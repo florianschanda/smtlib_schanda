@@ -671,9 +671,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int1 : t1 -> int
+logic is_signed_positive : t1 -> prop
 
 logic of_int1 : int -> t1
+
+logic to_int1 : t1 -> int
+
+axiom to_int_def1 :
+  (forall x:t1 [to_int1(x)]. ((is_signed_positive(x) ->
+  (to_int1(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int1(x) = (-(4294967296 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t1. forall vqt:t1. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -715,6 +722,9 @@ predicate sle(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
 predicate sgt(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
 
 predicate sge(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t1. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t1, t1 -> t1
 

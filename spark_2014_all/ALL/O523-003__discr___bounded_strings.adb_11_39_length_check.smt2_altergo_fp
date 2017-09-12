@@ -1205,6 +1205,8 @@ goal WP_parameter_def :
   forall temp___203:index_type. forall temp___2031:(int,character) farray.
   forall temp___2032:t2. forall temp___2033:size_type.
   forall temp___204:(int,character) farray. forall temp___2041:t4.
+  forall temp___206:int. forall o5:(int,character) farray.
+  forall temp___208:(int,character) farray. forall temp___2081:t4.
   forall result:(int,character) farray. forall result1:t2.
   forall result2:size_type. forall b__split_fields3:(int,character) farray.
   forall b__split_fields4:t2. forall b__split_fields5:size_type.
@@ -1251,9 +1253,9 @@ goal WP_parameter_def :
   ((b__split_discrs = temp___203) and (((temp___2031 = o2) and
   (temp___2032 = o3)) and (temp___2033 = o4)))) and
   (((((result = b__split_fields) and (result1 = b__split_fields1)) and
-  (result2 = b__split_fields2)) and (((b__split_fields3 = temp___2031) and
-  (b__split_fields4 = temp___2032)) and
-  (b__split_fields5 = temp___2033))) and (b__split_discrs = temp___203))) ->
+  (result2 = b__split_fields2)) and (((temp___2031 = b__split_fields3) and
+  (temp___2032 = b__split_fields4)) and
+  (temp___2033 = b__split_fields5))) and (b__split_discrs = temp___203))) ->
   (((((to_rep1(first(initializer1)) <= to_rep1(last(initializer1))) and
   (((1 <= length({ elts = initializer; rt = initializer1 })) and
   (((to_rep1(last(initializer1)) - to_rep1(first(initializer1))) + 1) = ((length({
@@ -1266,21 +1268,20 @@ goal WP_parameter_def :
   (not (1 <= length({ elts = initializer; rt = initializer1 })))))) and
   ((slide(initializer, to_rep1(first(initializer1)), 1) = temp___204) and
   (mk4(1, length({ elts = initializer; rt = initializer1
-  })) = temp___2041))) ->
+  })) = temp___2041))) -> ((((temp___206 = length({ elts = initializer; rt =
+  initializer1 })) and in_range(length({ elts = initializer; rt =
+  initializer1 }))) and ((((1 <= temp___206) ->
+  (((to_rep1(first4(b__split_fields4)) <= 1) and
+  (1 <= to_rep1(last4(b__split_fields4)))) and
+  ((to_rep1(first4(b__split_fields4)) <= temp___206) and
+  (temp___206 <= to_rep1(last4(b__split_fields4)))))) and
+  (o5 = b__split_fields3)) and ((o5 = temp___208) and (mk4(1,
+  temp___206) = temp___2081)))) ->
   (((to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041))) ->
-  (((to_rep1(first8(mk4(1, length({ elts = initializer; rt = initializer1
-  })))) <= to_rep1(last8(mk4(1, length({ elts = initializer; rt =
-  initializer1 }))))) ->
-  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = ((to_rep1(last8(mk4(1,
-  length({ elts = initializer; rt = initializer1
-  })))) - to_rep1(first8(mk4(1, length({ elts = initializer; rt =
-  initializer1 }))))) + 1))) and ((not (to_rep1(first8(mk4(1, length({ elts =
-  initializer; rt = initializer1 })))) <= to_rep1(last8(mk4(1, length({
-  elts = initializer; rt = initializer1 })))))) ->
+  (((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) ->
+  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1))) and
+  ((not (to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081)))) ->
   (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = 0)))) and
   ((not (to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041)))) ->
-  ((to_rep1(first8(mk4(1, length({ elts = initializer; rt = initializer1
-  })))) <= to_rep1(last8(mk4(1, length({ elts = initializer; rt =
-  initializer1 }))))) -> (0 = ((to_rep1(last8(mk4(1, length({ elts =
-  initializer; rt = initializer1 })))) - to_rep1(first8(mk4(1, length({
-  elts = initializer; rt = initializer1 }))))) + 1))))))))))))))
+  ((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) ->
+  (0 = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1)))))))))))))))

@@ -1546,6 +1546,8 @@ goal WP_parameter_def :
   forall cert__attr__extractuser__fullstring__assume:(int,character) farray.
   forall cert__attr__extractuser__fullstring__assume1:t.
   forall temp___1040:(int,character) farray. forall temp___10401:t1.
+  forall o18:(int,character) farray.
+  forall temp___1043:(int,character) farray. forall temp___10431:t1.
   forall result:(int,character) farray.
   forall localuser1:(int,character) farray.
   forall result1:(int,character) farray.
@@ -1614,19 +1616,16 @@ goal WP_parameter_def :
   (not (1 <= to_rep1(fullstring__last)))))) and ((slide(fullstring1,
   to_rep1(fullstring__first), 1) = temp___1040) and (mk1(1,
   to_rep1(fullstring__last)) = temp___10401))) ->
+  (((((1 <= to_rep1(fullstring__last)) -> (((1 <= 1) and (1 <= 50)) and
+  ((1 <= to_rep1(fullstring__last)) and
+  (to_rep1(fullstring__last) <= 50)))) and (o18 = localuser1)) and
+  ((o18 = temp___1043) and (mk1(1,
+  to_rep1(fullstring__last)) = temp___10431))) ->
   (((to_rep1(first2(temp___10401)) <= to_rep1(last2(temp___10401))) ->
-  (((to_rep1(first2(mk1(1,
-  to_rep1(fullstring__last)))) <= to_rep1(last2(mk1(1,
-  to_rep1(fullstring__last))))) ->
-  (((to_rep1(last2(temp___10401)) - to_rep1(first2(temp___10401))) + 1) = ((to_rep1(last2(mk1(1,
-  to_rep1(fullstring__last)))) - to_rep1(first2(mk1(1,
-  to_rep1(fullstring__last))))) + 1))) and ((not (to_rep1(first2(mk1(1,
-  to_rep1(fullstring__last)))) <= to_rep1(last2(mk1(1,
-  to_rep1(fullstring__last)))))) ->
+  (((to_rep1(first2(temp___10431)) <= to_rep1(last2(temp___10431))) ->
+  (((to_rep1(last2(temp___10401)) - to_rep1(first2(temp___10401))) + 1) = ((to_rep1(last2(temp___10431)) - to_rep1(first2(temp___10431))) + 1))) and
+  ((not (to_rep1(first2(temp___10431)) <= to_rep1(last2(temp___10431)))) ->
   (((to_rep1(last2(temp___10401)) - to_rep1(first2(temp___10401))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___10401)) <= to_rep1(last2(temp___10401)))) ->
-  ((to_rep1(first2(mk1(1,
-  to_rep1(fullstring__last)))) <= to_rep1(last2(mk1(1,
-  to_rep1(fullstring__last))))) -> (0 = ((to_rep1(last2(mk1(1,
-  to_rep1(fullstring__last)))) - to_rep1(first2(mk1(1,
-  to_rep1(fullstring__last))))) + 1)))))))))))
+  ((to_rep1(first2(temp___10431)) <= to_rep1(last2(temp___10431))) ->
+  (0 = ((to_rep1(last2(temp___10431)) - to_rep1(first2(temp___10431))) + 1))))))))))))

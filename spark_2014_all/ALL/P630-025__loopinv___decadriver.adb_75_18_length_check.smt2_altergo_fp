@@ -333,9 +333,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -376,6 +383,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -592,7 +602,7 @@ axiom bool_eq_def1 :
 
 logic to_int1 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def1 :
   (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
   ((not (b = true)) -> (to_int1(b) = 0))))
 
@@ -1824,13 +1834,16 @@ function t13b__ref___projection(a: t13b__ref) : us_t3 = (a).t13b__content
 
  (* File "decadriver.ads", line 77, characters 0-0 *)
 goal WP_parameter_def :
-  (forall size:int. forall error:int. forall self__:(t,us_rep) farray.
-  forall self__1:rx_frame_queue_index. forall self__2:bool. forall o:int.
-  forall o1:int. forall decadriver__receiver_type__wait__R6b__assume:int.
+  (forall frame:(int,bits_8) farray. forall size:int. forall error:int.
+  forall self__:(t,us_rep) farray. forall self__1:rx_frame_queue_index.
+  forall self__2:bool. forall o:int. forall o1:int.
+  forall decadriver__receiver_type__wait__R6b__assume:int.
   forall o2:(int,bits_8) farray. forall temp___4550:(int,bits_8) farray.
   forall temp___45501:t3. forall temp___4551:(int,bits_8) farray.
-  forall temp___45511:t2. forall result:int. forall size1:int.
-  forall result1:int. forall error1:int. forall result2:bool.
+  forall temp___45511:t2. forall o3:(int,bits_8) farray.
+  forall temp___4553:(int,bits_8) farray. forall temp___45531:t2.
+  forall result:int. forall size1:int. forall result1:int. forall error1:int.
+  forall result2:bool.
   ((forall temp___4470:t. ((ule(of_int(0), temp___4470) and ule(temp___4470,
    of_int(1))) ->
    (((to_rep4((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) and
@@ -1872,17 +1885,17 @@ goal WP_parameter_def :
   (not (to_rep1(frame__first) <= r6b))))) and ((slide(temp___4550,
   to_rep1(first4(temp___45501)), to_rep1(frame__first)) = temp___4551) and
   (mk1(to_rep1(frame__first), r6b) = temp___45511)))) ->
+  (((((to_rep1(frame__first) <= r6b) ->
+  (((to_rep1(frame__first) <= to_rep1(frame__first)) and
+  (to_rep1(frame__first) <= to_rep1(frame__last))) and
+  ((to_rep1(frame__first) <= r6b) and (r6b <= to_rep1(frame__last))))) and
+  (o3 = frame)) and ((o3 = temp___4553) and (mk1(to_rep1(frame__first),
+  r6b) = temp___45531))) ->
   (((to_rep1(first2(temp___45511)) <= to_rep1(last2(temp___45511))) ->
-  (((to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b)))) ->
-  (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = ((to_rep1(last2(mk1(to_rep1(frame__first),
-  r6b))) - to_rep1(first2(mk1(to_rep1(frame__first), r6b)))) + 1))) and
-  ((not (to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b))))) ->
+  (((to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531))) ->
+  (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = ((to_rep1(last2(temp___45531)) - to_rep1(first2(temp___45531))) + 1))) and
+  ((not (to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531)))) ->
   (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___45511)) <= to_rep1(last2(temp___45511)))) ->
-  ((to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b)))) ->
-  (0 = ((to_rep1(last2(mk1(to_rep1(frame__first),
-  r6b))) - to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b)))) + 1)))))))))))))))))))
+  ((to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531))) ->
+  (0 = ((to_rep1(last2(temp___45531)) - to_rep1(first2(temp___45531))) + 1))))))))))))))))))))

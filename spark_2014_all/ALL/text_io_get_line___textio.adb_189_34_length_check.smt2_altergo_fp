@@ -1450,19 +1450,22 @@ goal WP_parameter_def :
   forall file__split_fields:file_descr. forall file__split_fields1:bool.
   forall file__split_fields2:bool. forall file__split_fields3:count.
   forall file__split_fields4:count. forall file__split_fields5:count.
-  forall file__split_fields6:bool. forall num:int. forall last10:int.
-  forall o:(int,character) farray. forall temp___661:(int,character) farray.
-  forall temp___6611:t2. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int.
+  forall file__split_fields6:bool. forall result__:(int,character) farray.
+  forall num:int. forall last10:int. forall o:(int,character) farray.
+  forall temp___661:(int,character) farray. forall temp___6611:t2.
+  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall o6:int.
   forall textio__get_line_function__get_rest__B_1__r__assume:(int,character) farray.
   forall textio__get_line_function__get_rest__B_1__r__assume1:t.
   forall o7:int. forall o8:int. forall o9:int. forall o10:int.
   forall o11:int. forall o12:int. forall temp___655:(int,character) farray.
-  forall temp___6551:t3. forall cur_position1:int.
-  forall buffer:(int,character) farray. forall last11:int. forall result:int.
-  forall num1:int. (in_range2(cur_position_at_start) -> (dynamic_property(1,
-  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) -> (dynamic_property(1,
-  2147483647, to_rep1(result____first), to_rep1(result____last)) ->
+  forall temp___6551:t3. forall o13:(int,character) farray.
+  forall temp___657:(int,character) farray. forall temp___6571:t3.
+  forall cur_position1:int. forall buffer:(int,character) farray.
+  forall last11:int. forall result:int. forall num1:int.
+  (in_range2(cur_position_at_start) -> (dynamic_property(1, 2147483647,
+  to_rep1(first(s1)), to_rep1(last(s1))) -> (dynamic_property(1, 2147483647,
+  to_rep1(result____first), to_rep1(result____last)) ->
   (((0 <= 2147483647) -> in_range4(num)) -> (in_range2(cur_position) ->
   (in_range3(eof_ch) -> ((mod(eof, 256) = eof_ch) -> (in_range5(eof) ->
   (((not (end_of_file({ us_split_fields1 = { rec__textio__file_type__descr =
@@ -1538,13 +1541,15 @@ goal WP_parameter_def :
   ((not (to_rep1(first(r1)) <= to_rep1(last(r1)))) and (((1 <= r77b) and
   (0 = ((r77b - 1) + 1))) or (not (1 <= r77b))))) and ((slide(r,
   to_rep1(first(r1)), 1) = temp___655) and (mk3(1, r77b) = temp___6551))) ->
+  (((((1 <= r77b) -> (((to_rep1(result____first) <= 1) and
+  (1 <= to_rep1(result____last))) and ((to_rep1(result____first) <= r77b) and
+  (r77b <= to_rep1(result____last))))) and (o13 = result__)) and
+  ((o13 = temp___657) and (mk3(1, r77b) = temp___6571))) ->
   (((to_rep1(first6(temp___6551)) <= to_rep1(last6(temp___6551))) ->
-  (((to_rep1(first6(mk3(1, r77b))) <= to_rep1(last6(mk3(1, r77b)))) ->
-  (((to_rep1(last6(temp___6551)) - to_rep1(first6(temp___6551))) + 1) = ((to_rep1(last6(mk3(1,
-  r77b))) - to_rep1(first6(mk3(1, r77b)))) + 1))) and
-  ((not (to_rep1(first6(mk3(1, r77b))) <= to_rep1(last6(mk3(1, r77b))))) ->
+  (((to_rep1(first6(temp___6571)) <= to_rep1(last6(temp___6571))) ->
+  (((to_rep1(last6(temp___6551)) - to_rep1(first6(temp___6551))) + 1) = ((to_rep1(last6(temp___6571)) - to_rep1(first6(temp___6571))) + 1))) and
+  ((not (to_rep1(first6(temp___6571)) <= to_rep1(last6(temp___6571)))) ->
   (((to_rep1(last6(temp___6551)) - to_rep1(first6(temp___6551))) + 1) = 0)))) and
   ((not (to_rep1(first6(temp___6551)) <= to_rep1(last6(temp___6551)))) ->
-  ((to_rep1(first6(mk3(1, r77b))) <= to_rep1(last6(mk3(1, r77b)))) ->
-  (0 = ((to_rep1(last6(mk3(1, r77b))) - to_rep1(first6(mk3(1,
-  r77b)))) + 1))))))))))))))))))))))))))))
+  ((to_rep1(first6(temp___6571)) <= to_rep1(last6(temp___6571))) ->
+  (0 = ((to_rep1(last6(temp___6571)) - to_rep1(first6(temp___6571))) + 1)))))))))))))))))))))))))))))

@@ -3812,68 +3812,81 @@ goal WP_parameter_def :
   forall o15:character. forall o16:int. forall o17:character.
   forall o18:(int,character) farray. forall temp___1263:int.
   forall o19:(int,character) farray. forall temp___1264:us_t2.
-  forall temp___1265:us_t1. forall temp___1269:us_t1.
-  forall o20:(int,character) farray. forall o21:screenycoordt.
-  forall o22:screenxcoordt. forall o23:us_split_fields4. forall o24:us_rep2.
-  forall screen__writeconfigdata__C121b__assume:int. forall o25:int.
-  forall o26:character. forall o27:int. forall o28:character.
-  forall o29:(int,character) farray. forall temp___1275:int.
-  forall o30:(int,character) farray. forall temp___1276:us_t4.
-  forall temp___1277:us_t3. forall temp___1281:us_t3.
-  forall o31:(int,character) farray. forall o32:screenycoordt.
-  forall o33:screenxcoordt. forall o34:us_split_fields4. forall o35:us_rep2.
-  forall screen__writeconfigdata__C131b__assume:int. forall o36:int.
-  forall o37:character. forall o38:int. forall o39:character.
-  forall o40:(int,character) farray. forall temp___1287:int.
-  forall o41:(int,character) farray. forall temp___1288:us_t6.
-  forall temp___1289:us_t5. forall temp___1293:us_t5.
-  forall o42:(int,character) farray. forall o43:screenycoordt.
-  forall o44:screenxcoordt. forall o45:us_split_fields4. forall o46:us_rep2.
-  forall screen__writeconfigdata__C141b__assume:int. forall o47:int.
-  forall o48:character. forall o49:int. forall o50:character.
-  forall o51:(int,character) farray. forall temp___1299:int.
-  forall o52:(int,character) farray. forall temp___1300:us_t8.
-  forall temp___1301:us_t7. forall temp___1305:us_t7.
-  forall o53:(int,character) farray. forall o54:screenycoordt.
-  forall o55:screenxcoordt. forall o56:us_split_fields4. forall o57:us_rep2.
-  forall temp___1309:us_t9. forall temp___1313:us_t9.
-  forall o58:(int,character) farray. forall o59:screenycoordt.
-  forall o60:screenxcoordt. forall o61:us_split_fields4. forall o62:us_rep2.
+  forall temp___1265:us_t1. forall temp___1266:int.
+  forall o20:(int,character) farray. forall temp___1268:us_t1.
+  forall temp___1269:us_t1. forall o21:(int,character) farray.
+  forall o22:screenycoordt. forall o23:screenxcoordt.
+  forall o24:us_split_fields4. forall o25:us_rep2.
+  forall screen__writeconfigdata__C121b__assume:int. forall o26:int.
+  forall o27:character. forall o28:int. forall o29:character.
+  forall o30:(int,character) farray. forall temp___1275:int.
+  forall o31:(int,character) farray. forall temp___1276:us_t4.
+  forall temp___1277:us_t3. forall temp___1278:int.
+  forall o32:(int,character) farray. forall temp___1280:us_t3.
+  forall temp___1281:us_t3. forall o33:(int,character) farray.
+  forall o34:screenycoordt. forall o35:screenxcoordt.
+  forall o36:us_split_fields4. forall o37:us_rep2.
+  forall screen__writeconfigdata__C131b__assume:int. forall o38:int.
+  forall o39:character. forall o40:int. forall o41:character.
+  forall o42:(int,character) farray. forall temp___1287:int.
+  forall o43:(int,character) farray. forall temp___1288:us_t6.
+  forall temp___1289:us_t5. forall temp___1290:int.
+  forall o44:(int,character) farray. forall temp___1292:us_t5.
+  forall temp___1293:us_t5. forall o45:(int,character) farray.
+  forall o46:screenycoordt. forall o47:screenxcoordt.
+  forall o48:us_split_fields4. forall o49:us_rep2.
+  forall screen__writeconfigdata__C141b__assume:int. forall o50:int.
+  forall o51:character. forall o52:int. forall o53:character.
+  forall o54:(int,character) farray. forall temp___1299:int.
+  forall o55:(int,character) farray. forall temp___1300:us_t8.
+  forall temp___1301:us_t7. forall temp___1302:int.
+  forall o56:(int,character) farray. forall temp___1304:us_t7.
+  forall temp___1305:us_t7. forall o57:(int,character) farray.
+  forall o58:screenycoordt. forall o59:screenxcoordt.
+  forall o60:us_split_fields4. forall o61:us_rep2. forall temp___1309:us_t9.
+  forall o62:(int,character) farray. forall temp___1312:us_t9.
+  forall temp___1313:us_t9. forall o63:(int,character) farray.
+  forall o64:screenycoordt. forall o65:screenxcoordt.
+  forall o66:us_split_fields4. forall o67:us_rep2.
   forall temp___1321:(int,character) farray.
-  forall o63:(int,character) farray. forall o64:us_t.
-  forall o65:screenycoordt. forall o66:screenxcoordt.
-  forall o67:us_split_fields4. forall o68:us_rep2.
+  forall o68:(int,character) farray. forall o69:us_t.
+  forall o70:screenycoordt. forall o71:screenxcoordt.
+  forall o72:us_split_fields4. forall o73:us_rep2.
   forall temp___1324:(int,character) farray.
-  forall o69:(int,character) farray. forall o70:us_t.
-  forall o71:screenycoordt. forall o72:screenxcoordt.
-  forall o73:us_split_fields4. forall o74:us_rep2.
+  forall o74:(int,character) farray. forall o75:us_t.
+  forall o76:screenycoordt. forall o77:screenxcoordt.
+  forall o78:us_split_fields4. forall o79:us_rep2.
   forall temp___1327:(int,character) farray.
-  forall o75:(int,character) farray. forall o76:us_t.
-  forall o77:screenycoordt. forall o78:screenxcoordt.
-  forall o79:us_split_fields4. forall o80:us_rep2. forall temp___1328:us_t10.
-  forall temp___1332:us_t10. forall o81:(int,character) farray.
+  forall o80:(int,character) farray. forall o81:us_t.
   forall o82:screenycoordt. forall o83:screenxcoordt.
-  forall o84:us_split_fields4. forall o85:us_rep2. forall temp___1338:us_t11.
-  forall temp___1342:us_t11. forall o86:(int,character) farray.
-  forall o87:screenycoordt. forall o88:screenxcoordt.
-  forall o89:us_split_fields4. forall o90:us_rep2. forall o91:int.
-  forall o92:int. forall o93:int. forall o94:int. forall o95:int.
-  forall o96:int. forall screen__writeconfigdata__B196b__data__assume:us_t.
-  forall o97:(int,character) farray. forall temp___1350:us_t13.
-  forall temp___1351:us_t12. forall temp___1355:us_t12.
-  forall o98:(int,character) farray. forall o99:screenycoordt.
-  forall o100:screenxcoordt. forall o101:us_split_fields4.
-  forall o102:us_rep2. forall o103:int. forall o104:int. forall o105:int.
-  forall o106:int. forall o107:int. forall o108:int.
-  forall screen__writeconfigdata__B208b__data__assume:us_t.
-  forall o109:(int,character) farray. forall temp___1366:us_t15.
-  forall temp___1367:us_t14. forall temp___1371:us_t14.
-  forall o110:(int,character) farray. forall o111:screenycoordt.
-  forall o112:screenxcoordt. forall o113:us_split_fields4.
-  forall o114:us_rep2. forall workstart1:int. forall workend1:int.
-  forall authduration1:int. forall policy1:int. forall minpreservedlog1:int.
-  forall alarmthreshold1:int. forall minentry1:int. forall clearance1:int.
-  forall maxfar1:int.
+  forall o84:us_split_fields4. forall o85:us_rep2. forall temp___1328:us_t10.
+  forall o86:(int,character) farray. forall temp___1331:us_t10.
+  forall temp___1332:us_t10. forall o87:(int,character) farray.
+  forall o88:screenycoordt. forall o89:screenxcoordt.
+  forall o90:us_split_fields4. forall o91:us_rep2. forall temp___1338:us_t11.
+  forall o92:(int,character) farray. forall temp___1341:us_t11.
+  forall temp___1342:us_t11. forall o93:(int,character) farray.
+  forall o94:screenycoordt. forall o95:screenxcoordt.
+  forall o96:us_split_fields4. forall o97:us_rep2. forall o98:int.
+  forall o99:int. forall o100:int. forall o101:int. forall o102:int.
+  forall o103:int. forall screen__writeconfigdata__B196b__data__assume:us_t.
+  forall o104:(int,character) farray. forall temp___1350:us_t13.
+  forall temp___1351:us_t12. forall temp___1353:int.
+  forall o105:(int,character) farray. forall temp___1354:us_t12.
+  forall temp___1355:us_t12. forall o106:(int,character) farray.
+  forall o107:screenycoordt. forall o108:screenxcoordt.
+  forall o109:us_split_fields4. forall o110:us_rep2. forall o111:int.
+  forall o112:int. forall o113:int. forall o114:int. forall o115:int.
+  forall o116:int. forall screen__writeconfigdata__B208b__data__assume:us_t.
+  forall o117:(int,character) farray. forall temp___1366:us_t15.
+  forall temp___1367:us_t14. forall temp___1369:int.
+  forall o118:(int,character) farray. forall temp___1370:us_t14.
+  forall temp___1371:us_t14. forall o119:(int,character) farray.
+  forall o120:screenycoordt. forall o121:screenxcoordt.
+  forall o122:us_split_fields4. forall o123:us_rep2. forall workstart1:int.
+  forall workend1:int. forall authduration1:int. forall policy1:int.
+  forall minpreservedlog1:int. forall alarmthreshold1:int.
+  forall minentry1:int. forall clearance1:int. forall maxfar1:int.
   forall configdata__thedisplayfields__thetokenremovalduration:int.
   forall configdata__thedisplayfields__thefingerwaitduration:int.
   forall configdata__thedisplayfields__thealarmsilentduration:int.
@@ -4055,35 +4068,33 @@ goal WP_parameter_def :
   (not ((6 - to_rep1(valuestr__last)) <= 3))))) and (temp___1265 = { elts1 =
   slide((temp___1264).elts2, to_rep1(first4((temp___1264).rt2)),
   (6 - to_rep1(valuestr__last))); rt1 = mk1((6 - to_rep1(valuestr__last)), 3)
-  }))) and
+  }))) and ((((temp___1266 = (6 - to_rep1(valuestr__last))) and
+  in_range1((6 - to_rep1(valuestr__last)))) and ((((temp___1266 <= 3) ->
+  (((1 <= temp___1266) and (temp___1266 <= 7)) and ((1 <= 3) and
+  (3 <= 7)))) and (o20 = str5)) and (temp___1268 = { elts1 = o20; rt1 =
+  mk1(temp___1266, 3) }))) and
   ((((to_rep1(first2((temp___1265).rt1)) <= to_rep1(last2((temp___1265).rt1))) and
-  (((to_rep1(first2(mk1((6 - to_rep1(valuestr__last)),
-  3))) <= to_rep1(last2(mk1((6 - to_rep1(valuestr__last)), 3)))) and
-  (((to_rep1(last2((temp___1265).rt1)) - to_rep1(first2((temp___1265).rt1))) + 1) = ((to_rep1(last2(mk1((6 - to_rep1(valuestr__last)),
-  3))) - to_rep1(first2(mk1((6 - to_rep1(valuestr__last)), 3)))) + 1))) or
-  ((not (to_rep1(first2(mk1((6 - to_rep1(valuestr__last)),
-  3))) <= to_rep1(last2(mk1((6 - to_rep1(valuestr__last)), 3))))) and
+  (((to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))) and
+  (((to_rep1(last2((temp___1265).rt1)) - to_rep1(first2((temp___1265).rt1))) + 1) = ((to_rep1(last2((temp___1268).rt1)) - to_rep1(first2((temp___1268).rt1))) + 1))) or
+  ((not (to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1)))) and
   (((to_rep1(last2((temp___1265).rt1)) - to_rep1(first2((temp___1265).rt1))) + 1) = 0)))) or
   ((not (to_rep1(first2((temp___1265).rt1)) <= to_rep1(last2((temp___1265).rt1)))) and
-  (((to_rep1(first2(mk1((6 - to_rep1(valuestr__last)),
-  3))) <= to_rep1(last2(mk1((6 - to_rep1(valuestr__last)), 3)))) and
-  (0 = ((to_rep1(last2(mk1((6 - to_rep1(valuestr__last)),
-  3))) - to_rep1(first2(mk1((6 - to_rep1(valuestr__last)), 3)))) + 1))) or
-  (not (to_rep1(first2(mk1((6 - to_rep1(valuestr__last)),
-  3))) <= to_rep1(last2(mk1((6 - to_rep1(valuestr__last)), 3)))))))) and
-  (temp___1269 = temp___1265))) and
+  (((to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))) and
+  (0 = ((to_rep1(last2((temp___1268).rt1)) - to_rep1(first2((temp___1268).rt1))) + 1))) or
+  (not (to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))))))) and
+  (temp___1269 = temp___1265)))) and
   (forall temp___1270:int.
   (((((6 - to_rep1(valuestr__last)) <= temp___1270) and
   (temp___1270 <= 3)) and
-  ((o20[temp___1270]) = ((temp___1269).elts1[temp___1270]))) or
+  ((o21[temp___1270]) = ((temp___1269).elts1[temp___1270]))) or
   ((not (((6 - to_rep1(valuestr__last)) <= temp___1270) and
-  (temp___1270 <= 3))) and ((o20[temp___1270]) = (str5[temp___1270])))))) and
-  ((result9 = { map__content = str5 }) and (str6 = o20)))) or
+  (temp___1270 <= 3))) and ((o21[temp___1270]) = (str5[temp___1270])))))) and
+  ((result9 = { map__content = str5 }) and (str6 = o21)))) or
   ((not (10 <= c111b)) and (str6 = str5))) and ((result10 = { map__content =
-  c112b }) and (c112b1 = str6))))))) -> ((((to_rep8(o21) = 9) and
-  ((to_rep7(o22) = 25) and (o23 = { rec__screen__interfac__xycoordt__x = o22;
-  rec__screen__interfac__xycoordt__y = o21 }))) and (o24 = {
-  us_split_fields5 = o23 })) -> (((result11 = { bool__content = ok1 }) and
+  c112b }) and (c112b1 = str6))))))) -> ((((to_rep8(o22) = 9) and
+  ((to_rep7(o23) = 25) and (o24 = { rec__screen__interfac__xycoordt__x = o23;
+  rec__screen__interfac__xycoordt__y = o22 }))) and (o25 = {
+  us_split_fields5 = o24 })) -> (((result11 = { bool__content = ok1 }) and
   (ok2 = match_bool(ok1, consoleok1, false))) ->
   (((((screen__writeconfigdata__C121b__assume = alarmsilent1) and
   in_range9(alarmsilent1)) and
@@ -4098,16 +4109,16 @@ goal WP_parameter_def :
   to_rep1(valuestr__last1)) and
   (((((((((to_rep1(valuestr__first1) <= to_rep1(valuestr__last1)) and
   (to_rep1(valuestr__last1) <= to_rep1(valuestr__last1))) and
-  (o25 = to_rep1(valuestr__last1))) and (o26 = (valuestr5[o25]))) and
-  (o27 = to_rep(o26))) and (to_rep(o28) = o27)) and
-  (o29 = (str7[5 <- o28]))) and ((result14 = { map__content = str7 }) and
-  (str8 = o29))) and ((((10 <= c121b) and
+  (o26 = to_rep1(valuestr__last1))) and (o27 = (valuestr5[o26]))) and
+  (o28 = to_rep(o27))) and (to_rep(o29) = o28)) and
+  (o30 = (str7[5 <- o29]))) and ((result14 = { map__content = str7 }) and
+  (str8 = o30))) and ((((10 <= c121b) and
   (((((((temp___1275 = (to_rep1(valuestr__last1) - 1)) and
   in_range1((to_rep1(valuestr__last1) - 1))) and ((((2 <= temp___1275) ->
   (((to_rep1(valuestr__first1) <= 2) and (2 <= to_rep1(valuestr__last1))) and
   ((to_rep1(valuestr__first1) <= temp___1275) and
-  (temp___1275 <= to_rep1(valuestr__last1))))) and (o30 = valuestr5)) and
-  (temp___1276 = { elts4 = o30; rt4 = mk4(2, temp___1275) }))) and
+  (temp___1275 <= to_rep1(valuestr__last1))))) and (o31 = valuestr5)) and
+  (temp___1276 = { elts4 = o31; rt4 = mk4(2, temp___1275) }))) and
   ((((to_rep1(first8((temp___1276).rt4)) <= to_rep1(last8((temp___1276).rt4))) and
   ((((6 - to_rep1(valuestr__last1)) <= 3) and
   (((to_rep1(last8((temp___1276).rt4)) - to_rep1(first8((temp___1276).rt4))) + 1) = ((3 - (6 - to_rep1(valuestr__last1))) + 1))) or
@@ -4119,35 +4130,33 @@ goal WP_parameter_def :
   (not ((6 - to_rep1(valuestr__last1)) <= 3))))) and (temp___1277 = { elts3 =
   slide((temp___1276).elts4, to_rep1(first8((temp___1276).rt4)),
   (6 - to_rep1(valuestr__last1))); rt3 = mk3((6 - to_rep1(valuestr__last1)),
-  3) }))) and
+  3) }))) and ((((temp___1278 = (6 - to_rep1(valuestr__last1))) and
+  in_range1((6 - to_rep1(valuestr__last1)))) and ((((temp___1278 <= 3) ->
+  (((1 <= temp___1278) and (temp___1278 <= 7)) and ((1 <= 3) and
+  (3 <= 7)))) and (o32 = str8)) and (temp___1280 = { elts3 = o32; rt3 =
+  mk3(temp___1278, 3) }))) and
   ((((to_rep1(first6((temp___1277).rt3)) <= to_rep1(last6((temp___1277).rt3))) and
-  (((to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) <= to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)), 3)))) and
-  (((to_rep1(last6((temp___1277).rt3)) - to_rep1(first6((temp___1277).rt3))) + 1) = ((to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) - to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)), 3)))) + 1))) or
-  ((not (to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) <= to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)), 3))))) and
+  (((to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))) and
+  (((to_rep1(last6((temp___1277).rt3)) - to_rep1(first6((temp___1277).rt3))) + 1) = ((to_rep1(last6((temp___1280).rt3)) - to_rep1(first6((temp___1280).rt3))) + 1))) or
+  ((not (to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3)))) and
   (((to_rep1(last6((temp___1277).rt3)) - to_rep1(first6((temp___1277).rt3))) + 1) = 0)))) or
   ((not (to_rep1(first6((temp___1277).rt3)) <= to_rep1(last6((temp___1277).rt3)))) and
-  (((to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) <= to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)), 3)))) and
-  (0 = ((to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) - to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)), 3)))) + 1))) or
-  (not (to_rep1(first6(mk3((6 - to_rep1(valuestr__last1)),
-  3))) <= to_rep1(last6(mk3((6 - to_rep1(valuestr__last1)), 3)))))))) and
-  (temp___1281 = temp___1277))) and
+  (((to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))) and
+  (0 = ((to_rep1(last6((temp___1280).rt3)) - to_rep1(first6((temp___1280).rt3))) + 1))) or
+  (not (to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))))))) and
+  (temp___1281 = temp___1277)))) and
   (forall temp___1282:int.
   (((((6 - to_rep1(valuestr__last1)) <= temp___1282) and
   (temp___1282 <= 3)) and
-  ((o31[temp___1282]) = ((temp___1281).elts3[temp___1282]))) or
+  ((o33[temp___1282]) = ((temp___1281).elts3[temp___1282]))) or
   ((not (((6 - to_rep1(valuestr__last1)) <= temp___1282) and
-  (temp___1282 <= 3))) and ((o31[temp___1282]) = (str8[temp___1282])))))) and
-  ((result15 = { map__content = str8 }) and (str9 = o31)))) or
+  (temp___1282 <= 3))) and ((o33[temp___1282]) = (str8[temp___1282])))))) and
+  ((result15 = { map__content = str8 }) and (str9 = o33)))) or
   ((not (10 <= c121b)) and (str9 = str8))) and ((result16 = { map__content =
-  c122b }) and (c122b1 = str9))))))) -> ((((to_rep8(o32) = 10) and
-  ((to_rep7(o33) = 25) and (o34 = { rec__screen__interfac__xycoordt__x = o33;
-  rec__screen__interfac__xycoordt__y = o32 }))) and (o35 = {
-  us_split_fields5 = o34 })) -> (((result17 = { bool__content = ok2 }) and
+  c122b }) and (c122b1 = str9))))))) -> ((((to_rep8(o34) = 10) and
+  ((to_rep7(o35) = 25) and (o36 = { rec__screen__interfac__xycoordt__x = o35;
+  rec__screen__interfac__xycoordt__y = o34 }))) and (o37 = {
+  us_split_fields5 = o36 })) -> (((result17 = { bool__content = ok2 }) and
   (ok3 = match_bool(ok2, consoleok2, false))) ->
   (((((screen__writeconfigdata__C131b__assume = fingerwait1) and
   in_range9(fingerwait1)) and
@@ -4162,16 +4171,16 @@ goal WP_parameter_def :
   to_rep1(valuestr__last2)) and
   (((((((((to_rep1(valuestr__first2) <= to_rep1(valuestr__last2)) and
   (to_rep1(valuestr__last2) <= to_rep1(valuestr__last2))) and
-  (o36 = to_rep1(valuestr__last2))) and (o37 = (valuestr6[o36]))) and
-  (o38 = to_rep(o37))) and (to_rep(o39) = o38)) and
-  (o40 = (str10[5 <- o39]))) and ((result20 = { map__content = str10 }) and
-  (str11 = o40))) and ((((10 <= c131b) and
+  (o38 = to_rep1(valuestr__last2))) and (o39 = (valuestr6[o38]))) and
+  (o40 = to_rep(o39))) and (to_rep(o41) = o40)) and
+  (o42 = (str10[5 <- o41]))) and ((result20 = { map__content = str10 }) and
+  (str11 = o42))) and ((((10 <= c131b) and
   (((((((temp___1287 = (to_rep1(valuestr__last2) - 1)) and
   in_range1((to_rep1(valuestr__last2) - 1))) and ((((2 <= temp___1287) ->
   (((to_rep1(valuestr__first2) <= 2) and (2 <= to_rep1(valuestr__last2))) and
   ((to_rep1(valuestr__first2) <= temp___1287) and
-  (temp___1287 <= to_rep1(valuestr__last2))))) and (o41 = valuestr6)) and
-  (temp___1288 = { elts6 = o41; rt6 = mk6(2, temp___1287) }))) and
+  (temp___1287 <= to_rep1(valuestr__last2))))) and (o43 = valuestr6)) and
+  (temp___1288 = { elts6 = o43; rt6 = mk6(2, temp___1287) }))) and
   ((((to_rep1(first12((temp___1288).rt6)) <= to_rep1(last12((temp___1288).rt6))) and
   ((((6 - to_rep1(valuestr__last2)) <= 3) and
   (((to_rep1(last12((temp___1288).rt6)) - to_rep1(first12((temp___1288).rt6))) + 1) = ((3 - (6 - to_rep1(valuestr__last2))) + 1))) or
@@ -4183,36 +4192,34 @@ goal WP_parameter_def :
   (not ((6 - to_rep1(valuestr__last2)) <= 3))))) and (temp___1289 = { elts5 =
   slide((temp___1288).elts6, to_rep1(first12((temp___1288).rt6)),
   (6 - to_rep1(valuestr__last2))); rt5 = mk5((6 - to_rep1(valuestr__last2)),
-  3) }))) and
+  3) }))) and ((((temp___1290 = (6 - to_rep1(valuestr__last2))) and
+  in_range1((6 - to_rep1(valuestr__last2)))) and ((((temp___1290 <= 3) ->
+  (((1 <= temp___1290) and (temp___1290 <= 7)) and ((1 <= 3) and
+  (3 <= 7)))) and (o44 = str11)) and (temp___1292 = { elts5 = o44; rt5 =
+  mk5(temp___1290, 3) }))) and
   ((((to_rep1(first10((temp___1289).rt5)) <= to_rep1(last10((temp___1289).rt5))) and
-  (((to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) <= to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)), 3)))) and
-  (((to_rep1(last10((temp___1289).rt5)) - to_rep1(first10((temp___1289).rt5))) + 1) = ((to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) - to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)), 3)))) + 1))) or
-  ((not (to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) <= to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)), 3))))) and
+  (((to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))) and
+  (((to_rep1(last10((temp___1289).rt5)) - to_rep1(first10((temp___1289).rt5))) + 1) = ((to_rep1(last10((temp___1292).rt5)) - to_rep1(first10((temp___1292).rt5))) + 1))) or
+  ((not (to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5)))) and
   (((to_rep1(last10((temp___1289).rt5)) - to_rep1(first10((temp___1289).rt5))) + 1) = 0)))) or
   ((not (to_rep1(first10((temp___1289).rt5)) <= to_rep1(last10((temp___1289).rt5)))) and
-  (((to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) <= to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)), 3)))) and
-  (0 = ((to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) - to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)), 3)))) + 1))) or
-  (not (to_rep1(first10(mk5((6 - to_rep1(valuestr__last2)),
-  3))) <= to_rep1(last10(mk5((6 - to_rep1(valuestr__last2)), 3)))))))) and
-  (temp___1293 = temp___1289))) and
+  (((to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))) and
+  (0 = ((to_rep1(last10((temp___1292).rt5)) - to_rep1(first10((temp___1292).rt5))) + 1))) or
+  (not (to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))))))) and
+  (temp___1293 = temp___1289)))) and
   (forall temp___1294:int.
   (((((6 - to_rep1(valuestr__last2)) <= temp___1294) and
   (temp___1294 <= 3)) and
-  ((o42[temp___1294]) = ((temp___1293).elts5[temp___1294]))) or
+  ((o45[temp___1294]) = ((temp___1293).elts5[temp___1294]))) or
   ((not (((6 - to_rep1(valuestr__last2)) <= temp___1294) and
-  (temp___1294 <= 3))) and ((o42[temp___1294]) = (str11[temp___1294])))))) and
-  ((result21 = { map__content = str11 }) and (str12 = o42)))) or
+  (temp___1294 <= 3))) and ((o45[temp___1294]) = (str11[temp___1294])))))) and
+  ((result21 = { map__content = str11 }) and (str12 = o45)))) or
   ((not (10 <= c131b)) and (str12 = str11))) and ((result22 = {
   map__content = c132b }) and (c132b1 = str12))))))) ->
-  ((((to_rep8(o43) = 9) and ((to_rep7(o44) = 63) and (o45 = {
-  rec__screen__interfac__xycoordt__x = o44;
-  rec__screen__interfac__xycoordt__y = o43 }))) and (o46 = {
-  us_split_fields5 = o45 })) -> (((result23 = { bool__content = ok3 }) and
+  ((((to_rep8(o46) = 9) and ((to_rep7(o47) = 63) and (o48 = {
+  rec__screen__interfac__xycoordt__x = o47;
+  rec__screen__interfac__xycoordt__y = o46 }))) and (o49 = {
+  us_split_fields5 = o48 })) -> (((result23 = { bool__content = ok3 }) and
   (ok4 = match_bool(ok3, consoleok3, false))) ->
   (((((screen__writeconfigdata__C141b__assume = tokenremove1) and
   in_range9(tokenremove1)) and
@@ -4227,16 +4234,16 @@ goal WP_parameter_def :
   to_rep1(valuestr__last3)) and
   (((((((((to_rep1(valuestr__first3) <= to_rep1(valuestr__last3)) and
   (to_rep1(valuestr__last3) <= to_rep1(valuestr__last3))) and
-  (o47 = to_rep1(valuestr__last3))) and (o48 = (valuestr7[o47]))) and
-  (o49 = to_rep(o48))) and (to_rep(o50) = o49)) and
-  (o51 = (str13[5 <- o50]))) and ((result26 = { map__content = str13 }) and
-  (str14 = o51))) and ((((10 <= c141b) and
+  (o50 = to_rep1(valuestr__last3))) and (o51 = (valuestr7[o50]))) and
+  (o52 = to_rep(o51))) and (to_rep(o53) = o52)) and
+  (o54 = (str13[5 <- o53]))) and ((result26 = { map__content = str13 }) and
+  (str14 = o54))) and ((((10 <= c141b) and
   (((((((temp___1299 = (to_rep1(valuestr__last3) - 1)) and
   in_range1((to_rep1(valuestr__last3) - 1))) and ((((2 <= temp___1299) ->
   (((to_rep1(valuestr__first3) <= 2) and (2 <= to_rep1(valuestr__last3))) and
   ((to_rep1(valuestr__first3) <= temp___1299) and
-  (temp___1299 <= to_rep1(valuestr__last3))))) and (o52 = valuestr7)) and
-  (temp___1300 = { elts8 = o52; rt8 = mk8(2, temp___1299) }))) and
+  (temp___1299 <= to_rep1(valuestr__last3))))) and (o55 = valuestr7)) and
+  (temp___1300 = { elts8 = o55; rt8 = mk8(2, temp___1299) }))) and
   ((((to_rep1(first16((temp___1300).rt8)) <= to_rep1(last16((temp___1300).rt8))) and
   ((((6 - to_rep1(valuestr__last3)) <= 3) and
   (((to_rep1(last16((temp___1300).rt8)) - to_rep1(first16((temp___1300).rt8))) + 1) = ((3 - (6 - to_rep1(valuestr__last3))) + 1))) or
@@ -4248,36 +4255,34 @@ goal WP_parameter_def :
   (not ((6 - to_rep1(valuestr__last3)) <= 3))))) and (temp___1301 = { elts7 =
   slide((temp___1300).elts8, to_rep1(first16((temp___1300).rt8)),
   (6 - to_rep1(valuestr__last3))); rt7 = mk7((6 - to_rep1(valuestr__last3)),
-  3) }))) and
+  3) }))) and ((((temp___1302 = (6 - to_rep1(valuestr__last3))) and
+  in_range1((6 - to_rep1(valuestr__last3)))) and ((((temp___1302 <= 3) ->
+  (((1 <= temp___1302) and (temp___1302 <= 7)) and ((1 <= 3) and
+  (3 <= 7)))) and (o56 = str14)) and (temp___1304 = { elts7 = o56; rt7 =
+  mk7(temp___1302, 3) }))) and
   ((((to_rep1(first14((temp___1301).rt7)) <= to_rep1(last14((temp___1301).rt7))) and
-  (((to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) <= to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)), 3)))) and
-  (((to_rep1(last14((temp___1301).rt7)) - to_rep1(first14((temp___1301).rt7))) + 1) = ((to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) - to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)), 3)))) + 1))) or
-  ((not (to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) <= to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)), 3))))) and
+  (((to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))) and
+  (((to_rep1(last14((temp___1301).rt7)) - to_rep1(first14((temp___1301).rt7))) + 1) = ((to_rep1(last14((temp___1304).rt7)) - to_rep1(first14((temp___1304).rt7))) + 1))) or
+  ((not (to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7)))) and
   (((to_rep1(last14((temp___1301).rt7)) - to_rep1(first14((temp___1301).rt7))) + 1) = 0)))) or
   ((not (to_rep1(first14((temp___1301).rt7)) <= to_rep1(last14((temp___1301).rt7)))) and
-  (((to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) <= to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)), 3)))) and
-  (0 = ((to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) - to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)), 3)))) + 1))) or
-  (not (to_rep1(first14(mk7((6 - to_rep1(valuestr__last3)),
-  3))) <= to_rep1(last14(mk7((6 - to_rep1(valuestr__last3)), 3)))))))) and
-  (temp___1305 = temp___1301))) and
+  (((to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))) and
+  (0 = ((to_rep1(last14((temp___1304).rt7)) - to_rep1(first14((temp___1304).rt7))) + 1))) or
+  (not (to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))))))) and
+  (temp___1305 = temp___1301)))) and
   (forall temp___1306:int.
   (((((6 - to_rep1(valuestr__last3)) <= temp___1306) and
   (temp___1306 <= 3)) and
-  ((o53[temp___1306]) = ((temp___1305).elts7[temp___1306]))) or
+  ((o57[temp___1306]) = ((temp___1305).elts7[temp___1306]))) or
   ((not (((6 - to_rep1(valuestr__last3)) <= temp___1306) and
-  (temp___1306 <= 3))) and ((o53[temp___1306]) = (str14[temp___1306])))))) and
-  ((result27 = { map__content = str14 }) and (str15 = o53)))) or
+  (temp___1306 <= 3))) and ((o57[temp___1306]) = (str14[temp___1306])))))) and
+  ((result27 = { map__content = str14 }) and (str15 = o57)))) or
   ((not (10 <= c141b)) and (str15 = str14))) and ((result28 = {
   map__content = c142b }) and (c142b1 = str15))))))) ->
-  ((((to_rep8(o54) = 10) and ((to_rep7(o55) = 63) and (o56 = {
-  rec__screen__interfac__xycoordt__x = o55;
-  rec__screen__interfac__xycoordt__y = o54 }))) and (o57 = {
-  us_split_fields5 = o56 })) -> (((result29 = { bool__content = ok4 }) and
+  ((((to_rep8(o58) = 10) and ((to_rep7(o59) = 63) and (o60 = {
+  rec__screen__interfac__xycoordt__x = o59;
+  rec__screen__interfac__xycoordt__y = o58 }))) and (o61 = {
+  us_split_fields5 = o60 })) -> (((result29 = { bool__content = ok4 }) and
   (ok5 = match_bool(ok4, consoleok4, false))) -> (((policy1 = c151b) and
   in_range10(c151b)) -> (((((result30 = { map__content = data }) and
   (data6 = (to_string(attr__ATTRIBUTE_IMAGE10(c151b))).elts)) and
@@ -4295,57 +4300,54 @@ goal WP_parameter_def :
   (((1 <= to_rep1(data__last)) and (0 = ((to_rep1(data__last) - 1) + 1))) or
   (not (1 <= to_rep1(data__last)))))) and (temp___1309 = { elts9 =
   slide(data6, to_rep1(data__first), 1); rt9 = mk9(1, to_rep1(data__last))
-  })) and
+  })) and (((((1 <= to_rep1(data__last)) -> (((1 <= 1) and (1 <= 12)) and
+  ((1 <= to_rep1(data__last)) and (to_rep1(data__last) <= 12)))) and
+  (o62 = result__6)) and (temp___1312 = { elts9 = o62; rt9 = mk9(1,
+  to_rep1(data__last)) })) and
   ((((to_rep1(first18((temp___1309).rt9)) <= to_rep1(last18((temp___1309).rt9))) and
-  (((to_rep1(first18(mk9(1, to_rep1(data__last)))) <= to_rep1(last18(mk9(1,
-  to_rep1(data__last))))) and
-  (((to_rep1(last18((temp___1309).rt9)) - to_rep1(first18((temp___1309).rt9))) + 1) = ((to_rep1(last18(mk9(1,
-  to_rep1(data__last)))) - to_rep1(first18(mk9(1,
-  to_rep1(data__last))))) + 1))) or ((not (to_rep1(first18(mk9(1,
-  to_rep1(data__last)))) <= to_rep1(last18(mk9(1,
-  to_rep1(data__last)))))) and
+  (((to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))) and
+  (((to_rep1(last18((temp___1309).rt9)) - to_rep1(first18((temp___1309).rt9))) + 1) = ((to_rep1(last18((temp___1312).rt9)) - to_rep1(first18((temp___1312).rt9))) + 1))) or
+  ((not (to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9)))) and
   (((to_rep1(last18((temp___1309).rt9)) - to_rep1(first18((temp___1309).rt9))) + 1) = 0)))) or
   ((not (to_rep1(first18((temp___1309).rt9)) <= to_rep1(last18((temp___1309).rt9)))) and
-  (((to_rep1(first18(mk9(1, to_rep1(data__last)))) <= to_rep1(last18(mk9(1,
-  to_rep1(data__last))))) and (0 = ((to_rep1(last18(mk9(1,
-  to_rep1(data__last)))) - to_rep1(first18(mk9(1,
-  to_rep1(data__last))))) + 1))) or (not (to_rep1(first18(mk9(1,
-  to_rep1(data__last)))) <= to_rep1(last18(mk9(1,
-  to_rep1(data__last))))))))) and (temp___1313 = temp___1309))) and
+  (((to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))) and
+  (0 = ((to_rep1(last18((temp___1312).rt9)) - to_rep1(first18((temp___1312).rt9))) + 1))) or
+  (not (to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))))))) and
+  (temp___1313 = temp___1309)))) and
   (forall temp___1314:int. ((((1 <= temp___1314) and
   (temp___1314 <= to_rep1(data__last))) and
-  ((o58[temp___1314]) = ((temp___1313).elts9[temp___1314]))) or
+  ((o63[temp___1314]) = ((temp___1313).elts9[temp___1314]))) or
   ((not ((1 <= temp___1314) and (temp___1314 <= to_rep1(data__last)))) and
-  ((o58[temp___1314]) = (result__6[temp___1314])))))) and ((result32 = {
-  map__content = result__6 }) and (result__7 = o58))) and ((result33 = {
+  ((o63[temp___1314]) = (result__6[temp___1314])))))) and ((result32 = {
+  map__content = result__6 }) and (result__7 = o63))) and ((result33 = {
   map__content = c152b }) and (c152b1 = result__7)))))) ->
-  ((((to_rep8(o59) = 12) and ((to_rep7(o60) = 25) and (o61 = {
-  rec__screen__interfac__xycoordt__x = o60;
-  rec__screen__interfac__xycoordt__y = o59 }))) and (o62 = {
-  us_split_fields5 = o61 })) -> (((result34 = { bool__content = ok5 }) and
+  ((((to_rep8(o64) = 12) and ((to_rep7(o65) = 25) and (o66 = {
+  rec__screen__interfac__xycoordt__x = o65;
+  rec__screen__interfac__xycoordt__y = o64 }))) and (o67 = {
+  us_split_fields5 = o66 })) -> (((result34 = { bool__content = ok5 }) and
   (ok6 = match_bool(ok5, consoleok5, false))) -> (((workstart1 = c159b) and
-  in_range5(c159b)) -> (((((to_rep8(o65) = 12) and ((to_rep7(o66) = 63) and
-  (o67 = { rec__screen__interfac__xycoordt__x = o66;
-  rec__screen__interfac__xycoordt__y = o65 }))) and (o68 = {
-  us_split_fields5 = o67 })) and (((temp___1321 = printduration(c159b)) and
+  in_range5(c159b)) -> (((((to_rep8(o70) = 12) and ((to_rep7(o71) = 63) and
+  (o72 = { rec__screen__interfac__xycoordt__x = o71;
+  rec__screen__interfac__xycoordt__y = o70 }))) and (o73 = {
+  us_split_fields5 = o72 })) and (((temp___1321 = printduration(c159b)) and
   (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
-  (o63 = temp___1321))) and (o64 = { elts = o63; rt = mk(1, 5) }))) ->
+  (o68 = temp___1321))) and (o69 = { elts = o68; rt = mk(1, 5) }))) ->
   (((result35 = { bool__content = ok6 }) and (ok7 = match_bool(ok6,
   consoleok6, false))) -> (((workend1 = c165b) and in_range5(c165b)) ->
-  (((((to_rep8(o71) = 13) and ((to_rep7(o72) = 63) and (o73 = {
-  rec__screen__interfac__xycoordt__x = o72;
-  rec__screen__interfac__xycoordt__y = o71 }))) and (o74 = {
-  us_split_fields5 = o73 })) and (((temp___1324 = printduration(c165b)) and
+  (((((to_rep8(o76) = 13) and ((to_rep7(o77) = 63) and (o78 = {
+  rec__screen__interfac__xycoordt__x = o77;
+  rec__screen__interfac__xycoordt__y = o76 }))) and (o79 = {
+  us_split_fields5 = o78 })) and (((temp___1324 = printduration(c165b)) and
   (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
-  (o69 = temp___1324))) and (o70 = { elts = o69; rt = mk(1, 5) }))) ->
+  (o74 = temp___1324))) and (o75 = { elts = o74; rt = mk(1, 5) }))) ->
   (((result36 = { bool__content = ok7 }) and (ok8 = match_bool(ok7,
   consoleok7, false))) -> (((authduration1 = c171b) and in_range5(c171b)) ->
-  (((((to_rep8(o77) = 13) and ((to_rep7(o78) = 25) and (o79 = {
-  rec__screen__interfac__xycoordt__x = o78;
-  rec__screen__interfac__xycoordt__y = o77 }))) and (o80 = {
-  us_split_fields5 = o79 })) and (((temp___1327 = printduration(c171b)) and
+  (((((to_rep8(o82) = 13) and ((to_rep7(o83) = 25) and (o84 = {
+  rec__screen__interfac__xycoordt__x = o83;
+  rec__screen__interfac__xycoordt__y = o82 }))) and (o85 = {
+  us_split_fields5 = o84 })) and (((temp___1327 = printduration(c171b)) and
   (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
-  (o75 = temp___1327))) and (o76 = { elts = o75; rt = mk(1, 5) }))) ->
+  (o80 = temp___1327))) and (o81 = { elts = o80; rt = mk(1, 5) }))) ->
   (((result37 = { bool__content = ok8 }) and (ok9 = match_bool(ok8,
   consoleok8, false))) -> (((clearance1 = c177b) and in_range8(c177b)) ->
   (((((result38 = { map__content = data1 }) and
@@ -4365,36 +4367,31 @@ goal WP_parameter_def :
   (0 = ((to_rep1(data__last1) - 1) + 1))) or
   (not (1 <= to_rep1(data__last1)))))) and (temp___1328 = { elts10 =
   slide(data7, to_rep1(data__first1), 1); rt10 = mk10(1,
-  to_rep1(data__last1)) })) and
+  to_rep1(data__last1)) })) and (((((1 <= to_rep1(data__last1)) ->
+  (((1 <= 1) and (1 <= 12)) and ((1 <= to_rep1(data__last1)) and
+  (to_rep1(data__last1) <= 12)))) and (o86 = result__8)) and (temp___1331 = {
+  elts10 = o86; rt10 = mk10(1, to_rep1(data__last1)) })) and
   ((((to_rep1(first20((temp___1328).rt10)) <= to_rep1(last20((temp___1328).rt10))) and
-  (((to_rep1(first20(mk10(1,
-  to_rep1(data__last1)))) <= to_rep1(last20(mk10(1,
-  to_rep1(data__last1))))) and
-  (((to_rep1(last20((temp___1328).rt10)) - to_rep1(first20((temp___1328).rt10))) + 1) = ((to_rep1(last20(mk10(1,
-  to_rep1(data__last1)))) - to_rep1(first20(mk10(1,
-  to_rep1(data__last1))))) + 1))) or ((not (to_rep1(first20(mk10(1,
-  to_rep1(data__last1)))) <= to_rep1(last20(mk10(1,
-  to_rep1(data__last1)))))) and
+  (((to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))) and
+  (((to_rep1(last20((temp___1328).rt10)) - to_rep1(first20((temp___1328).rt10))) + 1) = ((to_rep1(last20((temp___1331).rt10)) - to_rep1(first20((temp___1331).rt10))) + 1))) or
+  ((not (to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10)))) and
   (((to_rep1(last20((temp___1328).rt10)) - to_rep1(first20((temp___1328).rt10))) + 1) = 0)))) or
   ((not (to_rep1(first20((temp___1328).rt10)) <= to_rep1(last20((temp___1328).rt10)))) and
-  (((to_rep1(first20(mk10(1,
-  to_rep1(data__last1)))) <= to_rep1(last20(mk10(1,
-  to_rep1(data__last1))))) and (0 = ((to_rep1(last20(mk10(1,
-  to_rep1(data__last1)))) - to_rep1(first20(mk10(1,
-  to_rep1(data__last1))))) + 1))) or (not (to_rep1(first20(mk10(1,
-  to_rep1(data__last1)))) <= to_rep1(last20(mk10(1,
-  to_rep1(data__last1))))))))) and (temp___1332 = temp___1328))) and
+  (((to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))) and
+  (0 = ((to_rep1(last20((temp___1331).rt10)) - to_rep1(first20((temp___1331).rt10))) + 1))) or
+  (not (to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))))))) and
+  (temp___1332 = temp___1328)))) and
   (forall temp___1333:int. ((((1 <= temp___1333) and
   (temp___1333 <= to_rep1(data__last1))) and
-  ((o81[temp___1333]) = ((temp___1332).elts10[temp___1333]))) or
+  ((o87[temp___1333]) = ((temp___1332).elts10[temp___1333]))) or
   ((not ((1 <= temp___1333) and (temp___1333 <= to_rep1(data__last1)))) and
-  ((o81[temp___1333]) = (result__8[temp___1333])))))) and ((result40 = {
-  map__content = result__8 }) and (result__9 = o81))) and ((result41 = {
+  ((o87[temp___1333]) = (result__8[temp___1333])))))) and ((result40 = {
+  map__content = result__8 }) and (result__9 = o87))) and ((result41 = {
   map__content = c178b }) and (c178b1 = result__9)))))) ->
-  ((((to_rep8(o82) = 15) and ((to_rep7(o83) = 25) and (o84 = {
-  rec__screen__interfac__xycoordt__x = o83;
-  rec__screen__interfac__xycoordt__y = o82 }))) and (o85 = {
-  us_split_fields5 = o84 })) -> (((result42 = { bool__content = ok9 }) and
+  ((((to_rep8(o88) = 15) and ((to_rep7(o89) = 25) and (o90 = {
+  rec__screen__interfac__xycoordt__x = o89;
+  rec__screen__interfac__xycoordt__y = o88 }))) and (o91 = {
+  us_split_fields5 = o90 })) -> (((result42 = { bool__content = ok9 }) and
   (ok10 = match_bool(ok9, consoleok9, false))) -> (((minentry1 = c185b) and
   in_range8(c185b)) -> (((((result43 = { map__content = data2 }) and
   (data8 = (to_string(attr__ATTRIBUTE_IMAGE8(c185b))).elts)) and
@@ -4413,57 +4410,52 @@ goal WP_parameter_def :
   (0 = ((to_rep1(data__last2) - 1) + 1))) or
   (not (1 <= to_rep1(data__last2)))))) and (temp___1338 = { elts11 =
   slide(data8, to_rep1(data__first2), 1); rt11 = mk11(1,
-  to_rep1(data__last2)) })) and
+  to_rep1(data__last2)) })) and (((((1 <= to_rep1(data__last2)) ->
+  (((1 <= 1) and (1 <= 12)) and ((1 <= to_rep1(data__last2)) and
+  (to_rep1(data__last2) <= 12)))) and (o92 = result__10)) and
+  (temp___1341 = { elts11 = o92; rt11 = mk11(1, to_rep1(data__last2)) })) and
   ((((to_rep1(first22((temp___1338).rt11)) <= to_rep1(last22((temp___1338).rt11))) and
-  (((to_rep1(first22(mk11(1,
-  to_rep1(data__last2)))) <= to_rep1(last22(mk11(1,
-  to_rep1(data__last2))))) and
-  (((to_rep1(last22((temp___1338).rt11)) - to_rep1(first22((temp___1338).rt11))) + 1) = ((to_rep1(last22(mk11(1,
-  to_rep1(data__last2)))) - to_rep1(first22(mk11(1,
-  to_rep1(data__last2))))) + 1))) or ((not (to_rep1(first22(mk11(1,
-  to_rep1(data__last2)))) <= to_rep1(last22(mk11(1,
-  to_rep1(data__last2)))))) and
+  (((to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))) and
+  (((to_rep1(last22((temp___1338).rt11)) - to_rep1(first22((temp___1338).rt11))) + 1) = ((to_rep1(last22((temp___1341).rt11)) - to_rep1(first22((temp___1341).rt11))) + 1))) or
+  ((not (to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11)))) and
   (((to_rep1(last22((temp___1338).rt11)) - to_rep1(first22((temp___1338).rt11))) + 1) = 0)))) or
   ((not (to_rep1(first22((temp___1338).rt11)) <= to_rep1(last22((temp___1338).rt11)))) and
-  (((to_rep1(first22(mk11(1,
-  to_rep1(data__last2)))) <= to_rep1(last22(mk11(1,
-  to_rep1(data__last2))))) and (0 = ((to_rep1(last22(mk11(1,
-  to_rep1(data__last2)))) - to_rep1(first22(mk11(1,
-  to_rep1(data__last2))))) + 1))) or (not (to_rep1(first22(mk11(1,
-  to_rep1(data__last2)))) <= to_rep1(last22(mk11(1,
-  to_rep1(data__last2))))))))) and (temp___1342 = temp___1338))) and
+  (((to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))) and
+  (0 = ((to_rep1(last22((temp___1341).rt11)) - to_rep1(first22((temp___1341).rt11))) + 1))) or
+  (not (to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))))))) and
+  (temp___1342 = temp___1338)))) and
   (forall temp___1343:int. ((((1 <= temp___1343) and
   (temp___1343 <= to_rep1(data__last2))) and
-  ((o86[temp___1343]) = ((temp___1342).elts11[temp___1343]))) or
+  ((o93[temp___1343]) = ((temp___1342).elts11[temp___1343]))) or
   ((not ((1 <= temp___1343) and (temp___1343 <= to_rep1(data__last2)))) and
-  ((o86[temp___1343]) = (result__10[temp___1343])))))) and ((result45 = {
-  map__content = result__10 }) and (result__11 = o86))) and ((result46 = {
+  ((o93[temp___1343]) = (result__10[temp___1343])))))) and ((result45 = {
+  map__content = result__10 }) and (result__11 = o93))) and ((result46 = {
   map__content = c186b }) and (c186b1 = result__11)))))) ->
-  ((((to_rep8(o87) = 16) and ((to_rep7(o88) = 25) and (o89 = {
-  rec__screen__interfac__xycoordt__x = o88;
-  rec__screen__interfac__xycoordt__y = o87 }))) and (o90 = {
-  us_split_fields5 = o89 })) -> (((result47 = { bool__content = ok10 }) and
+  ((((to_rep8(o94) = 16) and ((to_rep7(o95) = 25) and (o96 = {
+  rec__screen__interfac__xycoordt__x = o95;
+  rec__screen__interfac__xycoordt__y = o94 }))) and (o97 = {
+  us_split_fields5 = o96 })) -> (((result47 = { bool__content = ok10 }) and
   (ok11 = match_bool(ok10, consoleok10, false))) ->
   (((minpreservedlog1 = c193b) and in_range4(c193b)) ->
   ((((((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))) = 0) and
   (screen__writeconfigdata__B196b__data__assume = { elts =
   temp___String_Literal_1360(void); rt = mk(1, 7) })) or
   ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))) = 0)) and
-  ((((((((1 <= 7) and (o91 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
-  (o91 = 0))) and
+  ((((((((1 <= 7) and (o98 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
+  (o98 = 0))) and
   ((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt))) and
-  (o92 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt))) + 1))) or
+  (o99 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt))) + 1))) or
   ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)))) and
-  (o92 = 0))) and (o93 = (o92 + o91)))) and
-  (o94 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) + o93))) and
-  (o95 = (o94 - 1))) and ((o96 = o95) and in_range2(o95))) and
+  (o99 = 0))) and (o100 = (o99 + o98)))) and
+  (o101 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) + o100))) and
+  (o102 = (o101 - 1))) and ((o103 = o102) and in_range2(o102))) and
   (screen__writeconfigdata__B196b__data__assume = { elts =
   concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
   temp___String_Literal_1360(void), 1, 7); rt =
   mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
-  o96) })))) and (((result48 = data3) and
+  o103) })))) and (((result48 = data3) and
   (data9 = (screen__writeconfigdata__B196b__data__assume).elts)) and
   ((to_rep1(data__first3) = to_rep1(first((screen__writeconfigdata__B196b__data__assume).rt))) and
   (to_rep1(data__last3) = to_rep1(last((screen__writeconfigdata__B196b__data__assume).rt)))))) and
@@ -4473,8 +4465,9 @@ goal WP_parameter_def :
   (((((((((2 <= to_rep1(data__last3)) -> (((to_rep1(data__first3) <= 2) and
   (2 <= to_rep1(data__last3))) and
   ((to_rep1(data__first3) <= to_rep1(data__last3)) and
-  (to_rep1(data__last3) <= to_rep1(data__last3))))) and (o97 = data9)) and
-  (temp___1350 = { elts13 = o97; rt13 = mk13(2, to_rep1(data__last3)) })) and
+  (to_rep1(data__last3) <= to_rep1(data__last3))))) and (o104 = data9)) and
+  (temp___1350 = { elts13 = o104; rt13 = mk13(2, to_rep1(data__last3))
+  })) and
   ((((to_rep1(first26((temp___1350).rt13)) <= to_rep1(last26((temp___1350).rt13))) and
   (((1 <= (to_rep1(data__last3) - 1)) and
   (((to_rep1(last26((temp___1350).rt13)) - to_rep1(first26((temp___1350).rt13))) + 1) = (((to_rep1(data__last3) - 1) - 1) + 1))) or
@@ -4486,57 +4479,54 @@ goal WP_parameter_def :
   (not (1 <= (to_rep1(data__last3) - 1)))))) and (temp___1351 = { elts12 =
   slide((temp___1350).elts13, to_rep1(first26((temp___1350).rt13)), 1);
   rt12 = mk12(1, (to_rep1(data__last3) - 1)) }))) and
+  ((((temp___1353 = (to_rep1(data__last3) - 1)) and
+  in_range1((to_rep1(data__last3) - 1))) and ((((1 <= temp___1353) ->
+  (((1 <= 1) and (1 <= 15)) and ((1 <= temp___1353) and
+  (temp___1353 <= 15)))) and (o105 = result__12)) and (temp___1354 = {
+  elts12 = o105; rt12 = mk12(1, temp___1353) }))) and
   ((((to_rep1(first24((temp___1351).rt12)) <= to_rep1(last24((temp___1351).rt12))) and
-  (((to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1)))) <= to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1))))) and
-  (((to_rep1(last24((temp___1351).rt12)) - to_rep1(first24((temp___1351).rt12))) + 1) = ((to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1)))) - to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1))))) + 1))) or ((not (to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1)))) <= to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1)))))) and
+  (((to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))) and
+  (((to_rep1(last24((temp___1351).rt12)) - to_rep1(first24((temp___1351).rt12))) + 1) = ((to_rep1(last24((temp___1354).rt12)) - to_rep1(first24((temp___1354).rt12))) + 1))) or
+  ((not (to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12)))) and
   (((to_rep1(last24((temp___1351).rt12)) - to_rep1(first24((temp___1351).rt12))) + 1) = 0)))) or
   ((not (to_rep1(first24((temp___1351).rt12)) <= to_rep1(last24((temp___1351).rt12)))) and
-  (((to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1)))) <= to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1))))) and (0 = ((to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1)))) - to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1))))) + 1))) or (not (to_rep1(first24(mk12(1,
-  (to_rep1(data__last3) - 1)))) <= to_rep1(last24(mk12(1,
-  (to_rep1(data__last3) - 1))))))))) and (temp___1355 = temp___1351))) and
+  (((to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))) and
+  (0 = ((to_rep1(last24((temp___1354).rt12)) - to_rep1(first24((temp___1354).rt12))) + 1))) or
+  (not (to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))))))) and
+  (temp___1355 = temp___1351)))) and
   (forall temp___1356:int. ((((1 <= temp___1356) and
   (temp___1356 <= (to_rep1(data__last3) - 1))) and
-  ((o98[temp___1356]) = ((temp___1355).elts12[temp___1356]))) or
+  ((o106[temp___1356]) = ((temp___1355).elts12[temp___1356]))) or
   ((not ((1 <= temp___1356) and
   (temp___1356 <= (to_rep1(data__last3) - 1)))) and
-  ((o98[temp___1356]) = (result__12[temp___1356])))))) and ((result50 = {
-  map__content = result__12 }) and (result__13 = o98))) and
+  ((o106[temp___1356]) = (result__12[temp___1356])))))) and ((result50 = {
+  map__content = result__12 }) and (result__13 = o106))) and
   ((result51 = c194b) and (c194b1 = result__13)))))) ->
-  ((((to_rep8(o99) = 15) and ((to_rep7(o100) = 63) and (o101 = {
-  rec__screen__interfac__xycoordt__x = o100;
-  rec__screen__interfac__xycoordt__y = o99 }))) and (o102 = {
-  us_split_fields5 = o101 })) -> (((result52 = { bool__content = ok11 }) and
+  ((((to_rep8(o107) = 15) and ((to_rep7(o108) = 63) and (o109 = {
+  rec__screen__interfac__xycoordt__x = o108;
+  rec__screen__interfac__xycoordt__y = o107 }))) and (o110 = {
+  us_split_fields5 = o109 })) -> (((result52 = { bool__content = ok11 }) and
   (ok12 = match_bool(ok11, consoleok11, false))) ->
   (((alarmthreshold1 = c205b) and in_range4(c205b)) ->
   ((((((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))) = 0) and
   (screen__writeconfigdata__B208b__data__assume = { elts =
   temp___String_Literal_1376(void); rt = mk(1, 7) })) or
   ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))) = 0)) and
-  ((((((((1 <= 7) and (o103 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
-  (o103 = 0))) and
+  ((((((((1 <= 7) and (o111 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
+  (o111 = 0))) and
   ((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt))) and
-  (o104 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt))) + 1))) or
+  (o112 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt))) + 1))) or
   ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)))) and
-  (o104 = 0))) and (o105 = (o104 + o103)))) and
-  (o106 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) + o105))) and
-  (o107 = (o106 - 1))) and ((o108 = o107) and in_range2(o107))) and
+  (o112 = 0))) and (o113 = (o112 + o111)))) and
+  (o114 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) + o113))) and
+  (o115 = (o114 - 1))) and ((o116 = o115) and in_range2(o115))) and
   (screen__writeconfigdata__B208b__data__assume = { elts =
   concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
   temp___String_Literal_1376(void), 1, 7); rt =
   mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
-  o108) })))) and (((result53 = data4) and
+  o116) })))) and (((result53 = data4) and
   (data10 = (screen__writeconfigdata__B208b__data__assume).elts)) and
   ((to_rep1(data__first4) = to_rep1(first((screen__writeconfigdata__B208b__data__assume).rt))) and
   (to_rep1(data__last4) = to_rep1(last((screen__writeconfigdata__B208b__data__assume).rt)))))) and
@@ -4546,8 +4536,8 @@ goal WP_parameter_def :
   (((((((((2 <= to_rep1(data__last4)) -> (((to_rep1(data__first4) <= 2) and
   (2 <= to_rep1(data__last4))) and
   ((to_rep1(data__first4) <= to_rep1(data__last4)) and
-  (to_rep1(data__last4) <= to_rep1(data__last4))))) and (o109 = data10)) and
-  (temp___1366 = { elts15 = o109; rt15 = mk15(2, to_rep1(data__last4))
+  (to_rep1(data__last4) <= to_rep1(data__last4))))) and (o117 = data10)) and
+  (temp___1366 = { elts15 = o117; rt15 = mk15(2, to_rep1(data__last4))
   })) and
   ((((to_rep1(first30((temp___1366).rt15)) <= to_rep1(last30((temp___1366).rt15))) and
   (((1 <= (to_rep1(data__last4) - 1)) and
@@ -4560,36 +4550,33 @@ goal WP_parameter_def :
   (not (1 <= (to_rep1(data__last4) - 1)))))) and (temp___1367 = { elts14 =
   slide((temp___1366).elts15, to_rep1(first30((temp___1366).rt15)), 1);
   rt14 = mk14(1, (to_rep1(data__last4) - 1)) }))) and
+  ((((temp___1369 = (to_rep1(data__last4) - 1)) and
+  in_range1((to_rep1(data__last4) - 1))) and ((((1 <= temp___1369) ->
+  (((1 <= 1) and (1 <= 15)) and ((1 <= temp___1369) and
+  (temp___1369 <= 15)))) and (o118 = result__14)) and (temp___1370 = {
+  elts14 = o118; rt14 = mk14(1, temp___1369) }))) and
   ((((to_rep1(first28((temp___1367).rt14)) <= to_rep1(last28((temp___1367).rt14))) and
-  (((to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1)))) <= to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1))))) and
-  (((to_rep1(last28((temp___1367).rt14)) - to_rep1(first28((temp___1367).rt14))) + 1) = ((to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1)))) - to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1))))) + 1))) or ((not (to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1)))) <= to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1)))))) and
+  (((to_rep1(first28((temp___1370).rt14)) <= to_rep1(last28((temp___1370).rt14))) and
+  (((to_rep1(last28((temp___1367).rt14)) - to_rep1(first28((temp___1367).rt14))) + 1) = ((to_rep1(last28((temp___1370).rt14)) - to_rep1(first28((temp___1370).rt14))) + 1))) or
+  ((not (to_rep1(first28((temp___1370).rt14)) <= to_rep1(last28((temp___1370).rt14)))) and
   (((to_rep1(last28((temp___1367).rt14)) - to_rep1(first28((temp___1367).rt14))) + 1) = 0)))) or
   ((not (to_rep1(first28((temp___1367).rt14)) <= to_rep1(last28((temp___1367).rt14)))) and
-  (((to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1)))) <= to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1))))) and (0 = ((to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1)))) - to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1))))) + 1))) or (not (to_rep1(first28(mk14(1,
-  (to_rep1(data__last4) - 1)))) <= to_rep1(last28(mk14(1,
-  (to_rep1(data__last4) - 1))))))))) and (temp___1371 = temp___1367))) and
+  (((to_rep1(first28((temp___1370).rt14)) <= to_rep1(last28((temp___1370).rt14))) and
+  (0 = ((to_rep1(last28((temp___1370).rt14)) - to_rep1(first28((temp___1370).rt14))) + 1))) or
+  (not (to_rep1(first28((temp___1370).rt14)) <= to_rep1(last28((temp___1370).rt14))))))) and
+  (temp___1371 = temp___1367)))) and
   (forall temp___1372:int. ((((1 <= temp___1372) and
   (temp___1372 <= (to_rep1(data__last4) - 1))) and
-  ((o110[temp___1372]) = ((temp___1371).elts14[temp___1372]))) or
+  ((o119[temp___1372]) = ((temp___1371).elts14[temp___1372]))) or
   ((not ((1 <= temp___1372) and
   (temp___1372 <= (to_rep1(data__last4) - 1)))) and
-  ((o110[temp___1372]) = (result__14[temp___1372])))))) and ((result55 = {
-  map__content = result__14 }) and (result__15 = o110))) and
+  ((o119[temp___1372]) = (result__14[temp___1372])))))) and ((result55 = {
+  map__content = result__14 }) and (result__15 = o119))) and
   ((result56 = c206b) and (c206b1 = result__15)))))) ->
-  ((((to_rep8(o111) = 16) and ((to_rep7(o112) = 63) and (o113 = {
-  rec__screen__interfac__xycoordt__x = o112;
-  rec__screen__interfac__xycoordt__y = o111 }))) and (o114 = {
-  us_split_fields5 = o113 })) -> (((result57 = { bool__content = ok12 }) and
+  ((((to_rep8(o120) = 16) and ((to_rep7(o121) = 63) and (o122 = {
+  rec__screen__interfac__xycoordt__x = o121;
+  rec__screen__interfac__xycoordt__y = o120 }))) and (o123 = {
+  us_split_fields5 = o122 })) -> (((result57 = { bool__content = ok12 }) and
   (ok13 = match_bool(ok12, consoleok12, false))) -> (((maxfar1 = c217b) and
   in_range7(c217b)) -> ((((result58 = data5) and
   (data11 = (to_string(attr__ATTRIBUTE_IMAGE7(c217b))).elts)) and

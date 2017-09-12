@@ -1059,9 +1059,11 @@ goal WP_parameter_def :
   forall configuration__updatedata__makedescription__str__assume:(int,character) farray.
   forall configuration__updatedata__makedescription__str__assume1:t.
   forall temp___998:(int,character) farray. forall temp___9981:t1.
+  forall o144:(int,character) farray.
+  forall temp___1001:(int,character) farray. forall temp___10011:t1.
   forall result:(int,character) farray.
-  forall localtext1:(int,character) farray.
-  forall result1:(int,character) farray. forall str1:(int,character) farray.
+  forall localtext1:(int,character) farray. forall result1:map__ref.
+  forall str1:(int,character) farray.
   ((audittypes__nodescription__aggregate_def(32) = nodescription) ->
   (in_range9(thelatchunlockduration) -> (in_range9(thealarmsilentduration) ->
   (in_range9(thefingerwaitduration) -> (in_range9(thetokenremovalduration) ->
@@ -1472,7 +1474,7 @@ goal WP_parameter_def :
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) = configuration__updatedata__makedescription__str__assume) and
   (mk(to_rep1(first(temp___9951)),
   o143) = configuration__updatedata__makedescription__str__assume1)))))) and
-  (((result1 = str) and
+  (((result1 = { map__content = str }) and
   (str1 = configuration__updatedata__makedescription__str__assume)) and
   ((to_rep1(str__first) = to_rep1(first(configuration__updatedata__makedescription__str__assume1))) and
   (to_rep1(str__last) = to_rep1(last(configuration__updatedata__makedescription__str__assume1)))))) ->
@@ -1487,16 +1489,15 @@ goal WP_parameter_def :
   (((1 <= to_rep1(str__last)) and (0 = ((to_rep1(str__last) - 1) + 1))) or
   (not (1 <= to_rep1(str__last)))))) and ((slide(str1, to_rep1(str__first),
   1) = temp___998) and (mk1(1, to_rep1(str__last)) = temp___9981))) ->
+  (((((1 <= to_rep1(str__last)) -> (((1 <= 1) and (1 <= 150)) and
+  ((1 <= to_rep1(str__last)) and (to_rep1(str__last) <= 150)))) and
+  (o144 = localtext1)) and ((o144 = temp___1001) and (mk1(1,
+  to_rep1(str__last)) = temp___10011))) ->
   (((to_rep1(first2(temp___9981)) <= to_rep1(last2(temp___9981))) ->
-  (((to_rep1(first2(mk1(1, to_rep1(str__last)))) <= to_rep1(last2(mk1(1,
-  to_rep1(str__last))))) ->
-  (((to_rep1(last2(temp___9981)) - to_rep1(first2(temp___9981))) + 1) = ((to_rep1(last2(mk1(1,
-  to_rep1(str__last)))) - to_rep1(first2(mk1(1,
-  to_rep1(str__last))))) + 1))) and ((not (to_rep1(first2(mk1(1,
-  to_rep1(str__last)))) <= to_rep1(last2(mk1(1, to_rep1(str__last)))))) ->
+  (((to_rep1(first2(temp___10011)) <= to_rep1(last2(temp___10011))) ->
+  (((to_rep1(last2(temp___9981)) - to_rep1(first2(temp___9981))) + 1) = ((to_rep1(last2(temp___10011)) - to_rep1(first2(temp___10011))) + 1))) and
+  ((not (to_rep1(first2(temp___10011)) <= to_rep1(last2(temp___10011)))) ->
   (((to_rep1(last2(temp___9981)) - to_rep1(first2(temp___9981))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___9981)) <= to_rep1(last2(temp___9981)))) ->
-  ((to_rep1(first2(mk1(1, to_rep1(str__last)))) <= to_rep1(last2(mk1(1,
-  to_rep1(str__last))))) -> (0 = ((to_rep1(last2(mk1(1,
-  to_rep1(str__last)))) - to_rep1(first2(mk1(1,
-  to_rep1(str__last))))) + 1)))))))))))))))))))))))))
+  ((to_rep1(first2(temp___10011)) <= to_rep1(last2(temp___10011))) ->
+  (0 = ((to_rep1(last2(temp___10011)) - to_rep1(first2(temp___10011))) + 1))))))))))))))))))))))))))

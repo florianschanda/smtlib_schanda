@@ -794,12 +794,14 @@ goal WP_parameter_def :
   forall fixed_stream__trim_string__R8b__assume:int.
   forall o6:(int,character) farray. forall temp___295:(int,character) farray.
   forall temp___2951:t3. forall temp___296:(int,character) farray.
-  forall temp___2961:t2. forall temp___299:(int,character) farray.
-  forall temp___2991:t2. forall o7:(int,character) farray. forall i:int.
-  forall o8:int. forall o9:int. forall temp___301:int. forall o10:int.
-  forall o11:character. forall o12:int. forall o13:int. forall o14:int.
-  forall o15:int. forall o16:int. forall o17:int. forall o18:int.
-  forall o19:character. forall o20:int. forall o21:bool. forall result:int.
+  forall temp___2961:t2. forall o7:(int,character) farray.
+  forall temp___298:(int,character) farray. forall temp___2981:t2.
+  forall temp___299:(int,character) farray. forall temp___2991:t2.
+  forall o8:(int,character) farray. forall i:int. forall o9:int.
+  forall o10:int. forall temp___301:int. forall o11:int.
+  forall o12:character. forall o13:int. forall o14:int. forall o15:int.
+  forall o16:int. forall o17:int. forall o18:int. forall o19:int.
+  forall o20:character. forall o21:int. forall o22:bool. forall result:int.
   forall len1:int. forall result1:(int,character) farray.
   forall change1:(int,character) farray.
   forall result2:(int,character) farray.
@@ -862,51 +864,51 @@ goal WP_parameter_def :
   (not (to_rep1(change__first) <= r5b))))) and ((slide(temp___295,
   to_rep1(first6(temp___2951)), to_rep1(change__first)) = temp___296) and
   (mk2(to_rep1(change__first), r5b) = temp___2961)))) and
+  (((((to_rep1(change__first) <= r5b) ->
+  (((to_rep1(change__first) <= to_rep1(change__first)) and
+  (to_rep1(change__first) <= to_rep1(change__last))) and
+  ((to_rep1(change__first) <= r5b) and (r5b <= to_rep1(change__last))))) and
+  (o7 = change1)) and ((o7 = temp___298) and (mk2(to_rep1(change__first),
+  r5b) = temp___2981))) and
   ((((to_rep1(first4(temp___2961)) <= to_rep1(last4(temp___2961))) and
-  (((to_rep1(first4(mk2(to_rep1(change__first),
-  r5b))) <= to_rep1(last4(mk2(to_rep1(change__first), r5b)))) and
-  (((to_rep1(last4(temp___2961)) - to_rep1(first4(temp___2961))) + 1) = ((to_rep1(last4(mk2(to_rep1(change__first),
-  r5b))) - to_rep1(first4(mk2(to_rep1(change__first), r5b)))) + 1))) or
-  ((not (to_rep1(first4(mk2(to_rep1(change__first),
-  r5b))) <= to_rep1(last4(mk2(to_rep1(change__first), r5b))))) and
+  (((to_rep1(first4(temp___2981)) <= to_rep1(last4(temp___2981))) and
+  (((to_rep1(last4(temp___2961)) - to_rep1(first4(temp___2961))) + 1) = ((to_rep1(last4(temp___2981)) - to_rep1(first4(temp___2981))) + 1))) or
+  ((not (to_rep1(first4(temp___2981)) <= to_rep1(last4(temp___2981)))) and
   (((to_rep1(last4(temp___2961)) - to_rep1(first4(temp___2961))) + 1) = 0)))) or
   ((not (to_rep1(first4(temp___2961)) <= to_rep1(last4(temp___2961)))) and
-  (((to_rep1(first4(mk2(to_rep1(change__first),
-  r5b))) <= to_rep1(last4(mk2(to_rep1(change__first), r5b)))) and
-  (0 = ((to_rep1(last4(mk2(to_rep1(change__first),
-  r5b))) - to_rep1(first4(mk2(to_rep1(change__first), r5b)))) + 1))) or
-  (not (to_rep1(first4(mk2(to_rep1(change__first),
-  r5b))) <= to_rep1(last4(mk2(to_rep1(change__first), r5b)))))))) and ({
-  elts2 = temp___299; rt2 = temp___2991 } = { elts2 = temp___296; rt2 =
-  temp___2961 }))) and
+  (((to_rep1(first4(temp___2981)) <= to_rep1(last4(temp___2981))) and
+  (0 = ((to_rep1(last4(temp___2981)) - to_rep1(first4(temp___2981))) + 1))) or
+  (not (to_rep1(first4(temp___2981)) <= to_rep1(last4(temp___2981))))))) and
+  ({ elts2 = temp___299; rt2 = temp___2991 } = { elts2 = temp___296; rt2 =
+  temp___2961 })))) and
   (forall temp___300:int. ((((to_rep1(change__first) <= temp___300) and
-  (temp___300 <= r5b)) and ((o7[temp___300]) = (temp___299[temp___300]))) or
+  (temp___300 <= r5b)) and ((o8[temp___300]) = (temp___299[temp___300]))) or
   ((not ((to_rep1(change__first) <= temp___300) and (temp___300 <= r5b))) and
-  ((o7[temp___300]) = (change1[temp___300])))))) and ((change1 = result2) and
-  (change2 = o7)))))))) and (((len1 = len2) and (change2 = change3)) and
+  ((o8[temp___300]) = (change1[temp___300])))))) and ((change1 = result2) and
+  (change2 = o8)))))))) and (((len1 = len2) and (change2 = change3)) and
   ((len3 = len1) and (change4 = change2)))) ->
   (((to_rep1(change__first) <= i) and (i <= to_rep1(change__last))) ->
   (((((((to_rep1(change__first) <= i) and (i <= to_rep1(change__last))) and
-  (o18 = i)) and (o19 = (change3[o18]))) and (o20 = to_rep(o19))) and
-  (((o20 = 0) and (o21 = true)) or ((not (o20 = 0)) and (o21 = false)))) ->
+  (o19 = i)) and (o20 = (change3[o19]))) and (o21 = to_rep(o20))) and
+  (((o21 = 0) and (o22 = true)) or ((not (o21 = 0)) and (o22 = false)))) ->
   (((((to_rep1(first(new_val1)) <  0) and (result4 = true)) or
   ((not (to_rep1(first(new_val1)) <  0)) and
-  (((o16 = (2147483647 - to_rep1(first(new_val1)))) and
+  (((o17 = (2147483647 - to_rep1(first(new_val1)))) and
   in_range1((2147483647 - to_rep1(first(new_val1))))) and
-  (((o17 = (i - to_rep1(change__first))) and
-  in_range1((i - to_rep1(change__first)))) and (((o17 <= o16) and
-  (result4 = true)) or ((not (o17 <= o16)) and (result4 = false))))))) and
-  (((result4 = true) and (((((o13 = (i - to_rep1(change__first))) and
+  (((o18 = (i - to_rep1(change__first))) and
+  in_range1((i - to_rep1(change__first)))) and (((o18 <= o17) and
+  (result4 = true)) or ((not (o18 <= o17)) and (result4 = false))))))) and
+  (((result4 = true) and (((((o14 = (i - to_rep1(change__first))) and
   in_range1((i - to_rep1(change__first)))) and
-  (o14 = (o13 + to_rep1(first(new_val1))))) and ((o15 = o14) and
-  in_range1(o14))) and (((o15 <= to_rep1(last(new_val1))) and
-  (result3 = true)) or ((not (o15 <= to_rep1(last(new_val1)))) and
+  (o15 = (o14 + to_rep1(first(new_val1))))) and ((o16 = o15) and
+  in_range1(o15))) and (((o16 <= to_rep1(last(new_val1))) and
+  (result3 = true)) or ((not (o16 <= to_rep1(last(new_val1)))) and
   (result3 = false))))) or ((not (result4 = true)) and
   (result3 = false)))) -> ((result3 = true) ->
-  ((((((((o8 = (i - to_rep1(change__first))) and
+  ((((((((o9 = (i - to_rep1(change__first))) and
   in_range1((i - to_rep1(change__first)))) and
-  (o9 = (o8 + to_rep1(first(new_val1))))) and ((temp___301 = o9) and
-  in_range1(o9))) and (((to_rep1(first(new_val1)) <= temp___301) and
-  (temp___301 <= to_rep1(last(new_val1)))) and (o10 = temp___301))) and
-  (o11 = (new_val[o10]))) and (o12 = to_rep(o11))) ->
+  (o10 = (o9 + to_rep1(first(new_val1))))) and ((temp___301 = o10) and
+  in_range1(o10))) and (((to_rep1(first(new_val1)) <= temp___301) and
+  (temp___301 <= to_rep1(last(new_val1)))) and (o11 = temp___301))) and
+  (o12 = (new_val[o11]))) and (o13 = to_rep(o12))) ->
   (to_rep1(change__first) <= i))))))))))

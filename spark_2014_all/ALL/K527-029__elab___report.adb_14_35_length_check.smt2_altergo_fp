@@ -434,8 +434,10 @@ axiom no_name__def_axiom : (no_name = temp___String_Literal_132(void))
 
  (* File "report.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall test_name_len:int. forall temp___153:(int,character) farray.
-  forall temp___1531:t. forall result:int. forall test_name_len1:int.
+  (forall test_name_len:int. forall test_name:(int,character) farray.
+  forall temp___153:(int,character) farray. forall temp___1531:t.
+  forall o:(int,character) farray. forall temp___155:(int,character) farray.
+  forall temp___1551:t. forall result:int. forall test_name_len1:int.
   forall result1:int. forall test_name_len2:int.
   (((result = test_name_len) and (test_name_len1 = 0)) ->
   (in_range(test_name_len1) -> (((result1 = test_name_len1) and
@@ -443,14 +445,14 @@ goal WP_parameter_def :
   (((((1 <= 7) and (((1 <= r4b) and (((7 - 1) + 1) = ((r4b - 1) + 1))) or
   ((not (1 <= r4b)) and (((7 - 1) + 1) = 0)))) or ((not (1 <= 7)) and
   (((1 <= r4b) and (0 = ((r4b - 1) + 1))) or (not (1 <= r4b))))) and
-  ((no_name = temp___153) and (mk(1, 7) = temp___1531))) ->
+  ((no_name = temp___153) and (mk(1, 7) = temp___1531))) -> (((((1 <= r4b) ->
+  (((1 <= 1) and (1 <= 15)) and ((1 <= r4b) and (r4b <= 15)))) and
+  (o = test_name)) and ((o = temp___155) and (mk(1, r4b) = temp___1551))) ->
   (((to_rep1(first(temp___1531)) <= to_rep1(last(temp___1531))) ->
-  (((to_rep1(first(mk(1, r4b))) <= to_rep1(last(mk(1, r4b)))) ->
-  (((to_rep1(last(temp___1531)) - to_rep1(first(temp___1531))) + 1) = ((to_rep1(last(mk(1,
-  r4b))) - to_rep1(first(mk(1, r4b)))) + 1))) and ((not (to_rep1(first(mk(1,
-  r4b))) <= to_rep1(last(mk(1, r4b))))) ->
+  (((to_rep1(first(temp___1551)) <= to_rep1(last(temp___1551))) ->
+  (((to_rep1(last(temp___1531)) - to_rep1(first(temp___1531))) + 1) = ((to_rep1(last(temp___1551)) - to_rep1(first(temp___1551))) + 1))) and
+  ((not (to_rep1(first(temp___1551)) <= to_rep1(last(temp___1551)))) ->
   (((to_rep1(last(temp___1531)) - to_rep1(first(temp___1531))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___1531)) <= to_rep1(last(temp___1531)))) ->
-  ((to_rep1(first(mk(1, r4b))) <= to_rep1(last(mk(1, r4b)))) ->
-  (0 = ((to_rep1(last(mk(1, r4b))) - to_rep1(first(mk(1,
-  r4b)))) + 1)))))))))))
+  ((to_rep1(first(temp___1551)) <= to_rep1(last(temp___1551))) ->
+  (0 = ((to_rep1(last(temp___1551)) - to_rep1(first(temp___1551))) + 1))))))))))))

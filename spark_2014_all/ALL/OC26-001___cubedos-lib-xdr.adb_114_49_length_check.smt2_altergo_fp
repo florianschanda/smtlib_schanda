@@ -397,9 +397,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -440,6 +447,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -656,7 +666,7 @@ axiom bool_eq_def1 :
 
 logic to_int1 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def1 :
   (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
   ((not (b = true)) -> (to_int1(b) = 0))))
 
@@ -1408,17 +1418,20 @@ axiom def_axiom :
 goal WP_parameter_def :
   (forall data:(int,octet) farray. forall last8:int.
   forall padding_start:int. forall padding_stop:int.
-  forall temp___476:(int,octet) farray. forall temp___4761:t2.
+  forall temp___476:(int,octet) farray. forall temp___4761:t2. forall o:int.
+  forall o1:int. forall temp___477:int. forall o2:(int,octet) farray.
+  forall temp___478:(int,octet) farray. forall temp___4781:t2.
   forall temp___479:(int,octet) farray. forall temp___4791:t2.
-  forall o:(int,octet) farray. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall temp___488:(int,octet) farray. forall temp___4881:t4.
-  forall result:(int,octet) farray. forall data1:(int,octet) farray.
-  forall result1:int. forall padding_start1:int. forall result2:int.
-  forall padding_stop1:int. (dynamic_property(0, 65535,
-  to_rep(first(value1)), to_rep(last(value1))) -> (dynamic_property(0, 65535,
-  to_rep(data__first), to_rep(data__last)) -> (in_range2(position) ->
-  ((((-1) <= 65535) -> in_range3(last8)) -> (((comp_mod(position,4) = 0) and
+  forall o3:(int,octet) farray. forall o4:int. forall o5:int. forall o6:int.
+  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
+  forall o11:int. forall temp___488:(int,octet) farray.
+  forall temp___4881:t4. forall result:(int,octet) farray.
+  forall data1:(int,octet) farray. forall result1:int.
+  forall padding_start1:int. forall result2:int. forall padding_stop1:int.
+  (dynamic_property(0, 65535, to_rep(first(value1)), to_rep(last(value1))) ->
+  (dynamic_property(0, 65535, to_rep(data__first), to_rep(data__last)) ->
+  (in_range2(position) -> ((((-1) <= 65535) -> in_range3(last8)) ->
+  (((comp_mod(position,4) = 0) and
   ((((to_rep(data__first) <= to_rep(data__last)) and
   (0 <  ((to_rep(data__last) - to_rep(data__first)) + 1))) or
   ((not (to_rep(data__first) <= to_rep(data__last))) and (0 <  0))) and
@@ -1445,48 +1458,43 @@ goal WP_parameter_def :
   elts = value; rt = value1 })) - 1)))))) and ((slide(value,
   to_rep(first(value1)), position) = temp___476) and (mk1(position,
   ((position + length({ elts = value; rt = value1
-  })) - 1)) = temp___4761))) and
+  })) - 1)) = temp___4761))) and ((((((o = length({ elts = value; rt = value1
+  })) and in_range1(length({ elts = value; rt = value1 }))) and
+  (o1 = (position + o))) and (temp___477 = (o1 - 1))) and
+  ((((position <= temp___477) -> (((to_rep(data__first) <= position) and
+  (position <= to_rep(data__last))) and
+  ((to_rep(data__first) <= temp___477) and
+  (temp___477 <= to_rep(data__last))))) and (o2 = data)) and
+  ((o2 = temp___478) and (mk1(position, temp___477) = temp___4781)))) and
   ((((to_rep(first2(temp___4761)) <= to_rep(last2(temp___4761))) and
-  (((to_rep(first2(mk1(position, ((position + length({ elts = value; rt =
-  value1 })) - 1)))) <= to_rep(last2(mk1(position, ((position + length({
-  elts = value; rt = value1 })) - 1))))) and
-  (((to_rep(last2(temp___4761)) - to_rep(first2(temp___4761))) + 1) = ((to_rep(last2(mk1(position,
-  ((position + length({ elts = value; rt = value1
-  })) - 1)))) - to_rep(first2(mk1(position, ((position + length({ elts =
-  value; rt = value1 })) - 1))))) + 1))) or
-  ((not (to_rep(first2(mk1(position, ((position + length({ elts = value; rt =
-  value1 })) - 1)))) <= to_rep(last2(mk1(position, ((position + length({
-  elts = value; rt = value1 })) - 1)))))) and
+  (((to_rep(first2(temp___4781)) <= to_rep(last2(temp___4781))) and
+  (((to_rep(last2(temp___4761)) - to_rep(first2(temp___4761))) + 1) = ((to_rep(last2(temp___4781)) - to_rep(first2(temp___4781))) + 1))) or
+  ((not (to_rep(first2(temp___4781)) <= to_rep(last2(temp___4781)))) and
   (((to_rep(last2(temp___4761)) - to_rep(first2(temp___4761))) + 1) = 0)))) or
   ((not (to_rep(first2(temp___4761)) <= to_rep(last2(temp___4761)))) and
-  (((to_rep(first2(mk1(position, ((position + length({ elts = value; rt =
-  value1 })) - 1)))) <= to_rep(last2(mk1(position, ((position + length({
-  elts = value; rt = value1 })) - 1))))) and
-  (0 = ((to_rep(last2(mk1(position, ((position + length({ elts = value; rt =
-  value1 })) - 1)))) - to_rep(first2(mk1(position, ((position + length({
-  elts = value; rt = value1 })) - 1))))) + 1))) or
-  (not (to_rep(first2(mk1(position, ((position + length({ elts = value; rt =
-  value1 })) - 1)))) <= to_rep(last2(mk1(position, ((position + length({
-  elts = value; rt = value1 })) - 1))))))))) and ({ elts1 = temp___479; rt1 =
-  temp___4791 } = { elts1 = temp___476; rt1 = temp___4761 }))) and
+  (((to_rep(first2(temp___4781)) <= to_rep(last2(temp___4781))) and
+  (0 = ((to_rep(last2(temp___4781)) - to_rep(first2(temp___4781))) + 1))) or
+  (not (to_rep(first2(temp___4781)) <= to_rep(last2(temp___4781))))))) and ({
+  elts1 = temp___479; rt1 = temp___4791 } = { elts1 = temp___476; rt1 =
+  temp___4761 })))) and
   (forall temp___480:int. ((((position <= temp___480) and
   (temp___480 <= ((position + length({ elts = value; rt = value1
-  })) - 1))) and ((o[temp___480]) = (temp___479[temp___480]))) or
+  })) - 1))) and ((o3[temp___480]) = (temp___479[temp___480]))) or
   ((not ((position <= temp___480) and (temp___480 <= ((position + length({
   elts = value; rt = value1 })) - 1)))) and
-  ((o[temp___480]) = (data[temp___480])))))) and (({ map__content = result
-  } = { map__content = data }) and (data1 = o))) -> ((not (comp_mod(length({
-  elts = value; rt = value1 }),4) = 0)) -> ((((((o1 = length({ elts = value;
+  ((o3[temp___480]) = (data[temp___480])))))) and (({ map__content = result
+  } = { map__content = data }) and (data1 = o3))) -> ((not (comp_mod(length({
+  elts = value; rt = value1 }),4) = 0)) -> ((((((o4 = length({ elts = value;
   rt = value1 })) and in_range1(length({ elts = value; rt = value1 }))) and
-  (o2 = (position + o1))) and ((o3 = o2) and in_range2(o2))) and (({
+  (o5 = (position + o4))) and ((o6 = o5) and in_range2(o5))) and (({
   int__content = result1 } = { int__content = padding_start }) and
-  (padding_start1 = o3))) -> ((((((((o4 = length({ elts = value; rt = value1
+  (padding_start1 = o6))) -> ((((((((o7 = length({ elts = value; rt = value1
   })) and in_range1(length({ elts = value; rt = value1 }))) and
-  (o5 = comp_mod(o4,4))) and (o6 = (3 - o5))) and
-  (o7 = (padding_start1 + o6))) and ((o8 = o7) and in_range2(o7))) and (({
-  int__content = result2 } = { int__content = padding_stop }) and
-  (padding_stop1 = o8))) -> (((padding_start1 = r12b) and in_range2(r12b)) ->
-  (((padding_stop1 = r13b) and in_range2(r13b)) ->
+  (o8 = comp_mod(o7,4))) and (o9 = (3 - o8))) and
+  (o10 = (padding_start1 + o9))) and ((o11 = o10) and in_range2(o10))) and
+  (({ int__content = result2 } = { int__content = padding_stop }) and
+  (padding_stop1 = o11))) -> (((padding_start1 = r12b) and
+  in_range2(r12b)) -> (((padding_stop1 = r13b) and in_range2(r13b)) ->
   (((to_rep(first6((temp___481(of_int(0), r12b, r13b)).rt3)) = r12b) and
   ((to_rep(last6((temp___481(of_int(0), r12b, r13b)).rt3)) = r13b) and ({
   elts3 = temp___488; rt3 = temp___4881 } = temp___481(of_int(0), r12b,

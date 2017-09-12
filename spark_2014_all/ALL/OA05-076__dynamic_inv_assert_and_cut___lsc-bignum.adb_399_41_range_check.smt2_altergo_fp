@@ -336,9 +336,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(4294967296 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -380,6 +387,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -685,9 +695,16 @@ axiom Nth_rotate_left1 :
   (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
   ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 64))))))
 
-logic to_int1 : t1 -> int
+logic is_signed_positive1 : t1 -> prop
 
 logic of_int1 : int -> t1
+
+logic to_int1 : t1 -> int
+
+axiom to_int_def1 :
+  (forall x:t1 [to_int1(x)]. ((is_signed_positive1(x) ->
+  (to_int1(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int1(x) = (-(18446744073709551616 - tqtint1(x)))))))
 
 axiom to_uint_extensionality1 :
   (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
@@ -729,6 +746,9 @@ predicate sle1(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
 predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
 
 predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t1. (is_signed_positive1(x) <-> sge1(x, zeros1)))
 
 logic add1 : t1, t1 -> t1
 
@@ -921,7 +941,7 @@ axiom bool_eq_def2 :
 
 logic to_int2 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def2 :
   (forall b:bool [to_int2(b)]. (((b = true) -> (to_int2(b) = 1)) and
   ((not (b = true)) -> (to_int2(b) = 0))))
 

@@ -335,9 +335,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(65536 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -378,6 +385,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -682,9 +692,16 @@ axiom Nth_rotate_left1 :
   (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  32)) ->
   ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 32))))))
 
-logic to_int1 : t1 -> int
+logic is_signed_positive1 : t1 -> prop
 
 logic of_int1 : int -> t1
+
+logic to_int1 : t1 -> int
+
+axiom to_int_def1 :
+  (forall x:t1 [to_int1(x)]. ((is_signed_positive1(x) ->
+  (to_int1(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int1(x) = (-(4294967296 - tqtint1(x)))))))
 
 axiom to_uint_extensionality1 :
   (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
@@ -726,6 +743,9 @@ predicate sle1(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
 predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
 
 predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t1. (is_signed_positive1(x) <-> sge1(x, zeros1)))
 
 logic add1 : t1, t1 -> t1
 
@@ -1006,9 +1026,16 @@ axiom Nth_rotate_left2 :
   (forall v:t2. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
   ((0 <= n) -> (nth2(rotate_left2(v, n), i) = nth2(v, ((i - n) % 64))))))
 
-logic to_int2 : t2 -> int
+logic is_signed_positive2 : t2 -> prop
 
 logic of_int2 : int -> t2
+
+logic to_int2 : t2 -> int
+
+axiom to_int_def2 :
+  (forall x:t2 [to_int2(x)]. ((is_signed_positive2(x) ->
+  (to_int2(x) = tqtint2(x))) and ((not is_signed_positive2(x)) ->
+  (to_int2(x) = (-(18446744073709551616 - tqtint2(x)))))))
 
 axiom to_uint_extensionality2 :
   (forall v:t2. forall vqt:t2. ((tqtint2(v) = tqtint2(vqt)) -> (v = vqt)))
@@ -1050,6 +1077,9 @@ predicate sle2(v1: t2, v2: t2) = (to_int2(v1) <= to_int2(v2))
 predicate sgt2(v1: t2, v2: t2) = (to_int2(v2) <  to_int2(v1))
 
 predicate sge2(v1: t2, v2: t2) = (to_int2(v2) <= to_int2(v1))
+
+axiom positive_is_ge_zeros2 :
+  (forall x:t2. (is_signed_positive2(x) <-> sge2(x, zeros2)))
 
 logic add2 : t2, t2 -> t2
 
@@ -1255,7 +1285,7 @@ axiom bool_eq_def3 :
 
 logic to_int3 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def3 :
   (forall b:bool [to_int3(b)]. (((b = true) -> (to_int3(b) = 1)) and
   ((not (b = true)) -> (to_int3(b) = 0))))
 
@@ -1426,9 +1456,16 @@ axiom Nth_rotate_left3 :
   (forall v:t3. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
   ((0 <= n) -> (nth3(rotate_left3(v, n), i) = nth3(v, ((i - n) % 8))))))
 
-logic to_int4 : t3 -> int
+logic is_signed_positive3 : t3 -> prop
 
 logic of_int4 : int -> t3
+
+logic to_int4 : t3 -> int
+
+axiom to_int_def4 :
+  (forall x:t3 [to_int4(x)]. ((is_signed_positive3(x) ->
+  (to_int4(x) = tqtint3(x))) and ((not is_signed_positive3(x)) ->
+  (to_int4(x) = (-(256 - tqtint3(x)))))))
 
 axiom to_uint_extensionality3 :
   (forall v:t3. forall vqt:t3. ((tqtint3(v) = tqtint3(vqt)) -> (v = vqt)))
@@ -1469,6 +1506,9 @@ predicate sle3(v1: t3, v2: t3) = (to_int4(v1) <= to_int4(v2))
 predicate sgt3(v1: t3, v2: t3) = (to_int4(v2) <  to_int4(v1))
 
 predicate sge3(v1: t3, v2: t3) = (to_int4(v2) <= to_int4(v1))
+
+axiom positive_is_ge_zeros3 :
+  (forall x:t3. (is_signed_positive3(x) <-> sge3(x, zeros3)))
 
 logic add3 : t3, t3 -> t3
 

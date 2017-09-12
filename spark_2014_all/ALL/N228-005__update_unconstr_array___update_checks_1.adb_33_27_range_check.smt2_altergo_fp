@@ -409,8 +409,6 @@ axiom def_axiom :
   temp___509, temp___510)).elts[temp___511]) = (temp___507[temp___511]))))))))
 
  (* File "update_checks_1.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:int. (dynamic_property(1, 8, to_rep(a__first),
-  to_rep(a__last)) -> (in_range(new_val) -> ((((us = 8) and
-  dynamic_property1(to_rep(a__first), to_rep(a__last), 8)) and (o = 8)) ->
-  dynamic_property1(to_rep(a__first), to_rep(a__last), 1)))))
+goal WP_parameter_def : (dynamic_property(1, 8, to_rep(a__first),
+  to_rep(a__last)) -> (in_range(new_val) ->
+  dynamic_property1(to_rep(a__first), to_rep(a__last), 8)))

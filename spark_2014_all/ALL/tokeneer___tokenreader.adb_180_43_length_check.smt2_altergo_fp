@@ -580,21 +580,24 @@ function t17b__ref___projection(a: t17b__ref) : us_t1 = (a).t17b__content
 
  (* File "audittypes.ads", line 92, characters 0-0 *)
 goal WP_parameter_def :
-  (forall thecodename:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int.
-  forall temp___1185:(int,character) farray. forall temp___11851:t.
-  forall o6:int. forall o7:int. forall o8:int. forall o9:int. forall o10:int.
-  forall o11:int. forall temp___1187:(int,character) farray.
-  forall temp___11871:t. forall o12:int. forall o13:int. forall o14:int.
-  forall o15:int. forall o16:int. forall o17:int.
-  forall temp___1189:(int,character) farray. forall temp___11891:t.
-  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
-  forall o22:int. forall o23:int. forall temp___1191:(int,character) farray.
-  forall temp___11911:t. forall o24:int. forall o25:int. forall o26:int.
-  forall o27:int. forall o28:int. forall o29:int.
+  (forall result__:(int,character) farray. forall thecodename:int.
+  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall temp___1185:(int,character) farray.
+  forall temp___11851:t. forall o6:int. forall o7:int. forall o8:int.
+  forall o9:int. forall o10:int. forall o11:int.
+  forall temp___1187:(int,character) farray. forall temp___11871:t.
+  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
+  forall o16:int. forall o17:int. forall temp___1189:(int,character) farray.
+  forall temp___11891:t. forall o18:int. forall o19:int. forall o20:int.
+  forall o21:int. forall o22:int. forall o23:int.
+  forall temp___1191:(int,character) farray. forall temp___11911:t.
+  forall o24:int. forall o25:int. forall o26:int. forall o27:int.
+  forall o28:int. forall o29:int.
   forall tokenreader__makedescription__setresultstring__fullstring__assume:(int,character) farray.
   forall tokenreader__makedescription__setresultstring__fullstring__assume1:t.
   forall temp___1196:(int,character) farray. forall temp___11961:t1.
+  forall o30:(int,character) farray.
+  forall temp___1199:(int,character) farray. forall temp___11991:t1.
   (in_range5(thecodename) -> (dynamic_property(1, 2147483647,
   to_rep1(first(text1)), to_rep1(last(text1))) -> (in_range3(responsecode) ->
   (((((((((length({ elts = text; rt = text1 }) = 0) and
@@ -697,19 +700,16 @@ goal WP_parameter_def :
   (not (1 <= to_rep1(last(fullstring1))))))) and ((slide(fullstring,
   to_rep1(first(fullstring1)), 1) = temp___1196) and (mk1(1,
   to_rep1(last(fullstring1))) = temp___11961))) ->
+  (((((1 <= to_rep1(last(fullstring1))) -> (((1 <= 1) and (1 <= 150)) and
+  ((1 <= to_rep1(last(fullstring1))) and
+  (to_rep1(last(fullstring1)) <= 150)))) and (o30 = result__)) and
+  ((o30 = temp___1199) and (mk1(1,
+  to_rep1(last(fullstring1))) = temp___11991))) ->
   (((to_rep1(first2(temp___11961)) <= to_rep1(last2(temp___11961))) ->
-  (((to_rep1(first2(mk1(1,
-  to_rep1(last(fullstring1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(fullstring1)))))) ->
-  (((to_rep1(last2(temp___11961)) - to_rep1(first2(temp___11961))) + 1) = ((to_rep1(last2(mk1(1,
-  to_rep1(last(fullstring1))))) - to_rep1(first2(mk1(1,
-  to_rep1(last(fullstring1)))))) + 1))) and ((not (to_rep1(first2(mk1(1,
-  to_rep1(last(fullstring1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(fullstring1))))))) ->
+  (((to_rep1(first2(temp___11991)) <= to_rep1(last2(temp___11991))) ->
+  (((to_rep1(last2(temp___11961)) - to_rep1(first2(temp___11961))) + 1) = ((to_rep1(last2(temp___11991)) - to_rep1(first2(temp___11991))) + 1))) and
+  ((not (to_rep1(first2(temp___11991)) <= to_rep1(last2(temp___11991)))) ->
   (((to_rep1(last2(temp___11961)) - to_rep1(first2(temp___11961))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___11961)) <= to_rep1(last2(temp___11961)))) ->
-  ((to_rep1(first2(mk1(1,
-  to_rep1(last(fullstring1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(fullstring1)))))) -> (0 = ((to_rep1(last2(mk1(1,
-  to_rep1(last(fullstring1))))) - to_rep1(first2(mk1(1,
-  to_rep1(last(fullstring1)))))) + 1)))))))))))))
+  ((to_rep1(first2(temp___11991)) <= to_rep1(last2(temp___11991))) ->
+  (0 = ((to_rep1(last2(temp___11991)) - to_rep1(first2(temp___11991))) + 1))))))))))))))

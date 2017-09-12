@@ -392,6 +392,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "private_types.ads", line 2, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___220:bool. forall o:int. ((of_int(1) = temp___220) ->
-  ((to_int(temp___220) = 1) -> (((o = id(0)) and (in_range2(o) and
+  (forall temp___217:bool. forall o:int. ((of_int(1) = temp___217) ->
+  ((to_int(temp___217) = 1) -> (((o = id(0)) and (in_range2(o) and
   (o = 0))) -> in_range1(o)))))

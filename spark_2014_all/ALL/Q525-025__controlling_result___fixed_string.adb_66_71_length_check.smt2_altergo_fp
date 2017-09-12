@@ -926,8 +926,9 @@ goal WP_parameter_def :
   forall fixed_string__convert__R22b__assume:int.
   forall o3:(int,character) farray. forall temp___233:(int,character) farray.
   forall temp___2331:t2. forall temp___234:(int,character) farray.
-  forall temp___2341:t1. forall result:int. forall len1:int.
-  forall result1:(int,character) farray.
+  forall temp___2341:t1. forall o4:(int,character) farray.
+  forall temp___236:(int,character) farray. forall temp___2361:t1.
+  forall result:int. forall len1:int. forall result1:(int,character) farray.
   forall out_string1:(int,character) farray. (dynamic_property(1, 2147483647,
   to_rep1(first(in_string1)), to_rep1(last(in_string1))) ->
   ((((((o = length({ elts = in_string; rt = in_string1 })) and
@@ -975,17 +976,18 @@ goal WP_parameter_def :
   (not (to_rep1(out_string__first) <= r19b))))) and ((slide(temp___233,
   to_rep1(first4(temp___2331)), to_rep1(out_string__first)) = temp___234) and
   (mk1(to_rep1(out_string__first), r19b) = temp___2341)))) ->
+  (((((to_rep1(out_string__first) <= r19b) ->
+  (((to_rep1(out_string__first) <= to_rep1(out_string__first)) and
+  (to_rep1(out_string__first) <= to_rep1(out_string__last))) and
+  ((to_rep1(out_string__first) <= r19b) and
+  (r19b <= to_rep1(out_string__last))))) and (o4 = out_string1)) and
+  ((o4 = temp___236) and (mk1(to_rep1(out_string__first),
+  r19b) = temp___2361))) ->
   (((to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341))) ->
-  (((to_rep1(first2(mk1(to_rep1(out_string__first),
-  r19b))) <= to_rep1(last2(mk1(to_rep1(out_string__first), r19b)))) ->
-  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = ((to_rep1(last2(mk1(to_rep1(out_string__first),
-  r19b))) - to_rep1(first2(mk1(to_rep1(out_string__first),
-  r19b)))) + 1))) and ((not (to_rep1(first2(mk1(to_rep1(out_string__first),
-  r19b))) <= to_rep1(last2(mk1(to_rep1(out_string__first), r19b))))) ->
+  (((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) ->
+  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1))) and
+  ((not (to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361)))) ->
   (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341)))) ->
-  ((to_rep1(first2(mk1(to_rep1(out_string__first),
-  r19b))) <= to_rep1(last2(mk1(to_rep1(out_string__first), r19b)))) ->
-  (0 = ((to_rep1(last2(mk1(to_rep1(out_string__first),
-  r19b))) - to_rep1(first2(mk1(to_rep1(out_string__first),
-  r19b)))) + 1))))))))))))))
+  ((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) ->
+  (0 = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1)))))))))))))))

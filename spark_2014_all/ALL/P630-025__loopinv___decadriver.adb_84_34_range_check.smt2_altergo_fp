@@ -333,9 +333,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -376,6 +383,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -592,7 +602,7 @@ axiom bool_eq_def1 :
 
 logic to_int1 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def1 :
   (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
   ((not (b = true)) -> (to_int1(b) = 0))))
 
@@ -1831,25 +1841,27 @@ goal WP_parameter_def :
   forall decadriver__receiver_type__wait__R6b__assume:int.
   forall o2:(int,bits_8) farray. forall temp___4550:(int,bits_8) farray.
   forall temp___45501:t3. forall temp___4551:(int,bits_8) farray.
-  forall temp___45511:t2. forall temp___4554:(int,bits_8) farray.
-  forall temp___45541:t2. forall o3:(int,bits_8) farray. forall o4:int.
-  forall temp___4541:int. forall o5:(int,bits_8) farray.
-  forall temp___4544:(int,bits_8) farray. forall temp___45441:t4.
-  forall temp___4545:(int,bits_8) farray. forall temp___45451:t1.
-  forall temp___4546:(int,bits_8) farray. forall temp___45461:t1.
-  forall o6:(int,bits_8) farray. forall o7:rx_frame_queue_index.
-  forall o8:(t,us_rep) farray. forall o9:rx_frame_queue_index.
-  forall o10:natural. forall o11:bool. forall o12:bool.
-  forall o13:(t,us_rep) farray. forall o14:rx_frame_queue_index.
-  forall o15:natural. forall o16:bool. forall o17:bool.
-  forall frame1:(int,bits_8) farray. forall result:int. forall size1:int.
-  forall result1:int. forall error1:int. forall result2:bool.
-  forall result3:(int,bits_8) farray. forall frame2:(int,bits_8) farray.
-  forall result4:(int,bits_8) farray. forall frame3:(int,bits_8) farray.
-  forall result5:(t,us_rep) farray. forall result6:rx_frame_queue_index.
-  forall result7:natural. forall result8:bool. forall result9:bool.
-  forall self__5:(t,us_rep) farray. forall self__6:rx_frame_queue_index.
-  forall self__7:natural. forall self__8:bool. forall self__9:bool.
+  forall temp___45511:t2. forall o3:(int,bits_8) farray.
+  forall temp___4553:(int,bits_8) farray. forall temp___45531:t2.
+  forall temp___4554:(int,bits_8) farray. forall temp___45541:t2.
+  forall o4:(int,bits_8) farray. forall o5:int. forall temp___4541:int.
+  forall o6:(int,bits_8) farray. forall temp___4544:(int,bits_8) farray.
+  forall temp___45441:t4. forall temp___4545:(int,bits_8) farray.
+  forall temp___45451:t1. forall temp___4546:(int,bits_8) farray.
+  forall temp___45461:t1. forall o7:(int,bits_8) farray.
+  forall o8:rx_frame_queue_index. forall o9:(t,us_rep) farray.
+  forall o10:rx_frame_queue_index. forall o11:natural. forall o12:bool.
+  forall o13:bool. forall o14:(t,us_rep) farray.
+  forall o15:rx_frame_queue_index. forall o16:natural. forall o17:bool.
+  forall o18:bool. forall frame1:(int,bits_8) farray. forall result:int.
+  forall size1:int. forall result1:int. forall error1:int.
+  forall result2:bool. forall result3:(int,bits_8) farray.
+  forall frame2:(int,bits_8) farray. forall result4:(int,bits_8) farray.
+  forall frame3:(int,bits_8) farray. forall result5:(t,us_rep) farray.
+  forall result6:rx_frame_queue_index. forall result7:natural.
+  forall result8:bool. forall result9:bool. forall self__5:(t,us_rep) farray.
+  forall self__6:rx_frame_queue_index. forall self__7:natural.
+  forall self__8:bool. forall self__9:bool.
   ((forall temp___4470:t. ((ule(of_int(0), temp___4470) and ule(temp___4470,
    of_int(1))) ->
    (((to_rep4((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) and
@@ -1892,38 +1904,37 @@ goal WP_parameter_def :
   (not (to_rep1(frame__first) <= r6b))))) and ((slide(temp___4550,
   to_rep1(first4(temp___45501)), to_rep1(frame__first)) = temp___4551) and
   (mk1(to_rep1(frame__first), r6b) = temp___45511)))) and
+  (((((to_rep1(frame__first) <= r6b) ->
+  (((to_rep1(frame__first) <= to_rep1(frame__first)) and
+  (to_rep1(frame__first) <= to_rep1(frame__last))) and
+  ((to_rep1(frame__first) <= r6b) and (r6b <= to_rep1(frame__last))))) and
+  (o3 = frame)) and ((o3 = temp___4553) and (mk1(to_rep1(frame__first),
+  r6b) = temp___45531))) and
   ((((to_rep1(first2(temp___45511)) <= to_rep1(last2(temp___45511))) and
-  (((to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b)))) and
-  (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = ((to_rep1(last2(mk1(to_rep1(frame__first),
-  r6b))) - to_rep1(first2(mk1(to_rep1(frame__first), r6b)))) + 1))) or
-  ((not (to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b))))) and
+  (((to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531))) and
+  (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = ((to_rep1(last2(temp___45531)) - to_rep1(first2(temp___45531))) + 1))) or
+  ((not (to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531)))) and
   (((to_rep1(last2(temp___45511)) - to_rep1(first2(temp___45511))) + 1) = 0)))) or
   ((not (to_rep1(first2(temp___45511)) <= to_rep1(last2(temp___45511)))) and
-  (((to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b)))) and
-  (0 = ((to_rep1(last2(mk1(to_rep1(frame__first),
-  r6b))) - to_rep1(first2(mk1(to_rep1(frame__first), r6b)))) + 1))) or
-  (not (to_rep1(first2(mk1(to_rep1(frame__first),
-  r6b))) <= to_rep1(last2(mk1(to_rep1(frame__first), r6b)))))))) and ({
-  elts1 = temp___4554; rt1 = temp___45541 } = { elts1 = temp___4551; rt1 =
-  temp___45511 }))) and
+  (((to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531))) and
+  (0 = ((to_rep1(last2(temp___45531)) - to_rep1(first2(temp___45531))) + 1))) or
+  (not (to_rep1(first2(temp___45531)) <= to_rep1(last2(temp___45531))))))) and
+  ({ elts1 = temp___4554; rt1 = temp___45541 } = { elts1 = temp___4551; rt1 =
+  temp___45511 })))) and
   (forall temp___4555:int. ((((to_rep1(frame__first) <= temp___4555) and
   (temp___4555 <= r6b)) and
-  ((o3[temp___4555]) = (temp___4554[temp___4555]))) or
+  ((o4[temp___4555]) = (temp___4554[temp___4555]))) or
   ((not ((to_rep1(frame__first) <= temp___4555) and
-  (temp___4555 <= r6b))) and ((o3[temp___4555]) = (frame[temp___4555])))))) and
-  (({ map__content = result3 } = { map__content = frame }) and
-  (frame2 = o3)))))) or ((not (result2 = true)) and
+  (temp___4555 <= r6b))) and ((o4[temp___4555]) = (frame[temp___4555])))))) and
+  ((result3 = frame) and (frame2 = o4)))))) or ((not (result2 = true)) and
   ((((((((((to_rep1(frame__first) <= to_rep1(frame__last)) and
-  (o4 = ((to_rep1(frame__last) - to_rep1(frame__first)) + 1))) or
-  ((not (to_rep1(frame__first) <= to_rep1(frame__last))) and (o4 = 0))) and
-  ((temp___4541 = o4) and in_range1(o4))) and ((((1 <= temp___4541) ->
+  (o5 = ((to_rep1(frame__last) - to_rep1(frame__first)) + 1))) or
+  ((not (to_rep1(frame__first) <= to_rep1(frame__last))) and (o5 = 0))) and
+  ((temp___4541 = o5) and in_range1(o5))) and ((((1 <= temp___4541) ->
   (((0 <= 1) and (1 <= 1024)) and ((0 <= temp___4541) and
   (temp___4541 <= 1024)))) and
-  (o5 = (((self__[to_rep5(self__1)])).us_split_fields1).rec__decadriver__rx_frame_type__frame)) and
-  ((o5 = temp___4544) and (mk3(1, temp___4541) = temp___45441)))) and
+  (o6 = (((self__[to_rep5(self__1)])).us_split_fields1).rec__decadriver__rx_frame_type__frame)) and
+  ((o6 = temp___4544) and (mk3(1, temp___4541) = temp___45441)))) and
   ((temp___4544 = temp___4545) and (mk(to_rep1(first6(temp___45441)),
   to_rep1(last6(temp___45441))) = temp___45451))) and
   ((((to_rep1(first(temp___45451)) <= to_rep1(last(temp___45451))) and
@@ -1936,14 +1947,14 @@ goal WP_parameter_def :
   (0 = ((to_rep1(frame__last) - to_rep1(frame__first)) + 1))) or
   (not (to_rep1(frame__first) <= to_rep1(frame__last)))))) and ({ elts =
   temp___4546; rt = temp___45461 } = { elts = temp___4545; rt = temp___45451
-  }))) and (o6 = slide(temp___4546, to_rep1(first(temp___45461)),
-  to_rep1(frame__first)))) and ((result4 = frame) and (frame3 = o6))) and
+  }))) and (o7 = slide(temp___4546, to_rep1(first(temp___45461)),
+  to_rep1(frame__first)))) and ((result4 = frame) and (frame3 = o7))) and
   (frame2 = frame3)))))) or ((not (error1 = 0)) and ((frame2 = frame) and
-  (frame2 = frame1)))) -> (((((to_rep5(o7) = urem(add(to_rep5(self__1),
-  of_int(1)), of_int(2))) and ((self__ = o8) and ((o7 = o9) and
-  ((self__2 = o10) and ((self__3 = o11) and (self__4 = o12)))))) and
-  ((o13 = o8) and ((o14 = o9) and ((o15 = o10) and ((o16 = o11) and
-  (o17 = o12)))))) and (((result5 = self__) and ((result6 = self__1) and
+  (frame2 = frame1)))) -> (((((to_rep5(o8) = urem(add(to_rep5(self__1),
+  of_int(1)), of_int(2))) and ((self__ = o9) and ((o8 = o10) and
+  ((self__2 = o11) and ((self__3 = o12) and (self__4 = o13)))))) and
+  ((o14 = o9) and ((o15 = o10) and ((o16 = o11) and ((o17 = o12) and
+  (o18 = o13)))))) and (((result5 = self__) and ((result6 = self__1) and
   ((result7 = self__2) and ((result8 = self__3) and
   (result9 = self__4))))) and ({ us_split_fields3 = {
   rec__decadriver__receiver_type__frame_queue = self__5;
@@ -1951,9 +1962,9 @@ goal WP_parameter_def :
   rec__decadriver__receiver_type__rx_count = self__7;
   rec__decadriver__receiver_type__overrun_occurred = self__8;
   rec__decadriver__receiver_type__frame_ready = self__9 } } = {
-  us_split_fields3 = { rec__decadriver__receiver_type__frame_queue = o13;
-  rec__decadriver__receiver_type__queue_head = o14;
-  rec__decadriver__receiver_type__rx_count = o15;
-  rec__decadriver__receiver_type__overrun_occurred = o16;
-  rec__decadriver__receiver_type__frame_ready = o17 } }))) ->
+  us_split_fields3 = { rec__decadriver__receiver_type__frame_queue = o14;
+  rec__decadriver__receiver_type__queue_head = o15;
+  rec__decadriver__receiver_type__rx_count = o16;
+  rec__decadriver__receiver_type__overrun_occurred = o17;
+  rec__decadriver__receiver_type__frame_ready = o18 } }))) ->
   in_range2((to_rep(self__7) - 1))))))))))))

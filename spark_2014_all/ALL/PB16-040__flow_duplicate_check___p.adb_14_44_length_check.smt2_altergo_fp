@@ -676,7 +676,9 @@ goal WP_parameter_def :
   forall o7:(int,character) farray. forall temp___178:str_length.
   forall temp___1781:(int,character) farray.
   forall temp___179:(int,character) farray. forall temp___1791:t1.
-  forall result:str_length. forall result1:(int,character) farray.
+  forall o8:(int,character) farray. forall temp___182:(int,character) farray.
+  forall temp___1821:t1. forall result:str_length.
+  forall result1:(int,character) farray.
   forall target__split_fields2:str_length.
   forall target__split_fields3:(int,character) farray. forall result2:bool.
   forall result3:str_length. forall result4:(int,character) farray.
@@ -708,14 +710,14 @@ goal WP_parameter_def :
   ((not (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (((1 <= r2b) and (0 = ((r2b - 1) + 1))) or (not (1 <= r2b))))) and
   ((slide(source, to_rep1(first(source1)), 1) = temp___179) and (mk1(1,
-  r2b) = temp___1791))) ->
+  r2b) = temp___1791))) -> (((((1 <= r2b) -> (((1 <= 1) and (1 <= 10)) and
+  ((1 <= r2b) and (r2b <= 10)))) and (o8 = target__split_fields5)) and
+  ((o8 = temp___182) and (mk1(1, r2b) = temp___1821))) ->
   (((to_rep1(first2(temp___1791)) <= to_rep1(last2(temp___1791))) ->
-  (((to_rep1(first2(mk1(1, r2b))) <= to_rep1(last2(mk1(1, r2b)))) ->
-  (((to_rep1(last2(temp___1791)) - to_rep1(first2(temp___1791))) + 1) = ((to_rep1(last2(mk1(1,
-  r2b))) - to_rep1(first2(mk1(1, r2b)))) + 1))) and
-  ((not (to_rep1(first2(mk1(1, r2b))) <= to_rep1(last2(mk1(1, r2b))))) ->
+  (((to_rep1(first2(temp___1821)) <= to_rep1(last2(temp___1821))) ->
+  (((to_rep1(last2(temp___1791)) - to_rep1(first2(temp___1791))) + 1) = ((to_rep1(last2(temp___1821)) - to_rep1(first2(temp___1821))) + 1))) and
+  ((not (to_rep1(first2(temp___1821)) <= to_rep1(last2(temp___1821)))) ->
   (((to_rep1(last2(temp___1791)) - to_rep1(first2(temp___1791))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___1791)) <= to_rep1(last2(temp___1791)))) ->
-  ((to_rep1(first2(mk1(1, r2b))) <= to_rep1(last2(mk1(1, r2b)))) ->
-  (0 = ((to_rep1(last2(mk1(1, r2b))) - to_rep1(first2(mk1(1,
-  r2b)))) + 1)))))))))))))
+  ((to_rep1(first2(temp___1821)) <= to_rep1(last2(temp___1821))) ->
+  (0 = ((to_rep1(last2(temp___1821)) - to_rep1(first2(temp___1821))) + 1))))))))))))))

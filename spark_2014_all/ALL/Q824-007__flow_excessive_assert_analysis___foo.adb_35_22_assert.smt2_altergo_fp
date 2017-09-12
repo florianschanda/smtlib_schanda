@@ -1,0 +1,708 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type us_split_fields = { rec__foo__level_0__a1 : bool; rec__foo__level_0__a2
+: bool; rec__foo__level_0__a3 : bool; rec__foo__level_0__a4 : bool;
+rec__foo__level_0__a5 : bool
+}
+
+function us_split_fields_A1__projection(a: us_split_fields) : bool =
+  (a).rec__foo__level_0__a1
+
+function us_split_fields_A2__projection(a: us_split_fields) : bool =
+  (a).rec__foo__level_0__a2
+
+function us_split_fields_A3__projection(a: us_split_fields) : bool =
+  (a).rec__foo__level_0__a3
+
+function us_split_fields_A4__projection(a: us_split_fields) : bool =
+  (a).rec__foo__level_0__a4
+
+function us_split_fields_A5__projection(a: us_split_fields) : bool =
+  (a).rec__foo__level_0__a5
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq2 : us_rep, us_rep -> bool
+
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
+  (((((((((a).us_split_fields1).rec__foo__level_0__a1 = ((b).us_split_fields1).rec__foo__level_0__a1) and
+  (((a).us_split_fields1).rec__foo__level_0__a2 = ((b).us_split_fields1).rec__foo__level_0__a2)) and
+  (((a).us_split_fields1).rec__foo__level_0__a3 = ((b).us_split_fields1).rec__foo__level_0__a3)) and
+  (((a).us_split_fields1).rec__foo__level_0__a4 = ((b).us_split_fields1).rec__foo__level_0__a4)) and
+  (((a).us_split_fields1).rec__foo__level_0__a5 = ((b).us_split_fields1).rec__foo__level_0__a5)) ->
+  (bool_eq2(a, b) = true)) and
+  ((not (((((((a).us_split_fields1).rec__foo__level_0__a1 = ((b).us_split_fields1).rec__foo__level_0__a1) and
+  (((a).us_split_fields1).rec__foo__level_0__a2 = ((b).us_split_fields1).rec__foo__level_0__a2)) and
+  (((a).us_split_fields1).rec__foo__level_0__a3 = ((b).us_split_fields1).rec__foo__level_0__a3)) and
+  (((a).us_split_fields1).rec__foo__level_0__a4 = ((b).us_split_fields1).rec__foo__level_0__a4)) and
+  (((a).us_split_fields1).rec__foo__level_0__a5 = ((b).us_split_fields1).rec__foo__level_0__a5))) ->
+  (bool_eq2(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:bool. forall a1:bool. forall a2:bool. forall a3:bool.
+  forall a4:bool. (0 <= object__size({ us_split_fields1 = {
+  rec__foo__level_0__a1 = a; rec__foo__level_0__a2 = a1;
+  rec__foo__level_0__a3 = a2; rec__foo__level_0__a4 = a3;
+  rec__foo__level_0__a5 = a4 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:bool. forall a1:bool. forall a2:bool. forall a3:bool.
+  forall a4:bool. (0 <= object__alignment({ us_split_fields1 = {
+  rec__foo__level_0__a1 = a; rec__foo__level_0__a2 = a1;
+  rec__foo__level_0__a3 = a2; rec__foo__level_0__a4 = a3;
+  rec__foo__level_0__a5 = a4 } })))
+
+logic foo__level_0__a1__first__bit : int
+
+logic foo__level_0__a1__last__bit : int
+
+logic foo__level_0__a1__position : int
+
+axiom foo__level_0__a1__first__bit_axiom :
+  (0 <= foo__level_0__a1__first__bit)
+
+axiom foo__level_0__a1__last__bit_axiom :
+  (foo__level_0__a1__first__bit <  foo__level_0__a1__last__bit)
+
+axiom foo__level_0__a1__position_axiom : (0 <= foo__level_0__a1__position)
+
+logic foo__level_0__a2__first__bit : int
+
+logic foo__level_0__a2__last__bit : int
+
+logic foo__level_0__a2__position : int
+
+axiom foo__level_0__a2__first__bit_axiom :
+  (0 <= foo__level_0__a2__first__bit)
+
+axiom foo__level_0__a2__last__bit_axiom :
+  (foo__level_0__a2__first__bit <  foo__level_0__a2__last__bit)
+
+axiom foo__level_0__a2__position_axiom : (0 <= foo__level_0__a2__position)
+
+logic foo__level_0__a3__first__bit : int
+
+logic foo__level_0__a3__last__bit : int
+
+logic foo__level_0__a3__position : int
+
+axiom foo__level_0__a3__first__bit_axiom :
+  (0 <= foo__level_0__a3__first__bit)
+
+axiom foo__level_0__a3__last__bit_axiom :
+  (foo__level_0__a3__first__bit <  foo__level_0__a3__last__bit)
+
+axiom foo__level_0__a3__position_axiom : (0 <= foo__level_0__a3__position)
+
+logic foo__level_0__a4__first__bit : int
+
+logic foo__level_0__a4__last__bit : int
+
+logic foo__level_0__a4__position : int
+
+axiom foo__level_0__a4__first__bit_axiom :
+  (0 <= foo__level_0__a4__first__bit)
+
+axiom foo__level_0__a4__last__bit_axiom :
+  (foo__level_0__a4__first__bit <  foo__level_0__a4__last__bit)
+
+axiom foo__level_0__a4__position_axiom : (0 <= foo__level_0__a4__position)
+
+logic foo__level_0__a5__first__bit : int
+
+logic foo__level_0__a5__last__bit : int
+
+logic foo__level_0__a5__position : int
+
+axiom foo__level_0__a5__first__bit_axiom :
+  (0 <= foo__level_0__a5__first__bit)
+
+axiom foo__level_0__a5__last__bit_axiom :
+  (foo__level_0__a5__first__bit <  foo__level_0__a5__last__bit)
+
+axiom foo__level_0__a5__position_axiom : (0 <= foo__level_0__a5__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+logic dummy1 : bool
+
+logic dummy2 : bool
+
+logic dummy3 : bool
+
+logic dummy4 : bool
+
+logic dummy5 : bool
+
+type level_0__ref = { level_0__content : us_rep
+}
+
+function level_0__ref___projection(a: level_0__ref) : us_rep =
+  (a).level_0__content
+
+type us_split_fields2 = { rec__foo__level_1__b1 : us_rep;
+rec__foo__level_1__b2 : us_rep; rec__foo__level_1__b3 : us_rep;
+rec__foo__level_1__b4 : us_rep
+}
+
+function us_split_fields_B1__projection(a: us_split_fields2) : us_rep =
+  (a).rec__foo__level_1__b1
+
+function us_split_fields_B2__projection(a: us_split_fields2) : us_rep =
+  (a).rec__foo__level_1__b2
+
+function us_split_fields_B3__projection(a: us_split_fields2) : us_rep =
+  (a).rec__foo__level_1__b3
+
+function us_split_fields_B4__projection(a: us_split_fields2) : us_rep =
+  (a).rec__foo__level_1__b4
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq3 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def2 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq3(a, b)].
+  ((((((bool_eq2(((a).us_split_fields3).rec__foo__level_1__b1,
+  ((b).us_split_fields3).rec__foo__level_1__b1) = true) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b2,
+  ((b).us_split_fields3).rec__foo__level_1__b2) = true)) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b3,
+  ((b).us_split_fields3).rec__foo__level_1__b3) = true)) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b4,
+  ((b).us_split_fields3).rec__foo__level_1__b4) = true)) -> (bool_eq3(a,
+  b) = true)) and
+  ((not ((((bool_eq2(((a).us_split_fields3).rec__foo__level_1__b1,
+  ((b).us_split_fields3).rec__foo__level_1__b1) = true) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b2,
+  ((b).us_split_fields3).rec__foo__level_1__b2) = true)) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b3,
+  ((b).us_split_fields3).rec__foo__level_1__b3) = true)) and
+  (bool_eq2(((a).us_split_fields3).rec__foo__level_1__b4,
+  ((b).us_split_fields3).rec__foo__level_1__b4) = true))) -> (bool_eq3(a,
+  b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:us_rep1. (0 <= object__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep1. (0 <= object__alignment1(a)))
+
+logic foo__level_1__b1__first__bit : int
+
+logic foo__level_1__b1__last__bit : int
+
+logic foo__level_1__b1__position : int
+
+axiom foo__level_1__b1__first__bit_axiom :
+  (0 <= foo__level_1__b1__first__bit)
+
+axiom foo__level_1__b1__last__bit_axiom :
+  (foo__level_1__b1__first__bit <  foo__level_1__b1__last__bit)
+
+axiom foo__level_1__b1__position_axiom : (0 <= foo__level_1__b1__position)
+
+logic foo__level_1__b2__first__bit : int
+
+logic foo__level_1__b2__last__bit : int
+
+logic foo__level_1__b2__position : int
+
+axiom foo__level_1__b2__first__bit_axiom :
+  (0 <= foo__level_1__b2__first__bit)
+
+axiom foo__level_1__b2__last__bit_axiom :
+  (foo__level_1__b2__first__bit <  foo__level_1__b2__last__bit)
+
+axiom foo__level_1__b2__position_axiom : (0 <= foo__level_1__b2__position)
+
+logic foo__level_1__b3__first__bit : int
+
+logic foo__level_1__b3__last__bit : int
+
+logic foo__level_1__b3__position : int
+
+axiom foo__level_1__b3__first__bit_axiom :
+  (0 <= foo__level_1__b3__first__bit)
+
+axiom foo__level_1__b3__last__bit_axiom :
+  (foo__level_1__b3__first__bit <  foo__level_1__b3__last__bit)
+
+axiom foo__level_1__b3__position_axiom : (0 <= foo__level_1__b3__position)
+
+logic foo__level_1__b4__first__bit : int
+
+logic foo__level_1__b4__last__bit : int
+
+logic foo__level_1__b4__position : int
+
+axiom foo__level_1__b4__first__bit_axiom :
+  (0 <= foo__level_1__b4__first__bit)
+
+axiom foo__level_1__b4__last__bit_axiom :
+  (foo__level_1__b4__first__bit <  foo__level_1__b4__last__bit)
+
+axiom foo__level_1__b4__position_axiom : (0 <= foo__level_1__b4__position)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
+
+logic dummy6 : bool
+
+logic dummy7 : bool
+
+logic dummy8 : bool
+
+logic dummy9 : bool
+
+logic dummy10 : bool
+
+logic dummy11 : bool
+
+logic dummy12 : bool
+
+logic dummy13 : bool
+
+logic dummy14 : bool
+
+logic dummy15 : bool
+
+logic dummy16 : bool
+
+logic dummy17 : bool
+
+logic dummy18 : bool
+
+logic dummy19 : bool
+
+logic dummy20 : bool
+
+logic dummy21 : bool
+
+logic dummy22 : bool
+
+logic dummy23 : bool
+
+logic dummy24 : bool
+
+logic dummy25 : bool
+
+type level_1__ref = { level_1__content : us_rep1
+}
+
+function level_1__ref___projection(a: level_1__ref) : us_rep1 =
+  (a).level_1__content
+
+type us_split_fields4 = { rec__foo__level_2__c1 : us_rep1;
+rec__foo__level_2__c2 : us_rep1; rec__foo__level_2__c3 : us_rep1
+}
+
+function us_split_fields_C1__projection(a: us_split_fields4) : us_rep1 =
+  (a).rec__foo__level_2__c1
+
+function us_split_fields_C2__projection(a: us_split_fields4) : us_rep1 =
+  (a).rec__foo__level_2__c2
+
+function us_split_fields_C3__projection(a: us_split_fields4) : us_rep1 =
+  (a).rec__foo__level_2__c3
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep___3__projection(a: us_rep2) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq4 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def3 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq4(a, b)].
+  (((((bool_eq3(((a).us_split_fields5).rec__foo__level_2__c1,
+  ((b).us_split_fields5).rec__foo__level_2__c1) = true) and
+  (bool_eq3(((a).us_split_fields5).rec__foo__level_2__c2,
+  ((b).us_split_fields5).rec__foo__level_2__c2) = true)) and
+  (bool_eq3(((a).us_split_fields5).rec__foo__level_2__c3,
+  ((b).us_split_fields5).rec__foo__level_2__c3) = true)) -> (bool_eq4(a,
+  b) = true)) and
+  ((not (((bool_eq3(((a).us_split_fields5).rec__foo__level_2__c1,
+  ((b).us_split_fields5).rec__foo__level_2__c1) = true) and
+  (bool_eq3(((a).us_split_fields5).rec__foo__level_2__c2,
+  ((b).us_split_fields5).rec__foo__level_2__c2) = true)) and
+  (bool_eq3(((a).us_split_fields5).rec__foo__level_2__c3,
+  ((b).us_split_fields5).rec__foo__level_2__c3) = true))) -> (bool_eq4(a,
+  b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (forall a:us_rep2. (0 <= object__size2(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:us_rep2. (0 <= object__alignment2(a)))
+
+logic foo__level_2__c1__first__bit : int
+
+logic foo__level_2__c1__last__bit : int
+
+logic foo__level_2__c1__position : int
+
+axiom foo__level_2__c1__first__bit_axiom :
+  (0 <= foo__level_2__c1__first__bit)
+
+axiom foo__level_2__c1__last__bit_axiom :
+  (foo__level_2__c1__first__bit <  foo__level_2__c1__last__bit)
+
+axiom foo__level_2__c1__position_axiom : (0 <= foo__level_2__c1__position)
+
+logic foo__level_2__c2__first__bit : int
+
+logic foo__level_2__c2__last__bit : int
+
+logic foo__level_2__c2__position : int
+
+axiom foo__level_2__c2__first__bit_axiom :
+  (0 <= foo__level_2__c2__first__bit)
+
+axiom foo__level_2__c2__last__bit_axiom :
+  (foo__level_2__c2__first__bit <  foo__level_2__c2__last__bit)
+
+axiom foo__level_2__c2__position_axiom : (0 <= foo__level_2__c2__position)
+
+logic foo__level_2__c3__first__bit : int
+
+logic foo__level_2__c3__last__bit : int
+
+logic foo__level_2__c3__position : int
+
+axiom foo__level_2__c3__first__bit_axiom :
+  (0 <= foo__level_2__c3__first__bit)
+
+axiom foo__level_2__c3__last__bit_axiom :
+  (foo__level_2__c3__first__bit <  foo__level_2__c3__last__bit)
+
+axiom foo__level_2__c3__position_axiom : (0 <= foo__level_2__c3__position)
+
+logic user_eq3 : us_rep2, us_rep2 -> bool
+
+logic dummy26 : bool
+
+logic dummy27 : bool
+
+logic dummy28 : bool
+
+logic dummy29 : bool
+
+logic dummy30 : bool
+
+logic dummy31 : bool
+
+logic dummy32 : bool
+
+logic dummy33 : bool
+
+logic dummy34 : bool
+
+logic dummy35 : bool
+
+logic dummy36 : bool
+
+logic dummy37 : bool
+
+logic dummy38 : bool
+
+logic dummy39 : bool
+
+logic dummy40 : bool
+
+logic dummy41 : bool
+
+logic dummy42 : bool
+
+logic dummy43 : bool
+
+logic dummy44 : bool
+
+logic dummy45 : bool
+
+logic dummy46 : bool
+
+logic dummy47 : bool
+
+logic dummy48 : bool
+
+logic dummy49 : bool
+
+logic dummy50 : bool
+
+logic dummy51 : bool
+
+logic dummy52 : bool
+
+logic dummy53 : bool
+
+logic dummy54 : bool
+
+logic dummy55 : bool
+
+logic dummy56 : bool
+
+logic dummy57 : bool
+
+logic dummy58 : bool
+
+logic dummy59 : bool
+
+logic dummy60 : bool
+
+logic dummy61 : bool
+
+logic dummy62 : bool
+
+logic dummy63 : bool
+
+logic dummy64 : bool
+
+logic dummy65 : bool
+
+logic dummy66 : bool
+
+logic dummy67 : bool
+
+logic dummy68 : bool
+
+logic dummy69 : bool
+
+logic dummy70 : bool
+
+logic dummy71 : bool
+
+logic dummy72 : bool
+
+logic dummy73 : bool
+
+logic dummy74 : bool
+
+logic dummy75 : bool
+
+logic dummy76 : bool
+
+logic dummy77 : bool
+
+logic dummy78 : bool
+
+logic dummy79 : bool
+
+logic dummy80 : bool
+
+logic dummy81 : bool
+
+logic dummy82 : bool
+
+logic dummy83 : bool
+
+logic dummy84 : bool
+
+logic dummy85 : bool
+
+type level_2__ref = { level_2__content : us_rep2
+}
+
+function level_2__ref___projection(a: level_2__ref) : us_rep2 =
+  (a).level_2__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic x : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic invariant__ : us_rep1, us_rep1, us_rep1 -> bool
+
+logic invariant____function_guard : bool, us_rep1, us_rep1, us_rep1 -> prop
+
+axiom invariant____post_axiom : true
+
+axiom invariant____def_axiom :
+  (forall a:us_rep1. forall b:us_rep1. forall c:us_rep1 [invariant__(a, b,
+  c)]. ((invariant__(a, b, c) = true) <->
+  (((((((a).us_split_fields3).rec__foo__level_1__b1).us_split_fields1).rec__foo__level_0__a1 = true) and
+  (((((b).us_split_fields3).rec__foo__level_1__b2).us_split_fields1).rec__foo__level_0__a2 = true)) and
+  (((((c).us_split_fields3).rec__foo__level_1__b3).us_split_fields1).rec__foo__level_0__a3 = true))))
+
+ (* File "foo.ads", line 18, characters 0-0 *)
+goal WP_parameter_def :
+  (forall red__split_fields:us_split_fields4.
+  forall black__split_fields:us_split_fields4. (in_range(x) -> ((1 <  x) ->
+  ((invariant__((red__split_fields).rec__foo__level_2__c1,
+  (red__split_fields).rec__foo__level_2__c2,
+  (red__split_fields).rec__foo__level_2__c3) = true) ->
+  ((invariant__((black__split_fields).rec__foo__level_2__c1,
+  (black__split_fields).rec__foo__level_2__c2,
+  (black__split_fields).rec__foo__level_2__c3) = true) ->
+  (invariant__((red__split_fields).rec__foo__level_2__c1,
+  (red__split_fields).rec__foo__level_2__c2,
+  (red__split_fields).rec__foo__level_2__c3) = true))))))

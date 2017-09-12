@@ -386,6 +386,6 @@ function t2__ref___projection(a: t2__ref) : us_rep = (a).t2__content
 
  (* File "private_types.ads", line 31, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___211:bool. forall o:int. ((of_int(1) = temp___211) ->
-  ((to_int(temp___211) = 1) -> (((o = id(0)) and (in_range2(o) and
+  (forall temp___208:bool. forall o:int. ((of_int(1) = temp___208) ->
+  ((to_int(temp___208) = 1) -> (((o = id(0)) and (in_range2(o) and
   (o = 0))) -> in_range1(o)))))

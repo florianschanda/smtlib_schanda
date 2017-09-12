@@ -397,9 +397,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -440,6 +447,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -1081,9 +1091,16 @@ axiom Nth_rotate_left1 :
   (forall v:t2. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
   ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 64))))))
 
-logic to_int2 : t2 -> int
+logic is_signed_positive1 : t2 -> prop
 
 logic of_int1 : int -> t2
+
+logic to_int2 : t2 -> int
+
+axiom to_int_def1 :
+  (forall x:t2 [to_int2(x)]. ((is_signed_positive1(x) ->
+  (to_int2(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int2(x) = (-(18446744073709551616 - tqtint1(x)))))))
 
 axiom to_uint_extensionality1 :
   (forall v:t2. forall vqt:t2. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
@@ -1125,6 +1142,9 @@ predicate sle1(v1: t2, v2: t2) = (to_int2(v1) <= to_int2(v2))
 predicate sgt1(v1: t2, v2: t2) = (to_int2(v2) <  to_int2(v1))
 
 predicate sge1(v1: t2, v2: t2) = (to_int2(v2) <= to_int2(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t2. (is_signed_positive1(x) <-> sge1(x, zeros1)))
 
 logic add1 : t2, t2 -> t2
 
@@ -2048,7 +2068,9 @@ axiom def_axiom :
 goal WP_parameter_def :
   (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
   forall block:(int,byte) farray. forall temp___1103:(int,byte) farray.
-  forall temp___11031:t3. forall result:(int,byte) farray.
+  forall temp___11031:t3. forall o:int. forall temp___1105:int.
+  forall o1:(int,byte) farray. forall temp___1106:(int,byte) farray.
+  forall temp___11061:t3. forall result:(int,byte) farray.
   forall block1:(int,byte) farray. (dynamic_property(0, 2147483647,
   to_rep(first(in_data1)), to_rep(last(in_data1))) ->
   (in_range1(in_data_bit_length) ->
@@ -2071,20 +2093,16 @@ goal WP_parameter_def :
   (not (0 <= (length({ elts = in_data; rt = in_data1 }) - 1)))))) and
   ((slide(in_data, to_rep(first(in_data1)), 0) = temp___1103) and (mk1(0,
   (length({ elts = in_data; rt = in_data1 }) - 1)) = temp___11031))) ->
+  (((((o = length({ elts = in_data; rt = in_data1 })) and in_range(length({
+  elts = in_data; rt = in_data1 }))) and (temp___1105 = (o - 1))) and
+  ((((0 <= temp___1105) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= temp___1105) and (temp___1105 <= 199)))) and (o1 = block1)) and
+  ((o1 = temp___1106) and (mk1(0, temp___1105) = temp___11061)))) ->
   (((to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031))) ->
-  (((to_rep(first2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1)))) <= to_rep(last2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1))))) ->
-  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = ((to_rep(last2(mk1(0,
-  (length({ elts = in_data; rt = in_data1 }) - 1)))) - to_rep(first2(mk1(0,
-  (length({ elts = in_data; rt = in_data1 }) - 1))))) + 1))) and
-  ((not (to_rep(first2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1)))) <= to_rep(last2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1)))))) ->
+  (((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) ->
+  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1))) and
+  ((not (to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061)))) ->
   (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = 0)))) and
   ((not (to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031)))) ->
-  ((to_rep(first2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1)))) <= to_rep(last2(mk1(0, (length({ elts = in_data; rt = in_data1
-  }) - 1))))) -> (0 = ((to_rep(last2(mk1(0, (length({ elts = in_data; rt =
-  in_data1 }) - 1)))) - to_rep(first2(mk1(0, (length({ elts = in_data; rt =
-  in_data1 }) - 1))))) + 1)))))))))))
+  ((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) ->
+  (0 = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1))))))))))))

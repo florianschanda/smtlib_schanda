@@ -301,6 +301,6 @@ function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___205:bool. forall temp___204:bool. forall o:int.
-  ((temp___205 = temp___204) -> ((to_int(temp___204) = 1) ->
+  (forall temp___202:bool. forall temp___201:bool. forall o:int.
+  ((temp___202 = temp___201) -> ((to_int(temp___201) = 1) ->
   (((o = id(0)) and (in_range1(o) and (o = 0))) -> in_range(o)))))

@@ -740,8 +740,10 @@ goal WP_parameter_def :
   forall temp___5461:t. forall o10:(int,character) farray.
   forall o11:(int,character) farray.
   forall temp___550:(int,character) farray. forall temp___5501:t1.
+  forall o12:(int,character) farray.
+  forall temp___552:(int,character) farray. forall temp___5521:t1.
   forall temp___553:(int,character) farray. forall temp___5531:t1.
-  forall o12:(int,character) farray. forall result:(int,character) farray.
+  forall o13:(int,character) farray. forall result:(int,character) farray.
   forall address1:(int,character) farray.
   forall result1:(int,character) farray. forall name1:(int,character) farray.
   forall result2:(int,character) farray. forall name2:(int,character) farray.
@@ -798,22 +800,22 @@ goal WP_parameter_def :
   ((not (1 <= r9b)) and (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and
   (((1 <= r9b) and (0 = ((r9b - 1) + 1))) or (not (1 <= r9b))))) and
   ((temp___String_Literal_549(void) = temp___550) and (mk1(1,
-  5) = temp___5501))) and
+  5) = temp___5501))) and (((((1 <= r9b) -> (((1 <= 1) and (1 <= 20)) and
+  ((1 <= r9b) and (r9b <= 20)))) and (o12 = name3)) and
+  ((o12 = temp___552) and (mk1(1, r9b) = temp___5521))) and
   ((((to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501))) and
-  (((to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b)))) and
-  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = ((to_rep1(last2(mk1(1,
-  r9b))) - to_rep1(first2(mk1(1, r9b)))) + 1))) or
-  ((not (to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b))))) and
+  (((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) and
+  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))) or
+  ((not (to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521)))) and
   (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = 0)))) or
   ((not (to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501)))) and
-  (((to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b)))) and
-  (0 = ((to_rep1(last2(mk1(1, r9b))) - to_rep1(first2(mk1(1,
-  r9b)))) + 1))) or (not (to_rep1(first2(mk1(1,
-  r9b))) <= to_rep1(last2(mk1(1, r9b)))))))) and
-  ((temp___553 = temp___550) and (temp___5531 = temp___5501)))) and
+  (((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) and
+  (0 = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))) or
+  (not (to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))))))) and
+  ((temp___553 = temp___550) and (temp___5531 = temp___5501))))) and
   (forall temp___554:int. ((((1 <= temp___554) and (temp___554 <= r9b)) and
-  ((o12[temp___554]) = (temp___553[temp___554]))) or
+  ((o13[temp___554]) = (temp___553[temp___554]))) or
   ((not ((1 <= temp___554) and (temp___554 <= r9b))) and
-  ((o12[temp___554]) = (name3[temp___554])))))) and ((result9 = name3) and
-  (name4 = o12))) -> (((count1 = r13b) and in_range(r13b)) -> ((1 <= r13b) ->
+  ((o13[temp___554]) = (name3[temp___554])))))) and ((result9 = name3) and
+  (name4 = o13))) -> (((count1 = r13b) and in_range(r13b)) -> ((1 <= r13b) ->
   (1 <= 1)))))))))))))))))

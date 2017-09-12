@@ -1059,8 +1059,8 @@ goal WP_parameter_def :
   forall configuration__updatedata__makedescription__str__assume:(int,character) farray.
   forall configuration__updatedata__makedescription__str__assume1:t.
   forall result:(int,character) farray.
-  forall localtext1:(int,character) farray.
-  forall result1:(int,character) farray. forall str1:(int,character) farray.
+  forall localtext1:(int,character) farray. forall result1:map__ref.
+  forall str1:(int,character) farray.
   ((audittypes__nodescription__aggregate_def(32) = nodescription) ->
   (in_range9(thelatchunlockduration) -> (in_range9(thealarmsilentduration) ->
   (in_range9(thefingerwaitduration) -> (in_range9(thetokenremovalduration) ->
@@ -1471,7 +1471,7 @@ goal WP_parameter_def :
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE7(thesystemmaxfar))).rt))) = configuration__updatedata__makedescription__str__assume) and
   (mk(to_rep1(first(temp___9951)),
   o143) = configuration__updatedata__makedescription__str__assume1)))))) and
-  (((result1 = str) and
+  (((result1 = { map__content = str }) and
   (str1 = configuration__updatedata__makedescription__str__assume)) and
   ((to_rep1(str__first) = to_rep1(first(configuration__updatedata__makedescription__str__assume1))) and
   (to_rep1(str__last) = to_rep1(last(configuration__updatedata__makedescription__str__assume1)))))) ->

@@ -946,10 +946,12 @@ goal WP_parameter_def :
   forall o4:int. forall o5:integer. forall o6:integer.
   forall o7:(int,character) farray. forall temp___636:(int,character) farray.
   forall temp___6361:t2. forall temp___637:(int,character) farray.
-  forall temp___6371:t1. forall temp___642:(int,character) farray.
-  forall temp___6421:t1. forall o8:(int,character) farray.
-  forall o9:(int,(int,character) farray) farray. forall o10:bool.
-  forall o11:bool. forall o12:bool. forall i:int. forall j:int.
+  forall temp___6371:t1. forall o8:(int,character) farray.
+  forall temp___640:(int,character) farray. forall temp___6401:t1.
+  forall temp___642:(int,character) farray. forall temp___6421:t1.
+  forall o9:(int,character) farray.
+  forall o10:(int,(int,character) farray) farray. forall o11:bool.
+  forall o12:bool. forall o13:bool. forall i:int. forall j:int.
   forall last7:int. forall item1:(int,character) farray. forall result:int.
   forall current_candidate1:int.
   forall result1:(int,(int,character) farray) farray.
@@ -1036,31 +1038,33 @@ goal WP_parameter_def :
   ((not (to_rep1(first4(temp___6361)) <= to_rep1(last4(temp___6361)))) and
   (((1 <= r17b) and (0 = ((r17b - 1) + 1))) or (not (1 <= r17b))))) and
   ((temp___636 = temp___637) and (mk1(to_rep1(first4(temp___6361)),
-  to_rep1(last4(temp___6361))) = temp___6371)))) and
+  to_rep1(last4(temp___6361))) = temp___6371)))) and (((((1 <= r17b) ->
+  (((1 <= 1) and (1 <= 70)) and ((1 <= r17b) and (r17b <= 70)))) and
+  (o8 = (candidates3[current_candidate3]))) and ((o8 = temp___640) and
+  (mk1(1, r17b) = temp___6401))) and
   ((((to_rep1(first2(temp___6371)) <= to_rep1(last2(temp___6371))) and
-  (((to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b)))) and
-  (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = ((to_rep1(last2(mk1(1,
-  r17b))) - to_rep1(first2(mk1(1, r17b)))) + 1))) or
-  ((not (to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b))))) and
+  (((to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401))) and
+  (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = ((to_rep1(last2(temp___6401)) - to_rep1(first2(temp___6401))) + 1))) or
+  ((not (to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401)))) and
   (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = 0)))) or
   ((not (to_rep1(first2(temp___6371)) <= to_rep1(last2(temp___6371)))) and
-  (((to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b)))) and
-  (0 = ((to_rep1(last2(mk1(1, r17b))) - to_rep1(first2(mk1(1,
-  r17b)))) + 1))) or (not (to_rep1(first2(mk1(1,
-  r17b))) <= to_rep1(last2(mk1(1, r17b)))))))) and ({ elts1 = temp___642;
-  rt1 = temp___6421 } = { elts1 = temp___637; rt1 = temp___6371 }))) and
+  (((to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401))) and
+  (0 = ((to_rep1(last2(temp___6401)) - to_rep1(first2(temp___6401))) + 1))) or
+  (not (to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401))))))) and
+  ({ elts1 = temp___642; rt1 = temp___6421 } = { elts1 = temp___637; rt1 =
+  temp___6371 })))) and
   (forall temp___643:int. ((((1 <= temp___643) and (temp___643 <= r17b)) and
-  ((o8[temp___643]) = (temp___642[temp___643]))) or
+  ((o9[temp___643]) = (temp___642[temp___643]))) or
   ((not ((1 <= temp___643) and (temp___643 <= r17b))) and
-  ((o8[temp___643]) = ((candidates3[current_candidate3])[temp___643])))))) and
-  (o9 = (candidates3[current_candidate3 <- o8]))) and
-  ((candidates3 = result6) and (candidates4 = o9))) and
-  (((((o10 = end_of_file(file)) and (((not (o10 = true)) and (o11 = true)) or
-  ((o10 = true) and (o11 = false)))) and (((current_candidate3 <  20) and
-  (o12 = match_bool(o11, true, false))) or
-  ((not (current_candidate3 <  20)) and (o12 = match_bool(o11, false,
-  false))))) and (((not (o12 = true)) and (result7 = true)) or
-  ((o12 = true) and (result7 = false)))) and (result7 = true))))))))))))) and
+  ((o9[temp___643]) = ((candidates3[current_candidate3])[temp___643])))))) and
+  (o10 = (candidates3[current_candidate3 <- o9]))) and
+  ((candidates3 = result6) and (candidates4 = o10))) and
+  (((((o11 = end_of_file(file)) and (((not (o11 = true)) and (o12 = true)) or
+  ((o11 = true) and (o12 = false)))) and (((current_candidate3 <  20) and
+  (o13 = match_bool(o12, true, false))) or
+  ((not (current_candidate3 <  20)) and (o13 = match_bool(o12, false,
+  false))))) and (((not (o13 = true)) and (result7 = true)) or
+  ((o13 = true) and (result7 = false)))) and (result7 = true))))))))))))) and
   (((item3 = item4) and ((last9 = last10) and
   ((current_candidate3 = current_candidate4) and
   (candidates4 = candidates5)))) and ((item5 = item3) and

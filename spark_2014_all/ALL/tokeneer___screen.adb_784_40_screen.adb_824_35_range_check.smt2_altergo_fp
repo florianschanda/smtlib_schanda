@@ -1837,25 +1837,31 @@ goal WP_parameter_def :
   forall result__3:(int,character) farray. forall o:(int,character) farray.
   forall temp___1401:(int,character) farray. forall temp___14011:t2.
   forall temp___1402:(int,character) farray. forall temp___14021:t1.
+  forall temp___1404:int. forall o1:(int,character) farray.
+  forall temp___1405:(int,character) farray. forall temp___14051:t1.
   forall temp___1406:(int,character) farray. forall temp___14061:t1.
-  forall o1:(int,character) farray. forall o2:screenycoordt.
-  forall o3:screenxcoordt. forall o4:screenxcoordt. forall o5:screenycoordt.
-  forall o6:screenxcoordt. forall o7:screenycoordt.
-  forall o8:(int,character) farray.
+  forall o2:(int,character) farray. forall o3:screenycoordt.
+  forall o4:screenxcoordt. forall o5:screenxcoordt. forall o6:screenycoordt.
+  forall o7:screenxcoordt. forall o8:screenycoordt.
+  forall o9:(int,character) farray.
   forall temp___1414:(int,character) farray. forall temp___14141:t4.
   forall temp___1415:(int,character) farray. forall temp___14151:t3.
+  forall temp___1417:int. forall o10:(int,character) farray.
+  forall temp___1418:(int,character) farray. forall temp___14181:t3.
   forall temp___1419:(int,character) farray. forall temp___14191:t3.
-  forall o9:(int,character) farray. forall o10:screenycoordt.
-  forall o11:screenxcoordt. forall o12:screenxcoordt.
-  forall o13:screenycoordt. forall o14:screenxcoordt.
-  forall o15:screenycoordt. forall o16:(int,character) farray.
+  forall o11:(int,character) farray. forall o12:screenycoordt.
+  forall o13:screenxcoordt. forall o14:screenxcoordt.
+  forall o15:screenycoordt. forall o16:screenxcoordt.
+  forall o17:screenycoordt. forall o18:(int,character) farray.
   forall temp___1427:(int,character) farray. forall temp___14271:t6.
   forall temp___1428:(int,character) farray. forall temp___14281:t5.
+  forall temp___1430:int. forall o19:(int,character) farray.
+  forall temp___1431:(int,character) farray. forall temp___14311:t5.
   forall temp___1432:(int,character) farray. forall temp___14321:t5.
-  forall o17:(int,character) farray. forall o18:screenycoordt.
-  forall o19:screenxcoordt. forall o20:screenxcoordt.
-  forall o21:screenycoordt. forall o22:screenxcoordt.
-  forall o23:screenycoordt. forall successentry1:int. forall failentry1:int.
+  forall o20:(int,character) farray. forall o21:screenycoordt.
+  forall o22:screenxcoordt. forall o23:screenxcoordt.
+  forall o24:screenycoordt. forall o25:screenxcoordt.
+  forall o26:screenycoordt. forall successentry1:int. forall failentry1:int.
   forall successbio1:int. forall failbio1:int. forall ok:bool.
   forall result:map__ref. forall data4:(int,character) farray.
   forall result1:map__ref. forall result__4:(int,character) farray.
@@ -1911,35 +1917,32 @@ goal WP_parameter_def :
   (not (1 <= (to_rep1(data__last) - 1)))))) and ((slide(temp___1401,
   to_rep1(first4(temp___14011)), 1) = temp___1402) and (mk1(1,
   (to_rep1(data__last) - 1)) = temp___14021)))) and
+  ((((temp___1404 = (to_rep1(data__last) - 1)) and
+  in_range1((to_rep1(data__last) - 1))) and ((((1 <= temp___1404) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= temp___1404) and
+  (temp___1404 <= 10)))) and (o1 = result__4)) and ((o1 = temp___1405) and
+  (mk1(1, temp___1404) = temp___14051)))) and
   ((((to_rep1(first2(temp___14021)) <= to_rep1(last2(temp___14021))) and
-  (((to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1)))) <= to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1))))) and
-  (((to_rep1(last2(temp___14021)) - to_rep1(first2(temp___14021))) + 1) = ((to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1)))) - to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1))))) + 1))) or ((not (to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1)))) <= to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1)))))) and
+  (((to_rep1(first2(temp___14051)) <= to_rep1(last2(temp___14051))) and
+  (((to_rep1(last2(temp___14021)) - to_rep1(first2(temp___14021))) + 1) = ((to_rep1(last2(temp___14051)) - to_rep1(first2(temp___14051))) + 1))) or
+  ((not (to_rep1(first2(temp___14051)) <= to_rep1(last2(temp___14051)))) and
   (((to_rep1(last2(temp___14021)) - to_rep1(first2(temp___14021))) + 1) = 0)))) or
   ((not (to_rep1(first2(temp___14021)) <= to_rep1(last2(temp___14021)))) and
-  (((to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1)))) <= to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1))))) and (0 = ((to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1)))) - to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1))))) + 1))) or (not (to_rep1(first2(mk1(1,
-  (to_rep1(data__last) - 1)))) <= to_rep1(last2(mk1(1,
-  (to_rep1(data__last) - 1))))))))) and ({ elts1 = temp___1406; rt1 =
-  temp___14061 } = { elts1 = temp___1402; rt1 = temp___14021 }))) and
+  (((to_rep1(first2(temp___14051)) <= to_rep1(last2(temp___14051))) and
+  (0 = ((to_rep1(last2(temp___14051)) - to_rep1(first2(temp___14051))) + 1))) or
+  (not (to_rep1(first2(temp___14051)) <= to_rep1(last2(temp___14051))))))) and
+  ({ elts1 = temp___1406; rt1 = temp___14061 } = { elts1 = temp___1402; rt1 =
+  temp___14021 })))) and
   (forall temp___1407:int. ((((1 <= temp___1407) and
   (temp___1407 <= (to_rep1(data__last) - 1))) and
-  ((o1[temp___1407]) = (temp___1406[temp___1407]))) or
+  ((o2[temp___1407]) = (temp___1406[temp___1407]))) or
   ((not ((1 <= temp___1407) and
   (temp___1407 <= (to_rep1(data__last) - 1)))) and
-  ((o1[temp___1407]) = (result__4[temp___1407])))))) and ((result2 = {
-  map__content = result__4 }) and (result__5 = o1))) and ((result3 = {
+  ((o2[temp___1407]) = (result__4[temp___1407])))))) and ((result2 = {
+  map__content = result__4 }) and (result__5 = o2))) and ((result3 = {
   map__content = c249b }) and (c249b1 = result__5)))))) ->
-  ((((to_rep4(o2) = 26) and ((to_rep3(o3) = 50) and ((o3 = o4) and
-  (o2 = o5)))) and ((o6 = o4) and (o7 = o5))) -> (((result4 = {
+  ((((to_rep4(o3) = 26) and ((to_rep3(o4) = 50) and ((o4 = o5) and
+  (o3 = o6)))) and ((o7 = o5) and (o8 = o6))) -> (((result4 = {
   bool__content = ok }) and (ok1 = match_bool(ok, consoleok, false))) ->
   (((failentry1 = c259b) and in_range4(c259b)) -> (((((result5 = {
   map__content = data1 }) and
@@ -1952,8 +1955,8 @@ goal WP_parameter_def :
   (((((((((2 <= to_rep1(data__last1)) -> (((to_rep1(data__first1) <= 2) and
   (2 <= to_rep1(data__last1))) and
   ((to_rep1(data__first1) <= to_rep1(data__last1)) and
-  (to_rep1(data__last1) <= to_rep1(data__last1))))) and (o8 = data5)) and
-  ((o8 = temp___1414) and (mk4(2, to_rep1(data__last1)) = temp___14141))) and
+  (to_rep1(data__last1) <= to_rep1(data__last1))))) and (o9 = data5)) and
+  ((o9 = temp___1414) and (mk4(2, to_rep1(data__last1)) = temp___14141))) and
   ((((to_rep1(first8(temp___14141)) <= to_rep1(last8(temp___14141))) and
   (((1 <= (to_rep1(data__last1) - 1)) and
   (((to_rep1(last8(temp___14141)) - to_rep1(first8(temp___14141))) + 1) = (((to_rep1(data__last1) - 1) - 1) + 1))) or
@@ -1965,35 +1968,32 @@ goal WP_parameter_def :
   (not (1 <= (to_rep1(data__last1) - 1)))))) and ((slide(temp___1414,
   to_rep1(first8(temp___14141)), 1) = temp___1415) and (mk3(1,
   (to_rep1(data__last1) - 1)) = temp___14151)))) and
+  ((((temp___1417 = (to_rep1(data__last1) - 1)) and
+  in_range1((to_rep1(data__last1) - 1))) and ((((1 <= temp___1417) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= temp___1417) and
+  (temp___1417 <= 10)))) and (o10 = result__6)) and ((o10 = temp___1418) and
+  (mk3(1, temp___1417) = temp___14181)))) and
   ((((to_rep1(first6(temp___14151)) <= to_rep1(last6(temp___14151))) and
-  (((to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1)))) <= to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1))))) and
-  (((to_rep1(last6(temp___14151)) - to_rep1(first6(temp___14151))) + 1) = ((to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1)))) - to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1))))) + 1))) or ((not (to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1)))) <= to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1)))))) and
+  (((to_rep1(first6(temp___14181)) <= to_rep1(last6(temp___14181))) and
+  (((to_rep1(last6(temp___14151)) - to_rep1(first6(temp___14151))) + 1) = ((to_rep1(last6(temp___14181)) - to_rep1(first6(temp___14181))) + 1))) or
+  ((not (to_rep1(first6(temp___14181)) <= to_rep1(last6(temp___14181)))) and
   (((to_rep1(last6(temp___14151)) - to_rep1(first6(temp___14151))) + 1) = 0)))) or
   ((not (to_rep1(first6(temp___14151)) <= to_rep1(last6(temp___14151)))) and
-  (((to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1)))) <= to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1))))) and (0 = ((to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1)))) - to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1))))) + 1))) or (not (to_rep1(first6(mk3(1,
-  (to_rep1(data__last1) - 1)))) <= to_rep1(last6(mk3(1,
-  (to_rep1(data__last1) - 1))))))))) and ({ elts3 = temp___1419; rt3 =
-  temp___14191 } = { elts3 = temp___1415; rt3 = temp___14151 }))) and
+  (((to_rep1(first6(temp___14181)) <= to_rep1(last6(temp___14181))) and
+  (0 = ((to_rep1(last6(temp___14181)) - to_rep1(first6(temp___14181))) + 1))) or
+  (not (to_rep1(first6(temp___14181)) <= to_rep1(last6(temp___14181))))))) and
+  ({ elts3 = temp___1419; rt3 = temp___14191 } = { elts3 = temp___1415; rt3 =
+  temp___14151 })))) and
   (forall temp___1420:int. ((((1 <= temp___1420) and
   (temp___1420 <= (to_rep1(data__last1) - 1))) and
-  ((o9[temp___1420]) = (temp___1419[temp___1420]))) or
+  ((o11[temp___1420]) = (temp___1419[temp___1420]))) or
   ((not ((1 <= temp___1420) and
   (temp___1420 <= (to_rep1(data__last1) - 1)))) and
-  ((o9[temp___1420]) = (result__6[temp___1420])))))) and ((result7 = {
-  map__content = result__6 }) and (result__7 = o9))) and ((result8 = {
+  ((o11[temp___1420]) = (result__6[temp___1420])))))) and ((result7 = {
+  map__content = result__6 }) and (result__7 = o11))) and ((result8 = {
   map__content = c260b }) and (c260b1 = result__7)))))) ->
-  ((((to_rep4(o10) = 26) and ((to_rep3(o11) = 65) and ((o11 = o12) and
-  (o10 = o13)))) and ((o14 = o12) and (o15 = o13))) -> (((result9 = {
+  ((((to_rep4(o12) = 26) and ((to_rep3(o13) = 65) and ((o13 = o14) and
+  (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) -> (((result9 = {
   bool__content = ok1 }) and (ok2 = match_bool(ok1, consoleok1, false))) ->
   (((successbio1 = c270b) and in_range4(c270b)) -> (((((result10 = {
   map__content = data2 }) and
@@ -2006,8 +2006,8 @@ goal WP_parameter_def :
   (((((((((2 <= to_rep1(data__last2)) -> (((to_rep1(data__first2) <= 2) and
   (2 <= to_rep1(data__last2))) and
   ((to_rep1(data__first2) <= to_rep1(data__last2)) and
-  (to_rep1(data__last2) <= to_rep1(data__last2))))) and (o16 = data6)) and
-  ((o16 = temp___1427) and (mk6(2,
+  (to_rep1(data__last2) <= to_rep1(data__last2))))) and (o18 = data6)) and
+  ((o18 = temp___1427) and (mk6(2,
   to_rep1(data__last2)) = temp___14271))) and
   ((((to_rep1(first12(temp___14271)) <= to_rep1(last12(temp___14271))) and
   (((1 <= (to_rep1(data__last2) - 1)) and
@@ -2020,35 +2020,32 @@ goal WP_parameter_def :
   (not (1 <= (to_rep1(data__last2) - 1)))))) and ((slide(temp___1427,
   to_rep1(first12(temp___14271)), 1) = temp___1428) and (mk5(1,
   (to_rep1(data__last2) - 1)) = temp___14281)))) and
+  ((((temp___1430 = (to_rep1(data__last2) - 1)) and
+  in_range1((to_rep1(data__last2) - 1))) and ((((1 <= temp___1430) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= temp___1430) and
+  (temp___1430 <= 10)))) and (o19 = result__8)) and ((o19 = temp___1431) and
+  (mk5(1, temp___1430) = temp___14311)))) and
   ((((to_rep1(first10(temp___14281)) <= to_rep1(last10(temp___14281))) and
-  (((to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1)))) <= to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1))))) and
-  (((to_rep1(last10(temp___14281)) - to_rep1(first10(temp___14281))) + 1) = ((to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1)))) - to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1))))) + 1))) or ((not (to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1)))) <= to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1)))))) and
+  (((to_rep1(first10(temp___14311)) <= to_rep1(last10(temp___14311))) and
+  (((to_rep1(last10(temp___14281)) - to_rep1(first10(temp___14281))) + 1) = ((to_rep1(last10(temp___14311)) - to_rep1(first10(temp___14311))) + 1))) or
+  ((not (to_rep1(first10(temp___14311)) <= to_rep1(last10(temp___14311)))) and
   (((to_rep1(last10(temp___14281)) - to_rep1(first10(temp___14281))) + 1) = 0)))) or
   ((not (to_rep1(first10(temp___14281)) <= to_rep1(last10(temp___14281)))) and
-  (((to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1)))) <= to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1))))) and (0 = ((to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1)))) - to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1))))) + 1))) or (not (to_rep1(first10(mk5(1,
-  (to_rep1(data__last2) - 1)))) <= to_rep1(last10(mk5(1,
-  (to_rep1(data__last2) - 1))))))))) and ({ elts5 = temp___1432; rt5 =
-  temp___14321 } = { elts5 = temp___1428; rt5 = temp___14281 }))) and
+  (((to_rep1(first10(temp___14311)) <= to_rep1(last10(temp___14311))) and
+  (0 = ((to_rep1(last10(temp___14311)) - to_rep1(first10(temp___14311))) + 1))) or
+  (not (to_rep1(first10(temp___14311)) <= to_rep1(last10(temp___14311))))))) and
+  ({ elts5 = temp___1432; rt5 = temp___14321 } = { elts5 = temp___1428; rt5 =
+  temp___14281 })))) and
   (forall temp___1433:int. ((((1 <= temp___1433) and
   (temp___1433 <= (to_rep1(data__last2) - 1))) and
-  ((o17[temp___1433]) = (temp___1432[temp___1433]))) or
+  ((o20[temp___1433]) = (temp___1432[temp___1433]))) or
   ((not ((1 <= temp___1433) and
   (temp___1433 <= (to_rep1(data__last2) - 1)))) and
-  ((o17[temp___1433]) = (result__8[temp___1433])))))) and ((result12 = {
-  map__content = result__8 }) and (result__9 = o17))) and ((result13 = {
+  ((o20[temp___1433]) = (result__8[temp___1433])))))) and ((result12 = {
+  map__content = result__8 }) and (result__9 = o20))) and ((result13 = {
   map__content = c271b }) and (c271b1 = result__9)))))) ->
-  ((((to_rep4(o18) = 25) and ((to_rep3(o19) = 50) and ((o19 = o20) and
-  (o18 = o21)))) and ((o22 = o20) and (o23 = o21))) -> (((result14 = {
+  ((((to_rep4(o21) = 25) and ((to_rep3(o22) = 50) and ((o22 = o23) and
+  (o21 = o24)))) and ((o25 = o23) and (o26 = o24))) -> (((result14 = {
   bool__content = ok2 }) and (ok3 = match_bool(ok2, consoleok2, false))) ->
   (((failbio1 = c281b) and in_range4(c281b)) -> ((((result15 = {
   map__content = data3 }) and

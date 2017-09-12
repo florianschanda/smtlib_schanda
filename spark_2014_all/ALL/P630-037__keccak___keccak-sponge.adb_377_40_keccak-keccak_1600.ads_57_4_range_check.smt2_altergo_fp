@@ -333,9 +333,16 @@ axiom pow2_63 : (pow2(63) = 9223372036854775808)
 
 axiom pow2_64 : (pow2(64) = 18446744073709551616)
 
-logic to_int : t -> int
+logic is_signed_positive : t -> prop
 
 logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
 
 axiom to_uint_extensionality :
   (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
@@ -376,6 +383,9 @@ predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
 predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
 
 predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
 
 logic add : t, t -> t
 
@@ -592,7 +602,7 @@ axiom bool_eq_def1 :
 
 logic to_int1 : bool -> int
 
-axiom to_int_def :
+axiom to_int_def1 :
   (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
   ((not (b = true)) -> (to_int1(b) = 0))))
 
@@ -1071,9 +1081,16 @@ axiom Nth_rotate_left1 :
   (forall v:t2. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
   ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 64))))))
 
-logic to_int3 : t2 -> int
+logic is_signed_positive1 : t2 -> prop
 
 logic of_int2 : int -> t2
+
+logic to_int3 : t2 -> int
+
+axiom to_int_def2 :
+  (forall x:t2 [to_int3(x)]. ((is_signed_positive1(x) ->
+  (to_int3(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int3(x) = (-(18446744073709551616 - tqtint1(x)))))))
 
 axiom to_uint_extensionality1 :
   (forall v:t2. forall vqt:t2. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
@@ -1115,6 +1132,9 @@ predicate sle1(v1: t2, v2: t2) = (to_int3(v1) <= to_int3(v2))
 predicate sgt1(v1: t2, v2: t2) = (to_int3(v2) <  to_int3(v1))
 
 predicate sge1(v1: t2, v2: t2) = (to_int3(v2) <= to_int3(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t2. (is_signed_positive1(x) <-> sge1(x, zeros1)))
 
 logic add1 : t2, t2 -> t2
 
@@ -3100,16 +3120,18 @@ goal WP_parameter_def :
   forall keccak__keccak_1600__sponge__squeeze__B_2__R145s__assume:int.
   forall o26:(int,byte) farray. forall temp___918:(int,byte) farray.
   forall temp___9181:t6. forall temp___919:(int,byte) farray.
-  forall temp___9191:t5. forall temp___921:(int,byte) farray.
-  forall temp___9211:t5. forall o27:(int,byte) farray. forall o28:int.
-  forall o29:int. forall o30:byte_absorption_number. forall o31:map.
-  forall o32:(int,byte) farray. forall o33:bit_absorption_number.
-  forall o34:byte_absorption_number. forall o35:rate_number.
-  forall o36:states. forall temp___924:map.
+  forall temp___9191:t5. forall o27:(int,byte) farray.
+  forall temp___920:(int,byte) farray. forall temp___9201:t5.
+  forall temp___921:(int,byte) farray. forall temp___9211:t5.
+  forall o28:(int,byte) farray. forall o29:int. forall o30:int.
+  forall o31:byte_absorption_number. forall o32:map.
+  forall o33:(int,byte) farray. forall o34:bit_absorption_number.
+  forall o35:byte_absorption_number. forall o36:rate_number.
+  forall o37:states. forall temp___924:map.
   forall temp___9241:(int,byte) farray.
   forall temp___9242:bit_absorption_number.
   forall temp___9243:byte_absorption_number. forall temp___9244:rate_number.
-  forall temp___9245:states. forall o37:int. forall o38:int. forall o39:int.
+  forall temp___9245:states. forall o38:int. forall o39:int. forall o40:int.
   forall ctx__split_fields6:us_split_fields. forall result:int__ref.
   forall remaining1:int. forall result1:int__ref. forall offset1:int.
   forall result2:int__ref. forall initial_rate1:int. forall result3:map__ref.
@@ -3311,40 +3333,40 @@ goal WP_parameter_def :
   (((r140s <= r141s) and (0 = ((r141s - r140s) + 1))) or
   (not (r140s <= r141s))))) and ((slide(temp___918,
   to_rep(first8(temp___9181)), r140s) = temp___919) and (mk3(r140s,
-  r141s) = temp___9191)))) and
+  r141s) = temp___9191)))) and (((((r140s <= r141s) ->
+  (((to_rep(digest__first) <= r140s) and (r140s <= to_rep(digest__last))) and
+  ((to_rep(digest__first) <= r141s) and
+  (r141s <= to_rep(digest__last))))) and (o27 = digest1)) and
+  ((o27 = temp___920) and (mk3(r140s, r141s) = temp___9201))) and
   ((((to_rep(first6(temp___9191)) <= to_rep(last6(temp___9191))) and
-  (((to_rep(first6(mk3(r140s, r141s))) <= to_rep(last6(mk3(r140s,
-  r141s)))) and
-  (((to_rep(last6(temp___9191)) - to_rep(first6(temp___9191))) + 1) = ((to_rep(last6(mk3(r140s,
-  r141s))) - to_rep(first6(mk3(r140s, r141s)))) + 1))) or
-  ((not (to_rep(first6(mk3(r140s, r141s))) <= to_rep(last6(mk3(r140s,
-  r141s))))) and
+  (((to_rep(first6(temp___9201)) <= to_rep(last6(temp___9201))) and
+  (((to_rep(last6(temp___9191)) - to_rep(first6(temp___9191))) + 1) = ((to_rep(last6(temp___9201)) - to_rep(first6(temp___9201))) + 1))) or
+  ((not (to_rep(first6(temp___9201)) <= to_rep(last6(temp___9201)))) and
   (((to_rep(last6(temp___9191)) - to_rep(first6(temp___9191))) + 1) = 0)))) or
   ((not (to_rep(first6(temp___9191)) <= to_rep(last6(temp___9191)))) and
-  (((to_rep(first6(mk3(r140s, r141s))) <= to_rep(last6(mk3(r140s,
-  r141s)))) and (0 = ((to_rep(last6(mk3(r140s,
-  r141s))) - to_rep(first6(mk3(r140s, r141s)))) + 1))) or
-  (not (to_rep(first6(mk3(r140s, r141s))) <= to_rep(last6(mk3(r140s,
-  r141s)))))))) and ({ elts3 = temp___921; rt3 = temp___9211 } = { elts3 =
-  temp___919; rt3 = temp___9191 }))) and
+  (((to_rep(first6(temp___9201)) <= to_rep(last6(temp___9201))) and
+  (0 = ((to_rep(last6(temp___9201)) - to_rep(first6(temp___9201))) + 1))) or
+  (not (to_rep(first6(temp___9201)) <= to_rep(last6(temp___9201))))))) and ({
+  elts3 = temp___921; rt3 = temp___9211 } = { elts3 = temp___919; rt3 =
+  temp___9191 })))) and
   (forall temp___922:int. ((((r140s <= temp___922) and
   (temp___922 <= r141s)) and
-  ((o27[temp___922]) = (temp___921[temp___922]))) or
+  ((o28[temp___922]) = (temp___921[temp___922]))) or
   ((not ((r140s <= temp___922) and (temp___922 <= r141s))) and
-  ((o27[temp___922]) = (digest1[temp___922])))))) and ((result10 = {
-  map__content = digest1 }) and (digest2 = o27))) and
-  ((((((((o28 = (to_rep3((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__bytes_squeezed) + bytes_to_squeeze2)) and
+  ((o28[temp___922]) = (digest1[temp___922])))))) and ((result10 = {
+  map__content = digest1 }) and (digest2 = o28))) and
+  ((((((((o29 = (to_rep3((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__bytes_squeezed) + bytes_to_squeeze2)) and
   in_range1((to_rep3((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__bytes_squeezed) + bytes_to_squeeze2))) and
-  ((o29 = o28) and in_range6(o28))) and (to_rep3(o30) = o29)) and
-  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__state = o31) and
-  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__block = o32) and
-  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o33) and
-  ((o30 = o34) and
-  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__rate = o35) and
-  ((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__curr_state = o36))))))) and
-  ((temp___924 = o31) and ((temp___9241 = o32) and ((temp___9242 = o33) and
-  ((temp___9243 = o34) and ((temp___9244 = o35) and
-  (temp___9245 = o36))))))) and ((result11 = { us_split_fields__content =
+  ((o30 = o29) and in_range6(o29))) and (to_rep3(o31) = o30)) and
+  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__state = o32) and
+  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__block = o33) and
+  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__bits_absorbed = o34) and
+  ((o31 = o35) and
+  (((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__rate = o36) and
+  ((ctx__split_fields10).rec__keccak__keccak_1600__sponge__context__curr_state = o37))))))) and
+  ((temp___924 = o32) and ((temp___9241 = o33) and ((temp___9242 = o34) and
+  ((temp___9243 = o35) and ((temp___9244 = o36) and
+  (temp___9245 = o37))))))) and ((result11 = { us_split_fields__content =
   ctx__split_fields10 }) and (ctx__split_fields11 = {
   rec__keccak__keccak_1600__sponge__context__state = temp___924;
   rec__keccak__keccak_1600__sponge__context__block = temp___9241;
@@ -3352,13 +3374,13 @@ goal WP_parameter_def :
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed = temp___9243;
   rec__keccak__keccak_1600__sponge__context__rate = temp___9244;
   rec__keccak__keccak_1600__sponge__context__curr_state = temp___9245
-  }))) and ((((o37 = (offset1 + bytes_to_squeeze2)) and
+  }))) and ((((o38 = (offset1 + bytes_to_squeeze2)) and
   in_range1((offset1 + bytes_to_squeeze2))) and ((result12 = { int__content =
-  offset1 }) and (offset2 = o37))) and
-  ((((o38 = (remaining1 - bytes_to_squeeze2)) and
-  in_range1((remaining1 - bytes_to_squeeze2))) and ((o39 = o38) and
-  in_range2(o38))) and ((result13 = { int__content = remaining1 }) and
-  (remaining2 = o39))))))))))))) ->
+  offset1 }) and (offset2 = o38))) and
+  ((((o39 = (remaining1 - bytes_to_squeeze2)) and
+  in_range1((remaining1 - bytes_to_squeeze2))) and ((o40 = o39) and
+  in_range2(o39))) and ((result13 = { int__content = remaining1 }) and
+  (remaining2 = o40))))))))))))) ->
   ((to_rep4((ctx__split_fields11).rec__keccak__keccak_1600__sponge__context__rate) <= to_rep3((ctx__split_fields11).rec__keccak__keccak_1600__sponge__context__bytes_squeezed)) ->
   (((result14 = { us_split_fields__content = ctx__split_fields11 }) and
   (ctx__split_fields12 = { rec__keccak__keccak_1600__sponge__context__state =

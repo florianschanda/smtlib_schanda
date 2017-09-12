@@ -943,7 +943,9 @@ goal WP_parameter_def :
   forall o3:bool. forall o4:int. forall o5:integer. forall o6:integer.
   forall o7:(int,character) farray. forall temp___636:(int,character) farray.
   forall temp___6361:t2. forall temp___637:(int,character) farray.
-  forall temp___6371:t1. forall result:int. forall current_candidate1:int.
+  forall temp___6371:t1. forall o8:(int,character) farray.
+  forall temp___640:(int,character) farray. forall temp___6401:t1.
+  forall result:int. forall current_candidate1:int.
   forall result1:(int,(int,character) farray) farray.
   forall candidates1:(int,(int,character) farray) farray.
   forall result2:(int,(int,character) farray) farray.
@@ -1001,14 +1003,15 @@ goal WP_parameter_def :
   ((not (to_rep1(first4(temp___6361)) <= to_rep1(last4(temp___6361)))) and
   (((1 <= r17b) and (0 = ((r17b - 1) + 1))) or (not (1 <= r17b))))) and
   ((temp___636 = temp___637) and (mk1(to_rep1(first4(temp___6361)),
-  to_rep1(last4(temp___6361))) = temp___6371)))) ->
+  to_rep1(last4(temp___6361))) = temp___6371)))) -> (((((1 <= r17b) ->
+  (((1 <= 1) and (1 <= 70)) and ((1 <= r17b) and (r17b <= 70)))) and
+  (o8 = (candidates3[current_candidate3]))) and ((o8 = temp___640) and
+  (mk1(1, r17b) = temp___6401))) ->
   (((to_rep1(first2(temp___6371)) <= to_rep1(last2(temp___6371))) ->
-  (((to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b)))) ->
-  (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = ((to_rep1(last2(mk1(1,
-  r17b))) - to_rep1(first2(mk1(1, r17b)))) + 1))) and
-  ((not (to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b))))) ->
+  (((to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401))) ->
+  (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = ((to_rep1(last2(temp___6401)) - to_rep1(first2(temp___6401))) + 1))) and
+  ((not (to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401)))) ->
   (((to_rep1(last2(temp___6371)) - to_rep1(first2(temp___6371))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___6371)) <= to_rep1(last2(temp___6371)))) ->
-  ((to_rep1(first2(mk1(1, r17b))) <= to_rep1(last2(mk1(1, r17b)))) ->
-  (0 = ((to_rep1(last2(mk1(1, r17b))) - to_rep1(first2(mk1(1,
-  r17b)))) + 1))))))))))))))))))))))))))
+  ((to_rep1(first2(temp___6401)) <= to_rep1(last2(temp___6401))) ->
+  (0 = ((to_rep1(last2(temp___6401)) - to_rep1(first2(temp___6401))) + 1)))))))))))))))))))))))))))

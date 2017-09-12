@@ -740,6 +740,8 @@ goal WP_parameter_def :
   forall temp___5461:t. forall o10:(int,character) farray.
   forall o11:(int,character) farray.
   forall temp___550:(int,character) farray. forall temp___5501:t1.
+  forall o12:(int,character) farray.
+  forall temp___552:(int,character) farray. forall temp___5521:t1.
   forall result:(int,character) farray.
   forall address1:(int,character) farray.
   forall result1:(int,character) farray. forall name1:(int,character) farray.
@@ -796,14 +798,14 @@ goal WP_parameter_def :
   ((not (1 <= r9b)) and (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and
   (((1 <= r9b) and (0 = ((r9b - 1) + 1))) or (not (1 <= r9b))))) and
   ((temp___String_Literal_549(void) = temp___550) and (mk1(1,
-  5) = temp___5501))) ->
+  5) = temp___5501))) -> (((((1 <= r9b) -> (((1 <= 1) and (1 <= 20)) and
+  ((1 <= r9b) and (r9b <= 20)))) and (o12 = name3)) and
+  ((o12 = temp___552) and (mk1(1, r9b) = temp___5521))) ->
   (((to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501))) ->
-  (((to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b)))) ->
-  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = ((to_rep1(last2(mk1(1,
-  r9b))) - to_rep1(first2(mk1(1, r9b)))) + 1))) and
-  ((not (to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b))))) ->
+  (((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) ->
+  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))) and
+  ((not (to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521)))) ->
   (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501)))) ->
-  ((to_rep1(first2(mk1(1, r9b))) <= to_rep1(last2(mk1(1, r9b)))) ->
-  (0 = ((to_rep1(last2(mk1(1, r9b))) - to_rep1(first2(mk1(1,
-  r9b)))) + 1)))))))))))))))))))
+  ((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) ->
+  (0 = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))))))))))))))))))))

@@ -507,10 +507,11 @@ goal WP_parameter_def :
   (forall a:(int,integer) farray. forall o:(int,integer) farray.
   forall temp___150:(int,integer) farray. forall temp___1501:t1.
   forall temp___151:(int,integer) farray. forall temp___1511:t.
-  (in_range1(i) -> (in_range1(j) -> (in_range1(k) -> (in_range1(l) ->
-  (((j - i) = (l - k)) -> ((((((k <= l) -> (((1 <= k) and (k <= 8)) and
-  ((1 <= l) and (l <= 8)))) and (o = a)) and ((o = temp___150) and (mk1(k,
-  l) = temp___1501))) and
+  forall o1:(int,integer) farray. forall temp___152:(int,integer) farray.
+  forall temp___1521:t. (in_range1(i) -> (in_range1(j) -> (in_range1(k) ->
+  (in_range1(l) -> (((j - i) = (l - k)) -> ((((((k <= l) -> (((1 <= k) and
+  (k <= 8)) and ((1 <= l) and (l <= 8)))) and (o = a)) and
+  ((o = temp___150) and (mk1(k, l) = temp___1501))) and
   ((((to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501))) and
   (((i <= j) and
   (((to_rep1(last2(temp___1501)) - to_rep1(first2(temp___1501))) + 1) = ((j - i) + 1))) or
@@ -519,13 +520,14 @@ goal WP_parameter_def :
   ((not (to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501)))) and
   (((i <= j) and (0 = ((j - i) + 1))) or (not (i <= j))))) and
   ((slide(temp___150, to_rep1(first2(temp___1501)), i) = temp___151) and
-  (mk(i, j) = temp___1511)))) ->
+  (mk(i, j) = temp___1511)))) -> (((((i <= j) -> (((1 <= i) and (i <= 8)) and
+  ((1 <= j) and (j <= 8)))) and (o1 = a)) and ((o1 = temp___152) and (mk(i,
+  j) = temp___1521))) ->
   (((to_rep1(first(temp___1511)) <= to_rep1(last(temp___1511))) ->
-  (((to_rep1(first(mk(i, j))) <= to_rep1(last(mk(i, j)))) ->
-  (((to_rep1(last(temp___1511)) - to_rep1(first(temp___1511))) + 1) = ((to_rep1(last(mk(i,
-  j))) - to_rep1(first(mk(i, j)))) + 1))) and ((not (to_rep1(first(mk(i,
-  j))) <= to_rep1(last(mk(i, j))))) ->
+  (((to_rep1(first(temp___1521)) <= to_rep1(last(temp___1521))) ->
+  (((to_rep1(last(temp___1511)) - to_rep1(first(temp___1511))) + 1) = ((to_rep1(last(temp___1521)) - to_rep1(first(temp___1521))) + 1))) and
+  ((not (to_rep1(first(temp___1521)) <= to_rep1(last(temp___1521)))) ->
   (((to_rep1(last(temp___1511)) - to_rep1(first(temp___1511))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___1511)) <= to_rep1(last(temp___1511)))) ->
-  ((to_rep1(first(mk(i, j))) <= to_rep1(last(mk(i, j)))) ->
-  (0 = ((to_rep1(last(mk(i, j))) - to_rep1(first(mk(i, j)))) + 1))))))))))))
+  ((to_rep1(first(temp___1521)) <= to_rep1(last(temp___1521))) ->
+  (0 = ((to_rep1(last(temp___1521)) - to_rep1(first(temp___1521))) + 1)))))))))))))

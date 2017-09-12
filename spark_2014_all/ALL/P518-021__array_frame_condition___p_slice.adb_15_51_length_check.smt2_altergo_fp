@@ -822,7 +822,9 @@ goal WP_parameter_def :
   (forall x:(int,map) farray. forall i3:int. forall i21:int. forall i22:int.
   forall i1:int. forall temp___237:(int,integer) farray.
   forall temp___2371:t1. forall temp___238:(int,integer) farray.
-  forall temp___2381:t. forall result:map__ref2. forall x1:(int,map) farray.
+  forall temp___2381:t. forall o:(int,integer) farray.
+  forall temp___242:(int,integer) farray. forall temp___2421:t.
+  forall result:map__ref2. forall x1:(int,map) farray.
   forall result1:int__ref. forall i31:int. forall result2:int__ref.
   forall i211:int. forall result3:int__ref. forall i221:int.
   forall result4:int__ref. forall i11:int. (((result = { map__content2 = x
@@ -841,14 +843,14 @@ goal WP_parameter_def :
   ((not (to_rep(first2(temp___2371)) <= to_rep(last2(temp___2371)))) and
   (((i11 <= 2) and (0 = ((2 - i11) + 1))) or (not (i11 <= 2))))) and
   ((slide(temp___237, to_rep(first2(temp___2371)), i11) = temp___238) and
-  (mk(i11, 2) = temp___2381)))) ->
+  (mk(i11, 2) = temp___2381)))) -> (((((i11 <= 2) -> (((1 <= i11) and
+  (i11 <= 3)) and ((1 <= 2) and (2 <= 3)))) and (o = get((x1[i31]), i211,
+  i221))) and ((o = temp___242) and (mk(i11, 2) = temp___2421))) ->
   (((to_rep(first(temp___2381)) <= to_rep(last(temp___2381))) ->
-  (((to_rep(first(mk(i11, 2))) <= to_rep(last(mk(i11, 2)))) ->
-  (((to_rep(last(temp___2381)) - to_rep(first(temp___2381))) + 1) = ((to_rep(last(mk(i11,
-  2))) - to_rep(first(mk(i11, 2)))) + 1))) and ((not (to_rep(first(mk(i11,
-  2))) <= to_rep(last(mk(i11, 2))))) ->
+  (((to_rep(first(temp___2421)) <= to_rep(last(temp___2421))) ->
+  (((to_rep(last(temp___2381)) - to_rep(first(temp___2381))) + 1) = ((to_rep(last(temp___2421)) - to_rep(first(temp___2421))) + 1))) and
+  ((not (to_rep(first(temp___2421)) <= to_rep(last(temp___2421)))) ->
   (((to_rep(last(temp___2381)) - to_rep(first(temp___2381))) + 1) = 0)))) and
   ((not (to_rep(first(temp___2381)) <= to_rep(last(temp___2381)))) ->
-  ((to_rep(first(mk(i11, 2))) <= to_rep(last(mk(i11, 2)))) ->
-  (0 = ((to_rep(last(mk(i11, 2))) - to_rep(first(mk(i11,
-  2)))) + 1)))))))))))))
+  ((to_rep(first(temp___2421)) <= to_rep(last(temp___2421))) ->
+  (0 = ((to_rep(last(temp___2421)) - to_rep(first(temp___2421))) + 1))))))))))))))

@@ -573,6 +573,8 @@ goal WP_parameter_def :
   forall enrolment__validate__makedescription__thedesc__assume:(int,character) farray.
   forall enrolment__validate__makedescription__thedesc__assume1:t.
   forall temp___1061:(int,character) farray. forall temp___10611:t1.
+  forall o18:(int,character) farray.
+  forall temp___1064:(int,character) farray. forall temp___10641:t1.
   forall result:(int,character) farray.
   forall result__1:(int,character) farray.
   ((audittypes__nodescription__aggregate_def(32) = nodescription) ->
@@ -639,17 +641,15 @@ goal WP_parameter_def :
   (not (1 <= to_rep1(last(thedesc1))))))) and ((slide(thedesc,
   to_rep1(first(thedesc1)), 1) = temp___1061) and (mk1(1,
   to_rep1(last(thedesc1))) = temp___10611))) ->
+  (((((1 <= to_rep1(last(thedesc1))) -> (((1 <= 1) and (1 <= 150)) and
+  ((1 <= to_rep1(last(thedesc1))) and (to_rep1(last(thedesc1)) <= 150)))) and
+  (o18 = result__1)) and ((o18 = temp___1064) and (mk1(1,
+  to_rep1(last(thedesc1))) = temp___10641))) ->
   (((to_rep1(first2(temp___10611)) <= to_rep1(last2(temp___10611))) ->
-  (((to_rep1(first2(mk1(1, to_rep1(last(thedesc1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(thedesc1)))))) ->
-  (((to_rep1(last2(temp___10611)) - to_rep1(first2(temp___10611))) + 1) = ((to_rep1(last2(mk1(1,
-  to_rep1(last(thedesc1))))) - to_rep1(first2(mk1(1,
-  to_rep1(last(thedesc1)))))) + 1))) and ((not (to_rep1(first2(mk1(1,
-  to_rep1(last(thedesc1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(thedesc1))))))) ->
+  (((to_rep1(first2(temp___10641)) <= to_rep1(last2(temp___10641))) ->
+  (((to_rep1(last2(temp___10611)) - to_rep1(first2(temp___10611))) + 1) = ((to_rep1(last2(temp___10641)) - to_rep1(first2(temp___10641))) + 1))) and
+  ((not (to_rep1(first2(temp___10641)) <= to_rep1(last2(temp___10641)))) ->
   (((to_rep1(last2(temp___10611)) - to_rep1(first2(temp___10611))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___10611)) <= to_rep1(last2(temp___10611)))) ->
-  ((to_rep1(first2(mk1(1, to_rep1(last(thedesc1))))) <= to_rep1(last2(mk1(1,
-  to_rep1(last(thedesc1)))))) -> (0 = ((to_rep1(last2(mk1(1,
-  to_rep1(last(thedesc1))))) - to_rep1(first2(mk1(1,
-  to_rep1(last(thedesc1)))))) + 1))))))))))))))
+  ((to_rep1(first2(temp___10641)) <= to_rep1(last2(temp___10641))) ->
+  (0 = ((to_rep1(last2(temp___10641)) - to_rep1(first2(temp___10641))) + 1)))))))))))))))
