@@ -30,8 +30,10 @@ import os
 PATH = os.environ["PATH"].split(os.pathsep)
 
 # We skip the very first build (04-07) now since it doesn't support 2.6
-# style datatypes.
-CVC4_VERSIONS       = sorted(glob("cvc4_*"))[1:]
+# style datatypes. We also don't include debug builds.
+CVC4_VERSIONS       = [x
+                       for x in sorted(glob("cvc4_*"))[1:]
+                       if "_debug" not in x]
 
 Z3_VERSION          = sorted(glob("z3_201*"))[-1]
 Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
