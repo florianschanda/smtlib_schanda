@@ -1,5 +1,5 @@
 (set-info :smt-lib-version 2.6)
-(set-logic QF_UFFPLRA)
+(set-logic QF_FPLRA)
 (set-option :produce-models true)
 (set-info :source |Random FP created by PyMPF|)
 (set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
@@ -9,7 +9,9 @@
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
 (declare-const z Real)
-(assert (= z (- 340282356779733661637539395458142568449.0)))
+(assert (= z (- (/ 7565931.0 2.0))))
+;; z should be a representable real
+
 (assert (= y z))
 (check-sat)
 (exit)

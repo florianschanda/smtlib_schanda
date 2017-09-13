@@ -5,10 +5,14 @@
 (set-info :category random)
 (set-info :status unsat)
 (declare-const x Float32)
+(assert (or (fp.isZero x) (fp.isSubnormal x) (fp.isNormal x)))
+(assert (distinct x ((_ to_fp 8 24) #x806EA4FA)))
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
 (declare-const z Real)
-(assert (= z (- (/ 501268653390851086748958410282549838999550672758618273.0 50925899408362152156711142210234454026286709841648406265903511233859532494083417654584934400.0))))
+(assert (= z (- (/ 3625597.0 356811923176489970264571492362373784095686656.0))))
+;; z should be a representable real
+
 (assert (= y z))
 (check-sat)
 (exit)

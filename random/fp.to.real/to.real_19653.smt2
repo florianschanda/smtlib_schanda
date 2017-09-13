@@ -6,13 +6,13 @@
 (set-info :category random)
 (set-info :status sat)
 (declare-const x Float32)
-(assert (= x ((_ to_fp 8 24) #x4AB69415)))
-;; x should be Float32(0x4AB69415 [Rational(11965461, 2), 5982730.500000])
+(assert (= x (fp #b0 #b10010100 #b01101000010100101000010)))
+;; x should be Float32(0x4A342942 [Rational(5903521, 2), 2951760.500000])
 
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
-;; y should be Rational(11965461, 2)
+;; y should be Rational(5903521, 2)
 
-(assert (= y (/ 11965461.0 2.0)))
+(assert (= y (/ 5903521.0 2.0)))
 (check-sat)
 (exit)

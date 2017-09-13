@@ -12,8 +12,8 @@
 ;; this relies on unspecified behaviour
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
-;; y should be Rational(-1692411081015591477, 342737963)
+;; y should be Rational(-2557144078832346924, 328303307)
 
-(assert (= y (- (/ 1692411081015591477.0 342737963.0))))
+(assert (= y (- (/ 2557144078832346924.0 328303307.0))))
 (check-sat)
 (exit)

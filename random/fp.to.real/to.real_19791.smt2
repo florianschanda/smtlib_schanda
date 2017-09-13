@@ -5,13 +5,13 @@
 (set-info :category random)
 (set-info :status unsat)
 (declare-const x Float32)
-(assert (= x (fp #b1 #b00000000 #b11010111100100000011111)))
-;; x should be Float32(0x806BC81F [Rational(-7063583, 713623846352979940529142984724747568191373312), -0.000000])
+(assert (= x ((_ to_fp 8 24) #xD4EBD919)))
+;; x should be Float32(0xD4EBD919 [Rational(-8103676870656), -8103676870656.000000])
 
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
-;; y should be Rational(-7063583, 713623846352979940529142984724747568191373312)
+;; y should be Rational(-8103676870656)
 
-(assert (not (= y (- (/ 7063583.0 713623846352979940529142984724747568191373312.0)))))
+(assert (not (= y (- 8103676870656.0))))
 (check-sat)
 (exit)

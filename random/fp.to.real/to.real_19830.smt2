@@ -9,7 +9,9 @@
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
 (declare-const z Real)
-(assert (= z (- (/ 4704874833962279324.0 1797306331.0))))
+(assert (= z (/ 880232613232228594.0 1141912125.0)))
+;; z should be a random rational
+
 (assert (= y z))
 (check-sat)
 (exit)

@@ -6,14 +6,14 @@
 (set-info :category random)
 (set-info :status sat)
 (declare-const x Float32)
-(assert (= x (fp #b1 #b11111111 #b10101101010011110001001)))
+(assert (= x ((_ to_fp 8 24) #x7FEEC014)))
 ;; x should be Float32(NaN)
 
 ;; this relies on unspecified behaviour
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
-;; y should be Rational(15097311818500708650, 3386852909)
+;; y should be Rational(-13567366289158324613, 2430270417)
 
-(assert (= y (/ 15097311818500708650.0 3386852909.0)))
+(assert (= y (- (/ 13567366289158324613.0 2430270417.0))))
 (check-sat)
 (exit)

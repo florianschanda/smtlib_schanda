@@ -6,13 +6,13 @@
 (set-info :category random)
 (set-info :status sat)
 (declare-const x Float32)
-(assert (= x (fp #b1 #b01110101 #b01011111010111101000101)))
-;; x should be Float32(0xBAAFAF45 [Rational(-11513669, 8589934592), -0.001340])
+(assert (= x (fp #b1 #b11001000 #b00101100000100010100011)))
+;; x should be Float32(0xE41608A3 [Rational(-11070535808919760011264), -11070535808919760011264.000000])
 
 (declare-const y Real)
 (assert (= y (fp.to_real x)))
-;; y should be Rational(-11513669, 8589934592)
+;; y should be Rational(-11070535808919760011264)
 
-(assert (= y (- (/ 11513669.0 8589934592.0))))
+(assert (= y (- 11070535808919760011264.0)))
 (check-sat)
 (exit)
