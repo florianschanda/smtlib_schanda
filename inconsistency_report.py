@@ -90,7 +90,7 @@ with open("fishy.txt", "w") as fd:
             fd.write(msg + "\n")
 
     if len(cat_disagree_one) > 0:
-        fd.write("\n## Minority report\n")
+        fd.write("\n## Single solution that diverges from status\n")
         for msg in cat_disagree_one:
             fd.write(msg + "\n")
 
