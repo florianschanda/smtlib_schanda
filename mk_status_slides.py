@@ -45,7 +45,7 @@ other_data = [load_results(solver_kind, solver_bin, BENCHMARKS)
 other_data.append(mk_virtual_best_solver(other_data + [data[-1]],
                                          BENCHMARKS))
 
-COMPARISON_CATS = ("solved", "timeout", "error", "unsound")
+COMPARISON_CATS = ("solved", "timeout", "unknown", "error", "unsound")
 
 GROUPS = sorted(data[-1]["group_summary"])
 
@@ -54,8 +54,9 @@ def mk_bench_name(cat):
         "crafted"        : "Schanda",
         "nyxbrain"       : "NyxBrain",
         "random"         : "PyMPF",
+        "random_ext"     : "PyMPF (extensions)",
         "spark_2014"     : "{\\sc Spark~FP}",
-        "spark_2014_qf"  : "{\\sc Spark~QF~FP}",
+        "spark_2014_qf"  : "{\\sc Spark~FP~(QF)}",
         "spark_2014_all" : "{\sc Spark~ALL}",
     }
     if cat in mapping:
@@ -67,6 +68,8 @@ def mk_solver_name(nam):
     return {
         "vbs"            : "Virtual best",
         "cvc4"           : "{\\sc cvc4} (${\\mathbb F}$)",
+        "oldfp"          : "{\\sc cvc4} (${\\mathbb R}$)",
+        "nocbqi"         : "{\\sc cvc4} --nocbqi",
         "z3"             : "Z3",
         "z3_smallfloats" : "Z3 (SmallFloat)",
         "colibri"        : "Colibri",
@@ -74,7 +77,6 @@ def mk_solver_name(nam):
         "mathsat_acdl"   : "MathSAT (ACDL)",
         "altergo"        : "Alt-Ergo 1.3",
         "altergo-fp"     : "Alt-Ergo FPA",
-        "oldfp"          : "{\\sc cvc4} (${\\mathbb R}$)"
     }.get(nam, nam)
 
 def mk_coloring(criteria):
@@ -221,6 +223,7 @@ def mk_csf_slides(fd):
         name = BENCHMARKS[bm]["name"]
         assert "sha<" not in name
         assert (name.startswith("random/") or
+                name.startswith("random_ext/") or
                 name.startswith("wintersteiger/") or
                 name.startswith("nyxbrain/"))
 
@@ -274,7 +277,7 @@ def mk_csf_slides(fd):
     # Coverage results will be random benchmark results
     solved = {}
     total  = {}
-    for group in ("random", "wintersteiger", "nyxbrain"):
+    for group in ("random", "random_ext", "wintersteiger", "nyxbrain"):
         if group not in data[-1]["group_results"]:
             continue
         for bm, res in data[-1]["group_results"][group].iteritems():
@@ -387,7 +390,7 @@ def mk_csf_slides(fd):
         "fp.to.int"      : "$\\mathbb{F} \\rightarrow \\mathbb{Z}$",
     }
 
-    fd.write("\\subsection{Critical Success Factors}\n")
+    fd.write("\\subsection{Coverage}\n")
 
     ITEMS_PER_SLIDE = 11
     BAR_WIDTH = 0.6
@@ -417,7 +420,7 @@ def mk_csf_slides(fd):
                 score = "%.2f\\%%" % percent[cat]
             else:
                 score = "$\checkmark$"
-            fd.write("\\node at %s {\\tiny %s};\n" %
+            fd.write("\\node[font=\\tiny] at %s {%s};\n" %
                      (mk_coord(50, i + BAR_WIDTH * 0.5),
                       score))
             fd.write("\\draw %s -- %s -- %s -- %s -- cycle;\n" %
@@ -425,14 +428,14 @@ def mk_csf_slides(fd):
                       mk_coord(100, i),
                       mk_coord(100, i + BAR_WIDTH),
                       mk_coord(0, i + BAR_WIDTH)));
-            fd.write("\\node[anchor=west,text width=2cm] at %s {\\tiny %s};\n" %
+            fd.write("\\node[anchor=west,text width=2cm,font=\\tiny] at %s {%s};\n" %
                      (mk_coord(100, i + BAR_WIDTH * 0.5),
                       TXT.get(cat, cat)))
             if total[cat] <= 1000:
                 testcount = "%u tests" % total[cat]
             else:
                 testcount = "%.1fk tests" % (float(total[cat]) / 1000.0)
-            fd.write("\\node[anchor=east,text width=2cm,align=right] at %s {\\tiny %s};\n" %
+            fd.write("\\node[anchor=east,text width=2cm,align=right,font=\\tiny] at %s {%s};\n" %
                      (mk_coord(0, i + BAR_WIDTH * 0.5),
                       testcount))
 
@@ -788,6 +791,8 @@ def main():
             mk_cactus_slides(fd)
 
         fd.write("\\end{document}\n")
+
+
 
 if __name__ == "__main__":
     main()
