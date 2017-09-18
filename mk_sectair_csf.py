@@ -25,10 +25,14 @@
 # Helper script to produce the relevant numbers for the monthly sectair
 # report. This script will be of no use to anyone else really.
 
+from glob import glob
+
 import common
 
+CVC4_VERSIONS = sorted(glob("cvc4_*"))
+
 bench = common.load_benchmark_status()
-res = common.load_results("cvc4", "cvc4_2017_08_14", bench)
+res = common.load_results("cvc4", CVC4_VERSIONS[-1], bench)
 
 total  = 0
 solved = 0
