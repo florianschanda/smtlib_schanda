@@ -105,7 +105,11 @@ def format_fn_totals(item):
     return "%.0f\\%%" % item
 
 def mk_cvc4_shortname(prover_bin):
-    return "-".join(prover_bin.split("_")[-2:])
+    tmp = prover_bin.split("_")
+    if tmp[-1].isdigit():
+        return "-".join(tmp[-2:])
+    else:
+        return "-".join(tmp[-3:])
 
 def mk_progress_slides(fd):
     versions = [data[0], data[-1]]
@@ -168,7 +172,7 @@ def mk_progress_slides(fd):
         fd.write( "    length=5cm,\n")
         fd.write( "    },\n")
         fd.write( "  x axis={\n")
-        fd.write( "    ticks={major at={%s},node style={rotate=45,anchor=east}},\n" %
+        fd.write( "    ticks={major at={%s},node style={rotate=60,anchor=east,font=\\tiny}},\n" %
                   (",".join("%u as %s" %
                             (i,
                              mk_cvc4_shortname(data[i]["prover_bin"]))
