@@ -99,11 +99,9 @@
   (and (fp.leq (fp.neg (fp #b0 #b10001011 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b10001011 #b00000000000000000000000))))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 351, characters 0-0
-  (not (in_range1 abstr)))
+  (not (in_range1 (to_int (fp.to_real (fp.roundToIntegral RNA x))))))
 (check-sat)
 (exit)

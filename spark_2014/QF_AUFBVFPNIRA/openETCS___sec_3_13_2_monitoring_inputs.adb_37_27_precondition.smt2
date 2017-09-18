@@ -213,10 +213,10 @@
 ;; H
   (assert (fp.isFinite32 v))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (and (= o abstr) (in_range1 abstr)))
+  (assert
+  (and (= o (to_int (fp.to_real (fp.roundToIntegral RNA v)))) (in_range1
+  (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 (assert
 ;; WP_parameter_def

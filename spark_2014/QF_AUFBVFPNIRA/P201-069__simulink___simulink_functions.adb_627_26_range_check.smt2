@@ -66,11 +66,11 @@
 ;; H
   (assert (in_range i))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 52, characters 0-0
-  (not (in_range abstr)))
+  (not (in_range
+  (to_int (fp.to_real (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp 8 24) RNE (to_real
+  i)))))))))
 (check-sat)
 (exit)

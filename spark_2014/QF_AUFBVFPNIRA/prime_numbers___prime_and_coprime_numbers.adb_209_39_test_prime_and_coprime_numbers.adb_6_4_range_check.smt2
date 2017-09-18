@@ -314,11 +314,10 @@
 ;; H
   (assert (= is_prime3 (store is_prime2 1 (of_int 0))))
 
-(declare-const abstr2 Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
-  (not (in_range2 abstr2)))
+  (not (in_range2
+  (to_int (fp.to_real (fp.roundToIntegral RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))))
 (check-sat)
 (exit)

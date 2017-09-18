@@ -213,11 +213,9 @@
 ;; H
   (assert (fp.isFinite32 v))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (in_range1 abstr)))
+  (not (in_range1 (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 (check-sat)
 (exit)

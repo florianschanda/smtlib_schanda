@@ -111,10 +111,8 @@
 ;; H
   (assert (= o1 (fp.roundToIntegral RTN o)))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (= o2 abstr))
+  (assert (= o2 (to_int (fp.to_real (fp.roundToIntegral RNA o1)))))
 
 ;; H
   (assert (and (= o3 o2) (in_range1 o2)))

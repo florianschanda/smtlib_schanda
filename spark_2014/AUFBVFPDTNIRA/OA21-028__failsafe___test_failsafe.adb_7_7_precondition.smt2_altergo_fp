@@ -1786,10 +1786,9 @@ axiom is_valid__post_axiom : true
  (* File "failsafe.ads", line 20, characters 0-0 *)
 goal WP_parameter_def :
   (forall current_time:t. forall j:int. forall result:int. forall j1:int.
-  forall failsafe_state:us_private.
   forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time1:t. forall j2:int. (in_range2(current_time) -> ((({
-  int__content = result } = { int__content = j }) and (j1 = 1)) ->
-  (((1 <= j1) and (j1 <= 49)) -> ((in_range2(current_time1) and
-  ((1 <= j2) and (j2 <= 49))) -> (is_valid(failsafe_state, battery_level_at,
-  current_time1) = true))))))
+  forall current_time1:t. forall j2:int. forall failsafe_state:us_private.
+  (in_range2(current_time) -> ((({ int__content = result } = { int__content =
+  j }) and (j1 = 1)) -> (((1 <= j1) and (j1 <= 49)) ->
+  ((in_range2(current_time1) and ((1 <= j2) and (j2 <= 49))) ->
+  (is_valid(failsafe_state, battery_level_at, current_time1) = true))))))

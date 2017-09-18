@@ -92,11 +92,9 @@
 ;; H
   (assert (= a1 (fp #b0 #b10011000 #b00000000000000000000000)))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "foo.ads", line 4, characters 0-0
-  (not (in_range abstr)))
+  (not (in_range (to_int (fp.to_real (fp.roundToIntegral RNA a1))))))
 (check-sat)
 (exit)

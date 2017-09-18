@@ -252,11 +252,9 @@
 ;; H
   (assert (dynamic_invariant x1 true false true i1))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "dynamic_float.adb", line 1, characters 0-0
-  (not (= abstr i1)))
+  (not (= (to_int (fp.to_real (fp.roundToIntegral RNA (last i1)))) i1)))
 (check-sat)
 (exit)

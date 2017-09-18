@@ -252,10 +252,8 @@
 ;; H
   (assert (dynamic_invariant x1 true false true i1))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (= abstr i1))
+  (assert (= (to_int (fp.to_real (fp.roundToIntegral RNA (last i1)))) i1))
 
 (assert
 ;; WP_parameter_def

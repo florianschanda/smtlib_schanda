@@ -256,10 +256,10 @@
 ;; H
   (assert (in_range2 d))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (and (= o abstr) (in_range4 abstr)))
+  (assert
+  (and (= o (to_int (fp.to_real (fp.roundToIntegral RNA v)))) (in_range4
+  (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 (assert
 ;; WP_parameter_def

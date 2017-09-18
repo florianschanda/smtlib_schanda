@@ -86,11 +86,9 @@
   (assert
   (not (fp.lt value (fp.neg (fp #b0 #b10001110 #b00000000000000000000000)))))
 
-(declare-const abstr Int)
-
 (assert
 ;; WP_parameter_def
  ;; File "types.ads", line 10, characters 0-0
-  (not (in_range abstr)))
+  (not (in_range (to_int (fp.to_real (fp.roundToIntegral RNA value))))))
 (check-sat)
 (exit)

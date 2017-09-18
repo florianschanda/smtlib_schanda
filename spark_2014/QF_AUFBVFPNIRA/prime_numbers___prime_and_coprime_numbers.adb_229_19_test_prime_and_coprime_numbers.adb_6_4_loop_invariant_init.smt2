@@ -314,13 +314,12 @@
 ;; H
   (assert (= is_prime3 (store is_prime2 1 (of_int 0))))
 
-(declare-const abstr2 Int)
-
 ;; H
   (assert
   (and
-  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume
-  abstr2) (in_range2 abstr2)))
+  (= test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume (to_int (fp.to_real (fp.roundToIntegral RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))
+  (in_range2
+  (to_int (fp.to_real (fp.roundToIntegral RNA (fp.sqrt RNE (fp #b0 #b10001111 #b10000110101000000000000))))))))
 
 ;; H
   (assert
@@ -407,11 +406,11 @@
 ;; H
   (assert (= (select is_prime5 v4) true))
 
-(declare-const abstr3 Bool)
+(declare-const abstr2 Bool)
 
 (assert
 ;; WP_parameter_def
  ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
-  (not (= abstr3 true)))
+  (not (= abstr2 true)))
 (check-sat)
 (exit)

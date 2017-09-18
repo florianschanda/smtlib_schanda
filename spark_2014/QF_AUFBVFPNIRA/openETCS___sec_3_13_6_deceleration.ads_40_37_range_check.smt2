@@ -264,10 +264,10 @@
   (assert
   (= sec_3_13_6_deceleration__a_brake_emergency__result3 sec_3_13_6_deceleration__a_brake_emergency__result1))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (and (= o abstr) (in_range4 abstr)))
+  (assert
+  (and (= o (to_int (fp.to_real (fp.roundToIntegral RNA v)))) (in_range4
+  (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 ;; H
   (assert (and (= o2 o1) (fp.isFinite32 o1)))
@@ -280,7 +280,9 @@
   (= sec_3_13_6_deceleration__a_brake_emergency__result5 sec_3_13_6_deceleration__a_brake_emergency__result3))
 
 ;; H
-  (assert (and (= o3 abstr) (in_range4 abstr)))
+  (assert
+  (and (= o3 (to_int (fp.to_real (fp.roundToIntegral RNA v)))) (in_range4
+  (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 (assert
 ;; WP_parameter_def

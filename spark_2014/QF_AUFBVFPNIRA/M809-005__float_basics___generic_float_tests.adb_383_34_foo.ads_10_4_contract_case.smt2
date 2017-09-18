@@ -99,10 +99,10 @@
   (and (fp.leq (fp.neg (fp #b0 #b10001011 #b00000000000000000000000))
   x) (fp.leq x (fp #b0 #b10001011 #b00000000000000000000000))))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (and (= o abstr) (in_range1 abstr)))
+  (assert
+  (and (= o (to_int (fp.to_real (fp.roundToIntegral RNA x)))) (in_range1
+  (to_int (fp.to_real (fp.roundToIntegral RNA x))))))
 
 ;; H
   (assert (= result i))

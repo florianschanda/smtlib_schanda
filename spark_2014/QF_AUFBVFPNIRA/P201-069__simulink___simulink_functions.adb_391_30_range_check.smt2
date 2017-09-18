@@ -111,10 +111,8 @@
 ;; H
   (assert (= o1 (fp.roundToIntegral RTN o)))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (= o2 abstr))
+  (assert (= o2 (to_int (fp.to_real (fp.roundToIntegral RNA o1)))))
 
 (assert
 ;; WP_parameter_def

@@ -223,10 +223,10 @@
   (assert
   (= sec_3_13_2_monitoring_inputs__kwet_rst__result3 sec_3_13_2_monitoring_inputs__kwet_rst__result1))
 
-(declare-const abstr Int)
-
 ;; H
-  (assert (and (= o abstr) (in_range1 abstr)))
+  (assert
+  (and (= o (to_int (fp.to_real (fp.roundToIntegral RNA v)))) (in_range1
+  (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 ;; H
   (assert (= sec_3_13_2_monitoring_inputs__kwet_rst__result1 o1))
