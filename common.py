@@ -444,11 +444,14 @@ def augment_group_result(rv, group, benchmark_status):
 def augment_final_result(rv, group_total):
     totals = rv["total_summary"]
     for score in SCORES:
-        totals["average"][score] = (
-            sum(rv["group_summary"][group]["average"][score]
-                for group in rv["group_summary"]
-                if rv["group_summary"][group]["participated"]) /
-            float(group_total))
+        if group_total > 0:
+            totals["average"][score] = (
+                sum(rv["group_summary"][group]["average"][score]
+                    for group in rv["group_summary"]
+                    if rv["group_summary"][group]["participated"]) /
+                float(group_total))
+        else:
+            totals["average"][score] = 0.0
 
 def load_results(solver_kind, solver_bin, benchmark_status=None):
     print "Loading results for %s (%s)" % (solver_kind, solver_bin)
