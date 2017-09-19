@@ -46,7 +46,7 @@ ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all", "fast"])
+                    choices=["all", "fast", "industrial"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -61,6 +61,10 @@ def main():
         all_provers = False
     elif options.suite == "all":
         bm_suites = ["all"]
+        cvc4_used_versions = CVC4_VERSIONS
+        all_provers = True
+    elif options.suite == "industrial":
+        bm_suites = ["industrial"]
         cvc4_used_versions = CVC4_VERSIONS
         all_provers = True
     elif options.suite == "fast":
