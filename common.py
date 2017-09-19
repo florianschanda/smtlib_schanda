@@ -144,9 +144,12 @@ class Prover(object):
         self.strict  = kind.strict
 
     def get_status(self, benchmark):
+        MEM_LIMIT=1024*1024*1024*5 # 5 GiB
         def set_limit():
             resource.setrlimit(resource.RLIMIT_CPU, (self.timeout,
                                                      self.timeout))
+            resource.setrlimit(resource.RLIMIT_DATA, (MEM_LIMIT,
+                                                      MEM_LIMIT))
 
         benchmark.load(keep_logic = self.logic)
 
