@@ -1542,11 +1542,11 @@ goal WP_parameter_def :
   (forall v:int. (((index_22 <= v) and (v <= 100000)) ->
   (((is_prime5[v]) = true) <->
   (forall div1:int. (((2 <= div1) and (div1 <= (index_22 - 1))) ->
-  (not (mod(v, div1) = 0))))))))) -> ((((((2 <= r87b) -> dynamic_property(2,
-  r87b, index_22)) and ((0 <= 2147483647) -> in_range3(index_11))) and
-  (((-2147483648) <= 2147483647) -> in_range2(index_31))) and
-  ((2 <= index_22) and (index_22 <= r87b))) -> (((((0 <= index_22) and
-  (index_22 <= 100000)) and (o = index_22)) and
+  (not (mod(v, div1) = 0))))))))) -> ((((((0 <= 2147483647) ->
+  in_range3(index_11)) and (((-2147483648) <= 2147483647) ->
+  in_range2(index_31))) and ((2 <= r87b) -> dynamic_property(2, r87b,
+  index_22))) and ((2 <= index_22) and (index_22 <= r87b))) ->
+  (((((0 <= index_22) and (index_22 <= 100000)) and (o = index_22)) and
   (result4 = (is_prime5[o]))) -> ((result4 = true) ->
   (((index_11 = result5) and (index_12 = index_22)) ->
   ((((o1 = (2 * index_12)) and in_range2((2 * index_12))) and

@@ -1239,10 +1239,10 @@ goal WP_parameter_def :
   forall room_length:t. forall wall_thickness:t. forall total:t.
   forall good_types__feet_io__get__2__item:t. forall result:t.
   forall room_length1:t. forall good_types__inch_io__get__2__item:t.
-  forall result1:t. forall wall_thickness1:t. (in_range1(default_exp) ->
-  (in_range1(default_fore) -> (in_range1(default_aft) ->
-  (in_range1(default_exp1) -> (in_range1(default_fore1) ->
-  (in_range1(default_aft1) -> ((le(fliteral1, fliteral2) ->
+  forall result1:t. forall wall_thickness1:t. (in_range1(default_aft) ->
+  (in_range1(default_exp) -> (in_range1(default_fore) ->
+  (in_range1(default_aft1) -> (in_range1(default_exp1) ->
+  (in_range1(default_fore1) -> ((le(fliteral1, fliteral2) ->
   in_range2(room_length)) -> ((le(fliteral1, fliteral3) ->
   in_range3(wall_thickness)) -> ((le(fliteral1, fliteral2) ->
   in_range2(total)) -> ((in_range4(good_types__feet_io__get__2__item) and

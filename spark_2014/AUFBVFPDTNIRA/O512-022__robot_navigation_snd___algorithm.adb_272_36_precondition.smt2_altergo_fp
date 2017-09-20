@@ -4175,18 +4175,12 @@ goal WP_parameter_def :
   us_split_fields11 = iterr__split_fields2 })) = true)) and
   eq(to_rep2((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields5).rec__robot_iface__proxy__robot_radius),
   to_rep2(((((this__split_fields).us_split_fields__content7).rec__algorithm__controller__robot).us_split_fields5).rec__robot_iface__proxy__robot_radius))) ->
-  (((((((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields5).rec__robot_iface__proxy__speed).attr__constrained = false) and
+  ((((((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields5).rec__robot_iface__proxy__speed).attr__constrained = false) and
   (1000 = to_rep10((((this__split_fields1).rec__algorithm__controller__gapvec).us_split_discrs3).rec__algorithm__gap_vectors__list__capacity))) and
   (((((this__split_fields1).rec__algorithm__controller__robot = ((this__split_fields).us_split_fields__content7).rec__algorithm__controller__robot) and
   ((this__split_fields1).rec__algorithm__controller__laserscan = ((this__split_fields).us_split_fields__content7).rec__algorithm__controller__laserscan)) and
   ((this__split_fields1).rec__algorithm__controller__obsavoiddelta = ((this__split_fields).us_split_fields__content7).rec__algorithm__controller__obsavoiddelta)) and
-  ((this__split_fields1).rec__algorithm__controller__driveangle = ((this__split_fields).us_split_fields__content7).rec__algorithm__controller__driveangle))) and
-  (((not (bool_eq23({ us_split_fields11 = iterl__split_fields3 }, {
-  us_split_fields11 = { rec__algorithm__gap_vectors__cursor__node =
-  no_element } }) = true)) and (not (bool_eq23({ us_split_fields11 =
-  iterr__split_fields2 }, { us_split_fields11 = {
-  rec__algorithm__gap_vectors__cursor__node = no_element } }) = true))) and
-  (1 <  length1((this__split_fields1).rec__algorithm__controller__gapvec)))) ->
+  ((this__split_fields1).rec__algorithm__controller__driveangle = ((this__split_fields).us_split_fields__content7).rec__algorithm__controller__driveangle))) ->
   ((((((o33 = mul(NearestTiesToEven, fliteral4,
   to_rep2((((this__split_fields1).rec__algorithm__controller__robot).us_split_fields5).rec__robot_iface__proxy__scan_res))) and
   tqtisFinite(mul(NearestTiesToEven, fliteral4,

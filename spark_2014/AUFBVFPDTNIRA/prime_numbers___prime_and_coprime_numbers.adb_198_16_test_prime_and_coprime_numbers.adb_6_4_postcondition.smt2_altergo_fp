@@ -1514,7 +1514,7 @@ goal WP_parameter_def :
   (forall is_prime1:(int,bool) farray. forall index_1:int.
   forall index_3:int. forall index_2:int.
   forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume:int.
-  forall temp___260:(int,bool) farray. forall temp___259:int.
+  forall temp___261:int. forall temp___259:(int,bool) farray.
   forall temp___258:int. forall temp___257:int. forall o:int. forall o1:int.
   forall temp___255:(int,bool) farray. forall temp___254:int. forall o2:int.
   forall o3:(int,bool) farray. forall o4:int. forall index_11:int.
@@ -1559,20 +1559,20 @@ goal WP_parameter_def :
   (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = r87b)) and
   in_range3(r87b)) and ((({ int__content = result3 } = { int__content =
   index_2 }) and (index_21 = 2)) and ((((2 <= index_21) and
-  (index_21 <= r87b)) and ((((temp___260 = is_prime4) and
-  ((temp___259 = index_3) and ((temp___258 = index_1) and
-  ((temp___257 = index_21) and ((((2 <= index_22) and
+  (index_21 <= r87b)) and ((((temp___261 = index_21) and
+  ((temp___259 = is_prime4) and ((temp___258 = index_3) and
+  ((temp___257 = index_1) and ((((2 <= index_22) and
   (index_22 <= 100000)) and
   ((forall v:int. (((0 <= v) and (v <= index_22)) ->
    (((is_prime5[v]) = true) <-> (is_prime(v) = true)))) and
   (forall v:int. (((index_22 <= v) and (v <= 100000)) ->
   (((is_prime5[v]) = true) <->
   (forall div1:int. (((2 <= div1) and (div1 <= (index_22 - 1))) ->
-  (not (mod(v, div1) = 0))))))))) and ((((((2 <= r87b) -> dynamic_property(2,
-  r87b, index_22)) and ((0 <= 2147483647) -> in_range3(index_12))) and
-  (((-2147483648) <= 2147483647) -> in_range2(index_32))) and
-  ((2 <= index_22) and (index_22 <= r87b))) and ((((((0 <= index_22) and
-  (index_22 <= 100000)) and (o = index_22)) and
+  (not (mod(v, div1) = 0))))))))) and ((((((0 <= 2147483647) ->
+  in_range3(index_12)) and (((-2147483648) <= 2147483647) ->
+  in_range2(index_32))) and ((2 <= r87b) -> dynamic_property(2, r87b,
+  index_22))) and ((2 <= index_22) and (index_22 <= r87b))) and
+  ((((((0 <= index_22) and (index_22 <= 100000)) and (o = index_22)) and
   (result4 = (is_prime5[o]))) and (((result4 = true) and
   ((((index_12 = result5) and (index_13 = index_22)) and
   ((((o1 = (2 * index_13)) and in_range2((2 * index_13))) and
