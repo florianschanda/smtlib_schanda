@@ -1,0 +1,2348 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic to_rep1 : integer -> int
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep1(first((a).rt))
+
+function last1(a: us_t) : int = to_rep1(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+function bool_eq6(x: us_t, y: us_t) : bool = bool_eq5((x).elts,
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,character) farray
+
+logic dummy4 : t
+
+logic to_string : us_image -> us_t
+
+logic from_string : us_t -> us_image
+
+type string__ref = { string__content : us_t
+}
+
+function string__ref___projection(a: string__ref) : us_t =
+  (a).string__content
+
+type natural
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : natural, natural -> bool
+
+logic dummy5 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic nodescription : (int,character) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic audittypes__nodescription__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom :
+  (forall temp___133:int.
+  (forall temp___134:int.
+  ((audittypes__nodescription__aggregate_def(temp___133)[temp___134]) = of_rep(temp___133))))
+
+type us_main_type
+
+logic us_main_eq : us_main_type, us_main_type -> bool
+
+type us_rep
+
+logic bool_eq8 : us_rep, us_rep -> bool
+
+logic value__size1 : int
+
+logic object__size1 : us_rep -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:us_rep. (0 <= object__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep. (0 <= object__alignment1(a)))
+
+logic user_eq5 : us_rep, us_rep -> bool
+
+logic dummy6 : us_rep
+
+type t__ref = { t__content : us_rep
+}
+
+function t__ref___projection(a: t__ref) : us_rep = (a).t__content
+
+logic endoffile : us_rep -> bool
+
+logic endoffile__function_guard : bool, us_rep -> prop
+
+type issueridt
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 4294967295))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq6 : issueridt, issueridt -> bool
+
+logic dummy7 : issueridt
+
+type issueridt__ref = { issueridt__content : issueridt
+}
+
+function issueridt__ref___projection(a: issueridt__ref) : issueridt =
+  (a).issueridt__content
+
+logic to_rep2 : issueridt -> int
+
+logic of_rep2 : int -> issueridt
+
+axiom inversion_axiom2 :
+  (forall x:issueridt [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:issueridt [to_rep2(x)]. in_range5(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range5(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type namecountt
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 40))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : namecountt, namecountt -> bool
+
+logic dummy8 : namecountt
+
+type namecountt__ref = { namecountt__content : namecountt
+}
+
+function namecountt__ref___projection(a: namecountt__ref) : namecountt =
+  (a).namecountt__content
+
+logic to_rep3 : namecountt -> int
+
+logic of_rep3 : int -> namecountt
+
+axiom inversion_axiom3 :
+  (forall x:namecountt [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:namecountt [to_rep3(x)]. in_range6(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range6(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+logic dummy9 : (int,character) farray
+
+logic value__size2 : int
+
+logic object__size2 : (int,character) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,character) farray -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : (int,character) farray -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(int,character) farray. (0 <= object__size2(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,character) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(int,character) farray. (0 <= object__alignment2(a)))
+
+logic user_eq8 : (int,character) farray, (int,character) farray -> bool
+
+type us_split_fields = { rec__cryptotypes__issuert__id : issueridt;
+rec__cryptotypes__issuert__namelength : namecountt;
+rec__cryptotypes__issuert__name : (int,character) farray
+}
+
+function us_split_fields_ID__projection(a: us_split_fields) : issueridt =
+  (a).rec__cryptotypes__issuert__id
+
+function us_split_fields_NameLength__projection(a: us_split_fields) : namecountt =
+  (a).rec__cryptotypes__issuert__namelength
+
+function us_split_fields_Name__projection(a: us_split_fields) : (int,character) farray =
+  (a).rec__cryptotypes__issuert__name
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___3__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___4__projection(a: us_rep1) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq11 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def8 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq11(a, b)].
+  (((((to_rep2(((a).us_split_fields1).rec__cryptotypes__issuert__id) = to_rep2(((b).us_split_fields1).rec__cryptotypes__issuert__id)) and
+  (to_rep3(((a).us_split_fields1).rec__cryptotypes__issuert__namelength) = to_rep3(((b).us_split_fields1).rec__cryptotypes__issuert__namelength))) and
+  (bool_eq5(((a).us_split_fields1).rec__cryptotypes__issuert__name, 1, 40,
+  ((b).us_split_fields1).rec__cryptotypes__issuert__name, 1, 40) = true)) ->
+  (bool_eq11(a, b) = true)) and
+  ((not (((to_rep2(((a).us_split_fields1).rec__cryptotypes__issuert__id) = to_rep2(((b).us_split_fields1).rec__cryptotypes__issuert__id)) and
+  (to_rep3(((a).us_split_fields1).rec__cryptotypes__issuert__namelength) = to_rep3(((b).us_split_fields1).rec__cryptotypes__issuert__namelength))) and
+  (bool_eq5(((a).us_split_fields1).rec__cryptotypes__issuert__name, 1, 40,
+  ((b).us_split_fields1).rec__cryptotypes__issuert__name, 1, 40) = true))) ->
+  (bool_eq11(a, b) = false))))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep1 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep1 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:issueridt. forall a1:namecountt.
+  forall a2:(int,character) farray. (0 <= object__size3({ us_split_fields1 =
+  { rec__cryptotypes__issuert__id = a;
+  rec__cryptotypes__issuert__namelength = a1;
+  rec__cryptotypes__issuert__name = a2 } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:issueridt. forall a1:namecountt.
+  forall a2:(int,character) farray. (0 <= object__alignment3({
+  us_split_fields1 = { rec__cryptotypes__issuert__id = a;
+  rec__cryptotypes__issuert__namelength = a1;
+  rec__cryptotypes__issuert__name = a2 } })))
+
+logic cryptotypes__issuert__id__first__bit : int
+
+logic cryptotypes__issuert__id__last__bit : int
+
+logic cryptotypes__issuert__id__position : int
+
+axiom cryptotypes__issuert__id__first__bit_axiom :
+  (0 <= cryptotypes__issuert__id__first__bit)
+
+axiom cryptotypes__issuert__id__last__bit_axiom :
+  (cryptotypes__issuert__id__first__bit <  cryptotypes__issuert__id__last__bit)
+
+axiom cryptotypes__issuert__id__position_axiom :
+  (0 <= cryptotypes__issuert__id__position)
+
+logic cryptotypes__issuert__namelength__first__bit : int
+
+logic cryptotypes__issuert__namelength__last__bit : int
+
+logic cryptotypes__issuert__namelength__position : int
+
+axiom cryptotypes__issuert__namelength__first__bit_axiom :
+  (0 <= cryptotypes__issuert__namelength__first__bit)
+
+axiom cryptotypes__issuert__namelength__last__bit_axiom :
+  (cryptotypes__issuert__namelength__first__bit <  cryptotypes__issuert__namelength__last__bit)
+
+axiom cryptotypes__issuert__namelength__position_axiom :
+  (0 <= cryptotypes__issuert__namelength__position)
+
+logic cryptotypes__issuert__name__first__bit : int
+
+logic cryptotypes__issuert__name__last__bit : int
+
+logic cryptotypes__issuert__name__position : int
+
+axiom cryptotypes__issuert__name__first__bit_axiom :
+  (0 <= cryptotypes__issuert__name__first__bit)
+
+axiom cryptotypes__issuert__name__last__bit_axiom :
+  (cryptotypes__issuert__name__first__bit <  cryptotypes__issuert__name__last__bit)
+
+axiom cryptotypes__issuert__name__position_axiom :
+  (0 <= cryptotypes__issuert__name__position)
+
+logic user_eq9 : us_rep1, us_rep1 -> bool
+
+logic dummy10 : issueridt
+
+logic dummy11 : namecountt
+
+logic dummy12 : (int,character) farray
+
+type issuert__ref = { issuert__content : us_rep1
+}
+
+function issuert__ref___projection(a: issuert__ref) : us_rep1 =
+  (a).issuert__content
+
+type algorithmt
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 10))
+
+logic bool_eq12 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+
+logic user_eq10 : algorithmt, algorithmt -> bool
+
+logic dummy13 : algorithmt
+
+type algorithmt__ref = { algorithmt__content : algorithmt
+}
+
+function algorithmt__ref___projection(a: algorithmt__ref) : algorithmt =
+  (a).algorithmt__content
+
+logic to_rep4 : algorithmt -> int
+
+logic of_rep4 : int -> algorithmt
+
+axiom inversion_axiom4 :
+  (forall x:algorithmt [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 :
+  (forall x:algorithmt [to_rep4(x)]. in_range7(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range7(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type keyidt
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 4294967295))
+
+logic bool_eq13 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq13(x, y)]. (((x = y) -> (bool_eq13(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq13(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE8 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE8 : us_image -> int
+
+logic user_eq11 : keyidt, keyidt -> bool
+
+logic dummy14 : keyidt
+
+type keyidt__ref = { keyidt__content : keyidt
+}
+
+function keyidt__ref___projection(a: keyidt__ref) : keyidt =
+  (a).keyidt__content
+
+logic to_rep5 : keyidt -> int
+
+logic of_rep5 : int -> keyidt
+
+axiom inversion_axiom5 :
+  (forall x:keyidt [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 : (forall x:keyidt [to_rep5(x)]. in_range8(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range8(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type keylengtht
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 128))
+
+logic bool_eq14 : int, int -> bool
+
+axiom bool_eq_def11 :
+  (forall x:int. forall y:int [bool_eq14(x, y)]. (((x = y) -> (bool_eq14(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq14(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE9 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check9 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE9 : us_image -> int
+
+logic user_eq12 : keylengtht, keylengtht -> bool
+
+logic dummy15 : keylengtht
+
+type keylengtht__ref = { keylengtht__content : keylengtht
+}
+
+function keylengtht__ref___projection(a: keylengtht__ref) : keylengtht =
+  (a).keylengtht__content
+
+logic to_rep6 : keylengtht -> int
+
+logic of_rep6 : int -> keylengtht
+
+axiom inversion_axiom6 :
+  (forall x:keylengtht [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:keylengtht [to_rep6(x)]. in_range9(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range9(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type us_split_fields2 = { rec__cryptotypes__keypartt__algorithmid :
+algorithmt; rec__cryptotypes__keypartt__keyid : keyidt;
+rec__cryptotypes__keypartt__keylength : keylengtht
+}
+
+function us_split_fields_AlgorithmID__projection(a: us_split_fields2) : algorithmt =
+  (a).rec__cryptotypes__keypartt__algorithmid
+
+function us_split_fields_KeyID__projection(a: us_split_fields2) : keyidt =
+  (a).rec__cryptotypes__keypartt__keyid
+
+function us_split_fields_KeyLength__projection(a: us_split_fields2) : keylengtht =
+  (a).rec__cryptotypes__keypartt__keylength
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___4__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep2 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___5__projection(a: us_rep2) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq15 : us_rep2, us_rep2 -> bool
+
+axiom bool_eq_def12 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq15(a, b)].
+  (((((to_rep4(((a).us_split_fields3).rec__cryptotypes__keypartt__algorithmid) = to_rep4(((b).us_split_fields3).rec__cryptotypes__keypartt__algorithmid)) and
+  (to_rep5(((a).us_split_fields3).rec__cryptotypes__keypartt__keyid) = to_rep5(((b).us_split_fields3).rec__cryptotypes__keypartt__keyid))) and
+  (to_rep6(((a).us_split_fields3).rec__cryptotypes__keypartt__keylength) = to_rep6(((b).us_split_fields3).rec__cryptotypes__keypartt__keylength))) ->
+  (bool_eq15(a, b) = true)) and
+  ((not (((to_rep4(((a).us_split_fields3).rec__cryptotypes__keypartt__algorithmid) = to_rep4(((b).us_split_fields3).rec__cryptotypes__keypartt__algorithmid)) and
+  (to_rep5(((a).us_split_fields3).rec__cryptotypes__keypartt__keyid) = to_rep5(((b).us_split_fields3).rec__cryptotypes__keypartt__keyid))) and
+  (to_rep6(((a).us_split_fields3).rec__cryptotypes__keypartt__keylength) = to_rep6(((b).us_split_fields3).rec__cryptotypes__keypartt__keylength)))) ->
+  (bool_eq15(a, b) = false))))
+
+logic value__size4 : int
+
+logic object__size4 : us_rep2 -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : us_rep2 -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:algorithmt. forall a1:keyidt. forall a2:keylengtht.
+  (0 <= object__size4({ us_split_fields3 = {
+  rec__cryptotypes__keypartt__algorithmid = a;
+  rec__cryptotypes__keypartt__keyid = a1;
+  rec__cryptotypes__keypartt__keylength = a2 } })))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:algorithmt. forall a1:keyidt. forall a2:keylengtht.
+  (0 <= object__alignment4({ us_split_fields3 = {
+  rec__cryptotypes__keypartt__algorithmid = a;
+  rec__cryptotypes__keypartt__keyid = a1;
+  rec__cryptotypes__keypartt__keylength = a2 } })))
+
+logic cryptotypes__keypartt__algorithmid__first__bit : int
+
+logic cryptotypes__keypartt__algorithmid__last__bit : int
+
+logic cryptotypes__keypartt__algorithmid__position : int
+
+axiom cryptotypes__keypartt__algorithmid__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__algorithmid__first__bit)
+
+axiom cryptotypes__keypartt__algorithmid__last__bit_axiom :
+  (cryptotypes__keypartt__algorithmid__first__bit <  cryptotypes__keypartt__algorithmid__last__bit)
+
+axiom cryptotypes__keypartt__algorithmid__position_axiom :
+  (0 <= cryptotypes__keypartt__algorithmid__position)
+
+logic cryptotypes__keypartt__keyid__first__bit : int
+
+logic cryptotypes__keypartt__keyid__last__bit : int
+
+logic cryptotypes__keypartt__keyid__position : int
+
+axiom cryptotypes__keypartt__keyid__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__keyid__first__bit)
+
+axiom cryptotypes__keypartt__keyid__last__bit_axiom :
+  (cryptotypes__keypartt__keyid__first__bit <  cryptotypes__keypartt__keyid__last__bit)
+
+axiom cryptotypes__keypartt__keyid__position_axiom :
+  (0 <= cryptotypes__keypartt__keyid__position)
+
+logic cryptotypes__keypartt__keylength__first__bit : int
+
+logic cryptotypes__keypartt__keylength__last__bit : int
+
+logic cryptotypes__keypartt__keylength__position : int
+
+axiom cryptotypes__keypartt__keylength__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__keylength__first__bit)
+
+axiom cryptotypes__keypartt__keylength__last__bit_axiom :
+  (cryptotypes__keypartt__keylength__first__bit <  cryptotypes__keypartt__keylength__last__bit)
+
+axiom cryptotypes__keypartt__keylength__position_axiom :
+  (0 <= cryptotypes__keypartt__keylength__position)
+
+logic user_eq13 : us_rep2, us_rep2 -> bool
+
+logic dummy16 : algorithmt
+
+logic dummy17 : keyidt
+
+logic dummy18 : keylengtht
+
+type keypartt__ref = { keypartt__content : us_rep2
+}
+
+function keypartt__ref___projection(a: keypartt__ref) : us_rep2 =
+  (a).keypartt__content
+
+type rawcertificatei
+
+predicate in_range10(x: int) = ((1 <= x) and (x <= 4096))
+
+logic bool_eq16 : int, int -> bool
+
+axiom bool_eq_def13 :
+  (forall x:int. forall y:int [bool_eq16(x, y)]. (((x = y) -> (bool_eq16(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq16(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE10 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check10 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE10 : us_image -> int
+
+logic user_eq14 : rawcertificatei, rawcertificatei -> bool
+
+logic dummy19 : rawcertificatei
+
+type rawcertificatei__ref = { rawcertificatei__content : rawcertificatei
+}
+
+function rawcertificatei__ref___projection(a: rawcertificatei__ref) : rawcertificatei =
+  (a).rawcertificatei__content
+
+logic nullrawcertificate : (int,character) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic certtypes__nullrawcertificate__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom1 :
+  (forall temp___150:int.
+  (forall temp___151:int.
+  ((certtypes__nullrawcertificate__aggregate_def(temp___150)[temp___151]) = of_rep(temp___150))))
+
+logic privatekeypresent : us_private -> bool
+
+logic privatekeypresent__function_guard : bool, us_private -> prop
+
+axiom privatekeypresent__post_axiom : true
+
+type yearst
+
+predicate in_range11(x: int) = ((1901 <= x) and (x <= 2099))
+
+logic bool_eq17 : int, int -> bool
+
+axiom bool_eq_def14 :
+  (forall x:int. forall y:int [bool_eq17(x, y)]. (((x = y) -> (bool_eq17(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq17(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE11 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check11 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE11 : us_image -> int
+
+logic user_eq15 : yearst, yearst -> bool
+
+logic dummy20 : yearst
+
+type yearst__ref = { yearst__content : yearst
+}
+
+function yearst__ref___projection(a: yearst__ref) : yearst =
+  (a).yearst__content
+
+logic to_rep7 : yearst -> int
+
+logic of_rep7 : int -> yearst
+
+axiom inversion_axiom7 :
+  (forall x:yearst [to_rep7(x)]. (of_rep7(to_rep7(x)) = x))
+
+axiom range_axiom7 : (forall x:yearst [to_rep7(x)]. in_range11(to_rep7(x)))
+
+axiom coerce_axiom7 :
+  (forall x:int [to_rep7(of_rep7(x))]. (in_range11(x) ->
+  (to_rep7(of_rep7(x)) = x)))
+
+type monthst
+
+predicate in_range12(x: int) = ((1 <= x) and (x <= 12))
+
+logic bool_eq18 : int, int -> bool
+
+axiom bool_eq_def15 :
+  (forall x:int. forall y:int [bool_eq18(x, y)]. (((x = y) -> (bool_eq18(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq18(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE12 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check12 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE12 : us_image -> int
+
+logic user_eq16 : monthst, monthst -> bool
+
+logic dummy21 : monthst
+
+type monthst__ref = { monthst__content : monthst
+}
+
+function monthst__ref___projection(a: monthst__ref) : monthst =
+  (a).monthst__content
+
+logic to_rep8 : monthst -> int
+
+logic of_rep8 : int -> monthst
+
+axiom inversion_axiom8 :
+  (forall x:monthst [to_rep8(x)]. (of_rep8(to_rep8(x)) = x))
+
+axiom range_axiom8 : (forall x:monthst [to_rep8(x)]. in_range12(to_rep8(x)))
+
+axiom coerce_axiom8 :
+  (forall x:int [to_rep8(of_rep8(x))]. (in_range12(x) ->
+  (to_rep8(of_rep8(x)) = x)))
+
+type dayst
+
+predicate in_range13(x: int) = ((1 <= x) and (x <= 31))
+
+logic bool_eq19 : int, int -> bool
+
+axiom bool_eq_def16 :
+  (forall x:int. forall y:int [bool_eq19(x, y)]. (((x = y) -> (bool_eq19(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq19(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE13 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check13 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE13 : us_image -> int
+
+logic user_eq17 : dayst, dayst -> bool
+
+logic dummy22 : dayst
+
+type dayst__ref = { dayst__content : dayst
+}
+
+function dayst__ref___projection(a: dayst__ref) : dayst = (a).dayst__content
+
+logic to_rep9 : dayst -> int
+
+logic of_rep9 : int -> dayst
+
+axiom inversion_axiom9 :
+  (forall x:dayst [to_rep9(x)]. (of_rep9(to_rep9(x)) = x))
+
+axiom range_axiom9 : (forall x:dayst [to_rep9(x)]. in_range13(to_rep9(x)))
+
+axiom coerce_axiom9 :
+  (forall x:int [to_rep9(of_rep9(x))]. (in_range13(x) ->
+  (to_rep9(of_rep9(x)) = x)))
+
+type millisecst
+
+predicate in_range14(x: int) = ((0 <= x) and (x <= 86399999))
+
+logic bool_eq20 : int, int -> bool
+
+axiom bool_eq_def17 :
+  (forall x:int. forall y:int [bool_eq20(x, y)]. (((x = y) -> (bool_eq20(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq20(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE14 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check14 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE14 : us_image -> int
+
+logic user_eq18 : millisecst, millisecst -> bool
+
+logic dummy23 : millisecst
+
+type millisecst__ref = { millisecst__content : millisecst
+}
+
+function millisecst__ref___projection(a: millisecst__ref) : millisecst =
+  (a).millisecst__content
+
+logic to_rep10 : millisecst -> int
+
+logic of_rep10 : int -> millisecst
+
+axiom inversion_axiom10 :
+  (forall x:millisecst [to_rep10(x)]. (of_rep10(to_rep10(x)) = x))
+
+axiom range_axiom10 :
+  (forall x:millisecst [to_rep10(x)]. in_range14(to_rep10(x)))
+
+axiom coerce_axiom10 :
+  (forall x:int [to_rep10(of_rep10(x))]. (in_range14(x) ->
+  (to_rep10(of_rep10(x)) = x)))
+
+type us_split_fields4 = { rec__clock__timet__year : yearst;
+rec__clock__timet__month : monthst; rec__clock__timet__day : dayst;
+rec__clock__timet__millisec : millisecst
+}
+
+function us_split_fields_Year__projection(a: us_split_fields4) : yearst =
+  (a).rec__clock__timet__year
+
+function us_split_fields_Month__projection(a: us_split_fields4) : monthst =
+  (a).rec__clock__timet__month
+
+function us_split_fields_Day__projection(a: us_split_fields4) : dayst =
+  (a).rec__clock__timet__day
+
+function us_split_fields_MilliSec__projection(a: us_split_fields4) : millisecst =
+  (a).rec__clock__timet__millisec
+
+type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
+}
+
+function us_split_fields__ref___projection(a: us_split_fields__ref2) : us_split_fields4 =
+  (a).us_split_fields__content2
+
+type us_rep3 = { us_split_fields5 : us_split_fields4
+}
+
+function us_rep___projection(a: us_rep3) : us_split_fields4 =
+  (a).us_split_fields5
+
+logic bool_eq21 : us_rep3, us_rep3 -> bool
+
+axiom bool_eq_def18 :
+  (forall a:us_rep3. forall b:us_rep3 [bool_eq21(a, b)].
+  ((((((to_rep7(((a).us_split_fields5).rec__clock__timet__year) = to_rep7(((b).us_split_fields5).rec__clock__timet__year)) and
+  (to_rep8(((a).us_split_fields5).rec__clock__timet__month) = to_rep8(((b).us_split_fields5).rec__clock__timet__month))) and
+  (to_rep9(((a).us_split_fields5).rec__clock__timet__day) = to_rep9(((b).us_split_fields5).rec__clock__timet__day))) and
+  (to_rep10(((a).us_split_fields5).rec__clock__timet__millisec) = to_rep10(((b).us_split_fields5).rec__clock__timet__millisec))) ->
+  (bool_eq21(a, b) = true)) and
+  ((not ((((to_rep7(((a).us_split_fields5).rec__clock__timet__year) = to_rep7(((b).us_split_fields5).rec__clock__timet__year)) and
+  (to_rep8(((a).us_split_fields5).rec__clock__timet__month) = to_rep8(((b).us_split_fields5).rec__clock__timet__month))) and
+  (to_rep9(((a).us_split_fields5).rec__clock__timet__day) = to_rep9(((b).us_split_fields5).rec__clock__timet__day))) and
+  (to_rep10(((a).us_split_fields5).rec__clock__timet__millisec) = to_rep10(((b).us_split_fields5).rec__clock__timet__millisec)))) ->
+  (bool_eq21(a, b) = false))))
+
+logic value__size5 : int
+
+logic object__size5 : us_rep3 -> int
+
+logic value__alignment5 : int
+
+logic object__alignment5 : us_rep3 -> int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 :
+  (forall a:yearst. forall a1:monthst. forall a2:dayst. forall a3:millisecst.
+  (0 <= object__size5({ us_split_fields5 = { rec__clock__timet__year = a;
+  rec__clock__timet__month = a1; rec__clock__timet__day = a2;
+  rec__clock__timet__millisec = a3 } })))
+
+axiom value__alignment_axiom5 : (0 <= value__alignment5)
+
+axiom object__alignment_axiom5 :
+  (forall a:yearst. forall a1:monthst. forall a2:dayst. forall a3:millisecst.
+  (0 <= object__alignment5({ us_split_fields5 = { rec__clock__timet__year =
+  a; rec__clock__timet__month = a1; rec__clock__timet__day = a2;
+  rec__clock__timet__millisec = a3 } })))
+
+logic clock__timet__year__first__bit : int
+
+logic clock__timet__year__last__bit : int
+
+logic clock__timet__year__position : int
+
+axiom clock__timet__year__first__bit_axiom :
+  (0 <= clock__timet__year__first__bit)
+
+axiom clock__timet__year__last__bit_axiom :
+  (clock__timet__year__first__bit <  clock__timet__year__last__bit)
+
+axiom clock__timet__year__position_axiom :
+  (0 <= clock__timet__year__position)
+
+logic clock__timet__month__first__bit : int
+
+logic clock__timet__month__last__bit : int
+
+logic clock__timet__month__position : int
+
+axiom clock__timet__month__first__bit_axiom :
+  (0 <= clock__timet__month__first__bit)
+
+axiom clock__timet__month__last__bit_axiom :
+  (clock__timet__month__first__bit <  clock__timet__month__last__bit)
+
+axiom clock__timet__month__position_axiom :
+  (0 <= clock__timet__month__position)
+
+logic clock__timet__day__first__bit : int
+
+logic clock__timet__day__last__bit : int
+
+logic clock__timet__day__position : int
+
+axiom clock__timet__day__first__bit_axiom :
+  (0 <= clock__timet__day__first__bit)
+
+axiom clock__timet__day__last__bit_axiom :
+  (clock__timet__day__first__bit <  clock__timet__day__last__bit)
+
+axiom clock__timet__day__position_axiom : (0 <= clock__timet__day__position)
+
+logic clock__timet__millisec__first__bit : int
+
+logic clock__timet__millisec__last__bit : int
+
+logic clock__timet__millisec__position : int
+
+axiom clock__timet__millisec__first__bit_axiom :
+  (0 <= clock__timet__millisec__first__bit)
+
+axiom clock__timet__millisec__last__bit_axiom :
+  (clock__timet__millisec__first__bit <  clock__timet__millisec__last__bit)
+
+axiom clock__timet__millisec__position_axiom :
+  (0 <= clock__timet__millisec__position)
+
+logic user_eq19 : us_rep3, us_rep3 -> bool
+
+logic dummy24 : yearst
+
+logic dummy25 : monthst
+
+logic dummy26 : dayst
+
+logic dummy27 : millisecst
+
+type timet__ref = { timet__content : us_rep3
+}
+
+function timet__ref___projection(a: timet__ref) : us_rep3 =
+  (a).timet__content
+
+type serialnumbert
+
+predicate in_range15(x: int) = ((0 <= x) and (x <= 4294967295))
+
+logic bool_eq22 : int, int -> bool
+
+axiom bool_eq_def19 :
+  (forall x:int. forall y:int [bool_eq22(x, y)]. (((x = y) -> (bool_eq22(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq22(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE15 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check15 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE15 : us_image -> int
+
+logic user_eq20 : serialnumbert, serialnumbert -> bool
+
+logic dummy28 : serialnumbert
+
+type serialnumbert__ref = { serialnumbert__content : serialnumbert
+}
+
+function serialnumbert__ref___projection(a: serialnumbert__ref) : serialnumbert =
+  (a).serialnumbert__content
+
+logic to_rep11 : serialnumbert -> int
+
+logic of_rep11 : int -> serialnumbert
+
+axiom inversion_axiom11 :
+  (forall x:serialnumbert [to_rep11(x)]. (of_rep11(to_rep11(x)) = x))
+
+axiom range_axiom11 :
+  (forall x:serialnumbert [to_rep11(x)]. in_range15(to_rep11(x)))
+
+axiom coerce_axiom11 :
+  (forall x:int [to_rep11(of_rep11(x))]. (in_range15(x) ->
+  (to_rep11(of_rep11(x)) = x)))
+
+type us_split_fields6 = { rec__certtypes__idt__issuer : us_rep1;
+rec__certtypes__idt__serialnumber : serialnumbert
+}
+
+function us_split_fields_Issuer__projection(a: us_split_fields6) : us_rep1 =
+  (a).rec__certtypes__idt__issuer
+
+function us_split_fields_SerialNumber__projection(a: us_split_fields6) : serialnumbert =
+  (a).rec__certtypes__idt__serialnumber
+
+type us_split_fields__ref3 = { us_split_fields__content3 : us_split_fields6
+}
+
+function us_split_fields__ref___9__projection(a: us_split_fields__ref3) : us_split_fields6 =
+  (a).us_split_fields__content3
+
+type us_rep4 = { us_split_fields7 : us_split_fields6
+}
+
+function us_rep___10__projection(a: us_rep4) : us_split_fields6 =
+  (a).us_split_fields7
+
+logic bool_eq23 : us_rep4, us_rep4 -> bool
+
+axiom bool_eq_def20 :
+  (forall a:us_rep4. forall b:us_rep4 [bool_eq23(a, b)].
+  ((((bool_eq11(((a).us_split_fields7).rec__certtypes__idt__issuer,
+  ((b).us_split_fields7).rec__certtypes__idt__issuer) = true) and
+  (to_rep11(((a).us_split_fields7).rec__certtypes__idt__serialnumber) = to_rep11(((b).us_split_fields7).rec__certtypes__idt__serialnumber))) ->
+  (bool_eq23(a, b) = true)) and
+  ((not ((bool_eq11(((a).us_split_fields7).rec__certtypes__idt__issuer,
+  ((b).us_split_fields7).rec__certtypes__idt__issuer) = true) and
+  (to_rep11(((a).us_split_fields7).rec__certtypes__idt__serialnumber) = to_rep11(((b).us_split_fields7).rec__certtypes__idt__serialnumber)))) ->
+  (bool_eq23(a, b) = false))))
+
+logic value__size6 : int
+
+logic object__size6 : us_rep4 -> int
+
+logic value__alignment6 : int
+
+logic object__alignment6 : us_rep4 -> int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 :
+  (forall a:issueridt. forall a1:namecountt.
+  forall a2:(int,character) farray. forall a3:serialnumbert.
+  (0 <= object__size6({ us_split_fields7 = { rec__certtypes__idt__issuer = {
+  us_split_fields1 = { rec__cryptotypes__issuert__id = a;
+  rec__cryptotypes__issuert__namelength = a1;
+  rec__cryptotypes__issuert__name = a2 } };
+  rec__certtypes__idt__serialnumber = a3 } })))
+
+axiom value__alignment_axiom6 : (0 <= value__alignment6)
+
+axiom object__alignment_axiom6 :
+  (forall a:issueridt. forall a1:namecountt.
+  forall a2:(int,character) farray. forall a3:serialnumbert.
+  (0 <= object__alignment6({ us_split_fields7 = {
+  rec__certtypes__idt__issuer = { us_split_fields1 = {
+  rec__cryptotypes__issuert__id = a; rec__cryptotypes__issuert__namelength =
+  a1; rec__cryptotypes__issuert__name = a2 } };
+  rec__certtypes__idt__serialnumber = a3 } })))
+
+logic certtypes__idt__issuer__first__bit : int
+
+logic certtypes__idt__issuer__last__bit : int
+
+logic certtypes__idt__issuer__position : int
+
+axiom certtypes__idt__issuer__first__bit_axiom :
+  (0 <= certtypes__idt__issuer__first__bit)
+
+axiom certtypes__idt__issuer__last__bit_axiom :
+  (certtypes__idt__issuer__first__bit <  certtypes__idt__issuer__last__bit)
+
+axiom certtypes__idt__issuer__position_axiom :
+  (0 <= certtypes__idt__issuer__position)
+
+logic certtypes__idt__serialnumber__first__bit : int
+
+logic certtypes__idt__serialnumber__last__bit : int
+
+logic certtypes__idt__serialnumber__position : int
+
+axiom certtypes__idt__serialnumber__first__bit_axiom :
+  (0 <= certtypes__idt__serialnumber__first__bit)
+
+axiom certtypes__idt__serialnumber__last__bit_axiom :
+  (certtypes__idt__serialnumber__first__bit <  certtypes__idt__serialnumber__last__bit)
+
+axiom certtypes__idt__serialnumber__position_axiom :
+  (0 <= certtypes__idt__serialnumber__position)
+
+logic user_eq21 : us_rep4, us_rep4 -> bool
+
+logic dummy29 : issueridt
+
+logic dummy30 : namecountt
+
+logic dummy31 : (int,character) farray
+
+logic dummy32 : serialnumbert
+
+type idt__ref = { idt__content : us_rep4
+}
+
+function idt__ref___projection(a: idt__ref) : us_rep4 = (a).idt__content
+
+type us_split_fields8 = { rec__cert__contentst__id : us_rep4;
+rec__cert__contentst__notbefore : us_rep3; rec__cert__contentst__notafter :
+us_rep3; rec__cert__contentst__mechanism : algorithmt
+}
+
+function us_split_fields_ID__3__projection(a: us_split_fields8) : us_rep4 =
+  (a).rec__cert__contentst__id
+
+function us_split_fields_NotBefore__projection(a: us_split_fields8) : us_rep3 =
+  (a).rec__cert__contentst__notbefore
+
+function us_split_fields_NotAfter__projection(a: us_split_fields8) : us_rep3 =
+  (a).rec__cert__contentst__notafter
+
+function us_split_fields_Mechanism__projection(a: us_split_fields8) : algorithmt =
+  (a).rec__cert__contentst__mechanism
+
+type us_split_fields__ref4 = { us_split_fields__content4 : us_split_fields8
+}
+
+function us_split_fields__ref___10__projection(a: us_split_fields__ref4) : us_split_fields8 =
+  (a).us_split_fields__content4
+
+type us_rep5 = { us_split_fields9 : us_split_fields8
+}
+
+function us_rep___11__projection(a: us_rep5) : us_split_fields8 =
+  (a).us_split_fields9
+
+logic bool_eq24 : us_rep5, us_rep5 -> bool
+
+axiom bool_eq_def21 :
+  (forall a:us_rep5. forall b:us_rep5 [bool_eq24(a, b)].
+  ((((((bool_eq23(((a).us_split_fields9).rec__cert__contentst__id,
+  ((b).us_split_fields9).rec__cert__contentst__id) = true) and
+  (bool_eq21(((a).us_split_fields9).rec__cert__contentst__notbefore,
+  ((b).us_split_fields9).rec__cert__contentst__notbefore) = true)) and
+  (bool_eq21(((a).us_split_fields9).rec__cert__contentst__notafter,
+  ((b).us_split_fields9).rec__cert__contentst__notafter) = true)) and
+  (to_rep4(((a).us_split_fields9).rec__cert__contentst__mechanism) = to_rep4(((b).us_split_fields9).rec__cert__contentst__mechanism))) ->
+  (bool_eq24(a, b) = true)) and
+  ((not ((((bool_eq23(((a).us_split_fields9).rec__cert__contentst__id,
+  ((b).us_split_fields9).rec__cert__contentst__id) = true) and
+  (bool_eq21(((a).us_split_fields9).rec__cert__contentst__notbefore,
+  ((b).us_split_fields9).rec__cert__contentst__notbefore) = true)) and
+  (bool_eq21(((a).us_split_fields9).rec__cert__contentst__notafter,
+  ((b).us_split_fields9).rec__cert__contentst__notafter) = true)) and
+  (to_rep4(((a).us_split_fields9).rec__cert__contentst__mechanism) = to_rep4(((b).us_split_fields9).rec__cert__contentst__mechanism)))) ->
+  (bool_eq24(a, b) = false))))
+
+logic value__size7 : int
+
+logic object__size7 : us_rep5 -> int
+
+logic value__alignment7 : int
+
+logic object__alignment7 : us_rep5 -> int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 : (forall a:us_rep5. (0 <= object__size7(a)))
+
+axiom value__alignment_axiom7 : (0 <= value__alignment7)
+
+axiom object__alignment_axiom7 :
+  (forall a:us_rep5. (0 <= object__alignment7(a)))
+
+logic cert__contentst__id__first__bit : int
+
+logic cert__contentst__id__last__bit : int
+
+logic cert__contentst__id__position : int
+
+axiom cert__contentst__id__first__bit_axiom :
+  (0 <= cert__contentst__id__first__bit)
+
+axiom cert__contentst__id__last__bit_axiom :
+  (cert__contentst__id__first__bit <  cert__contentst__id__last__bit)
+
+axiom cert__contentst__id__position_axiom :
+  (0 <= cert__contentst__id__position)
+
+logic cert__contentst__notbefore__first__bit : int
+
+logic cert__contentst__notbefore__last__bit : int
+
+logic cert__contentst__notbefore__position : int
+
+axiom cert__contentst__notbefore__first__bit_axiom :
+  (0 <= cert__contentst__notbefore__first__bit)
+
+axiom cert__contentst__notbefore__last__bit_axiom :
+  (cert__contentst__notbefore__first__bit <  cert__contentst__notbefore__last__bit)
+
+axiom cert__contentst__notbefore__position_axiom :
+  (0 <= cert__contentst__notbefore__position)
+
+logic cert__contentst__notafter__first__bit : int
+
+logic cert__contentst__notafter__last__bit : int
+
+logic cert__contentst__notafter__position : int
+
+axiom cert__contentst__notafter__first__bit_axiom :
+  (0 <= cert__contentst__notafter__first__bit)
+
+axiom cert__contentst__notafter__last__bit_axiom :
+  (cert__contentst__notafter__first__bit <  cert__contentst__notafter__last__bit)
+
+axiom cert__contentst__notafter__position_axiom :
+  (0 <= cert__contentst__notafter__position)
+
+logic cert__contentst__mechanism__first__bit : int
+
+logic cert__contentst__mechanism__last__bit : int
+
+logic cert__contentst__mechanism__position : int
+
+axiom cert__contentst__mechanism__first__bit_axiom :
+  (0 <= cert__contentst__mechanism__first__bit)
+
+axiom cert__contentst__mechanism__last__bit_axiom :
+  (cert__contentst__mechanism__first__bit <  cert__contentst__mechanism__last__bit)
+
+axiom cert__contentst__mechanism__position_axiom :
+  (0 <= cert__contentst__mechanism__position)
+
+logic user_eq22 : us_rep5, us_rep5 -> bool
+
+logic dummy33 : issueridt
+
+logic dummy34 : namecountt
+
+logic dummy35 : (int,character) farray
+
+logic dummy36 : serialnumbert
+
+logic dummy37 : yearst
+
+logic dummy38 : monthst
+
+logic dummy39 : dayst
+
+logic dummy40 : millisecst
+
+logic dummy41 : yearst
+
+logic dummy42 : monthst
+
+logic dummy43 : dayst
+
+logic dummy44 : millisecst
+
+logic dummy45 : algorithmt
+
+type contentst__ref = { contentst__content : us_rep5
+}
+
+function contentst__ref___projection(a: contentst__ref) : us_rep5 =
+  (a).contentst__content
+
+logic theissuer : us_rep5 -> us_rep1
+
+logic theissuer__function_guard : us_rep1, us_rep5 -> prop
+
+axiom theissuer__post_axiom : true
+
+type us_split_fields10 = { rec__cert__id__contentst__id : us_rep4;
+rec__cert__id__contentst__notbefore : us_rep3;
+rec__cert__id__contentst__notafter : us_rep3;
+rec__cert__id__contentst__mechanism : algorithmt;
+rec__cert__id__contentst__subject : us_rep1;
+rec__cert__id__contentst__subjectpublickey : us_rep2
+}
+
+function us_split_fields_ID__4__projection(a: us_split_fields10) : us_rep4 =
+  (a).rec__cert__id__contentst__id
+
+function us_split_fields_NotBefore__2__projection(a: us_split_fields10) : us_rep3 =
+  (a).rec__cert__id__contentst__notbefore
+
+function us_split_fields_NotAfter__2__projection(a: us_split_fields10) : us_rep3 =
+  (a).rec__cert__id__contentst__notafter
+
+function us_split_fields_Mechanism__2__projection(a: us_split_fields10) : algorithmt =
+  (a).rec__cert__id__contentst__mechanism
+
+function us_split_fields_Subject__projection(a: us_split_fields10) : us_rep1 =
+  (a).rec__cert__id__contentst__subject
+
+function us_split_fields_SubjectPublicKey__projection(a: us_split_fields10) : us_rep2 =
+  (a).rec__cert__id__contentst__subjectpublickey
+
+type us_split_fields__ref5 = { us_split_fields__content5 : us_split_fields10
+}
+
+function us_split_fields__ref___11__projection(a: us_split_fields__ref5) : us_split_fields10 =
+  (a).us_split_fields__content5
+
+type us_rep6 = { us_split_fields11 : us_split_fields10
+}
+
+function us_rep___12__projection(a: us_rep6) : us_split_fields10 =
+  (a).us_split_fields11
+
+logic bool_eq25 : us_rep6, us_rep6 -> bool
+
+axiom bool_eq_def22 :
+  (forall a:us_rep6. forall b:us_rep6 [bool_eq25(a, b)].
+  ((((((((bool_eq23(((a).us_split_fields11).rec__cert__id__contentst__id,
+  ((b).us_split_fields11).rec__cert__id__contentst__id) = true) and
+  (bool_eq21(((a).us_split_fields11).rec__cert__id__contentst__notbefore,
+  ((b).us_split_fields11).rec__cert__id__contentst__notbefore) = true)) and
+  (bool_eq21(((a).us_split_fields11).rec__cert__id__contentst__notafter,
+  ((b).us_split_fields11).rec__cert__id__contentst__notafter) = true)) and
+  (to_rep4(((a).us_split_fields11).rec__cert__id__contentst__mechanism) = to_rep4(((b).us_split_fields11).rec__cert__id__contentst__mechanism))) and
+  (bool_eq11(((a).us_split_fields11).rec__cert__id__contentst__subject,
+  ((b).us_split_fields11).rec__cert__id__contentst__subject) = true)) and
+  (bool_eq15(((a).us_split_fields11).rec__cert__id__contentst__subjectpublickey,
+  ((b).us_split_fields11).rec__cert__id__contentst__subjectpublickey) = true)) ->
+  (bool_eq25(a, b) = true)) and
+  ((not ((((((bool_eq23(((a).us_split_fields11).rec__cert__id__contentst__id,
+  ((b).us_split_fields11).rec__cert__id__contentst__id) = true) and
+  (bool_eq21(((a).us_split_fields11).rec__cert__id__contentst__notbefore,
+  ((b).us_split_fields11).rec__cert__id__contentst__notbefore) = true)) and
+  (bool_eq21(((a).us_split_fields11).rec__cert__id__contentst__notafter,
+  ((b).us_split_fields11).rec__cert__id__contentst__notafter) = true)) and
+  (to_rep4(((a).us_split_fields11).rec__cert__id__contentst__mechanism) = to_rep4(((b).us_split_fields11).rec__cert__id__contentst__mechanism))) and
+  (bool_eq11(((a).us_split_fields11).rec__cert__id__contentst__subject,
+  ((b).us_split_fields11).rec__cert__id__contentst__subject) = true)) and
+  (bool_eq15(((a).us_split_fields11).rec__cert__id__contentst__subjectpublickey,
+  ((b).us_split_fields11).rec__cert__id__contentst__subjectpublickey) = true))) ->
+  (bool_eq25(a, b) = false))))
+
+logic value__size8 : int
+
+logic object__size8 : us_rep6 -> int
+
+logic value__alignment8 : int
+
+logic object__alignment8 : us_rep6 -> int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 : (forall a:us_rep6. (0 <= object__size8(a)))
+
+axiom value__alignment_axiom8 : (0 <= value__alignment8)
+
+axiom object__alignment_axiom8 :
+  (forall a:us_rep6. (0 <= object__alignment8(a)))
+
+logic cert__id__contentst__id__first__bit : int
+
+logic cert__id__contentst__id__last__bit : int
+
+logic cert__id__contentst__id__position : int
+
+axiom cert__id__contentst__id__first__bit_axiom :
+  (0 <= cert__id__contentst__id__first__bit)
+
+axiom cert__id__contentst__id__last__bit_axiom :
+  (cert__id__contentst__id__first__bit <  cert__id__contentst__id__last__bit)
+
+axiom cert__id__contentst__id__position_axiom :
+  (0 <= cert__id__contentst__id__position)
+
+logic cert__id__contentst__notbefore__first__bit : int
+
+logic cert__id__contentst__notbefore__last__bit : int
+
+logic cert__id__contentst__notbefore__position : int
+
+axiom cert__id__contentst__notbefore__first__bit_axiom :
+  (0 <= cert__id__contentst__notbefore__first__bit)
+
+axiom cert__id__contentst__notbefore__last__bit_axiom :
+  (cert__id__contentst__notbefore__first__bit <  cert__id__contentst__notbefore__last__bit)
+
+axiom cert__id__contentst__notbefore__position_axiom :
+  (0 <= cert__id__contentst__notbefore__position)
+
+logic cert__id__contentst__notafter__first__bit : int
+
+logic cert__id__contentst__notafter__last__bit : int
+
+logic cert__id__contentst__notafter__position : int
+
+axiom cert__id__contentst__notafter__first__bit_axiom :
+  (0 <= cert__id__contentst__notafter__first__bit)
+
+axiom cert__id__contentst__notafter__last__bit_axiom :
+  (cert__id__contentst__notafter__first__bit <  cert__id__contentst__notafter__last__bit)
+
+axiom cert__id__contentst__notafter__position_axiom :
+  (0 <= cert__id__contentst__notafter__position)
+
+logic cert__id__contentst__mechanism__first__bit : int
+
+logic cert__id__contentst__mechanism__last__bit : int
+
+logic cert__id__contentst__mechanism__position : int
+
+axiom cert__id__contentst__mechanism__first__bit_axiom :
+  (0 <= cert__id__contentst__mechanism__first__bit)
+
+axiom cert__id__contentst__mechanism__last__bit_axiom :
+  (cert__id__contentst__mechanism__first__bit <  cert__id__contentst__mechanism__last__bit)
+
+axiom cert__id__contentst__mechanism__position_axiom :
+  (0 <= cert__id__contentst__mechanism__position)
+
+logic cert__id__contentst__subject__first__bit : int
+
+logic cert__id__contentst__subject__last__bit : int
+
+logic cert__id__contentst__subject__position : int
+
+axiom cert__id__contentst__subject__first__bit_axiom :
+  (0 <= cert__id__contentst__subject__first__bit)
+
+axiom cert__id__contentst__subject__last__bit_axiom :
+  (cert__id__contentst__subject__first__bit <  cert__id__contentst__subject__last__bit)
+
+axiom cert__id__contentst__subject__position_axiom :
+  (0 <= cert__id__contentst__subject__position)
+
+logic cert__id__contentst__subjectpublickey__first__bit : int
+
+logic cert__id__contentst__subjectpublickey__last__bit : int
+
+logic cert__id__contentst__subjectpublickey__position : int
+
+axiom cert__id__contentst__subjectpublickey__first__bit_axiom :
+  (0 <= cert__id__contentst__subjectpublickey__first__bit)
+
+axiom cert__id__contentst__subjectpublickey__last__bit_axiom :
+  (cert__id__contentst__subjectpublickey__first__bit <  cert__id__contentst__subjectpublickey__last__bit)
+
+axiom cert__id__contentst__subjectpublickey__position_axiom :
+  (0 <= cert__id__contentst__subjectpublickey__position)
+
+logic user_eq23 : us_rep6, us_rep6 -> bool
+
+logic dummy46 : issueridt
+
+logic dummy47 : namecountt
+
+logic dummy48 : (int,character) farray
+
+logic dummy49 : serialnumbert
+
+logic dummy50 : yearst
+
+logic dummy51 : monthst
+
+logic dummy52 : dayst
+
+logic dummy53 : millisecst
+
+logic dummy54 : yearst
+
+logic dummy55 : monthst
+
+logic dummy56 : dayst
+
+logic dummy57 : millisecst
+
+logic dummy58 : algorithmt
+
+logic dummy59 : issueridt
+
+logic dummy60 : namecountt
+
+logic dummy61 : (int,character) farray
+
+logic dummy62 : algorithmt
+
+logic dummy63 : keyidt
+
+logic dummy64 : keylengtht
+
+type contentst__ref1 = { contentst__content1 : us_rep6
+}
+
+function contentst__ref___2__projection(a: contentst__ref1) : us_rep6 =
+  (a).contentst__content1
+
+logic thesubject : us_rep6 -> us_rep1
+
+logic thesubject__function_guard : us_rep1, us_rep6 -> prop
+
+axiom thesubject__post_axiom : true
+
+logic thepublickey : us_rep6 -> us_rep2
+
+logic thepublickey__function_guard : us_rep2, us_rep6 -> prop
+
+axiom thepublickey__post_axiom : true
+
+logic cert_id_to_cert : us_rep6 -> us_rep5
+
+logic cert_id_to_cert__function_guard : us_rep5, us_rep6 -> prop
+
+axiom cert_id_to_cert__post_axiom : true
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic makedescription : us_t, int -> (int,character) farray
+
+logic makedescription__function_guard : (int,character) farray, us_t,
+  int -> prop
+
+axiom makedescription__post_axiom : true
+
+logic istis : bool
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic attr__ATTRIBUTE_ADDRESS9 : int
+
+logic attr__ATTRIBUTE_ADDRESS10 : int
+
+logic attr__ATTRIBUTE_ADDRESS11 : int
+
+logic attr__ATTRIBUTE_ADDRESS12 : int
+
+logic attr__ATTRIBUTE_ADDRESS13 : int
+
+logic attr__ATTRIBUTE_ADDRESS14 : int
+
+logic attr__ATTRIBUTE_ADDRESS15 : int
+
+logic temp___String_Literal_1083 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1083__def_axiom :
+  (((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_1083(void)[1])) = 67) and
+  (to_rep((temp___String_Literal_1083(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_1083(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_1083(void)[4])) = 116)) and
+  (to_rep((temp___String_Literal_1083(void)[5])) = 105)) and
+  (to_rep((temp___String_Literal_1083(void)[6])) = 102)) and
+  (to_rep((temp___String_Literal_1083(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_1083(void)[8])) = 99)) and
+  (to_rep((temp___String_Literal_1083(void)[9])) = 97)) and
+  (to_rep((temp___String_Literal_1083(void)[10])) = 116)) and
+  (to_rep((temp___String_Literal_1083(void)[11])) = 101)) and
+  (to_rep((temp___String_Literal_1083(void)[12])) = 32)) and
+  (to_rep((temp___String_Literal_1083(void)[13])) = 99)) and
+  (to_rep((temp___String_Literal_1083(void)[14])) = 111)) and
+  (to_rep((temp___String_Literal_1083(void)[15])) = 117)) and
+  (to_rep((temp___String_Literal_1083(void)[16])) = 108)) and
+  (to_rep((temp___String_Literal_1083(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_1083(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_1083(void)[19])) = 110)) and
+  (to_rep((temp___String_Literal_1083(void)[20])) = 111)) and
+  (to_rep((temp___String_Literal_1083(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_1083(void)[22])) = 32)) and
+  (to_rep((temp___String_Literal_1083(void)[23])) = 98)) and
+  (to_rep((temp___String_Literal_1083(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_1083(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_1083(void)[26])) = 118)) and
+  (to_rep((temp___String_Literal_1083(void)[27])) = 101)) and
+  (to_rep((temp___String_Literal_1083(void)[28])) = 114)) and
+  (to_rep((temp___String_Literal_1083(void)[29])) = 105)) and
+  (to_rep((temp___String_Literal_1083(void)[30])) = 102)) and
+  (to_rep((temp___String_Literal_1083(void)[31])) = 105)) and
+  (to_rep((temp___String_Literal_1083(void)[32])) = 101)) and
+  (to_rep((temp___String_Literal_1083(void)[33])) = 100))
+
+logic temp___String_Literal_1084 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1084__def_axiom :
+  (((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_1084(void)[1])) = 75) and
+  (to_rep((temp___String_Literal_1084(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_1084(void)[3])) = 121)) and
+  (to_rep((temp___String_Literal_1084(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[5])) = 99)) and
+  (to_rep((temp___String_Literal_1084(void)[6])) = 111)) and
+  (to_rep((temp___String_Literal_1084(void)[7])) = 117)) and
+  (to_rep((temp___String_Literal_1084(void)[8])) = 108)) and
+  (to_rep((temp___String_Literal_1084(void)[9])) = 100)) and
+  (to_rep((temp___String_Literal_1084(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[11])) = 110)) and
+  (to_rep((temp___String_Literal_1084(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_1084(void)[13])) = 116)) and
+  (to_rep((temp___String_Literal_1084(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[15])) = 98)) and
+  (to_rep((temp___String_Literal_1084(void)[16])) = 101)) and
+  (to_rep((temp___String_Literal_1084(void)[17])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[18])) = 97)) and
+  (to_rep((temp___String_Literal_1084(void)[19])) = 100)) and
+  (to_rep((temp___String_Literal_1084(void)[20])) = 100)) and
+  (to_rep((temp___String_Literal_1084(void)[21])) = 101)) and
+  (to_rep((temp___String_Literal_1084(void)[22])) = 100)) and
+  (to_rep((temp___String_Literal_1084(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[24])) = 116)) and
+  (to_rep((temp___String_Literal_1084(void)[25])) = 111)) and
+  (to_rep((temp___String_Literal_1084(void)[26])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[27])) = 116)) and
+  (to_rep((temp___String_Literal_1084(void)[28])) = 104)) and
+  (to_rep((temp___String_Literal_1084(void)[29])) = 101)) and
+  (to_rep((temp___String_Literal_1084(void)[30])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[31])) = 75)) and
+  (to_rep((temp___String_Literal_1084(void)[32])) = 101)) and
+  (to_rep((temp___String_Literal_1084(void)[33])) = 121)) and
+  (to_rep((temp___String_Literal_1084(void)[34])) = 32)) and
+  (to_rep((temp___String_Literal_1084(void)[35])) = 83)) and
+  (to_rep((temp___String_Literal_1084(void)[36])) = 116)) and
+  (to_rep((temp___String_Literal_1084(void)[37])) = 111)) and
+  (to_rep((temp___String_Literal_1084(void)[38])) = 114)) and
+  (to_rep((temp___String_Literal_1084(void)[39])) = 101))
+
+logic temp___String_Literal_1085 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1085__def_axiom :
+  (((((((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_1085(void)[1])) = 67) and
+  (to_rep((temp___String_Literal_1085(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_1085(void)[4])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[5])) = 105)) and
+  (to_rep((temp___String_Literal_1085(void)[6])) = 102)) and
+  (to_rep((temp___String_Literal_1085(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_1085(void)[8])) = 99)) and
+  (to_rep((temp___String_Literal_1085(void)[9])) = 97)) and
+  (to_rep((temp___String_Literal_1085(void)[10])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[11])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[12])) = 32)) and
+  (to_rep((temp___String_Literal_1085(void)[13])) = 99)) and
+  (to_rep((temp___String_Literal_1085(void)[14])) = 111)) and
+  (to_rep((temp___String_Literal_1085(void)[15])) = 110)) and
+  (to_rep((temp___String_Literal_1085(void)[16])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[17])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[18])) = 110)) and
+  (to_rep((temp___String_Literal_1085(void)[19])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[20])) = 115)) and
+  (to_rep((temp___String_Literal_1085(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_1085(void)[22])) = 99)) and
+  (to_rep((temp___String_Literal_1085(void)[23])) = 111)) and
+  (to_rep((temp___String_Literal_1085(void)[24])) = 117)) and
+  (to_rep((temp___String_Literal_1085(void)[25])) = 108)) and
+  (to_rep((temp___String_Literal_1085(void)[26])) = 100)) and
+  (to_rep((temp___String_Literal_1085(void)[27])) = 32)) and
+  (to_rep((temp___String_Literal_1085(void)[28])) = 110)) and
+  (to_rep((temp___String_Literal_1085(void)[29])) = 111)) and
+  (to_rep((temp___String_Literal_1085(void)[30])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[31])) = 32)) and
+  (to_rep((temp___String_Literal_1085(void)[32])) = 98)) and
+  (to_rep((temp___String_Literal_1085(void)[33])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[34])) = 32)) and
+  (to_rep((temp___String_Literal_1085(void)[35])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[36])) = 120)) and
+  (to_rep((temp___String_Literal_1085(void)[37])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[38])) = 114)) and
+  (to_rep((temp___String_Literal_1085(void)[39])) = 97)) and
+  (to_rep((temp___String_Literal_1085(void)[40])) = 99)) and
+  (to_rep((temp___String_Literal_1085(void)[41])) = 116)) and
+  (to_rep((temp___String_Literal_1085(void)[42])) = 101)) and
+  (to_rep((temp___String_Literal_1085(void)[43])) = 100))
+
+axiom nodescription__def_axiom :
+  (nodescription = audittypes__nodescription__aggregate_def(32))
+
+axiom nullrawcertificate__def_axiom :
+  (nullrawcertificate = certtypes__nullrawcertificate__aggregate_def(32))
+
+ (* File "audittypes.ads", line 92, characters 0-0 *)
+goal WP_parameter_def :
+  (forall thefile:us_rep. forall certno:int. forall keyadded:bool.
+  forall description:(int,character) farray.
+  forall thecert:(int,character) farray.
+  forall thesubject__split_fields:issueridt.
+  forall thesubject__split_fields1:namecountt.
+  forall thesubject__split_fields2:(int,character) farray.
+  forall theissuer__split_fields:issueridt.
+  forall theissuer__split_fields1:namecountt.
+  forall theissuer__split_fields2:(int,character) farray.
+  forall thepublickey__split_fields:algorithmt.
+  forall thepublickey__split_fields1:keyidt.
+  forall thepublickey__split_fields2:keylengtht. forall addedok:bool.
+  forall verifiedok:bool. forall stop:int. forall state:us_private.
+  forall filestate:us_private. forall state1:us_private.
+  forall store1:us_private. forall o:bool. forall o1:bool.
+  forall temp___1079:int. forall temp___1078:us_rep.
+  forall temp___1077:(int,character) farray. forall o2:integer.
+  forall o3:integer. forall o4:bool. forall o5:bool. forall o6:bool.
+  forall temp___1080:issueridt. forall temp___10801:namecountt.
+  forall temp___10802:(int,character) farray. forall o7:us_rep5.
+  forall temp___1081:issueridt. forall temp___10811:namecountt.
+  forall temp___10812:(int,character) farray. forall temp___1082:algorithmt.
+  forall temp___10821:keyidt. forall temp___10822:keylengtht.
+  forall o8:us_rep5. forall o9:(int,character) farray.
+  forall o10:(int,character) farray. forall o11:(int,character) farray.
+  forall thefile1:us_rep. forall state2:us_private.
+  forall filestate1:us_private. forall state3:us_private.
+  forall store2:us_private. forall result:(int,character) farray.
+  forall thecert1:(int,character) farray. forall result1:bool.
+  forall addedok1:bool. forall result2:bool. forall verifiedok1:bool.
+  forall result3:int. forall stop1:int.
+  forall result4:(int,character) farray.
+  forall description1:(int,character) farray. forall result5:bool.
+  forall thefile2:us_rep. forall thecert2:(int,character) farray.
+  forall stop2:int. forall thefile3:us_rep. forall stop3:int.
+  forall file__getline__item:(int,character) farray.
+  forall result6:(int,character) farray.
+  forall thecert3:(int,character) farray. forall result7:bool.
+  forall thefile4:us_rep. forall thecert4:(int,character) farray.
+  forall stop4:int. forall thefile5:us_rep.
+  forall thecert5:(int,character) farray. forall stop5:int.
+  forall thefile6:us_rep. forall thecert6:(int,character) farray.
+  forall stop6:int. forall thefile7:us_rep.
+  forall thecert7:(int,character) farray. forall stop7:int.
+  forall thecontents__split_fields:us_split_fields10. forall extracted:bool.
+  forall result8:issueridt. forall result9:namecountt.
+  forall result10:(int,character) farray.
+  forall thesubject__split_fields3:issueridt.
+  forall thesubject__split_fields4:namecountt.
+  forall thesubject__split_fields5:(int,character) farray.
+  forall result11:issueridt. forall result12:namecountt.
+  forall result13:(int,character) farray.
+  forall theissuer__split_fields3:us_split_fields.
+  forall result14:us_split_fields__ref1.
+  forall thepublickey__split_fields3:us_split_fields2. forall addedok2:bool.
+  forall state4:us_private. forall filestate2:us_private.
+  forall state5:us_private. forall store3:us_private.
+  forall addedok3:bool__ref. forall state6:us_private__ref.
+  forall filestate3:us_private__ref. forall state7:us_private__ref.
+  forall store4:us_private__ref. forall addedok4:bool.
+  forall state8:us_private. forall filestate4:us_private.
+  forall state9:us_private. forall store5:us_private.
+  forall addedok5:bool__ref. forall state10:us_private__ref.
+  forall filestate5:us_private__ref. forall state11:us_private__ref.
+  forall store6:us_private__ref. forall addedok6:bool.
+  forall state12:us_private. forall filestate6:us_private.
+  forall state13:us_private. forall store7:us_private.
+  forall verifiedok2:bool. forall state14:us_private.
+  forall filestate7:us_private. forall verifiedok3:bool__ref.
+  forall state15:us_private__ref. forall filestate8:us_private__ref.
+  forall verifiedok4:bool. forall state16:us_private.
+  forall filestate9:us_private. forall addedok7:bool.
+  forall state17:us_private. forall filestate10:us_private.
+  forall state18:us_private. forall store8:us_private.
+  forall addedok8:bool__ref. forall state19:us_private__ref.
+  forall filestate11:us_private__ref. forall state20:us_private__ref.
+  forall store9:us_private__ref. forall addedok9:bool.
+  forall state21:us_private. forall filestate12:us_private.
+  forall state22:us_private. forall store10:us_private.
+  forall addedok10:bool. forall state23:us_private.
+  forall filestate13:us_private. forall state24:us_private.
+  forall store11:us_private. forall addedok11:bool__ref.
+  forall state25:us_private__ref. forall filestate14:us_private__ref.
+  forall state26:us_private__ref. forall store12:us_private__ref.
+  forall addedok12:bool. forall state27:us_private.
+  forall filestate15:us_private. forall state28:us_private.
+  forall store13:us_private. forall result15:map__ref.
+  forall description2:(int,character) farray. forall result16:map__ref.
+  forall description3:(int,character) farray. forall result17:map__ref.
+  forall description4:(int,character) farray. forall description5:map__ref.
+  forall description6:(int,character) farray. forall description7:map__ref.
+  forall description8:(int,character) farray. forall description9:map__ref.
+  forall description10:(int,character) farray. forall result18:bool__ref.
+  forall keyadded1:bool. forall thefile8:t__ref. forall keyadded2:bool__ref.
+  forall description11:map__ref. forall thecert8:map__ref.
+  forall thecontents__split_fields1:us_split_fields__ref5.
+  forall thesubject__split_fields6:us_split_fields__ref.
+  forall theissuer__split_fields4:us_split_fields__ref.
+  forall thepublickey__split_fields4:us_split_fields__ref1.
+  forall extracted1:bool__ref. forall addedok13:bool__ref.
+  forall verifiedok5:bool__ref. forall stop8:int__ref.
+  forall state29:us_private__ref. forall filestate16:us_private__ref.
+  forall state30:us_private__ref. forall store14:us_private__ref.
+  forall thefile9:us_rep. forall keyadded3:bool.
+  forall description12:(int,character) farray.
+  forall thecert9:(int,character) farray.
+  forall thecontents__split_fields2:us_split_fields10.
+  forall thesubject__split_fields7:us_split_fields.
+  forall theissuer__split_fields5:us_split_fields.
+  forall thepublickey__split_fields5:us_split_fields2.
+  forall extracted2:bool. forall addedok14:bool. forall verifiedok6:bool.
+  forall stop9:int. forall state31:us_private. forall filestate17:us_private.
+  forall state32:us_private. forall store15:us_private.
+  (((audittypes__nodescription__aggregate_def(32) = nodescription) and
+  ((certtypes__nullrawcertificate__aggregate_def(32) = nullrawcertificate) and
+  (in_range2(certno) and ((((result = thecert) and
+  (thecert1 = nullrawcertificate)) and (((result1 = addedok) and
+  (addedok1 = of_int(1))) and (((result2 = verifiedok) and
+  (verifiedok1 = of_int(0))) and (((result3 = stop) and (stop1 = 0)) and
+  (in_range4(stop1) and (((result4 = description) and
+  (description1 = nodescription)) and (((((o = endoffile(thefile)) and
+  (((not (o = true)) and (o1 = true)) or ((o = true) and (o1 = false)))) and
+  (((stop1 = 0) and (result5 = o1)) or ((not (stop1 = 0)) and
+  (result5 = false)))) and (((result5 = true) and
+  ((((temp___1079 = stop1) and ((temp___1078 = thefile) and
+  ((temp___1077 = thecert1) and ((((0 <= 2147483647) -> in_range4(stop2)) and
+  ((stop2 = 0) and (not (endoffile(thefile2) = true)))) and
+  ((((to_rep1(o3) = 4096) and ((to_rep1(o2) = 1) and in_range4(stop3))) and
+  ((result6 = thecert2) and (thecert3 = slide(file__getline__item,
+  to_rep1(first(mk(1, 4096))), 1)))) and (((((o4 = endoffile(thefile3)) and
+  (((not (o4 = true)) and (o5 = true)) or ((o4 = true) and
+  (o5 = false)))) and (((stop3 = 0) and (o6 = o5)) or ((not (stop3 = 0)) and
+  (o6 = false)))) and (((not (o6 = true)) and (result7 = true)) or
+  ((o6 = true) and (result7 = false)))) and (result7 = true))))))) and
+  (((stop3 = stop4) and ((thecert3 = thecert4) and
+  (thefile3 = thefile4))) and ((stop5 = stop3) and ((thecert5 = thecert3) and
+  (thefile5 = thefile3))))) and ((({ int__content = stop6 } = {
+  int__content = stop4 }) and (({ map__content = thecert6 } = {
+  map__content = thecert4 }) and ({ t__content = thefile6 } = { t__content =
+  thefile4 }))) and ((stop7 = stop5) and ((thecert7 = thecert5) and
+  (thefile7 = thefile5)))))) or ((not (result5 = true)) and
+  (((stop1 = stop6) and ((thecert1 = thecert6) and (thefile = thefile6))) and
+  ((stop7 = stop1) and ((thecert7 = thecert1) and
+  (thefile7 = thefile1))))))) and ((({ us_split_fields1 = {
+  rec__cryptotypes__issuert__id = temp___1080;
+  rec__cryptotypes__issuert__namelength = temp___10801;
+  rec__cryptotypes__issuert__name = temp___10802 } } = thesubject({
+  us_split_fields11 = thecontents__split_fields })) and
+  (((result8 = thesubject__split_fields) and
+  ((result9 = thesubject__split_fields1) and
+  (result10 = thesubject__split_fields2))) and
+  ((temp___1080 = thesubject__split_fields3) and
+  ((temp___10801 = thesubject__split_fields4) and
+  (temp___10802 = thesubject__split_fields5))))) and
+  ((((o7 = cert_id_to_cert({ us_split_fields11 = thecontents__split_fields
+  })) and ({ us_split_fields1 = { rec__cryptotypes__issuert__id =
+  temp___1081; rec__cryptotypes__issuert__namelength = temp___10811;
+  rec__cryptotypes__issuert__name = temp___10812 } } = theissuer(o7))) and
+  (((result11 = theissuer__split_fields) and
+  ((result12 = theissuer__split_fields1) and
+  (result13 = theissuer__split_fields2))) and (theissuer__split_fields3 = {
+  rec__cryptotypes__issuert__id = temp___1081;
+  rec__cryptotypes__issuert__namelength = temp___10811;
+  rec__cryptotypes__issuert__name = temp___10812 }))) and ((({
+  us_split_fields3 = { rec__cryptotypes__keypartt__algorithmid = temp___1082;
+  rec__cryptotypes__keypartt__keyid = temp___10821;
+  rec__cryptotypes__keypartt__keylength = temp___10822 } } = thepublickey({
+  us_split_fields11 = thecontents__split_fields })) and ((result14 = {
+  us_split_fields__content1 = { rec__cryptotypes__keypartt__algorithmid =
+  thepublickey__split_fields; rec__cryptotypes__keypartt__keyid =
+  thepublickey__split_fields1; rec__cryptotypes__keypartt__keylength =
+  thepublickey__split_fields2 } }) and (thepublickey__split_fields3 = {
+  rec__cryptotypes__keypartt__algorithmid = temp___1082;
+  rec__cryptotypes__keypartt__keyid = temp___10821;
+  rec__cryptotypes__keypartt__keylength = temp___10822 }))) and
+  ((((extracted = true) and
+  ((((to_rep2(thesubject__split_fields3) = to_rep2((theissuer__split_fields3).rec__cryptotypes__issuert__id)) and
+  (((match_bool(match_bool(addedok2, match_bool(of_int(1), false,
+  privatekeypresent(state5)), false), true, match_bool(addedok2,
+  match_bool(of_int(1), bool_eq(to_int(privatekeypresent(state5)),
+  to_int(privatekeypresent(state1))), false),
+  bool_eq(to_int(privatekeypresent(state5)),
+  to_int(privatekeypresent(state1))))) = true) and
+  (match_bool(match_bool(addedok2, match_bool(of_int(1), false,
+  privatekeypresent(state5)), false), match_bool(addedok2,
+  match_bool(of_int(1), bool_eq(to_int(privatekeypresent(state5)),
+  to_int(privatekeypresent(state1))), false),
+  bool_eq(to_int(privatekeypresent(state5)),
+  to_int(privatekeypresent(state1)))), false) = false)) and (((store4 = {
+  us_private__content = store3 }) and ((state7 = { us_private__content =
+  state5 }) and ((filestate3 = { us_private__content = filestate2 }) and
+  ((state6 = { us_private__content = state4 }) and (addedok3 = {
+  bool__content = addedok2 }))))) and ((store5 = store3) and
+  ((state9 = state5) and ((filestate4 = filestate2) and
+  ((state8 = state4) and (addedok4 = addedok2)))))))) or
+  ((not (to_rep2(thesubject__split_fields3) = to_rep2((theissuer__split_fields3).rec__cryptotypes__issuert__id))) and
+  (((store4 = { us_private__content = store1 }) and ((state7 = {
+  us_private__content = state1 }) and ((filestate3 = { us_private__content =
+  filestate }) and ((state6 = { us_private__content = state }) and
+  (addedok3 = { bool__content = addedok1 }))))) and ((store5 = store2) and
+  ((state9 = state3) and ((filestate4 = filestate1) and
+  ((state8 = state2) and (addedok4 = addedok1)))))))) and
+  (((store6 = store4) and ((state11 = state7) and
+  ((filestate5 = filestate3) and ((state10 = state6) and
+  (addedok5 = addedok3))))) and ((store7 = store5) and
+  ((state13 = state9) and ((filestate6 = filestate4) and
+  ((state12 = state8) and (addedok6 = addedok4)))))))) or
+  ((not (extracted = true)) and (((store6 = { us_private__content = store1
+  }) and ((state11 = { us_private__content = state1 }) and ((filestate5 = {
+  us_private__content = filestate }) and ((state10 = { us_private__content =
+  state }) and (addedok5 = { bool__content = addedok1 }))))) and
+  ((store7 = store2) and ((state13 = state3) and
+  ((filestate6 = filestate1) and ((state12 = state2) and
+  (addedok6 = addedok1)))))))) and ((((match_bool(extracted,
+  (addedok5).bool__content, false) = true) and ((o8 = cert_id_to_cert({
+  us_split_fields11 = thecontents__split_fields })) and (((filestate8 = {
+  us_private__content = filestate7 }) and ((state15 = { us_private__content =
+  state14 }) and (verifiedok3 = { bool__content = verifiedok2 }))) and
+  ((filestate9 = filestate7) and ((state16 = state14) and
+  (verifiedok4 = verifiedok2)))))) or ((not (match_bool(extracted,
+  (addedok5).bool__content, false) = true)) and
+  (((filestate8 = filestate5) and ((state15 = state10) and (verifiedok3 = {
+  bool__content = verifiedok1 }))) and ((filestate9 = filestate6) and
+  ((state16 = state12) and (verifiedok4 = verifiedok1)))))) and
+  ((((((verifiedok3).bool__content = true) and
+  (not (to_rep2(thesubject__split_fields3) = to_rep2((theissuer__split_fields3).rec__cryptotypes__issuert__id)))) and
+  (((match_bool(match_bool(addedok7, match_bool(of_int(1), false,
+  privatekeypresent(state18)), false), true, match_bool(addedok7,
+  match_bool(of_int(1), bool_eq(to_int(privatekeypresent(state18)),
+  to_int(privatekeypresent((state11).us_private__content))), false),
+  bool_eq(to_int(privatekeypresent(state18)),
+  to_int(privatekeypresent((state11).us_private__content))))) = true) and
+  (match_bool(match_bool(addedok7, match_bool(of_int(1), false,
+  privatekeypresent(state18)), false), match_bool(addedok7,
+  match_bool(of_int(1), bool_eq(to_int(privatekeypresent(state18)),
+  to_int(privatekeypresent((state11).us_private__content))), false),
+  bool_eq(to_int(privatekeypresent(state18)),
+  to_int(privatekeypresent((state11).us_private__content)))),
+  false) = false)) and (((store9 = { us_private__content = store8 }) and
+  ((state20 = { us_private__content = state18 }) and ((filestate11 = {
+  us_private__content = filestate10 }) and ((state19 = {
+  us_private__content = state17 }) and (addedok8 = { bool__content = addedok7
+  }))))) and ((store10 = store8) and ((state22 = state18) and
+  ((filestate12 = filestate10) and ((state21 = state17) and
+  (addedok9 = addedok7)))))))) or
+  ((not ((((verifiedok3).bool__content = true) ->
+  (not (to_rep2(thesubject__split_fields3) = to_rep2((theissuer__split_fields3).rec__cryptotypes__issuert__id)))) and
+  (not ((verifiedok3).bool__content = false)))) and (((store9 = store6) and
+  ((state20 = state11) and ((filestate11 = filestate8) and
+  ((state19 = state15) and (addedok8 = addedok5))))) and
+  ((store10 = store7) and ((state22 = state13) and
+  ((filestate12 = filestate9) and ((state21 = state16) and
+  (addedok9 = addedok6)))))))) and
+  ((((match_bool(match_bool((verifiedok3).bool__content,
+  (addedok8).bool__content, false), istis, false) = true) and
+  (((match_bool(match_bool(addedok10, match_bool(of_int(0), false,
+  privatekeypresent(state24)), false), true, match_bool(addedok10,
+  match_bool(of_int(0), bool_eq(to_int(privatekeypresent(state24)),
+  to_int(privatekeypresent((state20).us_private__content))), false),
+  bool_eq(to_int(privatekeypresent(state24)),
+  to_int(privatekeypresent((state20).us_private__content))))) = true) and
+  (match_bool(match_bool(addedok10, match_bool(of_int(0), false,
+  privatekeypresent(state24)), false), match_bool(addedok10,
+  match_bool(of_int(0), bool_eq(to_int(privatekeypresent(state24)),
+  to_int(privatekeypresent((state20).us_private__content))), false),
+  bool_eq(to_int(privatekeypresent(state24)),
+  to_int(privatekeypresent((state20).us_private__content)))),
+  false) = false)) and (((store12 = { us_private__content = store11 }) and
+  ((state26 = { us_private__content = state24 }) and ((filestate14 = {
+  us_private__content = filestate13 }) and ((state25 = {
+  us_private__content = state23 }) and (addedok11 = { bool__content =
+  addedok10 }))))) and ((store13 = store11) and ((state28 = state24) and
+  ((filestate15 = filestate13) and ((state27 = state23) and
+  (addedok12 = addedok10)))))))) or
+  ((not (match_bool(match_bool((verifiedok3).bool__content,
+  (addedok8).bool__content, false), istis, false) = true)) and
+  (((store12 = store9) and ((state26 = state20) and
+  ((filestate14 = filestate11) and ((state25 = state19) and
+  (addedok11 = addedok8))))) and ((store13 = store10) and
+  ((state28 = state22) and ((filestate15 = filestate12) and
+  ((state27 = state21) and (addedok12 = addedok9)))))))) and
+  ((((not (extracted = true)) and (((o9 = makedescription({ elts =
+  temp___String_Literal_1085(void); rt = mk(1, 43) }, certno)) and
+  ((result15 = { map__content = description1 }) and (description2 = o9))) and
+  ((description9 = { map__content = description2 }) and
+  (description10 = description2)))) or ((extracted = true) and
+  ((((not ((addedok11).bool__content = true)) and (((o10 = makedescription({
+  elts = temp___String_Literal_1084(void); rt = mk(1, 39) }, certno)) and
+  ((result16 = { map__content = description1 }) and
+  (description3 = o10))) and ((description7 = { map__content = description3
+  }) and (description8 = description3)))) or
+  (((addedok11).bool__content = true) and
+  ((((not ((verifiedok3).bool__content = true)) and
+  (((o11 = makedescription({ elts = temp___String_Literal_1083(void); rt =
+  mk(1, 33) }, certno)) and ((result17 = { map__content = description1 }) and
+  (description4 = o11))) and ((description5 = { map__content = description4
+  }) and (description6 = description4)))) or
+  (((verifiedok3).bool__content = true) and ((description5 = { map__content =
+  description1 }) and (description6 = description1)))) and
+  ((description7 = description5) and (description8 = description6))))) and
+  ((description9 = description7) and (description10 = description8))))) and
+  ((result18 = { bool__content = keyadded }) and
+  (keyadded1 = match_bool((verifiedok3).bool__content,
+  (addedok11).bool__content, false)))))))))))))))))) and
+  (((store14 = store12) and ((state30 = state26) and
+  ((filestate16 = filestate14) and ((state29 = state25) and ((stop8 = {
+  int__content = stop6 }) and ((verifiedok5 = verifiedok3) and
+  ((addedok13 = addedok11) and ((extracted1 = { bool__content = extracted
+  }) and ((thepublickey__split_fields4 = { us_split_fields__content1 =
+  thepublickey__split_fields3 }) and ((theissuer__split_fields4 = {
+  us_split_fields__content = theissuer__split_fields3 }) and
+  ((thesubject__split_fields6 = { us_split_fields__content = {
+  rec__cryptotypes__issuert__id = thesubject__split_fields3;
+  rec__cryptotypes__issuert__namelength = thesubject__split_fields4;
+  rec__cryptotypes__issuert__name = thesubject__split_fields5 } }) and
+  ((thecontents__split_fields1 = { us_split_fields__content5 =
+  thecontents__split_fields }) and ((thecert8 = { map__content = thecert6
+  }) and ((description11 = description9) and ((keyadded2 = { bool__content =
+  keyadded1 }) and (thefile8 = { t__content = thefile6 })))))))))))))))) and
+  ((store15 = store13) and ((state32 = state28) and
+  ((filestate17 = filestate15) and ((state31 = state27) and
+  ((stop9 = stop7) and ((verifiedok6 = verifiedok4) and
+  ((addedok14 = addedok12) and ((extracted2 = extracted) and
+  ((thepublickey__split_fields5 = thepublickey__split_fields3) and
+  ((theissuer__split_fields5 = theissuer__split_fields3) and
+  ((thesubject__split_fields7 = { rec__cryptotypes__issuert__id =
+  thesubject__split_fields3; rec__cryptotypes__issuert__namelength =
+  thesubject__split_fields4; rec__cryptotypes__issuert__name =
+  thesubject__split_fields5 }) and
+  ((thecontents__split_fields2 = thecontents__split_fields) and
+  ((thecert9 = thecert7) and ((description12 = description10) and
+  ((keyadded3 = keyadded1) and (thefile9 = thefile7))))))))))))))))))))) ->
+  (to_int(match_bool(istis, (keyadded2).bool__content,
+  false)) <= to_int(privatekeypresent((state30).us_private__content)))))

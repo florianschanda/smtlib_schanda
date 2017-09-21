@@ -1,0 +1,2942 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom : (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 255)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (8 <= n)) -> (nth(x, n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  8)) -> (nth(ones, n) = true)))
+
+logic bw_and : t, t -> t
+
+axiom Nth_bw_and :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_and(v1, v2), n) = match_bool(nth(v1, n), nth(v2, n), false))))
+
+logic bw_or : t, t -> t
+
+axiom Nth_bw_or :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_or(v1, v2), n) = match_bool(nth(v1, n), true, nth(v2, n)))))
+
+logic bw_xor : t, t -> t
+
+axiom Nth_bw_xor :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  8)) ->
+  (nth(bw_xor(v1, v2), n) = xorb(nth(v1, n), nth(v2, n)))))
+
+logic bw_not : t -> t
+
+axiom Nth_bw_not :
+  (forall v:t. forall n:int. (((0 <= n) and (n <  8)) -> (nth(bw_not(v),
+  n) = match_bool(nth(v, n), false, true))))
+
+logic lsr : t, int -> t
+
+axiom Lsr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  8) -> (nth(lsr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Lsr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((8 <= (n + s)) -> (nth(lsr(b, s), n) = false)))))
+
+axiom lsr_zeros : (forall x:t. (lsr(x, 0) = x))
+
+logic asr : t, int -> t
+
+axiom Asr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> (((n + s) <  8) -> (nth(asr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Asr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  8)) -> ((8 <= (n + s)) -> (nth(asr(b, s), n) = nth(b, (8 - 1)))))))
+
+axiom asr_zeros : (forall x:t. (asr(x, 0) = x))
+
+logic lsl : t, int -> t
+
+axiom Lsl_nth_high :
+  (forall b:t. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  8))) -> (nth(lsl(b, s), n) = nth(b, (n - s)))))
+
+axiom Lsl_nth_low :
+  (forall b:t. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth(lsl(b, s), n) = false)))
+
+axiom lsl_zeros : (forall x:t. (lsl(x, 0) = x))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (-1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic rotate_right : t, int -> t
+
+axiom Nth_rotate_right :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth(rotate_right(v, n), i) = nth(v, ((i + n) % 8))))))
+
+logic rotate_left : t, int -> t
+
+axiom Nth_rotate_left :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  8)) ->
+  ((0 <= n) -> (nth(rotate_left(v, n), i) = nth(v, ((i - n) % 8))))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic is_signed_positive : t -> prop
+
+logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(256 - tqtint(x)))))))
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+predicate uint_in_range(i: int) = ((0 <= i) and (i <= 255))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  256)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  256)) -> (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 8)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 255)
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) + tqtint(v2)) <  256) ->
+  (tqtint(add(v1, v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  256)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic neg : t -> t
+
+axiom to_uint_neg : (forall v:t. (tqtint(neg(v)) = ((-tqtint(v)) % 256)))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) * tqtint(v2)) <  256) ->
+  (tqtint(mul(v1, v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic lsr_bv : t, t -> t
+
+axiom lsr_bv_is_lsr :
+  (forall x:t. forall n:t. (lsr_bv(x, n) = lsr(x, tqtint(n))))
+
+axiom to_uint_lsr :
+  (forall v:t. forall n:t. (tqtint(lsr_bv(v,
+  n)) = (tqtint(v) / pow2(tqtint(n)))))
+
+logic asr_bv : t, t -> t
+
+axiom asr_bv_is_asr :
+  (forall x:t. forall n:t. (asr_bv(x, n) = asr(x, tqtint(n))))
+
+logic lsl_bv : t, t -> t
+
+axiom lsl_bv_is_lsl :
+  (forall x:t. forall n:t. (lsl_bv(x, n) = lsl(x, tqtint(n))))
+
+axiom to_uint_lsl :
+  (forall v:t. forall n:t. (tqtint(lsl_bv(v,
+  n)) = ((tqtint(v) * pow2(tqtint(n))) % 256)))
+
+logic rotate_right_bv : t, t -> t
+
+logic rotate_left_bv : t, t -> t
+
+axiom rotate_left_bv_is_rotate_left :
+  (forall v:t. forall n:t. (rotate_left_bv(v, n) = rotate_left(v,
+  tqtint(n))))
+
+axiom rotate_right_bv_is_rotate_right :
+  (forall v:t. forall n:t. (rotate_right_bv(v, n) = rotate_right(v,
+  tqtint(n))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  256)) -> (nth_bv(x,
+  of_int(i)) = nth(x, i))))
+
+logic eq_sub_bv : t, t, t, t -> prop
+
+predicate eq_sub(a: t, b: t, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth(a, j) = nth(b, j))))
+
+axiom eq_sub_equiv :
+  (forall a:t. forall b:t. forall i:t. forall n:t. (eq_sub(a, b, tqtint(i),
+  tqtint(n)) <-> eq_sub_bv(a, b, i, n)))
+
+axiom Extensionality :
+  (forall x:t. forall y:t [eq_sub(x, y, 0, 8)]. (eq_sub(x, y, 0, 8) ->
+  (x = y)))
+
+type t__ref = { t__content : t
+}
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic bool_ne : t, t -> bool
+
+axiom bool_ne_def :
+  (forall x:t. forall y:t [bool_ne(x, y)]. (((not (x = y)) -> (bool_ne(x,
+  y) = true)) and ((x = y) -> (bool_ne(x, y) = false))))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((ult(x, y) -> (bool_lt(x,
+  y) = true)) and ((not ult(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((ule(x, y) -> (bool_le(x,
+  y) = true)) and ((not ule(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((ugt(x, y) -> (bool_gt(x,
+  y) = true)) and ((not ugt(x, y)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
+  y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
+
+logic power : t, int -> t
+
+axiom Power_01 : (forall x:t. (power(x, 0) = one))
+
+axiom Power_11 : (forall x:t. (power(x, 1) = x))
+
+axiom Power_s1 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
+  power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+  (n - 1))))))
+
+axiom Power_sum1 :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+
+axiom Power_mult :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
+  n) = mul(power(x, n), power(y, n)))))
+
+logic bv_min : t, t -> t
+
+axiom bv_min_def :
+  (forall x:t. forall y:t [bv_min(x, y)]. ((ule(x, y) -> (bv_min(x,
+  y) = x)) and ((not ule(x, y)) -> (bv_min(x, y) = y))))
+
+logic bv_max : t, t -> t
+
+axiom bv_max_def :
+  (forall x:t. forall y:t [bv_max(x, y)]. ((ule(x, y) -> (bv_max(x,
+  y) = y)) and ((not ule(x, y)) -> (bv_max(x, y) = x))))
+
+logic min : int, int -> int
+
+axiom min_def :
+  (forall x:int. forall y:int [min(x, y)]. (((x <= y) -> (min(x, y) = x)) and
+  ((not (x <= y)) -> (min(x, y) = y))))
+
+logic max : int, int -> int
+
+axiom max_def :
+  (forall x:int. forall y:int [max(x, y)]. (((x <= y) -> (max(x, y) = y)) and
+  ((not (x <= y)) -> (max(x, y) = x))))
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+axiom bv_min_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_min(x, y)) = min(tqtint(x),
+  tqtint(y))))
+
+axiom bv_max_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_max(x, y)) = max(tqtint(x),
+  tqtint(y))))
+
+type t1
+
+logic tqtint1 : t1 -> int
+
+axiom tqtaxiom1 :
+  (forall i:t1. ((0 <= tqtint1(i)) and (tqtint1(i) <= 65535)))
+
+logic nth1 : t1, int -> bool
+
+axiom nth_out_of_bound1 :
+  (forall x:t1. forall n:int. (((n <  0) or (16 <= n)) -> (nth1(x,
+  n) = false)))
+
+logic zeros1 : t1
+
+axiom Nth_zeros1 : (forall n:int. (nth1(zeros1, n) = false))
+
+logic one1 : t1
+
+logic ones1 : t1
+
+axiom Nth_ones1 :
+  (forall n:int. (((0 <= n) and (n <  16)) -> (nth1(ones1, n) = true)))
+
+logic bw_and1 : t1, t1 -> t1
+
+axiom Nth_bw_and1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_and1(v1, v2), n) = match_bool(nth1(v1, n), nth1(v2, n), false))))
+
+logic bw_or1 : t1, t1 -> t1
+
+axiom Nth_bw_or1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_or1(v1, v2), n) = match_bool(nth1(v1, n), true, nth1(v2, n)))))
+
+logic bw_xor1 : t1, t1 -> t1
+
+axiom Nth_bw_xor1 :
+  (forall v1:t1. forall v2:t1. forall n:int. (((0 <= n) and (n <  16)) ->
+  (nth1(bw_xor1(v1, v2), n) = xorb(nth1(v1, n), nth1(v2, n)))))
+
+logic bw_not1 : t1 -> t1
+
+axiom Nth_bw_not1 :
+  (forall v:t1. forall n:int. (((0 <= n) and (n <  16)) -> (nth1(bw_not1(v),
+  n) = match_bool(nth1(v, n), false, true))))
+
+logic lsr1 : t1, int -> t1
+
+axiom Lsr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  16) -> (nth1(lsr1(b, s), n) = nth1(b, (n + s)))))))
+
+axiom Lsr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((16 <= (n + s)) -> (nth1(lsr1(b, s), n) = false)))))
+
+axiom lsr_zeros1 : (forall x:t1. (lsr1(x, 0) = x))
+
+logic asr1 : t1, int -> t1
+
+axiom Asr_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> (((n + s) <  16) -> (nth1(asr1(b, s), n) = nth1(b,
+  (n + s)))))))
+
+axiom Asr_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  16)) -> ((16 <= (n + s)) -> (nth1(asr1(b, s), n) = nth1(b,
+  (16 - 1)))))))
+
+axiom asr_zeros1 : (forall x:t1. (asr1(x, 0) = x))
+
+logic lsl1 : t1, int -> t1
+
+axiom Lsl_nth_high1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  16))) -> (nth1(lsl1(b, s), n) = nth1(b, (n - s)))))
+
+axiom Lsl_nth_low1 :
+  (forall b:t1. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth1(lsl1(b, s), n) = false)))
+
+axiom lsl_zeros1 : (forall x:t1. (lsl1(x, 0) = x))
+
+logic rotate_right1 : t1, int -> t1
+
+axiom Nth_rotate_right1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth1(rotate_right1(v, n), i) = nth1(v, ((i + n) % 16))))))
+
+logic rotate_left1 : t1, int -> t1
+
+axiom Nth_rotate_left1 :
+  (forall v:t1. forall n:int. forall i:int. (((0 <= i) and (i <  16)) ->
+  ((0 <= n) -> (nth1(rotate_left1(v, n), i) = nth1(v, ((i - n) % 16))))))
+
+logic is_signed_positive1 : t1 -> prop
+
+logic of_int1 : int -> t1
+
+logic to_int1 : t1 -> int
+
+axiom to_int_def1 :
+  (forall x:t1 [to_int1(x)]. ((is_signed_positive1(x) ->
+  (to_int1(x) = tqtint1(x))) and ((not is_signed_positive1(x)) ->
+  (to_int1(x) = (-(65536 - tqtint1(x)))))))
+
+axiom to_uint_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((to_int1(v) = to_int1(vqt)) -> (v = vqt)))
+
+predicate uint_in_range1(i: int) = ((0 <= i) and (i <= 65535))
+
+axiom to_uint_bounds1 :
+  (forall v:t1. ((0 <= tqtint1(v)) and (tqtint1(v) <  65536)))
+
+axiom to_uint_of_int1 :
+  (forall i:int. (((0 <= i) and (i <  65536)) -> (tqtint1(of_int1(i)) = i)))
+
+logic size_bv1 : t1
+
+axiom to_uint_size_bv1 : (tqtint1(size_bv1) = 16)
+
+axiom to_uint_zeros1 : (tqtint1(zeros1) = 0)
+
+axiom to_uint_one1 : (tqtint1(one1) = 1)
+
+axiom to_uint_ones1 : (tqtint1(ones1) = 65535)
+
+predicate ult1(x: t1, y: t1) = (tqtint1(x) <  tqtint1(y))
+
+predicate ule1(x: t1, y: t1) = (tqtint1(x) <= tqtint1(y))
+
+predicate ugt1(x: t1, y: t1) = (tqtint1(y) <  tqtint1(x))
+
+predicate uge1(x: t1, y: t1) = (tqtint1(y) <= tqtint1(x))
+
+predicate slt1(v1: t1, v2: t1) = (to_int1(v1) <  to_int1(v2))
+
+predicate sle1(v1: t1, v2: t1) = (to_int1(v1) <= to_int1(v2))
+
+predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
+
+predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t1. (is_signed_positive1(x) <-> sge1(x, zeros1)))
+
+logic add1 : t1, t1 -> t1
+
+axiom to_uint_add_bounded1 :
+  (forall v1:t1. forall v2:t1. (((tqtint1(v1) + tqtint1(v2)) <  65536) ->
+  (tqtint1(add1(v1, v2)) = (tqtint1(v1) + tqtint1(v2)))))
+
+logic sub1 : t1, t1 -> t1
+
+axiom to_uint_sub_bounded1 :
+  (forall v1:t1. forall v2:t1. (((0 <= (tqtint1(v1) - tqtint1(v2))) and
+  ((tqtint1(v1) - tqtint1(v2)) <  65536)) -> (tqtint1(sub1(v1,
+  v2)) = (tqtint1(v1) - tqtint1(v2)))))
+
+logic neg1 : t1 -> t1
+
+axiom to_uint_neg1 :
+  (forall v:t1. (tqtint1(neg1(v)) = ((-tqtint1(v)) % 65536)))
+
+logic mul1 : t1, t1 -> t1
+
+axiom to_uint_mul_bounded1 :
+  (forall v1:t1. forall v2:t1. (((tqtint1(v1) * tqtint1(v2)) <  65536) ->
+  (tqtint1(mul1(v1, v2)) = (tqtint1(v1) * tqtint1(v2)))))
+
+logic udiv1 : t1, t1 -> t1
+
+axiom to_uint_udiv1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(udiv1(v1,
+  v2)) = (tqtint1(v1) / tqtint1(v2))))
+
+logic urem1 : t1, t1 -> t1
+
+axiom to_uint_urem1 :
+  (forall v1:t1. forall v2:t1. (tqtint1(urem1(v1,
+  v2)) = (tqtint1(v1) % tqtint1(v2))))
+
+logic lsr_bv1 : t1, t1 -> t1
+
+axiom lsr_bv_is_lsr1 :
+  (forall x:t1. forall n:t1. (lsr_bv1(x, n) = lsr1(x, tqtint1(n))))
+
+axiom to_uint_lsr1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsr_bv1(v,
+  n)) = (tqtint1(v) / pow2(tqtint1(n)))))
+
+logic asr_bv1 : t1, t1 -> t1
+
+axiom asr_bv_is_asr1 :
+  (forall x:t1. forall n:t1. (asr_bv1(x, n) = asr1(x, tqtint1(n))))
+
+logic lsl_bv1 : t1, t1 -> t1
+
+axiom lsl_bv_is_lsl1 :
+  (forall x:t1. forall n:t1. (lsl_bv1(x, n) = lsl1(x, tqtint1(n))))
+
+axiom to_uint_lsl1 :
+  (forall v:t1. forall n:t1. (tqtint1(lsl_bv1(v,
+  n)) = ((tqtint1(v) * pow2(tqtint1(n))) % 65536)))
+
+logic rotate_right_bv1 : t1, t1 -> t1
+
+logic rotate_left_bv1 : t1, t1 -> t1
+
+axiom rotate_left_bv_is_rotate_left1 :
+  (forall v:t1. forall n:t1. (rotate_left_bv1(v, n) = rotate_left1(v,
+  tqtint1(n))))
+
+axiom rotate_right_bv_is_rotate_right1 :
+  (forall v:t1. forall n:t1. (rotate_right_bv1(v, n) = rotate_right1(v,
+  tqtint1(n))))
+
+logic nth_bv1 : t1, t1 -> bool
+
+axiom Nth_bv_is_nth1 :
+  (forall x:t1. forall i:t1. (nth1(x, tqtint1(i)) = nth_bv1(x, i)))
+
+axiom Nth_bv_is_nth21 :
+  (forall x:t1. forall i:int. (((0 <= i) and (i <  65536)) -> (nth_bv1(x,
+  of_int1(i)) = nth1(x, i))))
+
+logic eq_sub_bv1 : t1, t1, t1, t1 -> prop
+
+predicate eq_sub1(a: t1, b: t1, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth1(a, j) = nth1(b,
+  j))))
+
+axiom eq_sub_equiv1 :
+  (forall a:t1. forall b:t1. forall i:t1. forall n:t1. (eq_sub1(a, b,
+  tqtint1(i), tqtint1(n)) <-> eq_sub_bv1(a, b, i, n)))
+
+axiom Extensionality1 :
+  (forall x:t1. forall y:t1 [eq_sub1(x, y, 0, 16)]. (eq_sub1(x, y, 0, 16) ->
+  (x = y)))
+
+type t__ref1 = { t__content1 : t1
+}
+
+logic bool_eq1 : t1, t1 -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t1. forall y:t1 [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic bool_ne1 : t1, t1 -> bool
+
+axiom bool_ne_def1 :
+  (forall x:t1. forall y:t1 [bool_ne1(x, y)]. (((not (x = y)) -> (bool_ne1(x,
+  y) = true)) and ((x = y) -> (bool_ne1(x, y) = false))))
+
+logic bool_lt1 : t1, t1 -> bool
+
+axiom bool_lt_def1 :
+  (forall x:t1. forall y:t1 [bool_lt1(x, y)]. ((ult1(x, y) -> (bool_lt1(x,
+  y) = true)) and ((not ult1(x, y)) -> (bool_lt1(x, y) = false))))
+
+logic bool_le1 : t1, t1 -> bool
+
+axiom bool_le_def1 :
+  (forall x:t1. forall y:t1 [bool_le1(x, y)]. ((ule1(x, y) -> (bool_le1(x,
+  y) = true)) and ((not ule1(x, y)) -> (bool_le1(x, y) = false))))
+
+logic bool_gt1 : t1, t1 -> bool
+
+axiom bool_gt_def1 :
+  (forall x:t1. forall y:t1 [bool_gt1(x, y)]. ((ugt1(x, y) -> (bool_gt1(x,
+  y) = true)) and ((not ugt1(x, y)) -> (bool_gt1(x, y) = false))))
+
+logic bool_ge1 : t1, t1 -> bool
+
+axiom bool_ge_def1 :
+  (forall x:t1. forall y:t1 [bool_ge1(x, y)]. ((uge1(x, y) -> (bool_ge1(x,
+  y) = true)) and ((not uge1(x, y)) -> (bool_ge1(x, y) = false))))
+
+logic power1 : t1, int -> t1
+
+axiom Power_02 : (forall x:t1. (power1(x, 0) = one1))
+
+axiom Power_12 : (forall x:t1. (power1(x, 1) = x))
+
+axiom Power_s2 :
+  (forall x:t1. forall n:int. ((0 <= n) -> (power1(x, (n + 1)) = mul1(x,
+  power1(x, n)))))
+
+axiom Power_s_alt1 :
+  (forall x:t1. forall n:int. ((0 <  n) -> (power1(x, n) = mul1(x, power1(x,
+  (n - 1))))))
+
+axiom Power_sum2 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n + m)) = mul1(power1(x, n), power1(x, m))))))
+
+axiom Power_mult1 :
+  (forall x:t1. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power1(x, (n * m)) = power1(power1(x, n), m)))))
+
+axiom Power_mult21 :
+  (forall x:t1. forall y:t1. forall n:int. ((0 <= n) -> (power1(mul1(x, y),
+  n) = mul1(power1(x, n), power1(y, n)))))
+
+logic bv_min1 : t1, t1 -> t1
+
+axiom bv_min_def1 :
+  (forall x:t1. forall y:t1 [bv_min1(x, y)]. ((ule1(x, y) -> (bv_min1(x,
+  y) = x)) and ((not ule1(x, y)) -> (bv_min1(x, y) = y))))
+
+logic bv_max1 : t1, t1 -> t1
+
+axiom bv_max_def1 :
+  (forall x:t1. forall y:t1 [bv_max1(x, y)]. ((ule1(x, y) -> (bv_max1(x,
+  y) = y)) and ((not ule1(x, y)) -> (bv_max1(x, y) = x))))
+
+axiom bv_min_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_min1(x, y)) = min(tqtint1(x),
+  tqtint1(y))))
+
+axiom bv_max_to_uint1 :
+  (forall x:t1. forall y:t1. (tqtint1(bv_max1(x, y)) = max(tqtint1(x),
+  tqtint1(y))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic to_int2 : bool -> int
+
+axiom to_int_def2 :
+  (forall b:bool [to_int2(b)]. (((b = true) -> (to_int2(b) = 1)) and
+  ((not (b = true)) -> (to_int2(b) = 0))))
+
+logic of_int2 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
+  ((not (i = 0)) -> (of_int2(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type bits_1
+
+predicate in_range1(x: t) = (ule(of_int(0), x) and ule(x, of_int(1)))
+
+predicate in_range_int(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq3 : int, int -> bool
+
+logic bool_ne2 : int, int -> bool
+
+logic bool_lt2 : int, int -> bool
+
+logic bool_le2 : int, int -> bool
+
+logic bool_gt2 : int, int -> bool
+
+logic bool_ge2 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne2(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt2(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le2(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt2(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic user_eq : bits_1, bits_1 -> bool
+
+logic dummy : bits_1
+
+type bits_1__ref = { bits_1__content : bits_1
+}
+
+function bits_1__ref___projection(a: bits_1__ref) : bits_1 =
+  (a).bits_1__content
+
+logic to_rep : bits_1 -> t
+
+logic of_rep : t -> bits_1
+
+axiom inversion_axiom :
+  (forall x:bits_1 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:bits_1 [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (in_range1(urem(x, of_int(2))) ->
+  (to_rep(of_rep(x)) = urem(x, of_int(2)))))
+
+function to_int3(x: bits_1) : int = tqtint(to_rep(x))
+
+axiom range_int_axiom :
+  (forall x:bits_1 [to_int3(x)]. in_range_int(to_int3(x)))
+
+type bits_2
+
+predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(3)))
+
+predicate in_range_int1(x: int) = ((0 <= x) and (x <= 3))
+
+logic bool_eq5 : t, t -> bool
+
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic user_eq1 : bits_2, bits_2 -> bool
+
+logic dummy1 : bits_2
+
+type bits_2__ref = { bits_2__content : bits_2
+}
+
+function bits_2__ref___projection(a: bits_2__ref) : bits_2 =
+  (a).bits_2__content
+
+logic to_rep1 : bits_2 -> t
+
+logic of_rep1 : t -> bits_2
+
+axiom inversion_axiom1 :
+  (forall x:bits_2 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:bits_2 [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range2(urem(x, of_int(4))) ->
+  (to_rep1(of_rep1(x)) = urem(x, of_int(4)))))
+
+function to_int4(x: bits_2) : int = tqtint(to_rep1(x))
+
+axiom range_int_axiom1 :
+  (forall x:bits_2 [to_int4(x)]. in_range_int1(to_int4(x)))
+
+type bits_7
+
+predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(127)))
+
+predicate in_range_int2(x: int) = ((0 <= x) and (x <= 127))
+
+logic bool_eq6 : t, t -> bool
+
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic user_eq2 : bits_7, bits_7 -> bool
+
+logic dummy2 : bits_7
+
+type bits_7__ref = { bits_7__content : bits_7
+}
+
+function bits_7__ref___projection(a: bits_7__ref) : bits_7 =
+  (a).bits_7__content
+
+logic to_rep2 : bits_7 -> t
+
+logic of_rep2 : t -> bits_7
+
+axiom inversion_axiom2 :
+  (forall x:bits_7 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:bits_7 [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:t [to_rep2(of_rep2(x))]. (in_range3(urem(x, of_int(128))) ->
+  (to_rep2(of_rep2(x)) = urem(x, of_int(128)))))
+
+function to_int5(x: bits_7) : int = tqtint(to_rep2(x))
+
+axiom range_int_axiom2 :
+  (forall x:bits_7 [to_int5(x)]. in_range_int2(to_int5(x)))
+
+type bits_14
+
+predicate in_range4(x: t1) = (ule1(of_int1(0), x) and ule1(x,
+  of_int1(16383)))
+
+predicate in_range_int3(x: int) = ((0 <= x) and (x <= 16383))
+
+logic bool_eq7 : t1, t1 -> bool
+
+axiom bool_eq_def6 :
+  (forall x:t1. forall y:t1 [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t1
+
+logic user_eq3 : bits_14, bits_14 -> bool
+
+logic dummy3 : bits_14
+
+type bits_14__ref = { bits_14__content : bits_14
+}
+
+function bits_14__ref___projection(a: bits_14__ref) : bits_14 =
+  (a).bits_14__content
+
+logic to_rep3 : bits_14 -> t1
+
+logic of_rep3 : t1 -> bits_14
+
+axiom inversion_axiom3 :
+  (forall x:bits_14 [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:bits_14 [to_rep3(x)]. in_range4(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:t1 [to_rep3(of_rep3(x))]. (in_range4(urem1(x, of_int1(16384))) ->
+  (to_rep3(of_rep3(x)) = urem1(x, of_int1(16384)))))
+
+function to_int6(x: bits_14) : int = tqtint1(to_rep3(x))
+
+axiom range_int_axiom3 :
+  (forall x:bits_14 [to_int6(x)]. in_range_int3(to_int6(x)))
+
+type us_split_fields = { rec__dw1000__register_types__sys_ctrl_type__sfcst :
+bits_1; rec__dw1000__register_types__sys_ctrl_type__txstrt : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__txdlys : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__cansfcs : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__trxoff : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__wait4resp : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__rxenab : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__rxdlye : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__hrbpt : bits_1;
+rec__dw1000__register_types__sys_ctrl_type__reserved_1 : bits_2;
+rec__dw1000__register_types__sys_ctrl_type__reserved_2 : bits_14;
+rec__dw1000__register_types__sys_ctrl_type__reserved_3 : bits_7
+}
+
+function us_split_fields_SFCST__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__sfcst
+
+function us_split_fields_TXSTRT__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__txstrt
+
+function us_split_fields_TXDLYS__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__txdlys
+
+function us_split_fields_CANSFCS__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__cansfcs
+
+function us_split_fields_TRXOFF__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__trxoff
+
+function us_split_fields_WAIT4RESP__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__wait4resp
+
+function us_split_fields_RXENAB__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__rxenab
+
+function us_split_fields_RXDLYE__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__rxdlye
+
+function us_split_fields_HRBPT__projection(a: us_split_fields) : bits_1 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__hrbpt
+
+function us_split_fields_Reserved_1__2__projection(a: us_split_fields) : bits_2 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__reserved_1
+
+function us_split_fields_Reserved_2__2__projection(a: us_split_fields) : bits_14 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__reserved_2
+
+function us_split_fields_Reserved_3__projection(a: us_split_fields) : bits_7 =
+  (a).rec__dw1000__register_types__sys_ctrl_type__reserved_3
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___10__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___10__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq8 : us_rep, us_rep -> bool
+
+axiom bool_eq_def7 :
+  (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
+  ((((((((((((((to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__sfcst) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__sfcst)) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txstrt) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txstrt))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txdlys) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txdlys))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__cansfcs) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__cansfcs))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__trxoff) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__trxoff))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__wait4resp) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__wait4resp))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxenab) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxenab))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxdlye) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxdlye))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__hrbpt) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__hrbpt))) and
+  (to_rep1(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_1) = to_rep1(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_1))) and
+  (to_rep3(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_2) = to_rep3(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_2))) and
+  (to_rep2(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_3) = to_rep2(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_3))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((((((((((((to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__sfcst) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__sfcst)) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txstrt) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txstrt))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txdlys) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__txdlys))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__cansfcs) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__cansfcs))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__trxoff) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__trxoff))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__wait4resp) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__wait4resp))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxenab) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxenab))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxdlye) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__rxdlye))) and
+  (to_rep(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__hrbpt) = to_rep(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__hrbpt))) and
+  (to_rep1(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_1) = to_rep1(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_1))) and
+  (to_rep3(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_2) = to_rep3(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_2))) and
+  (to_rep2(((a).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_3) = to_rep2(((b).us_split_fields1).rec__dw1000__register_types__sys_ctrl_type__reserved_3)))) ->
+  (bool_eq8(a, b) = false))))
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:bits_1. forall a1:bits_1. forall a2:bits_1. forall a3:bits_1.
+  forall a4:bits_1. forall a5:bits_1. forall a6:bits_1. forall a7:bits_1.
+  forall a8:bits_1. forall a9:bits_2. forall a10:bits_14. forall a11:bits_7.
+  (0 <= object__size({ us_split_fields1 = {
+  rec__dw1000__register_types__sys_ctrl_type__sfcst = a;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt = a1;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys = a2;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs = a3;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff = a4;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp = a5;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab = a6;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye = a7;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt = a8;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 = a9;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 = a10;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 = a11 } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:bits_1. forall a1:bits_1. forall a2:bits_1. forall a3:bits_1.
+  forall a4:bits_1. forall a5:bits_1. forall a6:bits_1. forall a7:bits_1.
+  forall a8:bits_1. forall a9:bits_2. forall a10:bits_14. forall a11:bits_7.
+  (0 <= object__alignment({ us_split_fields1 = {
+  rec__dw1000__register_types__sys_ctrl_type__sfcst = a;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt = a1;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys = a2;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs = a3;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff = a4;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp = a5;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab = a6;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye = a7;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt = a8;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 = a9;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 = a10;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 = a11 } })))
+
+logic dw1000__register_types__sys_ctrl_type__sfcst__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__sfcst__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__sfcst__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__sfcst__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__sfcst__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__sfcst__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__sfcst__first__bit <  dw1000__register_types__sys_ctrl_type__sfcst__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__sfcst__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__sfcst__position)
+
+logic dw1000__register_types__sys_ctrl_type__txstrt__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__txstrt__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__txstrt__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__txstrt__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__txstrt__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__txstrt__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__txstrt__first__bit <  dw1000__register_types__sys_ctrl_type__txstrt__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__txstrt__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__txstrt__position)
+
+logic dw1000__register_types__sys_ctrl_type__txdlys__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__txdlys__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__txdlys__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__txdlys__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__txdlys__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__txdlys__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__txdlys__first__bit <  dw1000__register_types__sys_ctrl_type__txdlys__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__txdlys__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__txdlys__position)
+
+logic dw1000__register_types__sys_ctrl_type__cansfcs__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__cansfcs__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__cansfcs__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__cansfcs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__cansfcs__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__cansfcs__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__cansfcs__first__bit <  dw1000__register_types__sys_ctrl_type__cansfcs__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__cansfcs__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__cansfcs__position)
+
+logic dw1000__register_types__sys_ctrl_type__trxoff__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__trxoff__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__trxoff__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__trxoff__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__trxoff__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__trxoff__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__trxoff__first__bit <  dw1000__register_types__sys_ctrl_type__trxoff__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__trxoff__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__trxoff__position)
+
+logic dw1000__register_types__sys_ctrl_type__wait4resp__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__wait4resp__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__wait4resp__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__wait4resp__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__wait4resp__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__wait4resp__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__wait4resp__first__bit <  dw1000__register_types__sys_ctrl_type__wait4resp__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__wait4resp__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__wait4resp__position)
+
+logic dw1000__register_types__sys_ctrl_type__rxenab__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__rxenab__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__rxenab__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__rxenab__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__rxenab__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__rxenab__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__rxenab__first__bit <  dw1000__register_types__sys_ctrl_type__rxenab__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__rxenab__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__rxenab__position)
+
+logic dw1000__register_types__sys_ctrl_type__rxdlye__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__rxdlye__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__rxdlye__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__rxdlye__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__rxdlye__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__rxdlye__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__rxdlye__first__bit <  dw1000__register_types__sys_ctrl_type__rxdlye__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__rxdlye__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__rxdlye__position)
+
+logic dw1000__register_types__sys_ctrl_type__hrbpt__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__hrbpt__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__hrbpt__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__hrbpt__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__hrbpt__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__hrbpt__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__hrbpt__first__bit <  dw1000__register_types__sys_ctrl_type__hrbpt__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__hrbpt__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__hrbpt__position)
+
+logic dw1000__register_types__sys_ctrl_type__reserved_1__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_1__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_1__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_1__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_1__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_1__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__reserved_1__first__bit <  dw1000__register_types__sys_ctrl_type__reserved_1__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_1__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_1__position)
+
+logic dw1000__register_types__sys_ctrl_type__reserved_2__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_2__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_2__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_2__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_2__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_2__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__reserved_2__first__bit <  dw1000__register_types__sys_ctrl_type__reserved_2__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_2__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_2__position)
+
+logic dw1000__register_types__sys_ctrl_type__reserved_3__first__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_3__last__bit : int
+
+logic dw1000__register_types__sys_ctrl_type__reserved_3__position : int
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_3__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_3__first__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_3__last__bit_axiom :
+  (dw1000__register_types__sys_ctrl_type__reserved_3__first__bit <  dw1000__register_types__sys_ctrl_type__reserved_3__last__bit)
+
+axiom dw1000__register_types__sys_ctrl_type__reserved_3__position_axiom :
+  (0 <= dw1000__register_types__sys_ctrl_type__reserved_3__position)
+
+logic user_eq4 : us_rep, us_rep -> bool
+
+logic dummy4 : bits_1
+
+logic dummy5 : bits_1
+
+logic dummy6 : bits_1
+
+logic dummy7 : bits_1
+
+logic dummy8 : bits_1
+
+logic dummy9 : bits_1
+
+logic dummy10 : bits_1
+
+logic dummy11 : bits_1
+
+logic dummy12 : bits_1
+
+logic dummy13 : bits_2
+
+logic dummy14 : bits_14
+
+logic dummy15 : bits_7
+
+type sys_ctrl_type__ref = { sys_ctrl_type__content : us_rep
+}
+
+function sys_ctrl_type__ref___projection(a: sys_ctrl_type__ref) : us_rep =
+  (a).sys_ctrl_type__content
+
+type bits_5
+
+predicate in_range5(x: t) = (ule(of_int(0), x) and ule(x, of_int(31)))
+
+predicate in_range_int4(x: int) = ((0 <= x) and (x <= 31))
+
+logic bool_eq9 : t, t -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t. forall y:t [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t
+
+logic user_eq5 : bits_5, bits_5 -> bool
+
+logic dummy16 : bits_5
+
+type bits_5__ref = { bits_5__content : bits_5
+}
+
+function bits_5__ref___projection(a: bits_5__ref) : bits_5 =
+  (a).bits_5__content
+
+logic to_rep4 : bits_5 -> t
+
+logic of_rep4 : t -> bits_5
+
+axiom inversion_axiom4 :
+  (forall x:bits_5 [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : (forall x:bits_5 [to_rep4(x)]. in_range5(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:t [to_rep4(of_rep4(x))]. (in_range5(urem(x, of_int(32))) ->
+  (to_rep4(of_rep4(x)) = urem(x, of_int(32)))))
+
+function to_int7(x: bits_5) : int = tqtint(to_rep4(x))
+
+axiom range_int_axiom4 :
+  (forall x:bits_5 [to_int7(x)]. in_range_int4(to_int7(x)))
+
+type us_split_fields2 = { rec__dw1000__register_types__sys_status_type__irqs
+: bits_1; rec__dw1000__register_types__sys_status_type__cplock : bits_1;
+rec__dw1000__register_types__sys_status_type__esyncr : bits_1;
+rec__dw1000__register_types__sys_status_type__aat : bits_1;
+rec__dw1000__register_types__sys_status_type__txfrb : bits_1;
+rec__dw1000__register_types__sys_status_type__txprs : bits_1;
+rec__dw1000__register_types__sys_status_type__txphs : bits_1;
+rec__dw1000__register_types__sys_status_type__txfrs : bits_1;
+rec__dw1000__register_types__sys_status_type__rxprd : bits_1;
+rec__dw1000__register_types__sys_status_type__rxsfdd : bits_1;
+rec__dw1000__register_types__sys_status_type__ldedone : bits_1;
+rec__dw1000__register_types__sys_status_type__rxphd : bits_1;
+rec__dw1000__register_types__sys_status_type__rxphe : bits_1;
+rec__dw1000__register_types__sys_status_type__rxdfr : bits_1;
+rec__dw1000__register_types__sys_status_type__rxfcg : bits_1;
+rec__dw1000__register_types__sys_status_type__rxfce : bits_1;
+rec__dw1000__register_types__sys_status_type__rxrfsl : bits_1;
+rec__dw1000__register_types__sys_status_type__rxrfto : bits_1;
+rec__dw1000__register_types__sys_status_type__ldeerr : bits_1;
+rec__dw1000__register_types__sys_status_type__rxovrr : bits_1;
+rec__dw1000__register_types__sys_status_type__rxpto : bits_1;
+rec__dw1000__register_types__sys_status_type__gpioirq : bits_1;
+rec__dw1000__register_types__sys_status_type__slp2init : bits_1;
+rec__dw1000__register_types__sys_status_type__rfpll_ll : bits_1;
+rec__dw1000__register_types__sys_status_type__clkpll_ll : bits_1;
+rec__dw1000__register_types__sys_status_type__rxsfdto : bits_1;
+rec__dw1000__register_types__sys_status_type__hpdwarn : bits_1;
+rec__dw1000__register_types__sys_status_type__txberr : bits_1;
+rec__dw1000__register_types__sys_status_type__affrej : bits_1;
+rec__dw1000__register_types__sys_status_type__hsrbp : bits_1;
+rec__dw1000__register_types__sys_status_type__icrbp : bits_1;
+rec__dw1000__register_types__sys_status_type__rxrscs : bits_1;
+rec__dw1000__register_types__sys_status_type__rxprej : bits_1;
+rec__dw1000__register_types__sys_status_type__txpute : bits_1;
+rec__dw1000__register_types__sys_status_type__reserved_1 : bits_1;
+rec__dw1000__register_types__sys_status_type__reserved_2 : bits_5
+}
+
+function us_split_fields_IRQS__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__irqs
+
+function us_split_fields_CPLOCK__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__cplock
+
+function us_split_fields_ESYNCR__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__esyncr
+
+function us_split_fields_AAT__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__aat
+
+function us_split_fields_TXFRB__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txfrb
+
+function us_split_fields_TXPRS__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txprs
+
+function us_split_fields_TXPHS__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txphs
+
+function us_split_fields_TXFRS__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txfrs
+
+function us_split_fields_RXPRD__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxprd
+
+function us_split_fields_RXSFDD__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxsfdd
+
+function us_split_fields_LDEDONE__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__ldedone
+
+function us_split_fields_RXPHD__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxphd
+
+function us_split_fields_RXPHE__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxphe
+
+function us_split_fields_RXDFR__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxdfr
+
+function us_split_fields_RXFCG__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxfcg
+
+function us_split_fields_RXFCE__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxfce
+
+function us_split_fields_RXRFSL__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxrfsl
+
+function us_split_fields_RXRFTO__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxrfto
+
+function us_split_fields_LDEERR__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__ldeerr
+
+function us_split_fields_RXOVRR__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxovrr
+
+function us_split_fields_RXPTO__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxpto
+
+function us_split_fields_GPIOIRQ__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__gpioirq
+
+function us_split_fields_SLP2INIT__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__slp2init
+
+function us_split_fields_RFPLL_LL__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rfpll_ll
+
+function us_split_fields_CLKPLL_LL__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__clkpll_ll
+
+function us_split_fields_RXSFDTO__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxsfdto
+
+function us_split_fields_HPDWARN__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__hpdwarn
+
+function us_split_fields_TXBERR__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txberr
+
+function us_split_fields_AFFREJ__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__affrej
+
+function us_split_fields_HSRBP__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__hsrbp
+
+function us_split_fields_ICRBP__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__icrbp
+
+function us_split_fields_RXRSCS__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxrscs
+
+function us_split_fields_RXPREJ__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__rxprej
+
+function us_split_fields_TXPUTE__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__txpute
+
+function us_split_fields_Reserved_1__4__projection(a: us_split_fields2) : bits_1 =
+  (a).rec__dw1000__register_types__sys_status_type__reserved_1
+
+function us_split_fields_Reserved_2__4__projection(a: us_split_fields2) : bits_5 =
+  (a).rec__dw1000__register_types__sys_status_type__reserved_2
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___12__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___12__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq10 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def9 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq10(a, b)].
+  ((((((((((((((((((((((((((((((((((((((to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__irqs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__irqs)) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__cplock) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__cplock))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__esyncr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__esyncr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__aat) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__aat))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrb) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrb))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txprs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txprs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txphs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txphs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldedone) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldedone))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphe) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphe))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxdfr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxdfr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfcg) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfcg))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfce) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfce))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfsl) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfsl))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldeerr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldeerr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxovrr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxovrr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxpto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxpto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__gpioirq) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__gpioirq))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__slp2init) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__slp2init))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rfpll_ll) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rfpll_ll))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__clkpll_ll) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__clkpll_ll))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__hpdwarn) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__hpdwarn))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txberr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txberr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__affrej) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__affrej))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__hsrbp) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__hsrbp))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__icrbp) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__icrbp))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrscs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrscs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprej) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprej))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txpute) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txpute))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_1) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_1))) and
+  (to_rep4(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_2) = to_rep4(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_2))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((((((((((((((((((((((((((((((((((((to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__irqs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__irqs)) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__cplock) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__cplock))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__esyncr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__esyncr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__aat) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__aat))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrb) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrb))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txprs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txprs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txphs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txphs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txfrs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldedone) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldedone))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphd) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphd))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphe) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxphe))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxdfr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxdfr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfcg) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfcg))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfce) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxfce))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfsl) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfsl))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrfto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldeerr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__ldeerr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxovrr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxovrr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxpto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxpto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__gpioirq) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__gpioirq))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__slp2init) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__slp2init))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rfpll_ll) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rfpll_ll))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__clkpll_ll) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__clkpll_ll))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdto) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxsfdto))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__hpdwarn) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__hpdwarn))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txberr) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txberr))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__affrej) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__affrej))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__hsrbp) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__hsrbp))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__icrbp) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__icrbp))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrscs) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxrscs))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprej) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__rxprej))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__txpute) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__txpute))) and
+  (to_rep(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_1) = to_rep(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_1))) and
+  (to_rep4(((a).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_2) = to_rep4(((b).us_split_fields3).rec__dw1000__register_types__sys_status_type__reserved_2)))) ->
+  (bool_eq10(a, b) = false))))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (forall a:us_rep1. (0 <= object__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:us_rep1. (0 <= object__alignment1(a)))
+
+logic dw1000__register_types__sys_status_type__irqs__first__bit : int
+
+logic dw1000__register_types__sys_status_type__irqs__last__bit : int
+
+logic dw1000__register_types__sys_status_type__irqs__position : int
+
+axiom dw1000__register_types__sys_status_type__irqs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__irqs__first__bit)
+
+axiom dw1000__register_types__sys_status_type__irqs__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__irqs__first__bit <  dw1000__register_types__sys_status_type__irqs__last__bit)
+
+axiom dw1000__register_types__sys_status_type__irqs__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__irqs__position)
+
+logic dw1000__register_types__sys_status_type__cplock__first__bit : int
+
+logic dw1000__register_types__sys_status_type__cplock__last__bit : int
+
+logic dw1000__register_types__sys_status_type__cplock__position : int
+
+axiom dw1000__register_types__sys_status_type__cplock__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__cplock__first__bit)
+
+axiom dw1000__register_types__sys_status_type__cplock__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__cplock__first__bit <  dw1000__register_types__sys_status_type__cplock__last__bit)
+
+axiom dw1000__register_types__sys_status_type__cplock__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__cplock__position)
+
+logic dw1000__register_types__sys_status_type__esyncr__first__bit : int
+
+logic dw1000__register_types__sys_status_type__esyncr__last__bit : int
+
+logic dw1000__register_types__sys_status_type__esyncr__position : int
+
+axiom dw1000__register_types__sys_status_type__esyncr__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__esyncr__first__bit)
+
+axiom dw1000__register_types__sys_status_type__esyncr__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__esyncr__first__bit <  dw1000__register_types__sys_status_type__esyncr__last__bit)
+
+axiom dw1000__register_types__sys_status_type__esyncr__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__esyncr__position)
+
+logic dw1000__register_types__sys_status_type__aat__first__bit : int
+
+logic dw1000__register_types__sys_status_type__aat__last__bit : int
+
+logic dw1000__register_types__sys_status_type__aat__position : int
+
+axiom dw1000__register_types__sys_status_type__aat__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__aat__first__bit)
+
+axiom dw1000__register_types__sys_status_type__aat__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__aat__first__bit <  dw1000__register_types__sys_status_type__aat__last__bit)
+
+axiom dw1000__register_types__sys_status_type__aat__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__aat__position)
+
+logic dw1000__register_types__sys_status_type__txfrb__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txfrb__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txfrb__position : int
+
+axiom dw1000__register_types__sys_status_type__txfrb__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txfrb__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txfrb__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txfrb__first__bit <  dw1000__register_types__sys_status_type__txfrb__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txfrb__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txfrb__position)
+
+logic dw1000__register_types__sys_status_type__txprs__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txprs__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txprs__position : int
+
+axiom dw1000__register_types__sys_status_type__txprs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txprs__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txprs__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txprs__first__bit <  dw1000__register_types__sys_status_type__txprs__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txprs__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txprs__position)
+
+logic dw1000__register_types__sys_status_type__txphs__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txphs__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txphs__position : int
+
+axiom dw1000__register_types__sys_status_type__txphs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txphs__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txphs__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txphs__first__bit <  dw1000__register_types__sys_status_type__txphs__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txphs__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txphs__position)
+
+logic dw1000__register_types__sys_status_type__txfrs__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txfrs__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txfrs__position : int
+
+axiom dw1000__register_types__sys_status_type__txfrs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txfrs__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txfrs__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txfrs__first__bit <  dw1000__register_types__sys_status_type__txfrs__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txfrs__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txfrs__position)
+
+logic dw1000__register_types__sys_status_type__rxprd__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxprd__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxprd__position : int
+
+axiom dw1000__register_types__sys_status_type__rxprd__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxprd__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxprd__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxprd__first__bit <  dw1000__register_types__sys_status_type__rxprd__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxprd__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxprd__position)
+
+logic dw1000__register_types__sys_status_type__rxsfdd__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxsfdd__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxsfdd__position : int
+
+axiom dw1000__register_types__sys_status_type__rxsfdd__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxsfdd__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxsfdd__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxsfdd__first__bit <  dw1000__register_types__sys_status_type__rxsfdd__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxsfdd__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxsfdd__position)
+
+logic dw1000__register_types__sys_status_type__ldedone__first__bit : int
+
+logic dw1000__register_types__sys_status_type__ldedone__last__bit : int
+
+logic dw1000__register_types__sys_status_type__ldedone__position : int
+
+axiom dw1000__register_types__sys_status_type__ldedone__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__ldedone__first__bit)
+
+axiom dw1000__register_types__sys_status_type__ldedone__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__ldedone__first__bit <  dw1000__register_types__sys_status_type__ldedone__last__bit)
+
+axiom dw1000__register_types__sys_status_type__ldedone__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__ldedone__position)
+
+logic dw1000__register_types__sys_status_type__rxphd__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxphd__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxphd__position : int
+
+axiom dw1000__register_types__sys_status_type__rxphd__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxphd__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxphd__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxphd__first__bit <  dw1000__register_types__sys_status_type__rxphd__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxphd__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxphd__position)
+
+logic dw1000__register_types__sys_status_type__rxphe__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxphe__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxphe__position : int
+
+axiom dw1000__register_types__sys_status_type__rxphe__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxphe__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxphe__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxphe__first__bit <  dw1000__register_types__sys_status_type__rxphe__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxphe__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxphe__position)
+
+logic dw1000__register_types__sys_status_type__rxdfr__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxdfr__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxdfr__position : int
+
+axiom dw1000__register_types__sys_status_type__rxdfr__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxdfr__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxdfr__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxdfr__first__bit <  dw1000__register_types__sys_status_type__rxdfr__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxdfr__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxdfr__position)
+
+logic dw1000__register_types__sys_status_type__rxfcg__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxfcg__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxfcg__position : int
+
+axiom dw1000__register_types__sys_status_type__rxfcg__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxfcg__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxfcg__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxfcg__first__bit <  dw1000__register_types__sys_status_type__rxfcg__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxfcg__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxfcg__position)
+
+logic dw1000__register_types__sys_status_type__rxfce__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxfce__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxfce__position : int
+
+axiom dw1000__register_types__sys_status_type__rxfce__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxfce__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxfce__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxfce__first__bit <  dw1000__register_types__sys_status_type__rxfce__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxfce__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxfce__position)
+
+logic dw1000__register_types__sys_status_type__rxrfsl__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrfsl__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrfsl__position : int
+
+axiom dw1000__register_types__sys_status_type__rxrfsl__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrfsl__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrfsl__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxrfsl__first__bit <  dw1000__register_types__sys_status_type__rxrfsl__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrfsl__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrfsl__position)
+
+logic dw1000__register_types__sys_status_type__rxrfto__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrfto__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrfto__position : int
+
+axiom dw1000__register_types__sys_status_type__rxrfto__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrfto__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrfto__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxrfto__first__bit <  dw1000__register_types__sys_status_type__rxrfto__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrfto__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrfto__position)
+
+logic dw1000__register_types__sys_status_type__ldeerr__first__bit : int
+
+logic dw1000__register_types__sys_status_type__ldeerr__last__bit : int
+
+logic dw1000__register_types__sys_status_type__ldeerr__position : int
+
+axiom dw1000__register_types__sys_status_type__ldeerr__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__ldeerr__first__bit)
+
+axiom dw1000__register_types__sys_status_type__ldeerr__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__ldeerr__first__bit <  dw1000__register_types__sys_status_type__ldeerr__last__bit)
+
+axiom dw1000__register_types__sys_status_type__ldeerr__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__ldeerr__position)
+
+logic dw1000__register_types__sys_status_type__rxovrr__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxovrr__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxovrr__position : int
+
+axiom dw1000__register_types__sys_status_type__rxovrr__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxovrr__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxovrr__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxovrr__first__bit <  dw1000__register_types__sys_status_type__rxovrr__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxovrr__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxovrr__position)
+
+logic dw1000__register_types__sys_status_type__rxpto__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxpto__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxpto__position : int
+
+axiom dw1000__register_types__sys_status_type__rxpto__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxpto__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxpto__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxpto__first__bit <  dw1000__register_types__sys_status_type__rxpto__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxpto__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxpto__position)
+
+logic dw1000__register_types__sys_status_type__gpioirq__first__bit : int
+
+logic dw1000__register_types__sys_status_type__gpioirq__last__bit : int
+
+logic dw1000__register_types__sys_status_type__gpioirq__position : int
+
+axiom dw1000__register_types__sys_status_type__gpioirq__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__gpioirq__first__bit)
+
+axiom dw1000__register_types__sys_status_type__gpioirq__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__gpioirq__first__bit <  dw1000__register_types__sys_status_type__gpioirq__last__bit)
+
+axiom dw1000__register_types__sys_status_type__gpioirq__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__gpioirq__position)
+
+logic dw1000__register_types__sys_status_type__slp2init__first__bit : int
+
+logic dw1000__register_types__sys_status_type__slp2init__last__bit : int
+
+logic dw1000__register_types__sys_status_type__slp2init__position : int
+
+axiom dw1000__register_types__sys_status_type__slp2init__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__slp2init__first__bit)
+
+axiom dw1000__register_types__sys_status_type__slp2init__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__slp2init__first__bit <  dw1000__register_types__sys_status_type__slp2init__last__bit)
+
+axiom dw1000__register_types__sys_status_type__slp2init__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__slp2init__position)
+
+logic dw1000__register_types__sys_status_type__rfpll_ll__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rfpll_ll__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rfpll_ll__position : int
+
+axiom dw1000__register_types__sys_status_type__rfpll_ll__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rfpll_ll__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rfpll_ll__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rfpll_ll__first__bit <  dw1000__register_types__sys_status_type__rfpll_ll__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rfpll_ll__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rfpll_ll__position)
+
+logic dw1000__register_types__sys_status_type__clkpll_ll__first__bit : int
+
+logic dw1000__register_types__sys_status_type__clkpll_ll__last__bit : int
+
+logic dw1000__register_types__sys_status_type__clkpll_ll__position : int
+
+axiom dw1000__register_types__sys_status_type__clkpll_ll__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__clkpll_ll__first__bit)
+
+axiom dw1000__register_types__sys_status_type__clkpll_ll__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__clkpll_ll__first__bit <  dw1000__register_types__sys_status_type__clkpll_ll__last__bit)
+
+axiom dw1000__register_types__sys_status_type__clkpll_ll__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__clkpll_ll__position)
+
+logic dw1000__register_types__sys_status_type__rxsfdto__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxsfdto__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxsfdto__position : int
+
+axiom dw1000__register_types__sys_status_type__rxsfdto__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxsfdto__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxsfdto__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxsfdto__first__bit <  dw1000__register_types__sys_status_type__rxsfdto__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxsfdto__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxsfdto__position)
+
+logic dw1000__register_types__sys_status_type__hpdwarn__first__bit : int
+
+logic dw1000__register_types__sys_status_type__hpdwarn__last__bit : int
+
+logic dw1000__register_types__sys_status_type__hpdwarn__position : int
+
+axiom dw1000__register_types__sys_status_type__hpdwarn__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__hpdwarn__first__bit)
+
+axiom dw1000__register_types__sys_status_type__hpdwarn__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__hpdwarn__first__bit <  dw1000__register_types__sys_status_type__hpdwarn__last__bit)
+
+axiom dw1000__register_types__sys_status_type__hpdwarn__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__hpdwarn__position)
+
+logic dw1000__register_types__sys_status_type__txberr__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txberr__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txberr__position : int
+
+axiom dw1000__register_types__sys_status_type__txberr__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txberr__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txberr__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txberr__first__bit <  dw1000__register_types__sys_status_type__txberr__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txberr__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txberr__position)
+
+logic dw1000__register_types__sys_status_type__affrej__first__bit : int
+
+logic dw1000__register_types__sys_status_type__affrej__last__bit : int
+
+logic dw1000__register_types__sys_status_type__affrej__position : int
+
+axiom dw1000__register_types__sys_status_type__affrej__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__affrej__first__bit)
+
+axiom dw1000__register_types__sys_status_type__affrej__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__affrej__first__bit <  dw1000__register_types__sys_status_type__affrej__last__bit)
+
+axiom dw1000__register_types__sys_status_type__affrej__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__affrej__position)
+
+logic dw1000__register_types__sys_status_type__hsrbp__first__bit : int
+
+logic dw1000__register_types__sys_status_type__hsrbp__last__bit : int
+
+logic dw1000__register_types__sys_status_type__hsrbp__position : int
+
+axiom dw1000__register_types__sys_status_type__hsrbp__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__hsrbp__first__bit)
+
+axiom dw1000__register_types__sys_status_type__hsrbp__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__hsrbp__first__bit <  dw1000__register_types__sys_status_type__hsrbp__last__bit)
+
+axiom dw1000__register_types__sys_status_type__hsrbp__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__hsrbp__position)
+
+logic dw1000__register_types__sys_status_type__icrbp__first__bit : int
+
+logic dw1000__register_types__sys_status_type__icrbp__last__bit : int
+
+logic dw1000__register_types__sys_status_type__icrbp__position : int
+
+axiom dw1000__register_types__sys_status_type__icrbp__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__icrbp__first__bit)
+
+axiom dw1000__register_types__sys_status_type__icrbp__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__icrbp__first__bit <  dw1000__register_types__sys_status_type__icrbp__last__bit)
+
+axiom dw1000__register_types__sys_status_type__icrbp__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__icrbp__position)
+
+logic dw1000__register_types__sys_status_type__rxrscs__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrscs__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxrscs__position : int
+
+axiom dw1000__register_types__sys_status_type__rxrscs__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrscs__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrscs__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxrscs__first__bit <  dw1000__register_types__sys_status_type__rxrscs__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxrscs__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxrscs__position)
+
+logic dw1000__register_types__sys_status_type__rxprej__first__bit : int
+
+logic dw1000__register_types__sys_status_type__rxprej__last__bit : int
+
+logic dw1000__register_types__sys_status_type__rxprej__position : int
+
+axiom dw1000__register_types__sys_status_type__rxprej__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxprej__first__bit)
+
+axiom dw1000__register_types__sys_status_type__rxprej__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__rxprej__first__bit <  dw1000__register_types__sys_status_type__rxprej__last__bit)
+
+axiom dw1000__register_types__sys_status_type__rxprej__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__rxprej__position)
+
+logic dw1000__register_types__sys_status_type__txpute__first__bit : int
+
+logic dw1000__register_types__sys_status_type__txpute__last__bit : int
+
+logic dw1000__register_types__sys_status_type__txpute__position : int
+
+axiom dw1000__register_types__sys_status_type__txpute__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txpute__first__bit)
+
+axiom dw1000__register_types__sys_status_type__txpute__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__txpute__first__bit <  dw1000__register_types__sys_status_type__txpute__last__bit)
+
+axiom dw1000__register_types__sys_status_type__txpute__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__txpute__position)
+
+logic dw1000__register_types__sys_status_type__reserved_1__first__bit : int
+
+logic dw1000__register_types__sys_status_type__reserved_1__last__bit : int
+
+logic dw1000__register_types__sys_status_type__reserved_1__position : int
+
+axiom dw1000__register_types__sys_status_type__reserved_1__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__reserved_1__first__bit)
+
+axiom dw1000__register_types__sys_status_type__reserved_1__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__reserved_1__first__bit <  dw1000__register_types__sys_status_type__reserved_1__last__bit)
+
+axiom dw1000__register_types__sys_status_type__reserved_1__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__reserved_1__position)
+
+logic dw1000__register_types__sys_status_type__reserved_2__first__bit : int
+
+logic dw1000__register_types__sys_status_type__reserved_2__last__bit : int
+
+logic dw1000__register_types__sys_status_type__reserved_2__position : int
+
+axiom dw1000__register_types__sys_status_type__reserved_2__first__bit_axiom :
+  (0 <= dw1000__register_types__sys_status_type__reserved_2__first__bit)
+
+axiom dw1000__register_types__sys_status_type__reserved_2__last__bit_axiom :
+  (dw1000__register_types__sys_status_type__reserved_2__first__bit <  dw1000__register_types__sys_status_type__reserved_2__last__bit)
+
+axiom dw1000__register_types__sys_status_type__reserved_2__position_axiom :
+  (0 <= dw1000__register_types__sys_status_type__reserved_2__position)
+
+logic user_eq6 : us_rep1, us_rep1 -> bool
+
+logic dummy17 : bits_1
+
+logic dummy18 : bits_1
+
+logic dummy19 : bits_1
+
+logic dummy20 : bits_1
+
+logic dummy21 : bits_1
+
+logic dummy22 : bits_1
+
+logic dummy23 : bits_1
+
+logic dummy24 : bits_1
+
+logic dummy25 : bits_1
+
+logic dummy26 : bits_1
+
+logic dummy27 : bits_1
+
+logic dummy28 : bits_1
+
+logic dummy29 : bits_1
+
+logic dummy30 : bits_1
+
+logic dummy31 : bits_1
+
+logic dummy32 : bits_1
+
+logic dummy33 : bits_1
+
+logic dummy34 : bits_1
+
+logic dummy35 : bits_1
+
+logic dummy36 : bits_1
+
+logic dummy37 : bits_1
+
+logic dummy38 : bits_1
+
+logic dummy39 : bits_1
+
+logic dummy40 : bits_1
+
+logic dummy41 : bits_1
+
+logic dummy42 : bits_1
+
+logic dummy43 : bits_1
+
+logic dummy44 : bits_1
+
+logic dummy45 : bits_1
+
+logic dummy46 : bits_1
+
+logic dummy47 : bits_1
+
+logic dummy48 : bits_1
+
+logic dummy49 : bits_1
+
+logic dummy50 : bits_1
+
+logic dummy51 : bits_1
+
+logic dummy52 : bits_5
+
+type sys_status_type__ref = { sys_status_type__content : us_rep1
+}
+
+function sys_status_type__ref___projection(a: sys_status_type__ref) : us_rep1 =
+  (a).sys_status_type__content
+
+type register_type__ref = { register_type__content : us_rep
+}
+
+function register_type__ref___10__projection(a: register_type__ref) : us_rep =
+  (a).register_type__content
+
+type register_type__ref1 = { register_type__content1 : us_rep1
+}
+
+function register_type__ref___12__projection(a: register_type__ref1) : us_rep1 =
+  (a).register_type__content1
+
+type result_type
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 1))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def10 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : result_type, result_type -> bool
+
+logic dummy53 : result_type
+
+type result_type__ref = { result_type__content : result_type
+}
+
+function result_type__ref___projection(a: result_type__ref) : result_type =
+  (a).result_type__content
+
+logic delayed : bool
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+ (* File "dw1000-driver.adb", line 680, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result__:int. forall sys_ctrl_reg__split_fields:bits_1.
+  forall sys_ctrl_reg__split_fields1:bits_1.
+  forall sys_ctrl_reg__split_fields2:bits_1.
+  forall sys_ctrl_reg__split_fields3:bits_1.
+  forall sys_ctrl_reg__split_fields4:bits_1.
+  forall sys_ctrl_reg__split_fields5:bits_1.
+  forall sys_ctrl_reg__split_fields6:bits_1.
+  forall sys_ctrl_reg__split_fields7:bits_1.
+  forall sys_ctrl_reg__split_fields8:bits_1.
+  forall sys_ctrl_reg__split_fields9:bits_2.
+  forall sys_ctrl_reg__split_fields10:bits_14.
+  forall sys_ctrl_reg__split_fields11:bits_7.
+  forall sys_status_reg__split_fields:us_split_fields__ref1. forall o:bits_7.
+  forall o1:bits_14. forall o2:bits_2. forall o3:bits_1. forall o4:bits_1.
+  forall o5:bits_1. forall o6:bits_1. forall o7:bits_1. forall o8:bits_1.
+  forall o9:bits_1. forall o10:bits_1. forall o11:bits_1. forall o12:bits_1.
+  forall o13:bits_1. forall o14:bits_1. forall o15:bits_1. forall o16:bits_1.
+  forall o17:bits_1. forall o18:bits_1. forall o19:bits_1. forall o20:bits_1.
+  forall o21:bits_2. forall o22:bits_14. forall o23:bits_7.
+  forall temp___3315:bits_1. forall temp___33151:bits_1.
+  forall temp___33152:bits_1. forall temp___33153:bits_1.
+  forall temp___33154:bits_1. forall temp___33155:bits_1.
+  forall temp___33156:bits_1. forall temp___33157:bits_1.
+  forall temp___33158:bits_1. forall temp___33159:bits_2.
+  forall temp___331510:bits_14. forall temp___331511:bits_7.
+  forall o24:bits_1. forall o25:bits_1. forall o26:bits_1. forall o27:bits_1.
+  forall o28:bits_1. forall o29:bits_1. forall o30:bits_1. forall o31:bits_1.
+  forall o32:bits_1. forall o33:bits_1. forall o34:bits_2.
+  forall o35:bits_14. forall o36:bits_7. forall temp___3317:bits_1.
+  forall temp___33171:bits_1. forall temp___33172:bits_1.
+  forall temp___33173:bits_1. forall temp___33174:bits_1.
+  forall temp___33175:bits_1. forall temp___33176:bits_1.
+  forall temp___33177:bits_1. forall temp___33178:bits_1.
+  forall temp___33179:bits_2. forall temp___331710:bits_14.
+  forall temp___331711:bits_7. forall o37:bits_1. forall o38:bits_1.
+  forall o39:bits_1. forall o40:bits_1. forall o41:bits_1. forall o42:bits_1.
+  forall o43:bits_1. forall o44:bits_1. forall o45:bits_1. forall o46:bits_1.
+  forall o47:bits_2. forall o48:bits_14. forall o49:bits_7.
+  forall temp___3320:bits_1. forall temp___33201:bits_1.
+  forall temp___33202:bits_1. forall temp___33203:bits_1.
+  forall temp___33204:bits_1. forall temp___33205:bits_1.
+  forall temp___33206:bits_1. forall temp___33207:bits_1.
+  forall temp___33208:bits_1. forall temp___33209:bits_2.
+  forall temp___332010:bits_14. forall temp___332011:bits_7.
+  forall sys_status_reg__split_fields1:us_split_fields2.
+  forall result:bits_1. forall result1:bits_1. forall result2:bits_1.
+  forall result3:bits_1. forall result4:bits_1. forall result5:bits_1.
+  forall result6:bits_1. forall result7:bits_1. forall result8:bits_1.
+  forall result9:bits_2. forall result10:bits_14. forall result11:bits_7.
+  forall sys_ctrl_reg__split_fields12:bits_1.
+  forall sys_ctrl_reg__split_fields13:bits_1.
+  forall sys_ctrl_reg__split_fields14:bits_1.
+  forall sys_ctrl_reg__split_fields15:bits_1.
+  forall sys_ctrl_reg__split_fields16:bits_1.
+  forall sys_ctrl_reg__split_fields17:bits_1.
+  forall sys_ctrl_reg__split_fields18:bits_1.
+  forall sys_ctrl_reg__split_fields19:bits_1.
+  forall sys_ctrl_reg__split_fields20:bits_1.
+  forall sys_ctrl_reg__split_fields21:bits_2.
+  forall sys_ctrl_reg__split_fields22:bits_14.
+  forall sys_ctrl_reg__split_fields23:bits_7. forall result12:bits_1.
+  forall result13:bits_1. forall result14:bits_1. forall result15:bits_1.
+  forall result16:bits_1. forall result17:bits_1. forall result18:bits_1.
+  forall result19:bits_1. forall result20:bits_1. forall result21:bits_2.
+  forall result22:bits_14. forall result23:bits_7.
+  forall sys_ctrl_reg__split_fields24:bits_1.
+  forall sys_ctrl_reg__split_fields25:bits_1.
+  forall sys_ctrl_reg__split_fields26:bits_1.
+  forall sys_ctrl_reg__split_fields27:bits_1.
+  forall sys_ctrl_reg__split_fields28:bits_1.
+  forall sys_ctrl_reg__split_fields29:bits_1.
+  forall sys_ctrl_reg__split_fields30:bits_1.
+  forall sys_ctrl_reg__split_fields31:bits_1.
+  forall sys_ctrl_reg__split_fields32:bits_1.
+  forall sys_ctrl_reg__split_fields33:bits_2.
+  forall sys_ctrl_reg__split_fields34:bits_14.
+  forall sys_ctrl_reg__split_fields35:bits_7. forall device_state:us_private.
+  forall device_state1:us_private.
+  forall dw1000__registers__sys_status__read__reg__fields:us_split_fields2.
+  forall result24:us_split_fields__ref1.
+  forall sys_status_reg__split_fields2:us_split_fields2.
+  forall result25:bits_1. forall result26:bits_1. forall result27:bits_1.
+  forall result28:bits_1. forall result29:bits_1. forall result30:bits_1.
+  forall result31:bits_1. forall result32:bits_1. forall result33:bits_1.
+  forall result34:bits_2. forall result35:bits_14. forall result36:bits_7.
+  forall sys_ctrl_reg__split_fields36:bits_1.
+  forall sys_ctrl_reg__split_fields37:bits_1.
+  forall sys_ctrl_reg__split_fields38:bits_1.
+  forall sys_ctrl_reg__split_fields39:bits_1.
+  forall sys_ctrl_reg__split_fields40:bits_1.
+  forall sys_ctrl_reg__split_fields41:bits_1.
+  forall sys_ctrl_reg__split_fields42:bits_1.
+  forall sys_ctrl_reg__split_fields43:bits_1.
+  forall sys_ctrl_reg__split_fields44:bits_1.
+  forall sys_ctrl_reg__split_fields45:bits_2.
+  forall sys_ctrl_reg__split_fields46:bits_14.
+  forall sys_ctrl_reg__split_fields47:bits_7.
+  forall device_state2:us_private. forall result37:int. forall result__1:int.
+  forall result38:int. forall result__2:int. forall result39:int.
+  forall result__3:int. forall result__4:int.
+  forall sys_ctrl_reg__split_fields48:bits_1.
+  forall sys_ctrl_reg__split_fields49:bits_1.
+  forall sys_ctrl_reg__split_fields50:bits_1.
+  forall sys_ctrl_reg__split_fields51:bits_1.
+  forall sys_ctrl_reg__split_fields52:bits_1.
+  forall sys_ctrl_reg__split_fields53:bits_1.
+  forall sys_ctrl_reg__split_fields54:bits_1.
+  forall sys_ctrl_reg__split_fields55:bits_1.
+  forall sys_ctrl_reg__split_fields56:bits_1.
+  forall sys_ctrl_reg__split_fields57:bits_2.
+  forall sys_ctrl_reg__split_fields58:bits_14.
+  forall sys_ctrl_reg__split_fields59:bits_7.
+  forall sys_status_reg__split_fields3:us_split_fields__ref1.
+  forall device_state3:us_private. forall result__5:int.
+  forall sys_ctrl_reg__split_fields60:bits_1.
+  forall sys_ctrl_reg__split_fields61:bits_1.
+  forall sys_ctrl_reg__split_fields62:bits_1.
+  forall sys_ctrl_reg__split_fields63:bits_1.
+  forall sys_ctrl_reg__split_fields64:bits_1.
+  forall sys_ctrl_reg__split_fields65:bits_1.
+  forall sys_ctrl_reg__split_fields66:bits_1.
+  forall sys_ctrl_reg__split_fields67:bits_1.
+  forall sys_ctrl_reg__split_fields68:bits_1.
+  forall sys_ctrl_reg__split_fields69:bits_2.
+  forall sys_ctrl_reg__split_fields70:bits_14.
+  forall sys_ctrl_reg__split_fields71:bits_7.
+  forall sys_status_reg__split_fields4:us_split_fields2.
+  forall device_state4:us_private. ((((0 <= 1) -> in_range6(result__)) and
+  ((((((to_rep2(o) = of_int(0)) and ((to_rep3(o1) = of_int1(0)) and
+  ((to_rep1(o2) = of_int(0)) and ((to_rep(o3) = of_int(0)) and
+  ((to_rep(o4) = of_int(0)) and ((to_rep(o5) = of_int(1)) and
+  ((to_rep(o6) = of_int(0)) and ((to_rep(o7) = of_int(0)) and
+  ((to_rep(o8) = of_int(0)) and ((to_rep(o9) = of_int(0)) and
+  ((to_rep(o10) = of_int(0)) and ((to_rep(o11) = of_int(0)) and
+  ((o11 = o12) and ((o10 = o13) and ((o9 = o14) and ((o8 = o15) and
+  ((o7 = o16) and ((o6 = o17) and ((o5 = o18) and ((o4 = o19) and
+  ((o3 = o20) and ((o2 = o21) and ((o1 = o22) and
+  (o = o23)))))))))))))))))))))))) and ((temp___3315 = o12) and
+  ((temp___33151 = o13) and ((temp___33152 = o14) and
+  ((temp___33153 = o15) and ((temp___33154 = o16) and
+  ((temp___33155 = o17) and ((temp___33156 = o18) and
+  ((temp___33157 = o19) and ((temp___33158 = o20) and
+  ((temp___33159 = o21) and ((temp___331510 = o22) and
+  (temp___331511 = o23))))))))))))) and
+  (((result = sys_ctrl_reg__split_fields) and
+  ((result1 = sys_ctrl_reg__split_fields1) and
+  ((result2 = sys_ctrl_reg__split_fields2) and
+  ((result3 = sys_ctrl_reg__split_fields3) and
+  ((result4 = sys_ctrl_reg__split_fields4) and
+  ((result5 = sys_ctrl_reg__split_fields5) and
+  ((result6 = sys_ctrl_reg__split_fields6) and
+  ((result7 = sys_ctrl_reg__split_fields7) and
+  ((result8 = sys_ctrl_reg__split_fields8) and
+  ((result9 = sys_ctrl_reg__split_fields9) and
+  ((result10 = sys_ctrl_reg__split_fields10) and
+  (result11 = sys_ctrl_reg__split_fields11)))))))))))) and
+  ((temp___3315 = sys_ctrl_reg__split_fields12) and
+  ((temp___33151 = sys_ctrl_reg__split_fields13) and
+  ((temp___33152 = sys_ctrl_reg__split_fields14) and
+  ((temp___33153 = sys_ctrl_reg__split_fields15) and
+  ((temp___33154 = sys_ctrl_reg__split_fields16) and
+  ((temp___33155 = sys_ctrl_reg__split_fields17) and
+  ((temp___33156 = sys_ctrl_reg__split_fields18) and
+  ((temp___33157 = sys_ctrl_reg__split_fields19) and
+  ((temp___33158 = sys_ctrl_reg__split_fields20) and
+  ((temp___33159 = sys_ctrl_reg__split_fields21) and
+  ((temp___331510 = sys_ctrl_reg__split_fields22) and
+  (temp___331511 = sys_ctrl_reg__split_fields23)))))))))))))) and
+  ((((delayed = true) and ((((to_rep(o24) = of_int(1)) and
+  ((sys_ctrl_reg__split_fields12 = o25) and
+  ((sys_ctrl_reg__split_fields13 = o26) and
+  ((sys_ctrl_reg__split_fields14 = o27) and
+  ((sys_ctrl_reg__split_fields15 = o28) and
+  ((sys_ctrl_reg__split_fields16 = o29) and
+  ((sys_ctrl_reg__split_fields17 = o30) and
+  ((sys_ctrl_reg__split_fields18 = o31) and ((o24 = o32) and
+  ((sys_ctrl_reg__split_fields20 = o33) and
+  ((sys_ctrl_reg__split_fields21 = o34) and
+  ((sys_ctrl_reg__split_fields22 = o35) and
+  (sys_ctrl_reg__split_fields23 = o36))))))))))))) and
+  ((temp___3317 = o25) and ((temp___33171 = o26) and
+  ((temp___33172 = o27) and ((temp___33173 = o28) and
+  ((temp___33174 = o29) and ((temp___33175 = o30) and
+  ((temp___33176 = o31) and ((temp___33177 = o32) and
+  ((temp___33178 = o33) and ((temp___33179 = o34) and
+  ((temp___331710 = o35) and (temp___331711 = o36))))))))))))) and
+  (((result12 = sys_ctrl_reg__split_fields12) and
+  ((result13 = sys_ctrl_reg__split_fields13) and
+  ((result14 = sys_ctrl_reg__split_fields14) and
+  ((result15 = sys_ctrl_reg__split_fields15) and
+  ((result16 = sys_ctrl_reg__split_fields16) and
+  ((result17 = sys_ctrl_reg__split_fields17) and
+  ((result18 = sys_ctrl_reg__split_fields18) and
+  ((result19 = sys_ctrl_reg__split_fields19) and
+  ((result20 = sys_ctrl_reg__split_fields20) and
+  ((result21 = sys_ctrl_reg__split_fields21) and
+  ((result22 = sys_ctrl_reg__split_fields22) and
+  (result23 = sys_ctrl_reg__split_fields23)))))))))))) and
+  ((temp___3317 = sys_ctrl_reg__split_fields24) and
+  ((temp___33171 = sys_ctrl_reg__split_fields25) and
+  ((temp___33172 = sys_ctrl_reg__split_fields26) and
+  ((temp___33173 = sys_ctrl_reg__split_fields27) and
+  ((temp___33174 = sys_ctrl_reg__split_fields28) and
+  ((temp___33175 = sys_ctrl_reg__split_fields29) and
+  ((temp___33176 = sys_ctrl_reg__split_fields30) and
+  ((temp___33177 = sys_ctrl_reg__split_fields31) and
+  ((temp___33178 = sys_ctrl_reg__split_fields32) and
+  ((temp___33179 = sys_ctrl_reg__split_fields33) and
+  ((temp___331710 = sys_ctrl_reg__split_fields34) and
+  (temp___331711 = sys_ctrl_reg__split_fields35))))))))))))))) or
+  ((not (delayed = true)) and
+  ((sys_ctrl_reg__split_fields12 = sys_ctrl_reg__split_fields24) and
+  ((sys_ctrl_reg__split_fields13 = sys_ctrl_reg__split_fields25) and
+  ((sys_ctrl_reg__split_fields14 = sys_ctrl_reg__split_fields26) and
+  ((sys_ctrl_reg__split_fields15 = sys_ctrl_reg__split_fields27) and
+  ((sys_ctrl_reg__split_fields16 = sys_ctrl_reg__split_fields28) and
+  ((sys_ctrl_reg__split_fields17 = sys_ctrl_reg__split_fields29) and
+  ((sys_ctrl_reg__split_fields18 = sys_ctrl_reg__split_fields30) and
+  ((sys_ctrl_reg__split_fields19 = sys_ctrl_reg__split_fields31) and
+  ((sys_ctrl_reg__split_fields20 = sys_ctrl_reg__split_fields32) and
+  ((sys_ctrl_reg__split_fields21 = sys_ctrl_reg__split_fields33) and
+  ((sys_ctrl_reg__split_fields22 = sys_ctrl_reg__split_fields34) and
+  (sys_ctrl_reg__split_fields23 = sys_ctrl_reg__split_fields35)))))))))))))) and
+  (((delayed = true) and (((result24 = sys_status_reg__split_fields) and
+  (sys_status_reg__split_fields2 = dw1000__registers__sys_status__read__reg__fields)) and
+  (((to_rep((sys_status_reg__split_fields2).rec__dw1000__register_types__sys_status_type__hpdwarn) = of_int(1)) and
+  (((((to_rep(o37) = of_int(0)) and ((sys_ctrl_reg__split_fields24 = o38) and
+  ((sys_ctrl_reg__split_fields25 = o39) and
+  ((sys_ctrl_reg__split_fields26 = o40) and
+  ((sys_ctrl_reg__split_fields27 = o41) and
+  ((sys_ctrl_reg__split_fields28 = o42) and
+  ((sys_ctrl_reg__split_fields29 = o43) and
+  ((sys_ctrl_reg__split_fields30 = o44) and ((o37 = o45) and
+  ((sys_ctrl_reg__split_fields32 = o46) and
+  ((sys_ctrl_reg__split_fields33 = o47) and
+  ((sys_ctrl_reg__split_fields34 = o48) and
+  (sys_ctrl_reg__split_fields35 = o49))))))))))))) and
+  ((temp___3320 = o38) and ((temp___33201 = o39) and
+  ((temp___33202 = o40) and ((temp___33203 = o41) and
+  ((temp___33204 = o42) and ((temp___33205 = o43) and
+  ((temp___33206 = o44) and ((temp___33207 = o45) and
+  ((temp___33208 = o46) and ((temp___33209 = o47) and
+  ((temp___332010 = o48) and (temp___332011 = o49))))))))))))) and
+  (((result25 = sys_ctrl_reg__split_fields24) and
+  ((result26 = sys_ctrl_reg__split_fields25) and
+  ((result27 = sys_ctrl_reg__split_fields26) and
+  ((result28 = sys_ctrl_reg__split_fields27) and
+  ((result29 = sys_ctrl_reg__split_fields28) and
+  ((result30 = sys_ctrl_reg__split_fields29) and
+  ((result31 = sys_ctrl_reg__split_fields30) and
+  ((result32 = sys_ctrl_reg__split_fields31) and
+  ((result33 = sys_ctrl_reg__split_fields32) and
+  ((result34 = sys_ctrl_reg__split_fields33) and
+  ((result35 = sys_ctrl_reg__split_fields34) and
+  (result36 = sys_ctrl_reg__split_fields35)))))))))))) and
+  ((temp___3320 = sys_ctrl_reg__split_fields36) and
+  ((temp___33201 = sys_ctrl_reg__split_fields37) and
+  ((temp___33202 = sys_ctrl_reg__split_fields38) and
+  ((temp___33203 = sys_ctrl_reg__split_fields39) and
+  ((temp___33204 = sys_ctrl_reg__split_fields40) and
+  ((temp___33205 = sys_ctrl_reg__split_fields41) and
+  ((temp___33206 = sys_ctrl_reg__split_fields42) and
+  ((temp___33207 = sys_ctrl_reg__split_fields43) and
+  ((temp___33208 = sys_ctrl_reg__split_fields44) and
+  ((temp___33209 = sys_ctrl_reg__split_fields45) and
+  ((temp___332010 = sys_ctrl_reg__split_fields46) and
+  (temp___332011 = sys_ctrl_reg__split_fields47)))))))))))))) and
+  ((result37 = result__) and (result__1 = 1)))) or
+  ((not (to_rep((sys_status_reg__split_fields2).rec__dw1000__register_types__sys_status_type__hpdwarn) = of_int(1))) and
+  (((result38 = result__) and (result__2 = 0)) and
+  ((device_state2 = device_state1) and (({
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields36;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields37;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields38;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields39;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields40;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields41;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields42;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields43;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields44;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields45;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields46;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields47 } = {
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields24;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields25;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields26;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields27;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields28;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields29;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields30;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields31;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields32;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields33;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields34;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields35 }) and (result__1 = result__2)))))))) or
+  ((not (delayed = true)) and (((result39 = result__) and
+  (result__3 = 0)) and (((device_state2 = device_state) and (({
+  us_split_fields__content1 = sys_status_reg__split_fields2
+  } = sys_status_reg__split_fields) and (({
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields36;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields37;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields38;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields39;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields40;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields41;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields42;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields43;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields44;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields45;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields46;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields47 } = {
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields24;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields25;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields26;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields27;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields28;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields29;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields30;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields31;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields32;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields33;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields34;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields35 }) and (result__1 = result__3)))) and
+  ((device_state2 = device_state) and
+  ((sys_status_reg__split_fields2 = sys_status_reg__split_fields1) and (({
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields36;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields37;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields38;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields39;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields40;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields41;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields42;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields43;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields44;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields45;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields46;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields47 } = {
+  rec__dw1000__register_types__sys_ctrl_type__sfcst =
+  sys_ctrl_reg__split_fields24;
+  rec__dw1000__register_types__sys_ctrl_type__txstrt =
+  sys_ctrl_reg__split_fields25;
+  rec__dw1000__register_types__sys_ctrl_type__txdlys =
+  sys_ctrl_reg__split_fields26;
+  rec__dw1000__register_types__sys_ctrl_type__cansfcs =
+  sys_ctrl_reg__split_fields27;
+  rec__dw1000__register_types__sys_ctrl_type__trxoff =
+  sys_ctrl_reg__split_fields28;
+  rec__dw1000__register_types__sys_ctrl_type__wait4resp =
+  sys_ctrl_reg__split_fields29;
+  rec__dw1000__register_types__sys_ctrl_type__rxenab =
+  sys_ctrl_reg__split_fields30;
+  rec__dw1000__register_types__sys_ctrl_type__rxdlye =
+  sys_ctrl_reg__split_fields31;
+  rec__dw1000__register_types__sys_ctrl_type__hrbpt =
+  sys_ctrl_reg__split_fields32;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_1 =
+  sys_ctrl_reg__split_fields33;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_2 =
+  sys_ctrl_reg__split_fields34;
+  rec__dw1000__register_types__sys_ctrl_type__reserved_3 =
+  sys_ctrl_reg__split_fields35 }) and (result__1 = result__3)))))))))) and
+  (((device_state3 = device_state2) and ((sys_status_reg__split_fields3 = {
+  us_split_fields__content1 = sys_status_reg__split_fields2 }) and
+  (((sys_ctrl_reg__split_fields48 = sys_ctrl_reg__split_fields36) and
+  ((sys_ctrl_reg__split_fields49 = sys_ctrl_reg__split_fields37) and
+  ((sys_ctrl_reg__split_fields50 = sys_ctrl_reg__split_fields38) and
+  ((sys_ctrl_reg__split_fields51 = sys_ctrl_reg__split_fields39) and
+  ((sys_ctrl_reg__split_fields52 = sys_ctrl_reg__split_fields40) and
+  ((sys_ctrl_reg__split_fields53 = sys_ctrl_reg__split_fields41) and
+  ((sys_ctrl_reg__split_fields54 = sys_ctrl_reg__split_fields42) and
+  ((sys_ctrl_reg__split_fields55 = sys_ctrl_reg__split_fields43) and
+  ((sys_ctrl_reg__split_fields56 = sys_ctrl_reg__split_fields44) and
+  ((sys_ctrl_reg__split_fields57 = sys_ctrl_reg__split_fields45) and
+  ((sys_ctrl_reg__split_fields58 = sys_ctrl_reg__split_fields46) and
+  (sys_ctrl_reg__split_fields59 = sys_ctrl_reg__split_fields47)))))))))))) and
+  (result__1 = result__4)))) and ((device_state4 = device_state2) and
+  ((sys_status_reg__split_fields4 = sys_status_reg__split_fields2) and
+  (((sys_ctrl_reg__split_fields60 = sys_ctrl_reg__split_fields36) and
+  ((sys_ctrl_reg__split_fields61 = sys_ctrl_reg__split_fields37) and
+  ((sys_ctrl_reg__split_fields62 = sys_ctrl_reg__split_fields38) and
+  ((sys_ctrl_reg__split_fields63 = sys_ctrl_reg__split_fields39) and
+  ((sys_ctrl_reg__split_fields64 = sys_ctrl_reg__split_fields40) and
+  ((sys_ctrl_reg__split_fields65 = sys_ctrl_reg__split_fields41) and
+  ((sys_ctrl_reg__split_fields66 = sys_ctrl_reg__split_fields42) and
+  ((sys_ctrl_reg__split_fields67 = sys_ctrl_reg__split_fields43) and
+  ((sys_ctrl_reg__split_fields68 = sys_ctrl_reg__split_fields44) and
+  ((sys_ctrl_reg__split_fields69 = sys_ctrl_reg__split_fields45) and
+  ((sys_ctrl_reg__split_fields70 = sys_ctrl_reg__split_fields46) and
+  (sys_ctrl_reg__split_fields71 = sys_ctrl_reg__split_fields47)))))))))))) and
+  (result__5 = result__1))))))) -> ((not (delayed = true)) ->
+  (result__4 = 0))))
