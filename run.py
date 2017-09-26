@@ -160,7 +160,7 @@ def main():
             if d.startswith("industrial_") and os.path.isdir(d):
                 bench_dirs.append(d)
     if options.suite in ("all", "spark_all"):
-        bench_dirs.append("spark_2014_all/ALL")
+        bench_dirs.append("spark_2014_all")
     if options.suite == "debug":
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("random/smtlib.eq")
