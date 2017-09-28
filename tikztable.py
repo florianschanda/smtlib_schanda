@@ -67,13 +67,13 @@ class TikzTable(object):
         for col, item in data.iteritems():
             assert col in self.columns
             txt = format_fn(item)
-            if coloring == COL_ERROR:
+            if not self.competing[col]:
+                txt = "{\color{black!33}%s}" % txt
+            elif coloring == COL_ERROR:
                 if item == 0.0:
                     txt = "{\color{%s}%s}" % (self.col_good, txt)
                 else:
                     txt = "{\color{%s}%s}" % (self.col_bad, txt)
-            elif not self.competing[col]:
-                txt = "{\color{black!33}%s}" % txt
             elif coloring == COL_AWARD_HIGH:
                 if item == max(competing_data.itervalues()):
                     txt = "{\color{%s}%s}" % (self.col_good, txt)
