@@ -114,7 +114,7 @@ def create_report(prover_kind, prover_bin):
                     tmp.append((bench[bm]["name"],
                                 data["comment"]))
         if len(tmp) > 0:
-            fd.write("\n# Errors\n")
+            fd.write("\n# Errors (duplicates grouped)\n")
             def s(a, b):
                 conv_err_left = ("FLOATINGPOINT_TO_REAL_TOTAL" in a[1] or
                                  "to_fp" in a[1])
@@ -130,10 +130,29 @@ def create_report(prover_kind, prover_bin):
 
                 return cmp(a[0], b[0])
 
+            error = None
+            bms   = []
             for bm, comment in sorted(tmp, cmp=s):
-                if not bm.startswith("sha<"):
-                    fd.write("## %s\n" % bm)
-                    fd.write(comment + "\n")
+                if "<<<" in comment:
+                    comment = comment.rsplit("<<<")[0].strip()
+                if bm.startswith("sha<"):
+                    continue
+                if error is None:
+                    error = comment
+                    bms.append(bm)
+                elif error == comment:
+                    bms.append(bm)
+                else:
+                    for x in bms:
+                        fd.write("## %s\n" % x)
+                    fd.write(comment + "\n\n")
+                    error = comment
+                    bms   = [bm]
+            if len(bms) > 0:
+                for x in bms:
+                    fd.write("## %s\n" % x)
+                fd.write(comment + "\n")
+
 
 def main():
     ap = argparse.ArgumentParser()
