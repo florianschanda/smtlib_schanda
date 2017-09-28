@@ -62,7 +62,7 @@ def mk_bench_name(cat):
     if cat in mapping:
         return mapping[cat]
     else:
-        return cat.replace("_", "\\_").capitalize()
+        return cat.capitalize().replace("_qf", "~(QF)").replace("_", "~")
 
 def mk_solver_name(nam):
     return {
@@ -613,7 +613,9 @@ def mk_competition_slides(fd):
         fd.write("\\begin{center}\n")
         mk_table(cat)
         fd.write("\\end{center}\n")
-        fd.write("$^*$) uses different VCs\n")
+        fd.write("\\begin{center}\n")
+        fd.write("\\footnotesize $^*$) uses different VCs\n")
+        fd.write("\\end{center}\n")
         fd.write("\\end{frame}\n\n")
 
         # if cat == "solved":

@@ -73,7 +73,7 @@ class TikzTable(object):
                 else:
                     txt = "{\color{%s}%s}" % (self.col_bad, txt)
             elif not self.competing[col]:
-                pass
+                txt = "{\color{black!33}%s}" % txt
             elif coloring == COL_AWARD_HIGH:
                 if item == max(competing_data.itervalues()):
                     txt = "{\color{%s}%s}" % (self.col_good, txt)
