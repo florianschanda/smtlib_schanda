@@ -79,8 +79,8 @@ def main():
     if all_provers:
         # We pick a random (but consistent) version for the OldFP and
         # NoCBQI run for CVC4
-        invocations.append(("oldfp", "cvc4_2017_08_17_c"))
-        invocations.append(("nocbqi", "cvc4_2017_08_17_c"))
+        invocations.append(("oldfp", "cvc4_2017_10_02"))
+        invocations.append(("nocbqi", "cvc4_2017_10_02"))
 
         #invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
