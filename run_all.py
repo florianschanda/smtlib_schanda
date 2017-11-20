@@ -40,7 +40,7 @@ Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
 
 ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 
-ALT_ERGO_FP_VERSION = sorted(glob("altergo_fp_201*"))[-1]
+ALT_ERGO_FP_VERSION = "altergo_2_0_0"
 ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 
 def main():
