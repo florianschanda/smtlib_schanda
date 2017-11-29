@@ -277,7 +277,7 @@ def extract_benchmark(test):
                "--no-counterexample",
                "--no-axiom-guard",
                "--codepeer=off",
-               "-d"]
+               "--debug-save-vcs"]
         if test["ieee"]:
             cmd.append("--assume-ieee")
         if "O401-034__float_pred" in test["dir"]:
