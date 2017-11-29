@@ -22,11 +22,13 @@
 ##                                                                          ##
 ##############################################################################
 
-import os
-import glob
 import argparse
+import glob
 import multiprocessing
+import os
+import shutil
 import subprocess
+import copy
 
 # Set this to false to skip cleanup in test directories
 DO_CLEANUP = True
@@ -106,6 +108,7 @@ FLOAT_ONLY_BENCHMARKS = set([
     'P201-069__simulink',
     'P310-021__proof_float_remainder',
     'P315-010__float',
+    'P405-006__coq_lemma_library',
     'P615-019__silver',
     'P620-034__float_out_subtype',
     'P816-010__prefix_inline',
@@ -154,7 +157,7 @@ RELEVANT_FLOAT_STUFF = set(["fp.",
 
 RELEVANT_BV_STUFF = set(["bv2nat"])
 
-def autodetect_spark_testsuite():
+def autodetect_spark_install():
     candidate = None
     for p in os.environ["PATH"].split(os.pathsep):
         if os.path.exists(p) and os.path.isdir(p):
@@ -163,25 +166,24 @@ def autodetect_spark_testsuite():
                 break
     if candidate is None:
         return None
-    test_dir = os.path.normpath(os.path.join(candidate, "..", "..",
+    test_dir = os.path.normpath(os.path.join(candidate, ".."))
+    if os.path.isdir(test_dir):
+        return test_dir
+    else:
+        return None
+
+def autodetect_spark_testsuite():
+    candidate = autodetect_spark_install()
+    if candidate is None:
+        return None
+    test_dir = os.path.normpath(os.path.join(candidate, "..",
                                              "testsuite", "gnatprove", "tests"))
     if os.path.isdir(test_dir):
         return test_dir
     else:
         return None
 
-def extract_benchmark(test):
-    if "record_ddos" in test["dir"]:
-        return None
-    #if "proofinuse" not in test["dir"]:
-    #    return None
-    # if "TU__type_invariant__legal" not in test["dir"]:
-    #    return None
-    # if "O318-021__modular" not in test["dir"]:
-    #    return None
-
-    ROOT = os.getcwd()
-    os.chdir(test["dir"])
+def emit_default_gpr(test):
     gpr_files = glob.glob("*.gpr")
     if len(gpr_files) == 0:
         if not os.path.exists("test.adc"):
@@ -198,6 +200,50 @@ def extract_benchmark(test):
                          ' use "test.adc";\n')
                 fd.write('  end Compiler;\n')
                 fd.write('end Test;\n')
+
+def emit_lemmalib_gpr(test):
+    lemma_lib_dir = os.path.join(test["spark"], "lib", "gnat")
+    assert os.path.isdir(lemma_lib_dir)
+
+    include_dir = os.path.join(test["spark"], "include", "spark")
+    assert os.path.isdir(include_dir)
+
+    shutil.copyfile(os.path.join(lemma_lib_dir, "spark_lemmas.gpr"),
+                    os.path.join(test["dir"], "spark_lemmas.gpr"))
+
+    for fn in glob.glob(os.path.join(include_dir, "*.ad?")):
+        shutil.copyfile(fn, os.path.join(test["dir"], os.path.basename(fn)))
+
+    shutil.copytree(os.path.join(lemma_lib_dir, "proof"),
+                    os.path.join(test["dir"], "proof"))
+
+def extract_benchmark(test):
+    if "record_ddos" in test["dir"]:
+        return None
+    #if "proofinuse" not in test["dir"]:
+    #    return None
+    # if "TU__type_invariant__legal" not in test["dir"]:
+    #    return None
+    # if "O318-021__modular" not in test["dir"]:
+    #    return None
+
+    ROOT = os.getcwd()
+    os.chdir(test["dir"])
+
+    env = copy.copy(os.environ)
+    extra_env = {}
+
+    if "P405-006__coq_lemma_library" in test["dir"]:
+        # This test is important but quite special and needs a custom setup
+        emit_lemmalib_gpr(test)
+        extra_env["SPARK_LEMMAS_OBJECT_DIR"] = "obj"
+        extra_env["SPARK_LEMMAS_BODY_MODE"]  = "On"
+        extra_env["SPARK_LEMMAS_INSTALLED"] = "False"
+    else:
+        emit_default_gpr(test)
+
+    env.update(extra_env)
+
     with open("bench_w3.conf", "w") as fd:
         fd.write("[main]\n")
         fd.write("magic = 14\n")
@@ -239,7 +285,8 @@ def extract_benchmark(test):
             cmd.append("safety_pack.adb")
         p = subprocess.Popen(cmd,
                              stdout=subprocess.PIPE,
-                             stderr=subprocess.STDOUT)
+                             stderr=subprocess.STDOUT,
+                             env=env)
         stdout, _ = p.communicate()
         #print stdout
 
@@ -321,6 +368,9 @@ def main():
     ap.add_argument("--testsuite",
                     default=autodetect_spark_testsuite(),
                     help="root of the spark 2014 testsuite")
+    ap.add_argument("--install",
+                    default=autodetect_spark_install(),
+                    help="root of the spark 2014 install")
     ap.add_argument("--all",
                     action="store_true",
                     default=False,
@@ -371,6 +421,7 @@ def main():
 
     tests = [{"dir"    : os.path.normpath(os.path.join(options.testsuite,
                                                        d)),
+              "spark"  : os.path.normpath(options.install),
               "prover" : prover,
               "faker"  : faker,
               "driver" : driver,
