@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -712,6 +712,68 @@ logic c2__function_guard : bool, t -> prop
 axiom c2__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic vbraw : t
+
+logic x : bool
+
+logic tmp : t
+
+logic o : t
+
+logic o1 : bool
+
+logic vbraw1 : t
+
+logic result : t
+
+logic tmp1 : t
+
+logic result1 : bool
+
+logic x1 : bool
+
+logic vbraw2 : t
+
+logic x2 : bool
+
+logic tmp2 : t
+
+logic vbraw3 : t
+
+logic x3 : bool
+
+logic tmp3 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (o = vbraw1)
+
+axiom H4 : (result = tmp)
+
+axiom H5 : (tmp1 = o)
+
+axiom H6 : (o1 = c2(tmp1))
+
+axiom H7 : (result1 = x)
+
+axiom H8 : (x1 = o1)
+
+axiom H9 : (tmp2 = tmp1)
+
+axiom H10 : (x1 = x2)
+
+axiom H11 : (vbraw2 = vbraw1)
+
+axiom H12 : (tmp3 = tmp1)
+
+axiom H13 : (x3 = x1)
+
+axiom H14 : (vbraw3 = vbraw1)
 
  (* File "port.ads", line 90, characters 0-0 *)
 goal WP_parameter_def : true

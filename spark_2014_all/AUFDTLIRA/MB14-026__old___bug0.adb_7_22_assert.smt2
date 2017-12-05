@@ -116,6 +116,8 @@
 (declare-const old__ (Array Int character))
 (declare-const result (Array Int character))
 (declare-const old__1 (Array Int character))
+(declare-const old__2 (Array Int character))
+(declare-const old__3 (Array Int character))
 (assert (dynamic_property 1 2147483647 (to_rep1 s__first) (to_rep1 s__last)))
 (assert (= (mk_map__ref result) (mk_map__ref old__)))
 (assert (= old__1 s))

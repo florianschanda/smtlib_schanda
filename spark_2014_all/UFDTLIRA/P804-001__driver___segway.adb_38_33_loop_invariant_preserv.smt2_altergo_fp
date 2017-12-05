@@ -135,7 +135,7 @@ function state_type__ref___projection(a: state_type__ref) : state_type =
 
 type speed_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -182,15 +182,85 @@ axiom speed_is_valid__def_axiom :
   ((not (segway__state = 1)) and (segway__speed <  0))))) ->
   (speed_is_valid(segway__speed, segway__state) = true))))
 
+logic speed : int
+
+logic state : int
+
+logic temp___157 : int
+
+logic temp___156 : int
+
+logic speed1 : int
+
+logic state1 : int
+
+logic speed2 : int
+
+logic state2 : int
+
+logic speed3 : int
+
+logic state3 : int
+
+logic speed4 : int
+
+logic state4 : int
+
+logic speed5 : int
+
+logic state5 : int
+
+logic speed6 : int
+
+logic state6 : int
+
+logic speed7 : int
+
+logic state7 : int
+
+logic speed8 : int
+
+logic state8 : int
+
+logic speed9 : int
+
+logic state9 : int
+
+logic speed10 : int
+
+logic state10 : int
+
+logic speed11 : int
+
+logic state11 : int
+
+logic speed12 : int
+
+logic state12 : int
+
+axiom H : in_range2(speed)
+
+axiom H1 : in_range1(state)
+
+axiom H2 : (speed_is_valid(speed, state) = true)
+
+axiom H3 : (not (state = 0))
+
+axiom H4 : (speed_is_valid(speed2, state2) = true)
+
+axiom H5 : ((in_range2(speed2) and in_range1(state2)) and (not (state2 = 0)))
+
+axiom H6 : ((0 <  speed2) -> ((speed_is_valid(speed3, state3) = true) and
+  (in_range2(speed3) and in_range1(state3))))
+
+axiom H7 : ((not (0 <  speed2)) -> ((speed_is_valid(speed4,
+  state4) = true) and (in_range2(speed4) and in_range1(state4))))
+
+axiom H8 : ((not (0 <  speed2)) -> (state3 = state4))
+
+axiom H9 : ((not (0 <  speed2)) -> (speed3 = speed4))
+
+axiom H10 : (not (state3 = 0))
+
  (* File "segway.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:int. forall state:int. forall speed1:int. forall state1:int.
-  forall speed2:int. forall state2:int. forall speed3:int. forall state3:int.
-  (in_range2(speed) -> (in_range1(state) -> ((speed_is_valid(speed,
-  state) = true) -> ((not (state = 0)) -> ((speed_is_valid(speed1,
-  state1) = true) -> (((in_range2(speed1) and in_range1(state1)) and
-  ((((0 <  speed1) and ((speed_is_valid(speed2, state2) = true) and
-  (in_range2(speed2) and in_range1(state2)))) or ((not (0 <  speed1)) and
-  (((speed_is_valid(speed3, state3) = true) and (in_range2(speed3) and
-  in_range1(state3))) and ((state2 = state3) and (speed2 = speed3))))) and
-  (not (state2 = 0)))) -> (speed_is_valid(speed2, state2) = true))))))))
+goal WP_parameter_def : (speed_is_valid(speed3, state3) = true)

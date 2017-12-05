@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type value
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -301,22 +301,95 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,integer) farray
+
+logic v : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result : int
+
+logic v1 : int
+
+logic result1 : int
+
+logic v2 : int
+
+logic result2 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic v3 : int
+
+logic a4 : (int,integer) farray
+
+logic v4 : int
+
+axiom H : in_range1(j)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range3(v))
+
+axiom H2 : (result = v)
+
+axiom H3 : (v1 = 0)
+
+axiom H4 : (((1 <= j) and (j <= 10)) -> ((1 <= j) and (j <= 10)))
+
+axiom H5 : (((1 <= j) and (j <= 10)) -> (o = j))
+
+axiom H6 : (((1 <= j) and (j <= 10)) -> (o1 = (a[o])))
+
+axiom H7 : (((1 <= j) and (j <= 10)) -> (o2 = to_rep(o1)))
+
+axiom H8 : (((1 <= j) and (j <= 10)) -> (v1 = result1))
+
+axiom H9 : (((1 <= j) and (j <= 10)) -> (v2 = o2))
+
+axiom H10 : (((1 <= j) and (j <= 10)) -> (to_rep(o3) = 0))
+
+axiom H11 : (((1 <= j) and (j <= 10)) -> ((1 <= j) and (j <= 10)))
+
+axiom H12 : (((1 <= j) and (j <= 10)) -> (o4 = j))
+
+axiom H13 : (((1 <= j) and (j <= 10)) -> (o5 = (a[o4 <- o3])))
+
+axiom H14 : (((1 <= j) and (j <= 10)) -> (result2 = a))
+
+axiom H15 : (((1 <= j) and (j <= 10)) -> (a2 = o5))
+
+axiom H16 : ((not ((1 <= j) and (j <= 10))) -> (v2 = v1))
+
+axiom H17 : ((not ((1 <= j) and (j <= 10))) -> (a2 = a))
+
+axiom H18 : ((not ((1 <= j) and (j <= 10))) -> (v2 = v1))
+
+axiom H19 : ((not ((1 <= j) and (j <= 10))) -> (a2 = a1))
+
+axiom H20 : (v2 = v3)
+
+axiom H21 : (a2 = a3)
+
+axiom H22 : (v4 = v2)
+
+axiom H23 : (a4 = a2)
+
+axiom H24 : (1 <= j)
+
+axiom H25 : (j <= 10)
+
  (* File "example.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall v:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:integer. forall o4:int.
-  forall o5:(int,integer) farray. forall a1:(int,integer) farray.
-  forall result:int. forall v1:int. forall result1:int. forall v2:int.
-  forall result2:(int,integer) farray. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. forall v3:int.
-  forall a4:(int,integer) farray. forall v4:int. (in_range1(j) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(v)) -> ((((({ int__content =
-  result } = { int__content = v }) and (v1 = 0)) and ((((1 <= j) and
-  (j <= 10)) and (((((((1 <= j) and (j <= 10)) and (o = j)) and
-  (o1 = (a[o]))) and (o2 = to_rep(o1))) and ((v1 = result1) and
-  (v2 = o2))) and (((to_rep(o3) = 0) and ((((1 <= j) and (j <= 10)) and
-  (o4 = j)) and (o5 = (a[o4 <- o3])))) and ((result2 = a) and
-  (a2 = o5))))) or ((not ((1 <= j) and (j <= 10))) and (((v2 = v1) and
-  (a2 = a)) and ((v2 = v1) and (a2 = a1)))))) and (((v2 = v3) and
-  (a2 = a3)) and ((v4 = v2) and (a4 = a2)))) -> (((1 <= j) and (j <= 10)) ->
-  (v3 = to_rep((a[j]))))))))
+goal WP_parameter_def : (v3 = to_rep((a[j])))

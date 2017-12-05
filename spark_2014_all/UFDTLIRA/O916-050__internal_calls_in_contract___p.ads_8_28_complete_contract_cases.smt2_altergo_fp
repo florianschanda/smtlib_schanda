@@ -111,6 +111,8 @@ axiom internal__post_axiom : true
 axiom internal__def_axiom :
   (forall self__:pt [internal(self__)]. (internal(self__) = true))
 
+logic self__ : pt
+
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : (((of_int(1) = true) -> (1 <= (0 + 1))) and
   ((not (of_int(1) = true)) -> (1 <= (0 + 0))))

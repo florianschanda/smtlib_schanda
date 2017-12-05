@@ -84,7 +84,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -140,7 +140,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type ttB
 
-predicate in_range2(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -249,18 +249,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -378,7 +378,7 @@ function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
 type t
 
-predicate in_range3(x: int) = (((-2560) <= x) and (x <= 2560))
+predicate in_range3(x: int) = (((- 2560) <= x) and (x <= 2560))
 
 logic dummy2 : t
 
@@ -503,13 +503,60 @@ axiom y__def_axiom : (y = of_fixed1(128))
 
 axiom inv_y__def_axiom : (inv_y = of_fixed1(512))
 
+logic two : int
+
+logic z : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic z1 : t
+
+logic result : int
+
+logic two1 : int
+
+logic result1 : t
+
+logic z2 : t
+
+logic result2 : t
+
+logic z3 : t
+
+logic result3 : t
+
+logic z4 : t
+
+logic result4 : t
+
+logic z5 : t
+
+axiom H : (((- 1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280))
+
+axiom H1 : (result = two)
+
+axiom H2 : (two1 = 2)
+
+axiom H3 : in_range1(two1)
+
+axiom H4 : ((not (to_fixed1(x) = 0)) -> (to_fixed1(o) = fxp_div(to_fixed1(x),
+  to_fixed1(x))))
+
+axiom H5 : ((not (to_fixed1(x) = 0)) -> (result1 = z))
+
+axiom H6 : ((not (to_fixed1(x) = 0)) -> (z2 = o))
+
+axiom H7 : ((not (to_fixed1(x) = 0)) -> (to_fixed1(z2) = 256))
+
+axiom H8 : ((to_fixed1(x) = 0) -> (z2 = z))
+
+axiom H9 : ((to_fixed1(x) = 0) -> (z2 = z1))
+
  (* File "binary_fixed.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall two:int. forall z:t. forall o:t. forall z1:t. forall result:int.
-  forall two1:int. forall result1:t. forall z2:t.
-  ((((-1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280)) ->
-  (((result = two) and (two1 = 2)) -> (in_range1(two1) ->
-  ((((not (to_fixed1(x) = 0)) and (((to_fixed1(o) = fxp_div(to_fixed1(x),
-  to_fixed1(x))) and (({ t__content = result1 } = { t__content = z }) and
-  (z2 = o))) and (to_fixed1(z2) = 256))) or ((to_fixed1(x) = 0) and
-  ((z2 = z) and (z2 = z1)))) -> in_range2(fxp_div(to_fixed1(x), 128)))))))
+goal WP_parameter_def : in_range2(fxp_div(to_fixed1(x), 128))

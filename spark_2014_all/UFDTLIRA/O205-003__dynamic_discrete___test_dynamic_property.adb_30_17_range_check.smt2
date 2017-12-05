@@ -66,6 +66,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range2 temp___expr_15)))
 (define-fun dynamic_invariant2 ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 1 last)) (dynamic_property 1 last temp___expr_135)))
 (assert (= last c))
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (in_range1 c))
 (assert (in_range1 x))
 (assert (not (< c x)))

@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -664,28 +664,90 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic res : t
+
+logic safety_pack__saturate__2__result : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic res3 : t
+
+logic result3 : t
+
+logic safety_pack__saturate__2__result1 : t
+
+logic safety_pack__saturate__2__result2 : t
+
+logic safety_pack__saturate__2__result3 : t
+
+logic res4 : t
+
+logic safety_pack__saturate__2__result4 : t
+
+logic res5 : t
+
+logic safety_pack__saturate__2__result5 : t
+
+logic result4 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (result = res)
+
+axiom H4 : (res1 = value)
+
+axiom H5 : true
+
+axiom H6 : (ult(value, min_value) -> (result1 = res1))
+
+axiom H7 : (ult(value, min_value) -> (res2 = min_value))
+
+axiom H8 : ((not ult(value, min_value)) -> (ugt(value, max_value) ->
+  (result2 = res1)))
+
+axiom H9 : ((not ult(value, min_value)) -> (ugt(value, max_value) ->
+  (res3 = max_value)))
+
+axiom H10 : ((not ult(value, min_value)) -> ((not ugt(value, max_value)) ->
+  (res3 = res1)))
+
+axiom H11 : ((not ult(value, min_value)) -> (res2 = res3))
+
+axiom H12 :
+  (safety_pack__saturate__2__result1 = safety_pack__saturate__2__result2)
+
+axiom H13 :
+  (safety_pack__saturate__2__result3 = safety_pack__saturate__2__result1)
+
+axiom H14 : (result3 = safety_pack__saturate__2__result)
+
+axiom H15 : (safety_pack__saturate__2__result1 = res2)
+
+axiom H16 :
+  (safety_pack__saturate__2__result4 = safety_pack__saturate__2__result2)
+
+axiom H17 : (res4 = res2)
+
+axiom H18 :
+  (safety_pack__saturate__2__result5 = safety_pack__saturate__2__result3)
+
+axiom H19 : (res5 = res2)
+
+axiom H20 : (result4 = safety_pack__saturate__2__result4)
+
+axiom H21 : ult(value, min_value)
+
  (* File "types.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall safety_pack__saturate__2__result:t. forall result:t.
-  forall res1:t. forall result1:t. forall res2:t. forall result2:t.
-  forall res3:t. forall result3:t.
-  forall safety_pack__saturate__2__result1:t.
-  forall safety_pack__saturate__2__result2:t.
-  forall safety_pack__saturate__2__result3:t. forall res4:t.
-  forall safety_pack__saturate__2__result4:t. forall res5:t.
-  forall safety_pack__saturate__2__result5:t.
-  (forall result4:t. ((((((result = res) and (res1 = value)) and
-  (((ult(value, min_value) and ((result1 = res1) and (res2 = min_value))) or
-  ((not ult(value, min_value)) and (((ugt(value, max_value) and
-  ((result2 = res1) and (res3 = max_value))) or ((not ugt(value,
-  max_value)) and (res3 = res1))) and (res2 = res3)))) and
-  (((safety_pack__saturate__2__result1 = safety_pack__saturate__2__result2) and
-  (safety_pack__saturate__2__result3 = safety_pack__saturate__2__result1)) and
-  ((result3 = safety_pack__saturate__2__result) and
-  (safety_pack__saturate__2__result1 = res2))))) and
-  (((safety_pack__saturate__2__result4 = safety_pack__saturate__2__result2) and
-  (res4 = res2)) and
-  ((safety_pack__saturate__2__result5 = safety_pack__saturate__2__result3) and
-  (res5 = res2)))) and (result4 = safety_pack__saturate__2__result4)) ->
-  (ult(value, min_value) ->
-  (safety_pack__saturate__2__result4 = min_value)))))
+goal WP_parameter_def : (safety_pack__saturate__2__result4 = min_value)

@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 (define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
@@ -293,6 +293,7 @@
 (assert (forall ((speed Float32)) (! (= (= (is_valid_speed speed) true) (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed) (fp.leq speed (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern ((is_valid_speed speed)))))
 (declare-const i Int)
 (declare-const deceleration_curve__print_curve__L_3__R4b__assume Int)
+(declare-const o Float32)
 (declare-const result Int)
 (declare-const i1 Int)
 (declare-const i2 Int)

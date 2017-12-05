@@ -195,6 +195,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_210 (_ BitVec 8)) (temp___is_init_207 Bool) (temp___skip_constant_208 Bool) (temp___do_toplevel_209 Bool)) Bool true)
 (declare-const us Int)
 (declare-const us1 Int)
+(declare-const o Bool)
 (assert (dynamic_invariant l true false true))
 (assert (dynamic_invariant r true false true))
 (assert (= (to_rep (rec__very_longs__very_long__length (us_split_discrs1 l))) (to_rep (rec__very_longs__very_long__length (us_split_discrs1 r)))))

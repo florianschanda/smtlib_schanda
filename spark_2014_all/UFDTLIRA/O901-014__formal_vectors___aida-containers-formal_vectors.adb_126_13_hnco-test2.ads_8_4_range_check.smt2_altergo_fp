@@ -481,6 +481,11 @@ function index_type__ref___2__projection(a: index_type__ref) : index_type =
 
 logic first_index__function_guard : int, us_rep -> prop
 
+logic us : int
+
+logic us1 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
  (* File "aida-containers-formal_vectors.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(container) = to_rep1(container1)) ->
-  in_range(to_rep(container)))
+goal WP_parameter_def : in_range(to_rep(container))

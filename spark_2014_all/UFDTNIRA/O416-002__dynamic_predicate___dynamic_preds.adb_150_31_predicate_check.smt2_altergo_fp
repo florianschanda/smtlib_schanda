@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -335,9 +335,31 @@ function even_close_pair__ref___projection(a: even_close_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : even
+
+logic x__split_fields1 : even
+
+logic dynamic_preds__update_even_close_pair__x__compl : even
+
+logic dynamic_preds__update_even_close_pair__x__compl1 : even
+
+logic dynamic_preds__update_even_close_pair__x__fields : even
+
+logic dynamic_preds__update_even_close_pair__x__fields1 : even
+
+logic result : even
+
+logic result1 : even
+
+logic x__split_fields2 : even
+
+logic x__split_fields3 : even
+
+axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
+
+axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
+  (mod(to_rep(x__split_fields1), 2) = 0))
+
  (* File "dynamic_preds.ads", line 25, characters 0-0 *)
 goal WP_parameter_def :
-  (forall x__split_fields:even. forall x__split_fields1:even.
-  ((in_range(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
-  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) ->
-  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2)))))
+  (to_rep(x__split_fields1) = (to_rep(x__split_fields) + 2))

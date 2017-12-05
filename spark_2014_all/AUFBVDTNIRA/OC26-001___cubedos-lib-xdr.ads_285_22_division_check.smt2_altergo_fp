@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -686,7 +686,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1067,7 +1067,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type octet_array_extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 65535))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 65535))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1443,10 +1443,153 @@ axiom def_axiom :
   (forall temp___547:int. (((temp___542(temp___544, temp___545,
   temp___546)).elts2[temp___547]) = of_rep(temp___544)))))
 
+logic value : (int,character) farray
+
+logic last6 : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___549 : (int,character) farray
+
+logic temp___5491 : t3
+
+logic temp___550 : (int,character) farray
+
+logic temp___5501 : t1
+
+logic temp___551 : (int,character) farray
+
+logic temp___5511 : t1
+
+logic o8 : (int,character) farray
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___557 : int
+
+logic temp___554 : (int,character) farray
+
+logic o13 : int
+
+logic o14 : int
+
+logic temp___552 : int
+
+logic o15 : int
+
+logic o16 : octet
+
+logic o17 : t
+
+logic o18 : int
+
+logic o19 : character
+
+logic o20 : int
+
+logic o21 : (int,character) farray
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic result : bool
+
+logic result1 : (int,character) farray
+
+logic value1 : (int,character) farray
+
+logic result2 : int
+
+logic i1 : int
+
+logic value2 : (int,character) farray
+
+logic i2 : int
+
+logic result3 : (int,character) farray
+
+logic value3 : (int,character) farray
+
+logic value4 : (int,character) farray
+
+logic i3 : int
+
+logic value5 : (int,character) farray
+
+logic i4 : int
+
+logic value6 : (int,character) farray
+
+logic i5 : int
+
+logic value7 : (int,character) farray
+
+logic i6 : int
+
+logic result4 : int
+
+logic last7 : int
+
+logic value8 : (int,character) farray
+
+logic last8 : int
+
+logic i7 : int
+
+logic value9 : (int,character) farray
+
+logic last9 : int
+
+logic i8 : int
+
+axiom H : dynamic_property1(0, 65535, to_rep1(first2(data1)),
+  to_rep1(last2(data1)))
+
+axiom H1 : in_range4(position)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(value__first),
+  to_rep1(value__last))
+
+axiom H3 : (((- 1) <= 65535) -> in_range5(last6))
+
+axiom H4 : (comp_mod(position,4) = 0)
+
+axiom H5 : (0 <  length1({ elts1 = data; rt1 = data1 }))
+
  (* File "cubedos-lib-xdr.ads", line 261, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last6:int. (dynamic_property1(0, 65535, to_rep1(first2(data1)),
-  to_rep1(last2(data1))) -> (in_range4(position) -> (dynamic_property(1,
-  2147483647, to_rep1(value__first), to_rep1(value__last)) ->
-  ((((-1) <= 65535) -> in_range5(last6)) -> ((comp_mod(position,4) = 0) ->
-  ((0 <  length1({ elts1 = data; rt1 = data1 })) -> (not (4 = 0)))))))))
+goal WP_parameter_def : (not (4 = 0))

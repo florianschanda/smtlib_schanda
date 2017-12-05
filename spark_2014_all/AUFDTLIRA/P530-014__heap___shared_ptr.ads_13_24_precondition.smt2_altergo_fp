@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -407,6 +407,19 @@ logic this : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic us_HEAP : us_type_of_heap
+
+logic us : (int,character) farray
+
+logic us1 : t
+
+logic o : (int,character) farray
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
  (* File "shared_ptr.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us_HEAP:us_type_of_heap. (0 <  length1(this, us_HEAP)))
+goal WP_parameter_def : (0 <  length1(this, us_HEAP))

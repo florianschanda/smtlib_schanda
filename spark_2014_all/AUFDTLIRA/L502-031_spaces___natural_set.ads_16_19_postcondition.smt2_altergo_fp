@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type element_t
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -421,7 +421,7 @@ axiom valid__def_axiom :
   ((forall i:int. (((1 <= i) and (i <= to_rep(s))) ->
    in_range2(to_rep1((s1[i]))))) and
   (forall i:int. ((((to_rep(s) + 1) <= i) and (i <= 10)) ->
-  (to_rep1((s1[i])) = (-1)))))))
+  (to_rep1((s1[i])) = (- 1)))))))
 
 logic members : us_rep -> int
 
@@ -464,26 +464,63 @@ axiom def_axiom :
   (forall temp___199:int.
   ((temp___196(temp___198)[temp___199]) = of_rep1(temp___198))))
 
+logic s__split_fields : set_length
+
+logic s__split_fields1 : (int,element_t) farray
+
+logic o : set_length
+
+logic o1 : set_length
+
+logic o2 : (int,element_t) farray
+
+logic temp___200 : set_length
+
+logic temp___2001 : (int,element_t) farray
+
+logic result : set_length
+
+logic result1 : (int,element_t) farray
+
+logic s__split_fields2 : set_length
+
+logic s__split_fields3 : (int,element_t) farray
+
+logic s__split_fields4 : set_length
+
+logic s__split_fields5 : (int,element_t) farray
+
+logic s__split_fields6 : set_length
+
+logic s__split_fields7 : (int,element_t) farray
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___196((- 1)) = o2)
+
+axiom H3 : (temp___200 = o1)
+
+axiom H4 : (temp___2001 = o2)
+
+axiom H5 : (result = s__split_fields)
+
+axiom H6 : (result1 = s__split_fields1)
+
+axiom H7 : (temp___200 = s__split_fields2)
+
+axiom H8 : (temp___2001 = s__split_fields3)
+
+axiom H9 : (s__split_fields4 = s__split_fields2)
+
+axiom H10 : (s__split_fields5 = s__split_fields3)
+
+axiom H11 : (s__split_fields6 = s__split_fields2)
+
+axiom H12 : (s__split_fields7 = s__split_fields3)
+
  (* File "natural_set.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:set_length.
-  forall s__split_fields1:(int,element_t) farray. forall o:set_length.
-  forall o1:set_length. forall o2:(int,element_t) farray.
-  forall temp___200:set_length. forall temp___2001:(int,element_t) farray.
-  forall result:set_length. forall result1:(int,element_t) farray.
-  forall s__split_fields2:set_length.
-  forall s__split_fields3:(int,element_t) farray.
-  forall s__split_fields4:set_length.
-  forall s__split_fields5:(int,element_t) farray.
-  forall s__split_fields6:set_length.
-  forall s__split_fields7:(int,element_t) farray. ((((((to_rep(o) = 0) and
-  ((o = o1) and (temp___196((-1)) = o2))) and ((temp___200 = o1) and
-  (temp___2001 = o2))) and (((result = s__split_fields) and
-  (result1 = s__split_fields1)) and ((temp___200 = s__split_fields2) and
-  (temp___2001 = s__split_fields3)))) and
-  (((s__split_fields4 = s__split_fields2) and
-  (s__split_fields5 = s__split_fields3)) and
-  ((s__split_fields6 = s__split_fields2) and
-  (s__split_fields7 = s__split_fields3)))) -> (valid({ us_split_fields1 = {
+goal WP_parameter_def : (valid({ us_split_fields1 = {
   rec__natural_set__t__len = s__split_fields4; rec__natural_set__t__m =
-  s__split_fields5 } }) = true)))
+  s__split_fields5 } }) = true)

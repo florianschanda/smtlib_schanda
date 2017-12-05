@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -272,7 +272,10 @@ axiom def_axiom1 :
   ((not (temp___432 = temp___430)) -> ((temp___427(temp___429, temp___430,
   temp___431)[temp___432]) = (temp___429[temp___432])))))))
 
+axiom H : in_range1(i)
+
+axiom H1 : (bool_eq3(a, (- 2147483648), 2147483647, temp___420(a, i, 42),
+  (- 2147483648), 2147483647) = true)
+
  (* File "simple_arrays.adb", line 187, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> ((bool_eq3(a, (-2147483648),
-  2147483647, temp___420(a, i, 42), (-2147483648), 2147483647) = true) ->
-  (to_rep((a[i])) = to_rep((temp___427(a, i, 42)[i])))))
+goal WP_parameter_def : (to_rep((a[i])) = to_rep((temp___427(a, i, 42)[i])))

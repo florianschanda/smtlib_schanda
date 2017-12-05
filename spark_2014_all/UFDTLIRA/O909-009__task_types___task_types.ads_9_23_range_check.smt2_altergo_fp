@@ -383,9 +383,15 @@ logic t2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic us : int
+
+logic us1 : int
+
+axiom H : ((us = 0) and in_range(0))
+
+axiom H1 : ((t__attr__constrained = true) and (to_rep(t__split_discrs) = 0))
+
+axiom H2 : ((0 = to_rep(t__split_discrs)) and (t__attr__constrained = true))
+
  (* File "task_types.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. (((us = 0) and in_range(0)) ->
-  (((t__attr__constrained = true) and (to_rep(t__split_discrs) = 0)) ->
-  (((0 = to_rep(t__split_discrs)) and (t__attr__constrained = true)) ->
-  in_range(1)))))
+goal WP_parameter_def : in_range(1)

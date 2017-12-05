@@ -236,6 +236,8 @@
 (define-fun dynamic_invariant7 ((temp___expr_194 Int) (temp___is_init_191 Bool) (temp___skip_constant_192 Bool) (temp___do_toplevel_193 Bool)) Bool (=> (or (= temp___is_init_191 true) (<= 0 last4)) (dynamic_property3 0 last4 temp___expr_194)))
 (assert (= last4 (ite (< (length s1) (length s2)) (length s2) (length s1))))
 (declare-const lengths map1)
+(declare-const o Int)
+(declare-const us Int)
 (assert (and (and (and (dynamic_property6 first2 last2 (to_rep1 lengths__first) (to_rep1 lengths__last) first3 last3 (to_rep1 lengths__first_2) (to_rep1 lengths__last_2)) (and (= (to_rep1 lengths__first) (to_rep1 (first (rt s1)))) (= (to_rep1 lengths__last) (to_rep1 (last (rt s1)))))) (and (= (to_rep1 lengths__first_2) (to_rep1 (first (rt s2)))) (= (to_rep1 lengths__last_2) (to_rep1 (last (rt s2)))))) (forall ((temp___286 Int) (temp___287 Int)) (=> (and (and (<= (to_rep1 lengths__first) temp___286) (<= temp___286 (to_rep1 lengths__last))) (and (<= (to_rep1 lengths__first_2) temp___287) (<= temp___287 (to_rep1 lengths__last_2)))) (dynamic_property3 0 last4 (to_rep2 (get lengths temp___286 temp___287)))))))
 (assert (in_range1 x1))
 (assert (in_range4 x2))

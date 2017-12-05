@@ -176,7 +176,7 @@ function tlastS__ref___projection(a: tlastS__ref) : tlastS =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -439,23 +439,23 @@ logic bool_eq8 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq8(a, b)].
-  ((((((to_rep3(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep3(((b).us_split_discrs1).rec__tokens__token__kind)) and
-  (tokens__token__val__pred(a) ->
+  ((((to_rep3(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep3(((b).us_split_discrs1).rec__tokens__token__kind)) and
+  (((tokens__token__val__pred(a) ->
   (bool_eq5(((a).us_split_fields3).rec__tokens__token__val,
-  ((b).us_split_fields3).rec__tokens__token__val) = true))) and
-  (tokens__token__op__pred(a) ->
-  (to_rep2(((a).us_split_fields3).rec__tokens__token__op) = to_rep2(((b).us_split_fields3).rec__tokens__token__op)))) and
-  (tokens__token__instr__pred(a) ->
-  (to_rep(((a).us_split_fields3).rec__tokens__token__instr) = to_rep(((b).us_split_fields3).rec__tokens__token__instr)))) ->
-  (bool_eq8(a, b) = true)) and
-  ((not ((((to_rep3(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep3(((b).us_split_discrs1).rec__tokens__token__kind)) and
-  (tokens__token__val__pred(a) ->
-  (bool_eq5(((a).us_split_fields3).rec__tokens__token__val,
-  ((b).us_split_fields3).rec__tokens__token__val) = true))) and
+  ((b).us_split_fields3).rec__tokens__token__val) = true)) and
   (tokens__token__op__pred(a) ->
   (to_rep2(((a).us_split_fields3).rec__tokens__token__op) = to_rep2(((b).us_split_fields3).rec__tokens__token__op)))) and
   (tokens__token__instr__pred(a) ->
   (to_rep(((a).us_split_fields3).rec__tokens__token__instr) = to_rep(((b).us_split_fields3).rec__tokens__token__instr))))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep3(((b).us_split_discrs1).rec__tokens__token__kind)) and
+  (((tokens__token__val__pred(a) ->
+  (bool_eq5(((a).us_split_fields3).rec__tokens__token__val,
+  ((b).us_split_fields3).rec__tokens__token__val) = true)) and
+  (tokens__token__op__pred(a) ->
+  (to_rep2(((a).us_split_fields3).rec__tokens__token__op) = to_rep2(((b).us_split_fields3).rec__tokens__token__op)))) and
+  (tokens__token__instr__pred(a) ->
+  (to_rep(((a).us_split_fields3).rec__tokens__token__instr) = to_rep(((b).us_split_fields3).rec__tokens__token__instr)))))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size1 : int
@@ -575,9 +575,18 @@ logic t4 : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic last : int
+
+logic us : int
+
+axiom H : in_range2(last)
+
+axiom H1 : ((to_rep3(t) = 0) -> ((not (full(last) = true)) and
+  ((to_rep3(t) = 1) -> (2 <= size(last)))))
+
+axiom H2 : ((us = to_rep3(t)) and in_range5(to_rep3(t)))
+
+axiom H3 : (to_rep3(t) = 0)
+
  (* File "tokens.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last:int. forall us:int. (in_range2(last) -> (((to_rep3(t) = 0) ->
-  ((not (full(last) = true)) and ((to_rep3(t) = 1) -> (2 <= size(last))))) ->
-  (((us = to_rep3(t)) and in_range5(to_rep3(t))) -> ((to_rep3(t) = 0) ->
-  (not (full(last) = true)))))))
+goal WP_parameter_def : (not (full(last) = true))

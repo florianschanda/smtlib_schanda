@@ -75,7 +75,7 @@
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 (define-fun definite__t__b__pred ((a us_rep)) Bool (= (to_rep1 (rec__definite__t__d (us_split_discrs1 a))) 0))
 (define-fun definite__t__x__pred ((a us_rep)) Bool (= (to_rep1 (rec__definite__t__d (us_split_discrs1 a))) 1))
-(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (and (and (= (to_rep1 (rec__definite__t__d (us_split_discrs1 a))) (to_rep1 (rec__definite__t__d (us_split_discrs1 b)))) (= (to_rep (rec__definite__t__a (us_split_fields1 a))) (to_rep (rec__definite__t__a (us_split_fields1 b))))) (=> (definite__t__b__pred a) (= (to_rep (rec__definite__t__b (us_split_fields1 a))) (to_rep (rec__definite__t__b (us_split_fields1 b)))))) (=> (definite__t__x__pred a) (= (rec__definite__t__x (us_split_fields1 a)) (rec__definite__t__x (us_split_fields1 b))))) true false))
+(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep1 (rec__definite__t__d (us_split_discrs1 a))) (to_rep1 (rec__definite__t__d (us_split_discrs1 b)))) (and (and (= (to_rep (rec__definite__t__a (us_split_fields1 a))) (to_rep (rec__definite__t__a (us_split_fields1 b)))) (=> (definite__t__b__pred a) (= (to_rep (rec__definite__t__b (us_split_fields1 a))) (to_rep (rec__definite__t__b (us_split_fields1 b)))))) (=> (definite__t__x__pred a) (= (rec__definite__t__x (us_split_fields1 a)) (rec__definite__t__x (us_split_fields1 b)))))) true false))
 (declare-const value__size Int)
 (declare-fun object__size (us_rep) Int)
 (declare-const value__alignment Int)

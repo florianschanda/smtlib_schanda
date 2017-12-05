@@ -220,7 +220,11 @@ type pt__ref = { pt__content : us_rep
 
 function pt__ref___projection(a: pt__ref) : us_rep = (a).pt__content
 
+logic self__ : natural
+
+logic self__1 : bool
+
+axiom H : ((0 <  to_rep(self__)) and (self__1 = true))
+
  (* File "pure.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__:natural. forall self__1:bool. (((0 <  to_rep(self__)) and
-  (self__1 = true)) -> (0 <  to_rep(self__))))
+goal WP_parameter_def : (0 <  to_rep(self__))

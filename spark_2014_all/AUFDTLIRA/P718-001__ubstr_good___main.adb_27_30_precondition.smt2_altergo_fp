@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -716,49 +716,117 @@ axiom temp___String_Literal_865__def_axiom :
   (to_rep((temp___String_Literal_865(void)[4])) = 108)) and
   (to_rep((temp___String_Literal_865(void)[5])) = 111))
 
- (* File "main.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tag_v__split_fields:us_main_type.
-  forall tag_v__split_fields1:us_private. forall tag_v__split_fields2:int.
-  forall n__split_fields:us_main_type. forall n__split_fields1:us_private.
-  forall usq_:us_main_type. forall usq_1:us_private. forall usq_2:int.
-  forall temp___866:us_main_type. forall temp___8661:us_private.
-  forall temp___8662:int. forall o:us_main_type. forall o1:us_private.
-  forall o2:int. forall o3:int. forall o4:us_main_type. forall o5:us_private.
-  forall o6:int. forall tag_v__split_fields3:us_main_type.
-  forall tag_v__split_fields4:us_private. forall tag_v__split_fields5:int.
-  forall result:us_main_type. forall result1:us_private.
-  forall n__split_fields2:us_main_type. forall n__split_fields3:us_private.
-  forall result2:bool. (((tag_v__split_fields2 = us_tag1) and (length1({
-  us_split_fields1 = { rec__vk__tag__fs__name__t = tag_v__split_fields;
-  rec__ext__ = tag_v__split_fields1 }; attr__tag = tag_v__split_fields2
-  }) = 0)) -> (((n__attr__tag = us_tag) and (length1({ us_split_fields1 = {
+logic tag_v__split_fields : us_main_type
+
+logic tag_v__split_fields1 : us_private
+
+logic tag_v__split_fields2 : int
+
+logic n__split_fields : us_main_type
+
+logic n__split_fields1 : us_private
+
+logic usq_ : us_main_type
+
+logic usq_1 : us_private
+
+logic usq_2 : int
+
+logic temp___866 : us_main_type
+
+logic temp___8661 : us_private
+
+logic temp___8662 : int
+
+logic o : us_main_type
+
+logic o1 : us_private
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : us_main_type
+
+logic o5 : us_private
+
+logic o6 : int
+
+logic o7 : (int,character) farray
+
+logic o8 : t
+
+logic tag_v__split_fields3 : us_main_type
+
+logic tag_v__split_fields4 : us_private
+
+logic tag_v__split_fields5 : int
+
+logic result : us_main_type
+
+logic result1 : us_private
+
+logic n__split_fields2 : us_main_type
+
+logic n__split_fields3 : us_private
+
+logic result2 : bool
+
+axiom H : ((tag_v__split_fields2 = us_tag1) and (length1({ us_split_fields1 =
+  { rec__vk__tag__fs__name__t = tag_v__split_fields; rec__ext__ =
+  tag_v__split_fields1 }; attr__tag = tag_v__split_fields2 }) = 0))
+
+axiom H1 : ((n__attr__tag = us_tag) and (length1({ us_split_fields1 = {
   rec__vk__tag__fs__name__t = n__split_fields; rec__ext__ = n__split_fields1
-  }; attr__tag = n__attr__tag }) = 0)) -> ((((({ us_split_fields1 = {
-  rec__vk__tag__fs__name__t = usq_; rec__ext__ = usq_1 }; attr__tag = usq_2
-  } = name({ us_split_fields3 = { rec__vk__tag__t__my_name = {
-  us_split_fields1 = { rec__vk__tag__fs__name__t = tag_v__split_fields3;
-  rec__ext__ = tag_v__split_fields4 }; attr__tag = tag_v__split_fields5 } }
-  })) and (((tag_v__split_fields3 = usq_) and
-  (tag_v__split_fields4 = usq_1)) and (tag_v__split_fields5 = usq_2))) and
-  (((usq_ = temp___866) and (usq_1 = temp___8661)) and
-  (n__attr__tag = temp___8662))) and (((result = n__split_fields) and
-  (result1 = n__split_fields1)) and ((n__split_fields2 = temp___866) and
-  (n__split_fields3 = temp___8661)))) -> ((((({ us_split_fields1 = {
-  rec__vk__tag__fs__name__t = o; rec__ext__ = o1 }; attr__tag = o2 } = name({
-  us_split_fields3 = { rec__vk__tag__t__my_name = { us_split_fields1 = {
+  }; attr__tag = n__attr__tag }) = 0))
+
+axiom H2 : (({ us_split_fields1 = { rec__vk__tag__fs__name__t = usq_;
+  rec__ext__ = usq_1 }; attr__tag = usq_2 } = name({ us_split_fields3 = {
+  rec__vk__tag__t__my_name = { us_split_fields1 = {
+  rec__vk__tag__fs__name__t = tag_v__split_fields3; rec__ext__ =
+  tag_v__split_fields4 }; attr__tag = tag_v__split_fields5 } } })) and
+  (((tag_v__split_fields3 = usq_) and (tag_v__split_fields4 = usq_1)) and
+  (tag_v__split_fields5 = usq_2)))
+
+axiom H3 : (usq_ = temp___866)
+
+axiom H4 : (usq_1 = temp___8661)
+
+axiom H5 : (n__attr__tag = temp___8662)
+
+axiom H6 : (result = n__split_fields)
+
+axiom H7 : (result1 = n__split_fields1)
+
+axiom H8 : (n__split_fields2 = temp___866)
+
+axiom H9 : (n__split_fields3 = temp___8661)
+
+axiom H10 : (({ us_split_fields1 = { rec__vk__tag__fs__name__t = o;
+  rec__ext__ = o1 }; attr__tag = o2 } = name({ us_split_fields3 = {
+  rec__vk__tag__t__my_name = { us_split_fields1 = {
   rec__vk__tag__fs__name__t = tag_v__split_fields3; rec__ext__ =
   tag_v__split_fields4 }; attr__tag = tag_v__split_fields5 } } })) and
   (((tag_v__split_fields3 = o) and (tag_v__split_fields4 = o1)) and
-  (tag_v__split_fields5 = o2))) and ((o3 = length1({ us_split_fields1 = {
-  rec__vk__tag__fs__name__t = o; rec__ext__ = o1 }; attr__tag = o2 })) and
-  in_range3(o3))) and (((o3 <  500000) and (result2 = true)) or
-  ((not (o3 <  500000)) and (result2 = false)))) -> ((result2 = true) -> ((({
-  us_split_fields1 = { rec__vk__tag__fs__name__t = o4; rec__ext__ = o5 };
-  attr__tag = o6 } = name({ us_split_fields3 = { rec__vk__tag__t__my_name = {
-  us_split_fields1 = { rec__vk__tag__fs__name__t = tag_v__split_fields3;
-  rec__ext__ = tag_v__split_fields4 }; attr__tag = tag_v__split_fields5 } }
-  })) and (((tag_v__split_fields3 = o4) and (tag_v__split_fields4 = o5)) and
-  (tag_v__split_fields5 = o6))) -> (length1({ us_split_fields1 = {
+  (tag_v__split_fields5 = o2)))
+
+axiom H11 : ((o3 = length1({ us_split_fields1 = { rec__vk__tag__fs__name__t =
+  o; rec__ext__ = o1 }; attr__tag = o2 })) and in_range3(o3))
+
+axiom H12 : (((o3 <  500000) -> (result2 = true)) and
+  ((not (o3 <  500000)) -> (result2 = false)))
+
+axiom H13 : (result2 = true)
+
+axiom H14 : (({ us_split_fields1 = { rec__vk__tag__fs__name__t = o4;
+  rec__ext__ = o5 }; attr__tag = o6 } = name({ us_split_fields3 = {
+  rec__vk__tag__t__my_name = { us_split_fields1 = {
+  rec__vk__tag__fs__name__t = tag_v__split_fields3; rec__ext__ =
+  tag_v__split_fields4 }; attr__tag = tag_v__split_fields5 } } })) and
+  (((tag_v__split_fields3 = o4) and (tag_v__split_fields4 = o5)) and
+  (tag_v__split_fields5 = o6)))
+
+ (* File "main.adb", line 7, characters 0-0 *)
+goal WP_parameter_def : (length1({ us_split_fields1 = {
   rec__vk__tag__fs__name__t = o4; rec__ext__ = o5 }; attr__tag = o6
-  }) <  500000))))))))
+  }) <  500000)

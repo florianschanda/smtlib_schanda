@@ -378,34 +378,74 @@ axiom null_pair__def_axiom : ((null_pair = of_rep(0)) and
 axiom null_optional_pair__def_axiom : ((null_optional_pair = of_int(0)) and
   ((null_optional_pair1 = null_pair) and (null_optional_pair2 = null_pair1)))
 
+logic records__is_null_b__result : bool
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic temp___402 : unsigned_byte
+
+logic temp___4021 : unsigned_byte
+
+logic result : bool
+
+logic records__is_null_b__result1 : bool
+
+logic records__is_null_b__result2 : bool
+
+logic records__is_null_b__result3 : bool
+
+logic records__is_null_b__result4 : bool
+
+logic records__is_null_b__result5 : bool
+
+logic result1 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___402 = o2)
+
+axiom H5 : (temp___4021 = o3)
+
+axiom H6 : ((temp___402 = null_pair) and (temp___4021 = null_pair1))
+
+axiom H7 : ((of_int(0) = null_optional_pair) and
+  ((null_pair = null_optional_pair1) and (null_pair1 = null_optional_pair2)))
+
+axiom H8 : (records__is_null_b__result1 = records__is_null_b__result2)
+
+axiom H9 : (records__is_null_b__result3 = records__is_null_b__result1)
+
+axiom H10 : (result = records__is_null_b__result)
+
+axiom H11 : (((not (x = true)) -> (records__is_null_b__result1 = bool_eq3({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = x1;
+  rec__records_prooffuncs__pair__b = x2 } }, { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = null_pair;
+  rec__records_prooffuncs__pair__b = null_pair1 } }))) and ((x = true) ->
+  (records__is_null_b__result1 = false)))
+
+axiom H12 : (records__is_null_b__result4 = records__is_null_b__result2)
+
+axiom H13 : (records__is_null_b__result5 = records__is_null_b__result3)
+
+axiom H14 : (result1 = records__is_null_b__result4)
+
+axiom H15 : (records__is_null_b__result4 = true)
+
  (* File "records.adb", line 358, characters 0-0 *)
-goal WP_parameter_def :
-  (forall records__is_null_b__result:bool. forall o:unsigned_byte.
-  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
-  forall temp___402:unsigned_byte. forall temp___4021:unsigned_byte.
-  forall result:bool. forall records__is_null_b__result1:bool.
-  forall records__is_null_b__result2:bool.
-  forall records__is_null_b__result3:bool.
-  forall records__is_null_b__result4:bool.
-  forall records__is_null_b__result5:bool.
-  (forall result1:bool. ((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and
-  ((o1 = o2) and (o = o3)))) and ((temp___402 = o2) and
-  (temp___4021 = o3))) and ((temp___402 = null_pair) and
-  (temp___4021 = null_pair1))) and (((of_int(0) = null_optional_pair) and
-  ((null_pair = null_optional_pair1) and
-  (null_pair1 = null_optional_pair2))) and
-  (((((records__is_null_b__result1 = records__is_null_b__result2) and
-  (records__is_null_b__result3 = records__is_null_b__result1)) and
-  ((result = records__is_null_b__result) and (((not (x = true)) and
-  (records__is_null_b__result1 = bool_eq3({ us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = x1; rec__records_prooffuncs__pair__b =
-  x2 } }, { us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  null_pair; rec__records_prooffuncs__pair__b = null_pair1 } }))) or
-  ((x = true) and (records__is_null_b__result1 = false))))) and
-  ((records__is_null_b__result4 = records__is_null_b__result2) and
-  (records__is_null_b__result5 = records__is_null_b__result3))) and
-  (result1 = records__is_null_b__result4)))) ->
-  ((records__is_null_b__result4 = true) -> (bool_eq4({ us_split_fields3 = {
+goal WP_parameter_def : (bool_eq4({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = x;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = x1; rec__records_prooffuncs__pair__b =
@@ -413,4 +453,4 @@ goal WP_parameter_def :
   rec__records_prooffuncs__optional_pair__exists = null_optional_pair;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = null_optional_pair1;
-  rec__records_prooffuncs__pair__b = null_optional_pair2 } } } }) = true)))))
+  rec__records_prooffuncs__pair__b = null_optional_pair2 } } } }) = true)

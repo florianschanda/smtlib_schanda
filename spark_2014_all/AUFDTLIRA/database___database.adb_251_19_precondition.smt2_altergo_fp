@@ -1365,13 +1365,154 @@ axiom is_available__def_axiom :
   ((is_available(account, database__availability__links) = true) <->
   ((((database__availability__links[account])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
+logic account : int
+
+logic links : (int,us_rep1) farray
+
+logic first_available : int
+
+logic accounts : (int,us_rep2) farray
+
+logic accounts_balance : (int,us_rep3) farray
+
+logic o : ext_account_num
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,num) farray
+
+logic o3 : ext_account_num
+
+logic o4 : (int,character) farray
+
+logic o5 : (int,num) farray
+
+logic o6 : ext_account_num
+
+logic o7 : (int,us_rep2) farray
+
+logic o8 : raw_amount
+
+logic o9 : cur
+
+logic o10 : cur
+
+logic o11 : raw_amount
+
+logic o12 : ext_account_num
+
+logic o13 : cur
+
+logic o14 : raw_amount
+
+logic o15 : cur
+
+logic o16 : raw_amount
+
+logic o17 : ext_account_num
+
+logic o18 : cur
+
+logic o19 : raw_amount
+
+logic o20 : ext_account_num
+
+logic o21 : (int,us_rep3) farray
+
+logic o22 : cur
+
+logic o23 : raw_amount
+
+logic account1 : int
+
+logic links1 : (int,us_rep1) farray
+
+logic first_available1 : int
+
+logic accounts1 : (int,us_rep2) farray
+
+logic accounts_balance1 : (int,us_rep3) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic account2 : int
+
+logic account3 : int
+
+logic links2 : (int,us_rep1) farray
+
+logic first_available2 : int
+
+logic result2 : (int,us_rep2) farray
+
+logic accounts2 : (int,us_rep2) farray
+
+logic result3 : (int,us_rep3) farray
+
+logic accounts_balance2 : (int,us_rep3) farray
+
+logic account4 : int
+
+logic links3 : (int,us_rep1) farray
+
+logic first_available3 : int
+
+logic accounts3 : (int,us_rep2) farray
+
+logic accounts_balance3 : (int,us_rep3) farray
+
+logic account5 : int
+
+logic links4 : (int,us_rep1) farray
+
+logic first_available4 : int
+
+logic accounts4 : (int,us_rep2) farray
+
+logic accounts_balance4 : (int,us_rep3) farray
+
+logic account6 : int
+
+logic links5 : (int,us_rep1) farray
+
+logic first_available5 : int
+
+logic accounts5 : (int,us_rep2) farray
+
+logic accounts_balance5 : (int,us_rep3) farray
+
+logic account7 : int
+
+logic links6 : (int,us_rep1) farray
+
+logic first_available6 : int
+
+logic accounts6 : (int,us_rep2) farray
+
+logic accounts_balance6 : (int,us_rep3) farray
+
+logic result4 : bool
+
+logic result5 : bool
+
+axiom H : in_range4(first_available)
+
+axiom H1 : in_range2(cur1)
+
+axiom H2 : ((1 <= 200000) -> in_range5(account))
+
+axiom H3 : (not (max_account_reached(first_available) = true))
+
+axiom H4 : ((result = max_account_reached(first_available)) and
+  ((result = true) <-> (not (some_available(first_available) = true))))
+
+axiom H5 : (not (result = true))
+
+axiom H6 : (account2 = account)
+
+axiom H7 : (account2 = account1)
+
  (* File "money.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall account:int. forall first_available:int. forall account1:int.
-  forall result:bool. forall account2:int. (in_range4(first_available) ->
-  (in_range2(cur1) -> (((1 <= 200000) -> in_range5(account)) ->
-  ((not (max_account_reached(first_available) = true)) ->
-  ((((result = max_account_reached(first_available)) and ((result = true) <->
-  (not (some_available(first_available) = true)))) and
-  ((not (result = true)) and ((account2 = account) and
-  (account2 = account1)))) -> (some_available(first_available) = true)))))))
+goal WP_parameter_def : (some_available(first_available) = true)

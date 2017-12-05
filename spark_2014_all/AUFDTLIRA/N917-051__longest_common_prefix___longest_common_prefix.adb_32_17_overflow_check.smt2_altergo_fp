@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -332,35 +332,210 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,integer) farray
+
+logic l : int
+
+logic longest_common_prefix__lcp2__result : int
+
+logic temp___168 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic temp___169 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___164 : int
+
+logic temp___167 : int
+
+logic k : int
+
+logic temp___165 : int
+
+logic temp___166 : int
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : int
+
+logic temp___1681 : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic temp___1691 : int
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : bool
+
+logic i : int
+
+logic temp___170 : int
+
+logic temp___171 : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic result : int
+
+logic l1 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic l2 : int
+
+logic temp___1671 : int
+
+logic result4 : int
+
+logic temp___1672 : int
+
+logic result5 : int
+
+logic l3 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic l4 : int
+
+logic temp___1673 : int
+
+logic l5 : int
+
+logic temp___1674 : int
+
+logic l6 : int
+
+logic l7 : int
+
+logic l8 : int
+
+logic l9 : int
+
+logic result9 : int
+
+logic longest_common_prefix__lcp2__result1 : int
+
+logic longest_common_prefix__lcp2__result2 : int
+
+logic longest_common_prefix__lcp2__result3 : int
+
+logic l10 : int
+
+logic longest_common_prefix__lcp2__result4 : int
+
+logic l11 : int
+
+logic longest_common_prefix__lcp2__result5 : int
+
+axiom H : in_range3(x)
+
+axiom H1 : in_range3(y)
+
+axiom H2 : (((1 <= x) and (x <= 1000)) and ((1 <= y) and (y <= 1000)))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H4 : (result = l)
+
+axiom H5 : (l1 = 0)
+
+axiom H6 : ((o7 = (x + l1)) and in_range1((x + l1)))
+
+axiom H7 : (((o7 <= 1000) -> (result3 = true)) and ((not (o7 <= 1000)) ->
+  (result3 = false)))
+
+axiom H8 : ((result3 = true) -> ((o6 = (y + l1)) and in_range1((y + l1))))
+
+axiom H9 : ((result3 = true) -> (((o6 <= 1000) -> (result2 = true)) and
+  ((not (o6 <= 1000)) -> (result2 = false))))
+
+axiom H10 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H11 : ((result2 = true) -> ((temp___169 = (y + l1)) and
+  in_range1((y + l1))))
+
+axiom H12 : ((result2 = true) -> ((1 <= temp___169) and
+  (temp___169 <= 1000)))
+
+axiom H13 : ((result2 = true) -> (o2 = temp___169))
+
+axiom H14 : ((result2 = true) -> (o3 = (a[o2])))
+
+axiom H15 : ((result2 = true) -> (o4 = to_rep(o3)))
+
+axiom H16 : ((result2 = true) -> ((temp___168 = (x + l1)) and
+  in_range1((x + l1))))
+
+axiom H17 : ((result2 = true) -> ((1 <= temp___168) and
+  (temp___168 <= 1000)))
+
+axiom H18 : ((result2 = true) -> (o = temp___168))
+
+axiom H19 : ((result2 = true) -> (o1 = (a[o])))
+
+axiom H20 : ((result2 = true) -> (o5 = to_rep(o1)))
+
+axiom H21 : ((result2 = true) -> (((o5 = o4) -> (result1 = true)) and
+  ((not (o5 = o4)) -> (result1 = false))))
+
+axiom H22 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H23 : (result1 = true)
+
+axiom H24 :
+  (forall k1:int. (((0 <= k1) and (k1 <= (l2 - 1))) ->
+  (to_rep((a[(x + k1)])) = to_rep((a[(y + k1)])))))
+
+axiom H25 : (((0 <= 2147483647) -> in_range2(l2)) and
+  ((((x + l2) <= 1000) and ((y + l2) <= 1000)) and
+  (to_rep((a[(x + l2)])) = to_rep((a[(y + l2)])))))
+
+axiom H26 : (temp___1671 = result4)
+
+axiom H27 : (temp___1672 = l2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall l:int. forall temp___168:int.
-  forall o:int. forall o1:integer. forall temp___169:int. forall o2:int.
-  forall o3:integer. forall o4:int. forall o5:int. forall o6:int.
-  forall o7:int. forall result:int. forall l1:int. forall result1:bool.
-  forall result2:bool. forall result3:bool. forall l2:int.
-  forall temp___167:int. forall result4:int. forall temp___1671:int.
-  (in_range3(x) -> (in_range3(y) -> ((((1 <= x) and (x <= 1000)) and
-  ((1 <= y) and (y <= 1000))) -> (((0 <= 2147483647) -> in_range2(l)) -> ((({
-  int__content = result } = { int__content = l }) and (l1 = 0)) ->
-  ((((((o7 = (x + l1)) and in_range1((x + l1))) and (((o7 <= 1000) and
-  (result3 = true)) or ((not (o7 <= 1000)) and (result3 = false)))) and
-  (((result3 = true) and (((o6 = (y + l1)) and in_range1((y + l1))) and
-  (((o6 <= 1000) and (result2 = true)) or ((not (o6 <= 1000)) and
-  (result2 = false))))) or ((not (result3 = true)) and
-  (result2 = false)))) and (((result2 = true) and
-  ((((((temp___169 = (y + l1)) and in_range1((y + l1))) and
-  (((1 <= temp___169) and (temp___169 <= 1000)) and (o2 = temp___169))) and
-  (o3 = (a[o2]))) and (o4 = to_rep(o3))) and ((((((temp___168 = (x + l1)) and
-  in_range1((x + l1))) and (((1 <= temp___168) and (temp___168 <= 1000)) and
-  (o = temp___168))) and (o1 = (a[o]))) and (o5 = to_rep(o1))) and
-  (((o5 = o4) and (result1 = true)) or ((not (o5 = o4)) and
-  (result1 = false)))))) or ((not (result2 = true)) and
-  (result1 = false)))) -> ((result1 = true) ->
-  ((forall k:int. (((0 <= k) and (k <= (l2 - 1))) ->
-   (to_rep((a[(x + k)])) = to_rep((a[(y + k)]))))) ->
-  ((((0 <= 2147483647) -> in_range2(l2)) and ((((x + l2) <= 1000) and
-  ((y + l2) <= 1000)) and
-  (to_rep((a[(x + l2)])) = to_rep((a[(y + l2)]))))) ->
-  (((temp___167 = result4) and (temp___1671 = l2)) ->
-  in_range1((l2 + 1)))))))))))))
+goal WP_parameter_def : in_range1((l2 + 1))

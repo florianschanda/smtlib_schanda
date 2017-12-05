@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -272,25 +272,167 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : (int,natural) farray
+
+logic one : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : (int,natural) farray
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,natural) farray
+
+logic o6 : int
+
+logic o7 : natural
+
+logic o8 : (int,natural) farray
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : int
+
+logic o13 : natural
+
+logic o14 : (int,natural) farray
+
+logic o15 : int
+
+logic o16 : natural
+
+logic o17 : (int,natural) farray
+
+logic o18 : int
+
+logic o19 : natural
+
+logic o20 : (int,natural) farray
+
+logic o21 : int
+
+logic o22 : natural
+
+logic o23 : (int,natural) farray
+
+logic o24 : int
+
+logic o25 : natural
+
+logic o26 : (int,natural) farray
+
+logic o27 : int
+
+logic o28 : natural
+
+logic o29 : (int,natural) farray
+
+logic result : int
+
+logic one1 : int
+
+logic result1 : (int,natural) farray
+
+logic x1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic x2 : (int,natural) farray
+
+logic result3 : (int,natural) farray
+
+logic x3 : (int,natural) farray
+
+logic result4 : (int,natural) farray
+
+logic x4 : (int,natural) farray
+
+logic result5 : (int,natural) farray
+
+logic x5 : (int,natural) farray
+
+logic result6 : (int,natural) farray
+
+logic x6 : (int,natural) farray
+
+logic result7 : (int,natural) farray
+
+logic x7 : (int,natural) farray
+
+logic result8 : (int,natural) farray
+
+logic x8 : (int,natural) farray
+
+logic result9 : (int,natural) farray
+
+logic x9 : (int,natural) farray
+
+logic result10 : (int,natural) farray
+
+logic x10 : (int,natural) farray
+
+logic x11 : (int,natural) farray
+
+logic one2 : int
+
+logic x12 : (int,natural) farray
+
+logic one3 : int
+
+axiom H : (result = one)
+
+axiom H1 : (one1 = 1)
+
+axiom H2 : in_range1(one1)
+
+axiom H3 : ((o = (1 + one1)) and in_range1((1 + one1)))
+
+axiom H4 : (to_rep(o1) = o)
+
+axiom H5 : (o2 = (x[1 <- o1]))
+
+axiom H6 : (result1 = x)
+
+axiom H7 : (x1 = o2)
+
+axiom H8 : ((o3 = (2 + one1)) and in_range1((2 + one1)))
+
+axiom H9 : (to_rep(o4) = o3)
+
+axiom H10 : (o5 = (x1[2 <- o4]))
+
+axiom H11 : (x1 = result2)
+
+axiom H12 : (x2 = o5)
+
+axiom H13 : ((o6 = (3 + one1)) and in_range1((3 + one1)))
+
+axiom H14 : (to_rep(o7) = o6)
+
+axiom H15 : (o8 = (x2[3 <- o7]))
+
+axiom H16 : (x2 = result3)
+
+axiom H17 : (x3 = o8)
+
+axiom H18 : ((o9 = (4 + one1)) and in_range1((4 + one1)))
+
+axiom H19 : (to_rep(o10) = o9)
+
+axiom H20 : (o11 = (x3[4 <- o10]))
+
+axiom H21 : (x3 = result4)
+
+axiom H22 : (x4 = o11)
+
  (* File "array_arith.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,natural) farray. forall one:int. forall o:int.
-  forall o1:natural. forall o2:(int,natural) farray. forall o3:int.
-  forall o4:natural. forall o5:(int,natural) farray. forall o6:int.
-  forall o7:natural. forall o8:(int,natural) farray. forall o9:int.
-  forall o10:natural. forall o11:(int,natural) farray. forall result:int.
-  forall one1:int. forall result1:(int,natural) farray.
-  forall x1:(int,natural) farray. forall result2:(int,natural) farray.
-  forall x2:(int,natural) farray. forall result3:(int,natural) farray.
-  forall x3:(int,natural) farray. forall result4:(int,natural) farray.
-  forall x4:(int,natural) farray. ((({ int__content = result } = {
-  int__content = one }) and (one1 = 1)) -> (in_range1(one1) ->
-  ((((((o = (1 + one1)) and in_range1((1 + one1))) and (to_rep(o1) = o)) and
-  (o2 = (x[1 <- o1]))) and (({ map__content = result1 } = { map__content = x
-  }) and (x1 = o2))) -> ((((((o3 = (2 + one1)) and in_range1((2 + one1))) and
-  (to_rep(o4) = o3)) and (o5 = (x1[2 <- o4]))) and ((x1 = result2) and
-  (x2 = o5))) -> ((((((o6 = (3 + one1)) and in_range1((3 + one1))) and
-  (to_rep(o7) = o6)) and (o8 = (x2[3 <- o7]))) and ((x2 = result3) and
-  (x3 = o8))) -> ((((((o9 = (4 + one1)) and in_range1((4 + one1))) and
-  (to_rep(o10) = o9)) and (o11 = (x3[4 <- o10]))) and ((x3 = result4) and
-  (x4 = o11))) -> in_range1((5 + one1)))))))))
+goal WP_parameter_def : in_range1((5 + one1))

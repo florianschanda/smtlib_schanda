@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -874,7 +874,7 @@ axiom notb_def :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1020,8 +1020,52 @@ axiom first_index__def_axiom : (first_index = to_rep(first(array_of_bits1)))
 
 axiom last_index__def_axiom : (last_index = to_rep(last(array_of_bits1)))
 
+logic bits : t
+
+logic bit : t
+
+logic i : int
+
+logic bit_converter__to_modular_type__first_index__assume : int
+
+logic bit_converter__to_modular_type__last_index__assume : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : t
+
+logic result : t
+
+logic bits1 : t
+
+logic result1 : t
+
+logic bit1 : t
+
+logic result2 : t
+
+logic bits2 : t
+
+logic result3 : int
+
+logic i1 : int
+
+logic bits3 : t
+
+logic bit2 : t
+
+logic i2 : int
+
+logic result4 : t
+
+logic bits4 : t
+
+axiom H : dynamic_property(1, 8, to_rep(first(array_of_bits1)),
+  to_rep(last(array_of_bits1)))
+
+axiom H1 : (0 <  object__size(array_of_bits))
+
  (* File "bit_converter.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 8,
-  to_rep(first(array_of_bits1)), to_rep(last(array_of_bits1))) ->
-  ((0 <  object__size(array_of_bits)) ->
-  in_range2(to_rep(first(array_of_bits1)))))
+goal WP_parameter_def : in_range2(to_rep(first(array_of_bits1)))

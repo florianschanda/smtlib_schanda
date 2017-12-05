@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -739,21 +739,42 @@ logic var2_range_size : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "x86.ads", line 85, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x86__rangesintersect__result:bool. forall o:bool.
-  forall result:bool. forall x86__rangesintersect__result1:bool.
-  forall x86__rangesintersect__result2:bool.
-  forall x86__rangesintersect__result3:bool.
-  forall x86__rangesintersect__result4:bool.
-  forall x86__rangesintersect__result5:bool.
-  (forall result1:bool. ((ult(var1_range_size,
-  sub(of_int(18446744073709551615), var2_range_size)) and
-  (((((x86__rangesintersect__result1 = x86__rangesintersect__result2) and
-  (x86__rangesintersect__result3 = x86__rangesintersect__result1)) and
-  (((o = inrange64(var1, sub(var2, sub(var1_range_size, of_int(1))),
+logic x86__rangesintersect__result : bool
+
+logic o : bool
+
+logic result : bool
+
+logic x86__rangesintersect__result1 : bool
+
+logic x86__rangesintersect__result2 : bool
+
+logic x86__rangesintersect__result3 : bool
+
+logic x86__rangesintersect__result4 : bool
+
+logic x86__rangesintersect__result5 : bool
+
+logic result1 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : ult(var1_range_size, sub(of_int(18446744073709551615),
+  var2_range_size))
+
+axiom H5 : (x86__rangesintersect__result1 = x86__rangesintersect__result2)
+
+axiom H6 : (x86__rangesintersect__result3 = x86__rangesintersect__result1)
+
+axiom H7 : ((o = inrange64(var1, sub(var2, sub(var1_range_size, of_int(1))),
   add(sub(var1_range_size, of_int(1)), var2_range_size))) and
-  ((((o = true) or ((not (add(sub(var1_range_size, of_int(1)),
+  ((((o = true) -> ((not (add(sub(var1_range_size, of_int(1)),
   var2_range_size) = of_int(0))) and ((ule(sub(var2, sub(var1_range_size,
   of_int(1))), sub(of_int(18446744073709551615), sub(add(sub(var1_range_size,
   of_int(1)), var2_range_size), of_int(1)))) -> (ule(sub(var2,
@@ -765,21 +786,20 @@ goal WP_parameter_def :
   (ule(sub(var2, sub(var1_range_size, of_int(1))), var1) or ule(var1,
   sub(sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
   sub(of_int(18446744073709551615), sub(var2, sub(var1_range_size,
-  of_int(1))))), of_int(2)))))))) -> ((o = true) and
-  ((not (add(sub(var1_range_size, of_int(1)),
-  var2_range_size) = of_int(0))) and ((ule(sub(var2, sub(var1_range_size,
-  of_int(1))), sub(of_int(18446744073709551615), sub(add(sub(var1_range_size,
-  of_int(1)), var2_range_size), of_int(1)))) and (ule(sub(var2,
-  sub(var1_range_size, of_int(1))), var1) and ule(var1, add(sub(var2,
-  sub(var1_range_size, of_int(1))), sub(add(sub(var1_range_size, of_int(1)),
-  var2_range_size), of_int(1)))))) or ((not ule(sub(var2,
+  of_int(1))))), of_int(2)))))))) and (((not (add(sub(var1_range_size,
+  of_int(1)), var2_range_size) = of_int(0))) and ((ule(sub(var2,
   sub(var1_range_size, of_int(1))), sub(of_int(18446744073709551615),
+  sub(add(sub(var1_range_size, of_int(1)), var2_range_size), of_int(1)))) and
+  (ule(sub(var2, sub(var1_range_size, of_int(1))), var1) and ule(var1,
+  add(sub(var2, sub(var1_range_size, of_int(1))),
   sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
-  of_int(1))))) and (ule(sub(var2, sub(var1_range_size, of_int(1))), var1) or
-  ule(var1, sub(sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
-  sub(of_int(18446744073709551615), sub(var2, sub(var1_range_size,
-  of_int(1))))), of_int(2))))))))) and (((o = true) or
-  ((not (add(sub(var1_range_size, of_int(1)),
+  of_int(1)))))) or ((not ule(sub(var2, sub(var1_range_size, of_int(1))),
+  sub(of_int(18446744073709551615), sub(add(sub(var1_range_size, of_int(1)),
+  var2_range_size), of_int(1))))) and (ule(sub(var2, sub(var1_range_size,
+  of_int(1))), var1) or ule(var1, sub(sub(add(sub(var1_range_size,
+  of_int(1)), var2_range_size), sub(of_int(18446744073709551615), sub(var2,
+  sub(var1_range_size, of_int(1))))), of_int(2))))))) -> (o = true))) and
+  (((o = true) -> ((not (add(sub(var1_range_size, of_int(1)),
   var2_range_size) = of_int(0))) and ((ule(sub(var2, sub(var1_range_size,
   of_int(1))), sub(of_int(18446744073709551615), sub(add(sub(var1_range_size,
   of_int(1)), var2_range_size), of_int(1)))) -> (ule(sub(var2,
@@ -792,26 +812,33 @@ goal WP_parameter_def :
   of_int(18446744073709551615))) or ule(var1,
   sub(sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
   sub(of_int(18446744073709551615), sub(var2, sub(var1_range_size,
-  of_int(1))))), of_int(2)))))))) -> ((o = true) and
-  ((not (add(sub(var1_range_size, of_int(1)),
-  var2_range_size) = of_int(0))) and ((ule(sub(var2, sub(var1_range_size,
-  of_int(1))), sub(of_int(18446744073709551615), sub(add(sub(var1_range_size,
-  of_int(1)), var2_range_size), of_int(1)))) and (ule(sub(var2,
-  sub(var1_range_size, of_int(1))), var1) and ule(var1, add(sub(var2,
-  sub(var1_range_size, of_int(1))), sub(add(sub(var1_range_size, of_int(1)),
-  var2_range_size), of_int(1)))))) or ((not ule(sub(var2,
+  of_int(1))))), of_int(2)))))))) and (((not (add(sub(var1_range_size,
+  of_int(1)), var2_range_size) = of_int(0))) and ((ule(sub(var2,
   sub(var1_range_size, of_int(1))), sub(of_int(18446744073709551615),
+  sub(add(sub(var1_range_size, of_int(1)), var2_range_size), of_int(1)))) and
+  (ule(sub(var2, sub(var1_range_size, of_int(1))), var1) and ule(var1,
+  add(sub(var2, sub(var1_range_size, of_int(1))),
   sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
-  of_int(1))))) and ((ule(sub(var2, sub(var1_range_size, of_int(1))),
-  var1) and ule(var1, of_int(18446744073709551615))) or ule(var1,
-  sub(sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
+  of_int(1)))))) or ((not ule(sub(var2, sub(var1_range_size, of_int(1))),
+  sub(of_int(18446744073709551615), sub(add(sub(var1_range_size, of_int(1)),
+  var2_range_size), of_int(1))))) and ((ule(sub(var2, sub(var1_range_size,
+  of_int(1))), var1) and ule(var1, of_int(18446744073709551615))) or
+  ule(var1, sub(sub(add(sub(var1_range_size, of_int(1)), var2_range_size),
   sub(of_int(18446744073709551615), sub(var2, sub(var1_range_size,
-  of_int(1))))), of_int(2))))))))))) and
-  ((result = x86__rangesintersect__result) and
-  (x86__rangesintersect__result1 = o)))) and
-  ((x86__rangesintersect__result4 = x86__rangesintersect__result2) and
-  (x86__rangesintersect__result5 = x86__rangesintersect__result3))) and
-  (result1 = x86__rangesintersect__result4))) ->
-  ((x86__rangesintersect__result4 = true) -> (inrange64(var1, sub(var2,
-  sub(var1_range_size, of_int(1))), add(sub(var1_range_size, of_int(1)),
-  var2_range_size)) = true)))))
+  of_int(1))))), of_int(2))))))) -> (o = true)))))
+
+axiom H8 : (result = x86__rangesintersect__result)
+
+axiom H9 : (x86__rangesintersect__result1 = o)
+
+axiom H10 : (x86__rangesintersect__result4 = x86__rangesintersect__result2)
+
+axiom H11 : (x86__rangesintersect__result5 = x86__rangesintersect__result3)
+
+axiom H12 : (result1 = x86__rangesintersect__result4)
+
+axiom H13 : (x86__rangesintersect__result4 = true)
+
+ (* File "x86.ads", line 85, characters 0-0 *)
+goal WP_parameter_def : (inrange64(var1, sub(var2, sub(var1_range_size,
+  of_int(1))), add(sub(var1_range_size, of_int(1)), var2_range_size)) = true)

@@ -135,7 +135,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type contents_type
 
-predicate in_range2(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range2(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq3 : int, int -> bool
 
@@ -287,7 +287,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tbase_index_typeB
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq5 : int, int -> bool
 
@@ -353,55 +353,143 @@ function t7b__ref___projection(a: t7b__ref) : tbase_index_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "t3q5.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall i:int. forall t3q5__sort__find_smallest__result:int.
-  forall temp___186:int. forall temp___185:int. forall temp___188:int.
-  forall temp___187:int. forall x:int. forall i1:int. forall k1:int.
-  forall result:int. forall i2:int. forall result1:int. forall k2:int.
-  forall k3:int. forall i3:int. forall k4:int. forall i4:int. forall k5:int.
-  forall i5:int. forall k6:int. forall i6:int. forall k7:int. forall i7:int.
-  forall k8:int. forall i8:int. forall k9:int. forall i9:int.
-  forall result2:int. forall t3q5__sort__find_smallest__result1:int.
-  forall t3q5__sort__find_smallest__result2:int.
-  forall t3q5__sort__find_smallest__result3:int. forall k10:int.
-  forall i10:int. forall t3q5__sort__find_smallest__result4:int.
-  forall k11:int. forall i11:int.
-  forall t3q5__sort__find_smallest__result5:int. (in_range1(l) ->
-  (in_range1(u) -> ((((1 <= l) and (l <  u)) and (u <= 100)) ->
-  (((((1 <= 100) -> in_range1(k)) and (((k1 = l) and
-  (forall x1:int. (((l <= x1) and (x1 <= l)) ->
-  (to_rep((arr[k1])) <= to_rep((arr[x1])))))) and (((1 <= 100) ->
-  in_range1(k1)) and ((((l <  u) and (((({ int__content = result } = {
-  int__content = i }) and (i2 = (l + 1))) and (((((l + 1) <= i2) and
-  (i2 <= u)) and ((((temp___186 = k1) and ((temp___185 = i2) and
-  ((temp___188 = u) and ((temp___187 = l) and
-  ((((to_rep((arr[i2])) <  to_rep((arr[k1]))) and ((k1 = result1) and
-  (k2 = i2))) or ((not (to_rep((arr[i2])) <  to_rep((arr[k1])))) and
+logic k : int
+
+logic i : int
+
+logic t3q5__sort__find_smallest__result : int
+
+logic x : int
+
+logic temp___186 : int
+
+logic temp___185 : int
+
+logic temp___188 : int
+
+logic temp___187 : int
+
+logic x1 : int
+
+logic x2 : int
+
+logic i1 : int
+
+logic result : int
+
+logic k1 : int
+
+logic result1 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic k2 : int
+
+logic k3 : int
+
+logic i3 : int
+
+logic result3 : int
+
+logic i4 : int
+
+logic result4 : int
+
+logic k4 : int
+
+logic k5 : int
+
+logic i5 : int
+
+logic k6 : int
+
+logic i6 : int
+
+logic k7 : int
+
+logic i7 : int
+
+logic k8 : int
+
+logic i8 : int
+
+logic k9 : int
+
+logic i9 : int
+
+logic k10 : int
+
+logic i10 : int
+
+logic k11 : int
+
+logic i11 : int
+
+logic k12 : int
+
+logic i12 : int
+
+logic result5 : int
+
+logic t3q5__sort__find_smallest__result1 : int
+
+logic t3q5__sort__find_smallest__result2 : int
+
+logic t3q5__sort__find_smallest__result3 : int
+
+logic k13 : int
+
+logic i13 : int
+
+logic t3q5__sort__find_smallest__result4 : int
+
+logic k14 : int
+
+logic i14 : int
+
+logic t3q5__sort__find_smallest__result5 : int
+
+axiom H : in_range1(l)
+
+axiom H1 : in_range1(u)
+
+axiom H2 : (((1 <= l) and (l <  u)) and (u <= 100))
+
+axiom H3 : ((((1 <= 100) -> in_range1(k)) and (((k1 = l) and
+  (forall x3:int. (((l <= x3) and (x3 <= l)) ->
+  (to_rep((arr[k1])) <= to_rep((arr[x3])))))) and (((1 <= 100) ->
+  in_range1(k1)) and ((((l <  u) -> ((((result1 = i) and (i2 = (l + 1))) and
+  (((((l + 1) <= i2) and (i2 <= u)) -> ((((temp___186 = k1) and
+  ((temp___185 = i2) and ((temp___188 = u) and ((temp___187 = l) and
+  ((((to_rep((arr[i2])) <  to_rep((arr[k1]))) -> ((k1 = result2) and
+  (k2 = i2))) and ((not (to_rep((arr[i2])) <  to_rep((arr[k1])))) ->
   (k2 = k1))) and (((((((((l + 1) <= i3) and (i3 <= u)) and
   (l = temp___187)) and (u = temp___188)) and (l <  u)) and
-  (forall x1:int. (((l <= x1) and (x1 <= i3)) ->
-  (to_rep((arr[k3])) <= to_rep((arr[x1])))))) and ((l <= k3) and
+  (forall x3:int. (((l <= x3) and (x3 <= i3)) ->
+  (to_rep((arr[k3])) <= to_rep((arr[x3])))))) and ((l <= k3) and
   (k3 <= u))) and ((((((l + 1) <= u) -> dynamic_property((l + 1), u, i3)) and
   ((1 <= 100) -> in_range1(k3))) and (((l + 1) <= i3) and (i3 <= u))) and
-  (i3 = u)))))))) and (((i3 = i4) and (k3 = k4)) and ((i5 = i3) and
-  (k5 = k3)))) and ((({ int__content = i6 } = { int__content = i4 }) and ({
-  int__content = k6 } = { int__content = k4 })) and ((i7 = i5) and
-  (k7 = k5))))) or ((not (((l + 1) <= i2) and (i2 <= u))) and (((i2 = i6) and
-  (k1 = k6)) and ((i7 = i2) and (k7 = k1)))))) and ((({ int__content = i8
-  } = { int__content = i6 }) and ({ int__content = k8 } = { int__content = k6
-  })) and ((i9 = i7) and (k9 = k7))))) or ((not (l <  u)) and ((({
-  int__content = i8 } = { int__content = i }) and (k1 = k8)) and
-  ((i9 = i1) and (k9 = k1))))) and
+  (i3 = u)))))))) and (((i3 = i7) and (k3 = k7)) and ((i8 = i3) and
+  (k8 = k3)))) and (((i9 = i7) and (k9 = k7)) and ((i10 = i8) and
+  (k10 = k8))))) and ((not (((l + 1) <= i2) and (i2 <= u))) ->
+  (((i2 = i9) and (k1 = k9)) and ((i10 = i2) and (k10 = k1)))))) and
+  (((i11 = i9) and (k11 = k9)) and ((i12 = i10) and (k12 = k10))))) and
+  ((not (l <  u)) -> (((i11 = i) and (k1 = k11)) and ((i12 = i1) and
+  (k12 = k1))))) and
   (((t3q5__sort__find_smallest__result1 = t3q5__sort__find_smallest__result2) and
   (t3q5__sort__find_smallest__result3 = t3q5__sort__find_smallest__result1)) and
-  (({ int__content = result2 } = { int__content =
-  t3q5__sort__find_smallest__result }) and
-  (t3q5__sort__find_smallest__result1 = k8))))))) and ((({ int__content =
-  t3q5__sort__find_smallest__result4 } = { int__content =
-  t3q5__sort__find_smallest__result2 }) and (({ int__content = i10 } = {
-  int__content = i8 }) and ({ int__content = k10 } = { int__content = k8
-  }))) and
+  ((result5 = t3q5__sort__find_smallest__result) and
+  (t3q5__sort__find_smallest__result1 = k11))))))) and
+  (((t3q5__sort__find_smallest__result4 = t3q5__sort__find_smallest__result2) and
+  ((i13 = i11) and (k13 = k11))) and
   ((t3q5__sort__find_smallest__result5 = t3q5__sort__find_smallest__result3) and
-  ((i11 = i9) and (k11 = k9))))) -> (((l <= x) and (x <= u)) ->
-  (1 <= x)))))))
+  ((i14 = i12) and (k14 = k12)))))
+
+axiom H4 : (l <= x2)
+
+axiom H5 : (x2 <= u)
+
+ (* File "t3q5.ads", line 6, characters 0-0 *)
+goal WP_parameter_def : (1 <= x2)

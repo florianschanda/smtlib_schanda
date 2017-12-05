@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -303,18 +303,116 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic index : int
+
+logic s__contains__result : bool
+
+logic temp___159 : int
+
+logic temp___160 : int
+
+logic temp___158 : int
+
+logic j : int
+
+logic s__contains__result1 : bool
+
+logic result : int
+
+logic index1 : int
+
+logic index2 : int
+
+logic s__contains__result2 : bool
+
+logic result1 : bool
+
+logic s__contains__result3 : bool
+
+logic result2 : int
+
+logic index3 : int
+
+logic index4 : int
+
+logic s__contains__result4 : bool
+
+logic index5 : int
+
+logic s__contains__result5 : bool
+
+logic index6 : int
+
+logic s__contains__result6 : bool
+
+logic index7 : int
+
+logic s__contains__result7 : bool
+
+logic index8 : int
+
+logic s__contains__result8 : bool
+
+logic index9 : int
+
+logic s__contains__result9 : bool
+
+logic result3 : bool
+
+logic s__contains__result10 : bool
+
+logic s__contains__result11 : bool
+
+logic s__contains__result12 : bool
+
+logic index10 : int
+
+logic s__contains__result13 : bool
+
+logic index11 : int
+
+logic s__contains__result14 : bool
+
+logic index12 : int
+
+logic s__contains__result15 : bool
+
+logic index13 : int
+
+logic s__contains__result16 : bool
+
+axiom H : in_range1(value)
+
+axiom H1 : (result = index)
+
+axiom H2 : (index1 = 1)
+
+axiom H3 : (1 <= index1)
+
+axiom H4 : (index1 <= 10)
+
+axiom H5 :
+  (forall j1:int. (((1 <= j1) and (j1 <= (index2 - 1))) ->
+  (not (to_rep((table[j1])) = value))))
+
+axiom H6 : (((1 <= 10) -> in_range3(index2)) and ((1 <= index2) and
+  (index2 <= 10)))
+
+axiom H7 : (not (to_rep((table[index2])) = value))
+
+axiom H8 : (s__contains__result3 = s__contains__result2)
+
+axiom H9 : (not (index2 = 10))
+
+axiom H10 : (result2 = index2)
+
+axiom H11 : (index3 = (index2 + 1))
+
+logic j1 : int
+
+axiom H12 : (1 <= j1)
+
+axiom H13 : (j1 <= (index3 - 1))
+
  (* File "s.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall index:int. forall result:int. forall index1:int. forall index2:int.
-  forall s__contains__result:bool. forall s__contains__result1:bool.
-  forall result1:int. forall index3:int. (in_range1(value) -> ((({
-  int__content = result } = { int__content = index }) and (index1 = 1)) ->
-  (((1 <= index1) and (index1 <= 10)) ->
-  ((forall j:int. (((1 <= j) and (j <= (index2 - 1))) ->
-   (not (to_rep((table[j])) = value)))) ->
-  (((((1 <= 10) -> in_range3(index2)) and ((1 <= index2) and
-  (index2 <= 10))) and (((not (to_rep((table[index2])) = value)) and
-  (s__contains__result1 = s__contains__result)) and ((not (index2 = 10)) and
-  ((result1 = index2) and (index3 = (index2 + 1)))))) ->
-  (forall j:int. (((1 <= j) and (j <= (index3 - 1))) ->
-  (not (to_rep((table[j])) = value))))))))))
+goal WP_parameter_def : (not (to_rep((table[j1])) = value))

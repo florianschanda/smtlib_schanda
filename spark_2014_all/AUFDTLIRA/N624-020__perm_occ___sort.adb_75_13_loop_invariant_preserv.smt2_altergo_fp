@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -444,46 +444,200 @@ function t23b__ref___projection(a: t23b__ref) : integer = (a).t23b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index1:int. forall o:int. forall o1:int.
-  forall o2:natural. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:natural. forall o7:int. forall o8:int. forall result:int.
-  forall min1:int. forall result1:int. forall index2:int.
-  forall result2:bool. forall result3:int. forall min2:int. forall min3:int.
-  forall index3:int. forall result4:int. forall index4:int.
-  forall result5:bool. forall result6:int. forall min4:int.
-  (dynamic_property(1, 100, to_rep1(first(values1)),
-  to_rep1(last(values1))) -> ((0 <  length({ elts = values; rt = values1
-  })) -> (((1 <= 2147483647) -> in_range2(min)) ->
-  ((((o = to_rep1(first(values1))) and
-  in_range2(to_rep1(first(values1)))) and (({ int__content = result } = {
-  int__content = min }) and (min1 = o))) -> ((({ int__content = result1 } = {
-  int__content = index1 }) and (index2 = to_rep1(first(values1)))) ->
-  (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) ->
-  ((((((((to_rep1(first(values1)) <= min1) and
-  (min1 <= to_rep1(last(values1)))) and (o1 = min1)) and
-  (o2 = (values[o1]))) and (o3 = to_rep(o2))) and
-  (((to_rep((values[index2])) <  o3) and (result2 = true)) or
-  ((not (to_rep((values[index2])) <  o3)) and (result2 = false)))) and
-  (((result2 = true) and (((o4 = index2) and in_range2(index2)) and
-  ((min1 = result3) and (min2 = o4)))) or ((not (result2 = true)) and
-  (min2 = min1)))) -> ((((to_rep1(first(values1)) <= min3) and
+logic min : int
+
+logic index1 : int
+
+logic sort__index_of_minimum__result : int
+
+logic o : int
+
+logic temp___277 : int
+
+logic temp___276 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic i : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : natural
+
+logic o10 : int
+
+logic o11 : int
+
+logic i1 : int
+
+logic o12 : int
+
+logic o13 : natural
+
+logic o14 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min2 : int
+
+logic min3 : int
+
+logic index3 : int
+
+logic result4 : int
+
+logic index4 : int
+
+logic result5 : bool
+
+logic result6 : int
+
+logic min4 : int
+
+logic min5 : int
+
+logic index5 : int
+
+logic min6 : int
+
+logic index6 : int
+
+logic min7 : int
+
+logic index7 : int
+
+logic min8 : int
+
+logic index8 : int
+
+logic min9 : int
+
+logic index9 : int
+
+logic min10 : int
+
+logic index10 : int
+
+logic result7 : int
+
+logic sort__index_of_minimum__result1 : int
+
+logic sort__index_of_minimum__result2 : int
+
+logic sort__index_of_minimum__result3 : int
+
+logic min11 : int
+
+logic index11 : int
+
+logic sort__index_of_minimum__result4 : int
+
+logic min12 : int
+
+logic index12 : int
+
+logic sort__index_of_minimum__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(values1)),
+  to_rep1(last(values1)))
+
+axiom H1 : (0 <  length({ elts = values; rt = values1 }))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H3 : ((o = to_rep1(first(values1))) and
+  in_range2(to_rep1(first(values1))))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = o)
+
+axiom H6 : (result1 = index1)
+
+axiom H7 : (index2 = to_rep1(first(values1)))
+
+axiom H8 : (to_rep1(first(values1)) <= index2)
+
+axiom H9 : (index2 <= to_rep1(last(values1)))
+
+axiom H10 : ((to_rep1(first(values1)) <= min1) and
+  (min1 <= to_rep1(last(values1))))
+
+axiom H11 : (o1 = min1)
+
+axiom H12 : (o2 = (values[o1]))
+
+axiom H13 : (o3 = to_rep(o2))
+
+axiom H14 : (((to_rep((values[index2])) <  o3) -> (result2 = true)) and
+  ((not (to_rep((values[index2])) <  o3)) -> (result2 = false)))
+
+axiom H15 : ((result2 = true) -> ((o4 = index2) and in_range2(index2)))
+
+axiom H16 : ((result2 = true) -> (min1 = result3))
+
+axiom H17 : ((result2 = true) -> (min2 = o4))
+
+axiom H18 : ((not (result2 = true)) -> (min2 = min1))
+
+axiom H19 : (((to_rep1(first(values1)) <= min3) and
   (min3 <= to_rep1(last(values1)))) and
-  (forall i:int. (((to_rep1(first(values1)) <= i) and (i <= index3)) ->
-  (to_rep((values[min3])) <= to_rep((values[i])))))) ->
-  ((((((to_rep1(first(values1)) <= to_rep1(last(values1))) ->
+  (forall i2:int. (((to_rep1(first(values1)) <= i2) and (i2 <= index3)) ->
+  (to_rep((values[min3])) <= to_rep((values[i2]))))))
+
+axiom H20 : ((((to_rep1(first(values1)) <= to_rep1(last(values1))) ->
   dynamic_property1(to_rep1(first(values1)), to_rep1(last(values1)),
   index3)) and ((1 <= 2147483647) -> in_range2(min3))) and
   ((to_rep1(first(values1)) <= index3) and
-  (index3 <= to_rep1(last(values1))))) and
-  ((not (index3 = to_rep1(last(values1)))) and (((index3 = result4) and
-  (index4 = (index3 + 1))) and (((((((to_rep1(first(values1)) <= min3) and
-  (min3 <= to_rep1(last(values1)))) and (o5 = min3)) and
-  (o6 = (values[o5]))) and (o7 = to_rep(o6))) and
-  (((to_rep((values[index4])) <  o7) and (result5 = true)) or
-  ((not (to_rep((values[index4])) <  o7)) and (result5 = false)))) and
-  (((result5 = true) and (((o8 = index4) and in_range2(index4)) and
-  ((result6 = min3) and (min4 = o8)))) or ((not (result5 = true)) and
-  (min4 = min3))))))) -> (to_rep1(first(values1)) <= min4)))))))))))
+  (index3 <= to_rep1(last(values1)))))
+
+axiom H21 : (not (index3 = to_rep1(last(values1))))
+
+axiom H22 : (index3 = result4)
+
+axiom H23 : (index4 = (index3 + 1))
+
+axiom H24 : ((to_rep1(first(values1)) <= min3) and
+  (min3 <= to_rep1(last(values1))))
+
+axiom H25 : (o8 = min3)
+
+axiom H26 : (o9 = (values[o8]))
+
+axiom H27 : (o10 = to_rep(o9))
+
+axiom H28 : (((to_rep((values[index4])) <  o10) -> (result5 = true)) and
+  ((not (to_rep((values[index4])) <  o10)) -> (result5 = false)))
+
+axiom H29 : ((result5 = true) -> ((o11 = index4) and in_range2(index4)))
+
+axiom H30 : ((result5 = true) -> (result6 = min3))
+
+axiom H31 : ((result5 = true) -> (min4 = o11))
+
+axiom H32 : ((not (result5 = true)) -> (min4 = min3))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(values1)) <= min4)

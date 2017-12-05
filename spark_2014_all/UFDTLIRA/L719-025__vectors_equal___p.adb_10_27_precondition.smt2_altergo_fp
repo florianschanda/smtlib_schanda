@@ -563,10 +563,33 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range9(get(container, position)))))
 
- (* File "p.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. (in_range2(i) -> (((1 <= i) and
-  (i = (0 + length(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields4 : us_main_type
+
+logic e3 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : ((1 <= i) and (i = (0 + length(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
-  }))))) -> (1 <= i))))
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } })))))
+
+ (* File "p.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (1 <= i)

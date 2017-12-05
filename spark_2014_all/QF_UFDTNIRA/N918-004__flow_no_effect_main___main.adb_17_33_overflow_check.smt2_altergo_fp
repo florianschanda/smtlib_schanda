@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -171,44 +171,88 @@ logic side_3 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "main.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall main__is_right_angle_triangle__result:bool. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:int. forall o8:int. forall result:bool.
-  forall result1:bool. forall main__is_right_angle_triangle__result1:bool.
-  forall result2:bool. forall main__is_right_angle_triangle__result2:bool.
-  forall main__is_right_angle_triangle__result3:bool.
-  forall main__is_right_angle_triangle__result4:bool.
-  forall main__is_right_angle_triangle__result5:bool.
-  forall main__is_right_angle_triangle__result6:bool.
-  forall main__is_right_angle_triangle__result7:bool.
-  forall main__is_right_angle_triangle__result8:bool.
-  (in_range2(long_side) -> (in_range2(side_2) -> (in_range2(side_3) -> ((((({
-  bool__content = main__is_right_angle_triangle__result5 } = {
-  bool__content = main__is_right_angle_triangle__result3 }) and
+logic main__is_right_angle_triangle__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic main__is_right_angle_triangle__result1 : bool
+
+logic result2 : bool
+
+logic main__is_right_angle_triangle__result2 : bool
+
+logic main__is_right_angle_triangle__result3 : bool
+
+logic main__is_right_angle_triangle__result4 : bool
+
+logic main__is_right_angle_triangle__result5 : bool
+
+logic main__is_right_angle_triangle__result6 : bool
+
+logic main__is_right_angle_triangle__result7 : bool
+
+logic main__is_right_angle_triangle__result8 : bool
+
+axiom H : in_range2(long_side)
+
+axiom H1 : in_range2(side_2)
+
+axiom H2 : in_range2(side_3)
+
+axiom H3 :
+  (((main__is_right_angle_triangle__result5 = main__is_right_angle_triangle__result3) and
   (main__is_right_angle_triangle__result6 = main__is_right_angle_triangle__result4)) and
   ((((((o = (side_3 * side_3)) and in_range1((side_3 * side_3))) and
   (((o1 = (side_2 * side_2)) and in_range1((side_2 * side_2))) and
   (o2 = (o1 + o)))) and ((o3 = o2) and in_range1(o2))) and
   (((o4 = (long_side * long_side)) and
-  in_range1((long_side * long_side))) and (((o4 = o3) and (result = true)) or
-  ((not (o4 = o3)) and (result = false))))) and (((result = true) and
+  in_range1((long_side * long_side))) and (((o4 = o3) -> (result = true)) and
+  ((not (o4 = o3)) -> (result = false))))) and (((result = true) ->
   (((main__is_right_angle_triangle__result1 = main__is_right_angle_triangle__result3) and
   (main__is_right_angle_triangle__result4 = main__is_right_angle_triangle__result1)) and
-  (({ bool__content = result1 } = { bool__content =
-  main__is_right_angle_triangle__result }) and
-  (main__is_right_angle_triangle__result1 = of_int(1))))) or
-  ((not (result = true)) and
+  ((result1 = main__is_right_angle_triangle__result) and
+  (main__is_right_angle_triangle__result1 = of_int(1))))) and
+  ((not (result = true)) ->
   (((main__is_right_angle_triangle__result2 = main__is_right_angle_triangle__result3) and
   (main__is_right_angle_triangle__result4 = main__is_right_angle_triangle__result2)) and
-  (({ bool__content = result2 } = { bool__content =
-  main__is_right_angle_triangle__result }) and
-  (main__is_right_angle_triangle__result2 = of_int(0)))))))) and (({
-  bool__content = main__is_right_angle_triangle__result7 } = {
-  bool__content = main__is_right_angle_triangle__result5 }) and
-  (main__is_right_angle_triangle__result8 = main__is_right_angle_triangle__result6))) ->
-  (((((o5 = (side_3 * side_3)) and in_range1((side_3 * side_3))) and
-  (((o6 = (side_2 * side_2)) and in_range1((side_2 * side_2))) and
-  (o7 = (o6 + o5)))) and ((o8 = o7) and in_range1(o7))) ->
-  in_range1((long_side * long_side))))))))
+  ((result2 = main__is_right_angle_triangle__result) and
+  (main__is_right_angle_triangle__result2 = of_int(0))))))))
+
+axiom H4 :
+  (main__is_right_angle_triangle__result7 = main__is_right_angle_triangle__result5)
+
+axiom H5 :
+  (main__is_right_angle_triangle__result8 = main__is_right_angle_triangle__result6)
+
+axiom H6 : ((o5 = (side_3 * side_3)) and in_range1((side_3 * side_3)))
+
+axiom H7 : ((o6 = (side_2 * side_2)) and in_range1((side_2 * side_2)))
+
+axiom H8 : (o7 = (o6 + o5))
+
+axiom H9 : ((o8 = o7) and in_range1(o7))
+
+ (* File "main.adb", line 14, characters 0-0 *)
+goal WP_parameter_def : in_range1((long_side * long_side))

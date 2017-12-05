@@ -43,6 +43,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
 (assert (and (= semantics__check_within_ghost_function__C2b__assume (ghost_func Tuple0)) (in_range semantics__check_within_ghost_function__C2b__assume)))
 (assert (= semantics__check_within_ghost_function__C2b__assume c2b))
 (assert (in_range c2b))

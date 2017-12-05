@@ -443,10 +443,29 @@ function group1_set__ref___projection(a: group1_set__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic unmatched_g1_set__split_fields : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields1 : count
+
+logic idx_1 : int
+
+logic idx_2 : int
+
+logic o : int
+
+logic o1 : group1_id
+
+logic o2 : int
+
+axiom H : (1 <= idx_1)
+
+axiom H1 : (idx_1 <= to_rep1(unmatched_g1_set__split_fields1))
+
+axiom H2 : (1 <= idx_2)
+
+axiom H3 : (idx_2 <= to_rep1(unmatched_g1_set__split_fields1))
+
+axiom H4 : (not (idx_1 = idx_2))
+
  (* File "stable_marriage.adb", line 185, characters 0-0 *)
-goal WP_parameter_def :
-  (forall unmatched_g1_set__split_fields:count. forall idx_1:int.
-  forall idx_2:int. (((1 <= idx_1) and
-  (idx_1 <= to_rep1(unmatched_g1_set__split_fields))) -> (((1 <= idx_2) and
-  (idx_2 <= to_rep1(unmatched_g1_set__split_fields))) ->
-  ((not (idx_1 = idx_2)) -> (1 <= idx_2)))))
+goal WP_parameter_def : (1 <= idx_2)

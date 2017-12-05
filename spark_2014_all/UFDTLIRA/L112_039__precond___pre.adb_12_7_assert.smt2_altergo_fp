@@ -140,7 +140,9 @@ logic z : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range1(z)
+
+axiom H1 : (forall x:int. (((1 <= x) and (x <= 10)) -> (pred(x) = true)))
+
  (* File "pre.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (in_range1(z) ->
-  ((forall x:int. (((1 <= x) and (x <= 10)) -> (pred(x) = true))) ->
-  (pred(z) = true)))
+goal WP_parameter_def : (pred(z) = true)

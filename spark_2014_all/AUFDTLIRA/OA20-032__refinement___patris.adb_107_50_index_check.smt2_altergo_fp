@@ -463,7 +463,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -502,7 +502,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq10 : int, int -> bool
 
@@ -2016,7 +2016,7 @@ logic is_empty__function_guard : bool, (int,(int,cell) farray) farray, int,
 
 type integer
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq17 : int, int -> bool
 
@@ -2283,35 +2283,672 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall o:cell. forall o1:int. forall o2:(int,cell) farray. forall o3:int.
-  forall o4:(int,(int,cell) farray) farray. forall o5:cell. forall o6:int.
-  forall o7:(int,cell) farray. forall o8:int.
-  forall o9:(int,(int,cell) farray) farray. forall o10:cell.
-  forall result:(int,(int,cell) farray) farray.
-  forall cur_board1:(int,(int,cell) farray) farray.
-  forall result1:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray.
-  ((patris__possible_i_shapes__aggregate_def(temp___150(of_int(0), of_int(0),
-  of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(1),
-  of_int(0), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
-  of_int(0), of_int(0)), temp___170(of_int(0), of_int(0), of_int(1),
-  of_int(0), of_int(0), of_int(0), of_int(1), of_int(0), of_int(0),
-  of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
-  of_int(0)), temp___190(of_int(0), of_int(0), of_int(0), of_int(0),
-  of_int(0), of_int(0), of_int(0), of_int(0), of_int(1), of_int(1),
-  of_int(1), of_int(1), of_int(0), of_int(0), of_int(0), of_int(0)),
-  temp___210(of_int(0), of_int(1), of_int(0), of_int(0), of_int(0),
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic y : int
+
+logic x : int
+
+logic y1 : int
+
+logic x1 : int
+
+logic o : cell
+
+logic o1 : int
+
+logic o2 : (int,cell) farray
+
+logic o3 : int
+
+logic o4 : (int,(int,cell) farray) farray
+
+logic o5 : cell
+
+logic o6 : int
+
+logic o7 : (int,cell) farray
+
+logic o8 : int
+
+logic o9 : (int,(int,cell) farray) farray
+
+logic o10 : cell
+
+logic o11 : int
+
+logic o12 : (int,cell) farray
+
+logic o13 : int
+
+logic o14 : (int,(int,cell) farray) farray
+
+logic o15 : cell
+
+logic o16 : int
+
+logic o17 : (int,cell) farray
+
+logic o18 : int
+
+logic o19 : (int,(int,cell) farray) farray
+
+logic o20 : cell
+
+logic o21 : int
+
+logic o22 : (int,cell) farray
+
+logic o23 : int
+
+logic o24 : (int,(int,cell) farray) farray
+
+logic o25 : cell
+
+logic o26 : int
+
+logic o27 : (int,cell) farray
+
+logic o28 : int
+
+logic o29 : (int,(int,cell) farray) farray
+
+logic o30 : cell
+
+logic o31 : int
+
+logic o32 : (int,cell) farray
+
+logic o33 : int
+
+logic o34 : (int,(int,cell) farray) farray
+
+logic o35 : cell
+
+logic o36 : int
+
+logic o37 : (int,cell) farray
+
+logic o38 : int
+
+logic o39 : (int,(int,cell) farray) farray
+
+logic o40 : cell
+
+logic o41 : int
+
+logic o42 : (int,cell) farray
+
+logic o43 : int
+
+logic o44 : (int,(int,cell) farray) farray
+
+logic o45 : cell
+
+logic o46 : int
+
+logic o47 : (int,cell) farray
+
+logic o48 : int
+
+logic o49 : (int,(int,cell) farray) farray
+
+logic o50 : cell
+
+logic o51 : int
+
+logic o52 : (int,cell) farray
+
+logic o53 : int
+
+logic o54 : (int,(int,cell) farray) farray
+
+logic o55 : cell
+
+logic o56 : int
+
+logic o57 : (int,cell) farray
+
+logic o58 : int
+
+logic o59 : (int,(int,cell) farray) farray
+
+logic o60 : cell
+
+logic o61 : int
+
+logic o62 : (int,cell) farray
+
+logic o63 : int
+
+logic o64 : (int,(int,cell) farray) farray
+
+logic o65 : cell
+
+logic o66 : int
+
+logic o67 : (int,cell) farray
+
+logic o68 : int
+
+logic o69 : (int,(int,cell) farray) farray
+
+logic o70 : cell
+
+logic o71 : int
+
+logic o72 : (int,cell) farray
+
+logic o73 : int
+
+logic o74 : (int,(int,cell) farray) farray
+
+logic o75 : cell
+
+logic o76 : int
+
+logic o77 : (int,cell) farray
+
+logic o78 : int
+
+logic o79 : (int,(int,cell) farray) farray
+
+logic o80 : cell
+
+logic o81 : int
+
+logic o82 : (int,cell) farray
+
+logic o83 : int
+
+logic o84 : (int,(int,cell) farray) farray
+
+logic o85 : cell
+
+logic o86 : int
+
+logic o87 : (int,cell) farray
+
+logic o88 : int
+
+logic o89 : (int,(int,cell) farray) farray
+
+logic o90 : cell
+
+logic o91 : int
+
+logic o92 : (int,cell) farray
+
+logic o93 : int
+
+logic o94 : (int,(int,cell) farray) farray
+
+logic o95 : cell
+
+logic o96 : int
+
+logic o97 : (int,cell) farray
+
+logic o98 : int
+
+logic o99 : (int,(int,cell) farray) farray
+
+logic yy : int
+
+logic xx : int
+
+logic o100 : int
+
+logic temp___2142 : map
+
+logic o101 : cell
+
+logic o102 : int
+
+logic o103 : (int,cell) farray
+
+logic o104 : int
+
+logic o105 : (int,(int,cell) farray) farray
+
+logic o106 : int
+
+logic temp___21421 : map
+
+logic o107 : cell
+
+logic o108 : int
+
+logic o109 : (int,cell) farray
+
+logic o110 : int
+
+logic o111 : (int,(int,cell) farray) farray
+
+logic o112 : int
+
+logic temp___21422 : map
+
+logic o113 : cell
+
+logic o114 : int
+
+logic o115 : (int,cell) farray
+
+logic o116 : int
+
+logic o117 : (int,(int,cell) farray) farray
+
+logic o118 : int
+
+logic temp___21423 : map
+
+logic o119 : cell
+
+logic o120 : int
+
+logic o121 : (int,cell) farray
+
+logic o122 : int
+
+logic o123 : (int,(int,cell) farray) farray
+
+logic o124 : int
+
+logic temp___21424 : map
+
+logic o125 : cell
+
+logic o126 : int
+
+logic o127 : (int,cell) farray
+
+logic o128 : int
+
+logic o129 : (int,(int,cell) farray) farray
+
+logic o130 : int
+
+logic temp___21425 : map
+
+logic o131 : cell
+
+logic o132 : int
+
+logic o133 : (int,cell) farray
+
+logic o134 : int
+
+logic o135 : (int,(int,cell) farray) farray
+
+logic o136 : int
+
+logic temp___21426 : map
+
+logic o137 : cell
+
+logic o138 : int
+
+logic o139 : (int,cell) farray
+
+logic o140 : int
+
+logic o141 : (int,(int,cell) farray) farray
+
+logic o142 : int
+
+logic temp___21427 : map
+
+logic o143 : cell
+
+logic o144 : int
+
+logic o145 : (int,cell) farray
+
+logic o146 : int
+
+logic o147 : (int,(int,cell) farray) farray
+
+logic o148 : int
+
+logic temp___21428 : map
+
+logic o149 : cell
+
+logic o150 : int
+
+logic o151 : (int,cell) farray
+
+logic o152 : int
+
+logic o153 : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic y2 : int
+
+logic x2 : int
+
+logic y3 : int
+
+logic x3 : int
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result1 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result2 : (int,(int,cell) farray) farray
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic result3 : (int,(int,cell) farray) farray
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic result4 : int
+
+logic y4 : int
+
+logic result5 : int
+
+logic x4 : int
+
+logic result6 : (int,(int,cell) farray) farray
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic result7 : int
+
+logic x5 : int
+
+logic result8 : (int,(int,cell) farray) farray
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic result9 : int
+
+logic x6 : int
+
+logic result10 : (int,(int,cell) farray) farray
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic result11 : int
+
+logic x7 : int
+
+logic result12 : (int,(int,cell) farray) farray
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic result13 : int
+
+logic y5 : int
+
+logic result14 : int
+
+logic x8 : int
+
+logic result15 : (int,(int,cell) farray) farray
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic result16 : int
+
+logic x9 : int
+
+logic result17 : (int,(int,cell) farray) farray
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic result18 : int
+
+logic x10 : int
+
+logic result19 : (int,(int,cell) farray) farray
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic result20 : int
+
+logic x11 : int
+
+logic result21 : (int,(int,cell) farray) farray
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic result22 : int
+
+logic y6 : int
+
+logic result23 : int
+
+logic x12 : int
+
+logic result24 : (int,(int,cell) farray) farray
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic result25 : int
+
+logic x13 : int
+
+logic result26 : (int,(int,cell) farray) farray
+
+logic cur_board15 : (int,(int,cell) farray) farray
+
+logic result27 : int
+
+logic x14 : int
+
+logic result28 : (int,(int,cell) farray) farray
+
+logic cur_board16 : (int,(int,cell) farray) farray
+
+logic result29 : int
+
+logic x15 : int
+
+logic result30 : (int,(int,cell) farray) farray
+
+logic cur_board17 : (int,(int,cell) farray) farray
+
+logic result31 : int
+
+logic y7 : int
+
+logic result32 : int
+
+logic x16 : int
+
+logic result33 : (int,(int,cell) farray) farray
+
+logic cur_board18 : (int,(int,cell) farray) farray
+
+logic result34 : int
+
+logic x17 : int
+
+logic result35 : (int,(int,cell) farray) farray
+
+logic cur_board19 : (int,(int,cell) farray) farray
+
+logic result36 : int
+
+logic x18 : int
+
+logic result37 : (int,(int,cell) farray) farray
+
+logic cur_board20 : (int,(int,cell) farray) farray
+
+logic result38 : int
+
+logic x19 : int
+
+logic result39 : (int,(int,cell) farray) farray
+
+logic cur_board21 : (int,(int,cell) farray) farray
+
+logic result40 : int
+
+logic y8 : int
+
+logic result41 : int
+
+logic x20 : int
+
+logic result42 : bool
+
+logic result43 : (int,(int,cell) farray) farray
+
+logic cur_board22 : (int,(int,cell) farray) farray
+
+logic result44 : int
+
+logic x21 : int
+
+logic result45 : bool
+
+logic result46 : (int,(int,cell) farray) farray
+
+logic cur_board23 : (int,(int,cell) farray) farray
+
+logic result47 : int
+
+logic x22 : int
+
+logic result48 : bool
+
+logic result49 : (int,(int,cell) farray) farray
+
+logic cur_board24 : (int,(int,cell) farray) farray
+
+logic result50 : int
+
+logic y9 : int
+
+logic result51 : int
+
+logic x23 : int
+
+logic result52 : bool
+
+logic result53 : (int,(int,cell) farray) farray
+
+logic cur_board25 : (int,(int,cell) farray) farray
+
+logic result54 : int
+
+logic x24 : int
+
+logic result55 : bool
+
+logic result56 : (int,(int,cell) farray) farray
+
+logic cur_board26 : (int,(int,cell) farray) farray
+
+logic result57 : int
+
+logic x25 : int
+
+logic result58 : bool
+
+logic result59 : (int,(int,cell) farray) farray
+
+logic cur_board27 : (int,(int,cell) farray) farray
+
+logic result60 : int
+
+logic y10 : int
+
+logic result61 : int
+
+logic x26 : int
+
+logic result62 : bool
+
+logic result63 : (int,(int,cell) farray) farray
+
+logic cur_board28 : (int,(int,cell) farray) farray
+
+logic result64 : int
+
+logic x27 : int
+
+logic result65 : bool
+
+logic result66 : (int,(int,cell) farray) farray
+
+logic cur_board29 : (int,(int,cell) farray) farray
+
+logic result67 : int
+
+logic x28 : int
+
+logic result68 : bool
+
+logic result69 : (int,(int,cell) farray) farray
+
+logic cur_board30 : (int,(int,cell) farray) farray
+
+logic result70 : int
+
+logic cur_state1 : int
+
+logic cur_board31 : (int,(int,cell) farray) farray
+
+logic cur_state2 : int
+
+logic y11 : int
+
+logic x29 : int
+
+logic y12 : int
+
+logic x30 : int
+
+logic cur_board32 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic y13 : int
+
+logic x31 : int
+
+logic y14 : int
+
+logic x32 : int
+
+axiom H : (patris__possible_i_shapes__aggregate_def(temp___150(of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
+  of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0)), temp___170(of_int(0), of_int(0),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) ->
-  ((patris__possible_three_shapes__aggregate_def(temp___255(of_int(1),
+  of_int(0), of_int(0), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(1), of_int(0)), temp___190(of_int(0), of_int(0), of_int(0),
+  of_int(0), of_int(0), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(1), of_int(1), of_int(1), of_int(0), of_int(0), of_int(0),
+  of_int(0)), temp___210(of_int(0), of_int(1), of_int(0), of_int(0),
+  of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
+  of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (patris__possible_three_shapes__aggregate_def(temp___255(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___268(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -2345,30 +2982,59 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___502(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) -> (in_range9(cur_state) ->
-  (((get_state(cur_state) = 1) and (valid_configuration__2(cur_state, {
-  rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : in_range9(cur_state)
+
+axiom H3 : ((get_state(cur_state) = 1) and (valid_configuration__2(cur_state,
+  { rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
   cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
-  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true)) ->
-  ((to_rep1(cur_piece__split_fields) = 2) ->
-  (((((to_rep(o) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o1 = to_rep2(cur_piece__split_fields2))) and
-  (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o])))) and
-  ((((1 <= to_rep3(cur_piece__split_fields3)) and
-  (to_rep3(cur_piece__split_fields3) <= 20)) and
-  (o3 = to_rep3(cur_piece__split_fields3))) and
-  (o4 = (cur_board[o3 <- o2])))) and (({ map__content1 = result } = {
-  map__content1 = cur_board }) and (cur_board1 = o4))) ->
-  (((((to_rep(o5) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o6 = to_rep2(cur_piece__split_fields2))) and
-  (o7 = ((cur_board1[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
-  ((to_rep3(cur_piece__split_fields3) + 1) <= 20)) and
-  (o8 = (to_rep3(cur_piece__split_fields3) + 1))) and
-  (o9 = (cur_board1[o8 <- o7])))) and ((cur_board1 = result1) and
-  (cur_board2 = o9))) -> ((to_rep(o10) = to_rep1(cur_piece__split_fields)) ->
-  (1 <= (to_rep2(cur_piece__split_fields2) + 1)))))))))))
+  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true))
+
+axiom H4 : (to_rep1(cur_piece__split_fields) = 2)
+
+axiom H5 : (to_rep(o) = to_rep1(cur_piece__split_fields))
+
+axiom H6 : ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10))
+
+axiom H7 : (o1 = to_rep2(cur_piece__split_fields2))
+
+axiom H8 : (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o]))
+
+axiom H9 : ((1 <= to_rep3(cur_piece__split_fields3)) and
+  (to_rep3(cur_piece__split_fields3) <= 20))
+
+axiom H10 : (o3 = to_rep3(cur_piece__split_fields3))
+
+axiom H11 : (o4 = (cur_board[o3 <- o2]))
+
+axiom H12 : (result = cur_board)
+
+axiom H13 : (cur_board2 = o4)
+
+axiom H14 : (to_rep(o5) = to_rep1(cur_piece__split_fields))
+
+axiom H15 : ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10))
+
+axiom H16 : (o6 = to_rep2(cur_piece__split_fields2))
+
+axiom H17 :
+  (o7 = ((cur_board2[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5]))
+
+axiom H18 : ((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
+  ((to_rep3(cur_piece__split_fields3) + 1) <= 20))
+
+axiom H19 : (o8 = (to_rep3(cur_piece__split_fields3) + 1))
+
+axiom H20 : (o9 = (cur_board2[o8 <- o7]))
+
+axiom H21 : (cur_board2 = result1)
+
+axiom H22 : (cur_board3 = o9)
+
+axiom H23 : (to_rep(o10) = to_rep1(cur_piece__split_fields))
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (1 <= (to_rep2(cur_piece__split_fields2) + 1))

@@ -386,7 +386,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1070,49 +1070,139 @@ axiom result1__def_axiom : ((result1 = result__) and (result11 = result__1))
 axiom result1_base__def_axiom : ((result1_base = result1) and
   (result1_base1 = result11))
 
- (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall record_discr__search_upto__result:bool.
-  forall record_discr__search_upto__result1:us_main_type. forall us:int.
-  forall us1:int. forall us2:int. forall us3:int. forall us4:int.
-  forall o:int. forall record_discr__search_upto__result__assume:bool.
-  forall record_discr__search_upto__result__assume1:us_main_type.
-  forall o1:int. forall o2:natural. forall o3:int. forall o4:int.
-  forall o5:natural. forall o6:(int,natural) farray.
-  forall temp___265:(int,natural) farray. forall temp___2651:t2.
-  forall o7:(int,natural) farray. forall o8:t1.
-  forall o9:(int,natural) farray. forall o10:t1. forall o11:natural.
-  forall o12:natural. forall o13:(int,natural) farray. forall o14:t1.
-  forall o15:natural. forall o16:(int,natural) farray. forall o17:t.
-  forall o18:bool. forall o19:us_main_type. forall result:bool.
-  forall result2:bool. forall result3:us_main_type.
-  forall record_discr__search_upto__result2:bool.
-  forall record_discr__search_upto__result3:us_main_type.
-  forall result4:bool. forall result5:us_main_type.
-  forall record_discr__search_upto__result4:bool.
-  forall record_discr__search_upto__result5:us_main_type.
-  forall record_discr__search_upto__result6:bool.
-  forall record_discr__search_upto__result7:us_main_type.
-  forall record_discr__search_upto__result8:bool.
-  forall record_discr__search_upto__result9:us_main_type.
-  forall record_discr__search_upto__result10:result_ty__ref.
-  forall record_discr__search_upto__result11:us_rep.
-  forall record_discr__search_upto__result12:result_ty__ref.
-  forall record_discr__search_upto__result13:us_rep.
-  (forall result6:bool. forall result7:us_main_type. (((dynamic_property1(1,
-  to_rep(r), to_rep1(first(r2)), to_rep1(last(r2))) and
-  ((to_rep1(first(r2)) = 1) and (to_rep1(last(r2)) = to_rep(r)))) and
-  (in_range1(e) and (((((us = to_rep(r)) and in_range1(to_rep(r))) and
-  ((((not (to_rep(r) = 0)) and (us1 = to_int(true))) or ((to_rep(r) = 0) and
-  (us1 = to_int(false)))) and ((((not (to_rep(r) = 0)) and
-  (us2 = to_int(true))) or ((to_rep(r) = 0) and (us2 = to_int(false)))) and
-  ((us3 = 0) and ((us4 = 0) and ((((((to_rep(r) = 0) and (o = 1)) or
-  ((not (to_rep(r) = 0)) and ((o = to_rep(r)) and in_range2(to_rep(r))))) and
-  ((((not (to_rep(r) = 0)) and ({ us_split_discrs1 = {
+logic record_discr__search_upto__result : bool
+
+logic record_discr__search_upto__result1 : us_main_type
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic o : int
+
+logic record_discr__search_upto__result__assume : bool
+
+logic record_discr__search_upto__result__assume1 : us_main_type
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : (int,natural) farray
+
+logic temp___265 : (int,natural) farray
+
+logic temp___2651 : t2
+
+logic o7 : (int,natural) farray
+
+logic o8 : t1
+
+logic o9 : (int,natural) farray
+
+logic o10 : t1
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : (int,natural) farray
+
+logic o14 : t1
+
+logic o15 : natural
+
+logic o16 : (int,natural) farray
+
+logic o17 : t
+
+logic o18 : bool
+
+logic o19 : us_main_type
+
+logic temp___270 : int
+
+logic o20 : int
+
+logic i : int
+
+logic result : bool
+
+logic result2 : bool
+
+logic result3 : us_main_type
+
+logic record_discr__search_upto__result2 : bool
+
+logic record_discr__search_upto__result3 : us_main_type
+
+logic result4 : bool
+
+logic result5 : us_main_type
+
+logic record_discr__search_upto__result4 : bool
+
+logic record_discr__search_upto__result5 : us_main_type
+
+logic record_discr__search_upto__result6 : bool
+
+logic record_discr__search_upto__result7 : us_main_type
+
+logic record_discr__search_upto__result8 : bool
+
+logic record_discr__search_upto__result9 : us_main_type
+
+logic record_discr__search_upto__result10 : bool
+
+logic record_discr__search_upto__result11 : us_main_type
+
+logic record_discr__search_upto__result12 : bool
+
+logic record_discr__search_upto__result13 : us_main_type
+
+logic record_discr__search_upto__result14 : bool
+
+logic record_discr__search_upto__result15 : us_main_type
+
+logic record_discr__search_upto__result16 : bool
+
+logic record_discr__search_upto__result17 : us_main_type
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : us_main_type
+
+axiom H : (dynamic_property1(1, to_rep(r), to_rep1(first(r2)),
+  to_rep1(last(r2))) and ((to_rep1(first(r2)) = 1) and
+  (to_rep1(last(r2)) = to_rep(r))))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((((us = to_rep(r)) and in_range1(to_rep(r))) and
+  ((((not (to_rep(r) = 0)) -> (us1 = to_int(true))) and ((to_rep(r) = 0) ->
+  (us1 = to_int(false)))) and ((((not (to_rep(r) = 0)) ->
+  (us2 = to_int(true))) and ((to_rep(r) = 0) -> (us2 = to_int(false)))) and
+  ((us3 = 0) and ((us4 = 0) and ((((((to_rep(r) = 0) -> (o = 1)) and
+  ((not (to_rep(r) = 0)) -> ((o = to_rep(r)) and in_range2(to_rep(r))))) and
+  ((((not (to_rep(r) = 0)) -> ({ us_split_discrs1 = {
   rec__private_record__result_ty__found =
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
-  } } = mk_result(true, o))) or ((to_rep(r) = 0) and ({ us_split_discrs1 = {
+  } } = mk_result(true, o))) and ((to_rep(r) = 0) -> ({ us_split_discrs1 = {
   rec__private_record__result_ty__found =
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
@@ -1123,59 +1213,46 @@ goal WP_parameter_def :
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
   } }) = o))))) and
-  ((result__ = record_discr__search_upto__result__assume) and
-  (result__1 = record_discr__search_upto__result__assume1))) and
+  ((record_discr__search_upto__result__assume = result__) and
+  (record_discr__search_upto__result__assume1 = result__1))) and
   (((result__ = result1) and (result__1 = result11)) and ((bool_ne(to_rep(r),
   0) = result1) and (((result1 = result1_base) and
-  (result11 = result1_base1)) and (((record_discr__search_upto__result10 = {
-  result_ty__content = { us_split_discrs1 = {
-  rec__private_record__result_ty__found = record_discr__search_upto__result6
-  }; us_split_fields1 = { rec__private_record__result_ty =
-  record_discr__search_upto__result7 } } }) and
-  (record_discr__search_upto__result11 = { us_split_discrs1 = {
-  rec__private_record__result_ty__found = record_discr__search_upto__result8
-  }; us_split_fields1 = { rec__private_record__result_ty =
-  record_discr__search_upto__result9 } })) and ((((to_rep(r) = 0) and
-  (result = true)) or ((not (to_rep(r) = 0)) and
+  (result11 = result1_base1)) and
+  ((((record_discr__search_upto__result10 = record_discr__search_upto__result6) and
+  (record_discr__search_upto__result11 = record_discr__search_upto__result7)) and
+  ((record_discr__search_upto__result12 = record_discr__search_upto__result8) and
+  (record_discr__search_upto__result13 = record_discr__search_upto__result9))) and
+  ((((to_rep(r) = 0) -> (result = true)) and ((not (to_rep(r) = 0)) ->
   ((((((to_rep1(first(r2)) <= to_rep(r)) and
   (to_rep(r) <= to_rep1(last(r2)))) and (o1 = to_rep(r))) and
-  (o2 = (r1[o1]))) and (o3 = to_rep(o2))) and (((o3 = e) and
-  (result = true)) or ((not (o3 = e)) and (result = false)))))) and
-  (((result = true) and
+  (o2 = (r1[o1]))) and (o3 = to_rep(o2))) and (((o3 = e) ->
+  (result = true)) and ((not (o3 = e)) -> (result = false)))))) and
+  (((result = true) ->
   ((((record_discr__search_upto__result6 = record_discr__search_upto__result2) and
   (record_discr__search_upto__result7 = record_discr__search_upto__result3)) and
-  ({ us_split_discrs1 = { rec__private_record__result_ty__found =
-  record_discr__search_upto__result8 }; us_split_fields1 = {
-  rec__private_record__result_ty = record_discr__search_upto__result9 } } = {
-  us_split_discrs1 = { rec__private_record__result_ty__found =
-  record_discr__search_upto__result2 }; us_split_fields1 = {
-  rec__private_record__result_ty = record_discr__search_upto__result3 }
-  })) and (((result2 = record_discr__search_upto__result) and
+  ((record_discr__search_upto__result8 = record_discr__search_upto__result2) and
+  (record_discr__search_upto__result9 = record_discr__search_upto__result3))) and
+  (((result2 = record_discr__search_upto__result) and
   (result3 = record_discr__search_upto__result1)) and
-  ((result1_base = record_discr__search_upto__result2) and
-  (result1_base1 = record_discr__search_upto__result3))))) or
-  ((not (result = true)) and
+  ((record_discr__search_upto__result2 = result1_base) and
+  (record_discr__search_upto__result3 = result1_base1))))) and
+  ((not (result = true)) ->
   ((((record_discr__search_upto__result6 = record_discr__search_upto__result4) and
   (record_discr__search_upto__result7 = record_discr__search_upto__result5)) and
-  ({ us_split_discrs1 = { rec__private_record__result_ty__found =
-  record_discr__search_upto__result8 }; us_split_fields1 = {
-  rec__private_record__result_ty = record_discr__search_upto__result9 } } = {
-  us_split_discrs1 = { rec__private_record__result_ty__found =
-  record_discr__search_upto__result4 }; us_split_fields1 = {
-  rec__private_record__result_ty = record_discr__search_upto__result5 }
-  })) and ((((((((((1 <= (to_rep(r) - 1)) -> (((to_rep1(first(r2)) <= 1) and
+  ((record_discr__search_upto__result8 = record_discr__search_upto__result4) and
+  (record_discr__search_upto__result9 = record_discr__search_upto__result5))) and
+  ((((((((((1 <= (to_rep(r) - 1)) -> (((to_rep1(first(r2)) <= 1) and
   (1 <= to_rep1(last(r2)))) and ((to_rep1(first(r2)) <= (to_rep(r) - 1)) and
   ((to_rep(r) - 1) <= to_rep1(last(r2)))))) and (o6 = r1)) and
   ((o6 = temp___265) and (mk2(1, (to_rep(r) - 1)) = temp___2651))) and
-  ((((to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651))) and
-  (((1 <= (to_rep(r) - 1)) and
-  (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = (((to_rep(r) - 1) - 1) + 1))) or
-  ((not (1 <= (to_rep(r) - 1))) and
-  (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651)))) and
-  (((1 <= (to_rep(r) - 1)) and (0 = (((to_rep(r) - 1) - 1) + 1))) or
-  (not (1 <= (to_rep(r) - 1)))))) and ((temp___265 = o7) and
-  (mk1(to_rep1(first4(temp___2651)),
+  ((((to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651))) ->
+  (((1 <= (to_rep(r) - 1)) ->
+  (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = (((to_rep(r) - 1) - 1) + 1))) and
+  ((not (1 <= (to_rep(r) - 1))) ->
+  (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651)))) ->
+  ((1 <= (to_rep(r) - 1)) -> (0 = (((to_rep(r) - 1) - 1) + 1))))) and
+  ((temp___265 = o7) and (mk1(to_rep1(first4(temp___2651)),
   to_rep1(last4(temp___2651))) = o8)))) and ((o9 = o7) and (o10 = o8))) and
   (((((o4 = (to_rep(r) - 1)) and in_range1((to_rep(r) - 1))) and
   (to_rep(o5) = o4)) and (o5 = o11)) and ((o12 = o11) and ((o13 = o9) and
@@ -1189,26 +1266,31 @@ goal WP_parameter_def :
   rec__private_record__result_ty = o19 } } = search_upto({ us_split_discrs3 =
   { rec__record_discr__interm_result__upto = o15 }; us_split_fields3 = {
   rec__record_discr__interm_result__to_search = { elts = o16; rt = o17 } } },
-  e)) and (((o18 = true) and ((get_content({ us_split_discrs1 = {
+  e)) and (((o18 = true) -> ((get_content({ us_split_discrs1 = {
   rec__private_record__result_ty__found = o18 }; us_split_fields1 = {
   rec__private_record__result_ty = o19 } }) <= to_rep(o15)) and
   (to_rep((o16[get_content({ us_split_discrs1 = {
   rec__private_record__result_ty__found = o18 }; us_split_fields1 = {
-  rec__private_record__result_ty = o19 } })])) = e))) or
-  ((not (o18 = true)) and
-  (forall i:int. (((1 <= i) and (i <= to_rep(o15))) ->
-  (not (to_rep((o16[i])) = e)))))))) and
+  rec__private_record__result_ty = o19 } })])) = e))) and
+  ((not (o18 = true)) ->
+  (forall i1:int. (((1 <= i1) and (i1 <= to_rep(o15))) ->
+  (not (to_rep((o16[i1])) = e)))))))) and
   (((result4 = record_discr__search_upto__result) and
-  (result5 = record_discr__search_upto__result1)) and ({ us_split_discrs1 = {
-  rec__private_record__result_ty__found = record_discr__search_upto__result4
+  (result5 = record_discr__search_upto__result1)) and
+  ((record_discr__search_upto__result4 = o18) and
+  (record_discr__search_upto__result5 = o19)))))))))))))))))) and
+  (((record_discr__search_upto__result14 = record_discr__search_upto__result10) and
+  (record_discr__search_upto__result15 = record_discr__search_upto__result11)) and
+  ((record_discr__search_upto__result16 = record_discr__search_upto__result12) and
+  (record_discr__search_upto__result17 = record_discr__search_upto__result13))))
+
+axiom H3 : ((result7 = record_discr__search_upto__result14) and
+  (result8 = record_discr__search_upto__result15))
+
+axiom H4 : (record_discr__search_upto__result14 = true)
+
+ (* File "private_record.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (get_content({ us_split_discrs1 = {
+  rec__private_record__result_ty__found = record_discr__search_upto__result14
   }; us_split_fields1 = { rec__private_record__result_ty =
-  record_discr__search_upto__result5 } } = { us_split_discrs1 = {
-  rec__private_record__result_ty__found = o18 }; us_split_fields1 = {
-  rec__private_record__result_ty = o19 } }))))))))))))))))) and
-  ((record_discr__search_upto__result12 = record_discr__search_upto__result10) and
-  (record_discr__search_upto__result13 = record_discr__search_upto__result11))) and
-  ({ us_split_discrs1 = { rec__private_record__result_ty__found = result6 };
-  us_split_fields1 = { rec__private_record__result_ty = result7 }
-  } = (record_discr__search_upto__result12).result_ty__content)))) ->
-  (((((record_discr__search_upto__result12).result_ty__content).us_split_discrs1).rec__private_record__result_ty__found = true) ->
-  (get_content((record_discr__search_upto__result12).result_ty__content) <= to_rep(r))))))
+  record_discr__search_upto__result15 } }) <= to_rep(r))

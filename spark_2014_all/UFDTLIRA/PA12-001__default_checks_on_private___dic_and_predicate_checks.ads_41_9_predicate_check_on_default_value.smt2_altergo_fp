@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -618,18 +618,32 @@ axiom is_valid__def_axiom3 :
   us_split_fields1 = { rec__dic_and_predicate_checks__r__f = x;
   rec__dic_and_predicate_checks__r__g = x1 } }) = true)))
 
- (* File "dic_and_predicate_checks.ads", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x1__split_fields:integer. forall x1__split_fields1:integer.
-  forall x2__split_fields:integer. forall temp___207:integer.
-  forall temp___2071:integer. (((to_rep(x1__split_fields1) = 0) and
-  (is_valid1({ us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
+logic x1__split_fields : integer
+
+logic x1__split_fields1 : integer
+
+logic x2__split_fields : integer
+
+logic temp___210 : integer
+
+logic temp___207 : integer
+
+logic temp___2071 : integer
+
+axiom H : ((to_rep(x1__split_fields1) = 0) and (is_valid1({
+  us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
   x1__split_fields; rec__dic_and_predicate_checks__r__g = x1__split_fields1 }
-  }) = true)) -> ((is_valid2({ us_split_fields3 = {
+  }) = true))
+
+axiom H1 : (is_valid2({ us_split_fields3 = {
   rec__dic_and_predicate_checks__nested_2__r__f = x2__split_fields }
-  }) = true) -> (((to_rep(temp___2071) = 0) and (is_valid3({
-  us_split_fields1 = { rec__dic_and_predicate_checks__r__f = temp___207;
-  rec__dic_and_predicate_checks__r__g = temp___2071 } }) = true)) ->
-  (is_valid3({ us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
-  temp___207; rec__dic_and_predicate_checks__r__g = temp___2071 }
-  }) = true)))))
+  }) = true)
+
+axiom H2 : ((to_rep(temp___2071) = 0) and (is_valid3({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___207;
+  rec__dic_and_predicate_checks__r__g = temp___2071 } }) = true))
+
+ (* File "dic_and_predicate_checks.ads", line 41, characters 0-0 *)
+goal WP_parameter_def : (is_valid3({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___207;
+  rec__dic_and_predicate_checks__r__g = temp___2071 } }) = true)

@@ -120,7 +120,7 @@
 (declare-datatypes () ((us_rep (mk___rep (us_split_discrs1 us_split_discrs) (us_split_fields1 us_split_fields)))))
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1 a))
 (define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1 a))
-(define-fun bool_eq2 ((a us_rep) (b us_rep)) Bool (ite (and (and (= (to_rep (rec__stack__stack__n (us_split_discrs1 a))) (to_rep (rec__stack__stack__n (us_split_discrs1 b)))) (= (to_rep (rec__stack__stack__top (us_split_fields1 a))) (to_rep (rec__stack__stack__top (us_split_fields1 b))))) (= (bool_eq1 (rec__stack__stack__content (us_split_fields1 a)) (rec__stack__stack__content (us_split_fields1 b))) true)) true false))
+(define-fun bool_eq2 ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep (rec__stack__stack__n (us_split_discrs1 a))) (to_rep (rec__stack__stack__n (us_split_discrs1 b)))) (and (= (to_rep (rec__stack__stack__top (us_split_fields1 a))) (to_rep (rec__stack__stack__top (us_split_fields1 b)))) (= (bool_eq1 (rec__stack__stack__content (us_split_fields1 a)) (rec__stack__stack__content (us_split_fields1 b))) true))) true false))
 (declare-const value__size1 Int)
 (declare-fun object__size1 (us_rep) Int)
 (declare-const value__alignment1 Int)

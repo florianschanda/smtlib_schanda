@@ -138,13 +138,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 type us_split_discrs = { rec__foo__thing__d : natural
 }
 
-function us_split_discrs___projection(a: us_split_discrs) : natural =
+function us_split_discrs___2__projection(a: us_split_discrs) : natural =
   (a).rec__foo__thing__d
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__foo__thing__a : bool; rec__foo__thing__x : bool
@@ -166,10 +166,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___27__projection(a: us_rep) : us_split_discrs =
+function us_rep___28__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___28__projection(a: us_rep) : us_split_fields =
+function us_rep___29__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -261,10 +261,10 @@ type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep___29__projection(a: us_rep1) : us_split_discrs =
+function us_rep___30__projection(a: us_rep1) : us_split_discrs =
   (a).us_split_discrs2
 
-function us_rep___30__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___31__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
@@ -367,7 +367,17 @@ logic po_1__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic b : bool
+
+logic us : int
+
+logic result : bool
+
+logic b1 : bool
+
+axiom H : (result = b)
+
+axiom H1 : (b1 = of_int(0))
+
  (* File "foo.adb", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall result:bool. forall b1:bool. (((result = b) and
-  (b1 = of_int(0))) -> in_range1(12)))
+goal WP_parameter_def : in_range1(12)

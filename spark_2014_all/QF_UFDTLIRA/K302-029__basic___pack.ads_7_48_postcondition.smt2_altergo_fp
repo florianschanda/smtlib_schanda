@@ -81,5 +81,31 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : bool
+
+logic z : bool
+
+logic result : bool
+
+logic z1 : bool
+
+logic z2 : bool
+
+logic z3 : bool
+
+logic z4 : bool
+
+logic z5 : bool
+
+axiom H : ((((z1 = z2) and (z3 = z1)) and (((result = z) and (z1 = x)) and
+  (z1 = true))) or ((((result = z) and (z1 = x)) and (not (z1 = true))) and
+  ((z1 = z2) and (z3 = z1))))
+
+axiom H1 : (z4 = z2)
+
+axiom H2 : (z5 = z3)
+
+axiom H3 : (x = true)
+
  (* File "pack.ads", line 6, characters 0-0 *)
 goal WP_parameter_def : true

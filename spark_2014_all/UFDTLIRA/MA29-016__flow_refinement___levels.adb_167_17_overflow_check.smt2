@@ -45,6 +45,7 @@
 (declare-const y2 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range x0))
 (assert (in_range x1))
 (assert (in_range y1))

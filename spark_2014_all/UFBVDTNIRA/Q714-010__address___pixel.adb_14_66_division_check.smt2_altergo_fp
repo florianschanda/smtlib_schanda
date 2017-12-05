@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -665,7 +665,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -747,7 +747,7 @@ function address__ref___projection(a: address__ref) : address =
 
 type storage_offset
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -863,9 +863,33 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom buffer__def_axiom : (buffer = to_address(of_int(0)))
 
+logic asp : int
+
+logic pixel__buffer__assume : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+axiom H : (pixel__buffer__assume = to_address(of_int(0)))
+
+axiom H1 : (pixel__buffer__assume = buffer)
+
+axiom H2 : true
+
+axiom H3 : ((o2 = zero(void)) and (in_range2(o2) and (o2 = 0)))
+
  (* File "pixel.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pixel__buffer__assume:t. forall o:int.
-  (((pixel__buffer__assume = to_address(of_int(0))) and
-  (pixel__buffer__assume = buffer)) -> (((o = zero(void)) and
-  (in_range2(o) and (o = 0))) -> (not (o = 0)))))
+goal WP_parameter_def : (not (o2 = 0))

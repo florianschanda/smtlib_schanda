@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -675,12 +675,96 @@ axiom def_axiom7 :
   (forall temp___833:int.
   ((do_checks__do_length_check__B_24__x__aggregate_def(temp___832)[temp___833]) = temp___832)))
 
+logic branch : int
+
+logic x : (int,bool) farray
+
+logic y : (int,bool) farray
+
+logic x1 : (int,bool) farray
+
+logic y1 : (int,bool) farray
+
+logic x2 : (int,bool) farray
+
+logic x3 : (int,bool) farray
+
+logic x4 : (int,bool) farray
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic result : (int,bool) farray
+
+logic x5 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+logic y2 : (int,bool) farray
+
+logic result2 : (int,bool) farray
+
+logic x6 : (int,bool) farray
+
+logic result3 : (int,bool) farray
+
+logic y3 : (int,bool) farray
+
+logic result4 : (int,bool) farray
+
+logic x7 : (int,bool) farray
+
+logic result5 : (int,bool) farray
+
+logic x8 : (int,bool) farray
+
+logic result6 : (int,bool) farray
+
+logic x9 : (int,bool) farray
+
+axiom H : in_range2(branch)
+
+axiom H1 : (not (branch = 100))
+
+axiom H2 : (not (branch = 101))
+
+axiom H3 : (not (branch = 102))
+
+axiom H4 : (not (branch = 103))
+
+axiom H5 : (not (branch = 104))
+
+axiom H6 : (branch = 105)
+
+axiom H7 : (result6 = x4)
+
+axiom H8 :
+  (x9 = do_checks__do_length_check__B_24__x__aggregate_def(of_int(0)))
+
+axiom H9 : (to_rep(o11) = 11)
+
+axiom H10 : (to_rep(o10) = 1)
+
  (* File "do_checks.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall branch:int. forall x:(int,bool) farray. forall o:integer.
-  forall o1:integer. forall result:(int,bool) farray.
-  forall x1:(int,bool) farray. (in_range2(branch) -> ((not (branch = 100)) ->
-  ((not (branch = 101)) -> ((not (branch = 102)) -> ((not (branch = 103)) ->
-  ((not (branch = 104)) -> ((branch = 105) -> (((result = x) and
-  (x1 = do_checks__do_length_check__B_24__x__aggregate_def(of_int(0)))) ->
-  ((to_rep(o1) = 11) -> ((to_rep(o) = 1) -> (to_rep(o) = 1))))))))))))
+goal WP_parameter_def : (to_rep(o10) = 1)

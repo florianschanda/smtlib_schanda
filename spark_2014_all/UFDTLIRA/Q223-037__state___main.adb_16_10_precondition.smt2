@@ -41,6 +41,7 @@
 (assert (forall ((p__p_state Int)) (forall ((p__p_abs_state us_private)) (! (=> (dynamic_invariant p__p_state true true true) (= (get_p_state p__p_state p__p_abs_state) p__p_state)) :pattern ((get_p_state p__p_state p__p_abs_state))))))
 (declare-const p_state Int)
 (declare-const x Int)
+(declare-const o Int)
 (declare-const p_state1 Int)
 (declare-const p_abs_state us_private)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range p_state)))

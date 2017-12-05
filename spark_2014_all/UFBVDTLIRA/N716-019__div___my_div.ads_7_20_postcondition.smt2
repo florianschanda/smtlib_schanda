@@ -66,6 +66,7 @@
 (declare-const x3 (_ BitVec 32))
 (declare-const x4 (_ BitVec 32))
 (declare-const x5 (_ BitVec 32))
+(assert true)
 (assert (= (mk_t__ref result) (mk_t__ref x)))
 (assert (= x1 (bvudiv x ((_ int2bv 32) 4))))
 (assert (= x1 result1))

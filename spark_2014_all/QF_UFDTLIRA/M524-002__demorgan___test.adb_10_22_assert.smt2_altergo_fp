@@ -85,9 +85,16 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : ((not ((a = true) or (b = true))) <-> ((not (a = true)) and
+  (not (b = true))))
+
+axiom H1 : (((not ((a = true) and (b = true))) <-> (not (a = true))) or
+  (not (b = true)))
+
+axiom H2 : ((match_bool(a, true, b) = true) -> (not (match_bool(a, b,
+  false) = true)))
+
+axiom H3 : (not (match_bool(a, true, b) = false))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (((not ((a = true) or (b = true))) <->
-  ((not (a = true)) and (not (b = true)))) -> ((((not ((a = true) and
-  (b = true))) <-> (not (a = true))) or (not (b = true))) -> (((match_bool(a,
-  true, b) = true) and (match_bool(a, b, false) = false)) -> ((a = true) or
-  (b = true)))))
+goal WP_parameter_def : ((a = true) or (b = true))

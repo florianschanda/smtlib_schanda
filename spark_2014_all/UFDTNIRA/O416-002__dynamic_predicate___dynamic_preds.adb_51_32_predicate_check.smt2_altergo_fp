@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -355,14 +355,31 @@ axiom get_constant_even_pair__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x__split_fields : even
+
+logic x__split_fields1 : even
+
+logic o : even
+
+logic o1 : even
+
+logic temp___224 : even
+
+logic temp___2241 : even
+
+axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
+
+axiom H1 : ((to_rep(i11s1) = (to_rep(i11s) + 2)) and ((mod(to_rep(i11s),
+  2) = 0) and (mod(to_rep(i11s1), 2) = 0)))
+
+axiom H2 : true
+
+axiom H3 : (({ us_split_fields1 = { rec__dynamic_preds__even_pair__a = o;
+  rec__dynamic_preds__even_pair__b = o1 }
+  } = get_constant_even_pair(void)) and (((mod(to_rep(o), 2) = 0) and
+  (mod(to_rep(o1), 2) = 0)) and ((to_rep(o) = 0) and (to_rep(o1) = 0))))
+
+axiom H4 : ((temp___224 = o) and (temp___2241 = o1))
+
  (* File "dynamic_preds.adb", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:even. forall o1:even. forall temp___224:even.
-  forall temp___2241:even. ((in_range(i7s) and (mod(i7s, 2) = 0)) ->
-  (((to_rep(i11s1) = (to_rep(i11s) + 2)) and ((mod(to_rep(i11s), 2) = 0) and
-  (mod(to_rep(i11s1), 2) = 0))) -> (((({ us_split_fields1 = {
-  rec__dynamic_preds__even_pair__a = o; rec__dynamic_preds__even_pair__b = o1
-  } } = get_constant_even_pair(void)) and (((mod(to_rep(o), 2) = 0) and
-  (mod(to_rep(o1), 2) = 0)) and ((to_rep(o) = 0) and (to_rep(o1) = 0)))) and
-  ((temp___224 = o) and (temp___2241 = o1))) ->
-  (to_rep(temp___2241) = (to_rep(temp___224) + 2))))))
+goal WP_parameter_def : (to_rep(temp___2241) = (to_rep(temp___224) + 2))

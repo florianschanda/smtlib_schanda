@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,15 +218,35 @@ logic x : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic named__l__result : int
+
+logic result : int
+
+logic named__l__result1 : int
+
+logic named__l__result2 : int
+
+logic named__l__result3 : int
+
+logic named__l__result4 : int
+
+logic named__l__result5 : int
+
+logic result1 : int
+
+axiom H : (named__l__result1 = named__l__result2)
+
+axiom H1 : (named__l__result3 = named__l__result1)
+
+axiom H2 : (result = named__l__result)
+
+axiom H3 : (named__l__result1 = 10)
+
+axiom H4 : (named__l__result4 = named__l__result2)
+
+axiom H5 : (named__l__result5 = named__l__result3)
+
+axiom H6 : (result1 = named__l__result4)
+
  (* File "named.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall named__l__result:int. forall result:int.
-  forall named__l__result1:int. forall named__l__result2:int.
-  forall named__l__result3:int. forall named__l__result4:int.
-  forall named__l__result5:int.
-  (forall result1:int. ((((((named__l__result1 = named__l__result2) and
-  (named__l__result3 = named__l__result1)) and
-  ((result = named__l__result) and (named__l__result1 = 10))) and
-  ((named__l__result4 = named__l__result2) and
-  (named__l__result5 = named__l__result3))) and
-  (result1 = named__l__result4)) -> (10 <  127))))
+goal WP_parameter_def : (10 <  127)

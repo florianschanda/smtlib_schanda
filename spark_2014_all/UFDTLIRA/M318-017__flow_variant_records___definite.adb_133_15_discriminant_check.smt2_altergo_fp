@@ -238,19 +238,19 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  ((((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
-  (to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a))) and
-  (definite__t__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
-  (definite__t__x__pred(a) ->
-  (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not ((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
-  (to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
+  (((to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a)) and
   (definite__t__b__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
   (definite__t__x__pred(a) ->
   (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x)))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
+  (((to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a)) and
+  (definite__t__b__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
+  (definite__t__x__pred(a) ->
+  (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -660,18 +660,119 @@ type t39b__ref = { t39b__content : us_rep
 
 function t39b__ref___projection(a: t39b__ref) : us_rep = (a).t39b__content
 
+logic x__split_discrs : status
+
+logic y : int
+
+logic o : status
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : status
+
+logic temp___207 : status
+
+logic temp___2071 : natural
+
+logic temp___2072 : natural
+
+logic temp___2073 : bool
+
+logic temp___2074 : bool
+
+logic o7 : status
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : natural
+
+logic o11 : bool
+
+logic o12 : status
+
+logic temp___210 : status
+
+logic temp___2101 : natural
+
+logic temp___2102 : natural
+
+logic temp___2103 : bool
+
+logic temp___2104 : bool
+
+logic o13 : status
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : bool
+
+logic o18 : status
+
+logic temp___213 : status
+
+logic temp___2131 : natural
+
+logic temp___2132 : natural
+
+logic temp___2133 : bool
+
+logic temp___2134 : bool
+
+logic result : int
+
+logic y1 : int
+
+axiom H : ((0 <= 2) -> in_range2(y))
+
+axiom H1 : (result = y)
+
+axiom H2 : (y1 = to_rep1(x__split_discrs))
+
+axiom H3 : (y1 = 0)
+
+axiom H4 : (to_rep1(x__split_discrs) = r32b)
+
+axiom H5 : in_range2(r32b)
+
+axiom H6 : (to_rep(o1) = 0)
+
+axiom H7 : (to_rep(o2) = 0)
+
+axiom H8 : (o2 = o3)
+
+axiom H9 : (o1 = o4)
+
+axiom H10 : (true = o5)
+
+axiom H11 : (to_rep1(o) = 0)
+
+axiom H12 : (o = o6)
+
+axiom H13 : (temp___207 = o6)
+
+axiom H14 : (temp___2071 = o3)
+
+axiom H15 : (temp___2072 = o4)
+
+axiom H16 : (temp___2073 = o5)
+
+axiom H17 : (true = temp___2074)
+
+axiom H18 : (x__attr__constrained = true)
+
  (* File "definite.adb", line 107, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_discrs:status. forall y:int. forall o:status.
-  forall o1:natural. forall o2:natural. forall o3:natural. forall o4:natural.
-  forall o5:bool. forall o6:status. forall temp___207:status.
-  forall temp___2071:natural. forall temp___2072:natural.
-  forall temp___2073:bool. forall temp___2074:bool. forall result:int.
-  forall y1:int. (((0 <= 2) -> in_range2(y)) -> (((result = y) and
-  (y1 = to_rep1(x__split_discrs))) -> ((y1 = 0) ->
-  (((to_rep1(x__split_discrs) = r32b) and in_range2(r32b)) ->
-  ((((to_rep(o1) = 0) and ((to_rep(o2) = 0) and ((o2 = o3) and ((o1 = o4) and
-  (true = o5))))) and (((to_rep1(o) = 0) and (o = o6)) and
-  ((temp___207 = o6) and (((temp___2071 = o3) and ((temp___2072 = o4) and
-  (temp___2073 = o5))) and (true = temp___2074))))) ->
-  ((x__attr__constrained = true) -> (temp___207 = x__split_discrs))))))))
+goal WP_parameter_def : (temp___207 = x__split_discrs)

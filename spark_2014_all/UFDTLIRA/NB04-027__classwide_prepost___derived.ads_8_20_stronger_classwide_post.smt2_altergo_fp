@@ -137,7 +137,9 @@ logic x__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x__split_fields : bool
+
+axiom H : (not (x__split_fields = true))
+
  (* File "derived.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:bool. ((not (x__split_fields = true)) ->
-  (x__split_fields = true)))
+goal WP_parameter_def : (x__split_fields = true)

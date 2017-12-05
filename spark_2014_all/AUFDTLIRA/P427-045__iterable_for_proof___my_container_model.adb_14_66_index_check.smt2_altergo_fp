@@ -341,21 +341,122 @@ function t3b__ref___projection(a: t3b__ref) : t3b = (a).t3b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:(int,natural) farray. forall i:int. forall o:natural.
-  forall o1:(int,natural) farray. forall j:int.
-  forall c1:(int,natural) farray. forall result:int. forall i1:int.
-  forall result1:(int,natural) farray. forall c2:(int,natural) farray.
-  forall c3:(int,natural) farray. forall i2:int. ((({ int__content = result
-  } = { int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 100)) ->
-  ((((to_rep((c[i1])) = 0) and (((to_rep(o) = 1) and (o1 = (c[i1 <- o]))) and
-  (({ map__content = result1 } = { map__content = c }) and (c2 = o1)))) or
-  ((not (to_rep((c[i1])) = 0)) and ((c2 = c) and (c2 = c1)))) ->
-  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
-   (valid(to_rep((c3[j1]))) = true))) ->
-  (((((1 <= 100) -> in_range3(i2)) and
+logic c : (int,natural) farray
+
+logic i : int
+
+logic temp___197 : (int,natural) farray
+
+logic temp___196 : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic j : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic temp___203 : (int,natural) farray
+
+logic temp___202 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic e : int
+
+logic c1 : (int,natural) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,natural) farray
+
+logic c2 : (int,natural) farray
+
+logic c3 : (int,natural) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,natural) farray
+
+logic c4 : (int,natural) farray
+
+logic c5 : (int,natural) farray
+
+logic i4 : int
+
+logic c6 : (int,natural) farray
+
+logic i5 : int
+
+logic c7 : (int,natural) farray
+
+logic i6 : int
+
+logic c8 : (int,natural) farray
+
+logic i7 : int
+
+logic c9 : (int,natural) farray
+
+logic i8 : int
+
+logic c10 : (int,natural) farray
+
+logic i9 : int
+
+logic c11 : (int,natural) farray
+
+logic i10 : int
+
+logic c12 : (int,natural) farray
+
+logic i11 : int
+
+logic result4 : bool
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (1 <= i1)
+
+axiom H3 : (i1 <= 100)
+
+axiom H4 : ((to_rep((c[i1])) = 0) -> (to_rep(o) = 1))
+
+axiom H5 : ((to_rep((c[i1])) = 0) -> (o1 = (c[i1 <- o])))
+
+axiom H6 : ((to_rep((c[i1])) = 0) -> (result1 = c))
+
+axiom H7 : ((to_rep((c[i1])) = 0) -> (c2 = o1))
+
+axiom H8 : ((not (to_rep((c[i1])) = 0)) -> (c2 = c))
+
+axiom H9 : ((not (to_rep((c[i1])) = 0)) -> (c2 = c1))
+
+axiom H10 :
+  (forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+  (valid(to_rep((c3[j1]))) = true)))
+
+axiom H11 : ((((1 <= 100) -> in_range3(i2)) and
   (forall temp___198:int. (((1 <= temp___198) and (temp___198 <= 100)) ->
   ((i2 <  temp___198) -> ((c3[temp___198]) = (c[temp___198])))))) and
-  ((1 <= i2) and (i2 <= 100))) -> (((1 <= j) and (j <= i2)) ->
-  (1 <= j))))))))
+  ((1 <= i2) and (i2 <= 100)))
+
+axiom H12 : (1 <= j)
+
+axiom H13 : (j <= i2)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= j)

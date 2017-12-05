@@ -268,7 +268,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1328,112 +1328,241 @@ axiom size__def_axiom :
   rec__stackp__stack_root__content = s5; rec__stackp__stack_root__length =
   s6; rec__ext__ = s7 }; attr__tag = s8 }) = to_rep2(s6)))
 
- (* File "stackp.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stackp__get_model__3__result:(int,element) farray.
-  forall stackp__get_model__3__result1:t1.
-  forall stackp__get_model__3__R84s:int. forall o:(int,element) farray.
-  forall temp___543:(int,element) farray. forall temp___5431:t3.
-  forall o1:(int,element) farray. forall temp___542:(int,element) farray.
-  forall temp___5421:t2. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int.
-  forall temp___544:(int,element) farray. forall temp___5441:t.
-  forall stackp__get_model__3__R87s:int. forall o8:(int,element) farray.
-  forall temp___547:(int,element) farray. forall temp___5471:t4.
-  forall o9:(int,element) farray. forall o10:t1. forall result:bool.
-  forall result1:(int,element) farray. forall result2:t1.
-  forall stackp__get_model__3__result2:(int,element) farray.
-  forall stackp__get_model__3__result3:t1.
-  forall stackp__get_model__3__result4:(int,element) farray.
-  forall stackp__get_model__3__result5:t1.
-  forall stackp__get_model__3__result6:(int,element) farray.
-  forall stackp__get_model__3__result7:t1.
-  forall stackp__get_model__3__result8:(int,element) farray.
-  forall stackp__get_model__3__result9:t1.
-  forall stackp__get_model__3__result10:(int,element) farray.
-  forall stackp__get_model__3__result11:t1.
-  (forall result3:(int,element) farray. forall result4:t1.
-  (((((((stackp__get_model__3__result4 = stackp__get_model__3__result2) and
-  (stackp__get_model__3__result5 = stackp__get_model__3__result3)) and
+logic stackp__get_model__3__result : (int,element) farray
+
+logic stackp__get_model__3__result1 : t1
+
+logic stackp__get_model__3__R84s : int
+
+logic o : (int,element) farray
+
+logic temp___543 : (int,element) farray
+
+logic temp___5431 : t3
+
+logic o1 : (int,element) farray
+
+logic temp___542 : (int,element) farray
+
+logic temp___5421 : t2
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___544 : (int,element) farray
+
+logic temp___5441 : t
+
+logic stackp__get_model__3__R87s : int
+
+logic o8 : (int,element) farray
+
+logic temp___547 : (int,element) farray
+
+logic temp___5471 : t4
+
+logic o9 : (int,element) farray
+
+logic o10 : t1
+
+logic result : bool
+
+logic result1 : (int,element) farray
+
+logic result2 : t1
+
+logic stackp__get_model__3__result2 : (int,element) farray
+
+logic stackp__get_model__3__result3 : t1
+
+logic stackp__get_model__3__result4 : (int,element) farray
+
+logic stackp__get_model__3__result5 : t1
+
+logic stackp__get_model__3__result6 : (int,element) farray
+
+logic stackp__get_model__3__result7 : t1
+
+logic stackp__get_model__3__result8 : (int,element) farray
+
+logic stackp__get_model__3__result9 : t1
+
+logic stackp__get_model__3__result10 : (int,element) farray
+
+logic stackp__get_model__3__result11 : t1
+
+logic result3 : (int,element) farray
+
+logic result4 : t1
+
+axiom H : (stackp__get_model__3__result4 = stackp__get_model__3__result2)
+
+axiom H1 : (stackp__get_model__3__result5 = stackp__get_model__3__result3)
+
+axiom H2 :
   ((stackp__get_model__3__result6 = stackp__get_model__3__result2) and
-  (stackp__get_model__3__result7 = stackp__get_model__3__result3))) and
-  ((((result = wraps_around({ us_split_fields3 = {
+  (stackp__get_model__3__result7 = stackp__get_model__3__result3))
+
+axiom H3 : ((result = wraps_around({ us_split_fields3 = {
   rec__stackp__buffer__first = s; rec__stackp__stack_root__content1 = s1;
   rec__stackp__stack_root__length1 = s2; rec__ext__1 = s3 }; attr__tag1 = s4
-  })) and ((result = true) <->
-  (100 <  ((to_rep3(s) + to_rep2(s2)) - 1)))) and (((result = true) and
-  (((stackp__get_model__3__R84s = last4({ us_split_fields3 = {
-  rec__stackp__buffer__first = s; rec__stackp__stack_root__content1 = s1;
-  rec__stackp__stack_root__length1 = s2; rec__ext__1 = s3 }; attr__tag1 = s4
-  })) and (in_range4(stackp__get_model__3__R84s) and (((not (wraps_around({
+  })) and ((result = true) <-> (100 <  ((to_rep3(s) + to_rep2(s2)) - 1))))
+
+axiom H4 : ((result = true) -> ((stackp__get_model__3__R84s = last4({
   us_split_fields3 = { rec__stackp__buffer__first = s;
   rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
-  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true)) and
-  (stackp__get_model__3__R84s = ((to_rep3(s) + to_rep2(s2)) - 1))) or
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 })) and
+  (in_range4(stackp__get_model__3__R84s) and (((not (wraps_around({
+  us_split_fields3 = { rec__stackp__buffer__first = s;
+  rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true)) ->
+  (stackp__get_model__3__R84s = ((to_rep3(s) + to_rep2(s2)) - 1))) and
   ((wraps_around({ us_split_fields3 = { rec__stackp__buffer__first = s;
   rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
-  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true) and
-  (stackp__get_model__3__R84s = (((to_rep3(s) + to_rep2(s2)) - 1) - 100)))))) and
-  ((((((1 <= stackp__get_model__3__R84s) -> (((1 <= 1) and (1 <= 100)) and
-  ((1 <= stackp__get_model__3__R84s) and
-  (stackp__get_model__3__R84s <= 100)))) and (o = s1)) and
-  ((o = temp___543) and (mk3(1,
-  stackp__get_model__3__R84s) = temp___5431))) and (((((to_rep3(s) <= 100) ->
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true) ->
+  (stackp__get_model__3__R84s = (((to_rep3(s) + to_rep2(s2)) - 1) - 100)))))))
+
+axiom H5 : ((result = true) -> ((1 <= stackp__get_model__3__R84s) ->
+  (((1 <= 1) and (1 <= 100)) and ((1 <= stackp__get_model__3__R84s) and
+  (stackp__get_model__3__R84s <= 100)))))
+
+axiom H6 : ((result = true) -> (o = s1))
+
+axiom H7 : ((result = true) -> (o = temp___543))
+
+axiom H8 : ((result = true) -> (mk3(1,
+  stackp__get_model__3__R84s) = temp___5431))
+
+axiom H9 : ((result = true) -> ((to_rep3(s) <= 100) ->
   (((1 <= to_rep3(s)) and (to_rep3(s) <= 100)) and ((1 <= 100) and
-  (100 <= 100)))) and (o1 = s1)) and ((o1 = temp___542) and (mk2(to_rep3(s),
-  100) = temp___5421))) and (((length2({ elts2 = temp___542; rt2 =
-  temp___5421 }) = 0) and ((temp___543 = temp___544) and
-  (mk(to_rep1(first6(temp___5431)),
-  to_rep1(last8(temp___5431))) = temp___5441))) or ((not (length2({ elts2 =
-  temp___542; rt2 = temp___5421 }) = 0)) and
-  ((((((((to_rep1(first6(temp___5431)) <= to_rep1(last8(temp___5431))) and
-  (o2 = ((to_rep1(last8(temp___5431)) - to_rep1(first6(temp___5431))) + 1))) or
-  ((not (to_rep1(first6(temp___5431)) <= to_rep1(last8(temp___5431)))) and
-  (o2 = 0))) and
-  ((((to_rep1(first4(temp___5421)) <= to_rep1(last6(temp___5421))) and
-  (o3 = ((to_rep1(last6(temp___5421)) - to_rep1(first4(temp___5421))) + 1))) or
-  ((not (to_rep1(first4(temp___5421)) <= to_rep1(last6(temp___5421)))) and
-  (o3 = 0))) and (o4 = (o3 + o2)))) and (o5 = (1 + o4))) and
-  (o6 = (o5 - 1))) and ((o7 = o6) and in_range1(o6))) and
-  ((slide(concat(temp___542, to_rep1(first4(temp___5421)),
-  to_rep1(last6(temp___5421)), temp___543, to_rep1(first6(temp___5431)),
-  to_rep1(last8(temp___5431))), to_rep1(first4(temp___5421)),
-  1) = temp___544) and (mk(1, o7) = temp___5441))))))) and
-  (dynamic_property1(1, 2147483647, to_rep1(first(temp___5441)),
-  to_rep1(last(temp___5441))) and ((temp___544 = o9) and
-  (mk1(to_rep1(first(temp___5441)),
-  to_rep1(last(temp___5441))) = o10)))))) or ((not (result = true)) and
-  (((stackp__get_model__3__R87s = last4({ us_split_fields3 = {
-  rec__stackp__buffer__first = s; rec__stackp__stack_root__content1 = s1;
-  rec__stackp__stack_root__length1 = s2; rec__ext__1 = s3 }; attr__tag1 = s4
-  })) and (in_range4(stackp__get_model__3__R87s) and (((not (wraps_around({
+  (100 <= 100)))))
+
+axiom H10 : ((result = true) -> (o1 = s1))
+
+axiom H11 : ((result = true) -> (o1 = temp___542))
+
+axiom H12 : ((result = true) -> (mk2(to_rep3(s), 100) = temp___5421))
+
+axiom H13 : ((result = true) -> ((length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0) -> (temp___543 = temp___544)))
+
+axiom H14 : ((result = true) -> ((length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0) -> (mk(to_rep1(first6(temp___5431)),
+  to_rep1(last8(temp___5431))) = temp___5441)))
+
+axiom H15 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) ->
+  ((to_rep1(first6(temp___5431)) <= to_rep1(last8(temp___5431))) ->
+  (o2 = ((to_rep1(last8(temp___5431)) - to_rep1(first6(temp___5431))) + 1)))))
+
+axiom H16 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) ->
+  ((not (to_rep1(first6(temp___5431)) <= to_rep1(last8(temp___5431)))) ->
+  (o2 = 0))))
+
+axiom H17 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) ->
+  ((to_rep1(first4(temp___5421)) <= to_rep1(last6(temp___5421))) ->
+  (o3 = ((to_rep1(last6(temp___5421)) - to_rep1(first4(temp___5421))) + 1)))))
+
+axiom H18 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) ->
+  ((not (to_rep1(first4(temp___5421)) <= to_rep1(last6(temp___5421)))) ->
+  (o3 = 0))))
+
+axiom H19 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> (o4 = (o3 + o2))))
+
+axiom H20 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> (o5 = (1 + o4))))
+
+axiom H21 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> (o6 = (o5 - 1))))
+
+axiom H22 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> ((o7 = o6) and in_range1(o6))))
+
+axiom H23 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> (slide(concat(temp___542,
+  to_rep1(first4(temp___5421)), to_rep1(last6(temp___5421)), temp___543,
+  to_rep1(first6(temp___5431)), to_rep1(last8(temp___5431))),
+  to_rep1(first4(temp___5421)), 1) = temp___544)))
+
+axiom H24 : ((result = true) -> ((not (length2({ elts2 = temp___542; rt2 =
+  temp___5421 }) = 0)) -> (mk(1, o7) = temp___5441)))
+
+axiom H25 : ((result = true) -> dynamic_property1(1, 2147483647,
+  to_rep1(first(temp___5441)), to_rep1(last(temp___5441))))
+
+axiom H26 : ((result = true) -> (temp___544 = o9))
+
+axiom H27 : ((result = true) -> (mk1(to_rep1(first(temp___5441)),
+  to_rep1(last(temp___5441))) = o10))
+
+axiom H28 : ((not (result = true)) -> ((stackp__get_model__3__R87s = last4({
   us_split_fields3 = { rec__stackp__buffer__first = s;
   rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
-  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true)) and
-  (stackp__get_model__3__R87s = ((to_rep3(s) + to_rep2(s2)) - 1))) or
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 })) and
+  (in_range4(stackp__get_model__3__R87s) and (((not (wraps_around({
+  us_split_fields3 = { rec__stackp__buffer__first = s;
+  rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true)) ->
+  (stackp__get_model__3__R87s = ((to_rep3(s) + to_rep2(s2)) - 1))) and
   ((wraps_around({ us_split_fields3 = { rec__stackp__buffer__first = s;
   rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
-  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true) and
-  (stackp__get_model__3__R87s = (((to_rep3(s) + to_rep2(s2)) - 1) - 100)))))) and
-  (((((to_rep3(s) <= stackp__get_model__3__R87s) -> (((1 <= to_rep3(s)) and
+  s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true) ->
+  (stackp__get_model__3__R87s = (((to_rep3(s) + to_rep2(s2)) - 1) - 100)))))))
+
+axiom H29 : ((not (result = true)) ->
+  ((to_rep3(s) <= stackp__get_model__3__R87s) -> (((1 <= to_rep3(s)) and
   (to_rep3(s) <= 100)) and ((1 <= stackp__get_model__3__R87s) and
-  (stackp__get_model__3__R87s <= 100)))) and (o8 = s1)) and
-  ((o8 = temp___547) and (mk4(to_rep3(s),
-  stackp__get_model__3__R87s) = temp___5471))) and (dynamic_property1(1,
-  2147483647, to_rep1(first8(temp___5471)), to_rep1(last10(temp___5471))) and
-  ((temp___547 = o9) and (mk1(to_rep1(first8(temp___5471)),
-  to_rep1(last10(temp___5471))) = o10)))))))) and
-  (((result1 = stackp__get_model__3__result) and
-  (result2 = stackp__get_model__3__result1)) and
-  ((o9 = stackp__get_model__3__result2) and
-  (o10 = stackp__get_model__3__result3))))) and
-  (((stackp__get_model__3__result8 = stackp__get_model__3__result4) and
-  (stackp__get_model__3__result9 = stackp__get_model__3__result5)) and
-  ((stackp__get_model__3__result10 = stackp__get_model__3__result6) and
-  (stackp__get_model__3__result11 = stackp__get_model__3__result7)))) and
-  ((result3 = stackp__get_model__3__result8) and
-  (result4 = stackp__get_model__3__result9))) -> (length1({ elts1 =
-  stackp__get_model__3__result8; rt1 = stackp__get_model__3__result9
-  }) = size({ us_split_fields1 = { rec__stackp__stack_root__content = s1;
-  rec__stackp__stack_root__length = s2; rec__ext__ = hide_ext__(s, s3) };
-  attr__tag = s4 })))))
+  (stackp__get_model__3__R87s <= 100)))))
+
+axiom H30 : ((not (result = true)) -> (o8 = s1))
+
+axiom H31 : ((not (result = true)) -> (o8 = temp___547))
+
+axiom H32 : ((not (result = true)) -> (mk4(to_rep3(s),
+  stackp__get_model__3__R87s) = temp___5471))
+
+axiom H33 : ((not (result = true)) -> dynamic_property1(1, 2147483647,
+  to_rep1(first8(temp___5471)), to_rep1(last10(temp___5471))))
+
+axiom H34 : ((not (result = true)) -> (temp___547 = o9))
+
+axiom H35 : ((not (result = true)) -> (mk1(to_rep1(first8(temp___5471)),
+  to_rep1(last10(temp___5471))) = o10))
+
+axiom H36 : (result1 = stackp__get_model__3__result)
+
+axiom H37 : (result2 = stackp__get_model__3__result1)
+
+axiom H38 : ((stackp__get_model__3__result2 = o9) and
+  (stackp__get_model__3__result3 = o10))
+
+axiom H39 :
+  ((stackp__get_model__3__result8 = stackp__get_model__3__result4) and
+  (stackp__get_model__3__result9 = stackp__get_model__3__result5))
+
+axiom H40 : (stackp__get_model__3__result10 = stackp__get_model__3__result6)
+
+axiom H41 : (stackp__get_model__3__result11 = stackp__get_model__3__result7)
+
+axiom H42 : (result3 = stackp__get_model__3__result8)
+
+axiom H43 : (result4 = stackp__get_model__3__result9)
+
+ (* File "stackp.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (length1({ elts1 = stackp__get_model__3__result8;
+  rt1 = stackp__get_model__3__result9 }) = size({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s1; rec__stackp__stack_root__length =
+  s2; rec__ext__ = hide_ext__(s, s3) }; attr__tag = s4 }))

@@ -38,6 +38,8 @@
 (define-fun dynamic_invariant ((temp___expr_171 Int) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= 25 26)) (in_range1 temp___expr_171)))
 (declare-const v Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range1 v))
 (assert (<= 25 v))
 (assert (<= v 24))

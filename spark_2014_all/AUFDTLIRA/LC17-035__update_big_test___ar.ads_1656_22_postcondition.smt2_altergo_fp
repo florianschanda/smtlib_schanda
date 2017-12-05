@@ -535,22 +535,62 @@ axiom def_axiom1 :
   ((not (temp___3592 = temp___3590)) -> ((temp___3587(temp___3589,
   temp___3590, temp___3591)[temp___3592]) = (temp___3589[temp___3592])))))))
 
+logic a : (int,us_rep) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,et1) farray
+
+logic o3 : enum2t
+
+logic o4 : (int,et1) farray
+
+logic o5 : enum2t
+
+logic o6 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : in_range2(e)
+
+axiom H3 : (to_rep(o) = e)
+
+axiom H4 : (o1 = ((((a[i])).us_split_fields1).rec__ar__rofa1__s1[j <- o]))
+
+axiom H5 : (o1 = o2)
+
+axiom H6 : ((((a[i])).us_split_fields1).rec__ar__rofa1__t1 = o3)
+
+axiom H7 : (o4 = o2)
+
+axiom H8 : (o5 = o3)
+
+axiom H9 : (o6 = (a[i <- { us_split_fields1 = { rec__ar__rofa1__s1 = o4;
+  rec__ar__rofa1__t1 = o5 } }]))
+
+axiom H10 : (result = a)
+
+axiom H11 : (a1 = o6)
+
+axiom H12 : (a1 = a2)
+
+axiom H13 : (a3 = a1)
+
  (* File "ar.ads", line 1651, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,et1) farray. forall o3:enum2t. forall o4:(int,et1) farray.
-  forall o5:enum2t. forall o6:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall a2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
-  ((in_range1(i) and (in_range(j) and (in_range2(e) and
-  (((((((to_rep(o) = e) and
-  (o1 = ((((a[i])).us_split_fields1).rec__ar__rofa1__s1[j <- o]))) and
-  ((o1 = o2) and ((((a[i])).us_split_fields1).rec__ar__rofa1__t1 = o3))) and
-  ((o4 = o2) and (o5 = o3))) and (o6 = (a[i <- { us_split_fields1 = {
-  rec__ar__rofa1__s1 = o4; rec__ar__rofa1__t1 = o5 } }]))) and
-  ((result = a) and (a1 = o6))) and ((a1 = a2) and (a3 = a1)))))) ->
-  (bool_eq7(a2, 1, 16, temp___3581(a, i, { us_split_fields1 = {
-  rec__ar__rofa1__s1 =
+goal WP_parameter_def : (bool_eq7(a2, 1, 16, temp___3581(a, i, {
+  us_split_fields1 = { rec__ar__rofa1__s1 =
   temp___3587((((a[i])).us_split_fields1).rec__ar__rofa1__s1, j, e);
   rec__ar__rofa1__t1 = (((a[i])).us_split_fields1).rec__ar__rofa1__t1 } }),
-  1, 16) = true)))
+  1, 16) = true)

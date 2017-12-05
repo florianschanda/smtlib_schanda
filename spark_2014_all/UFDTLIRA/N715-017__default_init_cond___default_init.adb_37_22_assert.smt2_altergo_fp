@@ -148,7 +148,13 @@ axiom wrong_ok__post_axiom : true
 axiom wrong_ok__def_axiom :
   (forall x:int [wrong_ok(x)]. ((wrong_ok(x) = true) <-> (x = init(0))))
 
+logic w : int
+
+logic o : int
+
+axiom H : ((w = 0) and (wrong_ok(w) = true))
+
+axiom H1 : ((0 <= 2147483647) -> in_range(w))
+
  (* File "default_init.adb", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall w:int. (((w = 0) and (wrong_ok(w) = true)) ->
-  (((0 <= 2147483647) -> in_range(w)) -> (w = init(0)))))
+goal WP_parameter_def : (w = init(0))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type root_t
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,7 +111,7 @@ logic to_int__function_guard : int, int -> prop
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -141,7 +141,13 @@ axiom to_int__post_axiom :
 axiom to_int__def_axiom :
   (forall r:int [to_int(r)]. (in_range(r) -> (to_int(r) = r)))
 
+logic us : int
+
+logic temp___146 : int
+
+axiom H : ((us = 5) and in_range(5))
+
+axiom H1 : (in_range(temp___146) and (temp___146 = 5))
+
  (* File "dic3.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall temp___146:int. (((us = 5) and in_range(5)) ->
-  ((in_range(temp___146) and (temp___146 = 5)) -> (to_int(temp___146) = 5))))
+goal WP_parameter_def : (to_int(temp___146) = 5)

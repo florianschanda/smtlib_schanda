@@ -307,94 +307,362 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic the_basket : (int,callable_number) farray
+
+logic the_count : int
+
+logic random_index : int
+
+logic number : int
+
+logic index : int
+
+logic temp : int
+
+logic bingo_gen : us_private
+
+logic temp___192 : (int,callable_number) farray
+
+logic o : callable_number
+
+logic o1 : (int,callable_number) farray
+
+logic temp___197 : (int,callable_number) farray
+
+logic temp___196 : int
+
+logic o2 : int
+
+logic o3 : callable_number
+
+logic o4 : (int,callable_number) farray
+
+logic o5 : callable_number
+
+logic o6 : (int,callable_number) farray
+
+logic the_basket1 : (int,callable_number) farray
+
+logic random_index1 : int
+
+logic temp1 : int
+
+logic result : int
+
+logic number1 : int
+
+logic the_basket2 : (int,callable_number) farray
+
+logic number2 : int
+
+logic result1 : (int,callable_number) farray
+
+logic the_basket3 : (int,callable_number) farray
+
+logic the_basket4 : (int,callable_number) farray
+
+logic number3 : int
+
+logic the_basket5 : (int,callable_number) farray
+
+logic number4 : int
+
+logic the_basket6 : (int,callable_number) farray
+
+logic number5 : int
+
+logic the_basket7 : (int,callable_number) farray
+
+logic number6 : int
+
+logic result2 : int
+
+logic index1 : int
+
+logic the_basket8 : (int,callable_number) farray
+
+logic random_index2 : int
+
+logic index2 : int
+
+logic temp2 : int
+
+logic result3 : int
+
+logic random_index3 : int
+
+logic result4 : int
+
+logic temp3 : int
+
+logic result5 : (int,callable_number) farray
+
+logic the_basket9 : (int,callable_number) farray
+
+logic result6 : (int,callable_number) farray
+
+logic the_basket10 : (int,callable_number) farray
+
+logic the_basket11 : (int,callable_number) farray
+
+logic random_index4 : int
+
+logic index3 : int
+
+logic temp4 : int
+
+logic the_basket12 : (int,callable_number) farray
+
+logic random_index5 : int
+
+logic index4 : int
+
+logic temp5 : int
+
+logic the_basket13 : (int,callable_number) farray
+
+logic random_index6 : int
+
+logic index5 : int
+
+logic temp6 : int
+
+logic the_basket14 : (int,callable_number) farray
+
+logic random_index7 : int
+
+logic index6 : int
+
+logic temp7 : int
+
+logic result7 : int
+
+logic the_count1 : int
+
+logic the_basket15 : (int,callable_number) farray
+
+logic the_count2 : int
+
+logic random_index8 : int
+
+logic number7 : int
+
+logic index7 : int
+
+logic temp8 : int
+
+logic the_basket16 : (int,callable_number) farray
+
+logic the_count3 : int
+
+logic random_index9 : int
+
+logic number8 : int
+
+logic index8 : int
+
+logic temp9 : int
+
+axiom H : in_range1(the_count)
+
+axiom H1 : ((1 <= 75) -> in_range2(random_index))
+
+axiom H2 : (result = number)
+
+axiom H3 : (number1 = 1)
+
+axiom H4 : (((1 <= number1) and (number1 <= 75)) ->
+  (temp___192 = the_basket))
+
+axiom H5 : (((1 <= number1) and (number1 <= 75)) ->
+  ((forall temp___193:int. (((1 <= temp___193) and (temp___193 <= 75)) ->
+   ((number2 <= temp___193) ->
+   ((the_basket2[temp___193]) = (temp___192[temp___193]))))) and
+  ((1 <= number2) and (number2 <= 75))))
+
+axiom H6 : (((1 <= number1) and (number1 <= 75)) -> (to_rep(o) = number2))
+
+axiom H7 : (((1 <= number1) and (number1 <= 75)) ->
+  (o1 = (the_basket2[number2 <- o])))
+
+axiom H8 : (((1 <= number1) and (number1 <= 75)) -> (result1 = the_basket2))
+
+axiom H9 : (((1 <= number1) and (number1 <= 75)) -> (the_basket3 = o1))
+
+axiom H10 : (((1 <= number1) and (number1 <= 75)) -> (number2 = 75))
+
+axiom H11 : (((1 <= number1) and (number1 <= 75)) -> (number2 = number3))
+
+axiom H12 : (((1 <= number1) and (number1 <= 75)) ->
+  (the_basket3 = the_basket4))
+
+axiom H13 : (((1 <= number1) and (number1 <= 75)) -> (number4 = number2))
+
+axiom H14 : (((1 <= number1) and (number1 <= 75)) ->
+  (the_basket5 = the_basket3))
+
+axiom H15 : (((1 <= number1) and (number1 <= 75)) -> (number5 = number3))
+
+axiom H16 : (((1 <= number1) and (number1 <= 75)) ->
+  (the_basket6 = the_basket4))
+
+axiom H17 : (((1 <= number1) and (number1 <= 75)) -> (number6 = number4))
+
+axiom H18 : (((1 <= number1) and (number1 <= 75)) ->
+  (the_basket7 = the_basket5))
+
+axiom H19 : ((not ((1 <= number1) and (number1 <= 75))) ->
+  (number1 = number5))
+
+axiom H20 : ((not ((1 <= number1) and (number1 <= 75))) ->
+  (the_basket6 = the_basket))
+
+axiom H21 : ((not ((1 <= number1) and (number1 <= 75))) ->
+  (number6 = number1))
+
+axiom H22 : ((not ((1 <= number1) and (number1 <= 75))) ->
+  (the_basket7 = the_basket1))
+
+axiom H23 : (result2 = index)
+
+axiom H24 : (index1 = 1)
+
+axiom H25 : (((1 <= index1) and (index1 <= 75)) ->
+  (temp___197 = the_basket6))
+
+axiom H26 : (((1 <= index1) and (index1 <= 75)) ->
+  (temp___196 = random_index))
+
+axiom H27 : (((1 <= index1) and (index1 <= 75)) -> (((1 <= 75) ->
+  in_range2(random_index2)) and ((1 <= index2) and (index2 <= 75))))
+
+axiom H28 : (((1 <= index1) and (index1 <= 75)) ->
+  ((o2 = random_number(bingo_gen)) and in_range2(o2)))
+
+axiom H29 : (((1 <= index1) and (index1 <= 75)) -> (result3 = random_index2))
+
+axiom H30 : (((1 <= index1) and (index1 <= 75)) -> (random_index3 = o2))
+
+axiom H31 : (((1 <= index1) and (index1 <= 75)) -> (random_index3 = r6b))
+
+axiom H32 : (((1 <= index1) and (index1 <= 75)) -> in_range2(r6b))
+
+axiom H33 : (((1 <= index1) and (index1 <= 75)) -> ((1 <= 75) ->
+  in_range2(temp2)))
+
+axiom H34 : (((1 <= index1) and (index1 <= 75)) -> (result4 = temp2))
+
+axiom H35 : (((1 <= index1) and (index1 <= 75)) ->
+  (temp3 = to_rep((the_basket8[index2]))))
+
+axiom H36 : (((1 <= index1) and (index1 <= 75)) ->
+  (to_rep(o3) = to_rep((the_basket8[r6b]))))
+
+axiom H37 : (((1 <= index1) and (index1 <= 75)) ->
+  (o4 = (the_basket8[index2 <- o3])))
+
+axiom H38 : (((1 <= index1) and (index1 <= 75)) -> (result5 = the_basket8))
+
+axiom H39 : (((1 <= index1) and (index1 <= 75)) -> (the_basket9 = o4))
+
+axiom H40 : (((1 <= index1) and (index1 <= 75)) -> (to_rep(o5) = temp3))
+
+axiom H41 : (((1 <= index1) and (index1 <= 75)) ->
+  (o6 = (the_basket9[r6b <- o5])))
+
+axiom H42 : (((1 <= index1) and (index1 <= 75)) -> (result6 = the_basket9))
+
+axiom H43 : (((1 <= index1) and (index1 <= 75)) -> (the_basket10 = o6))
+
+axiom H44 : (((1 <= index1) and (index1 <= 75)) -> (index2 = 75))
+
+axiom H45 : (((1 <= index1) and (index1 <= 75)) -> (temp4 = temp3))
+
+axiom H46 : (((1 <= index1) and (index1 <= 75)) -> (index3 = index2))
+
+axiom H47 : (((1 <= index1) and (index1 <= 75)) ->
+  (random_index4 = random_index3))
+
+axiom H48 : (((1 <= index1) and (index1 <= 75)) ->
+  (the_basket11 = the_basket10))
+
+axiom H49 : (((1 <= index1) and (index1 <= 75)) -> (temp5 = temp3))
+
+axiom H50 : (((1 <= index1) and (index1 <= 75)) -> (index4 = index2))
+
+axiom H51 : (((1 <= index1) and (index1 <= 75)) ->
+  (random_index5 = random_index3))
+
+axiom H52 : (((1 <= index1) and (index1 <= 75)) ->
+  (the_basket12 = the_basket10))
+
+axiom H53 : (((1 <= index1) and (index1 <= 75)) -> (temp6 = temp4))
+
+axiom H54 : (((1 <= index1) and (index1 <= 75)) -> (index5 = index3))
+
+axiom H55 : (((1 <= index1) and (index1 <= 75)) ->
+  (random_index6 = random_index4))
+
+axiom H56 : (((1 <= index1) and (index1 <= 75)) ->
+  (the_basket13 = the_basket11))
+
+axiom H57 : (((1 <= index1) and (index1 <= 75)) -> (temp7 = temp5))
+
+axiom H58 : (((1 <= index1) and (index1 <= 75)) -> (index6 = index4))
+
+axiom H59 : (((1 <= index1) and (index1 <= 75)) ->
+  (random_index7 = random_index5))
+
+axiom H60 : (((1 <= index1) and (index1 <= 75)) ->
+  (the_basket14 = the_basket12))
+
+axiom H61 : ((not ((1 <= index1) and (index1 <= 75))) -> (temp6 = temp))
+
+axiom H62 : ((not ((1 <= index1) and (index1 <= 75))) -> (index5 = index1))
+
+axiom H63 : ((not ((1 <= index1) and (index1 <= 75))) ->
+  (random_index6 = random_index))
+
+axiom H64 : ((not ((1 <= index1) and (index1 <= 75))) ->
+  (the_basket13 = the_basket6))
+
+axiom H65 : ((not ((1 <= index1) and (index1 <= 75))) -> (temp7 = temp1))
+
+axiom H66 : ((not ((1 <= index1) and (index1 <= 75))) -> (index6 = index1))
+
+axiom H67 : ((not ((1 <= index1) and (index1 <= 75))) ->
+  (random_index7 = random_index1))
+
+axiom H68 : ((not ((1 <= index1) and (index1 <= 75))) ->
+  (the_basket14 = the_basket7))
+
+axiom H69 : (result7 = the_count)
+
+axiom H70 : (the_count1 = 75)
+
+axiom H71 : (temp8 = temp6)
+
+axiom H72 : (index7 = index5)
+
+axiom H73 : (number7 = number5)
+
+axiom H74 : (random_index8 = random_index6)
+
+axiom H75 : (the_count2 = the_count1)
+
+axiom H76 : (the_basket15 = the_basket13)
+
+axiom H77 : (temp9 = temp7)
+
+axiom H78 : (index8 = index6)
+
+axiom H79 : (number8 = number6)
+
+axiom H80 : (random_index9 = random_index7)
+
+axiom H81 : (the_count3 = the_count1)
+
+axiom H82 : (the_basket16 = the_basket14)
+
  (* File "bingo_basket.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_basket:(int,callable_number) farray. forall the_count:int.
-  forall random_index:int. forall number:int. forall index:int.
-  forall temp:int. forall bingo_gen:us_private.
-  forall temp___192:(int,callable_number) farray. forall o:callable_number.
-  forall o1:(int,callable_number) farray.
-  forall temp___197:(int,callable_number) farray. forall temp___196:int.
-  forall o2:int. forall o3:callable_number.
-  forall o4:(int,callable_number) farray. forall o5:callable_number.
-  forall o6:(int,callable_number) farray.
-  forall the_basket1:(int,callable_number) farray. forall random_index1:int.
-  forall temp1:int. forall result:int. forall number1:int.
-  forall the_basket2:(int,callable_number) farray. forall number2:int.
-  forall result1:(int,callable_number) farray.
-  forall the_basket3:(int,callable_number) farray.
-  forall the_basket4:(int,callable_number) farray. forall number3:int.
-  forall the_basket5:(int,callable_number) farray. forall number4:int.
-  forall the_basket6:(int,callable_number) farray. forall number5:int.
-  forall the_basket7:(int,callable_number) farray. forall number6:int.
-  forall result2:int. forall index1:int.
-  forall the_basket8:(int,callable_number) farray. forall random_index2:int.
-  forall index2:int. forall temp2:int. forall result3:int.
-  forall random_index3:int. forall result4:int. forall temp3:int.
-  forall result5:(int,callable_number) farray.
-  forall the_basket9:(int,callable_number) farray.
-  forall result6:(int,callable_number) farray.
-  forall the_basket10:(int,callable_number) farray.
-  forall the_basket11:(int,callable_number) farray. forall random_index4:int.
-  forall index3:int. forall temp4:int.
-  forall the_basket12:(int,callable_number) farray. forall random_index5:int.
-  forall index4:int. forall temp5:int.
-  forall the_basket13:(int,callable_number) farray. forall random_index6:int.
-  forall index5:int. forall temp6:int.
-  forall the_basket14:(int,callable_number) farray. forall random_index7:int.
-  forall index6:int. forall temp7:int. forall result7:int.
-  forall the_count1:int. forall the_basket15:(int,callable_number) farray.
-  forall the_count2:int. forall random_index8:int. forall number7:int.
-  forall index7:int. forall temp8:int.
-  forall the_basket16:(int,callable_number) farray. forall the_count3:int.
-  forall random_index9:int. forall number8:int. forall index8:int.
-  forall temp9:int. ((in_range1(the_count) and ((((1 <= 75) ->
-  in_range2(random_index)) and ((((result = number) and (number1 = 1)) and
-  ((((1 <= number1) and (number1 <= 75)) and ((((temp___192 = the_basket) and
-  (((forall temp___193:int. (((1 <= temp___193) and (temp___193 <= 75)) ->
-    ((number2 <= temp___193) ->
-    ((the_basket2[temp___193]) = (temp___192[temp___193]))))) and
-  ((1 <= number2) and (number2 <= 75))) and ((((to_rep(o) = number2) and
-  (o1 = (the_basket2[number2 <- o]))) and ((result1 = the_basket2) and
-  (the_basket3 = o1))) and (number2 = 75)))) and (((number2 = number3) and
-  (the_basket3 = the_basket4)) and ((number4 = number2) and
-  (the_basket5 = the_basket3)))) and (((number3 = number5) and
-  (the_basket4 = the_basket6)) and ((number6 = number4) and
-  (the_basket7 = the_basket5))))) or ((not ((1 <= number1) and
-  (number1 <= 75))) and (((number1 = number5) and
-  (the_basket = the_basket6)) and ((number6 = number1) and
-  (the_basket7 = the_basket1)))))) and ((((result2 = index) and
-  (index1 = 1)) and ((((1 <= index1) and (index1 <= 75)) and
-  ((((temp___197 = the_basket6) and ((temp___196 = random_index) and
-  ((((1 <= 75) -> in_range2(random_index2)) and ((1 <= index2) and
-  (index2 <= 75))) and ((((o2 = random_number(bingo_gen)) and
-  in_range2(o2)) and ((result3 = random_index2) and
-  (random_index3 = o2))) and (((random_index3 = r6b) and in_range2(r6b)) and
-  (((1 <= 75) -> in_range2(temp2)) and (((result4 = temp2) and
-  (temp3 = to_rep((the_basket8[index2])))) and
-  ((((to_rep(o3) = to_rep((the_basket8[r6b]))) and
-  (o4 = (the_basket8[index2 <- o3]))) and ((result5 = the_basket8) and
-  (the_basket9 = o4))) and ((((to_rep(o5) = temp3) and
-  (o6 = (the_basket9[r6b <- o5]))) and ((result6 = the_basket9) and
-  (the_basket10 = o6))) and (index2 = 75)))))))))) and (((temp3 = temp4) and
-  ((index2 = index3) and ((random_index3 = random_index4) and
-  (the_basket10 = the_basket11)))) and ((temp5 = temp3) and
-  ((index4 = index2) and ((random_index5 = random_index3) and
-  (the_basket12 = the_basket10)))))) and ((({ int__content = temp6 } = {
-  int__content = temp4 }) and (({ int__content = index5 } = { int__content =
-  index3 }) and (({ int__content = random_index6 } = { int__content =
-  random_index4 }) and ({ map__content = the_basket13 } = { map__content =
-  the_basket11 })))) and ((temp7 = temp5) and ((index6 = index4) and
-  ((random_index7 = random_index5) and (the_basket14 = the_basket12))))))) or
-  ((not ((1 <= index1) and (index1 <= 75))) and (((temp = temp6) and
-  ((index1 = index5) and ((random_index = random_index6) and ({
-  map__content = the_basket13 } = { map__content = the_basket6 })))) and
-  ((temp7 = temp1) and ((index6 = index1) and
-  ((random_index7 = random_index1) and
-  (the_basket14 = the_basket7)))))))) and ((result7 = the_count) and
-  (the_count1 = 75))))) and (((temp8 = temp6) and ((index7 = index5) and
-  ((number7 = number5) and ((random_index8 = random_index6) and
-  ((the_count1 = the_count2) and (the_basket15 = the_basket13)))))) and
-  ((temp9 = temp7) and ((index8 = index6) and ((number8 = number6) and
-  ((random_index9 = random_index7) and ((the_count3 = the_count1) and
-  (the_basket16 = the_basket14))))))))) -> (not (empty(the_count2) = true))))
+goal WP_parameter_def : (not (empty(the_count2) = true))

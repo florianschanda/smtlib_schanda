@@ -239,6 +239,8 @@
 (define-fun dynamic_invariant5 ((temp___expr_316 us_t1) (temp___is_init_313 Bool) (temp___skip_constant_314 Bool) (temp___do_toplevel_315 Bool)) Bool (=> (not (= temp___skip_constant_314 true)) (dynamic_property1 1 2147483647 (first3 temp___expr_316) (last3 temp___expr_316))))
 (define-fun dynamic_invariant6 ((temp___expr_327 us_t2) (temp___is_init_324 Bool) (temp___skip_constant_325 Bool) (temp___do_toplevel_326 Bool)) Bool (=> (not (= temp___skip_constant_325 true)) (dynamic_property2 1 2147483647 (first5 temp___expr_327) (last5 temp___expr_327))))
 (define-fun dynamic_invariant7 ((temp___expr_370 us_t3) (temp___is_init_367 Bool) (temp___skip_constant_368 Bool) (temp___do_toplevel_369 Bool)) Bool (=> (not (= temp___skip_constant_368 true)) (dynamic_property3 1 2147483647 (first7 temp___expr_370) (last7 temp___expr_370))))
+(declare-const o (Array Int fruits))
+(declare-const o1 t2)
 (declare-const initial_crate (Array Int fruits))
 (assert (dynamic_property 1 2147483647 (to_rep initial_crate__first) (to_rep initial_crate__last)))
 (assert (dynamic_property1 1 2147483647 (to_rep final_crate__first) (to_rep final_crate__last)))

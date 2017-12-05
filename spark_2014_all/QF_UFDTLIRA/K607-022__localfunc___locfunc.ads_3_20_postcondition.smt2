@@ -42,7 +42,7 @@
 (declare-const y3 Int)
 (assert (in_range x))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range y)))
-(assert (and (and (= x1 0) (= y1 0)) (and (in_range x1) (in_range y1))))
+(assert (and (and (= x1 0) (= y1 0)) (and (in_range y1) (in_range x1))))
 (assert (= y2 y1))
 (assert (= x1 x2))
 (assert (= y3 y1))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -653,14 +653,37 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic p__id__result : t
+
+logic result : t
+
+logic p__id__result1 : t
+
+logic p__id__result2 : t
+
+logic p__id__result3 : t
+
+logic p__id__result4 : t
+
+logic p__id__result5 : t
+
+logic result1 : t
+
+axiom H : in_range(x)
+
+axiom H1 : (p__id__result1 = p__id__result2)
+
+axiom H2 : (p__id__result3 = p__id__result1)
+
+axiom H3 : (result = p__id__result)
+
+axiom H4 : (p__id__result1 = x)
+
+axiom H5 : (p__id__result4 = p__id__result2)
+
+axiom H6 : (p__id__result5 = p__id__result3)
+
+axiom H7 : (result1 = p__id__result4)
+
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__id__result:t. forall result:t. forall p__id__result1:t.
-  forall p__id__result2:t. forall p__id__result3:t. forall p__id__result4:t.
-  forall p__id__result5:t.
-  (forall result1:t. ((in_range(x) and
-  (((((p__id__result1 = p__id__result2) and
-  (p__id__result3 = p__id__result1)) and ((result = p__id__result) and
-  (p__id__result1 = x))) and ((p__id__result4 = p__id__result2) and
-  (p__id__result5 = p__id__result3))) and (result1 = p__id__result4))) ->
-  (p__id__result4 = x))))
+goal WP_parameter_def : (p__id__result4 = x)

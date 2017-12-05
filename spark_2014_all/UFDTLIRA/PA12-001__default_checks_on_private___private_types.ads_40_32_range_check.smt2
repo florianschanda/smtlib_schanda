@@ -126,6 +126,7 @@
 (define-fun default_initial_assumption1 ((temp___expr_171 us_rep) (temp___skip_top_level_172 Bool)) Bool (and (= (attr__constrained temp___expr_171) false) (and (= (rec__private_types__p3__t__d (us_split_discrs1 temp___expr_171)) (of_int 0)) (=> (private_types__p3__t__f__pred temp___expr_171) (= (to_rep (rec__private_types__p3__t__f (us_split_fields1 temp___expr_171))) (id 0))))))
 (declare-const temp___211 Bool)
 (declare-const o Int)
+(declare-const us Int)
 (assert (= (of_int 1) temp___211))
 (assert (= (to_int1 temp___211) 1))
 (assert (and (= o (id 0)) (and (in_range2 o) (= o 0))))

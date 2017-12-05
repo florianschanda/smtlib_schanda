@@ -2013,61 +2013,1606 @@ axiom def_axiom4 :
   us_split_fields7 = { rec__pupils__subject_score_pair__subj = temp___401;
   rec__pupils__subject_score_pair__score = temp___4011 } })))
 
- (* File "pupils.ads", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:pupilnumbers.
-  forall subject_scores:(int,us_rep3) farray. forall i:int.
-  forall o:percentage. forall o1:subject. forall o2:subject.
-  forall o3:percentage. forall o4:percentage. forall o5:subject.
-  forall o6:subject. forall o7:percentage. forall o8:percentage.
-  forall o9:subject. forall o10:subject. forall o11:percentage.
-  forall o12:percentage. forall o13:subject. forall o14:subject.
-  forall o15:percentage. forall o16:percentage. forall o17:subject.
-  forall o18:subject. forall o19:percentage. forall o20:percentage.
-  forall o21:subject. forall o22:subject. forall o23:percentage.
-  forall o24:percentage. forall o25:subject. forall o26:subject.
-  forall o27:percentage. forall o28:percentage. forall o29:subject.
-  forall o30:subject. forall o31:percentage. forall o32:percentage.
-  forall o33:subject. forall o34:subject. forall o35:percentage.
-  forall o36:percentage. forall o37:subject. forall o38:subject.
-  forall o39:percentage. forall o40:subject. forall o41:percentage.
-  forall o42:subject. forall o43:percentage. forall o44:subject.
-  forall o45:percentage. forall o46:subject. forall o47:percentage.
-  forall o48:subject. forall o49:percentage. forall o50:subject.
-  forall o51:percentage. forall o52:subject. forall o53:percentage.
-  forall o54:subject. forall o55:percentage. forall o56:subject.
-  forall o57:percentage. forall o58:subject. forall o59:percentage.
-  forall o60:(int,us_rep3) farray. forall result:map__ref4.
-  forall subject_scores1:(int,us_rep3) farray. forall result1:int__ref.
-  forall i1:int. (in_range4(fm) -> (in_range2(subj0) -> (in_range1(score0) ->
-  (in_range2(subj1) -> (in_range1(score1) -> (in_range2(subj2) ->
-  (in_range1(score2) -> (in_range2(subj3) -> (in_range1(score3) ->
-  (in_range2(subj4) -> (in_range1(score4) -> (in_range2(subj5) ->
-  (in_range1(score5) -> (in_range2(subj6) -> (in_range1(score6) ->
-  (in_range2(subj7) -> (in_range1(score7) -> (in_range2(subj8) ->
-  (in_range1(score8) -> (in_range2(subj9) -> (in_range1(score9) ->
-  (((to_rep4(p__split_fields) <  250) and (not (fm = 8))) ->
-  ((((((to_rep(o36) = score9) and ((to_rep1(o37) = subj9) and
-  ((o37 = o38) and (o36 = o39)))) and ((o40 = o38) and (o41 = o39))) and
-  ((((to_rep(o32) = score8) and ((to_rep1(o33) = subj8) and ((o33 = o34) and
-  (o32 = o35)))) and ((o42 = o34) and (o43 = o35))) and
-  ((((to_rep(o28) = score7) and ((to_rep1(o29) = subj7) and ((o29 = o30) and
-  (o28 = o31)))) and ((o44 = o30) and (o45 = o31))) and
-  ((((to_rep(o24) = score6) and ((to_rep1(o25) = subj6) and ((o25 = o26) and
-  (o24 = o27)))) and ((o46 = o26) and (o47 = o27))) and
-  ((((to_rep(o20) = score5) and ((to_rep1(o21) = subj5) and ((o21 = o22) and
-  (o20 = o23)))) and ((o48 = o22) and (o49 = o23))) and
-  ((((to_rep(o16) = score4) and ((to_rep1(o17) = subj4) and ((o17 = o18) and
-  (o16 = o19)))) and ((o50 = o18) and (o51 = o19))) and
-  ((((to_rep(o12) = score3) and ((to_rep1(o13) = subj3) and ((o13 = o14) and
-  (o12 = o15)))) and ((o52 = o14) and (o53 = o15))) and
-  ((((to_rep(o8) = score2) and ((to_rep1(o9) = subj2) and ((o9 = o10) and
-  (o8 = o11)))) and ((o54 = o10) and (o55 = o11))) and
-  ((((to_rep(o4) = score1) and ((to_rep1(o5) = subj1) and ((o5 = o6) and
-  (o4 = o7)))) and ((o56 = o6) and (o57 = o7))) and
-  ((((to_rep(o) = score0) and ((to_rep1(o1) = subj0) and ((o1 = o2) and
-  (o = o3)))) and ((o58 = o2) and (o59 = o3))) and (o60 = temp___390({
-  us_split_fields7 = { rec__pupils__subject_score_pair__subj = o58;
+logic p__split_fields : pupilnumbers
+
+logic p__split_fields1 : (int,us_rep1) farray
+
+logic success : bool
+
+logic subject_scores : (int,us_rep3) farray
+
+logic i : int
+
+logic o : percentage
+
+logic o1 : subject
+
+logic o2 : subject
+
+logic o3 : percentage
+
+logic o4 : percentage
+
+logic o5 : subject
+
+logic o6 : subject
+
+logic o7 : percentage
+
+logic o8 : percentage
+
+logic o9 : subject
+
+logic o10 : subject
+
+logic o11 : percentage
+
+logic o12 : percentage
+
+logic o13 : subject
+
+logic o14 : subject
+
+logic o15 : percentage
+
+logic o16 : percentage
+
+logic o17 : subject
+
+logic o18 : subject
+
+logic o19 : percentage
+
+logic o20 : percentage
+
+logic o21 : subject
+
+logic o22 : subject
+
+logic o23 : percentage
+
+logic o24 : percentage
+
+logic o25 : subject
+
+logic o26 : subject
+
+logic o27 : percentage
+
+logic o28 : percentage
+
+logic o29 : subject
+
+logic o30 : subject
+
+logic o31 : percentage
+
+logic o32 : percentage
+
+logic o33 : subject
+
+logic o34 : subject
+
+logic o35 : percentage
+
+logic o36 : percentage
+
+logic o37 : subject
+
+logic o38 : subject
+
+logic o39 : percentage
+
+logic o40 : subject
+
+logic o41 : percentage
+
+logic o42 : subject
+
+logic o43 : percentage
+
+logic o44 : subject
+
+logic o45 : percentage
+
+logic o46 : subject
+
+logic o47 : percentage
+
+logic o48 : subject
+
+logic o49 : percentage
+
+logic o50 : subject
+
+logic o51 : percentage
+
+logic o52 : subject
+
+logic o53 : percentage
+
+logic o54 : subject
+
+logic o55 : percentage
+
+logic o56 : subject
+
+logic o57 : percentage
+
+logic o58 : subject
+
+logic o59 : percentage
+
+logic o60 : (int,us_rep3) farray
+
+logic temp___420 : bool
+
+logic temp___417 : pupilnumbers
+
+logic temp___4171 : (int,us_rep1) farray
+
+logic o61 : int
+
+logic o62 : (int,character) farray
+
+logic o63 : (int,character) farray
+
+logic o64 : formtype
+
+logic o65 : (int,us_rep) farray
+
+logic o66 : (int,character) farray
+
+logic o67 : (int,character) farray
+
+logic o68 : formtype
+
+logic o69 : (int,us_rep) farray
+
+logic temp___405 : (int,us_rep) farray
+
+logic o70 : bool
+
+logic o71 : percentage
+
+logic o72 : bool
+
+logic o73 : percentage
+
+logic o74 : bool
+
+logic o75 : bool
+
+logic o76 : percentage
+
+logic o77 : bool
+
+logic o78 : percentage
+
+logic o79 : bool
+
+logic o80 : percentage
+
+logic o81 : (int,us_rep) farray
+
+logic o82 : (int,character) farray
+
+logic o83 : (int,character) farray
+
+logic o84 : formtype
+
+logic o85 : (int,us_rep) farray
+
+logic o86 : (int,character) farray
+
+logic o87 : (int,character) farray
+
+logic o88 : formtype
+
+logic o89 : (int,us_rep) farray
+
+logic o90 : int
+
+logic o91 : (int,us_rep1) farray
+
+logic o92 : pupilnumbers
+
+logic o93 : (int,us_rep1) farray
+
+logic temp___416 : pupilnumbers
+
+logic temp___4161 : (int,us_rep1) farray
+
+logic o94 : int
+
+logic o95 : (int,character) farray
+
+logic o96 : (int,character) farray
+
+logic o97 : formtype
+
+logic o98 : (int,us_rep) farray
+
+logic o99 : (int,character) farray
+
+logic o100 : (int,character) farray
+
+logic o101 : formtype
+
+logic o102 : (int,us_rep) farray
+
+logic temp___4051 : (int,us_rep) farray
+
+logic o103 : bool
+
+logic o104 : percentage
+
+logic o105 : bool
+
+logic o106 : percentage
+
+logic o107 : bool
+
+logic o108 : bool
+
+logic o109 : percentage
+
+logic o110 : bool
+
+logic o111 : percentage
+
+logic o112 : bool
+
+logic o113 : percentage
+
+logic o114 : (int,us_rep) farray
+
+logic o115 : (int,character) farray
+
+logic o116 : (int,character) farray
+
+logic o117 : formtype
+
+logic o118 : (int,us_rep) farray
+
+logic o119 : (int,character) farray
+
+logic o120 : (int,character) farray
+
+logic o121 : formtype
+
+logic o122 : (int,us_rep) farray
+
+logic o123 : int
+
+logic o124 : (int,us_rep1) farray
+
+logic o125 : pupilnumbers
+
+logic o126 : (int,us_rep1) farray
+
+logic temp___4162 : pupilnumbers
+
+logic temp___4163 : (int,us_rep1) farray
+
+logic o127 : int
+
+logic o128 : (int,character) farray
+
+logic o129 : (int,character) farray
+
+logic o130 : formtype
+
+logic o131 : (int,us_rep) farray
+
+logic o132 : (int,character) farray
+
+logic o133 : (int,character) farray
+
+logic o134 : formtype
+
+logic o135 : (int,us_rep) farray
+
+logic temp___4052 : (int,us_rep) farray
+
+logic o136 : bool
+
+logic o137 : percentage
+
+logic o138 : bool
+
+logic o139 : percentage
+
+logic o140 : bool
+
+logic o141 : bool
+
+logic o142 : percentage
+
+logic o143 : bool
+
+logic o144 : percentage
+
+logic o145 : bool
+
+logic o146 : percentage
+
+logic o147 : (int,us_rep) farray
+
+logic o148 : (int,character) farray
+
+logic o149 : (int,character) farray
+
+logic o150 : formtype
+
+logic o151 : (int,us_rep) farray
+
+logic o152 : (int,character) farray
+
+logic o153 : (int,character) farray
+
+logic o154 : formtype
+
+logic o155 : (int,us_rep) farray
+
+logic o156 : int
+
+logic o157 : (int,us_rep1) farray
+
+logic o158 : pupilnumbers
+
+logic o159 : (int,us_rep1) farray
+
+logic temp___4164 : pupilnumbers
+
+logic temp___4165 : (int,us_rep1) farray
+
+logic o160 : int
+
+logic o161 : (int,character) farray
+
+logic o162 : (int,character) farray
+
+logic o163 : formtype
+
+logic o164 : (int,us_rep) farray
+
+logic o165 : (int,character) farray
+
+logic o166 : (int,character) farray
+
+logic o167 : formtype
+
+logic o168 : (int,us_rep) farray
+
+logic temp___4053 : (int,us_rep) farray
+
+logic o169 : bool
+
+logic o170 : percentage
+
+logic o171 : bool
+
+logic o172 : percentage
+
+logic o173 : bool
+
+logic o174 : bool
+
+logic o175 : percentage
+
+logic o176 : bool
+
+logic o177 : percentage
+
+logic o178 : bool
+
+logic o179 : percentage
+
+logic o180 : (int,us_rep) farray
+
+logic o181 : (int,character) farray
+
+logic o182 : (int,character) farray
+
+logic o183 : formtype
+
+logic o184 : (int,us_rep) farray
+
+logic o185 : (int,character) farray
+
+logic o186 : (int,character) farray
+
+logic o187 : formtype
+
+logic o188 : (int,us_rep) farray
+
+logic o189 : int
+
+logic o190 : (int,us_rep1) farray
+
+logic o191 : pupilnumbers
+
+logic o192 : (int,us_rep1) farray
+
+logic temp___4166 : pupilnumbers
+
+logic temp___4167 : (int,us_rep1) farray
+
+logic o193 : int
+
+logic o194 : (int,character) farray
+
+logic o195 : (int,character) farray
+
+logic o196 : formtype
+
+logic o197 : (int,us_rep) farray
+
+logic o198 : (int,character) farray
+
+logic o199 : (int,character) farray
+
+logic o200 : formtype
+
+logic o201 : (int,us_rep) farray
+
+logic temp___4054 : (int,us_rep) farray
+
+logic o202 : bool
+
+logic o203 : percentage
+
+logic o204 : bool
+
+logic o205 : percentage
+
+logic o206 : bool
+
+logic o207 : bool
+
+logic o208 : percentage
+
+logic o209 : bool
+
+logic o210 : percentage
+
+logic o211 : bool
+
+logic o212 : percentage
+
+logic o213 : (int,us_rep) farray
+
+logic o214 : (int,character) farray
+
+logic o215 : (int,character) farray
+
+logic o216 : formtype
+
+logic o217 : (int,us_rep) farray
+
+logic o218 : (int,character) farray
+
+logic o219 : (int,character) farray
+
+logic o220 : formtype
+
+logic o221 : (int,us_rep) farray
+
+logic o222 : int
+
+logic o223 : (int,us_rep1) farray
+
+logic o224 : pupilnumbers
+
+logic o225 : (int,us_rep1) farray
+
+logic temp___4168 : pupilnumbers
+
+logic temp___4169 : (int,us_rep1) farray
+
+logic o226 : int
+
+logic o227 : (int,character) farray
+
+logic o228 : (int,character) farray
+
+logic o229 : formtype
+
+logic o230 : (int,us_rep) farray
+
+logic o231 : (int,character) farray
+
+logic o232 : (int,character) farray
+
+logic o233 : formtype
+
+logic o234 : (int,us_rep) farray
+
+logic temp___4055 : (int,us_rep) farray
+
+logic o235 : bool
+
+logic o236 : percentage
+
+logic o237 : bool
+
+logic o238 : percentage
+
+logic o239 : bool
+
+logic o240 : bool
+
+logic o241 : percentage
+
+logic o242 : bool
+
+logic o243 : percentage
+
+logic o244 : bool
+
+logic o245 : percentage
+
+logic o246 : (int,us_rep) farray
+
+logic o247 : (int,character) farray
+
+logic o248 : (int,character) farray
+
+logic o249 : formtype
+
+logic o250 : (int,us_rep) farray
+
+logic o251 : (int,character) farray
+
+logic o252 : (int,character) farray
+
+logic o253 : formtype
+
+logic o254 : (int,us_rep) farray
+
+logic o255 : int
+
+logic o256 : (int,us_rep1) farray
+
+logic o257 : pupilnumbers
+
+logic o258 : (int,us_rep1) farray
+
+logic temp___41610 : pupilnumbers
+
+logic temp___41611 : (int,us_rep1) farray
+
+logic o259 : int
+
+logic o260 : (int,character) farray
+
+logic o261 : (int,character) farray
+
+logic o262 : formtype
+
+logic o263 : (int,us_rep) farray
+
+logic o264 : (int,character) farray
+
+logic o265 : (int,character) farray
+
+logic o266 : formtype
+
+logic o267 : (int,us_rep) farray
+
+logic temp___4056 : (int,us_rep) farray
+
+logic o268 : bool
+
+logic o269 : percentage
+
+logic o270 : bool
+
+logic o271 : percentage
+
+logic o272 : bool
+
+logic o273 : bool
+
+logic o274 : percentage
+
+logic o275 : bool
+
+logic o276 : percentage
+
+logic o277 : bool
+
+logic o278 : percentage
+
+logic o279 : (int,us_rep) farray
+
+logic o280 : (int,character) farray
+
+logic o281 : (int,character) farray
+
+logic o282 : formtype
+
+logic o283 : (int,us_rep) farray
+
+logic o284 : (int,character) farray
+
+logic o285 : (int,character) farray
+
+logic o286 : formtype
+
+logic o287 : (int,us_rep) farray
+
+logic o288 : int
+
+logic o289 : (int,us_rep1) farray
+
+logic o290 : pupilnumbers
+
+logic o291 : (int,us_rep1) farray
+
+logic temp___41612 : pupilnumbers
+
+logic temp___41613 : (int,us_rep1) farray
+
+logic o292 : int
+
+logic o293 : (int,character) farray
+
+logic o294 : (int,character) farray
+
+logic o295 : formtype
+
+logic o296 : (int,us_rep) farray
+
+logic o297 : (int,character) farray
+
+logic o298 : (int,character) farray
+
+logic o299 : formtype
+
+logic o300 : (int,us_rep) farray
+
+logic temp___4057 : (int,us_rep) farray
+
+logic o301 : bool
+
+logic o302 : percentage
+
+logic o303 : bool
+
+logic o304 : percentage
+
+logic o305 : bool
+
+logic o306 : bool
+
+logic o307 : percentage
+
+logic o308 : bool
+
+logic o309 : percentage
+
+logic o310 : bool
+
+logic o311 : percentage
+
+logic o312 : (int,us_rep) farray
+
+logic o313 : (int,character) farray
+
+logic o314 : (int,character) farray
+
+logic o315 : formtype
+
+logic o316 : (int,us_rep) farray
+
+logic o317 : (int,character) farray
+
+logic o318 : (int,character) farray
+
+logic o319 : formtype
+
+logic o320 : (int,us_rep) farray
+
+logic o321 : int
+
+logic o322 : (int,us_rep1) farray
+
+logic o323 : pupilnumbers
+
+logic o324 : (int,us_rep1) farray
+
+logic temp___41614 : pupilnumbers
+
+logic temp___41615 : (int,us_rep1) farray
+
+logic o325 : int
+
+logic o326 : (int,character) farray
+
+logic o327 : (int,character) farray
+
+logic o328 : formtype
+
+logic o329 : (int,us_rep) farray
+
+logic o330 : (int,character) farray
+
+logic o331 : (int,character) farray
+
+logic o332 : formtype
+
+logic o333 : (int,us_rep) farray
+
+logic temp___4058 : (int,us_rep) farray
+
+logic o334 : bool
+
+logic o335 : percentage
+
+logic o336 : bool
+
+logic o337 : percentage
+
+logic o338 : bool
+
+logic o339 : bool
+
+logic o340 : percentage
+
+logic o341 : bool
+
+logic o342 : percentage
+
+logic o343 : bool
+
+logic o344 : percentage
+
+logic o345 : (int,us_rep) farray
+
+logic o346 : (int,character) farray
+
+logic o347 : (int,character) farray
+
+logic o348 : formtype
+
+logic o349 : (int,us_rep) farray
+
+logic o350 : (int,character) farray
+
+logic o351 : (int,character) farray
+
+logic o352 : formtype
+
+logic o353 : (int,us_rep) farray
+
+logic o354 : int
+
+logic o355 : (int,us_rep1) farray
+
+logic o356 : pupilnumbers
+
+logic o357 : (int,us_rep1) farray
+
+logic temp___41616 : pupilnumbers
+
+logic temp___41617 : (int,us_rep1) farray
+
+logic o358 : int
+
+logic o359 : (int,character) farray
+
+logic o360 : (int,character) farray
+
+logic o361 : formtype
+
+logic o362 : (int,us_rep) farray
+
+logic o363 : (int,character) farray
+
+logic o364 : (int,character) farray
+
+logic o365 : formtype
+
+logic o366 : (int,us_rep) farray
+
+logic temp___4059 : (int,us_rep) farray
+
+logic o367 : bool
+
+logic o368 : percentage
+
+logic o369 : bool
+
+logic o370 : percentage
+
+logic o371 : bool
+
+logic o372 : bool
+
+logic o373 : percentage
+
+logic o374 : bool
+
+logic o375 : percentage
+
+logic o376 : bool
+
+logic o377 : percentage
+
+logic o378 : (int,us_rep) farray
+
+logic o379 : (int,character) farray
+
+logic o380 : (int,character) farray
+
+logic o381 : formtype
+
+logic o382 : (int,us_rep) farray
+
+logic o383 : (int,character) farray
+
+logic o384 : (int,character) farray
+
+logic o385 : formtype
+
+logic o386 : (int,us_rep) farray
+
+logic o387 : int
+
+logic o388 : (int,us_rep1) farray
+
+logic o389 : pupilnumbers
+
+logic o390 : (int,us_rep1) farray
+
+logic temp___41618 : pupilnumbers
+
+logic temp___41619 : (int,us_rep1) farray
+
+logic o391 : int
+
+logic o392 : pupilnumbers
+
+logic o393 : pupilnumbers
+
+logic o394 : (int,us_rep1) farray
+
+logic temp___424 : pupilnumbers
+
+logic temp___4241 : (int,us_rep1) farray
+
+logic o395 : int
+
+logic o396 : (int,us_rep1) farray
+
+logic o397 : pupilnumbers
+
+logic o398 : (int,us_rep1) farray
+
+logic temp___430 : pupilnumbers
+
+logic temp___4301 : (int,us_rep1) farray
+
+logic o399 : int
+
+logic o400 : (int,us_rep1) farray
+
+logic o401 : pupilnumbers
+
+logic o402 : (int,us_rep1) farray
+
+logic temp___436 : pupilnumbers
+
+logic temp___4361 : (int,us_rep1) farray
+
+logic o403 : formtype
+
+logic o404 : (int,character) farray
+
+logic o405 : (int,character) farray
+
+logic o406 : formtype
+
+logic o407 : (int,us_rep) farray
+
+logic o408 : (int,character) farray
+
+logic o409 : (int,character) farray
+
+logic o410 : formtype
+
+logic o411 : (int,us_rep) farray
+
+logic o412 : int
+
+logic o413 : (int,us_rep1) farray
+
+logic o414 : pupilnumbers
+
+logic o415 : (int,us_rep1) farray
+
+logic temp___442 : pupilnumbers
+
+logic temp___4421 : (int,us_rep1) farray
+
+logic i1 : int
+
+logic o416 : int
+
+logic o417 : (int,character) farray
+
+logic o418 : (int,character) farray
+
+logic o419 : formtype
+
+logic o420 : (int,us_rep) farray
+
+logic i2 : int
+
+logic o421 : percentage
+
+logic o422 : bool
+
+logic o423 : percentage
+
+logic o424 : percentage
+
+logic o425 : bool
+
+logic o426 : percentage
+
+logic o427 : percentage
+
+logic o428 : bool
+
+logic o429 : percentage
+
+logic o430 : percentage
+
+logic o431 : bool
+
+logic o432 : percentage
+
+logic o433 : percentage
+
+logic o434 : bool
+
+logic o435 : percentage
+
+logic o436 : percentage
+
+logic o437 : bool
+
+logic o438 : percentage
+
+logic o439 : percentage
+
+logic o440 : bool
+
+logic o441 : percentage
+
+logic o442 : percentage
+
+logic o443 : bool
+
+logic o444 : percentage
+
+logic o445 : percentage
+
+logic o446 : bool
+
+logic o447 : percentage
+
+logic o448 : percentage
+
+logic o449 : bool
+
+logic o450 : percentage
+
+logic o451 : bool
+
+logic o452 : percentage
+
+logic o453 : bool
+
+logic o454 : percentage
+
+logic o455 : bool
+
+logic o456 : percentage
+
+logic o457 : bool
+
+logic o458 : percentage
+
+logic o459 : bool
+
+logic o460 : percentage
+
+logic o461 : bool
+
+logic o462 : percentage
+
+logic o463 : bool
+
+logic o464 : percentage
+
+logic o465 : bool
+
+logic o466 : percentage
+
+logic o467 : bool
+
+logic o468 : percentage
+
+logic o469 : bool
+
+logic o470 : percentage
+
+logic o471 : (int,us_rep) farray
+
+logic o472 : formtype
+
+logic o473 : (int,character) farray
+
+logic o474 : (int,character) farray
+
+logic o475 : formtype
+
+logic o476 : (int,us_rep) farray
+
+logic o477 : (int,character) farray
+
+logic o478 : (int,character) farray
+
+logic o479 : formtype
+
+logic o480 : (int,us_rep) farray
+
+logic o481 : bool
+
+logic p__split_fields2 : pupilnumbers
+
+logic p__split_fields3 : (int,us_rep1) farray
+
+logic result : (int,us_rep3) farray
+
+logic subject_scores1 : (int,us_rep3) farray
+
+logic result1 : int
+
+logic i3 : int
+
+logic result2 : bool
+
+logic success1 : bool
+
+logic result3 : pupilnumbers
+
+logic result4 : (int,us_rep1) farray
+
+logic p__split_fields4 : pupilnumbers
+
+logic p__split_fields5 : (int,us_rep1) farray
+
+logic result5 : int
+
+logic i4 : int
+
+logic result6 : bool
+
+logic success2 : bool
+
+logic result7 : pupilnumbers
+
+logic result8 : (int,us_rep1) farray
+
+logic p__split_fields6 : pupilnumbers
+
+logic p__split_fields7 : (int,us_rep1) farray
+
+logic result9 : int
+
+logic i5 : int
+
+logic result10 : bool
+
+logic success3 : bool
+
+logic result11 : pupilnumbers
+
+logic result12 : (int,us_rep1) farray
+
+logic p__split_fields8 : pupilnumbers
+
+logic p__split_fields9 : (int,us_rep1) farray
+
+logic result13 : int
+
+logic i6 : int
+
+logic result14 : bool
+
+logic success4 : bool
+
+logic result15 : pupilnumbers
+
+logic result16 : (int,us_rep1) farray
+
+logic p__split_fields10 : pupilnumbers
+
+logic p__split_fields11 : (int,us_rep1) farray
+
+logic result17 : int
+
+logic i7 : int
+
+logic result18 : bool
+
+logic success5 : bool
+
+logic result19 : pupilnumbers
+
+logic result20 : (int,us_rep1) farray
+
+logic p__split_fields12 : pupilnumbers
+
+logic p__split_fields13 : (int,us_rep1) farray
+
+logic result21 : int
+
+logic i8 : int
+
+logic result22 : bool
+
+logic success6 : bool
+
+logic result23 : pupilnumbers
+
+logic result24 : (int,us_rep1) farray
+
+logic p__split_fields14 : pupilnumbers
+
+logic p__split_fields15 : (int,us_rep1) farray
+
+logic result25 : int
+
+logic i9 : int
+
+logic result26 : bool
+
+logic success7 : bool
+
+logic result27 : pupilnumbers
+
+logic result28 : (int,us_rep1) farray
+
+logic p__split_fields16 : pupilnumbers
+
+logic p__split_fields17 : (int,us_rep1) farray
+
+logic result29 : int
+
+logic i10 : int
+
+logic result30 : bool
+
+logic success8 : bool
+
+logic result31 : pupilnumbers
+
+logic result32 : (int,us_rep1) farray
+
+logic p__split_fields18 : pupilnumbers
+
+logic p__split_fields19 : (int,us_rep1) farray
+
+logic result33 : int
+
+logic i11 : int
+
+logic result34 : bool
+
+logic success9 : bool
+
+logic result35 : pupilnumbers
+
+logic result36 : (int,us_rep1) farray
+
+logic p__split_fields20 : pupilnumbers
+
+logic p__split_fields21 : (int,us_rep1) farray
+
+logic result37 : int
+
+logic i12 : int
+
+logic result38 : bool
+
+logic success10 : bool
+
+logic result39 : pupilnumbers
+
+logic result40 : (int,us_rep1) farray
+
+logic p__split_fields22 : pupilnumbers
+
+logic p__split_fields23 : (int,us_rep1) farray
+
+logic p__split_fields24 : pupilnumbers
+
+logic p__split_fields25 : (int,us_rep1) farray
+
+logic success11 : bool
+
+logic i13 : int
+
+logic p__split_fields26 : pupilnumbers
+
+logic p__split_fields27 : (int,us_rep1) farray
+
+logic success12 : bool
+
+logic i14 : int
+
+logic p__split_fields28 : pupilnumbers
+
+logic p__split_fields29 : (int,us_rep1) farray
+
+logic success13 : bool
+
+logic i15 : int
+
+logic p__split_fields30 : pupilnumbers
+
+logic p__split_fields31 : (int,us_rep1) farray
+
+logic success14 : bool
+
+logic i16 : int
+
+logic p__split_fields32 : pupilnumbers
+
+logic p__split_fields33 : (int,us_rep1) farray
+
+logic success15 : bool
+
+logic i17 : int
+
+logic p__split_fields34 : pupilnumbers
+
+logic p__split_fields35 : (int,us_rep1) farray
+
+logic success16 : bool
+
+logic i18 : int
+
+logic p__split_fields36 : pupilnumbers
+
+logic p__split_fields37 : (int,us_rep1) farray
+
+logic success17 : bool
+
+logic i19 : int
+
+logic p__split_fields38 : pupilnumbers
+
+logic p__split_fields39 : (int,us_rep1) farray
+
+logic success18 : bool
+
+logic i20 : int
+
+logic p__split_fields40 : pupilnumbers
+
+logic p__split_fields41 : (int,us_rep1) farray
+
+logic success19 : bool
+
+logic i21 : int
+
+logic p__split_fields42 : pupilnumbers
+
+logic p__split_fields43 : (int,us_rep1) farray
+
+logic success20 : bool
+
+logic i22 : int
+
+logic p__split_fields44 : pupilnumbers
+
+logic p__split_fields45 : (int,us_rep1) farray
+
+logic success21 : bool
+
+logic i23 : int
+
+logic p__split_fields46 : pupilnumbers
+
+logic p__split_fields47 : (int,us_rep1) farray
+
+logic success22 : bool
+
+logic i24 : int
+
+logic p__split_fields48 : pupilnumbers
+
+logic p__split_fields49 : (int,us_rep1) farray
+
+logic success23 : bool
+
+logic i25 : int
+
+logic p__split_fields50 : pupilnumbers
+
+logic p__split_fields51 : (int,us_rep1) farray
+
+logic success24 : bool
+
+logic i26 : int
+
+logic p__split_fields52 : pupilnumbers
+
+logic p__split_fields53 : (int,us_rep1) farray
+
+logic success25 : bool
+
+logic i27 : int
+
+logic p__split_fields54 : pupilnumbers
+
+logic p__split_fields55 : (int,us_rep1) farray
+
+logic success26 : bool
+
+logic i28 : int
+
+logic p__split_fields56 : pupilnumbers
+
+logic p__split_fields57 : (int,us_rep1) farray
+
+logic success27 : bool
+
+logic i29 : int
+
+logic p__split_fields58 : pupilnumbers
+
+logic p__split_fields59 : (int,us_rep1) farray
+
+logic success28 : bool
+
+logic i30 : int
+
+logic p__split_fields60 : pupilnumbers
+
+logic p__split_fields61 : (int,us_rep1) farray
+
+logic success29 : bool
+
+logic i31 : int
+
+logic p__split_fields62 : pupilnumbers
+
+logic p__split_fields63 : (int,us_rep1) farray
+
+logic success30 : bool
+
+logic i32 : int
+
+logic result41 : pupilnumbers
+
+logic result42 : (int,us_rep1) farray
+
+logic p__split_fields64 : pupilnumbers
+
+logic p__split_fields65 : (int,us_rep1) farray
+
+logic result43 : pupilnumbers
+
+logic result44 : (int,us_rep1) farray
+
+logic p__split_fields66 : pupilnumbers
+
+logic p__split_fields67 : (int,us_rep1) farray
+
+logic result45 : pupilnumbers
+
+logic result46 : (int,us_rep1) farray
+
+logic p__split_fields68 : pupilnumbers
+
+logic p__split_fields69 : (int,us_rep1) farray
+
+logic result47 : pupilnumbers
+
+logic result48 : (int,us_rep1) farray
+
+logic p__split_fields70 : pupilnumbers
+
+logic p__split_fields71 : (int,us_rep1) farray
+
+logic p__split_fields72 : pupilnumbers
+
+logic p__split_fields73 : (int,us_rep1) farray
+
+logic p__split_fields74 : pupilnumbers
+
+logic p__split_fields75 : (int,us_rep1) farray
+
+logic p__split_fields76 : pupilnumbers
+
+logic p__split_fields77 : (int,us_rep1) farray
+
+logic success31 : bool
+
+logic subject_scores2 : (int,us_rep3) farray
+
+logic i33 : int
+
+logic p__split_fields78 : pupilnumbers
+
+logic p__split_fields79 : (int,us_rep1) farray
+
+logic success32 : bool
+
+logic subject_scores3 : (int,us_rep3) farray
+
+logic i34 : int
+
+axiom H : in_range4(fm)
+
+axiom H1 : in_range2(subj0)
+
+axiom H2 : in_range1(score0)
+
+axiom H3 : in_range2(subj1)
+
+axiom H4 : in_range1(score1)
+
+axiom H5 : in_range2(subj2)
+
+axiom H6 : in_range1(score2)
+
+axiom H7 : in_range2(subj3)
+
+axiom H8 : in_range1(score3)
+
+axiom H9 : in_range2(subj4)
+
+axiom H10 : in_range1(score4)
+
+axiom H11 : in_range2(subj5)
+
+axiom H12 : in_range1(score5)
+
+axiom H13 : in_range2(subj6)
+
+axiom H14 : in_range1(score6)
+
+axiom H15 : in_range2(subj7)
+
+axiom H16 : in_range1(score7)
+
+axiom H17 : in_range2(subj8)
+
+axiom H18 : in_range1(score8)
+
+axiom H19 : in_range2(subj9)
+
+axiom H20 : in_range1(score9)
+
+axiom H21 : ((to_rep4(p__split_fields) <  250) and (not (fm = 8)))
+
+axiom H22 : (to_rep(o36) = score9)
+
+axiom H23 : (to_rep1(o37) = subj9)
+
+axiom H24 : (o37 = o38)
+
+axiom H25 : (o36 = o39)
+
+axiom H26 : (o40 = o38)
+
+axiom H27 : (o41 = o39)
+
+axiom H28 : (to_rep(o32) = score8)
+
+axiom H29 : (to_rep1(o33) = subj8)
+
+axiom H30 : (o33 = o34)
+
+axiom H31 : (o32 = o35)
+
+axiom H32 : (o42 = o34)
+
+axiom H33 : (o43 = o35)
+
+axiom H34 : (to_rep(o28) = score7)
+
+axiom H35 : (to_rep1(o29) = subj7)
+
+axiom H36 : (o29 = o30)
+
+axiom H37 : (o28 = o31)
+
+axiom H38 : (o44 = o30)
+
+axiom H39 : (o45 = o31)
+
+axiom H40 : (to_rep(o24) = score6)
+
+axiom H41 : (to_rep1(o25) = subj6)
+
+axiom H42 : (o25 = o26)
+
+axiom H43 : (o24 = o27)
+
+axiom H44 : ((o46 = o26) and (o47 = o27))
+
+axiom H45 : (to_rep(o20) = score5)
+
+axiom H46 : (to_rep1(o21) = subj5)
+
+axiom H47 : (o21 = o22)
+
+axiom H48 : (o20 = o23)
+
+axiom H49 : ((o48 = o22) and (o49 = o23))
+
+axiom H50 : (to_rep(o16) = score4)
+
+axiom H51 : (to_rep1(o17) = subj4)
+
+axiom H52 : (o17 = o18)
+
+axiom H53 : (o16 = o19)
+
+axiom H54 : ((o50 = o18) and (o51 = o19))
+
+axiom H55 : (to_rep(o12) = score3)
+
+axiom H56 : (to_rep1(o13) = subj3)
+
+axiom H57 : (o13 = o14)
+
+axiom H58 : (o12 = o15)
+
+axiom H59 : ((o52 = o14) and (o53 = o15))
+
+axiom H60 : (to_rep(o8) = score2)
+
+axiom H61 : (to_rep1(o9) = subj2)
+
+axiom H62 : (o9 = o10)
+
+axiom H63 : (o8 = o11)
+
+axiom H64 : ((o54 = o10) and (o55 = o11))
+
+axiom H65 : (to_rep(o4) = score1)
+
+axiom H66 : (to_rep1(o5) = subj1)
+
+axiom H67 : (o5 = o6)
+
+axiom H68 : (o4 = o7)
+
+axiom H69 : ((o56 = o6) and (o57 = o7))
+
+axiom H70 : (to_rep(o) = score0)
+
+axiom H71 : (to_rep1(o1) = subj0)
+
+axiom H72 : (o1 = o2)
+
+axiom H73 : (o = o3)
+
+axiom H74 : ((o58 = o2) and (o59 = o3))
+
+axiom H75 : (o60 = temp___390({ us_split_fields7 = {
+  rec__pupils__subject_score_pair__subj = o58;
   rec__pupils__subject_score_pair__score = o59 } }, { us_split_fields7 = {
   rec__pupils__subject_score_pair__subj = o56;
   rec__pupils__subject_score_pair__score = o57 } }, { us_split_fields7 = {
@@ -2086,7 +3631,15 @@ goal WP_parameter_def :
   rec__pupils__subject_score_pair__subj = o42;
   rec__pupils__subject_score_pair__score = o43 } }, { us_split_fields7 = {
   rec__pupils__subject_score_pair__subj = o40;
-  rec__pupils__subject_score_pair__score = o41 } })))))))))))) and
-  ((result = { map__content4 = subject_scores }) and
-  (subject_scores1 = o60))) -> (((result1 = { int__content = i }) and
-  (i1 = 0)) -> (1 <= (to_rep4(p__split_fields) + 1)))))))))))))))))))))))))))
+  rec__pupils__subject_score_pair__score = o41 } }))
+
+axiom H76 : (result = subject_scores)
+
+axiom H77 : (subject_scores1 = o60)
+
+axiom H78 : (result1 = i)
+
+axiom H79 : (i3 = 0)
+
+ (* File "pupils.ads", line 74, characters 0-0 *)
+goal WP_parameter_def : (1 <= (to_rep4(p__split_fields) + 1))

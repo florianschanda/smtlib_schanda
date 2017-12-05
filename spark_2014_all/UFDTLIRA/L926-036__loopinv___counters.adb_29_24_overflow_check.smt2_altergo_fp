@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -243,15 +243,15 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  ((((((to_rep2(((a).us_split_discrs1).rec__counters__counter__mode) = to_rep2(((b).us_split_discrs1).rec__counters__counter__mode)) and
+  (((((to_rep2(((a).us_split_discrs1).rec__counters__counter__mode) = to_rep2(((b).us_split_discrs1).rec__counters__counter__mode)) and
   (to_rep1(((a).us_split_discrs1).rec__counters__counter__ticks) = to_rep1(((b).us_split_discrs1).rec__counters__counter__ticks))) and
-  (to_rep(((a).us_split_fields1).rec__counters__counter__c) = to_rep(((b).us_split_fields1).rec__counters__counter__c))) and
-  (to_rep1(((a).us_split_fields1).rec__counters__counter__t) = to_rep1(((b).us_split_fields1).rec__counters__counter__t))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not ((((to_rep2(((a).us_split_discrs1).rec__counters__counter__mode) = to_rep2(((b).us_split_discrs1).rec__counters__counter__mode)) and
-  (to_rep1(((a).us_split_discrs1).rec__counters__counter__ticks) = to_rep1(((b).us_split_discrs1).rec__counters__counter__ticks))) and
-  (to_rep(((a).us_split_fields1).rec__counters__counter__c) = to_rep(((b).us_split_fields1).rec__counters__counter__c))) and
+  ((to_rep(((a).us_split_fields1).rec__counters__counter__c) = to_rep(((b).us_split_fields1).rec__counters__counter__c)) and
   (to_rep1(((a).us_split_fields1).rec__counters__counter__t) = to_rep1(((b).us_split_fields1).rec__counters__counter__t)))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not (((to_rep2(((a).us_split_discrs1).rec__counters__counter__mode) = to_rep2(((b).us_split_discrs1).rec__counters__counter__mode)) and
+  (to_rep1(((a).us_split_discrs1).rec__counters__counter__ticks) = to_rep1(((b).us_split_discrs1).rec__counters__counter__ticks))) and
+  ((to_rep(((a).us_split_fields1).rec__counters__counter__c) = to_rep(((b).us_split_fields1).rec__counters__counter__c)) and
+  (to_rep1(((a).us_split_fields1).rec__counters__counter__t) = to_rep1(((b).us_split_fields1).rec__counters__counter__t))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -362,25 +362,82 @@ logic c__split_discrs1 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic c__split_fields : integer
+
+logic c__split_fields1 : natural
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : integer
+
+logic o3 : natural
+
+logic temp___168 : change_mode
+
+logic temp___1681 : natural
+
+logic temp___1682 : integer
+
+logic temp___1683 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : integer
+
+logic result1 : natural
+
+logic c__split_fields2 : integer
+
+logic c__split_fields3 : natural
+
+axiom H : ((o = (to_rep1(c__split_fields1) + 1)) and
+  in_range((to_rep1(c__split_fields1) + 1)))
+
+axiom H1 : (to_rep1(o1) = o)
+
+axiom H2 : (c__split_fields = o2)
+
+axiom H3 : (o1 = o3)
+
+axiom H4 : ((c__split_discrs = temp___168) and
+  (c__split_discrs1 = temp___1681))
+
+axiom H5 : (temp___1682 = o2)
+
+axiom H6 : (temp___1683 = o3)
+
+axiom H7 : (result = c__split_fields)
+
+axiom H8 : (result1 = c__split_fields1)
+
+axiom H9 : (temp___1682 = c__split_fields2)
+
+axiom H10 : (temp___1683 = c__split_fields3)
+
+axiom H11 : ((c__split_discrs = temp___168) and
+  (c__split_discrs1 = temp___1681))
+
+axiom H12 : (not (to_rep2(c__split_discrs) = 0))
+
+axiom H13 : (not (to_rep2(c__split_discrs) = 1))
+
+axiom H14 : (not (to_rep2(c__split_discrs) = 3))
+
+axiom H15 : (to_rep2(c__split_discrs) = 4)
+
+axiom H16 : (to_rep1(c__split_discrs1) <= to_rep1(c__split_fields3))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c__split_fields:integer. forall c__split_fields1:natural.
-  forall o:int. forall o1:natural. forall o2:integer. forall o3:natural.
-  forall temp___168:change_mode. forall temp___1681:natural.
-  forall temp___1682:integer. forall temp___1683:natural.
-  forall result:integer. forall result1:natural.
-  forall c__split_fields2:integer. forall c__split_fields3:natural.
-  (((((((o = (to_rep1(c__split_fields1) + 1)) and
-  in_range((to_rep1(c__split_fields1) + 1))) and (to_rep1(o1) = o)) and
-  ((c__split_fields = o2) and (o1 = o3))) and
-  (((c__split_discrs = temp___168) and (c__split_discrs1 = temp___1681)) and
-  ((temp___1682 = o2) and (temp___1683 = o3)))) and
-  ((((result = c__split_fields) and (result1 = c__split_fields1)) and
-  ((temp___1682 = c__split_fields2) and
-  (temp___1683 = c__split_fields3))) and ((c__split_discrs = temp___168) and
-  (c__split_discrs1 = temp___1681)))) ->
-  ((not (to_rep2(c__split_discrs) = 0)) ->
-  ((not (to_rep2(c__split_discrs) = 1)) ->
-  ((not (to_rep2(c__split_discrs) = 3)) -> ((to_rep2(c__split_discrs) = 4) ->
-  ((to_rep1(c__split_discrs1) <= to_rep1(c__split_fields3)) ->
-  in_range((to_rep(c__split_fields2) + 1)))))))))
+goal WP_parameter_def : in_range((to_rep(c__split_fields2) + 1))

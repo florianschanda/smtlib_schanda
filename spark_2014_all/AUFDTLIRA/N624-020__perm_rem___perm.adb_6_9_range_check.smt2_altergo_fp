@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -719,15 +719,141 @@ logic result____last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "perm.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:(int,natural) farray. forall temp___546:(int,natural) farray.
-  forall temp___5461:t3. (dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range3(i) -> (((invariant__({ elts = a; rt = a1
-  }) = true) and ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1))))) ->
-  ((((((i + 1) <= to_rep1(last(a1))) -> (((to_rep1(first(a1)) <= (i + 1)) and
-  ((i + 1) <= to_rep1(last(a1)))) and
+logic result__ : (int,natural) farray
+
+logic perm__remove__result : (int,natural) farray
+
+logic perm__remove__result1 : t
+
+logic us : int
+
+logic o : (int,natural) farray
+
+logic temp___546 : (int,natural) farray
+
+logic temp___5461 : t3
+
+logic o1 : (int,natural) farray
+
+logic temp___545 : (int,natural) farray
+
+logic temp___5451 : t2
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___547 : (int,natural) farray
+
+logic temp___5471 : t
+
+logic perm__remove__result__assume : (int,natural) farray
+
+logic perm__remove__result__assume1 : t1
+
+logic k : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic temp___550 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : int
+
+logic k1 : int
+
+logic temp___551 : int
+
+logic o13 : int
+
+logic o14 : natural
+
+logic o15 : int
+
+logic k2 : int
+
+logic o16 : int
+
+logic o17 : natural
+
+logic o18 : int
+
+logic o19 : int
+
+logic result : (int,natural) farray
+
+logic result__1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic result2 : t
+
+logic perm__remove__result2 : (int,natural) farray
+
+logic perm__remove__result3 : t
+
+logic perm__remove__result4 : (int,natural) farray
+
+logic perm__remove__result5 : t
+
+logic perm__remove__result6 : (int,natural) farray
+
+logic perm__remove__result7 : t
+
+logic result__2 : (int,natural) farray
+
+logic perm__remove__result8 : (int,natural) farray
+
+logic perm__remove__result9 : t
+
+logic result__3 : (int,natural) farray
+
+logic perm__remove__result10 : (int,natural) farray
+
+logic perm__remove__result11 : t
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and
+  ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))))
+
+axiom H3 : (((i + 1) <= to_rep1(last(a1))) ->
+  (((to_rep1(first(a1)) <= (i + 1)) and ((i + 1) <= to_rep1(last(a1)))) and
   ((to_rep1(first(a1)) <= to_rep1(last(a1))) and
-  (to_rep1(last(a1)) <= to_rep1(last(a1)))))) and (o = a)) and
-  ((o = temp___546) and (mk3((i + 1), to_rep1(last(a1))) = temp___5461))) ->
-  ((1 <= (i - 1)) -> (to_rep1(first(a1)) <= 1)))))))
+  (to_rep1(last(a1)) <= to_rep1(last(a1))))))
+
+axiom H4 : (o = a)
+
+axiom H5 : (o = temp___546)
+
+axiom H6 : (mk3((i + 1), to_rep1(last(a1))) = temp___5461)
+
+axiom H7 : (1 <= (i - 1))
+
+ (* File "perm.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(a1)) <= 1)

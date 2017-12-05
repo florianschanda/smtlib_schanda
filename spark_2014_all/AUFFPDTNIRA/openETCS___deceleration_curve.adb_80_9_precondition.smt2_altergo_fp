@@ -1125,7 +1125,7 @@ axiom coerce_axiom :
 
 type tdistance_tB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -2542,13 +2542,167 @@ axiom a_gradient__def_axiom :
   (forall d:int [a_gradient(d)]. (in_range3(d) ->
   (a_gradient(d) = fliteral1)))
 
+logic braking_curve__split_fields : (int,us_rep) farray
+
+logic braking_curve__split_fields1 : distance_t
+
+logic speed : t
+
+logic location : int
+
+logic i : int
+
+logic deceleration_curve__curve_from_target__end_point__assume : int
+
+logic o : distance_t
+
+logic o1 : (int,us_rep) farray
+
+logic o2 : distance_t
+
+logic temp___374 : (int,us_rep) farray
+
+logic temp___3741 : distance_t
+
+logic o3 : distance_t
+
+logic o4 : distance_t
+
+logic o5 : speed_t
+
+logic o6 : distance_t
+
+logic o7 : speed_t
+
+logic o8 : (int,us_rep) farray
+
+logic o9 : (int,us_rep) farray
+
+logic o10 : distance_t
+
+logic temp___379 : (int,us_rep) farray
+
+logic temp___3791 : distance_t
+
+logic o11 : speed_t
+
+logic o12 : distance_t
+
+logic o13 : speed_t
+
+logic o14 : distance_t
+
+logic o15 : speed_t
+
+logic o16 : (int,us_rep) farray
+
+logic o17 : (int,us_rep) farray
+
+logic o18 : distance_t
+
+logic temp___384 : (int,us_rep) farray
+
+logic temp___3841 : distance_t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : t
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t
+
+logic o28 : t
+
+logic o29 : t
+
+logic o30 : t
+
+logic o31 : int
+
+logic o32 : int
+
+logic result : t
+
+logic speed1 : t
+
+logic result1 : int
+
+logic location1 : int
+
+logic result2 : (int,us_rep) farray
+
+logic result3 : distance_t
+
+logic braking_curve__split_fields2 : (int,us_rep) farray
+
+logic braking_curve__split_fields3 : distance_t
+
+logic result4 : (int,us_rep) farray
+
+logic result5 : distance_t
+
+logic braking_curve__split_fields4 : (int,us_rep) farray
+
+logic braking_curve__split_fields5 : distance_t
+
+logic result6 : (int,us_rep) farray
+
+logic result7 : distance_t
+
+logic braking_curve__split_fields6 : (int,us_rep) farray
+
+logic braking_curve__split_fields7 : distance_t
+
+logic result8 : int
+
+logic i1 : int
+
+logic braking_curve__split_fields8 : (int,us_rep) farray
+
+logic braking_curve__split_fields9 : distance_t
+
+logic speed2 : t
+
+logic location2 : int
+
+logic i2 : int
+
+logic result9 : t
+
+logic speed3 : t
+
+logic result10 : t
+
+logic speed4 : t
+
+axiom H : tqtisFinite(maximum_valid_speed)
+
+axiom H1 : (m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed)
+
+axiom H2 : (to_rep1(target1) <= 5000)
+
+axiom H3 : (result = speed)
+
+axiom H4 : (speed1 = to_rep(target2))
+
+axiom H5 : tqtisFinite(speed1)
+
+axiom H6 : (result1 = location)
+
+axiom H7 : (location1 = to_rep1(target1))
+
+axiom H8 : in_range3(location1)
+
  (* File "deceleration_curve.ads", line 32, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:t. forall location:int. forall result:t. forall speed1:t.
-  forall result1:int. forall location1:int.
-  (tqtisFinite(maximum_valid_speed) ->
-  ((m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed) ->
-  ((to_rep1(target1) <= 5000) -> (((result = speed) and
-  (speed1 = to_rep(target2))) -> (tqtisFinite(speed1) ->
-  (((result1 = location) and (location1 = to_rep1(target1))) ->
-  (in_range3(location1) -> (to_rep1(target1) <= 5000)))))))))
+goal WP_parameter_def : (to_rep1(target1) <= 5000)

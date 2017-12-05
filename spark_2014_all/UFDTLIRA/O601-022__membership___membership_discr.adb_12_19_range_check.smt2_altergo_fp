@@ -365,5 +365,7 @@ logic r1__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic us : int
+
  (* File "membership_discr.adb", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range1(1)

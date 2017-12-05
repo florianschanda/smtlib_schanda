@@ -1619,26 +1619,79 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "untangle_tests.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l:(int,us_rep1) farray.
-  forall tmp__split_fields:(int,us_rep) farray.
-  forall tmp__split_fields1:float1. forall tmp__split_fields2:float1.
-  forall tmp__split_fields3:float1. forall tmp__split_fields4:float1.
-  forall o:int.
-  forall untangle_tests__swap_triangle__tmp__assume:(int,us_rep) farray.
-  forall untangle_tests__swap_triangle__tmp__assume1:float1.
-  forall untangle_tests__swap_triangle__tmp__assume2:float1.
-  forall untangle_tests__swap_triangle__tmp__assume3:float1.
-  forall untangle_tests__swap_triangle__tmp__assume4:float1.
-  forall result:(int,us_rep) farray. forall result1:float1.
-  forall result2:float1. forall result3:float1. forall result4:float1.
-  forall tmp__split_fields5:(int,us_rep) farray.
-  forall tmp__split_fields6:float1. forall tmp__split_fields7:float1.
-  forall tmp__split_fields8:float1. forall tmp__split_fields9:float1.
-  (in_range(a) -> (in_range(b) -> ((((((1 <= a) and (a <= 100)) and
-  (o = a)) and ({ us_split_fields3 = {
-  rec__untangle_tests__triangle__vertices =
+logic l : (int,us_rep1) farray
+
+logic tmp__split_fields : (int,us_rep) farray
+
+logic tmp__split_fields1 : float1
+
+logic tmp__split_fields2 : float1
+
+logic tmp__split_fields3 : float1
+
+logic tmp__split_fields4 : float1
+
+logic o : int
+
+logic untangle_tests__swap_triangle__tmp__assume : (int,us_rep) farray
+
+logic untangle_tests__swap_triangle__tmp__assume1 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume2 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume3 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume4 : float1
+
+logic o1 : int
+
+logic o2 : (int,us_rep) farray
+
+logic o3 : float1
+
+logic o4 : float1
+
+logic o5 : float1
+
+logic o6 : float1
+
+logic o7 : int
+
+logic o8 : (int,us_rep1) farray
+
+logic result : (int,us_rep) farray
+
+logic result1 : float1
+
+logic result2 : float1
+
+logic result3 : float1
+
+logic result4 : float1
+
+logic tmp__split_fields5 : (int,us_rep) farray
+
+logic tmp__split_fields6 : float1
+
+logic tmp__split_fields7 : float1
+
+logic tmp__split_fields8 : float1
+
+logic tmp__split_fields9 : float1
+
+logic result5 : (int,us_rep1) farray
+
+logic l1 : (int,us_rep1) farray
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : ((1 <= a) and (a <= 100))
+
+axiom H3 : (o = a)
+
+axiom H4 : ({ us_split_fields3 = { rec__untangle_tests__triangle__vertices =
   untangle_tests__swap_triangle__tmp__assume;
   rec__untangle_tests__triangle__normal = { us_split_fields1 = {
   rec__untangle_tests__coordinate__x =
@@ -1648,13 +1701,31 @@ goal WP_parameter_def :
   rec__untangle_tests__coordinate__z =
   untangle_tests__swap_triangle__tmp__assume3;
   rec__untangle_tests__coordinate__w =
-  untangle_tests__swap_triangle__tmp__assume4 } } } } = (l[o]))) and
-  (((result = tmp__split_fields) and ((result1 = tmp__split_fields1) and
-  ((result2 = tmp__split_fields2) and ((result3 = tmp__split_fields3) and
-  (result4 = tmp__split_fields4))))) and
-  ((untangle_tests__swap_triangle__tmp__assume = tmp__split_fields5) and
-  ((untangle_tests__swap_triangle__tmp__assume1 = tmp__split_fields6) and
-  ((untangle_tests__swap_triangle__tmp__assume2 = tmp__split_fields7) and
-  ((untangle_tests__swap_triangle__tmp__assume3 = tmp__split_fields8) and
-  (untangle_tests__swap_triangle__tmp__assume4 = tmp__split_fields9))))))) ->
-  (1 <= b)))))
+  untangle_tests__swap_triangle__tmp__assume4 } } } } = (l[o]))
+
+axiom H5 : (result = tmp__split_fields)
+
+axiom H6 : (result1 = tmp__split_fields1)
+
+axiom H7 : (result2 = tmp__split_fields2)
+
+axiom H8 : (result3 = tmp__split_fields3)
+
+axiom H9 : (result4 = tmp__split_fields4)
+
+axiom H10 : (untangle_tests__swap_triangle__tmp__assume = tmp__split_fields5)
+
+axiom H11 :
+  (untangle_tests__swap_triangle__tmp__assume1 = tmp__split_fields6)
+
+axiom H12 :
+  (untangle_tests__swap_triangle__tmp__assume2 = tmp__split_fields7)
+
+axiom H13 :
+  (untangle_tests__swap_triangle__tmp__assume3 = tmp__split_fields8)
+
+axiom H14 :
+  (untangle_tests__swap_triangle__tmp__assume4 = tmp__split_fields9)
+
+ (* File "untangle_tests.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (1 <= b)

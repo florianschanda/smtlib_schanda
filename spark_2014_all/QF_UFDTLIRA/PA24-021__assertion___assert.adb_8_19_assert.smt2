@@ -42,7 +42,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (in_range1 x))
 (assert (in_range1 y))
-(assert (not (not (not (< x y)))))
+(assert (not (< x y)))
 (assert (not (< y x)))
 (assert (not (= x y)))
 (check-sat)

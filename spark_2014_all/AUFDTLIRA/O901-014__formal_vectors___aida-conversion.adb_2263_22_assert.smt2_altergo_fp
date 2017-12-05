@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -448,36 +448,98 @@ axiom convert_character_digit_to_integer__post_axiom :
   (convert_character_digit_to_integer(source2) = 9))))))))))))))))))))) and
   in_range1(convert_character_digit_to_integer(source2)))))
 
- (* File "aida-conversion.adb", line 2216, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall temp___2439:int. forall o:int.
-  forall o1:character. forall o2:int. forall o3:int. forall target1:int.
-  forall result:int. forall target2:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> (((length({ elts =
-  source; rt = source1 }) = 2) and
+logic target : int
+
+logic has_failed : bool
+
+logic temp___2440 : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : bool
+
+logic temp___2439 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : bool
+
+logic target1 : int
+
+logic result1 : int
+
+logic target2 : int
+
+logic result2 : bool
+
+logic has_failed1 : bool
+
+logic target3 : int
+
+logic has_failed2 : bool
+
+logic target4 : int
+
+logic has_failed3 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : ((length({ elts = source; rt = source1 }) = 2) and
   ((to_rep((source[(to_rep1(first(source1)) + 0)])) = 45) and
-  (forall index:int. ((((to_rep1(first(source1)) + 1) <= index) and
-  (index <= (to_rep1(first(source1)) + 1))) ->
-  (is_digit(to_rep((source[index]))) = true))))) ->
-  (((((((temp___2439 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___2439) and
-  (temp___2439 <= to_rep1(last(source1)))) and (o = temp___2439))) and
-  (o1 = (source[o]))) and (o2 = to_rep(o1))) and (((((0 <= target1) and
-  (target1 <= 9)) and (target1 = convert_character_digit_to_integer(o2))) and
-  (((bool_eq1(o2, 48) = true) and (target1 = 0)) or ((not (bool_eq1(o2,
-  48) = true)) and (((bool_eq1(o2, 49) = true) and (target1 = 1)) or
-  ((not (bool_eq1(o2, 49) = true)) and (((bool_eq1(o2, 50) = true) and
-  (target1 = 2)) or ((not (bool_eq1(o2, 50) = true)) and (((bool_eq1(o2,
-  51) = true) and (target1 = 3)) or ((not (bool_eq1(o2, 51) = true)) and
-  (((bool_eq1(o2, 52) = true) and (target1 = 4)) or ((not (bool_eq1(o2,
-  52) = true)) and (((bool_eq1(o2, 53) = true) and (target1 = 5)) or
-  ((not (bool_eq1(o2, 53) = true)) and (((bool_eq1(o2, 54) = true) and
-  (target1 = 6)) or ((not (bool_eq1(o2, 54) = true)) and (((bool_eq1(o2,
-  55) = true) and (target1 = 7)) or ((not (bool_eq1(o2, 55) = true)) and
-  (((bool_eq1(o2, 56) = true) and (target1 = 8)) or ((not (bool_eq1(o2,
-  56) = true)) and ((bool_eq1(o2, 57) = true) ->
-  (target1 = 9))))))))))))))))))))) and in_range1(target1))) ->
-  ((((o3 = (-target1)) and in_range1((-target1))) and ((target1 = result) and
-  (target2 = o3))) -> ((-9) <= target2)))))))
+  (forall index1:int. ((((to_rep1(first(source1)) + 1) <= index1) and
+  (index1 <= (to_rep1(first(source1)) + 1))) ->
+  (is_digit(to_rep((source[index1]))) = true)))))
+
+axiom H3 : ((temp___2439 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H4 : ((to_rep1(first(source1)) <= temp___2439) and
+  (temp___2439 <= to_rep1(last(source1))))
+
+axiom H5 : (o5 = temp___2439)
+
+axiom H6 : (o6 = (source[o5]))
+
+axiom H7 : (o7 = to_rep(o6))
+
+axiom H8 : (((((0 <= target1) and (target1 <= 9)) and
+  (target1 = convert_character_digit_to_integer(o7))) and (((bool_eq1(o7,
+  48) = true) -> (target1 = 0)) and ((not (bool_eq1(o7, 48) = true)) ->
+  (((bool_eq1(o7, 49) = true) -> (target1 = 1)) and ((not (bool_eq1(o7,
+  49) = true)) -> (((bool_eq1(o7, 50) = true) -> (target1 = 2)) and
+  ((not (bool_eq1(o7, 50) = true)) -> (((bool_eq1(o7, 51) = true) ->
+  (target1 = 3)) and ((not (bool_eq1(o7, 51) = true)) -> (((bool_eq1(o7,
+  52) = true) -> (target1 = 4)) and ((not (bool_eq1(o7, 52) = true)) ->
+  (((bool_eq1(o7, 53) = true) -> (target1 = 5)) and ((not (bool_eq1(o7,
+  53) = true)) -> (((bool_eq1(o7, 54) = true) -> (target1 = 6)) and
+  ((not (bool_eq1(o7, 54) = true)) -> (((bool_eq1(o7, 55) = true) ->
+  (target1 = 7)) and ((not (bool_eq1(o7, 55) = true)) -> (((bool_eq1(o7,
+  56) = true) -> (target1 = 8)) and ((not (bool_eq1(o7, 56) = true)) ->
+  ((bool_eq1(o7, 57) = true) -> (target1 = 9))))))))))))))))))))) and
+  in_range1(target1))
+
+axiom H9 : ((o8 = (-target1)) and in_range1((-target1)))
+
+axiom H10 : (target1 = result1)
+
+axiom H11 : (target2 = o8)
+
+ (* File "aida-conversion.adb", line 2216, characters 0-0 *)
+goal WP_parameter_def : ((- 9) <= target2)

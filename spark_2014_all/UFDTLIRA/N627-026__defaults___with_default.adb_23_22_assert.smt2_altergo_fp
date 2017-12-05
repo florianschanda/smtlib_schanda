@@ -138,7 +138,7 @@ function scalar_with_default__ref___2__projection(a: scalar_with_default__ref) :
 
 type tscalar_with_defaultB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -209,7 +209,7 @@ axiom first__def_axiom : (first = c)
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -281,12 +281,40 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic ok_def : int
+
+logic no_def : int
+
+logic no_ini : int
+
+logic us : int
+
+logic us1 : int
+
+logic o : int
+
+logic result : int
+
+logic no_def1 : int
+
+axiom H : in_range(c)
+
+axiom H1 : (ok_def = 0)
+
+axiom H2 : ((0 <= 2147483647) -> in_range1(ok_def))
+
+axiom H3 : ((us1 = c) and dynamic_property(first, 2147483647, c))
+
+axiom H4 : (o = c)
+
+axiom H5 : (result = no_def)
+
+axiom H6 : (no_def1 = o)
+
+axiom H7 : dynamic_property(first, 2147483647, no_def1)
+
+axiom H8 : ((first1 <= 2147483647) -> dynamic_property1(first1, 2147483647,
+  no_ini))
+
  (* File "with_default.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ok_def:int. forall no_def:int. forall no_ini:int. forall us:int.
-  forall o:int. forall result:int. forall no_def1:int. (in_range(c) ->
-  ((ok_def = 0) -> (((0 <= 2147483647) -> in_range1(ok_def)) ->
-  (((((us = c) and dynamic_property(first, 2147483647, c)) and (o = c)) and
-  ((result = no_def) and (no_def1 = o))) -> (dynamic_property(first,
-  2147483647, no_def1) -> (((first1 <= 2147483647) ->
-  dynamic_property1(first1, 2147483647, no_ini)) -> (ok_def = 0))))))))
+goal WP_parameter_def : (ok_def = 0)

@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral64 ((x Float64)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float64) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float64) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (assert (not (fp.leq (fp.add RNE (fp.add RNE (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))))
 (check-sat)

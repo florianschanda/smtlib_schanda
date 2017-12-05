@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -701,12 +701,21 @@ type t15b__ref = { t15b__content : us_t2
 
 function t15b__ref___projection(a: t15b__ref) : us_t2 = (a).t15b__content
 
-logic temp___539 : int -> (int,character) farray
+logic temp___533 : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___541:int.
-  (forall temp___542:int.
-  ((temp___539(temp___541)[temp___542]) = of_rep(temp___541))))
+  (forall temp___535:int.
+  (forall temp___536:int.
+  ((temp___533(temp___535)[temp___536]) = of_rep(temp___535))))
+
+logic temp___String_Literal_537 : unit -> (int,character) farray
+
+axiom temp___String_Literal_537__def_axiom :
+  (((((to_rep((temp___String_Literal_537(void)[1])) = 80) and
+  (to_rep((temp___String_Literal_537(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_537(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_537(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_537(void)[5])) = 114))
 
 logic temp___String_Literal_543 : unit -> (int,character) farray
 
@@ -717,38 +726,133 @@ axiom temp___String_Literal_543__def_axiom :
   (to_rep((temp___String_Literal_543(void)[4])) = 101)) and
   (to_rep((temp___String_Literal_543(void)[5])) = 114))
 
-logic temp___String_Literal_549 : unit -> (int,character) farray
-
-axiom temp___String_Literal_549__def_axiom :
-  (((((to_rep((temp___String_Literal_549(void)[1])) = 80) and
-  (to_rep((temp___String_Literal_549(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_549(void)[3])) = 116)) and
-  (to_rep((temp___String_Literal_549(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_549(void)[5])) = 114))
-
 axiom currency__def_axiom : ((currency = temp___String_Literal_151(void)) and
   (currency1 = mk(1, 7)))
 
+logic count : int
+
+logic name : (int,character) farray
+
+logic address : (int,character) farray
+
+logic city : (int,character) farray
+
+logic o : (int,character) farray
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,character) farray
+
+logic o3 : (int,character) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___540 : (int,character) farray
+
+logic temp___5401 : t
+
+logic o10 : (int,character) farray
+
+logic o11 : (int,character) farray
+
+logic temp___544 : (int,character) farray
+
+logic temp___5441 : t1
+
+logic o12 : (int,character) farray
+
+logic temp___546 : (int,character) farray
+
+logic temp___5461 : t1
+
+logic temp___547 : (int,character) farray
+
+logic temp___5471 : t1
+
+logic o13 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic address1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic name1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic name2 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic address2 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic city1 : (int,character) farray
+
+logic result5 : (int,character) farray
+
+logic name3 : (int,character) farray
+
+logic result6 : (int,character) farray
+
+logic address3 : (int,character) farray
+
+logic result7 : (int,character) farray
+
+logic address4 : (int,character) farray
+
+logic result8 : int
+
+logic count1 : int
+
+logic result9 : (int,character) farray
+
+logic name4 : (int,character) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(count))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(currency1)),
+  to_rep1(last(currency1)))
+
+axiom H2 : (result = address)
+
+axiom H3 : (address1 = temp___533(32))
+
+axiom H4 : (((1 <= 40) -> (((1 <= 20) ->
+  (((40 - 1) + 1) = ((20 - 1) + 1))) and ((not (1 <= 20)) ->
+  (((40 - 1) + 1) = 0)))) and ((not (1 <= 40)) -> ((1 <= 20) ->
+  (0 = ((20 - 1) + 1)))))
+
+axiom H5 : (o = address1)
+
+axiom H6 : (result1 = name)
+
+axiom H7 : (name1 = o)
+
+axiom H8 : (((1 <= 5) -> (((1 <= 20) -> (((5 - 1) + 1) = ((20 - 1) + 1))) and
+  ((not (1 <= 20)) -> (((5 - 1) + 1) = 0)))) and ((not (1 <= 5)) ->
+  ((1 <= 20) -> (0 = ((20 - 1) + 1)))))
+
+axiom H9 : (o1 = temp___String_Literal_537(void))
+
+axiom H10 : (result2 = name1)
+
+axiom H11 : (name2 = o1)
+
  (* File "string_examples.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall name:(int,character) farray.
-  forall address:(int,character) farray. forall o:(int,character) farray.
-  forall o1:(int,character) farray. forall result:(int,character) farray.
-  forall address1:(int,character) farray.
-  forall result1:(int,character) farray. forall name1:(int,character) farray.
-  forall result2:(int,character) farray. forall name2:(int,character) farray.
-  ((((-2147483648) <= 2147483647) -> in_range(count)) -> (dynamic_property(1,
-  2147483647, to_rep1(first(currency1)), to_rep1(last(currency1))) ->
-  (((result = address) and (address1 = temp___539(32))) -> ((((((1 <= 40) and
-  (((1 <= 20) and (((40 - 1) + 1) = ((20 - 1) + 1))) or ((not (1 <= 20)) and
-  (((40 - 1) + 1) = 0)))) or ((not (1 <= 40)) and (((1 <= 20) and
-  (0 = ((20 - 1) + 1))) or (not (1 <= 20))))) and (o = address1)) and
-  ((result1 = name) and (name1 = o))) -> ((((((1 <= 5) and (((1 <= 20) and
-  (((5 - 1) + 1) = ((20 - 1) + 1))) or ((not (1 <= 20)) and
-  (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and (((1 <= 20) and
-  (0 = ((20 - 1) + 1))) or (not (1 <= 20))))) and
-  (o1 = temp___String_Literal_543(void))) and ((result2 = name1) and
-  (name2 = o1))) -> (((1 <= 20) -> (((1 <= 40) ->
+goal WP_parameter_def : (((1 <= 20) -> (((1 <= 40) ->
   (((20 - 1) + 1) = ((40 - 1) + 1))) and ((not (1 <= 40)) ->
   (((20 - 1) + 1) = 0)))) and ((not (1 <= 20)) -> ((1 <= 40) ->
-  (0 = ((40 - 1) + 1)))))))))))
+  (0 = ((40 - 1) + 1)))))

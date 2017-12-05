@@ -395,9 +395,18 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x__split_fields : (int,natural) farray
+
+logic o : natural
+
+axiom H : in_range2(c)
+
+axiom H1 : in_range(e)
+
+axiom H2 : (has_element({ us_split_fields1 = {
+  rec__declare_iterable__container__content = x__split_fields } }, c) = true)
+
+axiom H3 : (to_rep(o) = e)
+
  (* File "declare_iterable.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:(int,natural) farray. forall o:natural.
-  (in_range2(c) -> (in_range(e) -> ((has_element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x__split_fields } },
-  c) = true) -> ((to_rep(o) = e) -> (1 <= c))))))
+goal WP_parameter_def : (1 <= c)

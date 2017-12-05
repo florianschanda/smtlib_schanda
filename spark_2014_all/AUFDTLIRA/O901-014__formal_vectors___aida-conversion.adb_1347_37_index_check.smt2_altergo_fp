@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -450,83 +450,314 @@ axiom convert_character_digit_to_integer__post_axiom :
   (convert_character_digit_to_integer(source2) = 9))))))))))))))))))))) and
   in_range1(convert_character_digit_to_integer(source2)))))
 
- (* File "aida-conversion.adb", line 1111, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall temp___1817:int. forall temp___1818:int.
-  forall o:int. forall o1:character. forall o2:int. forall o3:bool.
-  forall temp___1819:int. forall o4:int. forall o5:character. forall o6:int.
-  forall o7:bool. forall temp___1820:int. forall o8:int. forall o9:character.
-  forall o10:int. forall o11:bool. forall temp___1821:int. forall o12:int.
-  forall o13:character. forall o14:int. forall o15:bool.
-  forall temp___1822:int. forall o16:int. forall o17:character.
-  forall o18:int. forall o19:bool. forall temp___1823:int. forall o20:int.
-  forall o21:character. forall o22:int. forall o23:bool.
-  forall temp___1824:int. forall o24:int. forall o25:character.
-  forall o26:int. forall o27:bool. forall temp___1825:int. forall o28:int.
-  forall o29:character. forall o30:int. forall o31:bool. forall index:int.
-  forall o32:int. forall o33:int. forall o34:bool. forall o35:bool.
-  forall o36:bool. forall result:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> ((length({ elts =
-  source; rt = source1 }) = 11) ->
-  ((((((o33 = (to_rep1(first(source1)) + 10)) and
-  in_range1((to_rep1(first(source1)) + 10))) and (((index <= o33) and
-  (o34 = true)) or ((not (index <= o33)) and (o34 = false)))) and
-  ((((o32 = (to_rep1(first(source1)) + 10)) and
-  in_range1((to_rep1(first(source1)) + 10))) and (((o32 <= index) and
-  (o35 = true)) or ((not (o32 <= index)) and (o35 = false)))) and
-  (result = match_bool(o35, o34, false)))) and ((o36 = true) <->
+logic target : int
+
+logic has_failed : bool
+
+logic n : int
+
+logic temp___1815 : int
+
+logic temp___1816 : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : bool
+
+logic temp___1817 : int
+
+logic o4 : int
+
+logic o5 : character
+
+logic o6 : int
+
+logic o7 : bool
+
+logic temp___1818 : int
+
+logic o8 : int
+
+logic o9 : character
+
+logic o10 : int
+
+logic o11 : bool
+
+logic temp___1819 : int
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : int
+
+logic o15 : bool
+
+logic temp___1820 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : bool
+
+logic temp___1821 : int
+
+logic o20 : int
+
+logic o21 : character
+
+logic o22 : int
+
+logic o23 : bool
+
+logic temp___1822 : int
+
+logic o24 : int
+
+logic o25 : character
+
+logic o26 : int
+
+logic o27 : bool
+
+logic temp___1823 : int
+
+logic o28 : int
+
+logic o29 : character
+
+logic o30 : int
+
+logic o31 : bool
+
+logic temp___1824 : int
+
+logic o32 : int
+
+logic o33 : character
+
+logic o34 : int
+
+logic o35 : bool
+
+logic temp___1825 : int
+
+logic o36 : int
+
+logic o37 : character
+
+logic o38 : int
+
+logic o39 : bool
+
+logic index : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : bool
+
+logic o43 : bool
+
+logic o44 : bool
+
+logic temp___1814 : int
+
+logic o45 : int
+
+logic o46 : character
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic result : bool
+
+logic n1 : int
+
+logic result1 : int
+
+logic target1 : int
+
+logic result2 : int
+
+logic target2 : int
+
+logic result3 : bool
+
+logic has_failed1 : bool
+
+logic target3 : int
+
+logic has_failed2 : bool
+
+logic n2 : int
+
+logic target4 : int
+
+logic has_failed3 : bool
+
+logic n3 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (length({ elts = source; rt = source1 }) = 11)
+
+axiom H3 : ((o41 = (to_rep1(first(source1)) + 10)) and
+  in_range1((to_rep1(first(source1)) + 10)))
+
+axiom H4 : (((index <= o41) -> (o42 = true)) and ((not (index <= o41)) ->
+  (o42 = false)))
+
+axiom H5 : ((o40 = (to_rep1(first(source1)) + 10)) and
+  in_range1((to_rep1(first(source1)) + 10)))
+
+axiom H6 : (((o40 <= index) -> (o43 = true)) and ((not (o40 <= index)) ->
+  (o43 = false)))
+
+axiom H7 : (result = match_bool(o43, o42, false))
+
+axiom H8 : ((o44 = true) <->
   (forall index1:int. ((((to_rep1(first(source1)) + 10) <= index1) and
   (index1 <= (to_rep1(first(source1)) + 10))) ->
-  (is_digit(to_rep((source[index1]))) = true))))) ->
-  (((((((temp___1825 = (to_rep1(first(source1)) + 10)) and
-  in_range1((to_rep1(first(source1)) + 10))) and
-  (((to_rep1(first(source1)) <= temp___1825) and
-  (temp___1825 <= to_rep1(last(source1)))) and (o28 = temp___1825))) and
-  (o29 = (source[o28]))) and (o30 = to_rep(o29))) and (((o30 <  57) and
-  (o31 = true)) or ((not (o30 <  57)) and (o31 = false)))) ->
-  (((((((temp___1824 = (to_rep1(first(source1)) + 9)) and
-  in_range1((to_rep1(first(source1)) + 9))) and
-  (((to_rep1(first(source1)) <= temp___1824) and
-  (temp___1824 <= to_rep1(last(source1)))) and (o24 = temp___1824))) and
-  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((o26 = 52) and
-  (o27 = true)) or ((not (o26 = 52)) and (o27 = false)))) ->
-  (((((((temp___1823 = (to_rep1(first(source1)) + 8)) and
-  in_range1((to_rep1(first(source1)) + 8))) and
-  (((to_rep1(first(source1)) <= temp___1823) and
-  (temp___1823 <= to_rep1(last(source1)))) and (o20 = temp___1823))) and
-  (o21 = (source[o20]))) and (o22 = to_rep(o21))) and (((o22 = 54) and
-  (o23 = true)) or ((not (o22 = 54)) and (o23 = false)))) ->
-  (((((((temp___1822 = (to_rep1(first(source1)) + 7)) and
-  in_range1((to_rep1(first(source1)) + 7))) and
-  (((to_rep1(first(source1)) <= temp___1822) and
-  (temp___1822 <= to_rep1(last(source1)))) and (o16 = temp___1822))) and
-  (o17 = (source[o16]))) and (o18 = to_rep(o17))) and (((o18 = 51) and
-  (o19 = true)) or ((not (o18 = 51)) and (o19 = false)))) ->
-  (((((((temp___1821 = (to_rep1(first(source1)) + 6)) and
-  in_range1((to_rep1(first(source1)) + 6))) and
-  (((to_rep1(first(source1)) <= temp___1821) and
-  (temp___1821 <= to_rep1(last(source1)))) and (o12 = temp___1821))) and
-  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((o14 = 56) and
-  (o15 = true)) or ((not (o14 = 56)) and (o15 = false)))) ->
-  (((((((temp___1820 = (to_rep1(first(source1)) + 5)) and
-  in_range1((to_rep1(first(source1)) + 5))) and
-  (((to_rep1(first(source1)) <= temp___1820) and
-  (temp___1820 <= to_rep1(last(source1)))) and (o8 = temp___1820))) and
-  (o9 = (source[o8]))) and (o10 = to_rep(o9))) and (((o10 = 52) and
-  (o11 = true)) or ((not (o10 = 52)) and (o11 = false)))) ->
-  (((((((temp___1819 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and
-  (((to_rep1(first(source1)) <= temp___1819) and
-  (temp___1819 <= to_rep1(last(source1)))) and (o4 = temp___1819))) and
-  (o5 = (source[o4]))) and (o6 = to_rep(o5))) and (((o6 = 55) and
-  (o7 = true)) or ((not (o6 = 55)) and (o7 = false)))) ->
-  (((((((temp___1818 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1818) and
-  (temp___1818 <= to_rep1(last(source1)))) and (o = temp___1818))) and
-  (o1 = (source[o]))) and (o2 = to_rep(o1))) and (((o2 = 52) and
-  (o3 = true)) or ((not (o2 = 52)) and (o3 = false)))) ->
-  (((temp___1817 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) ->
-  (to_rep1(first(source1)) <= temp___1817)))))))))))))))
+  (is_digit(to_rep((source[index1]))) = true))))
+
+axiom H9 : ((temp___1825 = (to_rep1(first(source1)) + 10)) and
+  in_range1((to_rep1(first(source1)) + 10)))
+
+axiom H10 : ((to_rep1(first(source1)) <= temp___1825) and
+  (temp___1825 <= to_rep1(last(source1))))
+
+axiom H11 : (o36 = temp___1825)
+
+axiom H12 : (o37 = (source[o36]))
+
+axiom H13 : (o38 = to_rep(o37))
+
+axiom H14 : (((o38 <  57) -> (o39 = true)) and ((not (o38 <  57)) ->
+  (o39 = false)))
+
+axiom H15 : ((temp___1824 = (to_rep1(first(source1)) + 9)) and
+  in_range1((to_rep1(first(source1)) + 9)))
+
+axiom H16 : ((to_rep1(first(source1)) <= temp___1824) and
+  (temp___1824 <= to_rep1(last(source1))))
+
+axiom H17 : (o32 = temp___1824)
+
+axiom H18 : (o33 = (source[o32]))
+
+axiom H19 : (o34 = to_rep(o33))
+
+axiom H20 : (((o34 = 52) -> (o35 = true)) and ((not (o34 = 52)) ->
+  (o35 = false)))
+
+axiom H21 : ((temp___1823 = (to_rep1(first(source1)) + 8)) and
+  in_range1((to_rep1(first(source1)) + 8)))
+
+axiom H22 : ((to_rep1(first(source1)) <= temp___1823) and
+  (temp___1823 <= to_rep1(last(source1))))
+
+axiom H23 : (o28 = temp___1823)
+
+axiom H24 : (o29 = (source[o28]))
+
+axiom H25 : (o30 = to_rep(o29))
+
+axiom H26 : (((o30 = 54) -> (o31 = true)) and ((not (o30 = 54)) ->
+  (o31 = false)))
+
+axiom H27 : ((temp___1822 = (to_rep1(first(source1)) + 7)) and
+  in_range1((to_rep1(first(source1)) + 7)))
+
+axiom H28 : ((to_rep1(first(source1)) <= temp___1822) and
+  (temp___1822 <= to_rep1(last(source1))))
+
+axiom H29 : (o24 = temp___1822)
+
+axiom H30 : (o25 = (source[o24]))
+
+axiom H31 : (o26 = to_rep(o25))
+
+axiom H32 : (((o26 = 51) -> (o27 = true)) and ((not (o26 = 51)) ->
+  (o27 = false)))
+
+axiom H33 : ((temp___1821 = (to_rep1(first(source1)) + 6)) and
+  in_range1((to_rep1(first(source1)) + 6)))
+
+axiom H34 : ((to_rep1(first(source1)) <= temp___1821) and
+  (temp___1821 <= to_rep1(last(source1))))
+
+axiom H35 : (o20 = temp___1821)
+
+axiom H36 : (o21 = (source[o20]))
+
+axiom H37 : (o22 = to_rep(o21))
+
+axiom H38 : (((o22 = 56) -> (o23 = true)) and ((not (o22 = 56)) ->
+  (o23 = false)))
+
+axiom H39 : ((temp___1820 = (to_rep1(first(source1)) + 5)) and
+  in_range1((to_rep1(first(source1)) + 5)))
+
+axiom H40 : ((to_rep1(first(source1)) <= temp___1820) and
+  (temp___1820 <= to_rep1(last(source1))))
+
+axiom H41 : (o16 = temp___1820)
+
+axiom H42 : (o17 = (source[o16]))
+
+axiom H43 : (o18 = to_rep(o17))
+
+axiom H44 : (((o18 = 52) -> (o19 = true)) and ((not (o18 = 52)) ->
+  (o19 = false)))
+
+axiom H45 : ((temp___1819 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H46 : ((to_rep1(first(source1)) <= temp___1819) and
+  (temp___1819 <= to_rep1(last(source1))))
+
+axiom H47 : (o12 = temp___1819)
+
+axiom H48 : (o13 = (source[o12]))
+
+axiom H49 : (o14 = to_rep(o13))
+
+axiom H50 : (((o14 = 55) -> (o15 = true)) and ((not (o14 = 55)) ->
+  (o15 = false)))
+
+axiom H51 : ((temp___1818 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H52 : ((to_rep1(first(source1)) <= temp___1818) and
+  (temp___1818 <= to_rep1(last(source1))))
+
+axiom H53 : (o8 = temp___1818)
+
+axiom H54 : (o9 = (source[o8]))
+
+axiom H55 : (o10 = to_rep(o9))
+
+axiom H56 : (((o10 = 52) -> (o11 = true)) and ((not (o10 = 52)) ->
+  (o11 = false)))
+
+axiom H57 : ((temp___1817 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+ (* File "aida-conversion.adb", line 1111, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___1817)

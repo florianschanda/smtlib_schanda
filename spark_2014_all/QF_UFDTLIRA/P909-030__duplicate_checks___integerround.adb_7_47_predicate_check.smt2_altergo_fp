@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type t1
 
-predicate in_range1(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range1(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq1 : int, int -> bool
 
@@ -134,7 +134,7 @@ function t1__ref___projection(a: t1__ref) : t1 = (a).t1__content
 
 type t2
 
-predicate in_range2(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range2(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
 
@@ -161,8 +161,13 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic temp___185 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (in_range2(x) and (((- 1) <= x) and (x <= 1)))
+
+axiom H2 : ((temp___185 = x) and in_range2(x))
+
  (* File "integerround.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___185:int. (in_range1(x) -> ((in_range2(x) and
-  (((-1) <= x) and (x <= 1))) -> (((temp___185 = x) and in_range2(x)) ->
-  ((-1) <= temp___185)))))
+goal WP_parameter_def : ((- 1) <= temp___185)

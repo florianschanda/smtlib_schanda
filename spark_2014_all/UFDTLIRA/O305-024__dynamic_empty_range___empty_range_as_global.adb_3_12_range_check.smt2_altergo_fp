@@ -115,7 +115,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -185,6 +185,15 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom max__def_axiom : (max = 100)
 
+logic e : int
+
+logic e1 : int
+
+axiom H : in_range(c)
+
+axiom H1 : in_range(max)
+
+axiom H2 : (c <= 100)
+
  (* File "empty_range_as_global.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> (in_range(max) -> ((c <= 100) ->
-  (0 <= c))))
+goal WP_parameter_def : (0 <= c)

@@ -121,7 +121,7 @@ axiom coerce_axiom :
 
 type tdigit_count_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -267,18 +267,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1082,10 +1082,21 @@ logic r2 : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "very_longs.ads", line 33, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep(l), to_rep1(first(l2)),
+logic us : int
+
+logic us1 : int
+
+logic o : bool
+
+axiom H : (dynamic_property1(1, to_rep(l), to_rep1(first(l2)),
   to_rep1(last(l2))) and ((to_rep1(first(l2)) = 1) and
-  (to_rep1(last(l2)) = to_rep(l)))) -> ((dynamic_property1(1, to_rep(r),
-  to_rep1(first(r2)), to_rep1(last(r2))) and ((to_rep1(first(r2)) = 1) and
-  (to_rep1(last(r2)) = to_rep(r)))) -> ((to_rep(l) = to_rep(r)) ->
-  in_range(to_rep(r)))))
+  (to_rep1(last(l2)) = to_rep(l))))
+
+axiom H1 : (dynamic_property1(1, to_rep(r), to_rep1(first(r2)),
+  to_rep1(last(r2))) and ((to_rep1(first(r2)) = 1) and
+  (to_rep1(last(r2)) = to_rep(r))))
+
+axiom H2 : (to_rep(l) = to_rep(r))
+
+ (* File "very_longs.ads", line 33, characters 0-0 *)
+goal WP_parameter_def : in_range(to_rep(r))

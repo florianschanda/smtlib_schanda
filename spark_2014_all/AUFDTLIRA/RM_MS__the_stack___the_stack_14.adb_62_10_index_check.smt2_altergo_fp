@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -274,7 +274,15 @@ type index_range__ref = { index_range__content : index_range
 function index_range__ref___projection(a: index_range__ref) : index_range =
   (a).index_range__content
 
+logic pointer : int
+
+logic o : integer
+
+axiom H : in_range1(pointer)
+
+axiom H1 : in_range(x)
+
+axiom H2 : (to_rep(o) = x)
+
  (* File "the_stack_14.adb", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pointer:int. forall o:integer. (in_range1(pointer) ->
-  (in_range(x) -> ((to_rep(o) = x) -> (1 <= pointer)))))
+goal WP_parameter_def : (1 <= pointer)

@@ -159,7 +159,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -198,7 +198,7 @@ axiom coerce_axiom2 :
 
 type element_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -487,19 +487,19 @@ logic bool_eq8 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__count))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__front))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__rear))) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__items,
-  ((b).us_split_fields1).rec__bounded_queue_v1__queue_type__items) = true)) ->
-  (bool_eq8(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__count))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__count)) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__front))) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__rear))) and
   (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__items,
   ((b).us_split_fields1).rec__bounded_queue_v1__queue_type__items) = true))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v1__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__count)) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__front))) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v1__queue_type__rear))) and
+  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v1__queue_type__items,
+  ((b).us_split_fields1).rec__bounded_queue_v1__queue_type__items) = true)))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size1 : int
@@ -662,120 +662,297 @@ logic queue__split_discrs : positive
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "bounded_queue_v1.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall queue__split_fields:natural. forall queue__split_fields1:positive.
-  forall queue__split_fields2:positive.
-  forall queue__split_fields3:(int,element_type) farray.
-  forall queue__split_fields4:t. forall o:natural. forall o1:natural.
-  forall o2:positive. forall o3:positive.
-  forall o4:(int,element_type) farray. forall o5:t.
-  forall temp___283:positive. forall temp___2831:natural.
-  forall temp___2832:positive. forall temp___2833:positive.
-  forall temp___2834:(int,element_type) farray. forall temp___2835:t.
-  forall o6:positive. forall o7:natural. forall o8:positive.
-  forall o9:positive. forall o10:(int,element_type) farray. forall o11:t.
-  forall temp___285:positive. forall temp___2851:natural.
-  forall temp___2852:positive. forall temp___2853:positive.
-  forall temp___2854:(int,element_type) farray. forall temp___2855:t.
-  forall o12:positive. forall o13:natural. forall o14:positive.
-  forall o15:positive. forall o16:(int,element_type) farray. forall o17:t.
-  forall temp___287:positive. forall temp___2871:natural.
-  forall temp___2872:positive. forall temp___2873:positive.
-  forall temp___2874:(int,element_type) farray. forall temp___2875:t.
-  forall result:natural. forall result1:positive. forall result2:positive.
-  forall result3:(int,element_type) farray. forall result4:t.
-  forall queue__split_fields5:natural. forall queue__split_fields6:positive.
-  forall queue__split_fields7:positive.
-  forall queue__split_fields8:(int,element_type) farray.
-  forall queue__split_fields9:t. forall result5:natural.
-  forall result6:positive. forall result7:positive.
-  forall result8:(int,element_type) farray. forall result9:t.
-  forall queue__split_fields10:natural.
-  forall queue__split_fields11:positive.
-  forall queue__split_fields12:positive.
-  forall queue__split_fields13:(int,element_type) farray.
-  forall queue__split_fields14:t. forall result10:natural.
-  forall result11:positive. forall result12:positive.
-  forall result13:(int,element_type) farray. forall result14:t.
-  forall queue__split_fields15:natural.
-  forall queue__split_fields16:positive.
-  forall queue__split_fields17:positive.
-  forall queue__split_fields18:(int,element_type) farray.
-  forall queue__split_fields19:t. forall queue__split_fields20:natural.
-  forall queue__split_fields21:positive.
-  forall queue__split_fields22:positive.
-  forall queue__split_fields23:(int,element_type) farray.
-  forall queue__split_fields24:t. forall queue__split_fields25:natural.
-  forall queue__split_fields26:positive.
-  forall queue__split_fields27:positive.
-  forall queue__split_fields28:(int,element_type) farray.
-  forall queue__split_fields29:t. (((dynamic_property1(1,
-  to_rep1(queue__split_discrs), to_rep2(first(queue__split_fields4)),
+logic queue__split_fields : natural
+
+logic queue__split_fields1 : positive
+
+logic queue__split_fields2 : positive
+
+logic queue__split_fields3 : (int,element_type) farray
+
+logic queue__split_fields4 : t
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : positive
+
+logic o3 : positive
+
+logic o4 : (int,element_type) farray
+
+logic o5 : t
+
+logic temp___283 : positive
+
+logic temp___2831 : natural
+
+logic temp___2832 : positive
+
+logic temp___2833 : positive
+
+logic temp___2834 : (int,element_type) farray
+
+logic temp___2835 : t
+
+logic o6 : positive
+
+logic o7 : natural
+
+logic o8 : positive
+
+logic o9 : positive
+
+logic o10 : (int,element_type) farray
+
+logic o11 : t
+
+logic temp___285 : positive
+
+logic temp___2851 : natural
+
+logic temp___2852 : positive
+
+logic temp___2853 : positive
+
+logic temp___2854 : (int,element_type) farray
+
+logic temp___2855 : t
+
+logic o12 : positive
+
+logic o13 : natural
+
+logic o14 : positive
+
+logic o15 : positive
+
+logic o16 : (int,element_type) farray
+
+logic o17 : t
+
+logic temp___287 : positive
+
+logic temp___2871 : natural
+
+logic temp___2872 : positive
+
+logic temp___2873 : positive
+
+logic temp___2874 : (int,element_type) farray
+
+logic temp___2875 : t
+
+logic result : natural
+
+logic result1 : positive
+
+logic result2 : positive
+
+logic result3 : (int,element_type) farray
+
+logic result4 : t
+
+logic queue__split_fields5 : natural
+
+logic queue__split_fields6 : positive
+
+logic queue__split_fields7 : positive
+
+logic queue__split_fields8 : (int,element_type) farray
+
+logic queue__split_fields9 : t
+
+logic result5 : natural
+
+logic result6 : positive
+
+logic result7 : positive
+
+logic result8 : (int,element_type) farray
+
+logic result9 : t
+
+logic queue__split_fields10 : natural
+
+logic queue__split_fields11 : positive
+
+logic queue__split_fields12 : positive
+
+logic queue__split_fields13 : (int,element_type) farray
+
+logic queue__split_fields14 : t
+
+logic result10 : natural
+
+logic result11 : positive
+
+logic result12 : positive
+
+logic result13 : (int,element_type) farray
+
+logic result14 : t
+
+logic queue__split_fields15 : natural
+
+logic queue__split_fields16 : positive
+
+logic queue__split_fields17 : positive
+
+logic queue__split_fields18 : (int,element_type) farray
+
+logic queue__split_fields19 : t
+
+logic queue__split_fields20 : natural
+
+logic queue__split_fields21 : positive
+
+logic queue__split_fields22 : positive
+
+logic queue__split_fields23 : (int,element_type) farray
+
+logic queue__split_fields24 : t
+
+logic queue__split_fields25 : natural
+
+logic queue__split_fields26 : positive
+
+logic queue__split_fields27 : positive
+
+logic queue__split_fields28 : (int,element_type) farray
+
+logic queue__split_fields29 : t
+
+axiom H : (dynamic_property1(1, to_rep1(queue__split_discrs),
+  to_rep2(first(queue__split_fields4)),
   to_rep2(last(queue__split_fields4))) and
   ((to_rep2(first(queue__split_fields4)) = 1) and
-  (to_rep2(last(queue__split_fields4)) = to_rep1(queue__split_discrs)))) and
-  ((((((to_rep(o) = 0) and ((o = o1) and ((queue__split_fields1 = o2) and
-  ((queue__split_fields2 = o3) and ((queue__split_fields3 = o4) and
-  (queue__split_fields4 = o5)))))) and
-  ((queue__split_discrs = temp___283) and ((temp___2831 = o1) and
-  ((temp___2832 = o2) and ((temp___2833 = o3) and ((temp___2834 = o4) and
-  (temp___2835 = o5))))))) and ((((result = queue__split_fields) and
+  (to_rep2(last(queue__split_fields4)) = to_rep1(queue__split_discrs))))
+
+axiom H1 : (to_rep(o) = 0)
+
+axiom H2 : (o = o1)
+
+axiom H3 : (queue__split_fields1 = o2)
+
+axiom H4 : (queue__split_fields2 = o3)
+
+axiom H5 : (queue__split_fields3 = o4)
+
+axiom H6 : (queue__split_fields4 = o5)
+
+axiom H7 : (queue__split_discrs = temp___283)
+
+axiom H8 : (temp___2831 = o1)
+
+axiom H9 : (temp___2832 = o2)
+
+axiom H10 : (temp___2833 = o3)
+
+axiom H11 : (temp___2834 = o4)
+
+axiom H12 : (temp___2835 = o5)
+
+axiom H13 : ((result = queue__split_fields) and
   ((result1 = queue__split_fields1) and ((result2 = queue__split_fields2) and
-  ((result3 = queue__split_fields3) and
-  (result4 = queue__split_fields4))))) and
-  ((temp___2831 = queue__split_fields5) and
-  ((temp___2832 = queue__split_fields6) and
-  ((temp___2833 = queue__split_fields7) and
-  ((temp___2834 = queue__split_fields8) and
-  (temp___2835 = queue__split_fields9)))))) and
-  (queue__split_discrs = temp___283))) and (((((to_rep1(o6) = 1) and
-  ((queue__split_fields5 = o7) and ((o6 = o8) and
-  ((queue__split_fields7 = o9) and ((queue__split_fields8 = o10) and
-  (queue__split_fields9 = o11)))))) and
-  ((queue__split_discrs = temp___285) and ((temp___2851 = o7) and
-  ((temp___2852 = o8) and ((temp___2853 = o9) and ((temp___2854 = o10) and
-  (temp___2855 = o11))))))) and ((((result5 = queue__split_fields5) and
+  ((result3 = queue__split_fields3) and (result4 = queue__split_fields4)))))
+
+axiom H14 : ((queue__split_fields5 = temp___2831) and
+  ((queue__split_fields6 = temp___2832) and
+  ((queue__split_fields7 = temp___2833) and
+  ((queue__split_fields8 = temp___2834) and
+  (queue__split_fields9 = temp___2835)))))
+
+axiom H15 : (queue__split_discrs = temp___283)
+
+axiom H16 : (to_rep1(o6) = 1)
+
+axiom H17 : (queue__split_fields5 = o7)
+
+axiom H18 : (o6 = o8)
+
+axiom H19 : (queue__split_fields7 = o9)
+
+axiom H20 : ((queue__split_fields8 = o10) and (queue__split_fields9 = o11))
+
+axiom H21 : (queue__split_discrs = temp___285)
+
+axiom H22 : (temp___2851 = o7)
+
+axiom H23 : (temp___2852 = o8)
+
+axiom H24 : (temp___2853 = o9)
+
+axiom H25 : (temp___2854 = o10)
+
+axiom H26 : (temp___2855 = o11)
+
+axiom H27 : ((result5 = queue__split_fields5) and
   ((result6 = queue__split_fields6) and ((result7 = queue__split_fields7) and
-  ((result8 = queue__split_fields8) and
-  (result9 = queue__split_fields9))))) and
-  ((temp___2851 = queue__split_fields10) and
-  ((temp___2852 = queue__split_fields11) and
-  ((temp___2853 = queue__split_fields12) and
-  ((temp___2854 = queue__split_fields13) and
-  (temp___2855 = queue__split_fields14)))))) and
-  (queue__split_discrs = temp___285))) and
-  ((((to_rep1(o12) = to_rep1(queue__split_discrs)) and
-  ((queue__split_fields10 = o13) and ((queue__split_fields11 = o14) and
-  ((o12 = o15) and ((queue__split_fields13 = o16) and
-  (queue__split_fields14 = o17)))))) and
-  ((queue__split_discrs = temp___287) and ((temp___2871 = o13) and
-  ((temp___2872 = o14) and ((temp___2873 = o15) and ((temp___2874 = o16) and
-  (temp___2875 = o17))))))) and ((((result10 = queue__split_fields10) and
+  ((result8 = queue__split_fields8) and (result9 = queue__split_fields9)))))
+
+axiom H28 : ((queue__split_fields10 = temp___2851) and
+  ((queue__split_fields11 = temp___2852) and
+  ((queue__split_fields12 = temp___2853) and
+  ((queue__split_fields13 = temp___2854) and
+  (queue__split_fields14 = temp___2855)))))
+
+axiom H29 : (queue__split_discrs = temp___285)
+
+axiom H30 : (to_rep1(o12) = to_rep1(queue__split_discrs))
+
+axiom H31 : (queue__split_fields10 = o13)
+
+axiom H32 : (queue__split_fields11 = o14)
+
+axiom H33 : (o12 = o15)
+
+axiom H34 : ((queue__split_fields13 = o16) and (queue__split_fields14 = o17))
+
+axiom H35 : (queue__split_discrs = temp___287)
+
+axiom H36 : (temp___2871 = o13)
+
+axiom H37 : (temp___2872 = o14)
+
+axiom H38 : (temp___2873 = o15)
+
+axiom H39 : (temp___2874 = o16)
+
+axiom H40 : (temp___2875 = o17)
+
+axiom H41 : ((result10 = queue__split_fields10) and
   ((result11 = queue__split_fields11) and
   ((result12 = queue__split_fields12) and
   ((result13 = queue__split_fields13) and
-  (result14 = queue__split_fields14))))) and
-  ((temp___2871 = queue__split_fields15) and
-  ((temp___2872 = queue__split_fields16) and
-  ((temp___2873 = queue__split_fields17) and
-  ((temp___2874 = queue__split_fields18) and
-  (temp___2875 = queue__split_fields19)))))) and
-  (queue__split_discrs = temp___287))))) and
-  (((queue__split_fields20 = queue__split_fields15) and
+  (result14 = queue__split_fields14)))))
+
+axiom H42 : ((queue__split_fields15 = temp___2871) and
+  ((queue__split_fields16 = temp___2872) and
+  ((queue__split_fields17 = temp___2873) and
+  ((queue__split_fields18 = temp___2874) and
+  (queue__split_fields19 = temp___2875)))))
+
+axiom H43 : (queue__split_discrs = temp___287)
+
+axiom H44 : ((queue__split_fields20 = queue__split_fields15) and
   ((queue__split_fields21 = queue__split_fields16) and
   ((queue__split_fields22 = queue__split_fields17) and
   ((queue__split_fields23 = queue__split_fields18) and
-  (queue__split_fields24 = queue__split_fields19))))) and
-  ((queue__split_fields25 = queue__split_fields15) and
+  (queue__split_fields24 = queue__split_fields19)))))
+
+axiom H45 : ((queue__split_fields25 = queue__split_fields15) and
   ((queue__split_fields26 = queue__split_fields16) and
   ((queue__split_fields27 = queue__split_fields17) and
   ((queue__split_fields28 = queue__split_fields18) and
-  (queue__split_fields29 = queue__split_fields19)))))))) -> (empty({
-  us_split_discrs1 = { rec__bounded_queue_v1__queue_type__max_size =
-  queue__split_discrs }; us_split_fields1 = {
-  rec__bounded_queue_v1__queue_type__count = queue__split_fields20;
-  rec__bounded_queue_v1__queue_type__front = queue__split_fields21;
-  rec__bounded_queue_v1__queue_type__rear = queue__split_fields22;
-  rec__bounded_queue_v1__queue_type__items = { elts = queue__split_fields23;
-  rt = queue__split_fields24 } } }) = true)))
+  (queue__split_fields29 = queue__split_fields19)))))
+
+ (* File "bounded_queue_v1.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (empty({ us_split_discrs1 = {
+  rec__bounded_queue_v1__queue_type__max_size = queue__split_discrs };
+  us_split_fields1 = { rec__bounded_queue_v1__queue_type__count =
+  queue__split_fields20; rec__bounded_queue_v1__queue_type__front =
+  queue__split_fields21; rec__bounded_queue_v1__queue_type__rear =
+  queue__split_fields22; rec__bounded_queue_v1__queue_type__items = { elts =
+  queue__split_fields23; rt = queue__split_fields24 } } }) = true)

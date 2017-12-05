@@ -277,14 +277,43 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic flags : (int,flagvalue) farray
+
+logic o : flagvalue
+
+logic o1 : (int,flagvalue) farray
+
+logic result : (int,flagvalue) farray
+
+logic flags1 : (int,flagvalue) farray
+
+logic flags2 : (int,flagvalue) farray
+
+logic flags3 : (int,flagvalue) farray
+
+axiom H : in_range1(flag)
+
+axiom H1 : in_range2(value)
+
+axiom H2 : (to_rep(o) = value)
+
+axiom H3 : (o1 = (flags[flag <- o]))
+
+axiom H4 : (result = flags)
+
+axiom H5 : (flags1 = o1)
+
+axiom H6 : (flags1 = flags2)
+
+axiom H7 : (flags3 = flags1)
+
+logic k : int
+
+axiom H8 : (1 <= k)
+
+axiom H9 : (k <= 10)
+
+axiom H10 : (not (k = flag))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall flags:(int,flagvalue) farray. forall o:flagvalue.
-  forall o1:(int,flagvalue) farray. forall result:(int,flagvalue) farray.
-  forall flags1:(int,flagvalue) farray. forall flags2:(int,flagvalue) farray.
-  forall flags3:(int,flagvalue) farray. ((in_range1(flag) and
-  (in_range2(value) and ((((to_rep(o) = value) and
-  (o1 = (flags[flag <- o]))) and ((result = flags) and (flags1 = o1))) and
-  ((flags1 = flags2) and (flags3 = flags1))))) ->
-  (forall k:int. (((1 <= k) and (k <= 10)) -> ((not (k = flag)) ->
-  (to_rep((flags2[k])) = to_rep((flags[k]))))))))
+goal WP_parameter_def : (to_rep((flags2[k])) = to_rep((flags[k])))

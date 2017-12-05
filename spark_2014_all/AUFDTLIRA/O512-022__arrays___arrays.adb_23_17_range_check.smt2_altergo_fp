@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -372,12 +372,29 @@ logic x1 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  (dynamic_property(1, 2147483647, to_rep(first(x1)), to_rep(last(x1))) ->
-  (((((o = count_even({ elts = x; rt = x1 })) and (in_range1(o) and
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(x1)),
+  to_rep(last(x1)))
+
+axiom H1 : ((o = count_even({ elts = x; rt = x1 })) and (in_range1(o) and
   ((o <= length({ elts = x; rt = x1 })) and ((length({ elts = x; rt = x1
-  }) = 0) -> (o = 0))))) and (((o1 = length({ elts = x; rt = x1 })) and
-  in_range(length({ elts = x; rt = x1 }))) and (o2 = (o1 - o)))) and
-  ((o3 = o2) and in_range(o2))) -> in_range1(o3))))
+  }) = 0) -> (o = 0)))))
+
+axiom H2 : ((o1 = length({ elts = x; rt = x1 })) and in_range(length({ elts =
+  x; rt = x1 })))
+
+axiom H3 : (o2 = (o1 - o))
+
+axiom H4 : ((o3 = o2) and in_range(o2))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(o3)

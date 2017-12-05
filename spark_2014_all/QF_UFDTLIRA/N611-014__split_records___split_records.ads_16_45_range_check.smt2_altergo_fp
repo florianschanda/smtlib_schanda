@@ -77,6 +77,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+logic temp___present_235 : bool
+
  (* File "split_records.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___present_235:bool. in_range(to_int(temp___present_235)))
+goal WP_parameter_def : in_range(to_int(temp___present_235))

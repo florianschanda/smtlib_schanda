@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -199,14 +199,54 @@ axiom first__def_axiom : (first = x)
 
 axiom last__def_axiom : (last = y)
 
+logic tmp_s : int
+
+logic v : int
+
+logic us : int
+
+logic temp___144 : int
+
+logic o : int
+
+logic result : int
+
+logic tmp_s1 : int
+
+logic result1 : int
+
+logic v1 : int
+
+logic tmp_s2 : int
+
+logic v2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : in_range1(x1)
+
+axiom H3 : in_range1(y1)
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(tmp_s))
+
+axiom H5 : (result = tmp_s)
+
+axiom H6 : (tmp_s1 = x1)
+
+axiom H7 : ((temp___144 = (y1 - x1)) and in_range1((y1 - x1)))
+
+axiom H8 : (result1 = v)
+
+axiom H9 : (v1 = 1)
+
+axiom H10 : (1 <= v1)
+
+axiom H11 : (v1 <= temp___144)
+
+axiom H12 : ((((- 2147483648) <= 2147483647) -> in_range1(tmp_s2)) and
+  ((1 <= v2) and (v2 <= (y1 - x1))))
+
  (* File "p.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp_s:int. forall v:int. forall temp___144:int. forall result:int.
-  forall tmp_s1:int. forall result1:int. forall v1:int. forall tmp_s2:int.
-  forall v2:int. (in_range1(x) -> (in_range1(y) -> (in_range1(x1) ->
-  (in_range1(y1) -> ((((-2147483648) <= 2147483647) -> in_range1(tmp_s)) ->
-  (((result = tmp_s) and (tmp_s1 = x1)) -> (((temp___144 = (y1 - x1)) and
-  in_range1((y1 - x1))) -> (((result1 = v) and (v1 = 1)) -> (((1 <= v1) and
-  (v1 <= temp___144)) -> (((((-2147483648) <= 2147483647) ->
-  in_range1(tmp_s2)) and ((1 <= v2) and (v2 <= (y1 - x1)))) ->
-  in_range1((tmp_s2 + 1)))))))))))))
+goal WP_parameter_def : in_range1((tmp_s2 + 1))

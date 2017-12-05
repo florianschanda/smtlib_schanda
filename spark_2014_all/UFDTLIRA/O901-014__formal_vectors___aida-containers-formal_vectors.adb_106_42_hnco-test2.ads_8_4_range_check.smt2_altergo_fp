@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -5346,7 +5346,7 @@ axiom length__post_axiom2 :
 
 type element_type1
 
-predicate in_range48(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range48(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -5568,14 +5568,22 @@ logic container54 : int
 
 logic attr__ATTRIBUTE_ADDRESS18 : int
 
- (* File "aida-containers-formal_vectors.ads", line 100, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:capacity_range1.
-  forall container__split_fields1:us_main_type.
-  forall container__split_fields2:us_private.
-  ((to_rep(container__split_discrs) = to_rep1(container__split_fields)) ->
-  (in_range1(new_item) -> (((of_int(1) = true) -> (length({
-  us_split_discrs3 = {
+logic container__split_fields : capacity_range1
+
+logic container__split_fields1 : us_main_type
+
+logic container__split_fields2 : us_private
+
+logic us : int
+
+logic hnco__test2__v_type_owner__vector_type_owner__append__2__container__fields : us_main_type
+
+axiom H :
+  (to_rep(container__split_discrs) = to_rep1(container__split_fields))
+
+axiom H1 : in_range1(new_item)
+
+axiom H2 : ((of_int(1) = true) -> (length({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity =
   container__split_discrs }; us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -5584,6 +5592,11 @@ goal WP_parameter_def :
   container__split_fields }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector =
   container__split_fields1 } }; rec__ext__ = container__split_fields2 };
-  attr__tag = container__attr__tag }) <  to_rep(container__split_discrs))) ->
-  (((to_rep(container__split_discrs) = r259s) and in_range2(r259s)) ->
-  in_range3(r259s))))))
+  attr__tag = container__attr__tag }) <  to_rep(container__split_discrs)))
+
+axiom H3 : (to_rep(container__split_discrs) = r259s)
+
+axiom H4 : in_range2(r259s)
+
+ (* File "aida-containers-formal_vectors.ads", line 100, characters 0-0 *)
+goal WP_parameter_def : in_range3(r259s)

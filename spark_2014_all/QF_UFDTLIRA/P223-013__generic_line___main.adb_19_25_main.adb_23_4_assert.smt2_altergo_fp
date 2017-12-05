@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -138,11 +138,39 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic dummy2 : int
+
+logic local : int
+
+logic result : int
+
+logic local1 : int
+
+logic result1 : int
+
+logic dummy3 : int
+
+logic dummy4 : int
+
+logic local2 : int
+
+logic dummy5 : int
+
+logic local3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(dummy2))
+
+axiom H1 : in_range1(x)
+
+axiom H2 : (result = local)
+
+axiom H3 : (local1 = 0)
+
+axiom H4 : in_range(local1)
+
+axiom H5 : (result1 = dummy2)
+
+axiom H6 : (dummy3 = x)
+
  (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dummy2:int. forall local:int. forall result:int. forall local1:int.
-  forall result1:int. forall dummy3:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(dummy2)) -> (in_range1(x) -> ((({ int__content = result } = {
-  int__content = local }) and (local1 = 0)) -> (in_range(local1) -> ((({
-  int__content = result1 } = { int__content = dummy2 }) and (dummy3 = x)) ->
-  (local1 = 0)))))))
+goal WP_parameter_def : (local1 = 0)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1045,10 +1045,33 @@ function unsigned_64__ref___projection(a: unsigned_64__ref) : unsigned_64 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic value : t
+
+logic o : t1
+
+logic o1 : t
+
+logic o2 : t1
+
+logic o3 : t1
+
+logic foo__get__data : t1
+
+logic foo__get__data1 : t1
+
+axiom H : true
+
+axiom H1 : (o = toBig(value))
+
+axiom H2 : (o1 = toSmall(o))
+
+axiom H3 : (o2 = toBig(o1))
+
+axiom H4 : (o3 = o2)
+
+axiom H5 : (o3 = foo__get__data)
+
+axiom H6 : true
+
  (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:t. forall o:t1. forall o1:t. forall o2:t1. forall o3:t1.
-  forall foo__get__data:t1. forall foo__get__data1:t1.
-  ((((((o = toBig(value)) and (o1 = toSmall(o))) and (o2 = toBig(o1))) and
-  (o3 = o2)) and (o3 = foo__get__data)) -> ule1(toBig(of_int(0)),
-  foo__get__data1)))
+goal WP_parameter_def : ule1(toBig(of_int(0)), foo__get__data1)

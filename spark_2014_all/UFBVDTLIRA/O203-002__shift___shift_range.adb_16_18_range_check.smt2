@@ -70,6 +70,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_177 Int) (temp___is_init_174 Bool) (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool)) Bool (=> (or (= temp___is_init_174 true) (<= 0 255)) (in_range temp___expr_177)))
 (declare-const o (_ BitVec 16))
 (declare-const o1 Int)
+(declare-const o2 Int)
+(assert true)
 (assert (=> (< 8 16) (= o (bvlshr x ((_ int2bv 16) 8)))))
 (assert (=> (not (< 8 16)) (= o ((_ int2bv 16) 0))))
 (assert (= o1 (bv2nat o)))

@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type item
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -271,12 +271,41 @@ tTstack_vectorSP1
 function tTstack_vectorSP1__ref___projection(a: tTstack_vectorSP1__ref) : tTstack_vectorSP1 =
   (a).tTstack_vectorSP1__content
 
+logic e : int
+
+logic stack_vector : (int,item) farray
+
+logic index : int
+
+logic o : int
+
+logic o1 : item
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic e1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(e))
+
+axiom H1 : in_range(index)
+
+axiom H2 : (not (index = 0))
+
+axiom H3 : ((1 <= index) and (index <= 100))
+
+axiom H4 : (o = index)
+
+axiom H5 : (o1 = (stack_vector[o]))
+
+axiom H6 : (o2 = to_rep(o1))
+
+axiom H7 : (result = e)
+
+axiom H8 : (e1 = o2)
+
  (* File "generic_stack.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall stack_vector:(int,item) farray. forall index:int.
-  forall o:int. forall o1:item. forall o2:int. forall result:int.
-  forall e1:int. ((((-2147483648) <= 2147483647) -> in_range1(e)) ->
-  (in_range(index) -> ((not (index = 0)) -> (((((((1 <= index) and
-  (index <= 100)) and (o = index)) and (o1 = (stack_vector[o]))) and
-  (o2 = to_rep(o1))) and ((result = e) and (e1 = o2))) ->
-  in_range((index - 1)))))))
+goal WP_parameter_def : in_range((index - 1))

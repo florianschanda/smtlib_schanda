@@ -202,6 +202,7 @@
 (declare-const o5 Bool)
 (declare-const main__null_node__assume node_enum)
 (declare-const main__null_node__assume1 Bool)
+(declare-const us Int)
 (assert (= (to_rep1 o) 0))
 (assert (= o o1))
 (assert (= usq_ o1))

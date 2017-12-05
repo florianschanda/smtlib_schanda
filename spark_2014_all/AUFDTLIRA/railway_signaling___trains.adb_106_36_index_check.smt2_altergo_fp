@@ -1813,47 +1813,468 @@ axiom moving_to_a_new_track__def_axiom :
   rec__trains__train_position__track_end = new_position5 } }) = true)) and
   (to_rep(cur_position3) = to_rep(new_position5)))))
 
- (* File "trains.ads", line 191, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall trains:(int,us_rep1) farray.
-  forall track_signals:(int,signal) farray. forall result__:int.
-  forall prev:int. forall id:int. forall o:signal.
-  forall o1:(int,signal) farray. forall temp___371:(int,signal) farray.
-  forall temp___370:int. forall temp___369:(int,signal) farray.
-  forall temp___372:(int,signal) farray. forall temp___367:int.
-  forall o2:int. forall o3:int. forall o4:signal. forall o5:int.
-  forall o6:int. forall train1:int. forall id1:int. forall o7:int.
-  forall o8:track_id. forall o9:natural. forall o10:track_id. forall o11:int.
-  forall o12:bool. forall o13:int. forall o14:track_id. forall o15:natural.
-  forall o16:track_id. forall temp___375:int. forall prev1:int.
-  forall result:bool. forall result1:bool. forall result2:int.
-  forall result__1:int. forall result3:(int,us_rep1) farray.
-  forall trains1:(int,us_rep1) farray. forall result4:(int,signal) farray.
-  forall track_signals1:(int,signal) farray. forall result5:int.
-  forall id2:int. forall result6:int. forall prev2:int. forall result7:bool.
-  forall track_signals2:(int,signal) farray.
-  forall track_signals3:(int,signal) farray. forall prev3:int.
-  forall id3:int. forall track_signals4:(int,signal) farray.
-  forall prev4:int. forall id4:int.
-  forall track_signals5:(int,signal) farray. forall prev5:int.
-  forall id5:int. forall track_signals6:(int,signal) farray.
-  forall prev6:int. forall id6:int.
-  forall track_signals7:(int,signal) farray. forall prev7:int.
-  forall id7:int. forall result8:bool. (in_range6(cur_num_trains) ->
-  (in_range6(train) -> (((0 <= 3) -> in_range9(result__)) ->
-  ((((1 <= train) and (train <= cur_num_trains)) and
+logic cur_num_trains : int
+
+logic trains : (int,us_rep1) farray
+
+logic track_signals : (int,signal) farray
+
+logic result__ : int
+
+logic prev : int
+
+logic id : int
+
+logic id1 : int
+
+logic o : signal
+
+logic o1 : (int,signal) farray
+
+logic temp___371 : (int,signal) farray
+
+logic temp___370 : int
+
+logic temp___369 : (int,signal) farray
+
+logic temp___372 : (int,signal) farray
+
+logic temp___367 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : signal
+
+logic o5 : int
+
+logic o6 : int
+
+logic j : int
+
+logic t : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : signal
+
+logic o10 : int
+
+logic o11 : int
+
+logic train1 : int
+
+logic id2 : int
+
+logic o12 : int
+
+logic o13 : track_id
+
+logic o14 : natural
+
+logic o15 : track_id
+
+logic o16 : int
+
+logic o17 : bool
+
+logic o18 : int
+
+logic o19 : track_id
+
+logic o20 : natural
+
+logic o21 : track_id
+
+logic temp___377 : int
+
+logic o22 : int
+
+logic o23 : track_id
+
+logic o24 : natural
+
+logic o25 : track_id
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : track_id
+
+logic o30 : natural
+
+logic o31 : track_id
+
+logic temp___375 : int
+
+logic o32 : int
+
+logic o33 : signal
+
+logic temp___376 : int
+
+logic o34 : signal
+
+logic o35 : (int,signal) farray
+
+logic temp___364 : (int,signal) farray
+
+logic temp___358 : int
+
+logic temp___363 : (int,signal) farray
+
+logic temp___356 : (int,signal) farray
+
+logic temp___354 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : signal
+
+logic o39 : int
+
+logic o40 : signal
+
+logic o41 : int
+
+logic o42 : (int,signal) farray
+
+logic k : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : bool
+
+logic o46 : int
+
+logic temp___359 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : signal
+
+logic o50 : int
+
+logic o51 : signal
+
+logic o52 : int
+
+logic o53 : (int,signal) farray
+
+logic trains1 : (int,us_rep1) farray
+
+logic track_signals1 : (int,signal) farray
+
+logic prev1 : int
+
+logic id3 : int
+
+logic id4 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic result__1 : int
+
+logic result2 : (int,us_rep1) farray
+
+logic trains2 : (int,us_rep1) farray
+
+logic result3 : bool
+
+logic result4 : int
+
+logic result__2 : int
+
+logic result5 : (int,us_rep1) farray
+
+logic trains3 : (int,us_rep1) farray
+
+logic result6 : (int,signal) farray
+
+logic track_signals2 : (int,signal) farray
+
+logic result7 : int
+
+logic id5 : int
+
+logic result8 : int
+
+logic prev2 : int
+
+logic result9 : bool
+
+logic track_signals3 : (int,signal) farray
+
+logic track_signals4 : (int,signal) farray
+
+logic prev3 : int
+
+logic id6 : int
+
+logic result10 : bool
+
+logic result11 : int
+
+logic id7 : int
+
+logic result12 : int
+
+logic prev4 : int
+
+logic result13 : bool
+
+logic track_signals5 : (int,signal) farray
+
+logic track_signals6 : (int,signal) farray
+
+logic prev5 : int
+
+logic id8 : int
+
+logic track_signals7 : (int,signal) farray
+
+logic prev6 : int
+
+logic id9 : int
+
+logic track_signals8 : (int,signal) farray
+
+logic prev7 : int
+
+logic id10 : int
+
+logic track_signals9 : (int,signal) farray
+
+logic prev8 : int
+
+logic id11 : int
+
+logic track_signals10 : (int,signal) farray
+
+logic prev9 : int
+
+logic id12 : int
+
+logic track_signals11 : (int,signal) farray
+
+logic prev10 : int
+
+logic id13 : int
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : int
+
+logic result__3 : int
+
+logic result18 : int
+
+logic result__4 : int
+
+logic result19 : int
+
+logic result__5 : int
+
+logic result20 : (int,us_rep1) farray
+
+logic trains4 : (int,us_rep1) farray
+
+logic result21 : (int,signal) farray
+
+logic track_signals12 : (int,signal) farray
+
+logic result22 : int
+
+logic id14 : int
+
+logic result23 : int
+
+logic prev11 : int
+
+logic result24 : bool
+
+logic result25 : (int,signal) farray
+
+logic track_signals13 : (int,signal) farray
+
+logic track_signals14 : (int,signal) farray
+
+logic prev12 : int
+
+logic id15 : int
+
+logic result26 : bool
+
+logic result27 : int
+
+logic id16 : int
+
+logic result28 : int
+
+logic prev13 : int
+
+logic result29 : bool
+
+logic result30 : (int,signal) farray
+
+logic track_signals15 : (int,signal) farray
+
+logic track_signals16 : (int,signal) farray
+
+logic prev14 : int
+
+logic id17 : int
+
+logic track_signals17 : (int,signal) farray
+
+logic prev15 : int
+
+logic id18 : int
+
+logic track_signals18 : (int,signal) farray
+
+logic prev16 : int
+
+logic id19 : int
+
+logic track_signals19 : (int,signal) farray
+
+logic prev17 : int
+
+logic id20 : int
+
+logic trains5 : (int,us_rep1) farray
+
+logic track_signals20 : (int,signal) farray
+
+logic result__6 : int
+
+logic prev18 : int
+
+logic id21 : int
+
+logic trains6 : (int,us_rep1) farray
+
+logic track_signals21 : (int,signal) farray
+
+logic result__7 : int
+
+logic prev19 : int
+
+logic id22 : int
+
+logic trains7 : (int,us_rep1) farray
+
+logic track_signals22 : (int,signal) farray
+
+logic result__8 : int
+
+logic prev20 : int
+
+logic id23 : int
+
+logic id24 : int
+
+logic trains8 : (int,us_rep1) farray
+
+logic track_signals23 : (int,signal) farray
+
+logic result__9 : int
+
+logic prev21 : int
+
+logic id25 : int
+
+logic id26 : int
+
+logic trains9 : (int,us_rep1) farray
+
+logic track_signals24 : (int,signal) farray
+
+logic result__10 : int
+
+logic prev22 : int
+
+logic id27 : int
+
+logic id28 : int
+
+logic trains10 : (int,us_rep1) farray
+
+logic track_signals25 : (int,signal) farray
+
+logic result__11 : int
+
+logic prev23 : int
+
+logic id29 : int
+
+logic id30 : int
+
+logic trains11 : (int,us_rep1) farray
+
+logic track_signals26 : (int,signal) farray
+
+logic result__12 : int
+
+logic prev24 : int
+
+logic id31 : int
+
+logic id32 : int
+
+logic trains12 : (int,us_rep1) farray
+
+logic track_signals27 : (int,signal) farray
+
+logic result__13 : int
+
+logic prev25 : int
+
+logic id33 : int
+
+logic id34 : int
+
+axiom H : in_range6(cur_num_trains)
+
+axiom H1 : in_range6(train)
+
+axiom H2 : ((0 <= 3) -> in_range9(result__))
+
+axiom H3 : (((1 <= train) and (train <= cur_num_trains)) and
   ((valid_move((trains[train]), { us_split_fields3 = {
   rec__trains__train_position__track_begin = new_position;
   rec__trains__train_position__pos_begin = new_position1;
   rec__trains__train_position__track_end = new_position2 } }) = true) and
   ((one_train_at_most_per_track(cur_num_trains, trains) = true) and
-  (safe_signaling(cur_num_trains, trains, track_signals) = true)))) ->
-  (((trains[train]) = { us_split_fields3 = {
+  (safe_signaling(cur_num_trains, trains, track_signals) = true))))
+
+axiom H4 : ((trains[train]) = { us_split_fields3 = {
   rec__trains__train_position__track_begin = cur_position;
   rec__trains__train_position__pos_begin = cur_position1;
-  rec__trains__train_position__track_end = cur_position2 } }) ->
-  (((0 <= 8) -> in_range1(prev)) ->
-  (((result = moving_inside_current_tracks({ us_split_fields3 = {
+  rec__trains__train_position__track_end = cur_position2 } })
+
+axiom H5 : ((0 <= 8) -> in_range1(prev))
+
+axiom H6 : ((result = moving_inside_current_tracks({ us_split_fields3 = {
   rec__trains__train_position__track_begin = cur_position;
   rec__trains__train_position__pos_begin = cur_position1;
   rec__trains__train_position__track_end = cur_position2 } }, {
@@ -1861,15 +2282,18 @@ goal WP_parameter_def :
   new_position; rec__trains__train_position__pos_begin = new_position1;
   rec__trains__train_position__track_end = new_position2 } })) and
   ((result = true) <-> ((to_rep(cur_position) = to_rep(new_position)) and
-  (to_rep(cur_position2) = to_rep(new_position2))))) ->
-  ((not (result = true)) -> (((result1 = moving_away_from_current_track({
-  us_split_fields3 = { rec__trains__train_position__track_begin =
-  cur_position; rec__trains__train_position__pos_begin = cur_position1;
+  (to_rep(cur_position2) = to_rep(new_position2)))))
+
+axiom H7 : (not (result = true))
+
+axiom H8 : ((result3 = moving_away_from_current_track({ us_split_fields3 = {
+  rec__trains__train_position__track_begin = cur_position;
+  rec__trains__train_position__pos_begin = cur_position1;
   rec__trains__train_position__track_end = cur_position2 } }, {
   us_split_fields3 = { rec__trains__train_position__track_begin =
   new_position; rec__trains__train_position__pos_begin = new_position1;
   rec__trains__train_position__track_end = new_position2 } })) and
-  ((result1 = true) <-> (((entering_a_track({ us_split_fields3 = {
+  ((result3 = true) <-> (((entering_a_track({ us_split_fields3 = {
   rec__trains__train_position__track_begin = cur_position;
   rec__trains__train_position__pos_begin = cur_position1;
   rec__trains__train_position__track_end = cur_position2 } }) = true) and
@@ -1877,93 +2301,162 @@ goal WP_parameter_def :
   rec__trains__train_position__track_begin = new_position;
   rec__trains__train_position__pos_begin = new_position1;
   rec__trains__train_position__track_end = new_position2 } }) = true)) and
-  (to_rep(cur_position) = to_rep(new_position2))))) -> ((result1 = true) ->
-  ((({ int__content = result2 } = { int__content = result__ }) and
-  (result__1 = 2)) -> ((({ map__content3 = result3 } = { map__content3 =
-  trains }) and (trains1 = (trains[train <- { us_split_fields3 = {
+  (to_rep(cur_position) = to_rep(new_position2)))))
+
+axiom H9 : (result3 = true)
+
+axiom H10 : (result4 = result__)
+
+axiom H11 : (result__2 = 2)
+
+axiom H12 : (result5 = trains)
+
+axiom H13 : (trains3 = (trains[train <- { us_split_fields3 = {
   rec__trains__train_position__track_begin = new_position;
   rec__trains__train_position__pos_begin = new_position1;
-  rec__trains__train_position__track_end = new_position2 } }]))) ->
-  ((previous_tracks_on_orange_or_red(cur_num_trains, trains1,
-  track_signals) = true) -> ((((to_rep5(o) = 1) and
-  (o1 = (track_signals[to_rep(cur_position2) <- o]))) and (({ map__content4 =
-  result4 } = { map__content4 = track_signals }) and
-  (track_signals1 = o1))) -> ((no_track_precedes_itself(void) = true) ->
-  ((occupied_tracks_on_red(cur_num_trains, trains1,
-  track_signals1) = true) ->
-  ((previous_tracks_on_orange_or_red(cur_num_trains, trains1,
-  track_signals1) = true) -> (((({ int__content = result5 } = {
-  int__content = id }) and (id2 = 1)) and ((((1 <= id2) and (id2 <= 3)) and
-  ((((temp___371 = track_signals1) and ((temp___370 = prev) and
-  ((temp___369 = track_signals1) and ((temp___372 = track_signals1) and
-  ((temp___367 = id2) and ((((o2 = get_previous_track({ us_split_fields3 = {
+  rec__trains__train_position__track_end = new_position2 } }]))
+
+axiom H14 : (previous_tracks_on_orange_or_red(cur_num_trains, trains3,
+  track_signals) = true)
+
+axiom H15 : (to_rep5(o) = 1)
+
+axiom H16 : (o1 = (track_signals[to_rep(cur_position2) <- o]))
+
+axiom H17 : (result6 = track_signals)
+
+axiom H18 : (track_signals2 = o1)
+
+axiom H19 : (no_track_precedes_itself(void) = true)
+
+axiom H20 : (occupied_tracks_on_red(cur_num_trains, trains3,
+  track_signals2) = true)
+
+axiom H21 : (previous_tracks_on_orange_or_red(cur_num_trains, trains3,
+  track_signals2) = true)
+
+axiom H22 : (result7 = id)
+
+axiom H23 : (id5 = 1)
+
+axiom H24 : (((1 <= id5) and (id5 <= 3)) ->
+  (((temp___371 = track_signals2) and ((temp___370 = prev) and
+  ((temp___369 = track_signals2) and ((temp___372 = track_signals2) and
+  ((temp___367 = id5) and ((((o2 = get_previous_track({ us_split_fields3 = {
   rec__trains__train_position__track_begin = cur_position;
   rec__trains__train_position__pos_begin = cur_position1;
-  rec__trains__train_position__track_end = cur_position2 } }, id2)) and
+  rec__trains__train_position__track_end = cur_position2 } }, id5)) and
   (in_range1(o2) and
-  (o2 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(cur_position2)])).us_split_fields1).rec__trains__track__from)])[id2]))))) and
-  (({ int__content = result6 } = { int__content = prev }) and
-  (prev2 = o2))) and (((((not (prev2 = 0)) and ((((((1 <= prev2) and
-  (prev2 <= 8)) and (o3 = prev2)) and (o4 = (track_signals1[o3]))) and
-  (o5 = to_rep5(o4))) and (((o5 = 1) and (result7 = true)) or
-  ((not (o5 = 1)) and (result7 = false))))) or ((prev2 = 0) and
-  (result7 = false))) and (((result7 = true) and (((o6 = prev2) and
-  in_range2(prev2)) and
-  ((((exists t:int. (((1 <= t) and (t <= cur_num_trains)) and
-     (is_previous_track((trains1[t]), o6) = true))) and
-  (to_rep5((track_signals2[o6])) = 1)) or
-  ((not (exists t:int. (((1 <= t) and (t <= cur_num_trains)) and
-        (is_previous_track((trains1[t]), o6) = true)))) and
-  (to_rep5((track_signals2[o6])) = 0))) and
+  (o2 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(cur_position2)])).us_split_fields1).rec__trains__track__from)])[id5]))))) and
+  ((result8 = prev) and (prev2 = o2))) and (((((not (prev2 = 0)) ->
+  ((((((1 <= prev2) and (prev2 <= 8)) and (o3 = prev2)) and
+  (o4 = (track_signals2[o3]))) and (o5 = to_rep5(o4))) and (((o5 = 1) ->
+  (result9 = true)) and ((not (o5 = 1)) -> (result9 = false))))) and
+  ((prev2 = 0) -> (result9 = false))) and (((result9 = true) ->
+  (((o6 = prev2) and in_range2(prev2)) and
+  ((((exists t1:int. (((1 <= t1) and (t1 <= cur_num_trains)) and
+     (is_previous_track((trains3[t1]), o6) = true))) ->
+  (to_rep5((track_signals3[o6])) = 1)) and
+  ((not (exists t1:int. (((1 <= t1) and (t1 <= cur_num_trains)) and
+        (is_previous_track((trains3[t1]), o6) = true)))) ->
+  (to_rep5((track_signals3[o6])) = 0))) and
   (forall other_track:int. (((1 <= other_track) and (other_track <= 8)) ->
   ((not (other_track = o6)) ->
-  (to_rep5((track_signals2[other_track])) = to_rep5((track_signals1[other_track]))))))))) or
-  ((not (result7 = true)) and (track_signals2 = track_signals1)))) and
-  ((forall j:int. (((1 <= j) and (j <= 8)) ->
-   (((to_rep5((temp___371[j])) = 2) ->
-   (to_rep5((track_signals3[j])) = 2)) and
-   (((to_rep5((temp___372[j])) = 1) and
-   (exists t:int. (((1 <= t) and (t <= cur_num_trains)) and
-   (is_previous_track((trains1[t]), j) = true)))) ->
-   (to_rep5((track_signals3[j])) = 1))))) and
-  (((((1 <= 3) -> in_range3(id3)) and ((0 <= 8) -> in_range1(prev3))) and
-  ((1 <= id3) and (id3 <= 3))) and (id3 = 3)))))))))) and (((id3 = id4) and
-  ((prev3 = prev4) and (track_signals3 = track_signals4))) and
-  ((id5 = id3) and ((prev5 = prev3) and
-  (track_signals5 = track_signals3))))) and ((({ int__content = id6 } = {
-  int__content = id4 }) and (({ int__content = prev6 } = { int__content =
-  prev4 }) and ({ map__content4 = track_signals6 } = { map__content4 =
-  track_signals4 }))) and ((id7 = id5) and ((prev7 = prev5) and
-  (track_signals7 = track_signals5)))))) or ((not ((1 <= id2) and
-  (id2 <= 3))) and (((id2 = id6) and (({ int__content = prev6 } = {
-  int__content = prev }) and (track_signals1 = track_signals6))) and
-  ((id7 = id2) and ((prev7 = prev1) and
-  (track_signals7 = track_signals1))))))) ->
-  ((no_track_precedes_itself(void) = true) ->
-  ((occupied_tracks_on_red(cur_num_trains, trains1,
-  track_signals6) = true) -> (((1 <= train1) and
-  (train1 <= cur_num_trains)) -> (((1 <= id1) and (id1 <= 3)) ->
-  ((((((((1 <= train1) and (train1 <= 10)) and (o7 = train1)) and ({
-  us_split_fields3 = { rec__trains__train_position__track_begin = o8;
-  rec__trains__train_position__pos_begin = o9;
-  rec__trains__train_position__track_end = o10 } } = (trains1[o7]))) and
-  ((o11 = get_previous_track({ us_split_fields3 = {
-  rec__trains__train_position__track_begin = o8;
-  rec__trains__train_position__pos_begin = o9;
-  rec__trains__train_position__track_end = o10 } }, id1)) and
-  (in_range1(o11) and
-  (o11 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(o10)])).us_split_fields1).rec__trains__track__from)])[id1])))))) and
-  (((o11 = 0) and (o12 = true)) or ((not (o11 = 0)) and (o12 = false)))) and
-  (((not (o12 = true)) and (result8 = true)) or ((o12 = true) and
-  (result8 = false)))) -> ((result8 = true) -> ((((((1 <= train1) and
-  (train1 <= 10)) and (o13 = train1)) and ({ us_split_fields3 = {
-  rec__trains__train_position__track_begin = o14;
-  rec__trains__train_position__pos_begin = o15;
-  rec__trains__train_position__track_end = o16 } } = (trains1[o13]))) and
-  ((temp___375 = get_previous_track({ us_split_fields3 = {
-  rec__trains__train_position__track_begin = o14;
-  rec__trains__train_position__pos_begin = o15;
-  rec__trains__train_position__track_end = o16 } }, id1)) and
+  (to_rep5((track_signals3[other_track])) = to_rep5((track_signals2[other_track]))))))))) and
+  ((not (result9 = true)) -> (track_signals3 = track_signals2)))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= 8)) ->
+   (((to_rep5((temp___371[j1])) = 2) ->
+   (to_rep5((track_signals4[j1])) = 2)) and
+   (((to_rep5((temp___372[j1])) = 1) and
+   (exists t1:int. (((1 <= t1) and (t1 <= cur_num_trains)) and
+   (is_previous_track((trains3[t1]), j1) = true)))) ->
+   (to_rep5((track_signals4[j1])) = 1))))) and (((((1 <= 3) ->
+  in_range3(id6)) and ((0 <= 8) -> in_range1(prev3))) and ((1 <= id6) and
+  (id6 <= 3))) and (id6 = 3)))))))))) and (((id10 = id6) and
+  ((prev7 = prev3) and (track_signals8 = track_signals4))) and
+  ((id11 = id6) and ((prev8 = prev3) and
+  (track_signals9 = track_signals4))))))
+
+axiom H25 : (((1 <= id5) and (id5 <= 3)) -> (id12 = id10))
+
+axiom H26 : (((1 <= id5) and (id5 <= 3)) -> (prev9 = prev7))
+
+axiom H27 : (((1 <= id5) and (id5 <= 3)) ->
+  (track_signals10 = track_signals8))
+
+axiom H28 : (((1 <= id5) and (id5 <= 3)) -> (id13 = id11))
+
+axiom H29 : (((1 <= id5) and (id5 <= 3)) -> (prev10 = prev8))
+
+axiom H30 : (((1 <= id5) and (id5 <= 3)) ->
+  (track_signals11 = track_signals9))
+
+axiom H31 : ((not ((1 <= id5) and (id5 <= 3))) -> (id12 = id5))
+
+axiom H32 : ((not ((1 <= id5) and (id5 <= 3))) -> (prev9 = prev))
+
+axiom H33 : ((not ((1 <= id5) and (id5 <= 3))) ->
+  (track_signals10 = track_signals2))
+
+axiom H34 : ((not ((1 <= id5) and (id5 <= 3))) -> (id13 = id5))
+
+axiom H35 : ((not ((1 <= id5) and (id5 <= 3))) -> (prev10 = prev1))
+
+axiom H36 : ((not ((1 <= id5) and (id5 <= 3))) ->
+  (track_signals11 = track_signals2))
+
+axiom H37 : (no_track_precedes_itself(void) = true)
+
+axiom H38 : (occupied_tracks_on_red(cur_num_trains, trains3,
+  track_signals10) = true)
+
+axiom H39 : (1 <= train1)
+
+axiom H40 : (train1 <= cur_num_trains)
+
+axiom H41 : (1 <= id2)
+
+axiom H42 : (id2 <= 3)
+
+axiom H43 : ((1 <= train1) and (train1 <= 10))
+
+axiom H44 : (o22 = train1)
+
+axiom H45 : ({ us_split_fields3 = {
+  rec__trains__train_position__track_begin = o23;
+  rec__trains__train_position__pos_begin = o24;
+  rec__trains__train_position__track_end = o25 } } = (trains3[o22]))
+
+axiom H46 : ((o26 = get_previous_track({ us_split_fields3 = {
+  rec__trains__train_position__track_begin = o23;
+  rec__trains__train_position__pos_begin = o24;
+  rec__trains__train_position__track_end = o25 } }, id2)) and
+  (in_range1(o26) and
+  (o26 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(o25)])).us_split_fields1).rec__trains__track__from)])[id2])))))
+
+axiom H47 : (((o26 = 0) -> (o27 = true)) and ((not (o26 = 0)) ->
+  (o27 = false)))
+
+axiom H48 : (((not (o27 = true)) -> (result15 = true)) and ((o27 = true) ->
+  (result15 = false)))
+
+axiom H49 : (result15 = true)
+
+axiom H50 : ((1 <= train1) and (train1 <= 10))
+
+axiom H51 : (o28 = train1)
+
+axiom H52 : ({ us_split_fields3 = {
+  rec__trains__train_position__track_begin = o29;
+  rec__trains__train_position__pos_begin = o30;
+  rec__trains__train_position__track_end = o31 } } = (trains3[o28]))
+
+axiom H53 : ((temp___375 = get_previous_track({ us_split_fields3 = {
+  rec__trains__train_position__track_begin = o29;
+  rec__trains__train_position__pos_begin = o30;
+  rec__trains__train_position__track_end = o31 } }, id2)) and
   (in_range1(temp___375) and
-  (temp___375 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(o16)])).us_split_fields1).rec__trains__track__from)])[id1])))))) ->
-  (1 <= temp___375)))))))))))))))))))))))))))
+  (temp___375 = to_rep3(((previous_tracks[to_rep1((((tracks[to_rep(o31)])).us_split_fields1).rec__trains__track__from)])[id2])))))
+
+ (* File "trains.ads", line 191, characters 0-0 *)
+goal WP_parameter_def : (1 <= temp___375)

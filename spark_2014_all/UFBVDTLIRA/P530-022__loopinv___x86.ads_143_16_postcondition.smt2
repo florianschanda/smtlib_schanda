@@ -101,6 +101,7 @@
 (declare-const x86__readreg32__result4 (_ BitVec 32))
 (declare-const x86__readreg32__result5 (_ BitVec 32))
 (declare-const result1 (_ BitVec 32))
+(assert true)
 (assert (= x86__readreg32__result1 x86__readreg32__result2))
 (assert (= x86__readreg32__result3 x86__readreg32__result1))
 (assert (= (mk_t__ref result) (mk_t__ref x86__readreg32__result)))

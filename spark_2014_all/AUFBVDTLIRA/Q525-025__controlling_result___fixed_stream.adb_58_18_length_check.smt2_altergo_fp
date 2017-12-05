@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -689,7 +689,7 @@ axiom coerce_axiom :
 
 type tstream_element_offsetB
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -731,7 +731,7 @@ axiom coerce_axiom1 :
 
 type stream_element_offset
 
-predicate in_range3(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range3(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq5 : int, int -> bool
@@ -1546,8 +1546,8 @@ logic fixed_stream__null_string__value__aggregate_def : t, int, int -> us_t2
 axiom def_axiom1 :
   (forall temp___264:t.
   (forall temp___265:int. forall temp___266:int.
-  ((dynamic_property((-9223372036854775808), 9223372036854775807, temp___265,
-  temp___266) ->
+  ((dynamic_property((- 9223372036854775808), 9223372036854775807,
+  temp___265, temp___266) ->
   ((to_rep1(first4((fixed_stream__null_string__value__aggregate_def(temp___264,
   temp___265, temp___266)).rt2)) = temp___265) and
   (to_rep1(last4((fixed_stream__null_string__value__aggregate_def(temp___264,
@@ -1556,19 +1556,74 @@ axiom def_axiom1 :
   (((fixed_stream__null_string__value__aggregate_def(temp___264, temp___265,
   temp___266)).elts2[temp___267]) = of_rep2(temp___264))))))
 
+logic value : (int,stream_element) farray
+
+logic fixed_stream__null_string__result : (int,stream_element) farray
+
+logic fixed_stream__null_string__result1 : t1
+
+logic temp___269 : (int,stream_element) farray
+
+logic temp___2691 : t3
+
+logic fixed_stream__null_string__value__assume : (int,stream_element) farray
+
+logic fixed_stream__null_string__value__assume1 : t2
+
+logic o : int
+
+logic o1 : int
+
+logic result : (int,stream_element) farray
+
+logic value1 : (int,stream_element) farray
+
+logic result1 : (int,stream_element) farray
+
+logic result2 : t1
+
+logic fixed_stream__null_string__result2 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result3 : t1
+
+logic fixed_stream__null_string__result4 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result5 : t1
+
+logic fixed_stream__null_string__result6 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result7 : t1
+
+logic value2 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result8 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result9 : t1
+
+logic value3 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result10 : (int,stream_element) farray
+
+logic fixed_stream__null_string__result11 : t1
+
+axiom H :
+  (to_rep1(first4((fixed_stream__null_string__value__aggregate_def(of_int(0),
+  1, to_rep(this))).rt2)) = 1)
+
+axiom H1 :
+  (to_rep1(last4((fixed_stream__null_string__value__aggregate_def(of_int(0),
+  1, to_rep(this))).rt2)) = to_rep(this))
+
+axiom H2 : ({ elts2 = temp___269; rt2 = temp___2691
+  } = fixed_stream__null_string__value__aggregate_def(of_int(0), 1,
+  to_rep(this)))
+
  (* File "a-stream.ads", line 54, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___269:(int,stream_element) farray. forall temp___2691:t3.
-  (((to_rep1(first4((fixed_stream__null_string__value__aggregate_def(of_int(0),
-  1, to_rep(this))).rt2)) = 1) and
-  ((to_rep1(last4((fixed_stream__null_string__value__aggregate_def(of_int(0),
-  1, to_rep(this))).rt2)) = to_rep(this)) and ({ elts2 = temp___269; rt2 =
-  temp___2691 } = fixed_stream__null_string__value__aggregate_def(of_int(0),
-  1, to_rep(this))))) ->
   (((to_rep1(first4(temp___2691)) <= to_rep1(last4(temp___2691))) ->
   (((1 <= to_rep(this)) ->
   (((to_rep1(last4(temp___2691)) - to_rep1(first4(temp___2691))) + 1) = ((to_rep(this) - 1) + 1))) and
   ((not (1 <= to_rep(this))) ->
   (((to_rep1(last4(temp___2691)) - to_rep1(first4(temp___2691))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___2691)) <= to_rep1(last4(temp___2691)))) ->
-  ((1 <= to_rep(this)) -> (0 = ((to_rep(this) - 1) + 1)))))))
+  ((1 <= to_rep(this)) -> (0 = ((to_rep(this) - 1) + 1)))))

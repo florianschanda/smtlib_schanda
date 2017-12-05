@@ -80,6 +80,8 @@
 (declare-const amount Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
+(declare-const o1 (_ BitVec 8))
+(declare-const o2 (_ BitVec 8))
 (assert (in_range1 value))
 (assert (in_range amount))
 (assert (<= amount 4))

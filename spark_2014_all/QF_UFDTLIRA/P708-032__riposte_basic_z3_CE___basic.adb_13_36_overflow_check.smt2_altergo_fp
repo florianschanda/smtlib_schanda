@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,16 +113,41 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic basic__add_i__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic basic__add_i__result1 : int
+
+logic basic__add_i__result2 : int
+
+logic basic__add_i__result3 : int
+
+logic basic__add_i__result4 : int
+
+logic basic__add_i__result5 : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (basic__add_i__result1 = basic__add_i__result2)
+
+axiom H3 : (basic__add_i__result3 = basic__add_i__result1)
+
+axiom H4 : ((o = (a + b)) and in_range((a + b)))
+
+axiom H5 : (result = basic__add_i__result)
+
+axiom H6 : (basic__add_i__result1 = o)
+
+axiom H7 : (basic__add_i__result4 = basic__add_i__result2)
+
+axiom H8 : (basic__add_i__result5 = basic__add_i__result3)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall basic__add_i__result:int. forall o:int. forall result:int.
-  forall basic__add_i__result1:int. forall basic__add_i__result2:int.
-  forall basic__add_i__result3:int. forall basic__add_i__result4:int.
-  forall basic__add_i__result5:int. (in_range(a) -> (in_range(b) ->
-  (((((basic__add_i__result1 = basic__add_i__result2) and
-  (basic__add_i__result3 = basic__add_i__result1)) and (((o = (a + b)) and
-  in_range((a + b))) and (({ int__content = result } = { int__content =
-  basic__add_i__result }) and (basic__add_i__result1 = o)))) and (({
-  int__content = basic__add_i__result4 } = { int__content =
-  basic__add_i__result2 }) and
-  (basic__add_i__result5 = basic__add_i__result3))) -> in_range((a + b))))))
+goal WP_parameter_def : in_range((a + b))

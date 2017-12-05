@@ -1169,7 +1169,7 @@ axiom bool_eq_rev :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1430,16 +1430,16 @@ axiom def_axiom5 :
   forall temp___251:int. forall temp___252:int. forall temp___253:int.
   ((((((get(temp___240(temp___242, temp___243, temp___244, temp___245,
   temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
-  temp___252, temp___253), (-1), 1) = of_rep1(temp___242)) and
+  temp___252, temp___253), (- 1), 1) = of_rep1(temp___242)) and
   (get(temp___240(temp___242, temp___243, temp___244, temp___245, temp___246,
   temp___247, temp___248, temp___249, temp___250, temp___251, temp___252,
-  temp___253), (-1), 2) = of_rep1(temp___243))) and
+  temp___253), (- 1), 2) = of_rep1(temp___243))) and
   (get(temp___240(temp___242, temp___243, temp___244, temp___245, temp___246,
   temp___247, temp___248, temp___249, temp___250, temp___251, temp___252,
-  temp___253), (-1), 3) = of_rep1(temp___244))) and
+  temp___253), (- 1), 3) = of_rep1(temp___244))) and
   (get(temp___240(temp___242, temp___243, temp___244, temp___245, temp___246,
   temp___247, temp___248, temp___249, temp___250, temp___251, temp___252,
-  temp___253), (-1), 4) = of_rep1(temp___245))) and
+  temp___253), (- 1), 4) = of_rep1(temp___245))) and
   ((((get(temp___240(temp___242, temp___243, temp___244, temp___245,
   temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
   temp___252, temp___253), 0, 1) = of_rep1(temp___246)) and
@@ -1475,16 +1475,16 @@ axiom def_axiom6 :
   forall temp___267:int. forall temp___268:int. forall temp___269:int.
   ((((((get(temp___256(temp___258, temp___259, temp___260, temp___261,
   temp___262, temp___263, temp___264, temp___265, temp___266, temp___267,
-  temp___268, temp___269), (-1), 1) = of_rep1(temp___258)) and
+  temp___268, temp___269), (- 1), 1) = of_rep1(temp___258)) and
   (get(temp___256(temp___258, temp___259, temp___260, temp___261, temp___262,
   temp___263, temp___264, temp___265, temp___266, temp___267, temp___268,
-  temp___269), (-1), 2) = of_rep1(temp___259))) and
+  temp___269), (- 1), 2) = of_rep1(temp___259))) and
   (get(temp___256(temp___258, temp___259, temp___260, temp___261, temp___262,
   temp___263, temp___264, temp___265, temp___266, temp___267, temp___268,
-  temp___269), (-1), 3) = of_rep1(temp___260))) and
+  temp___269), (- 1), 3) = of_rep1(temp___260))) and
   (get(temp___256(temp___258, temp___259, temp___260, temp___261, temp___262,
   temp___263, temp___264, temp___265, temp___266, temp___267, temp___268,
-  temp___269), (-1), 4) = of_rep1(temp___261))) and
+  temp___269), (- 1), 4) = of_rep1(temp___261))) and
   ((((get(temp___256(temp___258, temp___259, temp___260, temp___261,
   temp___262, temp___263, temp___264, temp___265, temp___266, temp___267,
   temp___268, temp___269), 0, 1) = of_rep1(temp___262)) and
@@ -1527,7 +1527,7 @@ axiom def_axiom7 :
   ((not (temp___280 = 4)) -> (((1 <= temp___280) and (temp___280 <= 3)) ->
   (get(temp___272(temp___274, temp___275, temp___276, temp___277,
   temp___278), temp___279, temp___280) = of_rep1(temp___275)))))) and
-  ((not (temp___279 = 0)) -> ((temp___279 = (-1)) ->
+  ((not (temp___279 = 0)) -> ((temp___279 = (- 1)) ->
   (get(temp___272(temp___274, temp___275, temp___276, temp___277,
   temp___278), temp___279, temp___280) = of_rep1(temp___274)))))))))
 
@@ -1545,15 +1545,119 @@ axiom def_axiom9 :
   (forall temp___289:int. forall temp___290:int. (get(temp___286(temp___288),
   temp___289, temp___290) = of_rep1(temp___288))))
 
+logic small : (int,float1) farray
+
+logic a : t
+
+logic b : t
+
+logic c14b : t
+
+logic approx : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic temp___235 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : bool
+
+logic o13 : t
+
+logic result : t
+
+logic a1 : t
+
+logic result1 : t
+
+logic b1 : t
+
+logic result2 : (int,float1) farray
+
+logic small1 : (int,float1) farray
+
+logic result3 : (int,float1) farray
+
+logic small2 : (int,float1) farray
+
+logic result4 : (int,float1) farray
+
+logic small3 : (int,float1) farray
+
+logic result5 : (int,float1) farray
+
+logic small4 : (int,float1) farray
+
+logic result6 : t
+
+logic approx1 : t
+
+logic result7 : bool
+
+logic approx2 : t
+
+logic result8 : t
+
+logic approx3 : t
+
+logic result9 : bool
+
+logic approx4 : t
+
+logic approx5 : t
+
+logic approx6 : t
+
+logic approx7 : t
+
+logic result10 : t
+
+logic c14b1 : t
+
+axiom H : (result = a)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 23.3999996185302734375))
 
+axiom H1 : (a1 = fliteral1)
+
+axiom H2 : tqtisFinite(a1)
+
+axiom H3 : (result1 = b)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 19.8999996185302734375))
+
+axiom H4 : (b1 = fliteral2)
+
+axiom H5 : tqtisFinite(b1)
+
+axiom H6 : (result2 = small)
 
 logic fliteral3 : t
 
@@ -1580,38 +1684,51 @@ logic fliteral7 : t
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 5.0))
 
+axiom H7 : (small1 = temp___208(fliteral3, fliteral, fliteral4, fliteral5,
+  fliteral6, fliteral7, fliteral6, fliteral5, fliteral4, fliteral))
+
+axiom H8 : (result3 = small1)
+
+axiom H9 : (small2 = temp___221(fliteral3))
+
+axiom H10 : (result4 = small2)
+
+axiom H11 : (small3 = temp___225(fliteral3, fliteral))
+
+axiom H12 : (result5 = small3)
+
+axiom H13 : (small4 = temp___230(fliteral3, fliteral))
+
+axiom H14 : (b1 = c13b)
+
+axiom H15 : tqtisFinite(c13b)
+
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 340282346638528859811704183484516925440.0))
+
+axiom H16 : (le(neg(fliteral8), fliteral8) -> tqtisFinite(c14b))
+
+axiom H17 : (le(neg(fliteral8), fliteral8) -> tqtisFinite(approx))
 
 logic fliteral9 : t
 
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 0.0000009999999974752427078783512115478515625))
 
+axiom H18 : (mul(NearestTiesToEven, fliteral9, c13b) = tolerance)
+
+axiom H19 : tqtisFinite(tolerance)
+
+axiom H20 : (result6 = approx)
+
+axiom H21 : (approx1 = div(NearestTiesToEven, c13b, fliteral4))
+
+axiom H22 : ((o = mul(NearestTiesToEven, approx1, approx1)) and
+  tqtisFinite(mul(NearestTiesToEven, approx1, approx1)))
+
+axiom H23 : (o1 = sub(NearestTiesToEven, c13b, o))
+
  (* File "aggregates.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall small:(int,float1) farray. forall a:t. forall b:t. forall c14b:t.
-  forall approx:t. forall o:t. forall o1:t. forall result:t. forall a1:t.
-  forall result1:t. forall b1:t. forall result2:(int,float1) farray.
-  forall small1:(int,float1) farray. forall result3:(int,float1) farray.
-  forall small2:(int,float1) farray. forall result4:(int,float1) farray.
-  forall small3:(int,float1) farray. forall result5:(int,float1) farray.
-  forall small4:(int,float1) farray. forall result6:t. forall approx1:t.
-  (((result = a) and (a1 = fliteral1)) -> (tqtisFinite(a1) ->
-  (((result1 = b) and (b1 = fliteral2)) -> (tqtisFinite(b1) ->
-  (((result2 = small) and (small1 = temp___208(fliteral3, fliteral,
-  fliteral4, fliteral5, fliteral6, fliteral7, fliteral6, fliteral5,
-  fliteral4, fliteral))) -> (((result3 = small1) and
-  (small2 = temp___221(fliteral3))) -> (((result4 = small2) and
-  (small3 = temp___225(fliteral3, fliteral))) -> (((result5 = small3) and
-  (small4 = temp___230(fliteral3, fliteral))) -> (((b1 = c13b) and
-  tqtisFinite(c13b)) -> ((le(neg(fliteral8), fliteral8) ->
-  tqtisFinite(c14b)) -> ((le(neg(fliteral8), fliteral8) ->
-  tqtisFinite(approx)) -> ((mul(NearestTiesToEven, fliteral9,
-  c13b) = tolerance) -> (tqtisFinite(tolerance) -> ((({ t__content = result6
-  } = { t__content = approx }) and (approx1 = div(NearestTiesToEven, c13b,
-  fliteral4))) -> ((((o = mul(NearestTiesToEven, approx1, approx1)) and
-  tqtisFinite(mul(NearestTiesToEven, approx1, approx1))) and
-  (o1 = sub(NearestTiesToEven, c13b, o))) -> tqtisFinite(o1)))))))))))))))))
+goal WP_parameter_def : tqtisFinite(o1)

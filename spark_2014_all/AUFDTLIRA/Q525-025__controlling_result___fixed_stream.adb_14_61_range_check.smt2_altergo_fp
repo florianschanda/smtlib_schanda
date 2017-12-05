@@ -107,7 +107,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -782,8 +782,121 @@ axiom def_axiom :
   (forall temp___289:int. (((temp___284(temp___286, temp___287,
   temp___288)).elts1[temp___289]) = of_rep(temp___286)))))
 
+logic change : (int,character) farray
+
+logic len : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___291 : (int,character) farray
+
+logic temp___2911 : t1
+
+logic temp___292 : (int,character) farray
+
+logic temp___2921 : t
+
+logic temp___293 : (int,character) farray
+
+logic temp___2931 : t
+
+logic o5 : (int,character) farray
+
+logic fixed_stream__trim_string__R5b__assume : int
+
+logic fixed_stream__trim_string__R8b__assume : int
+
+logic o6 : (int,character) farray
+
+logic temp___295 : (int,character) farray
+
+logic temp___2951 : t3
+
+logic temp___296 : (int,character) farray
+
+logic temp___2961 : t2
+
+logic o7 : (int,character) farray
+
+logic temp___298 : (int,character) farray
+
+logic temp___2981 : t2
+
+logic temp___299 : (int,character) farray
+
+logic temp___2991 : t2
+
+logic o8 : (int,character) farray
+
+logic i : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic temp___301 : int
+
+logic o11 : int
+
+logic o12 : character
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : character
+
+logic o21 : int
+
+logic o22 : bool
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,character) farray
+
+logic change1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic change2 : (int,character) farray
+
+logic change3 : (int,character) farray
+
+logic len2 : int
+
+logic change4 : (int,character) farray
+
+logic len3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(change__first),
+  to_rep1(change__last))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(new_val1)),
+  to_rep1(last(new_val1)))
+
  (* File "fixed_stream.ads", line 38, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(change__first), to_rep1(change__last)) -> (dynamic_property(1,
-  2147483647, to_rep1(first(new_val1)), to_rep1(last(new_val1))) ->
-  in_range1(length({ elts = new_val; rt = new_val1 }))))
+goal WP_parameter_def : in_range1(length({ elts = new_val; rt = new_val1 }))

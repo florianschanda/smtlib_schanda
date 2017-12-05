@@ -139,7 +139,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -434,6 +434,23 @@ axiom def_axiom1 :
 
 axiom first__def_axiom : (first = one)
 
+logic a : map
+
+logic c : map
+
+logic result : map
+
+logic a1 : map
+
+logic result1 : map
+
+logic c1 : map
+
+axiom H : in_range1(one)
+
+axiom H1 : (one <= 1)
+
+axiom H2 : (3 <= 4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(one) -> ((one <= 1) -> ((3 <= 4) ->
-  (first <= 3))))
+goal WP_parameter_def : (first <= 3)

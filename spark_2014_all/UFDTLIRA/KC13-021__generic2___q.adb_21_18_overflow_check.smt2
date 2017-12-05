@@ -229,6 +229,7 @@
 (declare-const temp___1841 t2)
 (declare-const temp___1842 t31)
 (declare-const temp___1843 integer)
+(declare-const o Int)
 (declare-const result t1)
 (declare-const result1 Bool)
 (declare-const result2 t3)

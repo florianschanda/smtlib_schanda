@@ -66,6 +66,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range2 temp___expr_15)))
 (declare-const e Int)
+(declare-const us Int)
 (assert (in_range1 c))
 (assert (=> (<= first 100) (dynamic_property first 100 e)))
 (assert (not (dynamic_property first 100 c)))

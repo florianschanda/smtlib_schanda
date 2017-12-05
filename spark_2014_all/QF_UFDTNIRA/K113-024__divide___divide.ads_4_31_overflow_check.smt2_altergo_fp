@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -145,32 +145,140 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic q : int
+
+logic r : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : int
+
+logic q1 : int
+
+logic result1 : int
+
+logic r1 : int
+
+logic q2 : int
+
+logic r2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic q3 : int
+
+logic result4 : int
+
+logic r3 : int
+
+logic q4 : int
+
+logic r4 : int
+
+logic q5 : int
+
+logic r5 : int
+
+logic q6 : int
+
+logic r6 : int
+
+logic q7 : int
+
+logic r7 : int
+
+logic q8 : int
+
+logic r8 : int
+
+logic q9 : int
+
+logic r9 : int
+
+logic q10 : int
+
+logic r10 : int
+
+logic q11 : int
+
+logic r11 : int
+
+axiom H : in_range1(m)
+
+axiom H1 : in_range1(n)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(q))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(r))
+
+axiom H4 : ((0 <= m) and (0 <  n))
+
+axiom H5 : (result = q)
+
+axiom H6 : (q1 = 0)
+
+axiom H7 : (result1 = r)
+
+axiom H8 : (r1 = m)
+
+axiom H9 : ((n <= r1) -> (((temp___133 = r1) and ((temp___132 = q1) and
+  ((((q2 <= (m - r2)) and (m = ((q2 * n) + r2))) and (0 <= r2)) and
+  ((((((- 2147483648) <= 2147483647) -> in_range1(q2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(r2))) and (n <= r2)) and
+  ((((o4 = (q2 + 1)) and in_range1((q2 + 1))) and ((q2 = result3) and
+  (q3 = o4))) and ((((o5 = (r2 - n)) and in_range1((r2 - n))) and
+  ((r2 = result4) and (r3 = o5))) and (not (n <= r3)))))))) and
+  (((r3 = r6) and (q3 = q6)) and ((r7 = r3) and (q7 = q3)))))
+
+axiom H10 : ((n <= r1) -> (r8 = r6))
+
+axiom H11 : ((n <= r1) -> (q8 = q6))
+
+axiom H12 : ((n <= r1) -> (r9 = r7))
+
+axiom H13 : ((n <= r1) -> (q9 = q7))
+
+axiom H14 : ((not (n <= r1)) -> (r1 = r8))
+
+axiom H15 : ((not (n <= r1)) -> (q1 = q8))
+
+axiom H16 : ((not (n <= r1)) -> (r9 = r1))
+
+axiom H17 : ((not (n <= r1)) -> (q9 = q1))
+
+axiom H18 : (r10 = r8)
+
+axiom H19 : (q10 = q8)
+
+axiom H20 : (r11 = r9)
+
+axiom H21 : (q11 = q9)
+
+axiom H22 : ((o6 = (q10 * n)) and in_range1((q10 * n)))
+
+axiom H23 : (o7 = (o6 + r10))
+
  (* File "divide.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall q:int. forall r:int. forall temp___133:int. forall temp___132:int.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall result:int. forall q1:int. forall result1:int. forall r1:int.
-  forall q2:int. forall r2:int. forall result2:int. forall q3:int.
-  forall result3:int. forall r3:int. forall q4:int. forall r4:int.
-  forall q5:int. forall r5:int. forall q6:int. forall r6:int. forall q7:int.
-  forall r7:int. forall q8:int. forall r8:int. forall q9:int. forall r9:int.
-  (in_range1(m) -> (in_range1(n) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(q)) -> ((((-2147483648) <= 2147483647) -> in_range1(r)) ->
-  (((0 <= m) and (0 <  n)) -> ((((({ int__content = result } = {
-  int__content = q }) and (q1 = 0)) and ((({ int__content = result1 } = {
-  int__content = r }) and (r1 = m)) and (((n <= r1) and
-  ((((temp___133 = r1) and ((temp___132 = q1) and ((((q2 <= (m - r2)) and
-  (m = ((q2 * n) + r2))) and (0 <= r2)) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(q2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(r2))) and (n <= r2)) and
-  ((((o = (q2 + 1)) and in_range1((q2 + 1))) and ((q2 = result2) and
-  (q3 = o))) and ((((o1 = (r2 - n)) and in_range1((r2 - n))) and
-  ((r2 = result3) and (r3 = o1))) and (not (n <= r3)))))))) and
-  (((r3 = r4) and (q3 = q4)) and ((r5 = r3) and (q5 = q3)))) and ((({
-  int__content = r6 } = { int__content = r4 }) and ({ int__content = q6 } = {
-  int__content = q4 })) and ((r7 = r5) and (q7 = q5))))) or
-  ((not (n <= r1)) and (((r1 = r6) and (q1 = q6)) and ((r7 = r1) and
-  (q7 = q1))))))) and ((({ int__content = r8 } = { int__content = r6 }) and
-  ({ int__content = q8 } = { int__content = q6 })) and ((r9 = r7) and
-  (q9 = q7)))) -> ((((o2 = (q8 * n)) and in_range1((q8 * n))) and
-  (o3 = (o2 + r8))) -> in_range1(o3)))))))))
+goal WP_parameter_def : in_range1(o7)

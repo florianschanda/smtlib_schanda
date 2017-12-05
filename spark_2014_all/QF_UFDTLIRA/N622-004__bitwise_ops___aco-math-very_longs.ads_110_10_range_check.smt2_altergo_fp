@@ -105,8 +105,11 @@ type digit_index_type__ref = { digit_index_type__content : digit_index_type
 function digit_index_type__ref___projection(a: digit_index_type__ref) : digit_index_type =
   (a).digit_index_type__content
 
+logic temp___octet_length_1023 : int
+
+axiom H : in_range(temp___octet_length_1023)
+
+axiom H1 : (1 <= temp___octet_length_1023)
+
  (* File "aco-math-very_longs.ads", line 75, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___octet_length_1023:int.
-  (in_range(temp___octet_length_1023) -> ((1 <= temp___octet_length_1023) ->
-  (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

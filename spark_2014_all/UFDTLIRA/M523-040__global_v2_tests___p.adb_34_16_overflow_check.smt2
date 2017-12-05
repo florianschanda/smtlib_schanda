@@ -41,6 +41,7 @@
 (assert (forall ((p__nest__gn Int)) (! (=> (dynamic_invariant p__nest__gn true true true) (dynamic_invariant (foo p__nest__gn) true false true)) :pattern ((foo p__nest__gn)))))
 (declare-const g Int)
 (declare-const gn Int)
+(declare-const o Int)
 (assert (in_range g))
 (assert (in_range gn))
 (assert (in_range x))

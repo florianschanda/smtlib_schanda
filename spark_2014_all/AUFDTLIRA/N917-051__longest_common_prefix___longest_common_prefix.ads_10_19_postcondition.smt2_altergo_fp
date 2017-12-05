@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -332,81 +332,261 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall l:int.
-  forall longest_common_prefix__lcp__result:int. forall temp___159:int.
-  forall o:int. forall o1:integer. forall temp___160:int. forall o2:int.
-  forall o3:integer. forall o4:int. forall o5:int. forall o6:int.
-  forall o7:int. forall temp___155:int. forall temp___158:int. forall o8:int.
-  forall temp___1591:int. forall o9:int. forall o10:integer.
-  forall temp___1601:int. forall o11:int. forall o12:integer. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:bool.
-  forall result:int. forall l1:int. forall result1:bool. forall result2:bool.
-  forall result3:bool. forall l2:int. forall temp___1581:int.
-  forall result4:int. forall temp___1582:int. forall result5:int.
-  forall l3:int. forall result6:bool. forall result7:bool.
-  forall result8:bool. forall l4:int. forall l5:int. forall l6:int.
-  forall l7:int. forall result9:int.
-  forall longest_common_prefix__lcp__result1:int.
-  forall longest_common_prefix__lcp__result2:int.
-  forall longest_common_prefix__lcp__result3:int. forall l8:int.
-  forall longest_common_prefix__lcp__result4:int. forall l9:int.
-  forall longest_common_prefix__lcp__result5:int.
-  (forall result10:int. ((in_range3(x) and (in_range3(y) and ((((1 <= x) and
-  (x <= 1000)) and ((1 <= y) and (y <= 1000))) and (((((0 <= 2147483647) ->
-  in_range2(l)) and ((({ int__content = result } = { int__content = l }) and
-  (l1 = 0)) and (((((((o7 = (x + l1)) and in_range1((x + l1))) and
-  (((o7 <= 1000) and (result3 = true)) or ((not (o7 <= 1000)) and
-  (result3 = false)))) and (((result3 = true) and (((o6 = (y + l1)) and
-  in_range1((y + l1))) and (((o6 <= 1000) and (result2 = true)) or
-  ((not (o6 <= 1000)) and (result2 = false))))) or
-  ((not (result3 = true)) and (result2 = false)))) and (((result2 = true) and
-  ((((((temp___160 = (y + l1)) and in_range1((y + l1))) and
-  (((1 <= temp___160) and (temp___160 <= 1000)) and (o2 = temp___160))) and
-  (o3 = (a[o2]))) and (o4 = to_rep(o3))) and ((((((temp___159 = (x + l1)) and
-  in_range1((x + l1))) and (((1 <= temp___159) and (temp___159 <= 1000)) and
-  (o = temp___159))) and (o1 = (a[o]))) and (o5 = to_rep(o1))) and
-  (((o5 = o4) and (result1 = true)) or ((not (o5 = o4)) and
-  (result1 = false)))))) or ((not (result2 = true)) and
-  (result1 = false)))) and (((result1 = true) and ((((temp___155 = l1) and
+logic a : (int,integer) farray
+
+logic l : int
+
+logic longest_common_prefix__lcp__result : int
+
+logic temp___159 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic temp___160 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___155 : int
+
+logic temp___158 : int
+
+logic k : int
+
+logic temp___156 : int
+
+logic temp___157 : int
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : int
+
+logic temp___1591 : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic temp___1601 : int
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : bool
+
+logic i : int
+
+logic temp___161 : int
+
+logic temp___162 : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic result : int
+
+logic l1 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic l2 : int
+
+logic temp___1581 : int
+
+logic result4 : int
+
+logic temp___1582 : int
+
+logic result5 : int
+
+logic l3 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic l4 : int
+
+logic temp___1583 : int
+
+logic l5 : int
+
+logic temp___1584 : int
+
+logic l6 : int
+
+logic l7 : int
+
+logic l8 : int
+
+logic l9 : int
+
+logic result9 : int
+
+logic longest_common_prefix__lcp__result1 : int
+
+logic longest_common_prefix__lcp__result2 : int
+
+logic longest_common_prefix__lcp__result3 : int
+
+logic l10 : int
+
+logic longest_common_prefix__lcp__result4 : int
+
+logic l11 : int
+
+logic longest_common_prefix__lcp__result5 : int
+
+logic result10 : int
+
+axiom H : in_range3(x)
+
+axiom H1 : in_range3(y)
+
+axiom H2 : (((1 <= x) and (x <= 1000)) and ((1 <= y) and (y <= 1000)))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H4 : (result = l)
+
+axiom H5 : (l1 = 0)
+
+axiom H6 : ((o7 = (x + l1)) and in_range1((x + l1)))
+
+axiom H7 : (((o7 <= 1000) -> (result3 = true)) and ((not (o7 <= 1000)) ->
+  (result3 = false)))
+
+axiom H8 : ((result3 = true) -> ((o6 = (y + l1)) and in_range1((y + l1))))
+
+axiom H9 : ((result3 = true) -> (((o6 <= 1000) -> (result2 = true)) and
+  ((not (o6 <= 1000)) -> (result2 = false))))
+
+axiom H10 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H11 : ((result2 = true) -> ((temp___160 = (y + l1)) and
+  in_range1((y + l1))))
+
+axiom H12 : ((result2 = true) -> ((1 <= temp___160) and
+  (temp___160 <= 1000)))
+
+axiom H13 : ((result2 = true) -> (o2 = temp___160))
+
+axiom H14 : ((result2 = true) -> (o3 = (a[o2])))
+
+axiom H15 : ((result2 = true) -> (o4 = to_rep(o3)))
+
+axiom H16 : ((result2 = true) -> ((temp___159 = (x + l1)) and
+  in_range1((x + l1))))
+
+axiom H17 : ((result2 = true) -> ((1 <= temp___159) and
+  (temp___159 <= 1000)))
+
+axiom H18 : ((result2 = true) -> (o = temp___159))
+
+axiom H19 : ((result2 = true) -> (o1 = (a[o])))
+
+axiom H20 : ((result2 = true) -> (o5 = to_rep(o1)))
+
+axiom H21 : ((result2 = true) -> (((o5 = o4) -> (result1 = true)) and
+  ((not (o5 = o4)) -> (result1 = false))))
+
+axiom H22 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H23 : ((result1 = true) -> (((temp___155 = l1) and
   ((0 = temp___158) and
-  ((forall k:int. (((0 <= k) and (k <= (l2 - 1))) ->
-   (to_rep((a[(x + k)])) = to_rep((a[(y + k)]))))) and
+  ((forall k1:int. (((0 <= k1) and (k1 <= (l2 - 1))) ->
+   (to_rep((a[(x + k1)])) = to_rep((a[(y + k1)]))))) and
   ((((0 <= 2147483647) -> in_range2(l2)) and ((((x + l2) <= 1000) and
   ((y + l2) <= 1000)) and
   (to_rep((a[(x + l2)])) = to_rep((a[(y + l2)]))))) and
   (((temp___1581 = result4) and (temp___1582 = l2)) and
-  ((((o8 = (l2 + 1)) and in_range1((l2 + 1))) and ((l2 = result5) and
-  (l3 = o8))) and (((((((o16 = (x + l3)) and in_range1((x + l3))) and
-  (((o16 <= 1000) and (result8 = true)) or ((not (o16 <= 1000)) and
-  (result8 = false)))) and (((result8 = true) and (((o15 = (y + l3)) and
-  in_range1((y + l3))) and (((o15 <= 1000) and (result7 = true)) or
-  ((not (o15 <= 1000)) and (result7 = false))))) or
-  ((not (result8 = true)) and (result7 = false)))) and (((result7 = true) and
+  ((((o11 = (l2 + 1)) and in_range1((l2 + 1))) and ((l2 = result5) and
+  (l3 = o11))) and (((((((o19 = (x + l3)) and in_range1((x + l3))) and
+  (((o19 <= 1000) -> (result8 = true)) and ((not (o19 <= 1000)) ->
+  (result8 = false)))) and (((result8 = true) -> (((o18 = (y + l3)) and
+  in_range1((y + l3))) and (((o18 <= 1000) -> (result7 = true)) and
+  ((not (o18 <= 1000)) -> (result7 = false))))) and
+  ((not (result8 = true)) -> (result7 = false)))) and (((result7 = true) ->
   ((((((temp___1601 = (y + l3)) and in_range1((y + l3))) and
   (((1 <= temp___1601) and (temp___1601 <= 1000)) and
-  (o11 = temp___1601))) and (o12 = (a[o11]))) and (o13 = to_rep(o12))) and
+  (o14 = temp___1601))) and (o15 = (a[o14]))) and (o16 = to_rep(o15))) and
   ((((((temp___1591 = (x + l3)) and in_range1((x + l3))) and
   (((1 <= temp___1591) and (temp___1591 <= 1000)) and
-  (o9 = temp___1591))) and (o10 = (a[o9]))) and (o14 = to_rep(o10))) and
-  (((o14 = o13) and (o17 = true)) or ((not (o14 = o13)) and
-  (o17 = false)))))) or ((not (result7 = true)) and (o17 = false)))) and
-  (((not (o17 = true)) and (result6 = true)) or ((o17 = true) and
-  (result6 = false)))) and (result6 = true)))))))) and ((l3 = l4) and
-  (l5 = l3))) and (({ int__content = l6 } = { int__content = l4 }) and
-  (l7 = l5)))) or ((not (result1 = true)) and ((l1 = l6) and
-  (l7 = l1))))) and
-  (((longest_common_prefix__lcp__result1 = longest_common_prefix__lcp__result2) and
-  (longest_common_prefix__lcp__result3 = longest_common_prefix__lcp__result1)) and
-  (({ int__content = result9 } = { int__content =
-  longest_common_prefix__lcp__result }) and
-  (longest_common_prefix__lcp__result1 = l6)))))) and ((({ int__content =
-  longest_common_prefix__lcp__result4 } = { int__content =
-  longest_common_prefix__lcp__result2 }) and ({ int__content = l8 } = {
-  int__content = l6 })) and
-  ((longest_common_prefix__lcp__result5 = longest_common_prefix__lcp__result3) and
-  (l9 = l7)))) and (result10 = longest_common_prefix__lcp__result4))))) ->
-  (forall i:int. (((0 <= i) and
-  (i <= (longest_common_prefix__lcp__result4 - 1))) ->
-  (to_rep((a[(x + i)])) = to_rep((a[(y + i)]))))))))
+  (o12 = temp___1591))) and (o13 = (a[o12]))) and (o17 = to_rep(o13))) and
+  (((o17 = o16) -> (o20 = true)) and ((not (o17 = o16)) ->
+  (o20 = false)))))) and ((not (result7 = true)) -> (o20 = false)))) and
+  (((not (o20 = true)) -> (result6 = true)) and ((o20 = true) ->
+  (result6 = false)))) and (result6 = true)))))))) and ((l3 = l6) and
+  (l7 = l3))))
+
+axiom H24 : ((result1 = true) -> (l8 = l6))
+
+axiom H25 : ((result1 = true) -> (l9 = l7))
+
+axiom H26 : ((not (result1 = true)) -> (l1 = l8))
+
+axiom H27 : ((not (result1 = true)) -> (l9 = l1))
+
+axiom H28 :
+  (longest_common_prefix__lcp__result1 = longest_common_prefix__lcp__result2)
+
+axiom H29 :
+  (longest_common_prefix__lcp__result3 = longest_common_prefix__lcp__result1)
+
+axiom H30 : (result9 = longest_common_prefix__lcp__result)
+
+axiom H31 : (longest_common_prefix__lcp__result1 = l8)
+
+axiom H32 :
+  (longest_common_prefix__lcp__result4 = longest_common_prefix__lcp__result2)
+
+axiom H33 : (l10 = l8)
+
+axiom H34 :
+  (longest_common_prefix__lcp__result5 = longest_common_prefix__lcp__result3)
+
+axiom H35 : (l11 = l9)
+
+axiom H36 : (result10 = longest_common_prefix__lcp__result4)
+
+logic i1 : int
+
+axiom H37 : (0 <= i1)
+
+axiom H38 : (i1 <= (longest_common_prefix__lcp__result4 - 1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep((a[(x + i1)])) = to_rep((a[(y + i1)])))

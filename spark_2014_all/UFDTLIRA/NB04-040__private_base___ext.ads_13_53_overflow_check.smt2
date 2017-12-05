@@ -128,6 +128,7 @@
 (assert (forall ((x1 us_rep1)) (! (= (sum__2 x1) (+ (sum (to_base x1)) (to_rep (rec__ext__u__d (us_split_fields3 x1))))) :pattern ((sum__2 x1)))))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (sum (mk___rep (mk___split_fields (rec__base__t__c1 (us_split_fields3 x)) (hide_ext__ (rec__ext__u__d (us_split_fields3 x)) (rec__ext__1 (us_split_fields3 x)))) (attr__tag1 x)))) (and (in_range o) (= o (to_rep (rec__base__t__c1 (us_split_fields3 x)))))))
 (assert (= o1 (+ o (to_rep (rec__ext__u__d (us_split_fields3 x))))))
 (assert (not (in_range o1)))

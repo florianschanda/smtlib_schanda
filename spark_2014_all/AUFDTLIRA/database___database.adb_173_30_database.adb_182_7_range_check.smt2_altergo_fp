@@ -396,37 +396,114 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 axiom no_account_link__def_axiom : ((no_account_link = of_int(0)) and
   ((no_account_link1 = of_rep(0)) and (no_account_link2 = of_rep(0))))
 
- (* File "database.ads", line 121, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep) farray. forall first_available:int.
-  forall tmp_prev:int. forall tmp_next:int. forall i:int.
-  forall o:ext_account_num. forall o1:ext_account_num. forall o2:bool.
-  forall o3:ext_account_num. forall o4:ext_account_num.
-  forall database__availability__no_account_link__assume:bool.
-  forall database__availability__no_account_link__assume1:ext_account_num.
-  forall database__availability__no_account_link__assume2:ext_account_num.
-  forall result:int. forall first_available1:int. forall result1:int.
-  forall i1:int. forall links1:(int,us_rep) farray. forall tmp_prev1:int.
-  forall tmp_next1:int. forall i2:int. forall result2:int.
-  forall tmp_prev2:int. forall result3:int. forall tmp_prev3:int.
-  (((((to_rep(o) = 0) and ((to_rep(o1) = 0) and ((of_int(0) = o2) and
-  ((o1 = o3) and (o = o4))))) and
-  ((database__availability__no_account_link__assume = o2) and
-  ((database__availability__no_account_link__assume1 = o3) and
-  (database__availability__no_account_link__assume2 = o4)))) and
+logic links : (int,us_rep) farray
+
+logic first_available : int
+
+logic tmp_prev : int
+
+logic tmp_next : int
+
+logic i : int
+
+logic o : ext_account_num
+
+logic o1 : ext_account_num
+
+logic o2 : bool
+
+logic o3 : ext_account_num
+
+logic o4 : ext_account_num
+
+logic database__availability__no_account_link__assume : bool
+
+logic database__availability__no_account_link__assume1 : ext_account_num
+
+logic database__availability__no_account_link__assume2 : ext_account_num
+
+logic o5 : int
+
+logic result : int
+
+logic first_available1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic links1 : (int,us_rep) farray
+
+logic tmp_prev1 : int
+
+logic tmp_next1 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic tmp_prev2 : int
+
+logic result3 : int
+
+logic tmp_prev3 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (of_int(0) = o2)
+
+axiom H3 : (o1 = o3)
+
+axiom H4 : (o = o4)
+
+axiom H5 : (database__availability__no_account_link__assume = o2)
+
+axiom H6 : (database__availability__no_account_link__assume1 = o3)
+
+axiom H7 : (database__availability__no_account_link__assume2 = o4)
+
+axiom H8 :
   ((database__availability__no_account_link__assume = no_account_link) and
   ((database__availability__no_account_link__assume1 = no_account_link1) and
-  (database__availability__no_account_link__assume2 = no_account_link2)))) ->
-  (((result = first_available) and (first_available1 = 1)) ->
-  (in_range1(first_available1) -> (((0 <= 200000) -> in_range1(tmp_prev)) ->
-  (((0 <= 200000) -> in_range1(tmp_next)) -> (((result1 = i) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= 200000)) ->
-  (((((forall temp___414:int. (((1 <= temp___414) and
-      (temp___414 <= 200000)) -> ((i2 <= temp___414) ->
-      ((links1[temp___414]) = (links[temp___414]))))) and
-  ((0 <= 200000) -> in_range1(tmp_prev1))) and ((0 <= 200000) ->
-  in_range1(tmp_next1))) and ((1 <= i2) and (i2 <= 200000))) ->
-  ((((i2 = 1) and ((result2 = tmp_prev1) and (tmp_prev2 = 0))) or
-  ((not (i2 = 1)) and (((result3 = tmp_prev1) and (tmp_prev3 = (i2 - 1))) and
-  (tmp_prev2 = tmp_prev3)))) -> ((not (i2 = 200000)) ->
-  in_range1((i2 + 1)))))))))))))
+  (database__availability__no_account_link__assume2 = no_account_link2)))
+
+axiom H9 : (result = first_available)
+
+axiom H10 : (first_available1 = 1)
+
+axiom H11 : in_range1(first_available1)
+
+axiom H12 : ((0 <= 200000) -> in_range1(tmp_prev))
+
+axiom H13 : ((0 <= 200000) -> in_range1(tmp_next))
+
+axiom H14 : (result1 = i)
+
+axiom H15 : (i1 = 1)
+
+axiom H16 : (1 <= i1)
+
+axiom H17 : (i1 <= 200000)
+
+axiom H18 : (((((0 <= 200000) -> in_range1(tmp_prev1)) and ((0 <= 200000) ->
+  in_range1(tmp_next1))) and
+  (forall temp___416:int. (((1 <= temp___416) and (temp___416 <= 200000)) ->
+  ((i2 <= temp___416) -> ((links1[temp___416]) = (links[temp___416])))))) and
+  ((1 <= i2) and (i2 <= 200000)))
+
+axiom H19 : ((i2 = 1) -> (result2 = tmp_prev1))
+
+axiom H20 : ((i2 = 1) -> (tmp_prev2 = 0))
+
+axiom H21 : ((not (i2 = 1)) -> (result3 = tmp_prev1))
+
+axiom H22 : ((not (i2 = 1)) -> (tmp_prev3 = (i2 - 1)))
+
+axiom H23 : ((not (i2 = 1)) -> (tmp_prev2 = tmp_prev3))
+
+axiom H24 : (not (i2 = 200000))
+
+ (* File "database.ads", line 121, characters 0-0 *)
+goal WP_parameter_def : in_range1((i2 + 1))

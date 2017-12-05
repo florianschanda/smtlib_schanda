@@ -233,6 +233,7 @@
 (declare-const bv_arrays__create__result11 t)
 (declare-const result3 (Array (_ BitVec 16) natural))
 (declare-const result4 t)
+(assert true)
 (assert (= (to_rep (first4 (rt2 (bv_arrays__create__a__aggregate_def 0 ((_ int2bv 16) 0) c)))) ((_ int2bv 16) 0)))
 (assert (= (to_rep (last4 (rt2 (bv_arrays__create__a__aggregate_def 0 ((_ int2bv 16) 0) c)))) c))
 (assert (= (mk___t2 temp___167 temp___1671) (bv_arrays__create__a__aggregate_def 0 ((_ int2bv 16) 0) c)))

@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type element_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -611,9 +611,25 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
 
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___389 : count_type
+
+logic o2 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___389 = o1)
+
+axiom H3 : (temp___389 = no_element)
+
+axiom H4 : in_range2(new_item)
+
+axiom H5 : in_range1(count)
+
  (* File "a-cfdlli.ads", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:count_type. forall o1:count_type. forall temp___389:count_type.
-  (((((to_rep(o) = 0) and (o = o1)) and (temp___389 = o1)) and
-  (temp___389 = no_element)) -> (in_range2(new_item) -> (in_range1(count) ->
-  in_range((to_rep(container__split_discrs) - count))))))
+goal WP_parameter_def : in_range((to_rep(container__split_discrs) - count))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq1 : int, int -> bool
 
@@ -346,37 +346,116 @@ axiom bool_eq_rev :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "arrays_of_records.adb", line 42, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:value. forall o1:bool.
-  forall o2:value. forall o3:value. forall o4:bool. forall o5:value.
-  forall o6:value. forall o7:(int,us_rep) farray. forall o8:value.
-  forall o9:bool. forall o10:value. forall o11:value. forall o12:bool.
-  forall o13:value. forall o14:value. forall o15:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall result1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall result2:(int,us_rep) farray. forall a3:(int,us_rep) farray. ((({
-  map__content = result } = { map__content = a }) and (a1 = (a[17 <- {
-  us_split_fields1 = { rec__arrays_of_records__basic_record__flag =
-  of_int(1); rec__arrays_of_records__basic_record__first_value =
+logic a : (int,us_rep) farray
+
+logic o : value
+
+logic o1 : bool
+
+logic o2 : value
+
+logic o3 : value
+
+logic o4 : bool
+
+logic o5 : value
+
+logic o6 : value
+
+logic o7 : (int,us_rep) farray
+
+logic o8 : value
+
+logic o9 : bool
+
+logic o10 : value
+
+logic o11 : value
+
+logic o12 : bool
+
+logic o13 : value
+
+logic o14 : value
+
+logic o15 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic a5 : (int,us_rep) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = (a[17 <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__flag = of_int(1);
+  rec__arrays_of_records__basic_record__first_value =
   (((a[17])).us_split_fields1).rec__arrays_of_records__basic_record__first_value;
   rec__arrays_of_records__basic_record__second_value =
   (((a[17])).us_split_fields1).rec__arrays_of_records__basic_record__second_value
-  } }]))) -> ((((((to_rep(o) = 42) and
-  (((((a1[17])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1) and
-  ((o = o2) and
-  ((((a1[17])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)))) and
-  ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and (o7 = (a1[17 <- {
-  us_split_fields1 = { rec__arrays_of_records__basic_record__flag = o4;
+  } }]))
+
+axiom H2 : (to_rep(o) = 42)
+
+axiom H3 :
+  ((((a1[17])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1)
+
+axiom H4 : (o = o2)
+
+axiom H5 :
+  ((((a1[17])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)
+
+axiom H6 : (o4 = o1)
+
+axiom H7 : (o5 = o2)
+
+axiom H8 : (o6 = o3)
+
+axiom H9 : (o7 = (a1[17 <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__flag = o4;
   rec__arrays_of_records__basic_record__first_value = o5;
-  rec__arrays_of_records__basic_record__second_value = o6 } }]))) and
-  ((a1 = result1) and (a2 = o7))) -> ((((((to_rep(o8) = 23) and
-  (((((a2[101])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o9) and
-  (((((a2[101])).us_split_fields1).rec__arrays_of_records__basic_record__first_value = o10) and
-  (o8 = o11)))) and ((o12 = o9) and ((o13 = o10) and (o14 = o11)))) and
-  (o15 = (a2[101 <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__second_value = o6 } }]))
+
+axiom H10 : (a1 = result1)
+
+axiom H11 : (a2 = o7)
+
+axiom H12 : (to_rep(o8) = 23)
+
+axiom H13 :
+  ((((a2[101])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o9)
+
+axiom H14 :
+  ((((a2[101])).us_split_fields1).rec__arrays_of_records__basic_record__first_value = o10)
+
+axiom H15 : (o8 = o11)
+
+axiom H16 : (o12 = o9)
+
+axiom H17 : (o13 = o10)
+
+axiom H18 : (o14 = o11)
+
+axiom H19 : (o15 = (a2[101 <- { us_split_fields1 = {
   rec__arrays_of_records__basic_record__flag = o12;
   rec__arrays_of_records__basic_record__first_value = o13;
-  rec__arrays_of_records__basic_record__second_value = o14 } }]))) and
-  ((a2 = result2) and (a3 = o15))) ->
-  (to_rep((((a3[101])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 23)))))
+  rec__arrays_of_records__basic_record__second_value = o14 } }]))
+
+axiom H20 : (a2 = result2)
+
+axiom H21 : (a3 = o15)
+
+ (* File "arrays_of_records.adb", line 42, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((a3[101])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 23)

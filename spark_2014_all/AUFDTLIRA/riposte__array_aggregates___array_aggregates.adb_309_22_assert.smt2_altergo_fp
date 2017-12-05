@@ -287,8 +287,17 @@ axiom def_axiom :
   ((temp___581(temp___583, temp___584,
   temp___585)[temp___586]) = of_rep(temp___585))))))))
 
+logic x : (int,enum_t) farray
+
+logic result : (int,enum_t) farray
+
+logic x1 : (int,enum_t) farray
+
+axiom H : in_range2(n)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = temp___581(0, 2, 1))
+
  (* File "array_aggregates.adb", line 290, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,enum_t) farray. forall result:(int,enum_t) farray.
-  forall x1:(int,enum_t) farray. (in_range2(n) -> (((result = x) and
-  (x1 = temp___581(0, 2, 1))) -> (to_rep((x1[n])) = 0))))
+goal WP_parameter_def : (to_rep((x1[n])) = 0)

@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -916,25 +916,115 @@ type t24b__ref = { t24b__content : us_t2
 
 function t24b__ref___projection(a: t24b__ref) : us_t2 = (a).t24b__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall len:int. forall out_string:(int,character) farray. forall o:int.
-  forall o1:int. forall o2:int.
-  forall fixed_string__convert__out_string__assume:(int,character) farray.
-  forall fixed_string__convert__out_string__assume1:t.
-  forall fixed_string__convert__R19b__assume:int.
-  forall fixed_string__convert__R22b__assume:int.
-  forall o3:(int,character) farray. forall temp___233:(int,character) farray.
-  forall temp___2331:t2. forall temp___234:(int,character) farray.
-  forall temp___2341:t1. forall result:int. forall len1:int.
-  forall result1:(int,character) farray.
-  forall out_string1:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(in_string1)), to_rep1(last(in_string1))) ->
-  ((((((o = length({ elts = in_string; rt = in_string1 })) and
-  in_range(length({ elts = in_string; rt = in_string1 }))) and (o1 = min(o,
-  to_rep2(this)))) and ((o2 = o1) and in_range3(o1))) and (({ int__content =
-  result } = { int__content = len }) and (len1 = o2))) -> (in_range3(len1) ->
-  (((({ elts = fixed_string__convert__out_string__assume; rt =
+logic len : int
+
+logic out_string : (int,character) farray
+
+logic fixed_string__convert__result : (int,character) farray
+
+logic fixed_string__convert__result1 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic fixed_string__convert__out_string__assume : (int,character) farray
+
+logic fixed_string__convert__out_string__assume1 : t
+
+logic fixed_string__convert__R19b__assume : int
+
+logic fixed_string__convert__R22b__assume : int
+
+logic o3 : (int,character) farray
+
+logic temp___233 : (int,character) farray
+
+logic temp___2331 : t2
+
+logic temp___234 : (int,character) farray
+
+logic temp___2341 : t1
+
+logic o4 : (int,character) farray
+
+logic temp___236 : (int,character) farray
+
+logic temp___2361 : t1
+
+logic temp___237 : (int,character) farray
+
+logic temp___2371 : t1
+
+logic o5 : (int,character) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,character) farray
+
+logic out_string1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic out_string2 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic result4 : t
+
+logic fixed_string__convert__result2 : (int,character) farray
+
+logic fixed_string__convert__result3 : t
+
+logic fixed_string__convert__result4 : (int,character) farray
+
+logic fixed_string__convert__result5 : t
+
+logic fixed_string__convert__result6 : (int,character) farray
+
+logic fixed_string__convert__result7 : t
+
+logic len2 : int
+
+logic out_string3 : (int,character) farray
+
+logic fixed_string__convert__result8 : (int,character) farray
+
+logic fixed_string__convert__result9 : t
+
+logic len3 : int
+
+logic out_string4 : (int,character) farray
+
+logic fixed_string__convert__result10 : (int,character) farray
+
+logic fixed_string__convert__result11 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
+  to_rep1(last(in_string1)))
+
+axiom H1 : ((o = length({ elts = in_string; rt = in_string1 })) and
+  in_range(length({ elts = in_string; rt = in_string1 })))
+
+axiom H2 : (o1 = min(o, to_rep2(this)))
+
+axiom H3 : ((o2 = o1) and in_range3(o1))
+
+axiom H4 : (result = len)
+
+axiom H5 : (len1 = o2)
+
+axiom H6 : in_range3(len1)
+
+axiom H7 : (({ elts = fixed_string__convert__out_string__assume; rt =
   fixed_string__convert__out_string__assume1 } = null_string({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
@@ -945,35 +1035,66 @@ goal WP_parameter_def :
   fixed_string__convert__out_string__assume1 }) = elements({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })))) and ((({ map__content = result1 } = { map__content = out_string
-  }) and (out_string1 = fixed_string__convert__out_string__assume)) and
-  ((to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1))) and
-  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(out_string__first),
-  to_rep1(out_string__last)) ->
-  (((((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
-  in_range((to_rep1(out_string__first) + (len1 - 1)))) and
-  (fixed_string__convert__R19b__assume = r19b)) and in_range(r19b)) ->
-  (((((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
-  in_range((to_rep1(first(in_string1)) + (len1 - 1)))) and
-  (fixed_string__convert__R22b__assume = r22b)) and in_range(r22b)) ->
-  ((((((to_rep1(first(in_string1)) <= r22b) ->
+  this3 }))))
+
+axiom H8 : (result1 = out_string)
+
+axiom H9 : (out_string1 = fixed_string__convert__out_string__assume)
+
+axiom H10 :
+  (to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1)))
+
+axiom H11 :
+  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))
+
+axiom H12 : dynamic_property(1, 2147483647, to_rep1(out_string__first),
+  to_rep1(out_string__last))
+
+axiom H13 :
+  ((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
+  in_range((to_rep1(out_string__first) + (len1 - 1))))
+
+axiom H14 : (fixed_string__convert__R19b__assume = r19b)
+
+axiom H15 : in_range(r19b)
+
+axiom H16 :
+  ((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
+  in_range((to_rep1(first(in_string1)) + (len1 - 1))))
+
+axiom H17 : (fixed_string__convert__R22b__assume = r22b)
+
+axiom H18 : in_range(r22b)
+
+axiom H19 : ((to_rep1(first(in_string1)) <= r22b) ->
   (((to_rep1(first(in_string1)) <= to_rep1(first(in_string1))) and
   (to_rep1(first(in_string1)) <= to_rep1(last(in_string1)))) and
   ((to_rep1(first(in_string1)) <= r22b) and
-  (r22b <= to_rep1(last(in_string1)))))) and (o3 = in_string)) and
-  ((o3 = temp___233) and (mk2(to_rep1(first(in_string1)),
-  r22b) = temp___2331))) and
-  ((((to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331))) and
-  (((to_rep1(out_string__first) <= r19b) and
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) or
-  ((not (to_rep1(out_string__first) <= r19b)) and
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331)))) and
-  (((to_rep1(out_string__first) <= r19b) and
-  (0 = ((r19b - to_rep1(out_string__first)) + 1))) or
-  (not (to_rep1(out_string__first) <= r19b))))) and ((slide(temp___233,
-  to_rep1(first4(temp___2331)), to_rep1(out_string__first)) = temp___234) and
-  (mk1(to_rep1(out_string__first), r19b) = temp___2341)))) ->
+  (r22b <= to_rep1(last(in_string1))))))
+
+axiom H20 : (o3 = in_string)
+
+axiom H21 : (o3 = temp___233)
+
+axiom H22 : (mk2(to_rep1(first(in_string1)), r22b) = temp___2331)
+
+axiom H23 :
+  (((to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331))) ->
+  (((to_rep1(out_string__first) <= r19b) ->
+  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) and
+  ((not (to_rep1(out_string__first) <= r19b)) ->
+  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331)))) ->
   ((to_rep1(out_string__first) <= r19b) ->
-  (to_rep1(out_string__first) <= to_rep1(out_string__first))))))))))))
+  (0 = ((r19b - to_rep1(out_string__first)) + 1)))))
+
+axiom H24 : (slide(temp___233, to_rep1(first4(temp___2331)),
+  to_rep1(out_string__first)) = temp___234)
+
+axiom H25 : (mk1(to_rep1(out_string__first), r19b) = temp___2341)
+
+axiom H26 : (to_rep1(out_string__first) <= r19b)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(out_string__first) <= to_rep1(out_string__first))

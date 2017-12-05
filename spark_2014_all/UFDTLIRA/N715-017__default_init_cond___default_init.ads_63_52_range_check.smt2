@@ -48,6 +48,8 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content a))
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range1 temp___expr_33)))
 (assert (forall ((x Int)) (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (init x) true false true)) :pattern ((init x)))))
+(declare-const us Int)
+(declare-const temp___278 Int)
 (assert (not (in_range 0)))
 (check-sat)
 (exit)

@@ -82,6 +82,7 @@
 (assert (= v1v 1))
 (assert (= v2v 6))
 (assert (= v3v value__size))
+(declare-const unksize__v3v__assume Int)
 (assert (in_range v1v))
 (assert (in_range v2v))
 (assert (not (in_range value__size)))

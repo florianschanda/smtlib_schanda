@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -451,55 +451,163 @@ function t22b__ref___projection(a: t22b__ref) : t22b = (a).t22b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : (int,integer) farray
+
+logic y : (int,integer) farray
+
+logic z : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+logic temp___183 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,integer) farray
+
+logic temp___185 : (int,integer) farray
+
+logic temp___1851 : t
+
+logic o8 : (int,integer) farray
+
+logic temp___188 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : (int,integer) farray
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : (int,integer) farray
+
+logic temp___190 : (int,integer) farray
+
+logic temp___1901 : t1
+
+logic o18 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic z2 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic z3 : (int,integer) farray
+
+axiom H : true
+
+axiom H1 : ((1 <= 9) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 9) and
+  (9 <= 10))))
+
+axiom H2 : (temp___183 = x)
+
+axiom H3 : ((1 <= 9) -> (o2 = ((9 - 1) + 1)))
+
+axiom H4 : ((not (1 <= 9)) -> (o2 = 0))
+
+axiom H5 : (o3 = (o2 + 1))
+
+axiom H6 : (o4 = (1 + o3))
+
+axiom H7 : (o5 = (o4 - 1))
+
+axiom H8 : ((o6 = o5) and in_range(o5))
+
+axiom H9 : (to_rep(o) = 1)
+
+axiom H10 : (o1 = singleton(o, 1))
+
+axiom H11 : (o7 = concat(temp___183, 1, 9, o1, 1, 1))
+
+axiom H12 : (o7 = temp___185)
+
+axiom H13 : (mk(1, o6) = temp___1851)
+
+axiom H14 : (((to_rep(first(temp___1851)) <= to_rep(last(temp___1851))) ->
+  (((1 <= 10) ->
+  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = ((10 - 1) + 1))) and
+  ((not (1 <= 10)) ->
+  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = 0)))) and
+  ((not (to_rep(first(temp___1851)) <= to_rep(last(temp___1851)))) ->
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))
+
+axiom H15 : (o8 = slide(temp___185, to_rep(first(temp___1851)), 1))
+
+axiom H16 : (result = z)
+
+axiom H17 : (z2 = o8)
+
+axiom H18 : (to_rep((z2[1])) = to_rep((x[1])))
+
+axiom H19 : (to_rep((z2[10])) = 1)
+
+axiom H20 : ((1 <= 9) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 9) and
+  (9 <= 10))))
+
+axiom H21 : (temp___188 = y)
+
+axiom H22 : ((1 <= 9) -> (o12 = ((9 - 1) + 1)))
+
+axiom H23 : ((not (1 <= 9)) -> (o12 = 0))
+
+axiom H24 : (o13 = (o12 + 1))
+
+axiom H25 : (o14 = (1 + o13))
+
+axiom H26 : (o15 = (o14 - 1))
+
+axiom H27 : ((o16 = o15) and in_range1(o15))
+
+axiom H28 : (to_rep(o9) = 1)
+
+axiom H29 : (o10 = singleton(o9, 1))
+
+axiom H30 : (o11 = concat(temp___188, 1, 9, o10, 1, 1))
+
+axiom H31 : (o17 = slide(o11, 1, 1))
+
+axiom H32 : (o17 = temp___190)
+
+axiom H33 : (mk1(1, o16) = temp___1901)
+
+axiom H34 : (((to_rep(first2(temp___1901)) <= to_rep(last2(temp___1901))) ->
+  (((1 <= 10) ->
+  (((to_rep(last2(temp___1901)) - to_rep(first2(temp___1901))) + 1) = ((10 - 1) + 1))) and
+  ((not (1 <= 10)) ->
+  (((to_rep(last2(temp___1901)) - to_rep(first2(temp___1901))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___1901)) <= to_rep(last2(temp___1901)))) ->
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))
+
+axiom H35 : (o18 = slide(temp___190, to_rep(first2(temp___1901)), 1))
+
+axiom H36 : (result1 = z1)
+
+axiom H37 : (z3 = o18)
+
+axiom H38 : (to_rep((z3[1])) = to_rep((y[1])))
+
  (* File "concat.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall y:(int,integer) farray.
-  forall z:(int,integer) farray. forall z1:(int,integer) farray.
-  forall temp___183:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int.
-  forall o7:(int,integer) farray. forall temp___185:(int,integer) farray.
-  forall temp___1851:t. forall o8:(int,integer) farray.
-  forall temp___188:(int,integer) farray. forall o9:integer.
-  forall o10:(int,integer) farray. forall o11:(int,integer) farray.
-  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:(int,integer) farray.
-  forall temp___190:(int,integer) farray. forall temp___1901:t1.
-  forall o18:(int,integer) farray. forall result:(int,integer) farray.
-  forall z2:(int,integer) farray. forall result1:(int,integer) farray.
-  forall z3:(int,integer) farray. ((((((((1 <= 9) -> (((1 <= 1) and
-  (1 <= 10)) and ((1 <= 9) and (9 <= 10)))) and (temp___183 = x)) and
-  ((((((((1 <= 9) and (o2 = ((9 - 1) + 1))) or ((not (1 <= 9)) and
-  (o2 = 0))) and (o3 = (o2 + 1))) and (o4 = (1 + o3))) and
-  (o5 = (o4 - 1))) and ((o6 = o5) and in_range(o5))) and
-  ((((to_rep(o) = 1) and (o1 = singleton(o, 1))) and (o7 = concat(temp___183,
-  1, 9, o1, 1, 1))) and ((o7 = temp___185) and (mk(1,
-  o6) = temp___1851))))) and
-  ((((to_rep(first(temp___1851)) <= to_rep(last(temp___1851))) and
-  (((1 <= 10) and
-  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = ((10 - 1) + 1))) or
-  ((not (1 <= 10)) and
-  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = 0)))) or
-  ((not (to_rep(first(temp___1851)) <= to_rep(last(temp___1851)))) and
-  (((1 <= 10) and (0 = ((10 - 1) + 1))) or (not (1 <= 10))))) and
-  (o8 = slide(temp___185, to_rep(first(temp___1851)), 1)))) and (({
-  map__content = result } = { map__content = z }) and (z2 = o8))) and
-  ((to_rep((z2[1])) = to_rep((x[1]))) and (to_rep((z2[10])) = 1))) ->
-  (((((((1 <= 9) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 9) and
-  (9 <= 10)))) and (temp___188 = y)) and ((((((((1 <= 9) and
-  (o12 = ((9 - 1) + 1))) or ((not (1 <= 9)) and (o12 = 0))) and
-  (o13 = (o12 + 1))) and (o14 = (1 + o13))) and (o15 = (o14 - 1))) and
-  ((o16 = o15) and in_range1(o15))) and (((((to_rep(o9) = 1) and
-  (o10 = singleton(o9, 1))) and (o11 = concat(temp___188, 1, 9, o10, 1,
-  1))) and (o17 = slide(o11, 1, 1))) and ((o17 = temp___190) and (mk1(1,
-  o16) = temp___1901))))) and
-  ((((to_rep(first2(temp___1901)) <= to_rep(last2(temp___1901))) and
-  (((1 <= 10) and
-  (((to_rep(last2(temp___1901)) - to_rep(first2(temp___1901))) + 1) = ((10 - 1) + 1))) or
-  ((not (1 <= 10)) and
-  (((to_rep(last2(temp___1901)) - to_rep(first2(temp___1901))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___1901)) <= to_rep(last2(temp___1901)))) and
-  (((1 <= 10) and (0 = ((10 - 1) + 1))) or (not (1 <= 10))))) and
-  (o18 = slide(temp___190, to_rep(first2(temp___1901)), 1)))) and
-  ((result1 = z1) and (z3 = o18))) -> ((to_rep((z3[1])) = to_rep((y[1]))) ->
-  (to_rep((z3[10])) = 1)))))
+goal WP_parameter_def : (to_rep((z3[10])) = 1)

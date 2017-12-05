@@ -35,6 +35,7 @@
 (declare-const buf_list Int)
 (declare-const free_list Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const buf_list1 Int)
 (assert (in_range free_list))

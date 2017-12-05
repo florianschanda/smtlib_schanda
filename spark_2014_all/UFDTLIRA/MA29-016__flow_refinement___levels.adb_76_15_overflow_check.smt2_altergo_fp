@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -128,11 +128,49 @@ axiom read_partial_1__post_axiom :
   (in_range(levels__nested_1__x1) ->
   in_range(read_partial_1(levels__nested_1__x1))))
 
+logic x : int
+
+logic y : int
+
+logic x0 : int
+
+logic x1 : int
+
+logic y1 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic x3 : int
+
+axiom H : in_range(x0)
+
+axiom H1 : in_range(x1)
+
+axiom H2 : in_range(y1)
+
+axiom H3 : in_range(x2)
+
+axiom H4 : in_range(y2)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H6 : in_range(y)
+
+axiom H7 : ((o = read_partial_1(x1)) and in_range(o))
+
+axiom H8 : (o1 = (x0 + o))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall x0:int. forall x1:int. forall y1:int.
-  forall x2:int. forall y2:int. forall o:int. forall o1:int. (in_range(x0) ->
-  (in_range(x1) -> (in_range(y1) -> (in_range(x2) -> (in_range(y2) ->
-  ((((-2147483648) <= 2147483647) -> in_range(x)) -> (in_range(y) ->
-  ((((o = read_partial_1(x1)) and in_range(o)) and (o1 = (x0 + o))) ->
-  in_range(o1))))))))))
+goal WP_parameter_def : in_range(o1)

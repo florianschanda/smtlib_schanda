@@ -57,6 +57,8 @@
 (define-fun my_int__ref___projection ((a my_int__ref)) my_int (my_int__content a))
 (define-fun dynamic_invariant ((temp___expr_135 (_ BitVec 32)) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool true)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const x (_ BitVec 32))
+(assert true)
 (assert (not (not (= ((_ int2bv 32) 4294967295) #x00000000))))
 (check-sat)
 (exit)

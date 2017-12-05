@@ -1098,6 +1098,13 @@ logic z : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : tqtisFinite(z)
+
+axiom H3 : (lt(x, y) and lt(y, z))
+
  (* File "generic_float_tests.adb", line 212, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (tqtisFinite(z) -> ((lt(x, y) and lt(y, z)) -> lt(x, z)))))
+goal WP_parameter_def : lt(x, z)

@@ -171,6 +171,7 @@
 (assert (forall ((self__ us_rep)) (! (dynamic_invariant2 (item_count self__) true false true) :pattern ((item_count self__)))))
 (assert (forall ((self__ us_rep)) (! (= (item_count self__) (to_rep2 (rec__communications__mailboxT__count (us_split_fields1 self__)))) :pattern ((item_count self__)))))
 (define-fun dynamic_invariant3 ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 0 97)) (in_range1 temp___expr_160)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

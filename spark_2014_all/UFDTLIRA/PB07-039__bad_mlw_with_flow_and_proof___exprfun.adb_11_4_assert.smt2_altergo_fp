@@ -90,8 +90,21 @@ axiom prim_func__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t1_var : t1
+
+logic x : t1
+
+logic o : t1
+
+logic result : t1
+
+logic x1 : t1
+
+axiom H : ((o = prim_func(t1_var)) and (o = t1_var))
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = o)
+
  (* File "exprfun.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1_var:t1. forall x:t1. forall o:t1. forall result:t1.
-  forall x1:t1. (not (((o = prim_func(t1_var)) and (o = t1_var)) and
-  ((result = x) and (x1 = o)))))
+goal WP_parameter_def : false

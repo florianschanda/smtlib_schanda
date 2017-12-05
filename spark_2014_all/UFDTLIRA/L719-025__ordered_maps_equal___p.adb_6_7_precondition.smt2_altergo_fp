@@ -1249,19 +1249,29 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
- (* File "p.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall l__split_fields1:us_main_type.
-  (in_range2(k) -> (((length({ us_split_discrs1 = {
-  rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }) <  to_rep(l__split_discrs)) and
+logic l__split_fields : us_main_type
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range2(k)
+
+axiom H1 : ((length({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
+  l__split_fields } }) <  to_rep(l__split_discrs)) and
   (not (has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }), k) = true))) ->
-  ((((((((((length({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
-  l__split_fields1 } }) = (length({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }), k) = true)))
+
+axiom H2 : (((((((((length({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_maps__map = l__split_fields1 } }) = (length({ us_split_discrs1 =
+  { rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }) + 1)) and (has_key(model__({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_maps__map = l__split_fields1 } }),
@@ -1317,6 +1327,9 @@ goal WP_parameter_def :
   rec__p__my_maps__map = l__split_fields1 } }), find(keys({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_maps__map = l__split_fields1 } }), k),
-  1) = true)) -> (has_key(model__({ us_split_discrs1 = {
+  1) = true))
+
+ (* File "p.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields1 } }), k) = true)))))
+  rec__p__my_maps__map = l__split_fields1 } }), k) = true)

@@ -80,7 +80,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1220,15 +1220,15 @@ axiom Power_3 :
   mul(NearestTiesToEven, x, x)))))
 
 axiom Power_neg1 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-1)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 1)),
   div(NearestTiesToEven, of_int1(NearestTiesToEven, 1), x)))))
 
 axiom Power_neg2 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int1(NearestTiesToEven, 1), power(x, 2))))))
 
 axiom Power_neg3 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int1(NearestTiesToEven, 1), power(x, 3))))))
 
 axiom fib__def_axiom :
@@ -1287,16 +1287,217 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic result__ : int
+
+logic old__ : int
+
+logic oldest : int
+
+logic temp : int
+
+logic i : int
+
+logic number_theory__fibonacci__result : int
+
+logic temp___194 : int
+
+logic temp___193 : int
+
+logic temp___192 : int
+
+logic temp___191 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic old__1 : int
+
+logic oldest1 : int
+
+logic temp1 : int
+
+logic i1 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic oldest2 : int
+
+logic result2 : int
+
+logic old__2 : int
+
+logic result3 : int
+
+logic i2 : int
+
+logic old__3 : int
+
+logic oldest3 : int
+
+logic temp2 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic temp3 : int
+
+logic result5 : int
+
+logic oldest4 : int
+
+logic result6 : int
+
+logic old__4 : int
+
+logic result7 : int
+
+logic i4 : int
+
+logic old__5 : int
+
+logic oldest5 : int
+
+logic temp4 : int
+
+logic i5 : int
+
+logic old__6 : int
+
+logic oldest6 : int
+
+logic temp5 : int
+
+logic i6 : int
+
+logic old__7 : int
+
+logic oldest7 : int
+
+logic temp6 : int
+
+logic i7 : int
+
+logic old__8 : int
+
+logic oldest8 : int
+
+logic temp7 : int
+
+logic i8 : int
+
+logic old__9 : int
+
+logic oldest9 : int
+
+logic temp8 : int
+
+logic i9 : int
+
+logic old__10 : int
+
+logic oldest10 : int
+
+logic temp9 : int
+
+logic i10 : int
+
+logic result8 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+logic old__11 : int
+
+logic oldest11 : int
+
+logic temp10 : int
+
+logic i11 : int
+
+logic result__4 : int
+
+logic old__12 : int
+
+logic oldest12 : int
+
+logic temp11 : int
+
+logic i12 : int
+
+logic result9 : int
+
+logic number_theory__fibonacci__result1 : int
+
+logic number_theory__fibonacci__result2 : int
+
+logic number_theory__fibonacci__result3 : int
+
+logic result__5 : int
+
+logic old__13 : int
+
+logic oldest13 : int
+
+logic temp12 : int
+
+logic i13 : int
+
+logic number_theory__fibonacci__result4 : int
+
+logic result__6 : int
+
+logic old__14 : int
+
+logic oldest14 : int
+
+logic temp13 : int
+
+logic i14 : int
+
+logic number_theory__fibonacci__result5 : int
+
+axiom H : in_range4(n)
+
+axiom H1 : ((0 <= 2147483647) -> in_range2(result__))
+
+axiom H2 : ((1 <= 2147483647) -> in_range3(old__))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(oldest))
+
+axiom H4 : ((0 <= 2147483647) -> in_range2(temp))
+
+axiom H5 : (not (n = 0))
+
+axiom H6 : (not (n = 1))
+
+axiom H7 : (result1 = oldest)
+
+axiom H8 : (oldest2 = 0)
+
+axiom H9 : (result2 = old__)
+
+axiom H10 : (old__2 = 1)
+
+axiom H11 : (result3 = i)
+
+axiom H12 : (i2 = 2)
+
+axiom H13 : (2 <= i2)
+
+axiom H14 : (i2 <= n)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall old__:int. forall oldest:int. forall temp:int.
-  forall i:int. forall result:int. forall oldest1:int. forall result1:int.
-  forall old__1:int. forall result2:int. forall i1:int. (in_range4(n) ->
-  (((0 <= 2147483647) -> in_range2(result__)) -> (((1 <= 2147483647) ->
-  in_range3(old__)) -> (((0 <= 2147483647) -> in_range2(oldest)) ->
-  (((0 <= 2147483647) -> in_range2(temp)) -> ((not ((not (n = 0)) ->
-  (n = 1))) -> ((({ int__content = result } = { int__content = oldest }) and
-  (oldest1 = 0)) -> ((({ int__content = result1 } = { int__content = old__
-  }) and (old__1 = 1)) -> ((({ int__content = result2 } = { int__content = i
-  }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= n)) ->
-  (old__1 = fib((i1 - 1))))))))))))))
+goal WP_parameter_def : (old__2 = fib((i2 - 1)))

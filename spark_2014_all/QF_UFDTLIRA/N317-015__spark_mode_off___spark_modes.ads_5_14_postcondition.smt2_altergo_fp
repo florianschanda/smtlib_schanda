@@ -79,5 +79,23 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic b : bool
+
+logic b1 : bool
+
+logic b2 : bool
+
+logic b3 : bool
+
+logic b4 : bool
+
+axiom H : ((not (b = true)) -> (b1 = b2))
+
+axiom H1 : (b1 = b3)
+
+axiom H2 : (b4 = b1)
+
+axiom H3 : (b3 = true)
+
  (* File "spark_modes.adb", line 13, characters 0-0 *)
 goal WP_parameter_def : true

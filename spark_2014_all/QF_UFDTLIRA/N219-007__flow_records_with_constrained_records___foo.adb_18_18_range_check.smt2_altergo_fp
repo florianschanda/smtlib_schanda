@@ -105,7 +105,17 @@ type value_kind__ref = { value_kind__content : value_kind
 function value_kind__ref___projection(a: value_kind__ref) : value_kind =
   (a).value_kind__content
 
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic temp___kind_185 : int
+
+axiom H : ((us = 0) and in_range(0))
+
+axiom H1 : ((us1 = 2) and in_range(2))
+
  (* File "foo.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall us1:int. (((us = 0) and in_range(0)) ->
-  (((us1 = 2) and in_range(2)) -> in_range(1))))
+goal WP_parameter_def : in_range(1)

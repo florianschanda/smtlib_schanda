@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -369,12 +369,35 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic temp___225 : (int,integer) farray
+
+logic v3__split_fields : integer
+
+logic v3__split_fields1 : (int,integer) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(a))
+
+axiom H1 : (o = v3__split_fields)
+
+axiom H2 : (o1 = v3__split_fields1)
+
+axiom H3 : (o = o2)
+
+axiom H4 : (o1 = o3)
+
+axiom H5 : (temp___225 = o3)
+
+axiom H6 : (1 <= 4)
+
  (* File "vs.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall o:integer. forall o1:(int,integer) farray.
-  forall o2:integer. forall o3:(int,integer) farray.
-  forall temp___225:(int,integer) farray. forall v3__split_fields:integer.
-  forall v3__split_fields1:(int,integer) farray.
-  ((((-2147483648) <= 2147483647) -> in_range(a)) ->
-  (((((o = v3__split_fields) and (o1 = v3__split_fields1)) and ((o = o2) and
-  (o1 = o3))) and (temp___225 = o3)) -> ((1 <= 4) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

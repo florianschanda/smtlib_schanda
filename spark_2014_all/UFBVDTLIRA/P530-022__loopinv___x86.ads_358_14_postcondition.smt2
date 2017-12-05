@@ -104,6 +104,7 @@
 (declare-const x86__esp__result4 (_ BitVec 32))
 (declare-const x86__esp__result5 (_ BitVec 32))
 (declare-const result1 (_ BitVec 32))
+(assert true)
 (assert (= x86__esp__result1 x86__esp__result2))
 (assert (= x86__esp__result3 x86__esp__result1))
 (assert (= result x86__esp__result))

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1288,17 +1288,50 @@ logic self__4 : (int,natural) farray
 
 logic self__5 : t1
 
+logic temp___230 : (int,natural) farray
+
+logic temp___2301 : t3
+
+logic o : (int,natural) farray
+
+logic o1 : t2
+
+logic o2 : (int,natural) farray
+
+logic o3 : t2
+
+logic o4 : natural
+
+logic o5 : (int,natural) farray
+
+logic o6 : t2
+
+logic o7 : natural
+
+logic o8 : (int,natural) farray
+
+logic o9 : t
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : t
+
+axiom H : (to_rep1(first6((temp___210(0, 1, to_rep(self__1))).rt3)) = 1)
+
+axiom H1 : (to_rep1(last6((temp___210(0, 1,
+  to_rep(self__1))).rt3)) = to_rep(self__1))
+
+axiom H2 : ({ elts3 = temp___230; rt3 = temp___2301 } = temp___210(0, 1,
+  to_rep(self__1)))
+
  (* File "p.ads", line 9, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___230:(int,natural) farray. forall temp___2301:t3.
-  (((to_rep1(first6((temp___210(0, 1, to_rep(self__1))).rt3)) = 1) and
-  ((to_rep1(last6((temp___210(0, 1,
-  to_rep(self__1))).rt3)) = to_rep(self__1)) and ({ elts3 = temp___230; rt3 =
-  temp___2301 } = temp___210(0, 1, to_rep(self__1))))) ->
   (((to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301))) ->
   (((1 <= to_rep(self__1)) ->
   (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = ((to_rep(self__1) - 1) + 1))) and
   ((not (1 <= to_rep(self__1))) ->
   (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = 0)))) and
   ((not (to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301)))) ->
-  ((1 <= to_rep(self__1)) -> (0 = ((to_rep(self__1) - 1) + 1)))))))
+  ((1 <= to_rep(self__1)) -> (0 = ((to_rep(self__1) - 1) + 1)))))

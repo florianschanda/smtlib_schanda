@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -325,14 +325,47 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range5(get(container, position)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(fst)
+
+axiom H1 : in_range3(lst)
+
+axiom H2 : in_range1(offset)
+
+axiom H3 : ((o6 = (0 + length(left))) and (in_range3(o6) and
+  (o6 = (0 + length(left)))))
+
+axiom H4 : (((lst <= o6) -> (result = true)) and ((not (lst <= o6)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((offset <  0) -> (((((- 2147483648) - offset) <= 1) ->
+  (result1 = true)) and ((not (((- 2147483648) - offset) <= 1)) ->
+  (result1 = false))))
+
+axiom H7 : ((not (offset <  0)) -> (result1 = of_int(1)))
+
+axiom H8 : (result1 = true)
+
+axiom H9 : (fst <= lst)
+
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. forall result1:bool. (in_range2(fst) ->
-  (in_range3(lst) -> (in_range1(offset) -> ((((o = (0 + length(left))) and
-  (in_range3(o) and (o = (0 + length(left))))) and (((lst <= o) and
-  (result = true)) or ((not (lst <= o)) and (result = false)))) ->
-  ((result = true) -> ((((offset <  0) and
-  (((((-2147483648) - offset) <= 1) and (result1 = true)) or
-  ((not (((-2147483648) - offset) <= 1)) and (result1 = false)))) or
-  ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
-  ((fst <= lst) -> in_range1(lst))))))))))
+goal WP_parameter_def : in_range1(lst)

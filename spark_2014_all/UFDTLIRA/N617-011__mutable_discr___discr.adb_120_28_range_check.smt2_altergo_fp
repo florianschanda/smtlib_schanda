@@ -297,20 +297,75 @@ logic d2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic d1__split_fields : us_main_type
+
+logic d1__split_discrs : natural
+
+logic d2__split_fields : us_main_type
+
+logic discr__p4__d1__assume : natural
+
+logic discr__p4__d1__assume1 : us_main_type
+
+logic discr__p4__d1__assume2 : bool
+
+logic us : int
+
+logic o : natural
+
+logic o1 : us_main_type
+
+logic o2 : bool
+
+logic o3 : natural
+
+logic o4 : us_main_type
+
+logic o5 : bool
+
+logic discr__p4__d2__assume : natural
+
+logic discr__p4__d2__assume1 : us_main_type
+
+logic discr__p4__d2__assume2 : bool
+
+logic result : us_main_type
+
+logic d1__split_fields1 : us_main_type
+
+logic result1 : natural
+
+logic d1__split_discrs1 : natural
+
+logic result2 : us_main_type
+
+logic d2__split_fields1 : us_main_type
+
+logic discr__p4__nested1__d__discrs : natural
+
+logic discr__p4__nested1__d__fields : us_main_type
+
+logic result3 : us_main_type
+
+logic d2__split_fields2 : us_main_type
+
+axiom H : in_range(c)
+
+axiom H1 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+  discr__p4__d1__assume }; us_split_fields1 = {
+  rec__private_discr__p_with_default = discr__p4__d1__assume1 };
+  attr__constrained = discr__p4__d1__assume2 } = new_with_default(c)) and
+  (to_rep(discr__p4__d1__assume) = c))
+
+axiom H2 : (result = d1__split_fields)
+
+axiom H3 : (discr__p4__d1__assume1 = d1__split_fields1)
+
+axiom H4 : (result1 = d1__split_discrs)
+
+axiom H5 : (d1__split_discrs1 = discr__p4__d1__assume)
+
+axiom H6 : (d1__attr__constrained = false)
+
  (* File "discr.adb", line 111, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d1__split_fields:us_main_type. forall d1__split_discrs:natural.
-  forall discr__p4__d1__assume:natural.
-  forall discr__p4__d1__assume1:us_main_type.
-  forall discr__p4__d1__assume2:bool. forall result:us_main_type.
-  forall d1__split_fields1:us_main_type. forall result1:natural.
-  forall d1__split_discrs1:natural. (in_range(c) -> (((({ us_split_discrs1 =
-  { rec__private_discr__p_with_default__c = discr__p4__d1__assume };
-  us_split_fields1 = { rec__private_discr__p_with_default =
-  discr__p4__d1__assume1 }; attr__constrained = discr__p4__d1__assume2
-  } = new_with_default(c)) and (to_rep(discr__p4__d1__assume) = c)) and
-  (((result = d1__split_fields) and
-  (discr__p4__d1__assume1 = d1__split_fields1)) and
-  (((result1 = d1__split_discrs) and
-  (d1__split_discrs1 = discr__p4__d1__assume)) and
-  (d1__attr__constrained = false)))) -> in_range(c))))
+goal WP_parameter_def : in_range(c)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -263,32 +263,154 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic temp___135 : int
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : bool
+
+logic y : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : int
+
+logic o6 : bool
+
+logic x1 : int
+
+logic o7 : int
+
+logic result : int
+
+logic x2 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic x3 : int
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : int
+
+logic x4 : int
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic x5 : int
+
+logic x6 : int
+
+logic x7 : int
+
+logic x8 : int
+
+logic x9 : int
+
+logic x10 : int
+
+logic x11 : int
+
+logic x12 : int
+
+logic result20 : bool
+
+logic result21 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (result = x)
+
+axiom H3 : (x2 = 1)
+
+axiom H4 : (1 <= x2)
+
+axiom H5 : (x2 <= 2147483647)
+
+axiom H6 : ((result3 = divides(x2, a)) and ((result3 = true) <-> (mod(a,
+  x2) = 0)))
+
+axiom H7 : ((result3 = true) -> ((result2 = divides(x2, b)) and
+  ((result2 = true) <-> (mod(b, x2) = 0))))
+
+axiom H8 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H9 : ((result2 = true) -> ((o = divides(b, a)) and ((o = true) <->
+  (mod(a, b) = 0))))
+
+axiom H10 : ((result2 = true) -> (((not (o = true)) -> (result1 = true)) and
+  ((o = true) -> (result1 = false))))
+
+axiom H11 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H12 : ((result1 = true) -> (divides(x2, mod(a, b)) = true))
+
+axiom H13 : ((result5 = divides(b, a)) and ((result5 = true) <-> (mod(a,
+  b) = 0)))
+
+axiom H14 : ((result5 = true) -> ((result4 = divides(x2, b)) and
+  ((result4 = true) <-> (mod(b, x2) = 0))))
+
+axiom H15 : ((not (result5 = true)) -> (result4 = false))
+
+axiom H16 : ((result4 = true) -> (divides(x2, a) = true))
+
+axiom H17 : ((o2 = divides(b, a)) and ((o2 = true) <-> (mod(a, b) = 0)))
+
+axiom H18 : (((not (o2 = true)) -> (result8 = true)) and ((o2 = true) ->
+  (result8 = false)))
+
+axiom H19 : ((result8 = true) -> ((o1 = mod(a, b)) and in_range1(mod(a, b))))
+
+axiom H20 : ((result8 = true) -> ((result7 = divides(x2, o1)) and
+  ((result7 = true) <-> (mod(o1, x2) = 0))))
+
+axiom H21 : ((not (result8 = true)) -> (result7 = false))
+
+axiom H22 : ((result7 = true) -> ((result6 = divides(x2, b)) and
+  ((result6 = true) <-> (mod(b, x2) = 0))))
+
+axiom H23 : ((not (result7 = true)) -> (result6 = false))
+
+axiom H24 : (result6 = true)
+
  (* File "math_euclid.adb", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall o:bool. forall o1:int. forall o2:bool.
-  forall result:int. forall x1:int. forall result1:bool. forall result2:bool.
-  forall result3:bool. forall result4:bool. forall result5:bool.
-  forall result6:bool. forall result7:bool. forall result8:bool.
-  (in_range1(a) -> (in_range1(b) -> ((({ int__content = result } = {
-  int__content = x }) and (x1 = 1)) -> (((1 <= x1) and (x1 <= 2147483647)) ->
-  ((((((result3 = divides(x1, a)) and ((result3 = true) <-> (mod(a,
-  x1) = 0))) and (((result3 = true) and ((result2 = divides(x1, b)) and
-  ((result2 = true) <-> (mod(b, x1) = 0)))) or ((not (result3 = true)) and
-  (result2 = false)))) and (((result2 = true) and (((o = divides(b, a)) and
-  ((o = true) <-> (mod(a, b) = 0))) and (((not (o = true)) and
-  (result1 = true)) or ((o = true) and (result1 = false))))) or
-  ((not (result2 = true)) and (result1 = false)))) and ((result1 = true) ->
-  (divides(x1, mod(a, b)) = true))) -> (((((result5 = divides(b, a)) and
-  ((result5 = true) <-> (mod(a, b) = 0))) and (((result5 = true) and
-  ((result4 = divides(x1, b)) and ((result4 = true) <-> (mod(b,
-  x1) = 0)))) or ((not (result5 = true)) and (result4 = false)))) and
-  ((result4 = true) -> (divides(x1, a) = true))) -> ((((((o2 = divides(b,
-  a)) and ((o2 = true) <-> (mod(a, b) = 0))) and (((not (o2 = true)) and
-  (result8 = true)) or ((o2 = true) and (result8 = false)))) and
-  (((result8 = true) and (((o1 = mod(a, b)) and in_range1(mod(a, b))) and
-  ((result7 = divides(x1, o1)) and ((result7 = true) <-> (mod(o1,
-  x1) = 0))))) or ((not (result8 = true)) and (result7 = false)))) and
-  (((result7 = true) and ((result6 = divides(x1, b)) and
-  ((result6 = true) <-> (mod(b, x1) = 0)))) or ((not (result7 = true)) and
-  (result6 = false)))) -> ((result6 = true) -> (not (divides(b,
-  a) = true)))))))))))
+goal WP_parameter_def : (not (divides(b, a) = true))

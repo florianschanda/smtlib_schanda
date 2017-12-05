@@ -103,6 +103,7 @@
 (declare-const o18 Int)
 (declare-const o19 Int)
 (declare-const o20 Int)
+(declare-const o21 Int)
 (declare-const result Int)
 (declare-const v_hi1 Int)
 (declare-const result1 Int)

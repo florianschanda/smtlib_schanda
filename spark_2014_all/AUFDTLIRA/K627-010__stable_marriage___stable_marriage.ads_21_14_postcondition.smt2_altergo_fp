@@ -437,59 +437,127 @@ axiom def_axiom2 :
   (forall temp___415:int.
   ((temp___412(temp___414)[temp___415]) = temp___414)))
 
- (* File "stable_marriage.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall seen:(int,bool) farray. forall rank:int.
-  forall stable_marriage__is_permutation_1__result:bool.
-  forall temp___403:int. forall temp___401:(int,bool) farray.
-  forall result:(int,bool) farray. forall seen1:(int,bool) farray.
-  forall result1:int. forall rank1:int. forall seen2:(int,bool) farray.
-  forall rank2:int. forall result2:(int,bool) farray.
-  forall seen3:(int,bool) farray. forall seen4:(int,bool) farray.
-  forall rank3:int. forall seen5:(int,bool) farray. forall rank4:int.
-  forall seen6:(int,bool) farray. forall rank5:int.
-  forall seen7:(int,bool) farray. forall rank6:int. forall result3:bool.
-  forall stable_marriage__is_permutation_1__result1:bool.
-  forall stable_marriage__is_permutation_1__result2:bool.
-  forall stable_marriage__is_permutation_1__result3:bool.
-  forall seen8:(int,bool) farray. forall rank7:int.
-  forall stable_marriage__is_permutation_1__result4:bool.
-  forall seen9:(int,bool) farray. forall rank8:int.
-  forall stable_marriage__is_permutation_1__result5:bool.
-  (forall result4:bool. (((((({ map__content1 = result } = { map__content1 =
-  seen }) and
+logic seen : (int,bool) farray
+
+logic rank : int
+
+logic stable_marriage__is_permutation_1__result : bool
+
+logic temp___403 : int
+
+logic temp___401 : (int,bool) farray
+
+logic g1 : int
+
+logic prev : int
+
+logic result : (int,bool) farray
+
+logic seen1 : (int,bool) farray
+
+logic result1 : int
+
+logic rank1 : int
+
+logic seen2 : (int,bool) farray
+
+logic rank2 : int
+
+logic result2 : (int,bool) farray
+
+logic seen3 : (int,bool) farray
+
+logic result3 : int
+
+logic rank3 : int
+
+logic seen4 : (int,bool) farray
+
+logic rank4 : int
+
+logic seen5 : (int,bool) farray
+
+logic rank5 : int
+
+logic seen6 : (int,bool) farray
+
+logic rank6 : int
+
+logic seen7 : (int,bool) farray
+
+logic rank7 : int
+
+logic seen8 : (int,bool) farray
+
+logic rank8 : int
+
+logic seen9 : (int,bool) farray
+
+logic rank9 : int
+
+logic result4 : bool
+
+logic stable_marriage__is_permutation_1__result1 : bool
+
+logic stable_marriage__is_permutation_1__result2 : bool
+
+logic stable_marriage__is_permutation_1__result3 : bool
+
+logic seen10 : (int,bool) farray
+
+logic rank10 : int
+
+logic stable_marriage__is_permutation_1__result4 : bool
+
+logic seen11 : (int,bool) farray
+
+logic rank11 : int
+
+logic stable_marriage__is_permutation_1__result5 : bool
+
+logic result5 : bool
+
+axiom H : ((((result = seen) and
   (seen1 = stable_marriage__is_permutation_1__seen__aggregate_def(of_int(0)))) and
-  (((({ int__content = result1 } = { int__content = rank }) and
-  (rank1 = 1)) and ((((1 <= rank1) and (rank1 <= 64)) and
-  ((((temp___403 = rank1) and ((temp___401 = seen1) and
-  ((forall g1:int. (((1 <= g1) and (g1 <= 64)) -> (((seen2[g1]) = true) <->
-   (exists prev:int. (((1 <= prev) and (prev <= (rank2 - 1))) and
-   (to_rep((r1[prev])) = g1)))))) and
-  ((((1 <= 64) -> in_range2(rank2)) and ((1 <= rank2) and (rank2 <= 64))) and
-  (((seen2 = result2) and
+  ((((result1 = rank) and (rank1 = 1)) and ((((1 <= rank1) and
+  (rank1 <= 64)) -> ((((temp___403 = rank1) and ((temp___401 = seen1) and
+  ((forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
+   (((seen2[g11]) = true) <->
+   (exists prev1:int. (((1 <= prev1) and (prev1 <= (rank2 - 1))) and
+   (to_rep((r1[prev1])) = g11)))))) and ((((1 <= 64) -> in_range2(rank2)) and
+  ((1 <= rank2) and (rank2 <= 64))) and (((seen2 = result2) and
   (seen3 = (seen2[to_rep((r1[rank2])) <- of_int(1)]))) and
-  (rank2 = 64)))))) and (((rank2 = rank3) and (seen3 = seen4)) and
-  ((rank4 = rank2) and (seen5 = seen3)))) and ((({ int__content = rank5 } = {
-  int__content = rank3 }) and ({ map__content1 = seen6 } = { map__content1 =
-  seen4 })) and ((rank6 = rank4) and (seen7 = seen5))))) or
-  ((not ((1 <= rank1) and (rank1 <= 64))) and (((rank1 = rank5) and
-  (seen1 = seen6)) and ((rank6 = rank1) and (seen7 = seen1)))))) and
-  (((bool_eq5(seen6, 1, 64, temp___406(of_int(1)), 1, 64) = true) <->
-  (forall g1:int. (((1 <= g1) and (g1 <= 64)) -> (((seen6[g1]) = true) and
-  (exists rank9:int. (((1 <= rank9) and (rank9 <= 64)) and
-  (to_rep((r1[rank9])) = g1))))))) and
+  (rank2 = 64)))))) and (((rank2 = rank6) and (seen3 = seen6)) and
+  ((rank7 = rank2) and (seen7 = seen3)))) and (((rank8 = rank6) and
+  (seen8 = seen6)) and ((rank9 = rank7) and (seen9 = seen7))))) and
+  ((not ((1 <= rank1) and (rank1 <= 64))) -> (((rank1 = rank8) and
+  (seen1 = seen8)) and ((rank9 = rank1) and (seen9 = seen1)))))) and
+  (((bool_eq5(seen8, 1, 64, temp___406(of_int(1)), 1, 64) = true) <->
+  (forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
+  (((seen8[g11]) = true) and
+  (exists rank12:int. (((1 <= rank12) and (rank12 <= 64)) and
+  (to_rep((r1[rank12])) = g11))))))) and
   (((stable_marriage__is_permutation_1__result1 = stable_marriage__is_permutation_1__result2) and
   (stable_marriage__is_permutation_1__result3 = stable_marriage__is_permutation_1__result1)) and
-  ((result3 = stable_marriage__is_permutation_1__result) and
-  (stable_marriage__is_permutation_1__result1 = bool_eq5(seen6, 1, 64,
+  ((result4 = stable_marriage__is_permutation_1__result) and
+  (stable_marriage__is_permutation_1__result1 = bool_eq5(seen8, 1, 64,
   temp___412(of_int(1)), 1, 64))))))) and
   (((stable_marriage__is_permutation_1__result4 = stable_marriage__is_permutation_1__result2) and
-  (({ int__content = rank7 } = { int__content = rank5 }) and ({
-  map__content1 = seen8 } = { map__content1 = seen6 }))) and
+  ((rank10 = rank8) and (seen10 = seen8))) and
   ((stable_marriage__is_permutation_1__result5 = stable_marriage__is_permutation_1__result3) and
-  ((rank8 = rank6) and (seen9 = seen7))))) and
-  (result4 = stable_marriage__is_permutation_1__result4)) ->
-  ((stable_marriage__is_permutation_1__result4 = true) ->
-  (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
-  (exists rank9:int. (((1 <= rank9) and (rank9 <= 64)) and
-  (to_rep((r1[rank9])) = g1)))))))))
+  ((rank11 = rank9) and (seen11 = seen9)))))
+
+axiom H1 : (result5 = stable_marriage__is_permutation_1__result4)
+
+axiom H2 : (stable_marriage__is_permutation_1__result4 = true)
+
+logic g11 : int
+
+axiom H3 : (1 <= g11)
+
+axiom H4 : (g11 <= 64)
+
+ (* File "stable_marriage.ads", line 20, characters 0-0 *)
+goal WP_parameter_def :
+  (exists rank12:int. (((1 <= rank12) and (rank12 <= 64)) and
+  (to_rep((r1[rank12])) = g11)))

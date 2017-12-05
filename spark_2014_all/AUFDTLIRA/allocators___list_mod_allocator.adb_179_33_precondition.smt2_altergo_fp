@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1061,11 +1061,249 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range8(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
+logic res : int
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic next_avail : int
+
+logic i : int
+
+logic o : us_rep1
+
+logic o1 : us_rep2
+
+logic o2 : us_rep1
+
+logic o3 : us_rep2
+
+logic o4 : us_rep1
+
+logic o5 : us_rep2
+
+logic us : us_rep1
+
+logic us1 : us_rep2
+
+logic o6 : us_rep1
+
+logic o7 : us_rep2
+
+logic o8 : us_rep1
+
+logic o9 : us_rep2
+
+logic list_mod_allocator__alloc__ma__assume : us_rep1
+
+logic o10 : int
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : status
+
+logic o14 : resource
+
+logic o15 : resource
+
+logic o16 : int
+
+logic o17 : resource
+
+logic o18 : status
+
+logic o19 : status
+
+logic o20 : resource
+
+logic o21 : status
+
+logic o22 : resource
+
+logic o23 : int
+
+logic o24 : (int,us_rep) farray
+
+logic r : int
+
+logic o25 : us_rep1
+
+logic o26 : us_rep2
+
+logic o27 : us_rep1
+
+logic o28 : us_rep2
+
+logic list_mod_allocator__alloc__C96b__assume : us_rep1
+
+logic list_mod_allocator__alloc__B98b__L_4__R99b__assume : int
+
+logic temp___307 : int
+
+logic o29 : int
+
+logic j : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic j1 : int
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : int
+
+logic o36 : int
+
+logic j2 : int
+
+logic o37 : int
+
+logic o38 : bool
+
+logic temp___306 : int
+
+logic o39 : int
+
+logic o40 : status
+
+logic o41 : resource
+
+logic o42 : status
+
+logic o43 : resource
+
+logic o44 : resource
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : us_rep1
+
+logic o48 : us_rep2
+
+logic o49 : us_rep1
+
+logic o50 : us_rep2
+
+logic o51 : us_rep1
+
+logic o52 : us_rep2
+
+logic o53 : us_rep1
+
+logic o54 : us_rep2
+
+logic o55 : us_rep1
+
+logic data1 : (int,us_rep) farray
+
+logic first_available1 : int
+
+logic next_avail1 : int
+
+logic i1 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic next_avail2 : int
+
+logic result2 : (int,us_rep) farray
+
+logic data2 : (int,us_rep) farray
+
+logic result3 : int
+
+logic first_available2 : int
+
+logic result4 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic i8 : int
+
+logic result8 : int
+
+logic res2 : int
+
+logic res3 : int
+
+logic data3 : (int,us_rep) farray
+
+logic first_available3 : int
+
+logic next_avail3 : int
+
+logic i9 : int
+
+logic res4 : int
+
+logic data4 : (int,us_rep) farray
+
+logic first_available4 : int
+
+logic next_avail4 : int
+
+logic i10 : int
+
+logic res5 : int
+
+logic data5 : (int,us_rep) farray
+
+logic first_available5 : int
+
+logic next_avail5 : int
+
+logic i11 : int
+
+logic res6 : int
+
+logic data6 : (int,us_rep) farray
+
+logic first_available6 : int
+
+logic next_avail6 : int
+
+logic i12 : int
+
+logic result9 : bool
+
+axiom H : in_range2(first_available)
+
+axiom H1 : ((0 <= 10000) -> in_range2(res))
+
+axiom H2 : (is_valid(data, first_available) = true)
+
+axiom H3 : ((0 <= 10000) -> in_range2(next_avail))
+
  (* File "list_mod_allocator.adb", line 143, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall data:(int,us_rep) farray.
-  forall first_available:int. forall next_avail:int.
-  (in_range2(first_available) -> (((0 <= 10000) -> in_range2(res)) ->
-  ((is_valid(data, first_available) = true) -> (((0 <= 10000) ->
-  in_range2(next_avail)) -> (is_well_formed(data,
-  first_available) = true))))))
+goal WP_parameter_def : (is_well_formed(data, first_available) = true)

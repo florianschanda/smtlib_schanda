@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1977,11 +1977,38 @@ axiom readmem32__post_axiom :
   x86__memory)), lsl_bv2(toBig3(readmem16(add1(addr1, of_int1(2)),
   x86__memory)), of_int3(16))))))
 
- (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t1,unsigned8) farray. forall memory1:(t1,unsigned8) farray.
-  (((readmem8(addr, memory1) = toSmall(bw_and1(val__, of_int1(255)))) and
+logic memory : (t1,unsigned8) farray
+
+logic memory1 : (t1,unsigned8) farray
+
+logic memory2 : (t1,unsigned8) farray
+
+logic memory3 : (t1,unsigned8) farray
+
+logic memory4 : (t1,unsigned8) farray
+
+logic memory5 : (t1,unsigned8) farray
+
+logic memory6 : (t1,unsigned8) farray
+
+logic memory7 : (t1,unsigned8) farray
+
+logic memory8 : (t1,unsigned8) farray
+
+logic memory9 : (t1,unsigned8) farray
+
+logic memory10 : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : ((readmem8(addr, memory1) = toSmall(bw_and1(val__,
+  of_int1(255)))) and
   (forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
   of_int1(18446744073709551615))) -> ((not (i = addr)) ->
-  (to_rep((memory1[i])) = to_rep((memory[i]))))))) -> ule1(toBig(of_int(0)),
-  bw_and1(lsr_bv1(val__, of_int1(8)), of_int1(255)))))
+  (to_rep((memory1[i])) = to_rep((memory[i])))))))
+
+ (* File "x86.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(lsr_bv1(val__,
+  of_int1(8)), of_int1(255)))

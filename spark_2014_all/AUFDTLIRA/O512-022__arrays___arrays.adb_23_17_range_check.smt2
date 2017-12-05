@@ -113,6 +113,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (dynamic_invariant x true false true))
 (assert (and (= o (count_even x)) (and (in_range1 o) (and (<= o (length x)) (=> (= (length x) 0) (= o 0))))))
 (assert (and (= o1 (length x)) (in_range (length x))))

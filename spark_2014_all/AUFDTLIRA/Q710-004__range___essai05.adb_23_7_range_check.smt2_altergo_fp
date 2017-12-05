@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type tindex_aB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -309,7 +309,7 @@ axiom compare_def_gt :
 
 type index_a
 
-predicate in_range4(x: int) = (((-3) <= x) and (x <= 15))
+predicate in_range4(x: int) = (((- 3) <= x) and (x <= 15))
 
 logic bool_eq6 : int, int -> bool
 
@@ -720,7 +720,13 @@ axiom def_axiom :
   (forall temp___262:int. (((essai05__conv2__r__aggregate_def(temp___259,
   temp___260, temp___261)).elts3[temp___262]) = of_rep(temp___259)))))
 
+logic temp___264 : (int,integer) farray
+
+logic temp___2641 : t3
+
+axiom H : dynamic_property((- 3), 15, to_rep1(first(v1)), to_rep1(last(v1)))
+
+axiom H1 : (to_rep1(first(v1)) <= to_rep1(last(v1)))
+
  (* File "essai05.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property((-3), 15, to_rep1(first(v1)),
-  to_rep1(last(v1))) -> ((to_rep1(first(v1)) <= to_rep1(last(v1))) ->
-  (3 <= to_rep1(first(v1)))))
+goal WP_parameter_def : (3 <= to_rep1(first(v1)))

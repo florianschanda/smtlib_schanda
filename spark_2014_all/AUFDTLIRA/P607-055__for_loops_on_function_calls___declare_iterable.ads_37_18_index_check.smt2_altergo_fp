@@ -393,6 +393,10 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range2(c)
+
+axiom H1 : (has_element({ us_split_fields1 = {
+  rec__declare_iterable__container__content = x } }, c) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range2(c) -> ((has_element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c) = true) -> (1 <= c)))
+goal WP_parameter_def : (1 <= c)

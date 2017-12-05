@@ -249,10 +249,12 @@ logic f_of_pair__function_guard : bool, us_rep -> prop
 
 axiom f_of_pair__post_axiom : true
 
+axiom H :
+  (forall n:int. (((0 <= n) and (n <= 255)) -> (f_of_pair({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(0);
+  rec__records_prooffuncs__pair__b = of_rep(n) } }) = true)))
+
  (* File "records.adb", line 520, characters 0-0 *)
-goal WP_parameter_def :
-  ((forall n:int. (((0 <= n) and (n <= 255)) -> (f_of_pair({
-   us_split_fields1 = { rec__records_prooffuncs__pair__a = of_rep(0);
-   rec__records_prooffuncs__pair__b = of_rep(n) } }) = true))) ->
-  (f_of_pair({ us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  of_rep(5); rec__records_prooffuncs__pair__b = of_rep(5) } }) = true))
+goal WP_parameter_def : (f_of_pair({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = of_rep(5);
+  rec__records_prooffuncs__pair__b = of_rep(5) } }) = true)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -285,7 +285,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type octet_array_extended_index
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 65535))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 65535))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1186,20 +1186,100 @@ type t33b__ref = { t33b__content : us_t1
 
 function t33b__ref___projection(a: t33b__ref) : us_t1 = (a).t33b__content
 
- (* File "cubedos-lib-xdr.ads", line 244, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last4:int. forall o:int. (dynamic_property(0, 65535,
-  to_rep(first(data1)), to_rep(last(data1))) -> (in_range2(position) ->
-  (dynamic_property(0, 65535, to_rep(value__first), to_rep(value__last)) ->
-  ((((-1) <= 65535) -> in_range3(last4)) ->
-  (((((comp_mod(position,4) = 0) and (comp_mod(length({ elts = data; rt =
-  data1 }),4) = 0)) and ((to_rep(first(data1)) <= position) and
+logic value : (int,octet) farray
+
+logic last4 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___535 : int
+
+logic o9 : (int,octet) farray
+
+logic temp___536 : (int,octet) farray
+
+logic temp___5361 : t2
+
+logic temp___537 : (int,octet) farray
+
+logic temp___5371 : t1
+
+logic temp___538 : (int,octet) farray
+
+logic temp___5381 : t1
+
+logic o10 : (int,octet) farray
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic result : (int,octet) farray
+
+logic value1 : (int,octet) farray
+
+logic result1 : int
+
+logic last5 : int
+
+logic value2 : (int,octet) farray
+
+logic last6 : int
+
+logic value3 : (int,octet) farray
+
+logic last7 : int
+
+axiom H : dynamic_property(0, 65535, to_rep(first(data1)),
+  to_rep(last(data1)))
+
+axiom H1 : in_range2(position)
+
+axiom H2 : dynamic_property(0, 65535, to_rep(value__first),
+  to_rep(value__last))
+
+axiom H3 : (((- 1) <= 65535) -> in_range3(last4))
+
+axiom H4 : ((((comp_mod(position,4) = 0) and (comp_mod(length({ elts = data;
+  rt = data1 }),4) = 0)) and ((to_rep(first(data1)) <= position) and
   (position <= to_rep(last(data1))))) and
-  (((to_rep(value__first) <= to_rep(value__last)) and
-  ((position + (length_with_padding(((to_rep(value__last) - to_rep(value__first)) + 1)) - 1)) <= to_rep(last(data1)))) or
-  ((not (to_rep(value__first) <= to_rep(value__last))) and
-  ((position + (length_with_padding(0) - 1)) <= to_rep(last(data1)))))) ->
-  ((((to_rep(value__first) <= to_rep(value__last)) and
-  (o = ((to_rep(value__last) - to_rep(value__first)) + 1))) or
-  ((not (to_rep(value__first) <= to_rep(value__last))) and (o = 0))) ->
-  in_range1(o))))))))
+  (((to_rep(value__first) <= to_rep(value__last)) ->
+  ((position + (length_with_padding(((to_rep(value__last) - to_rep(value__first)) + 1)) - 1)) <= to_rep(last(data1)))) and
+  ((not (to_rep(value__first) <= to_rep(value__last))) ->
+  ((position + (length_with_padding(0) - 1)) <= to_rep(last(data1))))))
+
+axiom H5 : ((to_rep(value__first) <= to_rep(value__last)) ->
+  (o6 = ((to_rep(value__last) - to_rep(value__first)) + 1)))
+
+axiom H6 : ((not (to_rep(value__first) <= to_rep(value__last))) -> (o6 = 0))
+
+ (* File "cubedos-lib-xdr.ads", line 244, characters 0-0 *)
+goal WP_parameter_def : in_range1(o6)

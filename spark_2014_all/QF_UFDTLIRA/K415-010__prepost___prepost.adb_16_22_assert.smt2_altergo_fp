@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -143,6 +143,9 @@ logic z : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range1(z)
+
+axiom H1 : ((not (z = 1)) and (fun_is_zero(z) = true))
+
  (* File "prepost.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (in_range1(z) -> (((not (z = 1)) and
-  (fun_is_zero(z) = true)) -> (z = 0)))
+goal WP_parameter_def : (z = 0)

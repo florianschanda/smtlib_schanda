@@ -234,6 +234,7 @@
 (define-fun default_initial_assumption2 ((temp___expr_555 us_rep) (temp___skip_top_level_556 Bool)) Bool (and (= (attr__constrained temp___expr_555) false) (= (to_rep1 (rec__with_default__ok_nested_defaults__empty_rec1__d (us_split_discrs1 temp___expr_555))) c)))
 (define-fun default_initial_assumption3 ((temp___expr_582 us_rep2) (temp___skip_top_level_583 Bool)) Bool (and (= (attr__constrained1 temp___expr_582) false) (= (to_rep1 (rec__with_default__ok_nested_defaults__empty_rec2__d (us_split_discrs3 temp___expr_582))) 1)))
 (declare-const o Int)
+(declare-const temp___669 Int)
 (declare-const result Bool)
 (assert (in_range c))
 (assert (=> (<= 1 0) (= o (+ (- 0 1) 1))))

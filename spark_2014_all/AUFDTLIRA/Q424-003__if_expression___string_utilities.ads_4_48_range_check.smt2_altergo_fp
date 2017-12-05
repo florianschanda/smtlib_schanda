@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -469,11 +469,15 @@ type t16s__ref = { t16s__content : us_t1
 
 function t16s__ref___projection(a: t16s__ref) : us_t1 = (a).t16s__content
 
+logic temp___230 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : ((temp___230 = (to_rep1(first(s1)) + 1)) and
+  in_range((to_rep1(first(s1)) + 1)))
+
+axiom H2 : (temp___230 <= to_rep1(last(s1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___230:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(s1)), to_rep1(last(s1))) ->
-  (((temp___230 = (to_rep1(first(s1)) + 1)) and
-  in_range((to_rep1(first(s1)) + 1))) ->
-  ((temp___230 <= to_rep1(last(s1))) ->
-  (to_rep1(first(s1)) <= temp___230)))))
+goal WP_parameter_def : (to_rep1(first(s1)) <= temp___230)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -407,18 +407,31 @@ axiom def_axiom4 :
   temp___219)[1]) = of_rep(temp___218)) and ((temp___216(temp___218,
   temp___219)[2]) = of_rep(temp___219))))
 
- (* File "arr_aggregate.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall a:(int,integer) farray.
-  forall a1:(int,integer) farray. forall a2:(int,integer) farray.
-  ((in_range(one) and (in_range(b) and ((one = 1) and ((((b = 1) and
-  ((to_rep((a[one])) = one) and (to_rep((a[2])) = 2))) or ((not (b = 1)) and
-  (((b = 2) and
-  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep((a[k])) = one)))) or
-  ((not (b = 2)) and (((b = 3) and
-  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep((a[k])) = one)))) or
-  ((not (b = 3)) and (((b = 4) and ((to_rep((a[one])) = 2) and
-  (to_rep((a[2])) = one))) or ((not (b = 4)) and
+logic one : int
+
+logic a : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+axiom H : in_range(one)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (one = 1)
+
+axiom H3 : ((((b = 1) -> ((to_rep((a[one])) = one) and
+  (to_rep((a[2])) = 2))) and ((not (b = 1)) -> (((b = 2) ->
+  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep((a[k])) = one)))) and
+  ((not (b = 2)) -> (((b = 3) ->
+  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep((a[k])) = one)))) and
+  ((not (b = 3)) -> (((b = 4) -> ((to_rep((a[one])) = 2) and
+  (to_rep((a[2])) = one))) and ((not (b = 4)) ->
   ((to_rep((a[one])) = one) and (to_rep((a[2])) = 2)))))))))) and
-  ((a = a1) and (a2 = a)))))) -> ((b = 1) -> (bool_eq2(a1, 1, 2,
-  temp___192(one, 2), 1, 2) = true))))
+  ((a = a1) and (a2 = a)))
+
+axiom H4 : (b = 1)
+
+ (* File "arr_aggregate.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (bool_eq2(a1, 1, 2, temp___192(one, 2), 1, 2) = true)

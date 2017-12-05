@@ -81,7 +81,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -142,6 +142,22 @@ logic simple_extended_r2__function_guard : bool, int -> prop
 axiom simple_extended_r2__post_axiom :
   (forall x:int [simple_extended_r2(x)]. (in_range1(x) ->
   (simple_extended_r2(x) = true)))
+
+logic c : bool
+
+logic o : bool
+
+logic result : bool
+
+logic c1 : bool
+
+axiom H : ((o = simple_extended_r2(4)) and (o = true))
+
+axiom H1 : (result = c)
+
+axiom H2 : (c1 = o)
+
+axiom H3 : (c1 = true)
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

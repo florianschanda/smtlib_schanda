@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -417,7 +417,7 @@ axiom is_perm__def_axiom :
   (forall a:(int,integer) farray. forall a1:t. forall b:(int,integer) farray.
   forall b1:t [is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 })].
   ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 }) = true) <->
-  (forall e:int. ((((-2147483648) <= e) and (e <= 2147483647)) -> (occ({
+  (forall e:int. ((((- 2147483648) <= e) and (e <= 2147483647)) -> (occ({
   elts = a; rt = a1 }, e) = occ({ elts = b; rt = b1 }, e))))))
 
 logic values__first : integer
@@ -791,32 +791,122 @@ axiom occ_def__def_axiom :
   (occ_def({ elts = a; rt = a1 }, e) = occ_def(remove_last({ elts = a; rt =
   a1 }), e)))))))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,integer) farray. forall interm:(int,integer) farray.
-  forall e:int. forall o:int. forall o1:integer. forall o2:int.
-  forall result:int. forall e1:int. ((dynamic_property(0, 2147483646,
-  to_rep(values__first), to_rep(values__last)) and
-  (to_rep(values__first) = 0)) -> (in_range2(x) -> (in_range2(y) ->
-  (((dynamic_property2(to_rep(values__first), to_rep(values__last),
+logic values : (int,integer) farray
+
+logic interm : (int,integer) farray
+
+logic e : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___313 : int
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic e1 : int
+
+logic e2 : int
+
+logic result2 : int
+
+logic e3 : int
+
+logic e4 : int
+
+logic e5 : int
+
+logic e6 : int
+
+logic e7 : int
+
+logic e8 : int
+
+logic e9 : int
+
+logic e10 : int
+
+logic e11 : int
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(values__first),
+  to_rep(values__last)) and (to_rep(values__first) = 0))
+
+axiom H1 : in_range2(x)
+
+axiom H2 : in_range2(y)
+
+axiom H3 : ((dynamic_property2(to_rep(values__first), to_rep(values__last),
   to_rep(first2(init1)), to_rep(last2(init1))) and
   ((to_rep(first2(init1)) = to_rep(values__first)) and
   (to_rep(last2(init1)) = to_rep(values__last)))) and
-  (to_rep(first2(init1)) = 0)) -> (((dynamic_property4(to_rep(values__first),
-  to_rep(values__last), to_rep(interm__first), to_rep(interm__last)) and
+  (to_rep(first2(init1)) = 0))
+
+axiom H4 : ((dynamic_property4(to_rep(values__first), to_rep(values__last),
+  to_rep(interm__first), to_rep(interm__last)) and
   ((to_rep(interm__first) = to_rep(values__first)) and
   (to_rep(interm__last) = to_rep(values__last)))) and
-  (to_rep(interm__first) = 0)) -> ((((to_rep(values__first) <= x) and
+  (to_rep(interm__first) = 0))
+
+axiom H5 : (((to_rep(values__first) <= x) and
   (x <= to_rep(values__last))) and (((to_rep(values__first) <= y) and
   (y <= to_rep(values__last))) and ((is_set({ elts = init; rt =
   mk(to_rep(first2(init1)), to_rep(last2(init1))) }, x, to_rep((init[y])), {
   elts = interm; rt = mk(to_rep(interm__first), to_rep(interm__last))
   }) = true) and (is_set({ elts = interm; rt = mk(to_rep(interm__first),
   to_rep(interm__last)) }, y, to_rep((init[x])), { elts = values; rt =
-  mk(to_rep(values__first), to_rep(values__last)) }) = true)))) -> ((({
-  int__content = result } = { int__content = e }) and
-  (e1 = (-2147483648))) -> ((((-2147483648) <= e1) and (e1 <= 2147483647)) ->
-  ((((((to_rep(first2(init1)) <= y) and (y <= to_rep(last2(init1)))) and
-  (o = y)) and (o1 = (init[o]))) and (o2 = to_rep(o1))) ->
-  (to_rep(first(mk(to_rep(first2(init1)),
-  to_rep(last2(init1))))) <= x)))))))))))
+  mk(to_rep(values__first), to_rep(values__last)) }) = true))))
+
+axiom H6 : (result1 = e)
+
+axiom H7 : (e1 = (- 2147483648))
+
+axiom H8 : ((- 2147483648) <= e1)
+
+axiom H9 : (e1 <= 2147483647)
+
+axiom H10 : ((to_rep(first2(init1)) <= y) and (y <= to_rep(last2(init1))))
+
+axiom H11 : (o6 = y)
+
+axiom H12 : (o7 = (init[o6]))
+
+axiom H13 : (o8 = to_rep(o7))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(mk(to_rep(first2(init1)),
+  to_rep(last2(init1))))) <= x)

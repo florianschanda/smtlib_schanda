@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -430,7 +430,7 @@ axiom coerce_axiom2 :
 
 type value
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1672,47 +1672,169 @@ axiom not_in__def_axiom :
   (forall j:int. (((low <= j) and (j <= up)) ->
   (not (to_rep3((a1[j])) = v))))))))
 
+logic t1__split_fields : (int,value) farray
+
+logic t1__split_fields1 : t1
+
+logic t2__split_fields : (int,value) farray
+
+logic t2__split_fields1 : t1
+
+logic t3__split_fields : (int,value) farray
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : (int,value) farray
+
+logic my_test__t1__assume : natural
+
+logic my_test__t1__assume1 : (int,value) farray
+
+logic my_test__t1__assume2 : t1
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : (int,value) farray
+
+logic my_test__t2__assume : natural
+
+logic my_test__t2__assume1 : (int,value) farray
+
+logic my_test__t2__assume2 : t1
+
+logic us : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : natural
+
+logic o14 : (int,value) farray
+
+logic o15 : t1
+
+logic o16 : natural
+
+logic o17 : (int,value) farray
+
+logic o18 : t1
+
+logic temp___326 : natural
+
+logic temp___3261 : (int,value) farray
+
+logic i : int
+
+logic o19 : natural
+
+logic o20 : (int,value) farray
+
+logic o21 : t1
+
+logic o22 : natural
+
+logic o23 : (int,value) farray
+
+logic o24 : t1
+
+logic temp___330 : natural
+
+logic temp___3301 : (int,value) farray
+
+logic result : (int,value) farray
+
+logic result1 : t1
+
+logic t1__split_fields2 : (int,value) farray
+
+logic t1__split_fields3 : t1
+
+logic result2 : (int,value) farray
+
+logic result3 : t1
+
+logic t2__split_fields2 : (int,value) farray
+
+logic t2__split_fields3 : t1
+
+logic result4 : (int,value) farray
+
+logic t3__split_fields1 : (int,value) farray
+
+logic result5 : (int,value) farray
+
+logic t3__split_fields2 : (int,value) farray
+
+logic t1__split_fields4 : (int,value) farray
+
+logic t1__split_fields5 : t1
+
+axiom H : (to_rep2(o) = 10)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (o2 = o1)
+
+axiom H3 : (temp___292(5, 1, 3, 0, 9, 8, 2, 7, 4, 6) = o3)
+
+axiom H4 : (o2 = my_test__t1__assume)
+
+axiom H5 : (o3 = my_test__t1__assume1)
+
+axiom H6 : (mk1(1, 10) = my_test__t1__assume2)
+
+axiom H7 : ((result = t1__split_fields) and (result1 = t1__split_fields1))
+
+axiom H8 : ((t1__split_fields2 = my_test__t1__assume1) and
+  (t1__split_fields3 = my_test__t1__assume2))
+
+axiom H9 : (t1__split_discrs = my_test__t1__assume)
+
+axiom H10 : (dynamic_property2(1, to_rep2(t1__split_discrs),
+  to_rep1(first2(t1__split_fields3)), to_rep1(last2(t1__split_fields3))) and
+  ((to_rep1(first2(t1__split_fields3)) = 1) and
+  (to_rep1(last2(t1__split_fields3)) = to_rep2(t1__split_discrs))))
+
+axiom H11 : (to_rep2(o4) = 10)
+
+axiom H12 : (o4 = o5)
+
+axiom H13 : (o6 = o5)
+
+axiom H14 : (temp___305(4, 8, 6, 9, 0, 1, 7, 2, 5, 3) = o7)
+
+axiom H15 : (o6 = my_test__t2__assume)
+
+axiom H16 : (o7 = my_test__t2__assume1)
+
+axiom H17 : (mk1(1, 10) = my_test__t2__assume2)
+
+axiom H18 : ((result2 = t2__split_fields) and (result3 = t2__split_fields1))
+
+axiom H19 : ((t2__split_fields2 = my_test__t2__assume1) and
+  (t2__split_fields3 = my_test__t2__assume2))
+
+axiom H20 : (t2__split_discrs = my_test__t2__assume)
+
+axiom H21 : (dynamic_property2(1, to_rep2(t2__split_discrs),
+  to_rep1(first2(t2__split_fields3)), to_rep1(last2(t2__split_fields3))) and
+  ((to_rep1(first2(t2__split_fields3)) = 1) and
+  (to_rep1(last2(t2__split_fields3)) = to_rep2(t2__split_discrs))))
+
  (* File "my_test.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1__split_fields:(int,value) farray. forall t1__split_fields1:t1.
-  forall t2__split_fields:(int,value) farray. forall t2__split_fields1:t1.
-  forall o:natural. forall o1:natural. forall o2:natural.
-  forall o3:(int,value) farray. forall my_test__t1__assume:natural.
-  forall my_test__t1__assume1:(int,value) farray.
-  forall my_test__t1__assume2:t1. forall o4:natural. forall o5:natural.
-  forall o6:natural. forall o7:(int,value) farray.
-  forall my_test__t2__assume:natural.
-  forall my_test__t2__assume1:(int,value) farray.
-  forall my_test__t2__assume2:t1. forall result:us_split_fields__ref.
-  forall t1__split_fields2:us_split_fields.
-  forall result1:us_split_fields__ref.
-  forall t2__split_fields2:us_split_fields. ((((((to_rep2(o) = 10) and
-  (o = o1)) and ((o2 = o1) and (temp___292(5, 1, 3, 0, 9, 8, 2, 7, 4,
-  6) = o3))) and ((o2 = my_test__t1__assume) and
-  ((o3 = my_test__t1__assume1) and (mk1(1, 10) = my_test__t1__assume2)))) and
-  (((result = { us_split_fields__content = {
-  rec__simple_unc_arrays__table__v = { elts1 = t1__split_fields; rt1 =
-  t1__split_fields1 } } }) and (t1__split_fields2 = {
-  rec__simple_unc_arrays__table__v = { elts1 = my_test__t1__assume1; rt1 =
-  my_test__t1__assume2 } })) and
-  (t1__split_discrs = my_test__t1__assume))) -> ((dynamic_property2(1,
-  to_rep2(t1__split_discrs),
-  to_rep1(first2(((t1__split_fields2).rec__simple_unc_arrays__table__v).rt1)),
-  to_rep1(last2(((t1__split_fields2).rec__simple_unc_arrays__table__v).rt1))) and
-  ((to_rep1(first2(((t1__split_fields2).rec__simple_unc_arrays__table__v).rt1)) = 1) and
-  (to_rep1(last2(((t1__split_fields2).rec__simple_unc_arrays__table__v).rt1)) = to_rep2(t1__split_discrs)))) ->
-  ((((((to_rep2(o4) = 10) and (o4 = o5)) and ((o6 = o5) and (temp___305(4, 8,
-  6, 9, 0, 1, 7, 2, 5, 3) = o7))) and ((o6 = my_test__t2__assume) and
-  ((o7 = my_test__t2__assume1) and (mk1(1, 10) = my_test__t2__assume2)))) and
-  (((result1 = { us_split_fields__content = {
-  rec__simple_unc_arrays__table__v = { elts1 = t2__split_fields; rt1 =
-  t2__split_fields1 } } }) and (t2__split_fields2 = {
-  rec__simple_unc_arrays__table__v = { elts1 = my_test__t2__assume1; rt1 =
-  my_test__t2__assume2 } })) and
-  (t2__split_discrs = my_test__t2__assume))) -> ((dynamic_property2(1,
-  to_rep2(t2__split_discrs),
-  to_rep1(first2(((t2__split_fields2).rec__simple_unc_arrays__table__v).rt1)),
-  to_rep1(last2(((t2__split_fields2).rec__simple_unc_arrays__table__v).rt1))) and
-  ((to_rep1(first2(((t2__split_fields2).rec__simple_unc_arrays__table__v).rt1)) = 1) and
-  (to_rep1(last2(((t2__split_fields2).rec__simple_unc_arrays__table__v).rt1)) = to_rep2(t2__split_discrs)))) ->
-  in_range4(10))))))
+goal WP_parameter_def : in_range4(10)

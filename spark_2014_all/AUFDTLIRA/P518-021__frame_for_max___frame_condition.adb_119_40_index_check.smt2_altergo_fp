@@ -174,7 +174,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -501,19 +501,56 @@ logic old_a1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(old_a1)),
+  to_rep1(last(old_a1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H2 : ((to_rep1(first(old_a1)) = to_rep1(a__first)) and
+  (to_rep1(last(old_a1)) = to_rep1(a__last)))
+
+axiom H3 : (to_rep1(a__first) <= i)
+
+axiom H4 : (i <= to_rep1(a__last))
+
+axiom H5 : ((to_rep1(first(old_a1)) <= i) and (i <= to_rep1(last(old_a1))))
+
+axiom H6 : (o = i)
+
+axiom H7 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o1;
+  rec__frame_condition__cell__max_left = o2;
+  rec__frame_condition__cell__max_right = o3 } } = (old_a[o]))
+
+axiom H8 : (o1 = o4)
+
+axiom H9 : (o2 = o5)
+
+axiom H10 : (o3 = o6)
+
+axiom H11 : (o7 = o4)
+
+axiom H12 : (o8 = to_rep(o7))
+
  (* File "frame_condition.adb", line 118, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:natural. forall o2:natural.
-  forall o3:natural. forall o4:natural. forall o5:natural. forall o6:natural.
-  forall o7:natural. forall o8:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(old_a1)), to_rep1(last(old_a1))) -> (dynamic_property(1,
-  2147483647, to_rep1(a__first), to_rep1(a__last)) ->
-  (((to_rep1(first(old_a1)) = to_rep1(a__first)) and
-  (to_rep1(last(old_a1)) = to_rep1(a__last))) ->
-  (((to_rep1(a__first) <= i) and (i <= to_rep1(a__last))) ->
-  ((((((((to_rep1(first(old_a1)) <= i) and (i <= to_rep1(last(old_a1)))) and
-  (o = i)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o1; rec__frame_condition__cell__max_left = o2;
-  rec__frame_condition__cell__max_right = o3 } } = (old_a[o]))) and
-  ((o1 = o4) and ((o2 = o5) and (o3 = o6)))) and (o7 = o4)) and
-  (o8 = to_rep(o7))) -> (to_rep1(a__first) <= i)))))))
+goal WP_parameter_def : (to_rep1(a__first) <= i)

@@ -132,6 +132,7 @@
 (declare-const tmp1 Int)
 (declare-const result1 Int)
 (declare-const tmp2 Int)
+(declare-const tmp3 Int)
 (assert (in_range1 a))
 (assert (in_range2 c))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range tmp)))

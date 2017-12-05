@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -309,7 +309,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1004,9 +1004,18 @@ axiom length__post_axiom2 :
 
 axiom get__post_axiom : true
 
- (* File "a-cforse.ads", line 1189, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. ((((o = length({ us_split_discrs1 = {
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : ((o = length({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = right }; us_split_fields1 = {
   rec__my_ordered_sets__n__set = right1 } })) and (in_range1(o) and
-  (o <= to_rep(right)))) and (o1 = (2147483647 - o))) -> in_range(o1)))
+  (o <= to_rep(right))))
+
+axiom H1 : (o1 = (2147483647 - o))
+
+ (* File "a-cforse.ads", line 1189, characters 0-0 *)
+goal WP_parameter_def : in_range(o1)

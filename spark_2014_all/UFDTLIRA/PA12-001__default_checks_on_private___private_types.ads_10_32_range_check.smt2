@@ -97,6 +97,7 @@
 (declare-const temp___202 Bool)
 (declare-const temp___201 Bool)
 (declare-const o Int)
+(declare-const us Int)
 (assert (= temp___202 temp___201))
 (assert (= (to_int1 temp___201) 1))
 (assert (and (= o (id 0)) (and (in_range1 o) (= o 0))))

@@ -200,7 +200,10 @@ axiom rec_ok__def_axiom :
   rec__default_init__rec__f = x } })]. ((rec_ok({ us_split_fields1 = {
   rec__default_init__rec__f = x } }) = true) <-> (to_rep(x) = 0)))
 
+logic temp___271 : natural
+
+axiom H : (to_rep(temp___271) = 0)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___271:natural. ((to_rep(temp___271) = 0) -> (rec_ok({
-  us_split_fields1 = { rec__default_init__rec__f = temp___271 } }) = true)))
+goal WP_parameter_def : (rec_ok({ us_split_fields1 = {
+  rec__default_init__rec__f = temp___271 } }) = true)

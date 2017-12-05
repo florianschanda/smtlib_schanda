@@ -134,7 +134,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -484,17 +484,53 @@ axiom remove__post_axiom :
   elts = a2; rt = a3 }, i)).rt)), to_rep(last((remove({ elts = a2; rt = a3 },
   i)).rt)))))))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. forall result1:bool. forall result2:bool.
-  (dynamic_property(1, 100, to_rep(first(a1)), to_rep(last(a1))) ->
-  (dynamic_property(1, 100, to_rep(first(b1)), to_rep(last(b1))) ->
-  (dynamic_property(1, 100, to_rep(first(c1)), to_rep(last(c1))) ->
-  (((result = invariant__({ elts = a; rt = a1 })) and ((result = true) <->
-  ((to_rep(first(a1)) = 1) and (0 <= to_rep(last(a1)))))) ->
-  ((result = true) -> (((result1 = invariant__({ elts = b; rt = b1 })) and
+logic perm__perm_transitive__result : int
+
+logic o : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic perm__perm_transitive__result1 : int
+
+logic perm__perm_transitive__result2 : int
+
+logic perm__perm_transitive__result3 : int
+
+logic perm__perm_transitive__result4 : int
+
+logic perm__perm_transitive__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep(first(a1)), to_rep(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep(first(b1)), to_rep(last(b1)))
+
+axiom H2 : dynamic_property(1, 100, to_rep(first(c1)), to_rep(last(c1)))
+
+axiom H3 : ((result = invariant__({ elts = a; rt = a1 })) and
+  ((result = true) <-> ((to_rep(first(a1)) = 1) and
+  (0 <= to_rep(last(a1))))))
+
+axiom H4 : (result = true)
+
+axiom H5 : ((result1 = invariant__({ elts = b; rt = b1 })) and
   ((result1 = true) <-> ((to_rep(first(b1)) = 1) and
-  (0 <= to_rep(last(b1)))))) -> ((result1 = true) ->
-  (((result2 = invariant__({ elts = c; rt = c1 })) and ((result2 = true) <->
-  ((to_rep(first(c1)) = 1) and (0 <= to_rep(last(c1)))))) ->
-  ((result2 = true) -> (invariant__({ elts = a; rt = a1 }) = true)))))))))))
+  (0 <= to_rep(last(b1))))))
+
+axiom H6 : (result1 = true)
+
+axiom H7 : ((result2 = invariant__({ elts = c; rt = c1 })) and
+  ((result2 = true) <-> ((to_rep(first(c1)) = 1) and
+  (0 <= to_rep(last(c1))))))
+
+axiom H8 : (result2 = true)
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = a; rt = a1 }) = true)

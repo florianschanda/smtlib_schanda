@@ -247,8 +247,69 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r__split_fields : et1
+
+logic r__split_fields1 : et2
+
+logic temp : int
+
+logic o : int
+
+logic o1 : et1
+
+logic o2 : et1
+
+logic o3 : et2
+
+logic temp___6618 : et1
+
+logic temp___66181 : et2
+
+logic o4 : et2
+
+logic o5 : et1
+
+logic o6 : et2
+
+logic temp___6620 : et1
+
+logic temp___66201 : et2
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : et1
+
+logic result2 : et2
+
+logic r__split_fields2 : et1
+
+logic r__split_fields3 : et2
+
+logic result3 : et1
+
+logic result4 : et2
+
+logic r__split_fields4 : et1
+
+logic r__split_fields5 : et2
+
+logic r__split_fields6 : et1
+
+logic r__split_fields7 : et2
+
+logic temp2 : int
+
+logic r__split_fields8 : et1
+
+logic r__split_fields9 : et2
+
+logic temp3 : int
+
+axiom H : in_range1(to_rep(r__split_fields))
+
+axiom H1 : ((1 <= 25) -> in_range1(temp))
+
  (* File "ar.ads", line 730, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:et1. forall temp:int.
-  (in_range1(to_rep(r__split_fields)) -> (((1 <= 25) -> in_range1(temp)) ->
-  in_range1(to_rep(r__split_fields)))))
+goal WP_parameter_def : in_range1(to_rep(r__split_fields))

@@ -274,6 +274,7 @@
 (declare-const o5 Int)
 (declare-const o6 Int)
 (declare-const o7 Int)
+(declare-const temp___313 Int)
 (declare-const o8 Int)
 (declare-const o9 Int)
 (declare-const temp___312 Int)

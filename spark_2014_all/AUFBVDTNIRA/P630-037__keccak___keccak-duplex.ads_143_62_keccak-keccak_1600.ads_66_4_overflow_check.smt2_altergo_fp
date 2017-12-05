@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -658,7 +658,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1913,15 +1913,120 @@ axiom def_axiom :
   (forall temp___1082:int.
   ((keccak__keccak_1600__duplex__duplex_blank__block__aggregate_def(temp___1081)[temp___1082]) = of_rep1(temp___1081))))
 
- (* File "keccak-duplex.ads", line 115, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
-  forall o:int. forall result:bool. (dynamic_property(0, 2147483647,
-  to_rep(out_data__first), to_rep(out_data__last)) ->
-  (in_range1(out_data_bit_length) -> ((((o = rate_of({ us_split_fields1 = {
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : rate_number
+
+logic block : (int,byte) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic keccak__keccak_1600__duplex__duplex_blank__R185s__assume : int
+
+logic o8 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl1 : t3
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : (int,byte) farray
+
+logic o13 : (int,byte) farray
+
+logic temp___1088 : (int,byte) farray
+
+logic temp___10881 : t4
+
+logic o14 : (int,byte) farray
+
+logic o15 : t1
+
+logic o16 : int
+
+logic result : bool
+
+logic result1 : (int,byte) farray
+
+logic block1 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block : (int,byte) farray
+
+logic result2 : (int,byte) farray
+
+logic block2 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
+
+logic result3 : map
+
+logic result4 : rate_number
+
+logic ctx__split_fields2 : map
+
+logic ctx__split_fields3 : rate_number
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result5 : map
+
+logic result6 : rate_number
+
+logic ctx__split_fields4 : map
+
+logic ctx__split_fields5 : rate_number
+
+logic out_data : (int,byte) farray
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : rate_number
+
+logic out_data1 : (int,byte) farray
+
+logic block3 : (int,byte) farray
+
+logic ctx__split_fields8 : map
+
+logic ctx__split_fields9 : rate_number
+
+logic out_data2 : (int,byte) farray
+
+logic block4 : (int,byte) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep(out_data__first),
+  to_rep(out_data__last))
+
+axiom H1 : in_range1(out_data_bit_length)
+
+axiom H2 : ((o4 = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
-  })) and (in_range3(o) and (o = to_rep3(ctx__split_fields1)))) and
-  (((out_data_bit_length <= o) and (result = true)) or
-  ((not (out_data_bit_length <= o)) and (result = false)))) ->
-  ((result = true) -> in_range((out_data_bit_length + 7)))))))
+  })) and (in_range3(o4) and (o4 = to_rep3(ctx__split_fields1))))
+
+axiom H3 : (((out_data_bit_length <= o4) -> (result = true)) and
+  ((not (out_data_bit_length <= o4)) -> (result = false)))
+
+axiom H4 : (result = true)
+
+ (* File "keccak-duplex.ads", line 115, characters 0-0 *)
+goal WP_parameter_def : in_range((out_data_bit_length + 7))

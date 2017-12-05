@@ -225,18 +225,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -966,7 +966,7 @@ function us_split_fields__ref___137__projection(a: us_split_fields__ref) : us_sp
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___138__projection(a: us_rep) : us_split_fields =
+function us_rep___139__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq8 : us_rep, us_rep -> bool
@@ -1203,7 +1203,7 @@ function us_split_fields__ref___138__projection(a: us_split_fields__ref1) : us_s
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___139__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___140__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -1367,50 +1367,83 @@ function to_int3(x: rx_frame_queue_index) : int = tqtint(to_rep4(x))
 axiom range_int_axiom1 :
   (forall x:rx_frame_queue_index [to_int3(x)]. in_range_int(to_int3(x)))
 
-logic temp___4475 : us_rep -> (t,us_rep) farray
+logic temp___4465 : us_rep -> (t,us_rep) farray
 
 axiom def_axiom :
-  (forall temp___4477:frame_length. forall temp___44771:(int,bits_8) farray.
-  forall temp___44772:rx_errors. forall temp___44773:bool.
-  (forall temp___4478:t. ((temp___4475({ us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 }
-  })[temp___4478]) = { us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 } })))
+  (forall temp___4467:frame_length. forall temp___44671:(int,bits_8) farray.
+  forall temp___44672:rx_errors. forall temp___44673:bool.
+  (forall temp___4468:t. ((temp___4465({ us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 }
+  })[temp___4468]) = { us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 } })))
 
-logic temp___4479 : t -> (int,bits_8) farray
+logic temp___4469 : t -> (int,bits_8) farray
 
 axiom def_axiom1 :
-  (forall temp___4481:t.
-  (forall temp___4482:int.
-  ((temp___4479(temp___4481)[temp___4482]) = of_rep3(temp___4481))))
+  (forall temp___4471:t.
+  (forall temp___4472:int.
+  ((temp___4469(temp___4471)[temp___4472]) = of_rep3(temp___4471))))
+
+logic decadriver__receiver_type__pending_frames_count__result : int
+
+logic self__ : (t,us_rep) farray
+
+logic self__1 : rx_frame_queue_index
+
+logic self__2 : natural
+
+logic self__3 : bool
+
+logic self__4 : bool
+
+logic result : int
+
+logic decadriver__receiver_type__pending_frames_count__result1 : int
+
+logic decadriver__receiver_type__pending_frames_count__result2 : int
+
+logic decadriver__receiver_type__pending_frames_count__result3 : int
+
+logic decadriver__receiver_type__pending_frames_count__result4 : int
+
+logic decadriver__receiver_type__pending_frames_count__result5 : int
+
+logic result1 : int
+
+axiom H :
+  (forall temp___4460:t. ((ule(of_int(0), temp___4460) and ule(temp___4460,
+  of_int(1))) ->
+  (((to_rep2((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) ->
+  (0 <  to_rep1((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__size))) and
+  ((not (to_rep2((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0)) ->
+  (to_rep1((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__size) = 0)))))
+
+axiom H1 :
+  (decadriver__receiver_type__pending_frames_count__result1 = decadriver__receiver_type__pending_frames_count__result2)
+
+axiom H2 :
+  (decadriver__receiver_type__pending_frames_count__result3 = decadriver__receiver_type__pending_frames_count__result1)
+
+axiom H3 : (result = decadriver__receiver_type__pending_frames_count__result)
+
+axiom H4 :
+  (decadriver__receiver_type__pending_frames_count__result1 = to_rep(self__2))
+
+axiom H5 :
+  (decadriver__receiver_type__pending_frames_count__result4 = decadriver__receiver_type__pending_frames_count__result2)
+
+axiom H6 :
+  (decadriver__receiver_type__pending_frames_count__result5 = decadriver__receiver_type__pending_frames_count__result3)
+
+axiom H7 :
+  (result1 = decadriver__receiver_type__pending_frames_count__result4)
 
  (* File "decadriver.ads", line 77, characters 0-0 *)
 goal WP_parameter_def :
-  (forall decadriver__receiver_type__pending_frames_count__result:int.
-  forall self__:(t,us_rep) farray. forall self__1:natural. forall result:int.
-  forall decadriver__receiver_type__pending_frames_count__result1:int.
-  forall decadriver__receiver_type__pending_frames_count__result2:int.
-  forall decadriver__receiver_type__pending_frames_count__result3:int.
-  forall decadriver__receiver_type__pending_frames_count__result4:int.
-  forall decadriver__receiver_type__pending_frames_count__result5:int.
-  (forall result1:int.
-  (((forall temp___4470:t. ((ule(of_int(0), temp___4470) and ule(temp___4470,
-    of_int(1))) ->
-    (((to_rep2((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) and
-    (0 <  to_rep1((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__size))) or
-    ((not (to_rep2((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0)) and
-    (to_rep1((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__size) = 0))))) and
-  (((((decadriver__receiver_type__pending_frames_count__result1 = decadriver__receiver_type__pending_frames_count__result2) and
-  (decadriver__receiver_type__pending_frames_count__result3 = decadriver__receiver_type__pending_frames_count__result1)) and
-  ((result = decadriver__receiver_type__pending_frames_count__result) and
-  (decadriver__receiver_type__pending_frames_count__result1 = to_rep(self__1)))) and
-  ((decadriver__receiver_type__pending_frames_count__result4 = decadriver__receiver_type__pending_frames_count__result2) and
-  (decadriver__receiver_type__pending_frames_count__result5 = decadriver__receiver_type__pending_frames_count__result3))) and
-  (result1 = decadriver__receiver_type__pending_frames_count__result4))) ->
-  (decadriver__receiver_type__pending_frames_count__result4 <= 2))))
+  (decadriver__receiver_type__pending_frames_count__result4 <= 2)

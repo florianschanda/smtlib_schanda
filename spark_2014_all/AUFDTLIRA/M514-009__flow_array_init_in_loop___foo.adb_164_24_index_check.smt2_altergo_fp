@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -246,12 +246,235 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,integer) farray
+
+logic b : int
+
+logic i : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : (int,integer) farray
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : (int,integer) farray
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : int
+
+logic o20 : integer
+
+logic o21 : (int,integer) farray
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : (int,integer) farray
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : int
+
+logic o30 : integer
+
+logic o31 : (int,integer) farray
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : integer
+
+logic o36 : (int,integer) farray
+
+logic o37 : int
+
+logic o38 : integer
+
+logic o39 : int
+
+logic o40 : integer
+
+logic o41 : (int,integer) farray
+
+logic o42 : int
+
+logic o43 : integer
+
+logic o44 : int
+
+logic o45 : integer
+
+logic o46 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result2 : int
+
+logic b1 : int
+
+logic result3 : int
+
+logic i2 : int
+
+logic result4 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result5 : int
+
+logic b2 : int
+
+logic result6 : int
+
+logic i3 : int
+
+logic result7 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic result8 : int
+
+logic b3 : int
+
+logic result9 : int
+
+logic i4 : int
+
+logic result10 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic result11 : int
+
+logic b4 : int
+
+logic result12 : int
+
+logic i5 : int
+
+logic result13 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+logic result14 : int
+
+logic b5 : int
+
+logic result15 : int
+
+logic i6 : int
+
+logic result16 : (int,integer) farray
+
+logic a6 : (int,integer) farray
+
+logic result17 : int
+
+logic b6 : int
+
+logic result18 : int
+
+logic i7 : int
+
+logic result19 : (int,integer) farray
+
+logic a7 : (int,integer) farray
+
+logic result20 : int
+
+logic b7 : int
+
+logic result21 : int
+
+logic i8 : int
+
+logic result22 : (int,integer) farray
+
+logic a8 : (int,integer) farray
+
+logic result23 : int
+
+logic b8 : int
+
+logic result24 : int
+
+logic i9 : int
+
+logic result25 : (int,integer) farray
+
+logic a9 : (int,integer) farray
+
+logic result26 : int
+
+logic b9 : int
+
+logic result27 : int
+
+logic i10 : int
+
+logic result28 : (int,integer) farray
+
+logic a10 : (int,integer) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(b))
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (to_rep(o) = 0)
+
+axiom H4 : (o1 = (a[i1 <- o]))
+
+axiom H5 : (result1 = a)
+
+axiom H6 : (a1 = o1)
+
  (* File "foo.adb", line 150, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall b:int. forall i:int.
-  forall o:integer. forall o1:(int,integer) farray. forall result:int.
-  forall i1:int. forall result1:(int,integer) farray.
-  forall a1:(int,integer) farray. ((((-2147483648) <= 2147483647) ->
-  in_range(b)) -> (((result = i) and (i1 = 1)) -> ((((to_rep(o) = 0) and
-  (o1 = (a[i1 <- o]))) and ((result1 = a) and (a1 = o1))) ->
-  (1 <= (i1 + 1))))))
+goal WP_parameter_def : (1 <= (i1 + 1))

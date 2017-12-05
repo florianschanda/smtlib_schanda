@@ -83,6 +83,7 @@
 (assert (forall ((us_void_param tuple0)) (! (dynamic_invariant (bad_priority us_void_param) true false true) :pattern ((bad_priority us_void_param)))))
 (assert (forall ((us_void_param tuple0)) (! (= (bad_priority us_void_param) 98) :pattern ((bad_priority us_void_param)))))
 (define-fun dynamic_invariant1 ((temp___expr_208 Int) (temp___is_init_205 Bool) (temp___skip_constant_206 Bool) (temp___do_toplevel_207 Bool)) Bool (=> (or (= temp___is_init_205 true) (<= 0 97)) (in_range temp___expr_208)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

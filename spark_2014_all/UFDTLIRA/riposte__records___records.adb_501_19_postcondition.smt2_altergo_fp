@@ -358,5 +358,35 @@ logic r2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic records__field_suppression_on_computation_is_insufficient__result : bool
+
+logic result : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result1 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result2 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result3 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result4 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result5 : bool
+
+logic result1 : bool
+
+axiom H : (((r = true) and
+  (((records__field_suppression_on_computation_is_insufficient__result1 = records__field_suppression_on_computation_is_insufficient__result2) and
+  (records__field_suppression_on_computation_is_insufficient__result3 = records__field_suppression_on_computation_is_insufficient__result1)) and
+  ((result = records__field_suppression_on_computation_is_insufficient__result) and
+  (records__field_suppression_on_computation_is_insufficient__result1 = r)))) and
+  ((records__field_suppression_on_computation_is_insufficient__result4 = records__field_suppression_on_computation_is_insufficient__result2) and
+  (records__field_suppression_on_computation_is_insufficient__result5 = records__field_suppression_on_computation_is_insufficient__result3)))
+
+axiom H1 :
+  (result1 = records__field_suppression_on_computation_is_insufficient__result4)
+
+axiom H2 :
+  (records__field_suppression_on_computation_is_insufficient__result4 = true)
+
  (* File "records.adb", line 498, characters 0-0 *)
 goal WP_parameter_def : true

@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -471,31 +471,462 @@ function t73b__ref___projection(a: t73b__ref) : integer = (a).t73b__content
 
 logic attr__ATTRIBUTE_ADDRESS12 : int
 
- (* File "infoflow.ads", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i_v1:int. forall temp___443:int.
-  forall temp___440:(int,integer) farray. forall temp___438:int.
-  forall temp___437:int. forall o:int. forall o1:integer. forall o2:int.
-  forall o3:integer. forall o4:int. forall o5:(int,integer) farray.
-  forall m:int. forall o6:int. forall o7:integer. forall o8:int.
-  forall a_v1:(int,integer) farray. forall a_v11:(int,integer) farray.
-  forall result:int. forall i_v11:int. forall a_v12:(int,integer) farray.
-  forall i_v12:int. forall result1:(int,integer) farray.
-  forall a_v13:(int,integer) farray. forall a_v14:(int,integer) farray.
-  forall i_v13:int. forall a_v15:(int,integer) farray. forall i_v14:int.
-  forall a_v16:(int,integer) farray. forall i_v15:int.
-  forall a_v17:(int,integer) farray. forall i_v16:int.
-  (dynamic_property((-2147483648), 2147483647, to_rep(a_v1__first),
-  to_rep(a_v1__last)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(a_v2__first), to_rep(a_v2__last)) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(b_v11)),
-  to_rep(last(b_v11))) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(c_v11)), to_rep(last(c_v11))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(b_v21)),
-  to_rep(last(b_v21))) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(c_v21)), to_rep(last(c_v21))) -> (in_range1(k_1) ->
-  (in_range1(k_2) -> (in_range1(i) -> (((to_rep(a_v1__first) = 1) and
-  ((to_rep(first(b_v11)) = 1) and ((to_rep(first(c_v11)) = 1) and
+logic a_v1 : (int,integer) farray
+
+logic a_v2 : (int,integer) farray
+
+logic i_v1 : int
+
+logic i_v11 : int
+
+logic i_v2 : int
+
+logic i_v21 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___433 : int
+
+logic temp___431 : (int,integer) farray
+
+logic m : int
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : int
+
+logic o14 : (int,integer) farray
+
+logic m1 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic temp___443 : int
+
+logic temp___440 : (int,integer) farray
+
+logic temp___438 : int
+
+logic m2 : int
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic m3 : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic temp___437 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : integer
+
+logic o28 : int
+
+logic o29 : (int,integer) farray
+
+logic m4 : int
+
+logic o30 : int
+
+logic o31 : integer
+
+logic o32 : int
+
+logic m5 : int
+
+logic o33 : int
+
+logic o34 : integer
+
+logic o35 : int
+
+logic temp___451 : int
+
+logic temp___449 : (int,integer) farray
+
+logic m6 : int
+
+logic o36 : int
+
+logic o37 : integer
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : integer
+
+logic o41 : int
+
+logic o42 : integer
+
+logic o43 : int
+
+logic o44 : (int,integer) farray
+
+logic m7 : int
+
+logic o45 : int
+
+logic o46 : integer
+
+logic o47 : int
+
+logic m8 : int
+
+logic o48 : int
+
+logic o49 : integer
+
+logic o50 : int
+
+logic m9 : int
+
+logic o51 : int
+
+logic o52 : integer
+
+logic o53 : int
+
+logic temp___464 : int
+
+logic temp___462 : int
+
+logic temp___460 : (int,integer) farray
+
+logic m10 : int
+
+logic o54 : int
+
+logic o55 : integer
+
+logic o56 : int
+
+logic m11 : int
+
+logic o57 : int
+
+logic o58 : integer
+
+logic o59 : int
+
+logic temp___458 : int
+
+logic o60 : int
+
+logic o61 : integer
+
+logic o62 : int
+
+logic o63 : integer
+
+logic o64 : int
+
+logic o65 : (int,integer) farray
+
+logic o66 : int
+
+logic o67 : integer
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : integer
+
+logic o71 : int
+
+logic a_v11 : (int,integer) farray
+
+logic a_v21 : (int,integer) farray
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic i_v12 : int
+
+logic a_v12 : (int,integer) farray
+
+logic i_v13 : int
+
+logic result3 : (int,integer) farray
+
+logic a_v13 : (int,integer) farray
+
+logic result4 : int
+
+logic i_v14 : int
+
+logic a_v14 : (int,integer) farray
+
+logic i_v15 : int
+
+logic a_v15 : (int,integer) farray
+
+logic i_v16 : int
+
+logic a_v16 : (int,integer) farray
+
+logic i_v17 : int
+
+logic a_v17 : (int,integer) farray
+
+logic i_v18 : int
+
+logic a_v18 : (int,integer) farray
+
+logic i_v19 : int
+
+logic a_v19 : (int,integer) farray
+
+logic i_v110 : int
+
+logic result5 : int
+
+logic i_v111 : int
+
+logic a_v110 : (int,integer) farray
+
+logic i_v112 : int
+
+logic result6 : bool
+
+logic result7 : (int,integer) farray
+
+logic a_v111 : (int,integer) farray
+
+logic result8 : int
+
+logic i_v113 : int
+
+logic a_v112 : (int,integer) farray
+
+logic i_v114 : int
+
+logic a_v113 : (int,integer) farray
+
+logic i_v115 : int
+
+logic a_v114 : (int,integer) farray
+
+logic i_v116 : int
+
+logic a_v115 : (int,integer) farray
+
+logic i_v117 : int
+
+logic a_v116 : (int,integer) farray
+
+logic i_v118 : int
+
+logic a_v117 : (int,integer) farray
+
+logic i_v119 : int
+
+logic a_v118 : (int,integer) farray
+
+logic i_v120 : int
+
+logic a_v119 : (int,integer) farray
+
+logic i_v121 : int
+
+logic result9 : bool
+
+logic result10 : int
+
+logic i_v22 : int
+
+logic a_v22 : (int,integer) farray
+
+logic i_v23 : int
+
+logic result11 : (int,integer) farray
+
+logic a_v23 : (int,integer) farray
+
+logic result12 : int
+
+logic i_v24 : int
+
+logic a_v24 : (int,integer) farray
+
+logic i_v25 : int
+
+logic a_v25 : (int,integer) farray
+
+logic i_v26 : int
+
+logic a_v26 : (int,integer) farray
+
+logic i_v27 : int
+
+logic a_v27 : (int,integer) farray
+
+logic i_v28 : int
+
+logic a_v28 : (int,integer) farray
+
+logic i_v29 : int
+
+logic a_v29 : (int,integer) farray
+
+logic i_v210 : int
+
+logic a_v210 : (int,integer) farray
+
+logic i_v211 : int
+
+logic a_v211 : (int,integer) farray
+
+logic i_v212 : int
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : int
+
+logic i_v213 : int
+
+logic a_v212 : (int,integer) farray
+
+logic i_v214 : int
+
+logic result16 : bool
+
+logic result17 : (int,integer) farray
+
+logic a_v213 : (int,integer) farray
+
+logic result18 : int
+
+logic i_v215 : int
+
+logic a_v214 : (int,integer) farray
+
+logic i_v216 : int
+
+logic a_v215 : (int,integer) farray
+
+logic i_v217 : int
+
+logic a_v216 : (int,integer) farray
+
+logic i_v218 : int
+
+logic a_v217 : (int,integer) farray
+
+logic i_v219 : int
+
+logic a_v218 : (int,integer) farray
+
+logic i_v220 : int
+
+logic a_v219 : (int,integer) farray
+
+logic i_v221 : int
+
+logic a_v220 : (int,integer) farray
+
+logic i_v222 : int
+
+logic a_v221 : (int,integer) farray
+
+logic i_v223 : int
+
+logic a_v120 : (int,integer) farray
+
+logic a_v222 : (int,integer) farray
+
+logic i_v122 : int
+
+logic i_v123 : int
+
+logic i_v224 : int
+
+logic i_v225 : int
+
+logic a_v121 : (int,integer) farray
+
+logic a_v223 : (int,integer) farray
+
+logic i_v124 : int
+
+logic i_v125 : int
+
+logic i_v226 : int
+
+logic i_v227 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(a_v1__first),
+  to_rep(a_v1__last))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(a_v2__first),
+  to_rep(a_v2__last))
+
+axiom H2 : dynamic_property((- 2147483648), 2147483647, to_rep(first(b_v11)),
+  to_rep(last(b_v11)))
+
+axiom H3 : dynamic_property((- 2147483648), 2147483647, to_rep(first(c_v11)),
+  to_rep(last(c_v11)))
+
+axiom H4 : dynamic_property((- 2147483648), 2147483647, to_rep(first(b_v21)),
+  to_rep(last(b_v21)))
+
+axiom H5 : dynamic_property((- 2147483648), 2147483647, to_rep(first(c_v21)),
+  to_rep(last(c_v21)))
+
+axiom H6 : in_range1(k_1)
+
+axiom H7 : in_range1(k_2)
+
+axiom H8 : in_range1(i)
+
+axiom H9 : ((to_rep(a_v1__first) = 1) and ((to_rep(first(b_v11)) = 1) and
+  ((to_rep(first(c_v11)) = 1) and
   ((to_rep(a_v1__last) = to_rep(last(b_v11))) and
   ((to_rep(a_v1__last) = to_rep(last(c_v11))) and
   (((to_rep(first(b_v11)) <= k_1) and (k_1 <= to_rep(last(b_v11)))) and
@@ -504,39 +935,75 @@ goal WP_parameter_def :
   ((to_rep(a_v2__last) = to_rep(last(b_v21))) and
   ((to_rep(a_v2__last) = to_rep(last(c_v21))) and
   (((to_rep(first(b_v21)) <= k_2) and (k_2 <= to_rep(last(b_v21)))) and
-  (to_rep(a_v1__last) = to_rep(a_v2__last)))))))))))))) ->
-  ((forall m1:int. (((to_rep(a_v1__first) <= m1) and (m1 <= k_1)) ->
-   (to_rep((a_v1[m1])) = to_rep((b_v1[m1]))))) ->
-  ((((temp___443 = (k_1 + 1)) and in_range1((k_1 + 1))) and ((({
-  int__content = result } = { int__content = i_v1 }) and
-  (i_v11 = temp___443)) and ((((temp___443 <= i_v11) and
-  (i_v11 <= to_rep(a_v1__last))) and ((((temp___440 = a_v1) and
-  ((temp___438 = i_v11) and
-  (((forall m1:int. (((to_rep(a_v1__first) <= m1) and (m1 <= k_1)) ->
-    (to_rep((a_v12[m1])) = to_rep((b_v1[m1]))))) and
-  (forall m1:int. ((((k_1 + 1) <= m1) and (m1 <= (i_v12 - 1))) ->
-  (to_rep((a_v12[m1])) = to_rep((c_v1[(m1 - k_1)])))))) and
+  (to_rep(a_v1__last) = to_rep(a_v2__last))))))))))))))
+
+axiom H10 :
+  (forall m12:int. (((to_rep(a_v1__first) <= m12) and (m12 <= k_1)) ->
+  (to_rep((a_v18[m12])) = to_rep((b_v1[m12])))))
+
+axiom H11 : ((temp___443 = (k_1 + 1)) and in_range1((k_1 + 1)))
+
+axiom H12 : (result5 = i_v11)
+
+axiom H13 : (i_v111 = temp___443)
+
+axiom H14 : (((temp___443 <= i_v111) and (i_v111 <= to_rep(a_v1__last))) ->
+  (((temp___440 = a_v18) and ((temp___438 = i_v111) and
+  (((forall m12:int. (((to_rep(a_v1__first) <= m12) and (m12 <= k_1)) ->
+    (to_rep((a_v110[m12])) = to_rep((b_v1[m12]))))) and
+  (forall m12:int. ((((k_1 + 1) <= m12) and (m12 <= (i_v112 - 1))) ->
+  (to_rep((a_v110[m12])) = to_rep((c_v1[(m12 - k_1)])))))) and
   ((((((k_1 + 1) <= to_rep(a_v1__last)) -> dynamic_property2((k_1 + 1),
-  to_rep(a_v1__last), i_v12)) and
+  to_rep(a_v1__last), i_v112)) and
   (forall temp___441:int. (((to_rep(a_v1__first) <= temp___441) and
-  (temp___441 <= to_rep(a_v1__last))) -> ((i_v12 <= temp___441) ->
-  ((a_v12[temp___441]) = (temp___440[temp___441])))))) and
-  (((k_1 + 1) <= i_v12) and (i_v12 <= to_rep(a_v1__last)))) and
-  (((((((((temp___437 = (i_v12 - k_1)) and in_range1((i_v12 - k_1))) and
+  (temp___441 <= to_rep(a_v1__last))) -> ((i_v112 <= temp___441) ->
+  ((a_v110[temp___441]) = (temp___440[temp___441])))))) and
+  (((k_1 + 1) <= i_v112) and (i_v112 <= to_rep(a_v1__last)))) and
+  (((((((((temp___437 = (i_v112 - k_1)) and in_range1((i_v112 - k_1))) and
   (((to_rep(first(c_v11)) <= temp___437) and
-  (temp___437 <= to_rep(last(c_v11)))) and (o = temp___437))) and
-  (o1 = (c_v1[o]))) and (o2 = to_rep(o1))) and (to_rep(o3) = o2)) and
-  ((((to_rep(a_v1__first) <= i_v12) and (i_v12 <= to_rep(a_v1__last))) and
-  (o4 = i_v12)) and (o5 = (a_v12[o4 <- o3])))) and ((a_v12 = result1) and
-  (a_v13 = o5))) and (i_v12 = to_rep(a_v1__last))))))) and
-  (((i_v12 = i_v13) and (a_v13 = a_v14)) and ((i_v14 = i_v12) and
-  (a_v15 = a_v13)))) and ((({ int__content = i_v15 } = { int__content = i_v13
-  }) and ({ map__content = a_v16 } = { map__content = a_v14 })) and
-  ((i_v16 = i_v14) and (a_v17 = a_v15))))) or
-  ((not ((temp___443 <= i_v11) and (i_v11 <= to_rep(a_v1__last)))) and
-  (((i_v11 = i_v15) and ({ map__content = a_v16 } = { map__content = a_v1
-  })) and ((i_v16 = i_v11) and (a_v17 = a_v11))))))) ->
-  (((to_rep(a_v1__first) <= m) and (m <= k_1)) ->
-  ((((((to_rep(first(b_v11)) <= m) and (m <= to_rep(last(b_v11)))) and
-  (o6 = m)) and (o7 = (b_v1[o6]))) and (o8 = to_rep(o7))) ->
-  (to_rep(a_v1__first) <= m))))))))))))))))
+  (temp___437 <= to_rep(last(c_v11)))) and (o24 = temp___437))) and
+  (o25 = (c_v1[o24]))) and (o26 = to_rep(o25))) and (to_rep(o27) = o26)) and
+  ((((to_rep(a_v1__first) <= i_v112) and (i_v112 <= to_rep(a_v1__last))) and
+  (o28 = i_v112)) and (o29 = (a_v110[o28 <- o27])))) and
+  ((a_v110 = result7) and (a_v111 = o29))) and
+  (i_v112 = to_rep(a_v1__last))))))) and (((i_v118 = i_v112) and
+  (a_v116 = a_v111)) and ((i_v119 = i_v112) and (a_v117 = a_v111)))))
+
+axiom H15 : (((temp___443 <= i_v111) and (i_v111 <= to_rep(a_v1__last))) ->
+  (i_v120 = i_v118))
+
+axiom H16 : (((temp___443 <= i_v111) and (i_v111 <= to_rep(a_v1__last))) ->
+  (a_v118 = a_v116))
+
+axiom H17 : (((temp___443 <= i_v111) and (i_v111 <= to_rep(a_v1__last))) ->
+  (i_v121 = i_v119))
+
+axiom H18 : (((temp___443 <= i_v111) and (i_v111 <= to_rep(a_v1__last))) ->
+  (a_v119 = a_v117))
+
+axiom H19 : ((not ((temp___443 <= i_v111) and
+  (i_v111 <= to_rep(a_v1__last)))) -> (i_v120 = i_v111))
+
+axiom H20 : ((not ((temp___443 <= i_v111) and
+  (i_v111 <= to_rep(a_v1__last)))) -> (a_v118 = a_v18))
+
+axiom H21 : ((not ((temp___443 <= i_v111) and
+  (i_v111 <= to_rep(a_v1__last)))) -> (i_v121 = i_v111))
+
+axiom H22 : ((not ((temp___443 <= i_v111) and
+  (i_v111 <= to_rep(a_v1__last)))) -> (a_v119 = a_v19))
+
+axiom H23 : (to_rep(a_v1__first) <= m5)
+
+axiom H24 : (m5 <= k_1)
+
+axiom H25 : ((to_rep(first(b_v11)) <= m5) and (m5 <= to_rep(last(b_v11))))
+
+axiom H26 : (o33 = m5)
+
+axiom H27 : (o34 = (b_v1[o33]))
+
+axiom H28 : (o35 = to_rep(o34))
+
+ (* File "infoflow.ads", line 89, characters 0-0 *)
+goal WP_parameter_def : (to_rep(a_v1__first) <= m5)

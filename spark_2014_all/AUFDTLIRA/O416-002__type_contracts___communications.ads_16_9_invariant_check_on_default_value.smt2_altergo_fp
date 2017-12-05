@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -770,11 +770,33 @@ type communication__ref = { communication__content : us_rep1
 function communication__ref___projection(a: communication__ref) : us_rep1 =
   (a).communication__content
 
- (* File "communications.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___num_287:int. forall temp___288:positive.
-  forall temp___2881:(int,us_rep) farray. forall temp___2882:t.
-  (in_range2(temp___num_287) -> (((dynamic_property1(1, to_rep(temp___288),
+logic temp___num_287 : int
+
+logic temp___288 : positive
+
+logic temp___2881 : (int,us_rep) farray
+
+logic temp___2882 : t
+
+logic idx : int
+
+logic temp___291 : int
+
+logic o : int
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,character) farray
+
+logic o3 : (int,character) farray
+
+logic o4 : (int,character) farray
+
+logic temp___293 : (int,character) farray
+
+axiom H : in_range2(temp___num_287)
+
+axiom H1 : ((dynamic_property1(1, to_rep(temp___288),
   to_rep2(first(temp___2882)), to_rep2(last(temp___2882))) and
   ((to_rep2(first(temp___2882)) = 1) and
   (to_rep2(last(temp___2882)) = to_rep(temp___288)))) and
@@ -783,9 +805,12 @@ goal WP_parameter_def :
   (compare((((temp___2881[temp___190])).us_split_fields1).rec__messages__message__sent,
   1, 10,
   (((temp___2881[temp___190])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0)))) ->
-  (forall idx:int. (((1 <= idx) and (idx <= (to_rep(temp___288) - 1))) ->
-  (compare((((temp___2881[idx])).us_split_fields1).rec__messages__message__received,
+  1, 10) <= 0))))
+
+ (* File "communications.ads", line 12, characters 0-0 *)
+goal WP_parameter_def :
+  (forall idx1:int. (((1 <= idx1) and (idx1 <= (to_rep(temp___288) - 1))) ->
+  (compare((((temp___2881[idx1])).us_split_fields1).rec__messages__message__received,
   1, 10,
-  (((temp___2881[(idx + 1)])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0))))))
+  (((temp___2881[(idx1 + 1)])).us_split_fields1).rec__messages__message__received,
+  1, 10) <= 0)))

@@ -240,8 +240,16 @@ axiom def_axiom :
   (temp___408 <= 122))) -> ((temp___401(temp___403, temp___404, temp___405,
   temp___406, temp___407)[temp___408]) = temp___407)))))))))))
 
+logic m : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic m1 : (int,bool) farray
+
+axiom H : (result = m)
+
+axiom H1 : (m1 = temp___401(of_int(1), of_int(1), of_int(1), of_int(1),
+  of_int(0)))
+
  (* File "array_aggregates.adb", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:(int,bool) farray. forall result:(int,bool) farray.
-  forall m1:(int,bool) farray. (((result = m) and (m1 = temp___401(of_int(1),
-  of_int(1), of_int(1), of_int(1), of_int(0)))) -> ((m1[97]) = true)))
+goal WP_parameter_def : ((m1[97]) = true)

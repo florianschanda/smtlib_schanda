@@ -265,6 +265,8 @@
 (declare-const onofftime3 (Array Int times))
 (declare-const result13 int__ref)
 (declare-const hour1 Int)
+(declare-const result14 int__ref)
+(declare-const minute1 Int)
 (assert (in_range1 hoursinday))
 (assert (in_range1 minutesinhour))
 (assert (in_range1 secondsinminute))

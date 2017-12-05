@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -709,111 +709,451 @@ axiom secondsinminute__def_axiom : (secondsinminute = 60)
 
 axiom secondsinhour__def_axiom : (secondsinhour = 3600)
 
+logic onofftime : (int,times) farray
+
+logic clockoffset : int
+
+logic heatingison : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : times
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : times
+
+logic o6 : int
+
+logic o7 : (int,times) farray
+
+logic result : bool
+
+logic heatingison1 : bool
+
+logic result1 : int
+
+logic clockoffset1 : int
+
+logic result2 : (int,times) farray
+
+logic onofftime1 : (int,times) farray
+
+logic onofftime2 : (int,times) farray
+
+logic clockoffset2 : int
+
+logic switchposition : int
+
+logic timer : int
+
+logic slowadvance : bool
+
+logic fastadvance : bool
+
+logic changetoslowmode : bool
+
+logic changetofastmode : bool
+
+logic slowadvance1 : bool
+
+logic fastadvance1 : bool
+
+logic changetoslowmode1 : bool
+
+logic changetofastmode1 : bool
+
+logic hour : int
+
+logic minute : int
+
+logic advancemode : us_private
+
+logic advpressed : us_private
+
+logic advtimer : us_private
+
+logic switchposition1 : int
+
+logic timer1 : int
+
+logic result3 : int
+
+logic timer2 : int
+
+logic timer3 : int
+
+logic result4 : bool
+
+logic slowadvance2 : bool
+
+logic result5 : int
+
+logic clockoffset3 : int
+
+logic changetofastmode2 : bool
+
+logic advpressed1 : us_private
+
+logic advtimer1 : us_private
+
+logic advancemode1 : us_private
+
+logic fastadvance2 : bool
+
+logic advtimer2 : us_private
+
+logic result6 : int
+
+logic clockoffset4 : int
+
+logic changetoslowmode2 : bool
+
+logic advpressed2 : us_private
+
+logic advancemode2 : us_private
+
+logic result7 : int
+
+logic timer4 : int
+
+logic result8 : int
+
+logic timer5 : int
+
+logic result9 : bool
+
+logic slowadvance3 : bool
+
+logic result10 : int
+
+logic timer6 : int
+
+logic changetofastmode3 : bool
+
+logic advpressed3 : us_private
+
+logic advtimer3 : us_private
+
+logic advancemode3 : us_private
+
+logic fastadvance3 : bool
+
+logic advtimer4 : us_private
+
+logic result11 : int
+
+logic timer7 : int
+
+logic changetoslowmode3 : bool
+
+logic advpressed4 : us_private
+
+logic advancemode4 : us_private
+
+logic result12 : (int,times) farray
+
+logic onofftime3 : (int,times) farray
+
+logic result13 : int
+
+logic hour1 : int
+
+logic result14 : int
+
+logic minute1 : int
+
+axiom H : in_range1(hoursinday)
+
+axiom H1 : in_range1(minutesinhour)
+
+axiom H2 : in_range1(secondsinminute)
+
+axiom H3 : in_range1(secondsinhour)
+
+axiom H4 : ((0 <= 86399) -> in_range1(clockoffset))
+
+axiom H5 : (result = heatingison)
+
+axiom H6 : (heatingison1 = of_int(0))
+
+axiom H7 : (result1 = clockoffset)
+
+axiom H8 : (clockoffset1 = 0)
+
+axiom H9 : (result2 = onofftime)
+
+axiom H10 : (onofftime1 = temp___268(0, 0, 0, 0))
+
+axiom H11 : ((0 <= 86399) -> in_range1(clockoffset2))
+
+axiom H12 : ((0 <= 5) -> in_range3(switchposition))
+
+axiom H13 : ((0 <= 86399) -> in_range1(timer))
+
+axiom H14 : in_range3(switchposition1)
+
+axiom H15 : ((switchposition1 = 0) -> in_range1(timer1))
+
+axiom H16 : ((switchposition1 = 0) -> (result3 = timer1))
+
+axiom H17 : ((switchposition1 = 0) -> (timer2 = mod((timer1 + clockoffset2),
+  86400)))
+
+axiom H18 : ((switchposition1 = 0) -> (advtimer1 = advtimer))
+
+axiom H19 : ((switchposition1 = 0) -> (advpressed1 = advpressed))
+
+axiom H20 : ((switchposition1 = 0) -> (advancemode1 = advancemode))
+
+axiom H21 : ((switchposition1 = 0) ->
+  (changetofastmode3 = changetofastmode1))
+
+axiom H22 : ((switchposition1 = 0) ->
+  (changetoslowmode3 = changetoslowmode1))
+
+axiom H23 : ((switchposition1 = 0) -> (fastadvance3 = fastadvance1))
+
+axiom H24 : ((switchposition1 = 0) -> (slowadvance3 = slowadvance1))
+
+axiom H25 : ((switchposition1 = 0) -> (changetofastmode2 = changetofastmode))
+
+axiom H26 : ((switchposition1 = 0) -> (changetoslowmode2 = changetoslowmode))
+
+axiom H27 : ((switchposition1 = 0) -> (fastadvance2 = fastadvance))
+
+axiom H28 : ((switchposition1 = 0) -> (slowadvance2 = slowadvance))
+
+axiom H29 : ((switchposition1 = 0) -> (clockoffset3 = clockoffset2))
+
+axiom H30 : ((switchposition1 = 0) -> (onofftime3 = onofftime2))
+
+axiom H31 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  in_range1(timer3)))
+
+axiom H32 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((o = currentmode(advancemode)) and in_range4(o))))
+
+axiom H33 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (((o = 0) -> (result4 = true)) and ((not (o = 0)) -> (result4 = false)))))
+
+axiom H34 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> ((slowadvance2 = true) -> (result5 = clockoffset2)))))
+
+axiom H35 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> ((slowadvance2 = true) ->
+  (clockoffset3 = mod((clockoffset2 + 60), 86400))))))
+
+axiom H36 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> ((not (slowadvance2 = true)) ->
+  (clockoffset3 = clockoffset2)))))
+
+axiom H37 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> ((not (changetofastmode2 = true)) ->
+  (advancemode1 = advancemode)))))
+
+axiom H38 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> (changetoslowmode2 = changetoslowmode))))
+
+axiom H39 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((result4 = true) -> (fastadvance2 = fastadvance))))
+
+axiom H40 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> ((fastadvance2 = true) ->
+  (result6 = clockoffset2)))))
+
+axiom H41 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> ((fastadvance2 = true) ->
+  (clockoffset4 = mod((clockoffset2 + 600), 86400))))))
+
+axiom H42 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> ((not (fastadvance2 = true)) ->
+  (clockoffset4 = clockoffset2)))))
+
+axiom H43 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> ((not (changetoslowmode2 = true)) ->
+  (advancemode2 = advancemode)))))
+
+axiom H44 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (advtimer1 = advtimer2))))
+
+axiom H45 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (advpressed1 = advpressed2))))
+
+axiom H46 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (advancemode1 = advancemode2))))
+
+axiom H47 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (changetofastmode2 = changetofastmode))))
+
+axiom H48 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (slowadvance2 = slowadvance))))
+
+axiom H49 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  ((not (result4 = true)) -> (clockoffset3 = clockoffset4))))
+
+axiom H50 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (result7 = timer3)))
+
+axiom H51 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (timer4 = mod((timer3 + clockoffset3), 86400))))
+
+axiom H52 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (changetofastmode3 = changetofastmode1)))
+
+axiom H53 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (changetoslowmode3 = changetoslowmode1)))
+
+axiom H54 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (fastadvance3 = fastadvance1)))
+
+axiom H55 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (slowadvance3 = slowadvance1)))
+
+axiom H56 : ((not (switchposition1 = 0)) -> ((switchposition1 = 1) ->
+  (onofftime3 = onofftime2)))
+
+axiom H57 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((2 <= switchposition1) and (switchposition1 <= 5))))
+
+axiom H58 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (o1 = switchposition1)))
+
+axiom H59 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (o2 = (onofftime2[o1]))))
+
+axiom H60 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (o3 = to_rep(o2))))
+
+axiom H61 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (result8 = timer)))
+
+axiom H62 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (timer5 = o3)))
+
+axiom H63 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((o4 = currentmode(advancemode)) and in_range4(o4))))
+
+axiom H64 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (((o4 = 0) -> (result9 = true)) and ((not (o4 = 0)) ->
+  (result9 = false)))))
+
+axiom H65 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> ((slowadvance3 = true) -> (result10 = timer5)))))
+
+axiom H66 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> ((slowadvance3 = true) -> (timer6 = mod((timer5 + 60),
+  86400))))))
+
+axiom H67 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> ((not (slowadvance3 = true)) -> (timer6 = timer5)))))
+
+axiom H68 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> ((not (changetofastmode3 = true)) ->
+  (advancemode3 = advancemode)))))
+
+axiom H69 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> (changetoslowmode3 = changetoslowmode1))))
+
+axiom H70 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((result9 = true) -> (fastadvance3 = fastadvance1))))
+
+axiom H71 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> ((fastadvance3 = true) ->
+  (result11 = timer5)))))
+
+axiom H72 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> ((fastadvance3 = true) ->
+  (timer7 = mod((timer5 + 600), 86400))))))
+
+axiom H73 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> ((not (fastadvance3 = true)) ->
+  (timer7 = timer5)))))
+
+axiom H74 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> ((not (changetoslowmode3 = true)) ->
+  (advancemode4 = advancemode)))))
+
+axiom H75 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (advtimer3 = advtimer4))))
+
+axiom H76 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (advpressed3 = advpressed4))))
+
+axiom H77 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (advancemode3 = advancemode4))))
+
+axiom H78 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (changetofastmode3 = changetofastmode1))))
+
+axiom H79 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (slowadvance3 = slowadvance1))))
+
+axiom H80 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((not (result9 = true)) -> (timer6 = timer7))))
+
+axiom H81 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (to_rep(o5) = timer6)))
+
+axiom H82 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  ((2 <= switchposition1) and (switchposition1 <= 5))))
+
+axiom H83 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (o6 = switchposition1)))
+
+axiom H84 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (o7 = (onofftime2[o6 <- o5]))))
+
+axiom H85 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (result12 = onofftime2)))
+
+axiom H86 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (onofftime3 = o7)))
+
+axiom H87 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (advtimer1 = advtimer3)))
+
+axiom H88 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (advpressed1 = advpressed3)))
+
+axiom H89 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (advancemode1 = advancemode3)))
+
+axiom H90 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (changetofastmode2 = changetofastmode)))
+
+axiom H91 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (changetoslowmode2 = changetoslowmode)))
+
+axiom H92 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (fastadvance2 = fastadvance)))
+
+axiom H93 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (slowadvance2 = slowadvance)))
+
+axiom H94 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (timer4 = timer6)))
+
+axiom H95 : ((not (switchposition1 = 0)) -> ((not (switchposition1 = 1)) ->
+  (clockoffset3 = clockoffset2)))
+
+axiom H96 : ((not (switchposition1 = 0)) -> (timer2 = timer4))
+
+axiom H97 : (timer2 = c40b)
+
+axiom H98 : in_range1(c40b)
+
+axiom H99 : ((0 <= 23) -> in_range6(hour))
+
+axiom H100 : ((0 <= 59) -> in_range7(minute))
+
+axiom H101 : (result13 = hour)
+
+axiom H102 : (hour1 = comp_div(c40b,3600))
+
  (* File "heatingsystem_dfa.adb", line 143, characters 0-0 *)
-goal WP_parameter_def :
-  (forall onofftime:(int,times) farray. forall clockoffset:int.
-  forall heatingison:bool. forall o:int. forall o1:int. forall o2:times.
-  forall o3:int. forall o4:int. forall o5:times. forall o6:int.
-  forall o7:(int,times) farray. forall result:bool. forall heatingison1:bool.
-  forall result1:int. forall clockoffset1:int.
-  forall result2:(int,times) farray. forall onofftime1:(int,times) farray.
-  forall onofftime2:(int,times) farray. forall clockoffset2:int.
-  forall switchposition:int. forall timer:int. forall slowadvance:bool.
-  forall fastadvance:bool. forall changetoslowmode:bool.
-  forall changetofastmode:bool. forall slowadvance1:bool.
-  forall fastadvance1:bool. forall changetoslowmode1:bool.
-  forall changetofastmode1:bool. forall hour:int. forall minute:int.
-  forall advancemode:us_private. forall advpressed:us_private.
-  forall advtimer:us_private. forall switchposition1:int. forall timer1:int.
-  forall result3:int. forall timer2:int. forall timer3:int.
-  forall result4:bool. forall slowadvance2:bool. forall result5:int.
-  forall clockoffset3:int. forall changetofastmode2:bool.
-  forall advpressed1:us_private. forall advtimer1:us_private.
-  forall advancemode1:us_private. forall fastadvance2:bool.
-  forall advtimer2:us_private. forall result6:int. forall clockoffset4:int.
-  forall changetoslowmode2:bool. forall advpressed2:us_private.
-  forall advancemode2:us_private. forall result7:int. forall timer4:int.
-  forall result8:int. forall timer5:int. forall result9:bool.
-  forall slowadvance3:bool. forall result10:int. forall timer6:int.
-  forall changetofastmode3:bool. forall advpressed3:us_private.
-  forall advtimer3:us_private. forall advancemode3:us_private.
-  forall fastadvance3:bool. forall advtimer4:us_private. forall result11:int.
-  forall timer7:int. forall changetoslowmode3:bool.
-  forall advpressed4:us_private. forall advancemode4:us_private.
-  forall result12:(int,times) farray. forall onofftime3:(int,times) farray.
-  forall result13:int. forall hour1:int. (in_range1(hoursinday) ->
-  (in_range1(minutesinhour) -> (in_range1(secondsinminute) ->
-  (in_range1(secondsinhour) -> (((0 <= 86399) -> in_range1(clockoffset)) ->
-  (((result = heatingison) and (heatingison1 = of_int(0))) ->
-  (((result1 = clockoffset) and (clockoffset1 = 0)) ->
-  (((result2 = onofftime) and (onofftime1 = temp___268(0, 0, 0, 0))) ->
-  (((0 <= 86399) -> in_range1(clockoffset2)) -> (((0 <= 5) ->
-  in_range3(switchposition)) -> (((0 <= 86399) -> in_range1(timer)) ->
-  (in_range3(switchposition1) -> ((((switchposition1 = 0) and
-  ((in_range1(timer1) and ((result3 = timer1) and
-  (timer2 = mod((timer1 + clockoffset2), 86400)))) and
-  ((advtimer1 = advtimer) and ((advpressed1 = advpressed) and
-  ((advancemode1 = advancemode) and
-  ((changetofastmode3 = changetofastmode1) and
-  ((changetoslowmode3 = changetoslowmode1) and
-  ((fastadvance3 = fastadvance1) and ((slowadvance3 = slowadvance1) and
-  ((changetofastmode2 = changetofastmode) and
-  ((changetoslowmode2 = changetoslowmode) and
-  ((fastadvance2 = fastadvance) and ((slowadvance2 = slowadvance) and
-  ((clockoffset3 = clockoffset2) and
-  (onofftime3 = onofftime2))))))))))))))) or ((not (switchposition1 = 0)) and
-  ((((switchposition1 = 1) and ((in_range1(timer3) and
-  (((((o = currentmode(advancemode)) and in_range4(o)) and (((o = 0) and
-  (result4 = true)) or ((not (o = 0)) and (result4 = false)))) and
-  (((result4 = true) and (((((slowadvance2 = true) and
-  ((result5 = clockoffset2) and (clockoffset3 = mod((clockoffset2 + 60),
-  86400)))) or ((not (slowadvance2 = true)) and
-  (clockoffset3 = clockoffset2))) and ((not (changetofastmode2 = true)) ->
-  (advancemode1 = advancemode))) and
-  ((changetoslowmode2 = changetoslowmode) and
-  (fastadvance2 = fastadvance)))) or ((not (result4 = true)) and
-  (((((fastadvance2 = true) and ((result6 = clockoffset2) and
-  (clockoffset4 = mod((clockoffset2 + 600), 86400)))) or
-  ((not (fastadvance2 = true)) and (clockoffset4 = clockoffset2))) and
-  ((not (changetoslowmode2 = true)) -> (advancemode2 = advancemode))) and
-  ((advtimer1 = advtimer2) and ((advpressed1 = advpressed2) and
-  ((advancemode1 = advancemode2) and
-  ((changetofastmode2 = changetofastmode) and
-  ((slowadvance2 = slowadvance) and
-  (clockoffset3 = clockoffset4)))))))))) and ((result7 = timer3) and
-  (timer4 = mod((timer3 + clockoffset3), 86400))))) and
-  ((changetofastmode3 = changetofastmode1) and
-  ((changetoslowmode3 = changetoslowmode1) and
-  ((fastadvance3 = fastadvance1) and ((slowadvance3 = slowadvance1) and
-  (onofftime3 = onofftime2))))))) or ((not (switchposition1 = 1)) and
-  ((((((((2 <= switchposition1) and (switchposition1 <= 5)) and
-  (o1 = switchposition1)) and (o2 = (onofftime2[o1]))) and
-  (o3 = to_rep(o2))) and ((result8 = timer) and (timer5 = o3))) and
-  (((((o4 = currentmode(advancemode)) and in_range4(o4)) and (((o4 = 0) and
-  (result9 = true)) or ((not (o4 = 0)) and (result9 = false)))) and
-  (((result9 = true) and (((((slowadvance3 = true) and
-  ((result10 = timer5) and (timer6 = mod((timer5 + 60), 86400)))) or
-  ((not (slowadvance3 = true)) and (timer6 = timer5))) and
-  ((not (changetofastmode3 = true)) -> (advancemode3 = advancemode))) and
-  ((changetoslowmode3 = changetoslowmode1) and
-  (fastadvance3 = fastadvance1)))) or ((not (result9 = true)) and
-  (((((fastadvance3 = true) and ((result11 = timer5) and
-  (timer7 = mod((timer5 + 600), 86400)))) or ((not (fastadvance3 = true)) and
-  (timer7 = timer5))) and ((not (changetoslowmode3 = true)) ->
-  (advancemode4 = advancemode))) and ((advtimer3 = advtimer4) and
-  ((advpressed3 = advpressed4) and ((advancemode3 = advancemode4) and
-  ((changetofastmode3 = changetofastmode1) and
-  ((slowadvance3 = slowadvance1) and (timer6 = timer7)))))))))) and
-  (((to_rep(o5) = timer6) and ((((2 <= switchposition1) and
-  (switchposition1 <= 5)) and (o6 = switchposition1)) and
-  (o7 = (onofftime2[o6 <- o5])))) and ((result12 = onofftime2) and
-  (onofftime3 = o7))))) and ((advtimer1 = advtimer3) and
-  ((advpressed1 = advpressed3) and ((advancemode1 = advancemode3) and
-  ((changetofastmode2 = changetofastmode) and
-  ((changetoslowmode2 = changetoslowmode) and
-  ((fastadvance2 = fastadvance) and ((slowadvance2 = slowadvance) and
-  ((timer4 = timer6) and (clockoffset3 = clockoffset2)))))))))))) and
-  (timer2 = timer4)))) -> (((timer2 = c40b) and in_range1(c40b)) ->
-  (((0 <= 23) -> in_range6(hour)) -> (((0 <= 59) -> in_range7(minute)) ->
-  (((result13 = hour) and (hour1 = comp_div(c40b,3600))) ->
-  (not (3600 = 0))))))))))))))))))))
+goal WP_parameter_def : (not (3600 = 0))

@@ -411,6 +411,7 @@
 (declare-const entry_table__split_fields us_main_type1)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (= 1024 (to_rep2 (rec__names__data__char_tables__vector__capacity char_table__split_discrs))))
 (assert (= 256 (to_rep3 (rec__names__data__entry_tables__vector__capacity entry_table__split_discrs))))
 (assert (= (valid_tables (mk___split_fields char_table__split_fields) (mk___split_fields1 entry_table__split_fields)) true))

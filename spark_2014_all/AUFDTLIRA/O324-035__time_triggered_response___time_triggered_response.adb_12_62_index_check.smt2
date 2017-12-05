@@ -81,7 +81,7 @@
 (assert (in_range1 time_idle))
 (assert (=> (not (= time_idle 0)) (and (= o (ite (< 50 (- time_idle 1)) 50 (- time_idle 1))) (in_range2 (ite (< 50 (- time_idle 1)) 50 (- time_idle 1))))))
 (assert (=> (not (= time_idle 0)) (and (= result (always_set_until_now o idle_history)) (= (= result true) (forall ((t Int)) (=> (and (<= 0 t) (<= t o)) (= (select idle_history t) true)))))))
-(assert (=> (not (not (= time_idle 0))) (= result (of_int 1))))
+(assert (=> (= time_idle 0) (= result (of_int 1))))
 (assert (= result true))
 (assert (<= time_idle 50))
 (assert (not (<= 0 time_idle)))

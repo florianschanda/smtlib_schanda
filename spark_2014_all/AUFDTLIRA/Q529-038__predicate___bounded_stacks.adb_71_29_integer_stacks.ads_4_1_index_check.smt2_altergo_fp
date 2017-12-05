@@ -187,7 +187,7 @@ axiom coerce_axiom1 :
 
 type element
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -322,7 +322,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -508,15 +508,15 @@ logic bool_eq9 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq9(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep1(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
-  (bool_eq8(((a).us_split_fields1).rec__integer_stacks__stack__values,
-  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true)) and
-  (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top))) ->
-  (bool_eq9(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep1(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
-  (bool_eq8(((a).us_split_fields1).rec__integer_stacks__stack__values,
-  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true)) and
+  ((((to_rep1(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep1(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq8(((a).us_split_fields1).rec__integer_stacks__stack__values,
+  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true) and
   (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top)))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep1(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq8(((a).us_split_fields1).rec__integer_stacks__stack__values,
+  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true) and
+  (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top))))) ->
   (bool_eq9(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -665,26 +665,65 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "bounded_stacks.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall us:int. forall us1:int. forall o:int.
-  forall o1:element. forall o2:int. forall result:int. forall k1:int.
-  forall k2:int. (((to_rep(i13s3) <= to_rep1(i13s)) and (dynamic_property1(1,
+logic k : int
+
+logic us : int
+
+logic us1 : int
+
+logic o : int
+
+logic o1 : element
+
+logic o2 : int
+
+logic result : int
+
+logic k1 : int
+
+logic k2 : int
+
+axiom H : ((to_rep(i13s3) <= to_rep1(i13s)) and (dynamic_property1(1,
   to_rep1(i13s), to_rep3(first(i13s2)), to_rep3(last(i13s2))) and
-  ((to_rep3(first(i13s2)) = 1) and
-  (to_rep3(last(i13s2)) = to_rep1(i13s))))) ->
-  (((to_rep(left3) <= to_rep1(left)) and (dynamic_property1(1, to_rep1(left),
-  to_rep3(first(left2)), to_rep3(last(left2))) and
-  ((to_rep3(first(left2)) = 1) and
-  (to_rep3(last(left2)) = to_rep1(left))))) ->
-  (((to_rep(right3) <= to_rep1(right)) and (dynamic_property1(1,
+  ((to_rep3(first(i13s2)) = 1) and (to_rep3(last(i13s2)) = to_rep1(i13s)))))
+
+axiom H1 : ((to_rep(left3) <= to_rep1(left)) and (dynamic_property1(1,
+  to_rep1(left), to_rep3(first(left2)), to_rep3(last(left2))) and
+  ((to_rep3(first(left2)) = 1) and (to_rep3(last(left2)) = to_rep1(left)))))
+
+axiom H2 : ((to_rep(right3) <= to_rep1(right)) and (dynamic_property1(1,
   to_rep1(right), to_rep3(first(right2)), to_rep3(last(right2))) and
   ((to_rep3(first(right2)) = 1) and
-  (to_rep3(last(right2)) = to_rep1(right))))) -> (((us = to_rep1(right)) and
-  in_range2(to_rep1(right))) -> (((us1 = to_rep1(left)) and
-  in_range2(to_rep1(left))) -> ((to_rep(left3) = to_rep(right3)) ->
-  (((to_rep(left3) = r30b) and in_range1(r30b)) -> (((result = k) and
-  (k1 = 1)) -> (((1 <= k1) and (k1 <= r30b)) -> (((1 <= k2) and
-  (k2 <= r30b)) -> ((((((to_rep3(first(right2)) <= k2) and
-  (k2 <= to_rep3(last(right2)))) and (o = k2)) and (o1 = (right1[o]))) and
-  (o2 = to_rep2(o1))) -> (to_rep3(first(left2)) <= k2)))))))))))))
+  (to_rep3(last(right2)) = to_rep1(right)))))
+
+axiom H3 : ((us = to_rep1(right)) and in_range2(to_rep1(right)))
+
+axiom H4 : ((us1 = to_rep1(left)) and in_range2(to_rep1(left)))
+
+axiom H5 : (to_rep(left3) = to_rep(right3))
+
+axiom H6 : (to_rep(left3) = r30b)
+
+axiom H7 : in_range1(r30b)
+
+axiom H8 : (result = k)
+
+axiom H9 : (k1 = 1)
+
+axiom H10 : (1 <= k1)
+
+axiom H11 : (k1 <= r30b)
+
+axiom H12 : ((1 <= k2) and (k2 <= r30b))
+
+axiom H13 : ((to_rep3(first(right2)) <= k2) and
+  (k2 <= to_rep3(last(right2))))
+
+axiom H14 : (o = k2)
+
+axiom H15 : (o1 = (right1[o]))
+
+axiom H16 : (o2 = to_rep2(o1))
+
+ (* File "bounded_stacks.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (to_rep3(first(left2)) <= k2)

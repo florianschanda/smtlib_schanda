@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -515,12 +515,116 @@ function index_range__ref___projection(a: index_range__ref) : index_range =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "stack.ads", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall o:int. ((2 <= count({
-  rec__stack__stack_type__s = my_stack__split_fields;
-  rec__stack__stack_type__pointer = my_stack__split_fields1 })) ->
-  (((o = count({ rec__stack__stack_type__s = my_stack__split_fields;
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic temp : int
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic us1 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : (int,integer) farray
+
+logic o13 : (int,integer) farray
+
+logic o14 : pointer_range
+
+logic temp___216 : (int,integer) farray
+
+logic temp___2161 : pointer_range
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : (int,integer) farray
+
+logic o18 : (int,integer) farray
+
+logic o19 : pointer_range
+
+logic temp___220 : (int,integer) farray
+
+logic temp___2201 : pointer_range
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : bool
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : (int,integer) farray
+
+logic result2 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic result3 : (int,integer) farray
+
+logic result4 : pointer_range
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+logic temp2 : int
+
+logic my_stack__split_fields8 : (int,integer) farray
+
+logic my_stack__split_fields9 : pointer_range
+
+logic temp3 : int
+
+axiom H : (2 <= count({ rec__stack__stack_type__s = my_stack__split_fields;
+  rec__stack__stack_type__pointer = my_stack__split_fields1 }))
+
+axiom H1 : ((o = count({ rec__stack__stack_type__s = my_stack__split_fields;
   rec__stack__stack_type__pointer = my_stack__split_fields1 })) and
-  (in_range2(o) and (o = to_rep1(my_stack__split_fields1)))) -> (1 <= o))))
+  (in_range2(o) and (o = to_rep1(my_stack__split_fields1))))
+
+ (* File "stack.ads", line 63, characters 0-0 *)
+goal WP_parameter_def : (1 <= o)

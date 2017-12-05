@@ -604,72 +604,189 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r__split_fields : et3
+
+logic r__split_fields1 : et1
+
+logic r__split_fields2 : et2
+
+logic r__split_fields3 : enum1ta
+
+logic r__split_fields4 : bool
+
+logic r__split_fields5 : et1
+
+logic r__split_fields6 : et2
+
+logic temp__split_fields : et1
+
+logic temp__split_fields1 : et2
+
+logic result : et1
+
+logic result1 : et2
+
+logic temp__split_fields2 : et1
+
+logic temp__split_fields3 : et2
+
+logic result2 : et3
+
+logic result3 : et1
+
+logic result4 : et2
+
+logic result5 : enum1ta
+
+logic result6 : bool
+
+logic result7 : et1
+
+logic result8 : et2
+
+logic r__split_fields7 : et3
+
+logic r__split_fields8 : et1
+
+logic r__split_fields9 : et2
+
+logic r__split_fields10 : enum1ta
+
+logic r__split_fields11 : bool
+
+logic r__split_fields12 : et1
+
+logic r__split_fields13 : et2
+
+logic result9 : et3
+
+logic result10 : et1
+
+logic result11 : et2
+
+logic result12 : enum1ta
+
+logic result13 : bool
+
+logic result14 : et1
+
+logic result15 : et2
+
+logic r__split_fields14 : et3
+
+logic r__split_fields15 : et1
+
+logic r__split_fields16 : et2
+
+logic r__split_fields17 : enum1ta
+
+logic r__split_fields18 : bool
+
+logic r__split_fields19 : et1
+
+logic r__split_fields20 : et2
+
+logic r__split_fields21 : et3
+
+logic r__split_fields22 : et1
+
+logic r__split_fields23 : et2
+
+logic r__split_fields24 : enum1ta
+
+logic r__split_fields25 : bool
+
+logic r__split_fields26 : et1
+
+logic r__split_fields27 : et2
+
+logic temp__split_fields4 : et1
+
+logic temp__split_fields5 : et2
+
+logic r__split_fields28 : et3
+
+logic r__split_fields29 : et1
+
+logic r__split_fields30 : et2
+
+logic r__split_fields31 : enum1ta
+
+logic r__split_fields32 : bool
+
+logic r__split_fields33 : et1
+
+logic r__split_fields34 : et2
+
+logic temp__split_fields6 : et1
+
+logic temp__split_fields7 : et2
+
+axiom H : (result = temp__split_fields)
+
+axiom H1 : (result1 = temp__split_fields1)
+
+axiom H2 : (r__split_fields1 = temp__split_fields2)
+
+axiom H3 : (r__split_fields2 = temp__split_fields3)
+
+axiom H4 : (result2 = r__split_fields)
+
+axiom H5 : (result3 = r__split_fields1)
+
+axiom H6 : (result4 = r__split_fields2)
+
+axiom H7 : (result5 = r__split_fields3)
+
+axiom H8 : (result6 = r__split_fields4)
+
+axiom H9 : (result7 = r__split_fields5)
+
+axiom H10 : (result8 = r__split_fields6)
+
+axiom H11 : (((r__split_fields7 = r__split_fields) and
+  (((r__split_fields8 = r__split_fields5) and
+  (r__split_fields9 = r__split_fields6)) and
+  (r__split_fields10 = r__split_fields3))) and
+  ((r__split_fields11 = r__split_fields4) and
+  ((r__split_fields12 = r__split_fields5) and
+  (r__split_fields13 = r__split_fields6))))
+
+axiom H12 : (((result9 = r__split_fields7) and
+  (((result10 = r__split_fields8) and (result11 = r__split_fields9)) and
+  (result12 = r__split_fields10))) and ((result13 = r__split_fields11) and
+  ((result14 = r__split_fields12) and (result15 = r__split_fields13))))
+
+axiom H13 : (((r__split_fields14 = r__split_fields7) and
+  (((r__split_fields15 = r__split_fields8) and
+  (r__split_fields16 = r__split_fields9)) and
+  (r__split_fields17 = r__split_fields10))) and
+  ((r__split_fields18 = r__split_fields11) and
+  ((r__split_fields19 = temp__split_fields2) and
+  (r__split_fields20 = temp__split_fields3))))
+
+axiom H14 : ((temp__split_fields4 = temp__split_fields2) and
+  (temp__split_fields5 = temp__split_fields3))
+
+axiom H15 : (((r__split_fields21 = r__split_fields14) and
+  (((r__split_fields22 = r__split_fields15) and
+  (r__split_fields23 = r__split_fields16)) and
+  (r__split_fields24 = r__split_fields17))) and
+  ((r__split_fields25 = r__split_fields18) and
+  ((r__split_fields26 = r__split_fields19) and
+  (r__split_fields27 = r__split_fields20))))
+
+axiom H16 : ((temp__split_fields6 = temp__split_fields2) and
+  (temp__split_fields7 = temp__split_fields3))
+
+axiom H17 : (((r__split_fields28 = r__split_fields14) and
+  (((r__split_fields29 = r__split_fields15) and
+  (r__split_fields30 = r__split_fields16)) and
+  (r__split_fields31 = r__split_fields17))) and
+  ((r__split_fields32 = r__split_fields18) and
+  ((r__split_fields33 = r__split_fields19) and
+  (r__split_fields34 = r__split_fields20))))
+
  (* File "ar.ads", line 1170, characters 0-0 *)
 goal WP_parameter_def :
-  (forall r__split_fields:et3. forall r__split_fields1:et1.
-  forall r__split_fields2:et2. forall r__split_fields3:enum1ta.
-  forall r__split_fields4:bool. forall r__split_fields5:et1.
-  forall r__split_fields6:et2. forall temp__split_fields:et1.
-  forall temp__split_fields1:et2. forall result:et1. forall result1:et2.
-  forall temp__split_fields2:et1. forall temp__split_fields3:et2.
-  forall result2:et3. forall result3:et1. forall result4:et2.
-  forall result5:enum1ta. forall result6:bool. forall result7:et1.
-  forall result8:et2. forall r__split_fields7:et3.
-  forall r__split_fields8:et1. forall r__split_fields9:et2.
-  forall r__split_fields10:enum1ta. forall r__split_fields11:bool.
-  forall r__split_fields12:et1. forall r__split_fields13:et2.
-  forall result9:et3. forall result10:et1. forall result11:et2.
-  forall result12:enum1ta. forall result13:bool. forall result14:et1.
-  forall result15:et2. forall r__split_fields14:et3.
-  forall r__split_fields15:et1. forall r__split_fields16:et2.
-  forall r__split_fields17:enum1ta. forall r__split_fields18:bool.
-  forall r__split_fields19:et1. forall r__split_fields20:et2.
-  forall r__split_fields21:us_split_fields__ref2.
-  forall temp__split_fields4:us_split_fields__ref.
-  forall r__split_fields22:us_split_fields4.
-  forall temp__split_fields5:us_split_fields.
-  ((((((result = temp__split_fields) and (result1 = temp__split_fields1)) and
-  ((r__split_fields1 = temp__split_fields2) and
-  (r__split_fields2 = temp__split_fields3))) and
-  (((((result2 = r__split_fields) and (((result3 = r__split_fields1) and
-  (result4 = r__split_fields2)) and (result5 = r__split_fields3))) and
-  ((result6 = r__split_fields4) and ((result7 = r__split_fields5) and
-  (result8 = r__split_fields6)))) and
-  (((r__split_fields = r__split_fields7) and
-  (((r__split_fields5 = r__split_fields8) and
-  (r__split_fields6 = r__split_fields9)) and
-  (r__split_fields3 = r__split_fields10))) and
-  ((r__split_fields4 = r__split_fields11) and
-  ((r__split_fields5 = r__split_fields12) and
-  (r__split_fields6 = r__split_fields13))))) and
-  ((((result9 = r__split_fields7) and (((result10 = r__split_fields8) and
-  (result11 = r__split_fields9)) and (result12 = r__split_fields10))) and
-  ((result13 = r__split_fields11) and ((result14 = r__split_fields12) and
-  (result15 = r__split_fields13)))) and
-  (((r__split_fields7 = r__split_fields14) and
-  (((r__split_fields8 = r__split_fields15) and
-  (r__split_fields9 = r__split_fields16)) and
-  (r__split_fields10 = r__split_fields17))) and
-  ((r__split_fields11 = r__split_fields18) and
-  ((r__split_fields19 = temp__split_fields2) and
-  (r__split_fields20 = temp__split_fields3))))))) and
-  (((temp__split_fields4 = { us_split_fields__content = {
-  rec__ar__rec1t__f1 = temp__split_fields2; rec__ar__rec1t__g1 =
-  temp__split_fields3 } }) and (r__split_fields21 = {
-  us_split_fields__content2 = { rec__ar__rec5t__f5 = { us_split_fields3 = {
-  rec__ar__rec2t__f2 = r__split_fields14; rec__ar__rec2t__g2 = {
-  us_split_fields1 = { rec__ar__rec1t__f1 = r__split_fields15;
-  rec__ar__rec1t__g1 = r__split_fields16 } }; rec__ar__rec2t__h2 =
-  r__split_fields17 } }; rec__ar__rec5t__g5 = r__split_fields18;
-  rec__ar__rec5t__h5 = { us_split_fields1 = { rec__ar__rec1t__f1 =
-  r__split_fields19; rec__ar__rec1t__g1 = r__split_fields20 } } } })) and
-  ((temp__split_fields5 = { rec__ar__rec1t__f1 = temp__split_fields2;
-  rec__ar__rec1t__g1 = temp__split_fields3 }) and (r__split_fields22 = {
-  rec__ar__rec5t__f5 = { us_split_fields3 = { rec__ar__rec2t__f2 =
-  r__split_fields14; rec__ar__rec2t__g2 = { us_split_fields1 = {
-  rec__ar__rec1t__f1 = r__split_fields15; rec__ar__rec1t__g1 =
-  r__split_fields16 } }; rec__ar__rec2t__h2 = r__split_fields17 } };
-  rec__ar__rec5t__g5 = r__split_fields18; rec__ar__rec5t__h5 = {
-  us_split_fields1 = { rec__ar__rec1t__f1 = r__split_fields19;
-  rec__ar__rec1t__g1 = r__split_fields20 } } })))) ->
-  (to_rep2(((((r__split_fields21).us_split_fields__content2).rec__ar__rec5t__f5).us_split_fields3).rec__ar__rec2t__f2) = to_rep2(r__split_fields))))
+  (to_rep2(r__split_fields21) = to_rep2(r__split_fields))

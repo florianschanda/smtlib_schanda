@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1192,10 +1192,27 @@ axiom hasmem64__def_axiom :
   of_int(18374686479671623680)) = mul(toBig(to_rep((mem[add(addr,
   of_int(7))]))), of_int(72057594037927936)))))))
 
+logic rax : t
+
+logic rcx : t
+
+logic rdi : t
+
+logic memory : (t,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : ((readmem64(rdi, memory) = rax) and (rdi = add(rdi_start,
+  mul(sub(rcx_start, rcx), of_int(8)))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t. forall rcx:t. forall rdi:t.
-  forall memory:(t,unsigned8) farray. (((readmem64(rdi, memory) = rax) and
-  (rdi = add(rdi_start, mul(sub(rcx_start, rcx), of_int(8))))) ->
-  (readmem64(add(rdi_start, mul(sub(rcx_start, rcx), of_int(8))),
-  memory) = rax)))
+goal WP_parameter_def : (readmem64(add(rdi_start, mul(sub(rcx_start, rcx),
+  of_int(8))), memory) = rax)

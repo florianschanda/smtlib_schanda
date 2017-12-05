@@ -1103,5 +1103,30 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic y : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic y1 : t
+
+logic y2 : t
+
+logic y3 : t
+
+axiom H : in_range1(x1)
+
+axiom H1 : in_range1(x2)
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
+
+axiom H2 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(y))
+
  (* File "run.ads", line 25, characters 0-0 *)
 goal WP_parameter_def : true

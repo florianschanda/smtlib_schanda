@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -250,8 +250,14 @@ logic b : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (bool_eq3(a, (- 2147483648), 2147483647, b, (- 2147483648),
+  2147483647) = true)
+
+logic i : int
+
+axiom H1 : ((- 2147483648) <= i)
+
+axiom H2 : (i <= 2147483647)
+
  (* File "simple_arrays.adb", line 907, characters 0-0 *)
-goal WP_parameter_def : ((bool_eq3(a, (-2147483648), 2147483647, b,
-  (-2147483648), 2147483647) = true) ->
-  (forall i:int. ((((-2147483648) <= i) and (i <= 2147483647)) ->
-  (to_rep((a[i])) = to_rep((b[i]))))))
+goal WP_parameter_def : (to_rep((a[i])) = to_rep((b[i])))

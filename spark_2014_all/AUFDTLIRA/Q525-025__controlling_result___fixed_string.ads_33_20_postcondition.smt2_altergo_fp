@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -916,47 +916,119 @@ type t24b__ref = { t24b__content : us_t2
 
 function t24b__ref___projection(a: t24b__ref) : us_t2 = (a).t24b__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall len:int. forall out_string:(int,character) farray.
-  forall fixed_string__convert__result:(int,character) farray.
-  forall fixed_string__convert__result1:t. forall o:int. forall o1:int.
-  forall o2:int.
-  forall fixed_string__convert__out_string__assume:(int,character) farray.
-  forall fixed_string__convert__out_string__assume1:t.
-  forall fixed_string__convert__R19b__assume:int.
-  forall fixed_string__convert__R22b__assume:int.
-  forall o3:(int,character) farray. forall temp___233:(int,character) farray.
-  forall temp___2331:t2. forall temp___234:(int,character) farray.
-  forall temp___2341:t1. forall o4:(int,character) farray.
-  forall temp___236:(int,character) farray. forall temp___2361:t1.
-  forall temp___237:(int,character) farray. forall temp___2371:t1.
-  forall o5:(int,character) farray. forall result:int. forall len1:int.
-  forall result1:(int,character) farray.
-  forall out_string1:(int,character) farray.
-  forall result2:(int,character) farray.
-  forall out_string2:(int,character) farray.
-  forall result3:(int,character) farray. forall result4:t.
-  forall fixed_string__convert__result2:(int,character) farray.
-  forall fixed_string__convert__result3:t.
-  forall fixed_string__convert__result4:(int,character) farray.
-  forall fixed_string__convert__result5:t.
-  forall fixed_string__convert__result6:(int,character) farray.
-  forall fixed_string__convert__result7:t. forall len2:int.
-  forall out_string3:(int,character) farray.
-  forall fixed_string__convert__result8:(int,character) farray.
-  forall fixed_string__convert__result9:t. forall len3:int.
-  forall out_string4:(int,character) farray.
-  forall fixed_string__convert__result10:(int,character) farray.
-  forall fixed_string__convert__result11:t.
-  (forall result5:(int,character) farray. forall result6:t.
-  ((dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
-  to_rep1(last(in_string1))) and ((((((((o = length({ elts = in_string; rt =
-  in_string1 })) and in_range(length({ elts = in_string; rt = in_string1
-  }))) and (o1 = min(o, to_rep2(this)))) and ((o2 = o1) and
-  in_range3(o1))) and (({ int__content = result } = { int__content = len
-  }) and (len1 = o2))) and (in_range3(len1) and (((({ elts =
-  fixed_string__convert__out_string__assume; rt =
+logic len : int
+
+logic out_string : (int,character) farray
+
+logic fixed_string__convert__result : (int,character) farray
+
+logic fixed_string__convert__result1 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic fixed_string__convert__out_string__assume : (int,character) farray
+
+logic fixed_string__convert__out_string__assume1 : t
+
+logic fixed_string__convert__R19b__assume : int
+
+logic fixed_string__convert__R22b__assume : int
+
+logic o3 : (int,character) farray
+
+logic temp___233 : (int,character) farray
+
+logic temp___2331 : t2
+
+logic temp___234 : (int,character) farray
+
+logic temp___2341 : t1
+
+logic o4 : (int,character) farray
+
+logic temp___236 : (int,character) farray
+
+logic temp___2361 : t1
+
+logic temp___237 : (int,character) farray
+
+logic temp___2371 : t1
+
+logic o5 : (int,character) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,character) farray
+
+logic out_string1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic out_string2 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic result4 : t
+
+logic fixed_string__convert__result2 : (int,character) farray
+
+logic fixed_string__convert__result3 : t
+
+logic fixed_string__convert__result4 : (int,character) farray
+
+logic fixed_string__convert__result5 : t
+
+logic fixed_string__convert__result6 : (int,character) farray
+
+logic fixed_string__convert__result7 : t
+
+logic len2 : int
+
+logic out_string3 : (int,character) farray
+
+logic fixed_string__convert__result8 : (int,character) farray
+
+logic fixed_string__convert__result9 : t
+
+logic len3 : int
+
+logic out_string4 : (int,character) farray
+
+logic fixed_string__convert__result10 : (int,character) farray
+
+logic fixed_string__convert__result11 : t
+
+logic result5 : (int,character) farray
+
+logic result6 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
+  to_rep1(last(in_string1)))
+
+axiom H1 : ((o = length({ elts = in_string; rt = in_string1 })) and
+  in_range(length({ elts = in_string; rt = in_string1 })))
+
+axiom H2 : (o1 = min(o, to_rep2(this)))
+
+axiom H3 : ((o2 = o1) and in_range3(o1))
+
+axiom H4 : (result = len)
+
+axiom H5 : (len1 = o2)
+
+axiom H6 : in_range3(len1)
+
+axiom H7 : (({ elts = fixed_string__convert__out_string__assume; rt =
   fixed_string__convert__out_string__assume1 } = null_string({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
@@ -967,80 +1039,136 @@ goal WP_parameter_def :
   fixed_string__convert__out_string__assume1 }) = elements({
   us_split_fields1 = { rec__fixed_string__object__width = this;
   rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })))) and ((({ map__content = result1 } = { map__content = out_string
-  }) and (out_string1 = fixed_string__convert__out_string__assume)) and
-  ((to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1))) and
-  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))))) and
-  (dynamic_property(1, 2147483647, to_rep1(out_string__first),
-  to_rep1(out_string__last)) and
-  (((((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
-  in_range((to_rep1(out_string__first) + (len1 - 1)))) and
-  (fixed_string__convert__R19b__assume = r19b)) and in_range(r19b)) and
-  (((((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
-  in_range((to_rep1(first(in_string1)) + (len1 - 1)))) and
-  (fixed_string__convert__R22b__assume = r22b)) and in_range(r22b)) and
-  (((((((((to_rep1(first(in_string1)) <= r22b) ->
+  this3 }))))
+
+axiom H8 : (result1 = out_string)
+
+axiom H9 : (out_string1 = fixed_string__convert__out_string__assume)
+
+axiom H10 :
+  (to_rep1(out_string__first) = to_rep1(first(fixed_string__convert__out_string__assume1)))
+
+axiom H11 :
+  (to_rep1(out_string__last) = to_rep1(last(fixed_string__convert__out_string__assume1)))
+
+axiom H12 : dynamic_property(1, 2147483647, to_rep1(out_string__first),
+  to_rep1(out_string__last))
+
+axiom H13 :
+  ((fixed_string__convert__R19b__assume = (to_rep1(out_string__first) + (len1 - 1))) and
+  in_range((to_rep1(out_string__first) + (len1 - 1))))
+
+axiom H14 : (fixed_string__convert__R19b__assume = r19b)
+
+axiom H15 : in_range(r19b)
+
+axiom H16 :
+  ((fixed_string__convert__R22b__assume = (to_rep1(first(in_string1)) + (len1 - 1))) and
+  in_range((to_rep1(first(in_string1)) + (len1 - 1))))
+
+axiom H17 : (fixed_string__convert__R22b__assume = r22b)
+
+axiom H18 : in_range(r22b)
+
+axiom H19 : ((to_rep1(first(in_string1)) <= r22b) ->
   (((to_rep1(first(in_string1)) <= to_rep1(first(in_string1))) and
   (to_rep1(first(in_string1)) <= to_rep1(last(in_string1)))) and
   ((to_rep1(first(in_string1)) <= r22b) and
-  (r22b <= to_rep1(last(in_string1)))))) and (o3 = in_string)) and
-  ((o3 = temp___233) and (mk2(to_rep1(first(in_string1)),
-  r22b) = temp___2331))) and
-  ((((to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331))) and
-  (((to_rep1(out_string__first) <= r19b) and
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) or
-  ((not (to_rep1(out_string__first) <= r19b)) and
-  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331)))) and
-  (((to_rep1(out_string__first) <= r19b) and
-  (0 = ((r19b - to_rep1(out_string__first)) + 1))) or
-  (not (to_rep1(out_string__first) <= r19b))))) and ((slide(temp___233,
-  to_rep1(first4(temp___2331)), to_rep1(out_string__first)) = temp___234) and
-  (mk1(to_rep1(out_string__first), r19b) = temp___2341)))) and
-  (((((to_rep1(out_string__first) <= r19b) ->
+  (r22b <= to_rep1(last(in_string1))))))
+
+axiom H20 : (o3 = in_string)
+
+axiom H21 : (o3 = temp___233)
+
+axiom H22 : (mk2(to_rep1(first(in_string1)), r22b) = temp___2331)
+
+axiom H23 :
+  (((to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331))) ->
+  (((to_rep1(out_string__first) <= r19b) ->
+  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = ((r19b - to_rep1(out_string__first)) + 1))) and
+  ((not (to_rep1(out_string__first) <= r19b)) ->
+  (((to_rep1(last4(temp___2331)) - to_rep1(first4(temp___2331))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2331)) <= to_rep1(last4(temp___2331)))) ->
+  ((to_rep1(out_string__first) <= r19b) ->
+  (0 = ((r19b - to_rep1(out_string__first)) + 1)))))
+
+axiom H24 : (slide(temp___233, to_rep1(first4(temp___2331)),
+  to_rep1(out_string__first)) = temp___234)
+
+axiom H25 : (mk1(to_rep1(out_string__first), r19b) = temp___2341)
+
+axiom H26 : ((to_rep1(out_string__first) <= r19b) ->
   (((to_rep1(out_string__first) <= to_rep1(out_string__first)) and
   (to_rep1(out_string__first) <= to_rep1(out_string__last))) and
   ((to_rep1(out_string__first) <= r19b) and
-  (r19b <= to_rep1(out_string__last))))) and (o4 = out_string1)) and
-  ((o4 = temp___236) and (mk1(to_rep1(out_string__first),
-  r19b) = temp___2361))) and
-  ((((to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341))) and
-  (((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) and
-  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1))) or
-  ((not (to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361)))) and
-  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341)))) and
-  (((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) and
-  (0 = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1))) or
-  (not (to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))))))) and
-  ({ elts1 = temp___237; rt1 = temp___2371 } = { elts1 = temp___234; rt1 =
-  temp___2341 })))) and
+  (r19b <= to_rep1(out_string__last)))))
+
+axiom H27 : (o4 = out_string1)
+
+axiom H28 : (o4 = temp___236)
+
+axiom H29 : (mk1(to_rep1(out_string__first), r19b) = temp___2361)
+
+axiom H30 :
+  (((to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341))) ->
+  (((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) ->
+  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1))) and
+  ((not (to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361)))) ->
+  (((to_rep1(last2(temp___2341)) - to_rep1(first2(temp___2341))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___2341)) <= to_rep1(last2(temp___2341)))) ->
+  ((to_rep1(first2(temp___2361)) <= to_rep1(last2(temp___2361))) ->
+  (0 = ((to_rep1(last2(temp___2361)) - to_rep1(first2(temp___2361))) + 1)))))
+
+axiom H31 : ((temp___237 = temp___234) and (temp___2371 = temp___2341))
+
+axiom H32 :
   (forall temp___238:int. ((((to_rep1(out_string__first) <= temp___238) and
-  (temp___238 <= r19b)) and ((o5[temp___238]) = (temp___237[temp___238]))) or
+  (temp___238 <= r19b)) -> ((o5[temp___238]) = (temp___237[temp___238]))) and
   ((not ((to_rep1(out_string__first) <= temp___238) and
-  (temp___238 <= r19b))) and
-  ((o5[temp___238]) = (out_string1[temp___238])))))) and
-  ((out_string1 = result2) and (out_string2 = o5))) and
-  ((((fixed_string__convert__result4 = fixed_string__convert__result2) and
-  (fixed_string__convert__result5 = fixed_string__convert__result3)) and ({
-  elts = fixed_string__convert__result6; rt = fixed_string__convert__result7
-  } = { elts = fixed_string__convert__result2; rt =
-  fixed_string__convert__result3 })) and (({ string__content = { elts =
-  result3; rt = result4 } } = { string__content = { elts =
-  fixed_string__convert__result; rt = fixed_string__convert__result1 } }) and
-  ((out_string2 = fixed_string__convert__result2) and
-  (mk(to_rep1(out_string__first),
-  to_rep1(out_string__last)) = fixed_string__convert__result3))))))))))) and
-  ((({ string__content = { elts = fixed_string__convert__result8; rt =
-  fixed_string__convert__result9 } } = { string__content = { elts =
-  fixed_string__convert__result4; rt = fixed_string__convert__result5 }
-  }) and ((out_string2 = out_string3) and (len1 = len2))) and
-  (((fixed_string__convert__result10 = fixed_string__convert__result6) and
-  (fixed_string__convert__result11 = fixed_string__convert__result7)) and
-  ((out_string4 = out_string2) and (len3 = len1))))) and
-  ((result5 = fixed_string__convert__result8) and
-  (result6 = fixed_string__convert__result9)))) -> (length({ elts =
-  fixed_string__convert__result8; rt = fixed_string__convert__result9
-  }) = elements({ us_split_fields1 = { rec__fixed_string__object__width =
-  this; rec__fixed_string__object__name = this1; rec__ext__ = this2 };
-  attr__tag = this3 })))))
+  (temp___238 <= r19b))) -> ((o5[temp___238]) = (out_string1[temp___238])))))
+
+axiom H33 : (out_string1 = result2)
+
+axiom H34 : (out_string2 = o5)
+
+axiom H35 : (fixed_string__convert__result4 = fixed_string__convert__result2)
+
+axiom H36 : (fixed_string__convert__result5 = fixed_string__convert__result3)
+
+axiom H37 :
+  ((fixed_string__convert__result6 = fixed_string__convert__result2) and
+  (fixed_string__convert__result7 = fixed_string__convert__result3))
+
+axiom H38 : ((result3 = fixed_string__convert__result) and
+  (result4 = fixed_string__convert__result1))
+
+axiom H39 : (out_string2 = fixed_string__convert__result2)
+
+axiom H40 : (mk(to_rep1(out_string__first),
+  to_rep1(out_string__last)) = fixed_string__convert__result3)
+
+axiom H41 :
+  ((fixed_string__convert__result8 = fixed_string__convert__result4) and
+  (fixed_string__convert__result9 = fixed_string__convert__result5))
+
+axiom H42 : (out_string2 = out_string3)
+
+axiom H43 : (len1 = len2)
+
+axiom H44 :
+  ((fixed_string__convert__result10 = fixed_string__convert__result6) and
+  (fixed_string__convert__result11 = fixed_string__convert__result7))
+
+axiom H45 : (out_string4 = out_string2)
+
+axiom H46 : (len3 = len1)
+
+axiom H47 : (result5 = fixed_string__convert__result8)
+
+axiom H48 : (result6 = fixed_string__convert__result9)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (length({ elts = fixed_string__convert__result8; rt =
+  fixed_string__convert__result9 }) = elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = this; rec__fixed_string__object__name =
+  this1; rec__ext__ = this2 }; attr__tag = this3 }))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -768,32 +768,371 @@ type t31b__ref = { t31b__content : us_t2
 
 function t31b__ref___projection(a: t31b__ref) : us_t2 = (a).t31b__content
 
-logic temp___622 : int, int, int -> us_t2
+logic temp___616 : int, int, int -> us_t2
 
 axiom def_axiom :
-  (forall temp___624:int. forall temp___625:int. forall temp___626:int.
-  ((dynamic_property(1, 2147483647, temp___625, temp___626) ->
-  ((to_rep1(first4((temp___622(temp___624, temp___625,
-  temp___626)).rt2)) = temp___625) and (to_rep1(last4((temp___622(temp___624,
-  temp___625, temp___626)).rt2)) = temp___626))) and
-  (forall temp___627:int. (((temp___622(temp___624, temp___625,
-  temp___626)).elts2[temp___627]) = of_rep(temp___624)))))
+  (forall temp___618:int. forall temp___619:int. forall temp___620:int.
+  ((dynamic_property(1, 2147483647, temp___619, temp___620) ->
+  ((to_rep1(first4((temp___616(temp___618, temp___619,
+  temp___620)).rt2)) = temp___619) and (to_rep1(last4((temp___616(temp___618,
+  temp___619, temp___620)).rt2)) = temp___620))) and
+  (forall temp___621:int. (((temp___616(temp___618, temp___619,
+  temp___620)).elts2[temp___621]) = of_rep(temp___618)))))
+
+logic v : (int,character) farray
+
+logic size : int
+
+logic line : (int,character) farray
+
+logic first_char : int
+
+logic last_char : int
+
+logic line_num : int
+
+logic start : int
+
+logic current_char : int
+
+logic s : (int,character) farray
+
+logic i : int
+
+logic temp___609 : int
+
+logic temp___608 : (int,character) farray
+
+logic temp___607 : int
+
+logic temp___606 : int
+
+logic temp___605 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : character
+
+logic o3 : int
+
+logic temp___610 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : (int,character) farray
+
+logic temp___626 : (int,character) farray
+
+logic temp___6261 : t1
+
+logic input__next_word__B_5__s__assume : (int,character) farray
+
+logic input__next_word__B_5__s__assume1 : t
+
+logic temp___612 : (int,character) farray
+
+logic o10 : int
+
+logic o11 : character
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : character
+
+logic o15 : int
+
+logic o16 : (int,character) farray
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic us : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic temp___622 : (int,character) farray
+
+logic temp___6221 : t2
+
+logic temp___623 : (int,character) farray
+
+logic temp___6231 : t2
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : integer
+
+logic o39 : int
+
+logic temp___624 : (int,character) farray
+
+logic temp___6241 : t
+
+logic temp___625 : (int,character) farray
+
+logic temp___6251 : t
+
+logic o40 : (int,character) farray
+
+logic o41 : int
+
+logic o42 : int
+
+logic line1 : (int,character) farray
+
+logic first_char1 : int
+
+logic last_char1 : int
+
+logic line_num1 : int
+
+logic current_char1 : int
+
+logic first_char2 : int
+
+logic last_char2 : int
+
+logic line_num2 : int
+
+logic current_char2 : int
+
+logic line2 : (int,character) farray
+
+logic first_char3 : int
+
+logic last_char3 : int
+
+logic line_num3 : int
+
+logic current_char3 : int
+
+logic line3 : (int,character) farray
+
+logic first_char4 : int
+
+logic last_char4 : int
+
+logic line_num4 : int
+
+logic current_char4 : int
+
+logic line4 : (int,character) farray
+
+logic first_char5 : int
+
+logic last_char5 : int
+
+logic line_num5 : int
+
+logic current_char5 : int
+
+logic line5 : (int,character) farray
+
+logic first_char6 : int
+
+logic last_char6 : int
+
+logic line_num6 : int
+
+logic current_char6 : int
+
+logic line6 : (int,character) farray
+
+logic first_char7 : int
+
+logic last_char7 : int
+
+logic line_num7 : int
+
+logic current_char7 : int
+
+logic result : int
+
+logic first_char8 : int
+
+logic result1 : int
+
+logic first_char9 : int
+
+logic first_char10 : int
+
+logic first_char11 : int
+
+logic result2 : int
+
+logic start1 : int
+
+logic result3 : bool
+
+logic first_char12 : int
+
+logic result4 : int
+
+logic first_char13 : int
+
+logic result5 : bool
+
+logic first_char14 : int
+
+logic first_char15 : int
+
+logic first_char16 : int
+
+logic first_char17 : int
+
+logic result6 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result7 : int
+
+logic i1 : int
+
+logic s2 : (int,character) farray
+
+logic i2 : int
+
+logic result8 : (int,character) farray
+
+logic s3 : (int,character) farray
+
+logic s4 : (int,character) farray
+
+logic i3 : int
+
+logic s5 : (int,character) farray
+
+logic i4 : int
+
+logic s6 : (int,character) farray
+
+logic i5 : int
+
+logic s7 : (int,character) farray
+
+logic i6 : int
+
+logic result9 : bool
+
+logic result10 : (int,character) farray
+
+logic v1 : (int,character) farray
+
+logic result11 : int
+
+logic size1 : int
+
+logic v2 : (int,character) farray
+
+logic size2 : int
+
+logic line7 : (int,character) farray
+
+logic first_char18 : int
+
+logic last_char8 : int
+
+logic line_num8 : int
+
+logic start2 : int
+
+logic current_char8 : int
+
+logic s8 : (int,character) farray
+
+logic i7 : int
+
+logic v3 : (int,character) farray
+
+logic size3 : int
+
+logic line8 : (int,character) farray
+
+logic first_char19 : int
+
+logic last_char9 : int
+
+logic line_num9 : int
+
+logic start3 : int
+
+logic current_char9 : int
+
+logic s9 : (int,character) farray
+
+logic i8 : int
+
+axiom H : in_range7(first_char)
+
+axiom H1 : in_range8(last_char)
+
+axiom H2 : in_range4(line_num)
+
+axiom H3 : dynamic_property(1, 2147483647, to_rep1(v__first),
+  to_rep1(v__last))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(size))
+
+axiom H5 : (((to_rep1(v__first) <= to_rep1(v__last)) ->
+  (1024 <= ((to_rep1(v__last) - to_rep1(v__first)) + 1))) and
+  ((not (to_rep1(v__first) <= to_rep1(v__last))) -> (1024 <= 0)))
+
+axiom H6 : ((0 <= 2147483647) -> in_range4(start))
+
+axiom H7 : ((0 <= 255) -> in_range3(current_char))
+
+axiom H8 : (first_char <= 1024)
+
+axiom H9 : ((((in_range8(last_char2) and ((0 <= 255) ->
+  in_range3(current_char2))) and in_range4(line_num2)) and
+  in_range7(first_char2)) and (first_char2 <= 1024))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall size:int. forall first_char:int. forall last_char:int.
-  forall line_num:int. forall start:int. forall current_char:int.
-  forall first_char1:int. forall last_char1:int. forall line_num1:int.
-  forall current_char1:int. (in_range7(first_char) ->
-  (in_range8(last_char) -> (in_range4(line_num) -> (dynamic_property(1,
-  2147483647, to_rep1(v__first), to_rep1(v__last)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(size)) ->
-  ((((to_rep1(v__first) <= to_rep1(v__last)) and
-  (1024 <= ((to_rep1(v__last) - to_rep1(v__first)) + 1))) or
-  ((not (to_rep1(v__first) <= to_rep1(v__last))) and (1024 <= 0))) ->
-  (((0 <= 2147483647) -> in_range4(start)) -> (((0 <= 255) ->
-  in_range3(current_char)) -> ((first_char <= 1024) ->
-  (((((in_range8(last_char1) and ((0 <= 255) ->
-  in_range3(current_char1))) and in_range4(line_num1)) and
-  in_range7(first_char1)) and (first_char1 <= 1024)) ->
-  (first_char1 <= 1024))))))))))))
+goal WP_parameter_def : (first_char2 <= 1024)

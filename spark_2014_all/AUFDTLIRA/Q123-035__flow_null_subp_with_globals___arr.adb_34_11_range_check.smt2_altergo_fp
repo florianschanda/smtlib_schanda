@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -302,5 +302,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "arr.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (in_range2(l) -> ((1 <= l) -> (1 <= 1)))
+axiom H : in_range2(l)
+
+axiom H1 : (1 <= l)
+
+ (* File "arr.adb", line 13, characters 0-0 *)
+goal WP_parameter_def : (1 <= 1)

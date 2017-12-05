@@ -643,5 +643,67 @@ axiom is_empty__post_axiom :
   rec__my_lists__my_lists__list__capacity = container }; us_split_fields1 = {
   rec__my_lists__my_lists__list = container1 } }) = 0)))
 
+logic l1__split_fields : us_main_type
+
+logic l2__split_fields : us_main_type
+
+logic l3__split_fields : us_main_type
+
+logic l4__split_fields : us_main_type
+
+logic l5__split_fields : us_main_type
+
+logic l6__split_fields : us_main_type
+
+logic l7__split_fields : us_main_type
+
+logic us : int
+
+logic result : us_main_type
+
+logic l2__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields : us_main_type
+
+logic result1 : us_main_type
+
+logic l1__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields1 : us_main_type
+
+logic result2 : us_main_type
+
+logic l2__split_fields2 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields2 : us_main_type
+
+logic result3 : us_main_type
+
+logic l3__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields3 : us_main_type
+
+logic result4 : us_main_type
+
+logic l4__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields4 : us_main_type
+
+logic result5 : us_main_type
+
+logic l5__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields5 : us_main_type
+
+logic result6 : us_main_type
+
+logic l6__split_fields1 : us_main_type
+
+logic my_lists__my_lists__clear__container__fields6 : us_main_type
+
+logic result7 : us_main_type
+
+logic l7__split_fields1 : us_main_type
+
  (* File "a-contai.ads", line 20, characters 0-0 *)
 goal WP_parameter_def : in_range(100)

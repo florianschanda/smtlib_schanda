@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1835,69 +1835,163 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic battery_level_at : (t,battery_level_type) farray
+
+logic current_time : t
+
+logic counter : t
+
+logic o : t
+
+logic o1 : battery_level_type
+
+logic o2 : (t,battery_level_type) farray
+
+logic o3 : t
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : t
+
+logic o7 : t
+
+logic temp___280 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic temp___282 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic temp___279 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : battery_level_type
+
+logic o15 : t1
+
+logic result : t
+
+logic current_time1 : t
+
+logic result1 : (t,battery_level_type) farray
+
+logic battery_level_at1 : (t,battery_level_type) farray
+
+logic result2 : t
+
+logic counter1 : t
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : t
+
+logic counter2 : t
+
+logic battery_level_at2 : (t,battery_level_type) farray
+
+logic current_time2 : t
+
+logic counter3 : t
+
+logic battery_level_at3 : (t,battery_level_type) farray
+
+logic current_time3 : t
+
+logic counter4 : t
+
+axiom H : in_range4(counter)
+
+axiom H1 : in_range2(current_time)
+
+axiom H2 : tqtisFinite(battery_level)
+
+axiom H3 : (is_valid(battery_level_at, current_time, counter) = true)
+
+axiom H4 : (counter = c)
+
+axiom H5 : true
+
+axiom H6 : (counter = time_below_threshold(battery_level_at, current_time))
+
+axiom H7 :
+  ((forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
+   lt(to_rep((battery_level_at[s])), fliteral1))) -> (counter = of_int(50)))
+
+axiom H8 :
+  ((forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
+   ((not ((ule(sub(of_int(50), current_time), of_int(1)) and
+   (s = sub(add(current_time, of_int(1)), of_int(50)))) or
+   ((not ule(sub(of_int(50), current_time), of_int(1))) and
+   (s = add(current_time, of_int(1)))))) -> lt(to_rep((battery_level_at[s])),
+   fliteral1)))) -> uge(counter, of_int(49)))
+
+axiom H9 : (ule(sub(of_int(50), current_time), of_int(1)) ->
+  (o = sub(add(current_time, of_int(1)), of_int(50))))
+
+axiom H10 : ((not ule(sub(of_int(50), current_time), of_int(1))) ->
+  (o = add(current_time, of_int(1))))
+
+axiom H11 : (result = current_time)
+
+axiom H12 : (current_time1 = o)
+
+axiom H13 : (to_rep(o1) = battery_level)
+
+axiom H14 : (o2 = (battery_level_at[current_time1 <- o1]))
+
+axiom H15 : (result1 = battery_level_at)
+
+axiom H16 : (battery_level_at1 = o2)
+
+axiom H17 : lt(battery_level, fliteral1)
+
+axiom H18 : ((o3 = bv_min(add(counter, of_int(1)), of_int(50))) and
+  in_range4(bv_min(add(counter, of_int(1)), of_int(50))))
+
+axiom H19 : (result2 = counter)
+
+axiom H20 : (counter1 = o3)
+
+axiom H21 : (le(fliteral1, to_rep((battery_level_at1[current_time1]))) ->
+  (counter1 = of_int(0)))
+
+axiom H22 : ((c = of_int(50)) -> (counter1 = of_int(50)))
+
+axiom H23 : (((not (c = of_int(50))) and
+  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
+  lt(to_rep((battery_level_at1[s])), fliteral1)))) -> (c = of_int(49)))
+
+axiom H24 : (((not (c = of_int(50))) and
+  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
+  lt(to_rep((battery_level_at1[s])), fliteral1)))) ->
+  (counter1 = of_int(50)))
+
+axiom H25 : lt(to_rep((battery_level_at1[current_time1])), fliteral1)
+
+axiom H26 :
+  (not (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
+       lt(to_rep((battery_level_at1[s])), fliteral1))))
+
  (* File "failsafe.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. forall counter:t. forall o:t.
-  forall o1:battery_level_type. forall o2:(t,battery_level_type) farray.
-  forall o3:t. forall result:t. forall current_time1:t.
-  forall result1:(t,battery_level_type) farray.
-  forall battery_level_at1:(t,battery_level_type) farray. forall result2:t.
-  forall counter1:t. (in_range4(counter) -> (in_range2(current_time) ->
-  (tqtisFinite(battery_level) -> ((is_valid(battery_level_at, current_time,
-  counter) = true) -> ((counter = c) ->
-  ((counter = time_below_threshold(battery_level_at, current_time)) ->
-  ((((forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-     lt(to_rep((battery_level_at[s])), fliteral1))) and
-  (counter = of_int(50))) or
-  (not (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-       lt(to_rep((battery_level_at[s])), fliteral1))))) ->
-  ((((forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-     ((not ((ule(sub(of_int(50), current_time), of_int(1)) and
-     (s = sub(add(current_time, of_int(1)), of_int(50)))) or
-     ((not ule(sub(of_int(50), current_time), of_int(1))) and
-     (s = add(current_time, of_int(1)))))) ->
-     lt(to_rep((battery_level_at[s])), fliteral1)))) and
-  uge(counter, of_int(49))) or
-  (not (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-       ((not ((ule(sub(of_int(50), current_time), of_int(1)) ->
-       (s = sub(add(current_time, of_int(1)), of_int(50)))) and
-       ((not ule(sub(of_int(50), current_time), of_int(1))) ->
-       (s = add(current_time, of_int(1)))))) ->
-       lt(to_rep((battery_level_at[s])), fliteral1)))))) ->
-  ((((ule(sub(of_int(50), current_time), of_int(1)) and
-  (o = sub(add(current_time, of_int(1)), of_int(50)))) or
-  ((not ule(sub(of_int(50), current_time), of_int(1))) and
-  (o = add(current_time, of_int(1))))) and (({ t__content = result } = {
-  t__content = current_time }) and (current_time1 = o))) ->
-  ((((to_rep(o1) = battery_level) and
-  (o2 = (battery_level_at[current_time1 <- o1]))) and (({ map__content =
-  result1 } = { map__content = battery_level_at }) and
-  (battery_level_at1 = o2))) -> (lt(battery_level, fliteral1) ->
-  ((((o3 = bv_min(add(counter, of_int(1)), of_int(50))) and
-  in_range4(bv_min(add(counter, of_int(1)), of_int(50)))) and (({
-  t__content = result2 } = { t__content = counter }) and (counter1 = o3))) ->
-  (((le(fliteral1, to_rep((battery_level_at1[current_time1]))) and
-  (counter1 = of_int(0))) or (not le(fliteral1,
-  to_rep((battery_level_at1[current_time1]))))) -> ((((c = of_int(50)) and
-  (counter1 = of_int(50))) or (not (c = of_int(50)))) ->
-  (((((not (c = of_int(50))) and
-  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-  lt(to_rep((battery_level_at1[s])), fliteral1)))) and (c = of_int(49))) or
-  (not ((not (c = of_int(50))) and
-  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-  lt(to_rep((battery_level_at1[s])), fliteral1)))))) ->
-  (((((not (c = of_int(50))) and
-  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-  lt(to_rep((battery_level_at1[s])), fliteral1)))) and
-  (counter1 = of_int(50))) or (not ((not (c = of_int(50))) and
-  (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-  lt(to_rep((battery_level_at1[s])), fliteral1)))))) ->
-  ((lt(to_rep((battery_level_at1[current_time1])), fliteral1) and
-  (not (forall s:t. ((ule(of_int(0), s) and ule(s, of_int(49))) ->
-       lt(to_rep((battery_level_at1[s])), fliteral1))))) ->
-  ((ult(current_time1, counter1) -> le(fliteral1,
+goal WP_parameter_def : ((ult(current_time1, counter1) -> le(fliteral1,
   to_rep((battery_level_at1[add(sub(current_time1, counter1),
   of_int(50))])))) and ((not ult(current_time1, counter1)) -> le(fliteral1,
-  to_rep((battery_level_at1[sub(current_time1,
-  counter1)])))))))))))))))))))))))
+  to_rep((battery_level_at1[sub(current_time1, counter1)])))))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -470,49 +470,151 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic arg__split_fields : natural
+
+logic arg__split_fields1 : integer
+
+logic arg__split_fields2 : integer
+
+logic arg__split_fields3 : integer
+
+logic arg__split_fields4 : us_private
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : natural
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : us_private
+
+logic temp___588 : natural
+
+logic temp___5881 : integer
+
+logic temp___5882 : integer
+
+logic temp___5883 : integer
+
+logic temp___5884 : us_private
+
+logic temp___5885 : int
+
+logic result : natural
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic result4 : us_private
+
+logic arg__split_fields5 : natural
+
+logic arg__split_fields6 : integer
+
+logic arg__split_fields7 : integer
+
+logic arg__split_fields8 : integer
+
+logic arg__split_fields9 : us_private
+
+logic arg__split_fields10 : natural
+
+logic arg__split_fields11 : integer
+
+logic arg__split_fields12 : integer
+
+logic arg__split_fields13 : integer
+
+logic arg__split_fields14 : us_private
+
+logic arg__split_fields15 : natural
+
+logic arg__split_fields16 : integer
+
+logic arg__split_fields17 : integer
+
+logic arg__split_fields18 : integer
+
+logic arg__split_fields19 : us_private
+
+axiom H : (to_rep(arg__split_fields3) <  (to_rep(arg__split_fields2) - 10))
+
+axiom H1 : ((o = (to_rep(arg__split_fields3) + 10)) and
+  in_range((to_rep(arg__split_fields3) + 10)))
+
+axiom H2 : (to_rep(o1) = o)
+
+axiom H3 : (arg__split_fields = o2)
+
+axiom H4 : (arg__split_fields1 = o3)
+
+axiom H5 : (arg__split_fields2 = o4)
+
+axiom H6 : (o1 = o5)
+
+axiom H7 : (arg__split_fields4 = o6)
+
+axiom H8 : (temp___588 = o2)
+
+axiom H9 : (temp___5881 = o3)
+
+axiom H10 : (temp___5882 = o4)
+
+axiom H11 : (temp___5883 = o5)
+
+axiom H12 : (temp___5884 = o6)
+
+axiom H13 : (arg__attr__tag = temp___5885)
+
+axiom H14 : (result = arg__split_fields)
+
+axiom H15 : (result1 = arg__split_fields1)
+
+axiom H16 : (result2 = arg__split_fields2)
+
+axiom H17 : (result3 = arg__split_fields3)
+
+axiom H18 : (result4 = arg__split_fields4)
+
+axiom H19 : (temp___588 = arg__split_fields5)
+
+axiom H20 : (temp___5881 = arg__split_fields6)
+
+axiom H21 : (temp___5882 = arg__split_fields7)
+
+axiom H22 : (temp___5883 = arg__split_fields8)
+
+axiom H23 : (temp___5884 = arg__split_fields9)
+
+axiom H24 : (arg__split_fields10 = arg__split_fields5)
+
+axiom H25 : (arg__split_fields11 = arg__split_fields6)
+
+axiom H26 : (arg__split_fields12 = arg__split_fields7)
+
+axiom H27 : (arg__split_fields13 = arg__split_fields8)
+
+axiom H28 : (arg__split_fields14 = arg__split_fields9)
+
+axiom H29 : (arg__split_fields15 = arg__split_fields5)
+
+axiom H30 : (arg__split_fields16 = arg__split_fields6)
+
+axiom H31 : (arg__split_fields17 = arg__split_fields7)
+
+axiom H32 : (arg__split_fields18 = arg__split_fields8)
+
+axiom H33 : (arg__split_fields19 = arg__split_fields9)
+
  (* File "ints.ads", line 25, characters 0-0 *)
 goal WP_parameter_def :
-  (forall arg__split_fields:natural. forall arg__split_fields1:integer.
-  forall arg__split_fields2:integer. forall arg__split_fields3:integer.
-  forall arg__split_fields4:us_private. forall o:int. forall o1:integer.
-  forall o2:natural. forall o3:integer. forall o4:integer. forall o5:integer.
-  forall o6:us_private. forall temp___594:natural.
-  forall temp___5941:integer. forall temp___5942:integer.
-  forall temp___5943:integer. forall temp___5944:us_private.
-  forall temp___5945:int. forall result:natural. forall result1:integer.
-  forall result2:integer. forall result3:integer. forall result4:us_private.
-  forall arg__split_fields5:natural. forall arg__split_fields6:integer.
-  forall arg__split_fields7:integer. forall arg__split_fields8:integer.
-  forall arg__split_fields9:us_private. forall arg__split_fields10:natural.
-  forall arg__split_fields11:integer. forall arg__split_fields12:integer.
-  forall arg__split_fields13:integer. forall arg__split_fields14:us_private.
-  forall arg__split_fields15:natural. forall arg__split_fields16:integer.
-  forall arg__split_fields17:integer. forall arg__split_fields18:integer.
-  forall arg__split_fields19:us_private.
-  (((to_rep(arg__split_fields3) <  (to_rep(arg__split_fields2) - 10)) and
-  (((((((o = (to_rep(arg__split_fields3) + 10)) and
-  in_range((to_rep(arg__split_fields3) + 10))) and (to_rep(o1) = o)) and
-  ((arg__split_fields = o2) and ((arg__split_fields1 = o3) and
-  ((arg__split_fields2 = o4) and ((o1 = o5) and
-  (arg__split_fields4 = o6)))))) and (((temp___594 = o2) and
-  ((temp___5941 = o3) and ((temp___5942 = o4) and ((temp___5943 = o5) and
-  (temp___5944 = o6))))) and (arg__attr__tag = temp___5945))) and
-  (((result = arg__split_fields) and ((result1 = arg__split_fields1) and
-  ((result2 = arg__split_fields2) and ((result3 = arg__split_fields3) and
-  (result4 = arg__split_fields4))))) and
-  ((temp___594 = arg__split_fields5) and
-  ((temp___5941 = arg__split_fields6) and
-  ((temp___5942 = arg__split_fields7) and
-  ((temp___5943 = arg__split_fields8) and
-  (temp___5944 = arg__split_fields9))))))) and
-  (((arg__split_fields10 = arg__split_fields5) and
-  ((arg__split_fields11 = arg__split_fields6) and
-  ((arg__split_fields12 = arg__split_fields7) and
-  ((arg__split_fields13 = arg__split_fields8) and
-  (arg__split_fields14 = arg__split_fields9))))) and
-  ((arg__split_fields15 = arg__split_fields5) and
-  ((arg__split_fields16 = arg__split_fields6) and
-  ((arg__split_fields17 = arg__split_fields7) and
-  ((arg__split_fields18 = arg__split_fields8) and
-  (arg__split_fields19 = arg__split_fields9)))))))) ->
-  (to_rep(arg__split_fields3) <  to_rep(arg__split_fields13))))
+  (to_rep(arg__split_fields3) <  to_rep(arg__split_fields13))

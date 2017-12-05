@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type degreespersec
 
-predicate in_range2(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range2(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq3 : int, int -> bool
 
@@ -271,7 +271,7 @@ function degreespersec__ref___projection(a: degreespersec__ref) : degreespersec 
 
 type pitchangle
 
-predicate in_range3(x: int) = (((-10) <= x) and (x <= 20))
+predicate in_range3(x: int) = (((- 10) <= x) and (x <= 20))
 
 logic bool_eq4 : int, int -> bool
 
@@ -450,44 +450,203 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
- (* File "ap-altitude-pitch-rate.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall present_pitchrate:int.
-  forall pitch_history_c:(int,pitchangle) farray. forall average:int.
-  forall early_pitch:int. forall sum:int. forall gap:int.
-  forall average1:int. forall i:int. forall temp___227:int.
-  forall temp___226:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall result:int. forall sum1:int. forall result1:int.
-  forall i1:int. forall sum2:int. forall i2:int. forall result2:int.
-  forall sum3:int. forall sum4:int. forall i3:int. forall sum5:int.
-  forall i4:int. forall sum6:int. forall i5:int. forall sum7:int.
-  forall i6:int. forall result3:int. forall gap1:int. forall result4:int.
-  forall average2:int. forall result5:int. forall average3:int.
-  forall result6:int. forall early_pitch1:int. (in_range3(pitch) ->
-  ((((-180) <= 180) -> in_range2(present_pitchrate)) -> ((((-10) <= 20) ->
-  in_range3(average)) -> ((((-10) <= 20) -> in_range3(early_pitch)) -> (((({
-  int__content = result } = { int__content = sum }) and (sum1 = 0)) and
-  (in_range1(sum1) and ((((-2147483648) <= 2147483647) -> in_range1(gap)) and
-  ((((-10) <= 20) -> in_range3(average1)) and (((({ int__content = result1
-  } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
-  (i1 <= 10)) and ((((temp___227 = i1) and ((temp___226 = sum1) and
-  (((sum2 <= (i2 * 20)) and ((i2 * (-10)) <= sum2)) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(sum2)) and ((1 <= 10) ->
-  in_range4(i2))) and ((1 <= i2) and (i2 <= 10))) and
-  ((((o = (sum2 + to_rep((pitch_history_c[i2])))) and
+logic present_pitchrate : int
+
+logic pitch_history_c : (int,pitchangle) farray
+
+logic average : int
+
+logic early_pitch : int
+
+logic sum : int
+
+logic gap : int
+
+logic average1 : int
+
+logic i : int
+
+logic temp___227 : int
+
+logic temp___226 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic sum2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic sum3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic sum4 : int
+
+logic i4 : int
+
+logic sum5 : int
+
+logic i5 : int
+
+logic sum6 : int
+
+logic i6 : int
+
+logic sum7 : int
+
+logic i7 : int
+
+logic sum8 : int
+
+logic i8 : int
+
+logic sum9 : int
+
+logic i9 : int
+
+logic result4 : int
+
+logic gap1 : int
+
+logic result5 : int
+
+logic average2 : int
+
+logic result6 : int
+
+logic average3 : int
+
+logic result7 : int
+
+logic early_pitch1 : int
+
+logic result8 : int
+
+logic present_pitchrate1 : int
+
+logic result9 : int
+
+logic present_pitchrate2 : int
+
+logic result10 : int
+
+logic present_pitchrate3 : int
+
+logic present_pitchrate4 : int
+
+logic present_pitchrate5 : int
+
+logic present_pitchrate6 : int
+
+logic present_pitchrate7 : int
+
+axiom H : in_range3(pitch)
+
+axiom H1 : (((- 180) <= 180) -> in_range2(present_pitchrate))
+
+axiom H2 : (((- 10) <= 20) -> in_range3(average))
+
+axiom H3 : (((- 10) <= 20) -> in_range3(early_pitch))
+
+axiom H4 : (result = sum)
+
+axiom H5 : (sum1 = 0)
+
+axiom H6 : in_range1(sum1)
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(gap))
+
+axiom H8 : (((- 10) <= 20) -> in_range3(average1))
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = 1)
+
+axiom H11 : (((1 <= i1) and (i1 <= 10)) -> (((temp___227 = i1) and
+  ((temp___226 = sum1) and (((sum2 <= (i2 * 20)) and
+  ((i2 * (- 10)) <= sum2)) and ((((((- 2147483648) <= 2147483647) ->
+  in_range1(sum2)) and ((1 <= 10) -> in_range4(i2))) and ((1 <= i2) and
+  (i2 <= 10))) and ((((o3 = (sum2 + to_rep((pitch_history_c[i2])))) and
   in_range1((sum2 + to_rep((pitch_history_c[i2]))))) and
-  ((sum2 = result2) and (sum3 = o))) and (i2 = 10)))))) and (((i2 = i3) and
-  (sum3 = sum4)) and ((i4 = i2) and (sum5 = sum3)))) and ((({ int__content =
-  i5 } = { int__content = i3 }) and ({ int__content = sum6 } = {
-  int__content = sum4 })) and ((i6 = i4) and (sum7 = sum5))))) or
-  ((not ((1 <= i1) and (i1 <= 10))) and (((i1 = i5) and (sum1 = sum6)) and
-  ((i6 = i1) and (sum7 = sum1)))))) and ((({ int__content = result3 } = {
-  int__content = gap }) and (gap1 = 10)) and
-  (((((o1 = comp_div(sum6,gap1)) and in_range1(comp_div(sum6,gap1))) and
-  ((o2 = o1) and in_range3(o1))) and ((result4 = average1) and
-  (average2 = o2))) and ((result5 = average) and
-  (average3 = average2))))))))) -> (((result6 = early_pitch) and
-  (early_pitch1 = to_rep((pitch_history_c[1])))) ->
-  (((early_pitch1 <= average3) and (average3 <= pitch)) ->
-  (((o3 = ((pitch - early_pitch1) * 20)) and
-  in_range1(((pitch - early_pitch1) * 20))) -> (not (10 = 0)))))))))))
+  ((sum2 = result2) and (sum3 = o3))) and (i2 = 10)))))) and (((i2 = i6) and
+  (sum3 = sum6)) and ((i7 = i2) and (sum7 = sum3)))))
+
+axiom H12 : (((1 <= i1) and (i1 <= 10)) -> (i8 = i6))
+
+axiom H13 : (((1 <= i1) and (i1 <= 10)) -> (sum8 = sum6))
+
+axiom H14 : (((1 <= i1) and (i1 <= 10)) -> (i9 = i7))
+
+axiom H15 : (((1 <= i1) and (i1 <= 10)) -> (sum9 = sum7))
+
+axiom H16 : ((not ((1 <= i1) and (i1 <= 10))) -> (i1 = i8))
+
+axiom H17 : ((not ((1 <= i1) and (i1 <= 10))) -> (sum1 = sum8))
+
+axiom H18 : ((not ((1 <= i1) and (i1 <= 10))) -> (i9 = i1))
+
+axiom H19 : ((not ((1 <= i1) and (i1 <= 10))) -> (sum9 = sum1))
+
+axiom H20 : (result4 = gap)
+
+axiom H21 : (gap1 = 10)
+
+axiom H22 : ((o4 = comp_div(sum8,gap1)) and in_range1(comp_div(sum8,gap1)))
+
+axiom H23 : ((o5 = o4) and in_range3(o4))
+
+axiom H24 : (result5 = average1)
+
+axiom H25 : (average2 = o5)
+
+axiom H26 : (result6 = average)
+
+axiom H27 : (average3 = average2)
+
+axiom H28 : (result7 = early_pitch)
+
+axiom H29 : (early_pitch1 = to_rep((pitch_history_c[1])))
+
+axiom H30 : (early_pitch1 <= average3)
+
+axiom H31 : (average3 <= pitch)
+
+axiom H32 : ((o6 = ((pitch - early_pitch1) * 20)) and
+  in_range1(((pitch - early_pitch1) * 20)))
+
+ (* File "ap-altitude-pitch-rate.adb", line 11, characters 0-0 *)
+goal WP_parameter_def : (not (10 = 0))

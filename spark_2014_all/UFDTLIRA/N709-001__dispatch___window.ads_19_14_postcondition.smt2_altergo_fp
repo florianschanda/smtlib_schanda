@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -676,36 +676,96 @@ axiom get_stored_area__def_axiom :
   rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
   rec__ext__ = obj3 }; attr__tag = obj4 }) = to_rep(obj)))
 
- (* File "window.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall total_area:int. forall rec____split_fields:integer.
-  forall rec____split_fields1:integer. forall rec____split_fields2:integer.
-  forall rec____split_fields3:integer. forall rec____split_fields4:integer.
-  forall rec____split_fields5:integer. forall rec____split_fields6:natural.
-  forall rec____split_fields7:natural.
-  forall rec____split_fields8:us_private.
-  forall window__prepare_to_draw__obj__fields:integer.
-  forall window__prepare_to_draw__obj__fields1:integer.
-  forall window__prepare_to_draw__obj__fields2:integer.
-  forall window__prepare_to_draw__obj__fields3:us_private.
-  forall result:integer. forall result1:integer. forall result2:integer.
-  forall result3:natural. forall result4:natural. forall result5:us_private.
-  forall rec____split_fields9:integer. forall rec____split_fields10:integer.
-  forall rec____split_fields11:integer. forall rec____split_fields12:natural.
-  forall rec____split_fields13:natural.
-  forall rec____split_fields14:us_private. forall total_area1:int.
-  forall total_area2:int. forall rec____split_fields15:integer.
-  forall rec____split_fields16:integer. forall rec____split_fields17:integer.
-  forall rec____split_fields18:natural. forall rec____split_fields19:natural.
-  forall rec____split_fields20:us_private. forall total_area3:int.
-  forall rec____split_fields21:integer. forall rec____split_fields22:integer.
-  forall rec____split_fields23:integer. forall rec____split_fields24:natural.
-  forall rec____split_fields25:natural.
-  forall rec____split_fields26:us_private. ((in_range(total_area) and
-  ((100 <  total_area) and ((((rec____attr__tag = us_tag1) and
-  (((to_rep(rec____split_fields) = (-1)) and
-  (to_rep(rec____split_fields1) = (-1))) and
-  (to_rep(rec____split_fields2) = (-1)))) and
+logic total_area : int
+
+logic rec____split_fields : integer
+
+logic rec____split_fields1 : integer
+
+logic rec____split_fields2 : integer
+
+logic rec____split_fields3 : integer
+
+logic rec____split_fields4 : integer
+
+logic rec____split_fields5 : integer
+
+logic rec____split_fields6 : natural
+
+logic rec____split_fields7 : natural
+
+logic rec____split_fields8 : us_private
+
+logic window__prepare_to_draw__obj__fields : integer
+
+logic window__prepare_to_draw__obj__fields1 : integer
+
+logic window__prepare_to_draw__obj__fields2 : integer
+
+logic window__prepare_to_draw__obj__fields3 : us_private
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : natural
+
+logic result4 : natural
+
+logic result5 : us_private
+
+logic rec____split_fields9 : integer
+
+logic rec____split_fields10 : integer
+
+logic rec____split_fields11 : integer
+
+logic rec____split_fields12 : natural
+
+logic rec____split_fields13 : natural
+
+logic rec____split_fields14 : us_private
+
+logic total_area1 : int
+
+logic total_area2 : int
+
+logic rec____split_fields15 : integer
+
+logic rec____split_fields16 : integer
+
+logic rec____split_fields17 : integer
+
+logic rec____split_fields18 : natural
+
+logic rec____split_fields19 : natural
+
+logic rec____split_fields20 : us_private
+
+logic total_area3 : int
+
+logic rec____split_fields21 : integer
+
+logic rec____split_fields22 : integer
+
+logic rec____split_fields23 : integer
+
+logic rec____split_fields24 : natural
+
+logic rec____split_fields25 : natural
+
+logic rec____split_fields26 : us_private
+
+axiom H : in_range(total_area)
+
+axiom H1 : (100 <  total_area)
+
+axiom H2 : ((((rec____attr__tag = us_tag1) and
+  (((to_rep(rec____split_fields) = (- 1)) and
+  (to_rep(rec____split_fields1) = (- 1))) and
+  (to_rep(rec____split_fields2) = (- 1)))) and
   (((has_stored_area1(rec____attr__tag, { us_split_fields1 = {
   rec__object__t__area = window__prepare_to_draw__obj__fields;
   rec__object__t__max_width = window__prepare_to_draw__obj__fields1;
@@ -738,15 +798,14 @@ goal WP_parameter_def :
   ((rec____split_fields18 = rec____split_fields12) and
   ((rec____split_fields19 = rec____split_fields13) and
   (rec____split_fields20 = rec____split_fields14)))))) and
-  (total_area1 = total_area2)) and (({ rec__object__t__area1 =
-  rec____split_fields21; rec__object__t__max_width1 = rec____split_fields22;
-  rec__object__t__max_height1 = rec____split_fields23;
-  rec__rectangle__t__width = rec____split_fields24;
-  rec__rectangle__t__height = rec____split_fields25; rec__ext__1 =
-  rec____split_fields26 } = { rec__object__t__area1 = rec____split_fields9;
-  rec__object__t__max_width1 = rec____split_fields10;
-  rec__object__t__max_height1 = rec____split_fields11;
-  rec__rectangle__t__width = rec____split_fields12;
-  rec__rectangle__t__height = rec____split_fields13; rec__ext__1 =
-  rec____split_fields14 }) and (total_area3 = total_area1)))))) ->
-  (total_area2 = (total_area - 100))))
+  (total_area1 = total_area2)) and
+  (((rec____split_fields21 = rec____split_fields9) and
+  ((rec____split_fields22 = rec____split_fields10) and
+  ((rec____split_fields23 = rec____split_fields11) and
+  ((rec____split_fields24 = rec____split_fields12) and
+  ((rec____split_fields25 = rec____split_fields13) and
+  (rec____split_fields26 = rec____split_fields14)))))) and
+  (total_area3 = total_area1))))
+
+ (* File "window.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (total_area2 = (total_area - 100))

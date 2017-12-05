@@ -130,6 +130,7 @@
 (declare-const x86__readmem8__result4 (_ BitVec 8))
 (declare-const x86__readmem8__result5 (_ BitVec 8))
 (declare-const result1 (_ BitVec 8))
+(assert true)
 (assert (= x86__readmem8__result1 x86__readmem8__result2))
 (assert (= x86__readmem8__result3 x86__readmem8__result1))
 (assert (= result x86__readmem8__result))

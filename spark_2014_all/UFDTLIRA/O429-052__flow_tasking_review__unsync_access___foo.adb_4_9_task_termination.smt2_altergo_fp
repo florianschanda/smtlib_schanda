@@ -180,5 +180,7 @@ logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : false
+
  (* File "foo.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

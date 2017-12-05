@@ -294,19 +294,59 @@ axiom def_axiom1 :
   (forall temp___268:int.
   ((for_loop_iterable__p5__L_5__R54b__aggregate_def(temp___267)[temp___268]) = of_rep(temp___267))))
 
+logic a : (int,natural) farray
+
+logic c25b : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : int
+
+logic c25b1 : int
+
+logic a2 : (int,natural) farray
+
+logic c25b2 : int
+
+logic result2 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = for_loop_iterable__p5__a__aggregate_def(0))
+
+axiom H2 : (r54b = r52b)
+
+axiom H3 : (result1 = c25b)
+
+axiom H4 : (c25b1 = 1)
+
+axiom H5 : (1 <= c25b1)
+
+axiom H6 : (c25b1 <= 100)
+
+axiom H7 :
+  ((forall temp___273:int. (((1 <= temp___273) and (temp___273 <= 100)) ->
+   ((not (1 = temp___273)) -> ((a2[temp___273]) = (a1[temp___273]))))) and
+  ((1 <= c25b2) and (c25b2 <= 100)))
+
+axiom H8 :
+  (for_loop_iterable__p5__L_5__R54b__aggregate_def(to_rep((a2[1]))) = r54b)
+
+axiom H9 : (to_rep(o) = 1)
+
+axiom H10 : (o1 = (a2[1 <- o]))
+
+axiom H11 : (result2 = a2)
+
+axiom H12 : (a3 = o1)
+
  (* File "for_loop_iterable.adb", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall c25b:int. forall o:natural.
-  forall o1:(int,natural) farray. forall result:(int,natural) farray.
-  forall a1:(int,natural) farray. forall result1:int. forall c25b1:int.
-  forall a2:(int,natural) farray. forall c25b2:int.
-  forall result2:(int,natural) farray. forall a3:(int,natural) farray.
-  (((result = a) and (a1 = for_loop_iterable__p5__a__aggregate_def(0))) ->
-  ((r54b = r52b) -> (((result1 = c25b) and (c25b1 = 1)) -> (((1 <= c25b1) and
-  (c25b1 <= 100)) ->
-  (((forall temp___273:int. (((1 <= temp___273) and (temp___273 <= 100)) ->
-    ((not (1 = temp___273)) -> ((a2[temp___273]) = (a1[temp___273]))))) and
-  ((1 <= c25b2) and (c25b2 <= 100))) ->
-  ((for_loop_iterable__p5__L_5__R54b__aggregate_def(to_rep((a2[1]))) = r54b) ->
-  ((((to_rep(o) = 1) and (o1 = (a2[1 <- o]))) and ((result2 = a2) and
-  (a3 = o1))) -> (to_rep((r54b[c25b2])) = 1)))))))))
+goal WP_parameter_def : (to_rep((r54b[c25b2])) = 1)

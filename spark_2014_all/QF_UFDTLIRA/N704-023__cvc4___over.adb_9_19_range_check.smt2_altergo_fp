@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type ttB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -139,8 +139,27 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : ((1 <= 100) -> in_range1(res))
+
+axiom H3 : (not ((100 - x) <  y))
+
+axiom H4 : ((o3 = (x + y)) and in_range((x + y)))
+
  (* File "over.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall o:int. (in_range1(x) -> (in_range1(y) ->
-  (((1 <= 100) -> in_range1(res)) -> ((not ((100 - x) <  y)) ->
-  (((o = (x + y)) and in_range((x + y))) -> in_range1(o)))))))
+goal WP_parameter_def : in_range1(o3)

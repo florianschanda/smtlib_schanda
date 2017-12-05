@@ -271,41 +271,146 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "frame.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall j:int.
-  forall temp___176:(int,natural) farray. forall temp___175:int.
-  forall temp___178:(int,natural) farray.
-  forall temp___179:(int,natural) farray. forall o:natural.
-  forall o1:(int,natural) farray. forall a1:(int,natural) farray.
-  forall result:int. forall j1:int. forall result1:(int,natural) farray.
-  forall a2:(int,natural) farray. forall a3:(int,natural) farray.
-  forall j2:int. forall a4:(int,natural) farray. forall j3:int.
-  forall a5:(int,natural) farray. forall j4:int.
-  forall a6:(int,natural) farray. forall j5:int.
-  forall a7:(int,natural) farray. forall j6:int.
-  forall a8:(int,natural) farray. forall j7:int.
-  forall a9:(int,natural) farray. forall j8:int. ((((({ int__content = result
-  } = { int__content = j }) and (j1 = 1)) and ((((1 <= j1) and
-  (j1 <= 10)) and ((((temp___176 = a) and ((temp___175 = j1) and
-  ((temp___178 = a) and ((temp___179 = a) and ((((10 <  to_rep((a[j1]))) and
-  (((to_rep(o) = 10) and (o1 = (a[j1 <- o]))) and (({ map__content = result1
-  } = { map__content = a }) and (a2 = o1)))) or
-  ((not (10 <  to_rep((a[j1])))) and ((a2 = a) and (a2 = a1)))) and
-  ((forall k:int. (((1 <= k) and (k <= j2)) ->
-   (((10 <  to_rep((temp___179[k]))) and (to_rep((a3[k])) = 10)) or
-   ((not (10 <  to_rep((temp___179[k])))) and
-   (to_rep((a3[k])) = to_rep((temp___178[k]))))))) and
-  (((((1 <= 10) -> in_range2(j2)) and
+logic a : (int,natural) farray
+
+logic j : int
+
+logic temp___176 : (int,natural) farray
+
+logic temp___175 : int
+
+logic temp___178 : (int,natural) farray
+
+logic temp___179 : (int,natural) farray
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic k : int
+
+logic o2 : int
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : natural
+
+logic o9 : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic j2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : (int,natural) farray
+
+logic a4 : (int,natural) farray
+
+logic a5 : (int,natural) farray
+
+logic j4 : int
+
+logic a6 : (int,natural) farray
+
+logic j5 : int
+
+logic a7 : (int,natural) farray
+
+logic j6 : int
+
+logic a8 : (int,natural) farray
+
+logic j7 : int
+
+logic a9 : (int,natural) farray
+
+logic j8 : int
+
+logic a10 : (int,natural) farray
+
+logic j9 : int
+
+logic a11 : (int,natural) farray
+
+logic j10 : int
+
+logic a12 : (int,natural) farray
+
+logic j11 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 1)
+
+axiom H2 : (((1 <= j1) and (j1 <= 10)) -> (((temp___176 = a) and
+  ((temp___175 = j1) and ((temp___178 = a) and ((temp___179 = a) and
+  ((((10 <  to_rep((a[j1]))) -> (((to_rep(o) = 10) and
+  (o1 = (a[j1 <- o]))) and ((result1 = a) and (a2 = o1)))) and
+  ((not (10 <  to_rep((a[j1])))) -> ((a2 = a) and (a2 = a1)))) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= j2)) ->
+   (((10 <  to_rep((temp___179[k1]))) -> (to_rep((a3[k1])) = 10)) and
+   ((not (10 <  to_rep((temp___179[k1])))) ->
+   (to_rep((a3[k1])) = to_rep((temp___178[k1]))))))) and (((((1 <= 10) ->
+  in_range2(j2)) and
   (forall temp___177:int. (((1 <= temp___177) and (temp___177 <= 10)) ->
   ((j2 <  temp___177) -> ((a3[temp___177]) = (temp___176[temp___177])))))) and
-  ((1 <= j2) and (j2 <= 10))) and (j2 = 10)))))))) and (((j2 = j3) and
-  (a3 = a4)) and ((j4 = j2) and (a5 = a3)))) and (((j5 = j3) and ({
-  map__content = a6 } = { map__content = a4 })) and ((j6 = j4) and
-  (a7 = a5))))) or ((not ((1 <= j1) and (j1 <= 10))) and (((j1 = j5) and ({
-  map__content = a6 } = { map__content = a })) and ((j6 = j1) and
-  (a7 = a1)))))) and (((j7 = j5) and (a8 = a6)) and ((j8 = j6) and
-  (a9 = a7)))) ->
-  (forall j9:int. (((1 <= j9) and (j9 <= 10)) -> (((10 <  to_rep((a[j9]))) ->
-  (to_rep((a8[j9])) = 10)) and ((not (10 <  to_rep((a[j9])))) ->
-  (to_rep((a8[j9])) = to_rep((a[j9])))))))))
+  ((1 <= j2) and (j2 <= 10))) and (j2 = 10)))))))) and (((j2 = j6) and
+  (a3 = a7)) and ((j7 = j2) and (a8 = a3)))))
+
+axiom H3 : (((1 <= j1) and (j1 <= 10)) -> (j8 = j6))
+
+axiom H4 : (((1 <= j1) and (j1 <= 10)) -> (a9 = a7))
+
+axiom H5 : (((1 <= j1) and (j1 <= 10)) -> (j9 = j7))
+
+axiom H6 : (((1 <= j1) and (j1 <= 10)) -> (a10 = a8))
+
+axiom H7 : ((not ((1 <= j1) and (j1 <= 10))) -> (j1 = j8))
+
+axiom H8 : ((not ((1 <= j1) and (j1 <= 10))) -> (a9 = a))
+
+axiom H9 : ((not ((1 <= j1) and (j1 <= 10))) -> (j9 = j1))
+
+axiom H10 : ((not ((1 <= j1) and (j1 <= 10))) -> (a10 = a1))
+
+axiom H11 : (j10 = j8)
+
+axiom H12 : (a11 = a9)
+
+axiom H13 : (j11 = j9)
+
+axiom H14 : (a12 = a10)
+
+logic j12 : int
+
+axiom H15 : (1 <= j12)
+
+axiom H16 : (j12 <= 10)
+
+ (* File "frame.ads", line 14, characters 0-0 *)
+goal WP_parameter_def : (((10 <  to_rep((a[j12]))) ->
+  (to_rep((a11[j12])) = 10)) and ((not (10 <  to_rep((a[j12])))) ->
+  (to_rep((a11[j12])) = to_rep((a[j12])))))

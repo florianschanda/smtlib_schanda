@@ -109,6 +109,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (define-fun default_initial_assumption1 ((temp___expr_136 us_rep) (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136) us_tag))
+(declare-const o Int)
 (assert (not (in_range (+ (to_rep (rec__base__t__c1 (us_split_fields3 x))) (to_rep (rec__base__ext__u__d (us_split_fields3 x)))))))
 (check-sat)
 (exit)

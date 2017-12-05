@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -165,10 +165,28 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : int
+
+logic o : int
+
+logic result : int
+
+logic y1 : int
+
+logic y2 : int
+
+axiom H : in_range2(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
+axiom H2 : (result = y)
+
+axiom H3 : (y1 = 0)
+
+axiom H4 : (not (x = y1))
+
+axiom H5 : ((((- 2147483648) <= 2147483647) -> in_range1(y2)) and
+  (not (x = y2)))
+
  (* File "test.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:int. forall result:int. forall y1:int. forall y2:int.
-  (in_range2(x) -> ((((-2147483648) <= 2147483647) -> in_range1(y)) ->
-  (((result = y) and (y1 = 0)) -> ((not (x = y1)) ->
-  (((((-2147483648) <= 2147483647) -> in_range1(y2)) and (not (x = y2))) ->
-  in_range1((y2 + 1))))))))
+goal WP_parameter_def : in_range1((y2 + 1))

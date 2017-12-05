@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1059,9 +1059,28 @@ axiom readreg16__post_axiom :
   (forall reg:t [readreg16(reg)]. (readreg16(reg) = toSmall(bw_and(reg,
   of_int(65535)))))
 
+logic rsp : t
+
+logic result : t
+
+logic rsp1 : t
+
+logic rsp2 : t
+
+logic rsp3 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = rsp)
+
+axiom H3 : (rsp1 = bw_or(bw_and(rsp, of_int(18446744073709486080)),
+  toBig(val__)))
+
+axiom H4 : (rsp1 = rsp2)
+
+axiom H5 : (rsp3 = rsp1)
+
  (* File "x86.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rsp:t. forall result:t. forall rsp1:t. forall rsp2:t.
-  forall rsp3:t. ((((result = rsp) and (rsp1 = bw_or(bw_and(rsp,
-  of_int(18446744073709486080)), toBig(val__)))) and ((rsp1 = rsp2) and
-  (rsp3 = rsp1))) -> (writereg16post(rsp, rsp2, val__) = true)))
+goal WP_parameter_def : (writereg16post(rsp, rsp2, val__) = true)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -609,90 +609,864 @@ axiom invariant____def_axiom :
   a1 })]. ((invariant__({ elts = a; rt = a1 }) = true) <->
   ((to_rep1(first(a1)) = 1) and (0 <= to_rep1(last(a1))))))
 
- (* File "sort.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,natural) farray. forall temp:int.
-  forall interm:(int,natural) farray. forall hr:int. forall hr1:int.
-  forall o:int. forall o1:natural. forall o2:int. forall o3:int.
-  forall o4:natural. forall o5:int. forall o6:natural. forall o7:int.
-  forall o8:(int,natural) farray. forall o9:int. forall o10:natural.
-  forall o11:int. forall o12:(int,natural) farray. forall o13:int.
-  forall o14:us_t. forall o15:int. forall o16:us_t. forall o17:int.
-  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
-  forall o22:int. forall result:int__ref. forall temp1:int.
-  forall result1:map__ref. forall values1:(int,natural) farray.
-  forall result2:map__ref. forall interm1:(int,natural) farray.
-  forall result3:map__ref. forall values2:(int,natural) farray.
-  forall result4:int__ref. forall hr2:int. forall result5:int__ref.
-  forall hr3:int. (in_range3(x) -> (in_range3(y) -> ((((1 <= x) and
-  (x <= 100)) and (((1 <= y) and (y <= 100)) and (not (x = y)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(temp)) -> ((values = init) ->
-  (((1 <= 1) -> in_range4(hr)) -> (((((((1 <= x) and (x <= 100)) and
-  (o = x)) and (o1 = (values[o]))) and (o2 = to_rep(o1))) and ((result = {
-  int__content = temp }) and (temp1 = o2))) -> (((((((((1 <= y) and
-  (y <= 100)) and (o3 = y)) and (o4 = (values[o3]))) and
-  (o5 = to_rep(o4))) and (to_rep(o6) = o5)) and ((((1 <= x) and
-  (x <= 100)) and (o7 = x)) and (o8 = (values[o7 <- o6])))) and ((result1 = {
-  map__content = values }) and (values1 = o8))) -> (((result2 = {
-  map__content = interm }) and (interm1 = values1)) -> ((bool_eq7((remove({
-  elts = init; rt = mk(1, 100) }, x)).elts, to_rep1(first((remove({ elts =
-  init; rt = mk(1, 100) }, x)).rt)), to_rep1(last((remove({ elts = init; rt =
-  mk(1, 100) }, x)).rt)), (remove({ elts = interm1; rt = mk(1, 100) },
-  x)).elts, to_rep1(first((remove({ elts = interm1; rt = mk(1, 100) },
-  x)).rt)), to_rep1(last((remove({ elts = interm1; rt = mk(1, 100) },
-  x)).rt))) = true) -> ((((((o9 = temp1) and in_range2(temp1)) and
-  (to_rep(o10) = o9)) and ((((1 <= y) and (y <= 100)) and (o11 = y)) and
-  (o12 = (values1[o11 <- o10])))) and ((result3 = { map__content = values1
-  }) and (values2 = o12))) -> ((bool_eq7((remove({ elts = interm1; rt = mk(1,
-  100) }, y)).elts, to_rep1(first((remove({ elts = interm1; rt = mk(1, 100)
-  }, y)).rt)), to_rep1(last((remove({ elts = interm1; rt = mk(1, 100) },
-  y)).rt)), (remove({ elts = values2; rt = mk(1, 100) }, y)).elts,
+logic values : (int,natural) farray
+
+logic temp : int
+
+logic interm : (int,natural) farray
+
+logic hr : int
+
+logic hr1 : int
+
+logic hr2 : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : (int,natural) farray
+
+logic o9 : int
+
+logic temp___213 : (int,natural) farray
+
+logic temp___2131 : t
+
+logic o10 : int
+
+logic temp___212 : (int,natural) farray
+
+logic temp___2121 : t
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : int
+
+logic o14 : (int,natural) farray
+
+logic o15 : int
+
+logic temp___217 : (int,natural) farray
+
+logic temp___2171 : t
+
+logic o16 : int
+
+logic temp___216 : (int,natural) farray
+
+logic temp___2161 : t
+
+logic o17 : int
+
+logic o18 : (int,natural) farray
+
+logic o19 : t
+
+logic o20 : int
+
+logic o21 : (int,natural) farray
+
+logic o22 : t
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : (int,natural) farray
+
+logic o30 : t
+
+logic o31 : int
+
+logic temp___246 : (int,natural) farray
+
+logic temp___2461 : t
+
+logic o32 : int
+
+logic o33 : (int,natural) farray
+
+logic o34 : t
+
+logic o35 : int
+
+logic temp___245 : (int,natural) farray
+
+logic temp___2451 : t
+
+logic o36 : int
+
+logic o37 : (int,natural) farray
+
+logic o38 : t
+
+logic o39 : int
+
+logic temp___250 : (int,natural) farray
+
+logic temp___2501 : t
+
+logic o40 : int
+
+logic o41 : (int,natural) farray
+
+logic o42 : t
+
+logic o43 : int
+
+logic temp___249 : (int,natural) farray
+
+logic temp___2491 : t
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : (int,natural) farray
+
+logic o49 : t
+
+logic o50 : int
+
+logic temp___254 : (int,natural) farray
+
+logic temp___2541 : t
+
+logic o51 : int
+
+logic o52 : (int,natural) farray
+
+logic o53 : t
+
+logic o54 : int
+
+logic temp___253 : (int,natural) farray
+
+logic temp___2531 : t
+
+logic o55 : int
+
+logic o56 : (int,natural) farray
+
+logic o57 : t
+
+logic o58 : int
+
+logic o59 : (int,natural) farray
+
+logic o60 : t
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : (int,natural) farray
+
+logic o65 : t
+
+logic o66 : int
+
+logic temp___262 : (int,natural) farray
+
+logic temp___2621 : t
+
+logic o67 : int
+
+logic o68 : (int,natural) farray
+
+logic o69 : t
+
+logic o70 : int
+
+logic temp___261 : (int,natural) farray
+
+logic temp___2611 : t
+
+logic o71 : int
+
+logic o72 : (int,natural) farray
+
+logic o73 : t
+
+logic o74 : int
+
+logic o75 : (int,natural) farray
+
+logic o76 : t
+
+logic o77 : int
+
+logic o78 : (int,natural) farray
+
+logic o79 : t
+
+logic o80 : int
+
+logic o81 : (int,natural) farray
+
+logic o82 : t
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : (int,natural) farray
+
+logic o89 : t
+
+logic o90 : int
+
+logic o91 : (int,natural) farray
+
+logic o92 : t
+
+logic o93 : int
+
+logic o94 : (int,natural) farray
+
+logic o95 : t
+
+logic o96 : int
+
+logic o97 : (int,natural) farray
+
+logic o98 : t
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : (int,natural) farray
+
+logic o102 : t
+
+logic o103 : int
+
+logic o104 : (int,natural) farray
+
+logic o105 : t
+
+logic o106 : int
+
+logic o107 : (int,natural) farray
+
+logic o108 : t
+
+logic o109 : int
+
+logic o110 : (int,natural) farray
+
+logic o111 : t
+
+logic o112 : int
+
+logic o113 : (int,natural) farray
+
+logic o114 : t
+
+logic o115 : int
+
+logic o116 : (int,natural) farray
+
+logic o117 : t
+
+logic o118 : int
+
+logic o119 : int
+
+logic temp___265 : (int,natural) farray
+
+logic temp___2651 : t
+
+logic o120 : int
+
+logic temp___266 : (int,natural) farray
+
+logic temp___2661 : t
+
+logic o121 : int
+
+logic o122 : natural
+
+logic o123 : int
+
+logic o124 : int
+
+logic o125 : (int,natural) farray
+
+logic o126 : t
+
+logic o127 : int
+
+logic o128 : (int,natural) farray
+
+logic o129 : t
+
+logic us : bool
+
+logic o130 : int
+
+logic o131 : (int,natural) farray
+
+logic o132 : t
+
+logic o133 : int
+
+logic o134 : (int,natural) farray
+
+logic o135 : t
+
+logic o136 : int
+
+logic o137 : int
+
+logic o138 : int
+
+logic o139 : int
+
+logic o140 : int
+
+logic o141 : int
+
+logic o142 : (int,natural) farray
+
+logic o143 : t
+
+logic o144 : int
+
+logic temp___221 : (int,natural) farray
+
+logic temp___2211 : t
+
+logic o145 : int
+
+logic o146 : (int,natural) farray
+
+logic o147 : t
+
+logic o148 : int
+
+logic temp___220 : (int,natural) farray
+
+logic temp___2201 : t
+
+logic o149 : int
+
+logic o150 : (int,natural) farray
+
+logic o151 : t
+
+logic o152 : int
+
+logic temp___225 : (int,natural) farray
+
+logic temp___2251 : t
+
+logic o153 : int
+
+logic o154 : (int,natural) farray
+
+logic o155 : t
+
+logic o156 : int
+
+logic temp___224 : (int,natural) farray
+
+logic temp___2241 : t
+
+logic o157 : int
+
+logic o158 : int
+
+logic o159 : int
+
+logic o160 : int
+
+logic o161 : (int,natural) farray
+
+logic o162 : t
+
+logic o163 : int
+
+logic temp___229 : (int,natural) farray
+
+logic temp___2291 : t
+
+logic o164 : int
+
+logic o165 : (int,natural) farray
+
+logic o166 : t
+
+logic o167 : int
+
+logic temp___228 : (int,natural) farray
+
+logic temp___2281 : t
+
+logic o168 : int
+
+logic o169 : (int,natural) farray
+
+logic o170 : t
+
+logic o171 : int
+
+logic o172 : (int,natural) farray
+
+logic o173 : t
+
+logic o174 : int
+
+logic o175 : int
+
+logic o176 : int
+
+logic o177 : (int,natural) farray
+
+logic o178 : t
+
+logic o179 : int
+
+logic temp___237 : (int,natural) farray
+
+logic temp___2371 : t
+
+logic o180 : int
+
+logic o181 : (int,natural) farray
+
+logic o182 : t
+
+logic o183 : int
+
+logic temp___236 : (int,natural) farray
+
+logic temp___2361 : t
+
+logic o184 : int
+
+logic o185 : (int,natural) farray
+
+logic o186 : t
+
+logic o187 : int
+
+logic o188 : (int,natural) farray
+
+logic o189 : t
+
+logic o190 : int
+
+logic o191 : (int,natural) farray
+
+logic o192 : t
+
+logic o193 : int
+
+logic o194 : (int,natural) farray
+
+logic o195 : t
+
+logic o196 : int
+
+logic o197 : int
+
+logic o198 : int
+
+logic o199 : int
+
+logic o200 : int
+
+logic o201 : (int,natural) farray
+
+logic o202 : t
+
+logic o203 : int
+
+logic o204 : (int,natural) farray
+
+logic o205 : t
+
+logic o206 : int
+
+logic o207 : (int,natural) farray
+
+logic o208 : t
+
+logic o209 : int
+
+logic o210 : (int,natural) farray
+
+logic o211 : t
+
+logic o212 : int
+
+logic o213 : int
+
+logic o214 : (int,natural) farray
+
+logic o215 : t
+
+logic o216 : int
+
+logic o217 : (int,natural) farray
+
+logic o218 : t
+
+logic o219 : int
+
+logic o220 : (int,natural) farray
+
+logic o221 : t
+
+logic o222 : int
+
+logic o223 : (int,natural) farray
+
+logic o224 : t
+
+logic o225 : int
+
+logic o226 : (int,natural) farray
+
+logic o227 : t
+
+logic o228 : int
+
+logic o229 : (int,natural) farray
+
+logic o230 : t
+
+logic o231 : int
+
+logic o232 : int
+
+logic temp___240 : (int,natural) farray
+
+logic temp___2401 : t
+
+logic o233 : int
+
+logic temp___242 : (int,natural) farray
+
+logic temp___2421 : t
+
+logic o234 : int
+
+logic o235 : natural
+
+logic o236 : int
+
+logic o237 : int
+
+logic o238 : (int,natural) farray
+
+logic o239 : t
+
+logic o240 : int
+
+logic o241 : (int,natural) farray
+
+logic o242 : t
+
+logic us1 : bool
+
+logic us2 : bool
+
+logic hr3 : int
+
+logic hr4 : int
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : (int,natural) farray
+
+logic values1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic interm1 : (int,natural) farray
+
+logic result3 : (int,natural) farray
+
+logic values2 : (int,natural) farray
+
+logic result4 : int
+
+logic hr5 : int
+
+logic result5 : int
+
+logic hr6 : int
+
+logic result6 : int
+
+logic hr7 : int
+
+logic result7 : int
+
+logic hr8 : int
+
+logic result8 : int
+
+logic hr9 : int
+
+logic result9 : int
+
+logic hr10 : int
+
+logic result10 : int
+
+logic hr11 : int
+
+logic result11 : int
+
+logic hr12 : int
+
+logic result12 : int
+
+logic hr13 : int
+
+logic result13 : int
+
+logic hr14 : int
+
+logic result14 : int
+
+logic hr15 : int
+
+logic result15 : int
+
+logic hr16 : int
+
+logic result16 : int
+
+logic hr17 : int
+
+logic result17 : int
+
+logic hr18 : int
+
+logic result18 : int
+
+logic hr19 : int
+
+logic result19 : int
+
+logic hr20 : int
+
+logic values3 : (int,natural) farray
+
+logic temp2 : int
+
+logic interm2 : (int,natural) farray
+
+logic hr21 : int
+
+logic hr22 : int
+
+logic hr23 : int
+
+logic values4 : (int,natural) farray
+
+logic temp3 : int
+
+logic interm3 : (int,natural) farray
+
+logic hr24 : int
+
+logic hr25 : int
+
+logic hr26 : int
+
+axiom H : in_range3(x)
+
+axiom H1 : in_range3(y)
+
+axiom H2 : (((1 <= x) and (x <= 100)) and (((1 <= y) and (y <= 100)) and
+  (not (x = y))))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(temp))
+
+axiom H4 : (values = init)
+
+axiom H5 : ((1 <= 1) -> in_range4(hr))
+
+axiom H6 : ((1 <= x) and (x <= 100))
+
+axiom H7 : (o = x)
+
+axiom H8 : (o1 = (values[o]))
+
+axiom H9 : (o2 = to_rep(o1))
+
+axiom H10 : (result = temp)
+
+axiom H11 : (temp1 = o2)
+
+axiom H12 : ((1 <= y) and (y <= 100))
+
+axiom H13 : (o3 = y)
+
+axiom H14 : (o4 = (values[o3]))
+
+axiom H15 : (o5 = to_rep(o4))
+
+axiom H16 : (to_rep(o6) = o5)
+
+axiom H17 : ((1 <= x) and (x <= 100))
+
+axiom H18 : (o7 = x)
+
+axiom H19 : (o8 = (values[o7 <- o6]))
+
+axiom H20 : (result1 = values)
+
+axiom H21 : (values1 = o8)
+
+axiom H22 : (result2 = interm)
+
+axiom H23 : (interm1 = values1)
+
+axiom H24 : (bool_eq7((remove({ elts = init; rt = mk(1, 100) }, x)).elts,
+  to_rep1(first((remove({ elts = init; rt = mk(1, 100) }, x)).rt)),
+  to_rep1(last((remove({ elts = init; rt = mk(1, 100) }, x)).rt)), (remove({
+  elts = interm1; rt = mk(1, 100) }, x)).elts, to_rep1(first((remove({ elts =
+  interm1; rt = mk(1, 100) }, x)).rt)), to_rep1(last((remove({ elts =
+  interm1; rt = mk(1, 100) }, x)).rt))) = true)
+
+axiom H25 : ((o11 = temp1) and in_range2(temp1))
+
+axiom H26 : (to_rep(o12) = o11)
+
+axiom H27 : ((1 <= y) and (y <= 100))
+
+axiom H28 : (o13 = y)
+
+axiom H29 : (o14 = (values1[o13 <- o12]))
+
+axiom H30 : (result3 = values1)
+
+axiom H31 : (values2 = o14)
+
+axiom H32 : (bool_eq7((remove({ elts = interm1; rt = mk(1, 100) }, y)).elts,
+  to_rep1(first((remove({ elts = interm1; rt = mk(1, 100) }, y)).rt)),
+  to_rep1(last((remove({ elts = interm1; rt = mk(1, 100) }, y)).rt)),
+  (remove({ elts = values2; rt = mk(1, 100) }, y)).elts,
   to_rep1(first((remove({ elts = values2; rt = mk(1, 100) }, y)).rt)),
-  to_rep1(last((remove({ elts = values2; rt = mk(1, 100) },
-  y)).rt))) = true) -> ((not (y <  x)) -> (((1 <= 1) -> in_range4(hr1)) ->
-  (((((o17 = x) and in_range5(x)) and ((((o15 = y) and in_range5(y)) and
-  ((o16 = remove({ elts = values2; rt = mk(1, 100) }, o15)) and
-  (dynamic_property(1, 100, to_rep1(first((o16).rt)),
-  to_rep1(last((o16).rt))) and ((invariant__(o16) = true) and
-  ((to_rep1(last((o16).rt)) = (to_rep1(last(mk(1, 100))) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o15 - 1))) ->
-   (to_rep((values2[k])) = to_rep(((o16).elts[k]))))) and
-  ((forall k:int. ((((o15 + 1) <= k) and (k <= to_rep1(last(mk(1, 100))))) ->
-   (to_rep((values2[k])) = to_rep(((o16).elts[(k - 1)]))))) and
-  (forall k:int. (((o15 <= k) and (k <= (to_rep1(last(mk(1, 100))) - 1))) ->
-  (to_rep((values2[(k + 1)])) = to_rep(((o16).elts[k])))))))))))) and
-  ((((o13 = y) and in_range5(y)) and ((o14 = remove({ elts = interm1; rt =
-  mk(1, 100) }, o13)) and (dynamic_property(1, 100, to_rep1(first((o14).rt)),
-  to_rep1(last((o14).rt))) and ((invariant__(o14) = true) and
-  ((to_rep1(last((o14).rt)) = (to_rep1(last(mk(1, 100))) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o13 - 1))) ->
-   (to_rep((interm1[k])) = to_rep(((o14).elts[k]))))) and
-  ((forall k:int. ((((o13 + 1) <= k) and (k <= to_rep1(last(mk(1, 100))))) ->
-   (to_rep((interm1[k])) = to_rep(((o14).elts[(k - 1)]))))) and
-  (forall k:int. (((o13 <= k) and (k <= (to_rep1(last(mk(1, 100))) - 1))) ->
-  (to_rep((interm1[(k + 1)])) = to_rep(((o14).elts[k])))))))))))) and
-  ((o18 = remove_eq(o14, o16, o17)) and (in_range4(o18) and
-  ((of_int(o18) = true) -> (bool_eq7((remove(o14, o17)).elts,
-  to_rep1(first((remove(o14, o17)).rt)), to_rep1(last((remove(o14,
-  o17)).rt)), (remove(o16, o17)).elts, to_rep1(first((remove(o16, o17)).rt)),
-  to_rep1(last((remove(o16, o17)).rt))) = true))))))) and ((result4 = {
-  int__content = hr1 }) and (hr2 = o18))) -> (((((o20 = y) and
-  in_range5(y)) and (((o19 = x) and in_range5(x)) and ((o21 = remove_swap({
-  elts = interm1; rt = mk(1, 100) }, o19, o20)) and (in_range4(o21) and
-  ((of_int(o21) = true) -> (bool_eq7((remove(remove({ elts = interm1; rt =
-  mk(1, 100) }, o19), (o20 - 1))).elts, to_rep1(first((remove(remove({ elts =
-  interm1; rt = mk(1, 100) }, o19), (o20 - 1))).rt)),
-  to_rep1(last((remove(remove({ elts = interm1; rt = mk(1, 100) }, o19),
-  (o20 - 1))).rt)), (remove(remove({ elts = interm1; rt = mk(1, 100) }, o20),
-  o19)).elts, to_rep1(first((remove(remove({ elts = interm1; rt = mk(1, 100)
-  }, o20), o19)).rt)), to_rep1(last((remove(remove({ elts = interm1; rt =
-  mk(1, 100) }, o20), o19)).rt))) = true)))))) and ((result5 = {
-  int__content = hr2 }) and (hr3 = o21))) -> ((bool_eq7((remove(remove({
-  elts = interm1; rt = mk(1, 100) }, x), (y - 1))).elts,
-  to_rep1(first((remove(remove({ elts = interm1; rt = mk(1, 100) }, x),
-  (y - 1))).rt)), to_rep1(last((remove(remove({ elts = interm1; rt = mk(1,
-  100) }, x), (y - 1))).rt)), (remove(remove({ elts = interm1; rt = mk(1,
-  100) }, y), x)).elts, to_rep1(first((remove(remove({ elts = interm1; rt =
-  mk(1, 100) }, y), x)).rt)), to_rep1(last((remove(remove({ elts = interm1;
-  rt = mk(1, 100) }, y), x)).rt))) = true) -> (((o22 = x) and
-  in_range5(x)) -> in_range5(y))))))))))))))))))))
+  to_rep1(last((remove({ elts = values2; rt = mk(1, 100) }, y)).rt))) = true)
+
+axiom H33 : (not (y <  x))
+
+axiom H34 : ((1 <= 1) -> in_range4(hr2))
+
+axiom H35 : ((o136 = x) and in_range5(x))
+
+axiom H36 : ((o133 = y) and in_range5(y))
+
+axiom H37 : (({ elts = o134; rt = o135 } = remove({ elts = values2; rt =
+  mk(1, 100) }, o133)) and (dynamic_property(1, 100, to_rep1(first(o135)),
+  to_rep1(last(o135))) and ((invariant__({ elts = o134; rt = o135
+  }) = true) and ((to_rep1(last(o135)) = (to_rep1(last(mk(1, 100))) - 1)) and
+  ((forall k:int. (((1 <= k) and (k <= (o133 - 1))) ->
+   (to_rep((values2[k])) = to_rep((o134[k]))))) and
+  ((forall k:int. ((((o133 + 1) <= k) and (k <= to_rep1(last(mk(1,
+   100))))) -> (to_rep((values2[k])) = to_rep((o134[(k - 1)]))))) and
+  (forall k:int. (((o133 <= k) and (k <= (to_rep1(last(mk(1, 100))) - 1))) ->
+  (to_rep((values2[(k + 1)])) = to_rep((o134[k])))))))))))
+
+axiom H38 : ((o130 = y) and in_range5(y))
+
+axiom H39 : (({ elts = o131; rt = o132 } = remove({ elts = interm1; rt =
+  mk(1, 100) }, o130)) and (dynamic_property(1, 100, to_rep1(first(o132)),
+  to_rep1(last(o132))) and ((invariant__({ elts = o131; rt = o132
+  }) = true) and ((to_rep1(last(o132)) = (to_rep1(last(mk(1, 100))) - 1)) and
+  ((forall k:int. (((1 <= k) and (k <= (o130 - 1))) ->
+   (to_rep((interm1[k])) = to_rep((o131[k]))))) and
+  ((forall k:int. ((((o130 + 1) <= k) and (k <= to_rep1(last(mk(1,
+   100))))) -> (to_rep((interm1[k])) = to_rep((o131[(k - 1)]))))) and
+  (forall k:int. (((o130 <= k) and (k <= (to_rep1(last(mk(1, 100))) - 1))) ->
+  (to_rep((interm1[(k + 1)])) = to_rep((o131[k])))))))))))
+
+axiom H40 : ((o137 = remove_eq({ elts = o131; rt = o132 }, { elts = o134;
+  rt = o135 }, o136)) and (in_range4(o137) and ((of_int(o137) = true) ->
+  (bool_eq7((remove({ elts = o131; rt = o132 }, o136)).elts,
+  to_rep1(first((remove({ elts = o131; rt = o132 }, o136)).rt)),
+  to_rep1(last((remove({ elts = o131; rt = o132 }, o136)).rt)), (remove({
+  elts = o134; rt = o135 }, o136)).elts, to_rep1(first((remove({ elts = o134;
+  rt = o135 }, o136)).rt)), to_rep1(last((remove({ elts = o134; rt = o135 },
+  o136)).rt))) = true))))
+
+axiom H41 : (result12 = hr2)
+
+axiom H42 : (hr13 = o137)
+
+axiom H43 : ((o139 = y) and in_range5(y))
+
+axiom H44 : ((o138 = x) and in_range5(x))
+
+axiom H45 : ((o140 = remove_swap({ elts = interm1; rt = mk(1, 100) }, o138,
+  o139)) and (in_range4(o140) and ((of_int(o140) = true) ->
+  (bool_eq7((remove(remove({ elts = interm1; rt = mk(1, 100) }, o138),
+  (o139 - 1))).elts, to_rep1(first((remove(remove({ elts = interm1; rt =
+  mk(1, 100) }, o138), (o139 - 1))).rt)), to_rep1(last((remove(remove({
+  elts = interm1; rt = mk(1, 100) }, o138), (o139 - 1))).rt)),
+  (remove(remove({ elts = interm1; rt = mk(1, 100) }, o139), o138)).elts,
+  to_rep1(first((remove(remove({ elts = interm1; rt = mk(1, 100) }, o139),
+  o138)).rt)), to_rep1(last((remove(remove({ elts = interm1; rt = mk(1, 100)
+  }, o139), o138)).rt))) = true))))
+
+axiom H46 : (result13 = hr13)
+
+axiom H47 : (hr14 = o140)
+
+axiom H48 : (bool_eq7((remove(remove({ elts = interm1; rt = mk(1, 100) }, x),
+  (y - 1))).elts, to_rep1(first((remove(remove({ elts = interm1; rt = mk(1,
+  100) }, x), (y - 1))).rt)), to_rep1(last((remove(remove({ elts = interm1;
+  rt = mk(1, 100) }, x), (y - 1))).rt)), (remove(remove({ elts = interm1;
+  rt = mk(1, 100) }, y), x)).elts, to_rep1(first((remove(remove({ elts =
+  interm1; rt = mk(1, 100) }, y), x)).rt)), to_rep1(last((remove(remove({
+  elts = interm1; rt = mk(1, 100) }, y), x)).rt))) = true)
+
+axiom H49 : ((o152 = x) and in_range5(x))
+
+ (* File "sort.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : in_range5(y)

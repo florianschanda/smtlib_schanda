@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -233,7 +233,8 @@ axiom def_axiom :
   ((not (temp___597 = temp___595)) -> ((temp___592(temp___594, temp___595,
   temp___596)[temp___597]) = (temp___594[temp___597])))))))
 
+axiom H : in_range(i)
+
  (* File "simple_arrays.adb", line 372, characters 0-0 *)
-goal WP_parameter_def : (in_range(i) -> (bool_eq2(temp___592(a, i,
-  to_rep((a[i]))), (-2147483648), 2147483647, a, (-2147483648),
-  2147483647) = true))
+goal WP_parameter_def : (bool_eq2(temp___592(a, i, to_rep((a[i]))),
+  (- 2147483648), 2147483647, a, (- 2147483648), 2147483647) = true)

@@ -73,6 +73,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const self__ Bool)
 (declare-const self__1 integer)
+(declare-const o Int)
 (assert (in_range x))
 (assert (= self__ true))
 (assert (not (in_range (+ (to_rep self__1) x))))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -239,32 +239,175 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "greatest_common_divisor.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:int. forall c:int. forall d:int. forall r:int.
-  forall temp___134:int. forall temp___133:int. forall temp___132:int.
-  forall result:int. forall c1:int. forall result1:int. forall d1:int.
-  forall c2:int. forall d2:int. forall r1:int. forall c3:int. forall d3:int.
-  forall r2:int. forall c4:int. forall d4:int. forall r3:int. forall c5:int.
-  forall d5:int. forall r4:int. forall c6:int. forall d6:int. forall r5:int.
-  forall c7:int. forall d7:int. forall r6:int. forall c8:int. forall d8:int.
-  forall r7:int. forall result2:int. forall g1:int. forall g2:int.
-  forall c9:int. forall d9:int. forall r8:int. forall g3:int. forall c10:int.
-  forall d10:int. forall r9:int. ((in_range(m) and (in_range(n) and
-  (((0 <= 2147483647) -> in_range(g)) and ((((0 <= 2147483647) ->
-  in_range(c)) and (((0 <= 2147483647) -> in_range(d)) and
-  (((0 <= 2147483647) -> in_range(r)) and ((({ int__content = result } = {
-  int__content = c }) and (c1 = m)) and ((({ int__content = result1 } = {
-  int__content = d }) and (d1 = n)) and (((((temp___134 = r) and
-  ((temp___133 = d1) and ((temp___132 = c1) and ((gcd(c2, d2) = gcd(m,
-  n)) and (((((0 <= 2147483647) -> in_range(c2)) and ((0 <= 2147483647) ->
+logic g : int
+
+logic c : int
+
+logic d : int
+
+logic r : int
+
+logic temp___134 : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic o : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic d1 : int
+
+logic c2 : int
+
+logic d2 : int
+
+logic r1 : int
+
+logic result2 : int
+
+logic r2 : int
+
+logic result3 : int
+
+logic c3 : int
+
+logic result4 : int
+
+logic d3 : int
+
+logic c4 : int
+
+logic d4 : int
+
+logic r3 : int
+
+logic c5 : int
+
+logic d5 : int
+
+logic r4 : int
+
+logic c6 : int
+
+logic d6 : int
+
+logic r5 : int
+
+logic c7 : int
+
+logic d7 : int
+
+logic r6 : int
+
+logic c8 : int
+
+logic d8 : int
+
+logic r7 : int
+
+logic c9 : int
+
+logic d9 : int
+
+logic r8 : int
+
+logic c10 : int
+
+logic d10 : int
+
+logic r9 : int
+
+logic c11 : int
+
+logic d11 : int
+
+logic r10 : int
+
+logic result5 : int
+
+logic g1 : int
+
+logic g2 : int
+
+logic c12 : int
+
+logic d12 : int
+
+logic r11 : int
+
+logic g3 : int
+
+logic c13 : int
+
+logic d13 : int
+
+logic r12 : int
+
+axiom H : in_range(m)
+
+axiom H1 : in_range(n)
+
+axiom H2 : ((0 <= 2147483647) -> in_range(g))
+
+axiom H3 : ((0 <= 2147483647) -> in_range(c))
+
+axiom H4 : ((0 <= 2147483647) -> in_range(d))
+
+axiom H5 : ((0 <= 2147483647) -> in_range(r))
+
+axiom H6 : (result = c)
+
+axiom H7 : (c1 = m)
+
+axiom H8 : (result1 = d)
+
+axiom H9 : (d1 = n)
+
+axiom H10 : (((temp___134 = r) and ((temp___133 = d1) and
+  ((temp___132 = c1) and ((gcd(c2, d2) = gcd(m, n)) and
+  (((((0 <= 2147483647) -> in_range(c2)) and ((0 <= 2147483647) ->
   in_range(d2))) and ((0 <= 2147483647) -> in_range(r1))) and
-  ((((r1 = r2) and ((d2 = d3) and (c2 = c3))) and ((r3 = r1) and
-  ((d4 = d2) and (c4 = c2)))) and (d2 = 0))))))) and (((r2 = r4) and
-  ((d3 = d5) and (c3 = c5))) and ((r5 = r3) and ((d6 = d4) and
-  (c6 = c4))))) and ((({ int__content = r6 } = { int__content = r4 }) and (({
-  int__content = d7 } = { int__content = d5 }) and ({ int__content = c7 } = {
-  int__content = c5 }))) and ((r7 = r5) and ((d8 = d6) and (c8 = c6))))) and
-  ((result2 = g) and (g1 = c7)))))))) and (((r8 = r6) and ((d9 = d7) and
-  ((c9 = c7) and (g1 = g2)))) and ((r9 = r7) and ((d10 = d8) and
-  ((c10 = c8) and (g3 = g1))))))))) -> (g2 = gcd(m, n))))
+  ((((r1 = r3) and ((d2 = d4) and (c2 = c4))) and ((r4 = r1) and
+  ((d5 = d2) and (c5 = c2)))) and (d2 = 0))))))) and (((r7 = r3) and
+  ((d8 = d4) and (c8 = c4))) and ((r8 = r4) and ((d9 = d5) and (c9 = c5)))))
+
+axiom H11 : (r9 = r7)
+
+axiom H12 : (d10 = d8)
+
+axiom H13 : (c10 = c8)
+
+axiom H14 : (r10 = r8)
+
+axiom H15 : (d11 = d9)
+
+axiom H16 : (c11 = c9)
+
+axiom H17 : (result5 = g)
+
+axiom H18 : (g1 = c10)
+
+axiom H19 : (r11 = r9)
+
+axiom H20 : (d12 = d10)
+
+axiom H21 : (c12 = c10)
+
+axiom H22 : (g2 = g1)
+
+axiom H23 : (r12 = r10)
+
+axiom H24 : (d13 = d11)
+
+axiom H25 : (c13 = c11)
+
+axiom H26 : (g3 = g1)
+
+ (* File "greatest_common_divisor.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (g2 = gcd(m, n))

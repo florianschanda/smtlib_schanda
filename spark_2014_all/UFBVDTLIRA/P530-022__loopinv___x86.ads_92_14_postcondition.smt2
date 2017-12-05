@@ -74,6 +74,8 @@
 (declare-const x86__insaferegion64__result4 Bool)
 (declare-const x86__insaferegion64__result5 Bool)
 (declare-const result1 Bool)
+(assert true)
+(assert true)
 (assert (= x86__insaferegion64__result1 x86__insaferegion64__result2))
 (assert (= x86__insaferegion64__result3 x86__insaferegion64__result1))
 (assert (= result x86__insaferegion64__result))

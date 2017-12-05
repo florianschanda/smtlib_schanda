@@ -45,6 +45,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const x Int)
 (declare-const y Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (declare-const result1 Int)

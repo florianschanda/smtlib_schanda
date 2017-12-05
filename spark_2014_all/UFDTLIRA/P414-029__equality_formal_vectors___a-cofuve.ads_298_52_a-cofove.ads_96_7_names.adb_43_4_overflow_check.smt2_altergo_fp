@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tname_idB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -537,15 +537,38 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom get__post_axiom : true
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(position)
+
+axiom H1 : ((o3 = length(container)) and (in_range6(o3) and
+  ((0 + o3) <= 2147483647)))
+
+axiom H2 : (((o3 <  2147483647) -> (result = true)) and
+  ((not (o3 <  2147483647)) -> (result = false)))
+
+axiom H3 : (result = true)
+
+axiom H4 : ((o2 = (0 + length(container))) and (in_range7(o2) and
+  (o2 = (0 + length(container)))))
+
+axiom H5 : (((o2 <  2147483647) -> (result1 = true)) and
+  ((not (o2 <  2147483647)) -> (result1 = false)))
+
+axiom H6 : (result1 = true)
+
+axiom H7 : ((o = (0 + length(container))) and (in_range7(o) and
+  (o = (0 + length(container)))))
+
  (* File "a-cofuve.ads", line 272, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
-  forall result1:bool. (in_range1(position) ->
-  ((((o2 = length(container)) and (in_range6(o2) and
-  ((0 + o2) <= 2147483647))) and (((o2 <  2147483647) and (result = true)) or
-  ((not (o2 <  2147483647)) and (result = false)))) -> ((result = true) ->
-  ((((o1 = (0 + length(container))) and (in_range7(o1) and
-  (o1 = (0 + length(container))))) and (((o1 <  2147483647) and
-  (result1 = true)) or ((not (o1 <  2147483647)) and (result1 = false)))) ->
-  ((result1 = true) -> (((o = (0 + length(container))) and (in_range7(o) and
-  (o = (0 + length(container))))) -> (not (o = 2147483647)))))))))
+goal WP_parameter_def : (not (o = 2147483647))

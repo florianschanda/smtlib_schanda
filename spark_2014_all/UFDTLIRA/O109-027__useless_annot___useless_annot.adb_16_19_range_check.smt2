@@ -47,6 +47,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const x Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (assert (= result x))

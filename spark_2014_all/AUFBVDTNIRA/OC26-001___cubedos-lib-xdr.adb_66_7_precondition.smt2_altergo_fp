@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -691,7 +691,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1401,20 +1401,68 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "cubedos-lib-xdr.ads", line 73, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last2:int. forall temporary:t. forall result:t.
-  forall temporary1:t. forall result1:t. forall temporary2:t.
-  (in_range2(value) -> (dynamic_property(0, 65535, to_rep(data__first),
-  to_rep(data__last)) -> (in_range3(position) -> (((0 <= 65535) ->
-  in_range3(last2)) -> (((((comp_mod(position,4) = 0) and
-  (((to_rep(data__first) <= to_rep(data__last)) and
-  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and
+logic last2 : int
+
+logic temporary : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic result : t
+
+logic temporary1 : t
+
+logic result1 : t
+
+logic temporary2 : t
+
+logic data : (int,octet) farray
+
+logic last3 : int
+
+logic data1 : (int,octet) farray
+
+logic last4 : int
+
+logic temporary3 : t
+
+logic data2 : (int,octet) farray
+
+logic last5 : int
+
+logic temporary4 : t
+
+axiom H : in_range2(value)
+
+axiom H1 : dynamic_property(0, 65535, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H2 : in_range3(position)
+
+axiom H3 : ((0 <= 65535) -> in_range3(last2))
+
+axiom H4 : ((((comp_mod(position,4) = 0) and
+  (((to_rep(data__first) <= to_rep(data__last)) ->
+  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) ->
   (comp_mod(0,4) = 0)))) and ((to_rep(data__first) <= position) and
   (position <= to_rep(data__last)))) and
-  ((position + 3) <= to_rep(data__last))) -> ((((value = 0) and (({
-  t__content = result } = { t__content = temporary }) and
-  (temporary1 = of_int(0)))) or ((not (value = 0)) and ((({ t__content =
-  result1 } = { t__content = temporary }) and (temporary2 = of_int(1))) and
-  (temporary1 = temporary2)))) -> (comp_mod(position,4) = 0))))))))
+  ((position + 3) <= to_rep(data__last)))
+
+axiom H5 : true
+
+axiom H6 : ((value = 0) -> (result = temporary))
+
+axiom H7 : ((value = 0) -> (temporary1 = of_int(0)))
+
+axiom H8 : ((not (value = 0)) -> (result1 = temporary))
+
+axiom H9 : ((not (value = 0)) -> (temporary2 = of_int(1)))
+
+axiom H10 : ((not (value = 0)) -> (temporary1 = temporary2))
+
+ (* File "cubedos-lib-xdr.ads", line 73, characters 0-0 *)
+goal WP_parameter_def : (comp_mod(position,4) = 0)

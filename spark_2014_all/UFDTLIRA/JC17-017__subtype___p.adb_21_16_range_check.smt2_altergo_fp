@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -191,8 +191,41 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic tmp_s : int
+
+logic v : int
+
+logic us : int
+
+logic o : int
+
+logic us1 : int
+
+logic temp___141 : int
+
+logic temp___138 : int
+
+logic us2 : int
+
+logic result : int
+
+logic tmp_s1 : int
+
+logic result1 : int
+
+logic v1 : int
+
+logic tmp_s2 : int
+
+logic v2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : (x <= y)
+
+axiom H3 : ((first <= last) -> dynamic_property(first, last, tmp_s))
+
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp_s:int. (in_range1(x) -> (in_range1(y) -> ((x <= y) ->
-  (((first <= last) -> dynamic_property(first, last, tmp_s)) ->
-  dynamic_property(first, last, x))))))
+goal WP_parameter_def : dynamic_property(first, last, x)

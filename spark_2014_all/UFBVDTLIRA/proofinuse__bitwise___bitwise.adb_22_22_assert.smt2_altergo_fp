@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -659,9 +659,29 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = res)
+
+axiom H3 : (res1 = lsr_bv(x, of_int(1)))
+
+axiom H4 : (res1 = udiv(x, of_int(2)))
+
+axiom H5 : (result1 = res1)
+
+axiom H6 : (res2 = lsr_bv(res1, of_int(2)))
+
  (* File "bitwise.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall result:t. forall res1:t. forall result1:t.
-  forall res2:t. (((result = res) and (res1 = lsr_bv(x, of_int(1)))) ->
-  ((res1 = udiv(x, of_int(2))) -> (((result1 = res1) and (res2 = lsr_bv(res1,
-  of_int(2)))) -> (res2 = udiv(x, of_int(8)))))))
+goal WP_parameter_def : (res2 = udiv(x, of_int(8)))

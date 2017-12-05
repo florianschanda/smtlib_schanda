@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -687,6 +687,10 @@ axiom b__def_axiom : (b = of_int(10))
 
 axiom c__def_axiom : (c = of_int(2))
 
+axiom H : true
+
+axiom H1 : in_range(c)
+
  (* File "u.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> ((256 <  8) -> (lsl_bv(of_int(10),
-  of_int(256)) = of_int(0))))
+goal WP_parameter_def : ((256 <  8) -> (lsl_bv(of_int(10),
+  of_int(256)) = of_int(0)))

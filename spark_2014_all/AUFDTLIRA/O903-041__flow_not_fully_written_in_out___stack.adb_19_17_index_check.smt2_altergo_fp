@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -300,9 +300,27 @@ type tTcontentSP1__ref = { tTcontentSP1__content : tTcontentSP1
 function tTcontentSP1__ref___projection(a: tTcontentSP1__ref) : tTcontentSP1 =
   (a).tTcontentSP1__content
 
+logic top : int
+
+logic o : int
+
+logic o1 : element
+
+logic result : int
+
+logic top1 : int
+
+axiom H : in_range1(top)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : ((o = (top + 1)) and in_range((top + 1)))
+
+axiom H3 : (result = top)
+
+axiom H4 : (top1 = o)
+
+axiom H5 : (to_rep(o1) = e)
+
  (* File "stack.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall o:int. forall o1:element. forall result:int.
-  forall top1:int. (in_range1(top) -> (in_range2(e) -> ((((o = (top + 1)) and
-  in_range((top + 1))) and ((result = top) and (top1 = o))) ->
-  ((to_rep(o1) = e) -> (1 <= top1))))))
+goal WP_parameter_def : (1 <= top1)

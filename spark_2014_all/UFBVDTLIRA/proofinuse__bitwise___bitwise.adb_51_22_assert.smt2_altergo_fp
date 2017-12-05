@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1397,12 +1397,30 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "bitwise.adb", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t1. forall result:t1. forall res1:t1. (((result = res) and
-  (res1 = bw_or1(bw_or1(bw_or1(toBig1(val1), lsl_bv1(toBig1(val2),
+logic res : t1
+
+logic result : t1
+
+logic res1 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : (result = res)
+
+axiom H6 : (res1 = bw_or1(bw_or1(bw_or1(toBig1(val1), lsl_bv1(toBig1(val2),
   of_int1(8))), lsl_bv1(toBig1(val3), of_int1(16))), lsl_bv1(toBig1(val4),
-  of_int1(24))))) -> (((8 <  16) -> (((8 <  16) ->
+  of_int1(24))))
+
+ (* File "bitwise.adb", line 36, characters 0-0 *)
+goal WP_parameter_def : (((8 <  16) -> (((8 <  16) ->
   (res1 = bw_or1(toBig(bw_or(toBig2(val1), lsl_bv(toBig2(val2), of_int(8)))),
   lsl_bv1(toBig(bw_or(toBig2(val3), lsl_bv(toBig2(val4), of_int(8)))),
   of_int1(16))))) and ((not (8 <  16)) ->
@@ -1412,4 +1430,4 @@ goal WP_parameter_def :
   of_int(0))), lsl_bv1(toBig(bw_or(toBig2(val3), lsl_bv(toBig2(val4),
   of_int(8)))), of_int1(16))))) and ((not (8 <  16)) ->
   (res1 = bw_or1(toBig(bw_or(toBig2(val1), of_int(0))),
-  lsl_bv1(toBig(bw_or(toBig2(val3), of_int(0))), of_int1(16))))))))))
+  lsl_bv1(toBig(bw_or(toBig2(val3), of_int(0))), of_int1(16))))))))

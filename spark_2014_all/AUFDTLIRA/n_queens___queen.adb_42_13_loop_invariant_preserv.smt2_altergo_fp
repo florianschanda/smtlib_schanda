@@ -281,37 +281,193 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "queen.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:(int,index) farray. forall done__:bool. forall r:int.
-  forall o:index. forall o1:(int,index) farray. forall o2:(int,index) farray.
-  forall result:int. forall r1:int. forall b1:(int,index) farray.
-  forall done__1:bool. forall r2:int. forall result1:(int,index) farray.
-  forall b2:(int,index) farray. forall b3:(int,index) farray.
-  forall done__2:bool. forall b4:(int,index) farray. forall done__3:bool.
-  forall result2:int. forall r3:int. (in_range1(i) ->
-  ((((not (done__ = true)) and
-  (forall j:int. (((1 <= j) and (j <= (i - 1))) ->
-  (to_rep((c[j])) = to_rep((b[j])))))) and ((1 <  i) -> (consistent(b,
-  (i - 1)) = true))) -> ((({ int__content = result } = { int__content = r
-  }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 8)) ->
-  ((((not (done__1 = true)) and
-  (forall j:int. (((1 <= j) and (j <= (i - 1))) ->
-  (to_rep((b1[j])) = to_rep((b[j])))))) and ((to_rep((c[i])) <  r2) ->
-  (not (consistent(c, 8) = true)))) -> (((((1 <= 8) -> in_range1(r2)) and
-  ((1 <= r2) and (r2 <= 8))) and ((((to_rep(o) = r2) and
-  (o1 = (b1[i <- o]))) and ((b1 = result1) and (b2 = o1))) and
-  ((((to_rep((c[i])) = r2) and ((((done__2 = true) and (consistent(b3,
-  8) = true)) or ((not (done__2 = true)) and (not (consistent(c,
+logic b : (int,index) farray
+
+logic done__ : bool
+
+logic r : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic temp___192 : (int,index) farray
+
+logic temp___191 : bool
+
+logic temp___190 : int
+
+logic temp___189 : (int,index) farray
+
+logic j1 : int
+
+logic o5 : int
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : bool
+
+logic o10 : index
+
+logic o11 : (int,index) farray
+
+logic o12 : (int,index) farray
+
+logic j2 : int
+
+logic o13 : int
+
+logic o14 : index
+
+logic o15 : int
+
+logic b1 : (int,index) farray
+
+logic done__1 : bool
+
+logic result : int
+
+logic r1 : int
+
+logic b2 : (int,index) farray
+
+logic done__2 : bool
+
+logic r2 : int
+
+logic result1 : (int,index) farray
+
+logic b3 : (int,index) farray
+
+logic b4 : (int,index) farray
+
+logic done__3 : bool
+
+logic b5 : (int,index) farray
+
+logic done__4 : bool
+
+logic result2 : int
+
+logic r3 : int
+
+logic b6 : (int,index) farray
+
+logic done__5 : bool
+
+logic r4 : int
+
+logic b7 : (int,index) farray
+
+logic done__6 : bool
+
+logic r5 : int
+
+logic b8 : (int,index) farray
+
+logic done__7 : bool
+
+logic r6 : int
+
+logic b9 : (int,index) farray
+
+logic done__8 : bool
+
+logic r7 : int
+
+logic b10 : (int,index) farray
+
+logic done__9 : bool
+
+logic r8 : int
+
+logic b11 : (int,index) farray
+
+logic done__10 : bool
+
+logic r9 : int
+
+logic b12 : (int,index) farray
+
+logic done__11 : bool
+
+logic r10 : int
+
+logic b13 : (int,index) farray
+
+logic done__12 : bool
+
+logic r11 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : (((not (done__ = true)) and
+  (forall j3:int. (((1 <= j3) and (j3 <= (i - 1))) ->
+  (to_rep((c[j3])) = to_rep((b[j3])))))) and ((1 <  i) -> (consistent(b,
+  (i - 1)) = true)))
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 8)
+
+axiom H6 : (((not (done__2 = true)) and
+  (forall j3:int. (((1 <= j3) and (j3 <= (i - 1))) ->
+  (to_rep((b2[j3])) = to_rep((b[j3])))))) and ((to_rep((c[i])) <  r2) ->
+  (not (consistent(c, 8) = true))))
+
+axiom H7 : (((1 <= 8) -> in_range1(r2)) and ((1 <= r2) and (r2 <= 8)))
+
+axiom H8 : (to_rep(o10) = r2)
+
+axiom H9 : (o11 = (b2[i <- o10]))
+
+axiom H10 : (b2 = result1)
+
+axiom H11 : (b3 = o11)
+
+axiom H12 : ((to_rep((c[i])) = r2) -> ((((done__3 = true) -> (consistent(b4,
+  8) = true)) and ((not (done__3 = true)) -> (not (consistent(c,
   8) = true)))) and
-  (forall j:int. (((1 <= j) and (j <= i)) ->
-  (to_rep((b3[j])) = to_rep((b2[j]))))))) or ((not (to_rep((c[i])) = r2)) and
-  ((((o2 = copy_until(b2, i, c)) and
-  (forall j:int. (((1 <= j) and (j <= i)) ->
-  (to_rep((o2[j])) = to_rep((b2[j])))))) and ((((done__3 = true) and
-  (consistent(b4, 8) = true)) or ((not (done__3 = true)) and
-  (not (consistent(o2, 8) = true)))) and
-  (forall j:int. (((1 <= j) and (j <= i)) ->
-  (to_rep((b4[j])) = to_rep((b2[j]))))))) and ((done__2 = done__3) and
-  (b3 = b4))))) and ((not (done__2 = true)) and ((not (r2 = 8)) and
-  ((result2 = r2) and (r3 = (r2 + 1)))))))) -> (not (done__2 = true)))))))))
+  (forall j3:int. (((1 <= j3) and (j3 <= i)) ->
+  (to_rep((b4[j3])) = to_rep((b3[j3])))))))
+
+axiom H13 : ((not (to_rep((c[i])) = r2)) -> ((o12 = copy_until(b3, i, c)) and
+  (forall j3:int. (((1 <= j3) and (j3 <= i)) ->
+  (to_rep((o12[j3])) = to_rep((b3[j3])))))))
+
+axiom H14 : ((not (to_rep((c[i])) = r2)) -> ((((done__4 = true) ->
+  (consistent(b5, 8) = true)) and ((not (done__4 = true)) ->
+  (not (consistent(o12, 8) = true)))) and
+  (forall j3:int. (((1 <= j3) and (j3 <= i)) ->
+  (to_rep((b5[j3])) = to_rep((b3[j3])))))))
+
+axiom H15 : ((not (to_rep((c[i])) = r2)) -> (done__3 = done__4))
+
+axiom H16 : ((not (to_rep((c[i])) = r2)) -> (b4 = b5))
+
+axiom H17 : (not (done__3 = true))
+
+axiom H18 : (not (r2 = 8))
+
+axiom H19 : (result2 = r2)
+
+axiom H20 : (r3 = (r2 + 1))
+
+ (* File "queen.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (not (done__3 = true))

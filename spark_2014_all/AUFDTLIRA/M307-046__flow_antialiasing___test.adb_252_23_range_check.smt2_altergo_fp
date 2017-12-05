@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -519,33 +519,228 @@ type t102b__ref = { t102b__content : t102b
 
 function t102b__ref___projection(a: t102b__ref) : t102b = (a).t102b__content
 
+logic a : (int,character) farray
+
+logic tmp : int
+
+logic temp___459 : (int,character) farray
+
+logic test__op_string_char__x__compl : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic test__op_string_char__y : int
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : (int,character) farray
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : (int,character) farray
+
+logic temp___467 : (int,character) farray
+
+logic test__op_string_char__x__compl1 : (int,character) farray
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic test__op_string_char__y1 : int
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : (int,character) farray
+
+logic o15 : character
+
+logic o16 : int
+
+logic o17 : (int,character) farray
+
+logic temp___475 : (int,character) farray
+
+logic test__op_string_char__x__compl2 : (int,character) farray
+
+logic o18 : int
+
+logic o19 : character
+
+logic o20 : int
+
+logic test__op_string_char__y2 : int
+
+logic o21 : integer
+
+logic o22 : integer
+
+logic o23 : (int,character) farray
+
+logic o24 : character
+
+logic o25 : int
+
+logic o26 : (int,character) farray
+
+logic temp___483 : (int,character) farray
+
+logic test__op_string_char__x__compl3 : (int,character) farray
+
+logic o27 : integer
+
+logic o28 : integer
+
+logic o29 : (int,character) farray
+
+logic temp___491 : (int,character) farray
+
+logic temp___492 : (int,character) farray
+
+logic test__op_string_char__x__compl4 : (int,character) farray
+
+logic o30 : int
+
+logic o31 : character
+
+logic o32 : int
+
+logic test__op_string_char__y3 : int
+
+logic o33 : integer
+
+logic o34 : integer
+
+logic temp___501 : (int,character) farray
+
+logic o35 : (int,character) farray
+
+logic o36 : character
+
+logic result : int
+
+logic tmp1 : int
+
+logic test__op_string_char__y4 : int
+
+logic test__op_string_char__x : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic a1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic a2 : (int,character) farray
+
+logic test__op_string_char__y5 : int
+
+logic test__op_string_char__x1 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic a3 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic a4 : (int,character) farray
+
+logic test__op_string_char__y6 : int
+
+logic test__op_string_char__x2 : (int,character) farray
+
+logic result5 : (int,character) farray
+
+logic a5 : (int,character) farray
+
+logic result6 : (int,character) farray
+
+logic a6 : (int,character) farray
+
+logic tmp2 : int
+
+logic test__op_string_char__x3 : (int,character) farray
+
+logic result7 : (int,character) farray
+
+logic a7 : (int,character) farray
+
+logic test__op_string_char__y7 : int
+
+logic test__op_string_char__x4 : (int,character) farray
+
+logic result8 : (int,character) farray
+
+logic a8 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : (result = tmp)
+
+axiom H2 : (tmp1 = 120)
+
+axiom H3 : in_range2(tmp1)
+
+axiom H4 : ((3 <= 12) -> (((to_rep1(a__first) <= 3) and
+  (3 <= to_rep1(a__last))) and ((to_rep1(a__first) <= 12) and
+  (12 <= to_rep1(a__last)))))
+
+axiom H5 : (temp___459 = a)
+
+axiom H6 : (test__op_string_char__x__compl = temp___459)
+
+axiom H7 : ((to_rep1(a__first) <= 2) and (2 <= to_rep1(a__last)))
+
+axiom H8 : (o = 2)
+
+axiom H9 : (o1 = (a[o]))
+
+axiom H10 : (o2 = to_rep(o1))
+
+axiom H11 : (o2 = test__op_string_char__y)
+
+axiom H12 : (to_rep1(o4) = 12)
+
+axiom H13 : (to_rep1(o3) = 3)
+
+axiom H14 : in_range2(test__op_string_char__y4)
+
+axiom H15 :
+  (forall temp___462:int. ((((3 <= temp___462) and (temp___462 <= 12)) ->
+  ((o5[temp___462]) = (slide(test__op_string_char__x, to_rep1(first(mk(3,
+  12))), 3)[temp___462]))) and ((not ((3 <= temp___462) and
+  (temp___462 <= 12))) -> ((o5[temp___462]) = (a[temp___462])))))
+
+axiom H16 : (result1 = a)
+
+axiom H17 : (a1 = o5)
+
+axiom H18 : (to_rep(o6) = test__op_string_char__y4)
+
+axiom H19 : ((to_rep1(a__first) <= 2) and (2 <= to_rep1(a__last)))
+
+axiom H20 : (o7 = 2)
+
+axiom H21 : (o8 = (a1[o7 <- o6]))
+
+axiom H22 : (result2 = a1)
+
+axiom H23 : (a2 = o8)
+
+axiom H24 : (3 <= 12)
+
  (* File "test.adb", line 241, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,character) farray. forall tmp:int.
-  forall temp___459:(int,character) farray.
-  forall test__op_string_char__x__compl:(int,character) farray. forall o:int.
-  forall o1:character. forall o2:int. forall test__op_string_char__y:int.
-  forall o3:integer. forall o4:integer. forall o5:(int,character) farray.
-  forall o6:character. forall o7:int. forall o8:(int,character) farray.
-  forall result:int. forall tmp1:int. forall test__op_string_char__y1:int.
-  forall test__op_string_char__x:(int,character) farray.
-  forall result1:(int,character) farray. forall a1:(int,character) farray.
-  forall result2:(int,character) farray. forall a2:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(a__first), to_rep1(a__last)) ->
-  (((result = tmp) and (tmp1 = 120)) -> (in_range2(tmp1) -> ((((((3 <= 12) ->
-  (((to_rep1(a__first) <= 3) and (3 <= to_rep1(a__last))) and
-  ((to_rep1(a__first) <= 12) and (12 <= to_rep1(a__last))))) and
-  (temp___459 = a)) and (test__op_string_char__x__compl = temp___459)) and
-  (((((((to_rep1(a__first) <= 2) and (2 <= to_rep1(a__last))) and
-  (o = 2)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and
-  (o2 = test__op_string_char__y)) and (((to_rep1(o4) = 12) and
-  ((to_rep1(o3) = 3) and in_range2(test__op_string_char__y1))) and
-  (((forall temp___462:int. ((((3 <= temp___462) and (temp___462 <= 12)) and
-    ((o5[temp___462]) = (slide(test__op_string_char__x, to_rep1(first(mk(3,
-    12))), 3)[temp___462]))) or ((not ((3 <= temp___462) and
-    (temp___462 <= 12))) and ((o5[temp___462]) = (a[temp___462]))))) and
-  (({ map__content = result1 } = { map__content = a }) and (a1 = o5))) and
-  (((to_rep(o6) = test__op_string_char__y1) and
-  ((((to_rep1(a__first) <= 2) and (2 <= to_rep1(a__last))) and (o7 = 2)) and
-  (o8 = (a1[o7 <- o6])))) and ((result2 = a1) and (a2 = o8))))))) ->
-  ((3 <= 12) -> (to_rep1(a__first) <= 3)))))))
+goal WP_parameter_def : (to_rep1(a__first) <= 3)

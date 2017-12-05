@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -270,36 +270,91 @@ axiom def_axiom :
   temp___343, temp___344,
   temp___345)[temp___346]) = (temp___341[temp___346])))))))))
 
+logic arr : (int,integer) farray
+
+logic arrays__swap_fun__result : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic arrays__swap_fun__result1 : (int,integer) farray
+
+logic arrays__swap_fun__result2 : (int,integer) farray
+
+logic arrays__swap_fun__result3 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic arrays__swap_fun__result4 : (int,integer) farray
+
+logic arr5 : (int,integer) farray
+
+logic arrays__swap_fun__result5 : (int,integer) farray
+
+logic result4 : (int,integer) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : (result = arr)
+
+axiom H3 : (arr1 = arr_in)
+
+axiom H4 : (to_rep(o) = to_rep((arr_in[j])))
+
+axiom H5 : (o1 = (arr1[i <- o]))
+
+axiom H6 : (result1 = arr1)
+
+axiom H7 : (arr2 = o1)
+
+axiom H8 : (to_rep(o2) = to_rep((arr_in[i])))
+
+axiom H9 : (o3 = (arr2[j <- o2]))
+
+axiom H10 : (result2 = arr2)
+
+axiom H11 : (arr3 = o3)
+
+axiom H12 : (arrays__swap_fun__result1 = arrays__swap_fun__result2)
+
+axiom H13 : (arrays__swap_fun__result3 = arrays__swap_fun__result1)
+
+axiom H14 : (result3 = arrays__swap_fun__result)
+
+axiom H15 : (arrays__swap_fun__result1 = arr3)
+
+axiom H16 : (arrays__swap_fun__result4 = arrays__swap_fun__result2)
+
+axiom H17 : (arr4 = arr3)
+
+axiom H18 : (arrays__swap_fun__result5 = arrays__swap_fun__result3)
+
+axiom H19 : (arr5 = arr3)
+
+axiom H20 : (result4 = arrays__swap_fun__result4)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,integer) farray.
-  forall arrays__swap_fun__result:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall result:(int,integer) farray.
-  forall arr1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall arr2:(int,integer) farray. forall result2:(int,integer) farray.
-  forall arr3:(int,integer) farray. forall result3:(int,integer) farray.
-  forall arrays__swap_fun__result1:(int,integer) farray.
-  forall arrays__swap_fun__result2:(int,integer) farray.
-  forall arrays__swap_fun__result3:(int,integer) farray.
-  forall arr4:(int,integer) farray.
-  forall arrays__swap_fun__result4:(int,integer) farray.
-  forall arr5:(int,integer) farray.
-  forall arrays__swap_fun__result5:(int,integer) farray.
-  (forall result4:(int,integer) farray. ((in_range1(i) and (in_range1(j) and
-  (((((result = arr) and (arr1 = arr_in)) and
-  ((((to_rep(o) = to_rep((arr_in[j]))) and (o1 = (arr1[i <- o]))) and
-  ((result1 = arr1) and (arr2 = o1))) and
-  ((((to_rep(o2) = to_rep((arr_in[i]))) and (o3 = (arr2[j <- o2]))) and
-  ((result2 = arr2) and (arr3 = o3))) and
-  (((arrays__swap_fun__result1 = arrays__swap_fun__result2) and
-  (arrays__swap_fun__result3 = arrays__swap_fun__result1)) and
-  ((result3 = arrays__swap_fun__result) and
-  (arrays__swap_fun__result1 = arr3)))))) and
-  (((arrays__swap_fun__result4 = arrays__swap_fun__result2) and
-  (arr4 = arr3)) and
-  ((arrays__swap_fun__result5 = arrays__swap_fun__result3) and
-  (arr5 = arr3)))) and (result4 = arrays__swap_fun__result4)))) ->
-  (bool_eq3(temp___339(arrays__swap_fun__result4, i,
+goal WP_parameter_def : (bool_eq3(temp___339(arrays__swap_fun__result4, i,
   to_rep((arrays__swap_fun__result4[j])), j,
-  to_rep((arrays__swap_fun__result4[i]))), 1, 8, arr_in, 1, 8) = true))))
+  to_rep((arrays__swap_fun__result4[i]))), 1, 8, arr_in, 1, 8) = true)

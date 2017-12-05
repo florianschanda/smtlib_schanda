@@ -1143,14 +1143,32 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : t
+
+logic y : t
+
+logic z : t
+
+logic o : t
+
+logic result : t
+
+logic z1 : t
+
+axiom H : in_range2(x)
+
+axiom H1 : in_range2(y)
+
+axiom H2 : (le(fliteral3, fliteral4) -> in_range3(z))
+
+axiom H3 : (result = z)
+
+axiom H4 : (z1 = div(NearestTiesToEven, x, y))
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.4199999868869781494140625))
 
  (* File "fr.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall z:t. forall result:t. forall z1:t.
-  (in_range2(x) -> (in_range2(y) -> ((le(fliteral3, fliteral4) ->
-  in_range3(z)) -> (((result = z) and (z1 = div(NearestTiesToEven, x, y))) ->
-  in_range3(div(NearestTiesToEven, x, fliteral5)))))))
+goal WP_parameter_def : in_range3(div(NearestTiesToEven, x, fliteral5))

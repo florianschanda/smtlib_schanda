@@ -1072,27 +1072,86 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic res : t
+
+logic safety_pack__saturate__result : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic res3 : t
+
+logic result3 : t
+
+logic safety_pack__saturate__result1 : t
+
+logic safety_pack__saturate__result2 : t
+
+logic safety_pack__saturate__result3 : t
+
+logic res4 : t
+
+logic safety_pack__saturate__result4 : t
+
+logic res5 : t
+
+logic safety_pack__saturate__result5 : t
+
+logic result4 : t
+
+axiom H : tqtisFinite(value)
+
+axiom H1 : tqtisFinite(min_value)
+
+axiom H2 : tqtisFinite(max_value)
+
+axiom H3 : (result = res)
+
+axiom H4 : (res1 = value)
+
+axiom H5 : tqtisFinite(res1)
+
+axiom H6 : (lt(value, min_value) -> (result1 = res1))
+
+axiom H7 : (lt(value, min_value) -> (res2 = min_value))
+
+axiom H8 : ((not lt(value, min_value)) -> (lt(max_value, value) ->
+  (result2 = res1)))
+
+axiom H9 : ((not lt(value, min_value)) -> (lt(max_value, value) ->
+  (res3 = max_value)))
+
+axiom H10 : ((not lt(value, min_value)) -> ((not lt(max_value, value)) ->
+  (res3 = res1)))
+
+axiom H11 : ((not lt(value, min_value)) -> (res2 = res3))
+
+axiom H12 : (safety_pack__saturate__result1 = safety_pack__saturate__result2)
+
+axiom H13 : (safety_pack__saturate__result3 = safety_pack__saturate__result1)
+
+axiom H14 : (result3 = safety_pack__saturate__result)
+
+axiom H15 : (safety_pack__saturate__result1 = res2)
+
+axiom H16 : (safety_pack__saturate__result4 = safety_pack__saturate__result2)
+
+axiom H17 : (res4 = res2)
+
+axiom H18 : (safety_pack__saturate__result5 = safety_pack__saturate__result3)
+
+axiom H19 : (res5 = res2)
+
+axiom H20 : (result4 = safety_pack__saturate__result4)
+
+axiom H21 : lt(value, min_value)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall safety_pack__saturate__result:t. forall result:t.
-  forall res1:t. forall result1:t. forall res2:t. forall result2:t.
-  forall res3:t. forall result3:t. forall safety_pack__saturate__result1:t.
-  forall safety_pack__saturate__result2:t.
-  forall safety_pack__saturate__result3:t. forall res4:t.
-  forall safety_pack__saturate__result4:t. forall res5:t.
-  forall safety_pack__saturate__result5:t.
-  (forall result4:t. ((tqtisFinite(value) and (tqtisFinite(min_value) and
-  (tqtisFinite(max_value) and (((((result = res) and (res1 = value)) and
-  (tqtisFinite(res1) and (((lt(value, min_value) and ((result1 = res1) and
-  (res2 = min_value))) or ((not lt(value, min_value)) and (((lt(max_value,
-  value) and ((result2 = res1) and (res3 = max_value))) or
-  ((not lt(max_value, value)) and (res3 = res1))) and (res2 = res3)))) and
-  (((safety_pack__saturate__result1 = safety_pack__saturate__result2) and
-  (safety_pack__saturate__result3 = safety_pack__saturate__result1)) and
-  ((result3 = safety_pack__saturate__result) and
-  (safety_pack__saturate__result1 = res2)))))) and
-  (((safety_pack__saturate__result4 = safety_pack__saturate__result2) and
-  (res4 = res2)) and
-  ((safety_pack__saturate__result5 = safety_pack__saturate__result3) and
-  (res5 = res2)))) and (result4 = safety_pack__saturate__result4))))) ->
-  (lt(value, min_value) -> eq(safety_pack__saturate__result4, min_value)))))
+goal WP_parameter_def : eq(safety_pack__saturate__result4, min_value)

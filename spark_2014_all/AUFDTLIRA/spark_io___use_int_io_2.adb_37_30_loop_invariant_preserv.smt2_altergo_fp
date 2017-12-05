@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -531,108 +531,108 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic temp___String_Literal_845 : unit -> (int,character) farray
+logic temp___String_Literal_839 : unit -> (int,character) farray
 
-axiom temp___String_Literal_845__def_axiom :
-  ((((((((((((((((((((((((to_rep((temp___String_Literal_845(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_845(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_845(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_845(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_845(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_845(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_845(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_845(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_845(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_845(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_845(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_845(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_845(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_845(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_845(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_845(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_845(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_845(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_845(void)[19])) = 79)) and
-  (to_rep((temp___String_Literal_845(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_845(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_845(void)[22])) = 112)) and
-  (to_rep((temp___String_Literal_845(void)[23])) = 117)) and
-  (to_rep((temp___String_Literal_845(void)[24])) = 116))
+axiom temp___String_Literal_839__def_axiom :
+  ((((((((((((((((((((((((to_rep((temp___String_Literal_839(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_839(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_839(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_839(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_839(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_839(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_839(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_839(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_839(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_839(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_839(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_839(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_839(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_839(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_839(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_839(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_839(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_839(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_839(void)[19])) = 79)) and
+  (to_rep((temp___String_Literal_839(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_839(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_839(void)[22])) = 112)) and
+  (to_rep((temp___String_Literal_839(void)[23])) = 117)) and
+  (to_rep((temp___String_Literal_839(void)[24])) = 116))
 
-logic temp___String_Literal_846 : unit -> (int,character) farray
+logic temp___String_Literal_840 : unit -> (int,character) farray
 
-axiom temp___String_Literal_846__def_axiom :
-  (((((((((((((((to_rep((temp___String_Literal_846(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_846(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_846(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_846(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_846(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_846(void)[6])) = 117)) and
-  (to_rep((temp___String_Literal_846(void)[7])) = 109)) and
-  (to_rep((temp___String_Literal_846(void)[8])) = 98)) and
-  (to_rep((temp___String_Literal_846(void)[9])) = 101)) and
-  (to_rep((temp___String_Literal_846(void)[10])) = 114)) and
-  (to_rep((temp___String_Literal_846(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_846(void)[12])) = 105)) and
-  (to_rep((temp___String_Literal_846(void)[13])) = 115)) and
-  (to_rep((temp___String_Literal_846(void)[14])) = 58)) and
-  (to_rep((temp___String_Literal_846(void)[15])) = 32))
+axiom temp___String_Literal_840__def_axiom :
+  (((((((((((((((to_rep((temp___String_Literal_840(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_840(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_840(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_840(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_840(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_840(void)[6])) = 117)) and
+  (to_rep((temp___String_Literal_840(void)[7])) = 109)) and
+  (to_rep((temp___String_Literal_840(void)[8])) = 98)) and
+  (to_rep((temp___String_Literal_840(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_840(void)[10])) = 114)) and
+  (to_rep((temp___String_Literal_840(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_840(void)[12])) = 105)) and
+  (to_rep((temp___String_Literal_840(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_840(void)[14])) = 58)) and
+  (to_rep((temp___String_Literal_840(void)[15])) = 32))
 
-logic temp___String_Literal_847 : unit -> (int,character) farray
+logic temp___String_Literal_841 : unit -> (int,character) farray
 
-axiom temp___String_Literal_847__def_axiom :
-  ((((((((((((((((((((((((to_rep((temp___String_Literal_847(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_847(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_847(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_847(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_847(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_847(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_847(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_847(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_847(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_847(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_847(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_847(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_847(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_847(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_847(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_847(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_847(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_847(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_847(void)[19])) = 79)) and
-  (to_rep((temp___String_Literal_847(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_847(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_847(void)[22])) = 112)) and
-  (to_rep((temp___String_Literal_847(void)[23])) = 117)) and
-  (to_rep((temp___String_Literal_847(void)[24])) = 116))
+axiom temp___String_Literal_841__def_axiom :
+  ((((((((((((((((((((((((to_rep((temp___String_Literal_841(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_841(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_841(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_841(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_841(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_841(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_841(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_841(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_841(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_841(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_841(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_841(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_841(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_841(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_841(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_841(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_841(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_841(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_841(void)[19])) = 79)) and
+  (to_rep((temp___String_Literal_841(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_841(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_841(void)[22])) = 112)) and
+  (to_rep((temp___String_Literal_841(void)[23])) = 117)) and
+  (to_rep((temp___String_Literal_841(void)[24])) = 116))
 
-logic temp___String_Literal_848 : unit -> (int,character) farray
+logic temp___String_Literal_842 : unit -> (int,character) farray
 
-axiom temp___String_Literal_848__def_axiom :
-  ((((((((((((((((((((((((to_rep((temp___String_Literal_848(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_848(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_848(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_848(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_848(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_848(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_848(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_848(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_848(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_848(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_848(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_848(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_848(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_848(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_848(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_848(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_848(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_848(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_848(void)[19])) = 79)) and
-  (to_rep((temp___String_Literal_848(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_848(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_848(void)[22])) = 112)) and
-  (to_rep((temp___String_Literal_848(void)[23])) = 117)) and
-  (to_rep((temp___String_Literal_848(void)[24])) = 116))
+axiom temp___String_Literal_842__def_axiom :
+  ((((((((((((((((((((((((to_rep((temp___String_Literal_842(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_842(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_842(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_842(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_842(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_842(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_842(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_842(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_842(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_842(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_842(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_842(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_842(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_842(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_842(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_842(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_842(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_842(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_842(void)[19])) = 79)) and
+  (to_rep((temp___String_Literal_842(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_842(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_842(void)[22])) = 112)) and
+  (to_rep((temp___String_Literal_842(void)[23])) = 117)) and
+  (to_rep((temp___String_Literal_842(void)[24])) = 116))
 
 type file_mode
 
@@ -703,32 +703,110 @@ axiom is_readable__def_axiom :
   (forall file:us_rep [is_readable(file)]. ((is_readable(file) = true) <->
   ((is_open(file) = true) and (mode__2(file) = 0))))
 
- (* File "spark-text_io.ads", line 81, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_input:us_rep. forall standard_output:us_rep.
-  forall standard_error:us_rep. forall i:int. forall o:int. forall o1:bool.
-  forall o2:int. forall o3:bool. forall o4:int. forall o5:bool.
-  forall result:int. forall i1:int. forall standard_output1:us_rep.
-  forall standard_error1:us_rep. forall i2:int. forall result1:bool.
-  forall standard_error2:us_rep. forall standard_output2:us_rep.
-  forall result2:bool. forall standard_error3:us_rep.
-  forall standard_output3:us_rep. forall result3:bool.
-  forall standard_error4:us_rep. forall standard_output4:us_rep.
-  forall result4:int. forall i3:int.
-  (((((((is_readable(standard_input) = true) and
+logic standard_input : us_rep
+
+logic standard_output : us_rep
+
+logic standard_error : us_rep
+
+logic i : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : bool
+
+logic result : int
+
+logic i1 : int
+
+logic standard_output1 : us_rep
+
+logic standard_error1 : us_rep
+
+logic i2 : int
+
+logic result1 : bool
+
+logic standard_error2 : us_rep
+
+logic standard_output2 : us_rep
+
+logic result2 : bool
+
+logic standard_error3 : us_rep
+
+logic standard_output3 : us_rep
+
+logic result3 : bool
+
+logic standard_error4 : us_rep
+
+logic standard_output4 : us_rep
+
+logic result4 : int
+
+logic i3 : int
+
+axiom H : ((((((is_readable(standard_input) = true) and
   (is_writable(standard_output) = true)) and
   (is_writable(standard_error) = true)) and (status(standard_input) = 1)) and
-  (status(standard_output) = 1)) and (status(standard_error) = 1)) ->
-  (((is_writable(standard_error) = true) and (status(standard_error) = 1)) ->
-  (((result = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  (((is_writable(standard_error1) = true) and
-  (status(standard_error1) = 1)) -> (((((1 <= 10) -> in_range5(i2)) and
-  ((1 <= i2) and (i2 <= 10))) and ((((((o = status(standard_output1)) and
-  in_range4(o)) and (((o = 1) and (o1 = true)) or ((not (o = 1)) and
-  (o1 = false)))) and (((not (o1 = true)) and (result1 = true)) or
-  ((o1 = true) and (result1 = false)))) and ((not (result1 = true)) and
-  (standard_error2 = standard_error1))) and
-  ((((((((is_open(standard_output2) = true) and
+  (status(standard_output) = 1)) and (status(standard_error) = 1))
+
+axiom H1 : ((is_writable(standard_error) = true) and
+  (status(standard_error) = 1))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 1)
+
+axiom H4 : (1 <= i1)
+
+axiom H5 : (i1 <= 10)
+
+axiom H6 : ((is_writable(standard_error1) = true) and
+  (status(standard_error1) = 1))
+
+axiom H7 : (((1 <= 10) -> in_range5(i2)) and ((1 <= i2) and (i2 <= 10)))
+
+axiom H8 : ((o = status(standard_output1)) and in_range4(o))
+
+axiom H9 : (((o = 1) -> (o1 = true)) and ((not (o = 1)) -> (o1 = false)))
+
+axiom H10 : (((not (o1 = true)) -> (result1 = true)) and ((o1 = true) ->
+  (result1 = false)))
+
+axiom H11 : ((result1 = true) ->
+  ((((((((is_writable(standard_error2) = true) and
+  (is_open(standard_error2) = true)) and
+  (mode__2(standard_error2) = mode__2(standard_error1))) and
+  (bool_eq5((name(standard_error2)).elts,
+  to_rep1(first((name(standard_error2)).rt)),
+  to_rep1(last((name(standard_error2)).rt)), (name(standard_error1)).elts,
+  to_rep1(first((name(standard_error1)).rt)),
+  to_rep1(last((name(standard_error1)).rt))) = true)) and
+  (bool_eq5((form(standard_error2)).elts,
+  to_rep1(first((form(standard_error2)).rt)),
+  to_rep1(last((form(standard_error2)).rt)), (form(standard_error1)).elts,
+  to_rep1(first((form(standard_error1)).rt)),
+  to_rep1(last((form(standard_error1)).rt))) = true)) and
+  (line_length__2(standard_error2) = line_length__2(standard_error1))) and
+  (page_length__2(standard_error2) = page_length__2(standard_error1))) and
+  ((is_standard_file(standard_error2) = true) <->
+  (is_standard_file(standard_error1) = true))))
+
+axiom H12 : (not (result1 = true))
+
+axiom H13 : ((not (result1 = true)) -> (standard_error2 = standard_error1))
+
+axiom H14 : (((((((is_open(standard_output2) = true) and
   (mode__2(standard_output2) = 1)) and
   (bool_eq5((name(standard_output2)).elts,
   to_rep1(first((name(standard_output2)).rt)),
@@ -742,13 +820,39 @@ goal WP_parameter_def :
   to_rep1(last((form(standard_output1)).rt))) = true)) and
   (line_length__2(standard_output2) = line_length__2(standard_output1))) and
   (page_length__2(standard_output2) = page_length__2(standard_output1))) and
-  (is_standard_output(standard_output2) = true)) and
-  ((((((o2 = status(standard_output2)) and in_range4(o2)) and (((o2 = 1) and
-  (o3 = true)) or ((not (o2 = 1)) and (o3 = false)))) and
-  (((not (o3 = true)) and (result2 = true)) or ((o3 = true) and
-  (result2 = false)))) and ((not (result2 = true)) and
-  (standard_error3 = standard_error2))) and
-  ((((((((is_open(standard_output3) = true) and
+  (is_standard_output(standard_output2) = true))
+
+axiom H15 : ((o2 = status(standard_output2)) and in_range4(o2))
+
+axiom H16 : (((o2 = 1) -> (o3 = true)) and ((not (o2 = 1)) -> (o3 = false)))
+
+axiom H17 : (((not (o3 = true)) -> (result2 = true)) and ((o3 = true) ->
+  (result2 = false)))
+
+axiom H18 : ((result2 = true) ->
+  ((((((((is_writable(standard_error3) = true) and
+  (is_open(standard_error3) = true)) and
+  (mode__2(standard_error3) = mode__2(standard_error2))) and
+  (bool_eq5((name(standard_error3)).elts,
+  to_rep1(first((name(standard_error3)).rt)),
+  to_rep1(last((name(standard_error3)).rt)), (name(standard_error2)).elts,
+  to_rep1(first((name(standard_error2)).rt)),
+  to_rep1(last((name(standard_error2)).rt))) = true)) and
+  (bool_eq5((form(standard_error3)).elts,
+  to_rep1(first((form(standard_error3)).rt)),
+  to_rep1(last((form(standard_error3)).rt)), (form(standard_error2)).elts,
+  to_rep1(first((form(standard_error2)).rt)),
+  to_rep1(last((form(standard_error2)).rt))) = true)) and
+  (line_length__2(standard_error3) = line_length__2(standard_error2))) and
+  (page_length__2(standard_error3) = page_length__2(standard_error2))) and
+  ((is_standard_file(standard_error3) = true) <->
+  (is_standard_file(standard_error2) = true))))
+
+axiom H19 : (not (result2 = true))
+
+axiom H20 : ((not (result2 = true)) -> (standard_error3 = standard_error2))
+
+axiom H21 : (((((((is_open(standard_output3) = true) and
   (mode__2(standard_output3) = 1)) and
   (bool_eq5((name(standard_output3)).elts,
   to_rep1(first((name(standard_output3)).rt)),
@@ -762,13 +866,39 @@ goal WP_parameter_def :
   to_rep1(last((form(standard_output2)).rt))) = true)) and
   (line_length__2(standard_output3) = line_length__2(standard_output2))) and
   (page_length__2(standard_output3) = page_length__2(standard_output2))) and
-  (is_standard_output(standard_output3) = true)) and
-  ((((((o4 = status(standard_output3)) and in_range4(o4)) and (((o4 = 1) and
-  (o5 = true)) or ((not (o4 = 1)) and (o5 = false)))) and
-  (((not (o5 = true)) and (result3 = true)) or ((o5 = true) and
-  (result3 = false)))) and ((not (result3 = true)) and
-  (standard_error4 = standard_error3))) and
-  ((((((((is_open(standard_output4) = true) and
+  (is_standard_output(standard_output3) = true))
+
+axiom H22 : ((o4 = status(standard_output3)) and in_range4(o4))
+
+axiom H23 : (((o4 = 1) -> (o5 = true)) and ((not (o4 = 1)) -> (o5 = false)))
+
+axiom H24 : (((not (o5 = true)) -> (result3 = true)) and ((o5 = true) ->
+  (result3 = false)))
+
+axiom H25 : ((result3 = true) ->
+  ((((((((is_writable(standard_error4) = true) and
+  (is_open(standard_error4) = true)) and
+  (mode__2(standard_error4) = mode__2(standard_error3))) and
+  (bool_eq5((name(standard_error4)).elts,
+  to_rep1(first((name(standard_error4)).rt)),
+  to_rep1(last((name(standard_error4)).rt)), (name(standard_error3)).elts,
+  to_rep1(first((name(standard_error3)).rt)),
+  to_rep1(last((name(standard_error3)).rt))) = true)) and
+  (bool_eq5((form(standard_error4)).elts,
+  to_rep1(first((form(standard_error4)).rt)),
+  to_rep1(last((form(standard_error4)).rt)), (form(standard_error3)).elts,
+  to_rep1(first((form(standard_error3)).rt)),
+  to_rep1(last((form(standard_error3)).rt))) = true)) and
+  (line_length__2(standard_error4) = line_length__2(standard_error3))) and
+  (page_length__2(standard_error4) = page_length__2(standard_error3))) and
+  ((is_standard_file(standard_error4) = true) <->
+  (is_standard_file(standard_error3) = true))))
+
+axiom H26 : (not (result3 = true))
+
+axiom H27 : ((not (result3 = true)) -> (standard_error4 = standard_error3))
+
+axiom H28 : (((((((is_open(standard_output4) = true) and
   (mode__2(standard_output4) = 1)) and
   (bool_eq5((name(standard_output4)).elts,
   to_rep1(first((name(standard_output4)).rt)),
@@ -782,6 +912,13 @@ goal WP_parameter_def :
   to_rep1(last((form(standard_output3)).rt))) = true)) and
   (line_length__2(standard_output4) = line_length__2(standard_output3))) and
   (page_length__2(standard_output4) = page_length__2(standard_output3))) and
-  (is_standard_output(standard_output4) = true)) and ((not (i2 = 10)) and
-  ((result4 = i2) and (i3 = (i2 + 1))))))))))) ->
-  (is_writable(standard_error4) = true))))))))
+  (is_standard_output(standard_output4) = true))
+
+axiom H29 : (not (i2 = 10))
+
+axiom H30 : (result4 = i2)
+
+axiom H31 : (i3 = (i2 + 1))
+
+ (* File "spark-text_io.ads", line 81, characters 0-0 *)
+goal WP_parameter_def : (is_writable(standard_error4) = true)

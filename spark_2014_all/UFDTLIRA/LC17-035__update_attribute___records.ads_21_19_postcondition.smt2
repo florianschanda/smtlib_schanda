@@ -131,6 +131,8 @@
 (declare-const temp___2181 natural)
 (declare-const temp___2182 my_range)
 (declare-const temp___2183 integer)
+(declare-const o7 Int)
+(declare-const o8 my_range)
 (declare-const result integer)
 (declare-const result1 natural)
 (declare-const result2 my_range)

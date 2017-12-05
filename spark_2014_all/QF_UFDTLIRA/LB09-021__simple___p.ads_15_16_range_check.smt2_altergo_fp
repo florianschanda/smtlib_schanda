@@ -104,7 +104,9 @@ type enum__ref = { enum__content : enum
 
 function enum__ref___projection(a: enum__ref) : enum = (a).enum__content
 
+logic temp___z_163 : int
+
+axiom H : in_range(temp___z_163)
+
  (* File "p.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___z_163:int. (in_range(temp___z_163) ->
-  in_range(temp___z_163)))
+goal WP_parameter_def : in_range(temp___z_163)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -273,7 +273,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -360,26 +360,212 @@ function t5b__ref___projection(a1: t5b__ref) : integer = (a1).t5b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic c : int
+
+logic j : int
+
+logic math_simple_half__gcd__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___132 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic x : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___135 : int
+
+logic x1 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : int
+
+logic x2 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : bool
+
+logic j1 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic math_simple_half__gcd__result1 : int
+
+logic result2 : int
+
+logic c2 : int
+
+logic result3 : int
+
+logic j2 : int
+
+logic j3 : int
+
+logic result4 : int
+
+logic j4 : int
+
+logic j5 : int
+
+logic j6 : int
+
+logic j7 : int
+
+logic j8 : int
+
+logic j9 : int
+
+logic j10 : int
+
+logic c3 : int
+
+logic result5 : int
+
+logic c4 : int
+
+logic c5 : int
+
+logic c6 : int
+
+logic c7 : int
+
+logic c8 : int
+
+logic c9 : int
+
+logic c10 : int
+
+logic c11 : int
+
+logic c12 : int
+
+logic result6 : int
+
+logic math_simple_half__gcd__result2 : int
+
+logic c13 : int
+
+logic j11 : int
+
+logic math_simple_half__gcd__result3 : int
+
+logic c14 : int
+
+logic j12 : int
+
+logic math_simple_half__gcd__result4 : int
+
+logic c15 : int
+
+logic j13 : int
+
+logic math_simple_half__gcd__result5 : int
+
+logic c16 : int
+
+logic j14 : int
+
+logic math_simple_half__gcd__result6 : int
+
+logic c17 : int
+
+logic j15 : int
+
+logic math_simple_half__gcd__result7 : int
+
+logic c18 : int
+
+logic j16 : int
+
+logic math_simple_half__gcd__result8 : int
+
+logic c19 : int
+
+logic j17 : int
+
+logic math_simple_half__gcd__result9 : int
+
+logic c20 : int
+
+logic j18 : int
+
+logic math_simple_half__gcd__result10 : int
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : ((o = min(a, b)) and in_range1(min(a, b)))
+
+axiom H3 : (result = c)
+
+axiom H4 : (c1 = o)
+
+axiom H5 : in_range1(c1)
+
+axiom H6 : (not ((mod(a, c1) = 0) and (mod(b, c1) = 0)))
+
+axiom H7 : ((o1 = comp_div(c1,2)) and in_range1(comp_div(c1,2)))
+
+axiom H8 : (c1 = result2)
+
+axiom H9 : (c2 = o1)
+
+axiom H10 : ((c2 + 1) = r4b)
+
+axiom H11 : in_range2(r4b)
+
+axiom H12 : (result3 = j)
+
+axiom H13 : (j2 = r4b)
+
+axiom H14 : (((r4b <= j2) and (j2 <= (min(a, b) - 1))) ->
+  (((temp___132 = j2) and ((((o3 = min(a, b)) and in_range1(min(a, b))) and
+  (((o2 = j2) and in_range1(j2)) and (not (divides(o2, o3) = true)))) and
+  ((forall x3:int. ((((c2 + 1) <= x3) and (x3 <= j3)) -> (not (divides(x3,
+   min(a, b)) = true)))) and ((((r4b <= (min(a, b) - 1)) ->
+  dynamic_property(r4b, (min(a, b) - 1), j3)) and ((r4b <= j3) and
+  (j3 <= (min(a, b) - 1)))) and (j3 = (min(a, b) - 1)))))) and ((j3 = j7) and
+  (j8 = j3))))
+
+axiom H15 : (((r4b <= j2) and (j2 <= (min(a, b) - 1))) -> (j9 = j7))
+
+axiom H16 : (((r4b <= j2) and (j2 <= (min(a, b) - 1))) -> (j10 = j8))
+
+axiom H17 : ((not ((r4b <= j2) and (j2 <= (min(a, b) - 1)))) -> (j2 = j9))
+
+axiom H18 : ((not ((r4b <= j2) and (j2 <= (min(a, b) - 1)))) -> (j10 = j2))
+
+axiom H19 : (1 <  c2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall j:int. forall o:int. forall o1:int.
-  forall temp___132:int. forall o2:int. forall o3:int. forall result:int.
-  forall c1:int. forall result1:int. forall c2:int. forall result2:int.
-  forall j1:int. forall j2:int. forall j3:int. forall j4:int. forall j5:int.
-  forall j6:int. (in_range1(a) -> (in_range1(b) -> ((((o = min(a, b)) and
-  in_range1(min(a, b))) and (({ int__content = result } = { int__content = c
-  }) and (c1 = o))) -> (in_range1(c1) -> ((not ((mod(a, c1) = 0) and (mod(b,
-  c1) = 0))) -> ((((o1 = comp_div(c1,2)) and in_range1(comp_div(c1,2))) and
-  ((c1 = result1) and (c2 = o1))) -> ((((c2 + 1) = r4b) and
-  in_range2(r4b)) -> (((({ int__content = result2 } = { int__content = j
-  }) and (j1 = r4b)) and ((((r4b <= j1) and (j1 <= (min(a, b) - 1))) and
-  ((((temp___132 = j1) and ((((o3 = min(a, b)) and in_range1(min(a, b))) and
-  (((o2 = j1) and in_range1(j1)) and (not (divides(o2, o3) = true)))) and
-  ((forall x:int. ((((c2 + 1) <= x) and (x <= j2)) -> (not (divides(x, min(a,
-   b)) = true)))) and
-  ((((r4b <= (min(a, b) - 1)) -> dynamic_property(r4b, (min(a, b) - 1),
-  j2)) and ((r4b <= j2) and (j2 <= (min(a, b) - 1)))) and (j2 = (min(a,
-  b) - 1)))))) and ((j2 = j3) and (j4 = j2))) and (({ int__content = j5 } = {
-  int__content = j3 }) and (j6 = j4)))) or ((not ((r4b <= j1) and
-  (j1 <= (min(a, b) - 1)))) and ((j1 = j5) and (j6 = j1))))) -> ((1 <  c2) ->
-  (not (c2 = 0))))))))))))
+goal WP_parameter_def : (not (c2 = 0))

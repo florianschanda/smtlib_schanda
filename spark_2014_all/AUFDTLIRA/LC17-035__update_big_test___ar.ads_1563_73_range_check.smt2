@@ -147,6 +147,7 @@
 (declare-const o4 Bool)
 (declare-const temp___8338 (Array Int (Array Int et1)))
 (declare-const temp___83381 Bool)
+(declare-const o5 Int)
 (declare-const result (Array Int (Array Int et1)))
 (declare-const result1 Bool)
 (declare-const r__split_fields2 (Array Int (Array Int et1)))

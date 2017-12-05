@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -306,19 +306,114 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r : (int,bool) farray
+
+logic x : int
+
+logic counterex_forall__single_char_set_broken__result : (int,bool) farray
+
+logic temp___157 : int
+
+logic temp___155 : (int,bool) farray
+
+logic i : int
+
+logic o : int
+
+logic r1 : (int,bool) farray
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : (int,bool) farray
+
+logic r2 : (int,bool) farray
+
+logic r3 : (int,bool) farray
+
+logic x2 : int
+
+logic result2 : int
+
+logic x3 : int
+
+logic result3 : (int,bool) farray
+
+logic r4 : (int,bool) farray
+
+logic r5 : (int,bool) farray
+
+logic x4 : int
+
+logic r6 : (int,bool) farray
+
+logic x5 : int
+
+logic r7 : (int,bool) farray
+
+logic x6 : int
+
+logic r8 : (int,bool) farray
+
+logic x7 : int
+
+logic r9 : (int,bool) farray
+
+logic x8 : int
+
+logic r10 : (int,bool) farray
+
+logic x9 : int
+
+logic result4 : (int,bool) farray
+
+logic counterex_forall__single_char_set_broken__result1 : (int,bool) farray
+
+logic counterex_forall__single_char_set_broken__result2 : (int,bool) farray
+
+logic counterex_forall__single_char_set_broken__result3 : (int,bool) farray
+
+logic r11 : (int,bool) farray
+
+logic x10 : int
+
+logic counterex_forall__single_char_set_broken__result4 : (int,bool) farray
+
+logic r12 : (int,bool) farray
+
+logic x11 : int
+
+logic counterex_forall__single_char_set_broken__result5 : (int,bool) farray
+
+axiom H : in_range1(c)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = 1)
+
+axiom H3 : (1 <= x1)
+
+axiom H4 : (x1 <= 100)
+
+axiom H5 : (result1 = r)
+
+axiom H6 : (((x1 = c) -> (r2 = (r[x1 <- true]))) and ((not (x1 = c)) ->
+  (r2 = (r[x1 <- false]))))
+
+axiom H7 :
+  (forall i1:int. (((1 <= i1) and (i1 <= x2)) -> (((r3[i1]) = true) <->
+  (i1 = (c + 1)))))
+
+axiom H8 :
+  (((forall temp___156:int. ((((- 2147483648) <= temp___156) and
+    (temp___156 <= 2147483647)) -> ((x2 <  temp___156) ->
+    ((r3[temp___156]) = (r[temp___156]))))) and ((1 <= 100) ->
+  in_range2(x2))) and ((1 <= x2) and (x2 <= 100)))
+
+axiom H9 : (1 <= i)
+
+axiom H10 : (i <= x2)
+
  (* File "counterex_forall.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(int,bool) farray. forall x:int. forall i:int. forall result:int.
-  forall x1:int. forall result1:(int,bool) farray.
-  forall r1:(int,bool) farray. forall r2:(int,bool) farray. forall x2:int.
-  (in_range1(c) -> ((({ int__content = result } = { int__content = x }) and
-  (x1 = 1)) -> (((1 <= x1) and (x1 <= 100)) -> ((({ map__content = result1
-  } = { map__content = r }) and (((x1 = c) and (r1 = (r[x1 <- true]))) or
-  ((not (x1 = c)) and (r1 = (r[x1 <- false]))))) ->
-  ((forall i1:int. (((1 <= i1) and (i1 <= x2)) -> (((r2[i1]) = true) <->
-   (i1 = (c + 1))))) ->
-  ((((forall temp___156:int. ((((-2147483648) <= temp___156) and
-     (temp___156 <= 2147483647)) -> ((x2 <  temp___156) ->
-     ((r2[temp___156]) = (r[temp___156]))))) and
-  ((1 <= 100) -> in_range2(x2))) and ((1 <= x2) and (x2 <= 100))) ->
-  (((1 <= i) and (i <= x2)) -> in_range1((c + 1))))))))))
+goal WP_parameter_def : in_range1((c + 1))

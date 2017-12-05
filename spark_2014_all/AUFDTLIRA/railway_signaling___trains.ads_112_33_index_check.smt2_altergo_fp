@@ -553,7 +553,43 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic cur_num_trains : int
+
+logic trains : (int,us_rep) farray
+
+logic track_signals : (int,signal) farray
+
+logic train : int
+
+logic o : int
+
+logic o1 : track_id
+
+logic o2 : natural
+
+logic o3 : track_id
+
+logic o4 : track_id
+
+logic o5 : natural
+
+logic o6 : track_id
+
+logic o7 : track_id
+
+logic o8 : int
+
+logic o9 : signal
+
+logic o10 : int
+
+logic result : bool
+
+axiom H : in_range2(cur_num_trains)
+
+axiom H1 : (1 <= train)
+
+axiom H2 : (train <= cur_num_trains)
+
  (* File "trains.ads", line 110, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall train:int. (in_range2(cur_num_trains) ->
-  (((1 <= train) and (train <= cur_num_trains)) -> (1 <= train))))
+goal WP_parameter_def : (1 <= train)

@@ -216,73 +216,192 @@ logic attr__ATTRIBUTE_ADDRESS25 : int
 
 logic attr__ATTRIBUTE_ADDRESS26 : int
 
+logic nav_active_out1 : bool
+
+logic unit_delay_memory : bool
+
+logic unit_delay1_memory : bool
+
+logic unit_delay_out1 : bool
+
+logic unit_delay1_out1 : bool
+
+logic modes_on_out1 : bool
+
+logic nav_capture_cond_met_out1 : bool
+
+logic no_higher_event_than_nav_capture_cond_met_out1 : bool
+
+logic pilot_flying_side_out1 : bool
+
+logic selected_nav_frequency_changed_out1 : bool
+
+logic selected_nav_source_changed_out1 : bool
+
+logic not4_out1 : bool
+
+logic not3_out1 : bool
+
+logic not2_out1 : bool
+
+logic not_out1 : bool
+
+logic or_out1 : bool
+
+logic not1_out1 : bool
+
+logic not5_out1 : bool
+
+logic result : bool
+
+logic unit_delay_out11 : bool
+
+logic result1 : bool
+
+logic unit_delay1_out11 : bool
+
+logic result2 : bool
+
+logic modes_on_out11 : bool
+
+logic result3 : bool
+
+logic nav_active_out11 : bool
+
+logic result4 : bool
+
+logic nav_capture_cond_met_out11 : bool
+
+logic result5 : bool
+
+logic no_higher_event_than_nav_capture_cond_met_out11 : bool
+
+logic result6 : bool
+
+logic pilot_flying_side_out11 : bool
+
+logic changed_out1 : bool
+
+logic result7 : bool
+
+logic selected_nav_frequency_changed_out11 : bool
+
+logic result8 : bool
+
+logic selected_nav_source_changed_out11 : bool
+
+logic result9 : bool
+
+logic not4_out11 : bool
+
+logic result10 : bool
+
+logic not3_out11 : bool
+
+logic result11 : bool
+
+logic not2_out11 : bool
+
+logic result12 : bool
+
+logic not_out11 : bool
+
+logic result13 : bool
+
+logic or_out11 : bool
+
+logic result14 : bool
+
+logic not1_out11 : bool
+
+logic result15 : bool
+
+logic not5_out11 : bool
+
+axiom H : (result = unit_delay_out1)
+
+axiom H1 : (unit_delay_out11 = unit_delay_memory)
+
+axiom H2 : (result1 = unit_delay1_out1)
+
+axiom H3 : (unit_delay1_out11 = unit_delay1_memory)
+
+axiom H4 : (result2 = modes_on_out1)
+
+axiom H5 : (modes_on_out11 = modes_on)
+
+axiom H6 : (result3 = nav_active_out1)
+
+axiom H7 : (nav_active_out11 = nav_active)
+
+axiom H8 : (result4 = nav_capture_cond_met_out1)
+
+axiom H9 : (nav_capture_cond_met_out11 = nav_capture_cond_met)
+
+axiom H10 : (result5 = no_higher_event_than_nav_capture_cond_met_out1)
+
+axiom H11 :
+  (no_higher_event_than_nav_capture_cond_met_out11 = no_higher_event_than_nav_capture_cond_met)
+
+axiom H12 : (result6 = pilot_flying_side_out1)
+
+axiom H13 : (pilot_flying_side_out11 = pilot_flying_side)
+
+axiom H14 : (result7 = selected_nav_frequency_changed_out1)
+
+axiom H15 :
+  (selected_nav_frequency_changed_out11 = selected_nav_frequency_changed)
+
+axiom H16 : (result8 = selected_nav_source_changed_out1)
+
+axiom H17 : (selected_nav_source_changed_out11 = selected_nav_source_changed)
+
+axiom H18 : (result9 = not4_out1)
+
+axiom H19 : (((not (changed_out1 = true)) -> (not4_out11 = true)) and
+  ((changed_out1 = true) -> (not4_out11 = false)))
+
+axiom H20 : (result10 = not3_out1)
+
+axiom H21 : (((not (selected_nav_frequency_changed_out11 = true)) ->
+  (not3_out11 = true)) and ((selected_nav_frequency_changed_out11 = true) ->
+  (not3_out11 = false)))
+
+axiom H22 : (result11 = not2_out1)
+
+axiom H23 : (((not (selected_nav_source_changed_out11 = true)) ->
+  (not2_out11 = true)) and ((selected_nav_source_changed_out11 = true) ->
+  (not2_out11 = false)))
+
+axiom H24 : (result12 = not_out1)
+
+axiom H25 : (((not (unit_delay1_out11 = true)) -> (not_out11 = true)) and
+  ((unit_delay1_out11 = true) -> (not_out11 = false)))
+
+axiom H26 : (result13 = or_out1)
+
+axiom H27 : ((((((((((unit_delay_out11 = true) and (not_out11 = true)) and
+  (nav_capture_cond_met_out11 = true)) and (not2_out11 = true)) and
+  (not3_out11 = true)) and (not4_out11 = true)) and
+  (modes_on_out11 = true)) and
+  (no_higher_event_than_nav_capture_cond_met_out11 = true)) ->
+  (or_out11 = true)) and ((not ((((((((unit_delay_out11 = true) and
+  (not_out11 = true)) and (nav_capture_cond_met_out11 = true)) and
+  (not2_out11 = true)) and (not3_out11 = true)) and (not4_out11 = true)) and
+  (modes_on_out11 = true)) and
+  (no_higher_event_than_nav_capture_cond_met_out11 = true))) ->
+  (or_out11 = false)))
+
+axiom H28 : (result14 = not1_out1)
+
+axiom H29 : (((not (or_out11 = true)) -> (not1_out11 = true)) and
+  ((or_out11 = true) -> (not1_out11 = false)))
+
+axiom H30 : (result15 = not5_out1)
+
+axiom H31 : ((((not1_out11 = true) or (nav_active_out11 = true)) ->
+  (not5_out11 = true)) and ((not ((not1_out11 = true) or
+  (nav_active_out11 = true))) -> (not5_out11 = false)))
+
  (* File "nav_active_when_capture_cond_met.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall nav_active_out1:bool. forall unit_delay_memory:bool.
-  forall unit_delay1_memory:bool. forall unit_delay_out1:bool.
-  forall unit_delay1_out1:bool. forall modes_on_out1:bool.
-  forall nav_capture_cond_met_out1:bool.
-  forall no_higher_event_than_nav_capture_cond_met_out1:bool.
-  forall pilot_flying_side_out1:bool.
-  forall selected_nav_frequency_changed_out1:bool.
-  forall selected_nav_source_changed_out1:bool. forall not4_out1:bool.
-  forall not3_out1:bool. forall not2_out1:bool. forall not_out1:bool.
-  forall or_out1:bool. forall not1_out1:bool. forall not5_out1:bool.
-  forall result:bool. forall unit_delay_out11:bool. forall result1:bool.
-  forall unit_delay1_out11:bool. forall result2:bool.
-  forall modes_on_out11:bool. forall result3:bool.
-  forall nav_active_out11:bool. forall result4:bool.
-  forall nav_capture_cond_met_out11:bool. forall result5:bool.
-  forall no_higher_event_than_nav_capture_cond_met_out11:bool.
-  forall result6:bool. forall pilot_flying_side_out11:bool.
-  forall changed_out1:bool. forall result7:bool.
-  forall selected_nav_frequency_changed_out11:bool. forall result8:bool.
-  forall selected_nav_source_changed_out11:bool. forall result9:bool.
-  forall not4_out11:bool. forall result10:bool. forall not3_out11:bool.
-  forall result11:bool. forall not2_out11:bool. forall result12:bool.
-  forall not_out11:bool. forall result13:bool. forall or_out11:bool.
-  forall result14:bool. forall not1_out11:bool. forall result15:bool.
-  forall not5_out11:bool. (((result = unit_delay_out1) and
-  (unit_delay_out11 = unit_delay_memory)) ->
-  (((result1 = unit_delay1_out1) and
-  (unit_delay1_out11 = unit_delay1_memory)) ->
-  (((result2 = modes_on_out1) and (modes_on_out11 = modes_on)) ->
-  (((result3 = nav_active_out1) and (nav_active_out11 = nav_active)) ->
-  (((result4 = nav_capture_cond_met_out1) and
-  (nav_capture_cond_met_out11 = nav_capture_cond_met)) ->
-  (((result5 = no_higher_event_than_nav_capture_cond_met_out1) and
-  (no_higher_event_than_nav_capture_cond_met_out11 = no_higher_event_than_nav_capture_cond_met)) ->
-  (((result6 = pilot_flying_side_out1) and
-  (pilot_flying_side_out11 = pilot_flying_side)) ->
-  (((result7 = selected_nav_frequency_changed_out1) and
-  (selected_nav_frequency_changed_out11 = selected_nav_frequency_changed)) ->
-  (((result8 = selected_nav_source_changed_out1) and
-  (selected_nav_source_changed_out11 = selected_nav_source_changed)) ->
-  (((result9 = not4_out1) and (((not (changed_out1 = true)) and
-  (not4_out11 = true)) or ((changed_out1 = true) and
-  (not4_out11 = false)))) -> (((result10 = not3_out1) and
-  (((not (selected_nav_frequency_changed_out11 = true)) and
-  (not3_out11 = true)) or ((selected_nav_frequency_changed_out11 = true) and
-  (not3_out11 = false)))) -> (((result11 = not2_out1) and
-  (((not (selected_nav_source_changed_out11 = true)) and
-  (not2_out11 = true)) or ((selected_nav_source_changed_out11 = true) and
-  (not2_out11 = false)))) -> (((result12 = not_out1) and
-  (((not (unit_delay1_out11 = true)) and (not_out11 = true)) or
-  ((unit_delay1_out11 = true) and (not_out11 = false)))) ->
-  (((result13 = or_out1) and ((((((((((unit_delay_out11 = true) and
-  (not_out11 = true)) and (nav_capture_cond_met_out11 = true)) and
-  (not2_out11 = true)) and (not3_out11 = true)) and (not4_out11 = true)) and
-  (modes_on_out11 = true)) and
-  (no_higher_event_than_nav_capture_cond_met_out11 = true)) and
-  (or_out11 = true)) or ((not ((((((((unit_delay_out11 = true) and
-  (not_out11 = true)) and (nav_capture_cond_met_out11 = true)) and
-  (not2_out11 = true)) and (not3_out11 = true)) and (not4_out11 = true)) and
-  (modes_on_out11 = true)) and
-  (no_higher_event_than_nav_capture_cond_met_out11 = true))) and
-  (or_out11 = false)))) -> (((result14 = not1_out1) and
-  (((not (or_out11 = true)) and (not1_out11 = true)) or
-  ((or_out11 = true) and (not1_out11 = false)))) ->
-  (((result15 = not5_out1) and ((((not1_out11 = true) or
-  (nav_active_out11 = true)) and (not5_out11 = true)) or
-  ((not ((not1_out11 = true) or (nav_active_out11 = true))) and
-  (not5_out11 = false)))) -> (not5_out11 = true))))))))))))))))))
+goal WP_parameter_def : (not5_out11 = true)

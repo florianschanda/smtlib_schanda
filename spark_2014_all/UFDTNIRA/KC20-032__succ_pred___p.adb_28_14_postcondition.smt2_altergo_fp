@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tvoltB
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -165,18 +165,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -403,18 +403,41 @@ logic v : volt
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic p__ident__3__result : volt
+
+logic o : volt
+
+logic result : volt
+
+logic p__ident__3__result1 : volt
+
+logic p__ident__3__result2 : volt
+
+logic p__ident__3__result3 : volt
+
+logic p__ident__3__result4 : volt
+
+logic p__ident__3__result5 : volt
+
+logic result1 : volt
+
+axiom H : (not (to_fixed1(v) = 2040))
+
+axiom H1 : (p__ident__3__result1 = p__ident__3__result2)
+
+axiom H2 : (p__ident__3__result3 = p__ident__3__result1)
+
+axiom H3 : (to_fixed1(o) = ((to_fixed1(v) + 1) - 1))
+
+axiom H4 : (result = p__ident__3__result)
+
+axiom H5 : (p__ident__3__result1 = o)
+
+axiom H6 : (p__ident__3__result4 = p__ident__3__result2)
+
+axiom H7 : (p__ident__3__result5 = p__ident__3__result3)
+
+axiom H8 : (result1 = p__ident__3__result4)
+
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__ident__3__result:volt. forall o:volt. forall result:volt.
-  forall p__ident__3__result1:volt. forall p__ident__3__result2:volt.
-  forall p__ident__3__result3:volt. forall p__ident__3__result4:volt.
-  forall p__ident__3__result5:volt.
-  (forall result1:volt. (((not (to_fixed1(v) = 2040)) and
-  (((((p__ident__3__result1 = p__ident__3__result2) and
-  (p__ident__3__result3 = p__ident__3__result1)) and
-  ((to_fixed1(o) = ((to_fixed1(v) + 1) - 1)) and
-  ((result = p__ident__3__result) and (p__ident__3__result1 = o)))) and
-  ((p__ident__3__result4 = p__ident__3__result2) and
-  (p__ident__3__result5 = p__ident__3__result3))) and
-  (result1 = p__ident__3__result4))) ->
-  (to_fixed1(p__ident__3__result4) = to_fixed1(v)))))
+goal WP_parameter_def : (to_fixed1(p__ident__3__result4) = to_fixed1(v))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type time_type
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -946,14 +946,41 @@ buffer_count_type
 function buffer_count_type__ref___projection(a: buffer_count_type__ref) : buffer_count_type =
   (a).buffer_count_type__content
 
+logic buffer : (t,us_rep) farray
+
+logic count : int
+
+logic next_in : t
+
+logic next_out : t
+
+logic o : int
+
+logic result : (t,us_rep) farray
+
+logic buffer1 : (t,us_rep) farray
+
+logic result1 : t
+
+logic next_in1 : t
+
+axiom H : in_range3(count)
+
+axiom H1 : in_range2(next_in)
+
+axiom H2 : in_range2(next_out)
+
+axiom H3 : (result = buffer)
+
+axiom H4 : (buffer1 = (buffer[next_in <- { us_split_fields1 = {
+  rec__temperature_buffer14__temperature_record__time_stamp = item;
+  rec__temperature_buffer14__temperature_record__value = item1 } }]))
+
+axiom H5 : (result1 = next_in)
+
+axiom H6 : (next_in1 = urem(add(next_in, of_int(1)), of_int(8)))
+
+axiom H7 : (not (count = 8))
+
  (* File "temperature_buffer14.adb", line 57, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(t,us_rep) farray. forall count:int. forall next_in:t.
-  forall next_out:t. forall result:(t,us_rep) farray.
-  forall buffer1:(t,us_rep) farray. forall result1:t. forall next_in1:t.
-  (in_range3(count) -> (in_range2(next_in) -> (in_range2(next_out) ->
-  (((result = buffer) and (buffer1 = (buffer[next_in <- { us_split_fields1 =
-  { rec__temperature_buffer14__temperature_record__time_stamp = item;
-  rec__temperature_buffer14__temperature_record__value = item1 } }]))) ->
-  (((result1 = next_in) and (next_in1 = urem(add(next_in, of_int(1)),
-  of_int(8)))) -> ((not (count = 8)) -> in_range3((count + 1)))))))))
+goal WP_parameter_def : in_range3((count + 1))

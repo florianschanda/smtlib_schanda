@@ -1548,7 +1548,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tnum_delimiters_rangeB
 
-predicate in_range4(x1: int) = (((-128) <= x1) and (x1 <= 127))
+predicate in_range4(x1: int) = (((- 128) <= x1) and (x1 <= 127))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1616,46 +1616,248 @@ function t11b__ref___projection(a: t11b__ref) : tnum_delimiters_rangeB =
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic min1 : t
+
+logic i : int
+
+logic step_function__minimum_until_point__result : t
+
+logic temp___277 : t
+
+logic temp___276 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : function_range
+
+logic o2 : float1
+
+logic o3 : function_range
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : int
+
+logic j1 : int
+
+logic o7 : int
+
+logic o8 : function_range
+
+logic o9 : float1
+
+logic o10 : function_range
+
+logic o11 : float1
+
+logic o12 : float1
+
+logic o13 : t
+
+logic o14 : bool
+
+logic j2 : int
+
+logic o15 : int
+
+logic o16 : function_range
+
+logic o17 : float1
+
+logic o18 : function_range
+
+logic o19 : float1
+
+logic o20 : function_range
+
+logic o21 : int
+
+logic i1 : int
+
+logic o22 : int
+
+logic o23 : function_range
+
+logic o24 : float1
+
+logic o25 : function_range
+
+logic o26 : float1
+
+logic o27 : function_range
+
+logic o28 : int
+
+logic i2 : int
+
+logic o29 : int
+
+logic o30 : function_range
+
+logic o31 : float1
+
+logic o32 : function_range
+
+logic o33 : float1
+
+logic o34 : float1
+
+logic o35 : t
+
+logic o36 : bool
+
+logic o37 : bool
+
+logic result : t
+
+logic min2 : t
+
+logic result1 : int
+
+logic i3 : int
+
+logic min3 : t
+
+logic i4 : int
+
+logic result2 : bool
+
+logic result3 : t
+
+logic min4 : t
+
+logic result4 : int
+
+logic i5 : int
+
+logic min5 : t
+
+logic i6 : int
+
+logic min6 : t
+
+logic i7 : int
+
+logic min7 : t
+
+logic i8 : int
+
+logic min8 : t
+
+logic i9 : int
+
+logic result5 : t
+
+logic step_function__minimum_until_point__result1 : t
+
+logic step_function__minimum_until_point__result2 : t
+
+logic step_function__minimum_until_point__result3 : t
+
+logic min9 : t
+
+logic i10 : int
+
+logic step_function__minimum_until_point__result4 : t
+
+logic min10 : t
+
+logic i11 : int
+
+logic step_function__minimum_until_point__result5 : t
+
+logic result6 : bool
+
+axiom H : in_range3(x)
+
+axiom H1 : (is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun;
+  rec__step_function__step_function_t__step = sfun1 } }) = true)
+
+axiom H2 : (result = min1)
+
+axiom H3 :
+  (min2 = to_rep((((sfun1[0])).us_split_fields1).rec__step_function__delimiter_entry__value))
+
+axiom H4 : tqtisFinite(min2)
+
+axiom H5 : (to_rep1(sfun) = r10b)
+
+axiom H6 : in_range2(r10b)
+
+axiom H7 : (result1 = i)
+
+axiom H8 : (i3 = 0)
+
+axiom H9 : (0 <= i3)
+
+axiom H10 : (i3 <= r10b)
+
+axiom H11 :
+  (forall j3:int. (((0 <= j3) and (j3 <= (i4 - 1))) ->
+  ((to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  le(min3,
+  to_rep((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__value)))))
+
+axiom H12 :
+  (exists j3:int. (((0 <= j3) and (j3 <= i4)) and
+  ((to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
+  eq(min3,
+  to_rep((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__value)))))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H13 : ((((0 <= r10b) -> dynamic_property(0, r10b, i4)) and
+  (le(neg(fliteral1), fliteral1) -> tqtisFinite(min3))) and ((0 <= i4) and
+  (i4 <= r10b)))
+
+axiom H14 :
+  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  (lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  min3) -> (min3 = result3)))
+
+axiom H15 :
+  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  (lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  min3) ->
+  (min4 = to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value))))
+
+axiom H16 :
+  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+  ((not lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  min3)) -> (min4 = min3)))
+
+axiom H17 :
+  ((not (to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
+  (forall j3:int. ((((i4 + 1) <= j3) and (j3 <= to_rep1(sfun))) ->
+  (to_rep2((((sfun1[(j3 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))
+
+axiom H18 :
+  ((not (to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
+  (min4 = min3))
+
+axiom H19 : (not (i4 = r10b))
+
+axiom H20 : (result4 = i4)
+
+axiom H21 : (i5 = (i4 + 1))
+
+logic j3 : int
+
+axiom H22 : (0 <= j3)
+
+axiom H23 : (j3 <= (i5 - 1))
+
+axiom H24 :
+  (to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min1:t. forall i:int. forall result:t. forall min2:t.
-  forall result1:int. forall i1:int. forall min3:t. forall i2:int.
-  forall result2:t. forall min4:t. forall result3:int. forall i3:int.
-  (in_range3(x) -> ((is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun;
-  rec__step_function__step_function_t__step = sfun1 } }) = true) -> ((({
-  t__content = result } = { t__content = min1 }) and
-  (min2 = to_rep((((sfun1[0])).us_split_fields1).rec__step_function__delimiter_entry__value))) ->
-  (tqtisFinite(min2) -> (((to_rep1(sfun) = r10b) and in_range2(r10b)) -> ((({
-  int__content = result1 } = { int__content = i }) and (i1 = 0)) ->
-  (((0 <= i1) and (i1 <= r10b)) ->
-  (((forall j:int. (((0 <= j) and (j <= (i2 - 1))) ->
-    ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-    le(min3,
-    to_rep((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__value))))) and
-  (exists j:int. (((0 <= j) and (j <= i2)) and
-  ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
-  eq(min3,
-  to_rep((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) ->
-  ((((((0 <= r10b) -> dynamic_property(0, r10b, i2)) and (le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(min3))) and ((0 <= i2) and (i2 <= r10b))) and
-  ((((to_rep2((((sfun1[i2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
-  ((lt(to_rep((((sfun1[i2])).us_split_fields1).rec__step_function__delimiter_entry__value),
-  min3) and ((min3 = result2) and
-  (min4 = to_rep((((sfun1[i2])).us_split_fields1).rec__step_function__delimiter_entry__value)))) or
-  ((not lt(to_rep((((sfun1[i2])).us_split_fields1).rec__step_function__delimiter_entry__value),
-  min3)) and (min4 = min3)))) or
-  ((not (to_rep2((((sfun1[i2])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) and
-  ((forall j:int. ((((i2 + 1) <= j) and (j <= to_rep1(sfun))) ->
-   (to_rep2((((sfun1[(j - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))) and
-  (min4 = min3)))) and ((not (i2 = r10b)) and ((result3 = i2) and
-  (i3 = (i2 + 1)))))) ->
-  (forall j:int. (((0 <= j) and (j <= (i3 - 1))) ->
-  ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-  le(min4,
-  to_rep((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__value)))))))))))))))
+goal WP_parameter_def : le(min4,
+  to_rep((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__value))

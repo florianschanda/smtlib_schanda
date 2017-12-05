@@ -4445,7 +4445,7 @@ logic contains__function_guard1 : bool, int, us_rep1, int -> prop
 
 type element_type
 
-predicate in_range44(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range44(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -6094,36 +6094,93 @@ logic container54 : int
 
 logic attr__ATTRIBUTE_ADDRESS16 : int
 
+logic v__split_fields : capacity_range1
+
+logic v__split_fields1 : us_main_type
+
+logic v__split_fields2 : us_private
+
+logic hnco__test2__v_type_owner__append__2__container__fields : capacity_range1
+
+logic hnco__test2__v_type_owner__append__2__container__fields1 : us_main_type
+
+logic hnco__test2__v_type_owner__append__2__container__fields2 : us_private
+
+logic result : capacity_range1
+
+logic result1 : us_main_type
+
+logic result2 : us_private
+
+logic v__split_fields3 : capacity_range1
+
+logic v__split_fields4 : us_main_type
+
+logic v__split_fields5 : us_private
+
+logic hnco__test2__v_type_owner__append__2__container__fields3 : capacity_range1
+
+logic hnco__test2__v_type_owner__append__2__container__fields4 : us_main_type
+
+logic hnco__test2__v_type_owner__append__2__container__fields5 : us_private
+
+logic result3 : capacity_range1
+
+logic result4 : us_main_type
+
+logic result5 : us_private
+
+logic v__split_fields6 : capacity_range1
+
+logic v__split_fields7 : us_main_type
+
+logic v__split_fields8 : us_private
+
+axiom H : ((10 = to_rep1(v__split_discrs)) and
+  (10 = to_rep(v__split_fields)))
+
+axiom H1 :
+  (to_rep1(v__split_discrs) = to_rep(hnco__test2__v_type_owner__append__2__container__fields))
+
+axiom H2 : (result = v__split_fields)
+
+axiom H3 : (result1 = v__split_fields1)
+
+axiom H4 : (result2 = v__split_fields2)
+
+axiom H5 :
+  (hnco__test2__v_type_owner__append__2__container__fields = v__split_fields3)
+
+axiom H6 :
+  (hnco__test2__v_type_owner__append__2__container__fields1 = v__split_fields4)
+
+axiom H7 :
+  (extract__ext__19(hnco__test2__v_type_owner__append__2__container__fields2) = v__split_fields5)
+
+axiom H8 :
+  (to_rep1(v__split_discrs) = to_rep(hnco__test2__v_type_owner__append__2__container__fields3))
+
+axiom H9 : (((result3 = v__split_fields3) and
+  (result4 = v__split_fields4)) and (result5 = v__split_fields5))
+
+axiom H10 :
+  (((v__split_fields6 = hnco__test2__v_type_owner__append__2__container__fields3) and
+  (v__split_fields7 = hnco__test2__v_type_owner__append__2__container__fields4)) and
+  (v__split_fields8 = extract__ext__19(hnco__test2__v_type_owner__append__2__container__fields5)))
+
+axiom H11 : (contains({ us_split_discrs3 = {
+  rec__hnco__test2__v_type_owner__vector_type__capacity = v__split_discrs };
+  us_split_fields3 = {
+  rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
+  us_split_discrs1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity =
+  v__split_fields6 }; us_split_fields1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector =
+  v__split_fields7 } }; rec__ext__ = hide_ext__19(v__split_fields8) };
+  attr__tag = v__attr__tag }, 1) = true)
+
  (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:capacity_range1.
-  forall v__split_fields1:us_main_type. forall v__split_fields2:us_private.
-  forall hnco__test2__v_type_owner__append__2__container__fields:capacity_range1.
-  forall hnco__test2__v_type_owner__append__2__container__fields1:us_main_type.
-  forall hnco__test2__v_type_owner__append__2__container__fields2:us_private.
-  forall result:capacity_range1. forall result1:us_main_type.
-  forall result2:us_private. forall v__split_fields3:capacity_range1.
-  forall v__split_fields4:us_main_type. forall v__split_fields5:us_private.
-  forall hnco__test2__v_type_owner__append__2__container__fields3:capacity_range1.
-  forall hnco__test2__v_type_owner__append__2__container__fields4:us_main_type.
-  forall hnco__test2__v_type_owner__append__2__container__fields5:us_private.
-  forall result3:capacity_range1. forall result4:us_main_type.
-  forall result5:us_private. forall v__split_fields6:capacity_range1.
-  forall v__split_fields7:us_main_type. forall v__split_fields8:us_private.
-  (((10 = to_rep1(v__split_discrs)) and (10 = to_rep(v__split_fields))) ->
-  (((to_rep1(v__split_discrs) = to_rep(hnco__test2__v_type_owner__append__2__container__fields)) and
-  ((((result = v__split_fields) and (result1 = v__split_fields1)) and
-  (result2 = v__split_fields2)) and
-  (((hnco__test2__v_type_owner__append__2__container__fields = v__split_fields3) and
-  (hnco__test2__v_type_owner__append__2__container__fields1 = v__split_fields4)) and
-  (extract__ext__19(hnco__test2__v_type_owner__append__2__container__fields2) = v__split_fields5)))) ->
-  (((to_rep1(v__split_discrs) = to_rep(hnco__test2__v_type_owner__append__2__container__fields3)) and
-  ((((result3 = v__split_fields3) and (result4 = v__split_fields4)) and
-  (result5 = v__split_fields5)) and
-  (((hnco__test2__v_type_owner__append__2__container__fields3 = v__split_fields6) and
-  (hnco__test2__v_type_owner__append__2__container__fields4 = v__split_fields7)) and
-  (extract__ext__19(hnco__test2__v_type_owner__append__2__container__fields5) = v__split_fields8)))) ->
-  ((contains({ us_split_discrs3 = {
+goal WP_parameter_def : (contains({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity = v__split_discrs };
   us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -6132,13 +6189,4 @@ goal WP_parameter_def :
   v__split_fields6 }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector =
   v__split_fields7 } }; rec__ext__ = hide_ext__19(v__split_fields8) };
-  attr__tag = v__attr__tag }, 1) = true) -> (contains({ us_split_discrs3 = {
-  rec__hnco__test2__v_type_owner__vector_type__capacity = v__split_discrs };
-  us_split_fields3 = {
-  rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
-  us_split_discrs1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity =
-  v__split_fields6 }; us_split_fields1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector =
-  v__split_fields7 } }; rec__ext__ = hide_ext__19(v__split_fields8) };
-  attr__tag = v__attr__tag }, 2) = true))))))
+  attr__tag = v__attr__tag }, 2) = true)

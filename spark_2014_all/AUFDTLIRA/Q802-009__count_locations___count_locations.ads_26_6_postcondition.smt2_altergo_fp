@@ -505,82 +505,186 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "count_locations.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall st_count:int. forall lowest_max:int. forall st:int.
-  forall count_locations__check_selected_locations__result:bool.
-  forall temp___175:int. forall temp___174:int. forall temp___173:int.
-  forall o:int. forall result:int. forall st_count1:int. forall result1:int.
-  forall lowest_max1:int. forall result2:int. forall st1:int.
-  forall st_count2:int. forall lowest_max2:int. forall st2:int.
-  forall result3:int. forall st_count3:int. forall result4:int.
-  forall lowest_max3:int. forall st_count4:int. forall lowest_max4:int.
-  forall st3:int. forall st_count5:int. forall lowest_max5:int.
-  forall st4:int. forall st_count6:int. forall lowest_max6:int.
-  forall st5:int. forall st_count7:int. forall lowest_max7:int.
-  forall st6:int. forall result5:bool.
-  forall count_locations__check_selected_locations__result1:bool.
-  forall count_locations__check_selected_locations__result2:bool.
-  forall count_locations__check_selected_locations__result3:bool.
-  forall st_count8:int. forall lowest_max8:int. forall st7:int.
-  forall count_locations__check_selected_locations__result4:bool.
-  forall st_count9:int. forall lowest_max9:int. forall st8:int.
-  forall count_locations__check_selected_locations__result5:bool.
-  (forall result6:bool. (((((({ int__content = result } = { int__content =
-  st_count }) and (st_count1 = 0)) and (in_range3(st_count1) and ((({
-  int__content = result1 } = { int__content = lowest_max }) and
-  (lowest_max1 = 2147483647)) and (in_range1(lowest_max1) and (((({
-  int__content = result2 } = { int__content = st }) and (st1 = 1)) and
-  ((((1 <= st1) and (st1 <= 100)) and ((((temp___175 = lowest_max1) and
-  ((temp___174 = st_count1) and ((temp___173 = st1) and
+logic st_count : int
+
+logic lowest_max : int
+
+logic st : int
+
+logic count_locations__check_selected_locations__result : bool
+
+logic temp___175 : int
+
+logic temp___174 : int
+
+logic temp___173 : int
+
+logic s : int
+
+logic o : int
+
+logic s1 : int
+
+logic o1 : int
+
+logic o2 : positive
+
+logic o3 : int
+
+logic o4 : bool
+
+logic s2 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic result : int
+
+logic st_count1 : int
+
+logic result1 : int
+
+logic lowest_max1 : int
+
+logic result2 : int
+
+logic st1 : int
+
+logic st_count2 : int
+
+logic lowest_max2 : int
+
+logic st2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic st_count3 : int
+
+logic result6 : int
+
+logic lowest_max3 : int
+
+logic result7 : int
+
+logic st3 : int
+
+logic st_count4 : int
+
+logic lowest_max4 : int
+
+logic st4 : int
+
+logic st_count5 : int
+
+logic lowest_max5 : int
+
+logic st5 : int
+
+logic st_count6 : int
+
+logic lowest_max6 : int
+
+logic st6 : int
+
+logic st_count7 : int
+
+logic lowest_max7 : int
+
+logic st7 : int
+
+logic result8 : bool
+
+logic count_locations__check_selected_locations__result1 : bool
+
+logic count_locations__check_selected_locations__result2 : bool
+
+logic count_locations__check_selected_locations__result3 : bool
+
+logic st_count8 : int
+
+logic lowest_max8 : int
+
+logic st8 : int
+
+logic count_locations__check_selected_locations__result4 : bool
+
+logic st_count9 : int
+
+logic lowest_max9 : int
+
+logic st9 : int
+
+logic count_locations__check_selected_locations__result5 : bool
+
+logic result9 : bool
+
+axiom H : ((((result = st_count) and (st_count1 = 0)) and
+  (in_range3(st_count1) and (((result1 = lowest_max) and
+  (lowest_max1 = 2147483647)) and (in_range1(lowest_max1) and
+  ((((result2 = st) and (st1 = 1)) and ((((1 <= st1) and (st1 <= 100)) ->
+  ((((temp___175 = lowest_max1) and ((temp___174 = st_count1) and
+  ((temp___173 = st1) and
   (((count_selected_locations(sel) = (st_count2 + partial_count_selected_locations(sel,
   st2))) and
-  ((forall s:int. (((1 <= s) and (s <= (st2 - 1))) -> (((sel[s]) = true) ->
-   (lowest_max2 <= to_rep((max[s])))))) and
-  ((((forall s:int. (((1 <= s) and (s <= (st2 - 1))) ->
-     (not ((sel[s]) = true)))) and
-  (lowest_max2 = 2147483647)) or
-  (exists s:int. (((1 <= s) and (s <= (st2 - 1))) and (((sel[s]) = true) and
-  (to_rep((max[s])) = lowest_max2))))) and (st_count2 <  st2)))) and
-  ((((((1 <= 100) -> in_range4(st2)) and ((0 <= 100) ->
-  in_range3(st_count2))) and ((0 <= 2147483647) ->
+  ((forall s3:int. (((1 <= s3) and (s3 <= (st2 - 1))) ->
+   (((sel[s3]) = true) -> (lowest_max2 <= to_rep((max[s3])))))) and
+  ((((forall s3:int. (((1 <= s3) and (s3 <= (st2 - 1))) ->
+     (not ((sel[s3]) = true)))) and (lowest_max2 = 2147483647)) or
+  (exists s3:int. (((1 <= s3) and (s3 <= (st2 - 1))) and
+  (((sel[s3]) = true) and (to_rep((max[s3])) = lowest_max2))))) and
+  (st_count2 <  st2)))) and ((((((1 <= 100) -> in_range4(st2)) and
+  ((0 <= 100) -> in_range3(st_count2))) and ((0 <= 2147483647) ->
   in_range1(lowest_max2))) and ((1 <= st2) and (st2 <= 100))) and
-  (((((sel[st2]) = true) and ((((o = (st_count2 + 1)) and
-  in_range3((st_count2 + 1))) and ((st_count2 = result3) and
-  (st_count3 = o))) and (((to_rep((max[st2])) <  lowest_max2) and
-  ((lowest_max2 = result4) and (lowest_max3 = to_rep((max[st2]))))) or
-  ((not (to_rep((max[st2])) <  lowest_max2)) and
-  (lowest_max3 = lowest_max2))))) or ((not ((sel[st2]) = true)) and
+  (((((sel[st2]) = true) -> ((((o6 = (st_count2 + 1)) and
+  in_range3((st_count2 + 1))) and ((st_count2 = result5) and
+  (st_count3 = o6))) and (((to_rep((max[st2])) <  lowest_max2) ->
+  ((lowest_max2 = result6) and (lowest_max3 = to_rep((max[st2]))))) and
+  ((not (to_rep((max[st2])) <  lowest_max2)) ->
+  (lowest_max3 = lowest_max2))))) and ((not ((sel[st2]) = true)) ->
   ((lowest_max3 = lowest_max2) and (st_count3 = st_count2)))) and
-  (st2 = 100))))))) and (((st2 = st3) and ((lowest_max3 = lowest_max4) and
-  (st_count3 = st_count4))) and ((st4 = st2) and
-  ((lowest_max5 = lowest_max3) and (st_count5 = st_count3))))) and ((({
-  int__content = st5 } = { int__content = st3 }) and (({ int__content =
-  lowest_max6 } = { int__content = lowest_max4 }) and ({ int__content =
-  st_count6 } = { int__content = st_count4 }))) and ((st6 = st4) and
-  ((lowest_max7 = lowest_max5) and (st_count7 = st_count5)))))) or
-  ((not ((1 <= st1) and (st1 <= 100))) and (((st1 = st5) and
+  (st2 = 100))))))) and (((st2 = st4) and ((lowest_max3 = lowest_max4) and
+  (st_count3 = st_count4))) and ((st5 = st2) and
+  ((lowest_max5 = lowest_max3) and (st_count5 = st_count3))))) and
+  (((st6 = st4) and ((lowest_max6 = lowest_max4) and
+  (st_count6 = st_count4))) and ((st7 = st5) and
+  ((lowest_max7 = lowest_max5) and (st_count7 = st_count5)))))) and
+  ((not ((1 <= st1) and (st1 <= 100))) -> (((st1 = st6) and
   ((lowest_max1 = lowest_max6) and (st_count1 = st_count6))) and
-  ((st6 = st1) and ((lowest_max7 = lowest_max1) and
+  ((st7 = st1) and ((lowest_max7 = lowest_max1) and
   (st_count7 = st_count1))))))) and
   ((st_count6 = count_selected_locations(sel)) and
-  ((forall s:int. (((1 <= s) and (s <= 100)) -> (((sel[s]) = true) ->
-   (lowest_max6 <= to_rep((max[s])))))) and
+  ((forall s3:int. (((1 <= s3) and (s3 <= 100)) -> (((sel[s3]) = true) ->
+   (lowest_max6 <= to_rep((max[s3])))))) and
   (((count_locations__check_selected_locations__result1 = count_locations__check_selected_locations__result2) and
   (count_locations__check_selected_locations__result3 = count_locations__check_selected_locations__result1)) and
-  ((result5 = count_locations__check_selected_locations__result) and
-  (((st_count6 <= lowest_max6) and
-  (count_locations__check_selected_locations__result1 = true)) or
-  ((not (st_count6 <= lowest_max6)) and
+  ((result8 = count_locations__check_selected_locations__result) and
+  (((st_count6 <= lowest_max6) ->
+  (count_locations__check_selected_locations__result1 = true)) and
+  ((not (st_count6 <= lowest_max6)) ->
   (count_locations__check_selected_locations__result1 = false)))))))))))) and
-  (((count_locations__check_selected_locations__result2 = count_locations__check_selected_locations__result4) and
-  (({ int__content = st7 } = { int__content = st5 }) and (({ int__content =
-  lowest_max8 } = { int__content = lowest_max6 }) and ({ int__content =
-  st_count8 } = { int__content = st_count6 })))) and
+  (((count_locations__check_selected_locations__result4 = count_locations__check_selected_locations__result2) and
+  ((st8 = st6) and ((lowest_max8 = lowest_max6) and
+  (st_count8 = st_count6)))) and
   ((count_locations__check_selected_locations__result5 = count_locations__check_selected_locations__result3) and
-  ((st8 = st6) and ((lowest_max9 = lowest_max7) and
-  (st_count9 = st_count7)))))) and
-  (result6 = count_locations__check_selected_locations__result4)) ->
-  ((count_locations__check_selected_locations__result4 = true) ->
-  (forall s:int. (((1 <= s) and (s <= 100)) -> (((sel[s]) = true) ->
-  (count_selected_locations(sel) <= to_rep((max[s]))))))))))
+  ((st9 = st7) and ((lowest_max9 = lowest_max7) and
+  (st_count9 = st_count7))))))
+
+axiom H1 : (result9 = count_locations__check_selected_locations__result4)
+
+axiom H2 : (count_locations__check_selected_locations__result4 = true)
+
+logic s3 : int
+
+axiom H3 : (1 <= s3)
+
+axiom H4 : (s3 <= 100)
+
+axiom H5 : ((sel[s3]) = true)
+
+ (* File "count_locations.ads", line 22, characters 0-0 *)
+goal WP_parameter_def : (count_selected_locations(sel) <= to_rep((max[s3])))

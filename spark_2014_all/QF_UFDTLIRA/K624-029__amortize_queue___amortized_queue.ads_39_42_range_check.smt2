@@ -43,6 +43,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (= capacity 1000))
 (define-fun dynamic_invariant1 ((temp___expr_213 Int) (temp___is_init_210 Bool) (temp___skip_constant_211 Bool) (temp___do_toplevel_212 Bool)) Bool (=> (or (= temp___is_init_210 true) (<= 0 1000)) (in_range1 temp___expr_213)))
+(declare-const us Int)
 (assert (in_range capacity))
 (assert (not (in_range1 1000)))
 (check-sat)

@@ -436,7 +436,7 @@ logic size__function_guard : int, us_rep -> prop
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -3003,24 +3003,43 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep1(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,element) farray.
-  forall s__split_fields1:less_than_max. forall s__split_fields2:us_private.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  (in_range1(e) -> ((not (length(get_model({ us_split_fields1 = {
+logic s__split_fields : (int,element) farray
+
+logic s__split_fields1 : less_than_max
+
+logic s__split_fields2 : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+axiom H : in_range1(e)
+
+axiom H1 : (not (length(get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })) = 0)) ->
-  (((((((1 <= 1) and (o = ((1 - 1) + 1))) or ((not (1 <= 1)) and
-  (o = 0))) and ((((to_rep2(first((get_model({ us_split_fields1 = {
+  s__split_fields2 }; attr__tag = s__attr__tag })) = 0))
+
+axiom H2 : ((1 <= 1) -> (o = ((1 - 1) + 1)))
+
+axiom H3 : ((not (1 <= 1)) -> (o = 0))
+
+axiom H4 : ((to_rep2(first((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
   s__split_fields2 }; attr__tag = s__attr__tag
   })).rt)) <= to_rep2(last((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })).rt))) and
+  s__split_fields2 }; attr__tag = s__attr__tag })).rt))) ->
   (o1 = ((to_rep2(last((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
@@ -3028,17 +3047,25 @@ goal WP_parameter_def :
   })).rt)) - to_rep2(first((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })).rt))) + 1))) or
-  ((not (to_rep2(first((get_model({ us_split_fields1 = {
+  s__split_fields2 }; attr__tag = s__attr__tag })).rt))) + 1)))
+
+axiom H5 : ((not (to_rep2(first((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
   s__split_fields2 }; attr__tag = s__attr__tag
   })).rt)) <= to_rep2(last((get_model({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })).rt)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep2(first((get_model({ us_split_fields1 =
-  { rec__stackp__stack_root__content = s__split_fields;
+  s__split_fields2 }; attr__tag = s__attr__tag })).rt)))) -> (o1 = 0))
+
+axiom H6 : (o2 = (o1 + o))
+
+axiom H7 : (o3 = (to_rep2(first((get_model({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })).rt)) + o2))) and
-  (o4 = (o3 - 1))) -> in_range(o4)))))
+  s__split_fields2 }; attr__tag = s__attr__tag })).rt)) + o2))
+
+axiom H8 : (o4 = (o3 - 1))
+
+ (* File "stackp.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : in_range(o4)

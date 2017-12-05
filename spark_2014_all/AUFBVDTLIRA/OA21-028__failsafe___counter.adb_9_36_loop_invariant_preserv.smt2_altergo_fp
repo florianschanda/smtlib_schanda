@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -849,29 +849,135 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic inputs : (t,bool) farray
+
+logic res : t
+
+logic counter__model__current_chain_length__result : t
+
+logic o : t
+
+logic temp___228 : t
+
+logic temp___229 : t
+
+logic i : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : bool
+
+logic i1 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : bool
+
+logic res2 : t
+
+logic temp___2291 : t
+
+logic result2 : t
+
+logic temp___2292 : t
+
+logic result3 : t
+
+logic res3 : t
+
+logic result4 : bool
+
+logic res4 : t
+
+logic temp___2293 : t
+
+logic res5 : t
+
+logic temp___2294 : t
+
+logic res6 : t
+
+logic res7 : t
+
+logic res8 : t
+
+logic res9 : t
+
+logic result5 : t
+
+logic counter__model__current_chain_length__result1 : t
+
+logic counter__model__current_chain_length__result2 : t
+
+logic counter__model__current_chain_length__result3 : t
+
+logic res10 : t
+
+logic counter__model__current_chain_length__result4 : t
+
+logic res11 : t
+
+logic counter__model__current_chain_length__result5 : t
+
+logic result6 : bool
+
+axiom H : (result = res)
+
+axiom H1 : (res1 = of_int(0))
+
+axiom H2 : in_range1(res1)
+
+axiom H3 : (ult(res1, of_int(10)) -> (ule(of_int(1), sub(of_int(10),
+  res1)) and ule(sub(of_int(10), res1), of_int(10))))
+
+axiom H4 : (ult(res1, of_int(10)) -> (o = sub(of_int(10), res1)))
+
+axiom H5 : (ult(res1, of_int(10)) -> (result1 = (inputs[o])))
+
+axiom H6 : ((not ult(res1, of_int(10))) -> (result1 = false))
+
+axiom H7 : (result1 = true)
+
+axiom H8 :
+  (forall i2:t. ((ule(sub(of_int(10), res2), i2) and ule(i2, of_int(10))) ->
+  ((inputs[i2]) = true)))
+
+axiom H9 : ((ule(of_int(0), of_int(10)) -> in_range1(res2)) and (ult(res2,
+  of_int(10)) and ((inputs[sub(of_int(10), res2)]) = true)))
+
+axiom H10 : (temp___2291 = result2)
+
+axiom H11 : (temp___2292 = res2)
+
+axiom H12 : ((o1 = add(res2, of_int(1))) and in_range1(add(res2, of_int(1))))
+
+axiom H13 : (res2 = result3)
+
+axiom H14 : (res3 = o1)
+
+axiom H15 : (ult(res3, of_int(10)) -> (ule(of_int(1), sub(of_int(10),
+  res3)) and ule(sub(of_int(10), res3), of_int(10))))
+
+axiom H16 : (ult(res3, of_int(10)) -> (o2 = sub(of_int(10), res3)))
+
+axiom H17 : (ult(res3, of_int(10)) -> (o3 = (inputs[o2])))
+
+axiom H18 : ((not ult(res3, of_int(10))) -> (o3 = false))
+
+axiom H19 : (((not (o3 = true)) -> (result4 = true)) and ((o3 = true) ->
+  (result4 = false)))
+
+axiom H20 : (not (result4 = true))
+
+logic i2 : t
+
+axiom H21 : ule(sub(of_int(10), res3), i2)
+
+axiom H22 : ule(i2, of_int(10))
+
  (* File "counter.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall inputs:(t,bool) farray. forall res:t. forall o:t. forall o1:t.
-  forall o2:t. forall o3:bool. forall result:t. forall res1:t.
-  forall result1:bool. forall res2:t. forall temp___229:t. forall result2:t.
-  forall temp___2291:t. forall result3:t. forall res3:t. forall result4:bool.
-  ((({ t__content = result } = { t__content = res }) and
-  (res1 = of_int(0))) -> (in_range1(res1) -> (((ult(res1, of_int(10)) and
-  (((ule(of_int(1), sub(of_int(10), res1)) and ule(sub(of_int(10), res1),
-  of_int(10))) and (o = sub(of_int(10), res1))) and
-  (result1 = (inputs[o])))) or ((not ult(res1, of_int(10))) and
-  (result1 = false))) -> ((result1 = true) ->
-  ((forall i:t. ((ule(sub(of_int(10), res2), i) and ule(i, of_int(10))) ->
-   ((inputs[i]) = true))) ->
-  ((((ule(of_int(0), of_int(10)) -> in_range1(res2)) and (ult(res2,
-  of_int(10)) and ((inputs[sub(of_int(10), res2)]) = true))) and
-  (((temp___229 = result2) and (temp___2291 = res2)) and ((((o1 = add(res2,
-  of_int(1))) and in_range1(add(res2, of_int(1)))) and ((res2 = result3) and
-  (res3 = o1))) and ((((ult(res3, of_int(10)) and (((ule(of_int(1),
-  sub(of_int(10), res3)) and ule(sub(of_int(10), res3), of_int(10))) and
-  (o2 = sub(of_int(10), res3))) and (o3 = (inputs[o2])))) or ((not ult(res3,
-  of_int(10))) and (o3 = false))) and (((not (o3 = true)) and
-  (result4 = true)) or ((o3 = true) and (result4 = false)))) and
-  (not (result4 = true)))))) ->
-  (forall i:t. ((ule(sub(of_int(10), res3), i) and ule(i, of_int(10))) ->
-  ((inputs[i]) = true))))))))))
+goal WP_parameter_def : ((inputs[i2]) = true)

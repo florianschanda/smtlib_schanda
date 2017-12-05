@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -173,7 +173,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type element
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -507,15 +507,15 @@ logic bool_eq9 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq9(a, b)].
-  (((((to_rep3(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep3(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
-  (bool_eq7(((a).us_split_fields1).rec__stacks__stack__data,
-  ((b).us_split_fields1).rec__stacks__stack__data) = true)) -> (bool_eq9(a,
-  b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep3(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
+  ((((to_rep3(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep3(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
   (bool_eq7(((a).us_split_fields1).rec__stacks__stack__data,
   ((b).us_split_fields1).rec__stacks__stack__data) = true))) -> (bool_eq9(a,
+  b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep3(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
+  (bool_eq7(((a).us_split_fields1).rec__stacks__stack__data,
+  ((b).us_split_fields1).rec__stacks__stack__data) = true)))) -> (bool_eq9(a,
   b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -749,55 +749,225 @@ axiom size__def_axiom :
   rec__stacks__stack__top = s1; rec__stacks__stack__data = { elts = s2; rt =
   s3 }; rec__ext__ = s4 }; attr__tag = s5 }) = to_rep(s1))))
 
- (* File "stacks.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mystate:int. forall s__split_fields:natural.
-  forall s__split_fields1:(int,element) farray. forall s__split_fields2:t.
-  forall s__split_fields3:us_private. forall o:int. forall o1:natural.
-  forall o2:natural. forall o3:(int,element) farray. forall o4:t.
-  forall o5:us_private. forall temp___210:positive.
-  forall temp___2101:natural. forall temp___2102:(int,element) farray.
-  forall temp___2103:t. forall temp___2104:us_private.
-  forall temp___2105:int. forall o6:element. forall mystate1:int.
-  forall result:bool. forall mystate2:int. forall result1:natural.
-  forall result2:(int,element) farray. forall result3:t.
-  forall result4:us_private. forall s__split_fields4:natural.
-  forall s__split_fields5:(int,element) farray. forall s__split_fields6:t.
-  forall s__split_fields7:us_private. ((dynamic_property1(1,
-  to_rep3(s__split_discrs), to_rep2(first(s__split_fields2)),
-  to_rep2(last(s__split_fields2))) and
+logic mystate : int
+
+logic s__split_fields : natural
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : t
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : (int,element) farray
+
+logic o4 : t
+
+logic o5 : us_private
+
+logic temp___210 : positive
+
+logic temp___2101 : natural
+
+logic temp___2102 : (int,element) farray
+
+logic temp___2103 : t
+
+logic temp___2104 : us_private
+
+logic temp___2105 : int
+
+logic o6 : element
+
+logic o7 : int
+
+logic o8 : (int,element) farray
+
+logic o9 : (int,element) farray
+
+logic o10 : t
+
+logic o11 : natural
+
+logic o12 : (int,element) farray
+
+logic o13 : t
+
+logic o14 : us_private
+
+logic temp___214 : positive
+
+logic temp___2141 : natural
+
+logic temp___2142 : (int,element) farray
+
+logic temp___2143 : t
+
+logic temp___2144 : us_private
+
+logic temp___2145 : int
+
+logic mystate1 : int
+
+logic s__split_fields4 : natural
+
+logic s__split_fields5 : (int,element) farray
+
+logic s__split_fields6 : t
+
+logic s__split_fields7 : us_private
+
+logic result : bool
+
+logic mystate2 : int
+
+logic result1 : natural
+
+logic result2 : (int,element) farray
+
+logic result3 : t
+
+logic result4 : us_private
+
+logic s__split_fields8 : natural
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : t
+
+logic s__split_fields11 : us_private
+
+logic result5 : natural
+
+logic result6 : (int,element) farray
+
+logic result7 : t
+
+logic result8 : us_private
+
+logic s__split_fields12 : natural
+
+logic s__split_fields13 : (int,element) farray
+
+logic s__split_fields14 : t
+
+logic s__split_fields15 : us_private
+
+logic mystate3 : int
+
+logic s__split_fields16 : natural
+
+logic s__split_fields17 : (int,element) farray
+
+logic s__split_fields18 : t
+
+logic s__split_fields19 : us_private
+
+logic mystate4 : int
+
+logic s__split_fields20 : natural
+
+logic s__split_fields21 : (int,element) farray
+
+logic s__split_fields22 : t
+
+logic s__split_fields23 : us_private
+
+logic mystate5 : int
+
+logic s__split_fields24 : natural
+
+logic s__split_fields25 : (int,element) farray
+
+logic s__split_fields26 : t
+
+logic s__split_fields27 : us_private
+
+logic mystate6 : int
+
+logic s__split_fields28 : natural
+
+logic s__split_fields29 : (int,element) farray
+
+logic s__split_fields30 : t
+
+logic s__split_fields31 : us_private
+
+axiom H : (dynamic_property1(1, to_rep3(s__split_discrs),
+  to_rep2(first(s__split_fields2)), to_rep2(last(s__split_fields2))) and
   ((to_rep2(first(s__split_fields2)) = 1) and
-  (to_rep2(last(s__split_fields2)) = to_rep3(s__split_discrs)))) ->
-  (in_range3(e) -> (in_range2(mystate) -> ((not (is_full({ us_split_discrs1 =
-  { rec__stacks__stack__max = s__split_discrs }; us_split_fields1 = {
-  rec__stacks__stack__top = s__split_fields; rec__stacks__stack__data = {
-  elts = s__split_fields1; rt = s__split_fields2 }; rec__ext__ =
-  s__split_fields3 }; attr__tag = s__attr__tag }) = true)) ->
-  ((((result = is_full({ us_split_discrs1 = { rec__stacks__stack__max =
+  (to_rep2(last(s__split_fields2)) = to_rep3(s__split_discrs))))
+
+axiom H1 : in_range3(e)
+
+axiom H2 : in_range2(mystate)
+
+axiom H3 : (not (is_full({ us_split_discrs1 = { rec__stacks__stack__max =
   s__split_discrs }; us_split_fields1 = { rec__stacks__stack__top =
   s__split_fields; rec__stacks__stack__data = { elts = s__split_fields1; rt =
   s__split_fields2 }; rec__ext__ = s__split_fields3 }; attr__tag =
-  s__attr__tag })) and ((result = true) <-> (size({ us_split_discrs1 = {
+  s__attr__tag }) = true))
+
+axiom H4 : ((result = is_full({ us_split_discrs1 = {
   rec__stacks__stack__max = s__split_discrs }; us_split_fields1 = {
   rec__stacks__stack__top = s__split_fields; rec__stacks__stack__data = {
   elts = s__split_fields1; rt = s__split_fields2 }; rec__ext__ =
-  s__split_fields3 }; attr__tag = s__attr__tag
-  }) = to_rep3(s__split_discrs)))) and ((not (result = true)) and
-  ((mystate2 = mystate) and (mystate2 = mystate1)))) ->
-  (((((((o = (to_rep(s__split_fields) + 1)) and
-  in_range((to_rep(s__split_fields) + 1))) and (to_rep(o1) = o)) and
-  ((o1 = o2) and (((s__split_fields1 = o3) and (s__split_fields2 = o4)) and
-  (s__split_fields3 = o5)))) and ((s__split_discrs = temp___210) and
-  (((temp___2101 = o2) and (((temp___2102 = o3) and (temp___2103 = o4)) and
-  (temp___2104 = o5))) and (s__attr__tag = temp___2105)))) and ((({
-  us_split_fields__content = { rec__stacks__stack__top = result1;
-  rec__stacks__stack__data = { elts = result2; rt = result3 }; rec__ext__ =
-  result4 } } = { us_split_fields__content = { rec__stacks__stack__top =
-  s__split_fields; rec__stacks__stack__data = { elts = s__split_fields1; rt =
-  s__split_fields2 }; rec__ext__ = s__split_fields3 } }) and
-  ((temp___2101 = s__split_fields4) and
-  (((temp___2102 = s__split_fields5) and
-  (temp___2103 = s__split_fields6)) and
-  (temp___2104 = s__split_fields7)))) and (s__split_discrs = temp___210))) ->
-  ((to_rep1(o6) = e) ->
-  (to_rep2(first(s__split_fields6)) <= to_rep(s__split_fields4))))))))))
+  s__split_fields3 }; attr__tag = s__attr__tag })) and ((result = true) <->
+  (size({ us_split_discrs1 = { rec__stacks__stack__max = s__split_discrs };
+  us_split_fields1 = { rec__stacks__stack__top = s__split_fields;
+  rec__stacks__stack__data = { elts = s__split_fields1; rt = s__split_fields2
+  }; rec__ext__ = s__split_fields3 }; attr__tag = s__attr__tag
+  }) = to_rep3(s__split_discrs))))
+
+axiom H5 : (not (result = true))
+
+axiom H6 : (mystate2 = mystate)
+
+axiom H7 : (mystate2 = mystate1)
+
+axiom H8 : ((o = (to_rep(s__split_fields) + 1)) and
+  in_range((to_rep(s__split_fields) + 1)))
+
+axiom H9 : (to_rep(o1) = o)
+
+axiom H10 : (o1 = o2)
+
+axiom H11 : (s__split_fields1 = o3)
+
+axiom H12 : (s__split_fields2 = o4)
+
+axiom H13 : (s__split_fields3 = o5)
+
+axiom H14 : (s__split_discrs = temp___210)
+
+axiom H15 : (temp___2101 = o2)
+
+axiom H16 : (temp___2102 = o3)
+
+axiom H17 : (temp___2103 = o4)
+
+axiom H18 : (temp___2104 = o5)
+
+axiom H19 : (s__attr__tag = temp___2105)
+
+axiom H20 : ((result1 = s__split_fields) and
+  (((result2 = s__split_fields1) and (result3 = s__split_fields2)) and
+  (result4 = s__split_fields3)))
+
+axiom H21 : ((s__split_fields8 = temp___2101) and
+  (((s__split_fields9 = temp___2102) and
+  (s__split_fields10 = temp___2103)) and (s__split_fields11 = temp___2104)))
+
+axiom H22 : (s__split_discrs = temp___210)
+
+axiom H23 : (to_rep1(o6) = e)
+
+ (* File "stacks.ads", line 17, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep2(first(s__split_fields10)) <= to_rep(s__split_fields8))

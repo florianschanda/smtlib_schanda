@@ -350,5 +350,9 @@ function non_init__ref___projection(a: non_init__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic temp___658 : int
+
+axiom H : in_range(c)
+
  (* File "with_default.adb", line 107, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> in_range1(c))
+goal WP_parameter_def : in_range1(c)

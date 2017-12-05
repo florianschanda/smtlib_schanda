@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -667,7 +667,7 @@ logic key__function_guard1 : int, int, us_rep, us_rep1 -> prop
 
 type key_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -754,7 +754,7 @@ logic element__function_guard1 : int, int, us_rep, us_rep1 -> prop
 
 type element_type
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1074,7 +1074,7 @@ axiom model____post_axiom : true
 
 type key_type1
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq13 : int, int -> bool
 
@@ -1374,7 +1374,7 @@ axiom has_key__post_axiom :
 
 type element_type1
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -1485,7 +1485,7 @@ axiom length__post_axiom2 :
 
 type element_type2
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq16 : int, int -> bool
 
@@ -1634,19 +1634,80 @@ axiom w_get__post_axiom1 :
   ((in_range2(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
- (* File "a-cforma.ads", line 997, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_fields:us_main_type. forall c:count_type. forall o:bool.
-  forall o1:bool. forall result:bool. (dynamic_property((-2147483648),
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) -> (in_range1(k) ->
-  (((has_key1(model__({ us_split_discrs1 = {
+logic d__split_fields : us_main_type
+
+logic c : count_type
+
+logic o : bool
+
+logic o1 : bool
+
+logic temp___599 : int
+
+logic o2 : int
+
+logic c1 : count_type
+
+logic o3 : bool
+
+logic o4 : bool
+
+logic o5 : int
+
+logic o6 : bool
+
+logic temp___587 : int
+
+logic o7 : int
+
+logic o8 : count_type
+
+logic c2 : count_type
+
+logic o9 : bool
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : bool
+
+logic temp___592 : int
+
+logic o13 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic replacement__inverse_sets__replace_element__container__fields : us_main_type
+
+logic result4 : us_main_type
+
+logic d__split_fields1 : us_main_type
+
+logic result5 : bool
+
+logic result6 : bool
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : in_range1(k)
+
+axiom H2 : ((has_key1(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), k) = true) and
-  (forall c1:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+  (forall c3:count_type. ((has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), c1) = true) -> (to_rep((a[get2(model__({ us_split_discrs1 = {
+  } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
+  c3 } }) = true) -> (to_rep((a[get2(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), get(keys({ us_split_discrs1 = {
@@ -1655,25 +1716,37 @@ goal WP_parameter_def :
   } }), get1(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), c1)))])) = get(keys({ us_split_discrs1 = {
+  } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
+  c3 } })))])) = get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), get1(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
-  } }), c1)))))) -> (((d__split_discrs = d_old) and
-  (d__split_fields = d_old1)) -> ((((o = has_key(positions({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } }), {
-  us_split_fields3 = { rec__replacement__inverse_sets__cursor__node = c }
-  })) and ((o = true) <-> (has_key(positions({ us_split_discrs1 = {
+  } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
+  c3 } }))))))
+
+axiom H3 : ((d__split_discrs = d_old) and (d__split_fields = d_old1))
+
+axiom H4 : ((o3 = has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } }) = true))) and ((o1 = true) and (result = match_bool(o1, o,
-  false)))) -> ((result = true) -> (has_key(positions({ us_split_discrs1 = {
+  c1 } })) and ((o3 = true) <-> (has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } }) = true))))))))
+  c1 } }) = true)))
+
+axiom H5 : (o4 = true)
+
+axiom H6 : (result2 = match_bool(o4, o3, false))
+
+axiom H7 : (result2 = true)
+
+ (* File "a-cforma.ads", line 997, characters 0-0 *)
+goal WP_parameter_def : (has_key(positions({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
+  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
+  } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
+  c1 } }) = true)

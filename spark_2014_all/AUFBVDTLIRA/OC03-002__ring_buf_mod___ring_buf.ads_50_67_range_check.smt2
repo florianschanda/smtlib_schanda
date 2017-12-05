@@ -130,6 +130,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (dynamic_invariant1 m true false true))
 (assert (in_range x))
 (assert (not (= (length m) 0)))

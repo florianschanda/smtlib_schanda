@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1477,18 +1477,36 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic int_val : int
+
+logic real_val : t
+
+logic kind : int
+
+logic int_val1 : int
+
+logic real_val1 : t
+
+logic kind1 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(word1)),
+  to_rep(last(word1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(int_val))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(real_val))
+
+axiom H3 : ((0 <= 2) -> in_range4(kind))
+
+axiom H4 : ((in_range1(int_val1) and tqtisFinite(real_val1)) and
+  in_range4(kind1))
+
+axiom H5 : (not (kind1 = 1))
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall int_val:int. forall real_val:t. forall kind:int.
-  forall int_val1:int. forall real_val1:t. forall kind1:int.
-  (dynamic_property(1, 2147483647, to_rep(first(word1)),
-  to_rep(last(word1))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(int_val)) -> ((le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(real_val)) -> (((0 <= 2) -> in_range4(kind)) ->
-  (((in_range1(int_val1) and tqtisFinite(real_val1)) and in_range4(kind1)) ->
-  (kind1 = 1)))))))
+goal WP_parameter_def : false

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -323,9 +323,53 @@ function t8b__ref___projection(a: t8b__ref) : t8b = (a).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arr : (int,natural) farray
+
+logic n : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : (int,natural) farray
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,natural) farray
+
+logic arr1 : (int,natural) farray
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : (int,natural) farray
+
+logic arr2 : (int,natural) farray
+
+logic arr3 : (int,natural) farray
+
+logic n2 : int
+
+logic result2 : int
+
+logic n3 : int
+
+logic result3 : (int,natural) farray
+
+logic arr4 : (int,natural) farray
+
+axiom H : (result = n)
+
+axiom H1 : (n1 = 1)
+
+axiom H2 : (1 <= n1)
+
+axiom H3 : (n1 <= 10)
+
+axiom H4 : (to_rep((arr[n1])) <  2147483647)
+
  (* File "loop_related_legal.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,natural) farray. forall n:int. forall result:int.
-  forall n1:int. (((result = n) and (n1 = 1)) -> (((1 <= n1) and
-  (n1 <= 10)) -> ((to_rep((arr[n1])) <  2147483647) ->
-  in_range1((to_rep((arr[n1])) + 1))))))
+goal WP_parameter_def : in_range1((to_rep((arr[n1])) + 1))

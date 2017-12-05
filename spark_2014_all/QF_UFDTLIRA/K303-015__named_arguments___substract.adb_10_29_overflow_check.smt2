@@ -38,6 +38,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range first))
 (assert (in_range second))
 (assert (in_range third))

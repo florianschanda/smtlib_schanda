@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -876,14 +876,50 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
- (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall l__split_fields1:us_main_type.
-  forall l__split_fields2:us_main_type. forall l__split_fields3:us_main_type.
-  ((in_range3(i) and ((length({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic c : count_type
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : count_type
+
+logic o9 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range3(i)
+
+axiom H1 : (length({ us_split_discrs1 = {
   rec__int_list__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields }
-  }) <  to_rep(l__split_discrs)) and (((((length({ us_split_discrs1 = {
+  }) <  to_rep(l__split_discrs))
+
+axiom H2 : (((((length({ us_split_discrs1 = {
   rec__int_list__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields1 }
   }) = (length({ us_split_discrs1 = {
@@ -918,14 +954,16 @@ goal WP_parameter_def :
   positions({ us_split_discrs1 = { rec__int_list__my_lists__list__capacity =
   l__split_discrs }; us_split_fields1 = { rec__int_list__my_lists__list =
   l__split_fields1 } }), 1, 1) = true)) and
-  ((l__split_fields2 = l__split_fields1) and ({
-  rec__int_list__my_lists__list = l__split_fields3 } = {
-  rec__int_list__my_lists__list = l__split_fields1 }))))) -> (get(model__({
-  us_split_discrs1 = { rec__int_list__my_lists__list__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__int_list__my_lists__list =
-  l__split_fields2 } }), get1(positions({ us_split_discrs1 = {
+  ((l__split_fields2 = l__split_fields1) and
+  (l__split_fields3 = l__split_fields1)))
+
+ (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
+goal WP_parameter_def : (get(model__({ us_split_discrs1 = {
+  rec__int_list__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields2 } }),
+  get1(positions({ us_split_discrs1 = {
   rec__int_list__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__int_list__my_lists__list = l__split_fields2 } }),
   first({ us_split_discrs1 = { rec__int_list__my_lists__list__capacity =
   l__split_discrs }; us_split_fields1 = { rec__int_list__my_lists__list =
-  l__split_fields2 } }))) = i)))
+  l__split_fields2 } }))) = i)

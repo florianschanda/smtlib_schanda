@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type tvalueB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -174,7 +174,7 @@ function tvalueB__ref___projection(a: tvalueB__ref) : tvalueB =
 
 type value
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -308,7 +308,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -853,27 +853,252 @@ function t8b__ref___projection(a3: t8b__ref) : integer = (a3).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "simple_unc_arrays.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c__split_fields:(int,value) farray. forall c__split_fields1:t1.
-  forall i:int. forall us:int. forall us1:int. forall us2:int. forall o:int.
-  forall o1:value. forall o2:int. forall o3:value. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int. forall o8:value.
-  forall result:int. forall i1:int.
-  forall c__split_fields2:(int,value) farray. forall c__split_fields3:t1.
-  forall i2:int. ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic c__split_fields : (int,value) farray
+
+logic c__split_fields1 : t1
+
+logic i : int
+
+logic simple_unc_arrays__add__result : natural
+
+logic simple_unc_arrays__add__result1 : (int,value) farray
+
+logic simple_unc_arrays__add__result2 : t
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic temp___782 : int
+
+logic temp___779 : natural
+
+logic temp___7791 : (int,value) farray
+
+logic temp___7792 : t1
+
+logic j : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic o3 : value
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : value
+
+logic o10 : int
+
+logic o11 : value
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : value
+
+logic o17 : int
+
+logic o18 : (int,value) farray
+
+logic o19 : (int,value) farray
+
+logic o20 : t1
+
+logic o21 : (int,value) farray
+
+logic o22 : t1
+
+logic temp___778 : natural
+
+logic temp___7781 : (int,value) farray
+
+logic temp___7782 : t1
+
+logic j1 : int
+
+logic o23 : int
+
+logic o24 : value
+
+logic o25 : int
+
+logic o26 : value
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic c__split_fields2 : (int,value) farray
+
+logic c__split_fields3 : t1
+
+logic result : int
+
+logic i1 : int
+
+logic c__split_fields4 : (int,value) farray
+
+logic c__split_fields5 : t1
+
+logic i2 : int
+
+logic result1 : (int,value) farray
+
+logic result2 : t1
+
+logic c__split_fields6 : (int,value) farray
+
+logic c__split_fields7 : t1
+
+logic result3 : int
+
+logic i3 : int
+
+logic c__split_fields8 : (int,value) farray
+
+logic c__split_fields9 : t1
+
+logic i4 : int
+
+logic c__split_fields10 : (int,value) farray
+
+logic c__split_fields11 : t1
+
+logic i5 : int
+
+logic c__split_fields12 : (int,value) farray
+
+logic c__split_fields13 : t1
+
+logic i6 : int
+
+logic c__split_fields14 : (int,value) farray
+
+logic c__split_fields15 : t1
+
+logic i7 : int
+
+logic c__split_fields16 : (int,value) farray
+
+logic c__split_fields17 : t1
+
+logic i8 : int
+
+logic c__split_fields18 : (int,value) farray
+
+logic c__split_fields19 : t1
+
+logic i9 : int
+
+logic result4 : natural
+
+logic result5 : (int,value) farray
+
+logic result6 : t
+
+logic simple_unc_arrays__add__result3 : natural
+
+logic simple_unc_arrays__add__result4 : (int,value) farray
+
+logic simple_unc_arrays__add__result5 : t
+
+logic c__split_fields20 : (int,value) farray
+
+logic c__split_fields21 : t1
+
+logic i10 : int
+
+logic simple_unc_arrays__add__result6 : natural
+
+logic simple_unc_arrays__add__result7 : (int,value) farray
+
+logic simple_unc_arrays__add__result8 : t
+
+logic c__split_fields22 : (int,value) farray
+
+logic c__split_fields23 : t1
+
+logic i11 : int
+
+logic simple_unc_arrays__add__result9 : natural
+
+logic simple_unc_arrays__add__result10 : (int,value) farray
+
+logic simple_unc_arrays__add__result11 : t
+
+logic c__split_fields24 : (int,value) farray
+
+logic c__split_fields25 : t1
+
+logic i12 : int
+
+logic simple_unc_arrays__add__result12 : natural
+
+logic simple_unc_arrays__add__result13 : (int,value) farray
+
+logic simple_unc_arrays__add__result14 : t
+
+logic c__split_fields26 : (int,value) farray
+
+logic c__split_fields27 : t1
+
+logic i13 : int
+
+logic simple_unc_arrays__add__result15 : natural
+
+logic simple_unc_arrays__add__result16 : (int,value) farray
+
+logic simple_unc_arrays__add__result17 : t
+
+logic result7 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> ((dynamic_property1(1, to_rep(b),
-  to_rep2(first(b2)), to_rep2(last(b2))) and ((to_rep2(first(b2)) = 1) and
-  (to_rep2(last(b2)) = to_rep(b)))) -> ((same_range({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : (dynamic_property1(1, to_rep(b), to_rep2(first(b2)),
+  to_rep2(last(b2))) and ((to_rep2(first(b2)) = 1) and
+  (to_rep2(last(b2)) = to_rep(b))))
+
+axiom H2 : (same_range({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
   rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }, {
   us_split_discrs1 = { rec__simple_unc_arrays__table__last = b };
   us_split_fields1 = { rec__simple_unc_arrays__table__v = { elts = b1; rt =
-  b2 } } }) = true) -> (((us = to_rep(b)) and in_range1(to_rep(b))) ->
-  (((us1 = to_rep(a)) and in_range1(to_rep(a))) -> (((us2 = to_rep(a)) and
-  in_range1(to_rep(a))) -> (((to_rep(c__split_discrs) = to_rep(a)) and
-  ((to_rep(a) = to_rep(((to_base({ us_split_discrs2 = {
+  b2 } } }) = true)
+
+axiom H3 : ((us = to_rep(b)) and in_range1(to_rep(b)))
+
+axiom H4 : ((us1 = to_rep(a)) and in_range1(to_rep(a)))
+
+axiom H5 : ((us2 = to_rep(a)) and in_range1(to_rep(a)))
+
+axiom H6 : (to_rep(c__split_discrs) = to_rep(a))
+
+axiom H7 : ((to_rep(a) = to_rep(((to_base({ us_split_discrs2 = {
   rec__simple_unc_arrays__table__last = c__split_discrs }; us_split_fields3 =
   { rec__simple_unc_arrays__table__v1 = { elts1 = c__split_fields; rt1 =
   c__split_fields1 } }
@@ -881,24 +1106,56 @@ goal WP_parameter_def :
   (dynamic_property3(1, to_rep(a), to_rep2(first2(c__split_fields1)),
   to_rep2(last2(c__split_fields1))) and
   ((to_rep2(first2(c__split_fields1)) = 1) and
-  (to_rep2(last2(c__split_fields1)) = to_rep(a)))))) ->
-  (((to_rep(a) = r7b) and in_range1(r7b)) -> (((result = i) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= r7b)) ->
-  ((forall j:int. (((1 <= j) and (j <= (i2 - 1))) ->
-   (to_rep1((c__split_fields2[j])) = (to_rep1((a1[j])) + to_rep1((b1[j])))))) ->
-  (((((dynamic_property3(1, to_rep(a), to_rep2(first2(c__split_fields3)),
-  to_rep2(last2(c__split_fields3))) and
-  ((to_rep2(first2(c__split_fields3)) = 1) and
-  (to_rep2(last2(c__split_fields3)) = to_rep(a)))) and
-  (forall temp___787:int.
-  (((to_rep2(first2(c__split_fields3)) <= temp___787) and
-  (temp___787 <= to_rep2(last2(c__split_fields3)))) -> ((i2 <= temp___787) ->
-  ((c__split_fields2[temp___787]) = (c__split_fields[temp___787])))))) and
+  (to_rep2(last2(c__split_fields1)) = to_rep(a)))))
+
+axiom H8 : (to_rep(a) = r7b)
+
+axiom H9 : in_range1(r7b)
+
+axiom H10 : (result = i)
+
+axiom H11 : (i1 = 1)
+
+axiom H12 : (1 <= i1)
+
+axiom H13 : (i1 <= r7b)
+
+axiom H14 :
+  (forall j2:int. (((1 <= j2) and (j2 <= (i2 - 1))) ->
+  (to_rep1((c__split_fields4[j2])) = (to_rep1((a1[j2])) + to_rep1((b1[j2]))))))
+
+axiom H15 : ((((dynamic_property3(1, to_rep(a),
+  to_rep2(first2(c__split_fields5)), to_rep2(last2(c__split_fields5))) and
+  ((to_rep2(first2(c__split_fields5)) = 1) and
+  (to_rep2(last2(c__split_fields5)) = to_rep(a)))) and
+  (forall temp___781:int.
+  (((to_rep2(first2(c__split_fields5)) <= temp___781) and
+  (temp___781 <= to_rep2(last2(c__split_fields5)))) -> ((i2 <= temp___781) ->
+  ((c__split_fields4[temp___781]) = (c__split_fields[temp___781])))))) and
   ((1 <= r7b) -> dynamic_property4(1, r7b, i2))) and ((1 <= i2) and
-  (i2 <= r7b))) -> (((((((((to_rep2(first(b2)) <= i2) and
-  (i2 <= to_rep2(last(b2)))) and (o2 = i2)) and (o3 = (b1[o2]))) and
-  (o4 = to_rep1(o3))) and ((((((to_rep2(first(a2)) <= i2) and
-  (i2 <= to_rep2(last(a2)))) and (o = i2)) and (o1 = (a1[o]))) and
-  (o5 = to_rep1(o1))) and (o6 = (o5 + o4)))) and ((o7 = o6) and
-  in_range2(o6))) and (to_rep1(o8) = o7)) ->
-  (to_rep2(first2(c__split_fields3)) <= i2)))))))))))))))
+  (i2 <= r7b)))
+
+axiom H16 : ((to_rep2(first(b2)) <= i2) and (i2 <= to_rep2(last(b2))))
+
+axiom H17 : (o10 = i2)
+
+axiom H18 : (o11 = (b1[o10]))
+
+axiom H19 : (o12 = to_rep1(o11))
+
+axiom H20 : ((to_rep2(first(a2)) <= i2) and (i2 <= to_rep2(last(a2))))
+
+axiom H21 : (o8 = i2)
+
+axiom H22 : (o9 = (a1[o8]))
+
+axiom H23 : (o13 = to_rep1(o9))
+
+axiom H24 : (o14 = (o13 + o12))
+
+axiom H25 : ((o15 = o14) and in_range2(o14))
+
+axiom H26 : (to_rep1(o16) = o15)
+
+ (* File "simple_unc_arrays.ads", line 10, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first2(c__split_fields5)) <= i2)

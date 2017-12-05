@@ -463,7 +463,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -502,7 +502,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq10 : int, int -> bool
 
@@ -2016,7 +2016,7 @@ logic is_empty__function_guard : bool, (int,(int,cell) farray) farray, int,
 
 type integer
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq17 : int, int -> bool
 
@@ -2283,161 +2283,657 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall y:int. forall x:int. forall y1:int. forall x1:int. forall o:cell.
-  forall o1:int. forall o2:(int,cell) farray. forall o3:int.
-  forall o4:(int,(int,cell) farray) farray. forall o5:cell. forall o6:int.
-  forall o7:(int,cell) farray. forall o8:int.
-  forall o9:(int,(int,cell) farray) farray. forall o10:cell. forall o11:int.
-  forall o12:(int,cell) farray. forall o13:int.
-  forall o14:(int,(int,cell) farray) farray. forall o15:cell. forall o16:int.
-  forall o17:(int,cell) farray. forall o18:int.
-  forall o19:(int,(int,cell) farray) farray. forall o20:cell. forall o21:int.
-  forall o22:(int,cell) farray. forall o23:int.
-  forall o24:(int,(int,cell) farray) farray. forall o25:cell. forall o26:int.
-  forall o27:(int,cell) farray. forall o28:int.
-  forall o29:(int,(int,cell) farray) farray. forall o30:cell. forall o31:int.
-  forall o32:(int,cell) farray. forall o33:int.
-  forall o34:(int,(int,cell) farray) farray. forall o35:cell. forall o36:int.
-  forall o37:(int,cell) farray. forall o38:int.
-  forall o39:(int,(int,cell) farray) farray. forall o40:cell. forall o41:int.
-  forall o42:(int,cell) farray. forall o43:int.
-  forall o44:(int,(int,cell) farray) farray. forall o45:cell. forall o46:int.
-  forall o47:(int,cell) farray. forall o48:int.
-  forall o49:(int,(int,cell) farray) farray. forall o50:cell. forall o51:int.
-  forall o52:(int,cell) farray. forall o53:int.
-  forall o54:(int,(int,cell) farray) farray. forall o55:cell. forall o56:int.
-  forall o57:(int,cell) farray. forall o58:int.
-  forall o59:(int,(int,cell) farray) farray. forall o60:cell. forall o61:int.
-  forall o62:(int,cell) farray. forall o63:int.
-  forall o64:(int,(int,cell) farray) farray. forall o65:cell. forall o66:int.
-  forall o67:(int,cell) farray. forall o68:int.
-  forall o69:(int,(int,cell) farray) farray. forall o70:cell. forall o71:int.
-  forall o72:(int,cell) farray. forall o73:int.
-  forall o74:(int,(int,cell) farray) farray. forall o75:cell. forall o76:int.
-  forall o77:(int,cell) farray. forall o78:int.
-  forall o79:(int,(int,cell) farray) farray. forall o80:cell. forall o81:int.
-  forall o82:(int,cell) farray. forall o83:int.
-  forall o84:(int,(int,cell) farray) farray. forall o85:cell. forall o86:int.
-  forall o87:(int,cell) farray. forall o88:int.
-  forall o89:(int,(int,cell) farray) farray. forall o90:cell. forall o91:int.
-  forall o92:(int,cell) farray. forall o93:int.
-  forall o94:(int,(int,cell) farray) farray. forall o95:cell. forall o96:int.
-  forall o97:(int,cell) farray. forall o98:int.
-  forall o99:(int,(int,cell) farray) farray. forall o100:int.
-  forall temp___2148:map. forall o101:cell. forall o102:int.
-  forall o103:(int,cell) farray. forall o104:int.
-  forall o105:(int,(int,cell) farray) farray. forall o106:int.
-  forall temp___21481:map. forall o107:cell. forall o108:int.
-  forall o109:(int,cell) farray. forall o110:int.
-  forall o111:(int,(int,cell) farray) farray. forall o112:int.
-  forall temp___21482:map. forall o113:cell. forall o114:int.
-  forall o115:(int,cell) farray. forall o116:int.
-  forall o117:(int,(int,cell) farray) farray. forall o118:int.
-  forall temp___21483:map. forall o119:cell. forall o120:int.
-  forall o121:(int,cell) farray. forall o122:int.
-  forall o123:(int,(int,cell) farray) farray. forall o124:int.
-  forall temp___21484:map. forall o125:cell. forall o126:int.
-  forall o127:(int,cell) farray. forall o128:int.
-  forall o129:(int,(int,cell) farray) farray. forall o130:int.
-  forall temp___21485:map. forall o131:cell. forall o132:int.
-  forall o133:(int,cell) farray. forall o134:int.
-  forall o135:(int,(int,cell) farray) farray. forall o136:int.
-  forall temp___21486:map. forall o137:cell. forall o138:int.
-  forall o139:(int,cell) farray. forall o140:int.
-  forall o141:(int,(int,cell) farray) farray. forall o142:int.
-  forall temp___21487:map. forall o143:cell. forall o144:int.
-  forall o145:(int,cell) farray. forall o146:int.
-  forall o147:(int,(int,cell) farray) farray. forall o148:int.
-  forall temp___21488:map. forall o149:cell. forall o150:int.
-  forall o151:(int,cell) farray. forall o152:int.
-  forall o153:(int,(int,cell) farray) farray.
-  forall cur_board1:(int,(int,cell) farray) farray. forall y2:int.
-  forall x2:int. forall y3:int. forall x3:int.
-  forall result:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray.
-  forall result1:(int,(int,cell) farray) farray.
-  forall cur_board3:(int,(int,cell) farray) farray.
-  forall result2:(int,(int,cell) farray) farray.
-  forall cur_board4:(int,(int,cell) farray) farray.
-  forall result3:(int,(int,cell) farray) farray.
-  forall cur_board5:(int,(int,cell) farray) farray. forall result4:int.
-  forall y4:int. forall result5:int. forall x4:int.
-  forall result6:(int,(int,cell) farray) farray.
-  forall cur_board6:(int,(int,cell) farray) farray. forall result7:int.
-  forall x5:int. forall result8:(int,(int,cell) farray) farray.
-  forall cur_board7:(int,(int,cell) farray) farray. forall result9:int.
-  forall x6:int. forall result10:(int,(int,cell) farray) farray.
-  forall cur_board8:(int,(int,cell) farray) farray. forall result11:int.
-  forall x7:int. forall result12:(int,(int,cell) farray) farray.
-  forall cur_board9:(int,(int,cell) farray) farray. forall result13:int.
-  forall y5:int. forall result14:int. forall x8:int.
-  forall result15:(int,(int,cell) farray) farray.
-  forall cur_board10:(int,(int,cell) farray) farray. forall result16:int.
-  forall x9:int. forall result17:(int,(int,cell) farray) farray.
-  forall cur_board11:(int,(int,cell) farray) farray. forall result18:int.
-  forall x10:int. forall result19:(int,(int,cell) farray) farray.
-  forall cur_board12:(int,(int,cell) farray) farray. forall result20:int.
-  forall x11:int. forall result21:(int,(int,cell) farray) farray.
-  forall cur_board13:(int,(int,cell) farray) farray. forall result22:int.
-  forall y6:int. forall result23:int. forall x12:int.
-  forall result24:(int,(int,cell) farray) farray.
-  forall cur_board14:(int,(int,cell) farray) farray. forall result25:int.
-  forall x13:int. forall result26:(int,(int,cell) farray) farray.
-  forall cur_board15:(int,(int,cell) farray) farray. forall result27:int.
-  forall x14:int. forall result28:(int,(int,cell) farray) farray.
-  forall cur_board16:(int,(int,cell) farray) farray. forall result29:int.
-  forall x15:int. forall result30:(int,(int,cell) farray) farray.
-  forall cur_board17:(int,(int,cell) farray) farray. forall result31:int.
-  forall y7:int. forall result32:int. forall x16:int.
-  forall result33:(int,(int,cell) farray) farray.
-  forall cur_board18:(int,(int,cell) farray) farray.
-  forall result34:int__ref. forall x17:int. forall result35:map__ref1.
-  forall cur_board19:(int,(int,cell) farray) farray.
-  forall result36:int__ref. forall x18:int. forall result37:map__ref1.
-  forall cur_board20:(int,(int,cell) farray) farray.
-  forall result38:int__ref. forall x19:int. forall result39:map__ref1.
-  forall cur_board21:(int,(int,cell) farray) farray.
-  forall result40:int__ref. forall y8:int. forall result41:int__ref.
-  forall x20:int. forall result42:bool. forall result43:map__ref1.
-  forall cur_board22:(int,(int,cell) farray) farray.
-  forall result44:int__ref. forall x21:int. forall result45:bool.
-  forall result46:map__ref1.
-  forall cur_board23:(int,(int,cell) farray) farray.
-  forall result47:int__ref. forall x22:int. forall result48:bool.
-  forall result49:map__ref1.
-  forall cur_board24:(int,(int,cell) farray) farray.
-  forall result50:int__ref. forall y9:int. forall result51:int__ref.
-  forall x23:int. forall result52:bool. forall result53:map__ref1.
-  forall cur_board25:(int,(int,cell) farray) farray.
-  forall result54:int__ref. forall x24:int. forall result55:bool.
-  forall result56:map__ref1.
-  forall cur_board26:(int,(int,cell) farray) farray.
-  forall result57:int__ref. forall x25:int. forall result58:bool.
-  forall result59:map__ref1.
-  forall cur_board27:(int,(int,cell) farray) farray.
-  forall result60:int__ref. forall y10:int. forall result61:int__ref.
-  forall x26:int. forall result62:bool. forall result63:map__ref1.
-  forall cur_board28:(int,(int,cell) farray) farray.
-  forall result64:int__ref. forall x27:int. forall result65:bool.
-  forall result66:map__ref1.
-  forall cur_board29:(int,(int,cell) farray) farray.
-  forall result67:int__ref. forall x28:int. forall result68:bool.
-  forall result69:map__ref1.
-  forall cur_board30:(int,(int,cell) farray) farray.
-  forall result70:int__ref. forall cur_state1:int.
-  forall cur_board31:map__ref1. forall cur_state2:int__ref.
-  forall y11:int__ref. forall x29:int__ref. forall y12:int__ref.
-  forall x30:int__ref. forall cur_board32:(int,(int,cell) farray) farray.
-  forall cur_state3:int. forall y13:int. forall x31:int. forall y14:int.
-  forall x32:int.
-  (((patris__possible_i_shapes__aggregate_def(temp___150(of_int(0),
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic y : int
+
+logic x : int
+
+logic y1 : int
+
+logic x1 : int
+
+logic o : cell
+
+logic o1 : int
+
+logic o2 : (int,cell) farray
+
+logic o3 : int
+
+logic o4 : (int,(int,cell) farray) farray
+
+logic o5 : cell
+
+logic o6 : int
+
+logic o7 : (int,cell) farray
+
+logic o8 : int
+
+logic o9 : (int,(int,cell) farray) farray
+
+logic o10 : cell
+
+logic o11 : int
+
+logic o12 : (int,cell) farray
+
+logic o13 : int
+
+logic o14 : (int,(int,cell) farray) farray
+
+logic o15 : cell
+
+logic o16 : int
+
+logic o17 : (int,cell) farray
+
+logic o18 : int
+
+logic o19 : (int,(int,cell) farray) farray
+
+logic o20 : cell
+
+logic o21 : int
+
+logic o22 : (int,cell) farray
+
+logic o23 : int
+
+logic o24 : (int,(int,cell) farray) farray
+
+logic o25 : cell
+
+logic o26 : int
+
+logic o27 : (int,cell) farray
+
+logic o28 : int
+
+logic o29 : (int,(int,cell) farray) farray
+
+logic o30 : cell
+
+logic o31 : int
+
+logic o32 : (int,cell) farray
+
+logic o33 : int
+
+logic o34 : (int,(int,cell) farray) farray
+
+logic o35 : cell
+
+logic o36 : int
+
+logic o37 : (int,cell) farray
+
+logic o38 : int
+
+logic o39 : (int,(int,cell) farray) farray
+
+logic o40 : cell
+
+logic o41 : int
+
+logic o42 : (int,cell) farray
+
+logic o43 : int
+
+logic o44 : (int,(int,cell) farray) farray
+
+logic o45 : cell
+
+logic o46 : int
+
+logic o47 : (int,cell) farray
+
+logic o48 : int
+
+logic o49 : (int,(int,cell) farray) farray
+
+logic o50 : cell
+
+logic o51 : int
+
+logic o52 : (int,cell) farray
+
+logic o53 : int
+
+logic o54 : (int,(int,cell) farray) farray
+
+logic o55 : cell
+
+logic o56 : int
+
+logic o57 : (int,cell) farray
+
+logic o58 : int
+
+logic o59 : (int,(int,cell) farray) farray
+
+logic o60 : cell
+
+logic o61 : int
+
+logic o62 : (int,cell) farray
+
+logic o63 : int
+
+logic o64 : (int,(int,cell) farray) farray
+
+logic o65 : cell
+
+logic o66 : int
+
+logic o67 : (int,cell) farray
+
+logic o68 : int
+
+logic o69 : (int,(int,cell) farray) farray
+
+logic o70 : cell
+
+logic o71 : int
+
+logic o72 : (int,cell) farray
+
+logic o73 : int
+
+logic o74 : (int,(int,cell) farray) farray
+
+logic o75 : cell
+
+logic o76 : int
+
+logic o77 : (int,cell) farray
+
+logic o78 : int
+
+logic o79 : (int,(int,cell) farray) farray
+
+logic o80 : cell
+
+logic o81 : int
+
+logic o82 : (int,cell) farray
+
+logic o83 : int
+
+logic o84 : (int,(int,cell) farray) farray
+
+logic o85 : cell
+
+logic o86 : int
+
+logic o87 : (int,cell) farray
+
+logic o88 : int
+
+logic o89 : (int,(int,cell) farray) farray
+
+logic o90 : cell
+
+logic o91 : int
+
+logic o92 : (int,cell) farray
+
+logic o93 : int
+
+logic o94 : (int,(int,cell) farray) farray
+
+logic o95 : cell
+
+logic o96 : int
+
+logic o97 : (int,cell) farray
+
+logic o98 : int
+
+logic o99 : (int,(int,cell) farray) farray
+
+logic yy : int
+
+logic xx : int
+
+logic o100 : int
+
+logic temp___2142 : map
+
+logic o101 : cell
+
+logic o102 : int
+
+logic o103 : (int,cell) farray
+
+logic o104 : int
+
+logic o105 : (int,(int,cell) farray) farray
+
+logic o106 : int
+
+logic temp___21421 : map
+
+logic o107 : cell
+
+logic o108 : int
+
+logic o109 : (int,cell) farray
+
+logic o110 : int
+
+logic o111 : (int,(int,cell) farray) farray
+
+logic o112 : int
+
+logic temp___21422 : map
+
+logic o113 : cell
+
+logic o114 : int
+
+logic o115 : (int,cell) farray
+
+logic o116 : int
+
+logic o117 : (int,(int,cell) farray) farray
+
+logic o118 : int
+
+logic temp___21423 : map
+
+logic o119 : cell
+
+logic o120 : int
+
+logic o121 : (int,cell) farray
+
+logic o122 : int
+
+logic o123 : (int,(int,cell) farray) farray
+
+logic o124 : int
+
+logic temp___21424 : map
+
+logic o125 : cell
+
+logic o126 : int
+
+logic o127 : (int,cell) farray
+
+logic o128 : int
+
+logic o129 : (int,(int,cell) farray) farray
+
+logic o130 : int
+
+logic temp___21425 : map
+
+logic o131 : cell
+
+logic o132 : int
+
+logic o133 : (int,cell) farray
+
+logic o134 : int
+
+logic o135 : (int,(int,cell) farray) farray
+
+logic o136 : int
+
+logic temp___21426 : map
+
+logic o137 : cell
+
+logic o138 : int
+
+logic o139 : (int,cell) farray
+
+logic o140 : int
+
+logic o141 : (int,(int,cell) farray) farray
+
+logic o142 : int
+
+logic temp___21427 : map
+
+logic o143 : cell
+
+logic o144 : int
+
+logic o145 : (int,cell) farray
+
+logic o146 : int
+
+logic o147 : (int,(int,cell) farray) farray
+
+logic o148 : int
+
+logic temp___21428 : map
+
+logic o149 : cell
+
+logic o150 : int
+
+logic o151 : (int,cell) farray
+
+logic o152 : int
+
+logic o153 : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic y2 : int
+
+logic x2 : int
+
+logic y3 : int
+
+logic x3 : int
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result1 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result2 : (int,(int,cell) farray) farray
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic result3 : (int,(int,cell) farray) farray
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic result4 : int
+
+logic y4 : int
+
+logic result5 : int
+
+logic x4 : int
+
+logic result6 : (int,(int,cell) farray) farray
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic result7 : int
+
+logic x5 : int
+
+logic result8 : (int,(int,cell) farray) farray
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic result9 : int
+
+logic x6 : int
+
+logic result10 : (int,(int,cell) farray) farray
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic result11 : int
+
+logic x7 : int
+
+logic result12 : (int,(int,cell) farray) farray
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic result13 : int
+
+logic y5 : int
+
+logic result14 : int
+
+logic x8 : int
+
+logic result15 : (int,(int,cell) farray) farray
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic result16 : int
+
+logic x9 : int
+
+logic result17 : (int,(int,cell) farray) farray
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic result18 : int
+
+logic x10 : int
+
+logic result19 : (int,(int,cell) farray) farray
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic result20 : int
+
+logic x11 : int
+
+logic result21 : (int,(int,cell) farray) farray
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic result22 : int
+
+logic y6 : int
+
+logic result23 : int
+
+logic x12 : int
+
+logic result24 : (int,(int,cell) farray) farray
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic result25 : int
+
+logic x13 : int
+
+logic result26 : (int,(int,cell) farray) farray
+
+logic cur_board15 : (int,(int,cell) farray) farray
+
+logic result27 : int
+
+logic x14 : int
+
+logic result28 : (int,(int,cell) farray) farray
+
+logic cur_board16 : (int,(int,cell) farray) farray
+
+logic result29 : int
+
+logic x15 : int
+
+logic result30 : (int,(int,cell) farray) farray
+
+logic cur_board17 : (int,(int,cell) farray) farray
+
+logic result31 : int
+
+logic y7 : int
+
+logic result32 : int
+
+logic x16 : int
+
+logic result33 : (int,(int,cell) farray) farray
+
+logic cur_board18 : (int,(int,cell) farray) farray
+
+logic result34 : int
+
+logic x17 : int
+
+logic result35 : (int,(int,cell) farray) farray
+
+logic cur_board19 : (int,(int,cell) farray) farray
+
+logic result36 : int
+
+logic x18 : int
+
+logic result37 : (int,(int,cell) farray) farray
+
+logic cur_board20 : (int,(int,cell) farray) farray
+
+logic result38 : int
+
+logic x19 : int
+
+logic result39 : (int,(int,cell) farray) farray
+
+logic cur_board21 : (int,(int,cell) farray) farray
+
+logic result40 : int
+
+logic y8 : int
+
+logic result41 : int
+
+logic x20 : int
+
+logic result42 : bool
+
+logic result43 : (int,(int,cell) farray) farray
+
+logic cur_board22 : (int,(int,cell) farray) farray
+
+logic result44 : int
+
+logic x21 : int
+
+logic result45 : bool
+
+logic result46 : (int,(int,cell) farray) farray
+
+logic cur_board23 : (int,(int,cell) farray) farray
+
+logic result47 : int
+
+logic x22 : int
+
+logic result48 : bool
+
+logic result49 : (int,(int,cell) farray) farray
+
+logic cur_board24 : (int,(int,cell) farray) farray
+
+logic result50 : int
+
+logic y9 : int
+
+logic result51 : int
+
+logic x23 : int
+
+logic result52 : bool
+
+logic result53 : (int,(int,cell) farray) farray
+
+logic cur_board25 : (int,(int,cell) farray) farray
+
+logic result54 : int
+
+logic x24 : int
+
+logic result55 : bool
+
+logic result56 : (int,(int,cell) farray) farray
+
+logic cur_board26 : (int,(int,cell) farray) farray
+
+logic result57 : int
+
+logic x25 : int
+
+logic result58 : bool
+
+logic result59 : (int,(int,cell) farray) farray
+
+logic cur_board27 : (int,(int,cell) farray) farray
+
+logic result60 : int
+
+logic y10 : int
+
+logic result61 : int
+
+logic x26 : int
+
+logic result62 : bool
+
+logic result63 : (int,(int,cell) farray) farray
+
+logic cur_board28 : (int,(int,cell) farray) farray
+
+logic result64 : int
+
+logic x27 : int
+
+logic result65 : bool
+
+logic result66 : (int,(int,cell) farray) farray
+
+logic cur_board29 : (int,(int,cell) farray) farray
+
+logic result67 : int
+
+logic x28 : int
+
+logic result68 : bool
+
+logic result69 : (int,(int,cell) farray) farray
+
+logic cur_board30 : (int,(int,cell) farray) farray
+
+logic result70 : int
+
+logic cur_state1 : int
+
+logic cur_board31 : (int,(int,cell) farray) farray
+
+logic cur_state2 : int
+
+logic y11 : int
+
+logic x29 : int
+
+logic y12 : int
+
+logic x30 : int
+
+logic cur_board32 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic y13 : int
+
+logic x31 : int
+
+logic y14 : int
+
+logic x32 : int
+
+axiom H : (patris__possible_i_shapes__aggregate_def(temp___150(of_int(0),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
   of_int(0), of_int(0), of_int(0)), temp___170(of_int(0), of_int(0),
@@ -2449,8 +2945,10 @@ goal WP_parameter_def :
   of_int(0)), temp___210(of_int(0), of_int(1), of_int(0), of_int(0),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) and
-  ((patris__possible_three_shapes__aggregate_def(temp___255(of_int(1),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (patris__possible_three_shapes__aggregate_def(temp___255(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___268(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -2484,459 +2982,1811 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___502(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) and (in_range9(cur_state) and
-  (((get_state(cur_state) = 1) and (valid_configuration__2(cur_state, {
-  rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : in_range9(cur_state)
+
+axiom H3 : ((get_state(cur_state) = 1) and (valid_configuration__2(cur_state,
+  { rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
   cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
-  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true)) and
-  (((((to_rep1(cur_piece__split_fields) = 2) and
-  ((((((to_rep(o) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o1 = to_rep2(cur_piece__split_fields2))) and
-  (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o])))) and
-  ((((1 <= to_rep3(cur_piece__split_fields3)) and
-  (to_rep3(cur_piece__split_fields3) <= 20)) and
-  (o3 = to_rep3(cur_piece__split_fields3))) and
-  (o4 = (cur_board[o3 <- o2])))) and (({ map__content1 = result } = {
-  map__content1 = cur_board }) and (cur_board2 = o4))) and
-  (((((to_rep(o5) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o6 = to_rep2(cur_piece__split_fields2))) and
-  (o7 = ((cur_board2[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
-  ((to_rep3(cur_piece__split_fields3) + 1) <= 20)) and
-  (o8 = (to_rep3(cur_piece__split_fields3) + 1))) and
-  (o9 = (cur_board2[o8 <- o7])))) and ((cur_board2 = result1) and
-  (cur_board3 = o9))) and
-  (((((to_rep(o10) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + 1)) and
-  ((to_rep2(cur_piece__split_fields2) + 1) <= 10)) and
-  (o11 = (to_rep2(cur_piece__split_fields2) + 1))) and
-  (o12 = ((cur_board3[to_rep3(cur_piece__split_fields3)])[o11 <- o10])))) and
-  ((((1 <= to_rep3(cur_piece__split_fields3)) and
-  (to_rep3(cur_piece__split_fields3) <= 20)) and
-  (o13 = to_rep3(cur_piece__split_fields3))) and
-  (o14 = (cur_board3[o13 <- o12])))) and ((cur_board3 = result2) and
-  (cur_board4 = o14))) and
-  ((((to_rep(o15) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + 1)) and
-  ((to_rep2(cur_piece__split_fields2) + 1) <= 10)) and
-  (o16 = (to_rep2(cur_piece__split_fields2) + 1))) and
-  (o17 = ((cur_board4[(to_rep3(cur_piece__split_fields3) + 1)])[o16 <- o15])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
-  ((to_rep3(cur_piece__split_fields3) + 1) <= 20)) and
-  (o18 = (to_rep3(cur_piece__split_fields3) + 1))) and
-  (o19 = (cur_board4[o18 <- o17])))) and ((result3 = cur_board4) and
-  (cur_board5 = o19)))))) and (((x28 = x1) and ((y10 = y1) and ((x19 = x) and
-  (y7 = y)))) and ((x28 = x3) and ((y10 = y3) and ((x19 = x2) and
-  (y7 = y2))))))) or ((not (to_rep1(cur_piece__split_fields) = 2)) and
-  ((((to_rep1(cur_piece__split_fields) = 1) and
-  (((forall yy:int. (((0 <= yy) and (yy <= 3)) ->
-    (forall xx:int. (((0 <= xx) and (xx <= 3)) ->
-    ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), yy,
-    xx) = true) -> (is_empty(cur_board,
-    (to_rep3(cur_piece__split_fields3) + yy),
-    (to_rep2(cur_piece__split_fields2) + xx)) = true)))))) and
-  ((({ int__content = result4 } = { int__content = y }) and (y4 = 0)) and
-  (((({ int__content = result5 } = { int__content = x }) and (x4 = 0)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x4) = true) and ((((to_rep(o20) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x4)) and
-  ((to_rep2(cur_piece__split_fields2) + x4) <= 10)) and
-  (o21 = (to_rep2(cur_piece__split_fields2) + x4))) and
-  (o22 = ((cur_board[(to_rep3(cur_piece__split_fields3) + y4)])[o21 <- o20])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
-  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)) and
-  (o23 = (to_rep3(cur_piece__split_fields3) + y4))) and
-  (o24 = (cur_board[o23 <- o22])))) and (({ map__content1 = result6 } = {
-  map__content1 = cur_board }) and (cur_board6 = o24)))) or
+  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true))
+
+axiom H4 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (to_rep(o) = to_rep1(cur_piece__split_fields)))
+
+axiom H5 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10)))
+
+axiom H6 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o1 = to_rep2(cur_piece__split_fields2)))
+
+axiom H7 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o])))
+
+axiom H8 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= to_rep3(cur_piece__split_fields3)) and
+  (to_rep3(cur_piece__split_fields3) <= 20)))
+
+axiom H9 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o3 = to_rep3(cur_piece__split_fields3)))
+
+axiom H10 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o4 = (cur_board[o3 <- o2])))
+
+axiom H11 : ((to_rep1(cur_piece__split_fields) = 2) -> (result = cur_board))
+
+axiom H12 : ((to_rep1(cur_piece__split_fields) = 2) -> (cur_board2 = o4))
+
+axiom H13 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (to_rep(o5) = to_rep1(cur_piece__split_fields)))
+
+axiom H14 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10)))
+
+axiom H15 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o6 = to_rep2(cur_piece__split_fields2)))
+
+axiom H16 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o7 = ((cur_board2[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5])))
+
+axiom H17 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
+  ((to_rep3(cur_piece__split_fields3) + 1) <= 20)))
+
+axiom H18 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o8 = (to_rep3(cur_piece__split_fields3) + 1)))
+
+axiom H19 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o9 = (cur_board2[o8 <- o7])))
+
+axiom H20 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (cur_board2 = result1))
+
+axiom H21 : ((to_rep1(cur_piece__split_fields) = 2) -> (cur_board3 = o9))
+
+axiom H22 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (to_rep(o10) = to_rep1(cur_piece__split_fields)))
+
+axiom H23 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + 1)) and
+  ((to_rep2(cur_piece__split_fields2) + 1) <= 10)))
+
+axiom H24 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o11 = (to_rep2(cur_piece__split_fields2) + 1)))
+
+axiom H25 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o12 = ((cur_board3[to_rep3(cur_piece__split_fields3)])[o11 <- o10])))
+
+axiom H26 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= to_rep3(cur_piece__split_fields3)) and
+  (to_rep3(cur_piece__split_fields3) <= 20)))
+
+axiom H27 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o13 = to_rep3(cur_piece__split_fields3)))
+
+axiom H28 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o14 = (cur_board3[o13 <- o12])))
+
+axiom H29 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (cur_board3 = result2))
+
+axiom H30 : ((to_rep1(cur_piece__split_fields) = 2) -> (cur_board4 = o14))
+
+axiom H31 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (to_rep(o15) = to_rep1(cur_piece__split_fields)))
+
+axiom H32 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + 1)) and
+  ((to_rep2(cur_piece__split_fields2) + 1) <= 10)))
+
+axiom H33 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o16 = (to_rep2(cur_piece__split_fields2) + 1)))
+
+axiom H34 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o17 = ((cur_board4[(to_rep3(cur_piece__split_fields3) + 1)])[o16 <- o15])))
+
+axiom H35 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
+  ((to_rep3(cur_piece__split_fields3) + 1) <= 20)))
+
+axiom H36 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o18 = (to_rep3(cur_piece__split_fields3) + 1)))
+
+axiom H37 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (o19 = (cur_board4[o18 <- o17])))
+
+axiom H38 : ((to_rep1(cur_piece__split_fields) = 2) ->
+  (result3 = cur_board4))
+
+axiom H39 : ((to_rep1(cur_piece__split_fields) = 2) -> (cur_board5 = o19))
+
+axiom H40 : ((to_rep1(cur_piece__split_fields) = 2) -> (x28 = x1))
+
+axiom H41 : ((to_rep1(cur_piece__split_fields) = 2) -> (y10 = y1))
+
+axiom H42 : ((to_rep1(cur_piece__split_fields) = 2) -> (x19 = x))
+
+axiom H43 : ((to_rep1(cur_piece__split_fields) = 2) -> (y7 = y))
+
+axiom H44 : ((to_rep1(cur_piece__split_fields) = 2) -> (x28 = x3))
+
+axiom H45 : ((to_rep1(cur_piece__split_fields) = 2) -> (y10 = y3))
+
+axiom H46 : ((to_rep1(cur_piece__split_fields) = 2) -> (x19 = x2))
+
+axiom H47 : ((to_rep1(cur_piece__split_fields) = 2) -> (y7 = y2))
+
+axiom H48 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  (forall yy1:int. (((0 <= yy1) and (yy1 <= 3)) ->
+  (forall xx1:int. (((0 <= xx1) and (xx1 <= 3)) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), yy1,
+  xx1) = true) -> (is_empty(cur_board,
+  (to_rep3(cur_piece__split_fields3) + yy1),
+  (to_rep2(cur_piece__split_fields2) + xx1)) = true))))))))
+
+axiom H49 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result4 = y)))
+
+axiom H50 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y4 = 0)))
+
+axiom H51 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result5 = x)))
+
+axiom H52 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x4 = 0)))
+
+axiom H53 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (to_rep(o20) = to_rep1(cur_piece__split_fields)))))
+
+axiom H54 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x4)) and
+  ((to_rep2(cur_piece__split_fields2) + x4) <= 10)))))
+
+axiom H55 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (o21 = (to_rep2(cur_piece__split_fields2) + x4)))))
+
+axiom H56 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) ->
+  (o22 = ((cur_board[(to_rep3(cur_piece__split_fields3) + y4)])[o21 <- o20])))))
+
+axiom H57 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
+  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)))))
+
+axiom H58 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (o23 = (to_rep3(cur_piece__split_fields3) + y4)))))
+
+axiom H59 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (o24 = (cur_board[o23 <- o22])))))
+
+axiom H60 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (result6 = cur_board))))
+
+axiom H61 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x4) = true) -> (cur_board6 = o24))))
+
+axiom H62 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x4) = true)) and ((cur_board6 = cur_board) and
-  (cur_board6 = cur_board1)))) and (((x4 = result7) and (x5 = 1)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x5) = true) and ((((to_rep(o25) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x5)) and
-  ((to_rep2(cur_piece__split_fields2) + x5) <= 10)) and
-  (o26 = (to_rep2(cur_piece__split_fields2) + x5))) and
-  (o27 = ((cur_board6[(to_rep3(cur_piece__split_fields3) + y4)])[o26 <- o25])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
-  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)) and
-  (o28 = (to_rep3(cur_piece__split_fields3) + y4))) and
-  (o29 = (cur_board6[o28 <- o27])))) and ((cur_board6 = result8) and
-  (cur_board7 = o29)))) or
+  x4) = true)) -> (cur_board6 = cur_board))))
+
+axiom H63 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x5) = true)) and (cur_board7 = cur_board6))) and (((x5 = result9) and
-  (x6 = 2)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x6) = true) and ((((to_rep(o30) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x6)) and
-  ((to_rep2(cur_piece__split_fields2) + x6) <= 10)) and
-  (o31 = (to_rep2(cur_piece__split_fields2) + x6))) and
-  (o32 = ((cur_board7[(to_rep3(cur_piece__split_fields3) + y4)])[o31 <- o30])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
-  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)) and
-  (o33 = (to_rep3(cur_piece__split_fields3) + y4))) and
-  (o34 = (cur_board7[o33 <- o32])))) and ((cur_board7 = result10) and
-  (cur_board8 = o34)))) or
+  x4) = true)) -> (cur_board6 = cur_board1))))
+
+axiom H64 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x4 = result7)))
+
+axiom H65 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x5 = 1)))
+
+axiom H66 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (to_rep(o25) = to_rep1(cur_piece__split_fields)))))
+
+axiom H67 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x5)) and
+  ((to_rep2(cur_piece__split_fields2) + x5) <= 10)))))
+
+axiom H68 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (o26 = (to_rep2(cur_piece__split_fields2) + x5)))))
+
+axiom H69 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) ->
+  (o27 = ((cur_board6[(to_rep3(cur_piece__split_fields3) + y4)])[o26 <- o25])))))
+
+axiom H70 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
+  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)))))
+
+axiom H71 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (o28 = (to_rep3(cur_piece__split_fields3) + y4)))))
+
+axiom H72 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (o29 = (cur_board6[o28 <- o27])))))
+
+axiom H73 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (cur_board6 = result8))))
+
+axiom H74 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x5) = true) -> (cur_board7 = o29))))
+
+axiom H75 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x6) = true)) and (cur_board8 = cur_board7))) and (((x6 = result11) and
-  (x7 = 3)) and
-  (((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x7) = true) and ((((to_rep(o35) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x7)) and
-  ((to_rep2(cur_piece__split_fields2) + x7) <= 10)) and
-  (o36 = (to_rep2(cur_piece__split_fields2) + x7))) and
-  (o37 = ((cur_board8[(to_rep3(cur_piece__split_fields3) + y4)])[o36 <- o35])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
-  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)) and
-  (o38 = (to_rep3(cur_piece__split_fields3) + y4))) and
-  (o39 = (cur_board8[o38 <- o37])))) and ((cur_board8 = result12) and
-  (cur_board9 = o39)))) or
+  x5) = true)) -> (cur_board7 = cur_board6))))
+
+axiom H76 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x5 = result9)))
+
+axiom H77 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x6 = 2)))
+
+axiom H78 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (to_rep(o30) = to_rep1(cur_piece__split_fields)))))
+
+axiom H79 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x6)) and
+  ((to_rep2(cur_piece__split_fields2) + x6) <= 10)))))
+
+axiom H80 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (o31 = (to_rep2(cur_piece__split_fields2) + x6)))))
+
+axiom H81 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) ->
+  (o32 = ((cur_board7[(to_rep3(cur_piece__split_fields3) + y4)])[o31 <- o30])))))
+
+axiom H82 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
+  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)))))
+
+axiom H83 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (o33 = (to_rep3(cur_piece__split_fields3) + y4)))))
+
+axiom H84 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (o34 = (cur_board7[o33 <- o32])))))
+
+axiom H85 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (cur_board7 = result10))))
+
+axiom H86 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x6) = true) -> (cur_board8 = o34))))
+
+axiom H87 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
-  x7) = true)) and (cur_board9 = cur_board8)))))))))) and
-  (((result13 = y4) and (y5 = 1)) and ((((result14 = x7) and (x8 = 0)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x8) = true) and ((((to_rep(o40) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x8)) and
-  ((to_rep2(cur_piece__split_fields2) + x8) <= 10)) and
-  (o41 = (to_rep2(cur_piece__split_fields2) + x8))) and
-  (o42 = ((cur_board9[(to_rep3(cur_piece__split_fields3) + y5)])[o41 <- o40])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
-  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)) and
-  (o43 = (to_rep3(cur_piece__split_fields3) + y5))) and
-  (o44 = (cur_board9[o43 <- o42])))) and ((result15 = cur_board9) and
-  (cur_board10 = o44)))) or
+  x6) = true)) -> (cur_board8 = cur_board7))))
+
+axiom H88 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x6 = result11)))
+
+axiom H89 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x7 = 3)))
+
+axiom H90 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (to_rep(o35) = to_rep1(cur_piece__split_fields)))))
+
+axiom H91 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x7)) and
+  ((to_rep2(cur_piece__split_fields2) + x7) <= 10)))))
+
+axiom H92 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (o36 = (to_rep2(cur_piece__split_fields2) + x7)))))
+
+axiom H93 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) ->
+  (o37 = ((cur_board8[(to_rep3(cur_piece__split_fields3) + y4)])[o36 <- o35])))))
+
+axiom H94 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y4)) and
+  ((to_rep3(cur_piece__split_fields3) + y4) <= 20)))))
+
+axiom H95 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (o38 = (to_rep3(cur_piece__split_fields3) + y4)))))
+
+axiom H96 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (o39 = (cur_board8[o38 <- o37])))))
+
+axiom H97 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (cur_board8 = result12))))
+
+axiom H98 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true) -> (cur_board9 = o39))))
+
+axiom H99 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y4,
+  x7) = true)) -> (cur_board9 = cur_board8))))
+
+axiom H100 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result13 = y4)))
+
+axiom H101 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y5 = 1)))
+
+axiom H102 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result14 = x7)))
+
+axiom H103 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x8 = 0)))
+
+axiom H104 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (to_rep(o40) = to_rep1(cur_piece__split_fields)))))
+
+axiom H105 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x8)) and
+  ((to_rep2(cur_piece__split_fields2) + x8) <= 10)))))
+
+axiom H106 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (o41 = (to_rep2(cur_piece__split_fields2) + x8)))))
+
+axiom H107 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) ->
+  (o42 = ((cur_board9[(to_rep3(cur_piece__split_fields3) + y5)])[o41 <- o40])))))
+
+axiom H108 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
+  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)))))
+
+axiom H109 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (o43 = (to_rep3(cur_piece__split_fields3) + y5)))))
+
+axiom H110 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (o44 = (cur_board9[o43 <- o42])))))
+
+axiom H111 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (result15 = cur_board9))))
+
+axiom H112 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x8) = true) -> (cur_board10 = o44))))
+
+axiom H113 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x8) = true)) and (cur_board10 = cur_board9))) and (((result16 = x8) and
-  (x9 = 1)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x9) = true) and ((((to_rep(o45) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x9)) and
-  ((to_rep2(cur_piece__split_fields2) + x9) <= 10)) and
-  (o46 = (to_rep2(cur_piece__split_fields2) + x9))) and
-  (o47 = ((cur_board10[(to_rep3(cur_piece__split_fields3) + y5)])[o46 <- o45])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
-  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)) and
-  (o48 = (to_rep3(cur_piece__split_fields3) + y5))) and
-  (o49 = (cur_board10[o48 <- o47])))) and ((result17 = cur_board10) and
-  (cur_board11 = o49)))) or
+  x8) = true)) -> (cur_board10 = cur_board9))))
+
+axiom H114 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result16 = x8)))
+
+axiom H115 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x9 = 1)))
+
+axiom H116 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (to_rep(o45) = to_rep1(cur_piece__split_fields)))))
+
+axiom H117 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x9)) and
+  ((to_rep2(cur_piece__split_fields2) + x9) <= 10)))))
+
+axiom H118 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (o46 = (to_rep2(cur_piece__split_fields2) + x9)))))
+
+axiom H119 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) ->
+  (o47 = ((cur_board10[(to_rep3(cur_piece__split_fields3) + y5)])[o46 <- o45])))))
+
+axiom H120 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
+  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)))))
+
+axiom H121 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (o48 = (to_rep3(cur_piece__split_fields3) + y5)))))
+
+axiom H122 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (o49 = (cur_board10[o48 <- o47])))))
+
+axiom H123 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (result17 = cur_board10))))
+
+axiom H124 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x9) = true) -> (cur_board11 = o49))))
+
+axiom H125 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x9) = true)) and (cur_board11 = cur_board10))) and (((result18 = x9) and
-  (x10 = 2)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x10) = true) and ((((to_rep(o50) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x10)) and
-  ((to_rep2(cur_piece__split_fields2) + x10) <= 10)) and
-  (o51 = (to_rep2(cur_piece__split_fields2) + x10))) and
-  (o52 = ((cur_board11[(to_rep3(cur_piece__split_fields3) + y5)])[o51 <- o50])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
-  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)) and
-  (o53 = (to_rep3(cur_piece__split_fields3) + y5))) and
-  (o54 = (cur_board11[o53 <- o52])))) and ((result19 = cur_board11) and
-  (cur_board12 = o54)))) or
+  x9) = true)) -> (cur_board11 = cur_board10))))
+
+axiom H126 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result18 = x9)))
+
+axiom H127 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x10 = 2)))
+
+axiom H128 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (to_rep(o50) = to_rep1(cur_piece__split_fields)))))
+
+axiom H129 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x10)) and
+  ((to_rep2(cur_piece__split_fields2) + x10) <= 10)))))
+
+axiom H130 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (o51 = (to_rep2(cur_piece__split_fields2) + x10)))))
+
+axiom H131 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) ->
+  (o52 = ((cur_board11[(to_rep3(cur_piece__split_fields3) + y5)])[o51 <- o50])))))
+
+axiom H132 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
+  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)))))
+
+axiom H133 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (o53 = (to_rep3(cur_piece__split_fields3) + y5)))))
+
+axiom H134 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (o54 = (cur_board11[o53 <- o52])))))
+
+axiom H135 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (result19 = cur_board11))))
+
+axiom H136 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x10) = true) -> (cur_board12 = o54))))
+
+axiom H137 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x10) = true)) and (cur_board12 = cur_board11))) and (((result20 = x10) and
-  (x11 = 3)) and
-  (((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x11) = true) and ((((to_rep(o55) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x11)) and
-  ((to_rep2(cur_piece__split_fields2) + x11) <= 10)) and
-  (o56 = (to_rep2(cur_piece__split_fields2) + x11))) and
-  (o57 = ((cur_board12[(to_rep3(cur_piece__split_fields3) + y5)])[o56 <- o55])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
-  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)) and
-  (o58 = (to_rep3(cur_piece__split_fields3) + y5))) and
-  (o59 = (cur_board12[o58 <- o57])))) and ((result21 = cur_board12) and
-  (cur_board13 = o59)))) or
+  x10) = true)) -> (cur_board12 = cur_board11))))
+
+axiom H138 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result20 = x10)))
+
+axiom H139 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x11 = 3)))
+
+axiom H140 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (to_rep(o55) = to_rep1(cur_piece__split_fields)))))
+
+axiom H141 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x11)) and
+  ((to_rep2(cur_piece__split_fields2) + x11) <= 10)))))
+
+axiom H142 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (o56 = (to_rep2(cur_piece__split_fields2) + x11)))))
+
+axiom H143 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) ->
+  (o57 = ((cur_board12[(to_rep3(cur_piece__split_fields3) + y5)])[o56 <- o55])))))
+
+axiom H144 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y5)) and
+  ((to_rep3(cur_piece__split_fields3) + y5) <= 20)))))
+
+axiom H145 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (o58 = (to_rep3(cur_piece__split_fields3) + y5)))))
+
+axiom H146 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (o59 = (cur_board12[o58 <- o57])))))
+
+axiom H147 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (result21 = cur_board12))))
+
+axiom H148 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x11) = true) -> (cur_board13 = o59))))
+
+axiom H149 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
-  x11) = true)) and (cur_board13 = cur_board12)))))))))) and
-  (((result22 = y5) and (y6 = 2)) and ((((result23 = x11) and (x12 = 0)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x12) = true) and ((((to_rep(o60) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x12)) and
-  ((to_rep2(cur_piece__split_fields2) + x12) <= 10)) and
-  (o61 = (to_rep2(cur_piece__split_fields2) + x12))) and
-  (o62 = ((cur_board13[(to_rep3(cur_piece__split_fields3) + y6)])[o61 <- o60])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
-  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)) and
-  (o63 = (to_rep3(cur_piece__split_fields3) + y6))) and
-  (o64 = (cur_board13[o63 <- o62])))) and ((result24 = cur_board13) and
-  (cur_board14 = o64)))) or
+  x11) = true)) -> (cur_board13 = cur_board12))))
+
+axiom H150 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result22 = y5)))
+
+axiom H151 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y6 = 2)))
+
+axiom H152 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result23 = x11)))
+
+axiom H153 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x12 = 0)))
+
+axiom H154 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (to_rep(o60) = to_rep1(cur_piece__split_fields)))))
+
+axiom H155 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x12)) and
+  ((to_rep2(cur_piece__split_fields2) + x12) <= 10)))))
+
+axiom H156 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (o61 = (to_rep2(cur_piece__split_fields2) + x12)))))
+
+axiom H157 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) ->
+  (o62 = ((cur_board13[(to_rep3(cur_piece__split_fields3) + y6)])[o61 <- o60])))))
+
+axiom H158 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
+  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)))))
+
+axiom H159 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (o63 = (to_rep3(cur_piece__split_fields3) + y6)))))
+
+axiom H160 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (o64 = (cur_board13[o63 <- o62])))))
+
+axiom H161 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (result24 = cur_board13))))
+
+axiom H162 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x12) = true) -> (cur_board14 = o64))))
+
+axiom H163 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x12) = true)) and (cur_board14 = cur_board13))) and (((result25 = x12) and
-  (x13 = 1)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x13) = true) and ((((to_rep(o65) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x13)) and
-  ((to_rep2(cur_piece__split_fields2) + x13) <= 10)) and
-  (o66 = (to_rep2(cur_piece__split_fields2) + x13))) and
-  (o67 = ((cur_board14[(to_rep3(cur_piece__split_fields3) + y6)])[o66 <- o65])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
-  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)) and
-  (o68 = (to_rep3(cur_piece__split_fields3) + y6))) and
-  (o69 = (cur_board14[o68 <- o67])))) and ((result26 = cur_board14) and
-  (cur_board15 = o69)))) or
+  x12) = true)) -> (cur_board14 = cur_board13))))
+
+axiom H164 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result25 = x12)))
+
+axiom H165 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x13 = 1)))
+
+axiom H166 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (to_rep(o65) = to_rep1(cur_piece__split_fields)))))
+
+axiom H167 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x13)) and
+  ((to_rep2(cur_piece__split_fields2) + x13) <= 10)))))
+
+axiom H168 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (o66 = (to_rep2(cur_piece__split_fields2) + x13)))))
+
+axiom H169 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) ->
+  (o67 = ((cur_board14[(to_rep3(cur_piece__split_fields3) + y6)])[o66 <- o65])))))
+
+axiom H170 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
+  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)))))
+
+axiom H171 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (o68 = (to_rep3(cur_piece__split_fields3) + y6)))))
+
+axiom H172 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (o69 = (cur_board14[o68 <- o67])))))
+
+axiom H173 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (result26 = cur_board14))))
+
+axiom H174 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x13) = true) -> (cur_board15 = o69))))
+
+axiom H175 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x13) = true)) and (cur_board15 = cur_board14))) and (((result27 = x13) and
-  (x14 = 2)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x14) = true) and ((((to_rep(o70) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x14)) and
-  ((to_rep2(cur_piece__split_fields2) + x14) <= 10)) and
-  (o71 = (to_rep2(cur_piece__split_fields2) + x14))) and
-  (o72 = ((cur_board15[(to_rep3(cur_piece__split_fields3) + y6)])[o71 <- o70])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
-  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)) and
-  (o73 = (to_rep3(cur_piece__split_fields3) + y6))) and
-  (o74 = (cur_board15[o73 <- o72])))) and ((result28 = cur_board15) and
-  (cur_board16 = o74)))) or
+  x13) = true)) -> (cur_board15 = cur_board14))))
+
+axiom H176 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result27 = x13)))
+
+axiom H177 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x14 = 2)))
+
+axiom H178 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (to_rep(o70) = to_rep1(cur_piece__split_fields)))))
+
+axiom H179 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x14)) and
+  ((to_rep2(cur_piece__split_fields2) + x14) <= 10)))))
+
+axiom H180 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (o71 = (to_rep2(cur_piece__split_fields2) + x14)))))
+
+axiom H181 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) ->
+  (o72 = ((cur_board15[(to_rep3(cur_piece__split_fields3) + y6)])[o71 <- o70])))))
+
+axiom H182 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
+  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)))))
+
+axiom H183 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (o73 = (to_rep3(cur_piece__split_fields3) + y6)))))
+
+axiom H184 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (o74 = (cur_board15[o73 <- o72])))))
+
+axiom H185 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (result28 = cur_board15))))
+
+axiom H186 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x14) = true) -> (cur_board16 = o74))))
+
+axiom H187 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x14) = true)) and (cur_board16 = cur_board15))) and (((result29 = x14) and
-  (x15 = 3)) and
-  (((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x15) = true) and ((((to_rep(o75) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x15)) and
-  ((to_rep2(cur_piece__split_fields2) + x15) <= 10)) and
-  (o76 = (to_rep2(cur_piece__split_fields2) + x15))) and
-  (o77 = ((cur_board16[(to_rep3(cur_piece__split_fields3) + y6)])[o76 <- o75])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
-  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)) and
-  (o78 = (to_rep3(cur_piece__split_fields3) + y6))) and
-  (o79 = (cur_board16[o78 <- o77])))) and ((result30 = cur_board16) and
-  (cur_board17 = o79)))) or
+  x14) = true)) -> (cur_board16 = cur_board15))))
+
+axiom H188 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result29 = x14)))
+
+axiom H189 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x15 = 3)))
+
+axiom H190 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (to_rep(o75) = to_rep1(cur_piece__split_fields)))))
+
+axiom H191 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x15)) and
+  ((to_rep2(cur_piece__split_fields2) + x15) <= 10)))))
+
+axiom H192 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (o76 = (to_rep2(cur_piece__split_fields2) + x15)))))
+
+axiom H193 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) ->
+  (o77 = ((cur_board16[(to_rep3(cur_piece__split_fields3) + y6)])[o76 <- o75])))))
+
+axiom H194 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y6)) and
+  ((to_rep3(cur_piece__split_fields3) + y6) <= 20)))))
+
+axiom H195 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (o78 = (to_rep3(cur_piece__split_fields3) + y6)))))
+
+axiom H196 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (o79 = (cur_board16[o78 <- o77])))))
+
+axiom H197 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (result30 = cur_board16))))
+
+axiom H198 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
+  x15) = true) -> (cur_board17 = o79))))
+
+axiom H199 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y6,
-  x15) = true)) and (cur_board17 = cur_board16)))))))))) and
-  (((result31 = y6) and (y7 = 3)) and (((result32 = x15) and (x16 = 0)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x16) = true) and ((((to_rep(o80) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x16)) and
-  ((to_rep2(cur_piece__split_fields2) + x16) <= 10)) and
-  (o81 = (to_rep2(cur_piece__split_fields2) + x16))) and
-  (o82 = ((cur_board17[(to_rep3(cur_piece__split_fields3) + y7)])[o81 <- o80])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
-  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)) and
-  (o83 = (to_rep3(cur_piece__split_fields3) + y7))) and
-  (o84 = (cur_board17[o83 <- o82])))) and ((result33 = cur_board17) and
-  (cur_board18 = o84)))) or
+  x15) = true)) -> (cur_board17 = cur_board16))))
+
+axiom H200 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result31 = y6)))
+
+axiom H201 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y7 = 3)))
+
+axiom H202 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result32 = x15)))
+
+axiom H203 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x16 = 0)))
+
+axiom H204 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (to_rep(o80) = to_rep1(cur_piece__split_fields)))))
+
+axiom H205 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x16)) and
+  ((to_rep2(cur_piece__split_fields2) + x16) <= 10)))))
+
+axiom H206 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (o81 = (to_rep2(cur_piece__split_fields2) + x16)))))
+
+axiom H207 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) ->
+  (o82 = ((cur_board17[(to_rep3(cur_piece__split_fields3) + y7)])[o81 <- o80])))))
+
+axiom H208 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
+  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)))))
+
+axiom H209 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (o83 = (to_rep3(cur_piece__split_fields3) + y7)))))
+
+axiom H210 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (o84 = (cur_board17[o83 <- o82])))))
+
+axiom H211 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (result33 = cur_board17))))
+
+axiom H212 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x16) = true) -> (cur_board18 = o84))))
+
+axiom H213 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x16) = true)) and (cur_board18 = cur_board17))) and (((result34 = {
-  int__content = x16 }) and (x17 = 1)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x17) = true) and ((((to_rep(o85) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x17)) and
-  ((to_rep2(cur_piece__split_fields2) + x17) <= 10)) and
-  (o86 = (to_rep2(cur_piece__split_fields2) + x17))) and
-  (o87 = ((cur_board18[(to_rep3(cur_piece__split_fields3) + y7)])[o86 <- o85])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
-  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)) and
-  (o88 = (to_rep3(cur_piece__split_fields3) + y7))) and
-  (o89 = (cur_board18[o88 <- o87])))) and ((result35 = { map__content1 =
-  cur_board18 }) and (cur_board19 = o89)))) or
+  x16) = true)) -> (cur_board18 = cur_board17))))
+
+axiom H214 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result34 = x16)))
+
+axiom H215 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x17 = 1)))
+
+axiom H216 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (to_rep(o85) = to_rep1(cur_piece__split_fields)))))
+
+axiom H217 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x17)) and
+  ((to_rep2(cur_piece__split_fields2) + x17) <= 10)))))
+
+axiom H218 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (o86 = (to_rep2(cur_piece__split_fields2) + x17)))))
+
+axiom H219 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) ->
+  (o87 = ((cur_board18[(to_rep3(cur_piece__split_fields3) + y7)])[o86 <- o85])))))
+
+axiom H220 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
+  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)))))
+
+axiom H221 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (o88 = (to_rep3(cur_piece__split_fields3) + y7)))))
+
+axiom H222 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (o89 = (cur_board18[o88 <- o87])))))
+
+axiom H223 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (result35 = cur_board18))))
+
+axiom H224 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x17) = true) -> (cur_board19 = o89))))
+
+axiom H225 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x17) = true)) and (cur_board19 = cur_board18))) and (((result36 = {
-  int__content = x17 }) and (x18 = 2)) and
-  ((((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x18) = true) and ((((to_rep(o90) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x18)) and
-  ((to_rep2(cur_piece__split_fields2) + x18) <= 10)) and
-  (o91 = (to_rep2(cur_piece__split_fields2) + x18))) and
-  (o92 = ((cur_board19[(to_rep3(cur_piece__split_fields3) + y7)])[o91 <- o90])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
-  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)) and
-  (o93 = (to_rep3(cur_piece__split_fields3) + y7))) and
-  (o94 = (cur_board19[o93 <- o92])))) and ((result37 = { map__content1 =
-  cur_board19 }) and (cur_board20 = o94)))) or
+  x17) = true)) -> (cur_board19 = cur_board18))))
+
+axiom H226 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result36 = x17)))
+
+axiom H227 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x18 = 2)))
+
+axiom H228 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (to_rep(o90) = to_rep1(cur_piece__split_fields)))))
+
+axiom H229 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x18)) and
+  ((to_rep2(cur_piece__split_fields2) + x18) <= 10)))))
+
+axiom H230 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (o91 = (to_rep2(cur_piece__split_fields2) + x18)))))
+
+axiom H231 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) ->
+  (o92 = ((cur_board19[(to_rep3(cur_piece__split_fields3) + y7)])[o91 <- o90])))))
+
+axiom H232 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
+  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)))))
+
+axiom H233 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (o93 = (to_rep3(cur_piece__split_fields3) + y7)))))
+
+axiom H234 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (o94 = (cur_board19[o93 <- o92])))))
+
+axiom H235 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (result37 = cur_board19))))
+
+axiom H236 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x18) = true) -> (cur_board20 = o94))))
+
+axiom H237 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x18) = true)) and (cur_board20 = cur_board19))) and (((result38 = {
-  int__content = x18 }) and (x19 = 3)) and
-  (((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x19) = true) and ((((to_rep(o95) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x19)) and
-  ((to_rep2(cur_piece__split_fields2) + x19) <= 10)) and
-  (o96 = (to_rep2(cur_piece__split_fields2) + x19))) and
-  (o97 = ((cur_board20[(to_rep3(cur_piece__split_fields3) + y7)])[o96 <- o95])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
-  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)) and
-  (o98 = (to_rep3(cur_piece__split_fields3) + y7))) and
-  (o99 = (cur_board20[o98 <- o97])))) and ((result39 = { map__content1 =
-  cur_board20 }) and (cur_board21 = o99)))) or
+  x18) = true)) -> (cur_board20 = cur_board19))))
+
+axiom H238 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (result38 = x18)))
+
+axiom H239 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x19 = 3)))
+
+axiom H240 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (to_rep(o95) = to_rep1(cur_piece__split_fields)))))
+
+axiom H241 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> ((1 <= (to_rep2(cur_piece__split_fields2) + x19)) and
+  ((to_rep2(cur_piece__split_fields2) + x19) <= 10)))))
+
+axiom H242 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (o96 = (to_rep2(cur_piece__split_fields2) + x19)))))
+
+axiom H243 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) ->
+  (o97 = ((cur_board20[(to_rep3(cur_piece__split_fields3) + y7)])[o96 <- o95])))))
+
+axiom H244 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> ((1 <= (to_rep3(cur_piece__split_fields3) + y7)) and
+  ((to_rep3(cur_piece__split_fields3) + y7) <= 20)))))
+
+axiom H245 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (o98 = (to_rep3(cur_piece__split_fields3) + y7)))))
+
+axiom H246 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (o99 = (cur_board20[o98 <- o97])))))
+
+axiom H247 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (result39 = cur_board20))))
+
+axiom H248 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
+  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
+  x19) = true) -> (cur_board21 = o99))))
+
+axiom H249 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) ->
   ((not (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y7,
-  x19) = true)) and (cur_board21 = cur_board20)))))))))))))))))) and
-  (((x28 = x1) and (y10 = y1)) and ((x28 = x3) and (y10 = y3))))) or
-  ((not (to_rep1(cur_piece__split_fields) = 1)) and
-  (((forall yy:int. (((0 <= yy) and (yy <= 2)) ->
-    (forall xx:int. (((0 <= xx) and (xx <= 2)) ->
-    ((get(get1(possible_three_shapes, to_rep1(cur_piece__split_fields),
-    to_rep4(cur_piece__split_fields1)), yy, xx) = true) ->
-    (is_empty(cur_board, (to_rep3(cur_piece__split_fields3) + yy),
-    (to_rep2(cur_piece__split_fields2) + xx)) = true)))))) and
-  (((result40 = { int__content = y1 }) and (y8 = 0)) and ((((result41 = {
-  int__content = x1 }) and (x20 = 0)) and
-  (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o100 = to_rep1(cur_piece__split_fields))) and
-  (temp___2148 = get1(possible_three_shapes, o100,
-  to_rep4(cur_piece__split_fields1)))) and (result42 = get(temp___2148, y8,
-  x20))) and (((result42 = true) and
-  ((((to_rep(o101) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x20)) and
-  ((to_rep2(cur_piece__split_fields2) + x20) <= 10)) and
-  (o102 = (to_rep2(cur_piece__split_fields2) + x20))) and
-  (o103 = ((cur_board[(to_rep3(cur_piece__split_fields3) + y8)])[o102 <- o101])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
-  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)) and
-  (o104 = (to_rep3(cur_piece__split_fields3) + y8))) and
-  (o105 = (cur_board[o104 <- o103])))) and ((result43 = { map__content1 =
-  cur_board }) and (cur_board22 = o105)))) or ((not (result42 = true)) and
-  ((cur_board22 = cur_board) and (cur_board22 = cur_board1))))) and
-  (((result44 = { int__content = x20 }) and (x21 = 1)) and
-  (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o106 = to_rep1(cur_piece__split_fields))) and
-  (temp___21481 = get1(possible_three_shapes, o106,
-  to_rep4(cur_piece__split_fields1)))) and (result45 = get(temp___21481, y8,
-  x21))) and (((result45 = true) and
-  ((((to_rep(o107) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x21)) and
-  ((to_rep2(cur_piece__split_fields2) + x21) <= 10)) and
-  (o108 = (to_rep2(cur_piece__split_fields2) + x21))) and
-  (o109 = ((cur_board22[(to_rep3(cur_piece__split_fields3) + y8)])[o108 <- o107])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
-  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)) and
-  (o110 = (to_rep3(cur_piece__split_fields3) + y8))) and
-  (o111 = (cur_board22[o110 <- o109])))) and ((result46 = { map__content1 =
-  cur_board22 }) and (cur_board23 = o111)))) or ((not (result45 = true)) and
-  (cur_board23 = cur_board22)))) and (((result47 = { int__content = x21
-  }) and (x22 = 2)) and ((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o112 = to_rep1(cur_piece__split_fields))) and
-  (temp___21482 = get1(possible_three_shapes, o112,
-  to_rep4(cur_piece__split_fields1)))) and (result48 = get(temp___21482, y8,
-  x22))) and (((result48 = true) and
-  ((((to_rep(o113) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x22)) and
-  ((to_rep2(cur_piece__split_fields2) + x22) <= 10)) and
-  (o114 = (to_rep2(cur_piece__split_fields2) + x22))) and
-  (o115 = ((cur_board23[(to_rep3(cur_piece__split_fields3) + y8)])[o114 <- o113])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
-  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)) and
-  (o116 = (to_rep3(cur_piece__split_fields3) + y8))) and
-  (o117 = (cur_board23[o116 <- o115])))) and ((result49 = { map__content1 =
-  cur_board23 }) and (cur_board24 = o117)))) or ((not (result48 = true)) and
-  (cur_board24 = cur_board23))))))))) and (((result50 = { int__content = y8
-  }) and (y9 = 1)) and ((((result51 = { int__content = x22 }) and
-  (x23 = 0)) and (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o118 = to_rep1(cur_piece__split_fields))) and
-  (temp___21483 = get1(possible_three_shapes, o118,
-  to_rep4(cur_piece__split_fields1)))) and (result52 = get(temp___21483, y9,
-  x23))) and (((result52 = true) and
-  ((((to_rep(o119) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x23)) and
-  ((to_rep2(cur_piece__split_fields2) + x23) <= 10)) and
-  (o120 = (to_rep2(cur_piece__split_fields2) + x23))) and
-  (o121 = ((cur_board24[(to_rep3(cur_piece__split_fields3) + y9)])[o120 <- o119])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
-  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)) and
-  (o122 = (to_rep3(cur_piece__split_fields3) + y9))) and
-  (o123 = (cur_board24[o122 <- o121])))) and ((result53 = { map__content1 =
-  cur_board24 }) and (cur_board25 = o123)))) or ((not (result52 = true)) and
-  (cur_board25 = cur_board24)))) and (((result54 = { int__content = x23
-  }) and (x24 = 1)) and (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o124 = to_rep1(cur_piece__split_fields))) and
-  (temp___21484 = get1(possible_three_shapes, o124,
-  to_rep4(cur_piece__split_fields1)))) and (result55 = get(temp___21484, y9,
-  x24))) and (((result55 = true) and
-  ((((to_rep(o125) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x24)) and
-  ((to_rep2(cur_piece__split_fields2) + x24) <= 10)) and
-  (o126 = (to_rep2(cur_piece__split_fields2) + x24))) and
-  (o127 = ((cur_board25[(to_rep3(cur_piece__split_fields3) + y9)])[o126 <- o125])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
-  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)) and
-  (o128 = (to_rep3(cur_piece__split_fields3) + y9))) and
-  (o129 = (cur_board25[o128 <- o127])))) and ((result56 = { map__content1 =
-  cur_board25 }) and (cur_board26 = o129)))) or ((not (result55 = true)) and
-  (cur_board26 = cur_board25)))) and (((result57 = { int__content = x24
-  }) and (x25 = 2)) and ((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o130 = to_rep1(cur_piece__split_fields))) and
-  (temp___21485 = get1(possible_three_shapes, o130,
-  to_rep4(cur_piece__split_fields1)))) and (result58 = get(temp___21485, y9,
-  x25))) and (((result58 = true) and
-  ((((to_rep(o131) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x25)) and
-  ((to_rep2(cur_piece__split_fields2) + x25) <= 10)) and
-  (o132 = (to_rep2(cur_piece__split_fields2) + x25))) and
-  (o133 = ((cur_board26[(to_rep3(cur_piece__split_fields3) + y9)])[o132 <- o131])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
-  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)) and
-  (o134 = (to_rep3(cur_piece__split_fields3) + y9))) and
-  (o135 = (cur_board26[o134 <- o133])))) and ((result59 = { map__content1 =
-  cur_board26 }) and (cur_board27 = o135)))) or ((not (result58 = true)) and
-  (cur_board27 = cur_board26))))))))) and (((result60 = { int__content = y9
-  }) and (y10 = 2)) and (((result61 = { int__content = x25 }) and
-  (x26 = 0)) and (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o136 = to_rep1(cur_piece__split_fields))) and
-  (temp___21486 = get1(possible_three_shapes, o136,
-  to_rep4(cur_piece__split_fields1)))) and (result62 = get(temp___21486, y10,
-  x26))) and (((result62 = true) and
-  ((((to_rep(o137) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x26)) and
-  ((to_rep2(cur_piece__split_fields2) + x26) <= 10)) and
-  (o138 = (to_rep2(cur_piece__split_fields2) + x26))) and
-  (o139 = ((cur_board27[(to_rep3(cur_piece__split_fields3) + y10)])[o138 <- o137])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
-  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)) and
-  (o140 = (to_rep3(cur_piece__split_fields3) + y10))) and
-  (o141 = (cur_board27[o140 <- o139])))) and ((result63 = { map__content1 =
-  cur_board27 }) and (cur_board28 = o141)))) or ((not (result62 = true)) and
-  (cur_board28 = cur_board27)))) and (((result64 = { int__content = x26
-  }) and (x27 = 1)) and (((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o142 = to_rep1(cur_piece__split_fields))) and
-  (temp___21487 = get1(possible_three_shapes, o142,
-  to_rep4(cur_piece__split_fields1)))) and (result65 = get(temp___21487, y10,
-  x27))) and (((result65 = true) and
-  ((((to_rep(o143) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x27)) and
-  ((to_rep2(cur_piece__split_fields2) + x27) <= 10)) and
-  (o144 = (to_rep2(cur_piece__split_fields2) + x27))) and
-  (o145 = ((cur_board28[(to_rep3(cur_piece__split_fields3) + y10)])[o144 <- o143])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
-  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)) and
-  (o146 = (to_rep3(cur_piece__split_fields3) + y10))) and
-  (o147 = (cur_board28[o146 <- o145])))) and ((result66 = { map__content1 =
-  cur_board28 }) and (cur_board29 = o147)))) or ((not (result65 = true)) and
-  (cur_board29 = cur_board28)))) and (((result67 = { int__content = x27
-  }) and (x28 = 2)) and ((((((3 <= to_rep1(cur_piece__split_fields)) and
-  (to_rep1(cur_piece__split_fields) <= 7)) and
-  (o148 = to_rep1(cur_piece__split_fields))) and
-  (temp___21488 = get1(possible_three_shapes, o148,
-  to_rep4(cur_piece__split_fields1)))) and (result68 = get(temp___21488, y10,
-  x28))) and (((result68 = true) and
-  ((((to_rep(o149) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x28)) and
-  ((to_rep2(cur_piece__split_fields2) + x28) <= 10)) and
-  (o150 = (to_rep2(cur_piece__split_fields2) + x28))) and
-  (o151 = ((cur_board29[(to_rep3(cur_piece__split_fields3) + y10)])[o150 <- o149])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
-  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)) and
-  (o152 = (to_rep3(cur_piece__split_fields3) + y10))) and
-  (o153 = (cur_board29[o152 <- o151])))) and ((result69 = { map__content1 =
-  cur_board29 }) and (cur_board30 = o153)))) or ((not (result68 = true)) and
-  (cur_board30 = cur_board29))))))))))))))) and (((x19 = x) and ((y7 = y) and
-  (cur_board21 = cur_board30))) and ((x19 = x2) and ((y7 = y2) and
-  (cur_board21 = cur_board30))))))) and (cur_board5 = cur_board21)))) and
-  ((result70 = { int__content = cur_state }) and (cur_state1 = 2))) and
-  (((x30 = { int__content = x28 }) and ((y12 = { int__content = y10 }) and
-  ((x29 = { int__content = x19 }) and ((y11 = { int__content = y7 }) and
-  ((cur_state2 = { int__content = cur_state1 }) and (cur_board31 = {
-  map__content1 = cur_board5 })))))) and ((x32 = x28) and ((y14 = y10) and
-  ((x31 = x19) and ((y13 = y7) and ((cur_state3 = cur_state1) and
-  (cur_board32 = cur_board5)))))))))))) ->
-  (get_state((cur_state2).int__content) = 2)))
+  x19) = true)) -> (cur_board21 = cur_board20))))
+
+axiom H250 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x28 = x1)))
+
+axiom H251 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y10 = y1)))
+
+axiom H252 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (x28 = x3)))
+
+axiom H253 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((to_rep1(cur_piece__split_fields) = 1) -> (y10 = y3)))
+
+axiom H254 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (forall yy1:int. (((0 <= yy1) and (yy1 <= 2)) ->
+  (forall xx1:int. (((0 <= xx1) and (xx1 <= 2)) ->
+  ((get(get1(possible_three_shapes, to_rep1(cur_piece__split_fields),
+  to_rep4(cur_piece__split_fields1)), yy1, xx1) = true) ->
+  (is_empty(cur_board, (to_rep3(cur_piece__split_fields3) + yy1),
+  (to_rep2(cur_piece__split_fields2) + xx1)) = true))))))))
+
+axiom H255 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result40 = y1)))
+
+axiom H256 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (y8 = 0)))
+
+axiom H257 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result41 = x1)))
+
+axiom H258 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x20 = 0)))
+
+axiom H259 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H260 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o100 = to_rep1(cur_piece__split_fields))))
+
+axiom H261 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___2142 = get1(possible_three_shapes, o100,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H262 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result42 = get(temp___2142, y8, x20))))
+
+axiom H263 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (to_rep(o101) = to_rep1(cur_piece__split_fields)))))
+
+axiom H264 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x20)) and
+  ((to_rep2(cur_piece__split_fields2) + x20) <= 10)))))
+
+axiom H265 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (o102 = (to_rep2(cur_piece__split_fields2) + x20)))))
+
+axiom H266 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (o103 = ((cur_board[(to_rep3(cur_piece__split_fields3) + y8)])[o102 <- o101])))))
+
+axiom H267 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
+  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)))))
+
+axiom H268 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (o104 = (to_rep3(cur_piece__split_fields3) + y8)))))
+
+axiom H269 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (o105 = (cur_board[o104 <- o103])))))
+
+axiom H270 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (result43 = cur_board))))
+
+axiom H271 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result42 = true) ->
+  (cur_board22 = o105))))
+
+axiom H272 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result42 = true)) -> (cur_board22 = cur_board))))
+
+axiom H273 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result42 = true)) -> (cur_board22 = cur_board1))))
+
+axiom H274 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result44 = x20)))
+
+axiom H275 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x21 = 1)))
+
+axiom H276 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H277 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o106 = to_rep1(cur_piece__split_fields))))
+
+axiom H278 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21421 = get1(possible_three_shapes, o106,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H279 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result45 = get(temp___21421, y8, x21))))
+
+axiom H280 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (to_rep(o107) = to_rep1(cur_piece__split_fields)))))
+
+axiom H281 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x21)) and
+  ((to_rep2(cur_piece__split_fields2) + x21) <= 10)))))
+
+axiom H282 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (o108 = (to_rep2(cur_piece__split_fields2) + x21)))))
+
+axiom H283 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (o109 = ((cur_board22[(to_rep3(cur_piece__split_fields3) + y8)])[o108 <- o107])))))
+
+axiom H284 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
+  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)))))
+
+axiom H285 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (o110 = (to_rep3(cur_piece__split_fields3) + y8)))))
+
+axiom H286 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (o111 = (cur_board22[o110 <- o109])))))
+
+axiom H287 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (result46 = cur_board22))))
+
+axiom H288 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result45 = true) ->
+  (cur_board23 = o111))))
+
+axiom H289 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result45 = true)) -> (cur_board23 = cur_board22))))
+
+axiom H290 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result47 = x21)))
+
+axiom H291 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x22 = 2)))
+
+axiom H292 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H293 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o112 = to_rep1(cur_piece__split_fields))))
+
+axiom H294 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21422 = get1(possible_three_shapes, o112,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H295 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result48 = get(temp___21422, y8, x22))))
+
+axiom H296 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (to_rep(o113) = to_rep1(cur_piece__split_fields)))))
+
+axiom H297 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x22)) and
+  ((to_rep2(cur_piece__split_fields2) + x22) <= 10)))))
+
+axiom H298 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (o114 = (to_rep2(cur_piece__split_fields2) + x22)))))
+
+axiom H299 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (o115 = ((cur_board23[(to_rep3(cur_piece__split_fields3) + y8)])[o114 <- o113])))))
+
+axiom H300 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y8)) and
+  ((to_rep3(cur_piece__split_fields3) + y8) <= 20)))))
+
+axiom H301 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (o116 = (to_rep3(cur_piece__split_fields3) + y8)))))
+
+axiom H302 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (o117 = (cur_board23[o116 <- o115])))))
+
+axiom H303 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (result49 = cur_board23))))
+
+axiom H304 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result48 = true) ->
+  (cur_board24 = o117))))
+
+axiom H305 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result48 = true)) -> (cur_board24 = cur_board23))))
+
+axiom H306 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result50 = y8)))
+
+axiom H307 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (y9 = 1)))
+
+axiom H308 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result51 = x22)))
+
+axiom H309 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x23 = 0)))
+
+axiom H310 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H311 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o118 = to_rep1(cur_piece__split_fields))))
+
+axiom H312 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21423 = get1(possible_three_shapes, o118,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H313 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result52 = get(temp___21423, y9, x23))))
+
+axiom H314 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (to_rep(o119) = to_rep1(cur_piece__split_fields)))))
+
+axiom H315 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x23)) and
+  ((to_rep2(cur_piece__split_fields2) + x23) <= 10)))))
+
+axiom H316 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (o120 = (to_rep2(cur_piece__split_fields2) + x23)))))
+
+axiom H317 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (o121 = ((cur_board24[(to_rep3(cur_piece__split_fields3) + y9)])[o120 <- o119])))))
+
+axiom H318 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
+  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)))))
+
+axiom H319 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (o122 = (to_rep3(cur_piece__split_fields3) + y9)))))
+
+axiom H320 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (o123 = (cur_board24[o122 <- o121])))))
+
+axiom H321 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (result53 = cur_board24))))
+
+axiom H322 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result52 = true) ->
+  (cur_board25 = o123))))
+
+axiom H323 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result52 = true)) -> (cur_board25 = cur_board24))))
+
+axiom H324 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result54 = x23)))
+
+axiom H325 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x24 = 1)))
+
+axiom H326 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H327 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o124 = to_rep1(cur_piece__split_fields))))
+
+axiom H328 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21424 = get1(possible_three_shapes, o124,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H329 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result55 = get(temp___21424, y9, x24))))
+
+axiom H330 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (to_rep(o125) = to_rep1(cur_piece__split_fields)))))
+
+axiom H331 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x24)) and
+  ((to_rep2(cur_piece__split_fields2) + x24) <= 10)))))
+
+axiom H332 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (o126 = (to_rep2(cur_piece__split_fields2) + x24)))))
+
+axiom H333 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (o127 = ((cur_board25[(to_rep3(cur_piece__split_fields3) + y9)])[o126 <- o125])))))
+
+axiom H334 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
+  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)))))
+
+axiom H335 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (o128 = (to_rep3(cur_piece__split_fields3) + y9)))))
+
+axiom H336 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (o129 = (cur_board25[o128 <- o127])))))
+
+axiom H337 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (result56 = cur_board25))))
+
+axiom H338 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result55 = true) ->
+  (cur_board26 = o129))))
+
+axiom H339 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result55 = true)) -> (cur_board26 = cur_board25))))
+
+axiom H340 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result57 = x24)))
+
+axiom H341 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x25 = 2)))
+
+axiom H342 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H343 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o130 = to_rep1(cur_piece__split_fields))))
+
+axiom H344 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21425 = get1(possible_three_shapes, o130,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H345 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result58 = get(temp___21425, y9, x25))))
+
+axiom H346 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (to_rep(o131) = to_rep1(cur_piece__split_fields)))))
+
+axiom H347 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x25)) and
+  ((to_rep2(cur_piece__split_fields2) + x25) <= 10)))))
+
+axiom H348 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (o132 = (to_rep2(cur_piece__split_fields2) + x25)))))
+
+axiom H349 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (o133 = ((cur_board26[(to_rep3(cur_piece__split_fields3) + y9)])[o132 <- o131])))))
+
+axiom H350 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y9)) and
+  ((to_rep3(cur_piece__split_fields3) + y9) <= 20)))))
+
+axiom H351 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (o134 = (to_rep3(cur_piece__split_fields3) + y9)))))
+
+axiom H352 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (o135 = (cur_board26[o134 <- o133])))))
+
+axiom H353 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (result59 = cur_board26))))
+
+axiom H354 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result58 = true) ->
+  (cur_board27 = o135))))
+
+axiom H355 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result58 = true)) -> (cur_board27 = cur_board26))))
+
+axiom H356 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result60 = y9)))
+
+axiom H357 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (y10 = 2)))
+
+axiom H358 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result61 = x25)))
+
+axiom H359 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x26 = 0)))
+
+axiom H360 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H361 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o136 = to_rep1(cur_piece__split_fields))))
+
+axiom H362 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21426 = get1(possible_three_shapes, o136,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H363 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result62 = get(temp___21426, y10, x26))))
+
+axiom H364 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (to_rep(o137) = to_rep1(cur_piece__split_fields)))))
+
+axiom H365 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x26)) and
+  ((to_rep2(cur_piece__split_fields2) + x26) <= 10)))))
+
+axiom H366 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (o138 = (to_rep2(cur_piece__split_fields2) + x26)))))
+
+axiom H367 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (o139 = ((cur_board27[(to_rep3(cur_piece__split_fields3) + y10)])[o138 <- o137])))))
+
+axiom H368 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
+  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)))))
+
+axiom H369 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (o140 = (to_rep3(cur_piece__split_fields3) + y10)))))
+
+axiom H370 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (o141 = (cur_board27[o140 <- o139])))))
+
+axiom H371 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (result63 = cur_board27))))
+
+axiom H372 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result62 = true) ->
+  (cur_board28 = o141))))
+
+axiom H373 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result62 = true)) -> (cur_board28 = cur_board27))))
+
+axiom H374 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result64 = x26)))
+
+axiom H375 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x27 = 1)))
+
+axiom H376 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H377 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o142 = to_rep1(cur_piece__split_fields))))
+
+axiom H378 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21427 = get1(possible_three_shapes, o142,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H379 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result65 = get(temp___21427, y10, x27))))
+
+axiom H380 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (to_rep(o143) = to_rep1(cur_piece__split_fields)))))
+
+axiom H381 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x27)) and
+  ((to_rep2(cur_piece__split_fields2) + x27) <= 10)))))
+
+axiom H382 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (o144 = (to_rep2(cur_piece__split_fields2) + x27)))))
+
+axiom H383 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (o145 = ((cur_board28[(to_rep3(cur_piece__split_fields3) + y10)])[o144 <- o143])))))
+
+axiom H384 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
+  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)))))
+
+axiom H385 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (o146 = (to_rep3(cur_piece__split_fields3) + y10)))))
+
+axiom H386 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (o147 = (cur_board28[o146 <- o145])))))
+
+axiom H387 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (result66 = cur_board28))))
+
+axiom H388 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result65 = true) ->
+  (cur_board29 = o147))))
+
+axiom H389 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result65 = true)) -> (cur_board29 = cur_board28))))
+
+axiom H390 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (result67 = x27)))
+
+axiom H391 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x28 = 2)))
+
+axiom H392 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((3 <= to_rep1(cur_piece__split_fields)) and
+  (to_rep1(cur_piece__split_fields) <= 7))))
+
+axiom H393 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (o148 = to_rep1(cur_piece__split_fields))))
+
+axiom H394 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (temp___21428 = get1(possible_three_shapes, o148,
+  to_rep4(cur_piece__split_fields1)))))
+
+axiom H395 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (result68 = get(temp___21428, y10, x28))))
+
+axiom H396 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (to_rep(o149) = to_rep1(cur_piece__split_fields)))))
+
+axiom H397 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  ((1 <= (to_rep2(cur_piece__split_fields2) + x28)) and
+  ((to_rep2(cur_piece__split_fields2) + x28) <= 10)))))
+
+axiom H398 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (o150 = (to_rep2(cur_piece__split_fields2) + x28)))))
+
+axiom H399 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (o151 = ((cur_board29[(to_rep3(cur_piece__split_fields3) + y10)])[o150 <- o149])))))
+
+axiom H400 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  ((1 <= (to_rep3(cur_piece__split_fields3) + y10)) and
+  ((to_rep3(cur_piece__split_fields3) + y10) <= 20)))))
+
+axiom H401 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (o152 = (to_rep3(cur_piece__split_fields3) + y10)))))
+
+axiom H402 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (o153 = (cur_board29[o152 <- o151])))))
+
+axiom H403 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (result69 = cur_board29))))
+
+axiom H404 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> ((result68 = true) ->
+  (cur_board30 = o153))))
+
+axiom H405 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  ((not (result68 = true)) -> (cur_board30 = cur_board29))))
+
+axiom H406 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x19 = x)))
+
+axiom H407 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (y7 = y)))
+
+axiom H408 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (cur_board21 = cur_board30)))
+
+axiom H409 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (x19 = x2)))
+
+axiom H410 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (y7 = y2)))
+
+axiom H411 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  ((not (to_rep1(cur_piece__split_fields) = 1)) ->
+  (cur_board21 = cur_board30)))
+
+axiom H412 : ((not (to_rep1(cur_piece__split_fields) = 2)) ->
+  (cur_board5 = cur_board21))
+
+axiom H413 : (result70 = cur_state)
+
+axiom H414 : (cur_state1 = 2)
+
+axiom H415 : (x30 = x28)
+
+axiom H416 : (y12 = y10)
+
+axiom H417 : (x29 = x19)
+
+axiom H418 : (y11 = y7)
+
+axiom H419 : (cur_state2 = cur_state1)
+
+axiom H420 : (cur_board31 = cur_board5)
+
+axiom H421 : (x32 = x28)
+
+axiom H422 : (y14 = y10)
+
+axiom H423 : (x31 = x19)
+
+axiom H424 : (y13 = y7)
+
+axiom H425 : (cur_state3 = cur_state1)
+
+axiom H426 : (cur_board32 = cur_board5)
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (get_state(cur_state2) = 2)

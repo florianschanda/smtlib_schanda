@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -663,6 +663,25 @@ logic divisor : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x86__safedivision64__result : t
+
+logic result : t
+
+logic x86__safedivision64__result1 : t
+
+logic x86__safedivision64__result2 : t
+
+logic x86__safedivision64__result3 : t
+
+logic x86__safedivision64__result4 : t
+
+logic x86__safedivision64__result5 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (not (divisor = of_int(0)))
+
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ((not (divisor = of_int(0))) ->
-  (not (divisor = zeros)))
+goal WP_parameter_def : (not (divisor = zeros))

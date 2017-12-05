@@ -88,10 +88,45 @@ axiom h_y__def_axiom :
   (forall p__dummy__B17b__z:bool [h_y(p__dummy__B17b__z)].
   ((h_y(p__dummy__B17b__z) = true) <-> (p__dummy__B17b__z = true)))
 
+logic z : bool
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic result : bool
+
+logic z1 : bool
+
+logic result1 : bool
+
+logic z2 : bool
+
+logic result2 : bool
+
+logic z3 : bool
+
+logic result3 : bool
+
+logic z4 : bool
+
+axiom H : ((o = h_true(void)) and (o = true))
+
+axiom H1 : (result = z)
+
+axiom H2 : (z1 = o)
+
+axiom H3 : (z1 = true)
+
+axiom H4 : ((o1 = h_x(z1)) and ((o1 = true) <-> (z1 = true)))
+
+axiom H5 : (result1 = z1)
+
+axiom H6 : (z2 = o1)
+
  (* File "p.adb", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:bool. forall o:bool. forall o1:bool. forall result:bool.
-  forall z1:bool. forall result1:bool. forall z2:bool.
-  ((((o = h_true(void)) and (o = true)) and ((result = z) and (z1 = o))) ->
-  ((z1 = true) -> ((((o1 = h_x(z1)) and ((o1 = true) <-> (z1 = true))) and
-  ((result1 = z1) and (z2 = o1))) -> (z2 = true)))))
+goal WP_parameter_def : (z2 = true)

@@ -107,7 +107,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -569,7 +569,7 @@ function index_type__ref___2__projection(a: index_type__ref1) : index_type1 =
 
 type element_type1
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -869,7 +869,7 @@ axiom length__post_axiom1 :
 
 type element_type2
 
-predicate in_range11(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range11(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -900,6 +900,15 @@ axiom get__post_axiom :
   (position <= (0 + length(container5))))) -> in_range11(get(container5,
   position)))))
 
+logic us : int
+
+logic us1 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
+axiom H1 : in_range1(item)
+
+axiom H2 : in_range(index)
+
  (* File "aida-containers-formal_vectors.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(container) = to_rep1(container1)) ->
-  (in_range1(item) -> (in_range(index) -> in_range2(to_rep(container)))))
+goal WP_parameter_def : in_range2(to_rep(container))

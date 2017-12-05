@@ -153,6 +153,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 (declare-const visible Int)
+(declare-const us Int)
 (declare-const result Int)
 (declare-const visible1 Int)
 (assert (= result visible))

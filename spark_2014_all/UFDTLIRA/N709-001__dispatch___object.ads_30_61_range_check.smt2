@@ -105,6 +105,7 @@
 (assert true)
 (assert (forall ((obj1 us_rep)) (! (= (to_int1 (has_stored_area obj1)) (to_int1 (has_stored_area1 us_tag obj1))) :pattern ((has_stored_area1 us_tag obj1)))))
 (assert (forall ((obj1 us_rep)) (! (= (= (has_stored_area obj1) true) (in_range1 (to_rep (rec__object__t__area (us_split_fields1 obj1))))) :pattern ((has_stored_area obj1)))))
+(declare-const o Int)
 (assert (= (has_stored_area obj) true))
 (assert (not (in_range1 (to_rep (rec__object__t__area (us_split_fields1 obj))))))
 (check-sat)

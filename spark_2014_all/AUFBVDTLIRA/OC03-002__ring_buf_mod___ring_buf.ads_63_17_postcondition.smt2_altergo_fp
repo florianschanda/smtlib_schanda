@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -596,7 +596,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1555,23 +1555,48 @@ logic r2 : length_type
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ring_buf__head__result : int
+
+logic o : (t,integer) farray
+
+logic o1 : t1
+
+logic o2 : int
+
+logic result : int
+
+logic ring_buf__head__result1 : int
+
+logic ring_buf__head__result2 : int
+
+logic ring_buf__head__result3 : int
+
+logic ring_buf__head__result4 : int
+
+logic ring_buf__head__result5 : int
+
+logic result1 : int
+
+axiom H : (not (is_empty({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
+  r1; rec__ring_buf__ring_buffer__length = r2 } }) = true))
+
+axiom H1 : (ring_buf__head__result1 = ring_buf__head__result2)
+
+axiom H2 : (ring_buf__head__result3 = ring_buf__head__result1)
+
+axiom H3 : (result = ring_buf__head__result)
+
+axiom H4 : (ring_buf__head__result1 = to_rep((r[to_rep1(r1)])))
+
+axiom H5 : (ring_buf__head__result4 = ring_buf__head__result2)
+
+axiom H6 : (ring_buf__head__result5 = ring_buf__head__result3)
+
+axiom H7 : (result1 = ring_buf__head__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ring_buf__head__result:int. forall result:int.
-  forall ring_buf__head__result1:int. forall ring_buf__head__result2:int.
-  forall ring_buf__head__result3:int. forall ring_buf__head__result4:int.
-  forall ring_buf__head__result5:int.
-  (forall result1:int. (((not (is_empty({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }) = true)) and
-  (((((ring_buf__head__result1 = ring_buf__head__result2) and
-  (ring_buf__head__result3 = ring_buf__head__result1)) and (({ int__content =
-  result } = { int__content = ring_buf__head__result }) and
-  (ring_buf__head__result1 = to_rep((r[to_rep1(r1)]))))) and (({
-  int__content = ring_buf__head__result4 } = { int__content =
-  ring_buf__head__result2 }) and
-  (ring_buf__head__result5 = ring_buf__head__result3))) and
-  (result1 = ring_buf__head__result4))) ->
-  (ring_buf__head__result4 = func_head(to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r; rec__ring_buf__ring_buffer__first =
-  r1; rec__ring_buf__ring_buffer__length = r2 } }))))))
+goal WP_parameter_def : (ring_buf__head__result4 = func_head(to_model({
+  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r;
+  rec__ring_buf__ring_buffer__first = r1;
+  rec__ring_buf__ring_buffer__length = r2 } })))

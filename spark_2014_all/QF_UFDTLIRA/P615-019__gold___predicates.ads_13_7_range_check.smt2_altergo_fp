@@ -105,7 +105,11 @@ type positive__ref = { positive__content : positive
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
 
+logic temp___size_179 : int
+
+axiom H : in_range(temp___size_179)
+
+axiom H1 : (1 <= temp___size_179)
+
  (* File "predicates.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___size_179:int. (in_range(temp___size_179) ->
-  ((1 <= temp___size_179) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

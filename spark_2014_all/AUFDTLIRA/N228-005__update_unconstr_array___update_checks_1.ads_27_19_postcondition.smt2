@@ -279,6 +279,8 @@
 (declare-const temp___471 (Array Int integer))
 (declare-const temp___4711 t3)
 (declare-const o1 (Array Int integer))
+(declare-const temp___477 (Array Int integer))
+(declare-const temp___4771 t2)
 (declare-const result (Array Int integer))
 (declare-const a1 (Array Int integer))
 (declare-const a2 (Array Int integer))

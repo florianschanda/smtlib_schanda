@@ -257,9 +257,15 @@ axiom def_axiom :
   ((not ((temp___450 = 2) or ((4 <= temp___450) and (temp___450 <= 6)))) ->
   ((temp___446(temp___448, temp___449)[temp___450]) = of_rep(temp___449))))))
 
+logic x : (int,unsigned_byte) farray
+
+logic result : (int,unsigned_byte) farray
+
+logic x1 : (int,unsigned_byte) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___446(2, 8))
+
  (* File "array_aggregates.adb", line 140, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,unsigned_byte) farray.
-  forall result:(int,unsigned_byte) farray.
-  forall x1:(int,unsigned_byte) farray. (((result = x) and
-  (x1 = temp___446(2, 8))) -> (to_rep((x1[3])) = 5)))
+goal WP_parameter_def : (to_rep((x1[3])) = 5)

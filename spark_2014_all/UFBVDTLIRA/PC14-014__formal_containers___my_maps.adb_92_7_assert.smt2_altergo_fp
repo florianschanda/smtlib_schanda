@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1402,7 +1402,7 @@ logic element__function_guard1 : int, int, us_rep1, us_rep2 -> prop
 
 type element_type
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq14 : int, int -> bool
 
@@ -2147,7 +2147,7 @@ axiom has_key__post_axiom :
 
 type element_type1
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -2440,30 +2440,312 @@ axiom w_get__post_axiom1 :
   ((in_range3(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range9(w_get1(container, witness2)))))
 
- (* File "my_maps.adb", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall k__split_fields:us_main_type.
-  forall my_maps__test_map_rec_2__R16b__assume:t. forall us:t.
-  forall us1:int. forall my_maps__test_map_rec_2__R19b__assume:t.
-  forall us2:t. forall us3:int.
-  (((my_maps__test_map_rec_2__R16b__assume = default_modulus(10)) and
-  (my_maps__test_map_rec_2__R16b__assume = r16b)) -> ((us = r16b) ->
-  (((us1 = 10) and in_range3(10)) -> ((((to_rep3(l__split_discrs) = 10) and
+logic l__split_fields : us_main_type
+
+logic k__split_fields : us_main_type
+
+logic c__split_fields : count_type
+
+logic my_maps__test_map_rec_2__R16b__assume : t
+
+logic us : t
+
+logic us1 : int
+
+logic my_maps__test_map_rec_2__R19b__assume : t
+
+logic us2 : t
+
+logic us3 : int
+
+logic temp___1130 : count_type
+
+logic temp___1131 : count_type
+
+logic o : integer
+
+logic o1 : positive
+
+logic o2 : positive
+
+logic o3 : integer
+
+logic o4 : positive
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : positive
+
+logic o8 : positive
+
+logic o9 : integer
+
+logic o10 : positive
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : positive
+
+logic o14 : positive
+
+logic o15 : integer
+
+logic o16 : positive
+
+logic o17 : integer
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : positive
+
+logic o21 : positive
+
+logic o22 : integer
+
+logic o23 : positive
+
+logic o24 : integer
+
+logic o25 : integer
+
+logic o26 : positive
+
+logic o27 : positive
+
+logic o28 : integer
+
+logic o29 : positive
+
+logic o30 : integer
+
+logic o31 : integer
+
+logic o32 : positive
+
+logic o33 : positive
+
+logic o34 : integer
+
+logic o35 : positive
+
+logic o36 : integer
+
+logic o37 : integer
+
+logic o38 : positive
+
+logic o39 : positive
+
+logic o40 : integer
+
+logic o41 : positive
+
+logic o42 : integer
+
+logic o43 : integer
+
+logic o44 : positive
+
+logic o45 : positive
+
+logic o46 : integer
+
+logic o47 : positive
+
+logic o48 : integer
+
+logic temp___1143 : count_type
+
+logic o49 : integer
+
+logic o50 : positive
+
+logic o51 : positive
+
+logic o52 : integer
+
+logic o53 : positive
+
+logic o54 : integer
+
+logic temp___1145 : count_type
+
+logic o55 : integer
+
+logic o56 : positive
+
+logic o57 : positive
+
+logic o58 : integer
+
+logic o59 : positive
+
+logic o60 : integer
+
+logic o61 : integer
+
+logic o62 : positive
+
+logic o63 : positive
+
+logic o64 : integer
+
+logic o65 : positive
+
+logic o66 : integer
+
+logic result : count_type
+
+logic c__split_fields1 : count_type
+
+logic result1 : count_type
+
+logic c__split_fields2 : count_type
+
+logic my_maps__n__insert__2__container__fields : us_main_type
+
+logic result2 : us_main_type
+
+logic l__split_fields1 : us_main_type
+
+logic my_maps__n__insert__2__container__fields1 : us_main_type
+
+logic result3 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic c__split_fields3 : count_type
+
+logic b : bool
+
+logic my_maps__n__insert__container__fields : us_main_type
+
+logic result4 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic my_maps__n__replace_element__container__fields : us_main_type
+
+logic result5 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+logic my_maps__n__replace__container__fields : us_main_type
+
+logic result6 : us_main_type
+
+logic l__split_fields5 : us_main_type
+
+logic my_maps__n__assign__target__fields : us_main_type
+
+logic result7 : us_main_type
+
+logic k__split_fields1 : us_main_type
+
+logic my_maps__n__move__source__fields : us_main_type
+
+logic my_maps__n__move__target__fields : us_main_type
+
+logic result8 : us_main_type
+
+logic l__split_fields6 : us_main_type
+
+logic result9 : us_main_type
+
+logic k__split_fields2 : us_main_type
+
+logic my_maps__n__include__container__fields : us_main_type
+
+logic result10 : us_main_type
+
+logic l__split_fields7 : us_main_type
+
+logic my_maps__n__include__container__fields1 : us_main_type
+
+logic result11 : us_main_type
+
+logic l__split_fields8 : us_main_type
+
+logic my_maps__n__delete__container__fields : us_main_type
+
+logic result12 : us_main_type
+
+logic l__split_fields9 : us_main_type
+
+logic result13 : count_type
+
+logic c__split_fields4 : count_type
+
+logic c__split_fields5 : count_type
+
+logic my_maps__n__delete__2__container__fields : us_main_type
+
+logic result14 : us_main_type
+
+logic l__split_fields10 : us_main_type
+
+logic result15 : count_type
+
+logic c__split_fields6 : count_type
+
+logic my_maps__n__exclude__container__fields : us_main_type
+
+logic result16 : us_main_type
+
+logic l__split_fields11 : us_main_type
+
+logic my_maps__n__exclude__container__fields1 : us_main_type
+
+logic result17 : us_main_type
+
+logic l__split_fields12 : us_main_type
+
+axiom H : (my_maps__test_map_rec_2__R16b__assume = default_modulus(10))
+
+axiom H1 : (my_maps__test_map_rec_2__R16b__assume = r16b)
+
+axiom H2 : true
+
+axiom H3 : (us = r16b)
+
+axiom H4 : ((us1 = 10) and in_range3(10))
+
+axiom H5 : (((to_rep3(l__split_discrs) = 10) and
   (to_rep2(l__split_discrs1) = r16b)) and (is_empty({ us_split_discrs1 = {
   rec__my_maps__n__map__capacity = l__split_discrs;
   rec__my_maps__n__map__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_maps__n__map = l__split_fields } }) = true)) ->
-  (((10 = to_rep3(l__split_discrs)) and
-  (r16b = to_rep2(l__split_discrs1))) ->
-  (((my_maps__test_map_rec_2__R19b__assume = default_modulus(10)) and
-  (my_maps__test_map_rec_2__R19b__assume = r19b)) -> ((us2 = r19b) ->
-  (((us3 = 10) and in_range3(10)) -> ((((to_rep3(k__split_discrs) = 10) and
+  rec__my_maps__n__map = l__split_fields } }) = true))
+
+axiom H6 : ((10 = to_rep3(l__split_discrs)) and
+  (r16b = to_rep2(l__split_discrs1)))
+
+axiom H7 : (my_maps__test_map_rec_2__R19b__assume = default_modulus(10))
+
+axiom H8 : (my_maps__test_map_rec_2__R19b__assume = r19b)
+
+axiom H9 : true
+
+axiom H10 : (us2 = r19b)
+
+axiom H11 : ((us3 = 10) and in_range3(10))
+
+axiom H12 : (((to_rep3(k__split_discrs) = 10) and
   (to_rep2(k__split_discrs1) = r19b)) and (is_empty({ us_split_discrs1 = {
   rec__my_maps__n__map__capacity = k__split_discrs;
   rec__my_maps__n__map__modulus = k__split_discrs1 }; us_split_fields3 = {
-  rec__my_maps__n__map = k__split_fields } }) = true)) ->
-  (((10 = to_rep3(k__split_discrs)) and
-  (r19b = to_rep2(k__split_discrs1))) -> (is_empty({ us_split_discrs1 = {
+  rec__my_maps__n__map = k__split_fields } }) = true))
+
+axiom H13 : ((10 = to_rep3(k__split_discrs)) and
+  (r19b = to_rep2(k__split_discrs1)))
+
+ (* File "my_maps.adb", line 44, characters 0-0 *)
+goal WP_parameter_def : (is_empty({ us_split_discrs1 = {
   rec__my_maps__n__map__capacity = l__split_discrs;
   rec__my_maps__n__map__modulus = l__split_discrs1 }; us_split_fields3 = {
-  rec__my_maps__n__map = l__split_fields } }) = true))))))))))))
+  rec__my_maps__n__map = l__split_fields } }) = true)

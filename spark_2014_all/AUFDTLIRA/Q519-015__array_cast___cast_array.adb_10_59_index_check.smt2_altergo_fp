@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer_subtype
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -470,23 +470,127 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result__ : (int,integer_subtype) farray
+
+logic i : int
+
+logic cast_array__cast__result : (int,integer_subtype) farray
+
+logic temp___164 : int
+
+logic temp___162 : (int,integer_subtype) farray
+
+logic o : integer_subtype
+
+logic o1 : (int,integer_subtype) farray
+
+logic k : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : integer_subtype
+
+logic o6 : (int,integer_subtype) farray
+
+logic result__1 : (int,integer_subtype) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer_subtype) farray
+
+logic result__2 : (int,integer_subtype) farray
+
+logic result__3 : (int,integer_subtype) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,integer_subtype) farray
+
+logic result__4 : (int,integer_subtype) farray
+
+logic result__5 : (int,integer_subtype) farray
+
+logic i4 : int
+
+logic result__6 : (int,integer_subtype) farray
+
+logic i5 : int
+
+logic result__7 : (int,integer_subtype) farray
+
+logic i6 : int
+
+logic result__8 : (int,integer_subtype) farray
+
+logic i7 : int
+
+logic result__9 : (int,integer_subtype) farray
+
+logic i8 : int
+
+logic result__10 : (int,integer_subtype) farray
+
+logic i9 : int
+
+logic result4 : (int,integer_subtype) farray
+
+logic cast_array__cast__result1 : (int,integer_subtype) farray
+
+logic cast_array__cast__result2 : (int,integer_subtype) farray
+
+logic cast_array__cast__result3 : (int,integer_subtype) farray
+
+logic result__11 : (int,integer_subtype) farray
+
+logic i10 : int
+
+logic cast_array__cast__result4 : (int,integer_subtype) farray
+
+logic result__12 : (int,integer_subtype) farray
+
+logic i11 : int
+
+logic cast_array__cast__result5 : (int,integer_subtype) farray
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 0)
+
+axiom H2 : (0 <= i1)
+
+axiom H3 : (i1 <= 2)
+
+axiom H4 : (to_rep1(o) = to_rep((input_array[i1])))
+
+axiom H5 : (o1 = (result__[i1 <- o]))
+
+axiom H6 : (result1 = result__)
+
+axiom H7 : (result__2 = o1)
+
+axiom H8 :
+  (forall k1:int. (((0 <= k1) and (k1 <= i2)) ->
+  (to_rep1((result__3[k1])) = to_rep((input_array[k1])))))
+
+axiom H9 :
+  (((forall temp___163:int. (((0 <= temp___163) and (temp___163 <= 2)) ->
+    ((i2 <  temp___163) ->
+    ((result__3[temp___163]) = (result__[temp___163]))))) and ((0 <= 2) ->
+  in_range5(i2))) and ((0 <= i2) and (i2 <= 2)))
+
+axiom H10 : (0 <= k)
+
+axiom H11 : (k <= i2)
+
  (* File "cast_array.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,integer_subtype) farray. forall i:int.
-  forall o:integer_subtype. forall o1:(int,integer_subtype) farray.
-  forall k:int. forall result:int. forall i1:int.
-  forall result1:(int,integer_subtype) farray.
-  forall result__1:(int,integer_subtype) farray.
-  forall result__2:(int,integer_subtype) farray. forall i2:int. ((({
-  int__content = result } = { int__content = i }) and (i1 = 0)) ->
-  (((0 <= i1) and (i1 <= 2)) ->
-  ((((to_rep1(o) = to_rep((input_array[i1]))) and
-  (o1 = (result__[i1 <- o]))) and (({ map__content1 = result1 } = {
-  map__content1 = result__ }) and (result__1 = o1))) ->
-  ((forall k1:int. (((0 <= k1) and (k1 <= i2)) ->
-   (to_rep1((result__2[k1])) = to_rep((input_array[k1]))))) ->
-  ((((forall temp___163:int. (((0 <= temp___163) and (temp___163 <= 2)) ->
-     ((i2 <  temp___163) ->
-     ((result__2[temp___163]) = (result__[temp___163]))))) and
-  ((0 <= 2) -> in_range5(i2))) and ((0 <= i2) and (i2 <= 2))) ->
-  (((0 <= k) and (k <= i2)) -> (0 <= k))))))))
+goal WP_parameter_def : (0 <= k)

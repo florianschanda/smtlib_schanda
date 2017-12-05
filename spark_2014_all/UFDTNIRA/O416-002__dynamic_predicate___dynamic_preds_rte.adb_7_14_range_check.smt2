@@ -111,6 +111,7 @@
 (declare-const o3 very_small)
 (declare-const temp___207 small)
 (declare-const temp___2071 very_small)
+(declare-const temp___208 Int)
 (declare-const result small)
 (declare-const result1 very_small)
 (declare-const x__split_fields2 small)

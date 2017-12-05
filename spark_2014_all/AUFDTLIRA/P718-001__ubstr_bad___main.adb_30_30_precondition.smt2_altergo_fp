@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -576,24 +576,66 @@ axiom temp___String_Literal_849__def_axiom :
   (to_rep((temp___String_Literal_849(void)[2])) = 121)) and
   (to_rep((temp___String_Literal_849(void)[3])) = 101))
 
+logic tag_v__split_fields : us_rep
+
+logic n : us_rep
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic o2 : int
+
+logic o3 : us_rep
+
+logic o4 : (int,character) farray
+
+logic o5 : t
+
+logic tag_v__split_fields1 : us_rep
+
+logic result : us_rep
+
+logic n1 : us_rep
+
+logic extension__mutable_tag_name__initialize__this : us_rep
+
+logic result1 : us_rep
+
+logic n2 : us_rep
+
+logic result2 : bool
+
+axiom H : (length1(tag_v__split_fields) = 0)
+
+axiom H1 : (length1(n) = 0)
+
+axiom H2 : ((o = name({ us_split_fields1 = { rec__vk__tag__t__my_name =
+  tag_v__split_fields1 } })) and (o = tag_v__split_fields1))
+
+axiom H3 : (result = n)
+
+axiom H4 : (n1 = o)
+
+axiom H5 : (length({ elts = temp___String_Literal_849(void); rt = mk(1, 3)
+  }) = length1(extension__mutable_tag_name__initialize__this))
+
+axiom H6 : (result1 = n1)
+
+axiom H7 : (n2 = extension__mutable_tag_name__initialize__this)
+
+axiom H8 : ((o1 = name({ us_split_fields1 = { rec__vk__tag__t__my_name =
+  tag_v__split_fields1 } })) and (o1 = tag_v__split_fields1))
+
+axiom H9 : ((o2 = length1(o1)) and in_range3(o2))
+
+axiom H10 : (((o2 <  500000) -> (result2 = true)) and
+  ((not (o2 <  500000)) -> (result2 = false)))
+
+axiom H11 : (result2 = true)
+
+axiom H12 : ((o3 = name({ us_split_fields1 = { rec__vk__tag__t__my_name =
+  tag_v__split_fields1 } })) and (o3 = tag_v__split_fields1))
+
  (* File "main.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tag_v__split_fields:us_rep. forall n:us_rep. forall o:us_rep.
-  forall o1:us_rep. forall o2:int. forall o3:us_rep.
-  forall tag_v__split_fields1:us_rep. forall result:us_rep. forall n1:us_rep.
-  forall extension__mutable_tag_name__initialize__this:us_rep.
-  forall result1:us_rep. forall n2:us_rep. forall result2:bool.
-  ((length1(tag_v__split_fields) = 0) -> ((length1(n) = 0) -> ((((o = name({
-  us_split_fields1 = { rec__vk__tag__t__my_name = tag_v__split_fields1 }
-  })) and (o = tag_v__split_fields1)) and ((result = n) and (n1 = o))) ->
-  (((length({ elts = temp___String_Literal_849(void); rt = mk(1, 3)
-  }) = length1(extension__mutable_tag_name__initialize__this)) and
-  ((result1 = n1) and
-  (n2 = extension__mutable_tag_name__initialize__this))) -> (((((o1 = name({
-  us_split_fields1 = { rec__vk__tag__t__my_name = tag_v__split_fields1 }
-  })) and (o1 = tag_v__split_fields1)) and ((o2 = length1(o1)) and
-  in_range3(o2))) and (((o2 <  500000) and (result2 = true)) or
-  ((not (o2 <  500000)) and (result2 = false)))) -> ((result2 = true) ->
-  (((o3 = name({ us_split_fields1 = { rec__vk__tag__t__my_name =
-  tag_v__split_fields1 } })) and (o3 = tag_v__split_fields1)) ->
-  (length1(o3) <  500000)))))))))
+goal WP_parameter_def : (length1(o3) <  500000)

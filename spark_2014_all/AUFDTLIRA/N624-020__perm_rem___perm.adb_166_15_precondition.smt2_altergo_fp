@@ -307,7 +307,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -638,26 +638,75 @@ axiom ih__def_axiom : (ih = induction_hypothesis(remove({ elts = a; rt = a1
   }, to_rep(w)), remove({ elts = b; rt = b1 }, to_rep(w1)), remove({ elts =
   c; rt = c1 }, to_rep(w))))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__shift_perm_l__induction_hypothesis__result:int.
-  forall perm__shift_perm_l__induction_hypothesis__B_5__w__assume:index.
-  forall perm__shift_perm_l__induction_hypothesis__B_5__w__assume1:index.
-  forall o:(int,natural) farray. forall o1:t. forall o2:(int,natural) farray.
-  forall o3:t. forall o4:(int,natural) farray. forall o5:t.
-  forall perm__shift_perm_l__induction_hypothesis__result1:int.
-  forall perm__shift_perm_l__induction_hypothesis__result2:int.
-  (dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1))) ->
-  (dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1))) ->
-  (dynamic_property(1, 100, to_rep2(first(c1)), to_rep2(last(c1))) ->
-  (((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({ elts = b;
-  rt = b1 }) = true) and ((invariant__({ elts = c; rt = c1 }) = true) and
-  ((bool_eq5(a, to_rep2(first(a1)), to_rep2(last(a1)), c, to_rep2(first(c1)),
-  to_rep2(last(c1))) = true) and (is_perm({ elts = a; rt = a1 }, { elts = b;
-  rt = b1 }) = true))))) -> (((not (length({ elts = a; rt = a1 }) = 0)) and
-  ((perm__shift_perm_l__induction_hypothesis__result2 = perm__shift_perm_l__induction_hypothesis__result) and
-  (perm__shift_perm_l__induction_hypothesis__result2 = perm__shift_perm_l__induction_hypothesis__result1))) ->
-  (((({ us_split_fields1 = { rec__perm__witnesses__ia =
+logic perm__shift_perm_l__induction_hypothesis__result : int
+
+logic perm__shift_perm_l__induction_hypothesis__B_5__w__assume : index
+
+logic perm__shift_perm_l__induction_hypothesis__B_5__w__assume1 : index
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : (int,natural) farray
+
+logic o3 : t
+
+logic o4 : (int,natural) farray
+
+logic o5 : t
+
+logic perm__shift_perm_l__induction_hypothesis__B_5__ih__assume : int
+
+logic perm__shift_perm_l__induction_hypothesis__result1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result2 : int
+
+logic result4 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result3 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result4 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result5 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result6 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result7 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result8 : int
+
+logic perm__shift_perm_l__induction_hypothesis__result9 : int
+
+axiom H : dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1)))
+
+axiom H2 : dynamic_property(1, 100, to_rep2(first(c1)), to_rep2(last(c1)))
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and ((invariant__({ elts = c; rt = c1
+  }) = true) and ((bool_eq5(a, to_rep2(first(a1)), to_rep2(last(a1)), c,
+  to_rep2(first(c1)), to_rep2(last(c1))) = true) and (is_perm({ elts = a;
+  rt = a1 }, { elts = b; rt = b1 }) = true)))))
+
+axiom H4 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H5 :
+  (perm__shift_perm_l__induction_hypothesis__result2 = perm__shift_perm_l__induction_hypothesis__result)
+
+axiom H6 :
+  (perm__shift_perm_l__induction_hypothesis__result2 = perm__shift_perm_l__induction_hypothesis__result1)
+
+axiom H7 : (({ us_split_fields1 = { rec__perm__witnesses__ia =
   perm__shift_perm_l__induction_hypothesis__B_5__w__assume;
   rec__perm__witnesses__ib =
   perm__shift_perm_l__induction_hypothesis__B_5__w__assume1 }
@@ -670,35 +719,44 @@ goal WP_parameter_def :
   (is_perm(remove({ elts = a; rt = a1 },
   to_rep(perm__shift_perm_l__induction_hypothesis__B_5__w__assume)), remove({
   elts = b; rt = b1 },
-  to_rep(perm__shift_perm_l__induction_hypothesis__B_5__w__assume1))) = true))))) and
-  ((w = perm__shift_perm_l__induction_hypothesis__B_5__w__assume) and
-  (w1 = perm__shift_perm_l__induction_hypothesis__B_5__w__assume1))) -> ((({
-  elts = o4; rt = o5 } = remove({ elts = c; rt = c1 }, to_rep(w))) and
-  (dynamic_property(1, 100, to_rep2(first(o5)), to_rep2(last(o5))) and
-  ((invariant__({ elts = o4; rt = o5 }) = true) and
+  to_rep(perm__shift_perm_l__induction_hypothesis__B_5__w__assume1))) = true)))))
+
+axiom H8 :
+  ((perm__shift_perm_l__induction_hypothesis__B_5__w__assume = w) and
+  (perm__shift_perm_l__induction_hypothesis__B_5__w__assume1 = w1))
+
+axiom H9 : (({ elts = o4; rt = o5 } = remove({ elts = c; rt = c1 },
+  to_rep(w))) and (dynamic_property(1, 100, to_rep2(first(o5)),
+  to_rep2(last(o5))) and ((invariant__({ elts = o4; rt = o5 }) = true) and
   ((to_rep2(last(o5)) = (to_rep2(last(c1)) - 1)) and
   ((forall k:int. (((1 <= k) and (k <= (to_rep(w) - 1))) ->
    (to_rep1((c[k])) = to_rep1((o4[k]))))) and
   ((forall k:int. ((((to_rep(w) + 1) <= k) and (k <= to_rep2(last(c1)))) ->
    (to_rep1((c[k])) = to_rep1((o4[(k - 1)]))))) and
   (forall k:int. (((to_rep(w) <= k) and (k <= (to_rep2(last(c1)) - 1))) ->
-  (to_rep1((c[(k + 1)])) = to_rep1((o4[k]))))))))))) -> ((({ elts = o2; rt =
-  o3 } = remove({ elts = b; rt = b1 }, to_rep(w1))) and (dynamic_property(1,
-  100, to_rep2(first(o3)), to_rep2(last(o3))) and ((invariant__({ elts = o2;
-  rt = o3 }) = true) and ((to_rep2(last(o3)) = (to_rep2(last(b1)) - 1)) and
+  (to_rep1((c[(k + 1)])) = to_rep1((o4[k])))))))))))
+
+axiom H10 : (({ elts = o2; rt = o3 } = remove({ elts = b; rt = b1 },
+  to_rep(w1))) and (dynamic_property(1, 100, to_rep2(first(o3)),
+  to_rep2(last(o3))) and ((invariant__({ elts = o2; rt = o3 }) = true) and
+  ((to_rep2(last(o3)) = (to_rep2(last(b1)) - 1)) and
   ((forall k:int. (((1 <= k) and (k <= (to_rep(w1) - 1))) ->
    (to_rep1((b[k])) = to_rep1((o2[k]))))) and
   ((forall k:int. ((((to_rep(w1) + 1) <= k) and (k <= to_rep2(last(b1)))) ->
    (to_rep1((b[k])) = to_rep1((o2[(k - 1)]))))) and
   (forall k:int. (((to_rep(w1) <= k) and (k <= (to_rep2(last(b1)) - 1))) ->
-  (to_rep1((b[(k + 1)])) = to_rep1((o2[k]))))))))))) -> ((({ elts = o; rt =
-  o1 } = remove({ elts = a; rt = a1 }, to_rep(w))) and (dynamic_property(1,
-  100, to_rep2(first(o1)), to_rep2(last(o1))) and ((invariant__({ elts = o;
-  rt = o1 }) = true) and ((to_rep2(last(o1)) = (to_rep2(last(a1)) - 1)) and
+  (to_rep1((b[(k + 1)])) = to_rep1((o2[k])))))))))))
+
+axiom H11 : (({ elts = o; rt = o1 } = remove({ elts = a; rt = a1 },
+  to_rep(w))) and (dynamic_property(1, 100, to_rep2(first(o1)),
+  to_rep2(last(o1))) and ((invariant__({ elts = o; rt = o1 }) = true) and
+  ((to_rep2(last(o1)) = (to_rep2(last(a1)) - 1)) and
   ((forall k:int. (((1 <= k) and (k <= (to_rep(w) - 1))) ->
    (to_rep1((a[k])) = to_rep1((o[k]))))) and
   ((forall k:int. ((((to_rep(w) + 1) <= k) and (k <= to_rep2(last(a1)))) ->
    (to_rep1((a[k])) = to_rep1((o[(k - 1)]))))) and
   (forall k:int. (((to_rep(w) <= k) and (k <= (to_rep2(last(a1)) - 1))) ->
-  (to_rep1((a[(k + 1)])) = to_rep1((o[k]))))))))))) -> (invariant__({ elts =
-  o; rt = o1 }) = true)))))))))))
+  (to_rep1((a[(k + 1)])) = to_rep1((o[k])))))))))))
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = o; rt = o1 }) = true)

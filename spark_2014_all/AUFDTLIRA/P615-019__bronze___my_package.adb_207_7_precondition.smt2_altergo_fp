@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -393,6 +393,184 @@ axiom def_axiom :
   (forall temp___193:int.
   (forall temp___194:int.
   ((my_package__bad_aliasing__a__aggregate_def(temp___193)[temp___194]) = of_rep1(temp___193))))
+
+logic x : int
+
+logic y : int
+
+logic xx__split_fields : integer
+
+logic xx__split_fields1 : integer
+
+logic z__split_fields : integer
+
+logic z__split_fields1 : integer
+
+logic a : (int,natural) farray
+
+logic i : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic my_package__bad_aliasing__z__assume : integer
+
+logic my_package__bad_aliasing__z__assume1 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic temp___198 : integer
+
+logic temp___1981 : integer
+
+logic o7 : int
+
+logic o8 : natural
+
+logic o9 : int
+
+logic o10 : int
+
+logic my_package__swap__y : int
+
+logic o11 : int
+
+logic my_package__swap__x : int
+
+logic o12 : int
+
+logic o13 : natural
+
+logic o14 : (int,natural) farray
+
+logic o15 : int
+
+logic o16 : natural
+
+logic result : integer
+
+logic result1 : integer
+
+logic z__split_fields2 : integer
+
+logic z__split_fields3 : integer
+
+logic result2 : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result3 : int
+
+logic i1 : int
+
+logic y1 : int
+
+logic my_package__swap_with_y__x : int
+
+logic result4 : int
+
+logic y2 : int
+
+logic my_package__move_x_to_y__y__fields : integer
+
+logic my_package__move_x_to_y__y__fields1 : integer
+
+logic result5 : integer
+
+logic result6 : integer
+
+logic z__split_fields4 : integer
+
+logic z__split_fields5 : integer
+
+logic y3 : int
+
+logic y4 : int
+
+logic my_package__move_x_to_y2__y__fields : integer
+
+logic my_package__move_x_to_y2__y__fields1 : integer
+
+logic result7 : integer
+
+logic result8 : integer
+
+logic xx__split_fields2 : integer
+
+logic xx__split_fields3 : integer
+
+logic my_package__move_x_to_y2__2__y : int
+
+logic result9 : int
+
+logic x1 : int
+
+logic my_package__only_read_f2_of_x__y : int
+
+logic result10 : integer
+
+logic result11 : integer
+
+logic xx__split_fields4 : integer
+
+logic xx__split_fields5 : integer
+
+logic my_package__swap__y1 : int
+
+logic my_package__swap__x1 : int
+
+logic result12 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (to_rep(o) = 0)
+
+axiom H3 : (to_rep(o1) = 0)
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (o = o3)
+
+axiom H6 : (my_package__bad_aliasing__z__assume = o2)
+
+axiom H7 : (my_package__bad_aliasing__z__assume1 = o3)
+
+axiom H8 : (result = z__split_fields)
+
+axiom H9 : (result1 = z__split_fields1)
+
+axiom H10 : (my_package__bad_aliasing__z__assume = z__split_fields2)
+
+axiom H11 : (my_package__bad_aliasing__z__assume1 = z__split_fields3)
+
+axiom H12 : (result2 = a)
+
+axiom H13 : (a1 = my_package__bad_aliasing__a__aggregate_def(0))
+
+axiom H14 : (result3 = i)
+
+axiom H15 : (i1 = 2)
+
+axiom H16 : in_range(i1)
+
+axiom H17 : (in_range(my_package__swap_with_y__x) and in_range(y1))
+
+axiom H18 : (result4 = y1)
+
+axiom H19 : (y2 = my_package__swap_with_y__x)
 
  (* File "my_package.adb", line 195, characters 0-0 *)
 goal WP_parameter_def : true

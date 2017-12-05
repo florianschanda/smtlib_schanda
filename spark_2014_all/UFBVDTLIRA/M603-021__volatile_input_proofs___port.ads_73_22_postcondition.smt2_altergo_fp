@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -737,7 +737,7 @@ function source__ref___projection(a: source__ref) : source =
 
 type target
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -768,6 +768,74 @@ logic c__function_guard : int, t -> prop
 axiom c__post_axiom : (forall s:t [c(s)]. in_range2(c(s)))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic v1raw : t
+
+logic x : int
+
+logic tmp : t
+
+logic o : t
+
+logic o1 : int
+
+logic o2 : int
+
+logic v1raw1 : t
+
+logic result : t
+
+logic tmp1 : t
+
+logic result1 : int
+
+logic x1 : int
+
+logic v1raw2 : t
+
+logic x2 : int
+
+logic tmp2 : t
+
+logic v1raw3 : t
+
+logic x3 : int
+
+logic tmp3 : t
+
+axiom H : true
+
+axiom H1 : ((0 <= 17) -> in_range1(x))
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : (o = v1raw1)
+
+axiom H5 : (result = tmp)
+
+axiom H6 : (tmp1 = o)
+
+axiom H7 : ((o1 = c(tmp1)) and in_range2(o1))
+
+axiom H8 : ((o2 = o1) and in_range1(o1))
+
+axiom H9 : (result1 = x)
+
+axiom H10 : (x1 = o2)
+
+axiom H11 : (tmp2 = tmp1)
+
+axiom H12 : (x1 = x2)
+
+axiom H13 : (v1raw2 = v1raw1)
+
+axiom H14 : (tmp3 = tmp1)
+
+axiom H15 : (x3 = x1)
+
+axiom H16 : (v1raw3 = v1raw1)
 
  (* File "port.ads", line 21, characters 0-0 *)
 goal WP_parameter_def : true

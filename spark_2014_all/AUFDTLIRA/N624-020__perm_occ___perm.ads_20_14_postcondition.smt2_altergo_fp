@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -524,25 +524,50 @@ axiom remove_last__def_axiom :
   mk(to_rep(first2(mk1(to_rep(first(a3)), (to_rep(last(a3)) - 1)))),
   to_rep(last2(mk1(to_rep(first(a3)), (to_rep(last(a3)) - 1))))) }))
 
+logic perm__occ__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic perm__occ__result1 : int
+
+logic perm__occ__result2 : int
+
+logic perm__occ__result3 : int
+
+logic perm__occ__result4 : int
+
+logic perm__occ__result5 : int
+
+logic result1 : int
+
+axiom H : dynamic_property(1, 100, to_rep(first(a1)), to_rep(last(a1)))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : (perm__occ__result1 = perm__occ__result2)
+
+axiom H3 : (perm__occ__result3 = perm__occ__result1)
+
+axiom H4 : ((o = occ_def({ elts = a; rt = a1 }, e)) and (in_range3(o) and
+  ((((length({ elts = a; rt = a1 }) = 0) -> (o = 0)) and ((not (length({
+  elts = a; rt = a1 }) = 0)) -> (((to_rep1((a[to_rep(last(a1))])) = e) ->
+  (o = (occ_def(remove_last({ elts = a; rt = a1 }), e) + 1))) and
+  ((not (to_rep1((a[to_rep(last(a1))])) = e)) -> (o = occ_def(remove_last({
+  elts = a; rt = a1 }), e)))))) and (o <= length({ elts = a; rt = a1 })))))
+
+axiom H5 : (result = perm__occ__result)
+
+axiom H6 : (perm__occ__result1 = o)
+
+axiom H7 : (perm__occ__result4 = perm__occ__result2)
+
+axiom H8 : (perm__occ__result5 = perm__occ__result3)
+
+axiom H9 : (result1 = perm__occ__result4)
+
  (* File "perm.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__occ__result:int. forall o:int. forall result:int.
-  forall perm__occ__result1:int. forall perm__occ__result2:int.
-  forall perm__occ__result3:int. forall perm__occ__result4:int.
-  forall perm__occ__result5:int.
-  (forall result1:int. ((dynamic_property(1, 100, to_rep(first(a1)),
-  to_rep(last(a1))) and (in_range1(e) and
-  (((((perm__occ__result1 = perm__occ__result2) and
-  (perm__occ__result3 = perm__occ__result1)) and (((o = occ_def({ elts = a;
-  rt = a1 }, e)) and (in_range3(o) and ((((length({ elts = a; rt = a1
-  }) = 0) and (o = 0)) or ((not (length({ elts = a; rt = a1 }) = 0)) and
-  (((to_rep1((a[to_rep(last(a1))])) = e) and (o = (occ_def(remove_last({
-  elts = a; rt = a1 }), e) + 1))) or
-  ((not (to_rep1((a[to_rep(last(a1))])) = e)) and (o = occ_def(remove_last({
-  elts = a; rt = a1 }), e)))))) and (o <= length({ elts = a; rt = a1
-  }))))) and (({ int__content = result } = { int__content = perm__occ__result
-  }) and (perm__occ__result1 = o)))) and (({ int__content =
-  perm__occ__result4 } = { int__content = perm__occ__result2 }) and
-  (perm__occ__result5 = perm__occ__result3))) and
-  (result1 = perm__occ__result4)))) -> (perm__occ__result4 <= length({ elts =
-  a; rt = a1 })))))
+goal WP_parameter_def : (perm__occ__result4 <= length({ elts = a; rt = a1 }))

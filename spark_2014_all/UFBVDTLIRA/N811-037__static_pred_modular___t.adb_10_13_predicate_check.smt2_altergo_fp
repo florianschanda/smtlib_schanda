@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -653,11 +653,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+axiom H : ((ule(of_int(1), i1b) and ule(i1b, of_int(3))) or (ule(of_int(5),
+  i1b) and ule(i1b, of_int(255))))
+
+axiom H1 : ((ule(of_int(1), x) and ule(x, of_int(3))) or (ule(of_int(5),
+  x) and ule(x, of_int(255))))
+
  (* File "t.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. (((ule(of_int(1), i1b) and ule(i1b, of_int(3))) or
-  (ule(of_int(5), i1b) and ule(i1b, of_int(255)))) -> (((ule(of_int(1),
-  x) and ule(x, of_int(3))) or (ule(of_int(5), x) and ule(x,
-  of_int(255)))) -> ((ule(of_int(1), sub(x, of_int(1))) and ule(sub(x,
+goal WP_parameter_def : ((ule(of_int(1), sub(x, of_int(1))) and ule(sub(x,
   of_int(1)), of_int(3))) or (ule(of_int(5), sub(x, of_int(1))) and
-  ule(sub(x, of_int(1)), of_int(255)))))))
+  ule(sub(x, of_int(1)), of_int(255))))

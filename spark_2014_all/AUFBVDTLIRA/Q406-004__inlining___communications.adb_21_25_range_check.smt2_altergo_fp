@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -982,26 +982,92 @@ axiom def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic n : int
+
+logic self__ : (t,integer) farray
+
+logic self__1 : message_index
+
+logic self__2 : message_index
+
+logic self__3 : message_count
+
+logic o : message_index
+
+logic o1 : (t,integer) farray
+
+logic o2 : message_index
+
+logic o3 : message_index
+
+logic o4 : message_count
+
+logic o5 : (t,integer) farray
+
+logic o6 : message_index
+
+logic o7 : message_index
+
+logic o8 : message_count
+
+logic o9 : int
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : (t,integer) farray
+
+logic result2 : message_index
+
+logic result3 : message_index
+
+logic result4 : message_count
+
+logic self__4 : (t,integer) farray
+
+logic self__5 : message_index
+
+logic self__6 : message_index
+
+logic self__7 : message_count
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(n))
+
+axiom H1 : (0 <  to_rep2(self__3))
+
+axiom H2 : (result = n)
+
+axiom H3 : (n1 = to_rep((self__[to_rep1(self__2)])))
+
+axiom H4 : (to_rep1(o) = urem(add(to_rep1(self__2), of_int(1)), of_int(16)))
+
+axiom H5 : (self__ = o1)
+
+axiom H6 : (self__1 = o2)
+
+axiom H7 : (o = o3)
+
+axiom H8 : (self__3 = o4)
+
+axiom H9 : (o5 = o1)
+
+axiom H10 : (o6 = o2)
+
+axiom H11 : (o7 = o3)
+
+axiom H12 : (o8 = o4)
+
+axiom H13 : (result1 = self__)
+
+axiom H14 : (result2 = self__1)
+
+axiom H15 : (result3 = self__2)
+
+axiom H16 : (result4 = self__3)
+
+axiom H17 : ((self__4 = o5) and ((self__5 = o6) and ((self__6 = o7) and
+  (self__7 = o8))))
+
  (* File "communications.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall self__:(t,integer) farray.
-  forall self__1:message_index. forall self__2:message_index.
-  forall self__3:message_count. forall o:message_index.
-  forall o1:(t,integer) farray. forall o2:message_index.
-  forall o3:message_index. forall o4:message_count.
-  forall o5:(t,integer) farray. forall o6:message_index.
-  forall o7:message_index. forall o8:message_count. forall result:int.
-  forall n1:int. forall result1:(t,integer) farray.
-  forall result2:message_index. forall result3:message_index.
-  forall result4:message_count. forall self__4:(t,integer) farray.
-  forall self__5:message_index. forall self__6:message_index.
-  forall self__7:message_count. ((((-2147483648) <= 2147483647) ->
-  in_range(n)) -> ((0 <  to_rep2(self__3)) -> (((result = n) and
-  (n1 = to_rep((self__[to_rep1(self__2)])))) ->
-  (((((to_rep1(o) = urem(add(to_rep1(self__2), of_int(1)), of_int(16))) and
-  ((self__ = o1) and ((self__1 = o2) and ((o = o3) and (self__3 = o4))))) and
-  ((o5 = o1) and ((o6 = o2) and ((o7 = o3) and (o8 = o4))))) and
-  (((result1 = self__) and ((result2 = self__1) and ((result3 = self__2) and
-  (result4 = self__3)))) and ((self__4 = o5) and ((self__5 = o6) and
-  ((self__6 = o7) and (self__7 = o8)))))) ->
-  in_range2((to_rep2(self__7) - 1)))))))
+goal WP_parameter_def : in_range2((to_rep2(self__7) - 1))

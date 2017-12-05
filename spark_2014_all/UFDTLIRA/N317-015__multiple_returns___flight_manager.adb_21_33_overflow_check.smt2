@@ -43,6 +43,7 @@
 (assert (forall ((i Int)) (! (=> (dynamic_invariant i true true true) (dynamic_invariant (my_abs i) true false true)) :pattern ((my_abs i)))))
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 (declare-const max Int)
+(declare-const o Int)
 (assert (in_range position_x))
 (assert (in_range position_y))
 (assert (in_range target_x))

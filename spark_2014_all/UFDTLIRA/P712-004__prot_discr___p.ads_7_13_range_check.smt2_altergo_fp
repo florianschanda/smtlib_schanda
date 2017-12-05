@@ -253,6 +253,9 @@ logic p2__split_discrs : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (p1__split_discrs = of_int(1))
+
+axiom H1 : (of_int(1) = p1__split_discrs)
+
  (* File "system.ads", line 81, characters 0-0 *)
-goal WP_parameter_def : ((p1__split_discrs = of_int(1)) ->
-  ((of_int(1) = p1__split_discrs) -> in_range(0)))
+goal WP_parameter_def : in_range(0)

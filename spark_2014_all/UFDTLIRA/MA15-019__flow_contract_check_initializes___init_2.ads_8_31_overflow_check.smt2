@@ -48,6 +48,7 @@
 (declare-const z Int)
 (declare-const state us_private)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (declare-const result1 Int)

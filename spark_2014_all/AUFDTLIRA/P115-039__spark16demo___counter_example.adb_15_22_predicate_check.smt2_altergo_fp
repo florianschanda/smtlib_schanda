@@ -379,7 +379,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -595,25 +595,80 @@ axiom num_item_per_category__def_axiom :
   ((num_item_per_category = counter_example__num_item_per_category__aggregate_def(3,
   8, 10000, 42, 98, 76, 0, 1)) and (num_item_per_category1 = mk(1, 8)))
 
+logic pick1 : bool
+
+logic counter_example__get_best_item__idx1__assume : int
+
+logic counter_example__get_best_item__idx2__assume : int
+
+logic o : natural
+
+logic o1 : category
+
+logic o2 : category
+
+logic o3 : natural
+
+logic temp___168 : category
+
+logic temp___1681 : natural
+
+logic o4 : natural
+
+logic o5 : category
+
+logic o6 : category
+
+logic o7 : natural
+
+logic temp___167 : category
+
+logic temp___1671 : natural
+
+logic result : bool
+
+logic pick11 : bool
+
+axiom H : in_range2(cat1)
+
+axiom H1 : in_range2(cat2)
+
+axiom H2 :
+  ((counter_example__get_best_item__idx1__assume = pick_last(cat1)) and
+  (in_range1(counter_example__get_best_item__idx1__assume) and
+  (counter_example__get_best_item__idx1__assume = to_rep((num_item_per_category[cat1])))))
+
+axiom H3 : (counter_example__get_best_item__idx1__assume = idx1)
+
+axiom H4 : in_range1(idx1)
+
+axiom H5 :
+  ((counter_example__get_best_item__idx2__assume = pick_last(cat2)) and
+  (in_range1(counter_example__get_best_item__idx2__assume) and
+  (counter_example__get_best_item__idx2__assume = to_rep((num_item_per_category[cat2])))))
+
+axiom H6 : (counter_example__get_best_item__idx2__assume = idx2)
+
+axiom H7 : in_range1(idx2)
+
+axiom H8 : (result = pick1)
+
+axiom H9 : (pick11 = of_int(0))
+
+axiom H10 : (not (pick11 = true))
+
+axiom H11 : (to_rep(o4) = idx2)
+
+axiom H12 : (to_rep1(o5) = cat1)
+
+axiom H13 : (o5 = o6)
+
+axiom H14 : (o4 = o7)
+
+axiom H15 : (temp___167 = o6)
+
+axiom H16 : (temp___1671 = o7)
+
  (* File "counter_example.ads", line 9, characters 0-0 *)
 goal WP_parameter_def :
-  (forall pick1:bool.
-  forall counter_example__get_best_item__idx1__assume:int.
-  forall counter_example__get_best_item__idx2__assume:int. forall o:natural.
-  forall o1:category. forall o2:category. forall o3:natural.
-  forall temp___167:category. forall temp___1671:natural. forall result:bool.
-  forall pick11:bool. (in_range2(cat1) -> (in_range2(cat2) ->
-  ((((counter_example__get_best_item__idx1__assume = pick_last(cat1)) and
-  (in_range1(counter_example__get_best_item__idx1__assume) and
-  (counter_example__get_best_item__idx1__assume = to_rep((num_item_per_category[cat1]))))) and
-  (counter_example__get_best_item__idx1__assume = idx1)) ->
-  (in_range1(idx1) ->
-  ((((counter_example__get_best_item__idx2__assume = pick_last(cat2)) and
-  (in_range1(counter_example__get_best_item__idx2__assume) and
-  (counter_example__get_best_item__idx2__assume = to_rep((num_item_per_category[cat2]))))) and
-  (counter_example__get_best_item__idx2__assume = idx2)) ->
-  (in_range1(idx2) -> (((result = pick1) and (pick11 = of_int(0))) ->
-  ((not (pick11 = true)) -> ((((to_rep(o) = idx2) and
-  ((to_rep1(o1) = cat1) and ((o1 = o2) and (o = o3)))) and
-  ((temp___167 = o2) and (temp___1671 = o3))) ->
-  (to_rep(temp___1671) <= to_rep((num_item_per_category[to_rep1(temp___167)])))))))))))))
+  (to_rep(temp___1671) <= to_rep((num_item_per_category[to_rep1(temp___167)])))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -383,27 +383,48 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom a2__def_axiom : ((a2 = a) and (a21 = mk(1, 100)))
 
- (* File "dynamic_ranges.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___238:(int,integer) farray. forall temp___2381:t.
-  forall o:(int,integer) farray.
-  forall dynamic_ranges__resize__a2__assume:(int,integer) farray.
-  forall dynamic_ranges__resize__a2__assume1:t. (dynamic_property(1,
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) ->
-  (((to_rep(first(a1)) <= 1) and (100 <= to_rep(last(a1)))) ->
-  (((((((1 <= 100) -> (((to_rep(first(a1)) <= 1) and
+logic temp___238 : (int,integer) farray
+
+logic temp___2381 : t
+
+logic o : (int,integer) farray
+
+logic dynamic_ranges__resize__a2__assume : (int,integer) farray
+
+logic dynamic_ranges__resize__a2__assume1 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : ((to_rep(first(a1)) <= 1) and (100 <= to_rep(last(a1))))
+
+axiom H2 : ((1 <= 100) -> (((to_rep(first(a1)) <= 1) and
   (1 <= to_rep(last(a1)))) and ((to_rep(first(a1)) <= 100) and
-  (100 <= to_rep(last(a1)))))) and ((temp___238 = a) and
-  (temp___2381 = a1))) and (o = temp___238)) and
-  ((o = dynamic_ranges__resize__a2__assume) and (mk(1,
-  100) = dynamic_ranges__resize__a2__assume1))) and
-  ((dynamic_ranges__resize__a2__assume = a2) and
-  (dynamic_ranges__resize__a2__assume1 = a21))) -> (dynamic_property(1,
-  2147483647, to_rep(first(a21)), to_rep(last(a21))) ->
-  ((to_rep(first(a21)) = 1) -> ((to_rep(last(a21)) = 100) ->
-  (((to_rep(first(a21)) <= to_rep(last(a21))) -> (((1 <= 100) ->
+  (100 <= to_rep(last(a1))))))
+
+axiom H3 : ((temp___238 = a) and (temp___2381 = a1))
+
+axiom H4 : (o = temp___238)
+
+axiom H5 : (o = dynamic_ranges__resize__a2__assume)
+
+axiom H6 : (mk(1, 100) = dynamic_ranges__resize__a2__assume1)
+
+axiom H7 : ((dynamic_ranges__resize__a2__assume = a2) and
+  (dynamic_ranges__resize__a2__assume1 = a21))
+
+axiom H8 : dynamic_property(1, 2147483647, to_rep(first(a21)),
+  to_rep(last(a21)))
+
+axiom H9 : (to_rep(first(a21)) = 1)
+
+axiom H10 : (to_rep(last(a21)) = 100)
+
+ (* File "dynamic_ranges.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (((to_rep(first(a21)) <= to_rep(last(a21))) ->
+  (((1 <= 100) ->
   (((to_rep(last(a21)) - to_rep(first(a21))) + 1) = ((100 - 1) + 1))) and
   ((not (1 <= 100)) ->
   (((to_rep(last(a21)) - to_rep(first(a21))) + 1) = 0)))) and
   ((not (to_rep(first(a21)) <= to_rep(last(a21)))) -> ((1 <= 100) ->
-  (0 = ((100 - 1) + 1))))))))))))
+  (0 = ((100 - 1) + 1)))))

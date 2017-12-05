@@ -120,6 +120,7 @@
 (assert true)
 (assert (forall ((x us_rep1)) (forall ((extension_pkg__body_elaborated Bool)) (! (= (to_int1 (op2 x extension_pkg__body_elaborated)) (to_int1 (op3 us_tag1 x extension_pkg__body_elaborated))) :pattern ((op3 us_tag1 x extension_pkg__body_elaborated))))))
 (declare-const body_elaborated Bool)
+(declare-const o Bool)
 (assert (= (get1 (attr__tag y) y body_elaborated) true))
 (assert (not (= (get1 (attr__tag y) y body_elaborated) true)))
 (check-sat)

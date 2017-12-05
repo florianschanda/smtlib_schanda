@@ -257,9 +257,21 @@ logic r1 : (int,group1_id) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (is_permutation_1(r1) = true)
+
+logic rank1 : int
+
+axiom H1 : (1 <= rank1)
+
+axiom H2 : (rank1 <= 64)
+
+logic rank2 : int
+
+axiom H3 : (1 <= rank2)
+
+axiom H4 : (rank2 <= 64)
+
+axiom H5 : (not (rank1 = rank2))
+
  (* File "stable_marriage.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((is_permutation_1(r1) = true) ->
-  (forall rank1:int. (((1 <= rank1) and (rank1 <= 64)) ->
-  (forall rank2:int. (((1 <= rank2) and (rank2 <= 64)) ->
-  ((not (rank1 = rank2)) ->
-  (not (to_rep((r1[rank1])) = to_rep((r1[rank2]))))))))))
+goal WP_parameter_def : (not (to_rep((r1[rank1])) = to_rep((r1[rank2]))))

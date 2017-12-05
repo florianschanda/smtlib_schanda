@@ -244,5 +244,9 @@ type t6__ref = { t6__content : us_rep
 
 function t6__ref___projection(a: t6__ref) : us_rep = (a).t6__content
 
+logic us : int
+
+logic us1 : int
+
  (* File "types.ads", line 12, characters 0-0 *)
 goal WP_parameter_def : in_range1(1)

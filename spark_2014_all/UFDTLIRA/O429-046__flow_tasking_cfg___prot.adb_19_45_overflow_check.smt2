@@ -83,6 +83,7 @@
 (declare-const self__ integer)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range visible))
 (assert (in_range x))
 (assert (and (= o (+ (to_rep self__) visible)) (in_range (+ (to_rep self__) visible))))

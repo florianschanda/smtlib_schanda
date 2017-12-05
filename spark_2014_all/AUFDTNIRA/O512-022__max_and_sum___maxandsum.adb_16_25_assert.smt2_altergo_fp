@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -363,22 +363,136 @@ function t1b__ref___projection(a1: t1b__ref) : t1b = (a1).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic sum : int
+
+logic max : int
+
+logic i : int
+
+logic temp___151 : int
+
+logic temp___150 : int
+
+logic temp___149 : int
+
+logic o : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : int
+
+logic max1 : int
+
+logic result2 : int
+
+logic i1 : int
+
+logic sum2 : int
+
+logic max2 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic sum3 : int
+
+logic result4 : int
+
+logic max3 : int
+
+logic result5 : int
+
+logic i3 : int
+
+logic sum4 : int
+
+logic max4 : int
+
+logic i4 : int
+
+logic sum5 : int
+
+logic max5 : int
+
+logic i5 : int
+
+logic sum6 : int
+
+logic max6 : int
+
+logic i6 : int
+
+logic sum7 : int
+
+logic max7 : int
+
+logic i7 : int
+
+logic sum8 : int
+
+logic max8 : int
+
+logic i8 : int
+
+logic sum9 : int
+
+logic max9 : int
+
+logic i9 : int
+
+logic sum10 : int
+
+logic max10 : int
+
+logic i10 : int
+
+logic sum11 : int
+
+logic max11 : int
+
+logic i11 : int
+
+axiom H : ((0 <= 2147483647) -> in_range2(sum))
+
+axiom H1 : ((0 <= 100) -> in_range3(max))
+
+axiom H2 : (result = sum)
+
+axiom H3 : (sum1 = 0)
+
+axiom H4 : (result1 = max)
+
+axiom H5 : (max1 = 0)
+
+axiom H6 : (result2 = i)
+
+axiom H7 : (i1 = 1)
+
+axiom H8 : (1 <= i1)
+
+axiom H9 : (i1 <= 100)
+
+axiom H10 : (sum2 <= ((i2 - 1) * max2))
+
+axiom H11 : (((((0 <= 2147483647) -> in_range2(sum2)) and ((0 <= 100) ->
+  in_range3(max2))) and ((1 <= 100) -> in_range5(i2))) and ((1 <= i2) and
+  (i2 <= 100)))
+
+axiom H12 : ((o = (sum2 + to_rep((a[i2])))) and
+  in_range1((sum2 + to_rep((a[i2])))))
+
+axiom H13 : (sum2 = result3)
+
+axiom H14 : (sum3 = o)
+
+axiom H15 : ((max2 <  to_rep((a[i2]))) -> (max2 = result4))
+
+axiom H16 : ((max2 <  to_rep((a[i2]))) -> (max3 = to_rep((a[i2]))))
+
+axiom H17 : ((not (max2 <  to_rep((a[i2])))) -> (max3 = max2))
+
  (* File "maxandsum.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sum:int. forall max:int. forall i:int. forall o:int.
-  forall result:int. forall sum1:int. forall result1:int. forall max1:int.
-  forall result2:int. forall i1:int. forall sum2:int. forall max2:int.
-  forall i2:int. forall result3:int. forall sum3:int. forall result4:int.
-  forall max3:int. (((0 <= 2147483647) -> in_range2(sum)) -> (((0 <= 100) ->
-  in_range3(max)) -> ((({ int__content = result } = { int__content = sum
-  }) and (sum1 = 0)) -> ((({ int__content = result1 } = { int__content = max
-  }) and (max1 = 0)) -> ((({ int__content = result2 } = { int__content = i
-  }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 100)) ->
-  ((sum2 <= ((i2 - 1) * max2)) -> ((((((0 <= 2147483647) ->
-  in_range2(sum2)) and ((0 <= 100) -> in_range3(max2))) and ((1 <= 100) ->
-  in_range5(i2))) and ((1 <= i2) and (i2 <= 100))) ->
-  ((((o = (sum2 + to_rep((a[i2])))) and
-  in_range1((sum2 + to_rep((a[i2]))))) and ((sum2 = result3) and
-  (sum3 = o))) -> ((((max2 <  to_rep((a[i2]))) and ((max2 = result4) and
-  (max3 = to_rep((a[i2]))))) or ((not (max2 <  to_rep((a[i2])))) and
-  (max3 = max2))) -> (sum3 <= (i2 * max3)))))))))))))
+goal WP_parameter_def : (sum3 <= (i2 * max3))

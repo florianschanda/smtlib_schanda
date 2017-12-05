@@ -41,6 +41,7 @@
 (define-fun clock_type__ref___projection ((a clock_type__ref)) clock_type (clock_type__content a))
 (define-fun dynamic_invariant ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 9223372036854775807)) (in_range1 temp___expr_135)))
 (declare-const clock_value Int)
+(declare-const o Int)
 (assert (in_range1 clock_value))
 (assert (not (in_range (+ clock_value 1))))
 (check-sat)

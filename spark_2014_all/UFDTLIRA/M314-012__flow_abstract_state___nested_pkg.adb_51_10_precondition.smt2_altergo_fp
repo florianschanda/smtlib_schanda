@@ -78,6 +78,11 @@ axiom h__def_axiom :
   (forall nested_pkg__z__bar:bool [h(nested_pkg__z__bar)].
   ((h(nested_pkg__z__bar) = true) <-> (nested_pkg__z__bar = true)))
 
+logic bar : bool
+
+axiom H : (f(void) = true)
+
+axiom H1 : (g(void) = true)
+
  (* File "nested_pkg.adb", line 36, characters 0-0 *)
-goal WP_parameter_def : ((f(void) = true) -> ((g(void) = true) ->
-  (g(void) = true)))
+goal WP_parameter_def : (g(void) = true)

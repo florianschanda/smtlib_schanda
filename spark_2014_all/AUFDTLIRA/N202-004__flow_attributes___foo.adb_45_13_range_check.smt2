@@ -126,6 +126,7 @@
 (declare-const o1 Int)
 (declare-const o2 (Array Int character))
 (declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const result (Array Int character))
 (declare-const a1 (Array Int character))
 (assert (dynamic_property 1 2147483647 (to_rep1 a__first) (to_rep1 a__last)))

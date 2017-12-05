@@ -386,7 +386,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1070,11 +1070,126 @@ axiom result1__def_axiom : ((result1 = result__) and (result11 = result__1))
 axiom result1_base__def_axiom : ((result1_base = result1) and
   (result1_base1 = result11))
 
- (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. ((dynamic_property1(1, to_rep(r), to_rep1(first(r2)),
+logic record_discr__search_upto__result : bool
+
+logic record_discr__search_upto__result1 : us_main_type
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic o : int
+
+logic record_discr__search_upto__result__assume : bool
+
+logic record_discr__search_upto__result__assume1 : us_main_type
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : (int,natural) farray
+
+logic temp___265 : (int,natural) farray
+
+logic temp___2651 : t2
+
+logic o7 : (int,natural) farray
+
+logic o8 : t1
+
+logic o9 : (int,natural) farray
+
+logic o10 : t1
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : (int,natural) farray
+
+logic o14 : t1
+
+logic o15 : natural
+
+logic o16 : (int,natural) farray
+
+logic o17 : t
+
+logic o18 : bool
+
+logic o19 : us_main_type
+
+logic temp___270 : int
+
+logic o20 : int
+
+logic i : int
+
+logic result : bool
+
+logic result2 : bool
+
+logic result3 : us_main_type
+
+logic record_discr__search_upto__result2 : bool
+
+logic record_discr__search_upto__result3 : us_main_type
+
+logic result4 : bool
+
+logic result5 : us_main_type
+
+logic record_discr__search_upto__result4 : bool
+
+logic record_discr__search_upto__result5 : us_main_type
+
+logic record_discr__search_upto__result6 : bool
+
+logic record_discr__search_upto__result7 : us_main_type
+
+logic record_discr__search_upto__result8 : bool
+
+logic record_discr__search_upto__result9 : us_main_type
+
+logic record_discr__search_upto__result10 : bool
+
+logic record_discr__search_upto__result11 : us_main_type
+
+logic record_discr__search_upto__result12 : bool
+
+logic record_discr__search_upto__result13 : us_main_type
+
+logic record_discr__search_upto__result14 : bool
+
+logic record_discr__search_upto__result15 : us_main_type
+
+logic record_discr__search_upto__result16 : bool
+
+logic record_discr__search_upto__result17 : us_main_type
+
+logic result6 : bool
+
+axiom H : (dynamic_property1(1, to_rep(r), to_rep1(first(r2)),
   to_rep1(last(r2))) and ((to_rep1(first(r2)) = 1) and
-  (to_rep1(last(r2)) = to_rep(r)))) -> (in_range1(e) ->
-  (((us = to_rep(r)) and in_range1(to_rep(r))) -> (((not (to_rep(r) = 0)) ->
-  in_range(to_int(true))) and ((to_rep(r) = 0) ->
-  in_range(to_int(false))))))))
+  (to_rep1(last(r2)) = to_rep(r))))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((us = to_rep(r)) and in_range1(to_rep(r)))
+
+ (* File "private_record.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (((not (to_rep(r) = 0)) ->
+  in_range(to_int(true))) and ((to_rep(r) = 0) -> in_range(to_int(false))))

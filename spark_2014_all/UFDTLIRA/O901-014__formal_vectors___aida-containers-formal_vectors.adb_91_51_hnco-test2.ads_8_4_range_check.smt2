@@ -1563,6 +1563,8 @@
 (declare-const container__split_fields capacity_range1)
 (declare-const container__split_fields1 us_main_type)
 (declare-const container__split_fields2 us_private)
+(declare-const us Int)
+(declare-const hnco__test2__v_type_owner__vector_type_owner__replace_element__container__fields us_main_type)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) (to_rep1 container__split_fields)))
 (assert (in_range index))
 (assert (in_range1 new_item))

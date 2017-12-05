@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -706,17 +706,27 @@ logic r102b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "do_checks.adb", line 370, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:(int,bool) farray. forall x__split_fields1:t.
-  ((do_checks__do_discriminant_check__r1__arr__pred({ us_split_discrs1 = {
-  rec__do_checks__do_discriminant_check__r1__j = x__split_discrs };
-  us_split_fields1 = { rec__do_checks__do_discriminant_check__r1__arr = {
-  elts = x__split_fields; rt = x__split_fields1 } } }) ->
-  (dynamic_property1(1, to_rep(x__split_discrs),
-  to_rep(first(x__split_fields1)), to_rep(last(x__split_fields1))) and
+logic x__split_fields : (int,bool) farray
+
+logic x__split_fields1 : t
+
+axiom H : (do_checks__do_discriminant_check__r1__arr__pred({
+  us_split_discrs1 = { rec__do_checks__do_discriminant_check__r1__j =
+  x__split_discrs }; us_split_fields1 = {
+  rec__do_checks__do_discriminant_check__r1__arr = { elts = x__split_fields;
+  rt = x__split_fields1 } } }) -> (dynamic_property1(1,
+  to_rep(x__split_discrs), to_rep(first(x__split_fields1)),
+  to_rep(last(x__split_fields1))) and
   ((to_rep(first(x__split_fields1)) = 1) and
-  (to_rep(last(x__split_fields1)) = to_rep(x__split_discrs))))) ->
-  ((10 = to_rep(y__split_discrs)) -> ((to_rep(x__split_discrs) = 10) ->
-  (((to_rep(x__split_discrs) = r102b) and in_range(r102b)) ->
-  (10 = to_rep(x__split_discrs)))))))
+  (to_rep(last(x__split_fields1)) = to_rep(x__split_discrs)))))
+
+axiom H1 : (10 = to_rep(y__split_discrs))
+
+axiom H2 : (to_rep(x__split_discrs) = 10)
+
+axiom H3 : (to_rep(x__split_discrs) = r102b)
+
+axiom H4 : in_range(r102b)
+
+ (* File "do_checks.adb", line 370, characters 0-0 *)
+goal WP_parameter_def : (10 = to_rep(x__split_discrs))

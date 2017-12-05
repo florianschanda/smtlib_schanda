@@ -49,18 +49,35 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
+logic type_invariant_legal__pub__result : int
+
+logic result : int
+
+logic type_invariant_legal__pub__result1 : int
+
+logic type_invariant_legal__pub__result2 : int
+
+logic type_invariant_legal__pub__result3 : int
+
+logic type_invariant_legal__pub__result4 : int
+
+logic type_invariant_legal__pub__result5 : int
+
+axiom H :
+  (type_invariant_legal__pub__result1 = type_invariant_legal__pub__result2)
+
+axiom H1 :
+  (type_invariant_legal__pub__result3 = type_invariant_legal__pub__result1)
+
+axiom H2 : (result = type_invariant_legal__pub__result)
+
+axiom H3 : (type_invariant_legal__pub__result1 = 0)
+
+axiom H4 :
+  (type_invariant_legal__pub__result4 = type_invariant_legal__pub__result2)
+
+axiom H5 :
+  (type_invariant_legal__pub__result5 = type_invariant_legal__pub__result3)
+
  (* File "type_invariant_legal.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall type_invariant_legal__pub__result:int. forall result:int.
-  forall type_invariant_legal__pub__result1:int.
-  forall type_invariant_legal__pub__result2:int.
-  forall type_invariant_legal__pub__result3:int.
-  forall type_invariant_legal__pub__result4:int.
-  forall type_invariant_legal__pub__result5:int.
-  (((((type_invariant_legal__pub__result1 = type_invariant_legal__pub__result2) and
-  (type_invariant_legal__pub__result3 = type_invariant_legal__pub__result1)) and
-  ((result = type_invariant_legal__pub__result) and
-  (type_invariant_legal__pub__result1 = 0))) and
-  ((type_invariant_legal__pub__result4 = type_invariant_legal__pub__result2) and
-  (type_invariant_legal__pub__result5 = type_invariant_legal__pub__result3))) ->
-  (not (type_invariant_legal__pub__result4 = 0))))
+goal WP_parameter_def : (not (type_invariant_legal__pub__result4 = 0))

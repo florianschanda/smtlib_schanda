@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -751,41 +751,1067 @@ axiom aa__def_axiom : ({ elts = aa; rt = aa1 } = remove({ elts = a; rt = a1
 axiom bb__def_axiom : ({ elts = bb; rt = bb1 } = remove({ elts = b; rt = b1
   }, to_rep1(w1)))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ih:int. forall ia:int. forall ib:int.
-  forall perm__extended_perm__result:int.
-  forall perm__extended_perm__B_6__w__assume:index.
-  forall perm__extended_perm__B_6__w__assume1:index.
-  forall perm__extended_perm__B_6__aa__assume:(int,natural) farray.
-  forall perm__extended_perm__B_6__aa__assume1:t.
-  forall perm__extended_perm__B_6__bb__assume:(int,natural) farray.
-  forall perm__extended_perm__B_6__bb__assume1:t. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:int. forall o8:(int,natural) farray. forall o9:t.
-  forall o10:(int,natural) farray. forall o11:t. forall o12:int.
-  forall o13:(int,natural) farray. forall o14:t.
-  forall o15:(int,natural) farray. forall o16:t. forall o17:int.
-  forall o18:int. forall o19:int. forall o20:(int,natural) farray.
-  forall o21:t. forall o22:(int,natural) farray. forall o23:t.
-  forall o24:(int,natural) farray. forall o25:t.
-  forall o26:(int,natural) farray. forall o27:t. forall o28:int.
-  forall o29:us_t. forall o30:int. forall o31:int.
-  forall perm__extended_perm__result1:int.
-  forall perm__extended_perm__result2:int. forall result:int__ref.
-  forall ih1:int. forall result1:int__ref. forall ia1:int.
-  forall result2:int__ref. forall ih2:int. forall result3:int__ref.
-  forall ib1:int. forall result4:int__ref. forall ih3:int.
-  forall result5:int__ref. forall ih4:int. forall result6:int__ref.
-  forall ih5:int. (dynamic_property(1, 100, to_rep2(first(a1)),
-  to_rep2(last(a1))) -> (dynamic_property(1, 100, to_rep2(first(b1)),
-  to_rep2(last(b1))) -> (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((invariant__({ elts = b; rt = b1 }) = true) and (is_perm({ elts = a; rt =
-  a1 }, { elts = b; rt = b1 }) = true))) -> (((not (length({ elts = a; rt =
-  a1 }) = 0)) and
-  ((perm__extended_perm__result2 = perm__extended_perm__result) and
-  (perm__extended_perm__result2 = perm__extended_perm__result1))) -> (((({
-  us_split_fields1 = { rec__perm__witnesses__ia =
+logic ih : int
+
+logic ia : int
+
+logic ib : int
+
+logic perm__extended_perm__result : int
+
+logic perm__extended_perm__B_6__w__assume : index
+
+logic perm__extended_perm__B_6__w__assume1 : index
+
+logic perm__extended_perm__B_6__aa__assume : (int,natural) farray
+
+logic perm__extended_perm__B_6__aa__assume1 : t
+
+logic perm__extended_perm__B_6__bb__assume : (int,natural) farray
+
+logic perm__extended_perm__B_6__bb__assume1 : t
+
+logic o : int
+
+logic temp___595 : int
+
+logic temp___594 : int
+
+logic temp___593 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : (int,natural) farray
+
+logic o7 : t
+
+logic o8 : (int,natural) farray
+
+logic o9 : t
+
+logic o10 : int
+
+logic o11 : (int,natural) farray
+
+logic o12 : t
+
+logic o13 : int
+
+logic o14 : (int,natural) farray
+
+logic o15 : t
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : (int,natural) farray
+
+logic o20 : t
+
+logic o21 : int
+
+logic o22 : (int,natural) farray
+
+logic o23 : t
+
+logic o24 : (int,natural) farray
+
+logic o25 : t
+
+logic o26 : (int,natural) farray
+
+logic o27 : t
+
+logic o28 : int
+
+logic o29 : (int,natural) farray
+
+logic o30 : t
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : (int,natural) farray
+
+logic o34 : t
+
+logic o35 : int
+
+logic o36 : (int,natural) farray
+
+logic o37 : t
+
+logic o38 : (int,natural) farray
+
+logic o39 : t
+
+logic o40 : int
+
+logic o41 : (int,natural) farray
+
+logic o42 : t
+
+logic us : bool
+
+logic o43 : int
+
+logic o44 : (int,natural) farray
+
+logic o45 : t
+
+logic o46 : (int,natural) farray
+
+logic o47 : t
+
+logic us1 : bool
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : (int,natural) farray
+
+logic o52 : t
+
+logic o53 : int
+
+logic o54 : (int,natural) farray
+
+logic o55 : t
+
+logic o56 : int
+
+logic o57 : (int,natural) farray
+
+logic o58 : t
+
+logic o59 : (int,natural) farray
+
+logic o60 : t
+
+logic o61 : (int,natural) farray
+
+logic o62 : t
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : (int,natural) farray
+
+logic o66 : t
+
+logic o67 : int
+
+logic o68 : (int,natural) farray
+
+logic o69 : t
+
+logic o70 : (int,natural) farray
+
+logic o71 : t
+
+logic o72 : (int,natural) farray
+
+logic o73 : t
+
+logic us2 : bool
+
+logic o74 : int
+
+logic o75 : (int,natural) farray
+
+logic o76 : t
+
+logic o77 : (int,natural) farray
+
+logic o78 : t
+
+logic us3 : bool
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : (int,natural) farray
+
+logic o87 : t
+
+logic o88 : (int,natural) farray
+
+logic o89 : t
+
+logic o90 : int
+
+logic o91 : (int,natural) farray
+
+logic o92 : t
+
+logic o93 : (int,natural) farray
+
+logic o94 : t
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : (int,natural) farray
+
+logic o99 : t
+
+logic o100 : (int,natural) farray
+
+logic o101 : t
+
+logic o102 : (int,natural) farray
+
+logic o103 : t
+
+logic o104 : (int,natural) farray
+
+logic o105 : t
+
+logic o106 : int
+
+logic o107 : (int,natural) farray
+
+logic o108 : t
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : (int,natural) farray
+
+logic o112 : t
+
+logic o113 : (int,natural) farray
+
+logic o114 : t
+
+logic o115 : (int,natural) farray
+
+logic o116 : t
+
+logic o117 : int
+
+logic o118 : (int,natural) farray
+
+logic o119 : t
+
+logic us4 : bool
+
+logic o120 : int
+
+logic o121 : (int,natural) farray
+
+logic o122 : t
+
+logic o123 : (int,natural) farray
+
+logic o124 : t
+
+logic us5 : bool
+
+logic o125 : int
+
+logic o126 : int
+
+logic o127 : int
+
+logic o128 : (int,natural) farray
+
+logic o129 : t
+
+logic o130 : (int,natural) farray
+
+logic o131 : t
+
+logic o132 : int
+
+logic o133 : (int,natural) farray
+
+logic o134 : t
+
+logic o135 : (int,natural) farray
+
+logic o136 : t
+
+logic o137 : (int,natural) farray
+
+logic o138 : t
+
+logic o139 : int
+
+logic o140 : int
+
+logic o141 : (int,natural) farray
+
+logic o142 : t
+
+logic o143 : (int,natural) farray
+
+logic o144 : t
+
+logic o145 : (int,natural) farray
+
+logic o146 : t
+
+logic o147 : (int,natural) farray
+
+logic o148 : t
+
+logic us6 : bool
+
+logic o149 : int
+
+logic o150 : (int,natural) farray
+
+logic o151 : t
+
+logic o152 : (int,natural) farray
+
+logic o153 : t
+
+logic us7 : bool
+
+logic ib1 : int
+
+logic o154 : int
+
+logic o155 : (int,natural) farray
+
+logic o156 : t
+
+logic o157 : int
+
+logic o158 : (int,natural) farray
+
+logic o159 : t
+
+logic o160 : int
+
+logic o161 : natural
+
+logic o162 : int
+
+logic o163 : natural
+
+logic o164 : int
+
+logic o165 : int
+
+logic k : int
+
+logic ib2 : int
+
+logic o166 : int
+
+logic o167 : (int,natural) farray
+
+logic o168 : t
+
+logic o169 : int
+
+logic o170 : (int,natural) farray
+
+logic o171 : t
+
+logic o172 : int
+
+logic o173 : natural
+
+logic o174 : int
+
+logic o175 : natural
+
+logic o176 : int
+
+logic o177 : int
+
+logic o178 : int
+
+logic o179 : int
+
+logic o180 : int
+
+logic o181 : int
+
+logic o182 : int
+
+logic o183 : (int,natural) farray
+
+logic o184 : t
+
+logic o185 : (int,natural) farray
+
+logic o186 : t
+
+logic o187 : int
+
+logic o188 : (int,natural) farray
+
+logic o189 : t
+
+logic o190 : int
+
+logic o191 : (int,natural) farray
+
+logic o192 : t
+
+logic o193 : int
+
+logic o194 : int
+
+logic o195 : int
+
+logic o196 : (int,natural) farray
+
+logic o197 : t
+
+logic o198 : int
+
+logic o199 : (int,natural) farray
+
+logic o200 : t
+
+logic o201 : (int,natural) farray
+
+logic o202 : t
+
+logic o203 : (int,natural) farray
+
+logic o204 : t
+
+logic o205 : int
+
+logic o206 : (int,natural) farray
+
+logic o207 : t
+
+logic o208 : int
+
+logic o209 : int
+
+logic o210 : (int,natural) farray
+
+logic o211 : t
+
+logic o212 : int
+
+logic o213 : (int,natural) farray
+
+logic o214 : t
+
+logic o215 : (int,natural) farray
+
+logic o216 : t
+
+logic o217 : int
+
+logic o218 : (int,natural) farray
+
+logic o219 : t
+
+logic us8 : bool
+
+logic o220 : int
+
+logic o221 : (int,natural) farray
+
+logic o222 : t
+
+logic o223 : (int,natural) farray
+
+logic o224 : t
+
+logic us9 : bool
+
+logic o225 : int
+
+logic o226 : int
+
+logic o227 : int
+
+logic o228 : (int,natural) farray
+
+logic o229 : t
+
+logic o230 : int
+
+logic o231 : (int,natural) farray
+
+logic o232 : t
+
+logic o233 : int
+
+logic o234 : (int,natural) farray
+
+logic o235 : t
+
+logic o236 : (int,natural) farray
+
+logic o237 : t
+
+logic o238 : (int,natural) farray
+
+logic o239 : t
+
+logic o240 : int
+
+logic o241 : int
+
+logic o242 : (int,natural) farray
+
+logic o243 : t
+
+logic o244 : int
+
+logic o245 : (int,natural) farray
+
+logic o246 : t
+
+logic o247 : (int,natural) farray
+
+logic o248 : t
+
+logic o249 : (int,natural) farray
+
+logic o250 : t
+
+logic us10 : bool
+
+logic o251 : int
+
+logic o252 : (int,natural) farray
+
+logic o253 : t
+
+logic o254 : (int,natural) farray
+
+logic o255 : t
+
+logic us11 : bool
+
+logic o256 : int
+
+logic o257 : int
+
+logic o258 : int
+
+logic o259 : int
+
+logic o260 : int
+
+logic o261 : int
+
+logic o262 : int
+
+logic o263 : (int,natural) farray
+
+logic o264 : t
+
+logic o265 : (int,natural) farray
+
+logic o266 : t
+
+logic o267 : int
+
+logic o268 : (int,natural) farray
+
+logic o269 : t
+
+logic o270 : (int,natural) farray
+
+logic o271 : t
+
+logic o272 : int
+
+logic o273 : int
+
+logic o274 : int
+
+logic o275 : (int,natural) farray
+
+logic o276 : t
+
+logic o277 : (int,natural) farray
+
+logic o278 : t
+
+logic o279 : (int,natural) farray
+
+logic o280 : t
+
+logic o281 : (int,natural) farray
+
+logic o282 : t
+
+logic o283 : int
+
+logic o284 : (int,natural) farray
+
+logic o285 : t
+
+logic o286 : int
+
+logic o287 : int
+
+logic o288 : (int,natural) farray
+
+logic o289 : t
+
+logic o290 : (int,natural) farray
+
+logic o291 : t
+
+logic o292 : (int,natural) farray
+
+logic o293 : t
+
+logic o294 : int
+
+logic o295 : (int,natural) farray
+
+logic o296 : t
+
+logic us12 : bool
+
+logic o297 : int
+
+logic o298 : (int,natural) farray
+
+logic o299 : t
+
+logic o300 : (int,natural) farray
+
+logic o301 : t
+
+logic us13 : bool
+
+logic o302 : int
+
+logic o303 : int
+
+logic o304 : int
+
+logic o305 : (int,natural) farray
+
+logic o306 : t
+
+logic o307 : (int,natural) farray
+
+logic o308 : t
+
+logic o309 : int
+
+logic o310 : (int,natural) farray
+
+logic o311 : t
+
+logic o312 : (int,natural) farray
+
+logic o313 : t
+
+logic o314 : (int,natural) farray
+
+logic o315 : t
+
+logic o316 : int
+
+logic o317 : int
+
+logic o318 : (int,natural) farray
+
+logic o319 : t
+
+logic o320 : (int,natural) farray
+
+logic o321 : t
+
+logic o322 : (int,natural) farray
+
+logic o323 : t
+
+logic o324 : (int,natural) farray
+
+logic o325 : t
+
+logic us14 : bool
+
+logic o326 : int
+
+logic o327 : (int,natural) farray
+
+logic o328 : t
+
+logic o329 : (int,natural) farray
+
+logic o330 : t
+
+logic us15 : bool
+
+logic ib3 : int
+
+logic o331 : int
+
+logic o332 : (int,natural) farray
+
+logic o333 : t
+
+logic o334 : int
+
+logic o335 : (int,natural) farray
+
+logic o336 : t
+
+logic o337 : int
+
+logic o338 : natural
+
+logic o339 : int
+
+logic o340 : natural
+
+logic o341 : int
+
+logic o342 : int
+
+logic ia1 : int
+
+logic ib4 : int
+
+logic o343 : int
+
+logic o344 : (int,natural) farray
+
+logic o345 : t
+
+logic o346 : int
+
+logic o347 : (int,natural) farray
+
+logic o348 : t
+
+logic o349 : int
+
+logic o350 : natural
+
+logic o351 : int
+
+logic o352 : natural
+
+logic o353 : int
+
+logic o354 : int
+
+logic ih1 : int
+
+logic ia2 : int
+
+logic ib5 : int
+
+logic perm__extended_perm__result1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic perm__extended_perm__result2 : int
+
+logic result3 : int
+
+logic ih2 : int
+
+logic result4 : int
+
+logic ia3 : int
+
+logic result5 : int
+
+logic ib6 : int
+
+logic result6 : int
+
+logic ih3 : int
+
+logic result7 : int
+
+logic ib7 : int
+
+logic result8 : int
+
+logic ih4 : int
+
+logic result9 : int
+
+logic ih5 : int
+
+logic result10 : int
+
+logic ih6 : int
+
+logic result11 : int
+
+logic ib8 : int
+
+logic result12 : int
+
+logic ih7 : int
+
+logic result13 : int
+
+logic ih8 : int
+
+logic result14 : int
+
+logic ih9 : int
+
+logic result15 : int
+
+logic ib9 : int
+
+logic result16 : int
+
+logic ih10 : int
+
+logic result17 : int
+
+logic ih11 : int
+
+logic result18 : int
+
+logic ih12 : int
+
+logic result19 : int
+
+logic ib10 : int
+
+logic result20 : int
+
+logic ih13 : int
+
+logic result21 : int
+
+logic ih14 : int
+
+logic result22 : bool
+
+logic ih15 : int
+
+logic ia4 : int
+
+logic ib11 : int
+
+logic result23 : bool
+
+logic result24 : int
+
+logic ia5 : int
+
+logic result25 : int
+
+logic ib12 : int
+
+logic result26 : int
+
+logic ih16 : int
+
+logic result27 : int
+
+logic ib13 : int
+
+logic result28 : int
+
+logic ih17 : int
+
+logic result29 : int
+
+logic ih18 : int
+
+logic result30 : int
+
+logic ih19 : int
+
+logic result31 : int
+
+logic ib14 : int
+
+logic result32 : int
+
+logic ih20 : int
+
+logic result33 : int
+
+logic ih21 : int
+
+logic result34 : int
+
+logic ih22 : int
+
+logic result35 : int
+
+logic ib15 : int
+
+logic result36 : int
+
+logic ih23 : int
+
+logic result37 : int
+
+logic ih24 : int
+
+logic result38 : int
+
+logic ih25 : int
+
+logic result39 : int
+
+logic ib16 : int
+
+logic result40 : int
+
+logic ih26 : int
+
+logic result41 : int
+
+logic ih27 : int
+
+logic result42 : bool
+
+logic ih28 : int
+
+logic ia6 : int
+
+logic ib17 : int
+
+logic ih29 : int
+
+logic ia7 : int
+
+logic ib18 : int
+
+logic ih30 : int
+
+logic ia8 : int
+
+logic ib19 : int
+
+logic ih31 : int
+
+logic ia9 : int
+
+logic ib20 : int
+
+logic ih32 : int
+
+logic ia10 : int
+
+logic ib21 : int
+
+logic ih33 : int
+
+logic ia11 : int
+
+logic ib22 : int
+
+logic result43 : int
+
+logic perm__extended_perm__result3 : int
+
+logic ih34 : int
+
+logic ia12 : int
+
+logic ib23 : int
+
+logic perm__extended_perm__result4 : int
+
+logic ih35 : int
+
+logic ia13 : int
+
+logic ib24 : int
+
+logic perm__extended_perm__result5 : int
+
+logic ih36 : int
+
+logic ia14 : int
+
+logic ib25 : int
+
+logic perm__extended_perm__result6 : int
+
+logic ih37 : int
+
+logic ia15 : int
+
+logic ib26 : int
+
+logic perm__extended_perm__result7 : int
+
+logic ih38 : int
+
+logic ia16 : int
+
+logic ib27 : int
+
+logic perm__extended_perm__result8 : int
+
+logic ih39 : int
+
+logic ia17 : int
+
+logic ib28 : int
+
+logic perm__extended_perm__result9 : int
+
+logic result44 : bool
+
+axiom H : dynamic_property(1, 100, to_rep2(first(a1)), to_rep2(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep2(first(b1)), to_rep2(last(b1)))
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and (is_perm({ elts = a; rt = a1 }, { elts =
+  b; rt = b1 }) = true)))
+
+axiom H3 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H4 : (perm__extended_perm__result2 = perm__extended_perm__result)
+
+axiom H5 : (perm__extended_perm__result2 = perm__extended_perm__result1)
+
+axiom H6 : (({ us_split_fields1 = { rec__perm__witnesses__ia =
   perm__extended_perm__B_6__w__assume; rec__perm__witnesses__ib =
   perm__extended_perm__B_6__w__assume1 } } = get_witnesses({ elts = a; rt =
   a1 }, { elts = b; rt = b1 })) and
@@ -796,10 +1822,12 @@ goal WP_parameter_def :
   ((to_rep((a[to_rep1(perm__extended_perm__B_6__w__assume)])) = to_rep((b[to_rep1(perm__extended_perm__B_6__w__assume1)]))) and
   (is_perm(remove({ elts = a; rt = a1 },
   to_rep1(perm__extended_perm__B_6__w__assume)), remove({ elts = b; rt = b1
-  }, to_rep1(perm__extended_perm__B_6__w__assume1))) = true))))) and
-  ((w = perm__extended_perm__B_6__w__assume) and
-  (w1 = perm__extended_perm__B_6__w__assume1))) -> (((({ elts =
-  perm__extended_perm__B_6__aa__assume; rt =
+  }, to_rep1(perm__extended_perm__B_6__w__assume1))) = true)))))
+
+axiom H7 : ((perm__extended_perm__B_6__w__assume = w) and
+  (perm__extended_perm__B_6__w__assume1 = w1))
+
+axiom H8 : (({ elts = perm__extended_perm__B_6__aa__assume; rt =
   perm__extended_perm__B_6__aa__assume1 } = remove({ elts = a; rt = a1 },
   to_rep1(w))) and (dynamic_property(1, 100,
   to_rep2(first(perm__extended_perm__B_6__aa__assume1)),
@@ -807,16 +1835,21 @@ goal WP_parameter_def :
   elts = perm__extended_perm__B_6__aa__assume; rt =
   perm__extended_perm__B_6__aa__assume1 }) = true) and
   ((to_rep2(last(perm__extended_perm__B_6__aa__assume1)) = (to_rep2(last(a1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (to_rep1(w) - 1))) ->
-   (to_rep((a[k])) = to_rep((perm__extended_perm__B_6__aa__assume[k]))))) and
-  ((forall k:int. ((((to_rep1(w) + 1) <= k) and (k <= to_rep2(last(a1)))) ->
-   (to_rep((a[k])) = to_rep((perm__extended_perm__B_6__aa__assume[(k - 1)]))))) and
-  (forall k:int. (((to_rep1(w) <= k) and (k <= (to_rep2(last(a1)) - 1))) ->
-  (to_rep((a[(k + 1)])) = to_rep((perm__extended_perm__B_6__aa__assume[k]))))))))))) and
-  ((aa = perm__extended_perm__B_6__aa__assume) and
-  (aa1 = perm__extended_perm__B_6__aa__assume1))) -> (dynamic_property(1,
-  100, to_rep2(first(aa1)), to_rep2(last(aa1))) -> (((({ elts =
-  perm__extended_perm__B_6__bb__assume; rt =
+  ((forall k1:int. (((1 <= k1) and (k1 <= (to_rep1(w) - 1))) ->
+   (to_rep((a[k1])) = to_rep((perm__extended_perm__B_6__aa__assume[k1]))))) and
+  ((forall k1:int. ((((to_rep1(w) + 1) <= k1) and
+   (k1 <= to_rep2(last(a1)))) ->
+   (to_rep((a[k1])) = to_rep((perm__extended_perm__B_6__aa__assume[(k1 - 1)]))))) and
+  (forall k1:int. (((to_rep1(w) <= k1) and
+  (k1 <= (to_rep2(last(a1)) - 1))) ->
+  (to_rep((a[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__aa__assume[k1])))))))))))
+
+axiom H9 : ((perm__extended_perm__B_6__aa__assume = aa) and
+  (perm__extended_perm__B_6__aa__assume1 = aa1))
+
+axiom H10 : dynamic_property(1, 100, to_rep2(first(aa1)), to_rep2(last(aa1)))
+
+axiom H11 : (({ elts = perm__extended_perm__B_6__bb__assume; rt =
   perm__extended_perm__B_6__bb__assume1 } = remove({ elts = b; rt = b1 },
   to_rep1(w1))) and (dynamic_property(1, 100,
   to_rep2(first(perm__extended_perm__B_6__bb__assume1)),
@@ -824,155 +1857,237 @@ goal WP_parameter_def :
   elts = perm__extended_perm__B_6__bb__assume; rt =
   perm__extended_perm__B_6__bb__assume1 }) = true) and
   ((to_rep2(last(perm__extended_perm__B_6__bb__assume1)) = (to_rep2(last(b1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (to_rep1(w1) - 1))) ->
-   (to_rep((b[k])) = to_rep((perm__extended_perm__B_6__bb__assume[k]))))) and
-  ((forall k:int. ((((to_rep1(w1) + 1) <= k) and (k <= to_rep2(last(b1)))) ->
-   (to_rep((b[k])) = to_rep((perm__extended_perm__B_6__bb__assume[(k - 1)]))))) and
-  (forall k:int. (((to_rep1(w1) <= k) and (k <= (to_rep2(last(b1)) - 1))) ->
-  (to_rep((b[(k + 1)])) = to_rep((perm__extended_perm__B_6__bb__assume[k]))))))))))) and
-  ((bb = perm__extended_perm__B_6__bb__assume) and
-  (bb1 = perm__extended_perm__B_6__bb__assume1))) -> (dynamic_property(1,
-  100, to_rep2(first(bb1)), to_rep2(last(bb1))) -> ((((o = extended_perm({
-  elts = aa; rt = aa1 }, { elts = bb; rt = bb1 })) and (in_range3(o) and
-  ((of_int(o) = true) ->
-  (forall ia2:int. (((to_rep2(first(aa1)) <= ia2) and
-  (ia2 <= to_rep2(last(aa1)))) ->
-  (exists ib2:int. (((to_rep2(first(bb1)) <= ib2) and
-  (ib2 <= to_rep2(last(bb1)))) and
-  ((to_rep((aa[ia2])) = to_rep((bb[ib2]))) and (is_perm(remove({ elts = aa;
-  rt = aa1 }, ia2), remove({ elts = bb; rt = bb1 }, ib2)) = true))))))))) and
-  ((result = { int__content = ih }) and (ih1 = o))) -> (in_range3(ih1) ->
-  ((of_int(ih1) = true) -> (((result1 = { int__content = ia }) and
-  (ia1 = to_rep2(first(a1)))) -> (((to_rep2(first(a1)) <= ia1) and
-  (ia1 <= to_rep2(last(a1)))) -> (((1 <= 100) -> in_range4(ib)) ->
-  ((not (ia1 = to_rep1(w))) -> ((not (ia1 <  to_rep1(w))) ->
-  (((((o1 = ia1) and in_range4(ia1)) and ((o2 = remove_swap({ elts = a; rt =
-  a1 }, to_rep1(w), o1)) and (in_range3(o2) and ((of_int(o2) = true) ->
-  (bool_eq6((remove(remove({ elts = a; rt = a1 }, to_rep1(w)),
-  (o1 - 1))).elts, to_rep2(first((remove(remove({ elts = a; rt = a1 },
-  to_rep1(w)), (o1 - 1))).rt)), to_rep2(last((remove(remove({ elts = a; rt =
-  a1 }, to_rep1(w)), (o1 - 1))).rt)), (remove(remove({ elts = a; rt = a1 },
-  o1), to_rep1(w))).elts, to_rep2(first((remove(remove({ elts = a; rt = a1 },
-  o1), to_rep1(w))).rt)), to_rep2(last((remove(remove({ elts = a; rt = a1 },
-  o1), to_rep1(w))).rt))) = true))))) and ((result2 = { int__content = ih1
-  }) and (ih2 = o2))) -> ((of_int(ih2) = true) -> ((((((o3 = (ia1 - 1)) and
-  in_range1((ia1 - 1))) and ((o4 = o3) and in_range4(o3))) and
-  ((o5 = get_witness({ elts = aa; rt = aa1 }, { elts = bb; rt = bb1 },
-  o4)) and (in_range4(o5) and (((to_rep2(first(bb1)) <= o5) and
-  (o5 <= to_rep2(last(bb1)))) and ((to_rep((aa[o4])) = to_rep((bb[o5]))) and
-  (is_perm(remove({ elts = aa; rt = aa1 }, o4), remove({ elts = bb; rt = bb1
-  }, o5)) = true)))))) and ((result3 = { int__content = ib }) and
-  (ib1 = o5))) -> (((((((o12 = ia1) and in_range4(ia1)) and (({ elts = o13;
-  rt = o14 } = remove({ elts = a; rt = a1 }, o12)) and (dynamic_property(1,
-  100, to_rep2(first(o14)), to_rep2(last(o14))) and ((invariant__({ elts =
-  o13; rt = o14 }) = true) and
-  ((to_rep2(last(o14)) = (to_rep2(last(a1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o12 - 1))) ->
-   (to_rep((a[k])) = to_rep((o13[k]))))) and
-  ((forall k:int. ((((o12 + 1) <= k) and (k <= to_rep2(last(a1)))) ->
-   (to_rep((a[k])) = to_rep((o13[(k - 1)]))))) and
-  (forall k:int. (((o12 <= k) and (k <= (to_rep2(last(a1)) - 1))) ->
-  (to_rep((a[(k + 1)])) = to_rep((o13[k])))))))))))) and (({ elts = o15; rt =
-  o16 } = remove({ elts = o13; rt = o14 }, to_rep1(w))) and
-  (dynamic_property(1, 100, to_rep2(first(o16)), to_rep2(last(o16))) and
-  ((invariant__({ elts = o15; rt = o16 }) = true) and
-  ((to_rep2(last(o16)) = (to_rep2(last(o14)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (to_rep1(w) - 1))) ->
-   (to_rep((o13[k])) = to_rep((o15[k]))))) and
-  ((forall k:int. ((((to_rep1(w) + 1) <= k) and (k <= to_rep2(last(o14)))) ->
-   (to_rep((o13[k])) = to_rep((o15[(k - 1)]))))) and
-  (forall k:int. (((to_rep1(w) <= k) and (k <= (to_rep2(last(o14)) - 1))) ->
-  (to_rep((o13[(k + 1)])) = to_rep((o15[k])))))))))))) and ((({ elts = o10;
-  rt = o11 } = remove({ elts = bb; rt = bb1 }, ib1)) and (dynamic_property(1,
-  100, to_rep2(first(o11)), to_rep2(last(o11))) and ((invariant__({ elts =
-  o10; rt = o11 }) = true) and
-  ((to_rep2(last(o11)) = (to_rep2(last(bb1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (ib1 - 1))) ->
-   (to_rep((bb[k])) = to_rep((o10[k]))))) and
-  ((forall k:int. ((((ib1 + 1) <= k) and (k <= to_rep2(last(bb1)))) ->
-   (to_rep((bb[k])) = to_rep((o10[(k - 1)]))))) and
-  (forall k:int. (((ib1 <= k) and (k <= (to_rep2(last(bb1)) - 1))) ->
-  (to_rep((bb[(k + 1)])) = to_rep((o10[k]))))))))))) and
-  (((((o6 = (ia1 - 1)) and in_range1((ia1 - 1))) and ((o7 = o6) and
-  in_range4(o6))) and (({ elts = o8; rt = o9 } = remove({ elts = aa; rt = aa1
-  }, o7)) and (dynamic_property(1, 100, to_rep2(first(o9)),
-  to_rep2(last(o9))) and ((invariant__({ elts = o8; rt = o9 }) = true) and
-  ((to_rep2(last(o9)) = (to_rep2(last(aa1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o7 - 1))) ->
-   (to_rep((aa[k])) = to_rep((o8[k]))))) and
-  ((forall k:int. ((((o7 + 1) <= k) and (k <= to_rep2(last(aa1)))) ->
-   (to_rep((aa[k])) = to_rep((o8[(k - 1)]))))) and
-  (forall k:int. (((o7 <= k) and (k <= (to_rep2(last(aa1)) - 1))) ->
-  (to_rep((aa[(k + 1)])) = to_rep((o8[k])))))))))))) and
-  ((o17 = shift_perm_l({ elts = o8; rt = o9 }, { elts = o10; rt = o11 }, {
-  elts = o15; rt = o16 })) and (in_range3(o17) and ((of_int(o17) = true) ->
-  (is_perm({ elts = o15; rt = o16 }, { elts = o10; rt = o11
-  }) = true))))))) and ((result4 = { int__content = ih2 }) and
-  (ih3 = o17))) -> ((of_int(ih3) = true) -> ((ib1 <  to_rep1(w1)) ->
-  ((((o18 = remove_swap({ elts = b; rt = b1 }, ib1, to_rep1(w1))) and
-  (in_range3(o18) and ((of_int(o18) = true) -> (bool_eq6((remove(remove({
-  elts = b; rt = b1 }, ib1), (to_rep1(w1) - 1))).elts,
-  to_rep2(first((remove(remove({ elts = b; rt = b1 }, ib1),
+  ((forall k1:int. (((1 <= k1) and (k1 <= (to_rep1(w1) - 1))) ->
+   (to_rep((b[k1])) = to_rep((perm__extended_perm__B_6__bb__assume[k1]))))) and
+  ((forall k1:int. ((((to_rep1(w1) + 1) <= k1) and
+   (k1 <= to_rep2(last(b1)))) ->
+   (to_rep((b[k1])) = to_rep((perm__extended_perm__B_6__bb__assume[(k1 - 1)]))))) and
+  (forall k1:int. (((to_rep1(w1) <= k1) and
+  (k1 <= (to_rep2(last(b1)) - 1))) ->
+  (to_rep((b[(k1 + 1)])) = to_rep((perm__extended_perm__B_6__bb__assume[k1])))))))))))
+
+axiom H12 : ((perm__extended_perm__B_6__bb__assume = bb) and
+  (perm__extended_perm__B_6__bb__assume1 = bb1))
+
+axiom H13 : dynamic_property(1, 100, to_rep2(first(bb1)), to_rep2(last(bb1)))
+
+axiom H14 : ((o = extended_perm({ elts = aa; rt = aa1 }, { elts = bb; rt =
+  bb1 })) and (in_range3(o) and ((of_int(o) = true) ->
+  (forall ia18:int. (((to_rep2(first(aa1)) <= ia18) and
+  (ia18 <= to_rep2(last(aa1)))) ->
+  (exists ib29:int. (((to_rep2(first(bb1)) <= ib29) and
+  (ib29 <= to_rep2(last(bb1)))) and
+  ((to_rep((aa[ia18])) = to_rep((bb[ib29]))) and (is_perm(remove({ elts = aa;
+  rt = aa1 }, ia18), remove({ elts = bb; rt = bb1 }, ib29)) = true)))))))))
+
+axiom H15 : (result3 = ih)
+
+axiom H16 : (ih2 = o)
+
+axiom H17 : in_range3(ih2)
+
+axiom H18 : (of_int(ih2) = true)
+
+axiom H19 : (result4 = ia)
+
+axiom H20 : (ia3 = to_rep2(first(a1)))
+
+axiom H21 : (to_rep2(first(a1)) <= ia3)
+
+axiom H22 : (ia3 <= to_rep2(last(a1)))
+
+axiom H23 : ((1 <= 100) -> in_range4(ib))
+
+axiom H24 : (not (ia3 = to_rep1(w)))
+
+axiom H25 : (not (ia3 <  to_rep1(w)))
+
+axiom H26 : ((o79 = ia3) and in_range4(ia3))
+
+axiom H27 : ((o80 = remove_swap({ elts = a; rt = a1 }, to_rep1(w), o79)) and
+  (in_range3(o80) and ((of_int(o80) = true) -> (bool_eq6((remove(remove({
+  elts = a; rt = a1 }, to_rep1(w)), (o79 - 1))).elts,
+  to_rep2(first((remove(remove({ elts = a; rt = a1 }, to_rep1(w)),
+  (o79 - 1))).rt)), to_rep2(last((remove(remove({ elts = a; rt = a1 },
+  to_rep1(w)), (o79 - 1))).rt)), (remove(remove({ elts = a; rt = a1 }, o79),
+  to_rep1(w))).elts, to_rep2(first((remove(remove({ elts = a; rt = a1 },
+  o79), to_rep1(w))).rt)), to_rep2(last((remove(remove({ elts = a; rt = a1 },
+  o79), to_rep1(w))).rt))) = true))))
+
+axiom H28 : (result14 = ih2)
+
+axiom H29 : (ih9 = o80)
+
+axiom H30 : (of_int(ih9) = true)
+
+axiom H31 : ((o81 = (ia3 - 1)) and in_range1((ia3 - 1)))
+
+axiom H32 : ((o82 = o81) and in_range4(o81))
+
+axiom H33 : ((o83 = get_witness({ elts = aa; rt = aa1 }, { elts = bb; rt =
+  bb1 }, o82)) and (in_range4(o83) and (((to_rep2(first(bb1)) <= o83) and
+  (o83 <= to_rep2(last(bb1)))) and
+  ((to_rep((aa[o82])) = to_rep((bb[o83]))) and (is_perm(remove({ elts = aa;
+  rt = aa1 }, o82), remove({ elts = bb; rt = bb1 }, o83)) = true)))))
+
+axiom H34 : (result15 = ib)
+
+axiom H35 : (ib9 = o83)
+
+axiom H36 : ((o90 = ia3) and in_range4(ia3))
+
+axiom H37 : (({ elts = o91; rt = o92 } = remove({ elts = a; rt = a1 },
+  o90)) and (dynamic_property(1, 100, to_rep2(first(o92)),
+  to_rep2(last(o92))) and ((invariant__({ elts = o91; rt = o92 }) = true) and
+  ((to_rep2(last(o92)) = (to_rep2(last(a1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (o90 - 1))) ->
+   (to_rep((a[k1])) = to_rep((o91[k1]))))) and
+  ((forall k1:int. ((((o90 + 1) <= k1) and (k1 <= to_rep2(last(a1)))) ->
+   (to_rep((a[k1])) = to_rep((o91[(k1 - 1)]))))) and
+  (forall k1:int. (((o90 <= k1) and (k1 <= (to_rep2(last(a1)) - 1))) ->
+  (to_rep((a[(k1 + 1)])) = to_rep((o91[k1])))))))))))
+
+axiom H38 : (({ elts = o93; rt = o94 } = remove({ elts = o91; rt = o92 },
+  to_rep1(w))) and (dynamic_property(1, 100, to_rep2(first(o94)),
+  to_rep2(last(o94))) and ((invariant__({ elts = o93; rt = o94 }) = true) and
+  ((to_rep2(last(o94)) = (to_rep2(last(o92)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (to_rep1(w) - 1))) ->
+   (to_rep((o91[k1])) = to_rep((o93[k1]))))) and
+  ((forall k1:int. ((((to_rep1(w) + 1) <= k1) and
+   (k1 <= to_rep2(last(o92)))) ->
+   (to_rep((o91[k1])) = to_rep((o93[(k1 - 1)]))))) and
+  (forall k1:int. (((to_rep1(w) <= k1) and
+  (k1 <= (to_rep2(last(o92)) - 1))) ->
+  (to_rep((o91[(k1 + 1)])) = to_rep((o93[k1])))))))))))
+
+axiom H39 : (({ elts = o88; rt = o89 } = remove({ elts = bb; rt = bb1 },
+  ib9)) and (dynamic_property(1, 100, to_rep2(first(o89)),
+  to_rep2(last(o89))) and ((invariant__({ elts = o88; rt = o89 }) = true) and
+  ((to_rep2(last(o89)) = (to_rep2(last(bb1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (ib9 - 1))) ->
+   (to_rep((bb[k1])) = to_rep((o88[k1]))))) and
+  ((forall k1:int. ((((ib9 + 1) <= k1) and (k1 <= to_rep2(last(bb1)))) ->
+   (to_rep((bb[k1])) = to_rep((o88[(k1 - 1)]))))) and
+  (forall k1:int. (((ib9 <= k1) and (k1 <= (to_rep2(last(bb1)) - 1))) ->
+  (to_rep((bb[(k1 + 1)])) = to_rep((o88[k1])))))))))))
+
+axiom H40 : ((o84 = (ia3 - 1)) and in_range1((ia3 - 1)))
+
+axiom H41 : ((o85 = o84) and in_range4(o84))
+
+axiom H42 : (({ elts = o86; rt = o87 } = remove({ elts = aa; rt = aa1 },
+  o85)) and (dynamic_property(1, 100, to_rep2(first(o87)),
+  to_rep2(last(o87))) and ((invariant__({ elts = o86; rt = o87 }) = true) and
+  ((to_rep2(last(o87)) = (to_rep2(last(aa1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (o85 - 1))) ->
+   (to_rep((aa[k1])) = to_rep((o86[k1]))))) and
+  ((forall k1:int. ((((o85 + 1) <= k1) and (k1 <= to_rep2(last(aa1)))) ->
+   (to_rep((aa[k1])) = to_rep((o86[(k1 - 1)]))))) and
+  (forall k1:int. (((o85 <= k1) and (k1 <= (to_rep2(last(aa1)) - 1))) ->
+  (to_rep((aa[(k1 + 1)])) = to_rep((o86[k1])))))))))))
+
+axiom H43 : ((o95 = shift_perm_l({ elts = o86; rt = o87 }, { elts = o88; rt =
+  o89 }, { elts = o93; rt = o94 })) and (in_range3(o95) and
+  ((of_int(o95) = true) -> (is_perm({ elts = o93; rt = o94 }, { elts = o88;
+  rt = o89 }) = true))))
+
+axiom H44 : (result16 = ih9)
+
+axiom H45 : (ih10 = o95)
+
+axiom H46 : (of_int(ih10) = true)
+
+axiom H47 : (ib9 <  to_rep1(w1))
+
+axiom H48 : ((o96 = remove_swap({ elts = b; rt = b1 }, ib9, to_rep1(w1))) and
+  (in_range3(o96) and ((of_int(o96) = true) -> (bool_eq6((remove(remove({
+  elts = b; rt = b1 }, ib9), (to_rep1(w1) - 1))).elts,
+  to_rep2(first((remove(remove({ elts = b; rt = b1 }, ib9),
   (to_rep1(w1) - 1))).rt)), to_rep2(last((remove(remove({ elts = b; rt = b1
-  }, ib1), (to_rep1(w1) - 1))).rt)), (remove(remove({ elts = b; rt = b1 },
-  to_rep1(w1)), ib1)).elts, to_rep2(first((remove(remove({ elts = b; rt = b1
-  }, to_rep1(w1)), ib1)).rt)), to_rep2(last((remove(remove({ elts = b; rt =
-  b1 }, to_rep1(w1)), ib1)).rt))) = true)))) and ((result5 = { int__content =
-  ih3 }) and (ih4 = o18))) -> ((of_int(ih4) = true) ->
-  ((((((o28 = (to_rep1(w1) - 1)) and in_range4((to_rep1(w1) - 1))) and ((({
-  elts = o26; rt = o27 } = remove({ elts = b; rt = b1 }, ib1)) and
-  (dynamic_property(1, 100, to_rep2(first(o27)), to_rep2(last(o27))) and
-  ((invariant__({ elts = o26; rt = o27 }) = true) and
-  ((to_rep2(last(o27)) = (to_rep2(last(b1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (ib1 - 1))) ->
-   (to_rep((b[k])) = to_rep((o26[k]))))) and
-  ((forall k:int. ((((ib1 + 1) <= k) and (k <= to_rep2(last(b1)))) ->
-   (to_rep((b[k])) = to_rep((o26[(k - 1)]))))) and
-  (forall k:int. (((ib1 <= k) and (k <= (to_rep2(last(b1)) - 1))) ->
-  (to_rep((b[(k + 1)])) = to_rep((o26[k]))))))))))) and ((o29 = remove({
-  elts = o26; rt = o27 }, o28)) and (dynamic_property(1, 100,
-  to_rep2(first((o29).rt)), to_rep2(last((o29).rt))) and
-  ((invariant__(o29) = true) and
-  ((to_rep2(last((o29).rt)) = (to_rep2(last(o27)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o28 - 1))) ->
-   (to_rep((o26[k])) = to_rep(((o29).elts[k]))))) and
-  ((forall k:int. ((((o28 + 1) <= k) and (k <= to_rep2(last(o27)))) ->
-   (to_rep((o26[k])) = to_rep(((o29).elts[(k - 1)]))))) and
-  (forall k:int. (((o28 <= k) and (k <= (to_rep2(last(o27)) - 1))) ->
-  (to_rep((o26[(k + 1)])) = to_rep(((o29).elts[k]))))))))))))) and ((({
-  elts = o24; rt = o25 } = remove({ elts = bb; rt = bb1 }, ib1)) and
-  (dynamic_property(1, 100, to_rep2(first(o25)), to_rep2(last(o25))) and
-  ((invariant__({ elts = o24; rt = o25 }) = true) and
-  ((to_rep2(last(o25)) = (to_rep2(last(bb1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (ib1 - 1))) ->
-   (to_rep((bb[k])) = to_rep((o24[k]))))) and
-  ((forall k:int. ((((ib1 + 1) <= k) and (k <= to_rep2(last(bb1)))) ->
-   (to_rep((bb[k])) = to_rep((o24[(k - 1)]))))) and
-  (forall k:int. (((ib1 <= k) and (k <= (to_rep2(last(bb1)) - 1))) ->
-  (to_rep((bb[(k + 1)])) = to_rep((o24[k]))))))))))) and (((((o19 = ia1) and
-  in_range4(ia1)) and (({ elts = o20; rt = o21 } = remove({ elts = a; rt = a1
-  }, o19)) and (dynamic_property(1, 100, to_rep2(first(o21)),
-  to_rep2(last(o21))) and ((invariant__({ elts = o20; rt = o21 }) = true) and
-  ((to_rep2(last(o21)) = (to_rep2(last(a1)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (o19 - 1))) ->
-   (to_rep((a[k])) = to_rep((o20[k]))))) and
-  ((forall k:int. ((((o19 + 1) <= k) and (k <= to_rep2(last(a1)))) ->
-   (to_rep((a[k])) = to_rep((o20[(k - 1)]))))) and
-  (forall k:int. (((o19 <= k) and (k <= (to_rep2(last(a1)) - 1))) ->
-  (to_rep((a[(k + 1)])) = to_rep((o20[k])))))))))))) and (({ elts = o22; rt =
-  o23 } = remove({ elts = o20; rt = o21 }, to_rep1(w))) and
-  (dynamic_property(1, 100, to_rep2(first(o23)), to_rep2(last(o23))) and
-  ((invariant__({ elts = o22; rt = o23 }) = true) and
-  ((to_rep2(last(o23)) = (to_rep2(last(o21)) - 1)) and
-  ((forall k:int. (((1 <= k) and (k <= (to_rep1(w) - 1))) ->
-   (to_rep((o20[k])) = to_rep((o22[k]))))) and
-  ((forall k:int. ((((to_rep1(w) + 1) <= k) and (k <= to_rep2(last(o21)))) ->
-   (to_rep((o20[k])) = to_rep((o22[(k - 1)]))))) and
-  (forall k:int. (((to_rep1(w) <= k) and (k <= (to_rep2(last(o21)) - 1))) ->
-  (to_rep((o20[(k + 1)])) = to_rep((o22[k])))))))))))) and
-  ((o30 = shift_perm_r({ elts = o22; rt = o23 }, { elts = o24; rt = o25 },
-  o29)) and (in_range3(o30) and ((of_int(o30) = true) -> (is_perm({ elts =
-  o22; rt = o23 }, o29) = true))))))) and ((result6 = { int__content = ih4
-  }) and (ih5 = o30))) -> ((of_int(ih5) = true) ->
-  (((o31 = (to_rep1(w1) - 1)) and in_range4((to_rep1(w1) - 1))) ->
-  (invariant__({ elts = b; rt = b1 }) = true))))))))))))))))))))))))))))))
+  }, ib9), (to_rep1(w1) - 1))).rt)), (remove(remove({ elts = b; rt = b1 },
+  to_rep1(w1)), ib9)).elts, to_rep2(first((remove(remove({ elts = b; rt = b1
+  }, to_rep1(w1)), ib9)).rt)), to_rep2(last((remove(remove({ elts = b; rt =
+  b1 }, to_rep1(w1)), ib9)).rt))) = true))))
+
+axiom H49 : (result17 = ih10)
+
+axiom H50 : (ih11 = o96)
+
+axiom H51 : (of_int(ih11) = true)
+
+axiom H52 : ((o106 = (to_rep1(w1) - 1)) and in_range4((to_rep1(w1) - 1)))
+
+axiom H53 : (({ elts = o104; rt = o105 } = remove({ elts = b; rt = b1 },
+  ib9)) and (dynamic_property(1, 100, to_rep2(first(o105)),
+  to_rep2(last(o105))) and ((invariant__({ elts = o104; rt = o105
+  }) = true) and ((to_rep2(last(o105)) = (to_rep2(last(b1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (ib9 - 1))) ->
+   (to_rep((b[k1])) = to_rep((o104[k1]))))) and
+  ((forall k1:int. ((((ib9 + 1) <= k1) and (k1 <= to_rep2(last(b1)))) ->
+   (to_rep((b[k1])) = to_rep((o104[(k1 - 1)]))))) and
+  (forall k1:int. (((ib9 <= k1) and (k1 <= (to_rep2(last(b1)) - 1))) ->
+  (to_rep((b[(k1 + 1)])) = to_rep((o104[k1])))))))))))
+
+axiom H54 : (({ elts = o107; rt = o108 } = remove({ elts = o104; rt = o105 },
+  o106)) and (dynamic_property(1, 100, to_rep2(first(o108)),
+  to_rep2(last(o108))) and ((invariant__({ elts = o107; rt = o108
+  }) = true) and ((to_rep2(last(o108)) = (to_rep2(last(o105)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (o106 - 1))) ->
+   (to_rep((o104[k1])) = to_rep((o107[k1]))))) and
+  ((forall k1:int. ((((o106 + 1) <= k1) and (k1 <= to_rep2(last(o105)))) ->
+   (to_rep((o104[k1])) = to_rep((o107[(k1 - 1)]))))) and
+  (forall k1:int. (((o106 <= k1) and (k1 <= (to_rep2(last(o105)) - 1))) ->
+  (to_rep((o104[(k1 + 1)])) = to_rep((o107[k1])))))))))))
+
+axiom H55 : (({ elts = o102; rt = o103 } = remove({ elts = bb; rt = bb1 },
+  ib9)) and (dynamic_property(1, 100, to_rep2(first(o103)),
+  to_rep2(last(o103))) and ((invariant__({ elts = o102; rt = o103
+  }) = true) and ((to_rep2(last(o103)) = (to_rep2(last(bb1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (ib9 - 1))) ->
+   (to_rep((bb[k1])) = to_rep((o102[k1]))))) and
+  ((forall k1:int. ((((ib9 + 1) <= k1) and (k1 <= to_rep2(last(bb1)))) ->
+   (to_rep((bb[k1])) = to_rep((o102[(k1 - 1)]))))) and
+  (forall k1:int. (((ib9 <= k1) and (k1 <= (to_rep2(last(bb1)) - 1))) ->
+  (to_rep((bb[(k1 + 1)])) = to_rep((o102[k1])))))))))))
+
+axiom H56 : ((o97 = ia3) and in_range4(ia3))
+
+axiom H57 : (({ elts = o98; rt = o99 } = remove({ elts = a; rt = a1 },
+  o97)) and (dynamic_property(1, 100, to_rep2(first(o99)),
+  to_rep2(last(o99))) and ((invariant__({ elts = o98; rt = o99 }) = true) and
+  ((to_rep2(last(o99)) = (to_rep2(last(a1)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (o97 - 1))) ->
+   (to_rep((a[k1])) = to_rep((o98[k1]))))) and
+  ((forall k1:int. ((((o97 + 1) <= k1) and (k1 <= to_rep2(last(a1)))) ->
+   (to_rep((a[k1])) = to_rep((o98[(k1 - 1)]))))) and
+  (forall k1:int. (((o97 <= k1) and (k1 <= (to_rep2(last(a1)) - 1))) ->
+  (to_rep((a[(k1 + 1)])) = to_rep((o98[k1])))))))))))
+
+axiom H58 : (({ elts = o100; rt = o101 } = remove({ elts = o98; rt = o99 },
+  to_rep1(w))) and (dynamic_property(1, 100, to_rep2(first(o101)),
+  to_rep2(last(o101))) and ((invariant__({ elts = o100; rt = o101
+  }) = true) and ((to_rep2(last(o101)) = (to_rep2(last(o99)) - 1)) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= (to_rep1(w) - 1))) ->
+   (to_rep((o98[k1])) = to_rep((o100[k1]))))) and
+  ((forall k1:int. ((((to_rep1(w) + 1) <= k1) and
+   (k1 <= to_rep2(last(o99)))) ->
+   (to_rep((o98[k1])) = to_rep((o100[(k1 - 1)]))))) and
+  (forall k1:int. (((to_rep1(w) <= k1) and
+  (k1 <= (to_rep2(last(o99)) - 1))) ->
+  (to_rep((o98[(k1 + 1)])) = to_rep((o100[k1])))))))))))
+
+axiom H59 : ((o109 = shift_perm_r({ elts = o100; rt = o101 }, { elts = o102;
+  rt = o103 }, { elts = o107; rt = o108 })) and (in_range3(o109) and
+  ((of_int(o109) = true) -> (is_perm({ elts = o100; rt = o101 }, { elts =
+  o107; rt = o108 }) = true))))
+
+axiom H60 : (result18 = ih11)
+
+axiom H61 : (ih12 = o109)
+
+axiom H62 : (of_int(ih12) = true)
+
+axiom H63 : ((o117 = (to_rep1(w1) - 1)) and in_range4((to_rep1(w1) - 1)))
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = b; rt = b1 }) = true)

@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -430,7 +430,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -623,12 +623,26 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
- (* File "a-cfinve.ads", line 555, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. (in_range3(index) ->
-  (in_range2(count) -> (((1 <= index) and (index <= (0 + length1(model__({
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range3(index)
+
+axiom H1 : in_range2(count)
+
+axiom H2 : ((1 <= index) and (index <= (0 + length1(model__({
   us_split_discrs1 = {
   rec__indefinite_bounded_tagged__vect__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__indefinite_bounded_tagged__vect__vector = container__split_fields }
-  }))))) -> in_range2((index - 1))))))
+  })))))
+
+ (* File "a-cfinve.ads", line 555, characters 0-0 *)
+goal WP_parameter_def : in_range2((index - 1))

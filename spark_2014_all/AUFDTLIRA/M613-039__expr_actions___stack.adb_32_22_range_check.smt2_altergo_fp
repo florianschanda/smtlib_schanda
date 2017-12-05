@@ -118,7 +118,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -748,9 +748,41 @@ axiom is_empty__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "stack.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:r1. forall s__split_fields1:(int,integer) farray.
-  ((not (is_empty({ us_split_fields1 = { rec__stack__stack__top =
+logic s__split_fields : r1
+
+logic s__split_fields1 : (int,integer) farray
+
+logic o : int
+
+logic o1 : r1
+
+logic o2 : r1
+
+logic o3 : (int,integer) farray
+
+logic temp___234 : r1
+
+logic temp___2341 : (int,integer) farray
+
+logic result : r1
+
+logic result1 : (int,integer) farray
+
+logic s__split_fields2 : r1
+
+logic s__split_fields3 : (int,integer) farray
+
+logic s__split_fields4 : r1
+
+logic s__split_fields5 : (int,integer) farray
+
+logic s__split_fields6 : r1
+
+logic s__split_fields7 : (int,integer) farray
+
+axiom H : (not (is_empty({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields; rec__stack__stack__content = s__split_fields1 }
-  }) = true)) -> in_range((to_rep(s__split_fields) - 1))))
+  }) = true))
+
+ (* File "stack.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(s__split_fields) - 1))

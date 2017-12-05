@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -2110,11 +2110,34 @@ axiom s2__def_axiom :
   (lg + 1), to_rep1(x))).rt4)), (lg + 1))) and (s21 = mk3((lg + 1),
   to_rep1(x))))
 
+logic o : int
+
+logic instr__display_value__4__lg__assume : int
+
+logic temp___349 : (int,character) farray
+
+logic temp___3491 : t2
+
+logic instr__display_value__4__s1__assume : (int,character) farray
+
+logic instr__display_value__4__s1__assume1 : t1
+
+logic us : int
+
+logic temp___351 : (int,character) farray
+
+logic temp___3511 : t4
+
+axiom H : ((o = (to_rep1(x) * to_rep3(x4))) and
+  in_range((to_rep1(x) * to_rep3(x4))))
+
+axiom H1 : (instr__display_value__4__lg__assume = comp_div(o,100))
+
+axiom H2 : (instr__display_value__4__lg__assume = lg)
+
+axiom H3 : in_range(lg)
+
+axiom H4 : (1 <= lg)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall instr__display_value__4__lg__assume:int.
-  (((((o = (to_rep1(x) * to_rep3(x4))) and
-  in_range((to_rep1(x) * to_rep3(x4)))) and
-  (instr__display_value__4__lg__assume = comp_div(o,100))) and
-  (instr__display_value__4__lg__assume = lg)) -> (in_range(lg) ->
-  ((1 <= lg) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

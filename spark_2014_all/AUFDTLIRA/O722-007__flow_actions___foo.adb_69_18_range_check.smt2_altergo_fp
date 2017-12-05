@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -627,20 +627,78 @@ type t56b__ref = { t56b__content : us_t2
 
 function t56b__ref___projection(a: t56b__ref) : us_t2 = (a).t56b__content
 
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic x : int
+
+logic y : int
+
+logic z : int
+
+logic o : (int,character) farray
+
+logic temp___180 : (int,character) farray
+
+logic temp___1801 : t
+
+logic o1 : bool
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : int
+
+logic z1 : int
+
+logic result3 : bool
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 1)
+
+axiom H2 : in_range(x1)
+
+axiom H3 : (result1 = y)
+
+axiom H4 : (y1 = 1)
+
+axiom H5 : in_range(y1)
+
+axiom H6 : (result2 = z)
+
+axiom H7 : (z1 = 1)
+
+axiom H8 : in_range(z1)
+
+axiom H9 : (x1 = r48b)
+
+axiom H10 : in_range(r48b)
+
+axiom H11 : ((r48b <= 5) -> (((1 <= r48b) and (r48b <= 5)) and ((1 <= 5) and
+  (5 <= 5))))
+
+axiom H12 : (o = new_str)
+
+axiom H13 : (o = temp___180)
+
+axiom H14 : (mk(r48b, 5) = temp___1801)
+
+axiom H15 : (o1 = bool_eq3(temp___180, to_rep1(first(temp___1801)),
+  to_rep1(last(temp___1801)), new_sub, 1, 5))
+
+axiom H16 : (((not (o1 = true)) -> (result3 = true)) and ((o1 = true) ->
+  (result3 = false)))
+
+axiom H17 : (not (result3 = true))
+
+axiom H18 : (z1 <= 5)
+
  (* File "foo.adb", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray.
-  forall new_sub:(int,character) farray. forall x:int. forall y:int.
-  forall z:int. forall o:(int,character) farray.
-  forall temp___180:(int,character) farray. forall temp___1801:t.
-  forall o1:bool. forall result:int. forall x1:int. forall result1:int.
-  forall y1:int. forall result2:int. forall z1:int. forall result3:bool.
-  (((result = x) and (x1 = 1)) -> (in_range(x1) -> (((result1 = y) and
-  (y1 = 1)) -> (in_range(y1) -> (((result2 = z) and (z1 = 1)) ->
-  (in_range(z1) -> (((x1 = r48b) and in_range(r48b)) -> (((((((r48b <= 5) ->
-  (((1 <= r48b) and (r48b <= 5)) and ((1 <= 5) and (5 <= 5)))) and
-  (o = new_str)) and ((o = temp___180) and (mk(r48b, 5) = temp___1801))) and
-  (o1 = bool_eq3(temp___180, to_rep1(first(temp___1801)),
-  to_rep1(last(temp___1801)), new_sub, 1, 5))) and (((not (o1 = true)) and
-  (result3 = true)) or ((o1 = true) and (result3 = false)))) ->
-  ((not (result3 = true)) -> ((z1 <= 5) -> (1 <= z1))))))))))))
+goal WP_parameter_def : (1 <= z1)

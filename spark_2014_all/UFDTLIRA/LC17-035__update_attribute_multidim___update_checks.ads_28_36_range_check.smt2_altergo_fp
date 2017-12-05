@@ -424,29 +424,123 @@ axiom def_axiom1 :
   temp___215), temp___216, temp___217, temp___218) = get(temp___204,
   temp___216, temp___217, temp___218)))))))))
 
+logic a : map
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : map
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic result : map
+
+logic a1 : map
+
+logic a2 : map
+
+logic a3 : map
+
+axiom H : in_range(x1)
+
+axiom H1 : in_range(x2)
+
+axiom H2 : in_range(x3)
+
+axiom H3 : in_range1(y1)
+
+axiom H4 : in_range1(y2)
+
+axiom H5 : in_range1(y3)
+
+axiom H6 : in_range2(z1)
+
+axiom H7 : in_range2(z2)
+
+axiom H8 : in_range2(z3)
+
+axiom H9 : in_range3(new_val_1)
+
+axiom H10 : in_range3(new_val_2)
+
+axiom H11 : ((1 <  x1) and ((1 <  y1) and ((1 <  z1) and ((x2 <  3) and
+  ((y2 <  5) and ((z2 <  10) and ((x3 <  3) and ((y3 <  5) and
+  ((z3 <  10) and ((new_val_1 <  99) and (0 <  new_val_2)))))))))))
+
+axiom H12 : ((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1)))
+
+axiom H13 : ((o1 = (z3 + 1)) and in_range2((z3 + 1)))
+
+axiom H14 : ((o2 = (y3 + 1)) and in_range1((y3 + 1)))
+
+axiom H15 : ((o3 = (x3 + 1)) and in_range((x3 + 1)))
+
+axiom H16 : ((o4 = (new_val_1 + 1)) and in_range3((new_val_1 + 1)))
+
+axiom H17 : ((o5 = (z2 + 1)) and in_range2((z2 + 1)))
+
+axiom H18 : ((o6 = (y2 + 1)) and in_range1((y2 + 1)))
+
+axiom H19 : ((o7 = (x2 + 1)) and in_range((x2 + 1)))
+
+axiom H20 : ((o8 = (z1 - 1)) and in_range2((z1 - 1)))
+
+axiom H21 : ((o9 = (y1 - 1)) and in_range1((y1 - 1)))
+
+axiom H22 : ((o10 = (x1 - 1)) and in_range((x1 - 1)))
+
+axiom H23 : (o11 = temp___202(a, o10, o9, o8, o7, o6, o5, o4, o3, o2, o1, o))
+
+axiom H24 : (result = a)
+
+axiom H25 : (a1 = o11)
+
+axiom H26 : (a1 = a2)
+
+axiom H27 : (a3 = a1)
+
+axiom H28 : ((o12 = (new_val_2 - 1)) and in_range3((new_val_2 - 1)))
+
+axiom H29 : ((o13 = (z3 + 1)) and in_range2((z3 + 1)))
+
  (* File "update_checks.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:map. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:int. forall o11:map. forall o12:int.
-  forall o13:int. forall result:map. forall a1:map. forall a2:map.
-  forall a3:map. (in_range(x1) -> (in_range(x2) -> (in_range(x3) ->
-  (in_range1(y1) -> (in_range1(y2) -> (in_range1(y3) -> (in_range2(z1) ->
-  (in_range2(z2) -> (in_range2(z3) -> (in_range3(new_val_1) ->
-  (in_range3(new_val_2) -> (((1 <  x1) and ((1 <  y1) and ((1 <  z1) and
-  ((x2 <  3) and ((y2 <  5) and ((z2 <  10) and ((x3 <  3) and ((y3 <  5) and
-  ((z3 <  10) and ((new_val_1 <  99) and (0 <  new_val_2))))))))))) ->
-  ((((((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1))) and
-  (((o1 = (z3 + 1)) and in_range2((z3 + 1))) and (((o2 = (y3 + 1)) and
-  in_range1((y3 + 1))) and (((o3 = (x3 + 1)) and in_range((x3 + 1))) and
-  (((o4 = (new_val_1 + 1)) and in_range3((new_val_1 + 1))) and
-  (((o5 = (z2 + 1)) and in_range2((z2 + 1))) and (((o6 = (y2 + 1)) and
-  in_range1((y2 + 1))) and (((o7 = (x2 + 1)) and in_range((x2 + 1))) and
-  (((o8 = (z1 - 1)) and in_range2((z1 - 1))) and (((o9 = (y1 - 1)) and
-  in_range1((y1 - 1))) and (((o10 = (x1 - 1)) and in_range((x1 - 1))) and
-  (o11 = temp___202(a, o10, o9, o8, o7, o6, o5, o4, o3, o2, o1,
-  o))))))))))))) and (({ map__content = result } = { map__content = a }) and
-  (a1 = o11))) and ((a1 = a2) and (a3 = a1))) ->
-  (((o12 = (new_val_2 - 1)) and in_range3((new_val_2 - 1))) ->
-  (((o13 = (z3 + 1)) and in_range2((z3 + 1))) ->
-  in_range1((y3 + 1))))))))))))))))))
+goal WP_parameter_def : in_range1((y3 + 1))

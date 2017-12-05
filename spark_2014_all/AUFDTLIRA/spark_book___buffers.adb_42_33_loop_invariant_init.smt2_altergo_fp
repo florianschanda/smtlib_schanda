@@ -308,10 +308,47 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic count : int
+
+logic index : int
+
+logic o : int
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic count2 : int
+
+logic index2 : int
+
+logic result2 : int
+
+logic count3 : int
+
+logic result3 : int
+
+logic index3 : int
+
+axiom H : in_range1(ch)
+
+axiom H1 : (result = count)
+
+axiom H2 : (count1 = 0)
+
+axiom H3 : in_range2(count1)
+
+axiom H4 : (result1 = index)
+
+axiom H5 : (index1 = 1)
+
+axiom H6 : (1 <= index1)
+
+axiom H7 : (index1 <= 1024)
+
  (* File "buffers.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall index:int. forall result:int. forall count1:int.
-  forall result1:int. forall index1:int. (in_range1(ch) ->
-  (((result = count) and (count1 = 0)) -> (in_range2(count1) ->
-  (((result1 = index) and (index1 = 1)) -> (((1 <= index1) and
-  (index1 <= 1024)) -> (count1 <  index1)))))))
+goal WP_parameter_def : (count1 <  index1)

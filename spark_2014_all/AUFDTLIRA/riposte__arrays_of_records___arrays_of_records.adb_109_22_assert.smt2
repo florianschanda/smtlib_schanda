@@ -124,6 +124,8 @@
 (declare-const a3 (Array Int us_rep))
 (declare-const result3 (Array Int us_rep))
 (declare-const a4 (Array Int us_rep))
+(declare-const a5 (Array Int us_rep))
+(declare-const a6 (Array Int us_rep))
 (assert (= (to_rep o) 69))
 (assert (= (rec__arrays_of_records__basic_record__flag (us_split_fields1 (select a 23))) o1))
 (assert (= (rec__arrays_of_records__basic_record__first_value (us_split_fields1 (select a 23))) o2))

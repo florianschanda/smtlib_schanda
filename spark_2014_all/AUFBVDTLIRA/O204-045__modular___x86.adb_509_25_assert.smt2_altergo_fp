@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1524,7 +1524,39 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic rcx : t2
+
+logic rsi : t2
+
+logic rdi : t2
+
+logic val1 : t
+
+logic val2 : t
+
+logic rcx1 : t2
+
+logic rsi1 : t2
+
+logic rdi1 : t2
+
+logic val11 : t
+
+logic val21 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : ugt2(rcx, of_int2(0))
+
+axiom H6 : ugt2(rcx1, of_int2(0))
+
  (* File "x86.ads", line 488, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rcx:t2. forall rcx1:t2. (ugt2(rcx, of_int2(0)) -> (ugt2(rcx1,
-  of_int2(0)) -> (not (rcx1 = of_int2(0))))))
+goal WP_parameter_def : (not (rcx1 = of_int2(0)))

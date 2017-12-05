@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -432,28 +432,160 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall from:int. forall result__:int. forall us:int. forall o:int.
-  forall result:int. forall from1:int. forall from2:int.
-  forall result__1:int. forall dynamic_types__search__result:int.
-  forall from3:int. forall result__2:int.
-  forall dynamic_types__search__result1:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(c) ->
-  ((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
-  (((((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
-  to_rep1(first(a1)))) and (o = to_rep1(first(a1)))) and (({ int__content =
-  result } = { int__content = from }) and (from1 = o))) ->
-  (dynamic_property1(first2, last2, from1) -> (((0 <= 2147483647) ->
-  in_range2(result__)) ->
-  ((forall i:int. (((to_rep1(first(a1)) <= i) and (i <= (from2 - 1))) ->
-   (not (to_rep((a[i])) = c)))) ->
-  ((((first2 <= last2) -> dynamic_property1(first2, last2, from2)) and
-  ((0 <= 2147483647) -> in_range2(result__1))) -> (((((result__2 = 0) and
-  (forall i:int. (((from2 <= i) and (i <= from3)) ->
-  (not (to_rep((a[i])) = c))))) or (((to_rep1(first(a1)) <= result__2) and
+logic from : int
+
+logic result__ : int
+
+logic us : int
+
+logic o : int
+
+logic temp___157 : int
+
+logic temp___156 : int
+
+logic i : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic temp___155 : int
+
+logic us1 : int
+
+logic o3 : int
+
+logic result : int
+
+logic from1 : int
+
+logic from2 : int
+
+logic result__1 : int
+
+logic dynamic_types__search__result : int
+
+logic result1 : bool
+
+logic from3 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic dynamic_types__search__result1 : int
+
+logic result3 : int
+
+logic dynamic_types__search__result2 : int
+
+logic result4 : int
+
+logic from4 : int
+
+logic dynamic_types__search__result3 : int
+
+logic dynamic_types__search__result4 : int
+
+logic from5 : int
+
+logic result__3 : int
+
+logic dynamic_types__search__result5 : int
+
+logic from6 : int
+
+logic result__4 : int
+
+logic dynamic_types__search__result6 : int
+
+logic from7 : int
+
+logic result__5 : int
+
+logic dynamic_types__search__result7 : int
+
+logic from8 : int
+
+logic result__6 : int
+
+logic dynamic_types__search__result8 : int
+
+logic from9 : int
+
+logic result__7 : int
+
+logic dynamic_types__search__result9 : int
+
+logic from10 : int
+
+logic result__8 : int
+
+logic dynamic_types__search__result10 : int
+
+logic from11 : int
+
+logic result__9 : int
+
+logic dynamic_types__search__result11 : int
+
+logic from12 : int
+
+logic result__10 : int
+
+logic dynamic_types__search__result12 : int
+
+logic from13 : int
+
+logic result__11 : int
+
+logic dynamic_types__search__result13 : int
+
+logic from14 : int
+
+logic result__12 : int
+
+logic dynamic_types__search__result14 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (to_rep1(first(a1)) <= to_rep1(last(a1)))
+
+axiom H3 : ((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
+  to_rep1(first(a1))))
+
+axiom H4 : (o = to_rep1(first(a1)))
+
+axiom H5 : (result = from)
+
+axiom H6 : (from1 = o)
+
+axiom H7 : dynamic_property1(first2, last2, from1)
+
+axiom H8 : ((0 <= 2147483647) -> in_range2(result__))
+
+axiom H9 :
+  (forall i1:int. (((to_rep1(first(a1)) <= i1) and (i1 <= (from2 - 1))) ->
+  (not (to_rep((a[i1])) = c))))
+
+axiom H10 : (((first2 <= last2) -> dynamic_property1(first2, last2,
+  from2)) and ((0 <= 2147483647) -> in_range2(result__1)))
+
+axiom H11 : ((((result__2 = 0) and
+  (forall i1:int. (((from2 <= i1) and (i1 <= from3)) ->
+  (not (to_rep((a[i1])) = c))))) or (((to_rep1(first(a1)) <= result__2) and
   (result__2 <= to_rep1(last(a1)))) and (to_rep((a[result__2])) = c))) and
-  (dynamic_property1(first2, last2, from3) and in_range2(result__2))) ->
-  (((not (0 <  result__2)) and
-  (dynamic_types__search__result1 = dynamic_types__search__result)) ->
-  ((not (from3 = to_rep1(last(a1)))) -> in_range1((from3 + 1))))))))))))))
+  (dynamic_property1(first2, last2, from3) and in_range2(result__2)))
+
+axiom H12 : (not (0 <  result__2))
+
+axiom H13 : (dynamic_types__search__result1 = dynamic_types__search__result)
+
+axiom H14 : (not (from3 = to_rep1(last(a1))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1((from3 + 1))

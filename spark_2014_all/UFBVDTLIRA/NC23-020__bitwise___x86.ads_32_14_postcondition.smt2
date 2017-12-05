@@ -124,6 +124,8 @@
 (declare-const rax1 (_ BitVec 64))
 (declare-const rax2 (_ BitVec 64))
 (declare-const rax3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result rax))
 (assert (= rax1 (bvor (bvand rax ((_ int2bv 64) 65280)) ((_ zero_extend 48) (bvmul ((_ zero_extend 8) val__) ((_ int2bv 16) 256))))))
 (assert (= rax1 rax2))

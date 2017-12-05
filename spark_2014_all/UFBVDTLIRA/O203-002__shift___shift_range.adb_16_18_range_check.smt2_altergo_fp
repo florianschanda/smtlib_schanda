@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -678,8 +678,19 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : true
+
+axiom H1 : ((8 <  16) -> (o = lsr_bv(x, of_int(8))))
+
+axiom H2 : ((not (8 <  16)) -> (o = of_int(0)))
+
+axiom H3 : (o1 = tqtint(o))
+
  (* File "shift_range.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:int. (((((8 <  16) and (o = lsr_bv(x,
-  of_int(8)))) or ((not (8 <  16)) and (o = of_int(0)))) and
-  (o1 = tqtint(o))) -> in_range(o1)))
+goal WP_parameter_def : in_range(o1)

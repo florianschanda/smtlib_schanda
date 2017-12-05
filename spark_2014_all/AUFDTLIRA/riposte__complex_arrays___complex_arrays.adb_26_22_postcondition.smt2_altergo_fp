@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -357,6 +357,11 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : in_range1(v)
+
  (* File "complex_arrays.adb", line 171, characters 0-0 *)
-goal WP_parameter_def : ((in_range(i) and (in_range(j) and in_range1(v))) ->
-  (to_rep(((a[i])[j])) = v))
+goal WP_parameter_def : (to_rep(((a[i])[j])) = v)

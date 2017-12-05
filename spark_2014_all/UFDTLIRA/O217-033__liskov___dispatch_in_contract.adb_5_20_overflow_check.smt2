@@ -170,6 +170,7 @@
 (assert (forall ((o us_rep1)) (! (= (= (less_than_max__3 o) true) (< (to_rep (rec__dispatch_in_contract__root__f11 (us_split_fields3 o))) 2147483647)) :pattern ((less_than_max__3 o)))))
 (declare-const o__split_fields integer)
 (declare-const o__split_fields1 us_private)
+(declare-const o Int)
 (assert (= (less_than_max (mk___rep (mk___split_fields o__split_fields o__split_fields1) o__attr__tag)) true))
 (assert (not (in_range (+ (to_rep o__split_fields) 1))))
 (check-sat)

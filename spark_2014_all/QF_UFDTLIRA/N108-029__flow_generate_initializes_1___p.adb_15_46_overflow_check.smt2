@@ -40,6 +40,7 @@
 (declare-const const1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const hidden Int)
+(declare-const o Int)
 (assert (in_range1 hidden))
 (assert (in_range1 const1))
 (assert (not (in_range1 (+ hidden const1))))

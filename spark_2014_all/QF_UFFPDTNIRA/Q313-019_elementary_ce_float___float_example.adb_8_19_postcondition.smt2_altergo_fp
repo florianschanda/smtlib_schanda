@@ -1093,23 +1093,51 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic float_example__minus_i__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic float_example__minus_i__result1 : t
+
+logic float_example__minus_i__result2 : t
+
+logic float_example__minus_i__result3 : t
+
+logic float_example__minus_i__result4 : t
+
+logic float_example__minus_i__result5 : t
+
+logic result1 : t
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
+axiom H2 :
+  (float_example__minus_i__result1 = float_example__minus_i__result2)
+
+axiom H3 :
+  (float_example__minus_i__result3 = float_example__minus_i__result1)
+
+axiom H4 : ((o = sub(NearestTiesToEven, a, b)) and
+  tqtisFinite(sub(NearestTiesToEven, a, b)))
+
+axiom H5 : (result = float_example__minus_i__result)
+
+axiom H6 : (float_example__minus_i__result1 = o)
+
+axiom H7 :
+  (float_example__minus_i__result4 = float_example__minus_i__result2)
+
+axiom H8 :
+  (float_example__minus_i__result5 = float_example__minus_i__result3)
+
+axiom H9 : (result1 = float_example__minus_i__result4)
+
  (* File "float_example.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall float_example__minus_i__result:t. forall o:t. forall result:t.
-  forall float_example__minus_i__result1:t.
-  forall float_example__minus_i__result2:t.
-  forall float_example__minus_i__result3:t.
-  forall float_example__minus_i__result4:t.
-  forall float_example__minus_i__result5:t.
-  (forall result1:t. ((tqtisFinite(a) and (tqtisFinite(b) and
-  (((((float_example__minus_i__result1 = float_example__minus_i__result2) and
-  (float_example__minus_i__result3 = float_example__minus_i__result1)) and
-  (((o = sub(NearestTiesToEven, a, b)) and tqtisFinite(sub(NearestTiesToEven,
-  a, b))) and (({ t__content = result } = { t__content =
-  float_example__minus_i__result }) and
-  (float_example__minus_i__result1 = o)))) and (({ t__content =
-  float_example__minus_i__result4 } = { t__content =
-  float_example__minus_i__result2 }) and
-  (float_example__minus_i__result5 = float_example__minus_i__result3))) and
-  (result1 = float_example__minus_i__result4)))) ->
-  eq(float_example__minus_i__result4, add(NearestTiesToEven, a, b)))))
+goal WP_parameter_def : eq(float_example__minus_i__result4,
+  add(NearestTiesToEven, a, b))

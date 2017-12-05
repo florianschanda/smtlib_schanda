@@ -824,5 +824,334 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range5(w_get(container, witness1)))))
 
+logic e : int
+
+logic for_loops_on_lists__contains_0_for_of__result : bool
+
+logic o : count_type
+
+logic temp___478 : count_type
+
+logic o1 : int
+
+logic o2 : count_type
+
+logic o3 : bool
+
+logic o4 : count_type
+
+logic o5 : int
+
+logic temp___480 : us_rep2
+
+logic temp___479 : int
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic e1 : int
+
+logic e2 : int
+
+logic for_loops_on_lists__contains_0_for_of__result1 : bool
+
+logic temp___4781 : count_type
+
+logic result : bool
+
+logic result1 : int
+
+logic e3 : int
+
+logic result2 : bool
+
+logic e4 : int
+
+logic for_loops_on_lists__contains_0_for_of__result2 : bool
+
+logic temp___4782 : count_type
+
+logic result3 : bool
+
+logic for_loops_on_lists__contains_0_for_of__result3 : bool
+
+logic result4 : bool
+
+logic result5 : count_type
+
+logic temp___4783 : count_type
+
+logic result6 : bool
+
+logic e5 : int
+
+logic for_loops_on_lists__contains_0_for_of__result4 : bool
+
+logic temp___4784 : count_type
+
+logic e6 : int
+
+logic for_loops_on_lists__contains_0_for_of__result5 : bool
+
+logic temp___4785 : count_type
+
+logic e7 : int
+
+logic for_loops_on_lists__contains_0_for_of__result6 : bool
+
+logic temp___4786 : count_type
+
+logic e8 : int
+
+logic for_loops_on_lists__contains_0_for_of__result7 : bool
+
+logic temp___4787 : count_type
+
+logic result7 : bool
+
+logic for_loops_on_lists__contains_0_for_of__result8 : bool
+
+logic for_loops_on_lists__contains_0_for_of__result9 : bool
+
+logic for_loops_on_lists__contains_0_for_of__result10 : bool
+
+logic e9 : int
+
+logic for_loops_on_lists__contains_0_for_of__result11 : bool
+
+logic e10 : int
+
+logic for_loops_on_lists__contains_0_for_of__result12 : bool
+
+logic e11 : int
+
+logic for_loops_on_lists__contains_0_for_of__result13 : bool
+
+logic e12 : int
+
+logic for_loops_on_lists__contains_0_for_of__result14 : bool
+
+logic result8 : bool
+
+axiom H :
+  (((((for_loops_on_lists__contains_0_for_of__result11 = for_loops_on_lists__contains_0_for_of__result3) and
+  (e9 = e4)) and
+  ((for_loops_on_lists__contains_0_for_of__result12 = for_loops_on_lists__contains_0_for_of__result3) and
+  (e10 = e4))) and (((({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } } = first({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 }
+  })) and (((bool_eq1(length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), 0) = true) ->
+  (bool_eq4({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }, {
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  no_element } }) = true)) and ((not (bool_eq1(length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), 0) = true)) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }) = true) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }) = 1))))) and
+  (temp___478 = o)) and ((((result = has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } })) and
+  ((result = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 }
+  }) = true))) and (((result = true) -> (((o1 = get(model__({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } }))) and
+  (in_range4(o1) and (o1 = get(model__({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), get1(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___478 } }))))) and ((result1 = e) and (e3 = o1)))) and
+  ((not (result = true)) -> ((e3 = e) and (e3 = e2))))) and
+  (((result2 = has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } })) and
+  ((result2 = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 }
+  }) = true))) and ((result2 = true) and (((has_key(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } }) = true) and (e4 = get(model__({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), get1(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } })))) and ((e4 = 0) and
+  ((for_loops_on_lists__contains_0_for_of__result2 = result3) and
+  (for_loops_on_lists__contains_0_for_of__result3 = of_int(1)))))))))) or
+  ((((({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } } = first({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 }
+  })) and (((bool_eq1(length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), 0) = true) ->
+  (bool_eq4({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }, {
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  no_element } }) = true)) and ((not (bool_eq1(length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), 0) = true)) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }) = true) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o } }) = 1))))) and
+  (temp___478 = o)) and ((((result = has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } })) and
+  ((result = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 }
+  }) = true))) and (((result = true) -> (((o1 = get(model__({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } }))) and
+  (in_range4(o1) and (o1 = get(model__({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), get1(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___478 } }))))) and ((result1 = e) and (e3 = o1)))) and
+  ((not (result = true)) -> ((e3 = e) and (e3 = e2))))) and
+  (((result2 = has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 } })) and
+  ((result2 = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___478 }
+  }) = true))) and (((result2 = true) -> (((((has_key(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } }) = true) and (e4 = get(model__({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), get1(positions({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }),
+  { us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } })))) and (((not (e4 = 0)) and
+  (for_loops_on_lists__contains_0_for_of__result3 = for_loops_on_lists__contains_0_for_of__result2)) and
+  ((((({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 } } = next({
+  us_split_discrs1 = { rec__for_loops_on_lists__my_lists__list__capacity = l
+  }; us_split_fields1 = { rec__for_loops_on_lists__my_lists__list = l1 } }, {
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } })) and (((match_bool(bool_eq4({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___4782 } }, {
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  no_element } }), true, bool_eq1(get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___4782 } }),
+  length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }))) = true) ->
+  (bool_eq4({ us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 } }, {
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  no_element } }) = true)) and ((not (match_bool(bool_eq4({
+  us_split_fields3 = { rec__for_loops_on_lists__my_lists__cursor__node =
+  temp___4782 } }, { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = no_element } }), true,
+  bool_eq1(get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___4782 } }),
+  length1({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }))) = true)) ->
+  ((has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 } }) = true) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 }
+  }) = (get1(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = temp___4782 }
+  }) + 1)))))) and ((o3 = has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 } })) and
+  ((o3 = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__for_loops_on_lists__my_lists__list__capacity = l }; us_split_fields1 =
+  { rec__for_loops_on_lists__my_lists__list = l1 } }), { us_split_fields3 = {
+  rec__for_loops_on_lists__my_lists__cursor__node = o2 } }) = true)))) and
+  (((not (o3 = true)) -> (result4 = true)) and ((o3 = true) ->
+  (result4 = false)))) and (result4 = true)))) and
+  (((temp___4784 = temp___4782) and
+  ((for_loops_on_lists__contains_0_for_of__result4 = for_loops_on_lists__contains_0_for_of__result3) and
+  (e5 = e4))) and ((temp___4785 = temp___4782) and
+  ((for_loops_on_lists__contains_0_for_of__result5 = for_loops_on_lists__contains_0_for_of__result3) and
+  (e6 = e4))))) and (((temp___4786 = temp___4784) and
+  ((for_loops_on_lists__contains_0_for_of__result6 = for_loops_on_lists__contains_0_for_of__result4) and
+  (e7 = e5))) and ((temp___4787 = temp___4785) and
+  ((for_loops_on_lists__contains_0_for_of__result7 = for_loops_on_lists__contains_0_for_of__result5) and
+  (e8 = e6)))))) and ((not (result2 = true)) ->
+  (((temp___4786 = temp___478) and
+  ((for_loops_on_lists__contains_0_for_of__result6 = for_loops_on_lists__contains_0_for_of__result) and
+  (e7 = e3))) and ((temp___4787 = temp___4781) and
+  ((for_loops_on_lists__contains_0_for_of__result7 = for_loops_on_lists__contains_0_for_of__result1) and
+  (e8 = e3))))))))) and
+  ((((for_loops_on_lists__contains_0_for_of__result11 = for_loops_on_lists__contains_0_for_of__result9) and
+  (e9 = e7)) and
+  ((for_loops_on_lists__contains_0_for_of__result12 = for_loops_on_lists__contains_0_for_of__result10) and
+  (e10 = e8))) and
+  (((for_loops_on_lists__contains_0_for_of__result9 = for_loops_on_lists__contains_0_for_of__result8) and
+  (for_loops_on_lists__contains_0_for_of__result10 = for_loops_on_lists__contains_0_for_of__result8)) and
+  ((result7 = for_loops_on_lists__contains_0_for_of__result6) and
+  (for_loops_on_lists__contains_0_for_of__result8 = of_int(0)))))))
+
+axiom H1 :
+  (for_loops_on_lists__contains_0_for_of__result13 = for_loops_on_lists__contains_0_for_of__result11)
+
+axiom H2 : (e11 = e9)
+
+axiom H3 :
+  (for_loops_on_lists__contains_0_for_of__result14 = for_loops_on_lists__contains_0_for_of__result12)
+
+axiom H4 : (e12 = e10)
+
+axiom H5 : (for_loops_on_lists__contains_0_for_of__result13 = true)
+
  (* File "for_loops_on_lists.ads", line 14, characters 0-0 *)
 goal WP_parameter_def : true

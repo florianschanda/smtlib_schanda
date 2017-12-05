@@ -141,6 +141,7 @@
 (assert (= z (of_array (array_logical_ops__test_ok4__z__aggregate_def 1) 6 25)))
 (assert (= r4 (of_array (andb (to_array z) (first1 z) (last1 z) (to_array w) (first1 w) (last1 w)) (first1 z) (last1 z))))
 (define-fun dynamic_invariant2 ((temp___expr_202 Int) (temp___is_init_199 Bool) (temp___skip_constant_200 Bool) (temp___do_toplevel_201 Bool)) Bool (=> (or (= temp___is_init_199 true) (<= 1 1)) (in_range1 temp___expr_202)))
+(declare-const i Int)
 (assert (= (mk___t (array_logical_ops__test_ok4__w__aggregate_def 1) (mk 1 20)) w))
 (assert (dynamic_invariant w true false true))
 (assert (= (mk___t (array_logical_ops__test_ok4__z__aggregate_def 1) (mk 6 25)) z))

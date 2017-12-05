@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -418,17 +418,92 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic target : int
+
+logic has_failed : bool
+
+logic index : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic result : bool
+
+logic target1 : int
+
+logic has_failed1 : bool
+
+logic target2 : int
+
+logic has_failed2 : bool
+
+logic target3 : int
+
+logic has_failed3 : bool
+
+logic target4 : int
+
+logic has_failed4 : bool
+
+logic target5 : int
+
+logic has_failed5 : bool
+
+logic target6 : int
+
+logic has_failed6 : bool
+
+logic target7 : int
+
+logic has_failed7 : bool
+
+logic target8 : int
+
+logic has_failed8 : bool
+
+logic target9 : int
+
+logic has_failed9 : bool
+
+logic result1 : int
+
+logic target10 : int
+
+logic result2 : bool
+
+logic has_failed10 : bool
+
+logic target11 : int
+
+logic has_failed11 : bool
+
+logic target12 : int
+
+logic has_failed12 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (2 <= length({ elts = source; rt = source1 }))
+
+axiom H3 : ((o = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H4 : (((o <= index) -> (o1 = true)) and ((not (o <= index)) ->
+  (o1 = false)))
+
+axiom H5 : (((index <= to_rep1(last(source1))) -> (result = match_bool(o1,
+  true, false))) and ((not (index <= to_rep1(last(source1)))) ->
+  (result = match_bool(o1, false, false))))
+
+axiom H6 : (result = true)
+
  (* File "aida-conversion.adb", line 2252, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall index:int. forall o:int. forall o1:bool.
-  forall result:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> ((2 <= length({
-  elts = source; rt = source1 })) ->
-  (((((o = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and (((o <= index) and
-  (o1 = true)) or ((not (o <= index)) and (o1 = false)))) and
-  (((index <= to_rep1(last(source1))) and (result = match_bool(o1, true,
-  false))) or ((not (index <= to_rep1(last(source1)))) and
-  (result = match_bool(o1, false, false))))) -> ((result = true) ->
-  (to_rep1(first(source1)) <= index)))))))
+goal WP_parameter_def : (to_rep1(first(source1)) <= index)

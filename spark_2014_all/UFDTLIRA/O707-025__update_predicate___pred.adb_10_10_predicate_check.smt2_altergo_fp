@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -209,24 +209,84 @@ function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic temp___179 : integer
+
+logic temp___1791 : integer
+
+logic pred__x__assume : integer
+
+logic pred__x__assume1 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic temp___181 : integer
+
+logic temp___1811 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : integer
+
+axiom H : (to_rep(o) = 4)
+
+axiom H1 : (to_rep(o1) = 2)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___179 = o2)
+
+axiom H5 : (temp___1791 = o3)
+
+axiom H6 : (to_rep(temp___1791) = (to_rep(temp___179) + 2))
+
+axiom H7 : ((pred__x__assume = temp___179) and
+  (pred__x__assume1 = temp___1791))
+
+axiom H8 : (result = x__split_fields)
+
+axiom H9 : (result1 = x__split_fields1)
+
+axiom H10 : (pred__x__assume = x__split_fields2)
+
+axiom H11 : (pred__x__assume1 = x__split_fields3)
+
+axiom H12 : (to_rep(x__split_fields3) = (to_rep(x__split_fields2) + 2))
+
+axiom H13 : (to_rep(o4) = 6)
+
+axiom H14 : (to_rep(o5) = 4)
+
+axiom H15 : (o5 = o6)
+
+axiom H16 : (o4 = o7)
+
+axiom H17 : (temp___181 = o6)
+
+axiom H18 : (temp___1811 = o7)
+
  (* File "pred.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:integer.
-  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall temp___179:integer. forall temp___1791:integer.
-  forall pred__x__assume:integer. forall pred__x__assume1:integer.
-  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
-  forall temp___181:integer. forall temp___1811:integer.
-  forall result:integer. forall result1:integer.
-  forall x__split_fields2:integer. forall x__split_fields3:integer.
-  ((((((to_rep(o) = 4) and ((to_rep(o1) = 2) and ((o1 = o2) and
-  (o = o3)))) and ((temp___179 = o2) and (temp___1791 = o3))) and
-  ((to_rep(temp___1791) = (to_rep(temp___179) + 2)) and
-  ((pred__x__assume = temp___179) and (pred__x__assume1 = temp___1791)))) and
-  (((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((pred__x__assume = x__split_fields2) and
-  (pred__x__assume1 = x__split_fields3)))) ->
-  ((to_rep(x__split_fields3) = (to_rep(x__split_fields2) + 2)) ->
-  ((((to_rep(o4) = 6) and ((to_rep(o5) = 4) and ((o5 = o6) and
-  (o4 = o7)))) and ((temp___181 = o6) and (temp___1811 = o7))) ->
-  (to_rep(temp___1811) = (to_rep(temp___181) + 2))))))
+goal WP_parameter_def : (to_rep(temp___1811) = (to_rep(temp___181) + 2))

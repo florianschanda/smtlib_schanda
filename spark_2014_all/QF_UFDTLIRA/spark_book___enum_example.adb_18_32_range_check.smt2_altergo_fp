@@ -109,6 +109,11 @@ logic day : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+axiom H : in_range(day)
+
+axiom H1 : (not (day = 6))
+
  (* File "enum_example.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (in_range(day) -> ((not (day = 6)) ->
-  (not (day = 6))))
+goal WP_parameter_def : (not (day = 6))

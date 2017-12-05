@@ -41,6 +41,7 @@
 (declare-const x Int)
 (declare-const y Int)
 (declare-const x1 Int)
+(declare-const y1 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range y)))
 (assert (and (= x1 0) (in_range x1)))

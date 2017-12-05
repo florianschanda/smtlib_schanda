@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -177,18 +177,67 @@ axiom get_price_of_orange__def_axiom :
   (in_range1(fruit__price_of_orange) ->
   (get_price_of_orange(fruit__price_of_orange) = fruit__price_of_orange)))
 
+logic apples : int
+
+logic oranges : int
+
+logic price_of_apple : int
+
+logic price_of_orange : int
+
+logic apples_in_fruit_salad : int
+
+logic oranges_in_fruit_salad : int
+
+logic extra_cost : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : bool
+
+axiom H : in_range1(apples_in_fruit_salad)
+
+axiom H1 : in_range1(oranges_in_fruit_salad)
+
+axiom H2 : in_range1(apples)
+
+axiom H3 : in_range1(oranges)
+
+axiom H4 : in_range1(price_of_apple)
+
+axiom H5 : in_range1(price_of_orange)
+
+axiom H6 : in_range1(extra_cost)
+
+axiom H7 : ((o = get_price_of_orange(price_of_orange)) and (in_range1(o) and
+  (o = price_of_orange)))
+
+axiom H8 : ((o1 = get_price_of_apple(price_of_apple)) and (in_range1(o1) and
+  (o1 = price_of_apple)))
+
+axiom H9 : (((o <= o1) -> (result = true)) and ((not (o <= o1)) ->
+  (result = false)))
+
+axiom H10 : (not (result = true))
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall apples:int. forall oranges:int. forall price_of_apple:int.
-  forall price_of_orange:int. forall apples_in_fruit_salad:int.
-  forall oranges_in_fruit_salad:int. forall extra_cost:int. forall o:int.
-  forall o1:int. forall result:bool. (in_range1(apples_in_fruit_salad) ->
-  (in_range1(oranges_in_fruit_salad) -> (in_range1(apples) ->
-  (in_range1(oranges) -> (in_range1(price_of_apple) ->
-  (in_range1(price_of_orange) -> (in_range1(extra_cost) ->
-  ((((o = get_price_of_orange(price_of_orange)) and (in_range1(o) and
-  (o = price_of_orange))) and (((o1 = get_price_of_apple(price_of_apple)) and
-  (in_range1(o1) and (o1 = price_of_apple))) and (((o <= o1) and
-  (result = true)) or ((not (o <= o1)) and (result = false))))) ->
-  ((not (result = true)) ->
-  in_range((apples_in_fruit_salad + oranges_in_fruit_salad))))))))))))
+  in_range((apples_in_fruit_salad + oranges_in_fruit_salad))

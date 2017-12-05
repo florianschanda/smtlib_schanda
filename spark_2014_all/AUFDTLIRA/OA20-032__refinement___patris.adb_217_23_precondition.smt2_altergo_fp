@@ -385,7 +385,7 @@ axiom coerce_axiom1 :
 
 type px_coord
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq6 : int, int -> bool
 
@@ -424,7 +424,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1201,7 +1201,7 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type integer
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -2381,32 +2381,198 @@ axiom turn_direction__def_axiom :
   (((d = 3) -> (turn_direction(d, t) = 0)) and ((not (d = 3)) ->
   (turn_direction(d, t) = (d + 1))))))))
 
- (* File "patris.ads", line 72, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall result:bool. (in_range6(cur_state) -> (in_range7(a) ->
-  (((get_state(cur_state) = 0) and (valid_configuration__2(cur_state, {
+logic success : bool
+
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic candidate__split_fields : shape
+
+logic candidate__split_fields1 : direction
+
+logic candidate__split_fields2 : px_coord
+
+logic candidate__split_fields3 : py_coord
+
+logic temp___2102 : shape
+
+logic temp___21021 : direction
+
+logic temp___21022 : px_coord
+
+logic temp___21023 : py_coord
+
+logic success1 : bool
+
+logic cur_piece__split_fields4 : shape
+
+logic cur_piece__split_fields5 : direction
+
+logic cur_piece__split_fields6 : px_coord
+
+logic cur_piece__split_fields7 : py_coord
+
+logic candidate__split_fields4 : shape
+
+logic candidate__split_fields5 : direction
+
+logic candidate__split_fields6 : px_coord
+
+logic candidate__split_fields7 : py_coord
+
+logic result : bool
+
+logic result1 : shape
+
+logic result2 : direction
+
+logic result3 : px_coord
+
+logic result4 : py_coord
+
+logic candidate__split_fields8 : shape
+
+logic candidate__split_fields9 : direction
+
+logic candidate__split_fields10 : px_coord
+
+logic candidate__split_fields11 : py_coord
+
+logic result5 : bool
+
+logic result6 : shape
+
+logic result7 : direction
+
+logic result8 : px_coord
+
+logic result9 : py_coord
+
+logic cur_piece__split_fields8 : shape
+
+logic cur_piece__split_fields9 : direction
+
+logic cur_piece__split_fields10 : px_coord
+
+logic cur_piece__split_fields11 : py_coord
+
+logic result10 : bool
+
+logic success2 : bool
+
+logic result11 : bool
+
+logic success3 : bool
+
+logic success4 : bool
+
+logic cur_piece__split_fields12 : shape
+
+logic cur_piece__split_fields13 : direction
+
+logic cur_piece__split_fields14 : px_coord
+
+logic cur_piece__split_fields15 : py_coord
+
+logic candidate__split_fields12 : shape
+
+logic candidate__split_fields13 : direction
+
+logic candidate__split_fields14 : px_coord
+
+logic candidate__split_fields15 : py_coord
+
+logic success5 : bool
+
+logic cur_piece__split_fields16 : shape
+
+logic cur_piece__split_fields17 : direction
+
+logic cur_piece__split_fields18 : px_coord
+
+logic cur_piece__split_fields19 : py_coord
+
+logic candidate__split_fields16 : shape
+
+logic candidate__split_fields17 : direction
+
+logic candidate__split_fields18 : px_coord
+
+logic candidate__split_fields19 : py_coord
+
+logic success6 : bool
+
+logic cur_piece__split_fields20 : shape
+
+logic cur_piece__split_fields21 : direction
+
+logic cur_piece__split_fields22 : px_coord
+
+logic cur_piece__split_fields23 : py_coord
+
+logic candidate__split_fields20 : shape
+
+logic candidate__split_fields21 : direction
+
+logic candidate__split_fields22 : px_coord
+
+logic candidate__split_fields23 : py_coord
+
+logic success7 : bool
+
+logic cur_piece__split_fields24 : shape
+
+logic cur_piece__split_fields25 : direction
+
+logic cur_piece__split_fields26 : px_coord
+
+logic cur_piece__split_fields27 : py_coord
+
+logic candidate__split_fields24 : shape
+
+logic candidate__split_fields25 : direction
+
+logic candidate__split_fields26 : px_coord
+
+logic candidate__split_fields27 : py_coord
+
+axiom H : in_range6(cur_state)
+
+axiom H1 : in_range7(a)
+
+axiom H2 : ((get_state(cur_state) = 0) and (valid_configuration__2(cur_state,
+  { rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
+  cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
+  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true))
+
+axiom H3 : ((result = move_is_possible({ us_split_fields1 = {
   rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
   cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
-  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true)) ->
-  (((result = move_is_possible({ us_split_fields1 = { rec__patris__piece__s =
-  cur_piece__split_fields; rec__patris__piece__d = cur_piece__split_fields1;
-  rec__patris__piece__x = cur_piece__split_fields2; rec__patris__piece__y =
-  cur_piece__split_fields3 } }, a)) and (((result = true) or (((a = 0) ->
+  rec__patris__piece__y = cur_piece__split_fields3 } }, a)) and
+  (((result = true) -> (((a = 0) ->
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) and ((not (a = 0)) ->
   (((a = 1) -> in_range3((to_rep2(cur_piece__split_fields2) + 1))) and
   ((not (a = 1)) -> ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) ->
-  ((result = true) and (((a = 0) and
+  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) and ((((a = 0) and
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) or ((not (a = 0)) and
   (((a = 1) and in_range3((to_rep2(cur_piece__split_fields2) + 1))) or
   ((not (a = 1)) and ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))))) ->
-  ((result = true) -> (move_is_possible({ us_split_fields1 = {
+  in_range4((to_rep3(cur_piece__split_fields3) + 1))))))) ->
+  (result = true))))
+
+axiom H4 : (result = true)
+
+ (* File "patris.ads", line 72, characters 0-0 *)
+goal WP_parameter_def : (move_is_possible({ us_split_fields1 = {
   rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
   cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
-  rec__patris__piece__y = cur_piece__split_fields3 } }, a) = true)))))))
+  rec__patris__piece__y = cur_piece__split_fields3 } }, a) = true)

@@ -30,6 +30,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const b Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(assert true)
 (assert (or (= a true) (= b true)))
 (assert (not (not (= a true))))
 (check-sat)

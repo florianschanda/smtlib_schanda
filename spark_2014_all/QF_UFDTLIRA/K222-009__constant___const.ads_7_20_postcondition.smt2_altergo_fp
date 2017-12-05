@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type t
 
-predicate in_range(x: int) = (((-10000) <= x) and (x <= 10000))
+predicate in_range(x: int) = (((- 10000) <= x) and (x <= 10000))
 
 logic bool_eq : int, int -> bool
 
@@ -108,17 +108,43 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic const__incr__result : int
+
+logic o : int
+
+logic result : int
+
+logic const__incr__result1 : int
+
+logic const__incr__result2 : int
+
+logic const__incr__result3 : int
+
+logic const__incr__result4 : int
+
+logic const__incr__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (x <  10000)
+
+axiom H2 : (const__incr__result1 = const__incr__result2)
+
+axiom H3 : (const__incr__result3 = const__incr__result1)
+
+axiom H4 : ((o = (x + 1)) and in_range((x + 1)))
+
+axiom H5 : (result = const__incr__result)
+
+axiom H6 : (const__incr__result1 = o)
+
+axiom H7 : (const__incr__result4 = const__incr__result2)
+
+axiom H8 : (const__incr__result5 = const__incr__result3)
+
+axiom H9 : (result1 = const__incr__result4)
+
  (* File "const.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall const__incr__result:int. forall o:int. forall result:int.
-  forall const__incr__result1:int. forall const__incr__result2:int.
-  forall const__incr__result3:int. forall const__incr__result4:int.
-  forall const__incr__result5:int.
-  (forall result1:int. ((in_range(x) and ((x <  10000) and
-  (((((const__incr__result1 = const__incr__result2) and
-  (const__incr__result3 = const__incr__result1)) and (((o = (x + 1)) and
-  in_range((x + 1))) and ((result = const__incr__result) and
-  (const__incr__result1 = o)))) and
-  ((const__incr__result4 = const__incr__result2) and
-  (const__incr__result5 = const__incr__result3))) and
-  (result1 = const__incr__result4)))) -> (x <= 10000))))
+goal WP_parameter_def : (x <= 10000)

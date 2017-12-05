@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,34 +421,87 @@ logic to____last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dyn_arrays.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall to__:(int,natural) farray. forall temp___172:(int,natural) farray.
-  forall temp___1721:t. forall o:(int,natural) farray. forall i:int.
-  forall o1:int. forall o2:int. forall temp___174:int. forall o3:int.
-  forall o4:natural. forall o5:int. forall result:(int,natural) farray.
-  forall to__1:(int,natural) farray. forall to__2:(int,natural) farray.
-  forall to__3:(int,natural) farray. (dynamic_property(1, 2147483647,
-  to_rep1(to____first), to_rep1(to____last)) ->
-  (((to_rep1(to____first) <= to_rep1(to____last)) and
-  ((to_rep1(to____last) - to_rep1(to____first)) = 99)) ->
-  ((((((((to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100)))) and
-  (((to_rep1(to____first) <= to_rep1(to____last)) and (((to_rep1(last(mk(1,
+logic to__ : (int,natural) farray
+
+logic o : int
+
+logic temp___172 : (int,natural) farray
+
+logic temp___1721 : t
+
+logic o1 : (int,natural) farray
+
+logic i : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___174 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : int
+
+logic result : (int,natural) farray
+
+logic to__1 : (int,natural) farray
+
+logic to__2 : (int,natural) farray
+
+logic to__3 : (int,natural) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(to____first),
+  to_rep1(to____last))
+
+axiom H1 : ((to_rep1(to____first) <= to_rep1(to____last)) and
+  ((to_rep1(to____last) - to_rep1(to____first)) = 99))
+
+axiom H2 : (((to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100)))) ->
+  (((to_rep1(to____first) <= to_rep1(to____last)) -> (((to_rep1(last(mk(1,
   100))) - to_rep1(first(mk(1,
-  100)))) + 1) = ((to_rep1(to____last) - to_rep1(to____first)) + 1))) or
-  ((not (to_rep1(to____first) <= to_rep1(to____last))) and
-  (((to_rep1(last(mk(1, 100))) - to_rep1(first(mk(1, 100)))) + 1) = 0)))) or
-  ((not (to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100))))) and
-  (((to_rep1(to____first) <= to_rep1(to____last)) and
-  (0 = ((to_rep1(to____last) - to_rep1(to____first)) + 1))) or
-  (not (to_rep1(to____first) <= to_rep1(to____last)))))) and
-  ((from = temp___172) and (mk(1, 100) = temp___1721))) and
-  (o = slide(temp___172, to_rep1(first(temp___1721)),
-  to_rep1(to____first)))) and (({ map__content = result } = { map__content =
-  to__ }) and (to__1 = o))) and ((to__1 = to__2) and (to__3 = to__1))) ->
-  (((to_rep1(to____first) <= i) and (i <= to_rep1(to____last))) ->
-  ((((((((o1 = (i - to_rep1(to____first))) and
-  in_range1((i - to_rep1(to____first)))) and (o2 = (o1 + 1))) and
-  ((temp___174 = o2) and in_range1(o2))) and (((1 <= temp___174) and
-  (temp___174 <= 100)) and (o3 = temp___174))) and (o4 = (from[o3]))) and
-  (o5 = to_rep(o4))) -> (to_rep1(to____first) <= i)))))))
+  100)))) + 1) = ((to_rep1(to____last) - to_rep1(to____first)) + 1))) and
+  ((not (to_rep1(to____first) <= to_rep1(to____last))) ->
+  (((to_rep1(last(mk(1, 100))) - to_rep1(first(mk(1, 100)))) + 1) = 0)))) and
+  ((not (to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100))))) ->
+  ((to_rep1(to____first) <= to_rep1(to____last)) ->
+  (0 = ((to_rep1(to____last) - to_rep1(to____first)) + 1)))))
+
+axiom H3 : (from = temp___172)
+
+axiom H4 : (mk(1, 100) = temp___1721)
+
+axiom H5 : (o1 = slide(temp___172, to_rep1(first(temp___1721)),
+  to_rep1(to____first)))
+
+axiom H6 : (result = to__)
+
+axiom H7 : (to__1 = o1)
+
+axiom H8 : (to__1 = to__2)
+
+axiom H9 : (to__3 = to__1)
+
+axiom H10 : (to_rep1(to____first) <= i)
+
+axiom H11 : (i <= to_rep1(to____last))
+
+axiom H12 : ((o2 = (i - to_rep1(to____first))) and
+  in_range1((i - to_rep1(to____first))))
+
+axiom H13 : (o3 = (o2 + 1))
+
+axiom H14 : ((temp___174 = o3) and in_range1(o3))
+
+axiom H15 : ((1 <= temp___174) and (temp___174 <= 100))
+
+axiom H16 : (o4 = temp___174)
+
+axiom H17 : (o5 = (from[o4]))
+
+axiom H18 : (o6 = to_rep(o5))
+
+ (* File "dyn_arrays.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(to____first) <= i)

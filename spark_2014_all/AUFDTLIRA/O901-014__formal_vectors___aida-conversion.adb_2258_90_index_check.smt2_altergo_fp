@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -448,16 +448,67 @@ axiom convert_character_digit_to_integer__post_axiom :
   (convert_character_digit_to_integer(source2) = 9))))))))))))))))))))) and
   in_range1(convert_character_digit_to_integer(source2)))))
 
- (* File "aida-conversion.adb", line 2216, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall temp___2439:int. (dynamic_property(1,
-  2147483647, to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> (((length({ elts =
-  source; rt = source1 }) = 2) and
+logic target : int
+
+logic has_failed : bool
+
+logic temp___2440 : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : bool
+
+logic temp___2439 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : bool
+
+logic target1 : int
+
+logic result1 : int
+
+logic target2 : int
+
+logic result2 : bool
+
+logic has_failed1 : bool
+
+logic target3 : int
+
+logic has_failed2 : bool
+
+logic target4 : int
+
+logic has_failed3 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : ((length({ elts = source; rt = source1 }) = 2) and
   ((to_rep((source[(to_rep1(first(source1)) + 0)])) = 45) and
-  (forall index:int. ((((to_rep1(first(source1)) + 1) <= index) and
-  (index <= (to_rep1(first(source1)) + 1))) ->
-  (is_digit(to_rep((source[index]))) = true))))) ->
-  (((temp___2439 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) ->
-  (to_rep1(first(source1)) <= temp___2439))))))
+  (forall index1:int. ((((to_rep1(first(source1)) + 1) <= index1) and
+  (index1 <= (to_rep1(first(source1)) + 1))) ->
+  (is_digit(to_rep((source[index1]))) = true)))))
+
+axiom H3 : ((temp___2439 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+ (* File "aida-conversion.adb", line 2216, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___2439)

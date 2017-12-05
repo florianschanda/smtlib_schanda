@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type ttB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -104,6 +104,9 @@ type ttB__ref = { ttB__content : ttB
 
 function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
+logic temp___140 : int
+
+axiom H : in_range(temp___140)
+
  (* File "type_invariant_legal_2.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___140:int. (in_range(temp___140) -> (not (temp___140 = 0))))
+goal WP_parameter_def : (not (temp___140 = 0))

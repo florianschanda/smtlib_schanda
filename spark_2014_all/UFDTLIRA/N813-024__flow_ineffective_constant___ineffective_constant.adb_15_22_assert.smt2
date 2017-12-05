@@ -68,6 +68,7 @@
 (declare-const o integer)
 (declare-const o1 integer)
 (declare-const temp___139 integer)
+(declare-const o2 Int)
 (assert (= (to_rep o) 0))
 (assert (= o o1))
 (assert (= temp___139 o1))

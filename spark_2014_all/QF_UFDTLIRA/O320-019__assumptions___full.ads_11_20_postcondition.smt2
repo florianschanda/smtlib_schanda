@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const full__bump__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const full__bump__result1 Int)
 (declare-const full__bump__result2 Int)

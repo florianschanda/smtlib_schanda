@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,17 +421,51 @@ logic to____last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic to__ : (int,natural) farray
+
+logic o : int
+
+logic temp___172 : (int,natural) farray
+
+logic temp___1721 : t
+
+logic o1 : (int,natural) farray
+
+logic i : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___174 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : int
+
+logic result : (int,natural) farray
+
+logic to__1 : (int,natural) farray
+
+logic to__2 : (int,natural) farray
+
+logic to__3 : (int,natural) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(to____first),
+  to_rep1(to____last))
+
+axiom H1 : ((to_rep1(to____first) <= to_rep1(to____last)) and
+  ((to_rep1(to____last) - to_rep1(to____first)) = 99))
+
  (* File "dyn_arrays.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(to____first), to_rep1(to____last)) ->
-  (((to_rep1(to____first) <= to_rep1(to____last)) and
-  ((to_rep1(to____last) - to_rep1(to____first)) = 99)) ->
-  (((to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100)))) ->
-  (((to_rep1(to____first) <= to_rep1(to____last)) -> (((to_rep1(last(mk(1,
-  100))) - to_rep1(first(mk(1,
+goal WP_parameter_def : (((to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1,
+  100)))) -> (((to_rep1(to____first) <= to_rep1(to____last)) ->
+  (((to_rep1(last(mk(1, 100))) - to_rep1(first(mk(1,
   100)))) + 1) = ((to_rep1(to____last) - to_rep1(to____first)) + 1))) and
   ((not (to_rep1(to____first) <= to_rep1(to____last))) ->
   (((to_rep1(last(mk(1, 100))) - to_rep1(first(mk(1, 100)))) + 1) = 0)))) and
   ((not (to_rep1(first(mk(1, 100))) <= to_rep1(last(mk(1, 100))))) ->
   ((to_rep1(to____first) <= to_rep1(to____last)) ->
-  (0 = ((to_rep1(to____last) - to_rep1(to____first)) + 1)))))))
+  (0 = ((to_rep1(to____last) - to_rep1(to____first)) + 1)))))

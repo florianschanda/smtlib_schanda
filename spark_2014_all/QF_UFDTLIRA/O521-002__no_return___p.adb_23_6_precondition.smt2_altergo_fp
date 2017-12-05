@@ -51,7 +51,15 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic dummy : int
+
+logic result : int
+
+logic dummy1 : int
+
+axiom H : (result = dummy)
+
+axiom H1 : (dummy1 = 0)
+
  (* File "p.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dummy:int. forall result:int. forall dummy1:int.
-  (not ((result = dummy) and (dummy1 = 0))))
+goal WP_parameter_def : false

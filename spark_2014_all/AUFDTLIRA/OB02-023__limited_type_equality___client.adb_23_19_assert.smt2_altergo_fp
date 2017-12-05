@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -543,12 +543,20 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "client.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall z__split_fields:integer.
-  ((bool_eq2({ us_split_fields1 = { rec__p1__normal_record__x =
+logic x__split_fields : integer
+
+logic z__split_fields : integer
+
+logic a : (int,us_rep) farray
+
+logic c : (int,us_rep2) farray
+
+axiom H : (bool_eq2({ us_split_fields1 = { rec__p1__normal_record__x =
   x__split_fields } }, { us_split_fields1 = { rec__p1__normal_record__x =
-  x__split_fields } }) = true) -> (oeq({ us_split_fields5 = {
+  x__split_fields } }) = true)
+
+ (* File "client.adb", line 8, characters 0-0 *)
+goal WP_parameter_def : (oeq({ us_split_fields5 = {
   rec__p3__limited_record_with_user_eq__x = z__split_fields } }, {
   us_split_fields5 = { rec__p3__limited_record_with_user_eq__x =
-  z__split_fields } }) = true)))
+  z__split_fields } }) = true)

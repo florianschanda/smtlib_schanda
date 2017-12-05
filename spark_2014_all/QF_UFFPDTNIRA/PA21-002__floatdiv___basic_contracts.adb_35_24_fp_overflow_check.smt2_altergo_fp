@@ -1096,19 +1096,50 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : t
+
+logic basic_contracts__average_float__result : t
+
+logic o : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic basic_contracts__average_float__result1 : t
+
+logic basic_contracts__average_float__result2 : t
+
+logic basic_contracts__average_float__result3 : t
+
+logic res2 : t
+
+logic basic_contracts__average_float__result4 : t
+
+logic res3 : t
+
+logic basic_contracts__average_float__result5 : t
+
+axiom H : tqtisFinite(numerator)
+
+axiom H1 : tqtisFinite(denominator)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
+
+axiom H2 : (le(fliteral1, numerator) and le(fliteral, denominator))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
+axiom H3 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(res))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. (tqtisFinite(numerator) -> (tqtisFinite(denominator) ->
-  ((le(fliteral1, numerator) and le(fliteral, denominator)) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(res)) ->
-  tqtisFinite(div(NearestTiesToEven, numerator, denominator)))))))
+goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, numerator,
+  denominator))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -513,7 +513,7 @@ logic kmp__init_next__next__aggregate_def : int, int, int -> us_t2
 
 axiom def_axiom :
   (forall temp___161:int. forall temp___162:int. forall temp___163:int.
-  ((dynamic_property((-2147483648), 2147483647, temp___162, temp___163) ->
+  ((dynamic_property((- 2147483648), 2147483647, temp___162, temp___163) ->
   ((to_rep(first4((kmp__init_next__next__aggregate_def(temp___161,
   temp___162, temp___163)).rt2)) = temp___162) and
   (to_rep(last4((kmp__init_next__next__aggregate_def(temp___161, temp___162,
@@ -521,69 +521,132 @@ axiom def_axiom :
   (forall temp___164:int. (((kmp__init_next__next__aggregate_def(temp___161,
   temp___162, temp___163)).elts2[temp___164]) = of_rep(temp___161)))))
 
- (* File "kmp.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall next:(int,integer) farray.
-  forall kmp__init_next__result:(int,integer) farray.
-  forall kmp__init_next__result1:t. forall temp___166:(int,integer) farray.
-  forall temp___1661:t2.
-  forall kmp__init_next__next__assume:(int,integer) farray.
-  forall kmp__init_next__next__assume1:t1.
-  forall result:(int,integer) farray. forall next1:(int,integer) farray.
-  forall result1:(int,integer) farray. forall result2:t.
-  forall kmp__init_next__result2:(int,integer) farray.
-  forall kmp__init_next__result3:t.
-  forall kmp__init_next__result4:(int,integer) farray.
-  forall kmp__init_next__result5:t.
-  forall kmp__init_next__result6:(int,integer) farray.
-  forall kmp__init_next__result7:t. forall next2:(int,integer) farray.
-  forall kmp__init_next__result8:(int,integer) farray.
-  forall kmp__init_next__result9:t. forall next3:(int,integer) farray.
-  forall kmp__init_next__result10:(int,integer) farray.
-  forall kmp__init_next__result11:t.
-  (forall result3:(int,integer) farray. forall result4:t.
-  ((dynamic_property((-2147483648), 2147483647, to_rep(first(p1)),
-  to_rep(last(p1))) and ((1 <= length({ elts = p; rt = p1 })) and
-  (((((((to_rep(first4((kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1))) and
-  ((to_rep(last4((kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
-  to_rep(last(p1)))).rt2)) = to_rep(last(p1))) and ({ elts2 = temp___166;
-  rt2 = temp___1661 } = kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))))) and
-  ((((to_rep(first4(temp___1661)) <= to_rep(last4(temp___1661))) and
-  (((to_rep(first(p1)) <= to_rep(last(p1))) and
-  (((to_rep(last4(temp___1661)) - to_rep(first4(temp___1661))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
-  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) and
-  (((to_rep(last4(temp___1661)) - to_rep(first4(temp___1661))) + 1) = 0)))) or
-  ((not (to_rep(first4(temp___1661)) <= to_rep(last4(temp___1661)))) and
-  (((to_rep(first(p1)) <= to_rep(last(p1))) and
-  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
-  (not (to_rep(first(p1)) <= to_rep(last(p1))))))) and ((slide(temp___166,
-  to_rep(first4(temp___1661)),
-  to_rep(first(p1))) = kmp__init_next__next__assume) and
-  (mk1(to_rep(first(p1)),
-  to_rep(last(p1))) = kmp__init_next__next__assume1)))) and
-  (((result = next) and (next1 = kmp__init_next__next__assume)) and
-  ((to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1))) and
-  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))))) and
-  ((dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
+logic next : (int,integer) farray
+
+logic kmp__init_next__result : (int,integer) farray
+
+logic kmp__init_next__result1 : t
+
+logic temp___166 : (int,integer) farray
+
+logic temp___1661 : t2
+
+logic kmp__init_next__next__assume : (int,integer) farray
+
+logic kmp__init_next__next__assume1 : t1
+
+logic result : (int,integer) farray
+
+logic next1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic result2 : t
+
+logic kmp__init_next__result2 : (int,integer) farray
+
+logic kmp__init_next__result3 : t
+
+logic kmp__init_next__result4 : (int,integer) farray
+
+logic kmp__init_next__result5 : t
+
+logic kmp__init_next__result6 : (int,integer) farray
+
+logic kmp__init_next__result7 : t
+
+logic next2 : (int,integer) farray
+
+logic kmp__init_next__result8 : (int,integer) farray
+
+logic kmp__init_next__result9 : t
+
+logic next3 : (int,integer) farray
+
+logic kmp__init_next__result10 : (int,integer) farray
+
+logic kmp__init_next__result11 : t
+
+logic result3 : (int,integer) farray
+
+logic result4 : t
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(p1)),
+  to_rep(last(p1)))
+
+axiom H1 : (1 <= length({ elts = p; rt = p1 }))
+
+axiom H2 : (to_rep(first4((kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1)))
+
+axiom H3 : (to_rep(last4((kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(last(p1)))
+
+axiom H4 : ({ elts2 = temp___166; rt2 = temp___1661
+  } = kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
+  to_rep(last(p1))))
+
+axiom H5 : (((to_rep(first4(temp___1661)) <= to_rep(last4(temp___1661))) ->
+  (((to_rep(first(p1)) <= to_rep(last(p1))) ->
+  (((to_rep(last4(temp___1661)) - to_rep(first4(temp___1661))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) and
+  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) ->
+  (((to_rep(last4(temp___1661)) - to_rep(first4(temp___1661))) + 1) = 0)))) and
+  ((not (to_rep(first4(temp___1661)) <= to_rep(last4(temp___1661)))) ->
+  ((to_rep(first(p1)) <= to_rep(last(p1))) ->
+  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1)))))
+
+axiom H6 : (slide(temp___166, to_rep(first4(temp___1661)),
+  to_rep(first(p1))) = kmp__init_next__next__assume)
+
+axiom H7 : (mk1(to_rep(first(p1)),
+  to_rep(last(p1))) = kmp__init_next__next__assume1)
+
+axiom H8 : (result = next)
+
+axiom H9 : (next1 = kmp__init_next__next__assume)
+
+axiom H10 :
+  (to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1)))
+
+axiom H11 :
+  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))
+
+axiom H12 : (dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
   to_rep(next__first), to_rep(next__last)) and
   ((to_rep(next__first) = to_rep(first(p1))) and
-  (to_rep(next__last) = to_rep(last(p1))))) and
-  ((((kmp__init_next__result4 = kmp__init_next__result2) and
-  (kmp__init_next__result5 = kmp__init_next__result3)) and
-  ((kmp__init_next__result6 = kmp__init_next__result2) and
-  (kmp__init_next__result7 = kmp__init_next__result3))) and
-  (((result1 = kmp__init_next__result) and
-  (result2 = kmp__init_next__result1)) and
-  ((next1 = kmp__init_next__result2) and (mk(to_rep(next__first),
-  to_rep(next__last)) = kmp__init_next__result3)))))) and
-  ((((kmp__init_next__result8 = kmp__init_next__result4) and
-  (kmp__init_next__result9 = kmp__init_next__result5)) and
-  (next2 = next1)) and
-  (((kmp__init_next__result10 = kmp__init_next__result6) and
-  (kmp__init_next__result11 = kmp__init_next__result7)) and
-  (next3 = next1)))) and ((result3 = kmp__init_next__result8) and
-  (result4 = kmp__init_next__result9))))) -> (length({ elts =
-  kmp__init_next__result8; rt = kmp__init_next__result9 }) = length({ elts =
-  p; rt = p1 })))))
+  (to_rep(next__last) = to_rep(last(p1)))))
+
+axiom H13 : (kmp__init_next__result4 = kmp__init_next__result2)
+
+axiom H14 : (kmp__init_next__result5 = kmp__init_next__result3)
+
+axiom H15 : ((kmp__init_next__result6 = kmp__init_next__result2) and
+  (kmp__init_next__result7 = kmp__init_next__result3))
+
+axiom H16 : (result1 = kmp__init_next__result)
+
+axiom H17 : (result2 = kmp__init_next__result1)
+
+axiom H18 : (next1 = kmp__init_next__result2)
+
+axiom H19 : (mk(to_rep(next__first),
+  to_rep(next__last)) = kmp__init_next__result3)
+
+axiom H20 : ((kmp__init_next__result8 = kmp__init_next__result4) and
+  (kmp__init_next__result9 = kmp__init_next__result5))
+
+axiom H21 : (next2 = next1)
+
+axiom H22 : (kmp__init_next__result10 = kmp__init_next__result6)
+
+axiom H23 : (kmp__init_next__result11 = kmp__init_next__result7)
+
+axiom H24 : (next3 = next1)
+
+axiom H25 : (result3 = kmp__init_next__result8)
+
+axiom H26 : (result4 = kmp__init_next__result9)
+
+ (* File "kmp.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (length({ elts = kmp__init_next__result8; rt =
+  kmp__init_next__result9 }) = length({ elts = p; rt = p1 }))

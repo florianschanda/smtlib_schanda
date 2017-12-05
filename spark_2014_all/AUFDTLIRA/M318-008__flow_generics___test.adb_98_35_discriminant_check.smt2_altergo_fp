@@ -349,9 +349,9 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  ((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -359,10 +359,10 @@ axiom bool_eq_def3 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq3(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true))) -> (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  5) = true)))) -> (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -370,7 +370,7 @@ axiom bool_eq_def3 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq3(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true)))) -> (bool_eq4(a, b) = false))))
+  5) = true))))) -> (bool_eq4(a, b) = false))))
 
 logic value__size1 : int
 
@@ -913,23 +913,68 @@ axiom def_axiom1 :
   temp___405, temp___406, temp___407,
   temp___408)[5]) = of_rep1(temp___408))))
 
+logic us : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : item_t
+
+logic o4 : item_t
+
+logic o5 : item_t
+
+logic o6 : (int,item_t) farray
+
+logic o7 : bool
+
+logic o8 : natural
+
+logic o9 : item_t
+
+logic o10 : item_t
+
+logic o11 : item_t
+
+logic o12 : (int,item_t) farray
+
+logic o13 : bool
+
+logic o14 : natural
+
+logic o15 : item_t
+
+logic o16 : item_t
+
+logic o17 : item_t
+
+logic o18 : (int,item_t) farray
+
+logic o19 : bool
+
+axiom H : ((us = 0) and in_range(0))
+
+axiom H1 : (to_rep(o) = 0)
+
+axiom H2 : (o = o1)
+
+axiom H3 : (o2 = o1)
+
+axiom H4 : (dummy1 = o3)
+
+axiom H5 : (dummy1 = o4)
+
+axiom H6 : (dummy1 = o5)
+
+axiom H7 : (temp___402(1, 1, 1, 1, 1) = o6)
+
+axiom H8 : (true = o7)
+
+axiom H9 : ((o8 = o2) and (((o9 = o3) and ((o10 = o4) and ((o11 = o5) and
+  (o12 = o6)))) and (o13 = o7)))
+
  (* File "test.ads", line 73, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:natural. forall o1:natural. forall o2:natural.
-  forall o3:item_t. forall o4:item_t. forall o5:item_t.
-  forall o6:(int,item_t) farray. forall o7:bool. forall o8:natural.
-  forall o9:item_t. forall o10:item_t. forall o11:item_t.
-  forall o12:(int,item_t) farray. forall o13:bool. (((us = 0) and
-  in_range(0)) -> (((((to_rep(o) = 0) and (o = o1)) and ((o2 = o1) and
-  (((dummy1 = o3) and ((dummy1 = o4) and ((dummy1 = o5) and (temp___402(1, 1,
-  1, 1, 1) = o6)))) and (true = o7)))) and ({ us_split_discrs1 = {
-  rec__test__fruit_rec__record_t__d = o8 }; us_split_fields1 = {
-  rec__test__fruit_rec__record_t__single_item = o9;
-  rec__test__fruit_rec__record_t__a = o10;
-  rec__test__fruit_rec__record_t__b = o11;
-  rec__test__fruit_rec__record_t__arr = o12 }; attr__constrained = o13 } = {
-  us_split_discrs1 = { rec__test__fruit_rec__record_t__d = o2 };
-  us_split_fields1 = { rec__test__fruit_rec__record_t__single_item = o3;
-  rec__test__fruit_rec__record_t__a = o4; rec__test__fruit_rec__record_t__b =
-  o5; rec__test__fruit_rec__record_t__arr = o6 }; attr__constrained = o7
-  })) -> (0 = to_rep(o8)))))
+goal WP_parameter_def : (0 = to_rep(o8))

@@ -200,6 +200,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const dyn__R3b__assume Int)
+(declare-const us Int)
 (declare-const temp___183 (Array Int character))
 (declare-const temp___1831 t1)
 (assert (and (= dyn__R1b__assume (f Tuple0)) (and (in_range dyn__R1b__assume) (= dyn__R1b__assume 1))))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -253,23 +253,23 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__basic__r__x) = to_rep1(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base))) and
-  (basic__r__a_field__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
-  (basic__r__c_field1__pred(a) ->
-  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
-  (basic__r__c_field2__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__basic__r__x) = to_rep1(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__basic__r__x) = to_rep1(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base)) and
   (basic__r__a_field__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
   (basic__r__c_field1__pred(a) ->
   (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
   (basic__r__c_field2__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__basic__r__x) = to_rep1(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base)) and
+  (basic__r__a_field__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
+  (basic__r__c_field1__pred(a) ->
+  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
+  (basic__r__c_field2__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -635,67 +635,220 @@ logic z__split_discrs : enum
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "subty.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z__split_fields:integer. forall z__split_fields1:integer.
-  forall z__split_fields2:bool. forall z__split_fields3:natural.
-  forall o:enum. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall o5:bool. forall o6:natural. forall o7:enum.
-  forall o8:enum. forall o9:integer. forall o10:integer. forall o11:bool.
-  forall o12:natural. forall o13:enum. forall o14:integer.
-  forall o15:integer. forall o16:bool. forall o17:natural. forall o18:enum.
-  forall o19:integer. forall o20:integer. forall o21:bool.
-  forall o22:natural. forall subty__p__z__assume:enum.
-  forall subty__p__z__assume1:integer. forall subty__p__z__assume2:integer.
-  forall subty__p__z__assume3:bool. forall subty__p__z__assume4:natural.
-  forall o23:int. forall o24:integer. forall o25:integer. forall o26:integer.
-  forall o27:bool. forall o28:natural. forall temp___171:enum.
-  forall temp___1711:integer. forall temp___1712:integer.
-  forall temp___1713:bool. forall temp___1714:natural. forall result:integer.
-  forall result1:integer. forall result2:bool. forall result3:natural.
-  forall z__split_fields4:integer. forall z__split_fields5:integer.
-  forall z__split_fields6:bool. forall z__split_fields7:natural.
-  forall result4:integer. forall result5:integer. forall result6:bool.
-  forall result7:natural. forall z__split_fields8:integer.
-  forall z__split_fields9:integer. forall z__split_fields10:bool.
-  forall z__split_fields11:natural. ((0 = to_rep1(v)) ->
-  ((((((((to_rep(o1) = 1) and ((to_rep(o2) = 1) and ((o2 = o3) and
-  ((o1 = o4) and ((true = o5) and (dummy1 = o6)))))) and
-  (((to_rep1(o) = 0) and (o = o7)) and ((o8 = o7) and ((o9 = o3) and
-  ((o10 = o4) and ((o11 = o5) and (o12 = o6))))))) and ({ us_split_discrs1 =
-  { rec__basic__r__x = o13 }; us_split_fields1 = { rec__basic__r__base = o14;
-  rec__basic__r__a_field = o15; rec__basic__r__c_field1 = o16;
-  rec__basic__r__c_field2 = o17 } } = { us_split_discrs1 = {
-  rec__basic__r__x = o8 }; us_split_fields1 = { rec__basic__r__base = o9;
-  rec__basic__r__a_field = o10; rec__basic__r__c_field1 = o11;
-  rec__basic__r__c_field2 = o12 } })) and ({ us_split_discrs1 = {
-  rec__basic__r__x = o18 }; us_split_fields1 = { rec__basic__r__base = o19;
-  rec__basic__r__a_field = o20; rec__basic__r__c_field1 = o21;
-  rec__basic__r__c_field2 = o22 } } = { us_split_discrs1 = {
-  rec__basic__r__x = o13 }; us_split_fields1 = { rec__basic__r__base = o14;
-  rec__basic__r__a_field = o15; rec__basic__r__c_field1 = o16;
-  rec__basic__r__c_field2 = o17 } })) and ((subty__p__z__assume = o18) and
+logic z__split_fields : integer
+
+logic z__split_fields1 : integer
+
+logic z__split_fields2 : bool
+
+logic z__split_fields3 : natural
+
+logic o : enum
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : bool
+
+logic o6 : natural
+
+logic o7 : enum
+
+logic o8 : enum
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : bool
+
+logic o12 : natural
+
+logic o13 : enum
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : bool
+
+logic o17 : natural
+
+logic o18 : enum
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : bool
+
+logic o22 : natural
+
+logic subty__p__z__assume : enum
+
+logic subty__p__z__assume1 : integer
+
+logic subty__p__z__assume2 : integer
+
+logic subty__p__z__assume3 : bool
+
+logic subty__p__z__assume4 : natural
+
+logic o23 : int
+
+logic o24 : integer
+
+logic o25 : integer
+
+logic o26 : integer
+
+logic o27 : bool
+
+logic o28 : natural
+
+logic temp___171 : enum
+
+logic temp___1711 : integer
+
+logic temp___1712 : integer
+
+logic temp___1713 : bool
+
+logic temp___1714 : natural
+
+logic o29 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : bool
+
+logic result3 : natural
+
+logic z__split_fields4 : integer
+
+logic z__split_fields5 : integer
+
+logic z__split_fields6 : bool
+
+logic z__split_fields7 : natural
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result6 : bool
+
+logic result7 : natural
+
+logic z__split_fields8 : integer
+
+logic z__split_fields9 : integer
+
+logic z__split_fields10 : bool
+
+logic z__split_fields11 : natural
+
+axiom H : (0 = to_rep1(v))
+
+axiom H1 : (to_rep(o1) = 1)
+
+axiom H2 : (to_rep(o2) = 1)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (true = o5)
+
+axiom H6 : (dummy1 = o6)
+
+axiom H7 : (to_rep1(o) = 0)
+
+axiom H8 : (o = o7)
+
+axiom H9 : (o8 = o7)
+
+axiom H10 : (o9 = o3)
+
+axiom H11 : (o10 = o4)
+
+axiom H12 : (o11 = o5)
+
+axiom H13 : (o12 = o6)
+
+axiom H14 : ((o13 = o8) and ((o14 = o9) and ((o15 = o10) and ((o16 = o11) and
+  (o17 = o12)))))
+
+axiom H15 : ((o18 = o13) and ((o19 = o14) and ((o20 = o15) and
+  ((o21 = o16) and (o22 = o17)))))
+
+axiom H16 : ((subty__p__z__assume = o18) and
   ((subty__p__z__assume1 = o19) and ((subty__p__z__assume2 = o20) and
-  ((subty__p__z__assume3 = o21) and (subty__p__z__assume4 = o22)))))) and
-  ((((result = z__split_fields) and ((result1 = z__split_fields1) and
-  ((result2 = z__split_fields2) and (result3 = z__split_fields3)))) and
-  ((subty__p__z__assume1 = z__split_fields4) and
-  ((subty__p__z__assume2 = z__split_fields5) and
-  ((subty__p__z__assume3 = z__split_fields6) and
-  (subty__p__z__assume4 = z__split_fields7))))) and
-  (z__split_discrs = subty__p__z__assume))) ->
-  ((0 = to_rep1(z__split_discrs)) -> ((to_rep1(z__split_discrs) = 0) ->
-  ((to_rep(z__split_fields4) = 1) -> ((to_rep(z__split_fields5) = 1) ->
-  ((to_rep1(v) = 0) -> (((((((o23 = (to_rep(v2) + 1)) and
-  in_range((to_rep(v2) + 1))) and (to_rep(o24) = o23)) and
-  ((z__split_fields4 = o25) and ((o24 = o26) and
-  ((z__split_fields6 = o27) and (z__split_fields7 = o28))))) and
-  ((z__split_discrs = temp___171) and ((temp___1711 = o25) and
-  ((temp___1712 = o26) and ((temp___1713 = o27) and
-  (temp___1714 = o28)))))) and ((((result4 = z__split_fields4) and
+  ((subty__p__z__assume3 = o21) and (subty__p__z__assume4 = o22)))))
+
+axiom H17 : (result = z__split_fields)
+
+axiom H18 : (result1 = z__split_fields1)
+
+axiom H19 : (result2 = z__split_fields2)
+
+axiom H20 : (result3 = z__split_fields3)
+
+axiom H21 : ((z__split_fields4 = subty__p__z__assume1) and
+  ((z__split_fields5 = subty__p__z__assume2) and
+  ((z__split_fields6 = subty__p__z__assume3) and
+  (z__split_fields7 = subty__p__z__assume4))))
+
+axiom H22 : (z__split_discrs = subty__p__z__assume)
+
+axiom H23 : (0 = to_rep1(z__split_discrs))
+
+axiom H24 : (to_rep1(z__split_discrs) = 0)
+
+axiom H25 : (to_rep(z__split_fields4) = 1)
+
+axiom H26 : (to_rep(z__split_fields5) = 1)
+
+axiom H27 : (to_rep1(v) = 0)
+
+axiom H28 : ((o23 = (to_rep(v2) + 1)) and in_range((to_rep(v2) + 1)))
+
+axiom H29 : (to_rep(o24) = o23)
+
+axiom H30 : (z__split_fields4 = o25)
+
+axiom H31 : (o24 = o26)
+
+axiom H32 : (z__split_fields6 = o27)
+
+axiom H33 : (z__split_fields7 = o28)
+
+axiom H34 : (z__split_discrs = temp___171)
+
+axiom H35 : (temp___1711 = o25)
+
+axiom H36 : (temp___1712 = o26)
+
+axiom H37 : (temp___1713 = o27)
+
+axiom H38 : (temp___1714 = o28)
+
+axiom H39 : ((result4 = z__split_fields4) and
   ((result5 = z__split_fields5) and ((result6 = z__split_fields6) and
-  (result7 = z__split_fields7)))) and ((z__split_fields8 = temp___1711) and
+  (result7 = z__split_fields7))))
+
+axiom H40 : ((z__split_fields8 = temp___1711) and
   ((z__split_fields9 = temp___1712) and
-  ((z__split_fields10 = temp___1713) and
-  (z__split_fields11 = temp___1714))))) and
-  (z__split_discrs = temp___171))) -> (to_rep1(v) = 0))))))))))
+  ((z__split_fields10 = temp___1713) and (z__split_fields11 = temp___1714))))
+
+axiom H41 : (z__split_discrs = temp___171)
+
+ (* File "subty.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(v) = 0)

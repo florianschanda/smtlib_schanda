@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -732,33 +732,241 @@ axiom pow2__def_axiom :
   (pow21(i) = lsl_bv(of_int(1), of_int(i)))) and ((not (i <  4294967296)) ->
   (pow21(i) = of_int(0))))))
 
+logic cur_exp : t
+
+logic cur_val : t
+
+logic result__ : t
+
+logic iter : int
+
+logic exponentiate__result : t
+
+logic temp___207 : t
+
+logic temp___208 : t
+
+logic temp___206 : t
+
+logic temp___205 : t
+
+logic temp___204 : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : t
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : int
+
+logic exponentiate__result1 : t
+
+logic result : t
+
+logic cur_exp1 : t
+
+logic result1 : t
+
+logic cur_val1 : t
+
+logic result2 : t
+
+logic result__1 : t
+
+logic result3 : int
+
+logic iter1 : int
+
+logic result4 : t
+
+logic exponentiate__result2 : t
+
+logic cur_exp2 : t
+
+logic cur_val2 : t
+
+logic result__2 : t
+
+logic iter2 : int
+
+logic result5 : t
+
+logic result__3 : t
+
+logic result6 : t
+
+logic cur_exp3 : t
+
+logic result7 : t
+
+logic cur_val3 : t
+
+logic result8 : int
+
+logic iter3 : int
+
+logic cur_exp4 : t
+
+logic cur_val4 : t
+
+logic result__4 : t
+
+logic iter4 : int
+
+logic cur_exp5 : t
+
+logic cur_val5 : t
+
+logic result__5 : t
+
+logic iter5 : int
+
+logic cur_exp6 : t
+
+logic cur_val6 : t
+
+logic result__6 : t
+
+logic iter6 : int
+
+logic cur_exp7 : t
+
+logic cur_val7 : t
+
+logic result__7 : t
+
+logic iter7 : int
+
+logic result9 : t
+
+logic exponentiate__result3 : t
+
+logic exponentiate__result4 : t
+
+logic exponentiate__result5 : t
+
+logic cur_exp8 : t
+
+logic cur_val8 : t
+
+logic result__8 : t
+
+logic iter8 : int
+
+logic exponentiate__result6 : t
+
+logic cur_exp9 : t
+
+logic cur_val9 : t
+
+logic result__9 : t
+
+logic iter9 : int
+
+logic exponentiate__result7 : t
+
+logic cur_exp10 : t
+
+logic cur_val10 : t
+
+logic result__10 : t
+
+logic iter10 : int
+
+logic exponentiate__result8 : t
+
+logic cur_exp11 : t
+
+logic cur_val11 : t
+
+logic result__11 : t
+
+logic iter11 : int
+
+logic exponentiate__result9 : t
+
+axiom H : true
+
+axiom H1 : in_range(exp)
+
+axiom H2 : (result = cur_exp)
+
+axiom H3 : (cur_exp1 = of_int(exp))
+
+axiom H4 : true
+
+axiom H5 : (result1 = cur_val)
+
+axiom H6 : (cur_val1 = val__)
+
+axiom H7 : true
+
+axiom H8 : (result2 = result__)
+
+axiom H9 : (result__1 = of_int(1))
+
+axiom H10 : true
+
+axiom H11 : (result3 = iter)
+
+axiom H12 : (iter1 = 0)
+
+axiom H13 : in_range1(iter1)
+
+axiom H14 : (not (exp = 0))
+
+axiom H15 : (exponentiate__result2 = exponentiate__result)
+
+axiom H16 : (exponentiate__result2 = exponentiate__result1)
+
+axiom H17 : (not (cur_exp1 = of_int(0)))
+
+axiom H18 : (result__2 = power(val__, tqtint(urem(of_int(exp),
+  pow21(iter2)))))
+
+axiom H19 : (cur_val2 = power(val__, tqtint(pow21(iter2))))
+
+axiom H20 : (cur_exp2 = udiv(cur_exp1, pow21(iter2)))
+
+axiom H21 : ((0 <= 31) -> in_range1(iter2))
+
+axiom H22 : ((urem(cur_exp2, of_int(2)) = of_int(1)) ->
+  (result__2 = result5))
+
+axiom H23 : ((urem(cur_exp2, of_int(2)) = of_int(1)) ->
+  (result__3 = mul(result__2, cur_val2)))
+
+axiom H24 : ((not (urem(cur_exp2, of_int(2)) = of_int(1))) ->
+  (result__3 = result__2))
+
+axiom H25 : (cur_exp2 = result6)
+
+axiom H26 : (cur_exp3 = udiv(cur_exp2, of_int(2)))
+
+axiom H27 : (cur_val2 = result7)
+
+axiom H28 : (cur_val3 = mul(cur_val2, cur_val2))
+
+axiom H29 : ((o9 = (iter2 + 1)) and in_range1((iter2 + 1)))
+
+axiom H30 : (iter2 = result8)
+
+axiom H31 : (iter3 = o9)
+
+axiom H32 : (not (cur_exp3 = of_int(0)))
+
  (* File "interfac.ads", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_exp:t. forall cur_val:t. forall result__:t. forall iter:int.
-  forall exponentiate__result:t. forall o:int.
-  forall exponentiate__result1:t. forall result:t. forall cur_exp1:t.
-  forall result1:t. forall cur_val1:t. forall result2:t. forall result__1:t.
-  forall result3:int. forall iter1:int. forall exponentiate__result2:t.
-  forall cur_exp2:t. forall cur_val2:t. forall result__2:t. forall iter2:int.
-  forall result4:t. forall result__3:t. forall result5:t. forall cur_exp3:t.
-  forall result6:t. forall cur_val3:t. forall result7:int. forall iter3:int.
-  (in_range(exp) -> ((({ t__content = result } = { t__content = cur_exp
-  }) and (cur_exp1 = of_int(exp))) -> ((({ t__content = result1 } = {
-  t__content = cur_val }) and (cur_val1 = val__)) -> ((({ t__content =
-  result2 } = { t__content = result__ }) and (result__1 = of_int(1))) -> ((({
-  int__content = result3 } = { int__content = iter }) and (iter1 = 0)) ->
-  (in_range1(iter1) -> (((not (exp = 0)) and
-  ((exponentiate__result2 = exponentiate__result) and
-  (exponentiate__result2 = exponentiate__result1))) ->
-  ((not (cur_exp1 = of_int(0))) -> (((result__2 = power(val__,
-  tqtint(urem(of_int(exp), pow21(iter2))))) and ((cur_val2 = power(val__,
-  tqtint(pow21(iter2)))) and (cur_exp2 = udiv(cur_exp1, pow21(iter2))))) ->
-  ((((0 <= 31) -> in_range1(iter2)) and ((((urem(cur_exp2,
-  of_int(2)) = of_int(1)) and ((result__2 = result4) and
-  (result__3 = mul(result__2, cur_val2)))) or ((not (urem(cur_exp2,
-  of_int(2)) = of_int(1))) and (result__3 = result__2))) and
-  (((cur_exp2 = result5) and (cur_exp3 = udiv(cur_exp2, of_int(2)))) and
-  (((cur_val2 = result6) and (cur_val3 = mul(cur_val2, cur_val2))) and
-  ((((o = (iter2 + 1)) and in_range1((iter2 + 1))) and ((iter2 = result7) and
-  (iter3 = o))) and (not (cur_exp3 = of_int(0)))))))) ->
-  (cur_exp3 = udiv(cur_exp1, pow21(iter3))))))))))))))
+goal WP_parameter_def : (cur_exp3 = udiv(cur_exp1, pow21(iter3)))

@@ -46,6 +46,8 @@
 (declare-const gn Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range g))
 (assert (in_range pr_var))
 (assert (in_range gn))

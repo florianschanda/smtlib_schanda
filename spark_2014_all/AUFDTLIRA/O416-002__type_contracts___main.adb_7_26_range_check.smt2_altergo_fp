@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -822,7 +822,8 @@ function communication__ref___projection(a: communication__ref) : us_rep1 =
 
 type t5b
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= (-2147483647)))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and
+  (x <= (- 2147483647)))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1039,14 +1040,14 @@ axiom def_axiom :
   us_split_fields1 = { rec__messages__message__sent = temp___263;
   rec__messages__message__received = temp___2631 } }, { us_split_fields1 = {
   rec__messages__message__sent = temp___264;
-  rec__messages__message__received = temp___2641 } })[(-2147483648)]) = {
+  rec__messages__message__received = temp___2641 } })[(- 2147483648)]) = {
   us_split_fields1 = { rec__messages__message__sent = temp___263;
   rec__messages__message__received = temp___2631 } }) and
   ((main__a__aggregate_def({ us_split_fields1 = {
   rec__messages__message__sent = temp___263;
   rec__messages__message__received = temp___2631 } }, { us_split_fields1 = {
   rec__messages__message__sent = temp___264;
-  rec__messages__message__received = temp___2641 } })[(-2147483647)]) = {
+  rec__messages__message__received = temp___2641 } })[(- 2147483647)]) = {
   us_split_fields1 = { rec__messages__message__sent = temp___264;
   rec__messages__message__received = temp___2641 } })))
 
@@ -1106,34 +1107,67 @@ axiom temp___String_Literal_270__def_axiom :
   (to_rep2((temp___String_Literal_270(void)[9])) = 48)) and
   (to_rep2((temp___String_Literal_270(void)[10])) = 56))
 
- (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:(int,character) farray.
-  forall o1:(int,character) farray. forall o2:(int,character) farray.
-  forall o3:(int,character) farray. forall o4:(int,us_rep) farray.
-  forall main__a__assume:(int,us_rep) farray. forall main__a__assume1:t.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  ((((((compare(temp___String_Literal_269(void), 1, 10,
-  temp___String_Literal_270(void), 1, 10) <= 0) and
-  ((temp___String_Literal_269(void) = o) and
-  (temp___String_Literal_270(void) = o1))) and
-  (((compare(temp___String_Literal_266(void), 1, 10,
-  temp___String_Literal_267(void), 1, 10) <= 0) and
-  ((temp___String_Literal_266(void) = o2) and
-  (temp___String_Literal_267(void) = o3))) and (o4 = main__a__aggregate_def({
-  us_split_fields1 = { rec__messages__message__sent = o2;
-  rec__messages__message__received = o3 } }, { us_split_fields1 = {
-  rec__messages__message__sent = o; rec__messages__message__received = o1 }
-  })))) and ((o4 = main__a__assume) and (mk((-2147483648),
-  (-2147483647)) = main__a__assume1))) and (((result = a) and
-  (a1 = main__a__assume)) and
-  ((to_rep1(a__first) = to_rep1(first(main__a__assume1))) and
-  (to_rep1(a__last) = to_rep1(last(main__a__assume1)))))) ->
-  ((dynamic_property((-2147483648), 2147483647, to_rep1(a__first),
+logic a : (int,us_rep) farray
+
+logic o : (int,character) farray
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,character) farray
+
+logic o3 : (int,character) farray
+
+logic o4 : (int,us_rep) farray
+
+logic main__a__assume : (int,us_rep) farray
+
+logic main__a__assume1 : t
+
+logic us : int
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+axiom H : (compare(temp___String_Literal_269(void), 1, 10,
+  temp___String_Literal_270(void), 1, 10) <= 0)
+
+axiom H1 : (temp___String_Literal_269(void) = o)
+
+axiom H2 : (temp___String_Literal_270(void) = o1)
+
+axiom H3 : (compare(temp___String_Literal_266(void), 1, 10,
+  temp___String_Literal_267(void), 1, 10) <= 0)
+
+axiom H4 : (temp___String_Literal_266(void) = o2)
+
+axiom H5 : (temp___String_Literal_267(void) = o3)
+
+axiom H6 : (o4 = main__a__aggregate_def({ us_split_fields1 = {
+  rec__messages__message__sent = o2; rec__messages__message__received = o3 }
+  }, { us_split_fields1 = { rec__messages__message__sent = o;
+  rec__messages__message__received = o1 } }))
+
+axiom H7 : (o4 = main__a__assume)
+
+axiom H8 : (mk((- 2147483648), (- 2147483647)) = main__a__assume1)
+
+axiom H9 : (result = a)
+
+axiom H10 : (a1 = main__a__assume)
+
+axiom H11 : (to_rep1(a__first) = to_rep1(first(main__a__assume1)))
+
+axiom H12 : (to_rep1(a__last) = to_rep1(last(main__a__assume1)))
+
+axiom H13 : (dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
   to_rep1(a__last)) and
   (forall temp___272:int. (((to_rep1(a__first) <= temp___272) and
   (temp___272 <= to_rep1(a__last))) ->
   (compare((((a1[temp___272])).us_split_fields1).rec__messages__message__sent,
   1, 10,
   (((a1[temp___272])).us_split_fields1).rec__messages__message__received, 1,
-  10) <= 0)))) -> in_range1(2))))
+  10) <= 0))))
+
+ (* File "main.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : in_range1(2)

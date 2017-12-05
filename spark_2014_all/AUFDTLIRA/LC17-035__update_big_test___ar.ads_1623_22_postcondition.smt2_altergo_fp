@@ -538,45 +538,126 @@ logic f : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic r__split_fields : (int,et1) farray
+
+logic r__split_fields1 : (int,(int,et1) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,et1) farray
+
+logic o3 : (int,(int,et1) farray) farray
+
+logic temp___8700 : (int,et1) farray
+
+logic temp___87001 : (int,(int,et1) farray) farray
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic o6 : (int,(int,et1) farray) farray
+
+logic o7 : (int,et1) farray
+
+logic o8 : (int,(int,et1) farray) farray
+
+logic temp___8705 : (int,et1) farray
+
+logic temp___87051 : (int,(int,et1) farray) farray
+
+logic result : (int,et1) farray
+
+logic result1 : (int,(int,et1) farray) farray
+
+logic r__split_fields2 : (int,et1) farray
+
+logic r__split_fields3 : (int,(int,et1) farray) farray
+
+logic result2 : (int,et1) farray
+
+logic result3 : (int,(int,et1) farray) farray
+
+logic r__split_fields4 : (int,et1) farray
+
+logic r__split_fields5 : (int,(int,et1) farray) farray
+
+logic r__split_fields6 : (int,et1) farray
+
+logic r__split_fields7 : (int,(int,et1) farray) farray
+
+logic r__split_fields8 : (int,et1) farray
+
+logic r__split_fields9 : (int,(int,et1) farray) farray
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range3(e)
+
+axiom H3 : in_range3(f)
+
+axiom H4 : (to_rep(o) = e)
+
+axiom H5 : (o1 = (r__split_fields[j <- o]))
+
+axiom H6 : (o1 = o2)
+
+axiom H7 : (r__split_fields1 = o3)
+
+axiom H8 : (temp___8700 = o2)
+
+axiom H9 : (temp___87001 = o3)
+
+axiom H10 : (result = r__split_fields)
+
+axiom H11 : (result1 = r__split_fields1)
+
+axiom H12 : (temp___8700 = r__split_fields2)
+
+axiom H13 : (temp___87001 = r__split_fields3)
+
+axiom H14 : (to_rep(o4) = f)
+
+axiom H15 : (o5 = ((r__split_fields3[i])[j <- o4]))
+
+axiom H16 : (o6 = (r__split_fields3[i <- o5]))
+
+axiom H17 : (r__split_fields2 = o7)
+
+axiom H18 : (o6 = o8)
+
+axiom H19 : (temp___8705 = o7)
+
+axiom H20 : (temp___87051 = o8)
+
+axiom H21 : (result2 = r__split_fields2)
+
+axiom H22 : (result3 = r__split_fields3)
+
+axiom H23 : (temp___8705 = r__split_fields4)
+
+axiom H24 : (temp___87051 = r__split_fields5)
+
+axiom H25 : (r__split_fields6 = r__split_fields4)
+
+axiom H26 : (r__split_fields7 = r__split_fields5)
+
+axiom H27 : (r__split_fields8 = r__split_fields4)
+
+axiom H28 : (r__split_fields9 = r__split_fields5)
+
+logic m : int
+
+axiom H29 : (1 <= m)
+
+axiom H30 : (m <= 10)
+
+axiom H31 : (not (m = j))
+
  (* File "ar.ads", line 1618, characters 0-0 *)
 goal WP_parameter_def :
-  (forall r__split_fields:(int,et1) farray.
-  forall r__split_fields1:(int,(int,et1) farray) farray. forall o:et1.
-  forall o1:(int,et1) farray. forall o2:(int,et1) farray.
-  forall o3:(int,(int,et1) farray) farray.
-  forall temp___8700:(int,et1) farray.
-  forall temp___87001:(int,(int,et1) farray) farray. forall o4:et1.
-  forall o5:(int,et1) farray. forall o6:(int,(int,et1) farray) farray.
-  forall o7:(int,et1) farray. forall o8:(int,(int,et1) farray) farray.
-  forall temp___8705:(int,et1) farray.
-  forall temp___87051:(int,(int,et1) farray) farray.
-  forall result:(int,et1) farray.
-  forall result1:(int,(int,et1) farray) farray.
-  forall r__split_fields2:(int,et1) farray.
-  forall r__split_fields3:(int,(int,et1) farray) farray.
-  forall result2:(int,et1) farray.
-  forall result3:(int,(int,et1) farray) farray.
-  forall r__split_fields4:(int,et1) farray.
-  forall r__split_fields5:(int,(int,et1) farray) farray.
-  forall r__split_fields6:(int,et1) farray.
-  forall r__split_fields7:(int,(int,et1) farray) farray.
-  forall r__split_fields8:(int,et1) farray.
-  forall r__split_fields9:(int,(int,et1) farray) farray. ((in_range2(i) and
-  (in_range1(j) and (in_range3(e) and (in_range3(f) and
-  (((((((to_rep(o) = e) and (o1 = (r__split_fields[j <- o]))) and
-  ((o1 = o2) and (r__split_fields1 = o3))) and ((temp___8700 = o2) and
-  (temp___87001 = o3))) and (((result = r__split_fields) and
-  (result1 = r__split_fields1)) and ((temp___8700 = r__split_fields2) and
-  (temp___87001 = r__split_fields3)))) and ((((((to_rep(o4) = f) and
-  (o5 = ((r__split_fields3[i])[j <- o4]))) and
-  (o6 = (r__split_fields3[i <- o5]))) and ((r__split_fields2 = o7) and
-  (o6 = o8))) and ((temp___8705 = o7) and (temp___87051 = o8))) and
-  (((result2 = r__split_fields2) and (result3 = r__split_fields3)) and
-  ((temp___8705 = r__split_fields4) and
-  (temp___87051 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields4) and
-  (r__split_fields7 = r__split_fields5)) and
-  ((r__split_fields8 = r__split_fields4) and
-  (r__split_fields9 = r__split_fields5)))))))) ->
-  (forall m:int. (((1 <= m) and (m <= 10)) -> ((not (m = j)) ->
-  (to_rep((r__split_fields6[m])) = to_rep((r__split_fields[m]))))))))
+  (to_rep((r__split_fields6[m])) = to_rep((r__split_fields[m])))

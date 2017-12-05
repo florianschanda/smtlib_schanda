@@ -186,18 +186,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -862,11 +862,25 @@ axiom def_axiom1 :
   (forall temp___698:int.
   ((temp___695(temp___697)[temp___698]) = temp___697)))
 
+logic x : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic x1 : (int,bool) farray
+
+axiom H : true
+
+axiom H1 : (result = x)
+
+axiom H2 : (((bw_xor(y, y) = of_int(0)) -> (x1 = temp___691(true))) and
+  ((not (bw_xor(y, y) = of_int(0))) -> (x1 = temp___691(false))))
+
+logic n : int
+
+axiom H3 : (0 <= n)
+
+axiom H4 : (n <= 255)
+
  (* File "array_aggregates.adb", line 447, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,bool) farray. forall result:(int,bool) farray.
-  forall x1:(int,bool) farray. (((result = x) and (((bw_xor(y,
-  y) = of_int(0)) and (x1 = temp___691(true))) or ((not (bw_xor(y,
-  y) = of_int(0))) and (x1 = temp___691(false))))) ->
-  (forall n:int. (((0 <= n) and (n <= 255)) -> (bool_eq5(x1, 0, 255,
-  temp___695(bool_eq(n, n)), 0, 255) = true)))))
+goal WP_parameter_def : (bool_eq5(x1, 0, 255, temp___695(bool_eq(n, n)), 0,
+  255) = true)

@@ -1124,98 +1124,249 @@ logic g2__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
- (* File "use_private_attributes.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:us_main_type1. forall r__split_fields1:us_private.
-  forall f__split_fields:us_main_type1.
-  forall f__split_fields1:us_main_type2. forall f__split_fields2:us_private.
-  forall g__split_fields:natural. forall p__split_fields:natural.
-  forall rc__split_fields:us_main_type1. forall rc__split_fields1:us_private.
-  forall fc__split_fields:us_main_type1. forall fc__split_fields1:us_private.
-  forall g1__split_fields:us_main_type. forall g1__split_fields1:natural.
-  forall g1__split_fields2:natural. forall g1__split_fields3:us_private.
-  forall g2__split_fields:us_main_type. forall g2__split_fields1:natural.
-  forall g2__split_fields2:natural. forall g2__split_fields3:us_private.
-  forall o:natural. forall o1:us_main_type. forall o2:natural.
-  forall o3:natural. forall o4:us_private.
-  forall use_private_attributes__test_tag__g1__assume:us_main_type.
-  forall use_private_attributes__test_tag__g1__assume1:natural.
-  forall use_private_attributes__test_tag__g1__assume2:natural.
-  forall use_private_attributes__test_tag__g1__assume3:us_private.
-  forall use_private_attributes__test_tag__g1__assume4:int.
-  forall o5:natural. forall o6:us_main_type. forall o7:natural.
-  forall o8:natural. forall o9:us_private.
-  forall use_private_attributes__test_tag__g2__assume:us_main_type.
-  forall use_private_attributes__test_tag__g2__assume1:natural.
-  forall use_private_attributes__test_tag__g2__assume2:natural.
-  forall use_private_attributes__test_tag__g2__assume3:us_private.
-  forall use_private_attributes__test_tag__g2__assume4:int.
-  forall result:us_main_type1. forall result1:us_private.
-  forall rc__split_fields2:us_main_type1.
-  forall rc__split_fields3:us_private. forall result2:us_main_type1.
-  forall result3:us_private. forall fc__split_fields2:us_main_type1.
-  forall fc__split_fields3:us_private. forall result4:us_main_type.
-  forall result5:natural. forall result6:natural. forall result7:us_private.
-  forall g1__split_fields4:us_main_type. forall g1__split_fields5:natural.
-  forall g1__split_fields6:natural. forall g1__split_fields7:us_private.
-  forall result8:us_main_type. forall result9:natural.
-  forall result10:natural. forall result11:us_private.
-  forall g2__split_fields4:us_main_type. forall g2__split_fields5:natural.
-  forall g2__split_fields6:natural. forall g2__split_fields7:us_private.
-  (in_range1(c) -> ((r__attr__tag = us_tag2) -> ((f__attr__tag = us_tag3) ->
-  (((g__attr__tag = us_tag4) and (to_rep(g__split_fields) = 0)) ->
-  (((p__attr__tag = us_tag6) and (to_rep(p__split_fields) = 0)) ->
-  (((((result = rc__split_fields) and (result1 = rc__split_fields1)) and
-  ((r__split_fields = rc__split_fields2) and
-  (r__split_fields1 = rc__split_fields3))) and
-  (rc__attr__tag = r__attr__tag)) -> (((((result2 = fc__split_fields) and
-  (result3 = fc__split_fields1)) and
-  ((f__split_fields = fc__split_fields2) and (hide_ext__1(f__split_fields1,
-  f__split_fields2) = fc__split_fields3))) and
-  (fc__attr__tag = f__attr__tag)) -> (((((to_rep(o) = 1) and ((c1 = o1) and
-  ((o = o2) and ((c11 = o3) and (us_null_ext__ = o4))))) and
-  (((use_private_attributes__test_tag__g1__assume = o1) and
-  ((use_private_attributes__test_tag__g1__assume1 = o2) and
-  ((use_private_attributes__test_tag__g1__assume2 = o3) and
-  (use_private_attributes__test_tag__g1__assume3 = o4)))) and
-  (us_tag5 = use_private_attributes__test_tag__g1__assume4))) and
-  ((((result4 = g1__split_fields) and ((result5 = g1__split_fields1) and
-  ((result6 = g1__split_fields2) and (result7 = g1__split_fields3)))) and
-  ((use_private_attributes__test_tag__g1__assume = g1__split_fields4) and
-  ((use_private_attributes__test_tag__g1__assume1 = g1__split_fields5) and
-  ((use_private_attributes__test_tag__g1__assume2 = g1__split_fields6) and
-  (use_private_attributes__test_tag__g1__assume3 = g1__split_fields7))))) and
-  (g1__attr__tag = us_tag5))) -> (((((to_rep(o5) = 1) and ((c2 = o6) and
-  ((o5 = o7) and ((c21 = o8) and (us_null_ext__ = o9))))) and
-  (((use_private_attributes__test_tag__g2__assume = o6) and
-  ((use_private_attributes__test_tag__g2__assume1 = o7) and
-  ((use_private_attributes__test_tag__g2__assume2 = o8) and
-  (use_private_attributes__test_tag__g2__assume3 = o9)))) and
-  (us_tag5 = use_private_attributes__test_tag__g2__assume4))) and
-  ((((result8 = g2__split_fields) and ((result9 = g2__split_fields1) and
-  ((result10 = g2__split_fields2) and (result11 = g2__split_fields3)))) and
-  ((use_private_attributes__test_tag__g2__assume = g2__split_fields4) and
-  ((use_private_attributes__test_tag__g2__assume1 = g2__split_fields5) and
-  ((use_private_attributes__test_tag__g2__assume2 = g2__split_fields6) and
-  (use_private_attributes__test_tag__g2__assume3 = g2__split_fields7))))) and
-  (g2__attr__tag = us_tag5))) -> ((not (bool_eq4({ us_split_fields3 = {
+logic r__split_fields : us_main_type1
+
+logic r__split_fields1 : us_private
+
+logic f__split_fields : us_main_type1
+
+logic f__split_fields1 : us_main_type2
+
+logic f__split_fields2 : us_private
+
+logic g__split_fields : natural
+
+logic p__split_fields : us_main_type1
+
+logic p__split_fields1 : us_main_type2
+
+logic p__split_fields2 : natural
+
+logic p__split_fields3 : us_private
+
+logic rc__split_fields : us_main_type1
+
+logic rc__split_fields1 : us_private
+
+logic fc__split_fields : us_main_type1
+
+logic fc__split_fields1 : us_private
+
+logic g1__split_fields : us_main_type
+
+logic g1__split_fields1 : natural
+
+logic g1__split_fields2 : natural
+
+logic g1__split_fields3 : us_private
+
+logic g2__split_fields : us_main_type
+
+logic g2__split_fields1 : natural
+
+logic g2__split_fields2 : natural
+
+logic g2__split_fields3 : us_private
+
+logic o : natural
+
+logic o1 : us_main_type
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : us_private
+
+logic use_private_attributes__test_tag__g1__assume : us_main_type
+
+logic use_private_attributes__test_tag__g1__assume1 : natural
+
+logic use_private_attributes__test_tag__g1__assume2 : natural
+
+logic use_private_attributes__test_tag__g1__assume3 : us_private
+
+logic use_private_attributes__test_tag__g1__assume4 : int
+
+logic o5 : natural
+
+logic o6 : us_main_type
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : us_private
+
+logic use_private_attributes__test_tag__g2__assume : us_main_type
+
+logic use_private_attributes__test_tag__g2__assume1 : natural
+
+logic use_private_attributes__test_tag__g2__assume2 : natural
+
+logic use_private_attributes__test_tag__g2__assume3 : us_private
+
+logic use_private_attributes__test_tag__g2__assume4 : int
+
+logic result : us_main_type1
+
+logic result1 : us_private
+
+logic rc__split_fields2 : us_main_type1
+
+logic rc__split_fields3 : us_private
+
+logic result2 : us_main_type1
+
+logic result3 : us_private
+
+logic fc__split_fields2 : us_main_type1
+
+logic fc__split_fields3 : us_private
+
+logic result4 : us_main_type
+
+logic result5 : natural
+
+logic result6 : natural
+
+logic result7 : us_private
+
+logic g1__split_fields4 : us_main_type
+
+logic g1__split_fields5 : natural
+
+logic g1__split_fields6 : natural
+
+logic g1__split_fields7 : us_private
+
+logic result8 : us_main_type
+
+logic result9 : natural
+
+logic result10 : natural
+
+logic result11 : us_private
+
+logic g2__split_fields4 : us_main_type
+
+logic g2__split_fields5 : natural
+
+logic g2__split_fields6 : natural
+
+logic g2__split_fields7 : us_private
+
+axiom H : in_range1(c)
+
+axiom H1 : (r__attr__tag = us_tag2)
+
+axiom H2 : (f__attr__tag = us_tag3)
+
+axiom H3 : ((g__attr__tag = us_tag4) and (to_rep(g__split_fields) = 0))
+
+axiom H4 : ((p__attr__tag = us_tag6) and (to_rep(p__split_fields2) = 0))
+
+axiom H5 : ((result = rc__split_fields) and (result1 = rc__split_fields1))
+
+axiom H6 : ((rc__split_fields2 = r__split_fields) and
+  (rc__split_fields3 = r__split_fields1))
+
+axiom H7 : (rc__attr__tag = r__attr__tag)
+
+axiom H8 : ((result2 = fc__split_fields) and (result3 = fc__split_fields1))
+
+axiom H9 : ((fc__split_fields2 = f__split_fields) and
+  (fc__split_fields3 = hide_ext__1(f__split_fields1, f__split_fields2)))
+
+axiom H10 : (fc__attr__tag = f__attr__tag)
+
+axiom H11 : (to_rep(o) = 1)
+
+axiom H12 : (c1 = o1)
+
+axiom H13 : (o = o2)
+
+axiom H14 : (c11 = o3)
+
+axiom H15 : (us_null_ext__ = o4)
+
+axiom H16 : (use_private_attributes__test_tag__g1__assume = o1)
+
+axiom H17 : (use_private_attributes__test_tag__g1__assume1 = o2)
+
+axiom H18 : (use_private_attributes__test_tag__g1__assume2 = o3)
+
+axiom H19 : (use_private_attributes__test_tag__g1__assume3 = o4)
+
+axiom H20 : (us_tag5 = use_private_attributes__test_tag__g1__assume4)
+
+axiom H21 : ((result4 = g1__split_fields) and
+  ((result5 = g1__split_fields1) and ((result6 = g1__split_fields2) and
+  (result7 = g1__split_fields3))))
+
+axiom H22 :
+  ((g1__split_fields4 = use_private_attributes__test_tag__g1__assume) and
+  ((g1__split_fields5 = use_private_attributes__test_tag__g1__assume1) and
+  ((g1__split_fields6 = use_private_attributes__test_tag__g1__assume2) and
+  (g1__split_fields7 = use_private_attributes__test_tag__g1__assume3))))
+
+axiom H23 : (g1__attr__tag = us_tag5)
+
+axiom H24 : (to_rep(o5) = 1)
+
+axiom H25 : (c2 = o6)
+
+axiom H26 : (o5 = o7)
+
+axiom H27 : (c21 = o8)
+
+axiom H28 : (us_null_ext__ = o9)
+
+axiom H29 : (use_private_attributes__test_tag__g2__assume = o6)
+
+axiom H30 : (use_private_attributes__test_tag__g2__assume1 = o7)
+
+axiom H31 : (use_private_attributes__test_tag__g2__assume2 = o8)
+
+axiom H32 : (use_private_attributes__test_tag__g2__assume3 = o9)
+
+axiom H33 : (us_tag5 = use_private_attributes__test_tag__g2__assume4)
+
+axiom H34 : ((result8 = g2__split_fields) and
+  ((result9 = g2__split_fields1) and ((result10 = g2__split_fields2) and
+  (result11 = g2__split_fields3))))
+
+axiom H35 :
+  ((g2__split_fields4 = use_private_attributes__test_tag__g2__assume) and
+  ((g2__split_fields5 = use_private_attributes__test_tag__g2__assume1) and
+  ((g2__split_fields6 = use_private_attributes__test_tag__g2__assume2) and
+  (g2__split_fields7 = use_private_attributes__test_tag__g2__assume3))))
+
+axiom H36 : (g2__attr__tag = us_tag5)
+
+axiom H37 : (not (bool_eq4({ us_split_fields3 = {
   rec__private_with_attributes__child = c1;
   rec__private_with_attributes__root__f1 = c11; rec__ext__1 = c12 };
   attr__tag1 = c13 }, { us_split_fields3 = {
   rec__private_with_attributes__child = c2;
   rec__private_with_attributes__root__f1 = c21; rec__ext__1 = c22 };
-  attr__tag1 = c23 }) = true)) -> ((to_rep(c11) = to_rep(c21)) ->
-  ((not (((rc__attr__tag = fc__attr__tag) -> (us_dispatch_eq1({
+  attr__tag1 = c23 }) = true))
+
+axiom H38 : (to_rep(c11) = to_rep(c21))
+
+axiom H39 : (not (((rc__attr__tag = fc__attr__tag) and (us_dispatch_eq1({
   us_split_fields5 = { rec__private_with_attributes__root_private_tagged =
   rc__split_fields2; rec__ext__2 = rc__split_fields3 }; attr__tag2 =
   rc__attr__tag }, { us_split_fields5 = {
   rec__private_with_attributes__root_private_tagged = fc__split_fields2;
   rec__ext__2 = fc__split_fields3 }; attr__tag2 = fc__attr__tag
-  }) = true)) and ((not (rc__attr__tag = fc__attr__tag)) ->
-  (false = true)))) -> (bool_eq3({ us_split_fields1 = {
+  }) = true)) or ((not (rc__attr__tag = fc__attr__tag)) and (false = true))))
+
+ (* File "use_private_attributes.adb", line 5, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
   rec__private_with_attributes__root__f = g1__split_fields6; rec__ext__ =
   hide_ext__3(g1__split_fields4, g1__split_fields5, g1__split_fields7) };
   attr__tag = g1__attr__tag }, { us_split_fields1 = {
   rec__private_with_attributes__root__f = g2__split_fields6; rec__ext__ =
   hide_ext__3(g2__split_fields4, g2__split_fields5, g2__split_fields7) };
-  attr__tag = g2__attr__tag }) = true))))))))))))))
+  attr__tag = g2__attr__tag }) = true)

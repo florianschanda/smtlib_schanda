@@ -1176,26 +1176,79 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom c__def_axiom : (c = d)
 
+logic x : t
+
+logic o : t
+
+logic temp___152 : t
+
+logic us : t
+
+logic o1 : t
+
+logic us1 : t
+
+logic o2 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+logic result2 : t
+
+logic x2 : t
+
+logic x3 : t
+
+logic x4 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (d = c)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H3 : dynamic_property(fliteral2, last, x)
+
+axiom H4 : ((o = add(NearestTiesToEven, x, fliteral)) and
+  tqtisFinite(add(NearestTiesToEven, x, fliteral)))
+
+axiom H5 : ((le(o, c) -> (result = true)) and ((not le(o, c)) ->
+  (result = false)))
+
+axiom H6 : ((result = true) -> ((temp___152 = add(NearestTiesToEven, x,
+  fliteral)) and tqtisFinite(add(NearestTiesToEven, x, fliteral))))
+
+axiom H7 : ((result = true) -> ((us = temp___152) and
+  dynamic_property(fliteral2, last, temp___152)))
+
+axiom H8 : ((result = true) -> (o1 = temp___152))
+
+axiom H9 : ((result = true) -> (result1 = x))
+
+axiom H10 : ((result = true) -> (x1 = o1))
+
+axiom H11 : ((not (result = true)) -> ((us1 = fliteral) and
+  dynamic_property(fliteral2, last, fliteral)))
+
+axiom H12 : ((not (result = true)) -> (o2 = fliteral))
+
+axiom H13 : ((not (result = true)) -> (result2 = x))
+
+axiom H14 : ((not (result = true)) -> (x2 = o2))
+
+axiom H15 : ((not (result = true)) -> (x1 = x2))
+
+axiom H16 : (x1 = x3)
+
+axiom H17 : (x4 = x1)
+
  (* File "test_dynamic_property.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall o:t. forall temp___152:t. forall us:t. forall o1:t.
-  forall us1:t. forall o2:t. forall result:bool. forall result1:t.
-  forall x1:t. forall result2:t. forall x2:t. forall x3:t. forall x4:t.
-  ((tqtisFinite(d) and (in_range2(c) and ((d = c) and
-  (dynamic_property(fliteral2, last, x) and (((((o = add(NearestTiesToEven,
-  x, fliteral)) and tqtisFinite(add(NearestTiesToEven, x, fliteral))) and
-  ((le(o, c) and (result = true)) or ((not le(o, c)) and
-  (result = false)))) and (((result = true) and
-  ((((temp___152 = add(NearestTiesToEven, x, fliteral)) and
-  tqtisFinite(add(NearestTiesToEven, x, fliteral))) and
-  (((us = temp___152) and dynamic_property(fliteral2, last, temp___152)) and
-  (o1 = temp___152))) and ((result1 = x) and (x1 = o1)))) or
-  ((not (result = true)) and (((((us1 = fliteral) and
-  dynamic_property(fliteral2, last, fliteral)) and (o2 = fliteral)) and
-  ((result2 = x) and (x2 = o2))) and (x1 = x2))))) and ((x1 = x3) and
-  (x4 = x1))))))) -> le(fliteral, x3)))
+goal WP_parameter_def : le(fliteral, x3)

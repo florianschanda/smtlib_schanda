@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -275,7 +275,11 @@ type index_t__ref = { index_t__content : index_t
 function index_t__ref___projection(a: index_t__ref) : index_t =
   (a).index_t__content
 
+logic the_ptr : int
+
+axiom H : in_range1(the_ptr)
+
+axiom H1 : (not (is_empty(the_ptr) = true))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_ptr:int. (in_range1(the_ptr) ->
-  ((not (is_empty(the_ptr) = true)) -> (1 <= the_ptr))))
+goal WP_parameter_def : (1 <= the_ptr)

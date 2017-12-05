@@ -49,17 +49,35 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
+logic localcst__glob__result : int
+
+logic result : int
+
+logic localcst__glob__result1 : int
+
+logic localcst__glob__result2 : int
+
+logic localcst__glob__result3 : int
+
+logic localcst__glob__result4 : int
+
+logic localcst__glob__result5 : int
+
+logic result1 : int
+
+axiom H : (localcst__glob__result1 = localcst__glob__result2)
+
+axiom H1 : (localcst__glob__result3 = localcst__glob__result1)
+
+axiom H2 : (result = localcst__glob__result)
+
+axiom H3 : (localcst__glob__result1 = 1000)
+
+axiom H4 : (localcst__glob__result4 = localcst__glob__result2)
+
+axiom H5 : (localcst__glob__result5 = localcst__glob__result3)
+
+axiom H6 : (result1 = localcst__glob__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall localcst__glob__result:int. forall result:int.
-  forall localcst__glob__result1:int. forall localcst__glob__result2:int.
-  forall localcst__glob__result3:int. forall localcst__glob__result4:int.
-  forall localcst__glob__result5:int.
-  (forall result1:int.
-  ((((((localcst__glob__result1 = localcst__glob__result2) and
-  (localcst__glob__result3 = localcst__glob__result1)) and
-  ((result = localcst__glob__result) and
-  (localcst__glob__result1 = 1000))) and
-  ((localcst__glob__result4 = localcst__glob__result2) and
-  (localcst__glob__result5 = localcst__glob__result3))) and
-  (result1 = localcst__glob__result4)) -> (localcst__glob__result4 <  4000))))
+goal WP_parameter_def : (localcst__glob__result4 <  4000)

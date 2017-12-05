@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -548,20 +548,39 @@ axiom def_axiom :
 
 axiom last__def_axiom : (last = limit)
 
+logic us : int
+
+logic o : int
+
+logic temp___154 : (int,integer) farray
+
+logic temp___1541 : t1
+
+logic temp___155 : (int,integer) farray
+
+logic temp___1551 : t1
+
+axiom H : in_range(limit)
+
+axiom H1 : ((us = 1) and dynamic_property(1, last, 1))
+
+axiom H2 : (o = 1)
+
+axiom H3 : ({ elts1 = temp___154; rt1 = temp___1541
+  } = p__c__aggregate_def(o, 1, limit))
+
+axiom H4 : (to_rep(first2(temp___1541)) = 1)
+
+axiom H5 : (to_rep(last3(temp___1541)) = limit)
+
+axiom H6 : ((temp___155 = temp___154) and (temp___1551 = temp___1541))
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall us:int. forall o:int. forall temp___154:(int,integer) farray.
-  forall temp___1541:t1. forall temp___155:(int,integer) farray.
-  forall temp___1551:t1. (in_range(limit) -> ((((((us = 1) and
-  dynamic_property(1, last, 1)) and (o = 1)) and ({ elts1 = temp___154; rt1 =
-  temp___1541 } = p__c__aggregate_def(o, 1, limit))) and
-  ((to_rep(first2(temp___1541)) = 1) and
-  ((to_rep(last3(temp___1541)) = limit) and ((temp___155 = temp___154) and
-  (temp___1551 = temp___1541))))) ->
   (((to_rep(first2(temp___1551)) <= to_rep(last3(temp___1551))) ->
   (((1 <= last) ->
   (((to_rep(last3(temp___1551)) - to_rep(first2(temp___1551))) + 1) = ((last - 1) + 1))) and
   ((not (1 <= last)) ->
   (((to_rep(last3(temp___1551)) - to_rep(first2(temp___1551))) + 1) = 0)))) and
   ((not (to_rep(first2(temp___1551)) <= to_rep(last3(temp___1551)))) ->
-  ((1 <= last) -> (0 = ((last - 1) + 1))))))))
+  ((1 <= last) -> (0 = ((last - 1) + 1)))))

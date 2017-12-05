@@ -377,9 +377,9 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  ((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -387,10 +387,10 @@ axiom bool_eq_def4 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq4(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true))) -> (bool_eq5(a, b) = true)) and
-  ((not (((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  5) = true)))) -> (bool_eq5(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -398,7 +398,7 @@ axiom bool_eq_def4 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq4(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true)))) -> (bool_eq5(a, b) = false))))
+  5) = true))))) -> (bool_eq5(a, b) = false))))
 
 logic value__size1 : int
 
@@ -663,12 +663,66 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic mixed_basket__split_discrs : natural
+
+logic has_apple : bool
+
+logic i : int
+
+logic mixed_basket__split_fields : item_t
+
+logic mixed_basket__split_fields1 : item_t
+
+logic mixed_basket__split_fields2 : item_t
+
+logic mixed_basket__split_fields3 : (int,item_t) farray
+
+logic mixed_basket__split_discrs1 : natural
+
+logic result : bool
+
+logic has_apple1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic has_apple2 : bool
+
+logic result2 : int
+
+logic i2 : int
+
+logic has_apple3 : bool
+
+logic result3 : int
+
+logic i3 : int
+
+logic has_apple4 : bool
+
+logic result4 : int
+
+logic i4 : int
+
+logic has_apple5 : bool
+
+logic result5 : int
+
+logic i5 : int
+
+axiom H : ((0 = to_rep(apple_basket__split_discrs)) and
+  (apple_basket__attr__constrained = true))
+
+axiom H1 : (mixed_basket__attr__constrained = false)
+
+axiom H2 : true
+
+axiom H3 : (result = has_apple)
+
+axiom H4 : (has_apple1 = of_int(0))
+
+axiom H5 : (to_rep(mixed_basket__split_discrs1) = 1)
+
  (* File "test.adb", line 71, characters 0-0 *)
-goal WP_parameter_def :
-  (forall has_apple:bool. forall mixed_basket__split_discrs:natural.
-  forall result:bool. forall has_apple1:bool.
-  (((0 = to_rep(apple_basket__split_discrs)) and
-  (apple_basket__attr__constrained = true)) ->
-  ((mixed_basket__attr__constrained = false) -> (((result = has_apple) and
-  (has_apple1 = of_int(0))) -> ((to_rep(mixed_basket__split_discrs) = 1) ->
-  (to_rep(mixed_basket__split_discrs) = 1))))))
+goal WP_parameter_def : (to_rep(mixed_basket__split_discrs1) = 1)

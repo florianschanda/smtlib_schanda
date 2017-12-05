@@ -133,6 +133,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_461 (_ BitVec 8)) (temp___is_init_458 Bool) (temp___skip_constant_459 Bool) (temp___do_toplevel_460 Bool)) Bool true)
 (declare-const total_ones Int)
 (declare-const i Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const total_ones1 Int)
 (declare-const result1 Int)

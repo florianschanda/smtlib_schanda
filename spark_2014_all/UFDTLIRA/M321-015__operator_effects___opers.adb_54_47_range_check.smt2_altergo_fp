@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -135,7 +135,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type t
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -167,7 +167,7 @@ axiom double1__post_axiom :
 
 type t1
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -267,7 +267,7 @@ logic false1__function_guard : bool, int -> prop
 
 type t4
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -298,7 +298,7 @@ logic false2__function_guard : bool, int -> prop
 
 type t5
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -391,7 +391,7 @@ logic true1R__function_guard : bool, int -> prop
 
 type t8
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq11 : int, int -> bool
 
@@ -422,7 +422,7 @@ logic true2R__function_guard : bool, int -> prop
 
 type t9
 
-predicate in_range11(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range11(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -509,17 +509,85 @@ function t__ref___12__projection(a: t__ref11) : t11 = (a).t__content11
 
 axiom fixed_false2R__post_axiom : true
 
+logic a : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic a2 : int
+
+logic result2 : int
+
+logic a3 : int
+
+logic result3 : int
+
+logic a4 : int
+
+axiom H : in_range(a)
+
+axiom H1 : ((o = double1(a)) and in_range2(o))
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = o)
+
+axiom H4 : ((o1 = double2(a1)) and in_range3(o1))
+
+axiom H5 : (result1 = a1)
+
+axiom H6 : (a2 = o1)
+
+axiom H7 : ((o2 = a2) and in_range1(a2))
+
+axiom H8 : ((o3 = ten1(o2)) and in_range4(o3))
+
+axiom H9 : (result2 = a2)
+
+axiom H10 : (a3 = o3)
+
+axiom H11 : ((o4 = a3) and in_range1(a3))
+
+axiom H12 : ((o5 = ten2(o4)) and in_range5(o5))
+
+axiom H13 : (result3 = a3)
+
+axiom H14 : (a4 = o5)
+
+axiom H15 : (not (false1(a4) = true))
+
+axiom H16 : (not (false2(a4) = true))
+
+axiom H17 : (fixed_false1R(a4) = true)
+
+axiom H18 : (fixed_false2R(a4) = true)
+
+axiom H19 : (true1R(a4) = true)
+
+axiom H20 : (true2R(a4) = true)
+
  (* File "opers.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall result:int. forall a1:int.
-  forall result1:int. forall a2:int. forall result2:int. forall a3:int.
-  forall result3:int. forall a4:int. (in_range(a) -> ((((o = double1(a)) and
-  in_range2(o)) and ((result = a) and (a1 = o))) -> ((((o1 = double2(a1)) and
-  in_range3(o1)) and ((result1 = a1) and (a2 = o1))) -> (((((o2 = a2) and
-  in_range1(a2)) and ((o3 = ten1(o2)) and in_range4(o3))) and
-  ((result2 = a2) and (a3 = o3))) -> (((((o4 = a3) and in_range1(a3)) and
-  ((o5 = ten2(o4)) and in_range5(o5))) and ((result3 = a3) and (a4 = o5))) ->
-  ((not (false1(a4) = true)) -> ((not (false2(a4) = true)) ->
-  ((fixed_false1R(a4) = true) -> ((fixed_false2R(a4) = true) ->
-  ((true1R(a4) = true) -> ((true2R(a4) = true) -> in_range1(a4)))))))))))))
+goal WP_parameter_def : in_range1(a4)

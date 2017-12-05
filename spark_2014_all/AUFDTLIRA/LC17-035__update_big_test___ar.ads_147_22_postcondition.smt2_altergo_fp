@@ -257,11 +257,36 @@ axiom def_axiom :
   ((not (temp___579 = temp___577)) -> ((temp___574(temp___576, temp___577,
   temp___578)[temp___579]) = (temp___576[temp___579])))))))
 
+logic a : (int,et1) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : (to_rep(o) = e)
+
+axiom H3 : (o1 = (a[i <- o]))
+
+axiom H4 : (result = a)
+
+axiom H5 : (a1 = o1)
+
+axiom H6 : (a1 = a2)
+
+axiom H7 : (a3 = a1)
+
  (* File "ar.ads", line 140, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall o:et1. forall o1:(int,et1) farray.
-  forall result:(int,et1) farray. forall a1:(int,et1) farray.
-  forall a2:(int,et1) farray. forall a3:(int,et1) farray. ((in_range(i) and
-  (in_range1(e) and ((((to_rep(o) = e) and (o1 = (a[i <- o]))) and
-  ((result = a) and (a1 = o1))) and ((a1 = a2) and (a3 = a1))))) ->
-  (bool_eq3(a2, 1, 10, temp___574(a, i, e), 1, 10) = true)))
+goal WP_parameter_def : (bool_eq3(a2, 1, 10, temp___574(a, i, e), 1,
+  10) = true)

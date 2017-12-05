@@ -75,6 +75,7 @@
 (declare-const exp2 Int)
 (assert (= result val__))
 (assert (= val__1 ((_ int2bv 32) 12329)))
+(assert true)
 (assert (= result1 exp))
 (assert (= exp1 1))
 (assert (<= 1 exp1))

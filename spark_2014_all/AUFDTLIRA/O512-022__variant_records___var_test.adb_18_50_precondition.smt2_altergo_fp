@@ -326,23 +326,23 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__var__decision__kind) = to_rep1(((b).us_split_discrs1).rec__var__decision__kind)) and
-  (to_rep2(((a).us_split_fields1).rec__var__decision__id) = to_rep2(((b).us_split_fields1).rec__var__decision__id))) and
-  (var__decision__operand__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__var__decision__operand) = to_rep2(((b).us_split_fields1).rec__var__decision__operand)))) and
-  (var__decision__left__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__var__decision__left) = to_rep2(((b).us_split_fields1).rec__var__decision__left)))) and
-  (var__decision__right__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__var__decision__right) = to_rep2(((b).us_split_fields1).rec__var__decision__right)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__var__decision__kind) = to_rep1(((b).us_split_discrs1).rec__var__decision__kind)) and
-  (to_rep2(((a).us_split_fields1).rec__var__decision__id) = to_rep2(((b).us_split_fields1).rec__var__decision__id))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__var__decision__kind) = to_rep1(((b).us_split_discrs1).rec__var__decision__kind)) and
+  ((((to_rep2(((a).us_split_fields1).rec__var__decision__id) = to_rep2(((b).us_split_fields1).rec__var__decision__id)) and
   (var__decision__operand__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__var__decision__operand) = to_rep2(((b).us_split_fields1).rec__var__decision__operand)))) and
   (var__decision__left__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__var__decision__left) = to_rep2(((b).us_split_fields1).rec__var__decision__left)))) and
   (var__decision__right__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__var__decision__right) = to_rep2(((b).us_split_fields1).rec__var__decision__right))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__var__decision__kind) = to_rep1(((b).us_split_discrs1).rec__var__decision__kind)) and
+  ((((to_rep2(((a).us_split_fields1).rec__var__decision__id) = to_rep2(((b).us_split_fields1).rec__var__decision__id)) and
+  (var__decision__operand__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__var__decision__operand) = to_rep2(((b).us_split_fields1).rec__var__decision__operand)))) and
+  (var__decision__left__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__var__decision__left) = to_rep2(((b).us_split_fields1).rec__var__decision__left)))) and
+  (var__decision__right__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__var__decision__right) = to_rep2(((b).us_split_fields1).rec__var__decision__right)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -662,41 +662,166 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "tristates.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall decision_table:(int,us_rep) farray.
-  forall condition_values:(int,tristate) farray.
-  forall d__split_fields:node_id. forall d__split_fields1:node_id.
-  forall d__split_fields2:node_id. forall d__split_fields3:node_id.
-  forall d__split_discrs:decision_kind. forall kind:int.
-  forall result:node_id. forall result1:node_id. forall result2:node_id.
-  forall result3:node_id. forall d__split_fields4:node_id.
-  forall d__split_fields5:node_id. forall d__split_fields6:node_id.
-  forall d__split_fields7:node_id. forall result4:decision_kind.
-  forall d__split_discrs1:decision_kind. forall result5:int.
-  forall kind1:int.
-  ((forall temp___175:int. (((1 <= temp___175) and (temp___175 <= 1000)) ->
-   (((decision_table[temp___175])).attr__constrained = false))) ->
-  (in_range3(root_id) ->
-  ((forall x:int. (((1 <= x) and (x <= 1000)) ->
-   (not (to_rep((condition_values[x])) = 2)))) ->
-  (((({ us_split_fields__content = { rec__var__decision__id = result;
-  rec__var__decision__operand = result1; rec__var__decision__left = result2;
-  rec__var__decision__right = result3 } } = { us_split_fields__content = {
-  rec__var__decision__id = d__split_fields; rec__var__decision__operand =
-  d__split_fields1; rec__var__decision__left = d__split_fields2;
-  rec__var__decision__right = d__split_fields3 } }) and ({
-  rec__var__decision__id = d__split_fields4; rec__var__decision__operand =
-  d__split_fields5; rec__var__decision__left = d__split_fields6;
-  rec__var__decision__right = d__split_fields7
-  } = ((decision_table[root_id])).us_split_fields1)) and ((({
-  us_split_discrs__content = { rec__var__decision__kind = result4 } } = {
-  us_split_discrs__content = { rec__var__decision__kind = d__split_discrs }
-  }) and ({ rec__var__decision__kind = d__split_discrs1
-  } = ((decision_table[root_id])).us_split_discrs1)) and
-  (d__attr__constrained = false))) -> ((({ int__content = result5 } = {
-  int__content = kind }) and (kind1 = to_rep1(d__split_discrs1))) ->
-  (in_range2(kind1) -> ((not (kind1 = 0)) -> ((not (kind1 = 1)) ->
-  ((kind1 = 2) ->
+logic decision_table : (int,us_rep) farray
+
+logic condition_values : (int,tristate) farray
+
+logic d__split_fields : node_id
+
+logic d__split_fields1 : node_id
+
+logic d__split_fields2 : node_id
+
+logic d__split_fields3 : node_id
+
+logic d__split_discrs : decision_kind
+
+logic kind : int
+
+logic var_test__decision_eval__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : node_id
+
+logic result1 : node_id
+
+logic result2 : node_id
+
+logic result3 : node_id
+
+logic d__split_fields4 : node_id
+
+logic d__split_fields5 : node_id
+
+logic d__split_fields6 : node_id
+
+logic d__split_fields7 : node_id
+
+logic result4 : decision_kind
+
+logic d__split_discrs1 : decision_kind
+
+logic result5 : int
+
+logic kind1 : int
+
+logic result6 : int
+
+logic var_test__decision_eval__result1 : int
+
+logic result7 : int
+
+logic var_test__decision_eval__result2 : int
+
+logic result8 : int
+
+logic var_test__decision_eval__result3 : int
+
+logic result9 : int
+
+logic var_test__decision_eval__result4 : int
+
+logic var_test__decision_eval__result5 : int
+
+logic var_test__decision_eval__result6 : int
+
+logic var_test__decision_eval__result7 : int
+
+logic var_test__decision_eval__result8 : int
+
+logic var_test__decision_eval__result9 : int
+
+logic var_test__decision_eval__result10 : int
+
+logic var_test__decision_eval__result11 : int
+
+logic var_test__decision_eval__result12 : int
+
+logic d__split_fields8 : node_id
+
+logic d__split_fields9 : node_id
+
+logic d__split_fields10 : node_id
+
+logic d__split_fields11 : node_id
+
+logic d__split_discrs2 : decision_kind
+
+logic kind2 : int
+
+logic var_test__decision_eval__result13 : int
+
+logic d__split_fields12 : node_id
+
+logic d__split_fields13 : node_id
+
+logic d__split_fields14 : node_id
+
+logic d__split_fields15 : node_id
+
+logic d__split_discrs3 : decision_kind
+
+logic kind3 : int
+
+logic var_test__decision_eval__result14 : int
+
+axiom H :
+  (forall temp___175:int. (((1 <= temp___175) and (temp___175 <= 1000)) ->
+  (((decision_table[temp___175])).attr__constrained = false)))
+
+axiom H1 : in_range3(root_id)
+
+axiom H2 :
   (forall x:int. (((1 <= x) and (x <= 1000)) ->
-  (not (to_rep((condition_values[x])) = 2))))))))))))))
+  (not (to_rep((condition_values[x])) = 2))))
+
+axiom H3 : ((result = d__split_fields) and ((result1 = d__split_fields1) and
+  ((result2 = d__split_fields2) and (result3 = d__split_fields3))))
+
+axiom H4 : ({ rec__var__decision__id = d__split_fields4;
+  rec__var__decision__operand = d__split_fields5; rec__var__decision__left =
+  d__split_fields6; rec__var__decision__right = d__split_fields7
+  } = ((decision_table[root_id])).us_split_fields1)
+
+axiom H5 : (result4 = d__split_discrs)
+
+axiom H6 : ({ rec__var__decision__kind = d__split_discrs1
+  } = ((decision_table[root_id])).us_split_discrs1)
+
+axiom H7 : (d__attr__constrained = false)
+
+axiom H8 : (result5 = kind)
+
+axiom H9 : (kind1 = to_rep1(d__split_discrs1))
+
+axiom H10 : in_range2(kind1)
+
+axiom H11 : (not (kind1 = 0))
+
+axiom H12 : (not (kind1 = 1))
+
+axiom H13 : (kind1 = 2)
+
+logic x : int
+
+axiom H14 : (1 <= x)
+
+axiom H15 : (x <= 1000)
+
+ (* File "tristates.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (not (to_rep((condition_values[x])) = 2))

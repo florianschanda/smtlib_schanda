@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -523,35 +523,71 @@ logic r22 : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r1__split_fields : bool
+
+logic r1__split_fields1 : length_t
+
+logic r1__split_fields2 : (int,integer) farray
+
+logic result : bool
+
+logic result1 : length_t
+
+logic result2 : (int,integer) farray
+
+logic r1__split_fields3 : bool
+
+logic r1__split_fields4 : length_t
+
+logic r1__split_fields5 : (int,integer) farray
+
+logic r1__split_fields6 : bool
+
+logic r1__split_fields7 : length_t
+
+logic r1__split_fields8 : (int,integer) farray
+
+logic r1__split_fields9 : bool
+
+logic r1__split_fields10 : length_t
+
+logic r1__split_fields11 : (int,integer) farray
+
+axiom H : (result = r1__split_fields)
+
+axiom H1 : (result1 = r1__split_fields1)
+
+axiom H2 : (result2 = r1__split_fields2)
+
+axiom H3 : (r2 = r1__split_fields3)
+
+axiom H4 : (r1__split_fields1 = r1__split_fields4)
+
+axiom H5 : (r1__split_fields2 = r1__split_fields5)
+
+axiom H6 : (r1__split_fields6 = r1__split_fields3)
+
+axiom H7 : (r1__split_fields7 = r1__split_fields4)
+
+axiom H8 : (r1__split_fields8 = r1__split_fields5)
+
+axiom H9 : (r1__split_fields9 = r1__split_fields3)
+
+axiom H10 : (r1__split_fields10 = r1__split_fields4)
+
+axiom H11 : (r1__split_fields11 = r1__split_fields5)
+
+axiom H12 : (bool_eq5({ us_split_fields1 = { rec__stack__t__len =
+  r1__split_fields7; rec__stack__t__elements = r1__split_fields8 } }, {
+  us_split_fields1 = { rec__stack__t__len = r21; rec__stack__t__elements =
+  r22 } }) = true)
+
  (* File "records.adb", line 498, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r1__split_fields:bool. forall r1__split_fields1:length_t.
-  forall r1__split_fields2:(int,integer) farray. forall result:bool.
-  forall result1:length_t. forall result2:(int,integer) farray.
-  forall r1__split_fields3:bool. forall r1__split_fields4:length_t.
-  forall r1__split_fields5:(int,integer) farray.
-  forall r1__split_fields6:bool. forall r1__split_fields7:length_t.
-  forall r1__split_fields8:(int,integer) farray.
-  forall r1__split_fields9:bool. forall r1__split_fields10:length_t.
-  forall r1__split_fields11:(int,integer) farray.
-  (((((result = r1__split_fields) and ((result1 = r1__split_fields1) and
-  (result2 = r1__split_fields2))) and ((r2 = r1__split_fields3) and
-  ((r1__split_fields1 = r1__split_fields4) and
-  (r1__split_fields2 = r1__split_fields5)))) and
-  (((r1__split_fields6 = r1__split_fields3) and
-  ((r1__split_fields7 = r1__split_fields4) and
-  (r1__split_fields8 = r1__split_fields5))) and
-  ((r1__split_fields9 = r1__split_fields3) and
-  ((r1__split_fields10 = r1__split_fields4) and
-  (r1__split_fields11 = r1__split_fields5))))) -> ((bool_eq5({
-  us_split_fields1 = { rec__stack__t__len = r1__split_fields7;
-  rec__stack__t__elements = r1__split_fields8 } }, { us_split_fields1 = {
-  rec__stack__t__len = r21; rec__stack__t__elements = r22 } }) = true) ->
-  (bool_eq6({ us_split_fields3 = {
+goal WP_parameter_def : (bool_eq6({ us_split_fields3 = {
   rec__records_prooffuncs__part_private__unrelated = r1__split_fields6;
   rec__records_prooffuncs__part_private__hidden = { us_split_fields1 = {
   rec__stack__t__len = r1__split_fields7; rec__stack__t__elements =
   r1__split_fields8 } } } }, { us_split_fields3 = {
   rec__records_prooffuncs__part_private__unrelated = r2;
   rec__records_prooffuncs__part_private__hidden = { us_split_fields1 = {
-  rec__stack__t__len = r21; rec__stack__t__elements = r22 } } } }) = true))))
+  rec__stack__t__len = r21; rec__stack__t__elements = r22 } } } }) = true)

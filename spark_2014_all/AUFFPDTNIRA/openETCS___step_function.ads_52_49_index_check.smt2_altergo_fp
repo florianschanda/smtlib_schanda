@@ -1525,6 +1525,25 @@ logic sfun21 : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : function_range
+
+logic o2 : float1
+
+logic o3 : function_range
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : int
+
+axiom H : (1 <= i)
+
+axiom H1 : (i <= to_rep(sfun1))
+
  (* File "step_function.ads", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (((1 <= i) and (i <= to_rep(sfun1))) -> (0 <= i)))
+goal WP_parameter_def : (0 <= i)

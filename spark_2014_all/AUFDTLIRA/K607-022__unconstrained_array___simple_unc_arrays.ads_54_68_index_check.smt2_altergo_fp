@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -282,7 +282,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -590,66 +590,167 @@ function t36b__ref___projection(a3: t36b__ref) : integer = (a3).t36b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall i:int. forall simple_unc_arrays__max__result:int.
-  forall us:int. forall o:int. forall o1:value. forall o2:int.
-  forall temp___869:int. forall temp___868:int. forall o3:int.
-  forall o4:value. forall o5:int. forall o6:int. forall o7:value.
-  forall o8:int. forall j:int. forall result:int. forall res1:int.
-  forall result1:int. forall i1:int. forall res2:int. forall i2:int.
-  forall result2:bool. forall result3:int. forall res3:int. forall res4:int.
-  forall i3:int. forall res5:int. forall i4:int. forall res6:int.
-  forall i5:int. forall res7:int. forall i6:int. forall result4:int.
-  forall simple_unc_arrays__max__result1:int. forall res8:int. forall i7:int.
-  forall simple_unc_arrays__max__result2:int. forall res9:int. forall i8:int.
-  forall simple_unc_arrays__max__result3:int. forall res10:int.
-  forall i9:int. forall simple_unc_arrays__max__result4:int.
-  forall res11:int. forall i10:int.
-  forall simple_unc_arrays__max__result5:int. forall result5:bool.
-  ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic res : int
+
+logic i : int
+
+logic simple_unc_arrays__max__result : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic temp___863 : int
+
+logic temp___862 : int
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : value
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic res2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic res3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic res4 : int
+
+logic i4 : int
+
+logic res5 : int
+
+logic i5 : int
+
+logic res6 : int
+
+logic i6 : int
+
+logic res7 : int
+
+logic i7 : int
+
+logic res8 : int
+
+logic i8 : int
+
+logic res9 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic simple_unc_arrays__max__result1 : int
+
+logic res10 : int
+
+logic i10 : int
+
+logic simple_unc_arrays__max__result2 : int
+
+logic res11 : int
+
+logic i11 : int
+
+logic simple_unc_arrays__max__result3 : int
+
+logic res12 : int
+
+logic i12 : int
+
+logic simple_unc_arrays__max__result4 : int
+
+logic res13 : int
+
+logic i13 : int
+
+logic simple_unc_arrays__max__result5 : int
+
+logic result6 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> ((not (empty({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : (not (empty({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true)) ->
-  (((((us = to_rep(a)) and in_range1(to_rep(a))) and
+  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true))
+
+axiom H2 : ((((us = to_rep(a)) and in_range1(to_rep(a))) and
   ((((simple_unc_arrays__max__result1 = simple_unc_arrays__max__result2) and
-  (({ int__content = i7 } = { int__content = i5 }) and ({ int__content = res8
-  } = { int__content = res6 }))) and
+  ((i10 = i8) and (res10 = res8))) and
   ((simple_unc_arrays__max__result3 = simple_unc_arrays__max__result1) and
-  ((i8 = i6) and (res9 = res7)))) and ((((((((to_rep2(first(a2)) <= 1) and
+  ((i11 = i9) and (res11 = res9)))) and ((((((((to_rep2(first(a2)) <= 1) and
   (1 <= to_rep2(last(a2)))) and (o = 1)) and (o1 = (a1[o]))) and
-  (o2 = to_rep1(o1))) and (({ int__content = result } = { int__content = res
-  }) and (res1 = o2))) and in_range2(res1)) and (((to_rep(a) = r35b) and
-  in_range1(r35b)) and (((({ int__content = result1 } = { int__content = i
-  }) and (i1 = 2)) and ((((2 <= i1) and (i1 <= r35b)) and
-  ((((temp___869 = i1) and ((temp___868 = res1) and
-  ((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
-   (to_rep1((a1[j1])) <= res2))) and
-  ((((((-2147483648) <= 2147483647) -> in_range2(res2)) and ((2 <= r35b) ->
-  dynamic_property2(2, r35b, i2))) and ((2 <= i2) and (i2 <= r35b))) and
-  ((((((((to_rep2(first(a2)) <= i2) and (i2 <= to_rep2(last(a2)))) and
-  (o3 = i2)) and (o4 = (a1[o3]))) and (o5 = to_rep1(o4))) and
-  (((res2 <  o5) and (result2 = true)) or ((not (res2 <  o5)) and
-  (result2 = false)))) and (((result2 = true) and
+  (o2 = to_rep1(o1))) and ((result = res) and (res1 = o2))) and
+  in_range2(res1)) and (((to_rep(a) = r35b) and in_range1(r35b)) and
+  ((((result1 = i) and (i1 = 2)) and ((((2 <= i1) and (i1 <= r35b)) ->
+  ((((temp___863 = i1) and ((temp___862 = res1) and
+  ((forall j3:int. (((1 <= j3) and (j3 <= (i2 - 1))) ->
+   (to_rep1((a1[j3])) <= res2))) and ((((((- 2147483648) <= 2147483647) ->
+  in_range2(res2)) and ((2 <= r35b) -> dynamic_property2(2, r35b, i2))) and
+  ((2 <= i2) and (i2 <= r35b))) and ((((((((to_rep2(first(a2)) <= i2) and
+  (i2 <= to_rep2(last(a2)))) and (o3 = i2)) and (o4 = (a1[o3]))) and
+  (o5 = to_rep1(o4))) and (((res2 <  o5) -> (result2 = true)) and
+  ((not (res2 <  o5)) -> (result2 = false)))) and (((result2 = true) ->
   ((((((to_rep2(first(a2)) <= i2) and (i2 <= to_rep2(last(a2)))) and
   (o6 = i2)) and (o7 = (a1[o6]))) and (o8 = to_rep1(o7))) and
-  ((res2 = result3) and (res3 = o8)))) or ((not (result2 = true)) and
-  (res3 = res2)))) and (i2 = r35b)))))) and (((i2 = i3) and
-  (res3 = res4)) and ((i4 = i2) and (res5 = res3)))) and ((({ int__content =
-  i5 } = { int__content = i3 }) and ({ int__content = res6 } = {
-  int__content = res4 })) and ((i6 = i4) and (res7 = res5))))) or
-  ((not ((2 <= i1) and (i1 <= r35b))) and (((i1 = i5) and (res1 = res6)) and
-  ((i6 = i1) and (res7 = res1)))))) and (({ int__content = result4 } = {
-  int__content = simple_unc_arrays__max__result }) and
-  (simple_unc_arrays__max__result1 = res6))))))) and ((({ int__content =
-  simple_unc_arrays__max__result4 } = { int__content =
-  simple_unc_arrays__max__result2 }) and (({ int__content = i9 } = {
-  int__content = i7 }) and ({ int__content = res10 } = { int__content = res8
-  }))) and
+  ((res2 = result3) and (res3 = o8)))) and ((not (result2 = true)) ->
+  (res3 = res2)))) and (i2 = r35b)))))) and (((i2 = i6) and
+  (res3 = res6)) and ((i7 = i2) and (res7 = res3)))) and (((i8 = i6) and
+  (res8 = res6)) and ((i9 = i7) and (res9 = res7))))) and
+  ((not ((2 <= i1) and (i1 <= r35b))) -> (((i1 = i8) and (res1 = res8)) and
+  ((i9 = i1) and (res9 = res1)))))) and
+  ((result5 = simple_unc_arrays__max__result) and
+  (simple_unc_arrays__max__result1 = res8))))))) and
+  (((simple_unc_arrays__max__result4 = simple_unc_arrays__max__result2) and
+  ((i12 = i10) and (res12 = res10))) and
   ((simple_unc_arrays__max__result5 = simple_unc_arrays__max__result3) and
-  ((i10 = i8) and (res11 = res9))))) -> (((result5 = true) <->
-  (forall j1:int. (((1 <= j1) and (j1 <= to_rep(a))) ->
-  (to_rep1((a1[j1])) <= simple_unc_arrays__max__result4)))) ->
-  ((result5 = true) -> (((1 <= j) and (j <= to_rep(a))) ->
-  (to_rep2(first(a2)) <= j))))))))
+  ((i13 = i11) and (res13 = res11)))))
+
+axiom H3 : ((result6 = true) <->
+  (forall j3:int. (((1 <= j3) and (j3 <= to_rep(a))) ->
+  (to_rep1((a1[j3])) <= simple_unc_arrays__max__result4))))
+
+axiom H4 : (result6 = true)
+
+axiom H5 : (1 <= j1)
+
+axiom H6 : (j1 <= to_rep(a))
+
+ (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(a2)) <= j1)

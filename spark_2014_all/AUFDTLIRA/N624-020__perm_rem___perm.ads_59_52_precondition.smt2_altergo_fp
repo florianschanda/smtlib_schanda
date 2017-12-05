@@ -295,7 +295,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -599,17 +599,203 @@ axiom bb__def_axiom : ({ elts = bb; rt = bb1 } = remove({ elts = b; rt = b1
 axiom bb2__def_axiom : ({ elts = bb2; rt = bb21 } = remove({ elts = b; rt =
   b1 }, ib2))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. forall result1:bool. (dynamic_property(1, 100,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (dynamic_property(1, 100,
-  to_rep1(first(b1)), to_rep1(last(b1))) -> (in_range3(ia) ->
-  (in_range3(ib) -> (((result = invariant__({ elts = a; rt = a1 })) and
+logic h : int
+
+logic ia2 : int
+
+logic perm__remove_perm__result : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic perm__remove_perm__ib2__assume : int
+
+logic perm__remove_perm__aa__assume : (int,natural) farray
+
+logic perm__remove_perm__aa__assume1 : t
+
+logic perm__remove_perm__bb__assume : (int,natural) farray
+
+logic perm__remove_perm__bb__assume1 : t
+
+logic perm__remove_perm__bb2__assume : (int,natural) farray
+
+logic perm__remove_perm__bb2__assume1 : t
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : (int,natural) farray
+
+logic o9 : t
+
+logic o10 : (int,natural) farray
+
+logic o11 : t
+
+logic o12 : int
+
+logic o13 : (int,natural) farray
+
+logic o14 : t
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : (int,natural) farray
+
+logic o21 : t
+
+logic o22 : (int,natural) farray
+
+logic o23 : t
+
+logic o24 : (int,natural) farray
+
+logic o25 : t
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : (int,natural) farray
+
+logic o29 : t
+
+logic o30 : (int,natural) farray
+
+logic o31 : t
+
+logic ia21 : int
+
+logic perm__remove_perm__result1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic h1 : int
+
+logic result4 : int
+
+logic perm__remove_perm__result2 : int
+
+logic result5 : int
+
+logic h2 : int
+
+logic result6 : int
+
+logic h3 : int
+
+logic result7 : int
+
+logic ia22 : int
+
+logic result8 : int
+
+logic h4 : int
+
+logic result9 : int
+
+logic h5 : int
+
+logic result10 : int
+
+logic ia23 : int
+
+logic result11 : int
+
+logic h6 : int
+
+logic result12 : int
+
+logic h7 : int
+
+logic result13 : int
+
+logic h8 : int
+
+logic result14 : int
+
+logic perm__remove_perm__result3 : int
+
+logic perm__remove_perm__result4 : int
+
+logic perm__remove_perm__result5 : int
+
+logic h9 : int
+
+logic ia24 : int
+
+logic perm__remove_perm__result6 : int
+
+logic h10 : int
+
+logic ia25 : int
+
+logic perm__remove_perm__result7 : int
+
+logic h11 : int
+
+logic ia26 : int
+
+logic perm__remove_perm__result8 : int
+
+logic h12 : int
+
+logic ia27 : int
+
+logic perm__remove_perm__result9 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : in_range3(ia)
+
+axiom H3 : in_range3(ib)
+
+axiom H4 : ((result = invariant__({ elts = a; rt = a1 })) and
   ((result = true) <-> ((to_rep1(first(a1)) = 1) and
-  (0 <= to_rep1(last(a1)))))) -> ((result = true) ->
-  (((result1 = invariant__({ elts = b; rt = b1 })) and ((result1 = true) <->
-  ((to_rep1(first(b1)) = 1) and (0 <= to_rep1(last(b1)))))) ->
-  ((result1 = true) -> (((to_rep1(first(a1)) <= ia) and
-  (ia <= to_rep1(last(a1)))) -> (((to_rep1(first(b1)) <= ib) and
-  (ib <= to_rep1(last(b1)))) -> (invariant__({ elts = a; rt = a1
-  }) = true))))))))))))
+  (0 <= to_rep1(last(a1))))))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((result1 = invariant__({ elts = b; rt = b1 })) and
+  ((result1 = true) <-> ((to_rep1(first(b1)) = 1) and
+  (0 <= to_rep1(last(b1))))))
+
+axiom H7 : (result1 = true)
+
+axiom H8 : (to_rep1(first(a1)) <= ia)
+
+axiom H9 : (ia <= to_rep1(last(a1)))
+
+axiom H10 : (to_rep1(first(b1)) <= ib)
+
+axiom H11 : (ib <= to_rep1(last(b1)))
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = a; rt = a1 }) = true)

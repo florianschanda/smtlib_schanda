@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcoordinate_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -297,9 +297,48 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 axiom min_distance__def_axiom : (min_distance = min)
 
+logic status : int
+
+logic delta_x : int
+
+logic delta_y : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : int
+
+logic delta_x1 : int
+
+logic result1 : int
+
+logic delta_y1 : int
+
+axiom H : in_range1(min)
+
+axiom H1 : in_range1(min_distance)
+
+axiom H2 : (min = min_distance)
+
+axiom H3 : ((0 <= 2) -> in_range2(status))
+
+axiom H4 : ((o = abs_int((to_rep(a) - to_rep(b)))) and
+  in_range(abs_int((to_rep(a) - to_rep(b)))))
+
  (* File "raster_graphics.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall status:int. forall o:int. (in_range1(min) ->
-  (in_range1(min_distance) -> ((min = min_distance) -> (((0 <= 2) ->
-  in_range2(status)) -> (((o = abs_int((to_rep(a) - to_rep(b)))) and
-  in_range(abs_int((to_rep(a) - to_rep(b))))) -> in_range1(o)))))))
+goal WP_parameter_def : in_range1(o)

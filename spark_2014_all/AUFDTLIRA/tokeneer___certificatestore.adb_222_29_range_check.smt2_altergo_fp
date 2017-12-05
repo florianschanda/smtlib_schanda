@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -847,34 +847,121 @@ type t17b__ref = { t17b__content : us_t4
 
 function t17b__ref___projection(a: t17b__ref) : us_t4 = (a).t17b__content
 
-logic temp___1046 : int, int, int -> us_t4
+logic temp___1450 : int, int, int -> us_t4
 
 axiom def_axiom :
-  (forall temp___1048:int. forall temp___1049:int. forall temp___1050:int.
-  ((dynamic_property(1, 2147483647, temp___1049, temp___1050) ->
-  ((to_rep1(first8((temp___1046(temp___1048, temp___1049,
-  temp___1050)).rt4)) = temp___1049) and
-  (to_rep1(last8((temp___1046(temp___1048, temp___1049,
-  temp___1050)).rt4)) = temp___1050))) and
-  (forall temp___1051:int. (((temp___1046(temp___1048, temp___1049,
-  temp___1050)).elts4[temp___1051]) = of_rep(temp___1048)))))
+  (forall temp___1452:int. forall temp___1453:int. forall temp___1454:int.
+  ((dynamic_property(1, 2147483647, temp___1453, temp___1454) ->
+  ((to_rep1(first8((temp___1450(temp___1452, temp___1453,
+  temp___1454)).rt4)) = temp___1453) and
+  (to_rep1(last8((temp___1450(temp___1452, temp___1453,
+  temp___1454)).rt4)) = temp___1454))) and
+  (forall temp___1455:int. (((temp___1450(temp___1452, temp___1453,
+  temp___1454)).elts4[temp___1455]) = of_rep(temp___1452)))))
+
+logic text : (int,character) farray
+
+logic length5 : int
+
+logic str : (int,character) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : (int,character) farray
+
+logic temp___1444 : (int,character) farray
+
+logic temp___14441 : t2
+
+logic temp___1445 : (int,character) farray
+
+logic temp___14451 : t1
+
+logic o5 : (int,character) farray
+
+logic temp___1447 : (int,character) farray
+
+logic temp___14471 : t1
+
+logic temp___1448 : (int,character) farray
+
+logic temp___14481 : t1
+
+logic o6 : (int,character) farray
+
+logic temp___1457 : (int,character) farray
+
+logic temp___14571 : t4
+
+logic temp___1458 : (int,character) farray
+
+logic temp___14581 : t3
+
+logic o7 : (int,character) farray
+
+logic temp___1460 : (int,character) farray
+
+logic temp___14601 : t3
+
+logic result : (int,character) farray
+
+logic str1 : (int,character) farray
+
+logic result1 : int
+
+logic length6 : int
+
+logic result2 : (int,character) farray
+
+logic text1 : (int,character) farray
+
+axiom H : in_range3(num)
+
+axiom H1 : ((1 <= 10) -> in_range4(length5))
+
+axiom H2 : (result = str)
+
+axiom H3 : (str1 = (to_string(attr__ATTRIBUTE_IMAGE3(num))).elts)
+
+axiom H4 :
+  (to_rep1(str__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(num))).rt)))
+
+axiom H5 :
+  (to_rep1(str__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(num))).rt)))
+
+axiom H6 : dynamic_property(1, 2147483647, to_rep1(str__first),
+  to_rep1(str__last))
+
+axiom H7 : ((to_rep1(str__first) <= to_rep1(str__last)) ->
+  (o = ((to_rep1(str__last) - to_rep1(str__first)) + 1)))
+
+axiom H8 : ((not (to_rep1(str__first) <= to_rep1(str__last))) -> (o = 0))
+
+axiom H9 : ((o1 = o) and in_range(o))
+
+axiom H10 : (o2 = (o1 - 1))
+
+axiom H11 : ((o3 = o2) and in_range4(o2))
+
+axiom H12 : (result1 = length5)
+
+axiom H13 : (length6 = o3)
+
+axiom H14 : (length6 = r6b)
+
+axiom H15 : in_range4(r6b)
+
+axiom H16 : ((length6 + 1) = r10b)
+
+axiom H17 : in_range(r10b)
+
+axiom H18 : (2 <= r10b)
 
  (* File "certificatestore.adb", line 188, characters 0-0 *)
-goal WP_parameter_def :
-  (forall length5:int. forall str:(int,character) farray. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int.
-  forall result:(int,character) farray. forall str1:(int,character) farray.
-  forall result1:int. forall length6:int. (in_range3(num) -> (((1 <= 10) ->
-  in_range4(length5)) -> ((((result = str) and
-  (str1 = (to_string(attr__ATTRIBUTE_IMAGE3(num))).elts)) and
-  ((to_rep1(str__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(num))).rt))) and
-  (to_rep1(str__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(num))).rt))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(str__first),
-  to_rep1(str__last)) ->
-  ((((((((to_rep1(str__first) <= to_rep1(str__last)) and
-  (o = ((to_rep1(str__last) - to_rep1(str__first)) + 1))) or
-  ((not (to_rep1(str__first) <= to_rep1(str__last))) and (o = 0))) and
-  ((o1 = o) and in_range(o))) and (o2 = (o1 - 1))) and ((o3 = o2) and
-  in_range4(o2))) and ((result1 = length5) and (length6 = o3))) ->
-  (((length6 = r6b) and in_range4(r6b)) -> ((((length6 + 1) = r10b) and
-  in_range(r10b)) -> ((2 <= r10b) -> (to_rep1(str__first) <= 2))))))))))
+goal WP_parameter_def : (to_rep1(str__first) <= 2)

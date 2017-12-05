@@ -131,7 +131,11 @@ type index_type__ref = { index_type__content : index_type
 function index_type__ref___projection(a: index_type__ref) : index_type =
   (a).index_type__content
 
+logic temp___bound_177 : int
+
+axiom H : in_range1(temp___bound_177)
+
+axiom H1 : (1 <= temp___bound_177)
+
  (* File "bounded_strings.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___bound_177:int. (in_range1(temp___bound_177) ->
-  ((1 <= temp___bound_177) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

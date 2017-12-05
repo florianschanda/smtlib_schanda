@@ -2232,7 +2232,7 @@ axiom w_get__post_axiom1 :
 
 type extended_index1
 
-predicate in_range14(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range14(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq24 : int, int -> bool
 
@@ -2260,11 +2260,11 @@ logic oeq__function_guard5 : bool, us_rep7, us_rep7 -> prop
 
 axiom user_eq__def_axiom3 :
   (forall a:us_rep7. forall b:us_rep7 [user_eq16(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length2(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length2(a)))) ->
     (bool_eq14(get3(a, n), get3(b, n)) = true))) ->
   (user_eq16(a, b) = match_bool(bool_eq1(length2(a), length2(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length2(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length2(a)))) ->
         (bool_eq14(get3(a, n), get3(b, n)) = true)))) ->
   (user_eq16(a, b) = match_bool(bool_eq1(length2(a), length2(b)), false,
   false)))))
@@ -2310,7 +2310,7 @@ function index_type__ref___3__projection(a: index_type__ref) : index_type =
 
 type extended_index2
 
-predicate in_range16(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range16(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq26 : int, int -> bool
 
@@ -2336,16 +2336,408 @@ function extended_index__ref___4__projection(a: extended_index__ref2) : extended
 
 axiom length__post_axiom5 :
   (forall container:us_rep7 [length2(container)].
-  ((((-1) + length2(container)) <= 10000) and in_range4(length2(container))))
+  ((((- 1) + length2(container)) <= 10000) and
+  in_range4(length2(container))))
 
 axiom get__post_axiom3 : true
 
- (* File "partition_refinement.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,positive) farray. forall d__split_fields:us_main_type.
-  forall p__split_fields:us_main_type4.
-  forall partition_refinement__refine_one__i__assume:int.
-  (in_range1(x_elem) -> (((length1({ us_split_discrs3 = {
+logic a : (int,positive) farray
+
+logic d__split_fields : us_main_type
+
+logic p__split_fields : us_main_type4
+
+logic p_elem__split_fields : index
+
+logic p_elem__split_fields1 : index
+
+logic p_elem__split_fields2 : index_count
+
+logic c : count_type
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : partition_index
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : partition_index
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : partition_index
+
+logic o17 : int
+
+logic o18 : index
+
+logic o19 : index
+
+logic o20 : index_count
+
+logic o21 : index
+
+logic o22 : index
+
+logic o23 : index_count
+
+logic o24 : index
+
+logic o25 : int
+
+logic o26 : partition_index
+
+logic o27 : int
+
+logic o28 : index
+
+logic o29 : index
+
+logic o30 : index_count
+
+logic o31 : index
+
+logic o32 : index
+
+logic o33 : index_count
+
+logic o34 : index_count
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic us : int
+
+logic o38 : int
+
+logic o39 : partition_index
+
+logic o40 : int
+
+logic o41 : index
+
+logic o42 : index
+
+logic o43 : index_count
+
+logic o44 : int
+
+logic o45 : partition_index
+
+logic o46 : int
+
+logic o47 : index
+
+logic o48 : index
+
+logic o49 : index_count
+
+logic o50 : int
+
+logic us1 : int
+
+logic partition_refinement__refine_one__i__assume : int
+
+logic partition_refinement__refine_one__p_elem__assume : index
+
+logic partition_refinement__refine_one__p_elem__assume1 : index
+
+logic partition_refinement__refine_one__p_elem__assume2 : index_count
+
+logic partition_refinement__refine_one__j__assume : int
+
+logic c1 : count_type
+
+logic o51 : bool
+
+logic o52 : bool
+
+logic o53 : int
+
+logic o54 : bool
+
+logic o55 : int
+
+logic o56 : bool
+
+logic o57 : bool
+
+logic o58 : bool
+
+logic o59 : int
+
+logic o60 : int
+
+logic c2 : count_type
+
+logic o61 : bool
+
+logic o62 : bool
+
+logic o63 : int
+
+logic o64 : bool
+
+logic o65 : int
+
+logic o66 : bool
+
+logic o67 : bool
+
+logic o68 : bool
+
+logic o69 : int
+
+logic o70 : int
+
+logic c3 : count_type
+
+logic o71 : bool
+
+logic o72 : bool
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic c4 : count_type
+
+logic o76 : bool
+
+logic o77 : bool
+
+logic o78 : int
+
+logic o79 : bool
+
+logic o80 : int
+
+logic o81 : bool
+
+logic o82 : bool
+
+logic o83 : bool
+
+logic o84 : int
+
+logic o85 : int
+
+logic c5 : count_type
+
+logic o86 : bool
+
+logic o87 : bool
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic c6 : count_type
+
+logic o91 : bool
+
+logic o92 : bool
+
+logic o93 : int
+
+logic o94 : int
+
+logic o95 : int
+
+logic c7 : count_type
+
+logic o96 : bool
+
+logic o97 : bool
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : index_count
+
+logic o102 : index
+
+logic o103 : index
+
+logic o104 : index_count
+
+logic temp___1186 : index
+
+logic temp___11861 : index
+
+logic temp___11862 : index_count
+
+logic c8 : count_type
+
+logic o105 : bool
+
+logic c9 : count_type
+
+logic o106 : bool
+
+logic o107 : bool
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : int
+
+logic k : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : index
+
+logic result6 : index
+
+logic result7 : index_count
+
+logic p_elem__split_fields3 : index
+
+logic p_elem__split_fields4 : index
+
+logic p_elem__split_fields5 : index_count
+
+logic a1 : (int,positive) farray
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic partition_refinement__inverse_sets__replace__container__fields : us_main_type
+
+logic result10 : us_main_type
+
+logic d__split_fields1 : us_main_type
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic partition_refinement__inverse_sets__replace__container__fields1 : us_main_type
+
+logic result15 : us_main_type
+
+logic d__split_fields2 : us_main_type
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic result20 : bool
+
+logic result21 : bool
+
+logic result22 : bool
+
+logic result23 : index
+
+logic result24 : index
+
+logic result25 : index_count
+
+logic p_elem__split_fields6 : index
+
+logic p_elem__split_fields7 : index
+
+logic p_elem__split_fields8 : index_count
+
+logic partition_refinement__partitions__replace_element__container__fields : us_main_type4
+
+logic result26 : us_main_type4
+
+logic p__split_fields1 : us_main_type4
+
+logic a2 : (int,positive) farray
+
+logic d__split_fields3 : us_main_type
+
+logic p__split_fields2 : us_main_type4
+
+logic p_elem__split_fields9 : index
+
+logic p_elem__split_fields10 : index
+
+logic p_elem__split_fields11 : index_count
+
+logic a3 : (int,positive) farray
+
+logic d__split_fields4 : us_main_type
+
+logic p__split_fields3 : us_main_type4
+
+logic p_elem__split_fields12 : index
+
+logic p_elem__split_fields13 : index
+
+logic p_elem__split_fields14 : index_count
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic result30 : bool
+
+logic result31 : bool
+
+logic result32 : bool
+
+axiom H : in_range1(x_elem)
+
+axiom H1 : ((length1({ us_split_discrs3 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields7 = { rec__partition_refinement__partitions__vector =
   p__split_fields } }) <  10000) and ((has_key1(model__({ us_split_discrs1 =
@@ -2368,11 +2760,12 @@ goal WP_parameter_def :
    rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs
    }; us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
    d__split_fields } }), to_rep((a[j1]))) = true))) and
-  (forall c:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+  (forall c10:count_type. ((has_key(positions({ us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
-  d__split_fields } }), c) = true) -> (to_rep((a[get2(model__({
-  us_split_discrs1 = {
+  d__split_fields } }), { us_split_fields3 = {
+  rec__partition_refinement__inverse_sets__cursor__node = c10 } }) = true) ->
+  (to_rep((a[get2(model__({ us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
   d__split_fields } }), get(keys({ us_split_discrs1 = {
@@ -2381,14 +2774,18 @@ goal WP_parameter_def :
   d__split_fields } }), get1(positions({ us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
-  d__split_fields } }), c)))])) = get(keys({ us_split_discrs1 = {
+  d__split_fields } }), { us_split_fields3 = {
+  rec__partition_refinement__inverse_sets__cursor__node = c10 }
+  })))])) = get(keys({ us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
   d__split_fields } }), get1(positions({ us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
-  d__split_fields } }), c))))))))) ->
-  ((((partition_refinement__refine_one__i__assume = get2(model__({
+  d__split_fields } }), { us_split_fields3 = {
+  rec__partition_refinement__inverse_sets__cursor__node = c10 } })))))))))
+
+axiom H2 : ((partition_refinement__refine_one__i__assume = get2(model__({
   us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
@@ -2398,6 +2795,11 @@ goal WP_parameter_def :
   us_split_discrs1 = {
   rec__partition_refinement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__partition_refinement__inverse_sets__map =
-  d__split_fields } }), x_elem)))) and
-  (partition_refinement__refine_one__i__assume = i)) -> (in_range3(i) ->
-  (0 <= to_rep4((f[i]))))))))
+  d__split_fields } }), x_elem))))
+
+axiom H3 : (partition_refinement__refine_one__i__assume = i)
+
+axiom H4 : in_range3(i)
+
+ (* File "partition_refinement.adb", line 14, characters 0-0 *)
+goal WP_parameter_def : (0 <= to_rep4((f[i])))

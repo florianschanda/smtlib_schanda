@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -134,6 +134,24 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic x : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+logic x2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : ((o = (x + 1)) and in_range1((x + 1)))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = o)
 
  (* File "nested_problem.adb", line 5, characters 0-0 *)
 goal WP_parameter_def : true

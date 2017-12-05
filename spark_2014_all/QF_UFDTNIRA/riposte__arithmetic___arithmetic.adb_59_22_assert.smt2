@@ -52,6 +52,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const c Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const c1 Int)
 (assert (in_range2 double_a))

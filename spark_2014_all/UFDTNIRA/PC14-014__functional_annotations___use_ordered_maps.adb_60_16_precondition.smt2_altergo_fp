@@ -979,7 +979,7 @@ axiom key__post__dispatch_axiom :
 
 type element_type2
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq13 : int, int -> bool
 
@@ -1201,7 +1201,7 @@ logic f__function_guard : int, int -> prop
 
 type integer
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq14 : int, int -> bool
 
@@ -1229,8 +1229,8 @@ axiom f__post_axiom :
   (forall e:int [f(e)]. (in_range8(e) -> in_range8(f(e))))
 
 axiom f__def_axiom :
-  (forall e:int [f(e)]. (in_range8(e) -> (((((-100) <= e) and (e <= 100)) ->
-  (f(e) = (e * 2))) and ((not (((-100) <= e) and (e <= 100))) ->
+  (forall e:int [f(e)]. (in_range8(e) -> (((((- 100) <= e) and (e <= 100)) ->
+  (f(e) = (e * 2))) and ((not (((- 100) <= e) and (e <= 100))) ->
   (f(e) = e)))))
 
 logic s : count_type
@@ -1370,7 +1370,7 @@ axiom contains__post__dispatch_axiom : true
 
 type element_type3
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq16 : int, int -> bool
 
@@ -1570,31 +1570,190 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range5(w_get(container, witness2)))))
 
- (* File "use_ordered_maps.ads", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cu__split_fields:count_type.
-  forall use_ordered_maps__apply_f_2__cu__assume:count_type. forall o:int.
-  forall o1:int. forall o2:int. forall result:count_type.
-  forall cu__split_fields1:count_type. forall r__split_fields:us_main_type.
-  forall result1:bool. forall r__split_fields1:us_main_type.
-  forall cu__split_fields2:count_type. forall r__split_fields2:us_main_type.
-  ((length({ us_split_discrs1 = {
+logic cu__split_fields : count_type
+
+logic use_ordered_maps__apply_f_2__cu__assume : count_type
+
+logic temp___684 : count_type
+
+logic temp___683 : count_type
+
+logic temp___6831 : us_main_type
+
+logic o : us_rep4
+
+logic o1 : int
+
+logic i : int
+
+logic o2 : us_rep4
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : us_rep3
+
+logic o7 : int
+
+logic o8 : us_rep3
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : us_rep2
+
+logic o14 : us_rep3
+
+logic o15 : int
+
+logic temp___686 : us_rep3
+
+logic temp___685 : int
+
+logic o16 : bool
+
+logic o17 : bool
+
+logic k : int
+
+logic i1 : int
+
+logic o18 : us_rep4
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : bool
+
+logic o22 : us_rep3
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic temp___682 : count_type
+
+logic o27 : bool
+
+logic temp___693 : us_rep3
+
+logic temp___692 : int
+
+logic o28 : bool
+
+logic o29 : bool
+
+logic k1 : int
+
+logic temp___697 : us_rep3
+
+logic temp___696 : int
+
+logic o30 : bool
+
+logic o31 : bool
+
+logic k2 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : us_rep2
+
+logic o36 : bool
+
+logic result : count_type
+
+logic cu__split_fields1 : count_type
+
+logic r__split_fields : us_main_type
+
+logic result1 : bool
+
+logic r__split_fields1 : us_main_type
+
+logic cu__split_fields2 : count_type
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic r__split_fields2 : us_main_type
+
+logic result6 : count_type
+
+logic cu__split_fields3 : count_type
+
+logic result7 : bool
+
+logic r__split_fields3 : us_main_type
+
+logic cu__split_fields4 : count_type
+
+logic r__split_fields4 : us_main_type
+
+logic cu__split_fields5 : count_type
+
+logic r__split_fields5 : us_main_type
+
+logic cu__split_fields6 : count_type
+
+logic r__split_fields6 : us_main_type
+
+logic cu__split_fields7 : count_type
+
+logic r__split_fields7 : us_main_type
+
+logic cu__split_fields8 : count_type
+
+logic r__split_fields8 : us_main_type
+
+logic cu__split_fields9 : count_type
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : (length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_maps__my_maps__map = s1 }
-  }) <= to_rep(r__split_discrs)) -> (((({ us_split_fields3 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }) <= to_rep(r__split_discrs))
+
+axiom H1 : (({ us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node =
   use_ordered_maps__apply_f_2__cu__assume } } = first({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } })) and (((bool_eq1(length({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }),
-  0) = true) and (bool_eq4({ us_split_fields3 = {
+  0) = true) -> (bool_eq4({ us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node =
   use_ordered_maps__apply_f_2__cu__assume } }, { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = no_element } }) = true)) or
+  rec__use_ordered_maps__my_maps__cursor__node = no_element } }) = true)) and
   ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_maps__my_maps__map = s1 } }), 0) = true)) and
+  rec__use_ordered_maps__my_maps__map = s1 } }), 0) = true)) ->
   ((has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
@@ -1603,19 +1762,21 @@ goal WP_parameter_def :
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }), {
   us_split_fields3 = { rec__use_ordered_maps__my_maps__cursor__node =
-  use_ordered_maps__apply_f_2__cu__assume } }) = 1))))) and (({
-  us_split_fields__content1 = {
-  rec__use_ordered_maps__my_maps__cursor__node = result } } = {
-  us_split_fields__content1 = {
-  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields } }) and
-  (use_ordered_maps__apply_f_2__cu__assume = cu__split_fields1))) ->
-  (((length({ us_split_discrs1 = {
+  use_ordered_maps__apply_f_2__cu__assume } }) = 1)))))
+
+axiom H2 : (result = cu__split_fields)
+
+axiom H3 : (use_ordered_maps__apply_f_2__cu__assume = cu__split_fields1)
+
+axiom H4 : ((length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields
   } }) = 0) and (is_empty(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields
-  } })) = true)) -> (((result1 = has_key1(positions({ us_split_discrs1 = {
+  } })) = true))
+
+axiom H5 : ((result1 = has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields1 } })) and
@@ -1623,42 +1784,49 @@ goal WP_parameter_def :
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields1 }
-  }) = true))) -> ((result1 = true) -> (((length({ us_split_discrs1 = {
+  }) = true)))
+
+axiom H6 : (result1 = true)
+
+axiom H7 : (length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } }) = (get1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
+  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 } }) - 1))
+
+axiom H8 :
+  (forall i2:int. (((1 <= i2) and (i2 <= (get1(positions({ us_split_discrs1 =
+  { rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
-  }) - 1)) and
-  ((forall i:int. (((1 <= i) and (i <= (get1(positions({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
-   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
-   }) - 1))) -> ((has_key(model__({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
-   us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
-   r__split_fields1 } }), get(keys({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-   rec__use_ordered_maps__my_maps__map = s1 } }), i)) = true) and
-   (get2(model__({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
-   us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
-   r__split_fields1 } }), get(keys({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-   rec__use_ordered_maps__my_maps__map = s1 } }), i)) = f(get2(model__({
-   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
-   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }),
-   get(keys({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-   rec__use_ordered_maps__my_maps__map = s1 } }), i))))))) and
+  }) - 1))) -> ((has_key(model__({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
+  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
+  } }), get(keys({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), i2)) = true) and
+  (get2(model__({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
+  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
+  } }), get(keys({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), i2)) = f(get2(model__({
+  us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
+  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }),
+  get(keys({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), i2)))))))
+
+axiom H9 :
   (forall temp___689:int. ((in_range3(temp___689) and ((1 <= temp___689) and
   (temp___689 <= (0 + length3(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } })))))) ->
-  (exists i:int. (((1 <= i) and (i <= (get1(positions({ us_split_discrs1 = {
-  rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
+  (exists i2:int. (((1 <= i2) and (i2 <= (get1(positions({ us_split_discrs1 =
+  { rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
   }) - 1))) and (get(keys({ us_split_discrs1 = {
@@ -1666,8 +1834,9 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } }), temp___689) = get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
-  rec__use_ordered_maps__my_maps__map = s1 } }), i)))))))) ->
-  (((((o1 = get2(model__({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map = s1 } }), i2))))))
+
+axiom H10 : ((o25 = get2(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), get(keys({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
@@ -1676,7 +1845,7 @@ goal WP_parameter_def :
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
-  })))) and (in_range7(o1) and (o1 = get2(model__({ us_split_discrs1 = {
+  })))) and (in_range7(o25) and (o25 = get2(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), get(keys({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
@@ -1684,32 +1853,36 @@ goal WP_parameter_def :
   get1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
-  })))))) and ((o2 = f(o1)) and (in_range8(o2) and (((((-100) <= o1) and
-  (o1 <= 100)) and (o2 = (o1 * 2))) or ((not (((-100) <= o1) and
-  (o1 <= 100))) and (o2 = o1)))))) and (((o = get(keys({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 } }))))))
+
+axiom H11 : ((o26 = f(o25)) and (in_range8(o26) and (((((- 100) <= o25) and
+  (o25 <= 100)) -> (o26 = (o25 * 2))) and ((not (((- 100) <= o25) and
+  (o25 <= 100))) -> (o26 = o25)))))
+
+axiom H12 : ((o24 = get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), get1(positions({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }), {
   us_split_fields3 = { rec__use_ordered_maps__my_maps__cursor__node =
-  cu__split_fields2 } }))) and (in_range6(o) and (o = get(keys({
+  cu__split_fields2 } }))) and (in_range6(o24) and (o24 = get(keys({
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity = s };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = s1 } }),
   get1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
-  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
-  }))))) and (((has_key(model__({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 } })))))
+
+axiom H13 : (((has_key(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o) = true) and (get2(model__({ us_split_discrs1 = {
+  } }), o24) = true) and (get2(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o) = o2)) and (((has_key(model__({ us_split_discrs1 = {
+  } }), o24) = o26)) and (((has_key(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), o) = true) and (((((oeq2(positions({ us_split_discrs1 = {
+  } }), o24) = true) -> (((((oeq2(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
   } }), positions({ us_split_discrs1 = {
@@ -1721,32 +1894,40 @@ goal WP_parameter_def :
   } }), find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o)) = o)) and ((bool_eq1(length3(keys({ us_split_discrs1 = {
+  } }), o24)) = o24)) and (((bool_eq1(length3(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } })), length3(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }))) = true) and
-  (forall i:int. (((1 <= i) and (i <= (0 + length3(keys({ us_split_discrs1 =
-  { rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
-  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }))))) -> ((not (i = find(keys({ us_split_discrs1 = {
+  } }))) = true) ->
+  (forall i2:int. (((1 <= i2) and (i2 <= (0 + length3(keys({
+  us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity =
+  r__split_discrs }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = r__split_fields1 } }))))) ->
+  ((not (i2 = find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o))) -> (get(keys({ us_split_discrs1 = {
+  } }), o24))) -> (get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), i) = get(keys({ us_split_discrs1 = {
+  } }), i2) = get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), i))))))) and (match_bool(keys_included(model__({ us_split_discrs1 = {
-  rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
-  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), model__({ us_split_discrs1 = {
+  } }), i2)))))) and (not (bool_eq1(length3(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } })), keys_included(model__({ us_split_discrs1 = {
+  } })), length3(keys({ us_split_discrs1 = {
+  rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
+  us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
+  } }))) = false)))) and (match_bool(keys_included(model__({
+  us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity =
+  r__split_discrs }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = r__split_fields2 } }), model__({
+  us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity =
+  r__split_discrs }; us_split_fields1 = {
+  rec__use_ordered_maps__my_maps__map = r__split_fields1 } })),
+  keys_included(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } }), model__({ us_split_discrs1 = {
@@ -1759,10 +1940,10 @@ goal WP_parameter_def :
   us_split_discrs1 = { rec__use_ordered_maps__my_maps__map__capacity =
   r__split_discrs }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = r__split_fields1 } }),
-  o) = true))) or ((not (has_key(model__({ us_split_discrs1 = {
+  o24) = true))) and ((not (has_key(model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), o) = true)) and (((((((length({ us_split_discrs1 = {
+  } }), o24) = true)) -> (((((((length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
   } }) = (length({ us_split_discrs1 = {
@@ -1780,49 +1961,49 @@ goal WP_parameter_def :
   } }), model__({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), o) = true)) and (get(keys({ us_split_discrs1 = {
+  } }), o24) = true)) and (get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
   } }), find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o)) = o)) and
-  (forall i:int. (((1 <= i) and (i <= (find(keys({ us_split_discrs1 = {
+  } }), o24)) = o24)) and
+  (forall i2:int. (((1 <= i2) and (i2 <= (find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o) - 1))) -> (get(keys({ us_split_discrs1 = {
+  } }), o24) - 1))) -> (get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), i) = get(keys({ us_split_discrs1 = {
+  } }), i2) = get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), i))))) and
-  ((forall i:int. (((find(keys({ us_split_discrs1 = {
+  } }), i2))))) and
+  ((forall i2:int. (((find(keys({ us_split_discrs1 = {
    rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
    us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
-   r__split_fields2 } }), o) <= i) and (i <= length({ us_split_discrs1 = {
-   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
+   r__split_fields2 } }), o24) <= i2) and (i2 <= length({ us_split_discrs1 =
+   { rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
    us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
    r__split_fields1 } }))) -> (get(keys({ us_split_discrs1 = {
    rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
    us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
-   r__split_fields1 } }), i) = get(keys({ us_split_discrs1 = {
+   r__split_fields1 } }), i2) = get(keys({ us_split_discrs1 = {
    rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
    us_split_fields1 = { rec__use_ordered_maps__my_maps__map =
-   r__split_fields2 } }), (i + 1))))) and
-  (forall i:int. ((((find(keys({ us_split_discrs1 = {
+   r__split_fields2 } }), (i2 + 1))))) and
+  (forall i2:int. ((((find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o) + 1) <= i) and (i <= (length({ us_split_discrs1 = {
+  } }), o24) + 1) <= i2) and (i2 <= (length({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } }) + 1))) -> (get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
-  } }), (i - 1)) = get(keys({ us_split_discrs1 = {
+  } }), (i2 - 1)) = get(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), i)))))) and (p_positions_shifted(positions({ us_split_discrs1 = {
+  } }), i2)))))) and (p_positions_shifted(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields1
   } }), positions({ us_split_discrs1 = {
@@ -1831,11 +2012,14 @@ goal WP_parameter_def :
   } }), find(keys({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = r__split_discrs };
   us_split_fields1 = { rec__use_ordered_maps__my_maps__map = r__split_fields2
-  } }), o), 1) = true))))))) -> ((has_key1(positions({ us_split_discrs1 = {
+  } }), o24), 1) = true)))))
+
+ (* File "use_ordered_maps.ads", line 34, characters 0-0 *)
+goal WP_parameter_def : ((has_key1(positions({ us_split_discrs1 = {
   rec__use_ordered_maps__my_maps__map__capacity = s }; us_split_fields1 = {
   rec__use_ordered_maps__my_maps__map = s1 } }), { us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 }
   }) = true) or (bool_eq4({ us_split_fields3 = {
   rec__use_ordered_maps__my_maps__cursor__node = cu__split_fields2 } }, {
   us_split_fields3 = { rec__use_ordered_maps__my_maps__cursor__node =
-  no_element } }) = true))))))))))
+  no_element } }) = true))

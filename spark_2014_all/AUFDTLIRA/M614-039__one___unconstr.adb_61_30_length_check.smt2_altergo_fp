@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -617,19 +617,69 @@ axiom def_axiom :
   (((unconstr__unconstr_return__s__aggregate_def(temp___220, temp___221,
   temp___222)).elts2[temp___223]) = of_rep(temp___220)))))
 
+logic s : (int,character) farray
+
+logic unconstr__unconstr_return__result : (int,character) farray
+
+logic unconstr__unconstr_return__result1 : t
+
+logic temp___225 : (int,character) farray
+
+logic temp___2251 : t2
+
+logic unconstr__unconstr_return__s__assume : (int,character) farray
+
+logic unconstr__unconstr_return__s__assume1 : t1
+
+logic result : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic result2 : t
+
+logic unconstr__unconstr_return__result2 : (int,character) farray
+
+logic unconstr__unconstr_return__result3 : t
+
+logic unconstr__unconstr_return__result4 : (int,character) farray
+
+logic unconstr__unconstr_return__result5 : t
+
+logic unconstr__unconstr_return__result6 : (int,character) farray
+
+logic unconstr__unconstr_return__result7 : t
+
+logic s2 : (int,character) farray
+
+logic unconstr__unconstr_return__result8 : (int,character) farray
+
+logic unconstr__unconstr_return__result9 : t
+
+logic s3 : (int,character) farray
+
+logic unconstr__unconstr_return__result10 : (int,character) farray
+
+logic unconstr__unconstr_return__result11 : t
+
+axiom H : in_range1(x)
+
+axiom H1 : (to_rep1(first4((unconstr__unconstr_return__s__aggregate_def(32,
+  1, x)).rt2)) = 1)
+
+axiom H2 : (to_rep1(last4((unconstr__unconstr_return__s__aggregate_def(32, 1,
+  x)).rt2)) = x)
+
+axiom H3 : ({ elts2 = temp___225; rt2 = temp___2251
+  } = unconstr__unconstr_return__s__aggregate_def(32, 1, x))
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___225:(int,character) farray. forall temp___2251:t2.
-  (in_range1(x) ->
-  (((to_rep1(first4((unconstr__unconstr_return__s__aggregate_def(32, 1,
-  x)).rt2)) = 1) and
-  ((to_rep1(last4((unconstr__unconstr_return__s__aggregate_def(32, 1,
-  x)).rt2)) = x) and ({ elts2 = temp___225; rt2 = temp___2251
-  } = unconstr__unconstr_return__s__aggregate_def(32, 1, x)))) ->
   (((to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251))) ->
   (((1 <= x) ->
   (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = ((x - 1) + 1))) and
   ((not (1 <= x)) ->
   (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251)))) ->
-  ((1 <= x) -> (0 = ((x - 1) + 1))))))))
+  ((1 <= x) -> (0 = ((x - 1) + 1)))))

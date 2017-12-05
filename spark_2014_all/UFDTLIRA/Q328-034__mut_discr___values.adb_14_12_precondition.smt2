@@ -82,6 +82,7 @@
 (assert (forall ((stack__last Int)) (! (=> (dynamic_invariant stack__last true true true) (dynamic_invariant1 (size stack__last) true false true)) :pattern ((size stack__last)))))
 (assert (forall ((stack__last Int)) (! (=> (dynamic_invariant stack__last true true true) (= (size stack__last) stack__last)) :pattern ((size stack__last)))))
 (declare-const last Int)
+(declare-const last1 Int)
 (assert (in_range1 last))
 (assert (not (= (full last) true)))
 (assert (not (not (= (full last) true))))

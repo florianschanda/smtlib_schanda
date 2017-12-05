@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1852,28 +1852,42 @@ axiom lemma8__def_axiom : (((lemma81(void) = true) ->
    ult(shift_right(val__, (64 - n)), of_int(0)))))))) ->
   (lemma81(void) = true)))
 
- (* File "bits_manipulation-functions.ads", line 299, characters 0-0 *)
-goal WP_parameter_def :
-  (forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result:bool.
-  forall o:bool. forall result:bool.
-  forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result1:bool.
-  forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result2:bool.
-  forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result3:bool.
-  forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4:bool.
-  forall bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result5:bool.
-  (forall result1:bool. (((((lemma8(void) = true) and
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result : bool
+
+logic o : bool
+
+logic result : bool
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result1 : bool
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result2 : bool
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result3 : bool
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4 : bool
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result5 : bool
+
+logic result1 : bool
+
+axiom H : (((lemma8(void) = true) and
   ((forall size:int. (((1 <= size) and (size <= 63)) ->
-   (((size <  18446744073709551616) and ult(make_mask(size),
-   lsl_bv(of_int(1), of_int(size)))) or
-   ((not (size <  18446744073709551616)) and ult(make_mask(size),
-   of_int(0)))))) and
+   (((size <  18446744073709551616) -> ult(make_mask(size), lsl_bv(of_int(1),
+   of_int(size)))) and ((not (size <  18446744073709551616)) ->
+   ult(make_mask(size), of_int(0)))))) and
   (((bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result1 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result2) and
   (bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result3 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result1)) and
   ((o = lemma1_goal(void)) and
   ((result = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result) and
   (bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result1 = o)))))) and
   ((bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result2) and
-  (bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result5 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result3))) and
-  (result1 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4)) ->
-  ((bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4 = true) ->
-  (lemma1(void) = true)))))
+  (bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result5 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result3)))
+
+axiom H1 :
+  (result1 = bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4)
+
+axiom H2 :
+  (bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma1__result4 = true)
+
+ (* File "bits_manipulation-functions.ads", line 299, characters 0-0 *)
+goal WP_parameter_def : (lemma1(void) = true)

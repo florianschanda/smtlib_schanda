@@ -42,6 +42,7 @@
 (declare-const external Int)
 (declare-const main_refs__func_inst__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const main_refs__func_inst__result1 Int)
 (declare-const main_refs__func_inst__result2 Int)

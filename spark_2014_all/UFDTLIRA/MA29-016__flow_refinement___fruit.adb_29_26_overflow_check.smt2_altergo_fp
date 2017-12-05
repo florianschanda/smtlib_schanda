@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -151,9 +151,17 @@ logic oranges_to_consume : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic oranges : int
+
+logic o : int
+
+logic o1 : int
+
+axiom H : in_range1(oranges_to_consume)
+
+axiom H1 : in_range1(oranges)
+
+axiom H2 : (oranges_to_consume <= number_of_oranges(oranges))
+
  (* File "fruit.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall oranges:int. (in_range1(oranges_to_consume) ->
-  (in_range1(oranges) ->
-  ((oranges_to_consume <= number_of_oranges(oranges)) ->
-  in_range((oranges - oranges_to_consume))))))
+goal WP_parameter_def : in_range((oranges - oranges_to_consume))

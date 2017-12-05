@@ -81,6 +81,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic body2_elaborated : bool
+
+logic body1_elaborated : bool
+
+logic result : bool
+
+logic body1_elaborated1 : bool
+
  (* File "p1.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall body2_elaborated:bool. (body2_elaborated = true))
+goal WP_parameter_def : (body2_elaborated = true)

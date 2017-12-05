@@ -367,38 +367,77 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom null_pair__def_axiom : ((null_pair = of_rep(0)) and
   (null_pair1 = of_rep(0)))
 
+logic records__is_valid__result : bool
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic temp___277 : unsigned_byte
+
+logic temp___2771 : unsigned_byte
+
+logic result : bool
+
+logic records__is_valid__result1 : bool
+
+logic records__is_valid__result2 : bool
+
+logic records__is_valid__result3 : bool
+
+logic records__is_valid__result4 : bool
+
+logic records__is_valid__result5 : bool
+
+logic result1 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___277 = o2)
+
+axiom H5 : (temp___2771 = o3)
+
+axiom H6 : ((temp___277 = null_pair) and (temp___2771 = null_pair1))
+
+axiom H7 : (records__is_valid__result1 = records__is_valid__result2)
+
+axiom H8 : (records__is_valid__result3 = records__is_valid__result1)
+
+axiom H9 : (result = records__is_valid__result)
+
+axiom H10 : ((((a = true) or (bool_eq3({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } }, { us_split_fields1 = { rec__records_prooffuncs__pair__a =
+  null_pair; rec__records_prooffuncs__pair__b = null_pair1 } }) = true)) ->
+  (records__is_valid__result1 = true)) and ((not ((a = true) or (bool_eq3({
+  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
+  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = null_pair;
+  rec__records_prooffuncs__pair__b = null_pair1 } }) = true))) ->
+  (records__is_valid__result1 = false)))
+
+axiom H11 : (records__is_valid__result4 = records__is_valid__result2)
+
+axiom H12 : (records__is_valid__result5 = records__is_valid__result3)
+
+axiom H13 : (result1 = records__is_valid__result4)
+
+axiom H14 : (records__is_valid__result4 = true)
+
+axiom H15 : (not (a = true))
+
  (* File "records.adb", line 102, characters 0-0 *)
-goal WP_parameter_def :
-  (forall records__is_valid__result:bool. forall o:unsigned_byte.
-  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
-  forall temp___277:unsigned_byte. forall temp___2771:unsigned_byte.
-  forall result:bool. forall records__is_valid__result1:bool.
-  forall records__is_valid__result2:bool.
-  forall records__is_valid__result3:bool.
-  forall records__is_valid__result4:bool.
-  forall records__is_valid__result5:bool.
-  (forall result1:bool. ((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and
-  ((o1 = o2) and (o = o3)))) and ((temp___277 = o2) and
-  (temp___2771 = o3))) and ((temp___277 = null_pair) and
-  (temp___2771 = null_pair1))) and
-  (((((records__is_valid__result1 = records__is_valid__result2) and
-  (records__is_valid__result3 = records__is_valid__result1)) and
-  ((result = records__is_valid__result) and ((((a = true) or (bool_eq3({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
-  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = null_pair;
-  rec__records_prooffuncs__pair__b = null_pair1 } }) = true)) and
-  (records__is_valid__result1 = true)) or ((not ((a = true) or (bool_eq3({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
-  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = null_pair;
-  rec__records_prooffuncs__pair__b = null_pair1 } }) = true))) and
-  (records__is_valid__result1 = false))))) and
-  ((records__is_valid__result4 = records__is_valid__result2) and
-  (records__is_valid__result5 = records__is_valid__result3))) and
-  (result1 = records__is_valid__result4))) ->
-  ((records__is_valid__result4 = true) -> ((not (a = true)) -> (bool_eq3({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
-  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = null_pair;
-  rec__records_prooffuncs__pair__b = null_pair1 } }) = true))))))
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } }, { us_split_fields1 = { rec__records_prooffuncs__pair__a =
+  null_pair; rec__records_prooffuncs__pair__b = null_pair1 } }) = true)

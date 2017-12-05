@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -220,22 +220,52 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic dst__split_fields : integer
+
+logic dst__split_fields1 : integer
+
+logic temp___225 : integer
+
+logic temp___2251 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic dst__split_fields2 : integer
+
+logic dst__split_fields3 : integer
+
+logic dst__split_fields4 : integer
+
+logic dst__split_fields5 : integer
+
+logic dst__split_fields6 : integer
+
+logic dst__split_fields7 : integer
+
+axiom H : in_range(n)
+
+axiom H1 : ({ us_split_fields1 = { rec__complex__t__r = temp___225;
+  rec__complex__t__i = temp___2251 } } = create(n, 0))
+
+axiom H2 : (result = dst__split_fields)
+
+axiom H3 : (result1 = dst__split_fields1)
+
+axiom H4 : (temp___225 = dst__split_fields2)
+
+axiom H5 : (temp___2251 = dst__split_fields3)
+
+axiom H6 : (dst__split_fields4 = dst__split_fields2)
+
+axiom H7 : (dst__split_fields5 = dst__split_fields3)
+
+axiom H8 : (dst__split_fields6 = dst__split_fields2)
+
+axiom H9 : (dst__split_fields7 = dst__split_fields3)
+
  (* File "private_a.adb", line 91, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dst__split_fields:integer. forall dst__split_fields1:integer.
-  forall temp___225:integer. forall temp___2251:integer.
-  forall result:integer. forall result1:integer.
-  forall dst__split_fields2:integer. forall dst__split_fields3:integer.
-  forall dst__split_fields4:integer. forall dst__split_fields5:integer.
-  forall dst__split_fields6:integer. forall dst__split_fields7:integer.
-  ((in_range(n) and ((({ us_split_fields1 = { rec__complex__t__r =
-  temp___225; rec__complex__t__i = temp___2251 } } = create(n, 0)) and
-  (((result = dst__split_fields) and (result1 = dst__split_fields1)) and
-  ((temp___225 = dst__split_fields2) and
-  (temp___2251 = dst__split_fields3)))) and
-  (((dst__split_fields4 = dst__split_fields2) and
-  (dst__split_fields5 = dst__split_fields3)) and
-  ((dst__split_fields6 = dst__split_fields2) and
-  (dst__split_fields7 = dst__split_fields3))))) -> (bool_eq2({
-  us_split_fields1 = { rec__complex__t__r = dst__split_fields4;
-  rec__complex__t__i = dst__split_fields5 } }, create(n, 0)) = true)))
+goal WP_parameter_def : (bool_eq2({ us_split_fields1 = { rec__complex__t__r =
+  dst__split_fields4; rec__complex__t__i = dst__split_fields5 } }, create(n,
+  0)) = true)

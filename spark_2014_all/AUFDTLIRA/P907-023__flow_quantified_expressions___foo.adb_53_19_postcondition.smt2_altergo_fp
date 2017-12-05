@@ -300,40 +300,120 @@ function t29b__ref___projection(a: t29b__ref) : t29b = (a).t29b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "foo.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall i:int.
-  forall temp___167:(int,us_rep) farray. forall temp___166:int.
-  forall a1:(int,us_rep) farray. forall result:int. forall i1:int.
-  forall result1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall a3:(int,us_rep) farray. forall i2:int.
-  forall a4:(int,us_rep) farray. forall i3:int.
-  forall a5:(int,us_rep) farray. forall i4:int.
-  forall a6:(int,us_rep) farray. forall i5:int.
-  forall a7:(int,us_rep) farray. forall i6:int.
-  forall a8:(int,us_rep) farray. forall i7:int.
-  forall a9:(int,us_rep) farray. forall i8:int. ((((({ int__content = result
-  } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
-  (i1 <= 10)) and ((((temp___167 = a) and ((temp___166 = i1) and ((({
-  map__content = result1 } = { map__content = a }) and
-  (((not ((((a[i1])).us_split_fields1).rec__foo__r__x = true)) and
+logic a : (int,us_rep) farray
+
+logic i : int
+
+logic temp___167 : (int,us_rep) farray
+
+logic temp___166 : int
+
+logic j : int
+
+logic a1 : (int,us_rep) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic a5 : (int,us_rep) farray
+
+logic i4 : int
+
+logic a6 : (int,us_rep) farray
+
+logic i5 : int
+
+logic a7 : (int,us_rep) farray
+
+logic i6 : int
+
+logic a8 : (int,us_rep) farray
+
+logic i7 : int
+
+logic a9 : (int,us_rep) farray
+
+logic i8 : int
+
+logic a10 : (int,us_rep) farray
+
+logic i9 : int
+
+logic a11 : (int,us_rep) farray
+
+logic i10 : int
+
+logic a12 : (int,us_rep) farray
+
+logic i11 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (((1 <= i1) and (i1 <= 10)) -> (((temp___167 = a) and
+  ((temp___166 = i1) and (((result1 = a) and
+  (((not ((((a[i1])).us_split_fields1).rec__foo__r__x = true)) ->
   (a2 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
   match_bool((((a[i1])).us_split_fields1).rec__foo__r__x, true, true) }
-  }]))) or (((((a[i1])).us_split_fields1).rec__foo__r__x = true) and
+  }]))) and (((((a[i1])).us_split_fields1).rec__foo__r__x = true) ->
   (a2 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
   match_bool((((a[i1])).us_split_fields1).rec__foo__r__x, true, false) }
   }]))))) and
-  ((forall j:int. (((1 <= j) and (j <= i2)) ->
-   ((((a3[j])).us_split_fields1).rec__foo__r__x = true))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+   ((((a3[j1])).us_split_fields1).rec__foo__r__x = true))) and
   (((((1 <= 10) -> in_range2(i2)) and
   (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 10)) ->
   ((i2 <  temp___168) -> ((a3[temp___168]) = (temp___167[temp___168])))))) and
-  ((1 <= i2) and (i2 <= 10))) and (i2 = 10)))))) and (((i2 = i3) and
-  (a3 = a4)) and ((i4 = i2) and (a5 = a3)))) and (((i5 = i3) and ({
-  map__content = a6 } = { map__content = a4 })) and ((i6 = i4) and
-  (a7 = a5))))) or ((not ((1 <= i1) and (i1 <= 10))) and (((i1 = i5) and ({
-  map__content = a6 } = { map__content = a })) and ((i6 = i1) and
-  (a7 = a1)))))) and (((i7 = i5) and (a8 = a6)) and ((i8 = i6) and
-  (a9 = a7)))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) ->
-  ((((a8[n])).us_split_fields1).rec__foo__r__x = true)))))
+  ((1 <= i2) and (i2 <= 10))) and (i2 = 10)))))) and (((i2 = i6) and
+  (a3 = a7)) and ((i7 = i2) and (a8 = a3)))))
+
+axiom H3 : (((1 <= i1) and (i1 <= 10)) -> (i8 = i6))
+
+axiom H4 : (((1 <= i1) and (i1 <= 10)) -> (a9 = a7))
+
+axiom H5 : (((1 <= i1) and (i1 <= 10)) -> (i9 = i7))
+
+axiom H6 : (((1 <= i1) and (i1 <= 10)) -> (a10 = a8))
+
+axiom H7 : ((not ((1 <= i1) and (i1 <= 10))) -> (i1 = i8))
+
+axiom H8 : ((not ((1 <= i1) and (i1 <= 10))) -> (a9 = a))
+
+axiom H9 : ((not ((1 <= i1) and (i1 <= 10))) -> (i9 = i1))
+
+axiom H10 : ((not ((1 <= i1) and (i1 <= 10))) -> (a10 = a1))
+
+axiom H11 : (i10 = i8)
+
+axiom H12 : (a11 = a9)
+
+axiom H13 : (i11 = i9)
+
+axiom H14 : (a12 = a10)
+
+logic n : int
+
+axiom H15 : (1 <= n)
+
+axiom H16 : (n <= 10)
+
+ (* File "foo.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : ((((a11[n])).us_split_fields1).rec__foo__r__x = true)

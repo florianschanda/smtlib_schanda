@@ -361,25 +361,46 @@ logic d : (int,byte) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic equality__l611_019_reduced_testcase_2__result : bool
+
+logic result : bool
+
+logic equality__l611_019_reduced_testcase_2__result1 : bool
+
+logic equality__l611_019_reduced_testcase_2__result2 : bool
+
+logic equality__l611_019_reduced_testcase_2__result3 : bool
+
+logic equality__l611_019_reduced_testcase_2__result4 : bool
+
+logic equality__l611_019_reduced_testcase_2__result5 : bool
+
+logic result1 : bool
+
+axiom H : ((((bool_eq3(a, 0, 255, b, 0, 255) = true) and (bool_eq3(b, 0, 255,
+  c, 0, 255) = true)) and (bool_eq3(c, 0, 255, d, 0, 255) = true)) and
+  ((bool_eq3(a, 0, 255, c, 0, 255) = true) or (not (bool_eq3(a, 0, 255, c, 0,
+  255) = true))))
+
+axiom H1 :
+  (equality__l611_019_reduced_testcase_2__result1 = equality__l611_019_reduced_testcase_2__result2)
+
+axiom H2 :
+  (equality__l611_019_reduced_testcase_2__result3 = equality__l611_019_reduced_testcase_2__result1)
+
+axiom H3 : (result = equality__l611_019_reduced_testcase_2__result)
+
+axiom H4 : (equality__l611_019_reduced_testcase_2__result1 = of_int(1))
+
+axiom H5 :
+  (equality__l611_019_reduced_testcase_2__result4 = equality__l611_019_reduced_testcase_2__result2)
+
+axiom H6 :
+  (equality__l611_019_reduced_testcase_2__result5 = equality__l611_019_reduced_testcase_2__result3)
+
+axiom H7 : (result1 = equality__l611_019_reduced_testcase_2__result4)
+
+axiom H8 : (equality__l611_019_reduced_testcase_2__result4 = true)
+
  (* File "equality.adb", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall equality__l611_019_reduced_testcase_2__result:bool.
-  forall result:bool.
-  forall equality__l611_019_reduced_testcase_2__result1:bool.
-  forall equality__l611_019_reduced_testcase_2__result2:bool.
-  forall equality__l611_019_reduced_testcase_2__result3:bool.
-  forall equality__l611_019_reduced_testcase_2__result4:bool.
-  forall equality__l611_019_reduced_testcase_2__result5:bool.
-  (forall result1:bool. ((((((bool_eq3(a, 0, 255, b, 0, 255) = true) and
-  (bool_eq3(b, 0, 255, c, 0, 255) = true)) and (bool_eq3(c, 0, 255, d, 0,
-  255) = true)) and ((bool_eq3(a, 0, 255, c, 0, 255) = true) or
-  (not (bool_eq3(a, 0, 255, c, 0, 255) = true)))) and
-  (((((equality__l611_019_reduced_testcase_2__result1 = equality__l611_019_reduced_testcase_2__result2) and
-  (equality__l611_019_reduced_testcase_2__result3 = equality__l611_019_reduced_testcase_2__result1)) and
-  ((result = equality__l611_019_reduced_testcase_2__result) and
-  (equality__l611_019_reduced_testcase_2__result1 = of_int(1)))) and
-  ((equality__l611_019_reduced_testcase_2__result4 = equality__l611_019_reduced_testcase_2__result2) and
-  (equality__l611_019_reduced_testcase_2__result5 = equality__l611_019_reduced_testcase_2__result3))) and
-  (result1 = equality__l611_019_reduced_testcase_2__result4))) ->
-  ((equality__l611_019_reduced_testcase_2__result4 = true) -> (bool_eq3(a, 0,
-  255, d, 0, 255) = true)))))
+goal WP_parameter_def : (bool_eq3(a, 0, 255, d, 0, 255) = true)

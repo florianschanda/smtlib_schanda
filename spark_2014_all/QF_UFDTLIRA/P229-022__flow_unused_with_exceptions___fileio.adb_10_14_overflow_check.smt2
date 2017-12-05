@@ -37,6 +37,7 @@
 (declare-const y Int)
 (declare-const z Bool)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Bool)
 (declare-const z1 Bool)
 (declare-const result1 Int)

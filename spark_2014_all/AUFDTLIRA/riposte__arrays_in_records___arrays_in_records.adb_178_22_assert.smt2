@@ -174,6 +174,8 @@
 (declare-const a__split_fields9 us_split_fields)
 (declare-const result9 us_split_fields__ref)
 (declare-const a__split_fields10 us_split_fields)
+(declare-const a__split_fields11 us_split_fields__ref)
+(declare-const a__split_fields12 us_split_fields)
 (assert (in_range i))
 (assert (in_range j))
 (assert (not (= i j)))

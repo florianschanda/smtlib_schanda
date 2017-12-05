@@ -133,7 +133,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -437,7 +437,23 @@ type my_array__ref = { my_array__content : us_t
 function my_array__ref___projection(a: my_array__ref) : us_t =
   (a).my_array__content
 
+logic c : int
+
+logic top : int
+
+logic us : int
+
+logic o : int
+
+logic result : int
+
+logic top1 : int
+
+axiom H : in_range1(c)
+
+axiom H1 : (c = max)
+
+axiom H2 : in_range1(max)
+
  (* File "use_stack.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. (in_range1(c) -> ((c = max) -> (in_range1(max) ->
-  dynamic_property(0, last, 0)))))
+goal WP_parameter_def : dynamic_property(0, last, 0)

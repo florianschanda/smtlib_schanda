@@ -191,18 +191,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -365,10 +365,25 @@ axiom def_axiom :
   temp___227)[1]) = of_rep(temp___226)) and ((temp___224(temp___226,
   temp___227)[2]) = of_rep(temp___227))))
 
- (* File "dynamic_preds_rte.adb", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. ((in_range(i3s) and ((2 * i3s) <  100000)) ->
-  (((comp_div(to_rep((i9s[1])),to_rep((i9s[2]))) = 0) and
+logic x : (int,small) farray
+
+logic o : int
+
+logic o1 : int
+
+logic temp___233 : (int,small) farray
+
+axiom H : (in_range(i3s) and ((2 * i3s) <  100000))
+
+axiom H1 : ((comp_div(to_rep((i9s[1])),to_rep((i9s[2]))) = 0) and
   (forall temp___189:int. (((1 <= temp___189) and (temp___189 <= 2)) ->
-  ((2 * to_rep((i9s[temp___189]))) <  100000)))) -> ((((2 * 2) <  100000) and
-  (o = 2)) -> ((2 * 1) <  100000)))))
+  ((2 * to_rep((i9s[temp___189]))) <  100000))))
+
+axiom H2 : true
+
+axiom H3 : ((2 * 2) <  100000)
+
+axiom H4 : (o = 2)
+
+ (* File "dynamic_preds_rte.adb", line 26, characters 0-0 *)
+goal WP_parameter_def : ((2 * 1) <  100000)

@@ -180,20 +180,39 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic eq_null_record__always_true__result : bool
+
+logic result : bool
+
+logic eq_null_record__always_true__result1 : bool
+
+logic eq_null_record__always_true__result2 : bool
+
+logic eq_null_record__always_true__result3 : bool
+
+logic eq_null_record__always_true__result4 : bool
+
+logic eq_null_record__always_true__result5 : bool
+
+logic result1 : bool
+
+axiom H :
+  (eq_null_record__always_true__result1 = eq_null_record__always_true__result2)
+
+axiom H1 :
+  (eq_null_record__always_true__result3 = eq_null_record__always_true__result1)
+
+axiom H2 : (result = eq_null_record__always_true__result)
+
+axiom H3 : (eq_null_record__always_true__result1 = of_int(1))
+
+axiom H4 :
+  (eq_null_record__always_true__result4 = eq_null_record__always_true__result2)
+
+axiom H5 :
+  (eq_null_record__always_true__result5 = eq_null_record__always_true__result3)
+
+axiom H6 : (result1 = eq_null_record__always_true__result4)
+
  (* File "eq_null_record.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall eq_null_record__always_true__result:bool. forall result:bool.
-  forall eq_null_record__always_true__result1:bool.
-  forall eq_null_record__always_true__result2:bool.
-  forall eq_null_record__always_true__result3:bool.
-  forall eq_null_record__always_true__result4:bool.
-  forall eq_null_record__always_true__result5:bool.
-  (forall result1:bool.
-  ((((((eq_null_record__always_true__result1 = eq_null_record__always_true__result2) and
-  (eq_null_record__always_true__result3 = eq_null_record__always_true__result1)) and
-  ((result = eq_null_record__always_true__result) and
-  (eq_null_record__always_true__result1 = of_int(1)))) and
-  ((eq_null_record__always_true__result4 = eq_null_record__always_true__result2) and
-  (eq_null_record__always_true__result5 = eq_null_record__always_true__result3))) and
-  (result1 = eq_null_record__always_true__result4)) ->
-  (eq_null_record__always_true__result4 = true))))
+goal WP_parameter_def : (eq_null_record__always_true__result4 = true)

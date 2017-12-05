@@ -403,10 +403,87 @@ axiom def_axiom :
   (forall temp___442:int.
   ((stable_marriage__invert_1__result__aggregate_def(temp___441)[temp___442]) = of_rep1(temp___441))))
 
+logic result__ : (int,ranking) farray
+
+logic rank : int
+
+logic stable_marriage__invert_1__result : (int,ranking) farray
+
+logic temp___445 : int
+
+logic temp___443 : (int,ranking) farray
+
+logic prev : int
+
+logic g1 : int
+
+logic prev1 : int
+
+logic o : ranking
+
+logic o1 : (int,ranking) farray
+
+logic result : (int,ranking) farray
+
+logic result__1 : (int,ranking) farray
+
+logic result1 : int
+
+logic rank1 : int
+
+logic result__2 : (int,ranking) farray
+
+logic rank2 : int
+
+logic result2 : (int,ranking) farray
+
+logic result__3 : (int,ranking) farray
+
+logic result3 : int
+
+logic rank3 : int
+
+logic result__4 : (int,ranking) farray
+
+logic rank4 : int
+
+logic result__5 : (int,ranking) farray
+
+logic rank5 : int
+
+logic result__6 : (int,ranking) farray
+
+logic rank6 : int
+
+logic result__7 : (int,ranking) farray
+
+logic rank7 : int
+
+logic result4 : (int,ranking) farray
+
+logic stable_marriage__invert_1__result1 : (int,ranking) farray
+
+logic stable_marriage__invert_1__result2 : (int,ranking) farray
+
+logic stable_marriage__invert_1__result3 : (int,ranking) farray
+
+logic result__8 : (int,ranking) farray
+
+logic rank8 : int
+
+logic stable_marriage__invert_1__result4 : (int,ranking) farray
+
+logic result__9 : (int,ranking) farray
+
+logic rank9 : int
+
+logic stable_marriage__invert_1__result5 : (int,ranking) farray
+
+axiom H : (is_permutation_1(r1) = true)
+
+axiom H1 : (result = result__)
+
+axiom H2 : (result__1 = stable_marriage__invert_1__result__aggregate_def(64))
+
  (* File "stable_marriage.ads", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,ranking) farray. forall result:(int,ranking) farray.
-  forall result__1:(int,ranking) farray. ((is_permutation_1(r1) = true) ->
-  ((({ map__content1 = result } = { map__content1 = result__ }) and
-  (result__1 = stable_marriage__invert_1__result__aggregate_def(64))) ->
-  (is_permutation_1(r1) = true))))
+goal WP_parameter_def : (is_permutation_1(r1) = true)

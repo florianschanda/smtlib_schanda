@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tfixedB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -165,18 +165,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -298,7 +298,7 @@ function tfixedB__ref___projection(a: tfixedB__ref) : tfixedB =
 
 type fixed
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2146435072))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2146435072))
 
 logic dummy1 : fixed
 
@@ -451,65 +451,425 @@ logic attr__ATTRIBUTE_ADDRESS21 : int
 
 logic attr__ATTRIBUTE_ADDRESS22 : int
 
+logic t1 : fixed
+
+logic t2 : fixed
+
+logic t3 : fixed
+
+logic t4 : fixed
+
+logic t5 : fixed
+
+logic t6 : fixed
+
+logic t7 : fixed
+
+logic t8 : fixed
+
+logic t9 : fixed
+
+logic t10 : fixed
+
+logic a1 : fixed
+
+logic a2 : fixed
+
+logic a3 : fixed
+
+logic a4 : fixed
+
+logic a5 : fixed
+
+logic a6 : fixed
+
+logic a7 : fixed
+
+logic a8 : fixed
+
+logic a9 : fixed
+
+logic a10 : fixed
+
+logic num : fixed
+
+logic den : fixed
+
+logic res : fixed
+
+logic pi_compute__shanks_fixed__result : fixed
+
+logic o : fixed
+
+logic o1 : fixed
+
+logic o2 : fixed
+
+logic o3 : fixed
+
+logic o4 : fixed
+
+logic o5 : fixed
+
+logic o6 : fixed
+
+logic o7 : fixed
+
+logic o8 : fixed
+
+logic o9 : fixed
+
+logic o10 : fixed
+
+logic o11 : fixed
+
+logic o12 : fixed
+
+logic o13 : fixed
+
+logic o14 : fixed
+
+logic o15 : fixed
+
+logic o16 : fixed
+
+logic o17 : fixed
+
+logic o18 : fixed
+
+logic o19 : fixed
+
+logic o20 : fixed
+
+logic o21 : fixed
+
+logic result : fixed
+
+logic t11 : fixed
+
+logic result1 : fixed
+
+logic t21 : fixed
+
+logic result2 : fixed
+
+logic t31 : fixed
+
+logic result3 : fixed
+
+logic t41 : fixed
+
+logic result4 : fixed
+
+logic t51 : fixed
+
+logic result5 : fixed
+
+logic t61 : fixed
+
+logic result6 : fixed
+
+logic t71 : fixed
+
+logic result7 : fixed
+
+logic t81 : fixed
+
+logic result8 : fixed
+
+logic t91 : fixed
+
+logic result9 : fixed
+
+logic t101 : fixed
+
+logic result10 : fixed
+
+logic a11 : fixed
+
+logic result11 : fixed
+
+logic a21 : fixed
+
+logic result12 : fixed
+
+logic a31 : fixed
+
+logic result13 : fixed
+
+logic a41 : fixed
+
+logic result14 : fixed
+
+logic a51 : fixed
+
+logic result15 : fixed
+
+logic a61 : fixed
+
+logic result16 : fixed
+
+logic a71 : fixed
+
+logic result17 : fixed
+
+logic a81 : fixed
+
+logic result18 : fixed
+
+logic a91 : fixed
+
+logic result19 : fixed
+
+logic a101 : fixed
+
+logic result20 : fixed
+
+logic num1 : fixed
+
+logic result21 : fixed
+
+logic den1 : fixed
+
+logic result22 : fixed
+
+logic res1 : fixed
+
+logic result23 : fixed
+
+logic pi_compute__shanks_fixed__result1 : fixed
+
+logic pi_compute__shanks_fixed__result2 : fixed
+
+logic pi_compute__shanks_fixed__result3 : fixed
+
+logic t12 : fixed
+
+logic t22 : fixed
+
+logic t32 : fixed
+
+logic t42 : fixed
+
+logic t52 : fixed
+
+logic t62 : fixed
+
+logic t72 : fixed
+
+logic t82 : fixed
+
+logic t92 : fixed
+
+logic t102 : fixed
+
+logic a12 : fixed
+
+logic a22 : fixed
+
+logic a32 : fixed
+
+logic a42 : fixed
+
+logic a52 : fixed
+
+logic a62 : fixed
+
+logic a72 : fixed
+
+logic a82 : fixed
+
+logic a92 : fixed
+
+logic a102 : fixed
+
+logic num2 : fixed
+
+logic den2 : fixed
+
+logic res2 : fixed
+
+logic pi_compute__shanks_fixed__result4 : fixed
+
+logic t13 : fixed
+
+logic t23 : fixed
+
+logic t33 : fixed
+
+logic t43 : fixed
+
+logic t53 : fixed
+
+logic t63 : fixed
+
+logic t73 : fixed
+
+logic t83 : fixed
+
+logic t93 : fixed
+
+logic t103 : fixed
+
+logic a13 : fixed
+
+logic a23 : fixed
+
+logic a33 : fixed
+
+logic a43 : fixed
+
+logic a53 : fixed
+
+logic a63 : fixed
+
+logic a73 : fixed
+
+logic a83 : fixed
+
+logic a93 : fixed
+
+logic a103 : fixed
+
+logic num3 : fixed
+
+logic den3 : fixed
+
+logic res3 : fixed
+
+logic pi_compute__shanks_fixed__result5 : fixed
+
+axiom H : (to_fixed1(o) = 1048576)
+
+axiom H1 : (result = t1)
+
+axiom H2 : (t11 = o)
+
+axiom H3 : (to_fixed1(o1) = 349525)
+
+axiom H4 : (result1 = t2)
+
+axiom H5 : (t21 = o1)
+
+axiom H6 : (to_fixed1(o2) = 209715)
+
+axiom H7 : (result2 = t3)
+
+axiom H8 : (t31 = o2)
+
+axiom H9 : (to_fixed1(o3) = 149796)
+
+axiom H10 : (result3 = t4)
+
+axiom H11 : (t41 = o3)
+
+axiom H12 : (to_fixed1(o4) = 116508)
+
+axiom H13 : (result4 = t5)
+
+axiom H14 : (t51 = o4)
+
+axiom H15 : (to_fixed1(o5) = 95325)
+
+axiom H16 : (result5 = t6)
+
+axiom H17 : (t61 = o5)
+
+axiom H18 : (to_fixed1(o6) = 80659)
+
+axiom H19 : (result6 = t7)
+
+axiom H20 : (t71 = o6)
+
+axiom H21 : (to_fixed1(o7) = 69905)
+
+axiom H22 : (result7 = t8)
+
+axiom H23 : (t81 = o7)
+
+axiom H24 : (to_fixed1(o8) = 61680)
+
+axiom H25 : (result8 = t9)
+
+axiom H26 : (t91 = o8)
+
+axiom H27 : (to_fixed1(o9) = 55188)
+
+axiom H28 : (result9 = t10)
+
+axiom H29 : (t101 = o9)
+
+axiom H30 : (result10 = a1)
+
+axiom H31 : (a11 = t11)
+
+axiom H32 : (to_fixed1(o10) = (to_fixed1(a11) - to_fixed1(t21)))
+
+axiom H33 : (result11 = a2)
+
+axiom H34 : (a21 = o10)
+
+axiom H35 : (to_fixed1(o11) = (to_fixed1(a21) + to_fixed1(t31)))
+
+axiom H36 : (result12 = a3)
+
+axiom H37 : (a31 = o11)
+
+axiom H38 : (to_fixed1(o12) = (to_fixed1(a31) - to_fixed1(t41)))
+
+axiom H39 : (result13 = a4)
+
+axiom H40 : (a41 = o12)
+
+axiom H41 : (to_fixed1(o13) = (to_fixed1(a41) + to_fixed1(t51)))
+
+axiom H42 : (result14 = a5)
+
+axiom H43 : (a51 = o13)
+
+axiom H44 : (to_fixed1(o14) = (to_fixed1(a51) - to_fixed1(t61)))
+
+axiom H45 : (result15 = a6)
+
+axiom H46 : (a61 = o14)
+
+axiom H47 : (to_fixed1(o15) = (to_fixed1(a61) + to_fixed1(t71)))
+
+axiom H48 : (result16 = a7)
+
+axiom H49 : (a71 = o15)
+
+axiom H50 : (to_fixed1(o16) = (to_fixed1(a71) - to_fixed1(t81)))
+
+axiom H51 : (result17 = a8)
+
+axiom H52 : (a81 = o16)
+
+axiom H53 : (to_fixed1(o17) = (to_fixed1(a81) + to_fixed1(t91)))
+
+axiom H54 : (result18 = a9)
+
+axiom H55 : (a91 = o17)
+
+axiom H56 : (to_fixed1(o18) = (to_fixed1(a91) - to_fixed1(t101)))
+
+axiom H57 : (result19 = a10)
+
+axiom H58 : (a101 = o18)
+
+axiom H59 : (to_fixed1(o19) = ((fxp_mult(to_fixed1(a101),
+  to_fixed1(a81)) - fxp_mult(to_fixed1(a91), to_fixed1(a91))) * 4))
+
+axiom H60 : (result20 = num)
+
+axiom H61 : (num1 = o19)
+
+axiom H62 :
+  (to_fixed1(o20) = ((to_fixed1(a101) - (to_fixed1(a91) * 2)) + to_fixed1(a81)))
+
+axiom H63 : (result21 = den)
+
+axiom H64 : (den1 = o20)
+
  (* File "pi_compute.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:fixed. forall t2:fixed. forall t3:fixed. forall t4:fixed.
-  forall t5:fixed. forall t6:fixed. forall t7:fixed. forall t8:fixed.
-  forall t9:fixed. forall t10:fixed. forall a1:fixed. forall a2:fixed.
-  forall a3:fixed. forall a4:fixed. forall a5:fixed. forall a6:fixed.
-  forall a7:fixed. forall a8:fixed. forall a9:fixed. forall a10:fixed.
-  forall num:fixed. forall den:fixed. forall o:fixed. forall o1:fixed.
-  forall o2:fixed. forall o3:fixed. forall o4:fixed. forall o5:fixed.
-  forall o6:fixed. forall o7:fixed. forall o8:fixed. forall o9:fixed.
-  forall o10:fixed. forall o11:fixed. forall o12:fixed. forall o13:fixed.
-  forall o14:fixed. forall o15:fixed. forall o16:fixed. forall o17:fixed.
-  forall o18:fixed. forall o19:fixed. forall o20:fixed. forall result:fixed.
-  forall t11:fixed. forall result1:fixed. forall t21:fixed.
-  forall result2:fixed. forall t31:fixed. forall result3:fixed.
-  forall t41:fixed. forall result4:fixed. forall t51:fixed.
-  forall result5:fixed. forall t61:fixed. forall result6:fixed.
-  forall t71:fixed. forall result7:fixed. forall t81:fixed.
-  forall result8:fixed. forall t91:fixed. forall result9:fixed.
-  forall t101:fixed. forall result10:fixed. forall a11:fixed.
-  forall result11:fixed. forall a21:fixed. forall result12:fixed.
-  forall a31:fixed. forall result13:fixed. forall a41:fixed.
-  forall result14:fixed. forall a51:fixed. forall result15:fixed.
-  forall a61:fixed. forall result16:fixed. forall a71:fixed.
-  forall result17:fixed. forall a81:fixed. forall result18:fixed__ref.
-  forall a91:fixed. forall result19:fixed__ref. forall a101:fixed.
-  forall result20:fixed__ref. forall num1:fixed. forall result21:fixed__ref.
-  forall den1:fixed. (((to_fixed1(o) = 1048576) and ((result = t1) and
-  (t11 = o))) -> (((to_fixed1(o1) = 349525) and ((result1 = t2) and
-  (t21 = o1))) -> (((to_fixed1(o2) = 209715) and ((result2 = t3) and
-  (t31 = o2))) -> (((to_fixed1(o3) = 149796) and ((result3 = t4) and
-  (t41 = o3))) -> (((to_fixed1(o4) = 116508) and ((result4 = t5) and
-  (t51 = o4))) -> (((to_fixed1(o5) = 95325) and ((result5 = t6) and
-  (t61 = o5))) -> (((to_fixed1(o6) = 80659) and ((result6 = t7) and
-  (t71 = o6))) -> (((to_fixed1(o7) = 69905) and ((result7 = t8) and
-  (t81 = o7))) -> (((to_fixed1(o8) = 61680) and ((result8 = t9) and
-  (t91 = o8))) -> (((to_fixed1(o9) = 55188) and ((result9 = t10) and
-  (t101 = o9))) -> (((result10 = a1) and (a11 = t11)) ->
-  (((to_fixed1(o10) = (to_fixed1(a11) - to_fixed1(t21))) and
-  ((result11 = a2) and (a21 = o10))) ->
-  (((to_fixed1(o11) = (to_fixed1(a21) + to_fixed1(t31))) and
-  ((result12 = a3) and (a31 = o11))) ->
-  (((to_fixed1(o12) = (to_fixed1(a31) - to_fixed1(t41))) and
-  ((result13 = a4) and (a41 = o12))) ->
-  (((to_fixed1(o13) = (to_fixed1(a41) + to_fixed1(t51))) and
-  ((result14 = a5) and (a51 = o13))) ->
-  (((to_fixed1(o14) = (to_fixed1(a51) - to_fixed1(t61))) and
-  ((result15 = a6) and (a61 = o14))) ->
-  (((to_fixed1(o15) = (to_fixed1(a61) + to_fixed1(t71))) and
-  ((result16 = a7) and (a71 = o15))) ->
-  (((to_fixed1(o16) = (to_fixed1(a71) - to_fixed1(t81))) and
-  ((result17 = a8) and (a81 = o16))) ->
-  (((to_fixed1(o17) = (to_fixed1(a81) + to_fixed1(t91))) and ((result18 = {
-  fixed__content = a9 }) and (a91 = o17))) ->
-  (((to_fixed1(o18) = (to_fixed1(a91) - to_fixed1(t101))) and ((result19 = {
-  fixed__content = a10 }) and (a101 = o18))) ->
-  (((to_fixed1(o19) = ((fxp_mult(to_fixed1(a101),
-  to_fixed1(a81)) - fxp_mult(to_fixed1(a91), to_fixed1(a91))) * 4)) and
-  ((result20 = { fixed__content = num }) and (num1 = o19))) ->
-  (((to_fixed1(o20) = ((to_fixed1(a101) - (to_fixed1(a91) * 2)) + to_fixed1(a81))) and
-  ((result21 = { fixed__content = den }) and (den1 = o20))) ->
-  in_range(fxp_div(to_fixed1(num1), to_fixed1(den1))))))))))))))))))))))))))
+goal WP_parameter_def : in_range(fxp_div(to_fixed1(num1), to_fixed1(den1)))

@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -349,6 +349,8 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range(i)
+
  (* File "arrays_of_records.adb", line 19, characters 0-0 *)
-goal WP_parameter_def : (in_range(i) ->
-  (to_rep((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23))
+goal WP_parameter_def :
+  (to_rep((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23)

@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -727,18 +727,35 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range4(index)
+
+axiom H1 : in_range2(count)
+
+axiom H2 : ((1 <= index) and (index <= (0 + length1(model__({
+  us_split_discrs1 = { rec__names__entry_tables__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__names__entry_tables__vector = container__split_fields } })))))
+
+axiom H3 : ((o2 = (index - 1)) and in_range2((index - 1)))
+
+axiom H4 : ((o = length({ us_split_discrs1 = {
+  rec__names__entry_tables__vector__capacity = container__split_discrs };
+  us_split_fields1 = { rec__names__entry_tables__vector =
+  container__split_fields } })) and (in_range3(o) and (((of_int(0) = true) ->
+  (o <= to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o <= 2147483647)))))
+
+axiom H5 : (o1 = (o - count))
+
  (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
-  forall o2:int. (in_range4(index) -> (in_range2(count) -> (((1 <= index) and
-  (index <= (0 + length1(model__({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = container__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  container__split_fields } }))))) -> (((o2 = (index - 1)) and
-  in_range2((index - 1))) -> ((((o = length({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = container__split_discrs };
-  us_split_fields1 = { rec__names__entry_tables__vector =
-  container__split_fields } })) and (in_range3(o) and
-  (((of_int(0) = true) and (o <= to_rep(container__split_discrs))) or
-  ((not (of_int(0) = true)) and (o <= 2147483647))))) and
-  (o1 = (o - count))) -> in_range1(o1)))))))
+goal WP_parameter_def : in_range1(o1)

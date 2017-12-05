@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -278,16 +278,23 @@ axiom create__def_axiom1 :
   (forall c:int [create(c)]. (in_range(c) -> (create(c) = {
   us_split_fields1 = { rec__notag_base__t__c = of_rep(c) } })))
 
+logic notag_ext__test__a__assume : integer
+
+logic notag_ext__test__b__assume : integer
+
+axiom H : (({ us_split_fields1 = { rec__notag_base__t__c =
+  notag_ext__test__a__assume } } = create1(1)) and ({ us_split_fields1 = {
+  rec__notag_base__t__c = notag_ext__test__a__assume } } = create(1)))
+
+axiom H1 : (notag_ext__test__a__assume = a)
+
+axiom H2 : (({ us_split_fields1 = { rec__notag_base__t__c =
+  notag_ext__test__b__assume } } = create1(2)) and ({ us_split_fields1 = {
+  rec__notag_base__t__c = notag_ext__test__b__assume } } = create(2)))
+
+axiom H3 : (notag_ext__test__b__assume = b)
+
  (* File "notag_ext.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall notag_ext__test__a__assume:integer.
-  forall notag_ext__test__b__assume:integer. (((({ us_split_fields1 = {
-  rec__notag_base__t__c = notag_ext__test__a__assume } } = create1(1)) and ({
-  us_split_fields1 = { rec__notag_base__t__c = notag_ext__test__a__assume }
-  } = create(1))) and (a = notag_ext__test__a__assume)) -> (((({
-  us_split_fields1 = { rec__notag_base__t__c = notag_ext__test__b__assume }
-  } = create1(2)) and ({ us_split_fields1 = { rec__notag_base__t__c =
-  notag_ext__test__b__assume } } = create(2))) and
-  (b = notag_ext__test__b__assume)) -> (not (sum({ us_split_fields1 = {
+goal WP_parameter_def : (not (sum({ us_split_fields1 = {
   rec__notag_base__t__c = a } }) = sum({ us_split_fields1 = {
-  rec__notag_base__t__c = b } }))))))
+  rec__notag_base__t__c = b } })))

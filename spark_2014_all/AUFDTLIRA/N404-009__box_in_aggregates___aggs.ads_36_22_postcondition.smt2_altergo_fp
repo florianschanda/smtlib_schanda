@@ -244,9 +244,23 @@ axiom def_axiom :
   (forall temp___206:int.
   ((temp___203(temp___205)[temp___206]) = of_rep(temp___205))))
 
+logic x : (int,t2) farray
+
+logic result : (int,t2) farray
+
+logic x1 : (int,t2) farray
+
+logic x2 : (int,t2) farray
+
+logic x3 : (int,t2) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___203(11))
+
+axiom H2 : (x1 = x2)
+
+axiom H3 : (x3 = x1)
+
  (* File "aggs.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,t2) farray. forall result:(int,t2) farray.
-  forall x1:(int,t2) farray. forall x2:(int,t2) farray.
-  forall x3:(int,t2) farray. ((((result = x) and (x1 = temp___203(11))) and
-  ((x1 = x2) and (x3 = x1))) -> (to_rep((x2[2])) = 11)))
+goal WP_parameter_def : (to_rep((x2[2])) = 11)

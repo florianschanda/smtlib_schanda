@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -123,11 +123,27 @@ axiom return_state__post_axiom1 :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic state : us_private
+
+logic state1 : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : ((o = return_state1(state1)) and in_range(o))
+
+axiom H2 : ((o1 = return_state(state)) and in_range(o1))
+
+axiom H3 : (o2 = (o1 + o))
+
  (* File "better_error_locations.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall state:us_private. forall state1:us_private.
-  forall o:int. forall o1:int. forall o2:int.
-  ((((-2147483648) <= 2147483647) -> in_range(x)) ->
-  ((((o = return_state1(state1)) and in_range(o)) and
-  (((o1 = return_state(state)) and in_range(o1)) and (o2 = (o1 + o)))) ->
-  in_range(o2))))
+goal WP_parameter_def : in_range(o2)

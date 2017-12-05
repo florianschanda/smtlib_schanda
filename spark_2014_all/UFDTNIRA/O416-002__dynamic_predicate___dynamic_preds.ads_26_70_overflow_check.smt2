@@ -103,6 +103,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_174 us_rep) (temp___is_init_171 Bool) (temp___skip_constant_172 Bool) (temp___do_toplevel_173 Bool)) Bool (and (=> (= temp___do_toplevel_173 true) (=> (= temp___is_init_171 true) (= (to_rep (rec__dynamic_preds__even_pair__b (us_split_fields1 temp___expr_174))) (+ (to_rep (rec__dynamic_preds__even_pair__a (us_split_fields1 temp___expr_174))) 2)))) (and (=> (= temp___is_init_171 true) (= (mod2 (to_rep (rec__dynamic_preds__even_pair__a (us_split_fields1 temp___expr_174))) 2) 0)) (=> (= temp___is_init_171 true) (= (mod2 (to_rep (rec__dynamic_preds__even_pair__b (us_split_fields1 temp___expr_174))) 2) 0)))))
 (define-fun dynamic_predicate1 ((temp___182 us_rep)) Bool (= (to_rep (rec__dynamic_preds__even_pair__b (us_split_fields1 temp___182))) (+ (to_rep (rec__dynamic_preds__even_pair__a (us_split_fields1 temp___182))) 2)))
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const o Int)
 (assert (dynamic_invariant i7s true false true))
 (assert (dynamic_invariant1 i11s true false false))
 (assert (not (in_range (+ (to_rep (rec__dynamic_preds__even_pair__a (us_split_fields1 i11s))) 2))))

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1288,29 +1288,72 @@ logic self__4 : (int,natural) farray
 
 logic self__5 : t1
 
+logic temp___230 : (int,natural) farray
+
+logic temp___2301 : t3
+
+logic o : (int,natural) farray
+
+logic o1 : t2
+
+logic o2 : (int,natural) farray
+
+logic o3 : t2
+
+logic o4 : natural
+
+logic o5 : (int,natural) farray
+
+logic o6 : t2
+
+logic o7 : natural
+
+logic o8 : (int,natural) farray
+
+logic o9 : t
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : t
+
+axiom H : (to_rep1(first6((temp___210(0, 1, to_rep(self__1))).rt3)) = 1)
+
+axiom H1 : (to_rep1(last6((temp___210(0, 1,
+  to_rep(self__1))).rt3)) = to_rep(self__1))
+
+axiom H2 : ({ elts3 = temp___230; rt3 = temp___2301 } = temp___210(0, 1,
+  to_rep(self__1)))
+
+axiom H3 : (((to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301))) ->
+  (((1 <= to_rep(self__1)) ->
+  (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = ((to_rep(self__1) - 1) + 1))) and
+  ((not (1 <= to_rep(self__1))) ->
+  (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301)))) ->
+  ((1 <= to_rep(self__1)) -> (0 = ((to_rep(self__1) - 1) + 1)))))
+
+axiom H4 : (temp___230 = o)
+
+axiom H5 : (mk2(to_rep1(first6(temp___2301)),
+  to_rep1(last6(temp___2301))) = o1)
+
+axiom H6 : (o2 = o)
+
+axiom H7 : (o3 = o1)
+
+axiom H8 : (self__1 = o4)
+
+axiom H9 : (o5 = o2)
+
+axiom H10 : (o6 = o3)
+
+axiom H11 : ({ us_split_discrs1 = { rec__p__my_rec__c = o7 };
+  us_split_fields1 = { rec__p__my_rec__content = { elts = o8; rt = o9 } }
+  } = to_base1({ us_split_discrs3 = { rec__p__my_rec__c = o4 };
+  us_split_fields5 = { rec__p__my_rec__content2 = { elts2 = o5; rt2 = o6 } }
+  }))
+
  (* File "p.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___230:(int,natural) farray. forall temp___2301:t3.
-  forall o:(int,natural) farray. forall o1:t2.
-  forall o2:(int,natural) farray. forall o3:t2. forall o4:natural.
-  forall o5:(int,natural) farray. forall o6:t2. forall o7:natural.
-  forall o8:(int,natural) farray. forall o9:t.
-  (((((((to_rep1(first6((temp___210(0, 1, to_rep(self__1))).rt3)) = 1) and
-  ((to_rep1(last6((temp___210(0, 1,
-  to_rep(self__1))).rt3)) = to_rep(self__1)) and ({ elts3 = temp___230; rt3 =
-  temp___2301 } = temp___210(0, 1, to_rep(self__1))))) and
-  ((((to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301))) and
-  (((1 <= to_rep(self__1)) and
-  (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = ((to_rep(self__1) - 1) + 1))) or
-  ((not (1 <= to_rep(self__1))) and
-  (((to_rep1(last6(temp___2301)) - to_rep1(first6(temp___2301))) + 1) = 0)))) or
-  ((not (to_rep1(first6(temp___2301)) <= to_rep1(last6(temp___2301)))) and
-  (((1 <= to_rep(self__1)) and (0 = ((to_rep(self__1) - 1) + 1))) or
-  (not (1 <= to_rep(self__1)))))) and ((temp___230 = o) and
-  (mk2(to_rep1(first6(temp___2301)),
-  to_rep1(last6(temp___2301))) = o1)))) and ((o2 = o) and (o3 = o1))) and
-  ((self__1 = o4) and ((o5 = o2) and (o6 = o3)))) and ({ us_split_discrs1 = {
-  rec__p__my_rec__c = o7 }; us_split_fields1 = { rec__p__my_rec__content = {
-  elts = o8; rt = o9 } } } = to_base1({ us_split_discrs3 = {
-  rec__p__my_rec__c = o4 }; us_split_fields5 = { rec__p__my_rec__content2 = {
-  elts2 = o5; rt2 = o6 } } }))) -> (to_rep(self__1) = to_rep(o7))))
+goal WP_parameter_def : (to_rep(self__1) = to_rep(o7))

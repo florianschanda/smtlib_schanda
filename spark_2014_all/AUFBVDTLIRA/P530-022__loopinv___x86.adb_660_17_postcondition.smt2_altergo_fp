@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1240,14 +1240,29 @@ logic i : t1
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t1. forall rdi:t1. forall memory:(t1,unsigned8) farray.
-  forall mem:(t1,unsigned8) farray. (((hasmem64(mem, add1(rdi_start, mul1(i,
-  of_int1(8))), rax) = true) and ((nooverlap8equal(memory, mem,
-  rdi) = true) and ((nooverlap8(add1(rdi_start, mul1(i, of_int1(8))),
-  rdi) = true) and
+logic rax : t1
+
+logic rdi : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic mem : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : ((hasmem64(mem, add1(rdi_start, mul1(i, of_int1(8))),
+  rax) = true) and ((nooverlap8equal(memory, mem, rdi) = true) and
+  ((nooverlap8(add1(rdi_start, mul1(i, of_int1(8))), rdi) = true) and
   (forall j:t1. ((ule1(of_int1(0), j) and ule1(j, of_int1(7))) ->
   (to_rep((memory[add1(add1(rdi_start, mul1(i, of_int1(8))),
-  j)])) = to_rep((mem[add1(add1(rdi_start, mul1(i, of_int1(8))), j)])))))))) ->
-  (hasmem64(memory, add1(rdi_start, mul1(i, of_int1(8))), rax) = true)))
+  j)])) = to_rep((mem[add1(add1(rdi_start, mul1(i, of_int1(8))), j)]))))))))
+
+ (* File "x86.ads", line 10, characters 0-0 *)
+goal WP_parameter_def : (hasmem64(memory, add1(rdi_start, mul1(i,
+  of_int1(8))), rax) = true)

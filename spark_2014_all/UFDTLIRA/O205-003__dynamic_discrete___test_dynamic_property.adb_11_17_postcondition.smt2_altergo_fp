@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -179,12 +179,46 @@ axiom last__def_axiom : (last = c)
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic temp___144 : int
+
+logic us : int
+
+logic o : int
+
+logic x1 : int
+
+logic result : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic x4 : int
+
+axiom H : in_range1(c)
+
+axiom H1 : dynamic_property(0, last, x)
+
+axiom H2 : ((x <  c) -> ((temp___144 = (x + 1)) and in_range((x + 1))))
+
+axiom H3 : ((x <  c) -> ((us = temp___144) and dynamic_property(0, last,
+  temp___144)))
+
+axiom H4 : ((x <  c) -> (o = temp___144))
+
+axiom H5 : ((x <  c) -> (result = x))
+
+axiom H6 : ((x <  c) -> (x2 = o))
+
+axiom H7 : ((not (x <  c)) -> (x2 = x))
+
+axiom H8 : ((not (x <  c)) -> (x2 = x1))
+
+axiom H9 : (x2 = x3)
+
+axiom H10 : (x4 = x2)
+
  (* File "test_dynamic_property.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall temp___144:int. forall us:int. forall o:int.
-  forall x1:int. forall result:int. forall x2:int. forall x3:int.
-  forall x4:int. ((in_range1(c) and (dynamic_property(0, last, x) and
-  ((((x <  c) and ((((temp___144 = (x + 1)) and in_range((x + 1))) and
-  (((us = temp___144) and dynamic_property(0, last, temp___144)) and
-  (o = temp___144))) and ((result = x) and (x2 = o)))) or ((not (x <  c)) and
-  ((x2 = x) and (x2 = x1)))) and ((x2 = x3) and (x4 = x2))))) -> (0 <  x3)))
+goal WP_parameter_def : (0 <  x3)

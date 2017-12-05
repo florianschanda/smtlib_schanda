@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -493,29 +493,46 @@ axiom create__def_axiom :
   us_split_fields1 = { rec__base__t__c = of_rep(c); rec__ext__ =
   us_null_ext__ }; attr__tag = us_tag })))
 
- (* File "ext.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ext__test__a__assume:integer. forall ext__test__a__assume1:integer.
-  forall ext__test__a__assume2:us_private. forall ext__test__a__assume3:int.
-  forall ext__test__b__assume:integer. forall ext__test__b__assume1:integer.
-  forall ext__test__b__assume2:us_private. forall ext__test__b__assume3:int.
-  (((({ us_split_fields3 = { rec__ext__u__d = ext__test__a__assume;
+logic ext__test__a__assume : integer
+
+logic ext__test__a__assume1 : integer
+
+logic ext__test__a__assume2 : us_private
+
+logic ext__test__a__assume3 : int
+
+logic ext__test__b__assume : integer
+
+logic ext__test__b__assume1 : integer
+
+logic ext__test__b__assume2 : us_private
+
+logic ext__test__b__assume3 : int
+
+axiom H : (({ us_split_fields3 = { rec__ext__u__d = ext__test__a__assume;
   rec__base__t__c1 = ext__test__a__assume1; rec__ext__1 =
   ext__test__a__assume2 }; attr__tag1 = ext__test__a__assume3
   } = create__2(1)) and (((of_rep(0) = ext__test__a__assume) and
   ((((create(1)).us_split_fields1).rec__base__t__c = ext__test__a__assume1) and
   (us_null_ext__ = ext__test__a__assume2))) and
-  (us_tag1 = ext__test__a__assume3))) and (((ext__test__a__assume = a) and
-  ((ext__test__a__assume1 = a1) and (ext__test__a__assume2 = a2))) and
-  (us_tag1 = a3))) -> (((({ us_split_fields3 = { rec__ext__u__d =
-  ext__test__b__assume; rec__base__t__c1 = ext__test__b__assume1;
-  rec__ext__1 = ext__test__b__assume2 }; attr__tag1 = ext__test__b__assume3
+  (us_tag1 = ext__test__a__assume3)))
+
+axiom H1 : (((ext__test__a__assume = a) and ((ext__test__a__assume1 = a1) and
+  (ext__test__a__assume2 = a2))) and (us_tag1 = a3))
+
+axiom H2 : (({ us_split_fields3 = { rec__ext__u__d = ext__test__b__assume;
+  rec__base__t__c1 = ext__test__b__assume1; rec__ext__1 =
+  ext__test__b__assume2 }; attr__tag1 = ext__test__b__assume3
   } = create__2(2)) and (((of_rep(0) = ext__test__b__assume) and
   ((((create(2)).us_split_fields1).rec__base__t__c = ext__test__b__assume1) and
   (us_null_ext__ = ext__test__b__assume2))) and
-  (us_tag1 = ext__test__b__assume3))) and (((ext__test__b__assume = b) and
-  ((ext__test__b__assume1 = b1) and (ext__test__b__assume2 = b2))) and
-  (us_tag1 = b3))) -> (sum({ us_split_fields1 = { rec__base__t__c = a1;
+  (us_tag1 = ext__test__b__assume3)))
+
+axiom H3 : (((ext__test__b__assume = b) and ((ext__test__b__assume1 = b1) and
+  (ext__test__b__assume2 = b2))) and (us_tag1 = b3))
+
+ (* File "ext.ads", line 15, characters 0-0 *)
+goal WP_parameter_def : (sum({ us_split_fields1 = { rec__base__t__c = a1;
   rec__ext__ = hide_ext__(a, a2) }; attr__tag = a3 }) = sum({
   us_split_fields1 = { rec__base__t__c = b1; rec__ext__ = hide_ext__(b, b2)
-  }; attr__tag = b3 })))))
+  }; attr__tag = b3 }))

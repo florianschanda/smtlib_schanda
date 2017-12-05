@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -153,9 +153,39 @@ logic c2 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic real_world__k616_030_a__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic result : bool
+
+logic real_world__k616_030_a__result1 : bool
+
+logic real_world__k616_030_a__result2 : bool
+
+logic real_world__k616_030_a__result3 : bool
+
+logic real_world__k616_030_a__result4 : bool
+
+logic real_world__k616_030_a__result5 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : in_range1(z)
+
+axiom H3 : in_range1(c)
+
+axiom H4 : in_range1(c2)
+
+axiom H5 : ((o1 = (c2 + y)) and in_range1((c2 + y)))
+
+axiom H6 : (((c <= o1) -> (o2 = true)) and ((not (c <= o1)) -> (o2 = false)))
+
  (* File "real_world.adb", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:bool. (in_range1(x) -> (in_range1(y) ->
-  (in_range1(z) -> (in_range1(c) -> (in_range1(c2) -> ((((o = (c2 + y)) and
-  in_range1((c2 + y))) and (((c <= o) and (o1 = true)) or ((not (c <= o)) and
-  (o1 = false)))) -> in_range1((x + y)))))))))
+goal WP_parameter_def : in_range1((x + y))

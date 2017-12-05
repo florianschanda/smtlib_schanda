@@ -1349,10 +1349,60 @@ axiom sin__post_axiom :
   le(sin(x), fliteral)) and (eq(x, fliteral6) -> eq(sin(x), fliteral6))) and
   tqtisFinite(sin(x)))))
 
+logic lat_long__delta_long_in_meters__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic lat_long__delta_long_in_meters__result1 : t
+
+logic lat_long__delta_long_in_meters__result2 : t
+
+logic lat_long__delta_long_in_meters__result3 : t
+
+logic lat_long__delta_long_in_meters__result4 : t
+
+logic lat_long__delta_long_in_meters__result5 : t
+
+logic result1 : t
+
+axiom H :
+  (lat_long__delta_long_in_meters__result1 = lat_long__delta_long_in_meters__result2)
+
+axiom H1 :
+  (lat_long__delta_long_in_meters__result3 = lat_long__delta_long_in_meters__result1)
+
+axiom H2 : ((o = cos(to_rep(source))) and (tqtisFinite(o) and
+  ((o = sin(to_rep(source))) and ((le(neg(fliteral2), to_rep(source)) and
+  le(to_rep(source), fliteral2)) -> le(fliteral3, o)))))
+
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 6367444.5))
+
+axiom H3 : (o1 = div(NearestTiesToEven, mul(NearestTiesToEven,
+  sub(NearestTiesToEven, to_rep1(destination1), to_rep1(source1)),
+  fliteral7), o))
+
+axiom H4 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H5 : (result = lat_long__delta_long_in_meters__result)
+
+axiom H6 : (lat_long__delta_long_in_meters__result1 = o2)
+
+axiom H7 :
+  (lat_long__delta_long_in_meters__result4 = lat_long__delta_long_in_meters__result2)
+
+axiom H8 :
+  (lat_long__delta_long_in_meters__result5 = lat_long__delta_long_in_meters__result3)
+
+axiom H9 : (result1 = lat_long__delta_long_in_meters__result4)
 
 logic fliteral8 : t
 
@@ -1360,26 +1410,5 @@ axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 40007832.0))
 
  (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lat_long__delta_long_in_meters__result:t. forall o:t. forall o1:t.
-  forall o2:t. forall result:t.
-  forall lat_long__delta_long_in_meters__result1:t.
-  forall lat_long__delta_long_in_meters__result2:t.
-  forall lat_long__delta_long_in_meters__result3:t.
-  forall lat_long__delta_long_in_meters__result4:t.
-  forall lat_long__delta_long_in_meters__result5:t.
-  (forall result1:t.
-  ((((((lat_long__delta_long_in_meters__result1 = lat_long__delta_long_in_meters__result2) and
-  (lat_long__delta_long_in_meters__result3 = lat_long__delta_long_in_meters__result1)) and
-  (((((o = cos(to_rep(source))) and (tqtisFinite(o) and
-  ((o = sin(to_rep(source))) and ((le(neg(fliteral2), to_rep(source)) and
-  le(to_rep(source), fliteral2)) -> le(fliteral3, o))))) and
-  (o1 = div(NearestTiesToEven, mul(NearestTiesToEven, sub(NearestTiesToEven,
-  to_rep1(destination1), to_rep1(source1)), fliteral7), o))) and
-  ((o2 = o1) and tqtisFinite(o1))) and
-  ((result = lat_long__delta_long_in_meters__result) and
-  (lat_long__delta_long_in_meters__result1 = o2)))) and
-  ((lat_long__delta_long_in_meters__result4 = lat_long__delta_long_in_meters__result2) and
-  (lat_long__delta_long_in_meters__result5 = lat_long__delta_long_in_meters__result3))) and
-  (result1 = lat_long__delta_long_in_meters__result4)) ->
-  (olt(abs(lat_long__delta_long_in_meters__result4), fliteral8) = true))))
+goal WP_parameter_def : (olt(abs(lat_long__delta_long_in_meters__result4),
+  fliteral8) = true)

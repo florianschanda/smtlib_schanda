@@ -104,6 +104,7 @@
 (declare-const x (Array Int Bool))
 (declare-const result (Array Int Bool))
 (declare-const x1 (Array Int Bool))
+(assert true)
 (assert (= result x))
 (assert (= x1 (temp___691 (ite (= (bvxor y y) ((_ int2bv 8) 0)) true false))))
 (declare-const n Int)

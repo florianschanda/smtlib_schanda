@@ -134,7 +134,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range2(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range2(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq3 : int, int -> bool
 
@@ -273,7 +273,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type tcounterB
 
-predicate in_range3(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range3(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq5 : int, int -> bool
 
@@ -369,9 +369,183 @@ axiom def_axiom :
   (forall temp___241:int.
   ((temp___238(temp___240)[temp___241]) = of_rep(temp___240))))
 
+logic tmp : (int,value) farray
+
+logic j : int
+
+logic j1 : int
+
+logic complex_arrays__create_step_array__result : (int,value) farray
+
+logic temp___245 : int
+
+logic temp___244 : int
+
+logic temp___242 : (int,value) farray
+
+logic o : value
+
+logic o1 : (int,value) farray
+
+logic k : int
+
+logic o2 : value
+
+logic o3 : (int,value) farray
+
+logic temp___249 : (int,value) farray
+
+logic temp___248 : int
+
+logic o4 : value
+
+logic o5 : (int,value) farray
+
+logic k1 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : value
+
+logic o11 : (int,value) farray
+
+logic result : (int,value) farray
+
+logic tmp1 : (int,value) farray
+
+logic result1 : int
+
+logic j2 : int
+
+logic result2 : (int,value) farray
+
+logic tmp2 : (int,value) farray
+
+logic tmp3 : (int,value) farray
+
+logic j3 : int
+
+logic result3 : int
+
+logic j4 : int
+
+logic result4 : (int,value) farray
+
+logic tmp4 : (int,value) farray
+
+logic tmp5 : (int,value) farray
+
+logic j5 : int
+
+logic tmp6 : (int,value) farray
+
+logic j6 : int
+
+logic tmp7 : (int,value) farray
+
+logic j7 : int
+
+logic tmp8 : (int,value) farray
+
+logic j8 : int
+
+logic tmp9 : (int,value) farray
+
+logic j9 : int
+
+logic tmp10 : (int,value) farray
+
+logic j10 : int
+
+logic result5 : int
+
+logic j11 : int
+
+logic result6 : (int,value) farray
+
+logic tmp11 : (int,value) farray
+
+logic tmp12 : (int,value) farray
+
+logic j12 : int
+
+logic result7 : int
+
+logic j13 : int
+
+logic result8 : (int,value) farray
+
+logic tmp13 : (int,value) farray
+
+logic tmp14 : (int,value) farray
+
+logic j14 : int
+
+logic tmp15 : (int,value) farray
+
+logic j15 : int
+
+logic tmp16 : (int,value) farray
+
+logic j16 : int
+
+logic tmp17 : (int,value) farray
+
+logic j17 : int
+
+logic tmp18 : (int,value) farray
+
+logic j18 : int
+
+logic tmp19 : (int,value) farray
+
+logic j19 : int
+
+logic tmp20 : (int,value) farray
+
+logic j20 : int
+
+logic tmp21 : (int,value) farray
+
+logic j21 : int
+
+logic result9 : (int,value) farray
+
+logic complex_arrays__create_step_array__result1 : (int,value) farray
+
+logic complex_arrays__create_step_array__result2 : (int,value) farray
+
+logic complex_arrays__create_step_array__result3 : (int,value) farray
+
+logic tmp22 : (int,value) farray
+
+logic j22 : int
+
+logic j23 : int
+
+logic complex_arrays__create_step_array__result4 : (int,value) farray
+
+logic tmp23 : (int,value) farray
+
+logic j24 : int
+
+logic j25 : int
+
+logic complex_arrays__create_step_array__result5 : (int,value) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = tmp)
+
+axiom H2 : (tmp1 = temp___238(0))
+
+axiom H3 : (0 <= i)
+
  (* File "complex_arrays.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp:(int,value) farray. forall result:(int,value) farray.
-  forall tmp1:(int,value) farray. (in_range1(i) -> ((({ map__content = result
-  } = { map__content = tmp }) and (tmp1 = temp___238(0))) -> ((0 <= i) ->
-  (0 <= 0)))))
+goal WP_parameter_def : (0 <= 0)

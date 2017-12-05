@@ -527,6 +527,7 @@
 (assert (default_initial_assumption2 a false))
 (assert (= (to_rep o1) 100))
 (assert (= (to_rep o) 1))
+(assert true)
 (assert (= result (mk_map__ref a)))
 (assert (= a1 (slide do_loops__p__a (to_rep (first (mk 1 100))) 1)))
 (assert (= result1 (mk_int__ref i)))

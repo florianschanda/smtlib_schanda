@@ -188,6 +188,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range2 temp___expr_33)))
+(declare-const o Int)
 (assert (in_range1 i))
 (assert (not (in_range1 (+ i 1))))
 (check-sat)

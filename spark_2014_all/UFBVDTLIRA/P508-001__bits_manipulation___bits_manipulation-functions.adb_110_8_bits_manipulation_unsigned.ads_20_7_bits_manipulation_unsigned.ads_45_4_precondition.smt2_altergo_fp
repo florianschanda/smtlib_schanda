@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1771,6 +1771,25 @@ logic value : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result : int
+
+logic o : int
+
+logic result : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result1 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result2 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result3 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result4 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__msb_index_fast_not_inline__result5 : int
+
+axiom H : true
+
+axiom H1 : (not (value = of_int(0)))
+
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : ((not (value = of_int(0))) ->
-  (not (value = of_int(0))))
+goal WP_parameter_def : (not (value = of_int(0)))

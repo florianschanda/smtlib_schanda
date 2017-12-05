@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1682,6 +1682,294 @@ axiom writereg32post__post_axiom :
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and2(regnew,
   of_int2(18446744069414584320)) = of_int2(0))))))
+
+logic rax : t2
+
+logic rcx : t2
+
+logic rdx : t2
+
+logic rsp : t2
+
+logic rsi : t2
+
+logic rdi : t2
+
+logic r8 : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic savestackptr : t2
+
+logic ra0 : t
+
+logic ra1 : t
+
+logic ra2 : t
+
+logic ra3 : t
+
+logic ra4 : t
+
+logic ra5 : t
+
+logic ra6 : t
+
+logic ra7 : t
+
+logic o : t2
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic result : t2
+
+logic savestackptr1 : t2
+
+logic result1 : t
+
+logic ra01 : t
+
+logic result2 : t
+
+logic ra11 : t
+
+logic result3 : t
+
+logic ra21 : t
+
+logic result4 : t
+
+logic ra31 : t
+
+logic result5 : t
+
+logic ra41 : t
+
+logic result6 : t
+
+logic ra51 : t
+
+logic result7 : t
+
+logic ra61 : t
+
+logic result8 : t
+
+logic ra71 : t
+
+logic result9 : t2
+
+logic r81 : t2
+
+logic rax1 : t2
+
+logic rdx1 : t2
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic rax2 : t2
+
+logic rcx1 : t2
+
+logic rdx2 : t2
+
+logic rsp1 : t2
+
+logic rdi1 : t2
+
+logic r82 : t2
+
+logic memory1 : (t2,unsigned8) farray
+
+logic result10 : t2
+
+logic rsp2 : t2
+
+logic zeroflag1 : bool
+
+logic carryflag1 : bool
+
+logic signflag1 : bool
+
+logic overflowflag1 : bool
+
+logic rax3 : t2
+
+logic rcx2 : t2
+
+logic rdx3 : t2
+
+logic rsp3 : t2
+
+logic rdi2 : t2
+
+logic r83 : t2
+
+logic memory2 : (t2,unsigned8) farray
+
+logic savestackptr2 : t2
+
+logic ra02 : t
+
+logic ra12 : t
+
+logic ra22 : t
+
+logic ra32 : t
+
+logic ra42 : t
+
+logic ra52 : t
+
+logic ra62 : t
+
+logic ra72 : t
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic rax4 : t2
+
+logic rcx3 : t2
+
+logic rdx4 : t2
+
+logic rsp4 : t2
+
+logic rdi3 : t2
+
+logic r84 : t2
+
+logic memory3 : (t2,unsigned8) farray
+
+logic savestackptr3 : t2
+
+logic ra03 : t
+
+logic ra13 : t
+
+logic ra23 : t
+
+logic ra33 : t
+
+logic ra43 : t
+
+logic ra53 : t
+
+logic ra63 : t
+
+logic ra73 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : (not (inrange64(rsi, sub2(rsp, of_int2(7)), of_int2(15)) = true))
+
+axiom H8 : (o = rsp)
+
+axiom H9 : (result = savestackptr)
+
+axiom H10 : (savestackptr1 = o)
+
+axiom H11 : true
+
+axiom H12 : ((o1 = readmem8(rsp, memory)) and (o1 = to_rep((memory[rsp]))))
+
+axiom H13 : (o2 = o1)
+
+axiom H14 : (result1 = ra0)
+
+axiom H15 : (ra01 = o2)
+
+axiom H16 : true
+
+axiom H17 : ((o3 = readmem8(add2(rsp, of_int2(1)), memory)) and
+  (o3 = to_rep((memory[add2(rsp, of_int2(1))]))))
+
+axiom H18 : (o4 = o3)
+
+axiom H19 : (result2 = ra1)
+
+axiom H20 : (ra11 = o4)
+
+axiom H21 : true
+
+axiom H22 : ((o5 = readmem8(add2(rsp, of_int2(2)), memory)) and
+  (o5 = to_rep((memory[add2(rsp, of_int2(2))]))))
+
+axiom H23 : (o6 = o5)
+
+axiom H24 : (result3 = ra2)
+
+axiom H25 : (ra21 = o6)
+
+axiom H26 : true
+
+axiom H27 : ((o7 = readmem8(add2(rsp, of_int2(3)), memory)) and
+  (o7 = to_rep((memory[add2(rsp, of_int2(3))]))))
+
+axiom H28 : (o8 = o7)
+
+axiom H29 : (result4 = ra3)
+
+axiom H30 : (ra31 = o8)
+
+axiom H31 : true
+
+axiom H32 : ((o9 = readmem8(add2(rsp, of_int2(4)), memory)) and
+  (o9 = to_rep((memory[add2(rsp, of_int2(4))]))))
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -520,28 +520,47 @@ logic y__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "do_checks.adb", line 313, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:(int,bool) farray. forall x__split_fields1:t.
-  forall y__split_fields:(int,bool) farray. forall y__split_fields1:t.
-  forall o:int. forall o1:bool.
-  ((do_checks__do_discriminant_check__r1__arr__pred({ us_split_discrs1 = {
-  rec__do_checks__do_discriminant_check__r1__j = x__split_discrs };
-  us_split_fields1 = { rec__do_checks__do_discriminant_check__r1__arr = {
-  elts = x__split_fields; rt = x__split_fields1 } } }) ->
-  (dynamic_property1(1, to_rep(x__split_discrs),
-  to_rep(first(x__split_fields1)), to_rep(last(x__split_fields1))) and
+logic x__split_fields : (int,bool) farray
+
+logic x__split_fields1 : t
+
+logic y__split_fields : (int,bool) farray
+
+logic y__split_fields1 : t
+
+logic o : int
+
+logic o1 : bool
+
+axiom H : (do_checks__do_discriminant_check__r1__arr__pred({
+  us_split_discrs1 = { rec__do_checks__do_discriminant_check__r1__j =
+  x__split_discrs }; us_split_fields1 = {
+  rec__do_checks__do_discriminant_check__r1__arr = { elts = x__split_fields;
+  rt = x__split_fields1 } } }) -> (dynamic_property1(1,
+  to_rep(x__split_discrs), to_rep(first(x__split_fields1)),
+  to_rep(last(x__split_fields1))) and
   ((to_rep(first(x__split_fields1)) = 1) and
-  (to_rep(last(x__split_fields1)) = to_rep(x__split_discrs))))) ->
-  ((do_checks__do_discriminant_check__r1__arr__pred({ us_split_discrs1 = {
-  rec__do_checks__do_discriminant_check__r1__j = y__split_discrs };
-  us_split_fields1 = { rec__do_checks__do_discriminant_check__r1__arr = {
-  elts = y__split_fields; rt = y__split_fields1 } } }) ->
-  (dynamic_property1(1, to_rep(y__split_discrs),
-  to_rep(first(y__split_fields1)), to_rep(last(y__split_fields1))) and
+  (to_rep(last(x__split_fields1)) = to_rep(x__split_discrs)))))
+
+axiom H1 : (do_checks__do_discriminant_check__r1__arr__pred({
+  us_split_discrs1 = { rec__do_checks__do_discriminant_check__r1__j =
+  y__split_discrs }; us_split_fields1 = {
+  rec__do_checks__do_discriminant_check__r1__arr = { elts = y__split_fields;
+  rt = y__split_fields1 } } }) -> (dynamic_property1(1,
+  to_rep(y__split_discrs), to_rep(first(y__split_fields1)),
+  to_rep(last(y__split_fields1))) and
   ((to_rep(first(y__split_fields1)) = 1) and
-  (to_rep(last(y__split_fields1)) = to_rep(y__split_discrs))))) ->
-  (((to_rep(x__split_discrs) = 10) and (to_rep(y__split_discrs) = 10)) ->
-  (((((to_rep(first(y__split_fields1)) <= 10) and
-  (10 <= to_rep(last(y__split_fields1)))) and (o = 10)) and
-  (o1 = (y__split_fields[o]))) -> (to_rep(first(x__split_fields1)) <= 1))))))
+  (to_rep(last(y__split_fields1)) = to_rep(y__split_discrs)))))
+
+axiom H2 : ((to_rep(x__split_discrs) = 10) and
+  (to_rep(y__split_discrs) = 10))
+
+axiom H3 : ((to_rep(first(y__split_fields1)) <= 10) and
+  (10 <= to_rep(last(y__split_fields1))))
+
+axiom H4 : (o = 10)
+
+axiom H5 : (o1 = (y__split_fields[o]))
+
+ (* File "do_checks.adb", line 313, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(x__split_fields1)) <= 1)

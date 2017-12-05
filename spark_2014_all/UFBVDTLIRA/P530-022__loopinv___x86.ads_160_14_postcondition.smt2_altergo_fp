@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1031,15 +1031,39 @@ axiom readreglow8__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic rax : t1
+
+logic x86__al__result : t
+
+logic result : t
+
+logic x86__al__result1 : t
+
+logic x86__al__result2 : t
+
+logic x86__al__result3 : t
+
+logic x86__al__result4 : t
+
+logic x86__al__result5 : t
+
+logic result1 : t
+
+axiom H : true
+
+axiom H1 : (x86__al__result1 = x86__al__result2)
+
+axiom H2 : (x86__al__result3 = x86__al__result1)
+
+axiom H3 : (result = x86__al__result)
+
+axiom H4 : (x86__al__result1 = toSmall(bw_and1(rax, of_int1(255))))
+
+axiom H5 : (x86__al__result4 = x86__al__result2)
+
+axiom H6 : (x86__al__result5 = x86__al__result3)
+
+axiom H7 : (result1 = x86__al__result4)
+
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t1. forall x86__al__result:t. forall result:t.
-  forall x86__al__result1:t. forall x86__al__result2:t.
-  forall x86__al__result3:t. forall x86__al__result4:t.
-  forall x86__al__result5:t.
-  (forall result1:t. ((((((x86__al__result1 = x86__al__result2) and
-  (x86__al__result3 = x86__al__result1)) and ((result = x86__al__result) and
-  (x86__al__result1 = toSmall(bw_and1(rax, of_int1(255)))))) and
-  ((x86__al__result4 = x86__al__result2) and
-  (x86__al__result5 = x86__al__result3))) and
-  (result1 = x86__al__result4)) -> (x86__al__result4 = readreglow8(rax)))))
+goal WP_parameter_def : (x86__al__result4 = readreglow8(rax))

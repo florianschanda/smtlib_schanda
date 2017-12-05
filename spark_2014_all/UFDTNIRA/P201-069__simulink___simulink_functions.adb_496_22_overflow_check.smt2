@@ -64,6 +64,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range1 left))
 (assert (in_range1 right))
 (assert (not (= right 0)))

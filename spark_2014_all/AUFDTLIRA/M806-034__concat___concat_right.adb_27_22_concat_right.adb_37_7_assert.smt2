@@ -173,6 +173,7 @@
 (declare-const z2 (Array Int integer))
 (declare-const result1 (Array Int integer))
 (declare-const z3 (Array Int integer))
+(assert true)
 (assert (=> (<= 1 9) (and (and (<= 1 1) (<= 1 10)) (and (<= 1 9) (<= 9 10)))))
 (assert (= temp___183 x))
 (assert (=> (<= 1 9) (= o2 (+ (- 9 1) 1))))

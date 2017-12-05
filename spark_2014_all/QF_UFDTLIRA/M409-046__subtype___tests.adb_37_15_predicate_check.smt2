@@ -61,7 +61,6 @@
 (assert (= (= o true) (let ((temp___185 x)) (or (and (<= 1 temp___185) (<= temp___185 9)) (and (<= 11 temp___185) (<= temp___185 2147483647))))))
 (assert (= result (ite (in_range2 x) o false)))
 (assert (= result true))
-(define-fun temp___187 () Int x)
-(assert (not (or (and (<= 1 temp___187) (<= temp___187 9)) (and (<= 11 temp___187) (<= temp___187 2147483647)))))
+(assert (not (or (and (<= 1 x) (<= x 9)) (and (<= 11 x) (<= x 2147483647)))))
 (check-sat)
 (exit)

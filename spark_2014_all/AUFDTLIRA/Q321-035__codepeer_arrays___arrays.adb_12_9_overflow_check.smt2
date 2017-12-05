@@ -75,6 +75,7 @@
 (declare-const o9 integer)
 (declare-const o10 Int)
 (declare-const o11 (Array Int integer))
+(declare-const temp___179 Int)
 (declare-const o12 integer)
 (declare-const result Int)
 (declare-const y1 Int)

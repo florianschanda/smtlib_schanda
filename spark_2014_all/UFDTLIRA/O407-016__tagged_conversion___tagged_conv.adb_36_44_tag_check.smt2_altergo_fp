@@ -196,6 +196,7 @@ axiom r__def_axiom : ((r = us_null_ext__) and (r1 = us_tag))
 
 axiom rc__def_axiom : ((rc = r) and (rc1 = r1))
 
+axiom H : ((r = rc) and (r1 = rc1))
+
  (* File "tagged_conv.adb", line 27, characters 0-0 *)
-goal WP_parameter_def : (((r = rc) and (r1 = rc1)) -> us_compatible_tags(rc1,
-  us_tag1))
+goal WP_parameter_def : us_compatible_tags(rc1, us_tag1)

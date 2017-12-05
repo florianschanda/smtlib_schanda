@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,39 +421,125 @@ axiom full__def_axiom :
   (forall stack__last:int [full(stack__last)].
   ((full(stack__last) = true) <-> (200 <= stack__last)))
 
+logic last : int
+
+logic result__ : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic last1 : int
+
+logic v2__split_fields : integer
+
+logic last2 : int
+
+logic v1__split_fields : integer
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic result__3 : int
+
+logic result3 : int
+
+logic result__4 : int
+
+logic last3 : int
+
+axiom H : in_range3(op)
+
+axiom H1 : in_range2(last)
+
+axiom H2 : (2 <= size(last))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
+
+axiom H4 : ((size(last1) = (size(last) - 1)) and in_range2(last1))
+
+axiom H5 : ((size(last2) = (size(last1) - 1)) and in_range2(last2))
+
+axiom H6 : (((op = 0) or (op = 3)) ->
+  ((- 1073741823) <= to_rep(v1__split_fields)))
+
+axiom H7 : (((op = 0) or (op = 3)) ->
+  (to_rep(v1__split_fields) <= 1073741822))
+
+axiom H8 : (((op = 0) or (op = 3)) ->
+  ((- 1073741823) <= to_rep(v2__split_fields)))
+
+axiom H9 : (((op = 0) or (op = 3)) ->
+  (to_rep(v2__split_fields) <= 1073741822))
+
+axiom H10 : ((not ((op = 0) or (op = 3))) -> ((op = 1) ->
+  (not (to_rep(v2__split_fields) = 0))))
+
+axiom H11 : ((op = 0) ->
+  ((o = (to_rep(v1__split_fields) + to_rep(v2__split_fields))) and
+  in_range1((to_rep(v1__split_fields) + to_rep(v2__split_fields)))))
+
+axiom H12 : ((op = 0) -> (result = result__))
+
+axiom H13 : ((op = 0) -> (result__1 = o))
+
+axiom H14 : ((not (op = 0)) -> ((op = 1) ->
+  ((o1 = comp_div(to_rep(v1__split_fields),to_rep(v2__split_fields))) and
+  in_range1(comp_div(to_rep(v1__split_fields),to_rep(v2__split_fields))))))
+
+axiom H15 : ((not (op = 0)) -> ((op = 1) -> (result1 = result__)))
+
+axiom H16 : ((not (op = 0)) -> ((op = 1) -> (result__2 = o1)))
+
+axiom H17 : ((not (op = 0)) -> ((not (op = 1)) -> ((op = 2) ->
+  ((o2 = (to_rep(v1__split_fields) * to_rep(v2__split_fields))) and
+  in_range1((to_rep(v1__split_fields) * to_rep(v2__split_fields)))))))
+
+axiom H18 : ((not (op = 0)) -> ((not (op = 1)) -> ((op = 2) ->
+  (result2 = result__))))
+
+axiom H19 : ((not (op = 0)) -> ((not (op = 1)) -> ((op = 2) ->
+  (result__3 = o2))))
+
+axiom H20 : ((not (op = 0)) -> ((not (op = 1)) -> ((not (op = 2)) ->
+  ((o3 = (to_rep(v1__split_fields) - to_rep(v2__split_fields))) and
+  in_range1((to_rep(v1__split_fields) - to_rep(v2__split_fields)))))))
+
+axiom H21 : ((not (op = 0)) -> ((not (op = 1)) -> ((not (op = 2)) ->
+  (result3 = result__))))
+
+axiom H22 : ((not (op = 0)) -> ((not (op = 1)) -> ((not (op = 2)) ->
+  (result__4 = o3))))
+
+axiom H23 : ((not (op = 0)) -> ((not (op = 1)) -> ((not (op = 2)) ->
+  (result__3 = result__4))))
+
+axiom H24 : ((not (op = 0)) -> ((not (op = 1)) -> (result__2 = result__3)))
+
+axiom H25 : ((not (op = 0)) -> (result__1 = result__2))
+
+axiom H26 : (to_rep(o4) = result__1)
+
+axiom H27 : (o4 = o5)
+
+axiom H28 : (o6 = o5)
+
  (* File "values-operations.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last:int. forall result__:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:integer. forall o5:integer.
-  forall o6:integer. forall last1:int. forall v2__split_fields:integer.
-  forall last2:int. forall v1__split_fields:integer. forall result:int.
-  forall result__1:int. forall result1:int. forall result__2:int.
-  forall result2:int. forall result__3:int. forall result3:int.
-  forall result__4:int. (in_range3(op) -> (in_range2(last) ->
-  ((2 <= size(last)) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(result__)) -> (((size(last1) = (size(last) - 1)) and
-  in_range2(last1)) -> (((size(last2) = (size(last1) - 1)) and
-  in_range2(last2)) -> (((((op = 0) or (op = 3)) and
-  ((((-1073741823) <= to_rep(v1__split_fields)) and
-  (to_rep(v1__split_fields) <= 1073741822)) and
-  (((-1073741823) <= to_rep(v2__split_fields)) and
-  (to_rep(v2__split_fields) <= 1073741822)))) or ((not ((op = 0) or
-  (op = 3))) and ((op = 1) -> (not (to_rep(v2__split_fields) = 0))))) ->
-  ((((op = 0) and
-  (((o = (to_rep(v1__split_fields) + to_rep(v2__split_fields))) and
-  in_range1((to_rep(v1__split_fields) + to_rep(v2__split_fields)))) and
-  ((result = result__) and (result__1 = o)))) or ((not (op = 0)) and
-  ((((op = 1) and
-  (((o1 = comp_div(to_rep(v1__split_fields),to_rep(v2__split_fields))) and
-  in_range1(comp_div(to_rep(v1__split_fields),to_rep(v2__split_fields)))) and
-  ((result1 = result__) and (result__2 = o1)))) or ((not (op = 1)) and
-  ((((op = 2) and
-  (((o2 = (to_rep(v1__split_fields) * to_rep(v2__split_fields))) and
-  in_range1((to_rep(v1__split_fields) * to_rep(v2__split_fields)))) and
-  ((result2 = result__) and (result__3 = o2)))) or ((not (op = 2)) and
-  ((((o3 = (to_rep(v1__split_fields) - to_rep(v2__split_fields))) and
-  in_range1((to_rep(v1__split_fields) - to_rep(v2__split_fields)))) and
-  ((result3 = result__) and (result__4 = o3))) and
-  (result__3 = result__4)))) and (result__2 = result__3)))) and
-  (result__1 = result__2)))) -> ((((to_rep(o4) = result__1) and
-  (o4 = o5)) and (o6 = o5)) -> (not (full(last2) = true))))))))))))
+goal WP_parameter_def : (not (full(last2) = true))

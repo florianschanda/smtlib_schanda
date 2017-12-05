@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -206,15 +206,15 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__main__variant_type__discr) = to_rep1(((b).us_split_discrs1).rec__main__variant_type__discr)) and
-  (to_rep(((a).us_split_fields1).rec__main__variant_type__common) = to_rep(((b).us_split_fields1).rec__main__variant_type__common))) and
-  (main__variant_type__b_only__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__main__variant_type__b_only) = to_rep(((b).us_split_fields1).rec__main__variant_type__b_only)))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__main__variant_type__discr) = to_rep1(((b).us_split_discrs1).rec__main__variant_type__discr)) and
-  (to_rep(((a).us_split_fields1).rec__main__variant_type__common) = to_rep(((b).us_split_fields1).rec__main__variant_type__common))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__main__variant_type__discr) = to_rep1(((b).us_split_discrs1).rec__main__variant_type__discr)) and
+  ((to_rep(((a).us_split_fields1).rec__main__variant_type__common) = to_rep(((b).us_split_fields1).rec__main__variant_type__common)) and
   (main__variant_type__b_only__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__main__variant_type__b_only) = to_rep(((b).us_split_fields1).rec__main__variant_type__b_only))))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__main__variant_type__discr) = to_rep1(((b).us_split_discrs1).rec__main__variant_type__discr)) and
+  ((to_rep(((a).us_split_fields1).rec__main__variant_type__common) = to_rep(((b).us_split_fields1).rec__main__variant_type__common)) and
+  (main__variant_type__b_only__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__main__variant_type__b_only) = to_rep(((b).us_split_fields1).rec__main__variant_type__b_only)))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -676,56 +676,212 @@ logic u2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic u0__split_fields : integer
+
+logic u0__split_fields1 : integer
+
+logic u0__split_discrs : discriminant_type
+
+logic u1__split_fields : integer
+
+logic u1__split_fields1 : integer
+
+logic u2__split_fields : integer
+
+logic u2__split_fields1 : integer
+
+logic us : int
+
+logic o : discriminant_type
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : discriminant_type
+
+logic o5 : discriminant_type
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : bool
+
+logic o9 : discriminant_type
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : bool
+
+logic o13 : discriminant_type
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : bool
+
+logic main__u1__assume : discriminant_type
+
+logic main__u1__assume1 : integer
+
+logic main__u1__assume2 : integer
+
+logic main__u1__assume3 : bool
+
+logic us1 : int
+
+logic o17 : discriminant_type
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : discriminant_type
+
+logic o23 : discriminant_type
+
+logic o24 : integer
+
+logic o25 : integer
+
+logic o26 : bool
+
+logic o27 : discriminant_type
+
+logic o28 : integer
+
+logic o29 : integer
+
+logic o30 : bool
+
+logic o31 : discriminant_type
+
+logic o32 : integer
+
+logic o33 : integer
+
+logic o34 : bool
+
+logic main__u2__assume : discriminant_type
+
+logic main__u2__assume1 : integer
+
+logic main__u2__assume2 : integer
+
+logic main__u2__assume3 : bool
+
+logic usq_ : discriminant_type
+
+logic usq_1 : integer
+
+logic usq_2 : integer
+
+logic usq_3 : bool
+
+logic temp___210 : discriminant_type
+
+logic temp___2101 : integer
+
+logic temp___2102 : integer
+
+logic temp___2103 : bool
+
+logic result : integer
+
+logic result1 : integer
+
+logic u1__split_fields2 : integer
+
+logic u1__split_fields3 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic u2__split_fields2 : integer
+
+logic u2__split_fields3 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic u0__split_fields2 : integer
+
+logic u0__split_fields3 : integer
+
+logic result6 : discriminant_type
+
+logic u0__split_discrs1 : discriminant_type
+
+axiom H : ((u0__attr__constrained = false) and
+  (to_rep1(u0__split_discrs) = 0))
+
+axiom H1 : ((us = 0) and in_range1(0))
+
+axiom H2 : (to_rep(o1) = 0)
+
+axiom H3 : (o1 = o2)
+
+axiom H4 : (dummy = o3)
+
+axiom H5 : (to_rep1(o) = 0)
+
+axiom H6 : (o = o4)
+
+axiom H7 : (o5 = o4)
+
+axiom H8 : (o6 = o2)
+
+axiom H9 : (o7 = o3)
+
+axiom H10 : (true = o8)
+
+axiom H11 : ((o9 = o5) and (((o10 = o6) and (o11 = o7)) and (o12 = o8)))
+
+axiom H12 : ((o13 = o9) and (((o14 = o10) and (o15 = o11)) and (o16 = o12)))
+
+axiom H13 : ((main__u1__assume = o13) and (((main__u1__assume1 = o14) and
+  (main__u1__assume2 = o15)) and (main__u1__assume3 = o16)))
+
+axiom H14 : ((result = u1__split_fields) and (result1 = u1__split_fields1))
+
+axiom H15 : ((u1__split_fields2 = main__u1__assume1) and
+  (u1__split_fields3 = main__u1__assume2))
+
+axiom H16 : (u1__split_discrs = main__u1__assume)
+
+axiom H17 : (u1__attr__constrained = true)
+
+axiom H18 : ((0 = to_rep1(u1__split_discrs)) and
+  (u1__attr__constrained = true))
+
+axiom H19 : ((us1 = 1) and in_range1(1))
+
+axiom H20 : (to_rep(o18) = 0)
+
+axiom H21 : (to_rep(o19) = 0)
+
+axiom H22 : ((o20 = o19) and (o21 = o18))
+
+axiom H23 : (to_rep1(o17) = 1)
+
+axiom H24 : (o22 = o17)
+
+axiom H25 : ((o23 = o22) and (((o24 = o20) and (o25 = o21)) and
+  (o26 = true)))
+
+axiom H26 : ((o27 = o23) and (((o28 = o24) and (o29 = o25)) and (o30 = o26)))
+
  (* File "main.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall u0__split_discrs:discriminant_type.
-  forall u1__split_fields:integer. forall u1__split_fields1:integer.
-  forall us:int. forall o:discriminant_type. forall o1:integer.
-  forall o2:integer. forall o3:integer. forall o4:discriminant_type.
-  forall o5:discriminant_type. forall o6:integer. forall o7:integer.
-  forall o8:bool. forall o9:discriminant_type. forall o10:integer.
-  forall o11:integer. forall o12:bool. forall o13:discriminant_type.
-  forall o14:integer. forall o15:integer. forall o16:bool.
-  forall main__u1__assume:discriminant_type.
-  forall main__u1__assume1:integer. forall main__u1__assume2:integer.
-  forall main__u1__assume3:bool. forall us1:int.
-  forall o17:discriminant_type. forall o18:integer. forall o19:integer.
-  forall o20:integer. forall o21:integer. forall o22:discriminant_type.
-  forall o23:discriminant_type. forall o24:integer. forall o25:integer.
-  forall o26:bool. forall o27:discriminant_type. forall o28:integer.
-  forall o29:integer. forall o30:bool. forall result:integer.
-  forall result1:integer. forall u1__split_fields2:us_split_fields.
-  (((u0__attr__constrained = false) and (to_rep1(u0__split_discrs) = 0)) ->
-  (((us = 0) and in_range1(0)) -> ((((((((to_rep(o1) = 0) and ((o1 = o2) and
-  (dummy = o3))) and (((to_rep1(o) = 0) and (o = o4)) and ((o5 = o4) and
-  (((o6 = o2) and (o7 = o3)) and (true = o8))))) and ({ us_split_discrs1 = {
-  rec__main__variant_type__discr = o9 }; us_split_fields1 = {
-  rec__main__variant_type__common = o10; rec__main__variant_type__b_only =
-  o11 }; attr__constrained = o12 } = { us_split_discrs1 = {
-  rec__main__variant_type__discr = o5 }; us_split_fields1 = {
-  rec__main__variant_type__common = o6; rec__main__variant_type__b_only = o7
-  }; attr__constrained = o8 })) and ({ us_split_discrs1 = {
-  rec__main__variant_type__discr = o13 }; us_split_fields1 = {
-  rec__main__variant_type__common = o14; rec__main__variant_type__b_only =
-  o15 }; attr__constrained = o16 } = { us_split_discrs1 = {
-  rec__main__variant_type__discr = o9 }; us_split_fields1 = {
-  rec__main__variant_type__common = o10; rec__main__variant_type__b_only =
-  o11 }; attr__constrained = o12 })) and ((main__u1__assume = o13) and
-  (((main__u1__assume1 = o14) and (main__u1__assume2 = o15)) and
-  (main__u1__assume3 = o16)))) and ((((result = u1__split_fields) and
-  (result1 = u1__split_fields1)) and (u1__split_fields2 = {
-  rec__main__variant_type__common = main__u1__assume1;
-  rec__main__variant_type__b_only = main__u1__assume2 })) and
-  ((u1__split_discrs = main__u1__assume) and
-  (u1__attr__constrained = true)))) -> (((0 = to_rep1(u1__split_discrs)) and
-  (u1__attr__constrained = true)) -> (((us1 = 1) and in_range1(1)) ->
-  (((((to_rep(o18) = 0) and ((to_rep(o19) = 0) and ((o19 = o20) and
-  (o18 = o21)))) and (((to_rep1(o17) = 1) and (o17 = o22)) and
-  ((o23 = o22) and (((o24 = o20) and (o25 = o21)) and (true = o26))))) and ({
-  us_split_discrs1 = { rec__main__variant_type__discr = o27 };
-  us_split_fields1 = { rec__main__variant_type__common = o28;
-  rec__main__variant_type__b_only = o29 }; attr__constrained = o30 } = {
-  us_split_discrs1 = { rec__main__variant_type__discr = o23 };
-  us_split_fields1 = { rec__main__variant_type__common = o24;
-  rec__main__variant_type__b_only = o25 }; attr__constrained = o26 })) ->
-  (1 = to_rep1(o27)))))))))
+goal WP_parameter_def : (1 = to_rep1(o27))

@@ -1214,10 +1214,66 @@ logic old_speed : t
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic speed : t
+
+logic distance : t
+
+logic average : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : int
+
+logic result : t
+
+logic speed1 : t
+
+logic result1 : t
+
+logic average1 : t
+
+logic result2 : t
+
+logic distance1 : t
+
+logic speed2 : t
+
+logic distance2 : t
+
+logic average2 : t
+
+logic speed3 : t
+
+logic distance3 : t
+
+logic average3 : t
+
+axiom H : in_range1(n)
+
+axiom H1 : in_range2(factor)
+
+axiom H2 : tqtisFinite(speed)
+
+axiom H3 : tqtisFinite(distance)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
+
+axiom H4 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(average))
+
+axiom H5 : ((n <  25000) and (invariant__(n, speed, distance) = true))
+
+axiom H6 : (speed = old_speed)
+
+axiom H7 : tqtisFinite(old_speed)
 
 logic fliteral4 : t
 
@@ -1229,36 +1285,48 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.01000000000000000020816681711721685132943093776702880859375))
 
+axiom H8 : ((o = add(NearestTiesToEven, speed, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, factor, fliteral4), fliteral5))) and
+  tqtisFinite(add(NearestTiesToEven, speed, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, factor, fliteral4), fliteral5))))
+
+axiom H9 : (result = speed)
+
+axiom H10 : (speed1 = o)
+
+axiom H11 : ((o1 = add(NearestTiesToEven, old_speed, speed1)) and
+  tqtisFinite(add(NearestTiesToEven, old_speed, speed1)))
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.0))
 
+axiom H12 : (o2 = div(NearestTiesToEven, o1, fliteral6))
+
+axiom H13 : (result1 = average)
+
+axiom H14 : (average1 = o2)
+
+axiom H15 : ((o3 = add(NearestTiesToEven, distance, mul(NearestTiesToEven,
+  average1, fliteral5))) and tqtisFinite(add(NearestTiesToEven, distance,
+  mul(NearestTiesToEven, average1, fliteral5))))
+
+axiom H16 : (result2 = distance)
+
+axiom H17 : (distance1 = o3)
+
+axiom H18 : (average1 = average2)
+
+axiom H19 : (distance1 = distance2)
+
+axiom H20 : (speed1 = speed2)
+
+axiom H21 : (average3 = average1)
+
+axiom H22 : (distance3 = distance1)
+
+axiom H23 : (speed3 = speed1)
+
  (* File "attempt_4.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:t. forall distance:t. forall average:t. forall o:t.
-  forall o1:t. forall o2:t. forall o3:t. forall result:t. forall speed1:t.
-  forall result1:t. forall average1:t. forall result2:t. forall distance1:t.
-  forall speed2:t. forall distance2:t. forall average2:t. forall speed3:t.
-  forall distance3:t. forall average3:t. ((in_range1(n) and
-  (in_range2(factor) and (tqtisFinite(speed) and (tqtisFinite(distance) and
-  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(average)) and
-  (((n <  25000) and (invariant__(n, speed, distance) = true)) and
-  (((speed = old_speed) and (tqtisFinite(old_speed) and
-  ((((o = add(NearestTiesToEven, speed, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, factor, fliteral4), fliteral5))) and
-  tqtisFinite(add(NearestTiesToEven, speed, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, factor, fliteral4), fliteral5)))) and (({
-  t__content = result } = { t__content = speed }) and (speed1 = o))) and
-  (((((o1 = add(NearestTiesToEven, old_speed, speed1)) and
-  tqtisFinite(add(NearestTiesToEven, old_speed, speed1))) and
-  (o2 = div(NearestTiesToEven, o1, fliteral6))) and (({ t__content = result1
-  } = { t__content = average }) and (average1 = o2))) and
-  (((o3 = add(NearestTiesToEven, distance, mul(NearestTiesToEven, average1,
-  fliteral5))) and tqtisFinite(add(NearestTiesToEven, distance,
-  mul(NearestTiesToEven, average1, fliteral5)))) and (({ t__content = result2
-  } = { t__content = distance }) and (distance1 = o3))))))) and
-  (((average1 = average2) and ((distance1 = distance2) and
-  (speed1 = speed2))) and ((average3 = average1) and
-  ((distance3 = distance1) and (speed3 = speed1))))))))))) ->
-  (invariant__((n + 1), speed2, distance2) = true)))
+goal WP_parameter_def : (invariant__((n + 1), speed2, distance2) = true)

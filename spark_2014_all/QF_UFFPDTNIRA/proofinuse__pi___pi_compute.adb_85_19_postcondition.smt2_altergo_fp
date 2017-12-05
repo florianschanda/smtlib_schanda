@@ -1104,6 +1104,294 @@ logic attr__ATTRIBUTE_ADDRESS21 : int
 
 logic attr__ATTRIBUTE_ADDRESS22 : int
 
+logic t1 : t
+
+logic t2 : t
+
+logic t3 : t
+
+logic t4 : t
+
+logic t5 : t
+
+logic t6 : t
+
+logic t7 : t
+
+logic t8 : t
+
+logic t9 : t
+
+logic t10 : t
+
+logic a1 : t
+
+logic a2 : t
+
+logic a3 : t
+
+logic a4 : t
+
+logic a5 : t
+
+logic a6 : t
+
+logic a7 : t
+
+logic a8 : t
+
+logic a9 : t
+
+logic a10 : t
+
+logic num : t
+
+logic den : t
+
+logic res : t
+
+logic pi_compute__shanks_float__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic result : t
+
+logic t11 : t
+
+logic result1 : t
+
+logic t21 : t
+
+logic result2 : t
+
+logic t31 : t
+
+logic result3 : t
+
+logic t41 : t
+
+logic result4 : t
+
+logic t51 : t
+
+logic result5 : t
+
+logic t61 : t
+
+logic result6 : t
+
+logic t71 : t
+
+logic result7 : t
+
+logic t81 : t
+
+logic result8 : t
+
+logic t91 : t
+
+logic result9 : t
+
+logic t101 : t
+
+logic result10 : t
+
+logic a11 : t
+
+logic result11 : t
+
+logic a21 : t
+
+logic result12 : t
+
+logic a31 : t
+
+logic result13 : t
+
+logic a41 : t
+
+logic result14 : t
+
+logic a51 : t
+
+logic result15 : t
+
+logic a61 : t
+
+logic result16 : t
+
+logic a71 : t
+
+logic result17 : t
+
+logic a81 : t
+
+logic result18 : t
+
+logic a91 : t
+
+logic result19 : t
+
+logic a101 : t
+
+logic result20 : t
+
+logic num1 : t
+
+logic result21 : t
+
+logic den1 : t
+
+logic result22 : t
+
+logic res1 : t
+
+logic result23 : t
+
+logic pi_compute__shanks_float__result1 : t
+
+logic pi_compute__shanks_float__result2 : t
+
+logic pi_compute__shanks_float__result3 : t
+
+logic t12 : t
+
+logic t22 : t
+
+logic t32 : t
+
+logic t42 : t
+
+logic t52 : t
+
+logic t62 : t
+
+logic t72 : t
+
+logic t82 : t
+
+logic t92 : t
+
+logic t102 : t
+
+logic a12 : t
+
+logic a22 : t
+
+logic a32 : t
+
+logic a42 : t
+
+logic a52 : t
+
+logic a62 : t
+
+logic a72 : t
+
+logic a82 : t
+
+logic a92 : t
+
+logic a102 : t
+
+logic num2 : t
+
+logic den2 : t
+
+logic res2 : t
+
+logic pi_compute__shanks_float__result4 : t
+
+logic t13 : t
+
+logic t23 : t
+
+logic t33 : t
+
+logic t43 : t
+
+logic t53 : t
+
+logic t63 : t
+
+logic t73 : t
+
+logic t83 : t
+
+logic t93 : t
+
+logic t103 : t
+
+logic a13 : t
+
+logic a23 : t
+
+logic a33 : t
+
+logic a43 : t
+
+logic a53 : t
+
+logic a63 : t
+
+logic a73 : t
+
+logic a83 : t
+
+logic a93 : t
+
+logic a103 : t
+
+logic num3 : t
+
+logic den3 : t
+
+logic res3 : t
+
+logic pi_compute__shanks_float__result5 : t
+
+logic result24 : t
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1169,131 +1457,77 @@ logic fliteral13 : t
 axiom fliteral_axiom13 : (tqtisFinite(fliteral13) and
   (tqtreal(fliteral13) = 3.1412551403045654296875))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:t. forall t2:t. forall t3:t. forall t4:t. forall t5:t.
-  forall t6:t. forall t7:t. forall t8:t. forall t9:t. forall t10:t.
-  forall a1:t. forall a2:t. forall a3:t. forall a4:t. forall a5:t.
-  forall a6:t. forall a7:t. forall a8:t. forall a9:t. forall a10:t.
-  forall num:t. forall den:t. forall res:t.
-  forall pi_compute__shanks_float__result:t. forall o:t. forall o1:t.
-  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
-  forall o7:t. forall o8:t. forall o9:t. forall o10:t. forall o11:t.
-  forall o12:t. forall o13:t. forall o14:t. forall o15:t. forall o16:t.
-  forall o17:t. forall o18:t. forall o19:t. forall o20:t. forall result:t.
-  forall t11:t. forall result1:t. forall t21:t. forall result2:t.
-  forall t31:t. forall result3:t. forall t41:t. forall result4:t.
-  forall t51:t. forall result5:t. forall t61:t. forall result6:t.
-  forall t71:t. forall result7:t. forall t81:t. forall result8:t.
-  forall t91:t. forall result9:t. forall t101:t. forall result10:t.
-  forall a11:t. forall result11:t. forall a21:t. forall result12:t.
-  forall a31:t. forall result13:t. forall a41:t. forall result14:t.
-  forall a51:t. forall result15:t. forall a61:t. forall result16:t.
-  forall a71:t. forall result17:t. forall a81:t. forall result18:t__ref.
-  forall a91:t. forall result19:t__ref. forall a101:t.
-  forall result20:t__ref. forall num1:t. forall result21:t__ref.
-  forall den1:t. forall result22:t__ref. forall res1:t.
-  forall result23:t__ref. forall pi_compute__shanks_float__result1:t.
-  forall pi_compute__shanks_float__result2:t__ref.
-  forall pi_compute__shanks_float__result3:t. forall t12:t__ref.
-  forall t22:t__ref. forall t32:t__ref. forall t42:t__ref. forall t52:t__ref.
-  forall t62:t__ref. forall t72:t__ref. forall t82:t__ref. forall t92:t__ref.
-  forall t102:t__ref. forall a12:t__ref. forall a22:t__ref.
-  forall a32:t__ref. forall a42:t__ref. forall a52:t__ref. forall a62:t__ref.
-  forall a72:t__ref. forall a82:t__ref. forall a92:t__ref.
-  forall a102:t__ref. forall num2:t__ref. forall den2:t__ref.
-  forall res2:t__ref. forall pi_compute__shanks_float__result4:t__ref.
-  forall t13:t. forall t23:t. forall t33:t. forall t43:t. forall t53:t.
-  forall t63:t. forall t73:t. forall t83:t. forall t93:t. forall t103:t.
-  forall a13:t. forall a23:t. forall a33:t. forall a43:t. forall a53:t.
-  forall a63:t. forall a73:t. forall a83:t. forall a93:t. forall a103:t.
-  forall num3:t. forall den3:t. forall res3:t.
-  forall pi_compute__shanks_float__result5:t.
-  (forall result24:t. (((((({ t__content = result } = { t__content = t1
-  }) and (t11 = fliteral)) and (tqtisFinite(t11) and ((({ t__content =
-  result1 } = { t__content = t2 }) and (t21 = fliteral1)) and
-  (tqtisFinite(t21) and ((({ t__content = result2 } = { t__content = t3
-  }) and (t31 = fliteral2)) and (tqtisFinite(t31) and ((({ t__content =
-  result3 } = { t__content = t4 }) and (t41 = fliteral3)) and
-  (tqtisFinite(t41) and ((({ t__content = result4 } = { t__content = t5
-  }) and (t51 = fliteral4)) and (tqtisFinite(t51) and ((({ t__content =
-  result5 } = { t__content = t6 }) and (t61 = fliteral5)) and
-  (tqtisFinite(t61) and ((({ t__content = result6 } = { t__content = t7
-  }) and (t71 = fliteral6)) and (tqtisFinite(t71) and ((({ t__content =
-  result7 } = { t__content = t8 }) and (t81 = fliteral7)) and
-  (tqtisFinite(t81) and ((({ t__content = result8 } = { t__content = t9
-  }) and (t91 = fliteral8)) and (tqtisFinite(t91) and ((({ t__content =
-  result9 } = { t__content = t10 }) and (t101 = fliteral9)) and
-  (tqtisFinite(t101) and ((({ t__content = result10 } = { t__content = a1
-  }) and (a11 = t11)) and (tqtisFinite(a11) and
+axiom H : ((((result = t1) and (t11 = fliteral)) and (tqtisFinite(t11) and
+  (((result1 = t2) and (t21 = fliteral1)) and (tqtisFinite(t21) and
+  (((result2 = t3) and (t31 = fliteral2)) and (tqtisFinite(t31) and
+  (((result3 = t4) and (t41 = fliteral3)) and (tqtisFinite(t41) and
+  (((result4 = t5) and (t51 = fliteral4)) and (tqtisFinite(t51) and
+  (((result5 = t6) and (t61 = fliteral5)) and (tqtisFinite(t61) and
+  (((result6 = t7) and (t71 = fliteral6)) and (tqtisFinite(t71) and
+  (((result7 = t8) and (t81 = fliteral7)) and (tqtisFinite(t81) and
+  (((result8 = t9) and (t91 = fliteral8)) and (tqtisFinite(t91) and
+  (((result9 = t10) and (t101 = fliteral9)) and (tqtisFinite(t101) and
+  (((result10 = a1) and (a11 = t11)) and (tqtisFinite(a11) and
   ((((o = sub(NearestTiesToEven, a11, t21)) and
-  tqtisFinite(sub(NearestTiesToEven, a11, t21))) and (({ t__content =
-  result11 } = { t__content = a2 }) and (a21 = o))) and (tqtisFinite(a21) and
-  ((((o1 = add(NearestTiesToEven, a21, t31)) and
-  tqtisFinite(add(NearestTiesToEven, a21, t31))) and (({ t__content =
-  result12 } = { t__content = a3 }) and (a31 = o1))) and
-  (tqtisFinite(a31) and ((((o2 = sub(NearestTiesToEven, a31, t41)) and
-  tqtisFinite(sub(NearestTiesToEven, a31, t41))) and (({ t__content =
-  result13 } = { t__content = a4 }) and (a41 = o2))) and
-  (tqtisFinite(a41) and ((((o3 = add(NearestTiesToEven, a41, t51)) and
-  tqtisFinite(add(NearestTiesToEven, a41, t51))) and (({ t__content =
-  result14 } = { t__content = a5 }) and (a51 = o3))) and
-  (tqtisFinite(a51) and ((((o4 = sub(NearestTiesToEven, a51, t61)) and
-  tqtisFinite(sub(NearestTiesToEven, a51, t61))) and (({ t__content =
-  result15 } = { t__content = a6 }) and (a61 = o4))) and
-  (tqtisFinite(a61) and ((((o5 = add(NearestTiesToEven, a61, t71)) and
-  tqtisFinite(add(NearestTiesToEven, a61, t71))) and (({ t__content =
-  result16 } = { t__content = a7 }) and (a71 = o5))) and
-  (tqtisFinite(a71) and ((((o6 = sub(NearestTiesToEven, a71, t81)) and
-  tqtisFinite(sub(NearestTiesToEven, a71, t81))) and (({ t__content =
-  result17 } = { t__content = a8 }) and (a81 = o6))) and
-  (tqtisFinite(a81) and ((((o7 = add(NearestTiesToEven, a81, t91)) and
-  tqtisFinite(add(NearestTiesToEven, a81, t91))) and ((result18 = {
-  t__content = a9 }) and (a91 = o7))) and (tqtisFinite(a91) and
+  tqtisFinite(sub(NearestTiesToEven, a11, t21))) and ((result11 = a2) and
+  (a21 = o))) and (tqtisFinite(a21) and ((((o1 = add(NearestTiesToEven, a21,
+  t31)) and tqtisFinite(add(NearestTiesToEven, a21, t31))) and
+  ((result12 = a3) and (a31 = o1))) and (tqtisFinite(a31) and
+  ((((o2 = sub(NearestTiesToEven, a31, t41)) and
+  tqtisFinite(sub(NearestTiesToEven, a31, t41))) and ((result13 = a4) and
+  (a41 = o2))) and (tqtisFinite(a41) and ((((o3 = add(NearestTiesToEven, a41,
+  t51)) and tqtisFinite(add(NearestTiesToEven, a41, t51))) and
+  ((result14 = a5) and (a51 = o3))) and (tqtisFinite(a51) and
+  ((((o4 = sub(NearestTiesToEven, a51, t61)) and
+  tqtisFinite(sub(NearestTiesToEven, a51, t61))) and ((result15 = a6) and
+  (a61 = o4))) and (tqtisFinite(a61) and ((((o5 = add(NearestTiesToEven, a61,
+  t71)) and tqtisFinite(add(NearestTiesToEven, a61, t71))) and
+  ((result16 = a7) and (a71 = o5))) and (tqtisFinite(a71) and
+  ((((o6 = sub(NearestTiesToEven, a71, t81)) and
+  tqtisFinite(sub(NearestTiesToEven, a71, t81))) and ((result17 = a8) and
+  (a81 = o6))) and (tqtisFinite(a81) and ((((o7 = add(NearestTiesToEven, a81,
+  t91)) and tqtisFinite(add(NearestTiesToEven, a81, t91))) and
+  ((result18 = a9) and (a91 = o7))) and (tqtisFinite(a91) and
   ((((o8 = sub(NearestTiesToEven, a91, t101)) and
-  tqtisFinite(sub(NearestTiesToEven, a91, t101))) and ((result19 = {
-  t__content = a10 }) and (a101 = o8))) and (tqtisFinite(a101) and
+  tqtisFinite(sub(NearestTiesToEven, a91, t101))) and ((result19 = a10) and
+  (a101 = o8))) and (tqtisFinite(a101) and
   ((((((((o9 = mul(NearestTiesToEven, a91, a91)) and
   tqtisFinite(mul(NearestTiesToEven, a91, a91))) and
   (((o10 = mul(NearestTiesToEven, a101, a81)) and
   tqtisFinite(mul(NearestTiesToEven, a101, a81))) and
   (o11 = sub(NearestTiesToEven, o10, o9)))) and ((o12 = o11) and
   tqtisFinite(o11))) and (o13 = mul(NearestTiesToEven, fliteral10, o12))) and
-  ((o14 = o13) and tqtisFinite(o13))) and ((result20 = { t__content = num
-  }) and (num1 = o14))) and (tqtisFinite(num1) and
+  ((o14 = o13) and tqtisFinite(o13))) and ((result20 = num) and
+  (num1 = o14))) and (tqtisFinite(num1) and
   ((((((((o15 = mul(NearestTiesToEven, fliteral11, a91)) and
   tqtisFinite(mul(NearestTiesToEven, fliteral11, a91))) and
   (o16 = sub(NearestTiesToEven, a101, o15))) and ((o17 = o16) and
   tqtisFinite(o16))) and (o18 = add(NearestTiesToEven, o17, a81))) and
-  ((o19 = o18) and tqtisFinite(o18))) and ((result21 = { t__content = den
-  }) and (den1 = o19))) and (tqtisFinite(den1) and ((le(neg(fliteral12),
+  ((o19 = o18) and tqtisFinite(o18))) and ((result21 = den) and
+  (den1 = o19))) and (tqtisFinite(den1) and ((le(neg(fliteral12),
   fliteral12) -> tqtisFinite(res)) and ((((o20 = div(NearestTiesToEven, num1,
   den1)) and tqtisFinite(div(NearestTiesToEven, num1, den1))) and
-  ((result22 = { t__content = res }) and (res1 = o20))) and (eq(res1,
-  fliteral13) and (((pi_compute__shanks_float__result2 = { t__content =
-  pi_compute__shanks_float__result1 }) and
+  ((result22 = res) and (res1 = o20))) and (eq(res1, fliteral13) and
+  (((pi_compute__shanks_float__result2 = pi_compute__shanks_float__result1) and
   (pi_compute__shanks_float__result3 = pi_compute__shanks_float__result1)) and
-  ((result23 = { t__content = pi_compute__shanks_float__result }) and
+  ((result23 = pi_compute__shanks_float__result) and
   (pi_compute__shanks_float__result1 = res1)))))))))))))))))))))))))))))))))))))))))))))))))) and
   (((pi_compute__shanks_float__result4 = pi_compute__shanks_float__result2) and
-  ((res2 = { t__content = res1 }) and ((den2 = { t__content = den1 }) and
-  ((num2 = { t__content = num1 }) and ((a102 = { t__content = a101 }) and
-  ((a92 = { t__content = a91 }) and ((a82 = { t__content = a81 }) and
-  ((a72 = { t__content = a71 }) and ((a62 = { t__content = a61 }) and
-  ((a52 = { t__content = a51 }) and ((a42 = { t__content = a41 }) and
-  ((a32 = { t__content = a31 }) and ((a22 = { t__content = a21 }) and
-  ((a12 = { t__content = a11 }) and ((t102 = { t__content = t101 }) and
-  ((t92 = { t__content = t91 }) and ((t82 = { t__content = t81 }) and
-  ((t72 = { t__content = t71 }) and ((t62 = { t__content = t61 }) and
-  ((t52 = { t__content = t51 }) and ((t42 = { t__content = t41 }) and
-  ((t32 = { t__content = t31 }) and ((t22 = { t__content = t21 }) and
-  (t12 = { t__content = t11 })))))))))))))))))))))))) and
+  ((res2 = res1) and ((den2 = den1) and ((num2 = num1) and ((a102 = a101) and
+  ((a92 = a91) and ((a82 = a81) and ((a72 = a71) and ((a62 = a61) and
+  ((a52 = a51) and ((a42 = a41) and ((a32 = a31) and ((a22 = a21) and
+  ((a12 = a11) and ((t102 = t101) and ((t92 = t91) and ((t82 = t81) and
+  ((t72 = t71) and ((t62 = t61) and ((t52 = t51) and ((t42 = t41) and
+  ((t32 = t31) and ((t22 = t21) and (t12 = t11)))))))))))))))))))))))) and
   ((pi_compute__shanks_float__result5 = pi_compute__shanks_float__result3) and
   ((res3 = res1) and ((den3 = den1) and ((num3 = num1) and ((a103 = a101) and
   ((a93 = a91) and ((a83 = a81) and ((a73 = a71) and ((a63 = a61) and
   ((a53 = a51) and ((a43 = a41) and ((a33 = a31) and ((a23 = a21) and
   ((a13 = a11) and ((t103 = t101) and ((t93 = t91) and ((t83 = t81) and
   ((t73 = t71) and ((t63 = t61) and ((t53 = t51) and ((t43 = t41) and
-  ((t33 = t31) and ((t23 = t21) and (t13 = t11)))))))))))))))))))))))))) and
-  (result24 = (pi_compute__shanks_float__result4).t__content)) ->
-  eq((pi_compute__shanks_float__result4).t__content, fliteral13))))
+  ((t33 = t31) and ((t23 = t21) and (t13 = t11))))))))))))))))))))))))))
+
+axiom H1 : (result24 = pi_compute__shanks_float__result4)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : eq(pi_compute__shanks_float__result4, fliteral13)

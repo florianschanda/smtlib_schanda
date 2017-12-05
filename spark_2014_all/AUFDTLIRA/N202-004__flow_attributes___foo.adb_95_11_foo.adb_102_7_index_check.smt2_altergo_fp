@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -480,32 +480,64 @@ axiom def_axiom :
   (forall temp___289:int. (((temp___284(temp___286, temp___287,
   temp___288)).elts1[temp___289]) = of_rep(temp___286)))))
 
+logic a : (int,character) farray
+
+logic temp___291 : (int,character) farray
+
+logic temp___2911 : t1
+
+logic temp___292 : (int,character) farray
+
+logic temp___2921 : t
+
+logic temp___293 : (int,character) farray
+
+logic temp___2931 : t
+
+logic o : (int,character) farray
+
+logic o1 : character
+
+logic result : (int,character) farray
+
+logic a1 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : (to_rep1(first2((temp___284(32, to_rep1(a__first),
+  to_rep1(a__last))).rt1)) = to_rep1(a__first))
+
+axiom H2 : (to_rep1(last2((temp___284(32, to_rep1(a__first),
+  to_rep1(a__last))).rt1)) = to_rep1(a__last))
+
+axiom H3 : ({ elts1 = temp___291; rt1 = temp___2911 } = temp___284(32,
+  to_rep1(a__first), to_rep1(a__last)))
+
+axiom H4 : (temp___291 = temp___292)
+
+axiom H5 : (mk(to_rep1(first2(temp___2911)),
+  to_rep1(last2(temp___2911))) = temp___2921)
+
+axiom H6 : (((to_rep1(first(temp___2921)) <= to_rep1(last(temp___2921))) ->
+  (((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (((to_rep1(last(temp___2921)) - to_rep1(first(temp___2921))) + 1) = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) and
+  ((not (to_rep1(a__first) <= to_rep1(a__last))) ->
+  (((to_rep1(last(temp___2921)) - to_rep1(first(temp___2921))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2921)) <= to_rep1(last(temp___2921)))) ->
+  ((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (0 = ((to_rep1(a__last) - to_rep1(a__first)) + 1)))))
+
+axiom H7 : ((temp___293 = temp___292) and (temp___2931 = temp___2921))
+
+axiom H8 : (o = slide(temp___293, to_rep1(first(temp___2931)),
+  to_rep1(a__first)))
+
+axiom H9 : (result = a)
+
+axiom H10 : (a1 = o)
+
+axiom H11 : (to_rep(o1) = 120)
+
  (* File "foo.adb", line 84, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,character) farray. forall temp___291:(int,character) farray.
-  forall temp___2911:t1. forall temp___292:(int,character) farray.
-  forall temp___2921:t. forall temp___293:(int,character) farray.
-  forall temp___2931:t. forall o:(int,character) farray. forall o1:character.
-  forall result:(int,character) farray. forall a1:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(a__first), to_rep1(a__last)) ->
-  (((((((to_rep1(first2((temp___284(32, to_rep1(a__first),
-  to_rep1(a__last))).rt1)) = to_rep1(a__first)) and
-  ((to_rep1(last2((temp___284(32, to_rep1(a__first),
-  to_rep1(a__last))).rt1)) = to_rep1(a__last)) and ({ elts1 = temp___291;
-  rt1 = temp___2911 } = temp___284(32, to_rep1(a__first),
-  to_rep1(a__last))))) and ((temp___291 = temp___292) and
-  (mk(to_rep1(first2(temp___2911)),
-  to_rep1(last2(temp___2911))) = temp___2921))) and
-  ((((to_rep1(first(temp___2921)) <= to_rep1(last(temp___2921))) and
-  (((to_rep1(a__first) <= to_rep1(a__last)) and
-  (((to_rep1(last(temp___2921)) - to_rep1(first(temp___2921))) + 1) = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and
-  (((to_rep1(last(temp___2921)) - to_rep1(first(temp___2921))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2921)) <= to_rep1(last(temp___2921)))) and
-  (((to_rep1(a__first) <= to_rep1(a__last)) and
-  (0 = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  (not (to_rep1(a__first) <= to_rep1(a__last)))))) and
-  ((temp___293 = temp___292) and (temp___2931 = temp___2921)))) and
-  (o = slide(temp___293, to_rep1(first(temp___2931)),
-  to_rep1(a__first)))) and ((result = a) and (a1 = o))) ->
-  ((to_rep(o1) = 120) -> (to_rep1(a__first) <= to_rep1(a__first))))))
+goal WP_parameter_def : (to_rep1(a__first) <= to_rep1(a__first))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -742,14 +742,30 @@ axiom def_axiom :
 
 axiom identity__def_axiom : (identity = temp___String_Literal_138(void))
 
+logic search_string : (int,character) farray
+
+logic result_index : int
+
+logic o : int
+
+logic result : (int,character) farray
+
+logic search_string1 : (int,character) farray
+
+axiom H : (temp___String_Literal_138(void) = identity)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H2 : in_range2(ch)
+
+axiom H3 : (0 <  length({ elts = s; rt = s1 }))
+
+axiom H4 : (result = search_string)
+
+axiom H5 : (search_string1 = contains2__search_string__aggregate_def(ch))
+
+axiom H6 : ((0 <= 2147483647) -> in_range3(result_index))
+
  (* File "contains2.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall search_string:(int,character) farray. forall result_index:int.
-  forall result:(int,character) farray.
-  forall search_string1:(int,character) farray.
-  ((temp___String_Literal_138(void) = identity) -> (dynamic_property(1,
-  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) -> (in_range2(ch) ->
-  ((0 <  length({ elts = s; rt = s1 })) -> (((result = search_string) and
-  (search_string1 = contains2__search_string__aggregate_def(ch))) ->
-  (((0 <= 2147483647) -> in_range3(result_index)) ->
-  in_range1(to_rep1(first(s1))))))))))
+goal WP_parameter_def : in_range1(to_rep1(first(s1)))

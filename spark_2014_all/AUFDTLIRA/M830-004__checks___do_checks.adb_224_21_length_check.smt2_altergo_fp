@@ -135,7 +135,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -401,10 +401,12 @@ logic y__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : dynamic_property(0, 2147483647, to_rep(x__first), to_rep(x__last))
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep(y__first), to_rep(y__last))
+
  (* File "do_checks.adb", line 211, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483647, to_rep(x__first),
-  to_rep(x__last)) -> (dynamic_property(0, 2147483647, to_rep(y__first),
-  to_rep(y__last)) -> (((to_rep(first(mk(to_rep(x__first),
+goal WP_parameter_def : (((to_rep(first(mk(to_rep(x__first),
   to_rep(x__last)))) <= to_rep(last(mk(to_rep(x__first),
   to_rep(x__last))))) -> (((to_rep(x__first) <= to_rep(x__last)) ->
   (((to_rep(last(mk(to_rep(x__first),
@@ -417,4 +419,4 @@ goal WP_parameter_def : (dynamic_property(0, 2147483647, to_rep(x__first),
   ((not (to_rep(first(mk(to_rep(x__first),
   to_rep(x__last)))) <= to_rep(last(mk(to_rep(x__first),
   to_rep(x__last)))))) -> ((to_rep(x__first) <= to_rep(x__last)) ->
-  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))))
+  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))

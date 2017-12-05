@@ -246,10 +246,23 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_output:us_rep. forall result:bool. (in_range1(to__) ->
-  (((result = is_writable(standard_output)) and ((result = true) <->
+logic standard_output : us_rep
+
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(to__)
+
+axiom H1 : ((result = is_writable(standard_output)) and ((result = true) <->
   ((is_open(standard_output) = true) and ((mode__2(standard_output) = 1) or
-  (mode__2(standard_output) = 2))))) -> ((result = true) ->
-  (is_writable(standard_output) = true)))))
+  (mode__2(standard_output) = 2)))))
+
+axiom H2 : (result = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (is_writable(standard_output) = true)

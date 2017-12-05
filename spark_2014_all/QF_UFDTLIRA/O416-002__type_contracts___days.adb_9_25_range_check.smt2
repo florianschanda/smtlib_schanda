@@ -32,6 +32,7 @@
 (define-fun dynamic_invariant ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 6)) (in_range temp___expr_135)))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const d Int)
+(declare-const o Int)
 (assert (in_range d))
 (assert (not (= d 6)))
 (assert (not (not (= d 6))))

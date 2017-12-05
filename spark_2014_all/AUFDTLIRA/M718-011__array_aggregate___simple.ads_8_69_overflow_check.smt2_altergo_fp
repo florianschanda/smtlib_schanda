@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -261,29 +261,77 @@ axiom def_axiom1 :
   (forall temp___159:int.
   ((simple__foo__arr__aggregate_def(temp___158)[temp___159]) = of_rep(temp___158))))
 
+logic arr : (int,integer) farray
+
+logic simple__foo__result : (int,integer) farray
+
+logic o : int
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic simple__foo__result1 : (int,integer) farray
+
+logic simple__foo__result2 : (int,integer) farray
+
+logic simple__foo__result3 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic simple__foo__result4 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic simple__foo__result5 : (int,integer) farray
+
+axiom H : in_range(init_val)
+
+axiom H1 : ((o = (init_val + 1)) and in_range((init_val + 1)))
+
+axiom H2 : (o1 = simple__foo__arr__aggregate_def(o))
+
+axiom H3 : (result = arr)
+
+axiom H4 : (arr1 = o1)
+
+axiom H5 : (to_rep(o2) = 10)
+
+axiom H6 : (o3 = (arr1[1 <- o2]))
+
+axiom H7 : (arr1 = result1)
+
+axiom H8 : (arr2 = o3)
+
+axiom H9 : (simple__foo__result1 = simple__foo__result2)
+
+axiom H10 : (simple__foo__result3 = simple__foo__result1)
+
+axiom H11 : (result2 = simple__foo__result)
+
+axiom H12 : (simple__foo__result1 = arr2)
+
+axiom H13 : (simple__foo__result4 = simple__foo__result2)
+
+axiom H14 : (arr2 = arr3)
+
+axiom H15 : (simple__foo__result5 = simple__foo__result3)
+
+axiom H16 : (arr4 = arr2)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,integer) farray.
-  forall simple__foo__result:(int,integer) farray. forall o:int.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall result:(int,integer) farray.
-  forall arr1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall arr2:(int,integer) farray. forall result2:(int,integer) farray.
-  forall simple__foo__result1:(int,integer) farray.
-  forall simple__foo__result2:(int,integer) farray.
-  forall simple__foo__result3:(int,integer) farray.
-  forall arr3:(int,integer) farray.
-  forall simple__foo__result4:(int,integer) farray.
-  forall arr4:(int,integer) farray.
-  forall simple__foo__result5:(int,integer) farray. (in_range(init_val) ->
-  (((((((o = (init_val + 1)) and in_range((init_val + 1))) and
-  (o1 = simple__foo__arr__aggregate_def(o))) and (({ map__content = result
-  } = { map__content = arr }) and (arr1 = o1))) and ((((to_rep(o2) = 10) and
-  (o3 = (arr1[1 <- o2]))) and ((arr1 = result1) and (arr2 = o3))) and
-  (((simple__foo__result1 = simple__foo__result2) and
-  (simple__foo__result3 = simple__foo__result1)) and (({ map__content =
-  result2 } = { map__content = simple__foo__result }) and
-  (simple__foo__result1 = arr2))))) and ((({ map__content =
-  simple__foo__result4 } = { map__content = simple__foo__result2 }) and
-  (arr2 = arr3)) and ((simple__foo__result5 = simple__foo__result3) and
-  (arr4 = arr2)))) -> in_range((init_val + 1)))))
+goal WP_parameter_def : in_range((init_val + 1))

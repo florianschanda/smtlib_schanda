@@ -274,6 +274,17 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : et1
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (i <  10)
+
+axiom H3 : (0 <  e)
+
  (* File "ar.adb", line 30, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (in_range2(e) -> (((i <  10) and
-  (0 <  e)) -> in_range2((e - 1)))))
+goal WP_parameter_def : in_range2((e - 1))

@@ -36,6 +36,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const total Int)
 (declare-const last_incr Int)
+(declare-const o Int)
 (assert (in_range total))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range last_incr)))
 (assert (in_range incr))

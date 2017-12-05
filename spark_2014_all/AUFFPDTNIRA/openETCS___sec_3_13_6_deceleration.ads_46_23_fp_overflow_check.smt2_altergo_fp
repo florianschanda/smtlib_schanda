@@ -1930,29 +1930,73 @@ axiom is_valid_kwet_rst__def_axiom : ((is_valid_kwet_rst(void) = true) <->
   a_brake_emergency_model; rec__step_function__step_function_t__step =
   a_brake_emergency_model1 } }) = true)))
 
- (* File "units.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
-  (tqtisFinite(v) -> (in_range2(d) -> (((o9 = a_brake_emergency(v, d)) and
-  (in_range1(o9) and eq(o9, get_value({ us_split_fields3 = {
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+axiom H : tqtisFinite(v)
+
+axiom H1 : in_range2(d)
+
+axiom H2 : ((o9 = a_brake_emergency(v, d)) and (in_range1(o9) and eq(o9,
+  get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
-  a_brake_emergency_model1 } }, to_int(NearestTiesToAway, v))))) ->
-  (((((((((o = kwet_rst(v)) and (tqtisFinite(o) and eq(o, get_value({
+  a_brake_emergency_model1 } }, to_int(NearestTiesToAway, v)))))
+
+axiom H3 : ((o = kwet_rst(v)) and (tqtisFinite(o) and eq(o, get_value({
   us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = kwet_rst_model;
   rec__step_function__step_function_t__step = kwet_rst_model1 } },
-  to_int(NearestTiesToAway, v))))) and (o1 = sub(NearestTiesToEven, fliteral,
-  o))) and ((o2 = o1) and tqtisFinite(o1))) and (o3 = mul(NearestTiesToEven,
-  fliteral1, o2))) and (((o4 = kwet_rst(v)) and (tqtisFinite(o4) and eq(o4,
-  get_value({ us_split_fields3 = {
+  to_int(NearestTiesToAway, v)))))
+
+axiom H4 : (o1 = sub(NearestTiesToEven, fliteral, o))
+
+axiom H5 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H6 : (o3 = mul(NearestTiesToEven, fliteral1, o2))
+
+axiom H7 : ((o4 = kwet_rst(v)) and (tqtisFinite(o4) and eq(o4, get_value({
+  us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = kwet_rst_model;
   rec__step_function__step_function_t__step = kwet_rst_model1 } },
-  to_int(NearestTiesToAway, v))))) and (o5 = add(NearestTiesToEven, o4,
-  o3)))) and ((o6 = o5) and tqtisFinite(o5))) and (((o7 = kdry_rst(v)) and
-  (tqtisFinite(o7) and eq(o7, get_value({ us_split_fields3 = {
+  to_int(NearestTiesToAway, v)))))
+
+axiom H8 : (o5 = add(NearestTiesToEven, o4, o3))
+
+axiom H9 : ((o6 = o5) and tqtisFinite(o5))
+
+axiom H10 : ((o7 = kdry_rst(v)) and (tqtisFinite(o7) and eq(o7, get_value({
+  us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = kdry_rst_model;
   rec__step_function__step_function_t__step = kdry_rst_model1 } },
-  to_int(NearestTiesToAway, v))))) and (o8 = mul(NearestTiesToEven, o7,
-  o6)))) -> tqtisFinite(o8))))))
+  to_int(NearestTiesToAway, v)))))
+
+axiom H11 : (o8 = mul(NearestTiesToEven, o7, o6))
+
+ (* File "units.ads", line 26, characters 0-0 *)
+goal WP_parameter_def : tqtisFinite(o8)

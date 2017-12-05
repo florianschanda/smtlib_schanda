@@ -316,32 +316,146 @@ axiom sorted__def_axiom :
   (forall j:int. (((1 <= j) and (j <= 99)) ->
   (to_rep((v[j])) <= to_rep((v[(j + 1)])))))))
 
- (* File "math.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:(int,value) farray. forall prev_value:int. forall tmp_value:int.
-  forall j:int. forall o:value. forall temp___178:(int,value) farray.
-  forall o1:(int,value) farray. forall k:int. forall result:int.
-  forall prev_value1:int. forall result1:int. forall j1:int.
-  forall result2:int. forall tmp_value1:int. forall result3:int.
-  forall prev_value2:int. forall result4:(int,value) farray.
-  forall v1:(int,value) farray. forall v2:(int,value) farray.
-  forall prev_value3:int. forall tmp_value2:int. forall j2:int.
-  ((sorted(i5s) = true) -> ((sorted(v) = true) -> (((result = prev_value) and
-  (prev_value1 = to_rep((v[1])))) -> (in_range1(prev_value1) ->
-  (((0 <= 10000) -> in_range1(tmp_value)) -> (((result1 = j) and (j1 = 1)) ->
-  (((1 <= j1) and (j1 <= 100)) -> (((result2 = tmp_value) and
-  (tmp_value1 = prev_value1)) -> (((result3 = prev_value1) and
-  (prev_value2 = to_rep((v[j1])))) -> (((((to_rep(o) = tmp_value1) and
-  (temp___178 = (v[j1 <- o]))) and ((sorted(temp___178) = true) and
-  (o1 = temp___178))) and ((result4 = v) and (v1 = o1))) ->
-  (((prev_value3 = to_rep((v[j2]))) and
-  ((forall k1:int. (((1 <= k1) and (k1 <= j2)) ->
-   (to_rep((v2[k1])) = to_rep((v[max(1, (k1 - 1))]))))) and
-  (forall k1:int. ((((j2 + 1) <= k1) and (k1 <= 100)) ->
-  (to_rep((v2[k1])) = to_rep((v[k1]))))))) -> ((((((((0 <= 10000) ->
-  in_range1(prev_value3)) and (sorted(v2) = true)) and
+logic v : (int,value) farray
+
+logic prev_value : int
+
+logic tmp_value : int
+
+logic j : int
+
+logic o : value
+
+logic temp___178 : (int,value) farray
+
+logic o1 : (int,value) farray
+
+logic k : int
+
+logic o2 : int
+
+logic o3 : value
+
+logic o4 : int
+
+logic k1 : int
+
+logic o5 : int
+
+logic o6 : value
+
+logic o7 : int
+
+logic o8 : value
+
+logic temp___1781 : (int,value) farray
+
+logic o9 : (int,value) farray
+
+logic result : int
+
+logic prev_value1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : int
+
+logic tmp_value1 : int
+
+logic result3 : int
+
+logic prev_value2 : int
+
+logic result4 : (int,value) farray
+
+logic v1 : (int,value) farray
+
+logic v2 : (int,value) farray
+
+logic prev_value3 : int
+
+logic tmp_value2 : int
+
+logic j2 : int
+
+logic result5 : int
+
+logic j3 : int
+
+logic result6 : int
+
+logic tmp_value3 : int
+
+logic result7 : int
+
+logic prev_value4 : int
+
+logic result8 : (int,value) farray
+
+logic v3 : (int,value) farray
+
+axiom H : (sorted(i5s) = true)
+
+axiom H1 : (sorted(v) = true)
+
+axiom H2 : (result = prev_value)
+
+axiom H3 : (prev_value1 = to_rep((v[1])))
+
+axiom H4 : in_range1(prev_value1)
+
+axiom H5 : ((0 <= 10000) -> in_range1(tmp_value))
+
+axiom H6 : (result1 = j)
+
+axiom H7 : (j1 = 1)
+
+axiom H8 : (1 <= j1)
+
+axiom H9 : (j1 <= 100)
+
+axiom H10 : (result2 = tmp_value)
+
+axiom H11 : (tmp_value1 = prev_value1)
+
+axiom H12 : (result3 = prev_value1)
+
+axiom H13 : (prev_value2 = to_rep((v[j1])))
+
+axiom H14 : (to_rep(o) = tmp_value1)
+
+axiom H15 : (temp___178 = (v[j1 <- o]))
+
+axiom H16 : (sorted(temp___178) = true)
+
+axiom H17 : (o1 = temp___178)
+
+axiom H18 : (result4 = v)
+
+axiom H19 : (v1 = o1)
+
+axiom H20 : (prev_value3 = to_rep((v[j2])))
+
+axiom H21 :
+  (forall k2:int. (((1 <= k2) and (k2 <= j2)) ->
+  (to_rep((v2[k2])) = to_rep((v[max(1, (k2 - 1))])))))
+
+axiom H22 :
+  (forall k2:int. ((((j2 + 1) <= k2) and (k2 <= 100)) ->
+  (to_rep((v2[k2])) = to_rep((v[k2])))))
+
+axiom H23 : (((((((0 <= 10000) -> in_range1(prev_value3)) and
+  (sorted(v2) = true)) and
   (forall temp___181:int. (((1 <= temp___181) and (temp___181 <= 100)) ->
   ((j2 <  temp___181) -> ((v2[temp___181]) = (v[temp___181])))))) and
   ((0 <= 10000) -> in_range1(tmp_value2))) and ((1 <= 100) ->
-  in_range2(j2))) and ((1 <= j2) and (j2 <= 100))) -> (((1 <= k) and
-  (k <= j2)) -> (1 <= max(1, (k - 1)))))))))))))))))
+  in_range2(j2))) and ((1 <= j2) and (j2 <= 100)))
+
+axiom H24 : (1 <= k)
+
+axiom H25 : (k <= j2)
+
+ (* File "math.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : (1 <= max(1, (k - 1)))

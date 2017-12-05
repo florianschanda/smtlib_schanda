@@ -301,7 +301,39 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic y : (int,t) farray
+
+logic b : bool
+
+logic inline_for_proof__get2__result : int
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : t
+
+logic o4 : int
+
+logic result : int
+
+logic inline_for_proof__get2__result1 : int
+
+logic inline_for_proof__get2__result2 : int
+
+logic inline_for_proof__get2__result3 : int
+
+logic inline_for_proof__get2__result4 : int
+
+logic inline_for_proof__get2__result5 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : ((1 <= i) and (i <= 100))
+
+axiom H2 : (b = true)
+
  (* File "inline_for_proof.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. (in_range1(i) -> (((1 <= i) and (i <= 100)) ->
-  ((b = true) -> (1 <= i)))))
+goal WP_parameter_def : (1 <= i)

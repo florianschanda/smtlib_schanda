@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1919,6 +1919,100 @@ axiom readmem8__post_axiom :
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic rcx : t3
+
+logic rsi : t3
+
+logic rdi : t3
+
+logic memory : (t3,unsigned8) farray
+
+logic val1 : t
+
+logic val2 : t
+
+logic o : t2
+
+logic o1 : t2
+
+logic o2 : t3
+
+logic o3 : t
+
+logic o4 : t2
+
+logic o5 : t3
+
+logic o6 : t
+
+logic o7 : t2
+
+logic o8 : t2
+
+logic o9 : t2
+
+logic o10 : bool
+
+logic o11 : t2
+
+logic o12 : t2
+
+logic o13 : t2
+
+logic o14 : t2
+
+logic o15 : t2
+
+logic o16 : bool
+
+logic result : bool
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic rcx1 : t3
+
+logic rsi1 : t3
+
+logic rdi1 : t3
+
+logic val11 : t
+
+logic val21 : t
+
+logic temp___331 : t2
+
+logic result1 : t2
+
+logic temp___3311 : t2
+
+logic result2 : t
+
+logic val12 : t
+
+logic result3 : t
+
+logic val22 : t
+
+logic result4 : bool
+
+logic zeroflag1 : bool
+
+logic result5 : bool
+
+logic carryflag1 : bool
+
+logic rcx2 : t3
+
+logic result6 : bool
+
+logic rsi2 : t3
+
+logic rdi2 : t3
+
+logic result7 : bool
 
  (* File "x86.adb", line 520, characters 0-0 *)
 goal WP_parameter_def : true

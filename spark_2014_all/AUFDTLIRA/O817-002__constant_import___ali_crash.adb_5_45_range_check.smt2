@@ -117,6 +117,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range2 dir_sep))
 (assert (=> (<= 1 0) (= o (+ (- 0 1) 1))))
 (assert (=> (not (<= 1 0)) (= o 0)))

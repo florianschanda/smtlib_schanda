@@ -1504,6 +1504,7 @@
 (declare-const container__split_fields1 us_main_type)
 (declare-const container__split_fields2 us_private)
 (declare-const us Int)
+(declare-const hnco__test2__v_type_owner__vector_type_owner__append__2__container__fields us_main_type)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) (to_rep1 container__split_fields)))
 (assert (in_range1 new_item))
 (assert (=> (= (of_int 1) true) (< (length (mk___rep1 container__split_discrs (mk___split_fields1 (mk___rep (mk___split_discrs container__split_fields) (mk___split_fields container__split_fields1)) container__split_fields2) container__attr__tag)) (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)))))

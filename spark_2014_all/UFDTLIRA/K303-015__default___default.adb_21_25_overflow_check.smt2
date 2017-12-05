@@ -36,6 +36,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (and (= o (add 2 0)) (in_range o)))
 (assert (and (= o1 (add 1 2)) (in_range o1)))
 (assert (= o2 (+ o1 o)))

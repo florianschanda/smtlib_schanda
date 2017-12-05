@@ -598,7 +598,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type ttrain_idB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1556,22 +1556,116 @@ axiom get_other_previous_track__def_axiom :
   rec__trains__train_position__track_end = position2 } },
   id) = to_rep6(((previous_tracks[to_rep5((((tracks[to_rep1(position)])).us_split_fields3).rec__trains__track__from)])[id]))))))))
 
- (* File "trains.ads", line 155, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
-  forall track_signals:(int,signal) farray. forall train:int. forall t:int.
-  forall result:int. forall train1:int. forall result1:bool.
-  forall train2:int. (in_range1(track) -> (in_range2(cur_num_trains) ->
-  ((to_rep2((track_signals[track])) = 1) -> (((cur_num_trains = r7b) and
-  in_range2(r7b)) -> ((({ int__content = result } = { int__content = train
-  }) and (train1 = 1)) -> (((1 <= train1) and (train1 <= r7b)) ->
-  ((((result1 = is_previous_track((trains[train1]), track)) and
+logic cur_num_trains : int
+
+logic trains : (int,us_rep) farray
+
+logic track_signals : (int,signal) farray
+
+logic train : int
+
+logic temp___392 : int
+
+logic temp___393 : int
+
+logic temp___391 : int
+
+logic t : int
+
+logic o : signal
+
+logic o1 : (int,signal) farray
+
+logic t1 : int
+
+logic track_signals1 : (int,signal) farray
+
+logic result : int
+
+logic train1 : int
+
+logic result1 : bool
+
+logic train2 : int
+
+logic result2 : int
+
+logic train3 : int
+
+logic result3 : bool
+
+logic train4 : int
+
+logic train5 : int
+
+logic train6 : int
+
+logic train7 : int
+
+logic train8 : int
+
+logic train9 : int
+
+logic train10 : int
+
+logic train11 : int
+
+logic result4 : (int,signal) farray
+
+logic track_signals2 : (int,signal) farray
+
+logic track_signals3 : (int,signal) farray
+
+logic train12 : int
+
+logic track_signals4 : (int,signal) farray
+
+logic train13 : int
+
+logic track_signals5 : (int,signal) farray
+
+logic train14 : int
+
+logic track_signals6 : (int,signal) farray
+
+logic train15 : int
+
+axiom H : in_range1(track)
+
+axiom H1 : in_range2(cur_num_trains)
+
+axiom H2 : (to_rep2((track_signals[track])) = 1)
+
+axiom H3 : (cur_num_trains = r7b)
+
+axiom H4 : in_range2(r7b)
+
+axiom H5 : (result = train)
+
+axiom H6 : (train1 = 1)
+
+axiom H7 : (1 <= train1)
+
+axiom H8 : (train1 <= r7b)
+
+axiom H9 : ((result1 = is_previous_track((trains[train1]), track)) and
   ((result1 = true) <->
   (exists id:int. (((1 <= id) and (id <= 3)) and
   ((track = get_previous_track((trains[train1]), id)) or
-  (track = get_other_previous_track((trains[train1]), id))))))) and
-  (not (result1 = true))) ->
-  ((forall t1:int. (((1 <= t1) and (t1 <= train2)) ->
-   (not (is_previous_track((trains[t1]), track) = true)))) ->
-  ((((1 <= r7b) -> dynamic_property(1, r7b, train2)) and ((1 <= train2) and
-  (train2 <= r7b))) -> (((1 <= t) and (t <= train2)) -> (1 <= t))))))))))))
+  (track = get_other_previous_track((trains[train1]), id)))))))
+
+axiom H10 : (not (result1 = true))
+
+axiom H11 :
+  (forall t2:int. (((1 <= t2) and (t2 <= train2)) ->
+  (not (is_previous_track((trains[t2]), track) = true))))
+
+axiom H12 : (((1 <= r7b) -> dynamic_property(1, r7b, train2)) and
+  ((1 <= train2) and (train2 <= r7b)))
+
+axiom H13 : (1 <= t)
+
+axiom H14 : (t <= train2)
+
+ (* File "trains.ads", line 155, characters 0-0 *)
+goal WP_parameter_def : (1 <= t)

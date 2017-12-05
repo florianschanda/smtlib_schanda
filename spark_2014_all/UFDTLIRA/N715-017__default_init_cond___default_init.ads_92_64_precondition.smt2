@@ -50,6 +50,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert true)
 (assert (forall ((x1 Int)) (! (= (= (wrong_ok x1) true) (= x1 (init 0))) :pattern ((wrong_ok x1)))))
+(declare-const o Int)
+(assert (in_range x))
 (assert (not true))
 (check-sat)
 (exit)

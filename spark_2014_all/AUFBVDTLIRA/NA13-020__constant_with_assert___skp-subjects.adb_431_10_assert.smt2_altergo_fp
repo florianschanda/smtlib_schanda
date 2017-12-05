@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -7928,20 +7928,63 @@ axiom null_event__def_axiom : ((null_event = of_rep4(7)) and
   ((null_event1 = of_rep5(256)) and ((null_event2 = of_int1(0)) and
   (null_event3 = of_int1(0)))))
 
+logic skp__subjects__get_pml4_address__result : t
+
+logic subject : int
+
+logic subject1 : int
+
+logic subject2 : int
+
+logic subject3 : int
+
+logic subject4 : int
+
+logic subject5 : int
+
+logic subject6 : int
+
+logic result : t
+
+logic skp__subjects__get_pml4_address__result1 : t
+
+logic skp__subjects__get_pml4_address__result2 : t
+
+logic skp__subjects__get_pml4_address__result3 : t
+
+logic skp__subjects__get_pml4_address__result4 : t
+
+logic skp__subjects__get_pml4_address__result5 : t
+
+axiom H : in_range1(subject_id)
+
+axiom H1 :
+  (forall subject7:int. (((0 <= subject7) and (subject7 <= 0)) ->
+  (urem(to_rep((((subject_specs[subject7])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  of_int(4096)) = of_int(0))))
+
+axiom H2 :
+  (forall subject7:int. (((1 <= subject7) and (subject7 <= 1)) ->
+  (urem(to_rep((((subject_specs[subject7])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  of_int(4096)) = of_int(0))))
+
+axiom H3 :
+  (forall subject7:int. (((2 <= subject7) and (subject7 <= 2)) ->
+  (urem(to_rep((((subject_specs[subject7])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  of_int(4096)) = of_int(0))))
+
+axiom H4 :
+  (forall subject7:int. (((3 <= subject7) and (subject7 <= 3)) ->
+  (urem(to_rep((((subject_specs[subject7])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  of_int(4096)) = of_int(0))))
+
+logic subject7 : int
+
+axiom H5 : (4 <= subject7)
+
+axiom H6 : (subject7 <= 4)
+
  (* File "sk.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : (in_range1(subject_id) ->
-  ((forall subject:int. (((0 <= subject) and (subject <= 0)) ->
-   (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
-   of_int(4096)) = of_int(0)))) ->
-  ((forall subject:int. (((1 <= subject) and (subject <= 1)) ->
-   (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
-   of_int(4096)) = of_int(0)))) ->
-  ((forall subject:int. (((2 <= subject) and (subject <= 2)) ->
-   (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
-   of_int(4096)) = of_int(0)))) ->
-  ((forall subject:int. (((3 <= subject) and (subject <= 3)) ->
-   (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
-   of_int(4096)) = of_int(0)))) ->
-  (forall subject:int. (((4 <= subject) and (subject <= 4)) ->
-  (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
-  of_int(4096)) = of_int(0)))))))))
+goal WP_parameter_def :
+  (urem(to_rep((((subject_specs[subject7])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  of_int(4096)) = of_int(0))

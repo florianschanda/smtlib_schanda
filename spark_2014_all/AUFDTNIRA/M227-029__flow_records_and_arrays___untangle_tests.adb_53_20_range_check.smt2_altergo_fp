@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -339,14 +339,68 @@ axiom def_axiom :
   temp___221)[temp___222]) = temp___220)) and ((not (temp___222 = 1)) ->
   ((temp___218(temp___220, temp___221)[temp___222]) = temp___221)))))
 
+logic p : (int,bool) farray
+
+logic n : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : (int,bool) farray
+
+logic o4 : int
+
+logic result : (int,bool) farray
+
+logic p1 : (int,bool) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic p2 : (int,bool) farray
+
+logic n1 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic n2 : int
+
+logic p3 : (int,bool) farray
+
+logic n3 : int
+
+logic result3 : (int,bool) farray
+
+logic p4 : (int,bool) farray
+
+axiom H : ((1 <= 2147483647) -> in_range2(n))
+
+axiom H1 : (result = p)
+
+axiom H2 : (p1 = temp___218(of_int(0), of_int(1)))
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 1000)
+
+axiom H7 : (((1 <= 2147483647) -> in_range2(n1)) and ((1 <= i2) and
+  (i2 <= 1000)))
+
+axiom H8 : ((p2[i2]) = true)
+
+axiom H9 : ((o = (2 * i2)) and in_range1((2 * i2)))
+
  (* File "untangle_tests.adb", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p:(int,bool) farray. forall n:int. forall i:int. forall o:int.
-  forall result:(int,bool) farray. forall p1:(int,bool) farray.
-  forall result1:int. forall i1:int. forall p2:(int,bool) farray.
-  forall n1:int. forall i2:int. (((1 <= 2147483647) -> in_range2(n)) ->
-  (((result = p) and (p1 = temp___218(of_int(0), of_int(1)))) ->
-  (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 1000)) ->
-  ((((1 <= 2147483647) -> in_range2(n1)) and ((1 <= i2) and (i2 <= 1000))) ->
-  (((p2[i2]) = true) -> (((o = (2 * i2)) and in_range1((2 * i2))) ->
-  in_range2(o)))))))))
+goal WP_parameter_def : in_range2(o)

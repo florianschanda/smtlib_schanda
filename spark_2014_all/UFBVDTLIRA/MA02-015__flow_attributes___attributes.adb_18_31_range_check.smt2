@@ -70,6 +70,7 @@
 (define-fun t__ref___projection ((a t__ref1)) t (t__content1 a))
 (define-fun dynamic_invariant1 ((temp___expr_135 (_ BitVec 8)) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool true)
 (declare-const w Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range w)))
 (assert (not (uint_in_range x)))

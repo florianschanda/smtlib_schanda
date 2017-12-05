@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -307,34 +307,81 @@ logic z__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic z : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,integer) farray
+
+logic concat_left__one__z__assume : (int,integer) farray
+
+logic concat_left__one__z__assume1 : t
+
+logic result : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+axiom H : in_range(x)
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(y1)),
+  to_rep(last(y1)))
+
+axiom H2 : ((to_rep(last(y1)) <  2147483647) or
+  ((- 2147483648) <  to_rep(first(y1))))
+
+axiom H3 : ((to_rep(first(y1)) <= to_rep(last(y1))) ->
+  (o2 = ((to_rep(last(y1)) - to_rep(first(y1))) + 1)))
+
+axiom H4 : ((not (to_rep(first(y1)) <= to_rep(last(y1)))) -> (o2 = 0))
+
+axiom H5 : (o3 = (1 + o2))
+
+axiom H6 : (o4 = ((- 2147483648) + o3))
+
+axiom H7 : (o5 = (o4 - 1))
+
+axiom H8 : ((o6 = o5) and in_range(o5))
+
+axiom H9 : (to_rep(o) = x)
+
+axiom H10 : (o1 = singleton(o, (- 2147483648)))
+
+axiom H11 : (o7 = concat(o1, (- 2147483648), (- 2147483648), y,
+  to_rep(first(y1)), to_rep(last(y1))))
+
+axiom H12 : (o7 = concat_left__one__z__assume)
+
+axiom H13 : (mk((- 2147483648), o6) = concat_left__one__z__assume1)
+
+axiom H14 : (result = z)
+
+axiom H15 : (z1 = concat_left__one__z__assume)
+
+axiom H16 : (to_rep(z__first) = to_rep(first(concat_left__one__z__assume1)))
+
+axiom H17 : (to_rep(z__last) = to_rep(last(concat_left__one__z__assume1)))
+
+axiom H18 : dynamic_property((- 2147483648), 2147483647, to_rep(z__first),
+  to_rep(z__last))
+
+axiom H19 : (to_rep(z__first) = (- 2147483648))
+
+axiom H20 : (to_rep((z1[to_rep(z__first)])) = x)
+
  (* File "concat_left.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int.
-  forall o7:(int,integer) farray.
-  forall concat_left__one__z__assume:(int,integer) farray.
-  forall concat_left__one__z__assume1:t. forall result:(int,integer) farray.
-  forall z1:(int,integer) farray. (in_range(x) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(y1)),
-  to_rep(last(y1))) -> (((to_rep(last(y1)) <  2147483647) or
-  ((-2147483648) <  to_rep(first(y1)))) ->
-  ((((((((((to_rep(first(y1)) <= to_rep(last(y1))) and
-  (o2 = ((to_rep(last(y1)) - to_rep(first(y1))) + 1))) or
-  ((not (to_rep(first(y1)) <= to_rep(last(y1)))) and (o2 = 0))) and
-  (o3 = (1 + o2))) and (o4 = ((-2147483648) + o3))) and (o5 = (o4 - 1))) and
-  ((o6 = o5) and in_range(o5))) and ((((to_rep(o) = x) and (o1 = singleton(o,
-  (-2147483648)))) and (o7 = concat(o1, (-2147483648), (-2147483648), y,
-  to_rep(first(y1)), to_rep(last(y1))))) and
-  ((o7 = concat_left__one__z__assume) and (mk((-2147483648),
-  o6) = concat_left__one__z__assume1)))) and (((result = z) and
-  (z1 = concat_left__one__z__assume)) and
-  ((to_rep(z__first) = to_rep(first(concat_left__one__z__assume1))) and
-  (to_rep(z__last) = to_rep(last(concat_left__one__z__assume1)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(z__first),
-  to_rep(z__last)) -> ((to_rep(z__first) = (-2147483648)) ->
-  ((to_rep((z1[to_rep(z__first)])) = x) ->
-  (((to_rep(z__first) <= to_rep(z__last)) ->
+goal WP_parameter_def : (((to_rep(z__first) <= to_rep(z__last)) ->
   (((to_rep(z__last) - to_rep(z__first)) + 1) = (length({ elts = y; rt = y1
   }) + 1))) and ((not (to_rep(z__first) <= to_rep(z__last))) ->
-  (0 = (length({ elts = y; rt = y1 }) + 1))))))))))))
+  (0 = (length({ elts = y; rt = y1 }) + 1))))

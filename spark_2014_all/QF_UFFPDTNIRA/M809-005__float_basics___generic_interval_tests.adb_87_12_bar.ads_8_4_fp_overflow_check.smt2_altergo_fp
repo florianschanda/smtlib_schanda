@@ -1117,6 +1117,14 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic result : bool
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1127,7 +1135,8 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
+axiom H2 : ((le(neg(fliteral1), x) and le(x, fliteral2)) and
+  (le(neg(fliteral), y) and le(y, fliteral2)))
+
  (* File "generic_interval_tests.adb", line 72, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (((le(neg(fliteral1), x) and le(x, fliteral2)) and (le(neg(fliteral),
-  y) and le(y, fliteral2))) -> tqtisFinite(mul(NearestTiesToEven, x, y)))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, y))

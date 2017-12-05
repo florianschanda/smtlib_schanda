@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type time_type
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -952,19 +952,47 @@ buffer_index_type
 function buffer_index_type__ref___projection(a: buffer_index_type__ref) : buffer_index_type =
   (a).buffer_index_type__content
 
- (* File "temperature_buffer14.adb", line 39, characters 0-0 *)
-goal WP_parameter_def :
-  (forall item__split_fields:time_type.
-  forall item__split_fields1:temperature_type.
-  forall buffer:(t,us_rep) farray. forall count:int. forall next_out:t.
-  forall result:time_type. forall result1:temperature_type.
-  forall item__split_fields2:time_type.
-  forall item__split_fields3:temperature_type. forall result2:t.
-  forall next_out1:t. (in_range2(count) -> (in_range3(next_out) ->
-  ((has_more(count) = true) -> ((((result = item__split_fields) and
-  (result1 = item__split_fields1)) and ({
-  rec__temperature_buffer14__temperature_record__time_stamp =
+logic item__split_fields : time_type
+
+logic item__split_fields1 : temperature_type
+
+logic buffer : (t,us_rep) farray
+
+logic count : int
+
+logic next_out : t
+
+logic o : int
+
+logic result : time_type
+
+logic result1 : temperature_type
+
+logic item__split_fields2 : time_type
+
+logic item__split_fields3 : temperature_type
+
+logic result2 : t
+
+logic next_out1 : t
+
+axiom H : in_range2(count)
+
+axiom H1 : in_range3(next_out)
+
+axiom H2 : (has_more(count) = true)
+
+axiom H3 : (result = item__split_fields)
+
+axiom H4 : (result1 = item__split_fields1)
+
+axiom H5 : ({ rec__temperature_buffer14__temperature_record__time_stamp =
   item__split_fields2; rec__temperature_buffer14__temperature_record__value =
-  item__split_fields3 } = ((buffer[next_out])).us_split_fields1)) ->
-  (((result2 = next_out) and (next_out1 = urem(add(next_out, of_int(1)),
-  of_int(8)))) -> in_range2((count - 1))))))))
+  item__split_fields3 } = ((buffer[next_out])).us_split_fields1)
+
+axiom H6 : (result2 = next_out)
+
+axiom H7 : (next_out1 = urem(add(next_out, of_int(1)), of_int(8)))
+
+ (* File "temperature_buffer14.adb", line 39, characters 0-0 *)
+goal WP_parameter_def : in_range2((count - 1))

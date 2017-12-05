@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -430,15 +430,85 @@ axiom def_axiom1 :
   temp___1941 }, temp___195, temp___196, temp___197,
   temp___198)).elts[temp___199]) = (temp___194[temp___199]))))))))))
 
- (* File "sorters.adb", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,integer) farray. forall us:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:int. (dynamic_property(1,
-  2147483647, to_rep(values__first), to_rep(values__last)) ->
-  (in_range2(x) -> (in_range2(y) -> ((((to_rep(values__first) <= x) and
+logic values : (int,integer) farray
+
+logic us : int
+
+logic o : int
+
+logic o1 : integer
+
+logic us1 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___200 : (int,integer) farray
+
+logic temp___2001 : t
+
+logic temp___201 : (int,integer) farray
+
+logic temp___2011 : t
+
+logic o8 : (int,integer) farray
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic result : (int,integer) farray
+
+logic values1 : (int,integer) farray
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : in_range2(x)
+
+axiom H2 : in_range2(y)
+
+axiom H3 : (((to_rep(values__first) <= x) and
   (x <= to_rep(values__last))) and (((to_rep(values__first) <= y) and
-  (y <= to_rep(values__last))) and (not (x = y)))) ->
-  ((((((to_rep(values__first) <= x) and (x <= to_rep(values__last))) and
-  (o = x)) and (o1 = (values[o]))) and (o2 = to_rep(o1))) -> ((((us = y) and
-  dynamic_property1(to_rep(values__first), to_rep(values__last), y)) and
-  (o3 = y)) -> (to_rep(values__first) <= y))))))))
+  (y <= to_rep(values__last))) and (not (x = y))))
+
+axiom H4 : ((to_rep(values__first) <= x) and (x <= to_rep(values__last)))
+
+axiom H5 : (o2 = x)
+
+axiom H6 : (o3 = (values[o2]))
+
+axiom H7 : (o4 = to_rep(o3))
+
+axiom H8 : ((us1 = y) and dynamic_property1(to_rep(values__first),
+  to_rep(values__last), y))
+
+axiom H9 : (o5 = y)
+
+ (* File "sorters.adb", line 51, characters 0-0 *)
+goal WP_parameter_def : (to_rep(values__first) <= y)

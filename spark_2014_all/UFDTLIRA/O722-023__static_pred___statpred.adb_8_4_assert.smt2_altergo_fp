@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -138,7 +138,7 @@ logic id__function_guard : int, int -> prop
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -167,7 +167,8 @@ axiom id__post_axiom :
 
 axiom id__def_axiom : (forall x:int [id(x)]. (in_range2(x) -> (id(x) = x)))
 
+axiom H : (in_range1(id(2)) and ((((- 2147483648) <= id(2)) and
+  (id(2) <= (- 2))) or ((2 <= id(2)) and (id(2) <= 2147483647))))
+
  (* File "statpred.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : ((in_range1(id(2)) and ((((-2147483648) <= id(2)) and
-  (id(2) <= (-2))) or ((2 <= id(2)) and (id(2) <= 2147483647)))) ->
-  in_range1(id((-2))))
+goal WP_parameter_def : in_range1(id((- 2)))

@@ -269,7 +269,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -404,21 +404,62 @@ logic r1 : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic j : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1)))
+
+axiom H4 : ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1))))
+
+axiom H5 : ((to_rep1(first(r1)) = to_rep1(first(a1))) ->
+  (((to_rep1(last(r1)) = to_rep1(last(a1))) -> (result1 = true)) and
+  ((not (to_rep1(last(r1)) = to_rep1(last(a1)))) -> (result1 = false))))
+
+axiom H6 : ((not (to_rep1(first(r1)) = to_rep1(first(a1)))) ->
+  (result1 = false))
+
+axiom H7 : ((result1 = true) -> ((to_rep1(first(r1)) <= i) and
+  (i <= to_rep1(last(r1)))))
+
+axiom H8 : ((result1 = true) -> (o3 = i))
+
+axiom H9 : ((result1 = true) -> (o4 = (r[o3])))
+
+axiom H10 : ((result1 = true) -> (o5 = to_rep(o4)))
+
+axiom H11 : ((result1 = true) -> (((o5 = v) -> (result = true)) and
+  ((not (o5 = v)) -> (result = false))))
+
+axiom H12 : ((not (result1 = true)) -> (result = false))
+
+axiom H13 : (result = true)
+
+axiom H14 : (to_rep1(first(a1)) <= j)
+
+axiom H15 : (j <= to_rep1(last(a1)))
+
+axiom H16 : (not (i = j))
+
  (* File "perm.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall o:int. forall o1:natural. forall o2:int.
-  forall result:bool. forall result1:bool. (dynamic_property(1, 100,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(i) -> (in_range1(v) ->
-  (dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1))) ->
-  (((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))) ->
-  (((((to_rep1(first(r1)) = to_rep1(first(a1))) and
-  (((to_rep1(last(r1)) = to_rep1(last(a1))) and (result1 = true)) or
-  ((not (to_rep1(last(r1)) = to_rep1(last(a1)))) and (result1 = false)))) or
-  ((not (to_rep1(first(r1)) = to_rep1(first(a1)))) and
-  (result1 = false))) and (((result1 = true) and
-  ((((((to_rep1(first(r1)) <= i) and (i <= to_rep1(last(r1)))) and
-  (o = i)) and (o1 = (r[o]))) and (o2 = to_rep(o1))) and (((o2 = v) and
-  (result = true)) or ((not (o2 = v)) and (result = false))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (((to_rep1(first(a1)) <= j) and (j <= to_rep1(last(a1)))) ->
-  ((not (i = j)) -> (to_rep1(first(a1)) <= j)))))))))))
+goal WP_parameter_def : (to_rep1(first(a1)) <= j)

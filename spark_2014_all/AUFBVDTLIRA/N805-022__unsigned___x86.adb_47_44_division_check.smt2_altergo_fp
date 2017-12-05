@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1168,21 +1168,71 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic xsi : (int,unsigned_8) farray
+
+logic o : unsigned_8
+
+logic o1 : (int,unsigned_8) farray
+
+logic o2 : unsigned_8
+
+logic o3 : (int,unsigned_8) farray
+
+logic o4 : unsigned_8
+
+logic o5 : (int,unsigned_8) farray
+
+logic o6 : unsigned_8
+
+logic o7 : (int,unsigned_8) farray
+
+logic result : (int,unsigned_8) farray
+
+logic xsi1 : (int,unsigned_8) farray
+
+logic result1 : (int,unsigned_8) farray
+
+logic xsi2 : (int,unsigned_8) farray
+
+logic result2 : (int,unsigned_8) farray
+
+logic xsi3 : (int,unsigned_8) farray
+
+logic result3 : (int,unsigned_8) farray
+
+logic xsi4 : (int,unsigned_8) farray
+
+logic xsi5 : (int,unsigned_8) farray
+
+logic xsi6 : (int,unsigned_8) farray
+
+axiom H : true
+
+axiom H1 : (to_rep(o) = toSmall(urem1(val__, of_int1(256))))
+
+axiom H2 : (o1 = (xsi[0 <- o]))
+
+axiom H3 : (result = xsi)
+
+axiom H4 : (xsi1 = o1)
+
+axiom H5 : (to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
+  of_int1(256))))
+
+axiom H6 : (o3 = (xsi1[1 <- o2]))
+
+axiom H7 : (xsi1 = result1)
+
+axiom H8 : (xsi2 = o3)
+
+axiom H9 : (to_rep(o4) = toSmall(urem1(udiv1(val__, of_int1(65536)),
+  of_int1(256))))
+
+axiom H10 : (o5 = (xsi2[2 <- o4]))
+
+axiom H11 : (xsi2 = result2)
+
+axiom H12 : (xsi3 = o5)
+
  (* File "x86.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall xsi:(int,unsigned_8) farray. forall o:unsigned_8.
-  forall o1:(int,unsigned_8) farray. forall o2:unsigned_8.
-  forall o3:(int,unsigned_8) farray. forall o4:unsigned_8.
-  forall o5:(int,unsigned_8) farray. forall result:(int,unsigned_8) farray.
-  forall xsi1:(int,unsigned_8) farray.
-  forall result1:(int,unsigned_8) farray.
-  forall xsi2:(int,unsigned_8) farray.
-  forall result2:(int,unsigned_8) farray.
-  forall xsi3:(int,unsigned_8) farray. ((((to_rep(o) = toSmall(urem1(val__,
-  of_int1(256)))) and (o1 = (xsi[0 <- o]))) and (({ map__content = result
-  } = { map__content = xsi }) and (xsi1 = o1))) ->
-  ((((to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
-  of_int1(256)))) and (o3 = (xsi1[1 <- o2]))) and ((xsi1 = result1) and
-  (xsi2 = o3))) -> ((((to_rep(o4) = toSmall(urem1(udiv1(val__,
-  of_int1(65536)), of_int1(256)))) and (o5 = (xsi2[2 <- o4]))) and
-  ((xsi2 = result2) and (xsi3 = o5))) -> (not (of_int1(256) = zeros1))))))
+goal WP_parameter_def : (not (of_int1(256) = zeros1))

@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1762,12 +1762,35 @@ axiom shift_right__def_axiom :
   ((not ((17 <= 16) and (16 <= 32))) -> (shift_right(v,
   amount) = toSmall(lsr_bv3(toBig(v), of_int4(amount)))))))))))))
 
- (* File "bits_manipulation-functions.ads", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall val__:t. forall n:int. forall j:int. forall result:bool.
-  ((ule(of_int(0), val__) and ule(val__, of_int(65535))) ->
-  ((not (val__ = of_int(0))) -> (((0 <= n) and (n <= 15)) ->
-  (((result = true) <->
+logic val__ : t
+
+logic n : int
+
+logic j : int
+
+logic o : int
+
+logic result : bool
+
+axiom H : ule(of_int(0), val__)
+
+axiom H1 : ule(val__, of_int(65535))
+
+axiom H2 : (not (val__ = of_int(0)))
+
+axiom H3 : (0 <= n)
+
+axiom H4 : (n <= 15)
+
+axiom H5 : ((result = true) <->
   (forall j1:int. (((0 <= j1) and (j1 <= n)) -> uge(shift_right(val__, j1),
-  of_int(1))))) -> ((result = true) -> (((n <= j) and (j <= 15)) ->
-  in_range1(j))))))))
+  of_int(1)))))
+
+axiom H6 : (result = true)
+
+axiom H7 : (n <= j)
+
+axiom H8 : (j <= 15)
+
+ (* File "bits_manipulation-functions.ads", line 51, characters 0-0 *)
+goal WP_parameter_def : in_range1(j)

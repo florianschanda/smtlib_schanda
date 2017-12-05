@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -699,21 +699,133 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "inrange1.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall matched:bool. forall i:t. forall result:bool. forall matched1:bool.
-  forall result1:t. forall i1:t. forall matched2:bool. forall i2:t.
-  forall temp___206:t. forall result2:t. forall temp___2061:t.
-  forall matched3:bool. forall result3:t. forall i3:t. ((uge(range_size,
-  of_int(2)) and ule(range_size, of_int(65535))) -> ((({ bool__content =
-  result } = { bool__content = matched }) and (matched1 = of_int1(0))) ->
-  ((({ t__content = result1 } = { t__content = i }) and (i1 = of_int(0))) ->
-  ((ult(i1, range_size) and (not (matched1 = true))) ->
-  ((((matched2 = true) <-> (ugt(i2, of_int(0)) and
+logic matched : bool
+
+logic i : t
+
+logic inrange1__inrange64__result : bool
+
+logic temp___205 : t
+
+logic temp___204 : bool
+
+logic temp___206 : t
+
+logic result : bool
+
+logic matched1 : bool
+
+logic result1 : t
+
+logic i1 : t
+
+logic matched2 : bool
+
+logic i2 : t
+
+logic temp___2061 : t
+
+logic result2 : t
+
+logic temp___2062 : t
+
+logic result3 : bool
+
+logic matched3 : bool
+
+logic result4 : t
+
+logic i3 : t
+
+logic matched4 : bool
+
+logic i4 : t
+
+logic matched5 : bool
+
+logic i5 : t
+
+logic matched6 : bool
+
+logic i6 : t
+
+logic matched7 : bool
+
+logic i7 : t
+
+logic matched8 : bool
+
+logic i8 : t
+
+logic matched9 : bool
+
+logic i9 : t
+
+logic result5 : bool
+
+logic inrange1__inrange64__result1 : bool
+
+logic inrange1__inrange64__result2 : bool
+
+logic inrange1__inrange64__result3 : bool
+
+logic matched10 : bool
+
+logic i10 : t
+
+logic inrange1__inrange64__result4 : bool
+
+logic matched11 : bool
+
+logic i11 : t
+
+logic inrange1__inrange64__result5 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
+
+axiom H4 : (result = matched)
+
+axiom H5 : (matched1 = of_int1(0))
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = of_int(0))
+
+axiom H8 : true
+
+axiom H9 : ult(i1, range_size)
+
+axiom H10 : (not (matched1 = true))
+
+axiom H11 : ((matched2 = true) <-> (ugt(i2, of_int(0)) and
   (exists n:t. ((ule(of_int(0), n) and ule(n, sub(i2, of_int(1)))) and
-  (var = add(bottom, n)))))) and (not (matched2 = true))) -> (((ult(i2,
-  range_size) and (not (matched2 = true))) and (((temp___206 = result2) and
-  (temp___2061 = i2)) and (((not (var = add(bottom, i2))) and
-  (matched3 = matched2)) and (((i2 = result3) and (i3 = add(i2,
-  of_int(1)))) and (ult(i3, range_size) and (not (matched3 = true))))))) ->
-  (not (matched3 = true)))))))))
+  (var = add(bottom, n))))))
+
+axiom H12 : (not (matched2 = true))
+
+axiom H13 : (ult(i2, range_size) and (not (matched2 = true)))
+
+axiom H14 : (temp___2061 = result2)
+
+axiom H15 : (temp___2062 = i2)
+
+axiom H16 : (not (var = add(bottom, i2)))
+
+axiom H17 : (matched3 = matched2)
+
+axiom H18 : (i2 = result4)
+
+axiom H19 : (i3 = add(i2, of_int(1)))
+
+axiom H20 : ult(i3, range_size)
+
+axiom H21 : (not (matched3 = true))
+
+ (* File "inrange1.ads", line 15, characters 0-0 *)
+goal WP_parameter_def : (not (matched3 = true))

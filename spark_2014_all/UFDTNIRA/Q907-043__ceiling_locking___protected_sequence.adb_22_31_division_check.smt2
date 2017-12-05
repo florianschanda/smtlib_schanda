@@ -97,6 +97,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_159 Int) (temp___is_init_156 Bool) (temp___skip_constant_157 Bool) (temp___do_toplevel_158 Bool)) Bool (=> (or (= temp___is_init_156 true) (<= 0 97)) (in_range1 temp___expr_159)))
 (declare-const local Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const local1 Int)
 (declare-const local2 Int)

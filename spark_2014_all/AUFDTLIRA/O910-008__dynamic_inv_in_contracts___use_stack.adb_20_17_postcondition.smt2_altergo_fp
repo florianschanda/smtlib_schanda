@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -492,46 +492,164 @@ function t18b__ref___projection(a: t18b__ref) : integer = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "use_stack.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall content:(int,positive) farray. forall i:int.
-  forall us:int. forall o:int. forall temp___224:int.
-  forall temp___222:(int,positive) farray. forall o1:positive.
-  forall o2:(int,positive) farray. forall content1:(int,positive) farray.
-  forall result:int. forall top1:int. forall result1:int. forall i1:int.
-  forall result2:(int,positive) farray.
-  forall content2:(int,positive) farray.
-  forall content3:(int,positive) farray. forall i2:int.
-  forall content4:(int,positive) farray. forall i3:int.
-  forall content5:(int,positive) farray. forall i4:int.
-  forall content6:(int,positive) farray. forall i5:int.
-  forall content7:(int,positive) farray. forall i6:int. forall top2:int.
-  forall content8:(int,positive) farray. forall i7:int. forall top3:int.
-  forall content9:(int,positive) farray. forall i8:int. ((in_range1(max) and
-  (in_range1(e) and (dynamic_property(0, last, top) and
-  ((dynamic_property2(1, max, to_rep1(content__first),
+logic top : int
+
+logic content : (int,positive) farray
+
+logic i : int
+
+logic us : int
+
+logic o : int
+
+logic temp___224 : int
+
+logic temp___222 : (int,positive) farray
+
+logic o1 : positive
+
+logic o2 : (int,positive) farray
+
+logic j : int
+
+logic o3 : positive
+
+logic o4 : (int,positive) farray
+
+logic content1 : (int,positive) farray
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,positive) farray
+
+logic content2 : (int,positive) farray
+
+logic content3 : (int,positive) farray
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : (int,positive) farray
+
+logic content4 : (int,positive) farray
+
+logic content5 : (int,positive) farray
+
+logic i4 : int
+
+logic content6 : (int,positive) farray
+
+logic i5 : int
+
+logic content7 : (int,positive) farray
+
+logic i6 : int
+
+logic content8 : (int,positive) farray
+
+logic i7 : int
+
+logic content9 : (int,positive) farray
+
+logic i8 : int
+
+logic content10 : (int,positive) farray
+
+logic i9 : int
+
+logic top2 : int
+
+logic content11 : (int,positive) farray
+
+logic i10 : int
+
+logic top3 : int
+
+logic content12 : (int,positive) farray
+
+logic i11 : int
+
+axiom H : in_range1(max)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
   to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
-  (to_rep1(content__last) = max))) and ((is_empty(top) = true) and
-  ((((((us = max) and dynamic_property(0, last, max)) and (o = max)) and (({
-  int__content = result } = { int__content = top }) and (top1 = o))) and ((({
-  int__content = result1 } = { int__content = i }) and (i1 = 1)) and
-  ((((1 <= i1) and (i1 <= to_rep1(content__last))) and
-  ((((temp___224 = i1) and ((temp___222 = content) and
-  ((((to_rep(o1) = e) and (o2 = (content[i1 <- o1]))) and (({ map__content =
-  result2 } = { map__content = content }) and (content2 = o2))) and
-  ((forall j:int. (((1 <= j) and (j <= i2)) -> (to_rep((content3[j])) = e))) and
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (is_empty(top) = true)
+
+axiom H5 : ((us = max) and dynamic_property(0, last, max))
+
+axiom H6 : (o = max)
+
+axiom H7 : (result = top)
+
+axiom H8 : (top1 = o)
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = 1)
+
+axiom H11 : (((1 <= i1) and (i1 <= to_rep1(content__last))) ->
+  (((temp___224 = i1) and ((temp___222 = content) and ((((to_rep(o1) = e) and
+  (o2 = (content[i1 <- o1]))) and ((result2 = content) and
+  (content2 = o2))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+   (to_rep((content3[j1])) = e))) and
   ((((forall temp___223:int. (((to_rep1(content__first) <= temp___223) and
      (temp___223 <= to_rep1(content__last))) -> ((i2 <  temp___223) ->
      ((content3[temp___223]) = (temp___222[temp___223]))))) and
   ((1 <= to_rep1(content__last)) -> dynamic_property3(1,
   to_rep1(content__last), i2))) and ((1 <= i2) and
   (i2 <= to_rep1(content__last)))) and (i2 = to_rep1(content__last))))))) and
-  (((i2 = i3) and (content3 = content4)) and ((i4 = i2) and
-  (content5 = content3)))) and (((i5 = i3) and ({ map__content = content6
-  } = { map__content = content4 })) and ((i6 = i4) and
-  (content7 = content5))))) or ((not ((1 <= i1) and
-  (i1 <= to_rep1(content__last)))) and (((i1 = i5) and ({ map__content =
-  content6 } = { map__content = content })) and ((i6 = i1) and
-  (content7 = content1))))))) and (((i7 = i5) and ((content8 = content6) and
-  (top1 = top2))) and ((i8 = i6) and ((content9 = content7) and
-  (top3 = top1)))))))))) -> (is_full(top2) = true)))
+  (((i2 = i6) and (content3 = content7)) and ((i7 = i2) and
+  (content8 = content3)))))
+
+axiom H12 : (((1 <= i1) and (i1 <= to_rep1(content__last))) -> (i8 = i6))
+
+axiom H13 : (((1 <= i1) and (i1 <= to_rep1(content__last))) ->
+  (content9 = content7))
+
+axiom H14 : (((1 <= i1) and (i1 <= to_rep1(content__last))) -> (i9 = i7))
+
+axiom H15 : (((1 <= i1) and (i1 <= to_rep1(content__last))) ->
+  (content10 = content8))
+
+axiom H16 : ((not ((1 <= i1) and (i1 <= to_rep1(content__last)))) ->
+  (i1 = i8))
+
+axiom H17 : ((not ((1 <= i1) and (i1 <= to_rep1(content__last)))) ->
+  (content9 = content))
+
+axiom H18 : ((not ((1 <= i1) and (i1 <= to_rep1(content__last)))) ->
+  (i9 = i1))
+
+axiom H19 : ((not ((1 <= i1) and (i1 <= to_rep1(content__last)))) ->
+  (content10 = content1))
+
+axiom H20 : (i10 = i8)
+
+axiom H21 : (content11 = content9)
+
+axiom H22 : (top1 = top2)
+
+axiom H23 : (i11 = i9)
+
+axiom H24 : (content12 = content10)
+
+axiom H25 : (top3 = top1)
+
+ (* File "use_stack.adb", line 15, characters 0-0 *)
+goal WP_parameter_def : (is_full(top2) = true)

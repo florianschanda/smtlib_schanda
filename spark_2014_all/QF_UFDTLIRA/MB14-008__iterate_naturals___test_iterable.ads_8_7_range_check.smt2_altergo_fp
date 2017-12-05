@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -131,7 +131,11 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
+logic temp___c_168 : int
+
+axiom H : in_range1(temp___c_168)
+
+axiom H1 : (1 <= temp___c_168)
+
  (* File "test_iterable.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___c_168:int. (in_range1(temp___c_168) ->
-  ((1 <= temp___c_168) -> ((-2147483648) <= 1))))
+goal WP_parameter_def : ((- 2147483648) <= 1)

@@ -38,6 +38,7 @@
 (declare-const body_var Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range visible_var))
 (assert (in_range private_var))
 (assert (in_range body_var))

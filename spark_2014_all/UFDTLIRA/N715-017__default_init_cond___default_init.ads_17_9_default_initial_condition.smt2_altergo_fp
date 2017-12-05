@@ -273,11 +273,19 @@ axiom discr_ok__def_axiom :
   rec__default_init__discr__f = x1 } }) = true) <-> ((x = true) ->
   (to_rep(x1) = 0))))
 
+logic temp___291 : bool
+
+logic temp___290 : bool
+
+logic temp___292 : bool
+
+logic temp___2921 : natural
+
+axiom H : (temp___291 = temp___290)
+
+axiom H1 : ((to_int(temp___292) = 1) -> (to_rep(temp___2921) = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___291:bool. forall temp___290:bool. forall temp___292:bool.
-  forall temp___2921:natural. ((temp___291 = temp___290) ->
-  (((to_int(temp___292) = 1) -> (to_rep(temp___2921) = 0)) -> (discr_ok({
-  us_split_discrs1 = { rec__default_init__discr__b = temp___292 };
-  us_split_fields1 = { rec__default_init__discr__f = temp___2921 }
-  }) = true))))
+goal WP_parameter_def : (discr_ok({ us_split_discrs1 = {
+  rec__default_init__discr__b = temp___292 }; us_split_fields1 = {
+  rec__default_init__discr__f = temp___2921 } }) = true)

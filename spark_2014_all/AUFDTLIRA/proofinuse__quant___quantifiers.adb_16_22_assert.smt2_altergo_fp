@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer_32
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -290,11 +290,22 @@ axiom all_zero__post_axiom :
   (forall j:int. (((1 <= j) and (j <= 10)) ->
   (to_rep((all_zero(void)[j])) = 0)))
 
- (* File "quantifiers.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range2(y) ->
-  ((forall j:int. (((1 <= j) and (j <= 10)) -> ((to_rep((x[j])) = 0) ->
-   (exists k:int. (((1 <= k) and (k <= 10)) and (property(to_rep((x[k])),
-   j) = true)))))) -> ((bool_eq4(x, 1, 10, all_zero(void), 1, 10) = true) ->
-  (forall j:int. (((1 <= j) and (j <= 10)) ->
+axiom H : in_range2(y)
+
+axiom H1 :
+  (forall j:int. (((1 <= j) and (j <= 10)) -> ((to_rep((x[j])) = 0) ->
   (exists k:int. (((1 <= k) and (k <= 10)) and (property(to_rep((x[k])),
-  j) = true))))))))
+  j) = true))))))
+
+axiom H2 : (bool_eq4(x, 1, 10, all_zero(void), 1, 10) = true)
+
+logic j : int
+
+axiom H3 : (1 <= j)
+
+axiom H4 : (j <= 10)
+
+ (* File "quantifiers.adb", line 8, characters 0-0 *)
+goal WP_parameter_def :
+  (exists k:int. (((1 <= k) and (k <= 10)) and (property(to_rep((x[k])),
+  j) = true)))

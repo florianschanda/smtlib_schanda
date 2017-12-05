@@ -155,9 +155,17 @@ logic y__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : us_private
+
+logic result : us_private
+
+logic x__split_fields1 : us_private
+
+axiom H : (result = x__split_fields)
+
+axiom H1 : (us_null_ext__ = x__split_fields1)
+
+axiom H2 : (x__attr__tag = us_tag)
+
  (* File "tests.adb", line 451, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:us_private. forall result:us_private.
-  forall x__split_fields1:us_private. ((((result = x__split_fields) and
-  (us_null_ext__ = x__split_fields1)) and (x__attr__tag = us_tag)) ->
-  us_compatible_tags(x__attr__tag, us_tag1)))
+goal WP_parameter_def : us_compatible_tags(x__attr__tag, us_tag1)

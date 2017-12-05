@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -386,9 +386,14 @@ axiom empty_stack_str__def_axiom :
   ((empty_stack_str = temp___String_Literal_132(void)) and
   (empty_stack_str1 = mk(1, 11)))
 
+logic temp___max_192 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(empty_stack_str1)),
+  to_rep1(last(empty_stack_str1)))
+
+axiom H1 : in_range1(temp___max_192)
+
+axiom H2 : (1 <= temp___max_192)
+
  (* File "stacks.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___max_192:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(empty_stack_str1)), to_rep1(last(empty_stack_str1))) ->
-  (in_range1(temp___max_192) -> ((1 <= temp___max_192) ->
-  ((-2147483648) <= 1)))))
+goal WP_parameter_def : ((- 2147483648) <= 1)

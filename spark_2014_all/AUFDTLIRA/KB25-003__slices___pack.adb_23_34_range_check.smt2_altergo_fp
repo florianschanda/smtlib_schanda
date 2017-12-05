@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -688,7 +688,32 @@ axiom my_a__def_axiom : (my_a = pack__a2__my_a__aggregate_def(42))
 
 axiom my_b__def_axiom : (my_b = my_a)
 
+logic glob : (int,character) farray
+
+logic my_s2 : (int,character) farray
+
+logic temp___383 : (int,character) farray
+
+logic o : (int,character) farray
+
+logic pack__a2__my_b__assume : (int,integer) farray
+
+logic temp___390 : (int,character) farray
+
+logic temp___392 : (int,character) farray
+
+logic temp___409 : (int,character) farray
+
+logic temp___411 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic my_s21 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(glob__first),
+  to_rep1(glob__last))
+
+axiom H1 : (1 <= 4)
+
  (* File "pack.adb", line 11, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(glob__first), to_rep1(glob__last)) -> ((1 <= 4) ->
-  (to_rep1(glob__first) <= 1)))
+goal WP_parameter_def : (to_rep1(glob__first) <= 1)

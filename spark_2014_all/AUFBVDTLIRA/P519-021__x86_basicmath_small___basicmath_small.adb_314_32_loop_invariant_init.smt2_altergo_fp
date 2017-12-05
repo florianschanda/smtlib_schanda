@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1236,6 +1236,462 @@ axiom readmem64__post_axiom :
   x86__memory),
   of_int1(18374686479671623680)) = mul1(toBig(to_rep((x86__memory[add1(addr,
   of_int1(7))]))), of_int1(72057594037927936))))))
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic xmm0 : t1
+
+logic xmm1 : t1
+
+logic xmm2 : t1
+
+logic xmm3 : t1
+
+logic xmm4 : t1
+
+logic xmm5 : t1
+
+logic xmm7 : t1
+
+logic rax : t1
+
+logic rbx : t1
+
+logic rsp : t1
+
+logic rbp : t1
+
+logic rsi : t1
+
+logic rdi : t1
+
+logic r12 : t1
+
+logic r13 : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic temp___456 : t1
+
+logic temp___457 : t1
+
+logic temp___455 : t1
+
+logic temp___454 : t1
+
+logic temp___458 : (t1,unsigned8) farray
+
+logic temp___452 : t1
+
+logic temp___453 : (t1,unsigned8) farray
+
+logic temp___450 : t1
+
+logic temp___451 : bool
+
+logic temp___448 : t1
+
+logic temp___449 : t1
+
+logic temp___446 : t1
+
+logic temp___447 : bool
+
+logic temp___445 : t1
+
+logic temp___443 : t1
+
+logic temp___444 : bool
+
+logic temp___442 : t1
+
+logic temp___439 : t1
+
+logic temp___440 : t1
+
+logic temp___441 : t1
+
+logic temp___438 : bool
+
+logic temp___437 : t1
+
+logic o : t1
+
+logic o1 : t1
+
+logic o2 : t1
+
+logic o3 : t1
+
+logic xmm01 : t1
+
+logic xmm11 : t1
+
+logic xmm21 : t1
+
+logic xmm31 : t1
+
+logic xmm41 : t1
+
+logic xmm51 : t1
+
+logic xmm71 : t1
+
+logic rax1 : t1
+
+logic rbx1 : t1
+
+logic rsp1 : t1
+
+logic rbp1 : t1
+
+logic rsi1 : t1
+
+logic rdi1 : t1
+
+logic r121 : t1
+
+logic r131 : t1
+
+logic memory1 : (t1,unsigned8) farray
+
+logic result : t1
+
+logic xmm72 : t1
+
+logic result1 : t1
+
+logic r122 : t1
+
+logic memory2 : (t1,unsigned8) farray
+
+logic zeroflag1 : bool
+
+logic carryflag1 : bool
+
+logic signflag1 : bool
+
+logic overflowflag1 : bool
+
+logic xmm02 : t1
+
+logic xmm12 : t1
+
+logic xmm22 : t1
+
+logic xmm32 : t1
+
+logic xmm42 : t1
+
+logic rax2 : t1
+
+logic rbx2 : t1
+
+logic rsp2 : t1
+
+logic rbp2 : t1
+
+logic rsi2 : t1
+
+logic rdi2 : t1
+
+logic r123 : t1
+
+logic memory3 : (t1,unsigned8) farray
+
+logic result2 : t1
+
+logic xmm52 : t1
+
+logic result3 : t1
+
+logic r132 : t1
+
+logic result4 : bool
+
+logic zeroflag2 : bool
+
+logic result5 : t1
+
+logic xmm53 : t1
+
+logic memory4 : (t1,unsigned8) farray
+
+logic zeroflag3 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic xmm03 : t1
+
+logic xmm13 : t1
+
+logic xmm23 : t1
+
+logic xmm33 : t1
+
+logic xmm43 : t1
+
+logic xmm54 : t1
+
+logic xmm73 : t1
+
+logic rax3 : t1
+
+logic rbx3 : t1
+
+logic rsp3 : t1
+
+logic rbp3 : t1
+
+logic rsi3 : t1
+
+logic rdi3 : t1
+
+logic r124 : t1
+
+logic r133 : t1
+
+logic memory5 : (t1,unsigned8) farray
+
+logic zeroflag4 : bool
+
+logic carryflag3 : bool
+
+logic signflag3 : bool
+
+logic overflowflag3 : bool
+
+logic xmm04 : t1
+
+logic xmm14 : t1
+
+logic xmm24 : t1
+
+logic xmm34 : t1
+
+logic xmm44 : t1
+
+logic xmm55 : t1
+
+logic xmm74 : t1
+
+logic rax4 : t1
+
+logic rbx4 : t1
+
+logic rsp4 : t1
+
+logic rbp4 : t1
+
+logic rsi4 : t1
+
+logic rdi4 : t1
+
+logic r125 : t1
+
+logic r134 : t1
+
+logic memory6 : (t1,unsigned8) farray
+
+logic zeroflag5 : bool
+
+logic carryflag4 : bool
+
+logic signflag4 : bool
+
+logic overflowflag4 : bool
+
+logic xmm05 : t1
+
+logic xmm15 : t1
+
+logic xmm25 : t1
+
+logic xmm35 : t1
+
+logic xmm45 : t1
+
+logic xmm56 : t1
+
+logic xmm75 : t1
+
+logic rax5 : t1
+
+logic rbx5 : t1
+
+logic rsp5 : t1
+
+logic rbp5 : t1
+
+logic rsi5 : t1
+
+logic rdi5 : t1
+
+logic r126 : t1
+
+logic r135 : t1
+
+logic memory7 : (t1,unsigned8) farray
+
+logic zeroflag6 : bool
+
+logic carryflag5 : bool
+
+logic signflag5 : bool
+
+logic overflowflag5 : bool
+
+logic xmm06 : t1
+
+logic xmm16 : t1
+
+logic xmm26 : t1
+
+logic xmm36 : t1
+
+logic xmm46 : t1
+
+logic xmm57 : t1
+
+logic xmm76 : t1
+
+logic rax6 : t1
+
+logic rbx6 : t1
+
+logic rsp6 : t1
+
+logic rbp6 : t1
+
+logic rsi6 : t1
+
+logic rdi6 : t1
+
+logic r127 : t1
+
+logic r136 : t1
+
+logic memory8 : (t1,unsigned8) farray
+
+logic zeroflag7 : bool
+
+logic carryflag6 : bool
+
+logic signflag6 : bool
+
+logic overflowflag6 : bool
+
+logic xmm07 : t1
+
+logic xmm17 : t1
+
+logic xmm27 : t1
+
+logic xmm37 : t1
+
+logic xmm47 : t1
+
+logic xmm58 : t1
+
+logic xmm77 : t1
+
+logic rax7 : t1
+
+logic rbx7 : t1
+
+logic rsp7 : t1
+
+logic rbp7 : t1
+
+logic rsi7 : t1
+
+logic rdi7 : t1
+
+logic r128 : t1
+
+logic r137 : t1
+
+logic memory9 : (t1,unsigned8) farray
+
+logic zeroflag8 : bool
+
+logic carryflag7 : bool
+
+logic signflag7 : bool
+
+logic overflowflag7 : bool
+
+logic xmm08 : t1
+
+logic xmm18 : t1
+
+logic xmm28 : t1
+
+logic xmm38 : t1
+
+logic xmm48 : t1
+
+logic xmm59 : t1
+
+logic xmm78 : t1
+
+logic rax8 : t1
+
+logic rbx8 : t1
+
+logic rsp8 : t1
+
+logic rbp8 : t1
+
+logic rsi8 : t1
+
+logic rdi8 : t1
+
+logic r129 : t1
+
+logic r138 : t1
+
+logic memory10 : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : true
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

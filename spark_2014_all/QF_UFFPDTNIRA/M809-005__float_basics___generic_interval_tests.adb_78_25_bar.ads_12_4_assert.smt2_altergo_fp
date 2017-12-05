@@ -1120,6 +1120,14 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic result : bool
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1130,10 +1138,21 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
+axiom H2 : ((le(neg(fliteral1), x) and le(x, fliteral2)) and
+  (le(neg(fliteral), y) and le(y, fliteral2)))
+
+axiom H3 : ((o = mul(NearestTiesToEven, x, y)) and
+  tqtisFinite(mul(NearestTiesToEven, x, y)))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 30.0))
+
+axiom H4 : ((le(o, neg(fliteral3)) -> (result = true)) and ((not le(o,
+  neg(fliteral3))) -> (result = false)))
+
+axiom H5 : (result = true)
 
 logic fliteral4 : t
 
@@ -1141,10 +1160,4 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
 
  (* File "generic_interval_tests.adb", line 64, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall result:bool. (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (((le(neg(fliteral1), x) and le(x, fliteral2)) and (le(neg(fliteral),
-  y) and le(y, fliteral2))) -> ((((o = mul(NearestTiesToEven, x, y)) and
-  tqtisFinite(mul(NearestTiesToEven, x, y))) and ((le(o, neg(fliteral3)) and
-  (result = true)) or ((not le(o, neg(fliteral3))) and (result = false)))) ->
-  ((result = true) -> lt(x, fliteral4)))))))
+goal WP_parameter_def : lt(x, fliteral4)

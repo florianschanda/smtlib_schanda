@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -304,16 +304,36 @@ axiom def_axiom1 :
   ((not (temp___560 = temp___558)) -> ((temp___555(temp___557, temp___558,
   temp___559)[temp___560]) = (temp___557[temp___560])))))))
 
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : in_range1(y)
+
+axiom H3 : (bool_eq3(b, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H4 : (bool_eq3(c, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H5 : (bool_eq3(d, (- 2147483648), 2147483647, temp___548(c, i, 42),
+  (- 2147483648), 2147483647) = true)
+
+axiom H6 : (bool_eq3(e, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H7 : (bool_eq3(f, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H8 : (bool_eq3(g, (- 2147483648), 2147483647, temp___555(f, i, 42),
+  (- 2147483648), 2147483647) = true)
+
+axiom H9 : (to_rep((e[i])) = x)
+
+axiom H10 : (to_rep((g[i])) = y)
+
+axiom H11 : (bool_eq3(b, (- 2147483648), 2147483647, d, (- 2147483648),
+  2147483647) = true)
+
  (* File "simple_arrays.adb", line 298, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (in_range1(x) -> (in_range1(y) ->
-  (((((((((bool_eq3(b, (-2147483648), 2147483647, a, (-2147483648),
-  2147483647) = true) and (bool_eq3(c, (-2147483648), 2147483647, a,
-  (-2147483648), 2147483647) = true)) and (bool_eq3(d, (-2147483648),
-  2147483647, temp___548(c, i, 42), (-2147483648), 2147483647) = true)) and
-  (bool_eq3(e, (-2147483648), 2147483647, a, (-2147483648),
-  2147483647) = true)) and (bool_eq3(f, (-2147483648), 2147483647, a,
-  (-2147483648), 2147483647) = true)) and (bool_eq3(g, (-2147483648),
-  2147483647, temp___555(f, i, 42), (-2147483648), 2147483647) = true)) and
-  (to_rep((e[i])) = x)) and (to_rep((g[i])) = y)) -> ((bool_eq3(b,
-  (-2147483648), 2147483647, d, (-2147483648), 2147483647) = true) ->
-  (x = y))))))
+goal WP_parameter_def : (x = y)

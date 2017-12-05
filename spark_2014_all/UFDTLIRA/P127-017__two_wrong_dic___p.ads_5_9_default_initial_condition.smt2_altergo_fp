@@ -88,6 +88,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (really_false(void) = true)
+
  (* File "client.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((really_false(void) = true) ->
-  (really_false(void) = true))
+goal WP_parameter_def : (really_false(void) = true)

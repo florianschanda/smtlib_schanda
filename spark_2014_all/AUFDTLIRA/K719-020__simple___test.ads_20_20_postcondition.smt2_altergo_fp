@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -367,17 +367,37 @@ logic x2 : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic test__f2__result : int
+
+logic result : int
+
+logic test__f2__result1 : int
+
+logic test__f2__result2 : int
+
+logic test__f2__result3 : int
+
+logic test__f2__result4 : int
+
+logic test__f2__result5 : int
+
+logic result1 : int
+
+axiom H : (11 <  to_rep((x2[1])))
+
+axiom H1 : (test__f2__result1 = test__f2__result2)
+
+axiom H2 : (test__f2__result3 = test__f2__result1)
+
+axiom H3 : (result = test__f2__result)
+
+axiom H4 : (test__f2__result1 = to_rep((x2[1])))
+
+axiom H5 : (test__f2__result4 = test__f2__result2)
+
+axiom H6 : (test__f2__result5 = test__f2__result3)
+
+axiom H7 : (result1 = test__f2__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__f2__result:int. forall result:int.
-  forall test__f2__result1:int. forall test__f2__result2:int.
-  forall test__f2__result3:int. forall test__f2__result4:int.
-  forall test__f2__result5:int.
-  (forall result1:int. (((11 <  to_rep((x2[1]))) and
-  (((((test__f2__result1 = test__f2__result2) and
-  (test__f2__result3 = test__f2__result1)) and
-  ((result = test__f2__result) and
-  (test__f2__result1 = to_rep((x2[1]))))) and
-  ((test__f2__result4 = test__f2__result2) and
-  (test__f2__result5 = test__f2__result3))) and
-  (result1 = test__f2__result4))) -> (11 <  test__f2__result4))))
+goal WP_parameter_def : (11 <  test__f2__result4)

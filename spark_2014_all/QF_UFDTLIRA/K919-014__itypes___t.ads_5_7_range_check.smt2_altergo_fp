@@ -104,7 +104,11 @@ type s__ref = { s__content : s
 
 function s__ref___projection(a: s__ref) : s = (a).s__content
 
+logic temp___i_150 : int
+
+axiom H : in_range(temp___i_150)
+
+axiom H1 : (1 <= temp___i_150)
+
  (* File "t.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___i_150:int. (in_range(temp___i_150) ->
-  ((1 <= temp___i_150) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

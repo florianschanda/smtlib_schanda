@@ -46,6 +46,7 @@
 (declare-const advpressed Bool)
 (declare-const advtimer Int)
 (declare-const timenow Int)
+(declare-const o Int)
 (declare-const timenow1 Int)
 (declare-const stillpressed Bool)
 (declare-const result Bool)

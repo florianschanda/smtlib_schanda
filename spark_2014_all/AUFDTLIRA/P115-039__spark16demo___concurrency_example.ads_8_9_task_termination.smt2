@@ -106,6 +106,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 (assert (= all_zeroes (concurrency_example__all_zeroes__aggregate_def 0)))
 (assert (= all_ones (concurrency_example__all_ones__aggregate_def (- 2147483648))))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

@@ -68,6 +68,7 @@
 (assert (= first c))
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_145 Int) (temp___is_init_142 Bool) (temp___skip_constant_143 Bool) (temp___do_toplevel_144 Bool)) Bool (=> (or (= temp___is_init_142 true) (<= 0 2147483647)) (in_range1 temp___expr_145)))
+(declare-const us Int)
 (assert (in_range c))
 (assert (<= c 2147483647))
 (assert (not (<= 0 c)))

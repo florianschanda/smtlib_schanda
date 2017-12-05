@@ -65,6 +65,7 @@
 (declare-const x_i us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 (declare-const x us_rep)
+(declare-const o1 us_rep)
 (declare-const x1 us_rep)
 (declare-const result Bool)
 (declare-const x2 us_rep)

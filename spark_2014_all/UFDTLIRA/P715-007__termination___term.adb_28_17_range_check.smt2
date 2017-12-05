@@ -48,6 +48,7 @@
 (define-fun empty_if_c_is_neg__ref___projection ((a empty_if_c_is_neg__ref)) integer (empty_if_c_is_neg__content a))
 (define-fun dynamic_invariant1 ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 last)) (dynamic_property 0 last temp___expr_135)))
 (assert (= last c))
+(declare-const us Int)
 (assert (in_range c))
 (assert (not (< c 0)))
 (assert (not (dynamic_property 0 last c)))

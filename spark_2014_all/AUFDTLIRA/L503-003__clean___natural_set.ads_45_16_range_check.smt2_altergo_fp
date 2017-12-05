@@ -174,7 +174,7 @@ axiom coerce_axiom :
 
 type element_t
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -467,8 +467,17 @@ logic s1 : (int,element_t) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+logic i1 : int
+
+logic o : bool
+
+axiom H : ((o = true) <->
+  (forall i2:int. ((((to_rep(s) + 1) <= i2) and (i2 <= 10)) ->
+  (to_rep1((s1[i2])) = (- 1)))))
+
+axiom H1 : (1 <= to_rep(s))
+
  (* File "natural_set.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:bool. (((o = true) <->
-  (forall i:int. ((((to_rep(s) + 1) <= i) and (i <= 10)) ->
-  (to_rep1((s1[i])) = (-1))))) -> ((1 <= to_rep(s)) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

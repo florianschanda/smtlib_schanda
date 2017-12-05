@@ -197,7 +197,7 @@ logic get__function_guard : int, us_rep -> prop
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -236,7 +236,11 @@ axiom id__post_axiom :
 
 axiom id__def_axiom : (forall x:int [id(x)]. (in_range1(x) -> (id(x) = x)))
 
+logic temp___150 : natural
+
+logic temp___152 : natural
+
+axiom H : (to_rep(temp___150) = 0)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___150:natural. ((to_rep(temp___150) = 0) ->
-  (0 <  id(to_rep(temp___150)))))
+goal WP_parameter_def : (0 <  id(to_rep(temp___150)))

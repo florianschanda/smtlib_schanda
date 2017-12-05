@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type element
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -255,7 +255,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -480,15 +480,15 @@ logic bool_eq8 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
-  (((((to_rep3(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
-  (bool_eq6(((a).us_split_fields1).rec__integer_stacks__stack__values,
-  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true)) and
-  (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top))) ->
-  (bool_eq8(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
-  (bool_eq6(((a).us_split_fields1).rec__integer_stacks__stack__values,
-  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true)) and
+  ((((to_rep3(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq6(((a).us_split_fields1).rec__integer_stacks__stack__values,
+  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true) and
   (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top)))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs1).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs1).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq6(((a).us_split_fields1).rec__integer_stacks__stack__values,
+  ((b).us_split_fields1).rec__integer_stacks__stack__values) = true) and
+  (to_rep(((a).us_split_fields1).rec__integer_stacks__stack__top) = to_rep(((b).us_split_fields1).rec__integer_stacks__stack__top))))) ->
   (bool_eq8(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -821,15 +821,15 @@ logic bool_eq12 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq12(a, b)].
-  (((((to_rep3(((a).us_split_discrs2).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs2).rec__integer_stacks__stack__capacity)) and
-  (bool_eq11(((a).us_split_fields3).rec__integer_stacks__stack__values1,
-  ((b).us_split_fields3).rec__integer_stacks__stack__values1) = true)) and
-  (to_rep(((a).us_split_fields3).rec__integer_stacks__stack__top1) = to_rep(((b).us_split_fields3).rec__integer_stacks__stack__top1))) ->
-  (bool_eq12(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs2).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs2).rec__integer_stacks__stack__capacity)) and
-  (bool_eq11(((a).us_split_fields3).rec__integer_stacks__stack__values1,
-  ((b).us_split_fields3).rec__integer_stacks__stack__values1) = true)) and
+  ((((to_rep3(((a).us_split_discrs2).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs2).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq11(((a).us_split_fields3).rec__integer_stacks__stack__values1,
+  ((b).us_split_fields3).rec__integer_stacks__stack__values1) = true) and
   (to_rep(((a).us_split_fields3).rec__integer_stacks__stack__top1) = to_rep(((b).us_split_fields3).rec__integer_stacks__stack__top1)))) ->
+  (bool_eq12(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs2).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs2).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq11(((a).us_split_fields3).rec__integer_stacks__stack__values1,
+  ((b).us_split_fields3).rec__integer_stacks__stack__values1) = true) and
+  (to_rep(((a).us_split_fields3).rec__integer_stacks__stack__top1) = to_rep(((b).us_split_fields3).rec__integer_stacks__stack__top1))))) ->
   (bool_eq12(a, b) = false))))
 
 logic us_tag1 : int
@@ -1095,15 +1095,15 @@ logic bool_eq15 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def11 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq15(a, b)].
-  (((((to_rep3(((a).us_split_discrs3).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs3).rec__integer_stacks__stack__capacity)) and
-  (bool_eq14(((a).us_split_fields5).rec__integer_stacks__stack__values2,
-  ((b).us_split_fields5).rec__integer_stacks__stack__values2) = true)) and
-  (to_rep(((a).us_split_fields5).rec__integer_stacks__stack__top2) = to_rep(((b).us_split_fields5).rec__integer_stacks__stack__top2))) ->
-  (bool_eq15(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs3).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs3).rec__integer_stacks__stack__capacity)) and
-  (bool_eq14(((a).us_split_fields5).rec__integer_stacks__stack__values2,
-  ((b).us_split_fields5).rec__integer_stacks__stack__values2) = true)) and
+  ((((to_rep3(((a).us_split_discrs3).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs3).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq14(((a).us_split_fields5).rec__integer_stacks__stack__values2,
+  ((b).us_split_fields5).rec__integer_stacks__stack__values2) = true) and
   (to_rep(((a).us_split_fields5).rec__integer_stacks__stack__top2) = to_rep(((b).us_split_fields5).rec__integer_stacks__stack__top2)))) ->
+  (bool_eq15(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs3).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs3).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq14(((a).us_split_fields5).rec__integer_stacks__stack__values2,
+  ((b).us_split_fields5).rec__integer_stacks__stack__values2) = true) and
+  (to_rep(((a).us_split_fields5).rec__integer_stacks__stack__top2) = to_rep(((b).us_split_fields5).rec__integer_stacks__stack__top2))))) ->
   (bool_eq15(a, b) = false))))
 
 logic us_tag2 : int
@@ -1369,15 +1369,15 @@ logic bool_eq18 : us_rep3, us_rep3 -> bool
 
 axiom bool_eq_def13 :
   (forall a:us_rep3. forall b:us_rep3 [bool_eq18(a, b)].
-  (((((to_rep3(((a).us_split_discrs4).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs4).rec__integer_stacks__stack__capacity)) and
-  (bool_eq17(((a).us_split_fields7).rec__integer_stacks__stack__values3,
-  ((b).us_split_fields7).rec__integer_stacks__stack__values3) = true)) and
-  (to_rep(((a).us_split_fields7).rec__integer_stacks__stack__top3) = to_rep(((b).us_split_fields7).rec__integer_stacks__stack__top3))) ->
-  (bool_eq18(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs4).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs4).rec__integer_stacks__stack__capacity)) and
-  (bool_eq17(((a).us_split_fields7).rec__integer_stacks__stack__values3,
-  ((b).us_split_fields7).rec__integer_stacks__stack__values3) = true)) and
+  ((((to_rep3(((a).us_split_discrs4).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs4).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq17(((a).us_split_fields7).rec__integer_stacks__stack__values3,
+  ((b).us_split_fields7).rec__integer_stacks__stack__values3) = true) and
   (to_rep(((a).us_split_fields7).rec__integer_stacks__stack__top3) = to_rep(((b).us_split_fields7).rec__integer_stacks__stack__top3)))) ->
+  (bool_eq18(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs4).rec__integer_stacks__stack__capacity) = to_rep3(((b).us_split_discrs4).rec__integer_stacks__stack__capacity)) and
+  ((bool_eq17(((a).us_split_fields7).rec__integer_stacks__stack__values3,
+  ((b).us_split_fields7).rec__integer_stacks__stack__values3) = true) and
+  (to_rep(((a).us_split_fields7).rec__integer_stacks__stack__top3) = to_rep(((b).us_split_fields7).rec__integer_stacks__stack__top3))))) ->
   (bool_eq18(a, b) = false))))
 
 logic us_tag3 : int
@@ -2181,26 +2181,114 @@ axiom user_eq__def_axiom2 :
   b1; rt2 = b2 }; rec__integer_stacks__stack__top2 = b3; rec__ext__2 = b4 };
   attr__tag2 = b5 }))))
 
- (* File "bounded_stacks.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall this__split_fields:(int,element) farray.
-  forall this__split_fields1:t. forall this__split_fields2:natural.
-  forall this__split_fields3:us_private. forall item:int. forall o:int.
-  forall o1:element. forall o2:int. forall result:int. forall item1:int.
-  ((dynamic_property1(1, to_rep3(this__split_discrs),
+logic this__split_fields : (int,element) farray
+
+logic this__split_fields1 : t
+
+logic this__split_fields2 : natural
+
+logic this__split_fields3 : us_private
+
+logic item : int
+
+logic o : int
+
+logic o1 : element
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,element) farray
+
+logic o6 : t
+
+logic o7 : natural
+
+logic o8 : us_private
+
+logic temp___287 : positive
+
+logic temp___2871 : (int,element) farray
+
+logic temp___2872 : t
+
+logic temp___2873 : natural
+
+logic temp___2874 : us_private
+
+logic temp___2875 : int
+
+logic result : int
+
+logic item1 : int
+
+logic result1 : (int,element) farray
+
+logic result2 : t
+
+logic result3 : natural
+
+logic result4 : us_private
+
+logic this__split_fields4 : (int,element) farray
+
+logic this__split_fields5 : t
+
+logic this__split_fields6 : natural
+
+logic this__split_fields7 : us_private
+
+logic this__split_fields8 : (int,element) farray
+
+logic this__split_fields9 : t
+
+logic this__split_fields10 : natural
+
+logic this__split_fields11 : us_private
+
+logic item2 : int
+
+logic this__split_fields12 : (int,element) farray
+
+logic this__split_fields13 : t
+
+logic this__split_fields14 : natural
+
+logic this__split_fields15 : us_private
+
+logic item3 : int
+
+axiom H : (dynamic_property1(1, to_rep3(this__split_discrs),
   to_rep2(first(this__split_fields1)),
   to_rep2(last(this__split_fields1))) and
   ((to_rep2(first(this__split_fields1)) = 1) and
-  (to_rep2(last(this__split_fields1)) = to_rep3(this__split_discrs)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(item)) -> ((not (empty({
-  us_split_discrs1 = { rec__integer_stacks__stack__capacity =
-  this__split_discrs }; us_split_fields1 = {
-  rec__integer_stacks__stack__values = { elts = this__split_fields; rt =
-  this__split_fields1 }; rec__integer_stacks__stack__top =
-  this__split_fields2; rec__ext__ = this__split_fields3 }; attr__tag =
-  this__attr__tag }) = true)) ->
-  (((((((to_rep2(first(this__split_fields1)) <= to_rep(this__split_fields2)) and
-  (to_rep(this__split_fields2) <= to_rep2(last(this__split_fields1)))) and
-  (o = to_rep(this__split_fields2))) and (o1 = (this__split_fields[o]))) and
-  (o2 = to_rep1(o1))) and (({ int__content = result } = { int__content = item
-  }) and (item1 = o2))) -> in_range((to_rep(this__split_fields2) - 1)))))))
+  (to_rep2(last(this__split_fields1)) = to_rep3(this__split_discrs))))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(item))
+
+axiom H2 : (not (empty({ us_split_discrs1 = {
+  rec__integer_stacks__stack__capacity = this__split_discrs };
+  us_split_fields1 = { rec__integer_stacks__stack__values = { elts =
+  this__split_fields; rt = this__split_fields1 };
+  rec__integer_stacks__stack__top = this__split_fields2; rec__ext__ =
+  this__split_fields3 }; attr__tag = this__attr__tag }) = true))
+
+axiom H3 :
+  ((to_rep2(first(this__split_fields1)) <= to_rep(this__split_fields2)) and
+  (to_rep(this__split_fields2) <= to_rep2(last(this__split_fields1))))
+
+axiom H4 : (o = to_rep(this__split_fields2))
+
+axiom H5 : (o1 = (this__split_fields[o]))
+
+axiom H6 : (o2 = to_rep1(o1))
+
+axiom H7 : (result = item)
+
+axiom H8 : (item1 = o2)
+
+ (* File "bounded_stacks.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(this__split_fields2) - 1))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1198,24 +1198,326 @@ axiom convert_character_digit_to_integer__post_axiom :
   (convert_character_digit_to_integer(source2) = 9))))))))))))))))))))) and
   in_range1(convert_character_digit_to_integer(source2)))))
 
+logic target : int
+
+logic has_failed : bool
+
+logic int_array : (int,integer) farray
+
+logic n : (int,integer) farray
+
+logic index : int
+
+logic temp___2384 : int
+
+logic index1 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : bool
+
+logic temp___2364 : (int,integer) farray
+
+logic temp___23641 : t2
+
+logic aida__conversion__calculate_negative_target_length_5__int_array__assume : (int,integer) farray
+
+logic aida__conversion__calculate_negative_target_length_5__int_array__assume1 : t1
+
+logic us : int
+
+logic us1 : int
+
+logic temp___2372 : (int,integer) farray
+
+logic temp___23721 : t4
+
+logic aida__conversion__calculate_negative_target_length_5__n__assume : (int,integer) farray
+
+logic aida__conversion__calculate_negative_target_length_5__n__assume1 : t3
+
+logic us2 : int
+
+logic us3 : int
+
+logic temp___2378 : int
+
+logic temp___2379 : int
+
+logic temp___2377 : int
+
+logic temp___2375 : (int,integer) farray
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target : int
+
+logic o8 : int
+
+logic o9 : character
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : (int,integer) farray
+
+logic i : int
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : integer
+
+logic o18 : int
+
+logic o19 : bool
+
+logic j : int
+
+logic o20 : int
+
+logic o21 : bool
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target1 : int
+
+logic o28 : int
+
+logic o29 : character
+
+logic o30 : int
+
+logic o31 : integer
+
+logic o32 : int
+
+logic o33 : (int,integer) farray
+
+logic i1 : int
+
+logic o34 : int
+
+logic o35 : integer
+
+logic o36 : int
+
+logic o37 : integer
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : bool
+
+logic temp___2380 : int
+
+logic o41 : int
+
+logic o42 : integer
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic temp___2381 : int
+
+logic o46 : int
+
+logic o47 : integer
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic temp___2382 : int
+
+logic o53 : int
+
+logic o54 : integer
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic temp___2383 : int
+
+logic o60 : int
+
+logic o61 : integer
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic result : bool
+
+logic result1 : (int,integer) farray
+
+logic int_array1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic n1 : (int,integer) farray
+
+logic result3 : int
+
+logic index2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target2 : int
+
+logic result4 : (int,integer) farray
+
+logic n2 : (int,integer) farray
+
+logic n3 : (int,integer) farray
+
+logic index3 : int
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : int
+
+logic index4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target3 : int
+
+logic result8 : (int,integer) farray
+
+logic n4 : (int,integer) farray
+
+logic n5 : (int,integer) farray
+
+logic index5 : int
+
+logic n6 : (int,integer) farray
+
+logic index6 : int
+
+logic n7 : (int,integer) farray
+
+logic index7 : int
+
+logic n8 : (int,integer) farray
+
+logic index8 : int
+
+logic result9 : int
+
+logic target1 : int
+
+logic result10 : int
+
+logic target2 : int
+
+logic result11 : int
+
+logic target3 : int
+
+logic result12 : int
+
+logic target4 : int
+
+logic result13 : bool
+
+logic has_failed1 : bool
+
+logic target5 : int
+
+logic has_failed2 : bool
+
+logic int_array2 : (int,integer) farray
+
+logic n9 : (int,integer) farray
+
+logic index9 : int
+
+logic target6 : int
+
+logic has_failed3 : bool
+
+logic int_array3 : (int,integer) farray
+
+logic n10 : (int,integer) farray
+
+logic index10 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (length({ elts = source; rt = source1 }) = 5)
+
+axiom H3 : ((o1 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H4 : (((index1 <= o1) -> (o2 = true)) and ((not (index1 <= o1)) ->
+  (o2 = false)))
+
+axiom H5 : ((o = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H6 : (((o <= index1) -> (o3 = true)) and ((not (o <= index1)) ->
+  (o3 = false)))
+
+axiom H7 : (result = match_bool(o3, o2, false))
+
+axiom H8 : ((o4 = true) <->
+  (forall index11:int. ((((to_rep1(first(source1)) + 1) <= index11) and
+  (index11 <= (to_rep1(first(source1)) + 4))) ->
+  (is_digit(to_rep((source[index11]))) = true))))
+
+axiom H9 : ((temp___2384 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
  (* File "aida-conversion.adb", line 2090, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall temp___2384:int. forall index:int. forall o:int.
-  forall o1:int. forall o2:bool. forall o3:bool. forall o4:bool.
-  forall result:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> ((length({ elts =
-  source; rt = source1 }) = 5) ->
-  ((((((o1 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and (((index <= o1) and
-  (o2 = true)) or ((not (index <= o1)) and (o2 = false)))) and
-  ((((o = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and (((o <= index) and
-  (o3 = true)) or ((not (o <= index)) and (o3 = false)))) and
-  (result = match_bool(o3, o2, false)))) and ((o4 = true) <->
-  (forall index1:int. ((((to_rep1(first(source1)) + 1) <= index1) and
-  (index1 <= (to_rep1(first(source1)) + 4))) ->
-  (is_digit(to_rep((source[index1]))) = true))))) ->
-  (((temp___2384 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) ->
-  (to_rep1(first(source1)) <= temp___2384)))))))
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___2384)

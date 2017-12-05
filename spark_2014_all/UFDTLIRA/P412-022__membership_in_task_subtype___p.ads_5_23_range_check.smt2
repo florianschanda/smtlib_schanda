@@ -127,6 +127,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (define-fun dynamic_invariant2 ((temp___expr_176 us_rep1) (temp___is_init_173 Bool) (temp___skip_constant_174 Bool) (temp___do_toplevel_175 Bool)) Bool (=> (not (= temp___skip_constant_174 true)) (in_range1 1 (to_base temp___expr_176))))
 (define-fun default_initial_assumption1 ((temp___expr_178 us_rep1) (temp___skip_top_level_179 Bool)) Bool (= (to_rep (rec__p__tt__x (us_split_discrs2 temp___expr_178))) 1))
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (not (in_range 1)))
 (check-sat)
 (exit)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -837,75 +837,133 @@ axiom def_axiom1 :
   (((fixed_string__null_string__value__aggregate_def(temp___222, temp___223,
   temp___224)).elts2[temp___225]) = of_rep(temp___222)))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:(int,character) farray.
-  forall fixed_string__null_string__result:(int,character) farray.
-  forall fixed_string__null_string__result1:t.
-  forall temp___227:(int,character) farray. forall temp___2271:t2.
-  forall fixed_string__null_string__value__assume:(int,character) farray.
-  forall fixed_string__null_string__value__assume1:t1.
-  forall result:(int,character) farray. forall value1:(int,character) farray.
-  forall result1:(int,character) farray. forall result2:t.
-  forall fixed_string__null_string__result2:(int,character) farray.
-  forall fixed_string__null_string__result3:t.
-  forall fixed_string__null_string__result4:(int,character) farray.
-  forall fixed_string__null_string__result5:t.
-  forall fixed_string__null_string__result6:(int,character) farray.
-  forall fixed_string__null_string__result7:t.
-  forall value2:(int,character) farray.
-  forall fixed_string__null_string__result8:(int,character) farray.
-  forall fixed_string__null_string__result9:t.
-  forall value3:(int,character) farray.
-  forall fixed_string__null_string__result10:(int,character) farray.
-  forall fixed_string__null_string__result11:t.
-  (forall result3:(int,character) farray. forall result4:t.
-  ((((((((to_rep1(first4((fixed_string__null_string__value__aggregate_def(0,
-  1, to_rep2(this))).rt2)) = 1) and
-  ((to_rep1(last4((fixed_string__null_string__value__aggregate_def(0, 1,
-  to_rep2(this))).rt2)) = to_rep2(this)) and ({ elts2 = temp___227; rt2 =
-  temp___2271 } = fixed_string__null_string__value__aggregate_def(0, 1,
-  to_rep2(this))))) and
-  ((((to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271))) and
-  (((1 <= to_rep2(this)) and
-  (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = ((to_rep2(this) - 1) + 1))) or
-  ((not (1 <= to_rep2(this))) and
-  (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271)))) and
-  (((1 <= to_rep2(this)) and (0 = ((to_rep2(this) - 1) + 1))) or
-  (not (1 <= to_rep2(this)))))) and
-  ((temp___227 = fixed_string__null_string__value__assume) and
-  (mk1(to_rep1(first4(temp___2271)),
-  to_rep1(last4(temp___2271))) = fixed_string__null_string__value__assume1)))) and
-  ((({ map__content = result } = { map__content = value }) and
-  (value1 = fixed_string__null_string__value__assume)) and
-  ((to_rep1(value__first) = to_rep1(first2(fixed_string__null_string__value__assume1))) and
-  (to_rep1(value__last) = to_rep1(last2(fixed_string__null_string__value__assume1)))))) and
-  ((dynamic_property2(1, to_rep2(this), to_rep1(value__first),
+logic value : (int,character) farray
+
+logic fixed_string__null_string__result : (int,character) farray
+
+logic fixed_string__null_string__result1 : t
+
+logic temp___227 : (int,character) farray
+
+logic temp___2271 : t2
+
+logic fixed_string__null_string__value__assume : (int,character) farray
+
+logic fixed_string__null_string__value__assume1 : t1
+
+logic o : int
+
+logic o1 : int
+
+logic result : (int,character) farray
+
+logic value1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic result2 : t
+
+logic fixed_string__null_string__result2 : (int,character) farray
+
+logic fixed_string__null_string__result3 : t
+
+logic fixed_string__null_string__result4 : (int,character) farray
+
+logic fixed_string__null_string__result5 : t
+
+logic fixed_string__null_string__result6 : (int,character) farray
+
+logic fixed_string__null_string__result7 : t
+
+logic value2 : (int,character) farray
+
+logic fixed_string__null_string__result8 : (int,character) farray
+
+logic fixed_string__null_string__result9 : t
+
+logic value3 : (int,character) farray
+
+logic fixed_string__null_string__result10 : (int,character) farray
+
+logic fixed_string__null_string__result11 : t
+
+logic result3 : (int,character) farray
+
+logic result4 : t
+
+axiom H : (to_rep1(first4((fixed_string__null_string__value__aggregate_def(0,
+  1, to_rep2(this))).rt2)) = 1)
+
+axiom H1 : (to_rep1(last4((fixed_string__null_string__value__aggregate_def(0,
+  1, to_rep2(this))).rt2)) = to_rep2(this))
+
+axiom H2 : ({ elts2 = temp___227; rt2 = temp___2271
+  } = fixed_string__null_string__value__aggregate_def(0, 1, to_rep2(this)))
+
+axiom H3 : (((to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271))) ->
+  (((1 <= to_rep2(this)) ->
+  (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = ((to_rep2(this) - 1) + 1))) and
+  ((not (1 <= to_rep2(this))) ->
+  (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271)))) ->
+  ((1 <= to_rep2(this)) -> (0 = ((to_rep2(this) - 1) + 1)))))
+
+axiom H4 : (temp___227 = fixed_string__null_string__value__assume)
+
+axiom H5 : (mk1(to_rep1(first4(temp___2271)),
+  to_rep1(last4(temp___2271))) = fixed_string__null_string__value__assume1)
+
+axiom H6 : (result = value)
+
+axiom H7 : (value1 = fixed_string__null_string__value__assume)
+
+axiom H8 :
+  (to_rep1(value__first) = to_rep1(first2(fixed_string__null_string__value__assume1)))
+
+axiom H9 :
+  (to_rep1(value__last) = to_rep1(last2(fixed_string__null_string__value__assume1)))
+
+axiom H10 : (dynamic_property2(1, to_rep2(this), to_rep1(value__first),
   to_rep1(value__last)) and ((to_rep1(value__first) = 1) and
-  (to_rep1(value__last) = to_rep2(this)))) and
-  ((((fixed_string__null_string__result4 = fixed_string__null_string__result2) and
-  (fixed_string__null_string__result5 = fixed_string__null_string__result3)) and
-  ({ elts = fixed_string__null_string__result6; rt =
-  fixed_string__null_string__result7 } = { elts =
-  fixed_string__null_string__result2; rt = fixed_string__null_string__result3
-  })) and (({ string__content = { elts = result1; rt = result2 } } = {
-  string__content = { elts = fixed_string__null_string__result; rt =
-  fixed_string__null_string__result1 } }) and
-  ((value1 = fixed_string__null_string__result2) and
-  (mk(to_rep1(value__first),
-  to_rep1(value__last)) = fixed_string__null_string__result3)))))) and ((({
-  string__content = { elts = fixed_string__null_string__result8; rt =
-  fixed_string__null_string__result9 } } = { string__content = { elts =
-  fixed_string__null_string__result4; rt = fixed_string__null_string__result5
-  } }) and (value1 = value2)) and (({ elts =
-  fixed_string__null_string__result10; rt =
-  fixed_string__null_string__result11 } = { elts =
-  fixed_string__null_string__result6; rt = fixed_string__null_string__result7
-  }) and (value3 = value1)))) and
-  ((result3 = fixed_string__null_string__result8) and
-  (result4 = fixed_string__null_string__result9))) -> (length({ elts =
-  fixed_string__null_string__result8; rt = fixed_string__null_string__result9
-  }) = elements({ us_split_fields1 = { rec__fixed_string__object__width =
-  this; rec__fixed_string__object__name = this1; rec__ext__ = this2 };
-  attr__tag = this3 })))))
+  (to_rep1(value__last) = to_rep2(this))))
+
+axiom H11 :
+  (fixed_string__null_string__result4 = fixed_string__null_string__result2)
+
+axiom H12 :
+  (fixed_string__null_string__result5 = fixed_string__null_string__result3)
+
+axiom H13 :
+  ((fixed_string__null_string__result6 = fixed_string__null_string__result2) and
+  (fixed_string__null_string__result7 = fixed_string__null_string__result3))
+
+axiom H14 : ((result1 = fixed_string__null_string__result) and
+  (result2 = fixed_string__null_string__result1))
+
+axiom H15 : (value1 = fixed_string__null_string__result2)
+
+axiom H16 : (mk(to_rep1(value__first),
+  to_rep1(value__last)) = fixed_string__null_string__result3)
+
+axiom H17 :
+  ((fixed_string__null_string__result8 = fixed_string__null_string__result4) and
+  (fixed_string__null_string__result9 = fixed_string__null_string__result5))
+
+axiom H18 : (value1 = value2)
+
+axiom H19 :
+  ((fixed_string__null_string__result10 = fixed_string__null_string__result6) and
+  (fixed_string__null_string__result11 = fixed_string__null_string__result7))
+
+axiom H20 : (value3 = value1)
+
+axiom H21 : (result3 = fixed_string__null_string__result8)
+
+axiom H22 : (result4 = fixed_string__null_string__result9)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (length({ elts = fixed_string__null_string__result8;
+  rt = fixed_string__null_string__result9 }) = elements({ us_split_fields1 =
+  { rec__fixed_string__object__width = this;
+  rec__fixed_string__object__name = this1; rec__ext__ = this2 }; attr__tag =
+  this3 }))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type coordinate_type
 
-predicate in_range(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq : int, int -> bool
 
@@ -312,15 +312,130 @@ axiom in_bounds__def_axiom :
   in_range((to_rep(c1) + to_rep1(c2)))) and
   in_range((to_rep(c1) - to_rep1(c2))))))
 
+logic r : int
+
+logic shapes4__make_circle__result : coordinate_type
+
+logic shapes4__make_circle__result1 : coordinate_type
+
+logic shapes4__make_circle__result2 : radius_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : radius_type
+
+logic o5 : coordinate_type
+
+logic o6 : coordinate_type
+
+logic o7 : coordinate_type
+
+logic o8 : coordinate_type
+
+logic o9 : radius_type
+
+logic o10 : coordinate_type
+
+logic o11 : coordinate_type
+
+logic o12 : radius_type
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic r3 : int
+
+logic result3 : int
+
+logic r4 : int
+
+logic result4 : int
+
+logic r5 : int
+
+logic result5 : coordinate_type
+
+logic result6 : coordinate_type
+
+logic result7 : radius_type
+
+logic shapes4__make_circle__result3 : coordinate_type
+
+logic shapes4__make_circle__result4 : coordinate_type
+
+logic shapes4__make_circle__result5 : radius_type
+
+logic shapes4__make_circle__result6 : coordinate_type
+
+logic shapes4__make_circle__result7 : coordinate_type
+
+logic shapes4__make_circle__result8 : radius_type
+
+logic shapes4__make_circle__result9 : coordinate_type
+
+logic shapes4__make_circle__result10 : coordinate_type
+
+logic shapes4__make_circle__result11 : radius_type
+
+logic r6 : int
+
+logic shapes4__make_circle__result12 : coordinate_type
+
+logic shapes4__make_circle__result13 : coordinate_type
+
+logic shapes4__make_circle__result14 : radius_type
+
+logic r7 : int
+
+logic shapes4__make_circle__result15 : coordinate_type
+
+logic shapes4__make_circle__result16 : coordinate_type
+
+logic shapes4__make_circle__result17 : radius_type
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : in_range1(radius)
+
+axiom H3 : (result = r)
+
+axiom H4 : (r1 = radius)
+
+axiom H5 : in_range1(r1)
+
+axiom H6 : (((100 - x) <= r1) -> ((o = (100 - x)) and in_range1((100 - x))))
+
+axiom H7 : (((100 - x) <= r1) -> (r1 = result1))
+
+axiom H8 : (((100 - x) <= r1) -> (r2 = o))
+
+axiom H9 : ((not ((100 - x) <= r1)) -> (r2 = r1))
+
+axiom H10 : (((x - (- 100)) <= r2) -> ((o1 = (x - (- 100))) and
+  in_range1((x - (- 100)))))
+
+axiom H11 : (((x - (- 100)) <= r2) -> (r2 = result2))
+
+axiom H12 : (((x - (- 100)) <= r2) -> (r3 = o1))
+
+axiom H13 : ((not ((x - (- 100)) <= r2)) -> (r3 = r2))
+
+axiom H14 : ((100 - y) <= r3)
+
  (* File "shapes4.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall o:int. forall o1:int. forall result:int.
-  forall r1:int. forall result1:int. forall r2:int. forall result2:int.
-  forall r3:int. (in_range(x) -> (in_range(y) -> (in_range1(radius) -> ((({
-  int__content = result } = { int__content = r }) and (r1 = radius)) ->
-  (in_range1(r1) -> (((((100 - x) <= r1) and (((o = (100 - x)) and
-  in_range1((100 - x))) and ((r1 = result1) and (r2 = o)))) or
-  ((not ((100 - x) <= r1)) and (r2 = r1))) -> (((((x - (-100)) <= r2) and
-  (((o1 = (x - (-100))) and in_range1((x - (-100)))) and ((r2 = result2) and
-  (r3 = o1)))) or ((not ((x - (-100)) <= r2)) and (r3 = r2))) ->
-  (((100 - y) <= r3) -> in_range1((100 - y)))))))))))
+goal WP_parameter_def : in_range1((100 - y))

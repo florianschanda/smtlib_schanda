@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -629,7 +629,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1204,20 +1204,20 @@ logic c1 : t2
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___String_Literal_640 : unit -> (int,character) farray
+logic temp___String_Literal_634 : unit -> (int,character) farray
 
-axiom temp___String_Literal_640__def_axiom :
-  ((((to_rep((temp___String_Literal_640(void)[1])) = 122) and
-  (to_rep((temp___String_Literal_640(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_640(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_640(void)[4])) = 111))
+axiom temp___String_Literal_634__def_axiom :
+  ((((to_rep((temp___String_Literal_634(void)[1])) = 122) and
+  (to_rep((temp___String_Literal_634(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_634(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_634(void)[4])) = 111))
 
-logic temp___String_Literal_641 : unit -> (int,character) farray
+logic temp___String_Literal_635 : unit -> (int,character) farray
 
-axiom temp___String_Literal_641__def_axiom :
-  (((to_rep((temp___String_Literal_641(void)[1])) = 109) and
-  (to_rep((temp___String_Literal_641(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_641(void)[3])) = 120))
+axiom temp___String_Literal_635__def_axiom :
+  (((to_rep((temp___String_Literal_635(void)[1])) = 109) and
+  (to_rep((temp___String_Literal_635(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_635(void)[3])) = 120))
 
 axiom create__post_axiom :
   (forall last4:t [create(last4)].
@@ -1230,16 +1230,31 @@ axiom create__post_axiom :
 axiom c__def_axiom : ({ elts1 = c; rt1 = c1
   } = create(of_int(18446744073709551615)))
 
+logic o : int
+
+logic o1 : t
+
+logic o2 : int
+
+logic result : bool
+
+axiom H : dynamic_property1(of_int(0), of_int(18446744073709551615),
+  to_rep2(first2(c1)), to_rep2(last2(c1)))
+
+axiom H1 : (create(of_int(18446744073709551615)) = { elts1 = c; rt1 = c1 })
+
+axiom H2 : ((to_rep2(first2(c1)) = of_int(0)) and
+  (to_rep2(last2(c1)) = of_int(18446744073709551615)))
+
+axiom H3 : ((o = length1({ elts1 = c; rt1 = c1 })) and
+  uint_in_range(length1({ elts1 = c; rt1 = c1 })))
+
+axiom H4 : (o1 = of_int(o))
+
+axiom H5 : ((ugt(o1, of_int(18446744073709551615)) -> (result = true)) and
+  ((not ugt(o1, of_int(18446744073709551615))) -> (result = false)))
+
+axiom H6 : (not (result = true))
+
  (* File "mod_array.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:t. forall result:bool.
-  (dynamic_property1(of_int(0), of_int(18446744073709551615),
-  to_rep2(first2(c1)), to_rep2(last2(c1))) ->
-  ((create(of_int(18446744073709551615)) = { elts1 = c; rt1 = c1 }) ->
-  (((to_rep2(first2(c1)) = of_int(0)) and
-  (to_rep2(last2(c1)) = of_int(18446744073709551615))) -> (((((o = length1({
-  elts1 = c; rt1 = c1 })) and uint_in_range(length1({ elts1 = c; rt1 = c1
-  }))) and (o1 = of_int(o))) and ((ugt(o1, of_int(18446744073709551615)) and
-  (result = true)) or ((not ugt(o1, of_int(18446744073709551615))) and
-  (result = false)))) -> ((not (result = true)) -> uint_in_range(length1({
-  elts1 = c; rt1 = c1 }))))))))
+goal WP_parameter_def : uint_in_range(length1({ elts1 = c; rt1 = c1 }))

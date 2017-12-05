@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -256,26 +256,111 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic t1 : int
+
+logic t2 : int
+
+logic t3 : int
+
+logic t4 : int
+
+logic temp___201 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : int
+
+logic temp___202 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : int
+
+logic temp___203 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___204 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : int
+
+logic x : (int,integer) farray
+
+logic result : int
+
+logic t11 : int
+
+logic x1 : (int,integer) farray
+
+logic result1 : int
+
+logic t21 : int
+
+logic v2 : (int,integer) farray
+
+logic result2 : int
+
+logic t31 : int
+
+logic v21 : (int,integer) farray
+
+logic result3 : int
+
+logic t41 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(t1))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(t2))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(t3))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(t4))
+
+axiom H4 : (temp___201 = x)
+
+axiom H5 : (o = (temp___201[2]))
+
+axiom H6 : (o1 = to_rep(o))
+
+axiom H7 : (result = t1)
+
+axiom H8 : (t11 = o1)
+
+axiom H9 : (temp___202 = x1)
+
+axiom H10 : (o2 = (temp___202[2]))
+
+axiom H11 : (o3 = to_rep(o2))
+
+axiom H12 : (result1 = t2)
+
+axiom H13 : (t21 = o3)
+
+axiom H14 : (t11 = t21)
+
+axiom H15 : (temp___203 = v2)
+
+axiom H16 : (o4 = (temp___203[2]))
+
+axiom H17 : (o5 = to_rep(o4))
+
+axiom H18 : (result2 = t3)
+
+axiom H19 : (t31 = o5)
+
+axiom H20 : (temp___204 = v21)
+
+axiom H21 : (o6 = (temp___204[2]))
+
+axiom H22 : (o7 = to_rep(o6))
+
+axiom H23 : (result3 = t4)
+
+axiom H24 : (t41 = o7)
+
  (* File "vc4.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:int. forall t2:int. forall t3:int. forall t4:int.
-  forall temp___201:(int,integer) farray. forall o:integer. forall o1:int.
-  forall temp___202:(int,integer) farray. forall o2:integer. forall o3:int.
-  forall temp___203:(int,integer) farray. forall o4:integer. forall o5:int.
-  forall temp___204:(int,integer) farray. forall o6:integer. forall o7:int.
-  forall x:(int,integer) farray. forall result:int. forall t11:int.
-  forall x1:(int,integer) farray. forall result1:int. forall t21:int.
-  forall v2:(int,integer) farray. forall result2:int. forall t31:int.
-  forall v21:(int,integer) farray. forall result3:int. forall t41:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(t1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t2)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t3)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t4)) ->
-  (((((temp___201 = x) and (o = (temp___201[2]))) and (o1 = to_rep(o))) and
-  ((result = t1) and (t11 = o1))) -> (((((temp___202 = x1) and
-  (o2 = (temp___202[2]))) and (o3 = to_rep(o2))) and ((result1 = t2) and
-  (t21 = o3))) -> ((t11 = t21) -> (((((temp___203 = v2) and
-  (o4 = (temp___203[2]))) and (o5 = to_rep(o4))) and ((result2 = t3) and
-  (t31 = o5))) -> (((((temp___204 = v21) and (o6 = (temp___204[2]))) and
-  (o7 = to_rep(o6))) and ((result3 = t4) and (t41 = o7))) ->
-  (t31 = t41)))))))))))
+goal WP_parameter_def : (t31 = t41)

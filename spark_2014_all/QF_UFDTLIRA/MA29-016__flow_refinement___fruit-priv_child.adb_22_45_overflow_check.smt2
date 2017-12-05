@@ -45,6 +45,7 @@
 (declare-const price_of_orange Int)
 (declare-const extra_cost Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Bool)
 (assert (in_range1 extra_cost))
 (assert (in_range1 price_of_orange))

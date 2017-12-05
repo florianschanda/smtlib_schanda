@@ -151,6 +151,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_178 Int) (temp___is_init_175 Bool) (temp___skip_constant_176 Bool) (temp___do_toplevel_177 Bool)) Bool (=> (or (= temp___is_init_175 true) (<= 1 64)) (in_range2 temp___expr_178)))
 (define-fun dynamic_invariant2 ((temp___expr_184 Int) (temp___is_init_181 Bool) (temp___skip_constant_182 Bool) (temp___do_toplevel_183 Bool)) Bool (=> (or (= temp___is_init_181 true) (<= 0 64)) (in_range3 temp___expr_184)))
 (define-fun dynamic_invariant3 ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 0 97)) (in_range temp___expr_160)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

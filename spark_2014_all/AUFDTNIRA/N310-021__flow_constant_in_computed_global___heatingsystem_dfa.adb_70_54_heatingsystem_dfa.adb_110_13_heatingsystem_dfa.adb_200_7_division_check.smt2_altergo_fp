@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -709,29 +709,218 @@ axiom secondsinminute__def_axiom : (secondsinminute = 60)
 
 axiom secondsinhour__def_axiom : (secondsinhour = 3600)
 
+logic onofftime : (int,times) farray
+
+logic clockoffset : int
+
+logic heatingison : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : times
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : times
+
+logic o6 : int
+
+logic o7 : (int,times) farray
+
+logic result : bool
+
+logic heatingison1 : bool
+
+logic result1 : int
+
+logic clockoffset1 : int
+
+logic result2 : (int,times) farray
+
+logic onofftime1 : (int,times) farray
+
+logic onofftime2 : (int,times) farray
+
+logic clockoffset2 : int
+
+logic switchposition : int
+
+logic timer : int
+
+logic slowadvance : bool
+
+logic fastadvance : bool
+
+logic changetoslowmode : bool
+
+logic changetofastmode : bool
+
+logic slowadvance1 : bool
+
+logic fastadvance1 : bool
+
+logic changetoslowmode1 : bool
+
+logic changetofastmode1 : bool
+
+logic hour : int
+
+logic minute : int
+
+logic advancemode : us_private
+
+logic advpressed : us_private
+
+logic advtimer : us_private
+
+logic switchposition1 : int
+
+logic timer1 : int
+
+logic result3 : int
+
+logic timer2 : int
+
+logic timer3 : int
+
+logic result4 : bool
+
+logic slowadvance2 : bool
+
+logic result5 : int
+
+logic clockoffset3 : int
+
+logic changetofastmode2 : bool
+
+logic advpressed1 : us_private
+
+logic advtimer1 : us_private
+
+logic advancemode1 : us_private
+
+logic fastadvance2 : bool
+
+logic advtimer2 : us_private
+
+logic result6 : int
+
+logic clockoffset4 : int
+
+logic changetoslowmode2 : bool
+
+logic advpressed2 : us_private
+
+logic advancemode2 : us_private
+
+logic result7 : int
+
+logic timer4 : int
+
+logic result8 : int
+
+logic timer5 : int
+
+logic result9 : bool
+
+logic slowadvance3 : bool
+
+logic result10 : int
+
+logic timer6 : int
+
+logic changetofastmode3 : bool
+
+logic advpressed3 : us_private
+
+logic advtimer3 : us_private
+
+logic advancemode3 : us_private
+
+logic fastadvance3 : bool
+
+logic advtimer4 : us_private
+
+logic result11 : int
+
+logic timer7 : int
+
+logic changetoslowmode3 : bool
+
+logic advpressed4 : us_private
+
+logic advancemode4 : us_private
+
+logic result12 : (int,times) farray
+
+logic onofftime3 : (int,times) farray
+
+logic result13 : int
+
+logic hour1 : int
+
+logic result14 : int
+
+logic minute1 : int
+
+axiom H : in_range1(hoursinday)
+
+axiom H1 : in_range1(minutesinhour)
+
+axiom H2 : in_range1(secondsinminute)
+
+axiom H3 : in_range1(secondsinhour)
+
+axiom H4 : ((0 <= 86399) -> in_range1(clockoffset))
+
+axiom H5 : (result = heatingison)
+
+axiom H6 : (heatingison1 = of_int(0))
+
+axiom H7 : (result1 = clockoffset)
+
+axiom H8 : (clockoffset1 = 0)
+
+axiom H9 : (result2 = onofftime)
+
+axiom H10 : (onofftime1 = temp___268(0, 0, 0, 0))
+
+axiom H11 : ((0 <= 86399) -> in_range1(clockoffset2))
+
+axiom H12 : ((0 <= 5) -> in_range3(switchposition))
+
+axiom H13 : ((0 <= 86399) -> in_range1(timer))
+
+axiom H14 : in_range3(switchposition1)
+
+axiom H15 : (not (switchposition1 = 0))
+
+axiom H16 : (not (switchposition1 = 1))
+
+axiom H17 : ((2 <= switchposition1) and (switchposition1 <= 5))
+
+axiom H18 : (o1 = switchposition1)
+
+axiom H19 : (o2 = (onofftime2[o1]))
+
+axiom H20 : (o3 = to_rep(o2))
+
+axiom H21 : (result8 = timer)
+
+axiom H22 : (timer5 = o3)
+
+axiom H23 : ((o4 = currentmode(advancemode)) and in_range4(o4))
+
+axiom H24 : (((o4 = 0) -> (result9 = true)) and ((not (o4 = 0)) ->
+  (result9 = false)))
+
+axiom H25 : (not (result9 = true))
+
+axiom H26 : (fastadvance3 = true)
+
  (* File "heatingsystem_dfa.adb", line 143, characters 0-0 *)
-goal WP_parameter_def :
-  (forall onofftime:(int,times) farray. forall clockoffset:int.
-  forall heatingison:bool. forall o:int. forall o1:times. forall o2:int.
-  forall o3:int. forall result:bool. forall heatingison1:bool.
-  forall result1:int. forall clockoffset1:int.
-  forall result2:(int,times) farray. forall onofftime1:(int,times) farray.
-  forall onofftime2:(int,times) farray. forall clockoffset2:int.
-  forall switchposition:int. forall timer:int. forall advancemode:us_private.
-  forall switchposition1:int. forall result3:int. forall timer1:int.
-  forall result4:bool. forall fastadvance:bool. (in_range1(hoursinday) ->
-  (in_range1(minutesinhour) -> (in_range1(secondsinminute) ->
-  (in_range1(secondsinhour) -> (((0 <= 86399) -> in_range1(clockoffset)) ->
-  (((result = heatingison) and (heatingison1 = of_int(0))) ->
-  (((result1 = clockoffset) and (clockoffset1 = 0)) ->
-  (((result2 = onofftime) and (onofftime1 = temp___268(0, 0, 0, 0))) ->
-  (((0 <= 86399) -> in_range1(clockoffset2)) -> (((0 <= 5) ->
-  in_range3(switchposition)) -> (((0 <= 86399) -> in_range1(timer)) ->
-  (in_range3(switchposition1) -> ((not (switchposition1 = 0)) ->
-  ((not (switchposition1 = 1)) -> (((((((2 <= switchposition1) and
-  (switchposition1 <= 5)) and (o = switchposition1)) and
-  (o1 = (onofftime2[o]))) and (o2 = to_rep(o1))) and ((result3 = timer) and
-  (timer1 = o2))) -> ((((o3 = currentmode(advancemode)) and
-  in_range4(o3)) and (((o3 = 0) and (result4 = true)) or ((not (o3 = 0)) and
-  (result4 = false)))) -> ((not (result4 = true)) -> ((fastadvance = true) ->
-  (not (86400 = 0)))))))))))))))))))))
+goal WP_parameter_def : (not (86400 = 0))

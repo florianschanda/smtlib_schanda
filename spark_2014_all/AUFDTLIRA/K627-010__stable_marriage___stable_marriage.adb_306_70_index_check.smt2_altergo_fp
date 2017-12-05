@@ -1440,27 +1440,327 @@ axiom invert_1__post_axiom :
   (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
   (to_rep((r1[to_rep2((invert_1(r1)[g1]))])) = g1))))))
 
- (* File "stable_marriage.adb", line 194, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ranking_2_inverted:(int,(int,ranking) farray) farray.
-  forall proposals_made:(int,count) farray.
-  forall unmatched_g1_set__split_fields:(int,group1_id) farray.
-  forall unmatched_g1_set__split_fields1:count.
-  forall unmatched_g2_set:(int,bool) farray.
-  forall result__:(int,group1_id) farray. forall g1:int. forall g2:int.
-  forall rank:int. forall already_asked:int. forall o:int.
-  forall o1:group1_id. forall o2:int. forall o3:int. forall o4:count.
-  forall o5:(int,group1_id) farray. forall o6:count.
-  forall temp___586:(int,group1_id) farray. forall temp___5861:count.
-  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
-  forall o11:group2_id. forall o12:int. forall o13:(int,group1_id) farray.
-  forall result:int. forall rank1:int. forall result1:int. forall g11:int.
-  forall result2:(int,group1_id) farray. forall result3:count.
-  forall unmatched_g1_set__split_fields2:(int,group1_id) farray.
-  forall unmatched_g1_set__split_fields3:count. forall result4:int.
-  forall already_asked1:int. forall result5:int. forall rank2:int.
-  (((forall g21:int. (((1 <= g21) and (g21 <= 64)) ->
-    (is_permutation_1((ranking_2[g21])) = true))) and
+logic ranking_2_inverted : (int,(int,ranking) farray) farray
+
+logic proposals_made : (int,count) farray
+
+logic unmatched_g1_set__split_fields : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields1 : count
+
+logic unmatched_g2_set : (int,bool) farray
+
+logic result__ : (int,group1_id) farray
+
+logic g1 : int
+
+logic g2 : int
+
+logic accepted : bool
+
+logic rank : int
+
+logic already_asked : int
+
+logic temp___649 : (int,(int,ranking) farray) farray
+
+logic o : int
+
+logic o1 : group1_id
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : count
+
+logic o5 : (int,group1_id) farray
+
+logic o6 : count
+
+logic temp___586 : (int,group1_id) farray
+
+logic temp___5861 : count
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : group2_id
+
+logic o12 : int
+
+logic o13 : group1_id
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : group2_id
+
+logic o17 : int
+
+logic o18 : (int,group1_id) farray
+
+logic o19 : bool
+
+logic o20 : int
+
+logic o21 : count
+
+logic o22 : (int,count) farray
+
+logic o23 : int
+
+logic o24 : count
+
+logic o25 : (int,group1_id) farray
+
+logic o26 : count
+
+logic temp___603 : (int,group1_id) farray
+
+logic temp___6031 : count
+
+logic o27 : group1_id
+
+logic o28 : int
+
+logic o29 : (int,group1_id) farray
+
+logic o30 : (int,group1_id) farray
+
+logic o31 : count
+
+logic temp___607 : (int,group1_id) farray
+
+logic temp___6071 : count
+
+logic us : bool
+
+logic o32 : int
+
+logic o33 : count
+
+logic o34 : (int,group1_id) farray
+
+logic o35 : count
+
+logic temp___595 : (int,group1_id) farray
+
+logic temp___5951 : count
+
+logic o36 : group1_id
+
+logic o37 : int
+
+logic o38 : (int,group1_id) farray
+
+logic o39 : (int,group1_id) farray
+
+logic o40 : count
+
+logic temp___599 : (int,group1_id) farray
+
+logic temp___5991 : count
+
+logic o41 : group1_id
+
+logic o42 : (int,group1_id) farray
+
+logic g2_id : int
+
+logic idx : int
+
+logic g1_id : int
+
+logic rank1 : int
+
+logic o43 : int
+
+logic o44 : group2_id
+
+logic o45 : int
+
+logic o46 : group1_id
+
+logic o47 : int
+
+logic o48 : bool
+
+logic o49 : int
+
+logic o50 : group2_id
+
+logic o51 : int
+
+logic o52 : group1_id
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : group2_id
+
+logic o56 : int
+
+logic o57 : (int,group1_id) farray
+
+logic o58 : bool
+
+logic o59 : bool
+
+logic g1_id1 : int
+
+logic idx1 : int
+
+logic g1_id2 : int
+
+logic idx2 : int
+
+logic o60 : int
+
+logic unmatched_g2_set1 : (int,bool) farray
+
+logic result__1 : (int,group1_id) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic rank2 : int
+
+logic result2 : int
+
+logic g11 : int
+
+logic result3 : (int,group1_id) farray
+
+logic result4 : count
+
+logic unmatched_g1_set__split_fields2 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields3 : count
+
+logic result5 : int
+
+logic already_asked1 : int
+
+logic result6 : int
+
+logic rank3 : int
+
+logic result7 : int
+
+logic g21 : int
+
+logic result8 : (int,count) farray
+
+logic proposals_made1 : (int,count) farray
+
+logic result9 : bool
+
+logic accepted1 : bool
+
+logic result10 : (int,bool) farray
+
+logic unmatched_g2_set2 : (int,bool) farray
+
+logic result11 : bool
+
+logic accepted2 : bool
+
+logic result12 : (int,group1_id) farray
+
+logic result13 : count
+
+logic unmatched_g1_set__split_fields4 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields5 : count
+
+logic result14 : (int,group1_id) farray
+
+logic result15 : count
+
+logic unmatched_g1_set__split_fields6 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields7 : count
+
+logic result16 : bool
+
+logic accepted3 : bool
+
+logic result17 : (int,group1_id) farray
+
+logic result18 : count
+
+logic unmatched_g1_set__split_fields8 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields9 : count
+
+logic result19 : (int,group1_id) farray
+
+logic result20 : count
+
+logic unmatched_g1_set__split_fields10 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields11 : count
+
+logic result21 : (int,group1_id) farray
+
+logic result__2 : (int,group1_id) farray
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic proposals_made2 : (int,count) farray
+
+logic unmatched_g1_set__split_fields12 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields13 : count
+
+logic unmatched_g2_set3 : (int,bool) farray
+
+logic result__3 : (int,group1_id) farray
+
+logic g12 : int
+
+logic g22 : int
+
+logic accepted4 : bool
+
+logic rank4 : int
+
+logic already_asked2 : int
+
+logic proposals_made3 : (int,count) farray
+
+logic unmatched_g1_set__split_fields14 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields15 : count
+
+logic unmatched_g2_set4 : (int,bool) farray
+
+logic result__4 : (int,group1_id) farray
+
+logic g13 : int
+
+logic g23 : int
+
+logic accepted5 : bool
+
+logic rank5 : int
+
+logic already_asked3 : int
+
+axiom H :
+  ((forall g24:int. (((1 <= g24) and (g24 <= 64)) ->
+   (is_permutation_1((ranking_2[g24])) = true))) and
   ((bool_eq11(invert(ranking_2), 1, 64, ranking_2_inverted, 1,
   64) = true) and ((invariant_holds({
   rec__stable_marriage__matching__group1_set__elements =
@@ -1468,29 +1768,79 @@ goal WP_parameter_def :
   rec__stable_marriage__matching__group1_set__cardinality =
   unmatched_g1_set__split_fields1 }, proposals_made, result__,
   unmatched_g2_set) = true) and
-  (0 <  to_rep3(unmatched_g1_set__split_fields1))))) -> (((1 <= 64) ->
-  in_range1(g1)) -> (((1 <= 64) -> in_range2(g2)) -> (((result = rank) and
-  (rank1 = 1)) -> (in_range3(rank1) -> (((0 <= 64) ->
-  in_range4(already_asked)) ->
-  (((((((1 <= to_rep3(unmatched_g1_set__split_fields1)) and
-  (to_rep3(unmatched_g1_set__split_fields1) <= 64)) and
-  (o = to_rep3(unmatched_g1_set__split_fields1))) and
-  (o1 = (unmatched_g1_set__split_fields[o]))) and (o2 = to_rep(o1))) and
-  ((result1 = g1) and (g11 = o2))) ->
-  (((((((o3 = (to_rep3(unmatched_g1_set__split_fields1) - 1)) and
-  in_range4((to_rep3(unmatched_g1_set__split_fields1) - 1))) and
-  (to_rep3(o4) = o3)) and ((unmatched_g1_set__split_fields = o5) and
-  (o4 = o6))) and ((temp___586 = o5) and (temp___5861 = o6))) and
-  (((result2 = unmatched_g1_set__split_fields) and
-  (result3 = unmatched_g1_set__split_fields1)) and
-  ((unmatched_g1_set__split_fields2 = temp___586) and
-  (unmatched_g1_set__split_fields3 = temp___5861)))) ->
-  ((to_rep3((proposals_made[g11])) <  64) -> (((result4 = already_asked) and
-  (already_asked1 = to_rep3((proposals_made[g11])))) ->
-  ((not (already_asked1 = 0)) -> ((((((o7 = already_asked1) and
-  in_range3(already_asked1)) and (o8 = (o7 + 1))) and ((o9 = o8) and
-  in_range3(o8))) and ((result5 = rank1) and (rank2 = o9))) ->
-  (((((((1 <= (rank2 - 1)) and ((rank2 - 1) <= 64)) and
-  (o10 = (rank2 - 1))) and (o11 = ((ranking_1[g11])[o10]))) and
-  (o12 = to_rep1(o11))) and (o13 = (ranking_2[o12]))) ->
-  (1 <= (rank2 - 1))))))))))))))))
+  (0 <  to_rep3(unmatched_g1_set__split_fields1)))))
+
+axiom H1 : ((1 <= 64) -> in_range1(g1))
+
+axiom H2 : ((1 <= 64) -> in_range2(g2))
+
+axiom H3 : (result1 = rank)
+
+axiom H4 : (rank2 = 1)
+
+axiom H5 : in_range3(rank2)
+
+axiom H6 : ((0 <= 64) -> in_range4(already_asked))
+
+axiom H7 : ((1 <= to_rep3(unmatched_g1_set__split_fields1)) and
+  (to_rep3(unmatched_g1_set__split_fields1) <= 64))
+
+axiom H8 : (o = to_rep3(unmatched_g1_set__split_fields1))
+
+axiom H9 : (o1 = (unmatched_g1_set__split_fields[o]))
+
+axiom H10 : (o2 = to_rep(o1))
+
+axiom H11 : (result2 = g1)
+
+axiom H12 : (g11 = o2)
+
+axiom H13 : ((o3 = (to_rep3(unmatched_g1_set__split_fields1) - 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields1) - 1)))
+
+axiom H14 : (to_rep3(o4) = o3)
+
+axiom H15 : (unmatched_g1_set__split_fields = o5)
+
+axiom H16 : (o4 = o6)
+
+axiom H17 : (temp___586 = o5)
+
+axiom H18 : (temp___5861 = o6)
+
+axiom H19 : ((result3 = unmatched_g1_set__split_fields) and
+  (result4 = unmatched_g1_set__split_fields1))
+
+axiom H20 : ((unmatched_g1_set__split_fields2 = temp___586) and
+  (unmatched_g1_set__split_fields3 = temp___5861))
+
+axiom H21 : (to_rep3((proposals_made[g11])) <  64)
+
+axiom H22 : (result5 = already_asked)
+
+axiom H23 : (already_asked1 = to_rep3((proposals_made[g11])))
+
+axiom H24 : (not (already_asked1 = 0))
+
+axiom H25 : ((o7 = already_asked1) and in_range3(already_asked1))
+
+axiom H26 : (o8 = (o7 + 1))
+
+axiom H27 : ((o9 = o8) and in_range3(o8))
+
+axiom H28 : (result6 = rank2)
+
+axiom H29 : (rank3 = o9)
+
+axiom H30 : ((1 <= (rank3 - 1)) and ((rank3 - 1) <= 64))
+
+axiom H31 : (o15 = (rank3 - 1))
+
+axiom H32 : (o16 = ((ranking_1[g11])[o15]))
+
+axiom H33 : (o17 = to_rep1(o16))
+
+axiom H34 : (o18 = (ranking_2[o17]))
+
+ (* File "stable_marriage.adb", line 194, characters 0-0 *)
+goal WP_parameter_def : (1 <= (rank3 - 1))

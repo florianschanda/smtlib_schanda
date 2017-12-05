@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tbase_index_typeB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,7 +162,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type contents_type
 
-predicate in_range3(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range3(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq4 : int, int -> bool
 
@@ -366,31 +366,159 @@ function t18b__ref___projection(a: t18b__ref) : t18b = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "t3q5.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall table:(int,contents_type) farray. forall key:int. forall low:int.
-  forall o:int. forall x:int. forall table1:(int,contents_type) farray.
-  forall result:int. forall low1:int. forall result1:int. forall key1:int.
-  forall table2:(int,contents_type) farray.
-  forall table3:(int,contents_type) farray. forall key2:int. forall low2:int.
-  (((1 <= 100) -> in_range2(key)) -> ((({ int__content = result } = {
-  int__content = low }) and (low1 = 1)) -> (((1 <= low1) and (low1 <= 99)) ->
-  ((((o = find_smallest(table, low1, 100)) and (in_range2(o) and
+logic table : (int,contents_type) farray
+
+logic key : int
+
+logic low : int
+
+logic temp___177 : int
+
+logic temp___176 : int
+
+logic temp___175 : (int,contents_type) farray
+
+logic temp___179 : (int,contents_type) farray
+
+logic o : int
+
+logic x : int
+
+logic x1 : int
+
+logic temp___178 : int
+
+logic o1 : int
+
+logic o2 : contents_type
+
+logic o3 : int
+
+logic o4 : int
+
+logic table1 : (int,contents_type) farray
+
+logic key1 : int
+
+logic result : int
+
+logic low1 : int
+
+logic result1 : int
+
+logic key2 : int
+
+logic table2 : (int,contents_type) farray
+
+logic table3 : (int,contents_type) farray
+
+logic key3 : int
+
+logic low2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic low3 : int
+
+logic result4 : int
+
+logic key4 : int
+
+logic table4 : (int,contents_type) farray
+
+logic table5 : (int,contents_type) farray
+
+logic key5 : int
+
+logic low4 : int
+
+logic table6 : (int,contents_type) farray
+
+logic key6 : int
+
+logic low5 : int
+
+logic table7 : (int,contents_type) farray
+
+logic key7 : int
+
+logic low6 : int
+
+logic table8 : (int,contents_type) farray
+
+logic key8 : int
+
+logic low7 : int
+
+logic table9 : (int,contents_type) farray
+
+logic key9 : int
+
+logic low8 : int
+
+logic table10 : (int,contents_type) farray
+
+logic key10 : int
+
+logic low9 : int
+
+logic table11 : (int,contents_type) farray
+
+logic key11 : int
+
+logic low10 : int
+
+logic table12 : (int,contents_type) farray
+
+logic key12 : int
+
+logic low11 : int
+
+axiom H : ((1 <= 100) -> in_range2(key))
+
+axiom H1 : (result = low)
+
+axiom H2 : (low1 = 1)
+
+axiom H3 : (1 <= low1)
+
+axiom H4 : (low1 <= 99)
+
+axiom H5 : ((o = find_smallest(table, low1, 100)) and (in_range2(o) and
   (((low1 <= o) and (o <= 100)) and
-  (forall x1:int. (((low1 <= x1) and (x1 <= 100)) ->
-  (to_rep((table[o])) <= to_rep((table[x1])))))))) and (({ int__content =
-  result1 } = { int__content = key }) and (key1 = o))) ->
-  ((((not (key1 = low1)) and
-  ((to_rep((table2[low1])) = to_rep((table[key1]))) and
-  ((to_rep((table2[key1])) = to_rep((table[low1]))) and
-  ((forall x1:int. (((1 <= x1) and (x1 <= 100)) -> (((not (x1 = low1)) and
-   (not (x1 = key1))) -> (to_rep((table2[x1])) = to_rep((table[x1])))))) and
-  (perm(table2, table) = true))))) or ((key1 = low1) and
-  ((table2 = table) and (table2 = table1)))) ->
-  ((((forall x1:int. (((1 <= x1) and (x1 <= low2)) ->
-     (to_rep((table3[x1])) <= to_rep((table3[(x1 + 1)]))))) and
-  (forall x1:int. (((low2 <= x1) and (x1 <= 100)) ->
-  (to_rep((table3[low2])) <= to_rep((table3[x1])))))) and (perm(table3,
-  table) = true)) -> (((((1 <= 100) -> in_range2(key2)) and ((1 <= 99) ->
-  in_range4(low2))) and ((1 <= low2) and (low2 <= 99))) -> (((1 <= x) and
-  (x <= low2)) -> in_range1((x + 1)))))))))))
+  (forall x2:int. (((low1 <= x2) and (x2 <= 100)) ->
+  (to_rep((table[o])) <= to_rep((table[x2]))))))))
+
+axiom H6 : (result1 = key)
+
+axiom H7 : (key2 = o)
+
+axiom H8 : ((not (key2 = low1)) ->
+  ((to_rep((table2[low1])) = to_rep((table[key2]))) and
+  ((to_rep((table2[key2])) = to_rep((table[low1]))) and
+  ((forall x2:int. (((1 <= x2) and (x2 <= 100)) -> (((not (x2 = low1)) and
+   (not (x2 = key2))) -> (to_rep((table2[x2])) = to_rep((table[x2])))))) and
+  (perm(table2, table) = true)))))
+
+axiom H9 : ((key2 = low1) -> (table2 = table))
+
+axiom H10 : ((key2 = low1) -> (table2 = table1))
+
+axiom H11 :
+  (((forall x2:int. (((1 <= x2) and (x2 <= low2)) ->
+    (to_rep((table3[x2])) <= to_rep((table3[(x2 + 1)]))))) and
+  (forall x2:int. (((low2 <= x2) and (x2 <= 100)) ->
+  (to_rep((table3[low2])) <= to_rep((table3[x2])))))) and (perm(table3,
+  table) = true))
+
+axiom H12 : ((((1 <= 100) -> in_range2(key3)) and ((1 <= 99) ->
+  in_range4(low2))) and ((1 <= low2) and (low2 <= 99)))
+
+axiom H13 : (1 <= x1)
+
+axiom H14 : (x1 <= low2)
+
+ (* File "t3q5.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : in_range1((x1 + 1))

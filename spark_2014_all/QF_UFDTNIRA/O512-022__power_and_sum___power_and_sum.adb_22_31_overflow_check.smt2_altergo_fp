@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -195,15 +195,104 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic result__ : int
+
+logic i : int
+
+logic totalsum : int
+
+logic temp___508 : int
+
+logic temp___507 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic totalsum1 : int
+
+logic i2 : int
+
+logic totalsum2 : int
+
+logic result2 : int
+
+logic totalsum3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic totalsum4 : int
+
+logic i5 : int
+
+logic totalsum5 : int
+
+logic i6 : int
+
+logic totalsum6 : int
+
+logic i7 : int
+
+logic totalsum7 : int
+
+logic i8 : int
+
+logic totalsum8 : int
+
+logic i9 : int
+
+logic totalsum9 : int
+
+logic result4 : int
+
+logic result__1 : int
+
+logic result__2 : int
+
+logic i10 : int
+
+logic totalsum10 : int
+
+logic result__3 : int
+
+logic i11 : int
+
+logic totalsum11 : int
+
+axiom H : in_range3(n)
+
+axiom H1 : ((1 <= 2147483647) -> in_range3(result__))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 1)
+
+axiom H4 : in_range3(i1)
+
+axiom H5 : (result1 = totalsum)
+
+axiom H6 : (totalsum1 = 0)
+
+axiom H7 : in_range2(totalsum1)
+
+axiom H8 : (i1 <= n)
+
+axiom H9 : ((2 * totalsum2) = (i2 * (i2 - 1)))
+
+axiom H10 : ((((1 <= 2147483647) -> in_range3(i2)) and ((0 <= 2147483647) ->
+  in_range2(totalsum2))) and (i2 <= n))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall totalsum:int. forall result:int.
-  forall i1:int. forall result1:int. forall totalsum1:int. forall i2:int.
-  forall totalsum2:int. (in_range3(n) -> (((1 <= 2147483647) ->
-  in_range3(result__)) -> ((({ int__content = result } = { int__content = i
-  }) and (i1 = 1)) -> (in_range3(i1) -> ((({ int__content = result1 } = {
-  int__content = totalsum }) and (totalsum1 = 0)) -> (in_range2(totalsum1) ->
-  ((i1 <= n) -> (((2 * totalsum2) = (i2 * (i2 - 1))) ->
-  (((((1 <= 2147483647) -> in_range3(i2)) and ((0 <= 2147483647) ->
-  in_range2(totalsum2))) and (i2 <= n)) ->
-  in_range1((totalsum2 + i2))))))))))))
+goal WP_parameter_def : in_range1((totalsum2 + i2))

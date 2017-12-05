@@ -291,15 +291,93 @@ axiom def_axiom :
   ((not (temp___4358 = temp___4356)) -> ((temp___4353(temp___4355,
   temp___4356, temp___4357)[temp___4358]) = (temp___4355[temp___4358])))))))
 
+logic a : (int,et1) farray
+
+logic j : int
+
+logic f : int
+
+logic t : (int,et1) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic t1 : (int,et1) farray
+
+logic result1 : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic result2 : int
+
+logic j1 : int
+
+logic result3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic j3 : int
+
+logic f3 : int
+
+logic t2 : (int,et1) farray
+
+logic a4 : (int,et1) farray
+
+logic j4 : int
+
+logic f4 : int
+
+logic t3 : (int,et1) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : ((1 <= 10) -> in_range1(j))
+
+axiom H3 : ((0 <= 99) -> in_range2(f))
+
+axiom H4 : (bool_eq4(a1, 1, 10, temp___4353(t1, i, e), 1, 10) = true)
+
+axiom H5 : ((i = 10) -> (result2 = j))
+
+axiom H6 : ((i = 10) -> (j1 = 1))
+
+axiom H7 : ((not (i = 10)) -> ((o2 = (i + 1)) and in_range1((i + 1))))
+
+axiom H8 : ((not (i = 10)) -> (result3 = j))
+
+axiom H9 : ((not (i = 10)) -> (j2 = o2))
+
+axiom H10 : ((not (i = 10)) -> (j1 = j2))
+
+axiom H11 : (not (e = 0))
+
  (* File "ar.ads", line 174, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall f:int. forall o:int. forall t:(int,et1) farray.
-  forall a:(int,et1) farray. forall result:int. forall j1:int.
-  forall result1:int. forall j2:int. (in_range1(i) -> (in_range2(e) ->
-  (((1 <= 10) -> in_range1(j)) -> (((0 <= 99) -> in_range2(f)) ->
-  ((bool_eq4(a, 1, 10, temp___4353(t, i, e), 1, 10) = true) ->
-  ((((i = 10) and (({ int__content = result } = { int__content = j }) and
-  (j1 = 1))) or ((not (i = 10)) and ((((o = (i + 1)) and
-  in_range1((i + 1))) and (({ int__content = result1 } = { int__content = j
-  }) and (j2 = o))) and (j1 = j2)))) -> ((not (e = 0)) ->
-  in_range2((e - 1))))))))))
+goal WP_parameter_def : in_range2((e - 1))

@@ -35,5 +35,6 @@
 (assert (in_range x))
 (assert (not (= x 0)))
 (assert (not (= x 1)))
+(assert (not false))
 (check-sat)
 (exit)

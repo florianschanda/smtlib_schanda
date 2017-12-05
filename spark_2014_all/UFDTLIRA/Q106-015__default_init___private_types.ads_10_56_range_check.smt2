@@ -64,6 +64,7 @@
 (assert (= first one))
 (declare-const us Int)
 (declare-const temp___147 Int)
+(declare-const us1 Int)
 (assert (and (= us 0) (dynamic_property first 2147483647 0)))
 (assert (= temp___147 0))
 (assert (not (dynamic_property first 2147483647 temp___147)))

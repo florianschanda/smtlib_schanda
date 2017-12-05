@@ -54,6 +54,8 @@
 (declare-const right Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const o Int)
+(declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range right))
 (assert (< 0 right))
 (assert (and (= o (id (- 2147483648))) (and (in_range o) (= o (- 2147483648)))))

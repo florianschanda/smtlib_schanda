@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -674,12 +674,39 @@ logic obj4 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic total_area : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic result : int
+
+logic total_area1 : int
+
+logic total_area2 : int
+
+logic total_area3 : int
+
+axiom H : in_range1(total_area)
+
+axiom H1 : (has_stored_area1(obj4, { us_split_fields1 = {
+  rec__object__t__area = obj; rec__object__t__max_width = obj1;
+  rec__object__t__max_height = obj2; rec__ext__ = obj3 }; attr__tag = obj4
+  }) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall total_area:int. (in_range1(total_area) -> ((has_stored_area1(obj4,
-  { us_split_fields1 = { rec__object__t__area = obj;
-  rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
-  rec__ext__ = obj3 }; attr__tag = obj4 }) = true) -> (has_stored_area1(obj4,
-  { us_split_fields1 = { rec__object__t__area = obj;
-  rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
-  rec__ext__ = obj3 }; attr__tag = obj4 }) = true))))
+goal WP_parameter_def : (has_stored_area1(obj4, { us_split_fields1 = {
+  rec__object__t__area = obj; rec__object__t__max_width = obj1;
+  rec__object__t__max_height = obj2; rec__ext__ = obj3 }; attr__tag = obj4
+  }) = true)

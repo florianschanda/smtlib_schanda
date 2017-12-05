@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -355,15 +355,41 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,(int,value) farray) farray
+
+logic o : value
+
+logic o1 : (int,value) farray
+
+logic o2 : (int,(int,value) farray) farray
+
+logic result : (int,(int,value) farray) farray
+
+logic a1 : (int,(int,value) farray) farray
+
+logic a2 : (int,(int,value) farray) farray
+
+logic a3 : (int,(int,value) farray) farray
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : (to_rep(o) = v)
+
+axiom H4 : (o1 = ((a[i])[j <- o]))
+
+axiom H5 : (o2 = (a[i <- o1]))
+
+axiom H6 : (result = a)
+
+axiom H7 : (a1 = o2)
+
+axiom H8 : (a1 = a2)
+
+axiom H9 : (a3 = a1)
+
  (* File "complex_arrays.adb", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,value) farray) farray. forall o:value.
-  forall o1:(int,value) farray. forall o2:(int,(int,value) farray) farray.
-  forall result:(int,(int,value) farray) farray.
-  forall a1:(int,(int,value) farray) farray.
-  forall a2:(int,(int,value) farray) farray.
-  forall a3:(int,(int,value) farray) farray. ((in_range(i) and
-  (in_range(j) and (in_range1(v) and (((((to_rep(o) = v) and
-  (o1 = ((a[i])[j <- o]))) and (o2 = (a[i <- o1]))) and ((result = a) and
-  (a1 = o2))) and ((a1 = a2) and (a3 = a1)))))) ->
-  (to_rep(((a2[i])[j])) = 17)))
+goal WP_parameter_def : (to_rep(((a2[i])[j])) = 17)

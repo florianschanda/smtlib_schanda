@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -247,16 +247,74 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : map
+
+logic tmp : int
+
+logic o : value
+
+logic o1 : map
+
+logic o2 : value
+
+logic o3 : map
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : map
+
+logic a1 : map
+
+logic result2 : map
+
+logic a2 : map
+
+logic a3 : map
+
+logic tmp2 : int
+
+logic a4 : map
+
+logic tmp3 : int
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : (not (i = j))
+
+axiom H3 : (((- 23) <= 69) -> in_range1(tmp))
+
+axiom H4 : (result = tmp)
+
+axiom H5 : (tmp1 = to_rep(get(a, i, j)))
+
+axiom H6 : (to_rep(o) = to_rep(get(a, j, i)))
+
+axiom H7 : (o1 = set(a, i, j, o))
+
+axiom H8 : (result1 = a)
+
+axiom H9 : (a1 = o1)
+
+axiom H10 : (to_rep(o2) = tmp1)
+
+axiom H11 : (o3 = set(a1, j, i, o2))
+
+axiom H12 : (result2 = a1)
+
+axiom H13 : (a2 = o3)
+
+axiom H14 : (tmp2 = tmp1)
+
+axiom H15 : (a2 = a3)
+
+axiom H16 : (tmp3 = tmp1)
+
+axiom H17 : (a4 = a2)
+
  (* File "arrays_multidim.adb", line 121, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:map. forall tmp:int. forall o:value. forall o1:map.
-  forall o2:value. forall o3:map. forall result:int. forall tmp1:int.
-  forall result1:map. forall a1:map. forall result2:map. forall a2:map.
-  forall a3:map. forall tmp2:int. forall a4:map. forall tmp3:int.
-  ((in_range(i) and (in_range(j) and ((not (i = j)) and (((((-23) <= 69) ->
-  in_range1(tmp)) and (((result = tmp) and (tmp1 = to_rep(get(a, i, j)))) and
-  ((((to_rep(o) = to_rep(get(a, j, i))) and (o1 = set(a, i, j, o))) and
-  ((result1 = a) and (a1 = o1))) and (((to_rep(o2) = tmp1) and (o3 = set(a1,
-  j, i, o2))) and ((result2 = a1) and (a2 = o3)))))) and (((tmp2 = tmp1) and
-  (a2 = a3)) and ((tmp3 = tmp1) and (a4 = a2))))))) -> (not (bool_eq3(a3, 0,
-  1001, 0, 1001, a, 0, 1001, 0, 1001) = true))))
+goal WP_parameter_def : (not (bool_eq3(a3, 0, 1001, 0, 1001, a, 0, 1001, 0,
+  1001) = true))

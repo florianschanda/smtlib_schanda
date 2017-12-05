@@ -72,6 +72,7 @@
 (define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const handler__split_fields positive)
+(declare-const o Int)
 (assert (not (in_range (+ (to_rep handler__split_fields) 0))))
 (check-sat)
 (exit)

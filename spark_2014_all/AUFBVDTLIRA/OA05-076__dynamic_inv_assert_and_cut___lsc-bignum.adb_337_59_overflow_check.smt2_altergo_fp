@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1186,34 +1186,782 @@ logic attr__ATTRIBUTE_ADDRESS16 : int
 
 axiom num_of_boolean__post_axiom : true
 
- (* File "lsc-bignum.adb", line 158, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a_msw:t. forall i:int. forall o:int. forall o1:int.
-  forall o2:us_rep. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:us_rep. forall o8:us_rep. forall o9:us_rep.
-  forall o10:int. forall o11:int. forall o12:int. forall o13:int.
-  forall o14:us_rep. forall o15:int. forall o16:int. forall o17:us_rep.
-  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
-  forall o22:us_rep. forall o23:us_rep. forall o24:int. forall o25:int.
-  forall o26:int. forall o27:int. forall o28:us_rep. forall o29:us_rep.
-  forall o30:us_rep. forall o31:int. forall o32:int. forall o33:us_rep.
-  forall o34:us_rep. forall o35:int. forall o36:int. forall o37:int.
-  forall o38:int. forall o39:us_rep. forall o40:us_rep. forall o41:int.
-  forall o42:int. forall o43:int. forall o44:int. forall o45:us_rep.
-  forall o46:us_rep. forall o47:int. forall o48:int. forall o49:int.
-  forall o50:int. forall o51:us_rep. forall o52:us_rep. forall o53:us_rep.
-  forall o54:us_rep. forall o55:us_rep. forall o56:int. forall o57:int.
-  forall o58:int. forall o59:int. forall o60:us_rep. forall o61:us_rep.
-  forall o62:us_rep. forall o63:us_rep. forall o64:bool.
-  forall a:(int,word32) farray. forall result:t. forall a_msw1:t.
-  forall result1:int. forall i1:int. forall a1:(int,word32) farray.
-  forall a_msw2:t. forall i2:int. (dynamic_property(0, 2147483646,
-  to_rep(a__first), to_rep(a__last)) -> (in_range2(a_first) ->
-  (in_range2(a_last) -> (dynamic_property(0, 2147483646, to_rep(first(b1)),
-  to_rep(last(b1))) -> (in_range2(b_first) -> (dynamic_property(0,
-  2147483646, to_rep(first(c1)), to_rep(last(c1))) -> (in_range2(c_first) ->
-  (dynamic_property(0, 2147483646, to_rep(first(m1)), to_rep(last(m1))) ->
-  (in_range2(m_first) -> ((((to_rep(a__first) <= a_first) and
+logic carry : bool
+
+logic carry1 : t
+
+logic carry2 : t
+
+logic a_msw : t
+
+logic bi : t
+
+logic u : t
+
+logic i : int
+
+logic o : us_rep
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : us_rep
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : us_rep
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : us_rep
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : bool
+
+logic o23 : bool
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : bool
+
+logic o31 : bool
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : bool
+
+logic o39 : bool
+
+logic temp___612 : (int,word32) farray
+
+logic temp___610 : t
+
+logic temp___609 : t
+
+logic temp___608 : t
+
+logic temp___607 : int
+
+logic temp___606 : t
+
+logic temp___605 : t
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : us_rep
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : us_rep
+
+logic o50 : us_rep
+
+logic o51 : us_rep
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : us_rep
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : us_rep
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : us_rep
+
+logic o65 : us_rep
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : us_rep
+
+logic o71 : us_rep
+
+logic o72 : us_rep
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : us_rep
+
+logic o76 : us_rep
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : us_rep
+
+logic o82 : us_rep
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : us_rep
+
+logic o88 : us_rep
+
+logic o89 : int
+
+logic o90 : int
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : us_rep
+
+logic o94 : us_rep
+
+logic o95 : us_rep
+
+logic o96 : us_rep
+
+logic o97 : us_rep
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : int
+
+logic o102 : us_rep
+
+logic o103 : us_rep
+
+logic o104 : us_rep
+
+logic o105 : us_rep
+
+logic o106 : bool
+
+logic o107 : int
+
+logic o108 : int
+
+logic temp___603 : int
+
+logic o109 : int
+
+logic o110 : word32
+
+logic o111 : t
+
+logic o112 : int
+
+logic o113 : word32
+
+logic o114 : int
+
+logic o115 : word32
+
+logic o116 : t
+
+logic o117 : t
+
+logic o118 : t
+
+logic o119 : t
+
+logic o120 : t
+
+logic o121 : int
+
+logic o122 : word32
+
+logic o123 : t
+
+logic lsc__bignum__single_add_mult_mult__a : t
+
+logic o124 : int
+
+logic o125 : word32
+
+logic o126 : t
+
+logic o127 : int
+
+logic o128 : word32
+
+logic o129 : t
+
+logic o130 : word32
+
+logic o131 : int
+
+logic o132 : (int,word32) farray
+
+logic o133 : int
+
+logic o134 : int
+
+logic o135 : int
+
+logic o136 : word32
+
+logic o137 : int
+
+logic o138 : (int,word32) farray
+
+logic o139 : int
+
+logic o140 : word32
+
+logic o141 : t
+
+logic o142 : bool
+
+logic o143 : t
+
+logic o144 : t
+
+logic o145 : int
+
+logic o146 : int
+
+logic o147 : int
+
+logic o148 : int
+
+logic o149 : us_rep
+
+logic o150 : int
+
+logic o151 : int
+
+logic o152 : int
+
+logic o153 : int
+
+logic o154 : us_rep
+
+logic o155 : us_rep
+
+logic o156 : us_rep
+
+logic o157 : int
+
+logic o158 : int
+
+logic o159 : int
+
+logic o160 : int
+
+logic o161 : us_rep
+
+logic o162 : int
+
+logic o163 : int
+
+logic o164 : int
+
+logic o165 : int
+
+logic o166 : us_rep
+
+logic o167 : int
+
+logic o168 : int
+
+logic o169 : int
+
+logic o170 : int
+
+logic o171 : us_rep
+
+logic o172 : us_rep
+
+logic o173 : int
+
+logic o174 : int
+
+logic o175 : int
+
+logic o176 : int
+
+logic o177 : us_rep
+
+logic o178 : us_rep
+
+logic o179 : us_rep
+
+logic o180 : int
+
+logic o181 : int
+
+logic o182 : int
+
+logic o183 : int
+
+logic o184 : us_rep
+
+logic o185 : us_rep
+
+logic o186 : int
+
+logic o187 : int
+
+logic o188 : int
+
+logic o189 : int
+
+logic o190 : us_rep
+
+logic o191 : us_rep
+
+logic o192 : int
+
+logic o193 : int
+
+logic o194 : int
+
+logic o195 : int
+
+logic o196 : us_rep
+
+logic o197 : us_rep
+
+logic o198 : int
+
+logic o199 : int
+
+logic o200 : int
+
+logic o201 : int
+
+logic o202 : us_rep
+
+logic o203 : us_rep
+
+logic o204 : us_rep
+
+logic o205 : us_rep
+
+logic o206 : us_rep
+
+logic o207 : int
+
+logic o208 : int
+
+logic o209 : int
+
+logic o210 : int
+
+logic o211 : us_rep
+
+logic o212 : us_rep
+
+logic o213 : us_rep
+
+logic o214 : us_rep
+
+logic o215 : bool
+
+logic o216 : bool
+
+logic o217 : int
+
+logic o218 : int
+
+logic o219 : int
+
+logic o220 : int
+
+logic o221 : int
+
+logic o222 : int
+
+logic o223 : int
+
+logic o224 : int
+
+logic o225 : us_rep
+
+logic o226 : int
+
+logic o227 : int
+
+logic o228 : int
+
+logic o229 : int
+
+logic o230 : us_rep
+
+logic o231 : us_rep
+
+logic o232 : int
+
+logic o233 : int
+
+logic o234 : int
+
+logic o235 : int
+
+logic o236 : us_rep
+
+logic o237 : us_rep
+
+logic o238 : us_rep
+
+logic o239 : int
+
+logic o240 : int
+
+logic o241 : int
+
+logic o242 : int
+
+logic o243 : us_rep
+
+logic o244 : us_rep
+
+logic o245 : int
+
+logic o246 : int
+
+logic o247 : int
+
+logic o248 : int
+
+logic o249 : us_rep
+
+logic o250 : us_rep
+
+logic carry3 : bool
+
+logic carry11 : t
+
+logic carry21 : t
+
+logic bi1 : t
+
+logic u1 : t
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic a : (int,word32) farray
+
+logic result5 : t
+
+logic a_msw1 : t
+
+logic result6 : int
+
+logic i1 : int
+
+logic a1 : (int,word32) farray
+
+logic carry12 : t
+
+logic carry22 : t
+
+logic a_msw2 : t
+
+logic bi2 : t
+
+logic u2 : t
+
+logic i2 : int
+
+logic result7 : t
+
+logic carry13 : t
+
+logic result8 : t
+
+logic carry23 : t
+
+logic result9 : t
+
+logic bi3 : t
+
+logic result10 : t
+
+logic u3 : t
+
+logic carry14 : t
+
+logic carry24 : t
+
+logic lsc__bignum__single_add_mult_mult__a1 : t
+
+logic result11 : (int,word32) farray
+
+logic a2 : (int,word32) farray
+
+logic a3 : (int,word32) farray
+
+logic carry15 : t
+
+logic carry25 : t
+
+logic result12 : (int,word32) farray
+
+logic a4 : (int,word32) farray
+
+logic result13 : t
+
+logic a_msw3 : t
+
+logic result14 : int
+
+logic i3 : int
+
+logic a5 : (int,word32) farray
+
+logic carry16 : t
+
+logic carry26 : t
+
+logic a_msw4 : t
+
+logic bi4 : t
+
+logic u4 : t
+
+logic i4 : int
+
+logic a6 : (int,word32) farray
+
+logic carry17 : t
+
+logic carry27 : t
+
+logic a_msw5 : t
+
+logic bi5 : t
+
+logic u5 : t
+
+logic i5 : int
+
+logic a7 : (int,word32) farray
+
+logic carry18 : t
+
+logic carry28 : t
+
+logic a_msw6 : t
+
+logic bi6 : t
+
+logic u6 : t
+
+logic i6 : int
+
+logic a8 : (int,word32) farray
+
+logic carry19 : t
+
+logic carry29 : t
+
+logic a_msw7 : t
+
+logic bi7 : t
+
+logic u7 : t
+
+logic i7 : int
+
+logic a9 : (int,word32) farray
+
+logic carry110 : t
+
+logic carry210 : t
+
+logic a_msw8 : t
+
+logic bi8 : t
+
+logic u8 : t
+
+logic i8 : int
+
+logic a10 : (int,word32) farray
+
+logic carry111 : t
+
+logic carry211 : t
+
+logic a_msw9 : t
+
+logic bi9 : t
+
+logic u9 : t
+
+logic i9 : int
+
+logic result15 : bool
+
+logic a11 : (int,word32) farray
+
+logic carry4 : bool
+
+logic a12 : (int,word32) farray
+
+logic carry5 : bool
+
+logic a13 : (int,word32) farray
+
+logic carry6 : bool
+
+logic a14 : (int,word32) farray
+
+logic carry7 : bool
+
+logic carry112 : t
+
+logic carry212 : t
+
+logic a_msw10 : t
+
+logic bi10 : t
+
+logic u10 : t
+
+logic i10 : int
+
+logic a15 : (int,word32) farray
+
+logic carry8 : bool
+
+logic carry113 : t
+
+logic carry213 : t
+
+logic a_msw11 : t
+
+logic bi11 : t
+
+logic u11 : t
+
+logic i11 : int
+
+axiom H : dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(a_last)
+
+axiom H3 : dynamic_property(0, 2147483646, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H4 : in_range2(b_first)
+
+axiom H5 : dynamic_property(0, 2147483646, to_rep(first(c1)),
+  to_rep(last(c1)))
+
+axiom H6 : in_range2(c_first)
+
+axiom H7 : dynamic_property(0, 2147483646, to_rep(first(m1)),
+  to_rep(last(m1)))
+
+axiom H8 : in_range2(m_first)
+
+axiom H9 : true
+
+axiom H10 : (((to_rep(a__first) <= a_first) and
   (a_first <= to_rep(a__last))) and (((to_rep(a__first) <= a_last) and
   (a_last <= to_rep(a__last))) and ((a_first <  a_last) and
   (((to_rep(first(b1)) <= b_first) and (b_first <= to_rep(last(b1)))) and
@@ -1230,71 +1978,188 @@ goal WP_parameter_def :
   ((a_last - a_first) + 1))) = true) and ((olt(from_word32(of_int(1)),
   num_of_big_int({ elts = m; rt = m1 }, m_first,
   ((a_last - a_first) + 1))) = true) and (add(of_int(1), mul(m_inv,
-  to_rep1((m[m_first])))) = of_int(0))))))))))))) ->
-  ((forall k:int. (((a_first <= k) and (k <= a_last)) ->
-   (to_rep1((a[k])) = of_int(0)))) ->
-  ((({ t__content = result } = { t__content = a_msw }) and
-  (a_msw1 = of_int(0))) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = a_first)) -> (((a_first <= i1) and (i1 <= a_last)) ->
-  (((oeq(omod(oadd(num_of_big_int({ elts = a1; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }, a_first, ((a_last - a_first) + 1)),
-  omultiply(oexpon(base(void), ((a_last - a_first) + 1)),
-  from_word32(a_msw2))), num_of_big_int({ elts = m; rt = m1 }, m_first,
-  ((a_last - a_first) + 1))), omod(omultiply(omultiply(num_of_big_int({
-  elts = b; rt = b1 }, b_first, (i2 - a_first)), num_of_big_int({ elts = c;
-  rt = c1 }, c_first, ((a_last - a_first) + 1))),
-  oexpon(inverse(num_of_big_int({ elts = m; rt = m1 }, m_first,
-  ((a_last - a_first) + 1)), base(void)), (i2 - a_first))), num_of_big_int({
-  elts = m; rt = m1 }, m_first, ((a_last - a_first) + 1)))) = true) and
-  (olt(oadd(num_of_big_int({ elts = a1; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }, a_first, ((a_last - a_first) + 1)),
-  omultiply(oexpon(base(void), ((a_last - a_first) + 1)),
-  from_word32(a_msw2))), osubtract(omultiply(from_word32(of_int(2)),
-  num_of_big_int({ elts = m; rt = m1 }, m_first, ((a_last - a_first) + 1))),
-  from_word32(of_int(1)))) = true)) -> ((((a_first <= a_last) ->
-  dynamic_property1(a_first, a_last, i2)) and ((a_first <= i2) and
-  (i2 <= a_last))) -> ((((o62 = from_word32(of_int(1))) and
-  ((((((((o56 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o57 = (o56 + 1))) and ((o58 = o57) and in_range1(o57))) and
-  ((o59 = o58) and in_range2(o58))) and (o60 = num_of_big_int({ elts = m;
-  rt = m1 }, m_first, o59))) and ((o55 = from_word32(of_int(2))) and
-  (o61 = omultiply(o55, o60)))) and (o63 = osubtract(o61, o62)))) and
-  ((((o52 = from_word32(a_msw2)) and (((((((o47 = (a_last - a_first)) and
-  in_range1((a_last - a_first))) and (o48 = (o47 + 1))) and ((o49 = o48) and
-  in_range1(o48))) and ((o50 = o49) and in_range2(o49))) and
-  (((o46 = base(void)) and (o46 = oexpon(from_word32(of_int(2)), 32))) and
-  (o51 = oexpon(o46, o50)))) and (o53 = omultiply(o51, o52)))) and
-  (((((((o41 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o42 = (o41 + 1))) and ((o43 = o42) and in_range1(o42))) and
-  ((o44 = o43) and in_range2(o43))) and (o45 = num_of_big_int({ elts = a1;
-  rt = mk(to_rep(a__first), to_rep(a__last)) }, a_first, o44))) and
-  (o54 = oadd(o45, o53)))) and (o64 = olt(o54, o63)))) ->
-  ((((((((o35 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o36 = (o35 + 1))) and ((o37 = o36) and in_range1(o36))) and
-  ((o38 = o37) and in_range2(o37))) and (o39 = num_of_big_int({ elts = m;
-  rt = m1 }, m_first, o38))) and ((((((o31 = (i2 - a_first)) and
-  in_range1((i2 - a_first))) and ((o32 = o31) and in_range2(o31))) and
-  ((((o29 = base(void)) and (o29 = oexpon(from_word32(of_int(2)), 32))) and
-  (((((((o24 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o25 = (o24 + 1))) and ((o26 = o25) and in_range1(o25))) and
-  ((o27 = o26) and in_range2(o26))) and (o28 = num_of_big_int({ elts = m;
-  rt = m1 }, m_first, o27))) and (o30 = inverse(o28, o29)))) and
-  (o33 = oexpon(o30, o32)))) and ((((((((o18 = (a_last - a_first)) and
-  in_range1((a_last - a_first))) and (o19 = (o18 + 1))) and ((o20 = o19) and
-  in_range1(o19))) and ((o21 = o20) and in_range2(o20))) and
-  (o22 = num_of_big_int({ elts = c; rt = c1 }, c_first, o21))) and
-  (((((o15 = (i2 - a_first)) and in_range1((i2 - a_first))) and
-  ((o16 = o15) and in_range2(o15))) and (o17 = num_of_big_int({ elts = b;
-  rt = b1 }, b_first, o16))) and (o23 = omultiply(o17, o22)))) and
-  (o34 = omultiply(o23, o33)))) and (o40 = omod(o34, o39)))) ->
-  (((((((o10 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o11 = (o10 + 1))) and ((o12 = o11) and in_range1(o11))) and
-  ((o13 = o12) and in_range2(o12))) and (o14 = num_of_big_int({ elts = m;
-  rt = m1 }, m_first, o13))) -> (((o8 = from_word32(a_msw2)) and
-  (((((((o3 = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o4 = (o3 + 1))) and ((o5 = o4) and in_range1(o4))) and ((o6 = o5) and
-  in_range2(o5))) and (((o2 = base(void)) and
-  (o2 = oexpon(from_word32(of_int(2)), 32))) and (o7 = oexpon(o2, o6)))) and
-  (o9 = omultiply(o7, o8)))) -> ((((o = (a_last - a_first)) and
-  in_range1((a_last - a_first))) and (o1 = (o + 1))) ->
-  in_range1(o1)))))))))))))))))))))))
+  to_rep1((m[m_first])))) = of_int(0)))))))))))))
+
+axiom H11 : true
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : true
+
+axiom H15 : true
+
+axiom H16 :
+  (forall k:int. (((a_first <= k) and (k <= a_last)) ->
+  (to_rep1((a[k])) = of_int(0))))
+
+axiom H17 : (result5 = a_msw)
+
+axiom H18 : (a_msw1 = of_int(0))
+
+axiom H19 : (result6 = i)
+
+axiom H20 : (i1 = a_first)
+
+axiom H21 : (a_first <= i1)
+
+axiom H22 : (i1 <= a_last)
+
+axiom H23 : ((oeq(omod(oadd(num_of_big_int({ elts = a1; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, a_first,
+  ((a_last - a_first) + 1)), omultiply(oexpon(base(void),
+  ((a_last - a_first) + 1)), from_word32(a_msw2))), num_of_big_int({ elts =
+  m; rt = m1 }, m_first, ((a_last - a_first) + 1))),
+  omod(omultiply(omultiply(num_of_big_int({ elts = b; rt = b1 }, b_first,
+  (i2 - a_first)), num_of_big_int({ elts = c; rt = c1 }, c_first,
+  ((a_last - a_first) + 1))), oexpon(inverse(num_of_big_int({ elts = m; rt =
+  m1 }, m_first, ((a_last - a_first) + 1)), base(void)), (i2 - a_first))),
+  num_of_big_int({ elts = m; rt = m1 }, m_first,
+  ((a_last - a_first) + 1)))) = true) and (olt(oadd(num_of_big_int({ elts =
+  a1; rt = mk(to_rep(a__first), to_rep(a__last)) }, a_first,
+  ((a_last - a_first) + 1)), omultiply(oexpon(base(void),
+  ((a_last - a_first) + 1)), from_word32(a_msw2))),
+  osubtract(omultiply(from_word32(of_int(2)), num_of_big_int({ elts = m; rt =
+  m1 }, m_first, ((a_last - a_first) + 1))),
+  from_word32(of_int(1)))) = true))
+
+axiom H24 : (((a_first <= a_last) -> dynamic_property1(a_first, a_last,
+  i2)) and ((a_first <= i2) and (i2 <= a_last)))
+
+axiom H25 : (o104 = from_word32(of_int(1)))
+
+axiom H26 : ((o98 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H27 : (o99 = (o98 + 1))
+
+axiom H28 : ((o100 = o99) and in_range1(o99))
+
+axiom H29 : ((o101 = o100) and in_range2(o100))
+
+axiom H30 : (o102 = num_of_big_int({ elts = m; rt = m1 }, m_first, o101))
+
+axiom H31 : (o97 = from_word32(of_int(2)))
+
+axiom H32 : (o103 = omultiply(o97, o102))
+
+axiom H33 : (o105 = osubtract(o103, o104))
+
+axiom H34 : (o94 = from_word32(a_msw2))
+
+axiom H35 : ((o89 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H36 : (o90 = (o89 + 1))
+
+axiom H37 : ((o91 = o90) and in_range1(o90))
+
+axiom H38 : ((o92 = o91) and in_range2(o91))
+
+axiom H39 : ((o88 = base(void)) and (o88 = oexpon(from_word32(of_int(2)),
+  32)))
+
+axiom H40 : (o93 = oexpon(o88, o92))
+
+axiom H41 : (o95 = omultiply(o93, o94))
+
+axiom H42 : ((o83 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H43 : (o84 = (o83 + 1))
+
+axiom H44 : ((o85 = o84) and in_range1(o84))
+
+axiom H45 : ((o86 = o85) and in_range2(o85))
+
+axiom H46 : (o87 = num_of_big_int({ elts = a1; rt = mk(to_rep(a__first),
+  to_rep(a__last)) }, a_first, o86))
+
+axiom H47 : (o96 = oadd(o87, o95))
+
+axiom H48 : (o106 = olt(o96, o105))
+
+axiom H49 : ((o77 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H50 : (o78 = (o77 + 1))
+
+axiom H51 : ((o79 = o78) and in_range1(o78))
+
+axiom H52 : ((o80 = o79) and in_range2(o79))
+
+axiom H53 : (o81 = num_of_big_int({ elts = m; rt = m1 }, m_first, o80))
+
+axiom H54 : ((o73 = (i2 - a_first)) and in_range1((i2 - a_first)))
+
+axiom H55 : ((o74 = o73) and in_range2(o73))
+
+axiom H56 : ((o71 = base(void)) and (o71 = oexpon(from_word32(of_int(2)),
+  32)))
+
+axiom H57 : ((o66 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H58 : (o67 = (o66 + 1))
+
+axiom H59 : ((o68 = o67) and in_range1(o67))
+
+axiom H60 : ((o69 = o68) and in_range2(o68))
+
+axiom H61 : (o70 = num_of_big_int({ elts = m; rt = m1 }, m_first, o69))
+
+axiom H62 : (o72 = inverse(o70, o71))
+
+axiom H63 : (o75 = oexpon(o72, o74))
+
+axiom H64 : ((o60 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H65 : (o61 = (o60 + 1))
+
+axiom H66 : ((o62 = o61) and in_range1(o61))
+
+axiom H67 : ((o63 = o62) and in_range2(o62))
+
+axiom H68 : (o64 = num_of_big_int({ elts = c; rt = c1 }, c_first, o63))
+
+axiom H69 : ((o57 = (i2 - a_first)) and in_range1((i2 - a_first)))
+
+axiom H70 : ((o58 = o57) and in_range2(o57))
+
+axiom H71 : (o59 = num_of_big_int({ elts = b; rt = b1 }, b_first, o58))
+
+axiom H72 : (o65 = omultiply(o59, o64))
+
+axiom H73 : (o76 = omultiply(o65, o75))
+
+axiom H74 : (o82 = omod(o76, o81))
+
+axiom H75 : ((o52 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H76 : (o53 = (o52 + 1))
+
+axiom H77 : ((o54 = o53) and in_range1(o53))
+
+axiom H78 : ((o55 = o54) and in_range2(o54))
+
+axiom H79 : (o56 = num_of_big_int({ elts = m; rt = m1 }, m_first, o55))
+
+axiom H80 : (o50 = from_word32(a_msw2))
+
+axiom H81 : ((o45 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H82 : (o46 = (o45 + 1))
+
+axiom H83 : ((o47 = o46) and in_range1(o46))
+
+axiom H84 : ((o48 = o47) and in_range2(o47))
+
+axiom H85 : ((o44 = base(void)) and (o44 = oexpon(from_word32(of_int(2)),
+  32)))
+
+axiom H86 : (o49 = oexpon(o44, o48))
+
+axiom H87 : (o51 = omultiply(o49, o50))
+
+axiom H88 : ((o40 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H89 : (o41 = (o40 + 1))
+
+ (* File "lsc-bignum.adb", line 158, characters 0-0 *)
+goal WP_parameter_def : in_range1(o41)

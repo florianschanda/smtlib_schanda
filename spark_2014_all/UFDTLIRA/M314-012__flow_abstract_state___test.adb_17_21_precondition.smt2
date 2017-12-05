@@ -39,6 +39,7 @@
 (assert true)
 (declare-const i Int)
 (declare-const state us_private)
+(declare-const o Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range i)))
 (assert (not (not (= (is_empty state) true))))
 (check-sat)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -478,13 +478,34 @@ logic b1 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic j : int
+
+logic us : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : in_range1(last4)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H3 : ((length({ elts = b; rt = b1 }) <= length({ elts = a; rt = a1
+  })) and ((to_rep(last(a1)) <  2147483647) and
+  (last4 <= ((to_rep(last(a1)) + 1) - length({ elts = b; rt = b1 })))))
+
+axiom H4 : (to_rep(first(a1)) <= j)
+
+axiom H5 : (j <= last4)
+
  (* File "search_ter_p.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> (in_range1(last4) -> (dynamic_property(1, 2147483647,
-  to_rep(first(b1)), to_rep(last(b1))) -> (((length({ elts = b; rt = b1
-  }) <= length({ elts = a; rt = a1 })) and
-  ((to_rep(last(a1)) <  2147483647) and
-  (last4 <= ((to_rep(last(a1)) + 1) - length({ elts = b; rt = b1 }))))) ->
-  (((to_rep(first(a1)) <= j) and (j <= last4)) -> (length({ elts = b; rt = b1
-  }) <= length({ elts = a; rt = a1 }))))))))
+goal WP_parameter_def : (length({ elts = b; rt = b1 }) <= length({ elts = a;
+  rt = a1 }))

@@ -135,7 +135,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -419,6 +419,26 @@ logic x__first : integer
 logic x__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic x : (int,bool) farray
+
+logic o : (int,bool) farray
+
+logic do_checks__do_length_check__B_24__p1__x : (int,bool) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep(x__first), to_rep(x__last))
+
+axiom H1 : ((to_rep(x__first) = 1) and (to_rep(x__last) = 11))
+
+axiom H2 : (((to_rep(x__first) <= to_rep(x__last)) -> (((0 <= 10) ->
+  (((to_rep(x__last) - to_rep(x__first)) + 1) = ((10 - 0) + 1))) and
+  ((not (0 <= 10)) -> (((to_rep(x__last) - to_rep(x__first)) + 1) = 0)))) and
+  ((not (to_rep(x__first) <= to_rep(x__last))) -> ((0 <= 10) ->
+  (0 = ((10 - 0) + 1)))))
+
+axiom H3 : (o = slide(x, to_rep(x__first), 0))
+
+axiom H4 : (o = do_checks__do_length_check__B_24__p1__x)
 
  (* File "do_checks.adb", line 275, characters 0-0 *)
 goal WP_parameter_def : true

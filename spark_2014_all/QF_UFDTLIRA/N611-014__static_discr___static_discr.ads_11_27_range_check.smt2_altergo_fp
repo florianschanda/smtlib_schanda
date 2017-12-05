@@ -137,11 +137,33 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom max__def_axiom : (max = 100)
 
+logic temp___c_314 : int
+
+logic temp___unused_313 : int
+
+logic temp___c_312 : int
+
+logic temp___unused_311 : int
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+axiom H : in_range(max)
+
+axiom H1 : in_range(temp___c_314)
+
+axiom H2 : in_range(temp___unused_313)
+
+axiom H3 : in_range(temp___c_312)
+
+axiom H4 : in_range(temp___unused_311)
+
+axiom H5 : ((us = temp___c_312) and in_range(temp___c_312))
+
  (* File "static_discr.adb", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___c_314:int. forall temp___unused_313:int.
-  forall temp___c_312:int. forall temp___unused_311:int. forall us:int.
-  (in_range(max) -> ((in_range(temp___c_314) and
-  in_range(temp___unused_313)) -> (in_range(temp___c_312) ->
-  (in_range(temp___unused_311) -> (((us = temp___c_312) and
-  in_range(temp___c_312)) -> in_range(temp___unused_311)))))))
+goal WP_parameter_def : in_range(temp___unused_311)

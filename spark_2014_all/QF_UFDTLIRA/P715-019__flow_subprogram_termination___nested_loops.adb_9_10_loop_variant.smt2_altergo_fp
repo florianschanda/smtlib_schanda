@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -164,40 +164,216 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic j : int
+
+logic x : int
+
+logic o : int
+
+logic temp___134 : int
+
+logic temp___133 : int
+
+logic temp___135 : int
+
+logic temp___132 : int
+
+logic o1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : int
+
+logic j2 : int
+
+logic j3 : int
+
+logic x1 : int
+
+logic i : int
+
+logic temp___140 : int
+
+logic rho : int
+
+logic rho1 : int
+
+logic result2 : int
+
+logic temp___1401 : int
+
+logic result3 : int
+
+logic i1 : int
+
+logic x2 : int
+
+logic i2 : int
+
+logic temp___1351 : int
+
+logic rho2 : int
+
+logic result4 : int
+
+logic temp___1352 : int
+
+logic result5 : int
+
+logic x3 : int
+
+logic temp___1321 : int
+
+logic result6 : int
+
+logic temp___1322 : int
+
+logic rho3 : int
+
+logic rho4 : int
+
+logic result7 : int
+
+logic i3 : int
+
+logic x4 : int
+
+logic i4 : int
+
+logic x5 : int
+
+logic i5 : int
+
+logic rho5 : int
+
+logic rho6 : int
+
+logic x6 : int
+
+logic i6 : int
+
+logic x7 : int
+
+logic i7 : int
+
+logic rho7 : int
+
+logic rho8 : int
+
+logic result8 : int
+
+logic j4 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 2)
+
+axiom H2 : in_range1(j1)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H4 : (j1 <  5)
+
+axiom H5 : ((o = (j1 + 1)) and in_range1((j1 + 1)))
+
+axiom H6 : (result1 = j1)
+
+axiom H7 : (j2 = o)
+
+axiom H8 : ((((- 2147483648) <= 2147483647) -> in_range1(j3)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(x1)))
+
+axiom H9 : (result2 = temp___140)
+
+axiom H10 : (temp___1401 = j3)
+
+axiom H11 : (i = result3)
+
+axiom H12 : (i1 = 1)
+
+axiom H13 : (((1 <= i1) and (i1 <= 5)) -> (temp___134 = i1))
+
+axiom H14 : (((1 <= i1) and (i1 <= 5)) -> (temp___133 = x1))
+
+axiom H15 : (((1 <= i1) and (i1 <= 5)) -> (0 = temp___135))
+
+axiom H16 : (((1 <= i1) and (i1 <= 5)) ->
+  (((((- 2147483648) <= 2147483647) -> in_range1(x2)) and ((1 <= 5) ->
+  in_range2(i2))) and ((1 <= i2) and (i2 <= 5))))
+
+axiom H17 : (((1 <= i1) and (i1 <= 5)) -> (temp___1351 = result4))
+
+axiom H18 : (((1 <= i1) and (i1 <= 5)) -> (temp___1352 = i2))
+
+axiom H19 : (((1 <= i1) and (i1 <= 5)) -> (x2 = result5))
+
+axiom H20 : (((1 <= i1) and (i1 <= 5)) -> (x3 = i2))
+
+axiom H21 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) -> (0 = temp___132)))
+
+axiom H22 : true
+
+axiom H23 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) ->
+  (temp___1321 = result6)))
+
+axiom H24 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) -> (temp___1322 = x3)))
+
+axiom H25 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) -> (not (0 <  x3))))
+
+axiom H26 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) ->
+  (rho3 = temp___1322)))
+
+axiom H27 : (((1 <= i1) and (i1 <= 5)) -> ((0 <  x3) -> (rho4 = rho3)))
+
+axiom H28 : (((1 <= i1) and (i1 <= 5)) -> ((not (0 <  x3)) -> (rho4 = rho2)))
+
+axiom H29 : (((1 <= i1) and (i1 <= 5)) -> (i2 = 5))
+
+axiom H30 : (((1 <= i1) and (i1 <= 5)) -> (i2 = i4))
+
+axiom H31 : (((1 <= i1) and (i1 <= 5)) -> (x3 = x4))
+
+axiom H32 : (((1 <= i1) and (i1 <= 5)) -> (rho6 = rho4))
+
+axiom H33 : (((1 <= i1) and (i1 <= 5)) -> (rho5 = temp___1352))
+
+axiom H34 : (((1 <= i1) and (i1 <= 5)) -> (i5 = i2))
+
+axiom H35 : (((1 <= i1) and (i1 <= 5)) -> (x5 = x3))
+
+axiom H36 : (((1 <= i1) and (i1 <= 5)) -> (i6 = i4))
+
+axiom H37 : (((1 <= i1) and (i1 <= 5)) -> (x6 = x4))
+
+axiom H38 : (((1 <= i1) and (i1 <= 5)) -> (rho8 = rho6))
+
+axiom H39 : (((1 <= i1) and (i1 <= 5)) -> (rho7 = rho5))
+
+axiom H40 : (((1 <= i1) and (i1 <= 5)) -> (i7 = i5))
+
+axiom H41 : (((1 <= i1) and (i1 <= 5)) -> (x7 = x5))
+
+axiom H42 : ((not ((1 <= i1) and (i1 <= 5))) -> (i1 = i6))
+
+axiom H43 : ((not ((1 <= i1) and (i1 <= 5))) -> (x1 = x6))
+
+axiom H44 : ((not ((1 <= i1) and (i1 <= 5))) -> (rho8 = rho1))
+
+axiom H45 : ((not ((1 <= i1) and (i1 <= 5))) -> (rho7 = rho))
+
+axiom H46 : ((not ((1 <= i1) and (i1 <= 5))) -> (i7 = i1))
+
+axiom H47 : ((not ((1 <= i1) and (i1 <= 5))) -> (x7 = x1))
+
+axiom H48 : (j3 <  5)
+
+axiom H49 : ((o1 = (j3 + 1)) and in_range1((j3 + 1)))
+
+axiom H50 : (result8 = j3)
+
+axiom H51 : (j4 = o1)
+
  (* File "nested_loops.adb", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall x:int. forall o:int. forall temp___134:int.
-  forall temp___133:int. forall temp___135:int. forall temp___132:int.
-  forall o1:int. forall result:int. forall j1:int. forall result1:int.
-  forall j2:int. forall j3:int. forall x1:int. forall i:int.
-  forall temp___140:int. forall rho:int. forall rho1:int. forall result2:int.
-  forall temp___1401:int. forall result3:int. forall i1:int. forall x2:int.
-  forall i2:int. forall temp___1351:int. forall rho2:int. forall result4:int.
-  forall temp___1352:int. forall result5:int. forall x3:int.
-  forall temp___1321:int. forall result6:int. forall temp___1322:int.
-  forall rho3:int. forall rho4:int. forall x4:int. forall i3:int.
-  forall x5:int. forall i4:int. forall rho5:int. forall rho6:int.
-  forall x6:int. forall i5:int. forall x7:int. forall i6:int.
-  forall rho7:int. forall rho8:int. forall result7:int. forall j4:int.
-  (((result = j) and (j1 = 2)) -> (in_range1(j1) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) -> ((j1 <  5) ->
-  ((((o = (j1 + 1)) and in_range1((j1 + 1))) and ((result1 = j1) and
-  (j2 = o))) -> (((((-2147483648) <= 2147483647) -> in_range1(j3)) and
-  (((-2147483648) <= 2147483647) -> in_range1(x1))) ->
-  (((result2 = temp___140) and (temp___1401 = j3)) -> ((((i = result3) and
-  (i1 = 1)) and ((((1 <= i1) and (i1 <= 5)) and ((((temp___134 = i1) and
-  ((temp___133 = x1) and ((0 = temp___135) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(x2)) and ((1 <= 5) ->
-  in_range2(i2))) and ((1 <= i2) and (i2 <= 5))) and
-  (((temp___1351 = result4) and (temp___1352 = i2)) and (((x2 = result5) and
-  (x3 = i2)) and ((((0 <  x3) and ((((0 = temp___132) and ((0 <  x3) and
-  (((temp___1321 = result6) and (temp___1322 = x3)) and
-  (not (0 <  x3))))) and (rho3 = temp___1322)) and (rho4 = rho3))) or
-  ((not (0 <  x3)) and (rho4 = rho2))) and (i2 = 5)))))))) and
-  (((i2 = i3) and (x3 = x4)) and ((rho6 = rho4) and ((rho5 = temp___1352) and
-  ((i4 = i2) and (x5 = x3)))))) and (((i5 = i3) and (x6 = x4)) and
-  ((rho8 = rho6) and ((rho7 = rho5) and ((i6 = i4) and (x7 = x5))))))) or
-  ((not ((1 <= i1) and (i1 <= 5))) and (((i1 = i5) and (x1 = x6)) and
-  ((rho8 = rho1) and ((rho7 = rho) and ((i6 = i1) and (x7 = x1)))))))) ->
-  ((j3 <  5) -> ((((o1 = (j3 + 1)) and in_range1((j3 + 1))) and
-  ((result7 = j3) and (j4 = o1))) -> (temp___1401 <  j4))))))))))))
+goal WP_parameter_def : (temp___1401 <  j4)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -212,9 +212,25 @@ function ttmpS__ref___projection(a: ttmpS__ref) : ttmpS = (a).ttmpS__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic us_HEAP : us_type_of_heap
+
+logic y : int
+
+logic z : int
+
+logic tmp : int
+
+logic o : us_rep1
+
+logic o1 : int
+
+axiom H : in_range(y)
+
+axiom H1 : in_range(z)
+
+axiom H2 : ((1 <= 10) -> in_range1(tmp))
+
+axiom H3 : (o = get_my_t2(x, us_HEAP))
+
  (* File "q.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us_HEAP:us_type_of_heap. forall y:int. forall z:int.
-  forall tmp:int. forall o:us_rep1. (in_range(y) -> (in_range(z) ->
-  (((1 <= 10) -> in_range1(tmp)) -> ((o = get_my_t2(x, us_HEAP)) ->
-  in_range1(y))))))
+goal WP_parameter_def : in_range1(y)

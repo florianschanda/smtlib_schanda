@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -361,32 +361,32 @@ type string__ref = { string__content : us_t
 function string__ref___projection(a: string__ref) : us_t =
   (a).string__content
 
-logic temp___String_Literal_585 : unit -> (int,character) farray
+logic temp___String_Literal_579 : unit -> (int,character) farray
 
-axiom temp___String_Literal_585__def_axiom :
-  (((((((((((((((((((((((to_rep((temp___String_Literal_585(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_585(void)[2])) = 105)) and
-  (to_rep((temp___String_Literal_585(void)[3])) = 44)) and
-  (to_rep((temp___String_Literal_585(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[5])) = 73)) and
-  (to_rep((temp___String_Literal_585(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[7])) = 97)) and
-  (to_rep((temp___String_Literal_585(void)[8])) = 109)) and
-  (to_rep((temp___String_Literal_585(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[10])) = 97)) and
-  (to_rep((temp___String_Literal_585(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[12])) = 110)) and
-  (to_rep((temp___String_Literal_585(void)[13])) = 101)) and
-  (to_rep((temp___String_Literal_585(void)[14])) = 119)) and
-  (to_rep((temp___String_Literal_585(void)[15])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[16])) = 116)) and
-  (to_rep((temp___String_Literal_585(void)[17])) = 97)) and
-  (to_rep((temp___String_Literal_585(void)[18])) = 115)) and
-  (to_rep((temp___String_Literal_585(void)[19])) = 107)) and
-  (to_rep((temp___String_Literal_585(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_585(void)[21])) = 84)) and
-  (to_rep((temp___String_Literal_585(void)[22])) = 50)) and
-  (to_rep((temp___String_Literal_585(void)[23])) = 33))
+axiom temp___String_Literal_579__def_axiom :
+  (((((((((((((((((((((((to_rep((temp___String_Literal_579(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_579(void)[2])) = 105)) and
+  (to_rep((temp___String_Literal_579(void)[3])) = 44)) and
+  (to_rep((temp___String_Literal_579(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[5])) = 73)) and
+  (to_rep((temp___String_Literal_579(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[7])) = 97)) and
+  (to_rep((temp___String_Literal_579(void)[8])) = 109)) and
+  (to_rep((temp___String_Literal_579(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[10])) = 97)) and
+  (to_rep((temp___String_Literal_579(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[12])) = 110)) and
+  (to_rep((temp___String_Literal_579(void)[13])) = 101)) and
+  (to_rep((temp___String_Literal_579(void)[14])) = 119)) and
+  (to_rep((temp___String_Literal_579(void)[15])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[16])) = 116)) and
+  (to_rep((temp___String_Literal_579(void)[17])) = 97)) and
+  (to_rep((temp___String_Literal_579(void)[18])) = 115)) and
+  (to_rep((temp___String_Literal_579(void)[19])) = 107)) and
+  (to_rep((temp___String_Literal_579(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_579(void)[21])) = 84)) and
+  (to_rep((temp___String_Literal_579(void)[22])) = 50)) and
+  (to_rep((temp___String_Literal_579(void)[23])) = 33))
 
  (* File "pack.adb", line 7, characters 0-0 *)
 goal WP_parameter_def : false

@@ -89,6 +89,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range x))
 (assert (in_range1 y))
 (assert (in_range2 z))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1634,6 +1634,346 @@ axiom writereg32post__post_axiom :
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and2(regnew,
   of_int2(18446744069414584320)) = of_int2(0))))))
+
+logic exit_called : bool
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic rax : t2
+
+logic rcx : t2
+
+logic rdx : t2
+
+logic rbx : t2
+
+logic rsp : t2
+
+logic rbp : t2
+
+logic rsi : t2
+
+logic rdi : t2
+
+logic r8 : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic temp___345 : t2
+
+logic temp___344 : t2
+
+logic temp___343 : bool
+
+logic temp___342 : t2
+
+logic temp___340 : (t2,unsigned8) farray
+
+logic temp___341 : t2
+
+logic temp___339 : t2
+
+logic temp___338 : bool
+
+logic temp___337 : bool
+
+logic temp___336 : t2
+
+logic temp___335 : bool
+
+logic temp___334 : t2
+
+logic temp___333 : t2
+
+logic temp___346 : (t2,unsigned8) farray
+
+logic temp___331 : t2
+
+logic temp___332 : bool
+
+logic o : t1
+
+logic o1 : t1
+
+logic rax1 : t2
+
+logic rcx1 : t2
+
+logic rdx1 : t2
+
+logic rbx1 : t2
+
+logic rsp1 : t2
+
+logic rsi1 : t2
+
+logic rdi1 : t2
+
+logic r81 : t2
+
+logic memory1 : (t2,unsigned8) farray
+
+logic result : t2
+
+logic rsi2 : t2
+
+logic result1 : t2
+
+logic rdi2 : t2
+
+logic result2 : t2
+
+logic rsp2 : t2
+
+logic exit_called1 : bool
+
+logic zeroflag1 : bool
+
+logic carryflag1 : bool
+
+logic signflag1 : bool
+
+logic overflowflag1 : bool
+
+logic rax2 : t2
+
+logic rcx2 : t2
+
+logic rdx2 : t2
+
+logic rsp3 : t2
+
+logic rdi3 : t2
+
+logic r82 : t2
+
+logic memory2 : (t2,unsigned8) farray
+
+logic rdx3 : t2
+
+logic rsi3 : t2
+
+logic rax3 : t2
+
+logic rdi4 : t2
+
+logic result3 : t2
+
+logic rbx2 : t2
+
+logic result4 : t2
+
+logic rsp4 : t2
+
+logic rsp5 : t2
+
+logic result5 : bool
+
+logic zeroflag2 : bool
+
+logic result6 : bool
+
+logic signflag2 : bool
+
+logic result7 : bool
+
+logic carryflag2 : bool
+
+logic result8 : bool
+
+logic overflowflag2 : bool
+
+logic exit_called2 : bool
+
+logic zeroflag3 : bool
+
+logic carryflag3 : bool
+
+logic signflag3 : bool
+
+logic overflowflag3 : bool
+
+logic rax4 : t2
+
+logic rcx3 : t2
+
+logic rdx4 : t2
+
+logic rbx3 : t2
+
+logic rsp6 : t2
+
+logic rsi4 : t2
+
+logic rdi5 : t2
+
+logic r83 : t2
+
+logic memory3 : (t2,unsigned8) farray
+
+logic exit_called3 : bool
+
+logic zeroflag4 : bool
+
+logic carryflag4 : bool
+
+logic signflag4 : bool
+
+logic overflowflag4 : bool
+
+logic rax5 : t2
+
+logic rcx4 : t2
+
+logic rdx5 : t2
+
+logic rbx4 : t2
+
+logic rsp7 : t2
+
+logic rsi5 : t2
+
+logic rdi6 : t2
+
+logic r84 : t2
+
+logic memory4 : (t2,unsigned8) farray
+
+logic exit_called4 : bool
+
+logic zeroflag5 : bool
+
+logic carryflag5 : bool
+
+logic signflag5 : bool
+
+logic overflowflag5 : bool
+
+logic rax6 : t2
+
+logic rcx5 : t2
+
+logic rdx6 : t2
+
+logic rbx5 : t2
+
+logic rsp8 : t2
+
+logic rsi6 : t2
+
+logic rdi7 : t2
+
+logic r85 : t2
+
+logic memory5 : (t2,unsigned8) farray
+
+logic exit_called5 : bool
+
+logic zeroflag6 : bool
+
+logic carryflag6 : bool
+
+logic signflag6 : bool
+
+logic overflowflag6 : bool
+
+logic rax7 : t2
+
+logic rcx6 : t2
+
+logic rdx7 : t2
+
+logic rbx6 : t2
+
+logic rsp9 : t2
+
+logic rsi7 : t2
+
+logic rdi8 : t2
+
+logic r86 : t2
+
+logic memory6 : (t2,unsigned8) farray
+
+logic exit_called6 : bool
+
+logic zeroflag7 : bool
+
+logic carryflag7 : bool
+
+logic signflag7 : bool
+
+logic overflowflag7 : bool
+
+logic rax8 : t2
+
+logic rcx7 : t2
+
+logic rdx8 : t2
+
+logic rbx7 : t2
+
+logic rsp10 : t2
+
+logic rsi8 : t2
+
+logic rdi9 : t2
+
+logic r87 : t2
+
+logic memory7 : (t2,unsigned8) farray
+
+logic exit_called7 : bool
+
+logic zeroflag8 : bool
+
+logic carryflag8 : bool
+
+logic signflag8 : bool
+
+logic overflowflag8 : bool
+
+logic rax9 : t2
+
+logic rcx8 : t2
+
+logic rdx9 : t2
+
+logic rbx8 : t2
+
+logic rsp11 : t2
+
+logic rsi9 : t2
+
+logic rdi10 : t2
+
+logic r88 : t2
+
+logic memory8 : (t2,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

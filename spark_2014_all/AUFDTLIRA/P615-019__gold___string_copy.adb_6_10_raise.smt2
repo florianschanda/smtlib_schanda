@@ -118,6 +118,7 @@
 (assert (=> (<= (to_rep1 dest__first) (to_rep1 dest__last)) (= o (+ (- (to_rep1 dest__last) (to_rep1 dest__first)) 1))))
 (assert (=> (not (<= (to_rep1 dest__first) (to_rep1 dest__last))) (= o 0)))
 (assert (= result (ite (< o (length src)) true false)))
-(assert (not (not (= result true))))
+(assert (= result true))
+(assert (not false))
 (check-sat)
 (exit)

@@ -622,72 +622,93 @@ axiom get__def_axiom :
   us_split_fields1 = { rec__with_iterable__container__content = a } },
   i) = to_rep((a[i]))))))
 
- (* File "with_iterable.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:(int,natural) farray.
-  forall first__split_fields:natural. forall o:natural. forall o1:natural.
-  forall o2:natural. forall o3:natural. forall temp___221:natural.
-  forall temp___2211:natural. forall o4:natural. forall o5:natural.
-  forall o6:natural. forall o7:natural. forall o8:natural. forall o9:natural.
-  forall temp___222:natural. forall temp___2221:natural.
-  forall with_iterable__set_to_0__first__assume:natural.
-  forall with_iterable__set_to_0__first__assume1:natural. forall o10:natural.
-  forall o11:(int,natural) farray. forall o12:(int,natural) farray.
-  forall temp___225:(int,natural) farray. forall result:natural.
-  forall first__split_fields1:natural. forall result1:(int,natural) farray.
-  forall a__split_fields1:(int,natural) farray.
-  forall a__split_fields2:(int,natural) farray.
-  forall first__split_fields2:natural.
-  forall a__split_fields3:(int,natural) farray.
-  forall first__split_fields3:natural. ((((((((((((to_rep(o1) = 1) and
-  (o1 = o2)) and (((to_rep(o) = 101) and (o = o3)) and ((temp___221 = o3) and
+logic a__split_fields : (int,natural) farray
+
+logic first__split_fields : natural
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic temp___221 : natural
+
+logic temp___2211 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic temp___222 : natural
+
+logic temp___2221 : natural
+
+logic with_iterable__set_to_0__first__assume : natural
+
+logic with_iterable__set_to_0__first__assume1 : natural
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : (int,natural) farray
+
+logic temp___225 : (int,natural) farray
+
+logic result : natural
+
+logic first__split_fields1 : natural
+
+logic result1 : (int,natural) farray
+
+logic a__split_fields1 : (int,natural) farray
+
+logic a__split_fields2 : (int,natural) farray
+
+logic first__split_fields2 : natural
+
+logic a__split_fields3 : (int,natural) farray
+
+logic first__split_fields3 : natural
+
+axiom H : (((((((((((to_rep(o1) = 1) and (o1 = o2)) and
+  (((to_rep(o) = 101) and (o = o3)) and ((temp___221 = o3) and
   (temp___2211 = o2)))) and (((1 <= to_rep(temp___2211)) and
-  (to_rep(temp___2211) <= to_rep(temp___221))) and ({ us_split_discrs1 = {
-  rec__with_iterable__cursor__c = o4 }; us_split_fields3 = {
-  rec__with_iterable__cursor__i = o5 } } = { us_split_discrs1 = {
-  rec__with_iterable__cursor__c = temp___221 }; us_split_fields3 = {
-  rec__with_iterable__cursor__i = temp___2211 } }))) and ({
-  us_split_discrs1 = { rec__with_iterable__cursor__c = o6 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = o7 } } = {
-  us_split_discrs1 = { rec__with_iterable__cursor__c = o4 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = o5 } })) and ({
-  us_split_discrs1 = { rec__with_iterable__cursor__c = o8 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = o9 } } = {
-  us_split_discrs1 = { rec__with_iterable__cursor__c = o6 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = o7 } })) and ({
-  us_split_discrs1 = { rec__with_iterable__cursor__c = temp___222 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = temp___2221 } } = {
-  us_split_discrs1 = { rec__with_iterable__cursor__c = o8 };
-  us_split_fields3 = { rec__with_iterable__cursor__i = o9 } })) and
+  (to_rep(temp___2211) <= to_rep(temp___221))) and ((o4 = temp___221) and
+  (o5 = temp___2211)))) and ((o6 = o4) and (o7 = o5))) and ((o8 = o6) and
+  (o9 = o7))) and ((temp___222 = o8) and (temp___2221 = o9))) and
   (((1 <= to_rep(temp___2221)) and
-  (to_rep(temp___2221) <= to_rep(temp___222))) and ({ us_split_discrs1 = {
-  rec__with_iterable__cursor__c = with_iterable__set_to_0__first__assume };
-  us_split_fields3 = { rec__with_iterable__cursor__i =
-  with_iterable__set_to_0__first__assume1 } } = { us_split_discrs1 = {
-  rec__with_iterable__cursor__c = temp___222 }; us_split_fields3 = {
-  rec__with_iterable__cursor__i = temp___2221 } }))) and ((({
-  us_split_fields__content1 = { rec__with_iterable__cursor__i = result }
-  } = { us_split_fields__content1 = { rec__with_iterable__cursor__i =
-  first__split_fields } }) and
-  (with_iterable__set_to_0__first__assume1 = first__split_fields1)) and
+  (to_rep(temp___2221) <= to_rep(temp___222))) and
+  ((with_iterable__set_to_0__first__assume = temp___222) and
+  (with_iterable__set_to_0__first__assume1 = temp___2221)))) and
+  (((result = first__split_fields) and
+  (first__split_fields1 = with_iterable__set_to_0__first__assume1)) and
   (first__split_discrs = with_iterable__set_to_0__first__assume))) and
   (((101 = to_rep(first__split_discrs)) and
   ((1 <= to_rep(first__split_fields1)) and
   (to_rep(first__split_fields1) <= to_rep(first__split_discrs)))) and
   ((((((to_rep(o10) = 0) and (o11 = (a__split_fields[1 <- o10]))) and
-  (o11 = o12)) and (temp___225 = o12)) and (({ us_split_fields__content = {
-  rec__with_iterable__container__content = result1 } } = {
-  us_split_fields__content = { rec__with_iterable__container__content =
-  a__split_fields } }) and (temp___225 = a__split_fields1))) and
-  (has_element({ us_split_fields1 = {
+  (o12 = o11)) and (temp___225 = o12)) and ((result1 = a__split_fields) and
+  (a__split_fields1 = temp___225))) and (has_element({ us_split_fields1 = {
   rec__with_iterable__container__content = a__split_fields1 } }, {
   us_split_discrs1 = { rec__with_iterable__cursor__c = first__split_discrs };
   us_split_fields3 = { rec__with_iterable__cursor__i = first__split_fields1 }
   }) = true)))) and (((first__split_fields2 = first__split_fields1) and
-  (a__split_fields2 = a__split_fields1)) and (({
-  rec__with_iterable__cursor__i = first__split_fields3 } = {
-  rec__with_iterable__cursor__i = first__split_fields1 }) and ({
-  rec__with_iterable__container__content = a__split_fields3 } = {
-  rec__with_iterable__container__content = a__split_fields1 })))) ->
-  (contains_0({ us_split_fields1 = { rec__with_iterable__container__content =
-  a__split_fields2 } }) = true)))
+  (a__split_fields2 = a__split_fields1)) and
+  ((first__split_fields3 = first__split_fields1) and
+  (a__split_fields3 = a__split_fields1))))
+
+ (* File "with_iterable.ads", line 29, characters 0-0 *)
+goal WP_parameter_def : (contains_0({ us_split_fields1 = {
+  rec__with_iterable__container__content = a__split_fields2 } }) = true)

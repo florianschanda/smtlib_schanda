@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -572,68 +572,179 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "stack_functional_spec.ads", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall o:int.
-  forall o1:pointer_range. forall o2:(int,integer) farray.
-  forall o3:pointer_range. forall temp___201:(int,integer) farray.
-  forall temp___2011:pointer_range. forall o4:integer. forall o5:int.
-  forall o6:(int,integer) farray. forall o7:(int,integer) farray.
-  forall o8:pointer_range. forall temp___205:(int,integer) farray.
-  forall temp___2051:pointer_range. forall o9:int. forall o10:int.
-  forall o11:(int,integer) farray. forall o12:pointer_range. forall o13:int.
-  forall o14:int. forall o15:bool. forall o16:(int,integer) farray.
-  forall o17:pointer_range. forall o18:(int,integer) farray.
-  forall o19:pointer_range. forall o20:int. forall o21:int. forall o22:bool.
-  forall i:int. forall o23:int. forall o24:bool. forall o25:bool.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall my_stack__split_fields2:(int,integer) farray.
-  forall my_stack__split_fields3:pointer_range.
-  forall result2:(int,integer) farray. forall result3:pointer_range.
-  forall my_stack__split_fields4:(int,integer) farray.
-  forall my_stack__split_fields5:pointer_range.
-  forall my_stack__split_fields6:(int,integer) farray.
-  forall my_stack__split_fields7:pointer_range.
-  forall my_stack__split_fields8:(int,integer) farray.
-  forall my_stack__split_fields9:pointer_range. forall result4:bool.
-  (in_range1(x) -> ((not (is_full({
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : pointer_range
+
+logic o2 : (int,integer) farray
+
+logic o3 : pointer_range
+
+logic temp___201 : (int,integer) farray
+
+logic temp___2011 : pointer_range
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : (int,integer) farray
+
+logic o8 : pointer_range
+
+logic temp___205 : (int,integer) farray
+
+logic temp___2051 : pointer_range
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : (int,integer) farray
+
+logic o13 : pointer_range
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : bool
+
+logic o17 : (int,integer) farray
+
+logic o18 : pointer_range
+
+logic o19 : (int,integer) farray
+
+logic o20 : pointer_range
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic i : int
+
+logic o24 : int
+
+logic o25 : bool
+
+logic o26 : (int,integer) farray
+
+logic o27 : pointer_range
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : bool
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic result2 : (int,integer) farray
+
+logic result3 : pointer_range
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+logic my_stack__split_fields8 : (int,integer) farray
+
+logic my_stack__split_fields9 : pointer_range
+
+logic result4 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : (not (is_full({ rec__stack_functional_spec__stack_type__s =
+  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
+  my_stack__split_fields1 }) = true))
+
+axiom H2 : ((o = (to_rep1(my_stack__split_fields1) + 1)) and
+  in_range3((to_rep1(my_stack__split_fields1) + 1)))
+
+axiom H3 : (to_rep1(o1) = o)
+
+axiom H4 : (my_stack__split_fields = o2)
+
+axiom H5 : (o1 = o3)
+
+axiom H6 : (temp___201 = o2)
+
+axiom H7 : (temp___2011 = o3)
+
+axiom H8 : ((result = my_stack__split_fields) and
+  (result1 = my_stack__split_fields1))
+
+axiom H9 : (temp___201 = my_stack__split_fields2)
+
+axiom H10 : (temp___2011 = my_stack__split_fields3)
+
+axiom H11 : (to_rep(o4) = x)
+
+axiom H12 : ((1 <= to_rep1(my_stack__split_fields3)) and
+  (to_rep1(my_stack__split_fields3) <= 100))
+
+axiom H13 : (o5 = to_rep1(my_stack__split_fields3))
+
+axiom H14 : (o6 = (my_stack__split_fields2[o5 <- o4]))
+
+axiom H15 : (o6 = o7)
+
+axiom H16 : (my_stack__split_fields3 = o8)
+
+axiom H17 : (temp___205 = o7)
+
+axiom H18 : (temp___2051 = o8)
+
+axiom H19 : (result2 = my_stack__split_fields2)
+
+axiom H20 : (result3 = my_stack__split_fields3)
+
+axiom H21 : ((my_stack__split_fields4 = temp___205) and
+  (my_stack__split_fields5 = temp___2051))
+
+axiom H22 : ((my_stack__split_fields6 = my_stack__split_fields4) and
+  (my_stack__split_fields7 = my_stack__split_fields5))
+
+axiom H23 : ((my_stack__split_fields8 = my_stack__split_fields4) and
+  (my_stack__split_fields9 = my_stack__split_fields5))
+
+axiom H24 : ((o24 = count(state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
-  }) = true)) -> (((((((((o = (to_rep1(my_stack__split_fields1) + 1)) and
-  in_range3((to_rep1(my_stack__split_fields1) + 1))) and
-  (to_rep1(o1) = o)) and ((my_stack__split_fields = o2) and (o1 = o3))) and
-  ((temp___201 = o2) and (temp___2011 = o3))) and (({
-  us_split_fields__content = { rec__stack_functional_spec__stack_type__s =
-  result; rec__stack_functional_spec__stack_type__pointer = result1 } } = {
-  us_split_fields__content = { rec__stack_functional_spec__stack_type__s =
-  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields1 } }) and
-  ((temp___201 = my_stack__split_fields2) and
-  (temp___2011 = my_stack__split_fields3)))) and (((((to_rep(o4) = x) and
-  ((((1 <= to_rep1(my_stack__split_fields3)) and
-  (to_rep1(my_stack__split_fields3) <= 100)) and
-  (o5 = to_rep1(my_stack__split_fields3))) and
-  (o6 = (my_stack__split_fields2[o5 <- o4])))) and ((o6 = o7) and
-  (my_stack__split_fields3 = o8))) and ((temp___205 = o7) and
-  (temp___2051 = o8))) and (((result2 = my_stack__split_fields2) and
-  (result3 = my_stack__split_fields3)) and
-  ((temp___205 = my_stack__split_fields4) and
-  (temp___2051 = my_stack__split_fields5))))) and
-  (((my_stack__split_fields6 = my_stack__split_fields4) and
-  (my_stack__split_fields7 = my_stack__split_fields5)) and
-  ((my_stack__split_fields8 = my_stack__split_fields4) and
-  (my_stack__split_fields9 = my_stack__split_fields5)))) ->
-  ((((((o23 = count(state__2({ rec__stack_functional_spec__stack_type__s =
-  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields1 }))) and (in_range4(o23) and
-  (o23 = to_rep1(((state__2({ rec__stack_functional_spec__stack_type__s =
-  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields1
-  })).us_split_fields1).rec__stack_functional_spec__stack_type__pointer)))) and
-  (((i <= o23) and (o24 = true)) or ((not (i <= o23)) and
-  (o24 = false)))) and (((1 <= i) and (result4 = o24)) or ((not (1 <= i)) and
-  (result4 = false)))) and ((o25 = true) <->
+  }))) and (in_range4(o24) and (o24 = to_rep1(((state__2({
+  rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
+  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
+  })).us_split_fields1).rec__stack_functional_spec__stack_type__pointer))))
+
+axiom H25 : (((i <= o24) -> (o25 = true)) and ((not (i <= o24)) ->
+  (o25 = false)))
+
+axiom H26 : (((1 <= i) -> (result4 = o25)) and ((not (1 <= i)) ->
+  (result4 = false)))
+
+axiom H27 : ((o30 = true) <->
   (forall i1:int. (((1 <= i1) and (i1 <= count(state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
@@ -643,42 +754,65 @@ goal WP_parameter_def :
   }), i1) = stack_entry(state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
-  }), i1)))))) -> (((((({ us_split_fields1 = {
-  rec__stack_functional_spec__stack_type__s = o18;
-  rec__stack_functional_spec__stack_type__pointer = o19 } } = state__2({
+  }), i1)))))
+
+axiom H28 : (({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o19;
+  rec__stack_functional_spec__stack_type__pointer = o20 } } = state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields6;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields7
-  })) and ((my_stack__split_fields6 = o18) and
-  (my_stack__split_fields7 = o19))) and ((o20 = count({ us_split_fields1 = {
-  rec__stack_functional_spec__stack_type__s = o18;
-  rec__stack_functional_spec__stack_type__pointer = o19 } })) and
-  (in_range4(o20) and (o20 = to_rep1(o19))))) and ((({ us_split_fields1 = {
-  rec__stack_functional_spec__stack_type__s = o16;
-  rec__stack_functional_spec__stack_type__pointer = o17 } } = state__2({
+  })) and ((my_stack__split_fields6 = o19) and
+  (my_stack__split_fields7 = o20)))
+
+axiom H29 : ((o21 = count({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o19;
+  rec__stack_functional_spec__stack_type__pointer = o20 } })) and
+  (in_range4(o21) and (o21 = to_rep1(o20))))
+
+axiom H30 : (({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o17;
+  rec__stack_functional_spec__stack_type__pointer = o18 } } = state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields6;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields7
-  })) and ((my_stack__split_fields6 = o16) and
-  (my_stack__split_fields7 = o17))) and ((o21 = stack_entry({
-  us_split_fields1 = { rec__stack_functional_spec__stack_type__s = o16;
-  rec__stack_functional_spec__stack_type__pointer = o17 } }, o20)) and
-  (in_range1(o21) and (o21 = to_rep((o16[o20]))))))) and (((o21 = x) and
-  (o22 = true)) or ((not (o21 = x)) and (o22 = false)))) ->
-  ((((o13 = max_stack_size(void)) and (in_range4(o13) and (o13 = 100))) and
-  (((({ us_split_fields1 = { rec__stack_functional_spec__stack_type__s = o11;
-  rec__stack_functional_spec__stack_type__pointer = o12 } } = state__2({
+  })) and ((my_stack__split_fields6 = o17) and
+  (my_stack__split_fields7 = o18)))
+
+axiom H31 : ((o22 = stack_entry({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o17;
+  rec__stack_functional_spec__stack_type__pointer = o18 } }, o21)) and
+  (in_range1(o22) and (o22 = to_rep((o17[o21])))))
+
+axiom H32 : (((o22 = x) -> (o23 = true)) and ((not (o22 = x)) ->
+  (o23 = false)))
+
+axiom H33 : ((o14 = max_stack_size(void)) and (in_range4(o14) and
+  (o14 = 100)))
+
+axiom H34 : (({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o12;
+  rec__stack_functional_spec__stack_type__pointer = o13 } } = state__2({
   rec__stack_functional_spec__stack_type__s = my_stack__split_fields6;
   rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields7
-  })) and ((my_stack__split_fields6 = o11) and
-  (my_stack__split_fields7 = o12))) and ((o14 = count({ us_split_fields1 = {
-  rec__stack_functional_spec__stack_type__s = o11;
-  rec__stack_functional_spec__stack_type__pointer = o12 } })) and
-  (in_range4(o14) and (o14 = to_rep1(o12))))) and (((o14 <= o13) and
-  (o15 = true)) or ((not (o14 <= o13)) and (o15 = false))))) ->
-  ((((o9 = count(state__2({ rec__stack_functional_spec__stack_type__s =
-  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields1 }))) and (in_range4(o9) and
-  (o9 = to_rep1(((state__2({ rec__stack_functional_spec__stack_type__s =
-  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields1
-  })).us_split_fields1).rec__stack_functional_spec__stack_type__pointer)))) and
-  (o10 = (o9 + 1))) -> in_range1(o10)))))))))
+  })) and ((my_stack__split_fields6 = o12) and
+  (my_stack__split_fields7 = o13)))
+
+axiom H35 : ((o15 = count({ us_split_fields1 = {
+  rec__stack_functional_spec__stack_type__s = o12;
+  rec__stack_functional_spec__stack_type__pointer = o13 } })) and
+  (in_range4(o15) and (o15 = to_rep1(o13))))
+
+axiom H36 : (((o15 <= o14) -> (o16 = true)) and ((not (o15 <= o14)) ->
+  (o16 = false)))
+
+axiom H37 : ((o9 = count(state__2({
+  rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
+  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
+  }))) and (in_range4(o9) and (o9 = to_rep1(((state__2({
+  rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
+  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
+  })).us_split_fields1).rec__stack_functional_spec__stack_type__pointer))))
+
+axiom H38 : (o10 = (o9 + 1))
+
+ (* File "stack_functional_spec.ads", line 43, characters 0-0 *)
+goal WP_parameter_def : in_range1(o10)

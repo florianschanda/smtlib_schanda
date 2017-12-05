@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -834,61 +834,168 @@ axiom def_axiom :
   (forall temp___197:int. (((temp___192(temp___194, temp___195,
   temp___196)).elts2[temp___197]) = of_rep(temp___194)))))
 
- (* File "main.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall branch__split_fields:(int,integer) farray.
-  forall branch__split_fields1:t. forall i:int.
-  forall temp___199:(int,integer) farray. forall temp___1991:t2.
-  forall temp___200:(int,integer) farray. forall temp___2001:t1.
-  forall temp___202:(int,integer) farray. forall temp___2021:t1.
-  forall o:(int,integer) farray. forall o1:t. forall o2:(int,integer) farray.
-  forall o3:t. forall temp___204:natural.
-  forall temp___2041:(int,integer) farray. forall temp___2042:t.
-  forall result:(int,integer) farray. forall result1:t.
-  forall branch__split_fields2:(int,integer) farray.
-  forall branch__split_fields3:t. forall result2:int. forall i1:int.
-  forall branch__split_fields4:(int,integer) farray.
-  forall branch__split_fields5:t. forall i2:int. ((dynamic_property1(0,
-  to_rep1(branch__split_discrs), to_rep(first(branch__split_fields1)),
+logic branch__split_fields : (int,integer) farray
+
+logic branch__split_fields1 : t
+
+logic i : int
+
+logic temp___199 : (int,integer) farray
+
+logic temp___1991 : t2
+
+logic temp___200 : (int,integer) farray
+
+logic temp___2001 : t1
+
+logic temp___202 : (int,integer) farray
+
+logic temp___2021 : t1
+
+logic o : (int,integer) farray
+
+logic o1 : t
+
+logic o2 : (int,integer) farray
+
+logic o3 : t
+
+logic temp___204 : natural
+
+logic temp___2041 : (int,integer) farray
+
+logic temp___2042 : t
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : (int,integer) farray
+
+logic o8 : t
+
+logic o9 : (int,integer) farray
+
+logic o10 : t
+
+logic temp___207 : natural
+
+logic temp___2071 : (int,integer) farray
+
+logic temp___2072 : t
+
+logic result : (int,integer) farray
+
+logic result1 : t
+
+logic branch__split_fields2 : (int,integer) farray
+
+logic branch__split_fields3 : t
+
+logic result2 : int
+
+logic i1 : int
+
+logic branch__split_fields4 : (int,integer) farray
+
+logic branch__split_fields5 : t
+
+logic i2 : int
+
+logic result3 : (int,integer) farray
+
+logic result4 : t
+
+logic branch__split_fields6 : (int,integer) farray
+
+logic branch__split_fields7 : t
+
+logic result5 : int
+
+logic i3 : int
+
+axiom H : (dynamic_property1(0, to_rep1(branch__split_discrs),
+  to_rep(first(branch__split_fields1)),
   to_rep(last(branch__split_fields1))) and
   ((to_rep(first(branch__split_fields1)) = 0) and
-  (to_rep(last(branch__split_fields1)) = to_rep1(branch__split_discrs)))) ->
-  (((to_rep1(branch__split_discrs) = r7b) and in_range2(r7b)) ->
-  (((((((((to_rep(first4((temp___192(0, 0, r7b)).rt2)) = 0) and
-  ((to_rep(last4((temp___192(0, 0, r7b)).rt2)) = r7b) and ({ elts2 =
-  temp___199; rt2 = temp___1991 } = temp___192(0, 0, r7b)))) and
-  ((((to_rep(first4(temp___1991)) <= to_rep(last4(temp___1991))) and
-  (((0 <= r7b) and
-  (((to_rep(last4(temp___1991)) - to_rep(first4(temp___1991))) + 1) = ((r7b - 0) + 1))) or
-  ((not (0 <= r7b)) and
-  (((to_rep(last4(temp___1991)) - to_rep(first4(temp___1991))) + 1) = 0)))) or
-  ((not (to_rep(first4(temp___1991)) <= to_rep(last4(temp___1991)))) and
-  (((0 <= r7b) and (0 = ((r7b - 0) + 1))) or (not (0 <= r7b))))) and
-  ((temp___199 = temp___200) and (mk1(to_rep(first4(temp___1991)),
-  to_rep(last4(temp___1991))) = temp___2001)))) and
-  ((((to_rep(first2(temp___2001)) <= to_rep(last2(temp___2001))) and
-  (((to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1))) and
-  (((to_rep(last2(temp___2001)) - to_rep(first2(temp___2001))) + 1) = ((to_rep(last(branch__split_fields1)) - to_rep(first(branch__split_fields1))) + 1))) or
-  ((not (to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1)))) and
-  (((to_rep(last2(temp___2001)) - to_rep(first2(temp___2001))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___2001)) <= to_rep(last2(temp___2001)))) and
-  (((to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1))) and
-  (0 = ((to_rep(last(branch__split_fields1)) - to_rep(first(branch__split_fields1))) + 1))) or
-  (not (to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1))))))) and
-  ((temp___202 = temp___200) and (temp___2021 = temp___2001)))) and
-  ((temp___202 = o) and (mk(to_rep(first2(temp___2021)),
-  to_rep(last2(temp___2021))) = o1))) and ((o2 = o) and (o3 = o1))) and
-  ((branch__split_discrs = temp___204) and ((temp___2041 = o2) and
-  (temp___2042 = o3)))) and ((((result = branch__split_fields) and
-  (result1 = branch__split_fields1)) and
-  ((temp___2041 = branch__split_fields2) and
-  (temp___2042 = branch__split_fields3))) and
-  (branch__split_discrs = temp___204))) ->
-  (((to_rep(last(branch__split_fields3)) = r10b) and in_range1(r10b)) ->
-  (((result2 = i) and (i1 = 0)) -> (((0 <= i1) and (i1 <= r10b)) ->
-  ((((0 <= i2) and (i2 <= to_rep(last(branch__split_fields5)))) and
-  (to_rep(last(branch__split_fields5)) = to_rep(last(branch__split_fields3)))) ->
-  (((((dynamic_property1(0, to_rep1(branch__split_discrs),
+  (to_rep(last(branch__split_fields1)) = to_rep1(branch__split_discrs))))
+
+axiom H1 : (to_rep1(branch__split_discrs) = r7b)
+
+axiom H2 : in_range2(r7b)
+
+axiom H3 : (to_rep(first4((temp___192(0, 0, r7b)).rt2)) = 0)
+
+axiom H4 : (to_rep(last4((temp___192(0, 0, r7b)).rt2)) = r7b)
+
+axiom H5 : ({ elts2 = temp___199; rt2 = temp___1991 } = temp___192(0, 0,
+  r7b))
+
+axiom H6 : (((to_rep(first4(temp___1991)) <= to_rep(last4(temp___1991))) ->
+  (((0 <= r7b) ->
+  (((to_rep(last4(temp___1991)) - to_rep(first4(temp___1991))) + 1) = ((r7b - 0) + 1))) and
+  ((not (0 <= r7b)) ->
+  (((to_rep(last4(temp___1991)) - to_rep(first4(temp___1991))) + 1) = 0)))) and
+  ((not (to_rep(first4(temp___1991)) <= to_rep(last4(temp___1991)))) ->
+  ((0 <= r7b) -> (0 = ((r7b - 0) + 1)))))
+
+axiom H7 : (temp___199 = temp___200)
+
+axiom H8 : (mk1(to_rep(first4(temp___1991)),
+  to_rep(last4(temp___1991))) = temp___2001)
+
+axiom H9 : (((to_rep(first2(temp___2001)) <= to_rep(last2(temp___2001))) ->
+  (((to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1))) ->
+  (((to_rep(last2(temp___2001)) - to_rep(first2(temp___2001))) + 1) = ((to_rep(last(branch__split_fields1)) - to_rep(first(branch__split_fields1))) + 1))) and
+  ((not (to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1)))) ->
+  (((to_rep(last2(temp___2001)) - to_rep(first2(temp___2001))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___2001)) <= to_rep(last2(temp___2001)))) ->
+  ((to_rep(first(branch__split_fields1)) <= to_rep(last(branch__split_fields1))) ->
+  (0 = ((to_rep(last(branch__split_fields1)) - to_rep(first(branch__split_fields1))) + 1)))))
+
+axiom H10 : ((temp___202 = temp___200) and (temp___2021 = temp___2001))
+
+axiom H11 : (temp___202 = o)
+
+axiom H12 : (mk(to_rep(first2(temp___2021)),
+  to_rep(last2(temp___2021))) = o1)
+
+axiom H13 : (o2 = o)
+
+axiom H14 : (o3 = o1)
+
+axiom H15 : (branch__split_discrs = temp___204)
+
+axiom H16 : (temp___2041 = o2)
+
+axiom H17 : (temp___2042 = o3)
+
+axiom H18 : ((result = branch__split_fields) and
+  (result1 = branch__split_fields1))
+
+axiom H19 : ((branch__split_fields2 = temp___2041) and
+  (branch__split_fields3 = temp___2042))
+
+axiom H20 : (branch__split_discrs = temp___204)
+
+axiom H21 : (to_rep(last(branch__split_fields3)) = r10b)
+
+axiom H22 : in_range1(r10b)
+
+axiom H23 : (result2 = i)
+
+axiom H24 : (i1 = 0)
+
+axiom H25 : (0 <= i1)
+
+axiom H26 : (i1 <= r10b)
+
+axiom H27 : (((0 <= i2) and (i2 <= to_rep(last(branch__split_fields5)))) and
+  (to_rep(last(branch__split_fields5)) = to_rep(last(branch__split_fields3))))
+
+axiom H28 : ((((dynamic_property1(0, to_rep1(branch__split_discrs),
   to_rep(first(branch__split_fields5)),
   to_rep(last(branch__split_fields5))) and
   ((to_rep(first(branch__split_fields5)) = 0) and
@@ -899,6 +1006,13 @@ goal WP_parameter_def :
   ((i2 <= temp___210) ->
   ((branch__split_fields4[temp___210]) = (branch__split_fields2[temp___210])))))) and
   ((0 <= r10b) -> dynamic_property6(0, r10b, i2))) and ((0 <= i2) and
-  (i2 <= r10b))) -> ((i2 = to_rep(last(branch__split_fields5))) ->
-  (((to_rep(last(branch__split_fields5)) = r12b) and in_range1(r12b)) ->
-  (0 <= i2))))))))))))
+  (i2 <= r10b)))
+
+axiom H29 : (i2 = to_rep(last(branch__split_fields5)))
+
+axiom H30 : (to_rep(last(branch__split_fields5)) = r12b)
+
+axiom H31 : in_range1(r12b)
+
+ (* File "main.adb", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <= i2)

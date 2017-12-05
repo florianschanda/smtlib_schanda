@@ -246,8 +246,17 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : et1
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((o = (e - 1)) and in_range1((e - 1)))
+
+axiom H3 : (to_rep(o1) = o)
+
  (* File "ar.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:et1. (in_range(i) -> (in_range1(e) ->
-  ((((o = (e - 1)) and in_range1((e - 1))) and (to_rep(o1) = o)) ->
-  (1 <= (i + 1))))))
+goal WP_parameter_def : (1 <= (i + 1))

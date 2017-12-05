@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -294,19 +294,38 @@ logic y1 : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic my_maps__my_eq__result : bool
+
+logic result : bool
+
+logic my_maps__my_eq__result1 : bool
+
+logic my_maps__my_eq__result2 : bool
+
+logic my_maps__my_eq__result3 : bool
+
+logic my_maps__my_eq__result4 : bool
+
+logic my_maps__my_eq__result5 : bool
+
+logic result1 : bool
+
+axiom H : (my_maps__my_eq__result1 = my_maps__my_eq__result2)
+
+axiom H1 : (my_maps__my_eq__result3 = my_maps__my_eq__result1)
+
+axiom H2 : (result = my_maps__my_eq__result)
+
+axiom H3 : (((to_rep(x) = to_rep(y)) -> (my_maps__my_eq__result1 = true)) and
+  ((not (to_rep(x) = to_rep(y))) -> (my_maps__my_eq__result1 = false)))
+
+axiom H4 : (my_maps__my_eq__result4 = my_maps__my_eq__result2)
+
+axiom H5 : (my_maps__my_eq__result5 = my_maps__my_eq__result3)
+
+axiom H6 : (result1 = my_maps__my_eq__result4)
+
+axiom H7 : (my_maps__my_eq__result4 = true)
+
  (* File "my_maps.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_maps__my_eq__result:bool. forall result:bool.
-  forall my_maps__my_eq__result1:bool. forall my_maps__my_eq__result2:bool.
-  forall my_maps__my_eq__result3:bool. forall my_maps__my_eq__result4:bool.
-  forall my_maps__my_eq__result5:bool.
-  (forall result1:bool.
-  ((((((my_maps__my_eq__result1 = my_maps__my_eq__result2) and
-  (my_maps__my_eq__result3 = my_maps__my_eq__result1)) and
-  ((result = my_maps__my_eq__result) and (((to_rep(x) = to_rep(y)) and
-  (my_maps__my_eq__result1 = true)) or ((not (to_rep(x) = to_rep(y))) and
-  (my_maps__my_eq__result1 = false))))) and
-  ((my_maps__my_eq__result4 = my_maps__my_eq__result2) and
-  (my_maps__my_eq__result5 = my_maps__my_eq__result3))) and
-  (result1 = my_maps__my_eq__result4)) ->
-  ((my_maps__my_eq__result4 = true) -> (to_rep(x) = to_rep(y))))))
+goal WP_parameter_def : (to_rep(x) = to_rep(y))

@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -549,6 +549,19 @@ type d1__ref = { d1__content : us_rep2
 
 function d1__ref___3__projection(a: d1__ref) : us_rep2 = (a).d1__content
 
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic o2 : int
+
+logic us2 : int
+
+axiom H : ((o = hide(40)) and in_range1(o))
+
  (* File "tagged_component_check.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (((o = hide(40)) and in_range1(o)) -> in_range(o)))
+goal WP_parameter_def : in_range(o)

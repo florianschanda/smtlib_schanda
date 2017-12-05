@@ -129,6 +129,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (declare-const temp___217 Bool)
 (declare-const o Int)
+(declare-const us Int)
 (assert (= (of_int 1) temp___217))
 (assert (= (to_int1 temp___217) 1))
 (assert (and (= o (id 0)) (and (in_range2 o) (= o 0))))

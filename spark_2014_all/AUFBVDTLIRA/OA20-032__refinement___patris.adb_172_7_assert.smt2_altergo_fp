@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -974,7 +974,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1360,7 +1360,7 @@ axiom coerce_axiom1 :
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq11 : int, int -> bool
 
@@ -1399,7 +1399,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq12 : int, int -> bool
 
@@ -3252,87 +3252,562 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall score_nbr:t. forall level_nbr:t. forall line_counter:t.
-  forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall to_line:int. forall complete_lines:t. forall del_line:int.
-  forall temp___2178:int. forall temp___2177:t. forall temp___2176:int.
-  forall temp___2174:(int,(int,cell) farray) farray. forall o:t.
-  forall cur_board1:(int,(int,cell) farray) farray. forall result:int.
-  forall to_line1:int. forall result1:t. forall complete_lines1:t.
-  forall result2:int. forall del_line1:int. forall result3:bool.
-  forall result4:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray. forall result5:int.
-  forall to_line2:int. forall result6:t. forall complete_lines2:t.
-  forall cur_board3:(int,(int,cell) farray) farray. forall to_line3:int.
-  forall complete_lines3:t. forall del_line2:int.
-  forall cur_board4:(int,(int,cell) farray) farray. forall to_line4:int.
-  forall complete_lines4:t. forall del_line3:int.
-  forall cur_board5:(int,(int,cell) farray) farray. forall to_line5:int.
-  forall complete_lines5:t. forall del_line4:int.
-  forall cur_board6:(int,(int,cell) farray) farray. forall to_line6:int.
-  forall complete_lines6:t. forall del_line5:int.
-  forall cur_board7:(int,(int,cell) farray) farray. forall to_line7:int.
-  forall complete_lines7:t. forall del_line6:int. (in_range2(score_nbr) ->
-  (in_range2(level_nbr) -> (in_range2(line_counter) ->
-  (in_range9(cur_state) -> (((get_state(cur_state) = 2) and
-  (valid_configuration__2(cur_state, { rec__patris__piece__s =
-  cur_piece__split_fields; rec__patris__piece__d = cur_piece__split_fields1;
-  rec__patris__piece__x = cur_piece__split_fields2; rec__patris__piece__y =
-  cur_piece__split_fields3 }, cur_board) = true)) ->
-  ((patris__delete_complete_lines__empty_line__aggregate_def(0) = empty_line) ->
-  ((({ int__content = result } = { int__content = to_line }) and
-  (to_line1 = 20)) -> (in_range4(to_line1) -> ((({ t__content = result1 } = {
-  t__content = complete_lines }) and (complete_lines1 = of_int(0))) ->
-  (in_range2(complete_lines1) -> (((({ int__content = result2 } = {
-  int__content = del_line }) and (del_line1 = 1)) and ((((1 <= del_line1) and
-  (del_line1 <= 20)) and ((((temp___2178 = del_line1) and
-  ((temp___2177 = complete_lines1) and ((temp___2176 = to_line1) and
-  ((temp___2174 = cur_board) and
+logic score_nbr : t
+
+logic level_nbr : t
+
+logic line_counter : t
+
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic to_line : int
+
+logic complete_lines : t
+
+logic del_line : int
+
+logic from_line : int
+
+logic temp___2172 : int
+
+logic temp___2171 : t
+
+logic temp___2170 : int
+
+logic temp___2168 : (int,(int,cell) farray) farray
+
+logic o : t
+
+logic y : int
+
+logic o1 : t
+
+logic temp___2180 : int
+
+logic temp___2179 : int
+
+logic temp___2177 : (int,(int,cell) farray) farray
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : t
+
+logic o5 : t1
+
+logic o6 : t1
+
+logic o7 : t1
+
+logic o8 : t
+
+logic temp___2184 : t
+
+logic o9 : t
+
+logic o10 : t1
+
+logic o11 : t1
+
+logic o12 : t1
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t1
+
+logic o17 : t1
+
+logic o18 : t1
+
+logic o19 : t
+
+logic temp___2186 : t
+
+logic o20 : t
+
+logic o21 : t1
+
+logic o22 : t1
+
+logic o23 : t1
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t1
+
+logic o28 : t1
+
+logic o29 : t1
+
+logic o30 : t
+
+logic temp___2188 : t
+
+logic o31 : t
+
+logic o32 : t1
+
+logic o33 : t1
+
+logic o34 : t1
+
+logic o35 : t
+
+logic o36 : t
+
+logic o37 : t
+
+logic o38 : t1
+
+logic o39 : t1
+
+logic o40 : t1
+
+logic o41 : t
+
+logic temp___2190 : t
+
+logic o42 : t
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic o45 : t1
+
+logic o46 : t
+
+logic o47 : t
+
+logic o48 : t
+
+logic o49 : t
+
+logic o50 : t
+
+logic score_nbr1 : t
+
+logic level_nbr1 : t
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic from_line1 : int
+
+logic result : int
+
+logic to_line1 : int
+
+logic result1 : t
+
+logic complete_lines1 : t
+
+logic result2 : int
+
+logic del_line1 : int
+
+logic result3 : bool
+
+logic result4 : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result5 : int
+
+logic to_line2 : int
+
+logic result6 : t
+
+logic complete_lines2 : t
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic to_line3 : int
+
+logic complete_lines3 : t
+
+logic del_line2 : int
+
+logic result7 : int
+
+logic del_line3 : int
+
+logic result8 : bool
+
+logic result9 : (int,(int,cell) farray) farray
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic result10 : int
+
+logic to_line4 : int
+
+logic result11 : t
+
+logic complete_lines4 : t
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic to_line5 : int
+
+logic complete_lines5 : t
+
+logic del_line4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic to_line6 : int
+
+logic complete_lines6 : t
+
+logic del_line5 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic to_line7 : int
+
+logic complete_lines7 : t
+
+logic del_line6 : int
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic to_line8 : int
+
+logic complete_lines8 : t
+
+logic del_line7 : int
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic to_line9 : int
+
+logic complete_lines9 : t
+
+logic del_line8 : int
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic to_line10 : int
+
+logic complete_lines10 : t
+
+logic del_line9 : int
+
+logic result12 : int
+
+logic from_line2 : int
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic to_line11 : int
+
+logic from_line3 : int
+
+logic result13 : bool
+
+logic result14 : (int,(int,cell) farray) farray
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic result15 : (int,(int,cell) farray) farray
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic result16 : int
+
+logic to_line12 : int
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic to_line13 : int
+
+logic cur_board15 : (int,(int,cell) farray) farray
+
+logic to_line14 : int
+
+logic result17 : int
+
+logic from_line4 : int
+
+logic cur_board16 : (int,(int,cell) farray) farray
+
+logic to_line15 : int
+
+logic from_line5 : int
+
+logic cur_board17 : (int,(int,cell) farray) farray
+
+logic to_line16 : int
+
+logic from_line6 : int
+
+logic cur_board18 : (int,(int,cell) farray) farray
+
+logic to_line17 : int
+
+logic from_line7 : int
+
+logic cur_board19 : (int,(int,cell) farray) farray
+
+logic to_line18 : int
+
+logic from_line8 : int
+
+logic cur_board20 : (int,(int,cell) farray) farray
+
+logic to_line19 : int
+
+logic from_line9 : int
+
+logic cur_board21 : (int,(int,cell) farray) farray
+
+logic to_line20 : int
+
+logic from_line10 : int
+
+logic cur_board22 : (int,(int,cell) farray) farray
+
+logic to_line21 : int
+
+logic from_line11 : int
+
+logic cur_board23 : (int,(int,cell) farray) farray
+
+logic to_line22 : int
+
+logic from_line12 : int
+
+logic result18 : bool
+
+logic result19 : t
+
+logic score_nbr2 : t
+
+logic result20 : bool
+
+logic result21 : t
+
+logic score_nbr3 : t
+
+logic result22 : bool
+
+logic result23 : t
+
+logic score_nbr4 : t
+
+logic result24 : bool
+
+logic result25 : t
+
+logic score_nbr5 : t
+
+logic score_nbr6 : t
+
+logic score_nbr7 : t
+
+logic score_nbr8 : t
+
+logic score_nbr9 : t
+
+logic score_nbr10 : t
+
+logic score_nbr11 : t
+
+logic score_nbr12 : t
+
+logic score_nbr13 : t
+
+logic result26 : t
+
+logic line_counter1 : t
+
+logic result27 : t
+
+logic level_nbr2 : t
+
+logic result28 : t
+
+logic line_counter2 : t
+
+logic level_nbr3 : t
+
+logic line_counter3 : t
+
+logic level_nbr4 : t
+
+logic line_counter4 : t
+
+logic result29 : int
+
+logic cur_state1 : int
+
+logic score_nbr14 : t
+
+logic level_nbr5 : t
+
+logic line_counter5 : t
+
+logic cur_board24 : (int,(int,cell) farray) farray
+
+logic cur_state2 : int
+
+logic to_line23 : int
+
+logic complete_lines11 : t
+
+logic del_line10 : int
+
+logic from_line13 : int
+
+logic score_nbr15 : t
+
+logic level_nbr6 : t
+
+logic line_counter6 : t
+
+logic cur_board25 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic to_line24 : int
+
+logic complete_lines12 : t
+
+logic del_line11 : int
+
+logic from_line14 : int
+
+axiom H : in_range2(score_nbr)
+
+axiom H1 : in_range2(level_nbr)
+
+axiom H2 : in_range2(line_counter)
+
+axiom H3 : in_range9(cur_state)
+
+axiom H4 : ((get_state(cur_state) = 2) and (valid_configuration__2(cur_state,
+  { rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
+  cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
+  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true))
+
+axiom H5 :
+  (patris__delete_complete_lines__empty_line__aggregate_def(0) = empty_line)
+
+axiom H6 : (result = to_line)
+
+axiom H7 : (to_line1 = 20)
+
+axiom H8 : in_range4(to_line1)
+
+axiom H9 : (result1 = complete_lines)
+
+axiom H10 : (complete_lines1 = of_int(0))
+
+axiom H11 : in_range2(complete_lines1)
+
+axiom H12 : (result2 = del_line)
+
+axiom H13 : (del_line1 = 1)
+
+axiom H14 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (((temp___2172 = del_line1) and ((temp___2171 = complete_lines1) and
+  ((temp___2170 = to_line1) and ((temp___2168 = cur_board) and
   ((((result3 = is_complete_line((cur_board[del_line1]))) and
   ((result3 = true) <->
   (forall x:int. (((1 <= x) and (x <= 10)) ->
   (not (to_rep(((cur_board[del_line1])[x])) = 0)))))) and
-  (((result3 = true) and ((({ map__content1 = result4 } = { map__content1 =
-  cur_board }) and (cur_board2 = (cur_board[del_line1 <- empty_line]))) and
+  (((result3 = true) -> (((result4 = cur_board) and
+  (cur_board2 = (cur_board[del_line1 <- empty_line]))) and
   (((to_line1 = result5) and (to_line2 = del_line1)) and
-  ((((ule(sub(of_int(100000), complete_lines1), of_int(1)) and
-  (o = sub(add(complete_lines1, of_int(1)), of_int(100000)))) or
-  ((not ule(sub(of_int(100000), complete_lines1), of_int(1))) and
+  ((((ule(sub(of_int(100000), complete_lines1), of_int(1)) ->
+  (o = sub(add(complete_lines1, of_int(1)), of_int(100000)))) and
+  ((not ule(sub(of_int(100000), complete_lines1), of_int(1))) ->
   (o = add(complete_lines1, of_int(1))))) and
   ((complete_lines1 = result6) and (complete_lines2 = o))) and
-  (to_rep(((cur_board2[del_line1])[1])) = 0))))) or
-  ((not (result3 = true)) and (((complete_lines2 = complete_lines1) and
+  (to_rep(((cur_board2[del_line1])[1])) = 0))))) and
+  ((not (result3 = true)) -> (((complete_lines2 = complete_lines1) and
   ((to_line2 = to_line1) and (cur_board2 = cur_board))) and
   ((complete_lines2 = complete_lines1) and ((to_line2 = to_line1) and
   (cur_board2 = cur_board1))))))) and
-  ((forall y:int. (((1 <= y) and (y <= del_line2)) ->
-   (not (is_complete_line((cur_board3[y])) = true)))) and
-  ((((((forall temp___2175:int. (((1 <= temp___2175) and
-       (temp___2175 <= 20)) -> ((del_line2 <  temp___2175) ->
-       ((cur_board3[temp___2175]) = (temp___2174[temp___2175]))))) and
+  ((forall y1:int. (((1 <= y1) and (y1 <= del_line2)) ->
+   (not (is_complete_line((cur_board3[y1])) = true)))) and
+  ((((((forall temp___2169:int. (((1 <= temp___2169) and
+       (temp___2169 <= 20)) -> ((del_line2 <  temp___2169) ->
+       ((cur_board3[temp___2169]) = (temp___2168[temp___2169]))))) and
   ((1 <= 20) -> in_range4(to_line3))) and (ule(of_int(0), of_int(99999)) ->
   in_range2(complete_lines3))) and ((1 <= 20) -> in_range4(del_line2))) and
   ((1 <= del_line2) and (del_line2 <= 20))) and (del_line2 = 20)))))))) and
-  (((del_line2 = del_line3) and ((complete_lines3 = complete_lines4) and
-  ((to_line3 = to_line4) and (cur_board3 = cur_board4)))) and
-  ((del_line4 = del_line2) and ((complete_lines5 = complete_lines3) and
-  ((to_line5 = to_line3) and (cur_board5 = cur_board3)))))) and ((({
-  int__content = del_line5 } = { int__content = del_line3 }) and (({
-  t__content = complete_lines6 } = { t__content = complete_lines4 }) and (({
-  int__content = to_line6 } = { int__content = to_line4 }) and ({
-  map__content1 = cur_board6 } = { map__content1 = cur_board4 })))) and
-  ((del_line6 = del_line4) and ((complete_lines7 = complete_lines5) and
-  ((to_line7 = to_line5) and (cur_board7 = cur_board5))))))) or
-  ((not ((1 <= del_line1) and (del_line1 <= 20))) and
-  (((del_line1 = del_line5) and ((complete_lines1 = complete_lines6) and
-  ((to_line1 = to_line6) and ({ map__content1 = cur_board6 } = {
-  map__content1 = cur_board })))) and ((del_line6 = del_line1) and
-  ((complete_lines7 = complete_lines1) and ((to_line7 = to_line1) and
-  (cur_board7 = cur_board1)))))))) ->
-  (no_complete_lines(cur_board6) = true)))))))))))))
+  (((del_line6 = del_line2) and ((complete_lines7 = complete_lines3) and
+  ((to_line7 = to_line3) and (cur_board7 = cur_board3)))) and
+  ((del_line7 = del_line2) and ((complete_lines8 = complete_lines3) and
+  ((to_line8 = to_line3) and (cur_board8 = cur_board3)))))))
+
+axiom H15 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (del_line8 = del_line6))
+
+axiom H16 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (complete_lines9 = complete_lines7))
+
+axiom H17 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (to_line9 = to_line7))
+
+axiom H18 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (cur_board9 = cur_board7))
+
+axiom H19 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (del_line9 = del_line7))
+
+axiom H20 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (complete_lines10 = complete_lines8))
+
+axiom H21 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (to_line10 = to_line8))
+
+axiom H22 : (((1 <= del_line1) and (del_line1 <= 20)) ->
+  (cur_board10 = cur_board8))
+
+axiom H23 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (del_line8 = del_line1))
+
+axiom H24 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (complete_lines9 = complete_lines1))
+
+axiom H25 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (to_line9 = to_line1))
+
+axiom H26 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (cur_board9 = cur_board))
+
+axiom H27 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (del_line9 = del_line1))
+
+axiom H28 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (complete_lines10 = complete_lines1))
+
+axiom H29 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (to_line10 = to_line1))
+
+axiom H30 : ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (cur_board10 = cur_board1))
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (no_complete_lines(cur_board9) = true)

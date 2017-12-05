@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -133,5 +133,13 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic num_accounts : int
+
+logic o : int
+
+logic num_accounts1 : int
+
+axiom H : false
+
  (* File "account.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

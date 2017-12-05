@@ -295,7 +295,30 @@ axiom d_zero__def_axiom :
   }; us_split_fields1 = { rec__private_types__simple = s1 };
   attr__constrained = s2 }) = true) <-> (to_rep(s) = 0)))
 
+logic s__split_fields : us_main_type
+
+logic s__split_discrs : natural
+
+logic private_types__private_reinit__s__discrs : natural
+
+logic private_types__private_reinit__s__fields : us_main_type
+
+logic result : us_main_type
+
+logic s__split_fields1 : us_main_type
+
+logic result1 : natural
+
+logic s__split_discrs1 : natural
+
+logic s__split_fields2 : us_main_type
+
+logic s__split_discrs2 : natural
+
+logic s__split_fields3 : us_main_type
+
+logic s__split_discrs3 : natural
+
  (* File "use_private_types.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_discrs:natural. ((to_rep(s__split_discrs) = 0) or
-  (not (s__attr__constrained = true))))
+goal WP_parameter_def : ((to_rep(s__split_discrs) = 0) or
+  (not (s__attr__constrained = true)))

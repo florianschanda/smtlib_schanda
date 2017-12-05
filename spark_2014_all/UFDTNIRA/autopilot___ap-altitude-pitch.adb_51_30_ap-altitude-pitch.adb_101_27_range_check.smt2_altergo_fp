@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -244,7 +244,7 @@ function feet__ref___projection(a: feet__ref) : feet = (a).feet__content
 
 type feetpermin
 
-predicate in_range2(x: int) = (((-6000) <= x) and (x <= 6000))
+predicate in_range2(x: int) = (((- 6000) <= x) and (x <= 6000))
 
 logic bool_eq3 : int, int -> bool
 
@@ -296,7 +296,7 @@ function machnumber__ref___projection(a: machnumber__ref) : machnumber =
 
 type pitchangle
 
-predicate in_range4(x: int) = (((-10) <= x) and (x <= 20))
+predicate in_range4(x: int) = (((- 10) <= x) and (x <= 20))
 
 logic bool_eq5 : int, int -> bool
 
@@ -322,7 +322,7 @@ function pitchangle__ref___projection(a: pitchangle__ref) : pitchangle =
 
 type controlangle
 
-predicate in_range5(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range5(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq6 : int, int -> bool
 
@@ -348,7 +348,7 @@ function controlangle__ref___projection(a: controlangle__ref) : controlangle =
 
 type scaledata
 
-predicate in_range6(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range6(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq7 : int, int -> bool
 
@@ -406,7 +406,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type degreespersec
 
-predicate in_range7(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range7(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq8 : int, int -> bool
 
@@ -432,7 +432,7 @@ function degreespersec__ref___projection(a: degreespersec__ref) : degreespersec 
 
 type floorfpm
 
-predicate in_range8(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range8(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq9 : int, int -> bool
 
@@ -458,7 +458,7 @@ function floorfpm__ref___projection(a: floorfpm__ref) : floorfpm =
 
 type degreespersec1
 
-predicate in_range9(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range9(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq10 : int, int -> bool
 
@@ -530,40 +530,159 @@ logic attr__ATTRIBUTE_ADDRESS19 : int
 
 logic attr__ATTRIBUTE_ADDRESS20 : int
 
+logic present_pitchrate : int
+
+logic target_pitchrate : int
+
+logic elevator_movement : int
+
+logic target_climb_rate : int
+
+logic floor_climb_rate : int
+
+logic result__ : int
+
+logic result__1 : int
+
+logic target_angle : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate : int
+
+logic result : int
+
+logic present_pitchrate1 : int
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic result__3 : int
+
+logic result3 : int
+
+logic result__4 : int
+
+logic result4 : int
+
+logic target_climb_rate1 : int
+
+logic result5 : int
+
+logic floor_climb_rate1 : int
+
+logic result6 : int
+
+logic floor_climb_rate2 : int
+
+logic result7 : int
+
+logic floor_climb_rate3 : int
+
+logic result8 : int
+
+logic result__5 : int
+
+logic result9 : int
+
+logic result__6 : int
+
+logic result10 : int
+
+logic result__7 : int
+
+logic result11 : int
+
+logic target_pitchrate1 : int
+
+axiom H : in_range1(present_altitude)
+
+axiom H1 : in_range1(target_altitude)
+
+axiom H2 : in_range3(mach)
+
+axiom H3 : in_range2(climb_rate)
+
+axiom H4 : in_range4(the_pitch)
+
+axiom H5 : (((- 180) <= 180) -> in_range9(present_pitchrate))
+
+axiom H6 : (((- 180) <= 180) -> in_range9(target_pitchrate))
+
+axiom H7 : (((- 45) <= 45) -> in_range5(elevator_movement))
+
+axiom H8 :
+  in_range7(ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate)
+
+axiom H9 : (result = present_pitchrate)
+
+axiom H10 :
+  (present_pitchrate1 = ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate)
+
+axiom H11 : (present_altitude = c11b)
+
+axiom H12 : in_range1(c11b)
+
+axiom H13 : (target_altitude = c12b)
+
+axiom H14 : in_range1(c12b)
+
+axiom H15 : (climb_rate = c13b)
+
+axiom H16 : in_range2(c13b)
+
+axiom H17 : (((- 1000) <= 1000) -> in_range8(target_climb_rate))
+
+axiom H18 : (((- 1000) <= 1000) -> in_range8(floor_climb_rate))
+
+axiom H19 : (((- 180) <= 180) -> in_range9(result__))
+
+axiom H20 : (c11b = c16b)
+
+axiom H21 : in_range1(c16b)
+
+axiom H22 : (c12b = c17b)
+
+axiom H23 : in_range1(c17b)
+
+axiom H24 : (((- 6000) <= 6000) -> in_range2(result__1))
+
+axiom H25 : ((o = comp_div((c17b - c16b),10)) and
+  in_range2(comp_div((c17b - c16b),10)))
+
+axiom H26 : (result1 = result__1)
+
+axiom H27 : (result__2 = o)
+
+axiom H28 : ((1000 <  result__2) -> (result__2 = result2))
+
+axiom H29 : ((1000 <  result__2) -> (result__3 = 1000))
+
+axiom H30 : ((not (1000 <  result__2)) -> ((result__2 <  (- 1000)) ->
+  (result__2 = result3)))
+
+axiom H31 : ((not (1000 <  result__2)) -> ((result__2 <  (- 1000)) ->
+  (result__4 = (- 1000))))
+
+axiom H32 : ((not (1000 <  result__2)) -> ((not (result__2 <  (- 1000))) ->
+  (result__4 = result__2)))
+
+axiom H33 : ((not (1000 <  result__2)) -> (result__3 = result__4))
+
+axiom H34 : (result4 = target_climb_rate)
+
+axiom H35 : (target_climb_rate1 = result__3)
+
+axiom H36 : (not (1000 <  c13b))
+
+axiom H37 : (not (c13b <  (- 1000)))
+
  (* File "ap-altitude-pitch-rate.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall present_pitchrate:int. forall target_pitchrate:int.
-  forall elevator_movement:int. forall target_climb_rate:int.
-  forall floor_climb_rate:int. forall result__:int. forall result__1:int.
-  forall o:int.
-  forall ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate:int.
-  forall result:int. forall present_pitchrate1:int. forall result1:int.
-  forall result__2:int. forall result2:int. forall result__3:int.
-  forall result3:int. forall result__4:int. forall result4:int.
-  forall target_climb_rate1:int. (in_range1(present_altitude) ->
-  (in_range1(target_altitude) -> (in_range3(mach) ->
-  (in_range2(climb_rate) -> (in_range4(the_pitch) -> ((((-180) <= 180) ->
-  in_range9(present_pitchrate)) -> ((((-180) <= 180) ->
-  in_range9(target_pitchrate)) -> ((((-45) <= 45) ->
-  in_range5(elevator_movement)) ->
-  ((in_range7(ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate) and
-  ((result = present_pitchrate) and
-  (present_pitchrate1 = ap__altitude__pitch__rate__calc_pitchrate__present_pitchrate))) ->
-  (((present_altitude = c11b) and in_range1(c11b)) ->
-  (((target_altitude = c12b) and in_range1(c12b)) ->
-  (((climb_rate = c13b) and in_range2(c13b)) -> ((((-1000) <= 1000) ->
-  in_range8(target_climb_rate)) -> ((((-1000) <= 1000) ->
-  in_range8(floor_climb_rate)) -> ((((-180) <= 180) ->
-  in_range9(result__)) -> (((c11b = c16b) and in_range1(c16b)) ->
-  (((c12b = c17b) and in_range1(c17b)) -> (((((-6000) <= 6000) ->
-  in_range2(result__1)) and ((((o = comp_div((c17b - c16b),10)) and
-  in_range2(comp_div((c17b - c16b),10))) and (({ int__content = result1 } = {
-  int__content = result__1 }) and (result__2 = o))) and
-  ((((1000 <  result__2) and ((result__2 = result2) and
-  (result__3 = 1000))) or ((not (1000 <  result__2)) and
-  ((((result__2 <  (-1000)) and ((result__2 = result3) and
-  (result__4 = (-1000)))) or ((not (result__2 <  (-1000))) and
-  (result__4 = result__2))) and (result__3 = result__4)))) and (({
-  int__content = result4 } = { int__content = target_climb_rate }) and
-  (target_climb_rate1 = result__3))))) -> ((not (1000 <  c13b)) ->
-  ((not (c13b <  (-1000))) -> in_range8(c13b))))))))))))))))))))))
+goal WP_parameter_def : in_range8(c13b)

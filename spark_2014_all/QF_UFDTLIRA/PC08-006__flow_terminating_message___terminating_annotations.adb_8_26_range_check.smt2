@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-fun f_rec (Int) Int)
 (declare-fun f_rec__function_guard (Int Int) Bool)
+(declare-const o Int)
 (assert (in_range x))
 (assert (not (= x 0)))
 (assert (not (in_range (- x 1))))

@@ -77,6 +77,7 @@
 (declare-const o Int)
 (declare-const o1 element)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const e1 Int)
 (assert (in_range top))

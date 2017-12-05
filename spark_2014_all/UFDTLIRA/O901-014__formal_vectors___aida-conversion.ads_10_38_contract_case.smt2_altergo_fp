@@ -156,27 +156,47 @@ logic source : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic aida__conversion__convert_character_digit_to_integer__result : int
+
+logic result : int
+
+logic aida__conversion__convert_character_digit_to_integer__result1 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result3 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result5 : int
+
+axiom H : in_range1(source)
+
+axiom H1 : (is_digit(source) = true)
+
+axiom H2 :
+  (aida__conversion__convert_character_digit_to_integer__result1 = aida__conversion__convert_character_digit_to_integer__result2)
+
+axiom H3 :
+  (aida__conversion__convert_character_digit_to_integer__result3 = aida__conversion__convert_character_digit_to_integer__result1)
+
+axiom H4 :
+  (result = aida__conversion__convert_character_digit_to_integer__result)
+
+axiom H5 :
+  (aida__conversion__convert_character_digit_to_integer__result1 = (source - 48))
+
+axiom H6 :
+  (aida__conversion__convert_character_digit_to_integer__result4 = aida__conversion__convert_character_digit_to_integer__result2)
+
+axiom H7 :
+  (aida__conversion__convert_character_digit_to_integer__result5 = aida__conversion__convert_character_digit_to_integer__result3)
+
+axiom H8 : ((bool_eq(source, 48) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__result4 = 0))
+
+axiom H9 : (bool_eq(source, 49) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall aida__conversion__convert_character_digit_to_integer__result:int.
-  forall result:int.
-  forall aida__conversion__convert_character_digit_to_integer__result1:int.
-  forall aida__conversion__convert_character_digit_to_integer__result2:int.
-  forall aida__conversion__convert_character_digit_to_integer__result3:int.
-  forall aida__conversion__convert_character_digit_to_integer__result4:int.
-  forall aida__conversion__convert_character_digit_to_integer__result5:int.
-  (in_range1(source) -> ((is_digit(source) = true) ->
-  (((((aida__conversion__convert_character_digit_to_integer__result1 = aida__conversion__convert_character_digit_to_integer__result2) and
-  (aida__conversion__convert_character_digit_to_integer__result3 = aida__conversion__convert_character_digit_to_integer__result1)) and
-  (({ int__content = result } = { int__content =
-  aida__conversion__convert_character_digit_to_integer__result }) and
-  (aida__conversion__convert_character_digit_to_integer__result1 = (source - 48)))) and
-  (({ int__content =
-  aida__conversion__convert_character_digit_to_integer__result4 } = {
-  int__content =
-  aida__conversion__convert_character_digit_to_integer__result2 }) and
-  (aida__conversion__convert_character_digit_to_integer__result5 = aida__conversion__convert_character_digit_to_integer__result3))) ->
-  ((((bool_eq(source, 48) = true) and
-  (aida__conversion__convert_character_digit_to_integer__result4 = 0)) or
-  (not (bool_eq(source, 48) = true))) -> ((bool_eq(source, 49) = true) ->
-  (aida__conversion__convert_character_digit_to_integer__result4 = 1)))))))
+  (aida__conversion__convert_character_digit_to_integer__result4 = 1)

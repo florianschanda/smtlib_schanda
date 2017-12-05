@@ -92,6 +92,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const x__split_fields even)
 (declare-const x__split_fields1 even)
+(declare-const o Int)
+(declare-const o1 even)
 (assert (dynamic_invariant i7s true false true))
 (assert (dynamic_invariant1 (mk___rep (mk___split_fields x__split_fields x__split_fields1)) false false true))
 (assert (not (= (mod2 2 2) 0)))

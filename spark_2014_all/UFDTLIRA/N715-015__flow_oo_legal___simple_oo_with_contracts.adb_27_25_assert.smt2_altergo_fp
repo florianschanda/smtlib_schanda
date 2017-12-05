@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -562,10 +562,37 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic g2 : int
+
+logic g3 : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : in_range1(g2)
+
+axiom H1 : in_range1(g3)
+
+axiom H2 : (g3 = r1b)
+
+axiom H3 : in_range1(r1b)
+
+axiom H4 : (result = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (1 <= i1)
+
+axiom H7 : (i1 <= r1b)
+
+axiom H8 : ((1 <= i2) and (i2 <= r1b))
+
  (* File "simple_oo_with_contracts.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g2:int. forall g3:int. forall i:int. forall result:int.
-  forall i1:int. forall i2:int. (in_range1(g2) -> (in_range1(g3) ->
-  (((g3 = r1b) and in_range1(r1b)) -> (((result = i) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= r1b)) -> (((1 <= i2) and (i2 <= r1b)) ->
-  (not (g2 = (i2 + to_rep(par)))))))))))
+goal WP_parameter_def : (not (g2 = (i2 + to_rep(par))))

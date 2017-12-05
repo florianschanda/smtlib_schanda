@@ -345,24 +345,57 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic my_container_contains__element__result : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic result : int
+
+logic my_container_contains__element__result1 : int
+
+logic my_container_contains__element__result2 : int
+
+logic my_container_contains__element__result3 : int
+
+logic my_container_contains__element__result4 : int
+
+logic my_container_contains__element__result5 : int
+
+logic result1 : int
+
+axiom H : (has_element(c, { us_split_fields1 = {
+  rec__my_container_contains__cursor__index = p } }) = true)
+
+axiom H1 :
+  (my_container_contains__element__result1 = my_container_contains__element__result2)
+
+axiom H2 :
+  (my_container_contains__element__result3 = my_container_contains__element__result1)
+
+axiom H3 : ((1 <= to_rep(p)) and (to_rep(p) <= 100))
+
+axiom H4 : (o = to_rep(p))
+
+axiom H5 : (o1 = (c[o]))
+
+axiom H6 : (o2 = to_rep(o1))
+
+axiom H7 : (result = my_container_contains__element__result)
+
+axiom H8 : (my_container_contains__element__result1 = o2)
+
+axiom H9 :
+  (my_container_contains__element__result4 = my_container_contains__element__result2)
+
+axiom H10 :
+  (my_container_contains__element__result5 = my_container_contains__element__result3)
+
+axiom H11 : (result1 = my_container_contains__element__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_container_contains__element__result:int. forall o:int.
-  forall o1:natural. forall o2:int. forall result:int.
-  forall my_container_contains__element__result1:int.
-  forall my_container_contains__element__result2:int.
-  forall my_container_contains__element__result3:int.
-  forall my_container_contains__element__result4:int.
-  forall my_container_contains__element__result5:int.
-  (forall result1:int. (((has_element(c, { us_split_fields1 = {
-  rec__my_container_contains__cursor__index = p } }) = true) and
-  (((((my_container_contains__element__result1 = my_container_contains__element__result2) and
-  (my_container_contains__element__result3 = my_container_contains__element__result1)) and
-  ((((((1 <= to_rep(p)) and (to_rep(p) <= 100)) and (o = to_rep(p))) and
-  (o1 = (c[o]))) and (o2 = to_rep(o1))) and
-  ((result = my_container_contains__element__result) and
-  (my_container_contains__element__result1 = o2)))) and
-  ((my_container_contains__element__result4 = my_container_contains__element__result2) and
-  (my_container_contains__element__result5 = my_container_contains__element__result3))) and
-  (result1 = my_container_contains__element__result4))) -> (mem(c,
-  my_container_contains__element__result4) = true))))
+goal WP_parameter_def : (mem(c,
+  my_container_contains__element__result4) = true)

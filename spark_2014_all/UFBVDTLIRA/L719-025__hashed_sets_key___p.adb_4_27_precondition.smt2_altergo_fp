@@ -215,18 +215,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1879,12 +1879,34 @@ axiom find__post_axiom1 :
   container1 }; us_split_fields1 = { rec__p__my_sets__set = container2 } },
   key1)))), key1) = true)))))))
 
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields3 : us_main_type
+
+logic e3 : int
+
+axiom H : in_range2(k)
+
+axiom H1 : (contains({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_discrs; rec__p__my_sets__set__modulus = l__split_discrs1 };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }, k) = true)
+
  (* File "a-cfhase.ads", line 1254, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. (in_range2(k) -> ((contains({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs;
+goal WP_parameter_def : (contains({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }, k) = true) -> (contains({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs;
-  rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }, k) = true))))
+  rec__p__my_sets__set = l__split_fields } }, k) = true)

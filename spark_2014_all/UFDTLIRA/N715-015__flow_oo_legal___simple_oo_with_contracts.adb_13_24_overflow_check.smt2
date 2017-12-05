@@ -119,6 +119,7 @@
 (declare-const g4 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range g1))
 (assert (in_range g2))
 (assert (in_range g3))

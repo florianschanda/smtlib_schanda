@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -753,9 +753,23 @@ axiom bool_eq_rev :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : map
+
+logic o : natural
+
+logic o1 : map
+
+logic result : map
+
+logic x1 : map
+
+axiom H : (to_rep(o) = 10)
+
+axiom H1 : (o1 = set(x, of_int(5), of_int(5), o))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = o1)
+
  (* File "arrays_multidim.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:map. forall o:natural. forall o1:map. forall result:map.
-  forall x1:map. ((((to_rep(o) = 10) and (o1 = set(x, of_int(5), of_int(5),
-  o))) and ((result = x) and (x1 = o1))) -> (to_rep(get(x1, of_int(5),
-  of_int(5))) = 10)))
+goal WP_parameter_def : (to_rep(get(x1, of_int(5), of_int(5))) = 10)

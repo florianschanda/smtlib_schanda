@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -451,6 +451,70 @@ function t21b__ref___projection(a: t21b__ref) : t21b = (a).t21b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : (int,integer) farray
+
+logic y : (int,integer) farray
+
+logic z : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+logic temp___184 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,integer) farray
+
+logic temp___185 : (int,integer) farray
+
+logic temp___1851 : t
+
+logic o8 : (int,integer) farray
+
+logic temp___189 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : (int,integer) farray
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : (int,integer) farray
+
+logic temp___190 : (int,integer) farray
+
+logic temp___1901 : t1
+
+logic o17 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic z2 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic z3 : (int,integer) farray
+
  (* File "concat.ads", line 8, characters 0-0 *)
 goal WP_parameter_def : ((to_rep(last(mk(1, 10))) <  2147483647) or
-  ((-2147483648) <  to_rep(first(mk(1, 10)))))
+  ((- 2147483648) <  to_rep(first(mk(1, 10)))))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1552,23 +1552,131 @@ axiom def_axiom :
   (forall temp___395:int. (((temp___390(temp___392, temp___393,
   temp___394)).elts1[temp___395]) = of_rep(temp___392)))))
 
+logic description : (int,character) farray
+
+logic status : int
+
+logic event_array : (int,us_rep3) farray
+
+logic index : int
+
+logic temp___397 : (int,character) farray
+
+logic temp___3971 : t1
+
+logic temp___398 : (int,character) farray
+
+logic temp___3981 : t
+
+logic temp___399 : (int,character) farray
+
+logic temp___3991 : t
+
+logic o : (int,character) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic temp___401 : int
+
+logic o8 : character
+
+logic o9 : int
+
+logic o10 : (int,character) farray
+
+logic o11 : int
+
+logic result : int
+
+logic status1 : int
+
+logic result1 : (int,character) farray
+
+logic description1 : (int,character) farray
+
+logic result2 : int
+
+logic index1 : int
+
+logic description2 : (int,character) farray
+
+logic status2 : int
+
+logic index2 : int
+
+logic j : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic j1 : int
+
+logic description3 : (int,character) farray
+
+logic j2 : int
+
+logic result5 : bool
+
+logic result6 : (int,character) farray
+
+logic description4 : (int,character) farray
+
+logic result7 : int
+
+logic j3 : int
+
+logic description5 : (int,character) farray
+
+logic status3 : int
+
+logic j4 : int
+
+logic description6 : (int,character) farray
+
+logic status4 : int
+
+logic j5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(description__first),
+  to_rep1(description__last))
+
+axiom H1 : ((0 <= 3) -> in_range10(status))
+
+axiom H2 : ((1 <= 64) -> in_range12(index))
+
+axiom H3 : (result = status)
+
+axiom H4 : (status1 = 3)
+
+axiom H5 : (to_rep1(first2((temp___390(32, to_rep1(description__first),
+  to_rep1(description__last))).rt1)) = to_rep1(description__first))
+
+axiom H6 : (to_rep1(last2((temp___390(32, to_rep1(description__first),
+  to_rep1(description__last))).rt1)) = to_rep1(description__last))
+
+axiom H7 : ({ elts1 = temp___397; rt1 = temp___3971 } = temp___390(32,
+  to_rep1(description__first), to_rep1(description__last)))
+
+axiom H8 : (temp___397 = temp___398)
+
+axiom H9 : (mk(to_rep1(first2(temp___3971)),
+  to_rep1(last2(temp___3971))) = temp___3981)
+
  (* File "datebook.adb", line 114, characters 0-0 *)
 goal WP_parameter_def :
-  (forall status:int. forall index:int.
-  forall temp___397:(int,character) farray. forall temp___3971:t1.
-  forall temp___398:(int,character) farray. forall temp___3981:t.
-  forall result:int. forall status1:int. (dynamic_property(1, 2147483647,
-  to_rep1(description__first), to_rep1(description__last)) -> (((0 <= 3) ->
-  in_range10(status)) -> (((1 <= 64) -> in_range12(index)) ->
-  (((result = status) and (status1 = 3)) ->
-  ((((to_rep1(first2((temp___390(32, to_rep1(description__first),
-  to_rep1(description__last))).rt1)) = to_rep1(description__first)) and
-  ((to_rep1(last2((temp___390(32, to_rep1(description__first),
-  to_rep1(description__last))).rt1)) = to_rep1(description__last)) and ({
-  elts1 = temp___397; rt1 = temp___3971 } = temp___390(32,
-  to_rep1(description__first), to_rep1(description__last))))) and
-  ((temp___397 = temp___398) and (mk(to_rep1(first2(temp___3971)),
-  to_rep1(last2(temp___3971))) = temp___3981))) ->
   (((to_rep1(first(temp___3981)) <= to_rep1(last(temp___3981))) ->
   (((to_rep1(description__first) <= to_rep1(description__last)) ->
   (((to_rep1(last(temp___3981)) - to_rep1(first(temp___3981))) + 1) = ((to_rep1(description__last) - to_rep1(description__first)) + 1))) and
@@ -1576,4 +1684,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___3981)) - to_rep1(first(temp___3981))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___3981)) <= to_rep1(last(temp___3981)))) ->
   ((to_rep1(description__first) <= to_rep1(description__last)) ->
-  (0 = ((to_rep1(description__last) - to_rep1(description__first)) + 1)))))))))))
+  (0 = ((to_rep1(description__last) - to_rep1(description__first)) + 1)))))

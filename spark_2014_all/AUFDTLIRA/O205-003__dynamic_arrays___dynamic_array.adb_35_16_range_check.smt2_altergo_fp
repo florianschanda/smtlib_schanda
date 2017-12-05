@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -292,17 +292,17 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
-  (dynamic_array__rec__f2__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
+  ((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
   (dynamic_array__rec__f2__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  (dynamic_array__rec__f2__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -1629,7 +1629,257 @@ axiom hh__def_axiom : ({ us_split_discrs3 = { rec__dynamic_array__holder__d =
   hh }; us_split_fields3 = { rec__dynamic_array__holder__content = { elts =
   hh1; rt = hh2 } } } = new_holder(c))
 
+logic h__split_fields : (int,us_rep) farray
+
+logic h__split_fields1 : t1
+
+logic i : int
+
+logic temp___d_195 : int
+
+logic us : int
+
+logic o : natural
+
+logic us1 : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic usq_ : bool
+
+logic usq_1 : integer
+
+logic usq_2 : integer
+
+logic usq_3 : bool
+
+logic o5 : bool
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : bool
+
+logic temp___202 : (int,us_rep) farray
+
+logic temp___2021 : t3
+
+logic temp___203 : (int,us_rep) farray
+
+logic temp___2031 : t3
+
+logic o9 : (int,us_rep) farray
+
+logic o10 : t2
+
+logic o11 : (int,us_rep) farray
+
+logic o12 : t2
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : (int,us_rep) farray
+
+logic o16 : t2
+
+logic o17 : natural
+
+logic o18 : (int,us_rep) farray
+
+logic o19 : t
+
+logic o20 : natural
+
+logic o21 : (int,us_rep) farray
+
+logic o22 : t
+
+logic dynamic_array__h__assume : natural
+
+logic dynamic_array__h__assume1 : (int,us_rep) farray
+
+logic dynamic_array__h__assume2 : t1
+
+logic j : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic o25 : integer
+
+logic o26 : integer
+
+logic o27 : bool
+
+logic o28 : integer
+
+logic o29 : natural
+
+logic o30 : (int,us_rep) farray
+
+logic o31 : t
+
+logic o32 : (int,us_rep) farray
+
+logic o33 : t
+
+logic temp___218 : (int,us_rep) farray
+
+logic temp___2181 : t
+
+logic o34 : int
+
+logic o35 : bool
+
+logic o36 : integer
+
+logic o37 : integer
+
+logic o38 : bool
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : integer
+
+logic o43 : integer
+
+logic o44 : bool
+
+logic o45 : bool
+
+logic j1 : int
+
+logic dynamic_array__B_2__hh__assume : natural
+
+logic dynamic_array__B_2__hh__assume1 : (int,us_rep) farray
+
+logic dynamic_array__B_2__hh__assume2 : t
+
+logic o46 : int
+
+logic dynamic_array__B_2__r__assume : bool
+
+logic dynamic_array__B_2__r__assume1 : integer
+
+logic dynamic_array__B_2__r__assume2 : integer
+
+logic dynamic_array__B_2__r__assume3 : bool
+
+logic o47 : int
+
+logic us2 : int
+
+logic o48 : int
+
+logic o49 : integer
+
+logic o50 : integer
+
+logic o51 : integer
+
+logic temp___205 : bool
+
+logic temp___2051 : integer
+
+logic temp___2052 : integer
+
+logic temp___2053 : bool
+
+logic usq_4 : bool
+
+logic usq_5 : integer
+
+logic usq_6 : integer
+
+logic usq_7 : bool
+
+logic o52 : bool
+
+logic o53 : integer
+
+logic o54 : integer
+
+logic o55 : bool
+
+logic o56 : (int,us_rep) farray
+
+logic o57 : (int,us_rep) farray
+
+logic o58 : t1
+
+logic o59 : (int,us_rep) farray
+
+logic o60 : t1
+
+logic temp___211 : natural
+
+logic temp___2111 : (int,us_rep) farray
+
+logic temp___2112 : t1
+
+logic result : (int,us_rep) farray
+
+logic result1 : t1
+
+logic h__split_fields2 : (int,us_rep) farray
+
+logic h__split_fields3 : t1
+
+logic result2 : int
+
+logic i1 : int
+
+logic h__split_fields4 : (int,us_rep) farray
+
+logic h__split_fields5 : t1
+
+logic i2 : int
+
+logic f : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : int
+
+logic f3 : int
+
+logic result7 : (int,us_rep) farray
+
+logic result8 : t1
+
+logic h__split_fields6 : (int,us_rep) farray
+
+logic h__split_fields7 : t1
+
+logic result9 : int
+
+logic i3 : int
+
+axiom H : in_range2(c)
+
+axiom H1 : in_range2(temp___d_195)
+
  (* File "dynamic_array.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___d_195:int. (in_range2(c) -> (in_range2(temp___d_195) ->
-  in_range2(c))))
+goal WP_parameter_def : in_range2(c)

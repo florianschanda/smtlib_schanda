@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -5584,50 +5584,242 @@ logic z5__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS14 : int
 
- (* File "tagged_component_check.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x1__split_fields:natural. forall x1__split_fields1:natural.
-  forall x1__split_fields2:natural. forall x2__split_fields:natural.
-  forall x2__split_fields1:natural. forall x2__split_fields2:natural.
-  forall x3__split_fields:natural. forall x3__split_fields1:natural.
-  forall x3__split_fields2:natural. forall x4__split_fields:natural.
-  forall x4__split_fields1:natural. forall x5__split_fields:natural.
-  forall y1__split_fields:natural. forall y1__split_fields1:natural.
-  forall y1__split_fields2:natural. forall y2__split_fields:natural.
-  forall y2__split_fields1:natural. forall y2__split_fields2:natural.
-  forall y3__split_fields:natural. forall y3__split_fields1:natural.
-  forall y3__split_fields2:natural. forall y4__split_fields:natural.
-  forall y4__split_fields1:natural. forall y5__split_fields:natural.
-  forall z1__split_fields:natural. forall z1__split_fields1:natural.
-  forall z1__split_fields2:natural. forall o:int.
-  (((x1__attr__tag = us_tag2) and (((to_rep(x1__split_fields) = hide(10)) and
+logic x1__split_fields : natural
+
+logic x1__split_fields1 : natural
+
+logic x1__split_fields2 : natural
+
+logic x2__split_fields : natural
+
+logic x2__split_fields1 : natural
+
+logic x2__split_fields2 : natural
+
+logic x3__split_fields : natural
+
+logic x3__split_fields1 : natural
+
+logic x3__split_fields2 : natural
+
+logic x4__split_fields : natural
+
+logic x4__split_fields1 : natural
+
+logic x5__split_fields : natural
+
+logic y1__split_fields : natural
+
+logic y1__split_fields1 : natural
+
+logic y1__split_fields2 : natural
+
+logic y2__split_fields : natural
+
+logic y2__split_fields1 : natural
+
+logic y2__split_fields2 : natural
+
+logic y3__split_fields : natural
+
+logic y3__split_fields1 : natural
+
+logic y3__split_fields2 : natural
+
+logic y4__split_fields : natural
+
+logic y4__split_fields1 : natural
+
+logic y5__split_fields : natural
+
+logic z1__split_fields : natural
+
+logic z1__split_fields1 : natural
+
+logic z1__split_fields2 : natural
+
+logic z2__split_fields : natural
+
+logic z2__split_fields1 : natural
+
+logic z2__split_fields2 : natural
+
+logic z2__split_fields3 : us_private
+
+logic z3__split_fields : natural
+
+logic z3__split_fields1 : natural
+
+logic z3__split_fields2 : natural
+
+logic z3__split_fields3 : us_private
+
+logic z4__split_fields : us_main_type4
+
+logic z4__split_fields1 : natural
+
+logic z4__split_fields2 : natural
+
+logic z4__split_fields3 : us_private
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic o2 : int
+
+logic us2 : int
+
+logic o3 : int
+
+logic us3 : int
+
+logic o4 : int
+
+logic us4 : int
+
+logic o5 : int
+
+logic us5 : int
+
+logic o6 : int
+
+logic us6 : int
+
+logic o7 : int
+
+logic us7 : int
+
+logic o8 : int
+
+logic us8 : int
+
+logic o9 : int
+
+logic us9 : int
+
+logic o10 : int
+
+logic us10 : int
+
+logic o11 : int
+
+logic us11 : int
+
+logic o12 : int
+
+logic us12 : int
+
+logic o13 : int
+
+logic us13 : int
+
+logic o14 : int
+
+logic us14 : int
+
+logic o15 : int
+
+logic us15 : int
+
+logic o16 : int
+
+logic us16 : int
+
+logic o17 : int
+
+logic us17 : int
+
+logic o18 : int
+
+logic us18 : int
+
+logic o19 : int
+
+logic us19 : int
+
+logic o20 : int
+
+logic us20 : int
+
+logic o21 : int
+
+logic us21 : int
+
+logic o22 : int
+
+logic us22 : int
+
+logic o23 : int
+
+logic us23 : int
+
+logic o24 : int
+
+logic us24 : int
+
+logic o25 : int
+
+logic us25 : int
+
+logic o26 : int
+
+logic us26 : int
+
+axiom H : ((x1__attr__tag = us_tag2) and
+  (((to_rep(x1__split_fields) = hide(10)) and
   (to_rep(x1__split_fields1) = hide(0))) and
-  (to_rep(x1__split_fields2) = hide(1)))) -> (((x2__attr__tag = us_tag5) and
+  (to_rep(x1__split_fields2) = hide(1))))
+
+axiom H1 : ((x2__attr__tag = us_tag5) and
   (((to_rep(x2__split_fields) = hide(3)) and
   (to_rep(x2__split_fields1) = hide(11))) and
-  (to_rep(x2__split_fields2) = hide(2)))) -> (((x3__attr__tag = us_tag8) and
+  (to_rep(x2__split_fields2) = hide(2))))
+
+axiom H2 : ((x3__attr__tag = us_tag8) and
   (((to_rep(x3__split_fields) = hide(5)) and
   (to_rep(x3__split_fields1) = hide(12))) and
-  (to_rep(x3__split_fields2) = hide(4)))) -> (((x4__attr__tag = us_tag11) and
+  (to_rep(x3__split_fields2) = hide(4))))
+
+axiom H3 : ((x4__attr__tag = us_tag11) and
   ((to_rep(x4__split_fields) = hide(13)) and
-  (to_rep(x4__split_fields1) = hide(6)))) -> (((x5__attr__tag = us_tag13) and
-  (to_rep(x5__split_fields) = hide(14))) -> (((y1__attr__tag = us_tag16) and
+  (to_rep(x4__split_fields1) = hide(6))))
+
+axiom H4 : ((x5__attr__tag = us_tag13) and
+  (to_rep(x5__split_fields) = hide(14)))
+
+axiom H5 : ((y1__attr__tag = us_tag16) and
   (((to_rep(y1__split_fields) = hide(25)) and
   (to_rep(y1__split_fields1) = hide(15))) and
-  (to_rep(y1__split_fields2) = hide(16)))) ->
-  (((y2__attr__tag = us_tag19) and
+  (to_rep(y1__split_fields2) = hide(16))))
+
+axiom H6 : ((y2__attr__tag = us_tag19) and
   (((to_rep(y2__split_fields) = hide(18)) and
   (to_rep(y2__split_fields1) = hide(26))) and
-  (to_rep(y2__split_fields2) = hide(17)))) ->
-  (((y3__attr__tag = us_tag22) and
+  (to_rep(y2__split_fields2) = hide(17))))
+
+axiom H7 : ((y3__attr__tag = us_tag22) and
   (((to_rep(y3__split_fields) = hide(20)) and
   (to_rep(y3__split_fields1) = hide(27))) and
-  (to_rep(y3__split_fields2) = hide(19)))) ->
-  (((y4__attr__tag = us_tag25) and ((to_rep(y4__split_fields) = hide(28)) and
-  (to_rep(y4__split_fields1) = hide(21)))) ->
-  (((y5__attr__tag = us_tag27) and (to_rep(y5__split_fields) = hide(29))) ->
-  (((z1__attr__tag = us_tag30) and
+  (to_rep(y3__split_fields2) = hide(19))))
+
+axiom H8 : ((y4__attr__tag = us_tag25) and
+  ((to_rep(y4__split_fields) = hide(28)) and
+  (to_rep(y4__split_fields1) = hide(21))))
+
+axiom H9 : ((y5__attr__tag = us_tag27) and
+  (to_rep(y5__split_fields) = hide(29)))
+
+axiom H10 : ((z1__attr__tag = us_tag30) and
   (((to_rep(z1__split_fields) = hide(40)) and
   (to_rep(z1__split_fields1) = hide(30))) and
-  (to_rep(z1__split_fields2) = hide(31)))) -> (((o = hide(41)) and
-  in_range1(o)) -> in_range(o))))))))))))))
+  (to_rep(z1__split_fields2) = hide(31))))
+
+axiom H11 : ((o21 = hide(41)) and in_range1(o21))
+
+ (* File "tagged_component_check.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : in_range(o21)

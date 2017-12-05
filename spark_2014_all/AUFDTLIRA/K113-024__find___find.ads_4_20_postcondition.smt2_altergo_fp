@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -304,40 +304,144 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall i:int. forall find__find__result:int.
-  forall temp___145:int. forall temp___144:int. forall result:int.
-  forall res1:int. forall result1:int. forall i1:int. forall res2:int.
-  forall i2:int. forall result2:int. forall res3:int. forall res4:int.
-  forall res5:int. forall res6:int. forall i3:int. forall res7:int.
-  forall i4:int. forall res8:int. forall i5:int. forall res9:int.
-  forall i6:int. forall result3:int. forall find__find__result1:int.
-  forall find__find__result2:int. forall find__find__result3:int.
-  forall res10:int. forall i7:int. forall find__find__result4:int.
-  forall res11:int. forall i8:int. forall find__find__result5:int.
-  (forall result4:int. ((in_range1(r) and ((((({ int__content = result } = {
-  int__content = res }) and (res1 = 0)) and (in_range1(res1) and (((({
-  int__content = result1 } = { int__content = i }) and (i1 = 1)) and
-  ((((1 <= i1) and (i1 <= 10)) and ((((temp___145 = i1) and
+logic res : int
+
+logic i : int
+
+logic find__find__result : int
+
+logic temp___145 : int
+
+logic temp___144 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic res2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic res3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic res4 : int
+
+logic res5 : int
+
+logic res6 : int
+
+logic i4 : int
+
+logic res7 : int
+
+logic i5 : int
+
+logic res8 : int
+
+logic i6 : int
+
+logic res9 : int
+
+logic i7 : int
+
+logic res10 : int
+
+logic i8 : int
+
+logic res11 : int
+
+logic i9 : int
+
+logic result4 : int
+
+logic find__find__result1 : int
+
+logic find__find__result2 : int
+
+logic find__find__result3 : int
+
+logic res12 : int
+
+logic i10 : int
+
+logic find__find__result4 : int
+
+logic res13 : int
+
+logic i11 : int
+
+logic find__find__result5 : int
+
+logic result5 : int
+
+axiom H : in_range1(r)
+
+axiom H1 : (result = res)
+
+axiom H2 : (res1 = 0)
+
+axiom H3 : in_range1(res1)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (((1 <= i1) and (i1 <= 10)) -> (((temp___145 = i1) and
   ((temp___144 = res1) and ((res2 = 0) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(res2)) and ((1 <= 10) ->
+  ((((((- 2147483648) <= 2147483647) -> in_range1(res2)) and ((1 <= 10) ->
   in_range3(i2))) and ((1 <= i2) and (i2 <= 10))) and ((((res3 = res4) and
   (res5 = res3)) and ((to_rep((t[i2])) = r) and ((res2 = result2) and
   (res3 = i2)))) or (((not (to_rep((t[i2])) = r)) and (res3 = res2)) and
-  (((res3 = res4) and (res5 = res3)) and (i2 = 10)))))))) and (((i2 = i3) and
-  ({ int__content = res6 } = { int__content = res4 })) and ((i4 = i2) and
-  (res7 = res5)))) and ((({ int__content = i5 } = { int__content = i3 }) and
-  ({ int__content = res8 } = { int__content = res6 })) and ((i6 = i4) and
-  (res9 = res7))))) or ((not ((1 <= i1) and (i1 <= 10))) and (((i1 = i5) and
-  (res1 = res8)) and ((i6 = i1) and (res9 = res1)))))) and
-  (((find__find__result1 = find__find__result2) and
-  (find__find__result3 = find__find__result1)) and (({ int__content = result3
-  } = { int__content = find__find__result }) and
-  (find__find__result1 = res8)))))) and ((({ int__content =
-  find__find__result4 } = { int__content = find__find__result2 }) and (({
-  int__content = i7 } = { int__content = i5 }) and ({ int__content = res10
-  } = { int__content = res8 }))) and
-  ((find__find__result5 = find__find__result3) and ((i8 = i6) and
-  (res11 = res9))))) and (result4 = find__find__result4))) ->
-  (0 <= find__find__result4))))
+  (((res3 = res4) and (res5 = res3)) and (i2 = 10)))))))) and (((i2 = i6) and
+  (res8 = res4)) and ((i7 = i2) and (res9 = res5)))))
+
+axiom H7 : (((1 <= i1) and (i1 <= 10)) -> (i8 = i6))
+
+axiom H8 : (((1 <= i1) and (i1 <= 10)) -> (res10 = res8))
+
+axiom H9 : (((1 <= i1) and (i1 <= 10)) -> (i9 = i7))
+
+axiom H10 : (((1 <= i1) and (i1 <= 10)) -> (res11 = res9))
+
+axiom H11 : ((not ((1 <= i1) and (i1 <= 10))) -> (i1 = i8))
+
+axiom H12 : ((not ((1 <= i1) and (i1 <= 10))) -> (res1 = res10))
+
+axiom H13 : ((not ((1 <= i1) and (i1 <= 10))) -> (i9 = i1))
+
+axiom H14 : ((not ((1 <= i1) and (i1 <= 10))) -> (res11 = res1))
+
+axiom H15 : (find__find__result1 = find__find__result2)
+
+axiom H16 : (find__find__result3 = find__find__result1)
+
+axiom H17 : (result4 = find__find__result)
+
+axiom H18 : (find__find__result1 = res10)
+
+axiom H19 : (find__find__result4 = find__find__result2)
+
+axiom H20 : (i10 = i8)
+
+axiom H21 : (res12 = res10)
+
+axiom H22 : (find__find__result5 = find__find__result3)
+
+axiom H23 : (i11 = i9)
+
+axiom H24 : (res13 = res11)
+
+axiom H25 : (result5 = find__find__result4)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <= find__find__result4)

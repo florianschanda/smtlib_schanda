@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -735,71 +735,242 @@ function t11b__ref___projection(a: t11b__ref) : t11b = (a).t11b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___String_Literal_546 : unit -> (int,character) farray
+logic temp___String_Literal_540 : unit -> (int,character) farray
 
-axiom temp___String_Literal_546__def_axiom :
-  ((((((((to_rep((temp___String_Literal_546(void)[1])) = 79) and
-  (to_rep((temp___String_Literal_546(void)[2])) = 112)) and
-  (to_rep((temp___String_Literal_546(void)[3])) = 116)) and
-  (to_rep((temp___String_Literal_546(void)[4])) = 105)) and
-  (to_rep((temp___String_Literal_546(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_546(void)[6])) = 110)) and
-  (to_rep((temp___String_Literal_546(void)[7])) = 97)) and
-  (to_rep((temp___String_Literal_546(void)[8])) = 108))
+axiom temp___String_Literal_540__def_axiom :
+  ((((((((to_rep((temp___String_Literal_540(void)[1])) = 79) and
+  (to_rep((temp___String_Literal_540(void)[2])) = 112)) and
+  (to_rep((temp___String_Literal_540(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_540(void)[4])) = 105)) and
+  (to_rep((temp___String_Literal_540(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_540(void)[6])) = 110)) and
+  (to_rep((temp___String_Literal_540(void)[7])) = 97)) and
+  (to_rep((temp___String_Literal_540(void)[8])) = 108))
 
 logic optional__B_1__ta__aggregate_def : int -> (int,natural) farray
 
 axiom def_axiom :
-  (forall temp___554:int.
-  (forall temp___555:int.
-  ((optional__B_1__ta__aggregate_def(temp___554)[temp___555]) = of_rep2(temp___554))))
+  (forall temp___548:int.
+  (forall temp___549:int.
+  ((optional__B_1__ta__aggregate_def(temp___548)[temp___549]) = of_rep2(temp___548))))
 
-logic temp___String_Literal_563 : unit -> (int,character) farray
+logic temp___String_Literal_557 : unit -> (int,character) farray
 
-axiom temp___String_Literal_563__def_axiom :
-  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_563(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_563(void)[2])) = 82)) and
-  (to_rep((temp___String_Literal_563(void)[3])) = 82)) and
-  (to_rep((temp___String_Literal_563(void)[4])) = 79)) and
-  (to_rep((temp___String_Literal_563(void)[5])) = 82)) and
-  (to_rep((temp___String_Literal_563(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[7])) = 50)) and
-  (to_rep((temp___String_Literal_563(void)[8])) = 58)) and
-  (to_rep((temp___String_Literal_563(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[10])) = 115)) and
-  (to_rep((temp___String_Literal_563(void)[11])) = 104)) and
-  (to_rep((temp___String_Literal_563(void)[12])) = 111)) and
-  (to_rep((temp___String_Literal_563(void)[13])) = 117)) and
-  (to_rep((temp___String_Literal_563(void)[14])) = 108)) and
-  (to_rep((temp___String_Literal_563(void)[15])) = 100)) and
-  (to_rep((temp___String_Literal_563(void)[16])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[17])) = 110)) and
-  (to_rep((temp___String_Literal_563(void)[18])) = 111)) and
-  (to_rep((temp___String_Literal_563(void)[19])) = 116)) and
-  (to_rep((temp___String_Literal_563(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[21])) = 103)) and
-  (to_rep((temp___String_Literal_563(void)[22])) = 101)) and
-  (to_rep((temp___String_Literal_563(void)[23])) = 116)) and
-  (to_rep((temp___String_Literal_563(void)[24])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[25])) = 104)) and
-  (to_rep((temp___String_Literal_563(void)[26])) = 101)) and
-  (to_rep((temp___String_Literal_563(void)[27])) = 114)) and
-  (to_rep((temp___String_Literal_563(void)[28])) = 101))
+axiom temp___String_Literal_557__def_axiom :
+  ((((((((((((((((((((((((((((to_rep((temp___String_Literal_557(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_557(void)[2])) = 82)) and
+  (to_rep((temp___String_Literal_557(void)[3])) = 82)) and
+  (to_rep((temp___String_Literal_557(void)[4])) = 79)) and
+  (to_rep((temp___String_Literal_557(void)[5])) = 82)) and
+  (to_rep((temp___String_Literal_557(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[7])) = 50)) and
+  (to_rep((temp___String_Literal_557(void)[8])) = 58)) and
+  (to_rep((temp___String_Literal_557(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[10])) = 115)) and
+  (to_rep((temp___String_Literal_557(void)[11])) = 104)) and
+  (to_rep((temp___String_Literal_557(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_557(void)[13])) = 117)) and
+  (to_rep((temp___String_Literal_557(void)[14])) = 108)) and
+  (to_rep((temp___String_Literal_557(void)[15])) = 100)) and
+  (to_rep((temp___String_Literal_557(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[17])) = 110)) and
+  (to_rep((temp___String_Literal_557(void)[18])) = 111)) and
+  (to_rep((temp___String_Literal_557(void)[19])) = 116)) and
+  (to_rep((temp___String_Literal_557(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[21])) = 103)) and
+  (to_rep((temp___String_Literal_557(void)[22])) = 101)) and
+  (to_rep((temp___String_Literal_557(void)[23])) = 116)) and
+  (to_rep((temp___String_Literal_557(void)[24])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[25])) = 104)) and
+  (to_rep((temp___String_Literal_557(void)[26])) = 101)) and
+  (to_rep((temp___String_Literal_557(void)[27])) = 114)) and
+  (to_rep((temp___String_Literal_557(void)[28])) = 101))
 
 logic optional__B_3__ta__aggregate_def : int -> map
 
 axiom def_axiom1 :
-  (forall temp___565:int.
-  (forall temp___566:int. forall temp___567:int.
-  (get(optional__B_3__ta__aggregate_def(temp___565), temp___566,
-  temp___567) = of_rep2(temp___565))))
+  (forall temp___559:int.
+  (forall temp___560:int. forall temp___561:int.
+  (get(optional__B_3__ta__aggregate_def(temp___559), temp___560,
+  temp___561) = of_rep2(temp___559))))
+
+logic ta : (int,natural) farray
+
+logic index : int
+
+logic ta1 : map
+
+logic outer : int
+
+logic inner : int
+
+logic temp___543 : int
+
+logic temp___541 : (int,natural) farray
+
+logic temp___544 : (int,natural) farray
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic temp___550 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : map
+
+logic temp___552 : map
+
+logic temp___551 : int
+
+logic temp___5521 : map
+
+logic temp___5511 : int
+
+logic result : (int,natural) farray
+
+logic ta2 : (int,natural) farray
+
+logic result1 : int
+
+logic index1 : int
+
+logic ta3 : (int,natural) farray
+
+logic index2 : int
+
+logic result2 : (int,natural) farray
+
+logic ta4 : (int,natural) farray
+
+logic result3 : int
+
+logic index3 : int
+
+logic ta5 : (int,natural) farray
+
+logic index4 : int
+
+logic ta6 : (int,natural) farray
+
+logic index5 : int
+
+logic ta7 : (int,natural) farray
+
+logic index6 : int
+
+logic ta8 : (int,natural) farray
+
+logic index7 : int
+
+logic ta9 : (int,natural) farray
+
+logic index8 : int
+
+logic ta10 : (int,natural) farray
+
+logic index9 : int
+
+logic result4 : map
+
+logic ta11 : map
+
+logic result5 : map
+
+logic ta12 : map
+
+logic result6 : int
+
+logic outer1 : int
+
+logic result7 : int
+
+logic inner1 : int
+
+logic inner2 : int
+
+logic result8 : int
+
+logic inner3 : int
+
+logic inner4 : int
+
+logic inner5 : int
+
+logic inner6 : int
+
+logic inner7 : int
+
+logic inner8 : int
+
+logic inner9 : int
+
+logic inner10 : int
+
+logic inner11 : int
+
+logic result9 : int
+
+logic outer2 : int
+
+logic result10 : int
+
+logic inner12 : int
+
+logic inner13 : int
+
+logic result11 : int
+
+logic inner14 : int
+
+logic inner15 : int
+
+logic inner16 : int
+
+logic inner17 : int
+
+logic inner18 : int
+
+logic inner19 : int
+
+logic inner20 : int
+
+logic inner21 : int
+
+logic inner22 : int
+
+logic result12 : int
+
+logic outer3 : int
+
+logic result13 : int
+
+logic inner23 : int
+
+logic inner24 : int
+
+logic result14 : int
+
+logic inner25 : int
+
+logic inner26 : int
+
+logic inner27 : int
+
+axiom H : (result = ta)
+
+axiom H1 : (ta2 = optional__B_1__ta__aggregate_def(0))
+
+axiom H2 : (result1 = index)
+
+axiom H3 : (index1 = 1)
+
+axiom H4 : (1 <= index1)
+
+axiom H5 : (index1 <= 5)
 
  (* File "optional.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ta:(int,natural) farray. forall index:int.
-  forall result:(int,natural) farray. forall ta1:(int,natural) farray.
-  forall result1:int. forall index1:int. ((({ map__content1 = result } = {
-  map__content1 = ta }) and (ta1 = optional__B_1__ta__aggregate_def(0))) ->
-  ((({ int__content = result1 } = { int__content = index }) and
-  (index1 = 1)) -> (((1 <= index1) and (index1 <= 5)) ->
-  (to_rep2((ta1[index1])) = 0)))))
+goal WP_parameter_def : (to_rep2((ta2[index1])) = 0)

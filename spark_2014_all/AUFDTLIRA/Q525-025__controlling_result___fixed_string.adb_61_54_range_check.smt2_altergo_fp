@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -916,7 +916,101 @@ type t24b__ref = { t24b__content : us_t2
 
 function t24b__ref___projection(a: t24b__ref) : us_t2 = (a).t24b__content
 
+logic len : int
+
+logic out_string : (int,character) farray
+
+logic fixed_string__convert__result : (int,character) farray
+
+logic fixed_string__convert__result1 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic fixed_string__convert__out_string__assume : (int,character) farray
+
+logic fixed_string__convert__out_string__assume1 : t
+
+logic fixed_string__convert__R19b__assume : int
+
+logic fixed_string__convert__R22b__assume : int
+
+logic o3 : (int,character) farray
+
+logic temp___233 : (int,character) farray
+
+logic temp___2331 : t2
+
+logic temp___234 : (int,character) farray
+
+logic temp___2341 : t1
+
+logic o4 : (int,character) farray
+
+logic temp___236 : (int,character) farray
+
+logic temp___2361 : t1
+
+logic temp___237 : (int,character) farray
+
+logic temp___2371 : t1
+
+logic o5 : (int,character) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,character) farray
+
+logic out_string1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic out_string2 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic result4 : t
+
+logic fixed_string__convert__result2 : (int,character) farray
+
+logic fixed_string__convert__result3 : t
+
+logic fixed_string__convert__result4 : (int,character) farray
+
+logic fixed_string__convert__result5 : t
+
+logic fixed_string__convert__result6 : (int,character) farray
+
+logic fixed_string__convert__result7 : t
+
+logic len2 : int
+
+logic out_string3 : (int,character) farray
+
+logic fixed_string__convert__result8 : (int,character) farray
+
+logic fixed_string__convert__result9 : t
+
+logic len3 : int
+
+logic out_string4 : (int,character) farray
+
+logic fixed_string__convert__result10 : (int,character) farray
+
+logic fixed_string__convert__result11 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
+  to_rep1(last(in_string1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(first(in_string1)), to_rep1(last(in_string1))) -> in_range(length({
-  elts = in_string; rt = in_string1 })))
+goal WP_parameter_def : in_range(length({ elts = in_string; rt = in_string1
+  }))

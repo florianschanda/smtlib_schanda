@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,17 +162,75 @@ function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic n : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic n2 : int
+
+logic n3 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic n4 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(n))
+
+axiom H1 : (result = n)
+
+axiom H2 : (n1 = 12)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 3)
+
+axiom H7 : ((o = (n1 + 1)) and in_range1((n1 + 1)))
+
+axiom H8 : (result2 = n1)
+
+axiom H9 : (n2 = o)
+
+axiom H10 : (n1 <  n3)
+
+axiom H11 : ((((1 <= 3) -> in_range2(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(n3))) and ((1 <= i2) and
+  (i2 <= 3)))
+
+axiom H12 : (not (i2 = 3))
+
+axiom H13 : (i2 = result3)
+
+axiom H14 : (i3 = (i2 + 1))
+
+axiom H15 : ((o1 = (n3 + 1)) and in_range1((n3 + 1)))
+
+axiom H16 : (result4 = n3)
+
+axiom H17 : (n4 = o1)
+
  (* File "foo.adb", line 88, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall i:int. forall o:int. forall o1:int.
-  forall result:int. forall n1:int. forall result1:int. forall i1:int.
-  forall result2:int. forall n2:int. forall n3:int. forall i2:int.
-  forall result3:int. forall i3:int. forall result4:int. forall n4:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(n)) -> (((result = n) and
-  (n1 = 12)) -> (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= 3)) -> ((((o = (n1 + 1)) and in_range1((n1 + 1))) and
-  ((result2 = n1) and (n2 = o))) -> ((n1 <  n3) -> ((((((1 <= 3) ->
-  in_range2(i2)) and (((-2147483648) <= 2147483647) -> in_range1(n3))) and
-  ((1 <= i2) and (i2 <= 3))) and ((not (i2 = 3)) and (((i2 = result3) and
-  (i3 = (i2 + 1))) and (((o1 = (n3 + 1)) and in_range1((n3 + 1))) and
-  ((result4 = n3) and (n4 = o1)))))) -> (n1 <  n4)))))))))
+goal WP_parameter_def : (n1 <  n4)

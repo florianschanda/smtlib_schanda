@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,22 +555,106 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "test.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:(int,integer) farray. forall o1:t1.
-  forall o2:(int,integer) farray. forall o3:t1. forall result:int.
-  forall i1:int. forall i2:int. forall temp:int. (dynamic_property(1,
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) -> (dynamic_property(1,
-  2147483647, to_rep(first(b1)), to_rep(last(b1))) -> (dynamic_property(1,
-  2147483647, to_rep(c__first), to_rep(c__last)) ->
-  ((((to_rep(first(a1)) = to_rep(c__first)) and
+logic i : int
+
+logic o : (int,integer) farray
+
+logic o1 : t1
+
+logic o2 : (int,integer) farray
+
+logic o3 : t1
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___425 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : int
+
+logic o14 : (int,integer) farray
+
+logic o15 : int
+
+logic o16 : int
+
+logic temp___426 : int
+
+logic o17 : integer
+
+logic result : int
+
+logic i1 : int
+
+logic c : (int,integer) farray
+
+logic i2 : int
+
+logic temp : int
+
+logic result1 : int
+
+logic temp1 : int
+
+logic result2 : (int,integer) farray
+
+logic c1 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(c__first), to_rep(c__last))
+
+axiom H3 : (((to_rep(first(a1)) = to_rep(c__first)) and
   (to_rep(last(a1)) = to_rep(c__last))) and (length({ elts = a; rt = a1
-  }) = length({ elts = b; rt = b1 }))) -> (((dynamic_property1(1, 2147483647,
-  to_rep(first(b1)), to_rep(last(b1))) and ((b = o2) and
-  (mk1(to_rep(first(b1)), to_rep(last(b1))) = o3))) and (dynamic_property1(1,
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) and ((a = o) and
-  (mk1(to_rep(first(a1)), to_rep(last(a1))) = o1)))) -> (((result = i) and
-  (i1 = to_rep(c__first))) -> (((to_rep(c__first) <= i1) and
-  (i1 <= comp_div(to_rep(c__last),2))) -> (((to_rep(c__first) <= i2) and
-  (i2 <= comp_div(to_rep(c__last),2))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(temp)) -> (to_rep(c__first) <= i2)))))))))))
+  }) = length({ elts = b; rt = b1 })))
+
+axiom H4 : dynamic_property1(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H5 : (b = o2)
+
+axiom H6 : (mk1(to_rep(first(b1)), to_rep(last(b1))) = o3)
+
+axiom H7 : dynamic_property1(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H8 : (a = o)
+
+axiom H9 : (mk1(to_rep(first(a1)), to_rep(last(a1))) = o1)
+
+axiom H10 : true
+
+axiom H11 : (result = i)
+
+axiom H12 : (i1 = to_rep(c__first))
+
+axiom H13 : (to_rep(c__first) <= i1)
+
+axiom H14 : (i1 <= comp_div(to_rep(c__last),2))
+
+axiom H15 : ((to_rep(c__first) <= i2) and
+  (i2 <= comp_div(to_rep(c__last),2)))
+
+axiom H16 : (((- 2147483648) <= 2147483647) -> in_range1(temp))
+
+ (* File "test.adb", line 31, characters 0-0 *)
+goal WP_parameter_def : (to_rep(c__first) <= i2)

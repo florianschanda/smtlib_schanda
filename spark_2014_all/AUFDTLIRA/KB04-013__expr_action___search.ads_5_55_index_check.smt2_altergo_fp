@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -284,7 +284,17 @@ logic up : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic pos : int
+
+axiom H : in_range1(v)
+
+axiom H1 : in_range2(low)
+
+axiom H2 : in_range2(up)
+
+axiom H3 : (low <= pos)
+
+axiom H4 : (pos <= up)
+
  (* File "search.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. (in_range1(v) -> (in_range2(low) -> (in_range2(up) ->
-  (((low <= pos) and (pos <= up)) -> (1 <= pos))))))
+goal WP_parameter_def : (1 <= pos)

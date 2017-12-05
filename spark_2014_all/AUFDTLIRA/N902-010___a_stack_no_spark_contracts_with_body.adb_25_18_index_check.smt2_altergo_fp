@@ -281,7 +281,29 @@ type index__ref = { index__content : index
 
 function index__ref___projection(a: index__ref) : index = (a).index__content
 
+logic it : int
+
+logic sp : int
+
+logic vec : (int,item) farray
+
+logic o : int
+
+logic o1 : item
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic it1 : int
+
+axiom H : in_range1(sp)
+
+axiom H1 : ((0 <= 20) -> in_range(it))
+
+axiom H2 : (not (is_empty(sp) = true))
+
  (* File "a_stack_no_spark_contracts_with_body.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall it:int. forall sp:int. (in_range1(sp) -> (((0 <= 20) ->
-  in_range(it)) -> ((not (is_empty(sp) = true)) -> (1 <= sp)))))
+goal WP_parameter_def : (1 <= sp)

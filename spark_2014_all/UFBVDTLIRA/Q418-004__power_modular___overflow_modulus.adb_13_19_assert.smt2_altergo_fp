@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -713,17 +713,59 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic y : t
+
+logic temp___180 : int
+
+logic o : t
+
+logic temp___181 : int
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic y1 : t
+
+axiom H : true
+
+axiom H1 : (ule(of_int(0), of_int(7)) -> in_range1(y))
+
+axiom H2 : ((temp___180 = id(257)) and (in_range(temp___180) and
+  (temp___180 = 257)))
+
+axiom H3 : ((temp___180 <  256) -> (o = lsl_bv(of_int(1),
+  of_int(temp___180))))
+
+axiom H4 : ((not (temp___180 <  256)) -> (o = of_int(0)))
+
+axiom H5 : (result = x)
+
+axiom H6 : (x1 = o)
+
+axiom H7 : (x1 = of_int(0))
+
+axiom H8 : ((temp___181 = id(3)) and (in_range(temp___181) and
+  (temp___181 = 3)))
+
+axiom H9 : ((temp___181 <  256) -> (o1 = lsl_bv(of_int(1),
+  of_int(temp___181))))
+
+axiom H10 : ((not (temp___181 <  256)) -> (o1 = of_int(0)))
+
+axiom H11 : (o2 = urem(o1, of_int(8)))
+
+axiom H12 : (result1 = y)
+
+axiom H13 : (y1 = o2)
+
  (* File "overflow_modulus.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall temp___180:int. forall o:t.
-  forall temp___181:int. forall o1:t. forall o2:t. forall result:t.
-  forall x1:t. forall result1:t. forall y1:t. ((ule(of_int(0), of_int(7)) ->
-  in_range1(y)) -> (((((temp___180 = id(257)) and (in_range(temp___180) and
-  (temp___180 = 257))) and (((temp___180 <  256) and (o = lsl_bv(of_int(1),
-  of_int(temp___180)))) or ((not (temp___180 <  256)) and
-  (o = of_int(0))))) and ((result = x) and (x1 = o))) -> ((x1 = of_int(0)) ->
-  (((((temp___181 = id(3)) and (in_range(temp___181) and
-  (temp___181 = 3))) and ((((temp___181 <  256) and (o1 = lsl_bv(of_int(1),
-  of_int(temp___181)))) or ((not (temp___181 <  256)) and
-  (o1 = of_int(0)))) and (o2 = urem(o1, of_int(8))))) and ((result1 = y) and
-  (y1 = o2))) -> (y1 = of_int(0)))))))
+goal WP_parameter_def : (y1 = of_int(0))

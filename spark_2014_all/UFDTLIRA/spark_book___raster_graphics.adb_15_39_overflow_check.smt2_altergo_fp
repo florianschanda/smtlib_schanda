@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcoordinate_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -287,7 +287,37 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic status : int
+
+logic delta_x : int
+
+logic delta_y : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic delta_x1 : int
+
+logic result1 : int
+
+logic delta_y1 : int
+
+axiom H : ((0 <= 2) -> in_range2(status))
+
  (* File "raster_graphics.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall status:int. (((0 <= 2) -> in_range2(status)) ->
-  in_range(abs_int((to_rep(a) - to_rep(b))))))
+goal WP_parameter_def : in_range(abs_int((to_rep(a) - to_rep(b))))

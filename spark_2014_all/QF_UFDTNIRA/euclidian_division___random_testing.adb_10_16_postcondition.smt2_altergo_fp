@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -143,25 +143,68 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "random_testing.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:bool. forall m:int. forall n:int. forall q:int.
-  forall r:int. forall o:int. forall m1:int. forall n1:int. forall q1:int.
-  forall r1:int. forall result:bool. forall result__1:bool.
-  forall result1:bool. forall result__2:bool. forall result__3:bool.
-  forall m2:int. forall n2:int. forall q2:int. forall r2:int.
-  forall result__4:bool. forall m3:int. forall n3:int. forall q3:int.
-  forall r3:int. ((((((-2147483648) <= 2147483647) -> in_range1(m)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(n)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(q)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(r)) and ((((0 <= m1) and
+logic result__ : bool
+
+logic m : int
+
+logic n : int
+
+logic q : int
+
+logic r : int
+
+logic o : int
+
+logic m1 : int
+
+logic n1 : int
+
+logic q1 : int
+
+logic r1 : int
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : bool
+
+logic result__2 : bool
+
+logic result__3 : bool
+
+logic m2 : int
+
+logic n2 : int
+
+logic q2 : int
+
+logic r2 : int
+
+logic result__4 : bool
+
+logic m3 : int
+
+logic n3 : int
+
+logic q3 : int
+
+logic r3 : int
+
+axiom H : (((((- 2147483648) <= 2147483647) -> in_range1(m)) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(n)) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(q)) and
+  ((((- 2147483648) <= 2147483647) -> in_range1(r)) and ((((0 <= m1) and
   (m1 <  200)) and in_range1(m1)) and ((((0 <= n1) and (n1 <  100)) and
   in_range1(n1)) and ((((o = (n1 + 1)) and in_range1((n1 + 1))) and
   (((((0 <= q1) and (0 <= r1)) and (r1 <  o)) and (((o * q1) + r1) = m1)) and
   (in_range1(q1) and in_range1(r1)))) and (((result = result__) and
-  (result__1 = of_int(0))) and (((r1 <= 98) and ((result1 = result__1) and
-  (result__2 = of_int(1)))) or ((not (r1 <= 98)) and
+  (result__1 = of_int(0))) and (((r1 <= 98) -> ((result1 = result__1) and
+  (result__2 = of_int(1)))) and ((not (r1 <= 98)) ->
   (result__2 = result__1))))))))))) and (((r1 = r2) and ((q1 = q2) and
   ((n1 = n2) and ((m1 = m2) and (result__2 = result__3))))) and
   ((r3 = r1) and ((q3 = q1) and ((n3 = n1) and ((m3 = m1) and
-  (result__4 = result__2))))))) -> (result__3 = true)))
+  (result__4 = result__2)))))))
+
+ (* File "random_testing.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : (result__3 = true)

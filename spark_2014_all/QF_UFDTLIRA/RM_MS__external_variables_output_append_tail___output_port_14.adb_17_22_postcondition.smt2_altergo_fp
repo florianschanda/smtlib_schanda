@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,17 +113,47 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic output_port : int
+
+logic output_shadow : int
+
+logic result : int
+
+logic output_shadow1 : int
+
+logic result1 : int
+
+logic output_port1 : int
+
+logic output_port2 : int
+
+logic output_shadow2 : int
+
+logic output_port3 : int
+
+logic output_shadow3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(output_port))
+
+axiom H1 : in_range(output_value)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(output_shadow))
+
+axiom H3 : (result = output_shadow)
+
+axiom H4 : (output_shadow1 = output_value)
+
+axiom H5 : (result1 = output_port)
+
+axiom H6 : (output_port1 = output_shadow1)
+
+axiom H7 : (output_shadow1 = output_shadow2)
+
+axiom H8 : (output_port2 = output_port1)
+
+axiom H9 : (output_shadow3 = output_shadow1)
+
+axiom H10 : (output_port3 = output_port1)
+
  (* File "output_port_14.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall output_port:int. forall output_shadow:int. forall result:int.
-  forall output_shadow1:int. forall result1:int. forall output_port1:int.
-  forall output_port2:int. forall output_shadow2:int.
-  forall output_port3:int. forall output_shadow3:int.
-  (((((-2147483648) <= 2147483647) -> in_range(output_port)) and
-  (in_range(output_value) and ((((-2147483648) <= 2147483647) ->
-  in_range(output_shadow)) and ((((result = output_shadow) and
-  (output_shadow1 = output_value)) and ((result1 = output_port) and
-  (output_port1 = output_shadow1))) and
-  (((output_shadow1 = output_shadow2) and (output_port2 = output_port1)) and
-  ((output_shadow3 = output_shadow1) and
-  (output_port3 = output_port1))))))) -> (output_shadow2 = output_value)))
+goal WP_parameter_def : (output_shadow2 = output_value)

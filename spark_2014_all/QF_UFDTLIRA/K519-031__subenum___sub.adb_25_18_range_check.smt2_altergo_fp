@@ -136,9 +136,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic y : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 1)
+
+axiom H2 : in_range1(x1)
+
+axiom H3 : (result1 = y)
+
+axiom H4 : (y1 = x1)
+
+axiom H5 : in_range(y1)
+
  (* File "sub.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall result:int. forall x1:int.
-  forall result1:int. forall y1:int. (((result = x) and (x1 = 1)) ->
-  (in_range1(x1) -> (((result1 = y) and (y1 = x1)) -> (in_range(y1) ->
-  in_range1(y1))))))
+goal WP_parameter_def : in_range1(y1)

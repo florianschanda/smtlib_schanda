@@ -147,6 +147,7 @@
 (assert (forall ((container us_rep1)) (forall ((position Int)) (! (=> (and (dynamic_invariant2 position true true true) (and (<= 1 position) (<= position (last container)))) (dynamic_invariant3 (get container position) true false true)) :pattern ((get container position))))))
 (declare-const queue__front__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const queue__front__result1 Int)
 (declare-const queue__front__result2 Int)

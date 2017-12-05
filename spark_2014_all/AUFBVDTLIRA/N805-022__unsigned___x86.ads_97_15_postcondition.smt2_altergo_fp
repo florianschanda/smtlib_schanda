@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1537,25 +1537,50 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "x86.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t2,unsigned_8) farray. forall o:unsigned_8.
-  forall o1:(t2,unsigned_8) farray. forall o2:unsigned_8.
-  forall o3:(t2,unsigned_8) farray. forall o4:unsigned_8.
-  forall o5:(t2,unsigned_8) farray. forall o6:unsigned_8.
-  forall o7:(t2,unsigned_8) farray. forall result:(t2,unsigned_8) farray.
-  forall memory1:(t2,unsigned_8) farray.
-  forall result1:(t2,unsigned_8) farray.
-  forall memory2:(t2,unsigned_8) farray.
-  forall result2:(t2,unsigned_8) farray.
-  forall memory3:(t2,unsigned_8) farray.
-  forall result3:(t2,unsigned_8) farray.
-  forall memory4:(t2,unsigned_8) farray.
-  forall memory5:(t2,unsigned_8) farray.
-  forall memory6:(t2,unsigned_8) farray.
-  ((((((to_rep(o) = toSmall(urem1(val__, of_int1(256)))) and
-  (o1 = (memory[addr <- o]))) and (({ map__content = result } = {
-  map__content = memory }) and (memory1 = o1))) and
+logic memory : (t2,unsigned_8) farray
+
+logic o : unsigned_8
+
+logic o1 : (t2,unsigned_8) farray
+
+logic o2 : unsigned_8
+
+logic o3 : (t2,unsigned_8) farray
+
+logic o4 : unsigned_8
+
+logic o5 : (t2,unsigned_8) farray
+
+logic o6 : unsigned_8
+
+logic o7 : (t2,unsigned_8) farray
+
+logic result : (t2,unsigned_8) farray
+
+logic memory1 : (t2,unsigned_8) farray
+
+logic result1 : (t2,unsigned_8) farray
+
+logic memory2 : (t2,unsigned_8) farray
+
+logic result2 : (t2,unsigned_8) farray
+
+logic memory3 : (t2,unsigned_8) farray
+
+logic result3 : (t2,unsigned_8) farray
+
+logic memory4 : (t2,unsigned_8) farray
+
+logic memory5 : (t2,unsigned_8) farray
+
+logic memory6 : (t2,unsigned_8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (((((to_rep(o) = toSmall(urem1(val__, of_int1(256)))) and
+  (o1 = (memory[addr <- o]))) and ((result = memory) and (memory1 = o1))) and
   ((((to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
   of_int1(256)))) and (o3 = (memory1[add2(addr, of_int2(1)) <- o2]))) and
   ((memory1 = result1) and (memory2 = o3))) and
@@ -1589,8 +1614,11 @@ goal WP_parameter_def :
   mul1(toBig(to_rep((memory4[add2(addr, of_int2(2))]))), of_int1(65536))),
   mul1(toBig(to_rep((memory4[add2(addr, of_int2(3))]))),
   of_int1(16777216))) = val__))))))))) and ((memory4 = memory5) and
-  (memory6 = memory4))) -> (add1(add1(add1(toBig(to_rep((memory5[addr]))),
+  (memory6 = memory4)))
+
+ (* File "x86.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (add1(add1(add1(toBig(to_rep((memory5[addr]))),
   mul1(toBig(to_rep((memory5[add2(addr, of_int2(1))]))), of_int1(256))),
   mul1(toBig(to_rep((memory5[add2(addr, of_int2(2))]))), of_int1(65536))),
   mul1(toBig(to_rep((memory5[add2(addr, of_int2(3))]))),
-  of_int1(16777216))) = val__)))
+  of_int1(16777216))) = val__)

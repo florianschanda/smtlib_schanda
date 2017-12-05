@@ -173,23 +173,230 @@ logic attr__ATTRIBUTE_ADDRESS18 : int
 
 logic attr__ATTRIBUTE_ADDRESS19 : int
 
+logic in_0_rdy_v1 : bool
+
+logic in_1_rdy_v1 : bool
+
+logic out_0_rdy_v1 : bool
+
+logic out_1_rdy_v1 : bool
+
+logic in_0_dat_v1 : int
+
+logic in_1_dat_v1 : int
+
+logic out_0_dat_v1 : int
+
+logic out_1_dat_v1 : int
+
+logic in_0_rdy_v2 : bool
+
+logic in_1_rdy_v2 : bool
+
+logic out_0_rdy_v2 : bool
+
+logic out_1_rdy_v2 : bool
+
+logic in_0_dat_v2 : int
+
+logic in_1_dat_v2 : int
+
+logic out_0_dat_v2 : int
+
+logic out_1_dat_v2 : int
+
+logic data_0_v1 : int
+
+logic data_1_v1 : int
+
+logic data_0_v2 : int
+
+logic data_1_v2 : int
+
+logic in_0_rdy_v11 : bool
+
+logic in_1_rdy_v11 : bool
+
+logic out_0_rdy_v11 : bool
+
+logic out_1_rdy_v11 : bool
+
+logic out_0_dat_v11 : int
+
+logic out_1_dat_v11 : int
+
+logic in_0_rdy_v21 : bool
+
+logic in_1_rdy_v21 : bool
+
+logic out_0_rdy_v21 : bool
+
+logic out_1_rdy_v21 : bool
+
+logic out_0_dat_v21 : int
+
+logic out_1_dat_v21 : int
+
+logic data_0_v11 : int
+
+logic data_1_v11 : int
+
+logic data_0_v21 : int
+
+logic data_1_v21 : int
+
+logic result : int
+
+logic data_0_v12 : int
+
+logic result1 : bool
+
+logic in_0_rdy_v12 : bool
+
+logic result2 : int
+
+logic out_1_dat_v12 : int
+
+logic result3 : bool
+
+logic out_1_rdy_v12 : bool
+
+logic result4 : int
+
+logic data_1_v12 : int
+
+logic result5 : bool
+
+logic in_1_rdy_v12 : bool
+
+logic result6 : int
+
+logic out_0_dat_v12 : int
+
+logic result7 : bool
+
+logic out_0_rdy_v12 : bool
+
+logic result8 : int
+
+logic data_0_v22 : int
+
+logic result9 : bool
+
+logic in_0_rdy_v22 : bool
+
+logic result10 : int
+
+logic out_1_dat_v22 : int
+
+logic result11 : bool
+
+logic out_1_rdy_v22 : bool
+
+logic result12 : int
+
+logic data_1_v22 : int
+
+logic result13 : bool
+
+logic in_1_rdy_v22 : bool
+
+logic result14 : int
+
+logic out_0_dat_v22 : int
+
+logic result15 : bool
+
+logic out_0_rdy_v22 : bool
+
+logic in_0_rdy_v13 : bool
+
+logic in_1_rdy_v13 : bool
+
+logic out_0_rdy_v13 : bool
+
+logic out_1_rdy_v13 : bool
+
+logic out_0_dat_v13 : int
+
+logic out_1_dat_v13 : int
+
+logic in_0_rdy_v23 : bool
+
+logic in_1_rdy_v23 : bool
+
+logic out_0_rdy_v23 : bool
+
+logic out_1_rdy_v23 : bool
+
+logic out_0_dat_v23 : int
+
+logic out_1_dat_v23 : int
+
+logic data_0_v13 : int
+
+logic data_1_v13 : int
+
+logic data_0_v23 : int
+
+logic data_1_v23 : int
+
+logic in_0_rdy_v14 : bool
+
+logic in_1_rdy_v14 : bool
+
+logic out_0_rdy_v14 : bool
+
+logic out_1_rdy_v14 : bool
+
+logic out_0_dat_v14 : int
+
+logic out_1_dat_v14 : int
+
+logic in_0_rdy_v24 : bool
+
+logic in_1_rdy_v24 : bool
+
+logic out_0_rdy_v24 : bool
+
+logic out_1_rdy_v24 : bool
+
+logic out_0_dat_v24 : int
+
+logic out_1_dat_v24 : int
+
+logic data_0_v14 : int
+
+logic data_1_v14 : int
+
+logic data_0_v24 : int
+
+logic data_1_v24 : int
+
+axiom H : in_range1(in_0_dat_v1)
+
+axiom H1 : in_range1(in_1_dat_v1)
+
+axiom H2 : in_range1(out_0_dat_v1)
+
+axiom H3 : in_range1(out_1_dat_v1)
+
+axiom H4 : in_range1(in_0_dat_v2)
+
+axiom H5 : in_range1(in_1_dat_v2)
+
+axiom H6 : in_range1(out_0_dat_v2)
+
+axiom H7 : in_range1(out_1_dat_v2)
+
  (* File "infoflow.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall in_1_rdy_v1:bool. forall out_0_rdy_v1:bool. forall in_0_dat_v1:int.
-  forall in_1_dat_v1:int. forall out_0_dat_v1:int. forall out_1_dat_v1:int.
-  forall in_1_rdy_v2:bool. forall out_0_rdy_v2:bool. forall in_0_dat_v2:int.
-  forall in_1_dat_v2:int. forall out_0_dat_v2:int. forall out_1_dat_v2:int.
-  (in_range1(in_0_dat_v1) -> (in_range1(in_1_dat_v1) ->
-  (in_range1(out_0_dat_v1) -> (in_range1(out_1_dat_v1) ->
-  (in_range1(in_0_dat_v2) -> (in_range1(in_1_dat_v2) ->
-  (in_range1(out_0_dat_v2) -> (in_range1(out_1_dat_v2) ->
-  (((((bool_eq(in_1_dat_v1, in_1_dat_v2) = true) -> (((in_1_rdy_v1 = true) ->
-  ((not (out_0_rdy_v1 = true)) and ((out_0_rdy_v1 = false) ->
-  (((in_1_rdy_v2 = true) -> (not (out_0_rdy_v2 = true))) and
-  (not (in_1_rdy_v2 = false)))))) and (not (in_1_rdy_v1 = false)))) and
-  (not (bool_eq(in_1_dat_v1, in_1_dat_v2) = false))) ->
-  (((match_bool(match_bool(bool_eq(out_0_dat_v1, out_0_dat_v2),
-  match_bool(in_1_rdy_v1, out_0_rdy_v1, true), false),
+goal WP_parameter_def : (((((bool_eq(in_1_dat_v1, in_1_dat_v2) = true) ->
+  (((in_1_rdy_v1 = true) -> ((not (out_0_rdy_v1 = true)) and
+  ((out_0_rdy_v1 = false) -> (((in_1_rdy_v2 = true) ->
+  (not (out_0_rdy_v2 = true))) and (not (in_1_rdy_v2 = false)))))) and
+  (not (in_1_rdy_v1 = false)))) and (not (bool_eq(in_1_dat_v1,
+  in_1_dat_v2) = false))) -> (((match_bool(match_bool(bool_eq(out_0_dat_v1,
+  out_0_dat_v2), match_bool(in_1_rdy_v1, out_0_rdy_v1, true), false),
   match_bool(in_1_rdy_v2, out_0_rdy_v2, true), false) = true) ->
   (1 <= ((0 + 1) + 1))) and
   ((not (match_bool(match_bool(bool_eq(out_0_dat_v1, out_0_dat_v2),
@@ -208,4 +415,4 @@ goal WP_parameter_def :
   ((not (match_bool(match_bool(bool_eq(out_0_dat_v1, out_0_dat_v2),
   match_bool(in_1_rdy_v1, out_0_rdy_v1, true), false),
   match_bool(in_1_rdy_v2, out_0_rdy_v2, true), false) = true)) ->
-  (1 <= ((0 + 0) + 0)))))))))))))))
+  (1 <= ((0 + 0) + 0))))))

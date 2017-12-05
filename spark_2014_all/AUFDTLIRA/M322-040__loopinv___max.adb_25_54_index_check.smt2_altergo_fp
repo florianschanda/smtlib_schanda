@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -277,19 +277,67 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic max : int
+
+logic m : int
+
+logic n : int
+
+logic n1 : int
+
+logic o : bool
+
+logic n2 : int
+
+logic n3 : int
+
+logic o1 : bool
+
+logic m1 : int
+
+logic n4 : int
+
+logic n5 : int
+
+logic o2 : bool
+
+logic max1 : int
+
+logic result : int
+
+logic max2 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range1(max)
+
+axiom H2 :
+  (forall m2:int. ((((- 2147483648) <= m2) and (m2 <= 2147483647)) ->
+  (((forall n6:int. (((1 <= n6) and (n6 <= i)) -> (to_rep((a[n6])) <= m2))) and
+  (exists n6:int. (((1 <= n6) and (n6 <= i)) and (to_rep((a[n6])) = m2)))) ->
+  (m2 = max))))
+
+axiom H3 :
+  ((forall n6:int. (((1 <= n6) and (n6 <= (i - 1))) ->
+   (to_rep((a[n6])) <= max))) and
+  (exists n6:int. (((1 <= n6) and (n6 <= (i - 1))) and
+  (to_rep((a[n6])) = max))))
+
+axiom H4 : ((to_rep((a[i])) <  max) -> (result = max))
+
+axiom H5 : ((to_rep((a[i])) <  max) -> (max2 = to_rep((a[i]))))
+
+axiom H6 : ((not (to_rep((a[i])) <  max)) -> (max2 = max))
+
+axiom H7 : ((not (to_rep((a[i])) <  max)) -> (max2 = max1))
+
+axiom H8 : ((- 2147483648) <= m1)
+
+axiom H9 : (m1 <= 2147483647)
+
+axiom H10 : (1 <= n5)
+
+axiom H11 : (n5 <= i)
+
  (* File "max.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall max:int. forall m:int. forall n:int. forall max1:int.
-  forall result:int. forall max2:int. (in_range2(i) -> (in_range1(max) ->
-  ((forall m1:int. ((((-2147483648) <= m1) and (m1 <= 2147483647)) ->
-   (((forall n1:int. (((1 <= n1) and (n1 <= i)) -> (to_rep((a[n1])) <= m1))) and
-   (exists n1:int. (((1 <= n1) and (n1 <= i)) and (to_rep((a[n1])) = m1)))) ->
-   (m1 = max)))) ->
-  (((forall n1:int. (((1 <= n1) and (n1 <= (i - 1))) ->
-    (to_rep((a[n1])) <= max))) and
-  (exists n1:int. (((1 <= n1) and (n1 <= (i - 1))) and
-  (to_rep((a[n1])) = max)))) -> ((((to_rep((a[i])) <  max) and
-  ((result = max) and (max2 = to_rep((a[i]))))) or
-  ((not (to_rep((a[i])) <  max)) and ((max2 = max) and (max2 = max1)))) ->
-  ((((-2147483648) <= m) and (m <= 2147483647)) -> (((1 <= n) and
-  (n <= i)) -> (1 <= n)))))))))
+goal WP_parameter_def : (1 <= n5)

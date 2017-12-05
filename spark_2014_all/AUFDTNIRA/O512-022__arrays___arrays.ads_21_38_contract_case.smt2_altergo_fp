@@ -162,18 +162,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -219,7 +219,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -504,40 +504,163 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic c : int
+
+logic j : int
+
+logic arrays__count_even__result : int
+
+logic temp___169 : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic c2 : int
+
+logic j2 : int
+
+logic result2 : int
+
+logic c3 : int
+
+logic c4 : int
+
+logic j3 : int
+
+logic c5 : int
+
+logic j4 : int
+
+logic c6 : int
+
+logic j5 : int
+
+logic c7 : int
+
+logic j6 : int
+
+logic result3 : int
+
+logic arrays__count_even__result1 : int
+
+logic arrays__count_even__result2 : int
+
+logic arrays__count_even__result3 : int
+
+logic c8 : int
+
+logic j7 : int
+
+logic arrays__count_even__result4 : int
+
+logic c9 : int
+
+logic j8 : int
+
+logic arrays__count_even__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(x1)),
+  to_rep1(last(x1)))
+
+axiom H1 : (result = c)
+
+axiom H2 : (c1 = 0)
+
+axiom H3 : in_range2(c1)
+
+axiom H4 : (result1 = j)
+
+axiom H5 : (j1 = to_rep1(first(x1)))
+
+axiom H6 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (temp___169 = c1))
+
+axiom H7 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (((0 <= 2147483647) -> in_range2(c2)) and ((to_rep1(first(x1)) <= j2) and
+  (j2 <= to_rep1(last(x1))))))
+
+axiom H8 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  ((mod(to_rep((x[j2])), 2) = 0) -> ((o = (c2 + 1)) and
+  in_range1((c2 + 1)))))
+
+axiom H9 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  ((mod(to_rep((x[j2])), 2) = 0) -> (c2 = result2)))
+
+axiom H10 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  ((mod(to_rep((x[j2])), 2) = 0) -> (c3 = o)))
+
+axiom H11 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  ((not (mod(to_rep((x[j2])), 2) = 0)) -> (c3 = c2)))
+
+axiom H12 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (j2 = to_rep1(last(x1))))
+
+axiom H13 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (j2 = j3))
+
+axiom H14 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (c3 = c4))
+
+axiom H15 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (j4 = j2))
+
+axiom H16 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (c5 = c3))
+
+axiom H17 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (j5 = j3))
+
+axiom H18 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (c6 = c4))
+
+axiom H19 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (j6 = j4))
+
+axiom H20 : (((to_rep1(first(x1)) <= j1) and (j1 <= to_rep1(last(x1)))) ->
+  (c7 = c5))
+
+axiom H21 : ((not ((to_rep1(first(x1)) <= j1) and
+  (j1 <= to_rep1(last(x1))))) -> (j1 = j5))
+
+axiom H22 : ((not ((to_rep1(first(x1)) <= j1) and
+  (j1 <= to_rep1(last(x1))))) -> (c1 = c6))
+
+axiom H23 : ((not ((to_rep1(first(x1)) <= j1) and
+  (j1 <= to_rep1(last(x1))))) -> (j6 = j1))
+
+axiom H24 : ((not ((to_rep1(first(x1)) <= j1) and
+  (j1 <= to_rep1(last(x1))))) -> (c7 = c1))
+
+axiom H25 : (arrays__count_even__result1 = arrays__count_even__result2)
+
+axiom H26 : (arrays__count_even__result3 = arrays__count_even__result1)
+
+axiom H27 : (result3 = arrays__count_even__result)
+
+axiom H28 : (arrays__count_even__result1 = c6)
+
+axiom H29 : (arrays__count_even__result4 = arrays__count_even__result2)
+
+axiom H30 : (j7 = j5)
+
+axiom H31 : (c8 = c6)
+
+axiom H32 : (arrays__count_even__result5 = arrays__count_even__result3)
+
+axiom H33 : (j8 = j6)
+
+axiom H34 : (c9 = c7)
+
+axiom H35 : (bool_eq(length({ elts = x; rt = x1 }), 0) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall j:int. forall arrays__count_even__result:int.
-  forall temp___169:int. forall o:int. forall result:int. forall c1:int.
-  forall result1:int. forall j1:int. forall c2:int. forall j2:int.
-  forall result2:int. forall c3:int. forall c4:int. forall j3:int.
-  forall c5:int. forall j4:int. forall c6:int. forall j5:int. forall c7:int.
-  forall j6:int. forall result3:int. forall arrays__count_even__result1:int.
-  forall arrays__count_even__result2:int.
-  forall arrays__count_even__result3:int. forall c8:int. forall j7:int.
-  forall arrays__count_even__result4:int. forall c9:int. forall j8:int.
-  forall arrays__count_even__result5:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(x1)), to_rep1(last(x1))) -> ((((({ int__content = result
-  } = { int__content = c }) and (c1 = 0)) and (in_range2(c1) and (((({
-  int__content = result1 } = { int__content = j }) and
-  (j1 = to_rep1(first(x1)))) and ((((to_rep1(first(x1)) <= j1) and
-  (j1 <= to_rep1(last(x1)))) and ((((temp___169 = c1) and
-  ((((0 <= 2147483647) -> in_range2(c2)) and ((to_rep1(first(x1)) <= j2) and
-  (j2 <= to_rep1(last(x1))))) and ((((mod(to_rep((x[j2])), 2) = 0) and
-  (((o = (c2 + 1)) and in_range1((c2 + 1))) and ((c2 = result2) and
-  (c3 = o)))) or ((not (mod(to_rep((x[j2])), 2) = 0)) and (c3 = c2))) and
-  (j2 = to_rep1(last(x1)))))) and (((j2 = j3) and (c3 = c4)) and
-  ((j4 = j2) and (c5 = c3)))) and ((({ int__content = j5 } = { int__content =
-  j3 }) and ({ int__content = c6 } = { int__content = c4 })) and
-  ((j6 = j4) and (c7 = c5))))) or ((not ((to_rep1(first(x1)) <= j1) and
-  (j1 <= to_rep1(last(x1))))) and (((j1 = j5) and (c1 = c6)) and
-  ((j6 = j1) and (c7 = c1)))))) and
-  (((arrays__count_even__result1 = arrays__count_even__result2) and
-  (arrays__count_even__result3 = arrays__count_even__result1)) and (({
-  int__content = result3 } = { int__content = arrays__count_even__result
-  }) and (arrays__count_even__result1 = c6)))))) and ((({ int__content =
-  arrays__count_even__result4 } = { int__content =
-  arrays__count_even__result2 }) and (({ int__content = j7 } = {
-  int__content = j5 }) and ({ int__content = c8 } = { int__content = c6
-  }))) and ((arrays__count_even__result5 = arrays__count_even__result3) and
-  ((j8 = j6) and (c9 = c7))))) -> ((bool_eq(length({ elts = x; rt = x1 }),
-  0) = true) -> (arrays__count_even__result4 = 0)))))
+goal WP_parameter_def : (arrays__count_even__result4 = 0)

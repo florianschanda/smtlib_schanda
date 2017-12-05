@@ -519,7 +519,7 @@ logic element__function_guard : int, us_rep, us_rep1 -> prop
 
 type element_type1
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -626,7 +626,7 @@ axiom length__post_axiom1 :
 
 type element_type2
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -699,50 +699,84 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range2(w_get(container, witness1)))))
 
- (* File "a-cfdlli.ads", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lists__search2__result:count_type. forall o:count_type.
-  forall cu:count_type. forall o1:bool. forall o2:bool. forall o3:us_rep2.
-  forall o4:us_rep2. forall o5:int. forall result:count_type.
-  forall lists__search2__result1:count_type.
-  forall lists__search2__result2:count_type.
-  forall lists__search2__result3:count_type.
-  forall lists__search2__result4:count_type.
-  forall lists__search2__result5:count_type. forall result1:bool.
-  forall result2:bool.
-  (((((lists__search2__result2 = lists__search2__result1) and ({
-  us_split_fields3 = { rec__lists__l__cursor__node = lists__search2__result3
-  } } = { us_split_fields3 = { rec__lists__l__cursor__node =
-  lists__search2__result1 } })) and ((({ us_split_fields3 = {
-  rec__lists__l__cursor__node = o } } = search({ us_split_discrs1 = {
-  rec__lists__l__list__capacity = l }; us_split_fields1 = {
-  rec__lists__l__list = l1 } })) and
-  (((forall cu1:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+logic lists__search2__result : count_type
+
+logic o : count_type
+
+logic cu : count_type
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : us_rep2
+
+logic o4 : us_rep2
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : count_type
+
+logic lists__search2__result1 : count_type
+
+logic lists__search2__result2 : count_type
+
+logic lists__search2__result3 : count_type
+
+logic lists__search2__result4 : count_type
+
+logic lists__search2__result5 : count_type
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+axiom H : (lists__search2__result2 = lists__search2__result1)
+
+axiom H1 : (lists__search2__result3 = lists__search2__result1)
+
+axiom H2 : (({ us_split_fields3 = { rec__lists__l__cursor__node = o }
+  } = search({ us_split_discrs1 = { rec__lists__l__list__capacity = l };
+  us_split_fields1 = { rec__lists__l__list = l1 } })) and
+  (((forall cu1:count_type. ((has_key(positions({ us_split_discrs1 = {
     rec__lists__l__list__capacity = l }; us_split_fields1 = {
-    rec__lists__l__list = l1 } }), cu1) = true) -> (not (get1(model__({
+    rec__lists__l__list = l1 } }), { us_split_fields3 = {
+    rec__lists__l__cursor__node = cu1 } }) = true) -> (not (get1(model__({
     us_split_discrs1 = { rec__lists__l__list__capacity = l };
     us_split_fields1 = { rec__lists__l__list = l1 } }), get(positions({
     us_split_discrs1 = { rec__lists__l__list__capacity = l };
-    us_split_fields1 = { rec__lists__l__list = l1 } }), cu1)) = 0)))) and
+    us_split_fields1 = { rec__lists__l__list = l1 } }), { us_split_fields3 =
+    { rec__lists__l__cursor__node = cu1 } })) = 0)))) ->
   (not (has_key(positions({ us_split_discrs1 = {
   rec__lists__l__list__capacity = l }; us_split_fields1 = {
   rec__lists__l__list = l1 } }), { us_split_fields3 = {
-  rec__lists__l__cursor__node = o } }) = true))) or
-  ((not (forall cu1:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+  rec__lists__l__cursor__node = o } }) = true))) and
+  ((not (forall cu1:count_type. ((has_key(positions({ us_split_discrs1 = {
         rec__lists__l__list__capacity = l }; us_split_fields1 = {
-        rec__lists__l__list = l1 } }), cu1) = true) -> (not (get1(model__({
-        us_split_discrs1 = { rec__lists__l__list__capacity = l };
-        us_split_fields1 = { rec__lists__l__list = l1 } }), get(positions({
-        us_split_discrs1 = { rec__lists__l__list__capacity = l };
-        us_split_fields1 = { rec__lists__l__list = l1 } }), cu1)) = 0))))) and
-  ((exists cu1:us_rep1. ((has_key(positions({ us_split_discrs1 = {
+        rec__lists__l__list = l1 } }), { us_split_fields3 = {
+        rec__lists__l__cursor__node = cu1 } }) = true) ->
+        (not (get1(model__({ us_split_discrs1 = {
+        rec__lists__l__list__capacity = l }; us_split_fields1 = {
+        rec__lists__l__list = l1 } }), get(positions({ us_split_discrs1 = {
+        rec__lists__l__list__capacity = l }; us_split_fields1 = {
+        rec__lists__l__list = l1 } }), { us_split_fields3 = {
+        rec__lists__l__cursor__node = cu1 } })) = 0))))) ->
+  ((exists cu1:count_type. ((has_key(positions({ us_split_discrs1 = {
    rec__lists__l__list__capacity = l }; us_split_fields1 = {
-   rec__lists__l__list = l1 } }), cu1) = true) and (get1(model__({
+   rec__lists__l__list = l1 } }), { us_split_fields3 = {
+   rec__lists__l__cursor__node = cu1 } }) = true) and (get1(model__({
    us_split_discrs1 = { rec__lists__l__list__capacity = l };
    us_split_fields1 = { rec__lists__l__list = l1 } }), get(positions({
    us_split_discrs1 = { rec__lists__l__list__capacity = l };
-   us_split_fields1 = { rec__lists__l__list = l1 } }), cu1)) = 0))) ->
-  ((get1(model__({ us_split_discrs1 = { rec__lists__l__list__capacity = l };
+   us_split_fields1 = { rec__lists__l__list = l1 } }), { us_split_fields3 = {
+   rec__lists__l__cursor__node = cu1 } })) = 0))) -> ((get1(model__({
+  us_split_discrs1 = { rec__lists__l__list__capacity = l };
   us_split_fields1 = { rec__lists__l__list = l1 } }), get(positions({
   us_split_discrs1 = { rec__lists__l__list__capacity = l };
   us_split_fields1 = { rec__lists__l__list = l1 } }), { us_split_fields3 = {
@@ -752,59 +786,86 @@ goal WP_parameter_def :
   rec__lists__l__list = l1 } }), { us_split_fields3 = {
   rec__lists__l__cursor__node = o } }) - 1))) -> (not (get1(model__({
   us_split_discrs1 = { rec__lists__l__list__capacity = l };
-  us_split_fields1 = { rec__lists__l__list = l1 } }), i) = 0))))))))) and (({
-  cursor__content = { us_split_fields3 = { rec__lists__l__cursor__node =
-  result } } } = { cursor__content = { us_split_fields3 = {
-  rec__lists__l__cursor__node = lists__search2__result } } }) and ({
-  us_split_fields3 = { rec__lists__l__cursor__node = lists__search2__result1
-  } } = { us_split_fields3 = { rec__lists__l__cursor__node = o } })))) and
-  (({ cursor__content = { us_split_fields3 = { rec__lists__l__cursor__node =
-  lists__search2__result4 } } } = { cursor__content = { us_split_fields3 = {
-  rec__lists__l__cursor__node = lists__search2__result2 } } }) and ({
-  us_split_fields3 = { rec__lists__l__cursor__node = lists__search2__result5
-  } } = { us_split_fields3 = { rec__lists__l__cursor__node =
-  lists__search2__result3 } }))) -> (((result1 = has_key(positions({
-  us_split_discrs1 = { rec__lists__l__list__capacity = l };
-  us_split_fields1 = { rec__lists__l__list = l1 } }), { us_split_fields3 = {
+  us_split_fields1 = { rec__lists__l__list = l1 } }), i) = 0)))))))))
+
+axiom H3 : (result = lists__search2__result)
+
+axiom H4 : (lists__search2__result1 = o)
+
+axiom H5 : (lists__search2__result4 = lists__search2__result2)
+
+axiom H6 : (lists__search2__result5 = lists__search2__result3)
+
+axiom H7 : ((result1 = has_key(positions({ us_split_discrs1 = {
+  rec__lists__l__list__capacity = l }; us_split_fields1 = {
+  rec__lists__l__list = l1 } }), { us_split_fields3 = {
   rec__lists__l__cursor__node = lists__search2__result4 } })) and
   ((result1 = true) <-> (has_key(positions({ us_split_discrs1 = {
   rec__lists__l__list__capacity = l }; us_split_fields1 = {
   rec__lists__l__list = l1 } }), { us_split_fields3 = {
-  rec__lists__l__cursor__node = lists__search2__result4 } }) = true))) ->
-  ((result1 = true) -> ((((o1 = has_key(positions({ us_split_discrs1 = {
+  rec__lists__l__cursor__node = lists__search2__result4 } }) = true)))
+
+axiom H8 : (result1 = true)
+
+axiom H9 : ((o1 = has_key(positions({ us_split_discrs1 = {
   rec__lists__l__list__capacity = l }; us_split_fields1 = {
   rec__lists__l__list = l1 } }), { us_split_fields3 = {
   rec__lists__l__cursor__node = cu } })) and ((o1 = true) <->
   (has_key(positions({ us_split_discrs1 = { rec__lists__l__list__capacity = l
   }; us_split_fields1 = { rec__lists__l__list = l1 } }), { us_split_fields3 =
-  { rec__lists__l__cursor__node = cu } }) = true))) and ((o2 = true) and
-  (result2 = match_bool(o2, o1, false)))) -> ((result2 = true) ->
-  ((((o4 = positions({ us_split_discrs1 = { rec__lists__l__list__capacity = l
-  }; us_split_fields1 = { rec__lists__l__list = l1 } })) and
-  ((not (has_key(o4, { us_split_fields3 = { rec__lists__l__cursor__node =
-  no_element } }) = true)) and
-  (forall i:us_rep1. ((has_key(o4, i) = true) -> (((1 <= get(o4, i)) and
-  (get(o4, i) <= length1({ us_split_discrs1 = {
+  { rec__lists__l__cursor__node = cu } }) = true)))
+
+axiom H10 : (o2 = true)
+
+axiom H11 : (result2 = match_bool(o2, o1, false))
+
+axiom H12 : (result2 = true)
+
+axiom H13 : ((o4 = positions({ us_split_discrs1 = {
   rec__lists__l__list__capacity = l }; us_split_fields1 = {
-  rec__lists__l__list = l1 } }))) and
-  (forall j:us_rep1. ((has_key(o4, j) = true) -> ((get(o4, i) = get(o4,
-  j)) -> (bool_eq4(i, j) = true))))))))) and ((o5 = get(o4, {
+  rec__lists__l__list = l1 } })) and ((not (has_key(o4, { us_split_fields3 =
+  { rec__lists__l__cursor__node = no_element } }) = true)) and
+  (forall i:count_type. ((has_key(o4, { us_split_fields3 = {
+  rec__lists__l__cursor__node = i } }) = true) -> (((1 <= get(o4, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } })) and (get(o4, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }) <= length1({
+  us_split_discrs1 = { rec__lists__l__list__capacity = l };
+  us_split_fields1 = { rec__lists__l__list = l1 } }))) and
+  (forall j:count_type. ((has_key(o4, { us_split_fields3 = {
+  rec__lists__l__cursor__node = j } }) = true) -> ((get(o4, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }) = get(o4, {
+  us_split_fields3 = { rec__lists__l__cursor__node = j } })) -> (bool_eq4({
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }, {
+  us_split_fields3 = { rec__lists__l__cursor__node = j } }) = true)))))))))
+
+axiom H14 : ((o5 = get(o4, { us_split_fields3 = {
+  rec__lists__l__cursor__node = lists__search2__result4 } })) and
+  (in_range2(o5) and ((of_int(0) = true) -> ((o5 = w_get(o4, witness(o4, {
   us_split_fields3 = { rec__lists__l__cursor__node = lists__search2__result4
-  } })) and (in_range2(o5) and ((of_int(0) = true) -> ((o5 = w_get(o4,
-  witness(o4, { us_split_fields3 = { rec__lists__l__cursor__node =
-  lists__search2__result4 } }))) and
+  } }))) and
   (forall k:us_rep1. ((has_key(o4, k) = true) -> ((bool_eq4(k, {
   us_split_fields3 = { rec__lists__l__cursor__node = lists__search2__result4
   } }) = true) <-> (witness(o4, { us_split_fields3 = {
   rec__lists__l__cursor__node = lists__search2__result4 } }) = witness(o4,
-  k)))))))))) -> (((o3 = positions({ us_split_discrs1 = {
+  k)))))))))
+
+axiom H15 : ((o3 = positions({ us_split_discrs1 = {
   rec__lists__l__list__capacity = l }; us_split_fields1 = {
   rec__lists__l__list = l1 } })) and ((not (has_key(o3, { us_split_fields3 =
   { rec__lists__l__cursor__node = no_element } }) = true)) and
-  (forall i:us_rep1. ((has_key(o3, i) = true) -> (((1 <= get(o3, i)) and
-  (get(o3, i) <= length1({ us_split_discrs1 = {
-  rec__lists__l__list__capacity = l }; us_split_fields1 = {
-  rec__lists__l__list = l1 } }))) and
-  (forall j:us_rep1. ((has_key(o3, j) = true) -> ((get(o3, i) = get(o3,
-  j)) -> (bool_eq4(i, j) = true))))))))) -> (has_key(o3, { us_split_fields3 =
-  { rec__lists__l__cursor__node = cu } }) = true)))))))))
+  (forall i:count_type. ((has_key(o3, { us_split_fields3 = {
+  rec__lists__l__cursor__node = i } }) = true) -> (((1 <= get(o3, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } })) and (get(o3, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }) <= length1({
+  us_split_discrs1 = { rec__lists__l__list__capacity = l };
+  us_split_fields1 = { rec__lists__l__list = l1 } }))) and
+  (forall j:count_type. ((has_key(o3, { us_split_fields3 = {
+  rec__lists__l__cursor__node = j } }) = true) -> ((get(o3, {
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }) = get(o3, {
+  us_split_fields3 = { rec__lists__l__cursor__node = j } })) -> (bool_eq4({
+  us_split_fields3 = { rec__lists__l__cursor__node = i } }, {
+  us_split_fields3 = { rec__lists__l__cursor__node = j } }) = true)))))))))
+
+ (* File "a-cfdlli.ads", line 51, characters 0-0 *)
+goal WP_parameter_def : (has_key(o3, { us_split_fields3 = {
+  rec__lists__l__cursor__node = cu } }) = true)

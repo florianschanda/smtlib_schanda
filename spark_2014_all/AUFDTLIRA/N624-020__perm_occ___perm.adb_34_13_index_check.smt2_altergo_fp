@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -603,30 +603,91 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep1(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
- (* File "perm.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:(int,natural) farray.
-  forall perm__occ_set__b__assume:(int,natural) farray.
-  forall perm__occ_set__b__assume1:t. forall o:natural.
-  forall result:(int,natural) farray. forall b1:(int,natural) farray.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range3(i) -> (in_range1(v) -> (in_range1(e) -> (dynamic_property(1,
-  100, to_rep1(first(r1)), to_rep1(last(r1))) ->
-  ((((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))) and (is_set({
-  elts = a; rt = a1 }, i, v, { elts = r; rt = r1 }) = true)) -> (((({ elts =
-  perm__occ_set__b__assume; rt = perm__occ_set__b__assume1 } = remove_last({
-  elts = a; rt = a1 })) and (dynamic_property(1, 100,
-  to_rep1(first(perm__occ_set__b__assume1)),
+logic b : (int,natural) farray
+
+logic perm__occ_set__b__assume : (int,natural) farray
+
+logic perm__occ_set__b__assume1 : t
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : (int,natural) farray
+
+logic o5 : (int,natural) farray
+
+logic o6 : t
+
+logic o7 : (int,natural) farray
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : int
+
+logic result : (int,natural) farray
+
+logic b1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic b2 : (int,natural) farray
+
+logic b3 : (int,natural) farray
+
+logic b4 : (int,natural) farray
+
+logic b5 : (int,natural) farray
+
+logic b6 : (int,natural) farray
+
+logic result2 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : in_range1(e)
+
+axiom H4 : dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1)))
+
+axiom H5 : (((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))) and
+  (is_set({ elts = a; rt = a1 }, i, v, { elts = r; rt = r1 }) = true))
+
+axiom H6 : (({ elts = perm__occ_set__b__assume; rt =
+  perm__occ_set__b__assume1 } = remove_last({ elts = a; rt = a1 })) and
+  (dynamic_property(1, 100, to_rep1(first(perm__occ_set__b__assume1)),
   to_rep1(last(perm__occ_set__b__assume1))) and
   ((a = perm__occ_set__b__assume) and
   (mk(to_rep1(first2(mk1(to_rep1(first(a1)), (to_rep1(last(a1)) - 1)))),
   to_rep1(last2(mk1(to_rep1(first(a1)),
-  (to_rep1(last(a1)) - 1))))) = perm__occ_set__b__assume1)))) and ((({
-  map__content = result } = { map__content = b }) and
-  (b1 = perm__occ_set__b__assume)) and
-  ((to_rep1(b__first) = to_rep1(first(perm__occ_set__b__assume1))) and
-  (to_rep1(b__last) = to_rep1(last(perm__occ_set__b__assume1)))))) ->
-  (dynamic_property(1, 100, to_rep1(b__first), to_rep1(b__last)) ->
-  ((not (length({ elts = a; rt = a1 }) = 0)) ->
-  ((not (i = to_rep1(last(a1)))) -> ((to_rep(o) = v) ->
-  (to_rep1(b__first) <= i)))))))))))))
+  (to_rep1(last(a1)) - 1))))) = perm__occ_set__b__assume1))))
+
+axiom H7 : (result = b)
+
+axiom H8 : (b1 = perm__occ_set__b__assume)
+
+axiom H9 : (to_rep1(b__first) = to_rep1(first(perm__occ_set__b__assume1)))
+
+axiom H10 : (to_rep1(b__last) = to_rep1(last(perm__occ_set__b__assume1)))
+
+axiom H11 : dynamic_property(1, 100, to_rep1(b__first), to_rep1(b__last))
+
+axiom H12 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H13 : (not (i = to_rep1(last(a1))))
+
+axiom H14 : (to_rep(o2) = v)
+
+ (* File "perm.ads", line 22, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(b__first) <= i)

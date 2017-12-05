@@ -338,5 +338,27 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic alias__add__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic alias__add__result1 : int
+
+logic alias__add__result2 : int
+
+logic alias__add__result3 : int
+
+logic alias__add__result4 : int
+
+logic alias__add__result5 : int
+
+axiom H : in_range(x)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> (0 <  to_rep(r1)))
+goal WP_parameter_def : (0 <  to_rep(r1))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -765,6 +765,90 @@ axiom c3__post_axiom : (forall s:t [c3(s)]. in_range2(c3(s)))
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic veraw : t
+
+logic x : int
+
+logic t1 : int
+
+logic tmp : t
+
+logic o : t
+
+logic o1 : int
+
+logic veraw1 : t
+
+logic result : t
+
+logic tmp1 : t
+
+logic result1 : int
+
+logic t2 : int
+
+logic result2 : int
+
+logic x1 : int
+
+logic veraw2 : t
+
+logic x2 : int
+
+logic t3 : int
+
+logic tmp2 : t
+
+logic veraw3 : t
+
+logic x3 : int
+
+logic t4 : int
+
+logic tmp3 : t
+
+axiom H : true
+
+axiom H1 : ((0 <= 2) -> in_range1(x))
+
+axiom H2 : ((0 <= 2) -> in_range1(t1))
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : (o = veraw1)
+
+axiom H6 : (result = tmp)
+
+axiom H7 : (tmp1 = o)
+
+axiom H8 : ((o1 = c3(tmp1)) and in_range2(o1))
+
+axiom H9 : (result1 = t1)
+
+axiom H10 : (t2 = o1)
+
+axiom H11 : (result2 = x)
+
+axiom H12 : (x1 = t2)
+
+axiom H13 : (tmp2 = tmp1)
+
+axiom H14 : (t3 = t2)
+
+axiom H15 : (x1 = x2)
+
+axiom H16 : (veraw2 = veraw1)
+
+axiom H17 : (tmp3 = tmp1)
+
+axiom H18 : (t4 = t2)
+
+axiom H19 : (x3 = x1)
+
+axiom H20 : (veraw3 = veraw1)
 
  (* File "port.ads", line 10, characters 0-0 *)
 goal WP_parameter_def : true

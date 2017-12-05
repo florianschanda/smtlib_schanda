@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -702,128 +702,149 @@ type twrapperD1__ref = { twrapperD1__content : twrapperD1
 function twrapperD1__ref___projection(a2: twrapperD1__ref) : twrapperD1 =
   (a2).twrapperD1__content
 
- (* File "dynamic_types.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dynamic_types__search__search_range__result:(int,integer) farray.
-  forall dynamic_types__search__search_range__result1:natural. forall o:int.
-  forall o1:natural. forall o2:int. forall us:int. forall o3:int.
-  forall o4:natural. forall o5:(int,integer) farray.
-  forall o6:(int,integer) farray. forall o7:natural.
-  forall o8:(int,integer) farray. forall o9:natural. forall us1:int.
-  forall o10:int. forall o11:natural. forall o12:(int,integer) farray.
-  forall o13:(int,integer) farray. forall o14:natural.
-  forall o15:(int,integer) farray. forall o16:natural. forall i:int.
-  forall result:bool. forall result1:(int,integer) farray.
-  forall result2:natural.
-  forall dynamic_types__search__search_range__result2:(int,integer) farray.
-  forall dynamic_types__search__search_range__result3:natural.
-  forall result3:(int,integer) farray. forall result4:natural.
-  forall dynamic_types__search__search_range__result4:(int,integer) farray.
-  forall dynamic_types__search__search_range__result5:natural.
-  forall dynamic_types__search__search_range__result6:(int,integer) farray.
-  forall dynamic_types__search__search_range__result7:natural.
-  forall dynamic_types__search__search_range__result8:(int,integer) farray.
-  forall dynamic_types__search__search_range__result9:natural.
-  forall dynamic_types__search__search_range__result10:(int,integer) farray.
-  forall dynamic_types__search__search_range__result11:natural.
-  forall dynamic_types__search__search_range__result12:(int,integer) farray.
-  forall dynamic_types__search__search_range__result13:natural.
-  forall dynamic_types__search__search_range__result14:(int,integer) farray.
-  forall dynamic_types__search__search_range__result15:natural.
-  forall dynamic_types__search__search_range__result16:(int,integer) farray.
-  forall dynamic_types__search__search_range__result17:natural.
-  (in_range1(from) -> (dynamic_property(1, 2147483647, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range1(c) -> (((to_rep1(first(a1)) <= from) and
-  (from <= to_rep1(last(a1)))) -> ((((({ result_type__content = {
-  us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result10;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result11 } } } = {
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result6;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result7 } } }) and ({
-  us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result12;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result13 } } = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result8;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result9 } })) and
+logic dynamic_types__search__search_range__result : (int,integer) farray
+
+logic dynamic_types__search__search_range__result1 : natural
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic us : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,integer) farray
+
+logic o6 : (int,integer) farray
+
+logic o7 : natural
+
+logic o8 : (int,integer) farray
+
+logic o9 : natural
+
+logic us1 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : (int,integer) farray
+
+logic o13 : (int,integer) farray
+
+logic o14 : natural
+
+logic o15 : (int,integer) farray
+
+logic o16 : natural
+
+logic i : int
+
+logic result : bool
+
+logic result1 : (int,integer) farray
+
+logic result2 : natural
+
+logic dynamic_types__search__search_range__result2 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result3 : natural
+
+logic result3 : (int,integer) farray
+
+logic result4 : natural
+
+logic dynamic_types__search__search_range__result4 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result5 : natural
+
+logic dynamic_types__search__search_range__result6 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result7 : natural
+
+logic dynamic_types__search__search_range__result8 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result9 : natural
+
+logic dynamic_types__search__search_range__result10 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result11 : natural
+
+logic dynamic_types__search__search_range__result12 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result13 : natural
+
+logic dynamic_types__search__search_range__result14 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result15 : natural
+
+logic dynamic_types__search__search_range__result16 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result17 : natural
+
+logic result5 : bool
+
+axiom H : in_range1(from)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H2 : in_range1(c)
+
+axiom H3 : ((to_rep1(first(a1)) <= from) and (from <= to_rep1(last(a1))))
+
+axiom H4 :
+  ((((dynamic_types__search__search_range__result10 = dynamic_types__search__search_range__result6) and
+  (dynamic_types__search__search_range__result11 = dynamic_types__search__search_range__result7)) and
+  ((dynamic_types__search__search_range__result12 = dynamic_types__search__search_range__result8) and
+  (dynamic_types__search__search_range__result13 = dynamic_types__search__search_range__result9))) and
   (((((((to_rep1(first(a1)) <= from) and (from <= to_rep1(last(a1)))) and
-  (o = from)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and (((o2 = c) and
-  (result = true)) or ((not (o2 = c)) and (result = false)))) and
-  (((result = true) and
+  (o = from)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and (((o2 = c) ->
+  (result = true)) and ((not (o2 = c)) -> (result = false)))) and
+  (((result = true) ->
   ((((dynamic_types__search__search_range__result6 = dynamic_types__search__search_range__result2) and
   (dynamic_types__search__search_range__result7 = dynamic_types__search__search_range__result3)) and
-  ({ us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result8;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result9 } } = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result2;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result3 } })) and
+  ((dynamic_types__search__search_range__result8 = dynamic_types__search__search_range__result2) and
+  (dynamic_types__search__search_range__result9 = dynamic_types__search__search_range__result3))) and
   ((((to_rep(o4) = from) and (((((us = from) and dynamic_property1(first2,
   last2, from)) and (o3 = from)) and (o5 = temp___191(o3))) and
-  ((o5 = o6) and (o4 = o7)))) and ((o8 = o6) and (o9 = o7))) and (({
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from = result1;
-  rec__dynamic_types__search__result_type__result = result2 } } } = {
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result1 } } }) and ({
-  us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result2;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result3 } } = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from = o8;
-  rec__dynamic_types__search__result_type__result = o9 } }))))) or
-  ((not (result = true)) and
+  ((o5 = o6) and (o4 = o7)))) and ((o8 = o6) and (o9 = o7))) and
+  (((result1 = dynamic_types__search__search_range__result) and
+  (result2 = dynamic_types__search__search_range__result1)) and
+  ((dynamic_types__search__search_range__result2 = o8) and
+  (dynamic_types__search__search_range__result3 = o9)))))) and
+  ((not (result = true)) ->
   ((((dynamic_types__search__search_range__result6 = dynamic_types__search__search_range__result4) and
   (dynamic_types__search__search_range__result7 = dynamic_types__search__search_range__result5)) and
-  ({ us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result8;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result9 } } = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result4;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result5 } })) and
+  ((dynamic_types__search__search_range__result8 = dynamic_types__search__search_range__result4) and
+  (dynamic_types__search__search_range__result9 = dynamic_types__search__search_range__result5))) and
   ((((to_rep(o11) = 0) and (((((us1 = from) and dynamic_property1(first2,
   last2, from)) and (o10 = from)) and (o12 = temp___187(o10))) and
-  ((o12 = o13) and (o11 = o14)))) and ((o15 = o13) and (o16 = o14))) and (({
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from = result3;
-  rec__dynamic_types__search__result_type__result = result4 } } } = {
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result1 } } }) and ({
-  us_split_fields1 = { rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result4;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result5 } } = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from = o15;
-  rec__dynamic_types__search__result_type__result = o16 } })))))))) and (({
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result14;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result15 } } } = {
-  result_type__content = { us_split_fields1 = {
-  rec__dynamic_types__search__result_type__from =
-  dynamic_types__search__search_range__result10;
-  rec__dynamic_types__search__result_type__result =
-  dynamic_types__search__search_range__result11 } } }) and
+  ((o12 = o13) and (o11 = o14)))) and ((o15 = o13) and (o16 = o14))) and
+  (((result3 = dynamic_types__search__search_range__result) and
+  (result4 = dynamic_types__search__search_range__result1)) and
+  ((dynamic_types__search__search_range__result4 = o15) and
+  (dynamic_types__search__search_range__result5 = o16)))))))))
+
+axiom H5 :
+  ((dynamic_types__search__search_range__result14 = dynamic_types__search__search_range__result10) and
+  (dynamic_types__search__search_range__result15 = dynamic_types__search__search_range__result11))
+
+axiom H6 :
   ((dynamic_types__search__search_range__result16 = dynamic_types__search__search_range__result12) and
-  (dynamic_types__search__search_range__result17 = dynamic_types__search__search_range__result13)))) ->
-  ((to_rep(dynamic_types__search__search_range__result15) = 0) ->
-  (((from <= i) and
-  (i <= to_rep1((dynamic_types__search__search_range__result14[1])))) ->
-  (to_rep1(first(a1)) <= i)))))))))
+  (dynamic_types__search__search_range__result17 = dynamic_types__search__search_range__result13))
+
+axiom H7 : (to_rep(dynamic_types__search__search_range__result15) = 0)
+
+axiom H8 : (from <= i)
+
+axiom H9 : (i <= to_rep1((dynamic_types__search__search_range__result14[1])))
+
+ (* File "dynamic_types.adb", line 8, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(a1)) <= i)

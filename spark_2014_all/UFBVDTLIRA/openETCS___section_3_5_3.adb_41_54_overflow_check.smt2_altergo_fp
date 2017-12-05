@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -355,18 +355,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1522,22 +1522,107 @@ axiom witness__post_axiom :
 
 axiom w_get__post_axiom : true
 
- (* File "section_3_5_3.ads", line 53, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ertms_etcs_level:int. forall start_of_mission:bool.
-  forall track_side_new_communication_order:bool.
-  forall mode_change_report_to_rbc_not_considered_as_end_of_mission:bool.
-  forall manual_level_change:bool.
-  forall train_front_reaches_end_of_radio_hole:bool.
-  forall previous_communication_loss:bool.
-  forall start_of_mission_procedure_completed_without_com:bool.
-  forall connections__split_fields:us_main_type.
-  forall connection_attemps:int. forall result:int.
-  forall connection_attemps1:int. forall connection_attemps2:int.
-  forall result1:bool. (((10 = to_rep1(connections__split_discrs)) and
-  (r1s = to_rep(connections__split_discrs1))) -> (in_range4(destination) ->
-  (in_range3(phone) -> (in_range5(ertms_etcs_level) ->
-  (((authorize_new_communication_session(mode_change_report_to_rbc_not_considered_as_end_of_mission,
+logic ertms_etcs_level : int
+
+logic start_of_mission : bool
+
+logic end_of_mission : bool
+
+logic track_side_new_communication_order : bool
+
+logic track_side_terminate_communication_order : bool
+
+logic train_passes_level_transition_border : bool
+
+logic train_passes_rbc_rbc_border : bool
+
+logic train_passes_start_of_announced_radio_hole : bool
+
+logic order_to_contact_different_rbc : bool
+
+logic contact_order_not_for_accepting_rbc : bool
+
+logic mode_change_report_to_rbc_not_considered_as_end_of_mission : bool
+
+logic manual_level_change : bool
+
+logic train_front_reaches_end_of_radio_hole : bool
+
+logic previous_communication_loss : bool
+
+logic start_of_mission_procedure_completed_without_com : bool
+
+logic connections__split_fields : us_main_type
+
+logic connection_attemps : int
+
+logic temp___524 : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic result : int
+
+logic connection_attemps1 : int
+
+logic connection_attemps2 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic connection_attemps3 : int
+
+logic connection_attemps4 : int
+
+logic connection_attemps5 : int
+
+logic connection_attemps6 : int
+
+logic connection_attemps7 : int
+
+logic result3 : bool
+
+logic connection_attemps8 : int
+
+logic connection_attemps9 : int
+
+logic connection_attemps10 : int
+
+logic connection_attemps11 : int
+
+logic connection_attemps12 : int
+
+logic connection_attemps13 : int
+
+logic connection_attemps14 : int
+
+logic connection_attemps15 : int
+
+axiom H : ((10 = to_rep1(connections__split_discrs)) and
+  (r1s = to_rep(connections__split_discrs1)))
+
+axiom H1 : in_range4(destination)
+
+axiom H2 : in_range3(phone)
+
+axiom H3 : in_range5(ertms_etcs_level)
+
+axiom H4 :
+  ((authorize_new_communication_session(mode_change_report_to_rbc_not_considered_as_end_of_mission,
   manual_level_change, train_front_reaches_end_of_radio_hole,
   previous_communication_loss,
   start_of_mission_procedure_completed_without_com, ertms_etcs_level,
@@ -1546,10 +1631,24 @@ goal WP_parameter_def :
   rec__com_map__com_to_rbc_map__map__capacity = connections__split_discrs;
   rec__com_map__com_to_rbc_map__map__modulus = connections__split_discrs1 };
   us_split_fields1 = { rec__com_map__com_to_rbc_map__map =
-  connections__split_fields } }, destination) = true))) -> ((({
-  int__content = result } = { int__content = connection_attemps }) and
-  (connection_attemps1 = 0)) -> (in_range2(connection_attemps1) ->
-  ((start_of_mission = true) -> ((connection_attemps1 <= 3) ->
-  ((((0 <= 2147483647) -> in_range2(connection_attemps2)) and
-  (connection_attemps2 <= 3)) -> (((result1 = setup_connection(phone)) and
-  (not (result1 = true))) -> in_range1((connection_attemps2 + 1))))))))))))))
+  connections__split_fields } }, destination) = true)))
+
+axiom H5 : (result = connection_attemps)
+
+axiom H6 : (connection_attemps1 = 0)
+
+axiom H7 : in_range2(connection_attemps1)
+
+axiom H8 : (start_of_mission = true)
+
+axiom H9 : (connection_attemps1 <= 3)
+
+axiom H10 : (((0 <= 2147483647) -> in_range2(connection_attemps2)) and
+  (connection_attemps2 <= 3))
+
+axiom H11 : (result1 = setup_connection(phone))
+
+axiom H12 : (not (result1 = true))
+
+ (* File "section_3_5_3.ads", line 53, characters 0-0 *)
+goal WP_parameter_def : in_range1((connection_attemps2 + 1))

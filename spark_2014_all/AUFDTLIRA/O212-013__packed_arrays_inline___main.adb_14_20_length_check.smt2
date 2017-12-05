@@ -275,6 +275,8 @@
 (declare-const d__split_fields1 t)
 (declare-const temp___311 (Array Int Bool))
 (declare-const temp___3111 t2)
+(declare-const temp___312 (Array Int Bool))
+(declare-const temp___3121 t1)
 (assert (dynamic_invariant1 (mk___rep d__split_discrs (mk___split_fields (mk___t d__split_fields d__split_fields1))) false false true))
 (assert (= (to_rep (rec__main__discr_type__discr d__split_discrs)) r6b))
 (assert (in_range1 r6b))

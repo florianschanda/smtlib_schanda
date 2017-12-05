@@ -38,6 +38,7 @@
 (declare-const y Int)
 (declare-const d Int)
 (declare-const e Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (in_range y))
 (assert (in_range d))

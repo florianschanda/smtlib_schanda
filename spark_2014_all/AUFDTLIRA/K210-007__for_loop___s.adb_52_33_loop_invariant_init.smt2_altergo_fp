@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -299,19 +299,167 @@ function t19b__ref___projection(a: t19b__ref) : t19b = (a).t19b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic dest : (int,integer) farray
+
+logic src : (int,integer) farray
+
+logic index : int
+
+logic temp___188 : int
+
+logic temp___189 : (int,integer) farray
+
+logic temp___186 : (int,integer) farray
+
+logic temp___184 : (int,integer) farray
+
+logic temp___190 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic j : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic j1 : int
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : integer
+
+logic o12 : (int,integer) farray
+
+logic o13 : integer
+
+logic o14 : (int,integer) farray
+
+logic dest1 : (int,integer) farray
+
+logic src1 : (int,integer) farray
+
+logic result : int
+
+logic index1 : int
+
+logic result1 : (int,integer) farray
+
+logic dest2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic src2 : (int,integer) farray
+
+logic dest3 : (int,integer) farray
+
+logic src3 : (int,integer) farray
+
+logic index2 : int
+
+logic result3 : int
+
+logic index3 : int
+
+logic result4 : (int,integer) farray
+
+logic dest4 : (int,integer) farray
+
+logic result5 : (int,integer) farray
+
+logic src4 : (int,integer) farray
+
+logic dest5 : (int,integer) farray
+
+logic src5 : (int,integer) farray
+
+logic index4 : int
+
+logic dest6 : (int,integer) farray
+
+logic src6 : (int,integer) farray
+
+logic index5 : int
+
+logic dest7 : (int,integer) farray
+
+logic src7 : (int,integer) farray
+
+logic index6 : int
+
+logic dest8 : (int,integer) farray
+
+logic src8 : (int,integer) farray
+
+logic index7 : int
+
+logic dest9 : (int,integer) farray
+
+logic src9 : (int,integer) farray
+
+logic index8 : int
+
+logic dest10 : (int,integer) farray
+
+logic src10 : (int,integer) farray
+
+logic index9 : int
+
+logic dest11 : (int,integer) farray
+
+logic src11 : (int,integer) farray
+
+logic index10 : int
+
+logic dest12 : (int,integer) farray
+
+logic src12 : (int,integer) farray
+
+logic index11 : int
+
+axiom H : (result = index)
+
+axiom H1 : (index1 = 10)
+
+axiom H2 : (1 <= index1)
+
+axiom H3 : (index1 <= 10)
+
+axiom H4 : (to_rep(o) = to_rep((src[index1])))
+
+axiom H5 : (o1 = (dest[index1 <- o]))
+
+axiom H6 : (result1 = dest)
+
+axiom H7 : (dest2 = o1)
+
+axiom H8 : (to_rep(o2) = 0)
+
+axiom H9 : (o3 = (src[index1 <- o2]))
+
+axiom H10 : (result2 = src)
+
+axiom H11 : (src2 = o3)
+
+logic j2 : int
+
+axiom H12 : (index1 <= j2)
+
+axiom H13 : (j2 <= 10)
+
  (* File "s.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dest:(int,integer) farray. forall src:(int,integer) farray.
-  forall index:int. forall o:integer. forall o1:(int,integer) farray.
-  forall o2:integer. forall o3:(int,integer) farray. forall result:int.
-  forall index1:int. forall result1:(int,integer) farray.
-  forall dest1:(int,integer) farray. forall result2:(int,integer) farray.
-  forall src1:(int,integer) farray. ((({ int__content = result } = {
-  int__content = index }) and (index1 = 10)) -> (((1 <= index1) and
-  (index1 <= 10)) -> ((((to_rep(o) = to_rep((src[index1]))) and
-  (o1 = (dest[index1 <- o]))) and (({ map__content = result1 } = {
-  map__content = dest }) and (dest1 = o1))) -> ((((to_rep(o2) = 0) and
-  (o3 = (src[index1 <- o2]))) and (({ map__content = result2 } = {
-  map__content = src }) and (src1 = o3))) ->
-  (forall j:int. (((index1 <= j) and (j <= 10)) ->
-  (to_rep((dest1[j])) = to_rep((src[j]))))))))))
+goal WP_parameter_def : (to_rep((dest2[j2])) = to_rep((src[j2])))

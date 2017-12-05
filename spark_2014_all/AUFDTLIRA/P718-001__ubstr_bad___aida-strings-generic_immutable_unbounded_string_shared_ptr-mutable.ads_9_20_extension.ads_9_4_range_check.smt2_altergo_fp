@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -460,7 +460,10 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
+logic o : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(text1)),
+  to_rep1(last(text1)))
+
  (* File "aida-strings-generic_immutable_unbounded_string_shared_ptr-mutable.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(first(text1)), to_rep1(last(text1))) -> in_range(length({ elts =
-  text; rt = text1 })))
+goal WP_parameter_def : in_range(length({ elts = text; rt = text1 }))

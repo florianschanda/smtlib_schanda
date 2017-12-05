@@ -135,6 +135,7 @@
 (declare-const d Int)
 (declare-const e Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const c1 Int)
 (assert (in_range a))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -972,29 +972,101 @@ axiom temp___String_Literal_167__def_axiom :
   (to_rep1((temp___String_Literal_167(void)[of_int(4)])) = 52)) and
   (to_rep1((temp___String_Literal_167(void)[of_int(5)])) = 53))
 
+logic x : (t,character) farray
+
+logic y : (t,character) farray
+
+logic z : (t,character) farray
+
+logic f : (t,character) farray
+
+logic strlit__dosome__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : (t,character) farray
+
+logic x1 : (t,character) farray
+
+logic result1 : (t,character) farray
+
+logic y1 : (t,character) farray
+
+logic result2 : (t,character) farray
+
+logic z1 : (t,character) farray
+
+logic result3 : (t,character) farray
+
+logic f1 : (t,character) farray
+
+logic result4 : int
+
+logic strlit__dosome__result1 : int
+
+logic strlit__dosome__result2 : int
+
+logic strlit__dosome__result3 : int
+
+logic x2 : (t,character) farray
+
+logic y2 : (t,character) farray
+
+logic z2 : (t,character) farray
+
+logic f2 : (t,character) farray
+
+logic strlit__dosome__result4 : int
+
+logic x3 : (t,character) farray
+
+logic y3 : (t,character) farray
+
+logic z3 : (t,character) farray
+
+logic f3 : (t,character) farray
+
+logic strlit__dosome__result5 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___String_Literal_162(void))
+
+axiom H2 : (result1 = y)
+
+axiom H3 : (y1 = temp___String_Literal_163(void))
+
+axiom H4 : (to_rep(y__first) = to_rep(first(mk(of_int(0), of_int(9)))))
+
+axiom H5 : (to_rep(y__last) = to_rep(last(mk(of_int(0), of_int(9)))))
+
+axiom H6 : dynamic_property(of_int(0), of_int(255), to_rep(y__first),
+  to_rep(y__last))
+
+axiom H7 : (result2 = z)
+
+axiom H8 : (z1 = temp___String_Literal_165(void))
+
+axiom H9 : (to_rep(z__first) = to_rep(first(mk(of_int(0), of_int(9)))))
+
+axiom H10 : (to_rep(z__last) = to_rep(last(mk(of_int(0), of_int(9)))))
+
+axiom H11 : dynamic_property(of_int(0), of_int(255), to_rep(z__first),
+  to_rep(z__last))
+
+axiom H12 : (result3 = f)
+
+axiom H13 : (f1 = temp___String_Literal_167(void))
+
+axiom H14 : (to_rep(y__first) = of_int(0))
+
+axiom H15 : ((tqtint(to_rep(z__first)) <= tqtint(to_rep(z__last))) ->
+  (o = ((tqtint(to_rep(z__last)) - tqtint(to_rep(z__first))) + 1)))
+
+axiom H16 : ((not (tqtint(to_rep(z__first)) <= tqtint(to_rep(z__last)))) ->
+  (o = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(t,character) farray. forall y:(t,character) farray.
-  forall z:(t,character) farray. forall f:(t,character) farray. forall o:int.
-  forall result:(t,character) farray. forall x1:(t,character) farray.
-  forall result1:(t,character) farray. forall y1:(t,character) farray.
-  forall result2:(t,character) farray. forall z1:(t,character) farray.
-  forall result3:(t,character) farray. forall f1:(t,character) farray. ((({
-  map__content = result } = { map__content = x }) and
-  (x1 = temp___String_Literal_162(void))) -> (((({ map__content = result1
-  } = { map__content = y }) and (y1 = temp___String_Literal_163(void))) and
-  ((to_rep(y__first) = to_rep(first(mk(of_int(0), of_int(9))))) and
-  (to_rep(y__last) = to_rep(last(mk(of_int(0), of_int(9))))))) ->
-  (dynamic_property(of_int(0), of_int(255), to_rep(y__first),
-  to_rep(y__last)) -> (((({ map__content = result2 } = { map__content = z
-  }) and (z1 = temp___String_Literal_165(void))) and
-  ((to_rep(z__first) = to_rep(first(mk(of_int(0), of_int(9))))) and
-  (to_rep(z__last) = to_rep(last(mk(of_int(0), of_int(9))))))) ->
-  (dynamic_property(of_int(0), of_int(255), to_rep(z__first),
-  to_rep(z__last)) -> ((({ map__content = result3 } = { map__content = f
-  }) and (f1 = temp___String_Literal_167(void))) ->
-  ((to_rep(y__first) = of_int(0)) ->
-  ((((tqtint(to_rep(z__first)) <= tqtint(to_rep(z__last))) and
-  (o = ((tqtint(to_rep(z__last)) - tqtint(to_rep(z__first))) + 1))) or
-  ((not (tqtint(to_rep(z__first)) <= tqtint(to_rep(z__last)))) and
-  (o = 0))) -> in_range(o))))))))))
+goal WP_parameter_def : in_range(o)

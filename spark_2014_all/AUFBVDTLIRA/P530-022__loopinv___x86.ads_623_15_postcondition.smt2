@@ -172,6 +172,7 @@
 (declare-const x86__readmem32__result4 (_ BitVec 32))
 (declare-const x86__readmem32__result5 (_ BitVec 32))
 (declare-const result1 (_ BitVec 32))
+(assert true)
 (assert (= x86__readmem32__result1 x86__readmem32__result2))
 (assert (= x86__readmem32__result3 x86__readmem32__result1))
 (assert (and (= o9 (readmem8 (bvadd addr ((_ int2bv 64) 3)) memory)) (= o9 (to_rep (select memory (bvadd addr ((_ int2bv 64) 3)))))))

@@ -33,6 +33,8 @@
 (define-fun type_invariant ((temp___132 Int)) Bool (not (= temp___132 0)))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const x Int)
+(declare-const x1 Int)
+(declare-const x2 Int)
 (assert (in_range x))
 (assert (not (type_invariant x)))
 (check-sat)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -688,7 +688,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -899,25 +899,206 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
+logic prevtime : t
+
+logic prevcount : t
+
+logic success : bool
+
+logic result__ : int
+
+logic t1 : int
+
+logic t2 : int
+
+logic d1 : int
+
+logic d2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic success1 : bool
+
+logic result__1 : int
+
+logic t11 : int
+
+logic t21 : int
+
+logic d11 : int
+
+logic d21 : int
+
+logic result : bool
+
+logic success2 : bool
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic t12 : int
+
+logic result3 : int
+
+logic t22 : int
+
+logic result4 : int
+
+logic d12 : int
+
+logic result5 : int
+
+logic d22 : int
+
+logic result6 : bool
+
+logic success3 : bool
+
+logic result7 : int
+
+logic result__3 : int
+
+logic success4 : bool
+
+logic result__4 : int
+
+logic t13 : int
+
+logic t23 : int
+
+logic d13 : int
+
+logic d23 : int
+
+logic success5 : bool
+
+logic result__5 : int
+
+logic t14 : int
+
+logic t24 : int
+
+logic d14 : int
+
+logic d24 : int
+
+logic success6 : bool
+
+logic result__6 : int
+
+logic t15 : int
+
+logic t25 : int
+
+logic d15 : int
+
+logic d25 : int
+
+logic success7 : bool
+
+logic result__7 : int
+
+logic t16 : int
+
+logic t26 : int
+
+logic d16 : int
+
+logic d26 : int
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : ((0 <= 2147483647) -> in_range4(result__))
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : ((not (thistime = prevtime)) and (not (thiscount = prevcount)))
+
+axiom H7 : ((0 <= 2147483647) -> in_range2(t1))
+
+axiom H8 : ((0 <= 2147483647) -> in_range2(t2))
+
+axiom H9 : ((0 <= 2147483647) -> in_range3(d1))
+
+axiom H10 : ((0 <= 2147483647) -> in_range3(d2))
+
+axiom H11 : (not ult(sub(thiscount, prevcount), sub(thistime, prevtime)))
+
+axiom H12 : (result__2 = result__)
+
+axiom H13 : (success2 = success)
+
+axiom H14 : (result__2 = result__1)
+
+axiom H15 : (success2 = success1)
+
+axiom H16 : (result2 = t1)
+
+axiom H17 : (t12 = tqtint(sub(thistime, prevtime)))
+
+axiom H18 : (result3 = t2)
+
+axiom H19 : (t22 = tqtint(sub(currtime, thistime)))
+
+axiom H20 : ((o = (207 * tqtint(sub(thiscount, prevcount)))) and
+  in_range1((207 * tqtint(sub(thiscount, prevcount)))))
+
+axiom H21 : ((o1 = o) and in_range3(o))
+
+axiom H22 : (result4 = d1)
+
+axiom H23 : (d12 = o1)
+
  (* File "ng.adb", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall prevtime:t. forall prevcount:t. forall success:bool.
-  forall result__:int. forall t1:int. forall t2:int. forall d1:int.
-  forall d2:int. forall o:int. forall o1:int. forall success1:bool.
-  forall result__1:int. forall success2:bool. forall result__2:int.
-  forall result:int. forall t11:int. forall result1:int. forall t21:int.
-  forall result2:int. forall d11:int. (((0 <= 2147483647) ->
-  in_range4(result__)) -> (((not (thistime = prevtime)) and
-  (not (thiscount = prevcount))) -> (((0 <= 2147483647) -> in_range2(t1)) ->
-  (((0 <= 2147483647) -> in_range2(t2)) -> (((0 <= 2147483647) ->
-  in_range3(d1)) -> (((0 <= 2147483647) -> in_range3(d2)) ->
-  (((not ult(sub(thiscount, prevcount), sub(thistime, prevtime))) and
-  (((result__2 = result__) and (success2 = success)) and
-  ((result__2 = result__1) and (success2 = success1)))) -> ((({
-  int__content = result } = { int__content = t1 }) and
-  (t11 = tqtint(sub(thistime, prevtime)))) -> ((({ int__content = result1
-  } = { int__content = t2 }) and (t21 = tqtint(sub(currtime, thistime)))) ->
-  (((((o = (207 * tqtint(sub(thiscount, prevcount)))) and
-  in_range1((207 * tqtint(sub(thiscount, prevcount))))) and ((o1 = o) and
-  in_range3(o))) and (({ int__content = result2 } = { int__content = d1
-  }) and (d11 = o1))) -> in_range1((d11 * t21)))))))))))))
+goal WP_parameter_def : in_range1((d12 * t22))

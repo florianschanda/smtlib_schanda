@@ -153,6 +153,7 @@
 (assert (= identity (temp___String_Literal_138 Tuple0)))
 (declare-const search_string (Array Int character))
 (declare-const result_index Int)
+(declare-const o Int)
 (declare-const result (Array Int character))
 (declare-const search_string1 (Array Int character))
 (assert (= (temp___String_Literal_138 Tuple0) identity))

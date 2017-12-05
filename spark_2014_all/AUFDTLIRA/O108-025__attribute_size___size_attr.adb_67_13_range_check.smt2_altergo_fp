@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2367,16 +2367,136 @@ axiom def_axiom7 :
   forall temp___415:int. (get2(size_attr__ua4__aggregate_def(temp___411),
   temp___412, temp___413, temp___414, temp___415) = of_rep2(temp___411))))
 
+logic b : bool
+
+logic i : int
+
+logic s : (int,character) farray
+
+logic mi : int
+
+logic v : r
+
+logic v1__split_fields : character
+
+logic v2__split_fields : character
+
+logic v2__split_discrs : bool
+
+logic v3__split_fields : character
+
+logic v4__split_fields : integer
+
+logic v5__split_fields : integer
+
+logic v5__split_fields1 : us_private
+
+logic v6__split_fields : integer
+
+logic v6__split_fields1 : integer
+
+logic v6__split_fields2 : us_private
+
+logic ca : (int,natural) farray
+
+logic ua : (int,natural) farray
+
+logic ca2 : (int,natural) farray
+
+logic ca3 : (int,natural) farray
+
+logic ca4 : (int,natural) farray
+
+logic ua2 : map
+
+logic ua3 : map1
+
+logic ua4 : map2
+
+logic o : integer
+
+logic o1 : integer
+
+logic size_attr__v4__assume : integer
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result3 : int
+
+logic mi1 : int
+
+logic result4 : integer
+
+logic v4__split_fields1 : integer
+
+logic result5 : (int,natural) farray
+
+logic ca1 : (int,natural) farray
+
+logic result6 : (int,natural) farray
+
+logic ua1 : (int,natural) farray
+
+logic result7 : (int,natural) farray
+
+logic ca21 : (int,natural) farray
+
+logic result8 : (int,natural) farray
+
+logic ca31 : (int,natural) farray
+
+logic result9 : (int,natural) farray
+
+logic ca41 : (int,natural) farray
+
+logic result10 : map
+
+logic ua21 : map
+
+logic result11 : map1
+
+logic ua31 : map1
+
+logic result12 : map2
+
+logic ua41 : map2
+
+axiom H : (result = b)
+
+axiom H1 : (b1 = of_int(0))
+
+axiom H2 : (result1 = i)
+
+axiom H3 : (i1 = 0)
+
+axiom H4 : in_range1(i1)
+
+axiom H5 : (result2 = s)
+
+axiom H6 : (s1 = temp___String_Literal_370(void))
+
+axiom H7 : (to_rep1(s__first) = to_rep1(first(mk(1, 3))))
+
+axiom H8 : (to_rep1(s__last) = to_rep1(last(mk(1, 3))))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H10 : (result3 = mi)
+
+axiom H11 : (mi1 = 1)
+
+axiom H12 : in_range4(mi1)
+
  (* File "size_attr.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall i:int. forall s:(int,character) farray.
-  forall mi:int. forall result:bool. forall b1:bool. forall result1:int.
-  forall i1:int. forall result2:(int,character) farray.
-  forall s1:(int,character) farray. forall result3:int. forall mi1:int.
-  (((result = b) and (b1 = of_int(0))) -> (((result1 = i) and (i1 = 0)) ->
-  (in_range1(i1) -> ((((result2 = s) and
-  (s1 = temp___String_Literal_370(void))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 3)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result3 = mi) and
-  (mi1 = 1)) -> (in_range4(mi1) -> in_range(0)))))))))
+goal WP_parameter_def : in_range(0)

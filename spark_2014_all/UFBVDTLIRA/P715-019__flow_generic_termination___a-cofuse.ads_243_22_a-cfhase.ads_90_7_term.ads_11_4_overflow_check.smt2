@@ -254,6 +254,7 @@
 (declare-const o3 Int)
 (declare-const o4 Int)
 (declare-const o5 Int)
+(declare-const o6 Int)
 (assert (and (= o3 (length right)) (in_range1 o3)))
 (assert (= o4 (- 2147483647 o3)))
 (assert (and (= o5 o4) (in_range o4)))

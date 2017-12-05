@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1143,52 +1143,214 @@ function t108b__ref___projection(a: t108b__ref) : tdigit_index_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic digit_index : int
+
+logic i : int
+
+logic very_longs__divide__get_msd__result : int
+
+logic us : int
+
+logic temp___1198 : int
+
+logic temp___1197 : int
+
+logic o : int
+
+logic o1 : octet
+
+logic o2 : t
+
+logic o3 : bool
+
+logic j : int
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : bool
+
+logic j1 : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : octet
+
+logic o11 : t
+
+logic o12 : bool
+
+logic i1 : int
+
+logic o13 : int
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic result : int
+
+logic digit_index1 : int
+
+logic result1 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic digit_index2 : int
+
+logic digit_index3 : int
+
+logic i3 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic digit_index4 : int
+
+logic digit_index5 : int
+
+logic i5 : int
+
+logic digit_index6 : int
+
+logic i6 : int
+
+logic digit_index7 : int
+
+logic i7 : int
+
+logic digit_index8 : int
+
+logic i8 : int
+
+logic result9 : int
+
+logic very_longs__divide__get_msd__result1 : int
+
+logic very_longs__divide__get_msd__result2 : int
+
+logic very_longs__divide__get_msd__result3 : int
+
+logic digit_index9 : int
+
+logic i9 : int
+
+logic very_longs__divide__get_msd__result4 : int
+
+logic digit_index10 : int
+
+logic i10 : int
+
+logic very_longs__divide__get_msd__result5 : int
+
+logic result10 : bool
+
+axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
+  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep(number))))
+
+axiom H1 : (not (is_zero({ us_split_discrs1 = {
+  rec__very_longs__very_long__octet_length = number }; us_split_fields1 = {
+  rec__very_longs__very_long__long_digits = { elts = number1; rt = number2 }
+  } }) = true))
+
+axiom H2 : ((us = to_rep(number)) and in_range2(to_rep(number)))
+
+axiom H3 : (result = digit_index)
+
+axiom H4 : (digit_index1 = 1)
+
+axiom H5 : in_range2(digit_index1)
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i2 = 1)
+
+axiom H8 : (1 <= i2)
+
+axiom H9 : (i2 <= to_rep2(last(number2)))
+
+axiom H10 : ((to_rep2(first(number2)) <= i2) and
+  (i2 <= to_rep2(last(number2))))
+
+axiom H11 : (o = i2)
+
+axiom H12 : (o1 = (number1[o]))
+
+axiom H13 : (o2 = to_rep1(o1))
+
+axiom H14 : (((o2 = of_int(0)) -> (o3 = true)) and ((not (o2 = of_int(0))) ->
+  (o3 = false)))
+
+axiom H15 : (((not (o3 = true)) -> (result2 = true)) and ((o3 = true) ->
+  (result2 = false)))
+
+axiom H16 : ((result2 = true) -> (digit_index1 = result3))
+
+axiom H17 : ((result2 = true) -> (digit_index2 = i2))
+
+axiom H18 : ((not (result2 = true)) -> (digit_index2 = digit_index1))
+
+axiom H19 : ((not (to_rep1((number1[digit_index3])) = of_int(0))) or
+  (exists j2:int. ((((i3 + 1) <= j2) and (j2 <= to_rep2(last(number2)))) and
+  (not (to_rep1((number1[j2])) = of_int(0))))))
+
+axiom H20 : ((digit_index3 <  i3) ->
+  (forall j2:int. ((((digit_index3 + 1) <= j2) and (j2 <= i3)) ->
+  (to_rep1((number1[j2])) = of_int(0)))))
+
+axiom H21 : ((((1 <= 2147483647) -> in_range2(digit_index3)) and
+  ((1 <= to_rep2(last(number2))) -> dynamic_property2(1,
+  to_rep2(last(number2)), i3))) and ((1 <= i3) and
+  (i3 <= to_rep2(last(number2)))))
+
+axiom H22 : (not (i3 = to_rep2(last(number2))))
+
+axiom H23 : (i3 = result6)
+
+axiom H24 : (i4 = (i3 + 1))
+
+axiom H25 : ((to_rep2(first(number2)) <= i4) and
+  (i4 <= to_rep2(last(number2))))
+
+axiom H26 : (o9 = i4)
+
+axiom H27 : (o10 = (number1[o9]))
+
+axiom H28 : (o11 = to_rep1(o10))
+
+axiom H29 : (((o11 = of_int(0)) -> (o12 = true)) and
+  ((not (o11 = of_int(0))) -> (o12 = false)))
+
+axiom H30 : (((not (o12 = true)) -> (result7 = true)) and ((o12 = true) ->
+  (result7 = false)))
+
+axiom H31 : ((result7 = true) -> (result8 = digit_index3))
+
+axiom H32 : ((result7 = true) -> (digit_index4 = i4))
+
+axiom H33 : ((not (result7 = true)) -> (digit_index4 = digit_index3))
+
  (* File "very_longs.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
-  (forall digit_index:int. forall i:int. forall us:int. forall o:int.
-  forall o1:octet. forall o2:t. forall o3:bool. forall o4:int.
-  forall o5:octet. forall o6:t. forall o7:bool. forall result:int.
-  forall digit_index1:int. forall result1:int. forall i1:int.
-  forall result2:bool. forall result3:int. forall digit_index2:int.
-  forall digit_index3:int. forall i2:int. forall result4:int. forall i3:int.
-  forall result5:bool. forall result6:int. forall digit_index4:int.
-  ((dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
-  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number)))) -> ((not (is_zero({
-  us_split_discrs1 = { rec__very_longs__very_long__octet_length = number };
-  us_split_fields1 = { rec__very_longs__very_long__long_digits = { elts =
-  number1; rt = number2 } } }) = true)) -> (((us = to_rep(number)) and
-  in_range2(to_rep(number))) -> ((({ int__content = result } = {
-  int__content = digit_index }) and (digit_index1 = 1)) ->
-  (in_range2(digit_index1) -> ((({ int__content = result1 } = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= to_rep2(last(number2)))) ->
-  (((((((((to_rep2(first(number2)) <= i1) and
-  (i1 <= to_rep2(last(number2)))) and (o = i1)) and (o1 = (number1[o]))) and
-  (o2 = to_rep1(o1))) and (((o2 = of_int(0)) and (o3 = true)) or
-  ((not (o2 = of_int(0))) and (o3 = false)))) and (((not (o3 = true)) and
-  (result2 = true)) or ((o3 = true) and (result2 = false)))) and
-  (((result2 = true) and ((digit_index1 = result3) and
-  (digit_index2 = i1))) or ((not (result2 = true)) and
-  (digit_index2 = digit_index1)))) ->
-  ((((not (to_rep1((number1[digit_index3])) = of_int(0))) or
-  (exists j:int. ((((i2 + 1) <= j) and (j <= to_rep2(last(number2)))) and
-  (not (to_rep1((number1[j])) = of_int(0)))))) and (((digit_index3 <  i2) and
-  (forall j:int. ((((digit_index3 + 1) <= j) and (j <= i2)) ->
-  (to_rep1((number1[j])) = of_int(0))))) or (not (digit_index3 <  i2)))) ->
-  ((((((1 <= 2147483647) -> in_range2(digit_index3)) and
-  ((1 <= to_rep2(last(number2))) -> dynamic_property2(1,
-  to_rep2(last(number2)), i2))) and ((1 <= i2) and
-  (i2 <= to_rep2(last(number2))))) and
-  ((not (i2 = to_rep2(last(number2)))) and (((i2 = result4) and
-  (i3 = (i2 + 1))) and ((((((((to_rep2(first(number2)) <= i3) and
-  (i3 <= to_rep2(last(number2)))) and (o4 = i3)) and
-  (o5 = (number1[o4]))) and (o6 = to_rep1(o5))) and (((o6 = of_int(0)) and
-  (o7 = true)) or ((not (o6 = of_int(0))) and (o7 = false)))) and
-  (((not (o7 = true)) and (result5 = true)) or ((o7 = true) and
-  (result5 = false)))) and (((result5 = true) and
-  ((result6 = digit_index3) and (digit_index4 = i3))) or
-  ((not (result5 = true)) and (digit_index4 = digit_index3))))))) ->
   ((not (to_rep1((number1[digit_index4])) = of_int(0))) or
-  (exists j:int. ((((i3 + 1) <= j) and (j <= to_rep2(last(number2)))) and
-  (not (to_rep1((number1[j])) = of_int(0)))))))))))))))))
+  (exists j2:int. ((((i4 + 1) <= j2) and (j2 <= to_rep2(last(number2)))) and
+  (not (to_rep1((number1[j2])) = of_int(0))))))

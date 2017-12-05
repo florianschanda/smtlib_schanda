@@ -51,6 +51,7 @@
 (declare-const discr_checks__check_derived_priv__R4b__assume Int)
 (declare-const us Int)
 (declare-const discr_checks__check_derived_priv__R5b__assume Int)
+(declare-const us1 Int)
 (assert (and (= discr_checks__check_derived_priv__R4b__assume (bad Tuple0)) (and (in_range discr_checks__check_derived_priv__R4b__assume) (= discr_checks__check_derived_priv__R4b__assume 6))))
 (assert (= discr_checks__check_derived_priv__R4b__assume r4b))
 (assert (in_range r4b))

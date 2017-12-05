@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -400,28 +400,57 @@ axiom def_axiom6 :
   temp___395, temp___396, temp___397, temp___398,
   temp___399)[temp___400]) = (temp___393[temp___400])))))))))))
 
+logic a : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range1(k)
+
+axiom H3 : (((not (i = j)) and (not (j = k))) and (not (k = i)))
+
+axiom H4 : (((a = a_old) and ((((to_rep(o) = 3) and (o1 = (a[k <- o]))) and
+  ((result = a) and (a1 = o1))) and ((((to_rep(o2) = 2) and
+  (o3 = (a1[j <- o2]))) and ((a1 = result1) and (a2 = o3))) and
+  ((((to_rep(o4) = 1) and (o5 = (a2[i <- o4]))) and ((a2 = result2) and
+  (a3 = o5))) and ((bool_eq3(temp___333(a_old, i, 1, j, 2, k, 3),
+  (- 2147483648), 2147483647, temp___343(a_old, i, 1, k, 3, j, 2),
+  (- 2147483648), 2147483647) = true) and ((bool_eq3(temp___357(a_old, i, 1,
+  k, 3, j, 2), (- 2147483648), 2147483647, temp___367(a_old, k, 3, i, 1, j,
+  2), (- 2147483648), 2147483647) = true) and (bool_eq3(temp___381(a_old, k,
+  3, i, 1, j, 2), (- 2147483648), 2147483647, temp___391(a_old, k, 3, j, 2,
+  i, 1), (- 2147483648), 2147483647) = true))))))) and ((a3 = a4) and
+  (a5 = a3)))
+
  (* File "simple_arrays.adb", line 127, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:integer.
-  forall o5:(int,integer) farray. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall a2:(int,integer) farray. forall result2:(int,integer) farray.
-  forall a3:(int,integer) farray. forall a4:(int,integer) farray.
-  forall a5:(int,integer) farray. ((in_range1(i) and (in_range1(j) and
-  (in_range1(k) and ((((not (i = j)) and (not (j = k))) and
-  (not (k = i))) and (((a = a_old) and ((((to_rep(o) = 3) and
-  (o1 = (a[k <- o]))) and (({ map__content = result } = { map__content = a
-  }) and (a1 = o1))) and ((((to_rep(o2) = 2) and (o3 = (a1[j <- o2]))) and
-  ((a1 = result1) and (a2 = o3))) and ((((to_rep(o4) = 1) and
-  (o5 = (a2[i <- o4]))) and ((a2 = result2) and (a3 = o5))) and
-  ((bool_eq3(temp___333(a_old, i, 1, j, 2, k, 3), (-2147483648), 2147483647,
-  temp___343(a_old, i, 1, k, 3, j, 2), (-2147483648), 2147483647) = true) and
-  ((bool_eq3(temp___357(a_old, i, 1, k, 3, j, 2), (-2147483648), 2147483647,
-  temp___367(a_old, k, 3, i, 1, j, 2), (-2147483648), 2147483647) = true) and
-  (bool_eq3(temp___381(a_old, k, 3, i, 1, j, 2), (-2147483648), 2147483647,
-  temp___391(a_old, k, 3, j, 2, i, 1), (-2147483648),
-  2147483647) = true))))))) and ((a3 = a4) and (a5 = a3))))))) ->
-  (bool_eq3(a4, (-2147483648), 2147483647, temp___240(a, i, 1, j, 2, k, 3),
-  (-2147483648), 2147483647) = true)))
+goal WP_parameter_def : (bool_eq3(a4, (- 2147483648), 2147483647,
+  temp___240(a, i, 1, j, 2, k, 3), (- 2147483648), 2147483647) = true)

@@ -230,19 +230,48 @@ logic d__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "discr.adb", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_fields:us_main_type. forall discr__p1__d__assume:natural.
-  forall discr__p1__d__assume1:us_main_type. forall temp___308:natural.
-  forall temp___3081:us_main_type. forall result:us_main_type.
-  forall d__split_fields1:us_main_type. (in_range(c) -> (((({
-  us_split_discrs1 = { rec__private_discr__p_no_default__c =
+logic d__split_fields : us_main_type
+
+logic discr__p1__d__assume : natural
+
+logic discr__p1__d__assume1 : us_main_type
+
+logic temp___308 : natural
+
+logic temp___3081 : us_main_type
+
+logic temp___310 : natural
+
+logic temp___3101 : us_main_type
+
+logic temp___311 : natural
+
+logic temp___3111 : us_main_type
+
+logic result : us_main_type
+
+logic d__split_fields1 : us_main_type
+
+logic result1 : us_main_type
+
+logic d__split_fields2 : us_main_type
+
+axiom H : in_range(c)
+
+axiom H1 : (({ us_split_discrs1 = { rec__private_discr__p_no_default__c =
   discr__p1__d__assume }; us_split_fields1 = {
   rec__private_discr__p_no_default = discr__p1__d__assume1 }
-  } = new_no_default(c)) and (to_rep(discr__p1__d__assume) = c)) and
-  (((result = d__split_fields) and
-  (discr__p1__d__assume1 = d__split_fields1)) and
-  (d__split_discrs = discr__p1__d__assume))) -> ((({ us_split_discrs1 = {
-  rec__private_discr__p_no_default__c = temp___308 }; us_split_fields1 = {
-  rec__private_discr__p_no_default = temp___3081 } } = new_no_default(c)) and
-  (to_rep(temp___308) = c)) -> (temp___308 = d__split_discrs)))))
+  } = new_no_default(c)) and (to_rep(discr__p1__d__assume) = c))
+
+axiom H2 : (result = d__split_fields)
+
+axiom H3 : (discr__p1__d__assume1 = d__split_fields1)
+
+axiom H4 : (d__split_discrs = discr__p1__d__assume)
+
+axiom H5 : (({ us_split_discrs1 = { rec__private_discr__p_no_default__c =
+  temp___308 }; us_split_fields1 = { rec__private_discr__p_no_default =
+  temp___3081 } } = new_no_default(c)) and (to_rep(temp___308) = c))
+
+ (* File "discr.adb", line 76, characters 0-0 *)
+goal WP_parameter_def : (temp___308 = d__split_discrs)

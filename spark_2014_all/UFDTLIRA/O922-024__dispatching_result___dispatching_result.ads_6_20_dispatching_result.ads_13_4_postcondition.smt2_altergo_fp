@@ -348,66 +348,164 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "dispatching_result.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dispatching_result__init__2__result:natural.
-  forall dispatching_result__init__2__result1:natural.
-  forall dispatching_result__init__2__result2:us_private.
-  forall dispatching_result__init__2__result3:int. forall o:natural.
-  forall o1:natural. forall o2:natural. forall o3:natural.
-  forall o4:us_private. forall o5:natural. forall o6:natural.
-  forall o7:us_private. forall o8:int. forall result:natural.
-  forall result1:natural. forall result2:us_private. forall result3:int.
-  forall dispatching_result__init__2__result4:natural.
-  forall dispatching_result__init__2__result5:natural.
-  forall dispatching_result__init__2__result6:us_private.
-  forall dispatching_result__init__2__result7:int.
-  forall dispatching_result__init__2__result8:natural.
-  forall dispatching_result__init__2__result9:natural.
-  forall dispatching_result__init__2__result10:us_private.
-  forall dispatching_result__init__2__result11:int.
-  forall dispatching_result__init__2__result12:natural.
-  forall dispatching_result__init__2__result13:natural.
-  forall dispatching_result__init__2__result14:us_private.
-  forall dispatching_result__init__2__result15:int.
-  forall dispatching_result__init__2__result16:natural.
-  forall dispatching_result__init__2__result17:natural.
-  forall dispatching_result__init__2__result18:us_private.
-  forall dispatching_result__init__2__result19:int.
-  forall dispatching_result__init__2__result20:natural.
-  forall dispatching_result__init__2__result21:natural.
-  forall dispatching_result__init__2__result22:us_private.
-  forall dispatching_result__init__2__result23:int.
-  (forall result4:natural. forall result5:natural. forall result6:us_private.
-  forall result7:int. ((in_range(v) and
-  (((((((dispatching_result__init__2__result8 = dispatching_result__init__2__result4) and
-  ((dispatching_result__init__2__result9 = dispatching_result__init__2__result5) and
-  (dispatching_result__init__2__result10 = dispatching_result__init__2__result6))) and
-  (dispatching_result__init__2__result11 = dispatching_result__init__2__result7)) and
+logic dispatching_result__init__2__result : natural
+
+logic dispatching_result__init__2__result1 : natural
+
+logic dispatching_result__init__2__result2 : us_private
+
+logic dispatching_result__init__2__result3 : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : us_private
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : us_private
+
+logic o8 : int
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : us_private
+
+logic result3 : int
+
+logic dispatching_result__init__2__result4 : natural
+
+logic dispatching_result__init__2__result5 : natural
+
+logic dispatching_result__init__2__result6 : us_private
+
+logic dispatching_result__init__2__result7 : int
+
+logic dispatching_result__init__2__result8 : natural
+
+logic dispatching_result__init__2__result9 : natural
+
+logic dispatching_result__init__2__result10 : us_private
+
+logic dispatching_result__init__2__result11 : int
+
+logic dispatching_result__init__2__result12 : natural
+
+logic dispatching_result__init__2__result13 : natural
+
+logic dispatching_result__init__2__result14 : us_private
+
+logic dispatching_result__init__2__result15 : int
+
+logic dispatching_result__init__2__result16 : natural
+
+logic dispatching_result__init__2__result17 : natural
+
+logic dispatching_result__init__2__result18 : us_private
+
+logic dispatching_result__init__2__result19 : int
+
+logic dispatching_result__init__2__result20 : natural
+
+logic dispatching_result__init__2__result21 : natural
+
+logic dispatching_result__init__2__result22 : us_private
+
+logic dispatching_result__init__2__result23 : int
+
+logic result4 : natural
+
+logic result5 : natural
+
+logic result6 : us_private
+
+logic result7 : int
+
+axiom H : in_range(v)
+
+axiom H1 :
+  (dispatching_result__init__2__result8 = dispatching_result__init__2__result4)
+
+axiom H2 :
+  (dispatching_result__init__2__result9 = dispatching_result__init__2__result5)
+
+axiom H3 :
+  (dispatching_result__init__2__result10 = dispatching_result__init__2__result6)
+
+axiom H4 :
+  (dispatching_result__init__2__result11 = dispatching_result__init__2__result7)
+
+axiom H5 :
   (((dispatching_result__init__2__result12 = dispatching_result__init__2__result4) and
   ((dispatching_result__init__2__result13 = dispatching_result__init__2__result5) and
   (dispatching_result__init__2__result14 = dispatching_result__init__2__result6))) and
-  (dispatching_result__init__2__result15 = dispatching_result__init__2__result7))) and
-  ((((to_rep(o) = v) and ((to_rep(o1) = v) and ((o1 = o2) and ((o = o3) and
-  (us_null_ext__ = o4))))) and (((o5 = o2) and ((o6 = o3) and (o7 = o4))) and
-  (us_tag1 = o8))) and ((((result = dispatching_result__init__2__result) and
-  ((result1 = dispatching_result__init__2__result1) and
-  (result2 = dispatching_result__init__2__result2))) and
-  (result3 = dispatching_result__init__2__result3)) and
-  (((o5 = dispatching_result__init__2__result4) and
-  ((o6 = dispatching_result__init__2__result5) and
-  (o7 = dispatching_result__init__2__result6))) and
-  (o8 = dispatching_result__init__2__result7))))) and
-  ((((dispatching_result__init__2__result16 = dispatching_result__init__2__result8) and
+  (dispatching_result__init__2__result15 = dispatching_result__init__2__result7))
+
+axiom H6 : (to_rep(o) = v)
+
+axiom H7 : (to_rep(o1) = v)
+
+axiom H8 : (o1 = o2)
+
+axiom H9 : (o = o3)
+
+axiom H10 : (us_null_ext__ = o4)
+
+axiom H11 : (o5 = o2)
+
+axiom H12 : (o6 = o3)
+
+axiom H13 : (o7 = o4)
+
+axiom H14 : (us_tag1 = o8)
+
+axiom H15 : (result = dispatching_result__init__2__result)
+
+axiom H16 : (result1 = dispatching_result__init__2__result1)
+
+axiom H17 : (result2 = dispatching_result__init__2__result2)
+
+axiom H18 : (result3 = dispatching_result__init__2__result3)
+
+axiom H19 : (((dispatching_result__init__2__result4 = o5) and
+  ((dispatching_result__init__2__result5 = o6) and
+  (dispatching_result__init__2__result6 = o7))) and
+  (dispatching_result__init__2__result7 = o8))
+
+axiom H20 :
+  (((dispatching_result__init__2__result16 = dispatching_result__init__2__result8) and
   ((dispatching_result__init__2__result17 = dispatching_result__init__2__result9) and
   (dispatching_result__init__2__result18 = dispatching_result__init__2__result10))) and
-  (dispatching_result__init__2__result19 = dispatching_result__init__2__result11)) and
-  (((dispatching_result__init__2__result20 = dispatching_result__init__2__result12) and
-  ((dispatching_result__init__2__result21 = dispatching_result__init__2__result13) and
-  (dispatching_result__init__2__result22 = dispatching_result__init__2__result14))) and
-  (dispatching_result__init__2__result23 = dispatching_result__init__2__result15)))) and
-  (((result4 = dispatching_result__init__2__result16) and
-  ((result5 = dispatching_result__init__2__result17) and
-  (result6 = dispatching_result__init__2__result18))) and
-  (result7 = dispatching_result__init__2__result19)))) ->
-  (to_rep(dispatching_result__init__2__result17) = v))))
+  (dispatching_result__init__2__result19 = dispatching_result__init__2__result11))
+
+axiom H21 :
+  (dispatching_result__init__2__result20 = dispatching_result__init__2__result12)
+
+axiom H22 :
+  (dispatching_result__init__2__result21 = dispatching_result__init__2__result13)
+
+axiom H23 :
+  (dispatching_result__init__2__result22 = dispatching_result__init__2__result14)
+
+axiom H24 :
+  (dispatching_result__init__2__result23 = dispatching_result__init__2__result15)
+
+axiom H25 : (result4 = dispatching_result__init__2__result16)
+
+axiom H26 : (result5 = dispatching_result__init__2__result17)
+
+axiom H27 : (result6 = dispatching_result__init__2__result18)
+
+axiom H28 : (result7 = dispatching_result__init__2__result19)
+
+ (* File "dispatching_result.ads", line 10, characters 0-0 *)
+goal WP_parameter_def : (to_rep(dispatching_result__init__2__result17) = v)

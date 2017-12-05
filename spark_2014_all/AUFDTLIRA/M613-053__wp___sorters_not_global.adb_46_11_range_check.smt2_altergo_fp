@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -308,10 +308,107 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic min : int
+
+logic index : int
+
+logic sorters_not_global__index_of_minimum__result : int
+
+logic temp___175 : int
+
+logic temp___174 : int
+
+logic temp___176 : int
+
+logic j : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : bool
+
+logic j1 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic min2 : int
+
+logic index2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min3 : int
+
+logic result4 : int
+
+logic index3 : int
+
+logic min4 : int
+
+logic index4 : int
+
+logic min5 : int
+
+logic index5 : int
+
+logic min6 : int
+
+logic index6 : int
+
+logic min7 : int
+
+logic index7 : int
+
+logic min8 : int
+
+logic index8 : int
+
+logic min9 : int
+
+logic index9 : int
+
+logic result5 : int
+
+logic sorters_not_global__index_of_minimum__result1 : int
+
+logic sorters_not_global__index_of_minimum__result2 : int
+
+logic sorters_not_global__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index10 : int
+
+logic sorters_not_global__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index11 : int
+
+logic sorters_not_global__index_of_minimum__result5 : int
+
+axiom H : in_range2(starting_at)
+
+axiom H1 : in_range2(limit)
+
+axiom H2 : (starting_at <= limit)
+
+axiom H3 : ((1 <= 64) -> in_range2(min))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = starting_at)
+
+axiom H6 : ((starting_at + 1) <= limit)
+
  (* File "sorters_not_global.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall result:int. forall min1:int.
-  (in_range2(starting_at) -> (in_range2(limit) -> ((starting_at <= limit) ->
-  (((1 <= 64) -> in_range2(min)) -> ((({ int__content = result } = {
-  int__content = min }) and (min1 = starting_at)) ->
-  (((starting_at + 1) <= limit) -> (1 <= (starting_at + 1)))))))))
+goal WP_parameter_def : (1 <= (starting_at + 1))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -225,5 +225,53 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : int
+
+logic y : int
+
+logic k : int
+
+logic loc__local__result : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : int
+
+logic k1 : int
+
+logic result3 : int
+
+logic loc__local__result1 : int
+
+logic loc__local__result2 : int
+
+logic loc__local__result3 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic k2 : int
+
+logic loc__local__result4 : int
+
+logic x3 : int
+
+logic y3 : int
+
+logic k3 : int
+
+logic loc__local__result5 : int
+
+axiom H : in_range(z)
+
+axiom H1 : (z = 1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(z) -> ((z = 1) -> (not (z = 0))))
+goal WP_parameter_def : (not (z = 0))

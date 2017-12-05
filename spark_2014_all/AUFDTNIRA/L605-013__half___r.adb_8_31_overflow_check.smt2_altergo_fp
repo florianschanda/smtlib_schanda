@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -449,14 +449,47 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : (int,integer) farray
+
+logic h : int
+
+logic q : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___150 : int
+
+logic o2 : integer
+
+logic result : int
+
+logic h1 : int
+
+logic result1 : int
+
+logic q1 : int
+
+logic q2 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(a__first),
+  to_rep(a__last))
+
+axiom H1 : ((to_rep(a__first) = 1) and (1 <= to_rep(a__last)))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(h))
+
+axiom H3 : ((a = a_old) and (mk(to_rep(a__first), to_rep(a__last)) = a_old1))
+
+axiom H4 : dynamic_property((- 2147483648), 2147483647,
+  to_rep(first(a_old1)), to_rep(last(a_old1)))
+
+axiom H5 : (result = h)
+
+axiom H6 : (h1 = comp_div(to_rep(a__last),2))
+
+axiom H7 : ((2 * h1) <= to_rep(a__last))
+
  (* File "r.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall h:int. forall result:int.
-  forall h1:int. (dynamic_property((-2147483648), 2147483647,
-  to_rep(a__first), to_rep(a__last)) -> (((to_rep(a__first) = 1) and
-  (1 <= to_rep(a__last))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(h)) -> (((a = a_old) and (mk(to_rep(a__first),
-  to_rep(a__last)) = a_old1)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a_old1)), to_rep(last(a_old1))) -> (((result = h) and
-  (h1 = comp_div(to_rep(a__last),2))) -> (((2 * h1) <= to_rep(a__last)) ->
-  in_range1((to_rep(a__first) + h1))))))))))
+goal WP_parameter_def : in_range1((to_rep(a__first) + h1))

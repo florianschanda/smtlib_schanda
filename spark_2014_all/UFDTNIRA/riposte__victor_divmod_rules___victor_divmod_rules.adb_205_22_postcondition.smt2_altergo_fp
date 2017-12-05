@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type t
 
-predicate in_range1(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range1(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq1 : int, int -> bool
 
@@ -250,6 +250,11 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : ((x <= 0) and (y <  0))
+
  (* File "victor_divmod_rules.adb", line 192, characters 0-0 *)
-goal WP_parameter_def : ((in_range1(x) and (in_range1(y) and ((x <= 0) and
-  (y <  0)))) -> (mod(x, y) = comp_mod(x,y)))
+goal WP_parameter_def : (mod(x, y) = comp_mod(x,y))

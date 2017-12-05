@@ -327,51 +327,189 @@ axiom def_axiom :
   (forall temp___238:int.
   ((temp___235(temp___237)[temp___238]) = of_rep(temp___237))))
 
- (* File "buffers.adb", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(int,character) farray. forall valid:int.
-  forall workspace:(int,character) farray. forall offset:int. forall i:int.
-  forall i1:int. forall temp___243:int.
-  forall temp___241:(int,character) farray. forall temp___240:int.
-  forall o:character. forall o1:int. forall o2:(int,character) farray.
-  forall o3:int. forall o4:character. forall result:(int,character) farray.
-  forall workspace1:(int,character) farray. forall result1:int.
-  forall offset1:int. forall result2:int. forall i2:int.
-  forall workspace2:(int,character) farray. forall offset2:int.
-  forall i3:int. forall result3:(int,character) farray.
-  forall workspace3:(int,character) farray. forall result4:int.
-  forall offset3:int. forall workspace4:(int,character) farray.
-  forall offset4:int. forall i4:int.
-  forall workspace5:(int,character) farray. forall offset5:int.
-  forall i5:int. forall workspace6:(int,character) farray.
-  forall offset6:int. forall i6:int.
-  forall workspace7:(int,character) farray. forall offset7:int.
-  forall i7:int. forall result5:int. forall valid1:int. forall result6:int.
-  forall i8:int. forall i9:int. (in_range1(erase_character) ->
-  (in_range1(fill_character) -> (((0 <= 1024) -> in_range2(valid)) ->
-  (((0 <= 1024) -> in_range2(offset)) -> (((result = workspace) and
-  (workspace1 = temp___235(32))) -> (((result1 = offset) and
-  (offset1 = 0)) -> (((({ int__content = result2 } = { int__content = i
-  }) and (i2 = 1)) and ((((1 <= i2) and (i2 <= 1024)) and
-  ((((temp___243 = offset1) and ((temp___241 = workspace1) and
-  ((temp___240 = i2) and ((offset2 <  i3) and (((((1 <= 1024) ->
-  in_range3(i3)) and ((0 <= 1024) -> in_range2(offset2))) and ((1 <= i3) and
-  (i3 <= 1024))) and ((((not (to_rep((buffer[i3])) = erase_character)) and
+logic buffer : (int,character) farray
+
+logic valid : int
+
+logic workspace : (int,character) farray
+
+logic offset : int
+
+logic i : int
+
+logic i1 : int
+
+logic temp___243 : int
+
+logic temp___241 : (int,character) farray
+
+logic temp___240 : int
+
+logic o : character
+
+logic o1 : int
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : character
+
+logic result : (int,character) farray
+
+logic workspace1 : (int,character) farray
+
+logic result1 : int
+
+logic offset1 : int
+
+logic result2 : int
+
+logic i2 : int
+
+logic workspace2 : (int,character) farray
+
+logic offset2 : int
+
+logic i3 : int
+
+logic result3 : (int,character) farray
+
+logic workspace3 : (int,character) farray
+
+logic result4 : int
+
+logic offset3 : int
+
+logic result5 : int
+
+logic i4 : int
+
+logic workspace4 : (int,character) farray
+
+logic offset4 : int
+
+logic i5 : int
+
+logic workspace5 : (int,character) farray
+
+logic offset5 : int
+
+logic i6 : int
+
+logic workspace6 : (int,character) farray
+
+logic offset6 : int
+
+logic i7 : int
+
+logic workspace7 : (int,character) farray
+
+logic offset7 : int
+
+logic i8 : int
+
+logic workspace8 : (int,character) farray
+
+logic offset8 : int
+
+logic i9 : int
+
+logic workspace9 : (int,character) farray
+
+logic offset9 : int
+
+logic i10 : int
+
+logic result6 : int
+
+logic valid1 : int
+
+logic result7 : int
+
+logic i11 : int
+
+logic i12 : int
+
+axiom H : in_range1(erase_character)
+
+axiom H1 : in_range1(fill_character)
+
+axiom H2 : ((0 <= 1024) -> in_range2(valid))
+
+axiom H3 : ((0 <= 1024) -> in_range2(offset))
+
+axiom H4 : (result = workspace)
+
+axiom H5 : (workspace1 = temp___235(32))
+
+axiom H6 : (result1 = offset)
+
+axiom H7 : (offset1 = 0)
+
+axiom H8 : (result2 = i)
+
+axiom H9 : (i2 = 1)
+
+axiom H10 : (((1 <= i2) and (i2 <= 1024)) -> (((temp___243 = offset1) and
+  ((temp___241 = workspace1) and ((temp___240 = i2) and ((offset2 <  i3) and
+  (((((1 <= 1024) -> in_range3(i3)) and ((0 <= 1024) ->
+  in_range2(offset2))) and ((1 <= i3) and (i3 <= 1024))) and
+  ((((not (to_rep((buffer[i3])) = erase_character)) ->
   ((((to_rep(o) = to_rep((buffer[i3]))) and ((((1 <= (1 + offset2)) and
   ((1 + offset2) <= 1024)) and (o1 = (1 + offset2))) and
   (o2 = (workspace2[o1 <- o])))) and ((workspace2 = result3) and
   (workspace3 = o2))) and (((o3 = (offset2 + 1)) and
   in_range2((offset2 + 1))) and ((offset2 = result4) and
-  (offset3 = o3))))) or ((to_rep((buffer[i3])) = erase_character) and
+  (offset3 = o3))))) and ((to_rep((buffer[i3])) = erase_character) ->
   ((offset3 = offset2) and (workspace3 = workspace2)))) and
-  (i3 = 1024))))))) and (((i3 = i4) and ((offset3 = offset4) and
-  (workspace3 = workspace4))) and ((i5 = i3) and ((offset5 = offset3) and
-  (workspace5 = workspace3))))) and (((i6 = i4) and ((offset6 = offset4) and
-  (workspace6 = workspace4))) and ((i7 = i5) and ((offset7 = offset5) and
-  (workspace7 = workspace5)))))) or ((not ((1 <= i2) and (i2 <= 1024))) and
-  (((i2 = i6) and ((offset1 = offset6) and (workspace1 = workspace6))) and
-  ((i7 = i2) and ((offset7 = offset1) and (workspace7 = workspace1))))))) ->
-  (((result5 = valid) and (valid1 = offset6)) -> (((offset6 = r9b) and
-  in_range2(r9b)) -> (((result6 = i1) and (i8 = r9b)) -> (((r9b <= i8) and
-  (i8 <= 1023)) -> (((r9b <= i9) and (i9 <= 1023)) ->
-  ((to_rep(o4) = fill_character) -> (1 <= (1 + i9))))))))))))))))
+  (i3 = 1024))))))) and (((i3 = i7) and ((offset3 = offset6) and
+  (workspace3 = workspace6))) and ((i8 = i3) and ((offset7 = offset3) and
+  (workspace7 = workspace3))))))
+
+axiom H11 : (((1 <= i2) and (i2 <= 1024)) -> (i9 = i7))
+
+axiom H12 : (((1 <= i2) and (i2 <= 1024)) -> (offset8 = offset6))
+
+axiom H13 : (((1 <= i2) and (i2 <= 1024)) -> (workspace8 = workspace6))
+
+axiom H14 : (((1 <= i2) and (i2 <= 1024)) -> (i10 = i8))
+
+axiom H15 : (((1 <= i2) and (i2 <= 1024)) -> (offset9 = offset7))
+
+axiom H16 : (((1 <= i2) and (i2 <= 1024)) -> (workspace9 = workspace7))
+
+axiom H17 : ((not ((1 <= i2) and (i2 <= 1024))) -> (i2 = i9))
+
+axiom H18 : ((not ((1 <= i2) and (i2 <= 1024))) -> (offset1 = offset8))
+
+axiom H19 : ((not ((1 <= i2) and (i2 <= 1024))) -> (workspace1 = workspace8))
+
+axiom H20 : ((not ((1 <= i2) and (i2 <= 1024))) -> (i10 = i2))
+
+axiom H21 : ((not ((1 <= i2) and (i2 <= 1024))) -> (offset9 = offset1))
+
+axiom H22 : ((not ((1 <= i2) and (i2 <= 1024))) -> (workspace9 = workspace1))
+
+axiom H23 : (result6 = valid)
+
+axiom H24 : (valid1 = offset8)
+
+axiom H25 : (offset8 = r9b)
+
+axiom H26 : in_range2(r9b)
+
+axiom H27 : (result7 = i1)
+
+axiom H28 : (i11 = r9b)
+
+axiom H29 : (r9b <= i11)
+
+axiom H30 : (i11 <= 1023)
+
+axiom H31 : ((r9b <= i12) and (i12 <= 1023))
+
+axiom H32 : (to_rep(o4) = fill_character)
+
+ (* File "buffers.adb", line 52, characters 0-0 *)
+goal WP_parameter_def : (1 <= (1 + i12))

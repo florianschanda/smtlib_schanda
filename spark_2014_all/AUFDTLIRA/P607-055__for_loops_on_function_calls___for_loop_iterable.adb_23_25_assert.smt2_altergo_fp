@@ -279,17 +279,54 @@ axiom def_axiom :
   (forall temp___242:int.
   ((for_loop_iterable__p2__a__aggregate_def(temp___241)[temp___242]) = of_rep(temp___241))))
 
+logic a : (int,natural) farray
+
+logic c8b : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : int
+
+logic c8b1 : int
+
+logic a2 : (int,natural) farray
+
+logic c8b2 : int
+
+logic result2 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = for_loop_iterable__p2__a__aggregate_def(0))
+
+axiom H2 : (result1 = c8b)
+
+axiom H3 : (c8b1 = 1)
+
+axiom H4 : (1 <= c8b1)
+
+axiom H5 : (c8b1 <= 100)
+
+axiom H6 :
+  ((forall temp___244:int. (((1 <= temp___244) and (temp___244 <= 100)) ->
+   ((not (2 = temp___244)) -> ((a2[temp___244]) = (a1[temp___244]))))) and
+  ((1 <= c8b2) and (c8b2 <= 100)))
+
+axiom H7 : (to_rep(o) = 1)
+
+axiom H8 : (o1 = (a2[2 <- o]))
+
+axiom H9 : (result2 = a2)
+
+axiom H10 : (a3 = o1)
+
  (* File "for_loop_iterable.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall c8b:int. forall o:natural.
-  forall o1:(int,natural) farray. forall result:(int,natural) farray.
-  forall a1:(int,natural) farray. forall result1:int. forall c8b1:int.
-  forall a2:(int,natural) farray. forall c8b2:int.
-  forall result2:(int,natural) farray. forall a3:(int,natural) farray.
-  (((result = a) and (a1 = for_loop_iterable__p2__a__aggregate_def(0))) ->
-  (((result1 = c8b) and (c8b1 = 1)) -> (((1 <= c8b1) and (c8b1 <= 100)) ->
-  (((forall temp___244:int. (((1 <= temp___244) and (temp___244 <= 100)) ->
-    ((not (2 = temp___244)) -> ((a2[temp___244]) = (a1[temp___244]))))) and
-  ((1 <= c8b2) and (c8b2 <= 100))) -> ((((to_rep(o) = 1) and
-  (o1 = (a2[2 <- o]))) and ((result2 = a2) and (a3 = o1))) ->
-  (to_rep((a3[c8b2])) = 0)))))))
+goal WP_parameter_def : (to_rep((a3[c8b2])) = 0)

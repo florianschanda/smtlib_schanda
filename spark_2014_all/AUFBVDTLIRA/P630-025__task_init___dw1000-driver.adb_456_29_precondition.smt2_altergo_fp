@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -925,7 +925,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1274,12 +1274,28 @@ logic offset : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : t1
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(data1)),
+  to_rep(last(data1)))
+
+axiom H1 : in_range1(offset)
+
+axiom H2 : ((0 <  length({ elts = data; rt = data1 })) and ((length({ elts =
+  data; rt = data1 }) <= 1024) and ((offset <  1024) and ((length({ elts =
+  data; rt = data1 }) + offset) <= 1024))))
+
+axiom H3 : ((o3 = offset) and in_range_int(offset))
+
+axiom H4 : (o4 = of_int1(o3))
+
  (* File "dw1000-driver.adb", line 441, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:t1. (dynamic_property(0, 2147483647,
-  to_rep(first(data1)), to_rep(last(data1))) -> (in_range1(offset) ->
-  (((0 <  length({ elts = data; rt = data1 })) and ((length({ elts = data;
-  rt = data1 }) <= 1024) and ((offset <  1024) and ((length({ elts = data;
-  rt = data1 }) + offset) <= 1024)))) -> ((((o = offset) and
-  in_range_int(offset)) and (o1 = of_int1(o))) -> (0 <  length({ elts = data;
-  rt = data1 })))))))
+goal WP_parameter_def : (0 <  length({ elts = data; rt = data1 }))

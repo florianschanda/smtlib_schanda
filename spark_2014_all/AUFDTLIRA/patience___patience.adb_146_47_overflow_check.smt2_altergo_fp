@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -385,7 +385,7 @@ function cardstack__ref___projection(a: cardstack__ref) : us_t =
 
 type cardindex
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 100))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 100))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1063,7 +1063,7 @@ axiom inv__def_axiom :
   (forall k:int. ((((j + 1) <= k) and (k <= (to_rep2((s3[i])) - 1))) ->
   (to_rep((s1[to_rep2(((s4[i])[k]))])) <= to_rep((s1[to_rep2(((s4[i])[j]))])))))))))) and
   (forall i:int. (((0 <= i) and (i <= (to_rep2(s) - 1))) ->
-  (((((-1) <= to_rep2((s7[i]))) and
+  (((((- 1) <= to_rep2((s7[i]))) and
   (to_rep2((s7[i])) <= (to_rep2(s) - 1))) and (to_rep2((s7[i])) <  i)) and
   (((to_rep2((s7[i])) <  0) -> (to_rep2((s5[i])) = 0)) and
   ((not (to_rep2((s7[i])) <  0)) ->
@@ -1094,7 +1094,7 @@ axiom inv__def_axiom :
   (forall k:int. ((((j + 1) <= k) and (k <= (to_rep2((s3[i])) - 1))) ->
   (to_rep((s1[to_rep2(((s4[i])[k]))])) <= to_rep((s1[to_rep2(((s4[i])[j]))])))))))))) and
   (forall i:int. (((0 <= i) and (i <= (to_rep2(s) - 1))) ->
-  (((((-1) <= to_rep2((s7[i]))) and
+  (((((- 1) <= to_rep2((s7[i]))) and
   (to_rep2((s7[i])) <= (to_rep2(s) - 1))) and (to_rep2((s7[i])) <  i)) and
   (((to_rep2((s7[i])) <  0) and (to_rep2((s5[i])) = 0)) or
   ((not (to_rep2((s7[i])) <  0)) and
@@ -1143,101 +1143,462 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom null_state__def_axiom : ((null_state = of_rep2(0)) and
   ((null_state1 = temp___135(1)) and ((null_state2 = of_rep2(0)) and
-  ((null_state3 = temp___139((-1))) and
-  ((null_state4 = temp___143(temp___147((-1)))) and
-  ((null_state5 = temp___151((-1))) and ((null_state6 = temp___155((-1))) and
-  (null_state7 = temp___159((-1))))))))))
+  ((null_state3 = temp___139((- 1))) and
+  ((null_state4 = temp___143(temp___147((- 1)))) and
+  ((null_state5 = temp___151((- 1))) and
+  ((null_state6 = temp___155((- 1))) and
+  (null_state7 = temp___159((- 1))))))))))
 
- (* File "patience.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:cardindex.
-  forall s__split_fields1:(int,card) farray.
-  forall s__split_fields2:cardindex.
-  forall s__split_fields3:(int,cardindex) farray.
-  forall s__split_fields4:(int,(int,cardindex) farray) farray.
-  forall s__split_fields5:(int,cardindex) farray.
-  forall s__split_fields6:(int,cardindex) farray.
-  forall s__split_fields7:(int,cardindex) farray. forall i:int.
-  forall o:cardindex. forall o1:cardindex. forall o2:cardindex.
-  forall o3:(int,card) farray. forall o4:cardindex.
-  forall o5:(int,cardindex) farray.
-  forall o6:(int,(int,cardindex) farray) farray.
-  forall o7:(int,cardindex) farray. forall o8:(int,cardindex) farray.
-  forall o9:(int,cardindex) farray. forall temp___839:cardindex.
-  forall temp___8391:(int,card) farray. forall temp___8392:cardindex.
-  forall temp___8393:(int,cardindex) farray.
-  forall temp___8394:(int,(int,cardindex) farray) farray.
-  forall temp___8395:(int,cardindex) farray.
-  forall temp___8396:(int,cardindex) farray.
-  forall temp___8397:(int,cardindex) farray. forall result:cardindex.
-  forall result1:(int,card) farray. forall result2:cardindex.
-  forall result3:(int,cardindex) farray.
-  forall result4:(int,(int,cardindex) farray) farray.
-  forall result5:(int,cardindex) farray.
-  forall result6:(int,cardindex) farray.
-  forall result7:(int,cardindex) farray. forall s__split_fields8:cardindex.
-  forall s__split_fields9:(int,card) farray.
-  forall s__split_fields10:cardindex.
-  forall s__split_fields11:(int,cardindex) farray.
-  forall s__split_fields12:(int,(int,cardindex) farray) farray.
-  forall s__split_fields13:(int,cardindex) farray.
-  forall s__split_fields14:(int,cardindex) farray.
-  forall s__split_fields15:(int,cardindex) farray. forall result8:int.
-  forall i1:int. forall s__split_fields16:cardindex.
-  forall s__split_fields17:(int,card) farray.
-  forall s__split_fields18:cardindex.
-  forall s__split_fields19:(int,cardindex) farray.
-  forall s__split_fields20:(int,(int,cardindex) farray) farray.
-  forall s__split_fields21:(int,cardindex) farray.
-  forall s__split_fields22:(int,cardindex) farray.
-  forall s__split_fields23:(int,cardindex) farray. forall i2:int.
-  (((((to_rep2(o) = 0) and ((to_rep2(o1) = 0) and ((o1 = o2) and
-  ((temp___135(1) = o3) and ((o = o4) and ((temp___139((-1)) = o5) and
-  ((temp___143(temp___147((-1))) = o6) and ((temp___151((-1)) = o7) and
-  ((temp___155((-1)) = o8) and (temp___159((-1)) = o9)))))))))) and
-  ((temp___839 = o2) and ((temp___8391 = o3) and ((temp___8392 = o4) and
-  ((temp___8393 = o5) and ((temp___8394 = o6) and ((temp___8395 = o7) and
-  ((temp___8396 = o8) and (temp___8397 = o9))))))))) and
-  ((null_state = temp___839) and ((null_state1 = temp___8391) and
-  ((null_state2 = temp___8392) and ((null_state3 = temp___8393) and
-  ((null_state4 = temp___8394) and ((null_state5 = temp___8395) and
-  ((null_state6 = temp___8396) and (null_state7 = temp___8397))))))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(first(cards1)),
-  to_rep1(last(cards1))) -> ((length({ elts = cards; rt = cards1
-  }) <= 100) -> ((({ us_split_fields__content = {
-  rec__patience__state__numelts = result; rec__patience__state__values =
-  result1; rec__patience__state__numstacks = result2;
-  rec__patience__state__stacksizes = result3; rec__patience__state__stacks =
-  result4; rec__patience__state__posstack = result5;
-  rec__patience__state__posheight = result6; rec__patience__state__preds =
-  result7 } } = { us_split_fields__content = {
-  rec__patience__state__numelts = s__split_fields;
-  rec__patience__state__values = s__split_fields1;
-  rec__patience__state__numstacks = s__split_fields2;
-  rec__patience__state__stacksizes = s__split_fields3;
-  rec__patience__state__stacks = s__split_fields4;
-  rec__patience__state__posstack = s__split_fields5;
-  rec__patience__state__posheight = s__split_fields6;
-  rec__patience__state__preds = s__split_fields7 } }) and
-  ((null_state = s__split_fields8) and ((null_state1 = s__split_fields9) and
-  ((null_state2 = s__split_fields10) and
-  ((null_state3 = s__split_fields11) and
-  ((null_state4 = s__split_fields12) and
-  ((null_state5 = s__split_fields13) and
-  ((null_state6 = s__split_fields14) and
-  (null_state7 = s__split_fields15))))))))) -> ((({ int__content = result8
-  } = { int__content = i }) and (i1 = to_rep1(first(cards1)))) ->
-  (((to_rep1(first(cards1)) <= i1) and (i1 <= to_rep1(last(cards1)))) ->
-  (((to_rep2(s__split_fields16) = (i2 - to_rep1(first(cards1)))) and (inv({
-  us_split_fields1 = { rec__patience__state__numelts = s__split_fields16;
-  rec__patience__state__values = s__split_fields17;
+logic s__split_fields : cardindex
+
+logic s__split_fields1 : (int,card) farray
+
+logic s__split_fields2 : cardindex
+
+logic s__split_fields3 : (int,cardindex) farray
+
+logic s__split_fields4 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields5 : (int,cardindex) farray
+
+logic s__split_fields6 : (int,cardindex) farray
+
+logic s__split_fields7 : (int,cardindex) farray
+
+logic i : int
+
+logic patience__playgame__result : cardindex
+
+logic patience__playgame__result1 : (int,card) farray
+
+logic patience__playgame__result2 : cardindex
+
+logic patience__playgame__result3 : (int,cardindex) farray
+
+logic patience__playgame__result4 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result5 : (int,cardindex) farray
+
+logic patience__playgame__result6 : (int,cardindex) farray
+
+logic patience__playgame__result7 : (int,cardindex) farray
+
+logic o : cardindex
+
+logic o1 : cardindex
+
+logic o2 : cardindex
+
+logic o3 : (int,card) farray
+
+logic o4 : cardindex
+
+logic o5 : (int,cardindex) farray
+
+logic o6 : (int,(int,cardindex) farray) farray
+
+logic o7 : (int,cardindex) farray
+
+logic o8 : (int,cardindex) farray
+
+logic o9 : (int,cardindex) farray
+
+logic temp___839 : cardindex
+
+logic temp___8391 : (int,card) farray
+
+logic temp___8392 : cardindex
+
+logic temp___8393 : (int,cardindex) farray
+
+logic temp___8394 : (int,(int,cardindex) farray) farray
+
+logic temp___8395 : (int,cardindex) farray
+
+logic temp___8396 : (int,cardindex) farray
+
+logic temp___8397 : (int,cardindex) farray
+
+logic temp___828 : int
+
+logic temp___827 : cardindex
+
+logic temp___8271 : (int,card) farray
+
+logic temp___8272 : cardindex
+
+logic temp___8273 : (int,cardindex) farray
+
+logic temp___8274 : (int,(int,cardindex) farray) farray
+
+logic temp___8275 : (int,cardindex) farray
+
+logic temp___8276 : (int,cardindex) farray
+
+logic temp___8277 : (int,cardindex) farray
+
+logic o10 : int
+
+logic result : cardindex
+
+logic result1 : (int,card) farray
+
+logic result2 : cardindex
+
+logic result3 : (int,cardindex) farray
+
+logic result4 : (int,(int,cardindex) farray) farray
+
+logic result5 : (int,cardindex) farray
+
+logic result6 : (int,cardindex) farray
+
+logic result7 : (int,cardindex) farray
+
+logic s__split_fields8 : cardindex
+
+logic s__split_fields9 : (int,card) farray
+
+logic s__split_fields10 : cardindex
+
+logic s__split_fields11 : (int,cardindex) farray
+
+logic s__split_fields12 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields13 : (int,cardindex) farray
+
+logic s__split_fields14 : (int,cardindex) farray
+
+logic s__split_fields15 : (int,cardindex) farray
+
+logic result8 : int
+
+logic i1 : int
+
+logic s__split_fields16 : cardindex
+
+logic s__split_fields17 : (int,card) farray
+
+logic s__split_fields18 : cardindex
+
+logic s__split_fields19 : (int,cardindex) farray
+
+logic s__split_fields20 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields21 : (int,cardindex) farray
+
+logic s__split_fields22 : (int,cardindex) farray
+
+logic s__split_fields23 : (int,cardindex) farray
+
+logic i2 : int
+
+logic s__split_fields24 : cardindex
+
+logic s__split_fields25 : (int,card) farray
+
+logic s__split_fields26 : cardindex
+
+logic s__split_fields27 : (int,cardindex) farray
+
+logic s__split_fields28 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields29 : (int,cardindex) farray
+
+logic s__split_fields30 : (int,cardindex) farray
+
+logic s__split_fields31 : (int,cardindex) farray
+
+logic result9 : int
+
+logic i3 : int
+
+logic s__split_fields32 : cardindex
+
+logic s__split_fields33 : (int,card) farray
+
+logic s__split_fields34 : cardindex
+
+logic s__split_fields35 : (int,cardindex) farray
+
+logic s__split_fields36 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields37 : (int,cardindex) farray
+
+logic s__split_fields38 : (int,cardindex) farray
+
+logic s__split_fields39 : (int,cardindex) farray
+
+logic i4 : int
+
+logic s__split_fields40 : cardindex
+
+logic s__split_fields41 : (int,card) farray
+
+logic s__split_fields42 : cardindex
+
+logic s__split_fields43 : (int,cardindex) farray
+
+logic s__split_fields44 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields45 : (int,cardindex) farray
+
+logic s__split_fields46 : (int,cardindex) farray
+
+logic s__split_fields47 : (int,cardindex) farray
+
+logic i5 : int
+
+logic s__split_fields48 : cardindex
+
+logic s__split_fields49 : (int,card) farray
+
+logic s__split_fields50 : cardindex
+
+logic s__split_fields51 : (int,cardindex) farray
+
+logic s__split_fields52 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields53 : (int,cardindex) farray
+
+logic s__split_fields54 : (int,cardindex) farray
+
+logic s__split_fields55 : (int,cardindex) farray
+
+logic i6 : int
+
+logic s__split_fields56 : cardindex
+
+logic s__split_fields57 : (int,card) farray
+
+logic s__split_fields58 : cardindex
+
+logic s__split_fields59 : (int,cardindex) farray
+
+logic s__split_fields60 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields61 : (int,cardindex) farray
+
+logic s__split_fields62 : (int,cardindex) farray
+
+logic s__split_fields63 : (int,cardindex) farray
+
+logic i7 : int
+
+logic result10 : cardindex
+
+logic result11 : (int,card) farray
+
+logic result12 : cardindex
+
+logic result13 : (int,cardindex) farray
+
+logic result14 : (int,(int,cardindex) farray) farray
+
+logic result15 : (int,cardindex) farray
+
+logic result16 : (int,cardindex) farray
+
+logic result17 : (int,cardindex) farray
+
+logic patience__playgame__result8 : cardindex
+
+logic patience__playgame__result9 : (int,card) farray
+
+logic patience__playgame__result10 : cardindex
+
+logic patience__playgame__result11 : (int,cardindex) farray
+
+logic patience__playgame__result12 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result13 : (int,cardindex) farray
+
+logic patience__playgame__result14 : (int,cardindex) farray
+
+logic patience__playgame__result15 : (int,cardindex) farray
+
+logic patience__playgame__result16 : cardindex
+
+logic patience__playgame__result17 : (int,card) farray
+
+logic patience__playgame__result18 : cardindex
+
+logic patience__playgame__result19 : (int,cardindex) farray
+
+logic patience__playgame__result20 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result21 : (int,cardindex) farray
+
+logic patience__playgame__result22 : (int,cardindex) farray
+
+logic patience__playgame__result23 : (int,cardindex) farray
+
+logic patience__playgame__result24 : cardindex
+
+logic patience__playgame__result25 : (int,card) farray
+
+logic patience__playgame__result26 : cardindex
+
+logic patience__playgame__result27 : (int,cardindex) farray
+
+logic patience__playgame__result28 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result29 : (int,cardindex) farray
+
+logic patience__playgame__result30 : (int,cardindex) farray
+
+logic patience__playgame__result31 : (int,cardindex) farray
+
+logic s__split_fields64 : cardindex
+
+logic s__split_fields65 : (int,card) farray
+
+logic s__split_fields66 : cardindex
+
+logic s__split_fields67 : (int,cardindex) farray
+
+logic s__split_fields68 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields69 : (int,cardindex) farray
+
+logic s__split_fields70 : (int,cardindex) farray
+
+logic s__split_fields71 : (int,cardindex) farray
+
+logic i8 : int
+
+logic patience__playgame__result32 : cardindex
+
+logic patience__playgame__result33 : (int,card) farray
+
+logic patience__playgame__result34 : cardindex
+
+logic patience__playgame__result35 : (int,cardindex) farray
+
+logic patience__playgame__result36 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result37 : (int,cardindex) farray
+
+logic patience__playgame__result38 : (int,cardindex) farray
+
+logic patience__playgame__result39 : (int,cardindex) farray
+
+logic s__split_fields72 : cardindex
+
+logic s__split_fields73 : (int,card) farray
+
+logic s__split_fields74 : cardindex
+
+logic s__split_fields75 : (int,cardindex) farray
+
+logic s__split_fields76 : (int,(int,cardindex) farray) farray
+
+logic s__split_fields77 : (int,cardindex) farray
+
+logic s__split_fields78 : (int,cardindex) farray
+
+logic s__split_fields79 : (int,cardindex) farray
+
+logic i9 : int
+
+logic patience__playgame__result40 : cardindex
+
+logic patience__playgame__result41 : (int,card) farray
+
+logic patience__playgame__result42 : cardindex
+
+logic patience__playgame__result43 : (int,cardindex) farray
+
+logic patience__playgame__result44 : (int,(int,cardindex) farray) farray
+
+logic patience__playgame__result45 : (int,cardindex) farray
+
+logic patience__playgame__result46 : (int,cardindex) farray
+
+logic patience__playgame__result47 : (int,cardindex) farray
+
+axiom H : (to_rep2(o) = 0)
+
+axiom H1 : (to_rep2(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (temp___135(1) = o3)
+
+axiom H4 : (o = o4)
+
+axiom H5 : (temp___139((- 1)) = o5)
+
+axiom H6 : (temp___143(temp___147((- 1))) = o6)
+
+axiom H7 : (temp___151((- 1)) = o7)
+
+axiom H8 : (temp___155((- 1)) = o8)
+
+axiom H9 : (temp___159((- 1)) = o9)
+
+axiom H10 : (temp___839 = o2)
+
+axiom H11 : (temp___8391 = o3)
+
+axiom H12 : (temp___8392 = o4)
+
+axiom H13 : (temp___8393 = o5)
+
+axiom H14 : (temp___8394 = o6)
+
+axiom H15 : (temp___8395 = o7)
+
+axiom H16 : (temp___8396 = o8)
+
+axiom H17 : (temp___8397 = o9)
+
+axiom H18 : ((temp___839 = null_state) and ((temp___8391 = null_state1) and
+  ((temp___8392 = null_state2) and ((temp___8393 = null_state3) and
+  ((temp___8394 = null_state4) and ((temp___8395 = null_state5) and
+  ((temp___8396 = null_state6) and (temp___8397 = null_state7))))))))
+
+axiom H19 : dynamic_property(1, 2147483647, to_rep1(first(cards1)),
+  to_rep1(last(cards1)))
+
+axiom H20 : (length({ elts = cards; rt = cards1 }) <= 100)
+
+axiom H21 : ((result = s__split_fields) and ((result1 = s__split_fields1) and
+  ((result2 = s__split_fields2) and ((result3 = s__split_fields3) and
+  ((result4 = s__split_fields4) and ((result5 = s__split_fields5) and
+  ((result6 = s__split_fields6) and (result7 = s__split_fields7))))))))
+
+axiom H22 : ((s__split_fields8 = null_state) and
+  ((s__split_fields9 = null_state1) and
+  ((s__split_fields10 = null_state2) and
+  ((s__split_fields11 = null_state3) and
+  ((s__split_fields12 = null_state4) and
+  ((s__split_fields13 = null_state5) and
+  ((s__split_fields14 = null_state6) and
+  (s__split_fields15 = null_state7))))))))
+
+axiom H23 : (result8 = i)
+
+axiom H24 : (i1 = to_rep1(first(cards1)))
+
+axiom H25 : (to_rep1(first(cards1)) <= i1)
+
+axiom H26 : (i1 <= to_rep1(last(cards1)))
+
+axiom H27 : (to_rep2(s__split_fields16) = (i2 - to_rep1(first(cards1))))
+
+axiom H28 : (inv({ us_split_fields1 = { rec__patience__state__numelts =
+  s__split_fields16; rec__patience__state__values = s__split_fields17;
   rec__patience__state__numstacks = s__split_fields18;
   rec__patience__state__stacksizes = s__split_fields19;
   rec__patience__state__stacks = s__split_fields20;
   rec__patience__state__posstack = s__split_fields21;
   rec__patience__state__posheight = s__split_fields22;
-  rec__patience__state__preds = s__split_fields23 } }) = true)) ->
-  ((((to_rep1(first(cards1)) <= to_rep1(last(cards1))) ->
+  rec__patience__state__preds = s__split_fields23 } }) = true)
+
+axiom H29 : (((to_rep1(first(cards1)) <= to_rep1(last(cards1))) ->
   dynamic_property1(to_rep1(first(cards1)), to_rep1(last(cards1)), i2)) and
-  ((to_rep1(first(cards1)) <= i2) and (i2 <= to_rep1(last(cards1))))) ->
-  in_range1((i2 - to_rep1(first(cards1)))))))))))))
+  ((to_rep1(first(cards1)) <= i2) and (i2 <= to_rep1(last(cards1)))))
+
+ (* File "patience.ads", line 27, characters 0-0 *)
+goal WP_parameter_def : in_range1((i2 - to_rep1(first(cards1))))

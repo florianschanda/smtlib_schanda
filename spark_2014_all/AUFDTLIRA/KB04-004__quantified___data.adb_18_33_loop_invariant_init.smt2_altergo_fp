@@ -305,10 +305,101 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : (int,bool) farray
+
+logic i : int
+
+logic temp___165 : int
+
+logic temp___163 : (int,bool) farray
+
+logic k : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic k1 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : int
+
+logic x1 : (int,bool) farray
+
+logic result : int
+
+logic i1 : int
+
+logic x2 : (int,bool) farray
+
+logic i2 : int
+
+logic result1 : bool
+
+logic result2 : (int,bool) farray
+
+logic x3 : (int,bool) farray
+
+logic result3 : int
+
+logic i3 : int
+
+logic x4 : (int,bool) farray
+
+logic i4 : int
+
+logic x5 : (int,bool) farray
+
+logic i5 : int
+
+logic x6 : (int,bool) farray
+
+logic i6 : int
+
+logic x7 : (int,bool) farray
+
+logic i7 : int
+
+logic x8 : (int,bool) farray
+
+logic i8 : int
+
+logic x9 : (int,bool) farray
+
+logic i9 : int
+
+logic x10 : (int,bool) farray
+
+logic i10 : int
+
+logic x11 : (int,bool) farray
+
+logic i11 : int
+
+axiom H : (x = x_old)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (1 <= i1)
+
+axiom H4 : (i1 <= 10)
+
+logic k2 : int
+
+axiom H5 : (1 <= k2)
+
+axiom H6 : (k2 <= (i1 - 1))
+
+axiom H7 : ((x[k2]) = true)
+
  (* File "data.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,bool) farray. forall i:int. forall result:int.
-  forall i1:int. ((x = x_old) -> ((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  (forall k:int. (((1 <= k) and (k <= (i1 - 1))) -> (((x[k]) = true) ->
-  (not ((x_old[k]) = true)))))))))
+goal WP_parameter_def : (not ((x_old[k2]) = true))

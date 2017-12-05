@@ -590,5 +590,36 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range8(get(container, position)))))
 
+logic l__split_fields : us_main_type
+
+logic p__identity_swap__l_in__assume : capacity_range
+
+logic p__identity_swap__l_in__assume1 : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range1(i1)
+
+axiom H1 : in_range1(i2)
+
+axiom H2 : ((((1 <= i1) and (i1 <= (0 + length(model__({ us_split_discrs1 = {
+  rec__p__my_vectors__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
+  }))))) and (1 <= i2)) and (i2 <= (0 + length(model__({ us_split_discrs1 = {
+  rec__p__my_vectors__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } })))))
+
+axiom H3 : (of_int(1) = true)
+
  (* File "p.ads", line 18, characters 0-0 *)
 goal WP_parameter_def : true

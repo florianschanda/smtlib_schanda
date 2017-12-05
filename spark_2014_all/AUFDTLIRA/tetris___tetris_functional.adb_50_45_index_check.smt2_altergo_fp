@@ -463,7 +463,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -502,7 +502,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq10 : int, int -> bool
 
@@ -2079,7 +2079,7 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 type integer
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq17 : int, int -> bool
 
@@ -2230,19 +2230,320 @@ axiom no_overlap__def_axiom :
   rec__tetris_functional__piece__d = p1; rec__tetris_functional__piece__x =
   p2; rec__tetris_functional__piece__y = p3 } }) = true)))))
 
- (* File "tetris_functional.ads", line 170, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall y:int. forall o:cell. forall o1:int. forall o2:(int,cell) farray.
-  forall result:int. forall y1:int.
-  forall cur_board1:(int,(int,cell) farray) farray. forall y2:int.
-  forall x:int. forall result1:int. forall x1:int.
-  forall cur_board2:(int,(int,cell) farray) farray. forall x2:int.
-  ((tetris_functional__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic y : int
+
+logic x : int
+
+logic y1 : int
+
+logic x1 : int
+
+logic o : cell
+
+logic o1 : int
+
+logic o2 : (int,cell) farray
+
+logic o3 : int
+
+logic o4 : (int,(int,cell) farray) farray
+
+logic o5 : cell
+
+logic o6 : int
+
+logic o7 : (int,cell) farray
+
+logic o8 : int
+
+logic o9 : (int,(int,cell) farray) farray
+
+logic o10 : cell
+
+logic o11 : int
+
+logic o12 : (int,cell) farray
+
+logic o13 : int
+
+logic o14 : (int,(int,cell) farray) farray
+
+logic o15 : cell
+
+logic o16 : int
+
+logic o17 : (int,cell) farray
+
+logic o18 : int
+
+logic o19 : (int,(int,cell) farray) farray
+
+logic temp___739 : (int,(int,cell) farray) farray
+
+logic temp___734 : (int,(int,cell) farray) farray
+
+logic o20 : cell
+
+logic o21 : int
+
+logic o22 : (int,cell) farray
+
+logic o23 : int
+
+logic o24 : (int,(int,cell) farray) farray
+
+logic temp___754 : (int,(int,cell) farray) farray
+
+logic temp___749 : (int,(int,cell) farray) farray
+
+logic o25 : int
+
+logic temp___745 : map
+
+logic o26 : cell
+
+logic o27 : int
+
+logic o28 : (int,cell) farray
+
+logic o29 : int
+
+logic o30 : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic y2 : int
+
+logic x2 : int
+
+logic y3 : int
+
+logic x3 : int
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result1 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result2 : (int,(int,cell) farray) farray
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic result3 : (int,(int,cell) farray) farray
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic result4 : int
+
+logic y4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic y5 : int
+
+logic x4 : int
+
+logic result5 : int
+
+logic x5 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic x6 : int
+
+logic result6 : (int,(int,cell) farray) farray
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic x7 : int
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic x8 : int
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic x9 : int
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic x10 : int
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic y6 : int
+
+logic x11 : int
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic y7 : int
+
+logic x12 : int
+
+logic cur_board15 : (int,(int,cell) farray) farray
+
+logic y8 : int
+
+logic x13 : int
+
+logic cur_board16 : (int,(int,cell) farray) farray
+
+logic y9 : int
+
+logic x14 : int
+
+logic result7 : int
+
+logic y10 : int
+
+logic cur_board17 : (int,(int,cell) farray) farray
+
+logic y11 : int
+
+logic x15 : int
+
+logic result8 : int
+
+logic x16 : int
+
+logic cur_board18 : (int,(int,cell) farray) farray
+
+logic x17 : int
+
+logic result9 : bool
+
+logic result10 : (int,(int,cell) farray) farray
+
+logic cur_board19 : (int,(int,cell) farray) farray
+
+logic cur_board20 : (int,(int,cell) farray) farray
+
+logic x18 : int
+
+logic cur_board21 : (int,(int,cell) farray) farray
+
+logic x19 : int
+
+logic cur_board22 : (int,(int,cell) farray) farray
+
+logic x20 : int
+
+logic cur_board23 : (int,(int,cell) farray) farray
+
+logic x21 : int
+
+logic cur_board24 : (int,(int,cell) farray) farray
+
+logic y12 : int
+
+logic x22 : int
+
+logic cur_board25 : (int,(int,cell) farray) farray
+
+logic y13 : int
+
+logic x23 : int
+
+logic cur_board26 : (int,(int,cell) farray) farray
+
+logic y14 : int
+
+logic x24 : int
+
+logic cur_board27 : (int,(int,cell) farray) farray
+
+logic y15 : int
+
+logic x25 : int
+
+logic cur_board28 : (int,(int,cell) farray) farray
+
+logic y16 : int
+
+logic x26 : int
+
+logic y17 : int
+
+logic x27 : int
+
+logic cur_board29 : (int,(int,cell) farray) farray
+
+logic y18 : int
+
+logic x28 : int
+
+logic y19 : int
+
+logic x29 : int
+
+logic cur_board30 : (int,(int,cell) farray) farray
+
+logic y20 : int
+
+logic x30 : int
+
+logic y21 : int
+
+logic x31 : int
+
+logic cur_board31 : (int,(int,cell) farray) farray
+
+logic y22 : int
+
+logic x32 : int
+
+logic y23 : int
+
+logic x33 : int
+
+logic result11 : int
+
+logic cur_state1 : int
+
+logic cur_board32 : (int,(int,cell) farray) farray
+
+logic cur_state2 : int
+
+logic y24 : int
+
+logic x34 : int
+
+logic y25 : int
+
+logic x35 : int
+
+logic cur_board33 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic y26 : int
+
+logic x36 : int
+
+logic y27 : int
+
+logic x37 : int
+
+axiom H :
+  (tetris_functional__possible_i_shapes__aggregate_def(temp___143(of_int(0),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
   of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
@@ -2254,8 +2555,10 @@ goal WP_parameter_def :
   of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) ->
-  ((tetris_functional__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (tetris_functional__possible_three_shapes__aggregate_def(temp___248(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -2289,25 +2592,57 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) -> (in_range9(cur_state) ->
-  (((cur_state = 1) and (valid_configuration(cur_board, {
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : in_range9(cur_state)
+
+axiom H3 : ((cur_state = 1) and (valid_configuration(cur_board, {
   rec__tetris_functional__piece__s = cur_piece__split_fields;
   rec__tetris_functional__piece__d = cur_piece__split_fields1;
   rec__tetris_functional__piece__x = cur_piece__split_fields2;
   rec__tetris_functional__piece__y = cur_piece__split_fields3 },
-  cur_state) = true)) -> ((not (to_rep1(cur_piece__split_fields) = 2)) ->
-  ((to_rep1(cur_piece__split_fields) = 1) -> ((({ int__content = result } = {
-  int__content = y }) and (y1 = 0)) -> (((0 <= y1) and (y1 <= 3)) ->
-  (((0 <= y2) and (y2 <= 3)) -> (((x = result1) and (x1 = 0)) ->
-  (((0 <= x1) and (x1 <= 3)) ->
-  (((forall temp___735:int. (((1 <= temp___735) and (temp___735 <= 50)) ->
-    ((not ((to_rep3(cur_piece__split_fields3) + y2) = temp___735)) ->
-    ((cur_board2[temp___735]) = (cur_board1[temp___735]))))) and
-  ((0 <= x2) and (x2 <= 3))) ->
-  ((get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y2,
-  x2) = true) -> (((to_rep(o) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= (to_rep2(cur_piece__split_fields2) + x2)) and
-  ((to_rep2(cur_piece__split_fields2) + x2) <= 10)) and
-  (o1 = (to_rep2(cur_piece__split_fields2) + x2))) and
-  (o2 = ((cur_board2[(to_rep3(cur_piece__split_fields3) + y2)])[o1 <- o])))) ->
-  (1 <= (to_rep3(cur_piece__split_fields3) + y2)))))))))))))))))
+  cur_state) = true))
+
+axiom H4 : (not (to_rep1(cur_piece__split_fields) = 2))
+
+axiom H5 : (to_rep1(cur_piece__split_fields) = 1)
+
+axiom H6 : (result4 = y)
+
+axiom H7 : (y4 = 0)
+
+axiom H8 : (0 <= y4)
+
+axiom H9 : (y4 <= 3)
+
+axiom H10 : ((0 <= y5) and (y5 <= 3))
+
+axiom H11 : (x4 = result5)
+
+axiom H12 : (x5 = 0)
+
+axiom H13 : (0 <= x5)
+
+axiom H14 : (x5 <= 3)
+
+axiom H15 :
+  ((forall temp___735:int. (((1 <= temp___735) and (temp___735 <= 50)) ->
+   ((not ((to_rep3(cur_piece__split_fields3) + y5) = temp___735)) ->
+   ((cur_board7[temp___735]) = (cur_board6[temp___735]))))) and
+  ((0 <= x6) and (x6 <= 3)))
+
+axiom H16 : (get((possible_i_shapes[to_rep4(cur_piece__split_fields1)]), y5,
+  x6) = true)
+
+axiom H17 : (to_rep(o20) = to_rep1(cur_piece__split_fields))
+
+axiom H18 : ((1 <= (to_rep2(cur_piece__split_fields2) + x6)) and
+  ((to_rep2(cur_piece__split_fields2) + x6) <= 10))
+
+axiom H19 : (o21 = (to_rep2(cur_piece__split_fields2) + x6))
+
+axiom H20 :
+  (o22 = ((cur_board7[(to_rep3(cur_piece__split_fields3) + y5)])[o21 <- o20]))
+
+ (* File "tetris_functional.ads", line 170, characters 0-0 *)
+goal WP_parameter_def : (1 <= (to_rep3(cur_piece__split_fields3) + y5))

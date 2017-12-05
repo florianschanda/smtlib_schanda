@@ -218,5 +218,7 @@ logic x : (int,one_twenty) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (to_rep((x[1])) = 1)
+
  (* File "subar.ads", line 27, characters 0-0 *)
-goal WP_parameter_def : ((to_rep((x[1])) = 1) -> (to_rep((x[1])) = 1))
+goal WP_parameter_def : (to_rep((x[1])) = 1)

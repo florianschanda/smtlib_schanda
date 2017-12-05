@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -582,56 +582,155 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(int,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall o:integer. forall o1:(int,integer) farray.
-  forall o2:(int,integer) farray. forall o3:ar_index. forall o4:length_type.
-  forall temp___196:(int,integer) farray. forall temp___1961:ar_index.
-  forall temp___1962:length_type. forall o5:int. forall o6:length_type.
-  forall o7:(int,integer) farray. forall o8:ar_index. forall o9:length_type.
-  forall temp___198:(int,integer) farray. forall temp___1981:ar_index.
-  forall temp___1982:length_type. forall result:(int,integer) farray.
-  forall result1:ar_index. forall result2:length_type.
-  forall r__split_fields3:(int,integer) farray.
-  forall r__split_fields4:ar_index. forall r__split_fields5:length_type.
-  forall result3:(int,integer) farray. forall result4:ar_index.
-  forall result5:length_type. forall r__split_fields6:(int,integer) farray.
-  forall r__split_fields7:ar_index. forall r__split_fields8:length_type.
-  forall r__split_fields9:(int,integer) farray.
-  forall r__split_fields10:ar_index. forall r__split_fields11:length_type.
-  forall r__split_fields12:(int,integer) farray.
-  forall r__split_fields13:ar_index. forall r__split_fields14:length_type.
-  ((in_range(x) and ((not (is_full({ us_split_fields1 = {
+logic r__split_fields : (int,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : (int,integer) farray
+
+logic o3 : ar_index
+
+logic o4 : length_type
+
+logic temp___196 : (int,integer) farray
+
+logic temp___1961 : ar_index
+
+logic temp___1962 : length_type
+
+logic o5 : int
+
+logic o6 : length_type
+
+logic o7 : (int,integer) farray
+
+logic o8 : ar_index
+
+logic o9 : length_type
+
+logic temp___198 : (int,integer) farray
+
+logic temp___1981 : ar_index
+
+logic temp___1982 : length_type
+
+logic result : (int,integer) farray
+
+logic result1 : ar_index
+
+logic result2 : length_type
+
+logic r__split_fields3 : (int,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic result3 : (int,integer) farray
+
+logic result4 : ar_index
+
+logic result5 : length_type
+
+logic r__split_fields6 : (int,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (int,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic r__split_fields12 : (int,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+axiom H : in_range(x)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)) and
-  (((((((to_rep(o) = x) and
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))
+
+axiom H2 : (to_rep(o) = x)
+
+axiom H3 :
   (o1 = (r__split_fields[mod((to_rep1(r__split_fields1) + to_rep2(r__split_fields2)),
-  10000) <- o]))) and ((o1 = o2) and ((r__split_fields1 = o3) and
-  (r__split_fields2 = o4)))) and ((temp___196 = o2) and
-  ((temp___1961 = o3) and (temp___1962 = o4)))) and (({
-  us_split_fields__content = { rec__ring_buf__ring_buffer__data = result;
-  rec__ring_buf__ring_buffer__first = result1;
-  rec__ring_buf__ring_buffer__length = result2 } } = {
-  us_split_fields__content = { rec__ring_buf__ring_buffer__data =
-  r__split_fields; rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) and
-  ((temp___196 = r__split_fields3) and ((temp___1961 = r__split_fields4) and
-  (temp___1962 = r__split_fields5))))) and
-  ((((((o5 = (to_rep2(r__split_fields5) + 1)) and
-  in_range2((to_rep2(r__split_fields5) + 1))) and (to_rep2(o6) = o5)) and
-  ((r__split_fields3 = o7) and ((r__split_fields4 = o8) and (o6 = o9)))) and
-  ((temp___198 = o7) and ((temp___1981 = o8) and (temp___1982 = o9)))) and
-  (((result3 = r__split_fields3) and ((result4 = r__split_fields4) and
-  (result5 = r__split_fields5))) and ((temp___198 = r__split_fields6) and
-  ((temp___1981 = r__split_fields7) and
-  (temp___1982 = r__split_fields8)))))) and
-  (((r__split_fields9 = r__split_fields6) and
-  ((r__split_fields10 = r__split_fields7) and
-  (r__split_fields11 = r__split_fields8))) and
-  ((r__split_fields12 = r__split_fields6) and
-  ((r__split_fields13 = r__split_fields7) and
-  (r__split_fields14 = r__split_fields8))))))) ->
-  (to_rep2(r__split_fields11) = (to_rep2(r__split_fields2) + 1))))
+  10000) <- o]))
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (r__split_fields1 = o3)
+
+axiom H6 : (r__split_fields2 = o4)
+
+axiom H7 : (temp___196 = o2)
+
+axiom H8 : (temp___1961 = o3)
+
+axiom H9 : (temp___1962 = o4)
+
+axiom H10 : ((result = r__split_fields) and ((result1 = r__split_fields1) and
+  (result2 = r__split_fields2)))
+
+axiom H11 : (temp___196 = r__split_fields3)
+
+axiom H12 : (temp___1961 = r__split_fields4)
+
+axiom H13 : (temp___1962 = r__split_fields5)
+
+axiom H14 : ((o5 = (to_rep2(r__split_fields5) + 1)) and
+  in_range2((to_rep2(r__split_fields5) + 1)))
+
+axiom H15 : (to_rep2(o6) = o5)
+
+axiom H16 : (r__split_fields3 = o7)
+
+axiom H17 : (r__split_fields4 = o8)
+
+axiom H18 : (o6 = o9)
+
+axiom H19 : (temp___198 = o7)
+
+axiom H20 : (temp___1981 = o8)
+
+axiom H21 : (temp___1982 = o9)
+
+axiom H22 : (result3 = r__split_fields3)
+
+axiom H23 : (result4 = r__split_fields4)
+
+axiom H24 : (result5 = r__split_fields5)
+
+axiom H25 : (temp___198 = r__split_fields6)
+
+axiom H26 : (temp___1981 = r__split_fields7)
+
+axiom H27 : (temp___1982 = r__split_fields8)
+
+axiom H28 : (r__split_fields9 = r__split_fields6)
+
+axiom H29 : (r__split_fields10 = r__split_fields7)
+
+axiom H30 : (r__split_fields11 = r__split_fields8)
+
+axiom H31 : (r__split_fields12 = r__split_fields6)
+
+axiom H32 : (r__split_fields13 = r__split_fields7)
+
+axiom H33 : (r__split_fields14 = r__split_fields8)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep2(r__split_fields11) = (to_rep2(r__split_fields2) + 1))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tindexB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -427,7 +427,38 @@ axiom def_axiom1 :
   temp___3771 }, temp___378,
   temp___379)).elts[temp___380]) = (temp___377[temp___380]))))))))
 
+logic a : (int,integer) farray
+
+logic us : int
+
+logic o : int
+
+logic temp___381 : (int,integer) farray
+
+logic temp___3811 : t
+
+logic temp___382 : (int,integer) farray
+
+logic temp___3821 : t
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range(new_val)
+
  (* File "update_checks_1.ads", line 32, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 8, to_rep(a__first),
-  to_rep(a__last)) -> (in_range2(i) -> (in_range(new_val) ->
-  dynamic_property1(to_rep(a__first), to_rep(a__last), i))))
+goal WP_parameter_def : dynamic_property1(to_rep(a__first), to_rep(a__last),
+  i)

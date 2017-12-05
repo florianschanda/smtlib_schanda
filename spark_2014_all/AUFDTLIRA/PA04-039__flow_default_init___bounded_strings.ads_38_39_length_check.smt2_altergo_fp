@@ -160,7 +160,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -579,15 +579,15 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
+  ((((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
   (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length)))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size2 : int
@@ -831,19 +831,39 @@ axiom def_axiom :
   (forall temp___177:int. (((temp___172(temp___174, temp___175,
   temp___176)).elts1[temp___177]) = of_rep2(temp___174)))))
 
+logic temp___171 : int
+
+logic temp___170 : index_type
+
+logic temp___179 : (int,character) farray
+
+logic temp___1791 : t1
+
+logic temp___180 : index_type
+
+logic temp___1801 : (int,character) farray
+
+logic temp___1802 : t
+
+logic temp___1803 : length_type
+
+axiom H : in_range(temp___171)
+
+axiom H1 : (temp___171 = to_rep(temp___170))
+
+axiom H2 : (to_rep3(first2((temp___172(32, 1, temp___171)).rt1)) = 1)
+
+axiom H3 : (to_rep3(last2((temp___172(32, 1, temp___171)).rt1)) = temp___171)
+
+axiom H4 : ({ elts1 = temp___179; rt1 = temp___1791 } = temp___172(32, 1,
+  temp___171))
+
  (* File "bounded_strings.ads", line 38, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___171:int. forall temp___170:index_type.
-  forall temp___179:(int,character) farray. forall temp___1791:t1.
-  (in_range(temp___171) -> ((temp___171 = to_rep(temp___170)) ->
-  (((to_rep3(first2((temp___172(32, 1, temp___171)).rt1)) = 1) and
-  ((to_rep3(last2((temp___172(32, 1, temp___171)).rt1)) = temp___171) and ({
-  elts1 = temp___179; rt1 = temp___1791 } = temp___172(32, 1,
-  temp___171)))) ->
   (((to_rep3(first2(temp___1791)) <= to_rep3(last2(temp___1791))) ->
   (((1 <= temp___171) ->
   (((to_rep3(last2(temp___1791)) - to_rep3(first2(temp___1791))) + 1) = ((temp___171 - 1) + 1))) and
   ((not (1 <= temp___171)) ->
   (((to_rep3(last2(temp___1791)) - to_rep3(first2(temp___1791))) + 1) = 0)))) and
   ((not (to_rep3(first2(temp___1791)) <= to_rep3(last2(temp___1791)))) ->
-  ((1 <= temp___171) -> (0 = ((temp___171 - 1) + 1)))))))))
+  ((1 <= temp___171) -> (0 = ((temp___171 - 1) + 1)))))

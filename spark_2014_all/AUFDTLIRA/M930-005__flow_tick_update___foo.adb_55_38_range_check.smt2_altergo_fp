@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -496,11 +496,29 @@ axiom def_axiom :
   temp___1991; rec__foo__coordinate_t__z = temp___1992 }
   })[temp___200]) = (temp___197[temp___200]))))))))
 
- (* File "foo.adb", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:(int,us_rep) farray. forall o:int.
-  forall o1:integer. forall o2:integer. forall o3:integer. (in_range(n) ->
-  (in_range(m) -> (((((1 <= m) and (m <= 5)) and (o = m)) and ({
-  us_split_fields1 = { rec__foo__coordinate_t__x = o1;
+logic a__split_fields : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : int
+
+axiom H : in_range(n)
+
+axiom H1 : in_range(m)
+
+axiom H2 : ((1 <= m) and (m <= 5))
+
+axiom H3 : (o = m)
+
+axiom H4 : ({ us_split_fields1 = { rec__foo__coordinate_t__x = o1;
   rec__foo__coordinate_t__y = o2; rec__foo__coordinate_t__z = o3 }
-  } = (a__split_fields[o]))) -> in_range1(n)))))
+  } = (a__split_fields[o]))
+
+ (* File "foo.adb", line 35, characters 0-0 *)
+goal WP_parameter_def : in_range1(n)

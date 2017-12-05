@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -448,64 +448,446 @@ axiom def_axiom2 :
   (forall temp___257:int. forall temp___258:int. (get(temp___254(temp___256),
   temp___257, temp___258) = of_rep(temp___256))))
 
+logic m : map
+
+logic tmp : int
+
+logic c : int
+
+logic tmp1 : int
+
+logic c1 : int
+
+logic i : int
+
+logic temp___231 : int
+
+logic temp___228 : map
+
+logic temp___233 : map
+
+logic temp___232 : map
+
+logic temp___227 : int
+
+logic i1 : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : natural
+
+logic o11 : map
+
+logic o12 : natural
+
+logic o13 : map
+
+logic temp___250 : map
+
+logic temp___247 : int
+
+logic temp___244 : map
+
+logic temp___243 : int
+
+logic temp___249 : map
+
+logic temp___248 : map
+
+logic temp___251 : map
+
+logic i2 : int
+
+logic o14 : int
+
+logic o15 : natural
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : natural
+
+logic o19 : int
+
+logic o20 : natural
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic i3 : int
+
+logic o24 : int
+
+logic o25 : natural
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : natural
+
+logic o29 : int
+
+logic o30 : natural
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : bool
+
+logic o34 : natural
+
+logic o35 : map
+
+logic o36 : natural
+
+logic o37 : map
+
+logic temp___264 : map
+
+logic temp___262 : int
+
+logic temp___259 : map
+
+logic temp___263 : map
+
+logic k : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : natural
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic k1 : int
+
+logic h : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : natural
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : natural
+
+logic o52 : map
+
+logic tmp2 : int
+
+logic tmp3 : int
+
+logic result : map
+
+logic m1 : map
+
+logic result1 : int
+
+logic c2 : int
+
+logic m2 : map
+
+logic tmp4 : int
+
+logic c3 : int
+
+logic result2 : int
+
+logic tmp5 : int
+
+logic result3 : map
+
+logic m3 : map
+
+logic result4 : map
+
+logic m4 : map
+
+logic result5 : int
+
+logic c4 : int
+
+logic m5 : map
+
+logic tmp6 : int
+
+logic c5 : int
+
+logic m6 : map
+
+logic tmp7 : int
+
+logic c6 : int
+
+logic m7 : map
+
+logic tmp8 : int
+
+logic c7 : int
+
+logic m8 : map
+
+logic tmp9 : int
+
+logic c8 : int
+
+logic m9 : map
+
+logic tmp10 : int
+
+logic c9 : int
+
+logic m10 : map
+
+logic tmp11 : int
+
+logic c10 : int
+
+logic result6 : map
+
+logic m11 : map
+
+logic result7 : int
+
+logic c11 : int
+
+logic m12 : map
+
+logic tmp12 : int
+
+logic c12 : int
+
+logic result8 : int
+
+logic tmp13 : int
+
+logic result9 : map
+
+logic m13 : map
+
+logic result10 : map
+
+logic m14 : map
+
+logic result11 : int
+
+logic c13 : int
+
+logic m15 : map
+
+logic tmp14 : int
+
+logic c14 : int
+
+logic m16 : map
+
+logic tmp15 : int
+
+logic c15 : int
+
+logic m17 : map
+
+logic tmp16 : int
+
+logic c16 : int
+
+logic m18 : map
+
+logic tmp17 : int
+
+logic c17 : int
+
+logic m19 : map
+
+logic tmp18 : int
+
+logic c18 : int
+
+logic m20 : map
+
+logic tmp19 : int
+
+logic c19 : int
+
+logic result12 : map
+
+logic m21 : map
+
+logic result13 : int
+
+logic i4 : int
+
+logic m22 : map
+
+logic i5 : int
+
+logic result14 : map
+
+logic m23 : map
+
+logic result15 : int
+
+logic i6 : int
+
+logic m24 : map
+
+logic i7 : int
+
+logic m25 : map
+
+logic i8 : int
+
+logic m26 : map
+
+logic i9 : int
+
+logic m27 : map
+
+logic i10 : int
+
+logic m28 : map
+
+logic i11 : int
+
+logic m29 : map
+
+logic i12 : int
+
+axiom H : (result = m)
+
+axiom H1 : (m1 = temp___220(1, 2, 0))
+
+axiom H2 : (m1 = c62b)
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(tmp))
+
+axiom H4 : (result1 = c)
+
+axiom H5 : (c2 = 1)
+
+axiom H6 : (((1 <= c2) and (c2 <= 10)) -> (((temp___231 = c2) and
+  ((temp___228 = m1) and ((temp___233 = m1) and ((temp___232 = m1) and
+  ((temp___227 = tmp) and
+  ((forall i13:int. (((1 <= i13) and (i13 <= (c3 - 1))) -> ((to_rep(get(m2,
+   5, i13)) = to_rep(get(temp___232, 7, i13))) and (to_rep(get(m2, 7,
+   i13)) = to_rep(get(temp___233, 5, i13)))))) and ((((((0 <= 2147483647) ->
+  in_range2(tmp4)) and
+  (forall temp___229:int. forall temp___230:int. ((((1 <= temp___229) and
+  (temp___229 <= 10)) and ((1 <= temp___230) and (temp___230 <= 10))) ->
+  ((((c3 <= temp___230) or (not (7 = temp___229))) and ((c3 <= temp___230) or
+  (not (5 = temp___229)))) -> (get(m2, temp___229,
+  temp___230) = get(temp___228, temp___229, temp___230)))))) and
+  ((1 <= 10) -> in_range5(c3))) and ((1 <= c3) and (c3 <= 10))) and
+  (((tmp4 = result2) and (tmp5 = to_rep(get(m2, 5, c3)))) and
+  ((((to_rep(o10) = to_rep(get(m2, 7, c3))) and (o11 = set(m2, 5, c3,
+  o10))) and ((m2 = result3) and (m3 = o11))) and ((((to_rep(o12) = tmp5) and
+  (o13 = set(m3, 7, c3, o12))) and ((m3 = result4) and (m4 = o13))) and
+  (c3 = 10))))))))))) and (((c3 = c7) and ((tmp5 = tmp8) and (m4 = m7))) and
+  ((c8 = c3) and ((tmp9 = tmp5) and (m8 = m4))))))
+
+axiom H7 : (((1 <= c2) and (c2 <= 10)) -> (c9 = c7))
+
+axiom H8 : (((1 <= c2) and (c2 <= 10)) -> (tmp10 = tmp8))
+
+axiom H9 : (((1 <= c2) and (c2 <= 10)) -> (m9 = m7))
+
+axiom H10 : (((1 <= c2) and (c2 <= 10)) -> (c10 = c8))
+
+axiom H11 : (((1 <= c2) and (c2 <= 10)) -> (tmp11 = tmp9))
+
+axiom H12 : (((1 <= c2) and (c2 <= 10)) -> (m10 = m8))
+
+axiom H13 : ((not ((1 <= c2) and (c2 <= 10))) -> (c2 = c9))
+
+axiom H14 : ((not ((1 <= c2) and (c2 <= 10))) -> (tmp10 = tmp))
+
+axiom H15 : ((not ((1 <= c2) and (c2 <= 10))) -> (m1 = m9))
+
+axiom H16 : ((not ((1 <= c2) and (c2 <= 10))) -> (c10 = c2))
+
+axiom H17 : ((not ((1 <= c2) and (c2 <= 10))) -> (tmp11 = tmp2))
+
+axiom H18 : ((not ((1 <= c2) and (c2 <= 10))) -> (m10 = m1))
+
+axiom H19 :
+  (forall i13:int. (((1 <= i13) and (i13 <= 10)) ->
+  (forall j:int. (((1 <= j) and (j <= 10)) -> (((i13 = 5) -> (to_rep(get(m9,
+  i13, j)) = 2)) and ((not (i13 = 5)) -> (((i13 = 7) -> (to_rep(get(m9, i13,
+  j)) = 1)) and ((not (i13 = 7)) -> (to_rep(get(m9, i13, j)) = 0)))))))))
+
+axiom H20 : (result6 = m9)
+
+axiom H21 : (m11 = temp___236(1, 2, 0))
+
+axiom H22 : (m11 = c77b)
+
+axiom H23 : ((0 <= 2147483647) -> in_range2(tmp1))
+
+axiom H24 : (result7 = c1)
+
+axiom H25 : (c11 = 0)
+
+axiom H26 : (0 <= c11)
+
+axiom H27 : (c11 <= 9)
+
+axiom H28 :
+  (forall i13:int. (((1 <= i13) and (i13 <= c12)) -> ((to_rep(get(m12, 5,
+  i13)) = to_rep(get(m11, 7, i13))) and (to_rep(get(m12, 7,
+  i13)) = to_rep(get(m11, 5, i13))))))
+
+axiom H29 :
+  (forall i13:int. ((((c12 + 1) <= i13) and (i13 <= 10)) -> ((to_rep(get(m12,
+  5, i13)) = to_rep(get(m11, 5, i13))) and (to_rep(get(m12, 7,
+  i13)) = to_rep(get(m11, 7, i13))))))
+
+axiom H30 : (((((0 <= 9) -> in_range6(c12)) and
+  (forall temp___245:int. forall temp___246:int. ((((1 <= temp___245) and
+  (temp___245 <= 10)) and ((1 <= temp___246) and (temp___246 <= 10))) ->
+  (((not (7 = temp___245)) and (not (5 = temp___245))) -> (get(m12,
+  temp___245, temp___246) = get(m11, temp___245, temp___246)))))) and
+  ((0 <= 2147483647) -> in_range2(tmp12))) and ((0 <= c12) and (c12 <= 9)))
+
+axiom H31 : (1 <= i2)
+
+axiom H32 : (i2 <= c12)
+
  (* File "test_swap_lines.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:map. forall tmp:int. forall c:int. forall tmp1:int.
-  forall c1:int. forall temp___231:int. forall temp___230:int.
-  forall temp___227:map. forall temp___233:map. forall temp___232:map.
-  forall o:natural. forall o1:map. forall o2:natural. forall o3:map.
-  forall i:int. forall tmp2:int. forall result:map. forall m1:map.
-  forall result1:int. forall c2:int. forall m2:map. forall tmp3:int.
-  forall c3:int. forall result2:int. forall tmp4:int. forall result3:map.
-  forall m3:map. forall result4:map. forall m4:map. forall m5:map.
-  forall tmp5:int. forall c4:int. forall m6:map. forall tmp6:int.
-  forall c5:int. forall m7:map. forall tmp7:int. forall c6:int.
-  forall m8:map. forall tmp8:int. forall c7:int. forall result5:map.
-  forall m9:map. forall result6:int. forall c8:int. forall m10:map.
-  forall tmp9:int. forall c9:int. (((result = m) and (m1 = temp___220(1, 2,
-  0))) -> ((m1 = c62b) -> ((((0 <= 2147483647) -> in_range2(tmp)) and ((({
-  int__content = result1 } = { int__content = c }) and (c2 = 1)) and
-  ((((1 <= c2) and (c2 <= 10)) and ((((temp___231 = tmp) and
-  ((temp___230 = c2) and ((temp___227 = m1) and ((temp___233 = m1) and
-  ((temp___232 = m1) and
-  ((forall i1:int. (((1 <= i1) and (i1 <= (c3 - 1))) -> ((to_rep(get(m2, 5,
-   i1)) = to_rep(get(temp___232, 7, i1))) and (to_rep(get(m2, 7,
-   i1)) = to_rep(get(temp___233, 5, i1)))))) and
-  (((((forall temp___228:int. forall temp___229:int. ((((1 <= temp___228) and
-      (temp___228 <= 10)) and ((1 <= temp___229) and (temp___229 <= 10))) ->
-      ((((c3 <= temp___229) or (not (5 = temp___228))) and
-      ((c3 <= temp___229) or (not (7 = temp___228)))) -> (get(m2, temp___228,
-      temp___229) = get(temp___227, temp___228, temp___229))))) and
-  ((1 <= 10) -> in_range5(c3))) and ((0 <= 2147483647) ->
-  in_range2(tmp3))) and ((1 <= c3) and (c3 <= 10))) and
-  (((tmp3 = result2) and (tmp4 = to_rep(get(m2, 5, c3)))) and
-  ((((to_rep(o) = to_rep(get(m2, 7, c3))) and (o1 = set(m2, 5, c3, o))) and
-  ((m2 = result3) and (m3 = o1))) and ((((to_rep(o2) = tmp4) and
-  (o3 = set(m3, 7, c3, o2))) and ((m3 = result4) and (m4 = o3))) and
-  (c3 = 10))))))))))) and (((c3 = c4) and ((tmp4 = tmp5) and (m4 = m5))) and
-  ((c5 = c3) and ((tmp6 = tmp4) and (m6 = m4))))) and (((c6 = c4) and (({
-  int__content = tmp7 } = { int__content = tmp5 }) and ({ map__content = m7
-  } = { map__content = m5 }))) and ((c7 = c5) and ((tmp8 = tmp6) and
-  (m8 = m6)))))) or ((not ((1 <= c2) and (c2 <= 10))) and (((c2 = c6) and
-  ((tmp = tmp7) and (m1 = m7))) and ((c7 = c2) and ((tmp8 = tmp2) and
-  (m8 = m1)))))))) ->
-  ((forall i1:int. (((1 <= i1) and (i1 <= 10)) ->
-   (forall j:int. (((1 <= j) and (j <= 10)) -> (((i1 = 5) and (to_rep(get(m7,
-   i1, j)) = 2)) or ((not (i1 = 5)) and (((i1 = 7) and (to_rep(get(m7, i1,
-   j)) = 1)) or ((not (i1 = 7)) and (to_rep(get(m7, i1, j)) = 0))))))))) ->
-  (((result5 = m7) and (m9 = temp___236(1, 2, 0))) -> ((m9 = c77b) ->
-  (((0 <= 2147483647) -> in_range2(tmp1)) -> (((result6 = c1) and
-  (c8 = 0)) -> (((0 <= c8) and (c8 <= 9)) ->
-  (((forall i1:int. (((1 <= i1) and (i1 <= c9)) -> ((to_rep(get(m10, 5,
-    i1)) = to_rep(get(m9, 7, i1))) and (to_rep(get(m10, 7,
-    i1)) = to_rep(get(m9, 5, i1)))))) and
-  (forall i1:int. ((((c9 + 1) <= i1) and (i1 <= 10)) -> ((to_rep(get(m10, 5,
-  i1)) = to_rep(get(m9, 5, i1))) and (to_rep(get(m10, 7,
-  i1)) = to_rep(get(m9, 7, i1))))))) -> ((((((0 <= 9) -> in_range6(c9)) and
-  ((0 <= 2147483647) -> in_range2(tmp9))) and
-  (forall temp___246:int. forall temp___247:int. ((((1 <= temp___246) and
-  (temp___246 <= 10)) and ((1 <= temp___247) and (temp___247 <= 10))) ->
-  (((not (7 = temp___246)) and (not (5 = temp___246))) -> (get(m10,
-  temp___246, temp___247) = get(m9, temp___246, temp___247)))))) and
-  ((0 <= c9) and (c9 <= 9))) -> (((1 <= i) and (i <= c9)) ->
-  (1 <= i))))))))))))))
+goal WP_parameter_def : (1 <= i2)

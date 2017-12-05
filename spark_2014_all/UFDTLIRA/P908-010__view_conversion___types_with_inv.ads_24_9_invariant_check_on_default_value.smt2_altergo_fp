@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type tt2B
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -214,7 +214,11 @@ type r2__ref = { r2__content : us_rep
 
 function r2__ref___projection(a: r2__ref) : us_rep = (a).r2__content
 
+logic temp___161 : int
+
+logic temp___160 : integer
+
+axiom H : (to_rep(temp___160) = 1)
+
  (* File "types_with_inv.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___160:integer. ((to_rep(temp___160) = 1) ->
-  (not (to_rep(temp___160) = 0))))
+goal WP_parameter_def : (not (to_rep(temp___160) = 0))

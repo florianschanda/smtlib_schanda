@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -109,17 +109,41 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic math__bad__result : int
+
+logic o : int
+
+logic result : int
+
+logic math__bad__result1 : int
+
+logic math__bad__result2 : int
+
+logic math__bad__result3 : int
+
+logic math__bad__result4 : int
+
+logic math__bad__result5 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (0 <= x)
+
+axiom H2 : (math__bad__result1 = math__bad__result2)
+
+axiom H3 : (math__bad__result3 = math__bad__result1)
+
+axiom H4 : (result = math__bad__result)
+
+axiom H5 : (math__bad__result1 = 0)
+
+axiom H6 : (math__bad__result4 = math__bad__result2)
+
+axiom H7 : (math__bad__result5 = math__bad__result3)
+
+axiom H8 : ((bool_eq((x + x), 0) = true) -> (math__bad__result4 = 0))
+
+axiom H9 : (bool_gt(x, 0) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall math__bad__result:int. forall result:int.
-  forall math__bad__result1:int. forall math__bad__result2:int.
-  forall math__bad__result3:int. forall math__bad__result4:int.
-  forall math__bad__result5:int. (in_range(x) -> ((0 <= x) ->
-  (((((math__bad__result1 = math__bad__result2) and
-  (math__bad__result3 = math__bad__result1)) and (({ int__content = result
-  } = { int__content = math__bad__result }) and
-  (math__bad__result1 = 0))) and (({ int__content = math__bad__result4 } = {
-  int__content = math__bad__result2 }) and
-  (math__bad__result5 = math__bad__result3))) -> ((((bool_eq((x + x),
-  0) = true) and (math__bad__result4 = 0)) or (not (bool_eq((x + x),
-  0) = true))) -> ((bool_gt(x, 0) = true) -> (0 <  math__bad__result4)))))))
+goal WP_parameter_def : (0 <  math__bad__result4)

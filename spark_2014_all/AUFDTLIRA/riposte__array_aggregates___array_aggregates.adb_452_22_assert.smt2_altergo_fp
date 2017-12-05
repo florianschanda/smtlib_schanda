@@ -289,10 +289,22 @@ axiom def_axiom1 :
   (forall temp___687:int.
   ((temp___684(temp___686)[temp___687]) = temp___686)))
 
+logic x : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic x1 : (int,bool) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___680(of_int(1)))
+
+logic n : int
+
+axiom H2 : (0 <= n)
+
+axiom H3 : (n <= 255)
+
  (* File "array_aggregates.adb", line 432, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,bool) farray. forall result:(int,bool) farray.
-  forall x1:(int,bool) farray. (((result = x) and
-  (x1 = temp___680(of_int(1)))) ->
-  (forall n:int. (((0 <= n) and (n <= 255)) -> (bool_eq3(x1, 0, 255,
-  temp___684(bool_eq(n, n)), 0, 255) = true)))))
+goal WP_parameter_def : (bool_eq3(x1, 0, 255, temp___684(bool_eq(n, n)), 0,
+  255) = true)

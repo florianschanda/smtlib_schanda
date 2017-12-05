@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type duration
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -299,7 +299,7 @@ function duration__ref___projection(a: duration__ref) : duration =
 
 type my_duration
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic dummy1 : my_duration
@@ -410,7 +410,7 @@ function my_duration__ref___projection(a: my_duration__ref) : my_duration =
 
 type tmy_duration2B
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic dummy2 : tmy_duration2B
@@ -521,7 +521,7 @@ function tmy_duration2B__ref___projection(a: tmy_duration2B__ref) : tmy_duration
 
 type my_duration2
 
-predicate in_range3(x: int) = (((-20000000000) <= x) and (x <= 20000000000))
+predicate in_range3(x: int) = (((- 20000000000) <= x) and (x <= 20000000000))
 
 logic dummy3 : my_duration2
 
@@ -633,11 +633,34 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic md : my_duration
+
+logic md2 : my_duration2
+
+logic o : my_duration
+
+logic o1 : my_duration2
+
+logic result : my_duration
+
+logic md1 : my_duration
+
+logic result1 : my_duration2
+
+logic md21 : my_duration2
+
+axiom H : (to_fixed1(o) = (- 10000000000))
+
+axiom H1 : (result = md)
+
+axiom H2 : (md1 = o)
+
+axiom H3 : (to_fixed3(o1) = 10000000000)
+
+axiom H4 : (result1 = md2)
+
+axiom H5 : (md21 = o1)
+
  (* File "fxp_true_check_4.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall md:my_duration. forall md2:my_duration2. forall o:my_duration.
-  forall o1:my_duration2. forall result:my_duration. forall md1:my_duration.
-  forall result1:my_duration2. forall md21:my_duration2.
-  (((to_fixed1(o) = (-10000000000)) and ((result = md) and (md1 = o))) ->
-  (((to_fixed3(o1) = 10000000000) and ((result1 = md2) and (md21 = o1))) ->
-  (to_fixed(of_fixed(to_fixed1(md1))) = to_fixed(of_fixed((-to_fixed3(md21))))))))
+  (to_fixed(of_fixed(to_fixed1(md1))) = to_fixed(of_fixed((-to_fixed3(md21)))))

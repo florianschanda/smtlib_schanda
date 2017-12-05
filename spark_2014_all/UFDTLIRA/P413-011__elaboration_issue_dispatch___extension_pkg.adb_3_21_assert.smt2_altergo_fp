@@ -286,8 +286,10 @@ axiom get__def_axiom :
   extension_pkg__body_elaborated) = true) <->
   (extension_pkg__body_elaborated = true))))
 
+logic body_elaborated : bool
+
+axiom H : (get({ us_split_fields3 = { rec__extension_pkg__ext__flag = x;
+  rec__ext__1 = x1 }; attr__tag1 = x2 }, body_elaborated) = true)
+
  (* File "extension_pkg.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall body_elaborated:bool. ((get({ us_split_fields3 = {
-  rec__extension_pkg__ext__flag = x; rec__ext__1 = x1 }; attr__tag1 = x2 },
-  body_elaborated) = true) -> (body_elaborated = true)))
+goal WP_parameter_def : (body_elaborated = true)

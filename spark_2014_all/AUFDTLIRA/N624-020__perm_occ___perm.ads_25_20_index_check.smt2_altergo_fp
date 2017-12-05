@@ -269,7 +269,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -404,14 +404,42 @@ logic r1 : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic j : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1)))
+
+axiom H4 : ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1))))
+
+axiom H5 : ((to_rep1(first(r1)) = to_rep1(first(a1))) ->
+  (((to_rep1(last(r1)) = to_rep1(last(a1))) -> (result1 = true)) and
+  ((not (to_rep1(last(r1)) = to_rep1(last(a1)))) -> (result1 = false))))
+
+axiom H6 : ((not (to_rep1(first(r1)) = to_rep1(first(a1)))) ->
+  (result1 = false))
+
+axiom H7 : (result1 = true)
+
  (* File "perm.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. (dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range2(i) -> (in_range1(v) ->
-  (dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1))) ->
-  (((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))) ->
-  ((((to_rep1(first(r1)) = to_rep1(first(a1))) and
-  (((to_rep1(last(r1)) = to_rep1(last(a1))) and (result = true)) or
-  ((not (to_rep1(last(r1)) = to_rep1(last(a1)))) and (result = false)))) or
-  ((not (to_rep1(first(r1)) = to_rep1(first(a1)))) and (result = false))) ->
-  ((result = true) -> (to_rep1(first(r1)) <= i)))))))))
+goal WP_parameter_def : (to_rep1(first(r1)) <= i)

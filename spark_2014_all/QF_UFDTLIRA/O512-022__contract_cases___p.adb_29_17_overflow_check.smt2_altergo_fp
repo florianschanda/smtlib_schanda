@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -137,9 +137,32 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic threshold : int
+
+logic x : int
+
+logic o : int
+
+logic o1 : int
+
+logic x1 : int
+
+logic result : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic x4 : int
+
+axiom H : in_range1(threshold)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : (((x <  threshold) and (not (threshold <= x))) or
+  ((not (x <  threshold)) and (threshold <= x)))
+
+axiom H3 : (x <  threshold)
+
  (* File "p.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall threshold:int. forall x:int. (in_range1(threshold) ->
-  (in_range1(x) -> ((((x <  threshold) and (not (threshold <= x))) or
-  ((not (x <  threshold)) and (threshold <= x))) -> ((x <  threshold) ->
-  in_range1((x + 1)))))))
+goal WP_parameter_def : in_range1((x + 1))

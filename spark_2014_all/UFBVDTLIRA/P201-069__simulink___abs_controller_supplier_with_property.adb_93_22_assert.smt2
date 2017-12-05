@@ -137,6 +137,8 @@
 (declare-const at_rest_switch_out11 Int)
 (declare-const result6 Int)
 (declare-const at_rest_switch_out12 Int)
+(assert true)
+(assert true)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range3 apply_brakes)))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range3 sum_out1)))
 (assert (=> (<= (- 128) 127) (in_range1 sum_1_out1)))

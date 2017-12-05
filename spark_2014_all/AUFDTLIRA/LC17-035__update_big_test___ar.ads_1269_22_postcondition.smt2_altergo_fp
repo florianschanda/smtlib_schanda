@@ -367,12 +367,28 @@ axiom def_axiom :
   rec__ar__rec1t__g1 = temp___28631 }
   })[temp___2864]) = (temp___2861[temp___2864]))))))))
 
+logic a : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+axiom H : in_range(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = r;
+  rec__ar__rec1t__g1 = r1 } }]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
  (* File "ar.ads", line 1262, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall result:(int,us_rep) farray.
-  forall a1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall a3:(int,us_rep) farray. ((in_range(i) and (((result = a) and
-  (a1 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = r;
-  rec__ar__rec1t__g1 = r1 } }]))) and ((a1 = a2) and (a3 = a1)))) ->
-  (bool_eq5(a2, 1, 10, temp___2859(a, i, { us_split_fields1 = {
-  rec__ar__rec1t__f1 = r; rec__ar__rec1t__g1 = r1 } }), 1, 10) = true)))
+goal WP_parameter_def : (bool_eq5(a2, 1, 10, temp___2859(a, i, {
+  us_split_fields1 = { rec__ar__rec1t__f1 = r; rec__ar__rec1t__g1 = r1 } }),
+  1, 10) = true)

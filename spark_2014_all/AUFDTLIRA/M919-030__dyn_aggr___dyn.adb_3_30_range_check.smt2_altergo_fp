@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -606,14 +606,45 @@ axiom def_axiom :
   (forall temp___181:int. (((dyn__x__aggregate_def(temp___178, temp___179,
   temp___180)).elts1[temp___181]) = of_rep(temp___178)))))
 
+logic dyn__R1b__assume : int
+
+logic dyn__R2b__assume : int
+
+logic o : int
+
+logic o1 : int
+
+logic dyn__R3b__assume : int
+
+logic us : int
+
+logic temp___183 : (int,character) farray
+
+logic temp___1831 : t1
+
+axiom H : ((dyn__R1b__assume = f(void)) and (in_range(dyn__R1b__assume) and
+  (dyn__R1b__assume = 1)))
+
+axiom H1 : (dyn__R1b__assume = r1b)
+
+axiom H2 : in_range(r1b)
+
+axiom H3 : ((dyn__R2b__assume = f(void)) and (in_range(dyn__R2b__assume) and
+  (dyn__R2b__assume = 1)))
+
+axiom H4 : (dyn__R2b__assume = r2b)
+
+axiom H5 : in_range(r2b)
+
+axiom H6 : ((o = f(void)) and (in_range(o) and (o = 1)))
+
+axiom H7 : (o1 = (o - 1))
+
+axiom H8 : ((dyn__R3b__assume = o1) and in_range(o1))
+
+axiom H9 : (dyn__R3b__assume = r3b)
+
+axiom H10 : in_range(r3b)
+
  (* File "dyn.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dyn__R1b__assume:int. forall dyn__R2b__assume:int. forall o:int.
-  forall o1:int. forall dyn__R3b__assume:int.
-  ((((dyn__R1b__assume = f(void)) and (in_range(dyn__R1b__assume) and
-  (dyn__R1b__assume = 1))) and (dyn__R1b__assume = r1b)) -> (in_range(r1b) ->
-  ((((dyn__R2b__assume = f(void)) and (in_range(dyn__R2b__assume) and
-  (dyn__R2b__assume = 1))) and (dyn__R2b__assume = r2b)) -> (in_range(r2b) ->
-  ((((((o = f(void)) and (in_range(o) and (o = 1))) and (o1 = (o - 1))) and
-  ((dyn__R3b__assume = o1) and in_range(o1))) and
-  (dyn__R3b__assume = r3b)) -> (in_range(r3b) -> in_range1(r3b))))))))
+goal WP_parameter_def : in_range1(r3b)

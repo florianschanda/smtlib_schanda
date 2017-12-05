@@ -84,7 +84,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type ttB
 
-predicate in_range1(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -193,18 +193,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -322,7 +322,7 @@ function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
 type t
 
-predicate in_range2(x: int) = (((-2560) <= x) and (x <= 2560))
+predicate in_range2(x: int) = (((- 2560) <= x) and (x <= 2560))
 
 logic dummy1 : t
 
@@ -439,13 +439,38 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom y__def_axiom : (y = of_fixed1(1280))
 
+logic z : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic z1 : t
+
+logic result1 : t
+
+logic z2 : t
+
+logic result2 : t
+
+logic z3 : t
+
+axiom H : (((- 1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280))
+
+axiom H1 : (to_fixed1(o) = (to_fixed1(x) + to_fixed1(x)))
+
+axiom H2 : (result = z)
+
+axiom H3 : (z1 = o)
+
+axiom H4 : (((0 <  to_fixed1(x)) -> (to_fixed1(x) <  to_fixed1(z1))) and
+  ((not (0 <  to_fixed1(x))) -> (((to_fixed1(x) <  0) ->
+  (to_fixed1(z1) <  to_fixed1(x))) and ((not (to_fixed1(x) <  0)) ->
+  (to_fixed1(z1) = to_fixed1(x))))))
+
  (* File "binary_fixed.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:t. forall o:t. forall result:t. forall z1:t.
-  ((((-1280) <= to_fixed1(x)) and (to_fixed1(x) <= 1280)) ->
-  (((to_fixed1(o) = (to_fixed1(x) + to_fixed1(x))) and ((result = z) and
-  (z1 = o))) -> ((((0 <  to_fixed1(x)) and
-  (to_fixed1(x) <  to_fixed1(z1))) or ((not (0 <  to_fixed1(x))) and
-  (((to_fixed1(x) <  0) and (to_fixed1(z1) <  to_fixed1(x))) or
-  ((not (to_fixed1(x) <  0)) and (to_fixed1(z1) = to_fixed1(x)))))) ->
-  in_range2((to_fixed1(x) + 1280))))))
+goal WP_parameter_def : in_range2((to_fixed1(x) + 1280))

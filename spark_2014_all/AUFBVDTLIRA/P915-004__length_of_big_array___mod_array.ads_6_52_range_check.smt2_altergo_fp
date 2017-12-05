@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -916,7 +916,10 @@ logic x1 : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+axiom H : dynamic_property(of_int(0), of_int(18446744073709551615),
+  to_rep(first(x1)), to_rep(last(x1)))
+
  (* File "mod_array.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(of_int(0),
-  of_int(18446744073709551615), to_rep(first(x1)), to_rep(last(x1))) ->
-  uint_in_range(length({ elts = x; rt = x1 })))
+goal WP_parameter_def : uint_in_range(length({ elts = x; rt = x1 }))

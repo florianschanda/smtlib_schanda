@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -413,50 +413,88 @@ logic s31 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___String_Literal_596 : unit -> (int,character) farray
+logic temp___String_Literal_590 : unit -> (int,character) farray
 
-axiom temp___String_Literal_596__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_596(void)[1])) = 115) and
-  (to_rep((temp___String_Literal_596(void)[2])) = 100)) and
-  (to_rep((temp___String_Literal_596(void)[3])) = 99)) and
-  (to_rep((temp___String_Literal_596(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_596(void)[5])) = 101)) and
-  (to_rep((temp___String_Literal_596(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_596(void)[7])) = 114)) and
-  (to_rep((temp___String_Literal_596(void)[8])) = 111)) and
-  (to_rep((temp___String_Literal_596(void)[9])) = 114)) and
-  (to_rep((temp___String_Literal_596(void)[10])) = 32)) and
-  (to_rep((temp___String_Literal_596(void)[11])) = 97)) and
-  (to_rep((temp___String_Literal_596(void)[12])) = 116)) and
-  (to_rep((temp___String_Literal_596(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_596(void)[14])) = 108)) and
-  (to_rep((temp___String_Literal_596(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_596(void)[16])) = 110)) and
-  (to_rep((temp___String_Literal_596(void)[17])) = 101))
+axiom temp___String_Literal_590__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_590(void)[1])) = 115) and
+  (to_rep((temp___String_Literal_590(void)[2])) = 100)) and
+  (to_rep((temp___String_Literal_590(void)[3])) = 99)) and
+  (to_rep((temp___String_Literal_590(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_590(void)[5])) = 101)) and
+  (to_rep((temp___String_Literal_590(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_590(void)[7])) = 114)) and
+  (to_rep((temp___String_Literal_590(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_590(void)[9])) = 114)) and
+  (to_rep((temp___String_Literal_590(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_590(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_590(void)[12])) = 116)) and
+  (to_rep((temp___String_Literal_590(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_590(void)[14])) = 108)) and
+  (to_rep((temp___String_Literal_590(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_590(void)[16])) = 110)) and
+  (to_rep((temp___String_Literal_590(void)[17])) = 101))
 
-logic temp___String_Literal_597 : unit -> (int,character) farray
+logic temp___String_Literal_591 : unit -> (int,character) farray
 
-axiom temp___String_Literal_597__def_axiom :
-  ((to_rep((temp___String_Literal_597(void)[1])) = 58) and
-  (to_rep((temp___String_Literal_597(void)[2])) = 32))
+axiom temp___String_Literal_591__def_axiom :
+  ((to_rep((temp___String_Literal_591(void)[1])) = 58) and
+  (to_rep((temp___String_Literal_591(void)[2])) = 32))
+
+logic line_num : us_private
+
+logic o : int
+
+logic o1 : us_image
+
+logic temp___592 : (int,character) farray
+
+logic temp___5921 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s11)),
+  to_rep1(last(s11)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(first(s31)),
+  to_rep1(last(s31)))
+
+axiom H3 : ((o = line_number(line_num)) and in_range3(o))
+
+axiom H4 : (o1 = attr__ATTRIBUTE_IMAGE3(o))
+
+axiom H5 : ({ elts = temp___592; rt = temp___5921 } = to_string(o1))
+
+axiom H6 : (not (length({ elts = temp___592; rt = temp___5921 }) = 0))
+
+axiom H7 : ((1 <= 2) -> (o2 = ((2 - 1) + 1)))
+
+axiom H8 : ((not (1 <= 2)) -> (o2 = 0))
+
+axiom H9 : ((to_rep1(first(temp___5921)) <= to_rep1(last(temp___5921))) ->
+  (o3 = ((to_rep1(last(temp___5921)) - to_rep1(first(temp___5921))) + 1)))
+
+axiom H10 :
+  ((not (to_rep1(first(temp___5921)) <= to_rep1(last(temp___5921)))) ->
+  (o3 = 0))
+
+axiom H11 : (o4 = (o3 + o2))
+
+axiom H12 : (o5 = (to_rep1(first(temp___5921)) + o4))
+
+axiom H13 : (o6 = (o5 - 1))
 
  (* File "screen_output.adb", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall line_num:us_private. forall o:int. forall o1:us_image.
-  forall temp___598:(int,character) farray. forall temp___5981:t.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(s11)),
-  to_rep1(last(s11))) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(s21)), to_rep1(last(s21))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(s31)), to_rep1(last(s31))) ->
-  (((((o = line_number(line_num)) and in_range3(o)) and
-  (o1 = attr__ATTRIBUTE_IMAGE3(o))) and ({ elts = temp___598; rt =
-  temp___5981 } = to_string(o1))) -> ((not (length({ elts = temp___598; rt =
-  temp___5981 }) = 0)) -> (((((((1 <= 2) and (o2 = ((2 - 1) + 1))) or
-  ((not (1 <= 2)) and (o2 = 0))) and
-  ((((to_rep1(first(temp___5981)) <= to_rep1(last(temp___5981))) and
-  (o3 = ((to_rep1(last(temp___5981)) - to_rep1(first(temp___5981))) + 1))) or
-  ((not (to_rep1(first(temp___5981)) <= to_rep1(last(temp___5981)))) and
-  (o3 = 0))) and (o4 = (o3 + o2)))) and
-  (o5 = (to_rep1(first(temp___5981)) + o4))) and (o6 = (o5 - 1))) ->
-  in_range1(o6))))))))
+goal WP_parameter_def : in_range1(o6)

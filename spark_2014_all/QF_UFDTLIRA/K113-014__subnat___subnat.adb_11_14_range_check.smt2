@@ -42,6 +42,7 @@
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
+(declare-const o Int)
 (assert (in_range x))
 (assert (<= 1 x))
 (assert (not (in_range1 x)))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,10 +107,35 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic x2 : int
+
+logic x3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (0 <  x)
+
+axiom H2 : ((- 1) <  x)
+
+axiom H3 : ((o = (x - 1)) and in_range((x - 1)))
+
+axiom H4 : (result = x)
+
+axiom H5 : (x1 = o)
+
+axiom H6 : (x1 = x2)
+
+axiom H7 : (x3 = x1)
+
  (* File "body_contract.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall o:int. forall result:int. forall x1:int.
-  forall x2:int. forall x3:int. (in_range(x) -> ((0 <  x) -> (((-1) <  x) ->
-  (((((o = (x - 1)) and in_range((x - 1))) and (({ int__content = result
-  } = { int__content = x }) and (x1 = o))) and ((x1 = x2) and (x3 = x1))) ->
-  (x2 <  x))))))
+goal WP_parameter_def : (x2 <  x)

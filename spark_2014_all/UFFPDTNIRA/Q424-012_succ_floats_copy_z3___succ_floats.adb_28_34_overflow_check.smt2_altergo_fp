@@ -1098,40 +1098,97 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic result2 : t
+
+logic x3 : t
+
+logic result3 : t
+
+logic x4 : t
+
+logic result4 : t
+
+logic x5 : t
+
+logic result5 : t
+
+logic x6 : t
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H : (le(neg(fliteral1), fliteral1) -> tqtisFinite(x))
+
+axiom H1 : (result = x)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
+axiom H2 : (x1 = fliteral2)
+
+axiom H3 : lt(fliteral2, next_representable(x1))
+
+axiom H4 : lt(next_representable(x1), fliteral)
+
+axiom H5 : lt(prev_representable(x1), fliteral2)
+
+axiom H6 : lt(neg(fliteral), prev_representable(x1))
+
+axiom H7 : (result1 = x1)
+
+axiom H8 : (x2 = fliteral)
+
+axiom H9 : lt(fliteral, next_representable(x2))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.10000002384185791015625))
+
+axiom H10 : lt(next_representable(x2), fliteral3)
+
+axiom H11 : lt(prev_representable(x2), fliteral)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.899999976158142089843750))
 
+axiom H12 : lt(fliteral4, prev_representable(x2))
+
+axiom H13 : (result2 = x2)
+
+axiom H14 : (x3 = fliteral1)
+
+axiom H15 : ((a = true) -> (result3 = x3))
+
+axiom H16 : ((a = true) -> (x4 = next_representable(x3)))
+
+axiom H17 : ((not (a = true)) -> lt(prev_representable(x3), fliteral1))
+
+axiom H18 : ((not (a = true)) -> (x4 = x3))
+
+axiom H19 : lt(fliteral2, prev_representable(x4))
+
+axiom H20 : (result4 = x4)
+
+axiom H21 : (x5 = neg(fliteral1))
+
+axiom H22 : (not (b = true))
+
  (* File "succ_floats.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall result:t. forall x1:t. forall result1:t. forall x2:t.
-  forall result2:t. forall x3:t. forall result3:t. forall x4:t.
-  forall result4:t. forall x5:t. ((le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(x)) -> (((result = x) and (x1 = fliteral2)) -> (lt(fliteral2,
-  next_representable(x1)) -> (lt(next_representable(x1), fliteral) ->
-  (lt(prev_representable(x1), fliteral2) -> (lt(neg(fliteral),
-  prev_representable(x1)) -> (((result1 = x1) and (x2 = fliteral)) ->
-  (lt(fliteral, next_representable(x2)) -> (lt(next_representable(x2),
-  fliteral3) -> (lt(prev_representable(x2), fliteral) -> (lt(fliteral4,
-  prev_representable(x2)) -> (((result2 = x2) and (x3 = fliteral1)) ->
-  ((((a = true) and ((result3 = x3) and (x4 = next_representable(x3)))) or
-  ((not (a = true)) and (lt(prev_representable(x3), fliteral1) and
-  (x4 = x3)))) -> (lt(fliteral2, prev_representable(x4)) ->
-  (((result4 = x4) and (x5 = neg(fliteral1))) -> ((not (b = true)) ->
-  (not (x5 = fliteral1)))))))))))))))))))
+goal WP_parameter_def : (not (x5 = fliteral1))

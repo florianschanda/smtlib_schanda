@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -382,9 +382,37 @@ function teven_pairD1__ref___projection(a: teven_pairD1__ref) : teven_pairD1 =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : (int,even) farray
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : (int,even) farray
+
+logic o3 : int
+
+logic o4 : even
+
+logic o5 : (int,even) farray
+
+logic result : (int,even) farray
+
+logic x1 : (int,even) farray
+
+logic result1 : (int,even) farray
+
+logic x2 : (int,even) farray
+
+logic x3 : (int,even) farray
+
+logic x4 : (int,even) farray
+
+axiom H : (in_range1(i11s) and (mod(i11s, 2) = 0))
+
+axiom H1 :
+  (forall temp___147:int. (((1 <= temp___147) and (temp___147 <= 2)) ->
+  (mod(to_rep((x[temp___147])), 2) = 0)))
+
  (* File "dynamic_preds_array.adb", line 126, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,even) farray. ((in_range1(i11s) and (mod(i11s, 2) = 0)) ->
-  ((forall temp___147:int. (((1 <= temp___147) and (temp___147 <= 2)) ->
-   (mod(to_rep((x[temp___147])), 2) = 0))) ->
-  (mod(0, 2) = 0))))
+goal WP_parameter_def : (mod(0, 2) = 0)

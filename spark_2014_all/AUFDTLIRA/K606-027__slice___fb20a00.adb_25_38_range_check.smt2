@@ -170,6 +170,7 @@
 (declare-const ret (Array Int character))
 (declare-const pos Int)
 (declare-const i Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const i1 Int)
 (declare-const ret1 (Array Int character))

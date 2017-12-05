@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -740,33 +740,63 @@ logic data_copy__last_2 : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "discr.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data_copy:map. forall us:int. forall us1:int. forall us2:int.
-  forall us3:int. forall result:map. forall data_copy1:map.
-  (((dynamic_property7(to_rep(rec__), to_rep(rec__1),
+logic data_copy : map
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic result : map
+
+logic data_copy1 : map
+
+axiom H : ((dynamic_property7(to_rep(rec__), to_rep(rec__1),
   to_rep1(first3(rec__5)), to_rep1(last3(rec__5)), to_rep(rec__2),
   to_rep(rec__3), to_rep1(first4(rec__6)), to_rep1(last4(rec__6))) and
   ((to_rep1(first3(rec__5)) = to_rep(rec__)) and
   (to_rep1(last3(rec__5)) = to_rep(rec__1)))) and
   ((to_rep1(first4(rec__6)) = to_rep(rec__2)) and
-  (to_rep1(last4(rec__6)) = to_rep(rec__3)))) -> (((us = to_rep(rec__3)) and
-  in_range(to_rep(rec__3))) -> (((us1 = to_rep(rec__2)) and
-  in_range(to_rep(rec__2))) -> (((us2 = to_rep(rec__1)) and
-  in_range(to_rep(rec__1))) -> (((us3 = to_rep(rec__)) and
-  in_range(to_rep(rec__))) -> ((((result = data_copy) and
-  (data_copy1 = rec__4)) and
-  ((to_rep1(data_copy__first) = to_rep1(first(mk(to_rep1(first3(rec__5)),
-  to_rep1(last3(rec__5)))))) and
-  ((to_rep1(data_copy__last) = to_rep1(last(mk(to_rep1(first3(rec__5)),
-  to_rep1(last3(rec__5)))))) and
-  ((to_rep1(data_copy__first_2) = to_rep1(first1(mk1(to_rep1(first4(rec__6)),
-  to_rep1(last4(rec__6)))))) and
+  (to_rep1(last4(rec__6)) = to_rep(rec__3))))
+
+axiom H1 : ((us = to_rep(rec__3)) and in_range(to_rep(rec__3)))
+
+axiom H2 : ((us1 = to_rep(rec__2)) and in_range(to_rep(rec__2)))
+
+axiom H3 : ((us2 = to_rep(rec__1)) and in_range(to_rep(rec__1)))
+
+axiom H4 : ((us3 = to_rep(rec__)) and in_range(to_rep(rec__)))
+
+axiom H5 : (result = data_copy)
+
+axiom H6 : (data_copy1 = rec__4)
+
+axiom H7 :
+  (to_rep1(data_copy__first) = to_rep1(first(mk(to_rep1(first3(rec__5)),
+  to_rep1(last3(rec__5))))))
+
+axiom H8 :
+  (to_rep1(data_copy__last) = to_rep1(last(mk(to_rep1(first3(rec__5)),
+  to_rep1(last3(rec__5))))))
+
+axiom H9 :
+  (to_rep1(data_copy__first_2) = to_rep1(first1(mk1(to_rep1(first4(rec__6)),
+  to_rep1(last4(rec__6))))))
+
+axiom H10 :
   (to_rep1(data_copy__last_2) = to_rep1(last1(mk1(to_rep1(first4(rec__6)),
-  to_rep1(last4(rec__6)))))))))) -> (dynamic_property2(1, 2147483647,
-  to_rep1(data_copy__first), to_rep1(data_copy__last), 1, 2147483647,
-  to_rep1(data_copy__first_2), to_rep1(data_copy__last_2)) ->
-  (bool_eq3(data_copy1, to_rep1(data_copy__first), to_rep1(data_copy__last),
-  to_rep1(data_copy__first_2), to_rep1(data_copy__last_2), rec__4,
-  to_rep1(first3(rec__5)), to_rep1(last3(rec__5)), to_rep1(first4(rec__6)),
-  to_rep1(last4(rec__6))) = true)))))))))
+  to_rep1(last4(rec__6))))))
+
+axiom H11 : dynamic_property2(1, 2147483647, to_rep1(data_copy__first),
+  to_rep1(data_copy__last), 1, 2147483647, to_rep1(data_copy__first_2),
+  to_rep1(data_copy__last_2))
+
+ (* File "discr.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3(data_copy1, to_rep1(data_copy__first),
+  to_rep1(data_copy__last), to_rep1(data_copy__first_2),
+  to_rep1(data_copy__last_2), rec__4, to_rep1(first3(rec__5)),
+  to_rep1(last3(rec__5)), to_rep1(first4(rec__6)),
+  to_rep1(last4(rec__6))) = true)

@@ -46,6 +46,7 @@
 (declare-const fact Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (declare-const fact1 Int)
 (assert (in_range1 var))
 (assert (=> (<= 0 2147483647) (in_range1 fact)))

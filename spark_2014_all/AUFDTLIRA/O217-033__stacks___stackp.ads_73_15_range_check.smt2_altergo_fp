@@ -173,7 +173,7 @@ function telement_arrayD1__ref___projection(a: telement_arrayD1__ref) : telement
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -779,11 +779,53 @@ axiom size__def_axiom :
   rec__stackp__stack_root__content = s4; rec__stackp__stack_root__length =
   s5; rec__ext__ = s6 }; attr__tag = s7 }) = to_rep(s5)))
 
+logic stackp__get_model__2__result : (int,element) farray
+
+logic stackp__get_model__2__result1 : t
+
+logic o : (int,element) farray
+
+logic temp___478 : (int,element) farray
+
+logic temp___4781 : t1
+
+logic o1 : (int,element) farray
+
+logic o2 : t
+
+logic result : (int,element) farray
+
+logic result1 : t
+
+logic stackp__get_model__2__result2 : (int,element) farray
+
+logic stackp__get_model__2__result3 : t
+
+logic stackp__get_model__2__result4 : (int,element) farray
+
+logic stackp__get_model__2__result5 : t
+
+logic stackp__get_model__2__result6 : (int,element) farray
+
+logic stackp__get_model__2__result7 : t
+
+logic stackp__get_model__2__result8 : (int,element) farray
+
+logic stackp__get_model__2__result9 : t
+
+logic stackp__get_model__2__result10 : (int,element) farray
+
+logic stackp__get_model__2__result11 : t
+
+axiom H : ((1 <= to_rep(s1)) -> (((1 <= 1) and (1 <= 100)) and
+  ((1 <= to_rep(s1)) and (to_rep(s1) <= 100))))
+
+axiom H1 : (o = s)
+
+axiom H2 : (o = temp___478)
+
+axiom H3 : (mk1(1, to_rep(s1)) = temp___4781)
+
  (* File "stackp.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:(int,element) farray. forall temp___478:(int,element) farray.
-  forall temp___4781:t1. (((((1 <= to_rep(s1)) -> (((1 <= 1) and
-  (1 <= 100)) and ((1 <= to_rep(s1)) and (to_rep(s1) <= 100)))) and
-  (o = s)) and ((o = temp___478) and (mk1(1, to_rep(s1)) = temp___4781))) ->
-  dynamic_property(1, 2147483647, to_rep1(first2(temp___4781)),
-  to_rep1(last2(temp___4781)))))
+goal WP_parameter_def : dynamic_property(1, 2147483647,
+  to_rep1(first2(temp___4781)), to_rep1(last2(temp___4781)))

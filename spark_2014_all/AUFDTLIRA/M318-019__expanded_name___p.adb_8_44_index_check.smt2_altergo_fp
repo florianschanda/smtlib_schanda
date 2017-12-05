@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -552,28 +552,61 @@ axiom def_axiom :
   (forall temp___146:int. (((p__x__aggregate_def(temp___143, temp___144,
   temp___145)).elts1[temp___146]) = of_rep(temp___143)))))
 
+logic x : (int,integer) farray
+
+logic temp___148 : (int,integer) farray
+
+logic temp___1481 : t1
+
+logic p__x__assume : (int,integer) farray
+
+logic p__x__assume1 : t
+
+logic j : int
+
+logic result : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (a <= b)
+
+axiom H3 : (to_rep(first2((p__x__aggregate_def(a, a, b)).rt1)) = a)
+
+axiom H4 : (to_rep(last2((p__x__aggregate_def(a, a, b)).rt1)) = b)
+
+axiom H5 : ({ elts1 = temp___148; rt1 = temp___1481
+  } = p__x__aggregate_def(a, a, b))
+
+axiom H6 : (((to_rep(first2(temp___1481)) <= to_rep(last2(temp___1481))) ->
+  (((a <= b) ->
+  (((to_rep(last2(temp___1481)) - to_rep(first2(temp___1481))) + 1) = ((b - a) + 1))) and
+  ((not (a <= b)) ->
+  (((to_rep(last2(temp___1481)) - to_rep(first2(temp___1481))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___1481)) <= to_rep(last2(temp___1481)))) ->
+  ((a <= b) -> (0 = ((b - a) + 1)))))
+
+axiom H7 : (slide(temp___148, to_rep(first2(temp___1481)), a) = p__x__assume)
+
+axiom H8 : (mk(a, b) = p__x__assume1)
+
+axiom H9 : (result = x)
+
+axiom H10 : (x1 = p__x__assume)
+
+axiom H11 : (to_rep(x__first) = to_rep(first(p__x__assume1)))
+
+axiom H12 : (to_rep(x__last) = to_rep(last(p__x__assume1)))
+
+axiom H13 : (dynamic_property1(a, b, to_rep(x__first), to_rep(x__last)) and
+  ((to_rep(x__first) = a) and (to_rep(x__last) = b)))
+
+axiom H14 : (a <= j)
+
+axiom H15 : (j <= b)
+
  (* File "p.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall temp___148:(int,integer) farray.
-  forall temp___1481:t1. forall p__x__assume:(int,integer) farray.
-  forall p__x__assume1:t. forall j:int. forall result:(int,integer) farray.
-  forall x1:(int,integer) farray. (in_range1(a) -> (in_range1(b) ->
-  ((a <= b) -> (((((to_rep(first2((p__x__aggregate_def(a, a,
-  b)).rt1)) = a) and ((to_rep(last2((p__x__aggregate_def(a, a,
-  b)).rt1)) = b) and ({ elts1 = temp___148; rt1 = temp___1481
-  } = p__x__aggregate_def(a, a, b)))) and
-  ((((to_rep(first2(temp___1481)) <= to_rep(last2(temp___1481))) and
-  (((a <= b) and
-  (((to_rep(last2(temp___1481)) - to_rep(first2(temp___1481))) + 1) = ((b - a) + 1))) or
-  ((not (a <= b)) and
-  (((to_rep(last2(temp___1481)) - to_rep(first2(temp___1481))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___1481)) <= to_rep(last2(temp___1481)))) and
-  (((a <= b) and (0 = ((b - a) + 1))) or (not (a <= b))))) and
-  ((slide(temp___148, to_rep(first2(temp___1481)), a) = p__x__assume) and
-  (mk(a, b) = p__x__assume1)))) and (((result = x) and
-  (x1 = p__x__assume)) and
-  ((to_rep(x__first) = to_rep(first(p__x__assume1))) and
-  (to_rep(x__last) = to_rep(last(p__x__assume1)))))) ->
-  ((dynamic_property1(a, b, to_rep(x__first), to_rep(x__last)) and
-  ((to_rep(x__first) = a) and (to_rep(x__last) = b))) -> (((a <= j) and
-  (j <= b)) -> (to_rep(x__first) <= j))))))))
+goal WP_parameter_def : (to_rep(x__first) <= j)

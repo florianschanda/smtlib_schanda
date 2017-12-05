@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -398,20 +398,36 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "predicate.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall result:int. forall j1:int. forall j2:int.
-  ((dynamic_property(1, 2147483647, to_rep1(first(i1s1)),
+logic j : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+axiom H : (dynamic_property(1, 2147483647, to_rep1(first(i1s1)),
   to_rep1(last(i1s1))) and
   (forall temp___137:int. (((to_rep1(first(i1s1)) <= temp___137) and
   (temp___137 <= to_rep1(last(i1s1)))) ->
-  ((97 <= to_rep((i1s[temp___137]))) and (to_rep((i1s[temp___137])) <= 98))))) ->
-  ((dynamic_property(1, 2147483647, to_rep1(first(value1)),
+  ((97 <= to_rep((i1s[temp___137]))) and (to_rep((i1s[temp___137])) <= 98)))))
+
+axiom H1 : (dynamic_property(1, 2147483647, to_rep1(first(value1)),
   to_rep1(last(value1))) and
   (forall temp___137:int. (((to_rep1(first(value1)) <= temp___137) and
   (temp___137 <= to_rep1(last(value1)))) ->
   ((97 <= to_rep((value[temp___137]))) and
-  (to_rep((value[temp___137])) <= 98))))) -> (((result = j) and
-  (j1 = to_rep1(first(value1)))) -> (((to_rep1(first(value1)) <= j1) and
-  (j1 <= to_rep1(last(value1)))) -> (((to_rep1(first(value1)) <= j2) and
-  (j2 <= to_rep1(last(value1)))) -> (97 <= to_rep((value[j2])))))))))
+  (to_rep((value[temp___137])) <= 98)))))
+
+axiom H2 : (result = j)
+
+axiom H3 : (j1 = to_rep1(first(value1)))
+
+axiom H4 : (to_rep1(first(value1)) <= j1)
+
+axiom H5 : (j1 <= to_rep1(last(value1)))
+
+axiom H6 : ((to_rep1(first(value1)) <= j2) and (j2 <= to_rep1(last(value1))))
+
+ (* File "predicate.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (97 <= to_rep((value[j2])))

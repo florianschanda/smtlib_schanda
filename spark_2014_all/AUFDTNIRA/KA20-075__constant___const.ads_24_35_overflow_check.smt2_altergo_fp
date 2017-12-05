@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -465,31 +465,146 @@ axiom m__def_axiom : (m = fm(1))
 
 axiom n__def_axiom : (n = ((2 * fm(1)) - 1))
 
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic const__e__assume : integer
+
+logic const__e__assume1 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic const__f__assume : integer
+
+logic const__f__assume1 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic const__g__assume : integer
+
+logic const__g__assume1 : integer
+
+logic const__i__assume : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic const__j__assume : int
+
+logic const__k__assume : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic const__l__assume : int
+
+logic const__m__assume : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic const__n__assume : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (const__c__aggregate_def(1) = c)
+
+axiom H3 : (const__c2__aggregate_def(1) = c2)
+
+axiom H4 : (const__d__aggregate_def(1, 1) = d)
+
+axiom H5 : (const__d2__aggregate_def(1, 1) = d2)
+
+axiom H6 : (to_rep(o) = 1)
+
+axiom H7 : (to_rep(o1) = 1)
+
+axiom H8 : (o1 = o2)
+
+axiom H9 : (o = o3)
+
+axiom H10 : (const__e__assume = o2)
+
+axiom H11 : (const__e__assume1 = o3)
+
+axiom H12 : ((const__e__assume = e) and (const__e__assume1 = e1))
+
+axiom H13 : (to_rep(o4) = 1)
+
+axiom H14 : (to_rep(o5) = 1)
+
+axiom H15 : (o5 = o6)
+
+axiom H16 : (o4 = o7)
+
+axiom H17 : (const__f__assume = o6)
+
+axiom H18 : (const__f__assume1 = o7)
+
+axiom H19 : ((const__f__assume = f) and (const__f__assume1 = f1))
+
+axiom H20 : (to_rep(o8) = 1)
+
+axiom H21 : (to_rep(o9) = 1)
+
+axiom H22 : (o9 = o10)
+
+axiom H23 : (o8 = o11)
+
+axiom H24 : (const__g__assume = o10)
+
+axiom H25 : (const__g__assume1 = o11)
+
+axiom H26 : ((const__g__assume = g) and (const__g__assume1 = g1))
+
+axiom H27 : ((const__i__assume = fi(void)) and
+  (in_range(const__i__assume) and (const__i__assume = 1)))
+
+axiom H28 : (const__i__assume = i)
+
+axiom H29 : in_range(i)
+
+axiom H30 : ((o12 = fi(void)) and (in_range(o12) and (o12 = 1)))
+
+axiom H31 : (o13 = (2 * o12))
+
+axiom H32 : ((o14 = o13) and in_range(o13))
+
+axiom H33 : (o15 = (o14 - 1))
+
  (* File "const.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall const__e__assume:integer. forall const__e__assume1:integer.
-  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
-  forall const__f__assume:integer. forall const__f__assume1:integer.
-  forall o8:integer. forall o9:integer. forall o10:integer.
-  forall o11:integer. forall const__g__assume:integer.
-  forall const__g__assume1:integer. forall const__i__assume:int.
-  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
-  (in_range(a) -> (in_range(b) -> ((const__c__aggregate_def(1) = c) ->
-  ((const__c2__aggregate_def(1) = c2) -> ((const__d__aggregate_def(1,
-  1) = d) -> ((const__d2__aggregate_def(1, 1) = d2) ->
-  (((((to_rep(o) = 1) and ((to_rep(o1) = 1) and ((o1 = o2) and
-  (o = o3)))) and ((const__e__assume = o2) and (const__e__assume1 = o3))) and
-  ((const__e__assume = e) and (const__e__assume1 = e1))) ->
-  (((((to_rep(o4) = 1) and ((to_rep(o5) = 1) and ((o5 = o6) and
-  (o4 = o7)))) and ((const__f__assume = o6) and
-  (const__f__assume1 = o7))) and ((const__f__assume = f) and
-  (const__f__assume1 = f1))) -> (((((to_rep(o8) = 1) and
-  ((to_rep(o9) = 1) and ((o9 = o10) and (o8 = o11)))) and
-  ((const__g__assume = o10) and (const__g__assume1 = o11))) and
-  ((const__g__assume = g) and (const__g__assume1 = g1))) ->
-  ((((const__i__assume = fi(void)) and (in_range(const__i__assume) and
-  (const__i__assume = 1))) and (const__i__assume = i)) -> (in_range(i) ->
-  ((((((o12 = fi(void)) and (in_range(o12) and (o12 = 1))) and
-  (o13 = (2 * o12))) and ((o14 = o13) and in_range(o13))) and
-  (o15 = (o14 - 1))) -> in_range(o15))))))))))))))
+goal WP_parameter_def : in_range(o15)

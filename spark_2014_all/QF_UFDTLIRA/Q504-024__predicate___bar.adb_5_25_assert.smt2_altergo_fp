@@ -79,7 +79,19 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic x2 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 0)
+
  (* File "bar.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall result:int. forall x1:int. (((result = x) and
-  (x1 = 0)) -> (of_int(x1) = true)))
+goal WP_parameter_def : (of_int(x1) = true)

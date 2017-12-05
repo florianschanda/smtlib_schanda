@@ -233,21 +233,43 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom map__def_axiom : (map = main__map__aggregate_def(1, 0))
 
+logic main__with_postcondition__result : int
+
+logic result : int
+
+logic main__with_postcondition__result1 : int
+
+logic main__with_postcondition__result2 : int
+
+logic main__with_postcondition__result3 : int
+
+logic main__with_postcondition__result4 : int
+
+logic main__with_postcondition__result5 : int
+
+logic result1 : int
+
+axiom H : (main__map__aggregate_def(1, 0) = map)
+
+axiom H1 : in_range(id)
+
+axiom H2 :
+  (main__with_postcondition__result1 = main__with_postcondition__result2)
+
+axiom H3 :
+  (main__with_postcondition__result3 = main__with_postcondition__result1)
+
+axiom H4 : (result = main__with_postcondition__result)
+
+axiom H5 : (main__with_postcondition__result1 = to_rep((map[id])))
+
+axiom H6 :
+  (main__with_postcondition__result4 = main__with_postcondition__result2)
+
+axiom H7 :
+  (main__with_postcondition__result5 = main__with_postcondition__result3)
+
+axiom H8 : (result1 = main__with_postcondition__result4)
+
  (* File "main.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall main__with_postcondition__result:int. forall result:int.
-  forall main__with_postcondition__result1:int.
-  forall main__with_postcondition__result2:int.
-  forall main__with_postcondition__result3:int.
-  forall main__with_postcondition__result4:int.
-  forall main__with_postcondition__result5:int.
-  (forall result1:int. (((main__map__aggregate_def(1, 0) = map) and
-  (in_range(id) and
-  (((((main__with_postcondition__result1 = main__with_postcondition__result2) and
-  (main__with_postcondition__result3 = main__with_postcondition__result1)) and
-  ((result = main__with_postcondition__result) and
-  (main__with_postcondition__result1 = to_rep((map[id]))))) and
-  ((main__with_postcondition__result4 = main__with_postcondition__result2) and
-  (main__with_postcondition__result5 = main__with_postcondition__result3))) and
-  (result1 = main__with_postcondition__result4)))) ->
-  (not (id = main__with_postcondition__result4)))))
+goal WP_parameter_def : (not (id = main__with_postcondition__result4))

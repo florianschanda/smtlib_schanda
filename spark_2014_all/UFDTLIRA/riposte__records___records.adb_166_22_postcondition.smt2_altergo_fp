@@ -331,43 +331,93 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "records.adb", line 153, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dst__split_fields:bool. forall dst__split_fields1:unsigned_byte.
-  forall dst__split_fields2:unsigned_byte. forall result:bool.
-  forall result1:unsigned_byte. forall result2:unsigned_byte.
-  forall dst__split_fields3:bool. forall dst__split_fields4:unsigned_byte.
-  forall dst__split_fields5:unsigned_byte. forall result3:bool.
-  forall result4:unsigned_byte. forall result5:unsigned_byte.
-  forall dst__split_fields6:bool. forall dst__split_fields7:unsigned_byte.
-  forall dst__split_fields8:unsigned_byte. forall dst__split_fields9:bool.
-  forall dst__split_fields10:unsigned_byte.
-  forall dst__split_fields11:unsigned_byte. forall dst__split_fields12:bool.
-  forall dst__split_fields13:unsigned_byte.
-  forall dst__split_fields14:unsigned_byte.
-  ((((((result = dst__split_fields) and ((result1 = dst__split_fields1) and
-  (result2 = dst__split_fields2))) and ((src = dst__split_fields3) and
-  ((dst__split_fields1 = dst__split_fields4) and
-  (dst__split_fields2 = dst__split_fields5)))) and (((src = true) and
-  (((result3 = dst__split_fields3) and ((result4 = dst__split_fields4) and
-  (result5 = dst__split_fields5))) and
-  ((dst__split_fields3 = dst__split_fields6) and
-  ((src1 = dst__split_fields7) and (src2 = dst__split_fields8))))) or
-  ((not (src = true)) and ((dst__split_fields3 = dst__split_fields6) and
-  ((dst__split_fields4 = dst__split_fields7) and
-  (dst__split_fields5 = dst__split_fields8)))))) and
-  (((dst__split_fields9 = dst__split_fields6) and
-  ((dst__split_fields10 = dst__split_fields7) and
-  (dst__split_fields11 = dst__split_fields8))) and
-  ((dst__split_fields12 = dst__split_fields6) and
+logic dst__split_fields : bool
+
+logic dst__split_fields1 : unsigned_byte
+
+logic dst__split_fields2 : unsigned_byte
+
+logic result : bool
+
+logic result1 : unsigned_byte
+
+logic result2 : unsigned_byte
+
+logic dst__split_fields3 : bool
+
+logic dst__split_fields4 : unsigned_byte
+
+logic dst__split_fields5 : unsigned_byte
+
+logic result3 : bool
+
+logic result4 : unsigned_byte
+
+logic result5 : unsigned_byte
+
+logic dst__split_fields6 : bool
+
+logic dst__split_fields7 : unsigned_byte
+
+logic dst__split_fields8 : unsigned_byte
+
+logic dst__split_fields9 : bool
+
+logic dst__split_fields10 : unsigned_byte
+
+logic dst__split_fields11 : unsigned_byte
+
+logic dst__split_fields12 : bool
+
+logic dst__split_fields13 : unsigned_byte
+
+logic dst__split_fields14 : unsigned_byte
+
+axiom H : (result = dst__split_fields)
+
+axiom H1 : (result1 = dst__split_fields1)
+
+axiom H2 : (result2 = dst__split_fields2)
+
+axiom H3 : (src = dst__split_fields3)
+
+axiom H4 : (dst__split_fields1 = dst__split_fields4)
+
+axiom H5 : (dst__split_fields2 = dst__split_fields5)
+
+axiom H6 : ((src = true) -> (result3 = dst__split_fields3))
+
+axiom H7 : ((src = true) -> (result4 = dst__split_fields4))
+
+axiom H8 : ((src = true) -> (result5 = dst__split_fields5))
+
+axiom H9 : ((src = true) -> (dst__split_fields3 = dst__split_fields6))
+
+axiom H10 : ((src = true) -> ((src1 = dst__split_fields7) and
+  (src2 = dst__split_fields8)))
+
+axiom H11 : ((not (src = true)) ->
+  ((dst__split_fields6 = dst__split_fields3) and
+  ((dst__split_fields7 = dst__split_fields4) and
+  (dst__split_fields8 = dst__split_fields5))))
+
+axiom H12 : (dst__split_fields9 = dst__split_fields6)
+
+axiom H13 : (dst__split_fields10 = dst__split_fields7)
+
+axiom H14 : (dst__split_fields11 = dst__split_fields8)
+
+axiom H15 : ((dst__split_fields12 = dst__split_fields6) and
   ((dst__split_fields13 = dst__split_fields7) and
-  (dst__split_fields14 = dst__split_fields8))))) -> (bool_eq3({
-  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
-  dst__split_fields9; rec__records_prooffuncs__optional_pair__the_pair = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  dst__split_fields10; rec__records_prooffuncs__pair__b = dst__split_fields11
-  } } } }, { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists = src;
+  (dst__split_fields14 = dst__split_fields8)))
+
+ (* File "records.adb", line 153, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists = dst__split_fields9;
+  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = dst__split_fields10;
+  rec__records_prooffuncs__pair__b = dst__split_fields11 } } } }, {
+  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists = src;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = src1; rec__records_prooffuncs__pair__b =
-  src2 } } } }) = true)))
+  src2 } } } }) = true)

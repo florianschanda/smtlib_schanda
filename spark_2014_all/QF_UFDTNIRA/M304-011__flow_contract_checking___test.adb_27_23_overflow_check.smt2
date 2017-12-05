@@ -42,6 +42,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const par2 Int)
 (declare-const temp Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const temp1 Int)
 (declare-const par21 Int)

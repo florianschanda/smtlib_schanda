@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tfB
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -165,18 +165,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -294,7 +294,7 @@ function tfB__ref___projection(a: tfB__ref) : tfB = (a).tfB__content
 
 type f
 
-predicate in_range1(x: int) = (((-16000) <= x) and (x <= 16000))
+predicate in_range1(x: int) = (((- 16000) <= x) and (x <= 16000))
 
 logic dummy1 : f
 
@@ -404,9 +404,41 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : f
+
+logic y : f
+
+logic z : f
+
+logic o : f
+
+logic o1 : f
+
+logic o2 : f
+
+logic result : f
+
+logic x1 : f
+
+logic result1 : f
+
+logic y1 : f
+
+logic result2 : f
+
+logic z1 : f
+
+axiom H : (to_fixed1(o) = 5)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = o)
+
+axiom H3 : (to_fixed1(o1) = 3)
+
+axiom H4 : (result1 = y)
+
+axiom H5 : (y1 = o1)
+
  (* File "fix.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:f. forall y:f. forall o:f. forall o1:f. forall result:f.
-  forall x1:f. forall result1:f. forall y1:f. (((to_fixed1(o) = 5) and
-  ((result = x) and (x1 = o))) -> (((to_fixed1(o1) = 3) and
-  ((result1 = y) and (y1 = o1))) -> (not (to_fixed1(y1) = 0)))))
+goal WP_parameter_def : (not (to_fixed1(y1) = 0))

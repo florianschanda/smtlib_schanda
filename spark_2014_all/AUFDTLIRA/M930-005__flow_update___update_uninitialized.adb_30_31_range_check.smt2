@@ -66,6 +66,7 @@
 (declare-fun temp___160 ((Array Int integer) Int Int) (Array Int integer))
 (assert (forall ((temp___162 (Array Int integer))) (forall ((temp___163 Int) (temp___164 Int)) (let ((temp___161 (temp___160 temp___162 temp___163 temp___164))) (forall ((temp___165 Int)) (ite (= temp___165 temp___163) (= (select temp___161 temp___165) (of_rep temp___164)) (= (select temp___161 temp___165) (select temp___162 temp___165))))))))
 (declare-const element Int)
+(declare-const o Int)
 (declare-const element1 Int)
 (declare-const result Int)
 (declare-const element2 Int)

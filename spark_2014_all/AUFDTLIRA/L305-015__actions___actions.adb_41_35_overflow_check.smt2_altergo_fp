@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -448,16 +448,115 @@ axiom def_axiom :
   (forall temp___154:int.
   ((actions__a__aggregate_def(temp___153)[temp___154]) = of_rep(temp___153))))
 
+logic x : int
+
+logic y : int
+
+logic a : (int,integer) farray
+
+logic o : integer
+
+logic o1 : int
+
+logic o2 : (int,integer) farray
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic j1 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic j2 : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic j3 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic j4 : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic j5 : int
+
+logic o13 : int
+
+logic o14 : bool
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = actions__a__aggregate_def(0))
+
+axiom H4 : (1 <= x)
+
+axiom H5 : (x <= y)
+
+axiom H6 : (5 <= y)
+
+axiom H7 : (y <= 9)
+
+axiom H8 : (to_rep(o) = 1)
+
+axiom H9 : ((1 <= x) and (x <= 10))
+
+axiom H10 : (o1 = x)
+
+axiom H11 : (o2 = (a1[o1 <- o]))
+
+axiom H12 : (result1 = a1)
+
+axiom H13 : (a2 = o2)
+
+axiom H14 : (not (b1 = true))
+
+axiom H15 : (not (b2 = true))
+
+axiom H16 : (not (b3 = true))
+
+axiom H17 : (not (b4 = true))
+
+axiom H18 : (not (b5 = true))
+
+axiom H19 : (b6 = true)
+
  (* File "actions.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall a:(int,integer) farray.
-  forall o:integer. forall o1:int. forall o2:(int,integer) farray.
-  forall result:(int,integer) farray. forall a1:(int,integer) farray.
-  forall result1:(int,integer) farray. forall a2:(int,integer) farray.
-  (in_range1(x) -> (in_range1(y) -> (((result = a) and
-  (a1 = actions__a__aggregate_def(0))) -> ((not ((not ((1 <= x) and
-  (x <= y))) or (not ((5 <= y) and (y <= 9))))) -> ((((to_rep(o) = 1) and
-  ((((1 <= x) and (x <= 10)) and (o1 = x)) and (o2 = (a1[o1 <- o])))) and
-  ((result1 = a1) and (a2 = o2))) -> ((not (b1 = true)) ->
-  ((not (b2 = true)) -> ((not (b3 = true)) -> ((not (b4 = true)) ->
-  ((not (b5 = true)) -> ((b6 = true) -> in_range1((y + 1))))))))))))))
+goal WP_parameter_def : in_range1((y + 1))

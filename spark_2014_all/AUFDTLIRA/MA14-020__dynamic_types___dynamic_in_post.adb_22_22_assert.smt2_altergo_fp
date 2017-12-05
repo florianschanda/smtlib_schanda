@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -505,28 +505,79 @@ axiom temp___String_Literal_209__def_axiom :
   (to_rep((temp___String_Literal_209(void)[2])) = 111)) and
   (to_rep((temp___String_Literal_209(void)[3])) = 117))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall y:(int,character) farray.
-  forall a:int. forall b:int. forall o:int. forall o1:int.
-  forall result:(int,character) farray. forall x1:(int,character) farray.
-  forall result1:(int,character) farray. forall y1:(int,character) farray.
-  forall result2:int. forall a1:int. forall result3:int. forall b1:int.
-  ((((result = x) and (x1 = temp___String_Literal_207(void))) and
-  ((to_rep1(x__first) = to_rep1(first(mk(1, 5)))) and
-  (to_rep1(x__last) = to_rep1(last(mk(1, 5)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(x__first), to_rep1(x__last)) -> ((((result1 = y) and
-  (y1 = temp___String_Literal_209(void))) and
-  ((to_rep1(y__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(y__last) = to_rep1(last(mk(1, 3)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(y__first), to_rep1(y__last)) -> ((((o = get_last({
-  elts = x1; rt = mk(to_rep1(x__first), to_rep1(x__last)) })) and
-  (in_range(o) and (o = to_rep1(last2(mk1(to_rep1(first(mk(to_rep1(x__first),
+logic x : (int,character) farray
+
+logic y : (int,character) farray
+
+logic a : int
+
+logic b : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : (int,character) farray
+
+logic x1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic y1 : (int,character) farray
+
+logic result2 : int
+
+logic a1 : int
+
+logic result3 : int
+
+logic b1 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___String_Literal_207(void))
+
+axiom H2 : (to_rep1(x__first) = to_rep1(first(mk(1, 5))))
+
+axiom H3 : (to_rep1(x__last) = to_rep1(last(mk(1, 5))))
+
+axiom H4 : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = temp___String_Literal_209(void))
+
+axiom H7 : (to_rep1(y__first) = to_rep1(first(mk(1, 3))))
+
+axiom H8 : (to_rep1(y__last) = to_rep1(last(mk(1, 3))))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(y__first),
+  to_rep1(y__last))
+
+axiom H10 : ((o = get_last({ elts = x1; rt = mk(to_rep1(x__first),
+  to_rep1(x__last)) })) and (in_range(o) and
+  (o = to_rep1(last2(mk1(to_rep1(first(mk(to_rep1(x__first),
   to_rep1(x__last)))), to_rep1(last(mk(to_rep1(x__first),
-  to_rep1(x__last)))))))))) and ((result2 = a) and (a1 = o))) ->
-  (in_range(a1) -> ((((o1 = get_last({ elts = y1; rt = mk(to_rep1(y__first),
+  to_rep1(x__last))))))))))
+
+axiom H11 : (result2 = a)
+
+axiom H12 : (a1 = o)
+
+axiom H13 : in_range(a1)
+
+axiom H14 : ((o1 = get_last({ elts = y1; rt = mk(to_rep1(y__first),
   to_rep1(y__last)) })) and (in_range(o1) and
   (o1 = to_rep1(last2(mk1(to_rep1(first(mk(to_rep1(y__first),
   to_rep1(y__last)))), to_rep1(last(mk(to_rep1(y__first),
-  to_rep1(y__last)))))))))) and ((result3 = b) and (b1 = o1))) ->
-  (in_range(b1) -> (a1 = b1))))))))))
+  to_rep1(y__last))))))))))
+
+axiom H15 : (result3 = b)
+
+axiom H16 : (b1 = o1)
+
+axiom H17 : in_range(b1)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (a1 = b1)

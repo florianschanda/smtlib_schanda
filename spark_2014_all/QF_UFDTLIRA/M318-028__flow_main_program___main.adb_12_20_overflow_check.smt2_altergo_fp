@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -135,9 +135,69 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic temp : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic temp2 : int
+
+logic result3 : int
+
+logic i2 : int
+
+logic result4 : int
+
+logic temp3 : int
+
+logic result5 : int
+
+logic i3 : int
+
+logic result6 : int
+
+logic temp4 : int
+
+logic result7 : int
+
+logic i4 : int
+
+logic result8 : int
+
+logic temp5 : int
+
+logic result9 : int
+
+logic i5 : int
+
+axiom H : (result = temp)
+
+axiom H1 : (temp1 = 0)
+
+axiom H2 : in_range1(temp1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
  (* File "main.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp:int. forall i:int. forall result:int. forall temp1:int.
-  forall result1:int. forall i1:int. (((result = temp) and (temp1 = 0)) ->
-  (in_range1(temp1) -> (((result1 = i) and (i1 = 1)) ->
-  in_range((temp1 + i1))))))
+goal WP_parameter_def : in_range((temp1 + i1))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -464,10 +464,16 @@ type t18s__ref = { t18s__content : us_t1
 
 function t18s__ref___projection(a2: t18s__ref) : us_t1 = (a2).t18s__content
 
+logic temp___210 : int
+
+axiom H : dynamic_property(1, 100, to_rep(first(a1)), to_rep(last(a1)))
+
+axiom H1 : (0 <  length({ elts = a; rt = a1 }))
+
+axiom H2 : ((temp___210 = (to_rep(last(a1)) - 1)) and
+  in_range((to_rep(last(a1)) - 1)))
+
+axiom H3 : (to_rep(first(a1)) <= temp___210)
+
  (* File "types.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___210:int. (dynamic_property(1, 100, to_rep(first(a1)),
-  to_rep(last(a1))) -> ((0 <  length({ elts = a; rt = a1 })) ->
-  (((temp___210 = (to_rep(last(a1)) - 1)) and
-  in_range((to_rep(last(a1)) - 1))) -> ((to_rep(first(a1)) <= temp___210) ->
-  (to_rep(first(a1)) <= to_rep(first(a1))))))))
+goal WP_parameter_def : (to_rep(first(a1)) <= to_rep(first(a1)))

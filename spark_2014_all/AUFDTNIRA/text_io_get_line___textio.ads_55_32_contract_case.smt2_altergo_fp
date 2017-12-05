@@ -162,18 +162,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -219,7 +219,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -527,7 +527,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type int__
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -565,7 +565,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type file_descr
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1007,58 +1007,123 @@ axiom fpeek__def_axiom1 :
   (fpeek1(stream, helpers__cur_position,
   helpers__the_file) = to_rep((helpers__the_file[helpers__cur_position]))))))))
 
- (* File "textio.ads", line 129, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_file:(int,character) farray. forall cur_position:int.
-  forall last2:int. forall current_in__split_fields:file_descr.
-  forall current_in__split_fields1:bool.
-  forall current_in__split_fields2:bool.
-  forall current_in__split_fields3:count.
-  forall current_in__split_fields4:count.
-  forall current_in__split_fields5:count.
-  forall current_in__split_fields6:bool. forall cur_position1:int.
-  forall item:(int,character) farray. forall last3:int.
-  forall current_in__split_fields7:file_descr.
-  forall current_in__split_fields8:bool.
-  forall current_in__split_fields9:bool.
-  forall current_in__split_fields10:count.
-  forall current_in__split_fields11:count.
-  forall current_in__split_fields12:count.
-  forall current_in__split_fields13:bool. forall cur_position2:int.
-  forall item1:(int,character) farray. forall last4:int.
-  forall current_in__split_fields14:file_descr.
-  forall current_in__split_fields15:bool.
-  forall current_in__split_fields16:bool.
-  forall current_in__split_fields17:count.
-  forall current_in__split_fields18:count.
-  forall current_in__split_fields19:count.
-  forall current_in__split_fields20:bool. forall cur_position3:int.
-  forall item2:(int,character) farray. forall last5:int.
-  forall current_in__split_fields21:file_descr.
-  forall current_in__split_fields22:bool.
-  forall current_in__split_fields23:bool.
-  forall current_in__split_fields24:count.
-  forall current_in__split_fields25:count.
-  forall current_in__split_fields26:count.
-  forall current_in__split_fields27:bool. (dynamic_property(1, 2147483647,
-  to_rep1(item__first), to_rep1(item__last)) -> (((0 <= 2147483647) ->
-  in_range4(last2)) -> (in_range2(cur_position) -> (in_range3(eof_ch) ->
-  ((mod(eof, 256) = eof_ch) -> (in_range5(eof) ->
-  ((not (end_of_file(current_file({ rec__textio__file_type__descr =
+logic the_file : (int,character) farray
+
+logic cur_position : int
+
+logic last2 : int
+
+logic current_in__split_fields : file_descr
+
+logic current_in__split_fields1 : bool
+
+logic current_in__split_fields2 : bool
+
+logic current_in__split_fields3 : count
+
+logic current_in__split_fields4 : count
+
+logic current_in__split_fields5 : count
+
+logic current_in__split_fields6 : bool
+
+logic idx : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic cur_position1 : int
+
+logic item : (int,character) farray
+
+logic last3 : int
+
+logic current_in__split_fields7 : file_descr
+
+logic current_in__split_fields8 : bool
+
+logic current_in__split_fields9 : bool
+
+logic current_in__split_fields10 : count
+
+logic current_in__split_fields11 : count
+
+logic current_in__split_fields12 : count
+
+logic current_in__split_fields13 : bool
+
+logic cur_position2 : int
+
+logic item1 : (int,character) farray
+
+logic last4 : int
+
+logic current_in__split_fields14 : file_descr
+
+logic current_in__split_fields15 : bool
+
+logic current_in__split_fields16 : bool
+
+logic current_in__split_fields17 : count
+
+logic current_in__split_fields18 : count
+
+logic current_in__split_fields19 : count
+
+logic current_in__split_fields20 : bool
+
+logic cur_position3 : int
+
+logic item2 : (int,character) farray
+
+logic last5 : int
+
+logic current_in__split_fields21 : file_descr
+
+logic current_in__split_fields22 : bool
+
+logic current_in__split_fields23 : bool
+
+logic current_in__split_fields24 : count
+
+logic current_in__split_fields25 : count
+
+logic current_in__split_fields26 : count
+
+logic current_in__split_fields27 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(item__first),
+  to_rep1(item__last))
+
+axiom H1 : ((0 <= 2147483647) -> in_range4(last2))
+
+axiom H2 : in_range2(cur_position)
+
+axiom H3 : in_range3(eof_ch)
+
+axiom H4 : (mod(eof, 256) = eof_ch)
+
+axiom H5 : in_range5(eof)
+
+axiom H6 : (not (end_of_file(current_file({ rec__textio__file_type__descr =
   current_in__split_fields; rec__textio__file_type__before_lm =
   current_in__split_fields1; rec__textio__file_type__before_lm_pm =
   current_in__split_fields2; rec__textio__file_type__col =
   current_in__split_fields3; rec__textio__file_type__line =
   current_in__split_fields4; rec__textio__file_type__page =
   current_in__split_fields5; rec__textio__file_type__is_regular_file =
-  current_in__split_fields6 }), cur_position, the_file) = true)) ->
-  ((((((to_rep1(item__last) <  to_rep1(item__first)) and
-  (last3 = (to_rep1(item__first) - 1))) or
-  ((not (to_rep1(item__last) <  to_rep1(item__first))) and
+  current_in__split_fields6 }), cur_position, the_file) = true))
+
+axiom H7 : (((((to_rep1(item__last) <  to_rep1(item__first)) ->
+  (last3 = (to_rep1(item__first) - 1))) and
+  ((not (to_rep1(item__last) <  to_rep1(item__first))) ->
   (((((last3 = (to_rep1(item__first) - 1)) or
   ((to_rep1(item__first) <= last3) and (last3 <= to_rep1(item__last)))) and
-  (forall idx:int. (((to_rep1(item__first) <= idx) and (idx <= last3)) ->
-  (to_rep((item[idx])) = to_rep((the_file[((idx - to_rep1(item__first)) + cur_position)])))))) and
+  (forall idx1:int. (((to_rep1(item__first) <= idx1) and (idx1 <= last3)) ->
+  (to_rep((item[idx1])) = to_rep((the_file[((idx1 - to_rep1(item__first)) + cur_position)])))))) and
   (cur_position1 = (((cur_position + last3) - to_rep1(item__first)) + 1))) and
   (((last3 = to_rep1(item__last)) or
   (to_rep((the_file[cur_position1])) = eof_ch)) or
@@ -1072,21 +1137,18 @@ goal WP_parameter_def :
   ((current_in__split_fields19 = current_in__split_fields12) and
   (current_in__split_fields20 = current_in__split_fields13))))))) and
   ((last3 = last4) and ((item = item1) and
-  (cur_position1 = cur_position2)))) and (({ rec__textio__file_type__descr =
-  current_in__split_fields21; rec__textio__file_type__before_lm =
-  current_in__split_fields22; rec__textio__file_type__before_lm_pm =
-  current_in__split_fields23; rec__textio__file_type__col =
-  current_in__split_fields24; rec__textio__file_type__line =
-  current_in__split_fields25; rec__textio__file_type__page =
-  current_in__split_fields26; rec__textio__file_type__is_regular_file =
-  current_in__split_fields27 } = { rec__textio__file_type__descr =
-  current_in__split_fields7; rec__textio__file_type__before_lm =
-  current_in__split_fields8; rec__textio__file_type__before_lm_pm =
-  current_in__split_fields9; rec__textio__file_type__col =
-  current_in__split_fields10; rec__textio__file_type__line =
-  current_in__split_fields11; rec__textio__file_type__page =
-  current_in__split_fields12; rec__textio__file_type__is_regular_file =
-  current_in__split_fields13 }) and ((last5 = last3) and ((item2 = item) and
-  (cur_position3 = cur_position1)))))) -> ((bool_lt(to_rep1(item__last),
-  to_rep1(item__first)) = true) ->
-  (last4 = (to_rep1(item__first) - 1))))))))))))
+  (cur_position1 = cur_position2)))) and
+  (((current_in__split_fields21 = current_in__split_fields7) and
+  ((current_in__split_fields22 = current_in__split_fields8) and
+  ((current_in__split_fields23 = current_in__split_fields9) and
+  ((current_in__split_fields24 = current_in__split_fields10) and
+  ((current_in__split_fields25 = current_in__split_fields11) and
+  ((current_in__split_fields26 = current_in__split_fields12) and
+  (current_in__split_fields27 = current_in__split_fields13))))))) and
+  ((last5 = last3) and ((item2 = item) and
+  (cur_position3 = cur_position1))))))
+
+axiom H8 : (bool_lt(to_rep1(item__last), to_rep1(item__first)) = true)
+
+ (* File "textio.ads", line 129, characters 0-0 *)
+goal WP_parameter_def : (last4 = (to_rep1(item__first) - 1))

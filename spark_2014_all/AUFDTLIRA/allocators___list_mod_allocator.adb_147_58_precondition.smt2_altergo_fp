@@ -906,16 +906,71 @@ axiom is_empty__post_axiom :
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
 
- (* File "list_mod_allocator.ads", line 77, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int.
-  forall result:bool. (in_range1(first_available) ->
-  (((result = is_well_formed(data, first_available)) and ((result = true) <->
-  (((not (first_available = 0)) ->
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic r : int
+
+logic o : us_rep1
+
+logic o1 : us_rep2
+
+logic o2 : us_rep1
+
+logic o3 : us_rep2
+
+logic o4 : us_rep1
+
+logic o5 : us_rep2
+
+logic o6 : us_rep1
+
+logic o7 : us_rep1
+
+logic o8 : us_rep2
+
+logic o9 : us_rep1
+
+logic o10 : us_rep2
+
+logic o11 : us_rep1
+
+logic o12 : int
+
+logic temp___301 : int
+
+logic o13 : int
+
+logic o14 : status
+
+logic o15 : resource
+
+logic o16 : status
+
+logic o17 : resource
+
+logic o18 : resource
+
+logic o19 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(first_available)
+
+axiom H1 : ((result1 = is_well_formed(data, first_available)) and
+  ((result1 = true) <-> (((not (first_available = 0)) ->
   (to_rep1((((data[first_available])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)) and
-  (forall r:int. (((1 <= r) and (r <= 10000)) ->
-  (((to_rep1((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) and
-  (not (to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))) ->
-  (to_rep1((((data[to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next)])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0))))))) ->
-  ((result = true) -> ((not (first_available = 0)) -> (is_well_formed(data,
-  first_available) = true))))))
+  (forall r1:int. (((1 <= r1) and (r1 <= 10000)) ->
+  (((to_rep1((((data[r1])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) and
+  (not (to_rep((((data[r1])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))) ->
+  (to_rep1((((data[to_rep((((data[r1])).us_split_fields1).rec__list_mod_allocator__cell__next)])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)))))))
+
+axiom H2 : (result1 = true)
+
+axiom H3 : (not (first_available = 0))
+
+ (* File "list_mod_allocator.ads", line 77, characters 0-0 *)
+goal WP_parameter_def : (is_well_formed(data, first_available) = true)

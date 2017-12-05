@@ -71,6 +71,8 @@
 (declare-const b Int)
 (declare-const result Int)
 (declare-const b1 Int)
+(declare-const b2 Int)
+(declare-const b3 Int)
 (assert (in_range1 a))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 b)))
 (assert (= (mk_int__ref result) (mk_int__ref b)))

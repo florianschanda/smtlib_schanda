@@ -160,18 +160,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -626,7 +626,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -2700,17 +2700,640 @@ axiom def_axiom1 :
   (forall temp___994:int.
   ((temp___991(temp___993)[temp___994]) = of_rep1(temp___993))))
 
- (* File "keccak-sponge.ads", line 222, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:(int,byte) farray.
-  forall ctx__split_fields2:bit_absorption_number.
-  forall ctx__split_fields3:byte_absorption_number.
-  forall ctx__split_fields4:rate_number. forall ctx__split_fields5:states.
-  forall next_block:(int,byte) farray. forall o:int. forall o1:int.
-  forall result:(int,byte) farray. forall next_block1:(int,byte) farray.
-  forall result1:bool. (((result = next_block) and
-  (next_block1 = keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(of_int(0)))) ->
-  ((((o = rate_of({ us_split_fields1 = {
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : (int,byte) farray
+
+logic ctx__split_fields2 : bit_absorption_number
+
+logic ctx__split_fields3 : byte_absorption_number
+
+logic ctx__split_fields4 : rate_number
+
+logic ctx__split_fields5 : states
+
+logic next_block : (int,byte) farray
+
+logic o : int
+
+logic o1 : (int,byte) farray
+
+logic temp___986 : (int,byte) farray
+
+logic temp___9861 : t3
+
+logic o2 : (int,byte) farray
+
+logic o3 : t1
+
+logic o4 : int
+
+logic o5 : bit_absorption_number
+
+logic o6 : map
+
+logic o7 : (int,byte) farray
+
+logic o8 : bit_absorption_number
+
+logic o9 : byte_absorption_number
+
+logic o10 : rate_number
+
+logic o11 : states
+
+logic temp___998 : map
+
+logic temp___9981 : (int,byte) farray
+
+logic temp___9982 : bit_absorption_number
+
+logic temp___9983 : byte_absorption_number
+
+logic temp___9984 : rate_number
+
+logic temp___9985 : states
+
+logic o12 : (int,byte) farray
+
+logic keccak__padding__pad101_multi_blocks__next_block__compl : (int,byte) farray
+
+logic keccak__padding__pad101_multi_blocks__next_block__compl1 : t5
+
+logic o13 : (int,byte) farray
+
+logic keccak__padding__pad101_multi_blocks__first_block__compl : (int,byte) farray
+
+logic keccak__padding__pad101_multi_blocks__first_block__compl1 : t4
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : integer
+
+logic o18 : integer
+
+logic o19 : (int,byte) farray
+
+logic o20 : map
+
+logic o21 : (int,byte) farray
+
+logic o22 : bit_absorption_number
+
+logic o23 : byte_absorption_number
+
+logic o24 : rate_number
+
+logic o25 : states
+
+logic temp___1006 : map
+
+logic temp___10061 : (int,byte) farray
+
+logic temp___10062 : bit_absorption_number
+
+logic temp___10063 : byte_absorption_number
+
+logic temp___10064 : rate_number
+
+logic temp___10065 : states
+
+logic o26 : (int,byte) farray
+
+logic o27 : (int,byte) farray
+
+logic temp___1013 : (int,byte) farray
+
+logic temp___10131 : t6
+
+logic o28 : (int,byte) farray
+
+logic o29 : t1
+
+logic o30 : int
+
+logic o31 : (int,byte) farray
+
+logic temp___1019 : (int,byte) farray
+
+logic temp___10191 : t7
+
+logic o32 : (int,byte) farray
+
+logic o33 : t1
+
+logic o34 : int
+
+logic o35 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1 : t8
+
+logic o36 : integer
+
+logic o37 : integer
+
+logic o38 : (int,byte) farray
+
+logic o39 : map
+
+logic o40 : (int,byte) farray
+
+logic o41 : bit_absorption_number
+
+logic o42 : byte_absorption_number
+
+logic o43 : rate_number
+
+logic o44 : states
+
+logic temp___1031 : map
+
+logic temp___10311 : (int,byte) farray
+
+logic temp___10312 : bit_absorption_number
+
+logic temp___10313 : byte_absorption_number
+
+logic temp___10314 : rate_number
+
+logic temp___10315 : states
+
+logic o45 : bit_absorption_number
+
+logic o46 : map
+
+logic o47 : (int,byte) farray
+
+logic o48 : bit_absorption_number
+
+logic o49 : byte_absorption_number
+
+logic o50 : rate_number
+
+logic o51 : states
+
+logic temp___1033 : map
+
+logic temp___10331 : (int,byte) farray
+
+logic temp___10332 : bit_absorption_number
+
+logic temp___10333 : byte_absorption_number
+
+logic temp___10334 : rate_number
+
+logic temp___10335 : states
+
+logic o52 : byte_absorption_number
+
+logic o53 : map
+
+logic o54 : (int,byte) farray
+
+logic o55 : bit_absorption_number
+
+logic o56 : byte_absorption_number
+
+logic o57 : rate_number
+
+logic o58 : states
+
+logic temp___1035 : map
+
+logic temp___10351 : (int,byte) farray
+
+logic temp___10352 : bit_absorption_number
+
+logic temp___10353 : byte_absorption_number
+
+logic temp___10354 : rate_number
+
+logic temp___10355 : states
+
+logic o59 : states
+
+logic o60 : map
+
+logic o61 : (int,byte) farray
+
+logic o62 : bit_absorption_number
+
+logic o63 : byte_absorption_number
+
+logic o64 : rate_number
+
+logic o65 : states
+
+logic temp___1037 : map
+
+logic temp___10371 : (int,byte) farray
+
+logic temp___10372 : bit_absorption_number
+
+logic temp___10373 : byte_absorption_number
+
+logic temp___10374 : rate_number
+
+logic temp___10375 : states
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : (int,byte) farray
+
+logic ctx__split_fields8 : bit_absorption_number
+
+logic ctx__split_fields9 : byte_absorption_number
+
+logic ctx__split_fields10 : rate_number
+
+logic ctx__split_fields11 : states
+
+logic result : (int,byte) farray
+
+logic next_block1 : (int,byte) farray
+
+logic result1 : bool
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
+
+logic result2 : map
+
+logic result3 : (int,byte) farray
+
+logic result4 : bit_absorption_number
+
+logic result5 : byte_absorption_number
+
+logic result6 : rate_number
+
+logic result7 : states
+
+logic ctx__split_fields12 : map
+
+logic ctx__split_fields13 : (int,byte) farray
+
+logic ctx__split_fields14 : bit_absorption_number
+
+logic ctx__split_fields15 : byte_absorption_number
+
+logic ctx__split_fields16 : rate_number
+
+logic ctx__split_fields17 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result8 : map
+
+logic result9 : (int,byte) farray
+
+logic result10 : bit_absorption_number
+
+logic result11 : byte_absorption_number
+
+logic result12 : rate_number
+
+logic result13 : states
+
+logic ctx__split_fields18 : map
+
+logic ctx__split_fields19 : (int,byte) farray
+
+logic ctx__split_fields20 : bit_absorption_number
+
+logic ctx__split_fields21 : byte_absorption_number
+
+logic ctx__split_fields22 : rate_number
+
+logic ctx__split_fields23 : states
+
+logic result14 : map
+
+logic result15 : (int,byte) farray
+
+logic result16 : bit_absorption_number
+
+logic result17 : byte_absorption_number
+
+logic result18 : rate_number
+
+logic result19 : states
+
+logic ctx__split_fields24 : map
+
+logic ctx__split_fields25 : (int,byte) farray
+
+logic ctx__split_fields26 : bit_absorption_number
+
+logic ctx__split_fields27 : byte_absorption_number
+
+logic ctx__split_fields28 : rate_number
+
+logic ctx__split_fields29 : states
+
+logic result20 : map
+
+logic result21 : (int,byte) farray
+
+logic result22 : bit_absorption_number
+
+logic result23 : byte_absorption_number
+
+logic result24 : rate_number
+
+logic result25 : states
+
+logic ctx__split_fields30 : map
+
+logic ctx__split_fields31 : (int,byte) farray
+
+logic ctx__split_fields32 : bit_absorption_number
+
+logic ctx__split_fields33 : byte_absorption_number
+
+logic ctx__split_fields34 : rate_number
+
+logic ctx__split_fields35 : states
+
+logic spilled : bool
+
+logic keccak__padding__pad101_multi_blocks__next_block : (int,byte) farray
+
+logic keccak__padding__pad101_multi_blocks__first_block : (int,byte) farray
+
+logic result26 : map
+
+logic result27 : (int,byte) farray
+
+logic result28 : bit_absorption_number
+
+logic result29 : byte_absorption_number
+
+logic result30 : rate_number
+
+logic result31 : states
+
+logic ctx__split_fields36 : map
+
+logic ctx__split_fields37 : (int,byte) farray
+
+logic ctx__split_fields38 : bit_absorption_number
+
+logic ctx__split_fields39 : byte_absorption_number
+
+logic ctx__split_fields40 : rate_number
+
+logic ctx__split_fields41 : states
+
+logic result32 : (int,byte) farray
+
+logic next_block2 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1 : map
+
+logic result33 : map
+
+logic result34 : (int,byte) farray
+
+logic result35 : bit_absorption_number
+
+logic result36 : byte_absorption_number
+
+logic result37 : rate_number
+
+logic result38 : states
+
+logic ctx__split_fields42 : map
+
+logic ctx__split_fields43 : (int,byte) farray
+
+logic ctx__split_fields44 : bit_absorption_number
+
+logic ctx__split_fields45 : byte_absorption_number
+
+logic ctx__split_fields46 : rate_number
+
+logic ctx__split_fields47 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a1 : map
+
+logic result39 : map
+
+logic result40 : (int,byte) farray
+
+logic result41 : bit_absorption_number
+
+logic result42 : byte_absorption_number
+
+logic result43 : rate_number
+
+logic result44 : states
+
+logic ctx__split_fields48 : map
+
+logic ctx__split_fields49 : (int,byte) farray
+
+logic ctx__split_fields50 : bit_absorption_number
+
+logic ctx__split_fields51 : byte_absorption_number
+
+logic ctx__split_fields52 : rate_number
+
+logic ctx__split_fields53 : states
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a2 : map
+
+logic result45 : map
+
+logic result46 : (int,byte) farray
+
+logic result47 : bit_absorption_number
+
+logic result48 : byte_absorption_number
+
+logic result49 : rate_number
+
+logic result50 : states
+
+logic ctx__split_fields54 : map
+
+logic ctx__split_fields55 : (int,byte) farray
+
+logic ctx__split_fields56 : bit_absorption_number
+
+logic ctx__split_fields57 : byte_absorption_number
+
+logic ctx__split_fields58 : rate_number
+
+logic ctx__split_fields59 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a2 : map
+
+logic result51 : map
+
+logic result52 : (int,byte) farray
+
+logic result53 : bit_absorption_number
+
+logic result54 : byte_absorption_number
+
+logic result55 : rate_number
+
+logic result56 : states
+
+logic ctx__split_fields60 : map
+
+logic ctx__split_fields61 : (int,byte) farray
+
+logic ctx__split_fields62 : bit_absorption_number
+
+logic ctx__split_fields63 : byte_absorption_number
+
+logic ctx__split_fields64 : rate_number
+
+logic ctx__split_fields65 : states
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data : (int,byte) farray
+
+logic result57 : map
+
+logic result58 : (int,byte) farray
+
+logic result59 : bit_absorption_number
+
+logic result60 : byte_absorption_number
+
+logic result61 : rate_number
+
+logic result62 : states
+
+logic ctx__split_fields66 : map
+
+logic ctx__split_fields67 : (int,byte) farray
+
+logic ctx__split_fields68 : bit_absorption_number
+
+logic ctx__split_fields69 : byte_absorption_number
+
+logic ctx__split_fields70 : rate_number
+
+logic ctx__split_fields71 : states
+
+logic result63 : map
+
+logic result64 : (int,byte) farray
+
+logic result65 : bit_absorption_number
+
+logic result66 : byte_absorption_number
+
+logic result67 : rate_number
+
+logic result68 : states
+
+logic ctx__split_fields72 : map
+
+logic ctx__split_fields73 : (int,byte) farray
+
+logic ctx__split_fields74 : bit_absorption_number
+
+logic ctx__split_fields75 : byte_absorption_number
+
+logic ctx__split_fields76 : rate_number
+
+logic ctx__split_fields77 : states
+
+logic result69 : map
+
+logic result70 : (int,byte) farray
+
+logic result71 : bit_absorption_number
+
+logic result72 : byte_absorption_number
+
+logic result73 : rate_number
+
+logic result74 : states
+
+logic ctx__split_fields78 : map
+
+logic ctx__split_fields79 : (int,byte) farray
+
+logic ctx__split_fields80 : bit_absorption_number
+
+logic ctx__split_fields81 : byte_absorption_number
+
+logic ctx__split_fields82 : rate_number
+
+logic ctx__split_fields83 : states
+
+logic result75 : map
+
+logic result76 : (int,byte) farray
+
+logic result77 : bit_absorption_number
+
+logic result78 : byte_absorption_number
+
+logic result79 : rate_number
+
+logic result80 : states
+
+logic ctx__split_fields84 : map
+
+logic ctx__split_fields85 : (int,byte) farray
+
+logic ctx__split_fields86 : bit_absorption_number
+
+logic ctx__split_fields87 : byte_absorption_number
+
+logic ctx__split_fields88 : rate_number
+
+logic ctx__split_fields89 : states
+
+logic ctx__split_fields90 : map
+
+logic ctx__split_fields91 : (int,byte) farray
+
+logic ctx__split_fields92 : bit_absorption_number
+
+logic ctx__split_fields93 : byte_absorption_number
+
+logic ctx__split_fields94 : rate_number
+
+logic ctx__split_fields95 : states
+
+logic next_block3 : (int,byte) farray
+
+logic spilled1 : bool
+
+logic ctx__split_fields96 : map
+
+logic ctx__split_fields97 : (int,byte) farray
+
+logic ctx__split_fields98 : bit_absorption_number
+
+logic ctx__split_fields99 : byte_absorption_number
+
+logic ctx__split_fields100 : rate_number
+
+logic ctx__split_fields101 : states
+
+logic next_block4 : (int,byte) farray
+
+logic spilled2 : bool
+
+axiom H : (result = next_block)
+
+axiom H1 :
+  (next_block1 = keccak__keccak_1600__sponge__finalize__next_block__aggregate_def(of_int(0)))
+
+axiom H2 : ((o = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -2719,11 +3342,18 @@ goal WP_parameter_def :
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
   ctx__split_fields5 } })) and (in_range7(o) and
-  ((o = (to_rep6(ctx__split_fields4) * 8)) and (o <  1600)))) and
-  (((o <= to_rep5(ctx__split_fields2)) and (result1 = true)) or
-  ((not (o <= to_rep5(ctx__split_fields2))) and (result1 = false)))) ->
-  ((result1 = true) -> ((((to_rep6(ctx__split_fields4) - 1) = r114s) and
-  in_range1(r114s)) -> (((o1 = rate_of({ us_split_fields1 = {
+  ((o = (to_rep6(ctx__split_fields4) * 8)) and (o <  1600))))
+
+axiom H3 : (((o <= to_rep5(ctx__split_fields2)) -> (result1 = true)) and
+  ((not (o <= to_rep5(ctx__split_fields2))) -> (result1 = false)))
+
+axiom H4 : (result1 = true)
+
+axiom H5 : ((to_rep6(ctx__split_fields4) - 1) = r114s)
+
+axiom H6 : in_range1(r114s)
+
+axiom H7 : ((o4 = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -2731,6 +3361,10 @@ goal WP_parameter_def :
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 } })) and (in_range7(o1) and
-  ((o1 = (to_rep6(ctx__split_fields4) * 8)) and (o1 <  1600)))) ->
-  ((0 <= r114s) -> (0 <= 0))))))))
+  ctx__split_fields5 } })) and (in_range7(o4) and
+  ((o4 = (to_rep6(ctx__split_fields4) * 8)) and (o4 <  1600))))
+
+axiom H8 : (0 <= r114s)
+
+ (* File "keccak-sponge.ads", line 222, characters 0-0 *)
+goal WP_parameter_def : (0 <= 0)

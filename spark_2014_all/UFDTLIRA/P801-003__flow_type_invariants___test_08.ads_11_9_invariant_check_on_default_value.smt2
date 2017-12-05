@@ -132,6 +132,8 @@
 (define-fun default_initial_assumption2 ((temp___expr_152 us_rep2) (temp___skip_top_level_153 Bool)) Bool (= (to_rep (rec__test_08__t3__n (us_split_fields5 temp___expr_152))) 42))
 (define-fun type_invariant2 ((temp___154 us_rep2)) Bool (or (= (is_positive_ugly (to_rep (rec__test_08__t3__n (us_split_fields5 temp___154)))) true) (= (to_rep (rec__test_08__t3__n (us_split_fields5 temp___154))) (- 5))))
 (declare-const temp___158 integer)
+(declare-const temp___157 integer)
+(declare-const temp___156 integer)
 (assert (= (to_rep temp___158) 42))
 (assert (not (type_invariant (mk___rep (mk___split_fields temp___158)))))
 (check-sat)

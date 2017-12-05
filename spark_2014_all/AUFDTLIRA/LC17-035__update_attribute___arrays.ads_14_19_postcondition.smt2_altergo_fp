@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -297,40 +297,118 @@ axiom def_axiom1 :
   (forall temp___378:int.
   ((arrays__f1__arr__aggregate_def(temp___377)[temp___378]) = of_rep(temp___377))))
 
+logic x : int
+
+logic an_arr : (int,integer) farray
+
+logic arr : (int,integer) farray
+
+logic arrays__f1__result : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : (int,integer) farray
+
+logic o7 : int
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic result4 : (int,integer) farray
+
+logic arrays__f1__result1 : (int,integer) farray
+
+logic arrays__f1__result2 : (int,integer) farray
+
+logic arrays__f1__result3 : (int,integer) farray
+
+logic arr5 : (int,integer) farray
+
+logic arrays__f1__result4 : (int,integer) farray
+
+logic arr6 : (int,integer) farray
+
+logic arrays__f1__result5 : (int,integer) farray
+
+logic result5 : (int,integer) farray
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(init_val)
+
+axiom H2 : (init_val <  2147483647)
+
+axiom H3 : (result = arr)
+
+axiom H4 : (arr1 = arrays__f1__arr__aggregate_def(to_rep((an_arr[5]))))
+
+axiom H5 : (to_rep(o) = x)
+
+axiom H6 : (o1 = (arr1[1 <- o]))
+
+axiom H7 : (arr1 = result1)
+
+axiom H8 : (arr2 = o1)
+
+axiom H9 : (to_rep(o2) = x)
+
+axiom H10 : (o3 = (arr2[2 <- o2]))
+
+axiom H11 : (arr2 = result2)
+
+axiom H12 : (arr3 = o3)
+
+axiom H13 : ((o4 = (init_val + 1)) and in_range1((init_val + 1)))
+
+axiom H14 : (to_rep(o5) = o4)
+
+axiom H15 : (o6 = (arr3[3 <- o5]))
+
+axiom H16 : (arr3 = result3)
+
+axiom H17 : (arr4 = o6)
+
+axiom H18 : (arrays__f1__result1 = arrays__f1__result2)
+
+axiom H19 : (arrays__f1__result3 = arrays__f1__result1)
+
+axiom H20 : (result4 = arrays__f1__result)
+
+axiom H21 : (arrays__f1__result1 = arr4)
+
+axiom H22 : (arrays__f1__result4 = arrays__f1__result2)
+
+axiom H23 : (arr4 = arr5)
+
+axiom H24 : (arrays__f1__result5 = arrays__f1__result3)
+
+axiom H25 : (arr6 = arr4)
+
+axiom H26 : (result5 = arrays__f1__result4)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall an_arr:(int,integer) farray.
-  forall arr:(int,integer) farray.
-  forall arrays__f1__result:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:int. forall o5:integer.
-  forall o6:(int,integer) farray. forall result:(int,integer) farray.
-  forall arr1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall arr2:(int,integer) farray. forall result2:(int,integer) farray.
-  forall arr3:(int,integer) farray. forall result3:(int,integer) farray.
-  forall arr4:(int,integer) farray. forall result4:(int,integer) farray.
-  forall arrays__f1__result1:(int,integer) farray.
-  forall arrays__f1__result2:(int,integer) farray.
-  forall arrays__f1__result3:(int,integer) farray.
-  forall arr5:(int,integer) farray.
-  forall arrays__f1__result4:(int,integer) farray.
-  forall arr6:(int,integer) farray.
-  forall arrays__f1__result5:(int,integer) farray.
-  (forall result5:(int,integer) farray. ((in_range1(x) and
-  (in_range1(init_val) and ((init_val <  2147483647) and ((((({
-  map__content = result } = { map__content = arr }) and
-  (arr1 = arrays__f1__arr__aggregate_def(to_rep((an_arr[5]))))) and
-  ((((to_rep(o) = x) and (o1 = (arr1[1 <- o]))) and ((arr1 = result1) and
-  (arr2 = o1))) and ((((to_rep(o2) = x) and (o3 = (arr2[2 <- o2]))) and
-  ((arr2 = result2) and (arr3 = o3))) and ((((((o4 = (init_val + 1)) and
-  in_range1((init_val + 1))) and (to_rep(o5) = o4)) and
-  (o6 = (arr3[3 <- o5]))) and ((arr3 = result3) and (arr4 = o6))) and
-  (((arrays__f1__result1 = arrays__f1__result2) and
-  (arrays__f1__result3 = arrays__f1__result1)) and (({ map__content = result4
-  } = { map__content = arrays__f1__result }) and
-  (arrays__f1__result1 = arr4))))))) and ((({ map__content =
-  arrays__f1__result4 } = { map__content = arrays__f1__result2 }) and
-  (arr4 = arr5)) and ((arrays__f1__result5 = arrays__f1__result3) and
-  (arr6 = arr4)))) and (result5 = arrays__f1__result4))))) ->
-  (bool_eq4(arrays__f1__result4, 1, 8, temp___198(x, (init_val + 1),
-  to_rep((an_arr[5]))), 1, 8) = true))))
+goal WP_parameter_def : (bool_eq4(arrays__f1__result4, 1, 8, temp___198(x,
+  (init_val + 1), to_rep((an_arr[5]))), 1, 8) = true)

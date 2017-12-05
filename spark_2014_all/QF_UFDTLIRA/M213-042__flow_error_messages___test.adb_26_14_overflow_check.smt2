@@ -38,6 +38,7 @@
 (declare-const x Int)
 (declare-const n Int)
 (declare-const m Int)
+(declare-const o Int)
 (declare-const n1 Int)
 (declare-const result Int)
 (declare-const m1 Int)

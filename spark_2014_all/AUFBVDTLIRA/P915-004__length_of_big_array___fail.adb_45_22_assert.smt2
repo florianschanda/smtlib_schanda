@@ -137,6 +137,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_286 (_ BitVec 64)) (temp___is_init_283 Bool) (temp___skip_constant_284 Bool) (temp___do_toplevel_285 Bool)) Bool true)
 (assert (forall ((last2 (_ BitVec 64))) (! (=> (dynamic_invariant2 last2 true true true) (let ((result (create last2))) (and (and (= (last1 result) last2) (= (first1 result) ((_ int2bv 64) 0))) (dynamic_invariant result true false true)))) :pattern ((create last2)))))
 (assert (= c (create ((_ int2bv 64) 18446744073709551615))))
+(declare-const o Int)
 (assert (dynamic_invariant c true false true))
 (assert (= (create ((_ int2bv 64) 18446744073709551615)) c))
 (assert (and (= (to_rep (first (rt c))) ((_ int2bv 64) 0)) (= (to_rep (last (rt c))) ((_ int2bv 64) 18446744073709551615))))

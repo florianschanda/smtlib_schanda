@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -373,12 +373,30 @@ logic y1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : character
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(y1)),
+  to_rep1(last(y1)))
+
+axiom H2 : ((to_rep1(first(y1)) <= to_rep1(last(y1))) and
+  (to_rep1(last(y1)) <= to_rep1(last(y1))))
+
+axiom H3 : (o = to_rep1(last(y1)))
+
+axiom H4 : (o1 = (y[o]))
+
+axiom H5 : (o2 = to_rep(o1))
+
+axiom H6 : (to_rep(o3) = o2)
+
  (* File "test.adb", line 88, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:character. forall o2:int. forall o3:character.
-  (dynamic_property(1, 2147483647, to_rep1(x__first), to_rep1(x__last)) ->
-  (dynamic_property(1, 2147483647, to_rep1(first(y1)), to_rep1(last(y1))) ->
-  (((((((to_rep1(first(y1)) <= to_rep1(last(y1))) and
-  (to_rep1(last(y1)) <= to_rep1(last(y1)))) and (o = to_rep1(last(y1)))) and
-  (o1 = (y[o]))) and (o2 = to_rep(o1))) and (to_rep(o3) = o2)) ->
-  (to_rep1(x__first) <= to_rep1(x__first))))))
+goal WP_parameter_def : (to_rep1(x__first) <= to_rep1(x__first))

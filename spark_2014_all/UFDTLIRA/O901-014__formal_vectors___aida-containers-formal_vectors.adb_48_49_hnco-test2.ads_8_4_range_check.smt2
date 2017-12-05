@@ -154,6 +154,7 @@
 (assert (forall ((container1 us_rep)) (! (let ((result (length container1))) (and (<= result (capacity container1)) (dynamic_invariant1 result true false true))) :pattern ((length container1)))))
 (define-fun dynamic_invariant2 ((temp___expr_213 Int) (temp___is_init_210 Bool) (temp___skip_constant_211 Bool) (temp___do_toplevel_212 Bool)) Bool (=> (or (= temp___is_init_210 true) (<= 0 2147483647)) (in_range temp___expr_213)))
 (declare-const us Int)
+(declare-const us1 Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 container)))))))
 (assert (and (= us (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container)))) (in_range (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))))))
 (assert (not (in_range1 (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))))))

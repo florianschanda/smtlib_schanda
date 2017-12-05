@@ -123,9 +123,21 @@ axiom get_state__def_axiom :
   (in_range(sm_using_case_expression__state) ->
   (get_state(sm_using_case_expression__state) = sm_using_case_expression__state)))
 
+logic state : int
+
+logic state1 : int
+
+logic state2 : int
+
+logic state3 : int
+
+axiom H : ((0 <= 3) -> in_range(state))
+
+axiom H1 : ((get_state(state1) = 0) and in_range(state1))
+
+axiom H2 : (state1 = state2)
+
+axiom H3 : (state3 = state1)
+
  (* File "sm_using_case_expression.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:int. forall state1:int. forall state2:int. forall state3:int.
-  ((((0 <= 3) -> in_range(state)) and (((get_state(state1) = 0) and
-  in_range(state1)) and ((state1 = state2) and (state3 = state1)))) ->
-  (get_state(state2) = 0)))
+goal WP_parameter_def : (get_state(state2) = 0)

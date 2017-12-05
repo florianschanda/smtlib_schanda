@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -398,35 +398,224 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,bool) farray
+
+logic i : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___170 : int
+
+logic temp___169 : int
+
+logic temp___168 : (int,bool) farray
+
+logic temp___171 : int
+
+logic k : int
+
+logic k1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic k2 : int
+
+logic j1 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic j2 : int
+
+logic a1 : (int,bool) farray
+
+logic i1 : int
+
+logic j3 : int
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic j4 : int
+
+logic a2 : (int,bool) farray
+
+logic i3 : int
+
+logic j5 : int
+
+logic temp___1711 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic temp___1712 : int
+
+logic result5 : bool
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic j6 : int
+
+logic a3 : (int,bool) farray
+
+logic result9 : int
+
+logic i5 : int
+
+logic result10 : int
+
+logic j7 : int
+
+logic a4 : (int,bool) farray
+
+logic i6 : int
+
+logic j8 : int
+
+logic temp___1713 : int
+
+logic a5 : (int,bool) farray
+
+logic i7 : int
+
+logic j9 : int
+
+logic temp___1714 : int
+
+logic a6 : (int,bool) farray
+
+logic i8 : int
+
+logic j10 : int
+
+logic a7 : (int,bool) farray
+
+logic i9 : int
+
+logic j11 : int
+
+logic a8 : (int,bool) farray
+
+logic i10 : int
+
+logic j12 : int
+
+logic a9 : (int,bool) farray
+
+logic i11 : int
+
+logic j13 : int
+
+logic a10 : (int,bool) farray
+
+logic i12 : int
+
+logic j14 : int
+
+logic a11 : (int,bool) farray
+
+logic i13 : int
+
+logic j15 : int
+
+logic a12 : (int,bool) farray
+
+logic i14 : int
+
+logic j16 : int
+
+logic a13 : (int,bool) farray
+
+logic i15 : int
+
+logic j17 : int
+
+logic result11 : bool
+
+logic result12 : bool
+
+axiom H : dynamic_property(0, 1000000, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : ((0 <= 1000000) -> in_range2(i))
+
+axiom H2 : ((0 <= 1000000) -> in_range2(j))
+
+axiom H3 : (not (to_rep(a__last) <  to_rep(a__first)))
+
+axiom H4 : ((o = to_rep(a__first)) and in_range2(to_rep(a__first)))
+
+axiom H5 : (result = i)
+
+axiom H6 : (i2 = o)
+
+axiom H7 : ((o1 = to_rep(a__last)) and in_range2(to_rep(a__last)))
+
+axiom H8 : (result1 = j)
+
+axiom H9 : (j4 = o1)
+
+axiom H10 : (i2 <= j4)
+
+axiom H11 : (((((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) and
+  ((to_rep(a__first) <= j5) and (j5 <= to_rep(a__last)))) and
+  (forall k3:int. (((to_rep(a__first) <= k3) and (k3 <= (i3 - 1))) ->
+  (not ((a2[k3]) = true))))) and
+  (forall k3:int. ((((j5 + 1) <= k3) and (k3 <= to_rep(a__last))) ->
+  ((a2[k3]) = true))))
+
+axiom H12 : ((((0 <= 1000000) -> in_range2(i3)) and ((0 <= 1000000) ->
+  in_range2(j5))) and (i3 <= j5))
+
+axiom H13 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (((to_rep(a__first) <= j5) -> (((j5 <= to_rep(a__last)) ->
+  (result3 = true)) and ((not (j5 <= to_rep(a__last))) ->
+  (result3 = false)))) and ((not (to_rep(a__first) <= j5)) ->
+  (result3 = false))))
+
+axiom H14 : ((not ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) ->
+  (result3 = false))
+
+axiom H15 : ((result3 = true) -> ((result2 = true) <->
+  (forall k3:int. (((to_rep(a__first) <= k3) and (k3 <= (i3 - 1))) ->
+  (not ((a2[k3]) = true))))))
+
+axiom H16 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H17 : (result2 = true)
+
+axiom H18 : ((j5 + 1) <= k)
+
+axiom H19 : (k <= to_rep(a__last))
+
  (* File "p1.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall j:int. forall o:int. forall o1:int. forall k:int.
-  forall result:int. forall i1:int. forall result1:int. forall j1:int.
-  forall a:(int,bool) farray. forall i2:int. forall j2:int.
-  forall result2:bool. forall result3:bool. (dynamic_property(0, 1000000,
-  to_rep(a__first), to_rep(a__last)) -> (((0 <= 1000000) -> in_range2(i)) ->
-  (((0 <= 1000000) -> in_range2(j)) ->
-  ((not (to_rep(a__last) <  to_rep(a__first))) ->
-  ((((o = to_rep(a__first)) and in_range2(to_rep(a__first))) and (({
-  int__content = result } = { int__content = i }) and (i1 = o))) ->
-  ((((o1 = to_rep(a__last)) and in_range2(to_rep(a__last))) and (({
-  int__content = result1 } = { int__content = j }) and (j1 = o1))) ->
-  ((i1 <= j1) -> ((((((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last))) and ((to_rep(a__first) <= j2) and
-  (j2 <= to_rep(a__last)))) and
-  (forall k1:int. (((to_rep(a__first) <= k1) and (k1 <= (i2 - 1))) ->
-  (not ((a[k1]) = true))))) and
-  (forall k1:int. ((((j2 + 1) <= k1) and (k1 <= to_rep(a__last))) ->
-  ((a[k1]) = true)))) -> (((((0 <= 1000000) -> in_range2(i2)) and
-  ((0 <= 1000000) -> in_range2(j2))) and (i2 <= j2)) ->
-  ((((((to_rep(a__first) <= i2) and (i2 <= to_rep(a__last))) and
-  (((to_rep(a__first) <= j2) and (((j2 <= to_rep(a__last)) and
-  (result3 = true)) or ((not (j2 <= to_rep(a__last))) and
-  (result3 = false)))) or ((not (to_rep(a__first) <= j2)) and
-  (result3 = false)))) or ((not ((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last)))) and (result3 = false))) and
-  (((result3 = true) and ((result2 = true) <->
-  (forall k1:int. (((to_rep(a__first) <= k1) and (k1 <= (i2 - 1))) ->
-  (not ((a[k1]) = true)))))) or ((not (result3 = true)) and
-  (result2 = false)))) -> ((result2 = true) -> ((((j2 + 1) <= k) and
-  (k <= to_rep(a__last))) -> (to_rep(a__first) <= k))))))))))))))
+goal WP_parameter_def : (to_rep(a__first) <= k)

@@ -349,9 +349,9 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  ((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -359,10 +359,10 @@ axiom bool_eq_def3 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq3(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true))) -> (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
-  (test__fruit_rec__record_t__single_item__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item)))) and
+  5) = true)))) -> (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__test__fruit_rec__record_t__d) = to_rep(((b).us_split_discrs1).rec__test__fruit_rec__record_t__d)) and
+  ((((test__fruit_rec__record_t__single_item__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__single_item) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__single_item))) and
   (test__fruit_rec__record_t__a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__fruit_rec__record_t__a) = to_rep1(((b).us_split_fields1).rec__test__fruit_rec__record_t__a)))) and
   (test__fruit_rec__record_t__b__pred(a) ->
@@ -370,7 +370,7 @@ axiom bool_eq_def3 :
   (test__fruit_rec__record_t__arr__pred(a) ->
   (bool_eq3(((a).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1, 5,
   ((b).us_split_fields1).rec__test__fruit_rec__record_t__arr, 1,
-  5) = true)))) -> (bool_eq4(a, b) = false))))
+  5) = true))))) -> (bool_eq4(a, b) = false))))
 
 logic value__size1 : int
 
@@ -513,9 +513,25 @@ logic rec2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic rec2__split_fields : item_t
+
+logic rec2__split_fields1 : item_t
+
+logic rec2__split_fields2 : item_t
+
+logic rec2__split_fields3 : (int,item_t) farray
+
+logic rec2__split_discrs : natural
+
+logic us : int
+
+axiom H : (to_rep(rec1) = to_rep(rec2__split_discrs))
+
+axiom H1 : ((us = to_rep(rec1)) and in_range(to_rep(rec1)))
+
+axiom H2 : (not (to_rep(rec1) = 1))
+
+axiom H3 : (to_rep(rec1) = 2)
+
  (* File "test.adb", line 46, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rec2__split_discrs:natural. forall us:int.
-  ((to_rep(rec1) = to_rep(rec2__split_discrs)) -> (((us = to_rep(rec1)) and
-  in_range(to_rep(rec1))) -> ((not (to_rep(rec1) = 1)) ->
-  ((to_rep(rec1) = 2) -> (to_rep(rec2__split_discrs) = 2))))))
+goal WP_parameter_def : (to_rep(rec2__split_discrs) = 2)

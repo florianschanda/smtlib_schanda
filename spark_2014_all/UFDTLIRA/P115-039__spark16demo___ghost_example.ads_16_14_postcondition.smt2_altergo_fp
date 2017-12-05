@@ -121,9 +121,25 @@ axiom cur_state__def_axiom :
   (in_range(ghost_example__state) ->
   (cur_state(ghost_example__state) = ghost_example__state)))
 
+logic state : int
+
+logic result : int
+
+logic state1 : int
+
+logic state2 : int
+
+logic state3 : int
+
+axiom H : in_range(state)
+
+axiom H1 : (result = state)
+
+axiom H2 : (state1 = 0)
+
+axiom H3 : (state1 = state2)
+
+axiom H4 : (state3 = state1)
+
  (* File "ghost_example.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:int. forall result:int. forall state1:int. forall state2:int.
-  forall state3:int. ((in_range(state) and (((result = state) and
-  (state1 = 0)) and ((state1 = state2) and (state3 = state1)))) ->
-  (cur_state(state2) = 0)))
+goal WP_parameter_def : (cur_state(state2) = 0)

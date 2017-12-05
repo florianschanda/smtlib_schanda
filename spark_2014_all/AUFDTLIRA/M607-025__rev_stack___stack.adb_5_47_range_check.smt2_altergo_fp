@@ -169,7 +169,7 @@ function r2__ref___projection(a: r2__ref) : r2 = (a).r2__content
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -615,5 +615,45 @@ type t5b__ref = { t5b__content : us_t1
 
 function t5b__ref___projection(a: t5b__ref) : us_t1 = (a).t5b__content
 
+logic stack__model__to__result : (int,integer) farray
+
+logic stack__model__to__result1 : t
+
+logic o : (int,integer) farray
+
+logic temp___211 : (int,integer) farray
+
+logic temp___2111 : t1
+
+logic o1 : (int,integer) farray
+
+logic o2 : t
+
+logic result : (int,integer) farray
+
+logic result1 : t
+
+logic stack__model__to__result2 : (int,integer) farray
+
+logic stack__model__to__result3 : t
+
+logic stack__model__to__result4 : (int,integer) farray
+
+logic stack__model__to__result5 : t
+
+logic stack__model__to__result6 : (int,integer) farray
+
+logic stack__model__to__result7 : t
+
+logic stack__model__to__result8 : (int,integer) farray
+
+logic stack__model__to__result9 : t
+
+logic stack__model__to__result10 : (int,integer) farray
+
+logic stack__model__to__result11 : t
+
+axiom H : (1 <= to_rep(s))
+
  (* File "stack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ((1 <= to_rep(s)) -> (1 <= 1))
+goal WP_parameter_def : (1 <= 1)

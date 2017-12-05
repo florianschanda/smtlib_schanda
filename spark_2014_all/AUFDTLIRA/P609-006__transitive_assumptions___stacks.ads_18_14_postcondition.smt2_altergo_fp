@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -299,18 +299,65 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic top : int
+
+logic data : (int,integer) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : (int,integer) farray
+
+logic data1 : (int,integer) farray
+
+logic top2 : int
+
+logic data2 : (int,integer) farray
+
+logic top3 : int
+
+logic data3 : (int,integer) farray
+
+axiom H : in_range1(top)
+
+axiom H1 : in_range(e)
+
+axiom H2 : (not (is_full(top, data) = true))
+
+axiom H3 : ((o = (top + 1)) and in_range1((top + 1)))
+
+axiom H4 : (result = top)
+
+axiom H5 : (top1 = o)
+
+axiom H6 : (to_rep(o1) = e)
+
+axiom H7 : (o2 = (data[top1 <- o1]))
+
+axiom H8 : (result1 = data)
+
+axiom H9 : (data1 = o2)
+
+axiom H10 : (data1 = data2)
+
+axiom H11 : (top1 = top2)
+
+axiom H12 : (data3 = data1)
+
+axiom H13 : (top3 = top1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall data:(int,integer) farray. forall o:int.
-  forall o1:integer. forall o2:(int,integer) farray. forall result:int.
-  forall top1:int. forall result1:(int,integer) farray.
-  forall data1:(int,integer) farray. forall top2:int.
-  forall data2:(int,integer) farray. forall top3:int.
-  forall data3:(int,integer) farray. ((in_range1(top) and (in_range(e) and
-  ((not (is_full(top, data) = true)) and (((((o = (top + 1)) and
-  in_range1((top + 1))) and (({ int__content = result } = { int__content =
-  top }) and (top1 = o))) and (((to_rep(o1) = e) and
-  (o2 = (data[top1 <- o1]))) and (({ map__content = result1 } = {
-  map__content = data }) and (data1 = o2)))) and (((data1 = data2) and
-  (top1 = top2)) and ((data3 = data1) and (top3 = top1))))))) -> (size(top2,
-  data2) = (size(top, data) + 1))))
+goal WP_parameter_def : (size(top2, data2) = (size(top, data) + 1))

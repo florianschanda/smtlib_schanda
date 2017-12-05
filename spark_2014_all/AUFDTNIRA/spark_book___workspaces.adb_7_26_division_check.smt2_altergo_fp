@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -727,34 +727,85 @@ axiom def_axiom :
   (((workspaces__generate_workspace__workspace__aggregate_def(temp___150,
   temp___151, temp___152)).elts2[temp___153]) = of_rep(temp___150)))))
 
- (* File "workspaces.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall workspace:(int,natural) farray.
-  forall temp___155:(int,natural) farray. forall temp___1551:t2.
-  forall workspaces__generate_workspace__workspace__assume:(int,natural) farray.
-  forall workspaces__generate_workspace__workspace__assume1:t1.
-  forall result:(int,natural) farray. forall workspace1:(int,natural) farray.
-  (in_range3(size) ->
-  (((((to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(0,
-  1, size)).rt2)) = 1) and
-  ((to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(0,
-  1, size)).rt2)) = size) and ({ elts2 = temp___155; rt2 = temp___1551
-  } = workspaces__generate_workspace__workspace__aggregate_def(0, 1,
-  size)))) and
-  ((((to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551))) and
-  (((1 <= size) and
-  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = ((size - 1) + 1))) or
-  ((not (1 <= size)) and
-  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551)))) and
-  (((1 <= size) and (0 = ((size - 1) + 1))) or (not (1 <= size))))) and
-  ((temp___155 = workspaces__generate_workspace__workspace__assume) and
-  (mk1(to_rep1(first4(temp___1551)),
-  to_rep1(last4(temp___1551))) = workspaces__generate_workspace__workspace__assume1)))) and
-  (((result = workspace) and
-  (workspace1 = workspaces__generate_workspace__workspace__assume)) and
-  ((to_rep1(workspace__first) = to_rep1(first2(workspaces__generate_workspace__workspace__assume1))) and
-  (to_rep1(workspace__last) = to_rep1(last2(workspaces__generate_workspace__workspace__assume1)))))) ->
-  ((dynamic_property2(1, size, to_rep1(workspace__first),
+logic workspace : (int,natural) farray
+
+logic j : int
+
+logic temp___155 : (int,natural) farray
+
+logic temp___1551 : t2
+
+logic workspaces__generate_workspace__workspace__assume : (int,natural) farray
+
+logic workspaces__generate_workspace__workspace__assume1 : t1
+
+logic o : natural
+
+logic o1 : int
+
+logic o2 : (int,natural) farray
+
+logic o3 : int
+
+logic temp___157 : int
+
+logic o4 : natural
+
+logic result : (int,natural) farray
+
+logic workspace1 : (int,natural) farray
+
+logic result1 : int
+
+logic j1 : int
+
+logic workspace2 : (int,natural) farray
+
+logic j2 : int
+
+logic result2 : (int,natural) farray
+
+logic workspace3 : (int,natural) farray
+
+axiom H : in_range3(size)
+
+axiom H1 :
+  (to_rep1(first4((workspaces__generate_workspace__workspace__aggregate_def(0,
+  1, size)).rt2)) = 1)
+
+axiom H2 :
+  (to_rep1(last4((workspaces__generate_workspace__workspace__aggregate_def(0,
+  1, size)).rt2)) = size)
+
+axiom H3 : ({ elts2 = temp___155; rt2 = temp___1551
+  } = workspaces__generate_workspace__workspace__aggregate_def(0, 1, size))
+
+axiom H4 : (((to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551))) ->
+  (((1 <= size) ->
+  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = ((size - 1) + 1))) and
+  ((not (1 <= size)) ->
+  (((to_rep1(last4(temp___1551)) - to_rep1(first4(temp___1551))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___1551)) <= to_rep1(last4(temp___1551)))) ->
+  ((1 <= size) -> (0 = ((size - 1) + 1)))))
+
+axiom H5 : (temp___155 = workspaces__generate_workspace__workspace__assume)
+
+axiom H6 : (mk1(to_rep1(first4(temp___1551)),
+  to_rep1(last4(temp___1551))) = workspaces__generate_workspace__workspace__assume1)
+
+axiom H7 : (result = workspace)
+
+axiom H8 : (workspace1 = workspaces__generate_workspace__workspace__assume)
+
+axiom H9 :
+  (to_rep1(workspace__first) = to_rep1(first2(workspaces__generate_workspace__workspace__assume1)))
+
+axiom H10 :
+  (to_rep1(workspace__last) = to_rep1(last2(workspaces__generate_workspace__workspace__assume1)))
+
+axiom H11 : (dynamic_property2(1, size, to_rep1(workspace__first),
   to_rep1(workspace__last)) and ((to_rep1(workspace__first) = 1) and
-  (to_rep1(workspace__last) = size))) -> (not (2 = 0))))))
+  (to_rep1(workspace__last) = size)))
+
+ (* File "workspaces.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (not (2 = 0))

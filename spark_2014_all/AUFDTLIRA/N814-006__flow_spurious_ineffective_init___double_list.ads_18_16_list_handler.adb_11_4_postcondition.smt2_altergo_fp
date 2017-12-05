@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -557,9 +557,113 @@ axiom def_axiom1 :
   (forall temp___220:int.
   ((temp___217(temp___219)[temp___220]) = of_rep1(temp___219))))
 
+logic memory : (int,us_rep) farray
+
+logic count : int
+
+logic free_list : (int,index_type) farray
+
+logic free : int
+
+logic index : int
+
+logic o : index_type
+
+logic o1 : index_type
+
+logic o2 : element_type
+
+logic o3 : element_type
+
+logic o4 : index_type
+
+logic o5 : index_type
+
+logic o6 : element_type
+
+logic o7 : index_type
+
+logic o8 : index_type
+
+logic o9 : (int,us_rep) farray
+
+logic temp___221 : (int,index_type) farray
+
+logic o10 : index_type
+
+logic o11 : (int,index_type) farray
+
+logic result : (int,us_rep) farray
+
+logic memory1 : (int,us_rep) farray
+
+logic result1 : int
+
+logic count1 : int
+
+logic result2 : (int,index_type) farray
+
+logic free_list1 : (int,index_type) farray
+
+logic result3 : int
+
+logic free1 : int
+
+logic result4 : int
+
+logic index1 : int
+
+logic free_list2 : (int,index_type) farray
+
+logic index2 : int
+
+logic result5 : (int,index_type) farray
+
+logic free_list3 : (int,index_type) farray
+
+logic free_list4 : (int,index_type) farray
+
+logic index3 : int
+
+logic free_list5 : (int,index_type) farray
+
+logic index4 : int
+
+logic free_list6 : (int,index_type) farray
+
+logic index5 : int
+
+logic free_list7 : (int,index_type) farray
+
+logic index6 : int
+
+logic memory2 : (int,us_rep) farray
+
+logic count2 : int
+
+logic free_list8 : (int,index_type) farray
+
+logic free2 : int
+
+logic index7 : int
+
+logic memory3 : (int,us_rep) farray
+
+logic count3 : int
+
+logic free_list9 : (int,index_type) farray
+
+logic free3 : int
+
+logic index8 : int
+
+axiom H : ((0 <= 128) -> in_range2(count))
+
+axiom H1 : ((0 <= 128) -> in_range2(free))
+
+axiom H2 : (count2 = 0)
+
+axiom H3 : (in_range2(count2) and in_range2(free2))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall free:int. forall count1:int. forall free1:int.
-  ((((0 <= 128) -> in_range2(count)) and (((0 <= 128) -> in_range2(free)) and
-  ((count1 = 0) and (in_range2(count1) and in_range2(free1))))) ->
-  (size(count1) = 0)))
+goal WP_parameter_def : (size(count2) = 0)

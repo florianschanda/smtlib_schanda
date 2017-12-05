@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1020,7 +1020,21 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom lmask_8__def_axiom : (lmask_8 = of_int(255))
 
+logic res : t1
+
+logic result : t1
+
+logic res1 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (result = res)
+
+axiom H4 : (res1 = of_int1(255))
+
  (* File "bitwise.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t1. forall result:t1. forall res1:t1. (((result = res) and
-  (res1 = of_int1(255))) -> (bw_and1(x, res1) = bw_and1(x, of_int1(255)))))
+goal WP_parameter_def : (bw_and1(x, res1) = bw_and1(x, of_int1(255)))

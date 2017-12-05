@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -448,20 +448,854 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic target : int
+
+logic has_failed : bool
+
+logic index : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___1770 : int
+
+logic o4 : int
+
+logic o5 : character
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___1771 : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic temp___1772 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic temp___1773 : int
+
+logic o21 : int
+
+logic o22 : character
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic temp___1774 : int
+
+logic o29 : int
+
+logic o30 : character
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic temp___1775 : int
+
+logic o38 : int
+
+logic o39 : character
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic temp___1776 : int
+
+logic o43 : int
+
+logic o44 : character
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic temp___1777 : int
+
+logic o51 : int
+
+logic o52 : character
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic temp___1778 : int
+
+logic o59 : int
+
+logic o60 : character
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic temp___1779 : int
+
+logic o68 : int
+
+logic o69 : character
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic temp___1780 : int
+
+logic o73 : int
+
+logic o74 : character
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic o80 : int
+
+logic temp___1781 : int
+
+logic o81 : int
+
+logic o82 : character
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic temp___1782 : int
+
+logic o89 : int
+
+logic o90 : character
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : int
+
+logic o94 : int
+
+logic o95 : int
+
+logic o96 : int
+
+logic temp___1783 : int
+
+logic o97 : int
+
+logic o98 : character
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : int
+
+logic temp___1784 : int
+
+logic o106 : int
+
+logic o107 : character
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : int
+
+logic temp___1785 : int
+
+logic o111 : int
+
+logic o112 : character
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic o117 : int
+
+logic o118 : int
+
+logic temp___1786 : int
+
+logic o119 : int
+
+logic o120 : character
+
+logic o121 : int
+
+logic o122 : int
+
+logic o123 : int
+
+logic o124 : int
+
+logic o125 : int
+
+logic o126 : int
+
+logic temp___1787 : int
+
+logic o127 : int
+
+logic o128 : character
+
+logic o129 : int
+
+logic o130 : int
+
+logic o131 : int
+
+logic o132 : int
+
+logic o133 : int
+
+logic o134 : int
+
+logic temp___1788 : int
+
+logic o135 : int
+
+logic o136 : character
+
+logic o137 : int
+
+logic o138 : int
+
+logic o139 : int
+
+logic o140 : int
+
+logic o141 : int
+
+logic o142 : int
+
+logic temp___1789 : int
+
+logic o143 : int
+
+logic o144 : character
+
+logic o145 : int
+
+logic o146 : int
+
+logic o147 : int
+
+logic o148 : int
+
+logic o149 : int
+
+logic o150 : int
+
+logic o151 : int
+
+logic temp___1790 : int
+
+logic o152 : int
+
+logic o153 : character
+
+logic o154 : int
+
+logic o155 : int
+
+logic o156 : int
+
+logic temp___1791 : int
+
+logic o157 : int
+
+logic o158 : character
+
+logic o159 : int
+
+logic o160 : int
+
+logic o161 : int
+
+logic o162 : int
+
+logic o163 : int
+
+logic o164 : int
+
+logic temp___1792 : int
+
+logic o165 : int
+
+logic o166 : character
+
+logic o167 : int
+
+logic o168 : int
+
+logic o169 : int
+
+logic o170 : int
+
+logic o171 : int
+
+logic o172 : int
+
+logic temp___1793 : int
+
+logic o173 : int
+
+logic o174 : character
+
+logic o175 : int
+
+logic o176 : int
+
+logic o177 : int
+
+logic o178 : int
+
+logic o179 : int
+
+logic o180 : int
+
+logic temp___1794 : int
+
+logic o181 : int
+
+logic o182 : character
+
+logic o183 : int
+
+logic o184 : int
+
+logic o185 : int
+
+logic o186 : int
+
+logic o187 : int
+
+logic o188 : int
+
+logic temp___1795 : int
+
+logic o189 : int
+
+logic o190 : character
+
+logic o191 : int
+
+logic o192 : int
+
+logic o193 : int
+
+logic o194 : int
+
+logic o195 : int
+
+logic o196 : int
+
+logic temp___1796 : int
+
+logic o197 : int
+
+logic o198 : character
+
+logic o199 : int
+
+logic o200 : int
+
+logic o201 : int
+
+logic o202 : int
+
+logic o203 : int
+
+logic o204 : int
+
+logic o205 : int
+
+logic temp___1797 : int
+
+logic o206 : int
+
+logic o207 : character
+
+logic o208 : int
+
+logic o209 : int
+
+logic o210 : int
+
+logic temp___1798 : int
+
+logic o211 : int
+
+logic o212 : character
+
+logic o213 : int
+
+logic o214 : int
+
+logic o215 : int
+
+logic o216 : int
+
+logic o217 : int
+
+logic o218 : int
+
+logic temp___1799 : int
+
+logic o219 : int
+
+logic o220 : character
+
+logic o221 : int
+
+logic o222 : int
+
+logic o223 : int
+
+logic o224 : int
+
+logic o225 : int
+
+logic o226 : int
+
+logic temp___1800 : int
+
+logic o227 : int
+
+logic o228 : character
+
+logic o229 : int
+
+logic o230 : int
+
+logic o231 : int
+
+logic o232 : int
+
+logic o233 : int
+
+logic o234 : int
+
+logic temp___1801 : int
+
+logic o235 : int
+
+logic o236 : character
+
+logic o237 : int
+
+logic o238 : int
+
+logic o239 : int
+
+logic o240 : int
+
+logic o241 : int
+
+logic o242 : int
+
+logic temp___1802 : int
+
+logic o243 : int
+
+logic o244 : character
+
+logic o245 : int
+
+logic o246 : int
+
+logic o247 : int
+
+logic o248 : int
+
+logic o249 : int
+
+logic o250 : int
+
+logic temp___1803 : int
+
+logic o251 : int
+
+logic o252 : character
+
+logic o253 : int
+
+logic o254 : int
+
+logic o255 : int
+
+logic o256 : int
+
+logic o257 : int
+
+logic o258 : int
+
+logic temp___1804 : int
+
+logic o259 : int
+
+logic o260 : character
+
+logic o261 : int
+
+logic o262 : int
+
+logic o263 : int
+
+logic o264 : int
+
+logic o265 : int
+
+logic o266 : int
+
+logic o267 : int
+
+logic temp___1805 : int
+
+logic o268 : int
+
+logic o269 : character
+
+logic o270 : int
+
+logic o271 : int
+
+logic o272 : int
+
+logic temp___1806 : int
+
+logic o273 : int
+
+logic o274 : character
+
+logic o275 : int
+
+logic o276 : int
+
+logic o277 : int
+
+logic o278 : int
+
+logic o279 : int
+
+logic o280 : int
+
+logic temp___1807 : int
+
+logic o281 : int
+
+logic o282 : character
+
+logic o283 : int
+
+logic o284 : int
+
+logic o285 : int
+
+logic o286 : int
+
+logic o287 : int
+
+logic o288 : int
+
+logic temp___1808 : int
+
+logic o289 : int
+
+logic o290 : character
+
+logic o291 : int
+
+logic o292 : int
+
+logic o293 : int
+
+logic o294 : int
+
+logic o295 : int
+
+logic o296 : int
+
+logic temp___1809 : int
+
+logic o297 : int
+
+logic o298 : character
+
+logic o299 : int
+
+logic o300 : int
+
+logic o301 : int
+
+logic o302 : int
+
+logic o303 : int
+
+logic o304 : int
+
+logic temp___1810 : int
+
+logic o305 : int
+
+logic o306 : character
+
+logic o307 : int
+
+logic o308 : int
+
+logic o309 : int
+
+logic o310 : int
+
+logic o311 : int
+
+logic o312 : int
+
+logic temp___1811 : int
+
+logic o313 : int
+
+logic o314 : character
+
+logic o315 : int
+
+logic o316 : int
+
+logic o317 : int
+
+logic o318 : int
+
+logic o319 : int
+
+logic o320 : int
+
+logic temp___1812 : int
+
+logic o321 : int
+
+logic o322 : character
+
+logic o323 : int
+
+logic o324 : int
+
+logic o325 : int
+
+logic o326 : int
+
+logic o327 : int
+
+logic o328 : int
+
+logic temp___1813 : int
+
+logic o329 : int
+
+logic o330 : character
+
+logic o331 : int
+
+logic o332 : int
+
+logic o333 : int
+
+logic o334 : int
+
+logic o335 : int
+
+logic o336 : int
+
+logic o337 : int
+
+logic target1 : int
+
+logic has_failed1 : bool
+
+logic target2 : int
+
+logic has_failed2 : bool
+
+logic target3 : int
+
+logic has_failed3 : bool
+
+logic target4 : int
+
+logic has_failed4 : bool
+
+logic target5 : int
+
+logic has_failed5 : bool
+
+logic target6 : int
+
+logic has_failed6 : bool
+
+logic target7 : int
+
+logic has_failed7 : bool
+
+logic target8 : int
+
+logic has_failed8 : bool
+
+logic target9 : int
+
+logic has_failed9 : bool
+
+logic result : int
+
+logic target10 : int
+
+logic result1 : bool
+
+logic has_failed10 : bool
+
+logic target11 : int
+
+logic has_failed11 : bool
+
+logic target12 : int
+
+logic has_failed12 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (((0 <  length({ elts = source; rt = source1 })) and (length({
+  elts = source; rt = source1 }) <  10)) and
+  (forall index1:int. (((to_rep1(first(source1)) <= index1) and
+  (index1 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index1]))) = true))))
+
+axiom H3 : (not (length({ elts = source; rt = source1 }) = 1))
+
+axiom H4 : (not (length({ elts = source; rt = source1 }) = 2))
+
+axiom H5 : (not (length({ elts = source; rt = source1 }) = 3))
+
+axiom H6 : (not (length({ elts = source; rt = source1 }) = 4))
+
+axiom H7 : (not (length({ elts = source; rt = source1 }) = 5))
+
+axiom H8 : (not (length({ elts = source; rt = source1 }) = 6))
+
+axiom H9 : (not (length({ elts = source; rt = source1 }) = 7))
+
+axiom H10 : (length({ elts = source; rt = source1 }) = 8)
+
  (* File "aida-conversion.adb", line 1093, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> ((((0 <  length({
-  elts = source; rt = source1 })) and (length({ elts = source; rt = source1
-  }) <  10)) and
-  (forall index:int. (((to_rep1(first(source1)) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index]))) = true)))) -> ((not (length({ elts =
-  source; rt = source1 }) = 1)) -> ((not (length({ elts = source; rt =
-  source1 }) = 2)) -> ((not (length({ elts = source; rt = source1 }) = 3)) ->
-  ((not (length({ elts = source; rt = source1 }) = 4)) -> ((not (length({
-  elts = source; rt = source1 }) = 5)) -> ((not (length({ elts = source; rt =
-  source1 }) = 6)) -> ((not (length({ elts = source; rt = source1 }) = 7)) ->
-  ((length({ elts = source; rt = source1 }) = 8) -> (length({ elts = source;
-  rt = source1 }) = 8)))))))))))))
+goal WP_parameter_def : (length({ elts = source; rt = source1 }) = 8)

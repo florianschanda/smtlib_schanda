@@ -94,6 +94,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (and (= o (length new_item)) (and (in_range1 o) (<= o (capacity new_item)))))
 (assert (and (= o1 (capacity (mk___rep container__split_discrs (mk___split_fields container__split_fields)))) (and (in_range1 o1) (= o1 (ite (= (of_int 0) true) (to_rep (rec__indefinite_unbounded__vect__vector__capacity container__split_discrs)) 2147483647)))))
 (assert (= o2 (- o1 o)))

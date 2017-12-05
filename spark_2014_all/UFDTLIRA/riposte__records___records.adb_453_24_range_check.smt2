@@ -121,6 +121,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_186 Int) (temp___is_init_183 Bool) (temp___skip_constant_184 Bool) (temp___do_toplevel_185 Bool)) Bool (=> (or (= temp___is_init_183 true) (<= 0 2)) (in_range1 temp___expr_186)))
 (declare-const r__split_fields unsigned_byte)
 (declare-const r__split_fields1 unsigned_byte)
+(declare-const o Int)
 (declare-const result unsigned_byte)
 (declare-const result1 unsigned_byte)
 (declare-const r__split_fields2 unsigned_byte)

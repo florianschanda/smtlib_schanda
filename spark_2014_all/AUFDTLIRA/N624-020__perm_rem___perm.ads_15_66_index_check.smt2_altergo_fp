@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -719,110 +719,289 @@ logic result____last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "perm.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,natural) farray.
-  forall perm__remove__result:(int,natural) farray.
-  forall perm__remove__result1:t. forall o:(int,natural) farray.
-  forall temp___546:(int,natural) farray. forall temp___5461:t3.
-  forall o1:(int,natural) farray. forall temp___545:(int,natural) farray.
-  forall temp___5451:t2. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int.
-  forall temp___547:(int,natural) farray. forall temp___5471:t.
-  forall perm__remove__result__assume:(int,natural) farray.
-  forall perm__remove__result__assume1:t1. forall k:int. forall o8:int.
-  forall o9:bool. forall o10:int. forall result:(int,natural) farray.
-  forall result__1:(int,natural) farray. forall result1:(int,natural) farray.
-  forall result2:t. forall perm__remove__result2:(int,natural) farray.
-  forall perm__remove__result3:t.
-  forall perm__remove__result4:(int,natural) farray.
-  forall perm__remove__result5:t.
-  forall perm__remove__result6:(int,natural) farray.
-  forall perm__remove__result7:t. forall result__2:(int,natural) farray.
-  forall perm__remove__result8:(int,natural) farray.
-  forall perm__remove__result9:t. forall result__3:(int,natural) farray.
-  forall perm__remove__result10:(int,natural) farray.
-  forall perm__remove__result11:t. forall result3:bool. forall result4:bool.
-  forall result5:bool. forall result6:bool. forall result7:bool.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range3(i) -> (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1))))) ->
-  (((((((((((i + 1) <= to_rep1(last(a1))) ->
+logic result__ : (int,natural) farray
+
+logic perm__remove__result : (int,natural) farray
+
+logic perm__remove__result1 : t
+
+logic us : int
+
+logic o : (int,natural) farray
+
+logic temp___546 : (int,natural) farray
+
+logic temp___5461 : t3
+
+logic o1 : (int,natural) farray
+
+logic temp___545 : (int,natural) farray
+
+logic temp___5451 : t2
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___547 : (int,natural) farray
+
+logic temp___5471 : t
+
+logic perm__remove__result__assume : (int,natural) farray
+
+logic perm__remove__result__assume1 : t1
+
+logic k : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic temp___550 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : int
+
+logic k1 : int
+
+logic temp___551 : int
+
+logic o13 : int
+
+logic o14 : natural
+
+logic o15 : int
+
+logic k2 : int
+
+logic o16 : int
+
+logic o17 : natural
+
+logic o18 : int
+
+logic o19 : int
+
+logic result : (int,natural) farray
+
+logic result__1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic result2 : t
+
+logic perm__remove__result2 : (int,natural) farray
+
+logic perm__remove__result3 : t
+
+logic perm__remove__result4 : (int,natural) farray
+
+logic perm__remove__result5 : t
+
+logic perm__remove__result6 : (int,natural) farray
+
+logic perm__remove__result7 : t
+
+logic result__2 : (int,natural) farray
+
+logic perm__remove__result8 : (int,natural) farray
+
+logic perm__remove__result9 : t
+
+logic result__3 : (int,natural) farray
+
+logic perm__remove__result10 : (int,natural) farray
+
+logic perm__remove__result11 : t
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and
+  ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))))
+
+axiom H3 : (((i + 1) <= to_rep1(last(a1))) ->
   (((to_rep1(first(a1)) <= (i + 1)) and ((i + 1) <= to_rep1(last(a1)))) and
   ((to_rep1(first(a1)) <= to_rep1(last(a1))) and
-  (to_rep1(last(a1)) <= to_rep1(last(a1)))))) and (o = a)) and
-  ((o = temp___546) and (mk3((i + 1), to_rep1(last(a1))) = temp___5461))) and
-  (((((1 <= (i - 1)) -> (((to_rep1(first(a1)) <= 1) and
+  (to_rep1(last(a1)) <= to_rep1(last(a1))))))
+
+axiom H4 : (o = a)
+
+axiom H5 : (o = temp___546)
+
+axiom H6 : (mk3((i + 1), to_rep1(last(a1))) = temp___5461)
+
+axiom H7 : ((1 <= (i - 1)) -> (((to_rep1(first(a1)) <= 1) and
   (1 <= to_rep1(last(a1)))) and ((to_rep1(first(a1)) <= (i - 1)) and
-  ((i - 1) <= to_rep1(last(a1)))))) and (o1 = a)) and ((o1 = temp___545) and
-  (mk2(1, (i - 1)) = temp___5451))) and (((length2({ elts2 = temp___545;
-  rt2 = temp___5451 }) = 0) and ((temp___546 = temp___547) and
+  ((i - 1) <= to_rep1(last(a1))))))
+
+axiom H8 : (o1 = a)
+
+axiom H9 : (o1 = temp___545)
+
+axiom H10 : (mk2(1, (i - 1)) = temp___5451)
+
+axiom H11 : ((length2({ elts2 = temp___545; rt2 = temp___5451 }) = 0) ->
+  (temp___546 = temp___547))
+
+axiom H12 : ((length2({ elts2 = temp___545; rt2 = temp___5451 }) = 0) ->
   (mk(to_rep1(first6(temp___5461)),
-  to_rep1(last6(temp___5461))) = temp___5471))) or ((not (length2({ elts2 =
-  temp___545; rt2 = temp___5451 }) = 0)) and
-  ((((((((to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461))) and
-  (o2 = ((to_rep1(last6(temp___5461)) - to_rep1(first6(temp___5461))) + 1))) or
-  ((not (to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461)))) and
-  (o2 = 0))) and
-  ((((to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451))) and
-  (o3 = ((to_rep1(last4(temp___5451)) - to_rep1(first4(temp___5451))) + 1))) or
-  ((not (to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451)))) and
-  (o3 = 0))) and (o4 = (o3 + o2)))) and
-  (o5 = (to_rep1(first4(temp___5451)) + o4))) and (o6 = (o5 - 1))) and
-  ((o7 = o6) and in_range3(o6))) and ((concat(temp___545,
-  to_rep1(first4(temp___5451)), to_rep1(last4(temp___5451)), temp___546,
-  to_rep1(first6(temp___5461)),
-  to_rep1(last6(temp___5461))) = temp___547) and
-  (mk(to_rep1(first4(temp___5451)), o7) = temp___5471))))))) and
-  ((((to_rep1(first(temp___5471)) <= to_rep1(last(temp___5471))) and
-  (((1 <= (to_rep1(last(a1)) - 1)) and
-  (((to_rep1(last(temp___5471)) - to_rep1(first(temp___5471))) + 1) = (((to_rep1(last(a1)) - 1) - 1) + 1))) or
-  ((not (1 <= (to_rep1(last(a1)) - 1))) and
-  (((to_rep1(last(temp___5471)) - to_rep1(first(temp___5471))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___5471)) <= to_rep1(last(temp___5471)))) and
-  (((1 <= (to_rep1(last(a1)) - 1)) and
-  (0 = (((to_rep1(last(a1)) - 1) - 1) + 1))) or
-  (not (1 <= (to_rep1(last(a1)) - 1)))))) and ((slide(temp___547,
-  to_rep1(first(temp___5471)), 1) = perm__remove__result__assume) and (mk1(1,
-  (to_rep1(last(a1)) - 1)) = perm__remove__result__assume1)))) and ((({
-  map__content = result } = { map__content = result__ }) and
-  (result__1 = perm__remove__result__assume)) and
-  ((to_rep1(result____first) = to_rep1(first2(perm__remove__result__assume1))) and
-  (to_rep1(result____last) = to_rep1(last2(perm__remove__result__assume1)))))) and
-  ((dynamic_property2(1, (to_rep1(last(a1)) - 1), to_rep1(result____first),
-  to_rep1(result____last)) and ((to_rep1(result____first) = 1) and
-  (to_rep1(result____last) = (to_rep1(last(a1)) - 1)))) and
-  ((((perm__remove__result4 = perm__remove__result2) and
-  (perm__remove__result5 = perm__remove__result3)) and ({ elts =
-  perm__remove__result6; rt = perm__remove__result7 } = { elts =
-  perm__remove__result2; rt = perm__remove__result3 })) and (({
-  nat_array__content = { elts = result1; rt = result2 } } = {
-  nat_array__content = { elts = perm__remove__result; rt =
-  perm__remove__result1 } }) and ((result__1 = perm__remove__result2) and
-  (mk(to_rep1(result____first),
-  to_rep1(result____last)) = perm__remove__result3)))))) and ((({
-  nat_array__content = { elts = perm__remove__result8; rt =
-  perm__remove__result9 } } = { nat_array__content = { elts =
-  perm__remove__result4; rt = perm__remove__result5 } }) and
-  (result__1 = result__2)) and (({ elts = perm__remove__result10; rt =
-  perm__remove__result11 } = { elts = perm__remove__result6; rt =
-  perm__remove__result7 }) and (result__3 = result__1)))) ->
-  (((result3 = invariant__({ elts = perm__remove__result8; rt =
+  to_rep1(last6(temp___5461))) = temp___5471))
+
+axiom H13 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) ->
+  ((to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461))) ->
+  (o2 = ((to_rep1(last6(temp___5461)) - to_rep1(first6(temp___5461))) + 1))))
+
+axiom H14 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) ->
+  ((not (to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461)))) ->
+  (o2 = 0)))
+
+axiom H15 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) ->
+  ((to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451))) ->
+  (o3 = ((to_rep1(last4(temp___5451)) - to_rep1(first4(temp___5451))) + 1))))
+
+axiom H16 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) ->
+  ((not (to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451)))) ->
+  (o3 = 0)))
+
+axiom H17 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> (o4 = (o3 + o2)))
+
+axiom H18 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> (o5 = (to_rep1(first4(temp___5451)) + o4)))
+
+axiom H19 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> (o6 = (o5 - 1)))
+
+axiom H20 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> ((o7 = o6) and in_range3(o6)))
+
+axiom H21 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> (concat(temp___545, to_rep1(first4(temp___5451)),
+  to_rep1(last4(temp___5451)), temp___546, to_rep1(first6(temp___5461)),
+  to_rep1(last6(temp___5461))) = temp___547))
+
+axiom H22 : ((not (length2({ elts2 = temp___545; rt2 = temp___5451
+  }) = 0)) -> (mk(to_rep1(first4(temp___5451)), o7) = temp___5471))
+
+axiom H23 : (((to_rep1(first(temp___5471)) <= to_rep1(last(temp___5471))) ->
+  (((1 <= (to_rep1(last(a1)) - 1)) ->
+  (((to_rep1(last(temp___5471)) - to_rep1(first(temp___5471))) + 1) = (((to_rep1(last(a1)) - 1) - 1) + 1))) and
+  ((not (1 <= (to_rep1(last(a1)) - 1))) ->
+  (((to_rep1(last(temp___5471)) - to_rep1(first(temp___5471))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___5471)) <= to_rep1(last(temp___5471)))) ->
+  ((1 <= (to_rep1(last(a1)) - 1)) ->
+  (0 = (((to_rep1(last(a1)) - 1) - 1) + 1)))))
+
+axiom H24 : (slide(temp___547, to_rep1(first(temp___5471)),
+  1) = perm__remove__result__assume)
+
+axiom H25 : (mk1(1, (to_rep1(last(a1)) - 1)) = perm__remove__result__assume1)
+
+axiom H26 : (result = result__)
+
+axiom H27 : (result__1 = perm__remove__result__assume)
+
+axiom H28 :
+  (to_rep1(result____first) = to_rep1(first2(perm__remove__result__assume1)))
+
+axiom H29 :
+  (to_rep1(result____last) = to_rep1(last2(perm__remove__result__assume1)))
+
+axiom H30 : (dynamic_property2(1, (to_rep1(last(a1)) - 1),
+  to_rep1(result____first), to_rep1(result____last)) and
+  ((to_rep1(result____first) = 1) and
+  (to_rep1(result____last) = (to_rep1(last(a1)) - 1))))
+
+axiom H31 : (perm__remove__result4 = perm__remove__result2)
+
+axiom H32 : (perm__remove__result5 = perm__remove__result3)
+
+axiom H33 : ((perm__remove__result6 = perm__remove__result2) and
+  (perm__remove__result7 = perm__remove__result3))
+
+axiom H34 : ((result1 = perm__remove__result) and
+  (result2 = perm__remove__result1))
+
+axiom H35 : (result__1 = perm__remove__result2)
+
+axiom H36 : (mk(to_rep1(result____first),
+  to_rep1(result____last)) = perm__remove__result3)
+
+axiom H37 : ((perm__remove__result8 = perm__remove__result4) and
+  (perm__remove__result9 = perm__remove__result5))
+
+axiom H38 : (result__1 = result__2)
+
+axiom H39 : ((perm__remove__result10 = perm__remove__result6) and
+  (perm__remove__result11 = perm__remove__result7))
+
+axiom H40 : (result__3 = result__1)
+
+axiom H41 : ((result3 = invariant__({ elts = perm__remove__result8; rt =
   perm__remove__result9 })) and ((result3 = true) <->
   ((to_rep1(first(perm__remove__result9)) = 1) and
-  (0 <= to_rep1(last(perm__remove__result9)))))) -> ((result3 = true) ->
-  ((((o10 = (to_rep1(last(a1)) - 1)) and
-  in_range1((to_rep1(last(a1)) - 1))) and
-  (((to_rep1(last(perm__remove__result9)) = o10) and (result4 = true)) or
-  ((not (to_rep1(last(perm__remove__result9)) = o10)) and
-  (result4 = false)))) -> ((result4 = true) -> (((result5 = true) <->
-  (forall k1:int. (((1 <= k1) and (k1 <= (i - 1))) ->
-  (to_rep((a[k1])) = to_rep((perm__remove__result8[k1])))))) ->
-  ((result5 = true) -> (((result6 = true) <->
-  (forall k1:int. ((((i + 1) <= k1) and (k1 <= to_rep1(last(a1)))) ->
-  (to_rep((a[k1])) = to_rep((perm__remove__result8[(k1 - 1)])))))) ->
-  ((result6 = true) -> (((((o8 = (to_rep1(last(a1)) - 1)) and
-  in_range1((to_rep1(last(a1)) - 1))) and (((k <= o8) and (o9 = true)) or
-  ((not (k <= o8)) and (o9 = false)))) and (((i <= k) and (result7 = o9)) or
-  ((not (i <= k)) and (result7 = false)))) -> ((result7 = true) ->
-  (to_rep1(first(perm__remove__result9)) <= k))))))))))))))))
+  (0 <= to_rep1(last(perm__remove__result9))))))
+
+axiom H42 : (result3 = true)
+
+axiom H43 : ((o19 = (to_rep1(last(a1)) - 1)) and
+  in_range1((to_rep1(last(a1)) - 1)))
+
+axiom H44 : (((to_rep1(last(perm__remove__result9)) = o19) ->
+  (result4 = true)) and
+  ((not (to_rep1(last(perm__remove__result9)) = o19)) -> (result4 = false)))
+
+axiom H45 : (result4 = true)
+
+axiom H46 : ((result5 = true) <->
+  (forall k3:int. (((1 <= k3) and (k3 <= (i - 1))) ->
+  (to_rep((a[k3])) = to_rep((perm__remove__result8[k3]))))))
+
+axiom H47 : (result5 = true)
+
+axiom H48 : ((result6 = true) <->
+  (forall k3:int. ((((i + 1) <= k3) and (k3 <= to_rep1(last(a1)))) ->
+  (to_rep((a[k3])) = to_rep((perm__remove__result8[(k3 - 1)]))))))
+
+axiom H49 : (result6 = true)
+
+axiom H50 : ((o8 = (to_rep1(last(a1)) - 1)) and
+  in_range1((to_rep1(last(a1)) - 1)))
+
+axiom H51 : (((k <= o8) -> (o9 = true)) and ((not (k <= o8)) ->
+  (o9 = false)))
+
+axiom H52 : (((i <= k) -> (result7 = o9)) and ((not (i <= k)) ->
+  (result7 = false)))
+
+axiom H53 : (result7 = true)
+
+ (* File "perm.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(perm__remove__result9)) <= k)

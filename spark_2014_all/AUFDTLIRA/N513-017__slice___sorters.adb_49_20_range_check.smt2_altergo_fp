@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -380,38 +380,186 @@ function t17b__ref___projection(a: t17b__ref) : integer = (a).t17b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index:int. forall o:int. forall temp___194:int.
-  forall o1:int. forall o2:integer. forall o3:int. forall o4:integer.
-  forall o5:int. forall o6:int. forall result:int. forall min1:int.
-  forall result1:int. forall index1:int. forall min2:int. forall index2:int.
-  forall result2:bool. (dynamic_property(1, 2147483647,
-  to_rep(first(unsorted1)), to_rep(last(unsorted1))) ->
-  (((to_rep(first(unsorted1)) <= to_rep(last(unsorted1))) and
-  (to_rep(last(unsorted1)) <  2147483647)) -> (((1 <= 2147483647) ->
-  in_range2(min)) -> ((((o = to_rep(first(unsorted1))) and
-  in_range2(to_rep(first(unsorted1)))) and (({ int__content = result } = {
-  int__content = min }) and (min1 = o))) ->
-  (((temp___194 = (to_rep(first(unsorted1)) + 1)) and
-  in_range1((to_rep(first(unsorted1)) + 1))) -> ((({ int__content = result1
-  } = { int__content = index }) and (index1 = temp___194)) ->
-  (((temp___194 <= index1) and (index1 <= to_rep(last(unsorted1)))) ->
-  ((((to_rep(first(unsorted1)) <= min2) and
+logic min : int
+
+logic index : int
+
+logic sorters__index_of_minimum__result : int
+
+logic o : int
+
+logic us : int
+
+logic temp___194 : int
+
+logic temp___193 : int
+
+logic temp___192 : int
+
+logic j : int
+
+logic us1 : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic j1 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic min2 : int
+
+logic index2 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic min3 : int
+
+logic result5 : int
+
+logic index3 : int
+
+logic min4 : int
+
+logic index4 : int
+
+logic min5 : int
+
+logic index5 : int
+
+logic min6 : int
+
+logic index6 : int
+
+logic min7 : int
+
+logic index7 : int
+
+logic min8 : int
+
+logic index8 : int
+
+logic min9 : int
+
+logic index9 : int
+
+logic result6 : int
+
+logic sorters__index_of_minimum__result1 : int
+
+logic sorters__index_of_minimum__result2 : int
+
+logic sorters__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index10 : int
+
+logic sorters__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index11 : int
+
+logic sorters__index_of_minimum__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(unsorted1)),
+  to_rep(last(unsorted1)))
+
+axiom H1 : ((to_rep(first(unsorted1)) <= to_rep(last(unsorted1))) and
+  (to_rep(last(unsorted1)) <  2147483647))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H3 : ((o = to_rep(first(unsorted1))) and
+  in_range2(to_rep(first(unsorted1))))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = o)
+
+axiom H6 : ((temp___194 = (to_rep(first(unsorted1)) + 1)) and
+  in_range1((to_rep(first(unsorted1)) + 1)))
+
+axiom H7 : (result1 = index)
+
+axiom H8 : (index1 = temp___194)
+
+axiom H9 : (temp___194 <= index1)
+
+axiom H10 : (index1 <= to_rep(last(unsorted1)))
+
+axiom H11 : (((to_rep(first(unsorted1)) <= min2) and
   (min2 <= to_rep(last(unsorted1)))) and
-  (forall j:int. (((to_rep(first(unsorted1)) <= j) and
-  (j <= (index2 - 1))) ->
-  (to_rep((unsorted[min2])) <= to_rep((unsorted[j])))))) ->
-  ((((((to_rep(first(unsorted1)) + 1) <= to_rep(last(unsorted1))) ->
+  (forall j2:int. (((to_rep(first(unsorted1)) <= j2) and
+  (j2 <= (index2 - 1))) ->
+  (to_rep((unsorted[min2])) <= to_rep((unsorted[j2]))))))
+
+axiom H12 : (((((to_rep(first(unsorted1)) + 1) <= to_rep(last(unsorted1))) ->
   dynamic_property1((to_rep(first(unsorted1)) + 1), to_rep(last(unsorted1)),
   index2)) and ((1 <= 2147483647) -> in_range2(min2))) and
   (((to_rep(first(unsorted1)) + 1) <= index2) and
-  (index2 <= to_rep(last(unsorted1))))) ->
-  (((((((to_rep(first(unsorted1)) <= min2) and
-  (min2 <= to_rep(last(unsorted1)))) and (o3 = min2)) and
-  (o4 = (unsorted[o3]))) and (o5 = to_rep(o4))) and
-  ((((((to_rep(first(unsorted1)) <= index2) and
-  (index2 <= to_rep(last(unsorted1)))) and (o1 = index2)) and
-  (o2 = (unsorted[o1]))) and (o6 = to_rep(o2))) and (((o6 <  o5) and
-  (result2 = true)) or ((not (o6 <  o5)) and (result2 = false))))) ->
-  ((result2 = true) -> in_range2(index2)))))))))))))
+  (index2 <= to_rep(last(unsorted1)))))
+
+axiom H13 : ((to_rep(first(unsorted1)) <= min2) and
+  (min2 <= to_rep(last(unsorted1))))
+
+axiom H14 : (o8 = min2)
+
+axiom H15 : (o9 = (unsorted[o8]))
+
+axiom H16 : (o10 = to_rep(o9))
+
+axiom H17 : ((to_rep(first(unsorted1)) <= index2) and
+  (index2 <= to_rep(last(unsorted1))))
+
+axiom H18 : (o6 = index2)
+
+axiom H19 : (o7 = (unsorted[o6]))
+
+axiom H20 : (o11 = to_rep(o7))
+
+axiom H21 : (((o11 <  o10) -> (result3 = true)) and ((not (o11 <  o10)) ->
+  (result3 = false)))
+
+axiom H22 : (result3 = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range2(index2)

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -871,21 +871,40 @@ axiom def_axiom :
   (forall temp___309:int. (((temp___304(temp___306, temp___307,
   temp___308)).elts2[temp___309]) = temp___306)))))
 
+logic d__split_fields : (int,bool) farray
+
+logic d__split_fields1 : t
+
+logic temp___311 : (int,bool) farray
+
+logic temp___3111 : t2
+
+logic temp___312 : (int,bool) farray
+
+logic temp___3121 : t1
+
+axiom H : (dynamic_property1(0, to_rep(d__split_discrs),
+  to_rep1(first(d__split_fields1)), to_rep1(last(d__split_fields1))) and
+  ((to_rep1(first(d__split_fields1)) = 0) and
+  (to_rep1(last(d__split_fields1)) = to_rep(d__split_discrs))))
+
+axiom H1 : (to_rep(d__split_discrs) = r6b)
+
+axiom H2 : in_range1(r6b)
+
+axiom H3 : (to_rep1(first4((temp___304(of_int(0), 0, r6b)).rt2)) = 0)
+
+axiom H4 : (to_rep1(last4((temp___304(of_int(0), 0, r6b)).rt2)) = r6b)
+
+axiom H5 : ({ elts2 = temp___311; rt2 = temp___3111 } = temp___304(of_int(0),
+  0, r6b))
+
  (* File "main.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall d__split_fields:t. forall temp___311:(int,bool) farray.
-  forall temp___3111:t2. ((dynamic_property1(0, to_rep(d__split_discrs),
-  to_rep1(first(d__split_fields)), to_rep1(last(d__split_fields))) and
-  ((to_rep1(first(d__split_fields)) = 0) and
-  (to_rep1(last(d__split_fields)) = to_rep(d__split_discrs)))) ->
-  (((to_rep(d__split_discrs) = r6b) and in_range1(r6b)) ->
-  (((to_rep1(first4((temp___304(of_int(0), 0, r6b)).rt2)) = 0) and
-  ((to_rep1(last4((temp___304(of_int(0), 0, r6b)).rt2)) = r6b) and ({ elts2 =
-  temp___311; rt2 = temp___3111 } = temp___304(of_int(0), 0, r6b)))) ->
   (((to_rep1(first4(temp___3111)) <= to_rep1(last4(temp___3111))) ->
   (((0 <= r6b) ->
   (((to_rep1(last4(temp___3111)) - to_rep1(first4(temp___3111))) + 1) = ((r6b - 0) + 1))) and
   ((not (0 <= r6b)) ->
   (((to_rep1(last4(temp___3111)) - to_rep1(first4(temp___3111))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___3111)) <= to_rep1(last4(temp___3111)))) ->
-  ((0 <= r6b) -> (0 = ((r6b - 0) + 1)))))))))
+  ((0 <= r6b) -> (0 = ((r6b - 0) + 1)))))

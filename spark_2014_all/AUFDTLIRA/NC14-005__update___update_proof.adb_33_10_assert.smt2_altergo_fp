@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -575,28 +575,76 @@ axiom def_axiom9 :
   temp___253)[1]) = of_rep(temp___252)) and ((temp___250(temp___252,
   temp___253)[2]) = of_rep(temp___253))))
 
+logic a : (int,integer) farray
+
+logic b : (int,(int,integer) farray) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result2 : (int,(int,integer) farray) farray
+
+logic b1 : (int,(int,integer) farray) farray
+
+logic result3 : (int,(int,integer) farray) farray
+
+logic b2 : (int,(int,integer) farray) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = update_proof__B_1__a__aggregate_def(1, 2))
+
+axiom H2 : (a1 = o_a)
+
+axiom H3 : (to_rep(o) = 0)
+
+axiom H4 : (o1 = (a1[2 <- o]))
+
+axiom H5 : (a1 = result1)
+
+axiom H6 : (a2 = o1)
+
+axiom H7 : (to_rep((a2[1])) = to_rep((o_a[1])))
+
+axiom H8 : (to_rep((a2[2])) = 0)
+
+axiom H9 : (bool_eq4(a2, 1, 2, temp___191(o_a, 2, 0), 1, 2) = true)
+
+axiom H10 : (result2 = b)
+
+axiom H11 : (b1 = update_proof__B_2__b__aggregate_def(temp___245(11, 12),
+  temp___250(21, 22)))
+
+axiom H12 : (b1 = o_b)
+
+axiom H13 : (result3 = b1)
+
+axiom H14 : (b2 = (b1[2 <- temp___203(0)]))
+
+axiom H15 : (bool_eq4((b2[1]), 1, 2, (o_b[1]), 1, 2) = true)
+
+axiom H16 : (bool_eq4((b2[2]), 1, 2, temp___211(0), 1, 2) = true)
+
+axiom H17 : (bool_eq7(b2, 1, 2, temp___219(o_b, 2, temp___225(0)), 1,
+  2) = true)
+
+logic i : int
+
+axiom H18 : (1 <= i)
+
+axiom H19 : (i <= 2)
+
  (* File "update_proof.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall b:(int,(int,integer) farray) farray.
-  forall o:integer. forall o1:(int,integer) farray.
-  forall result:(int,integer) farray. forall a1:(int,integer) farray.
-  forall result1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall result2:(int,(int,integer) farray) farray.
-  forall b1:(int,(int,integer) farray) farray.
-  forall result3:(int,(int,integer) farray) farray.
-  forall b2:(int,(int,integer) farray) farray. (((({ map__content = result
-  } = { map__content = a }) and (a1 = update_proof__B_1__a__aggregate_def(1,
-  2))) and ((a1 = o_a) and ((((to_rep(o) = 0) and (o1 = (a1[2 <- o]))) and
-  ((a1 = result1) and (a2 = o1))) and
-  ((to_rep((a2[1])) = to_rep((o_a[1]))) and ((to_rep((a2[2])) = 0) and
-  (bool_eq4(a2, 1, 2, temp___191(o_a, 2, 0), 1, 2) = true)))))) ->
-  (((result2 = b) and
-  (b1 = update_proof__B_2__b__aggregate_def(temp___245(11, 12),
-  temp___250(21, 22)))) -> ((b1 = o_b) -> (((result3 = b1) and
-  (b2 = (b1[2 <- temp___203(0)]))) -> ((bool_eq4((b2[1]), 1, 2, (o_b[1]), 1,
-  2) = true) -> ((bool_eq4((b2[2]), 1, 2, temp___211(0), 1, 2) = true) ->
-  ((bool_eq7(b2, 1, 2, temp___219(o_b, 2, temp___225(0)), 1, 2) = true) ->
-  (forall i:int. (((1 <= i) and (i <= 2)) -> (((i = 2) -> (bool_eq4((b2[i]),
-  1, 2, temp___231(0), to_rep(first(mk(1, 2))), to_rep(last(mk(1,
-  2)))) = true)) and ((not (i = 2)) -> (bool_eq4((b2[i]), 1, 2, (o_b[i]),
-  to_rep(first(mk(1, 2))), to_rep(last(mk(1, 2)))) = true)))))))))))))
+goal WP_parameter_def : (((i = 2) -> (bool_eq4((b2[i]), 1, 2, temp___231(0),
+  to_rep(first(mk(1, 2))), to_rep(last(mk(1, 2)))) = true)) and
+  ((not (i = 2)) -> (bool_eq4((b2[i]), 1, 2, (o_b[i]), to_rep(first(mk(1,
+  2))), to_rep(last(mk(1, 2)))) = true)))

@@ -48,6 +48,7 @@
 (declare-const o5 Int)
 (declare-const o6 Int)
 (declare-const o7 Int)
+(declare-const o8 Int)
 (assert (in_range1 x))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 y)))
 (assert (and (<= 1 x) (<= x 2)))

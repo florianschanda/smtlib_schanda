@@ -261,17 +261,27 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom map__def_axiom : (map = main__map__aggregate_def(1, 0))
 
- (* File "main.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall main__with_spoon_feeding__result:int. forall result:int.
-  forall main__with_spoon_feeding__result1:int.
-  forall main__with_spoon_feeding__result2:int.
-  forall main__with_spoon_feeding__result3:int.
-  forall main__with_spoon_feeding__result4:int.
-  forall main__with_spoon_feeding__result5:int.
-  (forall result1:int. (((main__map__aggregate_def(1, 0) = map) and
-  (in_range1(id) and (((((to_rep((map[0])) = 1) and
-  (to_rep((map[1])) = 0)) and
+logic main__with_spoon_feeding__result : int
+
+logic result : int
+
+logic main__with_spoon_feeding__result1 : int
+
+logic main__with_spoon_feeding__result2 : int
+
+logic main__with_spoon_feeding__result3 : int
+
+logic main__with_spoon_feeding__result4 : int
+
+logic main__with_spoon_feeding__result5 : int
+
+logic result1 : int
+
+axiom H : (main__map__aggregate_def(1, 0) = map)
+
+axiom H1 : in_range1(id)
+
+axiom H2 : ((((to_rep((map[0])) = 1) and (to_rep((map[1])) = 0)) and
   ((forall id1:int. (((0 <= id1) and (id1 <= 1)) ->
    (not (to_rep((map[id1])) = id1)))) and
   (((main__with_spoon_feeding__result1 = main__with_spoon_feeding__result2) and
@@ -279,6 +289,9 @@ goal WP_parameter_def :
   ((result = main__with_spoon_feeding__result) and
   (main__with_spoon_feeding__result1 = to_rep((map[id]))))))) and
   ((main__with_spoon_feeding__result4 = main__with_spoon_feeding__result2) and
-  (main__with_spoon_feeding__result5 = main__with_spoon_feeding__result3))) and
-  (result1 = main__with_spoon_feeding__result4)))) ->
-  (not (id = main__with_spoon_feeding__result4)))))
+  (main__with_spoon_feeding__result5 = main__with_spoon_feeding__result3)))
+
+axiom H3 : (result1 = main__with_spoon_feeding__result4)
+
+ (* File "main.adb", line 8, characters 0-0 *)
+goal WP_parameter_def : (not (id = main__with_spoon_feeding__result4))

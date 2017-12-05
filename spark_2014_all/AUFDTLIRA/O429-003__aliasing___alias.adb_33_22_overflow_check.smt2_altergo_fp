@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -244,7 +244,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic j : (int,natural) farray
+
+logic x : (int,natural) farray
+
+logic o : int
+
  (* File "alias.adb", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:(int,natural) farray. forall x:(int,natural) farray.
-  in_range((to_rep((j[1])) + to_rep((x[1])))))
+goal WP_parameter_def : in_range((to_rep((j[1])) + to_rep((x[1]))))

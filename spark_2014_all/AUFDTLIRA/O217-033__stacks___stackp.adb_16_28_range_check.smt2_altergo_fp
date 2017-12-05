@@ -281,7 +281,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -2926,12 +2926,92 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,element) farray.
-  forall s__split_fields1:less_than_max. forall s__split_fields2:us_private.
-  (in_range1(e) -> ((not (is_full({ us_split_fields1 = {
+logic s__split_fields : (int,element) farray
+
+logic s__split_fields1 : less_than_max
+
+logic s__split_fields2 : us_private
+
+logic o : int
+
+logic o1 : less_than_max
+
+logic o2 : (int,element) farray
+
+logic o3 : less_than_max
+
+logic o4 : us_private
+
+logic temp___510 : (int,element) farray
+
+logic temp___5101 : less_than_max
+
+logic temp___5102 : us_private
+
+logic temp___5103 : int
+
+logic o5 : element
+
+logic o6 : int
+
+logic o7 : (int,element) farray
+
+logic o8 : (int,element) farray
+
+logic o9 : less_than_max
+
+logic o10 : us_private
+
+logic temp___514 : (int,element) farray
+
+logic temp___5141 : less_than_max
+
+logic temp___5142 : us_private
+
+logic temp___5143 : int
+
+logic result : (int,element) farray
+
+logic result1 : less_than_max
+
+logic result2 : us_private
+
+logic s__split_fields3 : (int,element) farray
+
+logic s__split_fields4 : less_than_max
+
+logic s__split_fields5 : us_private
+
+logic result3 : (int,element) farray
+
+logic result4 : less_than_max
+
+logic result5 : us_private
+
+logic s__split_fields6 : (int,element) farray
+
+logic s__split_fields7 : less_than_max
+
+logic s__split_fields8 : us_private
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+logic s__split_fields12 : (int,element) farray
+
+logic s__split_fields13 : less_than_max
+
+logic s__split_fields14 : us_private
+
+axiom H : in_range1(e)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag }) = true)) ->
-  in_range((to_rep(s__split_fields1) + 1)))))
+  s__split_fields2 }; attr__tag = s__attr__tag }) = true))
+
+ (* File "stackp.ads", line 22, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(s__split_fields1) + 1))

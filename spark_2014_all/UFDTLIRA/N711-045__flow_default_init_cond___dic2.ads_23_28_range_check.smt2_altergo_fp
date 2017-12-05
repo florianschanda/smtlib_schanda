@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type u
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -112,6 +112,10 @@ axiom bar__post_axiom : true
 
 axiom bar__def_axiom :
   (forall par:int [bar(par)]. ((bar(par) = true) <-> (par = 1)))
+
+logic us : int
+
+logic temp___158 : int
 
  (* File "dic2.ads", line 19, characters 0-0 *)
 goal WP_parameter_def : in_range(1)

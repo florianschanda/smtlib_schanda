@@ -94,6 +94,8 @@
 (define-fun dynamic_invariant2 ((temp___expr_142 Int) (temp___is_init_139 Bool) (temp___skip_constant_140 Bool) (temp___do_toplevel_141 Bool)) Bool (=> (or (= temp___is_init_139 true) (<= 1 100)) (in_range2 temp___expr_142)))
 (declare-const v (Array Int value))
 (declare-const j Int)
+(declare-const o value)
+(declare-const temp___192 (Array Int value))
 (declare-const result Int)
 (declare-const j1 Int)
 (declare-const v1 (Array Int value))

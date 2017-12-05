@@ -275,6 +275,8 @@
 (declare-const o12 us_rep2)
 (declare-const o13 us_split_fields6)
 (declare-const temp___7186 us_rep3)
+(declare-const o14 Int)
+(declare-const o15 enum1t)
 (declare-const result int__ref)
 (declare-const temp1 Int)
 (declare-const result1 us_split_fields__ref3)

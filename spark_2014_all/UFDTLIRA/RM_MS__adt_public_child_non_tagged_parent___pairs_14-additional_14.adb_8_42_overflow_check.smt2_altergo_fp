@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -216,18 +216,52 @@ function pair__ref___projection(a: pair__ref) : us_rep = (a).pair__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic value__split_fields : integer
+
+logic value__split_fields1 : integer
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic temp___141 : integer
+
+logic temp___1411 : integer
+
+logic o4 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic value__split_fields2 : integer
+
+logic value__split_fields3 : integer
+
+axiom H : ((o = (to_rep(value__split_fields) + 1)) and
+  in_range((to_rep(value__split_fields) + 1)))
+
+axiom H1 : (to_rep(o1) = o)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (value__split_fields1 = o3)
+
+axiom H4 : (temp___141 = o2)
+
+axiom H5 : (temp___1411 = o3)
+
+axiom H6 : (result = value__split_fields)
+
+axiom H7 : (result1 = value__split_fields1)
+
+axiom H8 : (temp___141 = value__split_fields2)
+
+axiom H9 : (temp___1411 = value__split_fields3)
+
  (* File "pairs_14-additional_14.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value__split_fields:integer. forall value__split_fields1:integer.
-  forall o:int. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall temp___141:integer. forall temp___1411:integer.
-  forall result:integer. forall result1:integer.
-  forall value__split_fields2:integer. forall value__split_fields3:integer.
-  (((((((o = (to_rep(value__split_fields) + 1)) and
-  in_range((to_rep(value__split_fields) + 1))) and (to_rep(o1) = o)) and
-  ((o1 = o2) and (value__split_fields1 = o3))) and ((temp___141 = o2) and
-  (temp___1411 = o3))) and (((result = value__split_fields) and
-  (result1 = value__split_fields1)) and
-  ((temp___141 = value__split_fields2) and
-  (temp___1411 = value__split_fields3)))) ->
-  in_range((to_rep(value__split_fields3) + 1))))
+goal WP_parameter_def : in_range((to_rep(value__split_fields3) + 1))

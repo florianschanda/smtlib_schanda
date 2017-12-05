@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -225,18 +225,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1023,53 +1023,176 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic s__split_fields : length_type
+
+logic s__split_fields1 : entry_id
+
+logic s__split_fields2 : (t,integer) farray
+
+logic tmp : int
+
+logic o : integer
+
+logic o1 : (t,integer) farray
+
+logic o2 : length_type
+
+logic o3 : entry_id
+
+logic o4 : (t,integer) farray
+
+logic temp___190 : length_type
+
+logic temp___1901 : entry_id
+
+logic temp___1902 : (t,integer) farray
+
+logic o5 : integer
+
+logic o6 : (t,integer) farray
+
+logic o7 : length_type
+
+logic o8 : entry_id
+
+logic o9 : (t,integer) farray
+
+logic temp___193 : length_type
+
+logic temp___1931 : entry_id
+
+logic temp___1932 : (t,integer) farray
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : length_type
+
+logic result2 : entry_id
+
+logic result3 : (t,integer) farray
+
+logic s__split_fields3 : length_type
+
+logic s__split_fields4 : entry_id
+
+logic s__split_fields5 : (t,integer) farray
+
+logic result4 : length_type
+
+logic result5 : entry_id
+
+logic result6 : (t,integer) farray
+
+logic s__split_fields6 : length_type
+
+logic s__split_fields7 : entry_id
+
+logic s__split_fields8 : (t,integer) farray
+
+logic s__split_fields9 : length_type
+
+logic s__split_fields10 : entry_id
+
+logic s__split_fields11 : (t,integer) farray
+
+logic tmp2 : int
+
+logic s__split_fields12 : length_type
+
+logic s__split_fields13 : entry_id
+
+logic s__split_fields14 : (t,integer) farray
+
+logic tmp3 : int
+
+axiom H : in_range1(i1)
+
+axiom H1 : in_range1(i2)
+
+axiom H2 : (result = tmp)
+
+axiom H3 : (tmp1 = to_rep((s__split_fields2[i1])))
+
+axiom H4 : in_range(tmp1)
+
+axiom H5 : (to_rep(o) = to_rep((s__split_fields2[i2])))
+
+axiom H6 : (o1 = (s__split_fields2[i1 <- o]))
+
+axiom H7 : (s__split_fields = o2)
+
+axiom H8 : (s__split_fields1 = o3)
+
+axiom H9 : (o1 = o4)
+
+axiom H10 : (temp___190 = o2)
+
+axiom H11 : (temp___1901 = o3)
+
+axiom H12 : (temp___1902 = o4)
+
+axiom H13 : (result1 = s__split_fields)
+
+axiom H14 : (result2 = s__split_fields1)
+
+axiom H15 : (result3 = s__split_fields2)
+
+axiom H16 : (temp___190 = s__split_fields3)
+
+axiom H17 : (temp___1901 = s__split_fields4)
+
+axiom H18 : (temp___1902 = s__split_fields5)
+
+axiom H19 : (to_rep(o5) = tmp1)
+
+axiom H20 : (o6 = (s__split_fields5[i2 <- o5]))
+
+axiom H21 : (s__split_fields3 = o7)
+
+axiom H22 : (s__split_fields4 = o8)
+
+axiom H23 : (o6 = o9)
+
+axiom H24 : (temp___193 = o7)
+
+axiom H25 : (temp___1931 = o8)
+
+axiom H26 : (temp___1932 = o9)
+
+axiom H27 : (result4 = s__split_fields3)
+
+axiom H28 : (result5 = s__split_fields4)
+
+axiom H29 : (result6 = s__split_fields5)
+
+axiom H30 : (temp___193 = s__split_fields6)
+
+axiom H31 : (temp___1931 = s__split_fields7)
+
+axiom H32 : (temp___1932 = s__split_fields8)
+
+axiom H33 : (tmp2 = tmp1)
+
+axiom H34 : (s__split_fields9 = s__split_fields6)
+
+axiom H35 : (s__split_fields10 = s__split_fields7)
+
+axiom H36 : (s__split_fields11 = s__split_fields8)
+
+axiom H37 : (tmp3 = tmp1)
+
+axiom H38 : (s__split_fields12 = s__split_fields6)
+
+axiom H39 : (s__split_fields13 = s__split_fields7)
+
+axiom H40 : (s__split_fields14 = s__split_fields8)
+
  (* File "test.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:length_type. forall s__split_fields1:entry_id.
-  forall s__split_fields2:(t,integer) farray. forall tmp:int.
-  forall o:integer. forall o1:(t,integer) farray. forall o2:length_type.
-  forall o3:entry_id. forall o4:(t,integer) farray.
-  forall temp___190:length_type. forall temp___1901:entry_id.
-  forall temp___1902:(t,integer) farray. forall o5:integer.
-  forall o6:(t,integer) farray. forall o7:length_type. forall o8:entry_id.
-  forall o9:(t,integer) farray. forall temp___193:length_type.
-  forall temp___1931:entry_id. forall temp___1932:(t,integer) farray.
-  forall result:int. forall tmp1:int. forall result1:length_type.
-  forall result2:entry_id. forall result3:(t,integer) farray.
-  forall s__split_fields3:length_type. forall s__split_fields4:entry_id.
-  forall s__split_fields5:(t,integer) farray. forall result4:length_type.
-  forall result5:entry_id. forall result6:(t,integer) farray.
-  forall s__split_fields6:length_type. forall s__split_fields7:entry_id.
-  forall s__split_fields8:(t,integer) farray.
-  forall s__split_fields9:length_type. forall s__split_fields10:entry_id.
-  forall s__split_fields11:(t,integer) farray. forall tmp2:int.
-  forall s__split_fields12:length_type. forall s__split_fields13:entry_id.
-  forall s__split_fields14:(t,integer) farray. forall tmp3:int.
-  ((in_range1(i1) and (in_range1(i2) and ((((result = tmp) and
-  (tmp1 = to_rep((s__split_fields2[i1])))) and (in_range(tmp1) and
-  ((((((to_rep(o) = to_rep((s__split_fields2[i2]))) and
-  (o1 = (s__split_fields2[i1 <- o]))) and ((s__split_fields = o2) and
-  ((s__split_fields1 = o3) and (o1 = o4)))) and ((temp___190 = o2) and
-  ((temp___1901 = o3) and (temp___1902 = o4)))) and
-  (((result1 = s__split_fields) and ((result2 = s__split_fields1) and
-  (result3 = s__split_fields2))) and ((temp___190 = s__split_fields3) and
-  ((temp___1901 = s__split_fields4) and
-  (temp___1902 = s__split_fields5))))) and (((((to_rep(o5) = tmp1) and
-  (o6 = (s__split_fields5[i2 <- o5]))) and ((s__split_fields3 = o7) and
-  ((s__split_fields4 = o8) and (o6 = o9)))) and ((temp___193 = o7) and
-  ((temp___1931 = o8) and (temp___1932 = o9)))) and
-  (((result4 = s__split_fields3) and ((result5 = s__split_fields4) and
-  (result6 = s__split_fields5))) and ((temp___193 = s__split_fields6) and
-  ((temp___1931 = s__split_fields7) and
-  (temp___1932 = s__split_fields8)))))))) and (((tmp2 = tmp1) and
-  ((s__split_fields9 = s__split_fields6) and
-  ((s__split_fields10 = s__split_fields7) and
-  (s__split_fields11 = s__split_fields8)))) and ((tmp3 = tmp1) and
-  ((s__split_fields12 = s__split_fields6) and
-  ((s__split_fields13 = s__split_fields7) and
-  (s__split_fields14 = s__split_fields8)))))))) -> (get_remaining({
-  us_split_fields1 = { rec__test__t__remaining = s__split_fields9;
-  rec__test__t__index = s__split_fields10; rec__test__t__cards =
-  s__split_fields11 } }) = get_remaining({ us_split_fields1 = {
-  rec__test__t__remaining = s__split_fields; rec__test__t__index =
-  s__split_fields1; rec__test__t__cards = s__split_fields2 } }))))
+goal WP_parameter_def : (get_remaining({ us_split_fields1 = {
+  rec__test__t__remaining = s__split_fields9; rec__test__t__index =
+  s__split_fields10; rec__test__t__cards = s__split_fields11 }
+  }) = get_remaining({ us_split_fields1 = { rec__test__t__remaining =
+  s__split_fields; rec__test__t__index = s__split_fields1;
+  rec__test__t__cards = s__split_fields2 } }))

@@ -109,9 +109,26 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v1 : int
+
+logic v2 : int
+
+logic result : int
+
+logic v21 : int
+
+logic result1 : bool
+
+axiom H : in_range(v1)
+
+axiom H1 : (result = v2)
+
+axiom H2 : (v21 = v1)
+
+axiom H3 : in_range(v21)
+
+axiom H4 : (((v21 = v1) -> (result1 = true)) and ((not (v21 = v1)) ->
+  (result1 = false)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v1:int. forall v2:int. forall result:int. forall v21:int.
-  (forall result1:bool. ((in_range(v1) and (((result = v2) and
-  (v21 = v1)) and (in_range(v21) and (((v21 = v1) and (result1 = true)) or
-  ((not (v21 = v1)) and (result1 = false)))))) -> (v21 = v1))))
+goal WP_parameter_def : (v21 = v1)

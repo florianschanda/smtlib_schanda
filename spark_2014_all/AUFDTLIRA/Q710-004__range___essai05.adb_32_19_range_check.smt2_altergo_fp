@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tindex_aB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type index_a
 
-predicate in_range1(x: int) = (((-3) <= x) and (x <= 15))
+predicate in_range1(x: int) = (((- 3) <= x) and (x <= 15))
 
 logic bool_eq2 : int, int -> bool
 
@@ -172,7 +172,7 @@ function index_b__ref___projection(a: index_b__ref) : index_b =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -463,7 +463,7 @@ function array_b__ref___projection(a: array_b__ref) : us_t1 =
 
 type t20b
 
-predicate in_range4(x: int) = (((-3) <= x) and (x <= (-1)))
+predicate in_range4(x: int) = (((- 3) <= x) and (x <= (- 1)))
 
 logic bool_eq8 : int, int -> bool
 
@@ -613,18 +613,29 @@ logic essai05__a__aggregate_def : int, int, int -> (int,integer) farray
 axiom def_axiom :
   (forall temp___250:int. forall temp___251:int. forall temp___252:int.
   ((((essai05__a__aggregate_def(temp___250, temp___251,
-  temp___252)[(-3)]) = of_rep1(temp___250)) and
+  temp___252)[(- 3)]) = of_rep1(temp___250)) and
   ((essai05__a__aggregate_def(temp___250, temp___251,
-  temp___252)[(-2)]) = of_rep1(temp___251))) and
+  temp___252)[(- 2)]) = of_rep1(temp___251))) and
   ((essai05__a__aggregate_def(temp___250, temp___251,
-  temp___252)[(-1)]) = of_rep1(temp___252))))
+  temp___252)[(- 1)]) = of_rep1(temp___252))))
+
+logic a : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = essai05__a__aggregate_def(0, 1, 2))
+
+axiom H2 : (to_rep(a__first) = to_rep(first(mk((- 3), (- 1)))))
+
+axiom H3 : (to_rep(a__last) = to_rep(last(mk((- 3), (- 1)))))
+
+axiom H4 : dynamic_property((- 3), 15, to_rep(a__first), to_rep(a__last))
+
+axiom H5 : (to_rep(a__first) <= to_rep(a__last))
 
  (* File "essai05.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. ((((result = a) and
-  (a1 = essai05__a__aggregate_def(0, 1, 2))) and
-  ((to_rep(a__first) = to_rep(first(mk((-3), (-1))))) and
-  (to_rep(a__last) = to_rep(last(mk((-3), (-1))))))) ->
-  (dynamic_property((-3), 15, to_rep(a__first), to_rep(a__last)) ->
-  ((to_rep(a__first) <= to_rep(a__last)) -> (3 <= to_rep(a__first))))))
+goal WP_parameter_def : (3 <= to_rep(a__first))

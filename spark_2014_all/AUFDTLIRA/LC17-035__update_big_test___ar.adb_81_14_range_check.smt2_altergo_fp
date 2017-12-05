@@ -314,11 +314,93 @@ axiom def_axiom3 :
   temp___632, temp___633,
   temp___634)[temp___635]) = (temp___630[temp___635])))))))))
 
+logic a : (int,et1) farray
+
+logic j : int
+
+logic f : int
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___4343 : (int,et1) farray
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___4341 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : int
+
+logic j2 : int
+
+logic result3 : int
+
+logic f1 : int
+
+logic result4 : int
+
+logic f2 : int
+
+logic result5 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic j3 : int
+
+logic f3 : int
+
+logic a4 : (int,et1) farray
+
+logic j4 : int
+
+logic f4 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((1 <= 10) -> in_range(j))
+
+axiom H3 : ((0 <= 99) -> in_range1(f))
+
+axiom H4 : (to_rep(o) = e)
+
+axiom H5 : (o1 = (a[i <- o]))
+
+axiom H6 : (result = a)
+
+axiom H7 : (a1 = o1)
+
+axiom H8 : (not (i = 10))
+
  (* File "ar.ads", line 62, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall j:int. forall f:int. forall o:et1.
-  forall o1:(int,et1) farray. forall result:(int,et1) farray.
-  forall a1:(int,et1) farray. (in_range(i) -> (in_range1(e) -> (((1 <= 10) ->
-  in_range(j)) -> (((0 <= 99) -> in_range1(f)) -> ((((to_rep(o) = e) and
-  (o1 = (a[i <- o]))) and (({ map__content = result } = { map__content = a
-  }) and (a1 = o1))) -> ((not (i = 10)) -> in_range((i + 1)))))))))
+goal WP_parameter_def : in_range((i + 1))

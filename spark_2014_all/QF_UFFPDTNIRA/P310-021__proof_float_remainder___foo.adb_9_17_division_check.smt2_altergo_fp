@@ -1081,7 +1081,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic c : t
+
+logic o : t
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (le(fliteral1, fliteral2) -> in_range1(c))
+
  (* File "foo.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:t. (in_range1(a) -> (in_range1(b) -> ((le(fliteral1,
-  fliteral2) -> in_range1(c)) -> (not is_zero(fliteral2))))))
+goal WP_parameter_def : (not is_zero(fliteral2))

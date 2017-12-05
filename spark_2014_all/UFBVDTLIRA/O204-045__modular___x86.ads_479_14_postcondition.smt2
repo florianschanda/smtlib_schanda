@@ -104,6 +104,8 @@
 (declare-const x86__signedlte_32__result4 Bool)
 (declare-const x86__signedlte_32__result5 Bool)
 (declare-const result1 Bool)
+(assert true)
+(assert true)
 (assert (= x86__signedlte_32__result1 x86__signedlte_32__result2))
 (assert (= x86__signedlte_32__result3 x86__signedlte_32__result1))
 (assert (and (= o (signedlt_32 val1 val2)) (= (= o true) (bvugt (bvadd ((_ zero_extend 32) val1) ((_ zero_extend 32) val2)) ((_ zero_extend 32) (bvadd val1 val2))))))

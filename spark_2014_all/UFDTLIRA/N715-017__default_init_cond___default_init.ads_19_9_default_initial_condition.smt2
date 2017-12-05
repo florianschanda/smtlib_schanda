@@ -89,6 +89,7 @@
 (assert (forall ((x us_rep)) (! (= (= (mut_discr_ok x) true) (not (= (rec__default_init__mut_discr__b (us_split_discrs1 x)) true))) :pattern ((mut_discr_ok x)))))
 (declare-const temp___296 Bool)
 (declare-const temp___295 Bool)
+(declare-const us Int)
 (declare-const temp___297 Bool)
 (declare-const temp___2971 natural)
 (declare-const temp___2972 Bool)

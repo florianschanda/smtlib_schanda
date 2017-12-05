@@ -667,24 +667,44 @@ logic val__ : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic self__split_fields : (int,us_rep) farray
+
+logic self__split_fields1 : (int,us_rep1) farray
+
+logic result : (int,us_rep) farray
+
+logic result1 : (int,us_rep1) farray
+
+logic self__split_fields2 : (int,us_rep) farray
+
+logic self__split_fields3 : (int,us_rep1) farray
+
+logic self__split_fields4 : (int,us_rep) farray
+
+logic self__split_fields5 : (int,us_rep1) farray
+
+logic self__split_fields6 : (int,us_rep) farray
+
+logic self__split_fields7 : (int,us_rep1) farray
+
+axiom H : (result = self__split_fields)
+
+axiom H1 : (result1 = self__split_fields1)
+
+axiom H2 : (val__ = self__split_fields2)
+
+axiom H3 : (self__split_fields1 = self__split_fields3)
+
+axiom H4 : (self__split_fields4 = self__split_fields2)
+
+axiom H5 : (self__split_fields5 = self__split_fields3)
+
+axiom H6 : (self__split_fields6 = self__split_fields2)
+
+axiom H7 : (self__split_fields7 = self__split_fields3)
+
  (* File "model.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__split_fields:(int,us_rep) farray.
-  forall self__split_fields1:(int,us_rep1) farray.
-  forall result:(int,us_rep) farray. forall result1:(int,us_rep1) farray.
-  forall self__split_fields2:(int,us_rep) farray.
-  forall self__split_fields3:(int,us_rep1) farray.
-  forall self__split_fields4:(int,us_rep) farray.
-  forall self__split_fields5:(int,us_rep1) farray.
-  forall self__split_fields6:(int,us_rep) farray.
-  forall self__split_fields7:(int,us_rep1) farray.
-  (((((result = self__split_fields) and (result1 = self__split_fields1)) and
-  ((val__ = self__split_fields2) and
-  (self__split_fields1 = self__split_fields3))) and
-  (((self__split_fields4 = self__split_fields2) and
-  (self__split_fields5 = self__split_fields3)) and
-  ((self__split_fields6 = self__split_fields2) and
-  (self__split_fields7 = self__split_fields3)))) -> (bool_eq4(owned_state({
-  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data =
-  self__split_fields4; rec__model__uml_state_machine__owned_transition_data =
-  self__split_fields5 } }), 0, 100, val__, 0, 100) = true)))
+goal WP_parameter_def : (bool_eq4(owned_state({ us_split_fields5 = {
+  rec__model__uml_state_machine__owned_state_data = self__split_fields4;
+  rec__model__uml_state_machine__owned_transition_data = self__split_fields5
+  } }), 0, 100, val__, 0, 100) = true)

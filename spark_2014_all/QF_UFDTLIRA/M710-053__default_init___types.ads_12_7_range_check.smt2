@@ -31,6 +31,7 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content a))
 (define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range temp___expr_39)))
 (declare-const temp___max_size_157 Int)
+(declare-const temp___max_size_156 Int)
 (assert (in_range temp___max_size_157))
 (assert (<= 1 temp___max_size_157))
 (assert (not (<= 1 1)))

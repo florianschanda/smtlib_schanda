@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -468,29 +468,76 @@ axiom f__2__def_axiom :
   rec__tagged_types__root__i1 = x1; rec__ext__1 = x2 }; attr__tag1 = x3
   }) = to_rep(x)))
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : integer
+
+logic x__split_fields2 : us_private
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : us_private
+
+logic test_redispatch__x__assume : integer
+
+logic test_redispatch__x__assume1 : integer
+
+logic test_redispatch__x__assume2 : us_private
+
+logic test_redispatch__x__assume3 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : us_private
+
+logic x__split_fields3 : integer
+
+logic x__split_fields4 : integer
+
+logic x__split_fields5 : us_private
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (to_rep(o1) = 2)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (us_null_ext__ = o4)
+
+axiom H5 : (test_redispatch__x__assume = o2)
+
+axiom H6 : (test_redispatch__x__assume1 = o3)
+
+axiom H7 : (test_redispatch__x__assume2 = o4)
+
+axiom H8 : (us_tag1 = test_redispatch__x__assume3)
+
+axiom H9 : (result = x__split_fields)
+
+axiom H10 : (result1 = x__split_fields1)
+
+axiom H11 : (result2 = x__split_fields2)
+
+axiom H12 : (test_redispatch__x__assume = x__split_fields3)
+
+axiom H13 : (test_redispatch__x__assume1 = x__split_fields4)
+
+axiom H14 : (test_redispatch__x__assume2 = x__split_fields5)
+
+axiom H15 : (x__attr__tag = us_tag1)
+
  (* File "test_redispatch.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:integer.
-  forall x__split_fields2:us_private. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:integer. forall o4:us_private.
-  forall test_redispatch__x__assume:integer.
-  forall test_redispatch__x__assume1:integer.
-  forall test_redispatch__x__assume2:us_private.
-  forall test_redispatch__x__assume3:int. forall result:integer.
-  forall result1:integer. forall result2:us_private.
-  forall x__split_fields3:integer. forall x__split_fields4:integer.
-  forall x__split_fields5:us_private. (((((to_rep(o) = 1) and
-  ((to_rep(o1) = 2) and ((o1 = o2) and ((o = o3) and
-  (us_null_ext__ = o4))))) and (((test_redispatch__x__assume = o2) and
-  ((test_redispatch__x__assume1 = o3) and
-  (test_redispatch__x__assume2 = o4))) and
-  (us_tag1 = test_redispatch__x__assume3))) and
-  ((((result = x__split_fields) and ((result1 = x__split_fields1) and
-  (result2 = x__split_fields2))) and
-  ((test_redispatch__x__assume = x__split_fields3) and
-  ((test_redispatch__x__assume1 = x__split_fields4) and
-  (test_redispatch__x__assume2 = x__split_fields5)))) and
-  (x__attr__tag = us_tag1))) -> (g({ us_split_fields1 = {
+goal WP_parameter_def : (g({ us_split_fields1 = {
   rec__tagged_types__root__i = x__split_fields4; rec__ext__ =
   hide_ext__(x__split_fields3, x__split_fields5) }; attr__tag = x__attr__tag
-  }) = 2)))
+  }) = 2)

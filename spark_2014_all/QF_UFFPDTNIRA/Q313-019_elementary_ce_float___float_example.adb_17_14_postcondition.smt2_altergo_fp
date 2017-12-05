@@ -1093,10 +1093,55 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic float_example__bounded_add__result : t
+
+logic o : t
+
+logic result : t
+
+logic float_example__bounded_add__result1 : t
+
+logic float_example__bounded_add__result2 : t
+
+logic float_example__bounded_add__result3 : t
+
+logic float_example__bounded_add__result4 : t
+
+logic float_example__bounded_add__result5 : t
+
+logic result1 : t
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 4.0))
+
+axiom H2 : (lt(a, fliteral1) and lt(b, fliteral1))
+
+axiom H3 :
+  (float_example__bounded_add__result1 = float_example__bounded_add__result2)
+
+axiom H4 :
+  (float_example__bounded_add__result3 = float_example__bounded_add__result1)
+
+axiom H5 : ((o = add(NearestTiesToEven, a, b)) and
+  tqtisFinite(add(NearestTiesToEven, a, b)))
+
+axiom H6 : (result = float_example__bounded_add__result)
+
+axiom H7 : (float_example__bounded_add__result1 = o)
+
+axiom H8 :
+  (float_example__bounded_add__result4 = float_example__bounded_add__result2)
+
+axiom H9 :
+  (float_example__bounded_add__result5 = float_example__bounded_add__result3)
+
+axiom H10 : (result1 = float_example__bounded_add__result4)
 
 logic fliteral2 : t
 
@@ -1104,21 +1149,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 7.0))
 
  (* File "float_example.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall float_example__bounded_add__result:t. forall o:t. forall result:t.
-  forall float_example__bounded_add__result1:t.
-  forall float_example__bounded_add__result2:t.
-  forall float_example__bounded_add__result3:t.
-  forall float_example__bounded_add__result4:t.
-  forall float_example__bounded_add__result5:t.
-  (forall result1:t. ((tqtisFinite(a) and (tqtisFinite(b) and ((lt(a,
-  fliteral1) and lt(b, fliteral1)) and
-  (((((float_example__bounded_add__result1 = float_example__bounded_add__result2) and
-  (float_example__bounded_add__result3 = float_example__bounded_add__result1)) and
-  (((o = add(NearestTiesToEven, a, b)) and tqtisFinite(add(NearestTiesToEven,
-  a, b))) and ((result = float_example__bounded_add__result) and
-  (float_example__bounded_add__result1 = o)))) and
-  ((float_example__bounded_add__result4 = float_example__bounded_add__result2) and
-  (float_example__bounded_add__result5 = float_example__bounded_add__result3))) and
-  (result1 = float_example__bounded_add__result4))))) ->
-  lt(float_example__bounded_add__result4, fliteral2))))
+goal WP_parameter_def : lt(float_example__bounded_add__result4, fliteral2)

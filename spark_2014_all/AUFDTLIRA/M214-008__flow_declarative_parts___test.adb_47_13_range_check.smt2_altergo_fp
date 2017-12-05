@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -395,8 +395,14 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic l : int
+
+logic o : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : ((0 <= 2147483647) -> in_range3(l))
+
  (* File "test.adb", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l:int. (dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1))) -> (((0 <= 2147483647) -> in_range3(l)) ->
-  in_range3(length({ elts = s; rt = s1 })))))
+goal WP_parameter_def : in_range3(length({ elts = s; rt = s1 }))

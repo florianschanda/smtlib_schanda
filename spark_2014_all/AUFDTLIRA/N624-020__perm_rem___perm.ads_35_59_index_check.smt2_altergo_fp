@@ -269,7 +269,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -447,16 +447,60 @@ axiom is_perm__def_axiom :
   (is_perm(remove({ elts = a2; rt = a3 }, ia), remove({ elts = b2; rt = b3 },
   ib)) = true)))))))))
 
+logic ia : int
+
+logic ib : int
+
+logic o : int
+
+logic o1 : (int,natural) farray
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : (int,natural) farray
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : natural
+
+logic o8 : int
+
+logic o9 : natural
+
+logic o10 : int
+
+logic o11 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and (invariant__({
+  elts = b; rt = b1 }) = true))
+
+axiom H3 : ((length({ elts = a; rt = a1 }) = 0) -> (((length({ elts = b; rt =
+  b1 }) = 0) -> (result = true)) and ((not (length({ elts = b; rt = b1
+  }) = 0)) -> (result = false))))
+
+axiom H4 : ((not (length({ elts = a; rt = a1 }) = 0)) -> (result = false))
+
+axiom H5 : (not (result = true))
+
+axiom H6 : (to_rep1(first(a1)) <= ia)
+
+axiom H7 : (ia <= to_rep1(last(a1)))
+
+axiom H8 : (to_rep1(first(b1)) <= ib)
+
+axiom H9 : (ib <= to_rep1(last(b1)))
+
  (* File "perm.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ia:int. forall ib:int. forall result:bool. (dynamic_property(1,
-  100, to_rep1(first(a1)), to_rep1(last(a1))) -> (dynamic_property(1, 100,
-  to_rep1(first(b1)), to_rep1(last(b1))) -> (((invariant__({ elts = a; rt =
-  a1 }) = true) and (invariant__({ elts = b; rt = b1 }) = true)) ->
-  ((((length({ elts = a; rt = a1 }) = 0) and (((length({ elts = b; rt = b1
-  }) = 0) and (result = true)) or ((not (length({ elts = b; rt = b1
-  }) = 0)) and (result = false)))) or ((not (length({ elts = a; rt = a1
-  }) = 0)) and (result = false))) -> ((not (result = true)) ->
-  (((to_rep1(first(a1)) <= ia) and (ia <= to_rep1(last(a1)))) ->
-  (((to_rep1(first(b1)) <= ib) and (ib <= to_rep1(last(b1)))) ->
-  (to_rep1(first(b1)) <= ib)))))))))
+goal WP_parameter_def : (to_rep1(first(b1)) <= ib)

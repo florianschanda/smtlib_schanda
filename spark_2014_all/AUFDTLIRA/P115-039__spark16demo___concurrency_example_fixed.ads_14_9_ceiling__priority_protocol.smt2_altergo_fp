@@ -210,7 +210,7 @@ axiom oadd__post_axiom : true
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -387,7 +387,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref) : us_spl
 type us_rep2 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep2) : us_split_fields =
+function us_rep___30__projection(a: us_rep2) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size2 : int
@@ -444,10 +444,13 @@ axiom all_zeroes__def_axiom :
   (all_zeroes = concurrency_example_fixed__all_zeroes__aggregate_def(0))
 
 axiom all_ones__def_axiom :
-  (all_ones = concurrency_example_fixed__all_ones__aggregate_def((-2147483648)))
+  (all_ones = concurrency_example_fixed__all_ones__aggregate_def((- 2147483648)))
+
+axiom H :
+  (concurrency_example_fixed__all_zeroes__aggregate_def(0) = all_zeroes)
+
+axiom H1 :
+  (concurrency_example_fixed__all_ones__aggregate_def((- 2147483648)) = all_ones)
 
  (* File "concurrency_example_fixed.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  ((concurrency_example_fixed__all_zeroes__aggregate_def(0) = all_zeroes) ->
-  ((concurrency_example_fixed__all_ones__aggregate_def((-2147483648)) = all_ones) ->
-  (97 <= 97)))
+goal WP_parameter_def : (97 <= 97)

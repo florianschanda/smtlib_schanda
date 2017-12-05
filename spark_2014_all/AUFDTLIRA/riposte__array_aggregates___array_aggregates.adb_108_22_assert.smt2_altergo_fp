@@ -225,9 +225,15 @@ axiom def_axiom :
   (forall temp___423:int.
   ((temp___420(temp___422)[temp___423]) = of_rep(temp___422))))
 
+logic x : (int,unsigned_byte) farray
+
+logic result : (int,unsigned_byte) farray
+
+logic x1 : (int,unsigned_byte) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___420(8))
+
  (* File "array_aggregates.adb", line 95, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,unsigned_byte) farray.
-  forall result:(int,unsigned_byte) farray.
-  forall x1:(int,unsigned_byte) farray. (((result = x) and
-  (x1 = temp___420(8))) -> (to_rep((x1[4])) = 8)))
+goal WP_parameter_def : (to_rep((x1[4])) = 8)

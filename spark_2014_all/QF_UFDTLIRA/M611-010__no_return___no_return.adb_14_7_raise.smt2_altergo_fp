@@ -51,8 +51,21 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic x1 : int
+
+logic result : int
+
+logic x2 : int
+
+axiom H : ((not (x = 0)) -> (result = x))
+
+axiom H1 : ((not (x = 0)) -> (x2 = 1))
+
+axiom H2 : ((x = 0) -> (x2 = x))
+
+axiom H3 : ((x = 0) -> (x2 = x1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall x1:int. forall result:int. forall x2:int.
-  (not (((not (x = 0)) and ((result = x) and (x2 = 1))) or ((x = 0) and
-  ((x2 = x) and (x2 = x1))))))
+goal WP_parameter_def : false

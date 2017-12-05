@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -569,18 +569,78 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
- (* File "perm.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:(int,integer) farray.
-  forall perm__occ_set__b__assume:(int,integer) farray.
-  forall perm__occ_set__b__assume1:t. forall result:(int,integer) farray.
-  forall b1:(int,integer) farray. ((dynamic_property(0, 2147483646,
-  to_rep(first(a1)), to_rep(last(a1))) and (to_rep(first(a1)) = 0)) ->
-  (in_range2(i) -> (in_range1(v) -> (in_range1(e) -> ((dynamic_property(0,
-  2147483646, to_rep(first(r1)), to_rep(last(r1))) and
-  (to_rep(first(r1)) = 0)) -> ((((to_rep(first(a1)) <= i) and
-  (i <= to_rep(last(a1)))) and (is_set({ elts = a; rt = a1 }, i, v, { elts =
-  r; rt = r1 }) = true)) -> (((({ elts = perm__occ_set__b__assume; rt =
+logic b : (int,integer) farray
+
+logic perm__occ_set__b__assume : (int,integer) farray
+
+logic perm__occ_set__b__assume1 : t
+
+logic o : (int,integer) farray
+
+logic o1 : t
+
+logic o2 : integer
+
+logic o3 : int
+
+logic temp___238 : (int,integer) farray
+
+logic o4 : (int,integer) farray
+
+logic o5 : (int,integer) farray
+
+logic o6 : t
+
+logic o7 : (int,integer) farray
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic result : (int,integer) farray
+
+logic b1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic b2 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+logic b4 : (int,integer) farray
+
+logic b5 : (int,integer) farray
+
+logic b6 : (int,integer) farray
+
+logic result2 : bool
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(first(a1)),
+  to_rep(last(a1))) and (to_rep(first(a1)) = 0))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : in_range1(e)
+
+axiom H4 : (dynamic_property(0, 2147483646, to_rep(first(r1)),
+  to_rep(last(r1))) and (to_rep(first(r1)) = 0))
+
+axiom H5 : (((to_rep(first(a1)) <= i) and (i <= to_rep(last(a1)))) and
+  (is_set({ elts = a; rt = a1 }, i, v, { elts = r; rt = r1 }) = true))
+
+axiom H6 : (({ elts = perm__occ_set__b__assume; rt =
   perm__occ_set__b__assume1 } = remove_last({ elts = a; rt = a1 })) and
   ((dynamic_property(0, 2147483646, to_rep(first(perm__occ_set__b__assume1)),
   to_rep(last(perm__occ_set__b__assume1))) and
@@ -588,11 +648,22 @@ goal WP_parameter_def :
   ((a = perm__occ_set__b__assume) and
   (mk(to_rep(first2(mk1(to_rep(first(a1)), (to_rep(last(a1)) - 1)))),
   to_rep(last2(mk1(to_rep(first(a1)),
-  (to_rep(last(a1)) - 1))))) = perm__occ_set__b__assume1)))) and ((({
-  map__content = result } = { map__content = b }) and
-  (b1 = perm__occ_set__b__assume)) and
-  ((to_rep(b__first) = to_rep(first(perm__occ_set__b__assume1))) and
-  (to_rep(b__last) = to_rep(last(perm__occ_set__b__assume1)))))) ->
-  ((dynamic_property(0, 2147483646, to_rep(b__first), to_rep(b__last)) and
-  (to_rep(b__first) = 0)) -> ((not (length({ elts = a; rt = a1 }) = 0)) ->
-  ((i = to_rep(last(a1))) -> (0 <  length({ elts = r; rt = r1 })))))))))))))
+  (to_rep(last(a1)) - 1))))) = perm__occ_set__b__assume1))))
+
+axiom H7 : (result = b)
+
+axiom H8 : (b1 = perm__occ_set__b__assume)
+
+axiom H9 : (to_rep(b__first) = to_rep(first(perm__occ_set__b__assume1)))
+
+axiom H10 : (to_rep(b__last) = to_rep(last(perm__occ_set__b__assume1)))
+
+axiom H11 : (dynamic_property(0, 2147483646, to_rep(b__first),
+  to_rep(b__last)) and (to_rep(b__first) = 0))
+
+axiom H12 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H13 : (i = to_rep(last(a1)))
+
+ (* File "perm.ads", line 26, characters 0-0 *)
+goal WP_parameter_def : (0 <  length({ elts = r; rt = r1 }))

@@ -250,12 +250,22 @@ axiom arr_ok__def_axiom :
   (forall x:(int,natural) farray [arr_ok(x)]. ((arr_ok(x) = true) <->
   (to_rep((x[1])) = 0)))
 
+logic o : int
+
+logic temp___273 : (int,natural) farray
+
+logic result : bool
+
+axiom H : ((1 <= 3) -> (o = ((3 - 1) + 1)))
+
+axiom H1 : ((not (1 <= 3)) -> (o = 0))
+
+axiom H2 : (((0 <  o) -> (result = true)) and ((not (0 <  o)) ->
+  (result = false)))
+
+axiom H3 :
+  (forall temp___274:int. (((1 <= temp___274) and (temp___274 <= 3)) ->
+  (to_rep((temp___273[temp___274])) = 0)))
+
  (* File "default_init.ads", line 54, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall temp___273:(int,natural) farray. forall result:bool.
-  (((((1 <= 3) and (o = ((3 - 1) + 1))) or ((not (1 <= 3)) and (o = 0))) and
-  (((0 <  o) and (result = true)) or ((not (0 <  o)) and
-  (result = false)))) ->
-  ((forall temp___274:int. (((1 <= temp___274) and (temp___274 <= 3)) ->
-   (to_rep((temp___273[temp___274])) = 0))) ->
-  (arr_ok(temp___273) = true))))
+goal WP_parameter_def : (arr_ok(temp___273) = true)

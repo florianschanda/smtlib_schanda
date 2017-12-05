@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -590,8 +590,182 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic ret : (int,character) farray
+
+logic to_up : bool
+
+logic idx : int
+
+logic hello__to_camel_case__result : (int,character) farray
+
+logic hello__to_camel_case__result1 : t
+
+logic hello__to_camel_case__ret__assume : (int,character) farray
+
+logic hello__to_camel_case__ret__assume1 : t1
+
+logic temp___592 : int
+
+logic temp___591 : bool
+
+logic temp___589 : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : (int,character) farray
+
+logic us : bool
+
+logic j : int
+
+logic o6 : int
+
+logic o7 : character
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : (int,character) farray
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic ret1 : (int,character) farray
+
+logic result1 : bool
+
+logic to_up1 : bool
+
+logic result2 : int
+
+logic idx1 : int
+
+logic result3 : (int,character) farray
+
+logic ret2 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic ret3 : (int,character) farray
+
+logic ret4 : (int,character) farray
+
+logic to_up2 : bool
+
+logic idx2 : int
+
+logic result5 : bool
+
+logic to_up3 : bool
+
+logic result6 : bool
+
+logic to_up4 : bool
+
+logic result7 : int
+
+logic idx3 : int
+
+logic result8 : (int,character) farray
+
+logic ret5 : (int,character) farray
+
+logic result9 : (int,character) farray
+
+logic ret6 : (int,character) farray
+
+logic ret7 : (int,character) farray
+
+logic to_up5 : bool
+
+logic idx4 : int
+
+logic ret8 : (int,character) farray
+
+logic to_up6 : bool
+
+logic idx5 : int
+
+logic ret9 : (int,character) farray
+
+logic to_up7 : bool
+
+logic idx6 : int
+
+logic ret10 : (int,character) farray
+
+logic to_up8 : bool
+
+logic idx7 : int
+
+logic ret11 : (int,character) farray
+
+logic to_up9 : bool
+
+logic idx8 : int
+
+logic ret12 : (int,character) farray
+
+logic to_up10 : bool
+
+logic idx9 : int
+
+logic result10 : (int,character) farray
+
+logic result11 : t
+
+logic hello__to_camel_case__result2 : (int,character) farray
+
+logic hello__to_camel_case__result3 : t
+
+logic hello__to_camel_case__result4 : (int,character) farray
+
+logic hello__to_camel_case__result5 : t
+
+logic hello__to_camel_case__result6 : (int,character) farray
+
+logic hello__to_camel_case__result7 : t
+
+logic ret13 : (int,character) farray
+
+logic to_up11 : bool
+
+logic idx10 : int
+
+logic hello__to_camel_case__result8 : (int,character) farray
+
+logic hello__to_camel_case__result9 : t
+
+logic ret14 : (int,character) farray
+
+logic to_up12 : bool
+
+logic idx11 : int
+
+logic hello__to_camel_case__result10 : (int,character) farray
+
+logic hello__to_camel_case__result11 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : (to_rep1(first(str1)) <= to_rep1(last(str1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) ->
-  ((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
-  (1 <= to_rep1(first(str1)))))
+goal WP_parameter_def : (1 <= to_rep1(first(str1)))

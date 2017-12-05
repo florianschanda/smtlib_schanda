@@ -162,18 +162,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -191,7 +191,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -219,6 +219,33 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic subprograms__f2__result : int
+
+logic o : int
+
+logic result : int
+
+logic subprograms__f2__result1 : int
+
+logic result1 : int
+
+logic subprograms__f2__result2 : int
+
+logic subprograms__f2__result3 : int
+
+logic subprograms__f2__result4 : int
+
+logic subprograms__f2__result5 : int
+
+logic subprograms__f2__result6 : int
+
+logic subprograms__f2__result7 : int
+
+logic subprograms__f2__result8 : int
+
+axiom H : in_range(val__)
+
+axiom H1 : (not (val__ = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(val__) -> ((not (val__ = 0)) ->
-  in_range(comp_div(val__,val__))))
+goal WP_parameter_def : in_range(comp_div(val__,val__))

@@ -321,9 +321,33 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic letter : int
+
+logic number : int
+
+logic the_basket : (int,callable_number) farray
+
+logic the_count : int
+
+logic o : int
+
+logic o1 : callable_number
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic number1 : int
+
+axiom H : in_range1(the_count)
+
+axiom H1 : ((0 <= 4) -> in_range3(letter))
+
+axiom H2 : ((1 <= 75) -> in_range2(number))
+
+axiom H3 : (not (empty(the_count) = true))
+
  (* File "bingo_basket.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall letter:int. forall number:int. forall the_count:int.
-  (in_range1(the_count) -> (((0 <= 4) -> in_range3(letter)) -> (((1 <= 75) ->
-  in_range2(number)) -> ((not (empty(the_count) = true)) ->
-  (1 <= the_count))))))
+goal WP_parameter_def : (1 <= the_count)

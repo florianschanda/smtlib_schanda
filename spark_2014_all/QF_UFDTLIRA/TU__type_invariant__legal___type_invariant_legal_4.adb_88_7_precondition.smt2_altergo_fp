@@ -106,5 +106,25 @@ function t__ref___projection(a: t__ref) : t = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic x1 : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic x4 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (not (x = 0))
+
+axiom H2 : (not (x = 0))
+
+axiom H3 : (in_range(x1) and (not (x1 = 0)))
+
+axiom H4 : (not (x1 = 0))
+
  (* File "type_invariant_legal_4.ads", line 19, characters 0-0 *)
 goal WP_parameter_def : true

@@ -104,6 +104,7 @@
 (declare-const o28 integer_32)
 (declare-const o29 (Array Int integer_32))
 (declare-const i1 Int)
+(declare-const o30 Int)
 (declare-const result Int)
 (declare-const i2 Int)
 (declare-const result1 (Array Int integer_32))

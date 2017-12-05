@@ -113,7 +113,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -231,15 +231,94 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic result__ : int
+
+logic i : int
+
+logic temp___506 : int
+
+logic temp___505 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic result__1 : int
+
+logic result__2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic result__3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result__4 : int
+
+logic i4 : int
+
+logic result__5 : int
+
+logic i5 : int
+
+logic result__6 : int
+
+logic i6 : int
+
+logic result__7 : int
+
+logic i7 : int
+
+logic result__8 : int
+
+logic i8 : int
+
+logic result__9 : int
+
+logic i9 : int
+
+logic result__10 : int
+
+logic i10 : int
+
+logic result__11 : int
+
+logic i11 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range3(n)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
+
+axiom H3 : (result = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : in_range1(i1)
+
+axiom H6 : (result1 = result__)
+
+axiom H7 : (result__1 = x)
+
+axiom H8 : (i1 <  n)
+
+axiom H9 : ((result__2 = power(x, i2)) and (1 <= i2))
+
+axiom H10 : (((((- 2147483648) <= 2147483647) -> in_range1(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(result__2))) and (i2 <  n))
+
  (* File "power_and_sum.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall result:int. forall i1:int.
-  forall result1:int. forall result__1:int. forall result__2:int.
-  forall i2:int. (in_range1(x) -> (in_range3(n) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(result__)) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  (in_range1(i1) -> ((({ int__content = result1 } = { int__content = result__
-  }) and (result__1 = x)) -> ((i1 <  n) -> (((result__2 = power(x, i2)) and
-  (1 <= i2)) -> ((((((-2147483648) <= 2147483647) -> in_range1(i2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(result__2))) and (i2 <  n)) ->
-  in_range2(i2)))))))))))
+goal WP_parameter_def : in_range2(i2)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tchar_table_indexB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -235,11 +235,11 @@ logic oeq__function_guard : bool, us_rep, us_rep -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep. forall b:us_rep [user_eq3(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
     n) = get(b, n)))) ->
   (user_eq3(a, b) = match_bool(bool_eq(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
         n) = get(b, n))))) ->
   (user_eq3(a, b) = match_bool(bool_eq(length(a), length(b)), false,
   false)))))
@@ -272,12 +272,12 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 axiom length__post_axiom :
   (forall container:us_rep [length(container)].
-  ((((-1) + length(container)) <= 2147483646) and
+  ((((- 1) + length(container)) <= 2147483646) and
   in_range4(length(container))))
 
 type extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq7 : int, int -> bool
 
@@ -317,19 +317,43 @@ axiom get__post_axiom :
   (forall container1:us_rep.
   (forall position1:int [get(container1, position1)].
   ((in_range5(position1) and ((0 <= position1) and
-  (position1 <= ((-1) + length(container1))))) -> in_range2(get(container1,
+  (position1 <= ((- 1) + length(container1))))) -> in_range2(get(container1,
   position1)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(position)
+
+axiom H1 : in_range2(new_item)
+
+axiom H2 : ((o3 = length(container)) and (in_range4(o3) and
+  (((- 1) + o3) <= 2147483646)))
+
+axiom H3 : (((o3 <  2147483647) -> (result = true)) and
+  ((not (o3 <  2147483647)) -> (result = false)))
+
+axiom H4 : (result = true)
+
+axiom H5 : ((o2 = ((- 1) + length(container))) and (in_range5(o2) and
+  (o2 = ((- 1) + length(container)))))
+
+axiom H6 : (((o2 <  2147483646) -> (result1 = true)) and
+  ((not (o2 <  2147483646)) -> (result1 = false)))
+
+axiom H7 : (result1 = true)
+
+axiom H8 : ((o = ((- 1) + length(container))) and (in_range5(o) and
+  (o = ((- 1) + length(container)))))
+
  (* File "a-cofuve.ads", line 272, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
-  forall result1:bool. (in_range1(position) -> (in_range2(new_item) ->
-  ((((o2 = length(container)) and (in_range4(o2) and
-  (((-1) + o2) <= 2147483646))) and (((o2 <  2147483647) and
-  (result = true)) or ((not (o2 <  2147483647)) and (result = false)))) ->
-  ((result = true) -> ((((o1 = ((-1) + length(container))) and
-  (in_range5(o1) and (o1 = ((-1) + length(container))))) and
-  (((o1 <  2147483646) and (result1 = true)) or ((not (o1 <  2147483646)) and
-  (result1 = false)))) -> ((result1 = true) ->
-  (((o = ((-1) + length(container))) and (in_range5(o) and
-  (o = ((-1) + length(container))))) -> (not (o = 2147483647))))))))))
+goal WP_parameter_def : (not (o = 2147483647))

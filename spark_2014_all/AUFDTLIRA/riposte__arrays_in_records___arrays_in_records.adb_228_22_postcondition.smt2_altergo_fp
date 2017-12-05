@@ -118,7 +118,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -428,85 +428,266 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "arrays_in_records.adb", line 210, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:index. forall a__split_fields1:(int,value) farray.
-  forall a__split_fields2:(int,value) farray. forall tmp:int. forall o:index.
-  forall o1:index. forall o2:(int,value) farray.
-  forall o3:(int,value) farray. forall temp___351:index.
-  forall temp___3511:(int,value) farray.
-  forall temp___3512:(int,value) farray. forall o4:value.
-  forall o5:(int,value) farray. forall o6:index.
-  forall o7:(int,value) farray. forall o8:(int,value) farray.
-  forall temp___355:index. forall temp___3551:(int,value) farray.
-  forall temp___3552:(int,value) farray. forall o9:value.
-  forall o10:(int,value) farray. forall o11:index.
-  forall o12:(int,value) farray. forall o13:(int,value) farray.
-  forall temp___358:index. forall temp___3581:(int,value) farray.
-  forall temp___3582:(int,value) farray. forall o14:value.
-  forall o15:(int,value) farray. forall o16:index.
-  forall o17:(int,value) farray. forall o18:(int,value) farray.
-  forall temp___361:index. forall temp___3611:(int,value) farray.
-  forall temp___3612:(int,value) farray. forall result:int. forall tmp1:int.
-  forall result1:index. forall result2:(int,value) farray.
-  forall result3:(int,value) farray. forall a__split_fields3:index.
-  forall a__split_fields4:(int,value) farray.
-  forall a__split_fields5:(int,value) farray. forall result4:index.
-  forall result5:(int,value) farray. forall result6:(int,value) farray.
-  forall a__split_fields6:index. forall a__split_fields7:(int,value) farray.
-  forall a__split_fields8:(int,value) farray. forall result7:index.
-  forall result8:(int,value) farray. forall result9:(int,value) farray.
-  forall a__split_fields9:index. forall a__split_fields10:(int,value) farray.
-  forall a__split_fields11:(int,value) farray. forall result10:index.
-  forall result11:(int,value) farray. forall result12:(int,value) farray.
-  forall a__split_fields12:index.
-  forall a__split_fields13:(int,value) farray.
-  forall a__split_fields14:(int,value) farray.
-  forall a__split_fields15:index.
-  forall a__split_fields16:(int,value) farray.
-  forall a__split_fields17:(int,value) farray. forall tmp2:int.
-  forall a__split_fields18:index.
-  forall a__split_fields19:(int,value) farray.
-  forall a__split_fields20:(int,value) farray. forall tmp3:int.
-  ((in_range(i) and (in_range(j) and ((not (i = j)) and (((((-23) <= 69) ->
-  in_range1(tmp)) and (((result = tmp) and
-  (tmp1 = to_rep1((a__split_fields1[i])))) and (((((to_rep(o) = i) and
-  ((o = o1) and ((a__split_fields1 = o2) and (a__split_fields2 = o3)))) and
-  ((temp___351 = o1) and ((temp___3511 = o2) and (temp___3512 = o3)))) and
-  (((result1 = a__split_fields) and ((result2 = a__split_fields1) and
-  (result3 = a__split_fields2))) and ((temp___351 = a__split_fields3) and
-  ((temp___3511 = a__split_fields4) and
-  (temp___3512 = a__split_fields5))))) and
-  ((((((to_rep1(o4) = to_rep1((a__split_fields4[j]))) and
-  (o5 = (a__split_fields4[i <- o4]))) and ((a__split_fields3 = o6) and
-  ((o5 = o7) and (a__split_fields5 = o8)))) and ((temp___355 = o6) and
-  ((temp___3551 = o7) and (temp___3552 = o8)))) and
-  (((result4 = a__split_fields3) and ((result5 = a__split_fields4) and
-  (result6 = a__split_fields5))) and ((temp___355 = a__split_fields6) and
-  ((temp___3551 = a__split_fields7) and
-  (temp___3552 = a__split_fields8))))) and ((((((to_rep1(o9) = tmp1) and
-  (o10 = (a__split_fields8[j <- o9]))) and ((a__split_fields6 = o11) and
-  ((a__split_fields7 = o12) and (o10 = o13)))) and ((temp___358 = o11) and
-  ((temp___3581 = o12) and (temp___3582 = o13)))) and
-  (((result7 = a__split_fields6) and ((result8 = a__split_fields7) and
-  (result9 = a__split_fields8))) and ((temp___358 = a__split_fields9) and
-  ((temp___3581 = a__split_fields10) and
-  (temp___3582 = a__split_fields11))))) and (((((to_rep1(o14) = tmp1) and
-  (o15 = (a__split_fields10[j <- o14]))) and ((a__split_fields9 = o16) and
-  ((o15 = o17) and (a__split_fields11 = o18)))) and ((temp___361 = o16) and
-  ((temp___3611 = o17) and (temp___3612 = o18)))) and
-  (((result10 = a__split_fields9) and ((result11 = a__split_fields10) and
-  (result12 = a__split_fields11))) and ((temp___361 = a__split_fields12) and
-  ((temp___3611 = a__split_fields13) and
-  (temp___3612 = a__split_fields14)))))))))) and (((tmp2 = tmp1) and
-  ((a__split_fields15 = a__split_fields12) and
+logic a__split_fields : index
+
+logic a__split_fields1 : (int,value) farray
+
+logic a__split_fields2 : (int,value) farray
+
+logic tmp : int
+
+logic o : index
+
+logic o1 : index
+
+logic o2 : (int,value) farray
+
+logic o3 : (int,value) farray
+
+logic temp___351 : index
+
+logic temp___3511 : (int,value) farray
+
+logic temp___3512 : (int,value) farray
+
+logic o4 : value
+
+logic o5 : (int,value) farray
+
+logic o6 : index
+
+logic o7 : (int,value) farray
+
+logic o8 : (int,value) farray
+
+logic temp___355 : index
+
+logic temp___3551 : (int,value) farray
+
+logic temp___3552 : (int,value) farray
+
+logic o9 : value
+
+logic o10 : (int,value) farray
+
+logic o11 : index
+
+logic o12 : (int,value) farray
+
+logic o13 : (int,value) farray
+
+logic temp___358 : index
+
+logic temp___3581 : (int,value) farray
+
+logic temp___3582 : (int,value) farray
+
+logic o14 : value
+
+logic o15 : (int,value) farray
+
+logic o16 : index
+
+logic o17 : (int,value) farray
+
+logic o18 : (int,value) farray
+
+logic temp___361 : index
+
+logic temp___3611 : (int,value) farray
+
+logic temp___3612 : (int,value) farray
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : index
+
+logic result2 : (int,value) farray
+
+logic result3 : (int,value) farray
+
+logic a__split_fields3 : index
+
+logic a__split_fields4 : (int,value) farray
+
+logic a__split_fields5 : (int,value) farray
+
+logic result4 : index
+
+logic result5 : (int,value) farray
+
+logic result6 : (int,value) farray
+
+logic a__split_fields6 : index
+
+logic a__split_fields7 : (int,value) farray
+
+logic a__split_fields8 : (int,value) farray
+
+logic result7 : index
+
+logic result8 : (int,value) farray
+
+logic result9 : (int,value) farray
+
+logic a__split_fields9 : index
+
+logic a__split_fields10 : (int,value) farray
+
+logic a__split_fields11 : (int,value) farray
+
+logic result10 : index
+
+logic result11 : (int,value) farray
+
+logic result12 : (int,value) farray
+
+logic a__split_fields12 : index
+
+logic a__split_fields13 : (int,value) farray
+
+logic a__split_fields14 : (int,value) farray
+
+logic a__split_fields15 : index
+
+logic a__split_fields16 : (int,value) farray
+
+logic a__split_fields17 : (int,value) farray
+
+logic tmp2 : int
+
+logic a__split_fields18 : index
+
+logic a__split_fields19 : (int,value) farray
+
+logic a__split_fields20 : (int,value) farray
+
+logic tmp3 : int
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : (not (i = j))
+
+axiom H3 : (((- 23) <= 69) -> in_range1(tmp))
+
+axiom H4 : (result = tmp)
+
+axiom H5 : (tmp1 = to_rep1((a__split_fields1[i])))
+
+axiom H6 : (to_rep(o) = i)
+
+axiom H7 : (o = o1)
+
+axiom H8 : (a__split_fields1 = o2)
+
+axiom H9 : (a__split_fields2 = o3)
+
+axiom H10 : (temp___351 = o1)
+
+axiom H11 : (temp___3511 = o2)
+
+axiom H12 : (temp___3512 = o3)
+
+axiom H13 : (result1 = a__split_fields)
+
+axiom H14 : (result2 = a__split_fields1)
+
+axiom H15 : (result3 = a__split_fields2)
+
+axiom H16 : (temp___351 = a__split_fields3)
+
+axiom H17 : (temp___3511 = a__split_fields4)
+
+axiom H18 : (temp___3512 = a__split_fields5)
+
+axiom H19 : (to_rep1(o4) = to_rep1((a__split_fields4[j])))
+
+axiom H20 : (o5 = (a__split_fields4[i <- o4]))
+
+axiom H21 : (a__split_fields3 = o6)
+
+axiom H22 : (o5 = o7)
+
+axiom H23 : (a__split_fields5 = o8)
+
+axiom H24 : (temp___355 = o6)
+
+axiom H25 : (temp___3551 = o7)
+
+axiom H26 : (temp___3552 = o8)
+
+axiom H27 : (result4 = a__split_fields3)
+
+axiom H28 : (result5 = a__split_fields4)
+
+axiom H29 : (result6 = a__split_fields5)
+
+axiom H30 : ((a__split_fields6 = temp___355) and
+  ((a__split_fields7 = temp___3551) and (a__split_fields8 = temp___3552)))
+
+axiom H31 : (to_rep1(o9) = tmp1)
+
+axiom H32 : (o10 = (a__split_fields8[j <- o9]))
+
+axiom H33 : (a__split_fields6 = o11)
+
+axiom H34 : (a__split_fields7 = o12)
+
+axiom H35 : (o10 = o13)
+
+axiom H36 : (temp___358 = o11)
+
+axiom H37 : (temp___3581 = o12)
+
+axiom H38 : (temp___3582 = o13)
+
+axiom H39 : ((result7 = a__split_fields6) and
+  ((result8 = a__split_fields7) and (result9 = a__split_fields8)))
+
+axiom H40 : ((a__split_fields9 = temp___358) and
+  ((a__split_fields10 = temp___3581) and (a__split_fields11 = temp___3582)))
+
+axiom H41 : (to_rep1(o14) = tmp1)
+
+axiom H42 : (o15 = (a__split_fields10[j <- o14]))
+
+axiom H43 : (a__split_fields9 = o16)
+
+axiom H44 : (o15 = o17)
+
+axiom H45 : (a__split_fields11 = o18)
+
+axiom H46 : (temp___361 = o16)
+
+axiom H47 : (temp___3611 = o17)
+
+axiom H48 : (temp___3612 = o18)
+
+axiom H49 : ((result10 = a__split_fields9) and
+  ((result11 = a__split_fields10) and (result12 = a__split_fields11)))
+
+axiom H50 : ((a__split_fields12 = temp___361) and
+  ((a__split_fields13 = temp___3611) and (a__split_fields14 = temp___3612)))
+
+axiom H51 : (tmp2 = tmp1)
+
+axiom H52 : ((a__split_fields15 = a__split_fields12) and
   ((a__split_fields16 = a__split_fields13) and
-  (a__split_fields17 = a__split_fields14)))) and ((tmp3 = tmp1) and
-  ((a__split_fields18 = a__split_fields12) and
+  (a__split_fields17 = a__split_fields14)))
+
+axiom H53 : (tmp3 = tmp1)
+
+axiom H54 : ((a__split_fields18 = a__split_fields12) and
   ((a__split_fields19 = a__split_fields13) and
-  (a__split_fields20 = a__split_fields14))))))))) -> (not (bool_eq4({
-  us_split_fields1 = { rec__arrays_in_records__record_with_arrays__counter =
-  a__split_fields15;
+  (a__split_fields20 = a__split_fields14)))
+
+ (* File "arrays_in_records.adb", line 210, characters 0-0 *)
+goal WP_parameter_def : (not (bool_eq4({ us_split_fields1 = {
+  rec__arrays_in_records__record_with_arrays__counter = a__split_fields15;
   rec__arrays_in_records__record_with_arrays__first_array =
   a__split_fields16;
   rec__arrays_in_records__record_with_arrays__second_array =
@@ -514,4 +695,4 @@ goal WP_parameter_def :
   rec__arrays_in_records__record_with_arrays__counter = a__split_fields;
   rec__arrays_in_records__record_with_arrays__first_array = a__split_fields1;
   rec__arrays_in_records__record_with_arrays__second_array = a__split_fields2
-  } }) = true))))
+  } }) = true))

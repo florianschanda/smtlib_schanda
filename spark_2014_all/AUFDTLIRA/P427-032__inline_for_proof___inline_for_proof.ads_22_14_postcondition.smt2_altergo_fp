@@ -301,28 +301,75 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic y : (int,t) farray
+
+logic b : bool
+
+logic inline_for_proof__get2__result : int
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : t
+
+logic o4 : int
+
+logic result : int
+
+logic inline_for_proof__get2__result1 : int
+
+logic inline_for_proof__get2__result2 : int
+
+logic inline_for_proof__get2__result3 : int
+
+logic inline_for_proof__get2__result4 : int
+
+logic inline_for_proof__get2__result5 : int
+
+logic result1 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : ((1 <= i) and (i <= 100))
+
+axiom H2 :
+  (inline_for_proof__get2__result1 = inline_for_proof__get2__result2)
+
+axiom H3 :
+  (inline_for_proof__get2__result3 = inline_for_proof__get2__result1)
+
+axiom H4 : ((b = true) -> ((1 <= i) and (i <= 100)))
+
+axiom H5 : ((b = true) -> (o = i))
+
+axiom H6 : ((b = true) -> (o1 = (x[o])))
+
+axiom H7 : ((b = true) -> (o4 = to_rep(o1)))
+
+axiom H8 : ((not (b = true)) -> ((1 <= i) and (i <= 100)))
+
+axiom H9 : ((not (b = true)) -> (o2 = i))
+
+axiom H10 : ((not (b = true)) -> (o3 = (y[o2])))
+
+axiom H11 : ((not (b = true)) -> (o4 = to_rep(o3)))
+
+axiom H12 : (result = inline_for_proof__get2__result)
+
+axiom H13 : (inline_for_proof__get2__result1 = o4)
+
+axiom H14 :
+  (inline_for_proof__get2__result4 = inline_for_proof__get2__result2)
+
+axiom H15 :
+  (inline_for_proof__get2__result5 = inline_for_proof__get2__result3)
+
+axiom H16 : (result1 = inline_for_proof__get2__result4)
+
  (* File "inline_for_proof.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:(int,t) farray. forall b:bool.
-  forall inline_for_proof__get2__result:int. forall o:int. forall o1:t.
-  forall o2:int. forall o3:t. forall o4:int. forall result:int.
-  forall inline_for_proof__get2__result1:int.
-  forall inline_for_proof__get2__result2:int.
-  forall inline_for_proof__get2__result3:int.
-  forall inline_for_proof__get2__result4:int.
-  forall inline_for_proof__get2__result5:int.
-  (forall result1:int. ((in_range1(i) and (((1 <= i) and (i <= 100)) and
-  (((((inline_for_proof__get2__result1 = inline_for_proof__get2__result2) and
-  (inline_for_proof__get2__result3 = inline_for_proof__get2__result1)) and
-  ((((b = true) and (((((1 <= i) and (i <= 100)) and (o = i)) and
-  (o1 = (x[o]))) and (o4 = to_rep(o1)))) or ((not (b = true)) and
-  (((((1 <= i) and (i <= 100)) and (o2 = i)) and (o3 = (y[o2]))) and
-  (o4 = to_rep(o3))))) and (({ int__content = result } = { int__content =
-  inline_for_proof__get2__result }) and
-  (inline_for_proof__get2__result1 = o4)))) and (({ int__content =
-  inline_for_proof__get2__result4 } = { int__content =
-  inline_for_proof__get2__result2 }) and
-  (inline_for_proof__get2__result5 = inline_for_proof__get2__result3))) and
-  (result1 = inline_for_proof__get2__result4)))) -> (((b = true) ->
+goal WP_parameter_def : (((b = true) ->
   (inline_for_proof__get2__result4 = to_rep((x[i])))) and
-  ((not (b = true)) -> (inline_for_proof__get2__result4 = to_rep((y[i]))))))))
+  ((not (b = true)) -> (inline_for_proof__get2__result4 = to_rep((y[i])))))

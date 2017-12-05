@@ -89,26 +89,50 @@ logic c : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "logic.adb", line 127, characters 0-0 *)
-goal WP_parameter_def :
-  (forall logic__equivalence_test_3__result:bool. forall result:bool.
-  forall logic__equivalence_test_3__result1:bool.
-  forall logic__equivalence_test_3__result2:bool.
-  forall logic__equivalence_test_3__result3:bool.
-  forall logic__equivalence_test_3__result4:bool.
-  forall logic__equivalence_test_3__result5:bool.
-  (forall result1:bool.
-  ((((((logic__equivalence_test_3__result1 = logic__equivalence_test_3__result2) and
-  (logic__equivalence_test_3__result3 = logic__equivalence_test_3__result1)) and
-  ((result = logic__equivalence_test_3__result) and
-  (((((to_int(b) = to_int(c)) and (to_int(a) = to_int(true))) or
-  ((not (to_int(b) = to_int(c))) and (to_int(a) = to_int(false)))) and
-  (logic__equivalence_test_3__result1 = true)) or
+logic logic__equivalence_test_3__result : bool
+
+logic result : bool
+
+logic logic__equivalence_test_3__result1 : bool
+
+logic logic__equivalence_test_3__result2 : bool
+
+logic logic__equivalence_test_3__result3 : bool
+
+logic logic__equivalence_test_3__result4 : bool
+
+logic logic__equivalence_test_3__result5 : bool
+
+logic result1 : bool
+
+axiom H :
+  (logic__equivalence_test_3__result1 = logic__equivalence_test_3__result2)
+
+axiom H1 :
+  (logic__equivalence_test_3__result3 = logic__equivalence_test_3__result1)
+
+axiom H2 : (result = logic__equivalence_test_3__result)
+
+axiom H3 : (((((to_int(b) = to_int(c)) and (to_int(a) = to_int(true))) or
+  ((not (to_int(b) = to_int(c))) and (to_int(a) = to_int(false)))) ->
+  (logic__equivalence_test_3__result1 = true)) and
   ((not (((to_int(b) = to_int(c)) -> (to_int(a) = to_int(true))) and
-  ((not (to_int(b) = to_int(c))) -> (to_int(a) = to_int(false))))) and
-  (logic__equivalence_test_3__result1 = false))))) and
-  ((logic__equivalence_test_3__result4 = logic__equivalence_test_3__result2) and
-  (logic__equivalence_test_3__result5 = logic__equivalence_test_3__result3))) and
-  (result1 = logic__equivalence_test_3__result4)) ->
-  ((logic__equivalence_test_3__result4 = true) -> (((a = true) <->
-  (b = true)) -> (c = true))))))
+  ((not (to_int(b) = to_int(c))) -> (to_int(a) = to_int(false))))) ->
+  (logic__equivalence_test_3__result1 = false)))
+
+axiom H4 :
+  (logic__equivalence_test_3__result4 = logic__equivalence_test_3__result2)
+
+axiom H5 :
+  (logic__equivalence_test_3__result5 = logic__equivalence_test_3__result3)
+
+axiom H6 : (result1 = logic__equivalence_test_3__result4)
+
+axiom H7 : (logic__equivalence_test_3__result4 = true)
+
+axiom H8 : ((a = true) -> (b = true))
+
+axiom H9 : ((b = true) -> (a = true))
+
+ (* File "logic.adb", line 127, characters 0-0 *)
+goal WP_parameter_def : (c = true)

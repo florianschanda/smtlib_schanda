@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -599,7 +599,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -691,8 +691,33 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic z : int
+
+logic l : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : int
+
+logic result : t
+
+logic l1 : t
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(z))
+
+axiom H3 : true
+
+axiom H4 : ((o = (x + y)) and in_range((x + y)))
+
  (* File "p.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:int. forall o:int. (in_range(x) -> (in_range(y) ->
-  ((((-2147483648) <= 2147483647) -> in_range(z)) -> (((o = (x + y)) and
-  in_range((x + y))) -> uint_in_range(o))))))
+goal WP_parameter_def : uint_in_range(o)

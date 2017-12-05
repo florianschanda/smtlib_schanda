@@ -107,20 +107,40 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic current_cycles : int
+
+logic entities__get_current_cycles__result : int
+
+logic result : int
+
+logic entities__get_current_cycles__result1 : int
+
+logic entities__get_current_cycles__result2 : int
+
+logic entities__get_current_cycles__result3 : int
+
+logic entities__get_current_cycles__result4 : int
+
+logic entities__get_current_cycles__result5 : int
+
+axiom H : in_range(current_cycles)
+
+axiom H1 :
+  (entities__get_current_cycles__result1 = entities__get_current_cycles__result2)
+
+axiom H2 :
+  (entities__get_current_cycles__result3 = entities__get_current_cycles__result1)
+
+axiom H3 : (result = entities__get_current_cycles__result)
+
+axiom H4 : (entities__get_current_cycles__result1 = current_cycles)
+
+axiom H5 :
+  (entities__get_current_cycles__result4 = entities__get_current_cycles__result2)
+
+axiom H6 :
+  (entities__get_current_cycles__result5 = entities__get_current_cycles__result3)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall current_cycles:int.
-  forall entities__get_current_cycles__result:int. forall result:int.
-  forall entities__get_current_cycles__result1:int.
-  forall entities__get_current_cycles__result2:int.
-  forall entities__get_current_cycles__result3:int.
-  forall entities__get_current_cycles__result4:int.
-  forall entities__get_current_cycles__result5:int.
-  (in_range(current_cycles) ->
-  (((((entities__get_current_cycles__result1 = entities__get_current_cycles__result2) and
-  (entities__get_current_cycles__result3 = entities__get_current_cycles__result1)) and
-  ((result = entities__get_current_cycles__result) and
-  (entities__get_current_cycles__result1 = current_cycles))) and
-  ((entities__get_current_cycles__result4 = entities__get_current_cycles__result2) and
-  (entities__get_current_cycles__result5 = entities__get_current_cycles__result3))) ->
-  (entities__get_current_cycles__result4 = current_cycles))))
+  (entities__get_current_cycles__result4 = current_cycles)

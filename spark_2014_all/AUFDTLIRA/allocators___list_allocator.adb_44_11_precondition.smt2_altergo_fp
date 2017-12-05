@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tcount_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -846,6 +846,187 @@ axiom is_empty__post_axiom :
   (forall item:int. (not (in_range9(item) and (contains(container,
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
+
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep2
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic e : int
+
+logic o : bool
+
+logic j : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic k : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___276 : int
+
+logic o5 : int
+
+logic o6 : status
+
+logic o7 : resource
+
+logic o8 : status
+
+logic o9 : resource
+
+logic o10 : resource
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+axiom H : in_range3(first_available)
+
+axiom H1 : ((o24 = length(model____split_fields)) and (in_range6(o24) and
+  ((0 + o24) <= 2147483647)))
+
+axiom H2 : (((o24 <= 10000) -> (result4 = true)) and ((not (o24 <= 10000)) ->
+  (result4 = false)))
+
+axiom H3 : ((result4 = true) -> ((o23 = length1(model____split_fields1)) and
+  in_range6(o23)))
+
+axiom H4 : ((result4 = true) -> (((o23 <= 10000) -> (result3 = true)) and
+  ((not (o23 <= 10000)) -> (result3 = false))))
+
+axiom H5 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H6 : ((result3 = true) -> ((o19 = length1(model____split_fields1)) and
+  in_range6(o19)))
+
+axiom H7 : ((result3 = true) -> ((o20 = length(model____split_fields)) and
+  (in_range6(o20) and ((0 + o20) <= 2147483647))))
+
+axiom H8 : ((result3 = true) -> (o21 = (o20 + o19)))
+
+axiom H9 : ((result3 = true) -> ((o22 = o21) and in_range2(o21)))
+
+axiom H10 : ((result3 = true) -> (((o22 = 10000) -> (result2 = true)) and
+  ((not (o22 = 10000)) -> (result2 = false))))
+
+axiom H11 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H12 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((o17 = length(model____split_fields)) and (in_range6(o17) and
+  ((0 + o17) <= 2147483647)))))
+
+axiom H13 : ((result2 = true) -> ((not (first_available = 0)) ->
+  (((0 <  o17) -> (result5 = true)) and ((not (0 <  o17)) ->
+  (result5 = false)))))
+
+axiom H14 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((result5 = true) -> ((o16 = get(model____split_fields, 1)) and
+  in_range7(o16)))))
+
+axiom H15 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((result5 = true) -> (((o16 = first_available) -> (result1 = true)) and
+  ((not (o16 = first_available)) -> (result1 = false))))))
+
+axiom H16 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((not (result5 = true)) -> (result1 = false))))
+
+axiom H17 : ((result2 = true) -> ((first_available = 0) ->
+  ((o18 = length(model____split_fields)) and (in_range6(o18) and
+  ((0 + o18) <= 2147483647)))))
+
+axiom H18 : ((result2 = true) -> ((first_available = 0) -> (((o18 = 0) ->
+  (result1 = true)) and ((not (o18 = 0)) -> (result1 = false)))))
+
+axiom H19 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H20 : ((result1 = true) -> ((o1 = length(model____split_fields)) and
+  (in_range6(o1) and ((0 + o1) <= 2147483647))))
+
+axiom H21 : ((result1 = true) -> (((j <= o1) -> (o2 = true)) and
+  ((not (j <= o1)) -> (o2 = false))))
+
+axiom H22 : ((result1 = true) -> (((1 <= j) -> (result6 = o2)) and
+  ((not (1 <= j)) -> (result6 = false))))
+
+axiom H23 : ((result1 = true) -> (((result = true) ->
+  (forall j1:int. (((1 <= j1) and (j1 <= length(model____split_fields))) ->
+  ((in_range4(get(model____split_fields, j1)) and
+  (((j1 <  length(model____split_fields)) ->
+  (to_rep((((data[get(model____split_fields,
+  j1)])).us_split_fields1).rec__list_allocator__cell__next) = get(model____split_fields,
+  (j1 + 1)))) and ((not (j1 <  length(model____split_fields))) ->
+  (to_rep((((data[get(model____split_fields,
+  j1)])).us_split_fields1).rec__list_allocator__cell__next) = 0)))) and
+  (forall k1:int. (((1 <= k1) and (k1 <= (j1 - 1))) ->
+  (not (get(model____split_fields, j1) = get(model____split_fields, k1))))))))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= length(model____split_fields))) ->
+   ((in_range4(get(model____split_fields, j1)) and
+   (((j1 <  length(model____split_fields)) and
+   (to_rep((((data[get(model____split_fields,
+   j1)])).us_split_fields1).rec__list_allocator__cell__next) = get(model____split_fields,
+   (j1 + 1)))) or ((not (j1 <  length(model____split_fields))) and
+   (to_rep((((data[get(model____split_fields,
+   j1)])).us_split_fields1).rec__list_allocator__cell__next) = 0)))) and
+   (forall k1:int. (((1 <= k1) and (k1 <= (j1 - 1))) ->
+   (not (get(model____split_fields, j1) = get(model____split_fields, k1)))))))) ->
+  (result = true))))
+
+axiom H24 : ((not (result1 = true)) -> (result = false))
+
+axiom H25 : (result = true)
 
  (* File "list_allocator.ads", line 82, characters 0-0 *)
 goal WP_parameter_def : true

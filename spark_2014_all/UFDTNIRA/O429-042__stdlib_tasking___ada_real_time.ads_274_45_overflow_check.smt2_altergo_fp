@@ -84,7 +84,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type duration
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -194,18 +194,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -362,7 +362,7 @@ function time_span__ref___projection(a: time_span__ref) : us_rep =
 
 type tseconds_countB
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -419,7 +419,7 @@ function tseconds_countB__ref___projection(a: tseconds_countB__ref) : tseconds_c
 
 type seconds_count
 
-predicate in_range3(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range3(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -481,30 +481,132 @@ axiom ts_sc__def_axiom :
   (forall ts1:us_rep [ts_sc(ts1)].
   (ts_sc(ts1) = to_int1(to_fixed(to_duration__2(ts1)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : duration
+
+logic o7 : duration
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : duration
+
+logic o18 : duration
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : bool
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : bool
+
+logic o32 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range3(sc)
+
+axiom H1 : ((o30 = (3 * 9223372036)) and in_range2((3 * 9223372036)))
+
+axiom H2 : (((sc <= o30) -> (o31 = true)) and ((not (sc <= o30)) ->
+  (o31 = false)))
+
+axiom H3 : ((o29 = (3 * (- 9223372036))) and in_range2((3 * (- 9223372036))))
+
+axiom H4 : (((o29 <= sc) -> (o32 = true)) and ((not (o29 <= sc)) ->
+  (o32 = false)))
+
+axiom H5 : (result = match_bool(o32, o31, false))
+
+axiom H6 : (result = true)
+
+axiom H7 : ((o25 = (9223372036 + 1)) and in_range2((9223372036 + 1)))
+
+axiom H8 : ((o26 = result_sc(sc, ts)) and (in_range3(o26) and
+  (o26 = (sc + ts_sc(ts)))))
+
+axiom H9 : (((o26 <= o25) -> (o27 = true)) and ((not (o26 <= o25)) ->
+  (o27 = false)))
+
+axiom H10 : ((o23 = result_sc(sc, ts)) and (in_range3(o23) and
+  (o23 = (sc + ts_sc(ts)))))
+
+axiom H11 : ((o24 = ((- 9223372036) - 1)) and
+  in_range2(((- 9223372036) - 1)))
+
+axiom H12 : (((o24 <= o23) -> (o28 = true)) and ((not (o24 <= o23)) ->
+  (o28 = false)))
+
+axiom H13 : (result1 = match_bool(o28, o27, false))
+
+axiom H14 : (result1 = true)
+
+axiom H15 : ((o = result_sc(sc, ts)) and (in_range3(o) and
+  (o = (sc + ts_sc(ts)))))
+
+axiom H16 : (((0 <  o) -> (result2 = true)) and ((not (0 <  o)) ->
+  (result2 = false)))
+
+axiom H17 : (not (result2 = true))
+
+axiom H18 : ((o18 = ts_fraction(ts)) and
+  (o18 = of_fixed((to_fixed(to_duration__2(ts)) - to_fixed(of_fixed((ts_sc(ts) * 1000000000)))))))
+
+axiom H19 : (o19 = to_fixed(o18))
+
+axiom H20 : ((o12 = result_sc(sc, ts)) and (in_range3(o12) and
+  (o12 = (sc + ts_sc(ts)))))
+
+axiom H21 : (o13 = (o12 + 10))
+
  (* File "ada_real_time.ads", line 239, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:duration.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:bool. forall o10:bool. forall o11:int. forall o12:int.
-  forall o13:bool. forall o14:bool. forall result:bool. forall result1:bool.
-  forall result2:bool. (in_range3(sc) -> (((((o12 = (3 * 9223372036)) and
-  in_range2((3 * 9223372036))) and (((sc <= o12) and (o13 = true)) or
-  ((not (sc <= o12)) and (o13 = false)))) and
-  ((((o11 = (3 * (-9223372036))) and in_range2((3 * (-9223372036)))) and
-  (((o11 <= sc) and (o14 = true)) or ((not (o11 <= sc)) and
-  (o14 = false)))) and (result = match_bool(o14, o13, false)))) ->
-  ((result = true) -> (((((o7 = (9223372036 + 1)) and
-  in_range2((9223372036 + 1))) and (((o8 = result_sc(sc, ts)) and
-  (in_range3(o8) and (o8 = (sc + ts_sc(ts))))) and (((o8 <= o7) and
-  (o9 = true)) or ((not (o8 <= o7)) and (o9 = false))))) and
-  ((((o5 = result_sc(sc, ts)) and (in_range3(o5) and
-  (o5 = (sc + ts_sc(ts))))) and (((o6 = ((-9223372036) - 1)) and
-  in_range2(((-9223372036) - 1))) and (((o6 <= o5) and (o10 = true)) or
-  ((not (o6 <= o5)) and (o10 = false))))) and (result1 = match_bool(o10, o9,
-  false)))) -> ((result1 = true) -> ((((o = result_sc(sc, ts)) and
-  (in_range3(o) and (o = (sc + ts_sc(ts))))) and (((0 <  o) and
-  (result2 = true)) or ((not (0 <  o)) and (result2 = false)))) ->
-  ((not (result2 = true)) -> ((((o3 = ts_fraction(ts)) and
-  (o3 = of_fixed((to_fixed(to_duration__2(ts)) - to_fixed(of_fixed((ts_sc(ts) * 1000000000))))))) and
-  (o4 = to_fixed(o3))) -> ((((o1 = result_sc(sc, ts)) and (in_range3(o1) and
-  (o1 = (sc + ts_sc(ts))))) and (o2 = (o1 + 10))) -> in_range2(o2)))))))))))
+goal WP_parameter_def : in_range2(o13)

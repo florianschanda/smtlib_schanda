@@ -76,6 +76,7 @@
 (declare-const o7 Int)
 (declare-const o8 Int)
 (declare-const o9 Int)
+(declare-const o10 Int)
 (assert (in_range1 c3))
 (assert (= (add_annotated_local 42 44) c3))
 (assert (in_range1 c4))

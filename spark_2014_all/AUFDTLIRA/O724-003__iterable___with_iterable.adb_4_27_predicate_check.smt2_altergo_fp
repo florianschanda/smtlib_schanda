@@ -622,11 +622,78 @@ axiom get__def_axiom :
   us_split_fields1 = { rec__with_iterable__container__content = a } },
   i) = to_rep((a[i]))))))
 
+logic a__split_fields : (int,natural) farray
+
+logic first__split_fields : natural
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic temp___221 : natural
+
+logic temp___2211 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic temp___222 : natural
+
+logic temp___2221 : natural
+
+logic with_iterable__set_to_0__first__assume : natural
+
+logic with_iterable__set_to_0__first__assume1 : natural
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : (int,natural) farray
+
+logic temp___225 : (int,natural) farray
+
+logic result : natural
+
+logic first__split_fields1 : natural
+
+logic result1 : (int,natural) farray
+
+logic a__split_fields1 : (int,natural) farray
+
+logic a__split_fields2 : (int,natural) farray
+
+logic first__split_fields2 : natural
+
+logic a__split_fields3 : (int,natural) farray
+
+logic first__split_fields3 : natural
+
+axiom H : (to_rep(o1) = 1)
+
+axiom H1 : (o1 = o2)
+
+axiom H2 : (to_rep(o) = 101)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___221 = o3)
+
+axiom H5 : (temp___2211 = o2)
+
  (* File "with_iterable.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:natural. forall o1:natural. forall o2:natural. forall o3:natural.
-  forall temp___221:natural. forall temp___2211:natural.
-  ((((to_rep(o1) = 1) and (o1 = o2)) and (((to_rep(o) = 101) and
-  (o = o3)) and ((temp___221 = o3) and (temp___2211 = o2)))) ->
-  ((1 <= to_rep(temp___2211)) and
-  (to_rep(temp___2211) <= to_rep(temp___221)))))
+goal WP_parameter_def : ((1 <= to_rep(temp___2211)) and
+  (to_rep(temp___2211) <= to_rep(temp___221)))

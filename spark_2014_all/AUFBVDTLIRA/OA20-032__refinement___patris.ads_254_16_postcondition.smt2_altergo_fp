@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -974,7 +974,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1360,7 +1360,7 @@ axiom coerce_axiom1 :
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq11 : int, int -> bool
 
@@ -1399,7 +1399,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq12 : int, int -> bool
 
@@ -3252,294 +3252,662 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall score_nbr:t. forall level_nbr:t. forall line_counter:t.
-  forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall to_line:int. forall complete_lines:t. forall del_line:int.
-  forall from_line:int. forall temp___2178:int. forall temp___2177:t.
-  forall temp___2176:int. forall temp___2174:(int,(int,cell) farray) farray.
-  forall o:t. forall temp___2186:int. forall temp___2185:int.
-  forall temp___2183:(int,(int,cell) farray) farray. forall o1:bool.
-  forall o2:int. forall o3:t. forall o4:t1. forall o5:t1. forall o6:t1.
-  forall o7:t. forall temp___2190:t. forall o8:t. forall o9:t1.
-  forall o10:t1. forall o11:t1. forall o12:t. forall o13:t. forall o14:t.
-  forall o15:t1. forall o16:t1. forall o17:t1. forall o18:t.
-  forall temp___2192:t. forall o19:t. forall o20:t1. forall o21:t1.
-  forall o22:t1. forall o23:t. forall o24:t. forall o25:t. forall o26:t1.
-  forall o27:t1. forall o28:t1. forall o29:t. forall temp___2194:t.
-  forall o30:t. forall o31:t1. forall o32:t1. forall o33:t1. forall o34:t.
-  forall o35:t. forall o36:t. forall o37:t1. forall o38:t1. forall o39:t1.
-  forall o40:t. forall temp___2196:t. forall o41:t. forall o42:t1.
-  forall o43:t1. forall o44:t1. forall o45:t. forall o46:t. forall o47:t.
-  forall o48:t. forall o49:t. forall score_nbr1:t. forall level_nbr1:t.
-  forall cur_board1:(int,(int,cell) farray) farray. forall from_line1:int.
-  forall result:int. forall to_line1:int. forall result1:t.
-  forall complete_lines1:t. forall result2:int. forall del_line1:int.
-  forall result3:bool. forall result4:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray. forall result5:int.
-  forall to_line2:int. forall result6:t. forall complete_lines2:t.
-  forall cur_board3:(int,(int,cell) farray) farray. forall to_line3:int.
-  forall complete_lines3:t. forall del_line2:int.
-  forall cur_board4:(int,(int,cell) farray) farray. forall to_line4:int.
-  forall complete_lines4:t. forall del_line3:int.
-  forall cur_board5:(int,(int,cell) farray) farray. forall to_line5:int.
-  forall complete_lines5:t. forall del_line4:int.
-  forall cur_board6:(int,(int,cell) farray) farray. forall to_line6:int.
-  forall complete_lines6:t. forall del_line5:int.
-  forall cur_board7:(int,(int,cell) farray) farray. forall to_line7:int.
-  forall complete_lines7:t. forall del_line6:int. forall result7:int.
-  forall from_line2:int. forall cur_board8:(int,(int,cell) farray) farray.
-  forall to_line8:int. forall from_line3:int. forall result8:bool.
-  forall result9:(int,(int,cell) farray) farray.
-  forall cur_board9:(int,(int,cell) farray) farray.
-  forall result10:(int,(int,cell) farray) farray.
-  forall cur_board10:(int,(int,cell) farray) farray. forall result11:int.
-  forall to_line9:int. forall cur_board11:(int,(int,cell) farray) farray.
-  forall to_line10:int. forall cur_board12:(int,(int,cell) farray) farray.
-  forall to_line11:int. forall cur_board13:map__ref1.
-  forall to_line12:int__ref. forall from_line4:int__ref.
-  forall cur_board14:(int,(int,cell) farray) farray. forall to_line13:int.
-  forall from_line5:int. forall cur_board15:map__ref1.
-  forall to_line14:int__ref. forall from_line6:int__ref.
-  forall cur_board16:(int,(int,cell) farray) farray. forall to_line15:int.
-  forall from_line7:int. forall cur_board17:map__ref1.
-  forall to_line16:int__ref. forall from_line8:int__ref.
-  forall cur_board18:(int,(int,cell) farray) farray. forall to_line17:int.
-  forall from_line9:int. forall result12:bool. forall result13:t__ref.
-  forall score_nbr2:t. forall result14:bool. forall result15:t__ref.
-  forall score_nbr3:t. forall result16:bool. forall result17:t__ref.
-  forall score_nbr4:t. forall result18:bool. forall result19:t__ref.
-  forall score_nbr5:t. forall score_nbr6:t__ref. forall score_nbr7:t.
-  forall score_nbr8:t__ref. forall score_nbr9:t. forall score_nbr10:t__ref.
-  forall score_nbr11:t. forall score_nbr12:t__ref. forall score_nbr13:t.
-  forall result20:t__ref. forall line_counter1:t. forall result21:t__ref.
-  forall level_nbr2:t. forall result22:t__ref. forall line_counter2:t.
-  forall level_nbr3:t__ref. forall line_counter3:t__ref. forall level_nbr4:t.
-  forall line_counter4:t. forall result23:int__ref. forall cur_state1:int.
-  forall score_nbr14:t__ref. forall level_nbr5:t__ref.
-  forall line_counter5:t__ref. forall cur_board19:map__ref1.
-  forall cur_state2:int__ref. forall to_line18:int__ref.
-  forall complete_lines8:t__ref. forall del_line7:int__ref.
-  forall from_line10:int__ref. forall score_nbr15:t. forall level_nbr6:t.
-  forall line_counter6:t. forall cur_board20:(int,(int,cell) farray) farray.
-  forall cur_state3:int. forall to_line19:int. forall complete_lines9:t.
-  forall del_line8:int. forall from_line11:int. ((in_range2(score_nbr) and
-  (in_range2(level_nbr) and (in_range2(line_counter) and
-  (in_range9(cur_state) and (((get_state(cur_state) = 2) and
-  (valid_configuration__2(cur_state, { rec__patris__piece__s =
-  cur_piece__split_fields; rec__patris__piece__d = cur_piece__split_fields1;
-  rec__patris__piece__x = cur_piece__split_fields2; rec__patris__piece__y =
-  cur_piece__split_fields3 }, cur_board) = true)) and
+logic score_nbr : t
+
+logic level_nbr : t
+
+logic line_counter : t
+
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic to_line : int
+
+logic complete_lines : t
+
+logic del_line : int
+
+logic from_line : int
+
+logic temp___2172 : int
+
+logic temp___2171 : t
+
+logic temp___2170 : int
+
+logic temp___2168 : (int,(int,cell) farray) farray
+
+logic o : t
+
+logic y : int
+
+logic o1 : t
+
+logic temp___2180 : int
+
+logic temp___2179 : int
+
+logic temp___2177 : (int,(int,cell) farray) farray
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : t
+
+logic o5 : t1
+
+logic o6 : t1
+
+logic o7 : t1
+
+logic o8 : t
+
+logic temp___2184 : t
+
+logic o9 : t
+
+logic o10 : t1
+
+logic o11 : t1
+
+logic o12 : t1
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t1
+
+logic o17 : t1
+
+logic o18 : t1
+
+logic o19 : t
+
+logic temp___2186 : t
+
+logic o20 : t
+
+logic o21 : t1
+
+logic o22 : t1
+
+logic o23 : t1
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t1
+
+logic o28 : t1
+
+logic o29 : t1
+
+logic o30 : t
+
+logic temp___2188 : t
+
+logic o31 : t
+
+logic o32 : t1
+
+logic o33 : t1
+
+logic o34 : t1
+
+logic o35 : t
+
+logic o36 : t
+
+logic o37 : t
+
+logic o38 : t1
+
+logic o39 : t1
+
+logic o40 : t1
+
+logic o41 : t
+
+logic temp___2190 : t
+
+logic o42 : t
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic o45 : t1
+
+logic o46 : t
+
+logic o47 : t
+
+logic o48 : t
+
+logic o49 : t
+
+logic o50 : t
+
+logic score_nbr1 : t
+
+logic level_nbr1 : t
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic from_line1 : int
+
+logic result : int
+
+logic to_line1 : int
+
+logic result1 : t
+
+logic complete_lines1 : t
+
+logic result2 : int
+
+logic del_line1 : int
+
+logic result3 : bool
+
+logic result4 : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result5 : int
+
+logic to_line2 : int
+
+logic result6 : t
+
+logic complete_lines2 : t
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic to_line3 : int
+
+logic complete_lines3 : t
+
+logic del_line2 : int
+
+logic result7 : int
+
+logic del_line3 : int
+
+logic result8 : bool
+
+logic result9 : (int,(int,cell) farray) farray
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic result10 : int
+
+logic to_line4 : int
+
+logic result11 : t
+
+logic complete_lines4 : t
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic to_line5 : int
+
+logic complete_lines5 : t
+
+logic del_line4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic to_line6 : int
+
+logic complete_lines6 : t
+
+logic del_line5 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic to_line7 : int
+
+logic complete_lines7 : t
+
+logic del_line6 : int
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic to_line8 : int
+
+logic complete_lines8 : t
+
+logic del_line7 : int
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic to_line9 : int
+
+logic complete_lines9 : t
+
+logic del_line8 : int
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic to_line10 : int
+
+logic complete_lines10 : t
+
+logic del_line9 : int
+
+logic result12 : int
+
+logic from_line2 : int
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic to_line11 : int
+
+logic from_line3 : int
+
+logic result13 : bool
+
+logic result14 : (int,(int,cell) farray) farray
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic result15 : (int,(int,cell) farray) farray
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic result16 : int
+
+logic to_line12 : int
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic to_line13 : int
+
+logic cur_board15 : (int,(int,cell) farray) farray
+
+logic to_line14 : int
+
+logic result17 : int
+
+logic from_line4 : int
+
+logic cur_board16 : (int,(int,cell) farray) farray
+
+logic to_line15 : int
+
+logic from_line5 : int
+
+logic cur_board17 : (int,(int,cell) farray) farray
+
+logic to_line16 : int
+
+logic from_line6 : int
+
+logic cur_board18 : (int,(int,cell) farray) farray
+
+logic to_line17 : int
+
+logic from_line7 : int
+
+logic cur_board19 : (int,(int,cell) farray) farray
+
+logic to_line18 : int
+
+logic from_line8 : int
+
+logic cur_board20 : (int,(int,cell) farray) farray
+
+logic to_line19 : int
+
+logic from_line9 : int
+
+logic cur_board21 : (int,(int,cell) farray) farray
+
+logic to_line20 : int
+
+logic from_line10 : int
+
+logic cur_board22 : (int,(int,cell) farray) farray
+
+logic to_line21 : int
+
+logic from_line11 : int
+
+logic cur_board23 : (int,(int,cell) farray) farray
+
+logic to_line22 : int
+
+logic from_line12 : int
+
+logic result18 : bool
+
+logic result19 : t
+
+logic score_nbr2 : t
+
+logic result20 : bool
+
+logic result21 : t
+
+logic score_nbr3 : t
+
+logic result22 : bool
+
+logic result23 : t
+
+logic score_nbr4 : t
+
+logic result24 : bool
+
+logic result25 : t
+
+logic score_nbr5 : t
+
+logic score_nbr6 : t
+
+logic score_nbr7 : t
+
+logic score_nbr8 : t
+
+logic score_nbr9 : t
+
+logic score_nbr10 : t
+
+logic score_nbr11 : t
+
+logic score_nbr12 : t
+
+logic score_nbr13 : t
+
+logic result26 : t
+
+logic line_counter1 : t
+
+logic result27 : t
+
+logic level_nbr2 : t
+
+logic result28 : t
+
+logic line_counter2 : t
+
+logic level_nbr3 : t
+
+logic line_counter3 : t
+
+logic level_nbr4 : t
+
+logic line_counter4 : t
+
+logic result29 : int
+
+logic cur_state1 : int
+
+logic score_nbr14 : t
+
+logic level_nbr5 : t
+
+logic line_counter5 : t
+
+logic cur_board24 : (int,(int,cell) farray) farray
+
+logic cur_state2 : int
+
+logic to_line23 : int
+
+logic complete_lines11 : t
+
+logic del_line10 : int
+
+logic from_line13 : int
+
+logic score_nbr15 : t
+
+logic level_nbr6 : t
+
+logic line_counter6 : t
+
+logic cur_board25 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic to_line24 : int
+
+logic complete_lines12 : t
+
+logic del_line11 : int
+
+logic from_line14 : int
+
+axiom H : in_range2(score_nbr)
+
+axiom H1 : in_range2(level_nbr)
+
+axiom H2 : in_range2(line_counter)
+
+axiom H3 : in_range9(cur_state)
+
+axiom H4 : ((get_state(cur_state) = 2) and (valid_configuration__2(cur_state,
+  { rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
+  cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
+  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true))
+
+axiom H5 :
   (((patris__delete_complete_lines__empty_line__aggregate_def(0) = empty_line) and
-  ((({ int__content = result } = { int__content = to_line }) and
-  (to_line1 = 20)) and (in_range4(to_line1) and ((({ t__content = result1
-  } = { t__content = complete_lines }) and (complete_lines1 = of_int(0))) and
-  (in_range2(complete_lines1) and (((({ int__content = result2 } = {
-  int__content = del_line }) and (del_line1 = 1)) and ((((1 <= del_line1) and
-  (del_line1 <= 20)) and ((((temp___2178 = del_line1) and
-  ((temp___2177 = complete_lines1) and ((temp___2176 = to_line1) and
-  ((temp___2174 = cur_board) and
+  (((result = to_line) and (to_line1 = 20)) and (in_range4(to_line1) and
+  (((result1 = complete_lines) and (complete_lines1 = of_int(0))) and
+  (in_range2(complete_lines1) and ((((result2 = del_line) and
+  (del_line1 = 1)) and ((((1 <= del_line1) and (del_line1 <= 20)) ->
+  ((((temp___2172 = del_line1) and ((temp___2171 = complete_lines1) and
+  ((temp___2170 = to_line1) and ((temp___2168 = cur_board) and
   ((((result3 = is_complete_line((cur_board[del_line1]))) and
   ((result3 = true) <->
   (forall x:int. (((1 <= x) and (x <= 10)) ->
   (not (to_rep(((cur_board[del_line1])[x])) = 0)))))) and
-  (((result3 = true) and ((({ map__content1 = result4 } = { map__content1 =
-  cur_board }) and (cur_board2 = (cur_board[del_line1 <- empty_line]))) and
+  (((result3 = true) -> (((result4 = cur_board) and
+  (cur_board2 = (cur_board[del_line1 <- empty_line]))) and
   (((to_line1 = result5) and (to_line2 = del_line1)) and
-  ((((ule(sub(of_int(100000), complete_lines1), of_int(1)) and
-  (o = sub(add(complete_lines1, of_int(1)), of_int(100000)))) or
-  ((not ule(sub(of_int(100000), complete_lines1), of_int(1))) and
+  ((((ule(sub(of_int(100000), complete_lines1), of_int(1)) ->
+  (o = sub(add(complete_lines1, of_int(1)), of_int(100000)))) and
+  ((not ule(sub(of_int(100000), complete_lines1), of_int(1))) ->
   (o = add(complete_lines1, of_int(1))))) and
   ((complete_lines1 = result6) and (complete_lines2 = o))) and
-  (to_rep(((cur_board2[del_line1])[1])) = 0))))) or
-  ((not (result3 = true)) and (((complete_lines2 = complete_lines1) and
+  (to_rep(((cur_board2[del_line1])[1])) = 0))))) and
+  ((not (result3 = true)) -> (((complete_lines2 = complete_lines1) and
   ((to_line2 = to_line1) and (cur_board2 = cur_board))) and
   ((complete_lines2 = complete_lines1) and ((to_line2 = to_line1) and
   (cur_board2 = cur_board1))))))) and
-  ((forall y:int. (((1 <= y) and (y <= del_line2)) ->
-   (not (is_complete_line((cur_board3[y])) = true)))) and
-  ((((((forall temp___2175:int. (((1 <= temp___2175) and
-       (temp___2175 <= 20)) -> ((del_line2 <  temp___2175) ->
-       ((cur_board3[temp___2175]) = (temp___2174[temp___2175]))))) and
+  ((forall y1:int. (((1 <= y1) and (y1 <= del_line2)) ->
+   (not (is_complete_line((cur_board3[y1])) = true)))) and
+  ((((((forall temp___2169:int. (((1 <= temp___2169) and
+       (temp___2169 <= 20)) -> ((del_line2 <  temp___2169) ->
+       ((cur_board3[temp___2169]) = (temp___2168[temp___2169]))))) and
   ((1 <= 20) -> in_range4(to_line3))) and (ule(of_int(0), of_int(99999)) ->
   in_range2(complete_lines3))) and ((1 <= 20) -> in_range4(del_line2))) and
   ((1 <= del_line2) and (del_line2 <= 20))) and (del_line2 = 20)))))))) and
-  (((del_line2 = del_line3) and ((complete_lines3 = complete_lines4) and
-  ((to_line3 = to_line4) and (cur_board3 = cur_board4)))) and
-  ((del_line4 = del_line2) and ((complete_lines5 = complete_lines3) and
-  ((to_line5 = to_line3) and (cur_board5 = cur_board3)))))) and ((({
-  int__content = del_line5 } = { int__content = del_line3 }) and (({
-  t__content = complete_lines6 } = { t__content = complete_lines4 }) and (({
-  int__content = to_line6 } = { int__content = to_line4 }) and ({
-  map__content1 = cur_board6 } = { map__content1 = cur_board4 })))) and
-  ((del_line6 = del_line4) and ((complete_lines7 = complete_lines5) and
-  ((to_line7 = to_line5) and (cur_board7 = cur_board5))))))) or
-  ((not ((1 <= del_line1) and (del_line1 <= 20))) and
-  (((del_line1 = del_line5) and ((complete_lines1 = complete_lines6) and
-  ((to_line1 = to_line6) and ({ map__content1 = cur_board6 } = {
-  map__content1 = cur_board })))) and ((del_line6 = del_line1) and
-  ((complete_lines7 = complete_lines1) and ((to_line7 = to_line1) and
-  (cur_board7 = cur_board1)))))))) and
-  ((no_complete_lines(cur_board6) = true) and
-  ((((not (complete_lines6 = of_int(0))) and (((((to_line6 - 1) = r21b) and
-  in_range1(r21b)) and (((result7 = from_line) and (from_line2 = r21b)) and
-  ((((1 <= from_line2) and (from_line2 <= r21b)) and
-  ((((temp___2186 = to_line6) and ((temp___2185 = from_line2) and
-  ((temp___2183 = cur_board6) and
-  (((no_complete_lines(cur_board8) = true) and (from_line3 <  to_line8)) and
-  (((((1 <= r21b) -> dynamic_property(1, r21b, from_line3)) and ((1 <= 20) ->
-  in_range4(to_line8))) and ((1 <= from_line3) and (from_line3 <= r21b))) and
-  (((((o1 = is_empty_line((cur_board8[from_line3]))) and ((o1 = true) <->
+  (((del_line6 = del_line2) and ((complete_lines7 = complete_lines3) and
+  ((to_line7 = to_line3) and (cur_board7 = cur_board3)))) and
+  ((del_line7 = del_line2) and ((complete_lines8 = complete_lines3) and
+  ((to_line8 = to_line3) and (cur_board8 = cur_board3)))))) and
+  (((del_line8 = del_line6) and ((complete_lines9 = complete_lines7) and
+  ((to_line9 = to_line7) and (cur_board9 = cur_board7)))) and
+  ((del_line9 = del_line7) and ((complete_lines10 = complete_lines8) and
+  ((to_line10 = to_line8) and (cur_board10 = cur_board8))))))) and
+  ((not ((1 <= del_line1) and (del_line1 <= 20))) ->
+  (((del_line8 = del_line1) and ((complete_lines9 = complete_lines1) and
+  ((to_line9 = to_line1) and (cur_board9 = cur_board)))) and
+  ((del_line9 = del_line1) and ((complete_lines10 = complete_lines1) and
+  ((to_line10 = to_line1) and (cur_board10 = cur_board1)))))))) and
+  ((no_complete_lines(cur_board9) = true) and
+  ((((not (complete_lines9 = of_int(0))) -> (((((to_line9 - 1) = r21b) and
+  in_range1(r21b)) and (((result12 = from_line) and (from_line2 = r21b)) and
+  ((((1 <= from_line2) and (from_line2 <= r21b)) ->
+  ((((temp___2180 = to_line9) and ((temp___2179 = from_line2) and
+  ((temp___2177 = cur_board9) and
+  (((no_complete_lines(cur_board11) = true) and
+  (from_line3 <  to_line11)) and (((((1 <= r21b) -> dynamic_property(1, r21b,
+  from_line3)) and ((1 <= 20) -> in_range4(to_line11))) and
+  ((1 <= from_line3) and (from_line3 <= r21b))) and
+  (((((o2 = is_empty_line((cur_board11[from_line3]))) and ((o2 = true) <->
   (forall x:int. (((1 <= x) and (x <= 10)) ->
-  (to_rep(((cur_board8[from_line3])[x])) = 0))))) and (((not (o1 = true)) and
-  (result8 = true)) or ((o1 = true) and (result8 = false)))) and
-  (((result8 = true) and ((((result9 = cur_board8) and
-  (cur_board9 = (cur_board8[to_line8 <- (cur_board8[from_line3])]))) and
-  (((result10 = cur_board9) and
-  (cur_board10 = (cur_board9[from_line3 <- empty_line]))) and
-  ((((o2 = (to_line8 - 1)) and in_range4((to_line8 - 1))) and
-  ((result11 = to_line8) and (to_line9 = o2))) and
-  (to_rep(((cur_board10[from_line3])[1])) = 0)))) and
-  (((to_line9 = to_line10) and (cur_board10 = cur_board11)) and
-  ((to_line11 = to_line9) and (cur_board12 = cur_board10))))) or
-  ((not (result8 = true)) and (((to_line8 = to_line10) and
-  (cur_board8 = cur_board11)) and ((to_line11 = to_line8) and
-  (cur_board12 = cur_board8)))))) and (from_line3 = 1))))))) and
-  (((from_line4 = { int__content = from_line3 }) and ((to_line12 = {
-  int__content = to_line10 }) and (cur_board13 = { map__content1 =
-  cur_board11 }))) and ((from_line5 = from_line3) and
-  ((to_line13 = to_line11) and (cur_board14 = cur_board12))))) and
-  (((from_line6 = from_line4) and ((to_line14 = to_line12) and
-  (cur_board15 = cur_board13))) and ((from_line7 = from_line5) and
-  ((to_line15 = to_line13) and (cur_board16 = cur_board14)))))) or
-  ((not ((1 <= from_line2) and (from_line2 <= r21b))) and (((from_line6 = {
-  int__content = from_line2 }) and ((to_line14 = { int__content = to_line6
-  }) and (cur_board15 = { map__content1 = cur_board6 }))) and
-  ((from_line7 = from_line2) and ((to_line15 = to_line7) and
-  (cur_board16 = cur_board7)))))))) and (((from_line8 = from_line6) and
-  ((to_line16 = to_line14) and (cur_board17 = cur_board15))) and
-  ((from_line9 = from_line7) and ((to_line17 = to_line15) and
-  (cur_board18 = cur_board16)))))) or ((complete_lines6 = of_int(0)) and
-  (((from_line8 = { int__content = from_line }) and ((to_line16 = {
-  int__content = to_line6 }) and (cur_board17 = { map__content1 = cur_board6
-  }))) and ((from_line9 = from_line1) and ((to_line17 = to_line7) and
-  (cur_board18 = cur_board7)))))) and ((((complete_lines6 = of_int(1)) and
-  ((((((((((ule(sub(of_int(100000), level_nbr), of_int(1)) and
-  (o3 = sub(add(level_nbr, of_int(1)), of_int(100000)))) or
-  ((not ule(sub(of_int(100000), level_nbr), of_int(1))) and
-  (o3 = add(level_nbr, of_int(1))))) and (o4 = toBig(o3))) and
-  (o5 = mul1(toBig(of_int(4)), o4))) and (o6 = urem1(o5,
-  of_int1(100000)))) and (o7 = toSmall(o6))) and
-  (temp___2190 = add(score_nbr, o7))) and ((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o8 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o8 = add(level_nbr, of_int(1))))) and
-  (o9 = toBig(o8))) and (o10 = mul1(toBig(of_int(4)), o9))) and
-  (o11 = urem1(o10, of_int1(100000)))) and (o12 = toSmall(o11))) and
-  ((ule(sub(of_int(100000), score_nbr), o12) and (result12 = true)) or
-  ((not ule(sub(of_int(100000), score_nbr), o12)) and
-  (result12 = false)))) and (((result12 = true) and (o13 = sub(temp___2190,
-  of_int(100000)))) or ((not (result12 = true)) and
-  (o13 = temp___2190))))) and ((result13 = { t__content = score_nbr }) and
-  (score_nbr2 = o13))) and ((score_nbr12 = { t__content = score_nbr2 }) and
-  (score_nbr13 = score_nbr2)))) or ((not (complete_lines6 = of_int(1))) and
-  ((((complete_lines6 = of_int(2)) and ((((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o14 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o14 = add(level_nbr, of_int(1))))) and
-  (o15 = toBig(o14))) and (o16 = mul1(toBig(of_int(10)), o15))) and
-  (o17 = urem1(o16, of_int1(100000)))) and (o18 = toSmall(o17))) and
-  (temp___2192 = add(score_nbr, o18))) and ((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o19 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o19 = add(level_nbr, of_int(1))))) and
-  (o20 = toBig(o19))) and (o21 = mul1(toBig(of_int(10)), o20))) and
-  (o22 = urem1(o21, of_int1(100000)))) and (o23 = toSmall(o22))) and
-  ((ule(sub(of_int(100000), score_nbr), o23) and (result14 = true)) or
-  ((not ule(sub(of_int(100000), score_nbr), o23)) and
-  (result14 = false)))) and (((result14 = true) and (o24 = sub(temp___2192,
-  of_int(100000)))) or ((not (result14 = true)) and
-  (o24 = temp___2192))))) and ((result15 = { t__content = score_nbr }) and
-  (score_nbr3 = o24))) and ((score_nbr10 = { t__content = score_nbr3 }) and
-  (score_nbr11 = score_nbr3)))) or ((not (complete_lines6 = of_int(2))) and
-  ((((complete_lines6 = of_int(3)) and ((((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o25 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o25 = add(level_nbr, of_int(1))))) and
-  (o26 = toBig(o25))) and (o27 = mul1(toBig(of_int(30)), o26))) and
-  (o28 = urem1(o27, of_int1(100000)))) and (o29 = toSmall(o28))) and
-  (temp___2194 = add(score_nbr, o29))) and ((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o30 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o30 = add(level_nbr, of_int(1))))) and
-  (o31 = toBig(o30))) and (o32 = mul1(toBig(of_int(30)), o31))) and
-  (o33 = urem1(o32, of_int1(100000)))) and (o34 = toSmall(o33))) and
-  ((ule(sub(of_int(100000), score_nbr), o34) and (result16 = true)) or
-  ((not ule(sub(of_int(100000), score_nbr), o34)) and
-  (result16 = false)))) and (((result16 = true) and (o35 = sub(temp___2194,
-  of_int(100000)))) or ((not (result16 = true)) and
-  (o35 = temp___2194))))) and ((result17 = { t__content = score_nbr }) and
-  (score_nbr4 = o35))) and ((score_nbr8 = { t__content = score_nbr4 }) and
-  (score_nbr9 = score_nbr4)))) or ((not (complete_lines6 = of_int(3))) and
-  ((((complete_lines6 = of_int(4)) and ((((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o36 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o36 = add(level_nbr, of_int(1))))) and
-  (o37 = toBig(o36))) and (o38 = mul1(toBig(of_int(120)), o37))) and
-  (o39 = urem1(o38, of_int1(100000)))) and (o40 = toSmall(o39))) and
-  (temp___2196 = add(score_nbr, o40))) and ((((((((ule(sub(of_int(100000),
-  level_nbr), of_int(1)) and (o41 = sub(add(level_nbr, of_int(1)),
-  of_int(100000)))) or ((not ule(sub(of_int(100000), level_nbr),
-  of_int(1))) and (o41 = add(level_nbr, of_int(1))))) and
-  (o42 = toBig(o41))) and (o43 = mul1(toBig(of_int(120)), o42))) and
-  (o44 = urem1(o43, of_int1(100000)))) and (o45 = toSmall(o44))) and
-  ((ule(sub(of_int(100000), score_nbr), o45) and (result18 = true)) or
-  ((not ule(sub(of_int(100000), score_nbr), o45)) and
-  (result18 = false)))) and (((result18 = true) and (o46 = sub(temp___2196,
-  of_int(100000)))) or ((not (result18 = true)) and
-  (o46 = temp___2196))))) and ((result19 = { t__content = score_nbr }) and
-  (score_nbr5 = o46))) and ((score_nbr6 = { t__content = score_nbr5 }) and
-  (score_nbr7 = score_nbr5)))) or ((not (complete_lines6 = of_int(4))) and
-  ((score_nbr6 = { t__content = score_nbr }) and
-  (score_nbr7 = score_nbr1)))) and ((score_nbr8 = score_nbr6) and
-  (score_nbr9 = score_nbr7))))) and ((score_nbr10 = score_nbr8) and
-  (score_nbr11 = score_nbr9))))) and ((score_nbr12 = score_nbr10) and
-  (score_nbr13 = score_nbr11))))) and ((((ule(sub(of_int(100000),
-  line_counter), complete_lines6) and (o47 = sub(add(line_counter,
-  complete_lines6), of_int(100000)))) or ((not ule(sub(of_int(100000),
-  line_counter), complete_lines6)) and (o47 = add(line_counter,
-  complete_lines6)))) and ((result20 = { t__content = line_counter }) and
-  (line_counter1 = o47))) and ((((uge(line_counter1, of_int(10)) and
-  ult(level_nbr, of_int(10))) and (((((ule(sub(of_int(100000), level_nbr),
-  of_int(1)) and (o48 = sub(add(level_nbr, of_int(1)), of_int(100000)))) or
-  ((not ule(sub(of_int(100000), level_nbr), of_int(1))) and
-  (o48 = add(level_nbr, of_int(1))))) and ((result21 = { t__content =
-  level_nbr }) and (level_nbr2 = o48))) and (((ult(line_counter1,
-  of_int(10)) and (o49 = add(sub(line_counter1, of_int(10)),
-  of_int(100000)))) or ((not ult(line_counter1, of_int(10))) and
-  (o49 = sub(line_counter1, of_int(10))))) and ((result22 = { t__content =
-  line_counter1 }) and (line_counter2 = o49)))) and (((line_counter3 = {
-  t__content = line_counter2 }) and (level_nbr3 = { t__content = level_nbr2
-  })) and ((line_counter4 = line_counter2) and
-  (level_nbr4 = level_nbr2))))) or ((not (uge(line_counter1, of_int(10)) and
-  ult(level_nbr, of_int(10)))) and (((line_counter3 = { t__content =
-  line_counter1 }) and (level_nbr3 = { t__content = level_nbr })) and
-  ((line_counter4 = line_counter1) and (level_nbr4 = level_nbr1))))) and
-  ((result23 = { int__content = cur_state }) and
-  (cur_state1 = 3))))))))))))) and (((from_line10 = from_line8) and
-  ((del_line7 = { int__content = del_line5 }) and ((complete_lines8 = {
-  t__content = complete_lines6 }) and ((to_line18 = to_line16) and
-  ((cur_state2 = { int__content = cur_state1 }) and
-  ((cur_board19 = cur_board17) and ((line_counter5 = line_counter3) and
+  (to_rep(((cur_board11[from_line3])[x])) = 0))))) and (((not (o2 = true)) ->
+  (result13 = true)) and ((o2 = true) -> (result13 = false)))) and
+  (((result13 = true) -> ((((result14 = cur_board11) and
+  (cur_board12 = (cur_board11[to_line11 <- (cur_board11[from_line3])]))) and
+  (((result15 = cur_board12) and
+  (cur_board13 = (cur_board12[from_line3 <- empty_line]))) and
+  ((((o3 = (to_line11 - 1)) and in_range4((to_line11 - 1))) and
+  ((result16 = to_line11) and (to_line12 = o3))) and
+  (to_rep(((cur_board13[from_line3])[1])) = 0)))) and
+  (((to_line13 = to_line12) and (cur_board14 = cur_board13)) and
+  ((to_line14 = to_line12) and (cur_board15 = cur_board13))))) and
+  ((not (result13 = true)) -> (((to_line13 = to_line11) and
+  (cur_board14 = cur_board11)) and ((to_line14 = to_line11) and
+  (cur_board15 = cur_board11)))))) and (from_line3 = 1))))))) and
+  (((from_line7 = from_line3) and ((to_line17 = to_line13) and
+  (cur_board18 = cur_board14))) and ((from_line8 = from_line3) and
+  ((to_line18 = to_line14) and (cur_board19 = cur_board15))))) and
+  (((from_line9 = from_line7) and ((to_line19 = to_line17) and
+  (cur_board20 = cur_board18))) and ((from_line10 = from_line8) and
+  ((to_line20 = to_line18) and (cur_board21 = cur_board19)))))) and
+  ((not ((1 <= from_line2) and (from_line2 <= r21b))) ->
+  (((from_line9 = from_line2) and ((to_line19 = to_line9) and
+  (cur_board20 = cur_board9))) and ((from_line10 = from_line2) and
+  ((to_line20 = to_line10) and (cur_board21 = cur_board10)))))))) and
+  (((from_line11 = from_line9) and ((to_line21 = to_line19) and
+  (cur_board22 = cur_board20))) and ((from_line12 = from_line10) and
+  ((to_line22 = to_line20) and (cur_board23 = cur_board21)))))) and
+  ((complete_lines9 = of_int(0)) -> (((from_line11 = from_line) and
+  ((to_line21 = to_line9) and (cur_board22 = cur_board9))) and
+  ((from_line12 = from_line1) and ((to_line22 = to_line10) and
+  (cur_board23 = cur_board10)))))) and ((((complete_lines9 = of_int(1)) ->
+  ((((((((((ule(sub(of_int(100000), level_nbr), of_int(1)) ->
+  (o4 = sub(add(level_nbr, of_int(1)), of_int(100000)))) and
+  ((not ule(sub(of_int(100000), level_nbr), of_int(1))) ->
+  (o4 = add(level_nbr, of_int(1))))) and (o5 = toBig(o4))) and
+  (o6 = mul1(toBig(of_int(4)), o5))) and (o7 = urem1(o6,
+  of_int1(100000)))) and (o8 = toSmall(o7))) and
+  (temp___2184 = add(score_nbr, o8))) and ((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o9 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o9 = add(level_nbr, of_int(1))))) and
+  (o10 = toBig(o9))) and (o11 = mul1(toBig(of_int(4)), o10))) and
+  (o12 = urem1(o11, of_int1(100000)))) and (o13 = toSmall(o12))) and
+  ((ule(sub(of_int(100000), score_nbr), o13) -> (result18 = true)) and
+  ((not ule(sub(of_int(100000), score_nbr), o13)) ->
+  (result18 = false)))) and (((result18 = true) -> (o14 = sub(temp___2184,
+  of_int(100000)))) and ((not (result18 = true)) ->
+  (o14 = temp___2184))))) and ((result19 = score_nbr) and
+  (score_nbr2 = o14))) and ((score_nbr12 = score_nbr2) and
+  (score_nbr13 = score_nbr2)))) and ((not (complete_lines9 = of_int(1))) ->
+  ((((complete_lines9 = of_int(2)) -> ((((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o15 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o15 = add(level_nbr, of_int(1))))) and
+  (o16 = toBig(o15))) and (o17 = mul1(toBig(of_int(10)), o16))) and
+  (o18 = urem1(o17, of_int1(100000)))) and (o19 = toSmall(o18))) and
+  (temp___2186 = add(score_nbr, o19))) and ((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o20 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o20 = add(level_nbr, of_int(1))))) and
+  (o21 = toBig(o20))) and (o22 = mul1(toBig(of_int(10)), o21))) and
+  (o23 = urem1(o22, of_int1(100000)))) and (o24 = toSmall(o23))) and
+  ((ule(sub(of_int(100000), score_nbr), o24) -> (result20 = true)) and
+  ((not ule(sub(of_int(100000), score_nbr), o24)) ->
+  (result20 = false)))) and (((result20 = true) -> (o25 = sub(temp___2186,
+  of_int(100000)))) and ((not (result20 = true)) ->
+  (o25 = temp___2186))))) and ((result21 = score_nbr) and
+  (score_nbr3 = o25))) and ((score_nbr10 = score_nbr3) and
+  (score_nbr11 = score_nbr3)))) and ((not (complete_lines9 = of_int(2))) ->
+  ((((complete_lines9 = of_int(3)) -> ((((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o26 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o26 = add(level_nbr, of_int(1))))) and
+  (o27 = toBig(o26))) and (o28 = mul1(toBig(of_int(30)), o27))) and
+  (o29 = urem1(o28, of_int1(100000)))) and (o30 = toSmall(o29))) and
+  (temp___2188 = add(score_nbr, o30))) and ((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o31 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o31 = add(level_nbr, of_int(1))))) and
+  (o32 = toBig(o31))) and (o33 = mul1(toBig(of_int(30)), o32))) and
+  (o34 = urem1(o33, of_int1(100000)))) and (o35 = toSmall(o34))) and
+  ((ule(sub(of_int(100000), score_nbr), o35) -> (result22 = true)) and
+  ((not ule(sub(of_int(100000), score_nbr), o35)) ->
+  (result22 = false)))) and (((result22 = true) -> (o36 = sub(temp___2188,
+  of_int(100000)))) and ((not (result22 = true)) ->
+  (o36 = temp___2188))))) and ((result23 = score_nbr) and
+  (score_nbr4 = o36))) and ((score_nbr8 = score_nbr4) and
+  (score_nbr9 = score_nbr4)))) and ((not (complete_lines9 = of_int(3))) ->
+  ((((complete_lines9 = of_int(4)) -> ((((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o37 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o37 = add(level_nbr, of_int(1))))) and
+  (o38 = toBig(o37))) and (o39 = mul1(toBig(of_int(120)), o38))) and
+  (o40 = urem1(o39, of_int1(100000)))) and (o41 = toSmall(o40))) and
+  (temp___2190 = add(score_nbr, o41))) and ((((((((ule(sub(of_int(100000),
+  level_nbr), of_int(1)) -> (o42 = sub(add(level_nbr, of_int(1)),
+  of_int(100000)))) and ((not ule(sub(of_int(100000), level_nbr),
+  of_int(1))) -> (o42 = add(level_nbr, of_int(1))))) and
+  (o43 = toBig(o42))) and (o44 = mul1(toBig(of_int(120)), o43))) and
+  (o45 = urem1(o44, of_int1(100000)))) and (o46 = toSmall(o45))) and
+  ((ule(sub(of_int(100000), score_nbr), o46) -> (result24 = true)) and
+  ((not ule(sub(of_int(100000), score_nbr), o46)) ->
+  (result24 = false)))) and (((result24 = true) -> (o47 = sub(temp___2190,
+  of_int(100000)))) and ((not (result24 = true)) ->
+  (o47 = temp___2190))))) and ((result25 = score_nbr) and
+  (score_nbr5 = o47))) and ((score_nbr6 = score_nbr5) and
+  (score_nbr7 = score_nbr5)))) and ((not (complete_lines9 = of_int(4))) ->
+  ((score_nbr6 = score_nbr) and (score_nbr7 = score_nbr1)))) and
+  ((score_nbr8 = score_nbr6) and (score_nbr9 = score_nbr7))))) and
+  ((score_nbr10 = score_nbr8) and (score_nbr11 = score_nbr9))))) and
+  ((score_nbr12 = score_nbr10) and (score_nbr13 = score_nbr11))))) and
+  ((((ule(sub(of_int(100000), line_counter), complete_lines9) ->
+  (o48 = sub(add(line_counter, complete_lines9), of_int(100000)))) and
+  ((not ule(sub(of_int(100000), line_counter), complete_lines9)) ->
+  (o48 = add(line_counter, complete_lines9)))) and
+  ((result26 = line_counter) and (line_counter1 = o48))) and
+  ((((uge(line_counter1, of_int(10)) and ult(level_nbr, of_int(10))) ->
+  (((((ule(sub(of_int(100000), level_nbr), of_int(1)) ->
+  (o49 = sub(add(level_nbr, of_int(1)), of_int(100000)))) and
+  ((not ule(sub(of_int(100000), level_nbr), of_int(1))) ->
+  (o49 = add(level_nbr, of_int(1))))) and ((result27 = level_nbr) and
+  (level_nbr2 = o49))) and (((ult(line_counter1, of_int(10)) ->
+  (o50 = add(sub(line_counter1, of_int(10)), of_int(100000)))) and
+  ((not ult(line_counter1, of_int(10))) -> (o50 = sub(line_counter1,
+  of_int(10))))) and ((result28 = line_counter1) and
+  (line_counter2 = o50)))) and (((line_counter3 = line_counter2) and
+  (level_nbr3 = level_nbr2)) and ((line_counter4 = line_counter2) and
+  (level_nbr4 = level_nbr2))))) and ((not (uge(line_counter1, of_int(10)) and
+  ult(level_nbr, of_int(10)))) -> (((line_counter3 = line_counter1) and
+  (level_nbr3 = level_nbr)) and ((line_counter4 = line_counter1) and
+  (level_nbr4 = level_nbr1))))) and ((result29 = cur_state) and
+  (cur_state1 = 3))))))))))))) and (((from_line13 = from_line11) and
+  ((del_line10 = del_line8) and ((complete_lines11 = complete_lines9) and
+  ((to_line23 = to_line21) and ((cur_state2 = cur_state1) and
+  ((cur_board24 = cur_board22) and ((line_counter5 = line_counter3) and
   ((level_nbr5 = level_nbr3) and (score_nbr14 = score_nbr12))))))))) and
-  ((from_line11 = from_line9) and ((del_line8 = del_line6) and
-  ((complete_lines9 = complete_lines7) and ((to_line19 = to_line17) and
-  ((cur_state3 = cur_state1) and ((cur_board20 = cur_board18) and
+  ((from_line14 = from_line12) and ((del_line11 = del_line9) and
+  ((complete_lines12 = complete_lines10) and ((to_line24 = to_line22) and
+  ((cur_state3 = cur_state1) and ((cur_board25 = cur_board23) and
   ((line_counter6 = line_counter4) and ((level_nbr6 = level_nbr4) and
-  (score_nbr15 = score_nbr13)))))))))))))))) ->
-  (get_state((cur_state2).int__content) = 3)))
+  (score_nbr15 = score_nbr13)))))))))))
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (get_state(cur_state2) = 3)

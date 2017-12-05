@@ -396,48 +396,253 @@ logic account : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep) farray. forall first_available:int.
-  forall o:ext_account_num. forall o1:bool. forall o2:ext_account_num.
-  forall o3:ext_account_num. forall o4:bool. forall o5:ext_account_num.
-  forall o6:ext_account_num. forall o7:int. forall o8:(int,us_rep) farray.
-  forall o9:ext_account_num. forall o10:bool. forall o11:ext_account_num.
-  forall o12:ext_account_num. forall o13:bool. forall o14:ext_account_num.
-  forall o15:ext_account_num. forall o16:int. forall o17:(int,us_rep) farray.
-  forall links1:(int,us_rep) farray. forall result:(int,us_rep) farray.
-  forall links2:(int,us_rep) farray. forall result1:(int,us_rep) farray.
-  forall links3:(int,us_rep) farray. (in_range1(first_available) ->
-  (in_range2(account) -> ((not (is_available(account, links) = true)) ->
-  ((((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) and
-  (((((to_rep(o) = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__next)) and
-  (((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__available = o1) and
-  (((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__prev = o2) and
-  (o = o3)))) and ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and
-  ((((1 <= to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)) and
-  (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) <= 200000)) and
-  (o7 = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev))) and
+logic links : (int,us_rep) farray
+
+logic first_available : int
+
+logic o : ext_account_num
+
+logic o1 : bool
+
+logic o2 : ext_account_num
+
+logic o3 : ext_account_num
+
+logic o4 : bool
+
+logic o5 : ext_account_num
+
+logic o6 : ext_account_num
+
+logic o7 : int
+
+logic o8 : (int,us_rep) farray
+
+logic o9 : ext_account_num
+
+logic o10 : bool
+
+logic o11 : ext_account_num
+
+logic o12 : ext_account_num
+
+logic o13 : bool
+
+logic o14 : ext_account_num
+
+logic o15 : ext_account_num
+
+logic o16 : int
+
+logic o17 : (int,us_rep) farray
+
+logic o18 : int
+
+logic o19 : bool
+
+logic o20 : ext_account_num
+
+logic o21 : ext_account_num
+
+logic o22 : bool
+
+logic o23 : ext_account_num
+
+logic o24 : ext_account_num
+
+logic o25 : ext_account_num
+
+logic o26 : int
+
+logic o27 : ext_account_num
+
+logic o28 : bool
+
+logic o29 : ext_account_num
+
+logic o30 : ext_account_num
+
+logic o31 : bool
+
+logic o32 : ext_account_num
+
+logic o33 : ext_account_num
+
+logic o34 : (int,us_rep) farray
+
+logic o35 : ext_account_num
+
+logic o36 : bool
+
+logic o37 : ext_account_num
+
+logic o38 : ext_account_num
+
+logic o39 : bool
+
+logic o40 : ext_account_num
+
+logic o41 : ext_account_num
+
+logic o42 : (int,us_rep) farray
+
+logic links1 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic links2 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic links3 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic links4 : (int,us_rep) farray
+
+logic result3 : (int,us_rep) farray
+
+logic links5 : (int,us_rep) farray
+
+logic result4 : (int,us_rep) farray
+
+logic links6 : (int,us_rep) farray
+
+logic result5 : int
+
+logic first_available1 : int
+
+logic links7 : (int,us_rep) farray
+
+logic first_available2 : int
+
+logic links8 : (int,us_rep) farray
+
+logic first_available3 : int
+
+axiom H : in_range1(first_available)
+
+axiom H1 : in_range2(account)
+
+axiom H2 : (not (is_available(account, links) = true))
+
+axiom H3 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (to_rep(o) = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__next)))
+
+axiom H4 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  ((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__available = o1))
+
+axiom H5 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  ((((links[to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)])).us_split_fields1).rec__database__availability__account_link__prev = o2))
+
+axiom H6 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (o = o3))
+
+axiom H7 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (o4 = o1))
+
+axiom H8 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (o5 = o2))
+
+axiom H9 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (o6 = o3))
+
+axiom H10 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  ((1 <= to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)) and
+  (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) <= 200000)))
+
+axiom H11 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (o7 = to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev)))
+
+axiom H12 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
   (o8 = (links[o7 <- { us_split_fields1 = {
   rec__database__availability__account_link__available = o4;
   rec__database__availability__account_link__prev = o5;
-  rec__database__availability__account_link__next = o6 } }])))) and (({
-  map__content = result } = { map__content = links }) and (links2 = o8)))) or
-  ((to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0) and
-  ((links2 = links) and (links2 = links1)))) ->
-  ((((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) and
-  (((((to_rep(o9) = to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__prev)) and
-  (((((links2[to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)])).us_split_fields1).rec__database__availability__account_link__available = o10) and
-  ((o9 = o11) and
-  ((((links2[to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)])).us_split_fields1).rec__database__availability__account_link__next = o12)))) and
-  ((o13 = o10) and ((o14 = o11) and (o15 = o12)))) and
-  ((((1 <= to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)) and
-  (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) <= 200000)) and
-  (o16 = to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next))) and
+  rec__database__availability__account_link__next = o6 } }])))
+
+axiom H13 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (result = links))
+
+axiom H14 :
+  ((not (to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0)) ->
+  (links2 = o8))
+
+axiom H15 :
+  ((to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0) ->
+  (links2 = links))
+
+axiom H16 :
+  ((to_rep((((links[account])).us_split_fields1).rec__database__availability__account_link__prev) = 0) ->
+  (links2 = links1))
+
+axiom H17 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (to_rep(o9) = to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__prev)))
+
+axiom H18 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  ((((links2[to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)])).us_split_fields1).rec__database__availability__account_link__available = o10))
+
+axiom H19 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (o9 = o11))
+
+axiom H20 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  ((((links2[to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)])).us_split_fields1).rec__database__availability__account_link__next = o12))
+
+axiom H21 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (o13 = o10))
+
+axiom H22 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (o14 = o11))
+
+axiom H23 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (o15 = o12))
+
+axiom H24 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  ((1 <= to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)) and
+  (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) <= 200000)))
+
+axiom H25 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (o16 = to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next)))
+
+axiom H26 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
   (o17 = (links2[o16 <- { us_split_fields1 = {
   rec__database__availability__account_link__available = o13;
   rec__database__availability__account_link__prev = o14;
-  rec__database__availability__account_link__next = o15 } }])))) and
-  ((links2 = result1) and (links3 = o17)))) or
-  ((to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0) and
-  (links3 = links2))) -> ((not (first_available = 0)) ->
-  (1 <= first_available))))))))
+  rec__database__availability__account_link__next = o15 } }])))
+
+axiom H27 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (links2 = result1))
+
+axiom H28 :
+  ((not (to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0)) ->
+  (links3 = o17))
+
+axiom H29 :
+  ((to_rep((((links2[account])).us_split_fields1).rec__database__availability__account_link__next) = 0) ->
+  (links3 = links2))
+
+axiom H30 : (not (first_available = 0))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= first_available)

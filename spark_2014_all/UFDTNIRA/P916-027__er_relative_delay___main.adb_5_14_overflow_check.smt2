@@ -83,6 +83,7 @@
 (declare-const o duration)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result duration)
 (declare-const one1 duration)
 (assert (= (to_fixed o) 1000000000))

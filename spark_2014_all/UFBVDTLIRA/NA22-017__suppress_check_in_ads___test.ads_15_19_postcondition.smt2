@@ -68,6 +68,8 @@
 (declare-const test__xor2__result4 (_ BitVec 32))
 (declare-const test__xor2__result5 (_ BitVec 32))
 (declare-const result1 (_ BitVec 32))
+(assert true)
+(assert true)
 (assert (= test__xor2__result1 test__xor2__result2))
 (assert (= test__xor2__result3 test__xor2__result1))
 (assert (= result test__xor2__result))

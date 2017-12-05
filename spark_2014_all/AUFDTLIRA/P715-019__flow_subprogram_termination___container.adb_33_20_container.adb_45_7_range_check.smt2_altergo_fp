@@ -536,7 +536,7 @@ logic element__function_guard : int, us_rep, us_rep1 -> prop
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -590,43 +590,156 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___607 : int -> (int,positive) farray
+logic temp___601 : int -> (int,positive) farray
 
 axiom def_axiom :
-  (forall temp___609:int.
-  (forall temp___610:int.
-  ((temp___607(temp___609)[temp___610]) = of_rep(temp___609))))
+  (forall temp___603:int.
+  (forall temp___604:int.
+  ((temp___601(temp___603)[temp___604]) = of_rep(temp___603))))
+
+logic int__ : int
+
+logic cont__split_fields : (int,positive) farray
+
+logic e : int
+
+logic o : natural
+
+logic temp___611 : natural
+
+logic o1 : int
+
+logic temp___605 : int
+
+logic temp___606 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : natural
+
+logic o7 : int
+
+logic e1 : int
+
+logic result : int
+
+logic int__1 : int
+
+logic result1 : (int,positive) farray
+
+logic cont__split_fields1 : (int,positive) farray
+
+logic result2 : bool
+
+logic result3 : int
+
+logic e2 : int
+
+logic result4 : bool
+
+logic b : bool
+
+logic int__2 : int
+
+logic e3 : int
+
+logic temp___6111 : natural
+
+logic result5 : int
+
+logic int__3 : int
+
+logic int__4 : int
+
+logic temp___6061 : int
+
+logic result6 : int
+
+logic temp___6062 : int
+
+logic result7 : int
+
+logic int__5 : int
+
+logic int__6 : int
+
+logic int__7 : int
+
+logic rho : int
+
+logic int__8 : int
+
+logic int__9 : int
+
+logic rho1 : int
+
+logic result8 : bool
+
+logic b1 : bool
+
+logic result9 : bool
+
+logic result10 : natural
+
+logic temp___6112 : natural
+
+logic result11 : bool
+
+axiom H : (result = int__)
+
+axiom H1 : (int__1 = 2)
+
+axiom H2 : in_range1(int__1)
+
+axiom H3 : (result1 = cont__split_fields)
+
+axiom H4 : (temp___601(4) = cont__split_fields1)
+
+axiom H5 : (cont__split_fields1 = c12b)
+
+axiom H6 : (({ us_split_fields3 = { rec__container__cursor__index = o }
+  } = first({ us_split_fields1 = { rec__container__container__a = c12b }
+  })) and (of_rep1(1) = o))
+
+axiom H7 : (temp___611 = o)
+
+axiom H8 : ((result2 = has_element({ us_split_fields1 = {
+  rec__container__container__a = c12b } }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___611 } })) and ((result2 = true) <->
+  ((1 <= to_rep1(temp___611)) and (to_rep1(temp___611) <= 200))))
+
+axiom H9 : ((result2 = true) -> ((o1 = element({ us_split_fields1 = {
+  rec__container__container__a = c12b } }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___611 } })) and (in_range4(o1) and
+  (o1 = to_rep((c12b[to_rep1(temp___611)]))))))
+
+axiom H10 : ((result2 = true) -> (result3 = e))
+
+axiom H11 : ((result2 = true) -> (e2 = o1))
+
+axiom H12 : ((not (result2 = true)) -> (e2 = e))
+
+axiom H13 : ((not (result2 = true)) -> (e2 = e1))
+
+axiom H14 : ((result4 = has_element({ us_split_fields1 = {
+  rec__container__container__a = c12b } }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___611 } })) and ((result4 = true) <->
+  ((1 <= to_rep1(temp___611)) and (to_rep1(temp___611) <= 200))))
+
+axiom H15 : (result4 = true)
+
+axiom H16 : (((1 <= 200) -> in_range1(int__2)) and ((has_element({
+  us_split_fields1 = { rec__container__container__a = c12b } }, {
+  us_split_fields3 = { rec__container__cursor__index = temp___6111 }
+  }) = true) and (e3 = element({ us_split_fields1 = {
+  rec__container__container__a = c12b } }, { us_split_fields3 = {
+  rec__container__cursor__index = temp___6111 } }))))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall int__:int. forall cont__split_fields:(int,positive) farray.
-  forall e:int. forall o:natural. forall temp___617:natural. forall o1:int.
-  forall e1:int. forall result:int. forall int__1:int.
-  forall result1:(int,positive) farray.
-  forall cont__split_fields1:(int,positive) farray. forall result2:bool.
-  forall result3:int. forall e2:int. forall result4:bool. forall int__2:int.
-  forall e3:int. forall temp___6171:natural. (((result = int__) and
-  (int__1 = 2)) -> (in_range1(int__1) -> (((result1 = cont__split_fields) and
-  (temp___607(4) = cont__split_fields1)) -> ((cont__split_fields1 = c12b) ->
-  (((({ us_split_fields3 = { rec__container__cursor__index = o } } = first({
-  us_split_fields1 = { rec__container__container__a = c12b } })) and
-  (of_rep1(1) = o)) and (temp___617 = o)) -> ((((result2 = has_element({
-  us_split_fields1 = { rec__container__container__a = c12b } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___617 } })) and
-  ((result2 = true) <-> ((1 <= to_rep1(temp___617)) and
-  (to_rep1(temp___617) <= 200)))) and (((result2 = true) and
-  (((o1 = element({ us_split_fields1 = { rec__container__container__a = c12b
-  } }, { us_split_fields3 = { rec__container__cursor__index = temp___617 }
-  })) and (in_range4(o1) and (o1 = to_rep((c12b[to_rep1(temp___617)]))))) and
-  ((result3 = e) and (e2 = o1)))) or ((not (result2 = true)) and
-  ((e2 = e) and (e2 = e1))))) -> (((result4 = has_element({
-  us_split_fields1 = { rec__container__container__a = c12b } }, {
-  us_split_fields3 = { rec__container__cursor__index = temp___617 } })) and
-  ((result4 = true) <-> ((1 <= to_rep1(temp___617)) and
-  (to_rep1(temp___617) <= 200)))) -> ((result4 = true) -> ((((1 <= 200) ->
-  in_range1(int__2)) and ((has_element({ us_split_fields1 = {
-  rec__container__container__a = c12b } }, { us_split_fields3 = {
-  rec__container__cursor__index = temp___6171 } }) = true) and
-  (e3 = element({ us_split_fields1 = { rec__container__container__a = c12b }
-  }, { us_split_fields3 = { rec__container__cursor__index = temp___6171 }
-  })))) -> in_range1((int__2 + 1))))))))))))
+goal WP_parameter_def : in_range1((int__2 + 1))

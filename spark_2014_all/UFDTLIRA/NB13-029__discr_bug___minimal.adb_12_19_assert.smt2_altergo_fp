@@ -346,11 +346,27 @@ logic c2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic c2__split_fields : natural
+
+logic c2__split_discrs : bool
+
+logic result : natural
+
+logic c2__split_fields1 : natural
+
+logic result1 : bool
+
+logic c2__split_discrs1 : bool
+
+axiom H : (result = c2__split_fields)
+
+axiom H1 : (dummy = c2__split_fields1)
+
+axiom H2 : (result1 = c2__split_discrs)
+
+axiom H3 : (of_int(0) = c2__split_discrs1)
+
+axiom H4 : (c2__attr__constrained = false)
+
  (* File "minimal.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c2__split_fields:natural. forall c2__split_discrs:bool.
-  forall result:natural. forall c2__split_fields1:natural.
-  forall result1:bool. forall c2__split_discrs1:bool.
-  ((((result = c2__split_fields) and (dummy = c2__split_fields1)) and
-  (((result1 = c2__split_discrs) and (of_int(0) = c2__split_discrs1)) and
-  (c2__attr__constrained = false))) -> (c2__split_discrs1 = true)))
+goal WP_parameter_def : (c2__split_discrs1 = true)

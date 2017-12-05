@@ -63,7 +63,6 @@
 (declare-const x (_ BitVec 8))
 (assert (dynamic_invariant i1b true false true))
 (assert (dynamic_invariant x true false true))
-(define-fun temp___178 () (_ BitVec 8) (bvsub x ((_ int2bv 8) 1)))
-(assert (not (or (and (bvule ((_ int2bv 8) 1) temp___178) (bvule temp___178 ((_ int2bv 8) 3))) (and (bvule ((_ int2bv 8) 5) temp___178) (bvule temp___178 ((_ int2bv 8) 255))))))
+(assert (not (or (and (bvule ((_ int2bv 8) 1) (bvsub x ((_ int2bv 8) 1))) (bvule (bvsub x ((_ int2bv 8) 1)) ((_ int2bv 8) 3))) (and (bvule ((_ int2bv 8) 5) (bvsub x ((_ int2bv 8) 1))) (bvule (bvsub x ((_ int2bv 8) 1)) ((_ int2bv 8) 255))))))
 (check-sat)
 (exit)

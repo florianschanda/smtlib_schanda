@@ -129,6 +129,8 @@
 (declare-const t__split_discrs us_split_discrs)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
+(declare-const p__R1s__assume Int)
+(declare-const us Int)
 (assert (and (= o (zero Tuple0)) (in_range o)))
 (assert (not (not (= o 0))))
 (check-sat)

@@ -130,7 +130,11 @@ type index__ref = { index__content : index
 
 function index__ref___projection(a: index__ref) : index = (a).index__content
 
+logic temp___n_225 : int
+
+axiom H : in_range1(temp___n_225)
+
+axiom H1 : (1 <= temp___n_225)
+
  (* File "stack.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___n_225:int. (in_range1(temp___n_225) ->
-  ((1 <= temp___n_225) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -331,10 +331,20 @@ logic m2 : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : dynamic_property2((- 2147483648), 2147483647, to_rep(first(m1)),
+  to_rep(last(m1)), (- 2147483648), 2147483647, to_rep(first1(m2)),
+  to_rep(last1(m2)))
+
+axiom H1 : ((o = length_2({ elts = m; rt = m1; rt_2 = m2 })) and
+  in_range(length_2({ elts = m; rt = m1; rt_2 = m2 })))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (dynamic_property2((-2147483648), 2147483647,
-  to_rep(first(m1)), to_rep(last(m1)), (-2147483648), 2147483647,
-  to_rep(first1(m2)), to_rep(last1(m2))) -> (((o = length_2({ elts = m; rt =
-  m1; rt_2 = m2 })) and in_range(length_2({ elts = m; rt = m1; rt_2 = m2
-  }))) -> in_range(length({ elts = m; rt = m1; rt_2 = m2 })))))
+goal WP_parameter_def : in_range(length({ elts = m; rt = m1; rt_2 = m2 }))

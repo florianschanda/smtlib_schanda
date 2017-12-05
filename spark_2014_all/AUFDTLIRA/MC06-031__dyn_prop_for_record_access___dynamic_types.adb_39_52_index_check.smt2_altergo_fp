@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -710,32 +710,236 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall from:int. forall result__:int.
-  forall tmp__split_fields:(int,integer) farray. forall us:int. forall o:int.
-  forall i:int. forall o1:int. forall o2:bool. forall result:int.
-  forall from1:int. forall from2:int. forall result__1:int.
-  forall tmp__split_fields1:(int,integer) farray. forall result1:bool.
-  (dynamic_property(1, 2147483647, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range2(c) -> ((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
-  (((((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
-  to_rep1(first(a1)))) and (o = to_rep1(first(a1)))) and (({ int__content =
-  result } = { int__content = from }) and (from1 = o))) ->
-  (dynamic_property1(first2, last2, from1) -> (((0 <= 2147483647) ->
-  in_range2(result__)) ->
-  ((forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
-   ((first2 <= last2) -> dynamic_property1(first2, last2,
-   to_rep1((tmp__split_fields[temp___168])))))) ->
-  ((forall i1:int. (((to_rep1(first(a1)) <= i1) and (i1 <= (from2 - 1))) ->
-   (not (to_rep((a[i1])) = c)))) ->
-  (((((first2 <= last2) -> dynamic_property1(first2, last2, from2)) and
-  ((0 <= 2147483647) -> in_range2(result__1))) and
+logic from : int
+
+logic result__ : int
+
+logic tmp__split_fields : (int,integer) farray
+
+logic tmp__split_fields1 : natural
+
+logic us : int
+
+logic o : int
+
+logic temp___185 : (int,integer) farray
+
+logic temp___1851 : natural
+
+logic temp___184 : int
+
+logic temp___183 : int
+
+logic i : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic temp___180 : (int,integer) farray
+
+logic temp___1801 : natural
+
+logic temp___182 : int
+
+logic us1 : int
+
+logic o4 : int
+
+logic result : int
+
+logic from1 : int
+
+logic from2 : int
+
+logic result__1 : int
+
+logic tmp__split_fields2 : (int,integer) farray
+
+logic tmp__split_fields3 : natural
+
+logic dynamic_types__search__result : int
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic result3 : natural
+
+logic tmp__split_fields4 : (int,integer) farray
+
+logic tmp__split_fields5 : natural
+
+logic result4 : int
+
+logic result__2 : int
+
+logic result5 : int
+
+logic from3 : int
+
+logic result6 : int
+
+logic dynamic_types__search__result1 : int
+
+logic result7 : int
+
+logic dynamic_types__search__result2 : int
+
+logic result8 : int
+
+logic from4 : int
+
+logic dynamic_types__search__result3 : int
+
+logic dynamic_types__search__result4 : int
+
+logic from5 : int
+
+logic result__3 : int
+
+logic tmp__split_fields6 : (int,integer) farray
+
+logic tmp__split_fields7 : natural
+
+logic dynamic_types__search__result5 : int
+
+logic from6 : int
+
+logic result__4 : int
+
+logic tmp__split_fields8 : (int,integer) farray
+
+logic tmp__split_fields9 : natural
+
+logic dynamic_types__search__result6 : int
+
+logic from7 : int
+
+logic result__5 : int
+
+logic tmp__split_fields10 : (int,integer) farray
+
+logic tmp__split_fields11 : natural
+
+logic dynamic_types__search__result7 : int
+
+logic from8 : int
+
+logic result__6 : int
+
+logic tmp__split_fields12 : (int,integer) farray
+
+logic tmp__split_fields13 : natural
+
+logic dynamic_types__search__result8 : int
+
+logic from9 : int
+
+logic result__7 : int
+
+logic tmp__split_fields14 : (int,integer) farray
+
+logic tmp__split_fields15 : natural
+
+logic dynamic_types__search__result9 : int
+
+logic from10 : int
+
+logic result__8 : int
+
+logic tmp__split_fields16 : (int,integer) farray
+
+logic tmp__split_fields17 : natural
+
+logic dynamic_types__search__result10 : int
+
+logic from11 : int
+
+logic result__9 : int
+
+logic tmp__split_fields18 : (int,integer) farray
+
+logic tmp__split_fields19 : natural
+
+logic dynamic_types__search__result11 : int
+
+logic from12 : int
+
+logic result__10 : int
+
+logic tmp__split_fields20 : (int,integer) farray
+
+logic tmp__split_fields21 : natural
+
+logic dynamic_types__search__result12 : int
+
+logic from13 : int
+
+logic result__11 : int
+
+logic tmp__split_fields22 : (int,integer) farray
+
+logic tmp__split_fields23 : natural
+
+logic dynamic_types__search__result13 : int
+
+logic from14 : int
+
+logic result__12 : int
+
+logic tmp__split_fields24 : (int,integer) farray
+
+logic tmp__split_fields25 : natural
+
+logic dynamic_types__search__result14 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (to_rep1(first(a1)) <= to_rep1(last(a1)))
+
+axiom H3 : ((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
+  to_rep1(first(a1))))
+
+axiom H4 : (o = to_rep1(first(a1)))
+
+axiom H5 : (result = from)
+
+axiom H6 : (from1 = o)
+
+axiom H7 : dynamic_property1(first2, last2, from1)
+
+axiom H8 : ((0 <= 2147483647) -> in_range2(result__))
+
+axiom H9 :
   (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
   ((first2 <= last2) -> dynamic_property1(first2, last2,
-  to_rep1((tmp__split_fields1[temp___168]))))))) ->
-  (((((o1 = (from2 - 1)) and in_range1((from2 - 1))) and (((i <= o1) and
-  (o2 = true)) or ((not (i <= o1)) and (o2 = false)))) and
-  (((to_rep1(first(a1)) <= i) and (result1 = o2)) or
-  ((not (to_rep1(first(a1)) <= i)) and (result1 = false)))) ->
-  ((result1 = true) -> (to_rep1(first(a1)) <= i)))))))))))))
+  to_rep1((tmp__split_fields[temp___168]))))))
+
+axiom H10 :
+  (forall i1:int. (((to_rep1(first(a1)) <= i1) and (i1 <= (from2 - 1))) ->
+  (not (to_rep((a[i1])) = c))))
+
+axiom H11 : ((((first2 <= last2) -> dynamic_property1(first2, last2,
+  from2)) and ((0 <= 2147483647) -> in_range2(result__1))) and
+  (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
+  ((first2 <= last2) -> dynamic_property1(first2, last2,
+  to_rep1((tmp__split_fields2[temp___168])))))))
+
+axiom H12 : ((o1 = (from2 - 1)) and in_range1((from2 - 1)))
+
+axiom H13 : (((i <= o1) -> (o2 = true)) and ((not (i <= o1)) ->
+  (o2 = false)))
+
+axiom H14 : (((to_rep1(first(a1)) <= i) -> (result1 = o2)) and
+  ((not (to_rep1(first(a1)) <= i)) -> (result1 = false)))
+
+axiom H15 : (result1 = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(a1)) <= i)

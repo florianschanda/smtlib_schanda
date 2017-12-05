@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -3084,11 +3084,983 @@ axiom def_axiom :
   (forall temp___900:int. (((temp___895(temp___897, temp___898,
   temp___899)).elts1[temp___900]) = of_rep1(temp___897))))))
 
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : (int,byte) farray
+
+logic ctx__split_fields2 : bit_absorption_number
+
+logic ctx__split_fields3 : byte_absorption_number
+
+logic ctx__split_fields4 : rate_number
+
+logic ctx__split_fields5 : states
+
+logic digest : (int,byte) farray
+
+logic remaining : int
+
+logic offset : int
+
+logic initial_rate : int
+
+logic bytes_to_squeeze : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___902 : (int,byte) farray
+
+logic temp___9021 : t3
+
+logic temp___903 : (int,byte) farray
+
+logic temp___9031 : t1
+
+logic temp___904 : (int,byte) farray
+
+logic temp___9041 : t1
+
+logic o3 : (int,byte) farray
+
+logic o4 : int
+
+logic o5 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl1 : t4
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : (int,byte) farray
+
+logic o9 : map
+
+logic o10 : (int,byte) farray
+
+logic o11 : bit_absorption_number
+
+logic o12 : byte_absorption_number
+
+logic o13 : rate_number
+
+logic o14 : states
+
+logic temp___914 : map
+
+logic temp___9141 : (int,byte) farray
+
+logic temp___9142 : bit_absorption_number
+
+logic temp___9143 : byte_absorption_number
+
+logic temp___9144 : rate_number
+
+logic temp___9145 : states
+
+logic o15 : byte_absorption_number
+
+logic o16 : map
+
+logic o17 : (int,byte) farray
+
+logic o18 : bit_absorption_number
+
+logic o19 : byte_absorption_number
+
+logic o20 : rate_number
+
+logic o21 : states
+
+logic temp___916 : map
+
+logic temp___9161 : (int,byte) farray
+
+logic temp___9162 : bit_absorption_number
+
+logic temp___9163 : byte_absorption_number
+
+logic temp___9164 : rate_number
+
+logic temp___9165 : states
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic keccak__keccak_1600__sponge__squeeze__B_2__R140s__assume : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic keccak__keccak_1600__sponge__squeeze__B_2__R141s__assume : int
+
+logic keccak__keccak_1600__sponge__squeeze__B_2__R145s__assume : int
+
+logic o29 : (int,byte) farray
+
+logic temp___918 : (int,byte) farray
+
+logic temp___9181 : t6
+
+logic temp___919 : (int,byte) farray
+
+logic temp___9191 : t5
+
+logic o30 : (int,byte) farray
+
+logic temp___920 : (int,byte) farray
+
+logic temp___9201 : t5
+
+logic temp___921 : (int,byte) farray
+
+logic temp___9211 : t5
+
+logic o31 : (int,byte) farray
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : byte_absorption_number
+
+logic o35 : map
+
+logic o36 : (int,byte) farray
+
+logic o37 : bit_absorption_number
+
+logic o38 : byte_absorption_number
+
+logic o39 : rate_number
+
+logic o40 : states
+
+logic temp___924 : map
+
+logic temp___9241 : (int,byte) farray
+
+logic temp___9242 : bit_absorption_number
+
+logic temp___9243 : byte_absorption_number
+
+logic temp___9244 : rate_number
+
+logic temp___9245 : states
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl2 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl3 : t7
+
+logic o45 : integer
+
+logic o46 : integer
+
+logic o47 : (int,byte) farray
+
+logic o48 : map
+
+logic o49 : (int,byte) farray
+
+logic o50 : bit_absorption_number
+
+logic o51 : byte_absorption_number
+
+logic o52 : rate_number
+
+logic o53 : states
+
+logic temp___934 : map
+
+logic temp___9341 : (int,byte) farray
+
+logic temp___9342 : bit_absorption_number
+
+logic temp___9343 : byte_absorption_number
+
+logic temp___9344 : rate_number
+
+logic temp___9345 : states
+
+logic o54 : byte_absorption_number
+
+logic o55 : map
+
+logic o56 : (int,byte) farray
+
+logic o57 : bit_absorption_number
+
+logic o58 : byte_absorption_number
+
+logic o59 : rate_number
+
+logic o60 : states
+
+logic temp___936 : map
+
+logic temp___9361 : (int,byte) farray
+
+logic temp___9362 : bit_absorption_number
+
+logic temp___9363 : byte_absorption_number
+
+logic temp___9364 : rate_number
+
+logic temp___9365 : states
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic temp___959 : map
+
+logic temp___9591 : (int,byte) farray
+
+logic temp___9592 : bit_absorption_number
+
+logic temp___9593 : byte_absorption_number
+
+logic temp___9594 : rate_number
+
+logic temp___9595 : states
+
+logic temp___958 : int
+
+logic temp___956 : (int,byte) farray
+
+logic temp___954 : int
+
+logic temp___962 : int
+
+logic temp___961 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : bool
+
+logic o69 : int
+
+logic o70 : bool
+
+logic keccak__keccak_1600__sponge__squeeze__L_3__R151s__assume : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic keccak__keccak_1600__sponge__squeeze__L_3__R152s__assume : int
+
+logic o74 : (int,byte) farray
+
+logic temp___939 : (int,byte) farray
+
+logic temp___9391 : t9
+
+logic temp___940 : (int,byte) farray
+
+logic temp___9401 : t8
+
+logic o75 : (int,byte) farray
+
+logic temp___941 : (int,byte) farray
+
+logic temp___9411 : t8
+
+logic temp___942 : (int,byte) farray
+
+logic temp___9421 : t8
+
+logic o76 : (int,byte) farray
+
+logic o77 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl4 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data__compl5 : t10
+
+logic o78 : integer
+
+logic o79 : integer
+
+logic o80 : (int,byte) farray
+
+logic o81 : map
+
+logic o82 : (int,byte) farray
+
+logic o83 : bit_absorption_number
+
+logic o84 : byte_absorption_number
+
+logic o85 : rate_number
+
+logic o86 : states
+
+logic temp___953 : map
+
+logic temp___9531 : (int,byte) farray
+
+logic temp___9532 : bit_absorption_number
+
+logic temp___9533 : byte_absorption_number
+
+logic temp___9534 : rate_number
+
+logic temp___9535 : states
+
+logic o87 : int
+
+logic o88 : int
+
+logic keccak__keccak_1600__sponge__squeeze__R161s__assume : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic o91 : int
+
+logic keccak__keccak_1600__sponge__squeeze__R162s__assume : int
+
+logic o92 : (int,byte) farray
+
+logic temp___965 : (int,byte) farray
+
+logic temp___9651 : t12
+
+logic temp___966 : (int,byte) farray
+
+logic temp___9661 : t11
+
+logic o93 : (int,byte) farray
+
+logic temp___967 : (int,byte) farray
+
+logic temp___9671 : t11
+
+logic temp___968 : (int,byte) farray
+
+logic temp___9681 : t11
+
+logic o94 : (int,byte) farray
+
+logic o95 : int
+
+logic o96 : byte_absorption_number
+
+logic o97 : map
+
+logic o98 : (int,byte) farray
+
+logic o99 : bit_absorption_number
+
+logic o100 : byte_absorption_number
+
+logic o101 : rate_number
+
+logic o102 : states
+
+logic temp___971 : map
+
+logic temp___9711 : (int,byte) farray
+
+logic temp___9712 : bit_absorption_number
+
+logic temp___9713 : byte_absorption_number
+
+logic temp___9714 : rate_number
+
+logic temp___9715 : states
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : (int,byte) farray
+
+logic ctx__split_fields8 : bit_absorption_number
+
+logic ctx__split_fields9 : byte_absorption_number
+
+logic ctx__split_fields10 : rate_number
+
+logic ctx__split_fields11 : states
+
+logic bytes_to_squeeze1 : int
+
+logic result : int
+
+logic remaining1 : int
+
+logic result1 : int
+
+logic offset1 : int
+
+logic result2 : int
+
+logic initial_rate1 : int
+
+logic result3 : (int,byte) farray
+
+logic digest1 : (int,byte) farray
+
+logic result4 : bool
+
+logic ctx__split_fields12 : map
+
+logic ctx__split_fields13 : (int,byte) farray
+
+logic ctx__split_fields14 : bit_absorption_number
+
+logic ctx__split_fields15 : byte_absorption_number
+
+logic ctx__split_fields16 : rate_number
+
+logic ctx__split_fields17 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result5 : map
+
+logic result6 : (int,byte) farray
+
+logic result7 : bit_absorption_number
+
+logic result8 : byte_absorption_number
+
+logic result9 : rate_number
+
+logic result10 : states
+
+logic ctx__split_fields18 : map
+
+logic ctx__split_fields19 : (int,byte) farray
+
+logic ctx__split_fields20 : bit_absorption_number
+
+logic ctx__split_fields21 : byte_absorption_number
+
+logic ctx__split_fields22 : rate_number
+
+logic ctx__split_fields23 : states
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data : (int,byte) farray
+
+logic result11 : map
+
+logic result12 : (int,byte) farray
+
+logic result13 : bit_absorption_number
+
+logic result14 : byte_absorption_number
+
+logic result15 : rate_number
+
+logic result16 : states
+
+logic ctx__split_fields24 : map
+
+logic ctx__split_fields25 : (int,byte) farray
+
+logic ctx__split_fields26 : bit_absorption_number
+
+logic ctx__split_fields27 : byte_absorption_number
+
+logic ctx__split_fields28 : rate_number
+
+logic ctx__split_fields29 : states
+
+logic result17 : map
+
+logic result18 : (int,byte) farray
+
+logic result19 : bit_absorption_number
+
+logic result20 : byte_absorption_number
+
+logic result21 : rate_number
+
+logic result22 : states
+
+logic ctx__split_fields30 : map
+
+logic ctx__split_fields31 : (int,byte) farray
+
+logic ctx__split_fields32 : bit_absorption_number
+
+logic ctx__split_fields33 : byte_absorption_number
+
+logic ctx__split_fields34 : rate_number
+
+logic ctx__split_fields35 : states
+
+logic result23 : int
+
+logic bytes_to_squeeze2 : int
+
+logic result24 : int
+
+logic bytes_to_squeeze3 : int
+
+logic result25 : (int,byte) farray
+
+logic digest2 : (int,byte) farray
+
+logic result26 : map
+
+logic result27 : (int,byte) farray
+
+logic result28 : bit_absorption_number
+
+logic result29 : byte_absorption_number
+
+logic result30 : rate_number
+
+logic result31 : states
+
+logic ctx__split_fields36 : map
+
+logic ctx__split_fields37 : (int,byte) farray
+
+logic ctx__split_fields38 : bit_absorption_number
+
+logic ctx__split_fields39 : byte_absorption_number
+
+logic ctx__split_fields40 : rate_number
+
+logic ctx__split_fields41 : states
+
+logic result32 : int
+
+logic offset2 : int
+
+logic result33 : int
+
+logic remaining2 : int
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a1 : map
+
+logic result34 : map
+
+logic result35 : (int,byte) farray
+
+logic result36 : bit_absorption_number
+
+logic result37 : byte_absorption_number
+
+logic result38 : rate_number
+
+logic result39 : states
+
+logic ctx__split_fields42 : map
+
+logic ctx__split_fields43 : (int,byte) farray
+
+logic ctx__split_fields44 : bit_absorption_number
+
+logic ctx__split_fields45 : byte_absorption_number
+
+logic ctx__split_fields46 : rate_number
+
+logic ctx__split_fields47 : states
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data1 : (int,byte) farray
+
+logic result40 : map
+
+logic result41 : (int,byte) farray
+
+logic result42 : bit_absorption_number
+
+logic result43 : byte_absorption_number
+
+logic result44 : rate_number
+
+logic result45 : states
+
+logic ctx__split_fields48 : map
+
+logic ctx__split_fields49 : (int,byte) farray
+
+logic ctx__split_fields50 : bit_absorption_number
+
+logic ctx__split_fields51 : byte_absorption_number
+
+logic ctx__split_fields52 : rate_number
+
+logic ctx__split_fields53 : states
+
+logic result46 : map
+
+logic result47 : (int,byte) farray
+
+logic result48 : bit_absorption_number
+
+logic result49 : byte_absorption_number
+
+logic result50 : rate_number
+
+logic result51 : states
+
+logic ctx__split_fields54 : map
+
+logic ctx__split_fields55 : (int,byte) farray
+
+logic ctx__split_fields56 : bit_absorption_number
+
+logic ctx__split_fields57 : byte_absorption_number
+
+logic ctx__split_fields58 : rate_number
+
+logic ctx__split_fields59 : states
+
+logic ctx__split_fields60 : map
+
+logic ctx__split_fields61 : (int,byte) farray
+
+logic ctx__split_fields62 : bit_absorption_number
+
+logic ctx__split_fields63 : byte_absorption_number
+
+logic ctx__split_fields64 : rate_number
+
+logic ctx__split_fields65 : states
+
+logic digest3 : (int,byte) farray
+
+logic remaining3 : int
+
+logic offset3 : int
+
+logic temp___9621 : int
+
+logic temp___9611 : int
+
+logic result52 : int
+
+logic temp___9622 : int
+
+logic result53 : int
+
+logic temp___9612 : int
+
+logic result54 : (int,byte) farray
+
+logic digest4 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a2 : map
+
+logic result55 : map
+
+logic result56 : (int,byte) farray
+
+logic result57 : bit_absorption_number
+
+logic result58 : byte_absorption_number
+
+logic result59 : rate_number
+
+logic result60 : states
+
+logic ctx__split_fields66 : map
+
+logic ctx__split_fields67 : (int,byte) farray
+
+logic ctx__split_fields68 : bit_absorption_number
+
+logic ctx__split_fields69 : byte_absorption_number
+
+logic ctx__split_fields70 : rate_number
+
+logic ctx__split_fields71 : states
+
+logic keccak__keccak_1600__keccakf_1600_lanes__extract_bytes__data2 : (int,byte) farray
+
+logic result61 : map
+
+logic result62 : (int,byte) farray
+
+logic result63 : bit_absorption_number
+
+logic result64 : byte_absorption_number
+
+logic result65 : rate_number
+
+logic result66 : states
+
+logic ctx__split_fields72 : map
+
+logic ctx__split_fields73 : (int,byte) farray
+
+logic ctx__split_fields74 : bit_absorption_number
+
+logic ctx__split_fields75 : byte_absorption_number
+
+logic ctx__split_fields76 : rate_number
+
+logic ctx__split_fields77 : states
+
+logic result67 : int
+
+logic offset4 : int
+
+logic result68 : int
+
+logic remaining4 : int
+
+logic ctx__split_fields78 : map
+
+logic ctx__split_fields79 : (int,byte) farray
+
+logic ctx__split_fields80 : bit_absorption_number
+
+logic ctx__split_fields81 : byte_absorption_number
+
+logic ctx__split_fields82 : rate_number
+
+logic ctx__split_fields83 : states
+
+logic digest5 : (int,byte) farray
+
+logic remaining5 : int
+
+logic offset5 : int
+
+logic temp___9623 : int
+
+logic temp___9613 : int
+
+logic ctx__split_fields84 : map
+
+logic ctx__split_fields85 : (int,byte) farray
+
+logic ctx__split_fields86 : bit_absorption_number
+
+logic ctx__split_fields87 : byte_absorption_number
+
+logic ctx__split_fields88 : rate_number
+
+logic ctx__split_fields89 : states
+
+logic digest6 : (int,byte) farray
+
+logic remaining6 : int
+
+logic offset6 : int
+
+logic temp___9624 : int
+
+logic temp___9614 : int
+
+logic ctx__split_fields90 : map
+
+logic ctx__split_fields91 : (int,byte) farray
+
+logic ctx__split_fields92 : bit_absorption_number
+
+logic ctx__split_fields93 : byte_absorption_number
+
+logic ctx__split_fields94 : rate_number
+
+logic ctx__split_fields95 : states
+
+logic digest7 : (int,byte) farray
+
+logic remaining7 : int
+
+logic offset7 : int
+
+logic ctx__split_fields96 : map
+
+logic ctx__split_fields97 : (int,byte) farray
+
+logic ctx__split_fields98 : bit_absorption_number
+
+logic ctx__split_fields99 : byte_absorption_number
+
+logic ctx__split_fields100 : rate_number
+
+logic ctx__split_fields101 : states
+
+logic digest8 : (int,byte) farray
+
+logic remaining8 : int
+
+logic offset8 : int
+
+logic ctx__split_fields102 : map
+
+logic ctx__split_fields103 : (int,byte) farray
+
+logic ctx__split_fields104 : bit_absorption_number
+
+logic ctx__split_fields105 : byte_absorption_number
+
+logic ctx__split_fields106 : rate_number
+
+logic ctx__split_fields107 : states
+
+logic digest9 : (int,byte) farray
+
+logic remaining9 : int
+
+logic offset9 : int
+
+logic ctx__split_fields108 : map
+
+logic ctx__split_fields109 : (int,byte) farray
+
+logic ctx__split_fields110 : bit_absorption_number
+
+logic ctx__split_fields111 : byte_absorption_number
+
+logic ctx__split_fields112 : rate_number
+
+logic ctx__split_fields113 : states
+
+logic digest10 : (int,byte) farray
+
+logic remaining10 : int
+
+logic offset10 : int
+
+logic result69 : (int,byte) farray
+
+logic digest11 : (int,byte) farray
+
+logic result70 : map
+
+logic result71 : (int,byte) farray
+
+logic result72 : bit_absorption_number
+
+logic result73 : byte_absorption_number
+
+logic result74 : rate_number
+
+logic result75 : states
+
+logic ctx__split_fields114 : map
+
+logic ctx__split_fields115 : (int,byte) farray
+
+logic ctx__split_fields116 : bit_absorption_number
+
+logic ctx__split_fields117 : byte_absorption_number
+
+logic ctx__split_fields118 : rate_number
+
+logic ctx__split_fields119 : states
+
+logic ctx__split_fields120 : map
+
+logic ctx__split_fields121 : (int,byte) farray
+
+logic ctx__split_fields122 : bit_absorption_number
+
+logic ctx__split_fields123 : byte_absorption_number
+
+logic ctx__split_fields124 : rate_number
+
+logic ctx__split_fields125 : states
+
+logic digest12 : (int,byte) farray
+
+logic ctx__split_fields126 : map
+
+logic ctx__split_fields127 : (int,byte) farray
+
+logic ctx__split_fields128 : bit_absorption_number
+
+logic ctx__split_fields129 : byte_absorption_number
+
+logic ctx__split_fields130 : rate_number
+
+logic ctx__split_fields131 : states
+
+logic digest13 : (int,byte) farray
+
+logic ctx__split_fields132 : map
+
+logic ctx__split_fields133 : (int,byte) farray
+
+logic ctx__split_fields134 : bit_absorption_number
+
+logic ctx__split_fields135 : byte_absorption_number
+
+logic ctx__split_fields136 : rate_number
+
+logic ctx__split_fields137 : states
+
+logic digest14 : (int,byte) farray
+
+logic remaining11 : int
+
+logic offset11 : int
+
+logic initial_rate2 : int
+
+logic bytes_to_squeeze4 : int
+
+logic ctx__split_fields138 : map
+
+logic ctx__split_fields139 : (int,byte) farray
+
+logic ctx__split_fields140 : bit_absorption_number
+
+logic ctx__split_fields141 : byte_absorption_number
+
+logic ctx__split_fields142 : rate_number
+
+logic ctx__split_fields143 : states
+
+logic digest15 : (int,byte) farray
+
+logic remaining12 : int
+
+logic offset12 : int
+
+logic initial_rate3 : int
+
+logic bytes_to_squeeze5 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(digest__first),
+  to_rep(digest__last))
+
+axiom H1 : ((to_rep(digest__first) <= to_rep(digest__last)) ->
+  (o = ((to_rep(digest__last) - to_rep(digest__first)) + 1)))
+
+axiom H2 : ((not (to_rep(digest__first) <= to_rep(digest__last))) -> (o = 0))
+
  (* File "keccak-sponge.ads", line 265, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (dynamic_property(0, 2147483647, to_rep(digest__first),
-  to_rep(digest__last)) ->
-  ((((to_rep(digest__first) <= to_rep(digest__last)) and
-  (o = ((to_rep(digest__last) - to_rep(digest__first)) + 1))) or
-  ((not (to_rep(digest__first) <= to_rep(digest__last))) and (o = 0))) ->
-  in_range2(o))))
+goal WP_parameter_def : in_range2(o)

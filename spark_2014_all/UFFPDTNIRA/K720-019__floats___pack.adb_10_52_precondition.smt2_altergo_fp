@@ -1096,6 +1096,30 @@ axiom add__post_axiom :
   (lt(neg(fliteral), r1) and lt(neg(fliteral), r2))))) -> (eq(add1(r1, r2),
   add(NearestTiesToEven, r1, r2)) and tqtisFinite(add1(r1, r2)))))
 
+logic pack__associativity_test__result : bool
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : bool
+
+logic result : bool
+
+logic pack__associativity_test__result1 : bool
+
+logic pack__associativity_test__result2 : bool
+
+logic pack__associativity_test__result3 : bool
+
+logic pack__associativity_test__result4 : bool
+
+logic pack__associativity_test__result5 : bool
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and

@@ -141,7 +141,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tinteger_8B
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -167,7 +167,7 @@ function tinteger_8B__ref___projection(a: tinteger_8B__ref) : tinteger_8B =
 
 type integer_8
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -199,6 +199,15 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : in_range2(left)
+
+axiom H1 : in_range2(right)
+
  (* File "interfac.ads", line 46, characters 0-0 *)
-goal WP_parameter_def : (in_range2(left) -> (in_range2(right) ->
-  in_range(right)))
+goal WP_parameter_def : in_range(right)

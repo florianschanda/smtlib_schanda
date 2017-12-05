@@ -52,7 +52,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1408,7 +1408,7 @@ function angle__ref___projection(a: angle__ref) : us_rep1 =
 
 type idir_t
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 1))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1580,6 +1580,9 @@ logic count : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+axiom H : in_range1(count)
+
  (* File "a-cfdlli.ads", line 667, characters 0-0 *)
-goal WP_parameter_def : (in_range1(count) ->
-  in_range((to_rep(container__split_discrs) - count)))
+goal WP_parameter_def : in_range((to_rep(container__split_discrs) - count))

@@ -584,7 +584,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq7 : int, int -> bool
 
@@ -626,11 +626,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq4(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq2(get(a, n), get(b, n)) = true))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq2(get(a, n), get(b, n)) = true)))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length1(a), length1(b)), false,
   false)))))
@@ -687,7 +687,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type extended_index1
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq9 : int, int -> bool
 
@@ -713,20 +713,50 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range4(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range4(length1(container))))
 
 axiom get__post_axiom : true
 
+logic p__split_fields : us_main_type
+
+logic o : index
+
+logic o1 : index
+
+logic o2 : index
+
+logic o3 : index
+
+logic o4 : index
+
+logic o5 : index
+
+logic sum_elem__partitions__append__2__container__fields : us_main_type
+
+logic result : us_main_type
+
+logic p__split_fields1 : us_main_type
+
+axiom H : (10 = to_rep1(p__split_discrs))
+
+axiom H1 : (to_rep(o) = 1)
+
+axiom H2 : (to_rep(o1) = 1)
+
+axiom H3 : (o1 = o2)
+
+axiom H4 : (o = o3)
+
+axiom H5 : (o4 = o2)
+
+axiom H6 : (o5 = o3)
+
  (* File "sum_elem.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:us_main_type. forall o:index. forall o1:index.
-  forall o2:index. forall o3:index. forall o4:index. forall o5:index.
-  ((10 = to_rep1(p__split_discrs)) -> ((((to_rep(o) = 1) and
-  ((to_rep(o1) = 1) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
-  (o5 = o3))) -> (((of_int(1) = true) -> (length({ us_split_discrs1 = {
-  rec__sum_elem__partitions__vector__capacity = p__split_discrs };
+goal WP_parameter_def : (((of_int(1) = true) -> (length({ us_split_discrs1 =
+  { rec__sum_elem__partitions__vector__capacity = p__split_discrs };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p__split_fields }
   }) <  to_rep1(p__split_discrs))) and ((not (of_int(1) = true)) -> (length({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
   p__split_discrs }; us_split_fields3 = { rec__sum_elem__partitions__vector =
-  p__split_fields } }) <  10001))))))
+  p__split_fields } }) <  10001)))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1117,106 +1117,343 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "core.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__:(t,us_rep) farray. forall self__1:message_index.
-  forall self__2:message_index. forall self__3:message_count.
-  forall o:integer. forall o1:integer. forall o2:natural. forall o3:integer.
-  forall o4:natural. forall o5:(t,us_rep) farray.
-  forall o6:(t,us_rep) farray. forall o7:message_index.
-  forall o8:message_index. forall o9:message_count.
-  forall o10:(t,us_rep) farray. forall o11:message_index.
-  forall o12:message_index. forall o13:message_count. forall o14:natural.
-  forall o15:integer. forall o16:natural. forall o17:integer.
-  forall o18:natural. forall o19:(t,us_rep) farray.
-  forall o20:(t,us_rep) farray. forall o21:message_index.
-  forall o22:message_index. forall o23:message_count.
-  forall o24:(t,us_rep) farray. forall o25:message_index.
-  forall o26:message_index. forall o27:message_count.
-  forall o28:message_index. forall o29:(t,us_rep) farray.
-  forall o30:message_index. forall o31:message_index.
-  forall o32:message_count. forall o33:(t,us_rep) farray.
-  forall o34:message_index. forall o35:message_index.
-  forall o36:message_count. forall o37:int. forall o38:message_count.
-  forall o39:(t,us_rep) farray. forall o40:message_index.
-  forall o41:message_index. forall o42:message_count.
-  forall o43:(t,us_rep) farray. forall o44:message_index.
-  forall o45:message_index. forall o46:message_count.
-  forall self__4:(t,us_rep) farray. forall self__5:message_index.
-  forall self__6:message_index. forall self__7:message_count.
-  forall result:(t,us_rep) farray. forall result1:message_index.
-  forall result2:message_index. forall result3:message_count.
-  forall self__8:(t,us_rep) farray. forall self__9:message_index.
-  forall self__10:message_index. forall self__11:message_count.
-  forall result4:(t,us_rep) farray. forall result5:message_index.
-  forall result6:message_index. forall result7:message_count.
-  forall self__12:(t,us_rep) farray. forall self__13:message_index.
-  forall self__14:message_index. forall self__15:message_count.
-  forall result8:(t,us_rep) farray. forall result9:message_index.
-  forall result10:message_index. forall result11:message_count.
-  forall self__16:(t,us_rep) farray. forall self__17:message_index.
-  forall self__18:message_index. forall self__19:message_count.
-  forall result12:(t,us_rep) farray. forall result13:message_index.
-  forall result14:message_index. forall result15:message_count.
-  forall self__20:(t,us_rep) farray. forall self__21:message_index.
-  forall self__22:message_index. forall self__23:message_count.
-  forall self__24:mailboxT__ref. forall self__25:us_rep1. ((in_range(n) and
-  ((((to_rep3(self__3) <  16) and ((((((((to_rep(o) = n) and ((o = o1) and
-  ((((self__[to_rep2(self__1)])).us_split_fields1).rec__core__message_record__size = o2))) and
-  ((o3 = o1) and (o4 = o2))) and (o5 = (self__[to_rep2(self__1) <- {
+logic self__ : (t,us_rep) farray
+
+logic self__1 : message_index
+
+logic self__2 : message_index
+
+logic self__3 : message_count
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : natural
+
+logic o3 : integer
+
+logic o4 : natural
+
+logic o5 : (t,us_rep) farray
+
+logic o6 : (t,us_rep) farray
+
+logic o7 : message_index
+
+logic o8 : message_index
+
+logic o9 : message_count
+
+logic o10 : (t,us_rep) farray
+
+logic o11 : message_index
+
+logic o12 : message_index
+
+logic o13 : message_count
+
+logic o14 : natural
+
+logic o15 : integer
+
+logic o16 : natural
+
+logic o17 : integer
+
+logic o18 : natural
+
+logic o19 : (t,us_rep) farray
+
+logic o20 : (t,us_rep) farray
+
+logic o21 : message_index
+
+logic o22 : message_index
+
+logic o23 : message_count
+
+logic o24 : (t,us_rep) farray
+
+logic o25 : message_index
+
+logic o26 : message_index
+
+logic o27 : message_count
+
+logic o28 : message_index
+
+logic o29 : (t,us_rep) farray
+
+logic o30 : message_index
+
+logic o31 : message_index
+
+logic o32 : message_count
+
+logic o33 : (t,us_rep) farray
+
+logic o34 : message_index
+
+logic o35 : message_index
+
+logic o36 : message_count
+
+logic o37 : int
+
+logic o38 : message_count
+
+logic o39 : (t,us_rep) farray
+
+logic o40 : message_index
+
+logic o41 : message_index
+
+logic o42 : message_count
+
+logic o43 : (t,us_rep) farray
+
+logic o44 : message_index
+
+logic o45 : message_index
+
+logic o46 : message_count
+
+logic self__4 : (t,us_rep) farray
+
+logic self__5 : message_index
+
+logic self__6 : message_index
+
+logic self__7 : message_count
+
+logic result : (t,us_rep) farray
+
+logic result1 : message_index
+
+logic result2 : message_index
+
+logic result3 : message_count
+
+logic self__8 : (t,us_rep) farray
+
+logic self__9 : message_index
+
+logic self__10 : message_index
+
+logic self__11 : message_count
+
+logic result4 : (t,us_rep) farray
+
+logic result5 : message_index
+
+logic result6 : message_index
+
+logic result7 : message_count
+
+logic self__12 : (t,us_rep) farray
+
+logic self__13 : message_index
+
+logic self__14 : message_index
+
+logic self__15 : message_count
+
+logic result8 : (t,us_rep) farray
+
+logic result9 : message_index
+
+logic result10 : message_index
+
+logic result11 : message_count
+
+logic self__16 : (t,us_rep) farray
+
+logic self__17 : message_index
+
+logic self__18 : message_index
+
+logic self__19 : message_count
+
+logic result12 : (t,us_rep) farray
+
+logic result13 : message_index
+
+logic result14 : message_index
+
+logic result15 : message_count
+
+logic self__20 : (t,us_rep) farray
+
+logic self__21 : message_index
+
+logic self__22 : message_index
+
+logic self__23 : message_count
+
+logic self__24 : (t,us_rep) farray
+
+logic self__25 : message_index
+
+logic self__26 : message_index
+
+logic self__27 : message_count
+
+logic self__28 : (t,us_rep) farray
+
+logic self__29 : message_index
+
+logic self__30 : message_index
+
+logic self__31 : message_count
+
+axiom H : in_range(n)
+
+axiom H1 : ((to_rep3(self__3) <  16) -> (to_rep(o) = n))
+
+axiom H2 : ((to_rep3(self__3) <  16) -> (o = o1))
+
+axiom H3 : ((to_rep3(self__3) <  16) ->
+  ((((self__[to_rep2(self__1)])).us_split_fields1).rec__core__message_record__size = o2))
+
+axiom H4 : ((to_rep3(self__3) <  16) -> (o3 = o1))
+
+axiom H5 : ((to_rep3(self__3) <  16) -> (o4 = o2))
+
+axiom H6 : ((to_rep3(self__3) <  16) -> (o5 = (self__[to_rep2(self__1) <- {
   us_split_fields1 = { rec__core__message_record__value = o3;
-  rec__core__message_record__size = o4 } }]))) and ((o5 = o6) and
-  ((self__1 = o7) and ((self__2 = o8) and (self__3 = o9))))) and
-  ((o10 = o6) and ((o11 = o7) and ((o12 = o8) and (o13 = o9))))) and
-  (((result = self__) and ((result1 = self__1) and ((result2 = self__2) and
-  (result3 = self__3)))) and ({ us_split_fields3 = {
-  rec__core__mailboxT__messages = self__8; rec__core__mailboxT__next_in =
-  self__9; rec__core__mailboxT__next_out = self__10;
-  rec__core__mailboxT__count = self__11 } } = { us_split_fields3 = {
-  rec__core__mailboxT__messages = o10; rec__core__mailboxT__next_in = o11;
-  rec__core__mailboxT__next_out = o12; rec__core__mailboxT__count = o13 }
-  }))) and ((((((((to_rep1(o14) = 0) and
-  (((((self__8[to_rep2(self__9)])).us_split_fields1).rec__core__message_record__value = o15) and
-  (o14 = o16))) and ((o17 = o15) and (o18 = o16))) and
+  rec__core__message_record__size = o4 } }])))
+
+axiom H7 : ((to_rep3(self__3) <  16) -> (o5 = o6))
+
+axiom H8 : ((to_rep3(self__3) <  16) -> (self__1 = o7))
+
+axiom H9 : ((to_rep3(self__3) <  16) -> (self__2 = o8))
+
+axiom H10 : ((to_rep3(self__3) <  16) -> (self__3 = o9))
+
+axiom H11 : ((to_rep3(self__3) <  16) -> (o10 = o6))
+
+axiom H12 : ((to_rep3(self__3) <  16) -> (o11 = o7))
+
+axiom H13 : ((to_rep3(self__3) <  16) -> (o12 = o8))
+
+axiom H14 : ((to_rep3(self__3) <  16) -> (o13 = o9))
+
+axiom H15 : ((to_rep3(self__3) <  16) -> ((result = self__) and
+  ((result1 = self__1) and ((result2 = self__2) and (result3 = self__3)))))
+
+axiom H16 : ((to_rep3(self__3) <  16) -> ((self__8 = o10) and
+  ((self__9 = o11) and ((self__10 = o12) and (self__11 = o13)))))
+
+axiom H17 : ((to_rep3(self__3) <  16) -> (to_rep1(o14) = 0))
+
+axiom H18 : ((to_rep3(self__3) <  16) ->
+  ((((self__8[to_rep2(self__9)])).us_split_fields1).rec__core__message_record__value = o15))
+
+axiom H19 : ((to_rep3(self__3) <  16) -> (o14 = o16))
+
+axiom H20 : ((to_rep3(self__3) <  16) -> (o17 = o15))
+
+axiom H21 : ((to_rep3(self__3) <  16) -> (o18 = o16))
+
+axiom H22 : ((to_rep3(self__3) <  16) ->
   (o19 = (self__8[to_rep2(self__9) <- { us_split_fields1 = {
   rec__core__message_record__value = o17; rec__core__message_record__size =
-  o18 } }]))) and ((o19 = o20) and ((self__9 = o21) and ((self__10 = o22) and
-  (self__11 = o23))))) and ((o24 = o20) and ((o25 = o21) and ((o26 = o22) and
-  (o27 = o23))))) and (((result4 = self__8) and ((result5 = self__9) and
-  ((result6 = self__10) and (result7 = self__11)))) and ({ us_split_fields3 =
-  { rec__core__mailboxT__messages = self__12; rec__core__mailboxT__next_in =
-  self__13; rec__core__mailboxT__next_out = self__14;
-  rec__core__mailboxT__count = self__15 } } = { us_split_fields3 = {
-  rec__core__mailboxT__messages = o24; rec__core__mailboxT__next_in = o25;
-  rec__core__mailboxT__next_out = o26; rec__core__mailboxT__count = o27 }
-  }))) and (((((to_rep2(o28) = urem(add(to_rep2(self__13), of_int(1)),
-  of_int(16))) and ((self__12 = o29) and ((o28 = o30) and
-  ((self__14 = o31) and (self__15 = o32))))) and ((o33 = o29) and
-  ((o34 = o30) and ((o35 = o31) and (o36 = o32))))) and
-  (((result8 = self__12) and ((result9 = self__13) and
-  ((result10 = self__14) and (result11 = self__15)))) and ({
-  us_split_fields3 = { rec__core__mailboxT__messages = self__16;
-  rec__core__mailboxT__next_in = self__17; rec__core__mailboxT__next_out =
-  self__18; rec__core__mailboxT__count = self__19 } } = { us_split_fields3 =
-  { rec__core__mailboxT__messages = o33; rec__core__mailboxT__next_in = o34;
-  rec__core__mailboxT__next_out = o35; rec__core__mailboxT__count = o36 }
-  }))) and ((((((o37 = (to_rep3(self__19) + 1)) and
-  in_range3((to_rep3(self__19) + 1))) and (to_rep3(o38) = o37)) and
-  ((self__16 = o39) and ((self__17 = o40) and ((self__18 = o41) and
-  (o38 = o42))))) and ((o43 = o39) and ((o44 = o40) and ((o45 = o41) and
-  (o46 = o42))))) and (((result12 = self__16) and ((result13 = self__17) and
-  ((result14 = self__18) and (result15 = self__19)))) and
-  ((o43 = self__20) and ((o44 = self__21) and ((o45 = self__22) and
-  (o46 = self__23)))))))))) or ((not (to_rep3(self__3) <  16)) and
-  (((self__ = self__20) and ((self__1 = self__21) and
-  ((self__2 = self__22) and (self__3 = self__23)))) and
-  ((self__4 = self__20) and ((self__5 = self__21) and
-  ((self__6 = self__22) and (self__7 = self__23))))))) and ((self__24 = {
-  mailboxT__content = { us_split_fields3 = { rec__core__mailboxT__messages =
-  self__20; rec__core__mailboxT__next_in = self__21;
-  rec__core__mailboxT__next_out = self__22; rec__core__mailboxT__count =
-  self__23 } } }) and (self__25 = { us_split_fields3 = {
-  rec__core__mailboxT__messages = self__20; rec__core__mailboxT__next_in =
-  self__21; rec__core__mailboxT__next_out = self__22;
-  rec__core__mailboxT__count = self__23 } })))) ->
-  (0 <  item_count((self__24).mailboxT__content))))
+  o18 } }])))
+
+axiom H23 : ((to_rep3(self__3) <  16) -> (o19 = o20))
+
+axiom H24 : ((to_rep3(self__3) <  16) -> (self__9 = o21))
+
+axiom H25 : ((to_rep3(self__3) <  16) -> (self__10 = o22))
+
+axiom H26 : ((to_rep3(self__3) <  16) -> (self__11 = o23))
+
+axiom H27 : ((to_rep3(self__3) <  16) -> (o24 = o20))
+
+axiom H28 : ((to_rep3(self__3) <  16) -> (o25 = o21))
+
+axiom H29 : ((to_rep3(self__3) <  16) -> (o26 = o22))
+
+axiom H30 : ((to_rep3(self__3) <  16) -> (o27 = o23))
+
+axiom H31 : ((to_rep3(self__3) <  16) -> ((result4 = self__8) and
+  ((result5 = self__9) and ((result6 = self__10) and (result7 = self__11)))))
+
+axiom H32 : ((to_rep3(self__3) <  16) -> ((self__12 = o24) and
+  ((self__13 = o25) and ((self__14 = o26) and (self__15 = o27)))))
+
+axiom H33 : ((to_rep3(self__3) <  16) ->
+  (to_rep2(o28) = urem(add(to_rep2(self__13), of_int(1)), of_int(16))))
+
+axiom H34 : ((to_rep3(self__3) <  16) -> (self__12 = o29))
+
+axiom H35 : ((to_rep3(self__3) <  16) -> (o28 = o30))
+
+axiom H36 : ((to_rep3(self__3) <  16) -> (self__14 = o31))
+
+axiom H37 : ((to_rep3(self__3) <  16) -> (self__15 = o32))
+
+axiom H38 : ((to_rep3(self__3) <  16) -> (o33 = o29))
+
+axiom H39 : ((to_rep3(self__3) <  16) -> (o34 = o30))
+
+axiom H40 : ((to_rep3(self__3) <  16) -> (o35 = o31))
+
+axiom H41 : ((to_rep3(self__3) <  16) -> (o36 = o32))
+
+axiom H42 : ((to_rep3(self__3) <  16) -> ((result8 = self__12) and
+  ((result9 = self__13) and ((result10 = self__14) and
+  (result11 = self__15)))))
+
+axiom H43 : ((to_rep3(self__3) <  16) -> ((self__16 = o33) and
+  ((self__17 = o34) and ((self__18 = o35) and (self__19 = o36)))))
+
+axiom H44 : ((to_rep3(self__3) <  16) -> ((o37 = (to_rep3(self__19) + 1)) and
+  in_range3((to_rep3(self__19) + 1))))
+
+axiom H45 : ((to_rep3(self__3) <  16) -> (to_rep3(o38) = o37))
+
+axiom H46 : ((to_rep3(self__3) <  16) -> (self__16 = o39))
+
+axiom H47 : ((to_rep3(self__3) <  16) -> (self__17 = o40))
+
+axiom H48 : ((to_rep3(self__3) <  16) -> (self__18 = o41))
+
+axiom H49 : ((to_rep3(self__3) <  16) -> (o38 = o42))
+
+axiom H50 : ((to_rep3(self__3) <  16) -> (o43 = o39))
+
+axiom H51 : ((to_rep3(self__3) <  16) -> (o44 = o40))
+
+axiom H52 : ((to_rep3(self__3) <  16) -> (o45 = o41))
+
+axiom H53 : ((to_rep3(self__3) <  16) -> (o46 = o42))
+
+axiom H54 : ((to_rep3(self__3) <  16) -> ((result12 = self__16) and
+  ((result13 = self__17) and ((result14 = self__18) and
+  (result15 = self__19)))))
+
+axiom H55 : ((to_rep3(self__3) <  16) -> ((self__20 = o43) and
+  ((self__21 = o44) and ((self__22 = o45) and (self__23 = o46)))))
+
+axiom H56 : ((not (to_rep3(self__3) <  16)) -> ((self__20 = self__) and
+  ((self__21 = self__1) and ((self__22 = self__2) and
+  (self__23 = self__3)))))
+
+axiom H57 : ((not (to_rep3(self__3) <  16)) -> ((self__20 = self__4) and
+  ((self__21 = self__5) and ((self__22 = self__6) and
+  (self__23 = self__7)))))
+
+axiom H58 : ((self__24 = self__20) and ((self__25 = self__21) and
+  ((self__26 = self__22) and (self__27 = self__23))))
+
+axiom H59 : ((self__28 = self__20) and ((self__29 = self__21) and
+  ((self__30 = self__22) and (self__31 = self__23))))
+
+ (* File "core.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : (0 <  item_count({ us_split_fields3 = {
+  rec__core__mailboxT__messages = self__24; rec__core__mailboxT__next_in =
+  self__25; rec__core__mailboxT__next_out = self__26;
+  rec__core__mailboxT__count = self__27 } }))

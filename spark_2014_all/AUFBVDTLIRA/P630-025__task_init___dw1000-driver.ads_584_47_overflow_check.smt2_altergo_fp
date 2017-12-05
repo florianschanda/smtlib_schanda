@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1518,17 +1518,55 @@ axiom def_axiom :
   (forall temp___3358:int. (((temp___3353(temp___3355, temp___3356,
   temp___3357)).elts1[temp___3358]) = of_rep3(temp___3355))))))
 
+logic address : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___3360 : (int,bits_8) farray
+
+logic temp___33601 : t2
+
+logic temp___3361 : (int,bits_8) farray
+
+logic temp___33611 : t1
+
+logic result : bool
+
+logic result1 : t
+
+logic address1 : t
+
+axiom H : true
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H2 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o4 = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H3 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o4 = 0))
+
+axiom H4 : (((o4 <= 256) -> (result = true)) and ((not (o4 <= 256)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H7 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o = 0))
+
+axiom H8 : ((o1 = o) and in_range1(o))
+
+axiom H9 : (o2 = (tqtint(start_address) + o1))
+
  (* File "dw1000-driver.adb", line 898, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall result:bool. (dynamic_property(0, 2147483647, to_rep(data__first),
-  to_rep(data__last)) -> (((((to_rep(data__first) <= to_rep(data__last)) and
-  (o3 = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o3 = 0))) and
-  (((o3 <= 256) and (result = true)) or ((not (o3 <= 256)) and
-  (result = false)))) -> ((result = true) ->
-  ((((((to_rep(data__first) <= to_rep(data__last)) and
-  (o = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o = 0))) and
-  ((o1 = o) and in_range1(o))) and (o2 = (tqtint(start_address) + o1))) ->
-  in_range1(o2))))))
+goal WP_parameter_def : in_range1(o2)

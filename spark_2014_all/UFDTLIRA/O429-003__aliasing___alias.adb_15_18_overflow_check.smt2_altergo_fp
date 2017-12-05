@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -262,8 +262,14 @@ logic x__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic h__split_fields : integer
+
+logic x__split_fields : integer
+
+logic o : int
+
+axiom H : (h__attr__constrained = false)
+
  (* File "alias.adb", line 8, characters 0-0 *)
 goal WP_parameter_def :
-  (forall h__split_fields:integer. forall x__split_fields:integer.
-  ((h__attr__constrained = false) ->
-  in_range((to_rep(h__split_fields) + to_rep(x__split_fields)))))
+  in_range((to_rep(h__split_fields) + to_rep(x__split_fields)))

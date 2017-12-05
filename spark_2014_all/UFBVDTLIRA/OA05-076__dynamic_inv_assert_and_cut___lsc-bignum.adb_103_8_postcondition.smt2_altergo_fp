@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -712,27 +712,71 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic result__ : t
+
+logic lsc__bignum__word_of_boolean__result : t
+
+logic result : t
+
+logic result__1 : t
+
+logic result1 : t
+
+logic result__2 : t
+
+logic result2 : t
+
+logic lsc__bignum__word_of_boolean__result1 : t
+
+logic lsc__bignum__word_of_boolean__result2 : t
+
+logic lsc__bignum__word_of_boolean__result3 : t
+
+logic result__3 : t
+
+logic lsc__bignum__word_of_boolean__result4 : t
+
+logic result__4 : t
+
+logic lsc__bignum__word_of_boolean__result5 : t
+
+logic result3 : t
+
+axiom H : true
+
+axiom H1 : ((b = true) -> (result = result__))
+
+axiom H2 : ((b = true) -> (result__1 = of_int(1)))
+
+axiom H3 : ((not (b = true)) -> (result1 = result__))
+
+axiom H4 : ((not (b = true)) -> (result__2 = of_int(0)))
+
+axiom H5 : ((not (b = true)) -> (result__1 = result__2))
+
+axiom H6 :
+  (lsc__bignum__word_of_boolean__result1 = lsc__bignum__word_of_boolean__result2)
+
+axiom H7 :
+  (lsc__bignum__word_of_boolean__result3 = lsc__bignum__word_of_boolean__result1)
+
+axiom H8 : (result2 = lsc__bignum__word_of_boolean__result)
+
+axiom H9 : (lsc__bignum__word_of_boolean__result1 = result__1)
+
+axiom H10 :
+  (lsc__bignum__word_of_boolean__result4 = lsc__bignum__word_of_boolean__result2)
+
+axiom H11 : (result__3 = result__1)
+
+axiom H12 :
+  (lsc__bignum__word_of_boolean__result5 = lsc__bignum__word_of_boolean__result3)
+
+axiom H13 : (result__4 = result__1)
+
+axiom H14 : (result3 = lsc__bignum__word_of_boolean__result4)
+
  (* File "lsc-types.ads", line 54, characters 0-0 *)
 goal WP_parameter_def :
-  (forall result__:t. forall lsc__bignum__word_of_boolean__result:t.
-  forall result:t. forall result__1:t. forall result1:t. forall result__2:t.
-  forall result2:t. forall lsc__bignum__word_of_boolean__result1:t.
-  forall lsc__bignum__word_of_boolean__result2:t.
-  forall lsc__bignum__word_of_boolean__result3:t. forall result__3:t.
-  forall lsc__bignum__word_of_boolean__result4:t. forall result__4:t.
-  forall lsc__bignum__word_of_boolean__result5:t.
-  (forall result3:t. (((((((b = true) and ((result = result__) and
-  (result__1 = of_int(1)))) or ((not (b = true)) and
-  (((result1 = result__) and (result__2 = of_int(0))) and
-  (result__1 = result__2)))) and
-  (((lsc__bignum__word_of_boolean__result1 = lsc__bignum__word_of_boolean__result2) and
-  (lsc__bignum__word_of_boolean__result3 = lsc__bignum__word_of_boolean__result1)) and
-  ((result2 = lsc__bignum__word_of_boolean__result) and
-  (lsc__bignum__word_of_boolean__result1 = result__1)))) and
-  (((lsc__bignum__word_of_boolean__result4 = lsc__bignum__word_of_boolean__result2) and
-  (result__3 = result__1)) and
-  ((lsc__bignum__word_of_boolean__result5 = lsc__bignum__word_of_boolean__result3) and
-  (result__4 = result__1)))) and
-  (result3 = lsc__bignum__word_of_boolean__result4)) ->
   (oeq(from_word32(lsc__bignum__word_of_boolean__result4),
-  num_of_boolean(b)) = true))))
+  num_of_boolean(b)) = true)

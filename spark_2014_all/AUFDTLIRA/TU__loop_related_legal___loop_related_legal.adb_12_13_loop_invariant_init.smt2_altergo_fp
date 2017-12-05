@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -323,18 +323,72 @@ function t8b__ref___projection(a: t8b__ref) : t8b = (a).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arr : (int,natural) farray
+
+logic n : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : (int,natural) farray
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,natural) farray
+
+logic arr1 : (int,natural) farray
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : (int,natural) farray
+
+logic arr2 : (int,natural) farray
+
+logic arr3 : (int,natural) farray
+
+logic n2 : int
+
+logic result2 : int
+
+logic n3 : int
+
+logic result3 : (int,natural) farray
+
+logic arr4 : (int,natural) farray
+
+axiom H : (result = n)
+
+axiom H1 : (n1 = 1)
+
+axiom H2 : (1 <= n1)
+
+axiom H3 : (n1 <= 10)
+
+axiom H4 : ((to_rep((arr[n1])) <  2147483647) ->
+  ((o = (to_rep((arr[n1])) + 1)) and in_range1((to_rep((arr[n1])) + 1))))
+
+axiom H5 : ((to_rep((arr[n1])) <  2147483647) -> (to_rep(o1) = o))
+
+axiom H6 : ((to_rep((arr[n1])) <  2147483647) -> (o2 = (arr[n1 <- o1])))
+
+axiom H7 : ((to_rep((arr[n1])) <  2147483647) -> (result1 = arr))
+
+axiom H8 : ((to_rep((arr[n1])) <  2147483647) -> (arr2 = o2))
+
+axiom H9 : ((not (to_rep((arr[n1])) <  2147483647)) -> (arr2 = arr))
+
+axiom H10 : ((not (to_rep((arr[n1])) <  2147483647)) -> (arr2 = arr1))
+
+logic i : int
+
+axiom H11 : (1 <= i)
+
+axiom H12 : (i <= 10)
+
  (* File "loop_related_legal.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,natural) farray. forall n:int. forall o:int.
-  forall o1:natural. forall o2:(int,natural) farray.
-  forall arr1:(int,natural) farray. forall result:int. forall n1:int.
-  forall result1:(int,natural) farray. forall arr2:(int,natural) farray.
-  (((result = n) and (n1 = 1)) -> (((1 <= n1) and (n1 <= 10)) ->
-  ((((to_rep((arr[n1])) <  2147483647) and
-  (((((o = (to_rep((arr[n1])) + 1)) and
-  in_range1((to_rep((arr[n1])) + 1))) and (to_rep(o1) = o)) and
-  (o2 = (arr[n1 <- o1]))) and ((result1 = arr) and (arr2 = o2)))) or
-  ((not (to_rep((arr[n1])) <  2147483647)) and ((arr2 = arr) and
-  (arr2 = arr1)))) ->
-  (forall i:int. (((1 <= i) and (i <= 10)) ->
-  (to_rep((arr[i])) <= to_rep((arr2[i])))))))))
+goal WP_parameter_def : (to_rep((arr[i])) <= to_rep((arr2[i])))

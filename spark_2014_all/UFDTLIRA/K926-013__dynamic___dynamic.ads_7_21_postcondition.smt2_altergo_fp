@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -306,51 +306,225 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 axiom z__def_axiom : (z = (x + 1))
 
+logic m : int
+
+logic oa : int
+
+logic ob : int
+
+logic oe : int
+
+logic of_o : int
+
+logic og : int
+
+logic dynamic__p__result : int
+
+logic dynamic__p__z__assume : int
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic o2 : int
+
+logic us2 : int
+
+logic o3 : int
+
+logic us3 : int
+
+logic o4 : int
+
+logic us4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : int
+
+logic oa1 : int
+
+logic result2 : int
+
+logic ob1 : int
+
+logic result3 : int
+
+logic oe1 : int
+
+logic result4 : int
+
+logic of_o1 : int
+
+logic result5 : int
+
+logic og1 : int
+
+logic result6 : int
+
+logic m2 : int
+
+logic result7 : int
+
+logic dynamic__p__result1 : int
+
+logic dynamic__p__result2 : int
+
+logic dynamic__p__result3 : int
+
+logic m3 : int
+
+logic oa2 : int
+
+logic ob2 : int
+
+logic oe2 : int
+
+logic of_o2 : int
+
+logic og2 : int
+
+logic dynamic__p__result4 : int
+
+logic m4 : int
+
+logic oa3 : int
+
+logic ob3 : int
+
+logic oe3 : int
+
+logic of_o3 : int
+
+logic og3 : int
+
+logic dynamic__p__result5 : int
+
+logic result8 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (x <= 10)
+
+axiom H2 : ((dynamic__p__z__assume = (x + 1)) and in_range((x + 1)))
+
+axiom H3 : (dynamic__p__z__assume = z)
+
+axiom H4 : in_range(z)
+
+axiom H5 : ((o = (x + 2)) and in_range((x + 2)))
+
+axiom H6 : (result = m)
+
+axiom H7 : (m1 = o)
+
+axiom H8 : in_range(m1)
+
+axiom H9 : ((us = 1) and dynamic_property(1, last, 1))
+
+axiom H10 : (o1 = 1)
+
+axiom H11 : (result1 = oa)
+
+axiom H12 : (oa1 = o1)
+
+axiom H13 : dynamic_property(1, last, oa1)
+
+axiom H14 : ((us1 = 2) and dynamic_property1(2, last1, 2))
+
+axiom H15 : (o2 = 2)
+
+axiom H16 : (result2 = ob)
+
+axiom H17 : (ob1 = o2)
+
+axiom H18 : dynamic_property1(2, last1, ob1)
+
+axiom H19 : ((us2 = x) and dynamic_property2(first, 10, x))
+
+axiom H20 : (o3 = x)
+
+axiom H21 : (result3 = oe)
+
+axiom H22 : (oe1 = o3)
+
+axiom H23 : dynamic_property2(first, 10, oe1)
+
+axiom H24 : ((us3 = 10) and dynamic_property3(first1, 10, 10))
+
+axiom H25 : (o4 = 10)
+
+axiom H26 : (result4 = of_o)
+
+axiom H27 : (of_o1 = o4)
+
+axiom H28 : dynamic_property3(first1, 10, of_o1)
+
+axiom H29 : ((us4 = 10) and dynamic_property4(first2, 10, 10))
+
+axiom H30 : (o5 = 10)
+
+axiom H31 : (result5 = og)
+
+axiom H32 : (og1 = o5)
+
+axiom H33 : dynamic_property4(first2, 10, og1)
+
+axiom H34 : ((o6 = (m1 + 1)) and in_range((m1 + 1)))
+
+axiom H35 : (m1 = result6)
+
+axiom H36 : (m2 = o6)
+
+axiom H37 : (dynamic__p__result1 = dynamic__p__result2)
+
+axiom H38 : (dynamic__p__result3 = dynamic__p__result1)
+
+axiom H39 : (result7 = dynamic__p__result)
+
+axiom H40 : (dynamic__p__result1 = og1)
+
+axiom H41 : (dynamic__p__result4 = dynamic__p__result2)
+
+axiom H42 : (og2 = og1)
+
+axiom H43 : (of_o1 = of_o2)
+
+axiom H44 : (oe1 = oe2)
+
+axiom H45 : (ob1 = ob2)
+
+axiom H46 : (oa1 = oa2)
+
+axiom H47 : (m2 = m3)
+
+axiom H48 : (dynamic__p__result5 = dynamic__p__result3)
+
+axiom H49 : (og3 = og1)
+
+axiom H50 : (of_o3 = of_o1)
+
+axiom H51 : (oe3 = oe1)
+
+axiom H52 : (ob3 = ob1)
+
+axiom H53 : (oa3 = oa1)
+
+axiom H54 : (m4 = m2)
+
+axiom H55 : (result8 = dynamic__p__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:int. forall oa:int. forall ob:int. forall oe:int.
-  forall of_o:int. forall og:int. forall dynamic__p__result:int.
-  forall dynamic__p__z__assume:int. forall o:int. forall us:int.
-  forall o1:int. forall us1:int. forall o2:int. forall us2:int.
-  forall o3:int. forall us3:int. forall o4:int. forall us4:int.
-  forall o5:int. forall o6:int. forall result:int. forall m1:int.
-  forall result1:int. forall oa1:int. forall result2:int. forall ob1:int.
-  forall result3:int. forall oe1:int. forall result4:int. forall of_o1:int.
-  forall result5:int. forall og1:int. forall result6:int. forall m2:int.
-  forall result7:int. forall dynamic__p__result1:int.
-  forall dynamic__p__result2:int. forall dynamic__p__result3:int.
-  forall m3:int. forall oa2:int. forall ob2:int. forall oe2:int.
-  forall of_o2:int. forall og2:int. forall dynamic__p__result4:int.
-  forall m4:int. forall oa3:int. forall ob3:int. forall oe3:int.
-  forall of_o3:int. forall og3:int. forall dynamic__p__result5:int.
-  (forall result8:int. ((in_range1(x) and ((x <= 10) and
-  ((((((dynamic__p__z__assume = (x + 1)) and in_range((x + 1))) and
-  (dynamic__p__z__assume = z)) and (in_range(z) and ((((o = (x + 2)) and
-  in_range((x + 2))) and (({ int__content = result } = { int__content = m
-  }) and (m1 = o))) and (in_range(m1) and (((((us = 1) and
-  dynamic_property(1, last, 1)) and (o1 = 1)) and (({ int__content = result1
-  } = { int__content = oa }) and (oa1 = o1))) and (dynamic_property(1, last,
-  oa1) and (((((us1 = 2) and dynamic_property1(2, last1, 2)) and
-  (o2 = 2)) and (({ int__content = result2 } = { int__content = ob }) and
-  (ob1 = o2))) and (dynamic_property1(2, last1, ob1) and (((((us2 = x) and
-  dynamic_property2(first, 10, x)) and (o3 = x)) and (({ int__content =
-  result3 } = { int__content = oe }) and (oe1 = o3))) and
-  (dynamic_property2(first, 10, oe1) and (((((us3 = 10) and
-  dynamic_property3(first1, 10, 10)) and (o4 = 10)) and (({ int__content =
-  result4 } = { int__content = of_o }) and (of_o1 = o4))) and
-  (dynamic_property3(first1, 10, of_o1) and (((((us4 = 10) and
-  dynamic_property4(first2, 10, 10)) and (o5 = 10)) and (({ int__content =
-  result5 } = { int__content = og }) and (og1 = o5))) and
-  (dynamic_property4(first2, 10, og1) and ((((o6 = (m1 + 1)) and
-  in_range((m1 + 1))) and ((m1 = result6) and (m2 = o6))) and
-  (((dynamic__p__result1 = dynamic__p__result2) and
-  (dynamic__p__result3 = dynamic__p__result1)) and (({ int__content = result7
-  } = { int__content = dynamic__p__result }) and
-  (dynamic__p__result1 = og1)))))))))))))))))) and ((({ int__content =
-  dynamic__p__result4 } = { int__content = dynamic__p__result2 }) and
-  ((og2 = og1) and ((of_o1 = of_o2) and ((oe1 = oe2) and ((ob1 = ob2) and
-  ((oa1 = oa2) and (m2 = m3))))))) and
-  ((dynamic__p__result5 = dynamic__p__result3) and ((og3 = og1) and
-  ((of_o3 = of_o1) and ((oe3 = oe1) and ((ob3 = ob1) and ((oa3 = oa1) and
-  (m4 = m2))))))))) and (result8 = dynamic__p__result4)))) ->
-  ((x + 2) <= dynamic__p__result4))))
+goal WP_parameter_def : ((x + 2) <= dynamic__p__result4)

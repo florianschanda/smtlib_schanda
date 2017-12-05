@@ -450,22 +450,61 @@ logic pr_nt__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic pr__split_fields : us_main_type
+
+logic pr__split_fields1 : us_private
+
+logic pr_d__split_fields : us_main_type1
+
+logic pr_d__split_fields1 : us_private
+
+logic pr_nt__split_fields : us_main_type2
+
+logic result : us_main_type
+
+logic result1 : us_private
+
+logic pr__split_fields2 : us_main_type
+
+logic pr__split_fields3 : us_private
+
+logic result2 : us_main_type1
+
+logic result3 : us_private
+
+logic pr_d__split_fields2 : us_main_type1
+
+logic pr_d__split_fields3 : us_private
+
+logic result4 : us_main_type2
+
+logic pr_nt__split_fields1 : us_main_type2
+
+axiom H : (result = pr__split_fields)
+
+axiom H1 : (result1 = pr__split_fields1)
+
+axiom H2 : ((pr__split_fields2 = c) and (pr__split_fields3 = c1))
+
+axiom H3 : (pr__attr__tag = c2)
+
+axiom H4 : (result2 = pr_d__split_fields)
+
+axiom H5 : (result3 = pr_d__split_fields1)
+
+axiom H6 : ((pr_d__split_fields2 = c_d1) and (pr_d__split_fields3 = c_d2))
+
+axiom H7 : (pr_d__split_discrs = c_d)
+
+axiom H8 : (pr_d__attr__tag = c_d3)
+
+axiom H9 : (result4 = pr_nt__split_fields)
+
+axiom H10 : (pr_nt__split_fields1 = c_nt1)
+
+axiom H11 : (pr_nt__split_discrs = c_nt)
+
+axiom H12 : (pr__attr__tag = us_tag)
+
  (* File "use_private_type.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pr__split_fields:us_main_type. forall pr__split_fields1:us_private.
-  forall pr_d__split_fields:us_main_type1.
-  forall pr_d__split_fields1:us_private.
-  forall pr_nt__split_fields:us_main_type2. forall result:us_main_type.
-  forall result1:us_private. forall pr__split_fields2:us_main_type.
-  forall pr__split_fields3:us_private. forall result2:us_main_type1.
-  forall result3:us_private. forall pr_d__split_fields2:us_main_type1.
-  forall pr_d__split_fields3:us_private. forall result4:us_main_type2.
-  forall pr_nt__split_fields1:us_main_type2.
-  (((((result = pr__split_fields) and (result1 = pr__split_fields1)) and
-  ((pr__split_fields2 = c) and (pr__split_fields3 = c1))) and
-  (pr__attr__tag = c2)) -> (((((result2 = pr_d__split_fields) and
-  (result3 = pr_d__split_fields1)) and ((pr_d__split_fields2 = c_d1) and
-  (pr_d__split_fields3 = c_d2))) and ((pr_d__split_discrs = c_d) and
-  (pr_d__attr__tag = c_d3))) -> ((((result4 = pr_nt__split_fields) and
-  (pr_nt__split_fields1 = c_nt1)) and (pr_nt__split_discrs = c_nt)) ->
-  ((pr__attr__tag = us_tag) -> (pr_d__attr__tag = us_tag1))))))
+goal WP_parameter_def : (pr_d__attr__tag = us_tag1)

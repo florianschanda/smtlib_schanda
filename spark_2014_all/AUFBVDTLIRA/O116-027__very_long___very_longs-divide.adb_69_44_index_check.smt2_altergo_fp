@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -830,7 +830,7 @@ axiom compare_def_gt :
 
 type tdigit_count_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1476,181 +1476,556 @@ axiom def_axiom :
   (forall temp___1186:int. (((temp___1181(temp___1183, temp___1184,
   temp___1185)).elts2[temp___1186]) = of_rep1(temp___1183))))))
 
- (* File "very_longs-divide.adb", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:(int,octet) farray.
-  forall result____split_fields1:t1. forall old_overflow:t.
-  forall new_overflow:t. forall overflow_mask:t. forall i:int. forall us:int.
-  forall temp___1188:(int,octet) farray. forall temp___11881:t3.
-  forall temp___1189:(int,octet) farray. forall temp___11891:t2.
-  forall temp___1191:(int,octet) farray. forall temp___11911:t2.
-  forall o:(int,octet) farray. forall o1:t1. forall o2:(int,octet) farray.
-  forall o3:t1. forall temp___1193:digit_index_type.
-  forall temp___11931:(int,octet) farray. forall temp___11932:t1.
-  forall o4:t. forall temp___1207:t. forall temp___1204:digit_index_type.
-  forall temp___12041:(int,octet) farray. forall temp___12042:t1.
-  forall temp___1203:t. forall o5:int. forall o6:octet. forall o7:t.
-  forall o8:t. forall o9:t. forall o10:int. forall o11:octet. forall o12:t.
-  forall o13:t. forall o14:octet. forall o15:int.
-  forall o16:(int,octet) farray. forall o17:(int,octet) farray.
-  forall o18:t1. forall o19:(int,octet) farray. forall o20:t1.
-  forall temp___1198:digit_index_type.
-  forall temp___11981:(int,octet) farray. forall temp___11982:t1.
-  forall o21:int. forall o22:octet. forall o23:t. forall o24:t.
-  forall o25:octet. forall o26:int. forall o27:(int,octet) farray.
-  forall o28:(int,octet) farray. forall o29:t1.
-  forall o30:(int,octet) farray. forall o31:t1.
-  forall temp___1202:digit_index_type.
-  forall temp___12021:(int,octet) farray. forall temp___12022:t1.
-  forall o32:octet. forall new_overflow1:t. forall result:t.
-  forall old_overflow1:t. forall result1:(int,octet) farray.
-  forall result2:t1. forall result____split_fields2:(int,octet) farray.
-  forall result____split_fields3:t1. forall result3:t.
-  forall overflow_mask1:t. forall result4:int__ref. forall i1:int.
-  forall result____split_fields4:us_split_fields. forall old_overflow2:t.
-  forall new_overflow2:t. forall i2:int. forall result5:t__ref.
-  forall new_overflow3:t. forall result6:us_split_fields__ref.
-  forall result____split_fields5:us_split_fields.
-  forall result7:us_split_fields__ref.
-  forall result____split_fields6:us_split_fields. forall result8:t__ref.
-  forall old_overflow3:t.
-  forall result____split_fields7:us_split_fields__ref.
-  forall old_overflow4:t__ref. forall new_overflow4:t__ref.
-  forall i3:int__ref. forall result____split_fields8:us_split_fields.
-  forall old_overflow5:t. forall new_overflow5:t. forall i4:int.
-  forall result____split_fields9:us_split_fields__ref.
-  forall old_overflow6:t__ref. forall new_overflow6:t__ref.
-  forall i5:int__ref. forall result____split_fields10:us_split_fields.
-  forall old_overflow7:t. forall new_overflow7:t. forall i6:int.
-  ((dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
+logic result____split_fields : (int,octet) farray
+
+logic result____split_fields1 : t1
+
+logic old_overflow : t
+
+logic new_overflow : t
+
+logic overflow_mask : t
+
+logic i : int
+
+logic us : int
+
+logic temp___1188 : (int,octet) farray
+
+logic temp___11881 : t3
+
+logic temp___1189 : (int,octet) farray
+
+logic temp___11891 : t2
+
+logic temp___1191 : (int,octet) farray
+
+logic temp___11911 : t2
+
+logic o : (int,octet) farray
+
+logic o1 : t1
+
+logic o2 : (int,octet) farray
+
+logic o3 : t1
+
+logic temp___1193 : digit_index_type
+
+logic temp___11931 : (int,octet) farray
+
+logic temp___11932 : t1
+
+logic o4 : t
+
+logic temp___1207 : t
+
+logic temp___1204 : digit_index_type
+
+logic temp___12041 : (int,octet) farray
+
+logic temp___12042 : t1
+
+logic temp___1203 : t
+
+logic o5 : int
+
+logic o6 : octet
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : int
+
+logic o11 : octet
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : octet
+
+logic o15 : int
+
+logic o16 : (int,octet) farray
+
+logic o17 : (int,octet) farray
+
+logic o18 : t1
+
+logic o19 : (int,octet) farray
+
+logic o20 : t1
+
+logic temp___1198 : digit_index_type
+
+logic temp___11981 : (int,octet) farray
+
+logic temp___11982 : t1
+
+logic o21 : int
+
+logic o22 : octet
+
+logic o23 : t
+
+logic o24 : t
+
+logic o25 : octet
+
+logic o26 : int
+
+logic o27 : (int,octet) farray
+
+logic o28 : (int,octet) farray
+
+logic o29 : t1
+
+logic o30 : (int,octet) farray
+
+logic o31 : t1
+
+logic temp___1202 : digit_index_type
+
+logic temp___12021 : (int,octet) farray
+
+logic temp___12022 : t1
+
+logic o32 : octet
+
+logic new_overflow1 : t
+
+logic result : t
+
+logic old_overflow1 : t
+
+logic result1 : (int,octet) farray
+
+logic result2 : t1
+
+logic result____split_fields2 : (int,octet) farray
+
+logic result____split_fields3 : t1
+
+logic result3 : t
+
+logic overflow_mask1 : t
+
+logic result4 : int
+
+logic i1 : int
+
+logic result____split_fields4 : (int,octet) farray
+
+logic result____split_fields5 : t1
+
+logic old_overflow2 : t
+
+logic new_overflow2 : t
+
+logic i2 : int
+
+logic result5 : t
+
+logic new_overflow3 : t
+
+logic result6 : (int,octet) farray
+
+logic result7 : t1
+
+logic result____split_fields6 : (int,octet) farray
+
+logic result____split_fields7 : t1
+
+logic result8 : (int,octet) farray
+
+logic result9 : t1
+
+logic result____split_fields8 : (int,octet) farray
+
+logic result____split_fields9 : t1
+
+logic result10 : t
+
+logic old_overflow3 : t
+
+logic result____split_fields10 : (int,octet) farray
+
+logic result____split_fields11 : t1
+
+logic old_overflow4 : t
+
+logic new_overflow4 : t
+
+logic i3 : int
+
+logic result____split_fields12 : (int,octet) farray
+
+logic result____split_fields13 : t1
+
+logic old_overflow5 : t
+
+logic new_overflow5 : t
+
+logic i4 : int
+
+logic result____split_fields14 : (int,octet) farray
+
+logic result____split_fields15 : t1
+
+logic old_overflow6 : t
+
+logic new_overflow6 : t
+
+logic i5 : int
+
+logic result____split_fields16 : (int,octet) farray
+
+logic result____split_fields17 : t1
+
+logic old_overflow7 : t
+
+logic new_overflow7 : t
+
+logic i6 : int
+
+axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
   to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number)))) -> ((dynamic_property1(1,
-  to_rep(result____split_discrs), to_rep2(first(result____split_fields1)),
+  (to_rep2(last(number2)) = to_rep(number))))
+
+axiom H1 : (dynamic_property1(1, to_rep(result____split_discrs),
+  to_rep2(first(result____split_fields1)),
   to_rep2(last(result____split_fields1))) and
   ((to_rep2(first(result____split_fields1)) = 1) and
-  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs)))) ->
-  (in_range4(distance) ->
-  ((to_rep(result____split_discrs) = (to_rep(number) + 1)) ->
-  (((us = to_rep(number)) and in_range1(to_rep(number))) ->
-  (((result = old_overflow) and (old_overflow1 = of_int(0))) ->
-  (((to_rep(result____split_discrs) = r118b) and in_range1(r118b)) ->
-  (((((((((to_rep2(first4((temp___1181(of_int(0), 1, r118b)).rt2)) = 1) and
-  ((to_rep2(last4((temp___1181(of_int(0), 1, r118b)).rt2)) = r118b) and ({
-  elts2 = temp___1188; rt2 = temp___11881 } = temp___1181(of_int(0), 1,
-  r118b)))) and
-  ((((to_rep2(first4(temp___11881)) <= to_rep2(last4(temp___11881))) and
-  (((1 <= r118b) and
-  (((to_rep2(last4(temp___11881)) - to_rep2(first4(temp___11881))) + 1) = ((r118b - 1) + 1))) or
-  ((not (1 <= r118b)) and
-  (((to_rep2(last4(temp___11881)) - to_rep2(first4(temp___11881))) + 1) = 0)))) or
-  ((not (to_rep2(first4(temp___11881)) <= to_rep2(last4(temp___11881)))) and
-  (((1 <= r118b) and (0 = ((r118b - 1) + 1))) or (not (1 <= r118b))))) and
-  ((temp___1188 = temp___1189) and (mk1(to_rep2(first4(temp___11881)),
-  to_rep2(last4(temp___11881))) = temp___11891)))) and
-  ((((to_rep2(first2(temp___11891)) <= to_rep2(last2(temp___11891))) and
-  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
-  (((to_rep2(last2(temp___11891)) - to_rep2(first2(temp___11891))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
-  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) and
-  (((to_rep2(last2(temp___11891)) - to_rep2(first2(temp___11891))) + 1) = 0)))) or
-  ((not (to_rep2(first2(temp___11891)) <= to_rep2(last2(temp___11891)))) and
-  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
-  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
-  (not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))))))) and
-  ((temp___1191 = temp___1189) and (temp___11911 = temp___11891)))) and
-  ((temp___1191 = o) and (mk(to_rep2(first2(temp___11911)),
-  to_rep2(last2(temp___11911))) = o1))) and ((o2 = o) and (o3 = o1))) and
-  ((result____split_discrs = temp___1193) and ((temp___11931 = o2) and
-  (temp___11932 = o3)))) and ((((result1 = result____split_fields) and
-  (result2 = result____split_fields1)) and
-  ((temp___11931 = result____split_fields2) and
-  (temp___11932 = result____split_fields3))) and
-  (result____split_discrs = temp___1193))) -> ((((((8 - distance) <  8) and
-  (o4 = lsl_bv(of_int(255), of_int((8 - distance))))) or
-  ((not ((8 - distance) <  8)) and (o4 = of_int(0)))) and
-  ((result3 = overflow_mask) and (overflow_mask1 = o4))) -> ((((result4 = {
-  int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
-  (i1 <= to_rep2(last(number2)))) and ((((temp___1207 = new_overflow) and
-  (((result____split_discrs = temp___1204) and
-  ((temp___12041 = result____split_fields2) and
-  (temp___12042 = result____split_fields3))) and
-  ((temp___1203 = old_overflow1) and ((((dynamic_property1(1,
-  to_rep(result____split_discrs),
-  to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)),
-  to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt))) and
-  ((to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) = 1) and
-  (to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) = to_rep(result____split_discrs)))) and
+  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs))))
+
+axiom H2 : in_range4(distance)
+
+axiom H3 : (to_rep(result____split_discrs) = (to_rep(number) + 1))
+
+axiom H4 : ((us = to_rep(number)) and in_range1(to_rep(number)))
+
+axiom H5 : (result = old_overflow)
+
+axiom H6 : (old_overflow1 = of_int(0))
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : (to_rep(result____split_discrs) = r118b)
+
+axiom H11 : in_range1(r118b)
+
+axiom H12 : (to_rep2(first4((temp___1181(of_int(0), 1, r118b)).rt2)) = 1)
+
+axiom H13 : (to_rep2(last4((temp___1181(of_int(0), 1, r118b)).rt2)) = r118b)
+
+axiom H14 : ({ elts2 = temp___1188; rt2 = temp___11881
+  } = temp___1181(of_int(0), 1, r118b))
+
+axiom H15 :
+  (((to_rep2(first4(temp___11881)) <= to_rep2(last4(temp___11881))) ->
+  (((1 <= r118b) ->
+  (((to_rep2(last4(temp___11881)) - to_rep2(first4(temp___11881))) + 1) = ((r118b - 1) + 1))) and
+  ((not (1 <= r118b)) ->
+  (((to_rep2(last4(temp___11881)) - to_rep2(first4(temp___11881))) + 1) = 0)))) and
+  ((not (to_rep2(first4(temp___11881)) <= to_rep2(last4(temp___11881)))) ->
+  ((1 <= r118b) -> (0 = ((r118b - 1) + 1)))))
+
+axiom H16 : (temp___1188 = temp___1189)
+
+axiom H17 : (mk1(to_rep2(first4(temp___11881)),
+  to_rep2(last4(temp___11881))) = temp___11891)
+
+axiom H18 :
+  (((to_rep2(first2(temp___11891)) <= to_rep2(last2(temp___11891))) ->
+  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
+  (((to_rep2(last2(temp___11891)) - to_rep2(first2(temp___11891))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) and
+  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) ->
+  (((to_rep2(last2(temp___11891)) - to_rep2(first2(temp___11891))) + 1) = 0)))) and
+  ((not (to_rep2(first2(temp___11891)) <= to_rep2(last2(temp___11891)))) ->
+  ((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
+  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1)))))
+
+axiom H19 : ((temp___1191 = temp___1189) and (temp___11911 = temp___11891))
+
+axiom H20 : (temp___1191 = o)
+
+axiom H21 : (mk(to_rep2(first2(temp___11911)),
+  to_rep2(last2(temp___11911))) = o1)
+
+axiom H22 : (o2 = o)
+
+axiom H23 : (o3 = o1)
+
+axiom H24 : (result____split_discrs = temp___1193)
+
+axiom H25 : (temp___11931 = o2)
+
+axiom H26 : (temp___11932 = o3)
+
+axiom H27 : ((result1 = result____split_fields) and
+  (result2 = result____split_fields1))
+
+axiom H28 : ((result____split_fields2 = temp___11931) and
+  (result____split_fields3 = temp___11932))
+
+axiom H29 : (result____split_discrs = temp___1193)
+
+axiom H30 : (((8 - distance) <  8) -> (o4 = lsl_bv(of_int(255),
+  of_int((8 - distance)))))
+
+axiom H31 : ((not ((8 - distance) <  8)) -> (o4 = of_int(0)))
+
+axiom H32 : (result3 = overflow_mask)
+
+axiom H33 : (overflow_mask1 = o4)
+
+axiom H34 : (result4 = i)
+
+axiom H35 : (i1 = 1)
+
+axiom H36 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (temp___1207 = new_overflow))
+
+axiom H37 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_discrs = temp___1204) and
+  ((result____split_fields2 = temp___12041) and
+  (result____split_fields3 = temp___12042))))
+
+axiom H38 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (temp___1203 = old_overflow1))
+
+axiom H39 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (((dynamic_property1(1, to_rep(result____split_discrs),
+  to_rep2(first(result____split_fields5)),
+  to_rep2(last(result____split_fields5))) and
+  ((to_rep2(first(result____split_fields5)) = 1) and
+  (to_rep2(last(result____split_fields5)) = to_rep(result____split_discrs)))) and
   ((result____split_discrs = temp___1204) and
   (forall temp___1206:int.
-  (((to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) <= temp___1206) and
-  (temp___1206 <= to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)))) ->
+  (((to_rep2(first(result____split_fields5)) <= temp___1206) and
+  (temp___1206 <= to_rep2(last(result____split_fields5)))) ->
   ((i2 <= temp___1206) ->
-  ((((result____split_fields4).rec__very_longs__very_long__long_digits).elts[temp___1206]) = (temp___12041[temp___1206]))))))) and
-  ((1 <= i2) and (i2 <= to_rep2(last(number2))))) and
-  (((((((((to_rep2(first(number2)) <= i2) and
-  (i2 <= to_rep2(last(number2)))) and (o5 = i2)) and
-  (o6 = (number1[o5]))) and (o7 = to_rep1(o6))) and (o8 = bw_and(o7,
-  overflow_mask1))) and ((o9 = shift_right__2(o8, (8 - distance))) and
-  ((((8 - distance) <  256) and (o9 = udiv(o8, lsl_bv(of_int(1),
-  of_int((8 - distance)))))) or ((not ((8 - distance) <  256)) and
-  (o9 = udiv(o8, of_int(0))))))) and ((result5 = { t__content = new_overflow2
-  }) and (new_overflow3 = o9))) and ((((((((((distance <  8) and
-  ((((((to_rep2(first(number2)) <= i2) and
-  (i2 <= to_rep2(last(number2)))) and (o10 = i2)) and
-  (o11 = (number1[o10]))) and (o12 = to_rep1(o11))) and (o13 = lsl_bv(o12,
-  of_int(distance))))) or ((not (distance <  8)) and (o13 = of_int(0)))) and
-  (to_rep1(o14) = o13)) and
-  ((((to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) <= i2) and
-  (i2 <= to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)))) and
-  (o15 = i2)) and
-  (o16 = (((result____split_fields4).rec__very_longs__very_long__long_digits).elts[o15 <- o14])))) and
-  ((o16 = o17) and
-  (((result____split_fields4).rec__very_longs__very_long__long_digits).rt = o18))) and
-  ((o19 = o17) and (o20 = o18))) and
-  ((result____split_discrs = temp___1198) and ((temp___11981 = o19) and
-  (temp___11982 = o20)))) and (((result6 = { us_split_fields__content =
-  result____split_fields4 }) and (result____split_fields5 = {
-  rec__very_longs__very_long__long_digits = { elts = temp___11981; rt =
-  temp___11982 } })) and (result____split_discrs = temp___1198))) and
-  (((((((((((((to_rep2(first(((result____split_fields5).rec__very_longs__very_long__long_digits).rt)) <= i2) and
-  (i2 <= to_rep2(last(((result____split_fields5).rec__very_longs__very_long__long_digits).rt)))) and
-  (o21 = i2)) and
-  (o22 = (((result____split_fields5).rec__very_longs__very_long__long_digits).elts[o21]))) and
-  (o23 = to_rep1(o22))) and (o24 = bw_or(o23, old_overflow2))) and
-  (to_rep1(o25) = o24)) and
-  ((((to_rep2(first(((result____split_fields5).rec__very_longs__very_long__long_digits).rt)) <= i2) and
-  (i2 <= to_rep2(last(((result____split_fields5).rec__very_longs__very_long__long_digits).rt)))) and
-  (o26 = i2)) and
-  (o27 = (((result____split_fields5).rec__very_longs__very_long__long_digits).elts[o26 <- o25])))) and
-  ((o27 = o28) and
-  (((result____split_fields5).rec__very_longs__very_long__long_digits).rt = o29))) and
-  ((o30 = o28) and (o31 = o29))) and
-  ((result____split_discrs = temp___1202) and ((temp___12021 = o30) and
-  (temp___12022 = o31)))) and (((result7 = { us_split_fields__content =
-  result____split_fields5 }) and (result____split_fields6 = {
-  rec__very_longs__very_long__long_digits = { elts = temp___12021; rt =
-  temp___12022 } })) and (result____split_discrs = temp___1202))) and
-  (((result8 = { t__content = old_overflow2 }) and
-  (old_overflow3 = new_overflow3)) and
-  (i2 = to_rep2(last(number2))))))))))) and (((i3 = { int__content = i2
-  }) and ((new_overflow4 = { t__content = new_overflow3 }) and
-  ((old_overflow4 = { t__content = old_overflow3 }) and
-  (result____split_fields7 = { us_split_fields__content =
-  result____split_fields6 })))) and ((i4 = i2) and
-  ((new_overflow5 = new_overflow3) and ((old_overflow5 = old_overflow3) and
-  (result____split_fields8 = result____split_fields6)))))) and
-  (((i5 = i3) and ((new_overflow6 = new_overflow4) and
-  ((old_overflow6 = old_overflow4) and
-  (result____split_fields9 = result____split_fields7)))) and ((i6 = i4) and
-  ((new_overflow7 = new_overflow5) and ((old_overflow7 = old_overflow5) and
-  (result____split_fields10 = result____split_fields8))))))) or
-  ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) and (((i5 = {
-  int__content = i1 }) and ((new_overflow6 = { t__content = new_overflow
-  }) and ((old_overflow6 = { t__content = old_overflow1 }) and
-  (result____split_fields9 = { us_split_fields__content = {
-  rec__very_longs__very_long__long_digits = { elts = result____split_fields2;
-  rt = result____split_fields3 } } })))) and ((i6 = i1) and
-  ((new_overflow7 = new_overflow1) and ((old_overflow7 = old_overflow1) and
-  (result____split_fields10 = { rec__very_longs__very_long__long_digits = {
-  elts = result____split_fields2; rt = result____split_fields3 } })))))))) ->
-  ((to_rep1(o32) = (old_overflow6).t__content) ->
-  (to_rep2(first((((result____split_fields9).us_split_fields__content).rec__very_longs__very_long__long_digits).rt)) <= to_rep2(last((((result____split_fields9).us_split_fields__content).rec__very_longs__very_long__long_digits).rt)))))))))))))))
+  ((result____split_fields4[temp___1206]) = (temp___12041[temp___1206]))))))) and
+  ((1 <= i2) and (i2 <= to_rep2(last(number2))))))
+
+axiom H40 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((to_rep2(first(number2)) <= i2) and (i2 <= to_rep2(last(number2)))))
+
+axiom H41 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (o5 = i2))
+
+axiom H42 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o6 = (number1[o5])))
+
+axiom H43 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o7 = to_rep1(o6)))
+
+axiom H44 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o8 = bw_and(o7, overflow_mask1)))
+
+axiom H45 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((o9 = shift_right__2(o8, (8 - distance))) and ((((8 - distance) <  256) ->
+  (o9 = udiv(o8, lsl_bv(of_int(1), of_int((8 - distance)))))) and
+  ((not ((8 - distance) <  256)) -> (o9 = udiv(o8, of_int(0)))))))
+
+axiom H46 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (result5 = new_overflow2))
+
+axiom H47 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (new_overflow3 = o9))
+
+axiom H48 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((distance <  8) -> ((to_rep2(first(number2)) <= i2) and
+  (i2 <= to_rep2(last(number2))))))
+
+axiom H49 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((distance <  8) -> (o10 = i2)))
+
+axiom H50 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((distance <  8) -> (o11 = (number1[o10]))))
+
+axiom H51 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((distance <  8) -> (o12 = to_rep1(o11))))
+
+axiom H52 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((distance <  8) -> (o13 = lsl_bv(o12, of_int(distance)))))
+
+axiom H53 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((not (distance <  8)) -> (o13 = of_int(0))))
+
+axiom H54 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (to_rep1(o14) = o13))
+
+axiom H55 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((to_rep2(first(result____split_fields5)) <= i2) and
+  (i2 <= to_rep2(last(result____split_fields5)))))
+
+axiom H56 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (o15 = i2))
+
+axiom H57 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o16 = (result____split_fields4[o15 <- o14])))
+
+axiom H58 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((o17 = o16) and (o18 = result____split_fields5)))
+
+axiom H59 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((o19 = o17) and (o20 = o18)))
+
+axiom H60 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((temp___1198 = result____split_discrs) and ((temp___11981 = o19) and
+  (temp___11982 = o20))))
+
+axiom H61 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result6 = result____split_fields4) and
+  (result7 = result____split_fields5)))
+
+axiom H62 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields6 = temp___11981) and
+  (result____split_fields7 = temp___11982)))
+
+axiom H63 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (result____split_discrs = temp___1198))
+
+axiom H64 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((to_rep2(first(result____split_fields7)) <= i2) and
+  (i2 <= to_rep2(last(result____split_fields7)))))
+
+axiom H65 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (o21 = i2))
+
+axiom H66 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o22 = (result____split_fields6[o21])))
+
+axiom H67 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o23 = to_rep1(o22)))
+
+axiom H68 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o24 = bw_or(o23, old_overflow2)))
+
+axiom H69 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (to_rep1(o25) = o24))
+
+axiom H70 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((to_rep2(first(result____split_fields7)) <= i2) and
+  (i2 <= to_rep2(last(result____split_fields7)))))
+
+axiom H71 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (o26 = i2))
+
+axiom H72 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (o27 = (result____split_fields6[o26 <- o25])))
+
+axiom H73 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((o28 = o27) and (o29 = result____split_fields7)))
+
+axiom H74 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((o30 = o28) and (o31 = o29)))
+
+axiom H75 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((temp___1202 = result____split_discrs) and ((temp___12021 = o30) and
+  (temp___12022 = o31))))
+
+axiom H76 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result8 = result____split_fields6) and
+  (result9 = result____split_fields7)))
+
+axiom H77 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields8 = temp___12021) and
+  (result____split_fields9 = temp___12022)))
+
+axiom H78 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (result____split_discrs = temp___1202))
+
+axiom H79 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (result10 = old_overflow2))
+
+axiom H80 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (old_overflow3 = new_overflow3))
+
+axiom H81 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (i2 = to_rep2(last(number2))))
+
+axiom H82 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (i3 = i2))
+
+axiom H83 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (new_overflow4 = new_overflow3))
+
+axiom H84 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (old_overflow4 = old_overflow3))
+
+axiom H85 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields10 = result____split_fields8) and
+  (result____split_fields11 = result____split_fields9)))
+
+axiom H86 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (i4 = i2))
+
+axiom H87 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (new_overflow5 = new_overflow3))
+
+axiom H88 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (old_overflow5 = old_overflow3))
+
+axiom H89 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields12 = result____split_fields8) and
+  (result____split_fields13 = result____split_fields9)))
+
+axiom H90 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (i5 = i3))
+
+axiom H91 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (new_overflow6 = new_overflow4))
+
+axiom H92 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (old_overflow6 = old_overflow4))
+
+axiom H93 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields14 = result____split_fields10) and
+  (result____split_fields15 = result____split_fields11)))
+
+axiom H94 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) -> (i6 = i4))
+
+axiom H95 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (new_overflow7 = new_overflow5))
+
+axiom H96 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  (old_overflow7 = old_overflow5))
+
+axiom H97 : (((1 <= i1) and (i1 <= to_rep2(last(number2)))) ->
+  ((result____split_fields16 = result____split_fields12) and
+  (result____split_fields17 = result____split_fields13)))
+
+axiom H98 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (i5 = i1))
+
+axiom H99 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (new_overflow6 = new_overflow))
+
+axiom H100 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (old_overflow6 = old_overflow1))
+
+axiom H101 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  ((result____split_fields14 = result____split_fields2) and
+  (result____split_fields15 = result____split_fields3)))
+
+axiom H102 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (i6 = i1))
+
+axiom H103 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (new_overflow7 = new_overflow1))
+
+axiom H104 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  (old_overflow7 = old_overflow1))
+
+axiom H105 : ((not ((1 <= i1) and (i1 <= to_rep2(last(number2))))) ->
+  ((result____split_fields16 = result____split_fields2) and
+  (result____split_fields17 = result____split_fields3)))
+
+axiom H106 : (to_rep1(o32) = old_overflow6)
+
+ (* File "very_longs-divide.adb", line 23, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep2(first(result____split_fields15)) <= to_rep2(last(result____split_fields15)))

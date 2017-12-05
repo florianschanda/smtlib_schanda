@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -388,34 +388,119 @@ type t11b__ref = { t11b__content : us_rep
 
 function t11b__ref___projection(a: t11b__ref) : us_rep = (a).t11b__content
 
+logic x__split_discrs : integer
+
+logic us : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : bool
+
+logic o4 : integer
+
+logic o5 : bool
+
+logic o6 : integer
+
+logic o7 : bool
+
+logic p__y__assume : integer
+
+logic p__y__assume1 : bool
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic temp___188 : integer
+
+logic temp___1881 : bool
+
+logic usq_ : integer
+
+logic usq_1 : bool
+
+logic temp___190 : integer
+
+logic temp___1901 : bool
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : bool
+
+logic o14 : integer
+
+logic o15 : bool
+
+logic o16 : integer
+
+logic o17 : bool
+
+logic result : integer
+
+logic x__split_discrs1 : integer
+
+axiom H : ((x__attr__constrained = false) and (to_rep(x__split_discrs) = 5))
+
+axiom H1 : ((us = 2) and in_range(2))
+
+axiom H2 : (to_rep(o) = 2)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (o2 = o1)
+
+axiom H5 : (true = o3)
+
+axiom H6 : ((o4 = o2) and (o5 = o3))
+
+axiom H7 : ((o6 = o4) and (o7 = o5))
+
+axiom H8 : ((p__y__assume = o6) and (p__y__assume1 = o7))
+
+axiom H9 : (y__split_discrs = p__y__assume)
+
+axiom H10 : (y__attr__constrained = true)
+
+axiom H11 : ((2 = to_rep(y__split_discrs)) and (y__attr__constrained = true))
+
+axiom H12 : (to_rep(o8) = 3)
+
+axiom H13 : (o8 = o9)
+
+axiom H14 : (temp___188 = o9)
+
+axiom H15 : (true = temp___1881)
+
+axiom H16 : ((x__attr__constrained = true) -> (temp___188 = x__split_discrs))
+
+axiom H17 : ((usq_ = temp___188) and (usq_1 = temp___1881))
+
+axiom H18 : (usq_ = temp___190)
+
+axiom H19 : (x__attr__constrained = temp___1901)
+
+axiom H20 : (result = x__split_discrs)
+
+axiom H21 : (x__split_discrs1 = temp___190)
+
+axiom H22 : (to_rep(o10) = 3)
+
+axiom H23 : (o10 = o11)
+
+axiom H24 : (o12 = o11)
+
+axiom H25 : (true = o13)
+
+axiom H26 : ((o14 = o12) and (o15 = o13))
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_discrs:integer. forall us:int. forall o:integer.
-  forall o1:integer. forall o2:integer. forall o3:bool. forall o4:integer.
-  forall o5:bool. forall o6:integer. forall o7:bool.
-  forall p__y__assume:integer. forall p__y__assume1:bool. forall o8:integer.
-  forall o9:integer. forall temp___188:integer. forall temp___1881:bool.
-  forall usq_:integer. forall usq_1:bool. forall temp___190:integer.
-  forall temp___1901:bool. forall o10:integer. forall o11:integer.
-  forall o12:integer. forall o13:bool. forall o14:integer. forall o15:bool.
-  forall result:integer. forall x__split_discrs1:integer.
-  (((x__attr__constrained = false) and (to_rep(x__split_discrs) = 5)) ->
-  (((us = 2) and in_range(2)) -> ((((((((to_rep(o) = 2) and (o = o1)) and
-  ((o2 = o1) and (true = o3))) and ({ us_split_discrs1 = { rec__p__t__x = o4
-  }; attr__constrained = o5 } = { us_split_discrs1 = { rec__p__t__x = o2 };
-  attr__constrained = o3 })) and ({ us_split_discrs1 = { rec__p__t__x = o6 };
-  attr__constrained = o7 } = { us_split_discrs1 = { rec__p__t__x = o4 };
-  attr__constrained = o5 })) and ((p__y__assume = o6) and
-  (p__y__assume1 = o7))) and ((y__split_discrs = p__y__assume) and
-  (y__attr__constrained = true))) -> (((2 = to_rep(y__split_discrs)) and
-  (y__attr__constrained = true)) -> (((((((to_rep(o8) = 3) and (o8 = o9)) and
-  ((temp___188 = o9) and (true = temp___1881))) and
-  ((((x__attr__constrained = true) and (temp___188 = x__split_discrs)) or
-  (not (x__attr__constrained = true))) and ((usq_ = temp___188) and
-  (usq_1 = temp___1881)))) and ((usq_ = temp___190) and
-  (x__attr__constrained = temp___1901))) and ((result = x__split_discrs) and
-  (x__split_discrs1 = temp___190))) -> (((((to_rep(o10) = 3) and
-  (o10 = o11)) and ((o12 = o11) and (true = o13))) and ({ us_split_discrs1 =
-  { rec__p__t__x = o14 }; attr__constrained = o15 } = { us_split_discrs1 = {
-  rec__p__t__x = o12 }; attr__constrained = o13 })) ->
-  (2 = to_rep(o14)))))))))
+goal WP_parameter_def : (2 = to_rep(o14))

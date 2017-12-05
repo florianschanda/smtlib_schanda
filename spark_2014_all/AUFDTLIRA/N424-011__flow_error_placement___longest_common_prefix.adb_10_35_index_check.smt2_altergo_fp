@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -332,15 +332,83 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,integer) farray
+
+logic l : int
+
+logic temp___153 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic temp___154 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___1531 : int
+
+logic temp___1541 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic l1 : int
+
+logic result3 : int
+
+logic l2 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+axiom H : in_range3(x)
+
+axiom H1 : in_range3(y)
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H3 : ((o7 = (x + l)) and in_range1((x + l)))
+
+axiom H4 : (((o7 <= 1000) -> (result2 = true)) and ((not (o7 <= 1000)) ->
+  (result2 = false)))
+
+axiom H5 : ((result2 = true) -> ((o6 = (y + l)) and in_range1((y + l))))
+
+axiom H6 : ((result2 = true) -> (((o6 <= 1000) -> (result1 = true)) and
+  ((not (o6 <= 1000)) -> (result1 = false))))
+
+axiom H7 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H8 : (result1 = true)
+
+axiom H9 : ((temp___154 = (y + l)) and in_range1((y + l)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l:int. forall temp___154:int. forall o:int. forall o1:int.
-  forall result:bool. forall result1:bool. (in_range3(x) -> (in_range3(y) ->
-  (((0 <= 2147483647) -> in_range2(l)) -> (((((o1 = (x + l)) and
-  in_range1((x + l))) and (((o1 <= 1000) and (result1 = true)) or
-  ((not (o1 <= 1000)) and (result1 = false)))) and (((result1 = true) and
-  (((o = (y + l)) and in_range1((y + l))) and (((o <= 1000) and
-  (result = true)) or ((not (o <= 1000)) and (result = false))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (((temp___154 = (y + l)) and in_range1((y + l))) ->
-  (1 <= temp___154))))))))
+goal WP_parameter_def : (1 <= temp___154)

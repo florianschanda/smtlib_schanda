@@ -280,7 +280,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -343,14 +343,111 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,elementtype) farray
+
+logic i : int
+
+logic temp___160 : (int,elementtype) farray
+
+logic temp___159 : int
+
+logic temp___157 : (int,elementtype) farray
+
+logic o : elementtype
+
+logic o1 : (int,elementtype) farray
+
+logic n : int
+
+logic o2 : bool
+
+logic o3 : elementtype
+
+logic o4 : (int,elementtype) farray
+
+logic n1 : int
+
+logic o5 : bool
+
+logic a1 : (int,elementtype) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,elementtype) farray
+
+logic a2 : (int,elementtype) farray
+
+logic a3 : (int,elementtype) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,elementtype) farray
+
+logic a4 : (int,elementtype) farray
+
+logic a5 : (int,elementtype) farray
+
+logic i4 : int
+
+logic a6 : (int,elementtype) farray
+
+logic i5 : int
+
+logic a7 : (int,elementtype) farray
+
+logic i6 : int
+
+logic a8 : (int,elementtype) farray
+
+logic i7 : int
+
+logic a9 : (int,elementtype) farray
+
+logic i8 : int
+
+logic a10 : (int,elementtype) farray
+
+logic i9 : int
+
+logic a11 : (int,elementtype) farray
+
+logic i10 : int
+
+logic a12 : (int,elementtype) farray
+
+logic i11 : int
+
+axiom H : in_range2(l)
+
+axiom H1 : in_range2(u)
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = l)
+
+axiom H4 : (l <= i1)
+
+axiom H5 : (i1 <= u)
+
+axiom H6 : (to_rep(o) = 0)
+
+axiom H7 : (o1 = (a[i1 <- o]))
+
+axiom H8 : (result1 = a)
+
+axiom H9 : (a2 = o1)
+
+logic n2 : int
+
+axiom H10 : (l <= n2)
+
+axiom H11 : (n2 <= i1)
+
  (* File "loop_entry.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,elementtype) farray. forall i:int. forall o:elementtype.
-  forall o1:(int,elementtype) farray. forall result:int. forall i1:int.
-  forall result1:(int,elementtype) farray.
-  forall a1:(int,elementtype) farray. (in_range2(l) -> (in_range2(u) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = l)) ->
-  (((l <= i1) and (i1 <= u)) -> ((((to_rep(o) = 0) and
-  (o1 = (a[i1 <- o]))) and (({ map__content = result1 } = { map__content = a
-  }) and (a1 = o1))) ->
-  (forall n:int. (((l <= n) and (n <= i1)) -> (to_rep((a1[n])) = 0)))))))))
+goal WP_parameter_def : (to_rep((a2[n2])) = 0)

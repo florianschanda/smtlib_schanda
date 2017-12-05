@@ -563,32 +563,60 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range9(get(container, position)))))
 
- (* File "p.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall e:int. forall o:int.
-  forall result:int. forall e1:int. forall l__split_fields1:us_main_type.
-  (in_range2(i) -> (((1 <= i) and (i = (0 + length(model__({
-  us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
-  }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
-  }))))) -> ((((o = get(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields4 : us_main_type
+
+logic e3 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : ((1 <= i) and (i = (0 + length(model__({ us_split_discrs1 = {
+  rec__p__my_vectors__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } })))))
+
+axiom H2 : ((o = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
   i)) and (in_range6(o) and (o = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
-  i)))) and (({ int__content = result } = { int__content = e }) and
-  (e1 = o))) -> (in_range1(e1) -> (((length1({ us_split_discrs1 = {
+  i))))
+
+axiom H3 : (result = e)
+
+axiom H4 : (e1 = o)
+
+axiom H5 : in_range1(e1)
+
+axiom H6 : ((length1({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   }) = (length1({ us_split_discrs1 = { rec__p__my_vectors__vector__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_vectors__vector =
-  l__split_fields } }) - 1)) and ((bool_lt(length(model__({
+  l__split_fields } }) - 1)) and (((bool_lt(length(model__({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   })), length(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
-  }))) = true) and
+  }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length(model__({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
@@ -598,10 +626,19 @@ goal WP_parameter_def :
   n) = get(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields } }),
-  n)))))) -> (((of_int(1) = true) -> (length1({ us_split_discrs1 = {
+  n))))) and (not (bool_lt(length(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 } })),
+  length(model__({ us_split_discrs1 = {
+  rec__p__my_vectors__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields }
+  }))) = false))))
+
+ (* File "p.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (((of_int(1) = true) -> (length1({ us_split_discrs1 =
+  { rec__p__my_vectors__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
   }) <  to_rep(l__split_discrs))) and ((not (of_int(1) = true)) -> (length1({
   us_split_discrs1 = { rec__p__my_vectors__vector__capacity = l__split_discrs
   }; us_split_fields1 = { rec__p__my_vectors__vector = l__split_fields1 }
-  }) <  100)))))))))
+  }) <  100)))

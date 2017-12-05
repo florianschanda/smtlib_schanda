@@ -160,5 +160,29 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic po : pt
+
+logic o : pt
+
+logic us_self__compl : pt
+
+logic po1 : pt
+
+logic po2 : pt
+
+logic us_self__compl1 : pt
+
+logic result : pt
+
+logic po3 : pt
+
+logic po4 : pt
+
+logic po5 : pt
+
+logic po6 : pt
+
+logic po7 : pt
+
  (* File "p.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : (95 <= 96)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -697,20 +697,126 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "inrange3.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:t. forall result:t. forall i1:t. forall i2:t.
-  forall inrange3__inrange64__result:bool. forall temp___205:t.
-  forall result1:t. forall temp___2051:t.
-  forall inrange3__inrange64__result1:bool. forall result2:t. forall i3:t.
-  ((uge(range_size, of_int(2)) and ule(range_size, of_int(65535))) -> ((({
-  t__content = result } = { t__content = i }) and (i1 = of_int(0))) ->
-  (ult(i1, range_size) -> (((ule(of_int(0), i2) and ule(i2, sub(range_size,
-  of_int(1)))) and ((i2 = of_int(0)) or
+logic i : t
+
+logic inrange3__inrange64__result : bool
+
+logic temp___204 : t
+
+logic temp___205 : t
+
+logic inrange3__inrange64__result1 : bool
+
+logic result : t
+
+logic i1 : t
+
+logic i2 : t
+
+logic inrange3__inrange64__result2 : bool
+
+logic temp___2051 : t
+
+logic result1 : t
+
+logic temp___2052 : t
+
+logic result2 : bool
+
+logic inrange3__inrange64__result3 : bool
+
+logic result3 : t
+
+logic i3 : t
+
+logic i4 : t
+
+logic inrange3__inrange64__result4 : bool
+
+logic temp___2053 : t
+
+logic i5 : t
+
+logic inrange3__inrange64__result5 : bool
+
+logic temp___2054 : t
+
+logic i6 : t
+
+logic inrange3__inrange64__result6 : bool
+
+logic i7 : t
+
+logic inrange3__inrange64__result7 : bool
+
+logic i8 : t
+
+logic inrange3__inrange64__result8 : bool
+
+logic i9 : t
+
+logic inrange3__inrange64__result9 : bool
+
+logic result4 : bool
+
+logic inrange3__inrange64__result10 : bool
+
+logic inrange3__inrange64__result11 : bool
+
+logic inrange3__inrange64__result12 : bool
+
+logic i10 : t
+
+logic inrange3__inrange64__result13 : bool
+
+logic i11 : t
+
+logic inrange3__inrange64__result14 : bool
+
+logic i12 : t
+
+logic inrange3__inrange64__result15 : bool
+
+logic i13 : t
+
+logic inrange3__inrange64__result16 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
+
+axiom H4 : (result = i)
+
+axiom H5 : (i1 = of_int(0))
+
+axiom H6 : true
+
+axiom H7 : ult(i1, range_size)
+
+axiom H8 : ((ule(of_int(0), i2) and ule(i2, sub(range_size, of_int(1)))) and
+  ((i2 = of_int(0)) or
   (forall n:t. ((ule(of_int(0), n) and ule(n, sub(i2, of_int(1)))) ->
-  (not (var = add(bottom, n))))))) -> (ult(i2, range_size) ->
-  (((temp___205 = result1) and (temp___2051 = i2)) ->
-  (((not (var = add(bottom, i2))) and
-  (inrange3__inrange64__result1 = inrange3__inrange64__result)) ->
-  (((i2 = result2) and (i3 = add(i2, of_int(1)))) -> (ult(i3, range_size) ->
-  ugt(i3, temp___2051)))))))))))
+  (not (var = add(bottom, n)))))))
+
+axiom H9 : ult(i2, range_size)
+
+axiom H10 : (temp___2051 = result1)
+
+axiom H11 : (temp___2052 = i2)
+
+axiom H12 : (not (var = add(bottom, i2)))
+
+axiom H13 : (inrange3__inrange64__result3 = inrange3__inrange64__result2)
+
+axiom H14 : (i2 = result3)
+
+axiom H15 : (i3 = add(i2, of_int(1)))
+
+axiom H16 : ult(i3, range_size)
+
+ (* File "inrange3.ads", line 15, characters 0-0 *)
+goal WP_parameter_def : ugt(i3, temp___2052)

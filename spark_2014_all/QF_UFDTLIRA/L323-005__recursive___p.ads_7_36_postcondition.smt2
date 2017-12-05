@@ -28,6 +28,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-fun bad (tuple0) Bool)
 (declare-fun bad__function_guard (Bool tuple0) Bool)
-(assert (not (not (= (bad Tuple0) true))))
+(assert (= (bad Tuple0) true))
+(assert (not false))
 (check-sat)
 (exit)

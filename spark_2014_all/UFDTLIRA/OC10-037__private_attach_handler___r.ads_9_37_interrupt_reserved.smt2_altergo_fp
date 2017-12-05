@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -140,19 +140,19 @@ type us_split_discrs = { rec__r__pt__x : integer; rec__r__pt__y : integer;
 rec__r__pt__z : integer
 }
 
-function us_split_discrs___projection(a: us_split_discrs) : integer =
+function us_split_discrs___2__projection(a: us_split_discrs) : integer =
   (a).rec__r__pt__x
 
-function us_split_discrs___2__projection(a: us_split_discrs) : integer =
+function us_split_discrs___3__projection(a: us_split_discrs) : integer =
   (a).rec__r__pt__y
 
-function us_split_discrs___3__projection(a: us_split_discrs) : integer =
+function us_split_discrs___4__projection(a: us_split_discrs) : integer =
   (a).rec__r__pt__z
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__r__pt : us_main_type
@@ -171,10 +171,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep) : us_split_discrs =
+function us_rep___30__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___30__projection(a: us_rep) : us_split_fields =
+function us_rep___31__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -255,5 +255,7 @@ logic self__2 : integer
 
 logic self__3 : us_main_type
 
+logic temp___1548 : bool
+
  (* File "r.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (forall temp___1558:bool. (temp___1558 = false))
+goal WP_parameter_def : (temp___1548 = false)

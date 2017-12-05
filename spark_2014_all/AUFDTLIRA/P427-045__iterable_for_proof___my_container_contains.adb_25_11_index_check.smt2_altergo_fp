@@ -345,7 +345,28 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic my_container_contains__element__result : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic result : int
+
+logic my_container_contains__element__result1 : int
+
+logic my_container_contains__element__result2 : int
+
+logic my_container_contains__element__result3 : int
+
+logic my_container_contains__element__result4 : int
+
+logic my_container_contains__element__result5 : int
+
+axiom H : (has_element(c, { us_split_fields1 = {
+  rec__my_container_contains__cursor__index = p } }) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((has_element(c, { us_split_fields1 = {
-  rec__my_container_contains__cursor__index = p } }) = true) ->
-  (1 <= to_rep(p)))
+goal WP_parameter_def : (1 <= to_rep(p))

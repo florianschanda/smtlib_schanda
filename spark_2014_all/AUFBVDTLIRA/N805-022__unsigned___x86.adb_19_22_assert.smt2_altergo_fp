@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1168,31 +1168,85 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic xcx : (int,unsigned_8) farray
+
+logic o : unsigned_8
+
+logic o1 : (int,unsigned_8) farray
+
+logic o2 : unsigned_8
+
+logic o3 : (int,unsigned_8) farray
+
+logic o4 : unsigned_8
+
+logic o5 : (int,unsigned_8) farray
+
+logic o6 : unsigned_8
+
+logic o7 : (int,unsigned_8) farray
+
+logic result : (int,unsigned_8) farray
+
+logic xcx1 : (int,unsigned_8) farray
+
+logic result1 : (int,unsigned_8) farray
+
+logic xcx2 : (int,unsigned_8) farray
+
+logic result2 : (int,unsigned_8) farray
+
+logic xcx3 : (int,unsigned_8) farray
+
+logic result3 : (int,unsigned_8) farray
+
+logic xcx4 : (int,unsigned_8) farray
+
+logic xcx5 : (int,unsigned_8) farray
+
+logic xcx6 : (int,unsigned_8) farray
+
+axiom H : true
+
+axiom H1 : (to_rep(o) = toSmall(urem1(val__, of_int1(256))))
+
+axiom H2 : (o1 = (xcx[0 <- o]))
+
+axiom H3 : (result = xcx)
+
+axiom H4 : (xcx1 = o1)
+
+axiom H5 : (to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
+  of_int1(256))))
+
+axiom H6 : (o3 = (xcx1[1 <- o2]))
+
+axiom H7 : (xcx1 = result1)
+
+axiom H8 : (xcx2 = o3)
+
+axiom H9 : (to_rep(o4) = toSmall(urem1(udiv1(val__, of_int1(65536)),
+  of_int1(256))))
+
+axiom H10 : (o5 = (xcx2[2 <- o4]))
+
+axiom H11 : (xcx2 = result2)
+
+axiom H12 : (xcx3 = o5)
+
+axiom H13 : (to_rep(o6) = toSmall(urem1(udiv1(val__, of_int1(16777216)),
+  of_int1(256))))
+
+axiom H14 : (o7 = (xcx3[3 <- o6]))
+
+axiom H15 : (xcx3 = result3)
+
+axiom H16 : (xcx4 = o7)
+
+axiom H17 : (add1(toBig(to_rep((xcx4[0]))), mul1(toBig(to_rep((xcx4[1]))),
+  of_int1(256))) = urem1(val__, of_int1(65536)))
+
  (* File "x86.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall xcx:(int,unsigned_8) farray. forall o:unsigned_8.
-  forall o1:(int,unsigned_8) farray. forall o2:unsigned_8.
-  forall o3:(int,unsigned_8) farray. forall o4:unsigned_8.
-  forall o5:(int,unsigned_8) farray. forall o6:unsigned_8.
-  forall o7:(int,unsigned_8) farray. forall result:(int,unsigned_8) farray.
-  forall xcx1:(int,unsigned_8) farray.
-  forall result1:(int,unsigned_8) farray.
-  forall xcx2:(int,unsigned_8) farray.
-  forall result2:(int,unsigned_8) farray.
-  forall xcx3:(int,unsigned_8) farray.
-  forall result3:(int,unsigned_8) farray.
-  forall xcx4:(int,unsigned_8) farray. ((((to_rep(o) = toSmall(urem1(val__,
-  of_int1(256)))) and (o1 = (xcx[0 <- o]))) and (({ map__content = result
-  } = { map__content = xcx }) and (xcx1 = o1))) ->
-  ((((to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
-  of_int1(256)))) and (o3 = (xcx1[1 <- o2]))) and ((xcx1 = result1) and
-  (xcx2 = o3))) -> ((((to_rep(o4) = toSmall(urem1(udiv1(val__,
-  of_int1(65536)), of_int1(256)))) and (o5 = (xcx2[2 <- o4]))) and
-  ((xcx2 = result2) and (xcx3 = o5))) ->
-  ((((to_rep(o6) = toSmall(urem1(udiv1(val__, of_int1(16777216)),
-  of_int1(256)))) and (o7 = (xcx3[3 <- o6]))) and ((xcx3 = result3) and
-  (xcx4 = o7))) -> ((add1(toBig(to_rep((xcx4[0]))),
-  mul1(toBig(to_rep((xcx4[1]))), of_int1(256))) = urem1(val__,
-  of_int1(65536))) -> (add1(toBig(to_rep((xcx4[2]))),
+goal WP_parameter_def : (add1(toBig(to_rep((xcx4[2]))),
   mul1(toBig(to_rep((xcx4[3]))), of_int1(256))) = urem1(udiv1(val__,
-  of_int1(65536)), of_int1(65536)))))))))
+  of_int1(65536)), of_int1(65536)))

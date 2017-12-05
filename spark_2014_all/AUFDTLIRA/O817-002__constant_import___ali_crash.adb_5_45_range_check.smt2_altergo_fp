@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -380,9 +380,27 @@ axiom s__def_axiom : ((s = concat(singleton(of_rep(dir_sep), 1), 1, 1,
   ((1 + (1 + ((0 - 1) + 1))) - 1)))) and ((not (1 <= 0)) -> (s1 = mk(1,
   ((1 + (1 + 0)) - 1))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : in_range2(dir_sep)
+
+axiom H1 : ((1 <= 0) -> (o = ((0 - 1) + 1)))
+
+axiom H2 : ((not (1 <= 0)) -> (o = 0))
+
+axiom H3 : (o1 = (1 + o))
+
+axiom H4 : (o2 = (1 + o1))
+
+axiom H5 : (o3 = (o2 - 1))
+
  (* File "ali_crash.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  (in_range2(dir_sep) -> (((((((1 <= 0) and (o = ((0 - 1) + 1))) or
-  ((not (1 <= 0)) and (o = 0))) and (o1 = (1 + o))) and (o2 = (1 + o1))) and
-  (o3 = (o2 - 1))) -> in_range1(o3))))
+goal WP_parameter_def : in_range1(o3)

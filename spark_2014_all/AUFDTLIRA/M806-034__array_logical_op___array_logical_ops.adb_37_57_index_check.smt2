@@ -142,6 +142,7 @@
 (assert (= r3 (of_array (xorb (to_array v) (first1 v) (last1 v) (to_array x) (first1 x) (last1 x)) (first1 v) (last1 v))))
 (define-fun dynamic_invariant2 ((temp___expr_191 Int) (temp___is_init_188 Bool) (temp___skip_constant_189 Bool) (temp___do_toplevel_190 Bool)) Bool (=> (or (= temp___is_init_188 true) (<= 0 1)) (in_range1 temp___expr_191)))
 (declare-const i Int)
+(declare-const i1 Int)
 (assert (= (mk___t (array_logical_ops__test_ok3__v__aggregate_def 0 1 0) (mk 6 45)) v))
 (assert (dynamic_invariant v true false true))
 (assert (= (mk___t (array_logical_ops__test_ok3__x__aggregate_def 1 0 1 0) (mk 1 40)) x))

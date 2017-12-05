@@ -283,12 +283,26 @@ logic index : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : bool
+
+axiom H : in_range(index)
+
+axiom H1 : ((o2 = length({ us_split_fields1 = { rec__vk__tag__fs__name__t =
+  this; rec__ext__ = this1 }; attr__tag = this2 })) and in_range1(o2))
+
+axiom H2 : (((0 <  o2) -> (result = true)) and ((not (0 <  o2)) ->
+  (result = false)))
+
+axiom H3 : (result = true)
+
+axiom H4 : ((o = length({ us_split_fields1 = { rec__vk__tag__fs__name__t =
+  this; rec__ext__ = this1 }; attr__tag = this2 })) and in_range1(o))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall result:bool. (in_range(index) ->
-  ((((o1 = length({ us_split_fields1 = { rec__vk__tag__fs__name__t = this;
-  rec__ext__ = this1 }; attr__tag = this2 })) and in_range1(o1)) and
-  (((0 <  o1) and (result = true)) or ((not (0 <  o1)) and
-  (result = false)))) -> ((result = true) -> (((o = length({
-  us_split_fields1 = { rec__vk__tag__fs__name__t = this; rec__ext__ = this1
-  }; attr__tag = this2 })) and in_range1(o)) -> in_range(o))))))
+goal WP_parameter_def : in_range(o)

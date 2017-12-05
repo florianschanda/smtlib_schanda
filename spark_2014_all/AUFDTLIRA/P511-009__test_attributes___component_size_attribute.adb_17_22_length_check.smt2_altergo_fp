@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -659,19 +659,43 @@ axiom def_axiom1 :
   elts = temp___218; rt = temp___2181 })[temp___219]) = { elts = temp___218;
   rt = temp___2181 })))
 
+logic a1 : (int,integer) farray
+
+logic a2 : (int,us_t) farray
+
+logic temp___215 : (int,integer) farray
+
+logic temp___2151 : t1
+
+logic component_size_attribute__p__a1__assume : (int,integer) farray
+
+logic component_size_attribute__p__a1__assume1 : t
+
+logic result : (int,integer) farray
+
+logic a11 : (int,integer) farray
+
+logic result1 : (int,us_t) farray
+
+logic a21 : (int,us_t) farray
+
+axiom H : in_range(x)
+
+axiom H1 : (to_rep(first2((component_size_attribute__p__a1__aggregate_def(1,
+  1, x)).rt1)) = 1)
+
+axiom H2 : (to_rep(last2((component_size_attribute__p__a1__aggregate_def(1,
+  1, x)).rt1)) = x)
+
+axiom H3 : ({ elts1 = temp___215; rt1 = temp___2151
+  } = component_size_attribute__p__a1__aggregate_def(1, 1, x))
+
  (* File "component_size_attribute.adb", line 11, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___215:(int,integer) farray. forall temp___2151:t1.
-  (in_range(x) ->
-  (((to_rep(first2((component_size_attribute__p__a1__aggregate_def(1, 1,
-  x)).rt1)) = 1) and
-  ((to_rep(last2((component_size_attribute__p__a1__aggregate_def(1, 1,
-  x)).rt1)) = x) and ({ elts1 = temp___215; rt1 = temp___2151
-  } = component_size_attribute__p__a1__aggregate_def(1, 1, x)))) ->
   (((to_rep(first2(temp___2151)) <= to_rep(last2(temp___2151))) ->
   (((1 <= x) ->
   (((to_rep(last2(temp___2151)) - to_rep(first2(temp___2151))) + 1) = ((x - 1) + 1))) and
   ((not (1 <= x)) ->
   (((to_rep(last2(temp___2151)) - to_rep(first2(temp___2151))) + 1) = 0)))) and
   ((not (to_rep(first2(temp___2151)) <= to_rep(last2(temp___2151)))) ->
-  ((1 <= x) -> (0 = ((x - 1) + 1))))))))
+  ((1 <= x) -> (0 = ((x - 1) + 1)))))

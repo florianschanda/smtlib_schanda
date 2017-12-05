@@ -114,5 +114,6 @@
 (assert (=> (= (state_c flag num) true) (= (state_b flag3 num5) true)))
 (assert (=> (= (state_d flag num) true) (or (= (state_c flag3 num5) true) (= (state_d flag3 num5) true))))
 (assert (not (= (ite (= (ite (= (ite (= (state_a flag num) false) (state_b flag num) true) false) (state_c flag num) true) false) (state_d flag num) true) true)))
+(assert (not false))
 (check-sat)
 (exit)

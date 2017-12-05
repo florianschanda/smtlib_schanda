@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -190,6 +190,10 @@ type tt__ref = { tt__content : us_rep
 }
 
 function tt__ref___projection(a: tt__ref) : us_rep = (a).tt__content
+
+logic y : int
+
+logic y1 : int
 
  (* File "p.adb", line 5, characters 0-0 *)
 goal WP_parameter_def : true

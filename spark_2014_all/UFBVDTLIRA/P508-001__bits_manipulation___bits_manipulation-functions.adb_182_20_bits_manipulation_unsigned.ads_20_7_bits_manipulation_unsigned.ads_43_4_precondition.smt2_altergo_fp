@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1842,9 +1842,28 @@ axiom lemma8__def_axiom : (((lemma81(void) = true) ->
    ((not (n <  65536)) and ult(shift_right(val__, (16 - n)), of_int(0)))))))) ->
   (lemma81(void) = true)))
 
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result : bool
+
+logic o : bool
+
+logic result : bool
+
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result1 : bool
+
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result2 : bool
+
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result3 : bool
+
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result4 : bool
+
+logic bits_manipulation_unsigned__unsigned_16__functions__proofs__make_mask__lemma1__result5 : bool
+
+axiom H : (lemma8(void) = true)
+
+axiom H1 :
+  (forall size:int. (((1 <= size) and (size <= 15)) -> (((size <  65536) ->
+  ult(make_mask(size), lsl_bv(of_int(1), of_int(size)))) and
+  ((not (size <  65536)) -> ult(make_mask(size), of_int(0))))))
+
  (* File "bits_manipulation-functions.ads", line 299, characters 0-0 *)
-goal WP_parameter_def : ((lemma8(void) = true) ->
-  ((forall size:int. (((1 <= size) and (size <= 15)) -> (((size <  65536) and
-   ult(make_mask(size), lsl_bv(of_int(1), of_int(size)))) or
-   ((not (size <  65536)) and ult(make_mask(size), of_int(0)))))) ->
-  (lemma1(void) = true)))
+goal WP_parameter_def : (lemma1(void) = true)

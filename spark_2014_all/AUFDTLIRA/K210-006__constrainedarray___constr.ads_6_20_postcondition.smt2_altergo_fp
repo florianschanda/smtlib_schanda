@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,67 +218,316 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : (int,integer) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : (int,integer) farray
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : (int,integer) farray
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : (int,integer) farray
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : (int,integer) farray
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : (int,integer) farray
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : (int,integer) farray
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+logic result2 : int
+
+logic i2 : int
+
+logic result3 : (int,integer) farray
+
+logic x2 : (int,integer) farray
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,integer) farray
+
+logic x3 : (int,integer) farray
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : (int,integer) farray
+
+logic x4 : (int,integer) farray
+
+logic result8 : int
+
+logic i5 : int
+
+logic result9 : (int,integer) farray
+
+logic x5 : (int,integer) farray
+
+logic result10 : int
+
+logic i6 : int
+
+logic result11 : (int,integer) farray
+
+logic x6 : (int,integer) farray
+
+logic result12 : int
+
+logic i7 : int
+
+logic result13 : (int,integer) farray
+
+logic x7 : (int,integer) farray
+
+logic result14 : int
+
+logic i8 : int
+
+logic result15 : (int,integer) farray
+
+logic x8 : (int,integer) farray
+
+logic result16 : int
+
+logic i9 : int
+
+logic result17 : (int,integer) farray
+
+logic x9 : (int,integer) farray
+
+logic result18 : int
+
+logic i10 : int
+
+logic result19 : (int,integer) farray
+
+logic x10 : (int,integer) farray
+
+logic x11 : (int,integer) farray
+
+logic i11 : int
+
+logic x12 : (int,integer) farray
+
+logic i12 : int
+
+axiom H : (to_rep((x[1])) = 0)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : ((o = (to_rep((x[i1])) + 1)) and in_range((to_rep((x[i1])) + 1)))
+
+axiom H4 : (to_rep(o1) = o)
+
+axiom H5 : (o2 = (x[i1 <- o1]))
+
+axiom H6 : (result1 = x)
+
+axiom H7 : (x1 = o2)
+
+axiom H8 : (i1 = result2)
+
+axiom H9 : (i2 = 2)
+
+axiom H10 : ((o3 = (to_rep((x1[i2])) + 1)) and
+  in_range((to_rep((x1[i2])) + 1)))
+
+axiom H11 : (to_rep(o4) = o3)
+
+axiom H12 : (o5 = (x1[i2 <- o4]))
+
+axiom H13 : (x1 = result3)
+
+axiom H14 : (x2 = o5)
+
+axiom H15 : (i2 = result4)
+
+axiom H16 : (i3 = 3)
+
+axiom H17 : ((o6 = (to_rep((x2[i3])) + 1)) and
+  in_range((to_rep((x2[i3])) + 1)))
+
+axiom H18 : (to_rep(o7) = o6)
+
+axiom H19 : (o8 = (x2[i3 <- o7]))
+
+axiom H20 : (x2 = result5)
+
+axiom H21 : (x3 = o8)
+
+axiom H22 : (i3 = result6)
+
+axiom H23 : (i4 = 4)
+
+axiom H24 : ((o9 = (to_rep((x3[i4])) + 1)) and
+  in_range((to_rep((x3[i4])) + 1)))
+
+axiom H25 : (to_rep(o10) = o9)
+
+axiom H26 : (o11 = (x3[i4 <- o10]))
+
+axiom H27 : (x3 = result7)
+
+axiom H28 : (x4 = o11)
+
+axiom H29 : (i4 = result8)
+
+axiom H30 : (i5 = 5)
+
+axiom H31 : ((o12 = (to_rep((x4[i5])) + 1)) and
+  in_range((to_rep((x4[i5])) + 1)))
+
+axiom H32 : (to_rep(o13) = o12)
+
+axiom H33 : (o14 = (x4[i5 <- o13]))
+
+axiom H34 : (x4 = result9)
+
+axiom H35 : (x5 = o14)
+
+axiom H36 : (i5 = result10)
+
+axiom H37 : (i6 = 6)
+
+axiom H38 : ((o15 = (to_rep((x5[i6])) + 1)) and
+  in_range((to_rep((x5[i6])) + 1)))
+
+axiom H39 : (to_rep(o16) = o15)
+
+axiom H40 : (o17 = (x5[i6 <- o16]))
+
+axiom H41 : (x5 = result11)
+
+axiom H42 : (x6 = o17)
+
+axiom H43 : (i6 = result12)
+
+axiom H44 : (i7 = 7)
+
+axiom H45 : ((o18 = (to_rep((x6[i7])) + 1)) and
+  in_range((to_rep((x6[i7])) + 1)))
+
+axiom H46 : (to_rep(o19) = o18)
+
+axiom H47 : (o20 = (x6[i7 <- o19]))
+
+axiom H48 : (x6 = result13)
+
+axiom H49 : (x7 = o20)
+
+axiom H50 : (i7 = result14)
+
+axiom H51 : (i8 = 8)
+
+axiom H52 : ((o21 = (to_rep((x7[i8])) + 1)) and
+  in_range((to_rep((x7[i8])) + 1)))
+
+axiom H53 : (to_rep(o22) = o21)
+
+axiom H54 : (o23 = (x7[i8 <- o22]))
+
+axiom H55 : (x7 = result15)
+
+axiom H56 : (x8 = o23)
+
+axiom H57 : (i8 = result16)
+
+axiom H58 : (i9 = 9)
+
+axiom H59 : ((o24 = (to_rep((x8[i9])) + 1)) and
+  in_range((to_rep((x8[i9])) + 1)))
+
+axiom H60 : (to_rep(o25) = o24)
+
+axiom H61 : (o26 = (x8[i9 <- o25]))
+
+axiom H62 : (x8 = result17)
+
+axiom H63 : (x9 = o26)
+
+axiom H64 : (i9 = result18)
+
+axiom H65 : (i10 = 10)
+
+axiom H66 : ((o27 = (to_rep((x9[i10])) + 1)) and
+  in_range((to_rep((x9[i10])) + 1)))
+
+axiom H67 : (to_rep(o28) = o27)
+
+axiom H68 : (o29 = (x9[i10 <- o28]))
+
+axiom H69 : (result19 = x9)
+
+axiom H70 : (x10 = o29)
+
+axiom H71 : (i11 = i10)
+
+axiom H72 : (x11 = x10)
+
+axiom H73 : (i12 = i10)
+
+axiom H74 : (x12 = x10)
+
  (* File "constr.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall i:int. forall o:int.
-  forall o1:integer. forall o2:(int,integer) farray. forall o3:int.
-  forall o4:integer. forall o5:(int,integer) farray. forall o6:int.
-  forall o7:integer. forall o8:(int,integer) farray. forall o9:int.
-  forall o10:integer. forall o11:(int,integer) farray. forall o12:int.
-  forall o13:integer. forall o14:(int,integer) farray. forall o15:int.
-  forall o16:integer. forall o17:(int,integer) farray. forall o18:int.
-  forall o19:integer. forall o20:(int,integer) farray. forall o21:int.
-  forall o22:integer. forall o23:(int,integer) farray. forall o24:int.
-  forall o25:integer. forall o26:(int,integer) farray. forall o27:int.
-  forall o28:integer. forall o29:(int,integer) farray. forall result:int.
-  forall i1:int. forall result1:(int,integer) farray.
-  forall x1:(int,integer) farray. forall result2:int. forall i2:int.
-  forall result3:(int,integer) farray. forall x2:(int,integer) farray.
-  forall result4:int. forall i3:int. forall result5:(int,integer) farray.
-  forall x3:(int,integer) farray. forall result6:int. forall i4:int.
-  forall result7:(int,integer) farray. forall x4:(int,integer) farray.
-  forall result8:int. forall i5:int. forall result9:(int,integer) farray.
-  forall x5:(int,integer) farray. forall result10:int. forall i6:int.
-  forall result11:(int,integer) farray. forall x6:(int,integer) farray.
-  forall result12:int. forall i7:int. forall result13:(int,integer) farray.
-  forall x7:(int,integer) farray. forall result14:int. forall i8:int.
-  forall result15:(int,integer) farray. forall x8:(int,integer) farray.
-  forall result16:int. forall i9:int. forall result17:(int,integer) farray.
-  forall x9:(int,integer) farray. forall result18:int. forall i10:int.
-  forall result19:(int,integer) farray. forall x10:(int,integer) farray.
-  forall x11:(int,integer) farray. forall i11:int.
-  forall x12:(int,integer) farray. forall i12:int. (((to_rep((x[1])) = 0) and
-  (((({ int__content = result } = { int__content = i }) and (i1 = 1)) and
-  ((((((o = (to_rep((x[i1])) + 1)) and in_range((to_rep((x[i1])) + 1))) and
-  (to_rep(o1) = o)) and (o2 = (x[i1 <- o1]))) and (({ map__content = result1
-  } = { map__content = x }) and (x1 = o2))) and (((i1 = result2) and
-  (i2 = 2)) and ((((((o3 = (to_rep((x1[i2])) + 1)) and
-  in_range((to_rep((x1[i2])) + 1))) and (to_rep(o4) = o3)) and
-  (o5 = (x1[i2 <- o4]))) and ((x1 = result3) and (x2 = o5))) and
-  (((i2 = result4) and (i3 = 3)) and ((((((o6 = (to_rep((x2[i3])) + 1)) and
-  in_range((to_rep((x2[i3])) + 1))) and (to_rep(o7) = o6)) and
-  (o8 = (x2[i3 <- o7]))) and ((x2 = result5) and (x3 = o8))) and
-  (((i3 = result6) and (i4 = 4)) and ((((((o9 = (to_rep((x3[i4])) + 1)) and
-  in_range((to_rep((x3[i4])) + 1))) and (to_rep(o10) = o9)) and
-  (o11 = (x3[i4 <- o10]))) and ((x3 = result7) and (x4 = o11))) and
-  (((i4 = result8) and (i5 = 5)) and ((((((o12 = (to_rep((x4[i5])) + 1)) and
-  in_range((to_rep((x4[i5])) + 1))) and (to_rep(o13) = o12)) and
-  (o14 = (x4[i5 <- o13]))) and ((x4 = result9) and (x5 = o14))) and
-  (((i5 = result10) and (i6 = 6)) and ((((((o15 = (to_rep((x5[i6])) + 1)) and
-  in_range((to_rep((x5[i6])) + 1))) and (to_rep(o16) = o15)) and
-  (o17 = (x5[i6 <- o16]))) and ((x5 = result11) and (x6 = o17))) and
-  (((i6 = result12) and (i7 = 7)) and ((((((o18 = (to_rep((x6[i7])) + 1)) and
-  in_range((to_rep((x6[i7])) + 1))) and (to_rep(o19) = o18)) and
-  (o20 = (x6[i7 <- o19]))) and ((x6 = result13) and (x7 = o20))) and
-  (((i7 = result14) and (i8 = 8)) and ((((((o21 = (to_rep((x7[i8])) + 1)) and
-  in_range((to_rep((x7[i8])) + 1))) and (to_rep(o22) = o21)) and
-  (o23 = (x7[i8 <- o22]))) and ((x7 = result15) and (x8 = o23))) and
-  (((i8 = result16) and (i9 = 9)) and ((((((o24 = (to_rep((x8[i9])) + 1)) and
-  in_range((to_rep((x8[i9])) + 1))) and (to_rep(o25) = o24)) and
-  (o26 = (x8[i9 <- o25]))) and ((x8 = result17) and (x9 = o26))) and
-  (((i9 = result18) and (i10 = 10)) and
-  (((((o27 = (to_rep((x9[i10])) + 1)) and
-  in_range((to_rep((x9[i10])) + 1))) and (to_rep(o28) = o27)) and
-  (o29 = (x9[i10 <- o28]))) and ((result19 = x9) and
-  (x10 = o29)))))))))))))))))))))) and (((i11 = i10) and (x10 = x11)) and
-  ((i12 = i10) and (x12 = x10))))) -> (to_rep((x11[1])) = 1)))
+goal WP_parameter_def : (to_rep((x11[1])) = 1)

@@ -124,7 +124,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -191,11 +191,22 @@ axiom tmp_b__def_axiom : (tmp_b = bar(a))
 
 axiom last__def_axiom : (last = tmp_b)
 
+logic b : int
+
+logic foo__test_02__tmp_b__assume : int
+
+logic o : int
+
+axiom H : in_range(a)
+
+axiom H1 : ((0 <= 2147483647) -> in_range(b))
+
+axiom H2 : ((foo__test_02__tmp_b__assume = bar(a)) and
+  in_range(foo__test_02__tmp_b__assume))
+
+axiom H3 : (foo__test_02__tmp_b__assume = tmp_b)
+
+axiom H4 : in_range(tmp_b)
+
  (* File "foo.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:int. forall foo__test_02__tmp_b__assume:int. (in_range(a) ->
-  (((0 <= 2147483647) -> in_range(b)) ->
-  ((((foo__test_02__tmp_b__assume = bar(a)) and
-  in_range(foo__test_02__tmp_b__assume)) and
-  (foo__test_02__tmp_b__assume = tmp_b)) -> (in_range(tmp_b) ->
-  in_range(last))))))
+goal WP_parameter_def : in_range(last)

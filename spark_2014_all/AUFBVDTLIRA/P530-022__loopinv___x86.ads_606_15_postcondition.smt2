@@ -164,6 +164,7 @@
 (declare-const x86__readmem16__result4 (_ BitVec 16))
 (declare-const x86__readmem16__result5 (_ BitVec 16))
 (declare-const result1 (_ BitVec 16))
+(assert true)
 (assert (= x86__readmem16__result1 x86__readmem16__result2))
 (assert (= x86__readmem16__result3 x86__readmem16__result1))
 (assert (=> (< 8 16) (and (= o1 (readmem8 (bvadd addr ((_ int2bv 64) 1)) memory)) (= o1 (to_rep (select memory (bvadd addr ((_ int2bv 64) 1))))))))

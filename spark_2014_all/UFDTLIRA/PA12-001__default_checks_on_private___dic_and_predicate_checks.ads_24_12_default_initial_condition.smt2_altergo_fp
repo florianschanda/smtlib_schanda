@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -246,9 +246,14 @@ axiom is_valid__def_axiom :
   us_split_fields1 = { rec__dic_and_predicate_checks__nested_2__r__f = x }
   }) = true) <-> (0 <  to_rep(x))))
 
+logic temp___222 : integer
+
+logic temp___225 : integer
+
+axiom H : (0 <  to_rep(temp___222))
+
+axiom H1 : (0 <  to_rep(temp___225))
+
  (* File "dic_and_predicate_checks.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___222:integer. forall temp___225:integer.
-  ((0 <  to_rep(temp___222)) -> ((0 <  to_rep(temp___225)) -> (is_valid({
-  us_split_fields1 = { rec__dic_and_predicate_checks__nested_2__r__f =
-  temp___225 } }) = true))))
+goal WP_parameter_def : (is_valid({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__nested_2__r__f = temp___225 } }) = true)

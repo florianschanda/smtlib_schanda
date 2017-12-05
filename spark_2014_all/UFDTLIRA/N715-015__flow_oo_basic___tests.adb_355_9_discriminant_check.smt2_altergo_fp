@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -428,12 +428,27 @@ logic b__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a__split_fields : integer
+
+logic b__split_discrs : bool
+
+logic result : integer
+
+logic a__split_fields1 : integer
+
+axiom H : (result = a__split_fields)
+
+axiom H1 : (dummy = a__split_fields1)
+
+axiom H2 : (a__split_discrs = of_int(0))
+
+axiom H3 : (a__attr__constrained = true)
+
+axiom H4 : ((of_int(0) = a__split_discrs) and (a__attr__constrained = true))
+
+axiom H5 : ((b__attr__constrained = false) and (b__split_discrs = of_int(0)))
+
+axiom H6 : (b__attr__constrained = true)
+
  (* File "tests.adb", line 330, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:integer. forall b__split_discrs:bool.
-  forall result:integer. forall a__split_fields1:integer.
-  ((((result = a__split_fields) and (dummy = a__split_fields1)) and
-  ((a__split_discrs = of_int(0)) and (a__attr__constrained = true))) ->
-  (((of_int(0) = a__split_discrs) and (a__attr__constrained = true)) ->
-  (((b__attr__constrained = false) and (b__split_discrs = of_int(0))) ->
-  ((b__attr__constrained = true) -> (a__split_discrs = b__split_discrs))))))
+goal WP_parameter_def : (a__split_discrs = b__split_discrs)

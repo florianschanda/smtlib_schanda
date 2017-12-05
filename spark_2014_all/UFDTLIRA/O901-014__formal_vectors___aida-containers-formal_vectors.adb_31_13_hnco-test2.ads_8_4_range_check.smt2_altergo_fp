@@ -453,6 +453,23 @@ logic container4 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic hnco__test2__v_type_owner__capacity__result : int
+
+logic us : int
+
+logic result : int
+
+logic hnco__test2__v_type_owner__capacity__result1 : int
+
+logic hnco__test2__v_type_owner__capacity__result2 : int
+
+logic hnco__test2__v_type_owner__capacity__result3 : int
+
+logic hnco__test2__v_type_owner__capacity__result4 : int
+
+logic hnco__test2__v_type_owner__capacity__result5 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
  (* File "aida-containers-formal_vectors.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(container) = to_rep1(container1)) ->
-  in_range(to_rep(container)))
+goal WP_parameter_def : in_range(to_rep(container))

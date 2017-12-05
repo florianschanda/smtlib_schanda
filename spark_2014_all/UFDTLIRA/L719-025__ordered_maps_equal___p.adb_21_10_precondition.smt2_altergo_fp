@@ -1356,21 +1356,41 @@ axiom w_get__post_axiom1 :
   ((in_range1(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range11(w_get1(container, witness2)))))
 
- (* File "a-cforma.ads", line 997, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall result:bool. (in_range3(k) ->
-  (in_range2(e) -> (((has_key(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic o : int
+
+logic result : bool
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range3(k)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : ((has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }), k) = true) or (length({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_maps__map = l__split_fields }
-  }) <  to_rep(l__split_discrs))) -> (((result = has_key(model__({
-  us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_maps__map = l__split_fields } }), k)) and
-  ((result = true) <-> (has_key(model__({ us_split_discrs1 = {
+  }) <  to_rep(l__split_discrs)))
+
+axiom H3 : ((result = has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }), k) = true))) ->
-  ((not (result = true)) -> (length({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }), k)) and ((result = true) <->
+  (has_key(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
+  l__split_fields } }), k) = true)))
+
+axiom H4 : (not (result = true))
+
+ (* File "a-cforma.ads", line 997, characters 0-0 *)
+goal WP_parameter_def : (length({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields }
-  }) <  to_rep(l__split_discrs))))))))
+  rec__p__my_maps__map = l__split_fields } }) <  to_rep(l__split_discrs))

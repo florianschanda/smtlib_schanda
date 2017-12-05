@@ -591,12 +591,138 @@ axiom oeq__post_axiom1 :
   ((oeq1(left, right) = true) <-> ((ole(left, right) = true) and (ole(right,
   left) = true))))
 
+logic model____split_fields : us_rep
+
+logic model____split_fields1 : us_rep1
+
+logic r : int
+
+logic temp___266 : us_rep
+
+logic temp___2661 : us_rep1
+
+logic temp___265 : int
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic o2 : us_rep1
+
+logic temp___264 : us_rep
+
+logic temp___2641 : us_rep1
+
+logic o3 : int
+
+logic rr : int
+
+logic o4 : int
+
+logic rr1 : int
+
+logic o5 : int
+
+logic o6 : us_rep
+
+logic o7 : us_rep
+
+logic o8 : us_rep1
+
+logic temp___2642 : us_rep
+
+logic temp___2643 : us_rep1
+
+logic rr2 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic model____split_fields2 : us_rep
+
+logic model____split_fields3 : us_rep1
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic result2 : us_rep1
+
+logic model____split_fields4 : us_rep
+
+logic model____split_fields5 : us_rep1
+
+logic model____split_fields6 : us_rep
+
+logic model____split_fields7 : us_rep1
+
+logic r2 : int
+
+logic result3 : int
+
+logic r3 : int
+
+logic result4 : us_rep
+
+logic result5 : us_rep1
+
+logic model____split_fields8 : us_rep
+
+logic model____split_fields9 : us_rep1
+
+logic model____split_fields10 : us_rep
+
+logic model____split_fields11 : us_rep1
+
+logic r4 : int
+
+logic model____split_fields12 : us_rep
+
+logic model____split_fields13 : us_rep1
+
+logic r5 : int
+
+logic model____split_fields14 : us_rep
+
+logic model____split_fields15 : us_rep1
+
+logic r6 : int
+
+logic model____split_fields16 : us_rep
+
+logic model____split_fields17 : us_rep1
+
+logic r7 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : ((length(model____split_fields) = 0) and
+  (is_empty(model____split_fields1) = true))
+
+axiom H1 : (length(model____split_fields) = 0)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 10000)
+
  (* File "list_allocator.adb", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep.
-  forall model____split_fields1:us_rep1. forall r:int. forall result:int.
-  forall r1:int. (((length(model____split_fields) = 0) and
-  (is_empty(model____split_fields1) = true)) ->
-  ((length(model____split_fields) = 0) -> ((({ int__content = result } = {
-  int__content = r }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 10000)) ->
-  (length(model____split_fields) <  2147483647))))))
+goal WP_parameter_def : (length(model____split_fields) <  2147483647)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,14 +162,59 @@ function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic i : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic x1 : int
+
+logic x2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : int
+
+logic x3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (1 <= i1)
+
+axiom H4 : (i1 <= 10)
+
+axiom H5 : (result1 = x)
+
+axiom H6 : (x1 = 0)
+
+axiom H7 : (x2 = x)
+
+axiom H8 : ((((1 <= 10) -> in_range2(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(x2))) and ((1 <= i2) and
+  (i2 <= 10)))
+
+axiom H9 : (not (i2 = 10))
+
+axiom H10 : (result2 = i2)
+
+axiom H11 : (i3 = (i2 + 1))
+
+axiom H12 : (result3 = x2)
+
+axiom H13 : (x3 = 0)
+
  (* File "test.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall i:int. forall result:int. forall i1:int.
-  forall result1:int. forall x1:int. forall x2:int. forall i2:int.
-  forall result2:int. forall i3:int. forall result3:int. forall x3:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) -> (((result = i) and
-  (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) -> (((result1 = x) and
-  (x1 = 0)) -> ((x2 = x) -> ((((((1 <= 10) -> in_range2(i2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(x2))) and ((1 <= i2) and
-  (i2 <= 10))) and ((not (i2 = 10)) and (((result2 = i2) and
-  (i3 = (i2 + 1))) and ((result3 = x2) and (x3 = 0))))) -> (x3 = x))))))))
+goal WP_parameter_def : (x3 = x)

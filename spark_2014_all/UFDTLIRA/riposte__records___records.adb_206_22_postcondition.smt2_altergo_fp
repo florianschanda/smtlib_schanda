@@ -362,26 +362,105 @@ logic x_old2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "records.adb", line 193, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:bool. forall x__split_fields1:unsigned_byte.
-  forall x__split_fields2:unsigned_byte. forall tmp:int.
-  forall o:unsigned_byte. forall o1:unsigned_byte. forall o2:unsigned_byte.
-  forall o3:unsigned_byte. forall o4:unsigned_byte. forall o5:bool.
-  forall o6:unsigned_byte. forall o7:unsigned_byte. forall temp___317:bool.
-  forall temp___3171:unsigned_byte. forall temp___3172:unsigned_byte.
-  forall tmp1:int. forall x__split_fields3:bool.
-  forall x__split_fields4:unsigned_byte.
-  forall x__split_fields5:unsigned_byte. forall result:bool.
-  forall result1:unsigned_byte. forall result2:unsigned_byte.
-  forall x__split_fields6:bool. forall x__split_fields7:unsigned_byte.
-  forall x__split_fields8:unsigned_byte. forall x__split_fields9:bool.
-  forall x__split_fields10:unsigned_byte.
-  forall x__split_fields11:unsigned_byte. forall tmp2:int__ref.
-  forall x__split_fields12:us_split_fields2. forall tmp3:int.
-  (((((0 <= 255) -> in_range1(tmp)) and (((x__split_fields = x_old) and
-  ((x__split_fields1 = x_old1) and (x__split_fields2 = x_old2))) and
-  (((bool_eq4({ us_split_fields3 = {
+logic x__split_fields : bool
+
+logic x__split_fields1 : unsigned_byte
+
+logic x__split_fields2 : unsigned_byte
+
+logic tmp : int
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic o4 : unsigned_byte
+
+logic o5 : bool
+
+logic o6 : unsigned_byte
+
+logic o7 : unsigned_byte
+
+logic temp___310 : bool
+
+logic temp___3101 : unsigned_byte
+
+logic temp___3102 : unsigned_byte
+
+logic o8 : unsigned_byte
+
+logic o9 : unsigned_byte
+
+logic o10 : unsigned_byte
+
+logic o11 : unsigned_byte
+
+logic o12 : unsigned_byte
+
+logic o13 : bool
+
+logic o14 : unsigned_byte
+
+logic o15 : unsigned_byte
+
+logic temp___317 : bool
+
+logic temp___3171 : unsigned_byte
+
+logic temp___3172 : unsigned_byte
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : bool
+
+logic result2 : unsigned_byte
+
+logic result3 : unsigned_byte
+
+logic x__split_fields3 : bool
+
+logic x__split_fields4 : unsigned_byte
+
+logic x__split_fields5 : unsigned_byte
+
+logic result4 : bool
+
+logic result5 : unsigned_byte
+
+logic result6 : unsigned_byte
+
+logic x__split_fields6 : bool
+
+logic x__split_fields7 : unsigned_byte
+
+logic x__split_fields8 : unsigned_byte
+
+logic x__split_fields9 : bool
+
+logic x__split_fields10 : unsigned_byte
+
+logic x__split_fields11 : unsigned_byte
+
+logic tmp2 : int
+
+logic x__split_fields12 : bool
+
+logic x__split_fields13 : unsigned_byte
+
+logic x__split_fields14 : unsigned_byte
+
+logic tmp3 : int
+
+axiom H : ((((0 <= 255) -> in_range1(tmp)) and
+  (((x__split_fields = x_old) and ((x__split_fields1 = x_old1) and
+  (x__split_fields2 = x_old2))) and (((bool_eq4({ us_split_fields3 = {
   rec__records_prooffuncs__optional_pair__exists = x__split_fields3;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = x__split_fields4;
@@ -391,18 +470,22 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__records_prooffuncs__pair__a = x_old2;
   rec__records_prooffuncs__pair__b = x_old2 } } } }) = true) and
   (tmp1 = to_rep(x_old2))) and (((0 <= 255) -> in_range1(tmp1)) and
-  ((((((to_rep(o) = tmp1) and ((x__split_fields4 = o1) and (o = o2))) and
-  ((o3 = o1) and (o4 = o2))) and ((x__split_fields3 = o5) and ((o6 = o3) and
-  (o7 = o4)))) and ((o5 = temp___317) and ((o6 = temp___3171) and
-  (o7 = temp___3172)))) and (((result = x__split_fields3) and
-  ((result1 = x__split_fields4) and (result2 = x__split_fields5))) and
-  ((temp___317 = x__split_fields6) and ((temp___3171 = x__split_fields7) and
-  (temp___3172 = x__split_fields8))))))))) and (((tmp2 = { int__content =
-  tmp1 }) and ((x__split_fields9 = x__split_fields6) and
+  ((((((to_rep(o8) = tmp1) and ((x__split_fields4 = o9) and (o8 = o10))) and
+  ((o11 = o9) and (o12 = o10))) and ((x__split_fields3 = o13) and
+  ((o14 = o11) and (o15 = o12)))) and ((temp___317 = o13) and
+  ((temp___3171 = o14) and (temp___3172 = o15)))) and
+  (((result4 = x__split_fields3) and ((result5 = x__split_fields4) and
+  (result6 = x__split_fields5))) and ((x__split_fields6 = temp___317) and
+  ((x__split_fields7 = temp___3171) and
+  (x__split_fields8 = temp___3172))))))))) and (((tmp2 = tmp1) and
+  ((x__split_fields9 = x__split_fields6) and
   ((x__split_fields10 = x__split_fields7) and
   (x__split_fields11 = x__split_fields8)))) and ((tmp3 = tmp1) and
-  (x__split_fields12 = { rec__records_prooffuncs__optional_pair__exists =
-  x__split_fields6; rec__records_prooffuncs__optional_pair__the_pair = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = x__split_fields7;
-  rec__records_prooffuncs__pair__b = x__split_fields8 } } })))) ->
-  ((x__split_fields9 = true) -> (x__split_fields = true))))
+  ((x__split_fields12 = x__split_fields6) and
+  ((x__split_fields13 = x__split_fields7) and
+  (x__split_fields14 = x__split_fields8))))))
+
+axiom H1 : (x__split_fields9 = true)
+
+ (* File "records.adb", line 193, characters 0-0 *)
+goal WP_parameter_def : (x__split_fields = true)

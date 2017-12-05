@@ -70,6 +70,7 @@
 (assert (forall ((temp___280 (Array Int et1))) (forall ((temp___281 Int) (temp___282 Int) (temp___283 Int)) (let ((temp___279 (temp___278 temp___280 temp___281 temp___282 temp___283))) (forall ((temp___284 Int)) (ite (or (= temp___284 temp___281) (= temp___284 temp___282)) (= (select temp___279 temp___284) (of_rep temp___283)) (= (select temp___279 temp___284) (select temp___280 temp___284))))))))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range i))
 (assert (in_range j))
 (assert (in_range1 e))

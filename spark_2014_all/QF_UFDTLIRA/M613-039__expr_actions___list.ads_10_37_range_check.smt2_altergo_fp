@@ -105,5 +105,7 @@ type capacity_range__ref = { capacity_range__content : capacity_range
 function capacity_range__ref___projection(a: capacity_range__ref) : capacity_range =
   (a).capacity_range__content
 
+logic us : int
+
  (* File "list.ads", line 13, characters 0-0 *)
 goal WP_parameter_def : in_range(100)

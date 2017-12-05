@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -425,14 +425,42 @@ axiom def_axiom :
   (forall temp___207:int.
   ((temp___204(temp___206)[temp___207]) = of_rep(temp___206))))
 
+logic workspace : (int,character) farray
+
+logic new_index : int
+
+logic i : int
+
+logic result : (int,character) farray
+
+logic workspace1 : (int,character) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic new_index1 : int
+
+logic i2 : int
+
+axiom H : in_range2(distance)
+
+axiom H1 : ((1 <= 1024) -> in_range3(new_index))
+
+axiom H2 : (result = workspace)
+
+axiom H3 : (workspace1 = temp___204(32))
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (1 <= i1)
+
+axiom H7 : (i1 <= 1024)
+
+axiom H8 : (((1 <= 1024) -> in_range3(new_index1)) and ((1 <= i2) and
+  (i2 <= 1024)))
+
  (* File "buffers.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall workspace:(int,character) farray. forall new_index:int.
-  forall i:int. forall result:(int,character) farray.
-  forall workspace1:(int,character) farray. forall result1:int.
-  forall i1:int. forall new_index1:int. forall i2:int.
-  (in_range2(distance) -> (((1 <= 1024) -> in_range3(new_index)) ->
-  (((result = workspace) and (workspace1 = temp___204(32))) ->
-  (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 1024)) ->
-  ((((1 <= 1024) -> in_range3(new_index1)) and ((1 <= i2) and
-  (i2 <= 1024))) -> (not (1024 = 0)))))))))
+goal WP_parameter_def : (not (1024 = 0))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -659,40 +659,74 @@ axiom def_axiom1 :
   elts = temp___275; rt = temp___2751 })[temp___276]) = { elts = temp___275;
   rt = temp___2751 })))
 
+logic a1 : (int,integer) farray
+
+logic a2 : (int,us_t) farray
+
+logic temp___272 : (int,integer) farray
+
+logic temp___2721 : t1
+
+logic alignment_attribute__q__a1__assume : (int,integer) farray
+
+logic alignment_attribute__q__a1__assume1 : t
+
+logic result : (int,integer) farray
+
+logic a11 : (int,integer) farray
+
+logic result1 : (int,us_t) farray
+
+logic a21 : (int,us_t) farray
+
+axiom H : in_range(x)
+
+axiom H1 : (to_rep(first2((alignment_attribute__q__a1__aggregate_def(1, 1,
+  x)).rt1)) = 1)
+
+axiom H2 : (to_rep(last2((alignment_attribute__q__a1__aggregate_def(1, 1,
+  x)).rt1)) = x)
+
+axiom H3 : ({ elts1 = temp___272; rt1 = temp___2721
+  } = alignment_attribute__q__a1__aggregate_def(1, 1, x))
+
+axiom H4 : (((to_rep(first2(temp___2721)) <= to_rep(last2(temp___2721))) ->
+  (((1 <= x) ->
+  (((to_rep(last2(temp___2721)) - to_rep(first2(temp___2721))) + 1) = ((x - 1) + 1))) and
+  ((not (1 <= x)) ->
+  (((to_rep(last2(temp___2721)) - to_rep(first2(temp___2721))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___2721)) <= to_rep(last2(temp___2721)))) ->
+  ((1 <= x) -> (0 = ((x - 1) + 1)))))
+
+axiom H5 : (temp___272 = alignment_attribute__q__a1__assume)
+
+axiom H6 : (mk(to_rep(first2(temp___2721)),
+  to_rep(last2(temp___2721))) = alignment_attribute__q__a1__assume1)
+
+axiom H7 : (result = a1)
+
+axiom H8 : (a11 = alignment_attribute__q__a1__assume)
+
+axiom H9 :
+  (to_rep(a1__first) = to_rep(first(alignment_attribute__q__a1__assume1)))
+
+axiom H10 :
+  (to_rep(a1__last) = to_rep(last(alignment_attribute__q__a1__assume1)))
+
+axiom H11 : (dynamic_property1(1, x, to_rep(a1__first), to_rep(a1__last)) and
+  ((to_rep(a1__first) = 1) and (to_rep(a1__last) = x)))
+
+axiom H12 : (result1 = a2)
+
+axiom H13 : (a21 = alignment_attribute__q__a2__aggregate_def({ elts = a11;
+  rt = mk(to_rep(a1__first), to_rep(a1__last)) }))
+
+axiom H14 :
+  (forall temp___234:int. (((1 <= temp___234) and (temp___234 <= 1)) ->
+  (dynamic_property1(1, x, to_rep(first(((a21[temp___234])).rt)),
+  to_rep(last(((a21[temp___234])).rt))) and
+  ((to_rep(first(((a21[temp___234])).rt)) = 1) and
+  (to_rep(last(((a21[temp___234])).rt)) = x)))))
+
  (* File "alignment_attribute.adb", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a1:(int,integer) farray. forall a2:(int,us_t) farray.
-  forall temp___272:(int,integer) farray. forall temp___2721:t1.
-  forall alignment_attribute__q__a1__assume:(int,integer) farray.
-  forall alignment_attribute__q__a1__assume1:t.
-  forall result:(int,integer) farray. forall a11:(int,integer) farray.
-  forall result1:(int,us_t) farray. forall a21:(int,us_t) farray.
-  (in_range(x) ->
-  (((((to_rep(first2((alignment_attribute__q__a1__aggregate_def(1, 1,
-  x)).rt1)) = 1) and
-  ((to_rep(last2((alignment_attribute__q__a1__aggregate_def(1, 1,
-  x)).rt1)) = x) and ({ elts1 = temp___272; rt1 = temp___2721
-  } = alignment_attribute__q__a1__aggregate_def(1, 1, x)))) and
-  ((((to_rep(first2(temp___2721)) <= to_rep(last2(temp___2721))) and
-  (((1 <= x) and
-  (((to_rep(last2(temp___2721)) - to_rep(first2(temp___2721))) + 1) = ((x - 1) + 1))) or
-  ((not (1 <= x)) and
-  (((to_rep(last2(temp___2721)) - to_rep(first2(temp___2721))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___2721)) <= to_rep(last2(temp___2721)))) and
-  (((1 <= x) and (0 = ((x - 1) + 1))) or (not (1 <= x))))) and
-  ((temp___272 = alignment_attribute__q__a1__assume) and
-  (mk(to_rep(first2(temp___2721)),
-  to_rep(last2(temp___2721))) = alignment_attribute__q__a1__assume1)))) and
-  (((result = a1) and (a11 = alignment_attribute__q__a1__assume)) and
-  ((to_rep(a1__first) = to_rep(first(alignment_attribute__q__a1__assume1))) and
-  (to_rep(a1__last) = to_rep(last(alignment_attribute__q__a1__assume1)))))) ->
-  ((dynamic_property1(1, x, to_rep(a1__first), to_rep(a1__last)) and
-  ((to_rep(a1__first) = 1) and (to_rep(a1__last) = x))) ->
-  (((result1 = a2) and (a21 = alignment_attribute__q__a2__aggregate_def({
-  elts = a11; rt = mk(to_rep(a1__first), to_rep(a1__last)) }))) ->
-  ((forall temp___234:int. (((1 <= temp___234) and (temp___234 <= 1)) ->
-   (dynamic_property1(1, x, to_rep(first(((a21[temp___234])).rt)),
-   to_rep(last(((a21[temp___234])).rt))) and
-   ((to_rep(first(((a21[temp___234])).rt)) = 1) and
-   (to_rep(last(((a21[temp___234])).rt)) = x))))) ->
-  (0 <= object__alignment1(a21))))))))
+goal WP_parameter_def : (0 <= object__alignment1(a21))

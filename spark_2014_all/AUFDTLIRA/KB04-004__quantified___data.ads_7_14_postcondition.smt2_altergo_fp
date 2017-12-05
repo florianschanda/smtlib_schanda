@@ -219,8 +219,15 @@ axiom notb_def :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : (int,bool) farray
+
+logic i : int
+
+axiom H : (1 <= i)
+
+axiom H1 : (i <= 10)
+
+axiom H2 : ((x[i]) = true)
+
  (* File "data.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,bool) farray.
-  (forall i:int. (((1 <= i) and (i <= 10)) -> (((x[i]) = true) ->
-  (not ((x[i]) = true))))))
+goal WP_parameter_def : (not ((x[i]) = true))

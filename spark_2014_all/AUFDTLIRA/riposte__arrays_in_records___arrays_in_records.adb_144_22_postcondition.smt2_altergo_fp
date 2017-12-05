@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -426,48 +426,153 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a__split_fields : index
+
+logic a__split_fields1 : (int,value) farray
+
+logic a__split_fields2 : (int,value) farray
+
+logic o : value
+
+logic o1 : (int,value) farray
+
+logic o2 : index
+
+logic o3 : (int,value) farray
+
+logic o4 : (int,value) farray
+
+logic temp___281 : index
+
+logic temp___2811 : (int,value) farray
+
+logic temp___2812 : (int,value) farray
+
+logic o5 : value
+
+logic o6 : (int,value) farray
+
+logic o7 : index
+
+logic o8 : (int,value) farray
+
+logic o9 : (int,value) farray
+
+logic temp___284 : index
+
+logic temp___2841 : (int,value) farray
+
+logic temp___2842 : (int,value) farray
+
+logic result : index
+
+logic result1 : (int,value) farray
+
+logic result2 : (int,value) farray
+
+logic a__split_fields3 : index
+
+logic a__split_fields4 : (int,value) farray
+
+logic a__split_fields5 : (int,value) farray
+
+logic result3 : index
+
+logic result4 : (int,value) farray
+
+logic result5 : (int,value) farray
+
+logic a__split_fields6 : index
+
+logic a__split_fields7 : (int,value) farray
+
+logic a__split_fields8 : (int,value) farray
+
+logic a__split_fields9 : index
+
+logic a__split_fields10 : (int,value) farray
+
+logic a__split_fields11 : (int,value) farray
+
+logic a__split_fields12 : index
+
+logic a__split_fields13 : (int,value) farray
+
+logic a__split_fields14 : (int,value) farray
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : (not (i = j))
+
+axiom H3 : (to_rep(o) = 23)
+
+axiom H4 : (o1 = (a__split_fields1[i <- o]))
+
+axiom H5 : (a__split_fields = o2)
+
+axiom H6 : (o1 = o3)
+
+axiom H7 : (a__split_fields2 = o4)
+
+axiom H8 : (temp___281 = o2)
+
+axiom H9 : (temp___2811 = o3)
+
+axiom H10 : (temp___2812 = o4)
+
+axiom H11 : (result = a__split_fields)
+
+axiom H12 : (result1 = a__split_fields1)
+
+axiom H13 : (result2 = a__split_fields2)
+
+axiom H14 : (temp___281 = a__split_fields3)
+
+axiom H15 : (temp___2811 = a__split_fields4)
+
+axiom H16 : (temp___2812 = a__split_fields5)
+
+axiom H17 : (to_rep(o5) = 42)
+
+axiom H18 : (o6 = (a__split_fields4[j <- o5]))
+
+axiom H19 : (a__split_fields3 = o7)
+
+axiom H20 : (o6 = o8)
+
+axiom H21 : (a__split_fields5 = o9)
+
+axiom H22 : (temp___284 = o7)
+
+axiom H23 : (temp___2841 = o8)
+
+axiom H24 : (temp___2842 = o9)
+
+axiom H25 : (result3 = a__split_fields3)
+
+axiom H26 : (result4 = a__split_fields4)
+
+axiom H27 : (result5 = a__split_fields5)
+
+axiom H28 : (temp___284 = a__split_fields6)
+
+axiom H29 : (temp___2841 = a__split_fields7)
+
+axiom H30 : (temp___2842 = a__split_fields8)
+
+axiom H31 : (a__split_fields9 = a__split_fields6)
+
+axiom H32 : (a__split_fields10 = a__split_fields7)
+
+axiom H33 : (a__split_fields11 = a__split_fields8)
+
+axiom H34 : (a__split_fields12 = a__split_fields6)
+
+axiom H35 : (a__split_fields13 = a__split_fields7)
+
+axiom H36 : (a__split_fields14 = a__split_fields8)
+
  (* File "arrays_in_records.adb", line 133, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:index. forall a__split_fields1:(int,value) farray.
-  forall a__split_fields2:(int,value) farray. forall o:value.
-  forall o1:(int,value) farray. forall o2:index.
-  forall o3:(int,value) farray. forall o4:(int,value) farray.
-  forall temp___281:index. forall temp___2811:(int,value) farray.
-  forall temp___2812:(int,value) farray. forall o5:value.
-  forall o6:(int,value) farray. forall o7:index.
-  forall o8:(int,value) farray. forall o9:(int,value) farray.
-  forall temp___284:index. forall temp___2841:(int,value) farray.
-  forall temp___2842:(int,value) farray. forall result:index.
-  forall result1:(int,value) farray. forall result2:(int,value) farray.
-  forall a__split_fields3:index. forall a__split_fields4:(int,value) farray.
-  forall a__split_fields5:(int,value) farray. forall result3:index.
-  forall result4:(int,value) farray. forall result5:(int,value) farray.
-  forall a__split_fields6:index. forall a__split_fields7:(int,value) farray.
-  forall a__split_fields8:(int,value) farray. forall a__split_fields9:index.
-  forall a__split_fields10:(int,value) farray.
-  forall a__split_fields11:(int,value) farray.
-  forall a__split_fields12:index.
-  forall a__split_fields13:(int,value) farray.
-  forall a__split_fields14:(int,value) farray. ((in_range(i) and
-  (in_range(j) and ((not (i = j)) and (((((((to_rep(o) = 23) and
-  (o1 = (a__split_fields1[i <- o]))) and ((a__split_fields = o2) and
-  ((o1 = o3) and (a__split_fields2 = o4)))) and ((temp___281 = o2) and
-  ((temp___2811 = o3) and (temp___2812 = o4)))) and
-  (((result = a__split_fields) and ((result1 = a__split_fields1) and
-  (result2 = a__split_fields2))) and ((temp___281 = a__split_fields3) and
-  ((temp___2811 = a__split_fields4) and
-  (temp___2812 = a__split_fields5))))) and (((((to_rep(o5) = 42) and
-  (o6 = (a__split_fields4[j <- o5]))) and ((a__split_fields3 = o7) and
-  ((o6 = o8) and (a__split_fields5 = o9)))) and ((temp___284 = o7) and
-  ((temp___2841 = o8) and (temp___2842 = o9)))) and
-  (((result3 = a__split_fields3) and ((result4 = a__split_fields4) and
-  (result5 = a__split_fields5))) and ((temp___284 = a__split_fields6) and
-  ((temp___2841 = a__split_fields7) and
-  (temp___2842 = a__split_fields8)))))) and
-  (((a__split_fields9 = a__split_fields6) and
-  ((a__split_fields10 = a__split_fields7) and
-  (a__split_fields11 = a__split_fields8))) and
-  ((a__split_fields12 = a__split_fields6) and
-  ((a__split_fields13 = a__split_fields7) and
-  (a__split_fields14 = a__split_fields8)))))))) ->
-  (not (to_rep((a__split_fields10[i])) = 23))))
+goal WP_parameter_def : (not (to_rep((a__split_fields10[i])) = 23))

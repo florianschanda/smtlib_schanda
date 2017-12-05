@@ -548,16 +548,26 @@ axiom def_axiom :
   rec__tests__test_14__record_with_mutable_discrs__field = temp___3841 };
   attr__constrained = temp___3842 }))
 
- (* File "tests.adb", line 274, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall result:(int,us_rep) farray.
-  forall a1:(int,us_rep) farray. (((result = a) and
-  (a1 = tests__test_14__a__aggregate_def({ us_split_discrs1 = {
+logic a : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = tests__test_14__a__aggregate_def({ us_split_discrs1 = {
   rec__tests__test_14__record_with_mutable_discrs__present = of_int(0) };
   us_split_fields1 = {
   rec__tests__test_14__record_with_mutable_discrs__field = dummy };
-  attr__constrained = false }))) ->
-  ((forall temp___240:int. (((1 <= temp___240) and (temp___240 <= 1)) ->
-   (((a1[temp___240])).attr__constrained = false))) ->
-  ((((a1[1])).attr__constrained = true) ->
-  (of_int(0) = (((a1[1])).us_split_discrs1).rec__tests__test_14__record_with_mutable_discrs__present)))))
+  attr__constrained = false }))
+
+axiom H2 :
+  (forall temp___240:int. (((1 <= temp___240) and (temp___240 <= 1)) ->
+  (((a1[temp___240])).attr__constrained = false)))
+
+axiom H3 : (((a1[1])).attr__constrained = true)
+
+ (* File "tests.adb", line 274, characters 0-0 *)
+goal WP_parameter_def :
+  (of_int(0) = (((a1[1])).us_split_discrs1).rec__tests__test_14__record_with_mutable_discrs__present)

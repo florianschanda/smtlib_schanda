@@ -47,6 +47,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (declare-const result1 Int)

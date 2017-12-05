@@ -43,5 +43,6 @@
 (assert (in_range x))
 (assert (= (ogt x t_zero) true))
 (assert (not (< 0 x)))
+(assert (not false))
 (check-sat)
 (exit)

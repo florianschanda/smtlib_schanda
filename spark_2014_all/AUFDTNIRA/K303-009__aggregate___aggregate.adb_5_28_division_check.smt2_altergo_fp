@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -370,7 +370,45 @@ axiom def_axiom :
   ((not ((1 <= temp___156) and (temp___156 <= 10))) ->
   ((temp___152(temp___154, temp___155)[temp___156]) = of_rep(temp___155))))))
 
+logic k : (int,integer) farray
+
+logic agg : (int,integer) farray
+
+logic o : int
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic agg1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic agg2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic k1 : (int,integer) farray
+
+logic k2 : (int,integer) farray
+
+logic agg3 : (int,integer) farray
+
+logic k3 : (int,integer) farray
+
+logic agg4 : (int,integer) farray
+
+axiom H : in_range1(x)
+
+axiom H1 : (x = 1)
+
+axiom H2 : ((o = (x + 1)) and in_range1((x + 1)))
+
  (* File "aggregate.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (in_range1(x) -> ((x = 1) -> (((o = (x + 1)) and
-  in_range1((x + 1))) -> (not (x = 0))))))
+goal WP_parameter_def : (not (x = 0))

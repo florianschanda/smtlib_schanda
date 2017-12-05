@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -742,21 +742,123 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "rectangle.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rec____split_fields:natural. forall rec____split_fields1:natural.
-  forall rec____split_fields2:integer. forall rec____split_fields3:integer.
-  forall rec____split_fields4:integer.
-  forall rec____split_fields5:us_private. forall result__:int. forall o:bool.
-  forall o1:int. forall result:bool. (((0 <= 2147483647) ->
-  in_range1(result__)) -> ((((o = has_stored_area({ us_split_fields1 = {
+logic rec____split_fields : natural
+
+logic rec____split_fields1 : natural
+
+logic rec____split_fields2 : integer
+
+logic rec____split_fields3 : integer
+
+logic rec____split_fields4 : integer
+
+logic rec____split_fields5 : us_private
+
+logic result__ : int
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic rec____split_fields6 : natural
+
+logic rec____split_fields7 : natural
+
+logic rec____split_fields8 : integer
+
+logic rec____split_fields9 : integer
+
+logic rec____split_fields10 : integer
+
+logic rec____split_fields11 : us_private
+
+logic result : bool
+
+logic object__set_area__obj__fields : integer
+
+logic object__set_area__obj__fields1 : integer
+
+logic object__set_area__obj__fields2 : integer
+
+logic object__set_area__obj__fields3 : us_private
+
+logic result1 : natural
+
+logic result2 : natural
+
+logic result3 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result6 : us_private
+
+logic rec____split_fields12 : natural
+
+logic rec____split_fields13 : natural
+
+logic rec____split_fields14 : integer
+
+logic rec____split_fields15 : integer
+
+logic rec____split_fields16 : integer
+
+logic rec____split_fields17 : us_private
+
+logic result7 : int
+
+logic result__1 : int
+
+logic rec____split_fields18 : natural
+
+logic rec____split_fields19 : natural
+
+logic rec____split_fields20 : integer
+
+logic rec____split_fields21 : integer
+
+logic rec____split_fields22 : integer
+
+logic rec____split_fields23 : us_private
+
+logic result__2 : int
+
+logic rec____split_fields24 : natural
+
+logic rec____split_fields25 : natural
+
+logic rec____split_fields26 : integer
+
+logic rec____split_fields27 : integer
+
+logic rec____split_fields28 : integer
+
+logic rec____split_fields29 : us_private
+
+logic result__3 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(result__))
+
+axiom H1 : ((o = has_stored_area({ us_split_fields1 = {
   rec__object__t__area = rec____split_fields2; rec__object__t__max_width =
   rec____split_fields3; rec__object__t__max_height = rec____split_fields4;
   rec__ext__ = hide_ext__(rec____split_fields, rec____split_fields1,
   rec____split_fields5) }; attr__tag = rec____attr__tag })) and
-  ((o = true) <-> in_range1(to_rep1(rec____split_fields2)))) and
-  (((not (o = true)) and (result = true)) or ((o = true) and
-  (result = false)))) -> ((result = true) ->
-  (((o1 = (to_rep(rec____split_fields) * to_rep(rec____split_fields1))) and
-  in_range((to_rep(rec____split_fields) * to_rep(rec____split_fields1)))) ->
-  in_range1(o1))))))
+  ((o = true) <-> in_range1(to_rep1(rec____split_fields2))))
+
+axiom H2 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H3 : (result = true)
+
+axiom H4 :
+  ((o1 = (to_rep(rec____split_fields) * to_rep(rec____split_fields1))) and
+  in_range((to_rep(rec____split_fields) * to_rep(rec____split_fields1))))
+
+ (* File "rectangle.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : in_range1(o1)

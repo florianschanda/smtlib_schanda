@@ -38,6 +38,7 @@
 (declare-const var us_private)
 (declare-const main__variable_constant__assume Bool)
 (declare-const main__ordinary_constant__assume Bool)
+(declare-const us Bool)
 (assert (= main__variable_constant__assume (read_variable var)))
 (assert (= main__variable_constant__assume variable_constant))
 (assert (= main__ordinary_constant__assume (simply_true Tuple0)))

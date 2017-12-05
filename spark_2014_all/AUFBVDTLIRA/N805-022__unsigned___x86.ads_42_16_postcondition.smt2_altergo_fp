@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1110,21 +1110,42 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic xsi : (int,unsigned_8) farray
+
+logic x86__esi__result : t1
+
+logic result : t1
+
+logic x86__esi__result1 : t1
+
+logic x86__esi__result2 : t1
+
+logic x86__esi__result3 : t1
+
+logic x86__esi__result4 : t1
+
+logic x86__esi__result5 : t1
+
+logic result1 : t1
+
+axiom H : (x86__esi__result1 = x86__esi__result2)
+
+axiom H1 : (x86__esi__result3 = x86__esi__result1)
+
+axiom H2 : (result = x86__esi__result)
+
+axiom H3 : (x86__esi__result1 = add1(add1(add1(toBig(to_rep((xsi[0]))),
+  mul1(toBig(to_rep((xsi[1]))), of_int1(256))), mul1(toBig(to_rep((xsi[2]))),
+  of_int1(65536))), mul1(toBig(to_rep((xsi[3]))), of_int1(16777216))))
+
+axiom H4 : (x86__esi__result4 = x86__esi__result2)
+
+axiom H5 : (x86__esi__result5 = x86__esi__result3)
+
+axiom H6 : (result1 = x86__esi__result4)
+
  (* File "x86.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
-  (forall xsi:(int,unsigned_8) farray. forall x86__esi__result:t1.
-  forall result:t1. forall x86__esi__result1:t1. forall x86__esi__result2:t1.
-  forall x86__esi__result3:t1. forall x86__esi__result4:t1.
-  forall x86__esi__result5:t1.
-  (forall result1:t1. ((((((x86__esi__result1 = x86__esi__result2) and
-  (x86__esi__result3 = x86__esi__result1)) and
-  ((result = x86__esi__result) and
-  (x86__esi__result1 = add1(add1(add1(toBig(to_rep((xsi[0]))),
-  mul1(toBig(to_rep((xsi[1]))), of_int1(256))), mul1(toBig(to_rep((xsi[2]))),
-  of_int1(65536))), mul1(toBig(to_rep((xsi[3]))), of_int1(16777216)))))) and
-  ((x86__esi__result4 = x86__esi__result2) and
-  (x86__esi__result5 = x86__esi__result3))) and
-  (result1 = x86__esi__result4)) ->
   (x86__esi__result4 = add1(add1(add1(toBig(to_rep((xsi[0]))),
   mul1(toBig(to_rep((xsi[1]))), of_int1(256))), mul1(toBig(to_rep((xsi[2]))),
-  of_int1(65536))), mul1(toBig(to_rep((xsi[3]))), of_int1(16777216)))))))
+  of_int1(65536))), mul1(toBig(to_rep((xsi[3]))), of_int1(16777216))))

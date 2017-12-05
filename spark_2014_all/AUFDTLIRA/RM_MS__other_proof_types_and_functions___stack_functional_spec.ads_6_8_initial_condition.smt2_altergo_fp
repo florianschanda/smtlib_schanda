@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -495,30 +495,60 @@ axiom count__def_axiom :
   us_split_fields1 = { rec__stack_functional_spec__stack_type__s = s;
   rec__stack_functional_spec__stack_type__pointer = s1 } }) = to_rep(s1)))
 
- (* File "stack_functional_spec.adb", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall o:pointer_range.
-  forall o1:(int,integer) farray. forall o2:pointer_range.
-  forall stack_functional_spec__initial_stack__assume:(int,integer) farray.
-  forall stack_functional_spec__initial_stack__assume1:pointer_range.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall my_stack__split_fields2:(int,integer) farray.
-  forall my_stack__split_fields3:pointer_range.
-  (forall result2:bool. ((((((to_rep(o) = 0) and ((temp___133(0) = o1) and
-  (o = o2))) and ((stack_functional_spec__initial_stack__assume = o1) and
-  (stack_functional_spec__initial_stack__assume1 = o2))) and
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : pointer_range
+
+logic o1 : (int,integer) farray
+
+logic o2 : pointer_range
+
+logic stack_functional_spec__initial_stack__assume : (int,integer) farray
+
+logic stack_functional_spec__initial_stack__assume1 : pointer_range
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic result2 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (temp___133(0) = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (stack_functional_spec__initial_stack__assume = o1)
+
+axiom H4 : (stack_functional_spec__initial_stack__assume1 = o2)
+
+axiom H5 :
   ((stack_functional_spec__initial_stack__assume = initial_stack) and
-  (stack_functional_spec__initial_stack__assume1 = initial_stack1))) and
-  ((((result = my_stack__split_fields) and
-  (result1 = my_stack__split_fields1)) and
-  ((initial_stack = my_stack__split_fields2) and
-  (initial_stack1 = my_stack__split_fields3))) and ((result2 = is_empty({
-  rec__stack_functional_spec__stack_type__s = my_stack__split_fields2;
-  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields3
-  })) and ((result2 = true) <-> (count(state__2({
-  rec__stack_functional_spec__stack_type__s = my_stack__split_fields2;
-  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields3
-  })) = 0))))) -> (is_empty({ rec__stack_functional_spec__stack_type__s =
+  (stack_functional_spec__initial_stack__assume1 = initial_stack1))
+
+axiom H6 : (result = my_stack__split_fields)
+
+axiom H7 : (result1 = my_stack__split_fields1)
+
+axiom H8 : ((my_stack__split_fields2 = initial_stack) and
+  (my_stack__split_fields3 = initial_stack1))
+
+axiom H9 : ((result2 = is_empty({ rec__stack_functional_spec__stack_type__s =
   my_stack__split_fields2; rec__stack_functional_spec__stack_type__pointer =
-  my_stack__split_fields3 }) = true))))
+  my_stack__split_fields3 })) and ((result2 = true) <-> (count(state__2({
+  rec__stack_functional_spec__stack_type__s = my_stack__split_fields2;
+  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields3
+  })) = 0)))
+
+ (* File "stack_functional_spec.adb", line 20, characters 0-0 *)
+goal WP_parameter_def : (is_empty({
+  rec__stack_functional_spec__stack_type__s = my_stack__split_fields2;
+  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields3
+  }) = true)

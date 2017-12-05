@@ -369,8 +369,52 @@ logic r2b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic u__split_fields : us_main_type
+
+logic u__split_discrs : natural
+
+logic u1__split_fields : us_main_type
+
+logic u1__split_discrs : natural
+
+logic u2__split_fields : us_main_type
+
+logic c__split_fields : us_main_type
+
+logic us : int
+
+logic usq_ : natural
+
+logic usq_1 : us_main_type
+
+logic usq_2 : bool
+
+logic temp___272 : natural
+
+logic temp___2721 : us_main_type
+
+logic temp___2722 : bool
+
+logic result : us_main_type
+
+logic u1__split_fields1 : us_main_type
+
+logic result1 : natural
+
+logic u1__split_discrs1 : natural
+
+logic result2 : us_main_type
+
+logic u2__split_fields1 : us_main_type
+
+logic result3 : us_main_type
+
+logic c__split_fields1 : us_main_type
+
+axiom H : (u__attr__constrained = true)
+
+axiom H1 : ((u1__attr__constrained = false) and
+  (to_rep(u1__split_discrs) = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall u1__split_discrs:natural. ((u__attr__constrained = true) ->
-  (((u1__attr__constrained = false) and (to_rep(u1__split_discrs) = 0)) ->
-  in_range(0))))
+goal WP_parameter_def : in_range(0)

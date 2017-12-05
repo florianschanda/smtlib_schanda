@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -291,28 +291,174 @@ axiom prev__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : (int,integer) farray
+
+logic cur : int
+
+logic i : int
+
+logic temp___155 : int
+
+logic temp___153 : (int,integer) farray
+
+logic temp___152 : int
+
+logic temp___151 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic k : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result : int
+
+logic cur1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic a2 : (int,integer) farray
+
+logic cur2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic cur3 : int
+
+logic result5 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic result6 : int
+
+logic i3 : int
+
+logic a4 : (int,integer) farray
+
+logic cur4 : int
+
+logic i4 : int
+
+logic a5 : (int,integer) farray
+
+logic cur5 : int
+
+logic i5 : int
+
+logic a6 : (int,integer) farray
+
+logic cur6 : int
+
+logic i6 : int
+
+logic a7 : (int,integer) farray
+
+logic cur7 : int
+
+logic i7 : int
+
+logic a8 : (int,integer) farray
+
+logic cur8 : int
+
+logic i8 : int
+
+logic a9 : (int,integer) farray
+
+logic cur9 : int
+
+logic i9 : int
+
+axiom H : in_range1(threshold)
+
+axiom H1 : (result = cur)
+
+axiom H2 : (cur1 = 0)
+
+axiom H3 : in_range1(cur1)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (1 <= i1)
+
+axiom H7 : (i1 <= 10)
+
+axiom H8 : ((cur1 <= cur2) and (cur2 <= prev(i2)))
+
+axiom H9 :
+  (forall j1:int. (((1 <= j1) and (j1 <= prev(i2))) ->
+  ((threshold <  to_rep((b[j1]))) ->
+  (exists k1:int. (((1 <= k1) and (k1 <= cur2)) and
+  (to_rep((a2[k1])) = to_rep((b[j1]))))))))
+
+axiom H10 : ((((1 <= 10) -> in_range2(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(cur2))) and ((1 <= i2) and
+  (i2 <= 10)))
+
+axiom H11 : ((threshold <  to_rep((b[i2]))) -> ((o8 = (cur2 + 1)) and
+  in_range1((cur2 + 1))))
+
+axiom H12 : ((threshold <  to_rep((b[i2]))) -> (cur2 = result4))
+
+axiom H13 : ((threshold <  to_rep((b[i2]))) -> (cur3 = o8))
+
+axiom H14 : ((threshold <  to_rep((b[i2]))) ->
+  (to_rep(o9) = to_rep((b[i2]))))
+
+axiom H15 : ((threshold <  to_rep((b[i2]))) -> ((1 <= cur3) and
+  (cur3 <= 10)))
+
+axiom H16 : ((threshold <  to_rep((b[i2]))) -> (o10 = cur3))
+
+axiom H17 : ((threshold <  to_rep((b[i2]))) -> (o11 = (a2[o10 <- o9])))
+
+axiom H18 : ((threshold <  to_rep((b[i2]))) -> (a2 = result5))
+
+axiom H19 : ((threshold <  to_rep((b[i2]))) -> (a3 = o11))
+
+axiom H20 : ((not (threshold <  to_rep((b[i2])))) -> (cur3 = cur2))
+
+axiom H21 : ((not (threshold <  to_rep((b[i2])))) -> (a3 = a2))
+
+axiom H22 : (not (i2 = 10))
+
+axiom H23 : (result6 = i2)
+
+axiom H24 : (i3 = (i2 + 1))
+
  (* File "tab.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur:int. forall i:int. forall o:int. forall o1:integer.
-  forall o2:int. forall o3:(int,integer) farray. forall result:int.
-  forall cur1:int. forall result1:int. forall i1:int.
-  forall a:(int,integer) farray. forall cur2:int. forall i2:int.
-  forall result2:int. forall cur3:int. forall result3:(int,integer) farray.
-  forall a1:(int,integer) farray. forall result4:int. forall i3:int.
-  (in_range1(threshold) -> ((({ int__content = result } = { int__content =
-  cur }) and (cur1 = 0)) -> (in_range1(cur1) -> ((({ int__content = result1
-  } = { int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  ((((cur1 <= cur2) and (cur2 <= prev(i2))) and
-  (forall j:int. (((1 <= j) and (j <= prev(i2))) ->
-  ((threshold <  to_rep((b[j]))) ->
-  (exists k:int. (((1 <= k) and (k <= cur2)) and
-  (to_rep((a[k])) = to_rep((b[j]))))))))) -> ((((((1 <= 10) ->
-  in_range2(i2)) and (((-2147483648) <= 2147483647) -> in_range1(cur2))) and
-  ((1 <= i2) and (i2 <= 10))) and ((((threshold <  to_rep((b[i2]))) and
-  ((((o = (cur2 + 1)) and in_range1((cur2 + 1))) and ((cur2 = result2) and
-  (cur3 = o))) and (((to_rep(o1) = to_rep((b[i2]))) and ((((1 <= cur3) and
-  (cur3 <= 10)) and (o2 = cur3)) and (o3 = (a[o2 <- o1])))) and
-  ((a = result3) and (a1 = o3))))) or
-  ((not (threshold <  to_rep((b[i2])))) and ((cur3 = cur2) and
-  (a1 = a)))) and ((not (i2 = 10)) and ((result4 = i2) and
-  (i3 = (i2 + 1)))))) -> (cur1 <= cur3)))))))))
+goal WP_parameter_def : (cur1 <= cur3)

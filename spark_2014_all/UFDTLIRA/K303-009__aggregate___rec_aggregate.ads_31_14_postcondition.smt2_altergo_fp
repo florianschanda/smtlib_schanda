@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -223,21 +223,43 @@ logic r : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic one : int
+
+logic rec_aggregate__f1__result : integer
+
+logic result : integer
+
+logic rec_aggregate__f1__result1 : integer
+
+logic rec_aggregate__f1__result2 : integer
+
+logic rec_aggregate__f1__result3 : integer
+
+logic rec_aggregate__f1__result4 : integer
+
+logic rec_aggregate__f1__result5 : integer
+
+logic result1 : integer
+
+axiom H : in_range1(one)
+
+axiom H1 : (one = 1)
+
+axiom H2 : (rec_aggregate__f1__result2 = rec_aggregate__f1__result1)
+
+axiom H3 : (rec_aggregate__f1__result3 = rec_aggregate__f1__result1)
+
+axiom H4 : (result = rec_aggregate__f1__result)
+
+axiom H5 : (rec_aggregate__f1__result1 = r)
+
+axiom H6 : (rec_aggregate__f1__result4 = rec_aggregate__f1__result2)
+
+axiom H7 : (rec_aggregate__f1__result5 = rec_aggregate__f1__result3)
+
+axiom H8 : (result1 = rec_aggregate__f1__result4)
+
  (* File "rec_aggregate.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall rec_aggregate__f1__result:integer.
-  forall result:integer. forall rec_aggregate__f1__result1:integer.
-  forall rec_aggregate__f1__result2:integer.
-  forall rec_aggregate__f1__result3:integer.
-  forall rec_aggregate__f1__result4:integer.
-  forall rec_aggregate__f1__result5:integer.
-  (forall result1:integer. ((in_range1(one) and ((one = 1) and
-  (((((rec_aggregate__f1__result2 = rec_aggregate__f1__result1) and
-  (rec_aggregate__f1__result3 = rec_aggregate__f1__result1)) and
-  ((result = rec_aggregate__f1__result) and
-  (r = rec_aggregate__f1__result1))) and
-  ((rec_aggregate__f1__result4 = rec_aggregate__f1__result2) and
-  (rec_aggregate__f1__result5 = rec_aggregate__f1__result3))) and
-  (result1 = rec_aggregate__f1__result4)))) -> (bool_eq3({ us_split_fields1 =
-  { rec__rec_aggregate__r1__x = rec_aggregate__f1__result4 } }, {
-  us_split_fields1 = { rec__rec_aggregate__r1__x = r } }) = true))))
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
+  rec__rec_aggregate__r1__x = rec_aggregate__f1__result4 } }, {
+  us_split_fields1 = { rec__rec_aggregate__r1__x = r } }) = true)

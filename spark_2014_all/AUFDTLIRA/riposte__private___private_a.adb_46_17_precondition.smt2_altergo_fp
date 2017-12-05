@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -414,29 +414,67 @@ axiom get_length__post_axiom :
   us_split_fields1 = { rec__stack__t__len = the_stack;
   rec__stack__t__elements = the_stack1 } })))
 
- (* File "complex.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall s__split_fields:length_t.
-  forall s__split_fields1:(int,integer) farray. forall temp___229:length_t.
-  forall temp___2291:(int,integer) farray. forall result:length_t.
-  forall result1:(int,integer) farray. forall s__split_fields2:length_t.
-  forall s__split_fields3:(int,integer) farray.
-  forall s__split_fields4:length_t.
-  forall s__split_fields5:(int,integer) farray. (in_range(n) -> (((({
-  us_split_fields1 = { rec__stack__t__len = temp___229;
+logic n : int
+
+logic s__split_fields : length_t
+
+logic s__split_fields1 : (int,integer) farray
+
+logic temp___229 : length_t
+
+logic temp___2291 : (int,integer) farray
+
+logic o : int
+
+logic result : length_t
+
+logic result1 : (int,integer) farray
+
+logic s__split_fields2 : length_t
+
+logic s__split_fields3 : (int,integer) farray
+
+logic s__split_fields4 : length_t
+
+logic s__split_fields5 : (int,integer) farray
+
+logic result2 : int
+
+logic n1 : int
+
+logic n2 : int
+
+logic s__split_fields6 : length_t
+
+logic s__split_fields7 : (int,integer) farray
+
+logic n3 : int
+
+logic s__split_fields8 : length_t
+
+logic s__split_fields9 : (int,integer) farray
+
+axiom H : in_range(n)
+
+axiom H1 : (({ us_split_fields1 = { rec__stack__t__len = temp___229;
   rec__stack__t__elements = temp___2291 } } = create_stack(void)) and
   (get_length({ us_split_fields1 = { rec__stack__t__len = temp___229;
-  rec__stack__t__elements = temp___2291 } }) = 0)) and (({
-  us_split_fields__content = { rec__stack__t__len = result;
-  rec__stack__t__elements = result1 } } = { us_split_fields__content = {
-  rec__stack__t__len = s__split_fields; rec__stack__t__elements =
-  s__split_fields1 } }) and ((temp___229 = s__split_fields2) and
-  (temp___2291 = s__split_fields3)))) -> (((get_length({ us_split_fields1 = {
+  rec__stack__t__elements = temp___2291 } }) = 0))
+
+axiom H2 : ((result = s__split_fields) and (result1 = s__split_fields1))
+
+axiom H3 : (temp___229 = s__split_fields2)
+
+axiom H4 : (temp___2291 = s__split_fields3)
+
+axiom H5 : ((get_length({ us_split_fields1 = { rec__stack__t__len =
+  s__split_fields4; rec__stack__t__elements = s__split_fields5 }
+  }) = (get_length({ us_split_fields1 = { rec__stack__t__len =
+  s__split_fields2; rec__stack__t__elements = s__split_fields3 } }) + 1)) and
+  (top({ us_split_fields1 = { rec__stack__t__len = s__split_fields4;
+  rec__stack__t__elements = s__split_fields5 } }) = n))
+
+ (* File "complex.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : (0 <  get_length({ us_split_fields1 = {
   rec__stack__t__len = s__split_fields4; rec__stack__t__elements =
-  s__split_fields5 } }) = (get_length({ us_split_fields1 = {
-  rec__stack__t__len = s__split_fields2; rec__stack__t__elements =
-  s__split_fields3 } }) + 1)) and (top({ us_split_fields1 = {
-  rec__stack__t__len = s__split_fields4; rec__stack__t__elements =
-  s__split_fields5 } }) = n)) -> (0 <  get_length({ us_split_fields1 = {
-  rec__stack__t__len = s__split_fields4; rec__stack__t__elements =
-  s__split_fields5 } }))))))
+  s__split_fields5 } }))

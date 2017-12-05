@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -307,35 +307,104 @@ logic z__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic z : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : (int,integer) farray
+
+logic concat_right__one__z__assume : (int,integer) farray
+
+logic concat_right__one__z__assume1 : t
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic result : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+axiom H : in_range(x)
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(y1)),
+  to_rep(last(y1)))
+
+axiom H2 : ((to_rep(last(y1)) <  2147483647) and
+  (to_rep(first(y1)) <= to_rep(last(y1))))
+
+axiom H3 : ((length({ elts = y; rt = y1 }) = 0) -> (to_rep(o) = x))
+
+axiom H4 : ((length({ elts = y; rt = y1 }) = 0) -> (o1 = singleton(o,
+  (- 2147483648))))
+
+axiom H5 : ((length({ elts = y; rt = y1 }) = 0) ->
+  (o1 = concat_right__one__z__assume))
+
+axiom H6 : ((length({ elts = y; rt = y1 }) = 0) -> (mk((- 2147483648),
+  (- 2147483648)) = concat_right__one__z__assume1))
+
+axiom H7 : ((not (length({ elts = y; rt = y1 }) = 0)) ->
+  ((to_rep(first(y1)) <= to_rep(last(y1))) ->
+  (o4 = ((to_rep(last(y1)) - to_rep(first(y1))) + 1))))
+
+axiom H8 : ((not (length({ elts = y; rt = y1 }) = 0)) ->
+  ((not (to_rep(first(y1)) <= to_rep(last(y1)))) -> (o4 = 0)))
+
+axiom H9 : ((not (length({ elts = y; rt = y1 }) = 0)) -> (o5 = (o4 + 1)))
+
+axiom H10 : ((not (length({ elts = y; rt = y1 }) = 0)) ->
+  (o6 = (to_rep(first(y1)) + o5)))
+
+axiom H11 : ((not (length({ elts = y; rt = y1 }) = 0)) -> (o7 = (o6 - 1)))
+
+axiom H12 : ((not (length({ elts = y; rt = y1 }) = 0)) -> ((o8 = o7) and
+  in_range(o7)))
+
+axiom H13 : ((not (length({ elts = y; rt = y1 }) = 0)) -> (to_rep(o2) = x))
+
+axiom H14 : ((not (length({ elts = y; rt = y1 }) = 0)) -> (o3 = singleton(o2,
+  1)))
+
+axiom H15 : ((not (length({ elts = y; rt = y1 }) = 0)) -> (o9 = concat(y,
+  to_rep(first(y1)), to_rep(last(y1)), o3, 1, 1)))
+
+axiom H16 : ((not (length({ elts = y; rt = y1 }) = 0)) ->
+  (o9 = concat_right__one__z__assume))
+
+axiom H17 : ((not (length({ elts = y; rt = y1 }) = 0)) ->
+  (mk(to_rep(first(y1)), o8) = concat_right__one__z__assume1))
+
+axiom H18 : (result = z)
+
+axiom H19 : (z1 = concat_right__one__z__assume)
+
+axiom H20 : (to_rep(z__first) = to_rep(first(concat_right__one__z__assume1)))
+
+axiom H21 : (to_rep(z__last) = to_rep(last(concat_right__one__z__assume1)))
+
+axiom H22 : dynamic_property((- 2147483648), 2147483647, to_rep(z__first),
+  to_rep(z__last))
+
+axiom H23 : (to_rep(z__first) = to_rep(first(y1)))
+
  (* File "concat_right.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:int. forall o8:int.
-  forall o9:(int,integer) farray.
-  forall concat_right__one__z__assume:(int,integer) farray.
-  forall concat_right__one__z__assume1:t. forall result:(int,integer) farray.
-  forall z1:(int,integer) farray. (in_range(x) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(y1)),
-  to_rep(last(y1))) -> (((to_rep(last(y1)) <  2147483647) and
-  (to_rep(first(y1)) <= to_rep(last(y1)))) -> (((((length({ elts = y; rt = y1
-  }) = 0) and (((to_rep(o) = x) and (o1 = singleton(o, (-2147483648)))) and
-  ((o1 = concat_right__one__z__assume) and (mk((-2147483648),
-  (-2147483648)) = concat_right__one__z__assume1)))) or ((not (length({
-  elts = y; rt = y1 }) = 0)) and
-  ((((((((to_rep(first(y1)) <= to_rep(last(y1))) and
-  (o4 = ((to_rep(last(y1)) - to_rep(first(y1))) + 1))) or
-  ((not (to_rep(first(y1)) <= to_rep(last(y1)))) and (o4 = 0))) and
-  (o5 = (o4 + 1))) and (o6 = (to_rep(first(y1)) + o5))) and
-  (o7 = (o6 - 1))) and ((o8 = o7) and in_range(o7))) and
-  ((((to_rep(o2) = x) and (o3 = singleton(o2, 1))) and (o9 = concat(y,
-  to_rep(first(y1)), to_rep(last(y1)), o3, 1, 1))) and
-  ((o9 = concat_right__one__z__assume) and (mk(to_rep(first(y1)),
-  o8) = concat_right__one__z__assume1)))))) and (((result = z) and
-  (z1 = concat_right__one__z__assume)) and
-  ((to_rep(z__first) = to_rep(first(concat_right__one__z__assume1))) and
-  (to_rep(z__last) = to_rep(last(concat_right__one__z__assume1)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(z__first),
-  to_rep(z__last)) -> ((to_rep(z__first) = to_rep(first(y1))) ->
-  (to_rep(first(y1)) <= to_rep(first(y1))))))))))
+goal WP_parameter_def : (to_rep(first(y1)) <= to_rep(first(y1)))

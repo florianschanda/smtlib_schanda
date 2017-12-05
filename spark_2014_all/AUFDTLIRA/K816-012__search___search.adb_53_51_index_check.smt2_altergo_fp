@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -342,18 +342,72 @@ logic index2 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "search.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:integer. forall o2:int. forall result:bool.
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(table1)),
-  to_rep(last(table1))) -> (in_range1(value1) -> (in_range1(value2) ->
-  (in_range1(index1) -> (in_range1(index2) ->
-  ((((to_rep(first(table1)) <= index1) and
+logic search__check_index__result : bool
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic search__check_index__result1 : bool
+
+logic search__check_index__result2 : bool
+
+logic search__check_index__result3 : bool
+
+logic search__check_index__result4 : bool
+
+logic search__check_index__result5 : bool
+
+logic result2 : bool
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(table1)),
+  to_rep(last(table1)))
+
+axiom H1 : in_range1(value1)
+
+axiom H2 : in_range1(value2)
+
+axiom H3 : in_range1(index1)
+
+axiom H4 : in_range1(index2)
+
+axiom H5 : (((to_rep(first(table1)) <= index1) and
   (index1 <= to_rep(last(table1)))) and
-  ((to_rep(first(table1)) <= index2) and
-  (index2 <= to_rep(last(table1))))) ->
-  (((((((to_rep(first(table1)) <= index1) and
-  (index1 <= to_rep(last(table1)))) and (o = index1)) and
-  (o1 = (table[o]))) and (o2 = to_rep(o1))) and (((o2 = value1) and
-  (result = true)) or ((not (o2 = value1)) and (result = false)))) ->
-  ((result = true) -> (to_rep(first(table1)) <= index2))))))))))
+  ((to_rep(first(table1)) <= index2) and (index2 <= to_rep(last(table1)))))
+
+axiom H6 : ((to_rep(first(table1)) <= index1) and
+  (index1 <= to_rep(last(table1))))
+
+axiom H7 : (o3 = index1)
+
+axiom H8 : (o4 = (table[o3]))
+
+axiom H9 : (o5 = to_rep(o4))
+
+axiom H10 : (((o5 = value1) -> (result = true)) and ((not (o5 = value1)) ->
+  (result = false)))
+
+axiom H11 : (result = true)
+
+ (* File "search.ads", line 16, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(table1)) <= index2)

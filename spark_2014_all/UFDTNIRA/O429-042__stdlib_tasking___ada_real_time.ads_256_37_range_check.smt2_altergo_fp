@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type duration
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -338,7 +338,7 @@ logic to_duration__2__function_guard : duration, us_rep -> prop
 
 type seconds_count
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq1 : int, int -> bool
@@ -405,8 +405,28 @@ logic ts : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : duration
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : duration
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+axiom H : ((o1 = ts_sc(ts)) and (in_range1(o1) and
+  (o1 = to_int(to_fixed(to_duration__2(ts))))))
+
+axiom H1 : (o2 = (o1 * 1000000000))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. ((((o = ts_sc(ts)) and (in_range1(o) and
-  (o = to_int(to_fixed(to_duration__2(ts)))))) and
-  (o1 = (o * 1000000000))) -> in_range(o1)))
+goal WP_parameter_def : in_range(o2)

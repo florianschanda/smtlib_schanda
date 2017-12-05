@@ -135,7 +135,7 @@ function state_type__ref___projection(a: state_type__ref) : state_type =
 
 type speed_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -182,26 +182,111 @@ axiom speed_is_valid__def_axiom :
   ((not (segway__state = 1)) and (segway__speed <  0))))) ->
   (speed_is_valid(segway__speed, segway__state) = true))))
 
+logic speed : int
+
+logic state : int
+
+logic temp___157 : int
+
+logic temp___156 : int
+
+logic speed1 : int
+
+logic state1 : int
+
+logic speed2 : int
+
+logic state2 : int
+
+logic speed3 : int
+
+logic state3 : int
+
+logic speed4 : int
+
+logic state4 : int
+
+logic speed5 : int
+
+logic state5 : int
+
+logic speed6 : int
+
+logic state6 : int
+
+logic speed7 : int
+
+logic state7 : int
+
+logic speed8 : int
+
+logic state8 : int
+
+logic speed9 : int
+
+logic state9 : int
+
+logic speed10 : int
+
+logic state10 : int
+
+axiom H : in_range2(speed)
+
+axiom H1 : in_range1(state)
+
+axiom H2 : (speed_is_valid(speed, state) = true)
+
+axiom H3 : ((not (state = 0)) -> (temp___157 = state))
+
+axiom H4 : ((not (state = 0)) -> (temp___156 = speed))
+
+axiom H5 : ((not (state = 0)) -> ((in_range2(speed2) and
+  in_range1(state2)) and (not (state2 = 0))))
+
+axiom H6 : ((not (state = 0)) -> ((0 <  speed2) -> ((speed_is_valid(speed3,
+  state3) = true) and (in_range2(speed3) and in_range1(state3)))))
+
+axiom H7 : ((not (state = 0)) -> ((not (0 <  speed2)) ->
+  ((speed_is_valid(speed4, state4) = true) and (in_range2(speed4) and
+  in_range1(state4)))))
+
+axiom H8 : ((not (state = 0)) -> ((not (0 <  speed2)) -> (state3 = state4)))
+
+axiom H9 : ((not (state = 0)) -> ((not (0 <  speed2)) -> (speed3 = speed4)))
+
+axiom H10 : ((not (state = 0)) -> (state3 = 0))
+
+axiom H11 : ((not (state = 0)) -> (state3 = state5))
+
+axiom H12 : ((not (state = 0)) -> (speed3 = speed5))
+
+axiom H13 : ((not (state = 0)) -> (state6 = state3))
+
+axiom H14 : ((not (state = 0)) -> (speed6 = speed3))
+
+axiom H15 : ((not (state = 0)) -> (state7 = state5))
+
+axiom H16 : ((not (state = 0)) -> (speed7 = speed5))
+
+axiom H17 : ((not (state = 0)) -> (state8 = state6))
+
+axiom H18 : ((not (state = 0)) -> (speed8 = speed6))
+
+axiom H19 : ((state = 0) -> (state7 = state))
+
+axiom H20 : ((state = 0) -> (speed7 = speed))
+
+axiom H21 : ((state = 0) -> (state8 = state1))
+
+axiom H22 : ((state = 0) -> (speed8 = speed1))
+
+axiom H23 : (state9 = state7)
+
+axiom H24 : (speed9 = speed7)
+
+axiom H25 : (state10 = state8)
+
+axiom H26 : (speed10 = speed8)
+
  (* File "segway.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:int. forall state:int. forall temp___157:int.
-  forall temp___156:int. forall speed1:int. forall state1:int.
-  forall speed2:int. forall state2:int. forall speed3:int. forall state3:int.
-  forall speed4:int. forall state4:int. forall speed5:int. forall state5:int.
-  forall speed6:int. forall state6:int. forall speed7:int. forall state7:int.
-  forall speed8:int. forall state8:int. forall speed9:int. forall state9:int.
-  forall speed10:int. forall state10:int. ((in_range2(speed) and
-  (in_range1(state) and ((speed_is_valid(speed, state) = true) and
-  ((((not (state = 0)) and ((((temp___157 = state) and
-  ((temp___156 = speed) and (((in_range2(speed2) and in_range1(state2)) and
-  (not (state2 = 0))) and ((((0 <  speed2) and ((speed_is_valid(speed3,
-  state3) = true) and (in_range2(speed3) and in_range1(state3)))) or
-  ((not (0 <  speed2)) and (((speed_is_valid(speed4, state4) = true) and
-  (in_range2(speed4) and in_range1(state4))) and ((state3 = state4) and
-  (speed3 = speed4))))) and (state3 = 0))))) and (((state3 = state5) and
-  (speed3 = speed5)) and ((state6 = state3) and (speed6 = speed3)))) and
-  (((state5 = state7) and (speed5 = speed7)) and ((state8 = state6) and
-  (speed8 = speed6))))) or ((state = 0) and (((state = state7) and
-  (speed = speed7)) and ((state8 = state1) and (speed8 = speed1))))) and
-  (((state9 = state7) and (speed9 = speed7)) and ((state10 = state8) and
-  (speed10 = speed8))))))) -> (state9 = 0)))
+goal WP_parameter_def : (state9 = 0)

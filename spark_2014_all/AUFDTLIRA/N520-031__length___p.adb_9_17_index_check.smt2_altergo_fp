@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -383,15 +383,92 @@ axiom def_axiom :
   temp___1401 }, temp___141, temp___142, temp___143,
   temp___144)).elts[temp___145]) = (temp___140[temp___145]))))))))))
 
+logic v : (int,integer) farray
+
+logic aux : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic result : int
+
+logic aux1 : int
+
+logic result1 : (int,integer) farray
+
+logic v1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic v2 : (int,integer) farray
+
+logic v3 : (int,integer) farray
+
+logic aux2 : int
+
+logic v4 : (int,integer) farray
+
+logic aux3 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(v__first), to_rep(v__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range2(j)
+
+axiom H3 : (((to_rep(v__first) <= i) and (i <= to_rep(v__last))) and
+  ((to_rep(v__first) <= j) and (j <= to_rep(v__last))))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(aux))
+
+axiom H5 : ((to_rep(v__first) <= i) and (i <= to_rep(v__last)))
+
+axiom H6 : (o = i)
+
+axiom H7 : (o1 = (v[o]))
+
+axiom H8 : (o2 = to_rep(o1))
+
+axiom H9 : (result = aux)
+
+axiom H10 : (aux1 = o2)
+
  (* File "p.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:(int,integer) farray. forall aux:int. forall o:int.
-  forall o1:integer. forall o2:int. forall result:int. forall aux1:int.
-  (dynamic_property(0, 2147483647, to_rep(v__first), to_rep(v__last)) ->
-  (in_range2(i) -> (in_range2(j) -> ((((to_rep(v__first) <= i) and
-  (i <= to_rep(v__last))) and ((to_rep(v__first) <= j) and
-  (j <= to_rep(v__last)))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(aux)) -> (((((((to_rep(v__first) <= i) and
-  (i <= to_rep(v__last))) and (o = i)) and (o1 = (v[o]))) and
-  (o2 = to_rep(o1))) and (({ int__content = result } = { int__content = aux
-  }) and (aux1 = o2))) -> (to_rep(v__first) <= j))))))))
+goal WP_parameter_def : (to_rep(v__first) <= j)

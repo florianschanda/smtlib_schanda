@@ -36,6 +36,7 @@
 (declare-const data1 Int)
 (declare-const data2 Int)
 (declare-const tmp Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const data11 Int)
 (assert (in_range data1))

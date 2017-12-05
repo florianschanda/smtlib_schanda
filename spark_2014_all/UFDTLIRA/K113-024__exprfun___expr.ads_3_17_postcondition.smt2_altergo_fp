@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -121,20 +121,61 @@ axiom echo2__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : int
+
+logic expr__echo__result : int
+
+logic o : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic expr__echo__result1 : int
+
+logic expr__echo__result2 : int
+
+logic expr__echo__result3 : int
+
+logic r2 : int
+
+logic expr__echo__result4 : int
+
+logic r3 : int
+
+logic expr__echo__result5 : int
+
+logic result2 : int
+
+axiom H : in_range(a)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
+
+axiom H2 : ((o = echo2(a)) and (in_range(o) and (o = a)))
+
+axiom H3 : (result = r)
+
+axiom H4 : (r1 = o)
+
+axiom H5 : (expr__echo__result1 = expr__echo__result2)
+
+axiom H6 : (expr__echo__result3 = expr__echo__result1)
+
+axiom H7 : (result1 = expr__echo__result)
+
+axiom H8 : (expr__echo__result1 = r1)
+
+axiom H9 : (expr__echo__result4 = expr__echo__result2)
+
+axiom H10 : (r2 = r1)
+
+axiom H11 : (expr__echo__result5 = expr__echo__result3)
+
+axiom H12 : (r3 = r1)
+
+axiom H13 : (result2 = expr__echo__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall expr__echo__result:int. forall o:int.
-  forall result:int. forall r1:int. forall result1:int.
-  forall expr__echo__result1:int. forall expr__echo__result2:int.
-  forall expr__echo__result3:int. forall r2:int.
-  forall expr__echo__result4:int. forall r3:int.
-  forall expr__echo__result5:int.
-  (forall result2:int. ((in_range(a) and ((((((-2147483648) <= 2147483647) ->
-  in_range(r)) and ((((o = echo2(a)) and (in_range(o) and (o = a))) and
-  ((result = r) and (r1 = o))) and
-  (((expr__echo__result1 = expr__echo__result2) and
-  (expr__echo__result3 = expr__echo__result1)) and
-  ((result1 = expr__echo__result) and (expr__echo__result1 = r1))))) and
-  (((expr__echo__result4 = expr__echo__result2) and (r2 = r1)) and
-  ((expr__echo__result5 = expr__echo__result3) and (r3 = r1)))) and
-  (result2 = expr__echo__result4))) -> (expr__echo__result4 = a))))
+goal WP_parameter_def : (expr__echo__result4 = a)

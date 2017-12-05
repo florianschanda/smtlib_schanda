@@ -80,6 +80,7 @@
 (declare-const a (Array Int integer))
 (declare-const o Int)
 (declare-const o1 (Array Int integer))
+(declare-const o2 Int)
 (declare-const result (Array Int integer))
 (declare-const a1 (Array Int integer))
 (declare-const a2 (Array Int integer))

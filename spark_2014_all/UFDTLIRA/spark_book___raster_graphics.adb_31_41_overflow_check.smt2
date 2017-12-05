@@ -120,6 +120,7 @@
 (declare-const status Int)
 (declare-const line_algorithm Int)
 (declare-const line_count Int)
+(declare-const o Int)
 (declare-const status1 Int)
 (assert (=> (<= 0 2) (in_range4 status)))
 (assert (in_range3 line_algorithm))

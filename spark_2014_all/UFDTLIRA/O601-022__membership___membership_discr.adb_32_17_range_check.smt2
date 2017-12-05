@@ -269,6 +269,7 @@
 (declare-const us4 Int)
 (declare-const us5 Int)
 (declare-const us6 Int)
+(declare-const us7 Int)
 (assert (and (= us 0) (in_range1 0)))
 (assert (and (= us1 0) (in_range1 0)))
 (assert (and (= us2 0) (in_range1 0)))

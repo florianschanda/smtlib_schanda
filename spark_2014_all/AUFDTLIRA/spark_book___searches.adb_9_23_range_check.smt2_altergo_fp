@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -358,11 +358,90 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic position : int
+
+logic index : int
+
+logic o : int
+
+logic temp___158 : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic o4 : int
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : int
+
+logic index1 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic result : int
+
+logic position1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic position2 : int
+
+logic position3 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic position4 : int
+
+logic position5 : int
+
+logic position6 : int
+
+logic position7 : int
+
+logic position8 : int
+
+logic position9 : int
+
+logic position10 : int
+
+logic position11 : int
+
+logic position12 : int
+
+logic position13 : int
+
+logic position14 : int
+
+logic result5 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(list1)),
+  to_rep(last(list1)))
+
+axiom H1 : in_range1(value)
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(position))
+
+axiom H3 :
+  (exists index2:int. (((to_rep(first(list1)) <= index2) and
+  (index2 <= to_rep(last(list1)))) and (to_rep((list[index2])) = value)))
+
  (* File "searches.ads", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall position:int. (dynamic_property(1, 2147483647,
-  to_rep(first(list1)), to_rep(last(list1))) -> (in_range1(value) ->
-  (((1 <= 2147483647) -> in_range2(position)) ->
-  ((exists index:int. (((to_rep(first(list1)) <= index) and
-   (index <= to_rep(last(list1)))) and (to_rep((list[index])) = value))) ->
-  in_range2(to_rep(first(list1))))))))
+goal WP_parameter_def : in_range2(to_rep(first(list1)))

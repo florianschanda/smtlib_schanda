@@ -1554,108 +1554,435 @@ axiom no_uml_activity__def_axiom :
   ((no_uml_activity = no_uml_action_vector) and
   (no_uml_activity1 = no_uml_control_flow_vector))
 
- (* File "model.ads", line 121, characters 0-0 *)
-goal WP_parameter_def :
-  (forall av:(int,us_rep3) farray. forall cfv:(int,us_rep4) farray.
-  forall act__split_fields:(int,us_rep3) farray.
-  forall act__split_fields1:(int,us_rep4) farray. forall s:int.
-  forall s1:int.
-  forall model__transform__L_1__R1b__assume:(int,us_rep) farray.
-  forall temp___436:(int,us_rep3) farray. forall temp___435:int.
-  forall temp___434:(int,us_rep) farray. forall o:name_t. forall o1:int.
-  forall o2:name_t. forall o3:name_t. forall o4:name_t.
-  forall o5:(int,us_rep3) farray.
-  forall model__transform__L_2__R7b__assume:(int,us_rep1) farray.
-  forall t:int. forall temp___450:(int,us_rep) farray.
-  forall temp___451:(int,us_rep1) farray. forall o6:int.
-  forall o7:uml_action_access. forall o8:uml_action_access. forall o9:int.
-  forall o10:name_t. forall o11:int. forall result:(int,us_rep3) farray.
-  forall av1:(int,us_rep3) farray. forall result1:(int,us_rep4) farray.
-  forall cfv1:(int,us_rep4) farray. forall result2:(int,us_rep3) farray.
-  forall result3:(int,us_rep4) farray.
-  forall act__split_fields2:(int,us_rep3) farray.
-  forall act__split_fields3:(int,us_rep4) farray. forall result4:int.
-  forall s2:int. forall av2:(int,us_rep3) farray. forall s3:int.
-  forall result5:(int,us_rep3) farray. forall av3:(int,us_rep3) farray.
-  forall av4:(int,us_rep3) farray. forall s4:int__ref.
-  forall av5:(int,us_rep3) farray. forall s5:int. forall av6:map__ref2.
-  forall s6:int__ref. forall av7:(int,us_rep3) farray. forall s7:int.
-  forall result6:int__ref. forall s8:int. forall cfv2:(int,us_rep4) farray.
-  forall s9:int. ((model__no_uml_action_vector__aggregate_def({
-  us_split_fields7 = { rec__model__uml_action__name_data = no_uml_action }
-  }) = no_uml_action_vector) ->
-  ((model__no_uml_control_flow_vector__aggregate_def({ us_split_fields9 = {
-  rec__model__uml_control_flow__from_data = no_uml_control_flow;
-  rec__model__uml_control_flow__to_data = no_uml_control_flow1 }
-  }) = no_uml_control_flow_vector) ->
-  (((no_uml_action_vector = no_uml_activity) and
-  (no_uml_control_flow_vector = no_uml_activity1)) -> (((result = av) and
-  (av1 = no_uml_action_vector)) -> (((result1 = cfv) and
-  (cfv1 = no_uml_control_flow_vector)) ->
-  ((((result2 = act__split_fields) and (result3 = act__split_fields1)) and
-  ((act__split_fields2 = no_uml_activity) and
-  (act__split_fields3 = no_uml_activity1))) ->
-  ((((model__transform__L_1__R1b__assume = owned_state({ us_split_fields5 = {
-  rec__model__uml_state_machine__owned_state_data = sm;
-  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (model__transform__L_1__R1b__assume = sm)) and
-  (model__transform__L_1__R1b__assume = r1b)) -> ((((result4 = s) and
-  (s2 = 0)) and ((((0 <= s2) and (s2 <= 100)) and ((((temp___436 = av1) and
-  ((temp___435 = s2) and
-  ((forall t1:int. (((0 <= t1) and (t1 <= (s3 - 1))) -> (name((owned_state({
-   us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
-   rec__model__uml_state_machine__owned_transition_data = sm1 }
-   })[t1])) = name__2((av2[t1]))))) and
-  ((((0 <= 100) -> in_range6(s3)) and ((0 <= s3) and (s3 <= 100))) and
-  ((((((((((temp___434 = owned_state({ us_split_fields5 = {
-  rec__model__uml_state_machine__owned_state_data = sm;
-  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (temp___434 = sm)) and ({ us_split_fields1 = {
-  rec__model__uml_state__name_data = o } } = (temp___434[s3]))) and
-  ((o1 = name({ us_split_fields1 = { rec__model__uml_state__name_data = o }
-  })) and (in_range1(o1) and (o1 = to_rep(o))))) and (to_rep(o2) = o1)) and
-  (o2 = o3)) and (o4 = o3)) and (o5 = (av2[s3 <- { us_split_fields7 = {
-  rec__model__uml_action__name_data = o4 } }]))) and ((result5 = av2) and
-  (av3 = o5))) and (s3 = 100)))))) and (((s4 = { int__content = s3 }) and
-  (av3 = av4)) and ((s5 = s3) and (av5 = av3)))) and (((s6 = s4) and (av6 = {
-  map__content2 = av4 })) and ((s7 = s5) and (av7 = av5))))) or
-  ((not ((0 <= s2) and (s2 <= 100))) and (((s6 = { int__content = s2 }) and
-  (av6 = { map__content2 = av1 })) and ((s7 = s2) and (av7 = av1)))))) ->
-  ((((model__transform__L_2__R7b__assume = owned_transition({
+logic av : (int,us_rep3) farray
+
+logic cfv : (int,us_rep4) farray
+
+logic act__split_fields : (int,us_rep3) farray
+
+logic act__split_fields1 : (int,us_rep4) farray
+
+logic s : int
+
+logic s1 : int
+
+logic model__transform__result : (int,us_rep3) farray
+
+logic model__transform__result1 : (int,us_rep4) farray
+
+logic model__transform__L_1__R1b__assume : (int,us_rep) farray
+
+logic temp___436 : (int,us_rep3) farray
+
+logic temp___435 : int
+
+logic t : int
+
+logic temp___438 : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : name_t
+
+logic o2 : int
+
+logic temp___434 : (int,us_rep) farray
+
+logic o3 : name_t
+
+logic o4 : int
+
+logic o5 : name_t
+
+logic o6 : name_t
+
+logic o7 : name_t
+
+logic o8 : (int,us_rep3) farray
+
+logic model__transform__L_2__R7b__assume : (int,us_rep1) farray
+
+logic temp___446 : (int,us_rep4) farray
+
+logic temp___445 : int
+
+logic t1 : int
+
+logic temp___448 : (int,us_rep) farray
+
+logic temp___449 : (int,us_rep1) farray
+
+logic o9 : int
+
+logic o10 : uml_action_access
+
+logic o11 : uml_action_access
+
+logic o12 : int
+
+logic o13 : name_t
+
+logic o14 : int
+
+logic temp___450 : (int,us_rep) farray
+
+logic temp___451 : (int,us_rep1) farray
+
+logic o15 : int
+
+logic o16 : uml_state_access
+
+logic o17 : uml_state_access
+
+logic o18 : int
+
+logic o19 : name_t
+
+logic o20 : int
+
+logic o21 : uml_action_access
+
+logic o22 : uml_action_access
+
+logic o23 : int
+
+logic o24 : name_t
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : bool
+
+logic temp___443 : (int,us_rep1) farray
+
+logic o28 : uml_state_access
+
+logic o29 : uml_state_access
+
+logic o30 : int
+
+logic temp___444 : (int,us_rep1) farray
+
+logic o31 : uml_state_access
+
+logic o32 : uml_state_access
+
+logic o33 : int
+
+logic result : (int,us_rep3) farray
+
+logic av1 : (int,us_rep3) farray
+
+logic result1 : (int,us_rep4) farray
+
+logic cfv1 : (int,us_rep4) farray
+
+logic result2 : (int,us_rep3) farray
+
+logic result3 : (int,us_rep4) farray
+
+logic act__split_fields2 : (int,us_rep3) farray
+
+logic act__split_fields3 : (int,us_rep4) farray
+
+logic result4 : int
+
+logic s2 : int
+
+logic av2 : (int,us_rep3) farray
+
+logic s3 : int
+
+logic result5 : (int,us_rep3) farray
+
+logic av3 : (int,us_rep3) farray
+
+logic result6 : int
+
+logic s4 : int
+
+logic av4 : (int,us_rep3) farray
+
+logic s5 : int
+
+logic av5 : (int,us_rep3) farray
+
+logic s6 : int
+
+logic av6 : (int,us_rep3) farray
+
+logic s7 : int
+
+logic av7 : (int,us_rep3) farray
+
+logic s8 : int
+
+logic av8 : (int,us_rep3) farray
+
+logic s9 : int
+
+logic av9 : (int,us_rep3) farray
+
+logic s10 : int
+
+logic result7 : int
+
+logic s11 : int
+
+logic cfv2 : (int,us_rep4) farray
+
+logic s12 : int
+
+logic model__set_from__2__self__fields : uml_action_access
+
+logic model__set_from__2__self__fields1 : uml_action_access
+
+logic result8 : (int,us_rep4) farray
+
+logic cfv3 : (int,us_rep4) farray
+
+logic model__set_to__2__self__fields : uml_action_access
+
+logic model__set_to__2__self__fields1 : uml_action_access
+
+logic result9 : (int,us_rep4) farray
+
+logic cfv4 : (int,us_rep4) farray
+
+logic result10 : int
+
+logic s13 : int
+
+logic cfv5 : (int,us_rep4) farray
+
+logic s14 : int
+
+logic cfv6 : (int,us_rep4) farray
+
+logic s15 : int
+
+logic rho : uml_action_access
+
+logic rho1 : uml_action_access
+
+logic rho2 : uml_action_access
+
+logic rho3 : uml_action_access
+
+logic cfv7 : (int,us_rep4) farray
+
+logic s16 : int
+
+logic cfv8 : (int,us_rep4) farray
+
+logic s17 : int
+
+logic cfv9 : (int,us_rep4) farray
+
+logic s18 : int
+
+logic cfv10 : (int,us_rep4) farray
+
+logic s19 : int
+
+logic cfv11 : (int,us_rep4) farray
+
+logic s20 : int
+
+logic cfv12 : (int,us_rep4) farray
+
+logic s21 : int
+
+logic act__split_fields4 : (int,us_rep3) farray
+
+logic act__split_fields5 : (int,us_rep4) farray
+
+logic act__split_fields6 : (int,us_rep3) farray
+
+logic act__split_fields7 : (int,us_rep4) farray
+
+logic result11 : (int,us_rep3) farray
+
+logic result12 : (int,us_rep4) farray
+
+logic model__transform__result2 : (int,us_rep3) farray
+
+logic model__transform__result3 : (int,us_rep4) farray
+
+logic model__transform__result4 : (int,us_rep3) farray
+
+logic model__transform__result5 : (int,us_rep4) farray
+
+logic model__transform__result6 : (int,us_rep3) farray
+
+logic model__transform__result7 : (int,us_rep4) farray
+
+logic av10 : (int,us_rep3) farray
+
+logic cfv13 : (int,us_rep4) farray
+
+logic act__split_fields8 : (int,us_rep3) farray
+
+logic act__split_fields9 : (int,us_rep4) farray
+
+logic s22 : int
+
+logic s23 : int
+
+logic model__transform__result8 : (int,us_rep3) farray
+
+logic model__transform__result9 : (int,us_rep4) farray
+
+logic av11 : (int,us_rep3) farray
+
+logic cfv14 : (int,us_rep4) farray
+
+logic act__split_fields10 : (int,us_rep3) farray
+
+logic act__split_fields11 : (int,us_rep4) farray
+
+logic s24 : int
+
+logic s25 : int
+
+logic model__transform__result10 : (int,us_rep3) farray
+
+logic model__transform__result11 : (int,us_rep4) farray
+
+axiom H : (model__no_uml_action_vector__aggregate_def({ us_split_fields7 = {
+  rec__model__uml_action__name_data = no_uml_action }
+  }) = no_uml_action_vector)
+
+axiom H1 : (model__no_uml_control_flow_vector__aggregate_def({
+  us_split_fields9 = { rec__model__uml_control_flow__from_data =
+  no_uml_control_flow; rec__model__uml_control_flow__to_data =
+  no_uml_control_flow1 } }) = no_uml_control_flow_vector)
+
+axiom H2 : ((no_uml_action_vector = no_uml_activity) and
+  (no_uml_control_flow_vector = no_uml_activity1))
+
+axiom H3 : (result = av)
+
+axiom H4 : (av1 = no_uml_action_vector)
+
+axiom H5 : (result1 = cfv)
+
+axiom H6 : (cfv1 = no_uml_control_flow_vector)
+
+axiom H7 : ((result2 = act__split_fields) and (result3 = act__split_fields1))
+
+axiom H8 : ((act__split_fields2 = no_uml_activity) and
+  (act__split_fields3 = no_uml_activity1))
+
+axiom H9 : ((model__transform__L_1__R1b__assume = owned_state({
   us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
   rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (model__transform__L_2__R7b__assume = sm1)) and
-  (model__transform__L_2__R7b__assume = r7b)) -> (((result6 = {
-  int__content = s1 }) and (s8 = 0)) -> (((0 <= s8) and (s8 <= 100)) ->
-  ((forall t1:int. (((0 <= t1) and (t1 <= (s9 - 1))) -> ((name((owned_state({
+  (model__transform__L_1__R1b__assume = sm))
+
+axiom H10 : (model__transform__L_1__R1b__assume = r1b)
+
+axiom H11 : (result4 = s)
+
+axiom H12 : (s2 = 0)
+
+axiom H13 : (((0 <= s2) and (s2 <= 100)) -> (((temp___436 = av1) and
+  ((temp___435 = s2) and
+  ((forall t2:int. (((0 <= t2) and (t2 <= (s3 - 1))) -> (name((owned_state({
    us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
    rec__model__uml_state_machine__owned_transition_data = sm1 }
-   })[from((owned_transition({ us_split_fields5 = {
-   rec__model__uml_state_machine__owned_state_data = sm;
-   rec__model__uml_state_machine__owned_transition_data = sm1 }
-   })[t1]))])) = name__2(((av6).map__content2[from__2((cfv2[t1]))]))) and
-   (name((owned_state({ us_split_fields5 = {
-   rec__model__uml_state_machine__owned_state_data = sm;
-   rec__model__uml_state_machine__owned_transition_data = sm1 }
-   })[to__((owned_transition({ us_split_fields5 = {
-   rec__model__uml_state_machine__owned_state_data = sm;
-   rec__model__uml_state_machine__owned_transition_data = sm1 }
-   })[t1]))])) = name__2(((av6).map__content2[to__2((cfv2[t1]))])))))) ->
-  ((((0 <= 100) -> in_range7(s9)) and ((0 <= s9) and (s9 <= 100))) ->
-  (((0 <= t) and (t <= (s9 - 1))) -> (((((((o6 = t) and in_range5(t)) and ({
-  us_split_fields9 = { rec__model__uml_control_flow__from_data = o7;
-  rec__model__uml_control_flow__to_data = o8 } } = (cfv2[o6]))) and
-  ((o9 = to__2({ us_split_fields9 = {
-  rec__model__uml_control_flow__from_data = o7;
-  rec__model__uml_control_flow__to_data = o8 } })) and (in_range4(o9) and
-  (o9 = to_rep2(o8))))) and ({ us_split_fields7 = {
-  rec__model__uml_action__name_data = o10 }
-  } = ((av6).map__content2[o9]))) and ((o11 = name__2({ us_split_fields7 = {
-  rec__model__uml_action__name_data = o10 } })) and (in_range1(o11) and
-  (o11 = to_rep(o10))))) -> (((temp___450 = owned_state({ us_split_fields5 =
-  { rec__model__uml_state_machine__owned_state_data = sm;
+   })[t2])) = name__2((av2[t2]))))) and ((((0 <= 100) -> in_range6(s3)) and
+  ((0 <= s3) and (s3 <= 100))) and ((((((((((temp___434 = owned_state({
+  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
   rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (temp___450 = sm)) -> (((temp___451 = owned_transition({ us_split_fields5 =
-  { rec__model__uml_state_machine__owned_state_data = sm;
+  (temp___434 = sm)) and ({ us_split_fields1 = {
+  rec__model__uml_state__name_data = o3 } } = (temp___434[s3]))) and
+  ((o4 = name({ us_split_fields1 = { rec__model__uml_state__name_data = o3 }
+  })) and (in_range1(o4) and (o4 = to_rep(o3))))) and (to_rep(o5) = o4)) and
+  (o5 = o6)) and (o7 = o6)) and (o8 = (av2[s3 <- { us_split_fields7 = {
+  rec__model__uml_action__name_data = o7 } }]))) and ((result5 = av2) and
+  (av3 = o8))) and (s3 = 100)))))) and (((s7 = s3) and (av6 = av3)) and
+  ((s8 = s3) and (av7 = av3)))))
+
+axiom H14 : (((0 <= s2) and (s2 <= 100)) -> (s9 = s7))
+
+axiom H15 : (((0 <= s2) and (s2 <= 100)) -> (av8 = av6))
+
+axiom H16 : (((0 <= s2) and (s2 <= 100)) -> (s10 = s8))
+
+axiom H17 : (((0 <= s2) and (s2 <= 100)) -> (av9 = av7))
+
+axiom H18 : ((not ((0 <= s2) and (s2 <= 100))) -> (s9 = s2))
+
+axiom H19 : ((not ((0 <= s2) and (s2 <= 100))) -> (av8 = av1))
+
+axiom H20 : ((not ((0 <= s2) and (s2 <= 100))) -> (s10 = s2))
+
+axiom H21 : ((not ((0 <= s2) and (s2 <= 100))) -> (av9 = av1))
+
+axiom H22 : ((model__transform__L_2__R7b__assume = owned_transition({
+  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
   rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
-  (temp___451 = sm1)) -> (0 <= t)))))))))))))))))))
+  (model__transform__L_2__R7b__assume = sm1))
+
+axiom H23 : (model__transform__L_2__R7b__assume = r7b)
+
+axiom H24 : (result7 = s1)
+
+axiom H25 : (s11 = 0)
+
+axiom H26 : (0 <= s11)
+
+axiom H27 : (s11 <= 100)
+
+axiom H28 :
+  (forall t2:int. (((0 <= t2) and (t2 <= (s12 - 1))) -> ((name((owned_state({
+  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 }
+  })[from((owned_transition({ us_split_fields5 = {
+  rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 }
+  })[t2]))])) = name__2((av8[from__2((cfv2[t2]))]))) and (name((owned_state({
+  us_split_fields5 = { rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 }
+  })[to__((owned_transition({ us_split_fields5 = {
+  rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 }
+  })[t2]))])) = name__2((av8[to__2((cfv2[t2]))]))))))
+
+axiom H29 : (((0 <= 100) -> in_range7(s12)) and ((0 <= s12) and
+  (s12 <= 100)))
+
+axiom H30 : (0 <= t1)
+
+axiom H31 : (t1 <= (s12 - 1))
+
+axiom H32 : ((o20 = t1) and in_range5(t1))
+
+axiom H33 : ({ us_split_fields9 = { rec__model__uml_control_flow__from_data =
+  o21; rec__model__uml_control_flow__to_data = o22 } } = (cfv2[o20]))
+
+axiom H34 : ((o23 = to__2({ us_split_fields9 = {
+  rec__model__uml_control_flow__from_data = o21;
+  rec__model__uml_control_flow__to_data = o22 } })) and (in_range4(o23) and
+  (o23 = to_rep2(o22))))
+
+axiom H35 : ({ us_split_fields7 = { rec__model__uml_action__name_data = o24 }
+  } = (av8[o23]))
+
+axiom H36 : ((o25 = name__2({ us_split_fields7 = {
+  rec__model__uml_action__name_data = o24 } })) and (in_range1(o25) and
+  (o25 = to_rep(o24))))
+
+axiom H37 : ((temp___450 = owned_state({ us_split_fields5 = {
+  rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
+  (temp___450 = sm))
+
+axiom H38 : ((temp___451 = owned_transition({ us_split_fields5 = {
+  rec__model__uml_state_machine__owned_state_data = sm;
+  rec__model__uml_state_machine__owned_transition_data = sm1 } })) and
+  (temp___451 = sm1))
+
+ (* File "model.ads", line 121, characters 0-0 *)
+goal WP_parameter_def : (0 <= t1)

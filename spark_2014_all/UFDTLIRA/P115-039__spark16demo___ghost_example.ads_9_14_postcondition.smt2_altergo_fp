@@ -153,23 +153,82 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic done__ : bool
+
+logic state : int
+
+logic successful : bool
+
+logic state1 : int
+
+logic result : bool
+
+logic successful1 : bool
+
+logic result1 : bool
+
+logic done__1 : bool
+
+logic result2 : int
+
+logic state2 : int
+
+logic result3 : bool
+
+logic done__2 : bool
+
+logic done__3 : bool
+
+logic state3 : int
+
+logic successful2 : bool
+
+logic done__4 : bool
+
+logic state4 : int
+
+logic successful3 : bool
+
+axiom H : in_range1(state)
+
+axiom H1 : (cur_state(state) = 1)
+
+axiom H2 : (result = successful)
+
+axiom H3 : (successful1 = of_int(0))
+
+axiom H4 : ((successful1 = true) -> (result1 = done__))
+
+axiom H5 : ((successful1 = true) -> (done__1 = of_int(1)))
+
+axiom H6 : ((successful1 = true) -> (result2 = state))
+
+axiom H7 : ((successful1 = true) -> (state2 = 2))
+
+axiom H8 : ((not (successful1 = true)) -> (result3 = done__))
+
+axiom H9 : ((not (successful1 = true)) -> (done__2 = of_int(0)))
+
+axiom H10 : ((not (successful1 = true)) -> (state2 = state))
+
+axiom H11 : ((not (successful1 = true)) -> (done__1 = done__2))
+
+axiom H12 : ((not (successful1 = true)) -> (state2 = state1))
+
+axiom H13 : ((not (successful1 = true)) -> (done__1 = done__2))
+
+axiom H14 : (successful2 = successful1)
+
+axiom H15 : (state2 = state3)
+
+axiom H16 : (done__1 = done__3)
+
+axiom H17 : (successful3 = successful1)
+
+axiom H18 : (state4 = state2)
+
+axiom H19 : (done__4 = done__1)
+
  (* File "ghost_example.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall done__:bool. forall state:int. forall successful:bool.
-  forall state1:int. forall result:bool. forall successful1:bool.
-  forall result1:bool. forall done__1:bool. forall result2:int.
-  forall state2:int. forall result3:bool. forall done__2:bool.
-  forall done__3:bool. forall state3:int. forall successful2:bool.
-  forall done__4:bool. forall state4:int. forall successful3:bool.
-  ((in_range1(state) and ((cur_state(state) = 1) and
-  ((((result = successful) and (successful1 = of_int(0))) and
-  (((successful1 = true) and (((result1 = done__) and
-  (done__1 = of_int(1))) and ((result2 = state) and (state2 = 2)))) or
-  ((not (successful1 = true)) and (((result3 = done__) and
-  (done__2 = of_int(0))) and (((state2 = state) and (done__1 = done__2)) and
-  ((state2 = state1) and (done__1 = done__2))))))) and
-  (((successful2 = successful1) and ((state2 = state3) and
-  (done__1 = done__3))) and ((successful3 = successful1) and
-  ((state4 = state2) and (done__4 = done__1))))))) -> (((done__3 = true) ->
-  (cur_state(state3) = 2)) and ((not (done__3 = true)) ->
-  (cur_state(state3) = 1)))))
+goal WP_parameter_def : (((done__3 = true) -> (cur_state(state3) = 2)) and
+  ((not (done__3 = true)) -> (cur_state(state3) = 1)))

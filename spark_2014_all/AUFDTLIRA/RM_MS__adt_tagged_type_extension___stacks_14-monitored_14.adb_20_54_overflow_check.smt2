@@ -209,6 +209,7 @@
 (declare-const temp___2533 pointer_range)
 (declare-const temp___2534 us_private)
 (declare-const temp___2535 Int)
+(declare-const o8 Int)
 (declare-const stacks_14__push__s__fields (Array Int integer))
 (declare-const stacks_14__push__s__fields1 pointer_range)
 (declare-const stacks_14__push__s__fields2 us_private)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -330,10 +330,27 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic local : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic local1 : int
+
+logic local2 : int
+
+axiom H : (result = local)
+
+axiom H1 : (local1 = 0)
+
+axiom H2 : in_range(local1)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(local2))
+
+axiom H4 : ((o = (local2 + 1)) and in_range((local2 + 1)))
+
  (* File "protected_sequence.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall local:int. forall o:int. forall result:int. forall local1:int.
-  forall local2:int. (((result = local) and (local1 = 0)) ->
-  (in_range(local1) -> ((((-2147483648) <= 2147483647) ->
-  in_range(local2)) -> (((o = (local2 + 1)) and in_range((local2 + 1))) ->
-  (not (100 = 0)))))))
+goal WP_parameter_def : (not (100 = 0))

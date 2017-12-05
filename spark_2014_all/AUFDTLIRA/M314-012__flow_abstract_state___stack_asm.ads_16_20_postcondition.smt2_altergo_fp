@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -279,20 +279,63 @@ type index_t__ref = { index_t__content : index_t
 function index_t__ref___projection(a: index_t__ref) : index_t =
   (a).index_t__content
 
+logic the_stack : (int,integer) farray
+
+logic the_ptr : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic result : int
+
+logic the_ptr1 : int
+
+logic result1 : (int,integer) farray
+
+logic the_stack1 : (int,integer) farray
+
+logic the_stack2 : (int,integer) farray
+
+logic the_ptr2 : int
+
+logic the_stack3 : (int,integer) farray
+
+logic the_ptr3 : int
+
+axiom H : in_range1(the_ptr)
+
+axiom H1 : in_range(v)
+
+axiom H2 : ((o = (the_ptr + 1)) and in_range1((the_ptr + 1)))
+
+axiom H3 : (result = the_ptr)
+
+axiom H4 : (the_ptr1 = o)
+
+axiom H5 : (to_rep(o1) = v)
+
+axiom H6 : ((1 <= the_ptr1) and (the_ptr1 <= 100))
+
+axiom H7 : (o2 = the_ptr1)
+
+axiom H8 : (o3 = (the_stack[o2 <- o1]))
+
+axiom H9 : (result1 = the_stack)
+
+axiom H10 : (the_stack1 = o3)
+
+axiom H11 : (the_ptr1 = the_ptr2)
+
+axiom H12 : (the_stack2 = the_stack1)
+
+axiom H13 : (the_ptr3 = the_ptr1)
+
+axiom H14 : (the_stack3 = the_stack1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_stack:(int,integer) farray. forall the_ptr:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:(int,integer) farray.
-  forall result:int. forall the_ptr1:int.
-  forall result1:(int,integer) farray.
-  forall the_stack1:(int,integer) farray.
-  forall the_stack2:(int,integer) farray. forall the_ptr2:int.
-  forall the_stack3:(int,integer) farray. forall the_ptr3:int.
-  ((in_range1(the_ptr) and (in_range(v) and (((((o = (the_ptr + 1)) and
-  in_range1((the_ptr + 1))) and (({ int__content = result } = {
-  int__content = the_ptr }) and (the_ptr1 = o))) and (((to_rep(o1) = v) and
-  ((((1 <= the_ptr1) and (the_ptr1 <= 100)) and (o2 = the_ptr1)) and
-  (o3 = (the_stack[o2 <- o1])))) and ((result1 = the_stack) and
-  (the_stack1 = o3)))) and (((the_ptr1 = the_ptr2) and
-  (the_stack2 = the_stack1)) and ((the_ptr3 = the_ptr1) and
-  (the_stack3 = the_stack1)))))) -> (not (is_empty(the_ptr2) = true))))
+goal WP_parameter_def : (not (is_empty(the_ptr2) = true))

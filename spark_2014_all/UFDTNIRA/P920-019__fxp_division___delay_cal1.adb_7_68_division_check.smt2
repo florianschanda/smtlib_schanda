@@ -104,6 +104,8 @@
 (assert (= up (osubtract now (of_fixed (fxp_div_int 1000000000 (zero Tuple0))))))
 (declare-const delay_cal1__now__assume us_rep)
 (declare-const o Int)
+(declare-const o1 Int)
+(declare-const o2 Int)
 (assert (= delay_cal1__now__assume now))
 (assert (and (= o (zero Tuple0)) (and (in_range1 o) (= o 0))))
 (assert (not (not (= o 0))))

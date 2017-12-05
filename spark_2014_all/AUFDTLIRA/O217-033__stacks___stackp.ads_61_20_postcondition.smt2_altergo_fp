@@ -431,7 +431,7 @@ function stack_root__ref___projection(a: stack_root__ref) : us_rep =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -2675,93 +2675,230 @@ axiom wraps_around__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4 }) = true) <->
   (100 <  ((to_rep3(s) + to_rep(s2)) - 1))))
 
- (* File "stackp.ads", line 39, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:positive_less_than_max.
-  forall s__split_fields1:(int,element) farray.
-  forall s__split_fields2:less_than_max. forall s__split_fields3:us_private.
-  forall o:int. forall o1:less_than_max. forall o2:positive_less_than_max.
-  forall o3:(int,element) farray. forall o4:less_than_max.
-  forall o5:us_private. forall temp___600:positive_less_than_max.
-  forall temp___6001:(int,element) farray. forall temp___6002:less_than_max.
-  forall temp___6003:us_private. forall temp___6004:int.
-  forall temp___602:int. forall o6:element. forall o7:int.
-  forall o8:(int,element) farray. forall o9:positive_less_than_max.
-  forall o10:(int,element) farray. forall o11:less_than_max.
-  forall o12:us_private. forall temp___604:positive_less_than_max.
-  forall temp___6041:(int,element) farray. forall temp___6042:less_than_max.
-  forall temp___6043:us_private. forall temp___6044:int.
-  forall result:positive_less_than_max. forall result1:(int,element) farray.
-  forall result2:less_than_max. forall result3:us_private.
-  forall s__split_fields4:positive_less_than_max.
-  forall s__split_fields5:(int,element) farray.
-  forall s__split_fields6:less_than_max. forall s__split_fields7:us_private.
-  forall result4:positive_less_than_max. forall result5:(int,element) farray.
-  forall result6:less_than_max. forall result7:us_private.
-  forall s__split_fields8:positive_less_than_max.
-  forall s__split_fields9:(int,element) farray.
-  forall s__split_fields10:less_than_max.
-  forall s__split_fields11:us_private.
-  forall s__split_fields12:positive_less_than_max.
-  forall s__split_fields13:(int,element) farray.
-  forall s__split_fields14:less_than_max.
-  forall s__split_fields15:us_private.
-  forall s__split_fields16:positive_less_than_max.
-  forall s__split_fields17:(int,element) farray.
-  forall s__split_fields18:less_than_max.
-  forall s__split_fields19:us_private. ((in_range1(e) and ((not (is_full({
-  us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields1;
+logic s__split_fields : positive_less_than_max
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : less_than_max
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : less_than_max
+
+logic o2 : positive_less_than_max
+
+logic o3 : (int,element) farray
+
+logic o4 : less_than_max
+
+logic o5 : us_private
+
+logic temp___600 : positive_less_than_max
+
+logic temp___6001 : (int,element) farray
+
+logic temp___6002 : less_than_max
+
+logic temp___6003 : us_private
+
+logic temp___6004 : int
+
+logic temp___602 : int
+
+logic o6 : element
+
+logic o7 : int
+
+logic o8 : (int,element) farray
+
+logic o9 : positive_less_than_max
+
+logic o10 : (int,element) farray
+
+logic o11 : less_than_max
+
+logic o12 : us_private
+
+logic temp___604 : positive_less_than_max
+
+logic temp___6041 : (int,element) farray
+
+logic temp___6042 : less_than_max
+
+logic temp___6043 : us_private
+
+logic temp___6044 : int
+
+logic result : positive_less_than_max
+
+logic result1 : (int,element) farray
+
+logic result2 : less_than_max
+
+logic result3 : us_private
+
+logic s__split_fields4 : positive_less_than_max
+
+logic s__split_fields5 : (int,element) farray
+
+logic s__split_fields6 : less_than_max
+
+logic s__split_fields7 : us_private
+
+logic result4 : positive_less_than_max
+
+logic result5 : (int,element) farray
+
+logic result6 : less_than_max
+
+logic result7 : us_private
+
+logic s__split_fields8 : positive_less_than_max
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+logic s__split_fields12 : positive_less_than_max
+
+logic s__split_fields13 : (int,element) farray
+
+logic s__split_fields14 : less_than_max
+
+logic s__split_fields15 : us_private
+
+logic s__split_fields16 : positive_less_than_max
+
+logic s__split_fields17 : (int,element) farray
+
+logic s__split_fields18 : less_than_max
+
+logic s__split_fields19 : us_private
+
+axiom H : in_range1(e)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s__split_fields1;
   rec__stackp__stack_root__length = s__split_fields2; rec__ext__ =
   hide_ext__(s__split_fields, s__split_fields3) }; attr__tag = s__attr__tag
-  }) = true)) and ((((((((o = (to_rep(s__split_fields2) + 1)) and
-  in_range((to_rep(s__split_fields2) + 1))) and (to_rep(o1) = o)) and
-  ((s__split_fields = o2) and ((s__split_fields1 = o3) and ((o1 = o4) and
-  (s__split_fields3 = o5))))) and (((temp___600 = o2) and
-  ((temp___6001 = o3) and ((temp___6002 = o4) and (temp___6003 = o5)))) and
-  (s__attr__tag = temp___6004))) and (({ us_split_fields__content1 = {
-  rec__stackp__buffer__first = result; rec__stackp__stack_root__content1 =
-  result1; rec__stackp__stack_root__length1 = result2; rec__ext__1 = result3
-  } } = { us_split_fields__content1 = { rec__stackp__buffer__first =
-  s__split_fields; rec__stackp__stack_root__content1 = s__split_fields1;
-  rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
-  s__split_fields3 } }) and ((temp___600 = s__split_fields4) and
-  ((temp___6001 = s__split_fields5) and ((temp___6002 = s__split_fields6) and
-  (temp___6003 = s__split_fields7)))))) and (((((to_rep1(o6) = e) and
-  ((((temp___602 = last2({ us_split_fields3 = { rec__stackp__buffer__first =
-  s__split_fields4; rec__stackp__stack_root__content1 = s__split_fields5;
+  }) = true))
+
+axiom H2 : ((o = (to_rep(s__split_fields2) + 1)) and
+  in_range((to_rep(s__split_fields2) + 1)))
+
+axiom H3 : (to_rep(o1) = o)
+
+axiom H4 : (s__split_fields = o2)
+
+axiom H5 : (s__split_fields1 = o3)
+
+axiom H6 : (o1 = o4)
+
+axiom H7 : (s__split_fields3 = o5)
+
+axiom H8 : (temp___600 = o2)
+
+axiom H9 : (temp___6001 = o3)
+
+axiom H10 : (temp___6002 = o4)
+
+axiom H11 : (temp___6003 = o5)
+
+axiom H12 : (s__attr__tag = temp___6004)
+
+axiom H13 : ((result = s__split_fields) and ((result1 = s__split_fields1) and
+  ((result2 = s__split_fields2) and (result3 = s__split_fields3))))
+
+axiom H14 : (temp___600 = s__split_fields4)
+
+axiom H15 : (temp___6001 = s__split_fields5)
+
+axiom H16 : (temp___6002 = s__split_fields6)
+
+axiom H17 : (temp___6003 = s__split_fields7)
+
+axiom H18 : (to_rep1(o6) = e)
+
+axiom H19 : ((temp___602 = last2({ us_split_fields3 = {
+  rec__stackp__buffer__first = s__split_fields4;
+  rec__stackp__stack_root__content1 = s__split_fields5;
   rec__stackp__stack_root__length1 = s__split_fields6; rec__ext__1 =
   s__split_fields7 }; attr__tag1 = s__attr__tag })) and
   (in_range(temp___602) and (((not (wraps_around({ us_split_fields3 = {
   rec__stackp__buffer__first = s__split_fields4;
   rec__stackp__stack_root__content1 = s__split_fields5;
   rec__stackp__stack_root__length1 = s__split_fields6; rec__ext__1 =
-  s__split_fields7 }; attr__tag1 = s__attr__tag }) = true)) and
-  (temp___602 = ((to_rep3(s__split_fields4) + to_rep(s__split_fields6)) - 1))) or
+  s__split_fields7 }; attr__tag1 = s__attr__tag }) = true)) ->
+  (temp___602 = ((to_rep3(s__split_fields4) + to_rep(s__split_fields6)) - 1))) and
   ((wraps_around({ us_split_fields3 = { rec__stackp__buffer__first =
   s__split_fields4; rec__stackp__stack_root__content1 = s__split_fields5;
   rec__stackp__stack_root__length1 = s__split_fields6; rec__ext__1 =
-  s__split_fields7 }; attr__tag1 = s__attr__tag }) = true) and
-  (temp___602 = (((to_rep3(s__split_fields4) + to_rep(s__split_fields6)) - 1) - 100)))))) and
-  (((1 <= temp___602) and (temp___602 <= 100)) and (o7 = temp___602))) and
-  (o8 = (s__split_fields5[o7 <- o6])))) and ((s__split_fields4 = o9) and
-  ((o8 = o10) and ((s__split_fields6 = o11) and
-  (s__split_fields7 = o12))))) and (((temp___604 = o9) and
-  ((temp___6041 = o10) and ((temp___6042 = o11) and
-  (temp___6043 = o12)))) and (s__attr__tag = temp___6044))) and
-  (((result4 = s__split_fields4) and ((result5 = s__split_fields5) and
-  ((result6 = s__split_fields6) and (result7 = s__split_fields7)))) and
-  ((temp___604 = s__split_fields8) and ((temp___6041 = s__split_fields9) and
-  ((temp___6042 = s__split_fields10) and
-  (temp___6043 = s__split_fields11))))))) and
-  (((s__split_fields12 = s__split_fields8) and
-  ((s__split_fields13 = s__split_fields9) and
-  ((s__split_fields14 = s__split_fields10) and
-  (s__split_fields15 = s__split_fields11)))) and
-  ((s__split_fields16 = s__split_fields8) and
-  ((s__split_fields17 = s__split_fields9) and
-  ((s__split_fields18 = s__split_fields10) and
-  (s__split_fields19 = s__split_fields11)))))))) -> (((length(get_model__3({
-  us_split_fields3 = { rec__stackp__buffer__first = s__split_fields;
+  s__split_fields7 }; attr__tag1 = s__attr__tag }) = true) ->
+  (temp___602 = (((to_rep3(s__split_fields4) + to_rep(s__split_fields6)) - 1) - 100))))))
+
+axiom H20 : ((1 <= temp___602) and (temp___602 <= 100))
+
+axiom H21 : (o7 = temp___602)
+
+axiom H22 : (o8 = (s__split_fields5[o7 <- o6]))
+
+axiom H23 : (s__split_fields4 = o9)
+
+axiom H24 : (o8 = o10)
+
+axiom H25 : (s__split_fields6 = o11)
+
+axiom H26 : (s__split_fields7 = o12)
+
+axiom H27 : (temp___604 = o9)
+
+axiom H28 : (temp___6041 = o10)
+
+axiom H29 : (temp___6042 = o11)
+
+axiom H30 : (temp___6043 = o12)
+
+axiom H31 : (s__attr__tag = temp___6044)
+
+axiom H32 : (result4 = s__split_fields4)
+
+axiom H33 : (result5 = s__split_fields5)
+
+axiom H34 : (result6 = s__split_fields6)
+
+axiom H35 : (result7 = s__split_fields7)
+
+axiom H36 : (temp___604 = s__split_fields8)
+
+axiom H37 : (temp___6041 = s__split_fields9)
+
+axiom H38 : (temp___6042 = s__split_fields10)
+
+axiom H39 : (temp___6043 = s__split_fields11)
+
+axiom H40 : (s__split_fields12 = s__split_fields8)
+
+axiom H41 : (s__split_fields13 = s__split_fields9)
+
+axiom H42 : (s__split_fields14 = s__split_fields10)
+
+axiom H43 : (s__split_fields15 = s__split_fields11)
+
+axiom H44 : (s__split_fields16 = s__split_fields8)
+
+axiom H45 : (s__split_fields17 = s__split_fields9)
+
+axiom H46 : (s__split_fields18 = s__split_fields10)
+
+axiom H47 : (s__split_fields19 = s__split_fields11)
+
+ (* File "stackp.ads", line 39, characters 0-0 *)
+goal WP_parameter_def : (((length(get_model__3({ us_split_fields3 = {
+  rec__stackp__buffer__first = s__split_fields;
   rec__stackp__stack_root__content1 = s__split_fields1;
   rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
   s__split_fields3 }; attr__tag1 = s__attr__tag })) = 0) ->
@@ -5429,4 +5566,4 @@ goal WP_parameter_def :
   rec__stackp__stack_root__content1 = s__split_fields1;
   rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
   s__split_fields3 }; attr__tag1 = s__attr__tag
-  })).rt)) + (0 + 0)) - 1))))) = true)))))))))))))))))
+  })).rt)) + (0 + 0)) - 1))))) = true)))))))))))))))

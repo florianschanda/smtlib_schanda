@@ -64,6 +64,7 @@
 (declare-const o3 Int)
 (declare-const o4 t_rate)
 (declare-const o5 Int)
+(declare-const o6 Int)
 (declare-const result Int)
 (declare-const roll_rate_desired1 Int)
 (declare-const result1 Int)

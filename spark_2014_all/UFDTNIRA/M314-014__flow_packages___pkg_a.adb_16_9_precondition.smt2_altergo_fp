@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -126,22 +126,62 @@ logic do_something : int -> int
 logic do_something__function_guard : int, int -> prop
 
 axiom do_something__post_axiom :
-  (forall x:int [do_something(x)]. ((in_range(x) and (((-100) <= x) and
+  (forall x:int [do_something(x)]. ((in_range(x) and (((- 100) <= x) and
   (x <= 100))) -> in_range(do_something(x))))
 
 axiom do_something__def_axiom :
   (forall x:int [do_something(x)]. (in_range(x) ->
   (do_something(x) = (x * 2))))
 
+logic x : int
+
+logic y : int
+
+logic z : int
+
+logic w : int
+
+logic q : int
+
+logic a : int
+
+logic b : int
+
+logic c : int
+
+logic o : int
+
+logic result : int
+
+logic z1 : int
+
+logic result1 : int
+
+logic c1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
+
+axiom H2 : (result = z)
+
+axiom H3 : (z1 = 12345)
+
+axiom H4 : in_range(z1)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(w))
+
+axiom H6 : (((- 2147483648) <= 2147483647) -> in_range(q))
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range(a))
+
+axiom H8 : (((- 2147483648) <= 2147483647) -> in_range(b))
+
+axiom H9 : (result1 = c)
+
+axiom H10 : (c1 = 12)
+
+axiom H11 : in_range(c1)
+
  (* File "pkg_a.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall z:int. forall w:int. forall q:int.
-  forall a:int. forall b:int. forall c:int. forall result:int. forall z1:int.
-  forall result1:int. forall c1:int. ((((-2147483648) <= 2147483647) ->
-  in_range(x)) -> ((((-2147483648) <= 2147483647) -> in_range(y)) ->
-  (((result = z) and (z1 = 12345)) -> (in_range(z1) ->
-  ((((-2147483648) <= 2147483647) -> in_range(w)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(q)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(a)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(b)) -> (((result1 = c) and
-  (c1 = 12)) -> (in_range(c1) -> ((-100) <= x))))))))))))
+goal WP_parameter_def : ((- 100) <= x)

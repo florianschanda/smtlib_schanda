@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -138,6 +138,48 @@ logic attr__ATTRIBUTE_ADDRESS : int
 logic formal : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic external : int
+
+logic main_refs__func_inst__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic main_refs__func_inst__result1 : int
+
+logic main_refs__func_inst__result2 : int
+
+logic main_refs__func_inst__result3 : int
+
+logic main_refs__func_inst__result4 : int
+
+logic main_refs__func_inst__result5 : int
+
+axiom H : in_range1(external)
+
+axiom H1 : in_range1(formal)
+
+axiom H2 : (0 <  external)
+
+axiom H3 : (main_refs__func_inst__result1 = main_refs__func_inst__result2)
+
+axiom H4 : (main_refs__func_inst__result3 = main_refs__func_inst__result1)
+
+axiom H5 : ((o = (formal + external)) and in_range1((formal + external)))
+
+axiom H6 : (result = main_refs__func_inst__result)
+
+axiom H7 : (main_refs__func_inst__result1 = o)
+
+axiom H8 : (main_refs__func_inst__result4 = main_refs__func_inst__result2)
+
+axiom H9 : (main_refs__func_inst__result5 = main_refs__func_inst__result3)
+
+axiom H10 : (bool_lt(formal, 0) = true)
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

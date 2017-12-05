@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -365,14 +365,38 @@ logic p1 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : bool
+
+logic temp___619 : int
+
+logic o2 : int
+
+logic o3 : positive
+
+logic o4 : int
+
+logic result : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(p1)),
+  to_rep1(last(p1)))
+
+axiom H1 : (not (length({ elts = p; rt = p1 }) <  2))
+
+axiom H2 : ((o = (to_rep1(last(p1)) - 1)) and
+  in_range1((to_rep1(last(p1)) - 1)))
+
+axiom H3 : (((i <= o) -> (o1 = true)) and ((not (i <= o)) -> (o1 = false)))
+
+axiom H4 : (((to_rep1(first(p1)) <= i) -> (result = o1)) and
+  ((not (to_rep1(first(p1)) <= i)) -> (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((temp___619 = (i + 1)) and in_range1((i + 1)))
+
  (* File "part.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:bool. forall temp___625:int.
-  forall result:bool. (dynamic_property(1, 2147483647, to_rep1(first(p1)),
-  to_rep1(last(p1))) -> ((not (length({ elts = p; rt = p1 }) <  2)) ->
-  (((((o = (to_rep1(last(p1)) - 1)) and
-  in_range1((to_rep1(last(p1)) - 1))) and (((i <= o) and (o1 = true)) or
-  ((not (i <= o)) and (o1 = false)))) and (((to_rep1(first(p1)) <= i) and
-  (result = o1)) or ((not (to_rep1(first(p1)) <= i)) and
-  (result = false)))) -> ((result = true) -> (((temp___625 = (i + 1)) and
-  in_range1((i + 1))) -> (to_rep1(first(p1)) <= temp___625)))))))
+goal WP_parameter_def : (to_rep1(first(p1)) <= temp___619)

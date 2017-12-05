@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -699,40 +699,143 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "inrange2.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall matched:bool. forall i:t. forall inrange2__inrange64__result:bool.
-  forall temp___205:t. forall temp___204:bool. forall temp___206:t.
-  forall result:bool. forall matched1:bool. forall result1:t. forall i1:t.
-  forall temp___2061:t. forall result2:bool. forall matched2:bool.
-  forall result3:t. forall i2:t. forall matched3:bool. forall i3:t.
-  forall temp___2062:t. forall result4:t. forall temp___2063:t.
-  forall result5:bool. forall matched4:bool. forall matched5:bool.
-  forall matched6:bool. forall matched7:bool. forall i4:t.
-  forall temp___2064:t. forall matched8:bool. forall i5:t.
-  forall temp___2065:t. forall matched9:bool. forall i6:t.
-  forall matched10:bool. forall i7:t. forall matched11:bool. forall i8:t.
-  forall matched12:bool. forall i9:t. forall result6:bool.
-  forall inrange2__inrange64__result1:bool.
-  forall inrange2__inrange64__result2:bool.
-  forall inrange2__inrange64__result3:bool. forall matched13:bool.
-  forall i10:t. forall inrange2__inrange64__result4:bool.
-  forall matched14:bool. forall i11:t.
-  forall inrange2__inrange64__result5:bool.
-  (forall result7:bool. (((uge(range_size, of_int(2)) and ule(range_size,
-  of_int(65535))) and ((((({ bool__content = result } = { bool__content =
-  matched }) and (matched1 = of_int1(0))) and ((({ t__content = result1 } = {
-  t__content = i }) and (i1 = of_int(0))) and ((((ult(i1, range_size) and
-  (not (matched1 = true))) and ((((temp___205 = i1) and
-  ((temp___204 = matched1) and ((of_int(0) = temp___206) and ((((({
-  t__content = temp___2064 } = { t__content = temp___206 }) and
-  ((i1 = i4) and (matched2 = matched7))) and ((temp___2065 = temp___2061) and
-  ((i5 = i1) and (matched8 = matched2)))) and ((var = add(bottom, i1)) and
+logic matched : bool
+
+logic i : t
+
+logic inrange2__inrange64__result : bool
+
+logic temp___205 : t
+
+logic temp___204 : bool
+
+logic temp___206 : t
+
+logic result : bool
+
+logic matched1 : bool
+
+logic result1 : t
+
+logic i1 : t
+
+logic temp___2061 : t
+
+logic result2 : bool
+
+logic matched2 : bool
+
+logic result3 : t
+
+logic i2 : t
+
+logic matched3 : bool
+
+logic i3 : t
+
+logic temp___2062 : t
+
+logic result4 : t
+
+logic temp___2063 : t
+
+logic result5 : bool
+
+logic matched4 : bool
+
+logic result6 : t
+
+logic i4 : t
+
+logic matched5 : bool
+
+logic matched6 : bool
+
+logic matched7 : bool
+
+logic i5 : t
+
+logic temp___2064 : t
+
+logic matched8 : bool
+
+logic i6 : t
+
+logic temp___2065 : t
+
+logic matched9 : bool
+
+logic i7 : t
+
+logic matched10 : bool
+
+logic i8 : t
+
+logic matched11 : bool
+
+logic i9 : t
+
+logic matched12 : bool
+
+logic i10 : t
+
+logic result7 : bool
+
+logic inrange2__inrange64__result1 : bool
+
+logic inrange2__inrange64__result2 : bool
+
+logic inrange2__inrange64__result3 : bool
+
+logic matched13 : bool
+
+logic i11 : t
+
+logic inrange2__inrange64__result4 : bool
+
+logic matched14 : bool
+
+logic i12 : t
+
+logic inrange2__inrange64__result5 : bool
+
+logic result8 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
+
+axiom H4 : (result = matched)
+
+axiom H5 : (matched1 = of_int1(0))
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = of_int(0))
+
+axiom H8 : true
+
+axiom H9 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (temp___205 = i1))
+
+axiom H10 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (temp___204 = matched1))
+
+axiom H11 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (of_int(0) = temp___206))
+
+axiom H12 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (((((temp___2064 = temp___206) and ((i1 = i5) and
+  (matched2 = matched7))) and ((temp___2065 = temp___2061) and ((i6 = i1) and
+  (matched8 = matched2)))) and ((var = add(bottom, i1)) and
   ((matched1 = result2) and (matched2 = of_int1(1))))) or
   (((not (var = add(bottom, i1))) and (matched2 = matched1)) and
-  ((((temp___2063 = temp___2064) and ((i3 = i4) and ({ bool__content =
-  matched7 } = { bool__content = matched5 }))) and
-  ((temp___2065 = temp___2063) and ((i5 = i3) and
+  ((((temp___2063 = temp___2064) and ((i3 = i5) and
+  (matched7 = matched5))) and ((temp___2065 = temp___2063) and ((i6 = i3) and
   (matched8 = matched6)))) and (((i1 = result3) and (i2 = add(i1,
   of_int(1)))) and ((((matched3 = true) <->
   (exists n:t. ((ule(of_int(0), n) and ule(n, sub(i3, of_int(1)))) and
@@ -742,24 +845,65 @@ goal WP_parameter_def :
   range_size) and (not (matched3 = true))))) or ((ult(i3, range_size) and
   (not (matched3 = true))) and (((matched4 = matched5) and
   (matched6 = matched4)) and ((var = add(bottom, i3)) and
-  ((matched3 = result5) and (matched4 = of_int1(1)))))))))))))))) and ((({
-  t__content = i6 } = { t__content = i4 }) and ({ bool__content = matched9
-  } = { bool__content = matched7 })) and ((i7 = i5) and
-  (matched10 = matched8)))) and ((({ t__content = i8 } = { t__content = i6
-  }) and ({ bool__content = matched11 } = { bool__content = matched9 })) and
-  ((i9 = i7) and (matched12 = matched10))))) or ((not (ult(i1,
-  range_size) and (not (matched1 = true)))) and (((i1 = i8) and
-  (matched1 = matched11)) and ((i9 = i1) and (matched12 = matched1))))) and
-  (((inrange2__inrange64__result1 = inrange2__inrange64__result2) and
-  (inrange2__inrange64__result3 = inrange2__inrange64__result1)) and
-  ((result6 = inrange2__inrange64__result) and
-  (inrange2__inrange64__result1 = matched11)))))) and ((({ bool__content =
-  inrange2__inrange64__result4 } = { bool__content =
-  inrange2__inrange64__result2 }) and ((i10 = i8) and
-  (matched13 = matched11))) and
-  ((inrange2__inrange64__result5 = inrange2__inrange64__result3) and
-  ((i11 = i9) and (matched14 = matched12))))) and
-  (result7 = inrange2__inrange64__result4))) ->
-  ((inrange2__inrange64__result4 = true) ->
+  ((matched3 = result5) and (matched4 = of_int1(1))))))))))))))
+
+axiom H13 : ((ult(i1, range_size) and (not (matched1 = true))) -> (i7 = i5))
+
+axiom H14 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (matched9 = matched7))
+
+axiom H15 : ((ult(i1, range_size) and (not (matched1 = true))) -> (i8 = i6))
+
+axiom H16 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (matched10 = matched8))
+
+axiom H17 : ((ult(i1, range_size) and (not (matched1 = true))) -> (i9 = i7))
+
+axiom H18 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (matched11 = matched9))
+
+axiom H19 : ((ult(i1, range_size) and (not (matched1 = true))) -> (i10 = i8))
+
+axiom H20 : ((ult(i1, range_size) and (not (matched1 = true))) ->
+  (matched12 = matched10))
+
+axiom H21 : ((not (ult(i1, range_size) and (not (matched1 = true)))) ->
+  (i9 = i1))
+
+axiom H22 : ((not (ult(i1, range_size) and (not (matched1 = true)))) ->
+  (matched1 = matched11))
+
+axiom H23 : ((not (ult(i1, range_size) and (not (matched1 = true)))) ->
+  (i10 = i1))
+
+axiom H24 : ((not (ult(i1, range_size) and (not (matched1 = true)))) ->
+  (matched12 = matched1))
+
+axiom H25 : (inrange2__inrange64__result2 = inrange2__inrange64__result1)
+
+axiom H26 : (inrange2__inrange64__result3 = inrange2__inrange64__result1)
+
+axiom H27 : (result7 = inrange2__inrange64__result)
+
+axiom H28 : (inrange2__inrange64__result1 = matched11)
+
+axiom H29 : (inrange2__inrange64__result4 = inrange2__inrange64__result2)
+
+axiom H30 : (i11 = i9)
+
+axiom H31 : (matched13 = matched11)
+
+axiom H32 : (inrange2__inrange64__result5 = inrange2__inrange64__result3)
+
+axiom H33 : (i12 = i10)
+
+axiom H34 : (matched14 = matched12)
+
+axiom H35 : (result8 = inrange2__inrange64__result4)
+
+axiom H36 : (inrange2__inrange64__result4 = true)
+
+ (* File "inrange2.ads", line 15, characters 0-0 *)
+goal WP_parameter_def :
   (exists n:t. ((ule(of_int(0), n) and ule(n, sub(range_size,
-  of_int(1)))) and (var = add(bottom, n))))))))
+  of_int(1)))) and (var = add(bottom, n))))

@@ -46,6 +46,7 @@
 (declare-const x Int)
 (declare-const refined_post_legal__func__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const refined_post_legal__func__result1 Int)
 (declare-const refined_post_legal__func__result2 Int)

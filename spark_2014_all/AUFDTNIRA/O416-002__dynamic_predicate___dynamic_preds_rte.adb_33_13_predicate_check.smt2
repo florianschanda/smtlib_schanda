@@ -87,6 +87,8 @@
 (assert (forall ((temp___226 Int) (temp___227 Int)) (let ((temp___225 (temp___224 temp___226 temp___227))) (and (= (select temp___225 1) (of_rep temp___226)) (= (select temp___225 2) (of_rep temp___227))))))
 (declare-const x (Array Int small))
 (declare-const o Int)
+(declare-const o1 Int)
+(declare-const temp___233 (Array Int small))
 (assert (dynamic_invariant i3s true false true))
 (assert (dynamic_invariant1 i9s true false true))
 (assert (dynamic_invariant1 x false false true))

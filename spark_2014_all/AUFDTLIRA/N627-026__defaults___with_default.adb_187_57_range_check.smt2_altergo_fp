@@ -180,7 +180,7 @@ axiom coerce_axiom :
 
 type tscalar_with_defaultB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -249,7 +249,7 @@ function scalar_bad_default__ref___7__projection(a: scalar_bad_default__ref) : t
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -460,17 +460,17 @@ logic bool_eq9 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def8 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
-  (((((((a).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b) and
-  (with_default__ok_record__rec_with_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1) = to_rep(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1)))) and
-  (with_default__ok_record__rec_with_discr__f2__pred(a) ->
-  (to_rep1(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2) = to_rep1(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2)))) ->
-  (bool_eq9(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b) and
-  (with_default__ok_record__rec_with_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1) = to_rep(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1)))) and
+  ((((((a).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b) and
+  ((with_default__ok_record__rec_with_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1) = to_rep(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1))) and
   (with_default__ok_record__rec_with_discr__f2__pred(a) ->
   (to_rep1(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2) = to_rep1(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2))))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__ok_record__rec_with_discr__b) and
+  ((with_default__ok_record__rec_with_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1) = to_rep(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f1))) and
+  (with_default__ok_record__rec_with_discr__f2__pred(a) ->
+  (to_rep1(((a).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2) = to_rep1(((b).us_split_fields3).rec__with_default__ok_record__rec_with_discr__f2)))))) ->
   (bool_eq9(a, b) = false))))
 
 logic value__size1 : int
@@ -611,17 +611,17 @@ logic bool_eq10 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq10(a, b)].
-  (((((((a).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b = ((b).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b) and
-  (with_default__ok_record__rec_with_default_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1) = to_rep(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1)))) and
-  (with_default__ok_record__rec_with_default_discr__f2__pred(a) ->
-  (to_rep1(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2) = to_rep1(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2)))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((((a).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b = ((b).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b) and
-  (with_default__ok_record__rec_with_default_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1) = to_rep(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1)))) and
+  ((((((a).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b = ((b).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b) and
+  ((with_default__ok_record__rec_with_default_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1) = to_rep(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1))) and
   (with_default__ok_record__rec_with_default_discr__f2__pred(a) ->
   (to_rep1(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2) = to_rep1(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2))))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((((a).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b = ((b).us_split_discrs3).rec__with_default__ok_record__rec_with_default_discr__b) and
+  ((with_default__ok_record__rec_with_default_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1) = to_rep(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f1))) and
+  (with_default__ok_record__rec_with_default_discr__f2__pred(a) ->
+  (to_rep1(((a).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2) = to_rep1(((b).us_split_fields5).rec__with_default__ok_record__rec_with_default_discr__f2)))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size2 : int
@@ -770,17 +770,17 @@ logic bool_eq11 : us_rep3, us_rep3 -> bool
 
 axiom bool_eq_def10 :
   (forall a:us_rep3. forall b:us_rep3 [bool_eq11(a, b)].
-  (((((((a).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b = ((b).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b) and
-  (with_default__ok_record__rec_with_bad_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1) = to_rep(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1)))) and
-  (with_default__ok_record__rec_with_bad_discr__f2__pred(a) ->
-  (to_rep1(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2) = to_rep1(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2)))) ->
-  (bool_eq11(a, b) = true)) and
-  ((not (((((a).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b = ((b).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b) and
-  (with_default__ok_record__rec_with_bad_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1) = to_rep(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1)))) and
+  ((((((a).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b = ((b).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b) and
+  ((with_default__ok_record__rec_with_bad_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1) = to_rep(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1))) and
   (with_default__ok_record__rec_with_bad_discr__f2__pred(a) ->
   (to_rep1(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2) = to_rep1(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2))))) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((((a).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b = ((b).us_split_discrs5).rec__with_default__ok_record__rec_with_bad_discr__b) and
+  ((with_default__ok_record__rec_with_bad_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1) = to_rep(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f1))) and
+  (with_default__ok_record__rec_with_bad_discr__f2__pred(a) ->
+  (to_rep1(((a).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2) = to_rep1(((b).us_split_fields7).rec__with_default__ok_record__rec_with_bad_discr__f2)))))) ->
   (bool_eq11(a, b) = false))))
 
 logic value__size3 : int
@@ -926,17 +926,17 @@ logic bool_eq12 : us_rep4, us_rep4 -> bool
 
 axiom bool_eq_def11 :
   (forall a:us_rep4. forall b:us_rep4 [bool_eq12(a, b)].
-  (((((((a).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b = ((b).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b) and
-  (with_default__ok_record__rec_with_ok_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1) = to_rep(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1)))) and
-  (with_default__ok_record__rec_with_ok_discr__f3__pred(a) ->
-  (to_rep1(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3) = to_rep1(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3)))) ->
-  (bool_eq12(a, b) = true)) and
-  ((not (((((a).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b = ((b).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b) and
-  (with_default__ok_record__rec_with_ok_discr__f1__pred(a) ->
-  (to_rep(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1) = to_rep(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1)))) and
+  ((((((a).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b = ((b).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b) and
+  ((with_default__ok_record__rec_with_ok_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1) = to_rep(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1))) and
   (with_default__ok_record__rec_with_ok_discr__f3__pred(a) ->
   (to_rep1(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3) = to_rep1(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3))))) ->
+  (bool_eq12(a, b) = true)) and
+  ((not ((((a).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b = ((b).us_split_discrs7).rec__with_default__ok_record__rec_with_ok_discr__b) and
+  ((with_default__ok_record__rec_with_ok_discr__f1__pred(a) ->
+  (to_rep(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1) = to_rep(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f1))) and
+  (with_default__ok_record__rec_with_ok_discr__f3__pred(a) ->
+  (to_rep1(((a).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3) = to_rep1(((b).us_split_fields9).rec__with_default__ok_record__rec_with_ok_discr__f3)))))) ->
   (bool_eq12(a, b) = false))))
 
 logic value__size4 : int
@@ -1098,7 +1098,7 @@ function small_positive__ref___projection(a: small_positive__ref) : small_positi
 
 type tsmall_naturalB
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -2010,7 +2010,159 @@ axiom first__def_axiom : (first = c)
 
 axiom first__def_axiom1 : (first1 = c)
 
+logic no_def__split_fields : scalar_with_default
+
+logic no_def__split_fields1 : tscalar_with_defaultB
+
+logic no_def__split_discrs : bool
+
+logic simple__split_fields : scalar_with_default
+
+logic simple__split_fields1 : integer
+
+logic w_disc__split_fields : scalar_with_default
+
+logic w_disc__split_fields1 : tscalar_with_defaultB
+
+logic w_d_di__split_fields : scalar_with_default
+
+logic w_d_di__split_fields1 : tscalar_with_defaultB
+
+logic w_d_di__split_discrs : bool
+
+logic w_o_di__split_fields : scalar_with_default
+
+logic w_o_di__split_fields1 : tscalar_with_defaultB
+
+logic w_o_di__split_discrs : bool
+
+logic empty__split_fields : (int,tscalar_with_defaultB) farray
+
+logic empty__split_fields1 : t
+
+logic empty__split_discrs : small_natural
+
+logic wrap__split_fields : bool
+
+logic wrap__split_fields1 : scalar_with_default
+
+logic wrap__split_fields2 : tscalar_with_defaultB
+
+logic wrap__split_fields3 : bool
+
+logic wrap__split_discrs : bool
+
+logic temp___d_618 : int
+
+logic temp___b_619 : bool
+
+logic us : int
+
+logic o : int
+
+logic o1 : tscalar_with_defaultB
+
+logic o2 : scalar_with_default
+
+logic o3 : tscalar_with_defaultB
+
+logic with_default__ok_record__no_def__assume : bool
+
+logic with_default__ok_record__no_def__assume1 : scalar_with_default
+
+logic with_default__ok_record__no_def__assume2 : tscalar_with_defaultB
+
+logic with_default__ok_record__no_def__assume3 : bool
+
+logic us1 : int
+
+logic us2 : int
+
+logic temp___622 : bool
+
+logic temp___6221 : scalar_with_default
+
+logic temp___6222 : tscalar_with_defaultB
+
+logic us3 : int
+
+logic temp___625 : bool
+
+logic temp___6251 : scalar_with_default
+
+logic temp___6252 : tscalar_with_defaultB
+
+logic temp___6253 : bool
+
+logic us4 : int
+
+logic us5 : int
+
+logic temp___629 : bool
+
+logic temp___6291 : scalar_with_default
+
+logic temp___6292 : tscalar_with_defaultB
+
+logic temp___6293 : bool
+
+logic us6 : int
+
+logic us7 : int
+
+logic temp___632 : small_natural
+
+logic temp___6321 : (int,tscalar_with_defaultB) farray
+
+logic temp___6322 : t
+
+logic temp___6323 : bool
+
+logic o4 : int
+
+logic us8 : int
+
+logic temp___636 : bool
+
+logic temp___6361 : bool
+
+logic temp___6362 : scalar_with_default
+
+logic temp___6363 : tscalar_with_defaultB
+
+logic temp___6364 : bool
+
+logic temp___6365 : bool
+
+logic temp___638 : bool
+
+logic temp___6381 : scalar_with_default
+
+logic temp___6382 : tscalar_with_defaultB
+
+logic temp___6383 : bool
+
+logic us9 : int
+
+logic us10 : int
+
+logic result : scalar_with_default
+
+logic result1 : tscalar_with_defaultB
+
+logic no_def__split_fields2 : scalar_with_default
+
+logic no_def__split_fields3 : tscalar_with_defaultB
+
+logic result2 : bool
+
+logic no_def__split_discrs1 : bool
+
+logic result3 : bool
+
+axiom H : in_range1(c)
+
+axiom H1 : in_range5(temp___d_618)
+
  (* File "with_default.adb", line 45, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___d_618:int. (in_range1(c) -> (in_range5(temp___d_618) ->
-  dynamic_property(first, 2147483647, c))))
+goal WP_parameter_def : dynamic_property(first, 2147483647, c)

@@ -48,6 +48,8 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
+(declare-const o5 Int)
 (declare-const result Bool)
 (assert (in_range1 test))
 (assert (in_range1 total))

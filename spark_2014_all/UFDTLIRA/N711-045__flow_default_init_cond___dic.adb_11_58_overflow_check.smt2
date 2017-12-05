@@ -70,6 +70,7 @@
 (declare-const r us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const o Int)
 (assert (not (in_range (+ (to_rep (rec__dic__pr_record_t__x (us_split_fields1 r))) (to_rep (rec__dic__pr_record_t__y (us_split_fields1 r)))))))
 (check-sat)
 (exit)

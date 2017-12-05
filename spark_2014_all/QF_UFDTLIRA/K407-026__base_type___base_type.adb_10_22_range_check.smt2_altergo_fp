@@ -140,6 +140,13 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : ((x <= 5) and (y <= 4))
+
  (* File "base_type.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> (((x <= 5) and
-  (y <= 4)) -> in_range1(((x + y) + 1)))))
+goal WP_parameter_def : in_range1(((x + y) + 1))

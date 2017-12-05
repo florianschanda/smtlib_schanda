@@ -367,38 +367,101 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom null_pair__def_axiom : ((null_pair = of_rep(0)) and
   (null_pair1 = of_rep(0)))
 
+logic records__is_valid_c__result : bool
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic temp___279 : unsigned_byte
+
+logic temp___2791 : unsigned_byte
+
+logic o4 : unsigned_byte
+
+logic o5 : unsigned_byte
+
+logic o6 : unsigned_byte
+
+logic o7 : unsigned_byte
+
+logic o8 : unsigned_byte
+
+logic o9 : unsigned_byte
+
+logic o10 : bool
+
+logic result : bool
+
+logic records__is_valid_c__result1 : bool
+
+logic records__is_valid_c__result2 : bool
+
+logic records__is_valid_c__result3 : bool
+
+logic records__is_valid_c__result4 : bool
+
+logic records__is_valid_c__result5 : bool
+
+logic result1 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___279 = o2)
+
+axiom H5 : (temp___2791 = o3)
+
+axiom H6 : ((temp___279 = null_pair) and (temp___2791 = null_pair1))
+
+axiom H7 : (records__is_valid_c__result1 = records__is_valid_c__result2)
+
+axiom H8 : (records__is_valid_c__result3 = records__is_valid_c__result1)
+
+axiom H9 : ((a = true) -> (o10 = true))
+
+axiom H10 : ((not (a = true)) -> (to_rep(o4) = 0))
+
+axiom H11 : ((not (a = true)) -> (to_rep(o5) = 1))
+
+axiom H12 : ((not (a = true)) -> (o5 = o6))
+
+axiom H13 : ((not (a = true)) -> (o4 = o7))
+
+axiom H14 : ((not (a = true)) -> (o8 = o6))
+
+axiom H15 : ((not (a = true)) -> (o9 = o7))
+
+axiom H16 : ((not (a = true)) -> (o10 = bool_eq3({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } }, { us_split_fields1 = { rec__records_prooffuncs__pair__a = o8;
+  rec__records_prooffuncs__pair__b = o9 } })))
+
+axiom H17 : (result = records__is_valid_c__result)
+
+axiom H18 : (records__is_valid_c__result1 = o10)
+
+axiom H19 : (records__is_valid_c__result4 = records__is_valid_c__result2)
+
+axiom H20 : (records__is_valid_c__result5 = records__is_valid_c__result3)
+
+axiom H21 : (result1 = records__is_valid_c__result4)
+
+axiom H22 : (records__is_valid_c__result4 = true)
+
+axiom H23 : (not (a = true))
+
  (* File "records.adb", line 118, characters 0-0 *)
-goal WP_parameter_def :
-  (forall records__is_valid_c__result:bool. forall o:unsigned_byte.
-  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
-  forall temp___279:unsigned_byte. forall temp___2791:unsigned_byte.
-  forall o4:unsigned_byte. forall o5:unsigned_byte. forall o6:unsigned_byte.
-  forall o7:unsigned_byte. forall o8:unsigned_byte. forall o9:unsigned_byte.
-  forall o10:bool. forall result:bool.
-  forall records__is_valid_c__result1:bool.
-  forall records__is_valid_c__result2:bool.
-  forall records__is_valid_c__result3:bool.
-  forall records__is_valid_c__result4:bool.
-  forall records__is_valid_c__result5:bool.
-  (forall result1:bool. ((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and
-  ((o1 = o2) and (o = o3)))) and ((temp___279 = o2) and
-  (temp___2791 = o3))) and ((temp___279 = null_pair) and
-  (temp___2791 = null_pair1))) and
-  (((((records__is_valid_c__result1 = records__is_valid_c__result2) and
-  (records__is_valid_c__result3 = records__is_valid_c__result1)) and
-  ((((a = true) and (o10 = true)) or ((not (a = true)) and
-  ((((to_rep(o4) = 0) and ((to_rep(o5) = 1) and ((o5 = o6) and
-  (o4 = o7)))) and ((o8 = o6) and (o9 = o7))) and (o10 = bool_eq3({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
-  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = o8; rec__records_prooffuncs__pair__b =
-  o9 } }))))) and ((result = records__is_valid_c__result) and
-  (records__is_valid_c__result1 = o10)))) and
-  ((records__is_valid_c__result4 = records__is_valid_c__result2) and
-  (records__is_valid_c__result5 = records__is_valid_c__result3))) and
-  (result1 = records__is_valid_c__result4))) ->
-  ((records__is_valid_c__result4 = true) -> ((not (a = true)) -> (bool_eq3({
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = a1;
-  rec__records_prooffuncs__pair__b = a2 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = null_pair;
-  rec__records_prooffuncs__pair__b = null_pair1 } }) = true))))))
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = a1; rec__records_prooffuncs__pair__b =
+  a2 } }, { us_split_fields1 = { rec__records_prooffuncs__pair__a =
+  null_pair; rec__records_prooffuncs__pair__b = null_pair1 } }) = true)

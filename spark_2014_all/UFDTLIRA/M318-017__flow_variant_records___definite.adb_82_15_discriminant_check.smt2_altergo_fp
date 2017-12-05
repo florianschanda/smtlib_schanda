@@ -238,19 +238,19 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  ((((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
-  (to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a))) and
-  (definite__t__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
-  (definite__t__x__pred(a) ->
-  (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not ((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
-  (to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
+  (((to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a)) and
   (definite__t__b__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
   (definite__t__x__pred(a) ->
   (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x)))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__definite__t__d) = to_rep1(((b).us_split_discrs1).rec__definite__t__d)) and
+  (((to_rep(((a).us_split_fields1).rec__definite__t__a) = to_rep(((b).us_split_fields1).rec__definite__t__a)) and
+  (definite__t__b__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__definite__t__b) = to_rep(((b).us_split_fields1).rec__definite__t__b)))) and
+  (definite__t__x__pred(a) ->
+  (((a).us_split_fields1).rec__definite__t__x = ((b).us_split_fields1).rec__definite__t__x))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -646,16 +646,105 @@ type t17b__ref = { t17b__content : us_rep
 
 function t17b__ref___projection(a: t17b__ref) : us_rep = (a).t17b__content
 
+logic g__split_discrs : status
+
+logic o : status
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : status
+
+logic temp___180 : status
+
+logic temp___1801 : natural
+
+logic temp___1802 : natural
+
+logic temp___1803 : bool
+
+logic temp___1804 : bool
+
+logic o7 : status
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : natural
+
+logic o11 : bool
+
+logic o12 : status
+
+logic temp___183 : status
+
+logic temp___1831 : natural
+
+logic temp___1832 : natural
+
+logic temp___1833 : bool
+
+logic temp___1834 : bool
+
+logic o13 : status
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : bool
+
+logic o18 : status
+
+logic temp___186 : status
+
+logic temp___1861 : natural
+
+logic temp___1862 : natural
+
+logic temp___1863 : bool
+
+logic temp___1864 : bool
+
+axiom H : (g__attr__constrained = false)
+
+axiom H1 : (not (to_rep1(g__split_discrs) = 0))
+
+axiom H2 : (to_rep1(g__split_discrs) = 1)
+
+axiom H3 : (to_rep(o8) = 0)
+
+axiom H4 : (o8 = o9)
+
+axiom H5 : (dummy = o10)
+
+axiom H6 : (of_int(0) = o11)
+
+axiom H7 : (to_rep1(o7) = 1)
+
+axiom H8 : (o7 = o12)
+
+axiom H9 : (temp___183 = o12)
+
+axiom H10 : (temp___1831 = o9)
+
+axiom H11 : (temp___1832 = o10)
+
+axiom H12 : (temp___1833 = o11)
+
+axiom H13 : (true = temp___1834)
+
+axiom H14 : (g__attr__constrained = true)
+
  (* File "definite.adb", line 58, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g__split_discrs:status. forall o:status. forall o1:natural.
-  forall o2:natural. forall o3:natural. forall o4:bool. forall o5:status.
-  forall temp___183:status. forall temp___1831:natural.
-  forall temp___1832:natural. forall temp___1833:bool.
-  forall temp___1834:bool. ((g__attr__constrained = false) ->
-  ((not (to_rep1(g__split_discrs) = 0)) -> ((to_rep1(g__split_discrs) = 1) ->
-  ((((to_rep(o1) = 0) and ((o1 = o2) and ((dummy = o3) and
-  (of_int(0) = o4)))) and (((to_rep1(o) = 1) and (o = o5)) and
-  ((temp___183 = o5) and (((temp___1831 = o2) and ((temp___1832 = o3) and
-  (temp___1833 = o4))) and (true = temp___1834))))) ->
-  ((g__attr__constrained = true) -> (temp___183 = g__split_discrs)))))))
+goal WP_parameter_def : (temp___183 = g__split_discrs)

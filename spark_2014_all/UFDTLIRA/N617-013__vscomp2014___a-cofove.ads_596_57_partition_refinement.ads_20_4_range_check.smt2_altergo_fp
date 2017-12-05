@@ -135,7 +135,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index
 
-predicate in_range2(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range2(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq3 : int, int -> bool
 
@@ -618,11 +618,11 @@ logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep1. forall b:us_rep1 [user_eq4(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq9(get(a, n), get(b, n)) = true))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq9(get(a, n), get(b, n)) = true)))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length1(a), length1(b)), false,
   false)))))
@@ -642,7 +642,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq10 : int, int -> bool
 
@@ -668,16 +668,25 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep1 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range1(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range1(length1(container))))
 
 axiom get__post_axiom : true
 
- (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. (in_range2(index) ->
-  (in_range1(count) -> (((0 <= index) and (index <= ((-1) + length1(model__({
+logic container__split_fields : us_main_type
+
+logic o : int
+
+axiom H : in_range2(index)
+
+axiom H1 : in_range1(count)
+
+axiom H2 : ((0 <= index) and (index <= ((- 1) + length1(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__partition_refinement__partitions__vector = container__split_fields }
-  }))))) -> in_range1((index - 0))))))
+  })))))
+
+ (* File "a-cofove.ads", line 549, characters 0-0 *)
+goal WP_parameter_def : in_range1((index - 0))

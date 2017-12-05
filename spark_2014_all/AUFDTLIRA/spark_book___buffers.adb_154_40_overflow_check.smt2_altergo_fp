@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -582,68 +582,179 @@ axiom def_axiom :
   (forall temp___280:int. (((temp___275(temp___277, temp___278,
   temp___279)).elts1[temp___280]) = of_rep(temp___277)))))
 
+logic destination : (int,character) farray
+
+logic characters_to_copy : int
+
+logic i : int
+
+logic temp___282 : (int,character) farray
+
+logic temp___2821 : t1
+
+logic temp___283 : (int,character) farray
+
+logic temp___2831 : t
+
+logic temp___284 : (int,character) farray
+
+logic temp___2841 : t
+
+logic o : (int,character) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___286 : int
+
+logic temp___285 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : character
+
+logic result : int
+
+logic characters_to_copy1 : int
+
+logic result1 : (int,character) farray
+
+logic destination1 : (int,character) farray
+
+logic result2 : int
+
+logic characters_to_copy2 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic characters_to_copy3 : int
+
+logic result5 : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(destination__first),
+  to_rep1(destination__last))
+
+axiom H1 : in_range5(point)
+
+axiom H2 : in_range4(length1)
+
+axiom H3 : ((0 <= 1024) -> in_range4(characters_to_copy))
+
+axiom H4 : (result = characters_to_copy)
+
+axiom H5 : (characters_to_copy1 = length1)
+
+axiom H6 : (to_rep1(first2((temp___275(32, to_rep1(destination__first),
+  to_rep1(destination__last))).rt1)) = to_rep1(destination__first))
+
+axiom H7 : (to_rep1(last2((temp___275(32, to_rep1(destination__first),
+  to_rep1(destination__last))).rt1)) = to_rep1(destination__last))
+
+axiom H8 : ({ elts1 = temp___282; rt1 = temp___2821 } = temp___275(32,
+  to_rep1(destination__first), to_rep1(destination__last)))
+
+axiom H9 : (temp___282 = temp___283)
+
+axiom H10 : (mk(to_rep1(first2(temp___2821)),
+  to_rep1(last2(temp___2821))) = temp___2831)
+
+axiom H11 : (((to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831))) ->
+  (((to_rep1(destination__first) <= to_rep1(destination__last)) ->
+  (((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1) = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))) and
+  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) ->
+  (((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831)))) ->
+  ((to_rep1(destination__first) <= to_rep1(destination__last)) ->
+  (0 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1)))))
+
+axiom H12 : ((temp___284 = temp___283) and (temp___2841 = temp___2831))
+
+axiom H13 : (o = slide(temp___284, to_rep1(first(temp___2841)),
+  to_rep1(destination__first)))
+
+axiom H14 : (result1 = destination)
+
+axiom H15 : (destination1 = o)
+
+axiom H16 : (((1024 - point) <  characters_to_copy1) ->
+  (result2 = characters_to_copy1))
+
+axiom H17 : (((1024 - point) <  characters_to_copy1) ->
+  (characters_to_copy2 = (1024 - point)))
+
+axiom H18 : ((not ((1024 - point) <  characters_to_copy1)) ->
+  (characters_to_copy2 = characters_to_copy1))
+
+axiom H19 : ((to_rep1(destination__first) <= to_rep1(destination__last)) ->
+  (o1 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1)))
+
+axiom H20 :
+  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) ->
+  (o1 = 0))
+
+axiom H21 : ((o2 = o1) and in_range1(o1))
+
+axiom H22 : (((o2 <  characters_to_copy2) -> (result3 = true)) and
+  ((not (o2 <  characters_to_copy2)) -> (result3 = false)))
+
+axiom H23 : ((result3 = true) ->
+  ((to_rep1(destination__first) <= to_rep1(destination__last)) ->
+  (o3 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))))
+
+axiom H24 : ((result3 = true) ->
+  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) ->
+  (o3 = 0)))
+
+axiom H25 : ((result3 = true) -> ((o4 = o3) and in_range4(o3)))
+
+axiom H26 : ((result3 = true) -> (result4 = characters_to_copy2))
+
+axiom H27 : ((result3 = true) -> (characters_to_copy3 = o4))
+
+axiom H28 : ((not (result3 = true)) ->
+  (characters_to_copy3 = characters_to_copy2))
+
+axiom H29 : (characters_to_copy3 = r22b)
+
+axiom H30 : in_range4(r22b)
+
+axiom H31 : (result5 = i)
+
+axiom H32 : (i1 = 1)
+
+axiom H33 : (1 <= i1)
+
+axiom H34 : (i1 <= r22b)
+
+axiom H35 : ((1 <= i2) and (i2 <= r22b))
+
+axiom H36 : ((temp___285 = (point + (i2 - 1))) and
+  in_range1((point + (i2 - 1))))
+
+axiom H37 : ((1 <= temp___285) and (temp___285 <= 1024))
+
+axiom H38 : (o5 = temp___285)
+
+axiom H39 : (o6 = (buffer[o5]))
+
+axiom H40 : (o7 = to_rep(o6))
+
+axiom H41 : (to_rep(o8) = o7)
+
  (* File "buffers.adb", line 118, characters 0-0 *)
-goal WP_parameter_def :
-  (forall destination:(int,character) farray. forall characters_to_copy:int.
-  forall i:int. forall temp___282:(int,character) farray.
-  forall temp___2821:t1. forall temp___283:(int,character) farray.
-  forall temp___2831:t. forall temp___284:(int,character) farray.
-  forall temp___2841:t. forall o:(int,character) farray. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall temp___285:int.
-  forall o5:int. forall o6:character. forall o7:int. forall o8:character.
-  forall result:int. forall characters_to_copy1:int.
-  forall result1:(int,character) farray.
-  forall destination1:(int,character) farray. forall result2:int.
-  forall characters_to_copy2:int. forall result3:bool. forall result4:int.
-  forall characters_to_copy3:int. forall result5:int. forall i1:int.
-  forall i2:int. (dynamic_property(1, 2147483647,
-  to_rep1(destination__first), to_rep1(destination__last)) ->
-  (in_range5(point) -> (in_range4(length1) -> (((0 <= 1024) ->
-  in_range4(characters_to_copy)) -> (((result = characters_to_copy) and
-  (characters_to_copy1 = length1)) -> (((((((to_rep1(first2((temp___275(32,
-  to_rep1(destination__first),
-  to_rep1(destination__last))).rt1)) = to_rep1(destination__first)) and
-  ((to_rep1(last2((temp___275(32, to_rep1(destination__first),
-  to_rep1(destination__last))).rt1)) = to_rep1(destination__last)) and ({
-  elts1 = temp___282; rt1 = temp___2821 } = temp___275(32,
-  to_rep1(destination__first), to_rep1(destination__last))))) and
-  ((temp___282 = temp___283) and (mk(to_rep1(first2(temp___2821)),
-  to_rep1(last2(temp___2821))) = temp___2831))) and
-  ((((to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831))) and
-  (((to_rep1(destination__first) <= to_rep1(destination__last)) and
-  (((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1) = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))) or
-  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) and
-  (((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831)))) and
-  (((to_rep1(destination__first) <= to_rep1(destination__last)) and
-  (0 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))) or
-  (not (to_rep1(destination__first) <= to_rep1(destination__last)))))) and
-  ((temp___284 = temp___283) and (temp___2841 = temp___2831)))) and
-  (o = slide(temp___284, to_rep1(first(temp___2841)),
-  to_rep1(destination__first)))) and ((result1 = destination) and
-  (destination1 = o))) -> (((((1024 - point) <  characters_to_copy1) and
-  ((result2 = characters_to_copy1) and
-  (characters_to_copy2 = (1024 - point)))) or
-  ((not ((1024 - point) <  characters_to_copy1)) and
-  (characters_to_copy2 = characters_to_copy1))) ->
-  (((((((to_rep1(destination__first) <= to_rep1(destination__last)) and
-  (o1 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))) or
-  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) and
-  (o1 = 0))) and ((o2 = o1) and in_range1(o1))) and
-  (((o2 <  characters_to_copy2) and (result3 = true)) or
-  ((not (o2 <  characters_to_copy2)) and (result3 = false)))) and
-  (((result3 = true) and
-  (((((to_rep1(destination__first) <= to_rep1(destination__last)) and
-  (o3 = ((to_rep1(destination__last) - to_rep1(destination__first)) + 1))) or
-  ((not (to_rep1(destination__first) <= to_rep1(destination__last))) and
-  (o3 = 0))) and ((o4 = o3) and in_range4(o3))) and
-  ((result4 = characters_to_copy2) and (characters_to_copy3 = o4)))) or
-  ((not (result3 = true)) and
-  (characters_to_copy3 = characters_to_copy2)))) ->
-  (((characters_to_copy3 = r22b) and in_range4(r22b)) -> (((result5 = i) and
-  (i1 = 1)) -> (((1 <= i1) and (i1 <= r22b)) -> (((1 <= i2) and
-  (i2 <= r22b)) -> (((((((temp___285 = (point + (i2 - 1))) and
-  in_range1((point + (i2 - 1)))) and (((1 <= temp___285) and
-  (temp___285 <= 1024)) and (o5 = temp___285))) and (o6 = (buffer[o5]))) and
-  (o7 = to_rep(o6))) and (to_rep(o8) = o7)) ->
-  in_range1((to_rep1(destination__first) + (i2 - 1)))))))))))))))))
+goal WP_parameter_def : in_range1((to_rep1(destination__first) + (i2 - 1)))

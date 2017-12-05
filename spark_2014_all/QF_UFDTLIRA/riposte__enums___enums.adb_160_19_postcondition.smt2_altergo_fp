@@ -165,24 +165,81 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : int
+
+logic enums__next_a__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic enums__next_a__result1 : int
+
+logic enums__next_a__result2 : int
+
+logic enums__next_a__result3 : int
+
+logic r3 : int
+
+logic enums__next_a__result4 : int
+
+logic r4 : int
+
+logic enums__next_a__result5 : int
+
+logic result3 : int
+
+axiom H : in_range2(a)
+
+axiom H1 : ((3 <= 5) -> in_range2(r))
+
+axiom H2 : ((a <  5) -> ((o = a) and (not (a = 8))))
+
+axiom H3 : ((a <  5) -> (o1 = (o + 1)))
+
+axiom H4 : ((a <  5) -> ((o2 = o1) and in_range2(o1)))
+
+axiom H5 : ((a <  5) -> (result = r))
+
+axiom H6 : ((a <  5) -> (r1 = o2))
+
+axiom H7 : ((not (a <  5)) -> (result1 = r))
+
+axiom H8 : ((not (a <  5)) -> (r2 = 3))
+
+axiom H9 : ((not (a <  5)) -> (r1 = r2))
+
+axiom H10 : (enums__next_a__result1 = enums__next_a__result2)
+
+axiom H11 : (enums__next_a__result3 = enums__next_a__result1)
+
+axiom H12 : (result2 = enums__next_a__result)
+
+axiom H13 : (enums__next_a__result1 = r1)
+
+axiom H14 : (enums__next_a__result4 = enums__next_a__result2)
+
+axiom H15 : (r3 = r1)
+
+axiom H16 : (enums__next_a__result5 = enums__next_a__result3)
+
+axiom H17 : (r4 = r1)
+
+axiom H18 : (result3 = enums__next_a__result4)
+
+axiom H19 : (a = 3)
+
  (* File "enums.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall enums__next_a__result:int. forall o:int.
-  forall o1:int. forall o2:int. forall result:int. forall r1:int.
-  forall result1:int. forall r2:int. forall result2:int.
-  forall enums__next_a__result1:int. forall enums__next_a__result2:int.
-  forall enums__next_a__result3:int. forall r3:int.
-  forall enums__next_a__result4:int. forall r4:int.
-  forall enums__next_a__result5:int.
-  (forall result3:int. ((in_range2(a) and (((((3 <= 5) -> in_range2(r)) and
-  ((((a <  5) and (((((o = a) and (not (a = 8))) and (o1 = (o + 1))) and
-  ((o2 = o1) and in_range2(o1))) and ((result = r) and (r1 = o2)))) or
-  ((not (a <  5)) and (((result1 = r) and (r2 = 3)) and (r1 = r2)))) and
-  (((enums__next_a__result1 = enums__next_a__result2) and
-  (enums__next_a__result3 = enums__next_a__result1)) and
-  ((result2 = enums__next_a__result) and
-  (enums__next_a__result1 = r1))))) and
-  (((enums__next_a__result4 = enums__next_a__result2) and (r3 = r1)) and
-  ((enums__next_a__result5 = enums__next_a__result3) and (r4 = r1)))) and
-  (result3 = enums__next_a__result4))) -> ((a = 3) ->
-  (enums__next_a__result4 = 4)))))
+goal WP_parameter_def : (enums__next_a__result4 = 4)

@@ -167,6 +167,7 @@ axiom object__alignment_axiom1 :
 
 logic user_eq1 : (int,r) farray, (int,r) farray -> bool
 
+axiom H : (0 <= value__component__size)
+
  (* File "component_size_attribute.adb", line 13, characters 0-0 *)
-goal WP_parameter_def : ((0 <= value__component__size) ->
-  (value__component__size <  0))
+goal WP_parameter_def : (value__component__size <  0)

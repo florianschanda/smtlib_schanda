@@ -637,5 +637,35 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range4(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
+logic data : (int,status) farray
+
+logic o : int
+
+logic o1 : status
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : int
+
+logic o5 : (int,status) farray
+
+logic data1 : (int,status) farray
+
+logic result : bool
+
+logic result1 : (int,status) farray
+
+logic data2 : (int,status) farray
+
+logic data3 : (int,status) farray
+
+logic data4 : (int,status) farray
+
+axiom H : in_range(res)
+
+axiom H1 : (not (res = 0))
+
  (* File "simple_allocator.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (in_range(res) -> ((not (res = 0)) -> (1 <= res)))
+goal WP_parameter_def : (1 <= res)

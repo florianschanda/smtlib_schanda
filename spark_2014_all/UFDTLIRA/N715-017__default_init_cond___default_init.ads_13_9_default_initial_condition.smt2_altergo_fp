@@ -204,8 +204,12 @@ axiom glob1_ok__def_axiom :
   us_split_fields1 = { rec__default_init__glob1__f = x } },
   default_init__n) = true) <-> (to_rep(x) = default_init__n))))
 
+logic n : int
+
+logic temp___285 : natural
+
+axiom H : (to_rep(temp___285) = 0)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall temp___285:natural. ((to_rep(temp___285) = 0) ->
-  (glob1_ok({ us_split_fields1 = { rec__default_init__glob1__f = temp___285 }
-  }, n) = true)))
+goal WP_parameter_def : (glob1_ok({ us_split_fields1 = {
+  rec__default_init__glob1__f = temp___285 } }, n) = true)

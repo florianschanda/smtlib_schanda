@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -274,17 +274,109 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic index : int
+
+logic utility__search_for_zero__result : int
+
+logic temp___151 : int
+
+logic temp___152 : int
+
+logic temp___150 : int
+
+logic j : int
+
+logic utility__search_for_zero__result1 : int
+
+logic result : int
+
+logic index1 : int
+
+logic result1 : int
+
+logic utility__search_for_zero__result2 : int
+
+logic index2 : int
+
+logic utility__search_for_zero__result3 : int
+
+logic result2 : int
+
+logic index3 : int
+
+logic result3 : int
+
+logic utility__search_for_zero__result4 : int
+
+logic index4 : int
+
+logic utility__search_for_zero__result5 : int
+
+logic index5 : int
+
+logic utility__search_for_zero__result6 : int
+
+logic index6 : int
+
+logic utility__search_for_zero__result7 : int
+
+logic index7 : int
+
+logic utility__search_for_zero__result8 : int
+
+logic index8 : int
+
+logic utility__search_for_zero__result9 : int
+
+logic index9 : int
+
+logic utility__search_for_zero__result10 : int
+
+logic index10 : int
+
+logic utility__search_for_zero__result11 : int
+
+logic index11 : int
+
+logic utility__search_for_zero__result12 : int
+
+logic index12 : int
+
+logic utility__search_for_zero__result13 : int
+
+logic index13 : int
+
+logic utility__search_for_zero__result14 : int
+
+logic index14 : int
+
+logic utility__search_for_zero__result15 : int
+
+logic index15 : int
+
+logic utility__search_for_zero__result16 : int
+
+axiom H :
+  (exists index16:int. (((0 <= index16) and (index16 <= 1023)) and
+  (to_rep((values[index16])) = 0)))
+
+axiom H1 : (result = index)
+
+axiom H2 : (index1 = 0)
+
+axiom H3 : (0 <= index1)
+
+axiom H4 : (index1 <= 1023)
+
+axiom H5 : (not (to_rep((values[index1])) = 0))
+
+axiom H6 :
+  (utility__search_for_zero__result2 = utility__search_for_zero__result)
+
+axiom H7 :
+  (utility__search_for_zero__result2 = utility__search_for_zero__result1)
+
  (* File "utility.ads", line 6, characters 0-0 *)
 goal WP_parameter_def :
-  (forall index:int. forall utility__search_for_zero__result:int.
-  forall utility__search_for_zero__result1:int. forall result:int.
-  forall index1:int. forall utility__search_for_zero__result2:int.
-  ((exists index2:int. (((0 <= index2) and (index2 <= 1023)) and
-   (to_rep((values[index2])) = 0))) ->
-  ((({ int__content = result } = { int__content = index }) and
-  (index1 = 0)) -> (((0 <= index1) and (index1 <= 1023)) ->
-  (((not (to_rep((values[index1])) = 0)) and
-  ((utility__search_for_zero__result2 = utility__search_for_zero__result) and
-  (utility__search_for_zero__result2 = utility__search_for_zero__result1))) ->
-  (exists j:int. ((((index1 + 1) <= j) and (j <= 1023)) and
-  (to_rep((values[j])) = 0))))))))
+  (exists j1:int. ((((index1 + 1) <= j1) and (j1 <= 1023)) and
+  (to_rep((values[j1])) = 0)))

@@ -216,8 +216,15 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ca : (int,positive) farray
+
+logic result : (int,positive) farray
+
+logic ca1 : (int,positive) farray
+
+axiom H : (result = ca)
+
+axiom H1 : (ca1 = ca)
+
  (* File "alignment_attribute.adb", line 90, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ca:(int,positive) farray. forall result:(int,positive) farray.
-  forall ca1:(int,positive) farray. (((result = ca) and (ca1 = ca)) ->
-  (0 <= 4)))
+goal WP_parameter_def : (0 <= 4)

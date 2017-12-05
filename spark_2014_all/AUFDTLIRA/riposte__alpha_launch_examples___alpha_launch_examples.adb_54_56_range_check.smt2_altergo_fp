@@ -254,7 +254,33 @@ logic v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic alpha_launch_examples__example_5__result : bool
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+logic alpha_launch_examples__example_5__result1 : bool
+
+logic alpha_launch_examples__example_5__result2 : bool
+
+logic alpha_launch_examples__example_5__result3 : bool
+
+logic alpha_launch_examples__example_5__result4 : bool
+
+logic alpha_launch_examples__example_5__result5 : bool
+
+axiom H : in_range1(v1)
+
+axiom H1 : in_range1(v2)
+
+axiom H2 : (0 <= i)
+
+axiom H3 : (i <= 3)
+
  (* File "alpha_launch_examples.adb", line 46, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (in_range1(v1) -> (in_range1(v2) -> (((0 <= i) and
-  (i <= 3)) -> (not (i = 4))))))
+goal WP_parameter_def : (not (i = 4))

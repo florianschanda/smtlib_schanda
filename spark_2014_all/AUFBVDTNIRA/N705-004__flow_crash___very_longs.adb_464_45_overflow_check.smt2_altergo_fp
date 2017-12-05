@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -966,7 +966,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -2008,23 +2008,317 @@ logic attr__ATTRIBUTE_ADDRESS11 : int
 
 logic attr__ATTRIBUTE_ADDRESS12 : int
 
- (* File "very_longs.adb", line 418, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall u__split_fields:(int,octet) farray.
-  forall u__split_fields1:t3. forall v__split_fields:(int,octet) farray.
-  forall v__split_fields1:t4. forall j:int. forall q_hat:t1.
-  forall current_borrow:t1. forall carry:t1. forall divisor_index:int.
-  forall o:int. forall o1:octet. forall o2:t. forall o3:t1. forall o4:t1.
-  forall o5:t1. forall o6:t1. forall result:t1. forall carry1:t1.
-  forall result1:t1. forall current_borrow1:t1. forall result2:int.
-  forall divisor_index1:int. forall u__split_fields2:t3. forall carry2:t1.
-  forall product:t1. forall temporary_digit:t1. forall divisor_index2:int.
-  forall result3:t1. forall product1:t1. forall result4:t1. forall carry3:t1.
-  forall result5:t1. forall temporary_digit1:t1. ((dynamic_property1(1,
-  to_rep1(divisor), to_rep2(first(divisor2)), to_rep2(last(divisor2))) and
-  ((to_rep2(first(divisor2)) = 1) and
-  (to_rep2(last(divisor2)) = to_rep1(divisor)))) -> (dynamic_property2(1,
-  last2, n) -> (((((2 * to_rep1(divisor)) + 1) = to_rep1(((to_base({
+logic n : int
+
+logic u__split_fields : (int,octet) farray
+
+logic u__split_fields1 : t3
+
+logic v__split_fields : (int,octet) farray
+
+logic v__split_fields1 : t4
+
+logic j : int
+
+logic q_hat : t1
+
+logic current_borrow : t1
+
+logic carry : t1
+
+logic product : t1
+
+logic temporary_digit : t1
+
+logic future_borrow : t1
+
+logic divisor_index : int
+
+logic temp___1320 : t1
+
+logic temp___1319 : t1
+
+logic temp___1318 : t1
+
+logic temp___1317 : t1
+
+logic temp___1314 : digit_index_type
+
+logic temp___13141 : (int,octet) farray
+
+logic temp___13142 : t3
+
+logic temp___1313 : t1
+
+logic o : int
+
+logic o1 : octet
+
+logic o2 : t
+
+logic o3 : t1
+
+logic o4 : t1
+
+logic o5 : t1
+
+logic o6 : t1
+
+logic o7 : int
+
+logic temp___1306 : int
+
+logic o8 : int
+
+logic o9 : octet
+
+logic o10 : t
+
+logic o11 : t1
+
+logic o12 : int
+
+logic temp___1310 : int
+
+logic o13 : int
+
+logic temp___1308 : int
+
+logic o14 : int
+
+logic o15 : octet
+
+logic o16 : t
+
+logic o17 : t1
+
+logic o18 : t1
+
+logic o19 : t1
+
+logic o20 : t1
+
+logic o21 : t1
+
+logic o22 : t
+
+logic o23 : octet
+
+logic o24 : int
+
+logic o25 : (int,octet) farray
+
+logic o26 : (int,octet) farray
+
+logic o27 : t3
+
+logic o28 : (int,octet) farray
+
+logic o29 : t3
+
+logic temp___1312 : digit_index_type
+
+logic temp___13121 : (int,octet) farray
+
+logic temp___13122 : t3
+
+logic o30 : int
+
+logic temp___1324 : int
+
+logic o31 : int
+
+logic o32 : octet
+
+logic o33 : t
+
+logic o34 : t1
+
+logic o35 : int
+
+logic temp___1328 : int
+
+logic o36 : int
+
+logic temp___1326 : int
+
+logic o37 : int
+
+logic o38 : octet
+
+logic o39 : t
+
+logic o40 : t1
+
+logic o41 : t1
+
+logic o42 : t1
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic o45 : t
+
+logic o46 : octet
+
+logic u__split_fields2 : (int,octet) farray
+
+logic u__split_fields3 : t3
+
+logic product1 : t1
+
+logic temporary_digit1 : t1
+
+logic future_borrow1 : t1
+
+logic result : t1
+
+logic carry1 : t1
+
+logic result1 : t1
+
+logic current_borrow1 : t1
+
+logic result2 : int
+
+logic divisor_index1 : int
+
+logic u__split_fields4 : (int,octet) farray
+
+logic u__split_fields5 : t3
+
+logic current_borrow2 : t1
+
+logic carry2 : t1
+
+logic product2 : t1
+
+logic temporary_digit2 : t1
+
+logic future_borrow2 : t1
+
+logic divisor_index2 : int
+
+logic result3 : t1
+
+logic product3 : t1
+
+logic result4 : t1
+
+logic carry3 : t1
+
+logic result5 : t1
+
+logic temporary_digit3 : t1
+
+logic result6 : bool
+
+logic result7 : t1
+
+logic future_borrow3 : t1
+
+logic result8 : t1
+
+logic future_borrow4 : t1
+
+logic result9 : (int,octet) farray
+
+logic result10 : t3
+
+logic u__split_fields6 : (int,octet) farray
+
+logic u__split_fields7 : t3
+
+logic result11 : t1
+
+logic current_borrow3 : t1
+
+logic u__split_fields8 : (int,octet) farray
+
+logic u__split_fields9 : t3
+
+logic current_borrow4 : t1
+
+logic carry4 : t1
+
+logic product4 : t1
+
+logic temporary_digit4 : t1
+
+logic future_borrow5 : t1
+
+logic divisor_index3 : int
+
+logic u__split_fields10 : (int,octet) farray
+
+logic u__split_fields11 : t3
+
+logic current_borrow5 : t1
+
+logic carry5 : t1
+
+logic product5 : t1
+
+logic temporary_digit5 : t1
+
+logic future_borrow6 : t1
+
+logic divisor_index4 : int
+
+logic u__split_fields12 : (int,octet) farray
+
+logic u__split_fields13 : t3
+
+logic current_borrow6 : t1
+
+logic carry6 : t1
+
+logic product6 : t1
+
+logic temporary_digit6 : t1
+
+logic future_borrow7 : t1
+
+logic divisor_index5 : int
+
+logic u__split_fields14 : (int,octet) farray
+
+logic u__split_fields15 : t3
+
+logic current_borrow7 : t1
+
+logic carry7 : t1
+
+logic product7 : t1
+
+logic temporary_digit7 : t1
+
+logic future_borrow8 : t1
+
+logic divisor_index6 : int
+
+logic result12 : bool
+
+logic result13 : t1
+
+logic future_borrow9 : t1
+
+logic result14 : t1
+
+logic future_borrow10 : t1
+
+logic future_borrow11 : t1
+
+logic future_borrow12 : t1
+
+axiom H : (dynamic_property1(1, to_rep1(divisor), to_rep2(first(divisor2)),
+  to_rep2(last(divisor2))) and ((to_rep2(first(divisor2)) = 1) and
+  (to_rep2(last(divisor2)) = to_rep1(divisor))))
+
+axiom H1 : dynamic_property2(1, last2, n)
+
+axiom H2 : ((((2 * to_rep1(divisor)) + 1) = to_rep1(((to_base({
   us_split_discrs2 = { rec__very_longs__very_long__octet_length =
   u__split_discrs }; us_split_fields3 = {
   rec__very_longs__very_long__long_digits1 = { elts1 = u__split_fields; rt1 =
@@ -2033,8 +2327,9 @@ goal WP_parameter_def :
   (dynamic_property4(1, ((2 * to_rep1(divisor)) + 1),
   to_rep2(first2(u__split_fields1)), to_rep2(last3(u__split_fields1))) and
   ((to_rep2(first2(u__split_fields1)) = 1) and
-  (to_rep2(last3(u__split_fields1)) = ((2 * to_rep1(divisor)) + 1))))) ->
-  (((to_rep1(divisor) = to_rep1(((to_base1({ us_split_discrs3 = {
+  (to_rep2(last3(u__split_fields1)) = ((2 * to_rep1(divisor)) + 1)))))
+
+axiom H3 : ((to_rep1(divisor) = to_rep1(((to_base1({ us_split_discrs3 = {
   rec__very_longs__very_long__octet_length = v__split_discrs };
   us_split_fields5 = { rec__very_longs__very_long__long_digits2 = { elts2 =
   v__split_fields; rt2 = v__split_fields1 } }
@@ -2042,25 +2337,78 @@ goal WP_parameter_def :
   (dynamic_property6(1, to_rep1(divisor), to_rep2(first4(v__split_fields1)),
   to_rep2(last5(v__split_fields1))) and
   ((to_rep2(first4(v__split_fields1)) = 1) and
-  (to_rep2(last5(v__split_fields1)) = to_rep1(divisor))))) ->
-  (in_range2(j) -> (((result = carry) and (carry1 = of_int1(0))) ->
-  (((result1 = current_borrow) and (current_borrow1 = of_int1(0))) ->
-  (((n = r132b) and dynamic_property2(1, last2, r132b)) ->
-  (((result2 = divisor_index) and (divisor_index1 = 1)) ->
-  (((1 <= divisor_index1) and (divisor_index1 <= r132b)) ->
-  (((dynamic_property4(1, ((2 * to_rep1(divisor)) + 1),
-  to_rep2(first2(u__split_fields2)), to_rep2(last3(u__split_fields2))) and
-  ((to_rep2(first2(u__split_fields2)) = 1) and
-  (to_rep2(last3(u__split_fields2)) = ((2 * to_rep1(divisor)) + 1)))) and
-  ((1 <= divisor_index2) and (divisor_index2 <= r132b))) ->
-  ((((((((((to_rep2(first4(v__split_fields1)) <= divisor_index2) and
-  (divisor_index2 <= to_rep2(last5(v__split_fields1)))) and
-  (o = divisor_index2)) and (o1 = (v__split_fields[o]))) and
-  (o2 = to_rep(o1))) and (o3 = toBig(o2))) and (o4 = mul1(q_hat, o3))) and
-  (o5 = add1(o4, carry2))) and ((result3 = product) and (product1 = o5))) ->
-  ((((o6 = shift_right(product1, 8)) and (((8 <  65536) and
-  (o6 = udiv1(product1, lsl_bv1(of_int1(1), of_int1(8))))) or
-  ((not (8 <  65536)) and (o6 = udiv1(product1, of_int1(0)))))) and
-  ((result4 = carry2) and (carry3 = o6))) ->
-  (((result5 = temporary_digit) and (temporary_digit1 = bw_and1(product1,
-  of_int1(255)))) -> in_range1((j + divisor_index2)))))))))))))))))
+  (to_rep2(last5(v__split_fields1)) = to_rep1(divisor)))))
+
+axiom H4 : in_range2(j)
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : (result = carry)
+
+axiom H12 : (carry1 = of_int1(0))
+
+axiom H13 : (result1 = current_borrow)
+
+axiom H14 : (current_borrow1 = of_int1(0))
+
+axiom H15 : (n = r132b)
+
+axiom H16 : dynamic_property2(1, last2, r132b)
+
+axiom H17 : (result2 = divisor_index)
+
+axiom H18 : (divisor_index1 = 1)
+
+axiom H19 : (1 <= divisor_index1)
+
+axiom H20 : (divisor_index1 <= r132b)
+
+axiom H21 : ((dynamic_property4(1, ((2 * to_rep1(divisor)) + 1),
+  to_rep2(first2(u__split_fields5)), to_rep2(last3(u__split_fields5))) and
+  ((to_rep2(first2(u__split_fields5)) = 1) and
+  (to_rep2(last3(u__split_fields5)) = ((2 * to_rep1(divisor)) + 1)))) and
+  ((1 <= divisor_index2) and (divisor_index2 <= r132b)))
+
+axiom H22 : ((to_rep2(first4(v__split_fields1)) <= divisor_index2) and
+  (divisor_index2 <= to_rep2(last5(v__split_fields1))))
+
+axiom H23 : (o = divisor_index2)
+
+axiom H24 : (o1 = (v__split_fields[o]))
+
+axiom H25 : (o2 = to_rep(o1))
+
+axiom H26 : (o3 = toBig(o2))
+
+axiom H27 : (o4 = mul1(q_hat, o3))
+
+axiom H28 : (o5 = add1(o4, carry2))
+
+axiom H29 : (result3 = product2)
+
+axiom H30 : (product3 = o5)
+
+axiom H31 : ((o6 = shift_right(product3, 8)) and (((8 <  65536) ->
+  (o6 = udiv1(product3, lsl_bv1(of_int1(1), of_int1(8))))) and
+  ((not (8 <  65536)) -> (o6 = udiv1(product3, of_int1(0))))))
+
+axiom H32 : (result4 = carry2)
+
+axiom H33 : (carry3 = o6)
+
+axiom H34 : (result5 = temporary_digit2)
+
+axiom H35 : (temporary_digit3 = bw_and1(product3, of_int1(255)))
+
+ (* File "very_longs.adb", line 418, characters 0-0 *)
+goal WP_parameter_def : in_range1((j + divisor_index2))

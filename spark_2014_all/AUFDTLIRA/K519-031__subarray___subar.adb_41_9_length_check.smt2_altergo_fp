@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type tone_twentyB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -639,27 +639,58 @@ axiom def_axiom :
   (forall temp___244:int. (((temp___239(temp___241, temp___242,
   temp___243)).elts1[temp___244]) = of_rep(temp___241)))))
 
+logic z : (int,integer) farray
+
+logic temp___246 : (int,integer) farray
+
+logic temp___2461 : t1
+
+logic temp___247 : (int,integer) farray
+
+logic temp___2471 : t
+
+logic o : (int,integer) farray
+
+logic o1 : t
+
+logic o2 : (int,integer) farray
+
+logic o3 : integer
+
+logic result : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+axiom H : in_range3(x)
+
+axiom H1 : ((1 <  x) and (x <  10))
+
+axiom H2 : (dynamic_property1((x - 1), (x + 1), to_rep1(z__first),
+  to_rep1(z__last)) and ((to_rep1(z__first) = (x - 1)) and
+  (to_rep1(z__last) = (x + 1))))
+
+axiom H3 : (to_rep1(first2((temp___239(0, (x - 1), (x + 1))).rt1)) = (x - 1))
+
+axiom H4 : (to_rep1(last2((temp___239(0, (x - 1), (x + 1))).rt1)) = (x + 1))
+
+axiom H5 : ({ elts1 = temp___246; rt1 = temp___2461 } = temp___239(0,
+  (x - 1), (x + 1)))
+
+axiom H6 : (((to_rep1(first2(temp___2461)) <= to_rep1(last2(temp___2461))) ->
+  ((((x - 1) <= (x + 1)) ->
+  (((to_rep1(last2(temp___2461)) - to_rep1(first2(temp___2461))) + 1) = (((x + 1) - (x - 1)) + 1))) and
+  ((not ((x - 1) <= (x + 1))) ->
+  (((to_rep1(last2(temp___2461)) - to_rep1(first2(temp___2461))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___2461)) <= to_rep1(last2(temp___2461)))) ->
+  (((x - 1) <= (x + 1)) -> (0 = (((x + 1) - (x - 1)) + 1)))))
+
+axiom H7 : (slide(temp___246, to_rep1(first2(temp___2461)),
+  (x - 1)) = temp___247)
+
+axiom H8 : (mk((x - 1), (x + 1)) = temp___2471)
+
  (* File "subar.adb", line 16, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___246:(int,integer) farray. forall temp___2461:t1.
-  forall temp___247:(int,integer) farray. forall temp___2471:t.
-  (in_range3(x) -> (((1 <  x) and (x <  10)) -> ((dynamic_property1((x - 1),
-  (x + 1), to_rep1(z__first), to_rep1(z__last)) and
-  ((to_rep1(z__first) = (x - 1)) and (to_rep1(z__last) = (x + 1)))) ->
-  ((((to_rep1(first2((temp___239(0, (x - 1), (x + 1))).rt1)) = (x - 1)) and
-  ((to_rep1(last2((temp___239(0, (x - 1), (x + 1))).rt1)) = (x + 1)) and ({
-  elts1 = temp___246; rt1 = temp___2461 } = temp___239(0, (x - 1),
-  (x + 1))))) and
-  ((((to_rep1(first2(temp___2461)) <= to_rep1(last2(temp___2461))) and
-  ((((x - 1) <= (x + 1)) and
-  (((to_rep1(last2(temp___2461)) - to_rep1(first2(temp___2461))) + 1) = (((x + 1) - (x - 1)) + 1))) or
-  ((not ((x - 1) <= (x + 1))) and
-  (((to_rep1(last2(temp___2461)) - to_rep1(first2(temp___2461))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___2461)) <= to_rep1(last2(temp___2461)))) and
-  ((((x - 1) <= (x + 1)) and (0 = (((x + 1) - (x - 1)) + 1))) or
-  (not ((x - 1) <= (x + 1)))))) and ((slide(temp___246,
-  to_rep1(first2(temp___2461)), (x - 1)) = temp___247) and (mk((x - 1),
-  (x + 1)) = temp___2471)))) ->
   (((to_rep1(first(temp___2471)) <= to_rep1(last(temp___2471))) ->
   (((to_rep1(z__first) <= to_rep1(z__last)) ->
   (((to_rep1(last(temp___2471)) - to_rep1(first(temp___2471))) + 1) = ((to_rep1(z__last) - to_rep1(z__first)) + 1))) and
@@ -667,4 +698,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___2471)) - to_rep1(first(temp___2471))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___2471)) <= to_rep1(last(temp___2471)))) ->
   ((to_rep1(z__first) <= to_rep1(z__last)) ->
-  (0 = ((to_rep1(z__last) - to_rep1(z__first)) + 1))))))))))
+  (0 = ((to_rep1(z__last) - to_rep1(z__first)) + 1)))))

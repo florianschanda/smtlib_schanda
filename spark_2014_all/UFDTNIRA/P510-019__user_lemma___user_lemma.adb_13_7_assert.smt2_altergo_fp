@@ -136,18 +136,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -225,6 +225,9 @@ axiom is_prime__def_axiom :
   (forall n:int [is_prime(n)]. ((is_prime(n) = true) <->
   (forall j:int. (((2 <= j) and (j <= (n - 1))) -> (not (mod(n, j) = 0))))))
 
+axiom H : (is_prime(15486209) = true)
+
+axiom H1 : (is_prime(15486209) = true)
+
  (* File "user_lemma.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : ((is_prime(15486209) = true) ->
-  ((is_prime(15486209) = true) -> (is_prime(15487001) = true)))
+goal WP_parameter_def : (is_prime(15487001) = true)

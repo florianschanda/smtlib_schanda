@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -666,25 +666,105 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "stacks_14-monitored_14.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,integer) farray.
-  forall s__split_fields1:integer.
-  forall s__split_fields2:(int,integer) farray.
-  forall s__split_fields3:pointer_range. forall s__split_fields4:us_private.
-  forall o:integer. forall stacks_14__push__s__fields:(int,integer) farray.
-  forall stacks_14__push__s__fields1:pointer_range.
-  forall stacks_14__push__s__fields2:us_private.
-  forall result:(int,integer) farray. forall result1:integer.
-  forall result2:(int,integer) farray. forall result3:pointer_range.
-  forall result4:us_private. forall s__split_fields5:(int,integer) farray.
-  forall s__split_fields6:integer.
-  forall s__split_fields7:(int,integer) farray.
-  forall s__split_fields8:pointer_range. forall s__split_fields9:us_private.
-  (in_range(x) -> ((((result = s__split_fields) and
-  ((result1 = s__split_fields1) and ((result2 = s__split_fields2) and
-  ((result3 = s__split_fields3) and (result4 = s__split_fields4))))) and ({
-  rec__stacks_14__monitored_14__monitored_stack__monitor_vector =
+logic s__split_fields : (int,integer) farray
+
+logic s__split_fields1 : integer
+
+logic s__split_fields2 : (int,integer) farray
+
+logic s__split_fields3 : pointer_range
+
+logic s__split_fields4 : us_private
+
+logic o : integer
+
+logic o1 : int
+
+logic o2 : (int,integer) farray
+
+logic o3 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : pointer_range
+
+logic o7 : us_private
+
+logic temp___253 : (int,integer) farray
+
+logic temp___2531 : integer
+
+logic temp___2532 : (int,integer) farray
+
+logic temp___2533 : pointer_range
+
+logic temp___2534 : us_private
+
+logic temp___2535 : int
+
+logic o8 : int
+
+logic stacks_14__push__s__fields : (int,integer) farray
+
+logic stacks_14__push__s__fields1 : pointer_range
+
+logic stacks_14__push__s__fields2 : us_private
+
+logic result : (int,integer) farray
+
+logic result1 : integer
+
+logic result2 : (int,integer) farray
+
+logic result3 : pointer_range
+
+logic result4 : us_private
+
+logic s__split_fields5 : (int,integer) farray
+
+logic s__split_fields6 : integer
+
+logic s__split_fields7 : (int,integer) farray
+
+logic s__split_fields8 : pointer_range
+
+logic s__split_fields9 : us_private
+
+logic result5 : (int,integer) farray
+
+logic result6 : integer
+
+logic result7 : (int,integer) farray
+
+logic result8 : pointer_range
+
+logic result9 : us_private
+
+logic s__split_fields10 : (int,integer) farray
+
+logic s__split_fields11 : integer
+
+logic s__split_fields12 : (int,integer) farray
+
+logic s__split_fields13 : pointer_range
+
+logic s__split_fields14 : us_private
+
+axiom H : in_range(x)
+
+axiom H1 : (result = s__split_fields)
+
+axiom H2 : (result1 = s__split_fields1)
+
+axiom H3 : (result2 = s__split_fields2)
+
+axiom H4 : (result3 = s__split_fields3)
+
+axiom H5 : (result4 = s__split_fields4)
+
+axiom H6 : ({ rec__stacks_14__monitored_14__monitored_stack__monitor_vector =
   s__split_fields5;
   rec__stacks_14__monitored_14__monitored_stack__next_identity_value =
   s__split_fields6; rec__stacks_14__stack__stack_vector1 = s__split_fields7;
@@ -693,5 +773,9 @@ goal WP_parameter_def :
   rec__stacks_14__stack__stack_vector = stacks_14__push__s__fields;
   rec__stacks_14__stack__stack_pointer = stacks_14__push__s__fields1;
   rec__ext__ = stacks_14__push__s__fields2 }; attr__tag = s__attr__tag
-  })).us_split_fields3)) -> ((to_rep(o) = to_rep(s__split_fields6)) ->
-  (1 <= to_rep1(s__split_fields8))))))
+  })).us_split_fields3)
+
+axiom H7 : (to_rep(o) = to_rep(s__split_fields6))
+
+ (* File "stacks_14-monitored_14.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (1 <= to_rep1(s__split_fields8))

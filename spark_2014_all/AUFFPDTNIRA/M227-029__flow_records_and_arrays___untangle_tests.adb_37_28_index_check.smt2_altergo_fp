@@ -1619,5 +1619,73 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic l : (int,us_rep1) farray
+
+logic tmp__split_fields : (int,us_rep) farray
+
+logic tmp__split_fields1 : float1
+
+logic tmp__split_fields2 : float1
+
+logic tmp__split_fields3 : float1
+
+logic tmp__split_fields4 : float1
+
+logic o : int
+
+logic untangle_tests__swap_triangle__tmp__assume : (int,us_rep) farray
+
+logic untangle_tests__swap_triangle__tmp__assume1 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume2 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume3 : float1
+
+logic untangle_tests__swap_triangle__tmp__assume4 : float1
+
+logic o1 : int
+
+logic o2 : (int,us_rep) farray
+
+logic o3 : float1
+
+logic o4 : float1
+
+logic o5 : float1
+
+logic o6 : float1
+
+logic o7 : int
+
+logic o8 : (int,us_rep1) farray
+
+logic result : (int,us_rep) farray
+
+logic result1 : float1
+
+logic result2 : float1
+
+logic result3 : float1
+
+logic result4 : float1
+
+logic tmp__split_fields5 : (int,us_rep) farray
+
+logic tmp__split_fields6 : float1
+
+logic tmp__split_fields7 : float1
+
+logic tmp__split_fields8 : float1
+
+logic tmp__split_fields9 : float1
+
+logic result5 : (int,us_rep1) farray
+
+logic l1 : (int,us_rep1) farray
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
  (* File "untangle_tests.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range(a) -> (in_range(b) -> (1 <= a)))
+goal WP_parameter_def : (1 <= a)

@@ -377,14 +377,37 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,(int,et1) farray) farray
+
+logic result : (int,(int,et1) farray) farray
+
+logic a1 : (int,(int,et1) farray) farray
+
+logic a2 : (int,(int,et1) farray) farray
+
+logic a3 : (int,(int,et1) farray) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- b]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
+logic n : int
+
+axiom H5 : (5 <= n)
+
+axiom H6 : (n <= 50)
+
+logic m : int
+
+axiom H7 : (1 <= m)
+
+axiom H8 : (m <= 10)
+
  (* File "ar.ads", line 366, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,et1) farray) farray.
-  forall result:(int,(int,et1) farray) farray.
-  forall a1:(int,(int,et1) farray) farray.
-  forall a2:(int,(int,et1) farray) farray.
-  forall a3:(int,(int,et1) farray) farray. ((in_range1(i) and
-  (((result = a) and (a1 = (a[i <- b]))) and ((a1 = a2) and (a3 = a1)))) ->
-  (forall n:int. (((5 <= n) and (n <= 50)) ->
-  (forall m:int. (((1 <= m) and (m <= 10)) ->
-  in_range2(to_rep(((a2[n])[m])))))))))
+goal WP_parameter_def : in_range2(to_rep(((a2[n])[m])))

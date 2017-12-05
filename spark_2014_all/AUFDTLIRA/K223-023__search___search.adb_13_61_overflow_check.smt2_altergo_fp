@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -319,17 +319,142 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic pos : int
+
+logic i : int
+
+logic search__search__result : int
+
+logic temp___154 : int
+
+logic temp___153 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic j1 : int
+
+logic us : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic pos2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic pos3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic pos4 : int
+
+logic i4 : int
+
+logic pos5 : int
+
+logic i5 : int
+
+logic pos6 : int
+
+logic i6 : int
+
+logic pos7 : int
+
+logic i7 : int
+
+logic pos8 : int
+
+logic i8 : int
+
+logic pos9 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic search__search__result1 : int
+
+logic search__search__result2 : int
+
+logic search__search__result3 : int
+
+logic pos10 : int
+
+logic i10 : int
+
+logic search__search__result4 : int
+
+logic pos11 : int
+
+logic i11 : int
+
+logic search__search__result5 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : in_range1(v)
+
+axiom H1 : (result = pos)
+
+axiom H2 : (pos1 = 0)
+
+axiom H3 : in_range1(pos1)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (1 <= i1)
+
+axiom H7 : (i1 <= 10)
+
+axiom H8 : (((pos2 = 0) and
+  (forall j2:int. (((1 <= j2) and (j2 <= (i2 - 1))) ->
+  (not (to_rep((t[j2])) = v))))) or ((to_rep((t[pos2])) = v) and
+  (forall j2:int. (((1 <= j2) and (j2 <= (pos2 - 1))) ->
+  (not (to_rep((t[j2])) = v))))))
+
+axiom H9 : (((((- 2147483648) <= 2147483647) -> in_range1(pos2)) and
+  ((1 <= 10) -> in_range3(i2))) and ((1 <= i2) and (i2 <= 10)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. forall i:int. forall result:int. forall pos1:int.
-  forall result1:int. forall i1:int. forall pos2:int. forall i2:int.
-  (in_range1(v) -> ((({ int__content = result } = { int__content = pos }) and
-  (pos1 = 0)) -> (in_range1(pos1) -> ((({ int__content = result1 } = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  ((((pos2 = 0) and
-  (forall j:int. (((1 <= j) and (j <= (i2 - 1))) ->
-  (not (to_rep((t[j])) = v))))) or ((to_rep((t[pos2])) = v) and
-  (forall j:int. (((1 <= j) and (j <= (pos2 - 1))) ->
-  (not (to_rep((t[j])) = v)))))) -> ((((((-2147483648) <= 2147483647) ->
-  in_range1(pos2)) and ((1 <= 10) -> in_range3(i2))) and ((1 <= i2) and
-  (i2 <= 10))) -> in_range1((pos2 - 1))))))))))
+goal WP_parameter_def : in_range1((pos2 - 1))

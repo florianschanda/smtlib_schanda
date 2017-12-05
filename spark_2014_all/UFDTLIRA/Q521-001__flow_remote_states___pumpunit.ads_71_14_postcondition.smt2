@@ -32,7 +32,7 @@
 (declare-const dummy internal_state)
 (declare-datatypes () ((internal_state__ref (mk_internal_state__ref (internal_state__content internal_state)))))
 (define-fun internal_state__ref___projection ((a internal_state__ref)) internal_state (internal_state__content a))
-(define-fun dynamic_invariant ((temp___expr_563 Int) (temp___is_init_560 Bool) (temp___skip_constant_561 Bool) (temp___do_toplevel_562 Bool)) Bool (=> (or (= temp___is_init_560 true) (<= 0 3)) (in_range temp___expr_563)))
+(define-fun dynamic_invariant ((temp___expr_557 Int) (temp___is_init_554 Bool) (temp___skip_constant_555 Bool) (temp___do_toplevel_556 Bool)) Bool (=> (or (= temp___is_init_554 true) (<= 0 3)) (in_range temp___expr_557)))
 (assert true)
 (assert (forall ((pumpunit__cur_state Int)) (! (= (= (is_ready pumpunit__cur_state) true) (= pumpunit__cur_state 1)) :pattern ((is_ready pumpunit__cur_state)))))
 (declare-fun is_pumping (Int) Bool)

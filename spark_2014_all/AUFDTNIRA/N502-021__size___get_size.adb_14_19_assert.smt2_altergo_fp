@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type universal_integer
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -326,9 +326,25 @@ axiom f__def_axiom : (f(void) = value__size)
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic x1 : int
+
+axiom H : ((o = value__size) and in_range(value__size))
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = o)
+
+axiom H3 : in_range(x1)
+
+axiom H4 : (x1 = f(void))
+
  (* File "get_size.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall o:int. forall result:int. forall x1:int.
-  ((((o = value__size) and in_range(value__size)) and ((result = x) and
-  (x1 = o))) -> (in_range(x1) -> ((x1 = f(void)) ->
-  (value__size1 = (10 * value__size))))))
+goal WP_parameter_def : (value__size1 = (10 * value__size))

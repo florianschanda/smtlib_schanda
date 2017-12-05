@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -435,30 +435,138 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "perm.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index1:int. forall o:int. forall o1:int.
-  forall o2:natural. forall o3:int. forall result:int. forall min1:int.
-  forall result1:int. forall index2:int. forall min2:int. forall index3:int.
-  forall result2:bool. (dynamic_invariant({ elts = values; rt = values1 },
-  true, false, true) -> ((0 <  length({ elts = values; rt = values1 })) ->
-  (((1 <= 2147483647) -> in_range2(min)) ->
-  ((((o = to_rep1(first(values1))) and
-  in_range2(to_rep1(first(values1)))) and (({ int__content = result } = {
-  int__content = min }) and (min1 = o))) -> ((({ int__content = result1 } = {
-  int__content = index1 }) and (index2 = to_rep1(first(values1)))) ->
-  (((to_rep1(first(values1)) <= index2) and
-  (index2 <= to_rep1(last(values1)))) ->
-  (((to_rep1(first(values1)) <= min2) and
-  (min2 <= to_rep1(last(values1)))) ->
-  (((((to_rep1(first(values1)) <= to_rep1(last(values1))) ->
+logic min : int
+
+logic index1 : int
+
+logic sort__index_of_minimum__result : int
+
+logic o : int
+
+logic temp___182 : int
+
+logic temp___181 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index2 : int
+
+logic min2 : int
+
+logic index3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min3 : int
+
+logic result4 : int
+
+logic index4 : int
+
+logic min4 : int
+
+logic index5 : int
+
+logic min5 : int
+
+logic index6 : int
+
+logic min6 : int
+
+logic index7 : int
+
+logic min7 : int
+
+logic index8 : int
+
+logic min8 : int
+
+logic index9 : int
+
+logic min9 : int
+
+logic index10 : int
+
+logic result5 : int
+
+logic sort__index_of_minimum__result1 : int
+
+logic sort__index_of_minimum__result2 : int
+
+logic sort__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index11 : int
+
+logic sort__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index12 : int
+
+logic sort__index_of_minimum__result5 : int
+
+axiom H : dynamic_invariant({ elts = values; rt = values1 }, true, false,
+  true)
+
+axiom H1 : (0 <  length({ elts = values; rt = values1 }))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H3 : ((o = to_rep1(first(values1))) and
+  in_range2(to_rep1(first(values1))))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = o)
+
+axiom H6 : (result1 = index1)
+
+axiom H7 : (index2 = to_rep1(first(values1)))
+
+axiom H8 : (to_rep1(first(values1)) <= index2)
+
+axiom H9 : (index2 <= to_rep1(last(values1)))
+
+axiom H10 : ((to_rep1(first(values1)) <= min2) and
+  (min2 <= to_rep1(last(values1))))
+
+axiom H11 : ((((to_rep1(first(values1)) <= to_rep1(last(values1))) ->
   dynamic_property1(to_rep1(first(values1)), to_rep1(last(values1)),
   index3)) and ((1 <= 2147483647) -> in_range2(min2))) and
   ((to_rep1(first(values1)) <= index3) and
-  (index3 <= to_rep1(last(values1))))) ->
-  (((((((to_rep1(first(values1)) <= min2) and
-  (min2 <= to_rep1(last(values1)))) and (o1 = min2)) and
-  (o2 = (values[o1]))) and (o3 = to_rep(o2))) and
-  (((to_rep((values[index3])) <  o3) and (result2 = true)) or
-  ((not (to_rep((values[index3])) <  o3)) and (result2 = false)))) ->
-  ((result2 = true) -> in_range2(index3))))))))))))
+  (index3 <= to_rep1(last(values1)))))
+
+axiom H12 : ((to_rep1(first(values1)) <= min2) and
+  (min2 <= to_rep1(last(values1))))
+
+axiom H13 : (o1 = min2)
+
+axiom H14 : (o2 = (values[o1]))
+
+axiom H15 : (o3 = to_rep(o2))
+
+axiom H16 : (((to_rep((values[index3])) <  o3) -> (result2 = true)) and
+  ((not (to_rep((values[index3])) <  o3)) -> (result2 = false)))
+
+axiom H17 : (result2 = true)
+
+ (* File "perm.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : in_range2(index3)

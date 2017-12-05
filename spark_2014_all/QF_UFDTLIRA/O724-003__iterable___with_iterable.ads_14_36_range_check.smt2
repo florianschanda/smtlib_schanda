@@ -33,6 +33,7 @@
 (declare-const max Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (= max 100))
+(declare-const us Int)
 (assert (in_range max))
 (assert (not (in_range 101)))
 (check-sat)

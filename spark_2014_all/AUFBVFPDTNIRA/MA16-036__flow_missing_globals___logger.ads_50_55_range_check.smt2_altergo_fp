@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2742,70 +2742,186 @@ axiom def_axiom :
   rec__logger__log_entry__estimatedgroundvelocityisavailable = temp___2864 }
   })))
 
+logic event_log__split_fields : (t,us_rep) farray
+
+logic event_log__split_fields1 : log_index
+
+logic event_log__split_fields2 : log_index
+
+logic event_log__split_fields3 : bool
+
+logic result__ : (t,us_rep) farray
+
+logic logger__log_content__result : (t,us_rep) farray
+
+logic logger__log_content__result1 : t2
+
+logic o : unsigned_16
+
+logic o1 : unsigned_16
+
+logic o2 : unsigned_16
+
+logic o3 : long_float
+
+logic o4 : bool
+
+logic o5 : (t,us_rep) farray
+
+logic o6 : (t,us_rep) farray
+
+logic o7 : t2
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic logger__log_content__B_1__tmp__assume : t
+
+logic o11 : (t,us_rep) farray
+
+logic temp___279 : (t,us_rep) farray
+
+logic temp___2791 : t4
+
+logic temp___280 : (t,us_rep) farray
+
+logic temp___2801 : t3
+
+logic o12 : (t,us_rep) farray
+
+logic o13 : t3
+
+logic o14 : (t,us_rep) farray
+
+logic o15 : (t,us_rep) farray
+
+logic temp___275 : (t,us_rep) farray
+
+logic temp___2751 : t6
+
+logic o16 : (t,us_rep) farray
+
+logic temp___274 : (t,us_rep) farray
+
+logic temp___2741 : t5
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : t
+
+logic temp___276 : (t,us_rep) farray
+
+logic temp___2761 : t2
+
+logic temp___277 : (t,us_rep) farray
+
+logic temp___2771 : t3
+
+logic o24 : (t,us_rep) farray
+
+logic o25 : t3
+
+logic o26 : (t,us_rep) farray
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic result__1 : (t,us_rep) farray
+
+logic result : (t,us_rep) farray
+
+logic result1 : t2
+
+logic logger__log_content__result2 : (t,us_rep) farray
+
+logic logger__log_content__result3 : t2
+
+logic result2 : (t,us_rep) farray
+
+logic result__2 : (t,us_rep) farray
+
+logic result3 : (t,us_rep) farray
+
+logic result__3 : (t,us_rep) farray
+
+logic result4 : (t,us_rep) farray
+
+logic result5 : t2
+
+logic logger__log_content__result4 : (t,us_rep) farray
+
+logic logger__log_content__result5 : t2
+
+logic result__4 : (t,us_rep) farray
+
+logic logger__log_content__result6 : (t,us_rep) farray
+
+logic logger__log_content__result7 : t2
+
+logic result__5 : (t,us_rep) farray
+
+logic logger__log_content__result8 : (t,us_rep) farray
+
+logic logger__log_content__result9 : t2
+
+logic result__6 : (t,us_rep) farray
+
+logic logger__log_content__result10 : (t,us_rep) farray
+
+logic logger__log_content__result11 : t2
+
+logic result__7 : (t,us_rep) farray
+
+logic logger__log_content__result12 : (t,us_rep) farray
+
+logic logger__log_content__result13 : t2
+
+logic result__8 : (t,us_rep) farray
+
+logic logger__log_content__result14 : (t,us_rep) farray
+
+logic logger__log_content__result15 : t2
+
+logic result__9 : (t,us_rep) farray
+
+logic logger__log_content__result16 : (t,us_rep) farray
+
+logic logger__log_content__result17 : t2
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
- (* File "logger.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall event_log__split_fields:(t,us_rep) farray.
-  forall event_log__split_fields1:log_index.
-  forall event_log__split_fields2:log_index.
-  forall event_log__split_fields3:bool. forall result__:(t,us_rep) farray.
-  forall logger__log_content__result:(t,us_rep) farray.
-  forall logger__log_content__result1:t2. forall o:unsigned_16.
-  forall o1:unsigned_16. forall o2:unsigned_16. forall o3:long_float.
-  forall o4:bool. forall o5:(t,us_rep) farray. forall o6:(t,us_rep) farray.
-  forall o7:t2. forall o8:int. forall o9:int. forall o10:int.
-  forall logger__log_content__B_1__tmp__assume:t.
-  forall o11:(t,us_rep) farray. forall temp___279:(t,us_rep) farray.
-  forall temp___2791:t4. forall temp___280:(t,us_rep) farray.
-  forall temp___2801:t3. forall o12:(t,us_rep) farray. forall o13:t3.
-  forall o14:(t,us_rep) farray. forall o15:(t,us_rep) farray.
-  forall temp___275:(t,us_rep) farray. forall temp___2751:t6.
-  forall o16:(t,us_rep) farray. forall temp___274:(t,us_rep) farray.
-  forall temp___2741:t5. forall o17:int. forall o18:int. forall o19:int.
-  forall o20:int. forall o21:int. forall o22:int. forall o23:t.
-  forall temp___276:(t,us_rep) farray. forall temp___2761:t2.
-  forall temp___277:(t,us_rep) farray. forall temp___2771:t3.
-  forall o24:(t,us_rep) farray. forall o25:t3. forall o26:(t,us_rep) farray.
-  forall o27:int. forall o28:int. forall result__1:(t,us_rep) farray.
-  forall result:(t,us_rep) farray. forall result1:t2.
-  forall logger__log_content__result2:(t,us_rep) farray.
-  forall logger__log_content__result3:t2. forall result2:(t,us_rep) farray.
-  forall result__2:(t,us_rep) farray. forall result3:(t,us_rep) farray.
-  forall result__3:(t,us_rep) farray. forall result4:(t,us_rep) farray.
-  forall result5:t2. forall logger__log_content__result4:(t,us_rep) farray.
-  forall logger__log_content__result5:t2. forall result__4:(t,us_rep) farray.
-  forall logger__log_content__result6:(t,us_rep) farray.
-  forall logger__log_content__result7:t2. forall result__5:(t,us_rep) farray.
-  forall logger__log_content__result8:(t,us_rep) farray.
-  forall logger__log_content__result9:t2. forall result__6:(t,us_rep) farray.
-  forall logger__log_content__result10:(t,us_rep) farray.
-  forall logger__log_content__result11:t2.
-  forall result__7:(t,us_rep) farray.
-  forall logger__log_content__result12:(t,us_rep) farray.
-  forall logger__log_content__result13:t2.
-  forall result__8:(t,us_rep) farray.
-  forall logger__log_content__result14:(t,us_rep) farray.
-  forall logger__log_content__result15:t2.
-  forall result__9:(t,us_rep) farray.
-  forall logger__log_content__result16:(t,us_rep) farray.
-  forall logger__log_content__result17:t2. (((((({ log_array__content = {
-  elts = logger__log_content__result10; rt = logger__log_content__result11 }
-  } = { log_array__content = { elts = logger__log_content__result6; rt =
-  logger__log_content__result7 } }) and ({ map__content = result__6 } = {
-  map__content = result__4 })) and (({ elts = logger__log_content__result12;
-  rt = logger__log_content__result13 } = { elts =
-  logger__log_content__result8; rt = logger__log_content__result9 }) and
-  (result__7 = result__5))) and (((event_log__split_fields3 = true) and
+axiom H :
+  (((((logger__log_content__result10 = logger__log_content__result6) and
+  (logger__log_content__result11 = logger__log_content__result7)) and
+  (result__6 = result__4)) and
+  (((logger__log_content__result12 = logger__log_content__result8) and
+  (logger__log_content__result13 = logger__log_content__result9)) and
+  (result__7 = result__5))) and (((event_log__split_fields3 = true) ->
   (((((logger__log_content__result6 = logger__log_content__result2) and
-  (logger__log_content__result7 = logger__log_content__result3)) and ({
-  map__content = result__4 } = { map__content = result__ })) and (({ elts =
-  logger__log_content__result8; rt = logger__log_content__result9 } = {
-  elts = logger__log_content__result2; rt = logger__log_content__result3
-  }) and (result__5 = result__1))) and ((((({ us_split_fields1 = {
+  (logger__log_content__result7 = logger__log_content__result3)) and
+  (result__4 = result__)) and
+  (((logger__log_content__result8 = logger__log_content__result2) and
+  (logger__log_content__result9 = logger__log_content__result3)) and
+  (result__5 = result__1))) and ((((({ us_split_fields1 = {
   rec__logger__log_entry__ngrotations = o;
   rec__logger__log_entry__ngclicktime = o1;
   rec__logger__log_entry__millisecs = o2;
@@ -2820,30 +2936,30 @@ goal WP_parameter_def :
   rec__logger__log_entry__millisecs = o2;
   rec__logger__log_entry__estimatedgroundvelocity = o3;
   rec__logger__log_entry__estimatedgroundvelocityisavailable = o4 } }))) and
-  ((o5 = o6) and (mk(of_int(1), of_int(0)) = o7))) and (({
-  log_array__content = { elts = result; rt = result1 } } = {
-  log_array__content = { elts = logger__log_content__result; rt =
-  logger__log_content__result1 } }) and ({ elts =
-  logger__log_content__result2; rt = logger__log_content__result3 } = {
-  elts = o6; rt = o7 }))))) or ((not (event_log__split_fields3 = true)) and
+  ((o5 = o6) and (mk(of_int(1), of_int(0)) = o7))) and
+  (((result = logger__log_content__result) and
+  (result1 = logger__log_content__result1)) and
+  ((logger__log_content__result2 = o6) and
+  (logger__log_content__result3 = o7)))))) and
+  ((not (event_log__split_fields3 = true)) ->
   (((((logger__log_content__result6 = logger__log_content__result4) and
   (logger__log_content__result7 = logger__log_content__result5)) and
-  (result__2 = result__4)) and (({ elts = logger__log_content__result8; rt =
-  logger__log_content__result9 } = { elts = logger__log_content__result4;
-  rt = logger__log_content__result5 }) and (result__5 = result__2))) and
-  (((((((o8 = log_size({ rec__logger__log_database__data =
-  event_log__split_fields; rec__logger__log_database__first =
-  event_log__split_fields1; rec__logger__log_database__last =
-  event_log__split_fields2; rec__logger__log_database__empty =
-  event_log__split_fields3 })) and (in_range4(o8) and
-  (((event_log__split_fields3 = true) and (o8 = 0)) or
-  ((not (event_log__split_fields3 = true)) and
+  (result__4 = result__2)) and
+  (((logger__log_content__result8 = logger__log_content__result4) and
+  (logger__log_content__result9 = logger__log_content__result5)) and
+  (result__5 = result__2))) and (((((((o8 = log_size({
+  rec__logger__log_database__data = event_log__split_fields;
+  rec__logger__log_database__first = event_log__split_fields1;
+  rec__logger__log_database__last = event_log__split_fields2;
+  rec__logger__log_database__empty = event_log__split_fields3 })) and
+  (in_range4(o8) and (((event_log__split_fields3 = true) -> (o8 = 0)) and
+  ((not (event_log__split_fields3 = true)) ->
   ((ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)) and
+  to_rep2(event_log__split_fields1)) ->
   (o8 = (tqtint(add(sub(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)), of_int(600))) + 1))) or
+  to_rep2(event_log__split_fields1)), of_int(600))) + 1))) and
   ((not ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1))) and
+  to_rep2(event_log__split_fields1))) ->
   (o8 = (tqtint(sub(to_rep2(event_log__split_fields2),
   to_rep2(event_log__split_fields1))) + 1)))))))) and (o9 = (o8 - 1))) and
   ((o10 = o9) and in_range_int(o9))) and
@@ -2853,38 +2969,35 @@ goal WP_parameter_def :
   to_rep2(result____last)) and ((to_rep2(result____first) = of_int(0)) and
   (to_rep2(result____last) = tmp))) and
   (((ule(to_rep2(event_log__split_fields1),
-  to_rep2(event_log__split_fields2)) and
+  to_rep2(event_log__split_fields2)) ->
   (((to_rep2(event_log__split_fields1) = r4b) and in_range2(r4b)) and
   (((to_rep2(event_log__split_fields2) = r5b) and in_range2(r5b)) and
   (((((((ule(r4b, r5b) -> ((ule(of_int(0), r4b) and ule(r4b,
   of_int(599))) and (ule(of_int(0), r5b) and ule(r5b, of_int(599))))) and
   (o11 = event_log__split_fields)) and ((o11 = temp___279) and (mk2(r4b,
   r5b) = temp___2791))) and
-  ((((tqtint(to_rep2(first4(temp___2791))) <= tqtint(to_rep2(last4(temp___2791)))) and
-  (((tqtint(of_int(0)) <= tqtint(tmp)) and
-  (((tqtint(to_rep2(last4(temp___2791))) - tqtint(to_rep2(first4(temp___2791)))) + 1) = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) or
-  ((not (tqtint(of_int(0)) <= tqtint(tmp))) and
-  (((tqtint(to_rep2(last4(temp___2791))) - tqtint(to_rep2(first4(temp___2791)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep2(first4(temp___2791))) <= tqtint(to_rep2(last4(temp___2791))))) and
-  (((tqtint(of_int(0)) <= tqtint(tmp)) and
-  (0 = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) or
-  (not (tqtint(of_int(0)) <= tqtint(tmp)))))) and ((slide(temp___279,
+  ((((tqtint(to_rep2(first4(temp___2791))) <= tqtint(to_rep2(last4(temp___2791)))) ->
+  (((tqtint(of_int(0)) <= tqtint(tmp)) ->
+  (((tqtint(to_rep2(last4(temp___2791))) - tqtint(to_rep2(first4(temp___2791)))) + 1) = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) and
+  ((not (tqtint(of_int(0)) <= tqtint(tmp))) ->
+  (((tqtint(to_rep2(last4(temp___2791))) - tqtint(to_rep2(first4(temp___2791)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep2(first4(temp___2791))) <= tqtint(to_rep2(last4(temp___2791))))) ->
+  ((tqtint(of_int(0)) <= tqtint(tmp)) ->
+  (0 = ((tqtint(tmp) - tqtint(of_int(0))) + 1))))) and ((slide(temp___279,
   to_rep2(first4(temp___2791)), of_int(0)) = temp___280) and (mk1(of_int(0),
   tmp) = temp___2801)))) and
-  ((((tqtint(to_rep2(first2(temp___2801))) <= tqtint(to_rep2(last2(temp___2801)))) and
-  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) and
-  (((tqtint(to_rep2(last2(temp___2801))) - tqtint(to_rep2(first2(temp___2801)))) + 1) = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) or
-  ((not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last)))) and
-  (((tqtint(to_rep2(last2(temp___2801))) - tqtint(to_rep2(first2(temp___2801)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep2(first2(temp___2801))) <= tqtint(to_rep2(last2(temp___2801))))) and
-  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) and
-  (0 = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) or
-  (not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))))))) and
-  ({ elts1 = o12; rt1 = o13 } = { elts1 = temp___280; rt1 = temp___2801
-  }))) and (o14 = o12)) and (({ map__content = result2 } = { map__content =
-  result__ }) and (result__2 = o14)))))) or
+  ((((tqtint(to_rep2(first2(temp___2801))) <= tqtint(to_rep2(last2(temp___2801)))) ->
+  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) ->
+  (((tqtint(to_rep2(last2(temp___2801))) - tqtint(to_rep2(first2(temp___2801)))) + 1) = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) and
+  ((not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last)))) ->
+  (((tqtint(to_rep2(last2(temp___2801))) - tqtint(to_rep2(first2(temp___2801)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep2(first2(temp___2801))) <= tqtint(to_rep2(last2(temp___2801))))) ->
+  ((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) ->
+  (0 = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))))) and
+  ((o12 = temp___280) and (o13 = temp___2801)))) and (o14 = o12)) and
+  ((result2 = result__) and (result__2 = o14)))))) and
   ((not ule(to_rep2(event_log__split_fields1),
-  to_rep2(event_log__split_fields2))) and
+  to_rep2(event_log__split_fields2))) ->
   ((((to_rep2(event_log__split_fields1) = r8b) and in_range2(r8b)) and
   (((to_rep2(event_log__split_fields2) = r11b) and in_range2(r11b)) and
   ((((((((ule(of_int(0), r11b) -> ((ule(of_int(0), of_int(0)) and
@@ -2895,17 +3008,17 @@ goal WP_parameter_def :
   of_int(599))) and (ule(of_int(0), of_int(599)) and ule(of_int(599),
   of_int(599))))) and (o16 = event_log__split_fields)) and
   ((o16 = temp___274) and (mk3(r8b, of_int(599)) = temp___2741))) and
-  (((length3({ elts3 = temp___274; rt3 = temp___2741 }) = 0) and
+  (((length3({ elts3 = temp___274; rt3 = temp___2741 }) = 0) ->
   ((temp___275 = temp___276) and (mk(to_rep2(first8(temp___2751)),
-  to_rep2(last8(temp___2751))) = temp___2761))) or ((not (length3({ elts3 =
-  temp___274; rt3 = temp___2741 }) = 0)) and
-  (((((((((tqtint(to_rep2(first8(temp___2751))) <= tqtint(to_rep2(last8(temp___2751)))) and
-  (o17 = ((tqtint(to_rep2(last8(temp___2751))) - tqtint(to_rep2(first8(temp___2751)))) + 1))) or
-  ((not (tqtint(to_rep2(first8(temp___2751))) <= tqtint(to_rep2(last8(temp___2751))))) and
+  to_rep2(last8(temp___2751))) = temp___2761))) and ((not (length3({ elts3 =
+  temp___274; rt3 = temp___2741 }) = 0)) ->
+  (((((((((tqtint(to_rep2(first8(temp___2751))) <= tqtint(to_rep2(last8(temp___2751)))) ->
+  (o17 = ((tqtint(to_rep2(last8(temp___2751))) - tqtint(to_rep2(first8(temp___2751)))) + 1))) and
+  ((not (tqtint(to_rep2(first8(temp___2751))) <= tqtint(to_rep2(last8(temp___2751))))) ->
   (o17 = 0))) and
-  ((((tqtint(to_rep2(first6(temp___2741))) <= tqtint(to_rep2(last6(temp___2741)))) and
-  (o18 = ((tqtint(to_rep2(last6(temp___2741))) - tqtint(to_rep2(first6(temp___2741)))) + 1))) or
-  ((not (tqtint(to_rep2(first6(temp___2741))) <= tqtint(to_rep2(last6(temp___2741))))) and
+  ((((tqtint(to_rep2(first6(temp___2741))) <= tqtint(to_rep2(last6(temp___2741)))) ->
+  (o18 = ((tqtint(to_rep2(last6(temp___2741))) - tqtint(to_rep2(first6(temp___2741)))) + 1))) and
+  ((not (tqtint(to_rep2(first6(temp___2741))) <= tqtint(to_rep2(last6(temp___2741))))) ->
   (o18 = 0))) and (o19 = (o18 + o17)))) and
   (o20 = (tqtint(to_rep2(first6(temp___2741))) + o19))) and
   (o21 = (o20 - 1))) and ((o22 = o21) and in_range_int(o21))) and
@@ -2913,52 +3026,62 @@ goal WP_parameter_def :
   to_rep2(last6(temp___2741)), temp___275, to_rep2(first8(temp___2751)),
   to_rep2(last8(temp___2751))) = temp___276) and
   (mk(to_rep2(first6(temp___2741)), o23) = temp___2761))))))) and
-  ((((tqtint(to_rep2(first(temp___2761))) <= tqtint(to_rep2(last(temp___2761)))) and
-  (((tqtint(of_int(0)) <= tqtint(tmp)) and
-  (((tqtint(to_rep2(last(temp___2761))) - tqtint(to_rep2(first(temp___2761)))) + 1) = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) or
-  ((not (tqtint(of_int(0)) <= tqtint(tmp))) and
-  (((tqtint(to_rep2(last(temp___2761))) - tqtint(to_rep2(first(temp___2761)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep2(first(temp___2761))) <= tqtint(to_rep2(last(temp___2761))))) and
-  (((tqtint(of_int(0)) <= tqtint(tmp)) and
-  (0 = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) or
-  (not (tqtint(of_int(0)) <= tqtint(tmp)))))) and ((slide(temp___276,
+  ((((tqtint(to_rep2(first(temp___2761))) <= tqtint(to_rep2(last(temp___2761)))) ->
+  (((tqtint(of_int(0)) <= tqtint(tmp)) ->
+  (((tqtint(to_rep2(last(temp___2761))) - tqtint(to_rep2(first(temp___2761)))) + 1) = ((tqtint(tmp) - tqtint(of_int(0))) + 1))) and
+  ((not (tqtint(of_int(0)) <= tqtint(tmp))) ->
+  (((tqtint(to_rep2(last(temp___2761))) - tqtint(to_rep2(first(temp___2761)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep2(first(temp___2761))) <= tqtint(to_rep2(last(temp___2761))))) ->
+  ((tqtint(of_int(0)) <= tqtint(tmp)) ->
+  (0 = ((tqtint(tmp) - tqtint(of_int(0))) + 1))))) and ((slide(temp___276,
   to_rep2(first(temp___2761)), of_int(0)) = temp___277) and (mk1(of_int(0),
   tmp) = temp___2771)))) and
-  ((((tqtint(to_rep2(first2(temp___2771))) <= tqtint(to_rep2(last2(temp___2771)))) and
-  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) and
-  (((tqtint(to_rep2(last2(temp___2771))) - tqtint(to_rep2(first2(temp___2771)))) + 1) = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) or
-  ((not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last)))) and
-  (((tqtint(to_rep2(last2(temp___2771))) - tqtint(to_rep2(first2(temp___2771)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep2(first2(temp___2771))) <= tqtint(to_rep2(last2(temp___2771))))) and
-  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) and
-  (0 = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) or
-  (not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))))))) and
-  ({ elts1 = o24; rt1 = o25 } = { elts1 = temp___277; rt1 = temp___2771
-  }))) and (o26 = o24)) and (({ map__content = result3 } = { map__content =
-  result__ }) and (result__3 = o26))))) and (result__2 = result__3)))) and
+  ((((tqtint(to_rep2(first2(temp___2771))) <= tqtint(to_rep2(last2(temp___2771)))) ->
+  (((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) ->
+  (((tqtint(to_rep2(last2(temp___2771))) - tqtint(to_rep2(first2(temp___2771)))) + 1) = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))) and
+  ((not (tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last)))) ->
+  (((tqtint(to_rep2(last2(temp___2771))) - tqtint(to_rep2(first2(temp___2771)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep2(first2(temp___2771))) <= tqtint(to_rep2(last2(temp___2771))))) ->
+  ((tqtint(to_rep2(result____first)) <= tqtint(to_rep2(result____last))) ->
+  (0 = ((tqtint(to_rep2(result____last)) - tqtint(to_rep2(result____first))) + 1))))) and
+  ((o24 = temp___277) and (o25 = temp___2771)))) and (o26 = o24)) and
+  ((result3 = result__) and (result__3 = o26))))) and
+  (result__2 = result__3)))) and
   (((result4 = logger__log_content__result) and
   (result5 = logger__log_content__result1)) and
-  ((result__2 = logger__log_content__result4) and
-  (mk(to_rep2(result____first),
-  to_rep2(result____last)) = logger__log_content__result5))))))))))) and
-  ((((logger__log_content__result14 = logger__log_content__result10) and
-  (logger__log_content__result15 = logger__log_content__result11)) and
-  (result__8 = result__6)) and
-  (((logger__log_content__result16 = logger__log_content__result12) and
-  (logger__log_content__result17 = logger__log_content__result13)) and
-  (result__9 = result__7)))) -> ((((o27 = log_size({
-  rec__logger__log_database__data = event_log__split_fields;
-  rec__logger__log_database__first = event_log__split_fields1;
-  rec__logger__log_database__last = event_log__split_fields2;
-  rec__logger__log_database__empty = event_log__split_fields3 })) and
-  (in_range4(o27) and (((event_log__split_fields3 = true) and (o27 = 0)) or
-  ((not (event_log__split_fields3 = true)) and
+  ((logger__log_content__result4 = result__2) and
+  (logger__log_content__result5 = mk(to_rep2(result____first),
+  to_rep2(result____last)))))))))))))
+
+axiom H1 :
+  ((logger__log_content__result14 = logger__log_content__result10) and
+  (logger__log_content__result15 = logger__log_content__result11))
+
+axiom H2 : (result__8 = result__6)
+
+axiom H3 :
+  ((logger__log_content__result16 = logger__log_content__result12) and
+  (logger__log_content__result17 = logger__log_content__result13))
+
+axiom H4 : (result__9 = result__7)
+
+axiom H5 : ((o27 = log_size({ rec__logger__log_database__data =
+  event_log__split_fields; rec__logger__log_database__first =
+  event_log__split_fields1; rec__logger__log_database__last =
+  event_log__split_fields2; rec__logger__log_database__empty =
+  event_log__split_fields3 })) and (in_range4(o27) and
+  (((event_log__split_fields3 = true) -> (o27 = 0)) and
+  ((not (event_log__split_fields3 = true)) ->
   ((ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)) and
+  to_rep2(event_log__split_fields1)) ->
   (o27 = (tqtint(add(sub(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)), of_int(600))) + 1))) or
+  to_rep2(event_log__split_fields1)), of_int(600))) + 1))) and
   ((not ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1))) and
+  to_rep2(event_log__split_fields1))) ->
   (o27 = (tqtint(sub(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1))) + 1)))))))) and (o28 = (o27 - 1))) ->
-  in_range_int(o28))))
+  to_rep2(event_log__split_fields1))) + 1))))))))
+
+axiom H6 : (o28 = (o27 - 1))
+
+ (* File "logger.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : in_range_int(o28)

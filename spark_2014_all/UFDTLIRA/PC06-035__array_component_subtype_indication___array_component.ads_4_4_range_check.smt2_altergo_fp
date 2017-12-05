@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -146,10 +146,17 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom d__def_axiom : (d = id(0))
 
- (* File "array_component.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall array_component__d__assume:int.
-  ((((array_component__d__assume = id(0)) and
+logic array_component__d__assume : int
+
+axiom H : ((array_component__d__assume = id(0)) and
   (in_range(array_component__d__assume) and
-  (array_component__d__assume = 0))) and (array_component__d__assume = d)) ->
-  (in_range(d) -> ((d <= 2147483647) -> (1 <= d)))))
+  (array_component__d__assume = 0)))
+
+axiom H1 : (array_component__d__assume = d)
+
+axiom H2 : in_range(d)
+
+axiom H3 : (d <= 2147483647)
+
+ (* File "array_component.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (1 <= d)

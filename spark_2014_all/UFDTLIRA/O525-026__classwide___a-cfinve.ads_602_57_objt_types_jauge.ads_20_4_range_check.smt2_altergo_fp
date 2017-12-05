@@ -530,12 +530,20 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
- (* File "a-cfinve.ads", line 555, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. (in_range2(index) ->
-  (in_range1(count) -> (((1 <= index) and (index <= (0 + length1(model__({
+logic container__split_fields : us_main_type
+
+logic o : int
+
+axiom H : in_range2(index)
+
+axiom H1 : in_range1(count)
+
+axiom H2 : ((1 <= index) and (index <= (0 + length1(model__({
   us_split_discrs1 = {
   rec__objt_types_jauge__objt_liste_jauge__vector__capacity =
   container__split_discrs }; us_split_fields1 = {
   rec__objt_types_jauge__objt_liste_jauge__vector = container__split_fields }
-  }))))) -> in_range1((index - 1))))))
+  })))))
+
+ (* File "a-cfinve.ads", line 555, characters 0-0 *)
+goal WP_parameter_def : in_range1((index - 1))

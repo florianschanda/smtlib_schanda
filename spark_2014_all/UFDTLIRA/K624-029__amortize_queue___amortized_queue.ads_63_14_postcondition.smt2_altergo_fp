@@ -792,7 +792,7 @@ axiom is_empty__post_axiom :
 
 type element_type
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -876,7 +876,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -906,52 +906,83 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range8(get(container, position)))))
 
- (* File "a-cofove.ads", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall revrear__split_fields:us_main_type.
-  forall amortized_queue__model__result:capacity_range.
-  forall amortized_queue__model__result1:us_main_type.
-  forall amortized_queue__model__revrear__assume:capacity_range.
-  forall amortized_queue__model__revrear__assume1:us_main_type.
-  forall o:capacity_range. forall o1:us_main_type.
-  forall result:us_main_type. forall revrear__split_fields1:us_main_type.
-  forall revrear__split_fields2:us_main_type. forall result1:capacity_range.
-  forall result2:us_main_type.
-  forall amortized_queue__model__result2:capacity_range.
-  forall amortized_queue__model__result3:us_main_type.
-  forall amortized_queue__model__result4:capacity_range.
-  forall amortized_queue__model__result5:us_main_type.
-  forall amortized_queue__model__result6:capacity_range.
-  forall amortized_queue__model__result7:us_main_type.
-  forall revrear__split_fields3:us_main_type.
-  forall amortized_queue__model__result8:capacity_range.
-  forall amortized_queue__model__result9:us_main_type.
-  forall revrear__split_fields4:us_main_type.
-  forall amortized_queue__model__result10:capacity_range.
-  forall amortized_queue__model__result11:us_main_type.
-  (forall result3:capacity_range. forall result4:us_main_type.
-  ((((1000 = to_rep(q)) and (1000 = to_rep(q2))) and ((inv({
-  us_split_fields3 = { rec__amortized_queue__queue__front = {
+logic revrear__split_fields : us_main_type
+
+logic amortized_queue__model__result : capacity_range
+
+logic amortized_queue__model__result1 : us_main_type
+
+logic amortized_queue__model__revrear__assume : capacity_range
+
+logic amortized_queue__model__revrear__assume1 : us_main_type
+
+logic o : capacity_range
+
+logic o1 : us_main_type
+
+logic result : us_main_type
+
+logic revrear__split_fields1 : us_main_type
+
+logic revrear__split_fields2 : us_main_type
+
+logic result1 : capacity_range
+
+logic result2 : us_main_type
+
+logic amortized_queue__model__result2 : capacity_range
+
+logic amortized_queue__model__result3 : us_main_type
+
+logic amortized_queue__model__result4 : capacity_range
+
+logic amortized_queue__model__result5 : us_main_type
+
+logic amortized_queue__model__result6 : capacity_range
+
+logic amortized_queue__model__result7 : us_main_type
+
+logic revrear__split_fields3 : us_main_type
+
+logic amortized_queue__model__result8 : capacity_range
+
+logic amortized_queue__model__result9 : us_main_type
+
+logic revrear__split_fields4 : us_main_type
+
+logic amortized_queue__model__result10 : capacity_range
+
+logic amortized_queue__model__result11 : us_main_type
+
+logic result3 : capacity_range
+
+logic result4 : us_main_type
+
+axiom H : ((1000 = to_rep(q)) and (1000 = to_rep(q2)))
+
+axiom H1 : (inv({ us_split_fields3 = { rec__amortized_queue__queue__front = {
   us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity = q
   }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } };
   rec__amortized_queue__queue__rear = { us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } } }
-  }) = true) and (((((({ us_split_discrs1 = {
+  }) = true)
+
+axiom H2 : (({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity =
   amortized_queue__model__revrear__assume }; us_split_fields1 = {
   rec__amortized_queue__my_vectors__vector =
   amortized_queue__model__revrear__assume1 } } = copy({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } },
-  0)) and (((bool_eq(length1(model__({ us_split_discrs1 = {
+  0)) and ((((bool_eq(length1(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity =
   amortized_queue__model__revrear__assume }; us_split_fields1 = {
   rec__amortized_queue__my_vectors__vector =
   amortized_queue__model__revrear__assume1 } })), length1(model__({
   us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
   q2 }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  }))) = true) and
+  }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
   amortized_queue__model__revrear__assume }; us_split_fields1 = {
@@ -963,22 +994,33 @@ goal WP_parameter_def :
   amortized_queue__model__revrear__assume1 } }), n) = get(model__({
   us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
   q2 }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  }), n))))) and (to_rep(amortized_queue__model__revrear__assume) = length({
+  }), n))))) and (not (bool_eq(length1(model__({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity =
+  amortized_queue__model__revrear__assume }; us_split_fields1 = {
+  rec__amortized_queue__my_vectors__vector =
+  amortized_queue__model__revrear__assume1 } })), length1(model__({
   us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
   q2 }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  })))) and ((({ us_split_fields__content = {
-  rec__amortized_queue__my_vectors__vector = result } } = {
-  us_split_fields__content = { rec__amortized_queue__my_vectors__vector =
-  revrear__split_fields } }) and
-  (amortized_queue__model__revrear__assume1 = revrear__split_fields1)) and
-  (revrear__split_discrs = amortized_queue__model__revrear__assume))) and
-  (((bool_eq(length1(model__({ us_split_discrs1 = {
+  }))) = false))) and
+  (to_rep(amortized_queue__model__revrear__assume) = length({
+  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
+  q2 }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
+  }))))
+
+axiom H3 : (result = revrear__split_fields)
+
+axiom H4 :
+  (amortized_queue__model__revrear__assume1 = revrear__split_fields1)
+
+axiom H5 : (revrear__split_discrs = amortized_queue__model__revrear__assume)
+
+axiom H6 : (((bool_eq(length1(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = revrear__split_discrs
   }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector =
   revrear__split_fields1 } })), length1(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = revrear__split_discrs
   }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector =
-  revrear__split_fields2 } }))) = true) and
+  revrear__split_fields2 } }))) = true) ->
   ((forall i:int. (((1 <= i) and (i <= (0 + length1(model__({
    us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
    revrear__split_discrs }; us_split_fields1 = {
@@ -1007,16 +1049,23 @@ goal WP_parameter_def :
   rec__amortized_queue__my_vectors__vector__capacity = revrear__split_discrs
   }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector =
   revrear__split_fields1 } }))) - i) + 1))))))) and
-  ((((amortized_queue__model__result4 = amortized_queue__model__result2) and
-  (amortized_queue__model__result5 = amortized_queue__model__result3)) and ({
-  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
-  amortized_queue__model__result6 }; us_split_fields1 = {
-  rec__amortized_queue__my_vectors__vector = amortized_queue__model__result7
-  } } = { us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity =
-  amortized_queue__model__result2 }; us_split_fields1 = {
-  rec__amortized_queue__my_vectors__vector = amortized_queue__model__result3
-  } })) and ((({ us_split_discrs1 = {
+  (not (bool_eq(length1(model__({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = revrear__split_discrs
+  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector =
+  revrear__split_fields1 } })), length1(model__({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = revrear__split_discrs
+  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector =
+  revrear__split_fields2 } }))) = false)))
+
+axiom H7 :
+  ((amortized_queue__model__result4 = amortized_queue__model__result2) and
+  (amortized_queue__model__result5 = amortized_queue__model__result3))
+
+axiom H8 :
+  ((amortized_queue__model__result6 = amortized_queue__model__result2) and
+  (amortized_queue__model__result7 = amortized_queue__model__result3))
+
+axiom H9 : (({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = o };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = o1 }
   } = oconcat({ us_split_discrs1 = {
@@ -1058,35 +1107,39 @@ goal WP_parameter_def :
   revrear__split_fields2 } }))) + i)) = get(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } }),
-  i))))))) and (((result1 = amortized_queue__model__result) and
-  (result2 = amortized_queue__model__result1)) and ({ us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity =
-  amortized_queue__model__result2 }; us_split_fields1 = {
-  rec__amortized_queue__my_vectors__vector = amortized_queue__model__result3
-  } } = { us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity = o };
-  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = o1 }
-  })))))) and ((({ vector__content = { us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity =
-  amortized_queue__model__result8 }; us_split_fields1 = {
-  rec__amortized_queue__my_vectors__vector = amortized_queue__model__result9
-  } } } = { vector__content = { us_split_discrs1 = {
-  rec__amortized_queue__my_vectors__vector__capacity =
-  amortized_queue__model__result4 }; us_split_fields1 = {
-  rec__amortized_queue__my_vectors__vector = amortized_queue__model__result5
-  } } }) and (revrear__split_fields3 = revrear__split_fields2)) and
-  (((amortized_queue__model__result10 = amortized_queue__model__result6) and
-  (amortized_queue__model__result11 = amortized_queue__model__result7)) and
-  (revrear__split_fields4 = revrear__split_fields2)))) and
-  ((result3 = amortized_queue__model__result8) and
-  (result4 = amortized_queue__model__result9))))) -> (is_model({
-  us_split_fields3 = { rec__amortized_queue__queue__front = {
-  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity = q
-  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } };
+  i)))))))
+
+axiom H10 : (result1 = amortized_queue__model__result)
+
+axiom H11 : (result2 = amortized_queue__model__result1)
+
+axiom H12 : ((amortized_queue__model__result2 = o) and
+  (amortized_queue__model__result3 = o1))
+
+axiom H13 :
+  ((amortized_queue__model__result8 = amortized_queue__model__result4) and
+  (amortized_queue__model__result9 = amortized_queue__model__result5))
+
+axiom H14 : (revrear__split_fields3 = revrear__split_fields2)
+
+axiom H15 :
+  ((amortized_queue__model__result10 = amortized_queue__model__result6) and
+  (amortized_queue__model__result11 = amortized_queue__model__result7))
+
+axiom H16 : (revrear__split_fields4 = revrear__split_fields2)
+
+axiom H17 : ((result3 = amortized_queue__model__result8) and
+  (result4 = amortized_queue__model__result9))
+
+ (* File "a-cofove.ads", line 76, characters 0-0 *)
+goal WP_parameter_def : (is_model({ us_split_fields3 = {
+  rec__amortized_queue__queue__front = { us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = q };
+  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 } };
   rec__amortized_queue__queue__rear = { us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } } } },
   { us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
   amortized_queue__model__result8 }; us_split_fields1 = {
   rec__amortized_queue__my_vectors__vector = amortized_queue__model__result9
-  } }) = true))))
+  } }) = true)

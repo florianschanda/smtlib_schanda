@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 (define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
@@ -66,6 +66,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const right Float32)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const o Float32)
 (assert (fp.isFinite32 left))
 (assert (fp.isFinite32 right))
 (assert (not (fp.isFinite32 (fp.sub RNE left right))))

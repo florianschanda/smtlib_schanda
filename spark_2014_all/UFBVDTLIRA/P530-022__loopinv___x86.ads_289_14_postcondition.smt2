@@ -106,6 +106,8 @@
 (declare-const rdx1 (_ BitVec 64))
 (declare-const rdx2 (_ BitVec 64))
 (declare-const rdx3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result rdx))
 (assert (= rdx1 ((_ zero_extend 32) val__)))
 (assert (= rdx1 rdx2))

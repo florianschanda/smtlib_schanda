@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1884,18 +1884,57 @@ logic addr : t3
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t3,unsigned8) farray. forall x86__readmem32__result:t2.
-  forall o:t. forall o1:t. forall o2:t2. forall o3:t2. forall o4:t2.
-  forall o5:t. forall o6:t2. forall o7:t2. forall o8:t2. forall o9:t.
-  forall o10:t2. forall o11:t2. forall o12:t2. forall o13:t2.
-  forall result:t2. forall x86__readmem32__result1:t2.
-  forall x86__readmem32__result2:t2. forall x86__readmem32__result3:t2.
-  forall x86__readmem32__result4:t2. forall x86__readmem32__result5:t2.
-  (forall result1:t2. (((((((8 <  16) and (bw_or1(toBig2(readmem8(addr,
-  memory)), lsl_bv1(toBig2(readmem8(add3(addr, of_int3(1)), memory)),
-  of_int1(8))) = readmem16(addr, memory))) or ((not (8 <  16)) and
+logic memory : (t3,unsigned8) farray
+
+logic x86__readmem32__result : t2
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t2
+
+logic o3 : t2
+
+logic o4 : t2
+
+logic o5 : t
+
+logic o6 : t2
+
+logic o7 : t2
+
+logic o8 : t2
+
+logic o9 : t
+
+logic o10 : t2
+
+logic o11 : t2
+
+logic o12 : t2
+
+logic o13 : t2
+
+logic result : t2
+
+logic x86__readmem32__result1 : t2
+
+logic x86__readmem32__result2 : t2
+
+logic x86__readmem32__result3 : t2
+
+logic x86__readmem32__result4 : t2
+
+logic x86__readmem32__result5 : t2
+
+logic result1 : t2
+
+axiom H : true
+
+axiom H1 : (((((8 <  16) -> (bw_or1(toBig2(readmem8(addr, memory)),
+  lsl_bv1(toBig2(readmem8(add3(addr, of_int3(1)), memory)),
+  of_int1(8))) = readmem16(addr, memory))) and ((not (8 <  16)) ->
   (bw_or1(toBig2(readmem8(addr, memory)), of_int1(0)) = readmem16(addr,
   memory)))) and ((bw_or2(lsl_bv2(toBig1(readmem8(add3(addr, of_int3(2)),
   memory)), of_int2(16)), lsl_bv2(toBig1(readmem8(add3(addr, of_int3(3)),
@@ -1917,7 +1956,11 @@ goal WP_parameter_def :
   ((result = x86__readmem32__result) and
   (x86__readmem32__result1 = o13)))))) and
   ((x86__readmem32__result4 = x86__readmem32__result2) and
-  (x86__readmem32__result5 = x86__readmem32__result3))) and
-  (result1 = x86__readmem32__result4)) ->
+  (x86__readmem32__result5 = x86__readmem32__result3)))
+
+axiom H2 : (result1 = x86__readmem32__result4)
+
+ (* File "x86.ads", line 8, characters 0-0 *)
+goal WP_parameter_def :
   (x86__readmem32__result4 = bw_or2(toBig(readmem16(addr, memory)),
-  lsl_bv2(toBig(readmem16(add3(addr, of_int3(2)), memory)), of_int2(16)))))))
+  lsl_bv2(toBig(readmem16(add3(addr, of_int3(2)), memory)), of_int2(16))))

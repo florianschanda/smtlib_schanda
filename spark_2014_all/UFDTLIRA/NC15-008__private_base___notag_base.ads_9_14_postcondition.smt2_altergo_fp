@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -205,22 +205,50 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic notag_base__create__result : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic result : integer
+
+logic notag_base__create__result1 : integer
+
+logic notag_base__create__result2 : integer
+
+logic notag_base__create__result3 : integer
+
+logic notag_base__create__result4 : integer
+
+logic notag_base__create__result5 : integer
+
+logic result1 : integer
+
+axiom H : in_range(c)
+
+axiom H1 : (notag_base__create__result2 = notag_base__create__result1)
+
+axiom H2 : (notag_base__create__result3 = notag_base__create__result1)
+
+axiom H3 : (to_rep(o) = c)
+
+axiom H4 : (o = o1)
+
+axiom H5 : (o2 = o1)
+
+axiom H6 : (result = notag_base__create__result)
+
+axiom H7 : (notag_base__create__result1 = o2)
+
+axiom H8 : (notag_base__create__result4 = notag_base__create__result2)
+
+axiom H9 : (notag_base__create__result5 = notag_base__create__result3)
+
+axiom H10 : (result1 = notag_base__create__result4)
+
  (* File "notag_base.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall notag_base__create__result:integer. forall o:integer.
-  forall o1:integer. forall o2:integer. forall result:integer.
-  forall notag_base__create__result1:integer.
-  forall notag_base__create__result2:integer.
-  forall notag_base__create__result3:integer.
-  forall notag_base__create__result4:integer.
-  forall notag_base__create__result5:integer.
-  (forall result1:integer. ((in_range(c) and
-  (((((notag_base__create__result2 = notag_base__create__result1) and
-  (notag_base__create__result3 = notag_base__create__result1)) and
-  ((((to_rep(o) = c) and (o = o1)) and (o2 = o1)) and
-  ((result = notag_base__create__result) and
-  (o2 = notag_base__create__result1)))) and
-  ((notag_base__create__result4 = notag_base__create__result2) and
-  (notag_base__create__result5 = notag_base__create__result3))) and
-  (result1 = notag_base__create__result4))) -> (sum({ us_split_fields1 = {
-  rec__notag_base__t__c = notag_base__create__result4 } }) = c))))
+goal WP_parameter_def : (sum({ us_split_fields1 = { rec__notag_base__t__c =
+  notag_base__create__result4 } }) = c)

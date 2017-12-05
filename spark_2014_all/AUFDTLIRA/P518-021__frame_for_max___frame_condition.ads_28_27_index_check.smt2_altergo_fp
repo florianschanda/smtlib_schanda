@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -585,111 +585,908 @@ logic c235b : int
 
 logic attr__ATTRIBUTE_ADDRESS20 : int
 
- (* File "frame_condition.adb", line 50, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall k:int. forall max:int.
-  forall c167b:int. forall c168b:int. forall k1:int. forall max1:int.
-  forall c204b:int. forall c205b:int. forall o:int.
-  forall frame_condition__update_max_3__B165b__first__assume:int.
-  forall frame_condition__update_max_3__B165b__last__assume:int.
-  forall temp___253:int. forall temp___249:int.
-  forall temp___251:(int,us_rep) farray. forall temp___248:int.
-  forall temp___247:int. forall temp___254:(int,us_rep) farray.
-  forall o1:int. forall o2:natural. forall o3:natural. forall o4:natural.
-  forall o5:natural. forall o6:natural. forall o7:natural. forall o8:natural.
-  forall o9:int. forall o10:int. forall o11:natural. forall o12:natural.
-  forall o13:natural. forall o14:natural. forall o15:natural.
-  forall o16:natural. forall o17:natural. forall o18:int. forall o19:natural.
-  forall o20:natural. forall o21:natural. forall o22:natural.
-  forall o23:natural. forall o24:natural. forall o25:natural. forall o26:int.
-  forall o27:(int,us_rep) farray.
-  forall frame_condition__update_max_3__B202b__first__assume:int.
-  forall frame_condition__update_max_3__B202b__last__assume:int.
-  forall temp___263:int. forall temp___262:int.
-  forall temp___260:(int,us_rep) farray. forall temp___258:int.
-  forall temp___264:(int,us_rep) farray. forall temp___257:int.
-  forall o28:int. forall o29:natural. forall o30:natural. forall o31:natural.
-  forall o32:natural. forall o33:natural. forall o34:natural.
-  forall o35:natural. forall o36:int. forall o37:int. forall o38:us_rep.
-  forall o39:us_split_fields. forall o40:natural. forall o41:int.
-  forall o42:natural. forall o43:us_split_fields. forall o44:us_rep.
-  forall o45:int. forall o46:(int,us_rep) farray. forall o47:natural.
-  forall o48:us_split_fields. forall o49:us_rep. forall o50:int.
-  forall o51:(int,us_rep) farray. forall i:int. forall j:int. forall o52:int.
-  forall o53:us_rep. forall o54:us_split_fields. forall o55:natural.
-  forall o56:int. forall o57:int. forall o58:us_rep.
-  forall o59:us_split_fields. forall o60:natural. forall o61:int.
-  forall o62:us_rep. forall o63:us_split_fields. forall o64:natural.
-  forall o65:int. forall o66:int. forall o67:bool.
-  forall a1:(int,us_rep) farray. forall k2:int. forall max2:int.
-  forall c167b1:int. forall c168b1:int. forall k3:int. forall max3:int.
-  forall c204b1:int. forall c205b1:int. forall result:bool.
-  forall result1:int__ref. forall k4:int. forall result2:int__ref.
-  forall max4:int. forall result3:bool. forall result4:int__ref.
-  forall max5:int. forall result5:int__ref. forall c167b2:int.
-  forall result6:int__ref. forall c168b2:int. forall result7:map__ref.
-  forall a2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
-  forall k5:int. forall max6:int. forall c167b3:int. forall c168b3:int.
-  forall k6:int__ref. forall k7:int. forall a4:map__ref. forall k8:int__ref.
-  forall max7:int__ref. forall c167b4:int__ref. forall c168b4:int__ref.
-  forall a5:(int,us_rep) farray. forall k9:int. forall max8:int.
-  forall c167b5:int. forall c168b5:int. forall a6:map__ref.
-  forall k10:int__ref. forall max9:int__ref. forall c167b6:int__ref.
-  forall c168b6:int__ref. forall a7:(int,us_rep) farray. forall k11:int.
-  forall max10:int. forall c167b7:int. forall c168b7:int.
-  forall result8:int__ref. forall k12:int. forall result9:int__ref.
-  forall max11:int. forall result10:bool. forall result11:int__ref.
-  forall max12:int. forall max13:int__ref. forall max14:int.
-  forall result12:int__ref. forall c204b2:int. forall result13:int__ref.
-  forall c205b2:int. forall result14:map__ref. forall a8:(int,us_rep) farray.
-  forall result15:map__ref. forall a9:(int,us_rep) farray.
-  forall a10:map__ref. forall a11:(int,us_rep) farray.
-  forall a12:(int,us_rep) farray. forall k13:int. forall max15:int.
-  forall c204b3:int. forall c205b3:int. forall k14:int__ref. forall k15:int.
-  forall a13:map__ref. forall k16:int__ref. forall max16:int__ref.
-  forall c204b4:int__ref. forall c205b4:int__ref.
-  forall a14:(int,us_rep) farray. forall k17:int. forall max17:int.
-  forall c204b5:int. forall c205b5:int. forall a15:map__ref.
-  forall k18:int__ref. forall max18:int__ref. forall c204b6:int__ref.
-  forall c205b6:int__ref. forall a16:(int,us_rep) farray. forall k19:int.
-  forall max19:int. forall c204b7:int. forall c205b7:int.
-  forall a17:map__ref. forall k20:int__ref. forall max20:int__ref.
-  forall c167b8:int__ref. forall c168b8:int__ref. forall k21:int__ref.
-  forall max21:int__ref. forall c204b8:int__ref. forall c205b8:int__ref.
-  forall a18:(int,us_rep) farray. forall k22:int. forall max22:int.
-  forall c167b9:int. forall c168b9:int. forall k23:int. forall max23:int.
-  forall c204b9:int. forall c205b9:int. forall a19:map__ref.
-  forall k24:int__ref. forall max24:int__ref. forall c167b10:int__ref.
-  forall c168b10:int__ref. forall k25:int__ref. forall max25:int__ref.
-  forall c204b10:int__ref. forall c205b10:int__ref.
-  forall a20:(int,us_rep) farray. forall k26:int. forall max26:int.
-  forall c167b11:int. forall c168b11:int. forall k27:int. forall max27:int.
-  forall c204b11:int. forall c205b11:int. (dynamic_property(1, 2147483647,
-  to_rep1(a__first), to_rep1(a__last)) -> (((((((c205b8 = { int__content =
-  c205b }) and ((c204b8 = { int__content = c204b }) and ((max21 = {
-  int__content = max1 }) and ((k21 = { int__content = k1 }) and ((c168b8 = {
-  int__content = c168b }) and ((c167b8 = { int__content = c167b }) and
-  ((max20 = { int__content = max }) and ((k20 = { int__content = k }) and
-  (a17 = { map__content = a }))))))))) and ((c205b9 = c205b1) and
-  ((c204b9 = c204b1) and ((max23 = max3) and ((k23 = k3) and
-  ((c168b9 = c168b1) and ((c167b9 = c167b1) and ((max22 = max2) and
-  ((k22 = k2) and (a18 = a1)))))))))) and
-  (((((to_rep1(a__first) <= to_rep1(a__last)) and
-  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (result = true))) or
-  ((((((to_rep1(a__first) <= to_rep1(a__last)) and
-  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (not (result = true))) and ((((c205b8 = c205b6) and
-  ((c204b8 = c204b6) and ((max21 = max18) and ((k21 = k18) and
-  ((c168b8 = c168b6) and ((c167b8 = c167b6) and ((max20 = max9) and
-  ((k20 = k10) and (a17 = a15))))))))) and ((c205b9 = c205b7) and
-  ((c204b9 = c204b7) and ((max23 = max19) and ((k23 = k19) and
-  ((c168b9 = c168b7) and ((c167b9 = c167b7) and ((max22 = max10) and
-  ((k22 = k11) and (a18 = a16)))))))))) and (in_range4(c164b) and
+logic a : (int,us_rep) farray
+
+logic k : int
+
+logic max : int
+
+logic c167b : int
+
+logic c168b : int
+
+logic k1 : int
+
+logic max1 : int
+
+logic c204b : int
+
+logic c205b : int
+
+logic o : int
+
+logic frame_condition__update_max_3__B165b__first__assume : int
+
+logic frame_condition__update_max_3__B165b__last__assume : int
+
+logic temp___254 : (int,us_rep) farray
+
+logic temp___252 : (int,us_rep) farray
+
+logic temp___250 : int
+
+logic temp___249 : int
+
+logic temp___248 : int
+
+logic temp___247 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : natural
+
+logic o18 : int
+
+logic o19 : natural
+
+logic o20 : natural
+
+logic o21 : natural
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic o24 : natural
+
+logic o25 : natural
+
+logic o26 : int
+
+logic o27 : (int,us_rep) farray
+
+logic i : int
+
+logic i1 : int
+
+logic o28 : bool
+
+logic i2 : int
+
+logic j : int
+
+logic o29 : int
+
+logic o30 : natural
+
+logic o31 : natural
+
+logic o32 : natural
+
+logic o33 : natural
+
+logic o34 : natural
+
+logic o35 : natural
+
+logic o36 : natural
+
+logic o37 : int
+
+logic i3 : int
+
+logic j1 : int
+
+logic o38 : int
+
+logic o39 : natural
+
+logic o40 : natural
+
+logic o41 : natural
+
+logic o42 : natural
+
+logic o43 : natural
+
+logic o44 : natural
+
+logic o45 : natural
+
+logic o46 : int
+
+logic i4 : int
+
+logic o47 : int
+
+logic o48 : natural
+
+logic o49 : natural
+
+logic o50 : natural
+
+logic o51 : natural
+
+logic o52 : natural
+
+logic o53 : natural
+
+logic o54 : natural
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : natural
+
+logic o59 : natural
+
+logic o60 : natural
+
+logic o61 : natural
+
+logic o62 : natural
+
+logic o63 : natural
+
+logic o64 : natural
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : natural
+
+logic o68 : natural
+
+logic o69 : natural
+
+logic o70 : natural
+
+logic o71 : natural
+
+logic o72 : natural
+
+logic o73 : natural
+
+logic o74 : int
+
+logic o75 : natural
+
+logic o76 : natural
+
+logic o77 : natural
+
+logic o78 : natural
+
+logic o79 : natural
+
+logic o80 : natural
+
+logic o81 : natural
+
+logic o82 : int
+
+logic o83 : (int,us_rep) farray
+
+logic frame_condition__update_max_3__B202b__first__assume : int
+
+logic frame_condition__update_max_3__B202b__last__assume : int
+
+logic temp___263 : int
+
+logic temp___261 : (int,us_rep) farray
+
+logic temp___259 : int
+
+logic temp___258 : int
+
+logic temp___257 : int
+
+logic temp___264 : (int,us_rep) farray
+
+logic o84 : int
+
+logic o85 : natural
+
+logic o86 : natural
+
+logic o87 : natural
+
+logic o88 : natural
+
+logic o89 : natural
+
+logic o90 : natural
+
+logic o91 : natural
+
+logic o92 : int
+
+logic o93 : int
+
+logic o94 : natural
+
+logic o95 : natural
+
+logic o96 : natural
+
+logic o97 : natural
+
+logic o98 : natural
+
+logic o99 : natural
+
+logic o100 : natural
+
+logic o101 : int
+
+logic o102 : natural
+
+logic o103 : natural
+
+logic o104 : natural
+
+logic o105 : natural
+
+logic o106 : natural
+
+logic o107 : natural
+
+logic o108 : natural
+
+logic o109 : int
+
+logic o110 : (int,us_rep) farray
+
+logic o111 : natural
+
+logic o112 : natural
+
+logic o113 : natural
+
+logic o114 : natural
+
+logic o115 : natural
+
+logic o116 : natural
+
+logic o117 : natural
+
+logic o118 : int
+
+logic o119 : (int,us_rep) farray
+
+logic i5 : int
+
+logic i6 : int
+
+logic o120 : bool
+
+logic i7 : int
+
+logic j2 : int
+
+logic o121 : int
+
+logic o122 : natural
+
+logic o123 : natural
+
+logic o124 : natural
+
+logic o125 : natural
+
+logic o126 : natural
+
+logic o127 : natural
+
+logic o128 : natural
+
+logic o129 : int
+
+logic i8 : int
+
+logic j3 : int
+
+logic o130 : int
+
+logic o131 : natural
+
+logic o132 : natural
+
+logic o133 : natural
+
+logic o134 : natural
+
+logic o135 : natural
+
+logic o136 : natural
+
+logic o137 : natural
+
+logic o138 : int
+
+logic i9 : int
+
+logic o139 : int
+
+logic o140 : natural
+
+logic o141 : natural
+
+logic o142 : natural
+
+logic o143 : natural
+
+logic o144 : natural
+
+logic o145 : natural
+
+logic o146 : natural
+
+logic o147 : int
+
+logic o148 : int
+
+logic o149 : int
+
+logic o150 : int
+
+logic o151 : natural
+
+logic o152 : natural
+
+logic o153 : natural
+
+logic o154 : natural
+
+logic o155 : natural
+
+logic o156 : natural
+
+logic o157 : natural
+
+logic o158 : int
+
+logic o159 : int
+
+logic o160 : natural
+
+logic o161 : natural
+
+logic o162 : natural
+
+logic o163 : natural
+
+logic o164 : natural
+
+logic o165 : natural
+
+logic o166 : natural
+
+logic o167 : int
+
+logic o168 : natural
+
+logic o169 : natural
+
+logic o170 : natural
+
+logic o171 : natural
+
+logic o172 : natural
+
+logic o173 : natural
+
+logic o174 : natural
+
+logic o175 : int
+
+logic o176 : (int,us_rep) farray
+
+logic o177 : natural
+
+logic o178 : natural
+
+logic o179 : natural
+
+logic o180 : natural
+
+logic o181 : natural
+
+logic o182 : natural
+
+logic o183 : natural
+
+logic o184 : int
+
+logic o185 : (int,us_rep) farray
+
+logic i10 : int
+
+logic o186 : int
+
+logic o187 : natural
+
+logic o188 : natural
+
+logic o189 : natural
+
+logic o190 : natural
+
+logic o191 : natural
+
+logic o192 : natural
+
+logic o193 : natural
+
+logic o194 : int
+
+logic j4 : int
+
+logic o195 : int
+
+logic o196 : natural
+
+logic o197 : natural
+
+logic o198 : natural
+
+logic o199 : natural
+
+logic o200 : natural
+
+logic o201 : natural
+
+logic o202 : natural
+
+logic o203 : int
+
+logic o204 : int
+
+logic o205 : natural
+
+logic o206 : natural
+
+logic o207 : natural
+
+logic o208 : natural
+
+logic o209 : natural
+
+logic o210 : natural
+
+logic o211 : natural
+
+logic o212 : int
+
+logic o213 : natural
+
+logic o214 : natural
+
+logic o215 : natural
+
+logic o216 : natural
+
+logic o217 : natural
+
+logic o218 : natural
+
+logic o219 : natural
+
+logic o220 : int
+
+logic o221 : int
+
+logic o222 : bool
+
+logic o223 : bool
+
+logic a1 : (int,us_rep) farray
+
+logic k2 : int
+
+logic max2 : int
+
+logic c167b1 : int
+
+logic c168b1 : int
+
+logic k3 : int
+
+logic max3 : int
+
+logic c204b1 : int
+
+logic c205b1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic k4 : int
+
+logic result2 : int
+
+logic max4 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic max5 : int
+
+logic result5 : int
+
+logic c167b2 : int
+
+logic result6 : int
+
+logic c168b2 : int
+
+logic result7 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic k5 : int
+
+logic max6 : int
+
+logic c167b3 : int
+
+logic c168b3 : int
+
+logic result8 : int
+
+logic k6 : int
+
+logic result9 : bool
+
+logic result10 : int
+
+logic max7 : int
+
+logic result11 : int
+
+logic c167b4 : int
+
+logic result12 : int
+
+logic c168b4 : int
+
+logic result13 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic k7 : int
+
+logic k8 : int
+
+logic a5 : (int,us_rep) farray
+
+logic k9 : int
+
+logic max8 : int
+
+logic c167b5 : int
+
+logic c168b5 : int
+
+logic a6 : (int,us_rep) farray
+
+logic k10 : int
+
+logic max9 : int
+
+logic c167b6 : int
+
+logic c168b6 : int
+
+logic a7 : (int,us_rep) farray
+
+logic k11 : int
+
+logic max10 : int
+
+logic c167b7 : int
+
+logic c168b7 : int
+
+logic a8 : (int,us_rep) farray
+
+logic k12 : int
+
+logic max11 : int
+
+logic c167b8 : int
+
+logic c168b8 : int
+
+logic result14 : int
+
+logic k13 : int
+
+logic result15 : int
+
+logic max12 : int
+
+logic result16 : bool
+
+logic result17 : int
+
+logic max13 : int
+
+logic max14 : int
+
+logic max15 : int
+
+logic result18 : int
+
+logic c204b2 : int
+
+logic result19 : int
+
+logic c205b2 : int
+
+logic result20 : (int,us_rep) farray
+
+logic a9 : (int,us_rep) farray
+
+logic result21 : (int,us_rep) farray
+
+logic a10 : (int,us_rep) farray
+
+logic a11 : (int,us_rep) farray
+
+logic a12 : (int,us_rep) farray
+
+logic a13 : (int,us_rep) farray
+
+logic k14 : int
+
+logic max16 : int
+
+logic c204b3 : int
+
+logic c205b3 : int
+
+logic result22 : int
+
+logic k15 : int
+
+logic result23 : int
+
+logic k16 : int
+
+logic k17 : int
+
+logic k18 : int
+
+logic result24 : bool
+
+logic result25 : int
+
+logic max17 : int
+
+logic max18 : int
+
+logic max19 : int
+
+logic result26 : int
+
+logic c204b4 : int
+
+logic result27 : int
+
+logic c205b4 : int
+
+logic result28 : (int,us_rep) farray
+
+logic a14 : (int,us_rep) farray
+
+logic result29 : (int,us_rep) farray
+
+logic a15 : (int,us_rep) farray
+
+logic a16 : (int,us_rep) farray
+
+logic a17 : (int,us_rep) farray
+
+logic k19 : int
+
+logic k20 : int
+
+logic a18 : (int,us_rep) farray
+
+logic k21 : int
+
+logic max20 : int
+
+logic c204b5 : int
+
+logic c205b5 : int
+
+logic a19 : (int,us_rep) farray
+
+logic k22 : int
+
+logic max21 : int
+
+logic c204b6 : int
+
+logic c205b6 : int
+
+logic a20 : (int,us_rep) farray
+
+logic k23 : int
+
+logic max22 : int
+
+logic c204b7 : int
+
+logic c205b7 : int
+
+logic a21 : (int,us_rep) farray
+
+logic k24 : int
+
+logic max23 : int
+
+logic c204b8 : int
+
+logic c205b8 : int
+
+logic a22 : (int,us_rep) farray
+
+logic k25 : int
+
+logic max24 : int
+
+logic c204b9 : int
+
+logic c205b9 : int
+
+logic a23 : (int,us_rep) farray
+
+logic k26 : int
+
+logic max25 : int
+
+logic c204b10 : int
+
+logic c205b10 : int
+
+logic a24 : (int,us_rep) farray
+
+logic k27 : int
+
+logic max26 : int
+
+logic c167b9 : int
+
+logic c168b9 : int
+
+logic k28 : int
+
+logic max27 : int
+
+logic c204b11 : int
+
+logic c205b11 : int
+
+logic a25 : (int,us_rep) farray
+
+logic k29 : int
+
+logic max28 : int
+
+logic c167b10 : int
+
+logic c168b10 : int
+
+logic k30 : int
+
+logic max29 : int
+
+logic c204b12 : int
+
+logic c205b12 : int
+
+logic a26 : (int,us_rep) farray
+
+logic k31 : int
+
+logic max30 : int
+
+logic c167b11 : int
+
+logic c168b11 : int
+
+logic k32 : int
+
+logic max31 : int
+
+logic c204b13 : int
+
+logic c205b13 : int
+
+logic a27 : (int,us_rep) farray
+
+logic k33 : int
+
+logic max32 : int
+
+logic c167b12 : int
+
+logic c168b12 : int
+
+logic k34 : int
+
+logic max33 : int
+
+logic c204b14 : int
+
+logic c205b14 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : (((((c205b11 = c205b) and ((c204b11 = c204b) and
+  ((max27 = max1) and ((k28 = k1) and ((c168b9 = c168b) and
+  ((c167b9 = c167b) and ((max26 = max) and ((k27 = k) and
+  (a24 = a))))))))) and ((c205b12 = c205b1) and ((c204b12 = c204b1) and
+  ((max29 = max3) and ((k30 = k3) and ((c168b10 = c168b1) and
+  ((c167b10 = c167b1) and ((max28 = max2) and ((k29 = k2) and
+  (a25 = a1)))))))))) and (((((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) and
+  ((not (to_rep1(a__first) <= to_rep1(a__last))) -> (o = 0))) and
+  (((o = 0) -> (result = true)) and ((not (o = 0)) -> (result = false)))) and
+  (result = true))) or ((((((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) and
+  ((not (to_rep1(a__first) <= to_rep1(a__last))) -> (o = 0))) and
+  (((o = 0) -> (result = true)) and ((not (o = 0)) -> (result = false)))) and
+  (not (result = true))) and ((((c205b11 = c205b9) and
+  ((c204b11 = c204b9) and ((max27 = max24) and ((k28 = k25) and
+  ((c168b9 = c168b7) and ((c167b9 = c167b7) and ((max26 = max10) and
+  ((k27 = k11) and (a24 = a22))))))))) and ((c205b12 = c205b10) and
+  ((c204b12 = c204b10) and ((max29 = max25) and ((k30 = k26) and
+  ((c168b10 = c168b8) and ((c167b10 = c167b8) and ((max28 = max11) and
+  ((k29 = k12) and (a25 = a23)))))))))) and (in_range4(c164b) and
   ((in_range4(not_kind) and
   ((((frame_condition__update_max_3__B165b__first__assume = to_rep1(a__first)) and
   in_range3(to_rep1(a__first))) and
@@ -698,28 +1495,27 @@ goal WP_parameter_def :
   ((((frame_condition__update_max_3__B165b__last__assume = to_rep1(a__last)) and
   in_range3(to_rep1(a__last))) and
   (frame_condition__update_max_3__B165b__last__assume = last2)) and
-  (in_range3(last2) and (((result1 = { int__content = k }) and
-  (k4 = first2)) and (in_range3(k4) and (((result2 = { int__content = max
-  }) and (max4 = 0)) and (in_range2(max4) and ((((temp___253 = max4) and
-  ((temp___249 = k4) and ((temp___251 = a) and ((temp___248 = c168b) and
-  ((temp___247 = c167b) and ((temp___254 = a) and
-  ((((((((((to_rep1(a__first) <= k4) and (k4 <= to_rep1(a__last))) and
-  (o1 = k4)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o2; rec__frame_condition__cell__max_left = o3;
+  (in_range3(last2) and (((result1 = k) and (k4 = first2)) and
+  (in_range3(k4) and (((result2 = max) and (max4 = 0)) and
+  (in_range2(max4) and ((((temp___254 = a) and ((temp___252 = a) and
+  ((temp___250 = max4) and ((temp___249 = k4) and ((temp___248 = c168b) and
+  ((temp___247 = c167b) and ((((((((((to_rep1(a__first) <= k4) and
+  (k4 <= to_rep1(a__last))) and (o1 = k4)) and ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o2;
+  rec__frame_condition__cell__max_left = o3;
   rec__frame_condition__cell__max_right = o4 } } = (a[o1]))) and
   ((o2 = o5) and ((o3 = o6) and (o4 = o7)))) and (o8 = o5)) and
-  (o9 = to_rep(o8))) and (((max4 <  o9) and (result3 = true)) or
-  ((not (max4 <  o9)) and (result3 = false)))) and (((result3 = true) and
+  (o9 = to_rep(o8))) and (((max4 <  o9) -> (result3 = true)) and
+  ((not (max4 <  o9)) -> (result3 = false)))) and (((result3 = true) ->
   ((((((((to_rep1(a__first) <= k4) and (k4 <= to_rep1(a__last))) and
   (o10 = k4)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
   o11; rec__frame_condition__cell__max_left = o12;
   rec__frame_condition__cell__max_right = o13 } } = (a[o10]))) and
   ((o11 = o14) and ((o12 = o15) and (o13 = o16)))) and (o17 = o14)) and
-  (o18 = to_rep(o17))) and ((result4 = { int__content = max4 }) and
-  (max5 = o18)))) or ((not (result3 = true)) and (max5 = max4)))) and
-  (in_range4(c166b) and ((((result5 = { int__content = c167b }) and
-  (c167b2 = k4)) and in_range3(c167b2)) and ((((result6 = { int__content =
-  c168b }) and (c168b2 = max5)) and in_range2(c168b2)) and
+  (o18 = to_rep(o17))) and ((result4 = max4) and (max5 = o18)))) and
+  ((not (result3 = true)) -> (max5 = max4)))) and (in_range4(c166b) and
+  ((((result5 = c167b) and (c167b2 = k4)) and in_range3(c167b2)) and
+  ((((result6 = c168b) and (c168b2 = max5)) and in_range2(c168b2)) and
   ((((((to_rep(o19) = c168b2) and
   (((((a[c167b2])).us_split_fields1).rec__frame_condition__cell__value = o20) and
   ((o19 = o21) and
@@ -729,133 +1525,202 @@ goal WP_parameter_def :
   (o26 = c167b2)) and (o27 = (a[o26 <- { us_split_fields1 = {
   rec__frame_condition__cell__value = o23;
   rec__frame_condition__cell__max_left = o24;
-  rec__frame_condition__cell__max_right = o25 } }])))) and ((result7 = {
-  map__content = a }) and (a2 = o27))) and ((((to_rep1(a__first) <= k5) and
+  rec__frame_condition__cell__max_right = o25 } }])))) and ((result7 = a) and
+  (a2 = o27))) and ((((to_rep1(a__first) <= k5) and
   (k5 <= to_rep1(a__last))) and
-  (((forall i1:int. (((first2 <= i1) and (i1 <= k5)) ->
-    (to_rep((((a3[i1])).us_split_fields1).rec__frame_condition__cell__value) <= max6))) and
-  (forall i1:int. (((k5 <= i1) and (i1 <= first2)) ->
-  (to_rep((((a3[i1])).us_split_fields1).rec__frame_condition__cell__value) <= max6)))) and
-  (forall i1:int. (((to_rep1(a__first) <= i1) and (i1 <= k5)) ->
-  (forall j1:int. (((i1 <= j1) and (j1 <= k5)) ->
-  (to_rep((((a3[i1])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a3[j1])).us_split_fields1).rec__frame_condition__cell__max_left)))))))) and
+  (((forall i11:int. (((first2 <= i11) and (i11 <= k5)) ->
+    (to_rep((((a3[i11])).us_split_fields1).rec__frame_condition__cell__value) <= max6))) and
+  (forall i11:int. (((k5 <= i11) and (i11 <= first2)) ->
+  (to_rep((((a3[i11])).us_split_fields1).rec__frame_condition__cell__value) <= max6)))) and
+  (forall i11:int. (((to_rep1(a__first) <= i11) and (i11 <= k5)) ->
+  (forall j5:int. (((i11 <= j5) and (j5 <= k5)) ->
+  (to_rep((((a3[i11])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a3[j5])).us_split_fields1).rec__frame_condition__cell__max_left)))))))) and
   (((((((1 <= 2147483647) -> in_range3(c167b3)) and ((0 <= 2147483647) ->
   in_range2(c168b3))) and ((1 <= 2147483647) -> in_range3(k5))) and
-  (forall temp___252:int. (((to_rep1(a__first) <= temp___252) and
-  (temp___252 <= to_rep1(a__last))) ->
-  ((((a3[temp___252])).us_split_fields1).rec__frame_condition__cell__value = (((temp___251[temp___252])).us_split_fields1).rec__frame_condition__cell__value)))) and
-  ((0 <= 2147483647) -> in_range2(max6))) and (((k6 = { int__content = k5
-  }) and (k7 = k5)) and (k5 = last2))))))))))))))) and (((c168b4 = {
-  int__content = c168b3 }) and ((c167b4 = { int__content = c167b3 }) and
-  ((max7 = { int__content = max6 }) and ((k8 = k6) and (a4 = { map__content =
-  a3 }))))) and ((c168b5 = c168b3) and ((c167b5 = c167b3) and
-  ((max8 = max6) and ((k9 = k7) and (a5 = a3))))))) and
-  (((c168b6 = c168b4) and ((c167b6 = c167b4) and ((max9 = max7) and
-  ((k10 = k8) and (a6 = a4))))) and ((c168b7 = c168b5) and
-  ((c167b7 = c167b5) and ((max10 = max8) and ((k11 = k9) and
-  (a7 = a5)))))))))))))))) and (in_range4(c201b) and
-  (in_range4(not_kind1) and (((((1 = 0) and
+  ((0 <= 2147483647) -> in_range2(max6))) and
+  (forall temp___253:int. (((to_rep1(a__first) <= temp___253) and
+  (temp___253 <= to_rep1(a__last))) ->
+  ((((a3[temp___253])).us_split_fields1).rec__frame_condition__cell__value = (((temp___252[temp___253])).us_split_fields1).rec__frame_condition__cell__value)))) and
+  (((k7 = k5) and (k8 = k5)) and (k5 = last2))))))))))))))) and
+  (((c168b5 = c168b3) and ((c167b5 = c167b3) and ((max8 = max6) and
+  ((k9 = k7) and (a5 = a3))))) and ((c168b6 = c168b3) and
+  ((c167b6 = c167b3) and ((max9 = max6) and ((k10 = k8) and
+  (a6 = a3))))))) and (((c168b7 = c168b5) and ((c167b7 = c167b5) and
+  ((max10 = max8) and ((k11 = k9) and (a7 = a5))))) and
+  ((c168b8 = c168b6) and ((c167b8 = c167b6) and ((max11 = max9) and
+  ((k12 = k10) and (a8 = a6)))))))))))))))) and (in_range4(c201b) and
+  (in_range4(not_kind1) and (((((1 = 0) ->
   ((frame_condition__update_max_3__B202b__first__assume = to_rep1(a__first)) and
-  in_range3(to_rep1(a__first)))) or ((not (1 = 0)) and
+  in_range3(to_rep1(a__first)))) and ((not (1 = 0)) ->
   ((frame_condition__update_max_3__B202b__first__assume = to_rep1(a__last)) and
   in_range3(to_rep1(a__last))))) and
   (frame_condition__update_max_3__B202b__first__assume = first3)) and
-  (in_range3(first3) and (((((1 = 0) and
+  (in_range3(first3) and (((((1 = 0) ->
   ((frame_condition__update_max_3__B202b__last__assume = to_rep1(a__last)) and
-  in_range3(to_rep1(a__last)))) or ((not (1 = 0)) and
+  in_range3(to_rep1(a__last)))) and ((not (1 = 0)) ->
   ((frame_condition__update_max_3__B202b__last__assume = to_rep1(a__first)) and
   in_range3(to_rep1(a__first))))) and
   (frame_condition__update_max_3__B202b__last__assume = last3)) and
-  (in_range3(last3) and (((result8 = { int__content = k1 }) and
-  (k12 = first3)) and (in_range3(k12) and (((result9 = { int__content = max1
-  }) and (max11 = 0)) and (in_range2(max11) and ((((temp___263 = k12) and
-  ((temp___262 = c205b) and ((temp___260 = (a6).map__content) and
-  ((temp___258 = c204b) and ((temp___264 = (a6).map__content) and
-  ((temp___257 = max11) and ((((((((((to_rep1(a__first) <= k12) and
-  (k12 <= to_rep1(a__last))) and (o28 = k12)) and ({ us_split_fields1 = {
-  rec__frame_condition__cell__value = o29;
-  rec__frame_condition__cell__max_left = o30;
-  rec__frame_condition__cell__max_right = o31 }
-  } = ((a6).map__content[o28]))) and ((o29 = o32) and ((o30 = o33) and
-  (o31 = o34)))) and (o35 = o32)) and (o36 = to_rep(o35))) and
-  (((max11 <  o36) and (result10 = true)) or ((not (max11 <  o36)) and
-  (result10 = false)))) and (((result10 = true) and
-  (((((((((to_rep1(a__first) <= k12) and (k12 <= to_rep1(a__last))) and
-  (o37 = k12)) and (o38 = ((a6).map__content[o37]))) and
-  (o39 = (o38).us_split_fields1)) and
-  (o40 = (o39).rec__frame_condition__cell__value)) and
-  (o41 = to_rep(o40))) and ((result11 = { int__content = max11 }) and
-  (max12 = o41))) and ((max13 = { int__content = max12 }) and
-  (max14 = max12)))) or ((not (result10 = true)) and ((max13 = {
-  int__content = max11 }) and (max14 = max11))))) and (in_range4(c203b) and
-  ((((result12 = { int__content = c204b }) and (c204b2 = k12)) and
-  in_range3(c204b2)) and ((((result13 = { int__content = c205b }) and
-  (c205b2 = (max13).int__content)) and in_range2(c205b2)) and ((((1 = 0) and
-  ((((((to_rep(o42) = c205b2) and (o43 = {
-  rec__frame_condition__cell__value =
-  ((((a6).map__content[c204b2])).us_split_fields1).rec__frame_condition__cell__value;
-  rec__frame_condition__cell__max_left = o42;
-  rec__frame_condition__cell__max_right =
-  ((((a6).map__content[c204b2])).us_split_fields1).rec__frame_condition__cell__max_right
-  })) and (o44 = { us_split_fields1 = o43 })) and
+  (in_range3(last3) and (((result14 = k1) and (k13 = first3)) and
+  (in_range3(k13) and (((result15 = max1) and (max12 = 0)) and
+  (in_range2(max12) and ((((temp___263 = max12) and ((temp___261 = a7) and
+  ((temp___259 = k13) and ((temp___258 = c205b) and ((temp___257 = c204b) and
+  ((temp___264 = a7) and ((((((((((to_rep1(a__first) <= k13) and
+  (k13 <= to_rep1(a__last))) and (o84 = k13)) and ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o85;
+  rec__frame_condition__cell__max_left = o86;
+  rec__frame_condition__cell__max_right = o87 } } = (a7[o84]))) and
+  ((o88 = o85) and ((o89 = o86) and (o90 = o87)))) and (o91 = o88)) and
+  (o92 = to_rep(o91))) and (((max12 <  o92) -> (result16 = true)) and
+  ((not (max12 <  o92)) -> (result16 = false)))) and (((result16 = true) ->
+  (((((((((to_rep1(a__first) <= k13) and (k13 <= to_rep1(a__last))) and
+  (o93 = k13)) and ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o94;
+  rec__frame_condition__cell__max_left = o95;
+  rec__frame_condition__cell__max_right = o96 } } = (a7[o93]))) and
+  ((o97 = o94) and ((o98 = o95) and (o99 = o96)))) and (o100 = o97)) and
+  (o101 = to_rep(o100))) and ((result17 = max12) and (max13 = o101))) and
+  ((max14 = max13) and (max15 = max13)))) and ((not (result16 = true)) ->
+  ((max14 = max12) and (max15 = max12))))) and (in_range4(c203b) and
+  ((((result18 = c204b) and (c204b2 = k13)) and in_range3(c204b2)) and
+  ((((result19 = c205b) and (c205b2 = max14)) and in_range2(c205b2)) and
+  ((((1 = 0) -> ((((((to_rep(o102) = c205b2) and
+  ((o103 = (((a7[c204b2])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((o104 = o102) and
+  (o105 = (((a7[c204b2])).us_split_fields1).rec__frame_condition__cell__max_right)))) and
+  ((o106 = o103) and ((o107 = o104) and (o108 = o105)))) and
   ((((to_rep1(a__first) <= c204b2) and (c204b2 <= to_rep1(a__last))) and
-  (o45 = c204b2)) and (o46 = ((a6).map__content[o45 <- o44])))) and
-  ((result14 = a6) and (a8 = o46))) and ((a10 = { map__content = a8 }) and
-  (a11 = a8)))) or ((not (1 = 0)) and ((((((to_rep(o47) = c205b2) and
-  (o48 = { rec__frame_condition__cell__value =
-  ((((a6).map__content[c204b2])).us_split_fields1).rec__frame_condition__cell__value;
-  rec__frame_condition__cell__max_left =
-  ((((a6).map__content[c204b2])).us_split_fields1).rec__frame_condition__cell__max_left;
-  rec__frame_condition__cell__max_right = o47 })) and (o49 = {
-  us_split_fields1 = o48 })) and ((((to_rep1(a__first) <= c204b2) and
-  (c204b2 <= to_rep1(a__last))) and (o50 = c204b2)) and
-  (o51 = ((a6).map__content[o50 <- o49])))) and ((result15 = a6) and
-  (a9 = o51))) and ((a10 = { map__content = a9 }) and (a11 = a9))))) and
-  ((((to_rep1(a__first) <= k13) and (k13 <= to_rep1(a__last))) and
-  (((forall i1:int. (((first3 <= i1) and (i1 <= k13)) ->
-    (to_rep((((a12[i1])).us_split_fields1).rec__frame_condition__cell__value) <= max15))) and
-  (forall i1:int. (((k13 <= i1) and (i1 <= first3)) ->
-  (to_rep((((a12[i1])).us_split_fields1).rec__frame_condition__cell__value) <= max15)))) and
-  ((forall i1:int. (((k13 <= i1) and (i1 <= to_rep1(a__last))) ->
-   (forall j1:int. (((i1 <= j1) and (j1 <= to_rep1(a__last))) ->
-   (to_rep((((a12[j1])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a12[i1])).us_split_fields1).rec__frame_condition__cell__max_right)))))) and
-  (forall i1:int. (((to_rep1(a__first) <= i1) and
-  (i1 <= to_rep1(a__last))) ->
-  (to_rep((((a12[i1])).us_split_fields1).rec__frame_condition__cell__max_left) = to_rep((((temp___264[i1])).us_split_fields1).rec__frame_condition__cell__max_left))))))) and
-  (((((((0 <= 2147483647) -> in_range2(max15)) and ((1 <= 2147483647) ->
-  in_range3(c204b3))) and
-  (forall temp___261:int. (((to_rep1(a__first) <= temp___261) and
-  (temp___261 <= to_rep1(a__last))) ->
-  ((((a12[temp___261])).us_split_fields1).rec__frame_condition__cell__value = (((temp___260[temp___261])).us_split_fields1).rec__frame_condition__cell__value)))) and
-  ((0 <= 2147483647) -> in_range2(c205b3))) and ((1 <= 2147483647) ->
-  in_range3(k13))) and (((k14 = { int__content = k13 }) and (k15 = k13)) and
-  (k13 = last3))))))))))))))) and (((c205b4 = { int__content = c205b3 }) and
-  ((c204b4 = { int__content = c204b3 }) and ((max16 = { int__content = max15
-  }) and ((k16 = k14) and (a13 = { map__content = a12 }))))) and
-  ((c205b5 = c205b3) and ((c204b5 = c204b3) and ((max17 = max15) and
-  ((k17 = k15) and (a14 = a12))))))) and (((c205b6 = c205b4) and
-  ((c204b6 = c204b4) and ((max18 = max16) and ((k18 = k16) and
-  (a15 = a13))))) and ((c205b7 = c205b5) and ((c204b7 = c204b5) and
-  ((max19 = max17) and ((k19 = k17) and (a16 = a14)))))))))))))))))))))) and
-  (((c205b10 = c205b8) and ((c204b10 = c204b8) and ((max25 = max21) and
-  ((k25 = k21) and ((c168b10 = c168b8) and ((c167b10 = c167b8) and
-  ((max24 = max20) and ((k24 = k20) and (a19 = a17))))))))) and
-  ((c205b11 = c205b9) and ((c204b11 = c204b9) and ((max27 = max23) and
-  ((k27 = k23) and ((c168b11 = c168b9) and ((c167b11 = c167b9) and
-  ((max26 = max22) and ((k26 = k22) and (a20 = a18))))))))))) ->
-  (((to_rep1(a__first) <= i) and (i <= to_rep1(a__last))) -> (((i <= j) and
-  (j <= to_rep1(a__last))) -> (((((((((to_rep1(a__first) <= i) and
-  (i <= to_rep1(a__last))) and (o61 = i)) and
-  (o62 = ((a19).map__content[o61]))) and (o63 = (o62).us_split_fields1)) and
-  (o64 = (o63).rec__frame_condition__cell__max_right)) and
-  (o65 = to_rep(o64))) and ((((((((to_rep1(a__first) <= j) and
-  (j <= to_rep1(a__last))) and (o57 = j)) and
-  (o58 = ((a19).map__content[o57]))) and (o59 = (o58).us_split_fields1)) and
-  (o60 = (o59).rec__frame_condition__cell__value)) and
-  (o66 = to_rep(o60))) and (((o66 <= o65) and (o67 = true)) or
-  ((not (o66 <= o65)) and (o67 = false))))) ->
-  ((((((((to_rep1(a__first) <= j) and (j <= to_rep1(a__last))) and
-  (o52 = j)) and (o53 = ((a19).map__content[o52]))) and
-  (o54 = (o53).us_split_fields1)) and
-  (o55 = (o54).rec__frame_condition__cell__max_left)) and
-  (o56 = to_rep(o55))) -> (to_rep1(a__first) <= i))))))))
+  (o109 = c204b2)) and (o110 = (a7[o109 <- { us_split_fields1 = {
+  rec__frame_condition__cell__value = o106;
+  rec__frame_condition__cell__max_left = o107;
+  rec__frame_condition__cell__max_right = o108 } }])))) and
+  ((result20 = a7) and (a9 = o110))) and ((a11 = a9) and (a12 = a9)))) and
+  ((not (1 = 0)) -> ((((((to_rep(o111) = c205b2) and
+  ((o112 = (((a7[c204b2])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((o113 = (((a7[c204b2])).us_split_fields1).rec__frame_condition__cell__max_left) and
+  (o114 = o111)))) and ((o115 = o112) and ((o116 = o113) and
+  (o117 = o114)))) and ((((to_rep1(a__first) <= c204b2) and
+  (c204b2 <= to_rep1(a__last))) and (o118 = c204b2)) and
+  (o119 = (a7[o118 <- { us_split_fields1 = {
+  rec__frame_condition__cell__value = o115;
+  rec__frame_condition__cell__max_left = o116;
+  rec__frame_condition__cell__max_right = o117 } }])))) and
+  ((result21 = a7) and (a10 = o119))) and ((a11 = a10) and
+  (a12 = a10))))) and ((((to_rep1(a__first) <= k14) and
+  (k14 <= to_rep1(a__last))) and
+  (((forall i11:int. (((first3 <= i11) and (i11 <= k14)) ->
+    (to_rep((((a13[i11])).us_split_fields1).rec__frame_condition__cell__value) <= max16))) and
+  (forall i11:int. (((k14 <= i11) and (i11 <= first3)) ->
+  (to_rep((((a13[i11])).us_split_fields1).rec__frame_condition__cell__value) <= max16)))) and
+  ((forall i11:int. (((k14 <= i11) and (i11 <= to_rep1(a__last))) ->
+   (forall j5:int. (((i11 <= j5) and (j5 <= to_rep1(a__last))) ->
+   (to_rep((((a13[j5])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a13[i11])).us_split_fields1).rec__frame_condition__cell__max_right)))))) and
+  (forall i11:int. (((to_rep1(a__first) <= i11) and
+  (i11 <= to_rep1(a__last))) ->
+  (to_rep((((a13[i11])).us_split_fields1).rec__frame_condition__cell__max_left) = to_rep((((temp___264[i11])).us_split_fields1).rec__frame_condition__cell__max_left))))))) and
+  (((((((1 <= 2147483647) -> in_range3(c204b3)) and ((0 <= 2147483647) ->
+  in_range2(c205b3))) and ((1 <= 2147483647) -> in_range3(k14))) and
+  (forall temp___262:int. (((to_rep1(a__first) <= temp___262) and
+  (temp___262 <= to_rep1(a__last))) ->
+  ((((a13[temp___262])).us_split_fields1).rec__frame_condition__cell__value = (((temp___261[temp___262])).us_split_fields1).rec__frame_condition__cell__value)))) and
+  ((0 <= 2147483647) -> in_range2(max16))) and (((k19 = k14) and
+  (k20 = k14)) and (k14 = last3))))))))))))))) and (((c205b7 = c205b3) and
+  ((c204b7 = c204b3) and ((max22 = max16) and ((k23 = k19) and
+  (a20 = a13))))) and ((c205b8 = c205b3) and ((c204b8 = c204b3) and
+  ((max23 = max16) and ((k24 = k20) and (a21 = a13))))))) and
+  (((c205b9 = c205b7) and ((c204b9 = c204b7) and ((max24 = max22) and
+  ((k25 = k23) and (a22 = a20))))) and ((c205b10 = c205b8) and
+  ((c204b10 = c204b8) and ((max25 = max23) and ((k26 = k24) and
+  (a23 = a21))))))))))))))))))))))
+
+axiom H2 : (c205b13 = c205b11)
+
+axiom H3 : (c204b13 = c204b11)
+
+axiom H4 : (max31 = max27)
+
+axiom H5 : (k32 = k28)
+
+axiom H6 : (c168b11 = c168b9)
+
+axiom H7 : (c167b11 = c167b9)
+
+axiom H8 : (max30 = max26)
+
+axiom H9 : (k31 = k27)
+
+axiom H10 : (a26 = a24)
+
+axiom H11 : (c205b14 = c205b12)
+
+axiom H12 : (c204b14 = c204b12)
+
+axiom H13 : (max33 = max29)
+
+axiom H14 : (k34 = k30)
+
+axiom H15 : (c168b12 = c168b10)
+
+axiom H16 : (c167b12 = c167b10)
+
+axiom H17 : (max32 = max28)
+
+axiom H18 : (k33 = k29)
+
+axiom H19 : (a27 = a25)
+
+axiom H20 : (to_rep1(a__first) <= i10)
+
+axiom H21 : (i10 <= to_rep1(a__last))
+
+axiom H22 : (i10 <= j4)
+
+axiom H23 : (j4 <= to_rep1(a__last))
+
+axiom H24 : ((to_rep1(a__first) <= i10) and (i10 <= to_rep1(a__last)))
+
+axiom H25 : (o212 = i10)
+
+axiom H26 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o213;
+  rec__frame_condition__cell__max_left = o214;
+  rec__frame_condition__cell__max_right = o215 } } = (a26[o212]))
+
+axiom H27 : ((o216 = o213) and ((o217 = o214) and (o218 = o215)))
+
+axiom H28 : (o219 = o218)
+
+axiom H29 : (o220 = to_rep(o219))
+
+axiom H30 : ((to_rep1(a__first) <= j4) and (j4 <= to_rep1(a__last)))
+
+axiom H31 : (o204 = j4)
+
+axiom H32 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o205;
+  rec__frame_condition__cell__max_left = o206;
+  rec__frame_condition__cell__max_right = o207 } } = (a26[o204]))
+
+axiom H33 : ((o208 = o205) and ((o209 = o206) and (o210 = o207)))
+
+axiom H34 : (o211 = o208)
+
+axiom H35 : (o221 = to_rep(o211))
+
+axiom H36 : (((o221 <= o220) -> (o222 = true)) and ((not (o221 <= o220)) ->
+  (o222 = false)))
+
+axiom H37 : ((to_rep1(a__first) <= j4) and (j4 <= to_rep1(a__last)))
+
+axiom H38 : (o195 = j4)
+
+axiom H39 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o196;
+  rec__frame_condition__cell__max_left = o197;
+  rec__frame_condition__cell__max_right = o198 } } = (a26[o195]))
+
+axiom H40 : ((o199 = o196) and ((o200 = o197) and (o201 = o198)))
+
+axiom H41 : (o202 = o200)
+
+axiom H42 : (o203 = to_rep(o202))
+
+ (* File "frame_condition.adb", line 50, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(a__first) <= i10)

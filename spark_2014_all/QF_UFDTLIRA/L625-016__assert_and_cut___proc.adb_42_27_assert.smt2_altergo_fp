@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -149,12 +149,71 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic a : int
+
+logic b : int
+
+logic c : int
+
+logic d : int
+
+logic e : int
+
+logic f : int
+
+logic g : int
+
+logic h : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic h1 : int
+
+logic result : int
+
+logic h2 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : in_range1(c)
+
+axiom H3 : in_range1(d)
+
+axiom H4 : in_range1(e)
+
+axiom H5 : in_range1(f)
+
+axiom H6 : in_range1(g)
+
+axiom H7 : in_range1(h)
+
+axiom H8 : true
+
+axiom H9 : ((h = 0) -> ((o7 = (h + 1)) and in_range1((h + 1))))
+
+axiom H10 : ((h = 0) -> (result = h))
+
+axiom H11 : ((h = 0) -> (h2 = o7))
+
+axiom H12 : ((not (h = 0)) -> (h2 = h))
+
+axiom H13 : ((not (h = 0)) -> (h2 = h1))
+
  (* File "proc.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall c:int. forall d:int. forall e:int.
-  forall f:int. forall g:int. forall h:int. forall o:int. forall h1:int.
-  forall result:int. forall h2:int. (in_range1(a) -> (in_range1(b) ->
-  (in_range1(c) -> (in_range1(d) -> (in_range1(e) -> (in_range1(f) ->
-  (in_range1(g) -> (in_range1(h) -> ((((h = 0) and (((o = (h + 1)) and
-  in_range1((h + 1))) and ((result = h) and (h2 = o)))) or ((not (h = 0)) and
-  ((h2 = h) and (h2 = h1)))) -> (h2 = 0)))))))))))
+goal WP_parameter_def : (h2 = 0)

@@ -67,6 +67,7 @@
 (declare-const content_body Int)
 (declare-const fonts Int)
 (declare-const title_styles Int)
+(declare-const o Int)
 (assert (in_range1 content_body))
 (assert (in_range2 fonts))
 (assert (in_range3 title_styles))

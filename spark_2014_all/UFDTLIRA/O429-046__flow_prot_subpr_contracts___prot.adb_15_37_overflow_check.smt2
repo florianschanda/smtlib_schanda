@@ -84,6 +84,7 @@
 (declare-const self__1 Bool)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range visible))
 (assert (in_range x))
 (assert (= self__1 true))

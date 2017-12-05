@@ -62,6 +62,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range1 length))
 (assert (=> (= (mod1 length 4) 0) (= o 0)))
 (assert (=> (not (= (mod1 length 4) 0)) (= o (- 4 (mod1 length 4)))))

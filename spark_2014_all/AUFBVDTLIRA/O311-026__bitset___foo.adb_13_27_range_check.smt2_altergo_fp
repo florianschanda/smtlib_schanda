@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -933,7 +933,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1309,7 +1309,22 @@ logic i : t1
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : int
+
+logic temp___167 : int
+
+logic temp___168 : int
+
+logic o2 : t
+
+axiom H : dynamic_property(0, 2147483646, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range1(a_first)
+
+axiom H2 : true
+
  (* File "foo.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483646, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range1(a_first) -> in_range1(tqtint1(urem1(i,
-  of_int1(32))))))
+goal WP_parameter_def : in_range1(tqtint1(urem1(i, of_int1(32))))

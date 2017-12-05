@@ -160,13 +160,51 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic po : pt
+
+logic o : pt
+
+logic us_self__compl : pt
+
+logic po1 : pt
+
+logic po2 : pt
+
+logic us_self__compl1 : pt
+
+logic result : pt
+
+logic po3 : pt
+
+logic po4 : pt
+
+logic po5 : pt
+
+logic po6 : pt
+
+logic po7 : pt
+
+axiom H : ((of_int(1) = true) -> (o = po2))
+
+axiom H1 : ((of_int(1) = true) -> (o = us_self__compl))
+
+axiom H2 : ((of_int(1) = true) -> (result = po2))
+
+axiom H3 : ((of_int(1) = true) -> (po3 = us_self__compl1))
+
+axiom H4 : ((of_int(1) = true) -> (not (of_int(1) = true)))
+
+axiom H5 : ((of_int(1) = true) -> (po3 = po4))
+
+axiom H6 : ((of_int(1) = true) -> (po5 = po3))
+
+axiom H7 : ((of_int(1) = true) -> (po6 = po4))
+
+axiom H8 : ((of_int(1) = true) -> (po7 = po5))
+
+axiom H9 : ((not (of_int(1) = true)) -> (po6 = po))
+
+axiom H10 : ((not (of_int(1) = true)) -> (po7 = po1))
+
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall po:pt. forall o:pt. forall us_self__compl:pt. forall po1:pt.
-  forall po2:pt. forall us_self__compl1:pt. forall result:pt. forall po3:pt.
-  forall po4:pt. forall po5:pt. forall po6:pt. forall po7:pt.
-  (not (((of_int(1) = true) and ((((((o = po2) and (o = us_self__compl)) and
-  ((result = po2) and (po3 = us_self__compl1))) and
-  (not (of_int(1) = true))) and ((po3 = po4) and (po5 = po3))) and
-  ((po4 = po6) and (po7 = po5)))) or ((not (of_int(1) = true)) and
-  ((po = po6) and (po7 = po1))))))
+goal WP_parameter_def : false

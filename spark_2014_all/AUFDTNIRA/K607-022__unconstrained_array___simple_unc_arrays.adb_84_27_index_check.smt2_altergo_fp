@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -258,7 +258,7 @@ axiom coerce_axiom :
 
 type tvalueB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -284,7 +284,7 @@ function tvalueB__ref___projection(a: tvalueB__ref) : tvalueB =
 
 type value
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -418,7 +418,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -750,18 +750,114 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sum:int. forall i:int. forall us:int. forall result:int.
-  forall sum1:int. forall result1:int. forall i1:int. forall sum2:int.
-  forall i2:int. ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic sum : int
+
+logic i : int
+
+logic simple_unc_arrays__average__result : int
+
+logic us : int
+
+logic temp___878 : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic sum2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic sum3 : int
+
+logic sum4 : int
+
+logic i3 : int
+
+logic sum5 : int
+
+logic i4 : int
+
+logic sum6 : int
+
+logic i5 : int
+
+logic sum7 : int
+
+logic i6 : int
+
+logic result3 : int
+
+logic simple_unc_arrays__average__result1 : int
+
+logic simple_unc_arrays__average__result2 : int
+
+logic simple_unc_arrays__average__result3 : int
+
+logic sum8 : int
+
+logic i7 : int
+
+logic simple_unc_arrays__average__result4 : int
+
+logic sum9 : int
+
+logic i8 : int
+
+logic simple_unc_arrays__average__result5 : int
+
+logic result4 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> ((not (empty({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : (not (empty({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true)) ->
-  (((us = to_rep(a)) and in_range1(to_rep(a))) -> ((({ int__content = result
-  } = { int__content = sum }) and (sum1 = 0)) -> (in_range3(sum1) ->
-  (((to_rep(a) = r43b) and in_range1(r43b)) -> ((({ int__content = result1
-  } = { int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= r43b)) ->
-  (((((-2147483648) <= 2147483647) -> in_range3(sum2)) and ((1 <= i2) and
-  (i2 <= r43b))) -> (to_rep2(first(a2)) <= i2)))))))))))
+  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true))
+
+axiom H2 : ((us = to_rep(a)) and in_range1(to_rep(a)))
+
+axiom H3 : (result = sum)
+
+axiom H4 : (sum1 = 0)
+
+axiom H5 : in_range3(sum1)
+
+axiom H6 : (to_rep(a) = r43b)
+
+axiom H7 : in_range1(r43b)
+
+axiom H8 : (result1 = i)
+
+axiom H9 : (i1 = 1)
+
+axiom H10 : (1 <= i1)
+
+axiom H11 : (i1 <= r43b)
+
+axiom H12 : ((((- 2147483648) <= 2147483647) -> in_range3(sum2)) and
+  ((1 <= i2) and (i2 <= r43b)))
+
+ (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(a2)) <= i2)

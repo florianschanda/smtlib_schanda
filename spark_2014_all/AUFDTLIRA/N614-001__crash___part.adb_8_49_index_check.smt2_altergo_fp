@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -361,37 +361,173 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : (int,integer) farray
+
+logic tmp : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic i : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic o24 : integer
+
+logic o25 : int
+
+logic o26 : int
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic x2 : (int,integer) farray
+
+logic x3 : (int,integer) farray
+
+logic tmp2 : int
+
+logic x4 : (int,integer) farray
+
+logic tmp3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(x__first), to_rep(x__last))
+
+axiom H1 : in_range2(a)
+
+axiom H2 : in_range2(b)
+
+axiom H3 : (((to_rep(x__first) <= a) and (a <= to_rep(x__last))) and
+  ((to_rep(x__first) <= b) and (b <= to_rep(x__last))))
+
+axiom H4 : ((to_rep(x__first) <= a) and (a <= to_rep(x__last)))
+
+axiom H5 : (o = a)
+
+axiom H6 : (o1 = (x[o]))
+
+axiom H7 : (o2 = to_rep(o1))
+
+axiom H8 : (result = tmp)
+
+axiom H9 : (tmp1 = o2)
+
+axiom H10 : in_range1(tmp1)
+
+axiom H11 : ((to_rep(x__first) <= b) and (b <= to_rep(x__last)))
+
+axiom H12 : (o3 = b)
+
+axiom H13 : (o4 = (x[o3]))
+
+axiom H14 : (o5 = to_rep(o4))
+
+axiom H15 : (to_rep(o6) = o5)
+
+axiom H16 : ((to_rep(x__first) <= a) and (a <= to_rep(x__last)))
+
+axiom H17 : (o7 = a)
+
+axiom H18 : (o8 = (x[o7 <- o6]))
+
+axiom H19 : (result1 = x)
+
+axiom H20 : (x1 = o8)
+
+axiom H21 : (to_rep(o9) = tmp1)
+
+axiom H22 : ((to_rep(x__first) <= b) and (b <= to_rep(x__last)))
+
+axiom H23 : (o10 = b)
+
+axiom H24 : (o11 = (x1[o10 <- o9]))
+
+axiom H25 : (x1 = result2)
+
+axiom H26 : (x2 = o11)
+
+axiom H27 : (tmp1 = tmp2)
+
+axiom H28 : (x2 = x3)
+
+axiom H29 : (tmp3 = tmp1)
+
+axiom H30 : (x4 = x2)
+
+axiom H31 : ((to_rep(x__first) <= b) and (b <= to_rep(x__last)))
+
+axiom H32 : (o23 = b)
+
+axiom H33 : (o24 = (x[o23]))
+
+axiom H34 : (o25 = to_rep(o24))
+
+axiom H35 : ((to_rep(x__first) <= a) and (a <= to_rep(x__last)))
+
+axiom H36 : (o21 = a)
+
+axiom H37 : (o22 = (x3[o21]))
+
+axiom H38 : (o26 = to_rep(o22))
+
+axiom H39 : (((o26 = o25) -> (result3 = true)) and ((not (o26 = o25)) ->
+  (result3 = false)))
+
+axiom H40 : (result3 = true)
+
  (* File "part.ads", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall tmp:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:int. forall o4:integer.
-  forall o5:int. forall o6:integer. forall o7:int.
-  forall o8:(int,integer) farray. forall o9:integer. forall o10:int.
-  forall o11:(int,integer) farray. forall o12:int. forall o13:integer.
-  forall o14:int. forall o15:integer. forall o16:int. forall o17:int.
-  forall result:int. forall tmp1:int. forall result1:(int,integer) farray.
-  forall x1:(int,integer) farray. forall result2:(int,integer) farray.
-  forall x2:(int,integer) farray. forall x3:(int,integer) farray.
-  forall tmp2:int. forall x4:(int,integer) farray. forall tmp3:int.
-  forall result3:bool. (dynamic_property(1, 2147483647, to_rep(x__first),
-  to_rep(x__last)) -> (in_range2(a) -> (in_range2(b) ->
-  ((((to_rep(x__first) <= a) and (a <= to_rep(x__last))) and
-  ((to_rep(x__first) <= b) and (b <= to_rep(x__last)))) ->
-  (((((((((to_rep(x__first) <= a) and (a <= to_rep(x__last))) and
-  (o = a)) and (o1 = (x[o]))) and (o2 = to_rep(o1))) and (({ int__content =
-  result } = { int__content = tmp }) and (tmp1 = o2))) and
-  (in_range1(tmp1) and (((((((((to_rep(x__first) <= b) and
-  (b <= to_rep(x__last))) and (o3 = b)) and (o4 = (x[o3]))) and
-  (o5 = to_rep(o4))) and (to_rep(o6) = o5)) and
-  ((((to_rep(x__first) <= a) and (a <= to_rep(x__last))) and (o7 = a)) and
-  (o8 = (x[o7 <- o6])))) and (({ map__content = result1 } = { map__content =
-  x }) and (x1 = o8))) and (((to_rep(o9) = tmp1) and
-  ((((to_rep(x__first) <= b) and (b <= to_rep(x__last))) and (o10 = b)) and
-  (o11 = (x1[o10 <- o9])))) and ((x1 = result2) and (x2 = o11)))))) and
-  (((tmp1 = tmp2) and (x2 = x3)) and ((tmp3 = tmp1) and (x4 = x2)))) ->
-  (((((((to_rep(x__first) <= b) and (b <= to_rep(x__last))) and
-  (o14 = b)) and (o15 = (x[o14]))) and (o16 = to_rep(o15))) and
-  ((((((to_rep(x__first) <= a) and (a <= to_rep(x__last))) and (o12 = a)) and
-  (o13 = (x3[o12]))) and (o17 = to_rep(o13))) and (((o17 = o16) and
-  (result3 = true)) or ((not (o17 = o16)) and (result3 = false))))) ->
-  ((result3 = true) -> (to_rep(x__first) <= a)))))))))
+goal WP_parameter_def : (to_rep(x__first) <= a)

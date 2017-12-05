@@ -127,14 +127,38 @@ axiom is_ready__def_axiom :
   (forall pumpunit__cur_state:int [is_ready(pumpunit__cur_state)].
   ((is_ready(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 1)))
 
+logic cur_state : int
+
+logic cur_state1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic cur_state2 : int
+
+logic cur_state3 : int
+
+logic cur_state4 : int
+
+axiom H : in_range(cur_state)
+
+axiom H1 : (is_ready(cur_state) = true)
+
+axiom H2 : ((result = is_ready(cur_state)) and ((result = true) <->
+  (cur_state = 1)))
+
+axiom H3 : ((result = true) -> (result1 = cur_state))
+
+axiom H4 : ((result = true) -> (cur_state2 = 2))
+
+axiom H5 : ((not (result = true)) -> (cur_state2 = cur_state))
+
+axiom H6 : ((not (result = true)) -> (cur_state2 = cur_state1))
+
+axiom H7 : (cur_state2 = cur_state3)
+
+axiom H8 : (cur_state4 = cur_state2)
+
  (* File "pumpunit.ads", line 40, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_state:int. forall cur_state1:int. forall result:bool.
-  forall result1:int. forall cur_state2:int. forall cur_state3:int.
-  forall cur_state4:int. ((in_range(cur_state) and
-  ((is_ready(cur_state) = true) and ((((result = is_ready(cur_state)) and
-  ((result = true) <-> (cur_state = 1))) and (((result = true) and
-  ((result1 = cur_state) and (cur_state2 = 2))) or ((not (result = true)) and
-  ((cur_state2 = cur_state) and (cur_state2 = cur_state1))))) and
-  ((cur_state2 = cur_state3) and (cur_state4 = cur_state2))))) ->
-  (is_waiting(cur_state3) = true)))
+goal WP_parameter_def : (is_waiting(cur_state3) = true)

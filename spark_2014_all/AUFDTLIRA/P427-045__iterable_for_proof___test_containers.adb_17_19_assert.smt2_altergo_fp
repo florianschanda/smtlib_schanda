@@ -363,17 +363,45 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic p1__split_fields : natural
+
+logic p2 : int
+
+logic p3 : int
+
+logic o : int
+
+logic o1 : (int,natural) farray
+
+logic o2 : int
+
+logic c1 : (int,natural) farray
+
+logic c2 : (int,natural) farray
+
+logic c3 : (int,natural) farray
+
+axiom H : ((0 <= 2147483647) -> in_range(p2))
+
+axiom H1 : ((0 <= 2147483647) -> in_range(p3))
+
+axiom H2 :
+  (forall temp___252:natural. ((has_element(c1, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___252 } }) = true) ->
+  (valid2(element(c1, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___252 } })) = true)))
+
+axiom H3 : (has_element(c1, { us_split_fields1 = {
+  rec__my_container__cursor__index = p1__split_fields } }) = true)
+
+axiom H4 : (valid2(element(c1, { us_split_fields1 = {
+  rec__my_container__cursor__index = p1__split_fields } })) = true)
+
+axiom H5 :
+  (forall e:int. ((in_range(e) and (mem(c2, e) = true)) ->
+  (valid1(e) = true)))
+
+axiom H6 : (mem(c2, p2) = true)
+
  (* File "test_containers.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p1__split_fields:natural. forall p2:int. forall p3:int.
-  forall c1:(int,natural) farray. forall c2:(int,natural) farray.
-  (((0 <= 2147483647) -> in_range(p2)) -> (((0 <= 2147483647) ->
-  in_range(p3)) ->
-  ((forall temp___252:us_rep. ((has_element(c1, temp___252) = true) ->
-   (valid2(element(c1, temp___252)) = true))) ->
-  ((has_element(c1, { us_split_fields1 = { rec__my_container__cursor__index =
-  p1__split_fields } }) = true) -> ((valid2(element(c1, { us_split_fields1 =
-  { rec__my_container__cursor__index = p1__split_fields } })) = true) ->
-  ((forall e:int. ((in_range(e) and (mem(c2, e) = true)) ->
-   (valid1(e) = true))) ->
-  ((mem(c2, p2) = true) -> (valid1(p2) = true)))))))))
+goal WP_parameter_def : (valid1(p2) = true)

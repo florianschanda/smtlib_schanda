@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tindexB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -455,8 +455,40 @@ axiom def_axiom1 :
   temp___4441 }, temp___445,
   temp___446)).elts[temp___447]) = (temp___444[temp___447]))))))))
 
+logic a : (int,integer) farray
+
+logic us : int
+
+logic o : int
+
+logic temp___448 : (int,integer) farray
+
+logic temp___4481 : t
+
+logic temp___449 : (int,integer) farray
+
+logic temp___4491 : t
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : in_range1(new_val)
+
+axiom H3 : ((to_rep(a__first) <= i) and (i <= to_rep(a__last)))
+
  (* File "update_checks_1.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 8, to_rep(a__first),
-  to_rep(a__last)) -> (in_range3(i) -> (in_range1(new_val) ->
-  (((to_rep(a__first) <= i) and (i <= to_rep(a__last))) ->
-  dynamic_property1(to_rep(a__first), to_rep(a__last), i)))))
+goal WP_parameter_def : dynamic_property1(to_rep(a__first), to_rep(a__last),
+  i)

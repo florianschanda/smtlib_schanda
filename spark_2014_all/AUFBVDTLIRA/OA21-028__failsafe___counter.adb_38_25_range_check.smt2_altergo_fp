@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -875,12 +875,48 @@ logic a : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic count : t
+
+logic inputs : (t,bool) farray
+
+logic o : t
+
+logic counter__p__B_3__a__assume : t
+
+logic i : t
+
+logic count1 : t
+
+logic inputs1 : (t,bool) farray
+
+logic result : t
+
+logic count2 : t
+
+logic result1 : t
+
+logic count3 : t
+
+logic count4 : t
+
+logic inputs2 : (t,bool) farray
+
+logic count5 : t
+
+logic inputs3 : (t,bool) farray
+
+axiom H : in_range1(count)
+
+axiom H1 : (current_chain_length(inputs) = count)
+
+axiom H2 :
+  ((forall k:t. ((ule(of_int(1), k) and ule(k, of_int(9))) ->
+   (((inputs1[k]) = true) <-> ((inputs[add(k, of_int(1))]) = true)))) and
+  (((inputs1[of_int(10)]) = true) <-> (input = true)))
+
+axiom H3 : (input = true)
+
+axiom H4 : ult(count, of_int(10))
+
  (* File "counter.ads", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:t. forall inputs:(t,bool) farray.
-  forall inputs1:(t,bool) farray. (in_range1(count) ->
-  ((current_chain_length(inputs) = count) ->
-  (((forall k:t. ((ule(of_int(1), k) and ule(k, of_int(9))) ->
-    (((inputs1[k]) = true) <-> ((inputs[add(k, of_int(1))]) = true)))) and
-  (((inputs1[of_int(10)]) = true) <-> (input = true))) -> ((input = true) ->
-  (ult(count, of_int(10)) -> in_range1(add(count, of_int(1)))))))))
+goal WP_parameter_def : in_range1(add(count, of_int(1)))

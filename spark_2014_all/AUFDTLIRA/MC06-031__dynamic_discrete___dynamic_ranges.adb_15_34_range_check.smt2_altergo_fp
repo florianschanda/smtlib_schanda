@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -383,7 +383,22 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom a2__def_axiom : ((a2 = a) and (a21 = mk(1, 100)))
 
+logic temp___238 : (int,integer) farray
+
+logic temp___2381 : t
+
+logic o : (int,integer) farray
+
+logic dynamic_ranges__resize__a2__assume : (int,integer) farray
+
+logic dynamic_ranges__resize__a2__assume1 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : ((to_rep(first(a1)) <= 1) and (100 <= to_rep(last(a1))))
+
+axiom H2 : (1 <= 100)
+
  (* File "dynamic_ranges.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> (((to_rep(first(a1)) <= 1) and
-  (100 <= to_rep(last(a1)))) -> ((1 <= 100) -> (to_rep(first(a1)) <= 1))))
+goal WP_parameter_def : (to_rep(first(a1)) <= 1)

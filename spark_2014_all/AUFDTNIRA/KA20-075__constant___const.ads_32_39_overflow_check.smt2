@@ -184,6 +184,7 @@
 (declare-const o21 Int)
 (declare-const o22 Int)
 (declare-const o23 Int)
+(declare-const const__n__assume Int)
 (assert (in_range a))
 (assert (in_range b))
 (assert (= (const__c__aggregate_def 1) c))

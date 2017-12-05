@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -380,73 +380,220 @@ function t18b__ref___projection(a: t18b__ref) : integer = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index:int.
-  forall sorters__index_of_minimum__result:int. forall o:int.
-  forall temp___219:int. forall temp___218:int. forall o1:int.
-  forall o2:integer. forall o3:int. forall o4:int. forall j:int.
-  forall o5:int. forall o6:integer. forall o7:int. forall result:int.
-  forall min1:int. forall result1:int. forall index1:int. forall min2:int.
-  forall index2:int. forall result2:bool. forall result3:int.
-  forall min3:int. forall min4:int. forall index3:int. forall min5:int.
-  forall index4:int. forall min6:int. forall index5:int. forall min7:int.
-  forall index6:int. forall result4:int.
-  forall sorters__index_of_minimum__result1:int.
-  forall sorters__index_of_minimum__result2:int.
-  forall sorters__index_of_minimum__result3:int. forall min8:int.
-  forall index7:int. forall sorters__index_of_minimum__result4:int.
-  forall min9:int. forall index8:int.
-  forall sorters__index_of_minimum__result5:int. (dynamic_property(1,
-  2147483647, to_rep(first(unsorted1)), to_rep(last(unsorted1))) ->
-  ((to_rep(first(unsorted1)) <= to_rep(last(unsorted1))) ->
-  (((((1 <= 2147483647) -> in_range2(min)) and
-  ((((o = to_rep(first(unsorted1))) and
-  in_range2(to_rep(first(unsorted1)))) and (({ int__content = result } = {
-  int__content = min }) and (min1 = o))) and (((({ int__content = result1
-  } = { int__content = index }) and (index1 = to_rep(first(unsorted1)))) and
-  ((((to_rep(first(unsorted1)) <= index1) and
-  (index1 <= to_rep(last(unsorted1)))) and ((((temp___219 = min1) and
+logic min : int
+
+logic index : int
+
+logic sorters__index_of_minimum__result : int
+
+logic o : int
+
+logic temp___219 : int
+
+logic temp___218 : int
+
+logic j : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : int
+
+logic j1 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic min2 : int
+
+logic index2 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic min3 : int
+
+logic result5 : int
+
+logic index3 : int
+
+logic min4 : int
+
+logic index4 : int
+
+logic min5 : int
+
+logic index5 : int
+
+logic min6 : int
+
+logic index6 : int
+
+logic min7 : int
+
+logic index7 : int
+
+logic min8 : int
+
+logic index8 : int
+
+logic min9 : int
+
+logic index9 : int
+
+logic result6 : int
+
+logic sorters__index_of_minimum__result1 : int
+
+logic sorters__index_of_minimum__result2 : int
+
+logic sorters__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index10 : int
+
+logic sorters__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index11 : int
+
+logic sorters__index_of_minimum__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(unsorted1)),
+  to_rep(last(unsorted1)))
+
+axiom H1 : (to_rep(first(unsorted1)) <= to_rep(last(unsorted1)))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H3 : ((o = to_rep(first(unsorted1))) and
+  in_range2(to_rep(first(unsorted1))))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = o)
+
+axiom H6 : (result1 = index)
+
+axiom H7 : (index1 = to_rep(first(unsorted1)))
+
+axiom H8 : (((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1)))) -> (((temp___219 = min1) and
   ((temp___218 = index1) and ((((to_rep(first(unsorted1)) <= min2) and
   (min2 <= to_rep(last(unsorted1)))) and
-  (forall j1:int. (((to_rep(first(unsorted1)) <= j1) and
-  (j1 <= (index2 - 1))) ->
-  (to_rep((unsorted[min2])) <= to_rep((unsorted[j1])))))) and
+  (forall j2:int. (((to_rep(first(unsorted1)) <= j2) and
+  (j2 <= (index2 - 1))) ->
+  (to_rep((unsorted[min2])) <= to_rep((unsorted[j2])))))) and
   (((((to_rep(first(unsorted1)) <= to_rep(last(unsorted1))) ->
   dynamic_property1(to_rep(first(unsorted1)), to_rep(last(unsorted1)),
   index2)) and ((1 <= 2147483647) -> in_range2(min2))) and
   ((to_rep(first(unsorted1)) <= index2) and
   (index2 <= to_rep(last(unsorted1))))) and
   ((((((((to_rep(first(unsorted1)) <= min2) and
-  (min2 <= to_rep(last(unsorted1)))) and (o1 = min2)) and
-  (o2 = (unsorted[o1]))) and (o3 = to_rep(o2))) and
-  (((to_rep((unsorted[index2])) <  o3) and (result2 = true)) or
-  ((not (to_rep((unsorted[index2])) <  o3)) and (result2 = false)))) and
-  (((result2 = true) and (((o4 = index2) and in_range2(index2)) and
-  ((min2 = result3) and (min3 = o4)))) or ((not (result2 = true)) and
+  (min2 <= to_rep(last(unsorted1)))) and (o6 = min2)) and
+  (o7 = (unsorted[o6]))) and (o8 = to_rep(o7))) and
+  (((to_rep((unsorted[index2])) <  o8) -> (result3 = true)) and
+  ((not (to_rep((unsorted[index2])) <  o8)) -> (result3 = false)))) and
+  (((result3 = true) -> (((o9 = index2) and in_range2(index2)) and
+  ((min2 = result4) and (min3 = o9)))) and ((not (result3 = true)) ->
   (min3 = min2)))) and (index2 = to_rep(last(unsorted1)))))))) and
-  (((index2 = index3) and (min3 = min4)) and ((index4 = index2) and
-  (min5 = min3)))) and ((({ int__content = index5 } = { int__content = index3
-  }) and ({ int__content = min6 } = { int__content = min4 })) and
-  ((index6 = index4) and (min7 = min5))))) or
-  ((not ((to_rep(first(unsorted1)) <= index1) and
-  (index1 <= to_rep(last(unsorted1))))) and (((index1 = index5) and
-  (min1 = min6)) and ((index6 = index1) and (min7 = min1)))))) and
-  (((sorters__index_of_minimum__result1 = sorters__index_of_minimum__result2) and
-  (sorters__index_of_minimum__result3 = sorters__index_of_minimum__result1)) and
-  (({ int__content = result4 } = { int__content =
-  sorters__index_of_minimum__result }) and
-  (sorters__index_of_minimum__result1 = min6)))))) and ((({ int__content =
-  sorters__index_of_minimum__result4 } = { int__content =
-  sorters__index_of_minimum__result2 }) and (({ int__content = index7 } = {
-  int__content = index5 }) and ({ int__content = min8 } = { int__content =
-  min6 }))) and
-  ((sorters__index_of_minimum__result5 = sorters__index_of_minimum__result3) and
-  ((index8 = index6) and (min9 = min7))))) ->
-  (((to_rep(first(unsorted1)) <= sorters__index_of_minimum__result4) and
-  (sorters__index_of_minimum__result4 <= to_rep(last(unsorted1)))) ->
-  (((to_rep(first(unsorted1)) <= j) and (j <= to_rep(last(unsorted1)))) ->
-  ((((((to_rep(first(unsorted1)) <= j) and
-  (j <= to_rep(last(unsorted1)))) and (o5 = j)) and
-  (o6 = (unsorted[o5]))) and (o7 = to_rep(o6))) ->
-  (to_rep(first(unsorted1)) <= sorters__index_of_minimum__result4))))))))
+  (((index2 = index6) and (min3 = min6)) and ((index7 = index2) and
+  (min7 = min3)))))
+
+axiom H9 : (((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1)))) -> (index8 = index6))
+
+axiom H10 : (((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1)))) -> (min8 = min6))
+
+axiom H11 : (((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1)))) -> (index9 = index7))
+
+axiom H12 : (((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1)))) -> (min9 = min7))
+
+axiom H13 : ((not ((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1))))) -> (index1 = index8))
+
+axiom H14 : ((not ((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1))))) -> (min1 = min8))
+
+axiom H15 : ((not ((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1))))) -> (index9 = index1))
+
+axiom H16 : ((not ((to_rep(first(unsorted1)) <= index1) and
+  (index1 <= to_rep(last(unsorted1))))) -> (min9 = min1))
+
+axiom H17 :
+  (sorters__index_of_minimum__result1 = sorters__index_of_minimum__result2)
+
+axiom H18 :
+  (sorters__index_of_minimum__result3 = sorters__index_of_minimum__result1)
+
+axiom H19 : (result6 = sorters__index_of_minimum__result)
+
+axiom H20 : (sorters__index_of_minimum__result1 = min8)
+
+axiom H21 :
+  (sorters__index_of_minimum__result4 = sorters__index_of_minimum__result2)
+
+axiom H22 : (index10 = index8)
+
+axiom H23 : (min10 = min8)
+
+axiom H24 :
+  (sorters__index_of_minimum__result5 = sorters__index_of_minimum__result3)
+
+axiom H25 : (index11 = index9)
+
+axiom H26 : (min11 = min9)
+
+axiom H27 : (to_rep(first(unsorted1)) <= sorters__index_of_minimum__result4)
+
+axiom H28 : (sorters__index_of_minimum__result4 <= to_rep(last(unsorted1)))
+
+axiom H29 : (to_rep(first(unsorted1)) <= j1)
+
+axiom H30 : (j1 <= to_rep(last(unsorted1)))
+
+axiom H31 : ((to_rep(first(unsorted1)) <= j1) and
+  (j1 <= to_rep(last(unsorted1))))
+
+axiom H32 : (o10 = j1)
+
+axiom H33 : (o11 = (unsorted[o10]))
+
+axiom H34 : (o12 = to_rep(o11))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep(first(unsorted1)) <= sorters__index_of_minimum__result4)

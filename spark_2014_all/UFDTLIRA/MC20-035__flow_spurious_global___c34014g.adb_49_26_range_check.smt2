@@ -44,6 +44,7 @@
 (define-fun t__ref___projection ((a t__ref)) t (t__content a))
 (define-fun dynamic_invariant1 ((temp___expr_197 Int) (temp___is_init_194 Bool) (temp___skip_constant_195 Bool) (temp___do_toplevel_196 Bool)) Bool (=> (or (= temp___is_init_194 true) (<= (- 100) 100)) (in_range1 temp___expr_197)))
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (and (= o (ident_int 1)) (in_range o)))
 (assert (not (in_range1 o)))
 (check-sat)

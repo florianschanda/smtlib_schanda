@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -402,26 +402,63 @@ axiom is_empty__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic s__split_fields : (int,integer) farray
+
+logic s__split_fields1 : pointer_range
+
+logic o : pointer_range
+
+logic o1 : (int,integer) farray
+
+logic o2 : pointer_range
+
+logic temp___179 : (int,integer) farray
+
+logic temp___1791 : pointer_range
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic s__split_fields2 : (int,integer) farray
+
+logic s__split_fields3 : pointer_range
+
+logic s__split_fields4 : (int,integer) farray
+
+logic s__split_fields5 : pointer_range
+
+logic s__split_fields6 : (int,integer) farray
+
+logic s__split_fields7 : pointer_range
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (s__split_fields = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (temp___179 = o1)
+
+axiom H4 : (temp___1791 = o2)
+
+axiom H5 : (result = s__split_fields)
+
+axiom H6 : (result1 = s__split_fields1)
+
+axiom H7 : (temp___179 = s__split_fields2)
+
+axiom H8 : (temp___1791 = s__split_fields3)
+
+axiom H9 : (s__split_fields4 = s__split_fields2)
+
+axiom H10 : (s__split_fields5 = s__split_fields3)
+
+axiom H11 : (s__split_fields6 = s__split_fields2)
+
+axiom H12 : (s__split_fields7 = s__split_fields3)
+
  (* File "stacks_14.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,integer) farray.
-  forall s__split_fields1:pointer_range. forall o:pointer_range.
-  forall o1:(int,integer) farray. forall o2:pointer_range.
-  forall temp___179:(int,integer) farray. forall temp___1791:pointer_range.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall s__split_fields2:(int,integer) farray.
-  forall s__split_fields3:pointer_range.
-  forall s__split_fields4:(int,integer) farray.
-  forall s__split_fields5:pointer_range.
-  forall s__split_fields6:(int,integer) farray.
-  forall s__split_fields7:pointer_range. ((((((to_rep(o) = 0) and
-  ((s__split_fields = o1) and (o = o2))) and ((temp___179 = o1) and
-  (temp___1791 = o2))) and (((result = s__split_fields) and
-  (result1 = s__split_fields1)) and ((temp___179 = s__split_fields2) and
-  (temp___1791 = s__split_fields3)))) and
-  (((s__split_fields4 = s__split_fields2) and
-  (s__split_fields5 = s__split_fields3)) and
-  ((s__split_fields6 = s__split_fields2) and
-  (s__split_fields7 = s__split_fields3)))) -> (is_empty({ us_split_fields1 =
-  { rec__stacks_14__stack__stack_vector = s__split_fields4;
-  rec__stacks_14__stack__stack_pointer = s__split_fields5 } }) = true)))
+goal WP_parameter_def : (is_empty({ us_split_fields1 = {
+  rec__stacks_14__stack__stack_vector = s__split_fields4;
+  rec__stacks_14__stack__stack_pointer = s__split_fields5 } }) = true)

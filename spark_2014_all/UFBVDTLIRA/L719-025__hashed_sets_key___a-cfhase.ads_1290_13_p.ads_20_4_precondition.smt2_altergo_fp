@@ -253,18 +253,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1451,6 +1451,21 @@ axiom get__post_axiom :
   (forall position:int [get(container3, position)]. ((in_range7(position) and
   ((1 <= position) and (position <= (0 + length3(container3))))) ->
   in_range8(get(container3, position)))))
+
+logic temp___830 : us_rep1
+
+logic e : int
+
+logic o : bool
+
+axiom H : in_range5(key1)
+
+axiom H1 : ((temp___830 = model__({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = container; rec__p__my_sets__set__modulus =
+  container1 }; us_split_fields1 = { rec__p__my_sets__set = container2 }
+  })) and (length2(temp___830) = length({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = container; rec__p__my_sets__set__modulus =
+  container1 }; us_split_fields1 = { rec__p__my_sets__set = container2 } })))
 
  (* File "a-cfhase.ads", line 1304, characters 0-0 *)
 goal WP_parameter_def : true

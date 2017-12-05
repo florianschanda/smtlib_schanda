@@ -581,48 +581,269 @@ axiom is_add__post_axiom :
 
 axiom is_add__post__dispatch_axiom : true
 
- (* File "allocator.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
-  forall r:int. forall o:us_rep. forall o1:us_rep. forall rr:int.
-  forall o2:int. forall o3:status. forall o4:int. forall e:int.
-  forall o5:bool. forall o6:bool. forall e1:int. forall o7:bool.
-  forall o8:bool. forall avail1:us_rep. forall alloc1:us_rep.
-  forall result:int. forall r1:int. forall result1:us_rep.
-  forall avail2:us_rep. forall result2:us_rep. forall alloc2:us_rep.
-  forall avail3:us_rep. forall alloc3:us_rep. forall r2:int.
-  forall result3:bool. forall result4:bool. forall result5:bool.
-  forall result6:bool. forall result7:bool. ((is_empty(avail) = true) ->
-  ((is_empty(alloc) = true) -> ((({ int__content = result } = {
-  int__content = r }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 3)) ->
-  ((((to_rep((data[r1])) = 0) and ((((o = add(avail, r1)) and (is_add(avail,
-  r1, o) = true)) and (({ set__content = result1 } = { set__content = avail
-  }) and (avail2 = o))) and ((alloc2 = alloc) and (alloc2 = alloc1)))) or
-  ((not (to_rep((data[r1])) = 0)) and ((((o1 = add(alloc, r1)) and
-  (is_add(alloc, r1, o1) = true)) and (({ set__content = result2 } = {
-  set__content = alloc }) and (alloc2 = o1))) and ((avail2 = avail) and
-  (avail2 = avail1))))) ->
-  ((((forall e2:int. ((in_range3(e2) and (mem(avail3, e2) = true)) ->
-     ((1 <= e2) and (e2 <= r2)))) and
+logic data : (int,status) farray
+
+logic avail : us_rep
+
+logic alloc : us_rep
+
+logic r : int
+
+logic allocator__m__model__result : us_rep
+
+logic allocator__m__model__result1 : us_rep
+
+logic temp___368 : us_rep
+
+logic temp___367 : us_rep
+
+logic temp___366 : int
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic rr : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic e : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic e1 : int
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : us_rep
+
+logic o17 : us_rep
+
+logic avail1 : us_rep
+
+logic alloc1 : us_rep
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic avail2 : us_rep
+
+logic result2 : us_rep
+
+logic alloc2 : us_rep
+
+logic avail3 : us_rep
+
+logic alloc3 : us_rep
+
+logic r2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : int
+
+logic r3 : int
+
+logic result9 : us_rep
+
+logic avail4 : us_rep
+
+logic result10 : us_rep
+
+logic alloc4 : us_rep
+
+logic avail5 : us_rep
+
+logic alloc5 : us_rep
+
+logic r4 : int
+
+logic avail6 : us_rep
+
+logic alloc6 : us_rep
+
+logic r5 : int
+
+logic avail7 : us_rep
+
+logic alloc7 : us_rep
+
+logic r6 : int
+
+logic avail8 : us_rep
+
+logic alloc8 : us_rep
+
+logic r7 : int
+
+logic avail9 : us_rep
+
+logic alloc9 : us_rep
+
+logic r8 : int
+
+logic avail10 : us_rep
+
+logic alloc10 : us_rep
+
+logic r9 : int
+
+logic result11 : us_rep
+
+logic result12 : us_rep
+
+logic allocator__m__model__result2 : us_rep
+
+logic allocator__m__model__result3 : us_rep
+
+logic allocator__m__model__result4 : us_rep
+
+logic allocator__m__model__result5 : us_rep
+
+logic allocator__m__model__result6 : us_rep
+
+logic allocator__m__model__result7 : us_rep
+
+logic avail11 : us_rep
+
+logic alloc11 : us_rep
+
+logic r10 : int
+
+logic allocator__m__model__result8 : us_rep
+
+logic allocator__m__model__result9 : us_rep
+
+logic avail12 : us_rep
+
+logic alloc12 : us_rep
+
+logic r11 : int
+
+logic allocator__m__model__result10 : us_rep
+
+logic allocator__m__model__result11 : us_rep
+
+axiom H : (is_empty(avail) = true)
+
+axiom H1 : (is_empty(alloc) = true)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 3)
+
+axiom H6 : ((to_rep((data[r1])) = 0) -> ((o = add(avail, r1)) and
+  (is_add(avail, r1, o) = true)))
+
+axiom H7 : ((to_rep((data[r1])) = 0) -> (result1 = avail))
+
+axiom H8 : ((to_rep((data[r1])) = 0) -> (avail2 = o))
+
+axiom H9 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc))
+
+axiom H10 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc1))
+
+axiom H11 : ((not (to_rep((data[r1])) = 0)) -> ((o1 = add(alloc, r1)) and
+  (is_add(alloc, r1, o1) = true)))
+
+axiom H12 : ((not (to_rep((data[r1])) = 0)) -> (result2 = alloc))
+
+axiom H13 : ((not (to_rep((data[r1])) = 0)) -> (alloc2 = o1))
+
+axiom H14 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail))
+
+axiom H15 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail1))
+
+axiom H16 :
+  (((forall e2:int. ((in_range3(e2) and (mem(avail3, e2) = true)) ->
+    ((1 <= e2) and (e2 <= r2)))) and
   (forall e2:int. ((in_range3(e2) and (mem(alloc3, e2) = true)) ->
   ((1 <= e2) and (e2 <= r2))))) and
   (forall rr1:int. (((1 <= rr1) and (rr1 <= r2)) ->
-  (((to_rep((data[rr1])) = 0) and ((mem(avail3, rr1) = true) and
-  (not (mem(alloc3, rr1) = true)))) or ((not (to_rep((data[rr1])) = 0)) and
-  ((not (mem(avail3, rr1) = true)) and (mem(alloc3, rr1) = true))))))) ->
-  ((((1 <= 3) -> in_range1(r2)) and ((1 <= r2) and (r2 <= 3))) ->
-  ((((((o7 = mem(avail3, e1)) and ((e1 = 0) -> (not (o7 = true)))) and
-  (((o8 = true) <-> in_range3(e1)) and (result5 = match_bool(o8, o7,
-  false)))) and ((result4 = true) <->
+  (((to_rep((data[rr1])) = 0) -> ((mem(avail3, rr1) = true) and
+  (not (mem(alloc3, rr1) = true)))) and ((not (to_rep((data[rr1])) = 0)) ->
+  ((not (mem(avail3, rr1) = true)) and (mem(alloc3, rr1) = true)))))))
+
+axiom H17 : (((1 <= 3) -> in_range1(r2)) and ((1 <= r2) and (r2 <= 3)))
+
+axiom H18 : ((o14 = mem(avail3, e1)) and ((e1 = 0) -> (not (o14 = true))))
+
+axiom H19 : ((o15 = true) <-> in_range3(e1))
+
+axiom H20 : (result5 = match_bool(o15, o14, false))
+
+axiom H21 : ((result4 = true) <->
   (forall e2:int. ((in_range3(e2) and (mem(avail3, e2) = true)) ->
-  ((1 <= e2) and (e2 <= r2)))))) and (((result4 = true) and
-  ((((o5 = mem(alloc3, e)) and ((e = 0) -> (not (o5 = true)))) and
-  (((o6 = true) <-> in_range3(e)) and (result6 = match_bool(o6, o5,
-  false)))) and ((result3 = true) <->
+  ((1 <= e2) and (e2 <= r2)))))
+
+axiom H22 : ((result4 = true) -> ((o12 = mem(alloc3, e)) and ((e = 0) ->
+  (not (o12 = true)))))
+
+axiom H23 : ((result4 = true) -> ((o13 = true) <-> in_range3(e)))
+
+axiom H24 : ((result4 = true) -> (result6 = match_bool(o13, o12, false)))
+
+axiom H25 : ((result4 = true) -> ((result3 = true) <->
   (forall e2:int. ((in_range3(e2) and (mem(alloc3, e2) = true)) ->
-  ((1 <= e2) and (e2 <= r2))))))) or ((not (result4 = true)) and
-  (result3 = false)))) -> ((result3 = true) -> (((1 <= rr) and (rr <= r2)) ->
-  (((((((1 <= rr) and (rr <= 3)) and (o2 = rr)) and (o3 = (data[o2]))) and
-  (o4 = to_rep(o3))) and (((o4 = 0) and (result7 = true)) or
-  ((not (o4 = 0)) and (result7 = false)))) -> ((not (result7 = true)) ->
-  in_range3(rr))))))))))))))
+  ((1 <= e2) and (e2 <= r2))))))
+
+axiom H26 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H27 : (result3 = true)
+
+axiom H28 : (1 <= rr)
+
+axiom H29 : (rr <= r2)
+
+axiom H30 : ((1 <= rr) and (rr <= 3))
+
+axiom H31 : (o2 = rr)
+
+axiom H32 : (o3 = (data[o2]))
+
+axiom H33 : (o4 = to_rep(o3))
+
+axiom H34 : (((o4 = 0) -> (result7 = true)) and ((not (o4 = 0)) ->
+  (result7 = false)))
+
+axiom H35 : (not (result7 = true))
+
+ (* File "allocator.ads", line 29, characters 0-0 *)
+goal WP_parameter_def : in_range3(rr)

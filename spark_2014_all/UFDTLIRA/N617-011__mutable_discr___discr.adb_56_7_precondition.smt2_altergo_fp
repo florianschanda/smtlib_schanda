@@ -359,5 +359,84 @@ logic d2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic d1__split_discrs : natural
+
+logic o : natural
+
+logic o1 : natural
+
+logic discr__r4__d1__assume : natural
+
+logic discr__r4__d1__assume1 : bool
+
+logic us : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : natural
+
+logic o7 : bool
+
+logic o8 : natural
+
+logic o9 : bool
+
+logic discr__r4__d2__assume : natural
+
+logic discr__r4__d2__assume1 : bool
+
+logic result : natural
+
+logic d1__split_discrs1 : natural
+
+logic discr__r4__nested1__d__discrs : natural
+
+axiom H : in_range(c)
+
+axiom H1 : (to_rep(o) = c)
+
+axiom H2 : (o = o1)
+
+axiom H3 : (discr__r4__d1__assume = o1)
+
+axiom H4 : (true = discr__r4__d1__assume1)
+
+axiom H5 : (result = d1__split_discrs)
+
+axiom H6 : (discr__r4__d1__assume = d1__split_discrs1)
+
+axiom H7 : (d1__attr__constrained = false)
+
+axiom H8 : ((us = c) and in_range(c))
+
+axiom H9 : (to_rep(o2) = c)
+
+axiom H10 : (o2 = o3)
+
+axiom H11 : (o4 = o3)
+
+axiom H12 : (true = o5)
+
+axiom H13 : ((o6 = o4) and (o7 = o5))
+
+axiom H14 : ((o8 = o6) and (o9 = o7))
+
+axiom H15 : ((discr__r4__d2__assume = o8) and (discr__r4__d2__assume1 = o9))
+
+axiom H16 : (d2__split_discrs = discr__r4__d2__assume)
+
+axiom H17 : (d2__attr__constrained = true)
+
+axiom H18 : ((c = to_rep(d2__split_discrs)) and
+  (d2__attr__constrained = true))
+
+axiom H19 : true
+
  (* File "discr.adb", line 27, characters 0-0 *)
 goal WP_parameter_def : true

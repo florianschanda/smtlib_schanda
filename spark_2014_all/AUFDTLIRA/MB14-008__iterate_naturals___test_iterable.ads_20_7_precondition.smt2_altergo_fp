@@ -266,7 +266,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -555,6 +555,18 @@ logic cont1 : (int,t) farray
 logic cont2 : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic c : int
+
+logic o : bool
+
+logic o1 : bool
+
+logic result : bool
+
+axiom H : (dynamic_property1(1, to_rep2(cont), to_rep1(first(cont2)),
+  to_rep1(last(cont2))) and ((to_rep1(first(cont2)) = 1) and
+  (to_rep1(last(cont2)) = to_rep2(cont))))
 
  (* File "test_iterable.ads", line 19, characters 0-0 *)
 goal WP_parameter_def : true

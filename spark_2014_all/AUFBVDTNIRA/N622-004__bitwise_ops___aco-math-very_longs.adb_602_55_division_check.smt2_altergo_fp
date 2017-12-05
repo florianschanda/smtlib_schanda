@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -851,7 +851,7 @@ function digit_index_type__ref___projection(a: digit_index_type__ref) : digit_in
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1195,14 +1195,69 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic number__split_fields : (int,octet) farray
+
+logic number__split_fields1 : t1
+
+logic digit_number : int
+
+logic bit_position : int
+
+logic digit : t
+
+logic o : int
+
+logic o1 : octet
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : octet
+
+logic result : int
+
+logic digit_number1 : int
+
+logic result1 : int
+
+logic bit_position1 : int
+
+logic result2 : t
+
+logic digit1 : t
+
+logic result3 : t
+
+logic digit2 : t
+
+logic result4 : t
+
+logic digit3 : t
+
+axiom H : (dynamic_property1(1, to_rep2(number__split_discrs),
+  to_rep1(first(number__split_fields1)),
+  to_rep1(last(number__split_fields1))) and
+  ((to_rep1(first(number__split_fields1)) = 1) and
+  (to_rep1(last(number__split_fields1)) = to_rep2(number__split_discrs))))
+
+axiom H1 : in_range3(bit_number)
+
+axiom H2 : in_range2(bit_value)
+
+axiom H3 : ((1 <= 2147483647) -> in_range(digit_number))
+
+axiom H4 : ((0 <= 2147483647) -> in_range3(bit_position))
+
+axiom H5 : true
+
  (* File "aco-math-very_longs.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number__split_fields:t1. forall digit_number:int.
-  forall bit_position:int. ((dynamic_property1(1,
-  to_rep2(number__split_discrs), to_rep1(first(number__split_fields)),
-  to_rep1(last(number__split_fields))) and
-  ((to_rep1(first(number__split_fields)) = 1) and
-  (to_rep1(last(number__split_fields)) = to_rep2(number__split_discrs)))) ->
-  (in_range3(bit_number) -> (in_range2(bit_value) -> (((1 <= 2147483647) ->
-  in_range(digit_number)) -> (((0 <= 2147483647) ->
-  in_range3(bit_position)) -> (not (8 = 0))))))))
+goal WP_parameter_def : (not (8 = 0))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -371,20 +371,166 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,natural) farray
+
+logic bad : bool
+
+logic i : int
+
+logic j : int
+
+logic o : natural
+
+logic o1 : int
+
+logic o2 : (int,natural) farray
+
+logic temp___299 : bool
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic o6 : bool
+
+logic j1 : int
+
+logic o7 : natural
+
+logic o8 : int
+
+logic o9 : (int,natural) farray
+
+logic temp___2991 : bool
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : int
+
+logic o13 : bool
+
+logic j2 : int
+
+logic result : bool
+
+logic bad1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result3 : int
+
+logic j3 : int
+
+logic bad2 : bool
+
+logic j4 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic bad3 : bool
+
+logic bad4 : bool
+
+logic j5 : int
+
+logic bad5 : bool
+
+logic j6 : int
+
+logic bad6 : bool
+
+logic j7 : int
+
+logic bad7 : bool
+
+logic j8 : int
+
+logic result6 : int
+
+logic i2 : int
+
+logic result7 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic result8 : int
+
+logic j9 : int
+
+logic bad8 : bool
+
+logic j10 : int
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic bad9 : bool
+
+logic bad10 : bool
+
+logic bad11 : bool
+
+logic bad12 : bool
+
+logic j11 : int
+
+logic bad13 : bool
+
+logic j12 : int
+
+logic bad14 : bool
+
+logic j13 : int
+
+logic bad15 : bool
+
+logic j14 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : (result = bad)
+
+axiom H2 : (bad1 = of_int(0))
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (to_rep(o) = 0)
+
+axiom H6 : ((to_rep1(a__first) <= i1) and (i1 <= to_rep1(a__last)))
+
+axiom H7 : (o1 = i1)
+
+axiom H8 : (o2 = (a[o1 <- o]))
+
+axiom H9 : (result2 = a)
+
+axiom H10 : (a1 = o2)
+
+axiom H11 : (result3 = j)
+
+axiom H12 : (j3 = to_rep1(a__first))
+
+axiom H13 : (to_rep1(a__first) <= j3)
+
+axiom H14 : (j3 <= i1)
+
+axiom H15 : ((to_rep1(a__first) <= j4) and (j4 <= i1))
+
  (* File "loops_static.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall bad:bool. forall i:int.
-  forall j:int. forall o:natural. forall o1:int.
-  forall o2:(int,natural) farray. forall result:bool. forall bad1:bool.
-  forall result1:int. forall i1:int. forall result2:(int,natural) farray.
-  forall a1:(int,natural) farray. forall result3:int. forall j1:int.
-  forall j2:int. (dynamic_property((-2147483648), 2147483647,
-  to_rep1(a__first), to_rep1(a__last)) -> (((result = bad) and
-  (bad1 = of_int(0))) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = 1)) -> ((((to_rep(o) = 0) and ((((to_rep1(a__first) <= i1) and
-  (i1 <= to_rep1(a__last))) and (o1 = i1)) and (o2 = (a[o1 <- o])))) and (({
-  map__content = result2 } = { map__content = a }) and (a1 = o2))) -> ((({
-  int__content = result3 } = { int__content = j }) and
-  (j1 = to_rep1(a__first))) -> (((to_rep1(a__first) <= j1) and (j1 <= i1)) ->
-  (((to_rep1(a__first) <= j2) and (j2 <= i1)) ->
-  (to_rep1(a__first) <= j2)))))))))
+goal WP_parameter_def : (to_rep1(a__first) <= j4)

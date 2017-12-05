@@ -170,6 +170,7 @@
 (declare-const o6 message_index)
 (declare-const o7 message_index)
 (declare-const o8 message_count)
+(declare-const o9 Int)
 (declare-const result Int)
 (declare-const n1 Int)
 (declare-const result1 (Array (_ BitVec 8) integer))

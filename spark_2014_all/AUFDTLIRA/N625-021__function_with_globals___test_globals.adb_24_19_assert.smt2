@@ -441,6 +441,7 @@
 (declare-const o17 us_rep)
 (declare-const o18 us_rep)
 (declare-const test_globals__rd__assume us_rep)
+(declare-const us2 Bool)
 (declare-const result map__ref)
 (declare-const au1 (Array Int natural))
 (declare-const result1 map__ref)

@@ -1098,21 +1098,67 @@ logic ka : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic homothetical__adjust2triangle__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic homothetical__adjust2triangle__result1 : t
+
+logic result2 : t
+
+logic homothetical__adjust2triangle__result2 : t
+
+logic homothetical__adjust2triangle__result3 : t
+
+logic homothetical__adjust2triangle__result4 : t
+
+logic homothetical__adjust2triangle__result5 : t
+
+logic homothetical__adjust2triangle__result6 : t
+
+logic homothetical__adjust2triangle__result7 : t
+
+logic homothetical__adjust2triangle__result8 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : tqtisFinite(kv)
+
+axiom H2 : tqtisFinite(ka)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H3 : ((neq(d, fliteral1) and lt(fliteral1, kv)) and lt(fliteral1, ka))
+
+axiom H4 : ((o = mul(NearestTiesToEven, kv, kv)) and
+  tqtisFinite(mul(NearestTiesToEven, kv, kv)))
+
+axiom H5 : (o1 = div(NearestTiesToEven, o, ka))
+
+axiom H6 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H7 : ((lt(abs(d), o2) -> (result = true)) and ((not lt(abs(d), o2)) ->
+  (result = false)))
+
+axiom H8 : (result = true)
+
+axiom H9 : ((o3 = mul(NearestTiesToEven, abs(d), ka)) and
+  tqtisFinite(mul(NearestTiesToEven, abs(d), ka)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall result:bool.
-  (tqtisFinite(d) -> (tqtisFinite(kv) -> (tqtisFinite(ka) -> (((neq(d,
-  fliteral1) and lt(fliteral1, kv)) and lt(fliteral1, ka)) ->
-  ((((((o = mul(NearestTiesToEven, kv, kv)) and
-  tqtisFinite(mul(NearestTiesToEven, kv, kv))) and
-  (o1 = div(NearestTiesToEven, o, ka))) and ((o2 = o1) and
-  tqtisFinite(o1))) and ((lt(abs(d), o2) and (result = true)) or
-  ((not lt(abs(d), o2)) and (result = false)))) -> ((result = true) ->
-  (((o3 = mul(NearestTiesToEven, abs(d), ka)) and
-  tqtisFinite(mul(NearestTiesToEven, abs(d), ka))) -> (is_zero(o3) or
-  is_positive(o3))))))))))
+goal WP_parameter_def : (is_zero(o3) or is_positive(o3))

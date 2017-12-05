@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -450,25 +450,76 @@ axiom temp___String_Literal_186__def_axiom :
   (to_rep((temp___String_Literal_186(void)[4])) = 52)) and
   (to_rep((temp___String_Literal_186(void)[5])) = 53))
 
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic pos : int
+
+logic o : (int,character) farray
+
+logic temp___189 : (int,character) farray
+
+logic temp___1891 : t
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : (int,character) farray
+
+logic new_str1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic new_sub1 : (int,character) farray
+
+logic result2 : int
+
+logic pos1 : int
+
+logic result3 : bool
+
+logic pos2 : int
+
+logic result4 : int
+
+logic pos3 : int
+
+axiom H : (result = new_str)
+
+axiom H1 : (new_str1 = temp___String_Literal_186(void))
+
+axiom H2 : (result1 = new_sub)
+
+axiom H3 : (new_sub1 = new_str1)
+
+axiom H4 : (result2 = pos)
+
+axiom H5 : (pos1 = 1)
+
+axiom H6 : in_range1(pos1)
+
+axiom H7 : ((pos1 <= 5) -> (((1 <= pos1) and (pos1 <= 5)) and ((1 <= 5) and
+  (5 <= 5))))
+
+axiom H8 : (o = new_str1)
+
+axiom H9 : (o = temp___189)
+
+axiom H10 : (mk(pos1, 5) = temp___1891)
+
+axiom H11 : (o1 = bool_eq4(temp___189, to_rep1(first(temp___1891)),
+  to_rep1(last(temp___1891)), new_sub1, 1, 5))
+
+axiom H12 : (((not (o1 = true)) -> (result3 = true)) and ((o1 = true) ->
+  (result3 = false)))
+
+axiom H13 : (result3 = true)
+
+axiom H14 : ((((- 2147483648) <= 2147483647) -> in_range1(pos2)) and
+  (not (bool_eq4(new_str1, to_rep1(first(mk(pos2, 5))), to_rep1(last(mk(pos2,
+  5))), new_sub1, 1, 5) = true)))
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray.
-  forall new_sub:(int,character) farray. forall pos:int.
-  forall o:(int,character) farray. forall temp___189:(int,character) farray.
-  forall temp___1891:t. forall o1:bool. forall result:(int,character) farray.
-  forall new_str1:(int,character) farray.
-  forall result1:(int,character) farray.
-  forall new_sub1:(int,character) farray. forall result2:int.
-  forall pos1:int. forall result3:bool. forall pos2:int.
-  (((result = new_str) and (new_str1 = temp___String_Literal_186(void))) ->
-  (((result1 = new_sub) and (new_sub1 = new_str1)) -> (((result2 = pos) and
-  (pos1 = 1)) -> (in_range1(pos1) -> (((((((pos1 <= 5) -> (((1 <= pos1) and
-  (pos1 <= 5)) and ((1 <= 5) and (5 <= 5)))) and (o = new_str1)) and
-  ((o = temp___189) and (mk(pos1, 5) = temp___1891))) and
-  (o1 = bool_eq4(temp___189, to_rep1(first(temp___1891)),
-  to_rep1(last(temp___1891)), new_sub1, 1, 5))) and (((not (o1 = true)) and
-  (result3 = true)) or ((o1 = true) and (result3 = false)))) ->
-  ((result3 = true) -> (((((-2147483648) <= 2147483647) ->
-  in_range1(pos2)) and (not (bool_eq4(new_str1, to_rep1(first(mk(pos2, 5))),
-  to_rep1(last(mk(pos2, 5))), new_sub1, 1, 5) = true))) ->
-  in_range1((pos2 + 1))))))))))
+goal WP_parameter_def : in_range1((pos2 + 1))

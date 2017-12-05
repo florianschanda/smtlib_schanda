@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -187,8 +187,15 @@ type p_intT__ref = { p_intT__content : us_rep
 function p_intT__ref___projection(a: p_intT__ref) : us_rep =
   (a).p_intT__content
 
+logic not_cae : bool
+
+logic self__ : integer
+
+logic o : int
+
+axiom H : (get_not_cae(not_cae) = true)
+
+axiom H1 : (not (to_rep(self__) = 2147483647))
+
  (* File "po_t.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall not_cae:bool. forall self__:integer.
-  ((get_not_cae(not_cae) = true) -> ((not (to_rep(self__) = 2147483647)) ->
-  in_range((to_rep(self__) + 1)))))
+goal WP_parameter_def : in_range((to_rep(self__) + 1))

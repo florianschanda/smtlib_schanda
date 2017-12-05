@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -161,7 +161,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -603,37 +603,73 @@ axiom length__post_axiom1 :
 
 axiom get__post_axiom : true
 
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic o8 : bool
+
+axiom H : in_range4(before)
+
+axiom H1 : in_range2(count)
+
+axiom H2 : ((not (before = 0)) -> ((o5 = (0 + length1(model__({
+  us_split_discrs1 = {
+  rec__indefinite_unbounded_tagged__vect__vector__capacity =
+  container__split_discrs }; us_split_fields3 = {
+  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
+  })))) and (in_range4(o5) and (o5 = (0 + length1(model__({
+  us_split_discrs1 = {
+  rec__indefinite_unbounded_tagged__vect__vector__capacity =
+  container__split_discrs }; us_split_fields3 = {
+  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
+  })))))))
+
+axiom H3 : ((not (before = 0)) -> ((((before - 1) = o5) -> (o6 = true)) and
+  ((not ((before - 1) = o5)) -> (o6 = false))))
+
+axiom H4 : ((before = 0) -> (o6 = false))
+
+axiom H5 : ((o3 = (0 + length1(model__({ us_split_discrs1 = {
+  rec__indefinite_unbounded_tagged__vect__vector__capacity =
+  container__split_discrs }; us_split_fields3 = {
+  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
+  })))) and (in_range4(o3) and (o3 = (0 + length1(model__({
+  us_split_discrs1 = {
+  rec__indefinite_unbounded_tagged__vect__vector__capacity =
+  container__split_discrs }; us_split_fields3 = {
+  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
+  }))))))
+
+axiom H6 : (((before <= o3) -> (o4 = true)) and ((not (before <= o3)) ->
+  (o4 = false)))
+
+axiom H7 : (((1 <= before) -> (o7 = o4)) and ((not (1 <= before)) ->
+  (o7 = false)))
+
+axiom H8 : (o8 = match_bool(o7, true, o6))
+
+axiom H9 : ((((of_int(0) = true) ->
+  (o = to_rep1(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o = 2147483647))) and (in_range5(o) and (((of_int(0) = true) ->
+  (o = to_rep1(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o = 2147483647)))))
+
+axiom H10 : (o1 = (o - count))
+
  (* File "a-cfinve.ads", line 351, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
-  forall o2:int. forall o3:bool. forall o4:int. forall o5:bool.
-  forall o6:bool. forall o7:bool. (in_range4(before) -> (in_range2(count) ->
-  (((((not (before = 0)) and (((o4 = (0 + length1(model__({
-  us_split_discrs1 = {
-  rec__indefinite_unbounded_tagged__vect__vector__capacity =
-  container__split_discrs }; us_split_fields3 = {
-  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
-  })))) and (in_range4(o4) and (o4 = (0 + length1(model__({
-  us_split_discrs1 = {
-  rec__indefinite_unbounded_tagged__vect__vector__capacity =
-  container__split_discrs }; us_split_fields3 = {
-  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
-  })))))) and ((((before - 1) = o4) and (o5 = true)) or
-  ((not ((before - 1) = o4)) and (o5 = false))))) or ((before = 0) and
-  (o5 = false))) and (((((o2 = (0 + length1(model__({ us_split_discrs1 = {
-  rec__indefinite_unbounded_tagged__vect__vector__capacity =
-  container__split_discrs }; us_split_fields3 = {
-  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
-  })))) and (in_range4(o2) and (o2 = (0 + length1(model__({
-  us_split_discrs1 = {
-  rec__indefinite_unbounded_tagged__vect__vector__capacity =
-  container__split_discrs }; us_split_fields3 = {
-  rec__indefinite_unbounded_tagged__vect__vector = container__split_fields }
-  })))))) and (((before <= o2) and (o3 = true)) or ((not (before <= o2)) and
-  (o3 = false)))) and (((1 <= before) and (o6 = o3)) or
-  ((not (1 <= before)) and (o6 = false)))) and (o7 = match_bool(o6, true,
-  o5)))) -> ((((((of_int(0) = true) and
-  (o = to_rep1(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o = 2147483647))) and (in_range5(o) and (((of_int(0) = true) and
-  (o = to_rep1(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o = 2147483647))))) and (o1 = (o - count))) -> in_range1(o1))))))
+goal WP_parameter_def : in_range1(o1)

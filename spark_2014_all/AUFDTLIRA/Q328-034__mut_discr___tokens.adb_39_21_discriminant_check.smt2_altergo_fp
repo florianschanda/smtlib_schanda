@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -653,23 +653,23 @@ logic bool_eq11 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq11(a, b)].
-  ((((((to_rep4(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep4(((b).us_split_discrs1).rec__tokens__token__kind)) and
-  (tokens__token__val__pred(a) ->
+  ((((to_rep4(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep4(((b).us_split_discrs1).rec__tokens__token__kind)) and
+  (((tokens__token__val__pred(a) ->
   (bool_eq8(((a).us_split_fields3).rec__tokens__token__val,
-  ((b).us_split_fields3).rec__tokens__token__val) = true))) and
-  (tokens__token__op__pred(a) ->
-  (to_rep3(((a).us_split_fields3).rec__tokens__token__op) = to_rep3(((b).us_split_fields3).rec__tokens__token__op)))) and
-  (tokens__token__instr__pred(a) ->
-  (to_rep2(((a).us_split_fields3).rec__tokens__token__instr) = to_rep2(((b).us_split_fields3).rec__tokens__token__instr)))) ->
-  (bool_eq11(a, b) = true)) and
-  ((not ((((to_rep4(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep4(((b).us_split_discrs1).rec__tokens__token__kind)) and
-  (tokens__token__val__pred(a) ->
-  (bool_eq8(((a).us_split_fields3).rec__tokens__token__val,
-  ((b).us_split_fields3).rec__tokens__token__val) = true))) and
+  ((b).us_split_fields3).rec__tokens__token__val) = true)) and
   (tokens__token__op__pred(a) ->
   (to_rep3(((a).us_split_fields3).rec__tokens__token__op) = to_rep3(((b).us_split_fields3).rec__tokens__token__op)))) and
   (tokens__token__instr__pred(a) ->
   (to_rep2(((a).us_split_fields3).rec__tokens__token__instr) = to_rep2(((b).us_split_fields3).rec__tokens__token__instr))))) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((to_rep4(((a).us_split_discrs1).rec__tokens__token__kind) = to_rep4(((b).us_split_discrs1).rec__tokens__token__kind)) and
+  (((tokens__token__val__pred(a) ->
+  (bool_eq8(((a).us_split_fields3).rec__tokens__token__val,
+  ((b).us_split_fields3).rec__tokens__token__val) = true)) and
+  (tokens__token__op__pred(a) ->
+  (to_rep3(((a).us_split_fields3).rec__tokens__token__op) = to_rep3(((b).us_split_fields3).rec__tokens__token__op)))) and
+  (tokens__token__instr__pred(a) ->
+  (to_rep2(((a).us_split_fields3).rec__tokens__token__instr) = to_rep2(((b).us_split_fields3).rec__tokens__token__instr)))))) ->
   (bool_eq11(a, b) = false))))
 
 logic value__size2 : int
@@ -1483,94 +1483,427 @@ type t22b__ref = { t22b__content : us_rep1
 
 function t22b__ref___projection(a: t22b__ref) : us_rep1 = (a).t22b__content
 
+logic word_size : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : (int,character) farray
+
+logic temp___229 : (int,character) farray
+
+logic temp___2291 : t1
+
+logic tokens__next__read_a_valid_token__word__assume : (int,character) farray
+
+logic tokens__next__read_a_valid_token__word__assume1 : t
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : character
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : character
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : bool
+
+logic o17 : token_kind
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : operation
+
+logic o21 : instruction
+
+logic o22 : token_kind
+
+logic temp___232 : token_kind
+
+logic temp___2321 : integer
+
+logic temp___2322 : operation
+
+logic temp___2323 : instruction
+
+logic temp___2324 : bool
+
+logic o23 : int
+
+logic o24 : character
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : character
+
+logic o28 : int
+
+logic o29 : bool
+
+logic o30 : bool
+
+logic o31 : int
+
+logic o32 : character
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : bool
+
+logic o36 : token_kind
+
+logic o37 : int
+
+logic o38 : operation
+
+logic o39 : integer
+
+logic o40 : operation
+
+logic o41 : instruction
+
+logic o42 : token_kind
+
+logic temp___235 : token_kind
+
+logic temp___2351 : integer
+
+logic temp___2352 : operation
+
+logic temp___2353 : instruction
+
+logic temp___2354 : bool
+
+logic o43 : int
+
+logic o44 : character
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : token_kind
+
+logic o48 : integer
+
+logic o49 : integer
+
+logic o50 : operation
+
+logic o51 : instruction
+
+logic o52 : token_kind
+
+logic temp___241 : token_kind
+
+logic temp___2411 : integer
+
+logic temp___2412 : operation
+
+logic temp___2413 : instruction
+
+logic temp___2414 : bool
+
+logic o53 : token_kind
+
+logic o54 : int
+
+logic o55 : operation
+
+logic o56 : integer
+
+logic o57 : operation
+
+logic o58 : instruction
+
+logic o59 : token_kind
+
+logic temp___238 : token_kind
+
+logic temp___2381 : integer
+
+logic temp___2382 : operation
+
+logic temp___2383 : instruction
+
+logic temp___2384 : bool
+
+logic o60 : int
+
+logic o61 : character
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : character
+
+logic o65 : int
+
+logic o66 : bool
+
+logic o67 : bool
+
+logic o68 : int
+
+logic o69 : character
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : character
+
+logic o73 : int
+
+logic o74 : bool
+
+logic o75 : bool
+
+logic o76 : bool
+
+logic o77 : bool
+
+logic o78 : token_kind
+
+logic o79 : int
+
+logic o80 : instruction
+
+logic o81 : integer
+
+logic o82 : operation
+
+logic o83 : instruction
+
+logic o84 : token_kind
+
+logic temp___244 : token_kind
+
+logic temp___2441 : integer
+
+logic temp___2442 : operation
+
+logic temp___2443 : instruction
+
+logic temp___2444 : bool
+
+logic v__split_discrs : token_kind
+
+logic word_buffer : (int,character) farray
+
+logic word_size1 : int
+
+logic word : (int,character) farray
+
+logic word_size2 : int
+
+logic input__next_word__v : (int,character) farray
+
+logic result : (int,character) farray
+
+logic word_buffer1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic word1 : (int,character) farray
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(word_size))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(word_size1))
+
+axiom H2 : (to_rep1(o1) = 1024)
+
+axiom H3 : (to_rep1(o) = 1)
+
+axiom H4 : ((word_size2 <= 1024) and in_range1(word_size2))
+
+axiom H5 : (result = word_buffer)
+
+axiom H6 : (word_buffer1 = slide(input__next_word__v, to_rep1(first(mk(1,
+  1024))), 1))
+
+axiom H7 : (word_size2 = r1b)
+
+axiom H8 : in_range1(r1b)
+
+axiom H9 : ((1 <= r1b) -> (((1 <= 1) and (1 <= 1024)) and ((1 <= r1b) and
+  (r1b <= 1024))))
+
+axiom H10 : (o2 = word_buffer1)
+
+axiom H11 : (o2 = temp___229)
+
+axiom H12 : (mk1(1, r1b) = temp___2291)
+
+axiom H13 : (temp___229 = tokens__next__read_a_valid_token__word__assume)
+
+axiom H14 : (mk(to_rep1(first2(temp___2291)),
+  to_rep1(last2(temp___2291))) = tokens__next__read_a_valid_token__word__assume1)
+
+axiom H15 : (result1 = word)
+
+axiom H16 : (word1 = tokens__next__read_a_valid_token__word__assume)
+
+axiom H17 :
+  (to_rep1(word__first) = to_rep1(first(tokens__next__read_a_valid_token__word__assume1)))
+
+axiom H18 :
+  (to_rep1(word__last) = to_rep1(last(tokens__next__read_a_valid_token__word__assume1)))
+
+axiom H19 : dynamic_property(1, 2147483647, to_rep1(word__first),
+  to_rep1(word__last))
+
+axiom H20 : ((to_rep1(word__first) <= to_rep1(word__last)) ->
+  (o3 = ((to_rep1(word__last) - to_rep1(word__first)) + 1)))
+
+axiom H21 : ((not (to_rep1(word__first) <= to_rep1(word__last))) -> (o3 = 0))
+
+axiom H22 : (((1 <= o3) -> (result2 = true)) and ((not (1 <= o3)) ->
+  (result2 = false)))
+
+axiom H23 : (result2 = true)
+
+axiom H24 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H25 : (o12 = to_rep1(word__first))
+
+axiom H26 : (o13 = (word1[o12]))
+
+axiom H27 : (o14 = to_rep(o13))
+
+axiom H28 : (((o14 = 46) -> (o15 = true)) and ((not (o14 = 46)) ->
+  (o15 = false)))
+
+axiom H29 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H30 : (o7 = to_rep1(word__first))
+
+axiom H31 : (o8 = (word1[o7]))
+
+axiom H32 : (o9 = to_rep(o8))
+
+axiom H33 : (((o9 <= 57) -> (o10 = true)) and ((not (o9 <= 57)) ->
+  (o10 = false)))
+
+axiom H34 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H35 : (o4 = to_rep1(word__first))
+
+axiom H36 : (o5 = (word1[o4]))
+
+axiom H37 : (o6 = to_rep(o5))
+
+axiom H38 : (((48 <= o6) -> (o11 = true)) and ((not (48 <= o6)) ->
+  (o11 = false)))
+
+axiom H39 : (o16 = match_bool(o11, o10, false))
+
+axiom H40 : (result3 = match_bool(o16, true, o15))
+
+axiom H41 : (not (result3 = true))
+
+axiom H42 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H43 : (o31 = to_rep1(word__first))
+
+axiom H44 : (o32 = (word1[o31]))
+
+axiom H45 : (o33 = to_rep(o32))
+
+axiom H46 : (((o33 = 47) -> (o34 = true)) and ((not (o33 = 47)) ->
+  (o34 = false)))
+
+axiom H47 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H48 : (o26 = to_rep1(word__first))
+
+axiom H49 : (o27 = (word1[o26]))
+
+axiom H50 : (o28 = to_rep(o27))
+
+axiom H51 : (((o28 = 42) -> (o29 = true)) and ((not (o28 = 42)) ->
+  (o29 = false)))
+
+axiom H52 : ((to_rep1(word__first) <= to_rep1(word__first)) and
+  (to_rep1(word__first) <= to_rep1(word__last)))
+
+axiom H53 : (o23 = to_rep1(word__first))
+
+axiom H54 : (o24 = (word1[o23]))
+
+axiom H55 : (o25 = to_rep(o24))
+
+axiom H56 : (((o25 = 43) -> (o30 = true)) and ((not (o25 = 43)) ->
+  (o30 = false)))
+
+axiom H57 : (o35 = match_bool(o30, true, o29))
+
+axiom H58 : (result4 = match_bool(o35, true, o34))
+
+axiom H59 : (result4 = true)
+
+axiom H60 : (to_rep4(v__split_discrs) = r9b)
+
+axiom H61 : in_range6(r9b)
+
+axiom H62 : ((o37 = read2({ elts = word1; rt = mk(to_rep1(word__first),
+  to_rep1(word__last)) })) and in_range5(o37))
+
+axiom H63 : (to_rep3(o38) = o37)
+
+axiom H64 : ((o39 = dummy6) and ((o40 = o38) and (o41 = dummy5)))
+
+axiom H65 : (to_rep4(o36) = 1)
+
+axiom H66 : (o42 = o36)
+
+axiom H67 : ((temp___235 = o42) and (((temp___2351 = o39) and
+  ((temp___2352 = o40) and (temp___2353 = o41))) and (temp___2354 = true)))
+
+axiom H68 : (v__attr__constrained = true)
+
  (* File "tokens.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall word_size:int. forall o:integer. forall o1:integer.
-  forall o2:(int,character) farray. forall temp___229:(int,character) farray.
-  forall temp___2291:t1.
-  forall tokens__next__read_a_valid_token__word__assume:(int,character) farray.
-  forall tokens__next__read_a_valid_token__word__assume1:t. forall o3:int.
-  forall o4:int. forall o5:character. forall o6:int. forall o7:int.
-  forall o8:character. forall o9:int. forall o10:bool. forall o11:bool.
-  forall o12:int. forall o13:character. forall o14:int. forall o15:bool.
-  forall o16:bool. forall o17:int. forall o18:character. forall o19:int.
-  forall o20:int. forall o21:character. forall o22:int. forall o23:bool.
-  forall o24:bool. forall o25:int. forall o26:character. forall o27:int.
-  forall o28:bool. forall o29:bool. forall o30:token_kind. forall o31:int.
-  forall o32:operation. forall o33:integer. forall o34:operation.
-  forall o35:instruction. forall o36:token_kind.
-  forall temp___235:token_kind. forall temp___2351:integer.
-  forall temp___2352:operation. forall temp___2353:instruction.
-  forall temp___2354:bool. forall v__split_discrs:us_split_discrs.
-  forall word_buffer:(int,character) farray. forall word_size1:int.
-  forall word:(int,character) farray. forall word_size2:int.
-  forall input__next_word__v:(int,character) farray. forall result:map__ref.
-  forall word_buffer1:(int,character) farray. forall result1:map__ref.
-  forall word1:(int,character) farray. forall result2:bool.
-  forall result3:bool. forall result4:bool.
-  ((((-2147483648) <= 2147483647) -> in_range1(word_size)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(word_size1)) ->
-  ((((to_rep1(o1) = 1024) and ((to_rep1(o) = 1) and ((word_size2 <= 1024) and
-  in_range1(word_size2)))) and ((result = { map__content = word_buffer }) and
-  (word_buffer1 = slide(input__next_word__v, to_rep1(first(mk(1, 1024))),
-  1)))) -> (((word_size2 = r1b) and in_range1(r1b)) -> ((((((((1 <= r1b) ->
-  (((1 <= 1) and (1 <= 1024)) and ((1 <= r1b) and (r1b <= 1024)))) and
-  (o2 = word_buffer1)) and ((o2 = temp___229) and (mk1(1,
-  r1b) = temp___2291))) and
-  ((temp___229 = tokens__next__read_a_valid_token__word__assume) and
-  (mk(to_rep1(first2(temp___2291)),
-  to_rep1(last2(temp___2291))) = tokens__next__read_a_valid_token__word__assume1))) and
-  (((result1 = { map__content = word }) and
-  (word1 = tokens__next__read_a_valid_token__word__assume)) and
-  ((to_rep1(word__first) = to_rep1(first(tokens__next__read_a_valid_token__word__assume1))) and
-  (to_rep1(word__last) = to_rep1(last(tokens__next__read_a_valid_token__word__assume1)))))) and
-  dynamic_property(1, 2147483647, to_rep1(word__first),
-  to_rep1(word__last))) ->
-  (((((to_rep1(word__first) <= to_rep1(word__last)) and
-  (o3 = ((to_rep1(word__last) - to_rep1(word__first)) + 1))) or
-  ((not (to_rep1(word__first) <= to_rep1(word__last))) and (o3 = 0))) and
-  (((1 <= o3) and (result2 = true)) or ((not (1 <= o3)) and
-  (result2 = false)))) -> ((result2 = true) ->
-  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o12 = to_rep1(word__first))) and (o13 = (word1[o12]))) and
-  (o14 = to_rep(o13))) and (((o14 = 46) and (o15 = true)) or
-  ((not (o14 = 46)) and (o15 = false)))) and
-  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o7 = to_rep1(word__first))) and (o8 = (word1[o7]))) and
-  (o9 = to_rep(o8))) and (((o9 <= 57) and (o10 = true)) or
-  ((not (o9 <= 57)) and (o10 = false)))) and
-  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o4 = to_rep1(word__first))) and (o5 = (word1[o4]))) and
-  (o6 = to_rep(o5))) and (((48 <= o6) and (o11 = true)) or
-  ((not (48 <= o6)) and (o11 = false)))) and (o16 = match_bool(o11, o10,
-  false)))) and (result3 = match_bool(o16, true, o15)))) ->
-  ((not (result3 = true)) ->
-  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o25 = to_rep1(word__first))) and (o26 = (word1[o25]))) and
-  (o27 = to_rep(o26))) and (((o27 = 47) and (o28 = true)) or
-  ((not (o27 = 47)) and (o28 = false)))) and
-  ((((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o20 = to_rep1(word__first))) and (o21 = (word1[o20]))) and
-  (o22 = to_rep(o21))) and (((o22 = 42) and (o23 = true)) or
-  ((not (o22 = 42)) and (o23 = false)))) and
-  (((((((to_rep1(word__first) <= to_rep1(word__first)) and
-  (to_rep1(word__first) <= to_rep1(word__last))) and
-  (o17 = to_rep1(word__first))) and (o18 = (word1[o17]))) and
-  (o19 = to_rep(o18))) and (((o19 = 43) and (o24 = true)) or
-  ((not (o19 = 43)) and (o24 = false)))) and (o29 = match_bool(o24, true,
-  o23)))) and (result4 = match_bool(o29, true, o28)))) ->
-  ((result4 = true) ->
-  (((to_rep4((v__split_discrs).rec__tokens__token__kind) = r9b) and
-  in_range6(r9b)) -> ((((((o31 = read2({ elts = word1; rt =
-  mk(to_rep1(word__first), to_rep1(word__last)) })) and in_range5(o31)) and
-  (to_rep3(o32) = o31)) and ((dummy6 = o33) and ((o32 = o34) and
-  (dummy5 = o35)))) and (((to_rep4(o30) = 1) and (o30 = o36)) and
-  ((temp___235 = o36) and (((temp___2351 = o33) and ((temp___2352 = o34) and
-  (temp___2353 = o35))) and (true = temp___2354))))) ->
-  ((v__attr__constrained = true) ->
-  (temp___235 = (v__split_discrs).rec__tokens__token__kind))))))))))))))))
+goal WP_parameter_def : (temp___235 = v__split_discrs)

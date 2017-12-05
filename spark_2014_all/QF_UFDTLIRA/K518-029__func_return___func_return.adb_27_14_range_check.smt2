@@ -53,6 +53,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_147 Int) (temp___is_init_144 Bool) (temp___skip_constant_145 Bool) (temp___do_toplevel_146 Bool)) Bool (=> (or (= temp___is_init_144 true) (<= 0 20)) (in_range2 temp___expr_147)))
 (declare-const g Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range g))
 (assert (and (= o g) (in_range1 g)))
 (assert (not (in_range2 o)))

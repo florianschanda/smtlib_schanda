@@ -52,6 +52,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const tmp Int)
+(declare-const o Int)
 (assert (in_range1 y))
 (assert (in_range2 the_action))
 (assert (=> (<= 1 16) (in_range1 tmp)))

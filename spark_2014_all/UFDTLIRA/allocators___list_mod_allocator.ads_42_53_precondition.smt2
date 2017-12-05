@@ -101,6 +101,7 @@
 (declare-const i Int)
 (declare-const o Int)
 (declare-const o1 Bool)
+(declare-const o2 Int)
 (declare-const result Bool)
 (assert (in_range1 e))
 (assert (and (= o (length s)) (and (in_range2 o) (<= (+ 0 o) 2147483647))))

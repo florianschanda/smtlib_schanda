@@ -115,6 +115,8 @@
 (declare-const x86__writereg32post__result4 Bool)
 (declare-const x86__writereg32post__result5 Bool)
 (declare-const result1 Bool)
+(assert true)
+(assert true)
 (assert (= x86__writereg32post__result1 x86__writereg32post__result2))
 (assert (= x86__writereg32post__result3 x86__writereg32post__result1))
 (assert (and (= o (readreg32 regnew)) (= o ((_ extract 31 0) (bvand regnew ((_ int2bv 64) 4294967295))))))

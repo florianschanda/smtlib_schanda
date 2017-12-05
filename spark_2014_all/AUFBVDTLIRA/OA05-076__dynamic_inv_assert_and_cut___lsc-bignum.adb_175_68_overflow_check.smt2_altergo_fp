@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1070,28 +1070,248 @@ function t41b__ref___projection(a2: t41b__ref) : integer = (a2).t41b__content
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "lsc-bignum.ads", line 120, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall result__:bool. forall i:int. forall result:bool.
-  forall result__1:bool. forall result1:int. forall i1:int. forall j1:int.
-  forall result__2:bool. forall i2:int. (dynamic_property(0, 2147483646,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(a_first) ->
-  (in_range2(a_last) -> (dynamic_property(0, 2147483646, to_rep1(first(b1)),
-  to_rep1(last(b1))) -> (in_range2(b_first) ->
-  (((((((to_rep1(first(a1)) <= a_first) and
+logic j : int
+
+logic result__ : bool
+
+logic i : int
+
+logic lsc__bignum__less__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic temp___598 : int
+
+logic temp___597 : bool
+
+logic temp___596 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : us_rep
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : word32
+
+logic o26 : int
+
+logic o27 : word32
+
+logic o28 : t
+
+logic o29 : t
+
+logic o30 : int
+
+logic o31 : word32
+
+logic o32 : int
+
+logic o33 : word32
+
+logic o34 : t
+
+logic o35 : t
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : us_rep
+
+logic j1 : int
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic j2 : int
+
+logic result__2 : bool
+
+logic i2 : int
+
+logic result2 : int
+
+logic j3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result__3 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic i3 : int
+
+logic result__4 : bool
+
+logic result__5 : bool
+
+logic j4 : int
+
+logic result__6 : bool
+
+logic i4 : int
+
+logic j5 : int
+
+logic result__7 : bool
+
+logic i5 : int
+
+logic j6 : int
+
+logic result__8 : bool
+
+logic i6 : int
+
+logic j7 : int
+
+logic result__9 : bool
+
+logic i7 : int
+
+logic j8 : int
+
+logic result__10 : bool
+
+logic i8 : int
+
+logic j9 : int
+
+logic result__11 : bool
+
+logic i9 : int
+
+logic result7 : bool
+
+logic lsc__bignum__less__result1 : bool
+
+logic lsc__bignum__less__result2 : bool
+
+logic lsc__bignum__less__result3 : bool
+
+logic j10 : int
+
+logic result__12 : bool
+
+logic i10 : int
+
+logic lsc__bignum__less__result4 : bool
+
+logic j11 : int
+
+logic result__13 : bool
+
+logic i11 : int
+
+logic lsc__bignum__less__result5 : bool
+
+axiom H : dynamic_property(0, 2147483646, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(a_last)
+
+axiom H3 : dynamic_property(0, 2147483646, to_rep1(first(b1)),
+  to_rep1(last(b1)))
+
+axiom H4 : in_range2(b_first)
+
+axiom H5 : ((((((to_rep1(first(a1)) <= a_first) and
   (a_first <= to_rep1(last(a1)))) and ((to_rep1(first(a1)) <= a_last) and
   (a_last <= to_rep1(last(a1))))) and ((to_rep1(first(b1)) <= b_first) and
   (b_first <= to_rep1(last(b1))))) and
   ((to_rep1(first(b1)) <= (b_first + (a_last - a_first))) and
   ((b_first + (a_last - a_first)) <= to_rep1(last(b1))))) and
-  (a_first <= a_last)) -> (((0 <= 2147483647) -> in_range2(j)) -> ((({
-  bool__content = result } = { bool__content = result__ }) and
-  (result__1 = of_int1(0))) -> ((({ int__content = result1 } = {
-  int__content = i }) and (i1 = a_last)) -> (((a_first <= i1) and
-  (i1 <= a_last)) -> (((oeq(num_of_big_int({ elts = a; rt = a1 }, (i2 + 1),
+  (a_first <= a_last))
+
+axiom H6 : ((0 <= 2147483647) -> in_range2(j))
+
+axiom H7 : (result = result__)
+
+axiom H8 : (result__1 = of_int1(0))
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = a_last)
+
+axiom H11 : (a_first <= i1)
+
+axiom H12 : (i1 <= a_last)
+
+axiom H13 : ((oeq(num_of_big_int({ elts = a; rt = a1 }, (i2 + 1),
   (a_last - i2)), num_of_big_int({ elts = b; rt = b1 },
   ((b_first + (i2 - a_first)) + 1), (a_last - i2))) = true) and
-  (not (result__2 = true))) -> (((((0 <= 2147483647) -> in_range2(j1)) and
+  (not (result__2 = true)))
+
+axiom H14 : ((((0 <= 2147483647) -> in_range2(j2)) and
   ((a_first <= a_last) -> dynamic_property1(a_first, a_last, i2))) and
-  ((a_first <= i2) and (i2 <= a_last))) ->
-  in_range1((a_last - i2)))))))))))))))
+  ((a_first <= i2) and (i2 <= a_last)))
+
+ (* File "lsc-bignum.ads", line 120, characters 0-0 *)
+goal WP_parameter_def : in_range1((a_last - i2))

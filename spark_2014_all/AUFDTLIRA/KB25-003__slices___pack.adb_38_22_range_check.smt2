@@ -193,6 +193,8 @@
 (declare-const pack__an21__my_b__assume (Array Int integer))
 (declare-const temp___429 (Array Int character))
 (declare-const temp___431 (Array Int character))
+(declare-const temp___442 (Array Int character))
+(declare-const temp___444 (Array Int character))
 (declare-const result (Array Int character))
 (declare-const my_s21 (Array Int character))
 (assert (dynamic_property 1 2147483647 (to_rep1 glob__first) (to_rep1 glob__last)))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -169,11 +169,29 @@ logic dummy2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic eleven : int
+
+logic p__B6b__dummy__assume : int
+
+logic result : int
+
+logic eleven1 : int
+
+axiom H : (result = eleven)
+
+axiom H1 : (eleven1 = 11)
+
+axiom H2 : in_range1(eleven1)
+
+axiom H3 : (eleven1 = c5b)
+
+axiom H4 : in_range1(c5b)
+
+axiom H5 : ((p__B6b__dummy__assume = c5b) and in_range2(c5b))
+
+axiom H6 : (p__B6b__dummy__assume = dummy2)
+
+axiom H7 : in_range2(dummy2)
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall eleven:int. forall p__B6b__dummy__assume:int. forall result:int.
-  forall eleven1:int. (((result = eleven) and (eleven1 = 11)) ->
-  (in_range1(eleven1) -> (((eleven1 = c5b) and in_range1(c5b)) ->
-  ((((p__B6b__dummy__assume = c5b) and in_range2(c5b)) and
-  (p__B6b__dummy__assume = dummy2)) -> (in_range2(dummy2) ->
-  (1 <= dummy2)))))))
+goal WP_parameter_def : (1 <= dummy2)

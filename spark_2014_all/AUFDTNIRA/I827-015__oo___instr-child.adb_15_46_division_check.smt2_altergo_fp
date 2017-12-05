@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1187,8 +1187,64 @@ logic inc : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : thousand
+
+logic x__split_fields1 : (int,character) farray
+
+logic x__split_fields2 : sixty
+
+logic x__split_fields3 : sixty
+
+logic x__split_fields4 : twenty_four
+
+logic x__split_fields5 : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic instr__increment__x__fields : sixty
+
+logic instr__increment__x__fields1 : sixty
+
+logic instr__increment__x__fields2 : twenty_four
+
+logic instr__increment__x__fields3 : (int,character) farray
+
+logic instr__increment__x__fields4 : us_private
+
+logic result : thousand
+
+logic result1 : (int,character) farray
+
+logic result2 : sixty
+
+logic result3 : sixty
+
+logic result4 : twenty_four
+
+logic result5 : us_private
+
+logic x__split_fields6 : thousand
+
+logic x__split_fields7 : (int,character) farray
+
+logic x__split_fields8 : sixty
+
+logic x__split_fields9 : sixty
+
+logic x__split_fields10 : twenty_four
+
+logic x__split_fields11 : us_private
+
+axiom H : in_range(inc)
+
+axiom H1 : ((o = (to_rep3(x__split_fields) + inc)) and
+  in_range((to_rep3(x__split_fields) + inc)))
+
  (* File "instr-child.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:thousand. forall o:int. (in_range(inc) ->
-  (((o = (to_rep3(x__split_fields) + inc)) and
-  in_range((to_rep3(x__split_fields) + inc))) -> (not (1000 = 0)))))
+goal WP_parameter_def : (not (1000 = 0))

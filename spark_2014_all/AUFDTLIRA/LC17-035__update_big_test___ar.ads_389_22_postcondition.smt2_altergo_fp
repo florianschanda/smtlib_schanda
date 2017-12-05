@@ -542,20 +542,65 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range1(i1)
+
+axiom H1 : in_range2(i2)
+
+axiom H2 : in_range3(i3)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : (to_rep(o) = e)
+
+axiom H5 : (o1 = (((a[i3])[i2])[i1 <- o]))
+
+axiom H6 : (o2 = ((a[i3])[i2 <- o1]))
+
+axiom H7 : (o3 = (a[i3 <- o2]))
+
+axiom H8 : (result = a)
+
+axiom H9 : (a1 = o3)
+
+axiom H10 : (a1 = a2)
+
+axiom H11 : (a3 = a1)
+
+logic m : int
+
+axiom H12 : (1 <= m)
+
+axiom H13 : (m <= 16)
+
+logic n : int
+
+axiom H14 : (5 <= n)
+
+axiom H15 : (n <= 50)
+
+logic o4 : int
+
+axiom H16 : (1 <= o4)
+
+axiom H17 : (o4 <= 10)
+
  (* File "ar.ads", line 381, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall o:et1.
-  forall o1:(int,et1) farray. forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray. ((in_range1(i1) and
-  (in_range2(i2) and (in_range3(i3) and (in_range4(e) and
-  ((((((to_rep(o) = e) and (o1 = (((a[i3])[i2])[i1 <- o]))) and
-  (o2 = ((a[i3])[i2 <- o1]))) and (o3 = (a[i3 <- o2]))) and ((result = a) and
-  (a1 = o3))) and ((a1 = a2) and (a3 = a1))))))) ->
-  (forall m:int. (((1 <= m) and (m <= 16)) ->
-  (forall n:int. (((5 <= n) and (n <= 50)) ->
-  (forall o4:int. (((1 <= o4) and (o4 <= 10)) ->
-  in_range4(to_rep((((a2[m])[n])[o4])))))))))))
+goal WP_parameter_def : in_range4(to_rep((((a2[m])[n])[o4])))

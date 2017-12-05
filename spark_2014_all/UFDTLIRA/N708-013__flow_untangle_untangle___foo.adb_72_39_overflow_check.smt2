@@ -138,6 +138,8 @@
 (declare-const temp___2153 integer)
 (declare-const temp___2154 integer)
 (declare-const temp___2155 integer)
+(declare-const o14 Int)
+(declare-const o15 Int)
 (declare-const result us_split_fields__ref1)
 (declare-const tmp__split_fields6 us_split_fields2)
 (assert (in_range a))

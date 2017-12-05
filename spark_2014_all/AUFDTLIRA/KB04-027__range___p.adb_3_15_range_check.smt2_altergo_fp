@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -596,6 +596,15 @@ axiom def_axiom :
   (forall temp___146:int. (((p__z__aggregate_def(temp___143, temp___144,
   temp___145)).elts1[temp___146]) = temp___143)))))
 
+logic temp___148 : (int,bool) farray
+
+logic temp___1481 : t1
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : (x <= y)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> ((x <= y) ->
-  (x <= x))))
+goal WP_parameter_def : (x <= x)

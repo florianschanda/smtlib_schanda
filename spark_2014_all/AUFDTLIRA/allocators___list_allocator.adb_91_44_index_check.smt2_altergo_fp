@@ -989,11 +989,123 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range6(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep2
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic o : int
+
+logic o1 : status
+
+logic o2 : resource
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : int
+
+logic o7 : resource
+
+logic o8 : status
+
+logic o9 : status
+
+logic o10 : resource
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : int
+
+logic o14 : (int,us_rep) farray
+
+logic o15 : us_rep2
+
+logic o16 : us_rep1
+
+logic o17 : us_rep2
+
+logic temp___294 : us_rep1
+
+logic temp___2941 : us_rep2
+
+logic o18 : us_rep1
+
+logic o19 : us_rep1
+
+logic o20 : us_rep2
+
+logic temp___296 : us_rep1
+
+logic temp___2961 : us_rep2
+
+logic model____split_fields2 : us_rep1
+
+logic model____split_fields3 : us_rep2
+
+logic data1 : (int,us_rep) farray
+
+logic first_available1 : int
+
+logic result : bool
+
+logic result1 : (int,us_rep) farray
+
+logic data2 : (int,us_rep) farray
+
+logic result2 : int
+
+logic first_available2 : int
+
+logic result3 : us_rep1
+
+logic result4 : us_rep2
+
+logic model____split_fields4 : us_rep1
+
+logic model____split_fields5 : us_rep2
+
+logic result5 : us_rep1
+
+logic result6 : us_rep2
+
+logic model____split_fields6 : us_rep1
+
+logic model____split_fields7 : us_rep2
+
+logic model____split_fields8 : us_rep1
+
+logic model____split_fields9 : us_rep2
+
+logic data3 : (int,us_rep) farray
+
+logic first_available3 : int
+
+logic model____split_fields10 : us_rep1
+
+logic model____split_fields11 : us_rep2
+
+logic data4 : (int,us_rep) farray
+
+logic first_available4 : int
+
+axiom H : in_range(first_available)
+
+axiom H1 : in_range(res)
+
+axiom H2 : (is_valid(data, first_available, {
+  rec__list_allocator__m__t__available = model____split_fields;
+  rec__list_allocator__m__t__allocated = model____split_fields1 }) = true)
+
+axiom H3 : (not (res = 0))
+
  (* File "list_allocator.ads", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep1.
-  forall model____split_fields1:us_rep2. forall data:(int,us_rep) farray.
-  forall first_available:int. (in_range(first_available) -> (in_range(res) ->
-  ((is_valid(data, first_available, { rec__list_allocator__m__t__available =
-  model____split_fields; rec__list_allocator__m__t__allocated =
-  model____split_fields1 }) = true) -> ((not (res = 0)) -> (1 <= res))))))
+goal WP_parameter_def : (1 <= res)

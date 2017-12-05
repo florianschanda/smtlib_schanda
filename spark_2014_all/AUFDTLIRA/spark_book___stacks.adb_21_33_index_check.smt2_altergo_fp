@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -436,15 +436,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
-  (to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top))) and
-  (bool_eq5(((a).us_split_fields1).rec__stacks__stack_type__items,
-  ((b).us_split_fields1).rec__stacks__stack_type__items) = true)) ->
-  (bool_eq7(a, b) = true)) and
-  ((not (((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
-  (to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top))) and
+  ((((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
+  ((to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top)) and
   (bool_eq5(((a).us_split_fields1).rec__stacks__stack_type__items,
   ((b).us_split_fields1).rec__stacks__stack_type__items) = true))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
+  ((to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top)) and
+  (bool_eq5(((a).us_split_fields1).rec__stacks__stack_type__items,
+  ((b).us_split_fields1).rec__stacks__stack_type__items) = true)))) ->
   (bool_eq7(a, b) = false))))
 
 logic value__size1 : int
@@ -540,13 +540,34 @@ logic stack__split_discrs : positive
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic item : int
+
+logic stack__split_fields : natural
+
+logic stack__split_fields1 : (int,integer) farray
+
+logic stack__split_fields2 : t
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic item1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(item))
+
+axiom H1 : (dynamic_property1(1, to_rep2(stack__split_discrs),
+  to_rep(first(stack__split_fields2)),
+  to_rep(last(stack__split_fields2))) and
+  ((to_rep(first(stack__split_fields2)) = 1) and
+  (to_rep(last(stack__split_fields2)) = to_rep2(stack__split_discrs))))
+
  (* File "stacks.adb", line 11, characters 0-0 *)
 goal WP_parameter_def :
-  (forall item:int. forall stack__split_fields:natural.
-  forall stack__split_fields1:t. ((((-2147483648) <= 2147483647) ->
-  in_range(item)) -> ((dynamic_property1(1, to_rep2(stack__split_discrs),
-  to_rep(first(stack__split_fields1)),
-  to_rep(last(stack__split_fields1))) and
-  ((to_rep(first(stack__split_fields1)) = 1) and
-  (to_rep(last(stack__split_fields1)) = to_rep2(stack__split_discrs)))) ->
-  (to_rep(first(stack__split_fields1)) <= to_rep1(stack__split_fields)))))
+  (to_rep(first(stack__split_fields2)) <= to_rep1(stack__split_fields))

@@ -246,5 +246,13 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : et1
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(e)
+
  (* File "ar.ads", line 24, characters 0-0 *)
-goal WP_parameter_def : (in_range(i) -> (in_range1(e) -> in_range1((e - 1))))
+goal WP_parameter_def : in_range1((e - 1))

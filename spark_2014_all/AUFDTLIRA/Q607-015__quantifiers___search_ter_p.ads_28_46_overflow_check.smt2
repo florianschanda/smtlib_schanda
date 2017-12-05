@@ -141,6 +141,8 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
+(declare-const o4 Bool)
 (assert (dynamic_invariant a true false true))
 (assert (dynamic_invariant b true false true))
 (assert (and (<= (length b) (length a)) (< (to_rep (last (rt a))) 2147483647)))

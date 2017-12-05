@@ -588,7 +588,7 @@
 (declare-const dummy15 rotation_count)
 (declare-datatypes () ((rotation_count__ref (mk_rotation_count__ref (rotation_count__content rotation_count)))))
 (define-fun rotation_count__ref___projection ((a rotation_count__ref)) rotation_count (rotation_count__content a))
-(define-fun dynamic_invariant5 ((temp___expr_1107 Int) (temp___is_init_1104 Bool) (temp___skip_constant_1105 Bool) (temp___do_toplevel_1106 Bool)) Bool (=> (or (= temp___is_init_1104 true) (<= 2 60)) (in_range5 temp___expr_1107)))
+(define-fun dynamic_invariant5 ((temp___expr_1101 Int) (temp___is_init_1098 Bool) (temp___skip_constant_1099 Bool) (temp___do_toplevel_1100 Bool)) Bool (=> (or (= temp___is_init_1098 true) (<= 2 60)) (in_range5 temp___expr_1101)))
 (declare-const r_512_0_0 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 (declare-const r_512_0_1 Int)

@@ -369,15 +369,43 @@ axiom valid__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic idle_history : (int,bool) farray
+
+logic status : bool
+
+logic time_idle : int
+
+logic result : bool
+
+logic status1 : bool
+
+logic result1 : bool
+
+logic status2 : bool
+
+logic status3 : bool
+
+logic status4 : bool
+
+axiom H : in_range1(time_idle)
+
+axiom H1 : (valid(idle_history, time_idle) = true)
+
+axiom H2 : ((10 <= time_idle) -> (result = status))
+
+axiom H3 : ((10 <= time_idle) -> (status1 = of_int(1)))
+
+axiom H4 : ((not (10 <= time_idle)) -> (result1 = status))
+
+axiom H5 : ((not (10 <= time_idle)) -> (status2 = of_int(0)))
+
+axiom H6 : ((not (10 <= time_idle)) -> (status1 = status2))
+
+axiom H7 : (status1 = status3)
+
+axiom H8 : (status4 = status1)
+
+axiom H9 : (always_set_until_now(9, idle_history) = true)
+
  (* File "time_triggered_response.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall idle_history:(int,bool) farray. forall status:bool.
-  forall time_idle:int. forall result:bool. forall status1:bool.
-  forall result1:bool. forall status2:bool. forall status3:bool.
-  forall status4:bool. (in_range1(time_idle) -> ((valid(idle_history,
-  time_idle) = true) -> (((((10 <= time_idle) and ((result = status) and
-  (status1 = of_int(1)))) or ((not (10 <= time_idle)) and
-  (((result1 = status) and (status2 = of_int(0))) and
-  (status1 = status2)))) and ((status1 = status3) and
-  (status4 = status1))) -> ((always_set_until_now(9, idle_history) = true) ->
-  (status3 = true))))))
+goal WP_parameter_def : (status3 = true)

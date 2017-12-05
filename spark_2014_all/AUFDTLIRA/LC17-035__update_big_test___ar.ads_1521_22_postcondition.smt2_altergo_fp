@@ -533,32 +533,90 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic r__split_fields : (int,(int,et1) farray) farray
+
+logic r__split_fields1 : bool
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,et1) farray) farray
+
+logic o4 : bool
+
+logic temp___8105 : (int,(int,et1) farray) farray
+
+logic temp___81051 : bool
+
+logic result : (int,(int,et1) farray) farray
+
+logic result1 : bool
+
+logic r__split_fields2 : (int,(int,et1) farray) farray
+
+logic r__split_fields3 : bool
+
+logic r__split_fields4 : (int,(int,et1) farray) farray
+
+logic r__split_fields5 : bool
+
+logic r__split_fields6 : (int,(int,et1) farray) farray
+
+logic r__split_fields7 : bool
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range3(e)
+
+axiom H3 : (to_rep(o) = e)
+
+axiom H4 : (o1 = ((r__split_fields[i])[j <- o]))
+
+axiom H5 : (o2 = (r__split_fields[i <- o1]))
+
+axiom H6 : (o2 = o3)
+
+axiom H7 : (r__split_fields1 = o4)
+
+axiom H8 : (temp___8105 = o3)
+
+axiom H9 : (temp___81051 = o4)
+
+axiom H10 : (result = r__split_fields)
+
+axiom H11 : (result1 = r__split_fields1)
+
+axiom H12 : (temp___8105 = r__split_fields2)
+
+axiom H13 : (temp___81051 = r__split_fields3)
+
+axiom H14 : (r__split_fields4 = r__split_fields2)
+
+axiom H15 : (r__split_fields5 = r__split_fields3)
+
+axiom H16 : (r__split_fields6 = r__split_fields2)
+
+axiom H17 : (r__split_fields7 = r__split_fields3)
+
+logic m : int
+
+axiom H18 : (5 <= m)
+
+axiom H19 : (m <= 50)
+
+logic n : int
+
+axiom H20 : (1 <= n)
+
+axiom H21 : (n <= 10)
+
+axiom H22 : ((not (m = i)) or (not (n = j)))
+
  (* File "ar.ads", line 85, characters 0-0 *)
 goal WP_parameter_def :
-  (forall r__split_fields:(int,(int,et1) farray) farray.
-  forall r__split_fields1:bool. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,et1) farray) farray. forall o4:bool.
-  forall temp___8105:(int,(int,et1) farray) farray. forall temp___81051:bool.
-  forall result:(int,(int,et1) farray) farray. forall result1:bool.
-  forall r__split_fields2:(int,(int,et1) farray) farray.
-  forall r__split_fields3:bool.
-  forall r__split_fields4:(int,(int,et1) farray) farray.
-  forall r__split_fields5:bool.
-  forall r__split_fields6:(int,(int,et1) farray) farray.
-  forall r__split_fields7:bool. ((in_range2(i) and (in_range1(j) and
-  (in_range3(e) and (((((((to_rep(o) = e) and
-  (o1 = ((r__split_fields[i])[j <- o]))) and
-  (o2 = (r__split_fields[i <- o1]))) and ((o2 = o3) and
-  (r__split_fields1 = o4))) and ((temp___8105 = o3) and
-  (temp___81051 = o4))) and (((result = r__split_fields) and
-  (result1 = r__split_fields1)) and ((temp___8105 = r__split_fields2) and
-  (temp___81051 = r__split_fields3)))) and
-  (((r__split_fields4 = r__split_fields2) and
-  (r__split_fields5 = r__split_fields3)) and
-  ((r__split_fields6 = r__split_fields2) and
-  (r__split_fields7 = r__split_fields3))))))) ->
-  (forall m:int. (((5 <= m) and (m <= 50)) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> (((not (m = i)) or
-  (not (n = j))) ->
-  (to_rep(((r__split_fields4[m])[n])) = to_rep(((r__split_fields[m])[n]))))))))))
+  (to_rep(((r__split_fields4[m])[n])) = to_rep(((r__split_fields[m])[n])))

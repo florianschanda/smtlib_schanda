@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -562,11 +562,85 @@ axiom is_empty__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : pointer_range
+
+logic o5 : (int,integer) farray
+
+logic o6 : pointer_range
+
+logic temp___214 : (int,integer) farray
+
+logic temp___2141 : pointer_range
+
+logic o7 : int
+
+logic o8 : int
+
+logic i : int
+
+logic o9 : (int,integer) farray
+
+logic o10 : pointer_range
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : (int,integer) farray
+
+logic o14 : pointer_range
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : bool
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : (int,integer) farray
+
+logic result2 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic x2 : int
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic x3 : int
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+logic result3 : bool
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H1 : (not (is_empty({ rec__stack_functional_spec__stack_type__s =
+  my_stack__split_fields; rec__stack_functional_spec__stack_type__pointer =
+  my_stack__split_fields1 }) = true))
+
  (* File "stack_functional_spec.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range.
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) -> ((not (is_empty({
-  rec__stack_functional_spec__stack_type__s = my_stack__split_fields;
-  rec__stack_functional_spec__stack_type__pointer = my_stack__split_fields1
-  }) = true)) -> (1 <= to_rep1(my_stack__split_fields1)))))
+goal WP_parameter_def : (1 <= to_rep1(my_stack__split_fields1))

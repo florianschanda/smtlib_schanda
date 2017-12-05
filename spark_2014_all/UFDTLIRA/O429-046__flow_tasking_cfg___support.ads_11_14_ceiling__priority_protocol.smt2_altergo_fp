@@ -206,5 +206,17 @@ axiom coerce_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : natural
+
+logic us_self__compl : natural
+
+logic prot__split_fields : natural
+
+logic us_self__compl1 : natural
+
+logic result : natural
+
+logic prot__split_fields1 : natural
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : (97 <= 97)

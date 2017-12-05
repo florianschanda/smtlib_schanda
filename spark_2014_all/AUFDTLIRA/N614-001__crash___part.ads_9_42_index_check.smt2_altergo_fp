@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -370,9 +370,17 @@ logic y1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(x1)),
+  to_rep(last(x1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep(first(y1)),
+  to_rep(last(y1)))
+
+axiom H2 : (to_rep(first(x1)) <= i)
+
+axiom H3 : (i <= to_rep(last(x1)))
+
  (* File "part.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (dynamic_property(1, 2147483647, to_rep(first(x1)),
-  to_rep(last(x1))) -> (dynamic_property(1, 2147483647, to_rep(first(y1)),
-  to_rep(last(y1))) -> (((to_rep(first(x1)) <= i) and
-  (i <= to_rep(last(x1)))) -> (to_rep(first(x1)) <= i)))))
+goal WP_parameter_def : (to_rep(first(x1)) <= i)

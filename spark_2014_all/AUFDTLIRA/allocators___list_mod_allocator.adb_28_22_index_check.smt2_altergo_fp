@@ -385,7 +385,31 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic r : int
+
+logic o : int
+
+logic o1 : status
+
+logic o2 : resource
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : int
+
+logic result : bool
+
+axiom H : in_range1(first_available)
+
+axiom H1 : (not (first_available = 0))
+
  (* File "list_mod_allocator.ads", line 69, characters 0-0 *)
-goal WP_parameter_def :
-  (forall first_available:int. (in_range1(first_available) ->
-  ((not (first_available = 0)) -> (1 <= first_available))))
+goal WP_parameter_def : (1 <= first_available)

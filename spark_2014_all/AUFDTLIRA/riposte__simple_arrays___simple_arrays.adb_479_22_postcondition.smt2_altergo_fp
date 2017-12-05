@@ -218,18 +218,67 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,enum_t) farray
+
+logic tmp : int
+
+logic o : enum_t
+
+logic o1 : (int,enum_t) farray
+
+logic o2 : enum_t
+
+logic o3 : (int,enum_t) farray
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : (int,enum_t) farray
+
+logic a1 : (int,enum_t) farray
+
+logic result2 : (int,enum_t) farray
+
+logic a2 : (int,enum_t) farray
+
+logic a3 : (int,enum_t) farray
+
+logic tmp2 : int
+
+logic a4 : (int,enum_t) farray
+
+logic tmp3 : int
+
+axiom H : ((0 <= 2) -> in_range(tmp))
+
+axiom H1 : (result = tmp)
+
+axiom H2 : (tmp1 = to_rep((a[0])))
+
+axiom H3 : (to_rep(o) = to_rep((a[1])))
+
+axiom H4 : (o1 = (a[0 <- o]))
+
+axiom H5 : (result1 = a)
+
+axiom H6 : (a1 = o1)
+
+axiom H7 : (to_rep(o2) = tmp1)
+
+axiom H8 : (o3 = (a1[1 <- o2]))
+
+axiom H9 : (result2 = a1)
+
+axiom H10 : (a2 = o3)
+
+axiom H11 : (tmp2 = tmp1)
+
+axiom H12 : (a2 = a3)
+
+axiom H13 : (tmp3 = tmp1)
+
+axiom H14 : (a4 = a2)
+
  (* File "simple_arrays.adb", line 466, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,enum_t) farray. forall tmp:int. forall o:enum_t.
-  forall o1:(int,enum_t) farray. forall o2:enum_t.
-  forall o3:(int,enum_t) farray. forall result:int. forall tmp1:int.
-  forall result1:(int,enum_t) farray. forall a1:(int,enum_t) farray.
-  forall result2:(int,enum_t) farray. forall a2:(int,enum_t) farray.
-  forall a3:(int,enum_t) farray. forall tmp2:int.
-  forall a4:(int,enum_t) farray. forall tmp3:int. (((((0 <= 2) ->
-  in_range(tmp)) and (((result = tmp) and (tmp1 = to_rep((a[0])))) and
-  ((((to_rep(o) = to_rep((a[1]))) and (o1 = (a[0 <- o]))) and
-  ((result1 = a) and (a1 = o1))) and (((to_rep(o2) = tmp1) and
-  (o3 = (a1[1 <- o2]))) and ((result2 = a1) and (a2 = o3)))))) and
-  (((tmp2 = tmp1) and (a2 = a3)) and ((tmp3 = tmp1) and (a4 = a2)))) ->
-  (not (bool_eq2(a3, 0, 2, a, 0, 2) = true))))
+goal WP_parameter_def : (not (bool_eq2(a3, 0, 2, a, 0, 2) = true))

@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -518,13 +518,32 @@ axiom max_size__def_axiom : (max_size = 128)
 
 axiom default_element__def_axiom : (default_element = 0)
 
+logic count : int
+
+logic free : int
+
+logic o : int
+
+logic count1 : int
+
+logic free1 : int
+
+logic result : bool
+
+axiom H : in_range(max_size)
+
+axiom H1 : in_range1(default_element)
+
+axiom H2 : ((0 <= 128) -> in_range2(count))
+
+axiom H3 : ((0 <= 128) -> in_range2(free))
+
+axiom H4 : ((count1 = 0) and (in_range2(count1) and in_range2(free1)))
+
+axiom H5 : ((o = size(count1)) and (in_range(o) and (o = count1)))
+
+axiom H6 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
+  (result = false)))
+
  (* File "list_handler.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall free:int. forall o:int. forall count1:int.
-  forall free1:int.
-  (forall result:bool. ((in_range(max_size) and
-  (in_range1(default_element) and (((0 <= 128) -> in_range2(count)) and
-  (((0 <= 128) -> in_range2(free)) and (((count1 = 0) and
-  (in_range2(count1) and in_range2(free1))) and (((o = size(count1)) and
-  (in_range(o) and (o = count1))) and (((o = 0) and (result = true)) or
-  ((not (o = 0)) and (result = false))))))))) -> (size(count1) = 0))))
+goal WP_parameter_def : (size(count1) = 0)

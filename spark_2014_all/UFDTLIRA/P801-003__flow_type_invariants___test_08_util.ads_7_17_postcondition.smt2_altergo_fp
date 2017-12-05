@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -229,25 +229,51 @@ axiom is_positive_bad__post_axiom :
   (forall n1:int [is_positive_bad(n1)]. (in_range1(n1) ->
   ((is_positive_bad(n1) = true) <-> (1 <= n1))))
 
+logic x__split_fields : integer
+
+logic test_08_util__is_positive_bad__result : bool
+
+logic result : bool
+
+logic test_08_util__is_positive_bad__result1 : bool
+
+logic test_08_util__is_positive_bad__result2 : bool
+
+logic test_08_util__is_positive_bad__result3 : bool
+
+logic test_08_util__is_positive_bad__result4 : bool
+
+logic test_08_util__is_positive_bad__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(n)
+
+axiom H1 : (to_rep(x__split_fields) = 42)
+
+axiom H2 : ((is_positive_bad(to_rep(x__split_fields)) = true) or
+  (to_rep(x__split_fields) = (- 5)))
+
+axiom H3 :
+  (test_08_util__is_positive_bad__result1 = test_08_util__is_positive_bad__result2)
+
+axiom H4 :
+  (test_08_util__is_positive_bad__result3 = test_08_util__is_positive_bad__result1)
+
+axiom H5 : (result = test_08_util__is_positive_bad__result)
+
+axiom H6 : (((1 <= n) -> (test_08_util__is_positive_bad__result1 = true)) and
+  ((not (1 <= n)) -> (test_08_util__is_positive_bad__result1 = false)))
+
+axiom H7 :
+  (test_08_util__is_positive_bad__result4 = test_08_util__is_positive_bad__result2)
+
+axiom H8 :
+  (test_08_util__is_positive_bad__result5 = test_08_util__is_positive_bad__result3)
+
+axiom H9 : (result1 = test_08_util__is_positive_bad__result4)
+
+axiom H10 : (test_08_util__is_positive_bad__result4 = true)
+
  (* File "test_08_util.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer.
-  forall test_08_util__is_positive_bad__result:bool. forall result:bool.
-  forall test_08_util__is_positive_bad__result1:bool.
-  forall test_08_util__is_positive_bad__result2:bool.
-  forall test_08_util__is_positive_bad__result3:bool.
-  forall test_08_util__is_positive_bad__result4:bool.
-  forall test_08_util__is_positive_bad__result5:bool.
-  (forall result1:bool. ((in_range1(n) and
-  ((((to_rep(x__split_fields) = 42) and
-  (((is_positive_bad(to_rep(x__split_fields)) = true) or
-  (to_rep(x__split_fields) = (-5))) and
-  (((test_08_util__is_positive_bad__result1 = test_08_util__is_positive_bad__result2) and
-  (test_08_util__is_positive_bad__result3 = test_08_util__is_positive_bad__result1)) and
-  ((result = test_08_util__is_positive_bad__result) and (((1 <= n) and
-  (test_08_util__is_positive_bad__result1 = true)) or ((not (1 <= n)) and
-  (test_08_util__is_positive_bad__result1 = false))))))) and
-  ((test_08_util__is_positive_bad__result4 = test_08_util__is_positive_bad__result2) and
-  (test_08_util__is_positive_bad__result5 = test_08_util__is_positive_bad__result3))) and
-  (result1 = test_08_util__is_positive_bad__result4))) ->
-  ((test_08_util__is_positive_bad__result4 = true) -> (1 <= n)))))
+goal WP_parameter_def : (1 <= n)

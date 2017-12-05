@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1117,21 +1117,553 @@ function t49b__ref___projection(a: t49b__ref) : integer = (a).t49b__content
 
 logic attr__ATTRIBUTE_ADDRESS12 : int
 
+logic a : (int,word32) farray
+
+logic carry1 : t
+
+logic carry2 : t
+
+logic temp : t
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : bool
+
+logic o19 : bool
+
+logic o20 : bool
+
+logic temp___738 : (int,word32) farray
+
+logic temp___731 : (int,word32) farray
+
+logic temp___740 : (int,word32) farray
+
+logic temp___742 : t
+
+logic temp___743 : (int,word32) farray
+
+logic temp___730 : t
+
+logic temp___736 : t
+
+logic temp___728 : (int,word32) farray
+
+logic temp___741 : t
+
+logic temp___729 : t
+
+logic temp___735 : t
+
+logic temp___734 : int
+
+logic temp___733 : t
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : us_rep
+
+logic o27 : us_rep
+
+logic o28 : us_rep
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : us_rep
+
+logic o32 : us_rep
+
+logic o33 : us_rep
+
+logic o34 : us_rep
+
+logic o35 : us_rep
+
+logic o36 : us_rep
+
+logic o37 : us_rep
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : us_rep
+
+logic o41 : us_rep
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : us_rep
+
+logic o45 : us_rep
+
+logic o46 : us_rep
+
+logic o47 : us_rep
+
+logic o48 : us_rep
+
+logic o49 : us_rep
+
+logic o50 : us_rep
+
+logic o51 : us_rep
+
+logic k : int
+
+logic us : int
+
+logic o52 : int
+
+logic o53 : bool
+
+logic o54 : int
+
+logic o55 : word32
+
+logic o56 : t
+
+logic o57 : bool
+
+logic temp___725 : int
+
+logic o58 : int
+
+logic o59 : word32
+
+logic o60 : t
+
+logic o61 : int
+
+logic o62 : int
+
+logic temp___726 : int
+
+logic o63 : int
+
+logic o64 : word32
+
+logic o65 : t
+
+logic o66 : int
+
+logic o67 : int
+
+logic temp___727 : int
+
+logic o68 : int
+
+logic o69 : word32
+
+logic o70 : t
+
+logic o71 : word32
+
+logic o72 : int
+
+logic o73 : (int,word32) farray
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic o83 : us_rep
+
+logic o84 : us_rep
+
+logic o85 : us_rep
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : us_rep
+
+logic o91 : us_rep
+
+logic o92 : us_rep
+
+logic o93 : us_rep
+
+logic o94 : us_rep
+
+logic o95 : us_rep
+
+logic o96 : us_rep
+
+logic o97 : int
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : us_rep
+
+logic o102 : us_rep
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : us_rep
+
+logic o108 : us_rep
+
+logic o109 : us_rep
+
+logic o110 : us_rep
+
+logic o111 : us_rep
+
+logic o112 : us_rep
+
+logic o113 : us_rep
+
+logic o114 : us_rep
+
+logic k1 : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic o117 : bool
+
+logic o118 : bool
+
+logic o119 : int
+
+logic o120 : word32
+
+logic o121 : t
+
+logic o122 : bool
+
+logic o123 : int
+
+logic o124 : int
+
+logic o125 : int
+
+logic o126 : int
+
+logic o127 : int
+
+logic o128 : int
+
+logic o129 : int
+
+logic o130 : int
+
+logic o131 : int
+
+logic o132 : us_rep
+
+logic o133 : us_rep
+
+logic o134 : us_rep
+
+logic o135 : int
+
+logic o136 : int
+
+logic o137 : int
+
+logic o138 : int
+
+logic o139 : us_rep
+
+logic o140 : us_rep
+
+logic o141 : us_rep
+
+logic o142 : us_rep
+
+logic o143 : us_rep
+
+logic o144 : us_rep
+
+logic o145 : us_rep
+
+logic o146 : int
+
+logic o147 : int
+
+logic o148 : int
+
+logic o149 : int
+
+logic o150 : us_rep
+
+logic o151 : us_rep
+
+logic o152 : int
+
+logic o153 : int
+
+logic o154 : int
+
+logic o155 : int
+
+logic o156 : us_rep
+
+logic o157 : us_rep
+
+logic o158 : us_rep
+
+logic o159 : us_rep
+
+logic o160 : us_rep
+
+logic o161 : us_rep
+
+logic o162 : us_rep
+
+logic o163 : us_rep
+
+logic a1 : (int,word32) farray
+
+logic carry11 : t
+
+logic carry21 : t
+
+logic temp1 : t
+
+logic result : int
+
+logic i1 : int
+
+logic a2 : (int,word32) farray
+
+logic carry12 : t
+
+logic carry22 : t
+
+logic temp2 : t
+
+logic i2 : int
+
+logic result1 : bool
+
+logic result2 : t
+
+logic temp3 : t
+
+logic carry13 : t
+
+logic carry23 : t
+
+logic temp4 : t
+
+logic result3 : (int,word32) farray
+
+logic a3 : (int,word32) farray
+
+logic result4 : bool
+
+logic result5 : int
+
+logic i3 : int
+
+logic a4 : (int,word32) farray
+
+logic carry14 : t
+
+logic carry24 : t
+
+logic temp5 : t
+
+logic i4 : int
+
+logic a5 : (int,word32) farray
+
+logic carry15 : t
+
+logic carry25 : t
+
+logic temp6 : t
+
+logic i5 : int
+
+logic a6 : (int,word32) farray
+
+logic carry16 : t
+
+logic carry26 : t
+
+logic temp7 : t
+
+logic i6 : int
+
+logic a7 : (int,word32) farray
+
+logic carry17 : t
+
+logic carry27 : t
+
+logic temp8 : t
+
+logic i7 : int
+
+logic a8 : (int,word32) farray
+
+logic carry18 : t
+
+logic carry28 : t
+
+logic temp9 : t
+
+logic i8 : int
+
+logic a9 : (int,word32) farray
+
+logic carry19 : t
+
+logic carry29 : t
+
+logic temp10 : t
+
+logic i9 : int
+
+logic a10 : (int,word32) farray
+
+logic carry110 : t
+
+logic carry210 : t
+
+logic temp11 : t
+
+logic i10 : int
+
+logic a11 : (int,word32) farray
+
+logic carry111 : t
+
+logic carry211 : t
+
+logic temp12 : t
+
+logic i11 : int
+
+axiom H : dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(a_last)
+
+axiom H3 : dynamic_property(0, 2147483646, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H4 : in_range2(b_first)
+
+axiom H5 : dynamic_property(0, 2147483646, to_rep(first(c1)),
+  to_rep(last(c1)))
+
+axiom H6 : in_range2(c_first)
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : ((o15 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H12 : (o16 = (c_first + o15))
+
+axiom H13 : ((o17 = o16) and in_range1(o16))
+
+axiom H14 : (((o17 <= to_rep(last(c1))) -> (o18 = true)) and
+  ((not (o17 <= to_rep(last(c1)))) -> (o18 = false)))
+
+axiom H15 : ((o12 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H16 : (o13 = (c_first + o12))
+
+axiom H17 : ((o14 = o13) and in_range1(o13))
+
+axiom H18 : (((to_rep(first(c1)) <= o14) -> (o19 = true)) and
+  ((not (to_rep(first(c1)) <= o14)) -> (o19 = false)))
+
+axiom H19 : (o20 = match_bool(o19, o18, false))
+
  (* File "lsc-types.ads", line 54, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:bool. forall o7:bool. forall o8:bool.
-  (dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last)) ->
-  (in_range2(a_first) -> (in_range2(a_last) -> (dynamic_property(0,
-  2147483646, to_rep(first(b1)), to_rep(last(b1))) -> (in_range2(b_first) ->
-  (dynamic_property(0, 2147483646, to_rep(first(c1)), to_rep(last(c1))) ->
-  (in_range2(c_first) -> (((((((o3 = (a_last - a_first)) and
-  in_range1((a_last - a_first))) and (o4 = (c_first + o3))) and
-  ((o5 = o4) and in_range1(o4))) and (((o5 <= to_rep(last(c1))) and
-  (o6 = true)) or ((not (o5 <= to_rep(last(c1)))) and (o6 = false)))) and
-  ((((((o = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o1 = (c_first + o))) and ((o2 = o1) and in_range1(o1))) and
-  (((to_rep(first(c1)) <= o2) and (o7 = true)) or
-  ((not (to_rep(first(c1)) <= o2)) and (o7 = false)))) and
-  (o8 = match_bool(o7, o6, false)))) ->
-  in_range1((a_last - a_first)))))))))))
+goal WP_parameter_def : in_range1((a_last - a_first))

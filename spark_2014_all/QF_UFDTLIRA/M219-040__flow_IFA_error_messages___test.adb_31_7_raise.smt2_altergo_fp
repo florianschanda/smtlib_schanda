@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -141,14 +141,27 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test__uninitialized_2__result : bool
+
+logic test__uninitialized_2__result1 : bool
+
+logic test__uninitialized_2__result2 : bool
+
+logic test__uninitialized_2__result3 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (not (a <  b))
+
+axiom H3 : (test__uninitialized_2__result2 = test__uninitialized_2__result)
+
+axiom H4 : (test__uninitialized_2__result2 = test__uninitialized_2__result1)
+
+axiom H5 : (not (b <  a))
+
+axiom H6 : (test__uninitialized_2__result3 = test__uninitialized_2__result2)
+
  (* File "test.adb", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__uninitialized_2__result:bool.
-  forall test__uninitialized_2__result1:bool.
-  forall test__uninitialized_2__result2:bool.
-  forall test__uninitialized_2__result3:bool. (in_range1(a) ->
-  (in_range1(b) -> (((not (a <  b)) and
-  ((test__uninitialized_2__result2 = test__uninitialized_2__result) and
-  (test__uninitialized_2__result2 = test__uninitialized_2__result1))) ->
-  (not ((not (b <  a)) and
-  (test__uninitialized_2__result3 = test__uninitialized_2__result2)))))))
+goal WP_parameter_def : false

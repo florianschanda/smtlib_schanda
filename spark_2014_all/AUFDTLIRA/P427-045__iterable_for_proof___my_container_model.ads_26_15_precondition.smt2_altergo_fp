@@ -341,5 +341,131 @@ function t3b__ref___projection(a: t3b__ref) : t3b = (a).t3b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic c : (int,natural) farray
+
+logic i : int
+
+logic temp___197 : (int,natural) farray
+
+logic temp___196 : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic j : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic temp___203 : (int,natural) farray
+
+logic temp___202 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic e : int
+
+logic c1 : (int,natural) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,natural) farray
+
+logic c2 : (int,natural) farray
+
+logic c3 : (int,natural) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,natural) farray
+
+logic c4 : (int,natural) farray
+
+logic c5 : (int,natural) farray
+
+logic i4 : int
+
+logic c6 : (int,natural) farray
+
+logic i5 : int
+
+logic c7 : (int,natural) farray
+
+logic i6 : int
+
+logic c8 : (int,natural) farray
+
+logic i7 : int
+
+logic c9 : (int,natural) farray
+
+logic i8 : int
+
+logic c10 : (int,natural) farray
+
+logic i9 : int
+
+logic c11 : (int,natural) farray
+
+logic i10 : int
+
+logic c12 : (int,natural) farray
+
+logic i11 : int
+
+logic result4 : bool
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (((1 <= i1) and (i1 <= 100)) -> (((temp___197 = c) and
+  ((temp___196 = i1) and ((((to_rep((c[i1])) = 0) -> (((to_rep(o) = 1) and
+  (o1 = (c[i1 <- o]))) and ((result1 = c) and (c2 = o1)))) and
+  ((not (to_rep((c[i1])) = 0)) -> ((c2 = c) and (c2 = c1)))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+   (valid(to_rep((c3[j1]))) = true))) and (((((1 <= 100) ->
+  in_range3(i2)) and
+  (forall temp___198:int. (((1 <= temp___198) and (temp___198 <= 100)) ->
+  ((i2 <  temp___198) -> ((c3[temp___198]) = (temp___197[temp___198])))))) and
+  ((1 <= i2) and (i2 <= 100))) and (i2 = 100)))))) and (((i2 = i6) and
+  (c3 = c7)) and ((i7 = i2) and (c8 = c3)))))
+
+axiom H3 : (((1 <= i1) and (i1 <= 100)) -> (i8 = i6))
+
+axiom H4 : (((1 <= i1) and (i1 <= 100)) -> (c9 = c7))
+
+axiom H5 : (((1 <= i1) and (i1 <= 100)) -> (i9 = i7))
+
+axiom H6 : (((1 <= i1) and (i1 <= 100)) -> (c10 = c8))
+
+axiom H7 : ((not ((1 <= i1) and (i1 <= 100))) -> (i1 = i8))
+
+axiom H8 : ((not ((1 <= i1) and (i1 <= 100))) -> (c9 = c))
+
+axiom H9 : ((not ((1 <= i1) and (i1 <= 100))) -> (i9 = i1))
+
+axiom H10 : ((not ((1 <= i1) and (i1 <= 100))) -> (c10 = c1))
+
+axiom H11 : (i10 = i8)
+
+axiom H12 : (c11 = c9)
+
+axiom H13 : (i11 = i9)
+
+axiom H14 : (c12 = c10)
+
+axiom H15 : ((temp___203 = get_model(c11)) and (temp___203 = c11))
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

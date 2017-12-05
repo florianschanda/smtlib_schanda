@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -297,33 +297,65 @@ logic a1 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic res_size__f__result : (int,integer) farray
+
+logic res_size__f__result1 : t
+
+logic result : (int,integer) farray
+
+logic result1 : t
+
+logic res_size__f__result2 : (int,integer) farray
+
+logic res_size__f__result3 : t
+
+logic res_size__f__result4 : (int,integer) farray
+
+logic res_size__f__result5 : t
+
+logic res_size__f__result6 : (int,integer) farray
+
+logic res_size__f__result7 : t
+
+logic res_size__f__result8 : (int,integer) farray
+
+logic res_size__f__result9 : t
+
+logic res_size__f__result10 : (int,integer) farray
+
+logic res_size__f__result11 : t
+
+logic result2 : (int,integer) farray
+
+logic result3 : t
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : (res_size__f__result4 = res_size__f__result2)
+
+axiom H2 : (res_size__f__result5 = res_size__f__result3)
+
+axiom H3 : ((res_size__f__result6 = res_size__f__result2) and
+  (res_size__f__result7 = res_size__f__result3))
+
+axiom H4 : (result = res_size__f__result)
+
+axiom H5 : (result1 = res_size__f__result1)
+
+axiom H6 : ((res_size__f__result2 = a) and (res_size__f__result3 = a1))
+
+axiom H7 : ((res_size__f__result8 = res_size__f__result4) and
+  (res_size__f__result9 = res_size__f__result5))
+
+axiom H8 : (res_size__f__result10 = res_size__f__result6)
+
+axiom H9 : (res_size__f__result11 = res_size__f__result7)
+
+axiom H10 : (result2 = res_size__f__result8)
+
+axiom H11 : (result3 = res_size__f__result9)
+
  (* File "res_size.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall res_size__f__result:(int,integer) farray.
-  forall res_size__f__result1:t. forall result:(int,integer) farray.
-  forall result1:t. forall res_size__f__result2:(int,integer) farray.
-  forall res_size__f__result3:t.
-  forall res_size__f__result4:(int,integer) farray.
-  forall res_size__f__result5:t.
-  forall res_size__f__result6:(int,integer) farray.
-  forall res_size__f__result7:t.
-  forall res_size__f__result8:(int,integer) farray.
-  forall res_size__f__result9:t.
-  forall res_size__f__result10:(int,integer) farray.
-  forall res_size__f__result11:t.
-  (forall result2:(int,integer) farray. forall result3:t.
-  ((dynamic_property((-2147483648), 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) and
-  ((((((res_size__f__result4 = res_size__f__result2) and
-  (res_size__f__result5 = res_size__f__result3)) and
-  ((res_size__f__result6 = res_size__f__result2) and
-  (res_size__f__result7 = res_size__f__result3))) and
-  (((result = res_size__f__result) and (result1 = res_size__f__result1)) and
-  ((a = res_size__f__result2) and (a1 = res_size__f__result3)))) and
-  (((res_size__f__result8 = res_size__f__result4) and
-  (res_size__f__result9 = res_size__f__result5)) and
-  ((res_size__f__result10 = res_size__f__result6) and
-  (res_size__f__result11 = res_size__f__result7)))) and
-  ((result2 = res_size__f__result8) and
-  (result3 = res_size__f__result9)))) ->
-  (object__size(res_size__f__result8) = object__size(a)))))
+  (object__size(res_size__f__result8) = object__size(a))

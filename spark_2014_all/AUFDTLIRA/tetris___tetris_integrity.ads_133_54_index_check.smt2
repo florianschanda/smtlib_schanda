@@ -109,6 +109,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_514 Int) (temp___is_init_511 Bool) (temp___skip_constant_512 Bool) (temp___do_toplevel_513 Bool)) Bool (=> (or (= temp___is_init_511 true) (<= 0 7)) (in_range1 temp___expr_514)))
 (define-fun dynamic_invariant2 ((temp___expr_532 Int) (temp___is_init_529 Bool) (temp___skip_constant_530 Bool) (temp___do_toplevel_531 Bool)) Bool (=> (or (= temp___is_init_529 true) (<= 1 10)) (in_range2 temp___expr_532)))
 (define-fun dynamic_invariant3 ((temp___expr_538 Int) (temp___is_init_535 Bool) (temp___skip_constant_536 Bool) (temp___do_toplevel_537 Bool)) Bool (=> (or (= temp___is_init_535 true) (<= 1 50)) (in_range3 temp___expr_538)))
+(declare-const o Int)
+(declare-const temp___679 (Array Int cell))
 (assert (in_range y))
 (assert (in_range x))
 (assert (in_range2 x))

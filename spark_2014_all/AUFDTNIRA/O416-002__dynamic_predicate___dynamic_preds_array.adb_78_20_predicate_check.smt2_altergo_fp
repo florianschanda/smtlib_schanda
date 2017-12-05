@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -349,6 +349,48 @@ function teven_pairD1__ref___projection(a: teven_pairD1__ref) : teven_pairD1 =
   (a).teven_pairD1__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic result__ : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result : (int,even) farray
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : (int,even) farray
+
+logic o3 : int
+
+logic o4 : even
+
+logic o5 : (int,even) farray
+
+logic result : (int,even) farray
+
+logic result__1 : (int,even) farray
+
+logic result1 : (int,even) farray
+
+logic result__2 : (int,even) farray
+
+logic result2 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result1 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result2 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result3 : (int,even) farray
+
+logic result__3 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result4 : (int,even) farray
+
+logic result__4 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result5 : (int,even) farray
+
+axiom H : true
 
  (* File "dynamic_preds_array.ads", line 6, characters 0-0 *)
 goal WP_parameter_def : (mod(0, 2) = 0)

@@ -64,6 +64,7 @@
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const g__split_fields integer)
+(declare-const o Int)
 (assert (in_range x))
 (assert (not (in_range (+ (to_rep g__split_fields) 1))))
 (check-sat)

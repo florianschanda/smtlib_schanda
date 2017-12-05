@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1017,19 +1017,19 @@ logic bool_eq15 : us_rep3, us_rep3 -> bool
 
 axiom bool_eq_def12 :
   (forall a:us_rep3. forall b:us_rep3 [bool_eq15(a, b)].
-  (((((((to_rep5(((a).us_split_discrs5).rec__lexer__token__kind) = to_rep5(((b).us_split_discrs5).rec__lexer__token__kind)) and
-  (to_rep2(((a).us_split_fields5).rec__lexer__token__line) = to_rep2(((b).us_split_fields5).rec__lexer__token__line))) and
-  (to_rep2(((a).us_split_fields5).rec__lexer__token__col) = to_rep2(((b).us_split_fields5).rec__lexer__token__col))) and
-  (to_rep2(((a).us_split_fields5).rec__lexer__token__length) = to_rep2(((b).us_split_fields5).rec__lexer__token__length))) and
-  (lexer__token__value__pred(a) ->
-  (to_rep6(((a).us_split_fields5).rec__lexer__token__value) = to_rep6(((b).us_split_fields5).rec__lexer__token__value)))) ->
-  (bool_eq15(a, b) = true)) and
-  ((not (((((to_rep5(((a).us_split_discrs5).rec__lexer__token__kind) = to_rep5(((b).us_split_discrs5).rec__lexer__token__kind)) and
-  (to_rep2(((a).us_split_fields5).rec__lexer__token__line) = to_rep2(((b).us_split_fields5).rec__lexer__token__line))) and
+  ((((to_rep5(((a).us_split_discrs5).rec__lexer__token__kind) = to_rep5(((b).us_split_discrs5).rec__lexer__token__kind)) and
+  ((((to_rep2(((a).us_split_fields5).rec__lexer__token__line) = to_rep2(((b).us_split_fields5).rec__lexer__token__line)) and
   (to_rep2(((a).us_split_fields5).rec__lexer__token__col) = to_rep2(((b).us_split_fields5).rec__lexer__token__col))) and
   (to_rep2(((a).us_split_fields5).rec__lexer__token__length) = to_rep2(((b).us_split_fields5).rec__lexer__token__length))) and
   (lexer__token__value__pred(a) ->
   (to_rep6(((a).us_split_fields5).rec__lexer__token__value) = to_rep6(((b).us_split_fields5).rec__lexer__token__value))))) ->
+  (bool_eq15(a, b) = true)) and
+  ((not ((to_rep5(((a).us_split_discrs5).rec__lexer__token__kind) = to_rep5(((b).us_split_discrs5).rec__lexer__token__kind)) and
+  ((((to_rep2(((a).us_split_fields5).rec__lexer__token__line) = to_rep2(((b).us_split_fields5).rec__lexer__token__line)) and
+  (to_rep2(((a).us_split_fields5).rec__lexer__token__col) = to_rep2(((b).us_split_fields5).rec__lexer__token__col))) and
+  (to_rep2(((a).us_split_fields5).rec__lexer__token__length) = to_rep2(((b).us_split_fields5).rec__lexer__token__length))) and
+  (lexer__token__value__pred(a) ->
+  (to_rep6(((a).us_split_fields5).rec__lexer__token__value) = to_rep6(((b).us_split_fields5).rec__lexer__token__value)))))) ->
   (bool_eq15(a, b) = false))))
 
 logic value__size5 : int
@@ -1730,186 +1730,186 @@ logic str__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS17 : int
 
-logic temp___String_Literal_842 : unit -> (int,character) farray
+logic temp___String_Literal_834 : unit -> (int,character) farray
 
-axiom temp___String_Literal_842__def_axiom :
-  (((((((((((((((((((to_rep((temp___String_Literal_842(void)[1])) = 105) and
-  (to_rep((temp___String_Literal_842(void)[2])) = 110)) and
-  (to_rep((temp___String_Literal_842(void)[3])) = 118)) and
-  (to_rep((temp___String_Literal_842(void)[4])) = 97)) and
-  (to_rep((temp___String_Literal_842(void)[5])) = 108)) and
-  (to_rep((temp___String_Literal_842(void)[6])) = 105)) and
-  (to_rep((temp___String_Literal_842(void)[7])) = 100)) and
-  (to_rep((temp___String_Literal_842(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_842(void)[9])) = 99)) and
-  (to_rep((temp___String_Literal_842(void)[10])) = 104)) and
-  (to_rep((temp___String_Literal_842(void)[11])) = 97)) and
-  (to_rep((temp___String_Literal_842(void)[12])) = 114)) and
-  (to_rep((temp___String_Literal_842(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_842(void)[14])) = 99)) and
-  (to_rep((temp___String_Literal_842(void)[15])) = 116)) and
-  (to_rep((temp___String_Literal_842(void)[16])) = 101)) and
-  (to_rep((temp___String_Literal_842(void)[17])) = 114)) and
-  (to_rep((temp___String_Literal_842(void)[18])) = 32)) and
-  (to_rep((temp___String_Literal_842(void)[19])) = 39))
+axiom temp___String_Literal_834__def_axiom :
+  (((((((((((((((((((to_rep((temp___String_Literal_834(void)[1])) = 105) and
+  (to_rep((temp___String_Literal_834(void)[2])) = 110)) and
+  (to_rep((temp___String_Literal_834(void)[3])) = 118)) and
+  (to_rep((temp___String_Literal_834(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_834(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_834(void)[6])) = 105)) and
+  (to_rep((temp___String_Literal_834(void)[7])) = 100)) and
+  (to_rep((temp___String_Literal_834(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_834(void)[9])) = 99)) and
+  (to_rep((temp___String_Literal_834(void)[10])) = 104)) and
+  (to_rep((temp___String_Literal_834(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_834(void)[12])) = 114)) and
+  (to_rep((temp___String_Literal_834(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_834(void)[14])) = 99)) and
+  (to_rep((temp___String_Literal_834(void)[15])) = 116)) and
+  (to_rep((temp___String_Literal_834(void)[16])) = 101)) and
+  (to_rep((temp___String_Literal_834(void)[17])) = 114)) and
+  (to_rep((temp___String_Literal_834(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_834(void)[19])) = 39))
 
-logic temp___String_Literal_844 : unit -> (int,character) farray
+logic temp___String_Literal_836 : unit -> (int,character) farray
 
-axiom temp___String_Literal_844__def_axiom :
-  (to_rep((temp___String_Literal_844(void)[1])) = 39)
+axiom temp___String_Literal_836__def_axiom :
+  (to_rep((temp___String_Literal_836(void)[1])) = 39)
 
-logic temp___String_Literal_860 : unit -> (int,character) farray
+logic temp___String_Literal_852 : unit -> (int,character) farray
 
-axiom temp___String_Literal_860__def_axiom :
-  ((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_860(void)[1])) = 105) and
-  (to_rep((temp___String_Literal_860(void)[2])) = 110)) and
-  (to_rep((temp___String_Literal_860(void)[3])) = 118)) and
-  (to_rep((temp___String_Literal_860(void)[4])) = 97)) and
-  (to_rep((temp___String_Literal_860(void)[5])) = 108)) and
-  (to_rep((temp___String_Literal_860(void)[6])) = 105)) and
-  (to_rep((temp___String_Literal_860(void)[7])) = 100)) and
-  (to_rep((temp___String_Literal_860(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[9])) = 102)) and
-  (to_rep((temp___String_Literal_860(void)[10])) = 111)) and
-  (to_rep((temp___String_Literal_860(void)[11])) = 114)) and
-  (to_rep((temp___String_Literal_860(void)[12])) = 109)) and
-  (to_rep((temp___String_Literal_860(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_860(void)[14])) = 116)) and
-  (to_rep((temp___String_Literal_860(void)[15])) = 44)) and
-  (to_rep((temp___String_Literal_860(void)[16])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[17])) = 109)) and
-  (to_rep((temp___String_Literal_860(void)[18])) = 117)) and
-  (to_rep((temp___String_Literal_860(void)[19])) = 115)) and
-  (to_rep((temp___String_Literal_860(void)[20])) = 116)) and
-  (to_rep((temp___String_Literal_860(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[22])) = 98)) and
-  (to_rep((temp___String_Literal_860(void)[23])) = 101)) and
-  (to_rep((temp___String_Literal_860(void)[24])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[25])) = 39)) and
-  (to_rep((temp___String_Literal_860(void)[26])) = 98)) and
-  (to_rep((temp___String_Literal_860(void)[27])) = 39)) and
-  (to_rep((temp___String_Literal_860(void)[28])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[29])) = 111)) and
-  (to_rep((temp___String_Literal_860(void)[30])) = 114)) and
-  (to_rep((temp___String_Literal_860(void)[31])) = 32)) and
-  (to_rep((temp___String_Literal_860(void)[32])) = 39)) and
-  (to_rep((temp___String_Literal_860(void)[33])) = 120)) and
-  (to_rep((temp___String_Literal_860(void)[34])) = 39))
+axiom temp___String_Literal_852__def_axiom :
+  ((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_852(void)[1])) = 105) and
+  (to_rep((temp___String_Literal_852(void)[2])) = 110)) and
+  (to_rep((temp___String_Literal_852(void)[3])) = 118)) and
+  (to_rep((temp___String_Literal_852(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_852(void)[5])) = 108)) and
+  (to_rep((temp___String_Literal_852(void)[6])) = 105)) and
+  (to_rep((temp___String_Literal_852(void)[7])) = 100)) and
+  (to_rep((temp___String_Literal_852(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[9])) = 102)) and
+  (to_rep((temp___String_Literal_852(void)[10])) = 111)) and
+  (to_rep((temp___String_Literal_852(void)[11])) = 114)) and
+  (to_rep((temp___String_Literal_852(void)[12])) = 109)) and
+  (to_rep((temp___String_Literal_852(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_852(void)[14])) = 116)) and
+  (to_rep((temp___String_Literal_852(void)[15])) = 44)) and
+  (to_rep((temp___String_Literal_852(void)[16])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[17])) = 109)) and
+  (to_rep((temp___String_Literal_852(void)[18])) = 117)) and
+  (to_rep((temp___String_Literal_852(void)[19])) = 115)) and
+  (to_rep((temp___String_Literal_852(void)[20])) = 116)) and
+  (to_rep((temp___String_Literal_852(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[22])) = 98)) and
+  (to_rep((temp___String_Literal_852(void)[23])) = 101)) and
+  (to_rep((temp___String_Literal_852(void)[24])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[25])) = 39)) and
+  (to_rep((temp___String_Literal_852(void)[26])) = 98)) and
+  (to_rep((temp___String_Literal_852(void)[27])) = 39)) and
+  (to_rep((temp___String_Literal_852(void)[28])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[29])) = 111)) and
+  (to_rep((temp___String_Literal_852(void)[30])) = 114)) and
+  (to_rep((temp___String_Literal_852(void)[31])) = 32)) and
+  (to_rep((temp___String_Literal_852(void)[32])) = 39)) and
+  (to_rep((temp___String_Literal_852(void)[33])) = 120)) and
+  (to_rep((temp___String_Literal_852(void)[34])) = 39))
 
-logic temp___String_Literal_878 : unit -> (int,character) farray
+logic temp___String_Literal_870 : unit -> (int,character) farray
 
-axiom temp___String_Literal_878__def_axiom : true
+axiom temp___String_Literal_870__def_axiom : true
 
-logic temp___String_Literal_883 : unit -> (int,character) farray
+logic temp___String_Literal_875 : unit -> (int,character) farray
 
-axiom temp___String_Literal_883__def_axiom :
-  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_883(void)[1])) = 113) and
-  (to_rep((temp___String_Literal_883(void)[2])) = 117)) and
-  (to_rep((temp___String_Literal_883(void)[3])) = 111)) and
-  (to_rep((temp___String_Literal_883(void)[4])) = 116)) and
-  (to_rep((temp___String_Literal_883(void)[5])) = 101)) and
-  (to_rep((temp___String_Literal_883(void)[6])) = 100)) and
-  (to_rep((temp___String_Literal_883(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_883(void)[8])) = 115)) and
-  (to_rep((temp___String_Literal_883(void)[9])) = 121)) and
-  (to_rep((temp___String_Literal_883(void)[10])) = 109)) and
-  (to_rep((temp___String_Literal_883(void)[11])) = 98)) and
-  (to_rep((temp___String_Literal_883(void)[12])) = 111)) and
-  (to_rep((temp___String_Literal_883(void)[13])) = 108)) and
-  (to_rep((temp___String_Literal_883(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_883(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_883(void)[16])) = 115)) and
-  (to_rep((temp___String_Literal_883(void)[17])) = 32)) and
-  (to_rep((temp___String_Literal_883(void)[18])) = 110)) and
-  (to_rep((temp___String_Literal_883(void)[19])) = 111)) and
-  (to_rep((temp___String_Literal_883(void)[20])) = 116)) and
-  (to_rep((temp___String_Literal_883(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_883(void)[22])) = 116)) and
-  (to_rep((temp___String_Literal_883(void)[23])) = 101)) and
-  (to_rep((temp___String_Literal_883(void)[24])) = 114)) and
-  (to_rep((temp___String_Literal_883(void)[25])) = 109)) and
-  (to_rep((temp___String_Literal_883(void)[26])) = 105)) and
-  (to_rep((temp___String_Literal_883(void)[27])) = 110)) and
-  (to_rep((temp___String_Literal_883(void)[28])) = 97)) and
-  (to_rep((temp___String_Literal_883(void)[29])) = 116)) and
-  (to_rep((temp___String_Literal_883(void)[30])) = 101)) and
-  (to_rep((temp___String_Literal_883(void)[31])) = 100))
+axiom temp___String_Literal_875__def_axiom :
+  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_875(void)[1])) = 113) and
+  (to_rep((temp___String_Literal_875(void)[2])) = 117)) and
+  (to_rep((temp___String_Literal_875(void)[3])) = 111)) and
+  (to_rep((temp___String_Literal_875(void)[4])) = 116)) and
+  (to_rep((temp___String_Literal_875(void)[5])) = 101)) and
+  (to_rep((temp___String_Literal_875(void)[6])) = 100)) and
+  (to_rep((temp___String_Literal_875(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_875(void)[8])) = 115)) and
+  (to_rep((temp___String_Literal_875(void)[9])) = 121)) and
+  (to_rep((temp___String_Literal_875(void)[10])) = 109)) and
+  (to_rep((temp___String_Literal_875(void)[11])) = 98)) and
+  (to_rep((temp___String_Literal_875(void)[12])) = 111)) and
+  (to_rep((temp___String_Literal_875(void)[13])) = 108)) and
+  (to_rep((temp___String_Literal_875(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_875(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_875(void)[16])) = 115)) and
+  (to_rep((temp___String_Literal_875(void)[17])) = 32)) and
+  (to_rep((temp___String_Literal_875(void)[18])) = 110)) and
+  (to_rep((temp___String_Literal_875(void)[19])) = 111)) and
+  (to_rep((temp___String_Literal_875(void)[20])) = 116)) and
+  (to_rep((temp___String_Literal_875(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_875(void)[22])) = 116)) and
+  (to_rep((temp___String_Literal_875(void)[23])) = 101)) and
+  (to_rep((temp___String_Literal_875(void)[24])) = 114)) and
+  (to_rep((temp___String_Literal_875(void)[25])) = 109)) and
+  (to_rep((temp___String_Literal_875(void)[26])) = 105)) and
+  (to_rep((temp___String_Literal_875(void)[27])) = 110)) and
+  (to_rep((temp___String_Literal_875(void)[28])) = 97)) and
+  (to_rep((temp___String_Literal_875(void)[29])) = 116)) and
+  (to_rep((temp___String_Literal_875(void)[30])) = 101)) and
+  (to_rep((temp___String_Literal_875(void)[31])) = 100))
 
-logic temp___String_Literal_884 : unit -> (int,character) farray
+logic temp___String_Literal_876 : unit -> (int,character) farray
 
-axiom temp___String_Literal_884__def_axiom :
-  ((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_884(void)[1])) = 98) and
-  (to_rep((temp___String_Literal_884(void)[2])) = 105)) and
-  (to_rep((temp___String_Literal_884(void)[3])) = 110)) and
-  (to_rep((temp___String_Literal_884(void)[4])) = 97)) and
-  (to_rep((temp___String_Literal_884(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_884(void)[6])) = 121)) and
-  (to_rep((temp___String_Literal_884(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[8])) = 111)) and
-  (to_rep((temp___String_Literal_884(void)[9])) = 114)) and
-  (to_rep((temp___String_Literal_884(void)[10])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[11])) = 104)) and
-  (to_rep((temp___String_Literal_884(void)[12])) = 101)) and
-  (to_rep((temp___String_Literal_884(void)[13])) = 120)) and
-  (to_rep((temp___String_Literal_884(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[15])) = 115)) and
-  (to_rep((temp___String_Literal_884(void)[16])) = 121)) and
-  (to_rep((temp___String_Literal_884(void)[17])) = 109)) and
-  (to_rep((temp___String_Literal_884(void)[18])) = 98)) and
-  (to_rep((temp___String_Literal_884(void)[19])) = 111)) and
-  (to_rep((temp___String_Literal_884(void)[20])) = 108)) and
-  (to_rep((temp___String_Literal_884(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[22])) = 105)) and
-  (to_rep((temp___String_Literal_884(void)[23])) = 115)) and
-  (to_rep((temp___String_Literal_884(void)[24])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[25])) = 110)) and
-  (to_rep((temp___String_Literal_884(void)[26])) = 111)) and
-  (to_rep((temp___String_Literal_884(void)[27])) = 116)) and
-  (to_rep((temp___String_Literal_884(void)[28])) = 32)) and
-  (to_rep((temp___String_Literal_884(void)[29])) = 102)) and
-  (to_rep((temp___String_Literal_884(void)[30])) = 105)) and
-  (to_rep((temp___String_Literal_884(void)[31])) = 110)) and
-  (to_rep((temp___String_Literal_884(void)[32])) = 105)) and
-  (to_rep((temp___String_Literal_884(void)[33])) = 115)) and
-  (to_rep((temp___String_Literal_884(void)[34])) = 104)) and
-  (to_rep((temp___String_Literal_884(void)[35])) = 101)) and
-  (to_rep((temp___String_Literal_884(void)[36])) = 100))
+axiom temp___String_Literal_876__def_axiom :
+  ((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_876(void)[1])) = 98) and
+  (to_rep((temp___String_Literal_876(void)[2])) = 105)) and
+  (to_rep((temp___String_Literal_876(void)[3])) = 110)) and
+  (to_rep((temp___String_Literal_876(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_876(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_876(void)[6])) = 121)) and
+  (to_rep((temp___String_Literal_876(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_876(void)[9])) = 114)) and
+  (to_rep((temp___String_Literal_876(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[11])) = 104)) and
+  (to_rep((temp___String_Literal_876(void)[12])) = 101)) and
+  (to_rep((temp___String_Literal_876(void)[13])) = 120)) and
+  (to_rep((temp___String_Literal_876(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[15])) = 115)) and
+  (to_rep((temp___String_Literal_876(void)[16])) = 121)) and
+  (to_rep((temp___String_Literal_876(void)[17])) = 109)) and
+  (to_rep((temp___String_Literal_876(void)[18])) = 98)) and
+  (to_rep((temp___String_Literal_876(void)[19])) = 111)) and
+  (to_rep((temp___String_Literal_876(void)[20])) = 108)) and
+  (to_rep((temp___String_Literal_876(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[22])) = 105)) and
+  (to_rep((temp___String_Literal_876(void)[23])) = 115)) and
+  (to_rep((temp___String_Literal_876(void)[24])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[25])) = 110)) and
+  (to_rep((temp___String_Literal_876(void)[26])) = 111)) and
+  (to_rep((temp___String_Literal_876(void)[27])) = 116)) and
+  (to_rep((temp___String_Literal_876(void)[28])) = 32)) and
+  (to_rep((temp___String_Literal_876(void)[29])) = 102)) and
+  (to_rep((temp___String_Literal_876(void)[30])) = 105)) and
+  (to_rep((temp___String_Literal_876(void)[31])) = 110)) and
+  (to_rep((temp___String_Literal_876(void)[32])) = 105)) and
+  (to_rep((temp___String_Literal_876(void)[33])) = 115)) and
+  (to_rep((temp___String_Literal_876(void)[34])) = 104)) and
+  (to_rep((temp___String_Literal_876(void)[35])) = 101)) and
+  (to_rep((temp___String_Literal_876(void)[36])) = 100))
 
-logic temp___String_Literal_885 : unit -> (int,character) farray
+logic temp___String_Literal_877 : unit -> (int,character) farray
 
-axiom temp___String_Literal_885__def_axiom :
-  ((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_885(void)[1])) = 115) and
-  (to_rep((temp___String_Literal_885(void)[2])) = 116)) and
-  (to_rep((temp___String_Literal_885(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_885(void)[4])) = 105)) and
-  (to_rep((temp___String_Literal_885(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_885(void)[6])) = 103)) and
-  (to_rep((temp___String_Literal_885(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_885(void)[8])) = 108)) and
-  (to_rep((temp___String_Literal_885(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_885(void)[10])) = 116)) and
-  (to_rep((temp___String_Literal_885(void)[11])) = 101)) and
-  (to_rep((temp___String_Literal_885(void)[12])) = 114)) and
-  (to_rep((temp___String_Literal_885(void)[13])) = 97)) and
-  (to_rep((temp___String_Literal_885(void)[14])) = 108)) and
-  (to_rep((temp___String_Literal_885(void)[15])) = 32)) and
-  (to_rep((temp___String_Literal_885(void)[16])) = 105)) and
-  (to_rep((temp___String_Literal_885(void)[17])) = 115)) and
-  (to_rep((temp___String_Literal_885(void)[18])) = 32)) and
-  (to_rep((temp___String_Literal_885(void)[19])) = 110)) and
-  (to_rep((temp___String_Literal_885(void)[20])) = 111)) and
-  (to_rep((temp___String_Literal_885(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_885(void)[22])) = 32)) and
-  (to_rep((temp___String_Literal_885(void)[23])) = 116)) and
-  (to_rep((temp___String_Literal_885(void)[24])) = 101)) and
-  (to_rep((temp___String_Literal_885(void)[25])) = 114)) and
-  (to_rep((temp___String_Literal_885(void)[26])) = 109)) and
-  (to_rep((temp___String_Literal_885(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_885(void)[28])) = 110)) and
-  (to_rep((temp___String_Literal_885(void)[29])) = 97)) and
-  (to_rep((temp___String_Literal_885(void)[30])) = 116)) and
-  (to_rep((temp___String_Literal_885(void)[31])) = 101)) and
-  (to_rep((temp___String_Literal_885(void)[32])) = 100))
+axiom temp___String_Literal_877__def_axiom :
+  ((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_877(void)[1])) = 115) and
+  (to_rep((temp___String_Literal_877(void)[2])) = 116)) and
+  (to_rep((temp___String_Literal_877(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_877(void)[4])) = 105)) and
+  (to_rep((temp___String_Literal_877(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_877(void)[6])) = 103)) and
+  (to_rep((temp___String_Literal_877(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_877(void)[8])) = 108)) and
+  (to_rep((temp___String_Literal_877(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_877(void)[10])) = 116)) and
+  (to_rep((temp___String_Literal_877(void)[11])) = 101)) and
+  (to_rep((temp___String_Literal_877(void)[12])) = 114)) and
+  (to_rep((temp___String_Literal_877(void)[13])) = 97)) and
+  (to_rep((temp___String_Literal_877(void)[14])) = 108)) and
+  (to_rep((temp___String_Literal_877(void)[15])) = 32)) and
+  (to_rep((temp___String_Literal_877(void)[16])) = 105)) and
+  (to_rep((temp___String_Literal_877(void)[17])) = 115)) and
+  (to_rep((temp___String_Literal_877(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_877(void)[19])) = 110)) and
+  (to_rep((temp___String_Literal_877(void)[20])) = 111)) and
+  (to_rep((temp___String_Literal_877(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_877(void)[22])) = 32)) and
+  (to_rep((temp___String_Literal_877(void)[23])) = 116)) and
+  (to_rep((temp___String_Literal_877(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_877(void)[25])) = 114)) and
+  (to_rep((temp___String_Literal_877(void)[26])) = 109)) and
+  (to_rep((temp___String_Literal_877(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_877(void)[28])) = 110)) and
+  (to_rep((temp___String_Literal_877(void)[29])) = 97)) and
+  (to_rep((temp___String_Literal_877(void)[30])) = 116)) and
+  (to_rep((temp___String_Literal_877(void)[31])) = 101)) and
+  (to_rep((temp___String_Literal_877(void)[32])) = 100))
 
 axiom local_invariant__post_axiom : true
 
@@ -1968,253 +1968,2342 @@ axiom is_empty__post_axiom :
   us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
   container1 } }) = 0)))
 
- (* File "lexer.ads", line 65, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t__split_fields:natural. forall t__split_fields1:natural.
-  forall t__split_fields2:natural. forall t__split_fields3:name_id.
-  forall t__split_discrs:token_kind. forall the_filename:int.
-  forall the_file:us_rep. forall current_read__split_fields:character.
-  forall current_read__split_discrs:read_status. forall current_line:int.
-  forall current_col:int. forall current_pos:int.
-  forall next_read__split_fields:character.
-  forall next_read__split_discrs:read_status.
-  forall s__split_fields:us_main_type1. forall first_line:int.
-  forall first_col:int. forall first_pos:int. forall state:int. forall c:int.
-  forall name_table:us_private. forall temp___859:int.
-  forall temp___858:token_kind. forall temp___8581:natural.
-  forall temp___8582:natural. forall temp___8583:natural.
-  forall temp___8584:name_id. forall temp___8585:bool. forall temp___857:int.
-  forall temp___856:us_rep. forall temp___855:int.
-  forall temp___854:read_status. forall temp___8541:character.
-  forall temp___8542:bool. forall temp___853:capacity_range.
-  forall temp___8531:us_main_type1. forall temp___852:int.
-  forall temp___851:int. forall temp___850:int. forall temp___849:int.
-  forall temp___848:int. forall temp___847:read_status.
-  forall temp___8471:character. forall temp___8472:bool.
-  forall t__split_fields4:us_split_fields4.
-  forall t__split_discrs1:us_split_discrs4. forall current_line1:int.
-  forall current_col1:int. forall current_pos1:int. forall first_line1:int.
-  forall first_col1:int. forall first_pos1:int. forall state1:int.
-  forall c1:int. forall current_read__split_fields1:us_split_fields.
-  forall current_read__split_discrs1:us_split_discrs.
-  forall current_line2:int. forall current_col2:int. forall current_pos2:int.
-  forall next_read__split_fields1:us_split_fields.
-  forall next_read__split_discrs1:us_split_discrs.
-  forall t__split_fields5:us_split_fields4.
-  forall t__split_discrs2:us_split_discrs4. forall result:int__ref.
-  forall first_line2:int. forall result1:int__ref. forall first_col2:int.
-  forall result2:int__ref. forall first_pos2:int. forall result3:int__ref.
-  forall c2:int. forall s__split_fields1:us_split_fields2.
-  forall the_file1:us_rep.
-  forall current_read__split_fields2:us_split_fields.
-  forall current_read__split_discrs2:us_split_discrs.
-  forall current_line3:int. forall current_col3:int. forall current_pos3:int.
-  forall next_read__split_fields2:us_split_fields.
-  forall next_read__split_discrs2:us_split_discrs.
-  forall s__split_fields2:us_split_fields2. forall result4:int__ref.
-  forall state2:int. forall result5:int__ref. forall state3:int.
-  forall result6:int__ref. forall state4:int. forall result7:int__ref.
-  forall state5:int. forall result8:int__ref. forall state6:int.
-  forall state7:int__ref. forall state8:int. forall state9:int__ref.
-  forall state10:int. forall state11:int__ref. forall state12:int.
-  forall state13:int__ref. forall state14:int.
-  forall t__split_fields6:us_split_fields__ref2.
-  forall t__split_discrs3:us_split_discrs__ref2. forall state15:int__ref.
-  forall t__split_fields7:us_split_fields4.
-  forall t__split_discrs4:us_split_discrs4. forall state16:int.
-  forall t__split_fields8:us_split_fields__ref2.
-  forall t__split_discrs5:us_split_discrs__ref2. forall the_file2:file__ref.
-  forall current_read__split_fields3:us_split_fields__ref.
-  forall current_read__split_discrs3:us_split_discrs__ref.
-  forall current_line4:int__ref. forall current_col4:int__ref.
-  forall current_pos4:int__ref.
-  forall next_read__split_fields3:us_split_fields__ref.
-  forall next_read__split_discrs3:us_split_discrs__ref.
-  forall s__split_fields3:us_split_fields__ref1. forall first_line3:int__ref.
-  forall first_col3:int__ref. forall first_pos3:int__ref.
-  forall state17:int__ref. forall c3:int__ref.
-  forall t__split_fields9:us_split_fields4.
-  forall t__split_discrs6:us_split_discrs4. forall the_file3:us_rep.
-  forall current_read__split_fields4:us_split_fields.
-  forall current_read__split_discrs4:us_split_discrs.
-  forall current_line5:int. forall current_col5:int. forall current_pos5:int.
-  forall next_read__split_fields4:us_split_fields.
-  forall next_read__split_discrs4:us_split_discrs.
-  forall s__split_fields4:us_split_fields2. forall first_line4:int.
-  forall first_col4:int. forall first_pos4:int. forall state18:int.
-  forall c4:int. forall t__split_fields10:us_split_fields__ref2.
-  forall t__split_discrs7:us_split_discrs__ref2. forall the_file4:file__ref.
-  forall current_read__split_fields5:us_split_fields__ref.
-  forall current_read__split_discrs5:us_split_discrs__ref.
-  forall current_line6:int__ref. forall current_col6:int__ref.
-  forall current_pos6:int__ref.
-  forall next_read__split_fields5:us_split_fields__ref.
-  forall next_read__split_discrs5:us_split_discrs__ref.
-  forall s__split_fields5:us_split_fields__ref1. forall first_line5:int__ref.
-  forall first_col5:int__ref. forall first_pos5:int__ref.
-  forall state19:int__ref. forall c5:int__ref.
-  forall t__split_fields11:us_split_fields4.
-  forall t__split_discrs8:us_split_discrs4. forall the_file5:us_rep.
-  forall current_read__split_fields6:us_split_fields.
-  forall current_read__split_discrs6:us_split_discrs.
-  forall current_line7:int. forall current_col7:int. forall current_pos7:int.
-  forall next_read__split_fields6:us_split_fields.
-  forall next_read__split_discrs6:us_split_discrs.
-  forall s__split_fields6:us_split_fields2. forall first_line6:int.
-  forall first_col6:int. forall first_pos6:int. forall state20:int.
-  forall c6:int. forall result9:int__ref. forall c7:int.
-  forall current_read__split_discrs7:us_split_discrs.
-  forall current_line8:int. forall current_col8:int. forall current_pos8:int.
-  forall s__split_fields7:us_split_fields2. forall state21:int.
-  forall c8:int. (in_range8(the_filename) ->
-  ((current_read__attr__constrained = false) -> (in_range2(current_line) ->
-  (in_range4(current_col) -> (in_range4(current_pos) ->
-  ((next_read__attr__constrained = false) -> (((invariant__(name_table, {
-  rec__file_io__read_result__c = current_read__split_fields }, {
-  rec__file_io__read_result__status = current_read__split_discrs }, {
-  rec__file_io__read_result__c = next_read__split_fields }, {
-  rec__file_io__read_result__status = next_read__split_discrs }) = true) and
-  (not (t__attr__constrained = true))) ->
-  (((to_rep4(s__split_discrs) = 32) and (is_empty({ us_split_discrs3 = {
+logic t__split_fields : natural
+
+logic t__split_fields1 : natural
+
+logic t__split_fields2 : natural
+
+logic t__split_fields3 : name_id
+
+logic t__split_discrs : token_kind
+
+logic the_filename : int
+
+logic the_file : us_rep
+
+logic current_read__split_fields : character
+
+logic current_read__split_discrs : read_status
+
+logic current_line : int
+
+logic current_col : int
+
+logic current_pos : int
+
+logic next_read__split_fields : character
+
+logic next_read__split_discrs : read_status
+
+logic s__split_fields : us_main_type1
+
+logic first_line : int
+
+logic first_col : int
+
+logic first_pos : int
+
+logic state : int
+
+logic c : int
+
+logic k : int
+
+logic str : (int,character) farray
+
+logic name_table : us_private
+
+logic temp___851 : int
+
+logic temp___850 : int
+
+logic temp___849 : us_rep
+
+logic temp___847 : int
+
+logic temp___848 : token_kind
+
+logic temp___8481 : natural
+
+logic temp___8482 : natural
+
+logic temp___8483 : natural
+
+logic temp___8484 : name_id
+
+logic temp___8485 : bool
+
+logic temp___846 : read_status
+
+logic temp___8461 : character
+
+logic temp___8462 : bool
+
+logic temp___845 : capacity_range
+
+logic temp___8451 : us_main_type1
+
+logic temp___844 : int
+
+logic temp___843 : int
+
+logic temp___842 : int
+
+logic temp___841 : int
+
+logic temp___840 : int
+
+logic temp___839 : read_status
+
+logic temp___8391 : character
+
+logic temp___8392 : bool
+
+logic o : token_kind
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : name_id
+
+logic o9 : token_kind
+
+logic temp___831 : token_kind
+
+logic temp___8311 : natural
+
+logic temp___8312 : natural
+
+logic temp___8313 : natural
+
+logic temp___8314 : name_id
+
+logic temp___8315 : bool
+
+logic usq_ : token_kind
+
+logic usq_1 : natural
+
+logic usq_2 : natural
+
+logic usq_3 : natural
+
+logic usq_4 : name_id
+
+logic usq_5 : bool
+
+logic temp___833 : token_kind
+
+logic temp___8331 : natural
+
+logic temp___8332 : natural
+
+logic temp___8333 : natural
+
+logic temp___8334 : name_id
+
+logic temp___8335 : bool
+
+logic o10 : character
+
+logic o11 : (int,character) farray
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : (int,character) farray
+
+logic temp___837 : (int,character) farray
+
+logic temp___8371 : t
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : (int,character) farray
+
+logic o25 : t
+
+logic temp___861 : int
+
+logic temp___860 : us_rep
+
+logic temp___859 : read_status
+
+logic temp___8591 : character
+
+logic temp___8592 : bool
+
+logic temp___858 : capacity_range
+
+logic temp___8581 : us_main_type1
+
+logic temp___857 : int
+
+logic temp___856 : int
+
+logic temp___855 : int
+
+logic temp___854 : int
+
+logic temp___853 : read_status
+
+logic temp___8531 : character
+
+logic temp___8532 : bool
+
+logic lexer__read_token__B_6__tmp__assume : (int,character) farray
+
+logic lexer__read_token__B_6__tmp__assume1 : t
+
+logic o26 : int
+
+logic temp___864 : int
+
+logic o27 : (int,character) farray
+
+logic temp___866 : (int,character) farray
+
+logic temp___8661 : t1
+
+logic temp___868 : int
+
+logic temp___867 : int
+
+logic o28 : (int,character) farray
+
+logic temp___869 : (int,character) farray
+
+logic temp___8691 : t2
+
+logic temp___871 : int
+
+logic o29 : (int,character) farray
+
+logic temp___873 : (int,character) farray
+
+logic temp___8731 : t3
+
+logic lexer__read_token__B_6__str__assume : (int,character) farray
+
+logic lexer__read_token__B_6__str__assume1 : t
+
+logic k1 : int
+
+logic str1 : (int,character) farray
+
+logic name_table1 : us_private
+
+logic t__split_fields4 : natural
+
+logic t__split_fields5 : natural
+
+logic t__split_fields6 : natural
+
+logic t__split_fields7 : name_id
+
+logic t__split_discrs1 : token_kind
+
+logic current_read__split_fields1 : character
+
+logic current_read__split_discrs1 : read_status
+
+logic current_line1 : int
+
+logic current_col1 : int
+
+logic current_pos1 : int
+
+logic next_read__split_fields1 : character
+
+logic next_read__split_discrs1 : read_status
+
+logic s__split_fields1 : us_main_type1
+
+logic first_line1 : int
+
+logic first_col1 : int
+
+logic first_pos1 : int
+
+logic state1 : int
+
+logic c1 : int
+
+logic the_file1 : us_rep
+
+logic current_read__split_fields2 : character
+
+logic current_read__split_discrs2 : read_status
+
+logic current_line2 : int
+
+logic current_col2 : int
+
+logic current_pos2 : int
+
+logic next_read__split_fields2 : character
+
+logic next_read__split_discrs2 : read_status
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : natural
+
+logic result3 : name_id
+
+logic t__split_fields8 : natural
+
+logic t__split_fields9 : natural
+
+logic t__split_fields10 : natural
+
+logic t__split_fields11 : name_id
+
+logic result4 : token_kind
+
+logic t__split_discrs2 : token_kind
+
+logic result5 : int
+
+logic first_line2 : int
+
+logic result6 : int
+
+logic first_col2 : int
+
+logic result7 : int
+
+logic first_pos2 : int
+
+logic result8 : int
+
+logic c2 : int
+
+logic s__split_fields2 : us_main_type1
+
+logic the_file2 : us_rep
+
+logic current_read__split_fields3 : character
+
+logic current_read__split_discrs3 : read_status
+
+logic current_line3 : int
+
+logic current_col3 : int
+
+logic current_pos3 : int
+
+logic next_read__split_fields3 : character
+
+logic next_read__split_discrs3 : read_status
+
+logic s__split_fields3 : us_main_type1
+
+logic t__split_fields12 : natural
+
+logic t__split_fields13 : natural
+
+logic t__split_fields14 : natural
+
+logic t__split_fields15 : name_id
+
+logic t__split_discrs3 : token_kind
+
+logic t__split_fields16 : natural
+
+logic t__split_fields17 : natural
+
+logic t__split_fields18 : natural
+
+logic t__split_fields19 : name_id
+
+logic t__split_discrs4 : token_kind
+
+logic result9 : int
+
+logic state2 : int
+
+logic result10 : int
+
+logic state3 : int
+
+logic result11 : int
+
+logic state4 : int
+
+logic result12 : int
+
+logic state5 : int
+
+logic result13 : int
+
+logic state6 : int
+
+logic state7 : int
+
+logic state8 : int
+
+logic state9 : int
+
+logic state10 : int
+
+logic state11 : int
+
+logic state12 : int
+
+logic state13 : int
+
+logic state14 : int
+
+logic t__split_fields20 : natural
+
+logic t__split_fields21 : natural
+
+logic t__split_fields22 : natural
+
+logic t__split_fields23 : name_id
+
+logic t__split_discrs5 : token_kind
+
+logic t__split_fields24 : natural
+
+logic t__split_fields25 : natural
+
+logic t__split_fields26 : natural
+
+logic t__split_fields27 : name_id
+
+logic t__split_discrs6 : token_kind
+
+logic t__split_fields28 : natural
+
+logic t__split_fields29 : natural
+
+logic t__split_fields30 : natural
+
+logic t__split_fields31 : name_id
+
+logic t__split_discrs7 : token_kind
+
+logic state15 : int
+
+logic t__split_fields32 : natural
+
+logic t__split_fields33 : natural
+
+logic t__split_fields34 : natural
+
+logic t__split_fields35 : name_id
+
+logic t__split_discrs8 : token_kind
+
+logic state16 : int
+
+logic t__split_fields36 : natural
+
+logic t__split_fields37 : natural
+
+logic t__split_fields38 : natural
+
+logic t__split_fields39 : name_id
+
+logic t__split_discrs9 : token_kind
+
+logic the_file3 : us_rep
+
+logic current_read__split_fields4 : character
+
+logic current_read__split_discrs4 : read_status
+
+logic current_line4 : int
+
+logic current_col4 : int
+
+logic current_pos4 : int
+
+logic next_read__split_fields4 : character
+
+logic next_read__split_discrs4 : read_status
+
+logic s__split_fields4 : us_main_type1
+
+logic first_line3 : int
+
+logic first_col3 : int
+
+logic first_pos3 : int
+
+logic c3 : int
+
+logic t__split_fields40 : natural
+
+logic t__split_fields41 : natural
+
+logic t__split_fields42 : natural
+
+logic t__split_fields43 : name_id
+
+logic t__split_discrs10 : token_kind
+
+logic the_file4 : us_rep
+
+logic current_read__split_fields5 : character
+
+logic current_read__split_discrs5 : read_status
+
+logic current_line5 : int
+
+logic current_col5 : int
+
+logic current_pos5 : int
+
+logic next_read__split_fields5 : character
+
+logic next_read__split_discrs5 : read_status
+
+logic s__split_fields5 : us_main_type1
+
+logic first_line4 : int
+
+logic first_col4 : int
+
+logic first_pos4 : int
+
+logic c4 : int
+
+logic t__split_fields44 : natural
+
+logic t__split_fields45 : natural
+
+logic t__split_fields46 : natural
+
+logic t__split_fields47 : name_id
+
+logic t__split_discrs11 : token_kind
+
+logic the_file5 : us_rep
+
+logic current_read__split_fields6 : character
+
+logic current_read__split_discrs6 : read_status
+
+logic current_line6 : int
+
+logic current_col6 : int
+
+logic current_pos6 : int
+
+logic next_read__split_fields6 : character
+
+logic next_read__split_discrs6 : read_status
+
+logic s__split_fields6 : us_main_type1
+
+logic first_line5 : int
+
+logic first_col5 : int
+
+logic first_pos5 : int
+
+logic state17 : int
+
+logic c5 : int
+
+logic t__split_fields48 : natural
+
+logic t__split_fields49 : natural
+
+logic t__split_fields50 : natural
+
+logic t__split_fields51 : name_id
+
+logic t__split_discrs12 : token_kind
+
+logic the_file6 : us_rep
+
+logic current_read__split_fields7 : character
+
+logic current_read__split_discrs7 : read_status
+
+logic current_line7 : int
+
+logic current_col7 : int
+
+logic current_pos7 : int
+
+logic next_read__split_fields7 : character
+
+logic next_read__split_discrs7 : read_status
+
+logic s__split_fields7 : us_main_type1
+
+logic first_line6 : int
+
+logic first_col6 : int
+
+logic first_pos6 : int
+
+logic state18 : int
+
+logic c6 : int
+
+logic t__split_fields52 : natural
+
+logic t__split_fields53 : natural
+
+logic t__split_fields54 : natural
+
+logic t__split_fields55 : name_id
+
+logic t__split_discrs13 : token_kind
+
+logic the_file7 : us_rep
+
+logic current_read__split_fields8 : character
+
+logic current_read__split_discrs8 : read_status
+
+logic current_line8 : int
+
+logic current_col8 : int
+
+logic current_pos8 : int
+
+logic next_read__split_fields8 : character
+
+logic next_read__split_discrs8 : read_status
+
+logic s__split_fields8 : us_main_type1
+
+logic first_line7 : int
+
+logic first_col7 : int
+
+logic first_pos7 : int
+
+logic state19 : int
+
+logic c7 : int
+
+logic t__split_fields56 : natural
+
+logic t__split_fields57 : natural
+
+logic t__split_fields58 : natural
+
+logic t__split_fields59 : name_id
+
+logic t__split_discrs14 : token_kind
+
+logic the_file8 : us_rep
+
+logic current_read__split_fields9 : character
+
+logic current_read__split_discrs9 : read_status
+
+logic current_line9 : int
+
+logic current_col9 : int
+
+logic current_pos9 : int
+
+logic next_read__split_fields9 : character
+
+logic next_read__split_discrs9 : read_status
+
+logic s__split_fields9 : us_main_type1
+
+logic first_line8 : int
+
+logic first_col8 : int
+
+logic first_pos8 : int
+
+logic state20 : int
+
+logic c8 : int
+
+logic result14 : int
+
+logic c9 : int
+
+logic the_file9 : us_rep
+
+logic current_read__split_fields10 : character
+
+logic current_read__split_discrs10 : read_status
+
+logic current_line10 : int
+
+logic current_col10 : int
+
+logic current_pos10 : int
+
+logic next_read__split_fields10 : character
+
+logic next_read__split_discrs10 : read_status
+
+logic s__split_fields10 : us_main_type1
+
+logic state21 : int
+
+logic c10 : int
+
+logic result15 : int
+
+logic state22 : int
+
+logic state23 : int
+
+logic state24 : int
+
+logic state25 : int
+
+logic state26 : int
+
+logic result16 : int
+
+logic state27 : int
+
+logic result17 : int
+
+logic state28 : int
+
+logic result18 : int
+
+logic state29 : int
+
+logic state30 : int
+
+logic state31 : int
+
+logic state32 : int
+
+logic state33 : int
+
+logic the_file10 : us_rep
+
+logic current_read__split_fields11 : character
+
+logic current_read__split_discrs11 : read_status
+
+logic current_line11 : int
+
+logic current_col11 : int
+
+logic current_pos11 : int
+
+logic next_read__split_fields11 : character
+
+logic next_read__split_discrs11 : read_status
+
+logic s__split_fields11 : us_main_type1
+
+logic result19 : int
+
+logic state34 : int
+
+logic the_file11 : us_rep
+
+logic current_read__split_fields12 : character
+
+logic current_read__split_discrs12 : read_status
+
+logic current_line12 : int
+
+logic current_col12 : int
+
+logic current_pos12 : int
+
+logic next_read__split_fields12 : character
+
+logic next_read__split_discrs12 : read_status
+
+logic s__split_fields12 : us_main_type1
+
+logic state35 : int
+
+logic the_file12 : us_rep
+
+logic current_read__split_fields13 : character
+
+logic current_read__split_discrs13 : read_status
+
+logic current_line13 : int
+
+logic current_col13 : int
+
+logic current_pos13 : int
+
+logic next_read__split_fields13 : character
+
+logic next_read__split_discrs13 : read_status
+
+logic s__split_fields13 : us_main_type1
+
+logic state36 : int
+
+logic result20 : bool
+
+logic the_file13 : us_rep
+
+logic current_read__split_fields14 : character
+
+logic current_read__split_discrs14 : read_status
+
+logic current_line14 : int
+
+logic current_col14 : int
+
+logic current_pos14 : int
+
+logic next_read__split_fields14 : character
+
+logic next_read__split_discrs14 : read_status
+
+logic the_file14 : us_rep
+
+logic current_read__split_fields15 : character
+
+logic current_read__split_discrs15 : read_status
+
+logic current_line15 : int
+
+logic current_col15 : int
+
+logic current_pos15 : int
+
+logic next_read__split_fields15 : character
+
+logic next_read__split_discrs15 : read_status
+
+logic s__split_fields14 : us_main_type1
+
+logic result21 : int
+
+logic state37 : int
+
+logic the_file15 : us_rep
+
+logic current_read__split_fields16 : character
+
+logic current_read__split_discrs16 : read_status
+
+logic current_line16 : int
+
+logic current_col16 : int
+
+logic current_pos16 : int
+
+logic next_read__split_fields16 : character
+
+logic next_read__split_discrs16 : read_status
+
+logic s__split_fields15 : us_main_type1
+
+logic state38 : int
+
+logic the_file16 : us_rep
+
+logic current_read__split_fields17 : character
+
+logic current_read__split_discrs17 : read_status
+
+logic current_line17 : int
+
+logic current_col17 : int
+
+logic current_pos17 : int
+
+logic next_read__split_fields17 : character
+
+logic next_read__split_discrs17 : read_status
+
+logic s__split_fields16 : us_main_type1
+
+logic state39 : int
+
+logic the_file17 : us_rep
+
+logic current_read__split_fields18 : character
+
+logic current_read__split_discrs18 : read_status
+
+logic current_line18 : int
+
+logic current_col18 : int
+
+logic current_pos18 : int
+
+logic next_read__split_fields18 : character
+
+logic next_read__split_discrs18 : read_status
+
+logic s__split_fields17 : us_main_type1
+
+logic state40 : int
+
+logic the_file18 : us_rep
+
+logic current_read__split_fields19 : character
+
+logic current_read__split_discrs19 : read_status
+
+logic current_line19 : int
+
+logic current_col19 : int
+
+logic current_pos19 : int
+
+logic next_read__split_fields19 : character
+
+logic next_read__split_discrs19 : read_status
+
+logic s__split_fields18 : us_main_type1
+
+logic state41 : int
+
+logic the_file19 : us_rep
+
+logic current_read__split_fields20 : character
+
+logic current_read__split_discrs20 : read_status
+
+logic current_line20 : int
+
+logic current_col20 : int
+
+logic current_pos20 : int
+
+logic next_read__split_fields20 : character
+
+logic next_read__split_discrs20 : read_status
+
+logic s__split_fields19 : us_main_type1
+
+logic state42 : int
+
+logic the_file20 : us_rep
+
+logic current_read__split_fields21 : character
+
+logic current_read__split_discrs21 : read_status
+
+logic current_line21 : int
+
+logic current_col21 : int
+
+logic current_pos21 : int
+
+logic next_read__split_fields21 : character
+
+logic next_read__split_discrs21 : read_status
+
+logic s__split_fields20 : us_main_type1
+
+logic state43 : int
+
+logic the_file21 : us_rep
+
+logic current_read__split_fields22 : character
+
+logic current_read__split_discrs22 : read_status
+
+logic current_line22 : int
+
+logic current_col22 : int
+
+logic current_pos22 : int
+
+logic next_read__split_fields22 : character
+
+logic next_read__split_discrs22 : read_status
+
+logic s__split_fields21 : us_main_type1
+
+logic state44 : int
+
+logic the_file22 : us_rep
+
+logic current_read__split_fields23 : character
+
+logic current_read__split_discrs23 : read_status
+
+logic current_line23 : int
+
+logic current_col23 : int
+
+logic current_pos23 : int
+
+logic next_read__split_fields23 : character
+
+logic next_read__split_discrs23 : read_status
+
+logic s__split_fields22 : us_main_type1
+
+logic state45 : int
+
+logic the_file23 : us_rep
+
+logic current_read__split_fields24 : character
+
+logic current_read__split_discrs24 : read_status
+
+logic current_line24 : int
+
+logic current_col24 : int
+
+logic current_pos24 : int
+
+logic next_read__split_fields24 : character
+
+logic next_read__split_discrs24 : read_status
+
+logic s__split_fields23 : us_main_type1
+
+logic state46 : int
+
+logic the_file24 : us_rep
+
+logic current_read__split_fields25 : character
+
+logic current_read__split_discrs25 : read_status
+
+logic current_line25 : int
+
+logic current_col25 : int
+
+logic current_pos25 : int
+
+logic next_read__split_fields25 : character
+
+logic next_read__split_discrs25 : read_status
+
+logic s__split_fields24 : us_main_type1
+
+logic state47 : int
+
+logic the_file25 : us_rep
+
+logic current_read__split_fields26 : character
+
+logic current_read__split_discrs26 : read_status
+
+logic current_line26 : int
+
+logic current_col26 : int
+
+logic current_pos26 : int
+
+logic next_read__split_fields26 : character
+
+logic next_read__split_discrs26 : read_status
+
+logic s__split_fields25 : us_main_type1
+
+logic state48 : int
+
+logic the_file26 : us_rep
+
+logic current_read__split_fields27 : character
+
+logic current_read__split_discrs27 : read_status
+
+logic current_line27 : int
+
+logic current_col27 : int
+
+logic current_pos27 : int
+
+logic next_read__split_fields27 : character
+
+logic next_read__split_discrs27 : read_status
+
+logic s__split_fields26 : us_main_type1
+
+logic state49 : int
+
+logic the_file27 : us_rep
+
+logic current_read__split_fields28 : character
+
+logic current_read__split_discrs28 : read_status
+
+logic current_line28 : int
+
+logic current_col28 : int
+
+logic current_pos28 : int
+
+logic next_read__split_fields28 : character
+
+logic next_read__split_discrs28 : read_status
+
+logic s__split_fields27 : us_main_type1
+
+logic state50 : int
+
+logic the_file28 : us_rep
+
+logic current_read__split_fields29 : character
+
+logic current_read__split_discrs29 : read_status
+
+logic current_line29 : int
+
+logic current_col29 : int
+
+logic current_pos29 : int
+
+logic next_read__split_fields29 : character
+
+logic next_read__split_discrs29 : read_status
+
+logic s__split_fields28 : us_main_type1
+
+logic state51 : int
+
+logic the_file29 : us_rep
+
+logic current_read__split_fields30 : character
+
+logic current_read__split_discrs30 : read_status
+
+logic current_line30 : int
+
+logic current_col30 : int
+
+logic current_pos30 : int
+
+logic next_read__split_fields30 : character
+
+logic next_read__split_discrs30 : read_status
+
+logic s__split_fields29 : us_main_type1
+
+logic state52 : int
+
+logic the_file30 : us_rep
+
+logic current_read__split_fields31 : character
+
+logic current_read__split_discrs31 : read_status
+
+logic current_line31 : int
+
+logic current_col31 : int
+
+logic current_pos31 : int
+
+logic next_read__split_fields31 : character
+
+logic next_read__split_discrs31 : read_status
+
+logic s__split_fields30 : us_main_type1
+
+logic state53 : int
+
+logic the_file31 : us_rep
+
+logic current_read__split_fields32 : character
+
+logic current_read__split_discrs32 : read_status
+
+logic current_line32 : int
+
+logic current_col32 : int
+
+logic current_pos32 : int
+
+logic next_read__split_fields32 : character
+
+logic next_read__split_discrs32 : read_status
+
+logic s__split_fields31 : us_main_type1
+
+logic state54 : int
+
+logic the_file32 : us_rep
+
+logic current_read__split_fields33 : character
+
+logic current_read__split_discrs33 : read_status
+
+logic current_line33 : int
+
+logic current_col33 : int
+
+logic current_pos33 : int
+
+logic next_read__split_fields33 : character
+
+logic next_read__split_discrs33 : read_status
+
+logic s__split_fields32 : us_main_type1
+
+logic state55 : int
+
+logic the_file33 : us_rep
+
+logic current_read__split_fields34 : character
+
+logic current_read__split_discrs34 : read_status
+
+logic current_line34 : int
+
+logic current_col34 : int
+
+logic current_pos34 : int
+
+logic next_read__split_fields34 : character
+
+logic next_read__split_discrs34 : read_status
+
+logic s__split_fields33 : us_main_type1
+
+logic state56 : int
+
+logic the_file34 : us_rep
+
+logic current_read__split_fields35 : character
+
+logic current_read__split_discrs35 : read_status
+
+logic current_line35 : int
+
+logic current_col35 : int
+
+logic current_pos35 : int
+
+logic next_read__split_fields35 : character
+
+logic next_read__split_discrs35 : read_status
+
+logic s__split_fields34 : us_main_type1
+
+logic state57 : int
+
+logic the_file35 : us_rep
+
+logic current_read__split_fields36 : character
+
+logic current_read__split_discrs36 : read_status
+
+logic current_line36 : int
+
+logic current_col36 : int
+
+logic current_pos36 : int
+
+logic next_read__split_fields36 : character
+
+logic next_read__split_discrs36 : read_status
+
+logic s__split_fields35 : us_main_type1
+
+logic state58 : int
+
+logic the_file36 : us_rep
+
+logic current_read__split_fields37 : character
+
+logic current_read__split_discrs37 : read_status
+
+logic current_line37 : int
+
+logic current_col37 : int
+
+logic current_pos37 : int
+
+logic next_read__split_fields37 : character
+
+logic next_read__split_discrs37 : read_status
+
+logic s__split_fields36 : us_main_type1
+
+logic state59 : int
+
+logic the_file37 : us_rep
+
+logic current_read__split_fields38 : character
+
+logic current_read__split_discrs38 : read_status
+
+logic current_line38 : int
+
+logic current_col38 : int
+
+logic current_pos38 : int
+
+logic next_read__split_fields38 : character
+
+logic next_read__split_discrs38 : read_status
+
+logic s__split_fields37 : us_main_type1
+
+logic state60 : int
+
+logic the_file38 : us_rep
+
+logic current_read__split_fields39 : character
+
+logic current_read__split_discrs39 : read_status
+
+logic current_line39 : int
+
+logic current_col39 : int
+
+logic current_pos39 : int
+
+logic next_read__split_fields39 : character
+
+logic next_read__split_discrs39 : read_status
+
+logic s__split_fields38 : us_main_type1
+
+logic state61 : int
+
+logic the_file39 : us_rep
+
+logic current_read__split_fields40 : character
+
+logic current_read__split_discrs40 : read_status
+
+logic current_line40 : int
+
+logic current_col40 : int
+
+logic current_pos40 : int
+
+logic next_read__split_fields40 : character
+
+logic next_read__split_discrs40 : read_status
+
+logic s__split_fields39 : us_main_type1
+
+logic state62 : int
+
+logic the_file40 : us_rep
+
+logic current_read__split_fields41 : character
+
+logic current_read__split_discrs41 : read_status
+
+logic current_line41 : int
+
+logic current_col41 : int
+
+logic current_pos41 : int
+
+logic next_read__split_fields41 : character
+
+logic next_read__split_discrs41 : read_status
+
+logic s__split_fields40 : us_main_type1
+
+logic state63 : int
+
+logic the_file41 : us_rep
+
+logic current_read__split_fields42 : character
+
+logic current_read__split_discrs42 : read_status
+
+logic current_line42 : int
+
+logic current_col42 : int
+
+logic current_pos42 : int
+
+logic next_read__split_fields42 : character
+
+logic next_read__split_discrs42 : read_status
+
+logic s__split_fields41 : us_main_type1
+
+logic state64 : int
+
+logic the_file42 : us_rep
+
+logic current_read__split_fields43 : character
+
+logic current_read__split_discrs43 : read_status
+
+logic current_line43 : int
+
+logic current_col43 : int
+
+logic current_pos43 : int
+
+logic next_read__split_fields43 : character
+
+logic next_read__split_discrs43 : read_status
+
+logic s__split_fields42 : us_main_type1
+
+logic state65 : int
+
+logic the_file43 : us_rep
+
+logic current_read__split_fields44 : character
+
+logic current_read__split_discrs44 : read_status
+
+logic current_line44 : int
+
+logic current_col44 : int
+
+logic current_pos44 : int
+
+logic next_read__split_fields44 : character
+
+logic next_read__split_discrs44 : read_status
+
+logic s__split_fields43 : us_main_type1
+
+logic state66 : int
+
+logic the_file44 : us_rep
+
+logic current_read__split_fields45 : character
+
+logic current_read__split_discrs45 : read_status
+
+logic current_line45 : int
+
+logic current_col45 : int
+
+logic current_pos45 : int
+
+logic next_read__split_fields45 : character
+
+logic next_read__split_discrs45 : read_status
+
+logic s__split_fields44 : us_main_type1
+
+logic state67 : int
+
+logic the_file45 : us_rep
+
+logic current_read__split_fields46 : character
+
+logic current_read__split_discrs46 : read_status
+
+logic current_line46 : int
+
+logic current_col46 : int
+
+logic current_pos46 : int
+
+logic next_read__split_fields46 : character
+
+logic next_read__split_discrs46 : read_status
+
+logic s__split_fields45 : us_main_type1
+
+logic state68 : int
+
+logic the_file46 : us_rep
+
+logic current_read__split_fields47 : character
+
+logic current_read__split_discrs47 : read_status
+
+logic current_line47 : int
+
+logic current_col47 : int
+
+logic current_pos47 : int
+
+logic next_read__split_fields47 : character
+
+logic next_read__split_discrs47 : read_status
+
+logic s__split_fields46 : us_main_type1
+
+logic state69 : int
+
+logic the_file47 : us_rep
+
+logic current_read__split_fields48 : character
+
+logic current_read__split_discrs48 : read_status
+
+logic current_line48 : int
+
+logic current_col48 : int
+
+logic current_pos48 : int
+
+logic next_read__split_fields48 : character
+
+logic next_read__split_discrs48 : read_status
+
+logic s__split_fields47 : us_main_type1
+
+logic result22 : int
+
+logic c11 : int
+
+logic the_file48 : us_rep
+
+logic current_read__split_fields49 : character
+
+logic current_read__split_discrs49 : read_status
+
+logic current_line49 : int
+
+logic current_col49 : int
+
+logic current_pos49 : int
+
+logic next_read__split_fields49 : character
+
+logic next_read__split_discrs49 : read_status
+
+logic s__split_fields48 : us_main_type1
+
+logic state70 : int
+
+logic the_file49 : us_rep
+
+logic current_read__split_fields50 : character
+
+logic current_read__split_discrs50 : read_status
+
+logic current_line50 : int
+
+logic current_col50 : int
+
+logic current_pos50 : int
+
+logic next_read__split_fields50 : character
+
+logic next_read__split_discrs50 : read_status
+
+logic s__split_fields49 : us_main_type1
+
+logic state71 : int
+
+logic the_file50 : us_rep
+
+logic current_read__split_fields51 : character
+
+logic current_read__split_discrs51 : read_status
+
+logic current_line51 : int
+
+logic current_col51 : int
+
+logic current_pos51 : int
+
+logic next_read__split_fields51 : character
+
+logic next_read__split_discrs51 : read_status
+
+logic s__split_fields50 : us_main_type1
+
+logic state72 : int
+
+logic c12 : int
+
+logic the_file51 : us_rep
+
+logic current_read__split_fields52 : character
+
+logic current_read__split_discrs52 : read_status
+
+logic current_line52 : int
+
+logic current_col52 : int
+
+logic current_pos52 : int
+
+logic next_read__split_fields52 : character
+
+logic next_read__split_discrs52 : read_status
+
+logic s__split_fields51 : us_main_type1
+
+logic state73 : int
+
+logic c13 : int
+
+logic the_file52 : us_rep
+
+logic current_read__split_fields53 : character
+
+logic current_read__split_discrs53 : read_status
+
+logic current_line53 : int
+
+logic current_col53 : int
+
+logic current_pos53 : int
+
+logic next_read__split_fields53 : character
+
+logic next_read__split_discrs53 : read_status
+
+logic s__split_fields52 : us_main_type1
+
+logic state74 : int
+
+logic c14 : int
+
+logic the_file53 : us_rep
+
+logic current_read__split_fields54 : character
+
+logic current_read__split_discrs54 : read_status
+
+logic current_line54 : int
+
+logic current_col54 : int
+
+logic current_pos54 : int
+
+logic next_read__split_fields54 : character
+
+logic next_read__split_discrs54 : read_status
+
+logic s__split_fields53 : us_main_type1
+
+logic state75 : int
+
+logic c15 : int
+
+logic the_file54 : us_rep
+
+logic current_read__split_fields55 : character
+
+logic current_read__split_discrs55 : read_status
+
+logic current_line55 : int
+
+logic current_col55 : int
+
+logic current_pos55 : int
+
+logic next_read__split_fields55 : character
+
+logic next_read__split_discrs55 : read_status
+
+logic s__split_fields54 : us_main_type1
+
+logic state76 : int
+
+logic c16 : int
+
+logic the_file55 : us_rep
+
+logic current_read__split_fields56 : character
+
+logic current_read__split_discrs56 : read_status
+
+logic current_line56 : int
+
+logic current_col56 : int
+
+logic current_pos56 : int
+
+logic next_read__split_fields56 : character
+
+logic next_read__split_discrs56 : read_status
+
+logic s__split_fields55 : us_main_type1
+
+logic state77 : int
+
+logic c17 : int
+
+logic the_file56 : us_rep
+
+logic current_read__split_fields57 : character
+
+logic current_read__split_discrs57 : read_status
+
+logic current_line57 : int
+
+logic current_col57 : int
+
+logic current_pos57 : int
+
+logic next_read__split_fields57 : character
+
+logic next_read__split_discrs57 : read_status
+
+logic s__split_fields56 : us_main_type1
+
+logic state78 : int
+
+logic c18 : int
+
+logic the_file57 : us_rep
+
+logic current_read__split_fields58 : character
+
+logic current_read__split_discrs58 : read_status
+
+logic current_line58 : int
+
+logic current_col58 : int
+
+logic current_pos58 : int
+
+logic next_read__split_fields58 : character
+
+logic next_read__split_discrs58 : read_status
+
+logic s__split_fields57 : us_main_type1
+
+logic state79 : int
+
+logic c19 : int
+
+logic result23 : int
+
+logic k2 : int
+
+logic result24 : (int,character) farray
+
+logic str2 : (int,character) farray
+
+logic t__split_fields60 : natural
+
+logic t__split_fields61 : natural
+
+logic t__split_fields62 : natural
+
+logic t__split_fields63 : name_id
+
+logic t__split_discrs15 : token_kind
+
+logic name_table2 : us_private
+
+logic t__split_fields64 : natural
+
+logic t__split_fields65 : natural
+
+logic t__split_fields66 : natural
+
+logic t__split_fields67 : name_id
+
+logic t__split_discrs16 : token_kind
+
+logic the_file58 : us_rep
+
+logic current_read__split_fields59 : character
+
+logic current_read__split_discrs59 : read_status
+
+logic current_line59 : int
+
+logic current_col59 : int
+
+logic current_pos59 : int
+
+logic next_read__split_fields59 : character
+
+logic next_read__split_discrs59 : read_status
+
+logic s__split_fields58 : us_main_type1
+
+logic first_line9 : int
+
+logic first_col9 : int
+
+logic first_pos9 : int
+
+logic state80 : int
+
+logic c20 : int
+
+logic k3 : int
+
+logic str3 : (int,character) farray
+
+logic name_table3 : us_private
+
+logic t__split_fields68 : natural
+
+logic t__split_fields69 : natural
+
+logic t__split_fields70 : natural
+
+logic t__split_fields71 : name_id
+
+logic t__split_discrs17 : token_kind
+
+logic the_file59 : us_rep
+
+logic current_read__split_fields60 : character
+
+logic current_read__split_discrs60 : read_status
+
+logic current_line60 : int
+
+logic current_col60 : int
+
+logic current_pos60 : int
+
+logic next_read__split_fields60 : character
+
+logic next_read__split_discrs60 : read_status
+
+logic s__split_fields59 : us_main_type1
+
+logic first_line10 : int
+
+logic first_col10 : int
+
+logic first_pos10 : int
+
+logic state81 : int
+
+logic c21 : int
+
+logic k4 : int
+
+logic str4 : (int,character) farray
+
+logic name_table4 : us_private
+
+logic t__split_fields72 : natural
+
+logic t__split_fields73 : natural
+
+logic t__split_fields74 : natural
+
+logic t__split_fields75 : name_id
+
+logic t__split_discrs18 : token_kind
+
+logic the_file60 : us_rep
+
+logic current_read__split_fields61 : character
+
+logic current_read__split_discrs61 : read_status
+
+logic current_line61 : int
+
+logic current_col61 : int
+
+logic current_pos61 : int
+
+logic next_read__split_fields61 : character
+
+logic next_read__split_discrs61 : read_status
+
+logic s__split_fields60 : us_main_type1
+
+logic first_line11 : int
+
+logic first_col11 : int
+
+logic first_pos11 : int
+
+logic state82 : int
+
+logic c22 : int
+
+logic k5 : int
+
+logic str5 : (int,character) farray
+
+logic name_table5 : us_private
+
+logic t__split_fields76 : natural
+
+logic t__split_fields77 : natural
+
+logic t__split_fields78 : natural
+
+logic t__split_fields79 : name_id
+
+logic t__split_discrs19 : token_kind
+
+logic the_file61 : us_rep
+
+logic current_read__split_fields62 : character
+
+logic current_read__split_discrs62 : read_status
+
+logic current_line62 : int
+
+logic current_col62 : int
+
+logic current_pos62 : int
+
+logic next_read__split_fields62 : character
+
+logic next_read__split_discrs62 : read_status
+
+logic s__split_fields61 : us_main_type1
+
+logic first_line12 : int
+
+logic first_col12 : int
+
+logic first_pos12 : int
+
+logic state83 : int
+
+logic c23 : int
+
+logic k6 : int
+
+logic str6 : (int,character) farray
+
+logic name_table6 : us_private
+
+axiom H : in_range8(the_filename)
+
+axiom H1 : (current_read__attr__constrained = false)
+
+axiom H2 : in_range2(current_line)
+
+axiom H3 : in_range4(current_col)
+
+axiom H4 : in_range4(current_pos)
+
+axiom H5 : (next_read__attr__constrained = false)
+
+axiom H6 : ((invariant__(name_table, { rec__file_io__read_result__c =
+  current_read__split_fields }, { rec__file_io__read_result__status =
+  current_read__split_discrs }, { rec__file_io__read_result__c =
+  next_read__split_fields }, { rec__file_io__read_result__status =
+  next_read__split_discrs }) = true) and (not (t__attr__constrained = true)))
+
+axiom H7 : ((to_rep4(s__split_discrs) = 32) and (is_empty({
+  us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
   us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
-  s__split_fields } }) = true)) -> ((32 = to_rep4(s__split_discrs)) ->
-  (((0 <= 2147483647) -> in_range4(first_line)) -> (((0 <= 2147483647) ->
-  in_range4(first_col)) -> (((0 <= 2147483647) -> in_range4(first_pos)) ->
-  (((0 <= 9) -> in_range11(state)) -> (((0 <= 255) -> in_range3(c)) ->
-  (((((temp___859 = first_col) and (((temp___858 = t__split_discrs) and
-  (((temp___8581 = t__split_fields) and ((temp___8582 = t__split_fields1) and
-  ((temp___8583 = t__split_fields2) and
-  (temp___8584 = t__split_fields3)))) and
-  (temp___8585 = t__attr__constrained))) and ((temp___857 = state) and
-  ((temp___856 = the_file) and ((temp___855 = first_line) and
-  (((temp___854 = next_read__split_discrs) and
-  ((temp___8541 = next_read__split_fields) and
-  (temp___8542 = next_read__attr__constrained))) and
-  (((temp___853 = s__split_discrs) and (temp___8531 = s__split_fields)) and
-  ((temp___852 = current_pos) and ((temp___851 = current_col) and
-  ((temp___850 = current_line) and ((temp___849 = first_pos) and
-  ((temp___848 = c) and (((temp___847 = current_read__split_discrs) and
-  ((temp___8471 = current_read__split_fields) and
-  (temp___8472 = current_read__attr__constrained))) and
-  ((((((((((0 <= 255) -> in_range3(c1)) and ((0 <= 2147483647) ->
+  s__split_fields } }) = true))
+
+axiom H8 : (32 = to_rep4(s__split_discrs))
+
+axiom H9 : ((0 <= 2147483647) -> in_range4(first_line))
+
+axiom H10 : ((0 <= 2147483647) -> in_range4(first_col))
+
+axiom H11 : ((0 <= 2147483647) -> in_range4(first_pos))
+
+axiom H12 : ((0 <= 9) -> in_range11(state))
+
+axiom H13 : ((0 <= 255) -> in_range3(c))
+
+axiom H14 : (temp___851 = first_col)
+
+axiom H15 : (temp___850 = state)
+
+axiom H16 : (temp___849 = the_file)
+
+axiom H17 : (temp___847 = first_line)
+
+axiom H18 : ((temp___848 = t__split_discrs) and
+  (((temp___8481 = t__split_fields) and ((temp___8482 = t__split_fields1) and
+  ((temp___8483 = t__split_fields2) and
+  (temp___8484 = t__split_fields3)))) and
+  (temp___8485 = t__attr__constrained)))
+
+axiom H19 : ((temp___846 = next_read__split_discrs) and
+  ((temp___8461 = next_read__split_fields) and
+  (temp___8462 = next_read__attr__constrained)))
+
+axiom H20 : ((temp___845 = s__split_discrs) and
+  (temp___8451 = s__split_fields))
+
+axiom H21 : (temp___844 = current_pos)
+
+axiom H22 : (temp___843 = current_col)
+
+axiom H23 : (temp___842 = current_line)
+
+axiom H24 : (temp___841 = first_pos)
+
+axiom H25 : (temp___840 = c)
+
+axiom H26 : ((temp___839 = current_read__split_discrs) and
+  ((temp___8391 = current_read__split_fields) and
+  (temp___8392 = current_read__attr__constrained)))
+
+axiom H27 : (((((((((0 <= 255) -> in_range3(c1)) and ((0 <= 2147483647) ->
   in_range4(first_pos1))) and in_range2(current_line1)) and
   in_range4(current_col1)) and in_range4(current_pos1)) and
   ((0 <= 2147483647) -> in_range4(first_line1))) and ((0 <= 9) ->
-  in_range11(state1))) and ((0 <= 2147483647) -> in_range4(first_col1))) and
-  (((local_invariant(current_read__split_fields1,
-  current_read__split_discrs1, next_read__split_fields1,
-  next_read__split_discrs1) = true) and ((in_range2(current_line2) and
-  in_range4(current_col2)) and in_range4(current_pos2))) and
-  (((not ((to_rep3((current_read__split_discrs1).rec__file_io__read_result__status) = 1) or
-  (to_rep3((current_read__split_discrs1).rec__file_io__read_result__status) = 2))) and
-  ((t__split_discrs2 = t__split_discrs1) and
-  (t__split_fields5 = t__split_fields4))) and (((result = { int__content =
-  first_line1 }) and (first_line2 = current_line2)) and (((result1 = {
-  int__content = first_col1 }) and (first_col2 = current_col2)) and
-  (((result2 = { int__content = first_pos1 }) and
-  (first_pos2 = current_pos2)) and (((result3 = { int__content = c1 }) and
-  (c2 = to_rep((current_read__split_fields1).rec__file_io__read_result__c))) and
-  ((length1({ us_split_discrs3 = {
+  in_range11(state1))) and ((0 <= 2147483647) -> in_range4(first_col1)))
+
+axiom H28 : ((local_invariant({ rec__file_io__read_result__c =
+  current_read__split_fields2 }, { rec__file_io__read_result__status =
+  current_read__split_discrs2 }, { rec__file_io__read_result__c =
+  next_read__split_fields2 }, { rec__file_io__read_result__status =
+  next_read__split_discrs2 }) = true) and ((in_range2(current_line2) and
+  in_range4(current_col2)) and in_range4(current_pos2)))
+
+axiom H29 : (not (to_rep3(current_read__split_discrs2) = 1))
+
+axiom H30 : (not (to_rep3(current_read__split_discrs2) = 2))
+
+axiom H31 : (t__split_discrs2 = t__split_discrs1)
+
+axiom H32 : ((t__split_fields8 = t__split_fields4) and
+  ((t__split_fields9 = t__split_fields5) and
+  ((t__split_fields10 = t__split_fields6) and
+  (t__split_fields11 = t__split_fields7))))
+
+axiom H33 : (result5 = first_line1)
+
+axiom H34 : (first_line2 = current_line2)
+
+axiom H35 : (result6 = first_col1)
+
+axiom H36 : (first_col2 = current_col2)
+
+axiom H37 : (result7 = first_pos1)
+
+axiom H38 : (first_pos2 = current_pos2)
+
+axiom H39 : (result8 = c1)
+
+axiom H40 : (c2 = to_rep(current_read__split_fields2))
+
+axiom H41 : (length1({ us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = s__split_fields1 }) = 0) and
-  (((((local_invariant(current_read__split_fields2,
-  current_read__split_discrs2, next_read__split_fields2,
-  next_read__split_discrs2) = true) and (length1({ us_split_discrs3 = {
+  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields2 } }) = 0)
+
+axiom H42 : ((((local_invariant({ rec__file_io__read_result__c =
+  current_read__split_fields3 }, { rec__file_io__read_result__status =
+  current_read__split_discrs3 }, { rec__file_io__read_result__c =
+  next_read__split_fields3 }, { rec__file_io__read_result__status =
+  next_read__split_discrs3 }) = true) and (length1({ us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = s__split_fields2 }) = (length1({ us_split_discrs3 = {
+  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields3 } }) = (length1({ us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = s__split_fields1 }) + 1))) and
-  (current_pos2 <= current_pos3)) and ((in_range2(current_line3) and
-  in_range4(current_col3)) and in_range4(current_pos3))) and
-  ((((state15 = state13) and ((t__split_discrs3 = {
-  us_split_discrs__content2 = t__split_discrs2 }) and (t__split_fields6 = {
-  us_split_fields__content2 = t__split_fields5 }))) and
-  ((state16 = state14) and ((t__split_discrs4 = t__split_discrs2) and
-  (t__split_fields7 = t__split_fields5)))) and ((not (c2 = 40)) and
-  ((not (c2 = 41)) and (((c2 = 124) and (((state13 = { int__content = state2
-  }) and (state14 = state2)) and ((result4 = { int__content = state1 }) and
-  (state2 = 1)))) or ((not (c2 = 124)) and (((state13 = state11) and
-  (state14 = state12)) and (((c2 = 35) and (((state11 = { int__content =
-  state3 }) and (state12 = state3)) and ((result5 = { int__content = state1
-  }) and (state3 = 5)))) or ((not (c2 = 35)) and (((state11 = state9) and
-  (state12 = state10)) and ((((48 <= c2) and (c2 <= 57)) and (((state9 = {
-  int__content = state4 }) and (state10 = state4)) and ((result6 = {
-  int__content = state1 }) and (state4 = 3)))) or ((not ((48 <= c2) and
-  (c2 <= 57))) and (((state9 = state7) and (state10 = state8)) and
-  (((((0 <= c2) and ((not (c2 <= 255)) -> ((0 <= c2) and (c2 <= 255)))) or
-  ((not (0 <= c2)) and ((0 <= c2) and (c2 <= 255)))) and (((state7 = {
-  int__content = state5 }) and (state8 = state5)) and ((result7 = {
-  int__content = state1 }) and (state5 = 0)))) or ((not (((0 <= c2) ->
-  ((not (c2 <= 255)) -> ((0 <= c2) and (c2 <= 255)))) and ((not (0 <= c2)) ->
-  ((0 <= c2) and (c2 <= 255))))) and (((state7 = { int__content = state6
-  }) and (state8 = state6)) and ((c2 = 34) and ((result8 = { int__content =
-  state1 }) and (state6 = 8)))))))))))))))))))))))))))))))))))))))) and
-  (((c3 = { int__content = c2 }) and ((state17 = state15) and
-  ((first_pos3 = { int__content = first_pos2 }) and ((first_col3 = {
-  int__content = first_col2 }) and ((first_line3 = { int__content =
-  first_line2 }) and ((s__split_fields3 = { us_split_fields__content1 =
-  s__split_fields2 }) and ((next_read__split_discrs3 = {
-  us_split_discrs__content = next_read__split_discrs2 }) and
-  ((next_read__split_fields3 = { us_split_fields__content =
-  next_read__split_fields2 }) and ((current_pos4 = { int__content =
-  current_pos3 }) and ((current_col4 = { int__content = current_col3 }) and
-  ((current_line4 = { int__content = current_line3 }) and
-  ((current_read__split_discrs3 = { us_split_discrs__content =
-  current_read__split_discrs2 }) and ((current_read__split_fields3 = {
-  us_split_fields__content = current_read__split_fields2 }) and
-  ((the_file2 = { file__content = the_file1 }) and
-  ((t__split_discrs5 = t__split_discrs3) and
-  (t__split_fields8 = t__split_fields6)))))))))))))))) and ((c4 = c2) and
-  ((state18 = state16) and ((first_pos4 = first_pos2) and
-  ((first_col4 = first_col2) and ((first_line4 = first_line2) and
-  ((s__split_fields4 = s__split_fields2) and
-  ((next_read__split_discrs4 = next_read__split_discrs2) and
-  ((next_read__split_fields4 = next_read__split_fields2) and
-  ((current_pos5 = current_pos3) and ((current_col5 = current_col3) and
-  ((current_line5 = current_line3) and
-  ((current_read__split_discrs4 = current_read__split_discrs2) and
-  ((current_read__split_fields4 = current_read__split_fields2) and
-  ((the_file3 = the_file1) and ((t__split_discrs6 = t__split_discrs4) and
-  (t__split_fields9 = t__split_fields7)))))))))))))))))) and (((c5 = c3) and
-  ((state19 = state17) and ((first_pos5 = first_pos3) and
-  ((first_col5 = first_col3) and ((first_line5 = first_line3) and
-  ((s__split_fields5 = s__split_fields3) and
-  ((next_read__split_discrs5 = next_read__split_discrs3) and
-  ((next_read__split_fields5 = next_read__split_fields3) and
-  ((current_pos6 = current_pos4) and ((current_col6 = current_col4) and
-  ((current_line6 = current_line4) and
-  ((current_read__split_discrs5 = current_read__split_discrs3) and
-  ((current_read__split_fields5 = current_read__split_fields3) and
-  ((the_file4 = the_file2) and ((t__split_discrs7 = t__split_discrs5) and
-  (t__split_fields10 = t__split_fields8)))))))))))))))) and ((c6 = c4) and
-  ((state20 = state18) and ((first_pos6 = first_pos4) and
-  ((first_col6 = first_col4) and ((first_line6 = first_line4) and
-  ((s__split_fields6 = s__split_fields4) and
-  ((next_read__split_discrs6 = next_read__split_discrs4) and
-  ((next_read__split_fields6 = next_read__split_fields4) and
-  ((current_pos7 = current_pos5) and ((current_col7 = current_col5) and
-  ((current_line7 = current_line5) and
-  ((current_read__split_discrs6 = current_read__split_discrs4) and
-  ((current_read__split_fields6 = current_read__split_fields4) and
-  ((the_file5 = the_file3) and ((t__split_discrs8 = t__split_discrs6) and
-  (t__split_fields11 = t__split_fields9)))))))))))))))))) ->
-  ((to_rep3(((current_read__split_discrs5).us_split_discrs__content).rec__file_io__read_result__status) = 0) ->
-  (((result9 = c5) and
-  (c7 = to_rep(((current_read__split_fields5).us_split_fields__content).rec__file_io__read_result__c))) ->
-  ((((((to_rep3((current_read__split_discrs7).rec__file_io__read_result__status) = 0) and
+  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields2 } }) + 1))) and (current_pos2 <= current_pos3)) and
+  ((in_range2(current_line3) and in_range4(current_col3)) and
+  in_range4(current_pos3)))
+
+axiom H43 : (state15 = state13)
+
+axiom H44 : (t__split_discrs7 = t__split_discrs2)
+
+axiom H45 : ((t__split_fields28 = t__split_fields8) and
+  ((t__split_fields29 = t__split_fields9) and
+  ((t__split_fields30 = t__split_fields10) and
+  (t__split_fields31 = t__split_fields11))))
+
+axiom H46 : (state16 = state14)
+
+axiom H47 : (t__split_discrs8 = t__split_discrs2)
+
+axiom H48 : ((t__split_fields32 = t__split_fields8) and
+  ((t__split_fields33 = t__split_fields9) and
+  ((t__split_fields34 = t__split_fields10) and
+  (t__split_fields35 = t__split_fields11))))
+
+axiom H49 : (not (c2 = 40))
+
+axiom H50 : (not (c2 = 41))
+
+axiom H51 : ((c2 = 124) -> (state13 = state2))
+
+axiom H52 : ((c2 = 124) -> (state14 = state2))
+
+axiom H53 : ((c2 = 124) -> (result9 = state1))
+
+axiom H54 : ((c2 = 124) -> (state2 = 1))
+
+axiom H55 : ((not (c2 = 124)) -> (state13 = state11))
+
+axiom H56 : ((not (c2 = 124)) -> (state14 = state12))
+
+axiom H57 : ((not (c2 = 124)) -> ((c2 = 35) -> (state11 = state3)))
+
+axiom H58 : ((not (c2 = 124)) -> ((c2 = 35) -> (state12 = state3)))
+
+axiom H59 : ((not (c2 = 124)) -> ((c2 = 35) -> (result10 = state1)))
+
+axiom H60 : ((not (c2 = 124)) -> ((c2 = 35) -> (state3 = 5)))
+
+axiom H61 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (state11 = state9)))
+
+axiom H62 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (state12 = state10)))
+
+axiom H63 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (((48 <= c2) and
+  (c2 <= 57)) -> (state9 = state4))))
+
+axiom H64 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (((48 <= c2) and
+  (c2 <= 57)) -> (state10 = state4))))
+
+axiom H65 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (((48 <= c2) and
+  (c2 <= 57)) -> (result11 = state1))))
+
+axiom H66 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> (((48 <= c2) and
+  (c2 <= 57)) -> (state4 = 3))))
+
+axiom H67 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> (state9 = state7))))
+
+axiom H68 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> (state10 = state8))))
+
+axiom H69 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((((0 <= c2) and ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) or ((not (0 <= c2)) and ((0 <= c2) and (c2 <= 255)))) ->
+  (state7 = state5)))))
+
+axiom H70 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((((0 <= c2) and ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) or ((not (0 <= c2)) and ((0 <= c2) and (c2 <= 255)))) ->
+  (state8 = state5)))))
+
+axiom H71 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((((0 <= c2) and ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) or ((not (0 <= c2)) and ((0 <= c2) and (c2 <= 255)))) ->
+  (result12 = state1)))))
+
+axiom H72 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((((0 <= c2) and ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) or ((not (0 <= c2)) and ((0 <= c2) and (c2 <= 255)))) ->
+  (state5 = 0)))))
+
+axiom H73 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((not (((0 <= c2) -> ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) and ((not (0 <= c2)) -> ((0 <= c2) and (c2 <= 255))))) ->
+  (state7 = state6)))))
+
+axiom H74 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((not (((0 <= c2) -> ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) and ((not (0 <= c2)) -> ((0 <= c2) and (c2 <= 255))))) ->
+  (state8 = state6)))))
+
+axiom H75 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((not (((0 <= c2) -> ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) and ((not (0 <= c2)) -> ((0 <= c2) and (c2 <= 255))))) ->
+  (c2 = 34)))))
+
+axiom H76 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((not (((0 <= c2) -> ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) and ((not (0 <= c2)) -> ((0 <= c2) and (c2 <= 255))))) ->
+  (result13 = state1)))))
+
+axiom H77 : ((not (c2 = 124)) -> ((not (c2 = 35)) -> ((not ((48 <= c2) and
+  (c2 <= 57))) -> ((not (((0 <= c2) -> ((not (c2 <= 255)) -> ((0 <= c2) and
+  (c2 <= 255)))) and ((not (0 <= c2)) -> ((0 <= c2) and (c2 <= 255))))) ->
+  (state6 = 8)))))
+
+axiom H78 : (c5 = c2)
+
+axiom H79 : (state17 = state15)
+
+axiom H80 : (first_pos5 = first_pos2)
+
+axiom H81 : (first_col5 = first_col2)
+
+axiom H82 : (first_line5 = first_line2)
+
+axiom H83 : (s__split_fields6 = s__split_fields3)
+
+axiom H84 : (next_read__split_discrs6 = next_read__split_discrs3)
+
+axiom H85 : (next_read__split_fields6 = next_read__split_fields3)
+
+axiom H86 : (current_pos6 = current_pos3)
+
+axiom H87 : (current_col6 = current_col3)
+
+axiom H88 : (current_line6 = current_line3)
+
+axiom H89 : (current_read__split_discrs6 = current_read__split_discrs3)
+
+axiom H90 : (current_read__split_fields6 = current_read__split_fields3)
+
+axiom H91 : (the_file5 = the_file2)
+
+axiom H92 : (t__split_discrs11 = t__split_discrs7)
+
+axiom H93 : ((t__split_fields44 = t__split_fields28) and
+  ((t__split_fields45 = t__split_fields29) and
+  ((t__split_fields46 = t__split_fields30) and
+  (t__split_fields47 = t__split_fields31))))
+
+axiom H94 : (c6 = c2)
+
+axiom H95 : (state18 = state16)
+
+axiom H96 : (first_pos6 = first_pos2)
+
+axiom H97 : (first_col6 = first_col2)
+
+axiom H98 : (first_line6 = first_line2)
+
+axiom H99 : (s__split_fields7 = s__split_fields3)
+
+axiom H100 : (next_read__split_discrs7 = next_read__split_discrs3)
+
+axiom H101 : (next_read__split_fields7 = next_read__split_fields3)
+
+axiom H102 : (current_pos7 = current_pos3)
+
+axiom H103 : (current_col7 = current_col3)
+
+axiom H104 : (current_line7 = current_line3)
+
+axiom H105 : (current_read__split_discrs7 = current_read__split_discrs3)
+
+axiom H106 : (current_read__split_fields7 = current_read__split_fields3)
+
+axiom H107 : (the_file6 = the_file2)
+
+axiom H108 : (t__split_discrs12 = t__split_discrs8)
+
+axiom H109 : ((t__split_fields48 = t__split_fields32) and
+  ((t__split_fields49 = t__split_fields33) and
+  ((t__split_fields50 = t__split_fields34) and
+  (t__split_fields51 = t__split_fields35))))
+
+axiom H110 : (c7 = c5)
+
+axiom H111 : (state19 = state17)
+
+axiom H112 : (first_pos7 = first_pos5)
+
+axiom H113 : (first_col7 = first_col5)
+
+axiom H114 : (first_line7 = first_line5)
+
+axiom H115 : (s__split_fields8 = s__split_fields6)
+
+axiom H116 : (next_read__split_discrs8 = next_read__split_discrs6)
+
+axiom H117 : (next_read__split_fields8 = next_read__split_fields6)
+
+axiom H118 : (current_pos8 = current_pos6)
+
+axiom H119 : (current_col8 = current_col6)
+
+axiom H120 : (current_line8 = current_line6)
+
+axiom H121 : (current_read__split_discrs8 = current_read__split_discrs6)
+
+axiom H122 : (current_read__split_fields8 = current_read__split_fields6)
+
+axiom H123 : (the_file7 = the_file5)
+
+axiom H124 : (t__split_discrs13 = t__split_discrs11)
+
+axiom H125 : ((t__split_fields52 = t__split_fields44) and
+  ((t__split_fields53 = t__split_fields45) and
+  ((t__split_fields54 = t__split_fields46) and
+  (t__split_fields55 = t__split_fields47))))
+
+axiom H126 : (c8 = c6)
+
+axiom H127 : (state20 = state18)
+
+axiom H128 : (first_pos8 = first_pos6)
+
+axiom H129 : (first_col8 = first_col6)
+
+axiom H130 : (first_line8 = first_line6)
+
+axiom H131 : (s__split_fields9 = s__split_fields7)
+
+axiom H132 : (next_read__split_discrs9 = next_read__split_discrs7)
+
+axiom H133 : (next_read__split_fields9 = next_read__split_fields7)
+
+axiom H134 : (current_pos9 = current_pos7)
+
+axiom H135 : (current_col9 = current_col7)
+
+axiom H136 : (current_line9 = current_line7)
+
+axiom H137 : (current_read__split_discrs9 = current_read__split_discrs7)
+
+axiom H138 : (current_read__split_fields9 = current_read__split_fields7)
+
+axiom H139 : (the_file8 = the_file6)
+
+axiom H140 : (t__split_discrs14 = t__split_discrs12)
+
+axiom H141 : ((t__split_fields56 = t__split_fields48) and
+  ((t__split_fields57 = t__split_fields49) and
+  ((t__split_fields58 = t__split_fields50) and
+  (t__split_fields59 = t__split_fields51))))
+
+axiom H142 : (to_rep3(current_read__split_discrs8) = 0)
+
+axiom H143 : (result14 = c7)
+
+axiom H144 : (c9 = to_rep(current_read__split_fields8))
+
+axiom H145 : (((((to_rep3(current_read__split_discrs10) = 0) and
   (in_range12(state21) -> (not (((2 <= state21) and (state21 <= 2)) or
   ((9 <= state21) and (state21 <= 9)))))) and (1 <= length1({
   us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = s__split_fields7 }))) and
-  ((first_pos5).int__content <= current_pos8)) and (((state21 = 6) or
-  (state21 = 7)) -> (2 <= length1({ us_split_discrs3 = {
+  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields10 } }))) and (first_pos7 <= current_pos10)) and
+  (((state21 = 6) or (state21 = 7)) -> (2 <= length1({ us_split_discrs3 = {
   rec__unbounded_strings__char_vectors__vector__capacity = s__split_discrs };
-  us_split_fields3 = s__split_fields7 })))) -> (((((((0 <= 255) ->
-  in_range3(c8)) and in_range2(current_line8)) and
-  in_range4(current_col8)) and in_range4(current_pos8)) and ((0 <= 9) ->
-  in_range11(state21))) -> ((not (state21 = 3)) -> ((not (state21 = 4)) ->
-  ((not (state21 = 5)) -> ((not (state21 = 6)) -> ((not (state21 = 7)) ->
-  ((not (state21 = 0)) -> ((not (state21 = 1)) ->
-  (state21 = 8))))))))))))))))))))))))))))
+  us_split_fields3 = { rec__unbounded_strings__char_vectors__vector =
+  s__split_fields10 } }))))
+
+axiom H146 : ((((((0 <= 255) -> in_range3(c10)) and
+  in_range2(current_line10)) and in_range4(current_col10)) and
+  in_range4(current_pos10)) and ((0 <= 9) -> in_range11(state21)))
+
+axiom H147 : (not (state21 = 3))
+
+axiom H148 : (not (state21 = 4))
+
+axiom H149 : (not (state21 = 5))
+
+axiom H150 : (not (state21 = 6))
+
+axiom H151 : (not (state21 = 7))
+
+axiom H152 : (not (state21 = 0))
+
+axiom H153 : (not (state21 = 1))
+
+axiom H154 : (not (state21 = 8))
+
+ (* File "lexer.ads", line 65, characters 0-0 *)
+goal WP_parameter_def : false

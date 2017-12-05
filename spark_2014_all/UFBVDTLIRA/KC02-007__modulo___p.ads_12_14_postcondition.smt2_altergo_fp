@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -655,16 +655,59 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : t
+
+logic p__g__result : int
+
+logic result : t
+
+logic y1 : t
+
+logic result1 : int
+
+logic p__g__result1 : int
+
+logic p__g__result2 : int
+
+logic p__g__result3 : int
+
+logic y2 : t
+
+logic p__g__result4 : int
+
+logic y3 : t
+
+logic p__g__result5 : int
+
+logic result2 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (x = of_int(15))
+
+axiom H2 : (result = y)
+
+axiom H3 : (y1 = urem(add(x, of_int(2)), of_int(16)))
+
+axiom H4 : in_range(y1)
+
+axiom H5 : (p__g__result1 = p__g__result2)
+
+axiom H6 : (p__g__result3 = p__g__result1)
+
+axiom H7 : (result1 = p__g__result)
+
+axiom H8 : (p__g__result1 = tqtint(y1))
+
+axiom H9 : (p__g__result4 = p__g__result2)
+
+axiom H10 : (y2 = y1)
+
+axiom H11 : (p__g__result5 = p__g__result3)
+
+axiom H12 : (y3 = y1)
+
+axiom H13 : (result2 = p__g__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t. forall p__g__result:int. forall result:t. forall y1:t.
-  forall result1:int. forall p__g__result1:int. forall p__g__result2:int.
-  forall p__g__result3:int. forall y2:t. forall p__g__result4:int.
-  forall y3:t. forall p__g__result5:int.
-  (forall result2:int. ((in_range(x) and ((x = of_int(15)) and
-  (((((result = y) and (y1 = urem(add(x, of_int(2)), of_int(16)))) and
-  (in_range(y1) and (((p__g__result1 = p__g__result2) and
-  (p__g__result3 = p__g__result1)) and ((result1 = p__g__result) and
-  (p__g__result1 = tqtint(y1)))))) and (((p__g__result4 = p__g__result2) and
-  (y2 = y1)) and ((p__g__result5 = p__g__result3) and (y3 = y1)))) and
-  (result2 = p__g__result4)))) -> (p__g__result4 = 1))))
+goal WP_parameter_def : (p__g__result4 = 1)

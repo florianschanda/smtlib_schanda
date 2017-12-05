@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -161,7 +161,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type tindex_countB
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq4 : int, int -> bool
 
@@ -388,7 +388,7 @@ function interval__ref___projection(a: interval__ref) : us_rep =
 
 type tpartition_indexB
 
-predicate in_range6(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range6(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq8 : int, int -> bool
 
@@ -939,7 +939,7 @@ logic attr__ATTRIBUTE_ADDRESS11 : int
 
 type extended_index
 
-predicate in_range10(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range10(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq15 : int, int -> bool
 
@@ -967,11 +967,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq11(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq7(get(a, n), get(b, n)) = true))) ->
   (user_eq11(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq7(get(a, n), get(b, n)) = true)))) ->
   (user_eq11(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -991,7 +991,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range11(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range11(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq16 : int, int -> bool
 
@@ -1017,80 +1017,1290 @@ function extended_index__ref___4__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range2(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range2(length1(container))))
 
 axiom get__post_axiom : true
 
+logic p__split_fields : us_main_type
+
+logic f : (int,partition_index) farray
+
+logic p_elem__split_fields : index
+
+logic p_elem__split_fields1 : index
+
+logic p_elem__split_fields2 : index_count
+
+logic p_prime__split_fields : index
+
+logic p_prime__split_fields1 : index
+
+logic p_prime__split_fields2 : index_count
+
+logic p_prime_index : int
+
+logic j : int
+
+logic i : int
+
+logic j1 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic k : int
+
+logic o3 : int
+
+logic o4 : index
+
+logic o5 : index
+
+logic o6 : index_count
+
+logic o7 : index
+
+logic o8 : index
+
+logic o9 : index_count
+
+logic o10 : index
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : index
+
+logic o14 : index
+
+logic o15 : index_count
+
+logic o16 : index
+
+logic o17 : index
+
+logic o18 : index_count
+
+logic o19 : index
+
+logic o20 : int
+
+logic o21 : bool
+
+logic o22 : bool
+
+logic j2 : int
+
+logic o23 : index
+
+logic o24 : index
+
+logic o25 : index_count
+
+logic o26 : index
+
+logic o27 : index
+
+logic o28 : index_count
+
+logic o29 : index
+
+logic o30 : index
+
+logic o31 : index_count
+
+logic o32 : index
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic partition_refinement__make_new_partitions__L_1__R50b__assume : int
+
+logic temp___1226 : int
+
+logic temp___1225 : int
+
+logic temp___1232 : int
+
+logic temp___1231 : index
+
+logic temp___12311 : index
+
+logic temp___12312 : index_count
+
+logic temp___1229 : (int,partition_index) farray
+
+logic temp___1228 : index
+
+logic temp___12281 : index
+
+logic temp___12282 : index_count
+
+logic temp___1227 : capacity_range
+
+logic temp___12271 : us_main_type
+
+logic temp___1212 : index
+
+logic temp___12121 : index
+
+logic temp___12122 : index_count
+
+logic o41 : int
+
+logic o42 : index_count
+
+logic o43 : index
+
+logic o44 : index
+
+logic o45 : index
+
+logic o46 : index_count
+
+logic temp___1213 : index
+
+logic temp___12131 : index
+
+logic temp___12132 : index_count
+
+logic o47 : int
+
+logic o48 : index
+
+logic o49 : index
+
+logic o50 : index
+
+logic o51 : index_count
+
+logic temp___1215 : index
+
+logic temp___12151 : index
+
+logic temp___12152 : index_count
+
+logic o52 : index_count
+
+logic o53 : index
+
+logic o54 : index
+
+logic o55 : index_count
+
+logic temp___1217 : index
+
+logic temp___12171 : index
+
+logic temp___12172 : index_count
+
+logic partition_refinement__make_new_partitions__B_2__save_length__assume : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : index
+
+logic o62 : index
+
+logic o63 : index_count
+
+logic temp___1222 : int
+
+logic temp___1220 : (int,partition_index) farray
+
+logic o64 : partition_index
+
+logic o65 : (int,partition_index) farray
+
+logic k1 : int
+
+logic k2 : int
+
+logic o66 : int
+
+logic o67 : partition_index
+
+logic o68 : int
+
+logic k3 : int
+
+logic us : int
+
+logic o69 : int
+
+logic o70 : bool
+
+logic o71 : int
+
+logic o72 : partition_index
+
+logic o73 : int
+
+logic o74 : partition_index
+
+logic o75 : (int,partition_index) farray
+
+logic k4 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic k5 : int
+
+logic o78 : int
+
+logic o79 : partition_index
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic o83 : bool
+
+logic k6 : int
+
+logic o84 : int
+
+logic o85 : partition_index
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : bool
+
+logic k7 : int
+
+logic o90 : int
+
+logic o91 : partition_index
+
+logic o92 : int
+
+logic o93 : index
+
+logic o94 : index
+
+logic o95 : index_count
+
+logic k8 : int
+
+logic o96 : int
+
+logic o97 : partition_index
+
+logic o98 : int
+
+logic o99 : index
+
+logic o100 : index
+
+logic o101 : index_count
+
+logic o102 : int
+
+logic o103 : partition_index
+
+logic o104 : int
+
+logic o105 : index
+
+logic o106 : index
+
+logic o107 : index_count
+
+logic o108 : index
+
+logic o109 : index
+
+logic o110 : index_count
+
+logic o111 : index
+
+logic o112 : int
+
+logic o113 : bool
+
+logic k9 : int
+
+logic o114 : int
+
+logic o115 : partition_index
+
+logic o116 : int
+
+logic o117 : index
+
+logic o118 : index
+
+logic o119 : index_count
+
+logic k10 : int
+
+logic o120 : int
+
+logic o121 : partition_index
+
+logic o122 : int
+
+logic o123 : index
+
+logic o124 : index
+
+logic o125 : index_count
+
+logic o126 : int
+
+logic o127 : partition_index
+
+logic o128 : int
+
+logic o129 : index
+
+logic o130 : index
+
+logic o131 : index_count
+
+logic o132 : index
+
+logic o133 : index
+
+logic o134 : index_count
+
+logic o135 : index
+
+logic o136 : int
+
+logic o137 : bool
+
+logic k11 : int
+
+logic o138 : int
+
+logic o139 : partition_index
+
+logic o140 : int
+
+logic o141 : index
+
+logic o142 : index
+
+logic o143 : index_count
+
+logic o144 : int
+
+logic o145 : partition_index
+
+logic o146 : int
+
+logic o147 : index
+
+logic o148 : index
+
+logic o149 : index_count
+
+logic o150 : index
+
+logic o151 : index
+
+logic o152 : index_count
+
+logic o153 : index
+
+logic o154 : int
+
+logic o155 : bool
+
+logic k12 : int
+
+logic o156 : int
+
+logic o157 : partition_index
+
+logic o158 : int
+
+logic o159 : index
+
+logic o160 : index
+
+logic o161 : index_count
+
+logic o162 : int
+
+logic o163 : partition_index
+
+logic o164 : int
+
+logic o165 : index
+
+logic o166 : index
+
+logic o167 : index_count
+
+logic o168 : index
+
+logic o169 : index
+
+logic o170 : index_count
+
+logic o171 : index
+
+logic o172 : int
+
+logic o173 : bool
+
+logic k13 : int
+
+logic l : int
+
+logic o174 : int
+
+logic o175 : index
+
+logic o176 : index
+
+logic o177 : index_count
+
+logic o178 : int
+
+logic o179 : index
+
+logic o180 : index
+
+logic o181 : index_count
+
+logic o182 : int
+
+logic o183 : index
+
+logic o184 : index
+
+logic o185 : index_count
+
+logic o186 : index
+
+logic o187 : index
+
+logic o188 : index_count
+
+logic o189 : index
+
+logic o190 : int
+
+logic o191 : int
+
+logic o192 : index
+
+logic o193 : index
+
+logic o194 : index_count
+
+logic o195 : index
+
+logic o196 : index
+
+logic o197 : index_count
+
+logic o198 : index
+
+logic o199 : int
+
+logic o200 : bool
+
+logic o201 : bool
+
+logic l1 : int
+
+logic o202 : int
+
+logic o203 : index
+
+logic o204 : index
+
+logic o205 : index_count
+
+logic o206 : int
+
+logic o207 : index
+
+logic o208 : index
+
+logic o209 : index_count
+
+logic o210 : int
+
+logic o211 : index
+
+logic o212 : index
+
+logic o213 : index_count
+
+logic o214 : index
+
+logic o215 : index
+
+logic o216 : index_count
+
+logic o217 : index
+
+logic o218 : int
+
+logic o219 : int
+
+logic o220 : index
+
+logic o221 : index
+
+logic o222 : index_count
+
+logic o223 : index
+
+logic o224 : index
+
+logic o225 : index_count
+
+logic o226 : index
+
+logic o227 : int
+
+logic o228 : bool
+
+logic o229 : bool
+
+logic k14 : int
+
+logic o230 : int
+
+logic o231 : int
+
+logic o232 : int
+
+logic o233 : bool
+
+logic o234 : bool
+
+logic l2 : int
+
+logic o235 : int
+
+logic o236 : index
+
+logic o237 : index
+
+logic o238 : index_count
+
+logic o239 : int
+
+logic o240 : index
+
+logic o241 : index
+
+logic o242 : index_count
+
+logic o243 : int
+
+logic o244 : index
+
+logic o245 : index
+
+logic o246 : index_count
+
+logic o247 : index
+
+logic o248 : index
+
+logic o249 : index_count
+
+logic o250 : index
+
+logic o251 : int
+
+logic o252 : int
+
+logic o253 : index
+
+logic o254 : index
+
+logic o255 : index_count
+
+logic o256 : index
+
+logic o257 : index
+
+logic o258 : index_count
+
+logic o259 : index
+
+logic o260 : int
+
+logic o261 : bool
+
+logic o262 : bool
+
+logic k15 : int
+
+logic o263 : index
+
+logic o264 : index
+
+logic o265 : index_count
+
+logic o266 : index
+
+logic o267 : index
+
+logic o268 : index_count
+
+logic o269 : index
+
+logic o270 : index
+
+logic o271 : index_count
+
+logic o272 : index
+
+logic o273 : int
+
+logic o274 : bool
+
+logic k16 : int
+
+logic o275 : int
+
+logic o276 : int
+
+logic o277 : bool
+
+logic l3 : int
+
+logic o278 : int
+
+logic o279 : index
+
+logic o280 : index
+
+logic o281 : index_count
+
+logic o282 : int
+
+logic o283 : index
+
+logic o284 : index
+
+logic o285 : index_count
+
+logic o286 : int
+
+logic o287 : index
+
+logic o288 : index
+
+logic o289 : index_count
+
+logic o290 : index
+
+logic o291 : index
+
+logic o292 : index_count
+
+logic o293 : index
+
+logic o294 : int
+
+logic o295 : int
+
+logic o296 : index
+
+logic o297 : index
+
+logic o298 : index_count
+
+logic o299 : index
+
+logic o300 : index
+
+logic o301 : index_count
+
+logic o302 : index
+
+logic o303 : int
+
+logic o304 : bool
+
+logic o305 : bool
+
+logic j3 : int
+
+logic o306 : int
+
+logic o307 : int
+
+logic o308 : bool
+
+logic k17 : int
+
+logic o309 : int
+
+logic o310 : index
+
+logic o311 : index
+
+logic o312 : index_count
+
+logic o313 : index
+
+logic o314 : index
+
+logic o315 : index_count
+
+logic o316 : index
+
+logic o317 : int
+
+logic o318 : int
+
+logic o319 : index
+
+logic o320 : index
+
+logic o321 : index_count
+
+logic o322 : index
+
+logic o323 : index
+
+logic o324 : index_count
+
+logic o325 : index
+
+logic o326 : int
+
+logic o327 : bool
+
+logic o328 : bool
+
+logic j4 : int
+
+logic o329 : index
+
+logic o330 : index
+
+logic o331 : index_count
+
+logic o332 : index
+
+logic o333 : index
+
+logic o334 : index_count
+
+logic o335 : index
+
+logic o336 : index
+
+logic o337 : index_count
+
+logic o338 : index
+
+logic o339 : int
+
+logic o340 : bool
+
+logic p__split_fields1 : us_main_type
+
+logic f1 : (int,partition_index) farray
+
+logic p_elem__split_fields3 : index
+
+logic p_elem__split_fields4 : index
+
+logic p_elem__split_fields5 : index_count
+
+logic p_prime__split_fields3 : index
+
+logic p_prime__split_fields4 : index
+
+logic p_prime__split_fields5 : index_count
+
+logic p_prime_index1 : int
+
+logic i1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic j5 : int
+
+logic p__split_fields2 : us_main_type
+
+logic f2 : (int,partition_index) farray
+
+logic p_elem__split_fields6 : index
+
+logic p_elem__split_fields7 : index
+
+logic p_elem__split_fields8 : index_count
+
+logic p_prime__split_fields6 : index
+
+logic p_prime__split_fields7 : index
+
+logic p_prime__split_fields8 : index_count
+
+logic p_prime_index2 : int
+
+logic j6 : int
+
+logic i2 : int
+
+logic rho : us_main_type
+
+logic rho1 : us_main_type
+
+logic result7 : index
+
+logic result8 : index
+
+logic result9 : index_count
+
+logic p_elem__split_fields9 : index
+
+logic p_elem__split_fields10 : index
+
+logic p_elem__split_fields11 : index_count
+
+logic result10 : index
+
+logic result11 : index
+
+logic result12 : index_count
+
+logic p_prime__split_fields9 : index
+
+logic p_prime__split_fields10 : index
+
+logic p_prime__split_fields11 : index_count
+
+logic result13 : index
+
+logic result14 : index
+
+logic result15 : index_count
+
+logic p_elem__split_fields12 : index
+
+logic p_elem__split_fields13 : index
+
+logic p_elem__split_fields14 : index_count
+
+logic result16 : index
+
+logic result17 : index
+
+logic result18 : index_count
+
+logic p_elem__split_fields15 : index
+
+logic p_elem__split_fields16 : index
+
+logic p_elem__split_fields17 : index_count
+
+logic partition_refinement__partitions__replace_element__container__fields : us_main_type
+
+logic result19 : us_main_type
+
+logic p__split_fields3 : us_main_type
+
+logic result20 : int
+
+logic p_prime_index3 : int
+
+logic partition_refinement__partitions__append__2__container__fields : us_main_type
+
+logic result21 : us_main_type
+
+logic p__split_fields4 : us_main_type
+
+logic result22 : int
+
+logic i3 : int
+
+logic result23 : (int,partition_index) farray
+
+logic f3 : (int,partition_index) farray
+
+logic f4 : (int,partition_index) farray
+
+logic i4 : int
+
+logic result24 : bool
+
+logic result25 : int
+
+logic i5 : int
+
+logic result26 : (int,partition_index) farray
+
+logic f5 : (int,partition_index) farray
+
+logic f6 : (int,partition_index) farray
+
+logic i6 : int
+
+logic f7 : (int,partition_index) farray
+
+logic i7 : int
+
+logic f8 : (int,partition_index) farray
+
+logic i8 : int
+
+logic f9 : (int,partition_index) farray
+
+logic i9 : int
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic result30 : bool
+
+logic p__split_fields5 : us_main_type
+
+logic f10 : (int,partition_index) farray
+
+logic p_elem__split_fields18 : index
+
+logic p_elem__split_fields19 : index
+
+logic p_elem__split_fields20 : index_count
+
+logic p_prime__split_fields12 : index
+
+logic p_prime__split_fields13 : index
+
+logic p_prime__split_fields14 : index_count
+
+logic p_prime_index4 : int
+
+logic i10 : int
+
+logic p__split_fields6 : us_main_type
+
+logic f11 : (int,partition_index) farray
+
+logic p_elem__split_fields21 : index
+
+logic p_elem__split_fields22 : index
+
+logic p_elem__split_fields23 : index_count
+
+logic p_prime__split_fields15 : index
+
+logic p_prime__split_fields16 : index
+
+logic p_prime__split_fields17 : index_count
+
+logic p_prime_index5 : int
+
+logic i11 : int
+
+logic rho2 : us_main_type
+
+logic rho3 : us_main_type
+
+logic result31 : bool
+
+logic result32 : bool
+
+logic p__split_fields7 : us_main_type
+
+logic f12 : (int,partition_index) farray
+
+logic p_elem__split_fields24 : index
+
+logic p_elem__split_fields25 : index
+
+logic p_elem__split_fields26 : index_count
+
+logic p_prime__split_fields18 : index
+
+logic p_prime__split_fields19 : index
+
+logic p_prime__split_fields20 : index_count
+
+logic p_prime_index6 : int
+
+logic j7 : int
+
+logic i12 : int
+
+logic p__split_fields8 : us_main_type
+
+logic f13 : (int,partition_index) farray
+
+logic p_elem__split_fields27 : index
+
+logic p_elem__split_fields28 : index
+
+logic p_elem__split_fields29 : index_count
+
+logic p_prime__split_fields21 : index
+
+logic p_prime__split_fields22 : index
+
+logic p_prime__split_fields23 : index_count
+
+logic p_prime_index7 : int
+
+logic j8 : int
+
+logic i13 : int
+
+logic p__split_fields9 : us_main_type
+
+logic f14 : (int,partition_index) farray
+
+logic p_elem__split_fields30 : index
+
+logic p_elem__split_fields31 : index
+
+logic p_elem__split_fields32 : index_count
+
+logic p_prime__split_fields24 : index
+
+logic p_prime__split_fields25 : index
+
+logic p_prime__split_fields26 : index_count
+
+logic p_prime_index8 : int
+
+logic j9 : int
+
+logic i14 : int
+
+logic p__split_fields10 : us_main_type
+
+logic f15 : (int,partition_index) farray
+
+logic p_elem__split_fields33 : index
+
+logic p_elem__split_fields34 : index
+
+logic p_elem__split_fields35 : index_count
+
+logic p_prime__split_fields27 : index
+
+logic p_prime__split_fields28 : index
+
+logic p_prime__split_fields29 : index_count
+
+logic p_prime_index9 : int
+
+logic j10 : int
+
+logic i15 : int
+
+logic p__split_fields11 : us_main_type
+
+logic f16 : (int,partition_index) farray
+
+logic p_elem__split_fields36 : index
+
+logic p_elem__split_fields37 : index
+
+logic p_elem__split_fields38 : index_count
+
+logic p_prime__split_fields30 : index
+
+logic p_prime__split_fields31 : index
+
+logic p_prime__split_fields32 : index_count
+
+logic p_prime_index10 : int
+
+logic j11 : int
+
+logic i16 : int
+
+logic p__split_fields12 : us_main_type
+
+logic f17 : (int,partition_index) farray
+
+logic p_elem__split_fields39 : index
+
+logic p_elem__split_fields40 : index
+
+logic p_elem__split_fields41 : index_count
+
+logic p_prime__split_fields33 : index
+
+logic p_prime__split_fields34 : index
+
+logic p_prime__split_fields35 : index_count
+
+logic p_prime_index11 : int
+
+logic j12 : int
+
+logic i17 : int
+
+logic result33 : bool
+
+logic result34 : bool
+
+logic result35 : bool
+
+logic result36 : bool
+
+axiom H : ((((of_int(1) = true) -> (o38 = to_rep3(p__split_discrs))) and
+  ((not (of_int(1) = true)) -> (o38 = 10001))) and (in_range9(o38) and
+  (((of_int(1) = true) -> (o38 = to_rep3(p__split_discrs))) and
+  ((not (of_int(1) = true)) -> (o38 = 10001)))))
+
+axiom H1 : ((o36 = length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } })) and (in_range9(o36) and (((of_int(1) = true) ->
+  (o36 <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o36 <= 10001)))))
+
+axiom H2 : (o37 = (2 * o36))
+
+axiom H3 : ((o39 = o37) and in_range1(o37))
+
+axiom H4 : (((o39 <= o38) -> (result = true)) and ((not (o39 <= o38)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((o35 = length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } })) and (in_range9(o35) and (((of_int(1) = true) ->
+  (o35 <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o35 <= 10001)))))
+
+axiom H7 : (((o35 <= 5000) -> (result1 = true)) and ((not (o35 <= 5000)) ->
+  (result1 = false)))
+
+axiom H8 : (result1 = true)
+
+axiom H9 : ((result2 = true) <->
+  (forall j13:int. (((0 <= j13) and (j13 <= 5)) ->
+  ((0 <= to_rep2((f[j13]))) and (to_rep2((f[j13])) <= (length({
+  us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } }) - 1))))))
+
+axiom H10 : (result2 = true)
+
+axiom H11 : ((result3 = true) <->
+  (forall j13:int. (((0 <= j13) and (j13 <= 5)) -> ((to_rep1(((get(model__({
+  us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } }),
+  to_rep2((f[j13])))).us_split_fields1).rec__partition_refinement__interval__first) <= j13) and
+  (j13 <= to_rep1(((get(model__({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } }),
+  to_rep2((f[j13])))).us_split_fields1).rec__partition_refinement__interval__last))))))
+
+axiom H12 : (result3 = true)
+
+axiom H13 : ((o = length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } })) and (in_range9(o) and (((of_int(1) = true) ->
+  (o <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o <= 10001)))))
+
+axiom H14 : (o1 = (o - 1))
+
+axiom H15 : (((j1 <= o1) -> (o2 = true)) and ((not (j1 <= o1)) ->
+  (o2 = false)))
+
+axiom H16 : (((0 <= j1) -> (result4 = o2)) and ((not (0 <= j1)) ->
+  (result4 = false)))
+
+axiom H17 : (result4 = true)
+
+axiom H18 : ((o12 = j1) and in_range8(j1))
+
+axiom H19 : (({ us_split_fields1 = {
+  rec__partition_refinement__interval__first = o13;
+  rec__partition_refinement__interval__last = o14;
+  rec__partition_refinement__interval__count = o15 } } = get(model__({
+  us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } }), o12)) and (bool_eq7({ us_split_fields1 = {
+  rec__partition_refinement__interval__first = o13;
+  rec__partition_refinement__interval__last = o14;
+  rec__partition_refinement__interval__count = o15 } }, get(model__({
+  us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } }), o12)) = true))
+
+axiom H20 : (o13 = o16)
+
+axiom H21 : (o14 = o17)
+
+axiom H22 : (o15 = o18)
+
+axiom H23 : (o19 = o17)
+
+axiom H24 : (o20 = to_rep1(o19))
+
+axiom H25 : (((k <= o20) -> (o21 = true)) and ((not (k <= o20)) ->
+  (o21 = false)))
+
  (* File "partition_refinement.adb", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:us_main_type.
-  forall f:(int,partition_index) farray. forall j:int. forall o:int.
-  forall o1:int. forall o2:bool. forall k:int. forall o3:int.
-  forall o4:index. forall o5:index. forall o6:index_count. forall o7:index.
-  forall o8:index. forall o9:index_count. forall o10:index. forall o11:int.
-  forall o12:bool. forall o13:int. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall result:bool. forall result1:bool.
-  forall result2:bool. forall result3:bool. forall result4:bool.
-  ((((((of_int(1) = true) and (o16 = to_rep3(p__split_discrs))) or
-  ((not (of_int(1) = true)) and (o16 = 10001))) and (in_range9(o16) and
-  (((of_int(1) = true) and (o16 = to_rep3(p__split_discrs))) or
-  ((not (of_int(1) = true)) and (o16 = 10001))))) and (((((o14 = length({
-  us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range9(o14) and (((of_int(1) = true) and
-  (o14 <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
-  (o14 <= 10001))))) and (o15 = (2 * o14))) and ((o17 = o15) and
-  in_range1(o15))) and (((o17 <= o16) and (result = true)) or
-  ((not (o17 <= o16)) and (result = false))))) -> ((result = true) ->
-  ((((o13 = length({ us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range9(o13) and (((of_int(1) = true) and
-  (o13 <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
-  (o13 <= 10001))))) and (((o13 <= 5000) and (result1 = true)) or
-  ((not (o13 <= 5000)) and (result1 = false)))) -> ((result1 = true) ->
-  (((result2 = true) <->
-  (forall j1:int. (((0 <= j1) and (j1 <= 5)) -> ((0 <= to_rep2((f[j1]))) and
-  (to_rep2((f[j1])) <= (length({ us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }) - 1)))))) -> ((result2 = true) ->
-  (((result3 = true) <->
-  (forall j1:int. (((0 <= j1) and (j1 <= 5)) -> ((to_rep1(((get(model__({
-  us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }),
-  to_rep2((f[j1])))).us_split_fields1).rec__partition_refinement__interval__first) <= j1) and
-  (j1 <= to_rep1(((get(model__({ us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }),
-  to_rep2((f[j1])))).us_split_fields1).rec__partition_refinement__interval__last)))))) ->
-  ((result3 = true) -> ((((((o = length({ us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range9(o) and (((of_int(1) = true) and
-  (o <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
-  (o <= 10001))))) and (o1 = (o - 1))) and (((j <= o1) and (o2 = true)) or
-  ((not (j <= o1)) and (o2 = false)))) and (((0 <= j) and (result4 = o2)) or
-  ((not (0 <= j)) and (result4 = false)))) -> ((result4 = true) ->
-  ((((((((o3 = j) and in_range8(j)) and (({ us_split_fields1 = {
-  rec__partition_refinement__interval__first = o4;
-  rec__partition_refinement__interval__last = o5;
-  rec__partition_refinement__interval__count = o6 } } = get(model__({
-  us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }), o3)) and (bool_eq7({ us_split_fields1 = {
-  rec__partition_refinement__interval__first = o4;
-  rec__partition_refinement__interval__last = o5;
-  rec__partition_refinement__interval__count = o6 } }, get(model__({
-  us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }), o3)) = true))) and ((o4 = o7) and ((o5 = o8) and
-  (o6 = o9)))) and (o10 = o8)) and (o11 = to_rep1(o10))) and (((k <= o11) and
-  (o12 = true)) or ((not (k <= o11)) and (o12 = false)))) ->
-  in_range8(j)))))))))))))
+goal WP_parameter_def : in_range8(j1)

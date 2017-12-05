@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -663,8 +663,21 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : t
+
+logic result : t
+
+logic res1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = res)
+
+axiom H3 : (res1 = mul(udiv(add(x, of_int(63)), of_int(64)), of_int(64)))
+
+axiom H4 : (b = true)
+
  (* File "counter_examples.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall result:t. forall res1:t. (((result = res) and
-  (res1 = mul(udiv(add(x, of_int(63)), of_int(64)), of_int(64)))) ->
-  ((b = true) -> ule(res1, x))))
+goal WP_parameter_def : ule(res1, x)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -141,10 +141,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic par2 : int
+
+logic temp : int
+
+logic o : int
+
+logic result : int
+
+logic temp1 : int
+
+logic par21 : int
+
+axiom H : in_range1(par1)
+
+axiom H1 : in_range1(par2)
+
+axiom H2 : (result = temp)
+
+axiom H3 : (temp1 = 0)
+
+axiom H4 : in_range1(temp1)
+
+axiom H5 : (temp1 <= par1)
+
+axiom H6 : (in_range1(par21) and (temp1 <= par1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall par2:int. forall temp:int. forall result:int. forall temp1:int.
-  forall par21:int. (in_range1(par1) -> (in_range1(par2) ->
-  (((result = temp) and (temp1 = 0)) -> (in_range1(temp1) ->
-  ((temp1 <= par1) -> ((in_range1(par21) and (temp1 <= par1)) ->
-  in_range1((par21 * temp1)))))))))
+goal WP_parameter_def : in_range1((par21 * temp1))

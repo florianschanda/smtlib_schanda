@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -452,8 +452,35 @@ axiom def_axiom :
   (forall temp___191:int.
   ((p__x__aggregate_def(temp___190)[temp___191]) = of_rep(temp___190))))
 
+logic x : (int,character) farray
+
+logic y : (int,character) farray
+
+logic o : (int,character) farray
+
+logic p__y__assume : (int,character) farray
+
+logic p__y__assume1 : t
+
+logic p__q__y__compl : (int,character) farray
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic result : (int,character) farray
+
+logic x1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic y1 : (int,character) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = p__x__aggregate_def(32))
+
+axiom H2 : (2 <= 5)
+
  (* File "p.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall result:(int,character) farray.
-  forall x1:(int,character) farray. (((result = x) and
-  (x1 = p__x__aggregate_def(32))) -> ((2 <= 5) -> (1 <= 2))))
+goal WP_parameter_def : (1 <= 2)

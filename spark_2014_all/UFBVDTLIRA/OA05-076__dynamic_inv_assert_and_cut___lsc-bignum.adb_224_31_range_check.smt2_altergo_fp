@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1154,15 +1154,103 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 axiom oexpon__post_axiom : true
 
+logic a : t
+
+logic carry1 : t
+
+logic carry2 : t
+
+logic mult1 : t1
+
+logic mult2 : t1
+
+logic temp : t1
+
+logic result : t1
+
+logic mult11 : t1
+
+logic result1 : t1
+
+logic mult21 : t1
+
+logic result2 : t1
+
+logic temp1 : t1
+
+logic result3 : t
+
+logic a1 : t
+
+logic result4 : t1
+
+logic temp2 : t1
+
+logic result5 : t
+
+logic carry11 : t
+
+logic result6 : t
+
+logic carry21 : t
+
+logic a2 : t
+
+logic carry12 : t
+
+logic carry22 : t
+
+logic mult12 : t1
+
+logic mult22 : t1
+
+logic temp3 : t1
+
+logic a3 : t
+
+logic carry13 : t
+
+logic carry23 : t
+
+logic mult13 : t1
+
+logic mult23 : t1
+
+logic temp4 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : (result = mult1)
+
+axiom H11 : (mult11 = mul1(toBig(v), toBig(w)))
+
+axiom H12 : (result1 = mult2)
+
+axiom H13 : (mult21 = mul1(toBig(x), toBig(y)))
+
+axiom H14 : (result2 = temp)
+
+axiom H15 : (temp1 = add1(add1(add1(toBig(a), toBig(carry1)), bw_and1(mult11,
+  of_int1(4294967295))), bw_and1(mult21, of_int1(4294967295))))
+
  (* File "lsc-types.ads", line 54, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:t. forall carry1:t. forall mult1:t1. forall mult2:t1.
-  forall temp:t1. forall result:t1. forall mult11:t1. forall result1:t1.
-  forall mult21:t1. forall result2:t1. forall temp1:t1. ((({ t__content1 =
-  result } = { t__content1 = mult1 }) and (mult11 = mul1(toBig(v),
-  toBig(w)))) -> ((({ t__content1 = result1 } = { t__content1 = mult2 }) and
-  (mult21 = mul1(toBig(x), toBig(y)))) -> ((({ t__content1 = result2 } = {
-  t__content1 = temp }) and (temp1 = add1(add1(add1(toBig(a), toBig(carry1)),
-  bw_and1(mult11, of_int1(4294967295))), bw_and1(mult21,
-  of_int1(4294967295))))) -> ule1(toBig(of_int(0)), bw_and1(temp1,
-  of_int1(4294967295)))))))
+goal WP_parameter_def : ule1(toBig(of_int(0)), bw_and1(temp1,
+  of_int1(4294967295)))

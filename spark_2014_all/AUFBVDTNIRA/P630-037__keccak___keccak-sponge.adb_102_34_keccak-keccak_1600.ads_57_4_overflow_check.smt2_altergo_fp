@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2980,56 +2980,1042 @@ type t101s__ref = { t101s__content : us_t8
 
 function t101s__ref___projection(a: t101s__ref) : us_t8 = (a).t101s__content
 
- (* File "keccak-sponge.ads", line 265, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:(int,byte) farray.
-  forall ctx__split_fields2:bit_absorption_number.
-  forall ctx__split_fields3:byte_absorption_number.
-  forall ctx__split_fields4:rate_number. forall ctx__split_fields5:states.
-  forall offset:int. forall remaining_bits:int. forall remaining_bytes:int.
-  forall initial_data_len:int. forall free_bytes_in_block:int.
-  forall free_bits_in_block:int. forall block_offset:int.
-  forall data_last:int. forall initial_bit_rate:int. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:int. forall o8:int. forall o9:int.
-  forall keccak__keccak_1600__sponge__absorb__R82s__assume:int.
-  forall keccak__keccak_1600__sponge__absorb__R85s__assume:int.
-  forall o10:(int,byte) farray. forall temp___817:(int,byte) farray.
-  forall temp___8171:t6. forall temp___818:(int,byte) farray.
-  forall temp___8181:t5. forall o11:(int,byte) farray.
-  forall temp___820:(int,byte) farray. forall temp___8201:t5.
-  forall temp___822:(int,byte) farray. forall temp___8221:t5.
-  forall o12:(int,byte) farray. forall o13:map. forall o14:(int,byte) farray.
-  forall o15:bit_absorption_number. forall o16:byte_absorption_number.
-  forall o17:rate_number. forall o18:states. forall temp___825:map.
-  forall temp___8251:(int,byte) farray.
-  forall temp___8252:bit_absorption_number.
-  forall temp___8253:byte_absorption_number. forall temp___8254:rate_number.
-  forall temp___8255:states. forall o19:int. forall o20:int. forall o21:int.
-  forall o22:int. forall o23:int. forall o24:(int,byte) farray.
-  forall temp___828:(int,byte) farray. forall temp___8281:t7.
-  forall o25:(int,byte) farray. forall o26:t1.
-  forall ctx__split_fields6:us_split_fields. forall block_offset1:int.
-  forall result:int__ref. forall offset1:int. forall result1:int__ref.
-  forall remaining_bits1:int. forall result2:int__ref.
-  forall remaining_bytes1:int. forall result3:int__ref.
-  forall initial_data_len1:int. forall result4:int__ref.
-  forall initial_bit_rate1:int. forall result5:int__ref.
-  forall data_last1:int. forall result6:int__ref.
-  forall free_bits_in_block1:int. forall result7:int__ref.
-  forall free_bytes_in_block1:int. forall result8:int__ref.
-  forall block_offset2:int. forall result9:us_split_fields__ref.
-  forall ctx__split_fields7:us_split_fields. forall result10:int__ref.
-  forall offset2:int. forall result11:int__ref. forall remaining_bytes2:int.
-  forall result12:int__ref. forall remaining_bits2:int.
-  forall keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a:map.
-  forall result13:us_split_fields__ref.
-  forall ctx__split_fields8:us_split_fields.
-  forall keccak__keccak_1600__keccakf_1600_permutation__permute__a:map.
-  forall result14:us_split_fields__ref.
-  forall ctx__split_fields9:us_split_fields. (dynamic_property(0, 2147483647,
-  to_rep1(first(data1)), to_rep1(last(data1))) -> (in_range2(bit_length) ->
-  (((state_of({ us_split_fields1 = {
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : (int,byte) farray
+
+logic ctx__split_fields2 : bit_absorption_number
+
+logic ctx__split_fields3 : byte_absorption_number
+
+logic ctx__split_fields4 : rate_number
+
+logic ctx__split_fields5 : states
+
+logic offset : int
+
+logic remaining_bits : int
+
+logic remaining_bytes : int
+
+logic initial_data_len : int
+
+logic free_bytes_in_block : int
+
+logic free_bits_in_block : int
+
+logic block_offset : int
+
+logic data_last : int
+
+logic initial_bit_rate : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic keccak__keccak_1600__sponge__absorb__R75s__assume : int
+
+logic o17 : (int,byte) farray
+
+logic temp___858 : (int,byte) farray
+
+logic temp___8581 : t4
+
+logic temp___859 : (int,byte) farray
+
+logic temp___8591 : t3
+
+logic o18 : (int,byte) farray
+
+logic temp___861 : (int,byte) farray
+
+logic temp___8611 : t3
+
+logic temp___863 : (int,byte) farray
+
+logic temp___8631 : t3
+
+logic o19 : (int,byte) farray
+
+logic o20 : map
+
+logic o21 : (int,byte) farray
+
+logic o22 : bit_absorption_number
+
+logic o23 : byte_absorption_number
+
+logic o24 : rate_number
+
+logic o25 : states
+
+logic temp___866 : map
+
+logic temp___8661 : (int,byte) farray
+
+logic temp___8662 : bit_absorption_number
+
+logic temp___8663 : byte_absorption_number
+
+logic temp___8664 : rate_number
+
+logic temp___8665 : states
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : bit_absorption_number
+
+logic o29 : map
+
+logic o30 : (int,byte) farray
+
+logic o31 : bit_absorption_number
+
+logic o32 : byte_absorption_number
+
+logic o33 : rate_number
+
+logic o34 : states
+
+logic temp___868 : map
+
+logic temp___8681 : (int,byte) farray
+
+logic temp___8682 : bit_absorption_number
+
+logic temp___8683 : byte_absorption_number
+
+logic temp___8684 : rate_number
+
+logic temp___8685 : states
+
+logic keccak__keccak_1600__sponge__absorb__R82s__assume : int
+
+logic keccak__keccak_1600__sponge__absorb__R85s__assume : int
+
+logic o35 : (int,byte) farray
+
+logic temp___817 : (int,byte) farray
+
+logic temp___8171 : t6
+
+logic temp___818 : (int,byte) farray
+
+logic temp___8181 : t5
+
+logic o36 : (int,byte) farray
+
+logic temp___820 : (int,byte) farray
+
+logic temp___8201 : t5
+
+logic temp___822 : (int,byte) farray
+
+logic temp___8221 : t5
+
+logic o37 : (int,byte) farray
+
+logic o38 : map
+
+logic o39 : (int,byte) farray
+
+logic o40 : bit_absorption_number
+
+logic o41 : byte_absorption_number
+
+logic o42 : rate_number
+
+logic o43 : states
+
+logic temp___825 : map
+
+logic temp___8251 : (int,byte) farray
+
+logic temp___8252 : bit_absorption_number
+
+logic temp___8253 : byte_absorption_number
+
+logic temp___8254 : rate_number
+
+logic temp___8255 : states
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : (int,byte) farray
+
+logic temp___828 : (int,byte) farray
+
+logic temp___8281 : t7
+
+logic o50 : (int,byte) farray
+
+logic o51 : t1
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic temp___841 : int
+
+logic temp___840 : int
+
+logic temp___839 : int
+
+logic temp___838 : map
+
+logic temp___8381 : (int,byte) farray
+
+logic temp___8382 : bit_absorption_number
+
+logic temp___8383 : byte_absorption_number
+
+logic temp___8384 : rate_number
+
+logic temp___8385 : states
+
+logic temp___844 : int
+
+logic temp___843 : int
+
+logic temp___842 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : bool
+
+logic o59 : int
+
+logic o60 : bool
+
+logic o61 : int
+
+logic o62 : bool
+
+logic keccak__keccak_1600__sponge__absorb__L_1__R91s__assume : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic keccak__keccak_1600__sponge__absorb__L_1__R92s__assume : int
+
+logic o65 : (int,byte) farray
+
+logic temp___833 : (int,byte) farray
+
+logic temp___8331 : t8
+
+logic o66 : (int,byte) farray
+
+logic o67 : t1
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : int
+
+logic keccak__keccak_1600__sponge__absorb__R98s__assume : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic keccak__keccak_1600__sponge__absorb__R99s__assume : int
+
+logic o73 : (int,byte) farray
+
+logic temp___845 : (int,byte) farray
+
+logic temp___8451 : t10
+
+logic temp___846 : (int,byte) farray
+
+logic temp___8461 : t9
+
+logic o74 : (int,byte) farray
+
+logic temp___849 : (int,byte) farray
+
+logic temp___8491 : t9
+
+logic temp___851 : (int,byte) farray
+
+logic temp___8511 : t9
+
+logic o75 : (int,byte) farray
+
+logic o76 : map
+
+logic o77 : (int,byte) farray
+
+logic o78 : bit_absorption_number
+
+logic o79 : byte_absorption_number
+
+logic o80 : rate_number
+
+logic o81 : states
+
+logic temp___854 : map
+
+logic temp___8541 : (int,byte) farray
+
+logic temp___8542 : bit_absorption_number
+
+logic temp___8543 : byte_absorption_number
+
+logic temp___8544 : rate_number
+
+logic temp___8545 : states
+
+logic o82 : int
+
+logic o83 : bool
+
+logic o84 : int
+
+logic o85 : bool
+
+logic o86 : int
+
+logic o87 : bool
+
+logic o88 : int
+
+logic o89 : bit_absorption_number
+
+logic o90 : map
+
+logic o91 : (int,byte) farray
+
+logic o92 : bit_absorption_number
+
+logic o93 : byte_absorption_number
+
+logic o94 : rate_number
+
+logic o95 : states
+
+logic temp___856 : map
+
+logic temp___8561 : (int,byte) farray
+
+logic temp___8562 : bit_absorption_number
+
+logic temp___8563 : byte_absorption_number
+
+logic temp___8564 : rate_number
+
+logic temp___8565 : states
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : bool
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : (int,byte) farray
+
+logic ctx__split_fields8 : bit_absorption_number
+
+logic ctx__split_fields9 : byte_absorption_number
+
+logic ctx__split_fields10 : rate_number
+
+logic ctx__split_fields11 : states
+
+logic free_bytes_in_block1 : int
+
+logic free_bits_in_block1 : int
+
+logic block_offset1 : int
+
+logic data_last1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic offset1 : int
+
+logic result3 : int
+
+logic remaining_bits1 : int
+
+logic result4 : int
+
+logic remaining_bytes1 : int
+
+logic result5 : int
+
+logic initial_data_len1 : int
+
+logic result6 : int
+
+logic initial_bit_rate1 : int
+
+logic result7 : int
+
+logic data_last2 : int
+
+logic result8 : int
+
+logic free_bits_in_block2 : int
+
+logic result9 : int
+
+logic free_bytes_in_block2 : int
+
+logic result10 : int
+
+logic block_offset2 : int
+
+logic result11 : map
+
+logic result12 : (int,byte) farray
+
+logic result13 : bit_absorption_number
+
+logic result14 : byte_absorption_number
+
+logic result15 : rate_number
+
+logic result16 : states
+
+logic ctx__split_fields12 : map
+
+logic ctx__split_fields13 : (int,byte) farray
+
+logic ctx__split_fields14 : bit_absorption_number
+
+logic ctx__split_fields15 : byte_absorption_number
+
+logic ctx__split_fields16 : rate_number
+
+logic ctx__split_fields17 : states
+
+logic result17 : map
+
+logic result18 : (int,byte) farray
+
+logic result19 : bit_absorption_number
+
+logic result20 : byte_absorption_number
+
+logic result21 : rate_number
+
+logic result22 : states
+
+logic ctx__split_fields18 : map
+
+logic ctx__split_fields19 : (int,byte) farray
+
+logic ctx__split_fields20 : bit_absorption_number
+
+logic ctx__split_fields21 : byte_absorption_number
+
+logic ctx__split_fields22 : rate_number
+
+logic ctx__split_fields23 : states
+
+logic result23 : int
+
+logic block_offset3 : int
+
+logic result24 : map
+
+logic result25 : (int,byte) farray
+
+logic result26 : bit_absorption_number
+
+logic result27 : byte_absorption_number
+
+logic result28 : rate_number
+
+logic result29 : states
+
+logic ctx__split_fields24 : map
+
+logic ctx__split_fields25 : (int,byte) farray
+
+logic ctx__split_fields26 : bit_absorption_number
+
+logic ctx__split_fields27 : byte_absorption_number
+
+logic ctx__split_fields28 : rate_number
+
+logic ctx__split_fields29 : states
+
+logic result30 : int
+
+logic offset2 : int
+
+logic result31 : int
+
+logic remaining_bytes2 : int
+
+logic result32 : int
+
+logic remaining_bits2 : int
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
+
+logic result33 : map
+
+logic result34 : (int,byte) farray
+
+logic result35 : bit_absorption_number
+
+logic result36 : byte_absorption_number
+
+logic result37 : rate_number
+
+logic result38 : states
+
+logic ctx__split_fields30 : map
+
+logic ctx__split_fields31 : (int,byte) farray
+
+logic ctx__split_fields32 : bit_absorption_number
+
+logic ctx__split_fields33 : byte_absorption_number
+
+logic ctx__split_fields34 : rate_number
+
+logic ctx__split_fields35 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result39 : map
+
+logic result40 : (int,byte) farray
+
+logic result41 : bit_absorption_number
+
+logic result42 : byte_absorption_number
+
+logic result43 : rate_number
+
+logic result44 : states
+
+logic ctx__split_fields36 : map
+
+logic ctx__split_fields37 : (int,byte) farray
+
+logic ctx__split_fields38 : bit_absorption_number
+
+logic ctx__split_fields39 : byte_absorption_number
+
+logic ctx__split_fields40 : rate_number
+
+logic ctx__split_fields41 : states
+
+logic ctx__split_fields42 : map
+
+logic ctx__split_fields43 : (int,byte) farray
+
+logic ctx__split_fields44 : bit_absorption_number
+
+logic ctx__split_fields45 : byte_absorption_number
+
+logic ctx__split_fields46 : rate_number
+
+logic ctx__split_fields47 : states
+
+logic offset3 : int
+
+logic remaining_bits3 : int
+
+logic remaining_bytes3 : int
+
+logic temp___8441 : int
+
+logic temp___8431 : int
+
+logic temp___8421 : int
+
+logic result45 : int
+
+logic temp___8442 : int
+
+logic result46 : int
+
+logic temp___8432 : int
+
+logic result47 : int
+
+logic temp___8422 : int
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a1 : map
+
+logic result48 : map
+
+logic result49 : (int,byte) farray
+
+logic result50 : bit_absorption_number
+
+logic result51 : byte_absorption_number
+
+logic result52 : rate_number
+
+logic result53 : states
+
+logic ctx__split_fields48 : map
+
+logic ctx__split_fields49 : (int,byte) farray
+
+logic ctx__split_fields50 : bit_absorption_number
+
+logic ctx__split_fields51 : byte_absorption_number
+
+logic ctx__split_fields52 : rate_number
+
+logic ctx__split_fields53 : states
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a1 : map
+
+logic result54 : map
+
+logic result55 : (int,byte) farray
+
+logic result56 : bit_absorption_number
+
+logic result57 : byte_absorption_number
+
+logic result58 : rate_number
+
+logic result59 : states
+
+logic ctx__split_fields54 : map
+
+logic ctx__split_fields55 : (int,byte) farray
+
+logic ctx__split_fields56 : bit_absorption_number
+
+logic ctx__split_fields57 : byte_absorption_number
+
+logic ctx__split_fields58 : rate_number
+
+logic ctx__split_fields59 : states
+
+logic result60 : int
+
+logic offset4 : int
+
+logic result61 : int
+
+logic remaining_bytes4 : int
+
+logic result62 : int
+
+logic remaining_bits4 : int
+
+logic ctx__split_fields60 : map
+
+logic ctx__split_fields61 : (int,byte) farray
+
+logic ctx__split_fields62 : bit_absorption_number
+
+logic ctx__split_fields63 : byte_absorption_number
+
+logic ctx__split_fields64 : rate_number
+
+logic ctx__split_fields65 : states
+
+logic offset5 : int
+
+logic remaining_bits5 : int
+
+logic remaining_bytes5 : int
+
+logic temp___8443 : int
+
+logic temp___8433 : int
+
+logic temp___8423 : int
+
+logic ctx__split_fields66 : map
+
+logic ctx__split_fields67 : (int,byte) farray
+
+logic ctx__split_fields68 : bit_absorption_number
+
+logic ctx__split_fields69 : byte_absorption_number
+
+logic ctx__split_fields70 : rate_number
+
+logic ctx__split_fields71 : states
+
+logic offset6 : int
+
+logic remaining_bits6 : int
+
+logic remaining_bytes6 : int
+
+logic temp___8444 : int
+
+logic temp___8434 : int
+
+logic temp___8424 : int
+
+logic ctx__split_fields72 : map
+
+logic ctx__split_fields73 : (int,byte) farray
+
+logic ctx__split_fields74 : bit_absorption_number
+
+logic ctx__split_fields75 : byte_absorption_number
+
+logic ctx__split_fields76 : rate_number
+
+logic ctx__split_fields77 : states
+
+logic offset7 : int
+
+logic remaining_bits7 : int
+
+logic remaining_bytes7 : int
+
+logic ctx__split_fields78 : map
+
+logic ctx__split_fields79 : (int,byte) farray
+
+logic ctx__split_fields80 : bit_absorption_number
+
+logic ctx__split_fields81 : byte_absorption_number
+
+logic ctx__split_fields82 : rate_number
+
+logic ctx__split_fields83 : states
+
+logic offset8 : int
+
+logic remaining_bits8 : int
+
+logic remaining_bytes8 : int
+
+logic ctx__split_fields84 : map
+
+logic ctx__split_fields85 : (int,byte) farray
+
+logic ctx__split_fields86 : bit_absorption_number
+
+logic ctx__split_fields87 : byte_absorption_number
+
+logic ctx__split_fields88 : rate_number
+
+logic ctx__split_fields89 : states
+
+logic offset9 : int
+
+logic remaining_bits9 : int
+
+logic remaining_bytes9 : int
+
+logic ctx__split_fields90 : map
+
+logic ctx__split_fields91 : (int,byte) farray
+
+logic ctx__split_fields92 : bit_absorption_number
+
+logic ctx__split_fields93 : byte_absorption_number
+
+logic ctx__split_fields94 : rate_number
+
+logic ctx__split_fields95 : states
+
+logic offset10 : int
+
+logic remaining_bits10 : int
+
+logic remaining_bytes10 : int
+
+logic result63 : map
+
+logic result64 : (int,byte) farray
+
+logic result65 : bit_absorption_number
+
+logic result66 : byte_absorption_number
+
+logic result67 : rate_number
+
+logic result68 : states
+
+logic ctx__split_fields96 : map
+
+logic ctx__split_fields97 : (int,byte) farray
+
+logic ctx__split_fields98 : bit_absorption_number
+
+logic ctx__split_fields99 : byte_absorption_number
+
+logic ctx__split_fields100 : rate_number
+
+logic ctx__split_fields101 : states
+
+logic ctx__split_fields102 : map
+
+logic ctx__split_fields103 : (int,byte) farray
+
+logic ctx__split_fields104 : bit_absorption_number
+
+logic ctx__split_fields105 : byte_absorption_number
+
+logic ctx__split_fields106 : rate_number
+
+logic ctx__split_fields107 : states
+
+logic ctx__split_fields108 : map
+
+logic ctx__split_fields109 : (int,byte) farray
+
+logic ctx__split_fields110 : bit_absorption_number
+
+logic ctx__split_fields111 : byte_absorption_number
+
+logic ctx__split_fields112 : rate_number
+
+logic ctx__split_fields113 : states
+
+logic result69 : map
+
+logic result70 : (int,byte) farray
+
+logic result71 : bit_absorption_number
+
+logic result72 : byte_absorption_number
+
+logic result73 : rate_number
+
+logic result74 : states
+
+logic ctx__split_fields114 : map
+
+logic ctx__split_fields115 : (int,byte) farray
+
+logic ctx__split_fields116 : bit_absorption_number
+
+logic ctx__split_fields117 : byte_absorption_number
+
+logic ctx__split_fields118 : rate_number
+
+logic ctx__split_fields119 : states
+
+logic ctx__split_fields120 : map
+
+logic ctx__split_fields121 : (int,byte) farray
+
+logic ctx__split_fields122 : bit_absorption_number
+
+logic ctx__split_fields123 : byte_absorption_number
+
+logic ctx__split_fields124 : rate_number
+
+logic ctx__split_fields125 : states
+
+logic offset11 : int
+
+logic remaining_bits11 : int
+
+logic remaining_bytes11 : int
+
+logic block_offset4 : int
+
+logic ctx__split_fields126 : map
+
+logic ctx__split_fields127 : (int,byte) farray
+
+logic ctx__split_fields128 : bit_absorption_number
+
+logic ctx__split_fields129 : byte_absorption_number
+
+logic ctx__split_fields130 : rate_number
+
+logic ctx__split_fields131 : states
+
+logic offset12 : int
+
+logic remaining_bits12 : int
+
+logic remaining_bytes12 : int
+
+logic block_offset5 : int
+
+logic ctx__split_fields132 : map
+
+logic ctx__split_fields133 : (int,byte) farray
+
+logic ctx__split_fields134 : bit_absorption_number
+
+logic ctx__split_fields135 : byte_absorption_number
+
+logic ctx__split_fields136 : rate_number
+
+logic ctx__split_fields137 : states
+
+logic offset13 : int
+
+logic remaining_bits13 : int
+
+logic remaining_bytes13 : int
+
+logic free_bytes_in_block3 : int
+
+logic free_bits_in_block3 : int
+
+logic block_offset6 : int
+
+logic data_last3 : int
+
+logic ctx__split_fields138 : map
+
+logic ctx__split_fields139 : (int,byte) farray
+
+logic ctx__split_fields140 : bit_absorption_number
+
+logic ctx__split_fields141 : byte_absorption_number
+
+logic ctx__split_fields142 : rate_number
+
+logic ctx__split_fields143 : states
+
+logic offset14 : int
+
+logic remaining_bits14 : int
+
+logic remaining_bytes14 : int
+
+logic free_bytes_in_block4 : int
+
+logic free_bits_in_block4 : int
+
+logic block_offset7 : int
+
+logic data_last4 : int
+
+logic ctx__split_fields144 : map
+
+logic ctx__split_fields145 : (int,byte) farray
+
+logic ctx__split_fields146 : bit_absorption_number
+
+logic ctx__split_fields147 : byte_absorption_number
+
+logic ctx__split_fields148 : rate_number
+
+logic ctx__split_fields149 : states
+
+logic offset15 : int
+
+logic remaining_bits15 : int
+
+logic remaining_bytes15 : int
+
+logic initial_data_len2 : int
+
+logic free_bytes_in_block5 : int
+
+logic free_bits_in_block5 : int
+
+logic block_offset8 : int
+
+logic data_last5 : int
+
+logic initial_bit_rate2 : int
+
+logic ctx__split_fields150 : map
+
+logic ctx__split_fields151 : (int,byte) farray
+
+logic ctx__split_fields152 : bit_absorption_number
+
+logic ctx__split_fields153 : byte_absorption_number
+
+logic ctx__split_fields154 : rate_number
+
+logic ctx__split_fields155 : states
+
+logic offset16 : int
+
+logic remaining_bits16 : int
+
+logic remaining_bytes16 : int
+
+logic initial_data_len3 : int
+
+logic free_bytes_in_block6 : int
+
+logic free_bits_in_block6 : int
+
+logic block_offset9 : int
+
+logic data_last6 : int
+
+logic initial_bit_rate3 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep1(first(data1)),
+  to_rep1(last(data1)))
+
+axiom H1 : in_range2(bit_length)
+
+axiom H2 : ((state_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -3064,19 +4050,47 @@ goal WP_parameter_def :
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 } })))))) -> (((result = { int__content = offset }) and
-  (offset1 = 0)) -> (in_range2(offset1) -> (((result1 = { int__content =
-  remaining_bits }) and (remaining_bits1 = bit_length)) ->
-  (in_range2(remaining_bits1) -> ((((((o = (bit_length + 7)) and
-  in_range1((bit_length + 7))) and (o1 = comp_div(o,8))) and ((o2 = o1) and
-  in_range2(o1))) and ((result2 = { int__content = remaining_bytes }) and
-  (remaining_bytes1 = o2))) -> (in_range2(remaining_bytes1) -> (((result3 = {
-  int__content = initial_data_len }) and
-  (initial_data_len1 = remaining_bytes1)) -> (in_range2(initial_data_len1) ->
-  (((0 <= 2147483647) -> in_range2(free_bytes_in_block)) ->
-  (((0 <= 2147483647) -> in_range2(free_bits_in_block)) ->
-  (((0 <= 2147483647) -> in_range2(block_offset)) -> (((0 <= 2147483647) ->
-  in_range4(data_last)) -> ((((o3 = rate_of({ us_split_fields1 = {
+  ctx__split_fields5 } }))))))
+
+axiom H3 : (result2 = offset)
+
+axiom H4 : (offset1 = 0)
+
+axiom H5 : in_range2(offset1)
+
+axiom H6 : (result3 = remaining_bits)
+
+axiom H7 : (remaining_bits1 = bit_length)
+
+axiom H8 : in_range2(remaining_bits1)
+
+axiom H9 : ((o6 = (bit_length + 7)) and in_range1((bit_length + 7)))
+
+axiom H10 : (o7 = comp_div(o6,8))
+
+axiom H11 : ((o8 = o7) and in_range2(o7))
+
+axiom H12 : (result4 = remaining_bytes)
+
+axiom H13 : (remaining_bytes1 = o8)
+
+axiom H14 : in_range2(remaining_bytes1)
+
+axiom H15 : (result5 = initial_data_len)
+
+axiom H16 : (initial_data_len1 = remaining_bytes1)
+
+axiom H17 : in_range2(initial_data_len1)
+
+axiom H18 : ((0 <= 2147483647) -> in_range2(free_bytes_in_block))
+
+axiom H19 : ((0 <= 2147483647) -> in_range2(free_bits_in_block))
+
+axiom H20 : ((0 <= 2147483647) -> in_range2(block_offset))
+
+axiom H21 : ((0 <= 2147483647) -> in_range4(data_last))
+
+axiom H22 : ((o9 = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -3084,15 +4098,27 @@ goal WP_parameter_def :
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 } })) and (in_range3(o3) and
-  ((o3 = (to_rep4(ctx__split_fields4) * 8)) and (o3 <  1600)))) and
-  ((result4 = { int__content = initial_bit_rate }) and
-  (initial_bit_rate1 = o3))) -> (in_range3(initial_bit_rate1) ->
-  ((0 <  initial_data_len1) ->
-  (((((o4 = (to_rep1(first(data1)) + (initial_data_len1 - 1))) and
-  in_range1((to_rep1(first(data1)) + (initial_data_len1 - 1)))) and
-  ((o5 = o4) and in_range4(o4))) and ((result5 = { int__content = data_last
-  }) and (data_last1 = o5))) -> (((((((o6 = rate_of({ us_split_fields1 = {
+  ctx__split_fields5 } })) and (in_range3(o9) and
+  ((o9 = (to_rep4(ctx__split_fields4) * 8)) and (o9 <  1600))))
+
+axiom H23 : (result6 = initial_bit_rate)
+
+axiom H24 : (initial_bit_rate1 = o9)
+
+axiom H25 : in_range3(initial_bit_rate1)
+
+axiom H26 : (0 <  initial_data_len1)
+
+axiom H27 : ((o10 = (to_rep1(first(data1)) + (initial_data_len1 - 1))) and
+  in_range1((to_rep1(first(data1)) + (initial_data_len1 - 1))))
+
+axiom H28 : ((o11 = o10) and in_range4(o10))
+
+axiom H29 : (result7 = data_last)
+
+axiom H30 : (data_last2 = o11)
+
+axiom H31 : ((o12 = rate_of({ us_split_fields1 = {
   rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
   rec__keccak__keccak_1600__sponge__context__bits_absorbed =
@@ -3100,139 +4126,236 @@ goal WP_parameter_def :
   rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
   ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
   ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 } })) and (in_range3(o6) and
-  ((o6 = (to_rep4(ctx__split_fields4) * 8)) and (o6 <  1600)))) and
-  (o7 = (o6 - to_rep3(ctx__split_fields2)))) and ((o8 = o7) and
-  in_range1(o7))) and ((o9 = o8) and in_range2(o8))) and ((result6 = {
-  int__content = free_bits_in_block }) and (free_bits_in_block1 = o9))) ->
-  (((result7 = { int__content = free_bytes_in_block }) and
-  (free_bytes_in_block1 = comp_div(free_bits_in_block1,8))) ->
-  ((free_bits_in_block1 <  1600) -> ((mod(free_bits_in_block1, 8) = 0) ->
-  ((not (bit_length <  free_bits_in_block1)) ->
-  ((((0 <  free_bits_in_block1) and (((result8 = { int__content =
-  block_offset }) and
-  (block_offset2 = comp_div(to_rep3(ctx__split_fields2),8))) and
-  (((block_offset2 = r81s) and in_range2(r81s)) and
-  (((((keccak__keccak_1600__sponge__absorb__R82s__assume = (block_offset2 + (free_bytes_in_block1 - 1))) and
-  in_range1((block_offset2 + (free_bytes_in_block1 - 1)))) and
-  (keccak__keccak_1600__sponge__absorb__R82s__assume = r82s)) and
-  in_range1(r82s)) and
-  (((((keccak__keccak_1600__sponge__absorb__R85s__assume = (to_rep1(first(data1)) + (free_bytes_in_block1 - 1))) and
-  in_range1((to_rep1(first(data1)) + (free_bytes_in_block1 - 1)))) and
-  (keccak__keccak_1600__sponge__absorb__R85s__assume = r85s)) and
-  in_range1(r85s)) and (((((((((((to_rep1(first(data1)) <= r85s) ->
+  ctx__split_fields5 } })) and (in_range3(o12) and
+  ((o12 = (to_rep4(ctx__split_fields4) * 8)) and (o12 <  1600))))
+
+axiom H32 : (o13 = (o12 - to_rep3(ctx__split_fields2)))
+
+axiom H33 : ((o14 = o13) and in_range1(o13))
+
+axiom H34 : ((o15 = o14) and in_range2(o14))
+
+axiom H35 : (result8 = free_bits_in_block)
+
+axiom H36 : (free_bits_in_block2 = o15)
+
+axiom H37 : (result9 = free_bytes_in_block)
+
+axiom H38 : (free_bytes_in_block2 = comp_div(free_bits_in_block2,8))
+
+axiom H39 : (free_bits_in_block2 <  1600)
+
+axiom H40 : (mod(free_bits_in_block2, 8) = 0)
+
+axiom H41 : (not (bit_length <  free_bits_in_block2))
+
+axiom H42 : ((0 <  free_bits_in_block2) -> (result23 = block_offset))
+
+axiom H43 : ((0 <  free_bits_in_block2) ->
+  (block_offset3 = comp_div(to_rep3(ctx__split_fields2),8)))
+
+axiom H44 : ((0 <  free_bits_in_block2) -> (block_offset3 = r81s))
+
+axiom H45 : ((0 <  free_bits_in_block2) -> in_range2(r81s))
+
+axiom H46 : ((0 <  free_bits_in_block2) ->
+  ((keccak__keccak_1600__sponge__absorb__R82s__assume = (block_offset3 + (free_bytes_in_block2 - 1))) and
+  in_range1((block_offset3 + (free_bytes_in_block2 - 1)))))
+
+axiom H47 : ((0 <  free_bits_in_block2) ->
+  (keccak__keccak_1600__sponge__absorb__R82s__assume = r82s))
+
+axiom H48 : ((0 <  free_bits_in_block2) -> in_range1(r82s))
+
+axiom H49 : ((0 <  free_bits_in_block2) ->
+  ((keccak__keccak_1600__sponge__absorb__R85s__assume = (to_rep1(first(data1)) + (free_bytes_in_block2 - 1))) and
+  in_range1((to_rep1(first(data1)) + (free_bytes_in_block2 - 1)))))
+
+axiom H50 : ((0 <  free_bits_in_block2) ->
+  (keccak__keccak_1600__sponge__absorb__R85s__assume = r85s))
+
+axiom H51 : ((0 <  free_bits_in_block2) -> in_range1(r85s))
+
+axiom H52 : ((0 <  free_bits_in_block2) ->
+  ((to_rep1(first(data1)) <= r85s) ->
   (((to_rep1(first(data1)) <= to_rep1(first(data1))) and
   (to_rep1(first(data1)) <= to_rep1(last(data1)))) and
-  ((to_rep1(first(data1)) <= r85s) and (r85s <= to_rep1(last(data1)))))) and
-  (o10 = data)) and ((o10 = temp___817) and (mk4(to_rep1(first(data1)),
-  r85s) = temp___8171))) and
-  ((((to_rep1(first8(temp___8171)) <= to_rep1(last8(temp___8171))) and
-  (((r81s <= r82s) and
-  (((to_rep1(last8(temp___8171)) - to_rep1(first8(temp___8171))) + 1) = ((r82s - r81s) + 1))) or
-  ((not (r81s <= r82s)) and
-  (((to_rep1(last8(temp___8171)) - to_rep1(first8(temp___8171))) + 1) = 0)))) or
-  ((not (to_rep1(first8(temp___8171)) <= to_rep1(last8(temp___8171)))) and
-  (((r81s <= r82s) and (0 = ((r82s - r81s) + 1))) or
-  (not (r81s <= r82s))))) and ((slide(temp___817,
-  to_rep1(first8(temp___8171)), r81s) = temp___818) and (mk3(r81s,
-  r82s) = temp___8181)))) and (((((r81s <= r82s) -> (((0 <= r81s) and
-  (r81s <= 199)) and ((0 <= r82s) and (r82s <= 199)))) and
-  (o11 = ctx__split_fields1)) and ((o11 = temp___820) and (mk3(r81s,
-  r82s) = temp___8201))) and
-  ((((to_rep1(first6(temp___8181)) <= to_rep1(last6(temp___8181))) and
-  (((to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201))) and
-  (((to_rep1(last6(temp___8181)) - to_rep1(first6(temp___8181))) + 1) = ((to_rep1(last6(temp___8201)) - to_rep1(first6(temp___8201))) + 1))) or
-  ((not (to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201)))) and
-  (((to_rep1(last6(temp___8181)) - to_rep1(first6(temp___8181))) + 1) = 0)))) or
-  ((not (to_rep1(first6(temp___8181)) <= to_rep1(last6(temp___8181)))) and
-  (((to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201))) and
-  (0 = ((to_rep1(last6(temp___8201)) - to_rep1(first6(temp___8201))) + 1))) or
-  (not (to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201))))))) and
-  ({ elts3 = temp___822; rt3 = temp___8221 } = { elts3 = temp___818; rt3 =
-  temp___8181 })))) and
+  ((to_rep1(first(data1)) <= r85s) and (r85s <= to_rep1(last(data1)))))))
+
+axiom H53 : ((0 <  free_bits_in_block2) -> (o35 = data))
+
+axiom H54 : ((0 <  free_bits_in_block2) -> ((temp___817 = o35) and
+  (temp___8171 = mk4(to_rep1(first(data1)), r85s))))
+
+axiom H55 : ((0 <  free_bits_in_block2) ->
+  (((to_rep1(first8(temp___8171)) <= to_rep1(last8(temp___8171))) ->
+  (((r81s <= r82s) ->
+  (((to_rep1(last8(temp___8171)) - to_rep1(first8(temp___8171))) + 1) = ((r82s - r81s) + 1))) and
+  ((not (r81s <= r82s)) ->
+  (((to_rep1(last8(temp___8171)) - to_rep1(first8(temp___8171))) + 1) = 0)))) and
+  ((not (to_rep1(first8(temp___8171)) <= to_rep1(last8(temp___8171)))) ->
+  ((r81s <= r82s) -> (0 = ((r82s - r81s) + 1))))))
+
+axiom H56 : ((0 <  free_bits_in_block2) -> ((temp___818 = slide(temp___817,
+  to_rep1(first8(temp___8171)), r81s)) and (temp___8181 = mk3(r81s, r82s))))
+
+axiom H57 : ((0 <  free_bits_in_block2) -> ((r81s <= r82s) ->
+  (((0 <= r81s) and (r81s <= 199)) and ((0 <= r82s) and (r82s <= 199)))))
+
+axiom H58 : ((0 <  free_bits_in_block2) -> (o36 = ctx__split_fields1))
+
+axiom H59 : ((0 <  free_bits_in_block2) -> ((temp___820 = o36) and
+  (temp___8201 = mk3(r81s, r82s))))
+
+axiom H60 : ((0 <  free_bits_in_block2) ->
+  (((to_rep1(first6(temp___8181)) <= to_rep1(last6(temp___8181))) ->
+  (((to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201))) ->
+  (((to_rep1(last6(temp___8181)) - to_rep1(first6(temp___8181))) + 1) = ((to_rep1(last6(temp___8201)) - to_rep1(first6(temp___8201))) + 1))) and
+  ((not (to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201)))) ->
+  (((to_rep1(last6(temp___8181)) - to_rep1(first6(temp___8181))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___8181)) <= to_rep1(last6(temp___8181)))) ->
+  ((to_rep1(first6(temp___8201)) <= to_rep1(last6(temp___8201))) ->
+  (0 = ((to_rep1(last6(temp___8201)) - to_rep1(first6(temp___8201))) + 1))))))
+
+axiom H61 : ((0 <  free_bits_in_block2) -> ((temp___822 = temp___818) and
+  (temp___8221 = temp___8181)))
+
+axiom H62 : ((0 <  free_bits_in_block2) ->
   (forall temp___823:int. ((((r81s <= temp___823) and
-  (temp___823 <= r82s)) and
-  ((o12[temp___823]) = (temp___822[temp___823]))) or
-  ((not ((r81s <= temp___823) and (temp___823 <= r82s))) and
-  ((o12[temp___823]) = (ctx__split_fields1[temp___823])))))) and
-  ((ctx__split_fields = o13) and ((o12 = o14) and
-  ((ctx__split_fields2 = o15) and ((ctx__split_fields3 = o16) and
-  ((ctx__split_fields4 = o17) and (ctx__split_fields5 = o18))))))) and
-  ((temp___825 = o13) and ((temp___8251 = o14) and ((temp___8252 = o15) and
-  ((temp___8253 = o16) and ((temp___8254 = o17) and
-  (temp___8255 = o18))))))) and ((result9 = { us_split_fields__content = {
-  rec__keccak__keccak_1600__sponge__context__state = ctx__split_fields;
-  rec__keccak__keccak_1600__sponge__context__block = ctx__split_fields1;
-  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields2;
-  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 } }) and (ctx__split_fields7 = {
-  rec__keccak__keccak_1600__sponge__context__state = temp___825;
-  rec__keccak__keccak_1600__sponge__context__block = temp___8251;
-  rec__keccak__keccak_1600__sponge__context__bits_absorbed = temp___8252;
-  rec__keccak__keccak_1600__sponge__context__bytes_squeezed = temp___8253;
-  rec__keccak__keccak_1600__sponge__context__rate = temp___8254;
-  rec__keccak__keccak_1600__sponge__context__curr_state = temp___8255
-  }))) and ((((o19 = (offset1 + free_bytes_in_block1)) and
-  in_range1((offset1 + free_bytes_in_block1))) and ((result10 = {
-  int__content = offset1 }) and (offset2 = o19))) and
-  (((((o20 = (remaining_bytes1 - free_bytes_in_block1)) and
-  in_range1((remaining_bytes1 - free_bytes_in_block1))) and ((o21 = o20) and
-  in_range2(o20))) and ((result11 = { int__content = remaining_bytes1 }) and
-  (remaining_bytes2 = o21))) and
-  ((((o22 = (remaining_bits1 - free_bits_in_block1)) and
-  in_range1((remaining_bits1 - free_bits_in_block1))) and ((o23 = o22) and
-  in_range2(o22))) and ((result12 = { int__content = remaining_bits1 }) and
-  (remaining_bits2 = o23))))))))))) or ((not (0 <  free_bits_in_block1)) and
-  (((block_offset2 = block_offset) and
-  ((remaining_bytes2 = remaining_bytes1) and
-  ((remaining_bits2 = remaining_bits1) and ((offset2 = offset1) and
-  (ctx__split_fields7 = { rec__keccak__keccak_1600__sponge__context__state =
-  ctx__split_fields; rec__keccak__keccak_1600__sponge__context__block =
-  ctx__split_fields1;
-  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  ctx__split_fields2;
-  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  ctx__split_fields3; rec__keccak__keccak_1600__sponge__context__rate =
-  ctx__split_fields4; rec__keccak__keccak_1600__sponge__context__curr_state =
-  ctx__split_fields5 }))))) and ((block_offset2 = block_offset1) and
-  ((remaining_bytes2 = remaining_bytes1) and
-  ((remaining_bits2 = remaining_bits1) and ((offset2 = offset1) and
-  (ctx__split_fields7 = ctx__split_fields6)))))))) ->
-  ((((to_rep4((ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__rate) - 1) = r88s) and
-  in_range1(r88s)) -> (((((((0 <= r88s) -> (((0 <= 0) and (0 <= 199)) and
-  ((0 <= r88s) and (r88s <= 199)))) and
-  (o24 = (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__block)) and
-  ((o24 = temp___828) and (mk5(0, r88s) = temp___8281))) and
-  ((o25 = temp___828) and (o26 = mk(to_rep1(first10(temp___8281)),
-  to_rep1(last10(temp___8281)))))) and ((result13 = {
-  us_split_fields__content = ctx__split_fields7 }) and
-  (ctx__split_fields8 = { rec__keccak__keccak_1600__sponge__context__state =
-  keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a;
-  rec__keccak__keccak_1600__sponge__context__block =
-  (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__block;
-  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
-  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
-  rec__keccak__keccak_1600__sponge__context__rate =
-  (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__rate;
-  rec__keccak__keccak_1600__sponge__context__curr_state =
-  (ctx__split_fields7).rec__keccak__keccak_1600__sponge__context__curr_state
-  }))) -> (((result14 = { us_split_fields__content = ctx__split_fields8
-  }) and (ctx__split_fields9 = {
-  rec__keccak__keccak_1600__sponge__context__state =
-  keccak__keccak_1600__keccakf_1600_permutation__permute__a;
-  rec__keccak__keccak_1600__sponge__context__block =
-  (ctx__split_fields8).rec__keccak__keccak_1600__sponge__context__block;
-  rec__keccak__keccak_1600__sponge__context__bits_absorbed =
-  (ctx__split_fields8).rec__keccak__keccak_1600__sponge__context__bits_absorbed;
-  rec__keccak__keccak_1600__sponge__context__bytes_squeezed =
-  (ctx__split_fields8).rec__keccak__keccak_1600__sponge__context__bytes_squeezed;
-  rec__keccak__keccak_1600__sponge__context__rate =
-  (ctx__split_fields8).rec__keccak__keccak_1600__sponge__context__rate;
-  rec__keccak__keccak_1600__sponge__context__curr_state =
-  (ctx__split_fields8).rec__keccak__keccak_1600__sponge__context__curr_state
-  })) -> in_range1((offset2 + remaining_bytes2)))))))))))))))))))))))))))))))
+  (temp___823 <= r82s)) ->
+  ((o37[temp___823]) = (temp___822[temp___823]))) and
+  ((not ((r81s <= temp___823) and (temp___823 <= r82s))) ->
+  ((o37[temp___823]) = (ctx__split_fields1[temp___823]))))))
+
+axiom H63 : ((0 <  free_bits_in_block2) -> ((o38 = ctx__split_fields) and
+  ((o39 = o37) and ((o40 = ctx__split_fields2) and
+  ((o41 = ctx__split_fields3) and ((o42 = ctx__split_fields4) and
+  (o43 = ctx__split_fields5)))))))
+
+axiom H64 : ((0 <  free_bits_in_block2) -> ((temp___825 = o38) and
+  ((temp___8251 = o39) and ((temp___8252 = o40) and ((temp___8253 = o41) and
+  ((temp___8254 = o42) and (temp___8255 = o43)))))))
+
+axiom H65 : ((0 <  free_bits_in_block2) ->
+  ((result24 = ctx__split_fields) and ((result25 = ctx__split_fields1) and
+  ((result26 = ctx__split_fields2) and ((result27 = ctx__split_fields3) and
+  ((result28 = ctx__split_fields4) and (result29 = ctx__split_fields5)))))))
+
+axiom H66 : ((0 <  free_bits_in_block2) ->
+  ((ctx__split_fields24 = temp___825) and
+  ((ctx__split_fields25 = temp___8251) and
+  ((ctx__split_fields26 = temp___8252) and
+  ((ctx__split_fields27 = temp___8253) and
+  ((ctx__split_fields28 = temp___8254) and
+  (ctx__split_fields29 = temp___8255)))))))
+
+axiom H67 : ((0 <  free_bits_in_block2) ->
+  ((o44 = (offset1 + free_bytes_in_block2)) and
+  in_range1((offset1 + free_bytes_in_block2))))
+
+axiom H68 : ((0 <  free_bits_in_block2) -> (result30 = offset1))
+
+axiom H69 : ((0 <  free_bits_in_block2) -> (offset2 = o44))
+
+axiom H70 : ((0 <  free_bits_in_block2) ->
+  ((o45 = (remaining_bytes1 - free_bytes_in_block2)) and
+  in_range1((remaining_bytes1 - free_bytes_in_block2))))
+
+axiom H71 : ((0 <  free_bits_in_block2) -> ((o46 = o45) and in_range2(o45)))
+
+axiom H72 : ((0 <  free_bits_in_block2) -> (result31 = remaining_bytes1))
+
+axiom H73 : ((0 <  free_bits_in_block2) -> (remaining_bytes2 = o46))
+
+axiom H74 : ((0 <  free_bits_in_block2) ->
+  ((o47 = (remaining_bits1 - free_bits_in_block2)) and
+  in_range1((remaining_bits1 - free_bits_in_block2))))
+
+axiom H75 : ((0 <  free_bits_in_block2) -> ((o48 = o47) and in_range2(o47)))
+
+axiom H76 : ((0 <  free_bits_in_block2) -> (result32 = remaining_bits1))
+
+axiom H77 : ((0 <  free_bits_in_block2) -> (remaining_bits2 = o48))
+
+axiom H78 : ((not (0 <  free_bits_in_block2)) ->
+  (block_offset3 = block_offset))
+
+axiom H79 : ((not (0 <  free_bits_in_block2)) ->
+  (remaining_bytes2 = remaining_bytes1))
+
+axiom H80 : ((not (0 <  free_bits_in_block2)) ->
+  (remaining_bits2 = remaining_bits1))
+
+axiom H81 : ((not (0 <  free_bits_in_block2)) -> (offset2 = offset1))
+
+axiom H82 : ((not (0 <  free_bits_in_block2)) ->
+  ((ctx__split_fields24 = ctx__split_fields) and
+  ((ctx__split_fields25 = ctx__split_fields1) and
+  ((ctx__split_fields26 = ctx__split_fields2) and
+  ((ctx__split_fields27 = ctx__split_fields3) and
+  ((ctx__split_fields28 = ctx__split_fields4) and
+  (ctx__split_fields29 = ctx__split_fields5)))))))
+
+axiom H83 : ((not (0 <  free_bits_in_block2)) ->
+  (block_offset3 = block_offset1))
+
+axiom H84 : ((not (0 <  free_bits_in_block2)) ->
+  (remaining_bytes2 = remaining_bytes1))
+
+axiom H85 : ((not (0 <  free_bits_in_block2)) ->
+  (remaining_bits2 = remaining_bits1))
+
+axiom H86 : ((not (0 <  free_bits_in_block2)) -> (offset2 = offset1))
+
+axiom H87 : ((not (0 <  free_bits_in_block2)) ->
+  ((ctx__split_fields24 = ctx__split_fields6) and
+  ((ctx__split_fields25 = ctx__split_fields7) and
+  ((ctx__split_fields26 = ctx__split_fields8) and
+  ((ctx__split_fields27 = ctx__split_fields9) and
+  ((ctx__split_fields28 = ctx__split_fields10) and
+  (ctx__split_fields29 = ctx__split_fields11)))))))
+
+axiom H88 : ((to_rep4(ctx__split_fields28) - 1) = r88s)
+
+axiom H89 : in_range1(r88s)
+
+axiom H90 : ((0 <= r88s) -> (((0 <= 0) and (0 <= 199)) and ((0 <= r88s) and
+  (r88s <= 199))))
+
+axiom H91 : (o49 = ctx__split_fields25)
+
+axiom H92 : ((temp___828 = o49) and (temp___8281 = mk5(0, r88s)))
+
+axiom H93 : ((o50 = temp___828) and (o51 = mk(to_rep1(first10(temp___8281)),
+  to_rep1(last10(temp___8281)))))
+
+axiom H94 : true
+
+axiom H95 : ((result33 = ctx__split_fields24) and
+  ((result34 = ctx__split_fields25) and ((result35 = ctx__split_fields26) and
+  ((result36 = ctx__split_fields27) and ((result37 = ctx__split_fields28) and
+  (result38 = ctx__split_fields29))))))
+
+axiom H96 :
+  ((ctx__split_fields30 = keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a) and
+  ((ctx__split_fields31 = ctx__split_fields25) and
+  ((ctx__split_fields32 = ctx__split_fields26) and
+  ((ctx__split_fields33 = ctx__split_fields27) and
+  ((ctx__split_fields34 = ctx__split_fields28) and
+  (ctx__split_fields35 = ctx__split_fields29))))))
+
+axiom H97 : ((result39 = ctx__split_fields30) and
+  ((result40 = ctx__split_fields31) and ((result41 = ctx__split_fields32) and
+  ((result42 = ctx__split_fields33) and ((result43 = ctx__split_fields34) and
+  (result44 = ctx__split_fields35))))))
+
+axiom H98 :
+  ((ctx__split_fields36 = keccak__keccak_1600__keccakf_1600_permutation__permute__a) and
+  ((ctx__split_fields37 = ctx__split_fields31) and
+  ((ctx__split_fields38 = ctx__split_fields32) and
+  ((ctx__split_fields39 = ctx__split_fields33) and
+  ((ctx__split_fields40 = ctx__split_fields34) and
+  (ctx__split_fields41 = ctx__split_fields35))))))
+
+ (* File "keccak-sponge.ads", line 265, characters 0-0 *)
+goal WP_parameter_def : in_range1((offset2 + remaining_bytes2))

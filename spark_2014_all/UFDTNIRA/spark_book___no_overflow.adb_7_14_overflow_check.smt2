@@ -66,6 +66,8 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range1 a))
 (assert (in_range1 b))
 (assert (=> (<= 0 2147483647) (in_range1 c)))

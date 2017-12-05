@@ -105,11 +105,23 @@ type positive__ref = { positive__content : positive
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
 
+logic temp___col_last_203 : int
+
+logic temp___col_first_202 : int
+
+logic temp___row_last_201 : int
+
+logic temp___row_first_200 : int
+
+axiom H : in_range(temp___col_last_203)
+
+axiom H1 : in_range(temp___col_first_202)
+
+axiom H2 : in_range(temp___row_last_201)
+
+axiom H3 : in_range(temp___row_first_200)
+
+axiom H4 : (temp___col_first_202 <= temp___col_last_203)
+
  (* File "discr.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___col_last_203:int. forall temp___col_first_202:int.
-  forall temp___row_last_201:int. forall temp___row_first_200:int.
-  (in_range(temp___col_last_203) -> (in_range(temp___col_first_202) ->
-  (in_range(temp___row_last_201) -> (in_range(temp___row_first_200) ->
-  ((temp___col_first_202 <= temp___col_last_203) ->
-  (1 <= temp___col_first_202)))))))
+goal WP_parameter_def : (1 <= temp___col_first_202)

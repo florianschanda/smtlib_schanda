@@ -278,8 +278,21 @@ type real_index_type__ref = { real_index_type__content : real_index_type
 function real_index_type__ref___projection(a: real_index_type__ref) : real_index_type =
   (a).real_index_type__content
 
+logic pointer : int
+
+logic max_read : int
+
+logic index : int
+
+axiom H : in_range2(pointer)
+
+axiom H1 : in_range2(max_read)
+
+axiom H2 : (pointer <= max_read)
+
+axiom H3 : (1 <= index)
+
+axiom H4 : (index <= max_read)
+
  (* File "buf_read.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pointer:int. forall max_read:int. forall index:int.
-  (in_range2(pointer) -> (in_range2(max_read) -> ((pointer <= max_read) ->
-  (((1 <= index) and (index <= max_read)) -> (1 <= index))))))
+goal WP_parameter_def : (1 <= index)

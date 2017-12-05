@@ -638,5 +638,104 @@ logic f : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic a : (int,us_rep) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,et1) farray
+
+logic o4 : (int,(int,et1) farray) farray
+
+logic o5 : (int,et1) farray
+
+logic o6 : (int,(int,et1) farray) farray
+
+logic o7 : (int,us_rep) farray
+
+logic o8 : et1
+
+logic o9 : (int,et1) farray
+
+logic o10 : (int,et1) farray
+
+logic o11 : (int,(int,et1) farray) farray
+
+logic o12 : (int,et1) farray
+
+logic o13 : (int,(int,et1) farray) farray
+
+logic o14 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+axiom H : in_range3(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range1(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : in_range4(f)
+
+axiom H5 : (to_rep(o) = e)
+
+axiom H6 :
+  (o1 = (((((a[i])).us_split_fields1).rec__ar__rofa4__t4[j])[k <- o]))
+
+axiom H7 : (o2 = ((((a[i])).us_split_fields1).rec__ar__rofa4__t4[j <- o1]))
+
+axiom H8 : ((((a[i])).us_split_fields1).rec__ar__rofa4__s4 = o3)
+
+axiom H9 : (o2 = o4)
+
+axiom H10 : (o5 = o3)
+
+axiom H11 : (o6 = o4)
+
+axiom H12 : (o7 = (a[i <- { us_split_fields1 = { rec__ar__rofa4__s4 = o5;
+  rec__ar__rofa4__t4 = o6 } }]))
+
+axiom H13 : (result = a)
+
+axiom H14 : (a1 = o7)
+
+axiom H15 : (to_rep(o8) = f)
+
+axiom H16 : (o9 = ((((a1[i])).us_split_fields1).rec__ar__rofa4__s4[k <- o8]))
+
+axiom H17 : (o9 = o10)
+
+axiom H18 : ((((a1[i])).us_split_fields1).rec__ar__rofa4__t4 = o11)
+
+axiom H19 : (o12 = o10)
+
+axiom H20 : (o13 = o11)
+
+axiom H21 : (o14 = (a1[i <- { us_split_fields1 = { rec__ar__rofa4__s4 = o12;
+  rec__ar__rofa4__t4 = o13 } }]))
+
+axiom H22 : (result1 = a1)
+
+axiom H23 : (a2 = o14)
+
+axiom H24 : (a2 = a3)
+
+axiom H25 : (a4 = a2)
+
  (* File "ar.ads", line 1738, characters 0-0 *)
 goal WP_parameter_def : true

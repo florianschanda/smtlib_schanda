@@ -771,10 +771,165 @@ axiom def_axiom3 :
   ((not ((1 <= temp___270) and (temp___270 <= 10))) ->
   ((temp___266(temp___268, temp___269)[temp___270]) = of_rep(temp___269))))))
 
+logic c1__split_fields : (int,natural) farray
+
+logic c1__split_fields1 : natural
+
+logic c2__split_fields : (int,natural) farray
+
+logic c2__split_fields1 : natural
+
+logic e : int
+
+logic e1 : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic o2 : natural
+
+logic temp___265 : (int,natural) farray
+
+logic temp___2651 : natural
+
+logic loop_iterable__c1__assume : (int,natural) farray
+
+logic loop_iterable__c1__assume1 : natural
+
+logic o3 : natural
+
+logic o4 : (int,natural) farray
+
+logic o5 : natural
+
+logic temp___271 : (int,natural) farray
+
+logic temp___2711 : natural
+
+logic loop_iterable__c2__assume : (int,natural) farray
+
+logic loop_iterable__c2__assume1 : natural
+
+logic o6 : (int,natural) farray
+
+logic temp___274 : (int,natural) farray
+
+logic o7 : int
+
+logic o8 : (int,natural) farray
+
+logic o9 : bool
+
+logic o10 : (int,natural) farray
+
+logic o11 : int
+
+logic o12 : natural
+
+logic temp___277 : natural
+
+logic o13 : int
+
+logic o14 : natural
+
+logic o15 : bool
+
+logic o16 : natural
+
+logic o17 : int
+
+logic e2 : int
+
+logic e3 : int
+
+logic result : (int,natural) farray
+
+logic result1 : natural
+
+logic c1__split_fields2 : (int,natural) farray
+
+logic c1__split_fields3 : natural
+
+logic result2 : (int,natural) farray
+
+logic result3 : natural
+
+logic c2__split_fields2 : (int,natural) farray
+
+logic c2__split_fields3 : natural
+
+logic temp___2741 : (int,natural) farray
+
+logic result4 : bool
+
+logic result5 : int
+
+logic e4 : int
+
+logic result6 : bool
+
+logic e5 : int
+
+logic temp___2742 : (int,natural) farray
+
+logic result7 : bool
+
+logic result8 : (int,natural) farray
+
+logic temp___2743 : (int,natural) farray
+
+logic result9 : bool
+
+logic e6 : int
+
+logic temp___2744 : (int,natural) farray
+
+logic e7 : int
+
+logic temp___2745 : (int,natural) farray
+
+logic e8 : int
+
+logic temp___2746 : (int,natural) farray
+
+logic e9 : int
+
+logic temp___2747 : (int,natural) farray
+
+logic result10 : bool
+
+logic result11 : int
+
+logic e10 : int
+
+logic e11 : int
+
+logic e12 : int
+
+logic result12 : bool
+
+logic e13 : int
+
+logic temp___2771 : natural
+
+logic result13 : bool
+
+logic result14 : natural
+
+logic temp___2772 : natural
+
+logic result15 : bool
+
+axiom H : (to_rep(o) = 10)
+
+axiom H1 : (temp___260(1, 0) = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (temp___265 = o1)
+
+axiom H4 : (temp___2651 = o2)
+
  (* File "loop_iterable.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:natural. forall o1:(int,natural) farray. forall o2:natural.
-  forall temp___265:(int,natural) farray. forall temp___2651:natural.
-  ((((to_rep(o) = 10) and ((temp___260(1, 0) = o1) and (o = o2))) and
-  ((temp___265 = o1) and (temp___2651 = o2))) ->
-  (to_rep(temp___2651) <= 100)))
+goal WP_parameter_def : (to_rep(temp___2651) <= 100)

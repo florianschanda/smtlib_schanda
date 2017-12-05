@@ -755,65 +755,252 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result__ : bool
+
+logic dates__is_before__result : bool
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : bool
+
+logic result__2 : bool
+
+logic result2 : bool
+
+logic result__3 : bool
+
+logic result3 : bool
+
+logic result__4 : bool
+
+logic result4 : bool
+
+logic result__5 : bool
+
+logic result5 : bool
+
+logic result__6 : bool
+
+logic result6 : bool
+
+logic result__7 : bool
+
+logic result7 : bool
+
+logic dates__is_before__result1 : bool
+
+logic dates__is_before__result2 : bool
+
+logic dates__is_before__result3 : bool
+
+logic result__8 : bool
+
+logic dates__is_before__result4 : bool
+
+logic result__9 : bool
+
+logic dates__is_before__result5 : bool
+
+logic result8 : bool
+
+axiom H : (result = result__)
+
+axiom H1 : (result__1 = of_int(0))
+
+axiom H2 : ((to_rep(past2) <  to_rep(future2)) -> (result1 = result__1))
+
+axiom H3 : ((to_rep(past2) <  to_rep(future2)) -> (result__2 = of_int(1)))
+
+axiom H4 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((to_rep1(past1) <  to_rep1(future1)) -> (result2 = result__1))))
+
+axiom H5 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((to_rep1(past1) <  to_rep1(future1)) -> (result__3 = of_int(1)))))
+
+axiom H6 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((to_rep2(past) <  to_rep2(future)) -> (result3 = result__1))))))
+
+axiom H7 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((to_rep2(past) <  to_rep2(future)) -> (result__4 = of_int(1)))))))
+
+axiom H8 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((to_rep3(past3) <  to_rep3(future3)) -> (result4 = result__1))))))))
+
+axiom H9 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((to_rep3(past3) <  to_rep3(future3)) -> (result__5 = of_int(1)))))))))
+
+axiom H10 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((to_rep4(past4) <  to_rep4(future4)) -> (result5 = result__1))))))))))
+
+axiom H11 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((to_rep4(past4) <  to_rep4(future4)) -> (result__6 = of_int(1)))))))))))
+
+axiom H12 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((not (to_rep4(past4) <  to_rep4(future4))) ->
+  ((to_rep4(past4) = to_rep4(future4)) ->
+  ((to_rep5(past5) <  to_rep5(future5)) -> (result6 = result__1))))))))))))
+
+axiom H13 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((not (to_rep4(past4) <  to_rep4(future4))) ->
+  ((to_rep4(past4) = to_rep4(future4)) ->
+  ((to_rep5(past5) <  to_rep5(future5)) -> (result__7 = of_int(1)))))))))))))
+
+axiom H14 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((not (to_rep4(past4) <  to_rep4(future4))) ->
+  ((to_rep4(past4) = to_rep4(future4)) ->
+  ((not (to_rep5(past5) <  to_rep5(future5))) ->
+  (result__7 = result__1))))))))))))
+
+axiom H15 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((not (to_rep4(past4) <  to_rep4(future4))) ->
+  ((not (to_rep4(past4) = to_rep4(future4))) ->
+  (result__7 = result__1)))))))))))
+
+axiom H16 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((to_rep3(past3) = to_rep3(future3)) ->
+  ((not (to_rep4(past4) <  to_rep4(future4))) ->
+  (result__6 = result__7))))))))))
+
+axiom H17 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  ((not (to_rep3(past3) = to_rep3(future3))) ->
+  (result__6 = result__1)))))))))
+
+axiom H18 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((to_rep2(past) = to_rep2(future)) ->
+  ((not (to_rep3(past3) <  to_rep3(future3))) ->
+  (result__5 = result__6))))))))
+
+axiom H19 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) ->
+  ((not (to_rep2(past) = to_rep2(future))) -> (result__5 = result__1)))))))
+
+axiom H20 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((to_rep1(past1) = to_rep1(future1)) ->
+  ((not (to_rep2(past) <  to_rep2(future))) -> (result__4 = result__5))))))
+
+axiom H21 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) ->
+  ((not (to_rep1(past1) = to_rep1(future1))) -> (result__4 = result__1)))))
+
+axiom H22 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((to_rep(past2) = to_rep(future2)) ->
+  ((not (to_rep1(past1) <  to_rep1(future1))) -> (result__3 = result__4))))
+
+axiom H23 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  ((not (to_rep(past2) = to_rep(future2))) -> (result__3 = result__1)))
+
+axiom H24 : ((not (to_rep(past2) <  to_rep(future2))) ->
+  (result__2 = result__3))
+
+axiom H25 : (dates__is_before__result1 = dates__is_before__result2)
+
+axiom H26 : (dates__is_before__result3 = dates__is_before__result1)
+
+axiom H27 : (result7 = dates__is_before__result)
+
+axiom H28 : (dates__is_before__result1 = result__2)
+
+axiom H29 : (dates__is_before__result4 = dates__is_before__result2)
+
+axiom H30 : (result__8 = result__2)
+
+axiom H31 : (dates__is_before__result5 = dates__is_before__result3)
+
+axiom H32 : (result__9 = result__2)
+
+axiom H33 : (result8 = dates__is_before__result4)
+
+axiom H34 : (dates__is_before__result4 = true)
+
  (* File "dates.ads", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:bool. forall dates__is_before__result:bool.
-  forall result:bool. forall result__1:bool. forall result1:bool.
-  forall result__2:bool. forall result2:bool. forall result__3:bool.
-  forall result3:bool. forall result__4:bool. forall result4:bool.
-  forall result__5:bool. forall result5:bool. forall result__6:bool.
-  forall result6:bool. forall result__7:bool. forall result7:bool.
-  forall dates__is_before__result1:bool.
-  forall dates__is_before__result2:bool.
-  forall dates__is_before__result3:bool. forall result__8:bool.
-  forall dates__is_before__result4:bool. forall result__9:bool.
-  forall dates__is_before__result5:bool.
-  (forall result8:bool. ((((((result = result__) and
-  (result__1 = of_int(0))) and ((((to_rep(past2) <  to_rep(future2)) and
-  ((result1 = result__1) and (result__2 = of_int(1)))) or
-  ((not (to_rep(past2) <  to_rep(future2))) and
-  ((((to_rep(past2) = to_rep(future2)) and
-  (((to_rep1(past1) <  to_rep1(future1)) and ((result2 = result__1) and
-  (result__3 = of_int(1)))) or
-  ((not (to_rep1(past1) <  to_rep1(future1))) and
-  ((((to_rep1(past1) = to_rep1(future1)) and
-  (((to_rep2(past) <  to_rep2(future)) and ((result3 = result__1) and
-  (result__4 = of_int(1)))) or ((not (to_rep2(past) <  to_rep2(future))) and
-  ((((to_rep2(past) = to_rep2(future)) and
-  (((to_rep3(past3) <  to_rep3(future3)) and ((result4 = result__1) and
-  (result__5 = of_int(1)))) or
-  ((not (to_rep3(past3) <  to_rep3(future3))) and
-  ((((to_rep3(past3) = to_rep3(future3)) and
-  (((to_rep4(past4) <  to_rep4(future4)) and ((result5 = result__1) and
-  (result__6 = of_int(1)))) or
-  ((not (to_rep4(past4) <  to_rep4(future4))) and
-  ((((to_rep4(past4) = to_rep4(future4)) and
-  (((to_rep5(past5) <  to_rep5(future5)) and ((result6 = result__1) and
-  (result__7 = of_int(1)))) or
-  ((not (to_rep5(past5) <  to_rep5(future5))) and
-  (result__7 = result__1)))) or
-  ((not (to_rep4(past4) = to_rep4(future4))) and
-  (result__7 = result__1))) and (result__6 = result__7))))) or
-  ((not (to_rep3(past3) = to_rep3(future3))) and
-  (result__6 = result__1))) and (result__5 = result__6))))) or
-  ((not (to_rep2(past) = to_rep2(future))) and (result__5 = result__1))) and
-  (result__4 = result__5))))) or
-  ((not (to_rep1(past1) = to_rep1(future1))) and
-  (result__4 = result__1))) and (result__3 = result__4))))) or
-  ((not (to_rep(past2) = to_rep(future2))) and (result__3 = result__1))) and
-  (result__2 = result__3)))) and
-  (((dates__is_before__result1 = dates__is_before__result2) and
-  (dates__is_before__result3 = dates__is_before__result1)) and
-  ((result7 = dates__is_before__result) and
-  (dates__is_before__result1 = result__2))))) and
-  (((dates__is_before__result4 = dates__is_before__result2) and
-  (result__8 = result__2)) and
-  ((dates__is_before__result5 = dates__is_before__result3) and
-  (result__9 = result__2)))) and (result8 = dates__is_before__result4)) ->
-  ((dates__is_before__result4 = true) -> (not (bool_eq10({ us_split_fields5 =
-  { rec__dates__datetime__date_part = { us_split_fields1 = {
+goal WP_parameter_def : (not (bool_eq10({ us_split_fields5 = {
+  rec__dates__datetime__date_part = { us_split_fields1 = {
   rec__dates__date__day = past; rec__dates__date__month = past1;
   rec__dates__date__year = past2 } }; rec__dates__datetime__time_part = {
   us_split_fields3 = { rec__dates__time__hour = past3;
   rec__dates__time__minute = past4; rec__dates__time__second = past5 } } } },
-  maximum_datetime(void)) = true))))))
+  maximum_datetime(void)) = true))

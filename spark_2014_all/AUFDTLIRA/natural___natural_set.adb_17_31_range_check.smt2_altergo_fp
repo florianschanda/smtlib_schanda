@@ -174,7 +174,7 @@ axiom coerce_axiom :
 
 type element_t
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -475,7 +475,7 @@ axiom valid__def_axiom :
   ((forall i:int. (((1 <= i) and (i <= to_rep(s))) ->
    in_range1(to_rep1((s1[i]))))) and
   (forall i:int. ((((to_rep(s) + 1) <= i) and (i <= 10)) ->
-  (to_rep1((s1[i])) = (-1)))))))
+  (to_rep1((s1[i])) = (- 1)))))))
 
 logic full : us_rep -> bool
 
@@ -530,18 +530,85 @@ axiom members__def_axiom :
   s1 } })]. (members({ us_split_fields1 = { rec__natural_set__t__len = s;
   rec__natural_set__t__m = s1 } }) = to_rep(s)))
 
- (* File "natural_set.ads", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:set_length.
-  forall s__split_fields1:(int,element_t) farray. forall o:bool.
-  forall result:bool. (in_range1(value) -> (((valid({ us_split_fields1 = {
-  rec__natural_set__t__len = s__split_fields; rec__natural_set__t__m =
-  s__split_fields1 } }) = true) and (not (full({ us_split_fields1 = {
-  rec__natural_set__t__len = s__split_fields; rec__natural_set__t__m =
-  s__split_fields1 } }) = true))) -> ((((o = contains({ us_split_fields1 = {
-  rec__natural_set__t__len = s__split_fields; rec__natural_set__t__m =
-  s__split_fields1 } }, value)) and ((o = true) <->
+logic s__split_fields : set_length
+
+logic s__split_fields1 : (int,element_t) farray
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : set_length
+
+logic o3 : set_length
+
+logic o4 : (int,element_t) farray
+
+logic temp___206 : set_length
+
+logic temp___2061 : (int,element_t) farray
+
+logic o5 : element_t
+
+logic o6 : int
+
+logic o7 : (int,element_t) farray
+
+logic o8 : set_length
+
+logic o9 : (int,element_t) farray
+
+logic temp___210 : set_length
+
+logic temp___2101 : (int,element_t) farray
+
+logic s__split_fields2 : set_length
+
+logic s__split_fields3 : (int,element_t) farray
+
+logic result : bool
+
+logic result1 : set_length
+
+logic result2 : (int,element_t) farray
+
+logic s__split_fields4 : set_length
+
+logic s__split_fields5 : (int,element_t) farray
+
+logic result3 : set_length
+
+logic result4 : (int,element_t) farray
+
+logic s__split_fields6 : set_length
+
+logic s__split_fields7 : (int,element_t) farray
+
+logic s__split_fields8 : set_length
+
+logic s__split_fields9 : (int,element_t) farray
+
+logic s__split_fields10 : set_length
+
+logic s__split_fields11 : (int,element_t) farray
+
+axiom H : in_range1(value)
+
+axiom H1 : ((valid({ us_split_fields1 = { rec__natural_set__t__len =
+  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }) = true) and
+  (not (full({ us_split_fields1 = { rec__natural_set__t__len =
+  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }) = true)))
+
+axiom H2 : ((o = contains({ us_split_fields1 = { rec__natural_set__t__len =
+  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }, value)) and
+  ((o = true) <->
   (exists i:int. (((1 <= i) and (i <= to_rep(s__split_fields))) and
-  (to_rep1((s__split_fields1[i])) = value))))) and (((not (o = true)) and
-  (result = true)) or ((o = true) and (result = false)))) ->
-  ((result = true) -> in_range2((to_rep(s__split_fields) + 1)))))))
+  (to_rep1((s__split_fields1[i])) = value)))))
+
+axiom H3 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
+ (* File "natural_set.ads", line 63, characters 0-0 *)
+goal WP_parameter_def : in_range2((to_rep(s__split_fields) + 1))

@@ -403,9 +403,13 @@ logic p : (int,natural) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(i17s1) <= 100) -> ((to_rep(c1) <= 100) ->
-  ((has_element({ us_split_fields1 = {
+axiom H : (to_rep(i17s1) <= 100)
+
+axiom H1 : (to_rep(c1) <= 100)
+
+axiom H2 : (has_element({ us_split_fields1 = {
   rec__composite_cursors__cont1__content = c;
-  rec__composite_cursors__cont1__length = c1 } }, p) = true) ->
-  (1 <= to_rep((p[1]))))))
+  rec__composite_cursors__cont1__length = c1 } }, p) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= to_rep((p[1])))

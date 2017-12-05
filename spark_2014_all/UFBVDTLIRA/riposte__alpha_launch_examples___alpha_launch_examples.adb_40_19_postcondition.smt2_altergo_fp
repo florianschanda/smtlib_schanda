@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -690,21 +690,47 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic alpha_launch_examples__example_3__result : t
+
+logic result : t
+
+logic alpha_launch_examples__example_3__result1 : t
+
+logic alpha_launch_examples__example_3__result2 : t
+
+logic alpha_launch_examples__example_3__result3 : t
+
+logic alpha_launch_examples__example_3__result4 : t
+
+logic alpha_launch_examples__example_3__result5 : t
+
+logic result1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (ugt(a, of_int(17)) and ugt(b, of_int(19)))
+
+axiom H3 :
+  (alpha_launch_examples__example_3__result1 = alpha_launch_examples__example_3__result2)
+
+axiom H4 :
+  (alpha_launch_examples__example_3__result3 = alpha_launch_examples__example_3__result1)
+
+axiom H5 : (result = alpha_launch_examples__example_3__result)
+
+axiom H6 : (alpha_launch_examples__example_3__result1 = bw_xor(of_int(73),
+  mul(a, b)))
+
+axiom H7 :
+  (alpha_launch_examples__example_3__result4 = alpha_launch_examples__example_3__result2)
+
+axiom H8 :
+  (alpha_launch_examples__example_3__result5 = alpha_launch_examples__example_3__result3)
+
+axiom H9 : (result1 = alpha_launch_examples__example_3__result4)
+
  (* File "alpha_launch_examples.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall alpha_launch_examples__example_3__result:t. forall result:t.
-  forall alpha_launch_examples__example_3__result1:t.
-  forall alpha_launch_examples__example_3__result2:t.
-  forall alpha_launch_examples__example_3__result3:t.
-  forall alpha_launch_examples__example_3__result4:t.
-  forall alpha_launch_examples__example_3__result5:t.
-  (forall result1:t. (((ugt(a, of_int(17)) and ugt(b, of_int(19))) and
-  (((((alpha_launch_examples__example_3__result1 = alpha_launch_examples__example_3__result2) and
-  (alpha_launch_examples__example_3__result3 = alpha_launch_examples__example_3__result1)) and
-  ((result = alpha_launch_examples__example_3__result) and
-  (alpha_launch_examples__example_3__result1 = bw_xor(of_int(73), mul(a,
-  b))))) and
-  ((alpha_launch_examples__example_3__result4 = alpha_launch_examples__example_3__result2) and
-  (alpha_launch_examples__example_3__result5 = alpha_launch_examples__example_3__result3))) and
-  (result1 = alpha_launch_examples__example_3__result4))) ->
-  ugt(alpha_launch_examples__example_3__result4, of_int(0)))))
+goal WP_parameter_def : ugt(alpha_launch_examples__example_3__result4,
+  of_int(0))

@@ -225,18 +225,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -709,7 +709,7 @@ axiom range_int_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1012,46 +1012,114 @@ axiom get_remaining__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "test.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:length_type. forall s__split_fields1:entry_id.
-  forall s__split_fields2:(t,integer) farray. forall o:int.
-  forall o1:length_type. forall o2:length_type. forall o3:entry_id.
-  forall o4:(t,integer) farray. forall temp___182:length_type.
-  forall temp___1821:entry_id. forall temp___1822:(t,integer) farray.
-  forall result:length_type. forall result1:entry_id.
-  forall result2:(t,integer) farray. forall s__split_fields3:length_type.
-  forall s__split_fields4:entry_id.
-  forall s__split_fields5:(t,integer) farray.
-  forall s__split_fields6:length_type. forall s__split_fields7:entry_id.
-  forall s__split_fields8:(t,integer) farray.
-  forall s__split_fields9:length_type. forall s__split_fields10:entry_id.
-  forall s__split_fields11:(t,integer) farray.
-  forall s__split_fields12:length_type. forall s__split_fields13:entry_id.
-  forall s__split_fields14:(t,integer) farray. (((0 <  get_remaining({
-  us_split_fields1 = { rec__test__t__remaining = s__split_fields;
-  rec__test__t__index = s__split_fields1; rec__test__t__cards =
-  s__split_fields2 } })) and ((((((((o = (to_rep(s__split_fields) - 1)) and
-  in_range((to_rep(s__split_fields) - 1))) and (to_rep(o1) = o)) and
-  ((o1 = o2) and ((s__split_fields1 = o3) and (s__split_fields2 = o4)))) and
-  ((temp___182 = o2) and ((temp___1821 = o3) and (temp___1822 = o4)))) and
-  (((result = s__split_fields) and ((result1 = s__split_fields1) and
-  (result2 = s__split_fields2))) and ((temp___182 = s__split_fields3) and
-  ((temp___1821 = s__split_fields4) and
-  (temp___1822 = s__split_fields5))))) and (get_remaining({
-  us_split_fields1 = { rec__test__t__remaining = s__split_fields6;
-  rec__test__t__index = s__split_fields7; rec__test__t__cards =
-  s__split_fields8 } }) = get_remaining({ us_split_fields1 = {
-  rec__test__t__remaining = s__split_fields3; rec__test__t__index =
-  s__split_fields4; rec__test__t__cards = s__split_fields5 } }))) and
-  (((s__split_fields9 = s__split_fields6) and
-  ((s__split_fields10 = s__split_fields7) and
-  (s__split_fields11 = s__split_fields8))) and
-  ((s__split_fields12 = s__split_fields6) and
-  ((s__split_fields13 = s__split_fields7) and
-  (s__split_fields14 = s__split_fields8)))))) -> (get_remaining({
-  us_split_fields1 = { rec__test__t__remaining = s__split_fields9;
-  rec__test__t__index = s__split_fields10; rec__test__t__cards =
-  s__split_fields11 } }) <= get_remaining({ us_split_fields1 = {
+logic s__split_fields : length_type
+
+logic s__split_fields1 : entry_id
+
+logic s__split_fields2 : (t,integer) farray
+
+logic o : int
+
+logic o1 : length_type
+
+logic o2 : length_type
+
+logic o3 : entry_id
+
+logic o4 : (t,integer) farray
+
+logic temp___182 : length_type
+
+logic temp___1821 : entry_id
+
+logic temp___1822 : (t,integer) farray
+
+logic result : length_type
+
+logic result1 : entry_id
+
+logic result2 : (t,integer) farray
+
+logic s__split_fields3 : length_type
+
+logic s__split_fields4 : entry_id
+
+logic s__split_fields5 : (t,integer) farray
+
+logic s__split_fields6 : length_type
+
+logic s__split_fields7 : entry_id
+
+logic s__split_fields8 : (t,integer) farray
+
+logic s__split_fields9 : length_type
+
+logic s__split_fields10 : entry_id
+
+logic s__split_fields11 : (t,integer) farray
+
+logic s__split_fields12 : length_type
+
+logic s__split_fields13 : entry_id
+
+logic s__split_fields14 : (t,integer) farray
+
+axiom H : (0 <  get_remaining({ us_split_fields1 = {
   rec__test__t__remaining = s__split_fields; rec__test__t__index =
-  s__split_fields1; rec__test__t__cards = s__split_fields2 } }))))
+  s__split_fields1; rec__test__t__cards = s__split_fields2 } }))
+
+axiom H1 : ((o = (to_rep(s__split_fields) - 1)) and
+  in_range((to_rep(s__split_fields) - 1)))
+
+axiom H2 : (to_rep(o1) = o)
+
+axiom H3 : (o1 = o2)
+
+axiom H4 : (s__split_fields1 = o3)
+
+axiom H5 : (s__split_fields2 = o4)
+
+axiom H6 : (temp___182 = o2)
+
+axiom H7 : (temp___1821 = o3)
+
+axiom H8 : (temp___1822 = o4)
+
+axiom H9 : (result = s__split_fields)
+
+axiom H10 : (result1 = s__split_fields1)
+
+axiom H11 : (result2 = s__split_fields2)
+
+axiom H12 : (temp___182 = s__split_fields3)
+
+axiom H13 : (temp___1821 = s__split_fields4)
+
+axiom H14 : (temp___1822 = s__split_fields5)
+
+axiom H15 : (get_remaining({ us_split_fields1 = { rec__test__t__remaining =
+  s__split_fields6; rec__test__t__index = s__split_fields7;
+  rec__test__t__cards = s__split_fields8 } }) = get_remaining({
+  us_split_fields1 = { rec__test__t__remaining = s__split_fields3;
+  rec__test__t__index = s__split_fields4; rec__test__t__cards =
+  s__split_fields5 } }))
+
+axiom H16 : (s__split_fields9 = s__split_fields6)
+
+axiom H17 : (s__split_fields10 = s__split_fields7)
+
+axiom H18 : (s__split_fields11 = s__split_fields8)
+
+axiom H19 : (s__split_fields12 = s__split_fields6)
+
+axiom H20 : (s__split_fields13 = s__split_fields7)
+
+axiom H21 : (s__split_fields14 = s__split_fields8)
+
+ (* File "test.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : (get_remaining({ us_split_fields1 = {
+  rec__test__t__remaining = s__split_fields9; rec__test__t__index =
+  s__split_fields10; rec__test__t__cards = s__split_fields11 }
+  }) <= get_remaining({ us_split_fields1 = { rec__test__t__remaining =
+  s__split_fields; rec__test__t__index = s__split_fields1;
+  rec__test__t__cards = s__split_fields2 } }))

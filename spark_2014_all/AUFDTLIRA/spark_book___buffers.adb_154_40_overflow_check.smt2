@@ -198,6 +198,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const temp___286 Int)
 (declare-const temp___285 Int)
 (declare-const o5 Int)
 (declare-const o6 character)

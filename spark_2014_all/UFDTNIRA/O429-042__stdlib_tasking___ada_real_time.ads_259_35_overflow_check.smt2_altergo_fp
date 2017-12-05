@@ -91,7 +91,7 @@ function time_span__ref___projection(a: time_span__ref) : us_rep =
 
 type tseconds_countB
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq1 : int, int -> bool
@@ -148,7 +148,7 @@ function tseconds_countB__ref___projection(a: tseconds_countB__ref) : tseconds_c
 
 type seconds_count
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq3 : int, int -> bool
@@ -175,7 +175,7 @@ function seconds_count__ref___projection(a: seconds_count__ref) : seconds_count 
 
 type duration
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -285,18 +285,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -436,8 +436,18 @@ logic ts : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : in_range1(sc)
+
+axiom H1 : ((o = ts_sc(ts)) and (in_range1(o) and
+  (o = to_int(to_fixed(to_duration__2(ts))))))
+
+axiom H2 : (o1 = (sc + o))
+
  (* File "ada_real_time.ads", line 239, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (in_range1(sc) -> ((((o = ts_sc(ts)) and
-  (in_range1(o) and (o = to_int(to_fixed(to_duration__2(ts)))))) and
-  (o1 = (sc + o))) -> in_range(o1))))
+goal WP_parameter_def : in_range(o1)

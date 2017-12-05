@@ -119,7 +119,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tt1B
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -182,7 +182,7 @@ function t1__ref___3__projection(a: t1__ref) : tt1B = (a).t1__content
 
 type tt2B
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -248,10 +248,31 @@ axiom last__def_axiom : (last = c1)
 
 axiom last__def_axiom1 : (last1 = c2)
 
+logic a : int
+
+logic b : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic a1 : int
+
+axiom H : ((0 <= 2147483647) -> in_range(a))
+
+axiom H1 : ((0 <= 2147483647) -> in_range(b))
+
+axiom H2 : in_range(c1)
+
+axiom H3 : in_range(c2)
+
+axiom H4 : ((o = last1) and in_range(last1))
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = o)
+
  (* File "info_flow_tests.adb", line 42, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall o:int. forall result:int.
-  forall a1:int. (((0 <= 2147483647) -> in_range(a)) ->
-  (((0 <= 2147483647) -> in_range(b)) -> (in_range(c1) -> (in_range(c2) ->
-  ((((o = last1) and in_range(last1)) and ((result = a) and (a1 = o))) ->
-  in_range(last)))))))
+goal WP_parameter_def : in_range(last)

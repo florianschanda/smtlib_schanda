@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type rec_int_bad
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -198,11 +198,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x__split_fields : rec_int_bad
+
+logic temp___387 : int
+
+logic temp___389 : rec_int_bad
+
+axiom H : (in_range(i45s) and ((((- 2147483648) <= i45s) and
+  (i45s <= (- 1))) or ((1 <= i45s) and (i45s <= 2147483647))))
+
+axiom H1 : true
+
+axiom H2 : (to_rep(temp___389) = 0)
+
  (* File "preds.adb", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___389:rec_int_bad. ((in_range(i45s) and
-  ((((-2147483648) <= i45s) and (i45s <= (-1))) or ((1 <= i45s) and
-  (i45s <= 2147483647)))) -> ((to_rep(temp___389) = 0) ->
-  ((((-2147483648) <= to_rep(temp___389)) and
-  (to_rep(temp___389) <= (-1))) or ((1 <= to_rep(temp___389)) and
-  (to_rep(temp___389) <= 2147483647))))))
+goal WP_parameter_def : ((((- 2147483648) <= to_rep(temp___389)) and
+  (to_rep(temp___389) <= (- 1))) or ((1 <= to_rep(temp___389)) and
+  (to_rep(temp___389) <= 2147483647)))

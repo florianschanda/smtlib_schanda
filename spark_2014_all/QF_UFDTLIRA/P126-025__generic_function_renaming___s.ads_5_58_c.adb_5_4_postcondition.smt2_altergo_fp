@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type element
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -109,16 +109,37 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic c__dummy__result : int
+
+logic result : int
+
+logic c__dummy__result1 : int
+
+logic c__dummy__result2 : int
+
+logic c__dummy__result3 : int
+
+logic c__dummy__result4 : int
+
+logic c__dummy__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(e)
+
+axiom H1 : (c__dummy__result1 = c__dummy__result2)
+
+axiom H2 : (c__dummy__result3 = c__dummy__result1)
+
+axiom H3 : (result = c__dummy__result)
+
+axiom H4 : (c__dummy__result1 = e)
+
+axiom H5 : (c__dummy__result4 = c__dummy__result2)
+
+axiom H6 : (c__dummy__result5 = c__dummy__result3)
+
+axiom H7 : (result1 = c__dummy__result4)
+
  (* File "s.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c__dummy__result:int. forall result:int.
-  forall c__dummy__result1:int. forall c__dummy__result2:int.
-  forall c__dummy__result3:int. forall c__dummy__result4:int.
-  forall c__dummy__result5:int.
-  (forall result1:int. ((in_range(e) and
-  (((((c__dummy__result1 = c__dummy__result2) and
-  (c__dummy__result3 = c__dummy__result1)) and
-  ((result = c__dummy__result) and (c__dummy__result1 = e))) and
-  ((c__dummy__result4 = c__dummy__result2) and
-  (c__dummy__result5 = c__dummy__result3))) and
-  (result1 = c__dummy__result4))) -> (c__dummy__result4 = e))))
+goal WP_parameter_def : (c__dummy__result4 = e)

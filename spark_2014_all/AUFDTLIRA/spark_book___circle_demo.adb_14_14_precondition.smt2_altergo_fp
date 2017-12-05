@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -363,7 +363,7 @@ function string__ref___projection(a: string__ref) : us_t =
 
 type coordinate_type
 
-predicate in_range3(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range3(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq6 : int, int -> bool
 
@@ -589,107 +589,135 @@ axiom inside_circle__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic temp___String_Literal_535 : unit -> (int,character) farray
+logic temp___String_Literal_529 : unit -> (int,character) farray
 
-axiom temp___String_Literal_535__def_axiom :
-  (((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_535(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_535(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_535(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_535(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_535(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_535(void)[7])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[8])) = 103)) and
-  (to_rep((temp___String_Literal_535(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_535(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[12])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[13])) = 115)) and
-  (to_rep((temp___String_Literal_535(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[15])) = 110)) and
-  (to_rep((temp___String_Literal_535(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_535(void)[17])) = 116)) and
-  (to_rep((temp___String_Literal_535(void)[18])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[19])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[20])) = 110)) and
-  (to_rep((temp___String_Literal_535(void)[21])) = 115)) and
-  (to_rep((temp___String_Literal_535(void)[22])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[23])) = 100)) and
-  (to_rep((temp___String_Literal_535(void)[24])) = 101)) and
-  (to_rep((temp___String_Literal_535(void)[25])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[26])) = 116)) and
-  (to_rep((temp___String_Literal_535(void)[27])) = 104)) and
-  (to_rep((temp___String_Literal_535(void)[28])) = 101)) and
-  (to_rep((temp___String_Literal_535(void)[29])) = 32)) and
-  (to_rep((temp___String_Literal_535(void)[30])) = 99)) and
-  (to_rep((temp___String_Literal_535(void)[31])) = 105)) and
-  (to_rep((temp___String_Literal_535(void)[32])) = 114)) and
-  (to_rep((temp___String_Literal_535(void)[33])) = 99)) and
-  (to_rep((temp___String_Literal_535(void)[34])) = 108)) and
-  (to_rep((temp___String_Literal_535(void)[35])) = 101))
+axiom temp___String_Literal_529__def_axiom :
+  (((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_529(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_529(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_529(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_529(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_529(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_529(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[8])) = 103)) and
+  (to_rep((temp___String_Literal_529(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_529(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[12])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_529(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[15])) = 110)) and
+  (to_rep((temp___String_Literal_529(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_529(void)[17])) = 116)) and
+  (to_rep((temp___String_Literal_529(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[19])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[20])) = 110)) and
+  (to_rep((temp___String_Literal_529(void)[21])) = 115)) and
+  (to_rep((temp___String_Literal_529(void)[22])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[23])) = 100)) and
+  (to_rep((temp___String_Literal_529(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_529(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[26])) = 116)) and
+  (to_rep((temp___String_Literal_529(void)[27])) = 104)) and
+  (to_rep((temp___String_Literal_529(void)[28])) = 101)) and
+  (to_rep((temp___String_Literal_529(void)[29])) = 32)) and
+  (to_rep((temp___String_Literal_529(void)[30])) = 99)) and
+  (to_rep((temp___String_Literal_529(void)[31])) = 105)) and
+  (to_rep((temp___String_Literal_529(void)[32])) = 114)) and
+  (to_rep((temp___String_Literal_529(void)[33])) = 99)) and
+  (to_rep((temp___String_Literal_529(void)[34])) = 108)) and
+  (to_rep((temp___String_Literal_529(void)[35])) = 101))
 
-logic temp___String_Literal_536 : unit -> (int,character) farray
+logic temp___String_Literal_530 : unit -> (int,character) farray
 
-axiom temp___String_Literal_536__def_axiom :
-  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_536(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_536(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_536(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_536(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_536(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_536(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_536(void)[7])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[8])) = 103)) and
-  (to_rep((temp___String_Literal_536(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_536(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_536(void)[12])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[13])) = 115)) and
-  (to_rep((temp___String_Literal_536(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_536(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[16])) = 110)) and
-  (to_rep((temp___String_Literal_536(void)[17])) = 115)) and
-  (to_rep((temp___String_Literal_536(void)[18])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[19])) = 100)) and
-  (to_rep((temp___String_Literal_536(void)[20])) = 101)) and
-  (to_rep((temp___String_Literal_536(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_536(void)[22])) = 116)) and
-  (to_rep((temp___String_Literal_536(void)[23])) = 104)) and
-  (to_rep((temp___String_Literal_536(void)[24])) = 101)) and
-  (to_rep((temp___String_Literal_536(void)[25])) = 32)) and
-  (to_rep((temp___String_Literal_536(void)[26])) = 99)) and
-  (to_rep((temp___String_Literal_536(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_536(void)[28])) = 114)) and
-  (to_rep((temp___String_Literal_536(void)[29])) = 99)) and
-  (to_rep((temp___String_Literal_536(void)[30])) = 108)) and
-  (to_rep((temp___String_Literal_536(void)[31])) = 101))
+axiom temp___String_Literal_530__def_axiom :
+  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_530(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_530(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_530(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_530(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_530(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_530(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_530(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[8])) = 103)) and
+  (to_rep((temp___String_Literal_530(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_530(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_530(void)[12])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_530(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_530(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[16])) = 110)) and
+  (to_rep((temp___String_Literal_530(void)[17])) = 115)) and
+  (to_rep((temp___String_Literal_530(void)[18])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[19])) = 100)) and
+  (to_rep((temp___String_Literal_530(void)[20])) = 101)) and
+  (to_rep((temp___String_Literal_530(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_530(void)[22])) = 116)) and
+  (to_rep((temp___String_Literal_530(void)[23])) = 104)) and
+  (to_rep((temp___String_Literal_530(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_530(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_530(void)[26])) = 99)) and
+  (to_rep((temp___String_Literal_530(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_530(void)[28])) = 114)) and
+  (to_rep((temp___String_Literal_530(void)[29])) = 99)) and
+  (to_rep((temp___String_Literal_530(void)[30])) = 108)) and
+  (to_rep((temp___String_Literal_530(void)[31])) = 101))
 
 axiom in_bounds__post_axiom : true
 
- (* File "shapes5.ads", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall wild_man:int. forall my_circle__split_fields:coordinate_type.
-  forall my_circle__split_fields1:coordinate_type.
-  forall my_circle__split_fields2:radius_type.
-  forall temp___534:coordinate_type. forall temp___5341:coordinate_type.
-  forall temp___5342:radius_type. forall result:coordinate_type.
-  forall result1:coordinate_type. forall result2:radius_type.
-  forall my_circle__split_fields3:coordinate_type.
-  forall my_circle__split_fields4:coordinate_type.
-  forall my_circle__split_fields5:radius_type. (in_range(wild_man) -> (((({
-  us_split_fields1 = { rec__shapes5__circle__center_x = temp___534;
-  rec__shapes5__circle__center_y = temp___5341;
-  rec__shapes5__circle__radius = temp___5342 } } = make_circle(0, 0, 5,
+logic wild_man : int
+
+logic my_circle__split_fields : coordinate_type
+
+logic my_circle__split_fields1 : coordinate_type
+
+logic my_circle__split_fields2 : radius_type
+
+logic temp___528 : coordinate_type
+
+logic temp___5281 : coordinate_type
+
+logic temp___5282 : radius_type
+
+logic result : coordinate_type
+
+logic result1 : coordinate_type
+
+logic result2 : radius_type
+
+logic my_circle__split_fields3 : coordinate_type
+
+logic my_circle__split_fields4 : coordinate_type
+
+logic my_circle__split_fields5 : radius_type
+
+logic result3 : bool
+
+axiom H : in_range(wild_man)
+
+axiom H1 : (({ us_split_fields1 = { rec__shapes5__circle__center_x =
+  temp___528; rec__shapes5__circle__center_y = temp___5281;
+  rec__shapes5__circle__radius = temp___5282 } } = make_circle(0, 0, 5,
   wild_man)) and (in_bounds({ us_split_fields1 = {
-  rec__shapes5__circle__center_x = temp___534;
-  rec__shapes5__circle__center_y = temp___5341;
-  rec__shapes5__circle__radius = temp___5342 } }, wild_man) = true)) and
-  (((result = my_circle__split_fields) and
-  ((result1 = my_circle__split_fields1) and
-  (result2 = my_circle__split_fields2))) and
-  ((temp___534 = my_circle__split_fields3) and
-  ((temp___5341 = my_circle__split_fields4) and
-  (temp___5342 = my_circle__split_fields5))))) -> (in_bounds({
-  us_split_fields1 = { rec__shapes5__circle__center_x =
-  my_circle__split_fields3; rec__shapes5__circle__center_y =
-  my_circle__split_fields4; rec__shapes5__circle__radius =
-  my_circle__split_fields5 } }, wild_man) = true))))
+  rec__shapes5__circle__center_x = temp___528;
+  rec__shapes5__circle__center_y = temp___5281;
+  rec__shapes5__circle__radius = temp___5282 } }, wild_man) = true))
+
+axiom H2 : (result = my_circle__split_fields)
+
+axiom H3 : (result1 = my_circle__split_fields1)
+
+axiom H4 : (result2 = my_circle__split_fields2)
+
+axiom H5 : (temp___528 = my_circle__split_fields3)
+
+axiom H6 : (temp___5281 = my_circle__split_fields4)
+
+axiom H7 : (temp___5282 = my_circle__split_fields5)
+
+ (* File "shapes5.ads", line 21, characters 0-0 *)
+goal WP_parameter_def : (in_bounds({ us_split_fields1 = {
+  rec__shapes5__circle__center_x = my_circle__split_fields3;
+  rec__shapes5__circle__center_y = my_circle__split_fields4;
+  rec__shapes5__circle__radius = my_circle__split_fields5 } },
+  wild_man) = true)

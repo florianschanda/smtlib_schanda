@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -559,114 +559,154 @@ logic search_demo__search_array__aggregate_def : int, int, int, int, int,
   int, int, int, int, int -> (int,natural) farray
 
 axiom def_axiom :
-  (forall temp___549:int. forall temp___550:int. forall temp___551:int.
-  forall temp___552:int. forall temp___553:int. forall temp___554:int.
-  forall temp___555:int. forall temp___556:int. forall temp___557:int.
-  forall temp___558:int.
-  (((((((((((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[1]) = of_rep2(temp___549)) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[2]) = of_rep2(temp___550))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[3]) = of_rep2(temp___551))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[4]) = of_rep2(temp___552))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[5]) = of_rep2(temp___553))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[6]) = of_rep2(temp___554))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[7]) = of_rep2(temp___555))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[8]) = of_rep2(temp___556))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[9]) = of_rep2(temp___557))) and
-  ((search_demo__search_array__aggregate_def(temp___549, temp___550,
-  temp___551, temp___552, temp___553, temp___554, temp___555, temp___556,
-  temp___557, temp___558)[10]) = of_rep2(temp___558))))
+  (forall temp___543:int. forall temp___544:int. forall temp___545:int.
+  forall temp___546:int. forall temp___547:int. forall temp___548:int.
+  forall temp___549:int. forall temp___550:int. forall temp___551:int.
+  forall temp___552:int.
+  (((((((((((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[1]) = of_rep2(temp___543)) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[2]) = of_rep2(temp___544))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[3]) = of_rep2(temp___545))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[4]) = of_rep2(temp___546))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[5]) = of_rep2(temp___547))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[6]) = of_rep2(temp___548))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[7]) = of_rep2(temp___549))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[8]) = of_rep2(temp___550))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[9]) = of_rep2(temp___551))) and
+  ((search_demo__search_array__aggregate_def(temp___543, temp___544,
+  temp___545, temp___546, temp___547, temp___548, temp___549, temp___550,
+  temp___551, temp___552)[10]) = of_rep2(temp___552))))
 
-logic temp___String_Literal_560 : unit -> (int,character) farray
+logic temp___String_Literal_554 : unit -> (int,character) farray
 
-axiom temp___String_Literal_560__def_axiom :
-  ((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_560(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_560(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_560(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_560(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[5])) = 118)) and
-  (to_rep((temp___String_Literal_560(void)[6])) = 97)) and
-  (to_rep((temp___String_Literal_560(void)[7])) = 108)) and
-  (to_rep((temp___String_Literal_560(void)[8])) = 117)) and
-  (to_rep((temp___String_Literal_560(void)[9])) = 101)) and
-  (to_rep((temp___String_Literal_560(void)[10])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[11])) = 49)) and
-  (to_rep((temp___String_Literal_560(void)[12])) = 48)) and
-  (to_rep((temp___String_Literal_560(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[14])) = 119)) and
-  (to_rep((temp___String_Literal_560(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_560(void)[16])) = 115)) and
-  (to_rep((temp___String_Literal_560(void)[17])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[18])) = 102)) and
-  (to_rep((temp___String_Literal_560(void)[19])) = 111)) and
-  (to_rep((temp___String_Literal_560(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_560(void)[21])) = 110)) and
-  (to_rep((temp___String_Literal_560(void)[22])) = 100)) and
-  (to_rep((temp___String_Literal_560(void)[23])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[24])) = 97)) and
-  (to_rep((temp___String_Literal_560(void)[25])) = 116)) and
-  (to_rep((temp___String_Literal_560(void)[26])) = 32)) and
-  (to_rep((temp___String_Literal_560(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_560(void)[28])) = 110)) and
-  (to_rep((temp___String_Literal_560(void)[29])) = 100)) and
-  (to_rep((temp___String_Literal_560(void)[30])) = 101)) and
-  (to_rep((temp___String_Literal_560(void)[31])) = 120)) and
-  (to_rep((temp___String_Literal_560(void)[32])) = 32))
+axiom temp___String_Literal_554__def_axiom :
+  ((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_554(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_554(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_554(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_554(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[5])) = 118)) and
+  (to_rep((temp___String_Literal_554(void)[6])) = 97)) and
+  (to_rep((temp___String_Literal_554(void)[7])) = 108)) and
+  (to_rep((temp___String_Literal_554(void)[8])) = 117)) and
+  (to_rep((temp___String_Literal_554(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_554(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[11])) = 49)) and
+  (to_rep((temp___String_Literal_554(void)[12])) = 48)) and
+  (to_rep((temp___String_Literal_554(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[14])) = 119)) and
+  (to_rep((temp___String_Literal_554(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_554(void)[16])) = 115)) and
+  (to_rep((temp___String_Literal_554(void)[17])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[18])) = 102)) and
+  (to_rep((temp___String_Literal_554(void)[19])) = 111)) and
+  (to_rep((temp___String_Literal_554(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_554(void)[21])) = 110)) and
+  (to_rep((temp___String_Literal_554(void)[22])) = 100)) and
+  (to_rep((temp___String_Literal_554(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[24])) = 97)) and
+  (to_rep((temp___String_Literal_554(void)[25])) = 116)) and
+  (to_rep((temp___String_Literal_554(void)[26])) = 32)) and
+  (to_rep((temp___String_Literal_554(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_554(void)[28])) = 110)) and
+  (to_rep((temp___String_Literal_554(void)[29])) = 100)) and
+  (to_rep((temp___String_Literal_554(void)[30])) = 101)) and
+  (to_rep((temp___String_Literal_554(void)[31])) = 120)) and
+  (to_rep((temp___String_Literal_554(void)[32])) = 32))
 
-logic temp___String_Literal_563 : unit -> (int,character) farray
+logic temp___String_Literal_557 : unit -> (int,character) farray
 
-axiom temp___String_Literal_563__def_axiom :
-  ((((((((((((((((((((((((((to_rep((temp___String_Literal_563(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_563(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_563(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_563(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[5])) = 118)) and
-  (to_rep((temp___String_Literal_563(void)[6])) = 97)) and
-  (to_rep((temp___String_Literal_563(void)[7])) = 108)) and
-  (to_rep((temp___String_Literal_563(void)[8])) = 117)) and
-  (to_rep((temp___String_Literal_563(void)[9])) = 101)) and
-  (to_rep((temp___String_Literal_563(void)[10])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[11])) = 49)) and
-  (to_rep((temp___String_Literal_563(void)[12])) = 48)) and
-  (to_rep((temp___String_Literal_563(void)[13])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[14])) = 119)) and
-  (to_rep((temp___String_Literal_563(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_563(void)[16])) = 115)) and
-  (to_rep((temp___String_Literal_563(void)[17])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[18])) = 110)) and
-  (to_rep((temp___String_Literal_563(void)[19])) = 111)) and
-  (to_rep((temp___String_Literal_563(void)[20])) = 116)) and
-  (to_rep((temp___String_Literal_563(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_563(void)[22])) = 102)) and
-  (to_rep((temp___String_Literal_563(void)[23])) = 111)) and
-  (to_rep((temp___String_Literal_563(void)[24])) = 117)) and
-  (to_rep((temp___String_Literal_563(void)[25])) = 110)) and
-  (to_rep((temp___String_Literal_563(void)[26])) = 100))
+axiom temp___String_Literal_557__def_axiom :
+  ((((((((((((((((((((((((((to_rep((temp___String_Literal_557(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_557(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_557(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_557(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[5])) = 118)) and
+  (to_rep((temp___String_Literal_557(void)[6])) = 97)) and
+  (to_rep((temp___String_Literal_557(void)[7])) = 108)) and
+  (to_rep((temp___String_Literal_557(void)[8])) = 117)) and
+  (to_rep((temp___String_Literal_557(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_557(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[11])) = 49)) and
+  (to_rep((temp___String_Literal_557(void)[12])) = 48)) and
+  (to_rep((temp___String_Literal_557(void)[13])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[14])) = 119)) and
+  (to_rep((temp___String_Literal_557(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_557(void)[16])) = 115)) and
+  (to_rep((temp___String_Literal_557(void)[17])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[18])) = 110)) and
+  (to_rep((temp___String_Literal_557(void)[19])) = 111)) and
+  (to_rep((temp___String_Literal_557(void)[20])) = 116)) and
+  (to_rep((temp___String_Literal_557(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_557(void)[22])) = 102)) and
+  (to_rep((temp___String_Literal_557(void)[23])) = 111)) and
+  (to_rep((temp___String_Literal_557(void)[24])) = 117)) and
+  (to_rep((temp___String_Literal_557(void)[25])) = 110)) and
+  (to_rep((temp___String_Literal_557(void)[26])) = 100))
+
+logic search_array : (int,natural) farray
+
+logic result_index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : (int,natural) farray
+
+logic search_array1 : (int,natural) farray
+
+logic found : bool
+
+logic search_demo__searcher__result : int
+
+logic result1 : int
+
+logic result_index1 : int
+
+axiom H : (result = search_array)
+
+axiom H1 : (search_array1 = search_demo__search_array__aggregate_def(2, 4, 6,
+  8, 10, 12, 14, 16, 18, 20))
+
+axiom H2 : ((1 <= 10) -> in_range3(result_index))
+
+logic j : int
+
+axiom H3 : (1 <= j)
+
+axiom H4 : (j <= 10)
+
+logic k : int
+
+axiom H5 : ((j + 1) <= k)
+
+axiom H6 : (k <= 10)
 
  (* File "generic_searchers.ads", line 12, characters 0-0 *)
 goal WP_parameter_def :
-  (forall search_array:(int,natural) farray. forall result_index:int.
-  forall result:(int,natural) farray.
-  forall search_array1:(int,natural) farray. (((result = search_array) and
-  (search_array1 = search_demo__search_array__aggregate_def(2, 4, 6, 8, 10,
-  12, 14, 16, 18, 20))) -> (((1 <= 10) -> in_range3(result_index)) ->
-  (forall j:int. (((1 <= j) and (j <= 10)) ->
-  (forall k:int. ((((j + 1) <= k) and (k <= 10)) ->
-  (to_rep2((search_array1[j])) <  to_rep2((search_array1[k]))))))))))
+  (to_rep2((search_array1[j])) <  to_rep2((search_array1[k])))

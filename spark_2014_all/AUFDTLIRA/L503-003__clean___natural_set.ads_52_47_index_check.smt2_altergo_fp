@@ -135,7 +135,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type element_t
 
-predicate in_range2(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -491,12 +491,26 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : bool
+
+logic result : bool
+
+axiom H : in_range1(value)
+
+axiom H1 : ((o = members({ us_split_fields1 = { rec__natural_set__t__len = s;
+  rec__natural_set__t__m = s1 } })) and (in_range1(o) and
+  ((o = to_rep1(s)) and ((0 <= o) and (o <= 10)))))
+
+axiom H2 : (((i <= o) -> (o1 = true)) and ((not (i <= o)) -> (o1 = false)))
+
+axiom H3 : (((1 <= i) -> (result = o1)) and ((not (1 <= i)) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "natural_set.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:bool. forall result:bool.
-  (in_range1(value) -> (((((o = members({ us_split_fields1 = {
-  rec__natural_set__t__len = s; rec__natural_set__t__m = s1 } })) and
-  (in_range1(o) and ((o = to_rep1(s)) and ((0 <= o) and (o <= 10))))) and
-  (((i <= o) and (o1 = true)) or ((not (i <= o)) and (o1 = false)))) and
-  (((1 <= i) and (result = o1)) or ((not (1 <= i)) and (result = false)))) ->
-  ((result = true) -> (1 <= i)))))
+goal WP_parameter_def : (1 <= i)

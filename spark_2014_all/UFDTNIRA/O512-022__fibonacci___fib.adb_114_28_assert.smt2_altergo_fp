@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -223,7 +223,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -331,63 +331,368 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p1:int. forall p2:int. forall b1:int. forall b2:int. forall k1:int.
-  forall k2:int. forall temp___187:int. forall temp___186:int.
-  forall temp___185:int. forall temp___188:int. forall o:int. forall o1:int.
-  forall o2:int. forall result:int. forall p11:int. forall result1:int.
-  forall b11:int. forall result2:int. forall k11:int. forall p12:int.
-  forall b12:int. forall k12:int. forall temp___1881:int. forall result3:int.
-  forall temp___1882:int. forall result4:int. forall k13:int.
-  forall result5:int. forall b13:int. forall result6:int. forall k14:int.
-  forall result7:int. forall p13:int. forall p14:int. forall b14:int.
-  forall k15:int. forall p15:int. forall b15:int. forall k16:int.
-  forall p16:int. forall b16:int. forall k17:int. forall p17:int.
-  forall b17:int. forall k18:int. forall result8:int. forall p21:int.
-  forall result9:int. forall b21:int. forall result10:int. forall k21:int.
-  forall p22:int. forall b22:int. forall k22:int. forall temp___194:int.
-  forall result11:int. forall temp___1941:int. (in_range1(a1) ->
-  (in_range1(a2) -> (in_range2(n1) -> (in_range2(n2) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(p1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(p2)) -> (((a1 = a2) and
-  ((n1 = n2) and (((not (a1 = 0)) or (not (n1 = 0))) and (power(a1,
-  n1) <  2147483647)))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(b1)) -> ((((-2147483648) <= 2147483647) -> in_range1(b2)) ->
-  (((0 <= 2147483647) -> in_range2(k1)) -> (((0 <= 2147483647) ->
-  in_range2(k2)) -> ((({ int__content = result } = { int__content = p1 }) and
-  (p11 = 1)) -> ((({ int__content = result1 } = { int__content = b1 }) and
-  (b11 = a1)) -> ((({ int__content = result2 } = { int__content = k1 }) and
-  (k11 = n1)) -> ((((0 <  k11) and ((((temp___187 = p11) and
-  ((temp___186 = k11) and ((temp___185 = b11) and ((0 = temp___188) and
-  (((power(a1, n1) = (p12 * power(b12, k12))) and (0 <= k12)) and
-  (((((((-2147483648) <= 2147483647) -> in_range1(b12)) and
+logic p1 : int
+
+logic p2 : int
+
+logic b1 : int
+
+logic b2 : int
+
+logic k1 : int
+
+logic k2 : int
+
+logic temp___187 : int
+
+logic temp___186 : int
+
+logic temp___185 : int
+
+logic temp___188 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___193 : int
+
+logic temp___192 : int
+
+logic temp___191 : int
+
+logic temp___194 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic p11 : int
+
+logic result1 : int
+
+logic b11 : int
+
+logic result2 : int
+
+logic k11 : int
+
+logic p12 : int
+
+logic b12 : int
+
+logic k12 : int
+
+logic temp___1881 : int
+
+logic result3 : int
+
+logic temp___1882 : int
+
+logic result4 : int
+
+logic k13 : int
+
+logic result5 : int
+
+logic b13 : int
+
+logic result6 : int
+
+logic k14 : int
+
+logic result7 : int
+
+logic p13 : int
+
+logic p14 : int
+
+logic b14 : int
+
+logic k15 : int
+
+logic temp___1883 : int
+
+logic p15 : int
+
+logic b15 : int
+
+logic k16 : int
+
+logic temp___1884 : int
+
+logic p16 : int
+
+logic b16 : int
+
+logic k17 : int
+
+logic p17 : int
+
+logic b17 : int
+
+logic k18 : int
+
+logic p18 : int
+
+logic b18 : int
+
+logic k19 : int
+
+logic p19 : int
+
+logic b19 : int
+
+logic k110 : int
+
+logic result8 : int
+
+logic p21 : int
+
+logic result9 : int
+
+logic b21 : int
+
+logic result10 : int
+
+logic k21 : int
+
+logic p22 : int
+
+logic b22 : int
+
+logic k22 : int
+
+logic temp___1941 : int
+
+logic result11 : int
+
+logic temp___1942 : int
+
+logic result12 : int
+
+logic k23 : int
+
+logic result13 : int
+
+logic b23 : int
+
+logic result14 : int
+
+logic k24 : int
+
+logic result15 : int
+
+logic p23 : int
+
+logic p24 : int
+
+logic b24 : int
+
+logic k25 : int
+
+logic p25 : int
+
+logic b25 : int
+
+logic k26 : int
+
+logic p26 : int
+
+logic b26 : int
+
+logic k27 : int
+
+logic temp___1943 : int
+
+logic p27 : int
+
+logic b27 : int
+
+logic k28 : int
+
+logic temp___1944 : int
+
+logic p28 : int
+
+logic b28 : int
+
+logic k29 : int
+
+logic temp___1945 : int
+
+logic p29 : int
+
+logic b29 : int
+
+logic k210 : int
+
+logic temp___1946 : int
+
+logic p210 : int
+
+logic b210 : int
+
+logic k211 : int
+
+logic p211 : int
+
+logic b211 : int
+
+logic k212 : int
+
+logic p212 : int
+
+logic b212 : int
+
+logic k213 : int
+
+logic p213 : int
+
+logic b213 : int
+
+logic k214 : int
+
+logic p110 : int
+
+logic p214 : int
+
+logic b110 : int
+
+logic b214 : int
+
+logic k111 : int
+
+logic k215 : int
+
+logic p111 : int
+
+logic p215 : int
+
+logic b111 : int
+
+logic b215 : int
+
+logic k112 : int
+
+logic k216 : int
+
+axiom H : in_range1(a1)
+
+axiom H1 : in_range1(a2)
+
+axiom H2 : in_range2(n1)
+
+axiom H3 : in_range2(n2)
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(p1))
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range1(p2))
+
+axiom H6 : ((a1 = a2) and ((n1 = n2) and (((not (a1 = 0)) or
+  (not (n1 = 0))) and (power(a1, n1) <  2147483647))))
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(b1))
+
+axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(b2))
+
+axiom H9 : ((0 <= 2147483647) -> in_range2(k1))
+
+axiom H10 : ((0 <= 2147483647) -> in_range2(k2))
+
+axiom H11 : (result = p1)
+
+axiom H12 : (p11 = 1)
+
+axiom H13 : (result1 = b1)
+
+axiom H14 : (b11 = a1)
+
+axiom H15 : (result2 = k1)
+
+axiom H16 : (k11 = n1)
+
+axiom H17 : ((0 <  k11) -> (((temp___187 = p11) and ((temp___186 = k11) and
+  ((temp___185 = b11) and ((0 = temp___188) and (((power(a1,
+  n1) = (p12 * power(b12, k12))) and (0 <= k12)) and
+  (((((((- 2147483648) <= 2147483647) -> in_range1(b12)) and
   ((0 <= 2147483647) -> in_range2(k12))) and
-  (((-2147483648) <= 2147483647) -> in_range1(p12))) and (0 <  k12)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(p12))) and (0 <  k12)) and
   (((temp___1881 = result3) and (temp___1882 = k12)) and
-  ((((comp_mod(k12,2) = 0) and ((((p12 * power((b12 * b12),
+  ((((comp_mod(k12,2) = 0) -> ((((p12 * power((b12 * b12),
   comp_div(k12,2))) = power(a1, n1)) and (((k12 = result4) and
   (k13 = comp_div(k12,2))) and (((o = (b12 * b12)) and
   in_range1((b12 * b12))) and ((b12 = result5) and (b13 = o))))) and
-  (p13 = p12))) or ((not (comp_mod(k12,2) = 0)) and
+  (p13 = p12))) and ((not (comp_mod(k12,2) = 0)) ->
   (((((p12 * b12) * power(b12, (k12 - 1))) = power(a1, n1)) and
-  ((((o1 = (k12 - 1)) and in_range2((k12 - 1))) and ((k12 = result6) and
-  (k14 = o1))) and (((o2 = (b12 * p12)) and in_range1((b12 * p12))) and
-  ((p12 = result7) and (p13 = o2))))) and ((k13 = k14) and
-  (b13 = b12))))) and (not (0 <  k13)))))))))) and (((k13 = k15) and
-  ((b13 = b14) and (p13 = p14))) and ((k16 = k13) and ((b15 = b13) and
-  (p15 = p13))))) and ((({ int__content = k17 } = { int__content = k15 }) and
-  (({ int__content = b16 } = { int__content = b14 }) and ({ int__content =
-  p16 } = { int__content = p14 }))) and ((k18 = k16) and ((b17 = b15) and
-  (p17 = p15)))))) or ((not (0 <  k11)) and (((k11 = k17) and
-  ((b11 = b16) and (p11 = p16))) and ((k18 = k11) and ((b17 = b11) and
-  (p17 = p11)))))) -> (((result8 = p2) and (p21 = 1)) -> (((result9 = b2) and
-  (b21 = a2)) -> (((result10 = k2) and (k21 = n2)) -> ((0 <  k21) ->
-  (((((power(a2, n2) = (p22 * power(b22, k22))) and (0 <= k17)) and
-  (p22 <= power(a2, n2))) and (b22 <= power(a2, n2))) ->
-  (((((((-2147483648) <= 2147483647) -> in_range1(p22)) and
-  (((-2147483648) <= 2147483647) -> in_range1(b22))) and
-  ((0 <= 2147483647) -> in_range2(k22))) and (0 <  k22)) ->
-  (((result11 = temp___194) and (temp___1941 = k22)) ->
-  ((comp_mod(k22,2) = 0) -> ((p22 * power((b22 * b22),
-  comp_div(k22,2))) = power(a2, n2))))))))))))))))))))))))))
+  ((((o2 = (k12 - 1)) and in_range2((k12 - 1))) and ((k12 = result6) and
+  (k14 = o2))) and (((o3 = (b12 * p12)) and in_range1((b12 * p12))) and
+  ((p12 = result7) and (p13 = o3))))) and ((k13 = k14) and
+  (b13 = b12))))) and (not (0 <  k13)))))))))) and (((k17 = k13) and
+  ((b16 = b13) and (p13 = p16))) and ((k18 = k13) and ((b17 = b13) and
+  (p17 = p13))))))
+
+axiom H18 : ((0 <  k11) -> (k19 = k17))
+
+axiom H19 : ((0 <  k11) -> (b18 = b16))
+
+axiom H20 : ((0 <  k11) -> (p18 = p16))
+
+axiom H21 : ((0 <  k11) -> (k110 = k18))
+
+axiom H22 : ((0 <  k11) -> (b19 = b17))
+
+axiom H23 : ((0 <  k11) -> (p19 = p17))
+
+axiom H24 : ((not (0 <  k11)) -> (k19 = k11))
+
+axiom H25 : ((not (0 <  k11)) -> (b18 = b11))
+
+axiom H26 : ((not (0 <  k11)) -> (p18 = p11))
+
+axiom H27 : ((not (0 <  k11)) -> (k110 = k11))
+
+axiom H28 : ((not (0 <  k11)) -> (b19 = b11))
+
+axiom H29 : ((not (0 <  k11)) -> (p19 = p11))
+
+axiom H30 : (result8 = p2)
+
+axiom H31 : (p21 = 1)
+
+axiom H32 : (result9 = b2)
+
+axiom H33 : (b21 = a2)
+
+axiom H34 : (result10 = k2)
+
+axiom H35 : (k21 = n2)
+
+axiom H36 : (0 <  k21)
+
+axiom H37 : ((((power(a2, n2) = (p22 * power(b22, k22))) and (0 <= k19)) and
+  (p22 <= power(a2, n2))) and (b22 <= power(a2, n2)))
+
+axiom H38 : ((((((- 2147483648) <= 2147483647) -> in_range1(p22)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(b22))) and
+  ((0 <= 2147483647) -> in_range2(k22))) and (0 <  k22))
+
+axiom H39 : (result11 = temp___1941)
+
+axiom H40 : (temp___1942 = k22)
+
+axiom H41 : (comp_mod(k22,2) = 0)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : ((p22 * power((b22 * b22),
+  comp_div(k22,2))) = power(a2, n2))

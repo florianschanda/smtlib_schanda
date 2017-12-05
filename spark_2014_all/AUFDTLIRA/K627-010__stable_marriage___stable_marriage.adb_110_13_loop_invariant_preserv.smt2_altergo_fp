@@ -392,36 +392,138 @@ axiom def_axiom :
   (forall temp___463:int.
   ((stable_marriage__invert_map__result__aggregate_def(temp___462)[temp___463]) = of_rep1(temp___462))))
 
+logic result__ : (int,group2_id) farray
+
+logic g2 : int
+
+logic stable_marriage__invert_map__result : (int,group2_id) farray
+
+logic temp___465 : (int,group2_id) farray
+
+logic temp___464 : int
+
+logic prev : int
+
+logic g1 : int
+
+logic prev2 : int
+
+logic o : group2_id
+
+logic o1 : (int,group2_id) farray
+
+logic result : (int,group2_id) farray
+
+logic result__1 : (int,group2_id) farray
+
+logic result1 : int
+
+logic g21 : int
+
+logic result__2 : (int,group2_id) farray
+
+logic g22 : int
+
+logic result2 : (int,group2_id) farray
+
+logic result__3 : (int,group2_id) farray
+
+logic result3 : int
+
+logic g23 : int
+
+logic result__4 : (int,group2_id) farray
+
+logic g24 : int
+
+logic result__5 : (int,group2_id) farray
+
+logic g25 : int
+
+logic result__6 : (int,group2_id) farray
+
+logic g26 : int
+
+logic result__7 : (int,group2_id) farray
+
+logic g27 : int
+
+logic result4 : (int,group2_id) farray
+
+logic stable_marriage__invert_map__result1 : (int,group2_id) farray
+
+logic stable_marriage__invert_map__result2 : (int,group2_id) farray
+
+logic stable_marriage__invert_map__result3 : (int,group2_id) farray
+
+logic result__8 : (int,group2_id) farray
+
+logic g28 : int
+
+logic stable_marriage__invert_map__result4 : (int,group2_id) farray
+
+logic result__9 : (int,group2_id) farray
+
+logic g29 : int
+
+logic stable_marriage__invert_map__result5 : (int,group2_id) farray
+
+axiom H :
+  (forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
+  (exists g210:int. (((1 <= g210) and (g210 <= 64)) and
+  (to_rep((g2_to_g1[g210])) = g11)))))
+
+axiom H1 : (result = result__)
+
+axiom H2 :
+  (result__1 = stable_marriage__invert_map__result__aggregate_def(64))
+
+axiom H3 :
+  (forall g211:int. (((1 <= g211) and (g211 <= 64)) ->
+  (forall g221:int. (((1 <= g221) and (g221 <= 64)) ->
+  ((not (g211 = g221)) ->
+  (not (to_rep((g2_to_g1[g211])) = to_rep((g2_to_g1[g221])))))))))
+
+axiom H4 : (result1 = g2)
+
+axiom H5 : (g21 = 1)
+
+axiom H6 : (1 <= g21)
+
+axiom H7 : (g21 <= 64)
+
+axiom H8 :
+  (forall prev1:int. (((1 <= prev1) and (prev1 <= (g22 - 1))) ->
+  (to_rep1((result__2[to_rep((g2_to_g1[prev1]))])) = prev1)))
+
+axiom H9 :
+  (forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
+  ((exists prev21:int. (((1 <= prev21) and (prev21 <= (g22 - 1))) and
+   (to_rep((g2_to_g1[prev21])) = g11))) ->
+  (to_rep((g2_to_g1[to_rep1((result__2[g11]))])) = g11))))
+
+axiom H10 : (((1 <= 64) -> in_range2(g22)) and ((1 <= g22) and (g22 <= 64)))
+
+axiom H11 : (to_rep1(o) = g22)
+
+axiom H12 : (o1 = (result__2[to_rep((g2_to_g1[g22])) <- o]))
+
+axiom H13 : (result__2 = result2)
+
+axiom H14 : (result__3 = o1)
+
+axiom H15 : (not (g22 = 64))
+
+axiom H16 : (result3 = g22)
+
+axiom H17 : (g23 = (g22 + 1))
+
+logic prev3 : int
+
+axiom H18 : (1 <= prev3)
+
+axiom H19 : (prev3 <= (g23 - 1))
+
  (* File "stable_marriage.ads", line 17, characters 0-0 *)
 goal WP_parameter_def :
-  (forall result__:(int,group2_id) farray. forall g2:int. forall o:group2_id.
-  forall o1:(int,group2_id) farray. forall result:(int,group2_id) farray.
-  forall result__1:(int,group2_id) farray. forall result1:int.
-  forall g21:int. forall result__2:(int,group2_id) farray. forall g22:int.
-  forall result2:(int,group2_id) farray.
-  forall result__3:(int,group2_id) farray. forall result3:int.
-  forall g23:int.
-  ((forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
-   (exists g24:int. (((1 <= g24) and (g24 <= 64)) and
-   (to_rep((g2_to_g1[g24])) = g1))))) ->
-  ((({ map__content1 = result } = { map__content1 = result__ }) and
-  (result__1 = stable_marriage__invert_map__result__aggregate_def(64))) ->
-  ((forall g211:int. (((1 <= g211) and (g211 <= 64)) ->
-   (forall g221:int. (((1 <= g221) and (g221 <= 64)) ->
-   ((not (g211 = g221)) ->
-   (not (to_rep((g2_to_g1[g211])) = to_rep((g2_to_g1[g221]))))))))) ->
-  ((({ int__content = result1 } = { int__content = g2 }) and (g21 = 1)) ->
-  (((1 <= g21) and (g21 <= 64)) ->
-  (((forall prev:int. (((1 <= prev) and (prev <= (g22 - 1))) ->
-    (to_rep1((result__2[to_rep((g2_to_g1[prev]))])) = prev))) and
-  (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
-  ((exists prev2:int. (((1 <= prev2) and (prev2 <= (g22 - 1))) and
-   (to_rep((g2_to_g1[prev2])) = g1))) ->
-  (to_rep((g2_to_g1[to_rep1((result__2[g1]))])) = g1))))) -> (((((1 <= 64) ->
-  in_range2(g22)) and ((1 <= g22) and (g22 <= 64))) and
-  ((((to_rep1(o) = g22) and
-  (o1 = (result__2[to_rep((g2_to_g1[g22])) <- o]))) and
-  ((result__2 = result2) and (result__3 = o1))) and ((not (g22 = 64)) and
-  ((result3 = g22) and (g23 = (g22 + 1)))))) ->
-  (forall prev:int. (((1 <= prev) and (prev <= (g23 - 1))) ->
-  (to_rep1((result__3[to_rep((g2_to_g1[prev]))])) = prev)))))))))))
+  (to_rep1((result__3[to_rep((g2_to_g1[prev3]))])) = prev3)

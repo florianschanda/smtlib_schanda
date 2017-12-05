@@ -417,20 +417,48 @@ type t3b__ref = { t3b__content : t3b
 
 function t3b__ref___projection(a: t3b__ref) : t3b = (a).t3b__content
 
+logic a : (int,bool) farray
+
+logic temp___152 : (int,bool) farray
+
+logic temp___153 : (int,bool) farray
+
+logic temp___1531 : t
+
+logic o : (int,bool) farray
+
+logic temp___155 : (int,bool) farray
+
+logic temp___1551 : t
+
+axiom H : in_range(d)
+
+axiom H1 : (d = 2)
+
+axiom H2 : ((2 <= 4) -> (((0 <= 2) and (2 <= 6)) and ((0 <= 4) and
+  (4 <= 6))))
+
+axiom H3 : (temp___152 = a)
+
+axiom H4 : (((2 <= 4) -> (((0 <= d) -> (((4 - 2) + 1) = ((d - 0) + 1))) and
+  ((not (0 <= d)) -> (((4 - 2) + 1) = 0)))) and ((not (2 <= 4)) ->
+  ((0 <= d) -> (0 = ((d - 0) + 1)))))
+
+axiom H5 : (slide(temp___152, 2, 0) = temp___153)
+
+axiom H6 : (mk(0, d) = temp___1531)
+
+axiom H7 : ((0 <= d) -> (((0 <= 0) and (0 <= 6)) and ((0 <= d) and
+  (d <= 6))))
+
+axiom H8 : (o = a)
+
+axiom H9 : (o = temp___155)
+
+axiom H10 : (mk(0, d) = temp___1551)
+
  (* File "slice_test_2.ads", line 8, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(int,bool) farray. forall temp___152:(int,bool) farray.
-  forall temp___153:(int,bool) farray. forall temp___1531:t.
-  forall o:(int,bool) farray. forall temp___155:(int,bool) farray.
-  forall temp___1551:t. (in_range(d) -> ((d = 2) -> (((((2 <= 4) ->
-  (((0 <= 2) and (2 <= 6)) and ((0 <= 4) and (4 <= 6)))) and
-  (temp___152 = a)) and ((((2 <= 4) and (((0 <= d) and
-  (((4 - 2) + 1) = ((d - 0) + 1))) or ((not (0 <= d)) and
-  (((4 - 2) + 1) = 0)))) or ((not (2 <= 4)) and (((0 <= d) and
-  (0 = ((d - 0) + 1))) or (not (0 <= d))))) and ((slide(temp___152, 2,
-  0) = temp___153) and (mk(0, d) = temp___1531)))) -> (((((0 <= d) ->
-  (((0 <= 0) and (0 <= 6)) and ((0 <= d) and (d <= 6)))) and (o = a)) and
-  ((o = temp___155) and (mk(0, d) = temp___1551))) ->
   (((to_rep(first(temp___1531)) <= to_rep(last(temp___1531))) ->
   (((to_rep(first(temp___1551)) <= to_rep(last(temp___1551))) ->
   (((to_rep(last(temp___1531)) - to_rep(first(temp___1531))) + 1) = ((to_rep(last(temp___1551)) - to_rep(first(temp___1551))) + 1))) and
@@ -438,4 +466,4 @@ goal WP_parameter_def :
   (((to_rep(last(temp___1531)) - to_rep(first(temp___1531))) + 1) = 0)))) and
   ((not (to_rep(first(temp___1531)) <= to_rep(last(temp___1531)))) ->
   ((to_rep(first(temp___1551)) <= to_rep(last(temp___1551))) ->
-  (0 = ((to_rep(last(temp___1551)) - to_rep(first(temp___1551))) + 1))))))))))
+  (0 = ((to_rep(last(temp___1551)) - to_rep(first(temp___1551))) + 1)))))

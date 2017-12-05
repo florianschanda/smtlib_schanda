@@ -255,49 +255,105 @@ logic b1 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic records__add_pair_a__result : unsigned_byte
+
+logic records__add_pair_a__result1 : unsigned_byte
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic o4 : unsigned_byte
+
+logic o5 : unsigned_byte
+
+logic o6 : unsigned_byte
+
+logic o7 : unsigned_byte
+
+logic result : unsigned_byte
+
+logic result1 : unsigned_byte
+
+logic records__add_pair_a__result2 : unsigned_byte
+
+logic records__add_pair_a__result3 : unsigned_byte
+
+logic records__add_pair_a__result4 : unsigned_byte
+
+logic records__add_pair_a__result5 : unsigned_byte
+
+logic records__add_pair_a__result6 : unsigned_byte
+
+logic records__add_pair_a__result7 : unsigned_byte
+
+logic records__add_pair_a__result8 : unsigned_byte
+
+logic records__add_pair_a__result9 : unsigned_byte
+
+logic records__add_pair_a__result10 : unsigned_byte
+
+logic records__add_pair_a__result11 : unsigned_byte
+
+logic result2 : unsigned_byte
+
+logic result3 : unsigned_byte
+
+axiom H : (in_range1((to_rep(a) + to_rep(b))) and
+  in_range1((to_rep(a1) + to_rep(b1))))
+
+axiom H1 : (records__add_pair_a__result4 = records__add_pair_a__result2)
+
+axiom H2 : (records__add_pair_a__result5 = records__add_pair_a__result3)
+
+axiom H3 : ((records__add_pair_a__result6 = records__add_pair_a__result2) and
+  (records__add_pair_a__result7 = records__add_pair_a__result3))
+
+axiom H4 : ((o1 = (to_rep(a1) + to_rep(b1))) and
+  in_range1((to_rep(a1) + to_rep(b1))))
+
+axiom H5 : (to_rep(o2) = o1)
+
+axiom H6 : ((o = (to_rep(a) + to_rep(b))) and
+  in_range1((to_rep(a) + to_rep(b))))
+
+axiom H7 : (to_rep(o3) = o)
+
+axiom H8 : (o3 = o4)
+
+axiom H9 : (o2 = o5)
+
+axiom H10 : (o6 = o4)
+
+axiom H11 : (o7 = o5)
+
+axiom H12 : (result = records__add_pair_a__result)
+
+axiom H13 : (result1 = records__add_pair_a__result1)
+
+axiom H14 : ((records__add_pair_a__result2 = o6) and
+  (records__add_pair_a__result3 = o7))
+
+axiom H15 :
+  ((records__add_pair_a__result8 = records__add_pair_a__result4) and
+  (records__add_pair_a__result9 = records__add_pair_a__result5))
+
+axiom H16 : (records__add_pair_a__result10 = records__add_pair_a__result6)
+
+axiom H17 : (records__add_pair_a__result11 = records__add_pair_a__result7)
+
+axiom H18 : (result2 = records__add_pair_a__result8)
+
+axiom H19 : (result3 = records__add_pair_a__result9)
+
  (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall records__add_pair_a__result:unsigned_byte.
-  forall records__add_pair_a__result1:unsigned_byte. forall o:int.
-  forall o1:int. forall o2:unsigned_byte. forall o3:unsigned_byte.
-  forall o4:unsigned_byte. forall o5:unsigned_byte. forall o6:unsigned_byte.
-  forall o7:unsigned_byte. forall result:unsigned_byte.
-  forall result1:unsigned_byte.
-  forall records__add_pair_a__result2:unsigned_byte.
-  forall records__add_pair_a__result3:unsigned_byte.
-  forall records__add_pair_a__result4:unsigned_byte.
-  forall records__add_pair_a__result5:unsigned_byte.
-  forall records__add_pair_a__result6:unsigned_byte.
-  forall records__add_pair_a__result7:unsigned_byte.
-  forall records__add_pair_a__result8:unsigned_byte.
-  forall records__add_pair_a__result9:unsigned_byte.
-  forall records__add_pair_a__result10:unsigned_byte.
-  forall records__add_pair_a__result11:unsigned_byte.
-  (forall result2:unsigned_byte. forall result3:unsigned_byte.
-  (((in_range1((to_rep(a) + to_rep(b))) and
-  in_range1((to_rep(a1) + to_rep(b1)))) and
-  ((((((records__add_pair_a__result4 = records__add_pair_a__result2) and
-  (records__add_pair_a__result5 = records__add_pair_a__result3)) and
-  ((records__add_pair_a__result6 = records__add_pair_a__result2) and
-  (records__add_pair_a__result7 = records__add_pair_a__result3))) and
-  ((((((o1 = (to_rep(a1) + to_rep(b1))) and
-  in_range1((to_rep(a1) + to_rep(b1)))) and (to_rep(o2) = o1)) and
-  ((((o = (to_rep(a) + to_rep(b))) and
-  in_range1((to_rep(a) + to_rep(b)))) and (to_rep(o3) = o)) and
-  ((o3 = o4) and (o2 = o5)))) and ((o6 = o4) and (o7 = o5))) and
-  (((result = records__add_pair_a__result) and
-  (result1 = records__add_pair_a__result1)) and
-  ((o6 = records__add_pair_a__result2) and
-  (o7 = records__add_pair_a__result3))))) and
-  (((records__add_pair_a__result8 = records__add_pair_a__result4) and
-  (records__add_pair_a__result9 = records__add_pair_a__result5)) and
-  ((records__add_pair_a__result10 = records__add_pair_a__result6) and
-  (records__add_pair_a__result11 = records__add_pair_a__result7)))) and
-  ((result2 = records__add_pair_a__result8) and
-  (result3 = records__add_pair_a__result9)))) -> (bool_eq3({
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
+  rec__records_prooffuncs__pair__a = records__add_pair_a__result8;
+  rec__records_prooffuncs__pair__b = records__add_pair_a__result9 } }, {
   us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  records__add_pair_a__result8; rec__records_prooffuncs__pair__b =
-  records__add_pair_a__result9 } }, { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = of_rep((to_rep(a) + to_rep(b)));
-  rec__records_prooffuncs__pair__b = of_rep((to_rep(a1) + to_rep(b1))) }
-  }) = true))))
+  of_rep((to_rep(a) + to_rep(b))); rec__records_prooffuncs__pair__b =
+  of_rep((to_rep(a1) + to_rep(b1))) } }) = true)

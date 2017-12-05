@@ -161,7 +161,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -331,6 +331,8 @@ axiom last_count__def_axiom : (last_count = 2147483647)
 
 axiom max_size_in_storage_elements__def_axiom :
   (max_size_in_storage_elements = value__size)
+
+logic indefinite_bounded_tagged__vect__max_size_in_storage_elements__assume : int
 
  (* File "a-cfinve.ads", line 861, characters 0-0 *)
 goal WP_parameter_def : in_range1(value__size)

@@ -256,7 +256,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -352,18 +352,196 @@ axiom def_axiom :
   (forall temp___175:int.
   ((queen__copy_until__r__aggregate_def(temp___174)[temp___175]) = of_rep(temp___174))))
 
+logic r : (int,index) farray
+
+logic j : int
+
+logic j1 : int
+
+logic queen__copy_until__result : (int,index) farray
+
+logic temp___178 : int
+
+logic temp___176 : (int,index) farray
+
+logic k : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : index
+
+logic o4 : (int,index) farray
+
+logic temp___183 : int
+
+logic temp___181 : (int,index) farray
+
+logic k1 : int
+
+logic o5 : int
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : (int,index) farray
+
+logic j2 : int
+
+logic o10 : int
+
+logic o11 : index
+
+logic o12 : int
+
+logic result : (int,index) farray
+
+logic r1 : (int,index) farray
+
+logic result1 : int
+
+logic j3 : int
+
+logic r2 : (int,index) farray
+
+logic j4 : int
+
+logic result2 : (int,index) farray
+
+logic r3 : (int,index) farray
+
+logic result3 : int
+
+logic j5 : int
+
+logic r4 : (int,index) farray
+
+logic j6 : int
+
+logic r5 : (int,index) farray
+
+logic j7 : int
+
+logic r6 : (int,index) farray
+
+logic j8 : int
+
+logic r7 : (int,index) farray
+
+logic j9 : int
+
+logic r8 : (int,index) farray
+
+logic j10 : int
+
+logic r9 : (int,index) farray
+
+logic j11 : int
+
+logic result4 : int
+
+logic j12 : int
+
+logic r10 : (int,index) farray
+
+logic j13 : int
+
+logic result5 : (int,index) farray
+
+logic r11 : (int,index) farray
+
+logic result6 : int
+
+logic j14 : int
+
+logic r12 : (int,index) farray
+
+logic j15 : int
+
+logic r13 : (int,index) farray
+
+logic j16 : int
+
+logic r14 : (int,index) farray
+
+logic j17 : int
+
+logic r15 : (int,index) farray
+
+logic j18 : int
+
+logic r16 : (int,index) farray
+
+logic j19 : int
+
+logic r17 : (int,index) farray
+
+logic j20 : int
+
+logic r18 : (int,index) farray
+
+logic j21 : int
+
+logic r19 : (int,index) farray
+
+logic j22 : int
+
+logic result7 : (int,index) farray
+
+logic queen__copy_until__result1 : (int,index) farray
+
+logic queen__copy_until__result2 : (int,index) farray
+
+logic queen__copy_until__result3 : (int,index) farray
+
+logic r20 : (int,index) farray
+
+logic j23 : int
+
+logic j24 : int
+
+logic queen__copy_until__result4 : (int,index) farray
+
+logic r21 : (int,index) farray
+
+logic j25 : int
+
+logic j26 : int
+
+logic queen__copy_until__result5 : (int,index) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = queen__copy_until__r__aggregate_def(1))
+
+axiom H3 : (result1 = j)
+
+axiom H4 : (j3 = 1)
+
+axiom H5 : (1 <= j3)
+
+axiom H6 : (j3 <= i)
+
+axiom H7 :
+  (forall k2:int. (((1 <= k2) and (k2 <= (j4 - 1))) ->
+  (to_rep((r2[k2])) = to_rep((b[k2])))))
+
+axiom H8 :
+  (((forall temp___177:int. (((1 <= temp___177) and (temp___177 <= 8)) ->
+    ((j4 <= temp___177) -> ((r2[temp___177]) = (r1[temp___177]))))) and
+  ((1 <= i) -> dynamic_property(1, i, j4))) and ((1 <= j4) and (j4 <= i)))
+
+axiom H9 : (1 <= k)
+
+axiom H10 : (k <= (j4 - 1))
+
  (* File "queen.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(int,index) farray. forall j:int. forall k:int.
-  forall result:(int,index) farray. forall r1:(int,index) farray.
-  forall result1:int. forall j1:int. forall r2:(int,index) farray.
-  forall j2:int. (in_range1(i) -> ((({ map__content = result } = {
-  map__content = r }) and (r1 = queen__copy_until__r__aggregate_def(1))) ->
-  ((({ int__content = result1 } = { int__content = j }) and (j1 = 1)) ->
-  (((1 <= j1) and (j1 <= i)) ->
-  ((forall k1:int. (((1 <= k1) and (k1 <= (j2 - 1))) ->
-   (to_rep((r2[k1])) = to_rep((b[k1]))))) ->
-  ((((forall temp___177:int. (((1 <= temp___177) and (temp___177 <= 8)) ->
-     ((j2 <= temp___177) -> ((r2[temp___177]) = (r1[temp___177]))))) and
-  ((1 <= i) -> dynamic_property(1, i, j2))) and ((1 <= j2) and (j2 <= i))) ->
-  (((1 <= k) and (k <= (j2 - 1))) -> (1 <= k)))))))))
+goal WP_parameter_def : (1 <= k)

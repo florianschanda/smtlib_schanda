@@ -108,5 +108,31 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic p__id_not_a__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic p__id_not_a__result1 : int
+
+logic p__id_not_a__result2 : int
+
+logic p__id_not_a__result3 : int
+
+logic p__id_not_a__result4 : int
+
+logic p__id_not_a__result5 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (not (x = 0))
+
  (* File "p.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> (not (x = 0))))
+goal WP_parameter_def : (not (x = 0))

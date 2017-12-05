@@ -168,6 +168,7 @@
 (define-fun dynamic_invariant5 ((temp___expr_228 Int) (temp___is_init_225 Bool) (temp___skip_constant_226 Bool) (temp___do_toplevel_227 Bool)) Bool (=> (or (= temp___is_init_225 true) (<= 1 2147483647)) (in_range6 temp___expr_228)))
 (assert (forall ((container us_rep1)) (forall ((position Int)) (! (=> (and (dynamic_invariant4 position true true true) (and (<= 1 position) (<= position (last container)))) (dynamic_invariant5 (get container position) true false true)) :pattern ((get container position))))))
 (declare-const container__split_fields us_main_type)
+(declare-const o Int)
 (assert (in_range2 index))
 (assert (in_range1 count))
 (assert (and (<= 1 index) (<= index (last (model__ (mk___rep container__split_discrs (mk___split_fields container__split_fields)))))))

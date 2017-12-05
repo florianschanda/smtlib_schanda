@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -122,6 +122,14 @@ axiom is_ok_to_increase__def_axiom :
   (0 <  proof_in_legal__body_var)))
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic var : int
+
+logic x : int
+
+logic body_var : int
+
+logic o : int
 
  (* File "proof_in_legal.adb", line 7, characters 0-0 *)
 goal WP_parameter_def : true

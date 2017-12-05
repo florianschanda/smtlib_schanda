@@ -482,11 +482,95 @@ axiom def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic m : int
+
+logic self__ : message_index_type
+
+logic self__1 : message_index_type
+
+logic self__2 : message_count_type
+
+logic self__3 : bool
+
+logic self__4 : (int,message_type) farray
+
+logic o : int
+
+logic o1 : message_count_type
+
+logic o2 : message_index_type
+
+logic o3 : message_index_type
+
+logic o4 : message_count_type
+
+logic o5 : bool
+
+logic o6 : (int,message_type) farray
+
+logic o7 : message_index_type
+
+logic o8 : message_index_type
+
+logic o9 : message_count_type
+
+logic o10 : bool
+
+logic o11 : (int,message_type) farray
+
+logic o12 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : message_index_type
+
+logic result2 : message_index_type
+
+logic result3 : message_count_type
+
+logic result4 : bool
+
+logic result5 : (int,message_type) farray
+
+logic self__5 : message_index_type
+
+logic self__6 : message_index_type
+
+logic self__7 : message_count_type
+
+logic self__8 : bool
+
+logic self__9 : (int,message_type) farray
+
+logic result6 : message_index_type
+
+logic result7 : message_index_type
+
+logic result8 : message_count_type
+
+logic result9 : bool
+
+logic result10 : (int,message_type) farray
+
+logic self__10 : message_index_type
+
+logic self__11 : message_index_type
+
+logic self__12 : message_count_type
+
+logic self__13 : bool
+
+logic self__14 : (int,message_type) farray
+
+axiom H : ((0 <= 1) -> in_range1(m))
+
+axiom H1 : (self__3 = true)
+
+axiom H2 : (result = m)
+
+axiom H3 : (m1 = to_rep((self__4[to_rep1(self__1)])))
+
  (* File "tasking.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:int. forall self__:message_index_type.
-  forall self__1:message_count_type. forall self__2:bool.
-  forall self__3:(int,message_type) farray. forall result:int. forall m1:int.
-  (((0 <= 1) -> in_range1(m)) -> ((self__2 = true) -> (((result = m) and
-  (m1 = to_rep((self__3[to_rep1(self__)])))) ->
-  in_range3((to_rep2(self__1) - 1))))))
+goal WP_parameter_def : in_range3((to_rep2(self__2) - 1))

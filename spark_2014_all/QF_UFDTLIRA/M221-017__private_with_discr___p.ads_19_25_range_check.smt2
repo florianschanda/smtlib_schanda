@@ -30,6 +30,7 @@
 (declare-datatypes () ((integer__ref (mk_integer__ref (integer__content integer)))))
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content a))
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const us Int)
 (assert (not (in_range 10)))
 (check-sat)
 (exit)

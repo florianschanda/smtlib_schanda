@@ -76,7 +76,7 @@ function poT__ref___projection(a: poT__ref) : poT = (a).poT__content
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -220,7 +220,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom foo__post_axiom : true
 
+logic temp___185 : integer
+
+axiom H : (to_rep(temp___185) = 0)
+
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___185:integer. ((to_rep(temp___185) = 0) ->
-  (foo(void) = true)))
+goal WP_parameter_def : (foo(void) = true)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type u
 
-predicate in_range1(x: int) = (((-5) <= x) and (x <= 10))
+predicate in_range1(x: int) = (((- 5) <= x) and (x <= 10))
 
 logic bool_eq1 : int, int -> bool
 
@@ -140,6 +140,13 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : ((x <= 4) and (y <= 1))
+
  (* File "base_type.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> (((x <= 4) and
-  (y <= 1)) -> in_range1((((x + y) - 1) + 6)))))
+goal WP_parameter_def : in_range1((((x + y) - 1) + 6))

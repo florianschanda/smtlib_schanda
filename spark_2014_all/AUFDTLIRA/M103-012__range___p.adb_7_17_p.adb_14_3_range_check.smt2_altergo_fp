@@ -107,7 +107,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -319,7 +319,7 @@ function b__ref___projection(a: b__ref) : us_t = (a).b__content
 
 type tTtSP1
 
-predicate in_range2(x: int) = (((-10) <= x) and (x <= 1000))
+predicate in_range2(x: int) = (((- 10) <= x) and (x <= 1000))
 
 logic bool_eq5 : int, int -> bool
 
@@ -362,9 +362,17 @@ axiom def_axiom :
   (forall temp___199:int.
   ((p__t__aggregate_def(temp___198)[temp___199]) = of_rep(temp___198))))
 
+logic t1 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic t2 : (int,integer) farray
+
+axiom H : (result = t1)
+
+axiom H1 : (t2 = p__t__aggregate_def(0))
+
+axiom H2 : (t2 = c9b)
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t1:(int,integer) farray. forall result:(int,integer) farray.
-  forall t2:(int,integer) farray. (((result = t1) and
-  (t2 = p__t__aggregate_def(0))) -> ((t2 = c9b) -> dynamic_property(1,
-  2147483647, (-10), 1000))))
+goal WP_parameter_def : dynamic_property(1, 2147483647, (- 10), 1000)

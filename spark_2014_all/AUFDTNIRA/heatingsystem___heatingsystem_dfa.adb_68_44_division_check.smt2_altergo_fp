@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -424,11 +424,31 @@ axiom def_axiom :
   temp___261)[2]) = of_rep(temp___260))) and ((temp___256(temp___258,
   temp___259, temp___260, temp___261)[3]) = of_rep(temp___261))))
 
+logic hour : int
+
+logic minute : int
+
+logic result : int
+
+logic hour1 : int
+
+logic result1 : int
+
+logic minute1 : int
+
+axiom H : in_range(time)
+
+axiom H1 : ((0 <= 23) -> in_range2(hour))
+
+axiom H2 : ((0 <= 59) -> in_range3(minute))
+
+axiom H3 : (result = hour)
+
+axiom H4 : (hour1 = comp_div(time,3600))
+
+axiom H5 : (result1 = minute)
+
+axiom H6 : (minute1 = comp_div(mod(time, 3600),60))
+
  (* File "heatingsystem_dfa.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall hour:int. forall minute:int. forall result:int. forall hour1:int.
-  forall result1:int. forall minute1:int. (in_range(time) -> (((0 <= 23) ->
-  in_range2(hour)) -> (((0 <= 59) -> in_range3(minute)) ->
-  (((result = hour) and (hour1 = comp_div(time,3600))) ->
-  (((result1 = minute) and (minute1 = comp_div(mod(time, 3600),60))) ->
-  (not (10 = 0))))))))
+goal WP_parameter_def : (not (10 = 0))

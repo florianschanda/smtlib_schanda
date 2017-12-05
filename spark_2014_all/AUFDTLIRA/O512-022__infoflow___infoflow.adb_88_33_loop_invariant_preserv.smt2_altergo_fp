@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -288,62 +288,245 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "infoflow.ads", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall outkeys_v1:(int,integer) farray.
-  forall outkeys_v2:(int,integer) farray. forall i:int. forall i1:int.
-  forall temp___364:int. forall temp___362:(int,integer) farray.
-  forall o:integer. forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:integer.
-  forall o5:(int,integer) farray. forall outkeys_v11:(int,integer) farray.
-  forall result:int. forall i2:int. forall result1:(int,integer) farray.
-  forall outkeys_v12:(int,integer) farray.
-  forall outkeys_v13:(int,integer) farray. forall i3:int.
-  forall outkeys_v14:(int,integer) farray. forall i4:int.
-  forall outkeys_v15:(int,integer) farray. forall i5:int.
-  forall outkeys_v16:(int,integer) farray. forall i6:int.
-  forall outkeys_v17:(int,integer) farray. forall i7:int. forall result2:int.
-  forall i8:int. forall result3:(int,integer) farray.
-  forall outkeys_v21:(int,integer) farray.
-  forall outkeys_v22:(int,integer) farray. forall i9:int. forall result4:int.
-  forall i10:int. forall result5:(int,integer) farray.
-  forall outkeys_v23:(int,integer) farray.
-  forall outkeys_v24:(int,integer) farray. forall i11:int.
-  forall outkeys_v25:(int,integer) farray. forall i12:int. (in_range2(j) ->
-  (((({ int__content = result } = { int__content = i }) and (i2 = 1)) and
-  ((((1 <= i2) and (i2 <= 10)) and ((((temp___364 = i2) and
+logic outkeys_v1 : (int,integer) farray
+
+logic outkeys_v2 : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic temp___364 : int
+
+logic temp___362 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic temp___368 : (int,integer) farray
+
+logic temp___367 : int
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic outkeys_v11 : (int,integer) farray
+
+logic outkeys_v21 : (int,integer) farray
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : (int,integer) farray
+
+logic outkeys_v12 : (int,integer) farray
+
+logic outkeys_v13 : (int,integer) farray
+
+logic i3 : int
+
+logic result2 : int
+
+logic i4 : int
+
+logic result3 : (int,integer) farray
+
+logic outkeys_v14 : (int,integer) farray
+
+logic outkeys_v15 : (int,integer) farray
+
+logic i5 : int
+
+logic outkeys_v16 : (int,integer) farray
+
+logic i6 : int
+
+logic outkeys_v17 : (int,integer) farray
+
+logic i7 : int
+
+logic outkeys_v18 : (int,integer) farray
+
+logic i8 : int
+
+logic outkeys_v19 : (int,integer) farray
+
+logic i9 : int
+
+logic outkeys_v110 : (int,integer) farray
+
+logic i10 : int
+
+logic result4 : int
+
+logic i11 : int
+
+logic result5 : (int,integer) farray
+
+logic outkeys_v22 : (int,integer) farray
+
+logic outkeys_v23 : (int,integer) farray
+
+logic i12 : int
+
+logic result6 : int
+
+logic i13 : int
+
+logic result7 : (int,integer) farray
+
+logic outkeys_v24 : (int,integer) farray
+
+logic outkeys_v25 : (int,integer) farray
+
+logic i14 : int
+
+logic outkeys_v26 : (int,integer) farray
+
+logic i15 : int
+
+logic outkeys_v27 : (int,integer) farray
+
+logic i16 : int
+
+logic outkeys_v28 : (int,integer) farray
+
+logic i17 : int
+
+logic outkeys_v29 : (int,integer) farray
+
+logic i18 : int
+
+logic outkeys_v210 : (int,integer) farray
+
+logic i19 : int
+
+logic outkeys_v211 : (int,integer) farray
+
+logic i20 : int
+
+logic outkeys_v212 : (int,integer) farray
+
+logic i21 : int
+
+logic outkeys_v111 : (int,integer) farray
+
+logic outkeys_v213 : (int,integer) farray
+
+logic i22 : int
+
+logic i23 : int
+
+logic outkeys_v112 : (int,integer) farray
+
+logic outkeys_v214 : (int,integer) farray
+
+logic i24 : int
+
+logic i25 : int
+
+axiom H : in_range2(j)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i2 = 1)
+
+axiom H3 : (((1 <= i2) and (i2 <= 10)) -> (((temp___364 = i2) and
   ((temp___362 = outkeys_v1) and ((((to_rep(o) = to_rep((inkeys_v1[i2]))) and
-  (o1 = (outkeys_v1[i2 <- o]))) and (({ map__content = result1 } = {
-  map__content = outkeys_v1 }) and (outkeys_v12 = o1))) and
+  (o1 = (outkeys_v1[i2 <- o]))) and ((result1 = outkeys_v1) and
+  (outkeys_v12 = o1))) and
   ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i3) ->
    (to_rep((outkeys_v13[k])) = to_rep((inkeys_v1[k])))))) and
   ((((forall temp___363:int. (((1 <= temp___363) and (temp___363 <= 10)) ->
      ((i3 <  temp___363) ->
      ((outkeys_v13[temp___363]) = (temp___362[temp___363]))))) and
   ((1 <= 10) -> in_range2(i3))) and ((1 <= i3) and (i3 <= 10))) and
-  (i3 = 10)))))) and (((i3 = i4) and (outkeys_v13 = outkeys_v14)) and
-  ((i5 = i3) and (outkeys_v15 = outkeys_v13)))) and ((({ int__content = i6
-  } = { int__content = i4 }) and ({ map__content = outkeys_v16 } = {
-  map__content = outkeys_v14 })) and ((i7 = i5) and
-  (outkeys_v17 = outkeys_v15))))) or ((not ((1 <= i2) and (i2 <= 10))) and
-  (((i2 = i6) and ({ map__content = outkeys_v16 } = { map__content =
-  outkeys_v1 })) and ((i7 = i2) and (outkeys_v17 = outkeys_v11)))))) -> ((({
-  int__content = result2 } = { int__content = i1 }) and (i8 = 1)) ->
-  (((1 <= i8) and (i8 <= 10)) ->
-  ((((to_rep(o2) = to_rep((inkeys_v2[i8]))) and
-  (o3 = (outkeys_v2[i8 <- o2]))) and (({ map__content = result3 } = {
-  map__content = outkeys_v2 }) and (outkeys_v21 = o3))) ->
-  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i9) ->
-   (to_rep((outkeys_v22[k])) = to_rep((inkeys_v2[k])))))) ->
-  (((((((1 <= 10) -> in_range2(i9)) and
+  (i3 = 10)))))) and (((i3 = i7) and (outkeys_v13 = outkeys_v17)) and
+  ((i8 = i3) and (outkeys_v18 = outkeys_v13)))))
+
+axiom H4 : (((1 <= i2) and (i2 <= 10)) -> (i9 = i7))
+
+axiom H5 : (((1 <= i2) and (i2 <= 10)) -> (outkeys_v19 = outkeys_v17))
+
+axiom H6 : (((1 <= i2) and (i2 <= 10)) -> (i10 = i8))
+
+axiom H7 : (((1 <= i2) and (i2 <= 10)) -> (outkeys_v110 = outkeys_v18))
+
+axiom H8 : ((not ((1 <= i2) and (i2 <= 10))) -> (i2 = i9))
+
+axiom H9 : ((not ((1 <= i2) and (i2 <= 10))) -> (outkeys_v19 = outkeys_v1))
+
+axiom H10 : ((not ((1 <= i2) and (i2 <= 10))) -> (i10 = i2))
+
+axiom H11 : ((not ((1 <= i2) and (i2 <= 10))) ->
+  (outkeys_v110 = outkeys_v11))
+
+axiom H12 : (result4 = i1)
+
+axiom H13 : (i11 = 1)
+
+axiom H14 : (1 <= i11)
+
+axiom H15 : (i11 <= 10)
+
+axiom H16 : (to_rep(o4) = to_rep((inkeys_v2[i11])))
+
+axiom H17 : (o5 = (outkeys_v2[i11 <- o4]))
+
+axiom H18 : (result5 = outkeys_v2)
+
+axiom H19 : (outkeys_v22 = o5)
+
+axiom H20 :
+  (forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i12) ->
+  (to_rep((outkeys_v23[k])) = to_rep((inkeys_v2[k]))))))
+
+axiom H21 : ((((1 <= 10) -> in_range2(i12)) and
   (forall temp___369:int. (((1 <= temp___369) and (temp___369 <= 10)) ->
-  ((i9 <  temp___369) ->
-  ((outkeys_v22[temp___369]) = (outkeys_v2[temp___369])))))) and
-  ((1 <= i9) and (i9 <= 10))) and ((not (i9 = 10)) and (((result4 = i9) and
-  (i10 = (i9 + 1))) and (((to_rep(o4) = to_rep((inkeys_v2[i10]))) and
-  (o5 = (outkeys_v22[i10 <- o4]))) and ((result5 = outkeys_v22) and
-  (outkeys_v23 = o5)))))) and (((i10 = i11) and
-  (outkeys_v23 = outkeys_v24)) and ((i12 = i10) and
-  (outkeys_v25 = outkeys_v23)))) ->
-  (forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i11) ->
-  (to_rep((outkeys_v24[k])) = to_rep((inkeys_v2[k]))))))))))))))
+  ((i12 <  temp___369) ->
+  ((outkeys_v23[temp___369]) = (outkeys_v2[temp___369])))))) and
+  ((1 <= i12) and (i12 <= 10)))
+
+axiom H22 : (not (i12 = 10))
+
+axiom H23 : (result6 = i12)
+
+axiom H24 : (i13 = (i12 + 1))
+
+axiom H25 : (to_rep(o6) = to_rep((inkeys_v2[i13])))
+
+axiom H26 : (o7 = (outkeys_v23[i13 <- o6]))
+
+axiom H27 : (result7 = outkeys_v23)
+
+axiom H28 : (outkeys_v24 = o7)
+
+axiom H29 : (i13 = i14)
+
+axiom H30 : (outkeys_v24 = outkeys_v25)
+
+axiom H31 : (i15 = i13)
+
+axiom H32 : (outkeys_v26 = outkeys_v24)
+
+logic k : int
+
+axiom H33 : (1 <= k)
+
+axiom H34 : (k <= 10)
+
+axiom H35 : (k <= i14)
+
+ (* File "infoflow.ads", line 43, characters 0-0 *)
+goal WP_parameter_def : (to_rep((outkeys_v25[k])) = to_rep((inkeys_v2[k])))

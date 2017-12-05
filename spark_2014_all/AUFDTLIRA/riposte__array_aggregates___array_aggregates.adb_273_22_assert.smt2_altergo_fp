@@ -486,15 +486,42 @@ axiom def_axiom1 :
   temp___558, temp___559, temp___560,
   temp___561)[5]) = of_rep1(temp___561))))
 
+logic x : (int,us_rep) farray
+
+logic o : length_t
+
+logic o1 : length_t
+
+logic o2 : (int,character) farray
+
+logic o3 : length_t
+
+logic o4 : (int,character) farray
+
+logic o5 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic x1 : (int,us_rep) farray
+
+axiom H : (to_rep(o) = 5)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___555(72, 101, 108, 108, 111) = o2)
+
+axiom H3 : (o3 = o1)
+
+axiom H4 : (o4 = o2)
+
+axiom H5 : (o5 = temp___551({ us_split_fields1 = {
+  rec__array_aggregates__string_t__len = o3;
+  rec__array_aggregates__string_t__elem = o4 } }))
+
+axiom H6 : (result = x)
+
+axiom H7 : (x1 = o5)
+
  (* File "array_aggregates.adb", line 254, characters 0-0 *)
 goal WP_parameter_def :
-  (forall x:(int,us_rep) farray. forall o:length_t. forall o1:length_t.
-  forall o2:(int,character) farray. forall o3:length_t.
-  forall o4:(int,character) farray. forall o5:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall x1:(int,us_rep) farray.
-  ((((((to_rep(o) = 5) and ((o = o1) and (temp___555(72, 101, 108, 108,
-  111) = o2))) and ((o3 = o1) and (o4 = o2))) and (o5 = temp___551({
-  us_split_fields1 = { rec__array_aggregates__string_t__len = o3;
-  rec__array_aggregates__string_t__elem = o4 } }))) and ((result = x) and
-  (x1 = o5))) ->
-  (to_rep((((x1[3])).us_split_fields1).rec__array_aggregates__string_t__len) = 3)))
+  (to_rep((((x1[3])).us_split_fields1).rec__array_aggregates__string_t__len) = 3)

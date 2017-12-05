@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -904,21 +904,53 @@ logic y__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : (int,bool) farray
+
+logic y__split_fields : (int,bool) farray
+
+logic temp___j_197 : int
+
+logic us : int
+
+logic temp___198 : integer
+
+logic temp___1981 : (int,bool) farray
+
+logic temp___201 : (int,bool) farray
+
+logic temp___2011 : t
+
+logic temp___203 : integer
+
+logic temp___2031 : (int,bool) farray
+
+logic temp___206 : (int,bool) farray
+
+logic temp___2061 : t
+
+axiom H : in_range1(temp___j_197)
+
+axiom H1 : ((us = 10) and in_range1(10))
+
+axiom H2 : (10 = to_rep(temp___198))
+
+axiom H3 : discr_init__r1__arr__pred1({ us_split_discrs2 = {
+  rec__discr_init__r1__j = temp___198 }; us_split_fields3 = {
+  rec__discr_init__r1__arr1 = temp___1981 } })
+
+axiom H4 : (to_rep(first((temp___190(of_int(1), 1, 10)).rt)) = 1)
+
+axiom H5 : (to_rep(last((temp___190(of_int(1), 1, 10)).rt)) = 10)
+
+axiom H6 : ({ elts = temp___201; rt = temp___2011 } = temp___190(of_int(1),
+  1, 10))
+
  (* File "discr_init.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___j_197:int. forall us:int. forall temp___198:integer.
-  forall temp___1981:(int,bool) farray. forall temp___201:(int,bool) farray.
-  forall temp___2011:t. (in_range1(temp___j_197) -> (((us = 10) and
-  in_range1(10)) -> ((10 = to_rep(temp___198)) ->
-  (discr_init__r1__arr__pred1({ us_split_discrs2 = { rec__discr_init__r1__j =
-  temp___198 }; us_split_fields3 = { rec__discr_init__r1__arr1 = temp___1981
-  } }) -> (((to_rep(first((temp___190(of_int(1), 1, 10)).rt)) = 1) and
-  ((to_rep(last((temp___190(of_int(1), 1, 10)).rt)) = 10) and ({ elts =
-  temp___201; rt = temp___2011 } = temp___190(of_int(1), 1, 10)))) ->
   (((to_rep(first(temp___2011)) <= to_rep(last(temp___2011))) ->
   (((1 <= 10) ->
   (((to_rep(last(temp___2011)) - to_rep(first(temp___2011))) + 1) = ((10 - 1) + 1))) and
   ((not (1 <= 10)) ->
   (((to_rep(last(temp___2011)) - to_rep(first(temp___2011))) + 1) = 0)))) and
   ((not (to_rep(first(temp___2011)) <= to_rep(last(temp___2011)))) ->
-  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))))))))
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))

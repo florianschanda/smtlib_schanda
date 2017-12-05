@@ -81,8 +81,25 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic maybe : bool
+
+logic b : bool
+
+logic result : bool
+
+logic b1 : bool
+
+logic b2 : bool
+
+logic b3 : bool
+
+axiom H : (result = b)
+
+axiom H1 : (b1 = maybe)
+
+axiom H2 : (b1 = b2)
+
+axiom H3 : (b3 = b1)
+
  (* File "no_separate_spec.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall maybe:bool. forall b:bool. forall result:bool. forall b1:bool.
-  forall b2:bool. forall b3:bool. ((((result = b) and (b1 = maybe)) and
-  ((b1 = b2) and (b3 = b1))) -> ((b2 = true) or (not (b2 = true)))))
+goal WP_parameter_def : ((b2 = true) or (not (b2 = true)))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1001,15 +1001,36 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t__mmul__result : t
+
+logic result : t
+
+logic t__mmul__result1 : t
+
+logic t__mmul__result2 : t
+
+logic t__mmul__result3 : t
+
+logic t__mmul__result4 : t
+
+logic t__mmul__result5 : t
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (t__mmul__result1 = t__mmul__result2)
+
+axiom H3 : (t__mmul__result3 = t__mmul__result1)
+
+axiom H4 : (result = t__mmul__result)
+
+axiom H5 : (t__mmul__result1 = toSmall(urem1(mul1(toBig(x), toBig(y)),
+  of_int1(230))))
+
+axiom H6 : (t__mmul__result4 = t__mmul__result2)
+
+axiom H7 : (t__mmul__result5 = t__mmul__result3)
+
  (* File "t.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t__mmul__result:t. forall result:t. forall t__mmul__result1:t.
-  forall t__mmul__result2:t. forall t__mmul__result3:t.
-  forall t__mmul__result4:t. forall t__mmul__result5:t. (in_range(x) ->
-  (in_range(y) -> (((((t__mmul__result1 = t__mmul__result2) and
-  (t__mmul__result3 = t__mmul__result1)) and (({ t__content = result } = {
-  t__content = t__mmul__result }) and
-  (t__mmul__result1 = toSmall(urem1(mul1(toBig(x), toBig(y)),
-  of_int1(230)))))) and (({ t__content = t__mmul__result4 } = { t__content =
-  t__mmul__result2 }) and (t__mmul__result5 = t__mmul__result3))) ->
-  (not (of_int1(230) = zeros1))))))
+goal WP_parameter_def : (not (of_int1(230) = zeros1))

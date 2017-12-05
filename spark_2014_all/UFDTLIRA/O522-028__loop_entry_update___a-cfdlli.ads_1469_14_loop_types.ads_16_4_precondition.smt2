@@ -236,6 +236,7 @@
 (declare-const o2 us_rep2)
 (declare-const o3 us_rep3)
 (declare-const o4 Int)
+(declare-const o5 Bool)
 (assert (= (to_rep o) 0))
 (assert (= o o1))
 (assert (= temp___686 o1))

@@ -174,5 +174,29 @@ axiom cc__def_axiom : ((cc = c) and (cc1 = c1))
 
 axiom rc__def_axiom : ((rc = r) and (rc1 = r1))
 
+axiom H : ((us_null_ext__ = c) and (us_tag1 = c1))
+
+axiom H1 : ((us_null_ext__ = r) and (us_tag = r1))
+
+axiom H2 : ((c = cc) and (c1 = cc1))
+
+axiom H3 : ((r = rc) and (r1 = rc1))
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

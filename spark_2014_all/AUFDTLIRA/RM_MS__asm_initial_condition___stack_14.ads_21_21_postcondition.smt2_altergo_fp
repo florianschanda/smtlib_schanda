@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -311,19 +311,67 @@ axiom is_empty__def_axiom :
   (forall stack_14__pointer:int [is_empty(stack_14__pointer)].
   ((is_empty(stack_14__pointer) = true) <-> (stack_14__pointer = 0)))
 
+logic s : (int,integer) farray
+
+logic pointer : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic result : int
+
+logic pointer1 : int
+
+logic result1 : (int,integer) farray
+
+logic s1 : (int,integer) farray
+
+logic s2 : (int,integer) farray
+
+logic pointer2 : int
+
+logic s3 : (int,integer) farray
+
+logic pointer3 : int
+
+axiom H : in_range1(pointer)
+
+axiom H1 : in_range(x)
+
+axiom H2 : (not (is_full(pointer) = true))
+
+axiom H3 : ((o = (pointer + 1)) and in_range1((pointer + 1)))
+
+axiom H4 : (result = pointer)
+
+axiom H5 : (pointer1 = o)
+
+axiom H6 : (to_rep(o1) = x)
+
+axiom H7 : ((1 <= pointer1) and (pointer1 <= 1024))
+
+axiom H8 : (o2 = pointer1)
+
+axiom H9 : (o3 = (s[o2 <- o1]))
+
+axiom H10 : (result1 = s)
+
+axiom H11 : (s1 = o3)
+
+axiom H12 : (pointer1 = pointer2)
+
+axiom H13 : (s1 = s2)
+
+axiom H14 : (pointer3 = pointer1)
+
+axiom H15 : (s3 = s1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:(int,integer) farray. forall pointer:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:(int,integer) farray.
-  forall result:int. forall pointer1:int.
-  forall result1:(int,integer) farray. forall s1:(int,integer) farray.
-  forall s2:(int,integer) farray. forall pointer2:int.
-  forall s3:(int,integer) farray. forall pointer3:int.
-  ((in_range1(pointer) and (in_range(x) and
-  ((not (is_full(pointer) = true)) and (((((o = (pointer + 1)) and
-  in_range1((pointer + 1))) and (({ int__content = result } = {
-  int__content = pointer }) and (pointer1 = o))) and (((to_rep(o1) = x) and
-  ((((1 <= pointer1) and (pointer1 <= 1024)) and (o2 = pointer1)) and
-  (o3 = (s[o2 <- o1])))) and (({ map__content = result1 } = { map__content =
-  s }) and (s1 = o3)))) and (((pointer1 = pointer2) and (s1 = s2)) and
-  ((pointer3 = pointer1) and (s3 = s1))))))) -> (top(pointer2, s2) = x)))
+goal WP_parameter_def : (top(pointer2, s2) = x)

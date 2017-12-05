@@ -136,6 +136,15 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic o1 : int
+
+axiom H : in_range1(v)
+
+axiom H1 : (25 <= v)
+
+axiom H2 : (v <= 24)
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(v) -> (((25 <= v) and (v <= 24)) ->
-  in_range1((v - 1))))
+goal WP_parameter_def : in_range1((v - 1))

@@ -212,18 +212,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1313,37 +1313,88 @@ axiom rate_of__def_axiom :
   ctx; rec__keccak__keccak_1600__duplex__context__rate = ctx1 }
   }) = to_rep1(ctx1)))
 
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : rate_number
+
+logic o : int
+
+logic o1 : rate_number
+
+logic o2 : map
+
+logic o3 : rate_number
+
+logic temp___1045 : map
+
+logic temp___10451 : rate_number
+
+logic keccak__keccak_1600__keccakf_1600__init__a : map
+
+logic result : map
+
+logic result1 : rate_number
+
+logic ctx__split_fields2 : map
+
+logic ctx__split_fields3 : rate_number
+
+logic result2 : map
+
+logic result3 : rate_number
+
+logic ctx__split_fields4 : map
+
+logic ctx__split_fields5 : rate_number
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : rate_number
+
+logic ctx__split_fields8 : map
+
+logic ctx__split_fields9 : rate_number
+
+axiom H : in_range(capacity)
+
+axiom H1 : (capacity <  1598)
+
+axiom H2 : ((result = ctx__split_fields) and (result1 = ctx__split_fields1))
+
+axiom H3 : (keccak__keccak_1600__keccakf_1600__init__a = ctx__split_fields2)
+
+axiom H4 : (ctx__split_fields1 = ctx__split_fields3)
+
+axiom H5 : ((o = (1600 - capacity)) and in_range1((1600 - capacity)))
+
+axiom H6 : (to_rep1(o1) = o)
+
+axiom H7 : (ctx__split_fields2 = o2)
+
+axiom H8 : (o1 = o3)
+
+axiom H9 : (temp___1045 = o2)
+
+axiom H10 : (temp___10451 = o3)
+
+axiom H11 : (result2 = ctx__split_fields2)
+
+axiom H12 : (result3 = ctx__split_fields3)
+
+axiom H13 : (temp___1045 = ctx__split_fields4)
+
+axiom H14 : (temp___10451 = ctx__split_fields5)
+
+axiom H15 : (ctx__split_fields6 = ctx__split_fields4)
+
+axiom H16 : (ctx__split_fields7 = ctx__split_fields5)
+
+axiom H17 : (ctx__split_fields8 = ctx__split_fields4)
+
+axiom H18 : (ctx__split_fields9 = ctx__split_fields5)
+
  (* File "keccak-duplex.ads", line 71, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
-  forall o:int. forall o1:rate_number. forall o2:map. forall o3:rate_number.
-  forall temp___1045:map. forall temp___10451:rate_number.
-  forall keccak__keccak_1600__keccakf_1600__init__a:map. forall result:map.
-  forall result1:rate_number. forall ctx__split_fields2:map.
-  forall ctx__split_fields3:rate_number. forall result2:map.
-  forall result3:rate_number. forall ctx__split_fields4:map.
-  forall ctx__split_fields5:rate_number. forall ctx__split_fields6:map.
-  forall ctx__split_fields7:rate_number. forall ctx__split_fields8:map.
-  forall ctx__split_fields9:rate_number. ((in_range(capacity) and
-  ((capacity <  1598) and (((({ us_split_fields__content = {
-  rec__keccak__keccak_1600__duplex__context__state = result;
-  rec__keccak__keccak_1600__duplex__context__rate = result1 } } = {
-  us_split_fields__content = {
-  rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
-  rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
-  }) and
-  ((keccak__keccak_1600__keccakf_1600__init__a = ctx__split_fields2) and
-  (ctx__split_fields1 = ctx__split_fields3))) and
-  ((((((o = (1600 - capacity)) and in_range1((1600 - capacity))) and
-  (to_rep1(o1) = o)) and ((ctx__split_fields2 = o2) and (o1 = o3))) and
-  ((temp___1045 = o2) and (temp___10451 = o3))) and
-  (((result2 = ctx__split_fields2) and (result3 = ctx__split_fields3)) and
-  ((temp___1045 = ctx__split_fields4) and
-  (temp___10451 = ctx__split_fields5))))) and
-  (((ctx__split_fields6 = ctx__split_fields4) and
-  (ctx__split_fields7 = ctx__split_fields5)) and
-  ((ctx__split_fields8 = ctx__split_fields4) and
-  (ctx__split_fields9 = ctx__split_fields5)))))) -> (rate_of({
-  us_split_fields1 = { rec__keccak__keccak_1600__duplex__context__state =
-  ctx__split_fields6; rec__keccak__keccak_1600__duplex__context__rate =
-  ctx__split_fields7 } }) = (1600 - capacity))))
+goal WP_parameter_def : (rate_of({ us_split_fields1 = {
+  rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields6;
+  rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields7 }
+  }) = (1600 - capacity))

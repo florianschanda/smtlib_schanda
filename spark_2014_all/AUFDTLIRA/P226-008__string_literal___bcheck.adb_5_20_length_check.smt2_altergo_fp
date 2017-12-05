@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -402,23 +402,62 @@ axiom temp___String_Literal_177__def_axiom :
   (to_rep((temp___String_Literal_177(void)[4])) = 52)) and
   (to_rep((temp___String_Literal_177(void)[5])) = 53))
 
+logic m2 : (int,character) farray
+
+logic p : int
+
+logic bcheck__R2b__assume : int
+
+logic temp___179 : (int,character) farray
+
+logic temp___1791 : t
+
+logic o : (int,character) farray
+
+logic temp___180 : (int,character) farray
+
+logic temp___1801 : t
+
+logic result : int
+
+logic p1 : int
+
+axiom H : (result = p)
+
+axiom H1 : (p1 = 1)
+
+axiom H2 : in_range(p1)
+
+axiom H3 : (p1 = r1b)
+
+axiom H4 : in_range(r1b)
+
+axiom H5 : ((bcheck__R2b__assume = (p1 + 4)) and in_range((p1 + 4)))
+
+axiom H6 : (bcheck__R2b__assume = r2b)
+
+axiom H7 : in_range(r2b)
+
+axiom H8 : (((1 <= 5) -> (((r1b <= r2b) ->
+  (((5 - 1) + 1) = ((r2b - r1b) + 1))) and ((not (r1b <= r2b)) ->
+  (((5 - 1) + 1) = 0)))) and ((not (1 <= 5)) -> ((r1b <= r2b) ->
+  (0 = ((r2b - r1b) + 1)))))
+
+axiom H9 : (slide(temp___String_Literal_177(void), 1, r1b) = temp___179)
+
+axiom H10 : (mk(r1b, r2b) = temp___1791)
+
+axiom H11 : ((r1b <= r2b) -> (((1 <= r1b) and (r1b <= 10)) and
+  ((1 <= r2b) and (r2b <= 10))))
+
+axiom H12 : (o = m2)
+
+axiom H13 : (o = temp___180)
+
+axiom H14 : (mk(r1b, r2b) = temp___1801)
+
  (* File "bcheck.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall m2:(int,character) farray. forall p:int.
-  forall bcheck__R2b__assume:int. forall temp___179:(int,character) farray.
-  forall temp___1791:t. forall o:(int,character) farray.
-  forall temp___180:(int,character) farray. forall temp___1801:t.
-  forall result:int. forall p1:int. (((result = p) and (p1 = 1)) ->
-  (in_range(p1) -> (((p1 = r1b) and in_range(r1b)) ->
-  (((((bcheck__R2b__assume = (p1 + 4)) and in_range((p1 + 4))) and
-  (bcheck__R2b__assume = r2b)) and in_range(r2b)) -> (((((1 <= 5) and
-  (((r1b <= r2b) and (((5 - 1) + 1) = ((r2b - r1b) + 1))) or
-  ((not (r1b <= r2b)) and (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and
-  (((r1b <= r2b) and (0 = ((r2b - r1b) + 1))) or (not (r1b <= r2b))))) and
-  ((slide(temp___String_Literal_177(void), 1, r1b) = temp___179) and (mk(r1b,
-  r2b) = temp___1791))) -> (((((r1b <= r2b) -> (((1 <= r1b) and
-  (r1b <= 10)) and ((1 <= r2b) and (r2b <= 10)))) and (o = m2)) and
-  ((o = temp___180) and (mk(r1b, r2b) = temp___1801))) ->
   (((to_rep1(first(temp___1791)) <= to_rep1(last(temp___1791))) ->
   (((to_rep1(first(temp___1801)) <= to_rep1(last(temp___1801))) ->
   (((to_rep1(last(temp___1791)) - to_rep1(first(temp___1791))) + 1) = ((to_rep1(last(temp___1801)) - to_rep1(first(temp___1801))) + 1))) and
@@ -426,4 +465,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___1791)) - to_rep1(first(temp___1791))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___1791)) <= to_rep1(last(temp___1791)))) ->
   ((to_rep1(first(temp___1801)) <= to_rep1(last(temp___1801))) ->
-  (0 = ((to_rep1(last(temp___1801)) - to_rep1(first(temp___1801))) + 1))))))))))))
+  (0 = ((to_rep1(last(temp___1801)) - to_rep1(first(temp___1801))) + 1)))))

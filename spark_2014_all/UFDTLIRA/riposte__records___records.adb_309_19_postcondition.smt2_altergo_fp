@@ -335,87 +335,202 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp__split_fields:bool. forall tmp__split_fields1:unsigned_byte.
-  forall tmp__split_fields2:unsigned_byte.
-  forall records__update_a__result:bool.
-  forall records__update_a__result1:unsigned_byte.
-  forall records__update_a__result2:unsigned_byte. forall o:unsigned_byte.
-  forall o1:unsigned_byte. forall o2:unsigned_byte. forall o3:unsigned_byte.
-  forall o4:unsigned_byte. forall o5:bool. forall o6:unsigned_byte.
-  forall o7:unsigned_byte. forall temp___381:bool.
-  forall temp___3811:unsigned_byte. forall temp___3812:unsigned_byte.
-  forall result:bool. forall result1:unsigned_byte.
-  forall result2:unsigned_byte. forall tmp__split_fields3:bool.
-  forall tmp__split_fields4:unsigned_byte.
-  forall tmp__split_fields5:unsigned_byte. forall result3:bool.
-  forall result4:unsigned_byte. forall result5:unsigned_byte.
-  forall tmp__split_fields6:bool. forall tmp__split_fields7:unsigned_byte.
-  forall tmp__split_fields8:unsigned_byte. forall result6:bool.
-  forall result7:unsigned_byte. forall result8:unsigned_byte.
-  forall records__update_a__result3:bool.
-  forall records__update_a__result4:unsigned_byte.
-  forall records__update_a__result5:unsigned_byte.
-  forall records__update_a__result6:bool.
-  forall records__update_a__result7:unsigned_byte.
-  forall records__update_a__result8:unsigned_byte.
-  forall records__update_a__result9:us_rep1.
-  forall tmp__split_fields9:us_split_fields__ref1.
-  forall records__update_a__result10:optional_pair__ref.
-  forall tmp__split_fields10:us_split_fields2.
-  forall records__update_a__result11:us_rep1.
-  (forall result9:bool. forall result10:unsigned_byte.
-  forall result11:unsigned_byte. ((in_range(n) and
-  ((((((result = tmp__split_fields) and ((result1 = tmp__split_fields1) and
-  (result2 = tmp__split_fields2))) and ((x = tmp__split_fields3) and
-  ((x1 = tmp__split_fields4) and (x2 = tmp__split_fields5)))) and
-  (((((((to_rep(o) = n) and ((o = o1) and (tmp__split_fields5 = o2))) and
-  ((o3 = o1) and (o4 = o2))) and ((tmp__split_fields3 = o5) and
-  ((o6 = o3) and (o7 = o4)))) and ((temp___381 = o5) and
-  ((temp___3811 = o6) and (temp___3812 = o7)))) and
-  (((result3 = tmp__split_fields3) and ((result4 = tmp__split_fields4) and
-  (result5 = tmp__split_fields5))) and ((temp___381 = tmp__split_fields6) and
-  ((temp___3811 = tmp__split_fields7) and
-  (temp___3812 = tmp__split_fields8))))) and
-  ((((records__update_a__result6 = records__update_a__result3) and
+logic tmp__split_fields : bool
+
+logic tmp__split_fields1 : unsigned_byte
+
+logic tmp__split_fields2 : unsigned_byte
+
+logic records__update_a__result : bool
+
+logic records__update_a__result1 : unsigned_byte
+
+logic records__update_a__result2 : unsigned_byte
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic o4 : unsigned_byte
+
+logic o5 : bool
+
+logic o6 : unsigned_byte
+
+logic o7 : unsigned_byte
+
+logic temp___381 : bool
+
+logic temp___3811 : unsigned_byte
+
+logic temp___3812 : unsigned_byte
+
+logic result : bool
+
+logic result1 : unsigned_byte
+
+logic result2 : unsigned_byte
+
+logic tmp__split_fields3 : bool
+
+logic tmp__split_fields4 : unsigned_byte
+
+logic tmp__split_fields5 : unsigned_byte
+
+logic result3 : bool
+
+logic result4 : unsigned_byte
+
+logic result5 : unsigned_byte
+
+logic tmp__split_fields6 : bool
+
+logic tmp__split_fields7 : unsigned_byte
+
+logic tmp__split_fields8 : unsigned_byte
+
+logic result6 : bool
+
+logic result7 : unsigned_byte
+
+logic result8 : unsigned_byte
+
+logic records__update_a__result3 : bool
+
+logic records__update_a__result4 : unsigned_byte
+
+logic records__update_a__result5 : unsigned_byte
+
+logic records__update_a__result6 : bool
+
+logic records__update_a__result7 : unsigned_byte
+
+logic records__update_a__result8 : unsigned_byte
+
+logic records__update_a__result9 : bool
+
+logic records__update_a__result10 : unsigned_byte
+
+logic records__update_a__result11 : unsigned_byte
+
+logic tmp__split_fields9 : bool
+
+logic tmp__split_fields10 : unsigned_byte
+
+logic tmp__split_fields11 : unsigned_byte
+
+logic records__update_a__result12 : bool
+
+logic records__update_a__result13 : unsigned_byte
+
+logic records__update_a__result14 : unsigned_byte
+
+logic tmp__split_fields12 : bool
+
+logic tmp__split_fields13 : unsigned_byte
+
+logic tmp__split_fields14 : unsigned_byte
+
+logic records__update_a__result15 : bool
+
+logic records__update_a__result16 : unsigned_byte
+
+logic records__update_a__result17 : unsigned_byte
+
+logic result9 : bool
+
+logic result10 : unsigned_byte
+
+logic result11 : unsigned_byte
+
+axiom H : in_range(n)
+
+axiom H1 : (result = tmp__split_fields)
+
+axiom H2 : (result1 = tmp__split_fields1)
+
+axiom H3 : (result2 = tmp__split_fields2)
+
+axiom H4 : ((tmp__split_fields3 = x) and ((tmp__split_fields4 = x1) and
+  (tmp__split_fields5 = x2)))
+
+axiom H5 : (to_rep(o) = n)
+
+axiom H6 : (o = o1)
+
+axiom H7 : (tmp__split_fields5 = o2)
+
+axiom H8 : (o3 = o1)
+
+axiom H9 : (o4 = o2)
+
+axiom H10 : (tmp__split_fields3 = o5)
+
+axiom H11 : (o6 = o3)
+
+axiom H12 : (o7 = o4)
+
+axiom H13 : (temp___381 = o5)
+
+axiom H14 : (temp___3811 = o6)
+
+axiom H15 : (temp___3812 = o7)
+
+axiom H16 : ((result3 = tmp__split_fields3) and
+  ((result4 = tmp__split_fields4) and (result5 = tmp__split_fields5)))
+
+axiom H17 : ((tmp__split_fields6 = temp___381) and
+  ((tmp__split_fields7 = temp___3811) and
+  (tmp__split_fields8 = temp___3812)))
+
+axiom H18 : ((records__update_a__result6 = records__update_a__result3) and
   ((records__update_a__result7 = records__update_a__result4) and
-  (records__update_a__result8 = records__update_a__result5))) and
-  (records__update_a__result9 = { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists =
-  records__update_a__result3;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__update_a__result4;
-  rec__records_prooffuncs__pair__b = records__update_a__result5 } } } })) and
-  (((result6 = records__update_a__result) and
+  (records__update_a__result8 = records__update_a__result5)))
+
+axiom H19 : ((records__update_a__result9 = records__update_a__result3) and
+  ((records__update_a__result10 = records__update_a__result4) and
+  (records__update_a__result11 = records__update_a__result5)))
+
+axiom H20 : ((result6 = records__update_a__result) and
   ((result7 = records__update_a__result1) and
-  (result8 = records__update_a__result2))) and
-  ((records__update_a__result3 = tmp__split_fields6) and
+  (result8 = records__update_a__result2)))
+
+axiom H21 : ((records__update_a__result3 = tmp__split_fields6) and
   ((records__update_a__result4 = tmp__split_fields7) and
-  (records__update_a__result5 = tmp__split_fields8))))))) and
-  (((records__update_a__result10 = { optional_pair__content = {
-  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
-  records__update_a__result6;
+  (records__update_a__result5 = tmp__split_fields8)))
+
+axiom H22 : ((records__update_a__result12 = records__update_a__result6) and
+  ((records__update_a__result13 = records__update_a__result7) and
+  (records__update_a__result14 = records__update_a__result8)))
+
+axiom H23 : ((tmp__split_fields9 = tmp__split_fields6) and
+  ((tmp__split_fields10 = tmp__split_fields7) and
+  (tmp__split_fields11 = tmp__split_fields8)))
+
+axiom H24 : ((records__update_a__result15 = records__update_a__result9) and
+  ((records__update_a__result16 = records__update_a__result10) and
+  (records__update_a__result17 = records__update_a__result11)))
+
+axiom H25 : ((tmp__split_fields12 = tmp__split_fields6) and
+  ((tmp__split_fields13 = tmp__split_fields7) and
+  (tmp__split_fields14 = tmp__split_fields8)))
+
+axiom H26 : ((result9 = records__update_a__result12) and
+  ((result10 = records__update_a__result13) and
+  (result11 = records__update_a__result14)))
+
+ (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists =
+  records__update_a__result12;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__update_a__result7;
-  rec__records_prooffuncs__pair__b = records__update_a__result8 } } } }
-  }) and (tmp__split_fields9 = { us_split_fields__content1 = {
-  rec__records_prooffuncs__optional_pair__exists = tmp__split_fields6;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = tmp__split_fields7;
-  rec__records_prooffuncs__pair__b = tmp__split_fields8 } } } })) and
-  ((records__update_a__result11 = records__update_a__result9) and
-  (tmp__split_fields10 = { rec__records_prooffuncs__optional_pair__exists =
-  tmp__split_fields6; rec__records_prooffuncs__optional_pair__the_pair = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = tmp__split_fields7;
-  rec__records_prooffuncs__pair__b = tmp__split_fields8 } } })))) and ({
-  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
-  result9; rec__records_prooffuncs__optional_pair__the_pair = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a = result10;
-  rec__records_prooffuncs__pair__b = result11 } } }
-  } = (records__update_a__result10).optional_pair__content))) ->
-  (bool_eq3((records__update_a__result10).optional_pair__content, {
+  rec__records_prooffuncs__pair__a = records__update_a__result13;
+  rec__records_prooffuncs__pair__b = records__update_a__result14 } } } }, {
   us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists = x;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = of_rep(n);
-  rec__records_prooffuncs__pair__b = x2 } } } }) = true))))
+  rec__records_prooffuncs__pair__b = x2 } } } }) = true)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -737,7 +737,7 @@ function source__ref___projection(a: source__ref) : source =
 
 type target
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -771,10 +771,67 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic v1raw : t
+
+logic x : int
+
+logic t1 : int
+
+logic tmp : t
+
+logic o : t
+
+logic o1 : int
+
+logic o2 : int
+
+logic v1raw1 : t
+
+logic result : t
+
+logic tmp1 : t
+
+logic result1 : int
+
+logic t2 : int
+
+logic result2 : int
+
+logic x1 : int
+
+logic v1raw2 : t
+
+logic x2 : int
+
+logic t3 : int
+
+logic tmp2 : t
+
+logic v1raw3 : t
+
+logic x3 : int
+
+logic t4 : int
+
+logic tmp3 : t
+
+axiom H : true
+
+axiom H1 : ((0 <= 17) -> in_range1(x))
+
+axiom H2 : ((0 <= 17) -> in_range1(t1))
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : (o = v1raw1)
+
+axiom H6 : (result = tmp)
+
+axiom H7 : (tmp1 = o)
+
+axiom H8 : ((o1 = c(tmp1)) and in_range2(o1))
+
  (* File "port.ads", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall t1:int. forall tmp:t. forall o:t. forall o1:int.
-  forall v1raw:t. forall result:t. forall tmp1:t. (((0 <= 17) ->
-  in_range1(x)) -> (((0 <= 17) -> in_range1(t1)) -> (((o = v1raw) and (({
-  t__content = result } = { t__content = tmp }) and (tmp1 = o))) ->
-  (((o1 = c(tmp1)) and in_range2(o1)) -> in_range1(o1))))))
+goal WP_parameter_def : in_range1(o1)

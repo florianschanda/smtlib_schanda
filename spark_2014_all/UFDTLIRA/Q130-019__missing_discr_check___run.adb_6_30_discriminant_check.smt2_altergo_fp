@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -203,15 +203,15 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__p_init__t__e) = to_rep1(((b).us_split_discrs1).rec__p_init__t__e)) and
-  (to_rep(((a).us_split_fields1).rec__p_init__t__x1) = to_rep(((b).us_split_fields1).rec__p_init__t__x1))) and
-  (p_init__t__x2__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__p_init__t__x2) = to_rep(((b).us_split_fields1).rec__p_init__t__x2)))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__p_init__t__e) = to_rep1(((b).us_split_discrs1).rec__p_init__t__e)) and
-  (to_rep(((a).us_split_fields1).rec__p_init__t__x1) = to_rep(((b).us_split_fields1).rec__p_init__t__x1))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__p_init__t__e) = to_rep1(((b).us_split_discrs1).rec__p_init__t__e)) and
+  ((to_rep(((a).us_split_fields1).rec__p_init__t__x1) = to_rep(((b).us_split_fields1).rec__p_init__t__x1)) and
   (p_init__t__x2__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__p_init__t__x2) = to_rep(((b).us_split_fields1).rec__p_init__t__x2))))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__p_init__t__e) = to_rep1(((b).us_split_discrs1).rec__p_init__t__e)) and
+  ((to_rep(((a).us_split_fields1).rec__p_init__t__x1) = to_rep(((b).us_split_fields1).rec__p_init__t__x1)) and
+  (p_init__t__x2__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__p_init__t__x2) = to_rep(((b).us_split_fields1).rec__p_init__t__x2)))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -824,17 +824,169 @@ axiom c1__def_axiom : ((c1 = of_rep1(0)) and (((c11 = of_rep(1)) and
 axiom c2__def_axiom : ((c2 = of_rep1(1)) and (((c21 = of_rep(1)) and
   (c22 = of_rep(2))) and (c23 = true)))
 
+logic y1__split_fields : integer
+
+logic y1__split_fields1 : integer
+
+logic y1__split_discrs : enum
+
+logic y2__split_fields : integer
+
+logic y2__split_fields1 : integer
+
+logic y2__split_discrs : enum
+
+logic z1__split_fields : integer
+
+logic z1__split_fields1 : integer
+
+logic us : int
+
+logic o : enum
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : enum
+
+logic o5 : enum
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : bool
+
+logic o9 : enum
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : bool
+
+logic o13 : enum
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : bool
+
+logic run__c1__assume : enum
+
+logic run__c1__assume1 : integer
+
+logic run__c1__assume2 : integer
+
+logic run__c1__assume3 : bool
+
+logic us1 : int
+
+logic o17 : enum
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : enum
+
+logic o23 : enum
+
+logic o24 : integer
+
+logic o25 : integer
+
+logic o26 : bool
+
+logic o27 : enum
+
+logic o28 : integer
+
+logic o29 : integer
+
+logic o30 : bool
+
+logic o31 : enum
+
+logic o32 : integer
+
+logic o33 : integer
+
+logic o34 : bool
+
+logic run__c2__assume : enum
+
+logic run__c2__assume1 : integer
+
+logic run__c2__assume2 : integer
+
+logic run__c2__assume3 : bool
+
+logic us2 : int
+
+logic us3 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic y1__split_fields2 : integer
+
+logic y1__split_fields3 : integer
+
+logic result2 : enum
+
+logic y1__split_discrs1 : enum
+
+logic result3 : integer
+
+logic result4 : integer
+
+logic y2__split_fields2 : integer
+
+logic y2__split_fields3 : integer
+
+logic result5 : enum
+
+logic y2__split_discrs1 : enum
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic z1__split_fields2 : integer
+
+logic z1__split_fields3 : integer
+
+axiom H : ((us = 0) and in_range1(0))
+
+axiom H1 : (to_rep(o1) = 1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (dummy = o3)
+
+axiom H4 : (to_rep1(o) = 0)
+
+axiom H5 : (o = o4)
+
+axiom H6 : (o5 = o4)
+
+axiom H7 : (o6 = o2)
+
+axiom H8 : (o7 = o3)
+
+axiom H9 : (true = o8)
+
+axiom H10 : ((o9 = o5) and (((o10 = o6) and (o11 = o7)) and (o12 = o8)))
+
  (* File "run.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:enum. forall o1:integer. forall o2:integer.
-  forall o3:integer. forall o4:enum. forall o5:enum. forall o6:integer.
-  forall o7:integer. forall o8:bool. forall o9:enum. forall o10:integer.
-  forall o11:integer. forall o12:bool. (((us = 0) and in_range1(0)) ->
-  (((((to_rep(o1) = 1) and ((o1 = o2) and (dummy = o3))) and
-  (((to_rep1(o) = 0) and (o = o4)) and ((o5 = o4) and (((o6 = o2) and
-  (o7 = o3)) and (true = o8))))) and ({ us_split_discrs1 = {
-  rec__p_init__t__e = o9 }; us_split_fields1 = { rec__p_init__t__x1 = o10;
-  rec__p_init__t__x2 = o11 }; attr__constrained = o12 } = {
-  us_split_discrs1 = { rec__p_init__t__e = o5 }; us_split_fields1 = {
-  rec__p_init__t__x1 = o6; rec__p_init__t__x2 = o7 }; attr__constrained = o8
-  })) -> (0 = to_rep1(o9)))))
+goal WP_parameter_def : (0 = to_rep1(o9))

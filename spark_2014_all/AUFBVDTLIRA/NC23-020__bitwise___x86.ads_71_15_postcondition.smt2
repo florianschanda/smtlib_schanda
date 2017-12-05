@@ -158,6 +158,8 @@
 (declare-const memory8 (Array (_ BitVec 64) unsigned8))
 (declare-const memory9 (Array (_ BitVec 64) unsigned8))
 (declare-const memory10 (Array (_ BitVec 64) unsigned8))
+(assert true)
+(assert true)
 (assert (= (to_rep o) ((_ extract 7 0) (bvurem (bvand val__ ((_ int2bv 64) 255)) ((_ int2bv 64) 256)))))
 (assert (= o1 (store memory addr o)))
 (assert (= result memory))

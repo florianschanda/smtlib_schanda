@@ -76,6 +76,7 @@
 (declare-const o3 integer)
 (declare-const temp___141 integer)
 (declare-const temp___1411 integer)
+(declare-const o4 Int)
 (declare-const result integer)
 (declare-const result1 integer)
 (declare-const value__split_fields2 integer)

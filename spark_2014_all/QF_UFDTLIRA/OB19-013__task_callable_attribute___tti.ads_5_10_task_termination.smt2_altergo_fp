@@ -79,5 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : false
+
  (* File "tti.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

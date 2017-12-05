@@ -591,31 +591,162 @@ axiom oeq__post_axiom1 :
   ((oeq1(left, right) = true) <-> ((ole(left, right) = true) and (ole(right,
   left) = true))))
 
- (* File "list_allocator.adb", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep.
-  forall model____split_fields1:us_rep1. forall r:int. forall o:us_rep.
-  forall o1:us_rep. forall o2:us_rep1. forall temp___264:us_rep.
-  forall temp___2641:us_rep1. forall result:int. forall r1:int.
-  forall result1:us_rep. forall result2:us_rep1.
-  forall model____split_fields2:us_rep.
-  forall model____split_fields3:us_rep1.
-  (((length(model____split_fields) = 0) and
-  (is_empty(model____split_fields1) = true)) ->
-  ((length(model____split_fields) = 0) -> ((({ int__content = result } = {
-  int__content = r }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 10000)) ->
-  ((((((o = add(model____split_fields, r1)) and
+logic model____split_fields : us_rep
+
+logic model____split_fields1 : us_rep1
+
+logic r : int
+
+logic temp___266 : us_rep
+
+logic temp___2661 : us_rep1
+
+logic temp___265 : int
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic o2 : us_rep1
+
+logic temp___264 : us_rep
+
+logic temp___2641 : us_rep1
+
+logic o3 : int
+
+logic rr : int
+
+logic o4 : int
+
+logic rr1 : int
+
+logic o5 : int
+
+logic o6 : us_rep
+
+logic o7 : us_rep
+
+logic o8 : us_rep1
+
+logic temp___2642 : us_rep
+
+logic temp___2643 : us_rep1
+
+logic rr2 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic model____split_fields2 : us_rep
+
+logic model____split_fields3 : us_rep1
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic result2 : us_rep1
+
+logic model____split_fields4 : us_rep
+
+logic model____split_fields5 : us_rep1
+
+logic model____split_fields6 : us_rep
+
+logic model____split_fields7 : us_rep1
+
+logic r2 : int
+
+logic result3 : int
+
+logic r3 : int
+
+logic result4 : us_rep
+
+logic result5 : us_rep1
+
+logic model____split_fields8 : us_rep
+
+logic model____split_fields9 : us_rep1
+
+logic model____split_fields10 : us_rep
+
+logic model____split_fields11 : us_rep1
+
+logic r4 : int
+
+logic model____split_fields12 : us_rep
+
+logic model____split_fields13 : us_rep1
+
+logic r5 : int
+
+logic model____split_fields14 : us_rep
+
+logic model____split_fields15 : us_rep1
+
+logic r6 : int
+
+logic model____split_fields16 : us_rep
+
+logic model____split_fields17 : us_rep1
+
+logic r7 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : ((length(model____split_fields) = 0) and
+  (is_empty(model____split_fields1) = true))
+
+axiom H1 : (length(model____split_fields) = 0)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 10000)
+
+axiom H6 : ((o = add(model____split_fields, r1)) and
   ((length(o) = (length(model____split_fields) + 1)) and ((get(o,
-  (0 + length(o))) = r1) and ((bool_le(length(model____split_fields),
-  length(o)) = true) and
+  (0 + length(o))) = r1) and (((bool_le(length(model____split_fields),
+  length(o)) = true) ->
   (forall n:int. (((1 <= n) and
   (n <= (0 + length(model____split_fields)))) -> (get(model____split_fields,
-  n) = get(o, n)))))))) and ((o = o1) and (model____split_fields1 = o2))) and
-  ((temp___264 = o1) and (temp___2641 = o2))) and (({
-  us_split_fields__content = { rec__list_allocator__m__t__available =
-  result1; rec__list_allocator__m__t__allocated = result2 } } = {
-  us_split_fields__content = { rec__list_allocator__m__t__available =
-  model____split_fields; rec__list_allocator__m__t__allocated =
-  model____split_fields1 } }) and ((temp___264 = model____split_fields2) and
-  (temp___2641 = model____split_fields3)))) -> (get(model____split_fields2,
-  1) = 1)))))))
+  n) = get(o, n))))) and (not (bool_le(length(model____split_fields),
+  length(o)) = false))))))
+
+axiom H7 : (o = o1)
+
+axiom H8 : (model____split_fields1 = o2)
+
+axiom H9 : (temp___264 = o1)
+
+axiom H10 : (temp___2641 = o2)
+
+axiom H11 : ((result1 = model____split_fields) and
+  (result2 = model____split_fields1))
+
+axiom H12 : (temp___264 = model____split_fields4)
+
+axiom H13 : (temp___2641 = model____split_fields5)
+
+ (* File "list_allocator.adb", line 21, characters 0-0 *)
+goal WP_parameter_def : (get(model____split_fields4, 1) = 1)

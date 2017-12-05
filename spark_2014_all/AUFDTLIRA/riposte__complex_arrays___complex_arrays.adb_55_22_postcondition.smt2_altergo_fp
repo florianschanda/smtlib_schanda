@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -347,12 +347,26 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,(int,value) farray) farray
+
+logic result : (int,(int,value) farray) farray
+
+logic a1 : (int,(int,value) farray) farray
+
+logic a2 : (int,(int,value) farray) farray
+
+logic a3 : (int,(int,value) farray) farray
+
+axiom H : in_range(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- (a[17])]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
  (* File "complex_arrays.adb", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,value) farray) farray.
-  forall result:(int,(int,value) farray) farray.
-  forall a1:(int,(int,value) farray) farray.
-  forall a2:(int,(int,value) farray) farray.
-  forall a3:(int,(int,value) farray) farray. ((in_range(i) and
-  (((result = a) and (a1 = (a[i <- (a[17])]))) and ((a1 = a2) and
-  (a3 = a1)))) -> (bool_eq3((a2[i]), 0, 1001, (a2[23]), 0, 1001) = true)))
+goal WP_parameter_def : (bool_eq3((a2[i]), 0, 1001, (a2[23]), 0,
+  1001) = true)

@@ -107,5 +107,45 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic counter : int
+
+logic temp___187 : int
+
+logic o : int
+
+logic result : int
+
+logic counter1 : int
+
+logic counter2 : int
+
+logic result1 : int
+
+logic counter3 : int
+
+logic counter4 : int
+
+logic counter5 : int
+
+logic counter6 : int
+
+logic counter7 : int
+
+logic counter8 : int
+
+logic counter9 : int
+
+axiom H : (result = counter)
+
+axiom H1 : (counter1 = 5)
+
+axiom H2 : in_range(counter1)
+
+axiom H3 : false
+
+axiom H4 : (counter8 = counter6)
+
+axiom H5 : (counter9 = counter7)
+
  (* File "p.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

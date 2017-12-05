@@ -161,18 +161,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -599,7 +599,7 @@ axiom bv_max_to_uint :
 
 type f
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -848,18 +848,83 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : f
+
+logic y : t
+
+logic o : f
+
+logic o1 : int
+
+logic o2 : t
+
+logic o3 : f
+
+logic o4 : int
+
+logic o5 : t
+
+logic o6 : f
+
+logic o7 : int
+
+logic result : f
+
+logic x1 : f
+
+logic result1 : t
+
+logic y1 : t
+
+logic result2 : f
+
+logic x2 : f
+
+logic result3 : t
+
+logic y2 : t
+
+logic result4 : f
+
+logic x3 : f
+
+axiom H : true
+
+axiom H1 : (to_fixed(o) = 64)
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = o)
+
+axiom H4 : ((o1 = to_int1(to_fixed(x1))) and
+  uint_in_range(to_int1(to_fixed(x1))))
+
+axiom H5 : (o2 = of_int(o1))
+
+axiom H6 : (result1 = y)
+
+axiom H7 : (y1 = o2)
+
+axiom H8 : (to_fixed(o3) = (- 12))
+
+axiom H9 : (result2 = x1)
+
+axiom H10 : (x2 = o3)
+
+axiom H11 : ((o4 = to_int1(to_fixed(x2))) and
+  uint_in_range(to_int1(to_fixed(x2))))
+
+axiom H12 : (o5 = of_int(o4))
+
+axiom H13 : (result3 = y1)
+
+axiom H14 : (y2 = o5)
+
+axiom H15 : (to_fixed(o6) = (- 64))
+
+axiom H16 : (result4 = x2)
+
+axiom H17 : (x3 = o6)
+
  (* File "fpmod.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:f. forall y:t. forall o:f. forall o1:int. forall o2:t.
-  forall o3:f. forall o4:int. forall o5:t. forall o6:f. forall result:f.
-  forall x1:f. forall result1:t. forall y1:t. forall result2:f. forall x2:f.
-  forall result3:t. forall y2:t. forall result4:f. forall x3:f.
-  (((to_fixed(o) = 64) and ((result = x) and (x1 = o))) ->
-  (((((o1 = to_int1(to_fixed(x1))) and
-  uint_in_range(to_int1(to_fixed(x1)))) and (o2 = of_int(o1))) and
-  ((result1 = y) and (y1 = o2))) -> (((to_fixed(o3) = (-12)) and
-  ((result2 = x1) and (x2 = o3))) -> (((((o4 = to_int1(to_fixed(x2))) and
-  uint_in_range(to_int1(to_fixed(x2)))) and (o5 = of_int(o4))) and
-  ((result3 = y1) and (y2 = o5))) -> (((to_fixed(o6) = (-64)) and
-  ((result4 = x2) and (x3 = o6))) ->
-  uint_in_range(to_int1(to_fixed(x3)))))))))
+goal WP_parameter_def : uint_in_range(to_int1(to_fixed(x3)))

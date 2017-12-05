@@ -76,7 +76,7 @@
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 (define-fun dynamic_array__rec__f1__pred ((a us_rep)) Bool (= (to_int1 (rec__dynamic_array__rec__b (us_split_discrs1 a))) 1))
 (define-fun dynamic_array__rec__f2__pred ((a us_rep)) Bool (= (to_int1 (rec__dynamic_array__rec__b (us_split_discrs1 a))) 0))
-(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (and (= (rec__dynamic_array__rec__b (us_split_discrs1 a)) (rec__dynamic_array__rec__b (us_split_discrs1 b))) (=> (dynamic_array__rec__f1__pred a) (= (to_rep (rec__dynamic_array__rec__f1 (us_split_fields1 a))) (to_rep (rec__dynamic_array__rec__f1 (us_split_fields1 b)))))) (=> (dynamic_array__rec__f2__pred a) (= (to_rep (rec__dynamic_array__rec__f2 (us_split_fields1 a))) (to_rep (rec__dynamic_array__rec__f2 (us_split_fields1 b)))))) true false))
+(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (= (rec__dynamic_array__rec__b (us_split_discrs1 a)) (rec__dynamic_array__rec__b (us_split_discrs1 b))) (and (=> (dynamic_array__rec__f1__pred a) (= (to_rep (rec__dynamic_array__rec__f1 (us_split_fields1 a))) (to_rep (rec__dynamic_array__rec__f1 (us_split_fields1 b))))) (=> (dynamic_array__rec__f2__pred a) (= (to_rep (rec__dynamic_array__rec__f2 (us_split_fields1 a))) (to_rep (rec__dynamic_array__rec__f2 (us_split_fields1 b))))))) true false))
 (declare-const value__size Int)
 (declare-fun object__size (us_rep) Int)
 (declare-const value__alignment Int)

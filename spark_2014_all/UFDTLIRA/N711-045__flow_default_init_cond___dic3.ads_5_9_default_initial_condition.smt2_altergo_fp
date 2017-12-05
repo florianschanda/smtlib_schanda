@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type derived_t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -139,7 +139,7 @@ logic to_int__2__function_guard : int, int -> prop
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -169,8 +169,13 @@ axiom to_int__2__post_axiom :
 axiom to_int__2__def_axiom :
   (forall d:int [to_int__2(d)]. (in_range1(d) -> (to_int__2(d) = d)))
 
+logic us : int
+
+logic temp___148 : int
+
+axiom H : ((us = 5) and in_range1(5))
+
+axiom H1 : (in_range1(temp___148) and (temp___148 = 5))
+
  (* File "dic3.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall temp___148:int. (((us = 5) and in_range1(5)) ->
-  ((in_range1(temp___148) and (temp___148 = 5)) ->
-  (1 <= to_int__2(temp___148)))))
+goal WP_parameter_def : (1 <= to_int__2(temp___148))

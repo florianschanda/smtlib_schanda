@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -879,54 +879,308 @@ axiom def_axiom :
   (((aida__conversion__calculate_positive_target_length_4__n__aggregate_def(temp___1699,
   temp___1700, temp___1701)).elts2[temp___1702]) = of_rep1(temp___1699)))))
 
- (* File "aida-conversion.adb", line 955, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall has_failed:bool. forall n:(int,integer) farray.
-  forall index:int. forall temp___1704:(int,integer) farray.
-  forall temp___17041:t2.
-  forall aida__conversion__calculate_positive_target_length_4__n__assume:(int,integer) farray.
-  forall aida__conversion__calculate_positive_target_length_4__n__assume1:t1.
-  forall temp___1711:int. forall temp___1709:int.
-  forall temp___1707:(int,integer) farray. forall o:int. forall o1:integer.
-  forall o2:int.
-  forall aida__conversion__convert_character_digit_to_integer__2__target:int.
-  forall o3:int. forall o4:character. forall o5:int. forall o6:integer.
-  forall o7:int. forall o8:(int,integer) farray. forall temp___1712:int.
-  forall o9:int. forall o10:integer. forall o11:int. forall temp___1713:int.
-  forall o12:int. forall o13:integer. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:int. forall temp___1714:int.
-  forall o19:int. forall o20:integer. forall o21:int. forall o22:int.
-  forall o23:int. forall o24:int. forall o25:int. forall temp___1715:int.
-  forall o26:int. forall o27:integer. forall o28:int. forall o29:int.
-  forall o30:int. forall o31:int. forall o32:int. forall temp___1716:int.
-  forall temp___1717:int. forall o33:int. forall o34:character.
-  forall o35:int. forall o36:int. forall o37:int. forall o38:int.
-  forall temp___1718:int. forall o39:int. forall o40:character.
-  forall o41:int. forall o42:int. forall o43:int. forall o44:int.
-  forall temp___1719:int. forall o45:int. forall o46:character.
-  forall o47:int. forall o48:int. forall o49:int. forall o50:int.
-  forall result:(int,integer) farray. forall n1:(int,integer) farray.
-  forall result1:int. forall index1:int.
-  forall aida__conversion__convert_character_digit_to_integer__2__target1:int.
-  forall result2:(int,integer) farray. forall n2:(int,integer) farray.
-  forall n3:(int,integer) farray. forall index2:int.
-  forall n4:(int,integer) farray. forall index3:int.
-  forall n5:(int,integer) farray. forall index4:int.
-  forall n6:(int,integer) farray. forall index5:int.
-  forall n7:(int,integer) farray. forall index6:int. forall result3:int.
-  forall target1:int. forall result4:int. forall target2:int.
-  forall result5:int. forall target3:int. forall result6:int.
-  forall target4:int. forall result7:bool. forall has_failed1:bool.
-  forall target5:int. forall has_failed2:bool.
-  forall n8:(int,integer) farray. forall index7:int. forall target6:int.
-  forall has_failed3:bool. forall n9:(int,integer) farray. forall index8:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(source1)),
-  to_rep1(last(source1))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(target)) -> (((length({ elts = source; rt = source1 }) = 4) and
-  (forall index9:int. (((to_rep1(first(source1)) <= index9) and
-  (index9 <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index9]))) = true)))) ->
-  (((((((to_rep1(first4((aida__conversion__calculate_positive_target_length_4__n__aggregate_def(0,
+logic target : int
+
+logic has_failed : bool
+
+logic n : (int,integer) farray
+
+logic index : int
+
+logic index1 : int
+
+logic us : int
+
+logic temp___1704 : (int,integer) farray
+
+logic temp___17041 : t2
+
+logic aida__conversion__calculate_positive_target_length_4__n__assume : (int,integer) farray
+
+logic aida__conversion__calculate_positive_target_length_4__n__assume1 : t1
+
+logic us1 : int
+
+logic temp___1711 : int
+
+logic temp___1709 : int
+
+logic temp___1707 : (int,integer) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic j : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target1 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : (int,integer) farray
+
+logic temp___1712 : int
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic temp___1713 : int
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic temp___1714 : int
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic temp___1715 : int
+
+logic o39 : int
+
+logic o40 : integer
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic temp___1716 : int
+
+logic o46 : int
+
+logic o47 : character
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic temp___1717 : int
+
+logic o51 : int
+
+logic o52 : character
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic temp___1718 : int
+
+logic o59 : int
+
+logic o60 : character
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic temp___1719 : int
+
+logic o67 : int
+
+logic o68 : character
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic result : (int,integer) farray
+
+logic n1 : (int,integer) farray
+
+logic result1 : int
+
+logic index2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target2 : int
+
+logic result2 : (int,integer) farray
+
+logic n2 : (int,integer) farray
+
+logic n3 : (int,integer) farray
+
+logic index3 : int
+
+logic result3 : int
+
+logic index4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target3 : int
+
+logic result4 : (int,integer) farray
+
+logic n4 : (int,integer) farray
+
+logic n5 : (int,integer) farray
+
+logic index5 : int
+
+logic n6 : (int,integer) farray
+
+logic index6 : int
+
+logic n7 : (int,integer) farray
+
+logic index7 : int
+
+logic n8 : (int,integer) farray
+
+logic index8 : int
+
+logic n9 : (int,integer) farray
+
+logic index9 : int
+
+logic n10 : (int,integer) farray
+
+logic index10 : int
+
+logic result5 : int
+
+logic target1 : int
+
+logic result6 : int
+
+logic target2 : int
+
+logic result7 : int
+
+logic target3 : int
+
+logic result8 : int
+
+logic target4 : int
+
+logic result9 : bool
+
+logic has_failed1 : bool
+
+logic target5 : int
+
+logic has_failed2 : bool
+
+logic n11 : (int,integer) farray
+
+logic index11 : int
+
+logic target6 : int
+
+logic has_failed3 : bool
+
+logic n12 : (int,integer) farray
+
+logic index12 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : ((length({ elts = source; rt = source1 }) = 4) and
+  (forall index13:int. (((to_rep1(first(source1)) <= index13) and
+  (index13 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index13]))) = true))))
+
+axiom H3 :
+  ((((((to_rep1(first4((aida__conversion__calculate_positive_target_length_4__n__aggregate_def(0,
   to_rep1(first(source1)),
   (to_rep1(first(source1)) + 3))).rt2)) = to_rep1(first(source1))) and
   ((to_rep1(last4((aida__conversion__calculate_positive_target_length_4__n__aggregate_def(0,
@@ -935,20 +1189,19 @@ goal WP_parameter_def :
   ({ elts2 = temp___1704; rt2 = temp___17041
   } = aida__conversion__calculate_positive_target_length_4__n__aggregate_def(0,
   to_rep1(first(source1)), (to_rep1(first(source1)) + 3))))) and
-  ((((to_rep1(first4(temp___17041)) <= to_rep1(last4(temp___17041))) and
-  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)) and
-  (((to_rep1(last4(temp___17041)) - to_rep1(first4(temp___17041))) + 1) = (((to_rep1(first(source1)) + 3) - to_rep1(first(source1))) + 1))) or
-  ((not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3))) and
-  (((to_rep1(last4(temp___17041)) - to_rep1(first4(temp___17041))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___17041)) <= to_rep1(last4(temp___17041)))) and
-  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)) and
-  (0 = (((to_rep1(first(source1)) + 3) - to_rep1(first(source1))) + 1))) or
-  (not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)))))) and
+  ((((to_rep1(first4(temp___17041)) <= to_rep1(last4(temp___17041))) ->
+  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)) ->
+  (((to_rep1(last4(temp___17041)) - to_rep1(first4(temp___17041))) + 1) = (((to_rep1(first(source1)) + 3) - to_rep1(first(source1))) + 1))) and
+  ((not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3))) ->
+  (((to_rep1(last4(temp___17041)) - to_rep1(first4(temp___17041))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___17041)) <= to_rep1(last4(temp___17041)))) ->
+  ((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)) ->
+  (0 = (((to_rep1(first(source1)) + 3) - to_rep1(first(source1))) + 1))))) and
   ((slide1(temp___1704, to_rep1(first4(temp___17041)),
   to_rep1(first(source1))) = aida__conversion__calculate_positive_target_length_4__n__assume) and
   (mk1(to_rep1(first(source1)),
   (to_rep1(first(source1)) + 3)) = aida__conversion__calculate_positive_target_length_4__n__assume1)))) and
-  ((({ map__content1 = result } = { map__content1 = n }) and
+  (((result = n) and
   (n1 = aida__conversion__calculate_positive_target_length_4__n__assume)) and
   ((to_rep1(n__first) = to_rep1(first2(aida__conversion__calculate_positive_target_length_4__n__assume1))) and
   (to_rep1(n__last) = to_rep1(last2(aida__conversion__calculate_positive_target_length_4__n__assume1)))))) and
@@ -957,156 +1210,189 @@ goal WP_parameter_def :
   ((to_rep1(n__first) = to_rep1(first(source1))) and
   (to_rep1(n__last) = (to_rep1(first(source1)) + 3)))) and
   ((((temp___1711 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and ((({ int__content = result1
-  } = { int__content = index }) and (index1 = to_rep1(first(source1)))) and
-  ((((to_rep1(first(source1)) <= index1) and (index1 <= temp___1711)) and
-  ((((temp___1709 = index1) and ((temp___1707 = n1) and
-  ((((((((to_rep1(n__first) <= index1) and (index1 <= to_rep1(n__last))) and
-  (o = index1)) and (o1 = (n1[o]))) and (o2 = to_rep1(o1))) and
+  in_range1((to_rep1(first(source1)) + 3))) and (((result1 = index) and
+  (index2 = to_rep1(first(source1)))) and
+  ((((to_rep1(first(source1)) <= index2) and (index2 <= temp___1711)) ->
+  ((((temp___1709 = index2) and ((temp___1707 = n1) and
+  ((((((((to_rep1(n__first) <= index2) and (index2 <= to_rep1(n__last))) and
+  (o = index2)) and (o1 = (n1[o]))) and (o2 = to_rep1(o1))) and
   (o2 = aida__conversion__convert_character_digit_to_integer__2__target)) and
-  (((((((to_rep1(first(source1)) <= index1) and
-  (index1 <= to_rep1(last(source1)))) and (o3 = index1)) and
+  (((((((to_rep1(first(source1)) <= index2) and
+  (index2 <= to_rep1(last(source1)))) and (o3 = index2)) and
   (o4 = (source[o3]))) and (o5 = to_rep(o4))) and
-  (((((0 <= aida__conversion__convert_character_digit_to_integer__2__target1) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 <= 9)) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = convert_character_digit_to_integer(o5))) and
-  (((bool_eq1(o5, 48) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 0)) or
-  ((not (bool_eq1(o5, 48) = true)) and (((bool_eq1(o5, 49) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 1)) or
-  ((not (bool_eq1(o5, 49) = true)) and (((bool_eq1(o5, 50) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 2)) or
-  ((not (bool_eq1(o5, 50) = true)) and (((bool_eq1(o5, 51) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 3)) or
-  ((not (bool_eq1(o5, 51) = true)) and (((bool_eq1(o5, 52) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 4)) or
-  ((not (bool_eq1(o5, 52) = true)) and (((bool_eq1(o5, 53) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 5)) or
-  ((not (bool_eq1(o5, 53) = true)) and (((bool_eq1(o5, 54) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 6)) or
-  ((not (bool_eq1(o5, 54) = true)) and (((bool_eq1(o5, 55) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 7)) or
-  ((not (bool_eq1(o5, 55) = true)) and (((bool_eq1(o5, 56) = true) and
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 8)) or
-  ((not (bool_eq1(o5, 56) = true)) and ((bool_eq1(o5, 57) = true) ->
-  (aida__conversion__convert_character_digit_to_integer__2__target1 = 9))))))))))))))))))))) and
-  in_range1(aida__conversion__convert_character_digit_to_integer__2__target1))) and
-  (((to_rep1(o6) = aida__conversion__convert_character_digit_to_integer__2__target1) and
-  ((((to_rep1(n__first) <= index1) and (index1 <= to_rep1(n__last))) and
-  (o7 = index1)) and (o8 = (n1[o7 <- o6])))) and ((n1 = result2) and
+  (((((0 <= aida__conversion__convert_character_digit_to_integer__2__target2) and
+  (aida__conversion__convert_character_digit_to_integer__2__target2 <= 9)) and
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = convert_character_digit_to_integer(o5))) and
+  (((bool_eq1(o5, 48) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 0)) and
+  ((not (bool_eq1(o5, 48) = true)) -> (((bool_eq1(o5, 49) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 1)) and
+  ((not (bool_eq1(o5, 49) = true)) -> (((bool_eq1(o5, 50) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 2)) and
+  ((not (bool_eq1(o5, 50) = true)) -> (((bool_eq1(o5, 51) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 3)) and
+  ((not (bool_eq1(o5, 51) = true)) -> (((bool_eq1(o5, 52) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 4)) and
+  ((not (bool_eq1(o5, 52) = true)) -> (((bool_eq1(o5, 53) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 5)) and
+  ((not (bool_eq1(o5, 53) = true)) -> (((bool_eq1(o5, 54) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 6)) and
+  ((not (bool_eq1(o5, 54) = true)) -> (((bool_eq1(o5, 55) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 7)) and
+  ((not (bool_eq1(o5, 55) = true)) -> (((bool_eq1(o5, 56) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 8)) and
+  ((not (bool_eq1(o5, 56) = true)) -> ((bool_eq1(o5, 57) = true) ->
+  (aida__conversion__convert_character_digit_to_integer__2__target2 = 9))))))))))))))))))))) and
+  in_range1(aida__conversion__convert_character_digit_to_integer__2__target2))) and
+  (((to_rep1(o6) = aida__conversion__convert_character_digit_to_integer__2__target2) and
+  ((((to_rep1(n__first) <= index2) and (index2 <= to_rep1(n__last))) and
+  (o7 = index2)) and (o8 = (n1[o7 <- o6])))) and ((n1 = result2) and
   (n2 = o8))))) and
-  ((forall j:int. (((to_rep1(first(source1)) <= j) and (j <= index2)) ->
-   (to_rep1((n3[j])) = convert_character_digit_to_integer(to_rep((source[j])))))) and
+  ((forall j1:int. (((to_rep1(first(source1)) <= j1) and (j1 <= index3)) ->
+   (to_rep1((n3[j1])) = convert_character_digit_to_integer(to_rep((source[j1])))))) and
   ((((forall temp___1708:int. (((to_rep1(n__first) <= temp___1708) and
-     (temp___1708 <= to_rep1(n__last))) -> ((index2 <  temp___1708) ->
+     (temp___1708 <= to_rep1(n__last))) -> ((index3 <  temp___1708) ->
      ((n3[temp___1708]) = (temp___1707[temp___1708]))))) and
   ((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 3)) ->
   dynamic_property5(to_rep1(first(source1)), (to_rep1(first(source1)) + 3),
-  index2))) and ((to_rep1(first(source1)) <= index2) and
-  (index2 <= (to_rep1(first(source1)) + 3)))) and
-  (index2 = temp___1711)))))) and (((index2 = index3) and (n3 = n4)) and
-  ((index4 = index2) and (n5 = n3)))) and ((({ int__content = index5 } = {
-  int__content = index3 }) and ({ map__content1 = n6 } = { map__content1 = n4
-  })) and ((index6 = index4) and (n7 = n5))))) or
-  ((not ((to_rep1(first(source1)) <= index1) and
-  (index1 <= temp___1711))) and (((index1 = index5) and (n1 = n6)) and
-  ((index6 = index1) and (n7 = n1))))))) and
+  index3))) and ((to_rep1(first(source1)) <= index3) and
+  (index3 <= (to_rep1(first(source1)) + 3)))) and
+  (index3 = temp___1711)))))) and (((index3 = index7) and (n3 = n7)) and
+  ((index8 = index3) and (n8 = n3)))) and (((index9 = index7) and
+  (n9 = n7)) and ((index10 = index8) and (n10 = n8))))) and
+  ((not ((to_rep1(first(source1)) <= index2) and (index2 <= temp___1711))) ->
+  (((index2 = index9) and (n1 = n9)) and ((index10 = index2) and
+  (n10 = n1))))))) and
   (((((((temp___1712 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(n__first) <= temp___1712) and
-  (temp___1712 <= to_rep1(n__last))) and (o9 = temp___1712))) and
-  (o10 = (n6[o9]))) and (o11 = to_rep1(o10))) and (({ int__content = result3
-  } = { int__content = target }) and (target1 = o11))) and
-  ((target1 <= 9) and
+  (temp___1712 <= to_rep1(n__last))) and (o22 = temp___1712))) and
+  (o23 = (n9[o22]))) and (o24 = to_rep1(o23))) and ((result5 = target) and
+  (target1 = o24))) and ((target1 <= 9) and
   (((((((((((temp___1713 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(n__first) <= temp___1713) and
-  (temp___1713 <= to_rep1(n__last))) and (o12 = temp___1713))) and
-  (o13 = (n6[o12]))) and (o14 = to_rep1(o13))) and (o15 = (o14 * 10))) and
-  ((o16 = o15) and in_range1(o15))) and (o17 = (target1 + o16))) and
-  ((o18 = o17) and in_range1(o17))) and ((target1 = result4) and
-  (target2 = o18))) and ((target2 <= 99) and
+  (temp___1713 <= to_rep1(n__last))) and (o25 = temp___1713))) and
+  (o26 = (n9[o25]))) and (o27 = to_rep1(o26))) and (o28 = (o27 * 10))) and
+  ((o29 = o28) and in_range1(o28))) and (o30 = (target1 + o29))) and
+  ((o31 = o30) and in_range1(o30))) and ((target1 = result6) and
+  (target2 = o31))) and ((target2 <= 99) and
   (((((((((((temp___1714 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(n__first) <= temp___1714) and
-  (temp___1714 <= to_rep1(n__last))) and (o19 = temp___1714))) and
-  (o20 = (n6[o19]))) and (o21 = to_rep1(o20))) and (o22 = (o21 * 100))) and
-  ((o23 = o22) and in_range1(o22))) and (o24 = (target2 + o23))) and
-  ((o25 = o24) and in_range1(o24))) and ((target2 = result5) and
-  (target3 = o25))) and ((target3 <= 999) and
+  (temp___1714 <= to_rep1(n__last))) and (o32 = temp___1714))) and
+  (o33 = (n9[o32]))) and (o34 = to_rep1(o33))) and (o35 = (o34 * 100))) and
+  ((o36 = o35) and in_range1(o35))) and (o37 = (target2 + o36))) and
+  ((o38 = o37) and in_range1(o37))) and ((result7 = target2) and
+  (target3 = o38))) and ((target3 <= 999) and
   (((((((((((temp___1715 = (to_rep1(first(source1)) + 0)) and
   in_range1((to_rep1(first(source1)) + 0))) and
   (((to_rep1(n__first) <= temp___1715) and
-  (temp___1715 <= to_rep1(n__last))) and (o26 = temp___1715))) and
-  (o27 = (n6[o26]))) and (o28 = to_rep1(o27))) and (o29 = (o28 * 1000))) and
-  ((o30 = o29) and in_range1(o29))) and (o31 = (target3 + o30))) and
-  ((o32 = o31) and in_range1(o31))) and ((target3 = result6) and
-  (target4 = o32))) and ((target4 <= 9999) and ((result7 = has_failed) and
-  (has_failed1 = of_int(0)))))))))))))) and ((({ int__content = index7 } = {
-  int__content = index5 }) and (({ map__content1 = n8 } = { map__content1 =
-  n6 }) and ((has_failed1 = has_failed2) and (target4 = target5)))) and
-  ((index8 = index6) and ((n9 = n7) and ((has_failed3 = has_failed1) and
-  (target6 = target4)))))) ->
-  (((((((((temp___1719 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1719) and
-  (temp___1719 <= to_rep1(last(source1)))) and (o45 = temp___1719))) and
-  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and
-  ((o48 = convert_character_digit_to_integer(o47)) and (in_range1(o48) and
-  (((0 <= o48) and (o48 <= 9)) and (((bool_eq1(o47, 48) = true) and
-  (o48 = 0)) or ((not (bool_eq1(o47, 48) = true)) and (((bool_eq1(o47,
-  49) = true) and (o48 = 1)) or ((not (bool_eq1(o47, 49) = true)) and
-  (((bool_eq1(o47, 50) = true) and (o48 = 2)) or ((not (bool_eq1(o47,
-  50) = true)) and (((bool_eq1(o47, 51) = true) and (o48 = 3)) or
-  ((not (bool_eq1(o47, 51) = true)) and (((bool_eq1(o47, 52) = true) and
-  (o48 = 4)) or ((not (bool_eq1(o47, 52) = true)) and (((bool_eq1(o47,
-  53) = true) and (o48 = 5)) or ((not (bool_eq1(o47, 53) = true)) and
-  (((bool_eq1(o47, 54) = true) and (o48 = 6)) or ((not (bool_eq1(o47,
-  54) = true)) and (((bool_eq1(o47, 55) = true) and (o48 = 7)) or
-  ((not (bool_eq1(o47, 55) = true)) and (((bool_eq1(o47, 56) = true) and
-  (o48 = 8)) or ((not (bool_eq1(o47, 56) = true)) and ((bool_eq1(o47,
-  57) = true) -> (o48 = 9)))))))))))))))))))))))) and (o49 = (o48 * 1))) and
-  ((o50 = o49) and in_range1(o49))) ->
-  (((((((((temp___1718 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1718) and
-  (temp___1718 <= to_rep1(last(source1)))) and (o39 = temp___1718))) and
-  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and
-  ((o42 = convert_character_digit_to_integer(o41)) and (in_range1(o42) and
-  (((0 <= o42) and (o42 <= 9)) and (((bool_eq1(o41, 48) = true) and
-  (o42 = 0)) or ((not (bool_eq1(o41, 48) = true)) and (((bool_eq1(o41,
-  49) = true) and (o42 = 1)) or ((not (bool_eq1(o41, 49) = true)) and
-  (((bool_eq1(o41, 50) = true) and (o42 = 2)) or ((not (bool_eq1(o41,
-  50) = true)) and (((bool_eq1(o41, 51) = true) and (o42 = 3)) or
-  ((not (bool_eq1(o41, 51) = true)) and (((bool_eq1(o41, 52) = true) and
-  (o42 = 4)) or ((not (bool_eq1(o41, 52) = true)) and (((bool_eq1(o41,
-  53) = true) and (o42 = 5)) or ((not (bool_eq1(o41, 53) = true)) and
-  (((bool_eq1(o41, 54) = true) and (o42 = 6)) or ((not (bool_eq1(o41,
-  54) = true)) and (((bool_eq1(o41, 55) = true) and (o42 = 7)) or
-  ((not (bool_eq1(o41, 55) = true)) and (((bool_eq1(o41, 56) = true) and
-  (o42 = 8)) or ((not (bool_eq1(o41, 56) = true)) and ((bool_eq1(o41,
-  57) = true) -> (o42 = 9)))))))))))))))))))))))) and (o43 = (o42 * 10))) and
-  ((o44 = o43) and in_range1(o43))) ->
-  (((((((((temp___1717 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1717) and
-  (temp___1717 <= to_rep1(last(source1)))) and (o33 = temp___1717))) and
-  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and
-  ((o36 = convert_character_digit_to_integer(o35)) and (in_range1(o36) and
-  (((0 <= o36) and (o36 <= 9)) and (((bool_eq1(o35, 48) = true) and
-  (o36 = 0)) or ((not (bool_eq1(o35, 48) = true)) and (((bool_eq1(o35,
-  49) = true) and (o36 = 1)) or ((not (bool_eq1(o35, 49) = true)) and
-  (((bool_eq1(o35, 50) = true) and (o36 = 2)) or ((not (bool_eq1(o35,
-  50) = true)) and (((bool_eq1(o35, 51) = true) and (o36 = 3)) or
-  ((not (bool_eq1(o35, 51) = true)) and (((bool_eq1(o35, 52) = true) and
-  (o36 = 4)) or ((not (bool_eq1(o35, 52) = true)) and (((bool_eq1(o35,
-  53) = true) and (o36 = 5)) or ((not (bool_eq1(o35, 53) = true)) and
-  (((bool_eq1(o35, 54) = true) and (o36 = 6)) or ((not (bool_eq1(o35,
-  54) = true)) and (((bool_eq1(o35, 55) = true) and (o36 = 7)) or
-  ((not (bool_eq1(o35, 55) = true)) and (((bool_eq1(o35, 56) = true) and
-  (o36 = 8)) or ((not (bool_eq1(o35, 56) = true)) and ((bool_eq1(o35,
-  57) = true) -> (o36 = 9)))))))))))))))))))))))) and
-  (o37 = (o36 * 100))) and ((o38 = o37) and in_range1(o37))) ->
-  (((temp___1716 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) ->
-  (to_rep1(first(source1)) <= temp___1716))))))))))
+  (temp___1715 <= to_rep1(n__last))) and (o39 = temp___1715))) and
+  (o40 = (n9[o39]))) and (o41 = to_rep1(o40))) and (o42 = (o41 * 1000))) and
+  ((o43 = o42) and in_range1(o42))) and (o44 = (target3 + o43))) and
+  ((o45 = o44) and in_range1(o44))) and ((result8 = target3) and
+  (target4 = o45))) and ((target4 <= 9999) and ((result9 = has_failed) and
+  (has_failed1 = of_int(0)))))))))))))) and (((index11 = index9) and
+  ((n11 = n9) and ((has_failed2 = has_failed1) and (target5 = target4)))) and
+  ((index12 = index10) and ((n12 = n10) and ((has_failed3 = has_failed1) and
+  (target6 = target4))))))
+
+axiom H4 : ((temp___1719 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H5 : ((to_rep1(first(source1)) <= temp___1719) and
+  (temp___1719 <= to_rep1(last(source1))))
+
+axiom H6 : (o67 = temp___1719)
+
+axiom H7 : (o68 = (source[o67]))
+
+axiom H8 : (o69 = to_rep(o68))
+
+axiom H9 : ((o70 = convert_character_digit_to_integer(o69)) and
+  (in_range1(o70) and (((0 <= o70) and (o70 <= 9)) and (((bool_eq1(o69,
+  48) = true) -> (o70 = 0)) and ((not (bool_eq1(o69, 48) = true)) ->
+  (((bool_eq1(o69, 49) = true) -> (o70 = 1)) and ((not (bool_eq1(o69,
+  49) = true)) -> (((bool_eq1(o69, 50) = true) -> (o70 = 2)) and
+  ((not (bool_eq1(o69, 50) = true)) -> (((bool_eq1(o69, 51) = true) ->
+  (o70 = 3)) and ((not (bool_eq1(o69, 51) = true)) -> (((bool_eq1(o69,
+  52) = true) -> (o70 = 4)) and ((not (bool_eq1(o69, 52) = true)) ->
+  (((bool_eq1(o69, 53) = true) -> (o70 = 5)) and ((not (bool_eq1(o69,
+  53) = true)) -> (((bool_eq1(o69, 54) = true) -> (o70 = 6)) and
+  ((not (bool_eq1(o69, 54) = true)) -> (((bool_eq1(o69, 55) = true) ->
+  (o70 = 7)) and ((not (bool_eq1(o69, 55) = true)) -> (((bool_eq1(o69,
+  56) = true) -> (o70 = 8)) and ((not (bool_eq1(o69, 56) = true)) ->
+  ((bool_eq1(o69, 57) = true) -> (o70 = 9)))))))))))))))))))))))
+
+axiom H10 : (o71 = (o70 * 1))
+
+axiom H11 : ((o72 = o71) and in_range1(o71))
+
+axiom H12 : ((temp___1718 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H13 : ((to_rep1(first(source1)) <= temp___1718) and
+  (temp___1718 <= to_rep1(last(source1))))
+
+axiom H14 : (o59 = temp___1718)
+
+axiom H15 : (o60 = (source[o59]))
+
+axiom H16 : (o61 = to_rep(o60))
+
+axiom H17 : ((o62 = convert_character_digit_to_integer(o61)) and
+  (in_range1(o62) and (((0 <= o62) and (o62 <= 9)) and (((bool_eq1(o61,
+  48) = true) -> (o62 = 0)) and ((not (bool_eq1(o61, 48) = true)) ->
+  (((bool_eq1(o61, 49) = true) -> (o62 = 1)) and ((not (bool_eq1(o61,
+  49) = true)) -> (((bool_eq1(o61, 50) = true) -> (o62 = 2)) and
+  ((not (bool_eq1(o61, 50) = true)) -> (((bool_eq1(o61, 51) = true) ->
+  (o62 = 3)) and ((not (bool_eq1(o61, 51) = true)) -> (((bool_eq1(o61,
+  52) = true) -> (o62 = 4)) and ((not (bool_eq1(o61, 52) = true)) ->
+  (((bool_eq1(o61, 53) = true) -> (o62 = 5)) and ((not (bool_eq1(o61,
+  53) = true)) -> (((bool_eq1(o61, 54) = true) -> (o62 = 6)) and
+  ((not (bool_eq1(o61, 54) = true)) -> (((bool_eq1(o61, 55) = true) ->
+  (o62 = 7)) and ((not (bool_eq1(o61, 55) = true)) -> (((bool_eq1(o61,
+  56) = true) -> (o62 = 8)) and ((not (bool_eq1(o61, 56) = true)) ->
+  ((bool_eq1(o61, 57) = true) -> (o62 = 9)))))))))))))))))))))))
+
+axiom H18 : (o63 = (o62 * 10))
+
+axiom H19 : ((o64 = o63) and in_range1(o63))
+
+axiom H20 : ((temp___1717 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H21 : ((to_rep1(first(source1)) <= temp___1717) and
+  (temp___1717 <= to_rep1(last(source1))))
+
+axiom H22 : (o51 = temp___1717)
+
+axiom H23 : (o52 = (source[o51]))
+
+axiom H24 : (o53 = to_rep(o52))
+
+axiom H25 : ((o54 = convert_character_digit_to_integer(o53)) and
+  (in_range1(o54) and (((0 <= o54) and (o54 <= 9)) and (((bool_eq1(o53,
+  48) = true) -> (o54 = 0)) and ((not (bool_eq1(o53, 48) = true)) ->
+  (((bool_eq1(o53, 49) = true) -> (o54 = 1)) and ((not (bool_eq1(o53,
+  49) = true)) -> (((bool_eq1(o53, 50) = true) -> (o54 = 2)) and
+  ((not (bool_eq1(o53, 50) = true)) -> (((bool_eq1(o53, 51) = true) ->
+  (o54 = 3)) and ((not (bool_eq1(o53, 51) = true)) -> (((bool_eq1(o53,
+  52) = true) -> (o54 = 4)) and ((not (bool_eq1(o53, 52) = true)) ->
+  (((bool_eq1(o53, 53) = true) -> (o54 = 5)) and ((not (bool_eq1(o53,
+  53) = true)) -> (((bool_eq1(o53, 54) = true) -> (o54 = 6)) and
+  ((not (bool_eq1(o53, 54) = true)) -> (((bool_eq1(o53, 55) = true) ->
+  (o54 = 7)) and ((not (bool_eq1(o53, 55) = true)) -> (((bool_eq1(o53,
+  56) = true) -> (o54 = 8)) and ((not (bool_eq1(o53, 56) = true)) ->
+  ((bool_eq1(o53, 57) = true) -> (o54 = 9)))))))))))))))))))))))
+
+axiom H26 : (o55 = (o54 * 100))
+
+axiom H27 : ((o56 = o55) and in_range1(o55))
+
+axiom H28 : ((temp___1716 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+ (* File "aida-conversion.adb", line 955, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___1716)

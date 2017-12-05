@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -273,29 +273,107 @@ function t8b__ref___projection(a: t8b__ref) : t8b = (a).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "counterex_forall.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(int,integer) farray. forall x:int. forall o:int.
-  forall o1:integer. forall o2:(int,integer) farray. forall i:int.
-  forall j:int. forall result:int. forall x1:int.
-  forall r1:(int,integer) farray. forall x2:int. forall y:int.
-  forall result1:int. forall y1:int. forall result2:(int,integer) farray.
-  forall r2:(int,integer) farray. forall r3:(int,integer) farray.
-  forall y2:int. (((result = x) and (x1 = 1)) -> (((1 <= x1) and
-  (x1 <= 100)) ->
-  (((forall temp___167:int. ((((-2147483648) <= temp___167) and
-    (temp___167 <= 2147483647)) -> ((x2 <= temp___167) ->
-    ((r1[temp___167]) = (r[temp___167]))))) and
-  ((1 <= x2) and (x2 <= 100))) -> (((result1 = y) and (y1 = 1)) ->
-  (((1 <= y1) and (y1 <= 200)) -> ((((((o = (to_rep((r1[x2])) + y1)) and
-  in_range1((to_rep((r1[x2])) + y1))) and (to_rep(o1) = o)) and
-  (o2 = (r1[x2 <- o1]))) and ((result2 = r1) and (r2 = o2))) ->
-  ((forall i1:int. (((1 <= i1) and (i1 <= y2)) ->
-   (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
-   ((i1 + j1) <  ((x2 + y2) + 1)))))) ->
-  (((((1 <= 200) -> in_range2(y2)) and
-  (forall temp___163:int. ((((-2147483648) <= temp___163) and
+logic r : (int,integer) farray
+
+logic x : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic i : int
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : (int,integer) farray
+
+logic result : int
+
+logic x1 : int
+
+logic r1 : (int,integer) farray
+
+logic x2 : int
+
+logic y : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : (int,integer) farray
+
+logic r2 : (int,integer) farray
+
+logic r3 : (int,integer) farray
+
+logic y2 : int
+
+logic result3 : int
+
+logic y3 : int
+
+logic result4 : (int,integer) farray
+
+logic r4 : (int,integer) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 1)
+
+axiom H2 : (1 <= x1)
+
+axiom H3 : (x1 <= 100)
+
+axiom H4 :
+  ((forall temp___167:int. ((((- 2147483648) <= temp___167) and
+   (temp___167 <= 2147483647)) -> ((x2 <= temp___167) ->
+   ((r1[temp___167]) = (r[temp___167]))))) and ((1 <= x2) and (x2 <= 100)))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = 1)
+
+axiom H7 : (1 <= y1)
+
+axiom H8 : (y1 <= 200)
+
+axiom H9 : ((o = (to_rep((r1[x2])) + y1)) and
+  in_range1((to_rep((r1[x2])) + y1)))
+
+axiom H10 : (to_rep(o1) = o)
+
+axiom H11 : (o2 = (r1[x2 <- o1]))
+
+axiom H12 : (result2 = r1)
+
+axiom H13 : (r2 = o2)
+
+axiom H14 :
+  (forall i1:int. (((1 <= i1) and (i1 <= y2)) ->
+  (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
+  ((i1 + j1) <  ((x2 + y2) + 1))))))
+
+axiom H15 : ((((1 <= 200) -> in_range2(y2)) and
+  (forall temp___163:int. ((((- 2147483648) <= temp___163) and
   (temp___163 <= 2147483647)) -> ((not (x2 = temp___163)) ->
-  ((r3[temp___163]) = (r1[temp___163])))))) and ((1 <= y2) and
-  (y2 <= 200))) -> (((1 <= i) and (i <= y2)) -> (((1 <= j) and (j <= 100)) ->
-  in_range1((i + j)))))))))))))
+  ((r3[temp___163]) = (r1[temp___163])))))) and ((1 <= y2) and (y2 <= 200)))
+
+axiom H16 : (1 <= i)
+
+axiom H17 : (i <= y2)
+
+axiom H18 : (1 <= j)
+
+axiom H19 : (j <= 100)
+
+ (* File "counterex_forall.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : in_range1((i + j))

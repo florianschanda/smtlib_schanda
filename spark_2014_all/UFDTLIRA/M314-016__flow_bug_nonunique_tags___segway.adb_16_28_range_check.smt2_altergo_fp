@@ -133,7 +133,7 @@ function valid_input__ref___projection(a: valid_input__ref) : valid_input =
 
 type speed_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -184,9 +184,63 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic speed : int
+
+logic state : int
+
+logic o : int
+
+logic o1 : int
+
+logic speed1 : int
+
+logic state1 : int
+
+logic result : int
+
+logic speed2 : int
+
+logic result1 : int
+
+logic speed3 : int
+
+logic result2 : int
+
+logic speed4 : int
+
+logic result3 : int
+
+logic state2 : int
+
+logic result4 : int
+
+logic state3 : int
+
+logic result5 : int
+
+logic state4 : int
+
+logic speed5 : int
+
+logic state5 : int
+
+logic speed6 : int
+
+logic state6 : int
+
+axiom H : (((- 100) <= 100) -> in_range2(speed))
+
+axiom H1 : ((0 <= 2) -> in_range(state))
+
+axiom H2 : in_range1(i)
+
+axiom H3 : (speed_is_valid(speed, state) = true)
+
+axiom H4 : (not (i = 2))
+
+axiom H5 : (i = 3)
+
+axiom H6 : ((- 100) <  speed)
+
  (* File "segway.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:int. forall state:int. ((((-100) <= 100) ->
-  in_range2(speed)) -> (((0 <= 2) -> in_range(state)) -> (in_range1(i) ->
-  ((speed_is_valid(speed, state) = true) -> ((not (i = 2)) -> ((i = 3) ->
-  (((-100) <  speed) -> in_range2((speed - 1))))))))))
+goal WP_parameter_def : in_range2((speed - 1))

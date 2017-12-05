@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -314,38 +314,161 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp:int. forall i:int. forall triangle__sum_up_to__result:int.
-  forall temp___133:int. forall temp___132:int. forall o:int.
-  forall result:int. forall tmp1:int. forall result1:int. forall i1:int.
-  forall result2:int. forall tmp2:int. forall tmp3:int. forall i2:int.
-  forall tmp4:int. forall i3:int. forall tmp5:int. forall i4:int.
-  forall tmp6:int. forall i5:int. forall tmp7:int. forall i6:int.
-  forall result3:int. forall triangle__sum_up_to__result1:int.
-  forall triangle__sum_up_to__result2:int.
-  forall triangle__sum_up_to__result3:int. forall tmp8:int. forall i7:int.
-  forall triangle__sum_up_to__result4:int. forall tmp9:int. forall i8:int.
-  forall triangle__sum_up_to__result5:int. (in_range2(n) -> ((n <= 10000) ->
-  ((((({ int__content = result } = { int__content = tmp }) and
-  (tmp1 = 0)) and (in_range2(tmp1) and (((({ int__content = result1 } = {
-  int__content = i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= n)) and
-  ((((temp___133 = i1) and ((temp___132 = tmp1) and ((((o = (tmp1 + i1)) and
+logic tmp : int
+
+logic i : int
+
+logic triangle__sum_up_to__result : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic tmp2 : int
+
+logic tmp3 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic tmp4 : int
+
+logic tmp5 : int
+
+logic i4 : int
+
+logic tmp6 : int
+
+logic i5 : int
+
+logic tmp7 : int
+
+logic i6 : int
+
+logic tmp8 : int
+
+logic i7 : int
+
+logic tmp9 : int
+
+logic i8 : int
+
+logic tmp10 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic triangle__sum_up_to__result1 : int
+
+logic triangle__sum_up_to__result2 : int
+
+logic triangle__sum_up_to__result3 : int
+
+logic tmp11 : int
+
+logic i10 : int
+
+logic triangle__sum_up_to__result4 : int
+
+logic tmp12 : int
+
+logic i11 : int
+
+logic triangle__sum_up_to__result5 : int
+
+axiom H : in_range2(n)
+
+axiom H1 : (n <= 10000)
+
+axiom H2 : (result = tmp)
+
+axiom H3 : (tmp1 = 0)
+
+axiom H4 : in_range2(tmp1)
+
+axiom H5 : (result1 = i)
+
+axiom H6 : (i1 = 1)
+
+axiom H7 : (((1 <= i1) and (i1 <= n)) -> (((temp___133 = i1) and
+  ((temp___132 = tmp1) and ((((o = (tmp1 + i1)) and
   in_range1((tmp1 + i1))) and ((tmp1 = result2) and (tmp2 = o))) and
   ((tmp3 = comp_div((i2 * (i2 + 1)),2)) and (((((0 <= 2147483647) ->
   in_range2(tmp3)) and ((1 <= n) -> dynamic_property(1, n, i2))) and
-  ((1 <= i2) and (i2 <= n))) and (i2 = n)))))) and (((i2 = i3) and
-  (tmp3 = tmp4)) and ((i4 = i2) and (tmp5 = tmp3)))) and ((({ int__content =
-  i5 } = { int__content = i3 }) and ({ int__content = tmp6 } = {
-  int__content = tmp4 })) and ((i6 = i4) and (tmp7 = tmp5))))) or
-  ((not ((1 <= i1) and (i1 <= n))) and (((i1 = i5) and (tmp1 = tmp6)) and
-  ((i6 = i1) and (tmp7 = tmp1)))))) and
-  (((triangle__sum_up_to__result1 = triangle__sum_up_to__result2) and
-  (triangle__sum_up_to__result3 = triangle__sum_up_to__result1)) and (({
-  int__content = result3 } = { int__content = triangle__sum_up_to__result
-  }) and (triangle__sum_up_to__result1 = tmp6)))))) and ((({ int__content =
-  triangle__sum_up_to__result4 } = { int__content =
-  triangle__sum_up_to__result2 }) and (({ int__content = i7 } = {
-  int__content = i5 }) and ({ int__content = tmp8 } = { int__content = tmp6
-  }))) and ((triangle__sum_up_to__result5 = triangle__sum_up_to__result3) and
-  ((i8 = i6) and (tmp9 = tmp7))))) -> in_range1((n + 1))))))
+  ((1 <= i2) and (i2 <= n))) and (i2 = n)))))) and (((i2 = i6) and
+  (tmp3 = tmp7)) and ((i7 = i2) and (tmp8 = tmp3)))))
+
+axiom H8 : (((1 <= i1) and (i1 <= n)) -> (i8 = i6))
+
+axiom H9 : (((1 <= i1) and (i1 <= n)) -> (tmp9 = tmp7))
+
+axiom H10 : (((1 <= i1) and (i1 <= n)) -> (i9 = i7))
+
+axiom H11 : (((1 <= i1) and (i1 <= n)) -> (tmp10 = tmp8))
+
+axiom H12 : ((not ((1 <= i1) and (i1 <= n))) -> (i1 = i8))
+
+axiom H13 : ((not ((1 <= i1) and (i1 <= n))) -> (tmp1 = tmp9))
+
+axiom H14 : ((not ((1 <= i1) and (i1 <= n))) -> (i9 = i1))
+
+axiom H15 : ((not ((1 <= i1) and (i1 <= n))) -> (tmp10 = tmp1))
+
+axiom H16 : (triangle__sum_up_to__result1 = triangle__sum_up_to__result2)
+
+axiom H17 : (triangle__sum_up_to__result3 = triangle__sum_up_to__result1)
+
+axiom H18 : (result5 = triangle__sum_up_to__result)
+
+axiom H19 : (triangle__sum_up_to__result1 = tmp9)
+
+axiom H20 : (triangle__sum_up_to__result4 = triangle__sum_up_to__result2)
+
+axiom H21 : (i10 = i8)
+
+axiom H22 : (tmp11 = tmp9)
+
+axiom H23 : (triangle__sum_up_to__result5 = triangle__sum_up_to__result3)
+
+axiom H24 : (i11 = i9)
+
+axiom H25 : (tmp12 = tmp10)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1((n + 1))

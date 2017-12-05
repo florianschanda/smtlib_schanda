@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -634,48 +634,1052 @@ logic attr__ATTRIBUTE_ADDRESS14 : int
 
 logic attr__ATTRIBUTE_ADDRESS15 : int
 
- (* File "do_loops.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_fields:(int,us_rep) farray.
-  forall d__split_fields1:(int,us_rep) farray. forall a:(int,us_rep) farray.
-  forall i:int. forall o:integer. forall o1:integer. forall o2:integer.
-  forall o3:integer. forall o4:integer. forall o5:integer. forall o6:integer.
-  forall o7:(int,us_rep) farray. forall o8:(int,us_rep) farray.
-  forall o9:(int,us_rep) farray. forall temp___234:(int,us_rep) farray.
-  forall temp___2341:(int,us_rep) farray.
-  forall do_loops__p__a:(int,us_rep) farray. forall result:map__ref.
-  forall a1:(int,us_rep) farray. forall result1:int__ref. forall i1:int.
-  forall d__split_fields2:us_split_fields2. forall i2:int.
-  forall result2:us_split_fields__ref1.
-  forall d__split_fields3:us_split_fields2.
-  (((forall temp___198:int. (((1 <= temp___198) and (temp___198 <= 100)) ->
-    ((to_rep((((d__split_fields[temp___198])).us_split_fields1).rec__do_loops__r__f1) = 0) and
-    (to_rep((((d__split_fields[temp___198])).us_split_fields1).rec__do_loops__r__f2) = 0)))) and
+logic d__split_fields : (int,us_rep) farray
+
+logic d__split_fields1 : (int,us_rep) farray
+
+logic a : (int,us_rep) farray
+
+logic i : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic d_outer__split_fields : (int,us_rep) farray
+
+logic d_outer__split_fields1 : (int,us_rep) farray
+
+logic i3 : int
+
+logic d_outer__split_fields2 : integer
+
+logic d_outer__split_fields3 : integer
+
+logic i4 : int
+
+logic j : int
+
+logic i5 : int
+
+logic d_outer__split_fields4 : (int,us_rep) farray
+
+logic d_outer__split_fields5 : (int,us_rep) farray
+
+logic j1 : int
+
+logic d_inner__split_fields : (int,us_rep) farray
+
+logic d_inner__split_fields1 : (int,us_rep) farray
+
+logic i6 : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic temp___236 : (int,us_rep) farray
+
+logic temp___241 : (int,us_rep) farray
+
+logic temp___2411 : (int,us_rep) farray
+
+logic temp___238 : (int,us_rep) farray
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : (int,us_rep) farray
+
+logic o8 : (int,us_rep) farray
+
+logic o9 : (int,us_rep) farray
+
+logic temp___234 : (int,us_rep) farray
+
+logic temp___2341 : (int,us_rep) farray
+
+logic temp___261 : (int,us_rep) farray
+
+logic temp___2611 : (int,us_rep) farray
+
+logic temp___258 : (int,us_rep) farray
+
+logic temp___256 : (int,us_rep) farray
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : integer
+
+logic o15 : (int,us_rep) farray
+
+logic o16 : (int,us_rep) farray
+
+logic o17 : (int,us_rep) farray
+
+logic temp___249 : (int,us_rep) farray
+
+logic temp___2491 : (int,us_rep) farray
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : integer
+
+logic o23 : (int,us_rep) farray
+
+logic o24 : (int,us_rep) farray
+
+logic o25 : (int,us_rep) farray
+
+logic temp___254 : (int,us_rep) farray
+
+logic temp___2541 : (int,us_rep) farray
+
+logic temp___282 : (int,us_rep) farray
+
+logic temp___287 : (int,us_rep) farray
+
+logic temp___2871 : (int,us_rep) farray
+
+logic temp___285 : (int,us_rep) farray
+
+logic o26 : integer
+
+logic o27 : integer
+
+logic o28 : integer
+
+logic o29 : integer
+
+logic o30 : integer
+
+logic o31 : (int,us_rep) farray
+
+logic o32 : (int,us_rep) farray
+
+logic o33 : (int,us_rep) farray
+
+logic temp___274 : (int,us_rep) farray
+
+logic temp___2741 : (int,us_rep) farray
+
+logic o34 : integer
+
+logic o35 : integer
+
+logic o36 : integer
+
+logic o37 : integer
+
+logic o38 : integer
+
+logic o39 : (int,us_rep) farray
+
+logic o40 : (int,us_rep) farray
+
+logic o41 : (int,us_rep) farray
+
+logic temp___279 : (int,us_rep) farray
+
+logic temp___2791 : (int,us_rep) farray
+
+logic temp___311 : (int,us_rep) farray
+
+logic temp___313 : (int,us_rep) farray
+
+logic temp___3131 : (int,us_rep) farray
+
+logic temp___308 : (int,us_rep) farray
+
+logic o42 : integer
+
+logic o43 : integer
+
+logic o44 : integer
+
+logic o45 : integer
+
+logic o46 : integer
+
+logic o47 : (int,us_rep) farray
+
+logic o48 : (int,us_rep) farray
+
+logic o49 : (int,us_rep) farray
+
+logic temp___296 : (int,us_rep) farray
+
+logic temp___2961 : (int,us_rep) farray
+
+logic o50 : integer
+
+logic o51 : integer
+
+logic o52 : integer
+
+logic o53 : integer
+
+logic o54 : integer
+
+logic o55 : (int,us_rep) farray
+
+logic o56 : (int,us_rep) farray
+
+logic o57 : (int,us_rep) farray
+
+logic temp___301 : (int,us_rep) farray
+
+logic temp___3011 : (int,us_rep) farray
+
+logic o58 : int
+
+logic o59 : (int,us_rep) farray
+
+logic o60 : (int,us_rep) farray
+
+logic o61 : (int,us_rep) farray
+
+logic temp___306 : (int,us_rep) farray
+
+logic temp___3061 : (int,us_rep) farray
+
+logic temp___333 : (int,us_rep) farray
+
+logic temp___3331 : (int,us_rep) farray
+
+logic temp___330 : (int,us_rep) farray
+
+logic temp___328 : (int,us_rep) farray
+
+logic temp___323 : (int,us_rep) farray
+
+logic temp___3231 : (int,us_rep) farray
+
+logic o62 : integer
+
+logic o63 : integer
+
+logic o64 : integer
+
+logic o65 : integer
+
+logic o66 : integer
+
+logic o67 : (int,us_rep) farray
+
+logic o68 : (int,us_rep) farray
+
+logic o69 : (int,us_rep) farray
+
+logic temp___322 : (int,us_rep) farray
+
+logic temp___3221 : (int,us_rep) farray
+
+logic temp___370 : (int,us_rep) farray
+
+logic temp___372 : (int,us_rep) farray
+
+logic temp___3721 : (int,us_rep) farray
+
+logic temp___367 : (int,us_rep) farray
+
+logic temp___362 : (int,us_rep) farray
+
+logic temp___3621 : (int,us_rep) farray
+
+logic temp___360 : (int,us_rep) farray
+
+logic temp___3601 : (int,us_rep) farray
+
+logic o70 : integer
+
+logic o71 : integer
+
+logic o72 : integer
+
+logic o73 : integer
+
+logic o74 : integer
+
+logic o75 : (int,us_rep) farray
+
+logic o76 : (int,us_rep) farray
+
+logic o77 : (int,us_rep) farray
+
+logic temp___349 : (int,us_rep) farray
+
+logic temp___3491 : (int,us_rep) farray
+
+logic o78 : integer
+
+logic o79 : integer
+
+logic o80 : integer
+
+logic o81 : integer
+
+logic o82 : integer
+
+logic o83 : (int,us_rep) farray
+
+logic o84 : (int,us_rep) farray
+
+logic o85 : (int,us_rep) farray
+
+logic temp___354 : (int,us_rep) farray
+
+logic temp___3541 : (int,us_rep) farray
+
+logic o86 : integer
+
+logic o87 : integer
+
+logic o88 : integer
+
+logic o89 : integer
+
+logic o90 : integer
+
+logic o91 : (int,us_rep) farray
+
+logic o92 : (int,us_rep) farray
+
+logic o93 : (int,us_rep) farray
+
+logic temp___359 : (int,us_rep) farray
+
+logic temp___3591 : (int,us_rep) farray
+
+logic o94 : integer
+
+logic o95 : integer
+
+logic o96 : integer
+
+logic o97 : integer
+
+logic o98 : integer
+
+logic o99 : (int,us_rep) farray
+
+logic o100 : (int,us_rep) farray
+
+logic o101 : (int,us_rep) farray
+
+logic temp___380 : (int,us_rep) farray
+
+logic temp___3801 : (int,us_rep) farray
+
+logic o102 : integer
+
+logic o103 : integer
+
+logic o104 : integer
+
+logic o105 : integer
+
+logic o106 : integer
+
+logic o107 : (int,us_rep) farray
+
+logic o108 : (int,us_rep) farray
+
+logic o109 : (int,us_rep) farray
+
+logic temp___385 : (int,us_rep) farray
+
+logic temp___3851 : (int,us_rep) farray
+
+logic o110 : int
+
+logic o111 : (int,us_rep) farray
+
+logic o112 : (int,us_rep) farray
+
+logic o113 : (int,us_rep) farray
+
+logic temp___390 : (int,us_rep) farray
+
+logic temp___3901 : (int,us_rep) farray
+
+logic d__split_fields2 : (int,us_rep) farray
+
+logic d__split_fields3 : (int,us_rep) farray
+
+logic j2 : int
+
+logic d_outer__split_fields6 : (int,us_rep) farray
+
+logic d_outer__split_fields7 : (int,us_rep) farray
+
+logic j3 : int
+
+logic d_inner__split_fields2 : (int,us_rep) farray
+
+logic d_inner__split_fields3 : (int,us_rep) farray
+
+logic do_loops__p__a : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : int
+
+logic i7 : int
+
+logic d__split_fields4 : (int,us_rep) farray
+
+logic d__split_fields5 : (int,us_rep) farray
+
+logic i8 : int
+
+logic result2 : (int,us_rep) farray
+
+logic result3 : (int,us_rep) farray
+
+logic d__split_fields6 : (int,us_rep) farray
+
+logic d__split_fields7 : (int,us_rep) farray
+
+logic d__split_fields8 : (int,us_rep) farray
+
+logic d__split_fields9 : (int,us_rep) farray
+
+logic i9 : int
+
+logic d__split_fields10 : (int,us_rep) farray
+
+logic d__split_fields11 : (int,us_rep) farray
+
+logic i10 : int
+
+logic d__split_fields12 : (int,us_rep) farray
+
+logic d__split_fields13 : (int,us_rep) farray
+
+logic i11 : int
+
+logic d__split_fields14 : (int,us_rep) farray
+
+logic d__split_fields15 : (int,us_rep) farray
+
+logic i12 : int
+
+logic result4 : int
+
+logic i13 : int
+
+logic d__split_fields16 : (int,us_rep) farray
+
+logic d__split_fields17 : (int,us_rep) farray
+
+logic i14 : int
+
+logic result5 : (int,us_rep) farray
+
+logic result6 : (int,us_rep) farray
+
+logic d__split_fields18 : (int,us_rep) farray
+
+logic d__split_fields19 : (int,us_rep) farray
+
+logic result7 : (int,us_rep) farray
+
+logic result8 : (int,us_rep) farray
+
+logic d__split_fields20 : (int,us_rep) farray
+
+logic d__split_fields21 : (int,us_rep) farray
+
+logic d__split_fields22 : (int,us_rep) farray
+
+logic d__split_fields23 : (int,us_rep) farray
+
+logic i15 : int
+
+logic d__split_fields24 : (int,us_rep) farray
+
+logic d__split_fields25 : (int,us_rep) farray
+
+logic i16 : int
+
+logic d__split_fields26 : (int,us_rep) farray
+
+logic d__split_fields27 : (int,us_rep) farray
+
+logic i17 : int
+
+logic d__split_fields28 : (int,us_rep) farray
+
+logic d__split_fields29 : (int,us_rep) farray
+
+logic i18 : int
+
+logic result9 : int
+
+logic i19 : int
+
+logic d__split_fields30 : (int,us_rep) farray
+
+logic d__split_fields31 : (int,us_rep) farray
+
+logic i20 : int
+
+logic result10 : (int,us_rep) farray
+
+logic result11 : (int,us_rep) farray
+
+logic d__split_fields32 : (int,us_rep) farray
+
+logic d__split_fields33 : (int,us_rep) farray
+
+logic result12 : (int,us_rep) farray
+
+logic result13 : (int,us_rep) farray
+
+logic d__split_fields34 : (int,us_rep) farray
+
+logic d__split_fields35 : (int,us_rep) farray
+
+logic result14 : (int,us_rep) farray
+
+logic result15 : (int,us_rep) farray
+
+logic d__split_fields36 : (int,us_rep) farray
+
+logic d__split_fields37 : (int,us_rep) farray
+
+logic d__split_fields38 : (int,us_rep) farray
+
+logic d__split_fields39 : (int,us_rep) farray
+
+logic i21 : int
+
+logic d__split_fields40 : (int,us_rep) farray
+
+logic d__split_fields41 : (int,us_rep) farray
+
+logic i22 : int
+
+logic d__split_fields42 : (int,us_rep) farray
+
+logic d__split_fields43 : (int,us_rep) farray
+
+logic i23 : int
+
+logic d__split_fields44 : (int,us_rep) farray
+
+logic d__split_fields45 : (int,us_rep) farray
+
+logic i24 : int
+
+logic result16 : int
+
+logic i25 : int
+
+logic d__split_fields46 : (int,us_rep) farray
+
+logic d__split_fields47 : (int,us_rep) farray
+
+logic i26 : int
+
+logic result17 : (int,us_rep) farray
+
+logic result18 : (int,us_rep) farray
+
+logic d__split_fields48 : (int,us_rep) farray
+
+logic d__split_fields49 : (int,us_rep) farray
+
+logic result19 : (int,us_rep) farray
+
+logic result20 : (int,us_rep) farray
+
+logic d__split_fields50 : (int,us_rep) farray
+
+logic d__split_fields51 : (int,us_rep) farray
+
+logic result21 : (int,us_rep) farray
+
+logic result22 : (int,us_rep) farray
+
+logic d__split_fields52 : (int,us_rep) farray
+
+logic d__split_fields53 : (int,us_rep) farray
+
+logic d__split_fields54 : (int,us_rep) farray
+
+logic d__split_fields55 : (int,us_rep) farray
+
+logic d__split_fields56 : (int,us_rep) farray
+
+logic d__split_fields57 : (int,us_rep) farray
+
+logic d__split_fields58 : (int,us_rep) farray
+
+logic d__split_fields59 : (int,us_rep) farray
+
+logic i27 : int
+
+logic d__split_fields60 : (int,us_rep) farray
+
+logic d__split_fields61 : (int,us_rep) farray
+
+logic i28 : int
+
+logic d__split_fields62 : (int,us_rep) farray
+
+logic d__split_fields63 : (int,us_rep) farray
+
+logic i29 : int
+
+logic d__split_fields64 : (int,us_rep) farray
+
+logic d__split_fields65 : (int,us_rep) farray
+
+logic i30 : int
+
+logic result23 : int
+
+logic i31 : int
+
+logic d__split_fields66 : (int,us_rep) farray
+
+logic d__split_fields67 : (int,us_rep) farray
+
+logic i32 : int
+
+logic j4 : int
+
+logic result24 : int
+
+logic j5 : int
+
+logic d__split_fields68 : (int,us_rep) farray
+
+logic d__split_fields69 : (int,us_rep) farray
+
+logic j6 : int
+
+logic result25 : (int,us_rep) farray
+
+logic result26 : (int,us_rep) farray
+
+logic d__split_fields70 : (int,us_rep) farray
+
+logic d__split_fields71 : (int,us_rep) farray
+
+logic d__split_fields72 : (int,us_rep) farray
+
+logic d__split_fields73 : (int,us_rep) farray
+
+logic d__split_fields74 : (int,us_rep) farray
+
+logic d__split_fields75 : (int,us_rep) farray
+
+logic d__split_fields76 : (int,us_rep) farray
+
+logic d__split_fields77 : (int,us_rep) farray
+
+logic j7 : int
+
+logic d__split_fields78 : (int,us_rep) farray
+
+logic d__split_fields79 : (int,us_rep) farray
+
+logic j8 : int
+
+logic d__split_fields80 : (int,us_rep) farray
+
+logic d__split_fields81 : (int,us_rep) farray
+
+logic j9 : int
+
+logic d__split_fields82 : (int,us_rep) farray
+
+logic d__split_fields83 : (int,us_rep) farray
+
+logic j10 : int
+
+logic d__split_fields84 : (int,us_rep) farray
+
+logic d__split_fields85 : (int,us_rep) farray
+
+logic i33 : int
+
+logic j11 : int
+
+logic d__split_fields86 : (int,us_rep) farray
+
+logic d__split_fields87 : (int,us_rep) farray
+
+logic i34 : int
+
+logic j12 : int
+
+logic d__split_fields88 : (int,us_rep) farray
+
+logic d__split_fields89 : (int,us_rep) farray
+
+logic i35 : int
+
+logic j13 : int
+
+logic d__split_fields90 : (int,us_rep) farray
+
+logic d__split_fields91 : (int,us_rep) farray
+
+logic i36 : int
+
+logic j14 : int
+
+logic result27 : int
+
+logic i37 : int
+
+logic d__split_fields92 : (int,us_rep) farray
+
+logic d__split_fields93 : (int,us_rep) farray
+
+logic i38 : int
+
+logic d_outer__split_fields8 : (int,us_rep) farray
+
+logic d_outer__split_fields9 : (int,us_rep) farray
+
+logic j15 : int
+
+logic d_inner__split_fields4 : (int,us_rep) farray
+
+logic d_inner__split_fields5 : (int,us_rep) farray
+
+logic result28 : int
+
+logic j16 : int
+
+logic d__split_fields94 : (int,us_rep) farray
+
+logic d__split_fields95 : (int,us_rep) farray
+
+logic d_outer__split_fields10 : (int,us_rep) farray
+
+logic d_outer__split_fields11 : (int,us_rep) farray
+
+logic j17 : int
+
+logic d_inner__split_fields6 : (int,us_rep) farray
+
+logic d_inner__split_fields7 : (int,us_rep) farray
+
+logic result29 : (int,us_rep) farray
+
+logic result30 : (int,us_rep) farray
+
+logic d__split_fields96 : (int,us_rep) farray
+
+logic d__split_fields97 : (int,us_rep) farray
+
+logic result31 : (int,us_rep) farray
+
+logic result32 : (int,us_rep) farray
+
+logic d_inner__split_fields8 : (int,us_rep) farray
+
+logic d_inner__split_fields9 : (int,us_rep) farray
+
+logic result33 : (int,us_rep) farray
+
+logic result34 : (int,us_rep) farray
+
+logic d_outer__split_fields12 : (int,us_rep) farray
+
+logic d_outer__split_fields13 : (int,us_rep) farray
+
+logic d__split_fields98 : (int,us_rep) farray
+
+logic d__split_fields99 : (int,us_rep) farray
+
+logic d_outer__split_fields14 : (int,us_rep) farray
+
+logic d_outer__split_fields15 : (int,us_rep) farray
+
+logic d_inner__split_fields10 : (int,us_rep) farray
+
+logic d_inner__split_fields11 : (int,us_rep) farray
+
+logic d__split_fields100 : (int,us_rep) farray
+
+logic d__split_fields101 : (int,us_rep) farray
+
+logic d_outer__split_fields16 : (int,us_rep) farray
+
+logic d_outer__split_fields17 : (int,us_rep) farray
+
+logic d_inner__split_fields12 : (int,us_rep) farray
+
+logic d_inner__split_fields13 : (int,us_rep) farray
+
+logic d__split_fields102 : (int,us_rep) farray
+
+logic d__split_fields103 : (int,us_rep) farray
+
+logic d_outer__split_fields18 : (int,us_rep) farray
+
+logic d_outer__split_fields19 : (int,us_rep) farray
+
+logic j18 : int
+
+logic d_inner__split_fields14 : (int,us_rep) farray
+
+logic d_inner__split_fields15 : (int,us_rep) farray
+
+logic d__split_fields104 : (int,us_rep) farray
+
+logic d__split_fields105 : (int,us_rep) farray
+
+logic d_outer__split_fields20 : (int,us_rep) farray
+
+logic d_outer__split_fields21 : (int,us_rep) farray
+
+logic j19 : int
+
+logic d_inner__split_fields16 : (int,us_rep) farray
+
+logic d_inner__split_fields17 : (int,us_rep) farray
+
+logic d__split_fields106 : (int,us_rep) farray
+
+logic d__split_fields107 : (int,us_rep) farray
+
+logic d_outer__split_fields22 : (int,us_rep) farray
+
+logic d_outer__split_fields23 : (int,us_rep) farray
+
+logic j20 : int
+
+logic d_inner__split_fields18 : (int,us_rep) farray
+
+logic d_inner__split_fields19 : (int,us_rep) farray
+
+logic d__split_fields108 : (int,us_rep) farray
+
+logic d__split_fields109 : (int,us_rep) farray
+
+logic d_outer__split_fields24 : (int,us_rep) farray
+
+logic d_outer__split_fields25 : (int,us_rep) farray
+
+logic j21 : int
+
+logic d_inner__split_fields20 : (int,us_rep) farray
+
+logic d_inner__split_fields21 : (int,us_rep) farray
+
+logic d__split_fields110 : (int,us_rep) farray
+
+logic d__split_fields111 : (int,us_rep) farray
+
+logic i39 : int
+
+logic d_outer__split_fields26 : (int,us_rep) farray
+
+logic d_outer__split_fields27 : (int,us_rep) farray
+
+logic j22 : int
+
+logic d_inner__split_fields22 : (int,us_rep) farray
+
+logic d_inner__split_fields23 : (int,us_rep) farray
+
+logic d__split_fields112 : (int,us_rep) farray
+
+logic d__split_fields113 : (int,us_rep) farray
+
+logic i40 : int
+
+logic d_outer__split_fields28 : (int,us_rep) farray
+
+logic d_outer__split_fields29 : (int,us_rep) farray
+
+logic j23 : int
+
+logic d_inner__split_fields24 : (int,us_rep) farray
+
+logic d_inner__split_fields25 : (int,us_rep) farray
+
+logic d__split_fields114 : (int,us_rep) farray
+
+logic d__split_fields115 : (int,us_rep) farray
+
+logic i41 : int
+
+logic d_outer__split_fields30 : (int,us_rep) farray
+
+logic d_outer__split_fields31 : (int,us_rep) farray
+
+logic j24 : int
+
+logic d_inner__split_fields26 : (int,us_rep) farray
+
+logic d_inner__split_fields27 : (int,us_rep) farray
+
+logic d__split_fields116 : (int,us_rep) farray
+
+logic d__split_fields117 : (int,us_rep) farray
+
+logic i42 : int
+
+logic d_outer__split_fields32 : (int,us_rep) farray
+
+logic d_outer__split_fields33 : (int,us_rep) farray
+
+logic j25 : int
+
+logic d_inner__split_fields28 : (int,us_rep) farray
+
+logic d_inner__split_fields29 : (int,us_rep) farray
+
+logic result35 : int
+
+logic i43 : int
+
+logic d__split_fields118 : (int,us_rep) farray
+
+logic d__split_fields119 : (int,us_rep) farray
+
+logic i44 : int
+
+logic d_outer__split_fields34 : integer
+
+logic d_outer__split_fields35 : integer
+
+logic result36 : (int,us_rep) farray
+
+logic result37 : (int,us_rep) farray
+
+logic d__split_fields120 : (int,us_rep) farray
+
+logic d__split_fields121 : (int,us_rep) farray
+
+logic result38 : (int,us_rep) farray
+
+logic result39 : (int,us_rep) farray
+
+logic d__split_fields122 : (int,us_rep) farray
+
+logic d__split_fields123 : (int,us_rep) farray
+
+logic result40 : (int,us_rep) farray
+
+logic result41 : (int,us_rep) farray
+
+logic d__split_fields124 : (int,us_rep) farray
+
+logic d__split_fields125 : (int,us_rep) farray
+
+logic result42 : integer
+
+logic result43 : integer
+
+logic d_outer__split_fields36 : integer
+
+logic d_outer__split_fields37 : integer
+
+logic d__split_fields126 : (int,us_rep) farray
+
+logic d__split_fields127 : (int,us_rep) farray
+
+logic d_outer__split_fields38 : integer
+
+logic d_outer__split_fields39 : integer
+
+logic d__split_fields128 : (int,us_rep) farray
+
+logic d__split_fields129 : (int,us_rep) farray
+
+logic d_outer__split_fields40 : integer
+
+logic d_outer__split_fields41 : integer
+
+axiom H :
+  ((forall temp___198:int. (((1 <= temp___198) and (temp___198 <= 100)) ->
+   ((to_rep((((d__split_fields[temp___198])).us_split_fields1).rec__do_loops__r__f1) = 0) and
+   (to_rep((((d__split_fields[temp___198])).us_split_fields1).rec__do_loops__r__f2) = 0)))) and
   (forall temp___201:int. (((1 <= temp___201) and (temp___201 <= 100)) ->
   ((to_rep((((d__split_fields1[temp___201])).us_split_fields1).rec__do_loops__r__f1) = 0) and
-  (to_rep((((d__split_fields1[temp___201])).us_split_fields1).rec__do_loops__r__f2) = 0))))) ->
-  ((forall temp___222:int. (((1 <= temp___222) and (temp___222 <= 100)) ->
-   ((to_rep((((a[temp___222])).us_split_fields1).rec__do_loops__r__f1) = 0) and
-   (to_rep((((a[temp___222])).us_split_fields1).rec__do_loops__r__f2) = 0)))) ->
-  ((((to_rep(o1) = 100) and (to_rep(o) = 1)) and ((result = { map__content =
-  a }) and (a1 = slide(do_loops__p__a, to_rep(first(mk(1, 100))), 1)))) ->
-  (((result1 = { int__content = i }) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= 100)) ->
-  ((((forall temp___242:int. (((1 <= temp___242) and (temp___242 <= 100)) ->
-     (((i2 <= temp___242) and
-     (((d__split_fields2).rec__do_loops__r_array_record__f3[temp___242]) = (d__split_fields[temp___242]))) or
-     ((not (i2 <= temp___242)) and
-     (((((d__split_fields2).rec__do_loops__r_array_record__f3[temp___242])).us_split_fields1).rec__do_loops__r__f2 = (((d__split_fields[temp___242])).us_split_fields1).rec__do_loops__r__f2))))) and
-  ((d__split_fields2).rec__do_loops__r_array_record__f4 = d__split_fields1)) and
-  ((1 <= i2) and (i2 <= 100))) -> ((((((((to_rep(o2) = 0) and ((o2 = o3) and
-  (((((d__split_fields2).rec__do_loops__r_array_record__f3[i2])).us_split_fields1).rec__do_loops__r__f2 = o4))) and
-  ((o5 = o3) and (o6 = o4))) and
-  (o7 = ((d__split_fields2).rec__do_loops__r_array_record__f3[i2 <- {
-  us_split_fields1 = { rec__do_loops__r__f1 = o5; rec__do_loops__r__f2 = o6 }
-  }]))) and ((o7 = o8) and
-  ((d__split_fields2).rec__do_loops__r_array_record__f4 = o9))) and
-  ((temp___234 = o8) and (temp___2341 = o9))) and ((result2 = {
-  us_split_fields__content1 = d__split_fields2 }) and (d__split_fields3 = {
-  rec__do_loops__r_array_record__f3 = temp___234;
-  rec__do_loops__r_array_record__f4 = temp___2341 }))) ->
-  (to_rep(((((d__split_fields3).rec__do_loops__r_array_record__f3[i2])).us_split_fields1).rec__do_loops__r__f2) = to_rep((((d__split_fields[i2])).us_split_fields1).rec__do_loops__r__f2))))))))))
+  (to_rep((((d__split_fields1[temp___201])).us_split_fields1).rec__do_loops__r__f2) = 0)))))
+
+axiom H1 :
+  (forall temp___222:int. (((1 <= temp___222) and (temp___222 <= 100)) ->
+  ((to_rep((((a[temp___222])).us_split_fields1).rec__do_loops__r__f1) = 0) and
+  (to_rep((((a[temp___222])).us_split_fields1).rec__do_loops__r__f2) = 0))))
+
+axiom H2 : (to_rep(o1) = 100)
+
+axiom H3 : (to_rep(o) = 1)
+
+axiom H4 : true
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = slide(do_loops__p__a, to_rep(first(mk(1, 100))), 1))
+
+axiom H7 : (result1 = i)
+
+axiom H8 : (i7 = 1)
+
+axiom H9 : (1 <= i7)
+
+axiom H10 : (i7 <= 100)
+
+axiom H11 :
+  (((forall temp___242:int. (((1 <= temp___242) and (temp___242 <= 100)) ->
+    (((i8 <= temp___242) ->
+    ((d__split_fields4[temp___242]) = (d__split_fields[temp___242]))) and
+    ((not (i8 <= temp___242)) ->
+    ((((d__split_fields4[temp___242])).us_split_fields1).rec__do_loops__r__f2 = (((d__split_fields[temp___242])).us_split_fields1).rec__do_loops__r__f2))))) and
+  (d__split_fields5 = d__split_fields1)) and ((1 <= i8) and (i8 <= 100)))
+
+axiom H12 : (to_rep(o2) = 0)
+
+axiom H13 : ((o3 = o2) and
+  (o4 = (((d__split_fields4[i8])).us_split_fields1).rec__do_loops__r__f2))
+
+axiom H14 : ((o5 = o3) and (o6 = o4))
+
+axiom H15 : (o7 = (d__split_fields4[i8 <- { us_split_fields1 = {
+  rec__do_loops__r__f1 = o5; rec__do_loops__r__f2 = o6 } }]))
+
+axiom H16 : ((o8 = o7) and (o9 = d__split_fields5))
+
+axiom H17 : ((temp___234 = o8) and (temp___2341 = o9))
+
+axiom H18 : ((result2 = d__split_fields4) and (result3 = d__split_fields5))
+
+axiom H19 : ((d__split_fields6 = temp___234) and
+  (d__split_fields7 = temp___2341))
+
+ (* File "do_loops.adb", line 16, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((d__split_fields6[i8])).us_split_fields1).rec__do_loops__r__f2) = to_rep((((d__split_fields[i8])).us_split_fields1).rec__do_loops__r__f2))

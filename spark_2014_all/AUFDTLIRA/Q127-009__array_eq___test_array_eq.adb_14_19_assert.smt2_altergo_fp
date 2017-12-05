@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -387,32 +387,135 @@ axiom oeq__def_axiom :
   rec__test_array_eq__my_rec__f1 = y; rec__test_array_eq__my_rec__f2 = y1 }
   }) = true) <-> (to_rep(x) = to_rep(y))))
 
- (* File "test_array_eq.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
-  forall o8:integer. forall o9:integer. forall o10:integer.
-  forall o11:integer. forall o12:(int,us_rep) farray. forall o13:integer.
-  forall o14:integer. forall o15:integer. forall o16:integer.
-  forall o17:integer. forall o18:integer. forall o19:integer.
-  forall o20:integer. forall o21:integer. forall o22:integer.
-  forall o23:integer. forall o24:integer. forall o25:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall result1:(int,us_rep) farray. forall b1:(int,us_rep) farray.
-  ((((((to_rep(o4) = 4) and ((to_rep(o5) = 3) and ((o5 = o6) and
-  (o4 = o7)))) and ((o8 = o6) and (o9 = o7))) and ((((to_rep(o) = 2) and
-  ((to_rep(o1) = 1) and ((o1 = o2) and (o = o3)))) and ((o10 = o2) and
-  (o11 = o3))) and (o12 = test_array_eq__a__aggregate_def({
-  us_split_fields1 = { rec__test_array_eq__my_rec__f1 = o10;
-  rec__test_array_eq__my_rec__f2 = o11 } }, { us_split_fields1 = {
-  rec__test_array_eq__my_rec__f1 = o8; rec__test_array_eq__my_rec__f2 = o9 }
-  })))) and ((result = a) and (a1 = o12))) -> ((((((to_rep(o17) = 3) and
-  ((to_rep(o18) = 3) and ((o18 = o19) and (o17 = o20)))) and ((o21 = o19) and
-  (o22 = o20))) and ((((to_rep(o13) = 1) and ((to_rep(o14) = 1) and
-  ((o14 = o15) and (o13 = o16)))) and ((o23 = o15) and (o24 = o16))) and
-  (o25 = test_array_eq__b__aggregate_def({ us_split_fields1 = {
+logic a : (int,us_rep) farray
+
+logic b : (int,us_rep) farray
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : (int,us_rep) farray
+
+logic o13 : integer
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : integer
+
+logic o17 : integer
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : integer
+
+logic o23 : integer
+
+logic o24 : integer
+
+logic o25 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic b1 : (int,us_rep) farray
+
+axiom H : (to_rep(o4) = 4)
+
+axiom H1 : (to_rep(o5) = 3)
+
+axiom H2 : (o5 = o6)
+
+axiom H3 : (o4 = o7)
+
+axiom H4 : (o8 = o6)
+
+axiom H5 : (o9 = o7)
+
+axiom H6 : (to_rep(o) = 2)
+
+axiom H7 : (to_rep(o1) = 1)
+
+axiom H8 : (o1 = o2)
+
+axiom H9 : (o = o3)
+
+axiom H10 : (o10 = o2)
+
+axiom H11 : (o11 = o3)
+
+axiom H12 : (o12 = test_array_eq__a__aggregate_def({ us_split_fields1 = {
+  rec__test_array_eq__my_rec__f1 = o10; rec__test_array_eq__my_rec__f2 = o11
+  } }, { us_split_fields1 = { rec__test_array_eq__my_rec__f1 = o8;
+  rec__test_array_eq__my_rec__f2 = o9 } }))
+
+axiom H13 : (result = a)
+
+axiom H14 : (a1 = o12)
+
+axiom H15 : (to_rep(o17) = 3)
+
+axiom H16 : (to_rep(o18) = 3)
+
+axiom H17 : (o18 = o19)
+
+axiom H18 : (o17 = o20)
+
+axiom H19 : (o21 = o19)
+
+axiom H20 : (o22 = o20)
+
+axiom H21 : (to_rep(o13) = 1)
+
+axiom H22 : (to_rep(o14) = 1)
+
+axiom H23 : (o14 = o15)
+
+axiom H24 : (o13 = o16)
+
+axiom H25 : (o23 = o15)
+
+axiom H26 : (o24 = o16)
+
+axiom H27 : (o25 = test_array_eq__b__aggregate_def({ us_split_fields1 = {
   rec__test_array_eq__my_rec__f1 = o23; rec__test_array_eq__my_rec__f2 = o24
   } }, { us_split_fields1 = { rec__test_array_eq__my_rec__f1 = o21;
-  rec__test_array_eq__my_rec__f2 = o22 } })))) and ((result1 = b) and
-  (b1 = o25))) -> (bool_eq4(a1, 1, 2, b1, 1, 2) = true))))
+  rec__test_array_eq__my_rec__f2 = o22 } }))
+
+axiom H28 : (result1 = b)
+
+axiom H29 : (b1 = o25)
+
+ (* File "test_array_eq.adb", line 7, characters 0-0 *)
+goal WP_parameter_def : (bool_eq4(a1, 1, 2, b1, 1, 2) = true)

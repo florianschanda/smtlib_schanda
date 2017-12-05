@@ -36,6 +36,7 @@
 (assert (= y1 (of_int 0)))
 (assert (= y1 y2))
 (assert (= y3 y1))
-(assert (not (not (= y2 true))))
+(assert (= y2 true))
+(assert (not false))
 (check-sat)
 (exit)

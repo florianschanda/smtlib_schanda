@@ -164,6 +164,7 @@
 (define-fun dynamic_invariant4 ((temp___expr_136 Int) (temp___is_init_133 Bool) (temp___skip_constant_134 Bool) (temp___do_toplevel_135 Bool)) Bool (=> (or (= temp___is_init_133 true) (<= 1 100)) (in_range2 temp___expr_136)))
 (declare-const perm__occ__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const perm__occ__result1 Int)
 (declare-const perm__occ__result2 Int)

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1058,9 +1058,15 @@ logic value : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t1
+
+logic o1 : t1
+
+axiom H : true
+
+axiom H1 : ((o = shift_right(value, 8)) and (((8 <  65536) ->
+  (o = udiv1(value, lsl_bv1(of_int1(1), of_int1(8))))) and
+  ((not (8 <  65536)) -> (o = udiv1(value, of_int1(0))))))
+
  (* File "example.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t1. (((o = shift_right(value, 8)) and (((8 <  65536) and
-  (o = udiv1(value, lsl_bv1(of_int1(1), of_int1(8))))) or
-  ((not (8 <  65536)) and (o = udiv1(value, of_int1(0)))))) ->
-  ule1(toBig(of_int(0)), o)))
+goal WP_parameter_def : ule1(toBig(of_int(0)), o)

@@ -36,6 +36,7 @@
 (declare-fun a__function_guard (Bool Int) Bool)
 (assert true)
 (assert (forall ((x1 Int)) (! (= (= (a x1) true) (not (= x1 0))) :pattern ((a x1)))))
+(declare-const o Bool)
 (assert (in_range x))
 (assert (not (= x 0)))
 (assert (not (not (= x 0))))

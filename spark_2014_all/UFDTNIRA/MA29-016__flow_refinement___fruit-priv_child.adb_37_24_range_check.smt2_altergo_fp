@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -212,43 +212,147 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
+logic apples : int
+
+logic oranges : int
+
+logic price_of_apple : int
+
+logic price_of_orange : int
+
+logic apples_in_fruit_salad : int
+
+logic oranges_in_fruit_salad : int
+
+logic profit : int
+
+logic extra_cost : int
+
+logic money : int
+
+logic fruit_salads : int
+
+logic fruit_salad : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic apples1 : int
+
+logic oranges1 : int
+
+logic price_of_apple1 : int
+
+logic price_of_orange1 : int
+
+logic extra_cost1 : int
+
+logic fruit_salads1 : int
+
+logic fruits : us_private
+
+logic result : int
+
+logic money1 : int
+
+logic result1 : int
+
+logic money2 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(profit))
+
+axiom H1 : in_range1(extra_cost)
+
+axiom H2 : in_range1(apples)
+
+axiom H3 : in_range1(oranges)
+
+axiom H4 : in_range1(price_of_apple)
+
+axiom H5 : in_range1(price_of_orange)
+
+axiom H6 : in_range1(apples_in_fruit_salad)
+
+axiom H7 : in_range1(oranges_in_fruit_salad)
+
+axiom H8 : ((0 <= 2147483647) -> in_range1(money))
+
+axiom H9 : ((0 <= 2147483647) -> in_range1(fruit_salads))
+
+axiom H10 : (((((in_range1(fruit_salads1) and in_range1(apples1)) and
+  in_range1(oranges1)) and in_range1(price_of_apple1)) and
+  in_range1(extra_cost1)) and in_range1(price_of_orange1))
+
+axiom H11 : ((o = price_of_fruit_salad(apples1, fruits, oranges1,
+  price_of_apple1, price_of_orange1, apples_in_fruit_salad, fruit_salad,
+  oranges_in_fruit_salad, extra_cost1)) and in_range1(o))
+
+axiom H12 : (o1 = (fruit_salads1 * o))
+
+axiom H13 : ((o2 = o1) and in_range(o1))
+
+axiom H14 : ((o3 = o2) and in_range1(o2))
+
+axiom H15 : (result = money)
+
+axiom H16 : (money1 = o3)
+
+axiom H17 : ((o4 = get_price_of_apple(price_of_apple1)) and
+  (in_range1(o4) and (o4 = price_of_apple1)))
+
+axiom H18 : (o5 = (apples1 * o4))
+
+axiom H19 : ((o6 = o5) and in_range(o5))
+
+axiom H20 : (o7 = (money1 + o6))
+
+axiom H21 : ((o8 = o7) and in_range(o7))
+
+axiom H22 : ((o9 = o8) and in_range1(o8))
+
+axiom H23 : (result1 = money1)
+
+axiom H24 : (money2 = o9)
+
+axiom H25 : ((o10 = get_price_of_orange(price_of_orange1)) and
+  (in_range1(o10) and (o10 = price_of_orange1)))
+
+axiom H26 : (o11 = (oranges1 * o10))
+
+axiom H27 : ((o12 = o11) and in_range(o11))
+
+axiom H28 : (o13 = (money2 + o12))
+
+axiom H29 : ((o14 = o13) and in_range(o13))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall apples:int. forall oranges:int. forall price_of_apple:int.
-  forall price_of_orange:int. forall apples_in_fruit_salad:int.
-  forall oranges_in_fruit_salad:int. forall profit:int.
-  forall extra_cost:int. forall money:int. forall fruit_salads:int.
-  forall fruit_salad:us_private. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int. forall o6:int. forall o7:int.
-  forall o8:int. forall o9:int. forall o10:int. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:int. forall apples1:int.
-  forall oranges1:int. forall price_of_apple1:int.
-  forall price_of_orange1:int. forall extra_cost1:int.
-  forall fruits:us_private.
-  forall fruit__pub_child__make_all_fruit_salads__fruit_salads_made:int.
-  forall result:int. forall fruit_salads1:int. forall result1:int.
-  forall money1:int. forall result2:int. forall money2:int.
-  (((0 <= 2147483647) -> in_range1(profit)) -> (in_range1(extra_cost) ->
-  (in_range1(apples) -> (in_range1(oranges) -> (in_range1(price_of_apple) ->
-  (in_range1(price_of_orange) -> (in_range1(apples_in_fruit_salad) ->
-  (in_range1(oranges_in_fruit_salad) -> (((0 <= 2147483647) ->
-  in_range1(money)) -> (((0 <= 2147483647) -> in_range1(fruit_salads)) ->
-  (((((((in_range1(fruit__pub_child__make_all_fruit_salads__fruit_salads_made) and
-  in_range1(apples1)) and in_range1(oranges1)) and
-  in_range1(price_of_apple1)) and in_range1(price_of_orange1)) and
-  in_range1(extra_cost1)) and ((result = fruit_salads) and
-  (fruit_salads1 = fruit__pub_child__make_all_fruit_salads__fruit_salads_made))) ->
-  (((((((o = price_of_fruit_salad(apples1, fruits, oranges1, price_of_apple1,
-  price_of_orange1, apples_in_fruit_salad, fruit_salad,
-  oranges_in_fruit_salad, extra_cost1)) and in_range1(o)) and
-  (o1 = (fruit_salads1 * o))) and ((o2 = o1) and in_range(o1))) and
-  ((o3 = o2) and in_range1(o2))) and ((result1 = money) and
-  (money1 = o3))) -> (((((((((o4 = get_price_of_apple(price_of_apple1)) and
-  (in_range1(o4) and (o4 = price_of_apple1))) and (o5 = (apples1 * o4))) and
-  ((o6 = o5) and in_range(o5))) and (o7 = (money1 + o6))) and ((o8 = o7) and
-  in_range(o7))) and ((o9 = o8) and in_range1(o8))) and
-  ((result2 = money1) and (money2 = o9))) ->
-  (((((((o10 = get_price_of_orange(price_of_orange1)) and (in_range1(o10) and
-  (o10 = price_of_orange1))) and (o11 = (oranges1 * o10))) and
-  ((o12 = o11) and in_range(o11))) and (o13 = (money2 + o12))) and
-  ((o14 = o13) and in_range(o13))) -> in_range1(o14))))))))))))))))
+goal WP_parameter_def : in_range1(o14)

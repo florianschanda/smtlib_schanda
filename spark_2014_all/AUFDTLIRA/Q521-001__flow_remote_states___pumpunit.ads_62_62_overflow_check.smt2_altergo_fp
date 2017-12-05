@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -765,20 +765,135 @@ axiom is_pumping__def_axiom :
   (forall pumpunit__cur_state:int [is_pumping(pumpunit__cur_state)].
   ((is_pumping(pumpunit__cur_state) = true) <-> (pumpunit__cur_state = 0)))
 
- (* File "pumpunit.adb", line 71, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_state:int.
-  forall cur_pump__split_fields:(int,character) farray.
-  forall cur_pump__split_fields1:nat_type.
-  forall cur_pump__split_fields2:nat_type.
-  forall cur_pump__split_fields3:nat_type. forall outstanding:int.
-  forall o:int. forall o1:int. forall result:bool. (in_range6(cur_state) ->
-  (in_range3(outstanding) -> (((result = is_ready(cur_state)) and
-  ((result = true) <-> (cur_state = 1))) -> ((result = true) ->
-  ((((o = get_cur_price({ rec__pump__pump_record__name =
+logic cur_state : int
+
+logic cur_pump__split_fields : (int,character) farray
+
+logic cur_pump__split_fields1 : nat_type
+
+logic cur_pump__split_fields2 : nat_type
+
+logic cur_pump__split_fields3 : nat_type
+
+logic outstanding : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : nat_type
+
+logic o6 : (int,character) farray
+
+logic o7 : nat_type
+
+logic o8 : nat_type
+
+logic o9 : nat_type
+
+logic temp___569 : (int,character) farray
+
+logic temp___5691 : nat_type
+
+logic temp___5692 : nat_type
+
+logic temp___5693 : nat_type
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic cur_state1 : int
+
+logic cur_pump__split_fields4 : (int,character) farray
+
+logic cur_pump__split_fields5 : nat_type
+
+logic cur_pump__split_fields6 : nat_type
+
+logic cur_pump__split_fields7 : nat_type
+
+logic outstanding1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic cur_state2 : int
+
+logic result3 : int
+
+logic outstanding2 : int
+
+logic result4 : (int,character) farray
+
+logic result5 : nat_type
+
+logic result6 : nat_type
+
+logic result7 : nat_type
+
+logic cur_pump__split_fields8 : (int,character) farray
+
+logic cur_pump__split_fields9 : nat_type
+
+logic cur_pump__split_fields10 : nat_type
+
+logic cur_pump__split_fields11 : nat_type
+
+logic cur_state3 : int
+
+logic cur_pump__split_fields12 : (int,character) farray
+
+logic cur_pump__split_fields13 : nat_type
+
+logic cur_pump__split_fields14 : nat_type
+
+logic cur_pump__split_fields15 : nat_type
+
+logic outstanding3 : int
+
+logic cur_state4 : int
+
+logic cur_pump__split_fields16 : (int,character) farray
+
+logic cur_pump__split_fields17 : nat_type
+
+logic cur_pump__split_fields18 : nat_type
+
+logic cur_pump__split_fields19 : nat_type
+
+logic outstanding4 : int
+
+logic result8 : bool
+
+axiom H : in_range6(cur_state)
+
+axiom H1 : in_range3(outstanding)
+
+axiom H2 : ((result = is_ready(cur_state)) and ((result = true) <->
+  (cur_state = 1)))
+
+axiom H3 : (result = true)
+
+axiom H4 : ((o = get_cur_price({ rec__pump__pump_record__name =
   cur_pump__split_fields; rec__pump__pump_record__resevoir =
   cur_pump__split_fields1; rec__pump__pump_record__price =
   cur_pump__split_fields2; rec__pump__pump_record__remaining =
   cur_pump__split_fields3 })) and (in_range4(o) and
-  (o = to_rep2(cur_pump__split_fields2)))) and (o1 = (2147483647 - o))) ->
-  in_range(o1)))))))
+  (o = to_rep2(cur_pump__split_fields2))))
+
+axiom H5 : (o1 = (2147483647 - o))
+
+ (* File "pumpunit.adb", line 71, characters 0-0 *)
+goal WP_parameter_def : in_range(o1)

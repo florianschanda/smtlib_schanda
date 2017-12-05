@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type duration
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -343,7 +343,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -412,8 +412,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom up__def_axiom : (up = osubtract(now, of_fixed(fxp_div_int(1000000000,
   zero(void)))))
 
+logic delay_cal1__now__assume : us_rep
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : (delay_cal1__now__assume = now)
+
+axiom H1 : ((o = zero(void)) and (in_range1(o) and (o = 0)))
+
  (* File "delay_cal1.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall delay_cal1__now__assume:us_rep. forall o:int.
-  ((delay_cal1__now__assume = now) -> (((o = zero(void)) and
-  (in_range1(o) and (o = 0))) -> (not (o = 0)))))
+goal WP_parameter_def : (not (o = 0))

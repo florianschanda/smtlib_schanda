@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tindex_tB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -133,7 +133,7 @@ function index_type__ref___2__projection(a: index_type__ref) : index_type =
 
 type element_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -318,15 +318,40 @@ axiom get__post_axiom :
   (position1 <= (0 + length(container1))))) -> in_range2(get(container1,
   position1)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(position)
+
+axiom H1 : in_range2(new_item)
+
+axiom H2 : ((o3 = length(container)) and (in_range4(o3) and
+  ((0 + o3) <= 100)))
+
+axiom H3 : (((o3 <  2147483647) -> (result = true)) and
+  ((not (o3 <  2147483647)) -> (result = false)))
+
+axiom H4 : (result = true)
+
+axiom H5 : ((o2 = (0 + length(container))) and (in_range5(o2) and
+  (o2 = (0 + length(container)))))
+
+axiom H6 : (((o2 <  100) -> (result1 = true)) and ((not (o2 <  100)) ->
+  (result1 = false)))
+
+axiom H7 : (result1 = true)
+
+axiom H8 : ((o = (0 + length(container))) and (in_range5(o) and
+  (o = (0 + length(container)))))
+
  (* File "a-cofuve.ads", line 272, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
-  forall result1:bool. (in_range1(position) -> (in_range2(new_item) ->
-  ((((o2 = length(container)) and (in_range4(o2) and ((0 + o2) <= 100))) and
-  (((o2 <  2147483647) and (result = true)) or ((not (o2 <  2147483647)) and
-  (result = false)))) -> ((result = true) ->
-  ((((o1 = (0 + length(container))) and (in_range5(o1) and
-  (o1 = (0 + length(container))))) and (((o1 <  100) and (result1 = true)) or
-  ((not (o1 <  100)) and (result1 = false)))) -> ((result1 = true) ->
-  (((o = (0 + length(container))) and (in_range5(o) and
-  (o = (0 + length(container))))) -> (not (o = 127))))))))))
+goal WP_parameter_def : (not (o = 127))

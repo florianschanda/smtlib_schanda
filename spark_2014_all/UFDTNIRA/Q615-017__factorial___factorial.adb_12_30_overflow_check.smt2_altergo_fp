@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -187,12 +187,117 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result__ : int
+
+logic i : int
+
+logic factorial__fact__result : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic result__4 : int
+
+logic result__5 : int
+
+logic i4 : int
+
+logic result__6 : int
+
+logic i5 : int
+
+logic result__7 : int
+
+logic i6 : int
+
+logic result__8 : int
+
+logic i7 : int
+
+logic result__9 : int
+
+logic i8 : int
+
+logic result__10 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic factorial__fact__result1 : int
+
+logic result__11 : int
+
+logic i10 : int
+
+logic factorial__fact__result2 : int
+
+logic result__12 : int
+
+logic i11 : int
+
+logic factorial__fact__result3 : int
+
+logic result__13 : int
+
+logic i12 : int
+
+logic factorial__fact__result4 : int
+
+logic result__14 : int
+
+logic i13 : int
+
+logic factorial__fact__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : ((1 <= x) and (x <= 12))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(result__))
+
+axiom H3 : (result = result__)
+
+axiom H4 : (result__1 = 1)
+
+axiom H5 : (result1 = i)
+
+axiom H6 : (i1 = 2)
+
+axiom H7 : (2 <= i1)
+
+axiom H8 : (i1 <= x)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall result:int.
-  forall result__1:int. forall result1:int. forall i1:int. (in_range1(x) ->
-  (((1 <= x) and (x <= 12)) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(result__)) -> ((({ int__content = result } = { int__content =
-  result__ }) and (result__1 = 1)) -> ((({ int__content = result1 } = {
-  int__content = i }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= x)) ->
-  in_range1((result__1 * i1)))))))))
+goal WP_parameter_def : in_range1((result__1 * i1))

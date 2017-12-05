@@ -439,49 +439,166 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic d2__split_discrs : natural
+
+logic h__split_fields : natural
+
+logic h__split_fields1 : bool
+
+logic us : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : bool
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : natural
+
+logic o7 : bool
+
+logic discr__r5__d1__assume : natural
+
+logic discr__r5__d1__assume1 : bool
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic discr__r5__d2__assume : natural
+
+logic discr__r5__d2__assume1 : bool
+
+logic usq_ : natural
+
+logic usq_1 : bool
+
+logic o10 : natural
+
+logic o11 : bool
+
+logic o12 : natural
+
+logic o13 : bool
+
+logic temp___295 : natural
+
+logic temp___2951 : bool
+
+logic usq_2 : natural
+
+logic usq_3 : bool
+
+logic o14 : natural
+
+logic o15 : bool
+
+logic o16 : natural
+
+logic o17 : bool
+
+logic temp___299 : natural
+
+logic temp___2991 : bool
+
+logic result : natural
+
+logic d2__split_discrs1 : natural
+
+logic result1 : natural
+
+logic result2 : bool
+
+logic h__split_fields2 : natural
+
+logic h__split_fields3 : bool
+
+logic result3 : natural
+
+logic result4 : bool
+
+logic h__split_fields4 : natural
+
+logic h__split_fields5 : bool
+
+axiom H : in_range(c)
+
+axiom H1 : ((us = c) and in_range(c))
+
+axiom H2 : (to_rep(o) = c)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (o2 = o1)
+
+axiom H5 : (true = o3)
+
+axiom H6 : ((o4 = o2) and (o5 = o3))
+
+axiom H7 : ((o6 = o4) and (o7 = o5))
+
+axiom H8 : ((discr__r5__d1__assume = o6) and (discr__r5__d1__assume1 = o7))
+
+axiom H9 : (d1__split_discrs = discr__r5__d1__assume)
+
+axiom H10 : (d1__attr__constrained = true)
+
+axiom H11 : ((c = to_rep(d1__split_discrs)) and
+  (d1__attr__constrained = true))
+
+axiom H12 : (to_rep(o8) = c)
+
+axiom H13 : (o8 = o9)
+
+axiom H14 : (discr__r5__d2__assume = o9)
+
+axiom H15 : (true = discr__r5__d2__assume1)
+
+axiom H16 : (result = d2__split_discrs)
+
+axiom H17 : (d2__split_discrs1 = discr__r5__d2__assume)
+
+axiom H18 : (d2__attr__constrained = false)
+
+axiom H19 : ((h__split_fields1 = false) and (to_rep(h__split_fields) = 0))
+
+axiom H20 : (h__split_fields1 = false)
+
+axiom H21 : (to_rep(h__split_fields) = 0)
+
+axiom H22 : (not (h__split_fields1 = true))
+
+axiom H23 : ((h__split_fields1 = true) ->
+  (d1__split_discrs = h__split_fields))
+
+axiom H24 : (d1__split_discrs = usq_)
+
+axiom H25 : (d1__attr__constrained = usq_1)
+
+axiom H26 : (usq_ = o10)
+
+axiom H27 : (h__split_fields1 = o11)
+
+axiom H28 : ((o12 = o10) and (o13 = o11))
+
+axiom H29 : ((temp___295 = o12) and (temp___2951 = o13))
+
+axiom H30 : ((result1 = h__split_fields) and (result2 = h__split_fields1))
+
+axiom H31 : ((h__split_fields2 = temp___295) and
+  (h__split_fields3 = temp___2951))
+
+axiom H32 : (not (h__split_fields3 = true))
+
+axiom H33 : (to_rep(h__split_fields2) = c)
+
+axiom H34 : (h__split_fields3 = true)
+
  (* File "discr.adb", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d2__split_discrs:natural. forall h__split_fields:natural.
-  forall h__split_fields1:bool. forall us:int. forall o:natural.
-  forall o1:natural. forall o2:natural. forall o3:bool. forall o4:natural.
-  forall o5:bool. forall o6:natural. forall o7:bool.
-  forall discr__r5__d1__assume:natural. forall discr__r5__d1__assume1:bool.
-  forall o8:natural. forall o9:natural. forall discr__r5__d2__assume:natural.
-  forall discr__r5__d2__assume1:bool. forall usq_:natural. forall usq_1:bool.
-  forall o10:natural. forall o11:bool. forall o12:natural. forall o13:bool.
-  forall temp___295:natural. forall temp___2951:bool. forall result:natural.
-  forall d2__split_discrs1:natural. forall result1:us_split_fields__ref.
-  forall h__split_fields2:us_split_fields. (in_range(c) -> (((us = c) and
-  in_range(c)) -> ((((((((to_rep(o) = c) and (o = o1)) and ((o2 = o1) and
-  (true = o3))) and ({ us_split_discrs1 = { rec__discr__with_default__c = o4
-  }; attr__constrained = o5 } = { us_split_discrs1 = {
-  rec__discr__with_default__c = o2 }; attr__constrained = o3 })) and ({
-  us_split_discrs1 = { rec__discr__with_default__c = o6 };
-  attr__constrained = o7 } = { us_split_discrs1 = {
-  rec__discr__with_default__c = o4 }; attr__constrained = o5 })) and
-  ((discr__r5__d1__assume = o6) and (discr__r5__d1__assume1 = o7))) and
-  ((d1__split_discrs = discr__r5__d1__assume) and
-  (d1__attr__constrained = true))) -> (((c = to_rep(d1__split_discrs)) and
-  (d1__attr__constrained = true)) -> (((((to_rep(o8) = c) and (o8 = o9)) and
-  ((discr__r5__d2__assume = o9) and (true = discr__r5__d2__assume1))) and
-  (((result = d2__split_discrs) and
-  (discr__r5__d2__assume = d2__split_discrs1)) and
-  (d2__attr__constrained = false))) -> (((h__split_fields1 = false) and
-  (to_rep(h__split_fields) = 0)) -> ((h__split_fields1 = false) ->
-  ((to_rep(h__split_fields) = 0) -> ((not (h__split_fields1 = true)) ->
-  (((((((((h__split_fields1 = true) and
-  (d1__split_discrs = h__split_fields)) or
-  (not (h__split_fields1 = true))) and ((d1__split_discrs = usq_) and
-  (d1__attr__constrained = usq_1))) and ((usq_ = o10) and
-  (h__split_fields1 = o11))) and ((o10 = o12) and (o11 = o13))) and
-  ((temp___295 = o12) and (temp___2951 = o13))) and ((result1 = {
-  us_split_fields__content = { rec__discr__holder__content = {
-  us_split_discrs1 = { rec__discr__with_default__c = h__split_fields };
-  attr__constrained = h__split_fields1 } } }) and (h__split_fields2 = {
-  rec__discr__holder__content = { us_split_discrs1 = {
-  rec__discr__with_default__c = temp___295 }; attr__constrained = temp___2951
-  } }))) ->
-  ((not (((h__split_fields2).rec__discr__holder__content).attr__constrained = true)) ->
-  ((to_rep((((h__split_fields2).rec__discr__holder__content).us_split_discrs1).rec__discr__with_default__c) = c) ->
-  ((((h__split_fields2).rec__discr__holder__content).attr__constrained = true) ->
-  (d2__split_discrs1 = (((h__split_fields2).rec__discr__holder__content).us_split_discrs1).rec__discr__with_default__c)))))))))))))))
+goal WP_parameter_def : (d2__split_discrs1 = h__split_fields2)

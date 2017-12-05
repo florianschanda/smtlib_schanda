@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -309,39 +309,105 @@ logic d__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "concat.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d:(int,integer) farray. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int.
-  forall concat__three__d__assume:(int,integer) farray.
-  forall concat__three__d__assume1:t. forall result:(int,integer) farray.
-  forall d1:(int,integer) farray. (dynamic_property((-2147483648),
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(b1)),
-  to_rep(last(b1))) -> (((to_rep(first(a1)) <= to_rep(last(a1))) and
+logic d : (int,integer) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic concat__three__d__assume : (int,integer) farray
+
+logic concat__three__d__assume1 : t
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic result : (int,integer) farray
+
+logic d1 : (int,integer) farray
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H2 : ((to_rep(first(a1)) <= to_rep(last(a1))) and
   ((to_rep(first(b1)) <= to_rep(last(b1))) and
-  ((to_rep(last(a1)) + (to_rep(last(b1)) - to_rep(first(b1)))) <  2147483647))) ->
-  (((((length({ elts = a; rt = a1 }) = 0) and
-  ((b = concat__three__d__assume) and (mk(to_rep(first(b1)),
-  to_rep(last(b1))) = concat__three__d__assume1))) or ((not (length({ elts =
-  a; rt = a1 }) = 0)) and ((((((((to_rep(first(b1)) <= to_rep(last(b1))) and
-  (o = ((to_rep(last(b1)) - to_rep(first(b1))) + 1))) or
-  ((not (to_rep(first(b1)) <= to_rep(last(b1)))) and (o = 0))) and
-  ((((to_rep(first(a1)) <= to_rep(last(a1))) and
-  (o1 = ((to_rep(last(a1)) - to_rep(first(a1))) + 1))) or
-  ((not (to_rep(first(a1)) <= to_rep(last(a1)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep(first(a1)) + o2))) and
-  (o4 = (o3 - 1))) and ((o5 = o4) and in_range(o4))) and ((concat(a,
+  ((to_rep(last(a1)) + (to_rep(last(b1)) - to_rep(first(b1)))) <  2147483647)))
+
+axiom H3 : ((length({ elts = a; rt = a1 }) = 0) ->
+  (b = concat__three__d__assume))
+
+axiom H4 : ((length({ elts = a; rt = a1 }) = 0) -> (mk(to_rep(first(b1)),
+  to_rep(last(b1))) = concat__three__d__assume1))
+
+axiom H5 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  ((to_rep(first(b1)) <= to_rep(last(b1))) ->
+  (o3 = ((to_rep(last(b1)) - to_rep(first(b1))) + 1))))
+
+axiom H6 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  ((not (to_rep(first(b1)) <= to_rep(last(b1)))) -> (o3 = 0)))
+
+axiom H7 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  ((to_rep(first(a1)) <= to_rep(last(a1))) ->
+  (o4 = ((to_rep(last(a1)) - to_rep(first(a1))) + 1))))
+
+axiom H8 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  ((not (to_rep(first(a1)) <= to_rep(last(a1)))) -> (o4 = 0)))
+
+axiom H9 : ((not (length({ elts = a; rt = a1 }) = 0)) -> (o5 = (o4 + o3)))
+
+axiom H10 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  (o6 = (to_rep(first(a1)) + o5)))
+
+axiom H11 : ((not (length({ elts = a; rt = a1 }) = 0)) -> (o7 = (o6 - 1)))
+
+axiom H12 : ((not (length({ elts = a; rt = a1 }) = 0)) -> ((o8 = o7) and
+  in_range(o7)))
+
+axiom H13 : ((not (length({ elts = a; rt = a1 }) = 0)) -> (concat(a,
   to_rep(first(a1)), to_rep(last(a1)), b, to_rep(first(b1)),
-  to_rep(last(b1))) = concat__three__d__assume) and (mk(to_rep(first(a1)),
-  o5) = concat__three__d__assume1))))) and (((result = d) and
-  (d1 = concat__three__d__assume)) and
-  ((to_rep(d__first) = to_rep(first(concat__three__d__assume1))) and
-  (to_rep(d__last) = to_rep(last(concat__three__d__assume1)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(d__first),
-  to_rep(d__last)) -> ((to_rep(d__first) = to_rep(first(a1))) ->
-  (((to_rep(d__first) <= to_rep(d__last)) ->
+  to_rep(last(b1))) = concat__three__d__assume))
+
+axiom H14 : ((not (length({ elts = a; rt = a1 }) = 0)) ->
+  (mk(to_rep(first(a1)), o8) = concat__three__d__assume1))
+
+axiom H15 : (result = d)
+
+axiom H16 : (d1 = concat__three__d__assume)
+
+axiom H17 : (to_rep(d__first) = to_rep(first(concat__three__d__assume1)))
+
+axiom H18 : (to_rep(d__last) = to_rep(last(concat__three__d__assume1)))
+
+axiom H19 : dynamic_property((- 2147483648), 2147483647, to_rep(d__first),
+  to_rep(d__last))
+
+axiom H20 : (to_rep(d__first) = to_rep(first(a1)))
+
+ (* File "concat.adb", line 33, characters 0-0 *)
+goal WP_parameter_def : (((to_rep(d__first) <= to_rep(d__last)) ->
   (((to_rep(d__last) - to_rep(d__first)) + 1) = (length({ elts = a; rt = a1
   }) + length({ elts = b; rt = b1 })))) and
   ((not (to_rep(d__first) <= to_rep(d__last))) -> (0 = (length({ elts = a;
-  rt = a1 }) + length({ elts = b; rt = b1 }))))))))))))
+  rt = a1 }) + length({ elts = b; rt = b1 })))))

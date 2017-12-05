@@ -585,26 +585,118 @@ axiom def_axiom2 :
   ((not (temp___5440 = temp___5438)) -> ((temp___5435(temp___5437,
   temp___5438, temp___5439)[temp___5440]) = (temp___5437[temp___5440])))))))
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next : int
+
+logic f : int
+
+logic t : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : et1
+
+logic o7 : (int,et1) farray
+
+logic o8 : (int,(int,et1) farray) farray
+
+logic o9 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic t1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result2 : int
+
+logic k_next1 : int
+
+logic result3 : int
+
+logic k_next2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next3 : int
+
+logic f3 : int
+
+logic t2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next4 : int
+
+logic f4 : int
+
+logic t3 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range3(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : ((1 <= 16) -> in_range3(k_next))
+
+axiom H5 : ((0 <= 99) -> in_range4(f))
+
+axiom H6 : (result = t)
+
+axiom H7 : (t1 = a)
+
+axiom H8 : (to_rep(o) = e)
+
+axiom H9 : (o1 = (((a[k])[j])[i <- o]))
+
+axiom H10 : (o2 = ((a[k])[j <- o1]))
+
+axiom H11 : (o3 = (a[k <- o2]))
+
+axiom H12 : (result1 = a)
+
+axiom H13 : (a1 = o3)
+
+axiom H14 : ((k = 16) -> (result2 = k_next))
+
+axiom H15 : ((k = 16) -> (k_next1 = 1))
+
+axiom H16 : ((not (k = 16)) -> ((o4 = (k + 1)) and in_range3((k + 1))))
+
+axiom H17 : ((not (k = 16)) -> (result3 = k_next))
+
+axiom H18 : ((not (k = 16)) -> (k_next2 = o4))
+
+axiom H19 : ((not (k = 16)) -> (k_next1 = k_next2))
+
  (* File "ar.ads", line 481, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall k_next:int.
-  forall f:int. forall t:(int,(int,(int,et1) farray) farray) farray.
-  forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray. forall o4:int.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall t1:(int,(int,(int,et1) farray) farray) farray.
-  forall result1:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray. forall result2:int.
-  forall k_next1:int. forall result3:int. forall k_next2:int.
-  (in_range1(i) -> (in_range2(j) -> (in_range3(k) -> (in_range4(e) ->
-  (((1 <= 16) -> in_range3(k_next)) -> (((0 <= 99) -> in_range4(f)) -> (((({
-  map__content2 = result } = { map__content2 = t }) and (t1 = a)) and
-  ((((((to_rep(o) = e) and (o1 = (((a[k])[j])[i <- o]))) and
-  (o2 = ((a[k])[j <- o1]))) and (o3 = (a[k <- o2]))) and (({ map__content2 =
-  result1 } = { map__content2 = a }) and (a1 = o3))) and (((k = 16) and
-  ((result2 = k_next) and (k_next1 = 1))) or ((not (k = 16)) and
-  ((((o4 = (k + 1)) and in_range3((k + 1))) and ((result3 = k_next) and
-  (k_next2 = o4))) and (k_next1 = k_next2)))))) -> (bool_eq8(a1, 1, 16,
-  temp___5423(t1, k, temp___5429((t1[k]), j, temp___5435(((t1[k])[j]), i,
-  e))), 1, 16) = true)))))))))
+goal WP_parameter_def : (bool_eq8(a1, 1, 16, temp___5423(t1, k,
+  temp___5429((t1[k]), j, temp___5435(((t1[k])[j]), i, e))), 1, 16) = true)

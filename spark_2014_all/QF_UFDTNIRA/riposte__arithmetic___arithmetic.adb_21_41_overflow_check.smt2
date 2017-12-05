@@ -36,6 +36,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const arithmetic__multiply_a__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const arithmetic__multiply_a__result1 Int)
 (declare-const arithmetic__multiply_a__result2 Int)

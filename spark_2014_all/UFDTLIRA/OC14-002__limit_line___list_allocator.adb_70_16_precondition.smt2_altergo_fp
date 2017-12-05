@@ -316,7 +316,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -387,12 +387,134 @@ axiom oeq__post_axiom :
 
 axiom oeq__post__dispatch_axiom : true
 
+logic j : int
+
+logic list_allocator__m__find__result : int
+
+logic list_allocator__m__find__L_1__R29b__assume : int
+
+logic temp___383 : int
+
+logic temp___384 : int
+
+logic temp___382 : int
+
+logic o : int
+
+logic k : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic list_allocator__m__find__result1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic list_allocator__m__find__result2 : int
+
+logic j2 : int
+
+logic list_allocator__m__find__result3 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic list_allocator__m__find__result4 : int
+
+logic j4 : int
+
+logic list_allocator__m__find__result5 : int
+
+logic j5 : int
+
+logic list_allocator__m__find__result6 : int
+
+logic j6 : int
+
+logic list_allocator__m__find__result7 : int
+
+logic j7 : int
+
+logic list_allocator__m__find__result8 : int
+
+logic j8 : int
+
+logic list_allocator__m__find__result9 : int
+
+logic j9 : int
+
+logic list_allocator__m__find__result10 : int
+
+logic j10 : int
+
+logic list_allocator__m__find__result11 : int
+
+logic j11 : int
+
+logic list_allocator__m__find__result12 : int
+
+logic result6 : int
+
+logic list_allocator__m__find__result13 : int
+
+logic list_allocator__m__find__result14 : int
+
+logic list_allocator__m__find__result15 : int
+
+logic j12 : int
+
+logic list_allocator__m__find__result16 : int
+
+logic j13 : int
+
+logic list_allocator__m__find__result17 : int
+
+logic j14 : int
+
+logic list_allocator__m__find__result18 : int
+
+logic j15 : int
+
+logic list_allocator__m__find__result19 : int
+
+logic result7 : bool
+
+axiom H : in_range3(r)
+
+axiom H1 : ((list_allocator__m__find__L_1__R29b__assume = length(s)) and
+  in_range1(list_allocator__m__find__L_1__R29b__assume))
+
+axiom H2 : (list_allocator__m__find__L_1__R29b__assume = r29b)
+
+axiom H3 : in_range1(r29b)
+
+axiom H4 : (result = j)
+
+axiom H5 : (j1 = 1)
+
+axiom H6 : (1 <= j1)
+
+axiom H7 : (j1 <= r29b)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall list_allocator__m__find__L_1__R29b__assume:int.
-  forall result:int. forall j1:int. (in_range3(r) ->
-  (((((list_allocator__m__find__L_1__R29b__assume = length(s)) and
-  in_range1(list_allocator__m__find__L_1__R29b__assume)) and
-  (list_allocator__m__find__L_1__R29b__assume = r29b)) and
-  in_range1(r29b)) -> ((({ int__content = result } = { int__content = j
-  }) and (j1 = 1)) -> (((1 <= j1) and (j1 <= r29b)) -> (1 <= j1))))))
+goal WP_parameter_def : (1 <= j1)

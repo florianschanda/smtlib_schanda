@@ -67,6 +67,7 @@
 (assert (= last tmp_b))
 (declare-const b Int)
 (declare-const foo__test_02__tmp_b__assume Int)
+(declare-const o Int)
 (assert (in_range a))
 (assert (=> (<= 0 2147483647) (in_range b)))
 (assert (and (= foo__test_02__tmp_b__assume (bar a)) (in_range foo__test_02__tmp_b__assume)))

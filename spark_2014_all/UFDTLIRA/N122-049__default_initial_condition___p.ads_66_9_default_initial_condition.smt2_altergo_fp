@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -213,9 +213,12 @@ logic p12__function_guard : bool, us_rep -> prop
 
 axiom p12__post_axiom : true
 
+logic temp___238 : integer
+
+logic temp___2381 : integer
+
+axiom H : ((to_rep(temp___238) = 0) and (to_rep(temp___2381) = 0))
+
  (* File "p.ads", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___238:integer. forall temp___2381:integer.
-  (((to_rep(temp___238) = 0) and (to_rep(temp___2381) = 0)) -> (p12({
-  us_split_fields1 = { rec__p__t12__f1 = temp___238; rec__p__t12__f2 =
-  temp___2381 } }) = true)))
+goal WP_parameter_def : (p12({ us_split_fields1 = { rec__p__t12__f1 =
+  temp___238; rec__p__t12__f2 = temp___2381 } }) = true)

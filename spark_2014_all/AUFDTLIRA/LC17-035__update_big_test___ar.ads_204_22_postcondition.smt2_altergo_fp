@@ -245,10 +245,29 @@ logic b : (int,et1) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = b)
+
+axiom H2 : (a1 = a2)
+
+axiom H3 : (a3 = a1)
+
+logic n : int
+
+axiom H4 : (1 <= n)
+
+axiom H5 : (n <= 10)
+
  (* File "ar.ads", line 62, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall result:(int,et1) farray.
-  forall a1:(int,et1) farray. forall a2:(int,et1) farray.
-  forall a3:(int,et1) farray. ((((result = a) and (a1 = b)) and
-  ((a1 = a2) and (a3 = a1))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> in_range1(to_rep((a2[n])))))))
+goal WP_parameter_def : in_range1(to_rep((a2[n])))

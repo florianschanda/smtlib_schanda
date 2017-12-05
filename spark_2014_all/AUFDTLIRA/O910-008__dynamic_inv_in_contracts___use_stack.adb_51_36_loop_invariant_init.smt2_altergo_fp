@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -492,20 +492,133 @@ function t18b__ref___projection(a: t18b__ref) : integer = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic top : int
+
+logic content : (int,positive) farray
+
+logic i : int
+
+logic us : int
+
+logic o : int
+
+logic temp___224 : int
+
+logic temp___222 : (int,positive) farray
+
+logic o1 : positive
+
+logic o2 : (int,positive) farray
+
+logic j : int
+
+logic o3 : positive
+
+logic o4 : (int,positive) farray
+
+logic content1 : (int,positive) farray
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,positive) farray
+
+logic content2 : (int,positive) farray
+
+logic content3 : (int,positive) farray
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : (int,positive) farray
+
+logic content4 : (int,positive) farray
+
+logic content5 : (int,positive) farray
+
+logic i4 : int
+
+logic content6 : (int,positive) farray
+
+logic i5 : int
+
+logic content7 : (int,positive) farray
+
+logic i6 : int
+
+logic content8 : (int,positive) farray
+
+logic i7 : int
+
+logic content9 : (int,positive) farray
+
+logic i8 : int
+
+logic content10 : (int,positive) farray
+
+logic i9 : int
+
+logic top2 : int
+
+logic content11 : (int,positive) farray
+
+logic i10 : int
+
+logic top3 : int
+
+logic content12 : (int,positive) farray
+
+logic i11 : int
+
+axiom H : in_range1(max)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
+  to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (is_empty(top) = true)
+
+axiom H5 : ((us = max) and dynamic_property(0, last, max))
+
+axiom H6 : (o = max)
+
+axiom H7 : (result = top)
+
+axiom H8 : (top1 = o)
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = 1)
+
+axiom H11 : (1 <= i1)
+
+axiom H12 : (i1 <= to_rep1(content__last))
+
+axiom H13 : (to_rep(o1) = e)
+
+axiom H14 : (o2 = (content[i1 <- o1]))
+
+axiom H15 : (result2 = content)
+
+axiom H16 : (content2 = o2)
+
+logic j1 : int
+
+axiom H17 : (1 <= j1)
+
+axiom H18 : (j1 <= i1)
+
  (* File "use_stack.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall content:(int,positive) farray. forall i:int.
-  forall us:int. forall o:int. forall o1:positive.
-  forall o2:(int,positive) farray. forall result:int. forall top1:int.
-  forall result1:int. forall i1:int. forall result2:(int,positive) farray.
-  forall content1:(int,positive) farray. (in_range1(max) -> (in_range1(e) ->
-  (dynamic_property(0, last, top) -> ((dynamic_property2(1, max,
-  to_rep1(content__first), to_rep1(content__last)) and
-  ((to_rep1(content__first) = 1) and (to_rep1(content__last) = max))) ->
-  ((is_empty(top) = true) -> (((((us = max) and dynamic_property(0, last,
-  max)) and (o = max)) and (({ int__content = result } = { int__content = top
-  }) and (top1 = o))) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= to_rep1(content__last))) ->
-  ((((to_rep(o1) = e) and (o2 = (content[i1 <- o1]))) and (({ map__content =
-  result2 } = { map__content = content }) and (content1 = o2))) ->
-  (forall j:int. (((1 <= j) and (j <= i1)) -> (to_rep((content1[j])) = e)))))))))))))
+goal WP_parameter_def : (to_rep((content2[j1])) = e)

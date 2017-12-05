@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -693,7 +693,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -762,7 +762,7 @@ axiom coerce_axiom :
 
 type xdr_hyper
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -1378,7 +1378,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type source
 
-predicate in_range4(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range4(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq10 : int, int -> bool
@@ -1435,13 +1435,45 @@ logic xdr_hyper_to_unsigned__function_guard : t, int -> prop
 
 axiom xdr_hyper_to_unsigned__post_axiom : true
 
+logic last2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : t
+
+logic data : (int,octet) farray
+
+logic last3 : int
+
+logic data1 : (int,octet) farray
+
+logic last4 : int
+
+logic data2 : (int,octet) farray
+
+logic last5 : int
+
+axiom H : in_range2(value)
+
+axiom H1 : dynamic_property(0, 65535, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H2 : in_range3(position)
+
+axiom H3 : ((0 <= 65535) -> in_range3(last2))
+
+axiom H4 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H5 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o = 0))
+
+axiom H6 : (o1 = comp_mod(o,4))
+
+axiom H7 : (((o1 = 0) -> (o2 = true)) and ((not (o1 = 0)) -> (o2 = false)))
+
  (* File "cubedos-lib-xdr.ads", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last2:int. forall o:int. forall o1:int. forall o2:bool.
-  (in_range2(value) -> (dynamic_property(0, 65535, to_rep(data__first),
-  to_rep(data__last)) -> (in_range3(position) -> (((0 <= 65535) ->
-  in_range3(last2)) -> ((((((to_rep(data__first) <= to_rep(data__last)) and
-  (o = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o = 0))) and
-  (o1 = comp_mod(o,4))) and (((o1 = 0) and (o2 = true)) or
-  ((not (o1 = 0)) and (o2 = false)))) -> (not (4 = 0))))))))
+goal WP_parameter_def : (not (4 = 0))

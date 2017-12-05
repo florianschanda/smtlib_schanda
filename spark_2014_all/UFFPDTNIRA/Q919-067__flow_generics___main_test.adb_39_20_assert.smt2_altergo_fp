@@ -1307,7 +1307,7 @@ function tbxb_matrixP2__ref___2__projection(a: tbxb_matrixP2__ref1) : tbxb_matri
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1600,8 +1600,8 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 type t21b
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and
-  (x <= (-2147483647)))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and
+  (x <= (- 2147483647)))
 
 logic bool_eq14 : int, int -> bool
 
@@ -1626,8 +1626,8 @@ function t21b__ref___projection(a: t21b__ref) : t21b = (a).t21b__content
 
 type t22b
 
-predicate in_range11(x: int) = (((-2147483648) <= x) and
-  (x <= (-2147483647)))
+predicate in_range11(x: int) = (((- 2147483648) <= x) and
+  (x <= (- 2147483647)))
 
 logic bool_eq15 : int, int -> bool
 
@@ -1652,8 +1652,8 @@ function t22b__ref___projection(a: t22b__ref) : t22b = (a).t22b__content
 
 type t24b
 
-predicate in_range12(x: int) = (((-2147483648) <= x) and
-  (x <= (-2147483647)))
+predicate in_range12(x: int) = (((- 2147483648) <= x) and
+  (x <= (- 2147483647)))
 
 logic bool_eq16 : int, int -> bool
 
@@ -1678,8 +1678,8 @@ function t24b__ref___projection(a: t24b__ref) : t24b = (a).t24b__content
 
 type t25b
 
-predicate in_range13(x: int) = (((-2147483648) <= x) and
-  (x <= (-2147483647)))
+predicate in_range13(x: int) = (((- 2147483648) <= x) and
+  (x <= (- 2147483647)))
 
 logic bool_eq17 : int, int -> bool
 
@@ -1839,35 +1839,35 @@ logic temp___1809 : t, t, t, t -> map
 axiom def_axiom6 :
   (forall temp___1811:t. forall temp___1812:t. forall temp___1813:t.
   forall temp___1814:t. (((get(temp___1809(temp___1811, temp___1812,
-  temp___1813, temp___1814), (-2147483648),
-  (-2147483648)) = of_rep(temp___1811)) and (get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (-2147483648),
-  (-2147483647)) = of_rep(temp___1812))) and ((get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (-2147483647),
-  (-2147483648)) = of_rep(temp___1813)) and (get(temp___1809(temp___1811,
-  temp___1812, temp___1813, temp___1814), (-2147483647),
-  (-2147483647)) = of_rep(temp___1814)))))
+  temp___1813, temp___1814), (- 2147483648),
+  (- 2147483648)) = of_rep(temp___1811)) and (get(temp___1809(temp___1811,
+  temp___1812, temp___1813, temp___1814), (- 2147483648),
+  (- 2147483647)) = of_rep(temp___1812))) and ((get(temp___1809(temp___1811,
+  temp___1812, temp___1813, temp___1814), (- 2147483647),
+  (- 2147483648)) = of_rep(temp___1813)) and (get(temp___1809(temp___1811,
+  temp___1812, temp___1813, temp___1814), (- 2147483647),
+  (- 2147483647)) = of_rep(temp___1814)))))
 
 logic temp___1819 : t, t, t, t -> map
 
 axiom def_axiom7 :
   (forall temp___1821:t. forall temp___1822:t. forall temp___1823:t.
   forall temp___1824:t. (((get(temp___1819(temp___1821, temp___1822,
-  temp___1823, temp___1824), (-2147483648),
-  (-2147483648)) = of_rep(temp___1821)) and (get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (-2147483648),
-  (-2147483647)) = of_rep(temp___1822))) and ((get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (-2147483647),
-  (-2147483648)) = of_rep(temp___1823)) and (get(temp___1819(temp___1821,
-  temp___1822, temp___1823, temp___1824), (-2147483647),
-  (-2147483647)) = of_rep(temp___1824)))))
+  temp___1823, temp___1824), (- 2147483648),
+  (- 2147483648)) = of_rep(temp___1821)) and (get(temp___1819(temp___1821,
+  temp___1822, temp___1823, temp___1824), (- 2147483648),
+  (- 2147483647)) = of_rep(temp___1822))) and ((get(temp___1819(temp___1821,
+  temp___1822, temp___1823, temp___1824), (- 2147483647),
+  (- 2147483648)) = of_rep(temp___1823)) and (get(temp___1819(temp___1821,
+  temp___1822, temp___1823, temp___1824), (- 2147483647),
+  (- 2147483647)) = of_rep(temp___1824)))))
 
 axiom transpose__post_axiom :
   (forall x:map. forall x1:t1. forall x2:t2 [transpose({ elts = x; rt = x1;
-  rt_2 = x2 })]. dynamic_property2((-2147483648), 2147483647,
+  rt_2 = x2 })]. dynamic_property2((- 2147483648), 2147483647,
   to_rep1(first((transpose({ elts = x; rt = x1; rt_2 = x2 })).rt)),
   to_rep1(last((transpose({ elts = x; rt = x1; rt_2 = x2 })).rt)),
-  (-2147483648), 2147483647, to_rep1(first1((transpose({ elts = x; rt = x1;
+  (- 2147483648), 2147483647, to_rep1(first1((transpose({ elts = x; rt = x1;
   rt_2 = x2 })).rt_2)), to_rep1(last1((transpose({ elts = x; rt = x1; rt_2 =
   x2 })).rt_2))))
 
@@ -1875,19 +1875,74 @@ axiom omultiply__4__post_axiom :
   (forall left:map. forall left1:t1. forall left2:t2. forall right:map.
   forall right1:t1. forall right2:t2 [omultiply__4({ elts = left; rt = left1;
   rt_2 = left2 }, { elts = right; rt = right1; rt_2 = right2 })].
-  dynamic_property2((-2147483648), 2147483647, to_rep1(first((omultiply__4({
+  dynamic_property2((- 2147483648), 2147483647, to_rep1(first((omultiply__4({
   elts = left; rt = left1; rt_2 = left2 }, { elts = right; rt = right1;
   rt_2 = right2 })).rt)), to_rep1(last((omultiply__4({ elts = left; rt =
   left1; rt_2 = left2 }, { elts = right; rt = right1; rt_2 = right2 })).rt)),
-  (-2147483648), 2147483647, to_rep1(first1((omultiply__4({ elts = left; rt =
-  left1; rt_2 = left2 }, { elts = right; rt = right1; rt_2 = right2
+  (- 2147483648), 2147483647, to_rep1(first1((omultiply__4({ elts = left;
+  rt = left1; rt_2 = left2 }, { elts = right; rt = right1; rt_2 = right2
   })).rt_2)), to_rep1(last1((omultiply__4({ elts = left; rt = left1; rt_2 =
   left2 }, { elts = right; rt = right1; rt_2 = right2 })).rt_2))))
+
+logic mat_in : map
+
+logic mat_map : map
+
+logic mat_out : map
+
+logic mat_in2 : map
+
+logic mat_map2 : map
+
+logic mat_out2 : map
+
+logic o : map
+
+logic o1 : map
+
+logic result : map
+
+logic mat_in1 : map
+
+logic result1 : map
+
+logic mat_map1 : map
+
+logic result2 : map
+
+logic mat_out1 : map
+
+logic result3 : map
+
+logic mat_in21 : map
+
+logic result4 : map
+
+logic mat_map21 : map
+
+logic result5 : map
+
+logic mat_out21 : map
+
+logic result6 : map
+
+logic mat_out3 : map
+
+logic result7 : map
+
+logic mat_out22 : map
+
+axiom H : (result = mat_in)
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
+
+axiom H1 : (mat_in1 = main_test__mat_in__aggregate_def(fliteral, fliteral1,
+  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))
+
+axiom H2 : (result1 = mat_map)
 
 logic fliteral2 : t
 
@@ -1898,6 +1953,43 @@ logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3.0))
+
+axiom H3 : (mat_map1 = main_test__mat_map__aggregate_def(fliteral2,
+  fliteral1, fliteral1, fliteral1, fliteral1, fliteral3))
+
+axiom H4 : (result2 = mat_out)
+
+axiom H5 : (mat_out1 = main_test__mat_out__aggregate_def(fliteral1))
+
+axiom H6 : (result3 = mat_in2)
+
+axiom H7 : (mat_in21 = main_test__mat_in2__aggregate_def(fliteral, fliteral1,
+  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))
+
+axiom H8 : (result4 = mat_map2)
+
+axiom H9 : (mat_map21 = main_test__mat_map2__aggregate_def(fliteral2,
+  fliteral1, fliteral1, fliteral1, fliteral1, fliteral3))
+
+axiom H10 : (result5 = mat_out2)
+
+axiom H11 : (mat_out21 = main_test__mat_out2__aggregate_def(fliteral1))
+
+axiom H12 : ((o = manipulate1(mat_in1, mat_map1)) and
+  (o = slide((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
+  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
+  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })).elts,
+  to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
+  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
+  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
+  })).rt_2)), 1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
+  mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1,
+  3); rt_2 = mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
+  })).rt_2)), 1)))
+
+axiom H13 : (result6 = mat_out1)
+
+axiom H14 : (mat_out3 = o)
 
 logic fliteral4 : t
 
@@ -1910,38 +2002,6 @@ axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 9.0))
 
  (* File "generic_matrix_thing.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mat_in:map. forall mat_map:map. forall mat_out:map.
-  forall mat_in2:map. forall mat_map2:map. forall mat_out2:map. forall o:map.
-  forall result:map. forall mat_in1:map. forall result1:map.
-  forall mat_map1:map. forall result2:map. forall mat_out1:map.
-  forall result3:map. forall mat_in21:map. forall result4:map.
-  forall mat_map21:map. forall result5:map. forall mat_out21:map.
-  forall result6:map. forall mat_out3:map. (((result = mat_in) and
-  (mat_in1 = main_test__mat_in__aggregate_def(fliteral, fliteral1, fliteral1,
-  fliteral1, fliteral, fliteral1, fliteral1, fliteral1, fliteral))) ->
-  (((result1 = mat_map) and
-  (mat_map1 = main_test__mat_map__aggregate_def(fliteral2, fliteral1,
-  fliteral1, fliteral1, fliteral1, fliteral3))) -> (((result2 = mat_out) and
-  (mat_out1 = main_test__mat_out__aggregate_def(fliteral1))) ->
-  (((result3 = mat_in2) and
-  (mat_in21 = main_test__mat_in2__aggregate_def(fliteral, fliteral1,
-  fliteral1, fliteral1, fliteral, fliteral1, fliteral1, fliteral1,
-  fliteral))) -> (((result4 = mat_map2) and
-  (mat_map21 = main_test__mat_map2__aggregate_def(fliteral2, fliteral1,
-  fliteral1, fliteral1, fliteral1, fliteral3))) -> (((result5 = mat_out2) and
-  (mat_out21 = main_test__mat_out2__aggregate_def(fliteral1))) ->
-  ((((o = manipulate1(mat_in1, mat_map1)) and
-  (o = slide((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
-  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) })).elts,
-  to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts = mat_map1; rt =
-  mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1, 3); rt_2 =
-  mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
-  })).rt_2)), 1, to_rep1(first1((omultiply__4(omultiply__4(transpose({ elts =
-  mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2) }), { elts = mat_in1; rt = mk(1,
-  3); rt_2 = mk1(1, 3) }), { elts = mat_map1; rt = mk(1, 3); rt_2 = mk1(1, 2)
-  })).rt_2)), 1))) and ((result6 = mat_out1) and (mat_out3 = o))) ->
-  (bool_eq2(mat_out3, 1, 2, 1, 2, temp___1809(fliteral4, fliteral1,
-  fliteral1, fliteral5), (-2147483648), (-2147483647), (-2147483648),
-  (-2147483647)) = true)))))))))
+goal WP_parameter_def : (bool_eq2(mat_out3, 1, 2, 1, 2,
+  temp___1809(fliteral4, fliteral1, fliteral1, fliteral5), (- 2147483648),
+  (- 2147483647), (- 2147483648), (- 2147483647)) = true)

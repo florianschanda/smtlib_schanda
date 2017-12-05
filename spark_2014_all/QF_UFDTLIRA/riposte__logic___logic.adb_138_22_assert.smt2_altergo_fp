@@ -89,6 +89,11 @@ logic c : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : (((a = true) -> (b = true)) -> (c = true))
+
+axiom H1 : (a = true)
+
+axiom H2 : (b = true)
+
  (* File "logic.adb", line 127, characters 0-0 *)
-goal WP_parameter_def : ((((a = true) -> (b = true)) -> (c = true)) ->
-  ((a = true) -> ((b = true) -> (c = true))))
+goal WP_parameter_def : (c = true)

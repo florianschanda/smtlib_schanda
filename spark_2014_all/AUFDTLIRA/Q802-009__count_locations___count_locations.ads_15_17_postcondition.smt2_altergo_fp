@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -351,33 +351,78 @@ axiom partial_count_selected_locations__def_axiom :
   ((not (from1 <  100)) -> (partial_count_selected_locations(sel1,
   from1) = (0 + 0)))))))))
 
+logic count_locations__partial_count_selected_locations__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic count_locations__partial_count_selected_locations__result1 : int
+
+logic count_locations__partial_count_selected_locations__result2 : int
+
+logic count_locations__partial_count_selected_locations__result3 : int
+
+logic count_locations__partial_count_selected_locations__result4 : int
+
+logic count_locations__partial_count_selected_locations__result5 : int
+
+logic result1 : int
+
+axiom H : in_range2(from)
+
+axiom H1 :
+  (count_locations__partial_count_selected_locations__result1 = count_locations__partial_count_selected_locations__result2)
+
+axiom H2 :
+  (count_locations__partial_count_selected_locations__result3 = count_locations__partial_count_selected_locations__result1)
+
+axiom H3 : ((from <  100) -> ((o = (from + 1)) and in_range2((from + 1))))
+
+axiom H4 : ((from <  100) -> ((o1 = partial_count_selected_locations(sel,
+  o)) and (in_range1(o1) and (((((sel[o]) = true) -> (((o <  100) ->
+  (o1 = (1 + partial_count_selected_locations(sel, (o + 1))))) and
+  ((not (o <  100)) -> (o1 = (1 + 0))))) and ((not ((sel[o]) = true)) ->
+  (((o <  100) -> (o1 = (0 + partial_count_selected_locations(sel,
+  (o + 1))))) and ((not (o <  100)) -> (o1 = (0 + 0)))))) and
+  (o1 <= ((100 - o) + 1))))))
+
+axiom H5 : ((not (from <  100)) -> (o1 = 0))
+
+axiom H6 : (((sel[from]) = true) -> (o2 = 1))
+
+axiom H7 : ((not ((sel[from]) = true)) -> (o2 = 0))
+
+axiom H8 : (o3 = (o2 + o1))
+
+axiom H9 : ((o4 = o3) and in_range(o3))
+
+axiom H10 : ((o5 = o4) and in_range1(o4))
+
+axiom H11 :
+  (result = count_locations__partial_count_selected_locations__result)
+
+axiom H12 : (count_locations__partial_count_selected_locations__result1 = o5)
+
+axiom H13 :
+  (count_locations__partial_count_selected_locations__result4 = count_locations__partial_count_selected_locations__result2)
+
+axiom H14 :
+  (count_locations__partial_count_selected_locations__result5 = count_locations__partial_count_selected_locations__result3)
+
+axiom H15 :
+  (result1 = count_locations__partial_count_selected_locations__result4)
+
  (* File "count_locations.ads", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  (forall count_locations__partial_count_selected_locations__result:int.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall result:int.
-  forall count_locations__partial_count_selected_locations__result1:int.
-  forall count_locations__partial_count_selected_locations__result2:int.
-  forall count_locations__partial_count_selected_locations__result3:int.
-  forall count_locations__partial_count_selected_locations__result4:int.
-  forall count_locations__partial_count_selected_locations__result5:int.
-  (forall result1:int. ((in_range2(from) and
-  (((((count_locations__partial_count_selected_locations__result1 = count_locations__partial_count_selected_locations__result2) and
-  (count_locations__partial_count_selected_locations__result3 = count_locations__partial_count_selected_locations__result1)) and
-  (((((((from <  100) and (((o = (from + 1)) and in_range2((from + 1))) and
-  ((o1 = partial_count_selected_locations(sel, o)) and (in_range1(o1) and
-  (((((sel[o]) = true) and (((o <  100) and
-  (o1 = (1 + partial_count_selected_locations(sel, (o + 1))))) or
-  ((not (o <  100)) and (o1 = (1 + 0))))) or ((not ((sel[o]) = true)) and
-  (((o <  100) and (o1 = (0 + partial_count_selected_locations(sel,
-  (o + 1))))) or ((not (o <  100)) and (o1 = (0 + 0)))))) and
-  (o1 <= ((100 - o) + 1))))))) or ((not (from <  100)) and (o1 = 0))) and
-  (((((sel[from]) = true) and (o2 = 1)) or ((not ((sel[from]) = true)) and
-  (o2 = 0))) and (o3 = (o2 + o1)))) and ((o4 = o3) and in_range(o3))) and
-  ((o5 = o4) and in_range1(o4))) and
-  ((result = count_locations__partial_count_selected_locations__result) and
-  (count_locations__partial_count_selected_locations__result1 = o5)))) and
-  ((count_locations__partial_count_selected_locations__result4 = count_locations__partial_count_selected_locations__result2) and
-  (count_locations__partial_count_selected_locations__result5 = count_locations__partial_count_selected_locations__result3))) and
-  (result1 = count_locations__partial_count_selected_locations__result4))) ->
-  (count_locations__partial_count_selected_locations__result4 <= ((100 - from) + 1)))))
+  (count_locations__partial_count_selected_locations__result4 <= ((100 - from) + 1))

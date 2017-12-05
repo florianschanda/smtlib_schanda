@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -274,55 +274,129 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "utility.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall index:int. forall utility__search_for_zero__result:int.
-  forall temp___151:int. forall temp___152:int. forall temp___150:int.
-  forall utility__search_for_zero__result1:int. forall result:int.
-  forall index1:int. forall result1:int.
-  forall utility__search_for_zero__result2:int. forall index2:int.
-  forall utility__search_for_zero__result3:int. forall result2:int.
-  forall index3:int. forall result3:int.
-  forall utility__search_for_zero__result4:int. forall index4:int.
-  forall utility__search_for_zero__result5:int. forall index5:int.
-  forall utility__search_for_zero__result6:int. forall index6:int.
-  forall utility__search_for_zero__result7:int. forall index7:int.
-  forall utility__search_for_zero__result8:int. forall index8:int.
-  forall utility__search_for_zero__result9:int. forall index9:int.
-  forall utility__search_for_zero__result10:int.
-  (forall result4:int.
-  (((exists index10:int. (((0 <= index10) and (index10 <= 1023)) and
-    (to_rep((values[index10])) = 0))) and
-  ((((((utility__search_for_zero__result5 = utility__search_for_zero__result7) and
-  (index6 = index4)) and
-  ((utility__search_for_zero__result8 = utility__search_for_zero__result6) and
-  (index7 = index5))) and ((temp___151 = 0) and ((temp___152 = 1023) and ((({
-  int__content = result } = { int__content = index }) and
-  (index1 = temp___151)) and (((temp___151 <= index1) and
-  (index1 <= temp___152)) and ((temp___150 = index1) and
-  (((((utility__search_for_zero__result2 = utility__search_for_zero__result5) and
-  (index1 = index4)) and
-  ((utility__search_for_zero__result6 = utility__search_for_zero__result2) and
-  (index5 = index1))) and ((to_rep((values[index1])) = 0) and
+logic index : int
+
+logic utility__search_for_zero__result : int
+
+logic temp___151 : int
+
+logic temp___152 : int
+
+logic temp___150 : int
+
+logic j : int
+
+logic utility__search_for_zero__result1 : int
+
+logic result : int
+
+logic index1 : int
+
+logic result1 : int
+
+logic utility__search_for_zero__result2 : int
+
+logic index2 : int
+
+logic utility__search_for_zero__result3 : int
+
+logic result2 : int
+
+logic index3 : int
+
+logic result3 : int
+
+logic utility__search_for_zero__result4 : int
+
+logic index4 : int
+
+logic utility__search_for_zero__result5 : int
+
+logic index5 : int
+
+logic utility__search_for_zero__result6 : int
+
+logic index6 : int
+
+logic utility__search_for_zero__result7 : int
+
+logic index7 : int
+
+logic utility__search_for_zero__result8 : int
+
+logic index8 : int
+
+logic utility__search_for_zero__result9 : int
+
+logic index9 : int
+
+logic utility__search_for_zero__result10 : int
+
+logic index10 : int
+
+logic utility__search_for_zero__result11 : int
+
+logic index11 : int
+
+logic utility__search_for_zero__result12 : int
+
+logic index12 : int
+
+logic utility__search_for_zero__result13 : int
+
+logic index13 : int
+
+logic utility__search_for_zero__result14 : int
+
+logic index14 : int
+
+logic utility__search_for_zero__result15 : int
+
+logic index15 : int
+
+logic utility__search_for_zero__result16 : int
+
+logic result4 : int
+
+axiom H :
+  (exists index16:int. (((0 <= index16) and (index16 <= 1023)) and
+  (to_rep((values[index16])) = 0)))
+
+axiom H1 :
+  (((((utility__search_for_zero__result13 = utility__search_for_zero__result7) and
+  (index12 = index6)) and
+  ((utility__search_for_zero__result14 = utility__search_for_zero__result8) and
+  (index13 = index7))) and ((temp___151 = 0) and ((temp___152 = 1023) and
+  (((result = index) and (index1 = temp___151)) and
+  (((temp___151 <= index1) and (index1 <= temp___152)) and
+  ((temp___150 = index1) and
+  (((((utility__search_for_zero__result2 = utility__search_for_zero__result7) and
+  (index1 = index6)) and
+  ((utility__search_for_zero__result8 = utility__search_for_zero__result2) and
+  (index7 = index1))) and ((to_rep((values[index1])) = 0) and
   ((result1 = utility__search_for_zero__result) and
   (utility__search_for_zero__result2 = index1)))) or
   (((not (to_rep((values[index1])) = 0)) and
   ((utility__search_for_zero__result2 = utility__search_for_zero__result) and
   (utility__search_for_zero__result2 = utility__search_for_zero__result1))) and
-  ((((utility__search_for_zero__result4 = utility__search_for_zero__result5) and
-  (index3 = index4)) and
-  ((utility__search_for_zero__result6 = utility__search_for_zero__result4) and
-  (index5 = index3))) and
-  ((exists j:int. ((((index2 + 1) <= j) and (j <= 1023)) and
-   (to_rep((values[j])) = 0))) and
-  ((((0 <= 1023) -> in_range2(index2)) and ((0 <= index2) and
-  (index2 <= 1023))) and ((not (index2 = temp___152)) and
+  ((((utility__search_for_zero__result4 = utility__search_for_zero__result7) and
+  (index3 = index6)) and
+  ((utility__search_for_zero__result8 = utility__search_for_zero__result4) and
+  (index7 = index3))) and
+  ((exists j1:int. ((((index2 + 1) <= j1) and (j1 <= 1023)) and
+   (to_rep((values[j1])) = 0))) and ((((0 <= 1023) -> in_range2(index2)) and
+  ((0 <= index2) and (index2 <= 1023))) and ((not (index2 = temp___152)) and
   (((index2 = result2) and (index3 = (index2 + 1))) and
   ((to_rep((values[index3])) = 0) and
   ((result3 = utility__search_for_zero__result3) and
   (utility__search_for_zero__result4 = index3)))))))))))))))) and
-  (((utility__search_for_zero__result9 = utility__search_for_zero__result7) and
-  (index8 = index6)) and
-  ((utility__search_for_zero__result10 = utility__search_for_zero__result8) and
-  (index9 = index7)))) and (result4 = utility__search_for_zero__result9))) ->
-  (to_rep((values[utility__search_for_zero__result9])) = 0))))
+  (((utility__search_for_zero__result15 = utility__search_for_zero__result13) and
+  (index14 = index12)) and
+  ((utility__search_for_zero__result16 = utility__search_for_zero__result14) and
+  (index15 = index13))))
+
+axiom H2 : (result4 = utility__search_for_zero__result15)
+
+ (* File "utility.ads", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((values[utility__search_for_zero__result15])) = 0)

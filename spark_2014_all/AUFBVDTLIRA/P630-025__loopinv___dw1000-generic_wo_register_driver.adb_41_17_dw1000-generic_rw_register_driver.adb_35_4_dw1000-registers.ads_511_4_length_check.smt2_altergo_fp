@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -925,7 +925,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1862,14 +1862,32 @@ logic reg_bytes__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___8090:(int,bits_8) farray. forall temp___80901:t4.
-  forall temp___8091:(int,bits_8) farray. forall temp___80911:t3.
-  ((dynamic_property2(1, 4, to_rep(reg_bytes__first),
+logic reg_bytes : (int,bits_8) farray
+
+logic temp___8090 : (int,bits_8) farray
+
+logic temp___80901 : t4
+
+logic temp___8091 : (int,bits_8) farray
+
+logic temp___80911 : t3
+
+logic o : (int,bits_8) farray
+
+logic o1 : t3
+
+logic o2 : (int,bits_8) farray
+
+logic result : (int,bits_8) farray
+
+logic reg_bytes1 : (int,bits_8) farray
+
+axiom H : (dynamic_property2(1, 4, to_rep(reg_bytes__first),
   to_rep(reg_bytes__last)) and ((to_rep(reg_bytes__first) = 1) and
-  (to_rep(reg_bytes__last) = 4))) -> (((({ elts2 = temp___8090; rt2 =
-  temp___80901 } = register_to_bytes({ us_split_fields1 = {
+  (to_rep(reg_bytes__last) = 4)))
+
+axiom H1 : (({ elts2 = temp___8090; rt2 = temp___80901
+  } = register_to_bytes({ us_split_fields1 = {
   rec__dw1000__register_types__aon_cfg0_type__sleep_en = reg;
   rec__dw1000__register_types__aon_cfg0_type__wake_pin = reg1;
   rec__dw1000__register_types__aon_cfg0_type__wake_spi = reg2;
@@ -1879,16 +1897,23 @@ goal WP_parameter_def :
   rec__dw1000__register_types__aon_cfg0_type__sleep_tim = reg6 } })) and
   (dynamic_property3(1, 4, to_rep(first4(temp___80901)),
   to_rep(last4(temp___80901))) and ((to_rep(first4(temp___80901)) = 1) and
-  (to_rep(last4(temp___80901)) = 4)))) and
-  ((((to_rep(first4(temp___80901)) <= to_rep(last4(temp___80901))) and
-  (((1 <= 4) and
-  (((to_rep(last4(temp___80901)) - to_rep(first4(temp___80901))) + 1) = ((4 - 1) + 1))) or
-  ((not (1 <= 4)) and
-  (((to_rep(last4(temp___80901)) - to_rep(first4(temp___80901))) + 1) = 0)))) or
-  ((not (to_rep(first4(temp___80901)) <= to_rep(last4(temp___80901)))) and
-  (((1 <= 4) and (0 = ((4 - 1) + 1))) or (not (1 <= 4))))) and
-  ((temp___8090 = temp___8091) and (mk1(to_rep(first4(temp___80901)),
-  to_rep(last4(temp___80901))) = temp___80911)))) ->
+  (to_rep(last4(temp___80901)) = 4))))
+
+axiom H2 : (((to_rep(first4(temp___80901)) <= to_rep(last4(temp___80901))) ->
+  (((1 <= 4) ->
+  (((to_rep(last4(temp___80901)) - to_rep(first4(temp___80901))) + 1) = ((4 - 1) + 1))) and
+  ((not (1 <= 4)) ->
+  (((to_rep(last4(temp___80901)) - to_rep(first4(temp___80901))) + 1) = 0)))) and
+  ((not (to_rep(first4(temp___80901)) <= to_rep(last4(temp___80901)))) ->
+  ((1 <= 4) -> (0 = ((4 - 1) + 1)))))
+
+axiom H3 : (temp___8090 = temp___8091)
+
+axiom H4 : (mk1(to_rep(first4(temp___80901)),
+  to_rep(last4(temp___80901))) = temp___80911)
+
+ (* File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep(first2(temp___80911)) <= to_rep(last2(temp___80911))) ->
   (((to_rep(reg_bytes__first) <= to_rep(reg_bytes__last)) ->
   (((to_rep(last2(temp___80911)) - to_rep(first2(temp___80911))) + 1) = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1))) and
@@ -1896,4 +1921,4 @@ goal WP_parameter_def :
   (((to_rep(last2(temp___80911)) - to_rep(first2(temp___80911))) + 1) = 0)))) and
   ((not (to_rep(first2(temp___80911)) <= to_rep(last2(temp___80911)))) ->
   ((to_rep(reg_bytes__first) <= to_rep(reg_bytes__last)) ->
-  (0 = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1))))))))
+  (0 = ((to_rep(reg_bytes__last) - to_rep(reg_bytes__first)) + 1)))))

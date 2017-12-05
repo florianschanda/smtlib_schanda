@@ -78,5 +78,7 @@ function example_pt__ref___projection(a: example_pt__ref) : example_pt =
 
 logic self__ : example_pt
 
+logic temp___1528 : bool
+
  (* File "gnat_bug.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : (forall temp___1538:bool. (temp___1538 = false))
+goal WP_parameter_def : (temp___1528 = false)

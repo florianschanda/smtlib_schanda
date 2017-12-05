@@ -291,23 +291,47 @@ logic b : (int,bool) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test_main__my_sets__union__result : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic test_main__my_sets__union__result1 : (int,bool) farray
+
+logic test_main__my_sets__union__result2 : (int,bool) farray
+
+logic test_main__my_sets__union__result3 : (int,bool) farray
+
+logic test_main__my_sets__union__result4 : (int,bool) farray
+
+logic test_main__my_sets__union__result5 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+axiom H :
+  (test_main__my_sets__union__result1 = test_main__my_sets__union__result2)
+
+axiom H1 :
+  (test_main__my_sets__union__result3 = test_main__my_sets__union__result1)
+
+axiom H2 : (result = test_main__my_sets__union__result)
+
+axiom H3 : (test_main__my_sets__union__result1 = orb1(a, 1, 10, b, 1, 10))
+
+axiom H4 :
+  (test_main__my_sets__union__result4 = test_main__my_sets__union__result2)
+
+axiom H5 :
+  (test_main__my_sets__union__result5 = test_main__my_sets__union__result3)
+
+axiom H6 : (result1 = test_main__my_sets__union__result4)
+
+logic elt : int
+
+axiom H7 : (1 <= elt)
+
+axiom H8 : (elt <= 10)
+
+axiom H9 : (mem(test_main__my_sets__union__result4, elt) = true)
+
  (* File "bitsets.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test_main__my_sets__union__result:(int,bool) farray.
-  forall result:(int,bool) farray.
-  forall test_main__my_sets__union__result1:(int,bool) farray.
-  forall test_main__my_sets__union__result2:(int,bool) farray.
-  forall test_main__my_sets__union__result3:(int,bool) farray.
-  forall test_main__my_sets__union__result4:(int,bool) farray.
-  forall test_main__my_sets__union__result5:(int,bool) farray.
-  (forall result1:(int,bool) farray.
-  ((((((test_main__my_sets__union__result1 = test_main__my_sets__union__result2) and
-  (test_main__my_sets__union__result3 = test_main__my_sets__union__result1)) and
-  ((result = test_main__my_sets__union__result) and
-  (test_main__my_sets__union__result1 = orb1(a, 1, 10, b, 1, 10)))) and
-  ((test_main__my_sets__union__result4 = test_main__my_sets__union__result2) and
-  (test_main__my_sets__union__result5 = test_main__my_sets__union__result3))) and
-  (result1 = test_main__my_sets__union__result4)) ->
-  (forall elt:int. (((1 <= elt) and (elt <= 10)) ->
-  ((mem(test_main__my_sets__union__result4, elt) = true) -> ((mem(a,
-  elt) = true) or (mem(b, elt) = true))))))))
+goal WP_parameter_def : ((mem(a, elt) = true) or (mem(b, elt) = true))

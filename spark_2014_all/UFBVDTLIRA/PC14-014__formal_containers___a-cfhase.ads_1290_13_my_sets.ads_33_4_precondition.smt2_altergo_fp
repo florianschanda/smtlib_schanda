@@ -187,18 +187,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -891,7 +891,7 @@ axiom user_eq__def_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1516,6 +1516,23 @@ axiom length__post_axiom2 :
   in_range1(length3(container3))))
 
 axiom get__post_axiom : true
+
+logic temp___1348 : us_rep2
+
+logic e : positive
+
+logic e1 : integer
+
+logic o : bool
+
+axiom H : in_range4(key)
+
+axiom H1 : ((temp___1348 = model__({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = container; rec__my_sets__n__set__modulus =
+  container1 }; us_split_fields1 = { rec__my_sets__n__set = container2 }
+  })) and (length2(temp___1348) = length({ us_split_discrs1 = {
+  rec__my_sets__n__set__capacity = container; rec__my_sets__n__set__modulus =
+  container1 }; us_split_fields1 = { rec__my_sets__n__set = container2 } })))
 
  (* File "a-cfhase.ads", line 1304, characters 0-0 *)
 goal WP_parameter_def : true

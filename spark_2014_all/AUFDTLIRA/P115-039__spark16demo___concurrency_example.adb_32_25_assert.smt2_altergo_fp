@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -621,76 +621,139 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___String_Literal_1764 : unit -> (int,character) farray
+logic temp___String_Literal_1754 : unit -> (int,character) farray
 
-axiom temp___String_Literal_1764__def_axiom :
-  ((((((((((to_rep((temp___String_Literal_1764(void)[1])) = 97) and
-  (to_rep((temp___String_Literal_1764(void)[2])) = 108)) and
-  (to_rep((temp___String_Literal_1764(void)[3])) = 108)) and
-  (to_rep((temp___String_Literal_1764(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_1764(void)[5])) = 122)) and
-  (to_rep((temp___String_Literal_1764(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_1764(void)[7])) = 114)) and
-  (to_rep((temp___String_Literal_1764(void)[8])) = 111)) and
-  (to_rep((temp___String_Literal_1764(void)[9])) = 101)) and
-  (to_rep((temp___String_Literal_1764(void)[10])) = 115))
+axiom temp___String_Literal_1754__def_axiom :
+  ((((((((((to_rep((temp___String_Literal_1754(void)[1])) = 97) and
+  (to_rep((temp___String_Literal_1754(void)[2])) = 108)) and
+  (to_rep((temp___String_Literal_1754(void)[3])) = 108)) and
+  (to_rep((temp___String_Literal_1754(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_1754(void)[5])) = 122)) and
+  (to_rep((temp___String_Literal_1754(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1754(void)[7])) = 114)) and
+  (to_rep((temp___String_Literal_1754(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_1754(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_1754(void)[10])) = 115))
 
-logic temp___String_Literal_1765 : unit -> (int,character) farray
+logic temp___String_Literal_1755 : unit -> (int,character) farray
 
-axiom temp___String_Literal_1765__def_axiom :
-  ((((((((to_rep((temp___String_Literal_1765(void)[1])) = 97) and
-  (to_rep((temp___String_Literal_1765(void)[2])) = 108)) and
-  (to_rep((temp___String_Literal_1765(void)[3])) = 108)) and
-  (to_rep((temp___String_Literal_1765(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_1765(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_1765(void)[6])) = 110)) and
-  (to_rep((temp___String_Literal_1765(void)[7])) = 101)) and
-  (to_rep((temp___String_Literal_1765(void)[8])) = 115))
+axiom temp___String_Literal_1755__def_axiom :
+  ((((((((to_rep((temp___String_Literal_1755(void)[1])) = 97) and
+  (to_rep((temp___String_Literal_1755(void)[2])) = 108)) and
+  (to_rep((temp___String_Literal_1755(void)[3])) = 108)) and
+  (to_rep((temp___String_Literal_1755(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_1755(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_1755(void)[6])) = 110)) and
+  (to_rep((temp___String_Literal_1755(void)[7])) = 101)) and
+  (to_rep((temp___String_Literal_1755(void)[8])) = 115))
 
-logic temp___String_Literal_1766 : unit -> (int,character) farray
+logic temp___String_Literal_1756 : unit -> (int,character) farray
 
-axiom temp___String_Literal_1766__def_axiom :
-  ((((((((((((((((((to_rep((temp___String_Literal_1766(void)[1])) = 100) and
-  (to_rep((temp___String_Literal_1766(void)[2])) = 97)) and
-  (to_rep((temp___String_Literal_1766(void)[3])) = 116)) and
-  (to_rep((temp___String_Literal_1766(void)[4])) = 97)) and
-  (to_rep((temp___String_Literal_1766(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_1766(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_1766(void)[7])) = 97)) and
-  (to_rep((temp___String_Literal_1766(void)[8])) = 99)) and
-  (to_rep((temp___String_Literal_1766(void)[9])) = 101)) and
-  (to_rep((temp___String_Literal_1766(void)[10])) = 32)) and
-  (to_rep((temp___String_Literal_1766(void)[11])) = 100)) and
-  (to_rep((temp___String_Literal_1766(void)[12])) = 101)) and
-  (to_rep((temp___String_Literal_1766(void)[13])) = 116)) and
-  (to_rep((temp___String_Literal_1766(void)[14])) = 101)) and
-  (to_rep((temp___String_Literal_1766(void)[15])) = 99)) and
-  (to_rep((temp___String_Literal_1766(void)[16])) = 116)) and
-  (to_rep((temp___String_Literal_1766(void)[17])) = 101)) and
-  (to_rep((temp___String_Literal_1766(void)[18])) = 100))
+axiom temp___String_Literal_1756__def_axiom :
+  ((((((((((((((((((to_rep((temp___String_Literal_1756(void)[1])) = 100) and
+  (to_rep((temp___String_Literal_1756(void)[2])) = 97)) and
+  (to_rep((temp___String_Literal_1756(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_1756(void)[4])) = 97)) and
+  (to_rep((temp___String_Literal_1756(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_1756(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_1756(void)[7])) = 97)) and
+  (to_rep((temp___String_Literal_1756(void)[8])) = 99)) and
+  (to_rep((temp___String_Literal_1756(void)[9])) = 101)) and
+  (to_rep((temp___String_Literal_1756(void)[10])) = 32)) and
+  (to_rep((temp___String_Literal_1756(void)[11])) = 100)) and
+  (to_rep((temp___String_Literal_1756(void)[12])) = 101)) and
+  (to_rep((temp___String_Literal_1756(void)[13])) = 116)) and
+  (to_rep((temp___String_Literal_1756(void)[14])) = 101)) and
+  (to_rep((temp___String_Literal_1756(void)[15])) = 99)) and
+  (to_rep((temp___String_Literal_1756(void)[16])) = 116)) and
+  (to_rep((temp___String_Literal_1756(void)[17])) = 101)) and
+  (to_rep((temp___String_Literal_1756(void)[18])) = 100))
 
 axiom all_zeroes__def_axiom :
   (all_zeroes = concurrency_example__all_zeroes__aggregate_def(0))
 
 axiom all_ones__def_axiom :
-  (all_ones = concurrency_example__all_ones__aggregate_def((-2147483648)))
+  (all_ones = concurrency_example__all_ones__aggregate_def((- 2147483648)))
+
+logic data : (int,integer) farray
+
+logic value : (int,integer) farray
+
+logic deadline : us_rep
+
+logic o : us_rep
+
+logic temp___1758 : (int,integer) farray
+
+logic temp___1757 : us_rep
+
+logic o1 : (int,character) farray
+
+logic o2 : t
+
+logic result : us_rep
+
+logic deadline1 : us_rep
+
+logic value1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic value2 : (int,integer) farray
+
+logic deadline2 : us_rep
+
+logic value3 : (int,integer) farray
+
+logic deadline3 : us_rep
+
+logic value4 : (int,integer) farray
+
+logic deadline4 : us_rep
+
+logic value5 : (int,integer) farray
+
+logic deadline5 : us_rep
+
+logic value6 : (int,integer) farray
+
+logic deadline6 : us_rep
+
+axiom H : (concurrency_example__all_zeroes__aggregate_def(0) = all_zeroes)
+
+axiom H1 :
+  (concurrency_example__all_ones__aggregate_def((- 2147483648)) = all_ones)
+
+axiom H2 : (result = deadline)
+
+axiom H3 : (deadline1 = o)
+
+axiom H4 : (value1 = result1)
+
+axiom H5 : (value2 = data)
+
+axiom H6 : ((bool_eq10(value2, 1, 1000, all_zeroes, 1, 1000) = true) ->
+  (temp___String_Literal_1754(void) = o1))
+
+axiom H7 : ((bool_eq10(value2, 1, 1000, all_zeroes, 1, 1000) = true) ->
+  (mk(1, 10) = o2))
+
+axiom H8 : ((not (bool_eq10(value2, 1, 1000, all_zeroes, 1, 1000) = true)) ->
+  ((bool_eq10(value2, 1, 1000, all_ones, 1, 1000) = true) ->
+  (temp___String_Literal_1755(void) = o1)))
+
+axiom H9 : ((not (bool_eq10(value2, 1, 1000, all_zeroes, 1, 1000) = true)) ->
+  ((bool_eq10(value2, 1, 1000, all_ones, 1, 1000) = true) -> (mk(1,
+  8) = o2)))
+
+axiom H10 : ((not (bool_eq10(value2, 1, 1000, all_zeroes, 1,
+  1000) = true)) -> ((not (bool_eq10(value2, 1, 1000, all_ones, 1,
+  1000) = true)) -> (temp___String_Literal_1756(void) = o1)))
+
+axiom H11 : ((not (bool_eq10(value2, 1, 1000, all_zeroes, 1,
+  1000) = true)) -> ((not (bool_eq10(value2, 1, 1000, all_ones, 1,
+  1000) = true)) -> (mk(1, 18) = o2)))
 
  (* File "concurrency_example.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,integer) farray. forall deadline:us_rep. forall o:us_rep.
-  forall o1:(int,character) farray. forall o2:t. forall result:us_rep.
-  forall deadline1:us_rep. forall value:(int,integer) farray.
-  forall result1:(int,integer) farray. forall value1:(int,integer) farray.
-  ((concurrency_example__all_zeroes__aggregate_def(0) = all_zeroes) ->
-  ((concurrency_example__all_ones__aggregate_def((-2147483648)) = all_ones) ->
-  ((({ time__content = result } = { time__content = deadline }) and
-  (deadline1 = o)) -> (((value = result1) and (value1 = data)) ->
-  ((((bool_eq10(value1, 1, 1000, all_zeroes, 1, 1000) = true) and
-  ((temp___String_Literal_1764(void) = o1) and (mk(1, 10) = o2))) or
-  ((not (bool_eq10(value1, 1, 1000, all_zeroes, 1, 1000) = true)) and
-  (((bool_eq10(value1, 1, 1000, all_ones, 1, 1000) = true) and
-  ((temp___String_Literal_1765(void) = o1) and (mk(1, 8) = o2))) or
-  ((not (bool_eq10(value1, 1, 1000, all_ones, 1, 1000) = true)) and
-  ((temp___String_Literal_1766(void) = o1) and (mk(1, 18) = o2)))))) ->
-  ((bool_eq10(value1, 1, 1000, all_zeroes, 1, 1000) = true) or
-  (bool_eq10(value1, 1, 1000, all_ones, 1, 1000) = true))))))))
+goal WP_parameter_def : ((bool_eq10(value2, 1, 1000, all_zeroes, 1,
+  1000) = true) or (bool_eq10(value2, 1, 1000, all_ones, 1, 1000) = true))

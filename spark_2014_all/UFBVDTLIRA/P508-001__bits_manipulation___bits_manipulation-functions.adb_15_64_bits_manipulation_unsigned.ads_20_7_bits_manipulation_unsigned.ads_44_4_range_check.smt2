@@ -171,6 +171,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_177 (_ BitVec 8)) (temp___is_init_174 Bool) (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool)) Bool true)
 (define-fun dynamic_invariant3 ((temp___expr_183 (_ BitVec 16)) (temp___is_init_180 Bool) (temp___skip_constant_181 Bool) (temp___do_toplevel_182 Bool)) Bool true)
+(assert true)
 (assert (in_range1 amount))
 (assert (<= 1 32))
 (assert (<= 32 8))

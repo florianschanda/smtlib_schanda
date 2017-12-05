@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -214,18 +214,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1736,13 +1736,66 @@ axiom is_empty__def_axiom :
   rec__ring_buf__ring_buffer__length = r2 } }) = true) <->
   (to_rep1(r2) = 0)))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall h:int. forall r__split_fields:(t,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  (in_range(x) -> (in_range(y) -> (in_range(z) ->
-  ((((-2147483648) <= 2147483647) -> in_range(h)) -> ((bool_eq5((to_model({
-  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r__split_fields;
+logic h : int
+
+logic r__split_fields : (t,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic r__split_fields3 : (t,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic r__split_fields6 : (t,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (t,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic h1 : int
+
+logic r__split_fields12 : (t,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+logic r__split_fields15 : (t,integer) farray
+
+logic r__split_fields16 : ar_index
+
+logic r__split_fields17 : length_type
+
+logic h2 : int
+
+logic r__split_fields18 : (t,integer) farray
+
+logic r__split_fields19 : ar_index
+
+logic r__split_fields20 : length_type
+
+logic h3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : in_range(z)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(h))
+
+axiom H4 : (bool_eq5((to_model({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
   rec__ring_buf__ring_buffer__length = r__split_fields2 } })).elts,
   to_rep(first((to_model({ us_split_fields1 = {
@@ -1753,7 +1806,10 @@ goal WP_parameter_def :
   rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
   rec__ring_buf__ring_buffer__length = r__split_fields2 } })).rt)),
-  temp___219(0), of_int(1), of_int(0)) = true) -> (not (is_full({
-  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r__split_fields;
+  temp___219(0), of_int(1), of_int(0)) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (not (is_full({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))))))))
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))

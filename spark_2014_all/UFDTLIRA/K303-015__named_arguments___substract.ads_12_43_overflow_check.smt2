@@ -39,6 +39,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const substract__subinv__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const substract__subinv__result1 Int)
 (declare-const substract__subinv__result2 Int)

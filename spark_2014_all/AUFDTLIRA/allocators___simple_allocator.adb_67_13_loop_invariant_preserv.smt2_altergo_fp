@@ -637,25 +637,185 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range4(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
- (* File "simple_allocator.ads", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall data:(int,status) farray. forall r:int.
-  forall res1:int. forall data1:(int,status) farray. forall result:int.
-  forall r1:int. forall data2:(int,status) farray. forall res2:int.
-  forall res3:int. forall data3:(int,status) farray. forall r2:int.
-  forall result1:int. forall r3:int. forall data4:(int,status) farray.
-  forall res4:int. (((0 <= 10000) -> in_range1(res)) -> ((({ int__content =
-  result } = { int__content = r }) and (r1 = 1)) -> (((1 <= r1) and
-  (r1 <= 10000)) -> (((not (to_rep((data[r1])) = 0)) and (((data2 = data) and
-  (res2 = res)) and ((data2 = data1) and (res2 = res1)))) ->
-  (((bool_eq5(data3, 1, 10000, data, 1, 10000) = true) and
-  (forall rr:int. (((1 <= rr) and (rr <= r2)) -> (to_rep((data3[rr])) = 1)))) ->
-  (((((((1 <= 10000) -> in_range2(r2)) and ((0 <= 10000) ->
+logic res : int
+
+logic data : (int,status) farray
+
+logic r : int
+
+logic temp___248 : int
+
+logic temp___249 : int
+
+logic temp___245 : (int,status) farray
+
+logic temp___247 : (int,status) farray
+
+logic temp___244 : int
+
+logic temp___243 : int
+
+logic o : status
+
+logic o1 : (int,status) farray
+
+logic rr : int
+
+logic o2 : status
+
+logic o3 : (int,status) farray
+
+logic res1 : int
+
+logic data1 : (int,status) farray
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : (int,status) farray
+
+logic data2 : (int,status) farray
+
+logic result2 : int
+
+logic res2 : int
+
+logic res3 : int
+
+logic data3 : (int,status) farray
+
+logic r2 : int
+
+logic result3 : int
+
+logic r3 : int
+
+logic result4 : (int,status) farray
+
+logic data4 : (int,status) farray
+
+logic result5 : int
+
+logic res4 : int
+
+logic res5 : int
+
+logic data5 : (int,status) farray
+
+logic r4 : int
+
+logic res6 : int
+
+logic data6 : (int,status) farray
+
+logic r5 : int
+
+logic res7 : int
+
+logic data7 : (int,status) farray
+
+logic r6 : int
+
+logic res8 : int
+
+logic data8 : (int,status) farray
+
+logic r7 : int
+
+logic res9 : int
+
+logic data9 : (int,status) farray
+
+logic r8 : int
+
+logic res10 : int
+
+logic data10 : (int,status) farray
+
+logic r9 : int
+
+logic res11 : int
+
+logic data11 : (int,status) farray
+
+logic r10 : int
+
+logic res12 : int
+
+logic data12 : (int,status) farray
+
+logic r11 : int
+
+logic result6 : int
+
+logic res13 : int
+
+logic res14 : int
+
+logic data13 : (int,status) farray
+
+logic r12 : int
+
+logic res15 : int
+
+logic data14 : (int,status) farray
+
+logic r13 : int
+
+logic res16 : int
+
+logic data15 : (int,status) farray
+
+logic r14 : int
+
+logic res17 : int
+
+logic data16 : (int,status) farray
+
+logic r15 : int
+
+axiom H : ((0 <= 10000) -> in_range1(res))
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = 1)
+
+axiom H3 : (1 <= r1)
+
+axiom H4 : (r1 <= 10000)
+
+axiom H5 : (not (to_rep((data[r1])) = 0))
+
+axiom H6 : (data2 = data)
+
+axiom H7 : (res2 = res)
+
+axiom H8 : (data2 = data1)
+
+axiom H9 : (res2 = res1)
+
+axiom H10 : ((bool_eq5(data3, 1, 10000, data, 1, 10000) = true) and
+  (forall rr1:int. (((1 <= rr1) and (rr1 <= r2)) ->
+  (to_rep((data3[rr1])) = 1))))
+
+axiom H11 : (((((1 <= 10000) -> in_range2(r2)) and ((0 <= 10000) ->
   in_range1(res3))) and
   (forall temp___246:int. (((1 <= temp___246) and (temp___246 <= 10000)) ->
   ((r2 <  temp___246) -> ((data3[temp___246]) = (data[temp___246])))))) and
-  ((1 <= r2) and (r2 <= 10000))) and ((not (r2 = 10000)) and
-  (((r2 = result1) and (r3 = (r2 + 1))) and
-  ((not (to_rep((data3[r3])) = 0)) and ((data4 = data3) and
-  (res4 = res3)))))) -> (bool_eq5(data4, 1, 10000, data, 1,
-  10000) = true))))))))
+  ((1 <= r2) and (r2 <= 10000)))
+
+axiom H12 : (not (r2 = 10000))
+
+axiom H13 : (r2 = result3)
+
+axiom H14 : (r3 = (r2 + 1))
+
+axiom H15 : (not (to_rep((data3[r3])) = 0))
+
+axiom H16 : (data4 = data3)
+
+axiom H17 : (res4 = res3)
+
+ (* File "simple_allocator.ads", line 30, characters 0-0 *)
+goal WP_parameter_def : (bool_eq5(data4, 1, 10000, data, 1, 10000) = true)

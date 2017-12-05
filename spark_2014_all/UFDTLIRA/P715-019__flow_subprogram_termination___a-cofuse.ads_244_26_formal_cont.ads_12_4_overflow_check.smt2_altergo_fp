@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -231,7 +231,7 @@ logic attr__ATTRIBUTE_VALUE2 : us_image -> bool
 
 type element_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -264,7 +264,23 @@ logic includes_intersection : us_rep, us_rep, us_rep -> bool
 logic includes_intersection__function_guard : bool, us_rep, us_rep,
   us_rep -> prop
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+axiom H : ((o3 = length(right)) and in_range1(o3))
+
+axiom H1 : (o4 = (2147483647 - o3))
+
  (* File "a-cofuse.ads", line 218, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. ((((o = length(right)) and in_range1(o)) and
-  (o1 = (2147483647 - o))) -> in_range(o1)))
+goal WP_parameter_def : in_range(o4)

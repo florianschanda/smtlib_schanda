@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1025,9 +1025,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic msb : t
+
+logic lsb : t
+
+logic o : t1
+
+logic o1 : t1
+
+logic result : t
+
+logic msb1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (result = msb)
+
+axiom H4 : (msb1 = toSmall(bw_and1(value, of_int1(255))))
+
+axiom H5 : ((8 <  16) -> (o = lsr_bv1(value, of_int1(8))))
+
+axiom H6 : ((not (8 <  16)) -> (o = of_int1(0)))
+
  (* File "network-helpers0.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall msb:t. forall o:t1. forall result:t. forall msb1:t.
-  (((result = msb) and (msb1 = toSmall(bw_and1(value, of_int1(255))))) ->
-  ((((8 <  16) and (o = lsr_bv1(value, of_int1(8)))) or ((not (8 <  16)) and
-  (o = of_int1(0)))) -> ule1(toBig(of_int(0)), o))))
+goal WP_parameter_def : ule1(toBig(of_int(0)), o)

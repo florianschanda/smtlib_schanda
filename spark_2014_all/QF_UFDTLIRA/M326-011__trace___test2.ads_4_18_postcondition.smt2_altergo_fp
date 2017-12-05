@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,26 +111,75 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic result__ : int
+
+logic test2__test__result : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic result__3 : int
+
+logic result3 : int
+
+logic test2__test__result1 : int
+
+logic test2__test__result2 : int
+
+logic test2__test__result3 : int
+
+logic result__4 : int
+
+logic test2__test__result4 : int
+
+logic result__5 : int
+
+logic test2__test__result5 : int
+
+logic result4 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (result = result__)
+
+axiom H2 : (result__1 = 0)
+
+axiom H3 : in_range(result__1)
+
+axiom H4 : ((x = 0) -> (result1 = result__1))
+
+axiom H5 : ((x = 0) -> (result__2 = 0))
+
+axiom H6 : ((not (x = 0)) -> (result2 = result__1))
+
+axiom H7 : ((not (x = 0)) -> (result__3 = 1))
+
+axiom H8 : ((not (x = 0)) -> (result__2 = result__3))
+
+axiom H9 : (test2__test__result1 = test2__test__result2)
+
+axiom H10 : (test2__test__result3 = test2__test__result1)
+
+axiom H11 : (result3 = test2__test__result)
+
+axiom H12 : (test2__test__result1 = result__2)
+
+axiom H13 : (test2__test__result4 = test2__test__result2)
+
+axiom H14 : (result__4 = result__2)
+
+axiom H15 : (test2__test__result5 = test2__test__result3)
+
+axiom H16 : (result__5 = result__2)
+
+axiom H17 : (result4 = test2__test__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall test2__test__result:int. forall result:int.
-  forall result__1:int. forall result1:int. forall result__2:int.
-  forall result2:int. forall result__3:int. forall result3:int.
-  forall test2__test__result1:int. forall test2__test__result2:int.
-  forall test2__test__result3:int. forall result__4:int.
-  forall test2__test__result4:int. forall result__5:int.
-  forall test2__test__result5:int.
-  (forall result4:int. ((in_range(x) and (((((result = result__) and
-  (result__1 = 0)) and (in_range(result__1) and ((((x = 0) and
-  ((result1 = result__1) and (result__2 = 0))) or ((not (x = 0)) and
-  (((result2 = result__1) and (result__3 = 1)) and
-  (result__2 = result__3)))) and
-  (((test2__test__result1 = test2__test__result2) and
-  (test2__test__result3 = test2__test__result1)) and
-  ((result3 = test2__test__result) and
-  (test2__test__result1 = result__2)))))) and
-  (((test2__test__result4 = test2__test__result2) and
-  (result__4 = result__2)) and
-  ((test2__test__result5 = test2__test__result3) and
-  (result__5 = result__2)))) and (result4 = test2__test__result4))) ->
-  (test2__test__result4 = 1))))
+goal WP_parameter_def : (test2__test__result4 = 1)

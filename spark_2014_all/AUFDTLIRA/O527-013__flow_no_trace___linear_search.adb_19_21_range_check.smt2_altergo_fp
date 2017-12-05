@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type element
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -388,20 +388,52 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic pos : int
+
+logic o : int
+
+logic result : int
+
+logic pos1 : int
+
+logic pos2 : int
+
+logic res__split_fields : bool
+
+logic res__split_fields1 : index
+
+logic linear_search__search__result : bool
+
+logic linear_search__search__result1 : index
+
+logic res__split_fields2 : bool
+
+logic res__split_fields3 : index
+
+logic linear_search__search__result2 : bool
+
+logic linear_search__search__result3 : index
+
+axiom H : in_range2(val__)
+
+axiom H1 : (result = pos)
+
+axiom H2 : (pos1 = 1)
+
+axiom H3 : in_range1(pos1)
+
+axiom H4 : (pos1 <  10)
+
+axiom H5 : (((1 <= 10) -> in_range1(pos2)) and (pos2 <  10))
+
+axiom H6 : (not (to_rep1((a[pos2])) = val__))
+
+axiom H7 :
+  ((linear_search__search__result2 = linear_search__search__result) and
+  (linear_search__search__result3 = linear_search__search__result1))
+
+axiom H8 : ((res__split_fields2 = res__split_fields) and
+  (res__split_fields3 = res__split_fields1))
+
  (* File "linear_search.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. forall result:int. forall pos1:int. forall pos2:int.
-  forall res__split_fields:bool. forall res__split_fields1:index.
-  forall linear_search__search__result:bool.
-  forall linear_search__search__result1:index.
-  forall res__split_fields2:bool. forall res__split_fields3:index.
-  forall linear_search__search__result2:bool.
-  forall linear_search__search__result3:index. (in_range2(val__) ->
-  (((result = pos) and (pos1 = 1)) -> (in_range1(pos1) -> ((pos1 <  10) ->
-  ((((1 <= 10) -> in_range1(pos2)) and (pos2 <  10)) ->
-  (((not (to_rep1((a[pos2])) = val__)) and
-  (((linear_search__search__result2 = linear_search__search__result) and
-  (linear_search__search__result3 = linear_search__search__result1)) and
-  ((res__split_fields2 = res__split_fields) and
-  (res__split_fields3 = res__split_fields1)))) ->
-  in_range1((pos2 + 1)))))))))
+goal WP_parameter_def : in_range1((pos2 + 1))

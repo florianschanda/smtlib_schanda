@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -152,6 +152,61 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 logic c2 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic real_world__k616_030_a__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic result : bool
+
+logic real_world__k616_030_a__result1 : bool
+
+logic real_world__k616_030_a__result2 : bool
+
+logic real_world__k616_030_a__result3 : bool
+
+logic real_world__k616_030_a__result4 : bool
+
+logic real_world__k616_030_a__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : in_range1(z)
+
+axiom H3 : in_range1(c)
+
+axiom H4 : in_range1(c2)
+
+axiom H5 : ((((x + y) <= z) and (z <= c)) and (c <= (c2 + y)))
+
+axiom H6 :
+  (real_world__k616_030_a__result1 = real_world__k616_030_a__result2)
+
+axiom H7 :
+  (real_world__k616_030_a__result3 = real_world__k616_030_a__result1)
+
+axiom H8 : (result = real_world__k616_030_a__result)
+
+axiom H9 : (((x <= c2) -> (real_world__k616_030_a__result1 = true)) and
+  ((not (x <= c2)) -> (real_world__k616_030_a__result1 = false)))
+
+axiom H10 :
+  (real_world__k616_030_a__result4 = real_world__k616_030_a__result2)
+
+axiom H11 :
+  (real_world__k616_030_a__result5 = real_world__k616_030_a__result3)
+
+axiom H12 : (result1 = real_world__k616_030_a__result4)
+
+axiom H13 : (real_world__k616_030_a__result4 = true)
 
  (* File "real_world.adb", line 48, characters 0-0 *)
 goal WP_parameter_def : true

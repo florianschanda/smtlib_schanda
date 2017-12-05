@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -447,26 +447,86 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic s__split_fields : (int,integer) farray
+
+logic s__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : pointer_range
+
+logic o2 : (int,integer) farray
+
+logic o3 : pointer_range
+
+logic temp___183 : (int,integer) farray
+
+logic temp___1831 : pointer_range
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : (int,integer) farray
+
+logic o8 : pointer_range
+
+logic temp___187 : (int,integer) farray
+
+logic temp___1871 : pointer_range
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic s__split_fields2 : (int,integer) farray
+
+logic s__split_fields3 : pointer_range
+
+logic result2 : (int,integer) farray
+
+logic result3 : pointer_range
+
+logic s__split_fields4 : (int,integer) farray
+
+logic s__split_fields5 : pointer_range
+
+logic s__split_fields6 : (int,integer) farray
+
+logic s__split_fields7 : pointer_range
+
+logic s__split_fields8 : (int,integer) farray
+
+logic s__split_fields9 : pointer_range
+
+axiom H : in_range(x)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
+  rec__stacks_14__stack__stack_vector = s__split_fields;
+  rec__stacks_14__stack__stack_pointer = s__split_fields1 } }) = true))
+
+axiom H2 : ((o = (to_rep1(s__split_fields1) + 1)) and
+  in_range2((to_rep1(s__split_fields1) + 1)))
+
+axiom H3 : (to_rep1(o1) = o)
+
+axiom H4 : (s__split_fields = o2)
+
+axiom H5 : (o1 = o3)
+
+axiom H6 : (temp___183 = o2)
+
+axiom H7 : (temp___1831 = o3)
+
+axiom H8 : ((result = s__split_fields) and (result1 = s__split_fields1))
+
+axiom H9 : (temp___183 = s__split_fields2)
+
+axiom H10 : (temp___1831 = s__split_fields3)
+
+axiom H11 : (to_rep(o4) = x)
+
  (* File "stacks_14.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,integer) farray.
-  forall s__split_fields1:pointer_range. forall o:int.
-  forall o1:pointer_range. forall o2:(int,integer) farray.
-  forall o3:pointer_range. forall temp___183:(int,integer) farray.
-  forall temp___1831:pointer_range. forall o4:integer.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall s__split_fields2:(int,integer) farray.
-  forall s__split_fields3:pointer_range. (in_range(x) -> ((not (is_full({
-  us_split_fields1 = { rec__stacks_14__stack__stack_vector = s__split_fields;
-  rec__stacks_14__stack__stack_pointer = s__split_fields1 } }) = true)) ->
-  (((((((o = (to_rep1(s__split_fields1) + 1)) and
-  in_range2((to_rep1(s__split_fields1) + 1))) and (to_rep1(o1) = o)) and
-  ((s__split_fields = o2) and (o1 = o3))) and ((temp___183 = o2) and
-  (temp___1831 = o3))) and (({ us_split_fields__content = {
-  rec__stacks_14__stack__stack_vector = result;
-  rec__stacks_14__stack__stack_pointer = result1 } } = {
-  us_split_fields__content = { rec__stacks_14__stack__stack_vector =
-  s__split_fields; rec__stacks_14__stack__stack_pointer = s__split_fields1 }
-  }) and ((temp___183 = s__split_fields2) and
-  (temp___1831 = s__split_fields3)))) -> ((to_rep(o4) = x) ->
-  (1 <= to_rep1(s__split_fields3)))))))
+goal WP_parameter_def : (1 <= to_rep1(s__split_fields3))

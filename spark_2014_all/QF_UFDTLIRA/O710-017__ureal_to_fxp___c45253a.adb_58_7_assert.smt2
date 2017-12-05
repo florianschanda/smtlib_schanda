@@ -28,6 +28,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (assert (not (= (of_int 0) true)))
 (assert (not (= (of_int 0) true)))
-(assert (not (not (= (of_int 1) true))))
+(assert (= (of_int 1) true))
+(assert (not false))
 (check-sat)
 (exit)

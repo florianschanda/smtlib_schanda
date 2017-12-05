@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,9 +107,27 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic g : int
+
+logic o : int
+
+logic result : int
+
+logic g1 : int
+
+logic g2 : int
+
+logic g3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(g))
+
+axiom H1 : (result = g)
+
+axiom H2 : (g1 = 1)
+
+axiom H3 : (g1 = g2)
+
+axiom H4 : (g3 = g1)
+
  (* File "tick_old_implies_input.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:int. forall result:int. forall g1:int. forall g2:int.
-  forall g3:int. (((((-2147483648) <= 2147483647) -> in_range(g)) and ((({
-  int__content = result } = { int__content = g }) and (g1 = 1)) and
-  ((g1 = g2) and (g3 = g1)))) -> (g2 = (g + 1))))
+goal WP_parameter_def : (g2 = (g + 1))

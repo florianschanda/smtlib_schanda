@@ -137,7 +137,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -413,39 +413,446 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic right : int
+
+logic left : int
+
+logic right_is_out : bool
+
+logic left_is_out : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___236 : int
+
+logic temp___235 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic v : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___238 : bool
+
+logic temp___237 : int
+
+logic o10 : int
+
+logic v1 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic v2 : int
+
+logic v3 : int
+
+logic o24 : int
+
+logic o25 : bool
+
+logic v4 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : bool
+
+logic v5 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : bool
+
+logic right_is_out1 : bool
+
+logic left_is_out1 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result1 : int
+
+logic result : int
+
+logic right1 : int
+
+logic result1 : int
+
+logic left1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result2 : int
+
+logic result4 : int
+
+logic right2 : int
+
+logic result5 : bool
+
+logic right_is_out2 : bool
+
+logic result6 : bool
+
+logic right3 : int
+
+logic right_is_out3 : bool
+
+logic result7 : int
+
+logic right4 : int
+
+logic result8 : bool
+
+logic right_is_out4 : bool
+
+logic result9 : bool
+
+logic right_is_out5 : bool
+
+logic right_is_out6 : bool
+
+logic right5 : int
+
+logic right_is_out7 : bool
+
+logic right6 : int
+
+logic right_is_out8 : bool
+
+logic right7 : int
+
+logic right_is_out9 : bool
+
+logic right8 : int
+
+logic right_is_out10 : bool
+
+logic right9 : int
+
+logic right_is_out11 : bool
+
+logic right10 : int
+
+logic right_is_out12 : bool
+
+logic result10 : bool
+
+logic right_is_out13 : bool
+
+logic right11 : int
+
+logic right_is_out14 : bool
+
+logic right12 : int
+
+logic right_is_out15 : bool
+
+logic result11 : int
+
+logic left2 : int
+
+logic result12 : bool
+
+logic left_is_out2 : bool
+
+logic result13 : bool
+
+logic left3 : int
+
+logic left_is_out3 : bool
+
+logic result14 : int
+
+logic left4 : int
+
+logic result15 : bool
+
+logic left_is_out4 : bool
+
+logic result16 : bool
+
+logic left_is_out5 : bool
+
+logic left_is_out6 : bool
+
+logic left5 : int
+
+logic left_is_out7 : bool
+
+logic left6 : int
+
+logic left_is_out8 : bool
+
+logic left7 : int
+
+logic left_is_out9 : bool
+
+logic left8 : int
+
+logic left_is_out10 : bool
+
+logic left9 : int
+
+logic left_is_out11 : bool
+
+logic left10 : int
+
+logic left_is_out12 : bool
+
+logic left11 : int
+
+logic left_is_out13 : bool
+
+logic left12 : int
+
+logic left_is_out14 : bool
+
+logic result17 : bool
+
+logic left_is_out15 : bool
+
+logic left13 : int
+
+logic left_is_out16 : bool
+
+logic left14 : int
+
+logic left_is_out17 : bool
+
+logic result18 : bool
+
+logic result19 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result3 : int
+
+logic result20 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result4 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result5 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result6 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result7 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result8 : int
+
+logic result21 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result9 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result10 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result11 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result12 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result13 : int
+
+logic result22 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result14 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result15 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result16 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result17 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result18 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result19 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result20 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result21 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result22 : int
+
+logic right13 : int
+
+logic left15 : int
+
+logic right_is_out16 : bool
+
+logic left_is_out18 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result23 : int
+
+logic right14 : int
+
+logic left16 : int
+
+logic right_is_out17 : bool
+
+logic left_is_out19 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result24 : int
+
+logic right15 : int
+
+logic left17 : int
+
+logic right_is_out18 : bool
+
+logic left_is_out20 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result25 : int
+
+logic right16 : int
+
+logic left18 : int
+
+logic right_is_out19 : bool
+
+logic left_is_out21 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result26 : int
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic result25 : bool
+
+logic result26 : bool
+
+axiom H : in_range4(mode)
+
+axiom H1 : in_range2(value)
+
+axiom H2 : (((0 <= value) and (value <= 100000)) and (((mode = 0) ->
+  (has_true(number_list, value, 100000) = true)) and ((not (mode = 0)) ->
+  (((mode = 1) -> (has_true(number_list, 0, value) = true)) and
+  ((not (mode = 1)) -> (has_true(number_list, 0, 100000) = true))))))
+
+axiom H3 : (result = right)
+
+axiom H4 : (right1 = 0)
+
+axiom H5 : in_range1(right1)
+
+axiom H6 : (result1 = left)
+
+axiom H7 : (left1 = 0)
+
+axiom H8 : in_range1(left1)
+
+axiom H9 : ((0 <= value) and (value <= 100000))
+
+axiom H10 : (o = value)
+
+axiom H11 : (result2 = (number_list[o]))
+
+axiom H12 : (not (result2 = true))
+
+axiom H13 :
+  (test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result)
+
+axiom H14 :
+  (test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result1)
+
+axiom H15 : ((mode = 0) or (mode = 2))
+
+axiom H16 : ((o1 = value) and (not (value = 2147483647)))
+
+axiom H17 : (o2 = (o1 + 1))
+
+axiom H18 : (right1 = result4)
+
+axiom H19 : (right2 = o2)
+
+axiom H20 : (result5 = right_is_out)
+
+axiom H21 : (((100000 <  right2) -> (right_is_out2 = true)) and
+  ((not (100000 <  right2)) -> (right_is_out2 = false)))
+
+axiom H22 : ((right_is_out2 = true) -> (result6 = true))
+
+axiom H23 : ((not (right_is_out2 = true)) -> ((0 <= right2) and
+  (right2 <= 100000)))
+
+axiom H24 : ((not (right_is_out2 = true)) -> (o3 = right2))
+
+axiom H25 : ((not (right_is_out2 = true)) -> (result6 = (number_list[o3])))
+
+axiom H26 : (not (result6 = true))
+
+axiom H27 : (((value + 1) <= right3) and (right3 <= 100000))
+
+axiom H28 :
+  (forall v6:int. (((value <= v6) and (v6 <= right3)) ->
+  (not ((number_list[v6]) = true))))
+
+axiom H29 : (((- 2147483648) <= 2147483647) -> in_range1(right3))
+
  (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall right:int. forall left:int. forall right_is_out:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result:int.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result1:int.
-  forall result:int. forall right1:int. forall result1:int. forall left1:int.
-  forall result2:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result2:int.
-  forall result3:int. forall right2:int. forall result4:bool.
-  forall right_is_out1:bool. forall result5:bool. forall right3:int.
-  (in_range4(mode) -> (in_range2(value) -> ((((0 <= value) and
-  (value <= 100000)) and (((mode = 0) and (has_true(number_list, value,
-  100000) = true)) or ((not (mode = 0)) and (((mode = 1) and
-  (has_true(number_list, 0, value) = true)) or ((not (mode = 1)) and
-  (has_true(number_list, 0, 100000) = true)))))) -> ((({ int__content =
-  result } = { int__content = right }) and (right1 = 0)) ->
-  (in_range1(right1) -> ((({ int__content = result1 } = { int__content = left
-  }) and (left1 = 0)) -> (in_range1(left1) -> ((((((0 <= value) and
-  (value <= 100000)) and (o = value)) and (result2 = (number_list[o]))) and
-  ((not (result2 = true)) and
-  ((test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result1)))) ->
-  (((mode = 0) or (mode = 2)) -> (((((o1 = value) and
-  (not (value = 2147483647))) and (o2 = (o1 + 1))) and
-  ((right1 = result3) and (right2 = o2))) -> ((({ bool__content = result4
-  } = { bool__content = right_is_out }) and (((100000 <  right2) and
-  (right_is_out1 = true)) or ((not (100000 <  right2)) and
-  (right_is_out1 = false)))) -> (((((right_is_out1 = true) and
-  (result5 = true)) or ((not (right_is_out1 = true)) and ((((0 <= right2) and
-  (right2 <= 100000)) and (o3 = right2)) and
-  (result5 = (number_list[o3]))))) and (not (result5 = true))) ->
-  (((((value + 1) <= right3) and (right3 <= 100000)) and
-  (forall v:int. (((value <= v) and (v <= right3)) ->
-  (not ((number_list[v]) = true))))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(right3)) -> (not (right3 = 2147483647)))))))))))))))))
+goal WP_parameter_def : (not (right3 = 2147483647))

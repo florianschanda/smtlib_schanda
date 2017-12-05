@@ -228,7 +228,11 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
+logic self__ : natural
+
+logic self__1 : bool
+
+axiom H : (self__1 = true)
+
  (* File "logger.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__:natural. forall self__1:bool. ((self__1 = true) ->
-  (0 <  to_rep(self__))))
+goal WP_parameter_def : (0 <  to_rep(self__))

@@ -107,7 +107,7 @@ function any_priority__ref___projection(a: any_priority__ref) : any_priority =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -135,13 +135,13 @@ type us_split_discrs = { rec__interrupt_priority__no_interrupt_needed_1__c :
 any_priority
 }
 
-function us_split_discrs___projection(a: us_split_discrs) : any_priority =
+function us_split_discrs___2__projection(a: us_split_discrs) : any_priority =
   (a).rec__interrupt_priority__no_interrupt_needed_1__c
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__interrupt_priority__no_interrupt_needed_1__i :
@@ -161,10 +161,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep) : us_split_discrs =
+function us_rep___30__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___30__projection(a: us_rep) : us_split_fields =
+function us_rep___31__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -246,10 +246,10 @@ type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep___35__projection(a: us_rep1) : us_split_discrs =
+function us_rep___36__projection(a: us_rep1) : us_split_discrs =
   (a).us_split_discrs2
 
-function us_rep___36__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___37__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
@@ -376,10 +376,10 @@ type us_rep2 = { us_split_discrs3 : us_split_discrs; us_split_fields5 :
 us_split_fields4
 }
 
-function us_rep___37__projection(a: us_rep2) : us_split_discrs =
+function us_rep___38__projection(a: us_rep2) : us_split_discrs =
   (a).us_split_discrs3
 
-function us_rep___38__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___39__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
 function to_base1(a: us_rep2) : us_rep = { us_split_discrs1 =
@@ -467,13 +467,13 @@ type us_split_discrs4 = { rec__interrupt_priority__no_interrupt_needed_2__c :
 any_priority
 }
 
-function us_split_discrs___3__projection(a: us_split_discrs4) : any_priority =
+function us_split_discrs___4__projection(a: us_split_discrs4) : any_priority =
   (a).rec__interrupt_priority__no_interrupt_needed_2__c
 
 type us_split_discrs__ref1 = { us_split_discrs__content1 : us_split_discrs4
 }
 
-function us_split_discrs__ref___3__projection(a: us_split_discrs__ref1) : us_split_discrs4 =
+function us_split_discrs__ref___4__projection(a: us_split_discrs__ref1) : us_split_discrs4 =
   (a).us_split_discrs__content1
 
 type us_split_fields6 = { rec__interrupt_priority__no_interrupt_needed_2__i :
@@ -493,10 +493,10 @@ type us_rep3 = { us_split_discrs5 : us_split_discrs4; us_split_fields7 :
 us_split_fields6
 }
 
-function us_rep___33__projection(a: us_rep3) : us_split_discrs4 =
+function us_rep___34__projection(a: us_rep3) : us_split_discrs4 =
   (a).us_split_discrs5
 
-function us_rep___34__projection(a: us_rep3) : us_split_fields6 =
+function us_rep___35__projection(a: us_rep3) : us_split_fields6 =
   (a).us_split_fields7
 
 logic value__size3 : int
@@ -578,10 +578,10 @@ type us_rep4 = { us_split_discrs6 : us_split_discrs4; us_split_fields9 :
 us_split_fields8
 }
 
-function us_rep___39__projection(a: us_rep4) : us_split_discrs4 =
+function us_rep___40__projection(a: us_rep4) : us_split_discrs4 =
   (a).us_split_discrs6
 
-function us_rep___40__projection(a: us_rep4) : us_split_fields8 =
+function us_rep___41__projection(a: us_rep4) : us_split_fields8 =
   (a).us_split_fields9
 
 function to_base2(a: us_rep4) : us_rep3 = { us_split_discrs5 =
@@ -682,10 +682,10 @@ type us_rep5 = { us_split_discrs7 : us_split_discrs4; us_split_fields11 :
 us_split_fields10
 }
 
-function us_rep___41__projection(a: us_rep5) : us_split_discrs4 =
+function us_rep___42__projection(a: us_rep5) : us_split_discrs4 =
   (a).us_split_discrs7
 
-function us_rep___42__projection(a: us_rep5) : us_split_fields10 =
+function us_rep___43__projection(a: us_rep5) : us_split_fields10 =
   (a).us_split_fields11
 
 function to_base3(a: us_rep5) : us_rep3 = { us_split_discrs5 =
@@ -773,13 +773,13 @@ type us_split_discrs8 = { rec__interrupt_priority__interrupt_needed_1__c :
 any_priority
 }
 
-function us_split_discrs___2__projection(a: us_split_discrs8) : any_priority =
+function us_split_discrs___3__projection(a: us_split_discrs8) : any_priority =
   (a).rec__interrupt_priority__interrupt_needed_1__c
 
 type us_split_discrs__ref2 = { us_split_discrs__content2 : us_split_discrs8
 }
 
-function us_split_discrs__ref___2__projection(a: us_split_discrs__ref2) : us_split_discrs8 =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref2) : us_split_discrs8 =
   (a).us_split_discrs__content2
 
 type us_split_fields12 = { rec__interrupt_priority__interrupt_needed_1__i :
@@ -799,10 +799,10 @@ type us_rep6 = { us_split_discrs9 : us_split_discrs8; us_split_fields13 :
 us_split_fields12
 }
 
-function us_rep___31__projection(a: us_rep6) : us_split_discrs8 =
+function us_rep___32__projection(a: us_rep6) : us_split_discrs8 =
   (a).us_split_discrs9
 
-function us_rep___32__projection(a: us_rep6) : us_split_fields12 =
+function us_rep___33__projection(a: us_rep6) : us_split_fields12 =
   (a).us_split_fields13
 
 logic value__size6 : int
@@ -884,10 +884,10 @@ type us_rep7 = { us_split_discrs10 : us_split_discrs8; us_split_fields15 :
 us_split_fields14
 }
 
-function us_rep___43__projection(a: us_rep7) : us_split_discrs8 =
+function us_rep___44__projection(a: us_rep7) : us_split_discrs8 =
   (a).us_split_discrs10
 
-function us_rep___44__projection(a: us_rep7) : us_split_fields14 =
+function us_rep___45__projection(a: us_rep7) : us_split_fields14 =
   (a).us_split_fields15
 
 function to_base4(a: us_rep7) : us_rep6 = { us_split_discrs9 =
@@ -969,14 +969,44 @@ logic p5__split_discrs : any_priority
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic p1__split_fields : integer
+
+logic p2__split_fields : integer
+
+logic p3__split_fields : integer
+
+logic p4__split_fields : integer
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+axiom H : ((us = 0) and in_range(0))
+
+axiom H1 : ((to_rep(p1__split_discrs) = 0) and
+  (to_rep1(p1__split_fields) = 0))
+
+axiom H2 : (0 = to_rep(p1__split_discrs))
+
+axiom H3 : ((us1 = 98) and in_range(98))
+
+axiom H4 : ((to_rep(p2__split_discrs) = 98) and
+  (to_rep1(p2__split_fields) = 0))
+
+axiom H5 : (98 = to_rep(p2__split_discrs))
+
+axiom H6 : ((us2 = 0) and in_range(0))
+
+axiom H7 : ((to_rep(p3__split_discrs) = 0) and
+  (to_rep1(p3__split_fields) = 0))
+
+axiom H8 : (0 = to_rep(p3__split_discrs))
+
  (* File "interrupt_priority.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p1__split_fields:integer. forall p2__split_fields:integer.
-  forall p3__split_fields:integer. forall us:int. forall us1:int.
-  forall us2:int. (((us = 0) and in_range(0)) ->
-  (((to_rep(p1__split_discrs) = 0) and (to_rep1(p1__split_fields) = 0)) ->
-  ((0 = to_rep(p1__split_discrs)) -> (((us1 = 98) and in_range(98)) ->
-  (((to_rep(p2__split_discrs) = 98) and (to_rep1(p2__split_fields) = 0)) ->
-  ((98 = to_rep(p2__split_discrs)) -> (((us2 = 0) and in_range(0)) ->
-  (((to_rep(p3__split_discrs) = 0) and (to_rep1(p3__split_fields) = 0)) ->
-  ((0 = to_rep(p3__split_discrs)) -> in_range(98)))))))))))
+goal WP_parameter_def : in_range(98)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -139,16 +139,44 @@ logic id : int -> int
 
 logic id__function_guard : int, int -> prop
 
+logic p__id__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic p__id__result1 : int
+
+logic p__id__result2 : int
+
+logic p__id__result3 : int
+
+logic p__id__result4 : int
+
+logic p__id__result5 : int
+
+logic result1 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : (p__id__result1 = p__id__result2)
+
+axiom H2 : (p__id__result3 = p__id__result1)
+
+axiom H3 : (result = p__id__result)
+
+axiom H4 : (p__id__result1 = n)
+
+axiom H5 : (p__id__result4 = p__id__result2)
+
+axiom H6 : (p__id__result5 = p__id__result3)
+
+axiom H7 : (result1 = p__id__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__id__result:int. forall result:int. forall p__id__result1:int.
-  forall p__id__result2:int. forall p__id__result3:int.
-  forall p__id__result4:int. forall p__id__result5:int.
-  (forall result1:int. ((in_range1(n) and
-  (((((p__id__result1 = p__id__result2) and
-  (p__id__result3 = p__id__result1)) and (({ int__content = result } = {
-  int__content = p__id__result }) and (p__id__result1 = n))) and (({
-  int__content = p__id__result4 } = { int__content = p__id__result2 }) and
-  (p__id__result5 = p__id__result3))) and (result1 = p__id__result4))) ->
-  (((n = 0) -> (p__id__result4 = 0)) and ((not (n = 0)) ->
-  (p__id__result4 = (id((n - 1)) + 1)))))))
+goal WP_parameter_def : (((n = 0) -> (p__id__result4 = 0)) and
+  ((not (n = 0)) -> (p__id__result4 = (id((n - 1)) + 1))))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type index
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -305,6 +305,67 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,integer) farray
+
+logic tmp : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : bool
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic tmp2 : int
+
+logic a4 : (int,integer) farray
+
+logic tmp3 : int
+
+axiom H : in_range2(j)
+
+axiom H1 : in_range2(k)
+
+axiom H2 : (((1 <= j) and (j <= 10)) and ((1 <= k) and (k <= 10)))
+
  (* File "p.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (in_range2(j) -> (in_range2(k) -> ((((1 <= j) and
-  (j <= 10)) and ((1 <= k) and (k <= 10))) -> (1 <= j))))
+goal WP_parameter_def : (1 <= j)

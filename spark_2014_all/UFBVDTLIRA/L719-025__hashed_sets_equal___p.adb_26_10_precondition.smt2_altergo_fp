@@ -282,18 +282,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1841,25 +1841,45 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range7(w_get(container, witness1)))))
 
- (* File "a-cfhase.ads", line 1134, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall result:bool. (in_range2(e) ->
-  (((contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs; rec__p__my_sets__set__modulus = l__split_discrs1 };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
-  e) = true) or (length({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic o : count_type
+
+logic o1 : int
+
+logic result : bool
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range2(e)
+
+axiom H1 : ((contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs))) ->
-  (((result = contains(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true) or (length({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs;
+  rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs)))
+
+axiom H2 : ((result = contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), e)) and ((result = true) <->
   (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs; rec__p__my_sets__set__modulus = l__split_discrs1 };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
-  e) = true))) -> ((not (result = true)) -> (length({ us_split_discrs1 = {
+  e) = true)))
+
+axiom H3 : (not (result = true))
+
+ (* File "a-cfhase.ads", line 1134, characters 0-0 *)
+goal WP_parameter_def : (length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs;
   rec__p__my_sets__set__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields }
-  }) <  to_rep(l__split_discrs)))))))
+  rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs))

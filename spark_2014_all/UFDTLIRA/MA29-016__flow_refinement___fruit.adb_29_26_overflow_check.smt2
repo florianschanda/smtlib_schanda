@@ -48,6 +48,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const oranges Int)
+(declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range1 oranges_to_consume))
 (assert (in_range1 oranges))
 (assert (<= oranges_to_consume (number_of_oranges oranges)))

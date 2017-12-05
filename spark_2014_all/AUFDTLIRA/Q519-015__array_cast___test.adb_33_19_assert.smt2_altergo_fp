@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -187,7 +187,7 @@ axiom coerce_axiom1 :
 
 type integer_subtype
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1291,52 +1291,143 @@ axiom convert__def2 :
   (forall temp___319:int.
   (to_rep((a[temp___319])) = to_rep2((convert2(a)[temp___319])))))
 
+logic x : (int,(int,natural) farray) farray
+
+logic y : (int,(int,natural) farray) farray
+
+logic w : (int,us_rep) farray
+
+logic z : (int,us_rep) farray
+
+logic test_array : (int,integer) farray
+
+logic result_array : (int,integer_subtype) farray
+
+logic us : int
+
+logic us1 : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : (int,us_rep) farray
+
+logic o13 : (int,integer_subtype) farray
+
+logic result : (int,(int,natural) farray) farray
+
+logic x1 : (int,(int,natural) farray) farray
+
+logic result1 : (int,(int,natural) farray) farray
+
+logic y1 : (int,(int,natural) farray) farray
+
+logic result2 : (int,us_rep) farray
+
+logic w1 : (int,us_rep) farray
+
+logic result3 : (int,us_rep) farray
+
+logic z1 : (int,us_rep) farray
+
+logic result4 : (int,integer) farray
+
+logic test_array1 : (int,integer) farray
+
+logic result5 : (int,integer_subtype) farray
+
+logic result_array1 : (int,integer_subtype) farray
+
+logic result6 : (int,integer_subtype) farray
+
+logic result_array2 : (int,integer_subtype) farray
+
+axiom H : ((us = 10) and in_range1(10))
+
+axiom H1 : ((us1 = 10) and in_range1(10))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = test__x__aggregate_def(temp___301(1)))
+
+axiom H4 : (result1 = y)
+
+axiom H5 : (y1 = convert(x1))
+
+axiom H6 : (to_rep(o1) = 1)
+
+axiom H7 : (o1 = o2)
+
+axiom H8 : (to_rep(o) = 10)
+
+axiom H9 : (o = o3)
+
+axiom H10 : (o4 = o3)
+
+axiom H11 : (o5 = o2)
+
+axiom H12 : ((o6 = o4) and (o7 = o5))
+
+axiom H13 : ((o8 = o6) and (o9 = o7))
+
+axiom H14 : ((o10 = o8) and (o11 = o9))
+
+axiom H15 : (o12 = test__w__aggregate_def({ us_split_discrs1 = {
+  rec__test__rec__x = o10 }; us_split_fields1 = { rec__test__rec__y = o11 }
+  }))
+
+axiom H16 : (result2 = w)
+
+axiom H17 : (w1 = o12)
+
+axiom H18 :
+  (forall temp___277:int. (((1 <= temp___277) and (temp___277 <= 3)) ->
+  (10 = to_rep((((w1[temp___277])).us_split_discrs1).rec__test__rec__x))))
+
+axiom H19 : (result3 = z)
+
+axiom H20 : (z1 = convert1(w1))
+
+axiom H21 :
+  (forall temp___289:int. (((1 <= temp___289) and (temp___289 <= 3)) ->
+  (10 = to_rep((((z1[temp___289])).us_split_discrs1).rec__test__rec__x))))
+
+axiom H22 : (result4 = test_array)
+
+axiom H23 : (test_array1 = test__test_array__aggregate_def(1, 2, 3))
+
+axiom H24 :
+  (forall i:int. (((1 <= i) and (i <= 3)) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (to_rep1(((y1[i])[j])) = 1)))))
+
+axiom H25 :
+  (forall i:int. (((1 <= i) and (i <= 3)) ->
+  (to_rep((((z1[i])).us_split_fields1).rec__test__rec__y) = 1)))
+
+axiom H26 : (result5 = result_array)
+
+axiom H27 : (result_array1 = convert2(test_array1))
+
  (* File "test.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,(int,natural) farray) farray.
-  forall y:(int,(int,natural) farray) farray. forall w:(int,us_rep) farray.
-  forall z:(int,us_rep) farray. forall test_array:(int,integer) farray.
-  forall result_array:(int,integer_subtype) farray. forall us:int.
-  forall us1:int. forall o:integer. forall o1:integer. forall o2:integer.
-  forall o3:integer. forall o4:integer. forall o5:integer. forall o6:integer.
-  forall o7:integer. forall o8:integer. forall o9:integer.
-  forall o10:integer. forall o11:integer. forall o12:(int,us_rep) farray.
-  forall result:(int,(int,natural) farray) farray.
-  forall x1:(int,(int,natural) farray) farray.
-  forall result1:(int,(int,natural) farray) farray.
-  forall y1:(int,(int,natural) farray) farray.
-  forall result2:(int,us_rep) farray. forall w1:(int,us_rep) farray.
-  forall result3:(int,us_rep) farray. forall z1:(int,us_rep) farray.
-  forall result4:(int,integer) farray.
-  forall test_array1:(int,integer) farray.
-  forall result5:(int,integer_subtype) farray.
-  forall result_array1:(int,integer_subtype) farray. (((us = 10) and
-  in_range1(10)) -> (((us1 = 10) and in_range1(10)) -> (((result = x) and
-  (x1 = test__x__aggregate_def(temp___301(1)))) -> (((result1 = y) and
-  (y1 = convert(x1))) -> (((((((((to_rep(o1) = 1) and (o1 = o2)) and
-  (((to_rep(o) = 10) and (o = o3)) and ((o4 = o3) and (o5 = o2)))) and ({
-  us_split_discrs1 = { rec__test__rec__x = o6 }; us_split_fields1 = {
-  rec__test__rec__y = o7 } } = { us_split_discrs1 = { rec__test__rec__x = o4
-  }; us_split_fields1 = { rec__test__rec__y = o5 } })) and ({
-  us_split_discrs1 = { rec__test__rec__x = o8 }; us_split_fields1 = {
-  rec__test__rec__y = o9 } } = { us_split_discrs1 = { rec__test__rec__x = o6
-  }; us_split_fields1 = { rec__test__rec__y = o7 } })) and ({
-  us_split_discrs1 = { rec__test__rec__x = o10 }; us_split_fields1 = {
-  rec__test__rec__y = o11 } } = { us_split_discrs1 = { rec__test__rec__x = o8
-  }; us_split_fields1 = { rec__test__rec__y = o9 } })) and
-  (o12 = test__w__aggregate_def({ us_split_discrs1 = { rec__test__rec__x =
-  o10 }; us_split_fields1 = { rec__test__rec__y = o11 } }))) and
-  ((result2 = w) and (w1 = o12))) ->
-  ((forall temp___277:int. (((1 <= temp___277) and (temp___277 <= 3)) ->
-   (10 = to_rep((((w1[temp___277])).us_split_discrs1).rec__test__rec__x)))) ->
-  (((result3 = z) and (z1 = convert1(w1))) ->
-  ((forall temp___289:int. (((1 <= temp___289) and (temp___289 <= 3)) ->
-   (10 = to_rep((((z1[temp___289])).us_split_discrs1).rec__test__rec__x)))) ->
-  (((result4 = test_array) and
-  (test_array1 = test__test_array__aggregate_def(1, 2, 3))) ->
-  ((forall i:int. (((1 <= i) and (i <= 3)) ->
-   (forall j:int. (((1 <= j) and (j <= 100)) -> (to_rep1(((y1[i])[j])) = 1))))) ->
-  ((forall i:int. (((1 <= i) and (i <= 3)) ->
-   (to_rep((((z1[i])).us_split_fields1).rec__test__rec__y) = 1))) ->
-  (((result5 = result_array) and (result_array1 = convert2(test_array1))) ->
-  (to_rep2((result_array1[1])) = 2))))))))))))))
+goal WP_parameter_def : (to_rep2((result_array1[1])) = 2)

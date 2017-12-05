@@ -86,6 +86,7 @@
 (declare-const o11 integer)
 (declare-const temp___154 integer)
 (declare-const temp___1541 integer)
+(declare-const o12 Int)
 (declare-const result Bool)
 (declare-const result1 integer)
 (declare-const result2 integer)

@@ -580,16 +580,52 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom null_node__def_axiom : ((null_node = of_rep1(0)) and
   (null_node1 = false))
 
+logic o : node_enum
+
+logic o1 : node_enum
+
+logic usq_ : node_enum
+
+logic usq_1 : bool
+
+logic o2 : node_enum
+
+logic o3 : bool
+
+logic o4 : node_enum
+
+logic o5 : bool
+
+logic main__null_node__assume : node_enum
+
+logic main__null_node__assume1 : bool
+
+logic us : int
+
+axiom H : (to_rep1(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (usq_ = o1)
+
+axiom H3 : (true = usq_1)
+
+axiom H4 : (usq_ = o2)
+
+axiom H5 : (false = o3)
+
+axiom H6 : (o4 = o2)
+
+axiom H7 : (o5 = o3)
+
+axiom H8 : (main__null_node__assume = o4)
+
+axiom H9 : (main__null_node__assume1 = o5)
+
+axiom H10 : ((main__null_node__assume = null_node) and
+  (main__null_node__assume1 = null_node1))
+
+axiom H11 : (null_node1 = false)
+
  (* File "main.adb", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:node_enum. forall o1:node_enum. forall usq_:node_enum.
-  forall usq_1:bool. forall o2:node_enum. forall o3:bool.
-  forall o4:node_enum. forall o5:bool.
-  forall main__null_node__assume:node_enum.
-  forall main__null_node__assume1:bool. ((((((((to_rep1(o) = 0) and
-  (o = o1)) and ((usq_ = o1) and (true = usq_1))) and ((usq_ = o2) and
-  (false = o3))) and ((o4 = o2) and (o5 = o3))) and
-  ((main__null_node__assume = o4) and (main__null_node__assume1 = o5))) and
-  ((main__null_node__assume = null_node) and
-  (main__null_node__assume1 = null_node1))) -> ((null_node1 = false) ->
-  in_range(7))))
+goal WP_parameter_def : in_range(7)

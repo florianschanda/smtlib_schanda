@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -188,10 +188,19 @@ axiom one__def_axiom : (one = id(1))
 
 axiom first__def_axiom : (first = one)
 
+logic o : int
+
+logic check_default_value__p__one__assume : int
+
+axiom H : ((o = id(1)) and (in_range1(o) and (o = 1)))
+
+axiom H1 : ((check_default_value__p__one__assume = o) and in_range(o))
+
+axiom H2 : (check_default_value__p__one__assume = one)
+
+axiom H3 : in_range(one)
+
+axiom H4 : (one <= 2147483647)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall check_default_value__p__one__assume:int.
-  (((((o = id(1)) and (in_range1(o) and (o = 1))) and
-  ((check_default_value__p__one__assume = o) and in_range(o))) and
-  (check_default_value__p__one__assume = one)) -> (in_range(one) ->
-  ((one <= 2147483647) -> (0 <= one)))))
+goal WP_parameter_def : (0 <= one)

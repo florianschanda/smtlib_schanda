@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -543,61 +543,344 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count_bs:int. forall i:int. forall ti:int. forall i1:int.
-  forall temp___154:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall escape__backslash_escape__B_2__len__assume:int.
-  forall o4:character. forall o5:int. forall o6:(int,character) farray.
-  forall o7:int. forall o8:character. forall o9:int.
-  forall o10:(int,character) farray. forall result:int. forall count_bs1:int.
-  forall result1:int. forall i2:int. forall count_bs2:int. forall i3:int.
-  forall result2:int. forall count_bs3:int. forall count_bs4:int.
-  forall i4:int. forall count_bs5:int. forall i5:int. forall count_bs6:int.
-  forall i6:int. forall count_bs7:int. forall i7:int. forall result3:int.
-  forall ti1:int. forall result4:int. forall i8:int.
-  forall result__:(int,character) farray. forall ti2:int. forall i9:int.
-  forall result5:(int,character) farray.
-  forall result__1:(int,character) farray. forall result6:int.
-  forall ti3:int. forall result7:(int,character) farray.
-  forall result__2:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(s1)), to_rep1(last(s1))) -> ((({ int__content = result } = {
-  int__content = count_bs }) and (count_bs1 = 0)) -> (in_range4(count_bs1) ->
-  (((({ int__content = result1 } = { int__content = i }) and
-  (i2 = to_rep1(first(s1)))) and ((((to_rep1(first(s1)) <= i2) and
-  (i2 <= to_rep1(last(s1)))) and ((((temp___154 = count_bs1) and
-  ((((0 <= 2147483647) -> in_range4(count_bs2)) and
-  ((to_rep1(first(s1)) <= i3) and (i3 <= to_rep1(last(s1))))) and
-  ((((to_rep((s[i3])) = 92) and (((o = (count_bs2 + 1)) and
-  in_range1((count_bs2 + 1))) and ((count_bs2 = result2) and
-  (count_bs3 = o)))) or ((not (to_rep((s[i3])) = 92)) and
-  (count_bs3 = count_bs2))) and (i3 = to_rep1(last(s1)))))) and
-  (((i3 = i4) and (count_bs3 = count_bs4)) and ((i5 = i3) and
-  (count_bs5 = count_bs3)))) and ((({ int__content = i6 } = { int__content =
-  i4 }) and ({ int__content = count_bs6 } = { int__content = count_bs4
-  })) and ((i7 = i5) and (count_bs7 = count_bs5))))) or
-  ((not ((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1))))) and
-  (((i2 = i6) and (count_bs1 = count_bs6)) and ((i7 = i2) and
-  (count_bs7 = count_bs1)))))) -> (((((((o1 = length({ elts = s; rt = s1
-  })) and in_range1(length({ elts = s; rt = s1 }))) and
-  (o2 = (o1 + count_bs6))) and ((o3 = o2) and in_range1(o2))) and
-  ((escape__backslash_escape__B_2__len__assume = o3) and in_range4(o3))) and
-  (escape__backslash_escape__B_2__len__assume = len)) -> (in_range4(len) ->
-  ((dynamic_property2(1, len, to_rep1(result____first),
+logic count_bs : int
+
+logic i : int
+
+logic result__ : (int,character) farray
+
+logic ti : int
+
+logic i1 : int
+
+logic escape__backslash_escape__result : (int,character) farray
+
+logic escape__backslash_escape__result1 : t
+
+logic temp___154 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic escape__backslash_escape__B_2__len__assume : int
+
+logic temp___160 : int
+
+logic temp___158 : (int,character) farray
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : (int,character) farray
+
+logic o7 : int
+
+logic o8 : character
+
+logic o9 : int
+
+logic o10 : (int,character) farray
+
+logic o11 : int
+
+logic result__1 : (int,character) farray
+
+logic result : int
+
+logic count_bs1 : int
+
+logic result1 : int
+
+logic i2 : int
+
+logic count_bs2 : int
+
+logic i3 : int
+
+logic result2 : int
+
+logic count_bs3 : int
+
+logic count_bs4 : int
+
+logic i4 : int
+
+logic count_bs5 : int
+
+logic i5 : int
+
+logic count_bs6 : int
+
+logic i6 : int
+
+logic count_bs7 : int
+
+logic i7 : int
+
+logic result3 : int
+
+logic ti1 : int
+
+logic result4 : int
+
+logic i8 : int
+
+logic result__2 : (int,character) farray
+
+logic ti2 : int
+
+logic i9 : int
+
+logic result5 : (int,character) farray
+
+logic result__3 : (int,character) farray
+
+logic result6 : int
+
+logic ti3 : int
+
+logic result7 : (int,character) farray
+
+logic result__4 : (int,character) farray
+
+logic result8 : int
+
+logic ti4 : int
+
+logic result__5 : (int,character) farray
+
+logic ti5 : int
+
+logic result__6 : (int,character) farray
+
+logic ti6 : int
+
+logic result__7 : (int,character) farray
+
+logic ti7 : int
+
+logic i10 : int
+
+logic result__8 : (int,character) farray
+
+logic ti8 : int
+
+logic i11 : int
+
+logic result__9 : (int,character) farray
+
+logic ti9 : int
+
+logic i12 : int
+
+logic result__10 : (int,character) farray
+
+logic ti10 : int
+
+logic i13 : int
+
+logic result9 : (int,character) farray
+
+logic result10 : t
+
+logic escape__backslash_escape__result2 : (int,character) farray
+
+logic escape__backslash_escape__result3 : t
+
+logic result__11 : (int,character) farray
+
+logic ti11 : int
+
+logic i14 : int
+
+logic escape__backslash_escape__result4 : (int,character) farray
+
+logic escape__backslash_escape__result5 : t
+
+logic result__12 : (int,character) farray
+
+logic ti12 : int
+
+logic i15 : int
+
+logic escape__backslash_escape__result6 : (int,character) farray
+
+logic escape__backslash_escape__result7 : t
+
+logic count_bs8 : int
+
+logic i16 : int
+
+logic result__13 : (int,character) farray
+
+logic ti13 : int
+
+logic i17 : int
+
+logic escape__backslash_escape__result8 : (int,character) farray
+
+logic escape__backslash_escape__result9 : t
+
+logic count_bs9 : int
+
+logic i18 : int
+
+logic result__14 : (int,character) farray
+
+logic ti14 : int
+
+logic i19 : int
+
+logic escape__backslash_escape__result10 : (int,character) farray
+
+logic escape__backslash_escape__result11 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : (result = count_bs)
+
+axiom H2 : (count_bs1 = 0)
+
+axiom H3 : in_range4(count_bs1)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i2 = to_rep1(first(s1)))
+
+axiom H6 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (temp___154 = count_bs1))
+
+axiom H7 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (((0 <= 2147483647) -> in_range4(count_bs2)) and
+  ((to_rep1(first(s1)) <= i3) and (i3 <= to_rep1(last(s1))))))
+
+axiom H8 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  ((to_rep((s[i3])) = 92) -> ((o = (count_bs2 + 1)) and
+  in_range1((count_bs2 + 1)))))
+
+axiom H9 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  ((to_rep((s[i3])) = 92) -> (count_bs2 = result2)))
+
+axiom H10 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  ((to_rep((s[i3])) = 92) -> (count_bs3 = o)))
+
+axiom H11 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  ((not (to_rep((s[i3])) = 92)) -> (count_bs3 = count_bs2)))
+
+axiom H12 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (i3 = to_rep1(last(s1))))
+
+axiom H13 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (i3 = i4))
+
+axiom H14 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (count_bs3 = count_bs4))
+
+axiom H15 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (i5 = i3))
+
+axiom H16 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (count_bs5 = count_bs3))
+
+axiom H17 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (i6 = i4))
+
+axiom H18 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (count_bs6 = count_bs4))
+
+axiom H19 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (i7 = i5))
+
+axiom H20 : (((to_rep1(first(s1)) <= i2) and (i2 <= to_rep1(last(s1)))) ->
+  (count_bs7 = count_bs5))
+
+axiom H21 : ((not ((to_rep1(first(s1)) <= i2) and
+  (i2 <= to_rep1(last(s1))))) -> (i2 = i6))
+
+axiom H22 : ((not ((to_rep1(first(s1)) <= i2) and
+  (i2 <= to_rep1(last(s1))))) -> (count_bs1 = count_bs6))
+
+axiom H23 : ((not ((to_rep1(first(s1)) <= i2) and
+  (i2 <= to_rep1(last(s1))))) -> (i7 = i2))
+
+axiom H24 : ((not ((to_rep1(first(s1)) <= i2) and
+  (i2 <= to_rep1(last(s1))))) -> (count_bs7 = count_bs1))
+
+axiom H25 : ((o1 = length({ elts = s; rt = s1 })) and in_range1(length({
+  elts = s; rt = s1 })))
+
+axiom H26 : (o2 = (o1 + count_bs6))
+
+axiom H27 : ((o3 = o2) and in_range1(o2))
+
+axiom H28 : ((escape__backslash_escape__B_2__len__assume = o3) and
+  in_range4(o3))
+
+axiom H29 : (escape__backslash_escape__B_2__len__assume = len)
+
+axiom H30 : in_range4(len)
+
+axiom H31 : (dynamic_property2(1, len, to_rep1(result____first),
   to_rep1(result____last)) and ((to_rep1(result____first) = 1) and
-  (to_rep1(result____last) = len))) -> ((({ int__content = result3 } = {
-  int__content = ti }) and (ti1 = 1)) -> (in_range2(ti1) -> ((({
-  int__content = result4 } = { int__content = i1 }) and
-  (i8 = to_rep1(first(s1)))) -> (((to_rep1(first(s1)) <= i8) and
-  (i8 <= to_rep1(last(s1)))) -> ((((1 <= 2147483647) -> in_range2(ti2)) and
-  ((to_rep1(first(s1)) <= i9) and (i9 <= to_rep1(last(s1))))) ->
-  ((((to_rep(o4) = to_rep((s[i9]))) and
-  ((((to_rep1(result____first) <= ti2) and
-  (ti2 <= to_rep1(result____last))) and (o5 = ti2)) and
-  (o6 = (result__[o5 <- o4])))) and ((result__ = result5) and
-  (result__1 = o6))) -> ((((o7 = (ti2 + 1)) and in_range1((ti2 + 1))) and
-  ((ti2 = result6) and (ti3 = o7))) -> ((to_rep((s[i9])) = 92) ->
-  ((((to_rep(o8) = 92) and ((((to_rep1(result____first) <= ti3) and
-  (ti3 <= to_rep1(result____last))) and (o9 = ti3)) and
-  (o10 = (result__1[o9 <- o8])))) and ((result__1 = result7) and
-  (result__2 = o10))) -> in_range1((ti3 + 1)))))))))))))))))))
+  (to_rep1(result____last) = len)))
+
+axiom H32 : (result3 = ti)
+
+axiom H33 : (ti1 = 1)
+
+axiom H34 : in_range2(ti1)
+
+axiom H35 : (result4 = i1)
+
+axiom H36 : (i8 = to_rep1(first(s1)))
+
+axiom H37 : (to_rep1(first(s1)) <= i8)
+
+axiom H38 : (i8 <= to_rep1(last(s1)))
+
+axiom H39 : (((1 <= 2147483647) -> in_range2(ti2)) and
+  ((to_rep1(first(s1)) <= i9) and (i9 <= to_rep1(last(s1)))))
+
+axiom H40 : (to_rep(o4) = to_rep((s[i9])))
+
+axiom H41 : ((to_rep1(result____first) <= ti2) and
+  (ti2 <= to_rep1(result____last)))
+
+axiom H42 : (o5 = ti2)
+
+axiom H43 : (o6 = (result__2[o5 <- o4]))
+
+axiom H44 : (result__2 = result5)
+
+axiom H45 : (result__3 = o6)
+
+axiom H46 : ((o7 = (ti2 + 1)) and in_range1((ti2 + 1)))
+
+axiom H47 : (ti2 = result6)
+
+axiom H48 : (ti3 = o7)
+
+axiom H49 : (to_rep((s[i9])) = 92)
+
+axiom H50 : (to_rep(o8) = 92)
+
+axiom H51 : ((to_rep1(result____first) <= ti3) and
+  (ti3 <= to_rep1(result____last)))
+
+axiom H52 : (o9 = ti3)
+
+axiom H53 : (o10 = (result__3[o9 <- o8]))
+
+axiom H54 : (result__3 = result7)
+
+axiom H55 : (result__4 = o10)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1((ti3 + 1))

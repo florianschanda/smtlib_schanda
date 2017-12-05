@@ -1193,18 +1193,81 @@ axiom length_bc__def_axiom : (length_bc = sqrt(NearestTiesToEven,
   c_x), sub(NearestTiesToEven, b_x, c_x)), mul(NearestTiesToEven,
   sub(NearestTiesToEven, b_y, c_y), sub(NearestTiesToEven, b_y, c_y)))))
 
+logic res : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic floating_point__angle_between__ba_dot_bc__assume : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic floating_point__angle_between__length_ba__assume : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic floating_point__angle_between__length_bc__assume : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic result : t
+
+logic res1 : t
+
+axiom H : in_range2(a_x)
+
+axiom H1 : in_range2(a_y)
+
+axiom H2 : in_range2(b_x)
+
+axiom H3 : in_range2(b_y)
+
+axiom H4 : in_range2(c_x)
+
+axiom H5 : in_range2(c_y)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
+axiom H6 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(res))
+
+axiom H7 : (sub(NearestTiesToEven, a_x, b_x) = vec_ba_x)
+
+axiom H8 : tqtisFinite(vec_ba_x)
+
+axiom H9 : (sub(NearestTiesToEven, a_y, b_y) = vec_ba_y)
+
+axiom H10 : tqtisFinite(vec_ba_y)
+
+axiom H11 : (sub(NearestTiesToEven, c_x, b_x) = vec_bc_x)
+
+axiom H12 : tqtisFinite(vec_bc_x)
+
+axiom H13 : (sub(NearestTiesToEven, c_y, b_y) = vec_bc_y)
+
+axiom H14 : tqtisFinite(vec_bc_y)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. (in_range2(a_x) -> (in_range2(a_y) -> (in_range2(b_x) ->
-  (in_range2(b_y) -> (in_range2(c_x) -> (in_range2(c_y) ->
-  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(res)) ->
-  ((sub(NearestTiesToEven, a_x, b_x) = vec_ba_x) -> (tqtisFinite(vec_ba_x) ->
-  ((sub(NearestTiesToEven, a_y, b_y) = vec_ba_y) -> (tqtisFinite(vec_ba_y) ->
-  ((sub(NearestTiesToEven, c_x, b_x) = vec_bc_x) -> (tqtisFinite(vec_bc_x) ->
-  ((sub(NearestTiesToEven, c_y, b_y) = vec_bc_y) -> (tqtisFinite(vec_bc_y) ->
-  tqtisFinite(mul(NearestTiesToEven, vec_ba_y, vec_bc_y))))))))))))))))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, vec_ba_y,
+  vec_bc_y))

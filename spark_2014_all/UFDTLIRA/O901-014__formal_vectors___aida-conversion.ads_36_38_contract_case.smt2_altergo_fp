@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -214,18 +214,43 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic target : int
+
+logic o : int
+
+logic result : int
+
+logic target1 : int
+
+logic target2 : int
+
+logic target3 : int
+
+axiom H : in_range2(source)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (is_digit(source) = true)
+
+axiom H3 : (result = target)
+
+axiom H4 : (target1 = (source - 48))
+
+axiom H5 : (target1 = target2)
+
+axiom H6 : (target3 = target1)
+
+axiom H7 : ((bool_eq(source, 48) = true) -> (target2 = 0))
+
+axiom H8 : ((bool_eq(source, 49) = true) -> (target2 = 1))
+
+axiom H9 : ((bool_eq(source, 50) = true) -> (target2 = 2))
+
+axiom H10 : ((bool_eq(source, 51) = true) -> (target2 = 3))
+
+axiom H11 : ((bool_eq(source, 52) = true) -> (target2 = 4))
+
+axiom H12 : (bool_eq(source, 53) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall result:int. forall target1:int.
-  forall target2:int. forall target3:int. (in_range2(source) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) ->
-  ((is_digit(source) = true) -> (((({ int__content = result } = {
-  int__content = target }) and (target1 = (source - 48))) and
-  ((target1 = target2) and (target3 = target1))) -> ((((bool_eq(source,
-  48) = true) and (target2 = 0)) or (not (bool_eq(source, 48) = true))) ->
-  ((((bool_eq(source, 49) = true) and (target2 = 1)) or (not (bool_eq(source,
-  49) = true))) -> ((((bool_eq(source, 50) = true) and (target2 = 2)) or
-  (not (bool_eq(source, 50) = true))) -> ((((bool_eq(source, 51) = true) and
-  (target2 = 3)) or (not (bool_eq(source, 51) = true))) ->
-  ((((bool_eq(source, 52) = true) and (target2 = 4)) or (not (bool_eq(source,
-  52) = true))) -> ((bool_eq(source, 53) = true) -> (target2 = 5))))))))))))
+goal WP_parameter_def : (target2 = 5)

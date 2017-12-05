@@ -258,6 +258,7 @@
 (assert (forall ((container us_rep1)) (forall ((position Int)) (! (=> (and (dynamic_invariant4 position true true true) (and (<= 1 position) (<= position (last container)))) (dynamic_invariant5 (get container position) true false true)) :pattern ((get container position))))))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (length right)) (and (in_range1 o) (<= o (to_rep1 (rec__my_sets__m__set__capacity (us_split_discrs1 right)))))))
 (assert (= o1 (- 2147483647 o)))
 (assert (not (in_range o1)))

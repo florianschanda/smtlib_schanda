@@ -491,5 +491,69 @@ axiom def_axiom :
   (forall temp___233:int.
   ((for_loop_iterable__p1__a__aggregate_def(temp___232)[temp___233]) = of_rep(temp___232))))
 
+logic a : (int,natural) farray
+
+logic e : int
+
+logic temp___238 : (int,natural) farray
+
+logic o : int
+
+logic temp___239 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : int
+
+logic e1 : int
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : bool
+
+logic result2 : int
+
+logic e2 : int
+
+logic result3 : bool
+
+logic a2 : (int,natural) farray
+
+logic e3 : int
+
+logic temp___2391 : int
+
+logic result4 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic result5 : bool
+
+logic result6 : int
+
+logic temp___2392 : int
+
+logic result7 : bool
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = for_loop_iterable__p1__a__aggregate_def(0))
+
+axiom H2 : (({ us_split_fields1 = {
+  rec__declare_iterable__container__content = temp___238 }
+  } = from_nat_array(a1)) and (a1 = temp___238))
+
  (* File "for_loop_iterable.adb", line 3, characters 0-0 *)
 goal WP_parameter_def : true

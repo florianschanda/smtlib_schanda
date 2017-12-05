@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -470,132 +470,276 @@ axiom c__def_axiom : (c = (last2 - 1))
 
 axiom last__def_axiom2 : (last4 = c)
 
+logic i : int
+
+logic e : int
+
+logic dynamic_ranges__search_0__nested__result : int
+
+logic o : int
+
+logic temp___263 : int
+
+logic temp___264 : int
+
+logic temp___262 : int
+
+logic temp___261 : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic us : int
+
+logic o4 : int
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic us1 : int
+
+logic o8 : int
+
+logic us2 : int
+
+logic o9 : int
+
+logic i1 : int
+
+logic e1 : int
+
+logic dynamic_ranges__search_0__nested__result1 : int
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic e2 : int
+
+logic result2 : int
+
+logic dynamic_ranges__search_0__nested__result2 : int
+
+logic i3 : int
+
+logic e3 : int
+
+logic dynamic_ranges__search_0__nested__result3 : int
+
+logic result3 : int
+
+logic i4 : int
+
+logic result4 : int
+
+logic e4 : int
+
+logic result5 : int
+
+logic dynamic_ranges__search_0__nested__result4 : int
+
+logic i5 : int
+
+logic e5 : int
+
+logic dynamic_ranges__search_0__nested__result5 : int
+
+logic i6 : int
+
+logic e6 : int
+
+logic dynamic_ranges__search_0__nested__result6 : int
+
+logic i7 : int
+
+logic e7 : int
+
+logic dynamic_ranges__search_0__nested__result7 : int
+
+logic i8 : int
+
+logic e8 : int
+
+logic dynamic_ranges__search_0__nested__result8 : int
+
+logic i9 : int
+
+logic e9 : int
+
+logic dynamic_ranges__search_0__nested__result9 : int
+
+logic i10 : int
+
+logic e10 : int
+
+logic dynamic_ranges__search_0__nested__result10 : int
+
+logic i11 : int
+
+logic e11 : int
+
+logic dynamic_ranges__search_0__nested__result11 : int
+
+logic i12 : int
+
+logic e12 : int
+
+logic dynamic_ranges__search_0__nested__result12 : int
+
+logic result6 : int
+
+logic dynamic_ranges__search_0__nested__result13 : int
+
+logic dynamic_ranges__search_0__nested__result14 : int
+
+logic dynamic_ranges__search_0__nested__result15 : int
+
+logic i13 : int
+
+logic e13 : int
+
+logic dynamic_ranges__search_0__nested__result16 : int
+
+logic i14 : int
+
+logic e14 : int
+
+logic dynamic_ranges__search_0__nested__result17 : int
+
+logic i15 : int
+
+logic e15 : int
+
+logic dynamic_ranges__search_0__nested__result18 : int
+
+logic i16 : int
+
+logic e16 : int
+
+logic dynamic_ranges__search_0__nested__result19 : int
+
+logic result7 : bool
+
+axiom H : dynamic_property1(0, last2, c)
+
+axiom H1 : ((last2 - 1) = c)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H3 : ((c <= to_rep(last(a1))) and
+  ((to_rep(first(a1)) <= to_rep(last(a1))) and
+  (2 <= (to_rep(last(a1)) - to_rep(first(a1))))))
+
+axiom H4 :
+  (((((dynamic_ranges__search_0__nested__result16 = dynamic_ranges__search_0__nested__result7) and
+  ((e13 = e7) and (i13 = i7))) and
+  ((dynamic_ranges__search_0__nested__result17 = dynamic_ranges__search_0__nested__result8) and
+  ((e14 = e8) and (i14 = i8)))) and ((temp___263 = to_rep(first(a1))) and
+  ((temp___264 = last4) and (((result = i) and (i2 = temp___263)) and
+  (((temp___263 <= i2) and (i2 <= temp___264)) and ((temp___262 = e) and
+  ((temp___261 = i2) and ((((((((to_rep(first(a1)) <= i2) and
+  (i2 <= to_rep(last(a1)))) and (o1 = i2)) and (o2 = (a[o1]))) and
+  (o3 = to_rep(o2))) and ((result1 = e) and (e2 = o3))) and
+  in_range1(e2)) and
+  (((((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result7) and
+  ((e2 = e7) and (i2 = i7))) and
+  ((dynamic_ranges__search_0__nested__result8 = dynamic_ranges__search_0__nested__result2) and
+  ((e8 = e2) and (i8 = i2)))) and ((e2 = 0) and ((((us = i2) and
+  dynamic_property3(0, last4, i2)) and (o4 = i2)) and
+  ((result2 = dynamic_ranges__search_0__nested__result) and
+  (dynamic_ranges__search_0__nested__result2 = o4))))) or
+  (((not (e2 = 0)) and
+  ((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result) and
+  (dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result1))) and
+  ((((dynamic_ranges__search_0__nested__result4 = dynamic_ranges__search_0__nested__result7) and
+  ((e4 = e7) and (i4 = i7))) and
+  ((dynamic_ranges__search_0__nested__result8 = dynamic_ranges__search_0__nested__result4) and
+  ((e8 = e4) and (i8 = i4)))) and
+  ((forall j1:int. (((to_rep(first(a1)) <= j1) and (j1 <= i3)) ->
+   (not (to_rep((a[j1])) = 0)))) and (((((to_rep(first(a1)) <= last4) ->
+  dynamic_property4(to_rep(first(a1)), last4, i3)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(e3))) and
+  ((to_rep(first(a1)) <= i3) and (i3 <= last4))) and
+  ((not (i3 = temp___264)) and (((i3 = result3) and (i4 = (i3 + 1))) and
+  ((((((((to_rep(first(a1)) <= i4) and (i4 <= to_rep(last(a1)))) and
+  (o5 = i4)) and (o6 = (a[o5]))) and (o7 = to_rep(o6))) and
+  ((e3 = result4) and (e4 = o7))) and in_range1(e4)) and ((e4 = 0) and
+  ((((us1 = i4) and dynamic_property3(0, last4, i4)) and (o8 = i4)) and
+  ((dynamic_ranges__search_0__nested__result3 = result5) and
+  (dynamic_ranges__search_0__nested__result4 = o8)))))))))))))))))))) or
+  ((((result = i) and (i2 = to_rep(first(a1)))) and
+  ((((to_rep(first(a1)) <= i2) and (i2 <= last4)) -> ((((temp___262 = e) and
+  ((temp___261 = i2) and ((((((((to_rep(first(a1)) <= i2) and
+  (i2 <= to_rep(last(a1)))) and (o1 = i2)) and (o2 = (a[o1]))) and
+  (o3 = to_rep(o2))) and ((result1 = e) and (e2 = o3))) and
+  in_range1(e2)) and (((not (e2 = 0)) and
+  ((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result) and
+  (dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result1))) and
+  ((forall j1:int. (((to_rep(first(a1)) <= j1) and (j1 <= i3)) ->
+   (not (to_rep((a[j1])) = 0)))) and (((((to_rep(first(a1)) <= last4) ->
+  dynamic_property4(to_rep(first(a1)), last4, i3)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(e3))) and
+  ((to_rep(first(a1)) <= i3) and (i3 <= last4))) and (i3 = last4))))))) and
+  (((dynamic_ranges__search_0__nested__result3 = dynamic_ranges__search_0__nested__result9) and
+  ((e3 = e9) and (i3 = i9))) and
+  ((dynamic_ranges__search_0__nested__result10 = dynamic_ranges__search_0__nested__result3) and
+  ((e10 = e3) and (i10 = i3))))) and
+  (((dynamic_ranges__search_0__nested__result11 = dynamic_ranges__search_0__nested__result9) and
+  ((e11 = e9) and (i11 = i9))) and
+  ((dynamic_ranges__search_0__nested__result12 = dynamic_ranges__search_0__nested__result10) and
+  ((e12 = e10) and (i12 = i10)))))) and ((not ((to_rep(first(a1)) <= i2) and
+  (i2 <= last4))) ->
+  (((dynamic_ranges__search_0__nested__result11 = dynamic_ranges__search_0__nested__result) and
+  ((e11 = e) and (i2 = i11))) and
+  ((dynamic_ranges__search_0__nested__result12 = dynamic_ranges__search_0__nested__result1) and
+  ((e12 = e1) and (i12 = i2))))))) and
+  ((((dynamic_ranges__search_0__nested__result16 = dynamic_ranges__search_0__nested__result14) and
+  ((e13 = e11) and (i13 = i11))) and
+  ((dynamic_ranges__search_0__nested__result17 = dynamic_ranges__search_0__nested__result15) and
+  ((e14 = e12) and (i14 = i12)))) and
+  (((dynamic_ranges__search_0__nested__result14 = dynamic_ranges__search_0__nested__result13) and
+  (dynamic_ranges__search_0__nested__result15 = dynamic_ranges__search_0__nested__result13)) and
+  ((((us2 = 0) and dynamic_property3(0, last4, 0)) and (o9 = 0)) and
+  ((result6 = dynamic_ranges__search_0__nested__result11) and
+  (dynamic_ranges__search_0__nested__result13 = o9)))))))
+
+axiom H5 :
+  (dynamic_ranges__search_0__nested__result18 = dynamic_ranges__search_0__nested__result16)
+
+axiom H6 : (e15 = e13)
+
+axiom H7 : (i15 = i13)
+
+axiom H8 :
+  (dynamic_ranges__search_0__nested__result19 = dynamic_ranges__search_0__nested__result17)
+
+axiom H9 : (e16 = e14)
+
+axiom H10 : (i16 = i14)
+
+axiom H11 : ((dynamic_ranges__search_0__nested__result18 = 0) ->
+  ((result7 = true) <->
+  (forall i17:int. (((to_rep(first(a1)) <= i17) and (i17 <= c)) ->
+  (not (to_rep((a[i17])) = 0))))))
+
+axiom H12 : ((not (dynamic_ranges__search_0__nested__result18 = 0)) ->
+  (result7 = false))
+
+axiom H13 : (not (result7 = true))
+
+axiom H14 : (to_rep(first(a1)) <= dynamic_ranges__search_0__nested__result18)
+
  (* File "dynamic_ranges.adb", line 26, characters 0-0 *)
 goal WP_parameter_def :
-  (forall i:int. forall e:int.
-  forall dynamic_ranges__search_0__nested__result:int. forall temp___263:int.
-  forall temp___264:int. forall temp___262:int. forall temp___261:int.
-  forall o:int. forall o1:integer. forall o2:int. forall us:int.
-  forall o3:int. forall o4:int. forall o5:integer. forall o6:int.
-  forall us1:int. forall o7:int. forall us2:int. forall o8:int.
-  forall e1:int. forall dynamic_ranges__search_0__nested__result1:int.
-  forall result:int. forall i1:int. forall result1:int. forall e2:int.
-  forall result2:int. forall dynamic_ranges__search_0__nested__result2:int.
-  forall i2:int. forall e3:int.
-  forall dynamic_ranges__search_0__nested__result3:int. forall result3:int.
-  forall i3:int. forall result4:int. forall e4:int. forall result5:int.
-  forall dynamic_ranges__search_0__nested__result4:int. forall i4:int.
-  forall e5:int. forall dynamic_ranges__search_0__nested__result5:int.
-  forall i5:int. forall e6:int.
-  forall dynamic_ranges__search_0__nested__result6:int. forall i6:int.
-  forall e7:int. forall dynamic_ranges__search_0__nested__result7:int.
-  forall i7:int. forall e8:int.
-  forall dynamic_ranges__search_0__nested__result8:int. forall i8:int.
-  forall e9:int. forall dynamic_ranges__search_0__nested__result9:int.
-  forall i9:int. forall e10:int.
-  forall dynamic_ranges__search_0__nested__result10:int. forall result6:int.
-  forall dynamic_ranges__search_0__nested__result11:int.
-  forall dynamic_ranges__search_0__nested__result12:int.
-  forall dynamic_ranges__search_0__nested__result13:int. forall i10:int.
-  forall e11:int. forall dynamic_ranges__search_0__nested__result14:int.
-  forall i11:int. forall e12:int.
-  forall dynamic_ranges__search_0__nested__result15:int. forall i12:int.
-  forall e13:int. forall dynamic_ranges__search_0__nested__result16:int.
-  forall i13:int. forall e14:int.
-  forall dynamic_ranges__search_0__nested__result17:int. forall result7:bool.
-  (dynamic_property1(0, last2, c) -> (((last2 - 1) = c) ->
-  (dynamic_property(1, 2147483647, to_rep(first(a1)), to_rep(last(a1))) ->
-  (((c <= to_rep(last(a1))) and ((to_rep(first(a1)) <= to_rep(last(a1))) and
-  (2 <= (to_rep(last(a1)) - to_rep(first(a1)))))) -> ((((((({ int__content =
-  dynamic_ranges__search_0__nested__result14 } = { int__content =
-  dynamic_ranges__search_0__nested__result5 }) and (({ int__content = e11
-  } = { int__content = e5 }) and ({ int__content = i10 } = { int__content =
-  i4 }))) and
-  ((dynamic_ranges__search_0__nested__result15 = dynamic_ranges__search_0__nested__result6) and
-  ((e12 = e6) and (i11 = i5)))) and ((temp___263 = to_rep(first(a1))) and
-  ((temp___264 = last4) and ((({ int__content = result } = { int__content = i
-  }) and (i1 = temp___263)) and (((temp___263 <= i1) and
-  (i1 <= temp___264)) and ((temp___262 = e) and ((temp___261 = i1) and
-  ((((((((to_rep(first(a1)) <= i1) and (i1 <= to_rep(last(a1)))) and
-  (o = i1)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and (({ int__content =
-  result1 } = { int__content = e }) and (e2 = o2))) and in_range1(e2)) and
-  (((((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result5) and
-  ((e2 = e5) and (i1 = i4))) and
-  ((dynamic_ranges__search_0__nested__result6 = dynamic_ranges__search_0__nested__result2) and
-  ((e6 = e2) and (i5 = i1)))) and ((e2 = 0) and ((((us = i1) and
-  dynamic_property3(0, last4, i1)) and (o3 = i1)) and (({ int__content =
-  result2 } = { int__content = dynamic_ranges__search_0__nested__result
-  }) and (dynamic_ranges__search_0__nested__result2 = o3))))) or
-  (((not (e2 = 0)) and
-  ((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result) and
-  (dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result1))) and
-  ((((dynamic_ranges__search_0__nested__result4 = dynamic_ranges__search_0__nested__result5) and
-  ((e4 = e5) and (i3 = i4))) and
-  ((dynamic_ranges__search_0__nested__result6 = dynamic_ranges__search_0__nested__result4) and
-  ((e6 = e4) and (i5 = i3)))) and
-  ((forall j:int. (((to_rep(first(a1)) <= j) and (j <= i2)) ->
-   (not (to_rep((a[j])) = 0)))) and
-  (((((to_rep(first(a1)) <= last4) -> dynamic_property4(to_rep(first(a1)),
-  last4, i2)) and (((-2147483648) <= 2147483647) -> in_range1(e3))) and
-  ((to_rep(first(a1)) <= i2) and (i2 <= last4))) and
-  ((not (i2 = temp___264)) and (((i2 = result3) and (i3 = (i2 + 1))) and
-  ((((((((to_rep(first(a1)) <= i3) and (i3 <= to_rep(last(a1)))) and
-  (o4 = i3)) and (o5 = (a[o4]))) and (o6 = to_rep(o5))) and
-  ((e3 = result4) and (e4 = o6))) and in_range1(e4)) and ((e4 = 0) and
-  ((((us1 = i3) and dynamic_property3(0, last4, i3)) and (o7 = i3)) and
-  ((dynamic_ranges__search_0__nested__result3 = result5) and
-  (dynamic_ranges__search_0__nested__result4 = o7)))))))))))))))))))) or
-  (((({ int__content = result } = { int__content = i }) and
-  (i1 = to_rep(first(a1)))) and ((((to_rep(first(a1)) <= i1) and
-  (i1 <= last4)) and ((((temp___262 = e) and ((temp___261 = i1) and
-  ((((((((to_rep(first(a1)) <= i1) and (i1 <= to_rep(last(a1)))) and
-  (o = i1)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and (({ int__content =
-  result1 } = { int__content = e }) and (e2 = o2))) and in_range1(e2)) and
-  (((not (e2 = 0)) and
-  ((dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result) and
-  (dynamic_ranges__search_0__nested__result2 = dynamic_ranges__search_0__nested__result1))) and
-  ((forall j:int. (((to_rep(first(a1)) <= j) and (j <= i2)) ->
-   (not (to_rep((a[j])) = 0)))) and
-  (((((to_rep(first(a1)) <= last4) -> dynamic_property4(to_rep(first(a1)),
-  last4, i2)) and (((-2147483648) <= 2147483647) -> in_range1(e3))) and
-  ((to_rep(first(a1)) <= i2) and (i2 <= last4))) and (i2 = last4))))))) and
-  (((dynamic_ranges__search_0__nested__result3 = dynamic_ranges__search_0__nested__result7) and
-  ((e3 = e7) and (i2 = i6))) and
-  ((dynamic_ranges__search_0__nested__result8 = dynamic_ranges__search_0__nested__result3) and
-  ((e8 = e3) and (i7 = i2))))) and ((({ int__content =
-  dynamic_ranges__search_0__nested__result9 } = { int__content =
-  dynamic_ranges__search_0__nested__result7 }) and (({ int__content = e9
-  } = { int__content = e7 }) and ({ int__content = i8 } = { int__content = i6
-  }))) and
-  ((dynamic_ranges__search_0__nested__result10 = dynamic_ranges__search_0__nested__result8) and
-  ((e10 = e8) and (i9 = i7)))))) or ((not ((to_rep(first(a1)) <= i1) and
-  (i1 <= last4))) and ((({ int__content =
-  dynamic_ranges__search_0__nested__result9 } = { int__content =
-  dynamic_ranges__search_0__nested__result }) and (({ int__content = e9 } = {
-  int__content = e }) and (i1 = i8))) and
-  ((dynamic_ranges__search_0__nested__result10 = dynamic_ranges__search_0__nested__result1) and
-  ((e10 = e1) and (i9 = i1))))))) and (((({ int__content =
-  dynamic_ranges__search_0__nested__result14 } = { int__content =
-  dynamic_ranges__search_0__nested__result12 }) and (({ int__content = e11
-  } = { int__content = e9 }) and ({ int__content = i10 } = { int__content =
-  i8 }))) and
-  ((dynamic_ranges__search_0__nested__result15 = dynamic_ranges__search_0__nested__result13) and
-  ((e12 = e10) and (i11 = i9)))) and
-  (((dynamic_ranges__search_0__nested__result11 = dynamic_ranges__search_0__nested__result12) and
-  (dynamic_ranges__search_0__nested__result13 = dynamic_ranges__search_0__nested__result11)) and
-  ((((us2 = 0) and dynamic_property3(0, last4, 0)) and (o8 = 0)) and
-  ((result6 = dynamic_ranges__search_0__nested__result9) and
-  (dynamic_ranges__search_0__nested__result11 = o8))))))) and ((({
-  int__content = dynamic_ranges__search_0__nested__result16 } = {
-  int__content = dynamic_ranges__search_0__nested__result14 }) and
-  ((e13 = e11) and (i12 = i10))) and
-  ((dynamic_ranges__search_0__nested__result17 = dynamic_ranges__search_0__nested__result15) and
-  ((e14 = e12) and (i13 = i11))))) ->
-  ((((dynamic_ranges__search_0__nested__result16 = 0) and
-  ((result7 = true) <->
-  (forall i14:int. (((to_rep(first(a1)) <= i14) and (i14 <= c)) ->
-  (not (to_rep((a[i14])) = 0)))))) or
-  ((not (dynamic_ranges__search_0__nested__result16 = 0)) and
-  (result7 = false))) -> ((not (result7 = true)) ->
-  ((to_rep(first(a1)) <= dynamic_ranges__search_0__nested__result16) ->
-  (to_rep(first(a1)) <= dynamic_ranges__search_0__nested__result16))))))))))
+  (to_rep(first(a1)) <= dynamic_ranges__search_0__nested__result18)

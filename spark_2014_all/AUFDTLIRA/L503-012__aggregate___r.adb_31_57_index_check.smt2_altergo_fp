@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -511,10 +511,29 @@ axiom def_axiom1 :
   ((not (temp___282 = 2)) -> ((temp___278(temp___280,
   temp___281)[temp___282]) = of_rep(temp___281))))))
 
+logic a : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : (int,int5) farray
+
+logic o2 : (int,int5) farray
+
+logic temp___283 : (int,int5) farray
+
+axiom H : in_range1(n)
+
+axiom H1 : ((2 <= n) and (n <= 6))
+
+axiom H2 : ((1 <= n) and (n <= 5))
+
+axiom H3 : (o = n)
+
+axiom H4 : ({ us_split_fields1 = { rec__r__r__f = o1 } } = (a[o]))
+
+axiom H5 : (o1 = o2)
+
+axiom H6 : (temp___283 = o2)
+
  (* File "r.adb", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:int. forall o1:(int,int5) farray.
-  forall o2:(int,int5) farray. forall temp___283:(int,int5) farray.
-  (in_range1(n) -> (((2 <= n) and (n <= 6)) -> (((((((1 <= n) and
-  (n <= 5)) and (o = n)) and ({ us_split_fields1 = { rec__r__r__f = o1 }
-  } = (a[o]))) and (o1 = o2)) and (temp___283 = o2)) -> (2 <= n)))))
+goal WP_parameter_def : (2 <= n)

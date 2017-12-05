@@ -169,11 +169,24 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v : int
+
+logic o : bool
+
+logic result : bool
+
+axiom H : (in_range2(i7s) and ((2 <= i7s) and (i7s <= 2147483647)))
+
+axiom H1 : (in_range2(v) and ((2 <= v) and (v <= 2147483647)))
+
+axiom H2 : in_range1(x)
+
+axiom H3 : ((o = true) <-> ((2 <= x) and (x <= 2147483647)))
+
+axiom H4 : ((in_range2(x) -> (result = o)) and ((not in_range2(x)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
  (* File "tests.adb", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:int. forall o:bool. forall result:bool. ((in_range2(i7s) and
-  ((2 <= i7s) and (i7s <= 2147483647))) -> ((in_range2(v) and ((2 <= v) and
-  (v <= 2147483647))) -> (in_range1(x) -> ((((o = true) <-> ((2 <= x) and
-  (x <= 2147483647))) and ((in_range2(x) and (result = o)) or
-  ((not in_range2(x)) and (result = false)))) -> ((result = true) ->
-  (2 <= x)))))))
+goal WP_parameter_def : (2 <= x)

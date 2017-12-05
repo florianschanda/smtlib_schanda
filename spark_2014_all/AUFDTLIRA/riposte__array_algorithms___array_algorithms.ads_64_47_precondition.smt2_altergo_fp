@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type value_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type index_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type tindex_typeB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -455,50 +455,172 @@ function t9b__ref___projection(a2: t9b__ref) : tindex_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "array_algorithms.ads", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found:bool. forall location:int. forall i:int.
-  forall temp___201:bool. forall temp___200:int. forall temp___199:int.
-  forall result:bool. forall found1:bool. forall result1:int.
-  forall location1:int. forall result2:int. forall i1:int.
-  forall result3:bool. forall found2:bool. forall result4:int.
-  forall location2:int. forall found3:bool. forall location3:int.
-  forall i2:int. forall result5:int. forall i3:int. forall result6:bool.
-  forall found4:bool. forall result7:int. forall location4:int.
-  forall found5:bool. forall location5:int. forall i4:int.
-  forall found6:bool. forall location6:int. forall i5:int.
-  forall found7:bool. forall location7:int. forall i6:int.
-  forall found8:bool. forall location8:int. forall i7:int.
-  forall found9:bool. forall location9:int. forall i8:int.
-  forall found10:bool. forall location10:int. forall i9:int.
-  forall found11:bool. forall location11:int. forall i10:int.
-  forall found12:bool. forall location12:int. forall i11:int.
-  forall found13:bool. forall location13:int. forall i12:int.
-  forall found14:bool. forall location14:int. forall i13:int.
-  (dynamic_property((-2147483648), 2147483647, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range1(val__) ->
-  ((((-2147483648) <= 2147483647) -> in_range2(location)) -> ((((({
-  bool__content = result } = { bool__content = found }) and
-  (found1 = of_int(0))) and ((({ int__content = result1 } = { int__content =
-  location }) and (location1 = to_rep1(first(a1)))) and ((({ int__content =
-  result2 } = { int__content = i }) and (i1 = to_rep1(first(a1)))) and
-  ((((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) and
-  ((((temp___201 = found1) and ((temp___200 = i1) and
-  ((temp___199 = location1) and (((((i1 = i6) and
-  ((location2 = location7) and (found2 = found7))) and ((i7 = i1) and
-  ((location8 = location2) and (found8 = found2)))) and
+logic found : bool
+
+logic location : int
+
+logic i : int
+
+logic temp___201 : bool
+
+logic temp___200 : int
+
+logic temp___199 : int
+
+logic j : int
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic result : bool
+
+logic found1 : bool
+
+logic result1 : int
+
+logic location1 : int
+
+logic result2 : int
+
+logic i1 : int
+
+logic result3 : bool
+
+logic found2 : bool
+
+logic result4 : int
+
+logic location2 : int
+
+logic found3 : bool
+
+logic location3 : int
+
+logic i2 : int
+
+logic result5 : int
+
+logic i3 : int
+
+logic result6 : bool
+
+logic found4 : bool
+
+logic result7 : int
+
+logic location4 : int
+
+logic found5 : bool
+
+logic location5 : int
+
+logic i4 : int
+
+logic found6 : bool
+
+logic location6 : int
+
+logic i5 : int
+
+logic found7 : bool
+
+logic location7 : int
+
+logic i6 : int
+
+logic found8 : bool
+
+logic location8 : int
+
+logic i7 : int
+
+logic found9 : bool
+
+logic location9 : int
+
+logic i8 : int
+
+logic found10 : bool
+
+logic location10 : int
+
+logic i9 : int
+
+logic found11 : bool
+
+logic location11 : int
+
+logic i10 : int
+
+logic found12 : bool
+
+logic location12 : int
+
+logic i11 : int
+
+logic found13 : bool
+
+logic location13 : int
+
+logic i12 : int
+
+logic found14 : bool
+
+logic location14 : int
+
+logic i13 : int
+
+logic found15 : bool
+
+logic location15 : int
+
+logic i14 : int
+
+logic found16 : bool
+
+logic location16 : int
+
+logic i15 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range1(val__)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range2(location))
+
+axiom H3 : (result = found)
+
+axiom H4 : (found1 = of_int(0))
+
+axiom H5 : (result1 = location)
+
+axiom H6 : (location1 = to_rep1(first(a1)))
+
+axiom H7 : (result2 = i)
+
+axiom H8 : (i1 = to_rep1(first(a1)))
+
+axiom H9 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (((temp___201 = found1) and ((temp___200 = i1) and
+  ((temp___199 = location1) and (((((i1 = i8) and
+  ((location2 = location9) and (found2 = found9))) and ((i9 = i1) and
+  ((location10 = location2) and (found10 = found2)))) and
   ((to_rep((a[i1])) = val__) and (((found1 = result3) and
   (found2 = of_int(1))) and ((location1 = result4) and
   (location2 = i1))))) or (((not (to_rep((a[i1])) = val__)) and
-  ((location2 = location1) and (found2 = found1))) and (((({ int__content =
-  i6 } = { int__content = i4 }) and (({ int__content = location7 } = {
-  int__content = location5 }) and ({ bool__content = found7 } = {
-  bool__content = found5 }))) and ((i7 = i5) and ((location8 = location6) and
-  (found8 = found6)))) and
-  (((forall j:int. (((to_rep1(first(a1)) <= j) and (j <= i2)) ->
-    (not (to_rep((a[j])) = val__)))) and
-  (not (found3 = true))) and ((((((-2147483648) <= 2147483647) ->
-  in_range2(location3)) and ((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
+  ((location2 = location1) and (found2 = found1))) and ((((i8 = i4) and
+  ((location9 = location5) and (found9 = found5))) and ((i9 = i5) and
+  ((location10 = location6) and (found10 = found6)))) and
+  (((forall j1:int. (((to_rep1(first(a1)) <= j1) and (j1 <= i2)) ->
+    (not (to_rep((a[j1])) = val__)))) and (not (found3 = true))) and
+  ((((((- 2147483648) <= 2147483647) -> in_range2(location3)) and
+  ((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
   dynamic_property1(to_rep1(first(a1)), to_rep1(last(a1)), i2))) and
   ((to_rep1(first(a1)) <= i2) and (i2 <= to_rep1(last(a1))))) and
   (((((i2 = i4) and ((location3 = location5) and (found3 = found5))) and
@@ -508,20 +630,59 @@ goal WP_parameter_def :
   ((i5 = i3) and ((location6 = location4) and (found6 = found4)))) and
   (((i2 = result5) and (i3 = (i2 + 1))) and ((to_rep((a[i3])) = val__) and
   (((found3 = result6) and (found4 = of_int(1))) and
-  ((location3 = result7) and (location4 = i3)))))))))))))))) and ((({
-  int__content = i8 } = { int__content = i6 }) and (({ int__content =
-  location9 } = { int__content = location7 }) and ({ bool__content = found9
-  } = { bool__content = found7 }))) and ((i9 = i7) and
-  ((location10 = location8) and (found10 = found8))))) and ((({
-  int__content = i10 } = { int__content = i8 }) and (({ int__content =
-  location11 } = { int__content = location9 }) and ({ bool__content = found11
-  } = { bool__content = found9 }))) and ((i11 = i9) and
-  ((location12 = location10) and (found12 = found10)))))) or
-  ((not ((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1))))) and
-  (((i1 = i10) and ((location1 = location11) and (found1 = found11))) and
-  ((i11 = i1) and ((location12 = location1) and
-  (found12 = found1))))))))) and (((i12 = i10) and (({ int__content =
-  location13 } = { int__content = location11 }) and ({ bool__content =
-  found13 } = { bool__content = found11 }))) and ((i13 = i11) and
-  ((location14 = location12) and (found14 = found12))))) ->
-  ((found13 = true) -> (to_rep1(first(a1)) <= location13)))))))
+  ((location3 = result7) and (location4 = i3)))))))))))))))) and
+  (((i10 = i8) and ((location11 = location9) and (found11 = found9))) and
+  ((i11 = i9) and ((location12 = location10) and (found12 = found10))))))
+
+axiom H10 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (i12 = i10))
+
+axiom H11 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (location13 = location11))
+
+axiom H12 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (found13 = found11))
+
+axiom H13 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (i13 = i11))
+
+axiom H14 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (location14 = location12))
+
+axiom H15 : (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) ->
+  (found14 = found12))
+
+axiom H16 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (i12 = i1))
+
+axiom H17 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (location13 = location1))
+
+axiom H18 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (found13 = found1))
+
+axiom H19 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (i13 = i1))
+
+axiom H20 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (location14 = location1))
+
+axiom H21 : ((not ((to_rep1(first(a1)) <= i1) and
+  (i1 <= to_rep1(last(a1))))) -> (found14 = found1))
+
+axiom H22 : (i14 = i12)
+
+axiom H23 : (location15 = location13)
+
+axiom H24 : (found15 = found13)
+
+axiom H25 : (i15 = i13)
+
+axiom H26 : (location16 = location14)
+
+axiom H27 : (found16 = found14)
+
+axiom H28 : (found15 = true)
+
+ (* File "array_algorithms.ads", line 47, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(a1)) <= location15)

@@ -1555,6 +1555,7 @@
 (define-fun default_initial_assumption16 ((temp___expr_910 us_rep21) (temp___skip_top_level_911 Bool)) Bool (and (and (= (attr__tag19 temp___expr_910) us_tag19) (and (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs22 temp___expr_910))) (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container10)))) (and (= (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19 (us_split_fields41 temp___expr_910))))) (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container10)))) (= (is_empty1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector19 (us_split_fields41 temp___expr_910))) true)))) (=> (not (= temp___skip_top_level_911 true)) (= (is_empty (to_base18 temp___expr_910)) true))))
 (declare-const us Int)
 (declare-const us1 Int)
+(declare-const o Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 container)))))))
 (assert (in_range index))
 (assert (and (<= (first_index container) index) (<= index (last_index container))))

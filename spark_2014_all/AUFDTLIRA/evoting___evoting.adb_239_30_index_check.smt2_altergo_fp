@@ -175,7 +175,7 @@ axiom coerce_axiom :
 
 type tcandidate_number_tB
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq4 : int, int -> bool
 
@@ -581,44 +581,392 @@ function t73b__ref___projection(a: t73b__ref) : tcandidate_number_tB =
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "evoting.ads", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall winners:(int,bool) farray. forall latest_highest_score:int.
-  forall i:int. forall j:int. forall result:(int,bool) farray.
-  forall winners1:(int,bool) farray. forall result1:int.
-  forall latest_highest_score1:int. forall result2:(int,bool) farray.
-  forall winners2:(int,bool) farray. forall result3:int. forall i1:int.
-  forall winners3:(int,bool) farray. forall latest_highest_score2:int.
-  forall i2:int. forall result4:bool. (in_range1(program_phase) ->
-  (in_range4(last_candidate) -> ((program_phase = 2) -> (((0 <= 20) ->
-  in_range4(latest_highest_score)) -> ((({ map__content1 = result } = {
-  map__content1 = winners }) and (winners1 = (winners[0 <- of_int(0)]))) ->
-  ((({ int__content = result1 } = { int__content = latest_highest_score
-  }) and (latest_highest_score1 = 1)) -> (((winners1 = result2) and
-  (winners2 = (winners1[latest_highest_score1 <- of_int(1)]))) -> ((({
-  int__content = result3 } = { int__content = i }) and (i1 = 2)) ->
-  (((2 <= i1) and (i1 <= last_candidate)) ->
-  ((((((not ((winners3[0]) = true)) and (latest_highest_score2 <  i2)) and
+logic winners : (int,bool) farray
+
+logic latest_highest_score : int
+
+logic i : int
+
+logic j : int
+
+logic i1 : int
+
+logic temp___706 : (int,bool) farray
+
+logic temp___705 : int
+
+logic temp___704 : int
+
+logic j1 : int
+
+logic o : int
+
+logic j2 : int
+
+logic temp___700 : (int,bool) farray
+
+logic temp___699 : int
+
+logic k : int
+
+logic o1 : int
+
+logic o2 : (int,bool) farray
+
+logic temp___711 : (int,bool) farray
+
+logic temp___713 : (int,bool) farray
+
+logic temp___710 : int
+
+logic j3 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : int
+
+logic j4 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic i2 : int
+
+logic winner : int
+
+logic i3 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : counter_range_t
+
+logic o15 : int
+
+logic j5 : int
+
+logic result : (int,bool) farray
+
+logic winners1 : (int,bool) farray
+
+logic result1 : int
+
+logic latest_highest_score1 : int
+
+logic result2 : (int,bool) farray
+
+logic winners2 : (int,bool) farray
+
+logic result3 : int
+
+logic i4 : int
+
+logic winners3 : (int,bool) farray
+
+logic latest_highest_score2 : int
+
+logic i5 : int
+
+logic j6 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic j7 : int
+
+logic winners4 : (int,bool) farray
+
+logic j8 : int
+
+logic result7 : (int,bool) farray
+
+logic winners5 : (int,bool) farray
+
+logic result8 : int
+
+logic j9 : int
+
+logic winners6 : (int,bool) farray
+
+logic j10 : int
+
+logic winners7 : (int,bool) farray
+
+logic j11 : int
+
+logic winners8 : (int,bool) farray
+
+logic j12 : int
+
+logic winners9 : (int,bool) farray
+
+logic j13 : int
+
+logic winners10 : (int,bool) farray
+
+logic j14 : int
+
+logic winners11 : (int,bool) farray
+
+logic j15 : int
+
+logic result9 : (int,bool) farray
+
+logic winners12 : (int,bool) farray
+
+logic result10 : int
+
+logic latest_highest_score3 : int
+
+logic result11 : (int,bool) farray
+
+logic winners13 : (int,bool) farray
+
+logic result12 : int
+
+logic latest_highest_score4 : int
+
+logic result13 : (int,bool) farray
+
+logic winners14 : (int,bool) farray
+
+logic winners15 : (int,bool) farray
+
+logic latest_highest_score5 : int
+
+logic j16 : int
+
+logic winners16 : (int,bool) farray
+
+logic latest_highest_score6 : int
+
+logic j17 : int
+
+logic result14 : int
+
+logic i6 : int
+
+logic winners17 : (int,bool) farray
+
+logic latest_highest_score7 : int
+
+logic i7 : int
+
+logic j18 : int
+
+logic winners18 : (int,bool) farray
+
+logic latest_highest_score8 : int
+
+logic i8 : int
+
+logic j19 : int
+
+logic winners19 : (int,bool) farray
+
+logic latest_highest_score9 : int
+
+logic i9 : int
+
+logic j20 : int
+
+logic winners20 : (int,bool) farray
+
+logic latest_highest_score10 : int
+
+logic i10 : int
+
+logic j21 : int
+
+logic winners21 : (int,bool) farray
+
+logic latest_highest_score11 : int
+
+logic i11 : int
+
+logic j22 : int
+
+logic winners22 : (int,bool) farray
+
+logic latest_highest_score12 : int
+
+logic i12 : int
+
+logic j23 : int
+
+logic winners23 : (int,bool) farray
+
+logic latest_highest_score13 : int
+
+logic i13 : int
+
+logic j24 : int
+
+logic winners24 : (int,bool) farray
+
+logic latest_highest_score14 : int
+
+logic i14 : int
+
+logic j25 : int
+
+logic result15 : int
+
+logic i15 : int
+
+logic winners25 : (int,bool) farray
+
+logic i16 : int
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : (int,bool) farray
+
+logic winners26 : (int,bool) farray
+
+logic result19 : int
+
+logic i17 : int
+
+logic winners27 : (int,bool) farray
+
+logic i18 : int
+
+logic winners28 : (int,bool) farray
+
+logic i19 : int
+
+logic winners29 : (int,bool) farray
+
+logic i20 : int
+
+logic winners30 : (int,bool) farray
+
+logic i21 : int
+
+logic winners31 : (int,bool) farray
+
+logic i22 : int
+
+logic winners32 : (int,bool) farray
+
+logic i23 : int
+
+logic winners33 : (int,bool) farray
+
+logic i24 : int
+
+logic winners34 : (int,bool) farray
+
+logic i25 : int
+
+logic winners35 : (int,bool) farray
+
+logic latest_highest_score15 : int
+
+logic i26 : int
+
+logic j26 : int
+
+logic i27 : int
+
+logic winners36 : (int,bool) farray
+
+logic latest_highest_score16 : int
+
+logic i28 : int
+
+logic j27 : int
+
+logic i29 : int
+
+logic result20 : bool
+
+logic result21 : bool
+
+logic result22 : bool
+
+logic result23 : bool
+
+axiom H : in_range1(program_phase)
+
+axiom H1 : in_range4(last_candidate)
+
+axiom H2 : (program_phase = 2)
+
+axiom H3 : ((0 <= 20) -> in_range4(latest_highest_score))
+
+axiom H4 : true
+
+axiom H5 : (result = winners)
+
+axiom H6 : (winners1 = (winners[0 <- of_int(0)]))
+
+axiom H7 : (result1 = latest_highest_score)
+
+axiom H8 : (latest_highest_score1 = 1)
+
+axiom H9 : (winners1 = result2)
+
+axiom H10 : (winners2 = (winners1[latest_highest_score1 <- of_int(1)]))
+
+axiom H11 : (result3 = i)
+
+axiom H12 : (i4 = 2)
+
+axiom H13 : (2 <= i4)
+
+axiom H14 : (i4 <= last_candidate)
+
+axiom H15 : (((((not ((winners3[0]) = true)) and
+  (latest_highest_score2 <  i5)) and
   ((winners3[latest_highest_score2]) = true)) and
-  (forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
-  ((latest_highest_score2 <  j1) ->
-  (to_rep((counters[j1])) <  to_rep((counters[latest_highest_score2]))))))) and
-  (forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
-  ((((winners3[j1]) = true) and
-  (to_rep((counters[latest_highest_score2])) = to_rep((counters[j1])))) or
-  ((not ((winners3[j1]) = true)) and
-  (to_rep((counters[j1])) <  to_rep((counters[latest_highest_score2])))))))) ->
-  (((((2 <= last_candidate) -> dynamic_property(2, last_candidate, i2)) and
-  ((0 <= 20) -> in_range4(latest_highest_score2))) and ((2 <= i2) and
-  (i2 <= last_candidate))) ->
-  ((((((to_int((winners3[0])) = to_int(of_int(0))) and
-  (latest_highest_score2 <  i2)) and
-  ((winners3[latest_highest_score2]) = true)) and ((result4 = true) <->
-  (forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
-  ((latest_highest_score2 <  j1) ->
-  (to_rep((counters[j1])) <  to_rep((counters[latest_highest_score2])))))))) or
-  ((not (((to_int((winners3[0])) = to_int(of_int(0))) and
-  (latest_highest_score2 <  i2)) and
-  ((winners3[latest_highest_score2]) = true))) and (result4 = false))) ->
-  ((result4 = true) -> (((1 <= j) and (j <= (i2 - 1))) ->
-  (0 <= j))))))))))))))))
+  (forall j28:int. (((1 <= j28) and (j28 <= (i5 - 1))) ->
+  ((latest_highest_score2 <  j28) ->
+  (to_rep((counters[j28])) <  to_rep((counters[latest_highest_score2]))))))) and
+  (forall j28:int. (((1 <= j28) and (j28 <= (i5 - 1))) ->
+  ((((winners3[j28]) = true) ->
+  (to_rep((counters[latest_highest_score2])) = to_rep((counters[j28])))) and
+  ((not ((winners3[j28]) = true)) ->
+  (to_rep((counters[j28])) <  to_rep((counters[latest_highest_score2]))))))))
+
+axiom H16 : ((((2 <= last_candidate) -> dynamic_property(2, last_candidate,
+  i5)) and ((0 <= 20) -> in_range4(latest_highest_score2))) and
+  ((2 <= i5) and (i5 <= last_candidate)))
+
+axiom H17 : ((((to_int((winners3[0])) = to_int(of_int(0))) and
+  (latest_highest_score2 <  i5)) and
+  ((winners3[latest_highest_score2]) = true)) -> ((result4 = true) <->
+  (forall j28:int. (((1 <= j28) and (j28 <= (i5 - 1))) ->
+  ((latest_highest_score2 <  j28) ->
+  (to_rep((counters[j28])) <  to_rep((counters[latest_highest_score2]))))))))
+
+axiom H18 : ((not (((to_int((winners3[0])) = to_int(of_int(0))) and
+  (latest_highest_score2 <  i5)) and
+  ((winners3[latest_highest_score2]) = true))) -> (result4 = false))
+
+axiom H19 : (result4 = true)
+
+axiom H20 : (1 <= j1)
+
+axiom H21 : (j1 <= (i5 - 1))
+
+ (* File "evoting.ads", line 48, characters 0-0 *)
+goal WP_parameter_def : (0 <= j1)

@@ -63,6 +63,8 @@
 (declare-fun user_eq1 (us_rep us_rep) Bool)
 (declare-datatypes () ((tt__ref (mk_tt__ref (tt__content us_rep)))))
 (define-fun tt__ref___projection ((a tt__ref)) us_rep (tt__content a))
+(declare-const y Int)
+(declare-const y1 Int)
 (assert (not true))
 (check-sat)
 (exit)

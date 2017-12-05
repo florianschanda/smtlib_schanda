@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -419,7 +419,33 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic s__split_fields : (int,integer) farray
+
+logic s__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : pointer_range
+
+logic o2 : (int,integer) farray
+
+logic o3 : pointer_range
+
+logic temp___187 : (int,integer) farray
+
+logic temp___1871 : pointer_range
+
+logic o4 : integer
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic s__split_fields2 : (int,integer) farray
+
+logic s__split_fields3 : pointer_range
+
+axiom H : in_range(x)
+
  (* File "stacks_14.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:pointer_range. (in_range(x) ->
-  in_range2((to_rep1(s__split_fields) + 1))))
+goal WP_parameter_def : in_range2((to_rep1(s__split_fields1) + 1))

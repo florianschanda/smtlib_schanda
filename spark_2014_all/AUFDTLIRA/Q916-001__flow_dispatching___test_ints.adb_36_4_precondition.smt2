@@ -342,6 +342,7 @@
 (declare-const ints__call_bump__arg__fields us_split_fields)
 (declare-const result17 us_split_fields__ref)
 (declare-const i__split_fields10 us_split_fields)
+(declare-const ints__call_bump__arg__fields1 us_split_fields)
 (assert (= (to_rep1 o) 42))
 (assert (= (to_rep1 o1) 100))
 (assert (= (to_rep1 o2) 0))

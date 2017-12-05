@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type element_type
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -528,56 +528,196 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "double_list.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall status:int. forall memory:(int,us_rep) farray. forall count:int.
-  forall free_list:(int,index_type) farray. forall free:int.
-  forall new_pointer:int. forall o:index_type. forall o1:element_type.
-  forall o2:element_type. forall o3:index_type. forall o4:index_type.
-  forall o5:element_type. forall o6:index_type. forall o7:index_type.
-  forall o8:(int,us_rep) farray. forall o9:index_type.
-  forall o10:element_type. forall o11:index_type. forall o12:index_type.
-  forall o13:element_type. forall o14:index_type. forall o15:index_type.
-  forall o16:(int,us_rep) farray. forall o17:index_type.
-  forall o18:element_type. forall o19:index_type. forall o20:index_type.
-  forall o21:element_type. forall o22:index_type. forall o23:index_type.
-  forall o24:(int,us_rep) farray. forall result:int. forall status1:int.
-  forall result1:int. forall new_pointer1:int. forall result2:int.
-  forall free1:int. forall result3:(int,us_rep) farray.
-  forall memory1:(int,us_rep) farray. forall result4:(int,us_rep) farray.
-  forall memory2:(int,us_rep) farray. forall result5:(int,us_rep) farray.
-  forall memory3:(int,us_rep) farray. (in_range3(it) -> (in_range(item) ->
-  (((0 <= 3) -> in_range2(status)) -> (in_range1(count) ->
-  (in_range1(free) -> (((0 <= 128) -> in_range1(new_pointer)) ->
-  ((not (count = 128)) -> (((result = status) and (status1 = 0)) ->
-  (((result1 = new_pointer) and (new_pointer1 = free)) ->
-  (((result2 = free) and (free1 = to_rep1((free_list[free])))) ->
-  ((((((to_rep1(o) = it) and ((to_rep(o1) = item) and ((o1 = o2) and
-  ((o = o3) and
-  ((((memory[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous = o4))))) and
-  ((o5 = o2) and ((o6 = o3) and (o7 = o4)))) and
-  (o8 = (memory[new_pointer1 <- { us_split_fields1 = {
+logic status : int
+
+logic memory : (int,us_rep) farray
+
+logic count : int
+
+logic free_list : (int,index_type) farray
+
+logic free : int
+
+logic new_pointer : int
+
+logic o : index_type
+
+logic o1 : element_type
+
+logic o2 : element_type
+
+logic o3 : index_type
+
+logic o4 : index_type
+
+logic o5 : element_type
+
+logic o6 : index_type
+
+logic o7 : index_type
+
+logic o8 : (int,us_rep) farray
+
+logic o9 : index_type
+
+logic o10 : element_type
+
+logic o11 : index_type
+
+logic o12 : index_type
+
+logic o13 : element_type
+
+logic o14 : index_type
+
+logic o15 : index_type
+
+logic o16 : (int,us_rep) farray
+
+logic o17 : index_type
+
+logic o18 : element_type
+
+logic o19 : index_type
+
+logic o20 : index_type
+
+logic o21 : element_type
+
+logic o22 : index_type
+
+logic o23 : index_type
+
+logic o24 : (int,us_rep) farray
+
+logic o25 : int
+
+logic result : int
+
+logic status1 : int
+
+logic result1 : int
+
+logic new_pointer1 : int
+
+logic result2 : int
+
+logic free1 : int
+
+logic result3 : (int,us_rep) farray
+
+logic memory1 : (int,us_rep) farray
+
+logic result4 : (int,us_rep) farray
+
+logic memory2 : (int,us_rep) farray
+
+logic result5 : (int,us_rep) farray
+
+logic memory3 : (int,us_rep) farray
+
+axiom H : in_range3(it)
+
+axiom H1 : in_range(item)
+
+axiom H2 : ((0 <= 3) -> in_range2(status))
+
+axiom H3 : in_range1(count)
+
+axiom H4 : in_range1(free)
+
+axiom H5 : ((0 <= 128) -> in_range1(new_pointer))
+
+axiom H6 : (not (count = 128))
+
+axiom H7 : (result = status)
+
+axiom H8 : (status1 = 0)
+
+axiom H9 : (result1 = new_pointer)
+
+axiom H10 : (new_pointer1 = free)
+
+axiom H11 : (result2 = free)
+
+axiom H12 : (free1 = to_rep1((free_list[free])))
+
+axiom H13 : (to_rep1(o) = it)
+
+axiom H14 : (to_rep(o1) = item)
+
+axiom H15 : (o1 = o2)
+
+axiom H16 : (o = o3)
+
+axiom H17 :
+  ((((memory[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous = o4)
+
+axiom H18 : (o5 = o2)
+
+axiom H19 : (o6 = o3)
+
+axiom H20 : (o7 = o4)
+
+axiom H21 : (o8 = (memory[new_pointer1 <- { us_split_fields1 = {
   rec__list_handler__integer_list__list_node__value = o5;
   rec__list_handler__integer_list__list_node__next = o6;
-  rec__list_handler__integer_list__list_node__previous = o7 } }]))) and
-  ((result3 = memory) and (memory1 = o8))) ->
-  ((((((to_rep1(o9) = new_pointer1) and
-  (((((memory1[to_rep1((((memory1[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous)])).us_split_fields1).rec__list_handler__integer_list__list_node__value = o10) and
-  ((o9 = o11) and
-  ((((memory1[to_rep1((((memory1[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous)])).us_split_fields1).rec__list_handler__integer_list__list_node__previous = o12)))) and
-  ((o13 = o10) and ((o14 = o11) and (o15 = o12)))) and
+  rec__list_handler__integer_list__list_node__previous = o7 } }]))
+
+axiom H22 : (result3 = memory)
+
+axiom H23 : (memory1 = o8)
+
+axiom H24 : (to_rep1(o9) = new_pointer1)
+
+axiom H25 :
+  ((((memory1[to_rep1((((memory1[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous)])).us_split_fields1).rec__list_handler__integer_list__list_node__value = o10)
+
+axiom H26 : (o9 = o11)
+
+axiom H27 :
+  ((((memory1[to_rep1((((memory1[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous)])).us_split_fields1).rec__list_handler__integer_list__list_node__previous = o12)
+
+axiom H28 : (o13 = o10)
+
+axiom H29 : (o14 = o11)
+
+axiom H30 : (o15 = o12)
+
+axiom H31 :
   (o16 = (memory1[to_rep1((((memory1[it])).us_split_fields1).rec__list_handler__integer_list__list_node__previous) <- {
   us_split_fields1 = { rec__list_handler__integer_list__list_node__value =
   o13; rec__list_handler__integer_list__list_node__next = o14;
-  rec__list_handler__integer_list__list_node__previous = o15 } }]))) and
-  ((result4 = memory1) and (memory2 = o16))) ->
-  ((((((to_rep1(o17) = new_pointer1) and
-  (((((memory2[it])).us_split_fields1).rec__list_handler__integer_list__list_node__value = o18) and
-  (((((memory2[it])).us_split_fields1).rec__list_handler__integer_list__list_node__next = o19) and
-  (o17 = o20)))) and ((o21 = o18) and ((o22 = o19) and (o23 = o20)))) and
-  (o24 = (memory2[it <- { us_split_fields1 = {
+  rec__list_handler__integer_list__list_node__previous = o15 } }]))
+
+axiom H32 : (result4 = memory1)
+
+axiom H33 : (memory2 = o16)
+
+axiom H34 : (to_rep1(o17) = new_pointer1)
+
+axiom H35 :
+  ((((memory2[it])).us_split_fields1).rec__list_handler__integer_list__list_node__value = o18)
+
+axiom H36 :
+  ((((memory2[it])).us_split_fields1).rec__list_handler__integer_list__list_node__next = o19)
+
+axiom H37 : (o17 = o20)
+
+axiom H38 : (o21 = o18)
+
+axiom H39 : (o22 = o19)
+
+axiom H40 : (o23 = o20)
+
+axiom H41 : (o24 = (memory2[it <- { us_split_fields1 = {
   rec__list_handler__integer_list__list_node__value = o21;
   rec__list_handler__integer_list__list_node__next = o22;
-  rec__list_handler__integer_list__list_node__previous = o23 } }]))) and
-  ((result5 = memory2) and (memory3 = o24))) ->
-  in_range1((count + 1))))))))))))))))
+  rec__list_handler__integer_list__list_node__previous = o23 } }]))
+
+axiom H42 : (result5 = memory2)
+
+axiom H43 : (memory3 = o24)
+
+ (* File "double_list.ads", line 33, characters 0-0 *)
+goal WP_parameter_def : in_range1((count + 1))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -251,10 +251,74 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic q : int
+
+logic r : int
+
+logic temp___145 : int
+
+logic temp___144 : int
+
+logic o : int
+
+logic o1 : int
+
+logic r1 : int
+
+logic result : int
+
+logic q1 : int
+
+logic q2 : int
+
+logic r2 : int
+
+logic result1 : int
+
+logic r3 : int
+
+logic q3 : int
+
+logic q4 : int
+
+logic q5 : int
+
+logic r4 : int
+
+logic q6 : int
+
+logic r5 : int
+
+logic q7 : int
+
+logic r6 : int
+
+logic q8 : int
+
+logic r7 : int
+
+logic q9 : int
+
+logic r8 : int
+
+logic q10 : int
+
+logic r9 : int
+
+axiom H : in_range(n)
+
+axiom H1 : ((0 <= 1000000) -> in_range(q))
+
+axiom H2 : ((0 <= 1000000) -> in_range(r))
+
+axiom H3 : (result = q)
+
+axiom H4 : (q1 = n)
+
+axiom H5 : (0 <  q1)
+
+axiom H6 : (((0 <= 1000000) -> in_range(r2)) and ((0 <= 1000000) ->
+  in_range(q2)))
+
  (* File "simple_math.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall q:int. forall r:int. forall result:int. forall q1:int.
-  forall q2:int. forall r1:int. (in_range(n) -> (((0 <= 1000000) ->
-  in_range(q)) -> (((0 <= 1000000) -> in_range(r)) -> (((result = q) and
-  (q1 = n)) -> ((0 <  q1) -> ((((0 <= 1000000) -> in_range(r1)) and
-  ((0 <= 1000000) -> in_range(q2))) -> (not (q2 = 0)))))))))
+goal WP_parameter_def : (not (q2 = 0))

@@ -1160,6 +1160,9 @@ axiom is_valid_speed_km_per_h__def_axiom :
   ((is_valid_speed_km_per_h(speed1) = true) <-> (le(fliteral3, speed1) and
   le(speed1, fliteral4))))
 
+logic o : t
+
+axiom H : tqtisFinite(speed)
+
  (* File "units.ads", line 41, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(speed) ->
-  (is_valid_speed_km_per_h(fliteral4) = true))
+goal WP_parameter_def : (is_valid_speed_km_per_h(fliteral4) = true)

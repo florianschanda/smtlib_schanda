@@ -264,16 +264,51 @@ axiom def_axiom1 :
   (forall temp___195:int.
   ((rename_aggregate__R7b__aggregate_def(temp___194)[temp___195]) = of_rep(temp___194))))
 
+logic a : (int,natural) farray
+
+logic c12b : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic result2 : int
+
+logic c12b1 : int
+
+logic c12b2 : int
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = rename_aggregate__a__aggregate_def(0))
+
+axiom H2 : (rename_aggregate__R7b__aggregate_def(to_rep((a1[1]))) = r7b)
+
+axiom H3 : (to_rep(o) = 1)
+
+axiom H4 : (o1 = (a1[1 <- o]))
+
+axiom H5 : (result1 = a1)
+
+axiom H6 : (a2 = o1)
+
+axiom H7 : (result2 = c12b)
+
+axiom H8 : (c12b1 = 1)
+
+axiom H9 : (1 <= c12b1)
+
+axiom H10 : (c12b1 <= 100)
+
+axiom H11 : ((1 <= c12b2) and (c12b2 <= 100))
+
  (* File "rename_aggregate.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall c12b:int. forall o:natural.
-  forall o1:(int,natural) farray. forall result:(int,natural) farray.
-  forall a1:(int,natural) farray. forall result1:(int,natural) farray.
-  forall a2:(int,natural) farray. forall result2:int. forall c12b1:int.
-  forall c12b2:int. (((result = a) and
-  (a1 = rename_aggregate__a__aggregate_def(0))) ->
-  ((rename_aggregate__R7b__aggregate_def(to_rep((a1[1]))) = r7b) ->
-  ((((to_rep(o) = 1) and (o1 = (a1[1 <- o]))) and ((result1 = a1) and
-  (a2 = o1))) -> (((result2 = c12b) and (c12b1 = 1)) -> (((1 <= c12b1) and
-  (c12b1 <= 100)) -> (((1 <= c12b2) and (c12b2 <= 100)) ->
-  (to_rep((r7b[c12b2])) = 1))))))))
+goal WP_parameter_def : (to_rep((r7b[c12b2])) = 1)

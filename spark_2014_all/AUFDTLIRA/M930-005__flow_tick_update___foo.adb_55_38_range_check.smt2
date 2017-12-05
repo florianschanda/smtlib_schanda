@@ -151,6 +151,7 @@
 (declare-const o1 integer)
 (declare-const o2 integer)
 (declare-const o3 integer)
+(declare-const o4 Int)
 (assert (in_range n))
 (assert (in_range m))
 (assert (and (<= 1 m) (<= m 5)))

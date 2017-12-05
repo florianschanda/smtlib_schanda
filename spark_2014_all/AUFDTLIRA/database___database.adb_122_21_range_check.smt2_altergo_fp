@@ -406,8 +406,65 @@ axiom is_available__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic links : (int,us_rep) farray
+
+logic first_available : int
+
+logic account : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : (int,us_rep) farray
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : ext_account_num
+
+logic o6 : ext_account_num
+
+logic o7 : bool
+
+logic o8 : ext_account_num
+
+logic o9 : ext_account_num
+
+logic o10 : ext_account_num
+
+logic o11 : int
+
+logic result : int
+
+logic account1 : int
+
+logic result1 : (int,us_rep) farray
+
+logic links1 : (int,us_rep) farray
+
+logic result2 : int
+
+logic first_available1 : int
+
+logic links2 : (int,us_rep) farray
+
+logic first_available2 : int
+
+logic account2 : int
+
+logic links3 : (int,us_rep) farray
+
+logic first_available3 : int
+
+logic account3 : int
+
+axiom H : in_range1(first_available)
+
+axiom H1 : ((1 <= 200000) -> in_range2(account))
+
+axiom H2 : (some_available(first_available) = true)
+
  (* File "database.adb", line 46, characters 0-0 *)
-goal WP_parameter_def :
-  (forall first_available:int. forall account:int.
-  (in_range1(first_available) -> (((1 <= 200000) -> in_range2(account)) ->
-  ((some_available(first_available) = true) -> in_range2(first_available)))))
+goal WP_parameter_def : in_range2(first_available)

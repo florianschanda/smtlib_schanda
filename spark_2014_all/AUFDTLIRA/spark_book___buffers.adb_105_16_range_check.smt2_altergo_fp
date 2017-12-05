@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -490,14 +490,72 @@ axiom def_axiom :
   (forall temp___256:int.
   ((temp___253(temp___255)[temp___256]) = of_rep(temp___255))))
 
+logic buffer : (int,character) farray
+
+logic characters_to_copy : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___257 : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : (int,character) farray
+
+logic result : int
+
+logic characters_to_copy1 : int
+
+logic result1 : (int,character) farray
+
+logic buffer1 : (int,character) farray
+
+logic result2 : bool
+
+logic result3 : int
+
+logic characters_to_copy2 : int
+
+logic result4 : int
+
+logic index1 : int
+
+logic buffer2 : (int,character) farray
+
+logic index2 : int
+
+logic result5 : (int,character) farray
+
+logic buffer3 : (int,character) farray
+
+logic result6 : int
+
+logic index3 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (result = characters_to_copy)
+
+axiom H2 : (characters_to_copy1 = 1024)
+
+axiom H3 : in_range4(characters_to_copy1)
+
+axiom H4 : (result1 = buffer)
+
+axiom H5 : (buffer1 = temp___253(32))
+
  (* File "buffers.adb", line 69, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(int,character) farray. forall characters_to_copy:int.
-  forall result:int. forall characters_to_copy1:int.
-  forall result1:(int,character) farray.
-  forall buffer1:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  (((result = characters_to_copy) and (characters_to_copy1 = 1024)) ->
-  (in_range4(characters_to_copy1) -> (((result1 = buffer) and
-  (buffer1 = temp___253(32))) -> in_range1(length({ elts = source; rt =
-  source1 })))))))
+goal WP_parameter_def : in_range1(length({ elts = source; rt = source1 }))

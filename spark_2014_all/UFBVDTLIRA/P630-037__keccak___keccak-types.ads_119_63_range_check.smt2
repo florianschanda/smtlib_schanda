@@ -73,6 +73,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o (_ BitVec 8))
 (declare-const o1 (_ BitVec 8))
+(declare-const o2 (_ BitVec 8))
 (assert (in_range1 value))
 (assert (in_range amount))
 (assert (<= amount 2))

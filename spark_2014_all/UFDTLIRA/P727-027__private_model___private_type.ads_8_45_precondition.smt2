@@ -74,6 +74,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
 (assert (forall ((r1 us_rep)) (! (= (to_int1 (is_valid r1)) (to_int1 (is_valid1 us_tag r1))) :pattern ((is_valid1 us_tag r1)))))
+(declare-const o Int)
 (assert (not (= (is_valid r) true)))
 (check-sat)
 (exit)

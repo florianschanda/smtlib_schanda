@@ -56,6 +56,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const target Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const target1 Int)
 (declare-const target2 Int)

@@ -149,6 +149,7 @@
 (declare-const count Int)
 (declare-const next_in (_ BitVec 8))
 (declare-const next_out (_ BitVec 8))
+(declare-const o Int)
 (declare-const result (Array (_ BitVec 8) us_rep))
 (declare-const buffer1 (Array (_ BitVec 8) us_rep))
 (declare-const result1 (_ BitVec 8))

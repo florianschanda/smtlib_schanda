@@ -261,12 +261,37 @@ logic d2 : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic o : bool
+
+logic o1 : bool
+
+logic main__d1__assume : bool
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic main__d2__assume : bool
+
+axiom H : (of_int(1) = p1__split_discrs)
+
+axiom H1 : (of_int(0) = p2__split_discrs)
+
+axiom H2 : (p1__split_discrs = o)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (main__d1__assume = o1)
+
+axiom H5 : (main__d1__assume = d1)
+
+axiom H6 : (p2__split_discrs = o2)
+
+axiom H7 : (o2 = o3)
+
+axiom H8 : (main__d2__assume = o3)
+
+axiom H9 : (main__d2__assume = d2)
+
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:bool. forall o1:bool. forall main__d1__assume:bool.
-  forall o2:bool. forall o3:bool. forall main__d2__assume:bool.
-  ((of_int(1) = p1__split_discrs) -> ((of_int(0) = p2__split_discrs) ->
-  (((((p1__split_discrs = o) and (o = o1)) and (main__d1__assume = o1)) and
-  (main__d1__assume = d1)) -> (((((p2__split_discrs = o2) and (o2 = o3)) and
-  (main__d2__assume = o3)) and (main__d2__assume = d2)) ->
-  (not (d1 = d2)))))))
+goal WP_parameter_def : (not (d1 = d2))

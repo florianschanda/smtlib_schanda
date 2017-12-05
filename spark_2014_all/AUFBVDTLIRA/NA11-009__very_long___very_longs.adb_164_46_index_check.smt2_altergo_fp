@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -830,7 +830,7 @@ axiom compare_def_gt :
 
 type tdigit_count_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1108,18 +1108,75 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic result__ : bool
+
+logic i : int
+
+logic us : int
+
+logic us1 : int
+
+logic o : int
+
+logic o1 : octet
+
+logic o2 : int
+
+logic o3 : octet
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic result__2 : bool
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result__3 : bool
+
+axiom H : (dynamic_property1(1, to_rep(l), to_rep2(first(l2)),
+  to_rep2(last(l2))) and ((to_rep2(first(l2)) = 1) and
+  (to_rep2(last(l2)) = to_rep(l))))
+
+axiom H1 : (dynamic_property1(1, to_rep(r), to_rep2(first(r2)),
+  to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
+  (to_rep2(last(r2)) = to_rep(r))))
+
+axiom H2 : (to_rep(l) = to_rep(r))
+
+axiom H3 : ((us = to_rep(r)) and in_range1(to_rep(r)))
+
+axiom H4 : ((us1 = to_rep(l)) and in_range1(to_rep(l)))
+
+axiom H5 : (result = result__)
+
+axiom H6 : (result__1 = of_int1(0))
+
+axiom H7 : (result1 = i)
+
+axiom H8 : (i1 = to_rep2(last(l2)))
+
+axiom H9 : (1 <= i1)
+
+axiom H10 : (i1 <= to_rep2(last(l2)))
+
+axiom H11 : ((1 <= i2) and (i2 <= to_rep2(last(l2))))
+
  (* File "very_longs.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:bool. forall i:int. forall us:int. forall us1:int.
-  forall result:bool. forall result__1:bool. forall result1:int.
-  forall i1:int. forall i2:int. ((dynamic_property1(1, to_rep(l),
-  to_rep2(first(l2)), to_rep2(last(l2))) and ((to_rep2(first(l2)) = 1) and
-  (to_rep2(last(l2)) = to_rep(l)))) -> ((dynamic_property1(1, to_rep(r),
-  to_rep2(first(r2)), to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
-  (to_rep2(last(r2)) = to_rep(r)))) -> ((to_rep(l) = to_rep(r)) ->
-  (((us = to_rep(r)) and in_range1(to_rep(r))) -> (((us1 = to_rep(l)) and
-  in_range1(to_rep(l))) -> (((result = result__) and
-  (result__1 = of_int1(0))) -> (((result1 = i) and
-  (i1 = to_rep2(last(l2)))) -> (((1 <= i1) and (i1 <= to_rep2(last(l2)))) ->
-  (((1 <= i2) and (i2 <= to_rep2(last(l2)))) ->
-  (to_rep2(first(r2)) <= i2)))))))))))
+goal WP_parameter_def : (to_rep2(first(r2)) <= i2)

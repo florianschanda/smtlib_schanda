@@ -137,7 +137,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -413,260 +413,590 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall right:int. forall left:int. forall right_is_out:bool.
-  forall left_is_out:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result:int.
-  forall o:int. forall o1:int. forall o2:int. forall temp___236:int.
-  forall temp___235:bool. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:int. forall o7:int. forall o8:int. forall temp___238:bool.
-  forall temp___237:int. forall o9:int. forall o10:int. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:int. forall o19:int.
-  forall o20:int. forall o21:int. forall o22:int. forall v:int.
-  forall o23:int. forall o24:bool. forall right_is_out1:bool.
-  forall left_is_out1:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result1:int.
-  forall result:int. forall right1:int. forall result1:int. forall left1:int.
-  forall result2:bool. forall result3:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result2:int.
-  forall result4:int. forall right2:int. forall result5:bool.
-  forall right_is_out2:bool. forall result6:bool. forall right3:int.
-  forall right_is_out3:bool. forall result7:int. forall right4:int.
-  forall result8:bool. forall right_is_out4:bool. forall result9:bool.
-  forall right_is_out5:bool. forall right_is_out6:bool. forall right5:int.
-  forall right_is_out7:bool. forall right6:int. forall right_is_out8:bool.
-  forall right7:int. forall right_is_out9:bool. forall right8:int.
-  forall right_is_out10:bool. forall right9:int. forall right_is_out11:bool.
-  forall right10:int. forall right_is_out12:bool. forall result10:bool.
-  forall right_is_out13:bool. forall right11:int. forall right_is_out14:bool.
-  forall right12:int. forall right_is_out15:bool. forall result11:int.
-  forall left2:int. forall result12:bool. forall left_is_out2:bool.
-  forall result13:bool. forall left3:int. forall left_is_out3:bool.
-  forall result14:int. forall left4:int. forall result15:bool.
-  forall left_is_out4:bool. forall result16:bool. forall left_is_out5:bool.
-  forall left_is_out6:bool. forall left5:int. forall left_is_out7:bool.
-  forall left6:int. forall left_is_out8:bool. forall left7:int.
-  forall left_is_out9:bool. forall left8:int. forall left_is_out10:bool.
-  forall left9:int. forall left_is_out11:bool. forall left10:int.
-  forall left_is_out12:bool. forall result17:bool. forall left_is_out13:bool.
-  forall left11:int. forall left_is_out14:bool. forall left12:int.
-  forall left_is_out15:bool. forall result18:bool. forall result19:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result3:int.
-  forall result20:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result4:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result5:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result6:int.
-  forall result21:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result7:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result8:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result9:int.
-  forall result22:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result10:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result11:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result12:int.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result13:int__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result14:int.
-  forall right13:int__ref. forall left13:int__ref.
-  forall right_is_out16:bool__ref. forall left_is_out16:bool__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result15:int__ref.
-  forall right14:int. forall left14:int. forall right_is_out17:bool.
-  forall left_is_out17:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result16:int.
-  forall right15:int__ref. forall left15:int__ref.
-  forall right_is_out18:bool__ref. forall left_is_out18:bool__ref.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result17:int__ref.
-  forall right16:int. forall left16:int. forall right_is_out19:bool.
-  forall left_is_out19:bool.
-  forall test_prime_and_coprime_numbers__p__nearest_number__result18:int.
-  forall result23:bool. (in_range4(mode) -> (in_range2(value) ->
-  ((((0 <= value) and (value <= 100000)) and (((mode = 0) and
-  (has_true(number_list, value, 100000) = true)) or ((not (mode = 0)) and
-  (((mode = 1) and (has_true(number_list, 0, value) = true)) or
-  ((not (mode = 1)) and (has_true(number_list, 0, 100000) = true)))))) ->
-  ((((({ int__content = result } = { int__content = right }) and
-  (right1 = 0)) and (in_range1(right1) and ((({ int__content = result1 } = {
-  int__content = left }) and (left1 = 0)) and (in_range1(left1) and
-  (((((test_prime_and_coprime_numbers__p__nearest_number__result15 = {
-  int__content = test_prime_and_coprime_numbers__p__nearest_number__result2
-  }) and ((left_is_out16 = { bool__content = left_is_out }) and
-  ((right_is_out16 = { bool__content = right_is_out }) and ((left13 = {
-  int__content = left1 }) and (right13 = { int__content = right1 }))))) and
-  ((test_prime_and_coprime_numbers__p__nearest_number__result16 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
-  ((left_is_out17 = left_is_out1) and ((right_is_out17 = right_is_out1) and
-  ((left14 = left1) and (right14 = right1)))))) and (((((0 <= value) and
+logic right : int
+
+logic left : int
+
+logic right_is_out : bool
+
+logic left_is_out : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___236 : int
+
+logic temp___235 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic v : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___238 : bool
+
+logic temp___237 : int
+
+logic o10 : int
+
+logic v1 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic v2 : int
+
+logic v3 : int
+
+logic o24 : int
+
+logic o25 : bool
+
+logic v4 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : bool
+
+logic v5 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : bool
+
+logic right_is_out1 : bool
+
+logic left_is_out1 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result1 : int
+
+logic result : int
+
+logic right1 : int
+
+logic result1 : int
+
+logic left1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result2 : int
+
+logic result4 : int
+
+logic right2 : int
+
+logic result5 : bool
+
+logic right_is_out2 : bool
+
+logic result6 : bool
+
+logic right3 : int
+
+logic right_is_out3 : bool
+
+logic result7 : int
+
+logic right4 : int
+
+logic result8 : bool
+
+logic right_is_out4 : bool
+
+logic result9 : bool
+
+logic right_is_out5 : bool
+
+logic right_is_out6 : bool
+
+logic right5 : int
+
+logic right_is_out7 : bool
+
+logic right6 : int
+
+logic right_is_out8 : bool
+
+logic right7 : int
+
+logic right_is_out9 : bool
+
+logic right8 : int
+
+logic right_is_out10 : bool
+
+logic right9 : int
+
+logic right_is_out11 : bool
+
+logic right10 : int
+
+logic right_is_out12 : bool
+
+logic result10 : bool
+
+logic right_is_out13 : bool
+
+logic right11 : int
+
+logic right_is_out14 : bool
+
+logic right12 : int
+
+logic right_is_out15 : bool
+
+logic result11 : int
+
+logic left2 : int
+
+logic result12 : bool
+
+logic left_is_out2 : bool
+
+logic result13 : bool
+
+logic left3 : int
+
+logic left_is_out3 : bool
+
+logic result14 : int
+
+logic left4 : int
+
+logic result15 : bool
+
+logic left_is_out4 : bool
+
+logic result16 : bool
+
+logic left_is_out5 : bool
+
+logic left_is_out6 : bool
+
+logic left5 : int
+
+logic left_is_out7 : bool
+
+logic left6 : int
+
+logic left_is_out8 : bool
+
+logic left7 : int
+
+logic left_is_out9 : bool
+
+logic left8 : int
+
+logic left_is_out10 : bool
+
+logic left9 : int
+
+logic left_is_out11 : bool
+
+logic left10 : int
+
+logic left_is_out12 : bool
+
+logic left11 : int
+
+logic left_is_out13 : bool
+
+logic left12 : int
+
+logic left_is_out14 : bool
+
+logic result17 : bool
+
+logic left_is_out15 : bool
+
+logic left13 : int
+
+logic left_is_out16 : bool
+
+logic left14 : int
+
+logic left_is_out17 : bool
+
+logic result18 : bool
+
+logic result19 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result3 : int
+
+logic result20 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result4 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result5 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result6 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result7 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result8 : int
+
+logic result21 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result9 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result10 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result11 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result12 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result13 : int
+
+logic result22 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result14 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result15 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result16 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result17 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result18 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result19 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result20 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result21 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result22 : int
+
+logic right13 : int
+
+logic left15 : int
+
+logic right_is_out16 : bool
+
+logic left_is_out18 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result23 : int
+
+logic right14 : int
+
+logic left16 : int
+
+logic right_is_out17 : bool
+
+logic left_is_out19 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result24 : int
+
+logic right15 : int
+
+logic left17 : int
+
+logic right_is_out18 : bool
+
+logic left_is_out20 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result25 : int
+
+logic right16 : int
+
+logic left18 : int
+
+logic right_is_out19 : bool
+
+logic left_is_out21 : bool
+
+logic test_prime_and_coprime_numbers__p__nearest_number__result26 : int
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic result25 : bool
+
+logic result26 : bool
+
+axiom H : in_range4(mode)
+
+axiom H1 : in_range2(value)
+
+axiom H2 : (((0 <= value) and (value <= 100000)) and (((mode = 0) ->
+  (has_true(number_list, value, 100000) = true)) and ((not (mode = 0)) ->
+  (((mode = 1) -> (has_true(number_list, 0, value) = true)) and
+  ((not (mode = 1)) -> (has_true(number_list, 0, 100000) = true))))))
+
+axiom H3 : (result = right)
+
+axiom H4 : (right1 = 0)
+
+axiom H5 : in_range1(right1)
+
+axiom H6 : (result1 = left)
+
+axiom H7 : (left1 = 0)
+
+axiom H8 : in_range1(left1)
+
+axiom H9 :
+  (((((test_prime_and_coprime_numbers__p__nearest_number__result23 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
+  ((left_is_out18 = left_is_out) and ((right_is_out16 = right_is_out) and
+  ((left15 = left1) and (right13 = right1))))) and
+  ((test_prime_and_coprime_numbers__p__nearest_number__result24 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
+  ((left_is_out19 = left_is_out1) and ((right_is_out17 = right_is_out1) and
+  ((left16 = left1) and (right14 = right1)))))) and (((((0 <= value) and
   (value <= 100000)) and (o = value)) and (result2 = (number_list[o]))) and
-  ((result2 = true) and (({ int__content = result3 } = { int__content =
-  test_prime_and_coprime_numbers__p__nearest_number__result }) and
+  ((result2 = true) and
+  ((result3 = test_prime_and_coprime_numbers__p__nearest_number__result) and
   (test_prime_and_coprime_numbers__p__nearest_number__result2 = value))))) or
   ((((((0 <= value) and (value <= 100000)) and (o = value)) and
   (result2 = (number_list[o]))) and ((not (result2 = true)) and
   ((test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result) and
   (test_prime_and_coprime_numbers__p__nearest_number__result2 = test_prime_and_coprime_numbers__p__nearest_number__result1)))) and
-  ((((test_prime_and_coprime_numbers__p__nearest_number__result15 = test_prime_and_coprime_numbers__p__nearest_number__result13) and
-  ((left_is_out16 = { bool__content = left_is_out14 }) and
-  ((right_is_out16 = { bool__content = right_is_out14 }) and ((left13 = {
-  int__content = left11 }) and (right13 = { int__content = right11 }))))) and
-  ((test_prime_and_coprime_numbers__p__nearest_number__result16 = test_prime_and_coprime_numbers__p__nearest_number__result14) and
-  ((left_is_out17 = left_is_out15) and ((right_is_out17 = right_is_out15) and
-  ((left14 = left12) and (right14 = right12)))))) and (((((mode = 0) or
-  (mode = 2)) and ((((((o1 = value) and (not (value = 2147483647))) and
+  ((((test_prime_and_coprime_numbers__p__nearest_number__result23 = test_prime_and_coprime_numbers__p__nearest_number__result21) and
+  ((left_is_out18 = left_is_out16) and ((right_is_out16 = right_is_out14) and
+  ((left15 = left13) and (right13 = right11))))) and
+  ((test_prime_and_coprime_numbers__p__nearest_number__result24 = test_prime_and_coprime_numbers__p__nearest_number__result22) and
+  ((left_is_out19 = left_is_out17) and ((right_is_out17 = right_is_out15) and
+  ((left16 = left14) and (right14 = right12)))))) and (((((mode = 0) or
+  (mode = 2)) -> ((((((o1 = value) and (not (value = 2147483647))) and
   (o2 = (o1 + 1))) and ((right1 = result4) and (right2 = o2))) and
-  ((((temp___236 = right2) and ((temp___235 = right_is_out) and ((({
-  bool__content = result5 } = { bool__content = right_is_out }) and
-  (((100000 <  right2) and (right_is_out2 = true)) or
-  ((not (100000 <  right2)) and (right_is_out2 = false)))) and
-  (((((right_is_out2 = right_is_out7) and (right2 = right5)) and
-  ((right_is_out8 = right_is_out2) and (right6 = right2))) and
-  ((((right_is_out2 = true) and (result6 = true)) or
-  ((not (right_is_out2 = true)) and ((((0 <= right2) and
+  ((((temp___236 = right2) and ((temp___235 = right_is_out) and
+  (((result5 = right_is_out) and (((100000 <  right2) ->
+  (right_is_out2 = true)) and ((not (100000 <  right2)) ->
+  (right_is_out2 = false)))) and (((((right_is_out2 = right_is_out7) and
+  (right2 = right5)) and ((right_is_out8 = right_is_out2) and
+  (right6 = right2))) and ((((right_is_out2 = true) -> (result6 = true)) and
+  ((not (right_is_out2 = true)) -> ((((0 <= right2) and
   (right2 <= 100000)) and (o3 = right2)) and
   (result6 = (number_list[o3]))))) and (result6 = true))) or
-  (((((right_is_out2 = true) and (result6 = true)) or
-  ((not (right_is_out2 = true)) and ((((0 <= right2) and
+  (((((right_is_out2 = true) -> (result6 = true)) and
+  ((not (right_is_out2 = true)) -> ((((0 <= right2) and
   (right2 <= 100000)) and (o3 = right2)) and
-  (result6 = (number_list[o3]))))) and (not (result6 = true))) and (((({
-  bool__content = right_is_out7 } = { bool__content = right_is_out5 }) and
-  (right4 = right5)) and ((right_is_out8 = right_is_out6) and
-  (right6 = right4))) and (((((value + 1) <= right3) and
-  (right3 <= 100000)) and
-  (forall v1:int. (((value <= v1) and (v1 <= right3)) ->
-  (not ((number_list[v1]) = true))))) and ((((-2147483648) <= 2147483647) ->
-  in_range1(right3)) and (((((o4 = right3) and
-  (not (right3 = 2147483647))) and (o5 = (o4 + 1))) and
-  ((right3 = result7) and (right4 = o5))) and
+  (result6 = (number_list[o3]))))) and (not (result6 = true))) and
+  ((((right_is_out7 = right_is_out5) and (right4 = right5)) and
+  ((right_is_out8 = right_is_out6) and (right6 = right4))) and
+  (((((value + 1) <= right3) and (right3 <= 100000)) and
+  (forall v6:int. (((value <= v6) and (v6 <= right3)) ->
+  (not ((number_list[v6]) = true))))) and ((((- 2147483648) <= 2147483647) ->
+  in_range1(right3)) and (((((o5 = right3) and
+  (not (right3 = 2147483647))) and (o6 = (o5 + 1))) and
+  ((right3 = result7) and (right4 = o6))) and
   (((right_is_out4 = right_is_out5) and (right_is_out6 = right_is_out4)) and
-  (((right_is_out3 = result8) and (((100000 <  right4) and
-  (right_is_out4 = true)) or ((not (100000 <  right4)) and
-  (right_is_out4 = false)))) and ((((right_is_out4 = true) and
-  (result9 = true)) or ((not (right_is_out4 = true)) and ((((0 <= right4) and
-  (right4 <= 100000)) and (o6 = right4)) and
-  (result9 = (number_list[o6]))))) and (result9 = true))))))))))))) and ((({
-  bool__content = right_is_out9 } = { bool__content = right_is_out7 }) and ({
-  int__content = right7 } = { int__content = right5 })) and
-  ((right_is_out10 = right_is_out8) and (right8 = right6)))) and ((({
-  bool__content = right_is_out11 } = { bool__content = right_is_out9 }) and
-  ({ int__content = right9 } = { int__content = right7 })) and
-  ((right_is_out12 = right_is_out10) and (right10 = right8))))) and ((({
-  bool__content = right_is_out14 } = { bool__content = right_is_out11 }) and
-  ({ int__content = right11 } = { int__content = right9 })) and
-  ((right_is_out15 = right_is_out12) and (right12 = right10))))) or
-  ((not ((mode = 0) or (mode = 2))) and (((result10 = right_is_out) and
-  (right_is_out13 = of_int(1))) and (((right_is_out13 = right_is_out14) and
-  (right1 = right11)) and ((right_is_out15 = right_is_out13) and
-  (right12 = right1)))))) and (((((mode = 1) or (mode = 2)) and
-  ((((((o7 = value) and (not (value = (-2147483648)))) and
-  (o8 = (o7 - 1))) and ((result11 = left1) and (left2 = o8))) and
+  (((right_is_out3 = result8) and (((100000 <  right4) ->
+  (right_is_out4 = true)) and ((not (100000 <  right4)) ->
+  (right_is_out4 = false)))) and ((((right_is_out4 = true) ->
+  (result9 = true)) and ((not (right_is_out4 = true)) -> ((((0 <= right4) and
+  (right4 <= 100000)) and (o7 = right4)) and
+  (result9 = (number_list[o7]))))) and (result9 = true))))))))))))) and
+  (((right_is_out9 = right_is_out7) and (right7 = right5)) and
+  ((right_is_out10 = right_is_out8) and (right8 = right6)))) and
+  (((right_is_out11 = right_is_out9) and (right9 = right7)) and
+  ((right_is_out12 = right_is_out10) and (right10 = right8))))) and
+  (((right_is_out14 = right_is_out11) and (right11 = right9)) and
+  ((right_is_out15 = right_is_out12) and (right12 = right10))))) and
+  ((not ((mode = 0) or (mode = 2))) -> (((result10 = right_is_out) and
+  (right_is_out13 = of_int(1))) and (((right_is_out14 = right_is_out13) and
+  (right11 = right1)) and ((right_is_out15 = right_is_out13) and
+  (right12 = right1)))))) and (((((mode = 1) or (mode = 2)) ->
+  ((((((o8 = value) and (not (value = (- 2147483648)))) and
+  (o9 = (o8 - 1))) and ((result11 = left1) and (left2 = o9))) and
   ((((temp___238 = left_is_out) and ((temp___237 = left2) and
-  (((result12 = left_is_out) and (((left2 <  0) and (left_is_out2 = true)) or
-  ((not (left2 <  0)) and (left_is_out2 = false)))) and
-  (((((left_is_out2 = left_is_out7) and (left2 = left5)) and
-  ((left_is_out8 = left_is_out2) and (left6 = left2))) and
-  ((((left_is_out2 = true) and (result13 = true)) or
-  ((not (left_is_out2 = true)) and ((((0 <= left2) and (left2 <= 100000)) and
-  (o9 = left2)) and (result13 = (number_list[o9]))))) and
-  (result13 = true))) or (((((left_is_out2 = true) and (result13 = true)) or
-  ((not (left_is_out2 = true)) and ((((0 <= left2) and (left2 <= 100000)) and
-  (o9 = left2)) and (result13 = (number_list[o9]))))) and
-  (not (result13 = true))) and (((({ bool__content = left_is_out7 } = {
-  bool__content = left_is_out5 }) and (left4 = left5)) and
-  ((left_is_out8 = left_is_out6) and (left6 = left4))) and
-  ((((0 <= left3) and (left3 <= (value - 1))) and
-  (forall v1:int. (((left3 <= v1) and (v1 <= value)) ->
-  (not ((number_list[v1]) = true))))) and ((((-2147483648) <= 2147483647) ->
-  in_range1(left3)) and (((((o10 = left3) and
-  (not (left3 = (-2147483648)))) and (o11 = (o10 - 1))) and
-  ((result14 = left3) and (left4 = o11))) and
-  (((left_is_out4 = left_is_out5) and (left_is_out6 = left_is_out4)) and
-  (((result15 = left_is_out3) and (((left4 <  0) and
-  (left_is_out4 = true)) or ((not (left4 <  0)) and
-  (left_is_out4 = false)))) and ((((left_is_out4 = true) and
-  (result16 = true)) or ((not (left_is_out4 = true)) and ((((0 <= left4) and
-  (left4 <= 100000)) and (o12 = left4)) and
-  (result16 = (number_list[o12]))))) and (result16 = true))))))))))))) and
-  ((({ bool__content = left_is_out9 } = { bool__content = left_is_out7 }) and
-  ({ int__content = left7 } = { int__content = left5 })) and
-  ((left_is_out10 = left_is_out8) and (left8 = left6)))) and ((({
-  bool__content = left_is_out11 } = { bool__content = left_is_out9 }) and ({
-  int__content = left9 } = { int__content = left7 })) and
-  ((left_is_out12 = left_is_out10) and (left10 = left8))))) and ((({
-  bool__content = left_is_out14 } = { bool__content = left_is_out11 }) and ({
-  int__content = left11 } = { int__content = left9 })) and
-  ((left_is_out15 = left_is_out12) and (left12 = left10))))) or
-  ((not ((mode = 1) or (mode = 2))) and (((result17 = left_is_out) and
-  (left_is_out13 = of_int(1))) and (((left_is_out13 = left_is_out14) and
-  (left1 = left11)) and ((left_is_out15 = left_is_out13) and
-  (left12 = left1)))))) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result13 = test_prime_and_coprime_numbers__p__nearest_number__result11) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result14 = test_prime_and_coprime_numbers__p__nearest_number__result12)) and
-  (((not (right_is_out14 = true)) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result11 = test_prime_and_coprime_numbers__p__nearest_number__result8) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result12 = test_prime_and_coprime_numbers__p__nearest_number__result9)) and
-  (((not (left_is_out14 = true)) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result8 = test_prime_and_coprime_numbers__p__nearest_number__result5) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result9 = test_prime_and_coprime_numbers__p__nearest_number__result6)) and
-  ((((((o15 = (right11 - value)) and in_range1((right11 - value))) and
-  (o16 = abs_int(o15))) and ((o17 = o16) and in_range1(o16))) and
-  (((((o13 = (left11 - value)) and in_range1((left11 - value))) and
-  (o14 = abs_int(o13))) and ((o18 = o14) and in_range1(o14))) and
-  (((o18 <= o17) and (result18 = true)) or ((not (o18 <= o17)) and
-  (result18 = false))))) and (((result18 = true) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result5 = {
-  int__content = test_prime_and_coprime_numbers__p__nearest_number__result3
-  }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result6 = test_prime_and_coprime_numbers__p__nearest_number__result3)) and
-  (((o19 = left11) and in_range2(left11)) and
+  (((result12 = left_is_out) and (((left2 <  0) -> (left_is_out2 = true)) and
+  ((not (left2 <  0)) -> (left_is_out2 = false)))) and
+  (((((left_is_out9 = left_is_out2) and (left7 = left2)) and
+  ((left_is_out10 = left_is_out2) and (left8 = left2))) and
+  ((((left_is_out2 = true) -> (result13 = true)) and
+  ((not (left_is_out2 = true)) -> ((((0 <= left2) and (left2 <= 100000)) and
+  (o10 = left2)) and (result13 = (number_list[o10]))))) and
+  (result13 = true))) or (((((left_is_out2 = true) -> (result13 = true)) and
+  ((not (left_is_out2 = true)) -> ((((0 <= left2) and (left2 <= 100000)) and
+  (o10 = left2)) and (result13 = (number_list[o10]))))) and
+  (not (result13 = true))) and ((((left_is_out9 = left_is_out5) and
+  (left7 = left4)) and ((left_is_out10 = left_is_out6) and
+  (left8 = left4))) and ((((0 <= left3) and (left3 <= (value - 1))) and
+  (forall v6:int. (((left3 <= v6) and (v6 <= value)) ->
+  (not ((number_list[v6]) = true))))) and ((((- 2147483648) <= 2147483647) ->
+  in_range1(left3)) and (((((o11 = left3) and
+  (not (left3 = (- 2147483648)))) and (o12 = (o11 - 1))) and
+  ((result14 = left3) and (left4 = o12))) and
+  (((left_is_out5 = left_is_out4) and (left_is_out6 = left_is_out4)) and
+  (((result15 = left_is_out3) and (((left4 <  0) ->
+  (left_is_out4 = true)) and ((not (left4 <  0)) ->
+  (left_is_out4 = false)))) and ((((left_is_out4 = true) ->
+  (result16 = true)) and ((not (left_is_out4 = true)) -> ((((0 <= left4) and
+  (left4 <= 100000)) and (o13 = left4)) and
+  (result16 = (number_list[o13]))))) and (result16 = true))))))))))))) and
+  (((left_is_out11 = left_is_out9) and (left9 = left7)) and
+  ((left_is_out12 = left_is_out10) and (left10 = left8)))) and
+  (((left_is_out13 = left_is_out11) and (left11 = left9)) and
+  ((left_is_out14 = left_is_out12) and (left12 = left10))))) and
+  (((left_is_out16 = left_is_out13) and (left13 = left11)) and
+  ((left_is_out17 = left_is_out14) and (left14 = left12))))) and
+  ((not ((mode = 1) or (mode = 2))) -> (((result17 = left_is_out) and
+  (left_is_out15 = of_int(1))) and (((left_is_out16 = left_is_out15) and
+  (left13 = left1)) and ((left_is_out17 = left_is_out15) and
+  (left14 = left1)))))) and
+  ((((test_prime_and_coprime_numbers__p__nearest_number__result21 = test_prime_and_coprime_numbers__p__nearest_number__result19) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result22 = test_prime_and_coprime_numbers__p__nearest_number__result20)) and
+  (((not (right_is_out14 = true)) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result19 = test_prime_and_coprime_numbers__p__nearest_number__result12) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result20 = test_prime_and_coprime_numbers__p__nearest_number__result13)) and
+  (((not (left_is_out16 = true)) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result12 = test_prime_and_coprime_numbers__p__nearest_number__result7) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result13 = test_prime_and_coprime_numbers__p__nearest_number__result8)) and
+  ((((((o16 = (right11 - value)) and in_range1((right11 - value))) and
+  (o17 = abs_int(o16))) and ((o18 = o17) and in_range1(o17))) and
+  (((((o14 = (left13 - value)) and in_range1((left13 - value))) and
+  (o15 = abs_int(o14))) and ((o19 = o15) and in_range1(o15))) and
+  (((o19 <= o18) -> (result18 = true)) and ((not (o19 <= o18)) ->
+  (result18 = false))))) and (((result18 = true) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result7 = test_prime_and_coprime_numbers__p__nearest_number__result3) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result8 = test_prime_and_coprime_numbers__p__nearest_number__result3)) and
+  (((o20 = left13) and in_range2(left13)) and
   ((result19 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result3 = o19))))) or
-  ((not (result18 = true)) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result5 = {
-  int__content = test_prime_and_coprime_numbers__p__nearest_number__result4
-  }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result6 = test_prime_and_coprime_numbers__p__nearest_number__result4)) and
-  (((o20 = right11) and in_range2(right11)) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result3 = o20))))) and
+  ((not (result18 = true)) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result7 = test_prime_and_coprime_numbers__p__nearest_number__result4) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result8 = test_prime_and_coprime_numbers__p__nearest_number__result4)) and
+  (((o21 = right11) and in_range2(right11)) and
   ((result20 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result4 = o20))))))))) or
-  ((left_is_out14 = true) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result8 = {
-  int__content = test_prime_and_coprime_numbers__p__nearest_number__result7
-  }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result9 = test_prime_and_coprime_numbers__p__nearest_number__result7)) and
-  (((o21 = right11) and in_range2(right11)) and ((result21 = { int__content =
-  test_prime_and_coprime_numbers__p__nearest_number__result2 }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result7 = o21)))))))) or
-  ((right_is_out14 = true) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result11 = {
-  int__content = test_prime_and_coprime_numbers__p__nearest_number__result10
-  }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result12 = test_prime_and_coprime_numbers__p__nearest_number__result10)) and
-  ((not (left_is_out14 = true)) and (((o22 = left11) and
-  in_range2(left11)) and ((result22 = { int__content =
-  test_prime_and_coprime_numbers__p__nearest_number__result2 }) and
-  (test_prime_and_coprime_numbers__p__nearest_number__result10 = o22))))))))))))))))) and
-  (((test_prime_and_coprime_numbers__p__nearest_number__result17 = test_prime_and_coprime_numbers__p__nearest_number__result15) and
-  ((left_is_out18 = left_is_out16) and ((right_is_out18 = right_is_out16) and
-  ((left15 = left13) and (right15 = right13))))) and
-  ((test_prime_and_coprime_numbers__p__nearest_number__result18 = test_prime_and_coprime_numbers__p__nearest_number__result16) and
-  ((left_is_out19 = left_is_out17) and ((right_is_out19 = right_is_out17) and
-  ((left16 = left14) and (right16 = right14))))))) ->
-  ((((bool_eq(to_int((number_list[value])), to_int(of_int(1))) = true) and
-  ((test_prime_and_coprime_numbers__p__nearest_number__result17).int__content = value)) or
-  (not (bool_eq(to_int((number_list[value])), to_int(of_int(1))) = true))) ->
-  ((((match_bool(bool_eq(to_int((number_list[value])), to_int(of_int(0))),
-  bool_eq(mode, 0), false) = true) and
-  ((value <  (test_prime_and_coprime_numbers__p__nearest_number__result17).int__content) and
-  (forall v1:int. (((value <= v1) and
-  (v1 <= ((test_prime_and_coprime_numbers__p__nearest_number__result17).int__content - 1))) ->
-  (not ((number_list[v1]) = true)))))) or
-  (not (match_bool(bool_eq(to_int((number_list[value])), to_int(of_int(0))),
-  bool_eq(mode, 0), false) = true))) ->
-  ((match_bool(bool_eq(to_int((number_list[value])), to_int(of_int(0))),
-  bool_eq(mode, 1), false) = true) ->
-  (((test_prime_and_coprime_numbers__p__nearest_number__result17).int__content <  value) ->
-  (((((o23 = ((test_prime_and_coprime_numbers__p__nearest_number__result17).int__content + 1)) and
-  in_range1(((test_prime_and_coprime_numbers__p__nearest_number__result17).int__content + 1))) and
-  (((o23 <= v) and (o24 = true)) or ((not (o23 <= v)) and
-  (o24 = false)))) and (((v <= value) and (result23 = match_bool(o24, true,
-  false))) or ((not (v <= value)) and (result23 = match_bool(o24, false,
-  false))))) -> ((result23 = true) -> (0 <= v))))))))))))
+  (test_prime_and_coprime_numbers__p__nearest_number__result4 = o21))))))))) and
+  ((left_is_out16 = true) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result12 = test_prime_and_coprime_numbers__p__nearest_number__result9) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result13 = test_prime_and_coprime_numbers__p__nearest_number__result9)) and
+  (((o22 = right11) and in_range2(right11)) and
+  ((result21 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result9 = o22)))))))) and
+  ((right_is_out14 = true) ->
+  (((test_prime_and_coprime_numbers__p__nearest_number__result19 = test_prime_and_coprime_numbers__p__nearest_number__result14) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result20 = test_prime_and_coprime_numbers__p__nearest_number__result14)) and
+  ((not (left_is_out16 = true)) and (((o23 = left13) and
+  in_range2(left13)) and
+  ((result22 = test_prime_and_coprime_numbers__p__nearest_number__result2) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result14 = o23)))))))) or
+  (((right_is_out14 = true) and (not (right_is_out14 = true))) and
+  ((test_prime_and_coprime_numbers__p__nearest_number__result21 = test_prime_and_coprime_numbers__p__nearest_number__result17) and
+  (test_prime_and_coprime_numbers__p__nearest_number__result22 = test_prime_and_coprime_numbers__p__nearest_number__result18)))))))))
+
+axiom H10 :
+  (test_prime_and_coprime_numbers__p__nearest_number__result25 = test_prime_and_coprime_numbers__p__nearest_number__result23)
+
+axiom H11 : (left_is_out20 = left_is_out18)
+
+axiom H12 : (right_is_out18 = right_is_out16)
+
+axiom H13 : (left17 = left15)
+
+axiom H14 : (right15 = right13)
+
+axiom H15 :
+  (test_prime_and_coprime_numbers__p__nearest_number__result26 = test_prime_and_coprime_numbers__p__nearest_number__result24)
+
+axiom H16 : (left_is_out21 = left_is_out19)
+
+axiom H17 : (right_is_out19 = right_is_out17)
+
+axiom H18 : (left18 = left16)
+
+axiom H19 : (right16 = right14)
+
+axiom H20 : ((bool_eq(to_int((number_list[value])),
+  to_int(of_int(1))) = true) ->
+  (test_prime_and_coprime_numbers__p__nearest_number__result25 = value))
+
+axiom H21 : ((match_bool(bool_eq(to_int((number_list[value])),
+  to_int(of_int(0))), bool_eq(mode, 0), false) = true) ->
+  ((value <  test_prime_and_coprime_numbers__p__nearest_number__result25) and
+  (forall v6:int. (((value <= v6) and
+  (v6 <= (test_prime_and_coprime_numbers__p__nearest_number__result25 - 1))) ->
+  (not ((number_list[v6]) = true))))))
+
+axiom H22 : (match_bool(bool_eq(to_int((number_list[value])),
+  to_int(of_int(0))), bool_eq(mode, 1), false) = true)
+
+axiom H23 :
+  (test_prime_and_coprime_numbers__p__nearest_number__result25 <  value)
+
+axiom H24 :
+  ((o24 = (test_prime_and_coprime_numbers__p__nearest_number__result25 + 1)) and
+  in_range1((test_prime_and_coprime_numbers__p__nearest_number__result25 + 1)))
+
+axiom H25 : (((o24 <= v3) -> (o25 = true)) and ((not (o24 <= v3)) ->
+  (o25 = false)))
+
+axiom H26 : (((v3 <= value) -> (result23 = match_bool(o25, true, false))) and
+  ((not (v3 <= value)) -> (result23 = match_bool(o25, false, false))))
+
+axiom H27 : (result23 = true)
+
+ (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (0 <= v3)

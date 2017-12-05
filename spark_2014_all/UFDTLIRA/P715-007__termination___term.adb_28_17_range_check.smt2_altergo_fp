@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -151,6 +151,11 @@ function empty_if_c_is_neg__ref___projection(a: empty_if_c_is_neg__ref) : intege
 
 axiom last__def_axiom : (last = c)
 
+logic us : int
+
+axiom H : in_range(c)
+
+axiom H1 : (not (c <  0))
+
  (* File "term.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> ((not (c <  0)) ->
-  dynamic_property(0, last, c)))
+goal WP_parameter_def : dynamic_property(0, last, c)

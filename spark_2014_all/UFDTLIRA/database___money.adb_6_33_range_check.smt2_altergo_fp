@@ -293,7 +293,48 @@ logic b1 : raw_amount
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic money__Oadd__result : cur
+
+logic money__Oadd__result1 : raw_amount
+
+logic o : int
+
+logic o1 : raw_amount
+
+logic o2 : cur
+
+logic o3 : raw_amount
+
+logic o4 : cur
+
+logic o5 : raw_amount
+
+logic result : cur
+
+logic result1 : raw_amount
+
+logic money__Oadd__result2 : cur
+
+logic money__Oadd__result3 : raw_amount
+
+logic money__Oadd__result4 : cur
+
+logic money__Oadd__result5 : raw_amount
+
+logic money__Oadd__result6 : cur
+
+logic money__Oadd__result7 : raw_amount
+
+logic money__Oadd__result8 : cur
+
+logic money__Oadd__result9 : raw_amount
+
+logic money__Oadd__result10 : cur
+
+logic money__Oadd__result11 : raw_amount
+
+axiom H : ((to_rep(a) = to_rep(b)) and
+  ((to_rep1(a1) + to_rep1(b1)) <= 1000000))
+
  (* File "money.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : (((to_rep(a) = to_rep(b)) and
-  ((to_rep1(a1) + to_rep1(b1)) <= 1000000)) ->
-  in_range2((to_rep1(a1) + to_rep1(b1))))
+goal WP_parameter_def : in_range2((to_rep1(a1) + to_rep1(b1)))

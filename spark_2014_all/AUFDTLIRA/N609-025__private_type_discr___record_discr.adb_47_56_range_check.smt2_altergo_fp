@@ -374,7 +374,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1196,20 +1196,106 @@ axiom init__def_axiom : ({ us_split_discrs4 = {
   elts3 = slide(a, to_rep1(first(a1)), 1); rt3 = mk3(1, to_rep1(last(a1))) }
   } })))
 
+logic record_discr__search__result : bool
+
+logic record_discr__search__result1 : us_main_type
+
+logic us : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : (int,natural) farray
+
+logic o3 : t3
+
+logic o4 : (int,natural) farray
+
+logic o5 : t3
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : (int,natural) farray
+
+logic o9 : t3
+
+logic o10 : natural
+
+logic o11 : (int,natural) farray
+
+logic o12 : t1
+
+logic o13 : natural
+
+logic o14 : (int,natural) farray
+
+logic o15 : t1
+
+logic record_discr__search__init__assume : natural
+
+logic record_discr__search__init__assume1 : (int,natural) farray
+
+logic record_discr__search__init__assume2 : t2
+
+logic o16 : bool
+
+logic o17 : us_main_type
+
+logic temp___260 : int
+
+logic i : int
+
+logic result : bool
+
+logic result1 : us_main_type
+
+logic record_discr__search__result2 : bool
+
+logic record_discr__search__result3 : us_main_type
+
+logic record_discr__search__result4 : bool
+
+logic record_discr__search__result5 : us_main_type
+
+logic record_discr__search__result6 : bool
+
+logic record_discr__search__result7 : us_main_type
+
+logic record_discr__search__result8 : bool
+
+logic record_discr__search__result9 : us_main_type
+
+logic record_discr__search__result10 : bool
+
+logic record_discr__search__result11 : us_main_type
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((to_rep1(first(a1)) = 1) and (0 <= to_rep1(last(a1))))
+
+axiom H3 : ((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1))))
+
+axiom H4 : (((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
+  (((1 <= to_rep1(last(a1))) ->
+  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = ((to_rep1(last(a1)) - 1) + 1))) and
+  ((not (1 <= to_rep1(last(a1)))) ->
+  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = 0)))) and
+  ((not (to_rep1(first(a1)) <= to_rep1(last(a1)))) ->
+  ((1 <= to_rep1(last(a1))) -> (0 = ((to_rep1(last(a1)) - 1) + 1)))))
+
+axiom H5 : (slide(a, to_rep1(first(a1)), 1) = o2)
+
+axiom H6 : (mk3(1, to_rep1(last(a1))) = o3)
+
+axiom H7 : (o4 = o2)
+
+axiom H8 : (o5 = o3)
+
  (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:(int,natural) farray. forall o1:t3.
-  forall o2:(int,natural) farray. forall o3:t3. (dynamic_property(1,
-  2147483647, to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range1(e) ->
-  (((to_rep1(first(a1)) = 1) and (0 <= to_rep1(last(a1)))) ->
-  (((us = to_rep1(last(a1))) and in_range1(to_rep1(last(a1)))) ->
-  ((((((to_rep1(first(a1)) <= to_rep1(last(a1))) and
-  (((1 <= to_rep1(last(a1))) and
-  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = ((to_rep1(last(a1)) - 1) + 1))) or
-  ((not (1 <= to_rep1(last(a1)))) and
-  (((to_rep1(last(a1)) - to_rep1(first(a1))) + 1) = 0)))) or
-  ((not (to_rep1(first(a1)) <= to_rep1(last(a1)))) and
-  (((1 <= to_rep1(last(a1))) and (0 = ((to_rep1(last(a1)) - 1) + 1))) or
-  (not (1 <= to_rep1(last(a1))))))) and ((slide(a, to_rep1(first(a1)),
-  1) = o) and (mk3(1, to_rep1(last(a1))) = o1))) and ((o2 = o) and
-  (o3 = o1))) -> in_range1(to_rep1(last(a1)))))))))
+goal WP_parameter_def : in_range1(to_rep1(last(a1)))

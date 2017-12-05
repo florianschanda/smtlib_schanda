@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -789,7 +789,7 @@ axiom compare_def_gt :
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1095,10 +1095,15 @@ logic number2 : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+axiom H : (dynamic_property1(1, to_rep2(number), to_rep1(first(number2)),
+  to_rep1(last(number2))) and ((to_rep1(first(number2)) = 1) and
+  (to_rep1(last(number2)) = to_rep2(number))))
+
+axiom H1 : (1 <= i)
+
+axiom H2 : (i <= to_rep1(last(number2)))
+
  (* File "very_longs.ads", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. ((dynamic_property1(1, to_rep2(number),
-  to_rep1(first(number2)), to_rep1(last(number2))) and
-  ((to_rep1(first(number2)) = 1) and
-  (to_rep1(last(number2)) = to_rep2(number)))) -> (((1 <= i) and
-  (i <= to_rep1(last(number2)))) -> (to_rep1(first(number2)) <= i))))
+goal WP_parameter_def : (to_rep1(first(number2)) <= i)

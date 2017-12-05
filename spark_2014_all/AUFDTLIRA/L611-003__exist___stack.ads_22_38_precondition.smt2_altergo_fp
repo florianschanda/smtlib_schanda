@@ -161,7 +161,7 @@ function size_t__ref___projection(a: size_t__ref) : size_t =
 
 type element_t
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -333,7 +333,7 @@ axiom last_element__def_axiom :
   (forall t:(int,element_t) farray.
   (forall s:int [last_element(t, s)]. (in_range2(s) -> (((0 <  s) ->
   (last_element(t, s) = to_rep((t[s])))) and ((not (0 <  s)) ->
-  (last_element(t, s) = (-1)))))))
+  (last_element(t, s) = (- 1)))))))
 
 logic valid : (int,element_t) farray, int -> bool
 
@@ -347,7 +347,7 @@ axiom valid__def_axiom :
   ((forall i:int. (((1 <= i) and (i <= s)) -> ((0 <= to_rep((t[i]))) and
    (to_rep((t[i])) <= 2147483647)))) and
   (forall i:int. ((((s + 1) <= i) and (i <= 100)) ->
-  (to_rep((t[i])) = (-1))))))))
+  (to_rep((t[i])) = (- 1))))))))
 
 logic size : (int,element_t) farray -> int
 
@@ -370,13 +370,52 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "stack.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t:(int,element_t) farray. forall s:int. forall result:bool.
-  (in_range2(s) -> (in_range1(value) -> (((result = valid(t, s)) and
-  ((result = true) <->
+logic t : (int,element_t) farray
+
+logic s : int
+
+logic o : int
+
+logic stack__push__n__assume : int
+
+logic o1 : element_t
+
+logic o2 : int
+
+logic o3 : (int,element_t) farray
+
+logic o4 : int
+
+logic result : bool
+
+logic result1 : (int,element_t) farray
+
+logic t1 : (int,element_t) farray
+
+logic result2 : int
+
+logic s1 : int
+
+logic t2 : (int,element_t) farray
+
+logic s2 : int
+
+logic t3 : (int,element_t) farray
+
+logic s3 : int
+
+axiom H : in_range2(s)
+
+axiom H1 : in_range1(value)
+
+axiom H2 : ((result = valid(t, s)) and ((result = true) <->
   ((forall i:int. (((1 <= i) and (i <= s)) -> ((0 <= to_rep((t[i]))) and
    (to_rep((t[i])) <= 2147483647)))) and
   (forall i:int. ((((s + 1) <= i) and (i <= 100)) ->
-  (to_rep((t[i])) = (-1))))))) -> ((result = true) ->
-  (exists s1:int. (((0 <= s1) and (s1 <= 100)) and (valid(t, s1) = true))))))))
+  (to_rep((t[i])) = (- 1)))))))
+
+axiom H3 : (result = true)
+
+ (* File "stack.ads", line 5, characters 0-0 *)
+goal WP_parameter_def :
+  (exists s4:int. (((0 <= s4) and (s4 <= 100)) and (valid(t, s4) = true)))

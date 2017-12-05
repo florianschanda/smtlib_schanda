@@ -695,25 +695,68 @@ logic c : (int,et1) farray
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic a : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a2 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a3 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a4 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+axiom H : in_range4(i1)
+
+axiom H1 : in_range4(i2)
+
+axiom H2 : in_range3(j1)
+
+axiom H3 : in_range3(j2)
+
+axiom H4 : in_range2(k1)
+
+axiom H5 : in_range2(k2)
+
+axiom H6 : (((not (i1 = i2)) or (not (j1 = j2))) or (not (k1 = k2)))
+
+axiom H7 : (result = a)
+
+axiom H8 : (a1 = (a[i1 <- ((a[i1])[j1 <- (((a[i1])[j1])[k1 <- b])])]))
+
+axiom H9 : (result1 = a1)
+
+axiom H10 : (a2 = (a1[i2 <- ((a1[i2])[j2 <- (((a1[i2])[j2])[k2 <- c])])]))
+
+axiom H11 : (a2 = a3)
+
+axiom H12 : (a4 = a2)
+
+logic m : int
+
+axiom H13 : (90 <= m)
+
+axiom H14 : (m <= 99)
+
+logic n : int
+
+axiom H15 : (1 <= n)
+
+axiom H16 : (n <= 16)
+
+logic o : int
+
+axiom H17 : (5 <= o)
+
+axiom H18 : (o <= 50)
+
+axiom H19 : (not (((m = i1) and (n = j1)) and (o = k1)))
+
+axiom H20 : (not (((m = i2) and (n = j2)) and (o = k2)))
+
  (* File "ar.ads", line 676, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a2:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a3:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a4:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  ((in_range4(i1) and (in_range4(i2) and (in_range3(j1) and
-  (in_range3(j2) and (in_range2(k1) and (in_range2(k2) and
-  ((((not (i1 = i2)) or (not (j1 = j2))) or (not (k1 = k2))) and
-  ((((result = a) and
-  (a1 = (a[i1 <- ((a[i1])[j1 <- (((a[i1])[j1])[k1 <- b])])]))) and
-  ((result1 = a1) and
-  (a2 = (a1[i2 <- ((a1[i2])[j2 <- (((a1[i2])[j2])[k2 <- c])])])))) and
-  ((a2 = a3) and (a4 = a2)))))))))) ->
-  (forall m:int. (((90 <= m) and (m <= 99)) ->
-  (forall n:int. (((1 <= n) and (n <= 16)) ->
-  (forall o:int. (((5 <= o) and (o <= 50)) -> ((not ((((m = i1) and
-  (n = j1)) and (o = k1)) or (((m = i2) and (n = j2)) and (o = k2)))) ->
-  (bool_eq7((((a3[m])[n])[o]), 1, 10, (((a[m])[n])[o]), 1, 10) = true))))))))))
+goal WP_parameter_def : (bool_eq7((((a3[m])[n])[o]), 1, 10, (((a[m])[n])[o]),
+  1, 10) = true)

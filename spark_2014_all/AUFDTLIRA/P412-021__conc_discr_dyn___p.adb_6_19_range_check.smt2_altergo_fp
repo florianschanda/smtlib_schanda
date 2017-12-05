@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -815,7 +815,7 @@ function pp__ref___projection(a: pp__ref) : us_rep2 = (a).pp__content
 
 type ttB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -892,19 +892,31 @@ axiom last__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "p.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__:bool. forall self__1:natural. forall self__2:bool.
-  forall self__3:natural. forall self__4:(int,natural) farray.
-  forall self__5:t1. (((to_rep(self__1) = to_rep(((to_base({
-  us_split_discrs2 = { rec__p__my_rec__c = self__3 }; us_split_fields3 = {
+logic self__ : bool
+
+logic self__1 : natural
+
+logic self__2 : bool
+
+logic self__3 : natural
+
+logic self__4 : (int,natural) farray
+
+logic self__5 : t1
+
+logic us : int
+
+axiom H : ((to_rep(self__1) = to_rep(((to_base({ us_split_discrs2 = {
+  rec__p__my_rec__c = self__3 }; us_split_fields3 = {
   rec__p__my_rec__content1 = { elts1 = self__4; rt1 = self__5 } }
   })).us_split_discrs1).rec__p__my_rec__c)) and (dynamic_property3(1,
   to_rep(self__1), to_rep1(first2(self__5)), to_rep1(last2(self__5))) and
   ((to_rep1(first2(self__5)) = 1) and
-  (to_rep1(last2(self__5)) = to_rep(self__1))))) -> dynamic_property4(1,
-  last4({ us_split_discrs4 = { rec__p__pp__b = self__; rec__p__pp__c =
-  self__1 }; us_split_fields5 = { rec__p__pp__dummy = self__2;
-  rec__p__pp__r = { us_split_discrs2 = { rec__p__my_rec__c = self__3 };
-  us_split_fields3 = { rec__p__my_rec__content1 = { elts1 = self__4; rt1 =
-  self__5 } } } } }), 3)))
+  (to_rep1(last2(self__5)) = to_rep(self__1)))))
+
+ (* File "p.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : dynamic_property4(1, last4({ us_split_discrs4 = {
+  rec__p__pp__b = self__; rec__p__pp__c = self__1 }; us_split_fields5 = {
+  rec__p__pp__dummy = self__2; rec__p__pp__r = { us_split_discrs2 = {
+  rec__p__my_rec__c = self__3 }; us_split_fields3 = {
+  rec__p__my_rec__content1 = { elts1 = self__4; rt1 = self__5 } } } } }), 3)

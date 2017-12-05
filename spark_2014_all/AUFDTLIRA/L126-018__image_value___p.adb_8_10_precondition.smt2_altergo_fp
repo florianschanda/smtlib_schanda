@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -404,18 +404,51 @@ logic s__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic y : int
+
+logic x : int
+
+logic s : (int,character) farray
+
+logic p__s__assume : (int,character) farray
+
+logic p__s__assume1 : t
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+axiom H : in_range(y)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = 1)
+
+axiom H3 : in_range3(x1)
+
+axiom H4 : (({ elts = p__s__assume; rt = p__s__assume1
+  } = get_line__4(void)) and dynamic_property(1, 2147483647,
+  to_rep1(first(p__s__assume1)), to_rep1(last(p__s__assume1))))
+
+axiom H5 : (result1 = s)
+
+axiom H6 : (s1 = p__s__assume)
+
+axiom H7 : (to_rep1(s__first) = to_rep1(first(p__s__assume1)))
+
+axiom H8 : (to_rep1(s__last) = to_rep1(last(p__s__assume1)))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
  (* File "p.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:int. forall x:int. forall s:(int,character) farray.
-  forall p__s__assume:(int,character) farray. forall p__s__assume1:t.
-  forall result:int. forall x1:int. forall result1:(int,character) farray.
-  forall s1:(int,character) farray. (in_range(y) -> (((result = x) and
-  (x1 = 1)) -> (in_range3(x1) -> (((({ elts = p__s__assume; rt =
-  p__s__assume1 } = get_line__4(void)) and dynamic_property(1, 2147483647,
-  to_rep1(first(p__s__assume1)), to_rep1(last(p__s__assume1)))) and
-  (((result1 = s) and (s1 = p__s__assume)) and
-  ((to_rep1(s__first) = to_rep1(first(p__s__assume1))) and
-  (to_rep1(s__last) = to_rep1(last(p__s__assume1)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(s__first), to_rep1(s__last)) ->
-  attr__ATTRIBUTE_VALUE__pre_check3(from_string({ elts = s1; rt =
-  mk(to_rep1(s__first), to_rep1(s__last)) }))))))))
+goal WP_parameter_def : attr__ATTRIBUTE_VALUE__pre_check3(from_string({
+  elts = s1; rt = mk(to_rep1(s__first), to_rep1(s__last)) }))

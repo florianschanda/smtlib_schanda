@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -527,7 +527,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type int__
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -565,7 +565,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type file_descr
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -909,9 +909,9 @@ logic cur_position_at_start : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic temp___String_Literal_574 : unit -> (int,character) farray
+logic temp___String_Literal_568 : unit -> (int,character) farray
 
-axiom temp___String_Literal_574__def_axiom : true
+axiom temp___String_Literal_568__def_axiom : true
 
 logic fpeek1 : int, int, (int,character) farray -> int
 
@@ -978,34 +978,109 @@ axiom fpeek__def_axiom1 :
   (fpeek1(stream, helpers__cur_position,
   helpers__the_file) = to_rep((helpers__the_file[helpers__cur_position]))))))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_file:(int,character) farray. forall cur_position:int.
-  forall file__split_fields:file_descr. forall file__split_fields1:bool.
-  forall file__split_fields2:bool. forall file__split_fields3:count.
-  forall file__split_fields4:count. forall file__split_fields5:count.
-  forall file__split_fields6:bool. forall num:int. forall idx:int.
-  forall the_file1:(int,character) farray. forall cur_position1:int.
-  forall file__split_fields7:file_descr. forall file__split_fields8:bool.
-  forall file__split_fields9:bool. forall file__split_fields10:count.
-  forall file__split_fields11:count. forall file__split_fields12:count.
-  forall file__split_fields13:bool. forall result__:(int,character) farray.
-  forall num1:int. forall the_file2:(int,character) farray.
-  forall cur_position2:int. forall file__split_fields14:file_descr.
-  forall file__split_fields15:bool. forall file__split_fields16:bool.
-  forall file__split_fields17:count. forall file__split_fields18:count.
-  forall file__split_fields19:count. forall file__split_fields20:bool.
-  forall result__1:(int,character) farray. forall num2:int.
-  forall the_file3:(int,character) farray. forall cur_position3:int.
-  forall file__split_fields21:file_descr. forall file__split_fields22:bool.
-  forall file__split_fields23:bool. forall file__split_fields24:count.
-  forall file__split_fields25:count. forall file__split_fields26:count.
-  forall file__split_fields27:bool. forall result__2:(int,character) farray.
-  forall num3:int. (dynamic_property(1, 2147483647, to_rep1(result____first),
-  to_rep1(result____last)) -> (((0 <= 2147483647) -> in_range4(num)) ->
-  (in_range2(cur_position) -> (in_range3(eof_ch) -> ((mod(eof,
-  256) = eof_ch) -> (in_range5(eof) -> (((not (end_of_file({
-  us_split_fields1 = { rec__textio__file_type__descr = file__split_fields;
+logic the_file : (int,character) farray
+
+logic cur_position : int
+
+logic file__split_fields : file_descr
+
+logic file__split_fields1 : bool
+
+logic file__split_fields2 : bool
+
+logic file__split_fields3 : count
+
+logic file__split_fields4 : count
+
+logic file__split_fields5 : count
+
+logic file__split_fields6 : bool
+
+logic num : int
+
+logic idx : int
+
+logic the_file1 : (int,character) farray
+
+logic cur_position1 : int
+
+logic file__split_fields7 : file_descr
+
+logic file__split_fields8 : bool
+
+logic file__split_fields9 : bool
+
+logic file__split_fields10 : count
+
+logic file__split_fields11 : count
+
+logic file__split_fields12 : count
+
+logic file__split_fields13 : bool
+
+logic result__ : (int,character) farray
+
+logic num1 : int
+
+logic the_file2 : (int,character) farray
+
+logic cur_position2 : int
+
+logic file__split_fields14 : file_descr
+
+logic file__split_fields15 : bool
+
+logic file__split_fields16 : bool
+
+logic file__split_fields17 : count
+
+logic file__split_fields18 : count
+
+logic file__split_fields19 : count
+
+logic file__split_fields20 : bool
+
+logic result__1 : (int,character) farray
+
+logic num2 : int
+
+logic the_file3 : (int,character) farray
+
+logic cur_position3 : int
+
+logic file__split_fields21 : file_descr
+
+logic file__split_fields22 : bool
+
+logic file__split_fields23 : bool
+
+logic file__split_fields24 : count
+
+logic file__split_fields25 : count
+
+logic file__split_fields26 : count
+
+logic file__split_fields27 : bool
+
+logic result__2 : (int,character) farray
+
+logic num3 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(result____first),
+  to_rep1(result____last))
+
+axiom H1 : ((0 <= 2147483647) -> in_range4(num))
+
+axiom H2 : in_range2(cur_position)
+
+axiom H3 : in_range3(eof_ch)
+
+axiom H4 : (mod(eof, 256) = eof_ch)
+
+axiom H5 : in_range5(eof)
+
+axiom H6 : ((not (end_of_file({ us_split_fields1 = {
+  rec__textio__file_type__descr = file__split_fields;
   rec__textio__file_type__before_lm = file__split_fields1;
   rec__textio__file_type__before_lm_pm = file__split_fields2;
   rec__textio__file_type__col = file__split_fields3;
@@ -1013,8 +1088,9 @@ goal WP_parameter_def :
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
   cur_position, the_file) = true)) and ((to_rep1(result____first) = 1) and
-  (to_rep1(result____last) = 2147483647))) ->
-  ((((cur_position = cur_position_at_start) and
+  (to_rep1(result____last) = 2147483647)))
+
+axiom H7 : (((cur_position = cur_position_at_start) and
   (in_range2(cur_position_at_start) and
   (((forall idx1:int. (((1 <= idx1) and (idx1 <= num1)) ->
     (to_rep((result__[idx1])) = to_rep((the_file1[((idx1 - 1) + cur_position_at_start)]))))) and
@@ -1031,21 +1107,19 @@ goal WP_parameter_def :
   ((file__split_fields19 = file__split_fields12) and
   (file__split_fields20 = file__split_fields13))))))) and
   ((cur_position1 = cur_position2) and (the_file1 = the_file2))))) and
-  ((num3 = num1) and ((result__2 = result__) and (({
-  rec__textio__file_type__descr = file__split_fields21;
-  rec__textio__file_type__before_lm = file__split_fields22;
-  rec__textio__file_type__before_lm_pm = file__split_fields23;
-  rec__textio__file_type__col = file__split_fields24;
-  rec__textio__file_type__line = file__split_fields25;
-  rec__textio__file_type__page = file__split_fields26;
-  rec__textio__file_type__is_regular_file = file__split_fields27 } = {
-  rec__textio__file_type__descr = file__split_fields7;
-  rec__textio__file_type__before_lm = file__split_fields8;
-  rec__textio__file_type__before_lm_pm = file__split_fields9;
-  rec__textio__file_type__col = file__split_fields10;
-  rec__textio__file_type__line = file__split_fields11;
-  rec__textio__file_type__page = file__split_fields12;
-  rec__textio__file_type__is_regular_file = file__split_fields13 }) and
-  ((cur_position3 = cur_position1) and (the_file3 = the_file1))))))) ->
-  (((1 <= idx) and (idx <= num2)) ->
-  (to_rep1(result____first) <= idx)))))))))))
+  ((num3 = num1) and ((result__2 = result__) and
+  (((file__split_fields21 = file__split_fields7) and
+  ((file__split_fields22 = file__split_fields8) and
+  ((file__split_fields23 = file__split_fields9) and
+  ((file__split_fields24 = file__split_fields10) and
+  ((file__split_fields25 = file__split_fields11) and
+  ((file__split_fields26 = file__split_fields12) and
+  (file__split_fields27 = file__split_fields13))))))) and
+  ((cur_position3 = cur_position1) and (the_file3 = the_file1)))))))
+
+axiom H8 : (1 <= idx)
+
+axiom H9 : (idx <= num2)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(result____first) <= idx)

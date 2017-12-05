@@ -316,16 +316,45 @@ axiom ext_equal__def_axiom :
   (forall elt:int. (((1 <= elt) and (elt <= 10)) -> ((mem(a, elt) = true) <->
   (mem(b, elt) = true))))))
 
- (* File "bitsets.ads", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:(int,bool) farray. forall o:(int,bool) farray.
-  forall result:(int,bool) farray. forall s1:(int,bool) farray.
-  forall s2:(int,bool) farray. forall s3:(int,bool) farray.
-  ((((o = empty(void)) and
+logic s : (int,bool) farray
+
+logic o : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic s1 : (int,bool) farray
+
+logic s2 : (int,bool) farray
+
+logic s3 : (int,bool) farray
+
+axiom H : ((o = empty(void)) and
   (forall elt:int. (((1 <= elt) and (elt <= 10)) -> (not (mem(o,
-  elt) = true))))) and ((result = s) and (s1 = o))) -> ((ext_equal(s2,
-  add(s1, 8)) = true) -> ((ext_equal(s3, add(s2, 3)) = true) -> ((mem(s3,
-  3) = true) -> ((mem(s3, 8) = true) -> ((not (mem(s3, 1) = true)) ->
-  ((not (mem(s3, 2) = true)) -> ((not (mem(s3, 4) = true)) -> ((not (mem(s3,
-  5) = true)) -> ((not (mem(s3, 6) = true)) -> ((not (mem(s3, 7) = true)) ->
-  (not (mem(s3, 9) = true))))))))))))))
+  elt) = true)))))
+
+axiom H1 : (result = s)
+
+axiom H2 : (s1 = o)
+
+axiom H3 : (ext_equal(s2, add(s1, 8)) = true)
+
+axiom H4 : (ext_equal(s3, add(s2, 3)) = true)
+
+axiom H5 : (mem(s3, 3) = true)
+
+axiom H6 : (mem(s3, 8) = true)
+
+axiom H7 : (not (mem(s3, 1) = true))
+
+axiom H8 : (not (mem(s3, 2) = true))
+
+axiom H9 : (not (mem(s3, 4) = true))
+
+axiom H10 : (not (mem(s3, 5) = true))
+
+axiom H11 : (not (mem(s3, 6) = true))
+
+axiom H12 : (not (mem(s3, 7) = true))
+
+ (* File "bitsets.ads", line 47, characters 0-0 *)
+goal WP_parameter_def : (not (mem(s3, 9) = true))

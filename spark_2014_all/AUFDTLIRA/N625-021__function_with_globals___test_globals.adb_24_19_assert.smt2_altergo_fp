@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1211,119 +1211,266 @@ axiom def_axiom2 :
   (forall temp___209:int. (((test_globals__ad__aggregate_def(temp___206,
   temp___207, temp___208)).elts3[temp___209]) = of_rep(temp___206)))))
 
+logic au : (int,natural) farray
+
+logic as__ : (int,natural) farray
+
+logic ad : (int,natural) farray
+
+logic ru__split_fields : natural
+
+logic rs__split_fields : natural
+
+logic rd__split_fields : natural
+
+logic us : int
+
+logic us1 : int
+
+logic temp___200 : (int,natural) farray
+
+logic temp___2001 : t2
+
+logic test_globals__au__assume : (int,natural) farray
+
+logic test_globals__au__assume1 : t
+
+logic temp___211 : (int,natural) farray
+
+logic temp___2111 : t3
+
+logic test_globals__ad__assume : (int,natural) farray
+
+logic test_globals__ad__assume1 : t1
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic test_globals__ru__assume : natural
+
+logic test_globals__ru__assume1 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : natural
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic test_globals__rs__assume : natural
+
+logic test_globals__rs__assume1 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : natural
+
+logic o18 : natural
+
+logic o19 : natural
+
+logic o20 : natural
+
+logic o21 : natural
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic test_globals__rd__assume : natural
+
+logic test_globals__rd__assume1 : natural
+
+logic us2 : bool
+
+logic result : (int,natural) farray
+
+logic au1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic as__1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic ad1 : (int,natural) farray
+
+logic result3 : natural
+
+logic ru__split_fields1 : natural
+
+logic result4 : natural
+
+logic rs__split_fields1 : natural
+
+logic result5 : natural
+
+logic rd__split_fields1 : natural
+
+axiom H : in_range1(c)
+
+axiom H1 : ((us = 100) and in_range1(100))
+
+axiom H2 : ((us1 = c) and in_range1(c))
+
+axiom H3 : (to_rep1(first4((test_globals__au__aggregate_def(0, 1,
+  c)).rt2)) = 1)
+
+axiom H4 : (to_rep1(last4((test_globals__au__aggregate_def(0, 1,
+  c)).rt2)) = c)
+
+axiom H5 : ({ elts2 = temp___200; rt2 = temp___2001
+  } = test_globals__au__aggregate_def(0, 1, c))
+
+axiom H6 : (temp___200 = test_globals__au__assume)
+
+axiom H7 : (mk(to_rep1(first4(temp___2001)),
+  to_rep1(last4(temp___2001))) = test_globals__au__assume1)
+
+axiom H8 : (result = au)
+
+axiom H9 : (au1 = test_globals__au__assume)
+
+axiom H10 : (to_rep1(au__first) = to_rep1(first(test_globals__au__assume1)))
+
+axiom H11 : (to_rep1(au__last) = to_rep1(last(test_globals__au__assume1)))
+
+axiom H12 : dynamic_property(0, 2147483647, to_rep1(au__first),
+  to_rep1(au__last))
+
+axiom H13 : (result1 = as__)
+
+axiom H14 : (as__1 = test_globals__as__aggregate_def(0))
+
+axiom H15 : (to_rep1(first6((test_globals__ad__aggregate_def(0, 1,
+  c)).rt3)) = 1)
+
+axiom H16 : (to_rep1(last6((test_globals__ad__aggregate_def(0, 1,
+  c)).rt3)) = c)
+
+axiom H17 : ({ elts3 = temp___211; rt3 = temp___2111
+  } = test_globals__ad__aggregate_def(0, 1, c))
+
+axiom H18 :
+  (((to_rep1(first6(temp___2111)) <= to_rep1(last6(temp___2111))) ->
+  (((1 <= c) ->
+  (((to_rep1(last6(temp___2111)) - to_rep1(first6(temp___2111))) + 1) = ((c - 1) + 1))) and
+  ((not (1 <= c)) ->
+  (((to_rep1(last6(temp___2111)) - to_rep1(first6(temp___2111))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___2111)) <= to_rep1(last6(temp___2111)))) ->
+  ((1 <= c) -> (0 = ((c - 1) + 1)))))
+
+axiom H19 : (temp___211 = test_globals__ad__assume)
+
+axiom H20 : (mk1(to_rep1(first6(temp___2111)),
+  to_rep1(last6(temp___2111))) = test_globals__ad__assume1)
+
+axiom H21 : (result2 = ad)
+
+axiom H22 : (ad1 = test_globals__ad__assume)
+
+axiom H23 : (to_rep1(ad__first) = to_rep1(first2(test_globals__ad__assume1)))
+
+axiom H24 : (to_rep1(ad__last) = to_rep1(last2(test_globals__ad__assume1)))
+
+axiom H25 : (dynamic_property2(1, c, to_rep1(ad__first),
+  to_rep1(ad__last)) and ((to_rep1(ad__first) = 1) and
+  (to_rep1(ad__last) = c)))
+
+axiom H26 : (to_rep(o1) = 0)
+
+axiom H27 : (o1 = o2)
+
+axiom H28 : (to_rep(o) = c)
+
+axiom H29 : (o = o3)
+
+axiom H30 : (test_globals__ru__assume = o3)
+
+axiom H31 : (test_globals__ru__assume1 = o2)
+
+axiom H32 : (result3 = ru__split_fields)
+
+axiom H33 : (ru__split_fields1 = test_globals__ru__assume1)
+
+axiom H34 : (ru__split_discrs = test_globals__ru__assume)
+
+axiom H35 : (to_rep(o5) = 0)
+
+axiom H36 : (o5 = o6)
+
+axiom H37 : (to_rep(o4) = 100)
+
+axiom H38 : (o4 = o7)
+
+axiom H39 : (o8 = o7)
+
+axiom H40 : (o9 = o6)
+
+axiom H41 : ((o10 = o8) and (o11 = o9))
+
+axiom H42 : ((o12 = o10) and (o13 = o11))
+
+axiom H43 : ((test_globals__rs__assume = o12) and
+  (test_globals__rs__assume1 = o13))
+
+axiom H44 : (result4 = rs__split_fields)
+
+axiom H45 : (rs__split_fields1 = test_globals__rs__assume1)
+
+axiom H46 : (rs__split_discrs = test_globals__rs__assume)
+
+axiom H47 : (100 = to_rep(rs__split_discrs))
+
+axiom H48 : (to_rep(o15) = 0)
+
+axiom H49 : (o16 = o15)
+
+axiom H50 : (to_rep(o14) = c)
+
+axiom H51 : (o17 = o14)
+
+axiom H52 : ((o18 = o17) and (o19 = o16))
+
+axiom H53 : ((o20 = o18) and (o21 = o19))
+
+axiom H54 : ((o22 = o20) and (o23 = o21))
+
+axiom H55 : ((test_globals__rd__assume = o22) and
+  (test_globals__rd__assume1 = o23))
+
+axiom H56 : (result5 = rd__split_fields)
+
+axiom H57 : (rd__split_fields1 = test_globals__rd__assume1)
+
+axiom H58 : (rd__split_discrs = test_globals__rd__assume)
+
+axiom H59 : (c = to_rep(rd__split_discrs))
+
  (* File "test_globals.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall au:(int,natural) farray. forall as__:(int,natural) farray.
-  forall ad:(int,natural) farray. forall ru__split_fields:natural.
-  forall rs__split_fields:natural. forall rd__split_fields:natural.
-  forall us:int. forall us1:int. forall temp___200:(int,natural) farray.
-  forall temp___2001:t2.
-  forall test_globals__au__assume:(int,natural) farray.
-  forall test_globals__au__assume1:t. forall temp___211:(int,natural) farray.
-  forall temp___2111:t3.
-  forall test_globals__ad__assume:(int,natural) farray.
-  forall test_globals__ad__assume1:t1. forall o:natural. forall o1:natural.
-  forall o2:natural. forall o3:natural.
-  forall test_globals__ru__assume:natural.
-  forall test_globals__ru__assume1:natural. forall o4:natural.
-  forall o5:natural. forall o6:natural. forall o7:natural. forall o8:natural.
-  forall o9:natural. forall o10:natural. forall o11:natural.
-  forall o12:natural. forall o13:natural.
-  forall test_globals__rs__assume:natural.
-  forall test_globals__rs__assume1:natural. forall o14:natural.
-  forall o15:natural. forall o16:natural. forall o17:natural.
-  forall o18:natural. forall o19:natural. forall o20:natural.
-  forall o21:natural. forall o22:natural. forall o23:natural.
-  forall test_globals__rd__assume:natural.
-  forall test_globals__rd__assume1:natural. forall result:map__ref.
-  forall au1:(int,natural) farray. forall result1:map__ref.
-  forall as__1:(int,natural) farray. forall result2:map__ref.
-  forall ad1:(int,natural) farray. forall result3:us_split_fields__ref.
-  forall ru__split_fields1:us_split_fields.
-  forall result4:us_split_fields__ref.
-  forall rs__split_fields1:us_split_fields.
-  forall result5:us_split_fields__ref.
-  forall rd__split_fields1:us_split_fields. (in_range1(c) -> (((us = 100) and
-  in_range1(100)) -> (((us1 = c) and in_range1(c)) ->
-  (((((to_rep1(first4((test_globals__au__aggregate_def(0, 1,
-  c)).rt2)) = 1) and ((to_rep1(last4((test_globals__au__aggregate_def(0, 1,
-  c)).rt2)) = c) and ({ elts2 = temp___200; rt2 = temp___2001
-  } = test_globals__au__aggregate_def(0, 1, c)))) and
-  ((temp___200 = test_globals__au__assume) and
-  (mk(to_rep1(first4(temp___2001)),
-  to_rep1(last4(temp___2001))) = test_globals__au__assume1))) and
-  (((result = { map__content = au }) and
-  (au1 = test_globals__au__assume)) and
-  ((to_rep1(au__first) = to_rep1(first(test_globals__au__assume1))) and
-  (to_rep1(au__last) = to_rep1(last(test_globals__au__assume1)))))) ->
-  (dynamic_property(0, 2147483647, to_rep1(au__first), to_rep1(au__last)) ->
-  (((result1 = { map__content = as__ }) and
-  (as__1 = test_globals__as__aggregate_def(0))) ->
-  (((((to_rep1(first6((test_globals__ad__aggregate_def(0, 1,
-  c)).rt3)) = 1) and ((to_rep1(last6((test_globals__ad__aggregate_def(0, 1,
-  c)).rt3)) = c) and ({ elts3 = temp___211; rt3 = temp___2111
-  } = test_globals__ad__aggregate_def(0, 1, c)))) and
-  ((((to_rep1(first6(temp___2111)) <= to_rep1(last6(temp___2111))) and
-  (((1 <= c) and
-  (((to_rep1(last6(temp___2111)) - to_rep1(first6(temp___2111))) + 1) = ((c - 1) + 1))) or
-  ((not (1 <= c)) and
-  (((to_rep1(last6(temp___2111)) - to_rep1(first6(temp___2111))) + 1) = 0)))) or
-  ((not (to_rep1(first6(temp___2111)) <= to_rep1(last6(temp___2111)))) and
-  (((1 <= c) and (0 = ((c - 1) + 1))) or (not (1 <= c))))) and
-  ((temp___211 = test_globals__ad__assume) and
-  (mk1(to_rep1(first6(temp___2111)),
-  to_rep1(last6(temp___2111))) = test_globals__ad__assume1)))) and
-  (((result2 = { map__content = ad }) and
-  (ad1 = test_globals__ad__assume)) and
-  ((to_rep1(ad__first) = to_rep1(first2(test_globals__ad__assume1))) and
-  (to_rep1(ad__last) = to_rep1(last2(test_globals__ad__assume1)))))) ->
-  ((dynamic_property2(1, c, to_rep1(ad__first), to_rep1(ad__last)) and
-  ((to_rep1(ad__first) = 1) and (to_rep1(ad__last) = c))) ->
-  (((((to_rep(o1) = 0) and (o1 = o2)) and (((to_rep(o) = c) and (o = o3)) and
-  ((test_globals__ru__assume = o3) and
-  (test_globals__ru__assume1 = o2)))) and (((result3 = {
-  us_split_fields__content = { rec__test_globals__my_rec__f =
-  ru__split_fields } }) and (ru__split_fields1 = {
-  rec__test_globals__my_rec__f = test_globals__ru__assume1 })) and
-  (ru__split_discrs = test_globals__ru__assume))) ->
-  ((((((((to_rep(o5) = 0) and (o5 = o6)) and (((to_rep(o4) = 100) and
-  (o4 = o7)) and ((o8 = o7) and (o9 = o6)))) and ({ us_split_discrs1 = {
-  rec__test_globals__my_rec__d = o10 }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = o11 } } = { us_split_discrs1 = {
-  rec__test_globals__my_rec__d = o8 }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = o9 } })) and ({ us_split_discrs1 = {
-  rec__test_globals__my_rec__d = o12 }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = o13 } } = { us_split_discrs1 = {
-  rec__test_globals__my_rec__d = o10 }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = o11 } })) and ({ us_split_discrs1 = {
-  rec__test_globals__my_rec__d = test_globals__rs__assume };
-  us_split_fields1 = { rec__test_globals__my_rec__f =
-  test_globals__rs__assume1 } } = { us_split_discrs1 = {
-  rec__test_globals__my_rec__d = o12 }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = o13 } })) and (((result4 = {
-  us_split_fields__content = { rec__test_globals__my_rec__f =
-  rs__split_fields } }) and (rs__split_fields1 = {
-  rec__test_globals__my_rec__f = test_globals__rs__assume1 })) and
-  (rs__split_discrs = test_globals__rs__assume))) ->
-  ((100 = to_rep(rs__split_discrs)) -> ((((((((to_rep(o15) = 0) and
-  (o15 = o16)) and (((to_rep(o14) = c) and (o14 = o17)) and ((o18 = o17) and
-  (o19 = o16)))) and ({ us_split_discrs1 = { rec__test_globals__my_rec__d =
-  o20 }; us_split_fields1 = { rec__test_globals__my_rec__f = o21 } } = {
-  us_split_discrs1 = { rec__test_globals__my_rec__d = o18 };
-  us_split_fields1 = { rec__test_globals__my_rec__f = o19 } })) and ({
-  us_split_discrs1 = { rec__test_globals__my_rec__d = o22 };
-  us_split_fields1 = { rec__test_globals__my_rec__f = o23 } } = {
-  us_split_discrs1 = { rec__test_globals__my_rec__d = o20 };
-  us_split_fields1 = { rec__test_globals__my_rec__f = o21 } })) and ({
-  us_split_discrs1 = { rec__test_globals__my_rec__d =
-  test_globals__rd__assume }; us_split_fields1 = {
-  rec__test_globals__my_rec__f = test_globals__rd__assume1 } } = {
-  us_split_discrs1 = { rec__test_globals__my_rec__d = o22 };
-  us_split_fields1 = { rec__test_globals__my_rec__f = o23 } })) and
-  (((result5 = { us_split_fields__content = { rec__test_globals__my_rec__f =
-  rd__split_fields } }) and (rd__split_fields1 = {
-  rec__test_globals__my_rec__f = test_globals__rd__assume1 })) and
-  (rd__split_discrs = test_globals__rd__assume))) ->
-  ((c = to_rep(rd__split_discrs)) -> (nested_with_globals(au1, as__1, ad1,
-  ru__split_fields1, rs__split_fields1,
-  rd__split_fields1) = true)))))))))))))))
+goal WP_parameter_def : (nested_with_globals(au1, as__1, ad1, {
+  rec__test_globals__my_rec__f = ru__split_fields1 }, {
+  rec__test_globals__my_rec__f = rs__split_fields1 }, {
+  rec__test_globals__my_rec__f = rd__split_fields1 }) = true)

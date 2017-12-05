@@ -81,6 +81,8 @@
 (declare-const test_rotate__r__result4 (_ BitVec 64))
 (declare-const test_rotate__r__result5 (_ BitVec 64))
 (declare-const result1 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (and (bvule a ((_ int2bv 64) 18446744073709551615)) (and (not (= a ((_ int2bv 64) 0))) (bvule b ((_ int2bv 64) 2147483647)))))
 (assert (= test_rotate__r__result1 test_rotate__r__result2))
 (assert (= test_rotate__r__result3 test_rotate__r__result1))

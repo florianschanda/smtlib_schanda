@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -138,14 +138,34 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dummy2:int. forall local:int. forall result:int. forall local1:int.
-  forall result1:int. forall dummy3:int. forall dummy4:int.
-  forall local2:int. forall dummy5:int. forall local3:int.
-  (((((-2147483648) <= 2147483647) -> in_range1(dummy2)) and
-  (in_range1(x) and (((({ int__content = result } = { int__content = local
-  }) and (local1 = 0)) and (in_range(local1) and ((({ int__content = result1
-  } = { int__content = dummy2 }) and (dummy3 = x)) and (local1 = 0)))) and
+logic dummy2 : int
+
+logic local : int
+
+logic result : int
+
+logic local1 : int
+
+logic result1 : int
+
+logic dummy3 : int
+
+logic dummy4 : int
+
+logic local2 : int
+
+logic dummy5 : int
+
+logic local3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(dummy2))
+
+axiom H1 : in_range1(x)
+
+axiom H2 : ((((result = local) and (local1 = 0)) and (in_range(local1) and
+  (((result1 = dummy2) and (dummy3 = x)) and (local1 = 0)))) and
   (((local1 = local2) and (dummy3 = dummy4)) and ((local3 = local1) and
-  (dummy5 = dummy3)))))) -> (dummy4 = x)))
+  (dummy5 = dummy3))))
+
+ (* File "main.adb", line 4, characters 0-0 *)
+goal WP_parameter_def : (dummy4 = x)

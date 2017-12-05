@@ -38,6 +38,7 @@
 (declare-const nested_var2 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range used))
 (assert (in_range nested_var))
 (assert (in_range nested_var2))

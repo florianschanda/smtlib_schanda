@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -520,28 +520,101 @@ type index_range__ref = { index_range__content : index_range
 function index_range__ref___projection(a: index_range__ref) : index_range =
   (a).index_range__content
 
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : pointer_range
+
+logic o2 : (int,integer) farray
+
+logic o3 : pointer_range
+
+logic temp___191 : (int,integer) farray
+
+logic temp___1911 : pointer_range
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : (int,integer) farray
+
+logic o8 : pointer_range
+
+logic temp___195 : (int,integer) farray
+
+logic temp___1951 : pointer_range
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : bool
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic result2 : (int,integer) farray
+
+logic result3 : pointer_range
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+logic my_stack__split_fields8 : (int,integer) farray
+
+logic my_stack__split_fields9 : pointer_range
+
+axiom H : in_range1(x)
+
+axiom H1 : (not (is_full({ rec__stack_external_prover__stack_type__s =
+  my_stack__split_fields; rec__stack_external_prover__stack_type__pointer =
+  my_stack__split_fields1 }) = true))
+
+axiom H2 : ((o = (to_rep1(my_stack__split_fields1) + 1)) and
+  in_range3((to_rep1(my_stack__split_fields1) + 1)))
+
+axiom H3 : (to_rep1(o1) = o)
+
+axiom H4 : (my_stack__split_fields = o2)
+
+axiom H5 : (o1 = o3)
+
+axiom H6 : (temp___191 = o2)
+
+axiom H7 : (temp___1911 = o3)
+
+axiom H8 : ((result = my_stack__split_fields) and
+  (result1 = my_stack__split_fields1))
+
+axiom H9 : (temp___191 = my_stack__split_fields2)
+
+axiom H10 : (temp___1911 = my_stack__split_fields3)
+
+axiom H11 : (to_rep(o4) = x)
+
  (* File "stack_external_prover.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall o:int.
-  forall o1:pointer_range. forall o2:(int,integer) farray.
-  forall o3:pointer_range. forall temp___191:(int,integer) farray.
-  forall temp___1911:pointer_range. forall o4:integer.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall my_stack__split_fields2:(int,integer) farray.
-  forall my_stack__split_fields3:pointer_range. (in_range1(x) ->
-  ((not (is_full({ rec__stack_external_prover__stack_type__s =
-  my_stack__split_fields; rec__stack_external_prover__stack_type__pointer =
-  my_stack__split_fields1 }) = true)) ->
-  (((((((o = (to_rep1(my_stack__split_fields1) + 1)) and
-  in_range3((to_rep1(my_stack__split_fields1) + 1))) and
-  (to_rep1(o1) = o)) and ((my_stack__split_fields = o2) and (o1 = o3))) and
-  ((temp___191 = o2) and (temp___1911 = o3))) and (({
-  us_split_fields__content = { rec__stack_external_prover__stack_type__s =
-  result; rec__stack_external_prover__stack_type__pointer = result1 } } = {
-  us_split_fields__content = { rec__stack_external_prover__stack_type__s =
-  my_stack__split_fields; rec__stack_external_prover__stack_type__pointer =
-  my_stack__split_fields1 } }) and
-  ((temp___191 = my_stack__split_fields2) and
-  (temp___1911 = my_stack__split_fields3)))) -> ((to_rep(o4) = x) ->
-  (1 <= to_rep1(my_stack__split_fields3)))))))
+goal WP_parameter_def : (1 <= to_rep1(my_stack__split_fields3))

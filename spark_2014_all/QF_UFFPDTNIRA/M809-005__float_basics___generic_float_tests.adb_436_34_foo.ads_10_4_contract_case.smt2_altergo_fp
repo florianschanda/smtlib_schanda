@@ -1092,25 +1092,46 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : t
+
+logic result : t
+
+logic y1 : t
+
+logic y2 : t
+
+logic y3 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 4096.0))
 
+axiom H2 : (le(neg(fliteral2), x) and le(x, fliteral2))
+
+axiom H3 : (result = y)
+
+axiom H4 : (y1 = roundToIntegral(ToZero, x))
+
+axiom H5 : (y1 = y2)
+
+axiom H6 : (y3 = y1)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.60000002384185791015625))
 
+axiom H7 : (bool_eq(x, neg(fliteral3)) = true)
+
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t. forall result:t. forall y1:t. forall y2:t. forall y3:t.
-  (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) ->
-  ((le(neg(fliteral2), x) and le(x, fliteral2)) -> ((((result = y) and
-  (y1 = roundToIntegral(ToZero, x))) and ((y1 = y2) and (y3 = y1))) ->
-  ((bool_eq(x, neg(fliteral3)) = true) -> eq(y2, neg(fliteral))))))))
+goal WP_parameter_def : eq(y2, neg(fliteral))

@@ -1,0 +1,2463 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type integer
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+type positive
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq1 : positive, positive -> bool
+
+logic dummy1 : positive
+
+type positive__ref = { positive__content : positive
+}
+
+function positive__ref___projection(a: positive__ref) : positive =
+  (a).positive__content
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : character, character -> bool
+
+logic dummy2 : character
+
+type character__ref = { character__content : character
+}
+
+function character__ref___projection(a: character__ref) : character =
+  (a).character__content
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type map__ref = { map__content : (int,character) farray
+}
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton : character, int -> (int,character) farray
+
+axiom singleton_def :
+  (forall v:character.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+logic bool_eq5 : (int,character) farray, int, int, (int,character) farray,
+  int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall a:(int,character) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,character) farray. forall b__first:int. forall b__last:int
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_78:int. ((((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) and
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))) or
+  (not ((a__first <= temp___idx_78) and (temp___idx_78 <= a__last)))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)]))))))) ->
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_78:int. (((a__first <= temp___idx_78) and
+  (temp___idx_78 <= a__last)) ->
+  (to_rep((a[temp___idx_78])) = to_rep((b[((b__first - a__first) + temp___idx_78)])))))))))
+
+logic compare : (int,character) farray, int, int, (int,character) farray,
+  int, int -> int
+
+axiom compare_def_eq :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq5(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq5(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq5(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+
+logic to_rep1 : integer -> int
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t
+
+logic first : t -> integer
+
+logic last : t -> integer
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range1(f) -> (in_range1(l) ->
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first1(a: us_t) : int = to_rep1(first((a).rt))
+
+function last1(a: us_t) : int = to_rep1(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
+  (length(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+
+logic value__size : int
+
+logic object__size : (int,character) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (int,character) farray -> int
+
+logic value__alignment : int
+
+logic object__alignment : (int,character) farray -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__size(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(int,character) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:(int,character) farray. (0 <= object__alignment(a)))
+
+function bool_eq6(x: us_t, y: us_t) : bool = bool_eq5((x).elts,
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
+
+logic user_eq3 : us_t, us_t -> bool
+
+logic dummy3 : (int,character) farray
+
+logic dummy4 : t
+
+logic to_string : us_image -> us_t
+
+logic from_string : us_t -> us_image
+
+type string__ref = { string__content : us_t
+}
+
+function string__ref___projection(a: string__ref) : us_t =
+  (a).string__content
+
+logic get_line__4 : unit -> us_t
+
+logic get_line__4__function_guard : us_t, unit -> prop
+
+axiom get_line__4__post_axiom : dynamic_property(1, 2147483647,
+  to_rep1(first((get_line__4(void)).rt)),
+  to_rep1(last((get_line__4(void)).rt)))
+
+type slot
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq4 : slot, slot -> bool
+
+logic dummy5 : slot
+
+type slot__ref = { slot__content : slot
+}
+
+function slot__ref___projection(a: slot__ref) : slot = (a).slot__content
+
+logic to_rep2 : slot -> int
+
+logic of_rep2 : int -> slot
+
+axiom inversion_axiom2 :
+  (forall x:slot [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:slot [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type pos
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 3))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq5 : pos, pos -> bool
+
+logic dummy6 : pos
+
+type pos__ref = { pos__content : pos
+}
+
+function pos__ref___projection(a: pos__ref) : pos = (a).pos__content
+
+logic to_rep3 : pos -> int
+
+logic of_rep3 : int -> pos
+
+axiom inversion_axiom3 :
+  (forall x:pos [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:pos [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type map__ref1 = { map__content1 : (int,slot) farray
+}
+
+logic slide1 : (int,slot) farray, int, int -> (int,slot) farray
+
+axiom slide_eq1 :
+  (forall a:(int,slot) farray.
+  (forall first2:int [slide1(a, first2, first2)]. (slide1(a, first2,
+  first2) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,slot) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat1 : (int,slot) farray, int, int, (int,slot) farray, int,
+  int -> (int,slot) farray
+
+axiom concat_def1 :
+  (forall a:(int,slot) farray. forall b:(int,slot) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton1 : slot, int -> (int,slot) farray
+
+axiom singleton_def1 :
+  (forall v:slot.
+  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
+
+logic bool_eq9 : (int,slot) farray, int, int, (int,slot) farray, int,
+  int -> bool
+
+axiom bool_eq_def7 :
+  (forall a:(int,slot) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,slot) farray. forall b__first:int. forall b__last:int
+  [bool_eq9(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_151:int. ((((a__first <= temp___idx_151) and
+  (temp___idx_151 <= a__last)) and
+  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))) or
+  (not ((a__first <= temp___idx_151) and (temp___idx_151 <= a__last)))))) ->
+  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
+  (temp___idx_151 <= a__last)) ->
+  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)]))))))) ->
+  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,slot) farray. forall b:(int,slot) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq9(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_151:int. (((a__first <= temp___idx_151) and
+  (temp___idx_151 <= a__last)) ->
+  (to_rep2((a[temp___idx_151])) = to_rep2((b[((b__first - a__first) + temp___idx_151)])))))))))
+
+logic compare1 : (int,slot) farray, int, int, (int,slot) farray, int,
+  int -> int
+
+axiom compare_def_eq1 :
+  (forall a:(int,slot) farray. forall b:(int,slot) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq9(a,
+  a_first, a_last, b, b_first, b_last) = true))))
+
+axiom compare_def_lt1 :
+  (forall a:(int,slot) farray. forall b:(int,slot) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((compare1(a, a_first, a_last, b, b_first, b_last) <  0) <->
+  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
+  ((bool_eq9(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((i <  a_last) and (to_rep2((a[(i + 1)])) <  to_rep2((b[(j + 1)]))))))))))))
+
+axiom compare_def_gt1 :
+  (forall a:(int,slot) farray. forall b:(int,slot) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int [compare1(a, a_first, a_last, b, b_first, b_last)].
+  ((0 <  compare1(a, a_first, a_last, b, b_first, b_last)) <->
+  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
+  ((bool_eq9(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((i <  b_last) and (to_rep2((b[(i + 1)])) <  to_rep2((a[(j + 1)]))))))))))))
+
+logic dummy7 : (int,slot) farray
+
+logic value__size1 : int
+
+logic object__size1 : (int,slot) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (int,slot) farray -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : (int,slot) farray -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:(int,slot) farray. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(int,slot) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:(int,slot) farray. (0 <= object__alignment1(a)))
+
+logic user_eq6 : (int,slot) farray, (int,slot) farray -> bool
+
+type map__ref2 = { map__content2 : (int,(int,slot) farray) farray
+}
+
+logic slide2 : (int,(int,slot) farray) farray, int,
+  int -> (int,(int,slot) farray) farray
+
+axiom slide_eq2 :
+  (forall a:(int,(int,slot) farray) farray.
+  (forall first2:int [slide2(a, first2, first2)]. (slide2(a, first2,
+  first2) = a)))
+
+axiom slide_def2 :
+  (forall a:(int,(int,slot) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide2(a, old_first, new_first)[i])]. ((slide2(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat2 : (int,(int,slot) farray) farray, int, int,
+  (int,(int,slot) farray) farray, int, int -> (int,(int,slot) farray) farray
+
+axiom concat_def2 :
+  (forall a:(int,(int,slot) farray) farray.
+  forall b:(int,(int,slot) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat2(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat2(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat2(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton2 : (int,slot) farray, int -> (int,(int,slot) farray) farray
+
+axiom singleton_def2 :
+  (forall v:(int,slot) farray.
+  (forall i:int [(singleton2(v, i)[i])]. ((singleton2(v, i)[i]) = v)))
+
+logic bool_eq10 : (int,(int,slot) farray) farray, int, int,
+  (int,(int,slot) farray) farray, int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall a:(int,(int,slot) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,slot) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq10(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_152:int. ((((a__first <= temp___idx_152) and
+  (temp___idx_152 <= a__last)) and (bool_eq9((a[temp___idx_152]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_152) and (temp___idx_152 <= a__last)))))) ->
+  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
+  (temp___idx_152 <= a__last)) -> (bool_eq9((a[temp___idx_152]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true))))) ->
+  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev2 :
+  (forall a:(int,(int,slot) farray) farray.
+  forall b:(int,(int,slot) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_152:int. (((a__first <= temp___idx_152) and
+  (temp___idx_152 <= a__last)) -> (bool_eq9((a[temp___idx_152]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_152)]), 1, 3) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic num_free_slots : (int,(int,slot) farray) farray -> int
+
+logic num_free_slots__function_guard : int,
+  (int,(int,slot) farray) farray -> prop
+
+type natural
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq7 : natural, natural -> bool
+
+logic dummy8 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+logic count_free_slots : int, int, (int,(int,slot) farray) farray -> int
+
+logic count_free_slots__function_guard : int, int, int,
+  (int,(int,slot) farray) farray -> prop
+
+axiom num_free_slots__post_axiom :
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [num_free_slots(tictactoe__my_board)].
+  in_range6(num_free_slots(tictactoe__my_board)))
+
+axiom num_free_slots__def_axiom :
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [num_free_slots(tictactoe__my_board)].
+  (num_free_slots(tictactoe__my_board) = count_free_slots(3, 3,
+  tictactoe__my_board)))
+
+logic is_full : (int,(int,slot) farray) farray -> bool
+
+logic is_full__function_guard : bool, (int,(int,slot) farray) farray -> prop
+
+axiom is_full__post_axiom : true
+
+axiom is_full__def_axiom :
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [is_full(tictactoe__my_board)]. ((is_full(tictactoe__my_board) = true) <->
+  (num_free_slots(tictactoe__my_board) = 0)))
+
+type us_split_fields = { rec__tictactoe__position__x : pos;
+rec__tictactoe__position__y : pos
+}
+
+function us_split_fields_X__projection(a: us_split_fields) : pos =
+  (a).rec__tictactoe__position__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : pos =
+  (a).rec__tictactoe__position__y
+
+type us_split_fields__ref = { us_split_fields__content : us_split_fields
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref) : us_split_fields =
+  (a).us_split_fields__content
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function us_rep___3__projection(a: us_rep) : us_split_fields =
+  (a).us_split_fields1
+
+logic bool_eq12 : us_rep, us_rep -> bool
+
+axiom bool_eq_def10 :
+  (forall a:us_rep. forall b:us_rep [bool_eq12(a, b)].
+  ((((to_rep3(((a).us_split_fields1).rec__tictactoe__position__x) = to_rep3(((b).us_split_fields1).rec__tictactoe__position__x)) and
+  (to_rep3(((a).us_split_fields1).rec__tictactoe__position__y) = to_rep3(((b).us_split_fields1).rec__tictactoe__position__y))) ->
+  (bool_eq12(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_fields1).rec__tictactoe__position__x) = to_rep3(((b).us_split_fields1).rec__tictactoe__position__x)) and
+  (to_rep3(((a).us_split_fields1).rec__tictactoe__position__y) = to_rep3(((b).us_split_fields1).rec__tictactoe__position__y)))) ->
+  (bool_eq12(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:pos. forall a1:pos. (0 <= object__size2({ us_split_fields1 = {
+  rec__tictactoe__position__x = a; rec__tictactoe__position__y = a1 } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:pos. forall a1:pos. (0 <= object__alignment2({ us_split_fields1 =
+  { rec__tictactoe__position__x = a; rec__tictactoe__position__y = a1 } })))
+
+logic tictactoe__position__x__first__bit : int
+
+logic tictactoe__position__x__last__bit : int
+
+logic tictactoe__position__x__position : int
+
+axiom tictactoe__position__x__first__bit_axiom :
+  (0 <= tictactoe__position__x__first__bit)
+
+axiom tictactoe__position__x__last__bit_axiom :
+  (tictactoe__position__x__first__bit <  tictactoe__position__x__last__bit)
+
+axiom tictactoe__position__x__position_axiom :
+  (0 <= tictactoe__position__x__position)
+
+logic tictactoe__position__y__first__bit : int
+
+logic tictactoe__position__y__last__bit : int
+
+logic tictactoe__position__y__position : int
+
+axiom tictactoe__position__y__first__bit_axiom :
+  (0 <= tictactoe__position__y__first__bit)
+
+axiom tictactoe__position__y__last__bit_axiom :
+  (tictactoe__position__y__first__bit <  tictactoe__position__y__last__bit)
+
+axiom tictactoe__position__y__position_axiom :
+  (0 <= tictactoe__position__y__position)
+
+logic user_eq8 : us_rep, us_rep -> bool
+
+logic dummy9 : pos
+
+logic dummy10 : pos
+
+type position__ref = { position__content : us_rep
+}
+
+function position__ref___projection(a: position__ref) : us_rep =
+  (a).position__content
+
+type map__ref3 = { map__content3 : (int,us_rep) farray
+}
+
+logic slide3 : (int,us_rep) farray, int, int -> (int,us_rep) farray
+
+axiom slide_eq3 :
+  (forall a:(int,us_rep) farray.
+  (forall first2:int [slide3(a, first2, first2)]. (slide3(a, first2,
+  first2) = a)))
+
+axiom slide_def3 :
+  (forall a:(int,us_rep) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide3(a, old_first, new_first)[i])]. ((slide3(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat3 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> (int,us_rep) farray
+
+axiom concat_def3 :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat3(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat3(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat3(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton3 : us_rep, int -> (int,us_rep) farray
+
+axiom singleton_def3 :
+  (forall v:pos. forall v1:pos.
+  (forall i:int [(singleton3({ us_split_fields1 = {
+  rec__tictactoe__position__x = v; rec__tictactoe__position__y = v1 } },
+  i)[i])]. ((singleton3({ us_split_fields1 = { rec__tictactoe__position__x =
+  v; rec__tictactoe__position__y = v1 } }, i)[i]) = { us_split_fields1 = {
+  rec__tictactoe__position__x = v; rec__tictactoe__position__y = v1 } })))
+
+logic bool_eq13 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+  int -> bool
+
+axiom bool_eq_def11 :
+  (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
+  [bool_eq13(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_153:int. ((((a__first <= temp___idx_153) and
+  (temp___idx_153 <= a__last)) and (bool_eq12((a[temp___idx_153]),
+  (b[((b__first - a__first) + temp___idx_153)])) = true)) or
+  (not ((a__first <= temp___idx_153) and (temp___idx_153 <= a__last)))))) ->
+  (bool_eq13(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
+  (temp___idx_153 <= a__last)) -> (bool_eq12((a[temp___idx_153]),
+  (b[((b__first - a__first) + temp___idx_153)])) = true))))) -> (bool_eq13(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev3 :
+  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq13(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_153:int. (((a__first <= temp___idx_153) and
+  (temp___idx_153 <= a__last)) -> (bool_eq12((a[temp___idx_153]),
+  (b[((b__first - a__first) + temp___idx_153)])) = true)))))))
+
+logic dummy11 : (int,us_rep) farray
+
+logic value__size3 : int
+
+logic object__size3 : (int,us_rep) farray -> int
+
+logic value__component__size2 : int
+
+logic object__component__size2 : (int,us_rep) farray -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : (int,us_rep) farray -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:(int,us_rep) farray. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom2 : (0 <= value__component__size2)
+
+axiom object__component__size_axiom2 :
+  (forall a:(int,us_rep) farray. (0 <= object__component__size2(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:(int,us_rep) farray. (0 <= object__alignment3(a)))
+
+logic user_eq9 : (int,us_rep) farray, (int,us_rep) farray -> bool
+
+type map__ref4 = { map__content4 : (int,(int,us_rep) farray) farray
+}
+
+logic slide4 : (int,(int,us_rep) farray) farray, int,
+  int -> (int,(int,us_rep) farray) farray
+
+axiom slide_eq4 :
+  (forall a:(int,(int,us_rep) farray) farray.
+  (forall first2:int [slide4(a, first2, first2)]. (slide4(a, first2,
+  first2) = a)))
+
+axiom slide_def4 :
+  (forall a:(int,(int,us_rep) farray) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide4(a, old_first, new_first)[i])]. ((slide4(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat4 : (int,(int,us_rep) farray) farray, int, int,
+  (int,(int,us_rep) farray) farray, int,
+  int -> (int,(int,us_rep) farray) farray
+
+axiom concat_def4 :
+  (forall a:(int,(int,us_rep) farray) farray.
+  forall b:(int,(int,us_rep) farray) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat4(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat4(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat4(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+logic singleton4 : (int,us_rep) farray,
+  int -> (int,(int,us_rep) farray) farray
+
+axiom singleton_def4 :
+  (forall v:(int,us_rep) farray.
+  (forall i:int [(singleton4(v, i)[i])]. ((singleton4(v, i)[i]) = v)))
+
+logic bool_eq14 : (int,(int,us_rep) farray) farray, int, int,
+  (int,(int,us_rep) farray) farray, int, int -> bool
+
+axiom bool_eq_def12 :
+  (forall a:(int,(int,us_rep) farray) farray. forall a__first:int.
+  forall a__last:int. forall b:(int,(int,us_rep) farray) farray.
+  forall b__first:int. forall b__last:int [bool_eq14(a, a__first, a__last, b,
+  b__first, b__last)]. ((((((a__first <= a__last) and
+  ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq13((a[temp___idx_154]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (bool_eq14(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq13((a[temp___idx_154]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true))))) ->
+  (bool_eq14(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev4 :
+  (forall a:(int,(int,us_rep) farray) farray.
+  forall b:(int,(int,us_rep) farray) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq14(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq13((a[temp___idx_154]), 1, 3,
+  (b[((b__first - a__first) + temp___idx_154)]), 1, 3) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic won : (int,(int,slot) farray) farray,
+  (int,(int,us_rep) farray) farray -> int
+
+logic won__function_guard : int, (int,(int,slot) farray) farray,
+  (int,(int,us_rep) farray) farray -> prop
+
+axiom won__post_axiom :
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray.
+  (forall tictactoe__all_solutions:(int,(int,us_rep) farray) farray
+  [won(tictactoe__my_board, tictactoe__all_solutions)].
+  in_range4(won(tictactoe__my_board, tictactoe__all_solutions))))
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic s__first : integer
+
+logic s__last : integer
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic one_free_slot : int, int, (int,(int,slot) farray) farray -> int
+
+logic one_free_slot__function_guard : int, int, int,
+  (int,(int,slot) farray) farray -> prop
+
+axiom one_free_slot__post_axiom :
+  (forall x:int. forall y:int.
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [one_free_slot(x, y, tictactoe__my_board)]. ((in_range5(x) and
+  in_range5(y)) -> in_range1(one_free_slot(x, y, tictactoe__my_board)))))
+
+axiom one_free_slot__def_axiom :
+  (forall x:int. forall y:int.
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [one_free_slot(x, y, tictactoe__my_board)]. ((in_range5(x) and
+  in_range5(y)) -> (((to_rep2(((tictactoe__my_board[x])[y])) = 0) ->
+  (one_free_slot(x, y, tictactoe__my_board) = 1)) and
+  ((not (to_rep2(((tictactoe__my_board[x])[y])) = 0)) -> (one_free_slot(x, y,
+  tictactoe__my_board) = 0))))))
+
+axiom count_free_slots__post_axiom :
+  (forall x:int. forall y:int.
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [count_free_slots(x, y, tictactoe__my_board)]. ((in_range5(x) and
+  in_range5(y)) -> in_range1(count_free_slots(x, y, tictactoe__my_board)))))
+
+axiom count_free_slots__def_axiom :
+  (forall x:int. forall y:int.
+  (forall tictactoe__my_board:(int,(int,slot) farray) farray
+  [count_free_slots(x, y, tictactoe__my_board)]. ((in_range5(x) and
+  in_range5(y)) -> (((2 <= y) -> (((3 <= y) -> (((2 <= x) -> (((2 <= y) ->
+  (((3 <= y) -> (((3 <= x) -> (((2 <= y) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + 0))))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + 0))))))))) and ((not (2 <= x)) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + 0))))))) and ((not (3 <= y)) -> (((2 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (((3 <= x) -> (((2 <= y) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + 0))))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + 0))))))))) and ((not (2 <= x)) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + one_free_slot(1, 2,
+  tictactoe__my_board)) + 0) + 0) + 0))))))))) and ((not (2 <= y)) ->
+  (((3 <= y) -> (((2 <= x) -> (((2 <= y) -> (((3 <= y) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + 0))))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + 0))))))))) and ((not (2 <= x)) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + one_free_slot(1, 3,
+  tictactoe__my_board)) + 0) + 0))))))) and ((not (3 <= y)) -> (((2 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (((3 <= x) -> (((2 <= y) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + one_free_slot(2, 2,
+  tictactoe__my_board)) + 0)) + 0))))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + one_free_slot(2, 3,
+  tictactoe__my_board))) + 0))))) and ((not (3 <= y)) -> (((3 <= x) ->
+  (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + ((one_free_slot(2, 1,
+  tictactoe__my_board) + 0) + 0)) + 0))))))))) and ((not (2 <= x)) ->
+  (((3 <= x) -> (((2 <= y) -> (((3 <= y) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + one_free_slot(3, 3, tictactoe__my_board))))) and
+  ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + one_free_slot(3, 2,
+  tictactoe__my_board)) + 0)))))) and ((not (2 <= y)) -> (((3 <= y) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + one_free_slot(3, 3,
+  tictactoe__my_board))))) and ((not (3 <= y)) -> (count_free_slots(x, y,
+  tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + 0) + ((one_free_slot(3, 1,
+  tictactoe__my_board) + 0) + 0)))))))) and ((not (3 <= x)) ->
+  (count_free_slots(x, y, tictactoe__my_board) = ((((one_free_slot(1, 1,
+  tictactoe__my_board) + 0) + 0) + 0) + 0)))))))))))))
+
+logic my_board : (int,(int,slot) farray) farray
+
+logic p__split_fields : pos
+
+logic p__split_fields1 : pos
+
+logic all_solutions : (int,(int,us_rep) farray) farray
+
+logic temp___779 : pos
+
+logic temp___7791 : pos
+
+logic tictactoe__player_play__B_2__s__assume : (int,character) farray
+
+logic tictactoe__player_play__B_2__s__assume1 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : character
+
+logic o3 : int
+
+logic o4 : pos
+
+logic o5 : pos
+
+logic o6 : pos
+
+logic o7 : pos
+
+logic temp___767 : pos
+
+logic temp___7671 : pos
+
+logic o8 : pos
+
+logic o9 : pos
+
+logic o10 : pos
+
+logic o11 : pos
+
+logic temp___768 : pos
+
+logic temp___7681 : pos
+
+logic o12 : pos
+
+logic o13 : pos
+
+logic o14 : pos
+
+logic o15 : pos
+
+logic temp___769 : pos
+
+logic temp___7691 : pos
+
+logic o16 : pos
+
+logic o17 : pos
+
+logic o18 : pos
+
+logic o19 : pos
+
+logic temp___770 : pos
+
+logic temp___7701 : pos
+
+logic o20 : pos
+
+logic o21 : pos
+
+logic o22 : pos
+
+logic o23 : pos
+
+logic temp___771 : pos
+
+logic temp___7711 : pos
+
+logic o24 : pos
+
+logic o25 : pos
+
+logic o26 : pos
+
+logic o27 : pos
+
+logic temp___772 : pos
+
+logic temp___7721 : pos
+
+logic o28 : pos
+
+logic o29 : pos
+
+logic o30 : pos
+
+logic o31 : pos
+
+logic temp___773 : pos
+
+logic temp___7731 : pos
+
+logic o32 : pos
+
+logic o33 : pos
+
+logic o34 : pos
+
+logic o35 : pos
+
+logic temp___774 : pos
+
+logic temp___7741 : pos
+
+logic o36 : pos
+
+logic o37 : pos
+
+logic o38 : pos
+
+logic o39 : pos
+
+logic temp___775 : pos
+
+logic temp___7751 : pos
+
+logic o40 : pos
+
+logic o41 : pos
+
+logic o42 : pos
+
+logic o43 : pos
+
+logic temp___776 : pos
+
+logic temp___7761 : pos
+
+logic p__split_fields2 : pos
+
+logic p__split_fields3 : pos
+
+logic s : (int,character) farray
+
+logic found : bool
+
+logic c : int
+
+logic result : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result1 : bool
+
+logic found1 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic c1 : int
+
+logic result4 : pos
+
+logic result5 : pos
+
+logic p__split_fields4 : pos
+
+logic p__split_fields5 : pos
+
+logic result6 : pos
+
+logic result7 : pos
+
+logic p__split_fields6 : pos
+
+logic p__split_fields7 : pos
+
+logic result8 : pos
+
+logic result9 : pos
+
+logic p__split_fields8 : pos
+
+logic p__split_fields9 : pos
+
+logic result10 : pos
+
+logic result11 : pos
+
+logic p__split_fields10 : pos
+
+logic p__split_fields11 : pos
+
+logic result12 : pos
+
+logic result13 : pos
+
+logic p__split_fields12 : pos
+
+logic p__split_fields13 : pos
+
+logic result14 : pos
+
+logic result15 : pos
+
+logic p__split_fields14 : pos
+
+logic p__split_fields15 : pos
+
+logic result16 : pos
+
+logic result17 : pos
+
+logic p__split_fields16 : pos
+
+logic p__split_fields17 : pos
+
+logic result18 : pos
+
+logic result19 : pos
+
+logic p__split_fields18 : pos
+
+logic p__split_fields19 : pos
+
+logic result20 : pos
+
+logic result21 : pos
+
+logic p__split_fields20 : pos
+
+logic p__split_fields21 : pos
+
+logic result22 : pos
+
+logic result23 : pos
+
+logic p__split_fields22 : pos
+
+logic p__split_fields23 : pos
+
+logic result24 : bool
+
+logic found2 : bool
+
+logic p__split_fields24 : pos
+
+logic p__split_fields25 : pos
+
+logic found3 : bool
+
+logic c2 : int
+
+logic p__split_fields26 : pos
+
+logic p__split_fields27 : pos
+
+logic found4 : bool
+
+logic c3 : int
+
+logic p__split_fields28 : pos
+
+logic p__split_fields29 : pos
+
+logic s2 : (int,character) farray
+
+logic found5 : bool
+
+logic c4 : int
+
+logic p__split_fields30 : pos
+
+logic p__split_fields31 : pos
+
+logic s3 : (int,character) farray
+
+logic found6 : bool
+
+logic c5 : int
+
+logic p__split_fields32 : pos
+
+logic p__split_fields33 : pos
+
+logic s4 : (int,character) farray
+
+logic found7 : bool
+
+logic c6 : int
+
+logic p__split_fields34 : pos
+
+logic p__split_fields35 : pos
+
+logic s5 : (int,character) farray
+
+logic found8 : bool
+
+logic c7 : int
+
+logic my_board1 : (int,(int,slot) farray) farray
+
+logic my_board2 : (int,(int,slot) farray) farray
+
+logic p__split_fields36 : pos
+
+logic p__split_fields37 : pos
+
+logic s6 : (int,character) farray
+
+logic found9 : bool
+
+logic c8 : int
+
+logic my_board3 : (int,(int,slot) farray) farray
+
+logic p__split_fields38 : pos
+
+logic p__split_fields39 : pos
+
+logic s7 : (int,character) farray
+
+logic found10 : bool
+
+logic c9 : int
+
+axiom H : ((not (is_full(my_board) = true)) and (won(my_board,
+  all_solutions) = 0))
+
+axiom H1 : ((p__split_fields = temp___779) and
+  (p__split_fields1 = temp___7791))
+
+axiom H2 : (({ elts = tictactoe__player_play__B_2__s__assume; rt =
+  tictactoe__player_play__B_2__s__assume1 } = get_line__4(void)) and
+  dynamic_property(1, 2147483647,
+  to_rep1(first(tictactoe__player_play__B_2__s__assume1)),
+  to_rep1(last(tictactoe__player_play__B_2__s__assume1))))
+
+axiom H3 : (result = s)
+
+axiom H4 : (s1 = tictactoe__player_play__B_2__s__assume)
+
+axiom H5 :
+  (to_rep1(s__first) = to_rep1(first(tictactoe__player_play__B_2__s__assume1)))
+
+axiom H6 :
+  (to_rep1(s__last) = to_rep1(last(tictactoe__player_play__B_2__s__assume1)))
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H8 : (result1 = found)
+
+axiom H9 : (found1 = of_int(1))
+
+axiom H10 : (c2 = c1)
+
+axiom H11 : (found3 = found2)
+
+axiom H12 : ((p__split_fields24 = p__split_fields6) and
+  (p__split_fields25 = p__split_fields7))
+
+axiom H13 : (c3 = c1)
+
+axiom H14 : (found4 = found2)
+
+axiom H15 : ((p__split_fields26 = p__split_fields6) and
+  (p__split_fields27 = p__split_fields7))
+
+axiom H16 : ((to_rep1(s__first) <= to_rep1(s__last)) ->
+  (o = ((to_rep1(s__last) - to_rep1(s__first)) + 1)))
+
+axiom H17 : ((not (to_rep1(s__first) <= to_rep1(s__last))) -> (o = 0))
+
+axiom H18 : (((1 <= o) -> (result2 = true)) and ((not (1 <= o)) ->
+  (result2 = false)))
+
+axiom H19 : (result2 = true)
+
+axiom H20 : ((to_rep1(s__first) <= to_rep1(s__first)) and
+  (to_rep1(s__first) <= to_rep1(s__last)))
+
+axiom H21 : (o1 = to_rep1(s__first))
+
+axiom H22 : (o2 = (s1[o1]))
+
+axiom H23 : (o3 = to_rep(o2))
+
+axiom H24 : (result3 = c)
+
+axiom H25 : (c1 = o3)
+
+axiom H26 : in_range3(c1)
+
+axiom H27 : (to_rep3(o4) = 1)
+
+axiom H28 : (to_rep3(o5) = 1)
+
+axiom H29 : (o5 = o6)
+
+axiom H30 : (o4 = o7)
+
+axiom H31 : (temp___767 = o6)
+
+axiom H32 : (temp___7671 = o7)
+
+axiom H33 : ((result4 = p__split_fields2) and (result5 = p__split_fields3))
+
+axiom H34 : ((p__split_fields4 = temp___767) and
+  (p__split_fields5 = temp___7671))
+
+axiom H35 : ((c1 = 49) -> (to_rep3(o8) = 1))
+
+axiom H36 : ((c1 = 49) -> (to_rep3(o9) = 1))
+
+axiom H37 : ((c1 = 49) -> (o9 = o10))
+
+axiom H38 : ((c1 = 49) -> (o8 = o11))
+
+axiom H39 : ((c1 = 49) -> (temp___768 = o10))
+
+axiom H40 : ((c1 = 49) -> (temp___7681 = o11))
+
+axiom H41 : ((c1 = 49) -> ((result6 = p__split_fields4) and
+  (result7 = p__split_fields5)))
+
+axiom H42 : ((c1 = 49) -> ((p__split_fields6 = temp___768) and
+  (p__split_fields7 = temp___7681)))
+
+axiom H43 : ((c1 = 49) -> (found2 = found1))
+
+axiom H44 : ((not (c1 = 49)) -> ((c1 = 50) -> (to_rep3(o12) = 1)))
+
+axiom H45 : ((not (c1 = 49)) -> ((c1 = 50) -> (to_rep3(o13) = 2)))
+
+axiom H46 : ((not (c1 = 49)) -> ((c1 = 50) -> (o13 = o14)))
+
+axiom H47 : ((not (c1 = 49)) -> ((c1 = 50) -> (o12 = o15)))
+
+axiom H48 : ((not (c1 = 49)) -> ((c1 = 50) -> (temp___769 = o14)))
+
+axiom H49 : ((not (c1 = 49)) -> ((c1 = 50) -> (temp___7691 = o15)))
+
+axiom H50 : ((not (c1 = 49)) -> ((c1 = 50) ->
+  ((result8 = p__split_fields4) and (result9 = p__split_fields5))))
+
+axiom H51 : ((not (c1 = 49)) -> ((c1 = 50) ->
+  ((p__split_fields8 = temp___769) and (p__split_fields9 = temp___7691))))
+
+axiom H52 : ((not (c1 = 49)) -> ((c1 = 50) -> (found2 = found1)))
+
+axiom H53 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (to_rep3(o16) = 1))))
+
+axiom H54 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (to_rep3(o17) = 3))))
+
+axiom H55 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (o17 = o18))))
+
+axiom H56 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (o16 = o19))))
+
+axiom H57 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (temp___770 = o18))))
+
+axiom H58 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (temp___7701 = o19))))
+
+axiom H59 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  ((result10 = p__split_fields4) and (result11 = p__split_fields5)))))
+
+axiom H60 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  ((p__split_fields10 = temp___770) and (p__split_fields11 = temp___7701)))))
+
+axiom H61 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((c1 = 51) ->
+  (found2 = found1))))
+
+axiom H62 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> (to_rep3(o20) = 2)))))
+
+axiom H63 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> (to_rep3(o21) = 1)))))
+
+axiom H64 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> ((o22 = o21) and (o23 = o20))))))
+
+axiom H65 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> ((temp___771 = o22) and (temp___7711 = o23))))))
+
+axiom H66 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> ((result12 = p__split_fields4) and
+  (result13 = p__split_fields5))))))
+
+axiom H67 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> ((p__split_fields12 = temp___771) and
+  (p__split_fields13 = temp___7711))))))
+
+axiom H68 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((c1 = 52) -> (found2 = found1)))))
+
+axiom H69 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> (to_rep3(o24) = 2))))))
+
+axiom H70 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> (to_rep3(o25) = 2))))))
+
+axiom H71 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> ((o26 = o25) and (o27 = o24)))))))
+
+axiom H72 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> ((temp___772 = o26) and
+  (temp___7721 = o27)))))))
+
+axiom H73 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> ((result14 = p__split_fields4) and
+  (result15 = p__split_fields5)))))))
+
+axiom H74 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> ((p__split_fields14 = temp___772) and
+  (p__split_fields15 = temp___7721)))))))
+
+axiom H75 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((c1 = 53) -> (found2 = found1))))))
+
+axiom H76 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  (to_rep3(o28) = 2)))))))
+
+axiom H77 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  (to_rep3(o29) = 3)))))))
+
+axiom H78 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) -> ((o30 = o29) and
+  (o31 = o28))))))))
+
+axiom H79 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  ((temp___773 = o30) and (temp___7731 = o31))))))))
+
+axiom H80 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  ((result16 = p__split_fields4) and (result17 = p__split_fields5))))))))
+
+axiom H81 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  ((p__split_fields16 = temp___773) and
+  (p__split_fields17 = temp___7731))))))))
+
+axiom H82 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((c1 = 54) ->
+  (found2 = found1)))))))
+
+axiom H83 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  (to_rep3(o32) = 3))))))))
+
+axiom H84 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  (to_rep3(o33) = 1))))))))
+
+axiom H85 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  ((o34 = o33) and (o35 = o32)))))))))
+
+axiom H86 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  ((temp___774 = o34) and (temp___7741 = o35)))))))))
+
+axiom H87 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  ((result18 = p__split_fields4) and (result19 = p__split_fields5)))))))))
+
+axiom H88 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  ((p__split_fields18 = temp___774) and
+  (p__split_fields19 = temp___7741)))))))))
+
+axiom H89 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) -> ((c1 = 55) ->
+  (found2 = found1))))))))
+
+axiom H90 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> (to_rep3(o36) = 3)))))))))
+
+axiom H91 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> (to_rep3(o37) = 2)))))))))
+
+axiom H92 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> ((o38 = o37) and (o39 = o36))))))))))
+
+axiom H93 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> ((temp___775 = o38) and
+  (temp___7751 = o39))))))))))
+
+axiom H94 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> ((result20 = p__split_fields4) and
+  (result21 = p__split_fields5))))))))))
+
+axiom H95 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> ((p__split_fields20 = temp___775) and
+  (p__split_fields21 = temp___7751))))))))))
+
+axiom H96 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((c1 = 56) -> (found2 = found1)))))))))
+
+axiom H97 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  (to_rep3(o40) = 3))))))))))
+
+axiom H98 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  (to_rep3(o41) = 3))))))))))
+
+axiom H99 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) -> ((o42 = o41) and
+  (o43 = o40)))))))))))
+
+axiom H100 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  ((temp___776 = o42) and (temp___7761 = o43)))))))))))
+
+axiom H101 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  ((result22 = p__split_fields4) and (result23 = p__split_fields5)))))))))))
+
+axiom H102 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  ((p__split_fields22 = temp___776) and
+  (p__split_fields23 = temp___7761)))))))))))
+
+axiom H103 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((c1 = 57) ->
+  (found2 = found1))))))))))
+
+axiom H104 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((not (c1 = 57)) ->
+  (result24 = found1))))))))))
+
+axiom H105 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((not (c1 = 57)) ->
+  (found2 = of_int(0)))))))))))
+
+axiom H106 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) -> ((not (c1 = 57)) ->
+  ((p__split_fields22 = p__split_fields4) and
+  (p__split_fields23 = p__split_fields5)))))))))))
+
+axiom H107 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((not (c1 = 56)) ->
+  ((p__split_fields20 = p__split_fields22) and
+  (p__split_fields21 = p__split_fields23))))))))))
+
+axiom H108 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((not (c1 = 55)) -> ((p__split_fields18 = p__split_fields20) and
+  (p__split_fields19 = p__split_fields21)))))))))
+
+axiom H109 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) -> ((not (c1 = 54)) ->
+  ((p__split_fields16 = p__split_fields18) and
+  (p__split_fields17 = p__split_fields19))))))))
+
+axiom H110 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((not (c1 = 53)) ->
+  ((p__split_fields14 = p__split_fields16) and
+  (p__split_fields15 = p__split_fields17)))))))
+
+axiom H111 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((not (c1 = 52)) -> ((p__split_fields12 = p__split_fields14) and
+  (p__split_fields13 = p__split_fields15))))))
+
+axiom H112 : ((not (c1 = 49)) -> ((not (c1 = 50)) -> ((not (c1 = 51)) ->
+  ((p__split_fields10 = p__split_fields12) and
+  (p__split_fields11 = p__split_fields13)))))
+
+axiom H113 : ((not (c1 = 49)) -> ((not (c1 = 50)) ->
+  ((p__split_fields8 = p__split_fields10) and
+  (p__split_fields9 = p__split_fields11))))
+
+axiom H114 : ((not (c1 = 49)) -> ((p__split_fields6 = p__split_fields8) and
+  (p__split_fields7 = p__split_fields9)))
+
+axiom H115 : (found2 = true)
+
+axiom H116 :
+  (to_rep2(((my_board[to_rep3(p__split_fields6)])[to_rep3(p__split_fields7)])) = 0)
+
+axiom H117 : (c4 = c2)
+
+axiom H118 : (found5 = found3)
+
+axiom H119 : (s2 = s1)
+
+axiom H120 : ((p__split_fields28 = p__split_fields24) and
+  (p__split_fields29 = p__split_fields25))
+
+axiom H121 : (c5 = c3)
+
+axiom H122 : (found6 = found4)
+
+axiom H123 : (s3 = s1)
+
+axiom H124 : ((p__split_fields30 = p__split_fields26) and
+  (p__split_fields31 = p__split_fields27))
+
+axiom H125 : (c6 = c4)
+
+axiom H126 : (found7 = found5)
+
+axiom H127 : (s4 = s2)
+
+axiom H128 : ((p__split_fields32 = p__split_fields28) and
+  (p__split_fields33 = p__split_fields29))
+
+axiom H129 : (c7 = c5)
+
+axiom H130 : (found8 = found6)
+
+axiom H131 : (s5 = s3)
+
+axiom H132 : ((p__split_fields34 = p__split_fields30) and
+  (p__split_fields35 = p__split_fields31))
+
+ (* File "tictactoe.ads", line 5, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep2(((my_board[to_rep3(p__split_fields32)])[to_rep3(p__split_fields33)])) = 0)

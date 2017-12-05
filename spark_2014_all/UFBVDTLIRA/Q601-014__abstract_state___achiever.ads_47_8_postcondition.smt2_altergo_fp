@@ -367,18 +367,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -889,7 +889,7 @@ function op_type__ref___projection(a: op_type__ref) : op_type =
 
 type internal_state
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -992,73 +992,89 @@ logic c3b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "achiever.ads", line 67, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_internal_state:int. forall state_item__split_fields:bool.
-  forall state_item__split_fields1:bool. forall o:bool.
-  forall state_item__split_fields2:bool.
-  forall state_item__split_fields3:bool. forall result:bool.
-  forall state_item__split_fields4:bool.
-  forall state_item__split_fields5:bool.
-  forall state_item__split_fields6:bool.
-  forall state_item__split_fields7:bool.
-  forall state_item__split_fields8:bool.
-  forall state_item__split_fields9:bool. ((in_range1(st) and
-  (in_range3(my_internal_state) and (((((o = read({ us_split_fields3 = {
+logic my_internal_state : int
+
+logic state_item__split_fields : bool
+
+logic state_item__split_fields1 : bool
+
+logic o : bool
+
+logic state_item__split_fields2 : bool
+
+logic state_item__split_fields3 : bool
+
+logic result : bool
+
+logic state_item__split_fields4 : bool
+
+logic state_item__split_fields5 : bool
+
+logic state_item__split_fields6 : bool
+
+logic state_item__split_fields7 : bool
+
+logic state_item__split_fields8 : bool
+
+logic state_item__split_fields9 : bool
+
+axiom H : in_range1(st)
+
+axiom H1 : in_range3(my_internal_state)
+
+axiom H2 : (o = read({ us_split_fields3 = {
   rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields;
   rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } } })) and (((not (o = true)) and
-  (result = true)) or ((o = true) and (result = false)))) and
-  (((result = true) and (((st = c2b) and in_range1(c2b)) and
-  in_range2(c3b))) or ((not (result = true)) and
-  (((state_item__split_fields = state_item__split_fields4) and
-  (state_item__split_fields1 = state_item__split_fields5)) and ({
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields4;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields5 } } } = {
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields2;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields3 } } }))))) and
-  (((state_item__split_fields6 = state_item__split_fields4) and
-  (state_item__split_fields7 = state_item__split_fields5)) and ({
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields8;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields9 } } } = {
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields4;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields5 } } }))) and ((((read(get_state_item({
+  state_item__split_fields1 } } } }))
+
+axiom H3 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H4 : ((result = true) -> (st = c2b))
+
+axiom H5 : ((result = true) -> in_range1(c2b))
+
+axiom H6 : ((result = true) -> in_range2(c3b))
+
+axiom H7 : ((not (result = true)) ->
+  (state_item__split_fields = state_item__split_fields4))
+
+axiom H8 : ((not (result = true)) ->
+  (state_item__split_fields1 = state_item__split_fields5))
+
+axiom H9 : ((not (result = true)) ->
+  ((state_item__split_fields4 = state_item__split_fields2) and
+  (state_item__split_fields5 = state_item__split_fields3)))
+
+axiom H10 : (state_item__split_fields6 = state_item__split_fields4)
+
+axiom H11 : (state_item__split_fields7 = state_item__split_fields5)
+
+axiom H12 : ((state_item__split_fields8 = state_item__split_fields4) and
+  (state_item__split_fields9 = state_item__split_fields5))
+
+axiom H13 : ((read(get_state_item({
   rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields;
   rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } })) = false) and ((prf_do_something(st, 0,
+  state_item__split_fields1 } } })) = false) -> ((prf_do_something(st, 0,
   get_internal_state(my_internal_state),
   get_internal_state(my_internal_state)) = true) and (read(get_state_item({
   rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields6;
   rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields7 } } })) = true))) or (read(get_state_item({
+  state_item__split_fields7 } } })) = true)))
+
+axiom H14 : ((read(get_state_item({
   rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields;
   rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } })) = true)) and (((read(get_state_item({
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } })) = true) and (bool_eq2(get_state_item({
+  state_item__split_fields1 } } })) = true) -> (bool_eq2(get_state_item({
   rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields6;
@@ -1068,11 +1084,9 @@ goal WP_parameter_def :
   rec__sc_status_type__duplicate_status_type__prime =
   state_item__split_fields;
   rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } })) = true)) or (not (read(get_state_item({
-  rec__sc_status_type__object_type__sc_state = { us_split_fields1 = {
-  rec__sc_status_type__duplicate_status_type__prime =
-  state_item__split_fields;
-  rec__sc_status_type__duplicate_status_type__shadow =
-  state_item__split_fields1 } } })) = true))))))) -> (prf_do_stuff(st,
+  state_item__split_fields1 } } })) = true))
+
+ (* File "achiever.ads", line 67, characters 0-0 *)
+goal WP_parameter_def : (prf_do_stuff(st,
   get_internal_state(my_internal_state),
-  get_internal_state(my_internal_state)) = true)))
+  get_internal_state(my_internal_state)) = true)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -441,28 +441,60 @@ logic temp___173 : int, int, int -> us_t1
 
 axiom def_axiom :
   (forall temp___175:int. forall temp___176:int. forall temp___177:int.
-  ((dynamic_property((-2147483648), 2147483647, temp___176, temp___177) ->
+  ((dynamic_property((- 2147483648), 2147483647, temp___176, temp___177) ->
   ((to_rep(first2((temp___173(temp___175, temp___176,
   temp___177)).rt1)) = temp___176) and (to_rep(last2((temp___173(temp___175,
   temp___176, temp___177)).rt1)) = temp___177))) and
   (forall temp___178:int. (((temp___173(temp___175, temp___176,
   temp___177)).elts1[temp___178]) = of_rep1(temp___175)))))
 
+logic x : (int,myint) farray
+
+logic temp___180 : (int,myint) farray
+
+logic temp___1801 : t1
+
+logic temp___181 : (int,myint) farray
+
+logic temp___1811 : t
+
+logic temp___182 : (int,myint) farray
+
+logic temp___1821 : t
+
+logic o : (int,myint) farray
+
+logic result : (int,myint) farray
+
+logic x1 : (int,myint) farray
+
+logic x2 : (int,myint) farray
+
+logic x3 : (int,myint) farray
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(x__first),
+  to_rep(x__last))
+
+axiom H1 : (((to_rep(x__first) <= to_rep(x__last)) ->
+  (0 <  ((to_rep(x__last) - to_rep(x__first)) + 1))) and
+  ((not (to_rep(x__first) <= to_rep(x__last))) -> (0 <  0)))
+
+axiom H2 : (to_rep(first2((temp___173(0, to_rep(x__first),
+  to_rep(x__last))).rt1)) = to_rep(x__first))
+
+axiom H3 : (to_rep(last2((temp___173(0, to_rep(x__first),
+  to_rep(x__last))).rt1)) = to_rep(x__last))
+
+axiom H4 : ({ elts1 = temp___180; rt1 = temp___1801 } = temp___173(0,
+  to_rep(x__first), to_rep(x__last)))
+
+axiom H5 : (temp___180 = temp___181)
+
+axiom H6 : (mk(to_rep(first2(temp___1801)),
+  to_rep(last2(temp___1801))) = temp___1811)
+
  (* File "unconstr.ads", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___180:(int,myint) farray. forall temp___1801:t1.
-  forall temp___181:(int,myint) farray. forall temp___1811:t.
-  (dynamic_property((-2147483648), 2147483647, to_rep(x__first),
-  to_rep(x__last)) -> ((((to_rep(x__first) <= to_rep(x__last)) and
-  (0 <  ((to_rep(x__last) - to_rep(x__first)) + 1))) or
-  ((not (to_rep(x__first) <= to_rep(x__last))) and (0 <  0))) ->
-  ((((to_rep(first2((temp___173(0, to_rep(x__first),
-  to_rep(x__last))).rt1)) = to_rep(x__first)) and
-  ((to_rep(last2((temp___173(0, to_rep(x__first),
-  to_rep(x__last))).rt1)) = to_rep(x__last)) and ({ elts1 = temp___180; rt1 =
-  temp___1801 } = temp___173(0, to_rep(x__first), to_rep(x__last))))) and
-  ((temp___180 = temp___181) and (mk(to_rep(first2(temp___1801)),
-  to_rep(last2(temp___1801))) = temp___1811))) ->
   (((to_rep(first(temp___1811)) <= to_rep(last(temp___1811))) ->
   (((to_rep(x__first) <= to_rep(x__last)) ->
   (((to_rep(last(temp___1811)) - to_rep(first(temp___1811))) + 1) = ((to_rep(x__last) - to_rep(x__first)) + 1))) and
@@ -470,4 +502,4 @@ goal WP_parameter_def :
   (((to_rep(last(temp___1811)) - to_rep(first(temp___1811))) + 1) = 0)))) and
   ((not (to_rep(first(temp___1811)) <= to_rep(last(temp___1811)))) ->
   ((to_rep(x__first) <= to_rep(x__last)) ->
-  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))))))
+  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))

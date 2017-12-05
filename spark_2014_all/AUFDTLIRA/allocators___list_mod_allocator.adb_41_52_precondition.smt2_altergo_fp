@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -827,13 +827,165 @@ axiom is_empty__post_axiom :
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
 
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic e : int
+
+logic o : bool
+
+logic o1 : int
+
+logic temp___281 : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : resource
+
+logic o7 : resource
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___280 : int
+
+logic o10 : int
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : status
+
+logic o14 : resource
+
+logic o15 : resource
+
+logic o16 : int
+
+logic j : int
+
+logic o17 : int
+
+logic o18 : bool
+
+logic k : int
+
+logic o19 : int
+
+logic o20 : bool
+
+logic o21 : int
+
+logic o22 : int
+
+logic j1 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic temp___279 : int
+
+logic o25 : int
+
+logic o26 : status
+
+logic o27 : resource
+
+logic o28 : status
+
+logic o29 : resource
+
+logic o30 : resource
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic j2 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic o36 : int
+
+logic temp___278 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+axiom H : in_range2(first_available)
+
+axiom H1 : ((o43 = length(m)) and (in_range5(o43) and
+  ((0 + o43) <= 2147483647)))
+
+axiom H2 : (((o43 <= 10000) -> (result5 = true)) and ((not (o43 <= 10000)) ->
+  (result5 = false)))
+
+axiom H3 : (result5 = true)
+
+axiom H4 : (not (first_available = 0))
+
+axiom H5 : ((o41 = length(m)) and (in_range5(o41) and
+  ((0 + o41) <= 2147483647)))
+
+axiom H6 : (((0 <  o41) -> (result6 = true)) and ((not (0 <  o41)) ->
+  (result6 = false)))
+
+axiom H7 : (result6 = true)
+
  (* File "list_mod_allocator.ads", line 71, characters 0-0 *)
-goal WP_parameter_def :
-  (forall first_available:int. forall o:int. forall o1:int.
-  forall result:bool. forall result1:bool. (in_range2(first_available) ->
-  ((((o1 = length(m)) and (in_range5(o1) and ((0 + o1) <= 2147483647))) and
-  (((o1 <= 10000) and (result = true)) or ((not (o1 <= 10000)) and
-  (result = false)))) -> ((result = true) -> ((not (first_available = 0)) ->
-  ((((o = length(m)) and (in_range5(o) and ((0 + o) <= 2147483647))) and
-  (((0 <  o) and (result1 = true)) or ((not (0 <  o)) and
-  (result1 = false)))) -> ((result1 = true) -> (1 <= 1))))))))
+goal WP_parameter_def : (1 <= 1)

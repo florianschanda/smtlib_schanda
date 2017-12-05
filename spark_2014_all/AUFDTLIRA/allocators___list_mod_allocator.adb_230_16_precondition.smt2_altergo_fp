@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tresourceB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1063,55 +1063,293 @@ axiom is_empty__post_axiom :
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
 
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic r : int
+
+logic i : int
+
+logic o : resource
+
+logic o1 : status
+
+logic o2 : status
+
+logic o3 : resource
+
+logic o4 : status
+
+logic o5 : resource
+
+logic o6 : (int,us_rep) farray
+
+logic temp___259 : int
+
+logic temp___257 : (int,us_rep) farray
+
+logic o7 : int
+
+logic o8 : resource
+
+logic o9 : status
+
+logic o10 : resource
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : (int,us_rep) farray
+
+logic rr : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : resource
+
+logic o17 : status
+
+logic o18 : resource
+
+logic o19 : status
+
+logic o20 : resource
+
+logic o21 : (int,us_rep) farray
+
+logic o22 : us_rep1
+
+logic o23 : us_rep2
+
+logic o24 : us_rep1
+
+logic o25 : us_rep2
+
+logic list_mod_allocator__C143b__assume : us_rep1
+
+logic list_mod_allocator__B144b__L_5__R145b__assume : int
+
+logic temp___262 : int
+
+logic j : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : us_rep1
+
+logic o29 : us_rep2
+
+logic o30 : us_rep1
+
+logic o31 : us_rep2
+
+logic o32 : us_rep1
+
+logic o33 : us_rep1
+
+logic o34 : us_rep2
+
+logic o35 : us_rep1
+
+logic o36 : us_rep2
+
+logic o37 : us_rep1
+
+logic o38 : int
+
+logic temp___265 : int
+
+logic o39 : bool
+
+logic o40 : bool
+
+logic result : (int,us_rep) farray
+
+logic data1 : (int,us_rep) farray
+
+logic result1 : int
+
+logic first_available1 : int
+
+logic result2 : int
+
+logic r1 : int
+
+logic result3 : (int,us_rep) farray
+
+logic data2 : (int,us_rep) farray
+
+logic data3 : (int,us_rep) farray
+
+logic r2 : int
+
+logic result4 : int
+
+logic r3 : int
+
+logic result5 : (int,us_rep) farray
+
+logic data4 : (int,us_rep) farray
+
+logic data5 : (int,us_rep) farray
+
+logic r4 : int
+
+logic data6 : (int,us_rep) farray
+
+logic r5 : int
+
+logic data7 : (int,us_rep) farray
+
+logic r6 : int
+
+logic data8 : (int,us_rep) farray
+
+logic r7 : int
+
+logic result6 : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic result7 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic i8 : int
+
+logic i9 : int
+
+logic i10 : int
+
+logic i11 : int
+
+axiom H : in_range3(no_resource)
+
+axiom H1 : (to_rep(o) = 0)
+
+axiom H2 : (to_rep1(o1) = 0)
+
+axiom H3 : (o1 = o2)
+
+axiom H4 : (o = o3)
+
+axiom H5 : (o4 = o2)
+
+axiom H6 : (o5 = o3)
+
+axiom H7 : (o6 = list_mod_allocator__data__aggregate_def({ us_split_fields1 =
+  { rec__list_mod_allocator__cell__stat = o4;
+  rec__list_mod_allocator__cell__next = o5 } }))
+
+axiom H8 : (result = data)
+
+axiom H9 : (data1 = o6)
+
+axiom H10 : (result1 = first_available)
+
+axiom H11 : (first_available1 = 1)
+
+axiom H12 : in_range3(first_available1)
+
+axiom H13 : (result2 = r)
+
+axiom H14 : (r1 = 1)
+
+axiom H15 : (((1 <= r1) and (r1 <= 10000)) -> (temp___259 = r1))
+
+axiom H16 : (((1 <= r1) and (r1 <= 10000)) -> (temp___257 = data1))
+
+axiom H17 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  ((o7 = (r1 + 1)) and in_range3((r1 + 1)))))
+
+axiom H18 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  (to_rep(o8) = o7)))
+
+axiom H19 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  ((((data1[r1])).us_split_fields1).rec__list_mod_allocator__cell__stat = o9)))
+
+axiom H20 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) -> (o8 = o10)))
+
+axiom H21 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) -> (o11 = o9)))
+
+axiom H22 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) -> (o12 = o10)))
+
+axiom H23 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  (o13 = (data1[r1 <- { us_split_fields1 = {
+  rec__list_mod_allocator__cell__stat = o11;
+  rec__list_mod_allocator__cell__next = o12 } }]))))
+
+axiom H24 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  (result3 = data1)))
+
+axiom H25 : (((1 <= r1) and (r1 <= 10000)) -> ((r1 <  10000) ->
+  (data2 = o13)))
+
+axiom H26 : (((1 <= r1) and (r1 <= 10000)) -> ((not (r1 <  10000)) ->
+  (data2 = data1)))
+
+axiom H27 : (((1 <= r1) and (r1 <= 10000)) ->
+  (forall rr1:int. (((1 <= rr1) and (rr1 <= r2)) -> (((rr1 = 10000) ->
+  (to_rep((((data3[rr1])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0)) and
+  ((not (rr1 = 10000)) ->
+  (to_rep((((data3[rr1])).us_split_fields1).rec__list_mod_allocator__cell__next) = (rr1 + 1)))))))
+
+axiom H28 : (((1 <= r1) and (r1 <= 10000)) ->
+  (to_rep((((data3[10000])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))
+
+axiom H29 : (((1 <= r1) and (r1 <= 10000)) ->
+  (forall rr1:int. (((1 <= rr1) and (rr1 <= 10000)) ->
+  (to_rep1((((data3[rr1])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0))))
+
+axiom H30 : (((1 <= r1) and (r1 <= 10000)) ->
+  (((forall temp___258:int. (((1 <= temp___258) and (temp___258 <= 10000)) ->
+    (((r2 <  temp___258) ->
+    ((data3[temp___258]) = (temp___257[temp___258]))) and
+    ((not (r2 <  temp___258)) ->
+    ((((data3[temp___258])).us_split_fields1).rec__list_mod_allocator__cell__stat = (((temp___257[temp___258])).us_split_fields1).rec__list_mod_allocator__cell__stat))))) and
+  ((1 <= 10000) -> in_range4(r2))) and ((1 <= r2) and (r2 <= 10000))))
+
+axiom H31 : (((1 <= r1) and (r1 <= 10000)) -> (r2 = 10000))
+
+axiom H32 : (((1 <= r1) and (r1 <= 10000)) -> (r4 = r2))
+
+axiom H33 : (((1 <= r1) and (r1 <= 10000)) -> (data5 = data3))
+
+axiom H34 : (((1 <= r1) and (r1 <= 10000)) -> (r5 = r2))
+
+axiom H35 : (((1 <= r1) and (r1 <= 10000)) -> (data6 = data3))
+
+axiom H36 : (((1 <= r1) and (r1 <= 10000)) -> (r6 = r4))
+
+axiom H37 : (((1 <= r1) and (r1 <= 10000)) -> (data7 = data5))
+
+axiom H38 : (((1 <= r1) and (r1 <= 10000)) -> (r7 = r5))
+
+axiom H39 : (((1 <= r1) and (r1 <= 10000)) -> (data8 = data6))
+
+axiom H40 : ((not ((1 <= r1) and (r1 <= 10000))) -> (r6 = r1))
+
+axiom H41 : ((not ((1 <= r1) and (r1 <= 10000))) -> (data7 = data1))
+
+axiom H42 : ((not ((1 <= r1) and (r1 <= 10000))) -> (r7 = r1))
+
+axiom H43 : ((not ((1 <= r1) and (r1 <= 10000))) -> (data8 = data1))
+
  (* File "list_mod_allocator.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int. forall r:int.
-  forall o:resource. forall o1:status. forall o2:status. forall o3:resource.
-  forall o4:status. forall o5:resource. forall o6:(int,us_rep) farray.
-  forall temp___259:int. forall temp___257:(int,us_rep) farray.
-  forall o7:int. forall o8:resource. forall o9:status. forall o10:resource.
-  forall o11:status. forall o12:resource. forall o13:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall data1:(int,us_rep) farray.
-  forall result1:int. forall first_available1:int. forall result2:int.
-  forall r1:int. forall result3:(int,us_rep) farray.
-  forall data2:(int,us_rep) farray. forall data3:(int,us_rep) farray.
-  forall r2:int. forall data4:(int,us_rep) farray. forall r3:int.
-  forall data5:(int,us_rep) farray. forall r4:int.
-  forall data6:(int,us_rep) farray. forall r5:int.
-  forall data7:(int,us_rep) farray. forall r6:int. (in_range3(no_resource) ->
-  ((((((to_rep(o) = 0) and ((to_rep1(o1) = 0) and ((o1 = o2) and
-  (o = o3)))) and ((o4 = o2) and (o5 = o3))) and
-  (o6 = list_mod_allocator__data__aggregate_def({ us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = o4;
-  rec__list_mod_allocator__cell__next = o5 } }))) and ((result = data) and
-  (data1 = o6))) -> (((result1 = first_available) and
-  (first_available1 = 1)) -> (in_range3(first_available1) ->
-  ((((result2 = r) and (r1 = 1)) and ((((1 <= r1) and (r1 <= 10000)) and
-  ((((temp___259 = r1) and ((temp___257 = data1) and ((((r1 <  10000) and
-  (((((((o7 = (r1 + 1)) and in_range3((r1 + 1))) and (to_rep(o8) = o7)) and
-  (((((data1[r1])).us_split_fields1).rec__list_mod_allocator__cell__stat = o9) and
-  (o8 = o10))) and ((o11 = o9) and (o12 = o10))) and (o13 = (data1[r1 <- {
-  us_split_fields1 = { rec__list_mod_allocator__cell__stat = o11;
-  rec__list_mod_allocator__cell__next = o12 } }]))) and
-  ((result3 = data1) and (data2 = o13)))) or ((not (r1 <  10000)) and
-  (data2 = data1))) and
-  (((forall rr:int. (((1 <= rr) and (rr <= r2)) -> (((rr = 10000) and
-    (to_rep((((data3[rr])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0)) or
-    ((not (rr = 10000)) and
-    (to_rep((((data3[rr])).us_split_fields1).rec__list_mod_allocator__cell__next) = (rr + 1)))))) and
-  ((to_rep((((data3[10000])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0) and
-  (forall rr:int. (((1 <= rr) and (rr <= 10000)) ->
-  (to_rep1((((data3[rr])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0))))) and
-  ((((forall temp___258:int. (((1 <= temp___258) and
-     (temp___258 <= 10000)) -> (((r2 <  temp___258) and
-     ((data3[temp___258]) = (temp___257[temp___258]))) or
-     ((not (r2 <  temp___258)) and
-     ((((data3[temp___258])).us_split_fields1).rec__list_mod_allocator__cell__stat = (((temp___257[temp___258])).us_split_fields1).rec__list_mod_allocator__cell__stat))))) and
-  ((1 <= 10000) -> in_range4(r2))) and ((1 <= r2) and (r2 <= 10000))) and
-  (r2 = 10000)))))) and (((r2 = r3) and (data3 = data4)) and ((r4 = r2) and
-  (data5 = data3)))) and ((({ int__content = r5 } = { int__content = r3
-  }) and ({ map__content = data6 } = { map__content = data4 })) and
-  ((r6 = r4) and (data7 = data5))))) or ((not ((1 <= r1) and
-  (r1 <= 10000))) and (((r1 = r5) and (data1 = data6)) and ((r6 = r1) and
-  (data7 = data1)))))) -> (is_well_formed(data6,
-  first_available1) = true)))))))
+goal WP_parameter_def : (is_well_formed(data7, first_available1) = true)

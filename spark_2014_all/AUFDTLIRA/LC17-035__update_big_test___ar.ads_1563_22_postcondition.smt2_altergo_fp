@@ -504,40 +504,90 @@ axiom def_axiom1 :
   ((not (temp___3271 = temp___3269)) -> ((temp___3266(temp___3268,
   temp___3269, temp___3270)[temp___3271]) = (temp___3268[temp___3271])))))))
 
+logic r__split_fields : (int,(int,et1) farray) farray
+
+logic r__split_fields1 : bool
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,et1) farray) farray
+
+logic o4 : bool
+
+logic temp___8338 : (int,(int,et1) farray) farray
+
+logic temp___83381 : bool
+
+logic o5 : int
+
+logic result : (int,(int,et1) farray) farray
+
+logic result1 : bool
+
+logic r__split_fields2 : (int,(int,et1) farray) farray
+
+logic r__split_fields3 : bool
+
+logic result2 : (int,(int,et1) farray) farray
+
+logic result3 : bool
+
+logic r__split_fields4 : (int,(int,et1) farray) farray
+
+logic r__split_fields5 : bool
+
+logic r__split_fields6 : (int,(int,et1) farray) farray
+
+logic r__split_fields7 : bool
+
+logic r__split_fields8 : (int,(int,et1) farray) farray
+
+logic r__split_fields9 : bool
+
+axiom H : in_range(i)
+
+axiom H1 : ((result = r__split_fields) and (result1 = r__split_fields1))
+
+axiom H2 : ((r__split_fields[i <- a]) = r__split_fields2)
+
+axiom H3 : (r__split_fields1 = r__split_fields3)
+
+axiom H4 : (to_rep(o) = 0)
+
+axiom H5 : (o1 = ((r__split_fields2[(55 - i)])[1 <- o]))
+
+axiom H6 : (o2 = (r__split_fields2[(55 - i) <- o1]))
+
+axiom H7 : (o2 = o3)
+
+axiom H8 : (r__split_fields3 = o4)
+
+axiom H9 : (temp___8338 = o3)
+
+axiom H10 : (temp___83381 = o4)
+
+axiom H11 : (result2 = r__split_fields2)
+
+axiom H12 : (result3 = r__split_fields3)
+
+axiom H13 : (temp___8338 = r__split_fields4)
+
+axiom H14 : (temp___83381 = r__split_fields5)
+
+axiom H15 : (r__split_fields6 = r__split_fields4)
+
+axiom H16 : (r__split_fields7 = r__split_fields5)
+
+axiom H17 : ((r__split_fields8 = r__split_fields4) and
+  (r__split_fields9 = r__split_fields5))
+
  (* File "ar.ads", line 1558, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(int,(int,et1) farray) farray.
-  forall r__split_fields1:bool. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,et1) farray) farray. forall o4:bool.
-  forall temp___8338:(int,(int,et1) farray) farray. forall temp___83381:bool.
-  forall result:(int,(int,et1) farray) farray. forall result1:bool.
-  forall r__split_fields2:(int,(int,et1) farray) farray.
-  forall r__split_fields3:bool. forall result2:(int,(int,et1) farray) farray.
-  forall result3:bool. forall r__split_fields4:(int,(int,et1) farray) farray.
-  forall r__split_fields5:bool.
-  forall r__split_fields6:(int,(int,et1) farray) farray.
-  forall r__split_fields7:bool.
-  forall r__split_fields8:(int,(int,et1) farray) farray.
-  forall r__split_fields9:bool. ((in_range(i) and (((({
-  us_split_fields__content = { rec__ar__rofa2__s2 = result;
-  rec__ar__rofa2__t2 = result1 } } = { us_split_fields__content = {
-  rec__ar__rofa2__s2 = r__split_fields; rec__ar__rofa2__t2 = r__split_fields1
-  } }) and (((r__split_fields[i <- a]) = r__split_fields2) and
-  (r__split_fields1 = r__split_fields3))) and ((((((to_rep(o) = 0) and
-  (o1 = ((r__split_fields2[(55 - i)])[1 <- o]))) and
-  (o2 = (r__split_fields2[(55 - i) <- o1]))) and ((o2 = o3) and
-  (r__split_fields3 = o4))) and ((temp___8338 = o3) and
-  (temp___83381 = o4))) and (((result2 = r__split_fields2) and
-  (result3 = r__split_fields3)) and ((temp___8338 = r__split_fields4) and
-  (temp___83381 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields4) and
-  (r__split_fields7 = r__split_fields5)) and ({ rec__ar__rofa2__s2 =
-  r__split_fields8; rec__ar__rofa2__t2 = r__split_fields9 } = {
-  rec__ar__rofa2__s2 = r__split_fields4; rec__ar__rofa2__t2 =
-  r__split_fields5 })))) -> (bool_eq5({ us_split_fields1 = {
-  rec__ar__rofa2__s2 = r__split_fields6; rec__ar__rofa2__t2 =
-  r__split_fields7 } }, { us_split_fields1 = { rec__ar__rofa2__s2 =
-  temp___3258(r__split_fields, i, a, (55 - i),
-  temp___3266((r__split_fields[(55 - i)]), 1, 0)); rec__ar__rofa2__t2 =
-  r__split_fields1 } }) = true)))
+goal WP_parameter_def : (bool_eq5({ us_split_fields1 = { rec__ar__rofa2__s2 =
+  r__split_fields6; rec__ar__rofa2__t2 = r__split_fields7 } }, {
+  us_split_fields1 = { rec__ar__rofa2__s2 = temp___3258(r__split_fields, i,
+  a, (55 - i), temp___3266((r__split_fields[(55 - i)]), 1, 0));
+  rec__ar__rofa2__t2 = r__split_fields1 } }) = true)

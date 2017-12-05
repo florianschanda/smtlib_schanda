@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type long_long_integer
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq3 : int, int -> bool
@@ -277,8 +277,8 @@ logic pgcd__function_guard : int, int, int -> prop
 
 axiom pgcd__post_axiom :
   (forall a:int. forall b:int [pgcd(a, b)]. (((in_range1(a) and
-  in_range1(b)) and ((not (a = (-2147483648))) and
-  (not (b = (-2147483648))))) -> ((((pgcd(a, b) = 0) or ((1 <= pgcd(a,
+  in_range1(b)) and ((not (a = (- 2147483648))) and
+  (not (b = (- 2147483648))))) -> ((((pgcd(a, b) = 0) or ((1 <= pgcd(a,
   b)) and (pgcd(a, b) <= abs_int(a)))) or ((1 <= pgcd(a, b)) and (pgcd(a,
   b) <= abs_int(b)))) and in_range1(pgcd(a, b)))))
 
@@ -292,7 +292,81 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r : int
+
+logic a__ppcm__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : bool
+
+logic o18 : bool
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic a__ppcm__result1 : int
+
+logic a__ppcm__result2 : int
+
+logic a__ppcm__result3 : int
+
+logic r3 : int
+
+logic a__ppcm__result4 : int
+
+logic r4 : int
+
+logic a__ppcm__result5 : int
+
+logic result3 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (not (a = (- 2147483648)))
+
+axiom H3 : (not (b = (- 2147483648)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(a) -> (in_range1(b) ->
-  ((not (a = (-2147483648))) -> ((not (b = (-2147483648))) ->
-  in_range2((a * b))))))
+goal WP_parameter_def : in_range2((a * b))

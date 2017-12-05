@@ -201,6 +201,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range1 temp___expr_15)))
 (define-fun dynamic_invariant3 ((temp___expr_178 us_rep) (temp___is_init_175 Bool) (temp___skip_constant_176 Bool) (temp___do_toplevel_177 Bool)) Bool (let ((temp___179 (rec__main__branch_type__m_height (us_split_discrs1 temp___expr_178)))) (and (dynamic_property1 0 (to_rep temp___179) (first1 (rec__main__branch_type__m_nodes (us_split_fields1 temp___expr_178))) (last1 (rec__main__branch_type__m_nodes (us_split_fields1 temp___expr_178)))) (and (= (first1 (rec__main__branch_type__m_nodes (us_split_fields1 temp___expr_178))) 0) (= (last1 (rec__main__branch_type__m_nodes (us_split_fields1 temp___expr_178))) (to_rep temp___179))))))
 (declare-const temp___m_height_197 Int)
+(declare-const us Int)
 (assert (in_range temp___m_height_197))
 (assert (not (in_range 7)))
 (check-sat)

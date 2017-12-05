@@ -147,7 +147,7 @@
 (assert (in_range1 default_element))
 (assert (=> (<= 0 128) (in_range2 count)))
 (assert (=> (<= 0 128) (in_range2 free)))
-(assert (and (= (size count1) 0) (and (in_range2 count1) (in_range2 free1))))
+(assert (and (= (size count1) 0) (and (in_range2 free1) (in_range2 count1))))
 (assert (and (= o (size count1)) (and (in_range o) (= o count1))))
 (assert (= result (ite (= o 0) true false)))
 (assert (not (= (size count1) 0)))

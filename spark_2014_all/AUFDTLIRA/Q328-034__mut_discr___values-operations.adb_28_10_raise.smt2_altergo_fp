@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -387,12 +387,20 @@ logic temp___String_Literal_178 : unit -> (int,character) farray
 axiom temp___String_Literal_178__def_axiom :
   (to_rep((temp___String_Literal_178(void)[1])) = 43)
 
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(op1)),
+  to_rep1(last(op1)))
+
+axiom H1 : (not (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
+  temp___String_Literal_178(void), 1, 1) = true))
+
+axiom H2 : (not (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
+  temp___String_Literal_176(void), 1, 1) = true))
+
+axiom H3 : (not (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
+  temp___String_Literal_174(void), 1, 1) = true))
+
+axiom H4 : (not (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
+  temp___String_Literal_172(void), 1, 1) = true))
+
  (* File "values-operations.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(first(op1)),
-  to_rep1(last(op1))) -> ((not (bool_eq4(op, to_rep1(first(op1)),
-  to_rep1(last(op1)), temp___String_Literal_178(void), 1, 1) = true)) ->
-  ((not (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
-  temp___String_Literal_176(void), 1, 1) = true)) -> ((not (bool_eq4(op,
-  to_rep1(first(op1)), to_rep1(last(op1)), temp___String_Literal_174(void),
-  1, 1) = true)) -> (bool_eq4(op, to_rep1(first(op1)), to_rep1(last(op1)),
-  temp___String_Literal_172(void), 1, 1) = true)))))
+goal WP_parameter_def : false

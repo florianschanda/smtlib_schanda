@@ -85,6 +85,7 @@
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const h__split_fields integer)
 (declare-const x__split_fields integer)
+(declare-const o Int)
 (assert (= h__attr__constrained false))
 (assert (not (in_range (+ (to_rep h__split_fields) (to_rep x__split_fields)))))
 (check-sat)

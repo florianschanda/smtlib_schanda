@@ -160,7 +160,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range3(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range3(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq4 : int, int -> bool
 
@@ -298,7 +298,7 @@ logic create_step_array__function_guard : (int,value) farray, int -> prop
 axiom create_step_array__post_axiom :
   (forall i:int [create_step_array(i)]. (in_range2(i) ->
   (forall j:int. (((0 <= j) and (j <= 1001)) -> (((j <  i) ->
-  (to_rep((create_step_array(i)[j])) = (-23))) and ((i <= j) ->
+  (to_rep((create_step_array(i)[j])) = (- 23))) and ((i <= j) ->
   (to_rep((create_step_array(i)[j])) = 69)))))))
 
 logic i : int
@@ -311,22 +311,140 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic step : (int,value) farray
+
+logic c : int
+
+logic j : int
+
+logic complex_arrays__use_step_array__result : int
+
+logic o : (int,value) farray
+
+logic temp___254 : int
+
+logic temp___253 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : (int,value) farray
+
+logic step1 : (int,value) farray
+
+logic result2 : int
+
+logic j1 : int
+
+logic result3 : int
+
+logic c2 : int
+
+logic c3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic j3 : int
+
+logic result5 : int
+
+logic c4 : int
+
+logic c5 : int
+
+logic j4 : int
+
+logic c6 : int
+
+logic j5 : int
+
+logic c7 : int
+
+logic j6 : int
+
+logic c8 : int
+
+logic j7 : int
+
+logic c9 : int
+
+logic j8 : int
+
+logic c10 : int
+
+logic j9 : int
+
+logic result6 : int
+
+logic complex_arrays__use_step_array__result1 : int
+
+logic complex_arrays__use_step_array__result2 : int
+
+logic complex_arrays__use_step_array__result3 : int
+
+logic step2 : (int,value) farray
+
+logic c11 : int
+
+logic j10 : int
+
+logic complex_arrays__use_step_array__result4 : int
+
+logic step3 : (int,value) farray
+
+logic c12 : int
+
+logic j11 : int
+
+logic complex_arrays__use_step_array__result5 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : (result = c)
+
+axiom H2 : (c1 = 0)
+
+axiom H3 : in_range1(c1)
+
+axiom H4 : ((o = create_step_array(i)) and
+  (forall j12:int. (((0 <= j12) and (j12 <= 1001)) -> (((j12 <  i) ->
+  (to_rep((o[j12])) = (- 23))) and ((i <= j12) -> (to_rep((o[j12])) = 69))))))
+
+axiom H5 : (result1 = step)
+
+axiom H6 : (step1 = o)
+
+axiom H7 : (result2 = j)
+
+axiom H8 : (j1 = 0)
+
+axiom H9 : (0 <= j1)
+
+axiom H10 : (j1 <= 1001)
+
+axiom H11 : ((to_rep((step1[j1])) = (- 23)) -> ((o1 = (c1 + 1)) and
+  in_range1((c1 + 1))))
+
+axiom H12 : ((to_rep((step1[j1])) = (- 23)) -> (c1 = result3))
+
+axiom H13 : ((to_rep((step1[j1])) = (- 23)) -> (c2 = o1))
+
+axiom H14 : ((not (to_rep((step1[j1])) = (- 23))) -> (c2 = c1))
+
+logic k : int
+
+axiom H15 : (0 <= k)
+
+axiom H16 : (k <= 1001)
+
+axiom H17 : (k <  i)
+
  (* File "complex_arrays.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall step:(int,value) farray. forall c:int. forall j:int.
-  forall o:(int,value) farray. forall o1:int. forall result:int.
-  forall c1:int. forall result1:(int,value) farray.
-  forall step1:(int,value) farray. forall result2:int. forall j1:int.
-  forall result3:int. forall c2:int. (in_range2(i) -> ((({ int__content =
-  result } = { int__content = c }) and (c1 = 0)) -> (in_range1(c1) ->
-  ((((o = create_step_array(i)) and
-  (forall j2:int. (((0 <= j2) and (j2 <= 1001)) -> (((j2 <  i) ->
-  (to_rep((o[j2])) = (-23))) and ((i <= j2) -> (to_rep((o[j2])) = 69)))))) and
-  (({ map__content = result1 } = { map__content = step }) and
-  (step1 = o))) -> ((({ int__content = result2 } = { int__content = j }) and
-  (j1 = 0)) -> (((0 <= j1) and (j1 <= 1001)) ->
-  ((((to_rep((step1[j1])) = (-23)) and (((o1 = (c1 + 1)) and
-  in_range1((c1 + 1))) and ((c1 = result3) and (c2 = o1)))) or
-  ((not (to_rep((step1[j1])) = (-23))) and (c2 = c1))) ->
-  (forall k:int. (((0 <= k) and (k <= 1001)) -> ((k <  i) ->
-  (to_rep((step1[k])) = (-23)))))))))))))
+goal WP_parameter_def : (to_rep((step1[k])) = (- 23))

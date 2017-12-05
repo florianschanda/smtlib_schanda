@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -253,17 +253,17 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
-  (dynamic_array__rec__f2__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f2)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
+  ((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
   (dynamic_array__rec__f2__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f2))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  (dynamic_array__rec__f2__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep(((b).us_split_fields1).rec__dynamic_array__rec__f2)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -362,8 +362,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom last__def_axiom : (last = c)
 
+axiom H : in_range1(c)
+
+axiom H1 : (((to_int(r) = 1) -> dynamic_property(0, last, to_rep(r1))) and
+  ((to_int(r) = 0) -> dynamic_property(0, last, to_rep(r2))))
+
+axiom H2 : (not (r = true))
+
+axiom H3 : (to_rep(r2) <  c)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(c) -> ((((to_int(r) = 1) ->
-  dynamic_property(0, last, to_rep(r1))) and ((to_int(r) = 0) ->
-  dynamic_property(0, last, to_rep(r2)))) -> ((not (r = true)) ->
-  ((to_rep(r2) <  c) -> in_range((to_rep(r2) + 1))))))
+goal WP_parameter_def : in_range((to_rep(r2) + 1))

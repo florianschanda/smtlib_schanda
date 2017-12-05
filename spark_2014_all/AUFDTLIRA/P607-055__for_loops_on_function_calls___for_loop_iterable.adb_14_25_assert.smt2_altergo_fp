@@ -491,39 +491,114 @@ axiom def_axiom :
   (forall temp___233:int.
   ((for_loop_iterable__p1__a__aggregate_def(temp___232)[temp___233]) = of_rep(temp___232))))
 
- (* File "for_loop_iterable.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall e:int.
-  forall temp___238:(int,natural) farray. forall o:int.
-  forall temp___239:int. forall o1:int. forall o2:natural.
-  forall o3:(int,natural) farray. forall e1:int.
-  forall result:(int,natural) farray. forall a1:(int,natural) farray.
-  forall result1:bool. forall result2:int. forall e2:int.
-  forall result3:bool. forall a2:(int,natural) farray. forall e3:int.
-  forall temp___2391:int. forall result4:(int,natural) farray.
-  forall a3:(int,natural) farray. (((result = a) and
-  (a1 = for_loop_iterable__p1__a__aggregate_def(0))) -> ((({
-  us_split_fields1 = { rec__declare_iterable__container__content = temp___238
-  } } = from_nat_array(a1)) and (a1 = temp___238)) -> ((((o = first({
-  us_split_fields1 = { rec__declare_iterable__container__content = temp___238
-  } })) and (in_range3(o) and (o = 1))) and (o = temp___239)) ->
-  ((((result1 = has_element({ us_split_fields1 = {
+logic a : (int,natural) farray
+
+logic e : int
+
+logic temp___238 : (int,natural) farray
+
+logic o : int
+
+logic temp___239 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : int
+
+logic e1 : int
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : bool
+
+logic result2 : int
+
+logic e2 : int
+
+logic result3 : bool
+
+logic a2 : (int,natural) farray
+
+logic e3 : int
+
+logic temp___2391 : int
+
+logic result4 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic result5 : bool
+
+logic result6 : int
+
+logic temp___2392 : int
+
+logic result7 : bool
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = for_loop_iterable__p1__a__aggregate_def(0))
+
+axiom H2 : (({ us_split_fields1 = {
+  rec__declare_iterable__container__content = temp___238 }
+  } = from_nat_array(a1)) and (a1 = temp___238))
+
+axiom H3 : ((o = first({ us_split_fields1 = {
+  rec__declare_iterable__container__content = temp___238 } })) and
+  (in_range3(o) and (o = 1)))
+
+axiom H4 : (o = temp___239)
+
+axiom H5 : ((result1 = has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = temp___238 } },
-  temp___239)) and ((result1 = true) <-> in_range2(temp___239))) and
-  (((result1 = true) and (((o1 = element({ us_split_fields1 = {
+  temp___239)) and ((result1 = true) <-> in_range2(temp___239)))
+
+axiom H6 : ((result1 = true) -> ((o1 = element({ us_split_fields1 = {
   rec__declare_iterable__container__content = temp___238 } },
   temp___239)) and (in_range1(o1) and
-  (o1 = to_rep((temp___238[temp___239]))))) and ((result2 = e) and
-  (e2 = o1)))) or ((not (result1 = true)) and ((e2 = e) and (e2 = e1))))) ->
-  (((result3 = has_element({ us_split_fields1 = {
+  (o1 = to_rep((temp___238[temp___239]))))))
+
+axiom H7 : ((result1 = true) -> (result2 = e))
+
+axiom H8 : ((result1 = true) -> (e2 = o1))
+
+axiom H9 : ((not (result1 = true)) -> (e2 = e))
+
+axiom H10 : ((not (result1 = true)) -> (e2 = e1))
+
+axiom H11 : ((result3 = has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = temp___238 } },
-  temp___239)) and ((result3 = true) <-> in_range2(temp___239))) ->
-  ((result3 = true) ->
-  (((forall temp___235:int. (((1 <= temp___235) and (temp___235 <= 100)) ->
-    ((not (2 = temp___235)) -> ((a2[temp___235]) = (a1[temp___235]))))) and
+  temp___239)) and ((result3 = true) <-> in_range2(temp___239)))
+
+axiom H12 : (result3 = true)
+
+axiom H13 :
+  ((forall temp___235:int. (((1 <= temp___235) and (temp___235 <= 100)) ->
+   ((not (2 = temp___235)) -> ((a2[temp___235]) = (a1[temp___235]))))) and
   ((has_element({ us_split_fields1 = {
   rec__declare_iterable__container__content = temp___238 } },
   temp___2391) = true) and (e3 = element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = temp___238 } },
-  temp___2391)))) -> ((((to_rep(o2) = 1) and (o3 = (a2[2 <- o2]))) and
-  ((result4 = a2) and (a3 = o3))) -> (e3 = 0))))))))))
+  rec__declare_iterable__container__content = temp___238 } }, temp___2391))))
+
+axiom H14 : (to_rep(o2) = 1)
+
+axiom H15 : (o3 = (a2[2 <- o2]))
+
+axiom H16 : (result4 = a2)
+
+axiom H17 : (a3 = o3)
+
+ (* File "for_loop_iterable.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (e3 = 0)

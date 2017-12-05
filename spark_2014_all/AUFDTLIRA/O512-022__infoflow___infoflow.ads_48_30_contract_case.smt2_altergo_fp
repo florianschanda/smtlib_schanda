@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -276,71 +276,241 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "infoflow.ads", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cache_v1:(int,integer) farray.
-  forall cache_v2:(int,integer) farray. forall i:int. forall i1:int.
-  forall temp___350:(int,integer) farray. forall temp___349:int.
-  forall o:integer. forall o1:(int,integer) farray.
-  forall temp___355:(int,integer) farray. forall temp___354:int.
-  forall o2:integer. forall o3:(int,integer) farray.
-  forall cache_v11:(int,integer) farray.
-  forall cache_v21:(int,integer) farray. forall result:int. forall i2:int.
-  forall result1:(int,integer) farray. forall cache_v12:(int,integer) farray.
-  forall cache_v13:(int,integer) farray. forall i3:int.
-  forall cache_v14:(int,integer) farray. forall i4:int.
-  forall cache_v15:(int,integer) farray. forall i5:int.
-  forall cache_v16:(int,integer) farray. forall i6:int.
-  forall cache_v17:(int,integer) farray. forall i7:int. forall result2:int.
-  forall i8:int. forall result3:(int,integer) farray.
-  forall cache_v22:(int,integer) farray.
-  forall cache_v23:(int,integer) farray. forall i9:int.
-  forall cache_v24:(int,integer) farray. forall i10:int.
-  forall cache_v25:(int,integer) farray. forall i11:int.
-  forall cache_v26:(int,integer) farray. forall i12:int.
-  forall cache_v27:(int,integer) farray. forall i13:int.
-  forall cache_v18:(int,integer) farray.
-  forall cache_v28:(int,integer) farray. forall i14:int. forall i15:int.
-  forall cache_v19:(int,integer) farray.
-  forall cache_v29:(int,integer) farray. forall i16:int. forall i17:int.
-  (((((({ int__content = result } = { int__content = i }) and (i2 = 1)) and
-  ((((1 <= i2) and (i2 <= 10)) and ((((temp___350 = cache_v1) and
+logic cache_v1 : (int,integer) farray
+
+logic cache_v2 : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic temp___350 : (int,integer) farray
+
+logic temp___349 : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic temp___355 : (int,integer) farray
+
+logic temp___354 : int
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic cache_v11 : (int,integer) farray
+
+logic cache_v21 : (int,integer) farray
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : (int,integer) farray
+
+logic cache_v12 : (int,integer) farray
+
+logic cache_v13 : (int,integer) farray
+
+logic i3 : int
+
+logic result2 : int
+
+logic i4 : int
+
+logic result3 : (int,integer) farray
+
+logic cache_v14 : (int,integer) farray
+
+logic cache_v15 : (int,integer) farray
+
+logic i5 : int
+
+logic cache_v16 : (int,integer) farray
+
+logic i6 : int
+
+logic cache_v17 : (int,integer) farray
+
+logic i7 : int
+
+logic cache_v18 : (int,integer) farray
+
+logic i8 : int
+
+logic cache_v19 : (int,integer) farray
+
+logic i9 : int
+
+logic cache_v110 : (int,integer) farray
+
+logic i10 : int
+
+logic result4 : int
+
+logic i11 : int
+
+logic result5 : (int,integer) farray
+
+logic cache_v22 : (int,integer) farray
+
+logic cache_v23 : (int,integer) farray
+
+logic i12 : int
+
+logic result6 : int
+
+logic i13 : int
+
+logic result7 : (int,integer) farray
+
+logic cache_v24 : (int,integer) farray
+
+logic cache_v25 : (int,integer) farray
+
+logic i14 : int
+
+logic cache_v26 : (int,integer) farray
+
+logic i15 : int
+
+logic cache_v27 : (int,integer) farray
+
+logic i16 : int
+
+logic cache_v28 : (int,integer) farray
+
+logic i17 : int
+
+logic cache_v29 : (int,integer) farray
+
+logic i18 : int
+
+logic cache_v210 : (int,integer) farray
+
+logic i19 : int
+
+logic cache_v211 : (int,integer) farray
+
+logic i20 : int
+
+logic cache_v212 : (int,integer) farray
+
+logic i21 : int
+
+logic cache_v111 : (int,integer) farray
+
+logic cache_v213 : (int,integer) farray
+
+logic i22 : int
+
+logic i23 : int
+
+logic cache_v112 : (int,integer) farray
+
+logic cache_v214 : (int,integer) farray
+
+logic i24 : int
+
+logic i25 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i2 = 1)
+
+axiom H2 : (((1 <= i2) and (i2 <= 10)) -> (((temp___350 = cache_v1) and
   ((temp___349 = i2) and ((((to_rep(o) = 0) and
-  (o1 = (cache_v1[i2 <- o]))) and (({ map__content = result1 } = {
-  map__content = cache_v1 }) and (cache_v12 = o1))) and
+  (o1 = (cache_v1[i2 <- o]))) and ((result1 = cache_v1) and
+  (cache_v12 = o1))) and
   ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i3) ->
-   (to_rep((cache_v13[k])) = 0)))) and
-  (((((1 <= 10) -> in_range2(i3)) and
+   (to_rep((cache_v13[k])) = 0)))) and (((((1 <= 10) -> in_range2(i3)) and
   (forall temp___351:int. (((1 <= temp___351) and (temp___351 <= 10)) ->
   ((i3 <  temp___351) ->
   ((cache_v13[temp___351]) = (temp___350[temp___351])))))) and ((1 <= i3) and
-  (i3 <= 10))) and (i3 = 10)))))) and (((i3 = i4) and
-  (cache_v13 = cache_v14)) and ((i5 = i3) and (cache_v15 = cache_v13)))) and
-  ((({ int__content = i6 } = { int__content = i4 }) and ({ map__content =
-  cache_v16 } = { map__content = cache_v14 })) and ((i7 = i5) and
-  (cache_v17 = cache_v15))))) or ((not ((1 <= i2) and (i2 <= 10))) and
-  (((i2 = i6) and ({ map__content = cache_v16 } = { map__content = cache_v1
-  })) and ((i7 = i2) and (cache_v17 = cache_v11)))))) and ((({ int__content =
-  result2 } = { int__content = i1 }) and (i8 = 1)) and ((((1 <= i8) and
-  (i8 <= 10)) and ((((temp___355 = cache_v2) and ((temp___354 = i8) and
-  ((((to_rep(o2) = 0) and (o3 = (cache_v2[i8 <- o2]))) and (({ map__content =
-  result3 } = { map__content = cache_v2 }) and (cache_v22 = o3))) and
-  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i9) ->
-   (to_rep((cache_v23[k])) = 0)))) and
-  (((((1 <= 10) -> in_range2(i9)) and
+  (i3 <= 10))) and (i3 = 10)))))) and (((i3 = i7) and
+  (cache_v13 = cache_v17)) and ((i8 = i3) and (cache_v18 = cache_v13)))))
+
+axiom H3 : (((1 <= i2) and (i2 <= 10)) -> (i9 = i7))
+
+axiom H4 : (((1 <= i2) and (i2 <= 10)) -> (cache_v19 = cache_v17))
+
+axiom H5 : (((1 <= i2) and (i2 <= 10)) -> (i10 = i8))
+
+axiom H6 : (((1 <= i2) and (i2 <= 10)) -> (cache_v110 = cache_v18))
+
+axiom H7 : ((not ((1 <= i2) and (i2 <= 10))) -> (i2 = i9))
+
+axiom H8 : ((not ((1 <= i2) and (i2 <= 10))) -> (cache_v19 = cache_v1))
+
+axiom H9 : ((not ((1 <= i2) and (i2 <= 10))) -> (i10 = i2))
+
+axiom H10 : ((not ((1 <= i2) and (i2 <= 10))) -> (cache_v110 = cache_v11))
+
+axiom H11 : (result4 = i1)
+
+axiom H12 : (i11 = 1)
+
+axiom H13 : (((1 <= i11) and (i11 <= 10)) -> (((temp___355 = cache_v2) and
+  ((temp___354 = i11) and ((((to_rep(o4) = 0) and
+  (o5 = (cache_v2[i11 <- o4]))) and ((result5 = cache_v2) and
+  (cache_v22 = o5))) and
+  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i12) ->
+   (to_rep((cache_v23[k])) = 0)))) and (((((1 <= 10) -> in_range2(i12)) and
   (forall temp___356:int. (((1 <= temp___356) and (temp___356 <= 10)) ->
-  ((i9 <  temp___356) ->
-  ((cache_v23[temp___356]) = (temp___355[temp___356])))))) and ((1 <= i9) and
-  (i9 <= 10))) and (i9 = 10)))))) and (((i9 = i10) and
-  (cache_v23 = cache_v24)) and ((i11 = i9) and (cache_v25 = cache_v23)))) and
-  ((({ int__content = i12 } = { int__content = i10 }) and ({ map__content =
-  cache_v26 } = { map__content = cache_v24 })) and ((i13 = i11) and
-  (cache_v27 = cache_v25))))) or ((not ((1 <= i8) and (i8 <= 10))) and
-  (((i8 = i12) and ({ map__content = cache_v26 } = { map__content = cache_v2
-  })) and ((i13 = i8) and (cache_v27 = cache_v21))))))) and (((i15 = i12) and
-  ((i14 = i6) and (({ map__content = cache_v28 } = { map__content = cache_v26
-  }) and ({ map__content = cache_v18 } = { map__content = cache_v16 })))) and
-  ((i17 = i13) and ((i16 = i7) and ((cache_v29 = cache_v27) and
-  (cache_v19 = cache_v17)))))) -> ((of_int(1) = true) ->
-  (forall k:int. (((1 <= k) and (k <= 10)) ->
-  (to_rep((cache_v18[k])) = to_rep((cache_v28[k]))))))))
+  ((i12 <  temp___356) ->
+  ((cache_v23[temp___356]) = (temp___355[temp___356])))))) and
+  ((1 <= i12) and (i12 <= 10))) and (i12 = 10)))))) and (((i18 = i12) and
+  (cache_v29 = cache_v23)) and ((i19 = i12) and (cache_v210 = cache_v23)))))
+
+axiom H14 : (((1 <= i11) and (i11 <= 10)) -> (i20 = i18))
+
+axiom H15 : (((1 <= i11) and (i11 <= 10)) -> (cache_v211 = cache_v29))
+
+axiom H16 : (((1 <= i11) and (i11 <= 10)) -> (i21 = i19))
+
+axiom H17 : (((1 <= i11) and (i11 <= 10)) -> (cache_v212 = cache_v210))
+
+axiom H18 : ((not ((1 <= i11) and (i11 <= 10))) -> (i20 = i11))
+
+axiom H19 : ((not ((1 <= i11) and (i11 <= 10))) -> (cache_v211 = cache_v2))
+
+axiom H20 : ((not ((1 <= i11) and (i11 <= 10))) -> (i21 = i11))
+
+axiom H21 : ((not ((1 <= i11) and (i11 <= 10))) -> (cache_v212 = cache_v21))
+
+axiom H22 : (i23 = i20)
+
+axiom H23 : (i22 = i9)
+
+axiom H24 : (cache_v213 = cache_v211)
+
+axiom H25 : (cache_v111 = cache_v19)
+
+axiom H26 : (i25 = i21)
+
+axiom H27 : (i24 = i10)
+
+axiom H28 : (cache_v214 = cache_v212)
+
+axiom H29 : (cache_v112 = cache_v110)
+
+axiom H30 : (of_int(1) = true)
+
+logic k : int
+
+axiom H31 : (1 <= k)
+
+axiom H32 : (k <= 10)
+
+ (* File "infoflow.ads", line 35, characters 0-0 *)
+goal WP_parameter_def : (to_rep((cache_v111[k])) = to_rep((cache_v213[k])))

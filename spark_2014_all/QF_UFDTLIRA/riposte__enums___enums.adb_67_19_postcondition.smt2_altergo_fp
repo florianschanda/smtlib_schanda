@@ -139,33 +139,122 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : bool
+
+logic enums__enum_lt_5_broken_a__result : bool
+
+logic result : bool
+
+logic r1 : bool
+
+logic result1 : bool
+
+logic r2 : bool
+
+logic result2 : bool
+
+logic r3 : bool
+
+logic result3 : bool
+
+logic r4 : bool
+
+logic result4 : bool
+
+logic r5 : bool
+
+logic result5 : bool
+
+logic r6 : bool
+
+logic result6 : bool
+
+logic enums__enum_lt_5_broken_a__result1 : bool
+
+logic enums__enum_lt_5_broken_a__result2 : bool
+
+logic enums__enum_lt_5_broken_a__result3 : bool
+
+logic r7 : bool
+
+logic enums__enum_lt_5_broken_a__result4 : bool
+
+logic r8 : bool
+
+logic enums__enum_lt_5_broken_a__result5 : bool
+
+logic result7 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : ((a = 0) -> (result = r))
+
+axiom H2 : ((a = 0) -> (r1 = of_int(1)))
+
+axiom H3 : ((not (a = 0)) -> ((a = 2) -> (result1 = r)))
+
+axiom H4 : ((not (a = 0)) -> ((a = 2) -> (((a = 2) -> (r2 = true)) and
+  ((not (a = 2)) -> (r2 = false)))))
+
+axiom H5 : ((not (a = 0)) -> ((not (a = 2)) -> ((a = 3) -> (result2 = r))))
+
+axiom H6 : ((not (a = 0)) -> ((not (a = 2)) -> ((a = 3) -> (((not (a = 8)) ->
+  (r3 = true)) and ((a = 8) -> (r3 = false))))))
+
+axiom H7 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) -> ((a = 4) ->
+  (result3 = r)))))
+
+axiom H8 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) -> ((a = 4) ->
+  (((a <  6) -> (r4 = true)) and ((not (a <  6)) -> (r4 = false)))))))
+
+axiom H9 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> ((a = 7) -> (result4 = r))))))
+
+axiom H10 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> ((a = 7) -> (r5 = of_int(1)))))))
+
+axiom H11 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> ((not (a = 7)) -> (result5 = r))))))
+
+axiom H12 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> ((not (a = 7)) -> (r6 = of_int(0)))))))
+
+axiom H13 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> ((not (a = 7)) -> (r5 = r6))))))
+
+axiom H14 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  ((not (a = 4)) -> (r4 = r5)))))
+
+axiom H15 : ((not (a = 0)) -> ((not (a = 2)) -> ((not (a = 3)) ->
+  (r3 = r4))))
+
+axiom H16 : ((not (a = 0)) -> ((not (a = 2)) -> (r2 = r3)))
+
+axiom H17 : ((not (a = 0)) -> (r1 = r2))
+
+axiom H18 :
+  (enums__enum_lt_5_broken_a__result1 = enums__enum_lt_5_broken_a__result2)
+
+axiom H19 :
+  (enums__enum_lt_5_broken_a__result3 = enums__enum_lt_5_broken_a__result1)
+
+axiom H20 : (result6 = enums__enum_lt_5_broken_a__result)
+
+axiom H21 : (enums__enum_lt_5_broken_a__result1 = r1)
+
+axiom H22 :
+  (enums__enum_lt_5_broken_a__result4 = enums__enum_lt_5_broken_a__result2)
+
+axiom H23 : (r7 = r1)
+
+axiom H24 :
+  (enums__enum_lt_5_broken_a__result5 = enums__enum_lt_5_broken_a__result3)
+
+axiom H25 : (r8 = r1)
+
+axiom H26 : (result7 = enums__enum_lt_5_broken_a__result4)
+
+axiom H27 : (enums__enum_lt_5_broken_a__result4 = true)
+
  (* File "enums.adb", line 66, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:bool. forall enums__enum_lt_5_broken_a__result:bool.
-  forall result:bool. forall r1:bool. forall result1:bool. forall r2:bool.
-  forall result2:bool. forall r3:bool. forall result3:bool. forall r4:bool.
-  forall result4:bool. forall r5:bool. forall result5:bool. forall r6:bool.
-  forall result6:bool. forall enums__enum_lt_5_broken_a__result1:bool.
-  forall enums__enum_lt_5_broken_a__result2:bool.
-  forall enums__enum_lt_5_broken_a__result3:bool. forall r7:bool.
-  forall enums__enum_lt_5_broken_a__result4:bool. forall r8:bool.
-  forall enums__enum_lt_5_broken_a__result5:bool.
-  (forall result7:bool. ((in_range1(a) and ((((((a = 0) and ((result = r) and
-  (r1 = of_int(1)))) or ((not (a = 0)) and ((((a = 2) and ((result1 = r) and
-  (((a = 2) and (r2 = true)) or ((not (a = 2)) and (r2 = false))))) or
-  ((not (a = 2)) and ((((a = 3) and ((result2 = r) and (((not (a = 8)) and
-  (r3 = true)) or ((a = 8) and (r3 = false))))) or ((not (a = 3)) and
-  ((((a = 4) and ((result3 = r) and (((a <  6) and (r4 = true)) or
-  ((not (a <  6)) and (r4 = false))))) or ((not (a = 4)) and ((((a = 7) and
-  ((result4 = r) and (r5 = of_int(1)))) or ((not (a = 7)) and
-  (((result5 = r) and (r6 = of_int(0))) and (r5 = r6)))) and (r4 = r5)))) and
-  (r3 = r4)))) and (r2 = r3)))) and (r1 = r2)))) and
-  (((enums__enum_lt_5_broken_a__result1 = enums__enum_lt_5_broken_a__result2) and
-  (enums__enum_lt_5_broken_a__result3 = enums__enum_lt_5_broken_a__result1)) and
-  ((result6 = enums__enum_lt_5_broken_a__result) and
-  (enums__enum_lt_5_broken_a__result1 = r1)))) and
-  (((enums__enum_lt_5_broken_a__result4 = enums__enum_lt_5_broken_a__result2) and
-  (r7 = r1)) and
-  ((enums__enum_lt_5_broken_a__result5 = enums__enum_lt_5_broken_a__result3) and
-  (r8 = r1)))) and (result7 = enums__enum_lt_5_broken_a__result4))) ->
-  ((enums__enum_lt_5_broken_a__result4 = true) -> (a <  5)))))
+goal WP_parameter_def : (a <  5)

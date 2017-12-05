@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -311,7 +311,41 @@ axiom is_empty__def_axiom :
   (forall stack_14__pointer:int [is_empty(stack_14__pointer)].
   ((is_empty(stack_14__pointer) = true) <-> (stack_14__pointer = 0)))
 
+logic s : (int,integer) farray
+
+logic pointer : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic result : int
+
+logic pointer1 : int
+
+logic result1 : (int,integer) farray
+
+logic s1 : (int,integer) farray
+
+logic s2 : (int,integer) farray
+
+logic pointer2 : int
+
+logic s3 : (int,integer) farray
+
+logic pointer3 : int
+
+axiom H : in_range1(pointer)
+
+axiom H1 : in_range(x)
+
+axiom H2 : (not (is_full(pointer) = true))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pointer:int. (in_range1(pointer) -> (in_range(x) ->
-  ((not (is_full(pointer) = true)) -> in_range1((pointer + 1))))))
+goal WP_parameter_def : in_range1((pointer + 1))

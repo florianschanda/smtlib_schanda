@@ -220,6 +220,7 @@
 (define-fun dynamic_invariant5 ((temp___expr_393 Int) (temp___is_init_390 Bool) (temp___skip_constant_391 Bool) (temp___do_toplevel_392 Bool)) Bool (=> (or (= temp___is_init_390 true) (<= (- 2147483648) 2147483647)) (in_range6 temp___expr_393)))
 (assert (forall ((container us_rep2)) (forall ((position Int)) (! (=> (and (dynamic_invariant4 position true true true) (and (<= 1 position) (<= position (last container)))) (dynamic_invariant5 (get container position) true false true)) :pattern ((get container position))))))
 (declare-const container__split_fields capacity_range1)
+(declare-const us Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) (to_rep1 container__split_fields)))
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) r265s))
 (assert (in_range r265s))

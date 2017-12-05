@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tindexB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -987,53 +987,236 @@ function t5b__ref___projection(a: t5b__ref) : tindexB = (a).t5b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "test.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,word32) farray. forall i:int. forall o:int.
-  forall o1:word32. forall o2:t. forall o3:int. forall o4:word32.
-  forall o5:t. forall o6:t. forall o7:word32. forall o8:(int,word32) farray.
-  forall o9:int. forall o10:word32. forall o11:t. forall o12:int.
-  forall o13:word32. forall o14:t. forall o15:t. forall o16:word32.
-  forall o17:(int,word32) farray. forall result:int. forall i1:int.
-  forall result1:(int,word32) farray. forall result__1:(int,word32) farray.
-  forall result__2:(int,word32) farray. forall i2:int. forall result2:int.
-  forall i3:int. forall result3:(int,word32) farray.
-  forall result__3:(int,word32) farray. (dynamic_property(0, 79,
-  to_rep(first(left1)), to_rep(last(left1))) -> (dynamic_property(0, 79,
-  to_rep(first(right1)), to_rep(last(right1))) -> (dynamic_property(0, 79,
-  to_rep(result____first), to_rep(result____last)) ->
-  (((((to_rep(first(left1)) = to_rep(first(right1))) and
+logic result__ : (int,word32) farray
+
+logic i : int
+
+logic temp___281 : int
+
+logic temp___279 : (int,word32) farray
+
+logic o : int
+
+logic o1 : word32
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : word32
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : word32
+
+logic o8 : (int,word32) farray
+
+logic pos : int
+
+logic o9 : int
+
+logic o10 : word32
+
+logic o11 : t
+
+logic o12 : int
+
+logic o13 : word32
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : int
+
+logic o17 : word32
+
+logic o18 : t
+
+logic o19 : int
+
+logic o20 : word32
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : word32
+
+logic o24 : (int,word32) farray
+
+logic i1 : int
+
+logic o25 : int
+
+logic o26 : word32
+
+logic o27 : t
+
+logic o28 : int
+
+logic o29 : word32
+
+logic o30 : t
+
+logic o31 : t
+
+logic result__1 : (int,word32) farray
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : (int,word32) farray
+
+logic result__2 : (int,word32) farray
+
+logic result__3 : (int,word32) farray
+
+logic i3 : int
+
+logic result2 : int
+
+logic i4 : int
+
+logic result3 : (int,word32) farray
+
+logic result__4 : (int,word32) farray
+
+logic result__5 : (int,word32) farray
+
+logic i5 : int
+
+logic result__6 : (int,word32) farray
+
+logic i6 : int
+
+logic result__7 : (int,word32) farray
+
+logic i7 : int
+
+logic result__8 : (int,word32) farray
+
+logic i8 : int
+
+logic result__9 : (int,word32) farray
+
+logic i9 : int
+
+logic result__10 : (int,word32) farray
+
+logic i10 : int
+
+logic result__11 : (int,word32) farray
+
+logic i11 : int
+
+logic result__12 : (int,word32) farray
+
+logic i12 : int
+
+axiom H : dynamic_property(0, 79, to_rep(first(left1)), to_rep(last(left1)))
+
+axiom H1 : dynamic_property(0, 79, to_rep(first(right1)),
+  to_rep(last(right1)))
+
+axiom H2 : dynamic_property(0, 79, to_rep(result____first),
+  to_rep(result____last))
+
+axiom H3 : ((((to_rep(first(left1)) = to_rep(first(right1))) and
   (to_rep(last(left1)) = to_rep(last(right1)))) and
   (to_rep(first(right1)) = to_rep(result____first))) and
-  (to_rep(last(right1)) = to_rep(result____last))) -> ((({ int__content =
-  result } = { int__content = i }) and (i1 = to_rep(result____first))) ->
-  (((to_rep(result____first) <= i1) and (i1 <= to_rep(result____last))) ->
-  ((((((((((to_rep(first(right1)) <= i1) and
-  (i1 <= to_rep(last(right1)))) and (o3 = i1)) and (o4 = (right[o3]))) and
-  (o5 = to_rep1(o4))) and ((((((to_rep(first(left1)) <= i1) and
-  (i1 <= to_rep(last(left1)))) and (o = i1)) and (o1 = (left[o]))) and
-  (o2 = to_rep1(o1))) and ((o6 = xor2(o2, o5)) and (o6 = bw_xor(o2,
-  o5))))) and (to_rep1(o7) = o6)) and (o8 = (result__[i1 <- o7]))) and (({
-  map__content = result1 } = { map__content = result__ }) and
-  (result__1 = o8))) ->
-  ((forall pos:int. (((to_rep(result____first) <= pos) and (pos <= i2)) ->
-   (to_rep1((result__2[pos])) = xor2(to_rep1((left[pos])),
-   to_rep1((right[pos])))))) ->
-  (((((forall temp___280:int. (((to_rep(result____first) <= temp___280) and
-      (temp___280 <= to_rep(result____last))) -> ((i2 <  temp___280) ->
-      ((result__2[temp___280]) = (result__[temp___280]))))) and
+  (to_rep(last(right1)) = to_rep(result____last)))
+
+axiom H4 : (result = i)
+
+axiom H5 : (i2 = to_rep(result____first))
+
+axiom H6 : (to_rep(result____first) <= i2)
+
+axiom H7 : (i2 <= to_rep(result____last))
+
+axiom H8 : ((to_rep(first(right1)) <= i2) and (i2 <= to_rep(last(right1))))
+
+axiom H9 : (o3 = i2)
+
+axiom H10 : (o4 = (right[o3]))
+
+axiom H11 : (o5 = to_rep1(o4))
+
+axiom H12 : ((to_rep(first(left1)) <= i2) and (i2 <= to_rep(last(left1))))
+
+axiom H13 : (o = i2)
+
+axiom H14 : (o1 = (left[o]))
+
+axiom H15 : (o2 = to_rep1(o1))
+
+axiom H16 : ((o6 = xor2(o2, o5)) and (o6 = bw_xor(o2, o5)))
+
+axiom H17 : (to_rep1(o7) = o6)
+
+axiom H18 : (o8 = (result__[i2 <- o7]))
+
+axiom H19 : (result1 = result__)
+
+axiom H20 : (result__2 = o8)
+
+axiom H21 :
+  (forall pos1:int. (((to_rep(result____first) <= pos1) and (pos1 <= i3)) ->
+  (to_rep1((result__3[pos1])) = xor2(to_rep1((left[pos1])),
+  to_rep1((right[pos1]))))))
+
+axiom H22 :
+  (((forall temp___280:int. (((to_rep(result____first) <= temp___280) and
+    (temp___280 <= to_rep(result____last))) -> ((i3 <  temp___280) ->
+    ((result__3[temp___280]) = (result__[temp___280]))))) and
   ((to_rep(result____first) <= to_rep(result____last)) ->
   dynamic_property1(to_rep(result____first), to_rep(result____last),
-  i2))) and ((to_rep(result____first) <= i2) and
-  (i2 <= to_rep(result____last)))) and
-  ((not (i2 = to_rep(result____last))) and (((i2 = result2) and
-  (i3 = (i2 + 1))) and (((((((((to_rep(first(right1)) <= i3) and
-  (i3 <= to_rep(last(right1)))) and (o12 = i3)) and (o13 = (right[o12]))) and
-  (o14 = to_rep1(o13))) and ((((((to_rep(first(left1)) <= i3) and
-  (i3 <= to_rep(last(left1)))) and (o9 = i3)) and (o10 = (left[o9]))) and
-  (o11 = to_rep1(o10))) and ((o15 = xor2(o11, o14)) and (o15 = bw_xor(o11,
-  o14))))) and (to_rep1(o16) = o15)) and (o17 = (result__2[i3 <- o16]))) and
-  ((result3 = result__2) and (result__3 = o17)))))) ->
-  (forall pos:int. (((to_rep(result____first) <= pos) and (pos <= i3)) ->
-  (to_rep1((result__3[pos])) = xor2(to_rep1((left[pos])),
-  to_rep1((right[pos]))))))))))))))))
+  i3))) and ((to_rep(result____first) <= i3) and
+  (i3 <= to_rep(result____last))))
+
+axiom H23 : (not (i3 = to_rep(result____last)))
+
+axiom H24 : (i3 = result2)
+
+axiom H25 : (i4 = (i3 + 1))
+
+axiom H26 : ((to_rep(first(right1)) <= i4) and (i4 <= to_rep(last(right1))))
+
+axiom H27 : (o19 = i4)
+
+axiom H28 : (o20 = (right[o19]))
+
+axiom H29 : (o21 = to_rep1(o20))
+
+axiom H30 : ((to_rep(first(left1)) <= i4) and (i4 <= to_rep(last(left1))))
+
+axiom H31 : (o16 = i4)
+
+axiom H32 : (o17 = (left[o16]))
+
+axiom H33 : (o18 = to_rep1(o17))
+
+axiom H34 : ((o22 = xor2(o18, o21)) and (o22 = bw_xor(o18, o21)))
+
+axiom H35 : (to_rep1(o23) = o22)
+
+axiom H36 : (o24 = (result__3[i4 <- o23]))
+
+axiom H37 : (result3 = result__3)
+
+axiom H38 : (result__4 = o24)
+
+logic pos1 : int
+
+axiom H39 : (to_rep(result____first) <= pos1)
+
+axiom H40 : (pos1 <= i4)
+
+ (* File "test.ads", line 10, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1((result__4[pos1])) = xor2(to_rep1((left[pos1])),
+  to_rep1((right[pos1]))))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -388,7 +388,67 @@ type t11b__ref = { t11b__content : us_rep
 
 function t11b__ref___projection(a: t11b__ref) : us_rep = (a).t11b__content
 
+logic x__split_discrs : integer
+
+logic us : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : bool
+
+logic o4 : integer
+
+logic o5 : bool
+
+logic o6 : integer
+
+logic o7 : bool
+
+logic p__y__assume : integer
+
+logic p__y__assume1 : bool
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic temp___188 : integer
+
+logic temp___1881 : bool
+
+logic usq_ : integer
+
+logic usq_1 : bool
+
+logic temp___190 : integer
+
+logic temp___1901 : bool
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : bool
+
+logic o14 : integer
+
+logic o15 : bool
+
+logic o16 : integer
+
+logic o17 : bool
+
+logic result : integer
+
+logic x__split_discrs1 : integer
+
+axiom H : ((x__attr__constrained = false) and (to_rep(x__split_discrs) = 5))
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_discrs:integer. (((x__attr__constrained = false) and
-  (to_rep(x__split_discrs) = 5)) -> in_range(2)))
+goal WP_parameter_def : in_range(2)

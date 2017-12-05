@@ -263,9 +263,16 @@ axiom def_axiom :
   temp___157, temp___158, temp___159,
   temp___160)[temp___161]) = (temp___146[temp___161]))))))))))))))))
 
+logic arr : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic arr1 : (int,bool) farray
+
+axiom H : (result = arr)
+
+axiom H1 : (arr1 = temp___144(arr, 1, 5, of_int(1), 2, 5, of_int(0), 3, 5,
+  of_int(1), 4, 5, of_int(0), 5, of_int(1)))
+
  (* File "update_legal.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,bool) farray. forall result:(int,bool) farray.
-  forall arr1:(int,bool) farray. (((result = arr) and (arr1 = temp___144(arr,
-  1, 5, of_int(1), 2, 5, of_int(0), 3, 5, of_int(1), 4, 5, of_int(0), 5,
-  of_int(1)))) -> ((arr1[1]) = true)))
+goal WP_parameter_def : ((arr1[1]) = true)

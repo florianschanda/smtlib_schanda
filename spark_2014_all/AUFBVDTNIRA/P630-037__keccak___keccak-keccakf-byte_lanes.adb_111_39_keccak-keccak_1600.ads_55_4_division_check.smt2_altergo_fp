@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1033,7 +1033,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1697,64 +1697,719 @@ axiom def_axiom :
   (forall temp___743:int. (((temp___738(temp___740, temp___741,
   temp___742)).elts1[temp___743]) = of_rep1(temp___740))))))
 
+logic data : (int,byte) farray
+
+logic x : t
+
+logic y : t
+
+logic remaining_bytes : int
+
+logic offset : int
+
+logic lane : t1
+
+logic i : int
+
+logic shift : int
+
+logic initial_offset : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___745 : (int,byte) farray
+
+logic temp___7451 : t3
+
+logic temp___746 : (int,byte) farray
+
+logic temp___7461 : t2
+
+logic temp___747 : (int,byte) farray
+
+logic temp___7471 : t2
+
+logic o4 : (int,byte) farray
+
+logic temp___763 : t1
+
+logic temp___762 : int
+
+logic temp___761 : int
+
+logic temp___760 : t
+
+logic temp___759 : t
+
+logic temp___757 : (int,byte) farray
+
+logic temp___765 : int
+
+logic temp___764 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic temp___748 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : t1
+
+logic o14 : t1
+
+logic o15 : t1
+
+logic o16 : t1
+
+logic o17 : t
+
+logic o18 : byte
+
+logic o19 : int
+
+logic o20 : (int,byte) farray
+
+logic o21 : int
+
+logic o22 : int
+
+logic temp___7481 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : t1
+
+logic o26 : t1
+
+logic o27 : t1
+
+logic o28 : t1
+
+logic o29 : t
+
+logic o30 : byte
+
+logic o31 : int
+
+logic o32 : (int,byte) farray
+
+logic o33 : int
+
+logic o34 : int
+
+logic temp___7482 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : t1
+
+logic o38 : t1
+
+logic o39 : t1
+
+logic o40 : t1
+
+logic o41 : t
+
+logic o42 : byte
+
+logic o43 : int
+
+logic o44 : (int,byte) farray
+
+logic o45 : int
+
+logic o46 : int
+
+logic temp___7483 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : t1
+
+logic o50 : t1
+
+logic o51 : t1
+
+logic o52 : t1
+
+logic o53 : t
+
+logic o54 : byte
+
+logic o55 : int
+
+logic o56 : (int,byte) farray
+
+logic o57 : int
+
+logic o58 : int
+
+logic temp___7484 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : t1
+
+logic o62 : t1
+
+logic o63 : t1
+
+logic o64 : t1
+
+logic o65 : t
+
+logic o66 : byte
+
+logic o67 : int
+
+logic o68 : (int,byte) farray
+
+logic o69 : int
+
+logic o70 : int
+
+logic temp___7485 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : t1
+
+logic o74 : t1
+
+logic o75 : t1
+
+logic o76 : t1
+
+logic o77 : t
+
+logic o78 : byte
+
+logic o79 : int
+
+logic o80 : (int,byte) farray
+
+logic o81 : int
+
+logic o82 : int
+
+logic temp___7486 : int
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : t1
+
+logic o86 : t1
+
+logic o87 : t1
+
+logic o88 : t1
+
+logic o89 : t
+
+logic o90 : byte
+
+logic o91 : int
+
+logic o92 : (int,byte) farray
+
+logic o93 : int
+
+logic o94 : int
+
+logic temp___7487 : int
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : t1
+
+logic o98 : t1
+
+logic o99 : t1
+
+logic o100 : t1
+
+logic o101 : t
+
+logic o102 : byte
+
+logic o103 : int
+
+logic o104 : (int,byte) farray
+
+logic o105 : t
+
+logic o106 : t
+
+logic o107 : int
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : int
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : bool
+
+logic temp___766 : int
+
+logic o116 : byte
+
+logic o117 : int
+
+logic o118 : (int,byte) farray
+
+logic o119 : int
+
+logic o120 : int
+
+logic o121 : int
+
+logic lane1 : t1
+
+logic i1 : int
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic y1 : t
+
+logic result2 : int
+
+logic remaining_bytes1 : int
+
+logic result3 : int
+
+logic offset1 : int
+
+logic result4 : (int,byte) farray
+
+logic data1 : (int,byte) farray
+
+logic data2 : (int,byte) farray
+
+logic x2 : t
+
+logic y2 : t
+
+logic remaining_bytes2 : int
+
+logic offset2 : int
+
+logic lane2 : t1
+
+logic i2 : int
+
+logic temp___7651 : int
+
+logic temp___7641 : int
+
+logic result5 : int
+
+logic temp___7652 : int
+
+logic result6 : int
+
+logic temp___7642 : int
+
+logic result7 : t1
+
+logic lane3 : t1
+
+logic result8 : int
+
+logic i3 : int
+
+logic result9 : (int,byte) farray
+
+logic data3 : (int,byte) farray
+
+logic result10 : int
+
+logic i4 : int
+
+logic result11 : (int,byte) farray
+
+logic data4 : (int,byte) farray
+
+logic result12 : int
+
+logic i5 : int
+
+logic result13 : (int,byte) farray
+
+logic data5 : (int,byte) farray
+
+logic result14 : int
+
+logic i6 : int
+
+logic result15 : (int,byte) farray
+
+logic data6 : (int,byte) farray
+
+logic result16 : int
+
+logic i7 : int
+
+logic result17 : (int,byte) farray
+
+logic data7 : (int,byte) farray
+
+logic result18 : int
+
+logic i8 : int
+
+logic result19 : (int,byte) farray
+
+logic data8 : (int,byte) farray
+
+logic result20 : int
+
+logic i9 : int
+
+logic result21 : (int,byte) farray
+
+logic data9 : (int,byte) farray
+
+logic result22 : int
+
+logic i10 : int
+
+logic result23 : (int,byte) farray
+
+logic data10 : (int,byte) farray
+
+logic result24 : t
+
+logic x3 : t
+
+logic result25 : t
+
+logic y3 : t
+
+logic result26 : int
+
+logic remaining_bytes3 : int
+
+logic result27 : int
+
+logic offset3 : int
+
+logic data11 : (int,byte) farray
+
+logic x4 : t
+
+logic y4 : t
+
+logic remaining_bytes4 : int
+
+logic offset4 : int
+
+logic lane4 : t1
+
+logic i11 : int
+
+logic temp___7653 : int
+
+logic temp___7643 : int
+
+logic data12 : (int,byte) farray
+
+logic x5 : t
+
+logic y5 : t
+
+logic remaining_bytes5 : int
+
+logic offset5 : int
+
+logic lane5 : t1
+
+logic i12 : int
+
+logic temp___7654 : int
+
+logic temp___7644 : int
+
+logic data13 : (int,byte) farray
+
+logic x6 : t
+
+logic y6 : t
+
+logic remaining_bytes6 : int
+
+logic offset6 : int
+
+logic lane6 : t1
+
+logic i13 : int
+
+logic data14 : (int,byte) farray
+
+logic x7 : t
+
+logic y7 : t
+
+logic remaining_bytes7 : int
+
+logic offset7 : int
+
+logic lane7 : t1
+
+logic i14 : int
+
+logic data15 : (int,byte) farray
+
+logic x8 : t
+
+logic y8 : t
+
+logic remaining_bytes8 : int
+
+logic offset8 : int
+
+logic lane8 : t1
+
+logic i15 : int
+
+logic data16 : (int,byte) farray
+
+logic x9 : t
+
+logic y9 : t
+
+logic remaining_bytes9 : int
+
+logic offset9 : int
+
+logic lane9 : t1
+
+logic i16 : int
+
+logic result28 : t1
+
+logic lane10 : t1
+
+logic result29 : int
+
+logic shift1 : int
+
+logic result30 : int
+
+logic initial_offset1 : int
+
+logic data17 : (int,byte) farray
+
+logic remaining_bytes10 : int
+
+logic offset10 : int
+
+logic shift2 : int
+
+logic temp___775 : int
+
+logic temp___774 : int
+
+logic temp___773 : int
+
+logic result31 : int
+
+logic temp___7751 : int
+
+logic result32 : int
+
+logic temp___7741 : int
+
+logic result33 : int
+
+logic temp___7731 : int
+
+logic result34 : (int,byte) farray
+
+logic data18 : (int,byte) farray
+
+logic result35 : int
+
+logic shift3 : int
+
+logic result36 : int
+
+logic offset11 : int
+
+logic result37 : int
+
+logic remaining_bytes11 : int
+
+logic data19 : (int,byte) farray
+
+logic remaining_bytes12 : int
+
+logic offset12 : int
+
+logic shift4 : int
+
+logic temp___7752 : int
+
+logic temp___7742 : int
+
+logic temp___7732 : int
+
+logic data20 : (int,byte) farray
+
+logic remaining_bytes13 : int
+
+logic offset13 : int
+
+logic shift5 : int
+
+logic temp___7753 : int
+
+logic temp___7743 : int
+
+logic temp___7733 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H1 : (((to_rep(data__first) <= to_rep(data__last)) ->
+  (((to_rep(data__last) - to_rep(data__first)) + 1) <= 200)) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) -> (0 <= 200)))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = of_int(0))
+
+axiom H4 : in_range4(x1)
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = of_int(0))
+
+axiom H7 : in_range5(y1)
+
+axiom H8 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o2 = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H9 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o2 = 0))
+
+axiom H10 : ((o3 = o2) and in_range2(o2))
+
+axiom H11 : (result2 = remaining_bytes)
+
+axiom H12 : (remaining_bytes1 = o3)
+
+axiom H13 : in_range2(remaining_bytes1)
+
+axiom H14 : (result3 = offset)
+
+axiom H15 : (offset1 = 0)
+
+axiom H16 : in_range2(offset1)
+
+axiom H17 : true
+
+axiom H18 : (to_rep(first2((temp___738(of_int(0), to_rep(data__first),
+  to_rep(data__last))).rt1)) = to_rep(data__first))
+
+axiom H19 : (to_rep(last2((temp___738(of_int(0), to_rep(data__first),
+  to_rep(data__last))).rt1)) = to_rep(data__last))
+
+axiom H20 : ({ elts1 = temp___745; rt1 = temp___7451
+  } = temp___738(of_int(0), to_rep(data__first), to_rep(data__last)))
+
+axiom H21 : (temp___745 = temp___746)
+
+axiom H22 : (mk(to_rep(first2(temp___7451)),
+  to_rep(last2(temp___7451))) = temp___7461)
+
+axiom H23 : (((to_rep(first(temp___7461)) <= to_rep(last(temp___7461))) ->
+  (((to_rep(data__first) <= to_rep(data__last)) ->
+  (((to_rep(last(temp___7461)) - to_rep(first(temp___7461))) + 1) = ((to_rep(data__last) - to_rep(data__first)) + 1))) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) ->
+  (((to_rep(last(temp___7461)) - to_rep(first(temp___7461))) + 1) = 0)))) and
+  ((not (to_rep(first(temp___7461)) <= to_rep(last(temp___7461)))) ->
+  ((to_rep(data__first) <= to_rep(data__last)) ->
+  (0 = ((to_rep(data__last) - to_rep(data__first)) + 1)))))
+
+axiom H24 : ((temp___747 = temp___746) and (temp___7471 = temp___7461))
+
+axiom H25 : (o4 = slide(temp___747, to_rep(first(temp___7471)),
+  to_rep(data__first)))
+
+axiom H26 : (result4 = data)
+
+axiom H27 : (data1 = o4)
+
+axiom H28 : (8 <= remaining_bytes1)
+
+axiom H29 : ((mod(offset2, 8) = 0) and
+  (((to_rep(data__first) <= to_rep(data__last)) ->
+  ((offset2 + remaining_bytes2) = ((to_rep(data__last) - to_rep(data__first)) + 1))) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) ->
+  ((offset2 + remaining_bytes2) = 0))))
+
+axiom H30 : (((((ule(of_int(0), of_int(4)) -> in_range4(x2)) and
+  (ule(of_int(0), of_int(4)) -> in_range5(y2))) and ((0 <= 2147483647) ->
+  in_range2(remaining_bytes2))) and ((0 <= 2147483647) ->
+  in_range2(offset2))) and (8 <= remaining_bytes2))
+
+axiom H31 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o5 = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H32 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o5 = 0))
+
+axiom H33 : ((o6 = o5) and in_range1(o5))
+
+axiom H34 : ((o7 = (offset2 + remaining_bytes2)) and
+  in_range1((offset2 + remaining_bytes2)))
+
+axiom H35 : (((o7 = o6) -> (o8 = true)) and ((not (o7 = o6)) ->
+  (o8 = false)))
+
  (* File "keccak-keccakf-byte_lanes.adb", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,byte) farray. forall x:t. forall y:t.
-  forall remaining_bytes:int. forall offset:int. forall o:int. forall o1:int.
-  forall temp___745:(int,byte) farray. forall temp___7451:t3.
-  forall temp___746:(int,byte) farray. forall temp___7461:t2.
-  forall temp___747:(int,byte) farray. forall temp___7471:t2.
-  forall o2:(int,byte) farray. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:bool. forall result:t. forall x1:t. forall result1:t.
-  forall y1:t. forall result2:int. forall remaining_bytes1:int.
-  forall result3:int. forall offset1:int. forall result4:(int,byte) farray.
-  forall data1:(int,byte) farray. forall x2:t. forall y2:t.
-  forall remaining_bytes2:int. forall offset2:int. (dynamic_property(0,
-  2147483647, to_rep(data__first), to_rep(data__last)) ->
-  ((((to_rep(data__first) <= to_rep(data__last)) and
-  (((to_rep(data__last) - to_rep(data__first)) + 1) <= 200)) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (0 <= 200))) ->
-  (((result = x) and (x1 = of_int(0))) -> (in_range4(x1) ->
-  (((result1 = y) and (y1 = of_int(0))) -> (in_range5(y1) ->
-  ((((((to_rep(data__first) <= to_rep(data__last)) and
-  (o = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o = 0))) and
-  ((o1 = o) and in_range2(o))) and ((result2 = remaining_bytes) and
-  (remaining_bytes1 = o1))) -> (in_range2(remaining_bytes1) ->
-  (((result3 = offset) and (offset1 = 0)) -> (in_range2(offset1) ->
-  (((((((to_rep(first2((temp___738(of_int(0), to_rep(data__first),
-  to_rep(data__last))).rt1)) = to_rep(data__first)) and
-  ((to_rep(last2((temp___738(of_int(0), to_rep(data__first),
-  to_rep(data__last))).rt1)) = to_rep(data__last)) and ({ elts1 = temp___745;
-  rt1 = temp___7451 } = temp___738(of_int(0), to_rep(data__first),
-  to_rep(data__last))))) and ((temp___745 = temp___746) and
-  (mk(to_rep(first2(temp___7451)),
-  to_rep(last2(temp___7451))) = temp___7461))) and
-  ((((to_rep(first(temp___7461)) <= to_rep(last(temp___7461))) and
-  (((to_rep(data__first) <= to_rep(data__last)) and
-  (((to_rep(last(temp___7461)) - to_rep(first(temp___7461))) + 1) = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and
-  (((to_rep(last(temp___7461)) - to_rep(first(temp___7461))) + 1) = 0)))) or
-  ((not (to_rep(first(temp___7461)) <= to_rep(last(temp___7461)))) and
-  (((to_rep(data__first) <= to_rep(data__last)) and
-  (0 = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  (not (to_rep(data__first) <= to_rep(data__last)))))) and
-  ((temp___747 = temp___746) and (temp___7471 = temp___7461)))) and
-  (o2 = slide(temp___747, to_rep(first(temp___7471)),
-  to_rep(data__first)))) and ((result4 = data) and (data1 = o2))) ->
-  ((8 <= remaining_bytes1) -> (((mod(offset2, 8) = 0) and
-  (((to_rep(data__first) <= to_rep(data__last)) and
-  ((offset2 + remaining_bytes2) = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and
-  ((offset2 + remaining_bytes2) = 0)))) -> ((((((ule(of_int(0), of_int(4)) ->
-  in_range5(y2)) and ((0 <= 2147483647) -> in_range2(remaining_bytes2))) and
-  ((0 <= 2147483647) -> in_range2(offset2))) and (ule(of_int(0),
-  of_int(4)) -> in_range4(x2))) and (8 <= remaining_bytes2)) ->
-  ((((((to_rep(data__first) <= to_rep(data__last)) and
-  (o3 = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o3 = 0))) and
-  ((o4 = o3) and in_range1(o3))) and
-  (((o5 = (offset2 + remaining_bytes2)) and
-  in_range1((offset2 + remaining_bytes2))) and (((o5 = o4) and
-  (o6 = true)) or ((not (o5 = o4)) and (o6 = false))))) ->
-  (not (8 = 0))))))))))))))))))
+goal WP_parameter_def : (not (8 = 0))

@@ -160,18 +160,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2386,14 +2386,30 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic state : t1
+
+logic o : t1
+
+logic result : t1
+
+logic state1 : t1
+
+logic state2 : t1
+
+logic state3 : t1
+
+axiom H : tqtisFinite(state)
+
+axiom H1 : in_range2(x)
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
 
+axiom H2 : (ult(x, of_int(1000000)) and le(state, mul1(NearestTiesToEven,
+  of_ubv32(NearestTiesToEven, x), fliteral1)))
+
  (* File "wibble.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:t1. (tqtisFinite(state) -> (in_range2(x) -> ((ult(x,
-  of_int(1000000)) and le(state, mul1(NearestTiesToEven,
-  of_ubv32(NearestTiesToEven, x), fliteral1))) ->
-  tqtisFinite(add1(NearestTiesToEven, state, fliteral1))))))
+goal WP_parameter_def : tqtisFinite(add1(NearestTiesToEven, state,
+  fliteral1))

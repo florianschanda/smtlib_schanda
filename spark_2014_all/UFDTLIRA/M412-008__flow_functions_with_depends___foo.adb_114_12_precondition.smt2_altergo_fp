@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -135,13 +135,39 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic g1 : int
+
+logic g2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range(g1)
+
+axiom H1 : in_range(g2)
+
+axiom H2 : in_range(a)
+
+axiom H3 : in_range(b)
+
+axiom H4 : (result = wibble(a, b, g1, g2))
+
+axiom H5 : ((result = true) -> (o1 = a))
+
+axiom H6 : ((not (result = true)) -> (o1 = b))
+
+axiom H7 : ((result1 = wobble(a, b)) and ((result1 = true) <-> (a = 0)))
+
+axiom H8 : ((result1 = true) -> (o = a))
+
+axiom H9 : ((not (result1 = true)) -> ((o = (a + 1)) and in_range((a + 1))))
+
  (* File "foo.adb", line 90, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g1:int. forall g2:int. forall o:int. forall o1:int.
-  forall result:bool. forall result1:bool. (in_range(g1) -> (in_range(g2) ->
-  (in_range(a) -> (in_range(b) -> (((result = wibble(a, b, g1, g2)) and
-  (((result = true) and (o1 = a)) or ((not (result = true)) and
-  (o1 = b)))) -> ((((result1 = wobble(a, b)) and ((result1 = true) <->
-  (a = 0))) and (((result1 = true) and (o = a)) or
-  ((not (result1 = true)) and ((o = (a + 1)) and in_range((a + 1)))))) ->
-  (o1 = g2))))))))
+goal WP_parameter_def : (o1 = g2)

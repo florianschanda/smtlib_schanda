@@ -1455,35 +1455,120 @@ axiom previous_tracks__def_axiom :
   0), temp___158(1, 0, 0), temp___164(2, 3, 0), temp___170(5, 0, 0),
   temp___176(4, 6, 7)))
 
- (* File "trains.ads", line 144, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
-  forall train:int. forall id:int. forall o:int. forall o1:track_id.
-  forall o2:natural. forall o3:track_id. forall o4:int. forall o5:bool.
-  forall o6:int. forall o7:track_id. forall o8:natural. forall o9:track_id.
-  forall temp___338:int. forall result:bool. (in_range2(cur_num_trains) ->
-  (((1 <= train) and (train <= cur_num_trains)) -> (((1 <= id) and
-  (id <= 3)) -> ((((((((1 <= train) and (train <= 10)) and (o = train)) and
-  ({ us_split_fields1 = { rec__trains__train_position__track_begin = o1;
-  rec__trains__train_position__pos_begin = o2;
-  rec__trains__train_position__track_end = o3 } } = (trains[o]))) and
-  ((o4 = get_previous_track({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o1;
-  rec__trains__train_position__pos_begin = o2;
-  rec__trains__train_position__track_end = o3 } }, id)) and
-  (in_range7(o4) and
-  (o4 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o3)])).us_split_fields3).rec__trains__track__from)])[id])))))) and
-  (((o4 = 0) and (o5 = true)) or ((not (o4 = 0)) and (o5 = false)))) and
-  (((not (o5 = true)) and (result = true)) or ((o5 = true) and
-  (result = false)))) -> ((result = true) -> ((((((1 <= train) and
-  (train <= 10)) and (o6 = train)) and ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o7;
-  rec__trains__train_position__pos_begin = o8;
-  rec__trains__train_position__track_end = o9 } } = (trains[o6]))) and
-  ((temp___338 = get_previous_track({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o7;
-  rec__trains__train_position__pos_begin = o8;
-  rec__trains__train_position__track_end = o9 } }, id)) and
+logic cur_num_trains : int
+
+logic trains : (int,us_rep) farray
+
+logic track_signals : (int,signal) farray
+
+logic train : int
+
+logic id : int
+
+logic o : int
+
+logic o1 : track_id
+
+logic o2 : natural
+
+logic o3 : track_id
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : track_id
+
+logic o8 : natural
+
+logic o9 : track_id
+
+logic temp___340 : int
+
+logic o10 : int
+
+logic o11 : track_id
+
+logic o12 : natural
+
+logic o13 : track_id
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : track_id
+
+logic o18 : natural
+
+logic o19 : track_id
+
+logic temp___338 : int
+
+logic o20 : int
+
+logic o21 : signal
+
+logic temp___339 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range2(cur_num_trains)
+
+axiom H1 : (1 <= train)
+
+axiom H2 : (train <= cur_num_trains)
+
+axiom H3 : (1 <= id)
+
+axiom H4 : (id <= 3)
+
+axiom H5 : ((1 <= train) and (train <= 10))
+
+axiom H6 : (o10 = train)
+
+axiom H7 : ({ us_split_fields1 = { rec__trains__train_position__track_begin =
+  o11; rec__trains__train_position__pos_begin = o12;
+  rec__trains__train_position__track_end = o13 } } = (trains[o10]))
+
+axiom H8 : ((o14 = get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o11;
+  rec__trains__train_position__pos_begin = o12;
+  rec__trains__train_position__track_end = o13 } }, id)) and
+  (in_range7(o14) and
+  (o14 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o13)])).us_split_fields3).rec__trains__track__from)])[id])))))
+
+axiom H9 : (((o14 = 0) -> (o15 = true)) and ((not (o14 = 0)) ->
+  (o15 = false)))
+
+axiom H10 : (((not (o15 = true)) -> (result1 = true)) and ((o15 = true) ->
+  (result1 = false)))
+
+axiom H11 : (result1 = true)
+
+axiom H12 : ((1 <= train) and (train <= 10))
+
+axiom H13 : (o16 = train)
+
+axiom H14 : ({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o17;
+  rec__trains__train_position__pos_begin = o18;
+  rec__trains__train_position__track_end = o19 } } = (trains[o16]))
+
+axiom H15 : ((temp___338 = get_previous_track({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o17;
+  rec__trains__train_position__pos_begin = o18;
+  rec__trains__train_position__track_end = o19 } }, id)) and
   (in_range7(temp___338) and
-  (temp___338 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o9)])).us_split_fields3).rec__trains__track__from)])[id])))))) ->
-  (1 <= temp___338))))))))
+  (temp___338 = to_rep5(((previous_tracks[to_rep3((((tracks[to_rep1(o19)])).us_split_fields3).rec__trains__track__from)])[id])))))
+
+ (* File "trains.ads", line 144, characters 0-0 *)
+goal WP_parameter_def : (1 <= temp___338)

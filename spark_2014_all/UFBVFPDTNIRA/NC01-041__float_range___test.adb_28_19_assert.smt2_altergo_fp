@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1504,10 +1504,26 @@ function output_t__ref___projection(a: output_t__ref) : output_t =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic value : t1
+
+logic value1 : t1
+
+logic value2 : t1
+
+logic value3 : t1
+
+axiom H : (le(neg1(fliteral1), fliteral1) -> in_range2(value))
+
+axiom H1 : in_range2(value1)
+
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0000999999974737875163555145263671875))
+
+axiom H2 : (le(neg1(fliteral2), value1) and le(value1, fliteral2))
+
+axiom H3 : in_range2(value2)
 
 logic fliteral3 : t1
 
@@ -1519,16 +1535,14 @@ logic fliteral4 : t1
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.001000000047497451305389404296875))
 
+axiom H4 : (le(neg1(fliteral3), value2) and le(value2, neg1(fliteral4)))
+
+axiom H5 : in_range2(value3)
+
 logic fliteral5 : t1
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 31.9990005493164062500))
 
  (* File "test.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:t1. forall value1:t1. forall value2:t1. forall value3:t1.
-  ((le(neg1(fliteral1), fliteral1) -> in_range2(value)) ->
-  (in_range2(value1) -> ((le(neg1(fliteral2), value1) and le(value1,
-  fliteral2)) -> (in_range2(value2) -> ((le(neg1(fliteral3), value2) and
-  le(value2, neg1(fliteral4))) -> (in_range2(value3) -> le(fliteral5,
-  value3))))))))
+goal WP_parameter_def : le(fliteral5, value3)

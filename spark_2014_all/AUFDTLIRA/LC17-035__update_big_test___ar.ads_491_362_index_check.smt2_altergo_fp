@@ -853,48 +853,178 @@ axiom def_axiom22 :
   ((not (temp___5488 = temp___5486)) -> ((temp___5483(temp___5485,
   temp___5486, temp___5487)[temp___5488]) = (temp___5485[temp___5488])))))))
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next : int
+
+logic f : int
+
+logic t : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : et1
+
+logic o7 : (int,et1) farray
+
+logic o8 : (int,(int,et1) farray) farray
+
+logic o9 : (int,(int,(int,et1) farray) farray) farray
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___5521 : (int,(int,et1) farray) farray
+
+logic o13 : (int,et1) farray
+
+logic o14 : (int,et1) farray
+
+logic o15 : (int,(int,et1) farray) farray
+
+logic o16 : (int,(int,et1) farray) farray
+
+logic o17 : int
+
+logic temp___5522 : (int,(int,(int,et1) farray) farray) farray
+
+logic o18 : int
+
+logic o19 : int
+
+logic temp___5511 : (int,(int,et1) farray) farray
+
+logic o20 : int
+
+logic o21 : (int,et1) farray
+
+logic o22 : (int,et1) farray
+
+logic o23 : (int,(int,et1) farray) farray
+
+logic o24 : (int,(int,et1) farray) farray
+
+logic o25 : int
+
+logic temp___5512 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic t1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result2 : int
+
+logic k_next1 : int
+
+logic result3 : int
+
+logic k_next2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next3 : int
+
+logic f3 : int
+
+logic t2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next4 : int
+
+logic f4 : int
+
+logic t3 : (int,(int,(int,et1) farray) farray) farray
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range3(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : ((((1 <= 16) -> in_range3(k_next)) and (((0 <= 99) ->
+  in_range4(f)) and ((((bool_eq8(a1, 1, 16, temp___5471(t1, k,
+  temp___5477((t1[k]), j, temp___5483(((t1[k])[j]), i, e))), 1,
+  16) = true) and (((k = 16) and (k_next1 = 1)) or ((k <  16) and
+  (k_next1 = (k + 1))))) and in_range3(k_next1)) and (((1 <= 16) ->
+  in_range3(k_next1)) and ((((e = 0) -> ((result4 = f) and (f1 = 99))) and
+  ((not (e = 0)) -> ((((o5 = (e - 1)) and in_range4((e - 1))) and
+  ((result5 = f) and (f2 = o5))) and (f1 = f2)))) and
+  (((((to_rep(o6) = f1) and (o7 = (((a1[k_next1])[j])[i <- o6]))) and
+  (o8 = ((a1[k_next1])[j <- o7]))) and (o9 = (a1[k_next1 <- o8]))) and
+  ((a1 = result6) and (a2 = o9)))))))) and (((t1 = t2) and ((f1 = f3) and
+  ((k_next1 = k_next3) and (a2 = a3)))) and ((t3 = t1) and ((f4 = f1) and
+  ((k_next4 = k_next1) and (a4 = a2))))))
+
+axiom H5 : (k <  16)
+
+axiom H6 : ((0 <  e) -> ((o20 = (e - 1)) and in_range4((e - 1))))
+
+axiom H7 : ((0 <  e) -> ((1 <= (k + 1)) and ((k + 1) <= 16)))
+
+axiom H8 : ((0 <  e) -> (o19 = (k + 1)))
+
+axiom H9 : ((0 <  e) -> (temp___5511 = (a[o19])))
+
+axiom H10 : ((0 <  e) -> (o21 = (temp___5511[j])))
+
+axiom H11 : ((0 <  e) -> (o22 = temp___1845(o21, i, o20)))
+
+axiom H12 : ((0 <  e) -> ((1 <= (k + 1)) and ((k + 1) <= 16)))
+
+axiom H13 : ((0 <  e) -> (o18 = (k + 1)))
+
+axiom H14 : ((0 <  e) -> (o23 = (a[o18])))
+
+axiom H15 : ((0 <  e) -> (o24 = temp___1838(o23, j, o22)))
+
+axiom H16 : ((0 <  e) -> ((o25 = (k + 1)) and in_range3((k + 1))))
+
+axiom H17 : ((0 <  e) -> (temp___5512 = temp___1815(a, k, temp___1823((a[k]),
+  j, temp___1830(((a[k])[j]), i, e)), o25, o24)))
+
+axiom H18 : ((0 <  e) -> (result8 = bool_eq8(a3, 1, 16, temp___5512, 1, 16)))
+
+axiom H19 : ((not (0 <  e)) -> (result8 = false))
+
+axiom H20 : (not (result8 = true))
+
+axiom H21 : (e = 0)
+
  (* File "ar.ads", line 486, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall k_next:int.
-  forall f:int. forall o:int. forall o1:et1. forall o2:(int,et1) farray.
-  forall o3:(int,(int,et1) farray) farray.
-  forall o4:(int,(int,(int,et1) farray) farray) farray. forall o5:int.
-  forall o6:int. forall temp___5511:(int,(int,et1) farray) farray.
-  forall o7:int. forall o8:(int,et1) farray. forall o9:(int,et1) farray.
-  forall o10:(int,(int,et1) farray) farray.
-  forall o11:(int,(int,et1) farray) farray. forall o12:int.
-  forall temp___5512:(int,(int,(int,et1) farray) farray) farray.
-  forall t:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray. forall k_next1:int.
-  forall result:int. forall f1:int. forall result1:int. forall f2:int.
-  forall result2:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray. forall k_next2:int.
-  forall f3:int. forall t1:(int,(int,(int,et1) farray) farray) farray.
-  forall a4:(int,(int,(int,et1) farray) farray) farray. forall k_next3:int.
-  forall f4:int. forall t2:(int,(int,(int,et1) farray) farray) farray.
-  forall result3:bool. (in_range1(i) -> (in_range2(j) -> (in_range3(k) ->
-  (in_range4(e) -> (((((1 <= 16) -> in_range3(k_next)) and (((0 <= 99) ->
-  in_range4(f)) and ((((bool_eq8(a1, 1, 16, temp___5471(t, k,
-  temp___5477((t[k]), j, temp___5483(((t[k])[j]), i, e))), 1, 16) = true) and
-  (((k = 16) and (k_next1 = 1)) or ((k <  16) and (k_next1 = (k + 1))))) and
-  in_range3(k_next1)) and (((1 <= 16) -> in_range3(k_next1)) and
-  ((((e = 0) and (({ int__content = result } = { int__content = f }) and
-  (f1 = 99))) or ((not (e = 0)) and ((((o = (e - 1)) and
-  in_range4((e - 1))) and (({ int__content = result1 } = { int__content = f
-  }) and (f2 = o))) and (f1 = f2)))) and (((((to_rep(o1) = f1) and
-  (o2 = (((a1[k_next1])[j])[i <- o1]))) and
-  (o3 = ((a1[k_next1])[j <- o2]))) and (o4 = (a1[k_next1 <- o3]))) and
-  ((a1 = result2) and (a2 = o4)))))))) and (((t = t1) and ((f1 = f3) and
-  ((k_next1 = k_next2) and (a2 = a3)))) and ((t2 = t) and ((f4 = f1) and
-  ((k_next3 = k_next1) and (a4 = a2)))))) -> ((k <  16) -> ((((0 <  e) and
-  ((((((o7 = (e - 1)) and in_range4((e - 1))) and ((((((1 <= (k + 1)) and
-  ((k + 1) <= 16)) and (o6 = (k + 1))) and (temp___5511 = (a[o6]))) and
-  (o8 = (temp___5511[j]))) and (o9 = temp___1845(o8, i, o7)))) and
-  (((((1 <= (k + 1)) and ((k + 1) <= 16)) and (o5 = (k + 1))) and
-  (o10 = (a[o5]))) and (o11 = temp___1838(o10, j, o9)))) and
-  (((o12 = (k + 1)) and in_range3((k + 1))) and (temp___5512 = temp___1815(a,
-  k, temp___1823((a[k]), j, temp___1830(((a[k])[j]), i, e)), o12, o11)))) and
-  (result3 = bool_eq8(a3, 1, 16, temp___5512, 1, 16)))) or
-  ((not (0 <  e)) and (result3 = false))) -> ((not (result3 = true)) ->
-  ((e = 0) -> (1 <= (k + 1))))))))))))
+goal WP_parameter_def : (1 <= (k + 1))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -678,7 +678,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -964,19 +964,67 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "u.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sq:(int,unsigned_8) farray. forall i:int. forall j:int.
-  forall result:int. forall i1:int. forall sq1:(int,unsigned_8) farray.
-  forall i2:int. ((dynamic_property(0, 2147483647, to_rep(sq__first),
-  to_rep(sq__last)) and (to_rep(sq__first) = 0)) -> (((result = i) and
-  (i1 = 0)) -> (((0 <= i1) and (i1 <= to_rep(sq__last))) ->
-  ((forall j1:int. (((i2 <= j1) and (j1 <= to_rep(sq__last))) ->
-   (to_rep1((sq1[j1])) = to_rep1((sq[j1]))))) ->
-  ((((((0 <= to_rep(sq__last)) -> dynamic_property1(0, to_rep(sq__last),
-  i2)) and (to_rep(sq__first) = 0)) and
+logic sq : (int,unsigned_8) farray
+
+logic i : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : unsigned_8
+
+logic o2 : t
+
+logic o3 : unsigned_8
+
+logic o4 : int
+
+logic temp___226 : (int,unsigned_8) farray
+
+logic o5 : (int,unsigned_8) farray
+
+logic result : int
+
+logic i1 : int
+
+logic sq1 : (int,unsigned_8) farray
+
+logic i2 : int
+
+logic result1 : (int,unsigned_8) farray
+
+logic sq2 : (int,unsigned_8) farray
+
+logic result2 : int
+
+logic i3 : int
+
+axiom H : (dynamic_property(0, 2147483647, to_rep(sq__first),
+  to_rep(sq__last)) and (to_rep(sq__first) = 0))
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 0)
+
+axiom H3 : (0 <= i1)
+
+axiom H4 : (i1 <= to_rep(sq__last))
+
+axiom H5 :
+  (forall j1:int. (((i2 <= j1) and (j1 <= to_rep(sq__last))) ->
+  (to_rep1((sq1[j1])) = to_rep1((sq[j1])))))
+
+axiom H6 : (((((0 <= to_rep(sq__last)) -> dynamic_property1(0,
+  to_rep(sq__last), i2)) and (to_rep(sq__first) = 0)) and
   (forall temp___232:int. (((to_rep(sq__first) <= temp___232) and
   (temp___232 <= to_rep(sq__last))) -> ((i2 <= temp___232) ->
   ((sq1[temp___232]) = (sq[temp___232])))))) and ((0 <= i2) and
-  (i2 <= to_rep(sq__last)))) -> (((i2 <= j) and (j <= to_rep(sq__last))) ->
-  (to_rep(sq__first) <= j))))))))
+  (i2 <= to_rep(sq__last))))
+
+axiom H7 : (i2 <= j)
+
+axiom H8 : (j <= to_rep(sq__last))
+
+ (* File "u.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (to_rep(sq__first) <= j)

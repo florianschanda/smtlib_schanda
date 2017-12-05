@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -357,14 +357,33 @@ function tvec_10P1__ref___projection(a: tvec_10P1__ref) : tvec_10P1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : (int,myint) farray
+
+logic unconstr__p__x__compl : (int,myint) farray
+
+logic unconstr__p__x__compl1 : t
+
+logic o : integer
+
+logic o1 : integer
+
+logic unconstr__p__x : (int,myint) farray
+
+logic result : (int,myint) farray
+
+logic a1 : (int,myint) farray
+
+axiom H : dynamic_property((- 2147483648), 2147483647, 0, 10)
+
+axiom H1 : (a = unconstr__p__x__compl)
+
+axiom H2 : (mk(0, 10) = unconstr__p__x__compl1)
+
+axiom H3 : (to_rep(o1) = to_rep(last(unconstr__p__x__compl1)))
+
+axiom H4 : (to_rep(o) = to_rep(first(unconstr__p__x__compl1)))
+
  (* File "unconstr.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,myint) farray.
-  forall unconstr__p__x__compl:(int,myint) farray.
-  forall unconstr__p__x__compl1:t. forall o:integer. forall o1:integer.
-  ((dynamic_property((-2147483648), 2147483647, 0, 10) and
-  ((a = unconstr__p__x__compl) and (mk(0, 10) = unconstr__p__x__compl1))) ->
-  ((to_rep(o1) = to_rep(last(unconstr__p__x__compl1))) ->
-  ((to_rep(o) = to_rep(first(unconstr__p__x__compl1))) ->
-  (((to_rep(o) <= to_rep(o1)) -> (0 <  ((to_rep(o1) - to_rep(o)) + 1))) and
-  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0)))))))
+goal WP_parameter_def : (((to_rep(o) <= to_rep(o1)) ->
+  (0 <  ((to_rep(o1) - to_rep(o)) + 1))) and
+  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0)))

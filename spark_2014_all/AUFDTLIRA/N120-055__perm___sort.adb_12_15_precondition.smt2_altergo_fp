@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -411,6 +411,65 @@ logic y : int
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic values : (int,natural) farray
+
+logic temp : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : (int,natural) farray
+
+logic o9 : natural
+
+logic o10 : int
+
+logic o11 : (int,natural) farray
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : (int,natural) farray
+
+logic values1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic values2 : (int,natural) farray
+
+logic values3 : (int,natural) farray
+
+logic temp2 : int
+
+logic values4 : (int,natural) farray
+
+logic temp3 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(values__first),
+  to_rep1(values__last))
+
+axiom H1 : in_range3(x)
+
+axiom H2 : in_range3(y)
+
+axiom H3 : (((to_rep1(values__first) <= x) and
+  (x <= to_rep1(values__last))) and (((to_rep1(values__first) <= y) and
+  (y <= to_rep1(values__last))) and (not (x = y))))
 
  (* File "sort.ads", line 6, characters 0-0 *)
 goal WP_parameter_def : true

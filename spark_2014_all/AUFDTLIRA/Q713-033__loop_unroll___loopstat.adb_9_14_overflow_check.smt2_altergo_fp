@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -254,9 +254,1295 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic k : int
+
+logic a : (int,integer) farray
+
+logic j : int
+
+logic i : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : int
+
+logic o94 : int
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : int
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : integer
+
+logic o111 : (int,integer) farray
+
+logic o112 : integer
+
+logic o113 : (int,integer) farray
+
+logic o114 : integer
+
+logic o115 : (int,integer) farray
+
+logic o116 : integer
+
+logic o117 : (int,integer) farray
+
+logic o118 : integer
+
+logic o119 : (int,integer) farray
+
+logic o120 : integer
+
+logic o121 : (int,integer) farray
+
+logic o122 : integer
+
+logic o123 : (int,integer) farray
+
+logic o124 : integer
+
+logic o125 : (int,integer) farray
+
+logic o126 : integer
+
+logic o127 : (int,integer) farray
+
+logic o128 : integer
+
+logic o129 : (int,integer) farray
+
+logic result : int
+
+logic k1 : int
+
+logic result1 : int
+
+logic j3 : int
+
+logic result2 : int
+
+logic k2 : int
+
+logic result3 : int
+
+logic j4 : int
+
+logic result4 : int
+
+logic k3 : int
+
+logic result5 : int
+
+logic j5 : int
+
+logic result6 : int
+
+logic k4 : int
+
+logic result7 : int
+
+logic j6 : int
+
+logic result8 : int
+
+logic k5 : int
+
+logic result9 : int
+
+logic j7 : int
+
+logic result10 : int
+
+logic k6 : int
+
+logic result11 : int
+
+logic j8 : int
+
+logic result12 : int
+
+logic k7 : int
+
+logic result13 : int
+
+logic j9 : int
+
+logic result14 : int
+
+logic k8 : int
+
+logic result15 : int
+
+logic j10 : int
+
+logic result16 : int
+
+logic k9 : int
+
+logic result17 : int
+
+logic j11 : int
+
+logic result18 : int
+
+logic k10 : int
+
+logic result19 : int
+
+logic j12 : int
+
+logic result20 : int
+
+logic k11 : int
+
+logic result21 : int
+
+logic k12 : int
+
+logic result22 : int
+
+logic i1 : int
+
+logic result23 : int
+
+logic j13 : int
+
+logic result24 : int
+
+logic k13 : int
+
+logic result25 : int
+
+logic j14 : int
+
+logic result26 : int
+
+logic k14 : int
+
+logic result27 : int
+
+logic j15 : int
+
+logic result28 : int
+
+logic k15 : int
+
+logic result29 : int
+
+logic j16 : int
+
+logic result30 : int
+
+logic k16 : int
+
+logic result31 : int
+
+logic j17 : int
+
+logic result32 : int
+
+logic k17 : int
+
+logic result33 : int
+
+logic j18 : int
+
+logic result34 : int
+
+logic k18 : int
+
+logic result35 : int
+
+logic j19 : int
+
+logic result36 : int
+
+logic k19 : int
+
+logic result37 : int
+
+logic j20 : int
+
+logic result38 : int
+
+logic k20 : int
+
+logic result39 : int
+
+logic j21 : int
+
+logic result40 : int
+
+logic k21 : int
+
+logic result41 : int
+
+logic j22 : int
+
+logic result42 : int
+
+logic k22 : int
+
+logic result43 : int
+
+logic i2 : int
+
+logic result44 : int
+
+logic j23 : int
+
+logic result45 : int
+
+logic k23 : int
+
+logic result46 : int
+
+logic j24 : int
+
+logic result47 : int
+
+logic k24 : int
+
+logic result48 : int
+
+logic j25 : int
+
+logic result49 : int
+
+logic k25 : int
+
+logic result50 : int
+
+logic j26 : int
+
+logic result51 : int
+
+logic k26 : int
+
+logic result52 : int
+
+logic j27 : int
+
+logic result53 : int
+
+logic k27 : int
+
+logic result54 : int
+
+logic j28 : int
+
+logic result55 : int
+
+logic k28 : int
+
+logic result56 : int
+
+logic j29 : int
+
+logic result57 : int
+
+logic k29 : int
+
+logic result58 : int
+
+logic j30 : int
+
+logic result59 : int
+
+logic k30 : int
+
+logic result60 : int
+
+logic j31 : int
+
+logic result61 : int
+
+logic k31 : int
+
+logic result62 : int
+
+logic j32 : int
+
+logic result63 : int
+
+logic k32 : int
+
+logic result64 : int
+
+logic i3 : int
+
+logic result65 : int
+
+logic j33 : int
+
+logic result66 : int
+
+logic k33 : int
+
+logic result67 : int
+
+logic j34 : int
+
+logic result68 : int
+
+logic k34 : int
+
+logic result69 : int
+
+logic j35 : int
+
+logic result70 : int
+
+logic k35 : int
+
+logic result71 : int
+
+logic j36 : int
+
+logic result72 : int
+
+logic k36 : int
+
+logic result73 : int
+
+logic j37 : int
+
+logic result74 : int
+
+logic k37 : int
+
+logic result75 : int
+
+logic j38 : int
+
+logic result76 : int
+
+logic k38 : int
+
+logic result77 : int
+
+logic j39 : int
+
+logic result78 : int
+
+logic k39 : int
+
+logic result79 : int
+
+logic j40 : int
+
+logic result80 : int
+
+logic k40 : int
+
+logic result81 : int
+
+logic j41 : int
+
+logic result82 : int
+
+logic k41 : int
+
+logic result83 : int
+
+logic j42 : int
+
+logic result84 : int
+
+logic k42 : int
+
+logic result85 : int
+
+logic i4 : int
+
+logic result86 : int
+
+logic j43 : int
+
+logic result87 : int
+
+logic k43 : int
+
+logic result88 : int
+
+logic j44 : int
+
+logic result89 : int
+
+logic k44 : int
+
+logic result90 : int
+
+logic j45 : int
+
+logic result91 : int
+
+logic k45 : int
+
+logic result92 : int
+
+logic j46 : int
+
+logic result93 : int
+
+logic k46 : int
+
+logic result94 : int
+
+logic j47 : int
+
+logic result95 : int
+
+logic k47 : int
+
+logic result96 : int
+
+logic j48 : int
+
+logic result97 : int
+
+logic k48 : int
+
+logic result98 : int
+
+logic j49 : int
+
+logic result99 : int
+
+logic k49 : int
+
+logic result100 : int
+
+logic j50 : int
+
+logic result101 : int
+
+logic k50 : int
+
+logic result102 : int
+
+logic j51 : int
+
+logic result103 : int
+
+logic k51 : int
+
+logic result104 : int
+
+logic j52 : int
+
+logic result105 : int
+
+logic k52 : int
+
+logic result106 : int
+
+logic i5 : int
+
+logic result107 : int
+
+logic j53 : int
+
+logic result108 : int
+
+logic k53 : int
+
+logic result109 : int
+
+logic j54 : int
+
+logic result110 : int
+
+logic k54 : int
+
+logic result111 : int
+
+logic j55 : int
+
+logic result112 : int
+
+logic k55 : int
+
+logic result113 : int
+
+logic j56 : int
+
+logic result114 : int
+
+logic k56 : int
+
+logic result115 : int
+
+logic j57 : int
+
+logic result116 : int
+
+logic k57 : int
+
+logic result117 : int
+
+logic j58 : int
+
+logic result118 : int
+
+logic k58 : int
+
+logic result119 : int
+
+logic j59 : int
+
+logic result120 : int
+
+logic k59 : int
+
+logic result121 : int
+
+logic j60 : int
+
+logic result122 : int
+
+logic k60 : int
+
+logic result123 : int
+
+logic j61 : int
+
+logic result124 : int
+
+logic k61 : int
+
+logic result125 : int
+
+logic j62 : int
+
+logic result126 : int
+
+logic k62 : int
+
+logic result127 : int
+
+logic i6 : int
+
+logic result128 : int
+
+logic j63 : int
+
+logic result129 : int
+
+logic k63 : int
+
+logic result130 : int
+
+logic j64 : int
+
+logic result131 : int
+
+logic k64 : int
+
+logic result132 : int
+
+logic j65 : int
+
+logic result133 : int
+
+logic k65 : int
+
+logic result134 : int
+
+logic j66 : int
+
+logic result135 : int
+
+logic k66 : int
+
+logic result136 : int
+
+logic j67 : int
+
+logic result137 : int
+
+logic k67 : int
+
+logic result138 : int
+
+logic j68 : int
+
+logic result139 : int
+
+logic k68 : int
+
+logic result140 : int
+
+logic j69 : int
+
+logic result141 : int
+
+logic k69 : int
+
+logic result142 : int
+
+logic j70 : int
+
+logic result143 : int
+
+logic k70 : int
+
+logic result144 : int
+
+logic j71 : int
+
+logic result145 : int
+
+logic k71 : int
+
+logic result146 : int
+
+logic j72 : int
+
+logic result147 : int
+
+logic k72 : int
+
+logic result148 : int
+
+logic i7 : int
+
+logic result149 : int
+
+logic j73 : int
+
+logic result150 : int
+
+logic k73 : int
+
+logic result151 : int
+
+logic j74 : int
+
+logic result152 : int
+
+logic k74 : int
+
+logic result153 : int
+
+logic j75 : int
+
+logic result154 : int
+
+logic k75 : int
+
+logic result155 : int
+
+logic j76 : int
+
+logic result156 : int
+
+logic k76 : int
+
+logic result157 : int
+
+logic j77 : int
+
+logic result158 : int
+
+logic k77 : int
+
+logic result159 : int
+
+logic j78 : int
+
+logic result160 : int
+
+logic k78 : int
+
+logic result161 : int
+
+logic j79 : int
+
+logic result162 : int
+
+logic k79 : int
+
+logic result163 : int
+
+logic j80 : int
+
+logic result164 : int
+
+logic k80 : int
+
+logic result165 : int
+
+logic j81 : int
+
+logic result166 : int
+
+logic k81 : int
+
+logic result167 : int
+
+logic j82 : int
+
+logic result168 : int
+
+logic k82 : int
+
+logic result169 : int
+
+logic i8 : int
+
+logic result170 : int
+
+logic j83 : int
+
+logic result171 : int
+
+logic k83 : int
+
+logic result172 : int
+
+logic j84 : int
+
+logic result173 : int
+
+logic k84 : int
+
+logic result174 : int
+
+logic j85 : int
+
+logic result175 : int
+
+logic k85 : int
+
+logic result176 : int
+
+logic j86 : int
+
+logic result177 : int
+
+logic k86 : int
+
+logic result178 : int
+
+logic j87 : int
+
+logic result179 : int
+
+logic k87 : int
+
+logic result180 : int
+
+logic j88 : int
+
+logic result181 : int
+
+logic k88 : int
+
+logic result182 : int
+
+logic j89 : int
+
+logic result183 : int
+
+logic k89 : int
+
+logic result184 : int
+
+logic j90 : int
+
+logic result185 : int
+
+logic k90 : int
+
+logic result186 : int
+
+logic j91 : int
+
+logic result187 : int
+
+logic k91 : int
+
+logic result188 : int
+
+logic j92 : int
+
+logic result189 : int
+
+logic k92 : int
+
+logic result190 : int
+
+logic i9 : int
+
+logic result191 : int
+
+logic j93 : int
+
+logic result192 : int
+
+logic k93 : int
+
+logic result193 : int
+
+logic j94 : int
+
+logic result194 : int
+
+logic k94 : int
+
+logic result195 : int
+
+logic j95 : int
+
+logic result196 : int
+
+logic k95 : int
+
+logic result197 : int
+
+logic j96 : int
+
+logic result198 : int
+
+logic k96 : int
+
+logic result199 : int
+
+logic j97 : int
+
+logic result200 : int
+
+logic k97 : int
+
+logic result201 : int
+
+logic j98 : int
+
+logic result202 : int
+
+logic k98 : int
+
+logic result203 : int
+
+logic j99 : int
+
+logic result204 : int
+
+logic k99 : int
+
+logic result205 : int
+
+logic j100 : int
+
+logic result206 : int
+
+logic k100 : int
+
+logic result207 : int
+
+logic j101 : int
+
+logic result208 : int
+
+logic k101 : int
+
+logic result209 : int
+
+logic j102 : int
+
+logic result210 : int
+
+logic k102 : int
+
+logic result211 : int
+
+logic i10 : int
+
+logic result212 : int
+
+logic j103 : int
+
+logic result213 : int
+
+logic k103 : int
+
+logic result214 : int
+
+logic j104 : int
+
+logic result215 : int
+
+logic k104 : int
+
+logic result216 : int
+
+logic j105 : int
+
+logic result217 : int
+
+logic k105 : int
+
+logic result218 : int
+
+logic j106 : int
+
+logic result219 : int
+
+logic k106 : int
+
+logic result220 : int
+
+logic j107 : int
+
+logic result221 : int
+
+logic k107 : int
+
+logic result222 : int
+
+logic j108 : int
+
+logic result223 : int
+
+logic k108 : int
+
+logic result224 : int
+
+logic j109 : int
+
+logic result225 : int
+
+logic k109 : int
+
+logic result226 : int
+
+logic j110 : int
+
+logic result227 : int
+
+logic k110 : int
+
+logic result228 : int
+
+logic j111 : int
+
+logic result229 : int
+
+logic k111 : int
+
+logic result230 : int
+
+logic j112 : int
+
+logic result231 : int
+
+logic k112 : int
+
+logic result232 : int
+
+logic j113 : int
+
+logic result233 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result234 : int
+
+logic j114 : int
+
+logic result235 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result236 : int
+
+logic j115 : int
+
+logic result237 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic result238 : int
+
+logic j116 : int
+
+logic result239 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic result240 : int
+
+logic j117 : int
+
+logic result241 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+logic result242 : int
+
+logic j118 : int
+
+logic result243 : (int,integer) farray
+
+logic a6 : (int,integer) farray
+
+logic result244 : int
+
+logic j119 : int
+
+logic result245 : (int,integer) farray
+
+logic a7 : (int,integer) farray
+
+logic result246 : int
+
+logic j120 : int
+
+logic result247 : (int,integer) farray
+
+logic a8 : (int,integer) farray
+
+logic result248 : int
+
+logic j121 : int
+
+logic result249 : (int,integer) farray
+
+logic a9 : (int,integer) farray
+
+logic result250 : int
+
+logic j122 : int
+
+logic result251 : (int,integer) farray
+
+logic a10 : (int,integer) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(k))
+
+axiom H1 : (result = k)
+
+axiom H2 : (k1 = 0)
+
+axiom H3 : (result1 = j)
+
+axiom H4 : (j3 = 1)
+
  (* File "loopstat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall j:int. forall result:int. forall k1:int.
-  forall result1:int. forall j1:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(k)) -> (((result = k) and (k1 = 0)) -> ((({ int__content =
-  result1 } = { int__content = j }) and (j1 = 1)) -> in_range1((k1 + 1))))))
+goal WP_parameter_def : in_range1((k1 + 1))

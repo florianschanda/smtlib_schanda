@@ -1306,7 +1306,7 @@ axiom coerce_axiom2 :
 
 type idir_t
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 1))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq7 : int, int -> bool
 
@@ -2425,188 +2425,563 @@ axiom w_get__post_axiom :
   ((in_range6(witness1) and (has_witness(container, witness1) = true)) ->
   in_range10(w_get(container, witness1)))))
 
- (* File "algorithm.adb", line 132, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall algorithm__buildgapvector__B_9__dist__assume:t.
-  forall o:normalized2pi. forall o1:float1. forall o2:idir_t.
-  forall o3:normalized2pi. forall o4:float1. forall o5:idir_t.
-  forall gapvec__split_fields:us_split_fields4. forall result:int__ref.
-  forall i1:int. forall gapvec__split_fields1:us_split_fields4.
-  forall rayr__split_fields:us_split_fields8.
-  forall rayl__split_fields:us_split_fields8. forall i2:int.
-  forall rho:us_split_fields4. forall rho1:us_split_fields4.
-  forall result1:us_split_fields__ref4.
-  forall rayr__split_fields1:us_split_fields8.
-  forall result2:us_split_fields__ref4.
-  forall rayl__split_fields1:us_split_fields8.
-  forall algorithm__gap_vectors__append__container__fields:us_split_fields4.
-  forall result3:us_split_fields__ref2.
-  forall gapvec__split_fields2:us_split_fields4.
-  forall algorithm__gap_vectors__append__container__fields1:us_split_fields4.
-  forall result4:us_split_fields__ref2.
-  forall gapvec__split_fields3:us_split_fields4. forall result5:int__ref.
-  forall i3:int. ((1000 = to_rep4(gapvec__split_discrs)) ->
-  (in_range2(robotradius) -> (in_range2(mingapwidth) ->
-  (in_range2(fmaxrange) -> (((to_rep4(gapvec__split_discrs) = 1000) and
-  (length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields }) <= 1)) -> (((result = {
-  int__content = i }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= 999)) ->
-  (((to_rep4(gapvec__split_discrs) = 1000) and (length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }) <  i2)) -> (((((2 <= 999) ->
-  in_range8(i2)) and ((2 <= i2) and (i2 <= 999))) and (((result1 = {
-  us_split_fields__content4 = rayr__split_fields }) and
-  (rayr__split_fields1 = rayl__split_fields)) and (((result2 = {
-  us_split_fields__content4 = rayl__split_fields }) and
-  (rayl__split_fields1 = ((laserscan[i2])).us_split_fields9)) and
-  (((((algorithm__buildgapvector__B_9__dist__assume = sub(NearestTiesToEven,
-  to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first))) and
-  tqtisFinite(sub(NearestTiesToEven,
-  to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first)))) and
-  (algorithm__buildgapvector__B_9__dist__assume = dist1)) and
-  tqtisFinite(dist1)) and ((((le(mingapwidth, dist1) or
-  (eq(to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange) and
-  lt(to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange))) and (((({ us_split_fields3 = { rec__gaps__gap__bearing = {
-  us_split_fields1 = { rec__spaces__angles__angle__theta = o } };
-  rec__gaps__gap__distance = o1; rec__gaps__gap__idir = o2 }
-  } = create__2((rayr__split_fields1).rec__algorithm__laser_scan_data__second,
-  to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first),
-  (-1))) and ((((((length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields
-  }) = (length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }) + 1)) and (get1(positions({
+logic gapvec__split_fields : us_main_type
+
+logic rayr__split_fields : nonnegative_float
+
+logic rayr__split_fields1 : normalized2pi
+
+logic rayl__split_fields : nonnegative_float
+
+logic rayl__split_fields1 : normalized2pi
+
+logic i : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic algorithm__buildgapvector__B_7__dist__assume : t
+
+logic o12 : normalized2pi
+
+logic o13 : float1
+
+logic o14 : idir_t
+
+logic temp___820 : nonnegative_float
+
+logic temp___8201 : normalized2pi
+
+logic temp___819 : nonnegative_float
+
+logic temp___8191 : normalized2pi
+
+logic temp___818 : count_type
+
+logic temp___8181 : us_main_type
+
+logic temp___817 : int
+
+logic algorithm__buildgapvector__B_9__dist__assume : t
+
+logic o15 : normalized2pi
+
+logic o16 : float1
+
+logic o17 : idir_t
+
+logic o18 : normalized2pi
+
+logic o19 : float1
+
+logic o20 : idir_t
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : t
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : t
+
+logic o27 : t
+
+logic o28 : t
+
+logic o29 : t
+
+logic o30 : t
+
+logic o31 : t
+
+logic o32 : t
+
+logic algorithm__buildgapvector__B_10__dist__assume : t
+
+logic o33 : normalized2pi
+
+logic o34 : float1
+
+logic o35 : idir_t
+
+logic algorithm__gap_vectors__clear__container__fields : us_main_type
+
+logic result : us_main_type
+
+logic gapvec__split_fields1 : us_main_type
+
+logic result1 : nonnegative_float
+
+logic result2 : normalized2pi
+
+logic rayr__split_fields2 : nonnegative_float
+
+logic rayr__split_fields3 : normalized2pi
+
+logic result3 : nonnegative_float
+
+logic result4 : normalized2pi
+
+logic rayl__split_fields2 : nonnegative_float
+
+logic rayl__split_fields3 : normalized2pi
+
+logic algorithm__gap_vectors__append__container__fields : us_main_type
+
+logic result5 : us_main_type
+
+logic gapvec__split_fields2 : us_main_type
+
+logic result6 : int
+
+logic i1 : int
+
+logic gapvec__split_fields3 : us_main_type
+
+logic rayr__split_fields4 : nonnegative_float
+
+logic rayr__split_fields5 : normalized2pi
+
+logic rayl__split_fields4 : nonnegative_float
+
+logic rayl__split_fields5 : normalized2pi
+
+logic i2 : int
+
+logic rho : us_main_type
+
+logic rho1 : us_main_type
+
+logic result7 : nonnegative_float
+
+logic result8 : normalized2pi
+
+logic rayr__split_fields6 : nonnegative_float
+
+logic rayr__split_fields7 : normalized2pi
+
+logic result9 : nonnegative_float
+
+logic result10 : normalized2pi
+
+logic rayl__split_fields6 : nonnegative_float
+
+logic rayl__split_fields7 : normalized2pi
+
+logic algorithm__gap_vectors__append__container__fields1 : us_main_type
+
+logic result11 : us_main_type
+
+logic gapvec__split_fields4 : us_main_type
+
+logic algorithm__gap_vectors__append__container__fields2 : us_main_type
+
+logic result12 : us_main_type
+
+logic gapvec__split_fields5 : us_main_type
+
+logic result13 : int
+
+logic i3 : int
+
+logic gapvec__split_fields6 : us_main_type
+
+logic rayr__split_fields8 : nonnegative_float
+
+logic rayr__split_fields9 : normalized2pi
+
+logic rayl__split_fields8 : nonnegative_float
+
+logic rayl__split_fields9 : normalized2pi
+
+logic i4 : int
+
+logic gapvec__split_fields7 : us_main_type
+
+logic rayr__split_fields10 : nonnegative_float
+
+logic rayr__split_fields11 : normalized2pi
+
+logic rayl__split_fields10 : nonnegative_float
+
+logic rayl__split_fields11 : normalized2pi
+
+logic i5 : int
+
+logic gapvec__split_fields8 : us_main_type
+
+logic rayr__split_fields12 : nonnegative_float
+
+logic rayr__split_fields13 : normalized2pi
+
+logic rayl__split_fields12 : nonnegative_float
+
+logic rayl__split_fields13 : normalized2pi
+
+logic i6 : int
+
+logic gapvec__split_fields9 : us_main_type
+
+logic rayr__split_fields14 : nonnegative_float
+
+logic rayr__split_fields15 : normalized2pi
+
+logic rayl__split_fields14 : nonnegative_float
+
+logic rayl__split_fields15 : normalized2pi
+
+logic i7 : int
+
+logic gapvec__split_fields10 : us_main_type
+
+logic rayr__split_fields16 : nonnegative_float
+
+logic rayr__split_fields17 : normalized2pi
+
+logic rayl__split_fields16 : nonnegative_float
+
+logic rayl__split_fields17 : normalized2pi
+
+logic i8 : int
+
+logic gapvec__split_fields11 : us_main_type
+
+logic rayr__split_fields18 : nonnegative_float
+
+logic rayr__split_fields19 : normalized2pi
+
+logic rayl__split_fields18 : nonnegative_float
+
+logic rayl__split_fields19 : normalized2pi
+
+logic i9 : int
+
+logic result14 : nonnegative_float
+
+logic result15 : normalized2pi
+
+logic rayr__split_fields20 : nonnegative_float
+
+logic rayr__split_fields21 : normalized2pi
+
+logic result16 : nonnegative_float
+
+logic result17 : normalized2pi
+
+logic rayl__split_fields20 : nonnegative_float
+
+logic rayl__split_fields21 : normalized2pi
+
+logic algorithm__gap_vectors__append__container__fields3 : us_main_type
+
+axiom H : (1000 = to_rep4(gapvec__split_discrs))
+
+axiom H1 : in_range2(robotradius)
+
+axiom H2 : in_range2(mingapwidth)
+
+axiom H3 : in_range2(fmaxrange)
+
+axiom H4 : ((to_rep4(gapvec__split_discrs) = 1000) and (length({
   us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields }), last({
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields2 } }) <= 1))
+
+axiom H5 : (result6 = i)
+
+axiom H6 : (i1 = 2)
+
+axiom H7 : (2 <= i1)
+
+axiom H8 : (i1 <= 999)
+
+axiom H9 : ((to_rep4(gapvec__split_discrs) = 1000) and (length({
   us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields })) = length({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields }))) and
-  (keys_included_except(positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields }),
-  positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), last({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields
-  })) = true)) and (ole(positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), positions({ us_split_discrs1 =
-  { rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields
-  })) = true)) and (bool_eq9(get(model__({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields }),
-  length({ us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields })), { us_split_fields3 =
-  { rec__gaps__gap__bearing = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = o } }; rec__gaps__gap__distance = o1;
-  rec__gaps__gap__idir = o2 } }) = true)) and ((bool_le1(length1(model__({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 = gapvec__split_fields1 })),
-  length1(model__({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields
-  }))) = true) and
-  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 = gapvec__split_fields1 }))))) ->
-  (bool_eq9(get(model__({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), n), get(model__({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields }), n)) = true)))))) and
-  ((result3 = { us_split_fields__content2 = gapvec__split_fields1 }) and
-  (gapvec__split_fields2 = algorithm__gap_vectors__append__container__fields))) and
-  (algorithm__gap_vectors__append__container__fields1 = rho1))) or
-  ((not (le(mingapwidth, dist1) or
-  (eq(to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange) and
-  lt(to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange)))) and ((((le(dist1, neg(mingapwidth)) or
-  (eq(to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange) and
-  lt(to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange))) and ((({ us_split_fields3 = { rec__gaps__gap__bearing = {
-  us_split_fields1 = { rec__spaces__angles__angle__theta = o3 } };
-  rec__gaps__gap__distance = o4; rec__gaps__gap__idir = o5 }
-  } = create__2((rayl__split_fields1).rec__algorithm__laser_scan_data__second,
-  to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  1)) and ((((((length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1
-  }) = (length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }) + 1)) and (get1(positions({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields1 }), last({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields1 })) = length({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields1 }))) and
-  (keys_included_except(positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1 }),
-  positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), last({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1
-  })) = true)) and (ole(positions({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), positions({ us_split_discrs1 =
-  { rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1
-  })) = true)) and (bool_eq9(get(model__({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1 }),
-  length({ us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields1 })), {
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }) <  i2))
+
+axiom H10 : (((2 <= 999) -> in_range8(i2)) and ((2 <= i2) and (i2 <= 999)))
+
+axiom H11 : ((result7 = rayr__split_fields4) and
+  (result8 = rayr__split_fields5))
+
+axiom H12 : ((rayr__split_fields6 = rayl__split_fields4) and
+  (rayr__split_fields7 = rayl__split_fields5))
+
+axiom H13 : ((result9 = rayl__split_fields4) and
+  (result10 = rayl__split_fields5))
+
+axiom H14 : ({ rec__algorithm__laser_scan_data__first = rayl__split_fields6;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = rayl__split_fields7 } }
+  } = ((laserscan[i2])).us_split_fields9)
+
+axiom H15 :
+  ((algorithm__buildgapvector__B_9__dist__assume = sub(NearestTiesToEven,
+  to_rep(rayl__split_fields6), to_rep(rayr__split_fields6))) and
+  tqtisFinite(sub(NearestTiesToEven, to_rep(rayl__split_fields6),
+  to_rep(rayr__split_fields6))))
+
+axiom H16 : (algorithm__buildgapvector__B_9__dist__assume = dist1)
+
+axiom H17 : tqtisFinite(dist1)
+
+axiom H18 : ((le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange))) -> ({
   us_split_fields3 = { rec__gaps__gap__bearing = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = o3 } }; rec__gaps__gap__distance = o4;
-  rec__gaps__gap__idir = o5 } }) = true)) and ((bool_le1(length1(model__({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 = gapvec__split_fields1 })),
-  length1(model__({ us_split_discrs1 = {
+  rec__spaces__angles__angle__theta = o15 } }; rec__gaps__gap__distance =
+  o16; rec__gaps__gap__idir = o17 } } = create__2({ us_split_fields1 = {
+  rec__spaces__angles__angle__theta = rayr__split_fields7 } },
+  to_rep(rayr__split_fields6), (- 1))))
+
+axiom H19 : ((le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange))) ->
+  ((((((length({ us_split_discrs1 = {
   rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = algorithm__gap_vectors__append__container__fields1
-  }))) = true) and
-  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }) = (length({
   us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 = gapvec__split_fields1 }))))) ->
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }) + 1)) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }), last({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } })) = length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }))) and
+  (keys_included_except(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }), positions({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }), last({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } })) = true)) and
+  (ole(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } }), positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } })) = true)) and
   (bool_eq9(get(model__({ us_split_discrs1 = {
   rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = gapvec__split_fields1 }), n), get(model__({
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }), length({
   us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  gapvec__split_discrs }; us_split_fields5 =
-  algorithm__gap_vectors__append__container__fields1 }), n)) = true)))))) and
-  ((result4 = { us_split_fields__content2 = gapvec__split_fields1 }) and
-  (gapvec__split_fields3 = algorithm__gap_vectors__append__container__fields1)))) or
-  ((not (le(dist1, neg(mingapwidth)) or
-  (eq(to_rep((rayr__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange) and
-  lt(to_rep((rayl__split_fields1).rec__algorithm__laser_scan_data__first),
-  fmaxrange)))) and ((gapvec__split_fields3 = gapvec__split_fields1) and
-  ((algorithm__gap_vectors__append__container__fields1 = rho1) and
-  (gapvec__split_fields3 = gapvec__split_fields1))))) and
-  ((gapvec__split_fields2 = gapvec__split_fields3) and
-  ((algorithm__gap_vectors__append__container__fields = rho) and
-  (gapvec__split_fields2 = gapvec__split_fields3)))))) and
-  ((not (i2 = 999)) and ((result5 = { int__content = i2 }) and
-  (i3 = (i2 + 1))))))))) -> (to_rep4(gapvec__split_discrs) = 1000)))))))))))
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } })), {
+  us_split_fields3 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o15 } }; rec__gaps__gap__distance =
+  o16; rec__gaps__gap__idir = o17 } }) = true)) and
+  (((bool_le1(length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } })), length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }))) = true) ->
+  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }))))) ->
+  (bool_eq9(get(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } }), n), get(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }), n)) = true)))) and
+  (not (bool_le1(length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } })), length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields1 } }))) = false)))))
+
+axiom H20 : ((le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange))) ->
+  (result11 = gapvec__split_fields3))
+
+axiom H21 : ((le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange))) ->
+  (gapvec__split_fields4 = algorithm__gap_vectors__append__container__fields1))
+
+axiom H22 : ((le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange))) ->
+  (algorithm__gap_vectors__append__container__fields2 = rho1))
+
+axiom H23 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) -> ((le(dist1,
+  neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6), fmaxrange) and
+  lt(to_rep(rayl__split_fields6), fmaxrange))) -> ({ us_split_fields3 = {
+  rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o18 } }; rec__gaps__gap__distance =
+  o19; rec__gaps__gap__idir = o20 } } = create__2({ us_split_fields1 = {
+  rec__spaces__angles__angle__theta = rayl__split_fields7 } },
+  to_rep(rayl__split_fields6), 1))))
+
+axiom H24 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) -> ((le(dist1,
+  neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6), fmaxrange) and
+  lt(to_rep(rayl__split_fields6), fmaxrange))) -> ((((((length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }) = (length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }) + 1)) and
+  (get1(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }), last({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } })) = length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }))) and
+  (keys_included_except(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }), positions({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }), last({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } })) = true)) and
+  (ole(positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } }), positions({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } })) = true)) and
+  (bool_eq9(get(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }), length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } })), {
+  us_split_fields3 = { rec__gaps__gap__bearing = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = o18 } }; rec__gaps__gap__distance =
+  o19; rec__gaps__gap__idir = o20 } }) = true)) and
+  (((bool_le1(length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } })), length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }))) = true) ->
+  (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  gapvec__split_discrs }; us_split_fields5 = {
+  rec__algorithm__gap_vectors__list = gapvec__split_fields3 } }))))) ->
+  (bool_eq9(get(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } }), n), get(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }), n)) = true)))) and
+  (not (bool_le1(length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  gapvec__split_fields3 } })), length1(model__({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__append__container__fields2 } }))) = false))))))
+
+axiom H25 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) -> ((le(dist1,
+  neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6), fmaxrange) and
+  lt(to_rep(rayl__split_fields6), fmaxrange))) ->
+  (result12 = gapvec__split_fields3)))
+
+axiom H26 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) -> ((le(dist1,
+  neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6), fmaxrange) and
+  lt(to_rep(rayl__split_fields6), fmaxrange))) ->
+  (gapvec__split_fields5 = algorithm__gap_vectors__append__container__fields2)))
+
+axiom H27 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  ((not (le(dist1, neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6),
+  fmaxrange) and lt(to_rep(rayl__split_fields6), fmaxrange)))) ->
+  (gapvec__split_fields5 = gapvec__split_fields3)))
+
+axiom H28 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  ((not (le(dist1, neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6),
+  fmaxrange) and lt(to_rep(rayl__split_fields6), fmaxrange)))) ->
+  (algorithm__gap_vectors__append__container__fields2 = rho1)))
+
+axiom H29 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  ((not (le(dist1, neg(mingapwidth)) or (eq(to_rep(rayr__split_fields6),
+  fmaxrange) and lt(to_rep(rayl__split_fields6), fmaxrange)))) ->
+  (gapvec__split_fields5 = gapvec__split_fields3)))
+
+axiom H30 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  (gapvec__split_fields4 = gapvec__split_fields5))
+
+axiom H31 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  (algorithm__gap_vectors__append__container__fields1 = rho))
+
+axiom H32 : ((not (le(mingapwidth, dist1) or (eq(to_rep(rayl__split_fields6),
+  fmaxrange) and lt(to_rep(rayr__split_fields6), fmaxrange)))) ->
+  (gapvec__split_fields4 = gapvec__split_fields5))
+
+axiom H33 : (not (i2 = 999))
+
+axiom H34 : (result13 = i2)
+
+axiom H35 : (i3 = (i2 + 1))
+
+ (* File "algorithm.adb", line 132, characters 0-0 *)
+goal WP_parameter_def : (to_rep4(gapvec__split_discrs) = 1000)

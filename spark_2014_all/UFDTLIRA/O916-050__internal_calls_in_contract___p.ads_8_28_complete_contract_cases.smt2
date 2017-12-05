@@ -42,6 +42,7 @@
 (declare-fun internal__function_guard (Bool pt) Bool)
 (assert true)
 (assert (forall ((self__ pt)) (! (= (internal self__) true) :pattern ((internal self__)))))
+(declare-const self__ pt)
 (assert (not (<= 1 (+ 0 (ite (= (of_int 1) true) 1 0)))))
 (check-sat)
 (exit)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -307,7 +307,19 @@ logic temp___185 : int -> (int,integer) farray
 axiom def_axiom1 :
   (forall temp___187:int. ((temp___185(temp___187)[1]) = of_rep(temp___187)))
 
+logic one : int
+
+logic a : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+axiom H : in_range(one)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (one = 1)
+
  (* File "arr_aggregate.ads", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. (in_range(one) -> (in_range(b) -> ((one = 1) ->
-  (one = 1)))))
+goal WP_parameter_def : (one = 1)

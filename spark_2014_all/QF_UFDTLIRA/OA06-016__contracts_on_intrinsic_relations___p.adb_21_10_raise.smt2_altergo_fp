@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type ttime_spanB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function ttime_spanB__ref___projection(a: ttime_spanB__ref) : ttime_spanB =
 
 type time_span
 
-predicate in_range2(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range2(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
 
@@ -163,8 +163,18 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic result : bool
+
+axiom H : in_range2(x)
+
+axiom H1 : ((o = abs_int(x)) and in_range1(abs_int(x)))
+
+axiom H2 : (((0 <= o) -> (result = true)) and ((not (0 <= o)) ->
+  (result = false)))
+
+axiom H3 : (not (result = true))
+
  (* File "p.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (in_range2(x) -> ((((o = abs_int(x)) and
-  in_range1(abs_int(x))) and (((0 <= o) and (result = true)) or
-  ((not (0 <= o)) and (result = false)))) -> (result = true))))
+goal WP_parameter_def : false

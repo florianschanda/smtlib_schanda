@@ -100,6 +100,7 @@
 (declare-const x86__esi__result3 (_ BitVec 32))
 (declare-const x86__esi__result4 (_ BitVec 32))
 (declare-const x86__esi__result5 (_ BitVec 32))
+(assert true)
 (assert (= x86__esi__result1 x86__esi__result2))
 (assert (= x86__esi__result3 x86__esi__result1))
 (assert (= (mk_t__ref result) (mk_t__ref x86__esi__result)))

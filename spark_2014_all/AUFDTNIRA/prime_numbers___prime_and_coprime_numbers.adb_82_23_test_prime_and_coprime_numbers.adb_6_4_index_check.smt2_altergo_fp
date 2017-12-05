@@ -387,18 +387,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -487,30 +487,144 @@ function t62b__ref___projection(a: t62b__ref) : t62b = (a).t62b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "prime_and_coprime_numbers.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,bool) farray. forall index:int. forall o:int.
-  forall o1:bool. forall o2:(int,bool) farray. forall v:int. forall o3:bool.
-  forall o4:int. forall result:int. forall index1:int.
-  forall result1:(int,bool) farray. forall result__1:(int,bool) farray.
-  forall result__2:(int,bool) farray. forall index2:int. (in_range1(value) ->
-  ((2 <= value) -> ((({ int__content = result } = { int__content = index
-  }) and (index1 = 0)) -> (((0 <= index1) and (index1 <= 100000)) ->
-  ((((((o = euclid(value, index1)) and (in_range1(o) and
-  (((are_coprime(value, index1) = true) and (o = 1)) or
-  ((not (are_coprime(value, index1) = true)) and (1 <  o))))) and
-  (((o = 1) and (o1 = true)) or ((not (o = 1)) and (o1 = false)))) and
-  (o2 = (result__[index1 <- o1]))) and (({ map__content = result1 } = {
-  map__content = result__ }) and (result__1 = o2))) ->
-  ((forall v1:int. (((0 <= v1) and (v1 <= index2)) ->
-   (((result__2[v1]) = true) <-> (are_coprime(value, v1) = true)))) ->
-  (((((0 <= 100000) -> in_range3(index2)) and
+logic result__ : (int,bool) farray
+
+logic index : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result : (int,bool) farray
+
+logic temp___226 : (int,bool) farray
+
+logic temp___225 : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : (int,bool) farray
+
+logic v : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : (int,bool) farray
+
+logic result__1 : (int,bool) farray
+
+logic result : int
+
+logic index1 : int
+
+logic result1 : (int,bool) farray
+
+logic result__2 : (int,bool) farray
+
+logic result__3 : (int,bool) farray
+
+logic index2 : int
+
+logic result2 : int
+
+logic index3 : int
+
+logic result3 : (int,bool) farray
+
+logic result__4 : (int,bool) farray
+
+logic result__5 : (int,bool) farray
+
+logic index4 : int
+
+logic result__6 : (int,bool) farray
+
+logic index5 : int
+
+logic result__7 : (int,bool) farray
+
+logic index6 : int
+
+logic result__8 : (int,bool) farray
+
+logic index7 : int
+
+logic result__9 : (int,bool) farray
+
+logic index8 : int
+
+logic result__10 : (int,bool) farray
+
+logic index9 : int
+
+logic result4 : (int,bool) farray
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result1 : (int,bool) farray
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result2 : (int,bool) farray
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result3 : (int,bool) farray
+
+logic result__11 : (int,bool) farray
+
+logic index10 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result4 : (int,bool) farray
+
+logic result__12 : (int,bool) farray
+
+logic index11 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__result5 : (int,bool) farray
+
+axiom H : in_range1(value)
+
+axiom H1 : (2 <= value)
+
+axiom H2 : (result = index)
+
+axiom H3 : (index1 = 0)
+
+axiom H4 : (0 <= index1)
+
+axiom H5 : (index1 <= 100000)
+
+axiom H6 : ((o = euclid(value, index1)) and (in_range1(o) and
+  (((are_coprime(value, index1) = true) -> (o = 1)) and
+  ((not (are_coprime(value, index1) = true)) -> (1 <  o)))))
+
+axiom H7 : (((o = 1) -> (o1 = true)) and ((not (o = 1)) -> (o1 = false)))
+
+axiom H8 : (o2 = (result__[index1 <- o1]))
+
+axiom H9 : (result1 = result__)
+
+axiom H10 : (result__2 = o2)
+
+axiom H11 :
+  (forall v1:int. (((0 <= v1) and (v1 <= index2)) ->
+  (((result__3[v1]) = true) <-> (are_coprime(value, v1) = true))))
+
+axiom H12 : ((((0 <= 100000) -> in_range3(index2)) and
   (forall temp___227:int. (((0 <= temp___227) and (temp___227 <= 100000)) ->
   ((index2 <  temp___227) ->
-  ((result__2[temp___227]) = (result__[temp___227])))))) and
-  ((0 <= index2) and (index2 <= 100000))) -> (((0 <= v) and (v <= index2)) ->
-  ((((o3 = are_coprime(value, v)) and ((o3 = true) <-> (((0 <  value) and
-  (0 <  v)) and
+  ((result__3[temp___227]) = (result__[temp___227])))))) and
+  ((0 <= index2) and (index2 <= 100000)))
+
+axiom H13 : (0 <= v)
+
+axiom H14 : (v <= index2)
+
+axiom H15 : ((o3 = are_coprime(value, v)) and ((o3 = true) <->
+  (((0 <  value) and (0 <  v)) and
   (forall v1:int. (((2 <= v1) and (v1 <= min(value, v))) -> (not ((mod(value,
-  v1) = 0) and (mod(v, v1) = 0)))))))) and (o4 = to_int(o3))) ->
-  (0 <= v)))))))))))
+  v1) = 0) and (mod(v, v1) = 0))))))))
+
+axiom H16 : (o4 = to_int(o3))
+
+ (* File "prime_and_coprime_numbers.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (0 <= v)

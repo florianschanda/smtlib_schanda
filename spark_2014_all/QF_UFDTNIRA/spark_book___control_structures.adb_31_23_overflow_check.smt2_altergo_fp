@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,8 +113,21 @@ logic second : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range(first)
+
+axiom H1 : in_range(second)
+
+axiom H2 : ((o = abs_int(first)) and in_range(abs_int(first)))
+
+axiom H3 : (o1 = (2 * o))
+
  (* File "control_structures.adb", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (in_range(first) -> (in_range(second) ->
-  ((((o = abs_int(first)) and in_range(abs_int(first))) and
-  (o1 = (2 * o))) -> in_range(o1)))))
+goal WP_parameter_def : in_range(o1)

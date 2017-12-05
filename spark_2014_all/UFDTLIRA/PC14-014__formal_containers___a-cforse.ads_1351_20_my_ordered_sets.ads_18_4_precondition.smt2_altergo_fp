@@ -541,7 +541,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1255,35 +1255,67 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container2, witness1) = true)) ->
   in_range2(w_get(container2, witness1)))))
 
- (* File "a-cforse.ads", line 1330, characters 0-0 *)
-goal WP_parameter_def :
-  (forall position__split_fields:count_type. forall o:count_type.
-  forall o1:count_type. forall temp___1012:count_type. forall o2:us_rep2.
-  forall o3:int. (((((to_rep(o) = 0) and (o = o1)) and
-  (temp___1012 = o1)) and (temp___1012 = no_element)) ->
-  (((has_key(positions({ us_split_discrs1 = {
+logic position__split_fields : count_type
+
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___1012 : count_type
+
+logic o2 : us_rep2
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___1012 = o1)
+
+axiom H3 : (temp___1012 = no_element)
+
+axiom H4 : ((has_key(positions({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields1 = {
   rec__my_ordered_sets__n__set = container1 } }), { us_split_fields3 = {
   rec__my_ordered_sets__n__cursor__node = position__split_fields }
   }) = true) or (bool_eq4({ us_split_fields3 = {
   rec__my_ordered_sets__n__cursor__node = position__split_fields } }, {
   us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = no_element }
-  }) = true)) -> ((not (bool_eq4({ us_split_fields3 = {
+  }) = true))
+
+axiom H5 : (not (bool_eq4({ us_split_fields3 = {
   rec__my_ordered_sets__n__cursor__node = position__split_fields } }, {
   us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = no_element }
-  }) = true)) -> (((o3 = length({ us_split_discrs1 = {
+  }) = true))
+
+axiom H6 : ((o3 = length({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields1 = {
   rec__my_ordered_sets__n__set = container1 } })) and (in_range1(o3) and
-  (o3 <= to_rep(container)))) -> (((o2 = positions({ us_split_discrs1 = {
+  (o3 <= to_rep(container))))
+
+axiom H7 : ((o2 = positions({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields1 = {
   rec__my_ordered_sets__n__set = container1 } })) and ((not (has_key(o2, {
   us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = no_element }
   }) = true)) and
-  (forall i:us_rep1. ((has_key(o2, i) = true) -> (((1 <= get(o2, i)) and
-  (get(o2, i) <= length({ us_split_discrs1 = {
+  (forall i:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__my_ordered_sets__n__cursor__node = i } }) = true) -> (((1 <= get(o2, {
+  us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = i } })) and
+  (get(o2, { us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = i }
+  }) <= length({ us_split_discrs1 = {
   rec__my_ordered_sets__n__set__capacity = container }; us_split_fields1 = {
   rec__my_ordered_sets__n__set = container1 } }))) and
-  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get(o2, i) = get(o2,
-  j)) -> (bool_eq4(i, j) = true))))))))) -> (has_key(o2, { us_split_fields3 =
-  { rec__my_ordered_sets__n__cursor__node = position__split_fields }
-  }) = true)))))))
+  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__my_ordered_sets__n__cursor__node = j } }) = true) -> ((get(o2, {
+  us_split_fields3 = { rec__my_ordered_sets__n__cursor__node = i }
+  }) = get(o2, { us_split_fields3 = { rec__my_ordered_sets__n__cursor__node =
+  j } })) -> (bool_eq4({ us_split_fields3 = {
+  rec__my_ordered_sets__n__cursor__node = i } }, { us_split_fields3 = {
+  rec__my_ordered_sets__n__cursor__node = j } }) = true)))))))))
+
+ (* File "a-cforse.ads", line 1330, characters 0-0 *)
+goal WP_parameter_def : (has_key(o2, { us_split_fields3 = {
+  rec__my_ordered_sets__n__cursor__node = position__split_fields } }) = true)

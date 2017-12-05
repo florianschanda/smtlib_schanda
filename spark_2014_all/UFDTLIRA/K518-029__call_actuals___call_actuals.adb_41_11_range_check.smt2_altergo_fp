@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -146,7 +146,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type t
 
-predicate in_range2(x: int) = (((-20) <= x) and (x <= 20))
+predicate in_range2(x: int) = (((- 20) <= x) and (x <= 20))
 
 logic bool_eq3 : int, int -> bool
 
@@ -225,48 +225,191 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic g : int
+
+logic a1 : int
+
+logic a2 : int
+
+logic o : int
+
+logic call_actuals__fn__y : int
+
+logic o1 : int
+
+logic call_actuals__fn__x : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic call_actuals__fs__y : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic call_actuals__fs__x : int
+
+logic o16 : int
+
+logic o17 : integer
+
+logic o18 : int
+
+logic o19 : int
+
+logic a11 : int
+
+logic a21 : int
+
+logic call_actuals__fn__y1 : int
+
+logic call_actuals__fn__x1 : int
+
+logic result : int
+
+logic a12 : int
+
+logic result1 : int
+
+logic a22 : int
+
+logic call_actuals__ft__y : int
+
+logic call_actuals__ft__x : int
+
+logic result2 : int
+
+logic a13 : int
+
+logic result3 : int
+
+logic a23 : int
+
+logic call_actuals__fnt__y : int
+
+logic call_actuals__fnt__x : int
+
+logic result4 : int
+
+logic a14 : int
+
+logic result5 : int
+
+logic a24 : int
+
+logic call_actuals__fs__y1 : int
+
+logic call_actuals__fs__x1 : int
+
+logic result6 : int
+
+logic a15 : int
+
+axiom H : in_range(g)
+
+axiom H1 : in_range(a1)
+
+axiom H2 : in_range(a2)
+
+axiom H3 : ((a21 = (a11 + 1)) and (in_range(a11) and in_range(a21)))
+
+axiom H4 : ((o = a21) and in_range1(a21))
+
+axiom H5 : (o = call_actuals__fn__y)
+
+axiom H6 : ((o1 = a11) and in_range1(a11))
+
+axiom H7 : (o1 = call_actuals__fn__x)
+
+axiom H8 : ((call_actuals__fn__y1 = (call_actuals__fn__x1 + 1)) and
+  (in_range1(call_actuals__fn__x1) and in_range1(call_actuals__fn__y1)))
+
+axiom H9 : ((o2 = call_actuals__fn__x1) and in_range(call_actuals__fn__x1))
+
+axiom H10 : (a11 = result)
+
+axiom H11 : (a12 = o2)
+
+axiom H12 : ((o3 = call_actuals__fn__y1) and in_range(call_actuals__fn__y1))
+
+axiom H13 : (result1 = a21)
+
+axiom H14 : (a22 = o3)
+
+axiom H15 : ((call_actuals__ft__y = (call_actuals__ft__x + 1)) and
+  (in_range2(call_actuals__ft__x) and in_range2(call_actuals__ft__y)))
+
+axiom H16 : (to_rep(o4) = call_actuals__ft__x)
+
+axiom H17 : (o5 = to_rep(o4))
+
+axiom H18 : (result2 = a12)
+
+axiom H19 : (a13 = o5)
+
+axiom H20 : (to_rep(o6) = call_actuals__ft__y)
+
+axiom H21 : (o7 = to_rep(o6))
+
+axiom H22 : (result3 = a22)
+
+axiom H23 : (a23 = o7)
+
+axiom H24 : ((call_actuals__fnt__y = (call_actuals__fnt__x + 1)) and
+  (in_range4(call_actuals__fnt__x) and in_range4(call_actuals__fnt__y)))
+
+axiom H25 : (to_rep(o8) = call_actuals__fnt__x)
+
+axiom H26 : (o9 = to_rep(o8))
+
+axiom H27 : (result4 = a13)
+
+axiom H28 : (a14 = o9)
+
+axiom H29 : (to_rep(o10) = call_actuals__fnt__y)
+
+axiom H30 : (o11 = to_rep(o10))
+
+axiom H31 : (result5 = a23)
+
+axiom H32 : (a24 = o11)
+
+axiom H33 : ((o12 = a24) and in_range2(a24))
+
+axiom H34 : ((o13 = o12) and in_range3(o12))
+
+axiom H35 : (o13 = call_actuals__fs__y)
+
+axiom H36 : ((o14 = a14) and in_range2(a14))
+
+axiom H37 : ((o15 = o14) and in_range3(o14))
+
+axiom H38 : (o15 = call_actuals__fs__x)
+
+axiom H39 : ((call_actuals__fs__y1 = (call_actuals__fs__x1 + 1)) and
+  (in_range3(call_actuals__fs__x1) and in_range3(call_actuals__fs__y1)))
+
  (* File "call_actuals.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:int. forall a1:int. forall a2:int. forall o:int.
-  forall call_actuals__fn__y:int. forall o1:int.
-  forall call_actuals__fn__x:int. forall o2:int. forall o3:int.
-  forall o4:integer. forall o5:int. forall o6:integer. forall o7:int.
-  forall o8:integer. forall o9:int. forall o10:integer. forall o11:int.
-  forall o12:int. forall o13:int. forall call_actuals__fs__y:int.
-  forall o14:int. forall o15:int. forall call_actuals__fs__x:int.
-  forall a11:int. forall a21:int. forall call_actuals__fn__y1:int.
-  forall call_actuals__fn__x1:int. forall result:int. forall a12:int.
-  forall result1:int. forall a22:int. forall call_actuals__ft__y:int.
-  forall call_actuals__ft__x:int. forall result2:int. forall a13:int.
-  forall result3:int. forall a23:int. forall call_actuals__fnt__y:int.
-  forall call_actuals__fnt__x:int. forall result4:int. forall a14:int.
-  forall result5:int. forall a24:int. forall call_actuals__fs__y1:int.
-  forall call_actuals__fs__x1:int. (in_range(g) -> (in_range(a1) ->
-  (in_range(a2) -> (((a21 = (a11 + 1)) and (in_range(a11) and
-  in_range(a21))) -> (((((o = a21) and in_range1(a21)) and
-  (o = call_actuals__fn__y)) and ((((o1 = a11) and in_range1(a11)) and
-  (o1 = call_actuals__fn__x)) and
-  (((call_actuals__fn__y1 = (call_actuals__fn__x1 + 1)) and
-  (in_range1(call_actuals__fn__x1) and in_range1(call_actuals__fn__y1))) and
-  ((((o2 = call_actuals__fn__x1) and in_range(call_actuals__fn__x1)) and
-  ((a11 = result) and (a12 = o2))) and (((o3 = call_actuals__fn__y1) and
-  in_range(call_actuals__fn__y1)) and ((result1 = a21) and
-  (a22 = o3))))))) ->
-  ((((call_actuals__ft__y = (call_actuals__ft__x + 1)) and
-  (in_range2(call_actuals__ft__x) and in_range2(call_actuals__ft__y))) and
-  ((((to_rep(o4) = call_actuals__ft__x) and (o5 = to_rep(o4))) and
-  ((result2 = a12) and (a13 = o5))) and
-  (((to_rep(o6) = call_actuals__ft__y) and (o7 = to_rep(o6))) and
-  ((result3 = a22) and (a23 = o7))))) ->
-  ((((call_actuals__fnt__y = (call_actuals__fnt__x + 1)) and
-  (in_range4(call_actuals__fnt__x) and in_range4(call_actuals__fnt__y))) and
-  ((((to_rep(o8) = call_actuals__fnt__x) and (o9 = to_rep(o8))) and
-  ((result4 = a13) and (a14 = o9))) and
-  (((to_rep(o10) = call_actuals__fnt__y) and (o11 = to_rep(o10))) and
-  ((result5 = a23) and (a24 = o11))))) -> (((((o12 = a24) and
-  in_range2(a24)) and ((o13 = o12) and in_range3(o12))) and
-  (o13 = call_actuals__fs__y)) -> (((((o14 = a14) and in_range2(a14)) and
-  ((o15 = o14) and in_range3(o14))) and (o15 = call_actuals__fs__x)) ->
-  (((call_actuals__fs__y1 = (call_actuals__fs__x1 + 1)) and
-  (in_range3(call_actuals__fs__x1) and in_range3(call_actuals__fs__y1))) ->
-  in_range(call_actuals__fs__x1))))))))))))
+goal WP_parameter_def : in_range(call_actuals__fs__x1)

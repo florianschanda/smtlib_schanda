@@ -522,19 +522,31 @@ axiom is_empty__post_axiom1 :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = container1 }
   }) = 0)))
 
- (* File "a-cofove.ads", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___948:int. forall temp___951:capacity_range.
-  forall temp___9511:capacity_range1. forall temp___9512:us_main_type.
-  forall temp___9513:us_private. forall temp___9514:int.
-  (in_range(temp___948) -> (((to_rep(temp___951) = to_rep1(temp___9511)) and
+logic temp___948 : int
+
+logic temp___951 : capacity_range
+
+logic temp___9511 : capacity_range1
+
+logic temp___9512 : us_main_type
+
+logic temp___9513 : us_private
+
+logic temp___9514 : int
+
+axiom H : in_range(temp___948)
+
+axiom H1 : ((to_rep(temp___951) = to_rep1(temp___9511)) and
   ((temp___9514 = us_tag) and
   ((to_rep1(temp___9511) = to_rep(temp___951)) and (is_empty1({
   us_split_discrs1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity =
   temp___9511 }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = temp___9512 }
-  }) = true)))) -> (is_empty({ us_split_discrs3 = {
+  }) = true))))
+
+ (* File "a-cofove.ads", line 74, characters 0-0 *)
+goal WP_parameter_def : (is_empty({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity = temp___951 };
   us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -542,4 +554,4 @@ goal WP_parameter_def :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity =
   temp___9511 }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = temp___9512 }
-  }; rec__ext__ = temp___9513 }; attr__tag = temp___9514 }) = true))))
+  }; rec__ext__ = temp___9513 }; attr__tag = temp___9514 }) = true)

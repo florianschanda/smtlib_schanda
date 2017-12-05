@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -361,31 +361,91 @@ function t__ref___projection(a: t__ref) : us_rep = (a).t__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : bool
+
+logic x__split_fields2 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : bool
+
+logic o4 : (int,integer) farray
+
+logic temp___227 : integer
+
+logic temp___2271 : bool
+
+logic temp___2272 : (int,integer) farray
+
+logic result : integer
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic x__split_fields3 : integer
+
+logic x__split_fields4 : bool
+
+logic x__split_fields5 : (int,integer) farray
+
+logic x__split_fields6 : integer
+
+logic x__split_fields7 : bool
+
+logic x__split_fields8 : (int,integer) farray
+
+logic x__split_fields9 : integer
+
+logic x__split_fields10 : bool
+
+logic x__split_fields11 : (int,integer) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = (x__split_fields2[2 <- o]))
+
+axiom H2 : (x__split_fields = o2)
+
+axiom H3 : (x__split_fields1 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (temp___227 = o2)
+
+axiom H6 : (temp___2271 = o3)
+
+axiom H7 : (temp___2272 = o4)
+
+axiom H8 : (result = x__split_fields)
+
+axiom H9 : (result1 = x__split_fields1)
+
+axiom H10 : (result2 = x__split_fields2)
+
+axiom H11 : (temp___227 = x__split_fields3)
+
+axiom H12 : (temp___2271 = x__split_fields4)
+
+axiom H13 : (temp___2272 = x__split_fields5)
+
+axiom H14 : (x__split_fields6 = x__split_fields3)
+
+axiom H15 : (x__split_fields7 = x__split_fields4)
+
+axiom H16 : (x__split_fields8 = x__split_fields5)
+
+axiom H17 : (x__split_fields9 = x__split_fields3)
+
+axiom H18 : (x__split_fields10 = x__split_fields4)
+
+axiom H19 : (x__split_fields11 = x__split_fields5)
+
  (* File "test.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:bool.
-  forall x__split_fields2:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer. forall o3:bool.
-  forall o4:(int,integer) farray. forall temp___227:integer.
-  forall temp___2271:bool. forall temp___2272:(int,integer) farray.
-  forall result:integer. forall result1:bool.
-  forall result2:(int,integer) farray. forall x__split_fields3:integer.
-  forall x__split_fields4:bool. forall x__split_fields5:(int,integer) farray.
-  forall x__split_fields6:integer. forall x__split_fields7:bool.
-  forall x__split_fields8:(int,integer) farray.
-  forall x__split_fields9:integer. forall x__split_fields10:bool.
-  forall x__split_fields11:(int,integer) farray. (((((((to_rep(o) = 1) and
-  (o1 = (x__split_fields2[2 <- o]))) and ((x__split_fields = o2) and
-  ((x__split_fields1 = o3) and (o1 = o4)))) and ((temp___227 = o2) and
-  ((temp___2271 = o3) and (temp___2272 = o4)))) and
-  (((result = x__split_fields) and ((result1 = x__split_fields1) and
-  (result2 = x__split_fields2))) and ((temp___227 = x__split_fields3) and
-  ((temp___2271 = x__split_fields4) and
-  (temp___2272 = x__split_fields5))))) and
-  (((x__split_fields6 = x__split_fields3) and
-  ((x__split_fields7 = x__split_fields4) and
-  (x__split_fields8 = x__split_fields5))) and
-  ((x__split_fields9 = x__split_fields3) and
-  ((x__split_fields10 = x__split_fields4) and
-  (x__split_fields11 = x__split_fields5))))) ->
-  (to_rep((x__split_fields8[2])) = 1)))
+goal WP_parameter_def : (to_rep((x__split_fields8[2])) = 1)

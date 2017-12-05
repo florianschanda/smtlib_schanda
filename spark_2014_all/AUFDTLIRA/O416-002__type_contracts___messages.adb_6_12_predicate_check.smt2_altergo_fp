@@ -382,10 +382,14 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic m__split_fields : (int,character) farray
+
+logic m__split_fields1 : (int,character) farray
+
+axiom H : (compare(i1s, 1, 10, i1s1, 1, 10) <= 0)
+
+axiom H1 : (compare(m__split_fields, 1, 10, m__split_fields1, 1, 10) <= 0)
+
  (* File "messages.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m__split_fields:(int,character) farray.
-  forall m__split_fields1:(int,character) farray. ((compare(i1s, 1, 10, i1s1,
-  1, 10) <= 0) -> ((compare(m__split_fields, 1, 10, m__split_fields1, 1,
-  10) <= 0) -> (compare(m__split_fields1, 1, 10, m__split_fields, 1,
-  10) <= 0))))
+goal WP_parameter_def : (compare(m__split_fields1, 1, 10, m__split_fields, 1,
+  10) <= 0)

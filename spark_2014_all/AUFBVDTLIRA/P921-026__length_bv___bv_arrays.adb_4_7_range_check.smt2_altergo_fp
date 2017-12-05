@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1118,5 +1118,55 @@ axiom def_axiom :
   (forall temp___165:t. (((bv_arrays__create__a__aggregate_def(temp___162,
   temp___163, temp___164)).elts2[temp___165]) = of_rep1(temp___162))))))
 
+logic a : (t,natural) farray
+
+logic bv_arrays__create__result : (t,natural) farray
+
+logic bv_arrays__create__result1 : t1
+
+logic temp___167 : (t,natural) farray
+
+logic temp___1671 : t3
+
+logic bv_arrays__create__a__assume : (t,natural) farray
+
+logic bv_arrays__create__a__assume1 : t2
+
+logic result : (t,natural) farray
+
+logic a1 : (t,natural) farray
+
+logic result1 : (t,natural) farray
+
+logic result2 : t1
+
+logic bv_arrays__create__result2 : (t,natural) farray
+
+logic bv_arrays__create__result3 : t1
+
+logic bv_arrays__create__result4 : (t,natural) farray
+
+logic bv_arrays__create__result5 : t1
+
+logic bv_arrays__create__result6 : (t,natural) farray
+
+logic bv_arrays__create__result7 : t1
+
+logic a2 : (t,natural) farray
+
+logic bv_arrays__create__result8 : (t,natural) farray
+
+logic bv_arrays__create__result9 : t1
+
+logic a3 : (t,natural) farray
+
+logic bv_arrays__create__result10 : (t,natural) farray
+
+logic bv_arrays__create__result11 : t1
+
+axiom H : true
+
+axiom H1 : ule(of_int(0), c)
+
  (* File "bv_arrays.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (ule(of_int(0), c) -> uge(of_int(0), of_int(0)))
+goal WP_parameter_def : uge(of_int(0), of_int(0))

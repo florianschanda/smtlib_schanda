@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -208,14 +208,211 @@ function t22b__ref___projection(a1: t22b__ref) : integer = (a1).t22b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic r : int
+
+logic i : int
+
+logic i1 : int
+
+logic arithmetic__plus__result : int
+
+logic o : int
+
+logic temp___167 : int
+
+logic temp___166 : int
+
+logic temp___168 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___162 : int
+
+logic temp___161 : int
+
+logic temp___163 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic i4 : int
+
+logic result2 : int
+
+logic r2 : int
+
+logic r3 : int
+
+logic i5 : int
+
+logic result3 : int
+
+logic i6 : int
+
+logic result4 : int
+
+logic r4 : int
+
+logic r5 : int
+
+logic i7 : int
+
+logic r6 : int
+
+logic i8 : int
+
+logic r7 : int
+
+logic i9 : int
+
+logic r8 : int
+
+logic i10 : int
+
+logic r9 : int
+
+logic i11 : int
+
+logic r10 : int
+
+logic i12 : int
+
+logic result5 : int
+
+logic i13 : int
+
+logic result6 : int
+
+logic r11 : int
+
+logic r12 : int
+
+logic i14 : int
+
+logic result7 : int
+
+logic i15 : int
+
+logic result8 : int
+
+logic r13 : int
+
+logic r14 : int
+
+logic i16 : int
+
+logic r15 : int
+
+logic i17 : int
+
+logic r16 : int
+
+logic i18 : int
+
+logic r17 : int
+
+logic i19 : int
+
+logic r18 : int
+
+logic i20 : int
+
+logic r19 : int
+
+logic i21 : int
+
+logic r20 : int
+
+logic i22 : int
+
+logic i23 : int
+
+logic r21 : int
+
+logic i24 : int
+
+logic i25 : int
+
+logic result9 : int
+
+logic arithmetic__plus__result1 : int
+
+logic arithmetic__plus__result2 : int
+
+logic arithmetic__plus__result3 : int
+
+logic r22 : int
+
+logic i26 : int
+
+logic i27 : int
+
+logic arithmetic__plus__result4 : int
+
+logic r23 : int
+
+logic i28 : int
+
+logic i29 : int
+
+logic arithmetic__plus__result5 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : in_range1((a + b))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(r))
+
+axiom H4 : (result = r)
+
+axiom H5 : (r1 = a)
+
+axiom H6 : (not (0 <= b))
+
+axiom H7 : (result5 = i1)
+
+axiom H8 : (i13 = (- 1))
+
+axiom H9 : (b <= i13)
+
+axiom H10 : (i13 <= (- 1))
+
+axiom H11 : ((o6 = r1) and (not (r1 = (- 2147483648))))
+
+axiom H12 : (o7 = (o6 - 1))
+
+axiom H13 : (r1 = result6)
+
+axiom H14 : (r11 = o7)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall i:int. forall o:int. forall o1:int.
-  forall result:int. forall r1:int. forall result1:int. forall i1:int.
-  forall result2:int. forall r2:int. (in_range1(a) -> (in_range1(b) ->
-  (in_range1((a + b)) -> ((((-2147483648) <= 2147483647) -> in_range1(r)) ->
-  ((({ int__content = result } = { int__content = r }) and (r1 = a)) ->
-  ((not (0 <= b)) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = (-1))) -> (((b <= i1) and (i1 <= (-1))) -> (((((o = r1) and
-  (not (r1 = (-2147483648)))) and (o1 = (o - 1))) and ((r1 = result2) and
-  (r2 = o1))) -> (r2 = (a + i1))))))))))))
+goal WP_parameter_def : (r11 = (a + i13))

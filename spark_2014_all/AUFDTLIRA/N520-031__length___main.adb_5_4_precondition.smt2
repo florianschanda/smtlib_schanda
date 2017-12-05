@@ -108,6 +108,7 @@
 (declare-const o1 integer)
 (declare-const result (Array Int integer))
 (declare-const v1 (Array Int integer))
+(declare-const p__swap__v (Array Int integer))
 (assert (= result v))
 (assert (= v1 (main__v__aggregate_def 0)))
 (assert (= (to_rep o1) 100))

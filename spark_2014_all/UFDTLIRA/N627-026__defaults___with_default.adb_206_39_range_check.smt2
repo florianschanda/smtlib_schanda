@@ -114,6 +114,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (define-fun default_initial_assumption1 ((temp___expr_510 us_rep) (temp___skip_top_level_511 Bool)) Bool (and (= (attr__constrained temp___expr_510) false) (= (to_rep1 (rec__with_default__bad_nested_defaults1__empty_rec__d (us_split_discrs1 temp___expr_510))) c)))
+(declare-const temp___658 Int)
 (assert (in_range c))
 (assert (not (in_range1 c)))
 (check-sat)

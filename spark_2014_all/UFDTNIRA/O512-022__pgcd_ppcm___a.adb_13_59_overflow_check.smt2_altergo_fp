@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -257,34 +257,223 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ao:int. forall an:int. forall bn:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall result:int. forall an1:int. forall result1:int. forall bn1:int.
-  forall ao1:int. forall an2:int. forall bn2:int. forall result2:bool.
-  forall result3:bool. forall result4:bool. (in_range1(a) -> (in_range1(b) ->
-  (((not (a = (-2147483648))) and (not (b = (-2147483648)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(ao)) -> ((({ int__content =
-  result } = { int__content = an }) and (an1 = a)) -> (in_range1(an1) -> ((({
-  int__content = result1 } = { int__content = bn }) and (bn1 = b)) ->
-  (in_range1(bn1) -> ((not (bn1 = 0)) -> (((((not (an2 = (-2147483648))) and
-  (not (bn2 = (-2147483648)))) and ((abs_int(an2) <= abs_int(a)) or
+logic ao : int
+
+logic an : int
+
+logic bn : int
+
+logic a__pgcd__result : int
+
+logic temp___134 : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic temp___135 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic ao1 : int
+
+logic result : int
+
+logic an1 : int
+
+logic result1 : int
+
+logic bn1 : int
+
+logic ao2 : int
+
+logic an2 : int
+
+logic bn2 : int
+
+logic temp___1351 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic temp___1352 : int
+
+logic result6 : int
+
+logic ao3 : int
+
+logic result7 : int
+
+logic an3 : int
+
+logic result8 : int
+
+logic bn3 : int
+
+logic ao4 : int
+
+logic an4 : int
+
+logic bn4 : int
+
+logic temp___1353 : int
+
+logic ao5 : int
+
+logic an5 : int
+
+logic bn5 : int
+
+logic temp___1354 : int
+
+logic ao6 : int
+
+logic an6 : int
+
+logic bn6 : int
+
+logic ao7 : int
+
+logic an7 : int
+
+logic bn7 : int
+
+logic ao8 : int
+
+logic an8 : int
+
+logic bn8 : int
+
+logic ao9 : int
+
+logic an9 : int
+
+logic bn9 : int
+
+logic result9 : int
+
+logic a__pgcd__result1 : int
+
+logic a__pgcd__result2 : int
+
+logic a__pgcd__result3 : int
+
+logic ao10 : int
+
+logic an10 : int
+
+logic bn10 : int
+
+logic a__pgcd__result4 : int
+
+logic ao11 : int
+
+logic an11 : int
+
+logic bn11 : int
+
+logic a__pgcd__result5 : int
+
+logic result10 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : ((not (a = (- 2147483648))) and (not (b = (- 2147483648))))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(ao))
+
+axiom H4 : (result = an)
+
+axiom H5 : (an1 = a)
+
+axiom H6 : in_range1(an1)
+
+axiom H7 : (result1 = bn)
+
+axiom H8 : (bn1 = b)
+
+axiom H9 : in_range1(bn1)
+
+axiom H10 : (not (bn1 = 0))
+
+axiom H11 : ((((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) and ((abs_int(an2) <= abs_int(a)) or
   (abs_int(an2) <= abs_int(b)))) and ((abs_int(bn2) <= abs_int(a)) or
-  (abs_int(bn2) <= abs_int(b)))) -> (((((((-2147483648) <= 2147483647) ->
-  in_range1(ao1)) and (((-2147483648) <= 2147483647) -> in_range1(an2))) and
-  (((-2147483648) <= 2147483647) -> in_range1(bn2))) and (not (bn2 = 0))) ->
-  (((((not (an2 = (-2147483648))) and (not (bn2 = (-2147483648)))) and
-  ((((o4 = abs_int(a)) and in_range1(abs_int(a))) and
-  (((o5 = abs_int(an2)) and in_range1(abs_int(an2))) and (((o5 <= o4) and
-  (result3 = true)) or ((not (o5 <= o4)) and (result3 = false))))) and
-  (((result3 = true) and (result2 = true)) or ((not (result3 = true)) and
-  (((o2 = abs_int(b)) and in_range1(abs_int(b))) and
-  (((o3 = abs_int(an2)) and in_range1(abs_int(an2))) and (((o3 <= o2) and
-  (result2 = true)) or ((not (o3 <= o2)) and (result2 = false))))))))) or
-  ((not ((not (an2 = (-2147483648))) and (not (bn2 = (-2147483648))))) and
-  (result2 = false))) -> ((result2 = true) -> ((((o = abs_int(a)) and
-  in_range1(abs_int(a))) and (((o1 = abs_int(bn2)) and
-  in_range1(abs_int(bn2))) and (((o1 <= o) and (result4 = true)) or
-  ((not (o1 <= o)) and (result4 = false))))) -> ((not (result4 = true)) ->
-  in_range1(abs_int(b))))))))))))))))))
+  (abs_int(bn2) <= abs_int(b))))
+
+axiom H12 : ((((((- 2147483648) <= 2147483647) -> in_range1(ao2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(an2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(bn2))) and (not (bn2 = 0)))
+
+axiom H13 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((o6 = abs_int(a)) and
+  in_range1(abs_int(a))))
+
+axiom H14 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((o7 = abs_int(an2)) and
+  in_range1(abs_int(an2))))
+
+axiom H15 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> (((o7 <= o6) -> (result3 = true)) and
+  ((not (o7 <= o6)) -> (result3 = false))))
+
+axiom H16 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((result3 = true) -> (result2 = true)))
+
+axiom H17 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((not (result3 = true)) ->
+  ((o4 = abs_int(b)) and in_range1(abs_int(b)))))
+
+axiom H18 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((not (result3 = true)) ->
+  ((o5 = abs_int(an2)) and in_range1(abs_int(an2)))))
+
+axiom H19 : (((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648)))) -> ((not (result3 = true)) -> (((o5 <= o4) ->
+  (result2 = true)) and ((not (o5 <= o4)) -> (result2 = false)))))
+
+axiom H20 : ((not ((not (an2 = (- 2147483648))) and
+  (not (bn2 = (- 2147483648))))) -> (result2 = false))
+
+axiom H21 : (result2 = true)
+
+axiom H22 : ((o2 = abs_int(a)) and in_range1(abs_int(a)))
+
+axiom H23 : ((o3 = abs_int(bn2)) and in_range1(abs_int(bn2)))
+
+axiom H24 : (((o3 <= o2) -> (result4 = true)) and ((not (o3 <= o2)) ->
+  (result4 = false)))
+
+axiom H25 : (not (result4 = true))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(abs_int(b))

@@ -386,7 +386,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -825,6 +825,109 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic record_discr__search_upto_3__result : bool
+
+logic record_discr__search_upto_3__result1 : us_main_type
+
+logic o : bool
+
+logic o1 : us_main_type
+
+logic o2 : bool
+
+logic o3 : us_main_type
+
+logic o4 : bool
+
+logic o5 : us_main_type
+
+logic o6 : bool
+
+logic o7 : us_main_type
+
+logic temp___251 : int
+
+logic o8 : int
+
+logic i : int
+
+logic result : bool
+
+logic result1 : us_main_type
+
+logic record_discr__search_upto_3__result2 : bool
+
+logic record_discr__search_upto_3__result3 : us_main_type
+
+logic result2 : bool
+
+logic result3 : us_main_type
+
+logic record_discr__search_upto_3__result4 : bool
+
+logic record_discr__search_upto_3__result5 : us_main_type
+
+logic result4 : bool
+
+logic result5 : us_main_type
+
+logic record_discr__search_upto_3__result6 : bool
+
+logic record_discr__search_upto_3__result7 : us_main_type
+
+logic result6 : bool
+
+logic result7 : us_main_type
+
+logic record_discr__search_upto_3__result8 : bool
+
+logic record_discr__search_upto_3__result9 : us_main_type
+
+logic record_discr__search_upto_3__result10 : bool
+
+logic record_discr__search_upto_3__result11 : us_main_type
+
+logic record_discr__search_upto_3__result12 : bool
+
+logic record_discr__search_upto_3__result13 : us_main_type
+
+logic record_discr__search_upto_3__result14 : bool
+
+logic record_discr__search_upto_3__result15 : us_main_type
+
+logic record_discr__search_upto_3__result16 : bool
+
+logic record_discr__search_upto_3__result17 : us_main_type
+
+logic record_discr__search_upto_3__result18 : bool
+
+logic record_discr__search_upto_3__result19 : us_main_type
+
+logic record_discr__search_upto_3__result20 : bool
+
+logic record_discr__search_upto_3__result21 : us_main_type
+
+logic record_discr__search_upto_3__result22 : bool
+
+logic record_discr__search_upto_3__result23 : us_main_type
+
+logic record_discr__search_upto_3__result24 : bool
+
+logic record_discr__search_upto_3__result25 : us_main_type
+
+logic record_discr__search_upto_3__result26 : bool
+
+logic record_discr__search_upto_3__result27 : us_main_type
+
+logic record_discr__search_upto_3__result28 : bool
+
+logic record_discr__search_upto_3__result29 : us_main_type
+
+logic result8 : bool
+
+axiom H : (3 = to_rep(r))
+
+axiom H1 : in_range1(e)
+
  (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : ((3 = to_rep(r)) -> (in_range1(e) ->
-  (to_rep(r) = 3)))
+goal WP_parameter_def : (to_rep(r) = 3)

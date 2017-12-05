@@ -42,6 +42,7 @@
 (declare-const condition Bool)
 (declare-const x Int)
 (declare-const y Int)
+(declare-const o Int)
 (declare-const result Bool)
 (declare-const condition1 Bool)
 (assert (in_range1 x))

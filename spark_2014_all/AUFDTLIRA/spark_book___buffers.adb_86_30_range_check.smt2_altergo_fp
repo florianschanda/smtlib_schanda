@@ -327,26 +327,152 @@ axiom def_axiom :
   (forall temp___238:int.
   ((temp___235(temp___237)[temp___238]) = of_rep(temp___237))))
 
+logic buffer : (int,character) farray
+
+logic valid : int
+
+logic workspace : (int,character) farray
+
+logic offset : int
+
+logic i : int
+
+logic i1 : int
+
+logic temp___243 : int
+
+logic temp___241 : (int,character) farray
+
+logic temp___240 : int
+
+logic o : character
+
+logic o1 : int
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : character
+
+logic result : (int,character) farray
+
+logic workspace1 : (int,character) farray
+
+logic result1 : int
+
+logic offset1 : int
+
+logic result2 : int
+
+logic i2 : int
+
+logic workspace2 : (int,character) farray
+
+logic offset2 : int
+
+logic i3 : int
+
+logic result3 : (int,character) farray
+
+logic workspace3 : (int,character) farray
+
+logic result4 : int
+
+logic offset3 : int
+
+logic result5 : int
+
+logic i4 : int
+
+logic workspace4 : (int,character) farray
+
+logic offset4 : int
+
+logic i5 : int
+
+logic workspace5 : (int,character) farray
+
+logic offset5 : int
+
+logic i6 : int
+
+logic workspace6 : (int,character) farray
+
+logic offset6 : int
+
+logic i7 : int
+
+logic workspace7 : (int,character) farray
+
+logic offset7 : int
+
+logic i8 : int
+
+logic workspace8 : (int,character) farray
+
+logic offset8 : int
+
+logic i9 : int
+
+logic workspace9 : (int,character) farray
+
+logic offset9 : int
+
+logic i10 : int
+
+logic result6 : int
+
+logic valid1 : int
+
+logic result7 : int
+
+logic i11 : int
+
+logic i12 : int
+
+axiom H : in_range1(erase_character)
+
+axiom H1 : in_range1(fill_character)
+
+axiom H2 : ((0 <= 1024) -> in_range2(valid))
+
+axiom H3 : ((0 <= 1024) -> in_range2(offset))
+
+axiom H4 : (result = workspace)
+
+axiom H5 : (workspace1 = temp___235(32))
+
+axiom H6 : (result1 = offset)
+
+axiom H7 : (offset1 = 0)
+
+axiom H8 : (result2 = i)
+
+axiom H9 : (i2 = 1)
+
+axiom H10 : (1 <= i2)
+
+axiom H11 : (i2 <= 1024)
+
+axiom H12 : (offset2 <  i3)
+
+axiom H13 : ((((1 <= 1024) -> in_range3(i3)) and ((0 <= 1024) ->
+  in_range2(offset2))) and ((1 <= i3) and (i3 <= 1024)))
+
+axiom H14 : (not (to_rep((buffer[i3])) = erase_character))
+
+axiom H15 : (to_rep(o) = to_rep((buffer[i3])))
+
+axiom H16 : ((1 <= (1 + offset2)) and ((1 + offset2) <= 1024))
+
+axiom H17 : (o1 = (1 + offset2))
+
+axiom H18 : (o2 = (workspace2[o1 <- o]))
+
+axiom H19 : (workspace2 = result3)
+
+axiom H20 : (workspace3 = o2)
+
  (* File "buffers.adb", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(int,character) farray. forall valid:int.
-  forall workspace:(int,character) farray. forall offset:int. forall i:int.
-  forall o:character. forall o1:int. forall o2:(int,character) farray.
-  forall result:(int,character) farray.
-  forall workspace1:(int,character) farray. forall result1:int.
-  forall offset1:int. forall result2:int. forall i1:int.
-  forall workspace2:(int,character) farray. forall offset2:int.
-  forall i2:int. forall result3:(int,character) farray.
-  forall workspace3:(int,character) farray. (in_range1(erase_character) ->
-  (in_range1(fill_character) -> (((0 <= 1024) -> in_range2(valid)) ->
-  (((0 <= 1024) -> in_range2(offset)) -> (((result = workspace) and
-  (workspace1 = temp___235(32))) -> (((result1 = offset) and
-  (offset1 = 0)) -> ((({ int__content = result2 } = { int__content = i }) and
-  (i1 = 1)) -> (((1 <= i1) and (i1 <= 1024)) -> ((offset2 <  i2) ->
-  (((((1 <= 1024) -> in_range3(i2)) and ((0 <= 1024) ->
-  in_range2(offset2))) and ((1 <= i2) and (i2 <= 1024))) ->
-  ((not (to_rep((buffer[i2])) = erase_character)) ->
-  ((((to_rep(o) = to_rep((buffer[i2]))) and ((((1 <= (1 + offset2)) and
-  ((1 + offset2) <= 1024)) and (o1 = (1 + offset2))) and
-  (o2 = (workspace2[o1 <- o])))) and ((workspace2 = result3) and
-  (workspace3 = o2))) -> in_range2((offset2 + 1)))))))))))))))
+goal WP_parameter_def : in_range2((offset2 + 1))

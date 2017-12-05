@@ -49,6 +49,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_177 Int) (temp___is_init_174 Bool) (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool)) Bool (and (=> (or (= temp___is_init_174 true) (<= (- 10) 10)) (in_range2 temp___expr_177)) (=> (= temp___do_toplevel_176 true) (=> (= temp___is_init_174 true) (and (<= (- 1) temp___expr_177) (<= temp___expr_177 1))))))
 (define-fun dynamic_predicate ((temp___181 Int)) Bool (and (<= (- 1) temp___181) (<= temp___181 1)))
+(declare-const temp___185 Int)
 (assert (in_range1 x))
 (assert (and (in_range2 x) (let ((temp___188 x)) (and (<= (- 1) temp___188) (<= temp___188 1)))))
 (assert (not (in_range2 x)))

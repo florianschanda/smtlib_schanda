@@ -659,27 +659,132 @@ axiom def_axiom1 :
   (forall temp___531:int.
   ((temp___528(temp___530)[temp___531]) = of_rep1(temp___530))))
 
- (* File "stable_marriage.adb", line 127, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,(int,ranking) farray) farray. forall g2:int.
-  forall prev:int. forall o:int. forall o1:(int,group1_id) farray.
-  forall result:(int,(int,ranking) farray) farray.
-  forall result__1:(int,(int,ranking) farray) farray. forall result1:int.
-  forall g21:int. forall result__2:(int,(int,ranking) farray) farray.
-  forall g22:int.
-  ((forall g23:int. (((1 <= g23) and (g23 <= 64)) ->
-   (is_permutation_1((r2[g23])) = true))) ->
-  ((({ map__content3 = result } = { map__content3 = result__ }) and
-  (result__1 = temp___524(temp___528(64)))) -> ((({ int__content = result1
-  } = { int__content = g2 }) and (g21 = 1)) -> (((1 <= g21) and
-  (g21 <= 64)) ->
-  ((forall prev1:int. (((1 <= prev1) and (prev1 <= (g22 - 1))) ->
-   (bool_eq7((result__2[prev1]), 1, 64, invert_1((r2[prev1])), 1,
-   64) = true))) ->
-  (((((1 <= 64) -> in_range2(g22)) and
+logic result__ : (int,(int,ranking) farray) farray
+
+logic g2 : int
+
+logic stable_marriage__matching__invert__result : (int,(int,ranking) farray) farray
+
+logic temp___533 : (int,(int,ranking) farray) farray
+
+logic temp___532 : int
+
+logic prev : int
+
+logic o : int
+
+logic o1 : (int,group1_id) farray
+
+logic temp___536 : (int,ranking) farray
+
+logic o2 : (int,ranking) farray
+
+logic o3 : (int,(int,ranking) farray) farray
+
+logic g21 : int
+
+logic temp___544 : (int,ranking) farray
+
+logic result : (int,(int,ranking) farray) farray
+
+logic result__1 : (int,(int,ranking) farray) farray
+
+logic result1 : int
+
+logic g22 : int
+
+logic result__2 : (int,(int,ranking) farray) farray
+
+logic g23 : int
+
+logic result2 : (int,(int,ranking) farray) farray
+
+logic result__3 : (int,(int,ranking) farray) farray
+
+logic result3 : int
+
+logic g24 : int
+
+logic result__4 : (int,(int,ranking) farray) farray
+
+logic g25 : int
+
+logic result__5 : (int,(int,ranking) farray) farray
+
+logic g26 : int
+
+logic result__6 : (int,(int,ranking) farray) farray
+
+logic g27 : int
+
+logic result__7 : (int,(int,ranking) farray) farray
+
+logic g28 : int
+
+logic result__8 : (int,(int,ranking) farray) farray
+
+logic g29 : int
+
+logic result__9 : (int,(int,ranking) farray) farray
+
+logic g210 : int
+
+logic result4 : (int,(int,ranking) farray) farray
+
+logic stable_marriage__matching__invert__result1 : (int,(int,ranking) farray) farray
+
+logic stable_marriage__matching__invert__result2 : (int,(int,ranking) farray) farray
+
+logic stable_marriage__matching__invert__result3 : (int,(int,ranking) farray) farray
+
+logic result__10 : (int,(int,ranking) farray) farray
+
+logic g211 : int
+
+logic stable_marriage__matching__invert__result4 : (int,(int,ranking) farray) farray
+
+logic result__11 : (int,(int,ranking) farray) farray
+
+logic g212 : int
+
+logic stable_marriage__matching__invert__result5 : (int,(int,ranking) farray) farray
+
+axiom H :
+  (forall g213:int. (((1 <= g213) and (g213 <= 64)) ->
+  (is_permutation_1((r2[g213])) = true)))
+
+axiom H1 : (result = result__)
+
+axiom H2 : (result__1 = temp___524(temp___528(64)))
+
+axiom H3 : (result1 = g2)
+
+axiom H4 : (g22 = 1)
+
+axiom H5 : (1 <= g22)
+
+axiom H6 : (g22 <= 64)
+
+axiom H7 :
+  (forall prev1:int. (((1 <= prev1) and (prev1 <= (g23 - 1))) ->
+  (bool_eq7((result__2[prev1]), 1, 64, invert_1((r2[prev1])), 1,
+  64) = true)))
+
+axiom H8 : ((((1 <= 64) -> in_range2(g23)) and
   (forall temp___534:int. (((1 <= temp___534) and (temp___534 <= 64)) ->
-  ((g22 <= temp___534) ->
-  ((result__2[temp___534]) = (result__1[temp___534])))))) and ((1 <= g22) and
-  (g22 <= 64))) -> (((1 <= prev) and (prev <= (g22 - 1))) ->
-  (((((1 <= prev) and (prev <= 64)) and (o = prev)) and (o1 = (r2[o]))) ->
-  (is_permutation_1(o1) = true))))))))))
+  ((g23 <= temp___534) ->
+  ((result__2[temp___534]) = (result__1[temp___534])))))) and ((1 <= g23) and
+  (g23 <= 64)))
+
+axiom H9 : (1 <= prev)
+
+axiom H10 : (prev <= (g23 - 1))
+
+axiom H11 : ((1 <= prev) and (prev <= 64))
+
+axiom H12 : (o = prev)
+
+axiom H13 : (o1 = (r2[o]))
+
+ (* File "stable_marriage.adb", line 127, characters 0-0 *)
+goal WP_parameter_def : (is_permutation_1(o1) = true)

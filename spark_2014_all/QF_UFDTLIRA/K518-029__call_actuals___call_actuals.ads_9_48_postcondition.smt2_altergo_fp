@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type t
 
-predicate in_range1(x: int) = (((-20) <= x) and (x <= 20))
+predicate in_range1(x: int) = (((- 20) <= x) and (x <= 20))
 
 logic bool_eq2 : int, int -> bool
 
@@ -136,14 +136,65 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic y : int
+
+logic g : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic x3 : int
+
+logic y3 : int
+
+axiom H : in_range(g)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : in_range1(y)
+
+axiom H3 : ((o = g) and in_range1(g))
+
+axiom H4 : (result = x)
+
+axiom H5 : (x1 = o)
+
+axiom H6 : ((o1 = g) and in_range1(g))
+
+axiom H7 : (o2 = (o1 + 1))
+
+axiom H8 : ((o3 = o2) and in_range1(o2))
+
+axiom H9 : (result1 = y)
+
+axiom H10 : (y1 = o3)
+
+axiom H11 : (y1 = y2)
+
+axiom H12 : (x1 = x2)
+
+axiom H13 : (y3 = y1)
+
+axiom H14 : (x3 = x1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall g:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall result:int. forall x1:int.
-  forall result1:int. forall y1:int. forall x2:int. forall y2:int.
-  forall x3:int. forall y3:int. ((in_range(g) and (in_range1(x) and
-  (in_range1(y) and (((((o = g) and in_range1(g)) and (({ int__content =
-  result } = { int__content = x }) and (x1 = o))) and (((((o1 = g) and
-  in_range1(g)) and (o2 = (o1 + 1))) and ((o3 = o2) and in_range1(o2))) and
-  ((result1 = y) and (y1 = o3)))) and (((y1 = y2) and (x1 = x2)) and
-  ((y3 = y1) and (x3 = x1))))))) -> (y2 = (x2 + 1))))
+goal WP_parameter_def : (y2 = (x2 + 1))

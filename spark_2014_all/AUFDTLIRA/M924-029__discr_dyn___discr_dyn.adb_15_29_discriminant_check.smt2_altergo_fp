@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -423,15 +423,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs1).rec__discr_dyn__r2__a)) and
-  (bool_eq6(((a).us_split_fields1).rec__discr_dyn__r2__b,
-  ((b).us_split_fields1).rec__discr_dyn__r2__b) = true)) and
-  (((a).us_split_fields1).rec__discr_dyn__r2__c = ((b).us_split_fields1).rec__discr_dyn__r2__c)) ->
-  (bool_eq7(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs1).rec__discr_dyn__r2__a)) and
-  (bool_eq6(((a).us_split_fields1).rec__discr_dyn__r2__b,
-  ((b).us_split_fields1).rec__discr_dyn__r2__b) = true)) and
+  ((((to_rep(((a).us_split_discrs1).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs1).rec__discr_dyn__r2__a)) and
+  ((bool_eq6(((a).us_split_fields1).rec__discr_dyn__r2__b,
+  ((b).us_split_fields1).rec__discr_dyn__r2__b) = true) and
   (((a).us_split_fields1).rec__discr_dyn__r2__c = ((b).us_split_fields1).rec__discr_dyn__r2__c))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs1).rec__discr_dyn__r2__a)) and
+  ((bool_eq6(((a).us_split_fields1).rec__discr_dyn__r2__b,
+  ((b).us_split_fields1).rec__discr_dyn__r2__b) = true) and
+  (((a).us_split_fields1).rec__discr_dyn__r2__c = ((b).us_split_fields1).rec__discr_dyn__r2__c)))) ->
   (bool_eq7(a, b) = false))))
 
 logic value__size1 : int
@@ -612,15 +612,15 @@ logic bool_eq9 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
-  (((((to_rep(((a).us_split_discrs2).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs2).rec__discr_dyn__r2__a)) and
-  (bool_eq4(((a).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3,
-  ((b).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3) = true)) and
-  (((a).us_split_fields3).rec__discr_dyn__r2__c1 = ((b).us_split_fields3).rec__discr_dyn__r2__c1)) ->
-  (bool_eq9(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs2).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs2).rec__discr_dyn__r2__a)) and
-  (bool_eq4(((a).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3,
-  ((b).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3) = true)) and
+  ((((to_rep(((a).us_split_discrs2).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs2).rec__discr_dyn__r2__a)) and
+  ((bool_eq4(((a).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3,
+  ((b).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3) = true) and
   (((a).us_split_fields3).rec__discr_dyn__r2__c1 = ((b).us_split_fields3).rec__discr_dyn__r2__c1))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs2).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs2).rec__discr_dyn__r2__a)) and
+  ((bool_eq4(((a).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3,
+  ((b).us_split_fields3).rec__discr_dyn__r2__b1, 1, 3) = true) and
+  (((a).us_split_fields3).rec__discr_dyn__r2__c1 = ((b).us_split_fields3).rec__discr_dyn__r2__c1)))) ->
   (bool_eq9(a, b) = false))))
 
 predicate in_range4(rec__discr_dyn__r2__a1: int, a: us_rep) =
@@ -802,15 +802,15 @@ logic bool_eq11 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq11(a, b)].
-  (((((to_rep(((a).us_split_discrs3).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs3).rec__discr_dyn__r2__a)) and
-  (bool_eq4(((a).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2,
-  ((b).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2) = true)) and
-  (((a).us_split_fields5).rec__discr_dyn__r2__c2 = ((b).us_split_fields5).rec__discr_dyn__r2__c2)) ->
-  (bool_eq11(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs3).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs3).rec__discr_dyn__r2__a)) and
-  (bool_eq4(((a).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2,
-  ((b).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2) = true)) and
+  ((((to_rep(((a).us_split_discrs3).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs3).rec__discr_dyn__r2__a)) and
+  ((bool_eq4(((a).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2,
+  ((b).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2) = true) and
   (((a).us_split_fields5).rec__discr_dyn__r2__c2 = ((b).us_split_fields5).rec__discr_dyn__r2__c2))) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs3).rec__discr_dyn__r2__a) = to_rep(((b).us_split_discrs3).rec__discr_dyn__r2__a)) and
+  ((bool_eq4(((a).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2,
+  ((b).us_split_fields5).rec__discr_dyn__r2__b2, 1, 2) = true) and
+  (((a).us_split_fields5).rec__discr_dyn__r2__c2 = ((b).us_split_fields5).rec__discr_dyn__r2__c2)))) ->
   (bool_eq11(a, b) = false))))
 
 predicate in_range6(rec__discr_dyn__r2__a1: int, a: us_rep) =
@@ -906,12 +906,57 @@ axiom def_axiom :
   temp___205)[1]) = of_rep1(temp___204)) and ((temp___202(temp___204,
   temp___205)[2]) = of_rep1(temp___205))))
 
+logic temp___a_201 : int
+
+logic us : int
+
+logic o : stb
+
+logic o1 : stb
+
+logic o2 : stb
+
+logic o3 : (int,integer) farray
+
+logic o4 : bool
+
+logic o5 : stb
+
+logic o6 : (int,integer) farray
+
+logic o7 : t
+
+logic o8 : bool
+
+logic o9 : stb
+
+logic o10 : (int,integer) farray
+
+logic o11 : t
+
+logic o12 : bool
+
+axiom H : in_range1(temp___a_201)
+
+axiom H1 : ((us = 3) and in_range1(3))
+
+axiom H2 : (to_rep(o) = 2)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (o2 = o1)
+
+axiom H5 : (temp___202((- 1), (- 2)) = o3)
+
+axiom H6 : (of_int(0) = o4)
+
+axiom H7 : (o2 = o5)
+
+axiom H8 : (o3 = o6)
+
+axiom H9 : (mk(1, 2) = o7)
+
+axiom H10 : (o4 = o8)
+
  (* File "discr_dyn.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___a_201:int. forall us:int. forall o:stb. forall o1:stb.
-  forall o2:stb. forall o3:(int,integer) farray. forall o4:bool.
-  forall o5:stb. forall o6:(int,integer) farray. forall o7:t. forall o8:bool.
-  (in_range1(temp___a_201) -> (((us = 3) and in_range1(3)) ->
-  (((((to_rep(o) = 2) and (o = o1)) and ((o2 = o1) and ((temp___202((-1),
-  (-2)) = o3) and (of_int(0) = o4)))) and ((o2 = o5) and (((o3 = o6) and
-  (mk(1, 2) = o7)) and (o4 = o8)))) -> (3 = to_rep(o5))))))
+goal WP_parameter_def : (3 = to_rep(o5))

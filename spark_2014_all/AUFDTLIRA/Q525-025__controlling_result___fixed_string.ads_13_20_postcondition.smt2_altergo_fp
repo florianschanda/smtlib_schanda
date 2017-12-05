@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -640,117 +640,254 @@ logic this__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "fixed_string.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall this__split_fields:natural.
-  forall this__split_fields1:(int,character) farray.
-  forall this__split_fields2:us_private.
-  forall fixed_string__create__result:natural.
-  forall fixed_string__create__result1:(int,character) farray.
-  forall fixed_string__create__result2:us_private.
-  forall fixed_string__create__result3:int. forall o:natural.
-  forall o1:natural. forall o2:(int,character) farray. forall o3:us_private.
-  forall temp___215:natural. forall temp___2151:(int,character) farray.
-  forall temp___2152:us_private. forall temp___2153:int. forall o4:integer.
-  forall o5:integer. forall result:natural.
-  forall result1:(int,character) farray. forall result2:us_private.
-  forall this__split_fields3:natural.
-  forall this__split_fields4:(int,character) farray.
-  forall this__split_fields5:us_private.
-  forall fixed_string__trim_string__change:(int,character) farray.
-  forall result3:natural. forall result4:(int,character) farray.
-  forall result5:us_private. forall this__split_fields6:natural.
-  forall this__split_fields7:(int,character) farray.
-  forall this__split_fields8:us_private. forall result6:natural.
-  forall result7:(int,character) farray. forall result8:us_private.
-  forall result9:int. forall fixed_string__create__result4:natural.
-  forall fixed_string__create__result5:(int,character) farray.
-  forall fixed_string__create__result6:us_private.
-  forall fixed_string__create__result7:int.
-  forall fixed_string__create__result8:natural.
-  forall fixed_string__create__result9:(int,character) farray.
-  forall fixed_string__create__result10:us_private.
-  forall fixed_string__create__result11:int.
-  forall fixed_string__create__result12:natural.
-  forall fixed_string__create__result13:(int,character) farray.
-  forall fixed_string__create__result14:us_private.
-  forall fixed_string__create__result15:int.
-  forall this__split_fields9:natural.
-  forall this__split_fields10:(int,character) farray.
-  forall this__split_fields11:us_private.
-  forall fixed_string__create__result16:natural.
-  forall fixed_string__create__result17:(int,character) farray.
-  forall fixed_string__create__result18:us_private.
-  forall fixed_string__create__result19:int.
-  forall this__split_fields12:natural.
-  forall this__split_fields13:(int,character) farray.
-  forall this__split_fields14:us_private.
-  forall fixed_string__create__result20:natural.
-  forall fixed_string__create__result21:(int,character) farray.
-  forall fixed_string__create__result22:us_private.
-  forall fixed_string__create__result23:int.
-  (forall result10:natural. forall result11:(int,character) farray.
-  forall result12:us_private. forall result13:int.
-  ((in_range3(elem_width) and (dynamic_property(1, 2147483647,
-  to_rep1(first(name1)), to_rep1(last(name1))) and
-  (((((this__attr__tag = us_tag) and ((to_rep2(this__split_fields) = 0) and
-  (this__split_fields1 = temp___139(0)))) and
-  (((((to_rep2(o) = elem_width) and ((o = o1) and
-  ((this__split_fields1 = o2) and (this__split_fields2 = o3)))) and
-  (((temp___215 = o1) and ((temp___2151 = o2) and (temp___2152 = o3))) and
-  (this__attr__tag = temp___2153))) and (((result = this__split_fields) and
-  ((result1 = this__split_fields1) and (result2 = this__split_fields2))) and
-  ((temp___215 = this__split_fields3) and
-  ((temp___2151 = this__split_fields4) and
-  (temp___2152 = this__split_fields5))))) and ((((to_rep1(o5) = 20) and
-  ((to_rep1(o4) = 1) and
+logic this__split_fields : natural
+
+logic this__split_fields1 : (int,character) farray
+
+logic this__split_fields2 : us_private
+
+logic fixed_string__create__result : natural
+
+logic fixed_string__create__result1 : (int,character) farray
+
+logic fixed_string__create__result2 : us_private
+
+logic fixed_string__create__result3 : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : (int,character) farray
+
+logic o3 : us_private
+
+logic temp___215 : natural
+
+logic temp___2151 : (int,character) farray
+
+logic temp___2152 : us_private
+
+logic temp___2153 : int
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic result : natural
+
+logic result1 : (int,character) farray
+
+logic result2 : us_private
+
+logic this__split_fields3 : natural
+
+logic this__split_fields4 : (int,character) farray
+
+logic this__split_fields5 : us_private
+
+logic fixed_string__trim_string__change : (int,character) farray
+
+logic result3 : natural
+
+logic result4 : (int,character) farray
+
+logic result5 : us_private
+
+logic this__split_fields6 : natural
+
+logic this__split_fields7 : (int,character) farray
+
+logic this__split_fields8 : us_private
+
+logic result6 : natural
+
+logic result7 : (int,character) farray
+
+logic result8 : us_private
+
+logic result9 : int
+
+logic fixed_string__create__result4 : natural
+
+logic fixed_string__create__result5 : (int,character) farray
+
+logic fixed_string__create__result6 : us_private
+
+logic fixed_string__create__result7 : int
+
+logic fixed_string__create__result8 : natural
+
+logic fixed_string__create__result9 : (int,character) farray
+
+logic fixed_string__create__result10 : us_private
+
+logic fixed_string__create__result11 : int
+
+logic fixed_string__create__result12 : natural
+
+logic fixed_string__create__result13 : (int,character) farray
+
+logic fixed_string__create__result14 : us_private
+
+logic fixed_string__create__result15 : int
+
+logic this__split_fields9 : natural
+
+logic this__split_fields10 : (int,character) farray
+
+logic this__split_fields11 : us_private
+
+logic fixed_string__create__result16 : natural
+
+logic fixed_string__create__result17 : (int,character) farray
+
+logic fixed_string__create__result18 : us_private
+
+logic fixed_string__create__result19 : int
+
+logic this__split_fields12 : natural
+
+logic this__split_fields13 : (int,character) farray
+
+logic this__split_fields14 : us_private
+
+logic fixed_string__create__result20 : natural
+
+logic fixed_string__create__result21 : (int,character) farray
+
+logic fixed_string__create__result22 : us_private
+
+logic fixed_string__create__result23 : int
+
+logic result10 : natural
+
+logic result11 : (int,character) farray
+
+logic result12 : us_private
+
+logic result13 : int
+
+axiom H : in_range3(elem_width)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(name1)),
+  to_rep1(last(name1)))
+
+axiom H2 : ((this__attr__tag = us_tag) and
+  ((to_rep2(this__split_fields) = 0) and
+  (this__split_fields1 = temp___139(0))))
+
+axiom H3 : (to_rep2(o) = elem_width)
+
+axiom H4 : (o = o1)
+
+axiom H5 : (this__split_fields1 = o2)
+
+axiom H6 : (this__split_fields2 = o3)
+
+axiom H7 : (temp___215 = o1)
+
+axiom H8 : (temp___2151 = o2)
+
+axiom H9 : (temp___2152 = o3)
+
+axiom H10 : (this__attr__tag = temp___2153)
+
+axiom H11 : (result = this__split_fields)
+
+axiom H12 : (result1 = this__split_fields1)
+
+axiom H13 : (result2 = this__split_fields2)
+
+axiom H14 : (temp___215 = this__split_fields3)
+
+axiom H15 : (temp___2151 = this__split_fields4)
+
+axiom H16 : (temp___2152 = this__split_fields5)
+
+axiom H17 : (to_rep1(o5) = 20)
+
+axiom H18 : (to_rep1(o4) = 1)
+
+axiom H19 :
   (forall i:int. (((to_rep1(o4) <= i) and (i <= to_rep1(o5))) ->
   (((((to_rep1(first(name1)) <  0) or
   ((i - to_rep1(o4)) <= (2147483647 - to_rep1(first(name1))))) and
   (((i - to_rep1(o4)) + to_rep1(first(name1))) <= to_rep1(last(name1)))) and
   (to_rep((fixed_string__trim_string__change[i])) = to_rep((name[((i - to_rep1(o4)) + to_rep1(first(name1)))])))) or
-  (to_rep((fixed_string__trim_string__change[i])) = 0)))))) and
-  (((result3 = this__split_fields3) and ((result4 = this__split_fields4) and
-  (result5 = this__split_fields5))) and
-  ((this__split_fields3 = this__split_fields6) and
-  ((slide(fixed_string__trim_string__change, to_rep1(first(mk(1, 20))),
-  1) = this__split_fields7) and
-  (this__split_fields5 = this__split_fields8))))) and
-  (((((fixed_string__create__result8 = fixed_string__create__result4) and
-  ((fixed_string__create__result9 = fixed_string__create__result5) and
-  (fixed_string__create__result10 = fixed_string__create__result6))) and
-  (fixed_string__create__result11 = fixed_string__create__result7)) and
-  (((fixed_string__create__result4 = fixed_string__create__result12) and
-  ((fixed_string__create__result5 = fixed_string__create__result13) and
-  (fixed_string__create__result6 = fixed_string__create__result14))) and
-  (fixed_string__create__result7 = fixed_string__create__result15))) and
-  ((((result6 = fixed_string__create__result) and
-  ((result7 = fixed_string__create__result1) and
-  (result8 = fixed_string__create__result2))) and
-  (result9 = fixed_string__create__result3)) and
-  (((fixed_string__create__result4 = this__split_fields6) and
-  ((fixed_string__create__result5 = this__split_fields7) and
-  (fixed_string__create__result6 = this__split_fields8))) and
-  (this__attr__tag = fixed_string__create__result7))))))) and
-  (((((fixed_string__create__result8 = fixed_string__create__result16) and
-  ((fixed_string__create__result9 = fixed_string__create__result17) and
-  (fixed_string__create__result10 = fixed_string__create__result18))) and
-  (fixed_string__create__result11 = fixed_string__create__result19)) and
-  ((this__split_fields9 = this__split_fields6) and
+  (to_rep((fixed_string__trim_string__change[i])) = 0))))
+
+axiom H20 : (result3 = this__split_fields3)
+
+axiom H21 : (result4 = this__split_fields4)
+
+axiom H22 : (result5 = this__split_fields5)
+
+axiom H23 : (this__split_fields3 = this__split_fields6)
+
+axiom H24 : (slide(fixed_string__trim_string__change, to_rep1(first(mk(1,
+  20))), 1) = this__split_fields7)
+
+axiom H25 : (this__split_fields5 = this__split_fields8)
+
+axiom H26 : (fixed_string__create__result8 = fixed_string__create__result4)
+
+axiom H27 : (fixed_string__create__result9 = fixed_string__create__result5)
+
+axiom H28 : (fixed_string__create__result10 = fixed_string__create__result6)
+
+axiom H29 : (fixed_string__create__result11 = fixed_string__create__result7)
+
+axiom H30 :
+  (((fixed_string__create__result12 = fixed_string__create__result4) and
+  ((fixed_string__create__result13 = fixed_string__create__result5) and
+  (fixed_string__create__result14 = fixed_string__create__result6))) and
+  (fixed_string__create__result15 = fixed_string__create__result7))
+
+axiom H31 : (result6 = fixed_string__create__result)
+
+axiom H32 : (result7 = fixed_string__create__result1)
+
+axiom H33 : (result8 = fixed_string__create__result2)
+
+axiom H34 : (result9 = fixed_string__create__result3)
+
+axiom H35 : (fixed_string__create__result4 = this__split_fields6)
+
+axiom H36 : (fixed_string__create__result5 = this__split_fields7)
+
+axiom H37 : (fixed_string__create__result6 = this__split_fields8)
+
+axiom H38 : (this__attr__tag = fixed_string__create__result7)
+
+axiom H39 :
+  (((fixed_string__create__result16 = fixed_string__create__result8) and
+  ((fixed_string__create__result17 = fixed_string__create__result9) and
+  (fixed_string__create__result18 = fixed_string__create__result10))) and
+  (fixed_string__create__result19 = fixed_string__create__result11))
+
+axiom H40 : ((this__split_fields9 = this__split_fields6) and
   ((this__split_fields10 = this__split_fields7) and
-  (this__split_fields11 = this__split_fields8)))) and
-  ((((fixed_string__create__result20 = fixed_string__create__result12) and
+  (this__split_fields11 = this__split_fields8)))
+
+axiom H41 :
+  (((fixed_string__create__result20 = fixed_string__create__result12) and
   ((fixed_string__create__result21 = fixed_string__create__result13) and
   (fixed_string__create__result22 = fixed_string__create__result14))) and
-  (fixed_string__create__result23 = fixed_string__create__result15)) and
-  ((this__split_fields12 = this__split_fields6) and
+  (fixed_string__create__result23 = fixed_string__create__result15))
+
+axiom H42 : ((this__split_fields12 = this__split_fields6) and
   ((this__split_fields13 = this__split_fields7) and
-  (this__split_fields14 = this__split_fields8)))))) and
-  (((result10 = fixed_string__create__result16) and
+  (this__split_fields14 = this__split_fields8)))
+
+axiom H43 : (((result10 = fixed_string__create__result16) and
   ((result11 = fixed_string__create__result17) and
   (result12 = fixed_string__create__result18))) and
-  (result13 = fixed_string__create__result19))))) -> (elements({
-  us_split_fields1 = { rec__fixed_string__object__width =
-  fixed_string__create__result16; rec__fixed_string__object__name =
-  fixed_string__create__result17; rec__ext__ = fixed_string__create__result18
-  }; attr__tag = fixed_string__create__result19 }) = elem_width))))
+  (result13 = fixed_string__create__result19))
+
+ (* File "fixed_string.ads", line 36, characters 0-0 *)
+goal WP_parameter_def : (elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = fixed_string__create__result16;
+  rec__fixed_string__object__name = fixed_string__create__result17;
+  rec__ext__ = fixed_string__create__result18 }; attr__tag =
+  fixed_string__create__result19 }) = elem_width)

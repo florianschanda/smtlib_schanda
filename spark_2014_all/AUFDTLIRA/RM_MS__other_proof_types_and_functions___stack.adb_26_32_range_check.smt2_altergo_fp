@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -491,10 +491,17 @@ type index_range__ref = { index_range__content : index_range
 function index_range__ref___projection(a: index_range__ref) : index_range =
   (a).index_range__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. (in_range2(n) ->
-  (((1 <= n) and (n <= count({ rec__stack__stack_type__s =
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : int
+
+axiom H : in_range2(n)
+
+axiom H1 : ((1 <= n) and (n <= count({ rec__stack__stack_type__s =
   my_stack__split_fields; rec__stack__stack_type__pointer =
-  my_stack__split_fields1 }))) -> in_range4(n))))
+  my_stack__split_fields1 })))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range4(n)

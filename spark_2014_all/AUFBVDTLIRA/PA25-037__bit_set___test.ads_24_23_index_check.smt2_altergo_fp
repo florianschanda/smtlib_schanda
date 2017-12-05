@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -961,7 +961,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1337,44 +1337,127 @@ logic i : t1
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "test.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__bit_set__result:bool. forall o:int. forall o1:int.
-  forall temp___223:int. forall o2:int. forall o3:unsigned_32.
-  forall temp___224:int. forall o4:t. forall o5:t. forall o6:t.
-  forall o7:bool. forall o8:bool. forall o9:int. forall o10:int.
-  forall temp___225:int. forall temp___226:int. forall o11:t.
-  forall result:bool. forall test__bit_set__result1:bool.
-  forall test__bit_set__result2:bool. forall test__bit_set__result3:bool.
-  forall test__bit_set__result4:bool. forall test__bit_set__result5:bool.
-  (dynamic_property(0, 2147483646, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range2(a_first) -> ((((to_rep1(first(a1)) <= a_first) and
+logic test__bit_set__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : t1
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___223 : int
+
+logic o5 : int
+
+logic o6 : unsigned_32
+
+logic temp___224 : int
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : int
+
+logic temp___225 : int
+
+logic temp___226 : int
+
+logic o14 : t
+
+logic result : bool
+
+logic test__bit_set__result1 : bool
+
+logic test__bit_set__result2 : bool
+
+logic test__bit_set__result3 : bool
+
+logic test__bit_set__result4 : bool
+
+logic test__bit_set__result5 : bool
+
+axiom H : dynamic_property(0, 2147483646, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : true
+
+axiom H3 : (((to_rep1(first(a1)) <= a_first) and
   (a_first <= to_rep1(last(a1)))) and ule1(udiv1(i, of_int1(32)),
-  of_int1((to_rep1(last(a1)) - a_first)))) ->
-  (((((test__bit_set__result1 = test__bit_set__result2) and
-  (test__bit_set__result3 = test__bit_set__result1)) and
-  (((((((temp___224 = tqtint1(urem1(i, of_int1(32)))) and
-  in_range2(tqtint1(urem1(i, of_int1(32))))) and
-  (((temp___224 <  4294967296) and (o4 = lsl_bv(of_int(1),
-  of_int(temp___224)))) or ((not (temp___224 <  4294967296)) and
-  (o4 = of_int(0))))) and ((((((((o = tqtint1(udiv1(i, of_int1(32)))) and
-  in_range2(tqtint1(udiv1(i, of_int1(32))))) and (o1 = (a_first + o))) and
-  ((temp___223 = o1) and in_range1(o1))) and
-  (((to_rep1(first(a1)) <= temp___223) and
-  (temp___223 <= to_rep1(last(a1)))) and (o2 = temp___223))) and
-  (o3 = (a[o2]))) and (o5 = to_rep(o3))) and (o6 = bw_and(o5, o4)))) and
-  (((o6 = of_int(0)) and (o7 = true)) or ((not (o6 = of_int(0))) and
-  (o7 = false)))) and (((not (o7 = true)) and (o8 = true)) or
-  ((o7 = true) and (o8 = false)))) and (({ bool__content = result } = {
-  bool__content = test__bit_set__result }) and
-  (test__bit_set__result1 = o8)))) and (({ bool__content =
-  test__bit_set__result4 } = { bool__content = test__bit_set__result2 }) and
-  (test__bit_set__result5 = test__bit_set__result3))) ->
-  ((((temp___226 = tqtint1(urem1(i, of_int1(32)))) and
-  in_range2(tqtint1(urem1(i, of_int1(32))))) and
-  (((temp___226 <  4294967296) and (o11 = lsl_bv(of_int(1),
-  of_int(temp___226)))) or ((not (temp___226 <  4294967296)) and
-  (o11 = of_int(0))))) -> (((((o9 = tqtint1(udiv1(i, of_int1(32)))) and
-  in_range2(tqtint1(udiv1(i, of_int1(32))))) and (o10 = (a_first + o9))) and
-  ((temp___225 = o10) and in_range1(o10))) ->
-  (to_rep1(first(a1)) <= temp___225))))))))
+  of_int1((to_rep1(last(a1)) - a_first))))
+
+axiom H4 : (test__bit_set__result1 = test__bit_set__result2)
+
+axiom H5 : (test__bit_set__result3 = test__bit_set__result1)
+
+axiom H6 : ((temp___224 = tqtint1(urem1(i, of_int1(32)))) and
+  in_range2(tqtint1(urem1(i, of_int1(32)))))
+
+axiom H7 : ((temp___224 <  4294967296) -> (o7 = lsl_bv(of_int(1),
+  of_int(temp___224))))
+
+axiom H8 : ((not (temp___224 <  4294967296)) -> (o7 = of_int(0)))
+
+axiom H9 : ((o3 = tqtint1(udiv1(i, of_int1(32)))) and
+  in_range2(tqtint1(udiv1(i, of_int1(32)))))
+
+axiom H10 : (o4 = (a_first + o3))
+
+axiom H11 : ((temp___223 = o4) and in_range1(o4))
+
+axiom H12 : ((to_rep1(first(a1)) <= temp___223) and
+  (temp___223 <= to_rep1(last(a1))))
+
+axiom H13 : (o5 = temp___223)
+
+axiom H14 : (o6 = (a[o5]))
+
+axiom H15 : (o8 = to_rep(o6))
+
+axiom H16 : (o9 = bw_and(o8, o7))
+
+axiom H17 : (((o9 = of_int(0)) -> (o10 = true)) and
+  ((not (o9 = of_int(0))) -> (o10 = false)))
+
+axiom H18 : (((not (o10 = true)) -> (o11 = true)) and ((o10 = true) ->
+  (o11 = false)))
+
+axiom H19 : (result = test__bit_set__result)
+
+axiom H20 : (test__bit_set__result1 = o11)
+
+axiom H21 : (test__bit_set__result4 = test__bit_set__result2)
+
+axiom H22 : (test__bit_set__result5 = test__bit_set__result3)
+
+axiom H23 : ((temp___226 = tqtint1(urem1(i, of_int1(32)))) and
+  in_range2(tqtint1(urem1(i, of_int1(32)))))
+
+axiom H24 : ((temp___226 <  4294967296) -> (o14 = lsl_bv(of_int(1),
+  of_int(temp___226))))
+
+axiom H25 : ((not (temp___226 <  4294967296)) -> (o14 = of_int(0)))
+
+axiom H26 : ((o12 = tqtint1(udiv1(i, of_int1(32)))) and
+  in_range2(tqtint1(udiv1(i, of_int1(32)))))
+
+axiom H27 : (o13 = (a_first + o12))
+
+axiom H28 : ((temp___225 = o13) and in_range1(o13))
+
+ (* File "test.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(a1)) <= temp___225)

@@ -104,6 +104,7 @@
 (declare-const x86__sp__result4 (_ BitVec 16))
 (declare-const x86__sp__result5 (_ BitVec 16))
 (declare-const result1 (_ BitVec 16))
+(assert true)
 (assert (= x86__sp__result1 x86__sp__result2))
 (assert (= x86__sp__result3 x86__sp__result1))
 (assert (= result x86__sp__result))

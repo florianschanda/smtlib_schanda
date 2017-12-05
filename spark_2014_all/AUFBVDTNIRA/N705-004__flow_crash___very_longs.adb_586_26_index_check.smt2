@@ -255,6 +255,7 @@
 (assert (in_range2 bit_value))
 (assert (=> (<= 1 2147483647) (in_range digit_number)))
 (assert (=> (<= 0 2147483647) (in_range3 bit_position)))
+(assert true)
 (assert (= result digit_number))
 (assert (= digit_number1 (+ 1 (div1 bit_number 8))))
 (assert (= result1 bit_position))

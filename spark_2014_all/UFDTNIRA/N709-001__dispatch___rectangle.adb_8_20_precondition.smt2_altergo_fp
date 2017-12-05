@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -742,37 +742,125 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "rectangle.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rec____split_fields:natural. forall rec____split_fields1:natural.
-  forall rec____split_fields2:integer. forall rec____split_fields3:integer.
-  forall rec____split_fields4:integer.
-  forall rec____split_fields5:us_private. forall result__:int. forall o:bool.
-  forall o1:int. forall o2:int. forall rec____split_fields6:natural.
-  forall rec____split_fields7:natural. forall rec____split_fields8:integer.
-  forall rec____split_fields9:integer. forall rec____split_fields10:integer.
-  forall rec____split_fields11:us_private. forall result:bool.
-  forall object__set_area__obj__fields:integer.
-  forall object__set_area__obj__fields1:integer.
-  forall object__set_area__obj__fields2:integer.
-  forall object__set_area__obj__fields3:us_private. forall result1:natural.
-  forall result2:natural. forall result3:integer. forall result4:integer.
-  forall result5:integer. forall result6:us_private.
-  forall rec____split_fields12:natural. forall rec____split_fields13:natural.
-  forall rec____split_fields14:integer. forall rec____split_fields15:integer.
-  forall rec____split_fields16:integer.
-  forall rec____split_fields17:us_private. (((0 <= 2147483647) ->
-  in_range1(result__)) -> (((((o = has_stored_area({ us_split_fields1 = {
+logic rec____split_fields : natural
+
+logic rec____split_fields1 : natural
+
+logic rec____split_fields2 : integer
+
+logic rec____split_fields3 : integer
+
+logic rec____split_fields4 : integer
+
+logic rec____split_fields5 : us_private
+
+logic result__ : int
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic rec____split_fields6 : natural
+
+logic rec____split_fields7 : natural
+
+logic rec____split_fields8 : integer
+
+logic rec____split_fields9 : integer
+
+logic rec____split_fields10 : integer
+
+logic rec____split_fields11 : us_private
+
+logic result : bool
+
+logic object__set_area__obj__fields : integer
+
+logic object__set_area__obj__fields1 : integer
+
+logic object__set_area__obj__fields2 : integer
+
+logic object__set_area__obj__fields3 : us_private
+
+logic result1 : natural
+
+logic result2 : natural
+
+logic result3 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result6 : us_private
+
+logic rec____split_fields12 : natural
+
+logic rec____split_fields13 : natural
+
+logic rec____split_fields14 : integer
+
+logic rec____split_fields15 : integer
+
+logic rec____split_fields16 : integer
+
+logic rec____split_fields17 : us_private
+
+logic result7 : int
+
+logic result__1 : int
+
+logic rec____split_fields18 : natural
+
+logic rec____split_fields19 : natural
+
+logic rec____split_fields20 : integer
+
+logic rec____split_fields21 : integer
+
+logic rec____split_fields22 : integer
+
+logic rec____split_fields23 : us_private
+
+logic result__2 : int
+
+logic rec____split_fields24 : natural
+
+logic rec____split_fields25 : natural
+
+logic rec____split_fields26 : integer
+
+logic rec____split_fields27 : integer
+
+logic rec____split_fields28 : integer
+
+logic rec____split_fields29 : us_private
+
+logic result__3 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(result__))
+
+axiom H1 : ((o = has_stored_area({ us_split_fields1 = {
   rec__object__t__area = rec____split_fields2; rec__object__t__max_width =
   rec____split_fields3; rec__object__t__max_height = rec____split_fields4;
   rec__ext__ = hide_ext__(rec____split_fields, rec____split_fields1,
   rec____split_fields5) }; attr__tag = rec____attr__tag })) and
-  ((o = true) <-> in_range1(to_rep1(rec____split_fields2)))) and
-  (((not (o = true)) and (result = true)) or ((o = true) and
-  (result = false)))) and (((result = true) and
-  (((((o1 = (to_rep(rec____split_fields) * to_rep(rec____split_fields1))) and
-  in_range((to_rep(rec____split_fields) * to_rep(rec____split_fields1)))) and
-  ((o2 = o1) and in_range1(o1))) and ((has_stored_area({ us_split_fields1 = {
+  ((o = true) <-> in_range1(to_rep1(rec____split_fields2))))
+
+axiom H2 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H3 : ((result = true) ->
+  ((o1 = (to_rep(rec____split_fields) * to_rep(rec____split_fields1))) and
+  in_range((to_rep(rec____split_fields) * to_rep(rec____split_fields1)))))
+
+axiom H4 : ((result = true) -> ((o2 = o1) and in_range1(o1)))
+
+axiom H5 : ((result = true) -> ((has_stored_area({ us_split_fields1 = {
   rec__object__t__area = object__set_area__obj__fields;
   rec__object__t__max_width = object__set_area__obj__fields1;
   rec__object__t__max_height = object__set_area__obj__fields2; rec__ext__ =
@@ -781,16 +869,14 @@ goal WP_parameter_def :
   rec__object__t__area = object__set_area__obj__fields;
   rec__object__t__max_width = object__set_area__obj__fields1;
   rec__object__t__max_height = object__set_area__obj__fields2; rec__ext__ =
-  object__set_area__obj__fields3 }; attr__tag = rec____attr__tag })))) and
-  (({ us_split_fields__content1 = { rec__rectangle__t__width = result1;
-  rec__rectangle__t__height = result2; rec__object__t__area1 = result3;
-  rec__object__t__max_width1 = result4; rec__object__t__max_height1 =
-  result5; rec__ext__1 = result6 } } = { us_split_fields__content1 = {
-  rec__rectangle__t__width = rec____split_fields; rec__rectangle__t__height =
-  rec____split_fields1; rec__object__t__area1 = rec____split_fields2;
-  rec__object__t__max_width1 = rec____split_fields3;
-  rec__object__t__max_height1 = rec____split_fields4; rec__ext__1 =
-  rec____split_fields5 } }) and ({ rec__rectangle__t__width =
+  object__set_area__obj__fields3 }; attr__tag = rec____attr__tag }))))
+
+axiom H6 : ((result = true) -> ((result1 = rec____split_fields) and
+  ((result2 = rec____split_fields1) and ((result3 = rec____split_fields2) and
+  ((result4 = rec____split_fields3) and ((result5 = rec____split_fields4) and
+  (result6 = rec____split_fields5)))))))
+
+axiom H7 : ((result = true) -> ({ rec__rectangle__t__width =
   rec____split_fields12; rec__rectangle__t__height = rec____split_fields13;
   rec__object__t__area1 = rec____split_fields14; rec__object__t__max_width1 =
   rec____split_fields15; rec__object__t__max_height1 = rec____split_fields16;
@@ -799,24 +885,37 @@ goal WP_parameter_def :
   rec__object__t__max_width = object__set_area__obj__fields1;
   rec__object__t__max_height = object__set_area__obj__fields2; rec__ext__ =
   object__set_area__obj__fields3 }; attr__tag = rec____attr__tag
-  })).us_split_fields3)))) or ((not (result = true)) and
-  (((rec____split_fields = rec____split_fields12) and
-  ((rec____split_fields1 = rec____split_fields13) and
-  ((rec____split_fields2 = rec____split_fields14) and
-  ((rec____split_fields3 = rec____split_fields15) and
-  ((rec____split_fields4 = rec____split_fields16) and
-  (rec____split_fields5 = rec____split_fields17)))))) and ({
-  rec__rectangle__t__width = rec____split_fields12;
-  rec__rectangle__t__height = rec____split_fields13; rec__object__t__area1 =
-  rec____split_fields14; rec__object__t__max_width1 = rec____split_fields15;
-  rec__object__t__max_height1 = rec____split_fields16; rec__ext__1 =
-  rec____split_fields17 } = { rec__rectangle__t__width =
-  rec____split_fields6; rec__rectangle__t__height = rec____split_fields7;
-  rec__object__t__area1 = rec____split_fields8; rec__object__t__max_width1 =
-  rec____split_fields9; rec__object__t__max_height1 = rec____split_fields10;
-  rec__ext__1 = rec____split_fields11 }))))) -> (has_stored_area({
-  us_split_fields1 = { rec__object__t__area = rec____split_fields14;
-  rec__object__t__max_width = rec____split_fields15;
-  rec__object__t__max_height = rec____split_fields16; rec__ext__ =
-  hide_ext__(rec____split_fields12, rec____split_fields13,
-  rec____split_fields17) }; attr__tag = rec____attr__tag }) = true))))
+  })).us_split_fields3))
+
+axiom H8 : ((not (result = true)) ->
+  (rec____split_fields = rec____split_fields12))
+
+axiom H9 : ((not (result = true)) ->
+  (rec____split_fields1 = rec____split_fields13))
+
+axiom H10 : ((not (result = true)) ->
+  (rec____split_fields2 = rec____split_fields14))
+
+axiom H11 : ((not (result = true)) ->
+  (rec____split_fields3 = rec____split_fields15))
+
+axiom H12 : ((not (result = true)) ->
+  (rec____split_fields4 = rec____split_fields16))
+
+axiom H13 : ((not (result = true)) ->
+  (rec____split_fields5 = rec____split_fields17))
+
+axiom H14 : ((not (result = true)) ->
+  ((rec____split_fields12 = rec____split_fields6) and
+  ((rec____split_fields13 = rec____split_fields7) and
+  ((rec____split_fields14 = rec____split_fields8) and
+  ((rec____split_fields15 = rec____split_fields9) and
+  ((rec____split_fields16 = rec____split_fields10) and
+  (rec____split_fields17 = rec____split_fields11)))))))
+
+ (* File "rectangle.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (has_stored_area({ us_split_fields1 = {
+  rec__object__t__area = rec____split_fields14; rec__object__t__max_width =
+  rec____split_fields15; rec__object__t__max_height = rec____split_fields16;
+  rec__ext__ = hide_ext__(rec____split_fields12, rec____split_fields13,
+  rec____split_fields17) }; attr__tag = rec____attr__tag }) = true)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -377,8 +377,14 @@ type t3__ref = { t3__content : us_rep2
 
 function t3__ref___projection(a: t3__ref) : us_rep2 = (a).t3__content
 
+logic temp___158 : integer
+
+logic temp___157 : integer
+
+logic temp___156 : integer
+
+axiom H : (to_rep(temp___157) = 42)
+
  (* File "test_08_util.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___157:integer. ((to_rep(temp___157) = 42) ->
-  ((is_positive_bad(to_rep(temp___157)) = true) or
-  (to_rep(temp___157) = (-5)))))
+goal WP_parameter_def : ((is_positive_bad(to_rep(temp___157)) = true) or
+  (to_rep(temp___157) = (- 5)))

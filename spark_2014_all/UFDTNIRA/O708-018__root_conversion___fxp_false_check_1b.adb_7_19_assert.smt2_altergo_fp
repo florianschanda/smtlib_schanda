@@ -84,7 +84,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type duration
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -194,18 +194,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -327,7 +327,7 @@ function duration__ref___projection(a: duration__ref) : duration =
 
 type my_duration
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic dummy1 : my_duration
@@ -438,7 +438,7 @@ function my_duration__ref___projection(a: my_duration__ref) : my_duration =
 
 type my_subduration
 
-predicate in_range3(x: int) = (((-10000000000) <= x) and (x <= 10000000000))
+predicate in_range3(x: int) = (((- 10000000000) <= x) and (x <= 10000000000))
 
 logic dummy2 : my_subduration
 
@@ -550,12 +550,34 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic md : my_duration
+
+logic ms : my_subduration
+
+logic o : my_duration
+
+logic o1 : my_subduration
+
+logic result : my_duration
+
+logic md1 : my_duration
+
+logic result1 : my_subduration
+
+logic ms1 : my_subduration
+
+axiom H : (to_fixed1(o) = 0)
+
+axiom H1 : (result = md)
+
+axiom H2 : (md1 = o)
+
+axiom H3 : (to_fixed2(o1) = 0)
+
+axiom H4 : (result1 = ms)
+
+axiom H5 : (ms1 = o1)
+
  (* File "fxp_false_check_1b.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall md:my_duration. forall ms:my_subduration. forall o:my_duration.
-  forall o1:my_subduration. forall result:my_duration.
-  forall md1:my_duration. forall result1:my_subduration.
-  forall ms1:my_subduration. (((to_fixed1(o) = 0) and ((result = md) and
-  (md1 = o))) -> (((to_fixed2(o1) = 0) and ((result1 = ms) and
-  (ms1 = o1))) -> ((to_fixed(of_fixed(to_fixed1(md1))) <  0) or
-  (to_fixed(of_fixed(to_fixed2(ms1))) <  0)))))
+goal WP_parameter_def : ((to_fixed(of_fixed(to_fixed1(md1))) <  0) or
+  (to_fixed(of_fixed(to_fixed2(ms1))) <  0))

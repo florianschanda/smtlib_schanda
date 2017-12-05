@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1007,21 +1007,49 @@ logic max_bit_length : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : bool
+
+axiom H : dynamic_property(0, 2147483647, to_rep(block__first),
+  to_rep(block__last))
+
+axiom H1 : in_range1(num_used_bits)
+
+axiom H2 : in_range1(max_bit_length)
+
+axiom H3 : ((to_rep(block__first) <= to_rep(block__last)) ->
+  (o4 = ((to_rep(block__last) - to_rep(block__first)) + 1)))
+
+axiom H4 : ((not (to_rep(block__first) <= to_rep(block__last))) -> (o4 = 0))
+
+axiom H5 : ((o5 = o4) and in_range(o4))
+
+axiom H6 : (((o5 <= 268435455) -> (result = true)) and
+  ((not (o5 <= 268435455)) -> (result = false)))
+
+axiom H7 : (result = true)
+
+axiom H8 : (max_bit_length <= 2147483640)
+
+axiom H9 : ((o1 = (max_bit_length + 7)) and in_range((max_bit_length + 7)))
+
+axiom H10 : (o2 = comp_div(o1,8))
+
+axiom H11 : ((to_rep(block__first) <= to_rep(block__last)) ->
+  (o = ((to_rep(block__last) - to_rep(block__first)) + 1)))
+
+axiom H12 : ((not (to_rep(block__first) <= to_rep(block__last))) -> (o = 0))
+
  (* File "keccak-padding.ads", line 45, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall result:bool. (dynamic_property(0, 2147483647, to_rep(block__first),
-  to_rep(block__last)) -> (in_range1(num_used_bits) ->
-  (in_range1(max_bit_length) ->
-  ((((((to_rep(block__first) <= to_rep(block__last)) and
-  (o3 = ((to_rep(block__last) - to_rep(block__first)) + 1))) or
-  ((not (to_rep(block__first) <= to_rep(block__last))) and (o3 = 0))) and
-  ((o4 = o3) and in_range(o3))) and (((o4 <= 268435455) and
-  (result = true)) or ((not (o4 <= 268435455)) and (result = false)))) ->
-  ((result = true) -> ((max_bit_length <= 2147483640) ->
-  ((((o1 = (max_bit_length + 7)) and in_range((max_bit_length + 7))) and
-  (o2 = comp_div(o1,8))) ->
-  ((((to_rep(block__first) <= to_rep(block__last)) and
-  (o = ((to_rep(block__last) - to_rep(block__first)) + 1))) or
-  ((not (to_rep(block__first) <= to_rep(block__last))) and (o = 0))) ->
-  in_range(o))))))))))
+goal WP_parameter_def : in_range(o)

@@ -563,14 +563,30 @@ logic a : (int,natural) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "with_iterable.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cu:natural. forall cu1:natural. forall o:bool. forall o1:bool.
-  forall result:bool. ((((o = has_element({ us_split_fields1 = {
+logic cu : natural
+
+logic cu1 : natural
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : bool
+
+axiom H : ((o = has_element({ us_split_fields1 = {
   rec__with_iterable__container__content = a } }, { us_split_discrs1 = {
   rec__with_iterable__cursor__c = cu }; us_split_fields3 = {
   rec__with_iterable__cursor__i = cu1 } })) and ((o = true) <->
-  ((1 <= to_rep(cu1)) and (to_rep(cu1) <= 100)))) and (((o1 = true) <->
-  ((101 = to_rep(cu)) and ((1 <= to_rep(cu1)) and
-  (to_rep(cu1) <= to_rep(cu))))) and (result = match_bool(o1, o, false)))) ->
-  ((result = true) -> (1 <= to_rep(cu1)))))
+  ((1 <= to_rep(cu1)) and (to_rep(cu1) <= 100))))
+
+axiom H1 : ((o1 = true) <-> ((101 = to_rep(cu)) and ((1 <= to_rep(cu1)) and
+  (to_rep(cu1) <= to_rep(cu)))))
+
+axiom H2 : (result = match_bool(o1, o, false))
+
+axiom H3 : (result = true)
+
+ (* File "with_iterable.ads", line 29, characters 0-0 *)
+goal WP_parameter_def : (1 <= to_rep(cu1))

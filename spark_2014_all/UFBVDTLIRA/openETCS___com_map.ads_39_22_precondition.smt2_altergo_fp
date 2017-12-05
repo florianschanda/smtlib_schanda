@@ -215,18 +215,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1144,17 +1144,23 @@ axiom witness__post_axiom :
 
 axiom w_get__post_axiom : true
 
- (* File "com_map.ads", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. (in_range(id) -> (((result = has_key(model__({
-  us_split_discrs1 = { rec__com_map__com_to_rbc_map__map__capacity = map;
+logic result : bool
+
+axiom H : in_range(id)
+
+axiom H1 : ((result = has_key(model__({ us_split_discrs1 = {
+  rec__com_map__com_to_rbc_map__map__capacity = map;
   rec__com_map__com_to_rbc_map__map__modulus = map1 }; us_split_fields1 = {
   rec__com_map__com_to_rbc_map__map = map2 } }), id)) and
   ((result = true) <-> (has_key(model__({ us_split_discrs1 = {
   rec__com_map__com_to_rbc_map__map__capacity = map;
   rec__com_map__com_to_rbc_map__map__modulus = map1 }; us_split_fields1 = {
-  rec__com_map__com_to_rbc_map__map = map2 } }), id) = true))) ->
-  ((result = true) -> (has_key(model__({ us_split_discrs1 = {
+  rec__com_map__com_to_rbc_map__map = map2 } }), id) = true)))
+
+axiom H2 : (result = true)
+
+ (* File "com_map.ads", line 37, characters 0-0 *)
+goal WP_parameter_def : (has_key(model__({ us_split_discrs1 = {
   rec__com_map__com_to_rbc_map__map__capacity = map;
   rec__com_map__com_to_rbc_map__map__modulus = map1 }; us_split_fields1 = {
-  rec__com_map__com_to_rbc_map__map = map2 } }), id) = true)))))
+  rec__com_map__com_to_rbc_map__map = map2 } }), id) = true)

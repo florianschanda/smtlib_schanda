@@ -212,6 +212,7 @@
 (declare-const x86__readmem64__result4 (_ BitVec 64))
 (declare-const x86__readmem64__result5 (_ BitVec 64))
 (declare-const result1 (_ BitVec 64))
+(assert true)
 (assert (= x86__readmem64__result1 x86__readmem64__result2))
 (assert (= x86__readmem64__result3 x86__readmem64__result1))
 (assert (and (= o1 (readmem32 (bvadd addr ((_ int2bv 64) 4)) memory)) (and (= o1 (bvadd ((_ zero_extend 16) (readmem16 (bvadd addr ((_ int2bv 64) 4)) memory)) (bvmul ((_ zero_extend 16) (readmem16 (bvadd (bvadd addr ((_ int2bv 64) 4)) ((_ int2bv 64) 2)) memory)) ((_ int2bv 32) 65536)))) (bvuge o1 ((_ int2bv 32) 0)))))

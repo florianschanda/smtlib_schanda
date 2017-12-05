@@ -726,13 +726,39 @@ logic c03__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic us5 : int
+
+logic us6 : int
+
+logic us7 : int
+
+axiom H : ((us = 0) and in_range1(0))
+
+axiom H1 : ((us1 = 0) and in_range1(0))
+
+axiom H2 : ((us2 = 0) and in_range1(0))
+
+axiom H3 : ((us3 = 0) and in_range1(0))
+
+axiom H4 : ((us4 = 0) and in_range1(0))
+
+axiom H5 : ((us5 = 0) and in_range1(0))
+
+axiom H6 : ((us6 = 0) and in_range1(0))
+
+axiom H7 : ((r00__attr__tag = us_tag7) and (to_rep(r00__split_discrs) = 0))
+
+axiom H8 : (0 = to_rep(r00__split_discrs))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall us1:int. forall us2:int. forall us3:int.
-  forall us4:int. forall us5:int. forall us6:int. (((us = 0) and
-  in_range1(0)) -> (((us1 = 0) and in_range1(0)) -> (((us2 = 0) and
-  in_range1(0)) -> (((us3 = 0) and in_range1(0)) -> (((us4 = 0) and
-  in_range1(0)) -> (((us5 = 0) and in_range1(0)) -> (((us6 = 0) and
-  in_range1(0)) -> (((r00__attr__tag = us_tag7) and
-  (to_rep(r00__split_discrs) = 0)) -> ((0 = to_rep(r00__split_discrs)) ->
-  in_range1(0)))))))))))
+goal WP_parameter_def : in_range1(0)

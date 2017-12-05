@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -481,7 +481,81 @@ axiom last__def_axiom2 : (last2 = to_rep(last(a1)))
 
 axiom c__def_axiom : (c = (last3 - 1))
 
+logic dynamic_ranges__search_0__result : int
+
+logic o : int
+
+logic us : int
+
+logic temp___244 : int
+
+logic us1 : int
+
+logic dynamic_ranges__search_0__c__assume : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___245 : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic i : int
+
+logic result : bool
+
+logic result1 : int
+
+logic dynamic_ranges__search_0__result1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic dynamic_ranges__search_0__result2 : int
+
+logic result4 : int
+
+logic dynamic_ranges__search_0__result3 : int
+
+logic dynamic_ranges__search_0__result4 : int
+
+logic dynamic_ranges__search_0__result5 : int
+
+logic dynamic_ranges__search_0__result6 : int
+
+logic dynamic_ranges__search_0__result7 : int
+
+logic dynamic_ranges__search_0__result8 : int
+
+logic dynamic_ranges__search_0__result9 : int
+
+logic dynamic_ranges__search_0__result10 : int
+
+logic dynamic_ranges__search_0__result11 : int
+
+logic result5 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : ((to_rep(first(a1)) <= to_rep(last(a1))) and
+  (2 <= (to_rep(last(a1)) - to_rep(first(a1)))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> (((to_rep(first(a1)) <= to_rep(last(a1))) and
-  (2 <= (to_rep(last(a1)) - to_rep(first(a1))))) -> in_range1((last2 - 1))))
+goal WP_parameter_def : in_range1((last2 - 1))

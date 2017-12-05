@@ -366,7 +366,9 @@ logic r02__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : ((r02__attr__tag = us_tag2) and (to_rep(r02__split_discrs) = 0))
+
+axiom H1 : (0 = to_rep(r02__split_discrs))
+
  (* File "membership_discr.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (((r02__attr__tag = us_tag2) and
-  (to_rep(r02__split_discrs) = 0)) -> ((0 = to_rep(r02__split_discrs)) ->
-  (r02__attr__tag = us_tag)))
+goal WP_parameter_def : (r02__attr__tag = us_tag)

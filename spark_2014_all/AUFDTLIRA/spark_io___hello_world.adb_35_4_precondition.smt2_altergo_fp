@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -500,25 +500,25 @@ logic page_length__2 : us_rep -> int
 
 logic page_length__2__function_guard : int, us_rep -> prop
 
-logic temp___String_Literal_808 : unit -> (int,character) farray
+logic temp___String_Literal_802 : unit -> (int,character) farray
 
-axiom temp___String_Literal_808__def_axiom :
-  ((((((to_rep((temp___String_Literal_808(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_808(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_808(void)[3])) = 108)) and
-  (to_rep((temp___String_Literal_808(void)[4])) = 108)) and
-  (to_rep((temp___String_Literal_808(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_808(void)[6])) = 32))
+axiom temp___String_Literal_802__def_axiom :
+  ((((((to_rep((temp___String_Literal_802(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_802(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_802(void)[3])) = 108)) and
+  (to_rep((temp___String_Literal_802(void)[4])) = 108)) and
+  (to_rep((temp___String_Literal_802(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_802(void)[6])) = 32))
 
-logic temp___String_Literal_809 : unit -> (int,character) farray
+logic temp___String_Literal_803 : unit -> (int,character) farray
 
-axiom temp___String_Literal_809__def_axiom :
-  ((((((to_rep((temp___String_Literal_809(void)[1])) = 87) and
-  (to_rep((temp___String_Literal_809(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_809(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_809(void)[4])) = 108)) and
-  (to_rep((temp___String_Literal_809(void)[5])) = 100)) and
-  (to_rep((temp___String_Literal_809(void)[6])) = 46))
+axiom temp___String_Literal_803__def_axiom :
+  ((((((to_rep((temp___String_Literal_803(void)[1])) = 87) and
+  (to_rep((temp___String_Literal_803(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_803(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_803(void)[4])) = 108)) and
+  (to_rep((temp___String_Literal_803(void)[5])) = 100)) and
+  (to_rep((temp___String_Literal_803(void)[6])) = 46))
 
 type file_mode
 
@@ -576,13 +576,25 @@ axiom is_readable__def_axiom :
   (forall file:us_rep [is_readable(file)]. ((is_readable(file) = true) <->
   ((is_open(file) = true) and (mode__2(file) = 0))))
 
- (* File "spark-text_io.ads", line 81, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_input:us_rep. forall standard_output:us_rep.
-  forall standard_error:us_rep.
-  (((((((is_readable(standard_input) = true) and
+logic standard_input : us_rep
+
+logic standard_output : us_rep
+
+logic standard_error : us_rep
+
+logic o : int
+
+logic standard_output1 : us_rep
+
+logic result : bool
+
+axiom H : ((((((is_readable(standard_input) = true) and
   (is_writable(standard_output) = true)) and
   (is_writable(standard_error) = true)) and (status(standard_input) = 1)) and
-  (status(standard_output) = 1)) and (status(standard_error) = 1)) ->
-  (((status(standard_output) = 1) and
-  (is_writable(standard_output) = true)) -> (status(standard_output) = 1))))
+  (status(standard_output) = 1)) and (status(standard_error) = 1))
+
+axiom H1 : ((status(standard_output) = 1) and
+  (is_writable(standard_output) = true))
+
+ (* File "spark-text_io.ads", line 81, characters 0-0 *)
+goal WP_parameter_def : (status(standard_output) = 1)

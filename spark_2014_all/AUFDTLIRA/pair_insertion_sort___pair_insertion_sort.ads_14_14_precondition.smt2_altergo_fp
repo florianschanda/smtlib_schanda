@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -358,7 +358,7 @@ axiom is_perm__def_axiom :
   (forall a:(int,integer) farray. forall a1:t. forall b:(int,integer) farray.
   forall b1:t [is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 })].
   ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 }) = true) <->
-  (forall e:int. ((((-2147483648) <= e) and (e <= 2147483647)) -> (occ({
+  (forall e:int. ((((- 2147483648) <= e) and (e <= 2147483647)) -> (occ({
   elts = a; rt = a1 }, e) = occ({ elts = b; rt = b1 }, e))))))
 
 logic sorted : us_t, int, int -> bool
@@ -674,316 +674,1538 @@ axiom occ__def_axiom :
   (((to_rep(first(a1)) = 0) and in_range1(e)) -> (occ({ elts = a; rt = a1 },
   e) = occ_def({ elts = a; rt = a1 }, e)))))
 
- (* File "pair_insertion_sort.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall i:int. forall j:int. forall x:int.
-  forall y:int. forall z:int. forall temp___253:(int,integer) farray.
-  forall temp___2531:t1.
-  forall pair_insertion_sort__sort__b__assume:(int,integer) farray.
-  forall pair_insertion_sort__sort__b__assume1:t1. forall o:int.
-  forall o1:int. forall o2:int. forall temp___279:int.
-  forall temp___278:(int,integer) farray. forall temp___275:int.
-  forall temp___274:int. forall temp___273:int. forall temp___272:int.
-  forall o3:int. forall o4:integer. forall o5:int. forall temp___254:int.
-  forall o6:int. forall o7:integer. forall o8:int. forall o9:int.
-  forall o10:int. forall o11:integer. forall o12:int.
-  forall temp___258:(int,integer) farray. forall temp___255:int.
-  forall o13:int. forall o14:int. forall o15:int. forall o16:int.
-  forall o17:int. forall o18:integer. forall o19:int. forall o20:bool.
-  forall temp___264:int. forall o21:int. forall o22:integer. forall o23:int.
-  forall o24:bool. forall o25:int. forall o26:int. forall o27:int.
-  forall o28:int. forall o29:int. forall o30:integer. forall o31:int.
-  forall temp___268:(int,integer) farray. forall temp___265:int.
-  forall o32:int. forall o33:int. forall o34:int. forall o35:int.
-  forall o36:int. forall o37:integer. forall o38:int. forall o39:bool.
-  forall o40:int. forall o41:int. forall o42:int. forall o43:int.
-  forall o44:bool. forall o45:int. forall o46:int. forall o47:int.
-  forall o48:int. forall o49:integer. forall o50:int. forall o51:int.
-  forall o52:int. forall o53:integer. forall o54:int.
-  forall temp___283:(int,integer) farray. forall temp___280:int.
-  forall o55:int. forall o56:int. forall o57:int. forall o58:int.
-  forall o59:int. forall o60:integer. forall o61:int. forall o62:bool.
-  forall o63:int. forall o64:int. forall o65:int.
-  forall a1:(int,integer) farray. forall j1:int. forall x1:int.
-  forall y1:int. forall z1:int. forall result:int. forall i1:int.
-  forall result1:bool. forall result2:int. forall x2:int. forall result3:int.
-  forall y2:int. forall result4:int. forall z2:int. forall result5:int.
-  forall x3:int. forall result6:int. forall y3:int. forall result7:int.
-  forall j2:int. forall result8:bool. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. forall j3:int. forall result9:int.
-  forall j4:int. forall result10:bool. forall a4:(int,integer) farray.
-  forall j5:int. forall a5:(int,integer) farray. forall j6:int.
-  forall a6:(int,integer) farray. forall j7:int.
-  forall a7:(int,integer) farray. forall j8:int. forall result11:bool.
-  forall a8:(int,integer) farray. forall a9:(int,integer) farray.
-  forall a10:(int,integer) farray. forall result12:bool.
-  forall a11:(int,integer) farray. forall a12:(int,integer) farray.
-  forall j9:int. forall result13:int. forall j10:int. forall result14:bool.
-  forall a13:(int,integer) farray. forall j11:int.
-  forall a14:(int,integer) farray. forall j12:int.
-  forall a15:(int,integer) farray. forall j13:int.
-  forall a16:(int,integer) farray. forall j14:int.
-  forall a17:(int,integer) farray. forall i2:int. forall j15:int.
-  forall x4:int. forall y4:int. forall z3:int. forall result15:int.
-  forall i3:int. forall result16:bool. forall a18:map__ref.
-  forall i4:int__ref. forall j16:int__ref. forall x5:int__ref.
-  forall y5:int__ref. forall z4:int__ref. forall a19:(int,integer) farray.
-  forall i5:int. forall j17:int. forall x6:int. forall y6:int. forall z5:int.
-  forall a20:map__ref. forall i6:int__ref. forall j18:int__ref.
-  forall x7:int__ref. forall y7:int__ref. forall z6:int__ref.
-  forall a21:(int,integer) farray. forall i7:int. forall j19:int.
-  forall x8:int. forall y8:int. forall z7:int. forall result17:bool.
-  forall result18:int__ref. forall y9:int. forall result19:int__ref.
-  forall j20:int. forall result20:bool. forall a22:(int,integer) farray.
-  forall a23:(int,integer) farray. forall j21:int. forall result21:int__ref.
-  forall j22:int. forall result22:bool. forall a24:map__ref.
-  forall j23:int__ref. forall a25:(int,integer) farray. forall j24:int.
-  forall a26:map__ref. forall j25:int__ref. forall a27:(int,integer) farray.
-  forall j26:int. forall a28:map__ref. forall j27:int__ref.
-  forall y10:int__ref. forall a29:(int,integer) farray. forall j28:int.
-  forall y11:int. forall a30:map__ref. forall i8:int__ref.
-  forall j29:int__ref. forall x9:int__ref. forall y12:int__ref.
-  forall z8:int__ref. forall a31:(int,integer) farray. forall i9:int.
-  forall j30:int. forall x10:int. forall y13:int. forall z9:int.
-  ((dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last)) and
-  (to_rep(a__first) = 0)) -> ((((((-2147483648) <= 2147483647) ->
-  in_range1(i)) and ((((-2147483648) <= 2147483647) -> in_range1(j)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(y)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(z)) and (((((slide(a,
-  to_rep(a__first), to_rep(a__first)) = temp___253) and
-  (mk1(to_rep(a__first), to_rep(a__last)) = temp___2531)) and
-  ((to_rep(first2(temp___2531)) = 0) and ({ elts1 =
-  pair_insertion_sort__sort__b__assume; rt1 =
-  pair_insertion_sort__sort__b__assume1 } = { elts1 = temp___253; rt1 =
-  temp___2531 }))) and ((b = pair_insertion_sort__sort__b__assume) and
-  (b1 = pair_insertion_sort__sort__b__assume1))) and
-  (((dynamic_property2(to_rep(a__first), to_rep(a__last), to_rep(first2(b1)),
-  to_rep(last2(b1))) and ((to_rep(first2(b1)) = to_rep(a__first)) and
-  (to_rep(last2(b1)) = to_rep(a__last)))) and (to_rep(first2(b1)) = 0)) and
-  ((({ int__content = result } = { int__content = i }) and (i1 = 0)) and
-  ((((((((to_rep(a__first) <= to_rep(a__last)) and
-  (o = ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (o = 0))) and
-  ((o1 = o) and in_range1(o))) and (o2 = (o1 - 1))) and (((i1 <  o2) and
-  (result1 = true)) or ((not (i1 <  o2)) and (result1 = false)))) and
-  (((result1 = true) and ((((temp___279 = i1) and ((temp___278 = a) and
-  ((temp___275 = z) and ((temp___274 = y) and ((temp___273 = x) and
-  ((temp___272 = j) and (((((((to_rep(a__first) <= i1) and
-  (i1 <= to_rep(a__last))) and (o3 = i1)) and (o4 = (a[o3]))) and
-  (o5 = to_rep(o4))) and (({ int__content = result2 } = { int__content = x
-  }) and (x2 = o5))) and (((((((temp___254 = (i1 + 1)) and
-  in_range1((i1 + 1))) and (((to_rep(a__first) <= temp___254) and
-  (temp___254 <= to_rep(a__last))) and (o6 = temp___254))) and
-  (o7 = (a[o6]))) and (o8 = to_rep(o7))) and (({ int__content = result3 } = {
-  int__content = y }) and (y2 = o8))) and ((((x2 <  y2) and ((({
-  int__content = result4 } = { int__content = z }) and (z2 = x2)) and
-  (((x2 = result5) and (x3 = y2)) and ((y2 = result6) and (y3 = z2))))) or
-  ((not (x2 <  y2)) and (((z2 = z) and ((y3 = y2) and (x3 = x2))) and
-  ((z2 = z1) and ((y3 = y2) and (x3 = x2)))))) and ((((o9 = (i1 - 1)) and
-  in_range1((i1 - 1))) and (({ int__content = result7 } = { int__content = j
-  }) and (j2 = o9))) and (((((0 <= j2) and ((((((to_rep(a__first) <= j2) and
-  (j2 <= to_rep(a__last))) and (o10 = j2)) and (o11 = (a[o10]))) and
-  (o12 = to_rep(o11))) and (((x3 <  o12) and (result8 = true)) or
-  ((not (x3 <  o12)) and (result8 = false))))) or ((not (0 <= j2)) and
-  (result8 = false))) and (((result8 = true) and ((((temp___258 = a) and
+logic a : (int,integer) farray
+
+logic i : int
+
+logic j : int
+
+logic x : int
+
+logic y : int
+
+logic z : int
+
+logic temp___253 : (int,integer) farray
+
+logic temp___2531 : t1
+
+logic pair_insertion_sort__sort__b__assume : (int,integer) farray
+
+logic pair_insertion_sort__sort__b__assume1 : t1
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___279 : int
+
+logic temp___278 : (int,integer) farray
+
+logic temp___275 : int
+
+logic temp___274 : int
+
+logic temp___273 : int
+
+logic temp___272 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___254 : int
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic temp___258 : (int,integer) farray
+
+logic temp___255 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic us : bool
+
+logic o19 : int
+
+logic o20 : int
+
+logic us1 : bool
+
+logic temp___259 : int
+
+logic temp___260 : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic temp___261 : int
+
+logic temp___262 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : integer
+
+logic o30 : int
+
+logic temp___263 : int
+
+logic o31 : int
+
+logic o32 : integer
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : bool
+
+logic o36 : bool
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : integer
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic temp___264 : int
+
+logic o45 : int
+
+logic o46 : integer
+
+logic o47 : int
+
+logic o48 : bool
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : integer
+
+logic o55 : int
+
+logic temp___268 : (int,integer) farray
+
+logic temp___265 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic us2 : bool
+
+logic o62 : int
+
+logic o63 : int
+
+logic us3 : bool
+
+logic temp___269 : int
+
+logic temp___270 : int
+
+logic o64 : int
+
+logic o65 : integer
+
+logic o66 : int
+
+logic temp___271 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : integer
+
+logic o70 : int
+
+logic o71 : bool
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic us4 : bool
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic o83 : int
+
+logic o84 : bool
+
+logic o85 : int
+
+logic o86 : integer
+
+logic o87 : int
+
+logic temp___2541 : int
+
+logic o88 : int
+
+logic o89 : integer
+
+logic o90 : int
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : integer
+
+logic o94 : int
+
+logic temp___2581 : (int,integer) farray
+
+logic temp___2551 : int
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic us5 : bool
+
+logic o101 : int
+
+logic o102 : int
+
+logic us6 : bool
+
+logic temp___2591 : int
+
+logic temp___2601 : int
+
+logic o103 : int
+
+logic o104 : integer
+
+logic o105 : int
+
+logic temp___2611 : int
+
+logic temp___2621 : int
+
+logic o106 : int
+
+logic o107 : integer
+
+logic o108 : int
+
+logic o109 : bool
+
+logic o110 : int
+
+logic o111 : integer
+
+logic o112 : int
+
+logic temp___2631 : int
+
+logic o113 : int
+
+logic o114 : integer
+
+logic o115 : int
+
+logic o116 : bool
+
+logic o117 : bool
+
+logic o118 : bool
+
+logic o119 : int
+
+logic o120 : int
+
+logic o121 : integer
+
+logic o122 : int
+
+logic o123 : bool
+
+logic o124 : int
+
+logic o125 : int
+
+logic o126 : int
+
+logic temp___2641 : int
+
+logic o127 : int
+
+logic o128 : integer
+
+logic o129 : int
+
+logic o130 : bool
+
+logic o131 : int
+
+logic o132 : int
+
+logic o133 : int
+
+logic o134 : int
+
+logic o135 : int
+
+logic o136 : integer
+
+logic o137 : int
+
+logic temp___2681 : (int,integer) farray
+
+logic temp___2651 : int
+
+logic o138 : int
+
+logic o139 : int
+
+logic o140 : int
+
+logic o141 : int
+
+logic o142 : int
+
+logic o143 : int
+
+logic us7 : bool
+
+logic o144 : int
+
+logic o145 : int
+
+logic us8 : bool
+
+logic temp___2691 : int
+
+logic temp___2701 : int
+
+logic o146 : int
+
+logic o147 : integer
+
+logic o148 : int
+
+logic temp___2711 : int
+
+logic o149 : int
+
+logic o150 : int
+
+logic o151 : integer
+
+logic o152 : int
+
+logic o153 : bool
+
+logic o154 : int
+
+logic o155 : int
+
+logic o156 : int
+
+logic o157 : int
+
+logic o158 : int
+
+logic o159 : int
+
+logic o160 : int
+
+logic o161 : integer
+
+logic o162 : int
+
+logic o163 : int
+
+logic o164 : int
+
+logic o165 : integer
+
+logic o166 : int
+
+logic temp___283 : (int,integer) farray
+
+logic temp___280 : int
+
+logic o167 : int
+
+logic o168 : int
+
+logic o169 : int
+
+logic o170 : int
+
+logic o171 : int
+
+logic o172 : int
+
+logic us9 : bool
+
+logic o173 : int
+
+logic o174 : int
+
+logic o175 : int
+
+logic o176 : int
+
+logic us10 : bool
+
+logic temp___284 : int
+
+logic temp___285 : int
+
+logic o177 : int
+
+logic o178 : integer
+
+logic o179 : int
+
+logic temp___286 : int
+
+logic o180 : int
+
+logic o181 : int
+
+logic o182 : integer
+
+logic o183 : int
+
+logic o184 : bool
+
+logic o185 : int
+
+logic o186 : int
+
+logic o187 : int
+
+logic o188 : int
+
+logic o189 : int
+
+logic o190 : int
+
+logic a1 : (int,integer) farray
+
+logic j1 : int
+
+logic x1 : int
+
+logic y1 : int
+
+logic z1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic x2 : int
+
+logic result3 : int
+
+logic y2 : int
+
+logic result4 : int
+
+logic z2 : int
+
+logic result5 : int
+
+logic x3 : int
+
+logic result6 : int
+
+logic y3 : int
+
+logic result7 : int
+
+logic j2 : int
+
+logic result8 : bool
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic j3 : int
+
+logic result9 : int
+
+logic j4 : int
+
+logic result10 : bool
+
+logic a4 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+logic j5 : int
+
+logic a6 : (int,integer) farray
+
+logic j6 : int
+
+logic a7 : (int,integer) farray
+
+logic j7 : int
+
+logic a8 : (int,integer) farray
+
+logic j8 : int
+
+logic a9 : (int,integer) farray
+
+logic j9 : int
+
+logic a10 : (int,integer) farray
+
+logic j10 : int
+
+logic result11 : bool
+
+logic a11 : (int,integer) farray
+
+logic a12 : (int,integer) farray
+
+logic a13 : (int,integer) farray
+
+logic result12 : bool
+
+logic a14 : (int,integer) farray
+
+logic a15 : (int,integer) farray
+
+logic j11 : int
+
+logic result13 : int
+
+logic j12 : int
+
+logic result14 : bool
+
+logic a16 : (int,integer) farray
+
+logic a17 : (int,integer) farray
+
+logic j13 : int
+
+logic a18 : (int,integer) farray
+
+logic j14 : int
+
+logic a19 : (int,integer) farray
+
+logic j15 : int
+
+logic a20 : (int,integer) farray
+
+logic j16 : int
+
+logic a21 : (int,integer) farray
+
+logic j17 : int
+
+logic a22 : (int,integer) farray
+
+logic j18 : int
+
+logic a23 : (int,integer) farray
+
+logic j19 : int
+
+logic a24 : (int,integer) farray
+
+logic j20 : int
+
+logic a25 : (int,integer) farray
+
+logic i2 : int
+
+logic j21 : int
+
+logic x4 : int
+
+logic y4 : int
+
+logic z3 : int
+
+logic result15 : int
+
+logic i3 : int
+
+logic result16 : bool
+
+logic result17 : int
+
+logic x5 : int
+
+logic result18 : int
+
+logic y5 : int
+
+logic result19 : int
+
+logic z4 : int
+
+logic result20 : int
+
+logic x6 : int
+
+logic result21 : int
+
+logic y6 : int
+
+logic x7 : int
+
+logic y7 : int
+
+logic z5 : int
+
+logic x8 : int
+
+logic y8 : int
+
+logic z6 : int
+
+logic result22 : int
+
+logic j22 : int
+
+logic result23 : bool
+
+logic a26 : (int,integer) farray
+
+logic a27 : (int,integer) farray
+
+logic j23 : int
+
+logic result24 : int
+
+logic j24 : int
+
+logic result25 : bool
+
+logic a28 : (int,integer) farray
+
+logic a29 : (int,integer) farray
+
+logic j25 : int
+
+logic a30 : (int,integer) farray
+
+logic j26 : int
+
+logic a31 : (int,integer) farray
+
+logic j27 : int
+
+logic a32 : (int,integer) farray
+
+logic j28 : int
+
+logic a33 : (int,integer) farray
+
+logic j29 : int
+
+logic a34 : (int,integer) farray
+
+logic j30 : int
+
+logic a35 : (int,integer) farray
+
+logic j31 : int
+
+logic a36 : (int,integer) farray
+
+logic j32 : int
+
+logic result26 : bool
+
+logic a37 : (int,integer) farray
+
+logic a38 : (int,integer) farray
+
+logic a39 : (int,integer) farray
+
+logic result27 : bool
+
+logic a40 : (int,integer) farray
+
+logic a41 : (int,integer) farray
+
+logic j33 : int
+
+logic result28 : int
+
+logic j34 : int
+
+logic result29 : bool
+
+logic a42 : (int,integer) farray
+
+logic a43 : (int,integer) farray
+
+logic j35 : int
+
+logic a44 : (int,integer) farray
+
+logic j36 : int
+
+logic a45 : (int,integer) farray
+
+logic j37 : int
+
+logic a46 : (int,integer) farray
+
+logic j38 : int
+
+logic a47 : (int,integer) farray
+
+logic j39 : int
+
+logic a48 : (int,integer) farray
+
+logic j40 : int
+
+logic a49 : (int,integer) farray
+
+logic j41 : int
+
+logic a50 : (int,integer) farray
+
+logic j42 : int
+
+logic a51 : (int,integer) farray
+
+logic i4 : int
+
+logic j43 : int
+
+logic x9 : int
+
+logic y9 : int
+
+logic z7 : int
+
+logic a52 : (int,integer) farray
+
+logic i5 : int
+
+logic j44 : int
+
+logic x10 : int
+
+logic y10 : int
+
+logic z8 : int
+
+logic a53 : (int,integer) farray
+
+logic i6 : int
+
+logic j45 : int
+
+logic x11 : int
+
+logic y11 : int
+
+logic z9 : int
+
+logic a54 : (int,integer) farray
+
+logic i7 : int
+
+logic j46 : int
+
+logic x12 : int
+
+logic y12 : int
+
+logic z10 : int
+
+logic a55 : (int,integer) farray
+
+logic i8 : int
+
+logic j47 : int
+
+logic x13 : int
+
+logic y13 : int
+
+logic z11 : int
+
+logic a56 : (int,integer) farray
+
+logic i9 : int
+
+logic j48 : int
+
+logic x14 : int
+
+logic y14 : int
+
+logic z12 : int
+
+logic result30 : bool
+
+logic result31 : int
+
+logic y15 : int
+
+logic result32 : int
+
+logic j49 : int
+
+logic result33 : bool
+
+logic a57 : (int,integer) farray
+
+logic a58 : (int,integer) farray
+
+logic j50 : int
+
+logic result34 : int
+
+logic j51 : int
+
+logic result35 : bool
+
+logic a59 : (int,integer) farray
+
+logic a60 : (int,integer) farray
+
+logic j52 : int
+
+logic a61 : (int,integer) farray
+
+logic j53 : int
+
+logic a62 : (int,integer) farray
+
+logic j54 : int
+
+logic a63 : (int,integer) farray
+
+logic j55 : int
+
+logic a64 : (int,integer) farray
+
+logic j56 : int
+
+logic a65 : (int,integer) farray
+
+logic j57 : int
+
+logic a66 : (int,integer) farray
+
+logic j58 : int
+
+logic a67 : (int,integer) farray
+
+logic j59 : int
+
+logic a68 : (int,integer) farray
+
+logic j60 : int
+
+logic y16 : int
+
+logic a69 : (int,integer) farray
+
+logic j61 : int
+
+logic y17 : int
+
+logic a70 : (int,integer) farray
+
+logic i10 : int
+
+logic j62 : int
+
+logic x15 : int
+
+logic y18 : int
+
+logic z13 : int
+
+logic a71 : (int,integer) farray
+
+logic i11 : int
+
+logic j63 : int
+
+logic x16 : int
+
+logic y19 : int
+
+logic z14 : int
+
+logic result36 : bool
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(a__first),
+  to_rep(a__last)) and (to_rep(a__first) = 0))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(i))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(j))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range1(z))
+
+axiom H6 : true
+
+axiom H7 : (slide(a, to_rep(a__first), to_rep(a__first)) = temp___253)
+
+axiom H8 : (mk1(to_rep(a__first), to_rep(a__last)) = temp___2531)
+
+axiom H9 : (to_rep(first2(temp___2531)) = 0)
+
+axiom H10 : ((pair_insertion_sort__sort__b__assume = temp___253) and
+  (pair_insertion_sort__sort__b__assume1 = temp___2531))
+
+axiom H11 : ((pair_insertion_sort__sort__b__assume = b) and
+  (pair_insertion_sort__sort__b__assume1 = b1))
+
+axiom H12 : ((dynamic_property2(to_rep(a__first), to_rep(a__last),
+  to_rep(first2(b1)), to_rep(last2(b1))) and
+  ((to_rep(first2(b1)) = to_rep(a__first)) and
+  (to_rep(last2(b1)) = to_rep(a__last)))) and (to_rep(first2(b1)) = 0))
+
+axiom H13 : (result = i)
+
+axiom H14 : (i1 = 0)
+
+axiom H15 : ((to_rep(a__first) <= to_rep(a__last)) ->
+  (o = ((to_rep(a__last) - to_rep(a__first)) + 1)))
+
+axiom H16 : ((not (to_rep(a__first) <= to_rep(a__last))) -> (o = 0))
+
+axiom H17 : ((o1 = o) and in_range1(o))
+
+axiom H18 : (o2 = (o1 - 1))
+
+axiom H19 : (((i1 <  o2) -> (result1 = true)) and ((not (i1 <  o2)) ->
+  (result1 = false)))
+
+axiom H20 : ((result1 = true) -> (temp___279 = i1))
+
+axiom H21 : ((result1 = true) -> (temp___278 = a))
+
+axiom H22 : ((result1 = true) -> (temp___275 = z))
+
+axiom H23 : ((result1 = true) -> (temp___274 = y))
+
+axiom H24 : ((result1 = true) -> (temp___273 = x))
+
+axiom H25 : ((result1 = true) -> (temp___272 = j))
+
+axiom H26 : ((result1 = true) -> ((to_rep(a__first) <= i1) and
+  (i1 <= to_rep(a__last))))
+
+axiom H27 : ((result1 = true) -> (o3 = i1))
+
+axiom H28 : ((result1 = true) -> (o4 = (a[o3])))
+
+axiom H29 : ((result1 = true) -> (o5 = to_rep(o4)))
+
+axiom H30 : ((result1 = true) -> (result2 = x))
+
+axiom H31 : ((result1 = true) -> (x2 = o5))
+
+axiom H32 : ((result1 = true) -> ((temp___254 = (i1 + 1)) and
+  in_range1((i1 + 1))))
+
+axiom H33 : ((result1 = true) -> ((to_rep(a__first) <= temp___254) and
+  (temp___254 <= to_rep(a__last))))
+
+axiom H34 : ((result1 = true) -> (o6 = temp___254))
+
+axiom H35 : ((result1 = true) -> (o7 = (a[o6])))
+
+axiom H36 : ((result1 = true) -> (o8 = to_rep(o7)))
+
+axiom H37 : ((result1 = true) -> (result3 = y))
+
+axiom H38 : ((result1 = true) -> (y2 = o8))
+
+axiom H39 : ((result1 = true) -> ((x2 <  y2) -> (result4 = z)))
+
+axiom H40 : ((result1 = true) -> ((x2 <  y2) -> (z2 = x2)))
+
+axiom H41 : ((result1 = true) -> ((x2 <  y2) -> (x2 = result5)))
+
+axiom H42 : ((result1 = true) -> ((x2 <  y2) -> (x3 = y2)))
+
+axiom H43 : ((result1 = true) -> ((x2 <  y2) -> (y2 = result6)))
+
+axiom H44 : ((result1 = true) -> ((x2 <  y2) -> (y3 = z2)))
+
+axiom H45 : ((result1 = true) -> ((not (x2 <  y2)) -> (z2 = z)))
+
+axiom H46 : ((result1 = true) -> ((not (x2 <  y2)) -> (y3 = y2)))
+
+axiom H47 : ((result1 = true) -> ((not (x2 <  y2)) -> (x3 = x2)))
+
+axiom H48 : ((result1 = true) -> ((not (x2 <  y2)) -> (z2 = z1)))
+
+axiom H49 : ((result1 = true) -> ((not (x2 <  y2)) -> (y3 = y2)))
+
+axiom H50 : ((result1 = true) -> ((not (x2 <  y2)) -> (x3 = x2)))
+
+axiom H51 : ((result1 = true) -> ((o9 = (i1 - 1)) and in_range1((i1 - 1))))
+
+axiom H52 : ((result1 = true) -> (result7 = j))
+
+axiom H53 : ((result1 = true) -> (j2 = o9))
+
+axiom H54 : ((result1 = true) -> ((0 <= j2) -> ((to_rep(a__first) <= j2) and
+  (j2 <= to_rep(a__last)))))
+
+axiom H55 : ((result1 = true) -> ((0 <= j2) -> (o10 = j2)))
+
+axiom H56 : ((result1 = true) -> ((0 <= j2) -> (o11 = (a[o10]))))
+
+axiom H57 : ((result1 = true) -> ((0 <= j2) -> (o12 = to_rep(o11))))
+
+axiom H58 : ((result1 = true) -> ((0 <= j2) -> (((x3 <  o12) ->
+  (result8 = true)) and ((not (x3 <  o12)) -> (result8 = false)))))
+
+axiom H59 : ((result1 = true) -> ((not (0 <= j2)) -> (result8 = false)))
+
+axiom H60 : ((result1 = true) -> ((result8 = true) -> (((temp___258 = a) and
   ((temp___255 = j2) and ((((o15 = j2) and in_range2(j2)) and
   ((((o13 = (j2 + 2)) and in_range1((j2 + 2))) and ((o14 = o13) and
   in_range2(o13))) and (((is_perm({ elts = a; rt = mk(to_rep(a__first),
   to_rep(a__last)) }, { elts = a2; rt = mk(to_rep(a__first), to_rep(a__last))
   }) = true) and ((to_rep((a2[o14])) = to_rep((a[o15]))) and
   ((to_rep((a2[o15])) = to_rep((a[o14]))) and
-  (forall z10:int. (((to_rep(a__first) <= z10) and
-  (z10 <= to_rep(a__last))) -> (((not (z10 = o14)) and (not (z10 = o15))) ->
-  (to_rep((a2[z10])) = to_rep((a[z10]))))))))) and
+  (forall z15:int. (((to_rep(a__first) <= z15) and
+  (z15 <= to_rep(a__last))) -> (((not (z15 = o14)) and (not (z15 = o15))) ->
+  (to_rep((a2[z15])) = to_rep((a[z15]))))))))) and
   (to_rep(a__first) = 0)))) and ((((0 <= j3) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (j3 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (j3 <= (0 - 3))))) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (j3 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (j3 <= (0 - 3))))) and
   ((sorted({ elts = a3; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
   (j3 - 1)) = true) and ((sorted({ elts = a3; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }, (j3 + 2), (i1 + 1)) = true) and ((((0 <  j3) and
-  (to_rep((a3[(j3 - 1)])) <= to_rep((a3[(j3 + 2)])))) or (not (0 <  j3))) and
+  to_rep(a__last)) }, (j3 + 2), (i1 + 1)) = true) and (((0 <  j3) ->
+  (to_rep((a3[(j3 - 1)])) <= to_rep((a3[(j3 + 2)])))) and
   ((x3 <  to_rep((a3[(j3 + 2)]))) and ((is_perm({ elts = b; rt =
   mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a3; rt =
   mk(to_rep(a__first), to_rep(a__last)) }) = true) and
   (((to_rep((a3[j3])) = x3) and (to_rep((a3[(j3 + 1)])) = y3)) or
   ((to_rep((a3[j3])) = y3) and (to_rep((a3[(j3 + 1)])) = x3))))))))) and
-  (((((-2147483648) <= 2147483647) -> in_range1(j3)) and
-  (to_rep(a__first) = 0)) and ((((o16 = (j3 - 1)) and
-  in_range1((j3 - 1))) and ((j3 = result9) and (j4 = o16))) and
-  (((((0 <= j4) and ((((((to_rep(a__first) <= j4) and
-  (j4 <= to_rep(a__last))) and (o17 = j4)) and (o18 = (a3[o17]))) and
-  (o19 = to_rep(o18))) and (((x3 <  o19) and (o20 = true)) or
-  ((not (x3 <  o19)) and (o20 = false))))) or ((not (0 <= j4)) and
-  (o20 = false))) and (((not (o20 = true)) and (result10 = true)) or
-  ((o20 = true) and (result10 = false)))) and (result10 = true)))))))) and
-  (((j4 = j5) and (a3 = a4)) and ((j6 = j4) and (a5 = a3)))) and ((({
-  int__content = j7 } = { int__content = j5 }) and ({ map__content = a6 } = {
-  map__content = a4 })) and ((j8 = j6) and (a7 = a5))))) or
-  ((not (result8 = true)) and (((j2 = j7) and ({ map__content = a6 } = {
-  map__content = a })) and ((j8 = j2) and (a7 = a1)))))) and
-  (((((((((temp___264 = (j7 + 2)) and in_range1((j7 + 2))) and
-  (((to_rep(a__first) <= temp___264) and (temp___264 <= to_rep(a__last))) and
-  (o21 = temp___264))) and (o22 = (a6[o21]))) and (o23 = to_rep(o22))) and
-  (((o23 = x3) and (o24 = true)) or ((not (o23 = x3)) and
-  (o24 = false)))) and (((not (o24 = true)) and (result11 = true)) or
-  ((o24 = true) and (result11 = false)))) and (((result11 = true) and
-  (((((o27 = (j7 + 1)) and in_range1((j7 + 1))) and ((o28 = o27) and
-  in_range2(o27))) and ((((o25 = (j7 + 2)) and in_range1((j7 + 2))) and
-  ((o26 = o25) and in_range2(o25))) and (((is_perm({ elts = a6; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, { elts = a8; rt =
+  (((((- 2147483648) <= 2147483647) -> in_range1(j3)) and
+  (to_rep(a__first) = 0)) and ((((o37 = (j3 - 1)) and
+  in_range1((j3 - 1))) and ((j3 = result9) and (j4 = o37))) and
+  (((((0 <= j4) -> ((((((to_rep(a__first) <= j4) and
+  (j4 <= to_rep(a__last))) and (o38 = j4)) and (o39 = (a3[o38]))) and
+  (o40 = to_rep(o39))) and (((x3 <  o40) -> (o41 = true)) and
+  ((not (x3 <  o40)) -> (o41 = false))))) and ((not (0 <= j4)) ->
+  (o41 = false))) and (((not (o41 = true)) -> (result10 = true)) and
+  ((o41 = true) -> (result10 = false)))) and (result10 = true)))))))) and
+  (((j4 = j7) and (a3 = a7)) and ((j8 = j4) and (a8 = a3))))))
+
+axiom H61 : ((result1 = true) -> ((result8 = true) -> (j9 = j7)))
+
+axiom H62 : ((result1 = true) -> ((result8 = true) -> (a9 = a7)))
+
+axiom H63 : ((result1 = true) -> ((result8 = true) -> (j10 = j8)))
+
+axiom H64 : ((result1 = true) -> ((result8 = true) -> (a10 = a8)))
+
+axiom H65 : ((result1 = true) -> ((not (result8 = true)) -> (j9 = j2)))
+
+axiom H66 : ((result1 = true) -> ((not (result8 = true)) -> (a9 = a)))
+
+axiom H67 : ((result1 = true) -> ((not (result8 = true)) -> (j10 = j2)))
+
+axiom H68 : ((result1 = true) -> ((not (result8 = true)) -> (a10 = a1)))
+
+axiom H69 : ((result1 = true) -> ((temp___264 = (j9 + 2)) and
+  in_range1((j9 + 2))))
+
+axiom H70 : ((result1 = true) -> ((to_rep(a__first) <= temp___264) and
+  (temp___264 <= to_rep(a__last))))
+
+axiom H71 : ((result1 = true) -> (o45 = temp___264))
+
+axiom H72 : ((result1 = true) -> (o46 = (a9[o45])))
+
+axiom H73 : ((result1 = true) -> (o47 = to_rep(o46)))
+
+axiom H74 : ((result1 = true) -> (((o47 = x3) -> (o48 = true)) and
+  ((not (o47 = x3)) -> (o48 = false))))
+
+axiom H75 : ((result1 = true) -> (((not (o48 = true)) ->
+  (result11 = true)) and ((o48 = true) -> (result11 = false))))
+
+axiom H76 : ((result1 = true) -> ((result11 = true) -> ((o51 = (j9 + 1)) and
+  in_range1((j9 + 1)))))
+
+axiom H77 : ((result1 = true) -> ((result11 = true) -> ((o52 = o51) and
+  in_range2(o51))))
+
+axiom H78 : ((result1 = true) -> ((result11 = true) -> ((o49 = (j9 + 2)) and
+  in_range1((j9 + 2)))))
+
+axiom H79 : ((result1 = true) -> ((result11 = true) -> ((o50 = o49) and
+  in_range2(o49))))
+
+axiom H80 : ((result1 = true) -> ((result11 = true) -> (((is_perm({ elts =
+  a9; rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts = a11; rt =
   mk(to_rep(a__first), to_rep(a__last)) }) = true) and
-  ((to_rep((a8[o26])) = to_rep((a6[o28]))) and
-  ((to_rep((a8[o28])) = to_rep((a6[o26]))) and
-  (forall z10:int. (((to_rep(a__first) <= z10) and
-  (z10 <= to_rep(a__last))) -> (((not (z10 = o26)) and (not (z10 = o28))) ->
-  (to_rep((a8[z10])) = to_rep((a6[z10]))))))))) and
-  (to_rep(a__first) = 0)))) and ((a8 = a9) and (a10 = a8)))) or
-  ((not (result11 = true)) and (({ map__content = a9 } = { map__content = a6
-  }) and (a10 = a7))))) and (((((0 <= j7) and
-  ((((((to_rep(a__first) <= j7) and (j7 <= to_rep(a__last))) and
-  (o29 = j7)) and (o30 = (a9[o29]))) and (o31 = to_rep(o30))) and
-  (((y3 <  o31) and (result12 = true)) or ((not (y3 <  o31)) and
-  (result12 = false))))) or ((not (0 <= j7)) and (result12 = false))) and
-  (((result12 = true) and ((((temp___268 = a9) and ((temp___265 = j7) and
-  ((((o34 = j7) and in_range2(j7)) and ((((o32 = (j7 + 1)) and
-  in_range1((j7 + 1))) and ((o33 = o32) and in_range2(o32))) and (((is_perm({
-  elts = a9; rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts = a11; rt =
+  ((to_rep((a11[o50])) = to_rep((a9[o52]))) and
+  ((to_rep((a11[o52])) = to_rep((a9[o50]))) and
+  (forall z15:int. (((to_rep(a__first) <= z15) and
+  (z15 <= to_rep(a__last))) -> (((not (z15 = o50)) and (not (z15 = o52))) ->
+  (to_rep((a11[z15])) = to_rep((a9[z15]))))))))) and
+  (to_rep(a__first) = 0))))
+
+axiom H81 : ((result1 = true) -> ((result11 = true) -> (a12 = a11)))
+
+axiom H82 : ((result1 = true) -> ((result11 = true) -> (a13 = a11)))
+
+axiom H83 : ((result1 = true) -> ((not (result11 = true)) -> (a12 = a9)))
+
+axiom H84 : ((result1 = true) -> ((not (result11 = true)) -> (a13 = a10)))
+
+axiom H85 : ((result1 = true) -> ((0 <= j9) -> ((to_rep(a__first) <= j9) and
+  (j9 <= to_rep(a__last)))))
+
+axiom H86 : ((result1 = true) -> ((0 <= j9) -> (o53 = j9)))
+
+axiom H87 : ((result1 = true) -> ((0 <= j9) -> (o54 = (a12[o53]))))
+
+axiom H88 : ((result1 = true) -> ((0 <= j9) -> (o55 = to_rep(o54))))
+
+axiom H89 : ((result1 = true) -> ((0 <= j9) -> (((y3 <  o55) ->
+  (result12 = true)) and ((not (y3 <  o55)) -> (result12 = false)))))
+
+axiom H90 : ((result1 = true) -> ((not (0 <= j9)) -> (result12 = false)))
+
+axiom H91 : ((result1 = true) -> ((result12 = true) ->
+  (((temp___268 = a12) and ((temp___265 = j9) and ((((o58 = j9) and
+  in_range2(j9)) and ((((o56 = (j9 + 1)) and in_range1((j9 + 1))) and
+  ((o57 = o56) and in_range2(o56))) and (((is_perm({ elts = a12; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, { elts = a14; rt =
   mk(to_rep(a__first), to_rep(a__last)) }) = true) and
-  ((to_rep((a11[o33])) = to_rep((a9[o34]))) and
-  ((to_rep((a11[o34])) = to_rep((a9[o33]))) and
-  (forall z10:int. (((to_rep(a__first) <= z10) and
-  (z10 <= to_rep(a__last))) -> (((not (z10 = o33)) and (not (z10 = o34))) ->
-  (to_rep((a11[z10])) = to_rep((a9[z10]))))))))) and
-  (to_rep(a__first) = 0)))) and ((((0 <= j9) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (j9 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (j9 <= (0 - 3))))) and
-  ((sorted({ elts = a12; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
-  (j9 - 1)) = true) and ((sorted({ elts = a12; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }, (j9 + 1), (i1 + 1)) = true) and ((((0 <  j9) and
-  (to_rep((a12[(j9 - 1)])) <= to_rep((a12[(j9 + 1)])))) or
-  (not (0 <  j9))) and ((y3 <  to_rep((a12[(j9 + 1)]))) and ((is_perm({
-  elts = b; rt = mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a12;
-  rt = mk(to_rep(a__first), to_rep(a__last)) }) = true) and
-  (to_rep((a12[j9])) = y3))))))) and (((((-2147483648) <= 2147483647) ->
-  in_range1(j9)) and (to_rep(a__first) = 0)) and ((((o35 = (j9 - 1)) and
-  in_range1((j9 - 1))) and ((result13 = j9) and (j10 = o35))) and
-  (((((0 <= j10) and ((((((to_rep(a__first) <= j10) and
-  (j10 <= to_rep(a__last))) and (o36 = j10)) and (o37 = (a12[o36]))) and
-  (o38 = to_rep(o37))) and (((y3 <  o38) and (o39 = true)) or
-  ((not (y3 <  o38)) and (o39 = false))))) or ((not (0 <= j10)) and
-  (o39 = false))) and (((not (o39 = true)) and (result14 = true)) or
-  ((o39 = true) and (result14 = false)))) and (result14 = true)))))))) and
-  (((j10 = j11) and (a12 = a13)) and ((j12 = j10) and (a14 = a12)))) and ((({
-  int__content = j13 } = { int__content = j11 }) and ({ map__content = a15
-  } = { map__content = a13 })) and ((j14 = j12) and (a16 = a14))))) or
-  ((not (result12 = true)) and ((({ int__content = j13 } = { int__content =
-  j7 }) and ({ map__content = a15 } = { map__content = a9 })) and
-  ((j14 = j8) and (a16 = a10)))))) and ((((0 <= i2) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (i2 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 2))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (i2 <= (0 - 2))))) and
-  ((((-1) <= j15) and (((to_rep(a__first) <= to_rep(a__last)) and
-  (j15 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (j15 <= (0 - 3))))) and
-  ((sorted({ elts = a17; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
-  (i2 + 1)) = true) and (is_perm({ elts = b; rt = mk(to_rep(first2(b1)),
-  to_rep(last2(b1))) }, { elts = a17; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }) = true)))) and (((((((((-2147483648) <= 2147483647) ->
-  in_range1(j15)) and (((-2147483648) <= 2147483647) -> in_range1(x4))) and
-  (((-2147483648) <= 2147483647) -> in_range1(y4))) and
-  (((-2147483648) <= 2147483647) -> in_range1(z3))) and
-  (to_rep(a__first) = 0)) and (((-2147483648) <= 2147483647) ->
-  in_range1(i2))) and ((((o40 = (i2 + 2)) and in_range1((i2 + 2))) and
-  ((result15 = i2) and (i3 = o40))) and
-  ((((((((to_rep(a__first) <= to_rep(a__last)) and
-  (o41 = ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (o41 = 0))) and
-  ((o42 = o41) and in_range1(o41))) and (o43 = (o42 - 1))) and
-  (((i3 <  o43) and (o44 = true)) or ((not (i3 <  o43)) and
-  (o44 = false)))) and (((not (o44 = true)) and (result16 = true)) or
-  ((o44 = true) and (result16 = false)))) and
-  (result16 = true)))))))))))))))))) and (((z4 = { int__content = z3 }) and
-  ((y5 = { int__content = y4 }) and ((x5 = { int__content = x4 }) and
-  ((j16 = { int__content = j15 }) and ((i4 = { int__content = i3 }) and
-  (a18 = { map__content = a17 })))))) and ((z5 = z3) and ((y6 = y4) and
-  ((x6 = x4) and ((j17 = j15) and ((i5 = i3) and (a19 = a17)))))))) and
-  (((z6 = z4) and ((y7 = y5) and ((x7 = x5) and ((j18 = j16) and
-  ((i6 = i4) and (a20 = a18)))))) and ((z7 = z5) and ((y8 = y6) and
-  ((x8 = x6) and ((j19 = j17) and ((i7 = i5) and (a21 = a19))))))))) or
-  ((not (result1 = true)) and (((z6 = { int__content = z }) and ((y7 = {
-  int__content = y }) and ((x7 = { int__content = x }) and ((j18 = {
-  int__content = j }) and ((i6 = { int__content = i1 }) and (a20 = {
-  map__content = a })))))) and ((z7 = z1) and ((y8 = y1) and ((x8 = x1) and
-  ((j19 = j1) and ((i7 = i1) and (a21 = a1)))))))))) and
-  (((((((to_rep(a__first) <= to_rep(a__last)) and
-  (o45 = ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (o45 = 0))) and
-  ((o46 = o45) and in_range1(o45))) and (o47 = (o46 - 1))) and
-  ((((i6).int__content = o47) and (result17 = true)) or
-  ((not ((i6).int__content = o47)) and (result17 = false)))) and
-  (((result17 = true) and ((((((((to_rep(a__first) <= (i6).int__content) and
-  ((i6).int__content <= to_rep(a__last))) and (o48 = (i6).int__content)) and
-  (o49 = ((a20).map__content[o48]))) and (o50 = to_rep(o49))) and
-  ((result18 = y7) and (y9 = o50))) and
-  ((((o51 = ((i6).int__content - 1)) and
-  in_range1(((i6).int__content - 1))) and ((result19 = j18) and
-  (j20 = o51))) and ((((0 <= j20) and ((((((to_rep(a__first) <= j20) and
-  (j20 <= to_rep(a__last))) and (o52 = j20)) and
-  (o53 = ((a20).map__content[o52]))) and (o54 = to_rep(o53))) and
-  (((y9 <  o54) and (result20 = true)) or ((not (y9 <  o54)) and
-  (result20 = false))))) or ((not (0 <= j20)) and (result20 = false))) and
-  (((result20 = true) and ((((temp___283 = (a20).map__content) and
-  ((temp___280 = j20) and ((((o57 = j20) and in_range2(j20)) and
-  ((((o55 = (j20 + 1)) and in_range1((j20 + 1))) and ((o56 = o55) and
-  in_range2(o55))) and (((is_perm({ elts = (a20).map__content; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, { elts = a22; rt =
+  ((to_rep((a14[o57])) = to_rep((a12[o58]))) and
+  ((to_rep((a14[o58])) = to_rep((a12[o57]))) and
+  (forall z15:int. (((to_rep(a__first) <= z15) and
+  (z15 <= to_rep(a__last))) -> (((not (z15 = o57)) and (not (z15 = o58))) ->
+  (to_rep((a14[z15])) = to_rep((a12[z15]))))))))) and
+  (to_rep(a__first) = 0)))) and ((((0 <= j11) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (j11 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (j11 <= (0 - 3))))) and
+  ((sorted({ elts = a15; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
+  (j11 - 1)) = true) and ((sorted({ elts = a15; rt = mk(to_rep(a__first),
+  to_rep(a__last)) }, (j11 + 1), (i1 + 1)) = true) and (((0 <  j11) ->
+  (to_rep((a15[(j11 - 1)])) <= to_rep((a15[(j11 + 1)])))) and
+  ((y3 <  to_rep((a15[(j11 + 1)]))) and ((is_perm({ elts = b; rt =
+  mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a15; rt =
   mk(to_rep(a__first), to_rep(a__last)) }) = true) and
-  ((to_rep((a22[o56])) = to_rep(((a20).map__content[o57]))) and
-  ((to_rep((a22[o57])) = to_rep(((a20).map__content[o56]))) and
-  (forall z10:int. (((to_rep(a__first) <= z10) and
-  (z10 <= to_rep(a__last))) -> (((not (z10 = o56)) and (not (z10 = o57))) ->
-  (to_rep((a22[z10])) = to_rep(((a20).map__content[z10]))))))))) and
-  (to_rep(a__first) = 0)))) and ((((0 <= j21) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (j21 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 2))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (j21 <= (0 - 2))))) and
-  ((sorted({ elts = a23; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
-  (j21 - 1)) = true) and ((((to_rep(a__first) <= to_rep(a__last)) and
-  (sorted({ elts = a23; rt = mk(to_rep(a__first), to_rep(a__last)) },
-  (j21 + 1), (((to_rep(a__last) - to_rep(a__first)) + 1) - 1)) = true)) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (sorted({ elts = a23; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, (j21 + 1), (0 - 1)) = true))) and
-  ((((0 <  j21) and
-  (to_rep((a23[(j21 - 1)])) <= to_rep((a23[(j21 + 1)])))) or
-  (not (0 <  j21))) and ((y9 <  to_rep((a23[(j21 + 1)]))) and ((is_perm({
-  elts = b; rt = mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a23;
-  rt = mk(to_rep(a__first), to_rep(a__last)) }) = true) and
-  (to_rep((a23[j21])) = y9))))))) and (((((-2147483648) <= 2147483647) ->
-  in_range1(j21)) and (to_rep(a__first) = 0)) and ((((o58 = (j21 - 1)) and
-  in_range1((j21 - 1))) and ((result21 = { int__content = j21 }) and
-  (j22 = o58))) and (((((0 <= j22) and ((((((to_rep(a__first) <= j22) and
-  (j22 <= to_rep(a__last))) and (o59 = j22)) and (o60 = (a23[o59]))) and
-  (o61 = to_rep(o60))) and (((y9 <  o61) and (o62 = true)) or
-  ((not (y9 <  o61)) and (o62 = false))))) or ((not (0 <= j22)) and
-  (o62 = false))) and (((not (o62 = true)) and (result22 = true)) or
-  ((o62 = true) and (result22 = false)))) and (result22 = true)))))))) and
-  (((j23 = { int__content = j22 }) and (a24 = { map__content = a23 })) and
-  ((j24 = j22) and (a25 = a23)))) and (((j25 = j23) and (a26 = a24)) and
-  ((j26 = j24) and (a27 = a25))))) or ((not (result20 = true)) and (((j25 = {
-  int__content = j20 }) and (a26 = a20)) and ((j26 = j20) and
-  (a27 = a21)))))))) and (((y10 = { int__content = y9 }) and ((j27 = j25) and
-  (a28 = a26))) and ((y11 = y9) and ((j28 = j26) and (a29 = a27)))))) or
-  ((not (result17 = true)) and (((y10 = y7) and ((j27 = j18) and
-  (a28 = a20))) and ((y11 = y8) and ((j28 = j19) and
-  (a29 = a21)))))))))))))))) and (((z8 = z6) and ((y12 = y10) and
-  ((x9 = x7) and ((j29 = j27) and ((i8 = i6) and (a30 = a28)))))) and
-  ((z9 = z7) and ((y13 = y11) and ((x10 = x8) and ((j30 = j28) and
-  ((i9 = i7) and (a31 = a29)))))))) ->
-  ((((((to_rep(a__first) <= to_rep(a__last)) and
-  (o63 = ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (o63 = 0))) and
-  ((o64 = o63) and in_range1(o63))) and (o65 = (o64 - 1))) ->
-  ((-2147483648) <  o65)))))
+  (to_rep((a15[j11])) = y3))))))) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(j11)) and (to_rep(a__first) = 0)) and ((((o67 = (j11 - 1)) and
+  in_range1((j11 - 1))) and ((result13 = j11) and (j12 = o67))) and
+  (((((0 <= j12) -> ((((((to_rep(a__first) <= j12) and
+  (j12 <= to_rep(a__last))) and (o68 = j12)) and (o69 = (a15[o68]))) and
+  (o70 = to_rep(o69))) and (((y3 <  o70) -> (o71 = true)) and
+  ((not (y3 <  o70)) -> (o71 = false))))) and ((not (0 <= j12)) ->
+  (o71 = false))) and (((not (o71 = true)) -> (result14 = true)) and
+  ((o71 = true) -> (result14 = false)))) and (result14 = true)))))))) and
+  (((j17 = j12) and (a21 = a15)) and ((j18 = j12) and (a22 = a15))))))
+
+axiom H92 : ((result1 = true) -> ((result12 = true) -> (j19 = j17)))
+
+axiom H93 : ((result1 = true) -> ((result12 = true) -> (a23 = a21)))
+
+axiom H94 : ((result1 = true) -> ((result12 = true) -> (j20 = j18)))
+
+axiom H95 : ((result1 = true) -> ((result12 = true) -> (a24 = a22)))
+
+axiom H96 : ((result1 = true) -> ((not (result12 = true)) -> (j19 = j9)))
+
+axiom H97 : ((result1 = true) -> ((not (result12 = true)) -> (a23 = a12)))
+
+axiom H98 : ((result1 = true) -> ((not (result12 = true)) -> (j20 = j10)))
+
+axiom H99 : ((result1 = true) -> ((not (result12 = true)) -> (a24 = a13)))
+
+axiom H100 : ((result1 = true) -> ((0 <= i2) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (i2 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 2))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (i2 <= (0 - 2))))))
+
+axiom H101 : ((result1 = true) -> (((- 1) <= j21) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (j21 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 3))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (j21 <= (0 - 3))))))
+
+axiom H102 : ((result1 = true) -> (sorted({ elts = a25; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, 0, (i2 + 1)) = true))
+
+axiom H103 : ((result1 = true) -> (is_perm({ elts = b; rt =
+  mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a25; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }) = true))
+
+axiom H104 : ((result1 = true) -> ((((((((- 2147483648) <= 2147483647) ->
+  in_range1(j21)) and (((- 2147483648) <= 2147483647) -> in_range1(x4))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(y4))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(z3))) and
+  (to_rep(a__first) = 0)) and (((- 2147483648) <= 2147483647) ->
+  in_range1(i2))))
+
+axiom H105 : ((result1 = true) -> ((o80 = (i2 + 2)) and in_range1((i2 + 2))))
+
+axiom H106 : ((result1 = true) -> (result15 = i2))
+
+axiom H107 : ((result1 = true) -> (i3 = o80))
+
+axiom H108 : ((result1 = true) -> ((to_rep(a__first) <= to_rep(a__last)) ->
+  (o81 = ((to_rep(a__last) - to_rep(a__first)) + 1))))
+
+axiom H109 : ((result1 = true) ->
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (o81 = 0)))
+
+axiom H110 : ((result1 = true) -> ((o82 = o81) and in_range1(o81)))
+
+axiom H111 : ((result1 = true) -> (o83 = (o82 - 1)))
+
+axiom H112 : ((result1 = true) -> (((i3 <  o83) -> (o84 = true)) and
+  ((not (i3 <  o83)) -> (o84 = false))))
+
+axiom H113 : ((result1 = true) -> (((not (o84 = true)) ->
+  (result16 = true)) and ((o84 = true) -> (result16 = false))))
+
+axiom H114 : ((result1 = true) -> (result16 = true))
+
+axiom H115 : ((result1 = true) -> (z9 = z3))
+
+axiom H116 : ((result1 = true) -> (y11 = y4))
+
+axiom H117 : ((result1 = true) -> (x11 = x4))
+
+axiom H118 : ((result1 = true) -> (j45 = j21))
+
+axiom H119 : ((result1 = true) -> (i6 = i3))
+
+axiom H120 : ((result1 = true) -> (a53 = a25))
+
+axiom H121 : ((result1 = true) -> (z10 = z3))
+
+axiom H122 : ((result1 = true) -> (y12 = y4))
+
+axiom H123 : ((result1 = true) -> (x12 = x4))
+
+axiom H124 : ((result1 = true) -> (j46 = j21))
+
+axiom H125 : ((result1 = true) -> (i7 = i3))
+
+axiom H126 : ((result1 = true) -> (a54 = a25))
+
+axiom H127 : ((result1 = true) -> (z11 = z9))
+
+axiom H128 : ((result1 = true) -> (y13 = y11))
+
+axiom H129 : ((result1 = true) -> (x13 = x11))
+
+axiom H130 : ((result1 = true) -> (j47 = j45))
+
+axiom H131 : ((result1 = true) -> (i8 = i6))
+
+axiom H132 : ((result1 = true) -> (a55 = a53))
+
+axiom H133 : ((result1 = true) -> (z12 = z10))
+
+axiom H134 : ((result1 = true) -> (y14 = y12))
+
+axiom H135 : ((result1 = true) -> (x14 = x12))
+
+axiom H136 : ((result1 = true) -> (j48 = j46))
+
+axiom H137 : ((result1 = true) -> (i9 = i7))
+
+axiom H138 : ((result1 = true) -> (a56 = a54))
+
+axiom H139 : ((not (result1 = true)) -> (z11 = z))
+
+axiom H140 : ((not (result1 = true)) -> (y13 = y))
+
+axiom H141 : ((not (result1 = true)) -> (x13 = x))
+
+axiom H142 : ((not (result1 = true)) -> (j47 = j))
+
+axiom H143 : ((not (result1 = true)) -> (i8 = i1))
+
+axiom H144 : ((not (result1 = true)) -> (a55 = a))
+
+axiom H145 : ((not (result1 = true)) -> (z12 = z1))
+
+axiom H146 : ((not (result1 = true)) -> (y14 = y1))
+
+axiom H147 : ((not (result1 = true)) -> (x14 = x1))
+
+axiom H148 : ((not (result1 = true)) -> (j48 = j1))
+
+axiom H149 : ((not (result1 = true)) -> (i9 = i1))
+
+axiom H150 : ((not (result1 = true)) -> (a56 = a1))
+
+axiom H151 : ((to_rep(a__first) <= to_rep(a__last)) ->
+  (o157 = ((to_rep(a__last) - to_rep(a__first)) + 1)))
+
+axiom H152 : ((not (to_rep(a__first) <= to_rep(a__last))) -> (o157 = 0))
+
+axiom H153 : ((o158 = o157) and in_range1(o157))
+
+axiom H154 : (o159 = (o158 - 1))
+
+axiom H155 : (((i8 = o159) -> (result30 = true)) and ((not (i8 = o159)) ->
+  (result30 = false)))
+
+axiom H156 : ((result30 = true) -> ((to_rep(a__first) <= i8) and
+  (i8 <= to_rep(a__last))))
+
+axiom H157 : ((result30 = true) -> (o160 = i8))
+
+axiom H158 : ((result30 = true) -> (o161 = (a55[o160])))
+
+axiom H159 : ((result30 = true) -> (o162 = to_rep(o161)))
+
+axiom H160 : ((result30 = true) -> (result31 = y13))
+
+axiom H161 : ((result30 = true) -> (y15 = o162))
+
+axiom H162 : ((result30 = true) -> ((o163 = (i8 - 1)) and
+  in_range1((i8 - 1))))
+
+axiom H163 : ((result30 = true) -> (result32 = j47))
+
+axiom H164 : ((result30 = true) -> (j49 = o163))
+
+axiom H165 : ((result30 = true) -> ((0 <= j49) ->
+  ((to_rep(a__first) <= j49) and (j49 <= to_rep(a__last)))))
+
+axiom H166 : ((result30 = true) -> ((0 <= j49) -> (o164 = j49)))
+
+axiom H167 : ((result30 = true) -> ((0 <= j49) -> (o165 = (a55[o164]))))
+
+axiom H168 : ((result30 = true) -> ((0 <= j49) -> (o166 = to_rep(o165))))
+
+axiom H169 : ((result30 = true) -> ((0 <= j49) -> (((y15 <  o166) ->
+  (result33 = true)) and ((not (y15 <  o166)) -> (result33 = false)))))
+
+axiom H170 : ((result30 = true) -> ((not (0 <= j49)) -> (result33 = false)))
+
+axiom H171 : ((result30 = true) -> ((result33 = true) ->
+  (((temp___283 = a55) and ((temp___280 = j49) and ((((o169 = j49) and
+  in_range2(j49)) and ((((o167 = (j49 + 1)) and in_range1((j49 + 1))) and
+  ((o168 = o167) and in_range2(o167))) and (((is_perm({ elts = a55; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, { elts = a57; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }) = true) and
+  ((to_rep((a57[o168])) = to_rep((a55[o169]))) and
+  ((to_rep((a57[o169])) = to_rep((a55[o168]))) and
+  (forall z15:int. (((to_rep(a__first) <= z15) and
+  (z15 <= to_rep(a__last))) -> (((not (z15 = o168)) and
+  (not (z15 = o169))) -> (to_rep((a57[z15])) = to_rep((a55[z15]))))))))) and
+  (to_rep(a__first) = 0)))) and ((((0 <= j50) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (j50 <= (((to_rep(a__last) - to_rep(a__first)) + 1) - 2))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (j50 <= (0 - 2))))) and
+  ((sorted({ elts = a58; rt = mk(to_rep(a__first), to_rep(a__last)) }, 0,
+  (j50 - 1)) = true) and ((((to_rep(a__first) <= to_rep(a__last)) ->
+  (sorted({ elts = a58; rt = mk(to_rep(a__first), to_rep(a__last)) },
+  (j50 + 1), (((to_rep(a__last) - to_rep(a__first)) + 1) - 1)) = true)) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (sorted({ elts = a58; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, (j50 + 1), (0 - 1)) = true))) and
+  (((0 <  j50) -> (to_rep((a58[(j50 - 1)])) <= to_rep((a58[(j50 + 1)])))) and
+  ((y15 <  to_rep((a58[(j50 + 1)]))) and ((is_perm({ elts = b; rt =
+  mk(to_rep(first2(b1)), to_rep(last2(b1))) }, { elts = a58; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }) = true) and
+  (to_rep((a58[j50])) = y15))))))) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(j50)) and (to_rep(a__first) = 0)) and ((((o180 = (j50 - 1)) and
+  in_range1((j50 - 1))) and ((result34 = j50) and (j51 = o180))) and
+  (((((0 <= j51) -> ((((((to_rep(a__first) <= j51) and
+  (j51 <= to_rep(a__last))) and (o181 = j51)) and (o182 = (a58[o181]))) and
+  (o183 = to_rep(o182))) and (((y15 <  o183) -> (o184 = true)) and
+  ((not (y15 <  o183)) -> (o184 = false))))) and ((not (0 <= j51)) ->
+  (o184 = false))) and (((not (o184 = true)) -> (result35 = true)) and
+  ((o184 = true) -> (result35 = false)))) and (result35 = true)))))))) and
+  (((j56 = j51) and (a64 = a58)) and ((j57 = j51) and (a65 = a58))))))
+
+axiom H172 : ((result30 = true) -> ((result33 = true) -> (j58 = j56)))
+
+axiom H173 : ((result30 = true) -> ((result33 = true) -> (a66 = a64)))
+
+axiom H174 : ((result30 = true) -> ((result33 = true) -> (j59 = j57)))
+
+axiom H175 : ((result30 = true) -> ((result33 = true) -> (a67 = a65)))
+
+axiom H176 : ((result30 = true) -> ((not (result33 = true)) -> (j58 = j49)))
+
+axiom H177 : ((result30 = true) -> ((not (result33 = true)) -> (a66 = a55)))
+
+axiom H178 : ((result30 = true) -> ((not (result33 = true)) -> (j59 = j49)))
+
+axiom H179 : ((result30 = true) -> ((not (result33 = true)) -> (a67 = a56)))
+
+axiom H180 : ((result30 = true) -> (y16 = y15))
+
+axiom H181 : ((result30 = true) -> (j60 = j58))
+
+axiom H182 : ((result30 = true) -> (a68 = a66))
+
+axiom H183 : ((result30 = true) -> (y17 = y15))
+
+axiom H184 : ((result30 = true) -> (j61 = j59))
+
+axiom H185 : ((result30 = true) -> (a69 = a67))
+
+axiom H186 : ((not (result30 = true)) -> (y16 = y13))
+
+axiom H187 : ((not (result30 = true)) -> (j60 = j47))
+
+axiom H188 : ((not (result30 = true)) -> (a68 = a55))
+
+axiom H189 : ((not (result30 = true)) -> (y17 = y14))
+
+axiom H190 : ((not (result30 = true)) -> (j61 = j48))
+
+axiom H191 : ((not (result30 = true)) -> (a69 = a56))
+
+axiom H192 : (z13 = z11)
+
+axiom H193 : (y18 = y16)
+
+axiom H194 : (x15 = x13)
+
+axiom H195 : (j62 = j60)
+
+axiom H196 : (i10 = i8)
+
+axiom H197 : (a70 = a68)
+
+axiom H198 : (z14 = z12)
+
+axiom H199 : (y19 = y17)
+
+axiom H200 : (x16 = x14)
+
+axiom H201 : (j63 = j61)
+
+axiom H202 : (i11 = i9)
+
+axiom H203 : (a71 = a69)
+
+axiom H204 : ((to_rep(a__first) <= to_rep(a__last)) ->
+  (o188 = ((to_rep(a__last) - to_rep(a__first)) + 1)))
+
+axiom H205 : ((not (to_rep(a__first) <= to_rep(a__last))) -> (o188 = 0))
+
+axiom H206 : ((o189 = o188) and in_range1(o188))
+
+axiom H207 : (o190 = (o189 - 1))
+
+ (* File "pair_insertion_sort.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : ((- 2147483648) <  o190)

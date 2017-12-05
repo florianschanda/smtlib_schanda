@@ -98,6 +98,7 @@
 (declare-const o3 integer)
 (declare-const o4 integer)
 (declare-const us_self__compl integer)
+(declare-const o5 Int)
 (declare-const p_4__split_fields integer)
 (declare-const result Int)
 (declare-const x1 Int)

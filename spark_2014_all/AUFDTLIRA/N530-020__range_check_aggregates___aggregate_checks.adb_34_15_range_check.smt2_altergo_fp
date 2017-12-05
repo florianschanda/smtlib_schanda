@@ -135,7 +135,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -633,7 +633,12 @@ axiom should_fail3__def_axiom :
   to_rep(last5((aggregate_checks__do_wrong_aggregate_4__should_fail3__aggregate_def(0,
   0, to_rep(last(a1)))).rt2)))))
 
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : (to_rep(first(a1)) <= to_rep(last(a1)))
+
+axiom H2 : (to_rep(first(a1)) <= to_rep(last(a1)))
+
  (* File "aggregate_checks.adb", line 24, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> ((to_rep(first(a1)) <= to_rep(last(a1))) ->
-  ((to_rep(first(a1)) <= to_rep(last(a1))) -> (1 <= to_rep(first(a1))))))
+goal WP_parameter_def : (1 <= to_rep(first(a1)))

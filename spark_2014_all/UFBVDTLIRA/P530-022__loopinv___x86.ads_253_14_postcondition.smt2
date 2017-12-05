@@ -104,6 +104,7 @@
 (declare-const x86__dl__result4 (_ BitVec 8))
 (declare-const x86__dl__result5 (_ BitVec 8))
 (declare-const result1 (_ BitVec 8))
+(assert true)
 (assert (= x86__dl__result1 x86__dl__result2))
 (assert (= x86__dl__result3 x86__dl__result1))
 (assert (= result x86__dl__result))

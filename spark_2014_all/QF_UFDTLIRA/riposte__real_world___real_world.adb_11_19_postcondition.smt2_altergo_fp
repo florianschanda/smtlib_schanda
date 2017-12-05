@@ -165,33 +165,130 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "real_world.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall real_world__example_a__result:int. forall result:int.
-  forall r1:int. forall result1:int. forall r2:int. forall result2:int.
-  forall r3:int. forall result3:int. forall r4:int. forall result4:int.
-  forall r5:int. forall result5:int. forall r6:int. forall result6:int.
-  forall real_world__example_a__result1:int.
-  forall real_world__example_a__result2:int.
-  forall real_world__example_a__result3:int. forall r7:int.
-  forall real_world__example_a__result4:int. forall r8:int.
-  forall real_world__example_a__result5:int.
-  (forall result7:int. ((in_range1(sort) and (((((0 <= 5) ->
-  in_range2(r)) and ((((sort = 2) and ((result = r) and (r1 = 3))) or
-  ((not (sort = 2)) and ((((sort = 4) and ((result1 = r) and (r2 = 1))) or
-  ((not (sort = 4)) and (((((not (sort = 5)) -> ((not (sort = 9)) ->
-  ((not (sort = 6)) -> (sort = 7)))) and ((result2 = r) and (r3 = 2))) or
+logic r : int
+
+logic real_world__example_a__result : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic r3 : int
+
+logic result3 : int
+
+logic r4 : int
+
+logic result4 : int
+
+logic r5 : int
+
+logic result5 : int
+
+logic r6 : int
+
+logic result6 : int
+
+logic real_world__example_a__result1 : int
+
+logic real_world__example_a__result2 : int
+
+logic real_world__example_a__result3 : int
+
+logic r7 : int
+
+logic real_world__example_a__result4 : int
+
+logic r8 : int
+
+logic real_world__example_a__result5 : int
+
+logic result7 : int
+
+axiom H : in_range1(sort)
+
+axiom H1 : ((0 <= 5) -> in_range2(r))
+
+axiom H2 : ((sort = 2) -> (result = r))
+
+axiom H3 : ((sort = 2) -> (r1 = 3))
+
+axiom H4 : ((not (sort = 2)) -> ((sort = 4) -> (result1 = r)))
+
+axiom H5 : ((not (sort = 2)) -> ((sort = 4) -> (r2 = 1)))
+
+axiom H6 : ((not (sort = 2)) -> ((not (sort = 4)) -> (((not (sort = 5)) ->
+  ((not (sort = 9)) -> ((not (sort = 6)) -> (sort = 7)))) -> (result2 = r))))
+
+axiom H7 : ((not (sort = 2)) -> ((not (sort = 4)) -> (((not (sort = 5)) ->
+  ((not (sort = 9)) -> ((not (sort = 6)) -> (sort = 7)))) -> (r3 = 2))))
+
+axiom H8 : ((not (sort = 2)) -> ((not (sort = 4)) ->
   ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
-  (sort = 7))))) and ((((sort = 1) and ((result3 = r) and (r4 = 4))) or
-  ((not (sort = 1)) and ((((sort = 8) and ((result4 = r) and (r5 = 5))) or
-  ((not (sort = 8)) and (((result5 = r) and (r6 = 0)) and (r5 = r6)))) and
-  (r4 = r5)))) and (r3 = r4)))) and (r2 = r3)))) and (r1 = r2)))) and
-  (((real_world__example_a__result1 = real_world__example_a__result2) and
-  (real_world__example_a__result3 = real_world__example_a__result1)) and
-  ((result6 = real_world__example_a__result) and
-  (real_world__example_a__result1 = r1))))) and
-  (((real_world__example_a__result4 = real_world__example_a__result2) and
-  (r7 = r1)) and
-  ((real_world__example_a__result5 = real_world__example_a__result3) and
-  (r8 = r1)))) and (result7 = real_world__example_a__result4))) ->
-  ((sort = 2) -> (real_world__example_a__result4 = 3)))))
+  (sort = 7))))) -> ((sort = 1) -> (result3 = r)))))
+
+axiom H9 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((sort = 1) -> (r4 = 4)))))
+
+axiom H10 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> ((sort = 8) -> (result4 = r))))))
+
+axiom H11 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> ((sort = 8) -> (r5 = 5))))))
+
+axiom H12 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> ((not (sort = 8)) ->
+  (result5 = r))))))
+
+axiom H13 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> ((not (sort = 8)) -> (r6 = 0))))))
+
+axiom H14 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> ((not (sort = 8)) -> (r5 = r6))))))
+
+axiom H15 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> ((not (sort = 1)) -> (r4 = r5)))))
+
+axiom H16 : ((not (sort = 2)) -> ((not (sort = 4)) ->
+  ((not ((not (sort = 5)) -> ((not (sort = 9)) -> ((not (sort = 6)) ->
+  (sort = 7))))) -> (r3 = r4))))
+
+axiom H17 : ((not (sort = 2)) -> ((not (sort = 4)) -> (r2 = r3)))
+
+axiom H18 : ((not (sort = 2)) -> (r1 = r2))
+
+axiom H19 : (real_world__example_a__result1 = real_world__example_a__result2)
+
+axiom H20 : (real_world__example_a__result3 = real_world__example_a__result1)
+
+axiom H21 : (result6 = real_world__example_a__result)
+
+axiom H22 : (real_world__example_a__result1 = r1)
+
+axiom H23 : (real_world__example_a__result4 = real_world__example_a__result2)
+
+axiom H24 : (r7 = r1)
+
+axiom H25 : (real_world__example_a__result5 = real_world__example_a__result3)
+
+axiom H26 : (r8 = r1)
+
+axiom H27 : (result7 = real_world__example_a__result4)
+
+axiom H28 : (sort = 2)
+
+ (* File "real_world.adb", line 6, characters 0-0 *)
+goal WP_parameter_def : (real_world__example_a__result4 = 3)

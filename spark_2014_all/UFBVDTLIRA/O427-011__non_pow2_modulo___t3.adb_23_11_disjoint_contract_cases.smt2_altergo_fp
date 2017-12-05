@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -692,15 +692,34 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t3__msub__result : t
+
+logic o : t
+
+logic result : t
+
+logic t3__msub__result1 : t
+
+logic t3__msub__result2 : t
+
+logic t3__msub__result3 : t
+
+logic t3__msub__result4 : t
+
+logic t3__msub__result5 : t
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
  (* File "t3.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
-  (((match_bool(bool_eq(x, of_int(0)), bool_eq(y, of_int(0)),
-  false) = true) -> (((match_bool(bool_ne(x, of_int(0)), bool_eq(y,
-  of_int(0)), false) = true) -> (((match_bool(bool_eq(x, of_int(0)),
-  bool_ne(y, of_int(0)), false) = true) -> (((match_bool(bool_eq(x,
-  of_int(2)), bool_eq(y, of_int(4)), false) = true) ->
-  (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true) -> ((((((0 + 1) + 1) + 1) + 1) + 1) <= 1)) and
+goal WP_parameter_def : (((match_bool(bool_eq(x, of_int(0)), bool_eq(y,
+  of_int(0)), false) = true) -> (((match_bool(bool_ne(x, of_int(0)),
+  bool_eq(y, of_int(0)), false) = true) -> (((match_bool(bool_eq(x,
+  of_int(0)), bool_ne(y, of_int(0)), false) = true) ->
+  (((match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
+  false) = true) -> (((match_bool(bool_eq(x, of_int(4)), bool_eq(y,
+  of_int(2)), false) = true) -> ((((((0 + 1) + 1) + 1) + 1) + 1) <= 1)) and
   ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
   false) = true)) -> ((((((0 + 1) + 1) + 1) + 1) + 0) <= 1)))) and
   ((not (match_bool(bool_eq(x, of_int(2)), bool_eq(y, of_int(4)),
@@ -795,4 +814,4 @@ goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
   (((match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
   false) = true) -> ((((((0 + 0) + 0) + 0) + 0) + 1) <= 1)) and
   ((not (match_bool(bool_eq(x, of_int(4)), bool_eq(y, of_int(2)),
-  false) = true)) -> ((((((0 + 0) + 0) + 0) + 0) + 0) <= 1)))))))))))))
+  false) = true)) -> ((((((0 + 0) + 0) + 0) + 0) + 0) <= 1)))))))))))

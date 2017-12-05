@@ -72,6 +72,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-fun temp___233 (Int Int) (Array Int et1))
 (assert (forall ((temp___235 Int) (temp___236 Int)) (let ((temp___234 (temp___233 temp___235 temp___236))) (forall ((temp___237 Int)) (ite (and (<= 5 temp___237) (<= temp___237 10)) (= (select temp___234 temp___237) (of_rep temp___236)) (=> (and (<= 1 temp___237) (<= temp___237 4)) (= (select temp___234 temp___237) (of_rep temp___235))))))))
+(declare-const o Int)
 (assert (in_range1 i))
 (assert (in_range2 e))
 (assert (not (in_range2 (- e 1))))

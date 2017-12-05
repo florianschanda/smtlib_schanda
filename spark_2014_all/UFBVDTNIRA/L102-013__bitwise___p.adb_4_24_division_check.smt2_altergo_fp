@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -749,9 +749,31 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : t
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : int
+
+logic result : t
+
+logic x1 : t
+
+axiom H : in_range(havok_x)
+
+axiom H1 : in_range(havok_y)
+
+axiom H2 : ((o = mod(havok_x, 256)) and uint_in_range(mod(havok_x, 256)))
+
+axiom H3 : (o1 = of_int(o))
+
+axiom H4 : (result = x)
+
+axiom H5 : (x1 = o1)
+
+axiom H6 : true
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall o:int. forall o1:t. forall result:t. forall x1:t.
-  (in_range(havok_x) -> (in_range(havok_y) -> (((((o = mod(havok_x, 256)) and
-  uint_in_range(mod(havok_x, 256))) and (o1 = of_int(o))) and
-  ((result = x) and (x1 = o1))) -> (not (256 = 0))))))
+goal WP_parameter_def : (not (256 = 0))

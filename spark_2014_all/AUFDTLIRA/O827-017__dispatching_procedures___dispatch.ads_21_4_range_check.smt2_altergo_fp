@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -781,18 +781,36 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 axiom b_max__def_axiom : (b_max = id(100))
 
+logic c1 : int
+
+logic c2 : int
+
+logic c3 : int
+
+logic dispatch__b_max__assume : int
+
+axiom H : ((dispatch__b_max__assume = id(100)) and
+  (in_range2(dispatch__b_max__assume) and (dispatch__b_max__assume = 100)))
+
+axiom H1 : (dispatch__b_max__assume = b_max)
+
+axiom H2 : in_range2(b_max)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(c1))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(c2))
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range1(c3))
+
+axiom H6 : (dynamic_property1(1, b_max, to_rep(a1__first),
+  to_rep(a1__last)) and ((to_rep(a1__first) = 1) and
+  (to_rep(a1__last) = b_max)))
+
+axiom H7 : (dynamic_property3(1, b_max, to_rep(a2__first),
+  to_rep(a2__last)) and ((to_rep(a2__first) = 1) and
+  (to_rep(a2__last) = b_max)))
+
+axiom H8 : (1 <= b_max)
+
  (* File "dispatch.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c1:int. forall c2:int. forall c3:int.
-  forall dispatch__b_max__assume:int.
-  ((((dispatch__b_max__assume = id(100)) and
-  (in_range2(dispatch__b_max__assume) and
-  (dispatch__b_max__assume = 100))) and (dispatch__b_max__assume = b_max)) ->
-  (in_range2(b_max) -> ((((-2147483648) <= 2147483647) -> in_range1(c1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(c2)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(c3)) -> ((dynamic_property1(1,
-  b_max, to_rep(a1__first), to_rep(a1__last)) and
-  ((to_rep(a1__first) = 1) and (to_rep(a1__last) = b_max))) ->
-  ((dynamic_property3(1, b_max, to_rep(a2__first), to_rep(a2__last)) and
-  ((to_rep(a2__first) = 1) and (to_rep(a2__last) = b_max))) ->
-  ((1 <= b_max) -> (1 <= 1))))))))))
+goal WP_parameter_def : (1 <= 1)

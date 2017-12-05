@@ -163,6 +163,8 @@
 (declare-const x (Array Int natural))
 (declare-const y (Array Int natural))
 (declare-const z (Array Int natural))
+(declare-const temp___157 (Array Int natural))
+(declare-const temp___159 (Array Int natural))
 (declare-const result (Array Int natural))
 (declare-const x1 (Array Int natural))
 (declare-const result1 (Array Int natural))

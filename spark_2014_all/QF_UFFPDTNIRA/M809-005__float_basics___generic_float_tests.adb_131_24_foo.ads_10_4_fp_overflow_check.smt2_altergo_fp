@@ -1085,8 +1085,14 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+logic o1 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : ((o = sub(NearestTiesToEven, x, neg(x))) and
+  tqtisFinite(sub(NearestTiesToEven, x, neg(x))))
+
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. (tqtisFinite(x) -> (((o = sub(NearestTiesToEven, x,
-  neg(x))) and tqtisFinite(sub(NearestTiesToEven, x, neg(x)))) ->
-  tqtisFinite(add(NearestTiesToEven, x, x)))))
+goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, x, x))

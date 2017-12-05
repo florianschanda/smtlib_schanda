@@ -35,6 +35,7 @@
 (assert true)
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const o Bool)
 (assert (in_range x))
 (assert (not (= x 0)))
 (assert (not (not (= x 0))))

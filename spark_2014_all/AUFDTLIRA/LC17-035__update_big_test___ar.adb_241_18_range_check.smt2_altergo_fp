@@ -245,35 +245,188 @@ logic b : (int,et1) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,et1) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : et1
+
+logic o3 : (int,et1) farray
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic o6 : et1
+
+logic o7 : (int,et1) farray
+
+logic o8 : int
+
+logic o9 : et1
+
+logic o10 : (int,et1) farray
+
+logic o11 : et1
+
+logic o12 : (int,et1) farray
+
+logic o13 : et1
+
+logic o14 : (int,et1) farray
+
+logic o15 : et1
+
+logic o16 : (int,et1) farray
+
+logic o17 : int
+
+logic o18 : et1
+
+logic o19 : (int,et1) farray
+
+logic o20 : et1
+
+logic o21 : (int,et1) farray
+
+logic o22 : int
+
+logic o23 : et1
+
+logic o24 : (int,et1) farray
+
+logic o25 : et1
+
+logic o26 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic result1 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic result2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic result3 : (int,et1) farray
+
+logic a4 : (int,et1) farray
+
+logic result4 : (int,et1) farray
+
+logic a5 : (int,et1) farray
+
+logic result5 : (int,et1) farray
+
+logic a6 : (int,et1) farray
+
+logic result6 : (int,et1) farray
+
+logic a7 : (int,et1) farray
+
+logic result7 : (int,et1) farray
+
+logic a8 : (int,et1) farray
+
+logic result8 : (int,et1) farray
+
+logic a9 : (int,et1) farray
+
+logic result9 : (int,et1) farray
+
+logic a10 : (int,et1) farray
+
+logic result10 : (int,et1) farray
+
+logic a11 : (int,et1) farray
+
+logic result11 : (int,et1) farray
+
+logic a12 : (int,et1) farray
+
+logic result12 : (int,et1) farray
+
+logic a13 : (int,et1) farray
+
+logic a14 : (int,et1) farray
+
+logic a15 : (int,et1) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = b)
+
+axiom H2 : (to_rep(o) = to_rep((b[4])))
+
+axiom H3 : (o1 = (a1[5 <- o]))
+
+axiom H4 : (a1 = result1)
+
+axiom H5 : (a2 = o1)
+
+axiom H6 : (to_rep(o2) = to_rep((a2[6])))
+
+axiom H7 : (o3 = (a2[3 <- o2]))
+
+axiom H8 : (a2 = result2)
+
+axiom H9 : (a3 = o3)
+
+axiom H10 : (to_rep(o4) = 0)
+
+axiom H11 : (o5 = (a3[6 <- o4]))
+
+axiom H12 : (a3 = result3)
+
+axiom H13 : (a4 = o5)
+
+axiom H14 : (to_rep(o6) = to_rep((a4[6])))
+
+axiom H15 : (o7 = (a4[7 <- o6]))
+
+axiom H16 : (a4 = result4)
+
+axiom H17 : (a5 = o7)
+
+axiom H18 : ((o8 = (to_rep((a5[5])) - to_rep((a5[4])))) and
+  in_range1((to_rep((a5[5])) - to_rep((a5[4])))))
+
+axiom H19 : (to_rep(o9) = o8)
+
+axiom H20 : (o10 = (a5[4 <- o9]))
+
+axiom H21 : (a5 = result5)
+
+axiom H22 : (a6 = o10)
+
+axiom H23 : (to_rep(o11) = 0)
+
+axiom H24 : (o12 = (a6[5 <- o11]))
+
+axiom H25 : (a6 = result6)
+
+axiom H26 : (a7 = o12)
+
+axiom H27 : (to_rep(o13) = 0)
+
+axiom H28 : (o14 = (a7[10 <- o13]))
+
+axiom H29 : (a7 = result7)
+
+axiom H30 : (a8 = o14)
+
+axiom H31 : (to_rep(o15) = 0)
+
+axiom H32 : (o16 = (a8[9 <- o15]))
+
+axiom H33 : (a8 = result8)
+
+axiom H34 : (a9 = o16)
+
  (* File "ar.ads", line 62, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:et1. forall o3:(int,et1) farray. forall o4:et1.
-  forall o5:(int,et1) farray. forall o6:et1. forall o7:(int,et1) farray.
-  forall o8:int. forall o9:et1. forall o10:(int,et1) farray. forall o11:et1.
-  forall o12:(int,et1) farray. forall o13:et1. forall o14:(int,et1) farray.
-  forall o15:et1. forall o16:(int,et1) farray.
-  forall result:(int,et1) farray. forall a1:(int,et1) farray.
-  forall result1:(int,et1) farray. forall a2:(int,et1) farray.
-  forall result2:(int,et1) farray. forall a3:(int,et1) farray.
-  forall result3:(int,et1) farray. forall a4:(int,et1) farray.
-  forall result4:(int,et1) farray. forall a5:(int,et1) farray.
-  forall result5:(int,et1) farray. forall a6:(int,et1) farray.
-  forall result6:(int,et1) farray. forall a7:(int,et1) farray.
-  forall result7:(int,et1) farray. forall a8:(int,et1) farray.
-  forall result8:(int,et1) farray. forall a9:(int,et1) farray. ((({
-  map__content = result } = { map__content = a }) and (a1 = b)) ->
-  ((((to_rep(o) = to_rep((b[4]))) and (o1 = (a1[5 <- o]))) and
-  ((a1 = result1) and (a2 = o1))) -> ((((to_rep(o2) = to_rep((a2[6]))) and
-  (o3 = (a2[3 <- o2]))) and ((a2 = result2) and (a3 = o3))) ->
-  ((((to_rep(o4) = 0) and (o5 = (a3[6 <- o4]))) and ((a3 = result3) and
-  (a4 = o5))) -> ((((to_rep(o6) = to_rep((a4[6]))) and
-  (o7 = (a4[7 <- o6]))) and ((a4 = result4) and (a5 = o7))) ->
-  ((((((o8 = (to_rep((a5[5])) - to_rep((a5[4])))) and
-  in_range1((to_rep((a5[5])) - to_rep((a5[4]))))) and (to_rep(o9) = o8)) and
-  (o10 = (a5[4 <- o9]))) and ((a5 = result5) and (a6 = o10))) ->
-  ((((to_rep(o11) = 0) and (o12 = (a6[5 <- o11]))) and ((a6 = result6) and
-  (a7 = o12))) -> ((((to_rep(o13) = 0) and (o14 = (a7[10 <- o13]))) and
-  ((a7 = result7) and (a8 = o14))) -> ((((to_rep(o15) = 0) and
-  (o16 = (a8[9 <- o15]))) and ((a8 = result8) and (a9 = o16))) ->
-  in_range1((to_rep((b[2])) - to_rep((a9[2]))))))))))))))
+goal WP_parameter_def : in_range1((to_rep((b[2])) - to_rep((a9[2]))))

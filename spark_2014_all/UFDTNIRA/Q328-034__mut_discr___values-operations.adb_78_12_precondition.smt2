@@ -142,6 +142,7 @@
 (declare-const result__3 Int)
 (declare-const result3 Int)
 (declare-const result__4 Int)
+(declare-const last3 Int)
 (assert (in_range3 op))
 (assert (in_range2 last))
 (assert (<= 2 (size last)))

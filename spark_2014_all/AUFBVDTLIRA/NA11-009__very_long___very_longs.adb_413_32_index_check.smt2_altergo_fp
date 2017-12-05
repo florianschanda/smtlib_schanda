@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tdigit_count_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1170,39 +1170,142 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "very_longs.adb", line 379, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number__split_fields:(int,octet) farray.
-  forall number__split_fields1:t1. forall old_overflow:t.
-  forall overflow_mask:t. forall i:int. forall o:t. forall o1:int.
-  forall o2:octet. forall o3:t. forall o4:t. forall o5:t. forall o6:int.
-  forall o7:octet. forall o8:t. forall o9:t. forall o10:octet.
-  forall o11:int. forall o12:(int,octet) farray.
-  forall o13:(int,octet) farray. forall o14:t1.
-  forall o15:(int,octet) farray. forall o16:t1.
-  forall temp___1216:digit_index_type.
-  forall temp___12161:(int,octet) farray. forall temp___12162:t1.
-  forall o17:int. forall o18:octet. forall o19:t. forall o20:t.
-  forall o21:octet. forall result:t. forall old_overflow1:t.
-  forall result1:t. forall overflow_mask1:t. forall result2:int.
-  forall i1:int. forall number__split_fields2:(int,octet) farray.
-  forall number__split_fields3:t1. forall old_overflow2:t.
-  forall new_overflow:t. forall i2:int. forall result3:t.
-  forall new_overflow1:t. forall result4:(int,octet) farray.
-  forall result5:t1. forall number__split_fields4:(int,octet) farray.
-  forall number__split_fields5:t1. ((dynamic_property1(1,
-  to_rep2(number__split_discrs), to_rep1(first(number__split_fields1)),
+logic number__split_fields : (int,octet) farray
+
+logic number__split_fields1 : t1
+
+logic old_overflow : t
+
+logic new_overflow : t
+
+logic overflow_mask : t
+
+logic i : int
+
+logic o : t
+
+logic o1 : int
+
+logic o2 : octet
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : octet
+
+logic o11 : int
+
+logic o12 : (int,octet) farray
+
+logic o13 : (int,octet) farray
+
+logic o14 : t1
+
+logic o15 : (int,octet) farray
+
+logic o16 : t1
+
+logic temp___1216 : digit_index_type
+
+logic temp___12161 : (int,octet) farray
+
+logic temp___12162 : t1
+
+logic o17 : int
+
+logic o18 : octet
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : octet
+
+logic result : t
+
+logic old_overflow1 : t
+
+logic result1 : t
+
+logic overflow_mask1 : t
+
+logic result2 : int
+
+logic i1 : int
+
+logic number__split_fields2 : (int,octet) farray
+
+logic number__split_fields3 : t1
+
+logic old_overflow2 : t
+
+logic new_overflow1 : t
+
+logic i2 : int
+
+logic result3 : t
+
+logic new_overflow2 : t
+
+logic result4 : (int,octet) farray
+
+logic result5 : t1
+
+logic number__split_fields4 : (int,octet) farray
+
+logic number__split_fields5 : t1
+
+axiom H : (dynamic_property1(1, to_rep2(number__split_discrs),
+  to_rep1(first(number__split_fields1)),
   to_rep1(last(number__split_fields1))) and
   ((to_rep1(first(number__split_fields1)) = 1) and
-  (to_rep1(last(number__split_fields1)) = to_rep2(number__split_discrs)))) ->
-  (in_range4(distance) -> (((result = old_overflow) and
-  (old_overflow1 = of_int(0))) -> ((((((8 - distance) <  8) and
-  (o = lsl_bv(of_int(255), of_int((8 - distance))))) or
-  ((not ((8 - distance) <  8)) and (o = of_int(0)))) and
-  ((result1 = overflow_mask) and (overflow_mask1 = o))) ->
-  (((to_rep1(last(number__split_fields1)) = r120b) and in_range1(r120b)) ->
-  (((result2 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= r120b)) ->
-  ((((dynamic_property1(1, to_rep2(number__split_discrs),
+  (to_rep1(last(number__split_fields1)) = to_rep2(number__split_discrs))))
+
+axiom H1 : in_range4(distance)
+
+axiom H2 : (result = old_overflow)
+
+axiom H3 : (old_overflow1 = of_int(0))
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : (((8 - distance) <  8) -> (o = lsl_bv(of_int(255),
+  of_int((8 - distance)))))
+
+axiom H8 : ((not ((8 - distance) <  8)) -> (o = of_int(0)))
+
+axiom H9 : (result1 = overflow_mask)
+
+axiom H10 : (overflow_mask1 = o)
+
+axiom H11 : (to_rep1(last(number__split_fields1)) = r120b)
+
+axiom H12 : in_range1(r120b)
+
+axiom H13 : (result2 = i)
+
+axiom H14 : (i1 = 1)
+
+axiom H15 : (1 <= i1)
+
+axiom H16 : (i1 <= r120b)
+
+axiom H17 : (((dynamic_property1(1, to_rep2(number__split_discrs),
   to_rep1(first(number__split_fields3)),
   to_rep1(last(number__split_fields3))) and
   ((to_rep1(first(number__split_fields3)) = 1) and
@@ -1212,33 +1315,86 @@ goal WP_parameter_def :
   (temp___1225 <= to_rep1(last(number__split_fields3)))) ->
   ((i2 <= temp___1225) ->
   ((number__split_fields2[temp___1225]) = (number__split_fields[temp___1225])))))) and
-  ((1 <= i2) and (i2 <= r120b))) ->
-  (((((((((to_rep1(first(number__split_fields3)) <= i2) and
-  (i2 <= to_rep1(last(number__split_fields3)))) and (o1 = i2)) and
-  (o2 = (number__split_fields2[o1]))) and (o3 = to_rep(o2))) and
-  (o4 = bw_and(o3, overflow_mask1))) and ((o5 = shift_right__2(o4,
-  (8 - distance))) and ((((8 - distance) <  256) and (o5 = udiv(o4,
-  lsl_bv(of_int(1), of_int((8 - distance)))))) or
-  ((not ((8 - distance) <  256)) and (o5 = udiv(o4, of_int(0))))))) and
-  ((result3 = new_overflow) and (new_overflow1 = o5))) ->
-  ((((((((((distance <  8) and
-  ((((((to_rep1(first(number__split_fields3)) <= i2) and
-  (i2 <= to_rep1(last(number__split_fields3)))) and (o6 = i2)) and
-  (o7 = (number__split_fields2[o6]))) and (o8 = to_rep(o7))) and
-  (o9 = lsl_bv(o8, of_int(distance))))) or ((not (distance <  8)) and
-  (o9 = of_int(0)))) and (to_rep(o10) = o9)) and
-  ((((to_rep1(first(number__split_fields3)) <= i2) and
-  (i2 <= to_rep1(last(number__split_fields3)))) and (o11 = i2)) and
-  (o12 = (number__split_fields2[o11 <- o10])))) and ((o12 = o13) and
-  (number__split_fields3 = o14))) and ((o15 = o13) and (o16 = o14))) and
-  ((number__split_discrs = temp___1216) and ((temp___12161 = o15) and
-  (temp___12162 = o16)))) and ((((result4 = number__split_fields2) and
-  (result5 = number__split_fields3)) and
-  ((temp___12161 = number__split_fields4) and
-  (temp___12162 = number__split_fields5))) and
-  (number__split_discrs = temp___1216))) ->
-  ((((((((to_rep1(first(number__split_fields5)) <= i2) and
-  (i2 <= to_rep1(last(number__split_fields5)))) and (o17 = i2)) and
-  (o18 = (number__split_fields4[o17]))) and (o19 = to_rep(o18))) and
-  (o20 = bw_or(o19, old_overflow2))) and (to_rep(o21) = o20)) ->
-  (to_rep1(first(number__split_fields5)) <= i2)))))))))))))
+  ((1 <= i2) and (i2 <= r120b)))
+
+axiom H18 : ((to_rep1(first(number__split_fields3)) <= i2) and
+  (i2 <= to_rep1(last(number__split_fields3))))
+
+axiom H19 : (o1 = i2)
+
+axiom H20 : (o2 = (number__split_fields2[o1]))
+
+axiom H21 : (o3 = to_rep(o2))
+
+axiom H22 : (o4 = bw_and(o3, overflow_mask1))
+
+axiom H23 : ((o5 = shift_right__2(o4, (8 - distance))) and
+  ((((8 - distance) <  256) -> (o5 = udiv(o4, lsl_bv(of_int(1),
+  of_int((8 - distance)))))) and ((not ((8 - distance) <  256)) ->
+  (o5 = udiv(o4, of_int(0))))))
+
+axiom H24 : (result3 = new_overflow1)
+
+axiom H25 : (new_overflow2 = o5)
+
+axiom H26 : ((distance <  8) ->
+  ((to_rep1(first(number__split_fields3)) <= i2) and
+  (i2 <= to_rep1(last(number__split_fields3)))))
+
+axiom H27 : ((distance <  8) -> (o6 = i2))
+
+axiom H28 : ((distance <  8) -> (o7 = (number__split_fields2[o6])))
+
+axiom H29 : ((distance <  8) -> (o8 = to_rep(o7)))
+
+axiom H30 : ((distance <  8) -> (o9 = lsl_bv(o8, of_int(distance))))
+
+axiom H31 : ((not (distance <  8)) -> (o9 = of_int(0)))
+
+axiom H32 : (to_rep(o10) = o9)
+
+axiom H33 : ((to_rep1(first(number__split_fields3)) <= i2) and
+  (i2 <= to_rep1(last(number__split_fields3))))
+
+axiom H34 : (o11 = i2)
+
+axiom H35 : (o12 = (number__split_fields2[o11 <- o10]))
+
+axiom H36 : (o12 = o13)
+
+axiom H37 : (number__split_fields3 = o14)
+
+axiom H38 : (o15 = o13)
+
+axiom H39 : (o16 = o14)
+
+axiom H40 : (number__split_discrs = temp___1216)
+
+axiom H41 : (temp___12161 = o15)
+
+axiom H42 : (temp___12162 = o16)
+
+axiom H43 : (result4 = number__split_fields2)
+
+axiom H44 : (result5 = number__split_fields3)
+
+axiom H45 : ((number__split_fields4 = temp___12161) and
+  (number__split_fields5 = temp___12162))
+
+axiom H46 : (number__split_discrs = temp___1216)
+
+axiom H47 : ((to_rep1(first(number__split_fields5)) <= i2) and
+  (i2 <= to_rep1(last(number__split_fields5))))
+
+axiom H48 : (o17 = i2)
+
+axiom H49 : (o18 = (number__split_fields4[o17]))
+
+axiom H50 : (o19 = to_rep(o18))
+
+axiom H51 : (o20 = bw_or(o19, old_overflow2))
+
+axiom H52 : (to_rep(o21) = o20)
+
+ (* File "very_longs.adb", line 379, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(number__split_fields5)) <= i2)

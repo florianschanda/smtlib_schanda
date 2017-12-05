@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -742,7 +742,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tdigit_count_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1614,14 +1614,205 @@ axiom def_axiom :
   (forall temp___799:int. (((temp___794(temp___796, temp___797,
   temp___798)).elts2[temp___799]) = of_rep1(temp___796))))))
 
- (* File "very_longs.ads", line 84, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:(int,octet) farray.
-  forall result____split_fields1:t2. forall temp:int. forall us:int.
-  forall temp___801:(int,octet) farray. forall temp___8011:t3.
-  (in_range1(number) -> (in_range3(length1) -> (((us = length1) and
-  in_range3(length1)) -> ((to_rep(result____split_discrs) = length1) ->
-  (((length1 = to_rep(((to_base({ us_split_discrs2 = {
+logic result____split_fields : (int,octet) farray
+
+logic result____split_fields1 : t2
+
+logic temp : int
+
+logic index : int
+
+logic very_longs__make_from_natural__result : digit_index_type
+
+logic very_longs__make_from_natural__result1 : (int,octet) farray
+
+logic very_longs__make_from_natural__result2 : t1
+
+logic us : int
+
+logic temp___801 : (int,octet) farray
+
+logic temp___8011 : t3
+
+logic temp___802 : (int,octet) farray
+
+logic temp___8021 : t2
+
+logic o : (int,octet) farray
+
+logic o1 : t2
+
+logic o2 : (int,octet) farray
+
+logic o3 : t2
+
+logic temp___805 : digit_index_type
+
+logic temp___8051 : (int,octet) farray
+
+logic temp___8052 : t2
+
+logic temp___812 : int
+
+logic temp___809 : digit_index_type
+
+logic temp___8091 : (int,octet) farray
+
+logic temp___8092 : t2
+
+logic o4 : int
+
+logic o5 : t
+
+logic o6 : octet
+
+logic o7 : int
+
+logic o8 : (int,octet) farray
+
+logic o9 : (int,octet) farray
+
+logic o10 : t2
+
+logic o11 : (int,octet) farray
+
+logic o12 : t2
+
+logic temp___808 : digit_index_type
+
+logic temp___8081 : (int,octet) farray
+
+logic temp___8082 : t2
+
+logic result : (int,octet) farray
+
+logic result1 : t2
+
+logic result____split_fields2 : (int,octet) farray
+
+logic result____split_fields3 : t2
+
+logic result2 : int
+
+logic temp1 : int
+
+logic result3 : int
+
+logic index1 : int
+
+logic result____split_fields4 : (int,octet) farray
+
+logic result____split_fields5 : t2
+
+logic temp2 : int
+
+logic index2 : int
+
+logic result4 : (int,octet) farray
+
+logic result5 : t2
+
+logic result____split_fields6 : (int,octet) farray
+
+logic result____split_fields7 : t2
+
+logic result6 : int
+
+logic temp3 : int
+
+logic result____split_fields8 : (int,octet) farray
+
+logic result____split_fields9 : t2
+
+logic temp4 : int
+
+logic index3 : int
+
+logic result____split_fields10 : (int,octet) farray
+
+logic result____split_fields11 : t2
+
+logic temp5 : int
+
+logic index4 : int
+
+logic result____split_fields12 : (int,octet) farray
+
+logic result____split_fields13 : t2
+
+logic temp6 : int
+
+logic index5 : int
+
+logic result____split_fields14 : (int,octet) farray
+
+logic result____split_fields15 : t2
+
+logic temp7 : int
+
+logic index6 : int
+
+logic result7 : digit_index_type
+
+logic result8 : (int,octet) farray
+
+logic result9 : t1
+
+logic very_longs__make_from_natural__result3 : digit_index_type
+
+logic very_longs__make_from_natural__result4 : (int,octet) farray
+
+logic very_longs__make_from_natural__result5 : t1
+
+logic very_longs__make_from_natural__result6 : digit_index_type
+
+logic very_longs__make_from_natural__result7 : (int,octet) farray
+
+logic very_longs__make_from_natural__result8 : t1
+
+logic very_longs__make_from_natural__result9 : digit_index_type
+
+logic very_longs__make_from_natural__result10 : (int,octet) farray
+
+logic very_longs__make_from_natural__result11 : t1
+
+logic result____split_fields16 : (int,octet) farray
+
+logic result____split_fields17 : t2
+
+logic temp8 : int
+
+logic index7 : int
+
+logic very_longs__make_from_natural__result12 : digit_index_type
+
+logic very_longs__make_from_natural__result13 : (int,octet) farray
+
+logic very_longs__make_from_natural__result14 : t1
+
+logic result____split_fields18 : (int,octet) farray
+
+logic result____split_fields19 : t2
+
+logic temp9 : int
+
+logic index8 : int
+
+logic very_longs__make_from_natural__result15 : digit_index_type
+
+logic very_longs__make_from_natural__result16 : (int,octet) farray
+
+logic very_longs__make_from_natural__result17 : t1
+
+axiom H : in_range1(number)
+
+axiom H1 : in_range3(length1)
+
+axiom H2 : ((us = length1) and in_range3(length1))
+
+axiom H3 : (to_rep(result____split_discrs) = length1)
+
+axiom H4 : ((length1 = to_rep(((to_base({ us_split_discrs2 = {
   rec__very_longs__very_long__length = result____split_discrs };
   us_split_fields3 = { rec__very_longs__very_long__long_digits1 = { elts1 =
   result____split_fields; rt1 = result____split_fields1 } }
@@ -1629,17 +1820,26 @@ goal WP_parameter_def :
   (dynamic_property3(1, length1, to_rep2(first2(result____split_fields1)),
   to_rep2(last2(result____split_fields1))) and
   ((to_rep2(first2(result____split_fields1)) = 1) and
-  (to_rep2(last2(result____split_fields1)) = length1)))) ->
-  (((0 <= 2147483647) -> in_range1(temp)) ->
-  ((to_rep(result____split_discrs) = length1) ->
-  (((to_rep2(first4((temp___794(of_int(0), 1, length1)).rt2)) = 1) and
-  ((to_rep2(last4((temp___794(of_int(0), 1, length1)).rt2)) = length1) and ({
-  elts2 = temp___801; rt2 = temp___8011 } = temp___794(of_int(0), 1,
-  length1)))) ->
+  (to_rep2(last2(result____split_fields1)) = length1))))
+
+axiom H5 : ((0 <= 2147483647) -> in_range1(temp))
+
+axiom H6 : (to_rep(result____split_discrs) = length1)
+
+axiom H7 : (to_rep2(first4((temp___794(of_int(0), 1, length1)).rt2)) = 1)
+
+axiom H8 : (to_rep2(last4((temp___794(of_int(0), 1,
+  length1)).rt2)) = length1)
+
+axiom H9 : ({ elts2 = temp___801; rt2 = temp___8011 } = temp___794(of_int(0),
+  1, length1))
+
+ (* File "very_longs.ads", line 84, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep2(first4(temp___8011)) <= to_rep2(last4(temp___8011))) ->
   (((1 <= length1) ->
   (((to_rep2(last4(temp___8011)) - to_rep2(first4(temp___8011))) + 1) = ((length1 - 1) + 1))) and
   ((not (1 <= length1)) ->
   (((to_rep2(last4(temp___8011)) - to_rep2(first4(temp___8011))) + 1) = 0)))) and
   ((not (to_rep2(first4(temp___8011)) <= to_rep2(last4(temp___8011)))) ->
-  ((1 <= length1) -> (0 = ((length1 - 1) + 1))))))))))))))
+  ((1 <= length1) -> (0 = ((length1 - 1) + 1)))))

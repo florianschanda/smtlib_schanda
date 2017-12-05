@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -258,7 +258,7 @@ axiom coerce_axiom :
 
 type content
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -509,28 +509,218 @@ function t31b__ref___projection(a: t31b__ref) : integer = (a).t31b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic h : (int,content) farray
+
+logic t1 : int
+
+logic m : int
+
+logic q : int
+
+logic temp___483 : (int,content) farray
+
+logic temp___481 : (int,content) farray
+
+logic temp___479 : int
+
+logic temp___487 : (int,content) farray
+
+logic temp___478 : int
+
+logic temp___485 : (int,content) farray
+
+logic k : int
+
+logic o : int
+
+logic o1 : content
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : content
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : content
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : content
+
+logic o11 : int
+
+logic temp___476 : int
+
+logic o12 : int
+
+logic o13 : content
+
+logic o14 : int
+
+logic o15 : content
+
+logic o16 : int
+
+logic o17 : (int,content) farray
+
+logic temp___477 : int
+
+logic o18 : content
+
+logic o19 : int
+
+logic o20 : (int,content) farray
+
+logic k1 : int
+
+logic o21 : int
+
+logic o22 : content
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : content
+
+logic o26 : int
+
+logic h1 : (int,content) farray
+
+logic t2 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : int
+
+logic q1 : int
+
+logic h2 : (int,content) farray
+
+logic t3 : int
+
+logic q2 : int
+
+logic result2 : int
+
+logic t4 : int
+
+logic result3 : (int,content) farray
+
+logic h3 : (int,content) farray
+
+logic result4 : (int,content) farray
+
+logic h4 : (int,content) farray
+
+logic result5 : int
+
+logic q3 : int
+
+logic h5 : (int,content) farray
+
+logic t5 : int
+
+logic q4 : int
+
+logic h6 : (int,content) farray
+
+logic t6 : int
+
+logic q5 : int
+
+logic h7 : (int,content) farray
+
+logic t7 : int
+
+logic q6 : int
+
+logic h8 : (int,content) farray
+
+logic t8 : int
+
+logic q7 : int
+
+logic h9 : (int,content) farray
+
+logic t9 : int
+
+logic q8 : int
+
+logic h10 : (int,content) farray
+
+logic t10 : int
+
+logic q9 : int
+
+logic h11 : (int,content) farray
+
+logic t11 : int
+
+logic m2 : int
+
+logic q10 : int
+
+logic h12 : (int,content) farray
+
+logic t12 : int
+
+logic m3 : int
+
+logic q11 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(h__first),
+  to_rep(h__last))
+
+axiom H1 : ((to_rep(h__first) = 1) and (1 <= to_rep(h__last)))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range2(t1))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(m))
+
+axiom H4 : (result = m)
+
+axiom H5 : (m1 = comp_div(to_rep(h__last),2))
+
+axiom H6 : (m1 = r30b)
+
+axiom H7 : in_range1(r30b)
+
+axiom H8 : (result1 = q)
+
+axiom H9 : (q1 = to_rep(h__first))
+
+axiom H10 : (to_rep(h__first) <= q1)
+
+axiom H11 : (q1 <= r30b)
+
+axiom H12 :
+  (forall k2:int. (((to_rep(h__first) <= k2) and (k2 <= to_rep(h__last))) ->
+  (((k2 <  q2) -> (to_rep1((h2[k2])) = to_rep1((h[(k2 + m1)])))) and
+  ((not (k2 <  q2)) -> ((((q2 + m1) <  k2) ->
+  (to_rep1((h2[k2])) = to_rep1((h[(k2 - m1)])))) and
+  ((not ((q2 + m1) <  k2)) -> (to_rep1((h2[k2])) = to_rep1((h[k2])))))))))
+
+axiom H13 : ((((to_rep(h__first) <= r30b) ->
+  dynamic_property1(to_rep(h__first), r30b, q2)) and
+  (((- 2147483648) <= 2147483647) -> in_range2(t3))) and
+  ((to_rep(h__first) <= q2) and (q2 <= r30b)))
+
+axiom H14 : (to_rep(h__first) <= k)
+
+axiom H15 : (k <= to_rep(h__last))
+
+axiom H16 : (not (k <  q2))
+
+axiom H17 : (not ((q2 + m1) <  k))
+
  (* File "infoflow.ads", line 114, characters 0-0 *)
-goal WP_parameter_def :
-  (forall h:(int,content) farray. forall t1:int. forall m:int. forall q:int.
-  forall k:int. forall result:int. forall m1:int. forall result1:int.
-  forall q1:int. forall h1:(int,content) farray. forall t2:int.
-  forall q2:int. (dynamic_property((-2147483648), 2147483647,
-  to_rep(h__first), to_rep(h__last)) -> (((to_rep(h__first) = 1) and
-  (1 <= to_rep(h__last))) -> ((((-2147483648) <= 2147483647) ->
-  in_range2(t1)) -> ((((-2147483648) <= 2147483647) -> in_range1(m)) -> ((({
-  int__content = result } = { int__content = m }) and
-  (m1 = comp_div(to_rep(h__last),2))) -> (((m1 = r30b) and
-  in_range1(r30b)) -> ((({ int__content = result1 } = { int__content = q
-  }) and (q1 = to_rep(h__first))) -> (((to_rep(h__first) <= q1) and
-  (q1 <= r30b)) ->
-  ((forall k1:int. (((to_rep(h__first) <= k1) and (k1 <= to_rep(h__last))) ->
-   (((k1 <  q2) and (to_rep1((h1[k1])) = to_rep1((h[(k1 + m1)])))) or
-   ((not (k1 <  q2)) and ((((q2 + m1) <  k1) and
-   (to_rep1((h1[k1])) = to_rep1((h[(k1 - m1)])))) or
-   ((not ((q2 + m1) <  k1)) and (to_rep1((h1[k1])) = to_rep1((h[k1]))))))))) ->
-  (((((to_rep(h__first) <= r30b) -> dynamic_property1(to_rep(h__first), r30b,
-  q2)) and (((-2147483648) <= 2147483647) -> in_range2(t2))) and
-  ((to_rep(h__first) <= q2) and (q2 <= r30b))) ->
-  (((to_rep(h__first) <= k) and (k <= to_rep(h__last))) ->
-  ((not (k <  q2)) -> ((not ((q2 + m1) <  k)) ->
-  (to_rep(h__first) <= k)))))))))))))))
+goal WP_parameter_def : (to_rep(h__first) <= k)

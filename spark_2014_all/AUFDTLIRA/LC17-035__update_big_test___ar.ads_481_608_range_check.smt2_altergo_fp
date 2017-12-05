@@ -825,68 +825,226 @@ axiom def_axiom22 :
   ((not (temp___5338 = temp___5336)) -> ((temp___5333(temp___5335,
   temp___5336, temp___5337)[temp___5338]) = (temp___5335[temp___5338])))))))
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next : int
+
+logic f : int
+
+logic t : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : et1
+
+logic o7 : (int,et1) farray
+
+logic o8 : (int,(int,et1) farray) farray
+
+logic o9 : (int,(int,(int,et1) farray) farray) farray
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___5371 : (int,(int,et1) farray) farray
+
+logic o13 : (int,et1) farray
+
+logic o14 : (int,et1) farray
+
+logic o15 : (int,(int,et1) farray) farray
+
+logic o16 : (int,(int,et1) farray) farray
+
+logic o17 : int
+
+logic temp___5372 : (int,(int,(int,et1) farray) farray) farray
+
+logic o18 : int
+
+logic o19 : int
+
+logic temp___5361 : (int,(int,et1) farray) farray
+
+logic o20 : int
+
+logic o21 : (int,et1) farray
+
+logic o22 : (int,et1) farray
+
+logic o23 : (int,(int,et1) farray) farray
+
+logic o24 : (int,(int,et1) farray) farray
+
+logic o25 : int
+
+logic temp___5362 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic t1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result2 : int
+
+logic k_next1 : int
+
+logic result3 : int
+
+logic k_next2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next3 : int
+
+logic f3 : int
+
+logic t2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next4 : int
+
+logic f4 : int
+
+logic t3 : (int,(int,(int,et1) farray) farray) farray
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range2(k)
+
+axiom H3 : in_range3(e)
+
+axiom H4 : ((((1 <= 16) -> in_range2(k_next)) and (((0 <= 99) ->
+  in_range3(f)) and ((bool_eq7(a1, 1, 16, temp___5321(t1, k,
+  temp___5327((t1[k]), j, temp___5333(((t1[k])[j]), i, e))), 1,
+  16) = true) and ((((k = 16) -> ((result2 = k_next) and (k_next1 = 1))) and
+  ((not (k = 16)) -> ((((o4 = (k + 1)) and in_range2((k + 1))) and
+  ((result3 = k_next) and (k_next2 = o4))) and (k_next1 = k_next2)))) and
+  ((((e = 0) -> ((result4 = f) and (f1 = 99))) and ((not (e = 0)) ->
+  ((((o5 = (e - 1)) and in_range3((e - 1))) and ((result5 = f) and
+  (f2 = o5))) and (f1 = f2)))) and (((((to_rep(o6) = f1) and
+  (o7 = (((a1[k_next1])[j])[i <- o6]))) and
+  (o8 = ((a1[k_next1])[j <- o7]))) and (o9 = (a1[k_next1 <- o8]))) and
+  ((a1 = result6) and (a2 = o9)))))))) and (((t1 = t2) and ((f1 = f3) and
+  ((k_next1 = k_next3) and (a2 = a3)))) and ((t3 = t1) and ((f4 = f1) and
+  ((k_next4 = k_next1) and (a4 = a2))))))
+
+axiom H5 : ((k <  16) -> ((0 <  e) -> ((o20 = (e - 1)) and
+  in_range3((e - 1)))))
+
+axiom H6 : ((k <  16) -> ((0 <  e) -> ((1 <= (k + 1)) and ((k + 1) <= 16))))
+
+axiom H7 : ((k <  16) -> ((0 <  e) -> (o19 = (k + 1))))
+
+axiom H8 : ((k <  16) -> ((0 <  e) -> (temp___5361 = (a[o19]))))
+
+axiom H9 : ((k <  16) -> ((0 <  e) -> (o21 = (temp___5361[j]))))
+
+axiom H10 : ((k <  16) -> ((0 <  e) -> (o22 = temp___1675(o21, i, o20))))
+
+axiom H11 : ((k <  16) -> ((0 <  e) -> ((1 <= (k + 1)) and ((k + 1) <= 16))))
+
+axiom H12 : ((k <  16) -> ((0 <  e) -> (o18 = (k + 1))))
+
+axiom H13 : ((k <  16) -> ((0 <  e) -> (o23 = (a[o18]))))
+
+axiom H14 : ((k <  16) -> ((0 <  e) -> (o24 = temp___1668(o23, j, o22))))
+
+axiom H15 : ((k <  16) -> ((0 <  e) -> ((o25 = (k + 1)) and
+  in_range2((k + 1)))))
+
+axiom H16 : ((k <  16) -> ((0 <  e) -> (temp___5362 = temp___1645(a, k,
+  temp___1653((a[k]), j, temp___1660(((a[k])[j]), i, e)), o25, o24))))
+
+axiom H17 : ((k <  16) -> ((0 <  e) -> (result8 = bool_eq7(a3, 1, 16,
+  temp___5362, 1, 16))))
+
+axiom H18 : ((k <  16) -> ((not (0 <  e)) -> (result8 = false)))
+
+axiom H19 : ((k <  16) -> ((result8 = true) -> (result7 = true)))
+
+axiom H20 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  ((1 <= (k + 1)) and ((k + 1) <= 16)))))
+
+axiom H21 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o12 = (k + 1)))))
+
+axiom H22 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (temp___5371 = (a[o12])))))
+
+axiom H23 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o13 = (temp___5371[j])))))
+
+axiom H24 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o14 = temp___1714(o13, i, 99)))))
+
+axiom H25 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  ((1 <= (k + 1)) and ((k + 1) <= 16)))))
+
+axiom H26 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o11 = (k + 1)))))
+
+axiom H27 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o15 = (a[o11])))))
+
+axiom H28 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (o16 = temp___1707(o15, j, o14)))))
+
+axiom H29 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  ((o17 = (k + 1)) and in_range2((k + 1))))))
+
+axiom H30 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (temp___5372 = temp___1684(a, k, temp___1692((a[k]), j,
+  temp___1699(((a[k])[j]), i, e)), o17, o16)))))
+
+axiom H31 : ((k <  16) -> ((not (result8 = true)) -> ((e = 0) ->
+  (result7 = bool_eq7(a3, 1, 16, temp___5372, 1, 16)))))
+
+axiom H32 : ((k <  16) -> ((not (result8 = true)) -> ((not (e = 0)) ->
+  (result7 = false))))
+
+axiom H33 : ((not (k <  16)) -> (result7 = false))
+
+axiom H34 : (not (result7 = true))
+
+axiom H35 : (k = 16)
+
+axiom H36 : (0 <  e)
+
  (* File "ar.ads", line 476, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall k_next:int.
-  forall f:int. forall o:int. forall o1:int. forall o2:et1.
-  forall o3:(int,et1) farray. forall o4:(int,(int,et1) farray) farray.
-  forall o5:(int,(int,(int,et1) farray) farray) farray. forall o6:int.
-  forall o7:int. forall temp___5371:(int,(int,et1) farray) farray.
-  forall o8:(int,et1) farray. forall o9:(int,et1) farray.
-  forall o10:(int,(int,et1) farray) farray.
-  forall o11:(int,(int,et1) farray) farray. forall o12:int.
-  forall temp___5372:(int,(int,(int,et1) farray) farray) farray.
-  forall o13:int. forall o14:int.
-  forall temp___5361:(int,(int,et1) farray) farray. forall o15:int.
-  forall o16:(int,et1) farray. forall o17:(int,et1) farray.
-  forall o18:(int,(int,et1) farray) farray.
-  forall o19:(int,(int,et1) farray) farray. forall o20:int.
-  forall temp___5362:(int,(int,(int,et1) farray) farray) farray.
-  forall t:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray. forall result:int.
-  forall k_next1:int. forall result1:int. forall k_next2:int.
-  forall result2:int. forall f1:int. forall result3:int. forall f2:int.
-  forall result4:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray. forall k_next3:int.
-  forall f3:int. forall t1:(int,(int,(int,et1) farray) farray) farray.
-  forall a4:(int,(int,(int,et1) farray) farray) farray. forall k_next4:int.
-  forall f4:int. forall t2:(int,(int,(int,et1) farray) farray) farray.
-  forall result5:bool. forall result6:bool. (in_range(i) -> (in_range1(j) ->
-  (in_range2(k) -> (in_range3(e) -> (((((1 <= 16) -> in_range2(k_next)) and
-  (((0 <= 99) -> in_range3(f)) and ((bool_eq7(a1, 1, 16, temp___5321(t, k,
-  temp___5327((t[k]), j, temp___5333(((t[k])[j]), i, e))), 1, 16) = true) and
-  ((((k = 16) and (({ int__content = result } = { int__content = k_next
-  }) and (k_next1 = 1))) or ((not (k = 16)) and ((((o = (k + 1)) and
-  in_range2((k + 1))) and (({ int__content = result1 } = { int__content =
-  k_next }) and (k_next2 = o))) and (k_next1 = k_next2)))) and ((((e = 0) and
-  (({ int__content = result2 } = { int__content = f }) and (f1 = 99))) or
-  ((not (e = 0)) and ((((o1 = (e - 1)) and in_range3((e - 1))) and (({
-  int__content = result3 } = { int__content = f }) and (f2 = o1))) and
-  (f1 = f2)))) and (((((to_rep(o2) = f1) and
-  (o3 = (((a1[k_next1])[j])[i <- o2]))) and
-  (o4 = ((a1[k_next1])[j <- o3]))) and (o5 = (a1[k_next1 <- o4]))) and
-  ((a1 = result4) and (a2 = o5)))))))) and (((t = t1) and ((f1 = f3) and
-  ((k_next1 = k_next3) and (a2 = a3)))) and ((t2 = t) and ((f4 = f1) and
-  ((k_next4 = k_next1) and (a4 = a2)))))) -> ((((k <  16) and ((((0 <  e) and
-  ((((((o15 = (e - 1)) and in_range3((e - 1))) and ((((((1 <= (k + 1)) and
-  ((k + 1) <= 16)) and (o14 = (k + 1))) and (temp___5361 = (a[o14]))) and
-  (o16 = (temp___5361[j]))) and (o17 = temp___1675(o16, i, o15)))) and
-  (((((1 <= (k + 1)) and ((k + 1) <= 16)) and (o13 = (k + 1))) and
-  (o18 = (a[o13]))) and (o19 = temp___1668(o18, j, o17)))) and
-  (((o20 = (k + 1)) and in_range2((k + 1))) and (temp___5362 = temp___1645(a,
-  k, temp___1653((a[k]), j, temp___1660(((a[k])[j]), i, e)), o20, o19)))) and
-  (result6 = bool_eq7(a3, 1, 16, temp___5362, 1, 16)))) or
-  ((not (0 <  e)) and (result6 = false))) and (((result6 = true) and
-  (result5 = true)) or ((not (result6 = true)) and (((e = 0) and
-  (((((((((1 <= (k + 1)) and ((k + 1) <= 16)) and (o7 = (k + 1))) and
-  (temp___5371 = (a[o7]))) and (o8 = (temp___5371[j]))) and
-  (o9 = temp___1714(o8, i, 99))) and (((((1 <= (k + 1)) and
-  ((k + 1) <= 16)) and (o6 = (k + 1))) and (o10 = (a[o6]))) and
-  (o11 = temp___1707(o10, j, o9)))) and (((o12 = (k + 1)) and
-  in_range2((k + 1))) and (temp___5372 = temp___1684(a, k,
-  temp___1692((a[k]), j, temp___1699(((a[k])[j]), i, e)), o12, o11)))) and
-  (result5 = bool_eq7(a3, 1, 16, temp___5372, 1, 16)))) or ((not (e = 0)) and
-  (result5 = false))))))) or ((not (k <  16)) and (result5 = false))) ->
-  ((not (result5 = true)) -> ((k = 16) -> ((0 <  e) ->
-  in_range3((e - 1))))))))))))
+goal WP_parameter_def : in_range3((e - 1))

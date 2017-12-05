@@ -99,6 +99,7 @@
 (declare-const result__4 (_ BitVec 32))
 (declare-const lsc__bignum__word_of_boolean__result5 (_ BitVec 32))
 (declare-const result3 (_ BitVec 32))
+(assert true)
 (assert (=> (= b true) (= result result__)))
 (assert (=> (= b true) (= result__1 ((_ int2bv 32) 1))))
 (assert (=> (not (= b true)) (= result1 result__)))

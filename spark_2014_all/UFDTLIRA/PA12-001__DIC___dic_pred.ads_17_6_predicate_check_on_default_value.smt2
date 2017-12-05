@@ -82,6 +82,7 @@
 (assert (forall ((x Int)) (! (=> (dynamic_invariant1 x true true true) (dynamic_invariant1 (id x) true false true)) :pattern ((id x)))))
 (assert (forall ((x Int)) (! (=> (dynamic_invariant1 x true true true) (= (id x) x)) :pattern ((id x)))))
 (declare-const temp___150 natural)
+(declare-const temp___152 natural)
 (assert (= (to_rep temp___150) 0))
 (assert (not (< 0 (id (to_rep temp___150)))))
 (check-sat)

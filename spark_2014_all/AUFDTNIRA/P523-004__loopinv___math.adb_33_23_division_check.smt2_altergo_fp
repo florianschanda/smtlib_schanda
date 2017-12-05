@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -394,9 +394,49 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v : (int,value) farray
+
+logic j : int
+
+logic o : value
+
+logic temp___199 : (int,value) farray
+
+logic o1 : (int,value) farray
+
+logic o2 : value
+
+logic temp___1991 : (int,value) farray
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : (int,value) farray
+
+logic v1 : (int,value) farray
+
+logic v2 : (int,value) farray
+
+logic j2 : int
+
+logic result2 : int
+
+logic j3 : int
+
+axiom H : (sorted(i5s) = true)
+
+axiom H1 : (sorted(v) = true)
+
+axiom H2 : (result = j)
+
+axiom H3 : (j1 = 1)
+
+axiom H4 : (1 <= j1)
+
+axiom H5 : (j1 <= 100)
+
+axiom H6 : (sorted(v) = true)
+
  (* File "math.adb", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:(int,value) farray. forall j:int. forall result:int.
-  forall j1:int. ((sorted(i5s) = true) -> ((sorted(v) = true) ->
-  (((result = j) and (j1 = 1)) -> (((1 <= j1) and (j1 <= 100)) ->
-  ((sorted(v) = true) -> (not (2 = 0))))))))
+goal WP_parameter_def : (not (2 = 0))

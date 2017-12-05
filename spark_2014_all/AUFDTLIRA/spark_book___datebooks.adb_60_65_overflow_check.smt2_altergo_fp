@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1586,140 +1586,355 @@ axiom def_axiom :
   (forall temp___369:int.
   ((temp___366(temp___368)[temp___369]) = of_rep(temp___368))))
 
- (* File "datebooks.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall book:(int,us_rep3) farray. forall status:int.
-  forall find_result__split_fields:event_index_type.
-  forall find_result__split_fields1:bool. forall i:int. forall i1:int.
-  forall o:event_index_type. forall o1:event_index_type. forall o2:bool.
-  forall temp___360:event_index_type. forall temp___3601:bool.
-  forall temp___363:int. forall temp___362:event_index_type.
-  forall temp___3621:bool. forall o3:event_index_type.
-  forall o4:event_index_type. forall o5:bool.
-  forall temp___361:event_index_type. forall temp___3611:bool. forall o6:int.
-  forall o7:int. forall o8:character. forall result:event_index_type.
-  forall result1:bool. forall find_result__split_fields2:event_index_type.
-  forall find_result__split_fields3:bool. forall result2:int. forall i2:int.
-  forall find_result__split_fields4:event_index_type.
-  forall find_result__split_fields5:bool. forall i3:int.
-  forall result3:event_index_type. forall result4:bool.
-  forall find_result__split_fields6:event_index_type.
-  forall find_result__split_fields7:bool.
-  forall find_result__split_fields8:event_index_type.
-  forall find_result__split_fields9:bool.
-  forall find_result__split_fields10:event_index_type.
-  forall find_result__split_fields11:bool.
-  forall find_result__split_fields12:us_split_fields__ref4.
-  forall i4:int__ref. forall find_result__split_fields13:us_split_fields8.
-  forall i5:int. forall find_result__split_fields14:us_split_fields__ref4.
-  forall i6:int__ref. forall find_result__split_fields15:us_split_fields8.
-  forall i7:int. forall result5:map__ref1. forall book1:(int,us_rep3) farray.
-  forall result6:int__ref. forall i8:int. forall book2:(int,us_rep3) farray.
-  forall i9:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(description1)), to_rep1(last(description1))) -> (((0 <= 3) ->
-  in_range13(status)) -> (((((to_rep9(o) = 1) and ((o = o1) and
-  (of_int(0) = o2))) and ((temp___360 = o1) and (temp___3601 = o2))) and
-  (((result = find_result__split_fields) and
-  (result1 = find_result__split_fields1)) and
-  ((temp___360 = find_result__split_fields2) and
-  (temp___3601 = find_result__split_fields3)))) -> ((not (128 <  length({
-  elts = description; rt = description1 }))) -> ((((result2 = i) and
-  (i2 = 1)) and ((((1 <= i2) and (i2 <= 64)) and ((((temp___363 = i2) and
+logic book : (int,us_rep3) farray
+
+logic status : int
+
+logic find_result__split_fields : event_index_type
+
+logic find_result__split_fields1 : bool
+
+logic i : int
+
+logic i1 : int
+
+logic o : event_index_type
+
+logic o1 : event_index_type
+
+logic o2 : bool
+
+logic temp___360 : event_index_type
+
+logic temp___3601 : bool
+
+logic temp___363 : int
+
+logic temp___362 : event_index_type
+
+logic temp___3621 : bool
+
+logic o3 : event_index_type
+
+logic o4 : event_index_type
+
+logic o5 : bool
+
+logic temp___361 : event_index_type
+
+logic temp___3611 : bool
+
+logic temp___377 : int
+
+logic temp___374 : (int,us_rep3) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___372 : int
+
+logic o9 : character
+
+logic o10 : int
+
+logic o11 : (int,character) farray
+
+logic o12 : (int,character) farray
+
+logic o13 : description_count_type
+
+logic o14 : day_type
+
+logic o15 : month_type
+
+logic o16 : year_type
+
+logic o17 : hour_type
+
+logic o18 : minute_type
+
+logic o19 : second_type
+
+logic o20 : bool
+
+logic o21 : (int,character) farray
+
+logic o22 : description_count_type
+
+logic o23 : day_type
+
+logic o24 : month_type
+
+logic o25 : year_type
+
+logic o26 : hour_type
+
+logic o27 : minute_type
+
+logic o28 : second_type
+
+logic o29 : bool
+
+logic o30 : (int,us_rep3) farray
+
+logic o31 : int
+
+logic result : event_index_type
+
+logic result1 : bool
+
+logic find_result__split_fields2 : event_index_type
+
+logic find_result__split_fields3 : bool
+
+logic result2 : int
+
+logic i2 : int
+
+logic find_result__split_fields4 : event_index_type
+
+logic find_result__split_fields5 : bool
+
+logic i3 : int
+
+logic result3 : event_index_type
+
+logic result4 : bool
+
+logic find_result__split_fields6 : event_index_type
+
+logic find_result__split_fields7 : bool
+
+logic result5 : int
+
+logic i4 : int
+
+logic find_result__split_fields8 : event_index_type
+
+logic find_result__split_fields9 : bool
+
+logic find_result__split_fields10 : event_index_type
+
+logic find_result__split_fields11 : bool
+
+logic find_result__split_fields12 : event_index_type
+
+logic find_result__split_fields13 : bool
+
+logic i5 : int
+
+logic find_result__split_fields14 : event_index_type
+
+logic find_result__split_fields15 : bool
+
+logic i6 : int
+
+logic find_result__split_fields16 : event_index_type
+
+logic find_result__split_fields17 : bool
+
+logic i7 : int
+
+logic find_result__split_fields18 : event_index_type
+
+logic find_result__split_fields19 : bool
+
+logic i8 : int
+
+logic find_result__split_fields20 : event_index_type
+
+logic find_result__split_fields21 : bool
+
+logic i9 : int
+
+logic find_result__split_fields22 : event_index_type
+
+logic find_result__split_fields23 : bool
+
+logic i10 : int
+
+logic result6 : (int,us_rep3) farray
+
+logic book1 : (int,us_rep3) farray
+
+logic result7 : int
+
+logic i11 : int
+
+logic book2 : (int,us_rep3) farray
+
+logic i12 : int
+
+logic result8 : (int,us_rep3) farray
+
+logic book3 : (int,us_rep3) farray
+
+logic result9 : int
+
+logic i13 : int
+
+logic book4 : (int,us_rep3) farray
+
+logic i14 : int
+
+logic book5 : (int,us_rep3) farray
+
+logic i15 : int
+
+logic book6 : (int,us_rep3) farray
+
+logic i16 : int
+
+logic book7 : (int,us_rep3) farray
+
+logic i17 : int
+
+logic book8 : (int,us_rep3) farray
+
+logic i18 : int
+
+logic book9 : (int,us_rep3) farray
+
+logic i19 : int
+
+logic book10 : (int,us_rep3) farray
+
+logic i20 : int
+
+logic book11 : (int,us_rep3) farray
+
+logic i21 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(description1)),
+  to_rep1(last(description1)))
+
+axiom H1 : ((0 <= 3) -> in_range13(status))
+
+axiom H2 : (to_rep9(o) = 1)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (of_int(0) = o2)
+
+axiom H5 : (temp___360 = o1)
+
+axiom H6 : (temp___3601 = o2)
+
+axiom H7 : ((result = find_result__split_fields) and
+  (result1 = find_result__split_fields1))
+
+axiom H8 : ((find_result__split_fields2 = temp___360) and
+  (find_result__split_fields3 = temp___3601))
+
+axiom H9 : (not (128 <  length({ elts = description; rt = description1 })))
+
+axiom H10 : (result2 = i)
+
+axiom H11 : (i2 = 1)
+
+axiom H12 : (((1 <= i2) and (i2 <= 64)) -> (((temp___363 = i2) and
   (((temp___362 = find_result__split_fields2) and
   (temp___3621 = find_result__split_fields3)) and ((length({ elts =
   description; rt = description1 }) <= 128) and ((((1 <= 64) ->
   in_range12(i3)) and ((1 <= i3) and (i3 <= 64))) and
   (((((find_result__split_fields8 = find_result__split_fields6) and
-  (find_result__split_fields9 = find_result__split_fields7)) and ({
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields10;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields11 } = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields6;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields7 })) and
+  (find_result__split_fields9 = find_result__split_fields7)) and
+  ((find_result__split_fields10 = find_result__split_fields6) and
+  (find_result__split_fields11 = find_result__split_fields7))) and
   ((not ((((book[i3])).us_split_fields7).rec__datebooks__event_record__is_used = true)) and
   ((((to_rep9(o3) = i3) and ((o3 = o4) and (of_int(1) = o5))) and
   ((temp___361 = o4) and (temp___3611 = o5))) and
   (((result3 = find_result__split_fields4) and
   (result4 = find_result__split_fields5)) and
-  ((temp___361 = find_result__split_fields6) and
-  (temp___3611 = find_result__split_fields7)))))) or
+  ((find_result__split_fields6 = temp___361) and
+  (find_result__split_fields7 = temp___3611)))))) or
   ((((((book[i3])).us_split_fields7).rec__datebooks__event_record__is_used = true) and
-  ({ rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields6;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields7 } = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields4;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields5 })) and
+  ((find_result__split_fields6 = find_result__split_fields4) and
+  (find_result__split_fields7 = find_result__split_fields5))) and
   ((((find_result__split_fields8 = find_result__split_fields6) and
-  (find_result__split_fields9 = find_result__split_fields7)) and ({
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields10;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields11 } = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields6;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields7 })) and (i3 = 64)))))))) and (((i4 = {
-  int__content = i3 }) and (find_result__split_fields12 = {
-  us_split_fields__content4 = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields8;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields9 } })) and ((i5 = i3) and
-  (find_result__split_fields13 = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields10;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields11 })))) and (((i6 = i4) and
-  (find_result__split_fields14 = find_result__split_fields12)) and
-  ((i7 = i5) and
-  (find_result__split_fields15 = find_result__split_fields13))))) or
-  ((not ((1 <= i2) and (i2 <= 64))) and (((i6 = { int__content = i2 }) and
-  (find_result__split_fields14 = { us_split_fields__content4 = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields2;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields3 } })) and ((i7 = i2) and
-  (find_result__split_fields15 = {
-  rec__datebooks__add_event__find_result_record__fresh_index =
-  find_result__split_fields2;
-  rec__datebooks__add_event__find_result_record__found_slot =
-  find_result__split_fields3 })))))) ->
-  ((((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__found_slot = true) ->
-  (((result5 = { map__content1 = book }) and
-  (book1 = (book[to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index) <- {
+  (find_result__split_fields9 = find_result__split_fields7)) and
+  ((find_result__split_fields10 = find_result__split_fields6) and
+  (find_result__split_fields11 = find_result__split_fields7))) and
+  (i3 = 64)))))))) and (((i7 = i3) and
+  ((find_result__split_fields16 = find_result__split_fields8) and
+  (find_result__split_fields17 = find_result__split_fields9))) and
+  ((i8 = i3) and
+  ((find_result__split_fields18 = find_result__split_fields10) and
+  (find_result__split_fields19 = find_result__split_fields11))))))
+
+axiom H13 : (((1 <= i2) and (i2 <= 64)) -> (i9 = i7))
+
+axiom H14 : (((1 <= i2) and (i2 <= 64)) ->
+  ((find_result__split_fields20 = find_result__split_fields16) and
+  (find_result__split_fields21 = find_result__split_fields17)))
+
+axiom H15 : (((1 <= i2) and (i2 <= 64)) -> (i10 = i8))
+
+axiom H16 : (((1 <= i2) and (i2 <= 64)) ->
+  ((find_result__split_fields22 = find_result__split_fields18) and
+  (find_result__split_fields23 = find_result__split_fields19)))
+
+axiom H17 : ((not ((1 <= i2) and (i2 <= 64))) -> (i9 = i2))
+
+axiom H18 : ((not ((1 <= i2) and (i2 <= 64))) ->
+  ((find_result__split_fields20 = find_result__split_fields2) and
+  (find_result__split_fields21 = find_result__split_fields3)))
+
+axiom H19 : ((not ((1 <= i2) and (i2 <= 64))) -> (i10 = i2))
+
+axiom H20 : ((not ((1 <= i2) and (i2 <= 64))) ->
+  ((find_result__split_fields22 = find_result__split_fields2) and
+  (find_result__split_fields23 = find_result__split_fields3)))
+
+axiom H21 : (find_result__split_fields21 = true)
+
+axiom H22 : (result6 = book)
+
+axiom H23 : (book1 = (book[to_rep9(find_result__split_fields20) <- {
   us_split_fields7 = { rec__datebooks__event_record__description_text =
   temp___366(32); rec__datebooks__event_record__description_size =
-  (((book[to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index)])).us_split_fields7).rec__datebooks__event_record__description_size;
+  (((book[to_rep9(find_result__split_fields20)])).us_split_fields7).rec__datebooks__event_record__description_size;
   rec__datebooks__event_record__date =
-  (((book[to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index)])).us_split_fields7).rec__datebooks__event_record__date;
+  (((book[to_rep9(find_result__split_fields20)])).us_split_fields7).rec__datebooks__event_record__date;
   rec__datebooks__event_record__is_used =
-  (((book[to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index)])).us_split_fields7).rec__datebooks__event_record__is_used
-  } }]))) -> (((result6 = { int__content = i1 }) and
-  (i8 = to_rep1(first(description1)))) ->
-  (((to_rep1(first(description1)) <= i8) and
-  (i8 <= to_rep1(last(description1)))) ->
-  (((in_range12(to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index)) and
-  (length({ elts = description; rt = description1 }) <= 128)) and
-  ((i9 - to_rep1(first(description1))) <  128)) ->
-  ((((forall temp___375:int. (((1 <= temp___375) and (temp___375 <= 64)) ->
-     (((not (to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index) = temp___375)) and
-     ((book2[temp___375]) = (book1[temp___375]))) or
-     ((to_rep9(((find_result__split_fields14).us_split_fields__content4).rec__datebooks__add_event__find_result_record__fresh_index) = temp___375) and
-     ((((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__description_size = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__description_size) and
-     ((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__date = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__date)) and
-     ((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__is_used = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__is_used)))))) and
+  (((book[to_rep9(find_result__split_fields20)])).us_split_fields7).rec__datebooks__event_record__is_used
+  } }]))
+
+axiom H24 : (result7 = i1)
+
+axiom H25 : (i11 = to_rep1(first(description1)))
+
+axiom H26 : (to_rep1(first(description1)) <= i11)
+
+axiom H27 : (i11 <= to_rep1(last(description1)))
+
+axiom H28 : ((in_range12(to_rep9(find_result__split_fields20)) and (length({
+  elts = description; rt = description1 }) <= 128)) and
+  ((i12 - to_rep1(first(description1))) <  128))
+
+axiom H29 :
+  (((forall temp___375:int. (((1 <= temp___375) and (temp___375 <= 64)) ->
+    (((not (to_rep9(find_result__split_fields20) = temp___375)) ->
+    ((book2[temp___375]) = (book1[temp___375]))) and
+    ((to_rep9(find_result__split_fields20) = temp___375) ->
+    ((((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__description_size = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__description_size) and
+    ((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__date = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__date)) and
+    ((((book2[temp___375])).us_split_fields7).rec__datebooks__event_record__is_used = (((book1[temp___375])).us_split_fields7).rec__datebooks__event_record__is_used)))))) and
   ((to_rep1(first(description1)) <= to_rep1(last(description1))) ->
   dynamic_property1(to_rep1(first(description1)),
-  to_rep1(last(description1)), i9))) and
-  ((to_rep1(first(description1)) <= i9) and
-  (i9 <= to_rep1(last(description1))))) ->
-  ((to_rep(o8) = to_rep((description[i9]))) ->
-  ((((o6 = (i9 - to_rep1(first(description1)))) and
-  in_range1((i9 - to_rep1(first(description1))))) and (o7 = (1 + o6))) ->
-  in_range1(o7)))))))))))))))
+  to_rep1(last(description1)), i12))) and
+  ((to_rep1(first(description1)) <= i12) and
+  (i12 <= to_rep1(last(description1)))))
+
+axiom H30 : (to_rep(o9) = to_rep((description[i12])))
+
+axiom H31 : ((o7 = (i12 - to_rep1(first(description1)))) and
+  in_range1((i12 - to_rep1(first(description1)))))
+
+axiom H32 : (o8 = (1 + o7))
+
+ (* File "datebooks.adb", line 14, characters 0-0 *)
+goal WP_parameter_def : in_range1(o8)

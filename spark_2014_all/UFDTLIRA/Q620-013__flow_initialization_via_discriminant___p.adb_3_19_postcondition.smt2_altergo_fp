@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -297,16 +297,30 @@ logic hack__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall hack__split_fields:integer. forall us:int.
-  forall result:int. forall result__1:int. forall result__2:int.
-  forall result__3:int. ((in_range(value) and
-  ((((-2147483648) <= 2147483647) -> in_range(result__)) and
-  ((((us = value) and in_range(value)) and
+logic result__ : int
+
+logic hack__split_fields : integer
+
+logic us : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+axiom H : in_range(value)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(result__))
+
+axiom H2 : ((((us = value) and in_range(value)) and
   (((to_rep(hack__split_discrs) = value) and
   (to_rep(hack__split_fields) = d)) and
   ((value = to_rep(hack__split_discrs)) and ((result = result__) and
   (result__1 = to_rep(hack__split_discrs)))))) and
-  ((result__1 = result__2) and (result__3 = result__1))))) ->
-  (result__2 = value)))
+  ((result__1 = result__2) and (result__3 = result__1)))
+
+ (* File "p.adb", line 1, characters 0-0 *)
+goal WP_parameter_def : (result__2 = value)

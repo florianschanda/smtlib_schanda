@@ -226,8 +226,10 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (p({ us_split_fields1 = { rec__generic_instance__root__f = x;
+  rec__ext__ = x1 }; attr__tag = x2 }) = true)
+
  (* File "generic_instance.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : ((p({ us_split_fields1 = {
+goal WP_parameter_def : (p({ us_split_fields1 = {
   rec__generic_instance__root__f = x; rec__ext__ = x1 }; attr__tag = x2
-  }) = true) -> (p({ us_split_fields1 = { rec__generic_instance__root__f = x;
-  rec__ext__ = x1 }; attr__tag = x2 }) = true))
+  }) = true)

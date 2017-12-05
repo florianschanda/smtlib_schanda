@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -291,25 +291,129 @@ function t6b__ref___projection(a: t6b__ref) : t6b = (a).t6b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic tmp__split_fields : integer
+
+logic tmp__split_fields1 : integer
+
+logic tmp__split_fields2 : integer
+
+logic i : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic foo__test_02__tmp__assume : integer
+
+logic foo__test_02__tmp__assume1 : integer
+
+logic foo__test_02__tmp__assume2 : integer
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic temp___197 : integer
+
+logic temp___1971 : integer
+
+logic temp___1972 : integer
+
+logic o11 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic tmp__split_fields3 : integer
+
+logic tmp__split_fields4 : integer
+
+logic tmp__split_fields5 : integer
+
+logic result3 : int
+
+logic i1 : int
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result6 : integer
+
+logic tmp__split_fields6 : integer
+
+logic tmp__split_fields7 : integer
+
+logic tmp__split_fields8 : integer
+
+logic tmp__split_fields9 : integer
+
+logic tmp__split_fields10 : integer
+
+logic tmp__split_fields11 : integer
+
+logic i2 : int
+
+logic result7 : int
+
+logic i3 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : (to_rep(o) = 0)
+
+axiom H2 : (to_rep(o1) = n)
+
+axiom H3 : (to_rep(o2) = n)
+
+axiom H4 : (o2 = o3)
+
+axiom H5 : (o1 = o4)
+
+axiom H6 : (o = o5)
+
+axiom H7 : (foo__test_02__tmp__assume = o3)
+
+axiom H8 : (foo__test_02__tmp__assume1 = o4)
+
+axiom H9 : (foo__test_02__tmp__assume2 = o5)
+
+axiom H10 : (result = tmp__split_fields)
+
+axiom H11 : (result1 = tmp__split_fields1)
+
+axiom H12 : (result2 = tmp__split_fields2)
+
+axiom H13 : (foo__test_02__tmp__assume = tmp__split_fields3)
+
+axiom H14 : (foo__test_02__tmp__assume1 = tmp__split_fields4)
+
+axiom H15 : (foo__test_02__tmp__assume2 = tmp__split_fields5)
+
+axiom H16 : (result3 = i)
+
+axiom H17 : (i1 = 1)
+
+axiom H18 : (1 <= i1)
+
+axiom H19 : (i1 <= 3)
+
  (* File "foo.adb", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp__split_fields:integer. forall tmp__split_fields1:integer.
-  forall tmp__split_fields2:integer. forall i:int. forall o:integer.
-  forall o1:integer. forall o2:integer. forall o3:integer. forall o4:integer.
-  forall o5:integer. forall foo__test_02__tmp__assume:integer.
-  forall foo__test_02__tmp__assume1:integer.
-  forall foo__test_02__tmp__assume2:integer. forall result:integer.
-  forall result1:integer. forall result2:integer.
-  forall tmp__split_fields3:integer. forall tmp__split_fields4:integer.
-  forall tmp__split_fields5:integer. forall result3:int. forall i1:int.
-  (in_range1(n) -> (((((to_rep(o) = 0) and ((to_rep(o1) = n) and
-  ((to_rep(o2) = n) and ((o2 = o3) and ((o1 = o4) and (o = o5)))))) and
-  ((foo__test_02__tmp__assume = o3) and
-  ((foo__test_02__tmp__assume1 = o4) and
-  (foo__test_02__tmp__assume2 = o5)))) and (((result = tmp__split_fields) and
-  ((result1 = tmp__split_fields1) and (result2 = tmp__split_fields2))) and
-  ((foo__test_02__tmp__assume = tmp__split_fields3) and
-  ((foo__test_02__tmp__assume1 = tmp__split_fields4) and
-  (foo__test_02__tmp__assume2 = tmp__split_fields5))))) ->
-  (((result3 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 3)) ->
-  in_range1((to_rep(tmp__split_fields4) + 1)))))))
+goal WP_parameter_def : in_range1((to_rep(tmp__split_fields4) + 1))

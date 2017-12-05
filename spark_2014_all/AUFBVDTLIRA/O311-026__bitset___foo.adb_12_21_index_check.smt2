@@ -190,6 +190,7 @@
 (declare-const o2 (_ BitVec 32))
 (assert (dynamic_invariant2 a true false true))
 (assert (in_range1 a_first))
+(assert true)
 (assert (and (= temp___168 (bv2nat (bvurem i ((_ int2bv 64) 32)))) (in_range1 (bv2nat (bvurem i ((_ int2bv 64) 32))))))
 (assert (=> (< temp___168 4294967296) (= o2 (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) temp___168)))))
 (assert (=> (not (< temp___168 4294967296)) (= o2 ((_ int2bv 32) 0))))

@@ -1992,261 +1992,927 @@ axiom def_axiom3 :
   rec__step_function__delimiter_entry__delimiter = temp___306;
   rec__step_function__delimiter_entry__value = temp___3061 } })))))))))))))))
 
+logic sfun1__split_fields : num_delimiters_range
+
+logic sfun1__split_fields1 : (int,us_rep) farray
+
+logic sfun2__split_fields : num_delimiters_range
+
+logic sfun2__split_fields1 : (int,us_rep) farray
+
+logic sfun3__split_fields : num_delimiters_range
+
+logic sfun3__split_fields1 : (int,us_rep) farray
+
+logic sfun4__split_fields : num_delimiters_range
+
+logic sfun4__split_fields1 : (int,us_rep) farray
+
+logic i : int
+
+logic o : float1
+
+logic o1 : function_range
+
+logic o2 : function_range
+
+logic o3 : float1
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : function_range
+
+logic o7 : float1
+
+logic o8 : float1
+
+logic o9 : function_range
+
+logic o10 : function_range
+
+logic o11 : float1
+
+logic o12 : float1
+
+logic o13 : function_range
+
+logic o14 : function_range
+
+logic o15 : float1
+
+logic o16 : function_range
+
+logic o17 : float1
+
+logic o18 : function_range
+
+logic o19 : float1
+
+logic o20 : function_range
+
+logic o21 : float1
+
+logic o22 : function_range
+
+logic o23 : float1
+
+logic o24 : (int,us_rep) farray
+
+logic o25 : num_delimiters_range
+
+logic o26 : num_delimiters_range
+
+logic o27 : (int,us_rep) farray
+
+logic step_function_test__sfun1__assume : num_delimiters_range
+
+logic step_function_test__sfun1__assume1 : (int,us_rep) farray
+
+logic o28 : float1
+
+logic o29 : function_range
+
+logic o30 : function_range
+
+logic o31 : float1
+
+logic o32 : float1
+
+logic o33 : function_range
+
+logic o34 : function_range
+
+logic o35 : float1
+
+logic o36 : float1
+
+logic o37 : function_range
+
+logic o38 : function_range
+
+logic o39 : float1
+
+logic o40 : float1
+
+logic o41 : function_range
+
+logic o42 : function_range
+
+logic o43 : float1
+
+logic o44 : function_range
+
+logic o45 : float1
+
+logic o46 : function_range
+
+logic o47 : float1
+
+logic o48 : function_range
+
+logic o49 : float1
+
+logic o50 : function_range
+
+logic o51 : float1
+
+logic o52 : (int,us_rep) farray
+
+logic o53 : num_delimiters_range
+
+logic o54 : num_delimiters_range
+
+logic o55 : (int,us_rep) farray
+
+logic step_function_test__sfun2__assume : num_delimiters_range
+
+logic step_function_test__sfun2__assume1 : (int,us_rep) farray
+
+logic o56 : float1
+
+logic o57 : function_range
+
+logic o58 : function_range
+
+logic o59 : float1
+
+logic o60 : float1
+
+logic o61 : function_range
+
+logic o62 : function_range
+
+logic o63 : float1
+
+logic o64 : float1
+
+logic o65 : function_range
+
+logic o66 : function_range
+
+logic o67 : float1
+
+logic o68 : float1
+
+logic o69 : function_range
+
+logic o70 : function_range
+
+logic o71 : float1
+
+logic o72 : float1
+
+logic o73 : function_range
+
+logic o74 : function_range
+
+logic o75 : float1
+
+logic o76 : float1
+
+logic o77 : function_range
+
+logic o78 : function_range
+
+logic o79 : float1
+
+logic o80 : float1
+
+logic o81 : function_range
+
+logic o82 : function_range
+
+logic o83 : float1
+
+logic o84 : function_range
+
+logic o85 : float1
+
+logic o86 : function_range
+
+logic o87 : float1
+
+logic o88 : function_range
+
+logic o89 : float1
+
+logic o90 : function_range
+
+logic o91 : float1
+
+logic o92 : function_range
+
+logic o93 : float1
+
+logic o94 : function_range
+
+logic o95 : float1
+
+logic o96 : function_range
+
+logic o97 : float1
+
+logic o98 : (int,us_rep) farray
+
+logic o99 : num_delimiters_range
+
+logic o100 : num_delimiters_range
+
+logic o101 : (int,us_rep) farray
+
+logic step_function_test__sfun3__assume : num_delimiters_range
+
+logic step_function_test__sfun3__assume1 : (int,us_rep) farray
+
+logic o102 : float1
+
+logic o103 : function_range
+
+logic o104 : function_range
+
+logic o105 : float1
+
+logic o106 : float1
+
+logic o107 : function_range
+
+logic o108 : function_range
+
+logic o109 : float1
+
+logic o110 : float1
+
+logic o111 : function_range
+
+logic o112 : function_range
+
+logic o113 : float1
+
+logic o114 : float1
+
+logic o115 : function_range
+
+logic o116 : function_range
+
+logic o117 : float1
+
+logic o118 : float1
+
+logic o119 : function_range
+
+logic o120 : function_range
+
+logic o121 : float1
+
+logic o122 : float1
+
+logic o123 : function_range
+
+logic o124 : function_range
+
+logic o125 : float1
+
+logic o126 : float1
+
+logic o127 : function_range
+
+logic o128 : function_range
+
+logic o129 : float1
+
+logic o130 : function_range
+
+logic o131 : float1
+
+logic o132 : function_range
+
+logic o133 : float1
+
+logic o134 : function_range
+
+logic o135 : float1
+
+logic o136 : function_range
+
+logic o137 : float1
+
+logic o138 : function_range
+
+logic o139 : float1
+
+logic o140 : function_range
+
+logic o141 : float1
+
+logic o142 : function_range
+
+logic o143 : float1
+
+logic o144 : (int,us_rep) farray
+
+logic o145 : num_delimiters_range
+
+logic o146 : num_delimiters_range
+
+logic o147 : (int,us_rep) farray
+
+logic step_function_test__sfun4__assume : num_delimiters_range
+
+logic step_function_test__sfun4__assume1 : (int,us_rep) farray
+
+logic o148 : t
+
+logic o149 : t
+
+logic o150 : t
+
+logic o151 : t
+
+logic o152 : t
+
+logic o153 : t
+
+logic o154 : t
+
+logic o155 : t
+
+logic o156 : t
+
+logic o157 : t
+
+logic o158 : t
+
+logic o159 : t
+
+logic o160 : t
+
+logic o161 : t
+
+logic o162 : t
+
+logic o163 : t
+
+logic o164 : t
+
+logic o165 : t
+
+logic o166 : t
+
+logic o167 : t
+
+logic o168 : t
+
+logic o169 : t
+
+logic o170 : t
+
+logic o171 : t
+
+logic o172 : t
+
+logic o173 : t
+
+logic o174 : t
+
+logic o175 : t
+
+logic o176 : t
+
+logic o177 : t
+
+logic o178 : t
+
+logic o179 : t
+
+logic o180 : t
+
+logic o181 : t
+
+logic o182 : t
+
+logic o183 : t
+
+logic o184 : t
+
+logic o185 : t
+
+logic o186 : t
+
+logic o187 : t
+
+logic o188 : t
+
+logic o189 : t
+
+logic o190 : t
+
+logic o191 : t
+
+logic o192 : t
+
+logic o193 : t
+
+logic o194 : t
+
+logic o195 : t
+
+logic o196 : t
+
+logic o197 : t
+
+logic o198 : t
+
+logic o199 : t
+
+logic o200 : t
+
+logic o201 : t
+
+logic o202 : t
+
+logic o203 : t
+
+logic o204 : t
+
+logic o205 : t
+
+logic o206 : t
+
+logic o207 : t
+
+logic o208 : t
+
+logic result : num_delimiters_range
+
+logic result1 : (int,us_rep) farray
+
+logic sfun1__split_fields2 : num_delimiters_range
+
+logic sfun1__split_fields3 : (int,us_rep) farray
+
+logic result2 : num_delimiters_range
+
+logic result3 : (int,us_rep) farray
+
+logic sfun2__split_fields2 : num_delimiters_range
+
+logic sfun2__split_fields3 : (int,us_rep) farray
+
+logic result4 : num_delimiters_range
+
+logic result5 : (int,us_rep) farray
+
+logic sfun3__split_fields2 : num_delimiters_range
+
+logic sfun3__split_fields3 : (int,us_rep) farray
+
+logic result6 : num_delimiters_range
+
+logic result7 : (int,us_rep) farray
+
+logic sfun4__split_fields2 : num_delimiters_range
+
+logic sfun4__split_fields3 : (int,us_rep) farray
+
+logic sfun_merge__split_fields : num_delimiters_range
+
+logic sfun_merge__split_fields1 : (int,us_rep) farray
+
+logic result8 : int
+
+logic i1 : int
+
+logic result9 : int
+
+logic i2 : int
+
+logic result10 : int
+
+logic i3 : int
+
+logic result11 : int
+
+logic i4 : int
+
+logic result12 : int
+
+logic i5 : int
+
+logic result13 : int
+
+logic i6 : int
+
+logic result14 : int
+
+logic i7 : int
+
+logic result15 : int
+
+logic i8 : int
+
+logic result16 : int
+
+logic i9 : int
+
+logic result17 : int
+
+logic i10 : int
+
+logic result18 : int
+
+logic i11 : int
+
+logic result19 : int
+
+logic i12 : int
+
+logic result20 : int
+
+logic i13 : int
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
+
+axiom H : (to_rep(o12) = fliteral1)
+
+axiom H1 : (to_rep2(o13) = 0)
+
+axiom H2 : (o13 = o14)
+
+axiom H3 : (o12 = o15)
+
+axiom H4 : (o16 = o14)
+
+axiom H5 : (o17 = o15)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 5.0))
 
+axiom H6 : (to_rep(o8) = fliteral2)
+
+axiom H7 : (to_rep2(o9) = 5)
+
+axiom H8 : (o9 = o10)
+
+axiom H9 : (o8 = o11)
+
+axiom H10 : (o18 = o10)
+
+axiom H11 : (o19 = o11)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 2.0))
+
+axiom H12 : (to_rep(o4) = fliteral3)
+
+axiom H13 : (to_rep2(o5) = 3)
+
+axiom H14 : (o5 = o6)
+
+axiom H15 : (o4 = o7)
+
+axiom H16 : (o20 = o6)
+
+axiom H17 : (o21 = o7)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3.0))
 
-logic fliteral5 : t
+axiom H18 : (to_rep(o) = fliteral4)
 
-axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 9.0))
+axiom H19 : (to_rep2(o1) = 0)
 
-logic fliteral6 : t
+axiom H20 : (o1 = o2)
 
-axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 7.0))
+axiom H21 : (o = o3)
 
-logic fliteral7 : t
+axiom H22 : ((o22 = o2) and (o23 = o3))
 
-axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
-  (tqtreal(fliteral7) = 0.500000000000000000000000))
-
-logic fliteral8 : t
-
-axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
-  (tqtreal(fliteral8) = 4.0))
-
-logic fliteral9 : t
-
-axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
-  (tqtreal(fliteral9) = 6.0))
-
-logic fliteral10 : t
-
-axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
-  (tqtreal(fliteral10) = 8.0))
-
-logic fliteral11 : t
-
-axiom fliteral_axiom11 : (tqtisFinite(fliteral11) and
-  (tqtreal(fliteral11) = 10.0))
-
- (* File "step_function_test.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sfun1__split_fields:num_delimiters_range.
-  forall sfun1__split_fields1:(int,us_rep) farray.
-  forall sfun2__split_fields:num_delimiters_range.
-  forall sfun2__split_fields1:(int,us_rep) farray.
-  forall sfun3__split_fields:num_delimiters_range.
-  forall sfun3__split_fields1:(int,us_rep) farray.
-  forall sfun4__split_fields:num_delimiters_range.
-  forall sfun4__split_fields1:(int,us_rep) farray. forall o:float1.
-  forall o1:function_range. forall o2:function_range. forall o3:float1.
-  forall o4:float1. forall o5:function_range. forall o6:function_range.
-  forall o7:float1. forall o8:float1. forall o9:function_range.
-  forall o10:function_range. forall o11:float1. forall o12:float1.
-  forall o13:function_range. forall o14:function_range. forall o15:float1.
-  forall o16:function_range. forall o17:float1. forall o18:function_range.
-  forall o19:float1. forall o20:function_range. forall o21:float1.
-  forall o22:function_range. forall o23:float1.
-  forall o24:(int,us_rep) farray. forall o25:num_delimiters_range.
-  forall o26:num_delimiters_range. forall o27:(int,us_rep) farray.
-  forall step_function_test__sfun1__assume:num_delimiters_range.
-  forall step_function_test__sfun1__assume1:(int,us_rep) farray.
-  forall o28:float1. forall o29:function_range. forall o30:function_range.
-  forall o31:float1. forall o32:float1. forall o33:function_range.
-  forall o34:function_range. forall o35:float1. forall o36:float1.
-  forall o37:function_range. forall o38:function_range. forall o39:float1.
-  forall o40:float1. forall o41:function_range. forall o42:function_range.
-  forall o43:float1. forall o44:function_range. forall o45:float1.
-  forall o46:function_range. forall o47:float1. forall o48:function_range.
-  forall o49:float1. forall o50:function_range. forall o51:float1.
-  forall o52:(int,us_rep) farray. forall o53:num_delimiters_range.
-  forall o54:num_delimiters_range. forall o55:(int,us_rep) farray.
-  forall step_function_test__sfun2__assume:num_delimiters_range.
-  forall step_function_test__sfun2__assume1:(int,us_rep) farray.
-  forall o56:float1. forall o57:function_range. forall o58:function_range.
-  forall o59:float1. forall o60:float1. forall o61:function_range.
-  forall o62:us_split_fields. forall o63:float1. forall o64:function_range.
-  forall o65:us_split_fields. forall o66:float1. forall o67:function_range.
-  forall o68:us_split_fields. forall o69:float1. forall o70:function_range.
-  forall o71:us_split_fields. forall o72:float1. forall o73:function_range.
-  forall o74:us_split_fields. forall o75:float1. forall o76:function_range.
-  forall o77:us_split_fields. forall o78:us_rep. forall o79:us_rep.
-  forall o80:us_rep. forall o81:us_rep. forall o82:us_rep. forall o83:us_rep.
-  forall o84:us_rep. forall o85:(int,us_rep) farray.
-  forall o86:num_delimiters_range. forall o87:us_split_fields2.
-  forall step_function_test__sfun3__assume:us_rep1. forall o88:float1.
-  forall o89:function_range. forall o90:us_split_fields. forall o91:float1.
-  forall o92:function_range. forall o93:us_split_fields. forall o94:float1.
-  forall o95:function_range. forall o96:us_split_fields. forall o97:float1.
-  forall o98:function_range. forall o99:us_split_fields. forall o100:float1.
-  forall o101:function_range. forall o102:us_split_fields.
-  forall o103:float1. forall o104:function_range.
-  forall o105:us_split_fields. forall o106:float1.
-  forall o107:function_range. forall o108:us_split_fields.
-  forall o109:us_rep. forall o110:us_rep. forall o111:us_rep.
-  forall o112:us_rep. forall o113:us_rep. forall o114:us_rep.
-  forall o115:us_rep. forall o116:(int,us_rep) farray.
-  forall o117:num_delimiters_range. forall o118:us_split_fields2.
-  forall step_function_test__sfun4__assume:us_rep1.
-  forall result:us_split_fields__ref1.
-  forall sfun1__split_fields2:us_split_fields2.
-  forall result1:us_split_fields__ref1.
-  forall sfun2__split_fields2:us_split_fields2.
-  forall result2:us_split_fields__ref1.
-  forall sfun3__split_fields2:us_split_fields2.
-  forall result3:us_split_fields__ref1.
-  forall sfun4__split_fields2:us_split_fields2.
-  ((((((((to_rep(o12) = fliteral1) and ((to_rep2(o13) = 0) and
-  ((o13 = o14) and (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) and
-  ((((to_rep(o8) = fliteral2) and ((to_rep2(o9) = 5) and ((o9 = o10) and
-  (o8 = o11)))) and ((o18 = o10) and (o19 = o11))) and
-  ((((to_rep(o4) = fliteral3) and ((to_rep2(o5) = 3) and ((o5 = o6) and
-  (o4 = o7)))) and ((o20 = o6) and (o21 = o7))) and
-  ((((to_rep(o) = fliteral4) and ((to_rep2(o1) = 0) and ((o1 = o2) and
-  (o = o3)))) and ((o2 = o22) and (o3 = o23))) and (o24 = temp___274({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o22;
+axiom H23 : (o24 = temp___274({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o22;
   rec__step_function__delimiter_entry__value = o23 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o20;
   rec__step_function__delimiter_entry__value = o21 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o18;
   rec__step_function__delimiter_entry__value = o19 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o16;
-  rec__step_function__delimiter_entry__value = o17 } })))))) and
-  ((to_rep1(o25) = 2) and ((o25 = o26) and (o24 = o27)))) and
-  ((step_function_test__sfun1__assume = o26) and
-  (step_function_test__sfun1__assume1 = o27))) and ((result = {
-  us_split_fields__content1 = {
-  rec__step_function__step_function_t__number_of_delimiters =
-  sfun1__split_fields; rec__step_function__step_function_t__step =
-  sfun1__split_fields1 } }) and (sfun1__split_fields2 = {
-  rec__step_function__step_function_t__number_of_delimiters =
-  step_function_test__sfun1__assume;
-  rec__step_function__step_function_t__step =
-  step_function_test__sfun1__assume1 }))) ->
-  ((((((((to_rep(o40) = fliteral1) and ((to_rep2(o41) = 0) and
-  ((o41 = o42) and (o40 = o43)))) and ((o44 = o42) and (o45 = o43))) and
-  ((((to_rep(o36) = fliteral4) and ((to_rep2(o37) = 5) and ((o37 = o38) and
-  (o36 = o39)))) and ((o46 = o38) and (o47 = o39))) and
-  ((((to_rep(o32) = fliteral) and ((to_rep2(o33) = 3) and ((o33 = o34) and
-  (o32 = o35)))) and ((o48 = o34) and (o49 = o35))) and
-  ((((to_rep(o28) = fliteral) and ((to_rep2(o29) = 0) and ((o29 = o30) and
-  (o28 = o31)))) and ((o50 = o30) and (o51 = o31))) and (o52 = temp___281({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o50;
+  rec__step_function__delimiter_entry__value = o17 } }))
+
+axiom H24 : (to_rep1(o25) = 2)
+
+axiom H25 : ((o26 = o25) and (o27 = o24))
+
+axiom H26 : ((step_function_test__sfun1__assume = o26) and
+  (step_function_test__sfun1__assume1 = o27))
+
+axiom H27 : ((result = sfun1__split_fields) and
+  (result1 = sfun1__split_fields1))
+
+axiom H28 : ((sfun1__split_fields2 = step_function_test__sfun1__assume) and
+  (sfun1__split_fields3 = step_function_test__sfun1__assume1))
+
+axiom H29 : (to_rep(o40) = fliteral1)
+
+axiom H30 : (to_rep2(o41) = 0)
+
+axiom H31 : ((o42 = o41) and (o43 = o40))
+
+axiom H32 : ((o44 = o42) and (o45 = o43))
+
+axiom H33 : (to_rep(o36) = fliteral4)
+
+axiom H34 : (to_rep2(o37) = 5)
+
+axiom H35 : ((o38 = o37) and (o39 = o36))
+
+axiom H36 : ((o46 = o38) and (o47 = o39))
+
+axiom H37 : (to_rep(o32) = fliteral)
+
+axiom H38 : (to_rep2(o33) = 3)
+
+axiom H39 : ((o34 = o33) and (o35 = o32))
+
+axiom H40 : ((o48 = o34) and (o49 = o35))
+
+axiom H41 : (to_rep(o28) = fliteral)
+
+axiom H42 : (to_rep2(o29) = 0)
+
+axiom H43 : ((o30 = o29) and (o31 = o28))
+
+axiom H44 : ((o50 = o30) and (o51 = o31))
+
+axiom H45 : (o52 = temp___281({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o50;
   rec__step_function__delimiter_entry__value = o51 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o48;
   rec__step_function__delimiter_entry__value = o49 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o46;
   rec__step_function__delimiter_entry__value = o47 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o44;
-  rec__step_function__delimiter_entry__value = o45 } })))))) and
-  ((to_rep1(o53) = 2) and ((o53 = o54) and (o52 = o55)))) and
-  ((step_function_test__sfun2__assume = o54) and
-  (step_function_test__sfun2__assume1 = o55))) and ((result1 = {
-  us_split_fields__content1 = {
+  rec__step_function__delimiter_entry__value = o45 } }))
+
+axiom H46 : (to_rep1(o53) = 2)
+
+axiom H47 : ((o54 = o53) and (o55 = o52))
+
+axiom H48 : ((step_function_test__sfun2__assume = o54) and
+  (step_function_test__sfun2__assume1 = o55))
+
+axiom H49 : ((result2 = sfun2__split_fields) and
+  (result3 = sfun2__split_fields1))
+
+axiom H50 : ((sfun2__split_fields2 = step_function_test__sfun2__assume) and
+  (sfun2__split_fields3 = step_function_test__sfun2__assume1))
+
+axiom H51 : (to_rep(o80) = fliteral1)
+
+axiom H52 : (to_rep2(o81) = 0)
+
+axiom H53 : ((o82 = o81) and (o83 = o80))
+
+axiom H54 : ((o84 = o82) and (o85 = o83))
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 9.0))
+
+axiom H55 : (to_rep(o76) = fliteral5)
+
+axiom H56 : (to_rep2(o77) = 9)
+
+axiom H57 : ((o78 = o77) and (o79 = o76))
+
+axiom H58 : ((o86 = o78) and (o87 = o79))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 7.0))
+
+axiom H59 : (to_rep(o72) = fliteral6)
+
+axiom H60 : (to_rep2(o73) = 7)
+
+axiom H61 : ((o74 = o73) and (o75 = o72))
+
+axiom H62 : ((o88 = o74) and (o89 = o75))
+
+axiom H63 : (to_rep(o68) = fliteral2)
+
+axiom H64 : (to_rep2(o69) = 5)
+
+axiom H65 : ((o70 = o69) and (o71 = o68))
+
+axiom H66 : ((o90 = o70) and (o91 = o71))
+
+axiom H67 : (to_rep(o64) = fliteral4)
+
+axiom H68 : (to_rep2(o65) = 3)
+
+axiom H69 : ((o66 = o65) and (o67 = o64))
+
+axiom H70 : ((o92 = o66) and (o93 = o67))
+
+axiom H71 : (to_rep(o60) = fliteral)
+
+axiom H72 : (to_rep2(o61) = 1)
+
+axiom H73 : ((o62 = o61) and (o63 = o60))
+
+axiom H74 : ((o94 = o62) and (o95 = o63))
+
+axiom H75 : (to_rep(o56) = fliteral)
+
+axiom H76 : (to_rep2(o57) = 0)
+
+axiom H77 : ((o58 = o57) and (o59 = o56))
+
+axiom H78 : ((o96 = o58) and (o97 = o59))
+
+axiom H79 : (o98 = temp___288({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o96;
+  rec__step_function__delimiter_entry__value = o97 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o94;
+  rec__step_function__delimiter_entry__value = o95 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o92;
+  rec__step_function__delimiter_entry__value = o93 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o90;
+  rec__step_function__delimiter_entry__value = o91 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o88;
+  rec__step_function__delimiter_entry__value = o89 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o86;
+  rec__step_function__delimiter_entry__value = o87 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o84;
+  rec__step_function__delimiter_entry__value = o85 } }))
+
+axiom H80 : (to_rep1(o99) = 5)
+
+axiom H81 : ((o100 = o99) and (o101 = o98))
+
+axiom H82 : ((step_function_test__sfun3__assume = o100) and
+  (step_function_test__sfun3__assume1 = o101))
+
+axiom H83 : ((result4 = sfun3__split_fields) and
+  (result5 = sfun3__split_fields1))
+
+axiom H84 : ((sfun3__split_fields2 = step_function_test__sfun3__assume) and
+  (sfun3__split_fields3 = step_function_test__sfun3__assume1))
+
+axiom H85 : (to_rep(o126) = fliteral1)
+
+axiom H86 : (to_rep2(o127) = 0)
+
+axiom H87 : ((o128 = o127) and (o129 = o126))
+
+axiom H88 : ((o130 = o128) and (o131 = o129))
+
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.500000000000000000000000))
+
+axiom H89 : (to_rep(o122) = fliteral7)
+
+axiom H90 : (to_rep2(o123) = 10)
+
+axiom H91 : ((o124 = o123) and (o125 = o122))
+
+axiom H92 : ((o132 = o124) and (o133 = o125))
+
+axiom H93 : (to_rep(o118) = fliteral3)
+
+axiom H94 : (to_rep2(o119) = 8)
+
+axiom H95 : ((o120 = o119) and (o121 = o118))
+
+axiom H96 : ((o134 = o120) and (o135 = o121))
+
+logic fliteral8 : t
+
+axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
+  (tqtreal(fliteral8) = 4.0))
+
+axiom H97 : (to_rep(o114) = fliteral8)
+
+axiom H98 : (to_rep2(o115) = 6)
+
+axiom H99 : ((o116 = o115) and (o117 = o114))
+
+axiom H100 : ((o136 = o116) and (o137 = o117))
+
+logic fliteral9 : t
+
+axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
+  (tqtreal(fliteral9) = 6.0))
+
+axiom H101 : (to_rep(o110) = fliteral9)
+
+axiom H102 : (to_rep2(o111) = 4)
+
+axiom H103 : ((o112 = o111) and (o113 = o110))
+
+axiom H104 : ((o138 = o112) and (o139 = o113))
+
+logic fliteral10 : t
+
+axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
+  (tqtreal(fliteral10) = 8.0))
+
+axiom H105 : (to_rep(o106) = fliteral10)
+
+axiom H106 : (to_rep2(o107) = 2)
+
+axiom H107 : ((o108 = o107) and (o109 = o106))
+
+axiom H108 : ((o140 = o108) and (o141 = o109))
+
+logic fliteral11 : t
+
+axiom fliteral_axiom11 : (tqtisFinite(fliteral11) and
+  (tqtreal(fliteral11) = 10.0))
+
+axiom H109 : (to_rep(o102) = fliteral11)
+
+axiom H110 : (to_rep2(o103) = 0)
+
+axiom H111 : ((o104 = o103) and (o105 = o102))
+
+axiom H112 : ((o142 = o104) and (o143 = o105))
+
+axiom H113 : (o144 = temp___298({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o142;
+  rec__step_function__delimiter_entry__value = o143 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o140;
+  rec__step_function__delimiter_entry__value = o141 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o138;
+  rec__step_function__delimiter_entry__value = o139 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o136;
+  rec__step_function__delimiter_entry__value = o137 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o134;
+  rec__step_function__delimiter_entry__value = o135 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o132;
+  rec__step_function__delimiter_entry__value = o133 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o130;
+  rec__step_function__delimiter_entry__value = o131 } }))
+
+axiom H114 : (to_rep1(o145) = 5)
+
+axiom H115 : ((o146 = o145) and (o147 = o144))
+
+axiom H116 : ((step_function_test__sfun4__assume = o146) and
+  (step_function_test__sfun4__assume1 = o147))
+
+axiom H117 : ((result6 = sfun4__split_fields) and
+  (result7 = sfun4__split_fields1))
+
+axiom H118 : ((sfun4__split_fields2 = step_function_test__sfun4__assume) and
+  (sfun4__split_fields3 = step_function_test__sfun4__assume1))
+
+axiom H119 : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
-  sfun2__split_fields; rec__step_function__step_function_t__step =
-  sfun2__split_fields1 } }) and (sfun2__split_fields2 = {
+  sfun1__split_fields2; rec__step_function__step_function_t__step =
+  sfun1__split_fields3 } }) = true)
+
+axiom H120 : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
-  step_function_test__sfun2__assume;
-  rec__step_function__step_function_t__step =
-  step_function_test__sfun2__assume1 }))) ->
-  ((((((((to_rep(o75) = fliteral1) and ((to_rep2(o76) = 0) and (o77 = {
-  rec__step_function__delimiter_entry__delimiter = o76;
-  rec__step_function__delimiter_entry__value = o75 }))) and (o78 = {
-  us_split_fields1 = o77 })) and ((((to_rep(o72) = fliteral5) and
-  ((to_rep2(o73) = 9) and (o74 = {
-  rec__step_function__delimiter_entry__delimiter = o73;
-  rec__step_function__delimiter_entry__value = o72 }))) and (o79 = {
-  us_split_fields1 = o74 })) and ((((to_rep(o69) = fliteral6) and
-  ((to_rep2(o70) = 7) and (o71 = {
-  rec__step_function__delimiter_entry__delimiter = o70;
-  rec__step_function__delimiter_entry__value = o69 }))) and (o80 = {
-  us_split_fields1 = o71 })) and ((((to_rep(o66) = fliteral2) and
-  ((to_rep2(o67) = 5) and (o68 = {
-  rec__step_function__delimiter_entry__delimiter = o67;
-  rec__step_function__delimiter_entry__value = o66 }))) and (o81 = {
-  us_split_fields1 = o68 })) and ((((to_rep(o63) = fliteral4) and
-  ((to_rep2(o64) = 3) and (o65 = {
-  rec__step_function__delimiter_entry__delimiter = o64;
-  rec__step_function__delimiter_entry__value = o63 }))) and (o82 = {
-  us_split_fields1 = o65 })) and ((((to_rep(o60) = fliteral) and
-  ((to_rep2(o61) = 1) and (o62 = {
-  rec__step_function__delimiter_entry__delimiter = o61;
-  rec__step_function__delimiter_entry__value = o60 }))) and (o83 = {
-  us_split_fields1 = o62 })) and ((((to_rep(o56) = fliteral) and
-  ((to_rep2(o57) = 0) and ((o57 = o58) and (o56 = o59)))) and (o84 = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o58;
-  rec__step_function__delimiter_entry__value = o59 } })) and
-  (o85 = temp___288(o84, o83, o82, o81, o80, o79, o78))))))))) and
-  ((to_rep1(o86) = 5) and (o87 = {
-  rec__step_function__step_function_t__number_of_delimiters = o86;
-  rec__step_function__step_function_t__step = o85 }))) and
-  (step_function_test__sfun3__assume = { us_split_fields3 = o87 })) and
-  ((result2 = { us_split_fields__content1 = {
+  sfun2__split_fields2; rec__step_function__step_function_t__step =
+  sfun2__split_fields3 } }) = true)
+
+axiom H121 : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
-  sfun3__split_fields; rec__step_function__step_function_t__step =
-  sfun3__split_fields1 } }) and
-  (sfun3__split_fields2 = (step_function_test__sfun3__assume).us_split_fields3))) ->
-  ((((((((to_rep(o106) = fliteral1) and ((to_rep2(o107) = 0) and (o108 = {
-  rec__step_function__delimiter_entry__delimiter = o107;
-  rec__step_function__delimiter_entry__value = o106 }))) and (o109 = {
-  us_split_fields1 = o108 })) and ((((to_rep(o103) = fliteral7) and
-  ((to_rep2(o104) = 10) and (o105 = {
-  rec__step_function__delimiter_entry__delimiter = o104;
-  rec__step_function__delimiter_entry__value = o103 }))) and (o110 = {
-  us_split_fields1 = o105 })) and ((((to_rep(o100) = fliteral3) and
-  ((to_rep2(o101) = 8) and (o102 = {
-  rec__step_function__delimiter_entry__delimiter = o101;
-  rec__step_function__delimiter_entry__value = o100 }))) and (o111 = {
-  us_split_fields1 = o102 })) and ((((to_rep(o97) = fliteral8) and
-  ((to_rep2(o98) = 6) and (o99 = {
-  rec__step_function__delimiter_entry__delimiter = o98;
-  rec__step_function__delimiter_entry__value = o97 }))) and (o112 = {
-  us_split_fields1 = o99 })) and ((((to_rep(o94) = fliteral9) and
-  ((to_rep2(o95) = 4) and (o96 = {
-  rec__step_function__delimiter_entry__delimiter = o95;
-  rec__step_function__delimiter_entry__value = o94 }))) and (o113 = {
-  us_split_fields1 = o96 })) and ((((to_rep(o91) = fliteral10) and
-  ((to_rep2(o92) = 2) and (o93 = {
-  rec__step_function__delimiter_entry__delimiter = o92;
-  rec__step_function__delimiter_entry__value = o91 }))) and (o114 = {
-  us_split_fields1 = o93 })) and ((((to_rep(o88) = fliteral11) and
-  ((to_rep2(o89) = 0) and (o90 = {
-  rec__step_function__delimiter_entry__delimiter = o89;
-  rec__step_function__delimiter_entry__value = o88 }))) and (o115 = {
-  us_split_fields1 = o90 })) and (o116 = temp___298(o115, o114, o113, o112,
-  o111, o110, o109))))))))) and ((to_rep1(o117) = 5) and (o118 = {
-  rec__step_function__step_function_t__number_of_delimiters = o117;
-  rec__step_function__step_function_t__step = o116 }))) and
-  (step_function_test__sfun4__assume = { us_split_fields3 = o118 })) and
-  ((result3 = { us_split_fields__content1 = {
+  sfun3__split_fields2; rec__step_function__step_function_t__step =
+  sfun3__split_fields3 } }) = true)
+
+axiom H122 : (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
-  sfun4__split_fields; rec__step_function__step_function_t__step =
-  sfun4__split_fields1 } }) and
-  (sfun4__split_fields2 = (step_function_test__sfun4__assume).us_split_fields3))) ->
-  ((is_valid({ us_split_fields3 = sfun1__split_fields2 }) = true) ->
-  ((is_valid({ us_split_fields3 = sfun2__split_fields2 }) = true) ->
-  ((is_valid({ us_split_fields3 = sfun3__split_fields2 }) = true) ->
-  ((is_valid({ us_split_fields3 = sfun4__split_fields2 }) = true) ->
-  (eq(get_value({ us_split_fields3 = sfun1__split_fields2 }, 0),
-  fliteral4) -> (eq(get_value({ us_split_fields3 = sfun1__split_fields2 },
-  1), fliteral4) -> (is_valid({ us_split_fields3 = sfun1__split_fields2
-  }) = true))))))))))))
+  sfun4__split_fields2; rec__step_function__step_function_t__step =
+  sfun4__split_fields3 } }) = true)
+
+axiom H123 : eq(get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters =
+  sfun1__split_fields2; rec__step_function__step_function_t__step =
+  sfun1__split_fields3 } }, 0), fliteral4)
+
+axiom H124 : eq(get_value({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters =
+  sfun1__split_fields2; rec__step_function__step_function_t__step =
+  sfun1__split_fields3 } }, 1), fliteral4)
+
+ (* File "step_function_test.adb", line 4, characters 0-0 *)
+goal WP_parameter_def : (is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters =
+  sfun1__split_fields2; rec__step_function__step_function_t__step =
+  sfun1__split_fields3 } }) = true)

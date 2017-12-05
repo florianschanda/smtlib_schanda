@@ -79,7 +79,19 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : bool
+
+logic x1 : bool
+
+logic x2 : bool
+
+logic x3 : bool
+
+axiom H : (x1 = x2)
+
+axiom H1 : (x3 = x1)
+
+axiom H2 : (x2 = true)
+
  (* File "qack.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:bool. forall x1:bool. forall x2:bool. forall x3:bool.
-  (((x1 = x2) and (x3 = x1)) -> ((x2 = true) -> (x = true))))
+goal WP_parameter_def : (x = true)

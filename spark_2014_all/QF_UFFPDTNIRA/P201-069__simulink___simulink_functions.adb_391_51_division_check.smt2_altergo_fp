@@ -1060,7 +1060,7 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type tinteger_32B
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1116,7 +1116,7 @@ function tinteger_32B__ref___projection(a: tinteger_32B__ref) : tinteger_32B =
 
 type integer_32
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1148,6 +1148,27 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+axiom H : in_range2(left)
+
+axiom H1 : in_range2(right)
+
+axiom H2 : (not (right = 0))
+
  (* File "interfac.ads", line 52, characters 0-0 *)
-goal WP_parameter_def : (in_range2(left) -> (in_range2(right) ->
-  ((not (right = 0)) -> (not is_zero(of_int(NearestTiesToEven, right))))))
+goal WP_parameter_def : (not is_zero(of_int(NearestTiesToEven, right)))

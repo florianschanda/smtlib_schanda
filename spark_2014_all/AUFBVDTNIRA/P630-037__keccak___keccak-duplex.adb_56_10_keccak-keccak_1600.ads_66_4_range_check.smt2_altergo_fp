@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -658,7 +658,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2184,55 +2184,225 @@ axiom def_axiom :
 axiom num_bytes__def_axiom :
   (num_bytes = comp_div((in_data_bit_length + 7),8))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
-  forall block:(int,byte) farray. forall o:int. forall o1:int.
-  forall keccak__keccak_1600__duplex__duplex__num_bytes__assume:int.
-  forall temp___1054:int. forall o2:(int,byte) farray.
-  forall temp___1055:(int,byte) farray. forall temp___10551:t4.
-  forall temp___1056:(int,byte) farray. forall temp___10561:t3.
-  forall result:(int,byte) farray. forall block1:(int,byte) farray.
-  (dynamic_property(0, 2147483647, to_rep(first(in_data1)),
-  to_rep(last(in_data1))) -> (in_range1(in_data_bit_length) ->
-  (dynamic_property(0, 2147483647, to_rep(out_data__first),
-  to_rep(out_data__last)) -> (in_range1(out_data_bit_length) ->
-  (((in_data_bit_length <= max_input_length({ us_split_fields1 = {
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : rate_number
+
+logic block : (int,byte) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic keccak__keccak_1600__duplex__duplex__num_bytes__assume : int
+
+logic temp___1054 : int
+
+logic o11 : (int,byte) farray
+
+logic temp___1055 : (int,byte) farray
+
+logic temp___10551 : t4
+
+logic temp___1056 : (int,byte) farray
+
+logic temp___10561 : t3
+
+logic o12 : (int,byte) farray
+
+logic temp___1059 : (int,byte) farray
+
+logic temp___10591 : t3
+
+logic temp___1060 : (int,byte) farray
+
+logic temp___10601 : t3
+
+logic o13 : (int,byte) farray
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic keccak__keccak_1600__duplex__duplex__R176s__assume : int
+
+logic o17 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl1 : t5
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : (int,byte) farray
+
+logic o22 : (int,byte) farray
+
+logic temp___1067 : (int,byte) farray
+
+logic temp___10671 : t6
+
+logic o23 : (int,byte) farray
+
+logic o24 : t1
+
+logic o25 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : (int,byte) farray
+
+logic block1 : (int,byte) farray
+
+logic result4 : (int,byte) farray
+
+logic block2 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block : (int,byte) farray
+
+logic result5 : (int,byte) farray
+
+logic block3 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
+
+logic result6 : map
+
+logic result7 : rate_number
+
+logic ctx__split_fields2 : map
+
+logic ctx__split_fields3 : rate_number
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result8 : map
+
+logic result9 : rate_number
+
+logic ctx__split_fields4 : map
+
+logic ctx__split_fields5 : rate_number
+
+logic out_data : (int,byte) farray
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : rate_number
+
+logic out_data1 : (int,byte) farray
+
+logic block4 : (int,byte) farray
+
+logic ctx__split_fields8 : map
+
+logic ctx__split_fields9 : rate_number
+
+logic out_data2 : (int,byte) farray
+
+logic block5 : (int,byte) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(in_data1)),
+  to_rep(last(in_data1)))
+
+axiom H1 : in_range1(in_data_bit_length)
+
+axiom H2 : dynamic_property(0, 2147483647, to_rep(out_data__first),
+  to_rep(out_data__last))
+
+axiom H3 : in_range1(out_data_bit_length)
+
+axiom H4 : ((in_data_bit_length <= max_input_length({ us_split_fields1 = {
   rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
   })) and ((comp_div((in_data_bit_length + 7),8) <= length({ elts = in_data;
   rt = in_data1 })) and ((out_data_bit_length <= rate_of({ us_split_fields1 =
   { rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
-  })) and (((to_rep(out_data__first) <= to_rep(out_data__last)) and
-  (((to_rep(out_data__last) - to_rep(out_data__first)) + 1) = comp_div((out_data_bit_length + 7),8))) or
-  ((not (to_rep(out_data__first) <= to_rep(out_data__last))) and
-  (0 = comp_div((out_data_bit_length + 7),8))))))) -> ((({ map__content =
-  result } = { map__content = block }) and
-  (block1 = keccak__keccak_1600__duplex__duplex__block__aggregate_def(of_int(0)))) ->
-  ((((((o = (in_data_bit_length + 7)) and
-  in_range((in_data_bit_length + 7))) and (o1 = comp_div(o,8))) and
-  ((keccak__keccak_1600__duplex__duplex__num_bytes__assume = o1) and
-  in_range1(o1))) and
-  (keccak__keccak_1600__duplex__duplex__num_bytes__assume = num_bytes)) ->
-  (in_range1(num_bytes) -> ((0 <  num_bytes) ->
-  (((((temp___1054 = (to_rep(first(in_data1)) + (num_bytes - 1))) and
-  in_range((to_rep(first(in_data1)) + (num_bytes - 1)))) and
-  ((((to_rep(first(in_data1)) <= temp___1054) ->
+  })) and (((to_rep(out_data__first) <= to_rep(out_data__last)) ->
+  (((to_rep(out_data__last) - to_rep(out_data__first)) + 1) = comp_div((out_data_bit_length + 7),8))) and
+  ((not (to_rep(out_data__first) <= to_rep(out_data__last))) ->
+  (0 = comp_div((out_data_bit_length + 7),8)))))))
+
+axiom H5 : (result3 = block)
+
+axiom H6 :
+  (block1 = keccak__keccak_1600__duplex__duplex__block__aggregate_def(of_int(0)))
+
+axiom H7 : ((o9 = (in_data_bit_length + 7)) and
+  in_range((in_data_bit_length + 7)))
+
+axiom H8 : (o10 = comp_div(o9,8))
+
+axiom H9 :
+  ((keccak__keccak_1600__duplex__duplex__num_bytes__assume = o10) and
+  in_range1(o10))
+
+axiom H10 :
+  (keccak__keccak_1600__duplex__duplex__num_bytes__assume = num_bytes)
+
+axiom H11 : in_range1(num_bytes)
+
+axiom H12 : (0 <  num_bytes)
+
+axiom H13 : ((temp___1054 = (to_rep(first(in_data1)) + (num_bytes - 1))) and
+  in_range((to_rep(first(in_data1)) + (num_bytes - 1))))
+
+axiom H14 : ((to_rep(first(in_data1)) <= temp___1054) ->
   (((to_rep(first(in_data1)) <= to_rep(first(in_data1))) and
   (to_rep(first(in_data1)) <= to_rep(last(in_data1)))) and
   ((to_rep(first(in_data1)) <= temp___1054) and
-  (temp___1054 <= to_rep(last(in_data1)))))) and (o2 = in_data)) and
-  ((o2 = temp___1055) and (mk2(to_rep(first(in_data1)),
-  temp___1054) = temp___10551)))) and
-  ((((to_rep(first4(temp___10551)) <= to_rep(last4(temp___10551))) and
-  (((0 <= (num_bytes - 1)) and
-  (((to_rep(last4(temp___10551)) - to_rep(first4(temp___10551))) + 1) = (((num_bytes - 1) - 0) + 1))) or
-  ((not (0 <= (num_bytes - 1))) and
-  (((to_rep(last4(temp___10551)) - to_rep(first4(temp___10551))) + 1) = 0)))) or
-  ((not (to_rep(first4(temp___10551)) <= to_rep(last4(temp___10551)))) and
-  (((0 <= (num_bytes - 1)) and (0 = (((num_bytes - 1) - 0) + 1))) or
-  (not (0 <= (num_bytes - 1)))))) and ((slide(temp___1055,
-  to_rep(first4(temp___10551)), 0) = temp___1056) and (mk1(0,
-  (num_bytes - 1)) = temp___10561)))) -> ((0 <= (num_bytes - 1)) ->
-  (0 <= 0)))))))))))))
+  (temp___1054 <= to_rep(last(in_data1))))))
+
+axiom H15 : (o11 = in_data)
+
+axiom H16 : (o11 = temp___1055)
+
+axiom H17 : (mk2(to_rep(first(in_data1)), temp___1054) = temp___10551)
+
+axiom H18 :
+  (((to_rep(first4(temp___10551)) <= to_rep(last4(temp___10551))) ->
+  (((0 <= (num_bytes - 1)) ->
+  (((to_rep(last4(temp___10551)) - to_rep(first4(temp___10551))) + 1) = (((num_bytes - 1) - 0) + 1))) and
+  ((not (0 <= (num_bytes - 1))) ->
+  (((to_rep(last4(temp___10551)) - to_rep(first4(temp___10551))) + 1) = 0)))) and
+  ((not (to_rep(first4(temp___10551)) <= to_rep(last4(temp___10551)))) ->
+  ((0 <= (num_bytes - 1)) -> (0 = (((num_bytes - 1) - 0) + 1)))))
+
+axiom H19 : (slide(temp___1055, to_rep(first4(temp___10551)),
+  0) = temp___1056)
+
+axiom H20 : (mk1(0, (num_bytes - 1)) = temp___10561)
+
+axiom H21 : (0 <= (num_bytes - 1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <= 0)

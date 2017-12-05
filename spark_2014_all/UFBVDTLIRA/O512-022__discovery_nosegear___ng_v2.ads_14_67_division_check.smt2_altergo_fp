@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -788,83 +788,227 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
- (* File "interfac.ads", line 66, characters 0-0 *)
-goal WP_parameter_def :
-  (forall estimatedgroundvelocityisavailable:bool.
-  forall estimatedgroundvelocity:t. forall prevtime:t. forall prevcount:t.
-  forall currtime:t. forall thistime:t. forall thiscount:t. forall t1:t.
-  forall t2:t. forall d1:t. forall d2:t. forall o:t. forall o1:t.
-  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
-  forall estimatedgroundvelocityisavailable1:bool.
-  forall estimatedgroundvelocity1:t. forall t11:t. forall t21:t.
-  forall d11:t. forall d21:t. forall result:bool.
-  forall estimatedgroundvelocityisavailable2:bool. forall result1:t.
-  forall t12:t. forall result2:t. forall t22:t. forall result3:t.
-  forall d12:t. forall result4:t. forall d22:t. forall result5:bool.
-  forall estimatedgroundvelocityisavailable3:bool. forall result6:t.
-  forall estimatedgroundvelocity2:t.
-  forall estimatedgroundvelocityisavailable4:bool.
-  forall estimatedgroundvelocity3:t. forall t13:t. forall t23:t.
-  forall d13:t. forall d23:t.
-  forall estimatedgroundvelocityisavailable5:bool.
-  forall estimatedgroundvelocity4:t. forall t14:t. forall t24:t.
-  forall d14:t. forall d24:t.
-  forall estimatedgroundvelocityisavailable6:bool.
-  forall estimatedgroundvelocity5:t. forall t15:t. forall t25:t.
-  forall d15:t. forall d25:t.
-  forall estimatedgroundvelocityisavailable7:bool.
-  forall estimatedgroundvelocity6:t. forall t16:t. forall t26:t.
-  forall d16:t. forall d26:t. ((((((({ t__content = d23 } = { t__content = d2
-  }) and (({ t__content = d13 } = { t__content = d1 }) and (({ t__content =
-  t23 } = { t__content = t2 }) and (({ t__content = t13 } = { t__content = t1
-  }) and (({ t__content = estimatedgroundvelocity3 } = { t__content =
-  estimatedgroundvelocity }) and
+logic estimatedgroundvelocityisavailable : bool
+
+logic estimatedgroundvelocity : t
+
+logic prevtime : t
+
+logic prevcount : t
+
+logic currtime : t
+
+logic thistime : t
+
+logic thiscount : t
+
+logic t1 : t
+
+logic t2 : t
+
+logic d1 : t
+
+logic d2 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic estimatedgroundvelocityisavailable1 : bool
+
+logic estimatedgroundvelocity1 : t
+
+logic t11 : t
+
+logic t21 : t
+
+logic d11 : t
+
+logic d21 : t
+
+logic result : bool
+
+logic estimatedgroundvelocityisavailable2 : bool
+
+logic result1 : t
+
+logic t12 : t
+
+logic result2 : t
+
+logic t22 : t
+
+logic result3 : t
+
+logic d12 : t
+
+logic result4 : t
+
+logic d22 : t
+
+logic result5 : bool
+
+logic estimatedgroundvelocityisavailable3 : bool
+
+logic result6 : t
+
+logic estimatedgroundvelocity2 : t
+
+logic estimatedgroundvelocityisavailable4 : bool
+
+logic estimatedgroundvelocity3 : t
+
+logic t13 : t
+
+logic t23 : t
+
+logic d13 : t
+
+logic d23 : t
+
+logic estimatedgroundvelocityisavailable5 : bool
+
+logic estimatedgroundvelocity4 : t
+
+logic t14 : t
+
+logic t24 : t
+
+logic d14 : t
+
+logic d24 : t
+
+logic estimatedgroundvelocityisavailable6 : bool
+
+logic estimatedgroundvelocity5 : t
+
+logic t15 : t
+
+logic t25 : t
+
+logic d15 : t
+
+logic d25 : t
+
+logic estimatedgroundvelocityisavailable7 : bool
+
+logic estimatedgroundvelocity6 : t
+
+logic t16 : t
+
+logic t26 : t
+
+logic d16 : t
+
+logic d26 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : (((((d23 = d2) and ((d13 = d1) and ((t23 = t2) and
+  ((t13 = t1) and ((estimatedgroundvelocity3 = estimatedgroundvelocity) and
   (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable4)))))) and
   ((d24 = d21) and ((d14 = d11) and ((t24 = t21) and ((t14 = t11) and
   ((estimatedgroundvelocity4 = estimatedgroundvelocity1) and
   (estimatedgroundvelocityisavailable5 = estimatedgroundvelocityisavailable2))))))) and
-  ((thistime = prevtime) and (({ bool__content = result } = { bool__content =
-  estimatedgroundvelocityisavailable }) and
+  ((thistime = prevtime) and
+  ((result = estimatedgroundvelocityisavailable) and
   (estimatedgroundvelocityisavailable2 = of_int1(0))))) or
   (((not (thistime = prevtime)) and
   ((estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable) and
   (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1))) and
-  ((((d22 = d23) and ((d12 = d13) and ((t22 = t23) and ((t12 = t13) and
+  ((((d23 = d22) and ((d13 = d12) and ((t23 = t22) and ((t12 = t13) and
   ((estimatedgroundvelocity2 = estimatedgroundvelocity3) and
   (estimatedgroundvelocityisavailable3 = estimatedgroundvelocityisavailable4)))))) and
   ((d24 = d22) and ((d14 = d12) and ((t24 = t22) and ((t14 = t12) and
   ((estimatedgroundvelocity4 = estimatedgroundvelocity2) and
   (estimatedgroundvelocityisavailable5 = estimatedgroundvelocityisavailable3))))))) and
   ((((o = timefromlastclicktolastupdate(prevtime, thistime)) and
-  (o = sub(thistime, prevtime))) and (({ t__content = result1 } = {
-  t__content = t1 }) and (t12 = o))) and
+  (o = sub(thistime, prevtime))) and ((result1 = t1) and (t12 = o))) and
   ((((o1 = timesincelastupdate(currtime, thistime)) and (o1 = sub(currtime,
-  thistime))) and (({ t__content = result2 } = { t__content = t2 }) and
-  (t22 = o1))) and ((((o2 = distancefromlastclicktolastupdate(prevcount,
-  thiscount)) and (o2 = mul(of_int(207), sub(thiscount, prevcount)))) and (({
-  t__content = result3 } = { t__content = d1 }) and (d12 = o2))) and
-  ((((o3 = distancesincelastupdate(prevtime, prevcount, currtime, thistime,
-  thiscount)) and (o3 = udiv(mul(distancefromlastclicktolastupdate(prevcount,
-  thiscount), timesincelastupdate(currtime, thistime)),
-  timefromlastclicktolastupdate(prevtime, thistime)))) and (({ t__content =
-  result4 } = { t__content = d2 }) and (d22 = o3))) and
-  (((estimatedgroundvelocityisavailable2 = result5) and
-  (estimatedgroundvelocityisavailable3 = of_int1(1))) and (({ t__content =
-  result6 } = { t__content = estimatedgroundvelocity }) and
-  (estimatedgroundvelocity2 = udiv(mul(add(d12, d22), of_int(3600)), add(t12,
-  t22)))))))))))) and (((d25 = d23) and ((d15 = d13) and ((t25 = t23) and
-  ((t15 = t13) and ((estimatedgroundvelocity5 = estimatedgroundvelocity3) and
-  ({ bool__content = estimatedgroundvelocityisavailable6 } = {
-  bool__content = estimatedgroundvelocityisavailable4 })))))) and
-  ((d26 = d24) and ((d16 = d14) and ((t26 = t24) and ((t16 = t14) and
-  ((estimatedgroundvelocity6 = estimatedgroundvelocity4) and
-  (estimatedgroundvelocityisavailable7 = estimatedgroundvelocityisavailable5)))))))) ->
-  ((estimatedgroundvelocityisavailable6 = true) ->
-  (((o6 = timesincelastclickbeforelastupdate(prevtime, currtime,
-  thistime)) and (o6 = add(timefromlastclicktolastupdate(prevtime, thistime),
-  timesincelastupdate(currtime, thistime)))) ->
-  ((((o4 = distancesincelastclickbeforelastupdate(prevtime, prevcount,
+  thistime))) and ((result2 = t2) and (t22 = o1))) and
+  ((((o2 = distancefromlastclicktolastupdate(prevcount, thiscount)) and
+  (o2 = mul(of_int(207), sub(thiscount, prevcount)))) and ((result3 = d1) and
+  (d12 = o2))) and ((((o3 = distancesincelastupdate(prevtime, prevcount,
   currtime, thistime, thiscount)) and
+  (o3 = udiv(mul(distancefromlastclicktolastupdate(prevcount, thiscount),
+  timesincelastupdate(currtime, thistime)),
+  timefromlastclicktolastupdate(prevtime, thistime)))) and
+  ((result4 = d2) and (d22 = o3))) and
+  (((estimatedgroundvelocityisavailable2 = result5) and
+  (estimatedgroundvelocityisavailable3 = of_int1(1))) and
+  ((result6 = estimatedgroundvelocity) and
+  (estimatedgroundvelocity2 = udiv(mul(add(d12, d22), of_int(3600)), add(t12,
+  t22))))))))))))
+
+axiom H11 : (d25 = d23)
+
+axiom H12 : (d15 = d13)
+
+axiom H13 : (t25 = t23)
+
+axiom H14 : (t15 = t13)
+
+axiom H15 : (estimatedgroundvelocity5 = estimatedgroundvelocity3)
+
+axiom H16 :
+  (estimatedgroundvelocityisavailable6 = estimatedgroundvelocityisavailable4)
+
+axiom H17 : (d26 = d24)
+
+axiom H18 : (d16 = d14)
+
+axiom H19 : (t26 = t24)
+
+axiom H20 : (t16 = t14)
+
+axiom H21 : (estimatedgroundvelocity6 = estimatedgroundvelocity4)
+
+axiom H22 :
+  (estimatedgroundvelocityisavailable7 = estimatedgroundvelocityisavailable5)
+
+axiom H23 : (estimatedgroundvelocityisavailable6 = true)
+
+axiom H24 : ((o6 = timesincelastclickbeforelastupdate(prevtime, currtime,
+  thistime)) and (o6 = add(timefromlastclicktolastupdate(prevtime, thistime),
+  timesincelastupdate(currtime, thistime))))
+
+axiom H25 : ((o4 = distancesincelastclickbeforelastupdate(prevtime,
+  prevcount, currtime, thistime, thiscount)) and
   (o4 = add(distancefromlastclicktolastupdate(prevcount, thiscount),
   distancesincelastupdate(prevtime, prevcount, currtime, thistime,
-  thiscount)))) and (o5 = mul(o4, of_int(3600)))) -> (not (o6 = zeros)))))))
+  thiscount))))
+
+axiom H26 : (o5 = mul(o4, of_int(3600)))
+
+ (* File "interfac.ads", line 66, characters 0-0 *)
+goal WP_parameter_def : (not (o6 = zeros))

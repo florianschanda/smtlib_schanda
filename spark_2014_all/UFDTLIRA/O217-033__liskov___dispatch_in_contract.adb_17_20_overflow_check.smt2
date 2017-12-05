@@ -134,6 +134,7 @@
 (declare-const temp___1801 integer)
 (declare-const temp___1802 us_private)
 (declare-const temp___1803 Int)
+(declare-const o5 Int)
 (declare-const result integer)
 (declare-const result1 integer)
 (declare-const result2 us_private)

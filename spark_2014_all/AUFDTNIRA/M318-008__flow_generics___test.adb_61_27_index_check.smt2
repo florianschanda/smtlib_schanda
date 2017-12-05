@@ -191,6 +191,7 @@
 (assert (dynamic_property1 1 2147483647 (to_rep (first (rt a))) (to_rep (last (rt a)))))
 (assert (= (elts a) o))
 (assert (= (mk1 (to_rep (first (rt a))) (to_rep (last (rt a)))) o1))
+(assert true)
 (assert (= result i))
 (assert (= i1 (to_rep c__first)))
 (assert (<= (to_rep c__first) i1))

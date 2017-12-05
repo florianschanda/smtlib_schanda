@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type bad_ty
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -167,22 +167,50 @@ logic bad_f : int -> bool
 
 logic bad_f__function_guard : bool, int -> prop
 
+logic recursive_through_type__bad_f__result : bool
+
+logic o : bool
+
+logic o1 : bool
+
+logic result : bool
+
+logic recursive_through_type__bad_f__result1 : bool
+
+logic recursive_through_type__bad_f__result2 : bool
+
+logic recursive_through_type__bad_f__result3 : bool
+
+logic recursive_through_type__bad_f__result4 : bool
+
+logic recursive_through_type__bad_f__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 :
+  (recursive_through_type__bad_f__result1 = recursive_through_type__bad_f__result2)
+
+axiom H2 :
+  (recursive_through_type__bad_f__result3 = recursive_through_type__bad_f__result1)
+
+axiom H3 : ((o = true) <-> (bad_f(x) = true))
+
+axiom H4 : ((in_range2(x) -> (o1 = o)) and ((not in_range2(x)) ->
+  (o1 = false)))
+
+axiom H5 : (result = recursive_through_type__bad_f__result)
+
+axiom H6 : (recursive_through_type__bad_f__result1 = o1)
+
+axiom H7 :
+  (recursive_through_type__bad_f__result4 = recursive_through_type__bad_f__result2)
+
+axiom H8 :
+  (recursive_through_type__bad_f__result5 = recursive_through_type__bad_f__result3)
+
+axiom H9 : (result1 = recursive_through_type__bad_f__result4)
+
  (* File "recursive_through_type.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall recursive_through_type__bad_f__result:bool. forall o:bool.
-  forall o1:bool. forall result:bool.
-  forall recursive_through_type__bad_f__result1:bool.
-  forall recursive_through_type__bad_f__result2:bool.
-  forall recursive_through_type__bad_f__result3:bool.
-  forall recursive_through_type__bad_f__result4:bool.
-  forall recursive_through_type__bad_f__result5:bool.
-  (forall result1:bool. (not (in_range1(x) and
-  (((((recursive_through_type__bad_f__result1 = recursive_through_type__bad_f__result2) and
-  (recursive_through_type__bad_f__result3 = recursive_through_type__bad_f__result1)) and
-  ((((o = true) <-> (bad_f(x) = true)) and ((in_range2(x) and (o1 = o)) or
-  ((not in_range2(x)) and (o1 = false)))) and
-  ((result = recursive_through_type__bad_f__result) and
-  (recursive_through_type__bad_f__result1 = o1)))) and
-  ((recursive_through_type__bad_f__result4 = recursive_through_type__bad_f__result2) and
-  (recursive_through_type__bad_f__result5 = recursive_through_type__bad_f__result3))) and
-  (result1 = recursive_through_type__bad_f__result4))))))
+goal WP_parameter_def : false

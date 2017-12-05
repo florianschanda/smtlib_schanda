@@ -55,7 +55,7 @@ logic blocking_true__function_guard : bool, unit -> prop
 
 type t
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 

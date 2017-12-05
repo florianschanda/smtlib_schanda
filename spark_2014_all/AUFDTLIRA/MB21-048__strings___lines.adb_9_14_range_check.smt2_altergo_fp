@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -505,10 +505,28 @@ type t5b__ref = { t5b__content : us_t1
 
 function t5b__ref___projection(a: t5b__ref) : us_t1 = (a).t5b__content
 
+logic pos : int
+
+logic result : int
+
+logic pos1 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : in_range1(size)
+
+axiom H2 : ((0 <= 2147483647) -> in_range3(pos))
+
+axiom H3 : (result = pos)
+
+axiom H4 : (pos1 = size)
+
+axiom H5 : (pos1 = r3b)
+
+axiom H6 : in_range3(r3b)
+
+axiom H7 : (1 <= r3b)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. forall result:int. forall pos1:int. (dynamic_property(1,
-  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) -> (in_range1(size) ->
-  (((0 <= 2147483647) -> in_range3(pos)) -> (((result = pos) and
-  (pos1 = size)) -> (((pos1 = r3b) and in_range3(r3b)) -> ((1 <= r3b) ->
-  (to_rep1(first(s1)) <= 1))))))))
+goal WP_parameter_def : (to_rep1(first(s1)) <= 1)

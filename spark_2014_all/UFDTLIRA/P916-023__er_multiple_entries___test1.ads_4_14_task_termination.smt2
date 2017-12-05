@@ -61,6 +61,7 @@
 (define-fun default_initial_assumption ((temp___expr_173 us_rep) (temp___skip_top_level_174 Bool)) Bool (= (rec__p__pt__g (us_split_fields1 temp___expr_173)) (of_int 1)))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 0 97)) (in_range temp___expr_160)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -282,7 +282,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -618,28 +618,164 @@ function t48b__ref___projection(a3: t48b__ref) : integer = (a3).t48b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. forall i:int. forall us:int. forall o:int.
-  forall o1:value. forall o2:int. forall result:int. forall pos1:int.
-  forall result1:int. forall i1:int. forall pos2:int. forall i2:int.
-  forall result2:bool. forall pos3:int. forall result3:int. forall i3:int.
-  ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic pos : int
+
+logic i : int
+
+logic simple_unc_arrays__search__result : int
+
+logic us : int
+
+logic temp___889 : int
+
+logic temp___888 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : value
+
+logic o6 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic pos2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic pos3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic pos4 : int
+
+logic pos5 : int
+
+logic pos6 : int
+
+logic i4 : int
+
+logic pos7 : int
+
+logic i5 : int
+
+logic pos8 : int
+
+logic i6 : int
+
+logic pos9 : int
+
+logic i7 : int
+
+logic pos10 : int
+
+logic i8 : int
+
+logic pos11 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic simple_unc_arrays__search__result1 : int
+
+logic simple_unc_arrays__search__result2 : int
+
+logic simple_unc_arrays__search__result3 : int
+
+logic pos12 : int
+
+logic i10 : int
+
+logic simple_unc_arrays__search__result4 : int
+
+logic pos13 : int
+
+logic i11 : int
+
+logic simple_unc_arrays__search__result5 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> (in_range2(v) ->
-  (((us = to_rep(a)) and in_range1(to_rep(a))) -> ((({ int__content = result
-  } = { int__content = pos }) and (pos1 = 0)) -> (in_range1(pos1) -> ((({
-  int__content = result1 } = { int__content = i }) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= to_rep2(last(a2)))) ->
-  ((forall j:int. (((1 <= j) and (j <= (i2 - 1))) ->
-   (not (to_rep1((a1[j])) = v)))) ->
-  ((((((0 <= 2147483647) -> in_range1(pos2)) and ((1 <= to_rep2(last(a2))) ->
-  dynamic_property2(1, to_rep2(last(a2)), i2))) and ((1 <= i2) and
-  (i2 <= to_rep2(last(a2))))) and ((((((((to_rep2(first(a2)) <= i2) and
-  (i2 <= to_rep2(last(a2)))) and (o = i2)) and (o1 = (a1[o]))) and
-  (o2 = to_rep1(o1))) and (((o2 = v) and (result2 = true)) or
-  ((not (o2 = v)) and (result2 = false)))) and ((not (result2 = true)) and
-  (pos3 = pos2))) and ((not (i2 = to_rep2(last(a2)))) and ((result3 = i2) and
-  (i3 = (i2 + 1)))))) ->
-  (forall j:int. (((1 <= j) and (j <= (i3 - 1))) ->
-  (not (to_rep1((a1[j])) = v))))))))))))))
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : in_range2(v)
+
+axiom H2 : ((us = to_rep(a)) and in_range1(to_rep(a)))
+
+axiom H3 : (result = pos)
+
+axiom H4 : (pos1 = 0)
+
+axiom H5 : in_range1(pos1)
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = 1)
+
+axiom H8 : (1 <= i1)
+
+axiom H9 : (i1 <= to_rep2(last(a2)))
+
+axiom H10 :
+  (forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
+  (not (to_rep1((a1[j1])) = v))))
+
+axiom H11 : ((((0 <= 2147483647) -> in_range1(pos2)) and
+  ((1 <= to_rep2(last(a2))) -> dynamic_property2(1, to_rep2(last(a2)),
+  i2))) and ((1 <= i2) and (i2 <= to_rep2(last(a2)))))
+
+axiom H12 : ((to_rep2(first(a2)) <= i2) and (i2 <= to_rep2(last(a2))))
+
+axiom H13 : (o = i2)
+
+axiom H14 : (o1 = (a1[o]))
+
+axiom H15 : (o2 = to_rep1(o1))
+
+axiom H16 : (((o2 = v) -> (result2 = true)) and ((not (o2 = v)) ->
+  (result2 = false)))
+
+axiom H17 : (not (result2 = true))
+
+axiom H18 : (pos3 = pos2)
+
+axiom H19 : (not (i2 = to_rep2(last(a2))))
+
+axiom H20 : (result4 = i2)
+
+axiom H21 : (i3 = (i2 + 1))
+
+logic j1 : int
+
+axiom H22 : (1 <= j1)
+
+axiom H23 : (j1 <= (i3 - 1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (not (to_rep1((a1[j1])) = v))

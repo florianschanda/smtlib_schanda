@@ -171,6 +171,7 @@
 (assert (forall ((num_bits Int)) (! (=> (dynamic_invariant2 num_bits true true true) (= (make_mask num_bits) (shift_right ((_ int2bv 64) 18446744073709551615) (- 64 num_bits)))) :pattern ((make_mask num_bits)))))
 (declare-const value (_ BitVec 64))
 (declare-const n Int)
+(declare-const o Int)
 (assert (bvule ((_ int2bv 64) 0) value))
 (assert (bvule value ((_ int2bv 64) 18446744073709551615)))
 (assert (<= 0 n))

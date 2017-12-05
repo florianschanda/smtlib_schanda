@@ -355,13 +355,23 @@ axiom def_axiom1 :
   (forall temp___340:int.
   ((temp___337(temp___339)[temp___340]) = of_rep(temp___339))))
 
+logic cur_board : (int,(int,cell) farray) farray
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+axiom H : (result = cur_board)
+
+axiom H1 : (cur_board1 = temp___333(temp___337(0)))
+
+axiom H2 : (cur_board1 = cur_board2)
+
+axiom H3 : (cur_board3 = cur_board1)
+
  (* File "repro.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall result:(int,(int,cell) farray) farray.
-  forall cur_board1:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray.
-  forall cur_board3:(int,(int,cell) farray) farray.
-  ((((result = cur_board) and (cur_board1 = temp___333(temp___337(0)))) and
-  ((cur_board1 = cur_board2) and (cur_board3 = cur_board1))) ->
-  (is_empty(get_board(cur_board2)) = true)))
+goal WP_parameter_def : (is_empty(get_board(cur_board2)) = true)

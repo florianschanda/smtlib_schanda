@@ -1069,7 +1069,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1290,18 +1290,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1378,21 +1378,21 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  ((((((to_rep1(((a).us_split_discrs1).rec__pred__r__d) = to_rep1(((b).us_split_discrs1).rec__pred__r__d)) and
-  (pred__r__c1__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__pred__r__c1) = to_rep(((b).us_split_fields1).rec__pred__r__c1)))) and
-  (pred__r__c2__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__pred__r__c2) = to_rep2(((b).us_split_fields1).rec__pred__r__c2)))) and
-  (pred__r__c3__pred(a) ->
-  (((a).us_split_fields1).rec__pred__r__c3 = ((b).us_split_fields1).rec__pred__r__c3))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not ((((to_rep1(((a).us_split_discrs1).rec__pred__r__d) = to_rep1(((b).us_split_discrs1).rec__pred__r__d)) and
-  (pred__r__c1__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__pred__r__c1) = to_rep(((b).us_split_fields1).rec__pred__r__c1)))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__pred__r__d) = to_rep1(((b).us_split_discrs1).rec__pred__r__d)) and
+  (((pred__r__c1__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__pred__r__c1) = to_rep(((b).us_split_fields1).rec__pred__r__c1))) and
   (pred__r__c2__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__pred__r__c2) = to_rep2(((b).us_split_fields1).rec__pred__r__c2)))) and
   (pred__r__c3__pred(a) ->
   (((a).us_split_fields1).rec__pred__r__c3 = ((b).us_split_fields1).rec__pred__r__c3)))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__pred__r__d) = to_rep1(((b).us_split_discrs1).rec__pred__r__d)) and
+  (((pred__r__c1__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__pred__r__c1) = to_rep(((b).us_split_fields1).rec__pred__r__c1))) and
+  (pred__r__c2__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__pred__r__c2) = to_rep2(((b).us_split_fields1).rec__pred__r__c2)))) and
+  (pred__r__c3__pred(a) ->
+  (((a).us_split_fields1).rec__pred__r__c3 = ((b).us_split_fields1).rec__pred__r__c3))))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -1495,6 +1495,10 @@ logic i13b2 : float1
 logic i13b3 : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic result : bool
+
+axiom H : true
 
  (* File "pred.adb", line 16, characters 0-0 *)
 goal WP_parameter_def : (not (to_rep1(i13b) = 0))

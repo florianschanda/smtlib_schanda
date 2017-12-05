@@ -121,6 +121,7 @@
 (declare-const o1 Int)
 (declare-const o2 (Array Int Bool))
 (declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const result Int)
 (declare-const result__1 Int)
 (declare-const result1 (Array Int Bool))

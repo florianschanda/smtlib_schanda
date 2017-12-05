@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1553,48 +1553,227 @@ axiom def_axiom :
   (forall temp___359:int. (((temp___354(temp___356, temp___357,
   temp___358)).elts1[temp___359]) = of_rep(temp___356)))))
 
- (* File "datebook.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall status:int. forall event_array:(int,us_rep3) farray.
-  forall found:bool. forall available:int. forall index:int.
-  forall temp___351:int. forall temp___350:bool. forall result:int.
-  forall available1:int. forall result1:bool. forall found1:bool.
-  forall result2:int. forall index1:int. forall found2:bool.
-  forall available2:int. forall index2:int. forall result3:int.
-  forall available3:int. forall result4:bool. forall found3:bool.
-  forall found4:bool. forall available4:int. forall found5:bool.
-  forall available5:int. forall found6:bool. forall available6:int.
-  forall index3:int. forall found7:bool. forall available7:int.
-  forall index4:int. forall found8:bool. forall available8:int.
-  forall index5:int. forall found9:bool. forall available9:int.
-  forall index6:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(description1)), to_rep1(last(description1))) -> (((0 <= 3) ->
-  in_range10(status)) -> (((result = available) and (available1 = 1)) ->
-  (in_range13(available1) -> ((not (128 <  length({ elts = description; rt =
-  description1 }))) -> (((result1 = found) and (found1 = of_int(0))) ->
-  ((((result2 = index) and (index1 = 1)) and ((((1 <= index1) and
-  (index1 <= 64)) and ((((temp___351 = available1) and
-  ((temp___350 = found1) and ((((1 <= 64) -> in_range13(available2)) and
-  ((1 <= index2) and (index2 <= 64))) and (((((available3 = available4) and
-  (found3 = found4)) and ((available5 = available3) and
-  (found5 = found3))) and
+logic status : int
+
+logic event_array : (int,us_rep3) farray
+
+logic found : bool
+
+logic available : int
+
+logic index : int
+
+logic temp___351 : int
+
+logic temp___350 : bool
+
+logic o : int
+
+logic o1 : int
+
+logic temp___361 : (int,character) farray
+
+logic temp___3611 : t1
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___362 : (int,character) farray
+
+logic temp___3621 : t
+
+logic o8 : (int,character) farray
+
+logic o9 : (int,character) farray
+
+logic o10 : description_count_type
+
+logic o11 : day_type
+
+logic o12 : month_type
+
+logic o13 : year_type
+
+logic o14 : hour_type
+
+logic o15 : minute_type
+
+logic o16 : second_type
+
+logic o17 : bool
+
+logic o18 : (int,character) farray
+
+logic o19 : description_count_type
+
+logic o20 : day_type
+
+logic o21 : month_type
+
+logic o22 : year_type
+
+logic o23 : hour_type
+
+logic o24 : minute_type
+
+logic o25 : second_type
+
+logic o26 : bool
+
+logic o27 : (int,us_rep3) farray
+
+logic o28 : int
+
+logic result : int
+
+logic available1 : int
+
+logic result1 : bool
+
+logic found1 : bool
+
+logic result2 : int
+
+logic index1 : int
+
+logic found2 : bool
+
+logic available2 : int
+
+logic index2 : int
+
+logic result3 : int
+
+logic available3 : int
+
+logic result4 : bool
+
+logic found3 : bool
+
+logic found4 : bool
+
+logic available4 : int
+
+logic found5 : bool
+
+logic available5 : int
+
+logic found6 : bool
+
+logic available6 : int
+
+logic index3 : int
+
+logic found7 : bool
+
+logic available7 : int
+
+logic index4 : int
+
+logic found8 : bool
+
+logic available8 : int
+
+logic index5 : int
+
+logic found9 : bool
+
+logic available9 : int
+
+logic index6 : int
+
+logic result5 : (int,us_rep3) farray
+
+logic event_array1 : (int,us_rep3) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(description1)),
+  to_rep1(last(description1)))
+
+axiom H1 : ((0 <= 3) -> in_range10(status))
+
+axiom H2 : (result = available)
+
+axiom H3 : (available1 = 1)
+
+axiom H4 : in_range13(available1)
+
+axiom H5 : (not (128 <  length({ elts = description; rt = description1 })))
+
+axiom H6 : (result1 = found)
+
+axiom H7 : (found1 = of_int(0))
+
+axiom H8 : (result2 = index)
+
+axiom H9 : (index1 = 1)
+
+axiom H10 : (((1 <= index1) and (index1 <= 64)) -> (temp___351 = available1))
+
+axiom H11 : (((1 <= index1) and (index1 <= 64)) -> (temp___350 = found1))
+
+axiom H12 : (((1 <= index1) and (index1 <= 64)) -> (((1 <= 64) ->
+  in_range13(available2)) and ((1 <= index2) and (index2 <= 64))))
+
+axiom H13 : (((1 <= index1) and (index1 <= 64)) ->
+  (((((available4 = available3) and (found4 = found3)) and
+  ((available5 = available3) and (found5 = found3))) and
   ((not ((((event_array[index2])).us_split_fields7).rec__datebook__event_record__is_used = true)) and
   (((result3 = available2) and (available3 = index2)) and
   ((result4 = found2) and (found3 = of_int(1)))))) or
   ((((((event_array[index2])).us_split_fields7).rec__datebook__event_record__is_used = true) and
   ((available3 = available2) and (found3 = found2))) and
-  ((((available3 = available4) and (found3 = found4)) and
-  ((available5 = available3) and (found5 = found3))) and
-  (index2 = 64))))))) and (((index2 = index3) and (({ int__content =
-  available6 } = { int__content = available4 }) and ({ bool__content = found6
-  } = { bool__content = found4 }))) and ((index4 = index2) and
-  ((available7 = available5) and (found7 = found5))))) and ((({
-  int__content = index5 } = { int__content = index3 }) and (({ int__content =
-  available8 } = { int__content = available6 }) and ({ bool__content = found8
-  } = { bool__content = found6 }))) and ((index6 = index4) and
-  ((available9 = available7) and (found9 = found7)))))) or
-  ((not ((1 <= index1) and (index1 <= 64))) and (((index1 = index5) and
-  ((available1 = available8) and (found1 = found8))) and
-  ((index6 = index1) and ((available9 = available1) and
-  (found9 = found1))))))) -> ((found8 = true) -> in_range1(length({ elts =
-  description; rt = description1 })))))))))))
+  ((((available4 = available3) and (found4 = found3)) and
+  ((available5 = available3) and (found5 = found3))) and (index2 = 64)))))
+
+axiom H14 : (((1 <= index1) and (index1 <= 64)) -> (index3 = index2))
+
+axiom H15 : (((1 <= index1) and (index1 <= 64)) -> (available6 = available4))
+
+axiom H16 : (((1 <= index1) and (index1 <= 64)) -> (found6 = found4))
+
+axiom H17 : (((1 <= index1) and (index1 <= 64)) -> (index4 = index2))
+
+axiom H18 : (((1 <= index1) and (index1 <= 64)) -> (available7 = available5))
+
+axiom H19 : (((1 <= index1) and (index1 <= 64)) -> (found7 = found5))
+
+axiom H20 : (((1 <= index1) and (index1 <= 64)) -> (index5 = index3))
+
+axiom H21 : (((1 <= index1) and (index1 <= 64)) -> (available8 = available6))
+
+axiom H22 : (((1 <= index1) and (index1 <= 64)) -> (found8 = found6))
+
+axiom H23 : (((1 <= index1) and (index1 <= 64)) -> (index6 = index4))
+
+axiom H24 : (((1 <= index1) and (index1 <= 64)) -> (available9 = available7))
+
+axiom H25 : (((1 <= index1) and (index1 <= 64)) -> (found9 = found7))
+
+axiom H26 : ((not ((1 <= index1) and (index1 <= 64))) -> (index5 = index1))
+
+axiom H27 : ((not ((1 <= index1) and (index1 <= 64))) ->
+  (available8 = available1))
+
+axiom H28 : ((not ((1 <= index1) and (index1 <= 64))) -> (found8 = found1))
+
+axiom H29 : ((not ((1 <= index1) and (index1 <= 64))) -> (index6 = index1))
+
+axiom H30 : ((not ((1 <= index1) and (index1 <= 64))) ->
+  (available9 = available1))
+
+axiom H31 : ((not ((1 <= index1) and (index1 <= 64))) -> (found9 = found1))
+
+axiom H32 : (found8 = true)
+
+ (* File "datebook.adb", line 38, characters 0-0 *)
+goal WP_parameter_def : in_range1(length({ elts = description; rt =
+  description1 }))

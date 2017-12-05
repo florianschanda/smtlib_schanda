@@ -36,6 +36,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const global_var Int)
+(declare-const global_var1 Int)
 (assert (=> (<= 0 2147483647) (in_range global_var)))
 (assert (in_range value))
 (assert (in_range id))

@@ -516,5 +516,30 @@ axiom is_empty__post_axiom :
 
 axiom is_empty__post__dispatch_axiom : true
 
+logic e : int
+
+logic o : bool
+
+logic e1 : int
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : ((o1 = mem(m, e1)) and ((e1 = 0) -> (not (o1 = true))))
+
+axiom H1 : ((o2 = true) <-> in_range3(e1))
+
+axiom H2 : (result1 = match_bool(o2, o1, false))
+
+axiom H3 : ((result = true) <->
+  (forall e2:int. ((in_range3(e2) and (mem(m, e2) = true)) -> in_range1(e2))))
+
+axiom H4 : (result = true)
+
  (* File "allocator.ads", line 39, characters 0-0 *)
 goal WP_parameter_def : true

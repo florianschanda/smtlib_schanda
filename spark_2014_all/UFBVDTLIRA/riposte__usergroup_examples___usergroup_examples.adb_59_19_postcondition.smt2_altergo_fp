@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -690,21 +690,47 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic usergroup_examples__example_5__result : t
+
+logic result : t
+
+logic usergroup_examples__example_5__result1 : t
+
+logic usergroup_examples__example_5__result2 : t
+
+logic usergroup_examples__example_5__result3 : t
+
+logic usergroup_examples__example_5__result4 : t
+
+logic usergroup_examples__example_5__result5 : t
+
+logic result1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (ugt(a, of_int(17)) and ugt(b, of_int(19)))
+
+axiom H3 :
+  (usergroup_examples__example_5__result1 = usergroup_examples__example_5__result2)
+
+axiom H4 :
+  (usergroup_examples__example_5__result3 = usergroup_examples__example_5__result1)
+
+axiom H5 : (result = usergroup_examples__example_5__result)
+
+axiom H6 : (usergroup_examples__example_5__result1 = bw_xor(of_int(73),
+  mul(a, b)))
+
+axiom H7 :
+  (usergroup_examples__example_5__result4 = usergroup_examples__example_5__result2)
+
+axiom H8 :
+  (usergroup_examples__example_5__result5 = usergroup_examples__example_5__result3)
+
+axiom H9 : (result1 = usergroup_examples__example_5__result4)
+
  (* File "usergroup_examples.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall usergroup_examples__example_5__result:t. forall result:t.
-  forall usergroup_examples__example_5__result1:t.
-  forall usergroup_examples__example_5__result2:t.
-  forall usergroup_examples__example_5__result3:t.
-  forall usergroup_examples__example_5__result4:t.
-  forall usergroup_examples__example_5__result5:t.
-  (forall result1:t. (((ugt(a, of_int(17)) and ugt(b, of_int(19))) and
-  (((((usergroup_examples__example_5__result1 = usergroup_examples__example_5__result2) and
-  (usergroup_examples__example_5__result3 = usergroup_examples__example_5__result1)) and
-  ((result = usergroup_examples__example_5__result) and
-  (usergroup_examples__example_5__result1 = bw_xor(of_int(73), mul(a,
-  b))))) and
-  ((usergroup_examples__example_5__result4 = usergroup_examples__example_5__result2) and
-  (usergroup_examples__example_5__result5 = usergroup_examples__example_5__result3))) and
-  (result1 = usergroup_examples__example_5__result4))) ->
-  ugt(usergroup_examples__example_5__result4, of_int(0)))))
+goal WP_parameter_def : ugt(usergroup_examples__example_5__result4,
+  of_int(0))

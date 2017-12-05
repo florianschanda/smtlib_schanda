@@ -4445,7 +4445,7 @@ logic contains__function_guard1 : bool, int, us_rep1, int -> prop
 
 type element_type
 
-predicate in_range44(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range44(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -6094,12 +6094,55 @@ logic container54 : int
 
 logic attr__ATTRIBUTE_ADDRESS16 : int
 
+logic v__split_fields : capacity_range1
+
+logic v__split_fields1 : us_main_type
+
+logic v__split_fields2 : us_private
+
+logic hnco__test2__v_type_owner__append__2__container__fields : capacity_range1
+
+logic hnco__test2__v_type_owner__append__2__container__fields1 : us_main_type
+
+logic hnco__test2__v_type_owner__append__2__container__fields2 : us_private
+
+logic result : capacity_range1
+
+logic result1 : us_main_type
+
+logic result2 : us_private
+
+logic v__split_fields3 : capacity_range1
+
+logic v__split_fields4 : us_main_type
+
+logic v__split_fields5 : us_private
+
+logic hnco__test2__v_type_owner__append__2__container__fields3 : capacity_range1
+
+logic hnco__test2__v_type_owner__append__2__container__fields4 : us_main_type
+
+logic hnco__test2__v_type_owner__append__2__container__fields5 : us_private
+
+logic result3 : capacity_range1
+
+logic result4 : us_main_type
+
+logic result5 : us_private
+
+logic v__split_fields6 : capacity_range1
+
+logic v__split_fields7 : us_main_type
+
+logic v__split_fields8 : us_private
+
+axiom H : ((10 = to_rep1(v__split_discrs)) and
+  (10 = to_rep(v__split_fields)))
+
+axiom H1 : (of_int(1) = true)
+
  (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:capacity_range1.
-  forall v__split_fields1:us_main_type. forall v__split_fields2:us_private.
-  (((10 = to_rep1(v__split_discrs)) and (10 = to_rep(v__split_fields))) ->
-  ((of_int(1) = true) -> (length({ us_split_discrs3 = {
+goal WP_parameter_def : (length({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity = v__split_discrs };
   us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -6108,4 +6151,4 @@ goal WP_parameter_def :
   v__split_fields }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector =
   v__split_fields1 } }; rec__ext__ = hide_ext__19(v__split_fields2) };
-  attr__tag = v__attr__tag }) <  to_rep1(v__split_discrs)))))
+  attr__tag = v__attr__tag }) <  to_rep1(v__split_discrs))

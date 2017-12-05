@@ -162,6 +162,7 @@
 (assert (forall ((x us_rep1)) (! (= (to_int1 (is_valid x)) (to_int1 (is_valid1 us_tag2 x))) :pattern ((is_valid1 us_tag2 x)))))
 (assert (forall ((x us_rep1)) (! (= (to_int1 (is_valid x)) (to_int1 (is_valid1 us_tag3 x))) :pattern ((is_valid1 us_tag3 x)))))
 (assert (forall ((x us_rep1)) (! (= (to_int1 (is_valid x)) (to_int1 (is_valid1 us_tag1 x))) :pattern ((is_valid1 us_tag1 x)))))
+(declare-const us Int)
 (assert (not (in_range 10)))
 (check-sat)
 (exit)

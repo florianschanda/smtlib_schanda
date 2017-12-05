@@ -74,6 +74,8 @@
 (declare-const alpha_launch_examples__example_3__result4 (_ BitVec 64))
 (declare-const alpha_launch_examples__example_3__result5 (_ BitVec 64))
 (declare-const result1 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (and (bvugt a ((_ int2bv 64) 17)) (bvugt b ((_ int2bv 64) 19))))
 (assert (= alpha_launch_examples__example_3__result1 alpha_launch_examples__example_3__result2))
 (assert (= alpha_launch_examples__example_3__result3 alpha_launch_examples__example_3__result1))

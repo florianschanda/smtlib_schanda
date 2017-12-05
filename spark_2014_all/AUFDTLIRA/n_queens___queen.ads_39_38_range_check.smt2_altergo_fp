@@ -267,5 +267,69 @@ logic c : (int,index) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic b : (int,index) farray
+
+logic done__ : bool
+
+logic j : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : int
+
+logic j1 : int
+
+logic o6 : int
+
+logic j2 : int
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : int
+
+logic b1 : (int,index) farray
+
+logic done__1 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic done__2 : bool
+
+logic b2 : (int,index) farray
+
+logic done__3 : bool
+
+logic b3 : (int,index) farray
+
+logic done__4 : bool
+
+logic b4 : (int,index) farray
+
+logic done__5 : bool
+
+logic b5 : (int,index) farray
+
+logic done__6 : bool
+
+logic b6 : (int,index) farray
+
+logic done__7 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : (1 <  i)
+
  (* File "queen.ads", line 27, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> ((1 <  i) -> in_range1((i - 1))))
+goal WP_parameter_def : in_range1((i - 1))

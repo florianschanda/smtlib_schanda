@@ -181,6 +181,8 @@
 (define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range2 temp___expr_39)))
 (define-fun dynamic_invariant5 ((temp___expr_63 Int) (temp___is_init_60 Bool) (temp___skip_constant_61 Bool) (temp___do_toplevel_62 Bool)) Bool (=> (or (= temp___is_init_60 true) (<= 0 255)) (in_range3 temp___expr_63)))
 (declare-const last2 Int)
+(declare-const tab us_private)
+(declare-const o integer)
 (declare-const result Bool)
 (assert (in_range5 i))
 (assert (in_range4 last2))

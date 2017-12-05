@@ -107,7 +107,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,7 +555,7 @@ axiom last__def_axiom1 : (last3 = to_rep1(last(s21)))
 
 type tseq_lengthB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1035,9 +1035,385 @@ logic temp___String_Literal_265 : unit -> (int,character) farray
 
 axiom temp___String_Literal_265__def_axiom : true
 
+logic lengths : map
+
+logic x1 : int
+
+logic x2 : int
+
+logic result__ : (int,character) farray
+
+logic rx : int
+
+logic x11 : int
+
+logic x21 : int
+
+logic string_utilities__longest_common_subsequence__result : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result1 : t
+
+logic temp___260 : map
+
+logic temp___253 : map
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___250 : int
+
+logic us : int
+
+logic o5 : int
+
+logic o6 : tseq_lengthB
+
+logic o7 : map
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic temp___249 : int
+
+logic us1 : int
+
+logic o14 : int
+
+logic o15 : tseq_lengthB
+
+logic o16 : map
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic string_utilities__longest_common_subsequence__B_4__last__assume : int
+
+logic us2 : int
+
+logic o20 : int
+
+logic us3 : int
+
+logic o21 : int
+
+logic us4 : int
+
+logic o22 : int
+
+logic temp___276 : int
+
+logic temp___274 : (int,character) farray
+
+logic temp___272 : int
+
+logic temp___271 : int
+
+logic o23 : character
+
+logic o24 : (int,character) farray
+
+logic us5 : int
+
+logic o25 : int
+
+logic temp___269 : int
+
+logic us6 : int
+
+logic o26 : int
+
+logic temp___270 : int
+
+logic us7 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic temp___267 : int
+
+logic us8 : int
+
+logic temp___266 : int
+
+logic us9 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic lengths1 : map
+
+logic x22 : int
+
+logic result__1 : (int,character) farray
+
+logic rx1 : int
+
+logic x12 : int
+
+logic x23 : int
+
+logic string_utilities__longest_common_subsequence__result2 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result3 : t
+
+logic result : int
+
+logic x13 : int
+
+logic lengths2 : map
+
+logic x14 : int
+
+logic x24 : int
+
+logic result1 : int
+
+logic x25 : int
+
+logic lengths3 : map
+
+logic x26 : int
+
+logic result2 : map
+
+logic lengths4 : map
+
+logic result3 : map
+
+logic lengths5 : map
+
+logic lengths6 : map
+
+logic x27 : int
+
+logic lengths7 : map
+
+logic x28 : int
+
+logic lengths8 : map
+
+logic x29 : int
+
+logic lengths9 : map
+
+logic x210 : int
+
+logic lengths10 : map
+
+logic x15 : int
+
+logic x211 : int
+
+logic lengths11 : map
+
+logic x16 : int
+
+logic x212 : int
+
+logic lengths12 : map
+
+logic x17 : int
+
+logic x213 : int
+
+logic lengths13 : map
+
+logic x18 : int
+
+logic x214 : int
+
+logic result4 : bool
+
+logic result5 : (int,character) farray
+
+logic result6 : t
+
+logic string_utilities__longest_common_subsequence__result4 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result5 : t
+
+logic string_utilities__longest_common_subsequence__result6 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result7 : t
+
+logic string_utilities__longest_common_subsequence__result8 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result9 : t
+
+logic result7 : int
+
+logic rx2 : int
+
+logic result8 : int
+
+logic x19 : int
+
+logic result9 : int
+
+logic x215 : int
+
+logic result__2 : (int,character) farray
+
+logic rx3 : int
+
+logic x110 : int
+
+logic x216 : int
+
+logic string_utilities__longest_common_subsequence__result10 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result11 : t
+
+logic result10 : (int,character) farray
+
+logic result__3 : (int,character) farray
+
+logic result11 : (int,character) farray
+
+logic result12 : t
+
+logic string_utilities__longest_common_subsequence__result12 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result13 : t
+
+logic string_utilities__longest_common_subsequence__result14 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result15 : t
+
+logic string_utilities__longest_common_subsequence__result16 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result17 : t
+
+logic result13 : int
+
+logic rx4 : int
+
+logic result14 : int
+
+logic x111 : int
+
+logic result15 : bool
+
+logic result__4 : (int,character) farray
+
+logic rx5 : int
+
+logic x112 : int
+
+logic x217 : int
+
+logic string_utilities__longest_common_subsequence__result18 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result19 : t
+
+logic result__5 : (int,character) farray
+
+logic rx6 : int
+
+logic x113 : int
+
+logic x218 : int
+
+logic string_utilities__longest_common_subsequence__result20 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result21 : t
+
+logic result__6 : (int,character) farray
+
+logic rx7 : int
+
+logic x114 : int
+
+logic x219 : int
+
+logic string_utilities__longest_common_subsequence__result22 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result23 : t
+
+logic result__7 : (int,character) farray
+
+logic rx8 : int
+
+logic x115 : int
+
+logic x220 : int
+
+logic string_utilities__longest_common_subsequence__result24 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result25 : t
+
+logic lengths14 : map
+
+logic x116 : int
+
+logic x221 : int
+
+logic result__8 : (int,character) farray
+
+logic rx9 : int
+
+logic x117 : int
+
+logic x222 : int
+
+logic string_utilities__longest_common_subsequence__result26 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result27 : t
+
+logic lengths15 : map
+
+logic x118 : int
+
+logic x223 : int
+
+logic result__9 : (int,character) farray
+
+logic rx10 : int
+
+logic x119 : int
+
+logic x224 : int
+
+logic string_utilities__longest_common_subsequence__result28 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result29 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s11)),
+  to_rep1(last(s11)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : (to_rep1(first(s11)) <= to_rep1(last(s11)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(first(s11)),
-  to_rep1(last(s11))) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(s21)), to_rep1(last(s21))) ->
-  ((to_rep1(first(s11)) <= to_rep1(last(s11))) ->
-  ((-2147483648) <= to_rep1(first(s11))))))
+goal WP_parameter_def : ((- 2147483648) <= to_rep1(first(s11)))

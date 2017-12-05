@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -374,7 +374,7 @@ axiom is_perm__def_axiom :
   (forall a:(int,integer) farray. forall a1:t. forall b:(int,integer) farray.
   forall b1:t [is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 })].
   ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 }) = true) <->
-  (forall e:int. ((((-2147483648) <= e) and (e <= 2147483647)) -> (occ({
+  (forall e:int. ((((- 2147483648) <= e) and (e <= 2147483647)) -> (occ({
   elts = a; rt = a1 }, e) = occ({ elts = b; rt = b1 }, e))))))
 
 logic values__first : integer
@@ -791,6 +791,223 @@ axiom occ__def_axiom :
   (forall e:int [occ({ elts = a; rt = a1 }, e)].
   (((to_rep(first(a1)) = 0) and in_range1(e)) -> (occ({ elts = a; rt = a1 },
   e) = occ_def({ elts = a; rt = a1 }, e)))))
+
+logic values : (int,integer) farray
+
+logic temp : int
+
+logic interm : (int,integer) farray
+
+logic temp___293 : (int,integer) farray
+
+logic temp___2931 : t1
+
+logic pair_insertion_sort__swap__init__assume : (int,integer) farray
+
+logic pair_insertion_sort__swap__init__assume1 : t1
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic temp___297 : (int,integer) farray
+
+logic o8 : (int,integer) farray
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic us : bool
+
+logic temp___299 : (int,integer) farray
+
+logic temp___2991 : t2
+
+logic temp___300 : (int,integer) farray
+
+logic temp___3001 : t2
+
+logic o12 : (int,integer) farray
+
+logic o13 : t2
+
+logic o14 : (int,integer) farray
+
+logic o15 : integer
+
+logic o16 : int
+
+logic temp___301 : (int,integer) farray
+
+logic o17 : (int,integer) farray
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic us1 : bool
+
+logic z : int
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : integer
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : integer
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : int
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : (int,integer) farray
+
+logic values1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic interm1 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+logic temp2 : int
+
+logic interm2 : (int,integer) farray
+
+logic values4 : (int,integer) farray
+
+logic temp3 : int
+
+logic interm3 : (int,integer) farray
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(values__first),
+  to_rep(values__last)) and (to_rep(values__first) = 0))
+
+axiom H1 : in_range2(x)
+
+axiom H2 : in_range2(y)
+
+axiom H3 : (((to_rep(values__first) <= x) and
+  (x <= to_rep(values__last))) and (((to_rep(values__first) <= y) and
+  (y <= to_rep(values__last))) and (not (x = y))))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(temp))
+
+axiom H5 : true
+
+axiom H6 : (slide(values, to_rep(values__first),
+  to_rep(values__first)) = temp___293)
+
+axiom H7 : (mk1(to_rep(values__first), to_rep(values__last)) = temp___2931)
+
+axiom H8 : (to_rep(first2(temp___2931)) = 0)
+
+axiom H9 : ((pair_insertion_sort__swap__init__assume = temp___293) and
+  (pair_insertion_sort__swap__init__assume1 = temp___2931))
+
+axiom H10 : ((pair_insertion_sort__swap__init__assume = init) and
+  (pair_insertion_sort__swap__init__assume1 = init1))
+
+axiom H11 : ((dynamic_property2(to_rep(values__first), to_rep(values__last),
+  to_rep(first2(init1)), to_rep(last2(init1))) and
+  ((to_rep(first2(init1)) = to_rep(values__first)) and
+  (to_rep(last2(init1)) = to_rep(values__last)))) and
+  (to_rep(first2(init1)) = 0))
+
+axiom H12 : (dynamic_property4(to_rep(values__first), to_rep(values__last),
+  to_rep(interm__first), to_rep(interm__last)) and
+  ((to_rep(interm__first) = to_rep(values__first)) and
+  (to_rep(interm__last) = to_rep(values__last))))
+
+axiom H13 : ((to_rep(values__first) <= x) and (x <= to_rep(values__last)))
+
+axiom H14 : (o = x)
+
+axiom H15 : (o1 = (values[o]))
+
+axiom H16 : (o2 = to_rep(o1))
+
+axiom H17 : (result = temp)
+
+axiom H18 : (temp1 = o2)
+
+axiom H19 : ((to_rep(values__first) <= y) and (y <= to_rep(values__last)))
+
+axiom H20 : (o3 = y)
+
+axiom H21 : (o4 = (values[o3]))
+
+axiom H22 : (o5 = to_rep(o4))
+
+axiom H23 : (to_rep(o6) = o5)
+
+axiom H24 : ((to_rep(values__first) <= x) and (x <= to_rep(values__last)))
+
+axiom H25 : (o7 = x)
+
+axiom H26 : (temp___297 = (values[o7 <- o6]))
+
+axiom H27 : (to_rep(values__first) = 0)
+
+axiom H28 : (o8 = temp___297)
+
+axiom H29 : (result1 = values)
+
+axiom H30 : (values1 = o8)
+
+axiom H31 : (is_set({ elts = init; rt = mk(to_rep(first2(init1)),
+  to_rep(last2(init1))) }, x, to_rep((init[y])), { elts = values1; rt =
+  mk(to_rep(values__first), to_rep(values__last)) }) = true)
 
  (* File "pair_insertion_sort.ads", line 13, characters 0-0 *)
 goal WP_parameter_def : true

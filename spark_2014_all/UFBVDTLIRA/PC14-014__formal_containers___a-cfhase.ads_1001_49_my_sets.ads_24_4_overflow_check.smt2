@@ -298,6 +298,7 @@
 (assert true)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (length right)) (and (in_range1 o) (<= o (to_rep1 (rec__my_sets__n__set__capacity (us_split_discrs1 right)))))))
 (assert (= o1 (- 2147483647 o)))
 (assert (not (in_range o1)))

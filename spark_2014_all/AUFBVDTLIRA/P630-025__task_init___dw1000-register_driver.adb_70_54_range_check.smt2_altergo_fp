@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -994,7 +994,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -2186,13 +2186,180 @@ axiom header__def_axiom2 : ((header8 = of_rep1(register_id)) and
   ((header12 = of_rep6(1)) and (header13 = of_rep3(toSmall(udiv1(sub_address,
   of_int1(128))))))))))
 
+logic o : operation_type
+
+logic o1 : sub_index_type
+
+logic o2 : bits_6
+
+logic o3 : bits_6
+
+logic o4 : sub_index_type
+
+logic o5 : operation_type
+
+logic temp___751 : bits_6
+
+logic temp___7511 : sub_index_type
+
+logic temp___7512 : operation_type
+
+logic dw1000__register_driver__read_register__B_1__header__assume : bits_6
+
+logic dw1000__register_driver__read_register__B_1__header__assume1 : sub_index_type
+
+logic dw1000__register_driver__read_register__B_1__header__assume2 : operation_type
+
+logic o6 : bits_6
+
+logic o7 : sub_index_type
+
+logic o8 : operation_type
+
+logic o9 : (int,bits_8) farray
+
+logic o10 : (int,bits_8) farray
+
+logic o11 : t2
+
+logic o12 : extended_address_type
+
+logic o13 : bits_7
+
+logic o14 : operation_type
+
+logic o15 : sub_index_type
+
+logic o16 : bits_6
+
+logic o17 : bits_6
+
+logic o18 : sub_index_type
+
+logic o19 : operation_type
+
+logic o20 : bits_7
+
+logic o21 : extended_address_type
+
+logic temp___749 : bits_6
+
+logic temp___7491 : sub_index_type
+
+logic temp___7492 : operation_type
+
+logic temp___7493 : bits_7
+
+logic temp___7494 : extended_address_type
+
+logic dw1000__register_driver__read_register__B_2__header__assume : bits_6
+
+logic dw1000__register_driver__read_register__B_2__header__assume1 : sub_index_type
+
+logic dw1000__register_driver__read_register__B_2__header__assume2 : operation_type
+
+logic dw1000__register_driver__read_register__B_2__header__assume3 : bits_7
+
+logic dw1000__register_driver__read_register__B_2__header__assume4 : extended_address_type
+
+logic o22 : bits_6
+
+logic o23 : sub_index_type
+
+logic o24 : operation_type
+
+logic o25 : bits_7
+
+logic o26 : extended_address_type
+
+logic o27 : (int,bits_8) farray
+
+logic o28 : (int,bits_8) farray
+
+logic o29 : t2
+
+logic o30 : bits_8
+
+logic o31 : extended_address_type
+
+logic o32 : bits_7
+
+logic o33 : operation_type
+
+logic o34 : sub_index_type
+
+logic o35 : bits_6
+
+logic o36 : bits_6
+
+logic o37 : sub_index_type
+
+logic o38 : operation_type
+
+logic o39 : bits_7
+
+logic o40 : extended_address_type
+
+logic o41 : bits_8
+
+logic temp___747 : bits_6
+
+logic temp___7471 : sub_index_type
+
+logic temp___7472 : operation_type
+
+logic temp___7473 : bits_7
+
+logic temp___7474 : extended_address_type
+
+logic temp___7475 : bits_8
+
+logic dw1000__register_driver__read_register__B_3__header__assume : bits_6
+
+logic dw1000__register_driver__read_register__B_3__header__assume1 : sub_index_type
+
+logic dw1000__register_driver__read_register__B_3__header__assume2 : operation_type
+
+logic dw1000__register_driver__read_register__B_3__header__assume3 : bits_7
+
+logic dw1000__register_driver__read_register__B_3__header__assume4 : extended_address_type
+
+logic dw1000__register_driver__read_register__B_3__header__assume5 : bits_8
+
+logic o42 : bits_6
+
+logic o43 : sub_index_type
+
+logic o44 : operation_type
+
+logic o45 : bits_7
+
+logic o46 : extended_address_type
+
+logic o47 : bits_8
+
+logic o48 : (int,bits_8) farray
+
+logic o49 : (int,bits_8) farray
+
+logic o50 : t2
+
+axiom H : in_range2(register_id)
+
+axiom H1 : in_range4(sub_address)
+
+axiom H2 : dynamic_property(0, 2147483647, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H3 : (((to_rep(data__first) <= to_rep(data__last)) ->
+  (0 <  ((to_rep(data__last) - to_rep(data__first)) + 1))) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) -> (0 <  0)))
+
+axiom H4 : (not (sub_address = of_int1(0)))
+
+axiom H5 : ult1(sub_address, of_int1(128))
+
+axiom H6 : (to_rep6(o12) = 0)
+
  (* File "dw1000-register_driver.ads", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:extended_address_type. (in_range2(register_id) ->
-  (in_range4(sub_address) -> (dynamic_property(0, 2147483647,
-  to_rep(data__first), to_rep(data__last)) ->
-  ((((to_rep(data__first) <= to_rep(data__last)) and
-  (0 <  ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (0 <  0))) ->
-  ((not (sub_address = of_int1(0))) -> (ult1(sub_address, of_int1(128)) ->
-  ((to_rep6(o) = 0) -> ule1(toBig(of_int(0)), sub_address)))))))))
+goal WP_parameter_def : ule1(toBig(of_int(0)), sub_address)

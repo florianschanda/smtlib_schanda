@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -280,21 +280,46 @@ logic index : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic s__check_index__result : bool
+
+logic result : bool
+
+logic s__check_index__result1 : bool
+
+logic s__check_index__result2 : bool
+
+logic s__check_index__result3 : bool
+
+logic s__check_index__result4 : bool
+
+logic s__check_index__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(value)
+
+axiom H1 : in_range2(index)
+
+axiom H2 : ((1 <= index) and (index <= 10))
+
+axiom H3 : (s__check_index__result1 = s__check_index__result2)
+
+axiom H4 : (s__check_index__result3 = s__check_index__result1)
+
+axiom H5 : (result = s__check_index__result)
+
+axiom H6 : (((to_rep((table[index])) = value) ->
+  (s__check_index__result1 = true)) and
+  ((not (to_rep((table[index])) = value)) ->
+  (s__check_index__result1 = false)))
+
+axiom H7 : (s__check_index__result4 = s__check_index__result2)
+
+axiom H8 : (s__check_index__result5 = s__check_index__result3)
+
+axiom H9 : (result1 = s__check_index__result4)
+
+axiom H10 : (s__check_index__result4 = true)
+
  (* File "s.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__check_index__result:bool. forall result:bool.
-  forall s__check_index__result1:bool. forall s__check_index__result2:bool.
-  forall s__check_index__result3:bool. forall s__check_index__result4:bool.
-  forall s__check_index__result5:bool.
-  (forall result1:bool. ((in_range1(value) and (in_range2(index) and
-  (((1 <= index) and (index <= 10)) and
-  (((((s__check_index__result1 = s__check_index__result2) and
-  (s__check_index__result3 = s__check_index__result1)) and
-  ((result = s__check_index__result) and
-  (((to_rep((table[index])) = value) and (s__check_index__result1 = true)) or
-  ((not (to_rep((table[index])) = value)) and
-  (s__check_index__result1 = false))))) and
-  ((s__check_index__result4 = s__check_index__result2) and
-  (s__check_index__result5 = s__check_index__result3))) and
-  (result1 = s__check_index__result4))))) ->
-  ((s__check_index__result4 = true) -> (to_rep((table[index])) = value)))))
+goal WP_parameter_def : (to_rep((table[index])) = value)

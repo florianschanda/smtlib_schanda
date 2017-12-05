@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -583,10 +583,15 @@ axiom less_than_max__3__def_axiom :
   rec__dispatch_in_contract__root__f11 = o1; rec__ext__1 = o2 }; attr__tag1 =
   o3 }) = true) <-> (to_rep(o1) <  2147483647)))
 
- (* File "dispatch_in_contract.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o__split_fields:integer. forall o__split_fields1:us_private.
-  ((less_than_max({ us_split_fields1 = {
+logic o__split_fields : integer
+
+logic o__split_fields1 : us_private
+
+logic o : int
+
+axiom H : (less_than_max({ us_split_fields1 = {
   rec__dispatch_in_contract__root__f1 = o__split_fields; rec__ext__ =
-  o__split_fields1 }; attr__tag = o__attr__tag }) = true) ->
-  in_range((to_rep(o__split_fields) + 1))))
+  o__split_fields1 }; attr__tag = o__attr__tag }) = true)
+
+ (* File "dispatch_in_contract.ads", line 6, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(o__split_fields) + 1))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -219,18 +219,37 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic div_one__f__result : int
+
+logic result : int
+
+logic div_one__f__result1 : int
+
+logic div_one__f__result2 : int
+
+logic div_one__f__result3 : int
+
+logic div_one__f__result4 : int
+
+logic div_one__f__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(a)
+
+axiom H1 : (div_one__f__result1 = div_one__f__result2)
+
+axiom H2 : (div_one__f__result3 = div_one__f__result1)
+
+axiom H3 : (result = div_one__f__result)
+
+axiom H4 : (div_one__f__result1 = a)
+
+axiom H5 : (div_one__f__result4 = div_one__f__result2)
+
+axiom H6 : (div_one__f__result5 = div_one__f__result3)
+
+axiom H7 : (result1 = div_one__f__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall div_one__f__result:int. forall result:int.
-  forall div_one__f__result1:int. forall div_one__f__result2:int.
-  forall div_one__f__result3:int. forall div_one__f__result4:int.
-  forall div_one__f__result5:int.
-  (forall result1:int. ((in_range(a) and
-  (((((div_one__f__result1 = div_one__f__result2) and
-  (div_one__f__result3 = div_one__f__result1)) and (({ int__content = result
-  } = { int__content = div_one__f__result }) and
-  (div_one__f__result1 = a))) and (({ int__content = div_one__f__result4
-  } = { int__content = div_one__f__result2 }) and
-  (div_one__f__result5 = div_one__f__result3))) and
-  (result1 = div_one__f__result4))) ->
-  (comp_div(div_one__f__result4,a) = 1))))
+goal WP_parameter_def : (comp_div(div_one__f__result4,a) = 1)

@@ -234,12 +234,26 @@ axiom def_axiom :
   ((not (temp___183 = to_int(temp___181))) -> ((temp___178(temp___180,
   temp___181, temp___182)[temp___183]) = (temp___180[temp___183])))))))
 
+logic a : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic a1 : (int,bool) farray
+
+logic a2 : (int,bool) farray
+
+logic a3 : (int,bool) farray
+
+axiom H : (result = a)
+
+axiom H1 : (((not ((a[to_int(b)]) = true)) ->
+  (a1 = (a[to_int(b) <- true]))) and (((a[to_int(b)]) = true) ->
+  (a1 = (a[to_int(b) <- false]))))
+
+axiom H2 : (a1 = a2)
+
+axiom H3 : (a3 = a1)
+
  (* File "upd.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,bool) farray. forall result:(int,bool) farray.
-  forall a1:(int,bool) farray. forall a2:(int,bool) farray.
-  forall a3:(int,bool) farray. ((((result = a) and
-  (((not ((a[to_int(b)]) = true)) and (a1 = (a[to_int(b) <- true]))) or
-  (((a[to_int(b)]) = true) and (a1 = (a[to_int(b) <- false]))))) and
-  ((a1 = a2) and (a3 = a1))) -> (bool_eq1(a2, 0, 1, temp___178(a2, b,
-  match_bool((a[to_int(b)]), false, true)), 0, 1) = true)))
+goal WP_parameter_def : (bool_eq1(a2, 0, 1, temp___178(a2, b,
+  match_bool((a[to_int(b)]), false, true)), 0, 1) = true)

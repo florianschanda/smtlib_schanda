@@ -308,19 +308,67 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic count : int
+
+logic index : int
+
+logic o : int
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic count2 : int
+
+logic index2 : int
+
+logic result2 : int
+
+logic count3 : int
+
+logic result3 : int
+
+logic index3 : int
+
+axiom H : in_range1(ch)
+
+axiom H1 : (result = count)
+
+axiom H2 : (count1 = 0)
+
+axiom H3 : in_range2(count1)
+
+axiom H4 : (result1 = index)
+
+axiom H5 : (index1 = 1)
+
+axiom H6 : (1 <= index1)
+
+axiom H7 : (index1 <= 1024)
+
+axiom H8 : (count2 <  index2)
+
+axiom H9 : ((((0 <= 1024) -> in_range2(count2)) and ((1 <= 1024) ->
+  in_range3(index2))) and ((1 <= index2) and (index2 <= 1024)))
+
+axiom H10 : ((to_rep((buffer[index2])) = ch) -> ((o = (count2 + 1)) and
+  in_range2((count2 + 1))))
+
+axiom H11 : ((to_rep((buffer[index2])) = ch) -> (result2 = count2))
+
+axiom H12 : ((to_rep((buffer[index2])) = ch) -> (count3 = o))
+
+axiom H13 : ((not (to_rep((buffer[index2])) = ch)) -> (count3 = count2))
+
+axiom H14 : (not (index2 = 1024))
+
+axiom H15 : (result3 = index2)
+
+axiom H16 : (index3 = (index2 + 1))
+
  (* File "buffers.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall index:int. forall o:int. forall result:int.
-  forall count1:int. forall result1:int. forall index1:int.
-  forall count2:int. forall index2:int. forall result2:int.
-  forall count3:int. forall result3:int. forall index3:int. (in_range1(ch) ->
-  (((result = count) and (count1 = 0)) -> (in_range2(count1) ->
-  (((result1 = index) and (index1 = 1)) -> (((1 <= index1) and
-  (index1 <= 1024)) -> ((count2 <  index2) -> ((((((0 <= 1024) ->
-  in_range2(count2)) and ((1 <= 1024) -> in_range3(index2))) and
-  ((1 <= index2) and (index2 <= 1024))) and
-  ((((to_rep((buffer[index2])) = ch) and (((o = (count2 + 1)) and
-  in_range2((count2 + 1))) and ((result2 = count2) and (count3 = o)))) or
-  ((not (to_rep((buffer[index2])) = ch)) and (count3 = count2))) and
-  ((not (index2 = 1024)) and ((result3 = index2) and
-  (index3 = (index2 + 1)))))) -> (count3 <  index3)))))))))
+goal WP_parameter_def : (count3 <  index3)

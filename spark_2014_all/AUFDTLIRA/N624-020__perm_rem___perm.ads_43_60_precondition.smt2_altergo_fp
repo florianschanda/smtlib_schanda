@@ -134,7 +134,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -478,13 +478,41 @@ axiom remove__post_axiom :
   elts = a2; rt = a3 }, i)).rt)), to_rep(last((remove({ elts = a2; rt = a3 },
   i)).rt)))))))
 
+logic perm__perm_symmetric__result : int
+
+logic o : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic perm__perm_symmetric__result1 : int
+
+logic perm__perm_symmetric__result2 : int
+
+logic perm__perm_symmetric__result3 : int
+
+logic perm__perm_symmetric__result4 : int
+
+logic perm__perm_symmetric__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep(first(a1)), to_rep(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep(first(b1)), to_rep(last(b1)))
+
+axiom H2 : ((result = invariant__({ elts = a; rt = a1 })) and
+  ((result = true) <-> ((to_rep(first(a1)) = 1) and
+  (0 <= to_rep(last(a1))))))
+
+axiom H3 : (result = true)
+
+axiom H4 : ((result1 = invariant__({ elts = b; rt = b1 })) and
+  ((result1 = true) <-> ((to_rep(first(b1)) = 1) and
+  (0 <= to_rep(last(b1))))))
+
+axiom H5 : (result1 = true)
+
  (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. forall result1:bool. (dynamic_property(1, 100,
-  to_rep(first(a1)), to_rep(last(a1))) -> (dynamic_property(1, 100,
-  to_rep(first(b1)), to_rep(last(b1))) -> (((result = invariant__({ elts = a;
-  rt = a1 })) and ((result = true) <-> ((to_rep(first(a1)) = 1) and
-  (0 <= to_rep(last(a1)))))) -> ((result = true) ->
-  (((result1 = invariant__({ elts = b; rt = b1 })) and ((result1 = true) <->
-  ((to_rep(first(b1)) = 1) and (0 <= to_rep(last(b1)))))) ->
-  ((result1 = true) -> (invariant__({ elts = a; rt = a1 }) = true))))))))
+goal WP_parameter_def : (invariant__({ elts = a; rt = a1 }) = true)

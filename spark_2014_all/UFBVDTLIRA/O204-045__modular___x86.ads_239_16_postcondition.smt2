@@ -99,6 +99,8 @@
 (declare-const rbp1 (_ BitVec 64))
 (declare-const rbp2 (_ BitVec 64))
 (declare-const rbp3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result rbp))
 (assert (= rbp1 (bvor (bvand rbp ((_ int2bv 64) 18446744069414584320)) ((_ zero_extend 32) val__))))
 (assert (= rbp1 rbp2))

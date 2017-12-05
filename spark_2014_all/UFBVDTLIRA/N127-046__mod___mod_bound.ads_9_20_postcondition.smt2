@@ -64,6 +64,7 @@
 (declare-const x2 (_ BitVec 32))
 (declare-const x3 (_ BitVec 32))
 (declare-const x4 (_ BitVec 32))
+(assert true)
 (assert (= result x))
 (assert (= x1 ((_ int2bv 32) 4294967295)))
 (assert (= result1 x1))

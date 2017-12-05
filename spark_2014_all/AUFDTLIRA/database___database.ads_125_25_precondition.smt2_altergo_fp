@@ -793,15 +793,98 @@ axiom is_available__def_axiom :
   ((is_available(account1, database__availability__links) = true) <->
   ((((database__availability__links[account1])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
+logic links : (int,us_rep1) farray
+
+logic accounts_balance : (int,us_rep2) farray
+
+logic o : cur
+
+logic o1 : raw_amount
+
+logic o2 : int
+
+logic us : cur
+
+logic us1 : raw_amount
+
+logic o3 : cur
+
+logic o4 : raw_amount
+
+logic o5 : cur
+
+logic o6 : raw_amount
+
+logic o7 : raw_amount
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : cur
+
+logic o12 : raw_amount
+
+logic o13 : cur
+
+logic o14 : raw_amount
+
+logic o15 : ext_account_num
+
+logic o16 : cur
+
+logic o17 : raw_amount
+
+logic o18 : ext_account_num
+
+logic o19 : (int,us_rep2) farray
+
+logic o20 : cur
+
+logic o21 : raw_amount
+
+logic o22 : cur
+
+logic o23 : raw_amount
+
+logic accounts_balance1 : (int,us_rep2) farray
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : (int,us_rep2) farray
+
+logic accounts_balance2 : (int,us_rep2) farray
+
+logic accounts_balance3 : (int,us_rep2) farray
+
+logic accounts_balance4 : (int,us_rep2) farray
+
+logic accounts_balance5 : (int,us_rep2) farray
+
+logic accounts_balance6 : (int,us_rep2) farray
+
+axiom H : in_range2(account)
+
+axiom H1 : ((result = existing(account, links)) and ((result = true) <->
+  (not (is_available(account, links) = true))))
+
+axiom H2 : (result = true)
+
+axiom H3 : ((o2 = currency(account, accounts_balance)) and (in_range(o2) and
+  (o2 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency))))
+
+axiom H4 : (((o2 = to_rep(sum)) -> (result1 = true)) and
+  ((not (o2 = to_rep(sum))) -> (result1 = false)))
+
+axiom H5 : (result1 = true)
+
  (* File "database.ads", line 103, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep1) farray.
-  forall accounts_balance:(int,us_rep2) farray. forall o:int.
-  forall result:bool. forall result1:bool. (in_range2(account) ->
-  (((result = existing(account, links)) and ((result = true) <->
-  (not (is_available(account, links) = true)))) -> ((result = true) ->
-  ((((o = currency(account, accounts_balance)) and (in_range(o) and
-  (o = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
-  (((o = to_rep(sum)) and (result1 = true)) or ((not (o = to_rep(sum))) and
-  (result1 = false)))) -> ((result1 = true) -> (existing(account,
-  links) = true)))))))
+goal WP_parameter_def : (existing(account, links) = true)

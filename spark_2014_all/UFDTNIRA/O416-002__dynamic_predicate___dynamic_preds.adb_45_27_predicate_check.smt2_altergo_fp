@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -331,7 +331,23 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x__split_fields : even
+
+logic x__split_fields1 : even
+
+logic o : int
+
+logic o1 : even
+
+axiom H : (in_range(i7s) and (mod(i7s, 2) = 0))
+
+axiom H1 : true
+
+axiom H2 : (mod(2, 2) = 0)
+
+axiom H3 : (o = 2)
+
+axiom H4 : (to_rep(o1) = o)
+
  (* File "dynamic_preds.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:even. ((in_range(i7s) and (mod(i7s, 2) = 0)) ->
-  ((((mod(2, 2) = 0) and (o = 2)) and (to_rep(o1) = o)) -> (mod(0, 2) = 0))))
+goal WP_parameter_def : (mod(0, 2) = 0)

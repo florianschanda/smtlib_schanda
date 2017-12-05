@@ -307,28 +307,57 @@ axiom result____def_axiom :
   (result__ = main__get_arr__result__aggregate_def({ us_split_fields1 = {
   rec__main__rec__comp = of_rep(9012) } }))
 
- (* File "main.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall main__get_arr__result:(int,us_rep) farray. forall o:natural.
-  forall o1:natural. forall o2:natural.
-  forall main__get_arr__result__assume:(int,us_rep) farray.
-  forall result:(int,us_rep) farray.
-  forall main__get_arr__result1:(int,us_rep) farray.
-  forall main__get_arr__result2:(int,us_rep) farray.
-  forall main__get_arr__result3:(int,us_rep) farray.
-  forall main__get_arr__result4:(int,us_rep) farray.
-  forall main__get_arr__result5:(int,us_rep) farray.
-  (forall result1:(int,us_rep) farray. (((((((((to_rep(o) = 9012) and
-  (o = o1)) and (o2 = o1)) and
+logic main__get_arr__result : (int,us_rep) farray
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic main__get_arr__result__assume : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic main__get_arr__result1 : (int,us_rep) farray
+
+logic main__get_arr__result2 : (int,us_rep) farray
+
+logic main__get_arr__result3 : (int,us_rep) farray
+
+logic main__get_arr__result4 : (int,us_rep) farray
+
+logic main__get_arr__result5 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+axiom H : (to_rep(o) = 9012)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (o2 = o1)
+
+axiom H3 :
   (main__get_arr__result__assume = main__get_arr__result__aggregate_def({
-  us_split_fields1 = { rec__main__rec__comp = o2 } }))) and
-  (main__get_arr__result__assume = result__)) and
-  (((main__get_arr__result1 = main__get_arr__result2) and
-  (main__get_arr__result3 = main__get_arr__result1)) and
-  ((result = main__get_arr__result) and
-  (main__get_arr__result1 = result__)))) and
-  ((main__get_arr__result4 = main__get_arr__result2) and
-  (main__get_arr__result5 = main__get_arr__result3))) and
-  (result1 = main__get_arr__result4)) -> (bool_eq4(main__get_arr__result4, 1,
-  10, temp___157({ us_split_fields1 = { rec__main__rec__comp = of_rep(9012) }
-  }), 1, 10) = true))))
+  us_split_fields1 = { rec__main__rec__comp = o2 } }))
+
+axiom H4 : (main__get_arr__result__assume = result__)
+
+axiom H5 : (main__get_arr__result1 = main__get_arr__result2)
+
+axiom H6 : (main__get_arr__result3 = main__get_arr__result1)
+
+axiom H7 : (result = main__get_arr__result)
+
+axiom H8 : (main__get_arr__result1 = result__)
+
+axiom H9 : (main__get_arr__result4 = main__get_arr__result2)
+
+axiom H10 : (main__get_arr__result5 = main__get_arr__result3)
+
+axiom H11 : (result1 = main__get_arr__result4)
+
+ (* File "main.adb", line 7, characters 0-0 *)
+goal WP_parameter_def : (bool_eq4(main__get_arr__result4, 1, 10, temp___157({
+  us_split_fields1 = { rec__main__rec__comp = of_rep(9012) } }), 1,
+  10) = true)

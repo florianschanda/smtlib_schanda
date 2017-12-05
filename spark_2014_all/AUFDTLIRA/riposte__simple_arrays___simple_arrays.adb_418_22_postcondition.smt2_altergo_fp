@@ -216,11 +216,31 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : (int,enum_t) farray
+
+logic o : enum_t
+
+logic o1 : (int,enum_t) farray
+
+logic result : (int,enum_t) farray
+
+logic a1 : (int,enum_t) farray
+
+logic a2 : (int,enum_t) farray
+
+logic a3 : (int,enum_t) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = (a[0 <- o]))
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = o1)
+
+axiom H4 : (a1 = a2)
+
+axiom H5 : (a3 = a1)
+
  (* File "simple_arrays.adb", line 408, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,enum_t) farray. forall o:enum_t.
-  forall o1:(int,enum_t) farray. forall result:(int,enum_t) farray.
-  forall a1:(int,enum_t) farray. forall a2:(int,enum_t) farray.
-  forall a3:(int,enum_t) farray. (((((to_rep(o) = 1) and
-  (o1 = (a[0 <- o]))) and ((result = a) and (a1 = o1))) and ((a1 = a2) and
-  (a3 = a1))) -> (to_rep((a2[0])) = 0)))
+goal WP_parameter_def : (to_rep((a2[0])) = 0)

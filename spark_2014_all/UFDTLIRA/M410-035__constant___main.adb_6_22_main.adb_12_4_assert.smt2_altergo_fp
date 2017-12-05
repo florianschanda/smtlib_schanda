@@ -92,6 +92,13 @@ axiom g__post_axiom : true
 
 axiom g__def_axiom : ((g(void) = true) <-> (f(void) = true))
 
+axiom H : (g(void) = e)
+
+axiom H1 : (h(void) = m)
+
+axiom H2 : (f(void) = true)
+
+axiom H3 : (e = true)
+
  (* File "main.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : ((g(void) = e) -> ((h(void) = m) ->
-  ((f(void) = true) -> ((e = true) -> (m = true)))))
+goal WP_parameter_def : (m = true)

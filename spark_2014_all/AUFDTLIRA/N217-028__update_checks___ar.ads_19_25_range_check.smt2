@@ -81,6 +81,7 @@
 (declare-const o7 Int)
 (declare-const o8 Int)
 (declare-const o9 Int)
+(declare-const o10 Int)
 (declare-const result (Array Int et1))
 (declare-const a1 (Array Int et1))
 (declare-const a2 (Array Int et1))

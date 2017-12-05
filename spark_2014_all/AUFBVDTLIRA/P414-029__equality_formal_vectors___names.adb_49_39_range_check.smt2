@@ -241,6 +241,7 @@
 (declare-const hash_table (Array (_ BitVec 32) name_id))
 (declare-const char_table__split_fields us_main_type1)
 (declare-const us Int)
+(declare-const us1 Int)
 (declare-const result (Array (_ BitVec 32) name_id))
 (declare-const hash_table1 (Array (_ BitVec 32) name_id))
 (assert (= result hash_table))

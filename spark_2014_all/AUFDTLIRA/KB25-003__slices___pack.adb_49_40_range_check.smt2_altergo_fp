@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -637,19 +637,55 @@ axiom my_a__def_axiom : (my_a = pack__an22__my_a__aggregate_def(42))
 
 axiom my_b__def_axiom : (my_b = my_a)
 
- (* File "pack.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall glob:(int,character) farray. forall my_s2:(int,character) farray.
-  forall temp___455:(int,character) farray. forall o:(int,character) farray.
-  forall pack__an22__my_b__assume:(int,integer) farray.
-  forall result:(int,character) farray. forall my_s21:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(glob__first),
-  to_rep1(glob__last)) -> ((((((1 <= 4) -> (((to_rep1(glob__first) <= 1) and
+logic glob : (int,character) farray
+
+logic my_s2 : (int,character) farray
+
+logic temp___455 : (int,character) farray
+
+logic o : (int,character) farray
+
+logic pack__an22__my_b__assume : (int,integer) farray
+
+logic temp___462 : (int,character) farray
+
+logic temp___464 : (int,character) farray
+
+logic temp___475 : (int,character) farray
+
+logic temp___477 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic my_s21 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(glob__first),
+  to_rep1(glob__last))
+
+axiom H1 : ((1 <= 4) -> (((to_rep1(glob__first) <= 1) and
   (1 <= to_rep1(glob__last))) and ((to_rep1(glob__first) <= 4) and
-  (4 <= to_rep1(glob__last))))) and (temp___455 = glob)) and
-  (o = temp___455)) and ((result = my_s2) and (my_s21 = o))) ->
-  ((pack__an22__my_a__aggregate_def(42) = my_a) -> (((((1 <= 4) ->
-  (((1 <= 1) and (1 <= 4)) and ((1 <= 4) and (4 <= 4)))) and
-  (pack__an22__my_b__assume = my_a)) and
-  (pack__an22__my_b__assume = my_b)) -> ((bool_eq4(my_s21, 1, 3, glob, 1,
-  3) = true) -> ((1 <= 3) -> (to_rep1(glob__first) <= 1))))))))
+  (4 <= to_rep1(glob__last)))))
+
+axiom H2 : (temp___455 = glob)
+
+axiom H3 : (o = temp___455)
+
+axiom H4 : (result = my_s2)
+
+axiom H5 : (my_s21 = o)
+
+axiom H6 : (pack__an22__my_a__aggregate_def(42) = my_a)
+
+axiom H7 : ((1 <= 4) -> (((1 <= 1) and (1 <= 4)) and ((1 <= 4) and
+  (4 <= 4))))
+
+axiom H8 : (pack__an22__my_b__assume = my_a)
+
+axiom H9 : (pack__an22__my_b__assume = my_b)
+
+axiom H10 : (bool_eq4(my_s21, 1, 3, glob, 1, 3) = true)
+
+axiom H11 : (1 <= 3)
+
+ (* File "pack.adb", line 33, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(glob__first) <= 1)

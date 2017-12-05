@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -146,18 +146,45 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic p__compare__result : bool
+
+logic o : bool
+
+logic result : bool
+
+logic p__compare__result1 : bool
+
+logic p__compare__result2 : bool
+
+logic p__compare__result3 : bool
+
+logic p__compare__result4 : bool
+
+logic p__compare__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(left)
+
+axiom H1 : in_range1(right)
+
+axiom H2 : (p__compare__result1 = p__compare__result2)
+
+axiom H3 : (p__compare__result3 = p__compare__result1)
+
+axiom H4 : (o = olt(left, right))
+
+axiom H5 : (result = p__compare__result)
+
+axiom H6 : (p__compare__result1 = o)
+
+axiom H7 : (p__compare__result4 = p__compare__result2)
+
+axiom H8 : (p__compare__result5 = p__compare__result3)
+
+axiom H9 : (result1 = p__compare__result4)
+
+axiom H10 : (p__compare__result4 = true)
+
  (* File "p.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__compare__result:bool. forall o:bool. forall result:bool.
-  forall p__compare__result1:bool. forall p__compare__result2:bool.
-  forall p__compare__result3:bool. forall p__compare__result4:bool.
-  forall p__compare__result5:bool.
-  (forall result1:bool. ((in_range1(left) and (in_range1(right) and
-  (((((p__compare__result1 = p__compare__result2) and
-  (p__compare__result3 = p__compare__result1)) and ((o = olt(left,
-  right)) and ((result = p__compare__result) and
-  (p__compare__result1 = o)))) and
-  ((p__compare__result4 = p__compare__result2) and
-  (p__compare__result5 = p__compare__result3))) and
-  (result1 = p__compare__result4)))) -> ((p__compare__result4 = true) ->
-  (not (left = right))))))
+goal WP_parameter_def : (not (left = right))

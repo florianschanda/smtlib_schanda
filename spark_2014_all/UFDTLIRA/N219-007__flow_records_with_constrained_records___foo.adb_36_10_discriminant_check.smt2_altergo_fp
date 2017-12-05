@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -235,17 +235,17 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__foo__value__kind) = to_rep(((b).us_split_discrs1).rec__foo__value__kind)) and
-  (foo__value__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field))) and
-  (foo__value__int_field__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__foo__value__int_field) = to_rep1(((b).us_split_fields1).rec__foo__value__int_field)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__foo__value__kind) = to_rep(((b).us_split_discrs1).rec__foo__value__kind)) and
-  (foo__value__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field))) and
+  ((((to_rep(((a).us_split_discrs1).rec__foo__value__kind) = to_rep(((b).us_split_discrs1).rec__foo__value__kind)) and
+  ((foo__value__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field)) and
   (foo__value__int_field__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__foo__value__int_field) = to_rep1(((b).us_split_fields1).rec__foo__value__int_field))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__foo__value__kind) = to_rep(((b).us_split_discrs1).rec__foo__value__kind)) and
+  ((foo__value__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field)) and
+  (foo__value__int_field__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__foo__value__int_field) = to_rep1(((b).us_split_fields1).rec__foo__value__int_field)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -547,10 +547,24 @@ logic r6b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v__split_fields : value_kind
+
+logic v__split_fields1 : bool
+
+logic v__split_fields2 : integer
+
+logic v__split_fields3 : bool
+
+logic us : int
+
+axiom H : (((to_rep(v__split_discrs) = to_rep(v__split_fields)) and
+  (v__split_fields3 = true)) and (v__split_fields3 = true))
+
+axiom H1 : (to_rep(v__split_discrs) = r6b)
+
+axiom H2 : in_range1(r6b)
+
+axiom H3 : ((us = r6b) and in_range1(r6b))
+
  (* File "foo.adb", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:value_kind. forall v__split_fields1:bool.
-  forall us:int. ((((to_rep(v__split_discrs) = to_rep(v__split_fields)) and
-  (v__split_fields1 = true)) and (v__split_fields1 = true)) ->
-  (((to_rep(v__split_discrs) = r6b) and in_range1(r6b)) -> (((us = r6b) and
-  in_range1(r6b)) -> (to_rep(v__split_fields) = 1)))))
+goal WP_parameter_def : (to_rep(v__split_fields) = 1)

@@ -43,6 +43,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const number Int)
 (declare-const next_number Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const number1 Int)
 (assert (in_range1 next_number))

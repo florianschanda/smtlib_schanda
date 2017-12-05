@@ -40,6 +40,7 @@
 (declare-const x Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range b))
 (assert (= 0 b))
 (assert (in_range a))

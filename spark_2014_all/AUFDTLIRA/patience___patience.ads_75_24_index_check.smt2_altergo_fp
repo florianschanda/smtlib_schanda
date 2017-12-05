@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -268,7 +268,7 @@ axiom compare_def_gt :
 
 type cardindex
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 100))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 100))
 
 logic bool_eq5 : int, int -> bool
 
@@ -928,17 +928,374 @@ logic s7 : (int,cardindex) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : cardindex
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : cardindex
+
+logic temp___512 : int
+
+logic o5 : int
+
+logic o6 : cardindex
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : cardindex
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : cardindex
+
+logic temp___507 : int
+
+logic o14 : int
+
+logic o15 : card
+
+logic o16 : int
+
+logic o17 : card
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : cardindex
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : cardindex
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : cardindex
+
+logic o28 : int
+
+logic o29 : bool
+
+logic o30 : bool
+
+logic i1 : int
+
+logic j : int
+
+logic o31 : int
+
+logic o32 : cardindex
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic k : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : cardindex
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : bool
+
+logic o43 : int
+
+logic temp___473 : (int,cardindex) farray
+
+logic o44 : int
+
+logic o45 : cardindex
+
+logic temp___474 : int
+
+logic o46 : int
+
+logic temp___477 : (int,cardindex) farray
+
+logic o47 : int
+
+logic o48 : cardindex
+
+logic temp___478 : int
+
+logic o49 : int
+
+logic o50 : card
+
+logic o51 : int
+
+logic i2 : int
+
+logic j1 : int
+
+logic o52 : int
+
+logic o53 : cardindex
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : bool
+
+logic k1 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : cardindex
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : bool
+
+logic o63 : bool
+
+logic o64 : int
+
+logic temp___449 : (int,cardindex) farray
+
+logic o65 : int
+
+logic temp___451 : (int,cardindex) farray
+
+logic o66 : int
+
+logic o67 : cardindex
+
+logic o68 : int
+
+logic ist : int
+
+logic ip : int
+
+logic o69 : int
+
+logic o70 : cardindex
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : bool
+
+logic o74 : int
+
+logic temp___426 : (int,cardindex) farray
+
+logic o75 : int
+
+logic o76 : cardindex
+
+logic temp___427 : int
+
+logic o77 : int
+
+logic temp___430 : (int,cardindex) farray
+
+logic o78 : int
+
+logic o79 : cardindex
+
+logic temp___431 : int
+
+logic o80 : int
+
+logic o81 : cardindex
+
+logic o82 : int
+
+logic o83 : bool
+
+logic i3 : int
+
+logic o84 : int
+
+logic o85 : cardindex
+
+logic temp___411 : int
+
+logic o86 : int
+
+logic temp___412 : (int,cardindex) farray
+
+logic o87 : int
+
+logic o88 : cardindex
+
+logic temp___414 : int
+
+logic o89 : int
+
+logic o90 : cardindex
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : cardindex
+
+logic o94 : int
+
+logic o95 : cardindex
+
+logic temp___408 : int
+
+logic o96 : int
+
+logic o97 : cardindex
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : bool
+
+logic o102 : bool
+
+logic o103 : int
+
+logic o104 : cardindex
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : cardindex
+
+logic o108 : int
+
+logic o109 : bool
+
+logic o110 : bool
+
+logic i4 : int
+
+logic o111 : int
+
+logic o112 : cardindex
+
+logic o113 : int
+
+logic o114 : bool
+
+logic j2 : int
+
+logic o115 : int
+
+logic o116 : cardindex
+
+logic o117 : int
+
+logic o118 : int
+
+logic o119 : bool
+
+logic o120 : int
+
+logic temp___389 : (int,cardindex) farray
+
+logic o121 : int
+
+logic temp___391 : (int,cardindex) farray
+
+logic o122 : int
+
+logic o123 : cardindex
+
+logic o124 : int
+
+logic o125 : bool
+
+logic o126 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+axiom H : (((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) ->
+  ((result4 = true) <->
+  (forall i5:int. (((0 <= i5) and (i5 <= (to_rep1(s2) - 1))) ->
+  (((1 <= to_rep1((s3[i5]))) and (to_rep1((s3[i5])) <= to_rep1(s))) and
+  (forall j3:int. (((0 <= j3) and (j3 <= (to_rep1((s3[i5])) - 1))) ->
+  ((0 <= to_rep1(((s4[i5])[j3]))) and
+  (to_rep1(((s4[i5])[j3])) <  to_rep1(s))))))))))
+
+axiom H1 : ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) ->
+  (result4 = false))
+
+axiom H2 : (result4 = true)
+
+axiom H3 : (0 <= i3)
+
+axiom H4 : (i3 <= (to_rep1(s) - 1))
+
  (* File "patience.ads", line 53, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:bool. (((((((0 <= to_rep1(s2)) and
-  (to_rep1(s2) <= to_rep1(s))) and (to_rep1(s) <= 100)) and
-  ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) and ((result = true) <->
-  (forall i1:int. (((0 <= i1) and (i1 <= (to_rep1(s2) - 1))) ->
-  (((1 <= to_rep1((s3[i1]))) and (to_rep1((s3[i1])) <= to_rep1(s))) and
-  (forall j:int. (((0 <= j) and (j <= (to_rep1((s3[i1])) - 1))) ->
-  ((0 <= to_rep1(((s4[i1])[j]))) and
-  (to_rep1(((s4[i1])[j])) <  to_rep1(s)))))))))) or
-  ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
-  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) and
-  (result = false))) -> ((result = true) -> (((0 <= i) and
-  (i <= (to_rep1(s) - 1))) -> (0 <= i)))))
+goal WP_parameter_def : (0 <= i3)

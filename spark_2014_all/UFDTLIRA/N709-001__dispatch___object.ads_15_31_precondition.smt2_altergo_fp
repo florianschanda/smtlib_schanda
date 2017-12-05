@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -407,18 +407,30 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "object.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall obj__split_fields:integer. forall obj__split_fields1:integer.
-  forall obj__split_fields2:integer. forall obj__split_fields3:us_private.
-  forall result:bool. (in_range(value) -> (((result = has_stored_area({
-  us_split_fields1 = { rec__object__t__area = obj__split_fields;
-  rec__object__t__max_width = obj__split_fields1;
-  rec__object__t__max_height = obj__split_fields2; rec__ext__ =
-  obj__split_fields3 }; attr__tag = obj__attr__tag })) and
-  ((result = true) <-> in_range(to_rep(obj__split_fields)))) ->
-  ((result = true) -> (has_stored_area({ us_split_fields1 = {
+logic o : int
+
+logic obj__split_fields : integer
+
+logic obj__split_fields1 : integer
+
+logic obj__split_fields2 : integer
+
+logic obj__split_fields3 : us_private
+
+logic result : bool
+
+axiom H : in_range(value)
+
+axiom H1 : ((result = has_stored_area({ us_split_fields1 = {
   rec__object__t__area = obj__split_fields; rec__object__t__max_width =
   obj__split_fields1; rec__object__t__max_height = obj__split_fields2;
-  rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag
-  }) = true)))))
+  rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag })) and
+  ((result = true) <-> in_range(to_rep(obj__split_fields))))
+
+axiom H2 : (result = true)
+
+ (* File "object.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (has_stored_area({ us_split_fields1 = {
+  rec__object__t__area = obj__split_fields; rec__object__t__max_width =
+  obj__split_fields1; rec__object__t__max_height = obj__split_fields2;
+  rec__ext__ = obj__split_fields3 }; attr__tag = obj__attr__tag }) = true)

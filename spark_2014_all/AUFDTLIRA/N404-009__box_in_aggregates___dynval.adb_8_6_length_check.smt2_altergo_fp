@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -527,33 +527,60 @@ axiom first__def_axiom : (first = l)
 
 axiom last__def_axiom : (last = u)
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall temp___156:(int,integer) farray.
-  forall temp___1561:t1. forall temp___157:(int,integer) farray.
-  forall temp___1571:t. (in_range(l) -> (in_range(u) ->
-  ((forall temp___146:int. (((to_rep(first1(mk(to_rep(x__first),
-   to_rep(x__last)))) <= temp___146) and
-   (temp___146 <= to_rep(last1(mk(to_rep(x__first), to_rep(x__last)))))) ->
-   (to_rep((x[temp___146])) = 5))) ->
-  (((dynamic_property1(first, last, to_rep(x__first), to_rep(x__last)) and
-  ((to_rep(x__first) = l) and (to_rep(x__last) = u))) and
+logic x : (int,integer) farray
+
+logic o : int
+
+logic us : int
+
+logic temp___156 : (int,integer) farray
+
+logic temp___1561 : t1
+
+logic temp___157 : (int,integer) farray
+
+logic temp___1571 : t
+
+logic result : bool
+
+axiom H : in_range(l)
+
+axiom H1 : in_range(u)
+
+axiom H2 :
+  (forall temp___146:int. (((to_rep(first1(mk(to_rep(x__first),
+  to_rep(x__last)))) <= temp___146) and
+  (temp___146 <= to_rep(last1(mk(to_rep(x__first), to_rep(x__last)))))) ->
+  (to_rep((x[temp___146])) = 5)))
+
+axiom H3 : ((dynamic_property1(first, last, to_rep(x__first),
+  to_rep(x__last)) and ((to_rep(x__first) = l) and
+  (to_rep(x__last) = u))) and
   (forall temp___149:int. (((to_rep(x__first) <= temp___149) and
   (temp___149 <= to_rep(x__last))) -> ((first <= last) ->
-  dynamic_property(first, last, to_rep((x[temp___149]))))))) ->
-  ((((to_rep(first3((temp___150(l, u)).rt1)) = l) and
-  ((to_rep(last3((temp___150(l, u)).rt1)) = u) and ({ elts1 = temp___156;
-  rt1 = temp___1561 } = temp___150(l, u)))) and
-  ((((to_rep(first3(temp___1561)) <= to_rep(last3(temp___1561))) and
-  (((first <= last) and
-  (((to_rep(last3(temp___1561)) - to_rep(first3(temp___1561))) + 1) = ((last - first) + 1))) or
-  ((not (first <= last)) and
-  (((to_rep(last3(temp___1561)) - to_rep(first3(temp___1561))) + 1) = 0)))) or
-  ((not (to_rep(first3(temp___1561)) <= to_rep(last3(temp___1561)))) and
-  (((first <= last) and (0 = ((last - first) + 1))) or
-  (not (first <= last))))) and ((slide(temp___156,
-  to_rep(first3(temp___1561)), first) = temp___157) and (mk(first,
-  last) = temp___1571)))) ->
+  dynamic_property(first, last, to_rep((x[temp___149])))))))
+
+axiom H4 : (to_rep(first3((temp___150(l, u)).rt1)) = l)
+
+axiom H5 : (to_rep(last3((temp___150(l, u)).rt1)) = u)
+
+axiom H6 : ({ elts1 = temp___156; rt1 = temp___1561 } = temp___150(l, u))
+
+axiom H7 : (((to_rep(first3(temp___1561)) <= to_rep(last3(temp___1561))) ->
+  (((first <= last) ->
+  (((to_rep(last3(temp___1561)) - to_rep(first3(temp___1561))) + 1) = ((last - first) + 1))) and
+  ((not (first <= last)) ->
+  (((to_rep(last3(temp___1561)) - to_rep(first3(temp___1561))) + 1) = 0)))) and
+  ((not (to_rep(first3(temp___1561)) <= to_rep(last3(temp___1561)))) ->
+  ((first <= last) -> (0 = ((last - first) + 1)))))
+
+axiom H8 : (slide(temp___156, to_rep(first3(temp___1561)),
+  first) = temp___157)
+
+axiom H9 : (mk(first, last) = temp___1571)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep(first1(temp___1571)) <= to_rep(last1(temp___1571))) ->
   (((to_rep(x__first) <= to_rep(x__last)) ->
   (((to_rep(last1(temp___1571)) - to_rep(first1(temp___1571))) + 1) = ((to_rep(x__last) - to_rep(x__first)) + 1))) and
@@ -561,4 +588,4 @@ goal WP_parameter_def :
   (((to_rep(last1(temp___1571)) - to_rep(first1(temp___1571))) + 1) = 0)))) and
   ((not (to_rep(first1(temp___1571)) <= to_rep(last1(temp___1571)))) ->
   ((to_rep(x__first) <= to_rep(x__last)) ->
-  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))))))))
+  (0 = ((to_rep(x__last) - to_rep(x__first)) + 1)))))

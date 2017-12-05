@@ -138,7 +138,7 @@ function scalar_with_default__ref___2__projection(a: scalar_with_default__ref) :
 
 type tscalar_with_defaultB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -209,7 +209,7 @@ axiom first__def_axiom : (first = c)
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -281,5 +281,25 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic ok_def : int
+
+logic no_def : int
+
+logic no_ini : int
+
+logic us : int
+
+logic us1 : int
+
+logic o : int
+
+logic result : int
+
+logic no_def1 : int
+
+axiom H : in_range(c)
+
+axiom H1 : (c <= 2147483647)
+
  (* File "with_default.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> ((c <= 2147483647) -> (0 <= c)))
+goal WP_parameter_def : (0 <= c)

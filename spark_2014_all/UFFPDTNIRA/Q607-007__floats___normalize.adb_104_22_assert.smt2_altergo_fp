@@ -1182,17 +1182,45 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v1 : t
+
+logic v2 : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic v11 : t
+
+logic result1 : t
+
+logic v21 : t
+
+axiom H : in_range3(x)
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range2(v1))
+
+axiom H2 : (le(neg(fliteral1), fliteral1) -> in_range2(v2))
+
+axiom H3 : (result = v1)
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
+axiom H4 : (v11 = div(NearestTiesToEven, x, fliteral5))
+
+axiom H5 : (le(neg(fliteral4), v11) and le(v11, fliteral4))
+
+axiom H6 : ((o = r2(v11)) and (in_range2(o) and (o = roundToIntegral(Down,
+  v11))))
+
+axiom H7 : (result1 = v2)
+
+axiom H8 : (v21 = o)
+
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v1:t. forall v2:t. forall o:t. forall result:t. forall v11:t.
-  forall result1:t. forall v21:t. (in_range3(x) -> ((le(neg(fliteral1),
-  fliteral1) -> in_range2(v1)) -> ((le(neg(fliteral1), fliteral1) ->
-  in_range2(v2)) -> (((result = v1) and (v11 = div(NearestTiesToEven, x,
-  fliteral5))) -> ((le(neg(fliteral4), v11) and le(v11, fliteral4)) ->
-  ((((o = r2(v11)) and (in_range2(o) and (o = roundToIntegral(Down,
-  v11)))) and ((result1 = v2) and (v21 = o))) -> le(v21, v11))))))))
+goal WP_parameter_def : le(v21, v11)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type large_range
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq1 : int, int -> bool
@@ -146,6 +146,13 @@ logic z : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : in_range1(z)
+
+axiom H3 : (((x <  y) and (y <  z)) and (z <  x))
+
  (* File "interval_reasoning.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> (in_range1(z) ->
-  (not (((x <  y) and (y <  z)) and (z <  x))))))
+goal WP_parameter_def : false

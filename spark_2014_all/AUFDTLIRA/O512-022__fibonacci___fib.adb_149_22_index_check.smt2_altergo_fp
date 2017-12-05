@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -326,17 +326,264 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic i5 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___221 : (int,integer) farray
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic us : int
+
+logic temp___228 : int
+
+logic temp___226 : (int,integer) farray
+
+logic temp___225 : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : (int,integer) farray
+
+logic temp___230 : (int,integer) farray
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : integer
+
+logic o22 : int
+
+logic o23 : (int,integer) farray
+
+logic us1 : int
+
+logic temp___237 : int
+
+logic temp___235 : (int,integer) farray
+
+logic temp___234 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : integer
+
+logic o28 : int
+
+logic o29 : (int,integer) farray
+
+logic a11 : (int,integer) farray
+
+logic a21 : (int,integer) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic i6 : int
+
+logic a12 : (int,integer) farray
+
+logic i7 : int
+
+logic result2 : (int,integer) farray
+
+logic a13 : (int,integer) farray
+
+logic a14 : (int,integer) farray
+
+logic i8 : int
+
+logic a15 : (int,integer) farray
+
+logic i9 : int
+
+logic a16 : (int,integer) farray
+
+logic i10 : int
+
+logic a17 : (int,integer) farray
+
+logic i11 : int
+
+logic result3 : int
+
+logic i12 : int
+
+logic a18 : (int,integer) farray
+
+logic i13 : int
+
+logic result4 : (int,integer) farray
+
+logic a19 : (int,integer) farray
+
+logic a110 : (int,integer) farray
+
+logic i14 : int
+
+logic a111 : (int,integer) farray
+
+logic i15 : int
+
+logic a112 : (int,integer) farray
+
+logic i16 : int
+
+logic a113 : (int,integer) farray
+
+logic i17 : int
+
+logic result5 : int
+
+logic i18 : int
+
+logic a22 : (int,integer) farray
+
+logic i19 : int
+
+logic result6 : (int,integer) farray
+
+logic a23 : (int,integer) farray
+
+logic a24 : (int,integer) farray
+
+logic i20 : int
+
+logic a25 : (int,integer) farray
+
+logic i21 : int
+
+logic a26 : (int,integer) farray
+
+logic i22 : int
+
+logic a27 : (int,integer) farray
+
+logic i23 : int
+
+logic result7 : int
+
+logic i24 : int
+
+logic a28 : (int,integer) farray
+
+logic i25 : int
+
+logic result8 : (int,integer) farray
+
+logic a29 : (int,integer) farray
+
+logic a210 : (int,integer) farray
+
+logic i26 : int
+
+logic a211 : (int,integer) farray
+
+logic i27 : int
+
+logic a212 : (int,integer) farray
+
+logic i28 : int
+
+logic a213 : (int,integer) farray
+
+logic i29 : int
+
+logic a114 : (int,integer) farray
+
+logic a214 : (int,integer) farray
+
+logic i30 : int
+
+logic i31 : int
+
+logic i32 : int
+
+logic i33 : int
+
+logic a115 : (int,integer) farray
+
+logic a215 : (int,integer) farray
+
+logic i34 : int
+
+logic i35 : int
+
+logic i36 : int
+
+logic i37 : int
+
+axiom H : in_range2(k)
+
+axiom H1 : ((0 <= k) and ((k <= 100) and
+  ((forall i38:int. (((0 <= i38) and (i38 <= k)) ->
+   (to_rep((b1[i38])) = to_rep((b2[i38]))))) and
+  (forall i38:int. ((((k + 1) <= i38) and (i38 <= 100)) ->
+  (to_rep((c1[(i38 - k)])) = to_rep((c2[(i38 - k)]))))))))
+
+axiom H2 : (result1 = i)
+
+axiom H3 : (i6 = 0)
+
+axiom H4 : (0 <= i6)
+
+axiom H5 : (i6 <= k)
+
+axiom H6 :
+  ((forall temp___222:int. (((0 <= temp___222) and (temp___222 <= 100)) ->
+   ((i7 <= temp___222) -> ((a12[temp___222]) = (a1[temp___222]))))) and
+  ((0 <= i7) and (i7 <= k)))
+
  (* File "fib.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a1:(int,integer) farray. forall i:int. forall result:int.
-  forall i1:int. forall a11:(int,integer) farray. forall i2:int.
-  (in_range2(k) -> (((0 <= k) and ((k <= 100) and
-  ((forall i3:int. (((0 <= i3) and (i3 <= k)) ->
-   (to_rep((b1[i3])) = to_rep((b2[i3]))))) and
-  (forall i3:int. ((((k + 1) <= i3) and (i3 <= 100)) ->
-  (to_rep((c1[(i3 - k)])) = to_rep((c2[(i3 - k)])))))))) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = 0)) ->
-  (((0 <= i1) and (i1 <= k)) ->
-  (((forall temp___222:int. (((0 <= temp___222) and (temp___222 <= 100)) ->
-    ((i2 <= temp___222) -> ((a11[temp___222]) = (a1[temp___222]))))) and
-  ((0 <= i2) and (i2 <= k))) -> (0 <= i2)))))))
+goal WP_parameter_def : (0 <= i7)

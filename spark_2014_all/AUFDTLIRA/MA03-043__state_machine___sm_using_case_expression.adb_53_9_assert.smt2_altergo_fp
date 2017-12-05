@@ -863,45 +863,239 @@ axiom invalid_transition_array__def_axiom :
   rec__sm_using_case_expression__invalid_transition_record_t__trigger =
   of_rep1(4) } }))
 
- (* File "sm_types.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:int. forall o:triggers_t. forall o1:states_t.
-  forall o2:states_t. forall o3:triggers_t. forall o4:triggers_t.
-  forall o5:states_t. forall o6:states_t. forall o7:triggers_t.
-  forall o8:triggers_t. forall o9:states_t. forall o10:states_t.
-  forall o11:triggers_t. forall o12:triggers_t. forall o13:states_t.
-  forall o14:states_t. forall o15:triggers_t. forall o16:triggers_t.
-  forall o17:states_t. forall o18:states_t. forall o19:triggers_t.
-  forall o20:triggers_t. forall o21:states_t. forall o22:states_t.
-  forall o23:triggers_t. forall o24:triggers_t. forall o25:states_t.
-  forall o26:states_t. forall o27:triggers_t. forall o28:triggers_t.
-  forall o29:states_t. forall o30:states_t. forall o31:triggers_t.
-  forall o32:triggers_t. forall o33:states_t. forall o34:states_t.
-  forall o35:triggers_t. forall o36:states_t. forall o37:triggers_t.
-  forall o38:states_t. forall o39:triggers_t. forall o40:states_t.
-  forall o41:triggers_t. forall o42:states_t. forall o43:triggers_t.
-  forall o44:states_t. forall o45:triggers_t. forall o46:states_t.
-  forall o47:triggers_t. forall o48:states_t. forall o49:triggers_t.
-  forall o50:states_t. forall o51:triggers_t. forall o52:states_t.
-  forall o53:triggers_t. forall temp___182:(int,us_rep) farray.
-  ((((((to_rep1(o32) = 4) and ((to_rep(o33) = 3) and ((o33 = o34) and
-  (o32 = o35)))) and ((o36 = o34) and (o37 = o35))) and
-  ((((to_rep1(o28) = 4) and ((to_rep(o29) = 3) and ((o29 = o30) and
-  (o28 = o31)))) and ((o38 = o30) and (o39 = o31))) and
-  ((((to_rep1(o24) = 3) and ((to_rep(o25) = 3) and ((o25 = o26) and
-  (o24 = o27)))) and ((o40 = o26) and (o41 = o27))) and
-  ((((to_rep1(o20) = 2) and ((to_rep(o21) = 3) and ((o21 = o22) and
-  (o20 = o23)))) and ((o42 = o22) and (o43 = o23))) and
-  ((((to_rep1(o16) = 1) and ((to_rep(o17) = 3) and ((o17 = o18) and
-  (o16 = o19)))) and ((o44 = o18) and (o45 = o19))) and
-  ((((to_rep1(o12) = 0) and ((to_rep(o13) = 3) and ((o13 = o14) and
-  (o12 = o15)))) and ((o46 = o14) and (o47 = o15))) and
-  ((((to_rep1(o8) = 4) and ((to_rep(o9) = 2) and ((o9 = o10) and
-  (o8 = o11)))) and ((o48 = o10) and (o49 = o11))) and
-  ((((to_rep1(o4) = 4) and ((to_rep(o5) = 1) and ((o5 = o6) and
-  (o4 = o7)))) and ((o50 = o6) and (o51 = o7))) and ((((to_rep1(o) = 4) and
-  ((to_rep(o1) = 0) and ((o1 = o2) and (o = o3)))) and ((o52 = o2) and
-  (o53 = o3))) and
+logic state : int
+
+logic o : triggers_t
+
+logic o1 : states_t
+
+logic o2 : states_t
+
+logic o3 : triggers_t
+
+logic o4 : triggers_t
+
+logic o5 : states_t
+
+logic o6 : states_t
+
+logic o7 : triggers_t
+
+logic o8 : triggers_t
+
+logic o9 : states_t
+
+logic o10 : states_t
+
+logic o11 : triggers_t
+
+logic o12 : triggers_t
+
+logic o13 : states_t
+
+logic o14 : states_t
+
+logic o15 : triggers_t
+
+logic o16 : triggers_t
+
+logic o17 : states_t
+
+logic o18 : states_t
+
+logic o19 : triggers_t
+
+logic o20 : triggers_t
+
+logic o21 : states_t
+
+logic o22 : states_t
+
+logic o23 : triggers_t
+
+logic o24 : triggers_t
+
+logic o25 : states_t
+
+logic o26 : states_t
+
+logic o27 : triggers_t
+
+logic o28 : triggers_t
+
+logic o29 : states_t
+
+logic o30 : states_t
+
+logic o31 : triggers_t
+
+logic o32 : triggers_t
+
+logic o33 : states_t
+
+logic o34 : states_t
+
+logic o35 : triggers_t
+
+logic o36 : states_t
+
+logic o37 : triggers_t
+
+logic o38 : states_t
+
+logic o39 : triggers_t
+
+logic o40 : states_t
+
+logic o41 : triggers_t
+
+logic o42 : states_t
+
+logic o43 : triggers_t
+
+logic o44 : states_t
+
+logic o45 : triggers_t
+
+logic o46 : states_t
+
+logic o47 : triggers_t
+
+logic o48 : states_t
+
+logic o49 : triggers_t
+
+logic o50 : states_t
+
+logic o51 : triggers_t
+
+logic o52 : states_t
+
+logic o53 : triggers_t
+
+logic temp___182 : (int,us_rep) farray
+
+logic state1 : int
+
+logic state2 : int
+
+logic state3 : int
+
+logic state4 : int
+
+logic state5 : int
+
+logic state6 : int
+
+logic state7 : int
+
+logic state8 : int
+
+logic state9 : int
+
+axiom H : (to_rep1(o32) = 4)
+
+axiom H1 : (to_rep(o33) = 3)
+
+axiom H2 : (o33 = o34)
+
+axiom H3 : (o32 = o35)
+
+axiom H4 : (o36 = o34)
+
+axiom H5 : (o37 = o35)
+
+axiom H6 : (to_rep1(o28) = 4)
+
+axiom H7 : (to_rep(o29) = 3)
+
+axiom H8 : (o29 = o30)
+
+axiom H9 : (o28 = o31)
+
+axiom H10 : (o38 = o30)
+
+axiom H11 : (o39 = o31)
+
+axiom H12 : (to_rep1(o24) = 3)
+
+axiom H13 : (to_rep(o25) = 3)
+
+axiom H14 : (o25 = o26)
+
+axiom H15 : (o24 = o27)
+
+axiom H16 : (o40 = o26)
+
+axiom H17 : (o41 = o27)
+
+axiom H18 : (to_rep1(o20) = 2)
+
+axiom H19 : (to_rep(o21) = 3)
+
+axiom H20 : (o21 = o22)
+
+axiom H21 : (o20 = o23)
+
+axiom H22 : (o42 = o22)
+
+axiom H23 : (o43 = o23)
+
+axiom H24 : (to_rep1(o16) = 1)
+
+axiom H25 : (to_rep(o17) = 3)
+
+axiom H26 : (o17 = o18)
+
+axiom H27 : (o16 = o19)
+
+axiom H28 : (o44 = o18)
+
+axiom H29 : (o45 = o19)
+
+axiom H30 : (to_rep1(o12) = 0)
+
+axiom H31 : (to_rep(o13) = 3)
+
+axiom H32 : (o13 = o14)
+
+axiom H33 : (o12 = o15)
+
+axiom H34 : (o46 = o14)
+
+axiom H35 : (o47 = o15)
+
+axiom H36 : (to_rep1(o8) = 4)
+
+axiom H37 : (to_rep(o9) = 2)
+
+axiom H38 : (o9 = o10)
+
+axiom H39 : (o8 = o11)
+
+axiom H40 : ((o48 = o10) and (o49 = o11))
+
+axiom H41 : (to_rep1(o4) = 4)
+
+axiom H42 : (to_rep(o5) = 1)
+
+axiom H43 : (o5 = o6)
+
+axiom H44 : (o4 = o7)
+
+axiom H45 : ((o50 = o6) and (o51 = o7))
+
+axiom H46 : (to_rep1(o) = 4)
+
+axiom H47 : (to_rep(o1) = 0)
+
+axiom H48 : (o1 = o2)
+
+axiom H49 : (o = o3)
+
+axiom H50 : ((o52 = o2) and (o53 = o3))
+
+axiom H51 :
   (temp___182 = sm_using_case_expression__invalid_transition_array__aggregate_def({
   us_split_fields1 = {
   rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
@@ -930,17 +1124,39 @@ goal WP_parameter_def :
   o39 } }, { us_split_fields1 = {
   rec__sm_using_case_expression__invalid_transition_record_t__initial_state =
   o36; rec__sm_using_case_expression__invalid_transition_record_t__trigger =
-  o37 } }))))))))))) and (temp___182 = invalid_transition_array)) ->
-  (in_range1(state) -> (in_range2(trigger) -> ((state = old_state) ->
-  (in_range1(old_state) ->
-  ((forall final_state:int. (((0 <= final_state) and (final_state <= 3)) ->
-   (exists initial_state:int. (((0 <= initial_state) and
-   (initial_state <= 3)) and
-   (exists trigger2:int. (((0 <= trigger2) and (trigger2 <= 4)) and
-   (final_state = my_sm(initial_state, trigger2)))))))) ->
-  (forall state2:int. (((0 <= state2) and (state2 <= 3)) ->
-  (forall trigger1:int. (((0 <= trigger1) and (trigger1 <= 4)) ->
-  ((not (my_sm(state2, trigger1) = 3)) or
+  o37 } }))
+
+axiom H52 : (temp___182 = invalid_transition_array)
+
+axiom H53 : in_range1(state)
+
+axiom H54 : in_range2(trigger)
+
+axiom H55 : (state = old_state)
+
+axiom H56 : in_range1(old_state)
+
+axiom H57 :
+  (forall final_state:int. (((0 <= final_state) and (final_state <= 3)) ->
+  (exists initial_state:int. (((0 <= initial_state) and
+  (initial_state <= 3)) and
+  (exists trigger2:int. (((0 <= trigger2) and (trigger2 <= 4)) and
+  (final_state = my_sm(initial_state, trigger2))))))))
+
+logic state21 : int
+
+axiom H58 : (0 <= state21)
+
+axiom H59 : (state21 <= 3)
+
+logic trigger1 : int
+
+axiom H60 : (0 <= trigger1)
+
+axiom H61 : (trigger1 <= 4)
+
+ (* File "sm_types.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : ((not (my_sm(state21, trigger1) = 3)) or
   (exists idx:int. (((1 <= idx) and (idx <= 20)) and
-  ((to_rep((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state) = state2) and
-  (to_rep1((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger) = trigger1))))))))))))))))
+  ((to_rep((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__initial_state) = state21) and
+  (to_rep1((((invalid_transition_array[idx])).us_split_fields1).rec__sm_using_case_expression__invalid_transition_record_t__trigger) = trigger1)))))

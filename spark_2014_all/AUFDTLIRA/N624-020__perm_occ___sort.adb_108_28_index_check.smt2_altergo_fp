@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -857,96 +857,367 @@ axiom occ__def_axiom :
   (forall e:int [occ({ elts = a; rt = a1 }, e)]. (in_range2(e) -> (occ({
   elts = a; rt = a1 }, e) = occ_def({ elts = a; rt = a1 }, e)))))
 
- (* File "sort.adb", line 59, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,natural) farray. forall smallest:int.
-  forall previous:(int,natural) farray. forall current:int. forall o:int.
-  forall temp___249:int. forall o1:(int,natural) farray.
-  forall temp___239:(int,natural) farray. forall temp___2391:t2.
-  forall o2:(int,natural) farray. forall o3:t. forall o4:int.
-  forall temp___240:(int,natural) farray. forall temp___2401:t1.
-  forall o5:(int,natural) farray. forall o6:t1.
-  forall o7:(int,natural) farray. forall o8:int. forall i:int. forall j:int.
-  forall o9:int. forall o10:bool. forall o11:int. forall o12:natural.
-  forall o13:int. forall values1:(int,natural) farray.
-  forall previous1:(int,natural) farray. forall result:bool.
-  forall result1:int. forall current1:int. forall result2:int.
-  forall smallest1:int. forall result3:(int,natural) farray.
-  forall previous2:(int,natural) farray. forall values2:(int,natural) farray.
-  forall values3:(int,natural) farray. forall smallest2:int.
-  forall current2:int. forall result4:bool. (dynamic_property(1, 100,
-  to_rep1(values__first), to_rep1(values__last)) -> (((1 <= 2147483647) ->
-  in_range3(smallest)) -> ((dynamic_property2(to_rep1(values__first),
-  to_rep1(values__last), to_rep1(previous__first),
-  to_rep1(previous__last)) and
+logic values : (int,natural) farray
+
+logic smallest : int
+
+logic previous : (int,natural) farray
+
+logic current : int
+
+logic o : int
+
+logic temp___249 : int
+
+logic temp___246 : (int,natural) farray
+
+logic temp___244 : int
+
+logic temp___242 : (int,natural) farray
+
+logic temp___243 : int
+
+logic temp___247 : (int,natural) farray
+
+logic o1 : (int,natural) farray
+
+logic temp___239 : (int,natural) farray
+
+logic temp___2391 : t2
+
+logic o2 : (int,natural) farray
+
+logic o3 : t
+
+logic o4 : int
+
+logic temp___240 : (int,natural) farray
+
+logic temp___2401 : t1
+
+logic o5 : (int,natural) farray
+
+logic o6 : t1
+
+logic o7 : (int,natural) farray
+
+logic o8 : int
+
+logic i : int
+
+logic j : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : int
+
+logic o14 : (int,natural) farray
+
+logic temp___2392 : (int,natural) farray
+
+logic temp___2393 : t2
+
+logic o15 : (int,natural) farray
+
+logic o16 : t
+
+logic o17 : int
+
+logic temp___2402 : (int,natural) farray
+
+logic temp___2403 : t1
+
+logic o18 : (int,natural) farray
+
+logic o19 : t1
+
+logic o20 : (int,natural) farray
+
+logic o21 : int
+
+logic o22 : int
+
+logic i1 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic temp___251 : int
+
+logic o25 : int
+
+logic o26 : natural
+
+logic o27 : int
+
+logic values1 : (int,natural) farray
+
+logic smallest1 : int
+
+logic previous1 : (int,natural) farray
+
+logic current1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic current2 : int
+
+logic result2 : int
+
+logic smallest2 : int
+
+logic result3 : (int,natural) farray
+
+logic previous2 : (int,natural) farray
+
+logic values2 : (int,natural) farray
+
+logic values3 : (int,natural) farray
+
+logic smallest3 : int
+
+logic previous3 : (int,natural) farray
+
+logic current3 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic current4 : int
+
+logic result6 : int
+
+logic smallest4 : int
+
+logic result7 : (int,natural) farray
+
+logic previous4 : (int,natural) farray
+
+logic values4 : (int,natural) farray
+
+logic values5 : (int,natural) farray
+
+logic smallest5 : int
+
+logic previous5 : (int,natural) farray
+
+logic current5 : int
+
+logic values6 : (int,natural) farray
+
+logic smallest6 : int
+
+logic previous6 : (int,natural) farray
+
+logic current6 : int
+
+logic values7 : (int,natural) farray
+
+logic smallest7 : int
+
+logic previous7 : (int,natural) farray
+
+logic current7 : int
+
+logic values8 : (int,natural) farray
+
+logic smallest8 : int
+
+logic previous8 : (int,natural) farray
+
+logic current8 : int
+
+logic values9 : (int,natural) farray
+
+logic smallest9 : int
+
+logic previous9 : (int,natural) farray
+
+logic current9 : int
+
+logic values10 : (int,natural) farray
+
+logic smallest10 : int
+
+logic previous10 : (int,natural) farray
+
+logic current10 : int
+
+logic values11 : (int,natural) farray
+
+logic smallest11 : int
+
+logic previous11 : (int,natural) farray
+
+logic current11 : int
+
+logic values12 : (int,natural) farray
+
+logic smallest12 : int
+
+logic previous12 : (int,natural) farray
+
+logic current12 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(values__first),
+  to_rep1(values__last))
+
+axiom H1 : ((1 <= 2147483647) -> in_range3(smallest))
+
+axiom H2 : (dynamic_property2(to_rep1(values__first), to_rep1(values__last),
+  to_rep1(previous__first), to_rep1(previous__last)) and
   ((to_rep1(previous__first) = to_rep1(values__first)) and
-  (to_rep1(previous__last) = to_rep1(values__last)))) ->
-  ((((((to_rep1(values__first) <= to_rep1(values__last)) and
-  (o = ((to_rep1(values__last) - to_rep1(values__first)) + 1))) or
-  ((not (to_rep1(values__first) <= to_rep1(values__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (not (result = true))) ->
-  (((temp___249 = (to_rep1(values__last) - 1)) and
-  in_range1((to_rep1(values__last) - 1))) -> ((({ int__content = result1
-  } = { int__content = current }) and (current1 = to_rep1(values__first))) ->
-  (((to_rep1(values__first) <= current1) and (current1 <= temp___249)) ->
-  ((((((((current1 <= to_rep1(values__last)) ->
-  (((to_rep1(values__first) <= current1) and
-  (current1 <= to_rep1(values__last))) and
+  (to_rep1(previous__last) = to_rep1(values__last))))
+
+axiom H3 : ((to_rep1(values__first) <= to_rep1(values__last)) ->
+  (o = ((to_rep1(values__last) - to_rep1(values__first)) + 1)))
+
+axiom H4 : ((not (to_rep1(values__first) <= to_rep1(values__last))) ->
+  (o = 0))
+
+axiom H5 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
+  (result = false)))
+
+axiom H6 : (not (result = true))
+
+axiom H7 : ((temp___249 = (to_rep1(values__last) - 1)) and
+  in_range1((to_rep1(values__last) - 1)))
+
+axiom H8 : (result1 = current)
+
+axiom H9 : (current2 = to_rep1(values__first))
+
+axiom H10 : (to_rep1(values__first) <= current2)
+
+axiom H11 : (current2 <= temp___249)
+
+axiom H12 : ((current2 <= to_rep1(values__last)) ->
+  (((to_rep1(values__first) <= current2) and
+  (current2 <= to_rep1(values__last))) and
   ((to_rep1(values__first) <= to_rep1(values__last)) and
-  (to_rep1(values__last) <= to_rep1(values__last))))) and (o1 = values)) and
-  ((o1 = temp___239) and (mk2(current1,
-  to_rep1(values__last)) = temp___2391))) and ((temp___239 = o2) and
-  (mk(to_rep1(first4(temp___2391)), to_rep1(last4(temp___2391))) = o3))) and
-  ((o4 = index_of_minimum({ elts = o2; rt = o3 })) and (in_range3(o4) and
-  (((to_rep1(first(o3)) <= o4) and (o4 <= to_rep1(last(o3)))) and
-  (forall i1:int. (((to_rep1(first(o3)) <= i1) and
-  (i1 <= to_rep1(last(o3)))) -> (to_rep((o2[o4])) <= to_rep((o2[i1]))))))))) and
-  (({ int__content = result2 } = { int__content = smallest }) and
-  (smallest1 = o4))) -> ((((not (smallest1 = current1)) and
-  ((((((slide(values, to_rep1(values__first),
-  to_rep1(values__first)) = temp___240) and (mk1(to_rep1(values__first),
-  to_rep1(values__last)) = temp___2401)) and
-  ((((to_rep1(first2(temp___2401)) <= to_rep1(last2(temp___2401))) and
-  (((to_rep1(previous__first) <= to_rep1(previous__last)) and
-  (((to_rep1(last2(temp___2401)) - to_rep1(first2(temp___2401))) + 1) = ((to_rep1(previous__last) - to_rep1(previous__first)) + 1))) or
-  ((not (to_rep1(previous__first) <= to_rep1(previous__last))) and
-  (((to_rep1(last2(temp___2401)) - to_rep1(first2(temp___2401))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___2401)) <= to_rep1(last2(temp___2401)))) and
-  (((to_rep1(previous__first) <= to_rep1(previous__last)) and
-  (0 = ((to_rep1(previous__last) - to_rep1(previous__first)) + 1))) or
-  (not (to_rep1(previous__first) <= to_rep1(previous__last)))))) and ({
-  elts1 = o5; rt1 = o6 } = { elts1 = temp___240; rt1 = temp___2401 }))) and
-  (o7 = o5)) and (({ map__content = result3 } = { map__content = previous
-  }) and (previous2 = o7))) and (((o8 = current1) and
-  in_range3(current1)) and ((((is_perm({ elts = values; rt =
-  mk(to_rep1(values__first), to_rep1(values__last)) }, { elts = values2; rt =
-  mk(to_rep1(values__first), to_rep1(values__last)) }) = true) and
-  (to_rep((values2[o8])) = to_rep((values[smallest1])))) and
-  (to_rep((values2[smallest1])) = to_rep((values[o8])))) and
+  (to_rep1(values__last) <= to_rep1(values__last)))))
+
+axiom H13 : (o1 = values)
+
+axiom H14 : (o1 = temp___239)
+
+axiom H15 : (mk2(current2, to_rep1(values__last)) = temp___2391)
+
+axiom H16 : (temp___239 = o2)
+
+axiom H17 : (mk(to_rep1(first4(temp___2391)),
+  to_rep1(last4(temp___2391))) = o3)
+
+axiom H18 : ((o4 = index_of_minimum({ elts = o2; rt = o3 })) and
+  (in_range3(o4) and (((to_rep1(first(o3)) <= o4) and
+  (o4 <= to_rep1(last(o3)))) and
+  (forall i2:int. (((to_rep1(first(o3)) <= i2) and
+  (i2 <= to_rep1(last(o3)))) -> (to_rep((o2[o4])) <= to_rep((o2[i2]))))))))
+
+axiom H19 : (result2 = smallest)
+
+axiom H20 : (smallest2 = o4)
+
+axiom H21 : true
+
+axiom H22 : ((not (smallest2 = current2)) -> (slide(values,
+  to_rep1(values__first), to_rep1(values__first)) = temp___240))
+
+axiom H23 : ((not (smallest2 = current2)) -> (mk1(to_rep1(values__first),
+  to_rep1(values__last)) = temp___2401))
+
+axiom H24 : ((not (smallest2 = current2)) ->
+  (((to_rep1(first2(temp___2401)) <= to_rep1(last2(temp___2401))) ->
+  (((to_rep1(previous__first) <= to_rep1(previous__last)) ->
+  (((to_rep1(last2(temp___2401)) - to_rep1(first2(temp___2401))) + 1) = ((to_rep1(previous__last) - to_rep1(previous__first)) + 1))) and
+  ((not (to_rep1(previous__first) <= to_rep1(previous__last))) ->
+  (((to_rep1(last2(temp___2401)) - to_rep1(first2(temp___2401))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___2401)) <= to_rep1(last2(temp___2401)))) ->
+  ((to_rep1(previous__first) <= to_rep1(previous__last)) ->
+  (0 = ((to_rep1(previous__last) - to_rep1(previous__first)) + 1))))))
+
+axiom H25 : ((not (smallest2 = current2)) -> ((o5 = temp___240) and
+  (o6 = temp___2401)))
+
+axiom H26 : ((not (smallest2 = current2)) -> (o7 = o5))
+
+axiom H27 : ((not (smallest2 = current2)) -> (result3 = previous))
+
+axiom H28 : ((not (smallest2 = current2)) -> (previous2 = o7))
+
+axiom H29 : ((not (smallest2 = current2)) -> ((o8 = current2) and
+  in_range3(current2)))
+
+axiom H30 : ((not (smallest2 = current2)) -> ((((is_perm({ elts = values;
+  rt = mk(to_rep1(values__first), to_rep1(values__last)) }, { elts = values2;
+  rt = mk(to_rep1(values__first), to_rep1(values__last)) }) = true) and
+  (to_rep((values2[o8])) = to_rep((values[smallest2])))) and
+  (to_rep((values2[smallest2])) = to_rep((values[o8])))) and
   (forall z:int. (((to_rep1(values__first) <= z) and
   (z <= to_rep1(values__last))) -> (((not (z = o8)) and
-  (not (z = smallest1))) -> (to_rep((values2[z])) = to_rep((values[z])))))))))) or
-  ((smallest1 = current1) and (((previous2 = previous) and
-  (values2 = values)) and ((previous2 = previous1) and
-  (values2 = values1))))) ->
-  (((forall i1:int. (((to_rep1(values__first) <= i1) and (i1 <= current2)) ->
-    (forall j1:int. ((((i1 + 1) <= j1) and (j1 <= to_rep1(values__last))) ->
-    (to_rep((values3[i1])) <= to_rep((values3[j1]))))))) and
-  (is_perm({ elts = values; rt = mk(to_rep1(values__first),
+  (not (z = smallest2))) -> (to_rep((values2[z])) = to_rep((values[z]))))))))
+
+axiom H31 : ((smallest2 = current2) -> (previous2 = previous))
+
+axiom H32 : ((smallest2 = current2) -> (values2 = values))
+
+axiom H33 : ((smallest2 = current2) -> (previous2 = previous1))
+
+axiom H34 : ((smallest2 = current2) -> (values2 = values1))
+
+axiom H35 :
+  (forall i2:int. (((to_rep1(values__first) <= i2) and (i2 <= current3)) ->
+  (forall j1:int. ((((i2 + 1) <= j1) and (j1 <= to_rep1(values__last))) ->
+  (to_rep((values3[i2])) <= to_rep((values3[j1])))))))
+
+axiom H36 : (is_perm({ elts = values; rt = mk(to_rep1(values__first),
   to_rep1(values__last)) }, { elts = values3; rt = mk(to_rep1(values__first),
-  to_rep1(values__last)) }) = true)) ->
-  (((((to_rep1(values__first) <= (to_rep1(values__last) - 1)) ->
+  to_rep1(values__last)) }) = true)
+
+axiom H37 : ((((to_rep1(values__first) <= (to_rep1(values__last) - 1)) ->
   dynamic_property3(to_rep1(values__first), (to_rep1(values__last) - 1),
-  current2)) and ((1 <= 2147483647) -> in_range3(smallest2))) and
-  ((to_rep1(values__first) <= current2) and
-  (current2 <= (to_rep1(values__last) - 1)))) ->
-  (((to_rep1(values__first) <= i) and (i <= current2)) ->
-  (((((o9 = (i + 1)) and in_range1((i + 1))) and (((o9 <= j) and
-  (o10 = true)) or ((not (o9 <= j)) and (o10 = false)))) and
-  (((j <= to_rep1(values__last)) and (result4 = match_bool(o10, true,
-  false))) or ((not (j <= to_rep1(values__last))) and
-  (result4 = match_bool(o10, false, false))))) -> ((result4 = true) ->
-  ((((((to_rep1(values__first) <= j) and (j <= to_rep1(values__last))) and
-  (o11 = j)) and (o12 = (values3[o11]))) and (o13 = to_rep(o12))) ->
-  (to_rep1(values__first) <= i)))))))))))))))))
+  current3)) and ((1 <= 2147483647) -> in_range3(smallest3))) and
+  ((to_rep1(values__first) <= current3) and
+  (current3 <= (to_rep1(values__last) - 1))))
+
+axiom H38 : (to_rep1(values__first) <= i)
+
+axiom H39 : (i <= current3)
+
+axiom H40 : ((o9 = (i + 1)) and in_range1((i + 1)))
+
+axiom H41 : (((o9 <= j) -> (o10 = true)) and ((not (o9 <= j)) ->
+  (o10 = false)))
+
+axiom H42 : (((j <= to_rep1(values__last)) -> (result4 = match_bool(o10,
+  true, false))) and ((not (j <= to_rep1(values__last))) ->
+  (result4 = match_bool(o10, false, false))))
+
+axiom H43 : (result4 = true)
+
+axiom H44 : ((to_rep1(values__first) <= j) and (j <= to_rep1(values__last)))
+
+axiom H45 : (o11 = j)
+
+axiom H46 : (o12 = (values3[o11]))
+
+axiom H47 : (o13 = to_rep(o12))
+
+ (* File "sort.adb", line 59, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(values__first) <= i)

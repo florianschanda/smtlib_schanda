@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -751,9 +751,53 @@ axiom def_axiom1 :
   (((do_checks__do_range_check__B_18__a__aggregate_def(temp___798,
   temp___799, temp___800)).elts1[temp___801]) = of_rep(temp___798)))))
 
+logic branch : int
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic temp___787 : int
+
+logic us4 : int
+
+logic us5 : int
+
+logic us6 : int
+
+logic us7 : int
+
+logic temp___796 : (int,character) farray
+
+logic temp___7961 : t
+
+logic us8 : int
+
+logic o : int
+
+logic temp___803 : (int,character) farray
+
+logic temp___8031 : t1
+
+axiom H : in_range2(branch)
+
+axiom H1 : in_range1(zero)
+
+axiom H2 : (not (branch = 0))
+
+axiom H3 : (not (branch = 1))
+
+axiom H4 : (not (branch = 2))
+
+axiom H5 : (not (branch = 3))
+
+axiom H6 : (branch = 4)
+
+axiom H7 : (zero <= 1)
+
  (* File "do_checks.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall branch:int. (in_range2(branch) -> (in_range1(zero) ->
-  ((not (branch = 0)) -> ((not (branch = 1)) -> ((not (branch = 2)) ->
-  ((not (branch = 3)) -> ((branch = 4) -> ((zero <= 1) ->
-  (1 <= zero))))))))))
+goal WP_parameter_def : (1 <= zero)

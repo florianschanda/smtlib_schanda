@@ -1069,10 +1069,28 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
+axiom H2 : ((o = div(NearestTiesToEven, left, right)) and
+  tqtisFinite(div(NearestTiesToEven, left, right)))
+
+axiom H3 : (o1 = roundToIntegral(ToZero, o))
+
+axiom H4 : (o2 = mul(NearestTiesToEven, o1, right))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(left) ->
-  (tqtisFinite(right) -> (((((o = div(NearestTiesToEven, left, right)) and
-  tqtisFinite(div(NearestTiesToEven, left, right))) and
-  (o1 = roundToIntegral(ToZero, o))) and (o2 = mul(NearestTiesToEven, o1,
-  right))) -> tqtisFinite(o2)))))
+goal WP_parameter_def : tqtisFinite(o2)

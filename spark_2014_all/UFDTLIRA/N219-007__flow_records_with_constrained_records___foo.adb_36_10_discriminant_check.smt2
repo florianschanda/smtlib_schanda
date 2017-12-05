@@ -70,7 +70,7 @@
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 (define-fun foo__value__bool_field__pred ((a us_rep)) Bool (= (to_rep (rec__foo__value__kind (us_split_discrs1 a))) 1))
 (define-fun foo__value__int_field__pred ((a us_rep)) Bool (= (to_rep (rec__foo__value__kind (us_split_discrs1 a))) 2))
-(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (and (= (to_rep (rec__foo__value__kind (us_split_discrs1 a))) (to_rep (rec__foo__value__kind (us_split_discrs1 b)))) (=> (foo__value__bool_field__pred a) (= (rec__foo__value__bool_field (us_split_fields1 a)) (rec__foo__value__bool_field (us_split_fields1 b))))) (=> (foo__value__int_field__pred a) (= (to_rep1 (rec__foo__value__int_field (us_split_fields1 a))) (to_rep1 (rec__foo__value__int_field (us_split_fields1 b)))))) true false))
+(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep (rec__foo__value__kind (us_split_discrs1 a))) (to_rep (rec__foo__value__kind (us_split_discrs1 b)))) (and (=> (foo__value__bool_field__pred a) (= (rec__foo__value__bool_field (us_split_fields1 a)) (rec__foo__value__bool_field (us_split_fields1 b)))) (=> (foo__value__int_field__pred a) (= (to_rep1 (rec__foo__value__int_field (us_split_fields1 a))) (to_rep1 (rec__foo__value__int_field (us_split_fields1 b))))))) true false))
 (declare-const value__size Int)
 (declare-fun object__size (us_rep) Int)
 (declare-const value__alignment Int)

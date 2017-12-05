@@ -41,6 +41,7 @@
 (declare-fun wakeup_time__function_guard (us_rep us_rep) Bool)
 (assert true)
 (assert (forall ((p__wakeup us_rep)) (! (= (wakeup_time p__wakeup) p__wakeup) :pattern ((wakeup_time p__wakeup)))))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

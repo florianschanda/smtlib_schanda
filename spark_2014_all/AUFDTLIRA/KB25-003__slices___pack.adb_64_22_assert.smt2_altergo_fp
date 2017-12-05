@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -404,17 +404,35 @@ axiom def_axiom :
   (forall temp___494:int.
   ((pack__a4__my_s4__aggregate_def(temp___493)[temp___494]) = of_rep(temp___493))))
 
+logic g : (int,character) farray
+
+logic my_s4 : (int,character) farray
+
+logic o : (int,character) farray
+
+logic result : (int,character) farray
+
+logic my_s41 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic my_s42 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(glob__first),
+  to_rep1(glob__last))
+
+axiom H1 : (result = my_s4)
+
+axiom H2 : (my_s41 = pack__a4__my_s4__aggregate_def(32))
+
+axiom H3 :
+  (forall temp___496:int. ((((1 <= temp___496) and (temp___496 <= 4)) ->
+  ((o[temp___496]) = (g[temp___496]))) and ((not ((1 <= temp___496) and
+  (temp___496 <= 4))) -> ((o[temp___496]) = (my_s41[temp___496])))))
+
+axiom H4 : (result1 = my_s41)
+
+axiom H5 : (my_s42 = o)
+
  (* File "pack.adb", line 53, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:(int,character) farray. forall my_s4:(int,character) farray.
-  forall o:(int,character) farray. forall result:(int,character) farray.
-  forall my_s41:(int,character) farray.
-  forall result1:(int,character) farray.
-  forall my_s42:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(glob__first), to_rep1(glob__last)) -> (((result = my_s4) and
-  (my_s41 = pack__a4__my_s4__aggregate_def(32))) ->
-  (((forall temp___496:int. ((((1 <= temp___496) and (temp___496 <= 4)) and
-    ((o[temp___496]) = (g[temp___496]))) or ((not ((1 <= temp___496) and
-    (temp___496 <= 4))) and ((o[temp___496]) = (my_s41[temp___496]))))) and
-  ((result1 = my_s41) and (my_s42 = o))) ->
-  (to_rep((my_s42[2])) = to_rep((g[2])))))))
+goal WP_parameter_def : (to_rep((my_s42[2])) = to_rep((g[2])))

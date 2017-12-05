@@ -80,6 +80,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (declare-const self__ us_rep)
 (declare-const o Int)
+(declare-const us Int)
 (assert (and (= o (zero Tuple0)) (and (in_range o) (= o 0))))
 (assert (not (in_range1 o)))
 (check-sat)

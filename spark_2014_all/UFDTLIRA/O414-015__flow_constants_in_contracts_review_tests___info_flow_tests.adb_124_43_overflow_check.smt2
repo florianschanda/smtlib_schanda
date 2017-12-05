@@ -75,6 +75,7 @@
 (declare-const o7 Int)
 (declare-const o8 Int)
 (declare-const o9 Int)
+(declare-const o10 Int)
 (assert (in_range1 c2))
 (assert (= (f1 5) c2))
 (assert (in_range1 c4))

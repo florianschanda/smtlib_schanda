@@ -36,6 +36,7 @@
 (assert (forall ((us_void_param tuple0)) (! (dynamic_invariant (foo us_void_param) true false true) :pattern ((foo us_void_param)))))
 (declare-const x Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (=> (<= 0 2) (in_range x)))
 (assert (and (= o (foo Tuple0)) (in_range o)))
 (assert (not (not (= o 2))))

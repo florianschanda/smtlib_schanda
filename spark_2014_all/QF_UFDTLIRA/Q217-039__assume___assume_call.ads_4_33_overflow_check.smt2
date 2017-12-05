@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const assume_call__f1__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const assume_call__f1__result1 Int)
 (declare-const assume_call__f1__result2 Int)

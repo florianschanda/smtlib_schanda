@@ -65,6 +65,8 @@
 (declare-const e us_rep)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
+(declare-const o1 us_rep)
+(declare-const o2 us_rep)
 (assert (in_range i))
 (assert (and (= o (to_integer e)) (in_range1 o)))
 (assert (not (< (- 2147483648) o)))

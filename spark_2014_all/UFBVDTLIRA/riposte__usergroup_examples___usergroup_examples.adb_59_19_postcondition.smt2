@@ -74,6 +74,8 @@
 (declare-const usergroup_examples__example_5__result4 (_ BitVec 64))
 (declare-const usergroup_examples__example_5__result5 (_ BitVec 64))
 (declare-const result1 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (and (bvugt a ((_ int2bv 64) 17)) (bvugt b ((_ int2bv 64) 19))))
 (assert (= usergroup_examples__example_5__result1 usergroup_examples__example_5__result2))
 (assert (= usergroup_examples__example_5__result3 usergroup_examples__example_5__result1))

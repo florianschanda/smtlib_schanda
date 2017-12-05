@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1648,51 +1648,346 @@ axiom writereg32post__post_axiom :
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and1(regnew,
   of_int1(18446744069414584320)) = of_int1(0))))))
 
- (* File "x86.ads", line 334, characters 0-0 *)
-goal WP_parameter_def :
-  (forall zeroflag:bool. forall carryflag:bool. forall signflag:bool.
-  forall overflowflag:bool. forall xmm0:t1. forall rax:t1. forall rbx:t1.
-  forall rsp:t1. forall rbp:t1. forall rdi:t1.
-  forall memory:(t1,unsigned8) farray. forall temp___370:t1.
-  forall temp___369:t1. forall temp___368:bool. forall temp___367:bool.
-  forall temp___366:t1. forall temp___364:bool. forall temp___365:t1.
-  forall temp___363:t1. forall temp___362:t1. forall temp___371:t1.
-  forall temp___361:bool. forall o:t1. forall o1:t. forall o2:t. forall o3:t.
-  forall o4:t. forall o5:t. forall o6:bool. forall o7:t. forall o8:t.
-  forall o9:t. forall o10:bool. forall o11:t. forall o12:t. forall o13:bool.
-  forall o14:t. forall o15:t. forall o16:t. forall o17:t. forall o18:bool.
-  forall o19:bool. forall o20:bool. forall zeroflag1:bool.
-  forall carryflag1:bool. forall signflag1:bool. forall overflowflag1:bool.
-  forall xmm01:t1. forall rax1:t1. forall rbx1:t1. forall rsp1:t1.
-  forall rbp1:t1. forall rdi1:t1. forall zeroflag2:bool.
-  forall carryflag2:bool. forall signflag2:bool. forall overflowflag2:bool.
-  forall xmm02:t1. forall rbx2:t1. forall rsp2:t1. forall rbp2:t1.
-  forall result:t1. forall xmm03:t1. forall rdi2:t1. forall rax2:t1.
-  forall rbx3:t1. forall result1:t1. forall rbp3:t1. forall result2:t1.
-  forall rsp3:t1. forall rsp4:t1. forall result3:bool. forall zeroflag3:bool.
-  forall result4:bool. forall signflag3:bool. forall result5:bool.
-  forall carryflag3:bool. forall result6:bool. forall result7:bool.
-  forall result8:bool. forall overflowflag3:bool. forall zeroflag4:bool.
-  forall carryflag4:bool. forall signflag4:bool. forall overflowflag4:bool.
-  forall xmm04:t1. forall rax3:t1. forall rbx4:t1. forall rsp5:t1.
-  forall rbp4:t1. forall rdi3:t1. forall zeroflag5:bool.
-  forall carryflag5:bool. forall signflag5:bool. forall overflowflag5:bool.
-  forall xmm05:t1. forall rax4:t1. forall rbx5:t1. forall rsp6:t1.
-  forall rbp5:t1. forall rdi4:t1. forall zeroflag6:bool.
-  forall carryflag6:bool. forall signflag6:bool. forall overflowflag6:bool.
-  forall xmm06:t__ref1. forall rax5:t__ref1. forall rbx6:t__ref1.
-  forall rsp7:t__ref1. forall rbp6:t__ref1. forall rdi5:t__ref1.
-  forall zeroflag7:bool. forall carryflag7:bool. forall signflag7:bool.
-  forall overflowflag7:bool. forall xmm07:t1. forall rax6:t1. forall rbx7:t1.
-  forall rsp8:t1. forall rbp7:t1. forall rdi6:t1. forall zeroflag8:bool__ref.
-  forall carryflag8:bool__ref. forall signflag8:bool__ref.
-  forall overflowflag8:bool__ref. forall xmm08:t__ref1. forall rax7:t__ref1.
-  forall rbx8:t__ref1. forall rsp9:t__ref1. forall rbp8:t__ref1.
-  forall rdi7:t__ref1. forall zeroflag9:bool. forall carryflag9:bool.
-  forall signflag9:bool. forall overflowflag9:bool. forall xmm09:t1.
-  forall rax8:t1. forall rbx9:t1. forall rsp10:t1. forall rbp9:t1.
-  forall rdi8:t1. ((((((not (zeroflag = true)) and
-  (to_int2(signflag) = to_int2(overflowflag))) and ((((temp___370 = rbx) and
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic xmm0 : t1
+
+logic rax : t1
+
+logic rbx : t1
+
+logic rsp : t1
+
+logic rbp : t1
+
+logic rdi : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic temp___370 : t1
+
+logic temp___369 : t1
+
+logic temp___368 : bool
+
+logic temp___367 : bool
+
+logic temp___366 : t1
+
+logic temp___364 : bool
+
+logic temp___365 : t1
+
+logic temp___363 : t1
+
+logic temp___362 : t1
+
+logic temp___371 : t1
+
+logic temp___361 : bool
+
+logic o : t1
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : bool
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : bool
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : bool
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : bool
+
+logic o19 : bool
+
+logic o20 : bool
+
+logic zeroflag1 : bool
+
+logic carryflag1 : bool
+
+logic signflag1 : bool
+
+logic overflowflag1 : bool
+
+logic xmm01 : t1
+
+logic rax1 : t1
+
+logic rbx1 : t1
+
+logic rsp1 : t1
+
+logic rbp1 : t1
+
+logic rdi1 : t1
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic xmm02 : t1
+
+logic rax2 : t1
+
+logic rbx2 : t1
+
+logic rsp2 : t1
+
+logic rbp2 : t1
+
+logic rdi2 : t1
+
+logic result : t1
+
+logic xmm03 : t1
+
+logic rdi3 : t1
+
+logic rax3 : t1
+
+logic rbx3 : t1
+
+logic result1 : t1
+
+logic rbp3 : t1
+
+logic result2 : t1
+
+logic rsp3 : t1
+
+logic rsp4 : t1
+
+logic result3 : bool
+
+logic zeroflag3 : bool
+
+logic result4 : bool
+
+logic signflag3 : bool
+
+logic result5 : bool
+
+logic carryflag3 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic overflowflag3 : bool
+
+logic zeroflag4 : bool
+
+logic carryflag4 : bool
+
+logic signflag4 : bool
+
+logic overflowflag4 : bool
+
+logic xmm04 : t1
+
+logic rax4 : t1
+
+logic rbx4 : t1
+
+logic rsp5 : t1
+
+logic rbp4 : t1
+
+logic rdi4 : t1
+
+logic zeroflag5 : bool
+
+logic carryflag5 : bool
+
+logic signflag5 : bool
+
+logic overflowflag5 : bool
+
+logic xmm05 : t1
+
+logic rax5 : t1
+
+logic rbx5 : t1
+
+logic rsp6 : t1
+
+logic rbp5 : t1
+
+logic rdi5 : t1
+
+logic zeroflag6 : bool
+
+logic carryflag6 : bool
+
+logic signflag6 : bool
+
+logic overflowflag6 : bool
+
+logic xmm06 : t1
+
+logic rax6 : t1
+
+logic rbx6 : t1
+
+logic rsp7 : t1
+
+logic rbp6 : t1
+
+logic rdi6 : t1
+
+logic zeroflag7 : bool
+
+logic carryflag7 : bool
+
+logic signflag7 : bool
+
+logic overflowflag7 : bool
+
+logic xmm07 : t1
+
+logic rax7 : t1
+
+logic rbx7 : t1
+
+logic rsp8 : t1
+
+logic rbp7 : t1
+
+logic rdi7 : t1
+
+logic zeroflag8 : bool
+
+logic carryflag8 : bool
+
+logic signflag8 : bool
+
+logic overflowflag8 : bool
+
+logic xmm08 : t1
+
+logic rax8 : t1
+
+logic rbx8 : t1
+
+logic rsp9 : t1
+
+logic rbp8 : t1
+
+logic rdi8 : t1
+
+logic zeroflag9 : bool
+
+logic carryflag9 : bool
+
+logic signflag9 : bool
+
+logic overflowflag9 : bool
+
+logic xmm09 : t1
+
+logic rax9 : t1
+
+logic rbx9 : t1
+
+logic rsp10 : t1
+
+logic rbp9 : t1
+
+logic rdi9 : t1
+
+logic zeroflag10 : bool
+
+logic carryflag10 : bool
+
+logic signflag10 : bool
+
+logic overflowflag10 : bool
+
+logic xmm010 : t1
+
+logic rax10 : t1
+
+logic rbx10 : t1
+
+logic rsp11 : t1
+
+logic rbp10 : t1
+
+logic rdi10 : t1
+
+logic zeroflag11 : bool
+
+logic carryflag11 : bool
+
+logic signflag11 : bool
+
+logic overflowflag11 : bool
+
+logic xmm011 : t1
+
+logic rax11 : t1
+
+logic rbx11 : t1
+
+logic rsp12 : t1
+
+logic rbp11 : t1
+
+logic rdi11 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (((temp___370 = rbx) and
   ((temp___369 = rsp) and ((temp___368 = overflowflag) and
   ((temp___367 = signflag) and ((temp___366 = rax) and
   ((temp___364 = carryflag) and ((temp___365 = xmm0) and
@@ -1715,8 +2010,8 @@ goal WP_parameter_def :
   of_int1(6))]))), of_int1(281474976710656)))) and (bw_and1(o,
   of_int1(18374686479671623680)) = mul1(toBig1(to_rep((memory[add1(rbp2,
   of_int1(7))]))), of_int1(72057594037927936))))) and ((xmm02 = result) and
-  (xmm03 = o))) and ((writereg32post(rdi2, of_int(4198699)) = true) and
-  ((writereg32post(rax2, of_int(1)) = true) and (((((o1 = ebx(rbx2)) and
+  (xmm03 = o))) and ((writereg32post(rdi3, of_int(4198699)) = true) and
+  ((writereg32post(rax3, of_int(1)) = true) and (((((o1 = ebx(rbx2)) and
   (o1 = readreg32(rbx2))) and (o2 = add(o1, of_int(1)))) and
   (writereg32post(rbx3, o2) = true)) and (((rbp2 = result1) and
   (rbp3 = add1(rbp2, of_int1(8)))) and (((rsp2 = result2) and
@@ -1734,8 +2029,8 @@ goal WP_parameter_def :
   (bw_and(o4,
   of_int(4278190080)) = mul(toBig(to_rep((memory[add1(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), of_int1(3))]))), of_int(16777216))))) and
-  (o5 = sub(o4, o3)))) and (((o5 = of_int(0)) and (o6 = true)) or
-  ((not (o5 = of_int(0))) and (o6 = false)))) and ((zeroflag2 = result3) and
+  (o5 = sub(o4, o3)))) and (((o5 = of_int(0)) -> (o6 = true)) and
+  ((not (o5 = of_int(0))) -> (o6 = false)))) and ((zeroflag2 = result3) and
   (zeroflag3 = o6))) and ((((((o7 = ebx(rbx3)) and
   (o7 = readreg32(rbx3))) and (((o8 = readmem32(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), memory)) and ((((bw_and(o8,
@@ -1749,8 +2044,8 @@ goal WP_parameter_def :
   (bw_and(o8,
   of_int(4278190080)) = mul(toBig(to_rep((memory[add1(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), of_int1(3))]))), of_int(16777216))))) and
-  (o9 = sub(o8, o7)))) and ((ugt(o9, of_int(2147483647)) and (o10 = true)) or
-  ((not ugt(o9, of_int(2147483647))) and (o10 = false)))) and
+  (o9 = sub(o8, o7)))) and ((ugt(o9, of_int(2147483647)) -> (o10 = true)) and
+  ((not ugt(o9, of_int(2147483647))) -> (o10 = false)))) and
   ((signflag2 = result4) and (signflag3 = o10))) and
   (((((o11 = ebx(rbx3)) and (o11 = readreg32(rbx3))) and
   (((o12 = readmem32(sub1(add1(rsp4, of_int1(152)), of_int1(108)),
@@ -1765,9 +2060,9 @@ goal WP_parameter_def :
   (bw_and(o12,
   of_int(4278190080)) = mul(toBig(to_rep((memory[add1(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), of_int1(3))]))), of_int(16777216))))) and
-  ((ult(o12, o11) and (o13 = true)) or ((not ult(o12, o11)) and
+  ((ult(o12, o11) -> (o13 = true)) and ((not ult(o12, o11)) ->
   (o13 = false))))) and ((carryflag2 = result5) and (carryflag3 = o13))) and
-  (((((((not (signflag3 = true)) and (((o17 = readmem32(sub1(add1(rsp4,
+  (((((((not (signflag3 = true)) -> (((o17 = readmem32(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), memory)) and ((((bw_and(o17,
   of_int(255)) = toBig(to_rep((memory[sub1(add1(rsp4, of_int1(152)),
   of_int1(108))])))) and (bw_and(o17,
@@ -1779,17 +2074,17 @@ goal WP_parameter_def :
   (bw_and(o17,
   of_int(4278190080)) = mul(toBig(to_rep((memory[add1(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), of_int1(3))]))), of_int(16777216))))) and
-  ((ugt(o17, of_int(2147483647)) and (result6 = true)) or ((not ugt(o17,
-  of_int(2147483647))) and (result6 = false))))) or ((signflag3 = true) and
-  (result6 = false))) and (((result6 = true) and (((o16 = ebx(rbx3)) and
-  (o16 = readreg32(rbx3))) and ((ule(o16, of_int(2147483647)) and
-  (o18 = true)) or ((not ule(o16, of_int(2147483647))) and
-  (o18 = false))))) or ((not (result6 = true)) and (o18 = false)))) and
-  (((((signflag3 = true) and (((o15 = ebx(rbx3)) and
-  (o15 = readreg32(rbx3))) and ((ugt(o15, of_int(2147483647)) and
-  (result7 = true)) or ((not ugt(o15, of_int(2147483647))) and
-  (result7 = false))))) or ((not (signflag3 = true)) and
-  (result7 = false))) and (((result7 = true) and
+  ((ugt(o17, of_int(2147483647)) -> (result6 = true)) and ((not ugt(o17,
+  of_int(2147483647))) -> (result6 = false))))) and ((signflag3 = true) ->
+  (result6 = false))) and (((result6 = true) -> (((o16 = ebx(rbx3)) and
+  (o16 = readreg32(rbx3))) and ((ule(o16, of_int(2147483647)) ->
+  (o18 = true)) and ((not ule(o16, of_int(2147483647))) ->
+  (o18 = false))))) and ((not (result6 = true)) -> (o18 = false)))) and
+  (((((signflag3 = true) -> (((o15 = ebx(rbx3)) and
+  (o15 = readreg32(rbx3))) and ((ugt(o15, of_int(2147483647)) ->
+  (result7 = true)) and ((not ugt(o15, of_int(2147483647))) ->
+  (result7 = false))))) and ((not (signflag3 = true)) ->
+  (result7 = false))) and (((result7 = true) ->
   (((o14 = readmem32(sub1(add1(rsp4, of_int1(152)), of_int1(108)),
   memory)) and ((((bw_and(o14,
   of_int(255)) = toBig(to_rep((memory[sub1(add1(rsp4, of_int1(152)),
@@ -1802,49 +2097,184 @@ goal WP_parameter_def :
   (bw_and(o14,
   of_int(4278190080)) = mul(toBig(to_rep((memory[add1(sub1(add1(rsp4,
   of_int1(152)), of_int1(108)), of_int1(3))]))), of_int(16777216))))) and
-  ((ule(o14, of_int(2147483647)) and (o19 = true)) or ((not ule(o14,
-  of_int(2147483647))) and (o19 = false))))) or ((not (result7 = true)) and
+  ((ule(o14, of_int(2147483647)) -> (o19 = true)) and ((not ule(o14,
+  of_int(2147483647))) -> (o19 = false))))) and ((not (result7 = true)) ->
   (o19 = false)))) and (o20 = match_bool(o19, true, o18)))) and
   ((overflowflag2 = result8) and (overflowflag3 = o20))) and
   (not ((not (zeroflag3 = true)) and
   (to_int2(signflag3) = to_int2(overflowflag3)))))))))))))))))))))))))))) and
-  (((rdi2 = rdi3) and ((rbp3 = rbp4) and ((rsp4 = rsp5) and
-  ((rbx3 = rbx4) and ((rax2 = rax3) and ((xmm03 = xmm04) and
-  ((overflowflag3 = overflowflag4) and ((signflag3 = signflag4) and
-  ((carryflag3 = carryflag4) and (zeroflag3 = zeroflag4)))))))))) and
-  ((rdi4 = rdi2) and ((rbp5 = rbp3) and ((rsp6 = rsp4) and ((rbx5 = rbx3) and
-  ((rax4 = rax2) and ((xmm05 = xmm03) and
-  ((overflowflag5 = overflowflag3) and ((signflag5 = signflag3) and
-  ((carryflag5 = carryflag3) and (zeroflag5 = zeroflag3)))))))))))) and
-  (((rdi5 = { t__content1 = rdi3 }) and ((rbp6 = { t__content1 = rbp4 }) and
-  ((rsp7 = { t__content1 = rsp5 }) and ((rbx6 = { t__content1 = rbx4 }) and
-  ((rax5 = { t__content1 = rax3 }) and ((xmm06 = { t__content1 = xmm04 }) and
-  (({ bool__content = overflowflag6 } = { bool__content = overflowflag4
-  }) and (({ bool__content = signflag6 } = { bool__content = signflag4 }) and
-  (({ bool__content = carryflag6 } = { bool__content = carryflag4 }) and ({
-  bool__content = zeroflag6 } = { bool__content = zeroflag4 })))))))))) and
-  ((rdi6 = rdi4) and ((rbp7 = rbp5) and ((rsp8 = rsp6) and ((rbx7 = rbx5) and
-  ((rax6 = rax4) and ((xmm07 = xmm05) and
-  ((overflowflag7 = overflowflag5) and ((signflag7 = signflag5) and
-  ((carryflag7 = carryflag5) and (zeroflag7 = zeroflag5))))))))))))) or
-  ((not ((not (zeroflag = true)) and
-  (to_int2(signflag) = to_int2(overflowflag)))) and (((rdi5 = { t__content1 =
-  rdi }) and ((rbp6 = { t__content1 = rbp }) and ((rsp7 = { t__content1 = rsp
-  }) and ((rbx6 = { t__content1 = rbx }) and ((rax5 = { t__content1 = rax
-  }) and ((xmm06 = { t__content1 = xmm0 }) and
-  ((overflowflag = overflowflag6) and ((signflag = signflag6) and
-  ((carryflag = carryflag6) and (zeroflag = zeroflag6)))))))))) and
-  ((rdi6 = rdi1) and ((rbp7 = rbp1) and ((rsp8 = rsp1) and ((rbx7 = rbx1) and
-  ((rax6 = rax1) and ((xmm07 = xmm01) and
-  ((overflowflag7 = overflowflag1) and ((signflag7 = signflag1) and
-  ((carryflag7 = carryflag1) and (zeroflag7 = zeroflag1))))))))))))) and
-  (((rdi7 = rdi5) and ((rbp8 = rbp6) and ((rsp9 = rsp7) and
-  ((rbx8 = rbx6) and ((rax7 = rax5) and ((xmm08 = xmm06) and
-  ((overflowflag8 = { bool__content = overflowflag6 }) and ((signflag8 = {
-  bool__content = signflag6 }) and ((carryflag8 = { bool__content =
-  carryflag6 }) and (zeroflag8 = { bool__content = zeroflag6 })))))))))) and
-  ((rdi8 = rdi6) and ((rbp9 = rbp7) and ((rsp10 = rsp8) and
-  ((rbx9 = rbx7) and ((rax8 = rax6) and ((xmm09 = xmm07) and
-  ((overflowflag9 = overflowflag7) and ((signflag9 = signflag7) and
-  ((carryflag9 = carryflag7) and (zeroflag9 = zeroflag7)))))))))))) ->
-  ((rsp9).t__content1 = rsp)))
+  (((rdi6 = rdi3) and ((rbp6 = rbp3) and ((rsp7 = rsp4) and
+  ((rbx6 = rbx3) and ((rax6 = rax3) and ((xmm06 = xmm03) and
+  ((overflowflag6 = overflowflag3) and ((signflag6 = signflag3) and
+  ((carryflag6 = carryflag3) and (zeroflag6 = zeroflag3)))))))))) and
+  ((rdi7 = rdi3) and ((rbp7 = rbp3) and ((rsp8 = rsp4) and ((rbx7 = rbx3) and
+  ((rax7 = rax3) and ((xmm07 = xmm03) and
+  ((overflowflag7 = overflowflag3) and ((signflag7 = signflag3) and
+  ((carryflag7 = carryflag3) and (zeroflag7 = zeroflag3)))))))))))))
+
+axiom H7 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rdi8 = rdi6))
+
+axiom H8 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rbp8 = rbp6))
+
+axiom H9 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rsp9 = rsp7))
+
+axiom H10 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rbx8 = rbx6))
+
+axiom H11 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rax8 = rax6))
+
+axiom H12 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (xmm08 = xmm06))
+
+axiom H13 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) ->
+  (overflowflag8 = overflowflag6))
+
+axiom H14 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (signflag8 = signflag6))
+
+axiom H15 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (carryflag8 = carryflag6))
+
+axiom H16 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (zeroflag8 = zeroflag6))
+
+axiom H17 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rdi9 = rdi7))
+
+axiom H18 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rbp9 = rbp7))
+
+axiom H19 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rsp10 = rsp8))
+
+axiom H20 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rbx9 = rbx7))
+
+axiom H21 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (rax9 = rax7))
+
+axiom H22 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (xmm09 = xmm07))
+
+axiom H23 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) ->
+  (overflowflag9 = overflowflag7))
+
+axiom H24 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (signflag9 = signflag7))
+
+axiom H25 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (carryflag9 = carryflag7))
+
+axiom H26 : (((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag))) -> (zeroflag9 = zeroflag7))
+
+axiom H27 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rdi8 = rdi))
+
+axiom H28 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rbp8 = rbp))
+
+axiom H29 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rsp9 = rsp))
+
+axiom H30 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rbx8 = rbx))
+
+axiom H31 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rax8 = rax))
+
+axiom H32 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (xmm08 = xmm0))
+
+axiom H33 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) ->
+  (overflowflag8 = overflowflag))
+
+axiom H34 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (signflag8 = signflag))
+
+axiom H35 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (carryflag8 = carryflag))
+
+axiom H36 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (zeroflag8 = zeroflag))
+
+axiom H37 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rdi9 = rdi1))
+
+axiom H38 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rbp9 = rbp1))
+
+axiom H39 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rsp10 = rsp1))
+
+axiom H40 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rbx9 = rbx1))
+
+axiom H41 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (rax9 = rax1))
+
+axiom H42 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (xmm09 = xmm01))
+
+axiom H43 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) ->
+  (overflowflag9 = overflowflag1))
+
+axiom H44 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (signflag9 = signflag1))
+
+axiom H45 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (carryflag9 = carryflag1))
+
+axiom H46 : ((not ((not (zeroflag = true)) and
+  (to_int2(signflag) = to_int2(overflowflag)))) -> (zeroflag9 = zeroflag1))
+
+axiom H47 : (rdi10 = rdi8)
+
+axiom H48 : (rbp10 = rbp8)
+
+axiom H49 : (rsp11 = rsp9)
+
+axiom H50 : (rbx10 = rbx8)
+
+axiom H51 : (rax10 = rax8)
+
+axiom H52 : (xmm010 = xmm08)
+
+axiom H53 : (overflowflag10 = overflowflag8)
+
+axiom H54 : (signflag10 = signflag8)
+
+axiom H55 : (carryflag10 = carryflag8)
+
+axiom H56 : (zeroflag10 = zeroflag8)
+
+axiom H57 : (rdi11 = rdi9)
+
+axiom H58 : (rbp11 = rbp9)
+
+axiom H59 : (rsp12 = rsp10)
+
+axiom H60 : (rbx11 = rbx9)
+
+axiom H61 : (rax11 = rax9)
+
+axiom H62 : (xmm011 = xmm09)
+
+axiom H63 : (overflowflag11 = overflowflag9)
+
+axiom H64 : (signflag11 = signflag9)
+
+axiom H65 : (carryflag11 = carryflag9)
+
+axiom H66 : (zeroflag11 = zeroflag9)
+
+ (* File "x86.ads", line 334, characters 0-0 *)
+goal WP_parameter_def : (rsp11 = rsp)

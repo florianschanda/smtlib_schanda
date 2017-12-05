@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -586,12 +586,12 @@ type messaget__ref = { messaget__content : us_rep
 function messaget__ref___projection(a: messaget__ref) : us_rep =
   (a).messaget__content
 
-logic temp___174 : int -> (int,character) farray
+logic temp___175 : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___176:int.
   (forall temp___177:int.
-  ((temp___174(temp___176)[temp___177]) = of_rep(temp___176))))
+  (forall temp___178:int.
+  ((temp___175(temp___177)[temp___178]) = of_rep(temp___177))))
 
 logic nullmsg : (int,character) farray
 
@@ -630,22 +630,22 @@ logic outmsg1 : messagelengtht
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic temp___String_Literal_151 : unit -> (int,character) farray
+logic temp___String_Literal_152 : unit -> (int,character) farray
 
-axiom temp___String_Literal_151__def_axiom :
-  (((((((((((((to_rep((temp___String_Literal_151(void)[1])) = 100) and
-  (to_rep((temp___String_Literal_151(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_151(void)[3])) = 111)) and
-  (to_rep((temp___String_Literal_151(void)[4])) = 114)) and
-  (to_rep((temp___String_Literal_151(void)[5])) = 46)) and
-  (to_rep((temp___String_Literal_151(void)[6])) = 117)) and
-  (to_rep((temp___String_Literal_151(void)[7])) = 110)) and
-  (to_rep((temp___String_Literal_151(void)[8])) = 108)) and
-  (to_rep((temp___String_Literal_151(void)[9])) = 111)) and
-  (to_rep((temp___String_Literal_151(void)[10])) = 99)) and
-  (to_rep((temp___String_Literal_151(void)[11])) = 107)) and
-  (to_rep((temp___String_Literal_151(void)[12])) = 40)) and
-  (to_rep((temp___String_Literal_151(void)[13])) = 41))
+axiom temp___String_Literal_152__def_axiom :
+  (((((((((((((to_rep((temp___String_Literal_152(void)[1])) = 100) and
+  (to_rep((temp___String_Literal_152(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_152(void)[3])) = 111)) and
+  (to_rep((temp___String_Literal_152(void)[4])) = 114)) and
+  (to_rep((temp___String_Literal_152(void)[5])) = 46)) and
+  (to_rep((temp___String_Literal_152(void)[6])) = 117)) and
+  (to_rep((temp___String_Literal_152(void)[7])) = 110)) and
+  (to_rep((temp___String_Literal_152(void)[8])) = 108)) and
+  (to_rep((temp___String_Literal_152(void)[9])) = 111)) and
+  (to_rep((temp___String_Literal_152(void)[10])) = 99)) and
+  (to_rep((temp___String_Literal_152(void)[11])) = 107)) and
+  (to_rep((temp___String_Literal_152(void)[12])) = 40)) and
+  (to_rep((temp___String_Literal_152(void)[13])) = 41))
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
@@ -654,35 +654,62 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
 axiom outmsg__def_axiom : ((outmsg = slide((overwrite({ elts = nullmsg; rt =
-  mk(1, 4096) }, 1, { elts = temp___String_Literal_151(void); rt = mk(1, 13)
+  mk(1, 4096) }, 1, { elts = temp___String_Literal_152(void); rt = mk(1, 13)
   })).elts, to_rep1(first((overwrite({ elts = nullmsg; rt = mk(1, 4096) }, 1,
-  { elts = temp___String_Literal_151(void); rt = mk(1, 13) })).rt)), 1)) and
+  { elts = temp___String_Literal_152(void); rt = mk(1, 13) })).rt)), 1)) and
   (outmsg1 = of_rep2(13)))
 
 axiom nullmsg__def_axiom : ((nullmsg = temp___132(0)) and
   (nullmsg1 = of_rep2(0)))
 
+logic inmsg__split_fields : (int,character) farray
+
+logic inmsg__split_fields1 : messagelengtht
+
+logic o : messagelengtht
+
+logic o1 : (int,character) farray
+
+logic o2 : messagelengtht
+
+logic temp___869 : (int,character) farray
+
+logic temp___8691 : messagelengtht
+
+logic temp___868 : (int,character) farray
+
+logic temp___8681 : t
+
+logic o3 : messagelengtht
+
+axiom H : (to_rep2(o) = 0)
+
+axiom H1 : (temp___132(0) = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (temp___869 = o1)
+
+axiom H4 : (temp___8691 = o2)
+
+axiom H5 : ((temp___869 = nullmsg) and (temp___8691 = nullmsg1))
+
+axiom H6 : ((inmsg__split_fields = temp___175(0)) and
+  (to_rep2(inmsg__split_fields1) = 0))
+
+axiom H7 : (to_rep2(o3) = 13)
+
+axiom H8 : (({ elts = temp___868; rt = temp___8681 } = overwrite({ elts =
+  nullmsg; rt = mk(1, 4096) }, 1, { elts = temp___String_Literal_152(void);
+  rt = mk(1, 13) })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___8681)), to_rep1(last(temp___8681))))
+
  (* File "latchapi.adb", line 39, characters 0-0 *)
 goal WP_parameter_def :
-  (forall inmsg__split_fields:(int,character) farray.
-  forall inmsg__split_fields1:messagelengtht. forall o:messagelengtht.
-  forall o1:(int,character) farray. forall o2:messagelengtht.
-  forall temp___749:(int,character) farray.
-  forall temp___7491:messagelengtht.
-  forall temp___748:(int,character) farray. forall temp___7481:t.
-  forall o3:messagelengtht. (((((to_rep2(o) = 0) and
-  ((temp___132(0) = o1) and (o = o2))) and ((temp___749 = o1) and
-  (temp___7491 = o2))) and ((temp___749 = nullmsg) and
-  (temp___7491 = nullmsg1))) -> (((inmsg__split_fields = temp___174(0)) and
-  (to_rep2(inmsg__split_fields1) = 0)) -> ((to_rep2(o3) = 13) -> ((({ elts =
-  temp___748; rt = temp___7481 } = overwrite({ elts = nullmsg; rt = mk(1,
-  4096) }, 1, { elts = temp___String_Literal_151(void); rt = mk(1, 13)
-  })) and dynamic_property(1, 2147483647, to_rep1(first(temp___7481)),
-  to_rep1(last(temp___7481)))) ->
-  (((to_rep1(first(temp___7481)) <= to_rep1(last(temp___7481))) ->
+  (((to_rep1(first(temp___8681)) <= to_rep1(last(temp___8681))) ->
   (((1 <= 4096) ->
-  (((to_rep1(last(temp___7481)) - to_rep1(first(temp___7481))) + 1) = ((4096 - 1) + 1))) and
+  (((to_rep1(last(temp___8681)) - to_rep1(first(temp___8681))) + 1) = ((4096 - 1) + 1))) and
   ((not (1 <= 4096)) ->
-  (((to_rep1(last(temp___7481)) - to_rep1(first(temp___7481))) + 1) = 0)))) and
-  ((not (to_rep1(first(temp___7481)) <= to_rep1(last(temp___7481)))) ->
-  ((1 <= 4096) -> (0 = ((4096 - 1) + 1))))))))))
+  (((to_rep1(last(temp___8681)) - to_rep1(first(temp___8681))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___8681)) <= to_rep1(last(temp___8681)))) ->
+  ((1 <= 4096) -> (0 = ((4096 - 1) + 1)))))

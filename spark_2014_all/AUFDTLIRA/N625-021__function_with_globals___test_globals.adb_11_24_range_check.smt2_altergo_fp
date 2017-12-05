@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1211,8 +1211,131 @@ axiom def_axiom2 :
   (forall temp___209:int. (((test_globals__ad__aggregate_def(temp___206,
   temp___207, temp___208)).elts3[temp___209]) = of_rep(temp___206)))))
 
+logic au : (int,natural) farray
+
+logic as__ : (int,natural) farray
+
+logic ad : (int,natural) farray
+
+logic ru__split_fields : natural
+
+logic rs__split_fields : natural
+
+logic rd__split_fields : natural
+
+logic us : int
+
+logic us1 : int
+
+logic temp___200 : (int,natural) farray
+
+logic temp___2001 : t2
+
+logic test_globals__au__assume : (int,natural) farray
+
+logic test_globals__au__assume1 : t
+
+logic temp___211 : (int,natural) farray
+
+logic temp___2111 : t3
+
+logic test_globals__ad__assume : (int,natural) farray
+
+logic test_globals__ad__assume1 : t1
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic test_globals__ru__assume : natural
+
+logic test_globals__ru__assume1 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : natural
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic test_globals__rs__assume : natural
+
+logic test_globals__rs__assume1 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : natural
+
+logic o18 : natural
+
+logic o19 : natural
+
+logic o20 : natural
+
+logic o21 : natural
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic test_globals__rd__assume : natural
+
+logic test_globals__rd__assume1 : natural
+
+logic us2 : bool
+
+logic result : (int,natural) farray
+
+logic au1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic as__1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic ad1 : (int,natural) farray
+
+logic result3 : natural
+
+logic ru__split_fields1 : natural
+
+logic result4 : natural
+
+logic rs__split_fields1 : natural
+
+logic result5 : natural
+
+logic rd__split_fields1 : natural
+
+axiom H : in_range1(c)
+
+axiom H1 : ((us = 100) and in_range1(100))
+
+axiom H2 : ((us1 = c) and in_range1(c))
+
+axiom H3 : (1 <= c)
+
  (* File "test_globals.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall us1:int. (in_range1(c) -> (((us = 100) and
-  in_range1(100)) -> (((us1 = c) and in_range1(c)) -> ((1 <= c) ->
-  (0 <= 1))))))
+goal WP_parameter_def : (0 <= 1)

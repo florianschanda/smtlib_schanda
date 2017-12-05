@@ -1243,18 +1243,72 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic count : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic count2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic count3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+axiom H : (result = count)
+
+axiom H1 : (count1 = 0)
+
+axiom H2 : in_range10(count1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 64)
+
+axiom H7 : (count2 <  i2)
+
+axiom H8 : ((((0 <= 64) -> in_range10(count2)) and ((1 <= 64) ->
+  in_range9(i2))) and ((1 <= i2) and (i2 <= 64)))
+
+axiom H9 :
+  (((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true) ->
+  ((o = (count2 + 1)) and in_range10((count2 + 1))))
+
+axiom H10 :
+  (((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true) ->
+  (result2 = count2))
+
+axiom H11 :
+  (((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true) ->
+  (count3 = o))
+
+axiom H12 :
+  ((not ((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true)) ->
+  (count3 = count2))
+
+axiom H13 : (not (i2 = 64))
+
+axiom H14 : (result3 = i2)
+
+axiom H15 : (i3 = (i2 + 1))
+
  (* File "datebooks.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall i:int. forall o:int. forall result:int.
-  forall count1:int. forall result1:int. forall i1:int. forall count2:int.
-  forall i2:int. forall result2:int. forall count3:int. forall result3:int.
-  forall i3:int. (((result = count) and (count1 = 0)) ->
-  (in_range10(count1) -> (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= 64)) -> ((count2 <  i2) -> ((((((0 <= 64) -> in_range10(count2)) and
-  ((1 <= 64) -> in_range9(i2))) and ((1 <= i2) and (i2 <= 64))) and
-  (((((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true) and
-  (((o = (count2 + 1)) and in_range10((count2 + 1))) and
-  ((result2 = count2) and (count3 = o)))) or
-  ((not ((((book[i2])).us_split_fields7).rec__datebooks__event_record__is_used = true)) and
-  (count3 = count2))) and ((not (i2 = 64)) and ((result3 = i2) and
-  (i3 = (i2 + 1)))))) -> (count3 <  i3))))))))
+goal WP_parameter_def : (count3 <  i3)

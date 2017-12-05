@@ -305,20 +305,119 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : (int,bool) farray
+
+logic i : int
+
+logic temp___165 : int
+
+logic temp___163 : (int,bool) farray
+
+logic k : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic k1 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : int
+
+logic x1 : (int,bool) farray
+
+logic result : int
+
+logic i1 : int
+
+logic x2 : (int,bool) farray
+
+logic i2 : int
+
+logic result1 : bool
+
+logic result2 : (int,bool) farray
+
+logic x3 : (int,bool) farray
+
+logic result3 : int
+
+logic i3 : int
+
+logic x4 : (int,bool) farray
+
+logic i4 : int
+
+logic x5 : (int,bool) farray
+
+logic i5 : int
+
+logic x6 : (int,bool) farray
+
+logic i6 : int
+
+logic x7 : (int,bool) farray
+
+logic i7 : int
+
+logic x8 : (int,bool) farray
+
+logic i8 : int
+
+logic x9 : (int,bool) farray
+
+logic i9 : int
+
+logic x10 : (int,bool) farray
+
+logic i10 : int
+
+logic x11 : (int,bool) farray
+
+logic i11 : int
+
+axiom H : (x = x_old)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (1 <= i1)
+
+axiom H4 : (i1 <= 10)
+
+axiom H5 :
+  ((forall k2:int. (((1 <= k2) and (k2 <= (i2 - 1))) ->
+   (((x2[k2]) = true) <-> (not ((x_old[k2]) = true))))) and
+  (forall k2:int. (((i2 <= k2) and (k2 <= 10)) -> (((x2[k2]) = true) <->
+  ((x_old[k2]) = true)))))
+
+axiom H6 :
+  (((forall temp___164:int. (((1 <= temp___164) and (temp___164 <= 10)) ->
+    ((i2 <= temp___164) -> ((x2[temp___164]) = (x[temp___164]))))) and
+  ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 10)))
+
+axiom H7 : (1 <= k1)
+
+axiom H8 : (k1 <= (i2 - 1))
+
+axiom H9 : ((1 <= k1) and (k1 <= 10))
+
+axiom H10 : (o3 = k1)
+
+axiom H11 : (o4 = (x_old[o3]))
+
+axiom H12 : (((not (o4 = true)) -> (o5 = true)) and ((o4 = true) ->
+  (o5 = false)))
+
+axiom H13 : (o6 = to_int(o5))
+
  (* File "data.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,bool) farray. forall i:int. forall k:int. forall o:int.
-  forall o1:bool. forall o2:bool. forall o3:int. forall result:int.
-  forall i1:int. forall x1:(int,bool) farray. forall i2:int. ((x = x_old) ->
-  ((({ int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= 10)) ->
-  (((forall k1:int. (((1 <= k1) and (k1 <= (i2 - 1))) ->
-    (((x1[k1]) = true) <-> (not ((x_old[k1]) = true))))) and
-  (forall k1:int. (((i2 <= k1) and (k1 <= 10)) -> (((x1[k1]) = true) <->
-  ((x_old[k1]) = true))))) ->
-  ((((forall temp___164:int. (((1 <= temp___164) and (temp___164 <= 10)) ->
-     ((i2 <= temp___164) -> ((x1[temp___164]) = (x[temp___164]))))) and
-  ((1 <= 10) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 10))) ->
-  (((1 <= k) and (k <= (i2 - 1))) -> (((((((1 <= k) and (k <= 10)) and
-  (o = k)) and (o1 = (x_old[o]))) and (((not (o1 = true)) and (o2 = true)) or
-  ((o1 = true) and (o2 = false)))) and (o3 = to_int(o2))) -> (1 <= k)))))))))
+goal WP_parameter_def : (1 <= k1)

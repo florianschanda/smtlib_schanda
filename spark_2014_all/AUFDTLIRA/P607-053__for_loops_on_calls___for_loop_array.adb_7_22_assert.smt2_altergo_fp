@@ -389,27 +389,61 @@ axiom def_axiom :
   (forall temp___220:int.
   ((for_loop_array__a__aggregate_def(temp___219)[temp___220]) = of_rep(temp___219))))
 
- (* File "for_loop_array.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall c3b:int.
-  forall o:(int,natural) farray.
-  forall for_loop_array__L_1__R4b__assume:(int,natural) farray.
-  forall o1:(int,natural) farray.
-  forall for_loop_array__L_1__R6b__assume:(int,natural) farray.
-  forall result:(int,natural) farray. forall a1:(int,natural) farray.
-  forall result1:int. forall c3b1:int. forall c3b2:int. (((result = a) and
-  (a1 = for_loop_array__a__aggregate_def(0))) -> ((((({ us_split_fields1 = {
+logic a : (int,natural) farray
+
+logic c3b : int
+
+logic o : (int,natural) farray
+
+logic for_loop_array__L_1__R4b__assume : (int,natural) farray
+
+logic o1 : (int,natural) farray
+
+logic for_loop_array__L_1__R6b__assume : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : int
+
+logic c3b1 : int
+
+logic c3b2 : int
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = for_loop_array__a__aggregate_def(0))
+
+axiom H2 : (({ us_split_fields1 = {
   rec__declare_iterable__container__content = o } } = from_nat_array(a1)) and
-  (a1 = o)) and ((for_loop_array__L_1__R4b__assume = to_nat_array({
+  (a1 = o))
+
+axiom H3 : ((for_loop_array__L_1__R4b__assume = to_nat_array({
   us_split_fields1 = { rec__declare_iterable__container__content = o }
-  })) and (for_loop_array__L_1__R4b__assume = o))) and
-  (for_loop_array__L_1__R4b__assume = r4b)) -> (((result1 = c3b) and
-  (c3b1 = 1)) -> (((1 <= c3b1) and (c3b1 <= 100)) -> (((1 <= c3b2) and
-  (c3b2 <= 100)) -> ((((({ us_split_fields1 = {
+  })) and (for_loop_array__L_1__R4b__assume = o))
+
+axiom H4 : (for_loop_array__L_1__R4b__assume = r4b)
+
+axiom H5 : (result1 = c3b)
+
+axiom H6 : (c3b1 = 1)
+
+axiom H7 : (1 <= c3b1)
+
+axiom H8 : (c3b1 <= 100)
+
+axiom H9 : ((1 <= c3b2) and (c3b2 <= 100))
+
+axiom H10 : (({ us_split_fields1 = {
   rec__declare_iterable__container__content = o1 }
-  } = from_nat_array(a1)) and (a1 = o1)) and
-  ((for_loop_array__L_1__R6b__assume = to_nat_array({ us_split_fields1 = {
-  rec__declare_iterable__container__content = o1 } })) and
-  (for_loop_array__L_1__R6b__assume = o1))) and
-  (for_loop_array__L_1__R6b__assume = r6b)) ->
-  (to_rep((r6b[c3b2])) = 0))))))))
+  } = from_nat_array(a1)) and (a1 = o1))
+
+axiom H11 : ((for_loop_array__L_1__R6b__assume = to_nat_array({
+  us_split_fields1 = { rec__declare_iterable__container__content = o1 }
+  })) and (for_loop_array__L_1__R6b__assume = o1))
+
+axiom H12 : (for_loop_array__L_1__R6b__assume = r6b)
+
+ (* File "for_loop_array.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (to_rep((r6b[c3b2])) = 0)

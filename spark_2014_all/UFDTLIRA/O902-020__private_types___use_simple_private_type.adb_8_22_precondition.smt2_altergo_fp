@@ -146,12 +146,25 @@ logic add : us_rep, us_rep -> us_rep
 
 logic add__function_guard : us_rep, us_rep, us_rep -> prop
 
+logic use_simple_private_type__add__result : us_rep
+
+logic o : us_rep
+
+logic use_simple_private_type__add__result1 : us_rep
+
+logic result : bool
+
+logic use_simple_private_type__add__result2 : us_rep
+
+axiom H : (result = is_zero(x))
+
+axiom H1 : (not (result = true))
+
+axiom H2 :
+  (use_simple_private_type__add__result2 = use_simple_private_type__add__result)
+
+axiom H3 :
+  (use_simple_private_type__add__result2 = use_simple_private_type__add__result1)
+
  (* File "use_simple_private_type.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall use_simple_private_type__add__result:us_rep.
-  forall use_simple_private_type__add__result1:us_rep. forall result:bool.
-  forall use_simple_private_type__add__result2:us_rep.
-  (((result = is_zero(x)) and ((not (result = true)) and
-  ((use_simple_private_type__add__result2 = use_simple_private_type__add__result) and
-  (use_simple_private_type__add__result2 = use_simple_private_type__add__result1)))) ->
-  (not (is_zero(x) = true))))
+goal WP_parameter_def : (not (is_zero(x) = true))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -272,12 +272,39 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic stack : (int,integer) farray
+
+logic stack_pointer : int
+
+logic x : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic x1 : int
+
+axiom H : in_range1(stack_pointer)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H2 : ((1 <= stack_pointer) and (stack_pointer <= 100))
+
+axiom H3 : (o = stack_pointer)
+
+axiom H4 : (o1 = (stack[o]))
+
+axiom H5 : (o2 = to_rep(o1))
+
+axiom H6 : (result = x)
+
+axiom H7 : (x1 = o2)
+
  (* File "pre_post_exercise.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stack:(int,integer) farray. forall stack_pointer:int. forall x:int.
-  forall o:int. forall o1:integer. forall o2:int. forall result:int.
-  forall x1:int. (in_range1(stack_pointer) ->
-  ((((-2147483648) <= 2147483647) -> in_range(x)) ->
-  (((((((1 <= stack_pointer) and (stack_pointer <= 100)) and
-  (o = stack_pointer)) and (o1 = (stack[o]))) and (o2 = to_rep(o1))) and
-  ((result = x) and (x1 = o2))) -> in_range1((stack_pointer - 1))))))
+goal WP_parameter_def : in_range1((stack_pointer - 1))

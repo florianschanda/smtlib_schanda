@@ -147,5 +147,14 @@ logic identity2__function_guard : bool, us_rep, bool -> prop
 
 axiom identity2__post_axiom : true
 
+logic self__ : bool
+
+logic o : bool
+
+logic o1 : bool
+
+axiom H : (o = identity2({ us_split_fields1 = { rec__p__pt__dummy = self__ }
+  }, self__))
+
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def : true

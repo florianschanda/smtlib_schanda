@@ -45,6 +45,7 @@
 (assert (in_range1 x))
 (assert (in_range1 y))
 (assert (in_range1 z))
-(assert (not (not (and (and (< x y) (< y z)) (< z x)))))
+(assert (and (and (< x y) (< y z)) (< z x)))
+(assert (not false))
 (check-sat)
 (exit)

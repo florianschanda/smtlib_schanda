@@ -262,8 +262,21 @@ axiom def_axiom :
   ((temp___271(temp___273, temp___274, temp___275,
   temp___276)[temp___277]) = (temp___273[temp___277])))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : in_range1(e)
+
+axiom H3 : ((o = (e - 1)) and in_range1((e - 1)))
+
+axiom H4 : ((o1 = (j + 1)) and in_range((j + 1)))
+
  (* File "ar.adb", line 106, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (in_range(i) -> (in_range(j) ->
-  (in_range1(e) -> (((o = (e - 1)) and in_range1((e - 1))) ->
-  (((o1 = (j + 1)) and in_range((j + 1))) -> in_range((i - 1))))))))
+goal WP_parameter_def : in_range((i - 1))

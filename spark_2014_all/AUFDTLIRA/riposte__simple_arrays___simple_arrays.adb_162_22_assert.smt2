@@ -91,6 +91,8 @@
 (declare-const a2 (Array Int integer))
 (declare-const result2 (Array Int integer))
 (declare-const a3 (Array Int integer))
+(declare-const a4 (Array Int integer))
+(declare-const a5 (Array Int integer))
 (assert (in_range1 i))
 (assert (in_range1 j))
 (assert (in_range1 k))

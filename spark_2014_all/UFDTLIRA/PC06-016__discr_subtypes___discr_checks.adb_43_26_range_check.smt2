@@ -47,6 +47,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_171 Int) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= 1 5)) (in_range1 temp___expr_171)))
 (declare-const discr_checks__check_subtype_task__R10b__assume Int)
+(declare-const us Int)
 (assert (and (= discr_checks__check_subtype_task__R10b__assume (bad Tuple0)) (and (in_range discr_checks__check_subtype_task__R10b__assume) (= discr_checks__check_subtype_task__R10b__assume 6))))
 (assert (= discr_checks__check_subtype_task__R10b__assume r10b))
 (assert (in_range r10b))

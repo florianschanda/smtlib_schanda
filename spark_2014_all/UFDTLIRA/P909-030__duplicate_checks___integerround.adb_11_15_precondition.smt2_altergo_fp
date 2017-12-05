@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type t1
 
-predicate in_range(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq : int, int -> bool
 
@@ -106,7 +106,7 @@ function t1__ref___projection(a: t1__ref) : t1 = (a).t1__content
 
 type t2
 
-predicate in_range1(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range1(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq2 : int, int -> bool
 
@@ -135,8 +135,8 @@ logic convert__function_guard : int, int -> prop
 
 axiom convert__post_axiom :
   (forall x:int [convert(x)]. ((in_range(x) and (in_range1(x) and
-  (((-1) <= x) and (x <= 1)))) -> (in_range1(convert(x)) and
-  (((-1) <= convert(x)) and (convert(x) <= 1)))))
+  (((- 1) <= x) and (x <= 1)))) -> (in_range1(convert(x)) and
+  (((- 1) <= convert(x)) and (convert(x) <= 1)))))
 
 axiom convert__def_axiom :
   (forall x:int [convert(x)]. (in_range(x) -> (convert(x) = x)))
@@ -145,7 +145,19 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x1 : int
+
+logic o : int
+
+logic result : int
+
+logic x11 : int
+
+axiom H : (result = x1)
+
+axiom H1 : (x11 = 1)
+
+axiom H2 : in_range(x11)
+
  (* File "integerround.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x1:int. forall result:int. forall x11:int. (((result = x1) and
-  (x11 = 1)) -> (in_range(x11) -> in_range1(x11))))
+goal WP_parameter_def : in_range1(x11)

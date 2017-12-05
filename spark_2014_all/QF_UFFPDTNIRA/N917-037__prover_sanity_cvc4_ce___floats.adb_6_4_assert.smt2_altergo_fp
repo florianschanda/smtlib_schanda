@@ -1064,5 +1064,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom dummy__def_axiom : (dummy1 = fliteral)
 
+axiom H : tqtisFinite(dummy1)
+
  (* File "floats.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (not tqtisFinite(dummy1))
+goal WP_parameter_def : false

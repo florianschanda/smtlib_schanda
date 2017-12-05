@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -752,11 +752,210 @@ axiom oeq__post_axiom1 :
 
 axiom oeq__post__dispatch_axiom : true
 
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep1
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic first_allocated : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : bool
+
+logic k : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___388 : int
+
+logic o6 : int
+
+logic o7 : status
+
+logic o8 : resource
+
+logic o9 : resource
+
+logic o10 : status
+
+logic o11 : resource
+
+logic o12 : resource
+
+logic o13 : resource
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic temp___387 : int
+
+logic o17 : int
+
+logic o18 : status
+
+logic o19 : resource
+
+logic o20 : resource
+
+logic o21 : status
+
+logic o22 : resource
+
+logic o23 : resource
+
+logic o24 : resource
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic j1 : int
+
+logic o30 : int
+
+logic o31 : bool
+
+logic k1 : int
+
+logic o32 : int
+
+logic o33 : bool
+
+logic o34 : int
+
+logic o35 : int
+
+logic temp___386 : int
+
+logic o36 : int
+
+logic o37 : status
+
+logic o38 : resource
+
+logic o39 : resource
+
+logic o40 : status
+
+logic o41 : resource
+
+logic o42 : resource
+
+logic o43 : resource
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic temp___385 : int
+
+logic o47 : int
+
+logic o48 : status
+
+logic o49 : resource
+
+logic o50 : resource
+
+logic o51 : status
+
+logic o52 : resource
+
+logic o53 : resource
+
+logic o54 : resource
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+axiom H : in_range3(first_available)
+
+axiom H1 : in_range3(first_allocated)
+
+axiom H2 : (not (first_available = 0))
+
+axiom H3 : ((o64 = length(model____split_fields)) and in_range6(o64))
+
+axiom H4 : (((0 <  o64) -> (result3 = true)) and ((not (0 <  o64)) ->
+  (result3 = false)))
+
+axiom H5 : (result3 = true)
+
  (* File "list_allocator.ads", line 50, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep1. forall first_available:int.
-  forall first_allocated:int. forall o:int. forall result:bool.
-  (in_range3(first_available) -> (in_range3(first_allocated) ->
-  ((not (first_available = 0)) -> ((((o = length(model____split_fields)) and
-  in_range6(o)) and (((0 <  o) and (result = true)) or ((not (0 <  o)) and
-  (result = false)))) -> ((result = true) -> (1 <= 1)))))))
+goal WP_parameter_def : (1 <= 1)

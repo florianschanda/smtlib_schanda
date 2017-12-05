@@ -64,6 +64,7 @@
 (define-fun dynamic_invariant ((temp___expr_171 (_ BitVec 64)) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool true)
 (declare-const x (_ BitVec 64))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(assert true)
 (assert (not (bvult x (bvadd x ((_ int2bv 64) 1)))))
 (check-sat)
 (exit)

@@ -1186,7 +1186,7 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1217,23 +1217,70 @@ axiom c__def_axiom :
   (forall x:int [c(x)]. (in_range3(x) -> (c(x) = of_int(NearestTiesToEven,
   x))))
 
+logic r1 : t
+
+logic r2 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic r11 : t
+
+logic result1 : t
+
+logic r21 : t
+
+axiom H : in_range1(x1)
+
+axiom H1 : in_range1(x2)
+
+axiom H2 : in_range1(x3)
+
+axiom H3 : in_range1(x4)
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
 
+axiom H4 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(r1))
+
+axiom H5 : (le(fliteral1, fliteral2) -> in_range2(r2))
+
+axiom H6 : le(fliteral1, a(x1))
+
+axiom H7 : le(a(x1), fliteral2)
+
+axiom H8 : le(a(x2), fliteral2)
+
+axiom H9 : le(fliteral1, a(x2))
+
+axiom H10 : (le(fliteral1, a(x3)) and le(a(x3), fliteral2))
+
+axiom H11 : ((o = a(x4)) and (tqtisFinite(o) and ((o = c(x4)) and
+  (le(fliteral1, o) and le(o, fliteral2)))))
+
+axiom H12 : (result = r1)
+
+axiom H13 : (r11 = o)
+
+axiom H14 : ((o1 = a(x4)) and (tqtisFinite(o1) and ((o1 = c(x4)) and
+  (le(fliteral1, o1) and le(o1, fliteral2)))))
+
+axiom H15 : ((o2 = o1) and tqtisFinite(o1))
+
+axiom H16 : (result1 = r2)
+
+axiom H17 : (r21 = o2)
+
+axiom H18 : le(fliteral1, r11)
+
+axiom H19 : le(r11, fliteral2)
+
  (* File "sgs.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r1:t. forall r2:t. forall o:t. forall o1:t. forall o2:t.
-  forall result:t. forall r11:t. forall result1:t. forall r21:t.
-  (in_range1(x1) -> (in_range1(x2) -> (in_range1(x3) -> (in_range1(x4) ->
-  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(r1)) -> ((le(fliteral1,
-  fliteral2) -> in_range2(r2)) -> (le(fliteral1, a(x1)) -> (le(a(x1),
-  fliteral2) -> (le(a(x2), fliteral2) -> (le(fliteral1, a(x2)) ->
-  ((le(fliteral1, a(x3)) and le(a(x3), fliteral2)) -> ((((o = a(x4)) and
-  (tqtisFinite(o) and ((o = c(x4)) and (le(fliteral1, o) and le(o,
-  fliteral2))))) and ((result = r1) and (r11 = o))) -> (((((o1 = a(x4)) and
-  (tqtisFinite(o1) and ((o1 = c(x4)) and (le(fliteral1, o1) and le(o1,
-  fliteral2))))) and ((o2 = o1) and tqtisFinite(o1))) and ((result1 = r2) and
-  (r21 = o2))) -> (le(fliteral1, r11) -> (le(r11, fliteral2) -> le(fliteral1,
-  r21)))))))))))))))))
+goal WP_parameter_def : le(fliteral1, r21)

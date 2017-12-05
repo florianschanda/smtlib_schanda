@@ -385,7 +385,7 @@ axiom coerce_axiom1 :
 
 type px_coord
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq6 : int, int -> bool
 
@@ -424,7 +424,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1221,7 +1221,7 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type integer
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -2339,116 +2339,214 @@ axiom turn_direction__def_axiom :
   (((d = 3) -> (turn_direction(d, t) = 0)) and ((not (d = 3)) ->
   (turn_direction(d, t) = (d + 1))))))))
 
- (* File "tetris_functional.ads", line 65, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall success:bool. forall candidate__split_fields:shape.
-  forall candidate__split_fields1:direction.
-  forall candidate__split_fields2:px_coord.
-  forall candidate__split_fields3:py_coord. forall temp___714:shape.
-  forall temp___7141:direction. forall temp___7142:px_coord.
-  forall temp___7143:py_coord. forall cur_piece__split_fields4:shape.
-  forall cur_piece__split_fields5:direction.
-  forall cur_piece__split_fields6:px_coord.
-  forall cur_piece__split_fields7:py_coord. forall success1:bool.
-  forall candidate__split_fields4:shape.
-  forall candidate__split_fields5:direction.
-  forall candidate__split_fields6:px_coord.
-  forall candidate__split_fields7:py_coord. forall result:bool.
-  forall result1:shape. forall result2:direction. forall result3:px_coord.
-  forall result4:py_coord. forall candidate__split_fields8:shape.
-  forall candidate__split_fields9:direction.
-  forall candidate__split_fields10:px_coord.
-  forall candidate__split_fields11:py_coord. forall result5:bool.
-  forall result6:shape. forall result7:direction. forall result8:px_coord.
-  forall result9:py_coord. forall cur_piece__split_fields8:shape.
-  forall cur_piece__split_fields9:direction.
-  forall cur_piece__split_fields10:px_coord.
-  forall cur_piece__split_fields11:py_coord. forall result10:bool.
-  forall success2:bool. forall result11:bool. forall success3:bool.
-  forall cur_piece__split_fields12:shape.
-  forall cur_piece__split_fields13:direction.
-  forall cur_piece__split_fields14:px_coord.
-  forall cur_piece__split_fields15:py_coord. forall success4:bool.
-  forall candidate__split_fields12:shape.
-  forall candidate__split_fields13:direction.
-  forall candidate__split_fields14:px_coord.
-  forall candidate__split_fields15:py_coord.
-  forall cur_piece__split_fields16:shape.
-  forall cur_piece__split_fields17:direction.
-  forall cur_piece__split_fields18:px_coord.
-  forall cur_piece__split_fields19:py_coord. forall success5:bool.
-  forall candidate__split_fields16:shape.
-  forall candidate__split_fields17:direction.
-  forall candidate__split_fields18:px_coord.
-  forall candidate__split_fields19:py_coord.
-  forall cur_piece__split_fields20:shape.
-  forall cur_piece__split_fields21:direction.
-  forall cur_piece__split_fields22:px_coord.
-  forall cur_piece__split_fields23:py_coord. forall success6:bool.
-  forall candidate__split_fields20:shape.
-  forall candidate__split_fields21:direction.
-  forall candidate__split_fields22:px_coord.
-  forall candidate__split_fields23:py_coord.
-  forall cur_piece__split_fields24:shape.
-  forall cur_piece__split_fields25:direction.
-  forall cur_piece__split_fields26:px_coord.
-  forall cur_piece__split_fields27:py_coord. forall success7:bool.
-  forall candidate__split_fields24:shape.
-  forall candidate__split_fields25:direction.
-  forall candidate__split_fields26:px_coord.
-  forall candidate__split_fields27:py_coord. ((in_range6(cur_state) and
-  (in_range7(a) and ((valid_configuration(cur_board, {
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic success : bool
+
+logic candidate__split_fields : shape
+
+logic candidate__split_fields1 : direction
+
+logic candidate__split_fields2 : px_coord
+
+logic candidate__split_fields3 : py_coord
+
+logic temp___714 : shape
+
+logic temp___7141 : direction
+
+logic temp___7142 : px_coord
+
+logic temp___7143 : py_coord
+
+logic cur_piece__split_fields4 : shape
+
+logic cur_piece__split_fields5 : direction
+
+logic cur_piece__split_fields6 : px_coord
+
+logic cur_piece__split_fields7 : py_coord
+
+logic success1 : bool
+
+logic candidate__split_fields4 : shape
+
+logic candidate__split_fields5 : direction
+
+logic candidate__split_fields6 : px_coord
+
+logic candidate__split_fields7 : py_coord
+
+logic result : bool
+
+logic result1 : shape
+
+logic result2 : direction
+
+logic result3 : px_coord
+
+logic result4 : py_coord
+
+logic candidate__split_fields8 : shape
+
+logic candidate__split_fields9 : direction
+
+logic candidate__split_fields10 : px_coord
+
+logic candidate__split_fields11 : py_coord
+
+logic result5 : bool
+
+logic result6 : shape
+
+logic result7 : direction
+
+logic result8 : px_coord
+
+logic result9 : py_coord
+
+logic cur_piece__split_fields8 : shape
+
+logic cur_piece__split_fields9 : direction
+
+logic cur_piece__split_fields10 : px_coord
+
+logic cur_piece__split_fields11 : py_coord
+
+logic result10 : bool
+
+logic success2 : bool
+
+logic result11 : bool
+
+logic success3 : bool
+
+logic cur_piece__split_fields12 : shape
+
+logic cur_piece__split_fields13 : direction
+
+logic cur_piece__split_fields14 : px_coord
+
+logic cur_piece__split_fields15 : py_coord
+
+logic success4 : bool
+
+logic candidate__split_fields12 : shape
+
+logic candidate__split_fields13 : direction
+
+logic candidate__split_fields14 : px_coord
+
+logic candidate__split_fields15 : py_coord
+
+logic cur_piece__split_fields16 : shape
+
+logic cur_piece__split_fields17 : direction
+
+logic cur_piece__split_fields18 : px_coord
+
+logic cur_piece__split_fields19 : py_coord
+
+logic success5 : bool
+
+logic candidate__split_fields16 : shape
+
+logic candidate__split_fields17 : direction
+
+logic candidate__split_fields18 : px_coord
+
+logic candidate__split_fields19 : py_coord
+
+logic cur_piece__split_fields20 : shape
+
+logic cur_piece__split_fields21 : direction
+
+logic cur_piece__split_fields22 : px_coord
+
+logic cur_piece__split_fields23 : py_coord
+
+logic success6 : bool
+
+logic candidate__split_fields20 : shape
+
+logic candidate__split_fields21 : direction
+
+logic candidate__split_fields22 : px_coord
+
+logic candidate__split_fields23 : py_coord
+
+logic cur_piece__split_fields24 : shape
+
+logic cur_piece__split_fields25 : direction
+
+logic cur_piece__split_fields26 : px_coord
+
+logic cur_piece__split_fields27 : py_coord
+
+logic success7 : bool
+
+logic candidate__split_fields24 : shape
+
+logic candidate__split_fields25 : direction
+
+logic candidate__split_fields26 : px_coord
+
+logic candidate__split_fields27 : py_coord
+
+axiom H : in_range6(cur_state)
+
+axiom H1 : in_range7(a)
+
+axiom H2 : (valid_configuration(cur_board, {
   rec__tetris_functional__piece__s = cur_piece__split_fields;
   rec__tetris_functional__piece__d = cur_piece__split_fields1;
   rec__tetris_functional__piece__x = cur_piece__split_fields2;
   rec__tetris_functional__piece__y = cur_piece__split_fields3 },
-  cur_state) = true) and
-  (((((((candidate__split_fields12 = candidate__split_fields8) and
+  cur_state) = true)
+
+axiom H3 : ((((((candidate__split_fields12 = candidate__split_fields8) and
   ((candidate__split_fields13 = candidate__split_fields9) and
   ((candidate__split_fields14 = candidate__split_fields10) and
   (candidate__split_fields15 = candidate__split_fields11)))) and
-  ((success2 = success4) and
+  ((success4 = success2) and
   ((cur_piece__split_fields12 = cur_piece__split_fields8) and
   ((cur_piece__split_fields13 = cur_piece__split_fields9) and
   ((cur_piece__split_fields14 = cur_piece__split_fields10) and
-  (cur_piece__split_fields15 = cur_piece__split_fields11)))))) and (({
-  rec__tetris_functional__piece__s = candidate__split_fields16;
-  rec__tetris_functional__piece__d = candidate__split_fields17;
-  rec__tetris_functional__piece__x = candidate__split_fields18;
-  rec__tetris_functional__piece__y = candidate__split_fields19 } = {
-  rec__tetris_functional__piece__s = candidate__split_fields8;
-  rec__tetris_functional__piece__d = candidate__split_fields9;
-  rec__tetris_functional__piece__x = candidate__split_fields10;
-  rec__tetris_functional__piece__y = candidate__split_fields11 }) and
-  ((success5 = success2) and ({ rec__tetris_functional__piece__s =
-  cur_piece__split_fields16; rec__tetris_functional__piece__d =
-  cur_piece__split_fields17; rec__tetris_functional__piece__x =
-  cur_piece__split_fields18; rec__tetris_functional__piece__y =
-  cur_piece__split_fields19 } = { rec__tetris_functional__piece__s =
-  cur_piece__split_fields8; rec__tetris_functional__piece__d =
-  cur_piece__split_fields9; rec__tetris_functional__piece__x =
-  cur_piece__split_fields10; rec__tetris_functional__piece__y =
-  cur_piece__split_fields11 })))) and (((result = move_is_possible({
-  us_split_fields1 = { rec__tetris_functional__piece__s =
-  cur_piece__split_fields; rec__tetris_functional__piece__d =
-  cur_piece__split_fields1; rec__tetris_functional__piece__x =
-  cur_piece__split_fields2; rec__tetris_functional__piece__y =
-  cur_piece__split_fields3 } }, a)) and (((result = true) or (((a = 0) ->
+  (cur_piece__split_fields15 = cur_piece__split_fields11)))))) and
+  (((candidate__split_fields16 = candidate__split_fields8) and
+  ((candidate__split_fields17 = candidate__split_fields9) and
+  ((candidate__split_fields18 = candidate__split_fields10) and
+  (candidate__split_fields19 = candidate__split_fields11)))) and
+  ((success5 = success2) and
+  ((cur_piece__split_fields16 = cur_piece__split_fields8) and
+  ((cur_piece__split_fields17 = cur_piece__split_fields9) and
+  ((cur_piece__split_fields18 = cur_piece__split_fields10) and
+  (cur_piece__split_fields19 = cur_piece__split_fields11))))))) and
+  (((result = move_is_possible({ us_split_fields1 = {
+  rec__tetris_functional__piece__s = cur_piece__split_fields;
+  rec__tetris_functional__piece__d = cur_piece__split_fields1;
+  rec__tetris_functional__piece__x = cur_piece__split_fields2;
+  rec__tetris_functional__piece__y = cur_piece__split_fields3 } }, a)) and
+  (((result = true) -> (((a = 0) ->
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) and ((not (a = 0)) ->
   (((a = 1) -> in_range3((to_rep2(cur_piece__split_fields2) + 1))) and
   ((not (a = 1)) -> ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) ->
-  ((result = true) and (((a = 0) and
+  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) and ((((a = 0) and
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) or ((not (a = 0)) and
   (((a = 1) and in_range3((to_rep2(cur_piece__split_fields2) + 1))) or
   ((not (a = 1)) and ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))))) and
-  ((result = true) and (((({ us_split_fields1 = {
+  in_range4((to_rep3(cur_piece__split_fields3) + 1))))))) ->
+  (result = true)))) and ((result = true) and (((({ us_split_fields1 = {
   rec__tetris_functional__piece__s = temp___714;
   rec__tetris_functional__piece__d = temp___7141;
   rec__tetris_functional__piece__x = temp___7142;
@@ -2457,55 +2555,27 @@ goal WP_parameter_def :
   cur_piece__split_fields; rec__tetris_functional__piece__d =
   cur_piece__split_fields1; rec__tetris_functional__piece__x =
   cur_piece__split_fields2; rec__tetris_functional__piece__y =
-  cur_piece__split_fields3 } }, a)) and (((a = 0) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x =
-  of_rep2((to_rep2(cur_piece__split_fields2) - 1));
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })) or
-  ((not (a = 0)) and (((a = 1) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x =
-  of_rep2((to_rep2(cur_piece__split_fields2) + 1));
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })) or
-  ((not (a = 1)) and (((a = 2) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x = cur_piece__split_fields2;
-  rec__tetris_functional__piece__y =
-  of_rep3((to_rep3(cur_piece__split_fields3) + 1)) } })) or
-  ((not (a = 2)) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d =
-  of_rep4(turn_direction(to_rep4(cur_piece__split_fields1), a));
-  rec__tetris_functional__piece__x = cur_piece__split_fields2;
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })))))))) and
-  (({ us_split_fields__content = { rec__tetris_functional__piece__s =
-  result1; rec__tetris_functional__piece__d = result2;
-  rec__tetris_functional__piece__x = result3;
-  rec__tetris_functional__piece__y = result4 } } = {
-  us_split_fields__content = { rec__tetris_functional__piece__s =
-  candidate__split_fields; rec__tetris_functional__piece__d =
-  candidate__split_fields1; rec__tetris_functional__piece__x =
-  candidate__split_fields2; rec__tetris_functional__piece__y =
-  candidate__split_fields3 } }) and
+  cur_piece__split_fields3 } }, a)) and (((a = 0) ->
+  ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = of_rep2((to_rep2(cur_piece__split_fields2) - 1))) and
+  (temp___7143 = cur_piece__split_fields3))))) and ((not (a = 0)) ->
+  (((a = 1) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = of_rep2((to_rep2(cur_piece__split_fields2) + 1))) and
+  (temp___7143 = cur_piece__split_fields3))))) and ((not (a = 1)) ->
+  (((a = 2) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = cur_piece__split_fields2) and
+  (temp___7143 = of_rep3((to_rep3(cur_piece__split_fields3) + 1))))))) and
+  ((not (a = 2)) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = of_rep4(turn_direction(to_rep4(cur_piece__split_fields1),
+  a))) and ((temp___7142 = cur_piece__split_fields2) and
+  (temp___7143 = cur_piece__split_fields3))))))))))) and
+  (((result1 = candidate__split_fields) and
+  ((result2 = candidate__split_fields1) and
+  ((result3 = candidate__split_fields2) and
+  (result4 = candidate__split_fields3)))) and
   ((temp___714 = candidate__split_fields8) and
   ((temp___7141 = candidate__split_fields9) and
   ((temp___7142 = candidate__split_fields10) and
@@ -2515,7 +2585,7 @@ goal WP_parameter_def :
   rec__tetris_functional__piece__d = candidate__split_fields9;
   rec__tetris_functional__piece__x = candidate__split_fields10;
   rec__tetris_functional__piece__y = candidate__split_fields11 } })) and
-  (((result5 = true) or (((to_rep1(candidate__split_fields8) = 2) ->
+  (((result5 = true) -> (((to_rep1(candidate__split_fields8) = 2) ->
   ((((is_empty(cur_board, to_rep3(candidate__split_fields11),
   to_rep2(candidate__split_fields10)) = true) and (is_empty(cur_board,
   to_rep3(candidate__split_fields11),
@@ -2538,9 +2608,9 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep1(candidate__split_fields8),
   to_rep4(candidate__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(candidate__split_fields11) + y),
-  (to_rep2(candidate__split_fields10) + x)) = true))))))))))) ->
-  ((result5 = true) and (((to_rep1(candidate__split_fields8) = 2) and
-  ((((is_empty(cur_board, to_rep3(candidate__split_fields11),
+  (to_rep2(candidate__split_fields10) + x)) = true))))))))))) and
+  ((((to_rep1(candidate__split_fields8) = 2) and ((((is_empty(cur_board,
+  to_rep3(candidate__split_fields11),
   to_rep2(candidate__split_fields10)) = true) and (is_empty(cur_board,
   to_rep3(candidate__split_fields11),
   (to_rep2(candidate__split_fields10) + 1)) = true)) and (is_empty(cur_board,
@@ -2562,36 +2632,32 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep1(candidate__split_fields8),
   to_rep4(candidate__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(candidate__split_fields11) + y),
-  (to_rep2(candidate__split_fields10) + x)) = true))))))))))))) and
-  ((result5 = true) and ((((result6 = cur_piece__split_fields) and
+  (to_rep2(candidate__split_fields10) + x)) = true)))))))))) ->
+  (result5 = true)))) and ((result5 = true) and
+  ((((result6 = cur_piece__split_fields) and
   ((result7 = cur_piece__split_fields1) and
   ((result8 = cur_piece__split_fields2) and
-  (result9 = cur_piece__split_fields3)))) and ({
-  rec__tetris_functional__piece__s = cur_piece__split_fields8;
-  rec__tetris_functional__piece__d = cur_piece__split_fields9;
-  rec__tetris_functional__piece__x = cur_piece__split_fields10;
-  rec__tetris_functional__piece__y = cur_piece__split_fields11 } = {
-  rec__tetris_functional__piece__s = candidate__split_fields8;
-  rec__tetris_functional__piece__d = candidate__split_fields9;
-  rec__tetris_functional__piece__x = candidate__split_fields10;
-  rec__tetris_functional__piece__y = candidate__split_fields11 })) and
+  (result9 = cur_piece__split_fields3)))) and
+  ((cur_piece__split_fields8 = candidate__split_fields8) and
+  ((cur_piece__split_fields9 = candidate__split_fields9) and
+  ((cur_piece__split_fields10 = candidate__split_fields10) and
+  (cur_piece__split_fields11 = candidate__split_fields11))))) and
   ((result10 = success) and (success2 = of_int(1)))))))))) or
   ((((result = move_is_possible({ us_split_fields1 = {
   rec__tetris_functional__piece__s = cur_piece__split_fields;
   rec__tetris_functional__piece__d = cur_piece__split_fields1;
   rec__tetris_functional__piece__x = cur_piece__split_fields2;
   rec__tetris_functional__piece__y = cur_piece__split_fields3 } }, a)) and
-  (((result = true) or (((a = 0) ->
+  (((result = true) -> (((a = 0) ->
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) and ((not (a = 0)) ->
   (((a = 1) -> in_range3((to_rep2(cur_piece__split_fields2) + 1))) and
   ((not (a = 1)) -> ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) ->
-  ((result = true) and (((a = 0) and
+  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))) and ((((a = 0) and
   in_range3((to_rep2(cur_piece__split_fields2) - 1))) or ((not (a = 0)) and
   (((a = 1) and in_range3((to_rep2(cur_piece__split_fields2) + 1))) or
   ((not (a = 1)) and ((a = 2) ->
-  in_range4((to_rep3(cur_piece__split_fields3) + 1)))))))))) and
-  (((result = true) and (((({ us_split_fields1 = {
+  in_range4((to_rep3(cur_piece__split_fields3) + 1))))))) ->
+  (result = true)))) and (((result = true) -> (((({ us_split_fields1 = {
   rec__tetris_functional__piece__s = temp___714;
   rec__tetris_functional__piece__d = temp___7141;
   rec__tetris_functional__piece__x = temp___7142;
@@ -2600,55 +2666,27 @@ goal WP_parameter_def :
   cur_piece__split_fields; rec__tetris_functional__piece__d =
   cur_piece__split_fields1; rec__tetris_functional__piece__x =
   cur_piece__split_fields2; rec__tetris_functional__piece__y =
-  cur_piece__split_fields3 } }, a)) and (((a = 0) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x =
-  of_rep2((to_rep2(cur_piece__split_fields2) - 1));
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })) or
-  ((not (a = 0)) and (((a = 1) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x =
-  of_rep2((to_rep2(cur_piece__split_fields2) + 1));
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })) or
-  ((not (a = 1)) and (((a = 2) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d = cur_piece__split_fields1;
-  rec__tetris_functional__piece__x = cur_piece__split_fields2;
-  rec__tetris_functional__piece__y =
-  of_rep3((to_rep3(cur_piece__split_fields3) + 1)) } })) or
-  ((not (a = 2)) and ({ us_split_fields1 = {
-  rec__tetris_functional__piece__s = temp___714;
-  rec__tetris_functional__piece__d = temp___7141;
-  rec__tetris_functional__piece__x = temp___7142;
-  rec__tetris_functional__piece__y = temp___7143 } } = { us_split_fields1 = {
-  rec__tetris_functional__piece__s = cur_piece__split_fields;
-  rec__tetris_functional__piece__d =
-  of_rep4(turn_direction(to_rep4(cur_piece__split_fields1), a));
-  rec__tetris_functional__piece__x = cur_piece__split_fields2;
-  rec__tetris_functional__piece__y = cur_piece__split_fields3 } })))))))) and
-  (({ us_split_fields__content = { rec__tetris_functional__piece__s =
-  result1; rec__tetris_functional__piece__d = result2;
-  rec__tetris_functional__piece__x = result3;
-  rec__tetris_functional__piece__y = result4 } } = {
-  us_split_fields__content = { rec__tetris_functional__piece__s =
-  candidate__split_fields; rec__tetris_functional__piece__d =
-  candidate__split_fields1; rec__tetris_functional__piece__x =
-  candidate__split_fields2; rec__tetris_functional__piece__y =
-  candidate__split_fields3 } }) and
+  cur_piece__split_fields3 } }, a)) and (((a = 0) ->
+  ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = of_rep2((to_rep2(cur_piece__split_fields2) - 1))) and
+  (temp___7143 = cur_piece__split_fields3))))) and ((not (a = 0)) ->
+  (((a = 1) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = of_rep2((to_rep2(cur_piece__split_fields2) + 1))) and
+  (temp___7143 = cur_piece__split_fields3))))) and ((not (a = 1)) ->
+  (((a = 2) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = cur_piece__split_fields1) and
+  ((temp___7142 = cur_piece__split_fields2) and
+  (temp___7143 = of_rep3((to_rep3(cur_piece__split_fields3) + 1))))))) and
+  ((not (a = 2)) -> ((temp___714 = cur_piece__split_fields) and
+  ((temp___7141 = of_rep4(turn_direction(to_rep4(cur_piece__split_fields1),
+  a))) and ((temp___7142 = cur_piece__split_fields2) and
+  (temp___7143 = cur_piece__split_fields3))))))))))) and
+  (((result1 = candidate__split_fields) and
+  ((result2 = candidate__split_fields1) and
+  ((result3 = candidate__split_fields2) and
+  (result4 = candidate__split_fields3)))) and
   ((temp___714 = candidate__split_fields8) and
   ((temp___7141 = candidate__split_fields9) and
   ((temp___7142 = candidate__split_fields10) and
@@ -2658,7 +2696,7 @@ goal WP_parameter_def :
   rec__tetris_functional__piece__d = candidate__split_fields9;
   rec__tetris_functional__piece__x = candidate__split_fields10;
   rec__tetris_functional__piece__y = candidate__split_fields11 } })) and
-  (((result5 = true) or (((to_rep1(candidate__split_fields8) = 2) ->
+  (((result5 = true) -> (((to_rep1(candidate__split_fields8) = 2) ->
   ((((is_empty(cur_board, to_rep3(candidate__split_fields11),
   to_rep2(candidate__split_fields10)) = true) and (is_empty(cur_board,
   to_rep3(candidate__split_fields11),
@@ -2681,9 +2719,9 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep1(candidate__split_fields8),
   to_rep4(candidate__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(candidate__split_fields11) + y),
-  (to_rep2(candidate__split_fields10) + x)) = true))))))))))) ->
-  ((result5 = true) and (((to_rep1(candidate__split_fields8) = 2) and
-  ((((is_empty(cur_board, to_rep3(candidate__split_fields11),
+  (to_rep2(candidate__split_fields10) + x)) = true))))))))))) and
+  ((((to_rep1(candidate__split_fields8) = 2) and ((((is_empty(cur_board,
+  to_rep3(candidate__split_fields11),
   to_rep2(candidate__split_fields10)) = true) and (is_empty(cur_board,
   to_rep3(candidate__split_fields11),
   (to_rep2(candidate__split_fields10) + 1)) = true)) and (is_empty(cur_board,
@@ -2705,21 +2743,19 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep1(candidate__split_fields8),
   to_rep4(candidate__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(candidate__split_fields11) + y),
-  (to_rep2(candidate__split_fields10) + x)) = true))))))))))))) and
-  ((not (result5 = true)) and (((success2 = success) and
+  (to_rep2(candidate__split_fields10) + x)) = true)))))))))) ->
+  (result5 = true)))) and ((not (result5 = true)) and
+  (((success2 = success) and
   ((cur_piece__split_fields = cur_piece__split_fields8) and
   ((cur_piece__split_fields1 = cur_piece__split_fields9) and
   ((cur_piece__split_fields2 = cur_piece__split_fields10) and
   (cur_piece__split_fields3 = cur_piece__split_fields11))))) and
-  ((success2 = success1) and ({ rec__tetris_functional__piece__s =
-  cur_piece__split_fields8; rec__tetris_functional__piece__d =
-  cur_piece__split_fields9; rec__tetris_functional__piece__x =
-  cur_piece__split_fields10; rec__tetris_functional__piece__y =
-  cur_piece__split_fields11 } = { rec__tetris_functional__piece__s =
-  cur_piece__split_fields4; rec__tetris_functional__piece__d =
-  cur_piece__split_fields5; rec__tetris_functional__piece__x =
-  cur_piece__split_fields6; rec__tetris_functional__piece__y =
-  cur_piece__split_fields7 }))))))) or ((not (result = true)) and
+  ((success2 = success1) and
+  ((cur_piece__split_fields8 = cur_piece__split_fields4) and
+  ((cur_piece__split_fields9 = cur_piece__split_fields5) and
+  ((cur_piece__split_fields10 = cur_piece__split_fields6) and
+  (cur_piece__split_fields11 = cur_piece__split_fields7)))))))))) and
+  ((not (result = true)) ->
   ((((candidate__split_fields = candidate__split_fields8) and
   ((candidate__split_fields1 = candidate__split_fields9) and
   ((candidate__split_fields2 = candidate__split_fields10) and
@@ -2733,62 +2769,59 @@ goal WP_parameter_def :
   ((candidate__split_fields5 = candidate__split_fields9) and
   ((candidate__split_fields6 = candidate__split_fields10) and
   (candidate__split_fields7 = candidate__split_fields11)))) and
-  ((success2 = success1) and ({ rec__tetris_functional__piece__s =
-  cur_piece__split_fields8; rec__tetris_functional__piece__d =
-  cur_piece__split_fields9; rec__tetris_functional__piece__x =
-  cur_piece__split_fields10; rec__tetris_functional__piece__y =
-  cur_piece__split_fields11 } = { rec__tetris_functional__piece__s =
-  cur_piece__split_fields4; rec__tetris_functional__piece__d =
-  cur_piece__split_fields5; rec__tetris_functional__piece__x =
-  cur_piece__split_fields6; rec__tetris_functional__piece__y =
-  cur_piece__split_fields7 }))))))) and
+  ((success2 = success1) and
+  ((cur_piece__split_fields8 = cur_piece__split_fields4) and
+  ((cur_piece__split_fields9 = cur_piece__split_fields5) and
+  ((cur_piece__split_fields10 = cur_piece__split_fields6) and
+  (cur_piece__split_fields11 = cur_piece__split_fields7)))))))))) and
   (((((candidate__split_fields12 = candidate__split_fields8) and
   ((candidate__split_fields13 = candidate__split_fields9) and
   ((candidate__split_fields14 = candidate__split_fields10) and
   (candidate__split_fields15 = candidate__split_fields11)))) and
-  ((success3 = success4) and
+  ((success4 = success3) and
   ((cur_piece__split_fields12 = cur_piece__split_fields8) and
   ((cur_piece__split_fields13 = cur_piece__split_fields9) and
   ((cur_piece__split_fields14 = cur_piece__split_fields10) and
-  (cur_piece__split_fields15 = cur_piece__split_fields11)))))) and (({
-  rec__tetris_functional__piece__s = candidate__split_fields16;
-  rec__tetris_functional__piece__d = candidate__split_fields17;
-  rec__tetris_functional__piece__x = candidate__split_fields18;
-  rec__tetris_functional__piece__y = candidate__split_fields19 } = {
-  rec__tetris_functional__piece__s = candidate__split_fields8;
-  rec__tetris_functional__piece__d = candidate__split_fields9;
-  rec__tetris_functional__piece__x = candidate__split_fields10;
-  rec__tetris_functional__piece__y = candidate__split_fields11 }) and
-  ((success5 = success3) and ({ rec__tetris_functional__piece__s =
-  cur_piece__split_fields16; rec__tetris_functional__piece__d =
-  cur_piece__split_fields17; rec__tetris_functional__piece__x =
-  cur_piece__split_fields18; rec__tetris_functional__piece__y =
-  cur_piece__split_fields19 } = { rec__tetris_functional__piece__s =
-  cur_piece__split_fields8; rec__tetris_functional__piece__d =
-  cur_piece__split_fields9; rec__tetris_functional__piece__x =
-  cur_piece__split_fields10; rec__tetris_functional__piece__y =
-  cur_piece__split_fields11 })))) and ((result11 = success2) and
-  (success3 = of_int(0)))))) and
-  ((((candidate__split_fields20 = candidate__split_fields12) and
+  (cur_piece__split_fields15 = cur_piece__split_fields11)))))) and
+  (((candidate__split_fields16 = candidate__split_fields8) and
+  ((candidate__split_fields17 = candidate__split_fields9) and
+  ((candidate__split_fields18 = candidate__split_fields10) and
+  (candidate__split_fields19 = candidate__split_fields11)))) and
+  ((success5 = success3) and
+  ((cur_piece__split_fields16 = cur_piece__split_fields8) and
+  ((cur_piece__split_fields17 = cur_piece__split_fields9) and
+  ((cur_piece__split_fields18 = cur_piece__split_fields10) and
+  (cur_piece__split_fields19 = cur_piece__split_fields11))))))) and
+  ((result11 = success2) and (success3 = of_int(0))))))
+
+axiom H4 : ((candidate__split_fields20 = candidate__split_fields12) and
   ((candidate__split_fields21 = candidate__split_fields13) and
   ((candidate__split_fields22 = candidate__split_fields14) and
-  (candidate__split_fields23 = candidate__split_fields15)))) and
-  ((success6 = success4) and
-  ((cur_piece__split_fields12 = cur_piece__split_fields20) and
-  ((cur_piece__split_fields13 = cur_piece__split_fields21) and
-  ((cur_piece__split_fields14 = cur_piece__split_fields22) and
-  (cur_piece__split_fields15 = cur_piece__split_fields23)))))) and
-  (((candidate__split_fields24 = candidate__split_fields16) and
+  (candidate__split_fields23 = candidate__split_fields15))))
+
+axiom H5 : (success6 = success4)
+
+axiom H6 : ((cur_piece__split_fields20 = cur_piece__split_fields12) and
+  ((cur_piece__split_fields21 = cur_piece__split_fields13) and
+  ((cur_piece__split_fields22 = cur_piece__split_fields14) and
+  (cur_piece__split_fields23 = cur_piece__split_fields15))))
+
+axiom H7 : ((candidate__split_fields24 = candidate__split_fields16) and
   ((candidate__split_fields25 = candidate__split_fields17) and
   ((candidate__split_fields26 = candidate__split_fields18) and
-  (candidate__split_fields27 = candidate__split_fields19)))) and
-  ((success7 = success5) and
-  ((cur_piece__split_fields24 = cur_piece__split_fields16) and
+  (candidate__split_fields27 = candidate__split_fields19))))
+
+axiom H8 : (success7 = success5)
+
+axiom H9 : ((cur_piece__split_fields24 = cur_piece__split_fields16) and
   ((cur_piece__split_fields25 = cur_piece__split_fields17) and
   ((cur_piece__split_fields26 = cur_piece__split_fields18) and
-  (cur_piece__split_fields27 = cur_piece__split_fields19))))))))))) ->
-  (valid_configuration(cur_board, { rec__tetris_functional__piece__s =
-  cur_piece__split_fields20; rec__tetris_functional__piece__d =
-  cur_piece__split_fields21; rec__tetris_functional__piece__x =
-  cur_piece__split_fields22; rec__tetris_functional__piece__y =
-  cur_piece__split_fields23 }, cur_state) = true)))
+  (cur_piece__split_fields27 = cur_piece__split_fields19))))
+
+ (* File "tetris_functional.ads", line 65, characters 0-0 *)
+goal WP_parameter_def : (valid_configuration(cur_board, {
+  rec__tetris_functional__piece__s = cur_piece__split_fields20;
+  rec__tetris_functional__piece__d = cur_piece__split_fields21;
+  rec__tetris_functional__piece__x = cur_piece__split_fields22;
+  rec__tetris_functional__piece__y = cur_piece__split_fields23 },
+  cur_state) = true)

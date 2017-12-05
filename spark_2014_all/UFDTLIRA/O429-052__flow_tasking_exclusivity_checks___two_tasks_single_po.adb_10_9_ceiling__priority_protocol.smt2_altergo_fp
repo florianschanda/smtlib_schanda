@@ -132,5 +132,17 @@ function poT__ref___projection(a: poT__ref) : poT = (a).poT__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : poT
+
+logic us_self__compl : poT
+
+logic po : poT
+
+logic us_self__compl1 : poT
+
+logic result : poT
+
+logic po1 : poT
+
  (* File "two_tasks_single_po.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : (97 <= 97)

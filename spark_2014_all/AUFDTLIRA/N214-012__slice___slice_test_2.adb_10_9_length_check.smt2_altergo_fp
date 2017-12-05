@@ -417,11 +417,31 @@ type t3b__ref = { t3b__content : t3b
 
 function t3b__ref___projection(a: t3b__ref) : t3b = (a).t3b__content
 
+logic a : (int,bool) farray
+
+logic temp___152 : (int,bool) farray
+
+logic temp___153 : (int,bool) farray
+
+logic temp___1531 : t
+
+logic o : (int,bool) farray
+
+logic temp___155 : (int,bool) farray
+
+logic temp___1551 : t
+
+axiom H : in_range(d)
+
+axiom H1 : (d = 2)
+
+axiom H2 : ((2 <= 4) -> (((0 <= 2) and (2 <= 6)) and ((0 <= 4) and
+  (4 <= 6))))
+
+axiom H3 : (temp___152 = a)
+
  (* File "slice_test_2.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,bool) farray. forall temp___152:(int,bool) farray.
-  (in_range(d) -> ((d = 2) -> ((((2 <= 4) -> (((0 <= 2) and (2 <= 6)) and
-  ((0 <= 4) and (4 <= 6)))) and (temp___152 = a)) -> (((2 <= 4) ->
-  (((0 <= d) -> (((4 - 2) + 1) = ((d - 0) + 1))) and ((not (0 <= d)) ->
+goal WP_parameter_def : (((2 <= 4) -> (((0 <= d) ->
+  (((4 - 2) + 1) = ((d - 0) + 1))) and ((not (0 <= d)) ->
   (((4 - 2) + 1) = 0)))) and ((not (2 <= 4)) -> ((0 <= d) ->
-  (0 = ((d - 0) + 1)))))))))
+  (0 = ((d - 0) + 1)))))

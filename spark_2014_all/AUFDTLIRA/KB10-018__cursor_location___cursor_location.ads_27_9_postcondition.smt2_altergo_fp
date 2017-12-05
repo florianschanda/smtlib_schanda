@@ -343,26 +343,77 @@ axiom change_side__def_axiom :
   (change_side(side) = 2)) and ((not (side = 1)) ->
   (change_side(side) = 1)))))
 
- (* File "cursor_location.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall current:int. forall current1:int. forall result:bool.
-  forall result1:int. forall current2:int. forall result2:bool.
-  forall result3:int. forall current3:int. forall result4:bool.
-  forall result5:int. forall current4:int. forall current5:int.
-  forall current6:int. ((in_range1(current) and
-  ((((result = fulfill_condition(1, request, du_available)) and
+logic current : int
+
+logic current1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic current2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic current3 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic current4 : int
+
+logic current5 : int
+
+logic current6 : int
+
+axiom H : in_range1(current)
+
+axiom H1 : ((result = fulfill_condition(1, request, du_available)) and
   (((du_available[1]) = true) and (((request[1]) = true) or
-  (not ((du_available[change_side(1)]) = true))))) and (((result = true) and
-  ((result1 = current) and (current2 = 1))) or ((not (result = true)) and
-  ((((result2 = fulfill_condition(2, request, du_available)) and
-  (((du_available[2]) = true) and (((request[2]) = true) or
-  (not ((du_available[change_side(2)]) = true))))) and (((result2 = true) and
-  ((result3 = current) and (current3 = 2))) or ((not (result2 = true)) and
-  ((((result4 = none_available(du_available)) and
-  ((not ((du_available[1]) = true)) and
-  (not ((du_available[2]) = true)))) and (((result4 = true) and
-  ((result5 = current) and (current4 = 0))) or ((not (result4 = true)) and
-  ((current4 = current) and (current4 = current1))))) and
-  (current3 = current4))))) and (current2 = current3))))) and
-  ((current2 = current5) and (current6 = current2)))) ->
-  ((not ((du_available[1]) = true)) -> (not (current5 = 1)))))
+  (not ((du_available[change_side(1)]) = true)))))
+
+axiom H2 : ((result = true) -> (result1 = current))
+
+axiom H3 : ((result = true) -> (current2 = 1))
+
+axiom H4 : ((not (result = true)) -> ((result2 = fulfill_condition(2,
+  request, du_available)) and (((du_available[2]) = true) and
+  (((request[2]) = true) or (not ((du_available[change_side(2)]) = true))))))
+
+axiom H5 : ((not (result = true)) -> ((result2 = true) ->
+  (result3 = current)))
+
+axiom H6 : ((not (result = true)) -> ((result2 = true) -> (current3 = 2)))
+
+axiom H7 : ((not (result = true)) -> ((not (result2 = true)) ->
+  ((result4 = none_available(du_available)) and
+  ((not ((du_available[1]) = true)) and (not ((du_available[2]) = true))))))
+
+axiom H8 : ((not (result = true)) -> ((not (result2 = true)) ->
+  ((result4 = true) -> (result5 = current))))
+
+axiom H9 : ((not (result = true)) -> ((not (result2 = true)) ->
+  ((result4 = true) -> (current4 = 0))))
+
+axiom H10 : ((not (result = true)) -> ((not (result2 = true)) ->
+  ((not (result4 = true)) -> (current4 = current))))
+
+axiom H11 : ((not (result = true)) -> ((not (result2 = true)) ->
+  ((not (result4 = true)) -> (current4 = current1))))
+
+axiom H12 : ((not (result = true)) -> ((not (result2 = true)) ->
+  (current3 = current4)))
+
+axiom H13 : ((not (result = true)) -> (current2 = current3))
+
+axiom H14 : (current2 = current5)
+
+axiom H15 : (current6 = current2)
+
+axiom H16 : (not ((du_available[1]) = true))
+
+ (* File "cursor_location.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (not (current5 = 1))

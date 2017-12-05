@@ -106,6 +106,8 @@
 (declare-const reg1 (_ BitVec 64))
 (declare-const reg2 (_ BitVec 64))
 (declare-const reg3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result reg))
 (assert (= reg1 ((_ zero_extend 32) val__)))
 (assert (= reg1 reg2))

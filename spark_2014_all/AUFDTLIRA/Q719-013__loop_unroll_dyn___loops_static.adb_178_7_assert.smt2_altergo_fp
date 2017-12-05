@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -377,46 +377,183 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic r : (int,natural) farray
+
+logic i : int
+
+logic bad : bool
+
+logic j : int
+
+logic loops_static__loop9__result : bool
+
+logic o : natural
+
+logic o1 : int
+
+logic o2 : (int,natural) farray
+
+logic j1 : int
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : (int,natural) farray
+
+logic j2 : int
+
+logic bad1 : bool
+
+logic j3 : int
+
+logic loops_static__loop9__result1 : bool
+
+logic result : (int,natural) farray
+
+logic r1 : (int,natural) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,natural) farray
+
+logic r2 : (int,natural) farray
+
+logic result3 : bool
+
+logic bad2 : bool
+
+logic result4 : int
+
+logic j4 : int
+
+logic j5 : int
+
+logic bad3 : bool
+
+logic j6 : int
+
+logic loops_static__loop9__result2 : bool
+
+logic bad4 : bool
+
+logic j7 : int
+
+logic loops_static__loop9__result3 : bool
+
+logic result5 : int
+
+logic i2 : int
+
+logic result6 : (int,natural) farray
+
+logic r3 : (int,natural) farray
+
+logic result7 : bool
+
+logic bad5 : bool
+
+logic result8 : int
+
+logic j8 : int
+
+logic j9 : int
+
+logic bad6 : bool
+
+logic j10 : int
+
+logic loops_static__loop9__result4 : bool
+
+logic bad7 : bool
+
+logic j11 : int
+
+logic loops_static__loop9__result5 : bool
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = a)
+
+axiom H3 : (to_rep1(r__first) = to_rep1(first(a1)))
+
+axiom H4 : (to_rep1(r__last) = to_rep1(last(a1)))
+
+axiom H5 : dynamic_property((- 2147483648), 2147483647, to_rep1(r__first),
+  to_rep1(r__last))
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = 1)
+
+axiom H8 : (to_rep(o) = 0)
+
+axiom H9 : ((to_rep1(r__first) <= i1) and (i1 <= to_rep1(r__last)))
+
+axiom H10 : (o1 = i1)
+
+axiom H11 : (o2 = (r1[o1 <- o]))
+
+axiom H12 : (r1 = result2)
+
+axiom H13 : (r2 = o2)
+
+axiom H14 : (not (i1 = to_rep1(last(a1))))
+
+axiom H15 : (loops_static__loop9__result2 = loops_static__loop9__result)
+
+axiom H16 : (j6 = j)
+
+axiom H17 : (bad3 = bad)
+
+axiom H18 : (loops_static__loop9__result3 = loops_static__loop9__result1)
+
+axiom H19 : (j7 = j3)
+
+axiom H20 : (bad4 = bad1)
+
+axiom H21 :
+  (forall j12:int. (((to_rep1(first(a1)) <= j12) and (j12 <= i1)) ->
+  (to_rep((r2[j12])) = 0)))
+
+axiom H22 : (i1 = result5)
+
+axiom H23 : (i2 = 2)
+
+axiom H24 : (to_rep(o3) = 0)
+
+axiom H25 : ((to_rep1(r__first) <= i2) and (i2 <= to_rep1(r__last)))
+
+axiom H26 : (o4 = i2)
+
+axiom H27 : (o5 = (r2[o4 <- o3]))
+
+axiom H28 : (r2 = result6)
+
+axiom H29 : (r3 = o5)
+
+axiom H30 : (not (i2 = to_rep1(last(a1))))
+
+axiom H31 : (loops_static__loop9__result4 = loops_static__loop9__result2)
+
+axiom H32 : (j10 = j6)
+
+axiom H33 : (bad6 = bad3)
+
+axiom H34 : (loops_static__loop9__result5 = loops_static__loop9__result3)
+
+axiom H35 : (j11 = j7)
+
+axiom H36 : (bad7 = bad4)
+
+axiom H37 :
+  (forall j12:int. (((to_rep1(first(a1)) <= j12) and (j12 <= i2)) ->
+  (to_rep((r3[j12])) = 0)))
+
  (* File "loops_static.adb", line 160, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(int,natural) farray. forall i:int. forall bad:bool.
-  forall j:int. forall loops_static__loop9__result:bool. forall o:natural.
-  forall o1:int. forall o2:(int,natural) farray. forall o3:natural.
-  forall o4:int. forall o5:(int,natural) farray. forall bad1:bool.
-  forall j1:int. forall loops_static__loop9__result1:bool.
-  forall result:(int,natural) farray. forall r1:(int,natural) farray.
-  forall result1:int. forall i1:int. forall result2:(int,natural) farray.
-  forall r2:(int,natural) farray. forall bad2:bool. forall j2:int.
-  forall loops_static__loop9__result2:bool. forall bad3:bool. forall j3:int.
-  forall loops_static__loop9__result3:bool. forall result3:int.
-  forall i2:int. forall result4:(int,natural) farray.
-  forall r3:(int,natural) farray. forall bad4:bool. forall j4:int.
-  forall loops_static__loop9__result4:bool. forall bad5:bool. forall j5:int.
-  forall loops_static__loop9__result5:bool. (dynamic_property((-2147483648),
-  2147483647, to_rep1(first(a1)), to_rep1(last(a1))) -> ((((result = r) and
-  (r1 = a)) and ((to_rep1(r__first) = to_rep1(first(a1))) and
-  (to_rep1(r__last) = to_rep1(last(a1))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep1(r__first),
-  to_rep1(r__last)) -> (not ((({ int__content = result1 } = { int__content =
-  i }) and (i1 = 1)) and ((((to_rep(o) = 0) and
-  ((((to_rep1(r__first) <= i1) and (i1 <= to_rep1(r__last))) and
-  (o1 = i1)) and (o2 = (r1[o1 <- o])))) and ((r1 = result2) and
-  (r2 = o2))) and (((not (i1 = to_rep1(last(a1)))) and ((({ bool__content =
-  loops_static__loop9__result2 } = { bool__content =
-  loops_static__loop9__result }) and (({ int__content = j2 } = {
-  int__content = j }) and ({ bool__content = bad2 } = { bool__content = bad
-  }))) and ((loops_static__loop9__result3 = loops_static__loop9__result1) and
-  ((j3 = j1) and (bad3 = bad1))))) and
-  ((forall j6:int. (((to_rep1(first(a1)) <= j6) and (j6 <= i1)) ->
-   (to_rep((r2[j6])) = 0))) and
-  (((i1 = result3) and (i2 = 2)) and ((((to_rep(o3) = 0) and
-  ((((to_rep1(r__first) <= i2) and (i2 <= to_rep1(r__last))) and
-  (o4 = i2)) and (o5 = (r2[o4 <- o3])))) and ((r2 = result4) and
-  (r3 = o5))) and (((not (i2 = to_rep1(last(a1)))) and ((({ bool__content =
-  loops_static__loop9__result4 } = { bool__content =
-  loops_static__loop9__result2 }) and (({ int__content = j4 } = {
-  int__content = j2 }) and ({ bool__content = bad4 } = { bool__content = bad2
-  }))) and ((loops_static__loop9__result5 = loops_static__loop9__result3) and
-  ((j5 = j3) and (bad5 = bad3))))) and
-  (forall j6:int. (((to_rep1(first(a1)) <= j6) and (j6 <= i2)) ->
-  (to_rep((r3[j6])) = 0)))))))))))))))
+goal WP_parameter_def : false

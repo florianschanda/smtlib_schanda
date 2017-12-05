@@ -100,6 +100,7 @@
 (assert (in_range1 last))
 (assert (not (= (empty last) true)))
 (assert (and (= result (empty last)) (= (= result true) (< last 1))))
-(assert (not (not (= result true))))
+(assert (= result true))
+(assert (not false))
 (check-sat)
 (exit)

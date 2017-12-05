@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -140,6 +140,86 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic s : int
+
+logic v : int
+
+logic valid : bool
+
+logic tmp : int
+
+logic o : int
+
+logic s1 : int
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : int
+
+logic v1 : int
+
+logic result2 : bool
+
+logic valid1 : bool
+
+logic s2 : int
+
+logic v2 : int
+
+logic valid2 : bool
+
+logic tmp2 : int
+
+logic s3 : int
+
+logic v3 : int
+
+logic valid3 : bool
+
+logic tmp3 : int
+
+axiom H : in_range1(s)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(v))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
+
+axiom H3 : in_range1(s1)
+
+axiom H4 : (o = s1)
+
+axiom H5 : (result = tmp)
+
+axiom H6 : (tmp1 = o)
+
+axiom H7 : (result1 = v)
+
+axiom H8 : (v1 = tmp1)
+
+axiom H9 : (result2 = valid)
+
+axiom H10 : (valid1 = of_int(1))
+
+axiom H11 : (tmp2 = tmp1)
+
+axiom H12 : (valid1 = valid2)
+
+axiom H13 : (v2 = v1)
+
+axiom H14 : (s2 = s1)
+
+axiom H15 : (tmp3 = tmp1)
+
+axiom H16 : (valid3 = valid1)
+
+axiom H17 : (v3 = v1)
+
+axiom H18 : (s3 = s1)
+
+axiom H19 : (valid2 = true)
 
  (* File "inc.ads", line 29, characters 0-0 *)
 goal WP_parameter_def : true

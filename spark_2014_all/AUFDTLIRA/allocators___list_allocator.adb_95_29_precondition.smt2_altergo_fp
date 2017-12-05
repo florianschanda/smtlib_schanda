@@ -989,33 +989,172 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range6(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
- (* File "list_allocator.ads", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep1.
-  forall model____split_fields1:us_rep2. forall data:(int,us_rep) farray.
-  forall first_available:int. forall o:int. forall o1:status.
-  forall o2:resource. forall o3:status. forall o4:resource. forall o5:status.
-  forall o6:int. forall o7:resource. forall o8:status. forall o9:status.
-  forall o10:resource. forall o11:status. forall o12:resource.
-  forall o13:int. forall o14:(int,us_rep) farray. forall result:bool.
-  forall result1:(int,us_rep) farray. forall data1:(int,us_rep) farray.
-  forall result2:int. forall first_available1:int.
-  (in_range(first_available) -> (in_range(res) -> ((is_valid(data,
-  first_available, { rec__list_allocator__m__t__available =
-  model____split_fields; rec__list_allocator__m__t__allocated =
-  model____split_fields1 }) = true) -> ((((not (res = 0)) and
-  ((((((((1 <= res) and (res <= 10000)) and (o = res)) and ({
-  us_split_fields1 = { rec__list_allocator__cell__stat = o1;
-  rec__list_allocator__cell__next = o2 } } = (data[o]))) and ((o1 = o3) and
-  (o2 = o4))) and (o5 = o3)) and (o6 = to_rep1(o5))) and (((o6 = 1) and
-  (result = true)) or ((not (o6 = 1)) and (result = false))))) or
-  ((res = 0) and (result = false))) -> ((result = true) ->
-  ((((((to_rep(o7) = first_available) and ((to_rep1(o8) = 0) and
-  ((o8 = o9) and (o7 = o10)))) and ((o11 = o9) and (o12 = o10))) and
-  ((((1 <= res) and (res <= 10000)) and (o13 = res)) and
-  (o14 = (data[o13 <- { us_split_fields1 = {
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep2
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic o : int
+
+logic o1 : status
+
+logic o2 : resource
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : int
+
+logic o7 : resource
+
+logic o8 : status
+
+logic o9 : status
+
+logic o10 : resource
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : int
+
+logic o14 : (int,us_rep) farray
+
+logic o15 : us_rep2
+
+logic o16 : us_rep1
+
+logic o17 : us_rep2
+
+logic temp___294 : us_rep1
+
+logic temp___2941 : us_rep2
+
+logic o18 : us_rep1
+
+logic o19 : us_rep1
+
+logic o20 : us_rep2
+
+logic temp___296 : us_rep1
+
+logic temp___2961 : us_rep2
+
+logic model____split_fields2 : us_rep1
+
+logic model____split_fields3 : us_rep2
+
+logic data1 : (int,us_rep) farray
+
+logic first_available1 : int
+
+logic result : bool
+
+logic result1 : (int,us_rep) farray
+
+logic data2 : (int,us_rep) farray
+
+logic result2 : int
+
+logic first_available2 : int
+
+logic result3 : us_rep1
+
+logic result4 : us_rep2
+
+logic model____split_fields4 : us_rep1
+
+logic model____split_fields5 : us_rep2
+
+logic result5 : us_rep1
+
+logic result6 : us_rep2
+
+logic model____split_fields6 : us_rep1
+
+logic model____split_fields7 : us_rep2
+
+logic model____split_fields8 : us_rep1
+
+logic model____split_fields9 : us_rep2
+
+logic data3 : (int,us_rep) farray
+
+logic first_available3 : int
+
+logic model____split_fields10 : us_rep1
+
+logic model____split_fields11 : us_rep2
+
+logic data4 : (int,us_rep) farray
+
+logic first_available4 : int
+
+axiom H : in_range(first_available)
+
+axiom H1 : in_range(res)
+
+axiom H2 : (is_valid(data, first_available, {
+  rec__list_allocator__m__t__available = model____split_fields;
+  rec__list_allocator__m__t__allocated = model____split_fields1 }) = true)
+
+axiom H3 : ((not (res = 0)) -> ((1 <= res) and (res <= 10000)))
+
+axiom H4 : ((not (res = 0)) -> (o = res))
+
+axiom H5 : ((not (res = 0)) -> ({ us_split_fields1 = {
+  rec__list_allocator__cell__stat = o1; rec__list_allocator__cell__next = o2
+  } } = (data[o])))
+
+axiom H6 : ((not (res = 0)) -> (o1 = o3))
+
+axiom H7 : ((not (res = 0)) -> (o2 = o4))
+
+axiom H8 : ((not (res = 0)) -> (o5 = o3))
+
+axiom H9 : ((not (res = 0)) -> (o6 = to_rep1(o5)))
+
+axiom H10 : ((not (res = 0)) -> (((o6 = 1) -> (result = true)) and
+  ((not (o6 = 1)) -> (result = false))))
+
+axiom H11 : ((res = 0) -> (result = false))
+
+axiom H12 : (result = true)
+
+axiom H13 : (to_rep(o7) = first_available)
+
+axiom H14 : (to_rep1(o8) = 0)
+
+axiom H15 : (o8 = o9)
+
+axiom H16 : (o7 = o10)
+
+axiom H17 : (o11 = o9)
+
+axiom H18 : (o12 = o10)
+
+axiom H19 : ((1 <= res) and (res <= 10000))
+
+axiom H20 : (o13 = res)
+
+axiom H21 : (o14 = (data[o13 <- { us_split_fields1 = {
   rec__list_allocator__cell__stat = o11; rec__list_allocator__cell__next =
-  o12 } }])))) and (({ map__content = result1 } = { map__content = data
-  }) and (data1 = o14))) -> ((({ int__content = result2 } = { int__content =
-  first_available }) and (first_available1 = res)) ->
-  (contains(model____split_fields1, res) = true)))))))))
+  o12 } }]))
+
+axiom H22 : (result1 = data)
+
+axiom H23 : (data2 = o14)
+
+axiom H24 : (result2 = first_available)
+
+axiom H25 : (first_available2 = res)
+
+ (* File "list_allocator.ads", line 47, characters 0-0 *)
+goal WP_parameter_def : (contains(model____split_fields1, res) = true)

@@ -66,6 +66,7 @@
 (assert (= last tmp_b))
 (declare-const b Int)
 (declare-const c6b Int)
+(declare-const o Int)
 (assert (in_range a))
 (assert (=> (<= 0 2147483647) (in_range b)))
 (assert (= a c5b))

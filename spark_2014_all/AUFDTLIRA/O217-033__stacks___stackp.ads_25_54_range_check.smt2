@@ -525,6 +525,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
 (assert (in_range1 e))
 (assert (not (= (length (get_model (mk___rep (mk___split_fields s__split_fields s__split_fields1 s__split_fields2) s__attr__tag))) 0)))
 (assert (=> (<= 1 1) (= o (+ (- 1 1) 1))))

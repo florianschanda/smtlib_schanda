@@ -122,6 +122,7 @@
 (declare-const o integer)
 (declare-const o1 Int)
 (declare-const o2 (Array Int integer))
+(declare-const o3 Int)
 (declare-const result (Array Int integer))
 (declare-const a1 (Array Int integer))
 (declare-const a2 (Array Int integer))

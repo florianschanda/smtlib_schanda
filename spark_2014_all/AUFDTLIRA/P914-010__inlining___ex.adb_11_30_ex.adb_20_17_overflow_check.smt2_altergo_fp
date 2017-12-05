@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -297,11 +297,195 @@ axiom temp___String_Literal_177__def_axiom :
   (to_rep((temp___String_Literal_177(void)[16])) = 111)) and
   (to_rep((temp___String_Literal_177(void)[17])) = 119))
 
+logic the_count : int
+
+logic result__ : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic result2 : int
+
+logic result__2 : int
+
+logic result3 : int
+
+logic index2 : int
+
+logic result4 : int
+
+logic result__3 : int
+
+logic result5 : int
+
+logic index3 : int
+
+logic result6 : int
+
+logic result__4 : int
+
+logic result7 : int
+
+logic index4 : int
+
+logic result8 : int
+
+logic result__5 : int
+
+logic result9 : int
+
+logic index5 : int
+
+logic result10 : int
+
+logic result__6 : int
+
+logic result11 : int
+
+logic index6 : int
+
+logic result12 : int
+
+logic result__7 : int
+
+logic result13 : int
+
+logic index7 : int
+
+logic result14 : int
+
+logic result__8 : int
+
+logic result15 : int
+
+logic index8 : int
+
+logic result16 : int
+
+logic result__9 : int
+
+logic result17 : int
+
+logic index9 : int
+
+logic result18 : int
+
+logic result__10 : int
+
+logic result19 : int
+
+logic index10 : int
+
+logic result20 : int
+
+logic result__11 : int
+
+logic result21 : int
+
+logic index11 : int
+
+logic result22 : int
+
+logic result__12 : int
+
+logic result23 : int
+
+logic index12 : int
+
+logic result24 : int
+
+logic result__13 : int
+
+logic result25 : int
+
+logic index13 : int
+
+logic result26 : int
+
+logic result__14 : int
+
+logic result27 : int
+
+logic index14 : int
+
+logic result28 : int
+
+logic result__15 : int
+
+logic result29 : int
+
+logic index15 : int
+
+logic result30 : int
+
+logic result__16 : int
+
+logic result31 : int
+
+logic index16 : int
+
+logic result32 : int
+
+logic result__17 : int
+
+logic result33 : int
+
+logic index17 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(the_count))
+
+axiom H1 : (result = result__)
+
+axiom H2 : (result__1 = 0)
+
+axiom H3 : in_range1(result__1)
+
+axiom H4 : (result1 = index)
+
+axiom H5 : (index1 = 1)
+
+axiom H6 : (to_rep((c7b[index1])) = 119)
+
  (* File "ex.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_count:int. forall result__:int. forall index:int.
-  forall result:int. forall result__1:int. forall result1:int.
-  forall index1:int. (((0 <= 2147483647) -> in_range1(the_count)) ->
-  (((result = result__) and (result__1 = 0)) -> (in_range1(result__1) ->
-  (((result1 = index) and (index1 = 1)) -> ((to_rep((c7b[index1])) = 119) ->
-  in_range((result__1 + 1))))))))
+goal WP_parameter_def : in_range((result__1 + 1))

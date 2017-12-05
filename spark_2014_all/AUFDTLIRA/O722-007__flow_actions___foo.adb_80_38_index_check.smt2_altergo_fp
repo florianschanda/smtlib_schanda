@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -657,16 +657,72 @@ type t75b__ref = { t75b__content : us_t2
 
 function t75b__ref___projection(a: t75b__ref) : us_t2 = (a).t75b__content
 
+logic new_str : (int,character) farray
+
+logic pos : int
+
+logic x : int
+
+logic y : int
+
+logic o : (int,character) farray
+
+logic temp___183 : (int,character) farray
+
+logic temp___1831 : t
+
+logic o1 : int
+
+logic o2 : character
+
+logic o3 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : int
+
+logic x1 : int
+
+logic result2 : int
+
+logic y1 : int
+
+logic result3 : bool
+
+axiom H : in_range1(n)
+
+axiom H1 : (result = pos)
+
+axiom H2 : (pos1 = n)
+
+axiom H3 : in_range(pos1)
+
+axiom H4 : (result1 = x)
+
+axiom H5 : (x1 = 1)
+
+axiom H6 : in_range(x1)
+
+axiom H7 : (result2 = y)
+
+axiom H8 : (y1 = 1)
+
+axiom H9 : in_range(y1)
+
+axiom H10 : (pos1 = r67b)
+
+axiom H11 : in_range(r67b)
+
+axiom H12 : ((n <= r67b) -> (((1 <= n) and (n <= 5)) and ((1 <= r67b) and
+  (r67b <= 5))))
+
+axiom H13 : (o = new_str)
+
+axiom H14 : (o = temp___183)
+
+axiom H15 : (mk(n, r67b) = temp___1831)
+
  (* File "foo.adb", line 61, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray. forall pos:int. forall x:int.
-  forall y:int. forall o:(int,character) farray.
-  forall temp___183:(int,character) farray. forall temp___1831:t.
-  forall result:int. forall pos1:int. forall result1:int. forall x1:int.
-  forall result2:int. forall y1:int. (in_range1(n) -> (((result = pos) and
-  (pos1 = n)) -> (in_range(pos1) -> (((result1 = x) and (x1 = 1)) ->
-  (in_range(x1) -> (((result2 = y) and (y1 = 1)) -> (in_range(y1) ->
-  (((pos1 = r67b) and in_range(r67b)) -> (((((n <= r67b) -> (((1 <= n) and
-  (n <= 5)) and ((1 <= r67b) and (r67b <= 5)))) and (o = new_str)) and
-  ((o = temp___183) and (mk(n, r67b) = temp___1831))) ->
-  (to_rep1(first(temp___1831)) <= 1)))))))))))
+goal WP_parameter_def : (to_rep1(first(temp___1831)) <= 1)

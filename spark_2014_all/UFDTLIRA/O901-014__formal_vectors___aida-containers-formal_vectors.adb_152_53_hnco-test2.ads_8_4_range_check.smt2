@@ -276,6 +276,7 @@
 (define-fun dynamic_invariant10 ((temp___expr_393 Int) (temp___is_init_390 Bool) (temp___skip_constant_391 Bool) (temp___do_toplevel_392 Bool)) Bool (=> (or (= temp___is_init_390 true) (<= (- 2147483648) 2147483647)) (in_range11 temp___expr_393)))
 (assert (forall ((container1 us_rep2)) (forall ((position Int)) (! (=> (and (dynamic_invariant9 position true true true) (and (<= 1 position) (<= position (last container1)))) (dynamic_invariant10 (get container1 position) true false true)) :pattern ((get container1 position))))))
 (declare-const us Int)
+(declare-const us1 Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 container)))))))
 (assert (in_range1 item))
 (assert (in_range index))

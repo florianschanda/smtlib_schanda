@@ -85,6 +85,12 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : true
+
+axiom H1 : ((match_bool(a, true, b) = true) -> (not (match_bool(a, b,
+  false) = true)))
+
+axiom H2 : (not (match_bool(a, true, b) = false))
+
  (* File "logic.adb", line 91, characters 0-0 *)
-goal WP_parameter_def : (((match_bool(a, true, b) = true) and (match_bool(a,
-  b, false) = false)) -> ((a = true) or (b = true)))
+goal WP_parameter_def : ((a = true) or (b = true))

@@ -291,6 +291,8 @@
 (declare-const us Int)
 (declare-const result (_ BitVec 8))
 (declare-const x1 (_ BitVec 8))
+(declare-const foo__lists__append__container__fields us_main_type)
+(assert true)
 (assert (and (= us 5) (in_range 5)))
 (assert (default_initial_assumption (mk___rep l__split_discrs (mk___split_fields l__split_fields)) false))
 (assert (= 5 (to_rep (rec__foo__lists__list__capacity l__split_discrs))))

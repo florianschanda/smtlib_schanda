@@ -252,5 +252,7 @@ function r__ref___projection(a: r__ref) : us_rep1 = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : false
+
  (* File "p.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

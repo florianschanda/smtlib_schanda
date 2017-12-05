@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -287,7 +287,31 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom x__def_axiom : (x = 22)
 
+logic global : int
+
+logic k : int
+
+logic z : int
+
+logic tv : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic z1 : int
+
+logic result1 : int
+
+logic tv1 : int
+
+axiom H : in_range(global)
+
+axiom H1 : (in_range1(x) and (mod(x, 2) = 0))
+
+axiom H2 : ((0 <= 1000) -> in_range(k))
+
  (* File "sub.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall global:int. forall k:int. (in_range(global) -> ((in_range1(x) and
-  (mod(x, 2) = 0)) -> (((0 <= 1000) -> in_range(k)) -> (mod(22, 2) = 0)))))
+goal WP_parameter_def : (mod(22, 2) = 0)

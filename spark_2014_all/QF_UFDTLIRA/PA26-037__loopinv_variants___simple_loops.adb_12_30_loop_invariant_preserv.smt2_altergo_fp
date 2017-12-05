@@ -325,5 +325,576 @@ function t8b__ref___projection(a: t8b__ref) : t8b = (a).t8b__content
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic prop__ : bool
+
+logic i : int
+
+logic j : int
+
+logic i1 : int
+
+logic j1 : int
+
+logic i2 : int
+
+logic j2 : int
+
+logic i3 : int
+
+logic j3 : int
+
+logic temp___173 : int
+
+logic temp___172 : bool
+
+logic temp___169 : int
+
+logic temp___168 : bool
+
+logic temp___181 : int
+
+logic temp___180 : bool
+
+logic temp___177 : int
+
+logic temp___176 : bool
+
+logic temp___189 : int
+
+logic temp___188 : bool
+
+logic temp___185 : int
+
+logic temp___184 : bool
+
+logic temp___193 : int
+
+logic temp___192 : bool
+
+logic prop__1 : bool
+
+logic j4 : int
+
+logic j5 : int
+
+logic j6 : int
+
+logic result : int
+
+logic i4 : int
+
+logic result1 : bool
+
+logic prop__2 : bool
+
+logic result2 : int
+
+logic j7 : int
+
+logic prop__3 : bool
+
+logic j8 : int
+
+logic result3 : bool
+
+logic prop__4 : bool
+
+logic result4 : int
+
+logic j9 : int
+
+logic prop__5 : bool
+
+logic j10 : int
+
+logic prop__6 : bool
+
+logic j11 : int
+
+logic prop__7 : bool
+
+logic j12 : int
+
+logic prop__8 : bool
+
+logic j13 : int
+
+logic prop__9 : bool
+
+logic j14 : int
+
+logic prop__10 : bool
+
+logic j15 : int
+
+logic prop__11 : bool
+
+logic i5 : int
+
+logic j16 : int
+
+logic result5 : int
+
+logic i6 : int
+
+logic result6 : bool
+
+logic prop__12 : bool
+
+logic result7 : int
+
+logic j17 : int
+
+logic prop__13 : bool
+
+logic j18 : int
+
+logic result8 : bool
+
+logic prop__14 : bool
+
+logic result9 : int
+
+logic j19 : int
+
+logic prop__15 : bool
+
+logic j20 : int
+
+logic prop__16 : bool
+
+logic j21 : int
+
+logic prop__17 : bool
+
+logic i7 : int
+
+logic j22 : int
+
+logic prop__18 : bool
+
+logic i8 : int
+
+logic j23 : int
+
+logic prop__19 : bool
+
+logic i9 : int
+
+logic j24 : int
+
+logic prop__20 : bool
+
+logic i10 : int
+
+logic j25 : int
+
+logic prop__21 : bool
+
+logic i11 : int
+
+logic j26 : int
+
+logic prop__22 : bool
+
+logic i12 : int
+
+logic j27 : int
+
+logic result10 : int
+
+logic i13 : int
+
+logic result11 : bool
+
+logic prop__23 : bool
+
+logic result12 : int
+
+logic j28 : int
+
+logic prop__24 : bool
+
+logic j29 : int
+
+logic result13 : bool
+
+logic prop__25 : bool
+
+logic result14 : int
+
+logic j30 : int
+
+logic prop__26 : bool
+
+logic j31 : int
+
+logic prop__27 : bool
+
+logic j32 : int
+
+logic prop__28 : bool
+
+logic j33 : int
+
+logic prop__29 : bool
+
+logic j34 : int
+
+logic prop__30 : bool
+
+logic j35 : int
+
+logic prop__31 : bool
+
+logic j36 : int
+
+logic prop__32 : bool
+
+logic j37 : int
+
+logic prop__33 : bool
+
+logic j38 : int
+
+logic prop__34 : bool
+
+logic i14 : int
+
+logic j39 : int
+
+logic result15 : int
+
+logic i15 : int
+
+logic result16 : bool
+
+logic prop__35 : bool
+
+logic result17 : int
+
+logic j40 : int
+
+logic prop__36 : bool
+
+logic j41 : int
+
+logic result18 : bool
+
+logic prop__37 : bool
+
+logic result19 : int
+
+logic j42 : int
+
+logic prop__38 : bool
+
+logic j43 : int
+
+logic prop__39 : bool
+
+logic j44 : int
+
+logic prop__40 : bool
+
+logic i16 : int
+
+logic j45 : int
+
+logic prop__41 : bool
+
+logic i17 : int
+
+logic j46 : int
+
+logic prop__42 : bool
+
+logic i18 : int
+
+logic j47 : int
+
+logic prop__43 : bool
+
+logic i19 : int
+
+logic j48 : int
+
+logic prop__44 : bool
+
+logic i20 : int
+
+logic j49 : int
+
+logic prop__45 : bool
+
+logic i21 : int
+
+logic j50 : int
+
+logic result20 : int
+
+logic i22 : int
+
+logic result21 : bool
+
+logic prop__46 : bool
+
+logic result22 : int
+
+logic j51 : int
+
+logic prop__47 : bool
+
+logic j52 : int
+
+logic result23 : bool
+
+logic prop__48 : bool
+
+logic result24 : int
+
+logic j53 : int
+
+logic prop__49 : bool
+
+logic j54 : int
+
+logic prop__50 : bool
+
+logic j55 : int
+
+logic prop__51 : bool
+
+logic j56 : int
+
+logic prop__52 : bool
+
+logic j57 : int
+
+logic prop__53 : bool
+
+logic j58 : int
+
+logic prop__54 : bool
+
+logic j59 : int
+
+logic prop__55 : bool
+
+logic j60 : int
+
+logic prop__56 : bool
+
+logic j61 : int
+
+logic prop__57 : bool
+
+logic i23 : int
+
+logic j62 : int
+
+logic result25 : int
+
+logic i24 : int
+
+logic result26 : bool
+
+logic prop__58 : bool
+
+logic result27 : int
+
+logic j63 : int
+
+logic prop__59 : bool
+
+logic j64 : int
+
+logic result28 : bool
+
+logic prop__60 : bool
+
+logic result29 : int
+
+logic j65 : int
+
+logic prop__61 : bool
+
+logic j66 : int
+
+logic prop__62 : bool
+
+logic j67 : int
+
+logic prop__63 : bool
+
+logic i25 : int
+
+logic j68 : int
+
+logic prop__64 : bool
+
+logic i26 : int
+
+logic j69 : int
+
+logic prop__65 : bool
+
+logic i27 : int
+
+logic j70 : int
+
+logic prop__66 : bool
+
+logic i28 : int
+
+logic j71 : int
+
+logic prop__67 : bool
+
+logic i29 : int
+
+logic j72 : int
+
+logic prop__68 : bool
+
+logic i30 : int
+
+logic j73 : int
+
+logic result30 : int
+
+logic i31 : int
+
+logic result31 : bool
+
+logic prop__69 : bool
+
+logic result32 : int
+
+logic j74 : int
+
+logic prop__70 : bool
+
+logic j75 : int
+
+logic result33 : bool
+
+logic prop__71 : bool
+
+logic result34 : int
+
+logic j76 : int
+
+logic prop__72 : bool
+
+logic j77 : int
+
+logic prop__73 : bool
+
+logic j78 : int
+
+logic prop__74 : bool
+
+logic j79 : int
+
+logic prop__75 : bool
+
+logic j80 : int
+
+logic prop__76 : bool
+
+logic j81 : int
+
+logic prop__77 : bool
+
+logic j82 : int
+
+logic prop__78 : bool
+
+logic j83 : int
+
+logic prop__79 : bool
+
+logic j84 : int
+
+logic prop__80 : bool
+
+logic i32 : int
+
+logic j85 : int
+
+logic result35 : int
+
+logic i33 : int
+
+logic result36 : bool
+
+logic prop__81 : bool
+
+logic result37 : int
+
+logic j86 : int
+
+logic prop__82 : bool
+
+logic j87 : int
+
+logic result38 : bool
+
+logic prop__83 : bool
+
+logic result39 : int
+
+logic j88 : int
+
+logic prop__84 : bool
+
+logic j89 : int
+
+logic prop__85 : bool
+
+logic j90 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i4 = 1)
+
+axiom H2 : (1 <= i4)
+
+axiom H3 : (i4 <= 3)
+
+axiom H4 : (result1 = prop__)
+
+axiom H5 : (prop__2 = of_int(0))
+
+axiom H6 : (result2 = j)
+
+axiom H7 : (j7 = 1)
+
+axiom H8 : (((1 <= j7) and (j7 <= 10)) -> (((temp___169 = j7) and
+  ((temp___168 = prop__2) and ((prop__3 = true) and ((((1 <= 10) ->
+  in_range2(j8)) and ((1 <= j8) and (j8 <= 10))) and
+  (((prop__3 = result3) and (prop__4 = of_int(1))) and (j8 = 10)))))) and
+  (((j8 = j12) and (prop__4 = prop__7)) and ((j13 = j8) and
+  (prop__8 = prop__4)))))
+
+axiom H9 : (((1 <= j7) and (j7 <= 10)) -> (j14 = j12))
+
+axiom H10 : (((1 <= j7) and (j7 <= 10)) -> (prop__9 = prop__7))
+
+axiom H11 : (((1 <= j7) and (j7 <= 10)) -> (j15 = j13))
+
+axiom H12 : (((1 <= j7) and (j7 <= 10)) -> (prop__10 = prop__8))
+
+axiom H13 : ((not ((1 <= j7) and (j7 <= 10))) -> (j7 = j14))
+
+axiom H14 : ((not ((1 <= j7) and (j7 <= 10))) -> (prop__2 = prop__9))
+
+axiom H15 : ((not ((1 <= j7) and (j7 <= 10))) -> (j15 = j7))
+
+axiom H16 : ((not ((1 <= j7) and (j7 <= 10))) -> (prop__10 = prop__2))
+
+axiom H17 : true
+
  (* File "simple_loops.adb", line 1, characters 0-0 *)
 goal WP_parameter_def : true

@@ -130,7 +130,7 @@
 (assert (=> (not (= first_available 0)) (= o5 o3)))
 (assert (=> (not (= first_available 0)) (= o6 (to_rep1 o5))))
 (assert (=> (not (= first_available 0)) (= result (ite (= o6 0) true false))))
-(assert (=> (not (not (= first_available 0))) (= result (of_int 1))))
+(assert (=> (= first_available 0) (= result (of_int 1))))
 (assert (= result true))
 (assert (<= 1 r))
 (assert (<= r 10000))

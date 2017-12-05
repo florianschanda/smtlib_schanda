@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -405,46 +405,372 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic courant : int
+
+logic possible : int
+
+logic indexbis__result : int
+
+logic o : int
+
+logic temp___153 : int
+
+logic i : int
+
+logic j : int
+
+logic o1 : int
+
+logic o2 : character
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___152 : int
+
+logic j1 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic i1 : int
+
+logic j2 : int
+
+logic o8 : int
+
+logic o9 : character
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : int
+
+logic o15 : character
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic i2 : int
+
+logic j3 : int
+
+logic o24 : int
+
+logic o25 : character
+
+logic o26 : int
+
+logic j4 : int
+
+logic o27 : int
+
+logic o28 : character
+
+logic o29 : int
+
+logic i3 : int
+
+logic j5 : int
+
+logic o30 : int
+
+logic o31 : character
+
+logic o32 : int
+
+logic o33 : bool
+
+logic courant1 : int
+
+logic possible1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic indexbis__result1 : int
+
+logic result2 : int
+
+logic courant2 : int
+
+logic courant3 : int
+
+logic possible2 : int
+
+logic indexbis__result2 : int
+
+logic result3 : int
+
+logic possible3 : int
+
+logic possible4 : int
+
+logic indexbis__result3 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : int
+
+logic indexbis__result4 : int
+
+logic result8 : int
+
+logic possible5 : int
+
+logic possible6 : int
+
+logic indexbis__result5 : int
+
+logic possible7 : int
+
+logic indexbis__result6 : int
+
+logic possible8 : int
+
+logic indexbis__result7 : int
+
+logic possible9 : int
+
+logic indexbis__result8 : int
+
+logic possible10 : int
+
+logic indexbis__result9 : int
+
+logic possible11 : int
+
+logic indexbis__result10 : int
+
+logic possible12 : int
+
+logic indexbis__result11 : int
+
+logic possible13 : int
+
+logic indexbis__result12 : int
+
+logic result9 : int
+
+logic courant4 : int
+
+logic result10 : int
+
+logic indexbis__result13 : int
+
+logic courant5 : int
+
+logic indexbis__result14 : int
+
+logic courant6 : int
+
+logic indexbis__result15 : int
+
+logic possible14 : int
+
+logic indexbis__result16 : int
+
+logic possible15 : int
+
+logic indexbis__result17 : int
+
+logic courant7 : int
+
+logic possible16 : int
+
+logic indexbis__result18 : int
+
+logic courant8 : int
+
+logic possible17 : int
+
+logic indexbis__result19 : int
+
+logic courant9 : int
+
+logic possible18 : int
+
+logic indexbis__result20 : int
+
+logic courant10 : int
+
+logic possible19 : int
+
+logic indexbis__result21 : int
+
+logic courant11 : int
+
+logic possible20 : int
+
+logic indexbis__result22 : int
+
+logic courant12 : int
+
+logic possible21 : int
+
+logic indexbis__result23 : int
+
+logic courant13 : int
+
+logic possible22 : int
+
+logic indexbis__result24 : int
+
+logic courant14 : int
+
+logic possible23 : int
+
+logic indexbis__result25 : int
+
+logic courant15 : int
+
+logic possible24 : int
+
+logic indexbis__result26 : int
+
+logic courant16 : int
+
+logic possible25 : int
+
+logic indexbis__result27 : int
+
+logic courant17 : int
+
+logic possible26 : int
+
+logic indexbis__result28 : int
+
+logic courant18 : int
+
+logic possible27 : int
+
+logic indexbis__result29 : int
+
+logic courant19 : int
+
+logic possible28 : int
+
+logic indexbis__result30 : int
+
+logic courant20 : int
+
+logic possible29 : int
+
+logic indexbis__result31 : int
+
+logic courant21 : int
+
+logic possible30 : int
+
+logic indexbis__result32 : int
+
+logic courant22 : int
+
+logic possible31 : int
+
+logic indexbis__result33 : int
+
+logic result11 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(c1)),
+  to_rep1(last(c1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H2 : ((length({ elts = s; rt = s1 }) = 0) -> (result = true))
+
+axiom H3 : ((not (length({ elts = s; rt = s1 }) = 0)) -> (((length({ elts =
+  c; rt = c1 }) = 0) -> (result = true)) and ((not (length({ elts = c; rt =
+  c1 }) = 0)) -> (result = false))))
+
+axiom H4 : (not (result = true))
+
+axiom H5 : ((o = to_rep1(first(s1))) and in_range2(to_rep1(first(s1))))
+
+axiom H6 : (result2 = courant)
+
+axiom H7 : (courant2 = o)
+
+axiom H8 : in_range2(courant2)
+
+axiom H9 : (((to_rep1(first(s1)) <= courant3) and
+  (courant3 <= to_rep1(last(s1)))) and
+  (not (exists i4:int. (((to_rep1(first(s1)) <= i4) and
+       (i4 <= (courant3 - 1))) and
+       (exists j6:int. (((to_rep1(first(c1)) <= j6) and
+       (j6 <= to_rep1(last(c1)))) and (to_rep((s[i4])) = to_rep((c[j6])))))))))
+
+axiom H10 : ((1 <= 2147483647) -> in_range2(courant3))
+
+axiom H11 : ((o4 = to_rep1(first(c1))) and in_range2(to_rep1(first(c1))))
+
+axiom H12 : (possible2 = result3)
+
+axiom H13 : (possible3 = o4)
+
+axiom H14 : in_range2(possible3)
+
+axiom H15 : (((((to_rep1(first(s1)) <= courant3) and
+  (courant3 <= to_rep1(last(s1)))) and
+  (not (exists i4:int. (((to_rep1(first(s1)) <= i4) and
+       (i4 <= (courant3 - 1))) and
+       (exists j6:int. (((to_rep1(first(c1)) <= j6) and
+       (j6 <= to_rep1(last(c1)))) and (to_rep((s[i4])) = to_rep((c[j6]))))))))) and
+  ((to_rep1(first(c1)) <= possible4) and
+  (possible4 <= to_rep1(last(c1))))) and
+  (not (exists j6:int. (((to_rep1(first(c1)) <= j6) and
+       (j6 <= (possible4 - 1))) and
+       (to_rep((s[courant3])) = to_rep((c[j6])))))))
+
+axiom H16 : ((1 <= 2147483647) -> in_range2(possible4))
+
+axiom H17 : (to_rep1(first(s1)) <= courant3)
+
+axiom H18 : (courant3 <= to_rep1(last(s1)))
+
+axiom H19 : (to_rep1(first(s1)) <= i1)
+
+axiom H20 : (i1 <= (courant3 - 1))
+
+axiom H21 : (to_rep1(first(c1)) <= j2)
+
+axiom H22 : (j2 <= to_rep1(last(c1)))
+
+axiom H23 : ((to_rep1(first(c1)) <= j2) and (j2 <= to_rep1(last(c1))))
+
+axiom H24 : (o8 = j2)
+
+axiom H25 : (o9 = (c[o8]))
+
+axiom H26 : (o10 = to_rep(o9))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall courant:int. forall o:int. forall o1:int. forall i:int.
-  forall j:int. forall o2:int. forall o3:character. forall o4:int.
-  forall result:bool. forall result1:int. forall courant1:int.
-  forall courant2:int. forall possible:int. forall result2:int.
-  forall possible1:int. forall possible2:int. (dynamic_property(1,
-  2147483647, to_rep1(first(c1)), to_rep1(last(c1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) -> ((((length({ elts =
-  s; rt = s1 }) = 0) and (result = true)) or ((not (length({ elts = s; rt =
-  s1 }) = 0)) and (((length({ elts = c; rt = c1 }) = 0) and
-  (result = true)) or ((not (length({ elts = c; rt = c1 }) = 0)) and
-  (result = false))))) -> ((not (result = true)) ->
-  ((((o = to_rep1(first(s1))) and in_range2(to_rep1(first(s1)))) and (({
-  int__content = result1 } = { int__content = courant }) and
-  (courant1 = o))) -> (in_range2(courant1) ->
-  ((((to_rep1(first(s1)) <= courant2) and
-  (courant2 <= to_rep1(last(s1)))) and
-  (not (exists i1:int. (((to_rep1(first(s1)) <= i1) and
-       (i1 <= (courant2 - 1))) and
-       (exists j1:int. (((to_rep1(first(c1)) <= j1) and
-       (j1 <= to_rep1(last(c1)))) and (to_rep((s[i1])) = to_rep((c[j1]))))))))) ->
-  (((1 <= 2147483647) -> in_range2(courant2)) ->
-  (((((o1 = to_rep1(first(c1))) and in_range2(to_rep1(first(c1)))) and
-  ((possible = result2) and (possible1 = o1))) and in_range2(possible1)) ->
-  ((((((to_rep1(first(s1)) <= courant2) and
-  (courant2 <= to_rep1(last(s1)))) and
-  (not (exists i1:int. (((to_rep1(first(s1)) <= i1) and
-       (i1 <= (courant2 - 1))) and
-       (exists j1:int. (((to_rep1(first(c1)) <= j1) and
-       (j1 <= to_rep1(last(c1)))) and (to_rep((s[i1])) = to_rep((c[j1]))))))))) and
-  ((to_rep1(first(c1)) <= possible2) and
-  (possible2 <= to_rep1(last(c1))))) and
-  (not (exists j1:int. (((to_rep1(first(c1)) <= j1) and
-       (j1 <= (possible2 - 1))) and
-       (to_rep((s[courant2])) = to_rep((c[j1]))))))) ->
-  (((1 <= 2147483647) -> in_range2(possible2)) ->
-  (((to_rep1(first(s1)) <= courant2) and (courant2 <= to_rep1(last(s1)))) ->
-  (((to_rep1(first(s1)) <= i) and (i <= (courant2 - 1))) ->
-  (((to_rep1(first(c1)) <= j) and (j <= to_rep1(last(c1)))) ->
-  ((((((to_rep1(first(c1)) <= j) and (j <= to_rep1(last(c1)))) and
-  (o2 = j)) and (o3 = (c[o2]))) and (o4 = to_rep(o3))) ->
-  (to_rep1(first(s1)) <= i)))))))))))))))))
+goal WP_parameter_def : (to_rep1(first(s1)) <= i1)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -467,27 +467,89 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic characters_to_copy : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___267 : int
+
+logic temp___266 : int
+
+logic o2 : int
+
+logic o3 : character
+
+logic o4 : int
+
+logic o5 : character
+
+logic result : int
+
+logic characters_to_copy1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic characters_to_copy2 : int
+
+logic result3 : int
+
+logic characters_to_copy3 : int
+
+logic result4 : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : in_range5(point)
+
+axiom H2 : in_range4(length1)
+
+axiom H3 : ((0 <= 1024) -> in_range4(characters_to_copy))
+
+axiom H4 : (result = characters_to_copy)
+
+axiom H5 : (characters_to_copy1 = length1)
+
+axiom H6 : ((o = length({ elts = source; rt = source1 })) and
+  in_range1(length({ elts = source; rt = source1 })))
+
+axiom H7 : (((o <  characters_to_copy1) -> (result1 = true)) and
+  ((not (o <  characters_to_copy1)) -> (result1 = false)))
+
+axiom H8 : ((result1 = true) -> ((o1 = length({ elts = source; rt = source1
+  })) and in_range4(length({ elts = source; rt = source1 }))))
+
+axiom H9 : ((result1 = true) -> (result2 = characters_to_copy1))
+
+axiom H10 : ((result1 = true) -> (characters_to_copy2 = o1))
+
+axiom H11 : ((not (result1 = true)) ->
+  (characters_to_copy2 = characters_to_copy1))
+
+axiom H12 : ((1024 <  (point + (characters_to_copy2 - 1))) ->
+  (result3 = characters_to_copy2))
+
+axiom H13 : ((1024 <  (point + (characters_to_copy2 - 1))) ->
+  (characters_to_copy3 = ((1024 - point) + 1)))
+
+axiom H14 : ((not (1024 <  (point + (characters_to_copy2 - 1)))) ->
+  (characters_to_copy3 = characters_to_copy2))
+
+axiom H15 : (characters_to_copy3 = r17b)
+
+axiom H16 : in_range4(r17b)
+
+axiom H17 : (1 <= r17b)
+
  (* File "buffers.adb", line 100, characters 0-0 *)
-goal WP_parameter_def :
-  (forall characters_to_copy:int. forall o:int. forall o1:int.
-  forall result:int. forall characters_to_copy1:int. forall result1:bool.
-  forall result2:int. forall characters_to_copy2:int. forall result3:int.
-  forall characters_to_copy3:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) -> (in_range5(point) ->
-  (in_range4(length1) -> (((0 <= 1024) -> in_range4(characters_to_copy)) ->
-  (((result = characters_to_copy) and (characters_to_copy1 = length1)) ->
-  (((((o = length({ elts = source; rt = source1 })) and in_range1(length({
-  elts = source; rt = source1 }))) and (((o <  characters_to_copy1) and
-  (result1 = true)) or ((not (o <  characters_to_copy1)) and
-  (result1 = false)))) and (((result1 = true) and (((o1 = length({ elts =
-  source; rt = source1 })) and in_range4(length({ elts = source; rt = source1
-  }))) and ((result2 = characters_to_copy1) and
-  (characters_to_copy2 = o1)))) or ((not (result1 = true)) and
-  (characters_to_copy2 = characters_to_copy1)))) ->
-  ((((1024 <  (point + (characters_to_copy2 - 1))) and
-  ((result3 = characters_to_copy2) and
-  (characters_to_copy3 = ((1024 - point) + 1)))) or
-  ((not (1024 <  (point + (characters_to_copy2 - 1)))) and
-  (characters_to_copy3 = characters_to_copy2))) ->
-  (((characters_to_copy3 = r17b) and in_range4(r17b)) -> ((1 <= r17b) ->
-  (0 <= 1)))))))))))
+goal WP_parameter_def : (0 <= 1)

@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1895,6 +1895,77 @@ axiom extract_bits_not_inline__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic result__ : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic result : t
+
+logic result__1 : t
+
+logic result1 : t
+
+logic result__2 : t
+
+logic result2 : t
+
+logic result__3 : t
+
+logic result3 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result1 : t
+
+logic result__4 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result2 : t
+
+logic result__5 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result3 : t
+
+logic result__6 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result4 : t
+
+logic result__7 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits__result5 : t
+
+logic result4 : bool
+
+logic result5 : bool
+
+axiom H : true
+
+axiom H1 : in_range(from)
+
+axiom H2 : in_range(to__)
+
+axiom H3 : (from <= to__)
+
+axiom H4 : true
+
+axiom H5 : (2 = 0)
+
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range(from) -> (in_range(to__) ->
-  ((from <= to__) -> ((2 = 0) -> (from <= to__)))))
+goal WP_parameter_def : (from <= to__)

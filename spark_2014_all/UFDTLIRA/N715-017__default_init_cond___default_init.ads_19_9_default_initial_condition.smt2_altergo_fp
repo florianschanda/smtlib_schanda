@@ -288,12 +288,25 @@ axiom mut_discr_ok__def_axiom :
   rec__default_init__mut_discr__f = x1 }; attr__constrained = x2
   }) = true) <-> (not (x = true))))
 
+logic temp___296 : bool
+
+logic temp___295 : bool
+
+logic us : int
+
+logic temp___297 : bool
+
+logic temp___2971 : natural
+
+logic temp___2972 : bool
+
+axiom H : (temp___296 = temp___295)
+
+axiom H1 : ((temp___2972 = false) and ((to_int(temp___297) = 1) ->
+  (to_rep(temp___2971) = init(0))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___296:bool. forall temp___295:bool. forall temp___297:bool.
-  forall temp___2971:natural. forall temp___2972:bool.
-  ((temp___296 = temp___295) -> (((temp___2972 = false) and
-  ((to_int(temp___297) = 1) -> (to_rep(temp___2971) = init(0)))) ->
-  (mut_discr_ok({ us_split_discrs1 = { rec__default_init__mut_discr__b =
-  temp___297 }; us_split_fields1 = { rec__default_init__mut_discr__f =
-  temp___2971 }; attr__constrained = temp___2972 }) = true))))
+goal WP_parameter_def : (mut_discr_ok({ us_split_discrs1 = {
+  rec__default_init__mut_discr__b = temp___297 }; us_split_fields1 = {
+  rec__default_init__mut_discr__f = temp___2971 }; attr__constrained =
+  temp___2972 }) = true)

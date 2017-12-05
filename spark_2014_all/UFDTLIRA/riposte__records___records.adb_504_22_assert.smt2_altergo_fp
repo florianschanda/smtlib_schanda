@@ -358,5 +358,19 @@ logic r2 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic records__field_suppression_on_computation_is_insufficient__result : bool
+
+logic result : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result1 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result2 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result3 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result4 : bool
+
+logic records__field_suppression_on_computation_is_insufficient__result5 : bool
+
  (* File "records.adb", line 498, characters 0-0 *)
 goal WP_parameter_def : (r = true)

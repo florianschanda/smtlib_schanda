@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1622,6 +1622,252 @@ axiom writereg32post__post_axiom :
   (forall val__:t1 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and2(regnew,
   of_int2(18446744069414584320)) = of_int2(0))))))
+
+logic zeroflag : bool
+
+logic xmm0 : t2
+
+logic xmm1 : t2
+
+logic xmm2 : t2
+
+logic rax : t2
+
+logic rbx : t2
+
+logic rsp : t2
+
+logic rbp : t2
+
+logic rdi : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic temp___360 : t2
+
+logic temp___359 : t2
+
+logic temp___358 : (t2,unsigned8) farray
+
+logic temp___361 : t2
+
+logic temp___357 : t2
+
+logic temp___356 : t2
+
+logic temp___355 : t2
+
+logic temp___362 : (t2,unsigned8) farray
+
+logic temp___354 : t2
+
+logic temp___353 : t2
+
+logic temp___352 : bool
+
+logic o : t2
+
+logic o1 : t2
+
+logic o2 : t2
+
+logic o3 : t2
+
+logic o4 : t1
+
+logic o5 : t1
+
+logic o6 : t1
+
+logic o7 : bool
+
+logic o8 : t2
+
+logic o9 : t2
+
+logic zeroflag1 : bool
+
+logic xmm01 : t2
+
+logic xmm11 : t2
+
+logic xmm21 : t2
+
+logic rax1 : t2
+
+logic rbx1 : t2
+
+logic rsp1 : t2
+
+logic rdi1 : t2
+
+logic memory1 : (t2,unsigned8) farray
+
+logic result : t2
+
+logic xmm12 : t2
+
+logic result1 : t2
+
+logic xmm02 : t2
+
+logic rdi2 : t2
+
+logic rax2 : t2
+
+logic memory2 : (t2,unsigned8) farray
+
+logic result2 : t2
+
+logic xmm13 : t2
+
+logic result3 : t2
+
+logic xmm14 : t2
+
+logic result4 : t2
+
+logic rsp2 : t2
+
+logic rsp3 : t2
+
+logic result5 : t2
+
+logic xmm22 : t2
+
+logic rbx2 : t2
+
+logic result6 : bool
+
+logic zeroflag2 : bool
+
+logic result7 : t2
+
+logic xmm23 : t2
+
+logic zeroflag3 : bool
+
+logic xmm03 : t2
+
+logic xmm15 : t2
+
+logic xmm24 : t2
+
+logic rax3 : t2
+
+logic rbx3 : t2
+
+logic rsp4 : t2
+
+logic rdi3 : t2
+
+logic memory3 : (t2,unsigned8) farray
+
+logic zeroflag4 : bool
+
+logic xmm04 : t2
+
+logic xmm16 : t2
+
+logic xmm25 : t2
+
+logic rax4 : t2
+
+logic rbx4 : t2
+
+logic rsp5 : t2
+
+logic rdi4 : t2
+
+logic memory4 : (t2,unsigned8) farray
+
+logic zeroflag5 : bool
+
+logic xmm05 : t2
+
+logic xmm17 : t2
+
+logic xmm26 : t2
+
+logic rax5 : t2
+
+logic rbx5 : t2
+
+logic rsp6 : t2
+
+logic rdi5 : t2
+
+logic memory5 : (t2,unsigned8) farray
+
+logic zeroflag6 : bool
+
+logic xmm06 : t2
+
+logic xmm18 : t2
+
+logic xmm27 : t2
+
+logic rax6 : t2
+
+logic rbx6 : t2
+
+logic rsp7 : t2
+
+logic rdi6 : t2
+
+logic memory6 : (t2,unsigned8) farray
+
+logic zeroflag7 : bool
+
+logic xmm07 : t2
+
+logic xmm19 : t2
+
+logic xmm28 : t2
+
+logic rax7 : t2
+
+logic rbx7 : t2
+
+logic rsp8 : t2
+
+logic rdi7 : t2
+
+logic memory7 : (t2,unsigned8) farray
+
+logic zeroflag8 : bool
+
+logic xmm08 : t2
+
+logic xmm110 : t2
+
+logic xmm29 : t2
+
+logic rax8 : t2
+
+logic rbx8 : t2
+
+logic rsp9 : t2
+
+logic rdi8 : t2
+
+logic memory8 : (t2,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

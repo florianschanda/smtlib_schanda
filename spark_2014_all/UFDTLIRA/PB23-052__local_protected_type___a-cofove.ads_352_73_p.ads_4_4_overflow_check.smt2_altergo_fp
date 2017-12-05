@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type element_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -478,7 +478,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -508,25 +508,51 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range7(get(container, position)))))
 
- (* File "a-cofove.ads", line 304, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall result:bool. (in_range3(before) ->
-  (in_range2(new_item) -> ((((((of_int(1) = true) and
-  (o2 = to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
-  (o2 = 2147483647))) and (in_range4(o2) and (((of_int(1) = true) and
-  (o2 = to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
-  (o2 = 2147483647))))) and (((o3 = length({ us_split_discrs1 = {
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : bool
+
+axiom H : in_range3(before)
+
+axiom H1 : in_range2(new_item)
+
+axiom H2 : ((((of_int(1) = true) ->
+  (o3 = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o3 = 2147483647))) and (in_range4(o3) and (((of_int(1) = true) ->
+  (o3 = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o3 = 2147483647)))))
+
+axiom H3 : ((o4 = length({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = container__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = container__split_fields }
-  })) and (in_range4(o3) and (((of_int(1) = true) and
-  (o3 <= to_rep(container__split_discrs))) or ((not (of_int(1) = true)) and
-  (o3 <= 2147483647))))) and (((o3 <  o2) and (result = true)) or
-  ((not (o3 <  o2)) and (result = false))))) -> ((result = true) ->
-  ((((o = (0 + length1(model__({ us_split_discrs1 = {
+  })) and (in_range4(o4) and (((of_int(1) = true) ->
+  (o4 <= to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o4 <= 2147483647)))))
+
+axiom H4 : (((o4 <  o3) -> (result = true)) and ((not (o4 <  o3)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((o = (0 + length1(model__({ us_split_discrs1 = {
   rec__p__my_vectors__vector__capacity = container__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = container__split_fields }
   })))) and (in_range3(o) and (o = (0 + length1(model__({ us_split_discrs1 =
   { rec__p__my_vectors__vector__capacity = container__split_discrs };
   us_split_fields1 = { rec__p__my_vectors__vector = container__split_fields }
-  })))))) and (o1 = (o + 1))) -> in_range1(o1)))))))
+  }))))))
+
+axiom H7 : (o1 = (o + 1))
+
+ (* File "a-cofove.ads", line 304, characters 0-0 *)
+goal WP_parameter_def : in_range1(o1)

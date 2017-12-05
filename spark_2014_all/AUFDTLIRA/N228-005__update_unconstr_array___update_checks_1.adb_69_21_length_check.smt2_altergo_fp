@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tindexB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -828,18 +828,59 @@ axiom def_axiom1 :
   (forall temp___465:int. (((temp___460(temp___462, temp___463,
   temp___464)).elts4[temp___465]) = of_rep1(temp___462)))))
 
+logic a : (int,integer) farray
+
+logic temp___467 : (int,integer) farray
+
+logic temp___4671 : t4
+
+logic temp___468 : (int,integer) farray
+
+logic temp___4681 : t3
+
+logic o : (int,integer) farray
+
+logic temp___470 : (int,integer) farray
+
+logic temp___4701 : t3
+
+logic temp___471 : (int,integer) farray
+
+logic temp___4711 : t3
+
+logic o1 : (int,integer) farray
+
+logic temp___477 : (int,integer) farray
+
+logic temp___4771 : t2
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : in_range1(new_val)
+
+axiom H3 : (to_rep(first8((temp___460(new_val, 2, i)).rt4)) = 2)
+
+axiom H4 : (to_rep(last8((temp___460(new_val, 2, i)).rt4)) = i)
+
+axiom H5 : ({ elts4 = temp___467; rt4 = temp___4671 } = temp___460(new_val,
+  2, i))
+
  (* File "update_checks_1.ads", line 23, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___467:(int,integer) farray. forall temp___4671:t4.
-  (dynamic_property(1, 8, to_rep(a__first), to_rep(a__last)) ->
-  (in_range3(i) -> (in_range1(new_val) ->
-  (((to_rep(first8((temp___460(new_val, 2, i)).rt4)) = 2) and
-  ((to_rep(last8((temp___460(new_val, 2, i)).rt4)) = i) and ({ elts4 =
-  temp___467; rt4 = temp___4671 } = temp___460(new_val, 2, i)))) ->
   (((to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671))) ->
   (((2 <= i) ->
   (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = ((i - 2) + 1))) and
   ((not (2 <= i)) ->
   (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = 0)))) and
   ((not (to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671)))) ->
-  ((2 <= i) -> (0 = ((i - 2) + 1))))))))))
+  ((2 <= i) -> (0 = ((i - 2) + 1)))))

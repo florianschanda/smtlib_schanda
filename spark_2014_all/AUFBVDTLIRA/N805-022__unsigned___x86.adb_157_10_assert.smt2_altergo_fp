@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2039,15 +2039,240 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall xcx:(int,unsigned_8) farray. forall o:t2. forall o1:bool.
-  forall result:bool. forall xcx1:(int,unsigned_8) farray.
-  (((((o = ecx(xcx)) and (o = add2(add2(add2(toBig2(to_rep((xcx[0]))),
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic memory : (t3,unsigned_8) farray
+
+logic xcx : (int,unsigned_8) farray
+
+logic xsi : (int,unsigned_8) farray
+
+logic xdi : (int,unsigned_8) farray
+
+logic val1 : t
+
+logic val2 : t
+
+logic o : t2
+
+logic o1 : bool
+
+logic temp___257 : bool
+
+logic temp___256 : t
+
+logic temp___255 : bool
+
+logic temp___254 : t
+
+logic temp___253 : (int,unsigned_8) farray
+
+logic temp___252 : (int,unsigned_8) farray
+
+logic temp___251 : (int,unsigned_8) farray
+
+logic o2 : t2
+
+logic o3 : t3
+
+logic o4 : t
+
+logic o5 : t2
+
+logic o6 : t3
+
+logic o7 : t
+
+logic o8 : t2
+
+logic o9 : t2
+
+logic o10 : t2
+
+logic o11 : bool
+
+logic o12 : t2
+
+logic o13 : t2
+
+logic o14 : t2
+
+logic o15 : t2
+
+logic o16 : t2
+
+logic o17 : bool
+
+logic o18 : bool
+
+logic zeroflag1 : bool
+
+logic carryflag1 : bool
+
+logic xcx1 : (int,unsigned_8) farray
+
+logic xsi1 : (int,unsigned_8) farray
+
+logic xdi1 : (int,unsigned_8) farray
+
+logic val11 : t
+
+logic val21 : t
+
+logic result : bool
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic xcx2 : (int,unsigned_8) farray
+
+logic xsi2 : (int,unsigned_8) farray
+
+logic xdi2 : (int,unsigned_8) farray
+
+logic val12 : t
+
+logic val22 : t
+
+logic result1 : t
+
+logic val13 : t
+
+logic result2 : t
+
+logic val23 : t
+
+logic result3 : bool
+
+logic zeroflag3 : bool
+
+logic result4 : bool
+
+logic carryflag3 : bool
+
+logic xcx3 : (int,unsigned_8) farray
+
+logic result5 : bool
+
+logic xsi3 : (int,unsigned_8) farray
+
+logic xdi3 : (int,unsigned_8) farray
+
+logic result6 : bool
+
+logic xsi4 : (int,unsigned_8) farray
+
+logic xdi4 : (int,unsigned_8) farray
+
+logic xsi5 : (int,unsigned_8) farray
+
+logic xdi5 : (int,unsigned_8) farray
+
+logic zeroflag4 : bool
+
+logic carryflag4 : bool
+
+logic xcx4 : (int,unsigned_8) farray
+
+logic xsi6 : (int,unsigned_8) farray
+
+logic xdi6 : (int,unsigned_8) farray
+
+logic val14 : t
+
+logic val24 : t
+
+logic zeroflag5 : bool
+
+logic carryflag5 : bool
+
+logic xcx5 : (int,unsigned_8) farray
+
+logic xsi7 : (int,unsigned_8) farray
+
+logic xdi7 : (int,unsigned_8) farray
+
+logic val15 : t
+
+logic val25 : t
+
+logic zeroflag6 : bool
+
+logic carryflag6 : bool
+
+logic xcx6 : (int,unsigned_8) farray
+
+logic xsi8 : (int,unsigned_8) farray
+
+logic xdi8 : (int,unsigned_8) farray
+
+logic val16 : t
+
+logic val26 : t
+
+logic zeroflag7 : bool
+
+logic carryflag7 : bool
+
+logic xcx7 : (int,unsigned_8) farray
+
+logic xsi9 : (int,unsigned_8) farray
+
+logic xdi9 : (int,unsigned_8) farray
+
+logic val17 : t
+
+logic val27 : t
+
+logic zeroflag8 : bool
+
+logic carryflag8 : bool
+
+logic xcx8 : (int,unsigned_8) farray
+
+logic xsi10 : (int,unsigned_8) farray
+
+logic xdi10 : (int,unsigned_8) farray
+
+logic val18 : t
+
+logic val28 : t
+
+logic zeroflag9 : bool
+
+logic carryflag9 : bool
+
+logic xcx9 : (int,unsigned_8) farray
+
+logic xsi11 : (int,unsigned_8) farray
+
+logic xdi11 : (int,unsigned_8) farray
+
+logic val19 : t
+
+logic val29 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : ((o = ecx(xcx)) and (o = add2(add2(add2(toBig2(to_rep((xcx[0]))),
   mul2(toBig2(to_rep((xcx[1]))), of_int2(256))),
   mul2(toBig2(to_rep((xcx[2]))), of_int2(65536))),
-  mul2(toBig2(to_rep((xcx[3]))), of_int2(16777216))))) and
-  (((o = of_int2(0)) and (o1 = true)) or ((not (o = of_int2(0))) and
-  (o1 = false)))) and (((not (o1 = true)) and (result = true)) or
-  ((o1 = true) and (result = false)))) -> ((result = true) ->
-  ((not (ecx(xcx1) = of_int2(0))) -> (not (ecx(xcx1) = of_int2(0)))))))
+  mul2(toBig2(to_rep((xcx[3]))), of_int2(16777216)))))
+
+axiom H3 : (((o = of_int2(0)) -> (o1 = true)) and ((not (o = of_int2(0))) ->
+  (o1 = false)))
+
+axiom H4 : (((not (o1 = true)) -> (result = true)) and ((o1 = true) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : (not (ecx(xcx2) = of_int2(0)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (not (ecx(xcx2) = of_int2(0)))

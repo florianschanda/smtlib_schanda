@@ -62,6 +62,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
 (define-fun default_initial_assumption ((temp___expr_202 us_rep) (temp___skip_top_level_203 Bool)) Bool (and (= (rec__alarm__blinken_poT__blinken_state (us_split_fields1 temp___expr_202)) (of_int 0)) (= (rec__alarm__the_light (us_split_fields1 temp___expr_202)) (of_int 0))))
 (define-fun dynamic_invariant ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 0 97)) (in_range temp___expr_160)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

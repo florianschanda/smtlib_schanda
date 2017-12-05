@@ -55,6 +55,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range1 apples))
 (assert (in_range1 oranges))
 (assert (and (= o (number_of_oranges oranges)) (and (in_range1 o) (= o oranges))))

@@ -123,6 +123,7 @@
 (declare-const o duration)
 (declare-const o1 my_duration)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result duration)
 (declare-const m1 duration)
 (assert (= (to_fixed o) 9223372036854775807))

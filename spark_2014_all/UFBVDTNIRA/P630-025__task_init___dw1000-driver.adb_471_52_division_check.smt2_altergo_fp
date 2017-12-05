@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -989,7 +989,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1659,74 +1659,290 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "dw1000-driver.adb", line 451, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tx_fctrl_reg__split_fields:bits_7.
-  forall tx_fctrl_reg__split_fields1:bits_3.
-  forall tx_fctrl_reg__split_fields2:bits_3.
-  forall tx_fctrl_reg__split_fields3:bits_2.
-  forall tx_fctrl_reg__split_fields4:bits_1.
-  forall tx_fctrl_reg__split_fields5:bits_2.
-  forall tx_fctrl_reg__split_fields6:bits_2.
-  forall tx_fctrl_reg__split_fields7:bits_2.
-  forall tx_fctrl_reg__split_fields8:bits_10.
-  forall tx_fctrl_reg__split_fields9:bits_8. forall o:int. forall o1:t.
-  forall o2:bits_7. forall o3:bits_7. forall o4:bits_3. forall o5:bits_3.
-  forall o6:bits_2. forall o7:bits_1. forall o8:bits_2. forall o9:bits_2.
-  forall o10:bits_2. forall o11:bits_10. forall o12:bits_8.
-  forall temp___3261:bits_7. forall temp___32611:bits_3.
-  forall temp___32612:bits_3. forall temp___32613:bits_2.
-  forall temp___32614:bits_1. forall temp___32615:bits_2.
-  forall temp___32616:bits_2. forall temp___32617:bits_2.
-  forall temp___32618:bits_10. forall temp___32619:bits_8.
-  forall dw1000__registers__tx_fctrl__read__reg__fields:bits_7.
-  forall dw1000__registers__tx_fctrl__read__reg__fields1:bits_3.
-  forall dw1000__registers__tx_fctrl__read__reg__fields2:bits_3.
-  forall dw1000__registers__tx_fctrl__read__reg__fields3:bits_2.
-  forall dw1000__registers__tx_fctrl__read__reg__fields4:bits_1.
-  forall dw1000__registers__tx_fctrl__read__reg__fields5:bits_2.
-  forall dw1000__registers__tx_fctrl__read__reg__fields6:bits_2.
-  forall dw1000__registers__tx_fctrl__read__reg__fields7:bits_2.
-  forall dw1000__registers__tx_fctrl__read__reg__fields8:bits_10.
-  forall dw1000__registers__tx_fctrl__read__reg__fields9:bits_8.
-  forall result:bits_7. forall result1:bits_3. forall result2:bits_3.
-  forall result3:bits_2. forall result4:bits_1. forall result5:bits_2.
-  forall result6:bits_2. forall result7:bits_2. forall result8:bits_10.
-  forall result9:bits_8. forall tx_fctrl_reg__split_fields10:bits_7.
-  forall tx_fctrl_reg__split_fields11:bits_3.
-  forall tx_fctrl_reg__split_fields12:bits_3.
-  forall tx_fctrl_reg__split_fields13:bits_2.
-  forall tx_fctrl_reg__split_fields14:bits_1.
-  forall tx_fctrl_reg__split_fields15:bits_2.
-  forall tx_fctrl_reg__split_fields16:bits_2.
-  forall tx_fctrl_reg__split_fields17:bits_2.
-  forall tx_fctrl_reg__split_fields18:bits_10.
-  forall tx_fctrl_reg__split_fields19:bits_8. forall result10:bits_7.
-  forall result11:bits_3. forall result12:bits_3. forall result13:bits_2.
-  forall result14:bits_1. forall result15:bits_2. forall result16:bits_2.
-  forall result17:bits_2. forall result18:bits_10. forall result19:bits_8.
-  forall tx_fctrl_reg__split_fields20:bits_7.
-  forall tx_fctrl_reg__split_fields21:bits_3.
-  forall tx_fctrl_reg__split_fields22:bits_3.
-  forall tx_fctrl_reg__split_fields23:bits_2.
-  forall tx_fctrl_reg__split_fields24:bits_1.
-  forall tx_fctrl_reg__split_fields25:bits_2.
-  forall tx_fctrl_reg__split_fields26:bits_2.
-  forall tx_fctrl_reg__split_fields27:bits_2.
-  forall tx_fctrl_reg__split_fields28:bits_10.
-  forall tx_fctrl_reg__split_fields29:bits_8. (in_range1(length) ->
-  (in_range1(offset) -> (((length <  1024) and ((offset <  1024) and
-  ((length + offset) <= 1024))) ->
-  ((((result = tx_fctrl_reg__split_fields) and
-  ((result1 = tx_fctrl_reg__split_fields1) and
-  ((result2 = tx_fctrl_reg__split_fields2) and
-  ((result3 = tx_fctrl_reg__split_fields3) and
-  ((result4 = tx_fctrl_reg__split_fields4) and
-  ((result5 = tx_fctrl_reg__split_fields5) and
-  ((result6 = tx_fctrl_reg__split_fields6) and
-  ((result7 = tx_fctrl_reg__split_fields7) and
-  ((result8 = tx_fctrl_reg__split_fields8) and
-  (result9 = tx_fctrl_reg__split_fields9)))))))))) and
+logic tx_fctrl_reg__split_fields : bits_7
+
+logic tx_fctrl_reg__split_fields1 : bits_3
+
+logic tx_fctrl_reg__split_fields2 : bits_3
+
+logic tx_fctrl_reg__split_fields3 : bits_2
+
+logic tx_fctrl_reg__split_fields4 : bits_1
+
+logic tx_fctrl_reg__split_fields5 : bits_2
+
+logic tx_fctrl_reg__split_fields6 : bits_2
+
+logic tx_fctrl_reg__split_fields7 : bits_2
+
+logic tx_fctrl_reg__split_fields8 : bits_10
+
+logic tx_fctrl_reg__split_fields9 : bits_8
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : t
+
+logic o3 : bits_7
+
+logic o4 : bits_7
+
+logic o5 : bits_3
+
+logic o6 : bits_3
+
+logic o7 : bits_2
+
+logic o8 : bits_1
+
+logic o9 : bits_2
+
+logic o10 : bits_2
+
+logic o11 : bits_2
+
+logic o12 : bits_10
+
+logic o13 : bits_8
+
+logic temp___3261 : bits_7
+
+logic temp___32611 : bits_3
+
+logic temp___32612 : bits_3
+
+logic temp___32613 : bits_2
+
+logic temp___32614 : bits_1
+
+logic temp___32615 : bits_2
+
+logic temp___32616 : bits_2
+
+logic temp___32617 : bits_2
+
+logic temp___32618 : bits_10
+
+logic temp___32619 : bits_8
+
+logic o14 : int
+
+logic o15 : t
+
+logic o16 : bits_3
+
+logic o17 : bits_7
+
+logic o18 : bits_3
+
+logic o19 : bits_3
+
+logic o20 : bits_2
+
+logic o21 : bits_1
+
+logic o22 : bits_2
+
+logic o23 : bits_2
+
+logic o24 : bits_2
+
+logic o25 : bits_10
+
+logic o26 : bits_8
+
+logic temp___3263 : bits_7
+
+logic temp___32631 : bits_3
+
+logic temp___32632 : bits_3
+
+logic temp___32633 : bits_2
+
+logic temp___32634 : bits_1
+
+logic temp___32635 : bits_2
+
+logic temp___32636 : bits_2
+
+logic temp___32637 : bits_2
+
+logic temp___32638 : bits_10
+
+logic temp___32639 : bits_8
+
+logic o27 : int
+
+logic dw1000__registers__tx_fctrl__read__reg__fields : bits_7
+
+logic dw1000__registers__tx_fctrl__read__reg__fields1 : bits_3
+
+logic dw1000__registers__tx_fctrl__read__reg__fields2 : bits_3
+
+logic dw1000__registers__tx_fctrl__read__reg__fields3 : bits_2
+
+logic dw1000__registers__tx_fctrl__read__reg__fields4 : bits_1
+
+logic dw1000__registers__tx_fctrl__read__reg__fields5 : bits_2
+
+logic dw1000__registers__tx_fctrl__read__reg__fields6 : bits_2
+
+logic dw1000__registers__tx_fctrl__read__reg__fields7 : bits_2
+
+logic dw1000__registers__tx_fctrl__read__reg__fields8 : bits_10
+
+logic dw1000__registers__tx_fctrl__read__reg__fields9 : bits_8
+
+logic result : bits_7
+
+logic result1 : bits_3
+
+logic result2 : bits_3
+
+logic result3 : bits_2
+
+logic result4 : bits_1
+
+logic result5 : bits_2
+
+logic result6 : bits_2
+
+logic result7 : bits_2
+
+logic result8 : bits_10
+
+logic result9 : bits_8
+
+logic tx_fctrl_reg__split_fields10 : bits_7
+
+logic tx_fctrl_reg__split_fields11 : bits_3
+
+logic tx_fctrl_reg__split_fields12 : bits_3
+
+logic tx_fctrl_reg__split_fields13 : bits_2
+
+logic tx_fctrl_reg__split_fields14 : bits_1
+
+logic tx_fctrl_reg__split_fields15 : bits_2
+
+logic tx_fctrl_reg__split_fields16 : bits_2
+
+logic tx_fctrl_reg__split_fields17 : bits_2
+
+logic tx_fctrl_reg__split_fields18 : bits_10
+
+logic tx_fctrl_reg__split_fields19 : bits_8
+
+logic result10 : bits_7
+
+logic result11 : bits_3
+
+logic result12 : bits_3
+
+logic result13 : bits_2
+
+logic result14 : bits_1
+
+logic result15 : bits_2
+
+logic result16 : bits_2
+
+logic result17 : bits_2
+
+logic result18 : bits_10
+
+logic result19 : bits_8
+
+logic tx_fctrl_reg__split_fields20 : bits_7
+
+logic tx_fctrl_reg__split_fields21 : bits_3
+
+logic tx_fctrl_reg__split_fields22 : bits_3
+
+logic tx_fctrl_reg__split_fields23 : bits_2
+
+logic tx_fctrl_reg__split_fields24 : bits_1
+
+logic tx_fctrl_reg__split_fields25 : bits_2
+
+logic tx_fctrl_reg__split_fields26 : bits_2
+
+logic tx_fctrl_reg__split_fields27 : bits_2
+
+logic tx_fctrl_reg__split_fields28 : bits_10
+
+logic tx_fctrl_reg__split_fields29 : bits_8
+
+logic result20 : bits_7
+
+logic result21 : bits_3
+
+logic result22 : bits_3
+
+logic result23 : bits_2
+
+logic result24 : bits_1
+
+logic result25 : bits_2
+
+logic result26 : bits_2
+
+logic result27 : bits_2
+
+logic result28 : bits_10
+
+logic result29 : bits_8
+
+logic tx_fctrl_reg__split_fields30 : bits_7
+
+logic tx_fctrl_reg__split_fields31 : bits_3
+
+logic tx_fctrl_reg__split_fields32 : bits_3
+
+logic tx_fctrl_reg__split_fields33 : bits_2
+
+logic tx_fctrl_reg__split_fields34 : bits_1
+
+logic tx_fctrl_reg__split_fields35 : bits_2
+
+logic tx_fctrl_reg__split_fields36 : bits_2
+
+logic tx_fctrl_reg__split_fields37 : bits_2
+
+logic tx_fctrl_reg__split_fields38 : bits_10
+
+logic tx_fctrl_reg__split_fields39 : bits_8
+
+axiom H : in_range1(length)
+
+axiom H1 : in_range1(offset)
+
+axiom H2 : ((length <  1024) and ((offset <  1024) and
+  ((length + offset) <= 1024)))
+
+axiom H3 : (result = tx_fctrl_reg__split_fields)
+
+axiom H4 : (result1 = tx_fctrl_reg__split_fields1)
+
+axiom H5 : (result2 = tx_fctrl_reg__split_fields2)
+
+axiom H6 : (result3 = tx_fctrl_reg__split_fields3)
+
+axiom H7 : (result4 = tx_fctrl_reg__split_fields4)
+
+axiom H8 : (result5 = tx_fctrl_reg__split_fields5)
+
+axiom H9 : (result6 = tx_fctrl_reg__split_fields6)
+
+axiom H10 : (result7 = tx_fctrl_reg__split_fields7)
+
+axiom H11 : (result8 = tx_fctrl_reg__split_fields8)
+
+axiom H12 : (result9 = tx_fctrl_reg__split_fields9)
+
+axiom H13 :
   ((tx_fctrl_reg__split_fields10 = dw1000__registers__tx_fctrl__read__reg__fields) and
   ((tx_fctrl_reg__split_fields11 = dw1000__registers__tx_fctrl__read__reg__fields1) and
   ((tx_fctrl_reg__split_fields12 = dw1000__registers__tx_fctrl__read__reg__fields2) and
@@ -1736,40 +1952,93 @@ goal WP_parameter_def :
   ((tx_fctrl_reg__split_fields16 = dw1000__registers__tx_fctrl__read__reg__fields6) and
   ((tx_fctrl_reg__split_fields17 = dw1000__registers__tx_fctrl__read__reg__fields7) and
   ((tx_fctrl_reg__split_fields18 = dw1000__registers__tx_fctrl__read__reg__fields8) and
-  (tx_fctrl_reg__split_fields19 = dw1000__registers__tx_fctrl__read__reg__fields9))))))))))) ->
-  ((((((((o = mod(length, 128)) and in_range_int1(mod(length, 128))) and
-  (o1 = of_int(o))) and (to_rep1(o2) = o1)) and ((o2 = o3) and
-  ((tx_fctrl_reg__split_fields11 = o4) and
-  ((tx_fctrl_reg__split_fields12 = o5) and
-  ((tx_fctrl_reg__split_fields13 = o6) and
-  ((tx_fctrl_reg__split_fields14 = o7) and
-  ((tx_fctrl_reg__split_fields15 = o8) and
-  ((tx_fctrl_reg__split_fields16 = o9) and
-  ((tx_fctrl_reg__split_fields17 = o10) and
-  ((tx_fctrl_reg__split_fields18 = o11) and
-  (tx_fctrl_reg__split_fields19 = o12))))))))))) and ((temp___3261 = o3) and
-  ((temp___32611 = o4) and ((temp___32612 = o5) and ((temp___32613 = o6) and
-  ((temp___32614 = o7) and ((temp___32615 = o8) and ((temp___32616 = o9) and
-  ((temp___32617 = o10) and ((temp___32618 = o11) and
-  (temp___32619 = o12))))))))))) and
-  (((result10 = tx_fctrl_reg__split_fields10) and
-  ((result11 = tx_fctrl_reg__split_fields11) and
-  ((result12 = tx_fctrl_reg__split_fields12) and
-  ((result13 = tx_fctrl_reg__split_fields13) and
-  ((result14 = tx_fctrl_reg__split_fields14) and
-  ((result15 = tx_fctrl_reg__split_fields15) and
-  ((result16 = tx_fctrl_reg__split_fields16) and
-  ((result17 = tx_fctrl_reg__split_fields17) and
-  ((result18 = tx_fctrl_reg__split_fields18) and
-  (result19 = tx_fctrl_reg__split_fields19)))))))))) and
-  ((temp___3261 = tx_fctrl_reg__split_fields20) and
-  ((temp___32611 = tx_fctrl_reg__split_fields21) and
-  ((temp___32612 = tx_fctrl_reg__split_fields22) and
-  ((temp___32613 = tx_fctrl_reg__split_fields23) and
-  ((temp___32614 = tx_fctrl_reg__split_fields24) and
-  ((temp___32615 = tx_fctrl_reg__split_fields25) and
-  ((temp___32616 = tx_fctrl_reg__split_fields26) and
-  ((temp___32617 = tx_fctrl_reg__split_fields27) and
-  ((temp___32618 = tx_fctrl_reg__split_fields28) and
-  (temp___32619 = tx_fctrl_reg__split_fields29)))))))))))) ->
-  (not (128 = 0))))))))
+  (tx_fctrl_reg__split_fields19 = dw1000__registers__tx_fctrl__read__reg__fields9))))))))))
+
+axiom H14 : ((o1 = mod(length, 128)) and in_range_int1(mod(length, 128)))
+
+axiom H15 : (o2 = of_int(o1))
+
+axiom H16 : (to_rep1(o3) = o2)
+
+axiom H17 : (o3 = o4)
+
+axiom H18 : (tx_fctrl_reg__split_fields11 = o5)
+
+axiom H19 : (tx_fctrl_reg__split_fields12 = o6)
+
+axiom H20 : (tx_fctrl_reg__split_fields13 = o7)
+
+axiom H21 : (tx_fctrl_reg__split_fields14 = o8)
+
+axiom H22 : (tx_fctrl_reg__split_fields15 = o9)
+
+axiom H23 : (tx_fctrl_reg__split_fields16 = o10)
+
+axiom H24 : (tx_fctrl_reg__split_fields17 = o11)
+
+axiom H25 : (tx_fctrl_reg__split_fields18 = o12)
+
+axiom H26 : (tx_fctrl_reg__split_fields19 = o13)
+
+axiom H27 : (temp___3261 = o4)
+
+axiom H28 : (temp___32611 = o5)
+
+axiom H29 : (temp___32612 = o6)
+
+axiom H30 : (temp___32613 = o7)
+
+axiom H31 : (temp___32614 = o8)
+
+axiom H32 : (temp___32615 = o9)
+
+axiom H33 : (temp___32616 = o10)
+
+axiom H34 : (temp___32617 = o11)
+
+axiom H35 : (temp___32618 = o12)
+
+axiom H36 : (temp___32619 = o13)
+
+axiom H37 : (result10 = tx_fctrl_reg__split_fields10)
+
+axiom H38 : (result11 = tx_fctrl_reg__split_fields11)
+
+axiom H39 : (result12 = tx_fctrl_reg__split_fields12)
+
+axiom H40 : (result13 = tx_fctrl_reg__split_fields13)
+
+axiom H41 : (result14 = tx_fctrl_reg__split_fields14)
+
+axiom H42 : (result15 = tx_fctrl_reg__split_fields15)
+
+axiom H43 : (result16 = tx_fctrl_reg__split_fields16)
+
+axiom H44 : (result17 = tx_fctrl_reg__split_fields17)
+
+axiom H45 : (result18 = tx_fctrl_reg__split_fields18)
+
+axiom H46 : (result19 = tx_fctrl_reg__split_fields19)
+
+axiom H47 : (temp___3261 = tx_fctrl_reg__split_fields20)
+
+axiom H48 : (temp___32611 = tx_fctrl_reg__split_fields21)
+
+axiom H49 : (temp___32612 = tx_fctrl_reg__split_fields22)
+
+axiom H50 : (temp___32613 = tx_fctrl_reg__split_fields23)
+
+axiom H51 : (temp___32614 = tx_fctrl_reg__split_fields24)
+
+axiom H52 : (temp___32615 = tx_fctrl_reg__split_fields25)
+
+axiom H53 : (temp___32616 = tx_fctrl_reg__split_fields26)
+
+axiom H54 : (temp___32617 = tx_fctrl_reg__split_fields27)
+
+axiom H55 : (temp___32618 = tx_fctrl_reg__split_fields28)
+
+axiom H56 : (temp___32619 = tx_fctrl_reg__split_fields29)
+
+ (* File "dw1000-driver.adb", line 451, characters 0-0 *)
+goal WP_parameter_def : (not (128 = 0))

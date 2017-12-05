@@ -416,31 +416,204 @@ axiom bool_eq_rev :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic cur_num_trains : int
+
+logic trains : (int,us_rep) farray
+
+logic train : int
+
+logic other_train : int
+
+logic o : int
+
+logic o1 : track_id
+
+logic o2 : natural
+
+logic o3 : track_id
+
+logic o4 : track_id
+
+logic o5 : natural
+
+logic o6 : track_id
+
+logic o7 : track_id
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : track_id
+
+logic o11 : natural
+
+logic o12 : track_id
+
+logic o13 : track_id
+
+logic o14 : natural
+
+logic o15 : track_id
+
+logic o16 : track_id
+
+logic o17 : int
+
+logic o18 : track_id
+
+logic o19 : natural
+
+logic o20 : track_id
+
+logic o21 : track_id
+
+logic o22 : natural
+
+logic o23 : track_id
+
+logic o24 : track_id
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : track_id
+
+logic o30 : natural
+
+logic o31 : track_id
+
+logic o32 : track_id
+
+logic o33 : natural
+
+logic o34 : track_id
+
+logic o35 : track_id
+
+logic o36 : int
+
+logic o37 : track_id
+
+logic o38 : natural
+
+logic o39 : track_id
+
+logic o40 : track_id
+
+logic o41 : natural
+
+logic o42 : track_id
+
+logic o43 : track_id
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : bool
+
+logic o47 : int
+
+logic o48 : track_id
+
+logic o49 : natural
+
+logic o50 : track_id
+
+logic o51 : track_id
+
+logic o52 : natural
+
+logic o53 : track_id
+
+logic o54 : track_id
+
+logic o55 : int
+
+logic o56 : track_id
+
+logic o57 : natural
+
+logic o58 : track_id
+
+logic o59 : track_id
+
+logic o60 : natural
+
+logic o61 : track_id
+
+logic o62 : track_id
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range2(cur_num_trains)
+
+axiom H1 : (1 <= train)
+
+axiom H2 : (train <= cur_num_trains)
+
+axiom H3 : (1 <= other_train)
+
+axiom H4 : (other_train <= cur_num_trains)
+
+axiom H5 : (not (other_train = train))
+
+axiom H6 : ((1 <= other_train) and (other_train <= 10))
+
+axiom H7 : (o55 = other_train)
+
+axiom H8 : ({ us_split_fields1 = { rec__trains__train_position__track_begin =
+  o56; rec__trains__train_position__pos_begin = o57;
+  rec__trains__train_position__track_end = o58 } } = (trains[o55]))
+
+axiom H9 : ((o59 = o56) and ((o60 = o57) and (o61 = o58)))
+
+axiom H10 : (o62 = o59)
+
+axiom H11 : (o63 = to_rep(o62))
+
+axiom H12 : ((1 <= train) and (train <= 10))
+
+axiom H13 : (o47 = train)
+
+axiom H14 : ({ us_split_fields1 = {
+  rec__trains__train_position__track_begin = o48;
+  rec__trains__train_position__pos_begin = o49;
+  rec__trains__train_position__track_end = o50 } } = (trains[o47]))
+
+axiom H15 : (o48 = o51)
+
+axiom H16 : (o49 = o52)
+
+axiom H17 : (o50 = o53)
+
+axiom H18 : (o54 = o51)
+
+axiom H19 : (o64 = to_rep(o54))
+
+axiom H20 : (((o64 = o63) -> (o65 = true)) and ((not (o64 = o63)) ->
+  (o65 = false)))
+
+axiom H21 : (((not (o65 = true)) -> (result2 = true)) and ((o65 = true) ->
+  (result2 = false)))
+
+axiom H22 : (result2 = true)
+
  (* File "trains.ads", line 91, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
-  forall train:int. forall other_train:int. forall o:int. forall o1:track_id.
-  forall o2:natural. forall o3:track_id. forall o4:track_id.
-  forall o5:natural. forall o6:track_id. forall o7:track_id. forall o8:int.
-  forall o9:track_id. forall o10:natural. forall o11:track_id.
-  forall o12:track_id. forall o13:natural. forall o14:track_id.
-  forall o15:track_id. forall o16:int. forall o17:int. forall o18:bool.
-  forall result:bool. (in_range2(cur_num_trains) -> (((1 <= train) and
-  (train <= cur_num_trains)) -> (((1 <= other_train) and
-  (other_train <= cur_num_trains)) -> ((not (other_train = train)) ->
-  ((((((((((1 <= other_train) and (other_train <= 10)) and
-  (o8 = other_train)) and ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o9;
-  rec__trains__train_position__pos_begin = o10;
-  rec__trains__train_position__track_end = o11 } } = (trains[o8]))) and
-  ((o9 = o12) and ((o10 = o13) and (o11 = o14)))) and (o15 = o12)) and
-  (o16 = to_rep(o15))) and ((((((((1 <= train) and (train <= 10)) and
-  (o = train)) and ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o1;
-  rec__trains__train_position__pos_begin = o2;
-  rec__trains__train_position__track_end = o3 } } = (trains[o]))) and
-  ((o1 = o4) and ((o2 = o5) and (o3 = o6)))) and (o7 = o4)) and
-  (o17 = to_rep(o7))) and (((o17 = o16) and (o18 = true)) or
-  ((not (o17 = o16)) and (o18 = false))))) and (((not (o18 = true)) and
-  (result = true)) or ((o18 = true) and (result = false)))) ->
-  ((result = true) -> (1 <= other_train))))))))
+goal WP_parameter_def : (1 <= other_train)

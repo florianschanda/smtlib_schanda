@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -469,24 +469,44 @@ type t29b__ref = { t29b__content : us_t1
 
 function t29b__ref___projection(a: t29b__ref) : us_t1 = (a).t29b__content
 
+logic dynamic_in_post__test_2__get_last__result : int
+
+logic result : int
+
+logic dynamic_in_post__test_2__get_last__result1 : int
+
+logic dynamic_in_post__test_2__get_last__result2 : int
+
+logic dynamic_in_post__test_2__get_last__result3 : int
+
+logic dynamic_in_post__test_2__get_last__result4 : int
+
+logic dynamic_in_post__test_2__get_last__result5 : int
+
+logic result1 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 :
+  (dynamic_in_post__test_2__get_last__result1 = dynamic_in_post__test_2__get_last__result2)
+
+axiom H2 :
+  (dynamic_in_post__test_2__get_last__result3 = dynamic_in_post__test_2__get_last__result1)
+
+axiom H3 : (result = dynamic_in_post__test_2__get_last__result)
+
+axiom H4 : (dynamic_in_post__test_2__get_last__result1 = to_rep1(last(s1)))
+
+axiom H5 :
+  (dynamic_in_post__test_2__get_last__result4 = dynamic_in_post__test_2__get_last__result2)
+
+axiom H6 :
+  (dynamic_in_post__test_2__get_last__result5 = dynamic_in_post__test_2__get_last__result3)
+
+axiom H7 : (result1 = dynamic_in_post__test_2__get_last__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall dynamic_in_post__test_2__get_last__result:int. forall result:int.
-  forall dynamic_in_post__test_2__get_last__result1:int.
-  forall dynamic_in_post__test_2__get_last__result2:int.
-  forall dynamic_in_post__test_2__get_last__result3:int.
-  forall dynamic_in_post__test_2__get_last__result4:int.
-  forall dynamic_in_post__test_2__get_last__result5:int.
-  (forall result1:int. ((dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1))) and
-  (((((dynamic_in_post__test_2__get_last__result1 = dynamic_in_post__test_2__get_last__result2) and
-  (dynamic_in_post__test_2__get_last__result3 = dynamic_in_post__test_2__get_last__result1)) and
-  (({ int__content = result } = { int__content =
-  dynamic_in_post__test_2__get_last__result }) and
-  (dynamic_in_post__test_2__get_last__result1 = to_rep1(last(s1))))) and (({
-  int__content = dynamic_in_post__test_2__get_last__result4 } = {
-  int__content = dynamic_in_post__test_2__get_last__result2 }) and
-  (dynamic_in_post__test_2__get_last__result5 = dynamic_in_post__test_2__get_last__result3))) and
-  (result1 = dynamic_in_post__test_2__get_last__result4))) ->
   (dynamic_in_post__test_2__get_last__result4 = to_rep1(last2(mk1(to_rep1(first(s1)),
-  to_rep1(last(s1)))))))))
+  to_rep1(last(s1))))))

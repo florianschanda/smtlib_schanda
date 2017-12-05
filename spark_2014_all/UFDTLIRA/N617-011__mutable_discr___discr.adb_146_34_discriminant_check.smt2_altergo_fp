@@ -383,10 +383,135 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic d1__split_fields : us_main_type
+
+logic d2__split_fields : us_main_type
+
+logic d2__split_discrs : natural
+
+logic h__split_fields : natural
+
+logic h__split_fields1 : us_main_type
+
+logic h__split_fields2 : bool
+
+logic us : int
+
+logic o : natural
+
+logic o1 : us_main_type
+
+logic o2 : bool
+
+logic o3 : natural
+
+logic o4 : us_main_type
+
+logic o5 : bool
+
+logic discr__p5__d1__assume : natural
+
+logic discr__p5__d1__assume1 : us_main_type
+
+logic discr__p5__d1__assume2 : bool
+
+logic discr__p5__d2__assume : natural
+
+logic discr__p5__d2__assume1 : us_main_type
+
+logic discr__p5__d2__assume2 : bool
+
+logic usq_ : natural
+
+logic usq_1 : us_main_type
+
+logic usq_2 : bool
+
+logic o6 : natural
+
+logic o7 : us_main_type
+
+logic o8 : bool
+
+logic o9 : natural
+
+logic o10 : us_main_type
+
+logic o11 : bool
+
+logic temp___343 : natural
+
+logic temp___3431 : us_main_type
+
+logic temp___3432 : bool
+
+logic usq_3 : natural
+
+logic usq_4 : us_main_type
+
+logic usq_5 : bool
+
+logic o12 : natural
+
+logic o13 : us_main_type
+
+logic o14 : bool
+
+logic o15 : natural
+
+logic o16 : us_main_type
+
+logic o17 : bool
+
+logic temp___347 : natural
+
+logic temp___3471 : us_main_type
+
+logic temp___3472 : bool
+
+logic result : us_main_type
+
+logic d1__split_fields1 : us_main_type
+
+logic result1 : us_main_type
+
+logic d2__split_fields1 : us_main_type
+
+logic result2 : natural
+
+logic d2__split_discrs1 : natural
+
+logic result3 : natural
+
+logic result4 : us_main_type
+
+logic result5 : bool
+
+logic h__split_fields3 : natural
+
+logic h__split_fields4 : us_main_type
+
+logic h__split_fields5 : bool
+
+logic result6 : natural
+
+logic result7 : us_main_type
+
+logic result8 : bool
+
+logic h__split_fields6 : natural
+
+logic h__split_fields7 : us_main_type
+
+logic h__split_fields8 : bool
+
+axiom H : in_range(c)
+
+axiom H1 : ((us = c) and in_range(c))
+
+axiom H2 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c = o
+  }; us_split_fields1 = { rec__private_discr__p_with_default = o1 };
+  attr__constrained = o2 } = new_with_default(c)) and (to_rep(o) = c))
+
  (* File "discr.adb", line 118, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:natural. forall o1:us_main_type. forall o2:bool.
-  (in_range(c) -> (((us = c) and in_range(c)) -> ((({ us_split_discrs1 = {
-  rec__private_discr__p_with_default__c = o }; us_split_fields1 = {
-  rec__private_discr__p_with_default = o1 }; attr__constrained = o2
-  } = new_with_default(c)) and (to_rep(o) = c)) -> (c = to_rep(o))))))
+goal WP_parameter_def : (c = to_rep(o))

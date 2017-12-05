@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -172,7 +172,7 @@ axiom coerce_axiom :
 
 type element_t
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -473,7 +473,7 @@ axiom valid__def_axiom :
   ((forall i:int. (((1 <= i) and (i <= to_rep(s))) ->
    in_range1(to_rep1((s1[i]))))) and
   (forall i:int. ((((to_rep(s) + 1) <= i) and (i <= 10)) ->
-  (to_rep1((s1[i])) = (-1)))))))
+  (to_rep1((s1[i])) = (- 1)))))))
 
 logic full : us_rep -> bool
 
@@ -533,63 +533,151 @@ axiom members__def_axiom :
   s1 } })]. (members({ us_split_fields1 = { rec__natural_set__t__len = s;
   rec__natural_set__t__m = s1 } }) = to_rep(s)))
 
- (* File "natural_set.ads", line 49, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:set_length.
-  forall s__split_fields1:(int,element_t) farray. forall o:bool.
-  forall o1:int. forall o2:set_length. forall o3:set_length.
-  forall o4:(int,element_t) farray. forall temp___206:set_length.
-  forall temp___2061:(int,element_t) farray. forall o5:element_t.
-  forall o6:int. forall o7:(int,element_t) farray. forall o8:set_length.
-  forall o9:(int,element_t) farray. forall temp___210:set_length.
-  forall temp___2101:(int,element_t) farray.
-  forall s__split_fields2:set_length.
-  forall s__split_fields3:(int,element_t) farray. forall result:bool.
-  forall result1:set_length. forall result2:(int,element_t) farray.
-  forall s__split_fields4:set_length.
-  forall s__split_fields5:(int,element_t) farray. forall result3:set_length.
-  forall result4:(int,element_t) farray. forall s__split_fields6:set_length.
-  forall s__split_fields7:(int,element_t) farray.
-  forall s__split_fields8:set_length.
-  forall s__split_fields9:(int,element_t) farray.
-  forall s__split_fields10:set_length.
-  forall s__split_fields11:(int,element_t) farray. ((in_range1(value) and
-  (((valid({ us_split_fields1 = { rec__natural_set__t__len = s__split_fields;
-  rec__natural_set__t__m = s__split_fields1 } }) = true) and (not (full({
-  us_split_fields1 = { rec__natural_set__t__len = s__split_fields;
-  rec__natural_set__t__m = s__split_fields1 } }) = true))) and
-  (((to_rep(s__split_fields) = old_length) and (in_range(old_length) and
-  ((((o = contains({ us_split_fields1 = { rec__natural_set__t__len =
+logic s__split_fields : set_length
+
+logic s__split_fields1 : (int,element_t) farray
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : set_length
+
+logic o3 : set_length
+
+logic o4 : (int,element_t) farray
+
+logic temp___206 : set_length
+
+logic temp___2061 : (int,element_t) farray
+
+logic o5 : element_t
+
+logic o6 : int
+
+logic o7 : (int,element_t) farray
+
+logic o8 : set_length
+
+logic o9 : (int,element_t) farray
+
+logic temp___210 : set_length
+
+logic temp___2101 : (int,element_t) farray
+
+logic s__split_fields2 : set_length
+
+logic s__split_fields3 : (int,element_t) farray
+
+logic result : bool
+
+logic result1 : set_length
+
+logic result2 : (int,element_t) farray
+
+logic s__split_fields4 : set_length
+
+logic s__split_fields5 : (int,element_t) farray
+
+logic result3 : set_length
+
+logic result4 : (int,element_t) farray
+
+logic s__split_fields6 : set_length
+
+logic s__split_fields7 : (int,element_t) farray
+
+logic s__split_fields8 : set_length
+
+logic s__split_fields9 : (int,element_t) farray
+
+logic s__split_fields10 : set_length
+
+logic s__split_fields11 : (int,element_t) farray
+
+axiom H : in_range1(value)
+
+axiom H1 : ((valid({ us_split_fields1 = { rec__natural_set__t__len =
+  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }) = true) and
+  (not (full({ us_split_fields1 = { rec__natural_set__t__len =
+  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }) = true)))
+
+axiom H2 : (to_rep(s__split_fields) = old_length)
+
+axiom H3 : in_range(old_length)
+
+axiom H4 : ((o = contains({ us_split_fields1 = { rec__natural_set__t__len =
   s__split_fields; rec__natural_set__t__m = s__split_fields1 } }, value)) and
   ((o = true) <->
   (exists i:int. (((1 <= i) and (i <= members({ us_split_fields1 = {
   rec__natural_set__t__len = s__split_fields; rec__natural_set__t__m =
-  s__split_fields1 } }))) and (to_rep1((s__split_fields1[i])) = value))))) and
-  (((not (o = true)) and (result = true)) or ((o = true) and
-  (result = false)))) and (((result = true) and
-  (((((((o1 = (to_rep(s__split_fields) + 1)) and
-  in_range2((to_rep(s__split_fields) + 1))) and (to_rep(o2) = o1)) and
-  ((o2 = o3) and (s__split_fields1 = o4))) and ((temp___206 = o3) and
-  (temp___2061 = o4))) and (({ us_split_fields__content = {
-  rec__natural_set__t__len = result1; rec__natural_set__t__m = result2 }
-  } = { us_split_fields__content = { rec__natural_set__t__len =
-  s__split_fields; rec__natural_set__t__m = s__split_fields1 } }) and
-  ((temp___206 = s__split_fields4) and
-  (temp___2061 = s__split_fields5)))) and (((((to_rep1(o5) = value) and
-  ((((1 <= to_rep(s__split_fields4)) and
-  (to_rep(s__split_fields4) <= 10)) and (o6 = to_rep(s__split_fields4))) and
-  (o7 = (s__split_fields5[o6 <- o5])))) and ((s__split_fields4 = o8) and
-  (o7 = o9))) and ((temp___210 = o8) and (temp___2101 = o9))) and
-  (((result3 = s__split_fields4) and (result4 = s__split_fields5)) and
-  ((temp___210 = s__split_fields6) and
-  (temp___2101 = s__split_fields7)))))) or ((not (result = true)) and
-  (((s__split_fields = s__split_fields6) and
-  (s__split_fields1 = s__split_fields7)) and
-  ((s__split_fields2 = s__split_fields6) and
-  (s__split_fields3 = s__split_fields7)))))))) and
-  (((s__split_fields8 = s__split_fields6) and
-  (s__split_fields9 = s__split_fields7)) and
-  ((s__split_fields10 = s__split_fields6) and
-  (s__split_fields11 = s__split_fields7)))))) -> (contains({
-  us_split_fields1 = { rec__natural_set__t__len = s__split_fields8;
-  rec__natural_set__t__m = s__split_fields9 } }, value) = true)))
+  s__split_fields1 } }))) and (to_rep1((s__split_fields1[i])) = value)))))
+
+axiom H5 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H6 : ((result = true) -> ((o1 = (to_rep(s__split_fields) + 1)) and
+  in_range2((to_rep(s__split_fields) + 1))))
+
+axiom H7 : ((result = true) -> (to_rep(o2) = o1))
+
+axiom H8 : ((result = true) -> (o2 = o3))
+
+axiom H9 : ((result = true) -> (s__split_fields1 = o4))
+
+axiom H10 : ((result = true) -> (temp___206 = o3))
+
+axiom H11 : ((result = true) -> (temp___2061 = o4))
+
+axiom H12 : ((result = true) -> ((result1 = s__split_fields) and
+  (result2 = s__split_fields1)))
+
+axiom H13 : ((result = true) -> (temp___206 = s__split_fields4))
+
+axiom H14 : ((result = true) -> (temp___2061 = s__split_fields5))
+
+axiom H15 : ((result = true) -> (to_rep1(o5) = value))
+
+axiom H16 : ((result = true) -> ((1 <= to_rep(s__split_fields4)) and
+  (to_rep(s__split_fields4) <= 10)))
+
+axiom H17 : ((result = true) -> (o6 = to_rep(s__split_fields4)))
+
+axiom H18 : ((result = true) -> (o7 = (s__split_fields5[o6 <- o5])))
+
+axiom H19 : ((result = true) -> (s__split_fields4 = o8))
+
+axiom H20 : ((result = true) -> (o7 = o9))
+
+axiom H21 : ((result = true) -> (temp___210 = o8))
+
+axiom H22 : ((result = true) -> (temp___2101 = o9))
+
+axiom H23 : ((result = true) -> (result3 = s__split_fields4))
+
+axiom H24 : ((result = true) -> (result4 = s__split_fields5))
+
+axiom H25 : ((result = true) -> (temp___210 = s__split_fields6))
+
+axiom H26 : ((result = true) -> (temp___2101 = s__split_fields7))
+
+axiom H27 : ((not (result = true)) -> (s__split_fields = s__split_fields6))
+
+axiom H28 : ((not (result = true)) -> (s__split_fields1 = s__split_fields7))
+
+axiom H29 : ((not (result = true)) -> (s__split_fields2 = s__split_fields6))
+
+axiom H30 : ((not (result = true)) -> (s__split_fields3 = s__split_fields7))
+
+axiom H31 : (s__split_fields8 = s__split_fields6)
+
+axiom H32 : (s__split_fields9 = s__split_fields7)
+
+axiom H33 : (s__split_fields10 = s__split_fields6)
+
+axiom H34 : (s__split_fields11 = s__split_fields7)
+
+ (* File "natural_set.ads", line 49, characters 0-0 *)
+goal WP_parameter_def : (contains({ us_split_fields1 = {
+  rec__natural_set__t__len = s__split_fields8; rec__natural_set__t__m =
+  s__split_fields9 } }, value) = true)

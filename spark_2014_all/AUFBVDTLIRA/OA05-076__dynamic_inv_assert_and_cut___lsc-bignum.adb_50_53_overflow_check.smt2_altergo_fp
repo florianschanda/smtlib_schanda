@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1003,20 +1003,110 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,word32) farray
+
+logic i : int
+
+logic temp___551 : int
+
+logic temp___549 : (int,word32) farray
+
+logic k : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : word32
+
+logic o3 : int
+
+logic o4 : (int,word32) farray
+
+logic k1 : int
+
+logic a1 : (int,word32) farray
+
+logic result : int
+
+logic i1 : int
+
+logic a2 : (int,word32) farray
+
+logic i2 : int
+
+logic result1 : bool
+
+logic result2 : (int,word32) farray
+
+logic a3 : (int,word32) farray
+
+logic result3 : int
+
+logic i3 : int
+
+logic a4 : (int,word32) farray
+
+logic i4 : int
+
+logic a5 : (int,word32) farray
+
+logic i5 : int
+
+logic a6 : (int,word32) farray
+
+logic i6 : int
+
+logic a7 : (int,word32) farray
+
+logic i7 : int
+
+logic a8 : (int,word32) farray
+
+logic i8 : int
+
+logic a9 : (int,word32) farray
+
+logic i9 : int
+
+logic a10 : (int,word32) farray
+
+logic i10 : int
+
+logic a11 : (int,word32) farray
+
+logic i11 : int
+
+axiom H : dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(a_last)
+
+axiom H3 : ((((to_rep(a__first) <= a_first) and
+  (a_first <= to_rep(a__last))) and ((to_rep(a__first) <= a_last) and
+  (a_last <= to_rep(a__last)))) and (a_first <= a_last))
+
+axiom H4 : (result = i)
+
+axiom H5 : (i1 = a_first)
+
+axiom H6 : (a_first <= i1)
+
+axiom H7 : (i1 <= a_last)
+
+axiom H8 :
+  (forall k2:int. (((a_first <= k2) and (k2 <= (i2 - 1))) ->
+  (to_rep1((a2[k2])) = of_int(0))))
+
+axiom H9 :
+  (((forall temp___550:int. (((to_rep(a__first) <= temp___550) and
+    (temp___550 <= to_rep(a__last))) -> ((i2 <= temp___550) ->
+    ((a2[temp___550]) = (a[temp___550]))))) and ((a_first <= a_last) ->
+  dynamic_property1(a_first, a_last, i2))) and ((a_first <= i2) and
+  (i2 <= a_last)))
+
  (* File "lsc-bignum.ads", line 59, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,word32) farray. forall i:int. forall result:int.
-  forall i1:int. forall a1:(int,word32) farray. forall i2:int.
-  (dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last)) ->
-  (in_range2(a_first) -> (in_range2(a_last) ->
-  (((((to_rep(a__first) <= a_first) and (a_first <= to_rep(a__last))) and
-  ((to_rep(a__first) <= a_last) and (a_last <= to_rep(a__last)))) and
-  (a_first <= a_last)) -> ((({ int__content = result } = { int__content = i
-  }) and (i1 = a_first)) -> (((a_first <= i1) and (i1 <= a_last)) ->
-  ((forall k:int. (((a_first <= k) and (k <= (i2 - 1))) ->
-   (to_rep1((a1[k])) = of_int(0)))) ->
-  ((((forall temp___550:int. (((to_rep(a__first) <= temp___550) and
-     (temp___550 <= to_rep(a__last))) -> ((i2 <= temp___550) ->
-     ((a1[temp___550]) = (a[temp___550]))))) and
-  ((a_first <= a_last) -> dynamic_property1(a_first, a_last, i2))) and
-  ((a_first <= i2) and (i2 <= a_last))) -> in_range1((i2 - 1)))))))))))
+goal WP_parameter_def : in_range1((i2 - 1))

@@ -160,18 +160,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1659,10 +1659,64 @@ axiom to_fp__post_axiom : (forall s:t [to_fp(s)]. tqtisFinite(to_fp(s)))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x__split_fields : float1
+
+logic x__split_fields1 : float1
+
+logic o : t1
+
+logic o1 : float1
+
+logic o2 : float1
+
+logic o3 : float1
+
+logic o4 : float1
+
+logic wibble__x__assume : float1
+
+logic wibble__x__assume1 : float1
+
+logic o5 : t1
+
+logic result : float1
+
+logic result1 : float1
+
+logic x__split_fields2 : float1
+
+logic x__split_fields3 : float1
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
+
+axiom H : (to_rep(o1) = fliteral1)
+
+axiom H1 : ((o = to_fp(of_int(2139094902))) and tqtisFinite(o))
+
+axiom H2 : (to_rep(o2) = o)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (wibble__x__assume = o3)
+
+axiom H6 : (wibble__x__assume1 = o4)
+
+axiom H7 : (result = x__split_fields)
+
+axiom H8 : (result1 = x__split_fields1)
+
+axiom H9 : (wibble__x__assume = x__split_fields2)
+
+axiom H10 : (wibble__x__assume1 = x__split_fields3)
+
+axiom H11 : ((o5 = to_fp(of_int(4144594944))) and tqtisFinite(o5))
+
+axiom H12 : lt(fliteral1, o5)
 
 logic fliteral2 : t1
 
@@ -1670,19 +1724,5 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:float1. forall x__split_fields1:float1.
-  forall o:t1. forall o1:float1. forall o2:float1. forall o3:float1.
-  forall o4:float1. forall wibble__x__assume:float1.
-  forall wibble__x__assume1:float1. forall o5:t1. forall result:float1.
-  forall result1:float1. forall x__split_fields2:float1.
-  forall x__split_fields3:float1. (((((to_rep(o1) = fliteral1) and
-  ((((o = to_fp(of_int(2139094902))) and tqtisFinite(o)) and
-  (to_rep(o2) = o)) and ((o2 = o3) and (o1 = o4)))) and
-  ((wibble__x__assume = o3) and (wibble__x__assume1 = o4))) and
-  (((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((wibble__x__assume = x__split_fields2) and
-  (wibble__x__assume1 = x__split_fields3)))) ->
-  (((o5 = to_fp(of_int(4144594944))) and tqtisFinite(o5)) -> (lt(fliteral1,
-  o5) -> le(add1(NearestTiesToEven, neg1(fliteral2), o5),
-  to_rep(x__split_fields2))))))
+goal WP_parameter_def : le(add1(NearestTiesToEven, neg1(fliteral2), o5),
+  to_rep(x__split_fields2))

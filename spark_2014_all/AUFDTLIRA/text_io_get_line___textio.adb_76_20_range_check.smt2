@@ -122,6 +122,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (define-fun dynamic_invariant4 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const o Int)
 (assert (dynamic_invariant2 s true false true))
 (assert (in_range2 ch))
 (assert (in_range3 n))

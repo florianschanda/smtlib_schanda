@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -668,20 +668,51 @@ axiom my_a__def_axiom : (my_a = pack__a1__my_a__aggregate_def(42))
 
 axiom my_b__def_axiom : (my_b = my_a)
 
+logic glob : (int,character) farray
+
+logic my_s1 : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : (int,character) farray
+
+logic pack__a1__my_b__assume : (int,integer) farray
+
+logic result : (int,character) farray
+
+logic my_s11 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(glob__first),
+  to_rep1(glob__last))
+
+axiom H1 : ((to_rep1(glob__first) <= 1) and (1 <= to_rep1(glob__last)))
+
+axiom H2 : (o = 1)
+
+axiom H3 : (o1 = (glob[o]))
+
+axiom H4 : (o2 = to_rep(o1))
+
+axiom H5 : (o3 = pack__a1__my_s1__aggregate_def(o2))
+
+axiom H6 : (result = my_s1)
+
+axiom H7 : (my_s11 = o3)
+
+axiom H8 : (pack__a1__my_a__aggregate_def(42) = my_a)
+
+axiom H9 : ((1 <= 4) -> (((1 <= 1) and (1 <= 4)) and ((1 <= 4) and
+  (4 <= 4))))
+
+axiom H10 : (pack__a1__my_b__assume = my_a)
+
+axiom H11 : (pack__a1__my_b__assume = my_b)
+
+axiom H12 : (bool_eq7(my_a, 1, 4, temp___361(42), 1, 4) = true)
+
  (* File "pack.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall glob:(int,character) farray. forall my_s1:(int,character) farray.
-  forall o:int. forall o1:character. forall o2:int.
-  forall o3:(int,character) farray.
-  forall pack__a1__my_b__assume:(int,integer) farray.
-  forall result:(int,character) farray. forall my_s11:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(glob__first),
-  to_rep1(glob__last)) -> ((((((((to_rep1(glob__first) <= 1) and
-  (1 <= to_rep1(glob__last))) and (o = 1)) and (o1 = (glob[o]))) and
-  (o2 = to_rep(o1))) and (o3 = pack__a1__my_s1__aggregate_def(o2))) and
-  ((result = my_s1) and (my_s11 = o3))) ->
-  ((pack__a1__my_a__aggregate_def(42) = my_a) -> (((((1 <= 4) ->
-  (((1 <= 1) and (1 <= 4)) and ((1 <= 4) and (4 <= 4)))) and
-  (pack__a1__my_b__assume = my_a)) and (pack__a1__my_b__assume = my_b)) ->
-  ((bool_eq7(my_a, 1, 4, temp___361(42), 1, 4) = true) -> (bool_eq7(my_b, 1,
-  4, temp___367(42), 1, 4) = true)))))))
+goal WP_parameter_def : (bool_eq7(my_b, 1, 4, temp___367(42), 1, 4) = true)

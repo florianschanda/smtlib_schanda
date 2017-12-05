@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -277,38 +277,92 @@ logic r2 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "mixed.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mixed__id__result:bool. forall mixed__id__result1:enum_t.
-  forall mixed__id__result2:integer. forall result:bool.
-  forall result1:enum_t. forall result2:integer.
-  forall mixed__id__result3:bool. forall mixed__id__result4:enum_t.
-  forall mixed__id__result5:integer. forall mixed__id__result6:bool.
-  forall mixed__id__result7:enum_t. forall mixed__id__result8:integer.
-  forall mixed__id__result9:bool. forall mixed__id__result10:enum_t.
-  forall mixed__id__result11:integer. forall mixed__id__result12:bool.
-  forall mixed__id__result13:enum_t. forall mixed__id__result14:integer.
-  forall mixed__id__result15:bool. forall mixed__id__result16:enum_t.
-  forall mixed__id__result17:integer.
-  (forall result3:bool. forall result4:enum_t. forall result5:integer.
-  (((((((mixed__id__result6 = mixed__id__result3) and
-  ((mixed__id__result7 = mixed__id__result4) and
-  (mixed__id__result8 = mixed__id__result5))) and
-  ((mixed__id__result9 = mixed__id__result3) and
+logic mixed__id__result : bool
+
+logic mixed__id__result1 : enum_t
+
+logic mixed__id__result2 : integer
+
+logic result : bool
+
+logic result1 : enum_t
+
+logic result2 : integer
+
+logic mixed__id__result3 : bool
+
+logic mixed__id__result4 : enum_t
+
+logic mixed__id__result5 : integer
+
+logic mixed__id__result6 : bool
+
+logic mixed__id__result7 : enum_t
+
+logic mixed__id__result8 : integer
+
+logic mixed__id__result9 : bool
+
+logic mixed__id__result10 : enum_t
+
+logic mixed__id__result11 : integer
+
+logic mixed__id__result12 : bool
+
+logic mixed__id__result13 : enum_t
+
+logic mixed__id__result14 : integer
+
+logic mixed__id__result15 : bool
+
+logic mixed__id__result16 : enum_t
+
+logic mixed__id__result17 : integer
+
+logic result3 : bool
+
+logic result4 : enum_t
+
+logic result5 : integer
+
+axiom H : (mixed__id__result6 = mixed__id__result3)
+
+axiom H1 : (mixed__id__result7 = mixed__id__result4)
+
+axiom H2 : (mixed__id__result8 = mixed__id__result5)
+
+axiom H3 : ((mixed__id__result9 = mixed__id__result3) and
   ((mixed__id__result10 = mixed__id__result4) and
-  (mixed__id__result11 = mixed__id__result5)))) and
-  (((result = mixed__id__result) and ((result1 = mixed__id__result1) and
-  (result2 = mixed__id__result2))) and ((r = mixed__id__result3) and
-  ((r1 = mixed__id__result4) and (r2 = mixed__id__result5))))) and
-  (((mixed__id__result12 = mixed__id__result6) and
+  (mixed__id__result11 = mixed__id__result5)))
+
+axiom H4 : (result = mixed__id__result)
+
+axiom H5 : (result1 = mixed__id__result1)
+
+axiom H6 : (result2 = mixed__id__result2)
+
+axiom H7 : ((mixed__id__result3 = r) and ((mixed__id__result4 = r1) and
+  (mixed__id__result5 = r2)))
+
+axiom H8 : ((mixed__id__result12 = mixed__id__result6) and
   ((mixed__id__result13 = mixed__id__result7) and
-  (mixed__id__result14 = mixed__id__result8))) and
-  ((mixed__id__result15 = mixed__id__result9) and
-  ((mixed__id__result16 = mixed__id__result10) and
-  (mixed__id__result17 = mixed__id__result11))))) and
-  ((result3 = mixed__id__result12) and ((result4 = mixed__id__result13) and
-  (result5 = mixed__id__result14)))) -> (bool_eq3({ us_split_fields1 = {
-  rec__mixed__rec__b = r; rec__mixed__rec__e = r1; rec__mixed__rec__i = r2 }
-  }, { us_split_fields1 = { rec__mixed__rec__b = mixed__id__result12;
+  (mixed__id__result14 = mixed__id__result8)))
+
+axiom H9 : (mixed__id__result15 = mixed__id__result9)
+
+axiom H10 : (mixed__id__result16 = mixed__id__result10)
+
+axiom H11 : (mixed__id__result17 = mixed__id__result11)
+
+axiom H12 : (result3 = mixed__id__result12)
+
+axiom H13 : (result4 = mixed__id__result13)
+
+axiom H14 : (result5 = mixed__id__result14)
+
+ (* File "mixed.adb", line 6, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = { rec__mixed__rec__b =
+  r; rec__mixed__rec__e = r1; rec__mixed__rec__i = r2 } }, {
+  us_split_fields1 = { rec__mixed__rec__b = mixed__id__result12;
   rec__mixed__rec__e = mixed__id__result13; rec__mixed__rec__i =
-  mixed__id__result14 } }) = true))))
+  mixed__id__result14 } }) = true)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -396,7 +396,42 @@ type t110b__ref = { t110b__content : t110b
 
 function t110b__ref___projection(a: t110b__ref) : t110b = (a).t110b__content
 
+logic a : (int,character) farray
+
+logic temp___508 : (int,character) farray
+
+logic test__op_string_char__x__compl : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic test__op_string_char__y : int
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : (int,character) farray
+
+logic o6 : character
+
+logic test__op_string_char__y1 : int
+
+logic test__op_string_char__x : (int,character) farray
+
+logic result : (int,character) farray
+
+logic a1 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : in_range1(n)
+
+axiom H2 : (3 <= 12)
+
  (* File "test.adb", line 247, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(a__first),
-  to_rep1(a__last)) -> (in_range1(n) -> ((3 <= 12) ->
-  (to_rep1(a__first) <= 3))))
+goal WP_parameter_def : (to_rep1(a__first) <= 3)

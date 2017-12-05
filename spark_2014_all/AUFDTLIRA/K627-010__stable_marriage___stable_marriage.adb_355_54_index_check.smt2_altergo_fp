@@ -1440,57 +1440,327 @@ axiom invert_1__post_axiom :
   (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
   (to_rep((r1[to_rep2((invert_1(r1)[g1]))])) = g1))))))
 
- (* File "stable_marriage.adb", line 194, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ranking_2_inverted:(int,(int,ranking) farray) farray.
-  forall proposals_made:(int,count) farray.
-  forall unmatched_g1_set__split_fields:(int,group1_id) farray.
-  forall unmatched_g1_set__split_fields1:count.
-  forall unmatched_g2_set:(int,bool) farray.
-  forall result__:(int,group1_id) farray. forall g1:int. forall g2:int.
-  forall accepted:bool. forall rank:int. forall already_asked:int.
-  forall o:int. forall o1:group1_id. forall o2:int. forall o3:int.
-  forall o4:count. forall o5:(int,group1_id) farray. forall o6:count.
-  forall temp___586:(int,group1_id) farray. forall temp___5861:count.
-  forall o7:int. forall o8:int. forall o9:int. forall o10:int.
-  forall o11:count. forall o12:(int,count) farray. forall o13:int.
-  forall o14:count. forall o15:(int,group1_id) farray. forall o16:count.
-  forall temp___603:(int,group1_id) farray. forall temp___6031:count.
-  forall o17:group1_id. forall o18:int. forall o19:(int,group1_id) farray.
-  forall o20:(int,group1_id) farray. forall o21:count.
-  forall temp___607:(int,group1_id) farray. forall temp___6071:count.
-  forall o22:int. forall o23:count. forall o24:(int,group1_id) farray.
-  forall o25:count. forall temp___595:(int,group1_id) farray.
-  forall temp___5951:count. forall o26:group1_id. forall o27:int.
-  forall o28:(int,group1_id) farray. forall o29:(int,group1_id) farray.
-  forall o30:count. forall temp___599:(int,group1_id) farray.
-  forall temp___5991:count. forall o31:group1_id.
-  forall o32:(int,group1_id) farray. forall g1_id:int. forall rank1:int.
-  forall unmatched_g2_set1:(int,bool) farray.
-  forall result__1:(int,group1_id) farray. forall result:int.
-  forall rank2:int. forall result1:int. forall g11:int.
-  forall result2:(int,group1_id) farray. forall result3:count.
-  forall unmatched_g1_set__split_fields2:(int,group1_id) farray.
-  forall unmatched_g1_set__split_fields3:count. forall result4:int.
-  forall already_asked1:int. forall result5:int. forall rank3:int.
-  forall result6:int. forall g21:int. forall result7:(int,count) farray.
-  forall proposals_made1:(int,count) farray. forall result8:bool.
-  forall accepted1:bool. forall result9:(int,bool) farray.
-  forall unmatched_g2_set2:(int,bool) farray. forall result10:bool.
-  forall accepted2:bool. forall result11:(int,group1_id) farray.
-  forall result12:count.
-  forall unmatched_g1_set__split_fields4:(int,group1_id) farray.
-  forall unmatched_g1_set__split_fields5:count.
-  forall result13:(int,group1_id) farray. forall result14:count.
-  forall unmatched_g1_set__split_fields6:us_split_fields.
-  forall result15:bool__ref. forall accepted3:bool.
-  forall result16:us_split_fields__ref.
-  forall unmatched_g1_set__split_fields7:us_split_fields.
-  forall result17:us_split_fields__ref.
-  forall unmatched_g1_set__split_fields8:us_split_fields.
-  forall result18:map__ref. forall result__2:(int,group1_id) farray.
-  (((forall g22:int. (((1 <= g22) and (g22 <= 64)) ->
-    (is_permutation_1((ranking_2[g22])) = true))) and
+logic ranking_2_inverted : (int,(int,ranking) farray) farray
+
+logic proposals_made : (int,count) farray
+
+logic unmatched_g1_set__split_fields : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields1 : count
+
+logic unmatched_g2_set : (int,bool) farray
+
+logic result__ : (int,group1_id) farray
+
+logic g1 : int
+
+logic g2 : int
+
+logic accepted : bool
+
+logic rank : int
+
+logic already_asked : int
+
+logic temp___649 : (int,(int,ranking) farray) farray
+
+logic o : int
+
+logic o1 : group1_id
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : count
+
+logic o5 : (int,group1_id) farray
+
+logic o6 : count
+
+logic temp___586 : (int,group1_id) farray
+
+logic temp___5861 : count
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : group2_id
+
+logic o12 : int
+
+logic o13 : group1_id
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : group2_id
+
+logic o17 : int
+
+logic o18 : (int,group1_id) farray
+
+logic o19 : bool
+
+logic o20 : int
+
+logic o21 : count
+
+logic o22 : (int,count) farray
+
+logic o23 : int
+
+logic o24 : count
+
+logic o25 : (int,group1_id) farray
+
+logic o26 : count
+
+logic temp___603 : (int,group1_id) farray
+
+logic temp___6031 : count
+
+logic o27 : group1_id
+
+logic o28 : int
+
+logic o29 : (int,group1_id) farray
+
+logic o30 : (int,group1_id) farray
+
+logic o31 : count
+
+logic temp___607 : (int,group1_id) farray
+
+logic temp___6071 : count
+
+logic us : bool
+
+logic o32 : int
+
+logic o33 : count
+
+logic o34 : (int,group1_id) farray
+
+logic o35 : count
+
+logic temp___595 : (int,group1_id) farray
+
+logic temp___5951 : count
+
+logic o36 : group1_id
+
+logic o37 : int
+
+logic o38 : (int,group1_id) farray
+
+logic o39 : (int,group1_id) farray
+
+logic o40 : count
+
+logic temp___599 : (int,group1_id) farray
+
+logic temp___5991 : count
+
+logic o41 : group1_id
+
+logic o42 : (int,group1_id) farray
+
+logic g2_id : int
+
+logic idx : int
+
+logic g1_id : int
+
+logic rank1 : int
+
+logic o43 : int
+
+logic o44 : group2_id
+
+logic o45 : int
+
+logic o46 : group1_id
+
+logic o47 : int
+
+logic o48 : bool
+
+logic o49 : int
+
+logic o50 : group2_id
+
+logic o51 : int
+
+logic o52 : group1_id
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : group2_id
+
+logic o56 : int
+
+logic o57 : (int,group1_id) farray
+
+logic o58 : bool
+
+logic o59 : bool
+
+logic g1_id1 : int
+
+logic idx1 : int
+
+logic g1_id2 : int
+
+logic idx2 : int
+
+logic o60 : int
+
+logic unmatched_g2_set1 : (int,bool) farray
+
+logic result__1 : (int,group1_id) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic rank2 : int
+
+logic result2 : int
+
+logic g11 : int
+
+logic result3 : (int,group1_id) farray
+
+logic result4 : count
+
+logic unmatched_g1_set__split_fields2 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields3 : count
+
+logic result5 : int
+
+logic already_asked1 : int
+
+logic result6 : int
+
+logic rank3 : int
+
+logic result7 : int
+
+logic g21 : int
+
+logic result8 : (int,count) farray
+
+logic proposals_made1 : (int,count) farray
+
+logic result9 : bool
+
+logic accepted1 : bool
+
+logic result10 : (int,bool) farray
+
+logic unmatched_g2_set2 : (int,bool) farray
+
+logic result11 : bool
+
+logic accepted2 : bool
+
+logic result12 : (int,group1_id) farray
+
+logic result13 : count
+
+logic unmatched_g1_set__split_fields4 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields5 : count
+
+logic result14 : (int,group1_id) farray
+
+logic result15 : count
+
+logic unmatched_g1_set__split_fields6 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields7 : count
+
+logic result16 : bool
+
+logic accepted3 : bool
+
+logic result17 : (int,group1_id) farray
+
+logic result18 : count
+
+logic unmatched_g1_set__split_fields8 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields9 : count
+
+logic result19 : (int,group1_id) farray
+
+logic result20 : count
+
+logic unmatched_g1_set__split_fields10 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields11 : count
+
+logic result21 : (int,group1_id) farray
+
+logic result__2 : (int,group1_id) farray
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic proposals_made2 : (int,count) farray
+
+logic unmatched_g1_set__split_fields12 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields13 : count
+
+logic unmatched_g2_set3 : (int,bool) farray
+
+logic result__3 : (int,group1_id) farray
+
+logic g12 : int
+
+logic g22 : int
+
+logic accepted4 : bool
+
+logic rank4 : int
+
+logic already_asked2 : int
+
+logic proposals_made3 : (int,count) farray
+
+logic unmatched_g1_set__split_fields14 : (int,group1_id) farray
+
+logic unmatched_g1_set__split_fields15 : count
+
+logic unmatched_g2_set4 : (int,bool) farray
+
+logic result__4 : (int,group1_id) farray
+
+logic g13 : int
+
+logic g23 : int
+
+logic accepted5 : bool
+
+logic rank5 : int
+
+logic already_asked3 : int
+
+axiom H :
+  ((forall g24:int. (((1 <= g24) and (g24 <= 64)) ->
+   (is_permutation_1((ranking_2[g24])) = true))) and
   ((bool_eq11(invert(ranking_2), 1, 64, ranking_2_inverted, 1,
   64) = true) and ((invariant_holds({
   rec__stable_marriage__matching__group1_set__elements =
@@ -1498,119 +1768,344 @@ goal WP_parameter_def :
   rec__stable_marriage__matching__group1_set__cardinality =
   unmatched_g1_set__split_fields1 }, proposals_made, result__,
   unmatched_g2_set) = true) and
-  (0 <  to_rep3(unmatched_g1_set__split_fields1))))) -> (((1 <= 64) ->
-  in_range1(g1)) -> (((1 <= 64) -> in_range2(g2)) -> (((result = rank) and
-  (rank2 = 1)) -> (in_range3(rank2) -> (((0 <= 64) ->
-  in_range4(already_asked)) ->
-  (((((((1 <= to_rep3(unmatched_g1_set__split_fields1)) and
-  (to_rep3(unmatched_g1_set__split_fields1) <= 64)) and
-  (o = to_rep3(unmatched_g1_set__split_fields1))) and
-  (o1 = (unmatched_g1_set__split_fields[o]))) and (o2 = to_rep(o1))) and
-  ((result1 = g1) and (g11 = o2))) ->
-  (((((((o3 = (to_rep3(unmatched_g1_set__split_fields1) - 1)) and
-  in_range4((to_rep3(unmatched_g1_set__split_fields1) - 1))) and
-  (to_rep3(o4) = o3)) and ((unmatched_g1_set__split_fields = o5) and
-  (o4 = o6))) and ((temp___586 = o5) and (temp___5861 = o6))) and
-  (((result2 = unmatched_g1_set__split_fields) and
-  (result3 = unmatched_g1_set__split_fields1)) and
-  ((temp___586 = unmatched_g1_set__split_fields2) and
-  (temp___5861 = unmatched_g1_set__split_fields3)))) ->
-  ((to_rep3((proposals_made[g11])) <  64) -> (((result4 = already_asked) and
-  (already_asked1 = to_rep3((proposals_made[g11])))) ->
-  ((((not (already_asked1 = 0)) and ((((((o7 = already_asked1) and
-  in_range3(already_asked1)) and (o8 = (o7 + 1))) and ((o9 = o8) and
-  in_range3(o8))) and ((result5 = rank2) and (rank3 = o9))) and
-  (not (is_preferred_1(g11,
+  (0 <  to_rep3(unmatched_g1_set__split_fields1)))))
+
+axiom H1 : ((1 <= 64) -> in_range1(g1))
+
+axiom H2 : ((1 <= 64) -> in_range2(g2))
+
+axiom H3 : (result1 = rank)
+
+axiom H4 : (rank2 = 1)
+
+axiom H5 : in_range3(rank2)
+
+axiom H6 : ((0 <= 64) -> in_range4(already_asked))
+
+axiom H7 : ((1 <= to_rep3(unmatched_g1_set__split_fields1)) and
+  (to_rep3(unmatched_g1_set__split_fields1) <= 64))
+
+axiom H8 : (o = to_rep3(unmatched_g1_set__split_fields1))
+
+axiom H9 : (o1 = (unmatched_g1_set__split_fields[o]))
+
+axiom H10 : (o2 = to_rep(o1))
+
+axiom H11 : (result2 = g1)
+
+axiom H12 : (g11 = o2)
+
+axiom H13 : ((o3 = (to_rep3(unmatched_g1_set__split_fields1) - 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields1) - 1)))
+
+axiom H14 : (to_rep3(o4) = o3)
+
+axiom H15 : (unmatched_g1_set__split_fields = o5)
+
+axiom H16 : (o4 = o6)
+
+axiom H17 : (temp___586 = o5)
+
+axiom H18 : (temp___5861 = o6)
+
+axiom H19 : ((result3 = unmatched_g1_set__split_fields) and
+  (result4 = unmatched_g1_set__split_fields1))
+
+axiom H20 : ((unmatched_g1_set__split_fields2 = temp___586) and
+  (unmatched_g1_set__split_fields3 = temp___5861))
+
+axiom H21 : (to_rep3((proposals_made[g11])) <  64)
+
+axiom H22 : (result5 = already_asked)
+
+axiom H23 : (already_asked1 = to_rep3((proposals_made[g11])))
+
+axiom H24 : ((not (already_asked1 = 0)) -> ((o7 = already_asked1) and
+  in_range3(already_asked1)))
+
+axiom H25 : ((not (already_asked1 = 0)) -> (o8 = (o7 + 1)))
+
+axiom H26 : ((not (already_asked1 = 0)) -> ((o9 = o8) and in_range3(o8)))
+
+axiom H27 : ((not (already_asked1 = 0)) -> (result6 = rank2))
+
+axiom H28 : ((not (already_asked1 = 0)) -> (rank3 = o9))
+
+axiom H29 : ((not (already_asked1 = 0)) -> (not (is_preferred_1(g11,
   to_rep((result__[to_rep1(((ranking_1[g11])[(rank3 - 1)]))])),
-  (ranking_2[to_rep1(((ranking_1[g11])[(rank3 - 1)]))])) = true)))) or
-  ((already_asked1 = 0) and (rank3 = rank2))) -> (((result6 = g2) and
-  (g21 = to_rep1(((ranking_1[g11])[rank3])))) ->
-  ((((((o10 = (to_rep3((proposals_made[g11])) + 1)) and
-  in_range4((to_rep3((proposals_made[g11])) + 1))) and
-  (to_rep3(o11) = o10)) and (o12 = (proposals_made[g11 <- o11]))) and
-  ((result7 = proposals_made) and (proposals_made1 = o12))) ->
-  (((((unmatched_g2_set[g21]) = true) and ((((result8 = accepted) and
-  (accepted1 = of_int(1))) and ((result9 = unmatched_g2_set) and
-  (unmatched_g2_set2 = (unmatched_g2_set[g21 <- of_int(0)])))) and
-  (unmatched_g1_set__split_fields6 = {
+  (ranking_2[to_rep1(((ranking_1[g11])[(rank3 - 1)]))])) = true)))
+
+axiom H30 : ((already_asked1 = 0) -> (rank3 = rank2))
+
+axiom H31 : (result7 = g2)
+
+axiom H32 : (g21 = to_rep1(((ranking_1[g11])[rank3])))
+
+axiom H33 : ((o20 = (to_rep3((proposals_made[g11])) + 1)) and
+  in_range4((to_rep3((proposals_made[g11])) + 1)))
+
+axiom H34 : (to_rep3(o21) = o20)
+
+axiom H35 : (o22 = (proposals_made[g11 <- o21]))
+
+axiom H36 : (result8 = proposals_made)
+
+axiom H37 : (proposals_made1 = o22)
+
+axiom H38 : (((unmatched_g2_set[g21]) = true) -> (result9 = accepted))
+
+axiom H39 : (((unmatched_g2_set[g21]) = true) -> (accepted1 = of_int(1)))
+
+axiom H40 : (((unmatched_g2_set[g21]) = true) ->
+  (result10 = unmatched_g2_set))
+
+axiom H41 : (((unmatched_g2_set[g21]) = true) ->
+  (unmatched_g2_set2 = (unmatched_g2_set[g21 <- of_int(0)])))
+
+axiom H42 : (((unmatched_g2_set[g21]) = true) ->
+  ((unmatched_g1_set__split_fields6 = unmatched_g1_set__split_fields2) and
+  (unmatched_g1_set__split_fields7 = unmatched_g1_set__split_fields3)))
+
+axiom H43 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (result11 = accepted)))
+
+axiom H44 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (accepted2 = of_int(1))))
+
+axiom H45 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (to_rep((result__[g21])) = c132b)))
+
+axiom H46 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  in_range1(c132b)))
+
+axiom H47 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((o23 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1)))))
+
+axiom H48 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (to_rep3(o24) = o23)))
+
+axiom H49 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (unmatched_g1_set__split_fields2 = o25)))
+
+axiom H50 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (o24 = o26)))
+
+axiom H51 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (temp___603 = o25)))
+
+axiom H52 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (temp___6031 = o26)))
+
+axiom H53 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((result12 = unmatched_g1_set__split_fields2) and
+  (result13 = unmatched_g1_set__split_fields3))))
+
+axiom H54 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((unmatched_g1_set__split_fields4 = temp___603) and
+  (unmatched_g1_set__split_fields5 = temp___6031))))
+
+axiom H55 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (to_rep(o27) = c132b)))
+
+axiom H56 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((1 <= to_rep3(unmatched_g1_set__split_fields5)) and
+  (to_rep3(unmatched_g1_set__split_fields5) <= 64))))
+
+axiom H57 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (o28 = to_rep3(unmatched_g1_set__split_fields5))))
+
+axiom H58 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (o29 = (unmatched_g1_set__split_fields4[o28 <- o27]))))
+
+axiom H59 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (o29 = o30)))
+
+axiom H60 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (unmatched_g1_set__split_fields5 = o31)))
+
+axiom H61 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (temp___607 = o30)))
+
+axiom H62 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (temp___6071 = o31)))
+
+axiom H63 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((result14 = unmatched_g1_set__split_fields4) and
+  (result15 = unmatched_g1_set__split_fields5))))
+
+axiom H64 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  ((unmatched_g1_set__split_fields6 = temp___607) and
+  (unmatched_g1_set__split_fields7 = temp___6071))))
+
+axiom H65 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) ->
+  (is_preferred_1(g11, to_rep((result__[g21])), (ranking_2[g21])) = true)))
+
+axiom H66 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (result16 = accepted)))
+
+axiom H67 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (accepted3 = of_int(0))))
+
+axiom H68 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (g11 = c134b)))
+
+axiom H69 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  in_range1(c134b)))
+
+axiom H70 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((o32 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
+  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1)))))
+
+axiom H71 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (to_rep3(o33) = o32)))
+
+axiom H72 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (unmatched_g1_set__split_fields2 = o34)))
+
+axiom H73 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (o33 = o35)))
+
+axiom H74 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((temp___595 = o34) and (temp___5951 = o35))))
+
+axiom H75 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((result17 = unmatched_g1_set__split_fields2) and
+  (result18 = unmatched_g1_set__split_fields3))))
+
+axiom H76 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((unmatched_g1_set__split_fields8 = temp___595) and
+  (unmatched_g1_set__split_fields9 = temp___5951))))
+
+axiom H77 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (to_rep(o36) = c134b)))
+
+axiom H78 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((1 <= to_rep3(unmatched_g1_set__split_fields9)) and
+  (to_rep3(unmatched_g1_set__split_fields9) <= 64))))
+
+axiom H79 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (o37 = to_rep3(unmatched_g1_set__split_fields9))))
+
+axiom H80 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (o38 = (unmatched_g1_set__split_fields8[o37 <- o36]))))
+
+axiom H81 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((o39 = o38) and (o40 = unmatched_g1_set__split_fields9))))
+
+axiom H82 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((temp___599 = o39) and (temp___5991 = o40))))
+
+axiom H83 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((result19 = unmatched_g1_set__split_fields8) and
+  (result20 = unmatched_g1_set__split_fields9))))
+
+axiom H84 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((unmatched_g1_set__split_fields10 = temp___599) and
+  (unmatched_g1_set__split_fields11 = temp___5991))))
+
+axiom H85 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  (accepted2 = accepted3)))
+
+axiom H86 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) ->
+  ((unmatched_g1_set__split_fields6 = unmatched_g1_set__split_fields10) and
+  (unmatched_g1_set__split_fields7 = unmatched_g1_set__split_fields11))))
+
+axiom H87 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  (accepted1 = accepted2))
+
+axiom H88 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  (unmatched_g2_set2 = unmatched_g2_set))
+
+axiom H89 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  (accepted1 = accepted2))
+
+axiom H90 : ((not ((unmatched_g2_set[g21]) = true)) ->
+  (unmatched_g2_set2 = unmatched_g2_set1))
+
+axiom H91 : ((accepted1 = true) -> (to_rep(o41) = g11))
+
+axiom H92 : ((accepted1 = true) -> (o42 = (result__[g21 <- o41])))
+
+axiom H93 : ((accepted1 = true) -> (result21 = result__))
+
+axiom H94 : ((accepted1 = true) -> (result__2 = o42))
+
+axiom H95 : ((not (accepted1 = true)) -> (result__2 = result__))
+
+axiom H96 : ((not (accepted1 = true)) -> (result__2 = result__1))
+
+axiom H97 : (all_unmatched_g1_set_elements_distinct({
   rec__stable_marriage__matching__group1_set__elements =
-  unmatched_g1_set__split_fields2;
+  unmatched_g1_set__split_fields6;
   rec__stable_marriage__matching__group1_set__cardinality =
-  unmatched_g1_set__split_fields3 }))) or
-  ((not ((unmatched_g2_set[g21]) = true)) and
-  ((((to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))]))) and
-  (((result10 = accepted) and (accepted2 = of_int(1))) and
-  (((to_rep((result__[g21])) = c132b) and in_range1(c132b)) and
-  (((((((o13 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
-  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1))) and
-  (to_rep3(o14) = o13)) and ((unmatched_g1_set__split_fields2 = o15) and
-  (o14 = o16))) and ((temp___603 = o15) and (temp___6031 = o16))) and
-  (((result11 = unmatched_g1_set__split_fields2) and
-  (result12 = unmatched_g1_set__split_fields3)) and
-  ((temp___603 = unmatched_g1_set__split_fields4) and
-  (temp___6031 = unmatched_g1_set__split_fields5)))) and
-  ((((((to_rep(o17) = c132b) and
-  ((((1 <= to_rep3(unmatched_g1_set__split_fields5)) and
-  (to_rep3(unmatched_g1_set__split_fields5) <= 64)) and
-  (o18 = to_rep3(unmatched_g1_set__split_fields5))) and
-  (o19 = (unmatched_g1_set__split_fields4[o18 <- o17])))) and
-  ((o19 = o20) and (unmatched_g1_set__split_fields5 = o21))) and
-  ((temp___607 = o20) and (temp___6071 = o21))) and
-  (((result13 = unmatched_g1_set__split_fields4) and
-  (result14 = unmatched_g1_set__split_fields5)) and
-  (unmatched_g1_set__split_fields6 = {
-  rec__stable_marriage__matching__group1_set__elements = temp___607;
-  rec__stable_marriage__matching__group1_set__cardinality = temp___6071
-  }))) and (is_preferred_1(g11, to_rep((result__[g21])),
-  (ranking_2[g21])) = true)))))) or
-  ((not (to_rep2(((ranking_2_inverted[g21])[g11])) <  to_rep2(((ranking_2_inverted[g21])[to_rep((result__[g21]))])))) and
-  ((((result15 = { bool__content = accepted }) and
-  (accepted3 = of_int(0))) and (((g11 = c134b) and in_range1(c134b)) and
-  (((((((o22 = (to_rep3(unmatched_g1_set__split_fields3) + 1)) and
-  in_range4((to_rep3(unmatched_g1_set__split_fields3) + 1))) and
-  (to_rep3(o23) = o22)) and ((unmatched_g1_set__split_fields2 = o24) and
-  (o23 = o25))) and ((temp___595 = o24) and (temp___5951 = o25))) and
-  ((result16 = { us_split_fields__content = {
-  rec__stable_marriage__matching__group1_set__elements =
-  unmatched_g1_set__split_fields2;
-  rec__stable_marriage__matching__group1_set__cardinality =
-  unmatched_g1_set__split_fields3 } }) and
-  (unmatched_g1_set__split_fields7 = {
-  rec__stable_marriage__matching__group1_set__elements = temp___595;
-  rec__stable_marriage__matching__group1_set__cardinality = temp___5951
-  }))) and (((((to_rep(o26) = c134b) and
-  ((((1 <= to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality)) and
-  (to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality) <= 64)) and
-  (o27 = to_rep3((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality))) and
-  (o28 = ((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__elements[o27 <- o26])))) and
-  ((o28 = o29) and
-  ((unmatched_g1_set__split_fields7).rec__stable_marriage__matching__group1_set__cardinality = o30))) and
-  ((temp___599 = o29) and (temp___5991 = o30))) and ((result17 = {
-  us_split_fields__content = unmatched_g1_set__split_fields7 }) and
-  (unmatched_g1_set__split_fields8 = {
-  rec__stable_marriage__matching__group1_set__elements = temp___599;
-  rec__stable_marriage__matching__group1_set__cardinality = temp___5991
-  })))))) and ((accepted2 = accepted3) and
-  (unmatched_g1_set__split_fields6 = unmatched_g1_set__split_fields8))))) and
-  (((accepted1 = accepted2) and (unmatched_g2_set2 = unmatched_g2_set)) and
-  ((accepted1 = accepted2) and
-  (unmatched_g2_set2 = unmatched_g2_set1)))))) -> ((((accepted1 = true) and
-  (((to_rep(o31) = g11) and (o32 = (result__[g21 <- o31]))) and
-  ((result18 = { map__content = result__ }) and (result__2 = o32)))) or
-  ((not (accepted1 = true)) and ((result__2 = result__) and
-  (result__2 = result__1)))) ->
-  ((all_unmatched_g1_set_elements_distinct(unmatched_g1_set__split_fields6) = true) ->
-  ((forall g21_id:int. (((1 <= g21_id) and (g21_id <= 64)) ->
-   (forall g22_id:int. (((1 <= g22_id) and (g22_id <= 64)) ->
-   ((((not ((unmatched_g2_set2[g21_id]) = true)) and
-   (not ((unmatched_g2_set2[g22_id]) = true))) and
-   (not (g21_id = g22_id))) ->
-   (not (to_rep((result__2[g21_id])) = to_rep((result__2[g22_id]))))))))) ->
-  ((forall g2_id:int. (((1 <= g2_id) and (g2_id <= 64)) ->
-   ((not ((unmatched_g2_set2[g2_id]) = true)) ->
-   (forall idx:int. (((1 <= idx) and
-   (idx <= to_rep3((unmatched_g1_set__split_fields6).rec__stable_marriage__matching__group1_set__cardinality))) ->
-   (not (to_rep(((unmatched_g1_set__split_fields6).rec__stable_marriage__matching__group1_set__elements[idx])) = to_rep((result__2[g2_id]))))))))) ->
-  (((1 <= g1_id) and (g1_id <= 64)) -> (((1 <= rank1) and
-  (rank1 <= to_rep3((proposals_made1[g1_id])))) ->
-  (1 <= rank1))))))))))))))))))))))
+  unmatched_g1_set__split_fields7 }) = true)
+
+axiom H98 :
+  (forall g21_id:int. (((1 <= g21_id) and (g21_id <= 64)) ->
+  (forall g22_id:int. (((1 <= g22_id) and (g22_id <= 64)) ->
+  ((((not ((unmatched_g2_set2[g21_id]) = true)) and
+  (not ((unmatched_g2_set2[g22_id]) = true))) and (not (g21_id = g22_id))) ->
+  (not (to_rep((result__2[g21_id])) = to_rep((result__2[g22_id])))))))))
+
+axiom H99 :
+  (forall g2_id1:int. (((1 <= g2_id1) and (g2_id1 <= 64)) ->
+  ((not ((unmatched_g2_set2[g2_id1]) = true)) ->
+  (forall idx3:int. (((1 <= idx3) and
+  (idx3 <= to_rep3(unmatched_g1_set__split_fields7))) ->
+  (not (to_rep((unmatched_g1_set__split_fields6[idx3])) = to_rep((result__2[g2_id1])))))))))
+
+axiom H100 : (1 <= g1_id)
+
+axiom H101 : (g1_id <= 64)
+
+axiom H102 : (1 <= rank1)
+
+axiom H103 : (rank1 <= to_rep3((proposals_made1[g1_id])))
+
+ (* File "stable_marriage.adb", line 194, characters 0-0 *)
+goal WP_parameter_def : (1 <= rank1)

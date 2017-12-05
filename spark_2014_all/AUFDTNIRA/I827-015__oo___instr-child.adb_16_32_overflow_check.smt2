@@ -347,6 +347,8 @@
 (declare-const x__split_fields5 us_private)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const instr__increment__x__fields sixty)
 (declare-const instr__increment__x__fields1 sixty)
 (declare-const instr__increment__x__fields2 twenty_four)

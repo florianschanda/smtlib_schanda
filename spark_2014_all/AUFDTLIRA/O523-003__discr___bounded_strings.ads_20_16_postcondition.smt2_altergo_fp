@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -585,15 +585,15 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((to_rep3(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq9(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
-  (to_rep2(((a).us_split_fields1).rec__bounded_strings__bounded_string__size) = to_rep2(((b).us_split_fields1).rec__bounded_strings__bounded_string__size))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq9(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
+  ((((to_rep3(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq9(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
   (to_rep2(((a).us_split_fields1).rec__bounded_strings__bounded_string__size) = to_rep2(((b).us_split_fields1).rec__bounded_strings__bounded_string__size)))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq9(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
+  (to_rep2(((a).us_split_fields1).rec__bounded_strings__bounded_string__size) = to_rep2(((b).us_split_fields1).rec__bounded_strings__bounded_string__size))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size2 : int
@@ -874,15 +874,15 @@ logic bool_eq13 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq13(a, b)].
-  (((((to_rep3(((a).us_split_discrs2).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs2).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq12(((a).us_split_fields3).rec__bounded_strings__bounded_string__text1,
-  ((b).us_split_fields3).rec__bounded_strings__bounded_string__text1) = true)) and
-  (to_rep2(((a).us_split_fields3).rec__bounded_strings__bounded_string__size1) = to_rep2(((b).us_split_fields3).rec__bounded_strings__bounded_string__size1))) ->
-  (bool_eq13(a, b) = true)) and
-  ((not (((to_rep3(((a).us_split_discrs2).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs2).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq12(((a).us_split_fields3).rec__bounded_strings__bounded_string__text1,
-  ((b).us_split_fields3).rec__bounded_strings__bounded_string__text1) = true)) and
+  ((((to_rep3(((a).us_split_discrs2).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs2).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq12(((a).us_split_fields3).rec__bounded_strings__bounded_string__text1,
+  ((b).us_split_fields3).rec__bounded_strings__bounded_string__text1) = true) and
   (to_rep2(((a).us_split_fields3).rec__bounded_strings__bounded_string__size1) = to_rep2(((b).us_split_fields3).rec__bounded_strings__bounded_string__size1)))) ->
+  (bool_eq13(a, b) = true)) and
+  ((not ((to_rep3(((a).us_split_discrs2).rec__bounded_strings__bounded_string__bound) = to_rep3(((b).us_split_discrs2).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq12(((a).us_split_fields3).rec__bounded_strings__bounded_string__text1,
+  ((b).us_split_fields3).rec__bounded_strings__bounded_string__text1) = true) and
+  (to_rep2(((a).us_split_fields3).rec__bounded_strings__bounded_string__size1) = to_rep2(((b).us_split_fields3).rec__bounded_strings__bounded_string__size1))))) ->
   (bool_eq13(a, b) = false))))
 
 predicate in_range5(rec__bounded_strings__bounded_string__bound1: int,
@@ -1194,53 +1194,217 @@ axiom def_axiom :
   (forall temp___197:int. (((temp___192(temp___194, temp___195,
   temp___196)).elts3[temp___197]) = of_rep(temp___194)))))
 
- (* File "bounded_strings.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b__split_fields:(int,character) farray. forall b__split_fields1:t2.
-  forall b__split_fields2:size_type.
-  forall bounded_strings__make__result:index_type.
-  forall bounded_strings__make__result1:(int,character) farray.
-  forall bounded_strings__make__result2:t1.
-  forall bounded_strings__make__result3:size_type. forall us:int.
-  forall temp___199:(int,character) farray. forall temp___1991:t3.
-  forall temp___200:(int,character) farray. forall temp___2001:t2.
-  forall o:(int,character) farray. forall o1:t2.
-  forall o2:(int,character) farray. forall o3:t2. forall o4:size_type.
-  forall temp___203:index_type. forall temp___2031:(int,character) farray.
-  forall temp___2032:t2. forall temp___2033:size_type.
-  forall temp___204:(int,character) farray. forall temp___2041:t4.
-  forall temp___206:int. forall o5:(int,character) farray.
-  forall temp___208:(int,character) farray. forall temp___2081:t4.
-  forall temp___210:(int,character) farray. forall temp___2101:t4.
-  forall o6:(int,character) farray. forall o7:t2.
-  forall o8:(int,character) farray. forall o9:t2. forall o10:size_type.
-  forall temp___213:index_type. forall temp___2131:(int,character) farray.
-  forall temp___2132:t2. forall temp___2133:size_type. forall o11:int.
-  forall o12:size_type. forall o13:(int,character) farray. forall o14:t2.
-  forall o15:size_type. forall temp___215:index_type.
-  forall temp___2151:(int,character) farray. forall temp___2152:t2.
-  forall temp___2153:size_type. forall result:(int,character) farray.
-  forall result1:t2. forall result2:size_type.
-  forall b__split_fields3:(int,character) farray. forall b__split_fields4:t2.
-  forall b__split_fields5:size_type. forall result3:(int,character) farray.
-  forall result4:t2. forall result5:size_type.
-  forall b__split_fields6:(int,character) farray. forall b__split_fields7:t2.
-  forall b__split_fields8:size_type. forall result6:us_split_fields__ref1.
-  forall b__split_fields9:us_split_fields2.
-  forall result7:bounded_string__ref.
-  forall bounded_strings__make__result4:us_rep.
-  forall bounded_strings__make__result5:bounded_string__ref.
-  forall bounded_strings__make__result6:us_rep.
-  forall b__split_fields10:us_split_fields__ref1.
-  forall bounded_strings__make__result7:bounded_string__ref.
-  forall b__split_fields11:us_split_fields2.
-  forall bounded_strings__make__result8:us_rep.
-  (forall result8:index_type. forall result9:(int,character) farray.
-  forall result10:t1. forall result11:size_type. ((in_range3(upper_bound) and
-  (dynamic_property(1, 2147483647, to_rep1(first(initializer1)),
-  to_rep1(last(initializer1))) and ((length({ elts = initializer; rt =
-  initializer1 }) <= upper_bound) and (((((us = upper_bound) and
-  in_range3(upper_bound)) and ((to_rep3(b__split_discrs) = upper_bound) and
+logic b__split_fields : (int,character) farray
+
+logic b__split_fields1 : t2
+
+logic b__split_fields2 : size_type
+
+logic bounded_strings__make__result : index_type
+
+logic bounded_strings__make__result1 : (int,character) farray
+
+logic bounded_strings__make__result2 : t1
+
+logic bounded_strings__make__result3 : size_type
+
+logic o : int
+
+logic us : int
+
+logic temp___199 : (int,character) farray
+
+logic temp___1991 : t3
+
+logic temp___200 : (int,character) farray
+
+logic temp___2001 : t2
+
+logic o1 : (int,character) farray
+
+logic o2 : t2
+
+logic o3 : (int,character) farray
+
+logic o4 : t2
+
+logic o5 : size_type
+
+logic temp___203 : index_type
+
+logic temp___2031 : (int,character) farray
+
+logic temp___2032 : t2
+
+logic temp___2033 : size_type
+
+logic temp___204 : (int,character) farray
+
+logic temp___2041 : t4
+
+logic temp___206 : int
+
+logic o6 : (int,character) farray
+
+logic temp___208 : (int,character) farray
+
+logic temp___2081 : t4
+
+logic temp___210 : (int,character) farray
+
+logic temp___2101 : t4
+
+logic o7 : (int,character) farray
+
+logic o8 : t2
+
+logic o9 : (int,character) farray
+
+logic o10 : t2
+
+logic o11 : size_type
+
+logic temp___213 : index_type
+
+logic temp___2131 : (int,character) farray
+
+logic temp___2132 : t2
+
+logic temp___2133 : size_type
+
+logic o12 : int
+
+logic o13 : size_type
+
+logic o14 : (int,character) farray
+
+logic o15 : t2
+
+logic o16 : size_type
+
+logic temp___215 : index_type
+
+logic temp___2151 : (int,character) farray
+
+logic temp___2152 : t2
+
+logic temp___2153 : size_type
+
+logic o17 : int
+
+logic result : (int,character) farray
+
+logic result1 : t2
+
+logic result2 : size_type
+
+logic b__split_fields3 : (int,character) farray
+
+logic b__split_fields4 : t2
+
+logic b__split_fields5 : size_type
+
+logic result3 : (int,character) farray
+
+logic result4 : t2
+
+logic result5 : size_type
+
+logic b__split_fields6 : (int,character) farray
+
+logic b__split_fields7 : t2
+
+logic b__split_fields8 : size_type
+
+logic result6 : (int,character) farray
+
+logic result7 : t2
+
+logic result8 : size_type
+
+logic b__split_fields9 : (int,character) farray
+
+logic b__split_fields10 : t2
+
+logic b__split_fields11 : size_type
+
+logic result9 : index_type
+
+logic result10 : (int,character) farray
+
+logic result11 : t1
+
+logic result12 : size_type
+
+logic bounded_strings__make__result4 : index_type
+
+logic bounded_strings__make__result5 : (int,character) farray
+
+logic bounded_strings__make__result6 : t1
+
+logic bounded_strings__make__result7 : size_type
+
+logic bounded_strings__make__result8 : index_type
+
+logic bounded_strings__make__result9 : (int,character) farray
+
+logic bounded_strings__make__result10 : t1
+
+logic bounded_strings__make__result11 : size_type
+
+logic bounded_strings__make__result12 : index_type
+
+logic bounded_strings__make__result13 : (int,character) farray
+
+logic bounded_strings__make__result14 : t1
+
+logic bounded_strings__make__result15 : size_type
+
+logic b__split_fields12 : (int,character) farray
+
+logic b__split_fields13 : t2
+
+logic b__split_fields14 : size_type
+
+logic bounded_strings__make__result16 : index_type
+
+logic bounded_strings__make__result17 : (int,character) farray
+
+logic bounded_strings__make__result18 : t1
+
+logic bounded_strings__make__result19 : size_type
+
+logic b__split_fields15 : (int,character) farray
+
+logic b__split_fields16 : t2
+
+logic b__split_fields17 : size_type
+
+logic bounded_strings__make__result20 : index_type
+
+logic bounded_strings__make__result21 : (int,character) farray
+
+logic bounded_strings__make__result22 : t1
+
+logic bounded_strings__make__result23 : size_type
+
+logic result13 : index_type
+
+logic result14 : (int,character) farray
+
+logic result15 : t1
+
+logic result16 : size_type
+
+axiom H : in_range3(upper_bound)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(initializer1)),
+  to_rep1(last(initializer1)))
+
+axiom H2 : (length({ elts = initializer; rt = initializer1 }) <= upper_bound)
+
+axiom H3 : ((((us = upper_bound) and in_range3(upper_bound)) and
+  ((to_rep3(b__split_discrs) = upper_bound) and
   (((upper_bound = to_rep3(((to_base({ us_split_discrs2 = {
   rec__bounded_strings__bounded_string__bound = b__split_discrs };
   us_split_fields3 = { rec__bounded_strings__bounded_string__text1 = {
@@ -1255,43 +1419,40 @@ goal WP_parameter_def :
   ((to_rep1(last6((temp___192(0, 1, upper_bound)).rt3)) = upper_bound) and ({
   elts3 = temp___199; rt3 = temp___1991 } = temp___192(0, 1,
   upper_bound)))) and
-  ((((to_rep1(first6(temp___1991)) <= to_rep1(last6(temp___1991))) and
-  (((1 <= upper_bound) and
-  (((to_rep1(last6(temp___1991)) - to_rep1(first6(temp___1991))) + 1) = ((upper_bound - 1) + 1))) or
-  ((not (1 <= upper_bound)) and
-  (((to_rep1(last6(temp___1991)) - to_rep1(first6(temp___1991))) + 1) = 0)))) or
-  ((not (to_rep1(first6(temp___1991)) <= to_rep1(last6(temp___1991)))) and
-  (((1 <= upper_bound) and (0 = ((upper_bound - 1) + 1))) or
-  (not (1 <= upper_bound))))) and ((temp___199 = temp___200) and
-  (mk2(to_rep1(first6(temp___1991)),
+  ((((to_rep1(first6(temp___1991)) <= to_rep1(last6(temp___1991))) ->
+  (((1 <= upper_bound) ->
+  (((to_rep1(last6(temp___1991)) - to_rep1(first6(temp___1991))) + 1) = ((upper_bound - 1) + 1))) and
+  ((not (1 <= upper_bound)) ->
+  (((to_rep1(last6(temp___1991)) - to_rep1(first6(temp___1991))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___1991)) <= to_rep1(last6(temp___1991)))) ->
+  ((1 <= upper_bound) -> (0 = ((upper_bound - 1) + 1))))) and
+  ((temp___199 = temp___200) and (mk2(to_rep1(first6(temp___1991)),
   to_rep1(last6(temp___1991))) = temp___2001)))) and
-  ((((to_rep1(first4(temp___2001)) <= to_rep1(last4(temp___2001))) and
-  (((to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1))) and
-  (((to_rep1(last4(temp___2001)) - to_rep1(first4(temp___2001))) + 1) = ((to_rep1(last4(b__split_fields1)) - to_rep1(first4(b__split_fields1))) + 1))) or
-  ((not (to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1)))) and
-  (((to_rep1(last4(temp___2001)) - to_rep1(first4(temp___2001))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2001)) <= to_rep1(last4(temp___2001)))) and
-  (((to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1))) and
-  (0 = ((to_rep1(last4(b__split_fields1)) - to_rep1(first4(b__split_fields1))) + 1))) or
-  (not (to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1))))))) and
-  ({ elts2 = o; rt2 = o1 } = { elts2 = temp___200; rt2 = temp___2001 }))) and
-  (((o2 = o) and (o3 = o1)) and (b__split_fields2 = o4))) and
-  ((b__split_discrs = temp___203) and (((temp___2031 = o2) and
-  (temp___2032 = o3)) and (temp___2033 = o4)))) and
+  ((((to_rep1(first4(temp___2001)) <= to_rep1(last4(temp___2001))) ->
+  (((to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1))) ->
+  (((to_rep1(last4(temp___2001)) - to_rep1(first4(temp___2001))) + 1) = ((to_rep1(last4(b__split_fields1)) - to_rep1(first4(b__split_fields1))) + 1))) and
+  ((not (to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1)))) ->
+  (((to_rep1(last4(temp___2001)) - to_rep1(first4(temp___2001))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2001)) <= to_rep1(last4(temp___2001)))) ->
+  ((to_rep1(first4(b__split_fields1)) <= to_rep1(last4(b__split_fields1))) ->
+  (0 = ((to_rep1(last4(b__split_fields1)) - to_rep1(first4(b__split_fields1))) + 1))))) and
+  ((o1 = temp___200) and (o2 = temp___2001)))) and (((o3 = o1) and
+  (o4 = o2)) and (b__split_fields2 = o5))) and
+  ((b__split_discrs = temp___203) and (((temp___2031 = o3) and
+  (temp___2032 = o4)) and (temp___2033 = o5)))) and
   (((((result = b__split_fields) and (result1 = b__split_fields1)) and
-  (result2 = b__split_fields2)) and (((temp___2031 = b__split_fields3) and
-  (temp___2032 = b__split_fields4)) and
-  (temp___2033 = b__split_fields5))) and (b__split_discrs = temp___203))) and
-  ((((((((((to_rep1(first(initializer1)) <= to_rep1(last(initializer1))) and
-  (((1 <= length({ elts = initializer; rt = initializer1 })) and
+  (result2 = b__split_fields2)) and (((b__split_fields3 = temp___2031) and
+  (b__split_fields4 = temp___2032)) and
+  (b__split_fields5 = temp___2033))) and (b__split_discrs = temp___203))) and
+  ((((((((((to_rep1(first(initializer1)) <= to_rep1(last(initializer1))) ->
+  (((1 <= length({ elts = initializer; rt = initializer1 })) ->
   (((to_rep1(last(initializer1)) - to_rep1(first(initializer1))) + 1) = ((length({
-  elts = initializer; rt = initializer1 }) - 1) + 1))) or
-  ((not (1 <= length({ elts = initializer; rt = initializer1 }))) and
-  (((to_rep1(last(initializer1)) - to_rep1(first(initializer1))) + 1) = 0)))) or
-  ((not (to_rep1(first(initializer1)) <= to_rep1(last(initializer1)))) and
-  (((1 <= length({ elts = initializer; rt = initializer1 })) and
-  (0 = ((length({ elts = initializer; rt = initializer1 }) - 1) + 1))) or
-  (not (1 <= length({ elts = initializer; rt = initializer1 })))))) and
+  elts = initializer; rt = initializer1 }) - 1) + 1))) and
+  ((not (1 <= length({ elts = initializer; rt = initializer1 }))) ->
+  (((to_rep1(last(initializer1)) - to_rep1(first(initializer1))) + 1) = 0)))) and
+  ((not (to_rep1(first(initializer1)) <= to_rep1(last(initializer1)))) ->
+  ((1 <= length({ elts = initializer; rt = initializer1 })) ->
+  (0 = ((length({ elts = initializer; rt = initializer1 }) - 1) + 1))))) and
   ((slide(initializer, to_rep1(first(initializer1)), 1) = temp___204) and
   (mk4(1, length({ elts = initializer; rt = initializer1
   })) = temp___2041))) and ((((temp___206 = length({ elts = initializer; rt =
@@ -1301,65 +1462,92 @@ goal WP_parameter_def :
   (1 <= to_rep1(last4(b__split_fields4)))) and
   ((to_rep1(first4(b__split_fields4)) <= temp___206) and
   (temp___206 <= to_rep1(last4(b__split_fields4)))))) and
-  (o5 = b__split_fields3)) and ((o5 = temp___208) and (mk4(1,
+  (o6 = b__split_fields3)) and ((o6 = temp___208) and (mk4(1,
   temp___206) = temp___2081)))) and
-  ((((to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041))) and
-  (((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) and
-  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1))) or
-  ((not (to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081)))) and
-  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = 0)))) or
-  ((not (to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041)))) and
-  (((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) and
-  (0 = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1))) or
-  (not (to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))))))) and
-  ({ elts4 = temp___210; rt4 = temp___2101 } = { elts4 = temp___204; rt4 =
-  temp___2041 })))) and
-  (((to_rep1(first4(b__split_fields4)) = to_rep1(first4(o7))) and
-  (to_rep1(last4(b__split_fields4)) = to_rep1(last4(o7)))) and
+  ((((to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041))) ->
+  (((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) ->
+  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1))) and
+  ((not (to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081)))) ->
+  (((to_rep1(last8(temp___2041)) - to_rep1(first8(temp___2041))) + 1) = 0)))) and
+  ((not (to_rep1(first8(temp___2041)) <= to_rep1(last8(temp___2041)))) ->
+  ((to_rep1(first8(temp___2081)) <= to_rep1(last8(temp___2081))) ->
+  (0 = ((to_rep1(last8(temp___2081)) - to_rep1(first8(temp___2081))) + 1))))) and
+  ((temp___210 = temp___204) and (temp___2101 = temp___2041))))) and
+  (((to_rep1(first4(b__split_fields4)) = to_rep1(first4(o8))) and
+  (to_rep1(last4(b__split_fields4)) = to_rep1(last4(o8)))) and
   (forall temp___211:int. ((((1 <= temp___211) and (temp___211 <= length({
-  elts = initializer; rt = initializer1 }))) and
-  ((o6[temp___211]) = (temp___210[temp___211]))) or
+  elts = initializer; rt = initializer1 }))) ->
+  ((o7[temp___211]) = (temp___210[temp___211]))) and
   ((not ((1 <= temp___211) and (temp___211 <= length({ elts = initializer;
-  rt = initializer1 })))) and
-  ((o6[temp___211]) = (b__split_fields3[temp___211]))))))) and
-  (((o8 = o6) and (o9 = o7)) and (b__split_fields5 = o10))) and
-  ((b__split_discrs = temp___213) and (((temp___2131 = o8) and
-  (temp___2132 = o9)) and (temp___2133 = o10)))) and
+  rt = initializer1 })))) ->
+  ((o7[temp___211]) = (b__split_fields3[temp___211]))))))) and
+  (((o9 = o7) and (o10 = o8)) and (o11 = b__split_fields5))) and
+  ((temp___213 = b__split_discrs) and (((temp___2131 = o9) and
+  (temp___2132 = o10)) and (temp___2133 = o11)))) and
   (((((result3 = b__split_fields3) and (result4 = b__split_fields4)) and
-  (result5 = b__split_fields5)) and (((temp___2131 = b__split_fields6) and
-  (temp___2132 = b__split_fields7)) and
-  (temp___2133 = b__split_fields8))) and (b__split_discrs = temp___213))) and
-  (((((((o11 = length({ elts = initializer; rt = initializer1 })) and
+  (result5 = b__split_fields5)) and (((b__split_fields6 = temp___2131) and
+  (b__split_fields7 = temp___2132)) and
+  (b__split_fields8 = temp___2133))) and (b__split_discrs = temp___213))) and
+  (((((((o12 = length({ elts = initializer; rt = initializer1 })) and
   in_range4(length({ elts = initializer; rt = initializer1 }))) and
-  (to_rep2(o12) = o11)) and (((b__split_fields6 = o13) and
-  (b__split_fields7 = o14)) and (o12 = o15))) and
-  ((b__split_discrs = temp___215) and (((temp___2151 = o13) and
-  (temp___2152 = o14)) and (temp___2153 = o15)))) and (((result6 = {
-  us_split_fields__content1 = { rec__bounded_strings__bounded_string__text1 =
-  { elts2 = b__split_fields6; rt2 = b__split_fields7 };
-  rec__bounded_strings__bounded_string__size1 = b__split_fields8 } }) and
-  (b__split_fields9 = { rec__bounded_strings__bounded_string__text1 = {
-  elts2 = temp___2151; rt2 = temp___2152 };
-  rec__bounded_strings__bounded_string__size1 = temp___2153 })) and
-  (b__split_discrs = temp___215))) and (((bounded_strings__make__result5 = {
-  bounded_string__content = bounded_strings__make__result4 }) and
-  (bounded_strings__make__result6 = bounded_strings__make__result4)) and
-  ((result7 = { bounded_string__content = { us_split_discrs1 = {
-  rec__bounded_strings__bounded_string__bound = bounded_strings__make__result
-  }; us_split_fields1 = { rec__bounded_strings__bounded_string__text = {
-  elts1 = bounded_strings__make__result1; rt1 =
-  bounded_strings__make__result2 };
-  rec__bounded_strings__bounded_string__size = bounded_strings__make__result3
-  } } }) and (bounded_strings__make__result4 = to_base({ us_split_discrs2 = {
+  (to_rep2(o13) = o12)) and (((o14 = b__split_fields6) and
+  (o15 = b__split_fields7)) and (o16 = o13))) and
+  ((temp___215 = b__split_discrs) and (((temp___2151 = o14) and
+  (temp___2152 = o15)) and (temp___2153 = o16)))) and
+  (((((result6 = b__split_fields6) and (result7 = b__split_fields7)) and
+  (result8 = b__split_fields8)) and (((b__split_fields9 = temp___2151) and
+  (b__split_fields10 = temp___2152)) and
+  (b__split_fields11 = temp___2153))) and
+  (b__split_discrs = temp___215))) and
+  ((((bounded_strings__make__result8 = bounded_strings__make__result4) and
+  (((bounded_strings__make__result9 = bounded_strings__make__result5) and
+  (bounded_strings__make__result10 = bounded_strings__make__result6)) and
+  (bounded_strings__make__result11 = bounded_strings__make__result7))) and
+  ((bounded_strings__make__result12 = bounded_strings__make__result4) and
+  (((bounded_strings__make__result13 = bounded_strings__make__result5) and
+  (bounded_strings__make__result14 = bounded_strings__make__result6)) and
+  (bounded_strings__make__result15 = bounded_strings__make__result7)))) and
+  (((result9 = bounded_strings__make__result) and
+  (((result10 = bounded_strings__make__result1) and
+  (result11 = bounded_strings__make__result2)) and
+  (result12 = bounded_strings__make__result3))) and ({ us_split_discrs1 = {
+  rec__bounded_strings__bounded_string__bound =
+  bounded_strings__make__result4 }; us_split_fields1 = {
+  rec__bounded_strings__bounded_string__text = { elts1 =
+  bounded_strings__make__result5; rt1 = bounded_strings__make__result6 };
+  rec__bounded_strings__bounded_string__size = bounded_strings__make__result7
+  } } = to_base({ us_split_discrs2 = {
   rec__bounded_strings__bounded_string__bound = b__split_discrs };
-  us_split_fields3 = b__split_fields9 })))))))))) and
-  (((bounded_strings__make__result7 = bounded_strings__make__result5) and
-  (b__split_fields10 = { us_split_fields__content1 = b__split_fields9 })) and
-  ((bounded_strings__make__result8 = bounded_strings__make__result6) and
-  (b__split_fields11 = b__split_fields9)))) and ({ us_split_discrs1 = {
-  rec__bounded_strings__bounded_string__bound = result8 }; us_split_fields1 =
-  { rec__bounded_strings__bounded_string__text = { elts1 = result9; rt1 =
-  result10 }; rec__bounded_strings__bounded_string__size = result11 }
-  } = (bounded_strings__make__result7).bounded_string__content))))) ->
-  (size((bounded_strings__make__result7).bounded_string__content) = length({
-  elts = initializer; rt = initializer1 })))))
+  us_split_fields3 = { rec__bounded_strings__bounded_string__text1 = {
+  elts2 = b__split_fields9; rt2 = b__split_fields10 };
+  rec__bounded_strings__bounded_string__size1 = b__split_fields11 }
+  })))))))))) and
+  ((((bounded_strings__make__result16 = bounded_strings__make__result8) and
+  (((bounded_strings__make__result17 = bounded_strings__make__result9) and
+  (bounded_strings__make__result18 = bounded_strings__make__result10)) and
+  (bounded_strings__make__result19 = bounded_strings__make__result11))) and
+  (((b__split_fields12 = b__split_fields9) and
+  (b__split_fields13 = b__split_fields10)) and
+  (b__split_fields14 = b__split_fields11))) and
+  (((bounded_strings__make__result20 = bounded_strings__make__result12) and
+  (((bounded_strings__make__result21 = bounded_strings__make__result13) and
+  (bounded_strings__make__result22 = bounded_strings__make__result14)) and
+  (bounded_strings__make__result23 = bounded_strings__make__result15))) and
+  (((b__split_fields15 = b__split_fields9) and
+  (b__split_fields16 = b__split_fields10)) and
+  (b__split_fields17 = b__split_fields11)))))
+
+axiom H4 : ((result13 = bounded_strings__make__result16) and
+  (((result14 = bounded_strings__make__result17) and
+  (result15 = bounded_strings__make__result18)) and
+  (result16 = bounded_strings__make__result19)))
+
+ (* File "bounded_strings.ads", line 24, characters 0-0 *)
+goal WP_parameter_def : (size({ us_split_discrs1 = {
+  rec__bounded_strings__bounded_string__bound =
+  bounded_strings__make__result16 }; us_split_fields1 = {
+  rec__bounded_strings__bounded_string__text = { elts1 =
+  bounded_strings__make__result17; rt1 = bounded_strings__make__result18 };
+  rec__bounded_strings__bounded_string__size =
+  bounded_strings__make__result19 } }) = length({ elts = initializer; rt =
+  initializer1 }))

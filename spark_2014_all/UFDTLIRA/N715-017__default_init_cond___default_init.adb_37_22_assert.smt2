@@ -50,6 +50,7 @@
 (assert true)
 (assert (forall ((x Int)) (! (= (= (wrong_ok x) true) (= x (init 0))) :pattern ((wrong_ok x)))))
 (declare-const w Int)
+(declare-const o Int)
 (assert (default_initial_assumption w false))
 (assert (=> (<= 0 2147483647) (in_range w)))
 (assert (not (= w (init 0))))

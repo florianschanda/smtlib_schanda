@@ -302,18 +302,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -432,7 +432,7 @@ function gpa_type__ref___projection(a: gpa_type__ref) : gpa_type =
 
 type tmoney_typeB
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic dummy3 : tmoney_typeB
 
@@ -540,7 +540,7 @@ function tmoney_typeB__ref___projection(a: tmoney_typeB__ref) : tmoney_typeB =
 
 type money_type
 
-predicate in_range5(x: int) = (((-9999999) <= x) and (x <= 9999999))
+predicate in_range5(x: int) = (((- 9999999) <= x) and (x <= 9999999))
 
 logic dummy4 : money_type
 
@@ -1242,32 +1242,166 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic tuition : money_type
+
+logic fees : money_type
+
+logic grants : money_type
+
+logic insurance : money_type
+
+logic o : money_type
+
+logic o1 : money_type
+
+logic o2 : money_type
+
+logic o3 : money_type
+
+logic o4 : money_type
+
+logic o5 : money_type
+
+logic o6 : money_type
+
+logic o7 : money_type
+
+logic o8 : money_type
+
+logic o9 : money_type
+
+logic o10 : money_type
+
+logic o11 : money_type
+
+logic o12 : money_type
+
+logic o13 : money_type
+
+logic o14 : money_type
+
+logic result : money_type
+
+logic grants1 : money_type
+
+logic result1 : money_type
+
+logic insurance1 : money_type
+
+logic result2 : money_type
+
+logic tuition1 : money_type
+
+logic result3 : money_type
+
+logic tuition2 : money_type
+
+logic result4 : money_type
+
+logic insurance2 : money_type
+
+logic result5 : money_type
+
+logic fees1 : money_type
+
+logic result6 : money_type
+
+logic fees2 : money_type
+
+logic result7 : money_type
+
+logic fees3 : money_type
+
+logic result8 : money_type
+
+logic fees4 : money_type
+
+logic result9 : money_type
+
+logic fees5 : money_type
+
+logic result10 : money_type
+
+logic fees6 : money_type
+
+logic result11 : money_type
+
+logic fees7 : money_type
+
+logic result12 : money_type
+
+logic fees8 : money_type
+
+logic result13 : money_type
+
+logic fees9 : money_type
+
+logic result14 : money_type
+
+logic grants2 : money_type
+
+logic result15 : money_type
+
+logic grants3 : money_type
+
+axiom H : ((0 <= to_fixed2(base_tuition)) and
+  (to_fixed2(base_tuition) <= 2000000))
+
+axiom H1 : (to_fixed2(o) = 0)
+
+axiom H2 : (result = grants)
+
+axiom H3 : (grants1 = o)
+
+axiom H4 : (to_fixed2(o1) = 0)
+
+axiom H5 : (result1 = insurance)
+
+axiom H6 : (insurance1 = o1)
+
+axiom H7 : (result2 = tuition)
+
+axiom H8 : (tuition1 = base_tuition)
+
+axiom H9 : ((not (student7 = true)) ->
+  (to_fixed2(o2) = (to_fixed2(tuition1) + fxp_div_int1(to_fixed2(tuition1),
+  2))))
+
+axiom H10 : ((not (student7 = true)) -> (result3 = tuition1))
+
+axiom H11 : ((not (student7 = true)) -> (tuition2 = o2))
+
+axiom H12 : ((student7 = true) -> (tuition2 = tuition1))
+
+axiom H13 : ((not (student10 = true)) -> (to_fixed2(o3) = 100000))
+
+axiom H14 : ((not (student10 = true)) -> (result4 = insurance1))
+
+axiom H15 : ((not (student10 = true)) -> (insurance2 = o3))
+
+axiom H16 : ((student10 = true) -> (insurance2 = insurance1))
+
+axiom H17 : ((student6 = true) -> (to_fixed2(o4) = 10000))
+
+axiom H18 : ((student6 = true) -> (result5 = fees))
+
+axiom H19 : ((student6 = true) -> (fees1 = o4))
+
+axiom H20 : ((not (student6 = true)) -> (to_fixed2(o5) = 50000))
+
+axiom H21 : ((not (student6 = true)) -> (result6 = fees))
+
+axiom H22 : ((not (student6 = true)) -> (fees2 = o5))
+
+axiom H23 : ((not (student6 = true)) -> (fees1 = fees2))
+
+axiom H24 : (not (student8 = true))
+
+axiom H25 : (not (to_rep1(student9) = 0))
+
+axiom H26 : (not (to_rep1(student9) = 1))
+
+axiom H27 : (to_rep1(student9) = 2)
+
  (* File "students.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tuition:money_type. forall fees:money_type.
-  forall grants:money_type. forall insurance:money_type. forall o:money_type.
-  forall o1:money_type. forall o2:money_type. forall o3:money_type.
-  forall o4:money_type. forall o5:money_type. forall result:money_type.
-  forall grants1:money_type. forall result1:money_type.
-  forall insurance1:money_type. forall result2:money_type.
-  forall tuition1:money_type. forall result3:money_type.
-  forall tuition2:money_type. forall result4:money_type.
-  forall insurance2:money_type. forall result5:money_type.
-  forall fees1:money_type. forall result6:money_type.
-  forall fees2:money_type. (((0 <= to_fixed2(base_tuition)) and
-  (to_fixed2(base_tuition) <= 2000000)) -> (((to_fixed2(o) = 0) and
-  ((result = grants) and (grants1 = o))) -> (((to_fixed2(o1) = 0) and
-  ((result1 = insurance) and (insurance1 = o1))) -> (((result2 = tuition) and
-  (tuition1 = base_tuition)) -> ((((not (student7 = true)) and
-  ((to_fixed2(o2) = (to_fixed2(tuition1) + fxp_div_int1(to_fixed2(tuition1),
-  2))) and ((result3 = tuition1) and (tuition2 = o2)))) or
-  ((student7 = true) and (tuition2 = tuition1))) ->
-  ((((not (student10 = true)) and ((to_fixed2(o3) = 100000) and
-  ((result4 = insurance1) and (insurance2 = o3)))) or ((student10 = true) and
-  (insurance2 = insurance1))) -> ((((student6 = true) and
-  ((to_fixed2(o4) = 10000) and ((result5 = fees) and (fees1 = o4)))) or
-  ((not (student6 = true)) and (((to_fixed2(o5) = 50000) and
-  ((result6 = fees) and (fees2 = o5))) and (fees1 = fees2)))) ->
-  ((not (student8 = true)) -> ((not (to_rep1(student9) = 0)) ->
-  ((not (to_rep1(student9) = 1)) -> ((to_rep1(student9) = 2) ->
-  in_range5((to_fixed2(fees1) + 150000))))))))))))))
+goal WP_parameter_def : in_range5((to_fixed2(fees1) + 150000))

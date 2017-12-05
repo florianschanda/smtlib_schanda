@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -590,62 +590,203 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ret:(int,character) farray. forall to_up:bool. forall idx:int.
-  forall hello__to_camel_case__result:(int,character) farray.
-  forall hello__to_camel_case__result1:t.
-  forall hello__to_camel_case__ret__assume:(int,character) farray.
-  forall hello__to_camel_case__ret__assume1:t1. forall temp___598:int.
-  forall temp___597:bool. forall temp___595:(int,character) farray.
-  forall o:int. forall o1:character. forall o2:(int,character) farray.
-  forall o3:int. forall o4:character. forall o5:(int,character) farray.
-  forall result:(int,character) farray. forall ret1:(int,character) farray.
-  forall result1:bool. forall to_up1:bool. forall result2:int.
-  forall idx1:int. forall result3:(int,character) farray.
-  forall ret2:(int,character) farray. forall result4:(int,character) farray.
-  forall ret3:(int,character) farray. forall ret4:(int,character) farray.
-  forall to_up2:bool. forall idx2:int. forall result5:bool.
-  forall to_up3:bool. forall result6:bool. forall to_up4:bool.
-  forall ret5:(int,character) farray. forall to_up5:bool. forall idx3:int.
-  forall ret6:(int,character) farray. forall to_up6:bool. forall idx4:int.
-  forall ret7:(int,character) farray. forall to_up7:bool. forall idx5:int.
-  forall ret8:(int,character) farray. forall to_up8:bool. forall idx6:int.
-  forall result7:(int,character) farray. forall result8:t.
-  forall hello__to_camel_case__result2:(int,character) farray.
-  forall hello__to_camel_case__result3:t.
-  forall hello__to_camel_case__result4:(int,character) farray.
-  forall hello__to_camel_case__result5:t.
-  forall hello__to_camel_case__result6:(int,character) farray.
-  forall hello__to_camel_case__result7:t. forall ret9:(int,character) farray.
-  forall to_up9:bool. forall idx7:int.
-  forall hello__to_camel_case__result8:(int,character) farray.
-  forall hello__to_camel_case__result9:t.
-  forall ret10:(int,character) farray. forall to_up10:bool. forall idx8:int.
-  forall hello__to_camel_case__result10:(int,character) farray.
-  forall hello__to_camel_case__result11:t.
-  (forall result9:(int,character) farray. forall result10:t.
-  ((dynamic_property(1, 2147483647, to_rep1(first(str1)),
-  to_rep1(last(str1))) and ((((((slide(str, to_rep1(first(str1)),
+logic ret : (int,character) farray
+
+logic to_up : bool
+
+logic idx : int
+
+logic hello__to_camel_case__result : (int,character) farray
+
+logic hello__to_camel_case__result1 : t
+
+logic hello__to_camel_case__ret__assume : (int,character) farray
+
+logic hello__to_camel_case__ret__assume1 : t1
+
+logic temp___592 : int
+
+logic temp___591 : bool
+
+logic temp___589 : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : (int,character) farray
+
+logic us : bool
+
+logic j : int
+
+logic o6 : int
+
+logic o7 : character
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : (int,character) farray
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic ret1 : (int,character) farray
+
+logic result1 : bool
+
+logic to_up1 : bool
+
+logic result2 : int
+
+logic idx1 : int
+
+logic result3 : (int,character) farray
+
+logic ret2 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic ret3 : (int,character) farray
+
+logic ret4 : (int,character) farray
+
+logic to_up2 : bool
+
+logic idx2 : int
+
+logic result5 : bool
+
+logic to_up3 : bool
+
+logic result6 : bool
+
+logic to_up4 : bool
+
+logic result7 : int
+
+logic idx3 : int
+
+logic result8 : (int,character) farray
+
+logic ret5 : (int,character) farray
+
+logic result9 : (int,character) farray
+
+logic ret6 : (int,character) farray
+
+logic ret7 : (int,character) farray
+
+logic to_up5 : bool
+
+logic idx4 : int
+
+logic ret8 : (int,character) farray
+
+logic to_up6 : bool
+
+logic idx5 : int
+
+logic ret9 : (int,character) farray
+
+logic to_up7 : bool
+
+logic idx6 : int
+
+logic ret10 : (int,character) farray
+
+logic to_up8 : bool
+
+logic idx7 : int
+
+logic ret11 : (int,character) farray
+
+logic to_up9 : bool
+
+logic idx8 : int
+
+logic ret12 : (int,character) farray
+
+logic to_up10 : bool
+
+logic idx9 : int
+
+logic result10 : (int,character) farray
+
+logic result11 : t
+
+logic hello__to_camel_case__result2 : (int,character) farray
+
+logic hello__to_camel_case__result3 : t
+
+logic hello__to_camel_case__result4 : (int,character) farray
+
+logic hello__to_camel_case__result5 : t
+
+logic hello__to_camel_case__result6 : (int,character) farray
+
+logic hello__to_camel_case__result7 : t
+
+logic ret13 : (int,character) farray
+
+logic to_up11 : bool
+
+logic idx10 : int
+
+logic hello__to_camel_case__result8 : (int,character) farray
+
+logic hello__to_camel_case__result9 : t
+
+logic ret14 : (int,character) farray
+
+logic to_up12 : bool
+
+logic idx11 : int
+
+logic hello__to_camel_case__result10 : (int,character) farray
+
+logic hello__to_camel_case__result11 : t
+
+logic result12 : (int,character) farray
+
+logic result13 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : (((((slide(str, to_rep1(first(str1)),
   to_rep1(first(str1))) = hello__to_camel_case__ret__assume) and
   (mk1(to_rep1(first(str1)),
-  to_rep1(last(str1))) = hello__to_camel_case__ret__assume1)) and ((({
-  map__content = result } = { map__content = ret }) and
-  (ret1 = hello__to_camel_case__ret__assume)) and
+  to_rep1(last(str1))) = hello__to_camel_case__ret__assume1)) and
+  (((result = ret) and (ret1 = hello__to_camel_case__ret__assume)) and
   ((to_rep1(ret__first) = to_rep1(first2(hello__to_camel_case__ret__assume1))) and
   (to_rep1(ret__last) = to_rep1(last2(hello__to_camel_case__ret__assume1)))))) and
   ((dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
   to_rep1(ret__first), to_rep1(ret__last)) and
   ((to_rep1(ret__first) = to_rep1(first(str1))) and
-  (to_rep1(ret__last) = to_rep1(last(str1))))) and ((({ bool__content =
-  result1 } = { bool__content = to_up }) and (to_up1 = of_int(1))) and (((({
-  int__content = result2 } = { int__content = idx }) and
+  (to_rep1(ret__last) = to_rep1(last(str1))))) and (((result1 = to_up) and
+  (to_up1 = of_int(1))) and ((((result2 = idx) and
   (idx1 = to_rep1(first(str1)))) and ((((to_rep1(first(str1)) <= idx1) and
-  (idx1 <= to_rep1(last(str1)))) and ((((temp___598 = idx1) and
-  ((temp___597 = to_up1) and ((temp___595 = ret1) and ((((to_up1 = true) and
+  (idx1 <= to_rep1(last(str1)))) -> ((((temp___592 = idx1) and
+  ((temp___591 = to_up1) and ((temp___589 = ret1) and ((((to_up1 = true) ->
   (((((o = to_upper(to_rep((ret1[idx1])))) and in_range3(o)) and
   (to_rep(o1) = o)) and (o2 = (ret1[idx1 <- o1]))) and ((ret1 = result3) and
-  (ret2 = o2)))) or ((not (to_up1 = true)) and
+  (ret2 = o2)))) and ((not (to_up1 = true)) ->
   ((((((o3 = to_lower(to_rep((ret1[idx1])))) and in_range3(o3)) and
   (to_rep(o4) = o3)) and (o5 = (ret1[idx1 <- o4]))) and ((ret1 = result4) and
   (ret3 = o5))) and (ret2 = ret3)))) and (((to_rep1(first(str1)) <= idx1) and
@@ -653,49 +794,49 @@ goal WP_parameter_def :
   (idx1 <= to_rep1(ret__last))) and (((to_caml_char2({ elts = str; rt = str1
   }, { elts = ret4; rt = mk(to_rep1(ret__first), to_rep1(ret__last)) },
   idx2) = true) and
-  (forall j:int. (((idx2 <= j) and (j <= to_rep1(last(str1)))) ->
-  ((idx2 <  j) -> (to_rep((ret4[j])) = to_rep((str[j]))))))) and
-  ((((forall temp___596:int. (((to_rep1(ret__first) <= temp___596) and
-     (temp___596 <= to_rep1(ret__last))) -> ((idx2 <  temp___596) ->
-     ((ret4[temp___596]) = (temp___595[temp___596]))))) and
+  (forall j1:int. (((idx2 <= j1) and (j1 <= to_rep1(last(str1)))) ->
+  ((idx2 <  j1) -> (to_rep((ret4[j1])) = to_rep((str[j1]))))))) and
+  ((((forall temp___590:int. (((to_rep1(ret__first) <= temp___590) and
+     (temp___590 <= to_rep1(ret__last))) -> ((idx2 <  temp___590) ->
+     ((ret4[temp___590]) = (temp___589[temp___590]))))) and
   ((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
   dynamic_property3(to_rep1(first(str1)), to_rep1(last(str1)), idx2))) and
   ((to_rep1(first(str1)) <= idx2) and (idx2 <= to_rep1(last(str1))))) and
   (((((not ((65 <= to_rep((str[idx2]))) and (to_rep((str[idx2])) <= 90))) and
-  (not ((97 <= to_rep((str[idx2]))) and (to_rep((str[idx2])) <= 122)))) and
-  ((to_up2 = result5) and (to_up3 = of_int(1)))) or
+  (not ((97 <= to_rep((str[idx2]))) and (to_rep((str[idx2])) <= 122)))) ->
+  ((to_up2 = result5) and (to_up3 = of_int(1)))) and
   ((not ((not ((65 <= to_rep((str[idx2]))) and
   (to_rep((str[idx2])) <= 90))) and (not ((97 <= to_rep((str[idx2]))) and
-  (to_rep((str[idx2])) <= 122))))) and (((to_up2 = result6) and
+  (to_rep((str[idx2])) <= 122))))) -> (((to_up2 = result6) and
   (to_up4 = of_int(0))) and (to_up3 = to_up4)))) and
-  (idx2 = to_rep1(last(str1)))))))))))) and (((idx2 = idx3) and
-  ((to_up3 = to_up5) and (ret4 = ret5))) and ((idx4 = idx2) and
-  ((to_up6 = to_up3) and (ret6 = ret4))))) and ((({ int__content = idx5 } = {
-  int__content = idx3 }) and (({ bool__content = to_up7 } = { bool__content =
-  to_up5 }) and ({ map__content = ret7 } = { map__content = ret5 }))) and
-  ((idx6 = idx4) and ((to_up8 = to_up6) and (ret8 = ret6)))))) or
+  (idx2 = to_rep1(last(str1)))))))))))) and (((idx6 = idx2) and
+  ((to_up3 = to_up7) and (ret4 = ret9))) and ((idx7 = idx2) and
+  ((to_up8 = to_up3) and (ret10 = ret4))))) and (((idx8 = idx6) and
+  ((to_up9 = to_up7) and (ret11 = ret9))) and ((idx9 = idx7) and
+  ((to_up10 = to_up8) and (ret12 = ret10)))))) and
   ((not ((to_rep1(first(str1)) <= idx1) and
-  (idx1 <= to_rep1(last(str1))))) and (((idx1 = idx5) and
-  ((to_up1 = to_up7) and (ret1 = ret7))) and ((idx6 = idx1) and
-  ((to_up8 = to_up1) and (ret8 = ret1))))))) and
+  (idx1 <= to_rep1(last(str1))))) -> (((idx8 = idx1) and
+  ((to_up9 = to_up1) and (ret11 = ret1))) and ((idx9 = idx1) and
+  ((to_up10 = to_up1) and (ret12 = ret1))))))) and
   ((((hello__to_camel_case__result4 = hello__to_camel_case__result2) and
-  (hello__to_camel_case__result5 = hello__to_camel_case__result3)) and ({
-  elts = hello__to_camel_case__result6; rt = hello__to_camel_case__result7
-  } = { elts = hello__to_camel_case__result2; rt =
-  hello__to_camel_case__result3 })) and
-  (((result7 = hello__to_camel_case__result) and
-  (result8 = hello__to_camel_case__result1)) and
-  ((ret7 = hello__to_camel_case__result2) and (mk(to_rep1(ret__first),
-  to_rep1(ret__last)) = hello__to_camel_case__result3)))))))) and ((({
-  string__content = { elts = hello__to_camel_case__result8; rt =
-  hello__to_camel_case__result9 } } = { string__content = { elts =
-  hello__to_camel_case__result4; rt = hello__to_camel_case__result5 } }) and
-  (({ int__content = idx7 } = { int__content = idx5 }) and (({
-  bool__content = to_up9 } = { bool__content = to_up7 }) and ({
-  map__content = ret9 } = { map__content = ret7 })))) and (({ elts =
-  hello__to_camel_case__result10; rt = hello__to_camel_case__result11 } = {
-  elts = hello__to_camel_case__result6; rt = hello__to_camel_case__result7
-  }) and ((idx8 = idx6) and ((to_up10 = to_up8) and (ret10 = ret8)))))) and
-  ((result9 = hello__to_camel_case__result8) and
-  (result10 = hello__to_camel_case__result9)))) ->
-  (to_rep1(first(hello__to_camel_case__result9)) = to_rep1(first(str1))))))
+  (hello__to_camel_case__result5 = hello__to_camel_case__result3)) and
+  ((hello__to_camel_case__result6 = hello__to_camel_case__result2) and
+  (hello__to_camel_case__result7 = hello__to_camel_case__result3))) and
+  (((result10 = hello__to_camel_case__result) and
+  (result11 = hello__to_camel_case__result1)) and
+  ((hello__to_camel_case__result2 = ret11) and
+  (hello__to_camel_case__result3 = mk(to_rep1(ret__first),
+  to_rep1(ret__last)))))))))) and
+  ((((hello__to_camel_case__result8 = hello__to_camel_case__result4) and
+  (hello__to_camel_case__result9 = hello__to_camel_case__result5)) and
+  ((idx10 = idx8) and ((to_up11 = to_up9) and (ret13 = ret11)))) and
+  (((hello__to_camel_case__result10 = hello__to_camel_case__result6) and
+  (hello__to_camel_case__result11 = hello__to_camel_case__result7)) and
+  ((idx11 = idx9) and ((to_up12 = to_up10) and (ret14 = ret12))))))
+
+axiom H2 : ((result12 = hello__to_camel_case__result8) and
+  (result13 = hello__to_camel_case__result9))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(first(hello__to_camel_case__result9)) = to_rep1(first(str1)))

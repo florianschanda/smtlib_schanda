@@ -166,7 +166,7 @@ function scalar_with_default__ref___6__projection(a: scalar_with_default__ref) :
 
 type tscalar_with_defaultB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -297,17 +297,17 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((((a).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b) and
-  (with_default__bad_record2__rec_with_discr__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1) = to_rep1(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1)))) and
-  (with_default__bad_record2__rec_with_discr__f2__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2) = to_rep(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b) and
-  (with_default__bad_record2__rec_with_discr__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1) = to_rep1(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1)))) and
+  ((((((a).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b) and
+  ((with_default__bad_record2__rec_with_discr__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1) = to_rep1(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1))) and
   (with_default__bad_record2__rec_with_discr__f2__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2) = to_rep(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b = ((b).us_split_discrs1).rec__with_default__bad_record2__rec_with_discr__b) and
+  ((with_default__bad_record2__rec_with_discr__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1) = to_rep1(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f1))) and
+  (with_default__bad_record2__rec_with_discr__f2__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2) = to_rep(((b).us_split_fields1).rec__with_default__bad_record2__rec_with_discr__f2)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -491,7 +491,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom first__def_axiom : (first = c)
 
+logic temp___646 : bool
+
+logic us : int
+
+axiom H : in_range1(c)
+
+axiom H1 : (of_int(0) = temp___646)
+
+axiom H2 : (to_int(temp___646) = 0)
+
  (* File "with_default.adb", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___646:bool. (in_range1(c) -> ((of_int(0) = temp___646) ->
-  ((to_int(temp___646) = 0) -> dynamic_property(first, 2147483647, 0)))))
+goal WP_parameter_def : dynamic_property(first, 2147483647, 0)

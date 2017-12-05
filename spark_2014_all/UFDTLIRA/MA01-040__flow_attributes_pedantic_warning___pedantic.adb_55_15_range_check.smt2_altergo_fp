@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -215,7 +215,10 @@ function r__ref___projection(a: r__ref) : us_rep = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic v__split_fields : integer
+
+logic o : int
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:integer. in_range(object__size({ us_split_fields1 =
-  { rec__pedantic__r__f1 = v__split_fields } })))
+goal WP_parameter_def : in_range(object__size({ us_split_fields1 = {
+  rec__pedantic__r__f1 = v__split_fields } }))

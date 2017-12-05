@@ -169,7 +169,7 @@ function r2__ref___projection(a: r2__ref) : r2 = (a).r2__content
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -615,42 +615,89 @@ type t5b__ref = { t5b__content : us_t1
 
 function t5b__ref___projection(a: t5b__ref) : us_t1 = (a).t5b__content
 
+logic stack__model__to__result : (int,integer) farray
+
+logic stack__model__to__result1 : t
+
+logic o : (int,integer) farray
+
+logic temp___211 : (int,integer) farray
+
+logic temp___2111 : t1
+
+logic o1 : (int,integer) farray
+
+logic o2 : t
+
+logic result : (int,integer) farray
+
+logic result1 : t
+
+logic stack__model__to__result2 : (int,integer) farray
+
+logic stack__model__to__result3 : t
+
+logic stack__model__to__result4 : (int,integer) farray
+
+logic stack__model__to__result5 : t
+
+logic stack__model__to__result6 : (int,integer) farray
+
+logic stack__model__to__result7 : t
+
+logic stack__model__to__result8 : (int,integer) farray
+
+logic stack__model__to__result9 : t
+
+logic stack__model__to__result10 : (int,integer) farray
+
+logic stack__model__to__result11 : t
+
+logic result2 : (int,integer) farray
+
+logic result3 : t
+
+axiom H : (stack__model__to__result4 = stack__model__to__result2)
+
+axiom H1 : (stack__model__to__result5 = stack__model__to__result3)
+
+axiom H2 : ((stack__model__to__result6 = stack__model__to__result2) and
+  (stack__model__to__result7 = stack__model__to__result3))
+
+axiom H3 : ((1 <= to_rep(s)) -> (((1 <= 1) and (1 <= 100)) and
+  ((1 <= to_rep(s)) and (to_rep(s) <= 100))))
+
+axiom H4 : (o = s1)
+
+axiom H5 : (o = temp___211)
+
+axiom H6 : (mk1(1, to_rep(s)) = temp___2111)
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(first2(temp___2111)),
+  to_rep1(last2(temp___2111)))
+
+axiom H8 : (temp___211 = o1)
+
+axiom H9 : (mk(to_rep1(first2(temp___2111)),
+  to_rep1(last2(temp___2111))) = o2)
+
+axiom H10 : (result = stack__model__to__result)
+
+axiom H11 : (result1 = stack__model__to__result1)
+
+axiom H12 : ((stack__model__to__result2 = o1) and
+  (stack__model__to__result3 = o2))
+
+axiom H13 : ((stack__model__to__result8 = stack__model__to__result4) and
+  (stack__model__to__result9 = stack__model__to__result5))
+
+axiom H14 : (stack__model__to__result10 = stack__model__to__result6)
+
+axiom H15 : (stack__model__to__result11 = stack__model__to__result7)
+
+axiom H16 : (result2 = stack__model__to__result8)
+
+axiom H17 : (result3 = stack__model__to__result9)
+
  (* File "stack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stack__model__to__result:(int,integer) farray.
-  forall stack__model__to__result1:t. forall o:(int,integer) farray.
-  forall temp___211:(int,integer) farray. forall temp___2111:t1.
-  forall o1:(int,integer) farray. forall o2:t.
-  forall result:(int,integer) farray. forall result1:t.
-  forall stack__model__to__result2:(int,integer) farray.
-  forall stack__model__to__result3:t.
-  forall stack__model__to__result4:(int,integer) farray.
-  forall stack__model__to__result5:t.
-  forall stack__model__to__result6:(int,integer) farray.
-  forall stack__model__to__result7:t.
-  forall stack__model__to__result8:(int,integer) farray.
-  forall stack__model__to__result9:t.
-  forall stack__model__to__result10:(int,integer) farray.
-  forall stack__model__to__result11:t.
-  (forall result2:(int,integer) farray. forall result3:t.
-  (((((((stack__model__to__result4 = stack__model__to__result2) and
-  (stack__model__to__result5 = stack__model__to__result3)) and
-  ((stack__model__to__result6 = stack__model__to__result2) and
-  (stack__model__to__result7 = stack__model__to__result3))) and
-  ((((((1 <= to_rep(s)) -> (((1 <= 1) and (1 <= 100)) and
-  ((1 <= to_rep(s)) and (to_rep(s) <= 100)))) and (o = s1)) and
-  ((o = temp___211) and (mk1(1, to_rep(s)) = temp___2111))) and
-  (dynamic_property(1, 2147483647, to_rep1(first2(temp___2111)),
-  to_rep1(last2(temp___2111))) and ((temp___211 = o1) and
-  (mk(to_rep1(first2(temp___2111)), to_rep1(last2(temp___2111))) = o2)))) and
-  (((result = stack__model__to__result) and
-  (result1 = stack__model__to__result1)) and
-  ((o1 = stack__model__to__result2) and
-  (o2 = stack__model__to__result3))))) and
-  (((stack__model__to__result8 = stack__model__to__result4) and
-  (stack__model__to__result9 = stack__model__to__result5)) and
-  ((stack__model__to__result10 = stack__model__to__result6) and
-  (stack__model__to__result11 = stack__model__to__result7)))) and
-  ((result2 = stack__model__to__result8) and
-  (result3 = stack__model__to__result9))) ->
-  (to_rep1(first(stack__model__to__result9)) = 1))))
+goal WP_parameter_def : (to_rep1(first(stack__model__to__result9)) = 1)

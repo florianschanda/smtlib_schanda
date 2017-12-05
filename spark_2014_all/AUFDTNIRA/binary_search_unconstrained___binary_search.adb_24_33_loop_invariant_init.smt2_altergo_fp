@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -258,7 +258,7 @@ axiom coerce_axiom :
 
 type topt_indexB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -535,43 +535,361 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic left : int
+
+logic right : int
+
+logic med : int
+
+logic binary_search__search__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic temp___169 : int
+
+logic temp___168 : int
+
+logic temp___167 : int
+
+logic temp___170 : int
+
+logic index1 : int
+
+logic index2 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic o16 : int
+
+logic o17 : integer
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : integer
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic i11 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : int
+
+logic o30 : int
+
+logic i21 : int
+
+logic o31 : int
+
+logic o32 : integer
+
+logic o33 : int
+
+logic index3 : int
+
+logic left1 : int
+
+logic right1 : int
+
+logic med1 : int
+
+logic binary_search__search__result1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic binary_search__search__result2 : int
+
+logic result2 : int
+
+logic left2 : int
+
+logic result3 : int
+
+logic right2 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic binary_search__search__result3 : int
+
+logic result6 : bool
+
+logic result7 : int
+
+logic binary_search__search__result4 : int
+
+logic binary_search__search__result5 : int
+
+logic binary_search__search__result6 : int
+
+logic left3 : int
+
+logic right3 : int
+
+logic med2 : int
+
+logic binary_search__search__result7 : int
+
+logic temp___1701 : int
+
+logic result8 : int
+
+logic temp___1702 : int
+
+logic result9 : int
+
+logic med3 : int
+
+logic result10 : bool
+
+logic result11 : int
+
+logic left4 : int
+
+logic result12 : bool
+
+logic result13 : int
+
+logic right4 : int
+
+logic result14 : int
+
+logic binary_search__search__result8 : int
+
+logic left5 : int
+
+logic right5 : int
+
+logic med4 : int
+
+logic binary_search__search__result9 : int
+
+logic left6 : int
+
+logic right6 : int
+
+logic med5 : int
+
+logic binary_search__search__result10 : int
+
+logic left7 : int
+
+logic right7 : int
+
+logic med6 : int
+
+logic binary_search__search__result11 : int
+
+logic left8 : int
+
+logic right8 : int
+
+logic med7 : int
+
+logic binary_search__search__result12 : int
+
+logic result15 : int
+
+logic binary_search__search__result13 : int
+
+logic binary_search__search__result14 : int
+
+logic binary_search__search__result15 : int
+
+logic left9 : int
+
+logic right9 : int
+
+logic med8 : int
+
+logic binary_search__search__result16 : int
+
+logic left10 : int
+
+logic right10 : int
+
+logic med9 : int
+
+logic binary_search__search__result17 : int
+
+logic left11 : int
+
+logic right11 : int
+
+logic med10 : int
+
+logic binary_search__search__result18 : int
+
+logic left12 : int
+
+logic right12 : int
+
+logic med11 : int
+
+logic binary_search__search__result19 : int
+
+logic left13 : int
+
+logic right13 : int
+
+logic med12 : int
+
+logic binary_search__search__result20 : int
+
+logic left14 : int
+
+logic right14 : int
+
+logic med13 : int
+
+logic binary_search__search__result21 : int
+
+logic left15 : int
+
+logic right15 : int
+
+logic med14 : int
+
+logic binary_search__search__result22 : int
+
+logic left16 : int
+
+logic right16 : int
+
+logic med15 : int
+
+logic binary_search__search__result23 : int
+
+axiom H : dynamic_property(1, 2147483646, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range1(i)
+
+axiom H2 : (sorted({ elts = a; rt = a1 }) = true)
+
+axiom H3 : ((1 <= 2147483646) -> in_range3(left))
+
+axiom H4 : ((1 <= 2147483646) -> in_range3(right))
+
+axiom H5 : ((1 <= 2147483646) -> in_range3(med))
+
+axiom H6 : ((result = empty({ elts = a; rt = a1 })) and ((result = true) <->
+  (to_rep1(last(a1)) <  to_rep1(first(a1)))))
+
+axiom H7 : (not (result = true))
+
+axiom H8 : (binary_search__search__result2 = binary_search__search__result)
+
+axiom H9 : (binary_search__search__result2 = binary_search__search__result1)
+
+axiom H10 : ((o = to_rep1(first(a1))) and in_range3(to_rep1(first(a1))))
+
+axiom H11 : (result2 = left)
+
+axiom H12 : (left2 = o)
+
+axiom H13 : ((o1 = to_rep1(last(a1))) and in_range3(to_rep1(last(a1))))
+
+axiom H14 : (result3 = right)
+
+axiom H15 : (right2 = o1)
+
+axiom H16 : ((to_rep1(first(a1)) <= left2) and (left2 <= to_rep1(last(a1))))
+
+axiom H17 : (o2 = left2)
+
+axiom H18 : (o3 = (a[o2]))
+
+axiom H19 : (o4 = to_rep(o3))
+
+axiom H20 : (((o4 = i) -> (o5 = true)) and ((not (o4 = i)) -> (o5 = false)))
+
+axiom H21 : (((left2 = right2) -> (result4 = o5)) and
+  ((not (left2 = right2)) -> (result4 = false)))
+
+axiom H22 : (not (result4 = true))
+
+axiom H23 : ((to_rep1(first(a1)) <= right2) and
+  (right2 <= to_rep1(last(a1))))
+
+axiom H24 : (o9 = right2)
+
+axiom H25 : (o10 = (a[o9]))
+
+axiom H26 : (o11 = to_rep(o10))
+
+axiom H27 : (((o11 <  i) -> (o12 = true)) and ((not (o11 <  i)) ->
+  (o12 = false)))
+
+axiom H28 : ((to_rep1(first(a1)) <= left2) and (left2 <= to_rep1(last(a1))))
+
+axiom H29 : (o6 = left2)
+
+axiom H30 : (o7 = (a[o6]))
+
+axiom H31 : (o8 = to_rep(o7))
+
+axiom H32 : (((i <  o8) -> (o13 = true)) and ((not (i <  o8)) ->
+  (o13 = false)))
+
+axiom H33 : (result6 = match_bool(o13, true, o12))
+
+axiom H34 : (not (result6 = true))
+
+axiom H35 : (binary_search__search__result4 = binary_search__search__result2)
+
+axiom H36 : (binary_search__search__result3 = binary_search__search__result4)
+
+axiom H37 : (left2 <= right2)
+
  (* File "binary_search.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall left:int. forall right:int. forall med:int.
-  forall binary_search__search__result:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:integer. forall o4:int. forall o5:bool.
-  forall o6:int. forall o7:integer. forall o8:int. forall o9:int.
-  forall o10:integer. forall o11:int. forall o12:bool. forall o13:bool.
-  forall binary_search__search__result1:int. forall result:bool.
-  forall binary_search__search__result2:int. forall result1:int.
-  forall left1:int. forall result2:int. forall right1:int.
-  forall result3:bool. forall binary_search__search__result3:int.
-  forall result4:bool. forall binary_search__search__result4:int.
-  (dynamic_property(1, 2147483646, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range1(i) -> ((sorted({ elts = a; rt = a1 }) = true) ->
-  (((1 <= 2147483646) -> in_range3(left)) -> (((1 <= 2147483646) ->
-  in_range3(right)) -> (((1 <= 2147483646) -> in_range3(med)) ->
-  ((((result = empty({ elts = a; rt = a1 })) and ((result = true) <->
-  (to_rep1(last(a1)) <  to_rep1(first(a1))))) and ((not (result = true)) and
-  ((binary_search__search__result2 = binary_search__search__result) and
-  (binary_search__search__result2 = binary_search__search__result1)))) ->
-  ((((o = to_rep1(first(a1))) and in_range3(to_rep1(first(a1)))) and (({
-  int__content = result1 } = { int__content = left }) and (left1 = o))) ->
-  ((((o1 = to_rep1(last(a1))) and in_range3(to_rep1(last(a1)))) and (({
-  int__content = result2 } = { int__content = right }) and (right1 = o1))) ->
-  (((((((((to_rep1(first(a1)) <= left1) and (left1 <= to_rep1(last(a1)))) and
-  (o2 = left1)) and (o3 = (a[o2]))) and (o4 = to_rep(o3))) and (((o4 = i) and
-  (o5 = true)) or ((not (o4 = i)) and (o5 = false)))) and
-  (((left1 = right1) and (result3 = o5)) or ((not (left1 = right1)) and
-  (result3 = false)))) and ((not (result3 = true)) and
-  (((((((((to_rep1(first(a1)) <= right1) and
-  (right1 <= to_rep1(last(a1)))) and (o9 = right1)) and (o10 = (a[o9]))) and
-  (o11 = to_rep(o10))) and (((o11 <  i) and (o12 = true)) or
-  ((not (o11 <  i)) and (o12 = false)))) and
-  (((((((to_rep1(first(a1)) <= left1) and (left1 <= to_rep1(last(a1)))) and
-  (o6 = left1)) and (o7 = (a[o6]))) and (o8 = to_rep(o7))) and
-  (((i <  o8) and (o13 = true)) or ((not (i <  o8)) and (o13 = false)))) and
-  (result4 = match_bool(o13, true, o12)))) and ((not (result4 = true)) and
-  (binary_search__search__result4 = binary_search__search__result2))) and
-  (binary_search__search__result3 = binary_search__search__result4)))) ->
-  ((left1 <= right1) -> (to_rep1(first(a1)) <= left1)))))))))))))
+goal WP_parameter_def : (to_rep1(first(a1)) <= left2)

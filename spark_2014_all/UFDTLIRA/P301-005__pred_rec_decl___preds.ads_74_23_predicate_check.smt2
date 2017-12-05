@@ -69,6 +69,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const x__split_fields rec_int_bad)
 (declare-const temp___387 Int)
+(declare-const temp___389 rec_int_bad)
 (assert (dynamic_invariant i45s true false true))
 (assert (dynamic_invariant1 (mk___rep (mk___split_fields x__split_fields)) false false true))
 (assert (and (= temp___387 0) (in_range 0)))

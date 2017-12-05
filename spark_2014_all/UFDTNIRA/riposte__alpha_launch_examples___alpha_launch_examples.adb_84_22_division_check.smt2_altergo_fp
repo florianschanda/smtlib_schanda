@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -221,28 +221,72 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : int
+
+logic alpha_launch_examples__example_7__result : int
+
+logic o : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic alpha_launch_examples__example_7__result1 : int
+
+logic alpha_launch_examples__example_7__result2 : int
+
+logic alpha_launch_examples__example_7__result3 : int
+
+logic r3 : int
+
+logic alpha_launch_examples__example_7__result4 : int
+
+logic r4 : int
+
+logic alpha_launch_examples__example_7__result5 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
+
+axiom H2 : ((x = (- 2147483648)) -> (result = r))
+
+axiom H3 : ((x = (- 2147483648)) -> (r1 = 73))
+
+axiom H4 : ((not (x = (- 2147483648))) -> ((o = abs_int(x)) and
+  in_range(abs_int(x))))
+
+axiom H5 : ((not (x = (- 2147483648))) -> (result1 = r))
+
+axiom H6 : ((not (x = (- 2147483648))) -> (r2 = o))
+
+axiom H7 : ((not (x = (- 2147483648))) -> (r1 = r2))
+
+axiom H8 :
+  (alpha_launch_examples__example_7__result1 = alpha_launch_examples__example_7__result2)
+
+axiom H9 :
+  (alpha_launch_examples__example_7__result3 = alpha_launch_examples__example_7__result1)
+
+axiom H10 : (result2 = alpha_launch_examples__example_7__result)
+
+axiom H11 : (alpha_launch_examples__example_7__result1 = r1)
+
+axiom H12 :
+  (alpha_launch_examples__example_7__result4 = alpha_launch_examples__example_7__result2)
+
+axiom H13 : (r1 = r3)
+
+axiom H14 :
+  (alpha_launch_examples__example_7__result5 = alpha_launch_examples__example_7__result3)
+
+axiom H15 : (r4 = r1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall alpha_launch_examples__example_7__result:int.
-  forall o:int. forall result:int. forall r1:int. forall result1:int.
-  forall r2:int. forall result2:int.
-  forall alpha_launch_examples__example_7__result1:int.
-  forall alpha_launch_examples__example_7__result2:int.
-  forall alpha_launch_examples__example_7__result3:int. forall r3:int.
-  forall alpha_launch_examples__example_7__result4:int. forall r4:int.
-  forall alpha_launch_examples__example_7__result5:int. (in_range(x) ->
-  ((((((-2147483648) <= 2147483647) -> in_range(r)) and
-  ((((x = (-2147483648)) and (({ int__content = result } = { int__content = r
-  }) and (r1 = 73))) or ((not (x = (-2147483648))) and
-  ((((o = abs_int(x)) and in_range(abs_int(x))) and (({ int__content =
-  result1 } = { int__content = r }) and (r2 = o))) and (r1 = r2)))) and
-  (((alpha_launch_examples__example_7__result1 = alpha_launch_examples__example_7__result2) and
-  (alpha_launch_examples__example_7__result3 = alpha_launch_examples__example_7__result1)) and
-  (({ int__content = result2 } = { int__content =
-  alpha_launch_examples__example_7__result }) and
-  (alpha_launch_examples__example_7__result1 = r1))))) and ((({
-  int__content = alpha_launch_examples__example_7__result4 } = {
-  int__content = alpha_launch_examples__example_7__result2 }) and
-  (r1 = r3)) and
-  ((alpha_launch_examples__example_7__result5 = alpha_launch_examples__example_7__result3) and
-  (r4 = r1)))) -> (not (alpha_launch_examples__example_7__result4 = 0)))))
+goal WP_parameter_def : (not (alpha_launch_examples__example_7__result4 = 0))

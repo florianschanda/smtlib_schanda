@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -277,18 +277,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1727,7 +1727,25 @@ logic ctx5 : states
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic keccak__keccak_1600__sponge__rate_of__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic keccak__keccak_1600__sponge__rate_of__result1 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result2 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result3 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result4 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result5 : int
+
+axiom H : ((o = (to_rep(ctx4) * 8)) and in_range((to_rep(ctx4) * 8)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (((o = (to_rep(ctx4) * 8)) and
-  in_range((to_rep(ctx4) * 8))) -> in_range1(o)))
+goal WP_parameter_def : in_range1(o)

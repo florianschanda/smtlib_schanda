@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -692,17 +692,44 @@ logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t3__msub__result : t
+
+logic o : t
+
+logic result : t
+
+logic t3__msub__result1 : t
+
+logic t3__msub__result2 : t
+
+logic t3__msub__result3 : t
+
+logic t3__msub__result4 : t
+
+logic t3__msub__result5 : t
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : (t3__msub__result1 = t3__msub__result2)
+
+axiom H3 : (t3__msub__result3 = t3__msub__result1)
+
+axiom H4 : (ult(x, y) -> (o = add(sub(x, y), of_int(230))))
+
+axiom H5 : ((not ult(x, y)) -> (o = sub(x, y)))
+
+axiom H6 : (result = t3__msub__result)
+
+axiom H7 : (t3__msub__result1 = o)
+
+axiom H8 : (t3__msub__result4 = t3__msub__result2)
+
+axiom H9 : (t3__msub__result5 = t3__msub__result3)
+
+axiom H10 : (match_bool(bool_eq(x, of_int(0)), bool_eq(y, of_int(0)),
+  false) = true)
+
  (* File "t3.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t3__msub__result:t. forall o:t. forall result:t.
-  forall t3__msub__result1:t. forall t3__msub__result2:t.
-  forall t3__msub__result3:t. forall t3__msub__result4:t.
-  forall t3__msub__result5:t. (in_range1(x) -> (in_range1(y) ->
-  (((((t3__msub__result1 = t3__msub__result2) and
-  (t3__msub__result3 = t3__msub__result1)) and (((ult(x, y) and
-  (o = add(sub(x, y), of_int(230)))) or ((not ult(x, y)) and (o = sub(x,
-  y)))) and ((result = t3__msub__result) and (t3__msub__result1 = o)))) and
-  ((t3__msub__result4 = t3__msub__result2) and
-  (t3__msub__result5 = t3__msub__result3))) -> ((match_bool(bool_eq(x,
-  of_int(0)), bool_eq(y, of_int(0)), false) = true) ->
-  (t3__msub__result4 = of_int(0)))))))
+goal WP_parameter_def : (t3__msub__result4 = of_int(0))

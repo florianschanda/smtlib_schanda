@@ -105,7 +105,11 @@ type digit_index_type__ref = { digit_index_type__content : digit_index_type
 function digit_index_type__ref___projection(a: digit_index_type__ref) : digit_index_type =
   (a).digit_index_type__content
 
+logic temp___length_788 : int
+
+axiom H : in_range(temp___length_788)
+
+axiom H1 : (1 <= temp___length_788)
+
  (* File "very_longs-divide.adb", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___length_788:int. (in_range(temp___length_788) ->
-  ((1 <= temp___length_788) -> (1 <= 1))))
+goal WP_parameter_def : (1 <= 1)

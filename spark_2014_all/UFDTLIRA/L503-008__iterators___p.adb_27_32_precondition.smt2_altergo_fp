@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -349,7 +349,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type element_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -627,7 +627,8 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range5(x2: int) = (((-2147483648) <= x2) and (x2 <= 2147483647))
+predicate in_range5(x2: int) = (((- 2147483648) <= x2) and
+  (x2 <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -754,41 +755,92 @@ axiom w_get__post_axiom :
   ((in_range2(witness1) and (has_witness(container, witness1) = true)) ->
   in_range6(w_get(container, witness1)))))
 
- (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sum:int. forall c__split_fields:count_type. forall o:count_type.
-  forall o1:count_type. forall temp___468:count_type.
-  forall temp___464:count_type. forall result:int. forall sum1:int.
-  forall result1:count_type. forall c__split_fields1:count_type.
-  forall sum2:int. forall c__split_fields2:count_type.
-  (((((to_rep(o) = 0) and (o = o1)) and (temp___468 = o1)) and
-  (temp___468 = no_element)) -> (((result = sum) and (sum1 = 0)) ->
-  (in_range1(sum1) -> ((to_rep(c__split_fields) = 0) -> (((({
-  us_split_fields3 = { rec__p__my_lists__cursor__node = temp___464 }
-  } = first({ us_split_discrs1 = { rec__p__my_lists__list__capacity = x };
-  us_split_fields1 = { rec__p__my_lists__list = x1 } })) and
-  (((bool_eq1(length({ us_split_discrs1 = {
+logic sum : int
+
+logic c__split_fields : count_type
+
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___468 : count_type
+
+logic temp___464 : count_type
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : count_type
+
+logic c__split_fields1 : count_type
+
+logic sum2 : int
+
+logic c__split_fields2 : count_type
+
+logic result2 : int
+
+logic sum3 : int
+
+logic c__split_fields3 : count_type
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___468 = o1)
+
+axiom H3 : (temp___468 = no_element)
+
+axiom H4 : (result = sum)
+
+axiom H5 : (sum1 = 0)
+
+axiom H6 : in_range1(sum1)
+
+axiom H7 : (to_rep(c__split_fields) = 0)
+
+axiom H8 : (({ us_split_fields3 = { rec__p__my_lists__cursor__node =
+  temp___464 } } = first({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = x }; us_split_fields1 = {
-  rec__p__my_lists__list = x1 } }), 0) = true) and (bool_eq5({
-  us_split_fields3 = { rec__p__my_lists__cursor__node = temp___464 } }, {
-  us_split_fields3 = { rec__p__my_lists__cursor__node = no_element }
-  }) = true)) or ((not (bool_eq1(length({ us_split_discrs1 = {
+  rec__p__my_lists__list = x1 } })) and (((bool_eq1(length({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = x };
+  us_split_fields1 = { rec__p__my_lists__list = x1 } }), 0) = true) ->
+  (bool_eq5({ us_split_fields3 = { rec__p__my_lists__cursor__node =
+  temp___464 } }, { us_split_fields3 = { rec__p__my_lists__cursor__node =
+  no_element } }) = true)) and ((not (bool_eq1(length({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = x }; us_split_fields1 = {
-  rec__p__my_lists__list = x1 } }), 0) = true)) and ((has_key(positions({
+  rec__p__my_lists__list = x1 } }), 0) = true)) -> ((has_key(positions({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = x };
   us_split_fields1 = { rec__p__my_lists__list = x1 } }), { us_split_fields3 =
   { rec__p__my_lists__cursor__node = temp___464 } }) = true) and
   (get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity = x
   }; us_split_fields1 = { rec__p__my_lists__list = x1 } }), {
   us_split_fields3 = { rec__p__my_lists__cursor__node = temp___464 }
-  }) = 1))))) and ((result1 = c__split_fields) and
-  (temp___464 = c__split_fields1))) -> ((not (bool_eq5({ us_split_fields3 = {
+  }) = 1)))))
+
+axiom H9 : (result1 = c__split_fields)
+
+axiom H10 : (temp___464 = c__split_fields1)
+
+axiom H11 : (not (bool_eq5({ us_split_fields3 = {
   rec__p__my_lists__cursor__node = c__split_fields1 } }, { us_split_fields3 =
-  { rec__p__my_lists__cursor__node = no_element } }) = true)) ->
-  (((((-2147483648) <= 2147483647) -> in_range1(sum2)) and (not (bool_eq5({
-  us_split_fields3 = { rec__p__my_lists__cursor__node = c__split_fields2 } },
-  { us_split_fields3 = { rec__p__my_lists__cursor__node = no_element }
-  }) = true))) -> (has_key(positions({ us_split_discrs1 = {
+  { rec__p__my_lists__cursor__node = no_element } }) = true))
+
+axiom H12 : ((((- 2147483648) <= 2147483647) -> in_range1(sum2)) and
+  (not (bool_eq5({ us_split_fields3 = { rec__p__my_lists__cursor__node =
+  c__split_fields2 } }, { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = no_element } }) = true)))
+
+ (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
+goal WP_parameter_def : (has_key(positions({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = x }; us_split_fields1 = {
   rec__p__my_lists__list = x1 } }), { us_split_fields3 = {
-  rec__p__my_lists__cursor__node = c__split_fields2 } }) = true)))))))))
+  rec__p__my_lists__cursor__node = c__split_fields2 } }) = true)

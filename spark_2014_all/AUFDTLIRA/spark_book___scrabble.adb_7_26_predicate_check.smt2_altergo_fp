@@ -427,46 +427,176 @@ axiom lookup_table__def_axiom :
   (lookup_table = scrabble__lookup_table__aggregate_def(1, 3, 3, 2, 1, 4, 2,
   4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+axiom H : (((1 <= 10) and (10 <= 5)) or (((8 <= 10) and (10 <= 8)) or
+  (10 <= 10)))
+
+axiom H1 : (o = 10)
+
+axiom H2 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
+  ((10 <= 4) and (4 <= 10))))
+
+axiom H3 : (o1 = 4)
+
+axiom H4 : (((1 <= 8) and (8 <= 5)) or ((8 <= 8) or ((10 <= 8) and
+  (8 <= 10))))
+
+axiom H5 : (o2 = 8)
+
+axiom H6 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
+  ((10 <= 4) and (4 <= 10))))
+
+axiom H7 : (o3 = 4)
+
+axiom H8 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
+  ((10 <= 4) and (4 <= 10))))
+
+axiom H9 : (o4 = 4)
+
+axiom H10 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H11 : (o5 = 1)
+
+axiom H12 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H13 : (o6 = 1)
+
+axiom H14 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H15 : (o7 = 1)
+
+axiom H16 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H17 : (o8 = 1)
+
+axiom H18 : (((1 <= 10) and (10 <= 5)) or (((8 <= 10) and (10 <= 8)) or
+  (10 <= 10)))
+
+axiom H19 : (o9 = 10)
+
+axiom H20 : (((1 <= 3) and (3 <= 5)) or (((8 <= 3) and (3 <= 8)) or
+  ((10 <= 3) and (3 <= 10))))
+
+axiom H21 : (o10 = 3)
+
+axiom H22 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H23 : (o11 = 1)
+
+axiom H24 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H25 : (o12 = 1)
+
+axiom H26 : (((1 <= 3) and (3 <= 5)) or (((8 <= 3) and (3 <= 8)) or
+  ((10 <= 3) and (3 <= 10))))
+
+axiom H27 : (o13 = 3)
+
+axiom H28 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H29 : (o14 = 1)
+
+axiom H30 : (((1 <= 5) and (5 <= 5)) or (((8 <= 5) and (5 <= 8)) or
+  ((10 <= 5) and (5 <= 10))))
+
+axiom H31 : (o15 = 5)
+
+axiom H32 : (((1 <= 8) and (8 <= 5)) or ((8 <= 8) or ((10 <= 8) and
+  (8 <= 10))))
+
+axiom H33 : (o16 = 8)
+
+axiom H34 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H35 : (o17 = 1)
+
+axiom H36 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
+  ((10 <= 4) and (4 <= 10))))
+
+axiom H37 : (o18 = 4)
+
+axiom H38 : (((1 <= 2) and (2 <= 5)) or (((8 <= 2) and (2 <= 8)) or
+  ((10 <= 2) and (2 <= 10))))
+
+axiom H39 : (o19 = 2)
+
+axiom H40 : (((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
+  ((10 <= 4) and (4 <= 10))))
+
+axiom H41 : (o20 = 4)
+
+axiom H42 : (((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
+  ((10 <= 1) and (1 <= 10))))
+
+axiom H43 : (o21 = 1)
+
+axiom H44 : (((1 <= 2) and (2 <= 5)) or (((8 <= 2) and (2 <= 8)) or
+  ((10 <= 2) and (2 <= 10))))
+
+axiom H45 : (o22 = 2)
+
+axiom H46 : (((1 <= 3) and (3 <= 5)) or (((8 <= 3) and (3 <= 8)) or
+  ((10 <= 3) and (3 <= 10))))
+
+axiom H47 : (o23 = 3)
+
  (* File "scrabble.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int. forall o8:int. forall o9:int.
-  forall o10:int. forall o11:int. forall o12:int. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:int.
-  forall o18:int. forall o19:int. forall o20:int. forall o21:int.
-  forall o22:int. forall o23:int. (((((1 <= 10) and (10 <= 5)) or
-  (((8 <= 10) and (10 <= 8)) or (10 <= 10))) and (o = 10)) ->
-  (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and
-  (4 <= 10)))) and (o1 = 4)) -> (((((1 <= 8) and (8 <= 5)) or ((8 <= 8) or
-  ((10 <= 8) and (8 <= 10)))) and (o2 = 8)) -> (((((1 <= 4) and (4 <= 5)) or
-  (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and (4 <= 10)))) and (o3 = 4)) ->
-  (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or ((10 <= 4) and
-  (4 <= 10)))) and (o4 = 4)) -> (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and
-  (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and (o5 = 1)) -> (((((1 <= 1) and
-  (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and
-  (o6 = 1)) -> (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
-  ((10 <= 1) and (1 <= 10)))) and (o7 = 1)) -> (((((1 <= 1) and (1 <= 5)) or
-  (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and (o8 = 1)) ->
-  (((((1 <= 10) and (10 <= 5)) or (((8 <= 10) and (10 <= 8)) or
-  (10 <= 10))) and (o9 = 10)) -> (((((1 <= 3) and (3 <= 5)) or (((8 <= 3) and
-  (3 <= 8)) or ((10 <= 3) and (3 <= 10)))) and (o10 = 3)) -> (((((1 <= 1) and
-  (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and
-  (o11 = 1)) -> (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or
-  ((10 <= 1) and (1 <= 10)))) and (o12 = 1)) -> (((((1 <= 3) and (3 <= 5)) or
-  (((8 <= 3) and (3 <= 8)) or ((10 <= 3) and (3 <= 10)))) and (o13 = 3)) ->
-  (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and
-  (1 <= 10)))) and (o14 = 1)) -> (((((1 <= 5) and (5 <= 5)) or (((8 <= 5) and
-  (5 <= 8)) or ((10 <= 5) and (5 <= 10)))) and (o15 = 5)) -> (((((1 <= 8) and
-  (8 <= 5)) or ((8 <= 8) or ((10 <= 8) and (8 <= 10)))) and (o16 = 8)) ->
-  (((((1 <= 1) and (1 <= 5)) or (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and
-  (1 <= 10)))) and (o17 = 1)) -> (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and
-  (4 <= 8)) or ((10 <= 4) and (4 <= 10)))) and (o18 = 4)) -> (((((1 <= 2) and
-  (2 <= 5)) or (((8 <= 2) and (2 <= 8)) or ((10 <= 2) and (2 <= 10)))) and
-  (o19 = 2)) -> (((((1 <= 4) and (4 <= 5)) or (((8 <= 4) and (4 <= 8)) or
-  ((10 <= 4) and (4 <= 10)))) and (o20 = 4)) -> (((((1 <= 1) and (1 <= 5)) or
-  (((8 <= 1) and (1 <= 8)) or ((10 <= 1) and (1 <= 10)))) and (o21 = 1)) ->
-  (((((1 <= 2) and (2 <= 5)) or (((8 <= 2) and (2 <= 8)) or ((10 <= 2) and
-  (2 <= 10)))) and (o22 = 2)) -> (((((1 <= 3) and (3 <= 5)) or (((8 <= 3) and
-  (3 <= 8)) or ((10 <= 3) and (3 <= 10)))) and (o23 = 3)) -> (((1 <= 3) and
-  (3 <= 5)) or (((8 <= 3) and (3 <= 8)) or ((10 <= 3) and
-  (3 <= 10)))))))))))))))))))))))))))))
+goal WP_parameter_def : (((1 <= 3) and (3 <= 5)) or (((8 <= 3) and
+  (3 <= 8)) or ((10 <= 3) and (3 <= 10))))

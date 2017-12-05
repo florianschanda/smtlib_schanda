@@ -237,7 +237,7 @@ logic last_element__function_guard : int, us_rep -> prop
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -431,7 +431,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -461,9 +461,29 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range4(get(container, position)))))
 
- (* File "queue.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : ((0 <  length({ us_split_discrs1 = {
+logic queue__front__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic queue__front__result1 : int
+
+logic queue__front__result2 : int
+
+logic queue__front__result3 : int
+
+logic queue__front__result4 : int
+
+logic queue__front__result5 : int
+
+axiom H : (0 <  length({ us_split_discrs1 = {
   rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } })) -> (not (is_empty({ us_split_discrs1 =
-  { rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
-  rec__queue__mylists__list = q1 } }) = true)))
+  rec__queue__mylists__list = q1 } }))
+
+ (* File "queue.ads", line 17, characters 0-0 *)
+goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
+  rec__queue__mylists__list__capacity = q }; us_split_fields1 = {
+  rec__queue__mylists__list = q1 } }) = true))

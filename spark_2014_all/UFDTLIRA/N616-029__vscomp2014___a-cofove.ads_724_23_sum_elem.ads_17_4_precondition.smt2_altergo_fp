@@ -249,7 +249,7 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 type extended_index
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq4 : int, int -> bool
 
@@ -472,11 +472,11 @@ logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep1. forall b:us_rep1 [user_eq4(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
     (bool_eq7(get(a, n), get(b, n)) = true))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
         (bool_eq7(get(a, n), get(b, n)) = true)))) ->
   (user_eq4(a, b) = match_bool(bool_eq(length(a), length(b)), false,
   false)))))
@@ -496,7 +496,7 @@ logic last_index__function_guard : int, us_rep -> prop
 
 type extended_index1
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq8 : int, int -> bool
 
@@ -601,31 +601,54 @@ axiom length__post_axiom :
 
 axiom length__post_axiom1 :
   (forall container2:us_rep1 [length(container2)].
-  ((((-1) + length(container2)) <= 10000) and in_range6(length(container2))))
+  ((((- 1) + length(container2)) <= 10000) and
+  in_range6(length(container2))))
 
 axiom get__post_axiom : true
 
+logic o : us_rep1
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic result : bool
+
+axiom H : in_range1(index1)
+
+axiom H1 : ((o4 = ((- 1) + length(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = container };
+  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
+  })))) and (in_range5(o4) and (o4 = ((- 1) + length(model__({
+  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
+  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
+  container1 } }))))))
+
+axiom H2 : (((o4 <  index1) -> (result = true)) and ((not (o4 <  index1)) ->
+  (result = false)))
+
+axiom H3 : (not (result = true))
+
+axiom H4 : ((o1 = ((- 1) + length(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = container };
+  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
+  })))) and (in_range5(o1) and (o1 = ((- 1) + length(model__({
+  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
+  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
+  container1 } }))))))
+
+axiom H5 : ((o2 = o1) and in_range3(o1))
+
+axiom H6 : ((o = model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = container };
+  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
+  })) and (length(o) = length1({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = container };
+  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 } })))
+
  (* File "a-cofove.ads", line 704, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:us_rep1. forall o1:int. forall o2:int. forall o3:int.
-  forall result:bool. (in_range1(index1) -> ((((o3 = ((-1) + length(model__({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
-  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
-  container1 } })))) and (in_range5(o3) and (o3 = ((-1) + length(model__({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
-  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
-  container1 } })))))) and (((o3 <  index1) and (result = true)) or
-  ((not (o3 <  index1)) and (result = false)))) -> ((not (result = true)) ->
-  ((((o1 = ((-1) + length(model__({ us_split_discrs1 = {
-  rec__sum_elem__partitions__vector__capacity = container };
-  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
-  })))) and (in_range5(o1) and (o1 = ((-1) + length(model__({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
-  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
-  container1 } })))))) and ((o2 = o1) and in_range3(o1))) -> (((o = model__({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity =
-  container }; us_split_fields1 = { rec__sum_elem__partitions__vector =
-  container1 } })) and (length(o) = length1({ us_split_discrs1 = {
-  rec__sum_elem__partitions__vector__capacity = container };
-  us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
-  }))) -> (o2 <= ((-1) + length(o)))))))))
+goal WP_parameter_def : (o2 <= ((- 1) + length(o)))

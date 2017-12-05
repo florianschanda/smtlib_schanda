@@ -152,10 +152,24 @@ logic file : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : (result = is_open(file))
+
+axiom H1 : (result = true)
+
+axiom H2 : ((o1 = mode__2(file)) and in_range(o1))
+
+axiom H3 : (((o1 = 1) -> (result1 = true)) and ((not (o1 = 1)) ->
+  (result1 = false)))
+
+axiom H4 : (not (result1 = true))
+
  (* File "spark-text_io.ads", line 137, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. forall result1:bool.
-  ((result = is_open(file)) -> ((result = true) -> ((((o = mode__2(file)) and
-  in_range(o)) and (((o = 1) and (result1 = true)) or ((not (o = 1)) and
-  (result1 = false)))) -> ((not (result1 = true)) ->
-  (is_open(file) = true))))))
+goal WP_parameter_def : (is_open(file) = true)

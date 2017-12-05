@@ -1068,11 +1068,28 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : bool
+
+logic o : t
+
+logic o1 : bool
+
+logic result : bool
+
+logic res1 : bool
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
+axiom H2 : le(x, y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H3 : lt(fliteral1, y)
+
  (* File "floating_point.adb", line 187, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) -> (le(x, y) ->
-  (lt(fliteral1, y) -> (not is_zero(y))))))
+goal WP_parameter_def : (not is_zero(y))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -390,7 +390,7 @@ logic a41 : t
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom a1__def_axiom : ((a1 = null_concat__p_good__a1__aggregate_def(0)) and
-  (a11 = mk(1, (-5))))
+  (a11 = mk(1, (- 5))))
 
 axiom a2__def_axiom : ((a2 = null_concat__p_good__a2__aggregate_def(1,
   2)) and (a21 = mk(1, 10)))
@@ -414,8 +414,8 @@ axiom a3__def_axiom : (((length({ elts = a1; rt = a11 }) = 0) ->
   (a31 = mk(to_rep(first(a11)), ((to_rep(first(a11)) + (0 + 0)) - 1))))))))))
 
 axiom a4__def_axiom : (((length({ elts = a1; rt = a11 }) = 0) ->
-  ((a4 = singleton(of_rep(2), (-2147483648))) and (a41 = mk((-2147483648),
-  (-2147483648))))) and ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((a4 = singleton(of_rep(2), (- 2147483648))) and (a41 = mk((- 2147483648),
+  (- 2147483648))))) and ((not (length({ elts = a1; rt = a11 }) = 0)) ->
   ((a4 = concat(a1, to_rep(first(a11)), to_rep(last(a11)),
   singleton(of_rep(2), 1), 1, 1)) and
   (((to_rep(first(a11)) <= to_rep(last(a11))) ->
@@ -424,57 +424,152 @@ axiom a4__def_axiom : (((length({ elts = a1; rt = a11 }) = 0) ->
   ((not (to_rep(first(a11)) <= to_rep(last(a11)))) ->
   (a41 = mk(to_rep(first(a11)), ((to_rep(first(a11)) + (0 + 1)) - 1))))))))
 
- (* File "null_concat.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall null_concat__p_good__a3__assume:(int,integer) farray.
-  forall null_concat__p_good__a3__assume1:t. forall o6:integer.
-  forall o7:(int,integer) farray. forall o8:integer.
-  forall o9:(int,integer) farray. forall o10:int. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:int.
-  forall o15:(int,integer) farray.
-  forall null_concat__p_good__a4__assume:(int,integer) farray.
-  forall null_concat__p_good__a4__assume1:t.
-  (((null_concat__p_good__a1__aggregate_def(0) = a1) and (mk(1,
-  (-5)) = a11)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a11)), to_rep(last(a11))) ->
-  (((null_concat__p_good__a2__aggregate_def(1, 2) = a2) and (mk(1,
-  10) = a21)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a21)), to_rep(last(a21))) -> (((((length({ elts = a1; rt = a11
-  }) = 0) and ((a2 = null_concat__p_good__a3__assume) and
-  (mk(to_rep(first(a21)),
-  to_rep(last(a21))) = null_concat__p_good__a3__assume1))) or ((not (length({
-  elts = a1; rt = a11 }) = 0)) and
-  ((((((((to_rep(first(a21)) <= to_rep(last(a21))) and
-  (o = ((to_rep(last(a21)) - to_rep(first(a21))) + 1))) or
-  ((not (to_rep(first(a21)) <= to_rep(last(a21)))) and (o = 0))) and
-  ((((to_rep(first(a11)) <= to_rep(last(a11))) and
-  (o1 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1))) or
-  ((not (to_rep(first(a11)) <= to_rep(last(a11)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep(first(a11)) + o2))) and
-  (o4 = (o3 - 1))) and ((o5 = o4) and in_range1(o4))) and ((concat(a1,
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic null_concat__p_good__a3__assume : (int,integer) farray
+
+logic null_concat__p_good__a3__assume1 : t
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic o8 : integer
+
+logic o9 : (int,integer) farray
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : (int,integer) farray
+
+logic null_concat__p_good__a4__assume : (int,integer) farray
+
+logic null_concat__p_good__a4__assume1 : t
+
+axiom H : ((null_concat__p_good__a1__aggregate_def(0) = a1) and (mk(1,
+  (- 5)) = a11))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a11)),
+  to_rep(last(a11)))
+
+axiom H2 : ((null_concat__p_good__a2__aggregate_def(1, 2) = a2) and (mk(1,
+  10) = a21))
+
+axiom H3 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a21)),
+  to_rep(last(a21)))
+
+axiom H4 : ((length({ elts = a1; rt = a11 }) = 0) ->
+  (a2 = null_concat__p_good__a3__assume))
+
+axiom H5 : ((length({ elts = a1; rt = a11 }) = 0) -> (mk(to_rep(first(a21)),
+  to_rep(last(a21))) = null_concat__p_good__a3__assume1))
+
+axiom H6 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((to_rep(first(a21)) <= to_rep(last(a21))) ->
+  (o = ((to_rep(last(a21)) - to_rep(first(a21))) + 1))))
+
+axiom H7 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((not (to_rep(first(a21)) <= to_rep(last(a21)))) -> (o = 0)))
+
+axiom H8 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((to_rep(first(a11)) <= to_rep(last(a11))) ->
+  (o1 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1))))
+
+axiom H9 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((not (to_rep(first(a11)) <= to_rep(last(a11)))) -> (o1 = 0)))
+
+axiom H10 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> (o2 = (o1 + o)))
+
+axiom H11 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o3 = (to_rep(first(a11)) + o2)))
+
+axiom H12 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> (o4 = (o3 - 1)))
+
+axiom H13 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> ((o5 = o4) and
+  in_range1(o4)))
+
+axiom H14 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> (concat(a1,
   to_rep(first(a11)), to_rep(last(a11)), a2, to_rep(first(a21)),
-  to_rep(last(a21))) = null_concat__p_good__a3__assume) and
-  (mk(to_rep(first(a11)), o5) = null_concat__p_good__a3__assume1))))) and
-  ((null_concat__p_good__a3__assume = a3) and
-  (null_concat__p_good__a3__assume1 = a31))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(a31)),
-  to_rep(last(a31))) -> (((((length({ elts = a1; rt = a11 }) = 0) and
-  (((to_rep(o6) = 2) and (o7 = singleton(o6, (-2147483648)))) and
-  ((o7 = null_concat__p_good__a4__assume) and (mk((-2147483648),
-  (-2147483648)) = null_concat__p_good__a4__assume1)))) or ((not (length({
-  elts = a1; rt = a11 }) = 0)) and
-  ((((((((to_rep(first(a11)) <= to_rep(last(a11))) and
-  (o10 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1))) or
-  ((not (to_rep(first(a11)) <= to_rep(last(a11)))) and (o10 = 0))) and
-  (o11 = (o10 + 1))) and (o12 = (to_rep(first(a11)) + o11))) and
-  (o13 = (o12 - 1))) and ((o14 = o13) and in_range1(o13))) and
-  ((((to_rep(o8) = 2) and (o9 = singleton(o8, 1))) and (o15 = concat(a1,
-  to_rep(first(a11)), to_rep(last(a11)), o9, 1, 1))) and
-  ((o15 = null_concat__p_good__a4__assume) and (mk(to_rep(first(a11)),
-  o14) = null_concat__p_good__a4__assume1)))))) and
-  ((null_concat__p_good__a4__assume = a4) and
-  (null_concat__p_good__a4__assume1 = a41))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(a41)),
-  to_rep(last(a41))) -> ((to_rep(first(a31)) = 1) ->
-  (to_rep((a3[1])) = 1)))))))))))
+  to_rep(last(a21))) = null_concat__p_good__a3__assume))
+
+axiom H15 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (mk(to_rep(first(a11)), o5) = null_concat__p_good__a3__assume1))
+
+axiom H16 : ((null_concat__p_good__a3__assume = a3) and
+  (null_concat__p_good__a3__assume1 = a31))
+
+axiom H17 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a31)),
+  to_rep(last(a31)))
+
+axiom H18 : ((length({ elts = a1; rt = a11 }) = 0) -> (to_rep(o6) = 2))
+
+axiom H19 : ((length({ elts = a1; rt = a11 }) = 0) -> (o7 = singleton(o6,
+  (- 2147483648))))
+
+axiom H20 : ((length({ elts = a1; rt = a11 }) = 0) ->
+  (o7 = null_concat__p_good__a4__assume))
+
+axiom H21 : ((length({ elts = a1; rt = a11 }) = 0) -> (mk((- 2147483648),
+  (- 2147483648)) = null_concat__p_good__a4__assume1))
+
+axiom H22 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((to_rep(first(a11)) <= to_rep(last(a11))) ->
+  (o10 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1))))
+
+axiom H23 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  ((not (to_rep(first(a11)) <= to_rep(last(a11)))) -> (o10 = 0)))
+
+axiom H24 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o11 = (o10 + 1)))
+
+axiom H25 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o12 = (to_rep(first(a11)) + o11)))
+
+axiom H26 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o13 = (o12 - 1)))
+
+axiom H27 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> ((o14 = o13) and
+  in_range1(o13)))
+
+axiom H28 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> (to_rep(o8) = 2))
+
+axiom H29 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o9 = singleton(o8, 1)))
+
+axiom H30 : ((not (length({ elts = a1; rt = a11 }) = 0)) -> (o15 = concat(a1,
+  to_rep(first(a11)), to_rep(last(a11)), o9, 1, 1)))
+
+axiom H31 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (o15 = null_concat__p_good__a4__assume))
+
+axiom H32 : ((not (length({ elts = a1; rt = a11 }) = 0)) ->
+  (mk(to_rep(first(a11)), o14) = null_concat__p_good__a4__assume1))
+
+axiom H33 : ((null_concat__p_good__a4__assume = a4) and
+  (null_concat__p_good__a4__assume1 = a41))
+
+axiom H34 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a41)),
+  to_rep(last(a41)))
+
+axiom H35 : (to_rep(first(a31)) = 1)
+
+ (* File "null_concat.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : (to_rep((a3[1])) = 1)

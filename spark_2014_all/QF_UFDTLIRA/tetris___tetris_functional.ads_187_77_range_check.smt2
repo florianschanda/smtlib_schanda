@@ -44,6 +44,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const t Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range d))
 (assert (in_range1 t))
 (assert (= t 3))

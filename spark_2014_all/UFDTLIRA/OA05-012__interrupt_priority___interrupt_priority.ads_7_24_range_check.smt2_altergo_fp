@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -148,13 +148,13 @@ type us_split_discrs = { rec__interrupt_priority__no_interrupt_needed_1__c :
 any_priority
 }
 
-function us_split_discrs___projection(a: us_split_discrs) : any_priority =
+function us_split_discrs___2__projection(a: us_split_discrs) : any_priority =
   (a).rec__interrupt_priority__no_interrupt_needed_1__c
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__interrupt_priority__no_interrupt_needed_1__i :
@@ -174,10 +174,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep) : us_split_discrs =
+function us_rep___30__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___30__projection(a: us_rep) : us_split_fields =
+function us_rep___31__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int

@@ -41,6 +41,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 (assert (in_range a))
 (assert (in_range visible_var))

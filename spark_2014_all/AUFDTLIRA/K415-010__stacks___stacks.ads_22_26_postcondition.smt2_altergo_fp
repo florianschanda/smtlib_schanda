@@ -107,7 +107,7 @@ function intmax__ref___projection(a: intmax__ref) : intmax =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -295,11 +295,33 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic top : int
+
+logic data : (int,integer) farray
+
+logic o : int
+
+logic result : int
+
+logic top1 : int
+
+logic top2 : int
+
+logic top3 : int
+
+axiom H : in_range(top)
+
+axiom H1 : (not (is_empty(top, data) = true))
+
+axiom H2 : ((o = (top - 1)) and in_range((top - 1)))
+
+axiom H3 : (result = top)
+
+axiom H4 : (top1 = o)
+
+axiom H5 : (top1 = top2)
+
+axiom H6 : (top3 = top1)
+
  (* File "stacks.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall data:(int,integer) farray. forall o:int.
-  forall result:int. forall top1:int. forall top2:int. forall top3:int.
-  ((in_range(top) and ((not (is_empty(top, data) = true)) and
-  ((((o = (top - 1)) and in_range((top - 1))) and ((result = top) and
-  (top1 = o))) and ((top1 = top2) and (top3 = top1))))) -> (size(top2,
-  data) = (size(top, data) - 1))))
+goal WP_parameter_def : (size(top2, data) = (size(top, data) - 1))

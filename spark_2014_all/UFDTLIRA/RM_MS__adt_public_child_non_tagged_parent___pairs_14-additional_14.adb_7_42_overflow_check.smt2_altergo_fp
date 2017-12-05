@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -216,7 +216,31 @@ function pair__ref___projection(a: pair__ref) : us_rep = (a).pair__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic value__split_fields : integer
+
+logic value__split_fields1 : integer
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic temp___141 : integer
+
+logic temp___1411 : integer
+
+logic o4 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic value__split_fields2 : integer
+
+logic value__split_fields3 : integer
+
  (* File "pairs_14-additional_14.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value__split_fields:integer.
-  in_range((to_rep(value__split_fields) + 1)))
+goal WP_parameter_def : in_range((to_rep(value__split_fields) + 1))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -364,15 +364,44 @@ logic r1 : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic j : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(first(a1)),
+  to_rep(last(a1))) and (to_rep(first(a1)) = 0))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : (dynamic_property(0, 2147483646, to_rep(first(r1)),
+  to_rep(last(r1))) and (to_rep(first(r1)) = 0))
+
+axiom H4 : ((to_rep(first(a1)) <= i) and (i <= to_rep(last(a1))))
+
+axiom H5 : ((to_rep(first(r1)) = to_rep(first(a1))) ->
+  (((to_rep(last(r1)) = to_rep(last(a1))) -> (result1 = true)) and
+  ((not (to_rep(last(r1)) = to_rep(last(a1)))) -> (result1 = false))))
+
+axiom H6 : ((not (to_rep(first(r1)) = to_rep(first(a1)))) ->
+  (result1 = false))
+
+axiom H7 : (result1 = true)
+
  (* File "perm.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. ((dynamic_property(0, 2147483646, to_rep(first(a1)),
-  to_rep(last(a1))) and (to_rep(first(a1)) = 0)) -> (in_range2(i) ->
-  (in_range1(v) -> ((dynamic_property(0, 2147483646, to_rep(first(r1)),
-  to_rep(last(r1))) and (to_rep(first(r1)) = 0)) ->
-  (((to_rep(first(a1)) <= i) and (i <= to_rep(last(a1)))) ->
-  ((((to_rep(first(r1)) = to_rep(first(a1))) and
-  (((to_rep(last(r1)) = to_rep(last(a1))) and (result = true)) or
-  ((not (to_rep(last(r1)) = to_rep(last(a1)))) and (result = false)))) or
-  ((not (to_rep(first(r1)) = to_rep(first(a1)))) and (result = false))) ->
-  ((result = true) -> (to_rep(first(r1)) <= i)))))))))
+goal WP_parameter_def : (to_rep(first(r1)) <= i)

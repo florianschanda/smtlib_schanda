@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -395,30 +395,67 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "instructions.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall instructions__read__result:int.
-  forall instructions__read__result1:int. forall result:int. forall i1:int.
-  forall instructions__read__result2:int. forall result1:int. forall i2:int.
-  forall instructions__read__result3:int. forall result2:int. forall i3:int.
-  forall instructions__read__result4:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(word1)), to_rep1(last(word1))) -> (not (((result = i) and
-  (i1 = 0)) and
-  (((not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i1))).elts,
+logic i : int
+
+logic instructions__read__result : int
+
+logic instructions__read__result1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic instructions__read__result2 : int
+
+logic result1 : int
+
+logic i2 : int
+
+logic instructions__read__result3 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic instructions__read__result4 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(word1)),
+  to_rep1(last(word1)))
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 0)
+
+axiom H3 : (not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i1))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(i1))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(i1))).rt)), word,
-  to_rep1(first(word1)), to_rep1(last(word1))) = true)) and
-  ((instructions__read__result2 = instructions__read__result) and
-  (instructions__read__result2 = instructions__read__result1))) and
-  (((result1 = i1) and (i2 = 1)) and
-  (((not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i2))).elts,
+  to_rep1(first(word1)), to_rep1(last(word1))) = true))
+
+axiom H4 : (instructions__read__result2 = instructions__read__result)
+
+axiom H5 : (instructions__read__result2 = instructions__read__result1)
+
+axiom H6 : (result1 = i1)
+
+axiom H7 : (i2 = 1)
+
+axiom H8 : (not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i2))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(i2))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(i2))).rt)), word,
-  to_rep1(first(word1)), to_rep1(last(word1))) = true)) and
-  (instructions__read__result3 = instructions__read__result2)) and
-  (((result2 = i2) and (i3 = 2)) and
-  ((not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i3))).elts,
+  to_rep1(first(word1)), to_rep1(last(word1))) = true))
+
+axiom H9 : (instructions__read__result3 = instructions__read__result2)
+
+axiom H10 : (result2 = i2)
+
+axiom H11 : (i3 = 2)
+
+axiom H12 : (not (bool_eq4((to_string(attr__ATTRIBUTE_IMAGE3(i3))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE3(i3))).rt)),
   to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE3(i3))).rt)), word,
-  to_rep1(first(word1)), to_rep1(last(word1))) = true)) and
-  (instructions__read__result4 = instructions__read__result3))))))))))
+  to_rep1(first(word1)), to_rep1(last(word1))) = true))
+
+axiom H13 : (instructions__read__result4 = instructions__read__result3)
+
+ (* File "instructions.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : false

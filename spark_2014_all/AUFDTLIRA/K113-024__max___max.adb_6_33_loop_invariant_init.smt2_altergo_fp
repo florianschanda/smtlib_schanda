@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -275,11 +275,93 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic imax : int
+
+logic i : int
+
+logic max__max__result : int
+
+logic temp___145 : int
+
+logic temp___144 : int
+
+logic result : int
+
+logic imax1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic imax2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic imax3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic imax4 : int
+
+logic i4 : int
+
+logic imax5 : int
+
+logic i5 : int
+
+logic imax6 : int
+
+logic i6 : int
+
+logic imax7 : int
+
+logic i7 : int
+
+logic imax8 : int
+
+logic i8 : int
+
+logic imax9 : int
+
+logic i9 : int
+
+logic result4 : int
+
+logic max__max__result1 : int
+
+logic max__max__result2 : int
+
+logic max__max__result3 : int
+
+logic imax10 : int
+
+logic i10 : int
+
+logic max__max__result4 : int
+
+logic imax11 : int
+
+logic i11 : int
+
+logic max__max__result5 : int
+
+axiom H : (result = imax)
+
+axiom H1 : (imax1 = to_rep((t[1])))
+
+axiom H2 : in_range1(imax1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 2)
+
+axiom H5 : (2 <= i1)
+
+axiom H6 : (i1 <= 10)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall imax:int. forall i:int. forall result:int. forall imax1:int.
-  forall result1:int. forall i1:int. ((({ int__content = result } = {
-  int__content = imax }) and (imax1 = to_rep((t[1])))) ->
-  (in_range1(imax1) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= 10)) ->
-  (to_rep((t[1])) <= imax1))))))
+goal WP_parameter_def : (to_rep((t[1])) <= imax1)

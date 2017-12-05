@@ -41,6 +41,7 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content a))
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (declare-const temp___upto_245 Int)
+(declare-const us Int)
 (assert (in_range temp___upto_245))
 (assert (not (in_range 3)))
 (check-sat)

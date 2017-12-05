@@ -135,7 +135,7 @@ function status_type__ref___projection(a: status_type__ref) : status_type =
 
 type speed_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -215,13 +215,45 @@ axiom current_speed__def_axiom :
   (in_range2(segway__speed) ->
   (current_speed(segway__speed) = segway__speed)))
 
+logic speed : int
+
+logic status : int
+
+logic result : int
+
+logic status1 : int
+
+logic result1 : int
+
+logic speed1 : int
+
+logic speed2 : int
+
+logic status2 : int
+
+logic speed3 : int
+
+logic status3 : int
+
+axiom H : (((- 100) <= 100) -> in_range2(speed))
+
+axiom H1 : ((0 <= 2) -> in_range1(status))
+
+axiom H2 : (result = status)
+
+axiom H3 : (status1 = 0)
+
+axiom H4 : (result1 = speed)
+
+axiom H5 : (speed1 = 0)
+
+axiom H6 : (status1 = status2)
+
+axiom H7 : (speed1 = speed2)
+
+axiom H8 : (status3 = status1)
+
+axiom H9 : (speed3 = speed1)
+
  (* File "segway.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:int. forall status:int. forall result:int.
-  forall status1:int. forall result1:int. forall speed1:int.
-  forall speed2:int. forall status2:int. forall speed3:int.
-  forall status3:int. ((((-100) <= 100) -> in_range2(speed)) -> (((0 <= 2) ->
-  in_range1(status)) -> (((((result = status) and (status1 = 0)) and
-  ((result1 = speed) and (speed1 = 0))) and (((status1 = status2) and
-  (speed1 = speed2)) and ((status3 = status1) and (speed3 = speed1)))) ->
-  (status2 = 0)))))
+goal WP_parameter_def : (status2 = 0)

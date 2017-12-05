@@ -191,7 +191,11 @@ function capacity_range__ref___2__projection(a: capacity_range__ref1) : capacity
 
 axiom no_index__def_axiom : (no_index = 0)
 
+logic temp___capacity_944 : int
+
+axiom H : in_range1(no_index)
+
+axiom H1 : in_range2(temp___capacity_944)
+
  (* File "hnco-test2.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___capacity_944:int. (in_range1(no_index) ->
-  (in_range2(temp___capacity_944) -> in_range3(temp___capacity_944))))
+goal WP_parameter_def : in_range3(temp___capacity_944)

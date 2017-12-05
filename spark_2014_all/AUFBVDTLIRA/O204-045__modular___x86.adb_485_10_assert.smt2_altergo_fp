@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1921,10 +1921,49 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic rcx : t3
+
+logic rsi : t3
+
+logic rdi : t3
+
+logic val1 : t
+
+logic val2 : t
+
+logic o : t2
+
+logic result : bool
+
+logic rcx1 : t3
+
+logic rsi1 : t3
+
+logic rdi1 : t3
+
+logic val11 : t
+
+logic val21 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : ((o = ecx(rcx)) and (o = toSmall(bw_and3(rcx,
+  of_int3(4294967295)))))
+
+axiom H6 : ((ugt2(o, of_int2(0)) -> (result = true)) and ((not ugt2(o,
+  of_int2(0))) -> (result = false)))
+
+axiom H7 : (result = true)
+
+axiom H8 : ugt2(ecx(rcx1), of_int2(0))
+
  (* File "x86.adb", line 467, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rcx:t3. forall o:t2. forall result:bool. forall rcx1:t3.
-  ((((o = ecx(rcx)) and (o = toSmall(bw_and3(rcx, of_int3(4294967295))))) and
-  ((ugt2(o, of_int2(0)) and (result = true)) or ((not ugt2(o,
-  of_int2(0))) and (result = false)))) -> ((result = true) ->
-  (ugt2(ecx(rcx1), of_int2(0)) -> (not (ecx(rcx1) = of_int2(0)))))))
+goal WP_parameter_def : (not (ecx(rcx1) = of_int2(0)))

@@ -289,7 +289,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tmax_lsid_typeB
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq5 : int, int -> bool
 
@@ -944,19 +944,24 @@ axiom get_element__def_axiom :
 axiom cpu_lsid_last__def_axiom :
   (cpu_lsid_last = foo__cpu_lsid_last__aggregate_def(3, 4))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall states__split_fields:(int,natural) farray.
-  forall states__split_fields1:t1. ((foo__cpu_lsid_last__aggregate_def(3,
-  4) = cpu_lsid_last) -> (in_range(cpu_id) ->
-  (((to_rep((cpu_lsid_last[cpu_id])) = to_rep(((to_base({ us_split_discrs2 =
-  { rec__foo__subject_state__max_id = states__split_discrs };
-  us_split_fields3 = { rec__foo__subject_state__states1 = { elts1 =
+logic states__split_fields : (int,natural) farray
+
+logic states__split_fields1 : t1
+
+axiom H : (foo__cpu_lsid_last__aggregate_def(3, 4) = cpu_lsid_last)
+
+axiom H1 : in_range(cpu_id)
+
+axiom H2 : ((to_rep((cpu_lsid_last[cpu_id])) = to_rep(((to_base({
+  us_split_discrs2 = { rec__foo__subject_state__max_id = states__split_discrs
+  }; us_split_fields3 = { rec__foo__subject_state__states1 = { elts1 =
   states__split_fields; rt1 = states__split_fields1 } }
   })).us_split_discrs1).rec__foo__subject_state__max_id)) and
   (dynamic_property3(0, to_rep((cpu_lsid_last[cpu_id])),
   to_rep1(first2(states__split_fields1)),
   to_rep1(last2(states__split_fields1))) and
   ((to_rep1(first2(states__split_fields1)) = 0) and
-  (to_rep1(last2(states__split_fields1)) = to_rep((cpu_lsid_last[cpu_id])))))) ->
-  (5 <= to_rep((cpu_lsid_last[cpu_id])))))))
+  (to_rep1(last2(states__split_fields1)) = to_rep((cpu_lsid_last[cpu_id]))))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (5 <= to_rep((cpu_lsid_last[cpu_id])))

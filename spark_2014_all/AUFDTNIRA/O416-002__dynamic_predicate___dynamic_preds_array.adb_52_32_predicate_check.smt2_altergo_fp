@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -371,14 +371,23 @@ axiom get_constant_even_pair__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "dynamic_preds_array.adb", line 45, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___270:(int,even) farray. ((in_range(i11s) and (mod(i11s,
-  2) = 0)) -> (((to_rep((i15s[2])) = (to_rep((i15s[1])) + 2)) and
+logic x : (int,even) farray
+
+logic temp___270 : (int,even) farray
+
+axiom H : (in_range(i11s) and (mod(i11s, 2) = 0))
+
+axiom H1 : ((to_rep((i15s[2])) = (to_rep((i15s[1])) + 2)) and
   (forall temp___185:int. (((1 <= temp___185) and (temp___185 <= 2)) ->
-  (mod(to_rep((i15s[temp___185])), 2) = 0)))) ->
-  (((temp___270 = get_constant_even_pair(void)) and
+  (mod(to_rep((i15s[temp___185])), 2) = 0))))
+
+axiom H2 : true
+
+axiom H3 : ((temp___270 = get_constant_even_pair(void)) and
   ((forall temp___147:int. (((1 <= temp___147) and (temp___147 <= 2)) ->
    (mod(to_rep((temp___270[temp___147])), 2) = 0))) and
-  ((to_rep((temp___270[1])) = 0) and (to_rep((temp___270[2])) = 0)))) ->
-  (to_rep((temp___270[2])) = (to_rep((temp___270[1])) + 2))))))
+  ((to_rep((temp___270[1])) = 0) and (to_rep((temp___270[2])) = 0))))
+
+ (* File "dynamic_preds_array.adb", line 45, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((temp___270[2])) = (to_rep((temp___270[1])) + 2))

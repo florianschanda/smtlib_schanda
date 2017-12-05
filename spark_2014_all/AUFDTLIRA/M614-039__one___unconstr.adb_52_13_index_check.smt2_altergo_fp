@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -437,21 +437,56 @@ axiom def_axiom :
   (forall temp___212:int.
   ((unconstr__constr_return_call__s__aggregate_def(temp___211)[temp___212]) = of_rep(temp___211))))
 
+logic s : (int,character) farray
+
+logic i : int
+
+logic o : character
+
+logic result : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic s2 : (int,character) farray
+
+logic i2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (x = c22b)
+
+axiom H2 : in_range1(c22b)
+
+axiom H3 : (result = s)
+
+axiom H4 : (s1 = unconstr__constr_return_call__s__aggregate_def(32))
+
+axiom H5 : (to_rep1(s__first) = to_rep1(first(mk(1, 10))))
+
+axiom H6 : (to_rep1(s__last) = to_rep1(last(mk(1, 10))))
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H8 : (result1 = i)
+
+axiom H9 : (i1 = to_rep1(s__first))
+
+axiom H10 : (to_rep1(s__first) <= i1)
+
+axiom H11 : (i1 <= to_rep1(s__last))
+
+axiom H12 :
+  ((forall temp___216:int. (((to_rep1(s__first) <= temp___216) and
+   (temp___216 <= to_rep1(s__last))) -> ((i2 <= temp___216) ->
+   ((s2[temp___216]) = (s1[temp___216]))))) and
+  ((to_rep1(s__first) <= i2) and (i2 <= to_rep1(s__last))))
+
+axiom H13 : (to_rep(o) = 32)
+
  (* File "unconstr.adb", line 32, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:(int,character) farray. forall i:int. forall o:character.
-  forall result:(int,character) farray. forall s1:(int,character) farray.
-  forall result1:int. forall i1:int. forall s2:(int,character) farray.
-  forall i2:int. (in_range1(x) -> ((x = c22b) -> (in_range1(c22b) ->
-  ((((result = s) and
-  (s1 = unconstr__constr_return_call__s__aggregate_def(32))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 10)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 10)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result1 = i) and
-  (i1 = to_rep1(s__first))) -> (((to_rep1(s__first) <= i1) and
-  (i1 <= to_rep1(s__last))) ->
-  (((forall temp___216:int. (((to_rep1(s__first) <= temp___216) and
-    (temp___216 <= to_rep1(s__last))) -> ((i2 <= temp___216) ->
-    ((s2[temp___216]) = (s1[temp___216]))))) and
-  ((to_rep1(s__first) <= i2) and (i2 <= to_rep1(s__last)))) ->
-  ((to_rep(o) = 32) -> (to_rep1(s__first) <= i2)))))))))))
+goal WP_parameter_def : (to_rep1(s__first) <= i2)

@@ -1119,6 +1119,11 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  tqtisFinite(mul(NearestTiesToEven, left, right))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, left, right))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -329,7 +329,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom x__def_axiom : (x = to_rep(z__first))
 
+axiom H : dynamic_property(0, 2147483647, to_rep(z__first), to_rep(z__last))
+
+axiom H1 : (to_rep(z__first) = x)
+
+axiom H2 : in_range(x)
+
  (* File "unconstr_call.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483647, to_rep(z__first),
-  to_rep(z__last)) -> ((to_rep(z__first) = x) -> (in_range(x) ->
-  (x = to_rep(z__first)))))
+goal WP_parameter_def : (x = to_rep(z__first))

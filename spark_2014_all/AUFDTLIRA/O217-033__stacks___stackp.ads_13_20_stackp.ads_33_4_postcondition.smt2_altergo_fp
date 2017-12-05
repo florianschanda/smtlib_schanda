@@ -173,7 +173,7 @@ function telement_arrayD1__ref___projection(a: telement_arrayD1__ref) : telement
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -779,45 +779,94 @@ axiom size__def_axiom :
   rec__stackp__stack_root__content = s4; rec__stackp__stack_root__length =
   s5; rec__ext__ = s6 }; attr__tag = s7 }) = to_rep(s5)))
 
- (* File "stackp.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stackp__get_model__2__result:(int,element) farray.
-  forall stackp__get_model__2__result1:t. forall o:(int,element) farray.
-  forall temp___478:(int,element) farray. forall temp___4781:t1.
-  forall o1:(int,element) farray. forall o2:t.
-  forall result:(int,element) farray. forall result1:t.
-  forall stackp__get_model__2__result2:(int,element) farray.
-  forall stackp__get_model__2__result3:t.
-  forall stackp__get_model__2__result4:(int,element) farray.
-  forall stackp__get_model__2__result5:t.
-  forall stackp__get_model__2__result6:(int,element) farray.
-  forall stackp__get_model__2__result7:t.
-  forall stackp__get_model__2__result8:(int,element) farray.
-  forall stackp__get_model__2__result9:t.
-  forall stackp__get_model__2__result10:(int,element) farray.
-  forall stackp__get_model__2__result11:t.
-  (forall result2:(int,element) farray. forall result3:t.
-  (((((((stackp__get_model__2__result4 = stackp__get_model__2__result2) and
-  (stackp__get_model__2__result5 = stackp__get_model__2__result3)) and
+logic stackp__get_model__2__result : (int,element) farray
+
+logic stackp__get_model__2__result1 : t
+
+logic o : (int,element) farray
+
+logic temp___478 : (int,element) farray
+
+logic temp___4781 : t1
+
+logic o1 : (int,element) farray
+
+logic o2 : t
+
+logic result : (int,element) farray
+
+logic result1 : t
+
+logic stackp__get_model__2__result2 : (int,element) farray
+
+logic stackp__get_model__2__result3 : t
+
+logic stackp__get_model__2__result4 : (int,element) farray
+
+logic stackp__get_model__2__result5 : t
+
+logic stackp__get_model__2__result6 : (int,element) farray
+
+logic stackp__get_model__2__result7 : t
+
+logic stackp__get_model__2__result8 : (int,element) farray
+
+logic stackp__get_model__2__result9 : t
+
+logic stackp__get_model__2__result10 : (int,element) farray
+
+logic stackp__get_model__2__result11 : t
+
+logic result2 : (int,element) farray
+
+logic result3 : t
+
+axiom H : (stackp__get_model__2__result4 = stackp__get_model__2__result2)
+
+axiom H1 : (stackp__get_model__2__result5 = stackp__get_model__2__result3)
+
+axiom H2 :
   ((stackp__get_model__2__result6 = stackp__get_model__2__result2) and
-  (stackp__get_model__2__result7 = stackp__get_model__2__result3))) and
-  ((((((1 <= to_rep(s1)) -> (((1 <= 1) and (1 <= 100)) and
-  ((1 <= to_rep(s1)) and (to_rep(s1) <= 100)))) and (o = s)) and
-  ((o = temp___478) and (mk1(1, to_rep(s1)) = temp___4781))) and
-  (dynamic_property(1, 2147483647, to_rep1(first2(temp___4781)),
-  to_rep1(last2(temp___4781))) and ((temp___478 = o1) and
-  (mk(to_rep1(first2(temp___4781)), to_rep1(last2(temp___4781))) = o2)))) and
-  (((result = stackp__get_model__2__result) and
-  (result1 = stackp__get_model__2__result1)) and
-  ((o1 = stackp__get_model__2__result2) and
-  (o2 = stackp__get_model__2__result3))))) and
-  (((stackp__get_model__2__result8 = stackp__get_model__2__result4) and
-  (stackp__get_model__2__result9 = stackp__get_model__2__result5)) and
-  ((stackp__get_model__2__result10 = stackp__get_model__2__result6) and
-  (stackp__get_model__2__result11 = stackp__get_model__2__result7)))) and
-  ((result2 = stackp__get_model__2__result8) and
-  (result3 = stackp__get_model__2__result9))) -> (length({ elts =
-  stackp__get_model__2__result8; rt = stackp__get_model__2__result9
-  }) = size({ us_split_fields1 = { rec__stackp__stack_root__content = s;
-  rec__stackp__stack_root__length = s1; rec__ext__ = s2 }; attr__tag = s3
-  })))))
+  (stackp__get_model__2__result7 = stackp__get_model__2__result3))
+
+axiom H3 : ((1 <= to_rep(s1)) -> (((1 <= 1) and (1 <= 100)) and
+  ((1 <= to_rep(s1)) and (to_rep(s1) <= 100))))
+
+axiom H4 : (o = s)
+
+axiom H5 : (o = temp___478)
+
+axiom H6 : (mk1(1, to_rep(s1)) = temp___4781)
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(first2(temp___4781)),
+  to_rep1(last2(temp___4781)))
+
+axiom H8 : (temp___478 = o1)
+
+axiom H9 : (mk(to_rep1(first2(temp___4781)),
+  to_rep1(last2(temp___4781))) = o2)
+
+axiom H10 : (result = stackp__get_model__2__result)
+
+axiom H11 : (result1 = stackp__get_model__2__result1)
+
+axiom H12 : ((stackp__get_model__2__result2 = o1) and
+  (stackp__get_model__2__result3 = o2))
+
+axiom H13 :
+  ((stackp__get_model__2__result8 = stackp__get_model__2__result4) and
+  (stackp__get_model__2__result9 = stackp__get_model__2__result5))
+
+axiom H14 : (stackp__get_model__2__result10 = stackp__get_model__2__result6)
+
+axiom H15 : (stackp__get_model__2__result11 = stackp__get_model__2__result7)
+
+axiom H16 : (result2 = stackp__get_model__2__result8)
+
+axiom H17 : (result3 = stackp__get_model__2__result9)
+
+ (* File "stackp.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (length({ elts = stackp__get_model__2__result8; rt =
+  stackp__get_model__2__result9 }) = size({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s; rec__stackp__stack_root__length = s1;
+  rec__ext__ = s2 }; attr__tag = s3 }))

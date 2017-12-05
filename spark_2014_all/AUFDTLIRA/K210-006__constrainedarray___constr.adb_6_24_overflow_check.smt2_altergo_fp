@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,8 +218,163 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : (int,integer) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : (int,integer) farray
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : (int,integer) farray
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : (int,integer) farray
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : (int,integer) farray
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : (int,integer) farray
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : (int,integer) farray
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+logic result2 : int
+
+logic i2 : int
+
+logic result3 : (int,integer) farray
+
+logic x2 : (int,integer) farray
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,integer) farray
+
+logic x3 : (int,integer) farray
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : (int,integer) farray
+
+logic x4 : (int,integer) farray
+
+logic result8 : int
+
+logic i5 : int
+
+logic result9 : (int,integer) farray
+
+logic x5 : (int,integer) farray
+
+logic result10 : int
+
+logic i6 : int
+
+logic result11 : (int,integer) farray
+
+logic x6 : (int,integer) farray
+
+logic result12 : int
+
+logic i7 : int
+
+logic result13 : (int,integer) farray
+
+logic x7 : (int,integer) farray
+
+logic result14 : int
+
+logic i8 : int
+
+logic result15 : (int,integer) farray
+
+logic x8 : (int,integer) farray
+
+logic result16 : int
+
+logic i9 : int
+
+logic result17 : (int,integer) farray
+
+logic x9 : (int,integer) farray
+
+logic result18 : int
+
+logic i10 : int
+
+logic result19 : (int,integer) farray
+
+logic x10 : (int,integer) farray
+
+logic x11 : (int,integer) farray
+
+logic i11 : int
+
+logic x12 : (int,integer) farray
+
+logic i12 : int
+
+axiom H : (to_rep((x[1])) = 0)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
  (* File "constr.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall i:int. forall result:int.
-  forall i1:int. ((to_rep((x[1])) = 0) -> ((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) -> in_range((to_rep((x[i1])) + 1)))))
+goal WP_parameter_def : in_range((to_rep((x[i1])) + 1))

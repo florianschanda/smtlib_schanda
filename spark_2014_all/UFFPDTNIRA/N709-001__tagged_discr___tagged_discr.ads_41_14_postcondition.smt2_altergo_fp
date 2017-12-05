@@ -80,7 +80,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1262,19 +1262,19 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  ((((((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
-  (((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z)) and
-  (tagged_discr__t__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
-  (tagged_discr__t__y__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep2(((b).us_split_fields1).rec__tagged_discr__t__y)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not ((((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
-  (((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z)) and
+  ((((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
   (tagged_discr__t__x__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
   (tagged_discr__t__y__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep2(((b).us_split_fields1).rec__tagged_discr__t__y))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
+  (tagged_discr__t__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
+  (tagged_discr__t__y__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep2(((b).us_split_fields1).rec__tagged_discr__t__y)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -1461,21 +1461,21 @@ logic bool_eq7 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
-  (((((((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
-  (to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w))) and
-  (((a).us_split_fields3).rec__tagged_discr__t__z1 = ((b).us_split_fields3).rec__tagged_discr__t__z1)) and
-  (tagged_discr__t__x__pred1(a) ->
-  (to_rep(((a).us_split_fields3).rec__tagged_discr__t__x1) = to_rep(((b).us_split_fields3).rec__tagged_discr__t__x1)))) and
-  (tagged_discr__t__y__pred1(a) ->
-  (to_rep2(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep2(((b).us_split_fields3).rec__tagged_discr__t__y1)))) ->
-  (bool_eq7(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
-  (to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w))) and
+  ((((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
+  ((((to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w)) and
   (((a).us_split_fields3).rec__tagged_discr__t__z1 = ((b).us_split_fields3).rec__tagged_discr__t__z1)) and
   (tagged_discr__t__x__pred1(a) ->
   (to_rep(((a).us_split_fields3).rec__tagged_discr__t__x1) = to_rep(((b).us_split_fields3).rec__tagged_discr__t__x1)))) and
   (tagged_discr__t__y__pred1(a) ->
   (to_rep2(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep2(((b).us_split_fields3).rec__tagged_discr__t__y1))))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
+  ((((to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w)) and
+  (((a).us_split_fields3).rec__tagged_discr__t__z1 = ((b).us_split_fields3).rec__tagged_discr__t__z1)) and
+  (tagged_discr__t__x__pred1(a) ->
+  (to_rep(((a).us_split_fields3).rec__tagged_discr__t__x1) = to_rep(((b).us_split_fields3).rec__tagged_discr__t__x1)))) and
+  (tagged_discr__t__y__pred1(a) ->
+  (to_rep2(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep2(((b).us_split_fields3).rec__tagged_discr__t__y1)))))) ->
   (bool_eq7(a, b) = false))))
 
 logic us_tag1 : int
@@ -1942,84 +1942,265 @@ logic r7b5 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "tagged_discr.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:integer. forall v__split_fields1:bool.
-  forall v__split_fields2:integer. forall v__split_fields3:float1.
-  forall v__split_fields4:us_private. forall o:e. forall o1:integer.
-  forall o2:bool. forall o3:integer. forall o4:float1. forall o5:us_private.
-  forall o6:e. forall tagged_discr__init__2__R7b__assume:e.
-  forall tagged_discr__init__2__R7b__assume1:bool.
-  forall tagged_discr__init__2__R7b__assume2:integer.
-  forall tagged_discr__init__2__R7b__assume3:float1.
-  forall tagged_discr__init__2__R7b__assume4:us_private.
-  forall tagged_discr__init__2__R7b__assume5:int. forall o7:integer.
-  forall o8:integer. forall o9:bool. forall o10:integer. forall o11:float1.
-  forall o12:us_private. forall temp___211:e. forall temp___2111:integer.
-  forall temp___2112:bool. forall temp___2113:integer.
-  forall temp___2114:float1. forall temp___2115:us_private.
-  forall temp___2116:int. forall usq_:e. forall usq_1:integer.
-  forall usq_2:bool. forall usq_3:integer. forall usq_4:float1.
-  forall usq_5:us_private. forall usq_6:int. forall temp___213:e.
-  forall temp___2131:integer. forall temp___2132:bool.
-  forall temp___2133:integer. forall temp___2134:float1.
-  forall temp___2135:us_private. forall temp___2136:int.
-  forall result:integer. forall result1:bool. forall result2:integer.
-  forall result3:float1. forall result4:us_private.
-  forall v__split_fields5:integer. forall v__split_fields6:bool.
-  forall v__split_fields7:integer. forall v__split_fields8:float1.
-  forall v__split_fields9:us_private. forall v__split_fields10:integer.
-  forall v__split_fields11:bool. forall v__split_fields12:integer.
-  forall v__split_fields13:float1. forall v__split_fields14:us_private.
-  forall v__split_fields15:integer. forall v__split_fields16:bool.
-  forall v__split_fields17:integer. forall v__split_fields18:float1.
-  forall v__split_fields19:us_private. (((to_rep1(v__split_discrs) = 0) and
-  ((((to_rep1(v__split_discrs) = r5b) and in_range3(r5b)) and
-  ((((((to_rep(o1) = 0) and ((of_int(0) = o2) and ((o1 = o3) and
-  ((dummy1 = o4) and (us_null_ext__ = o5))))) and (((to_rep1(o) = 0) and
-  (o = o6)) and ((tagged_discr__init__2__R7b__assume = o6) and
-  (((tagged_discr__init__2__R7b__assume1 = o2) and
-  ((tagged_discr__init__2__R7b__assume2 = o3) and
-  ((tagged_discr__init__2__R7b__assume3 = o4) and
-  (tagged_discr__init__2__R7b__assume4 = o5)))) and
-  (us_tag3 = tagged_discr__init__2__R7b__assume5))))) and
-  ((tagged_discr__init__2__R7b__assume = r7b) and
+logic v__split_fields : integer
+
+logic v__split_fields1 : bool
+
+logic v__split_fields2 : integer
+
+logic v__split_fields3 : float1
+
+logic v__split_fields4 : us_private
+
+logic o : e
+
+logic o1 : integer
+
+logic o2 : bool
+
+logic o3 : integer
+
+logic o4 : float1
+
+logic o5 : us_private
+
+logic o6 : e
+
+logic tagged_discr__init__2__R7b__assume : e
+
+logic tagged_discr__init__2__R7b__assume1 : bool
+
+logic tagged_discr__init__2__R7b__assume2 : integer
+
+logic tagged_discr__init__2__R7b__assume3 : float1
+
+logic tagged_discr__init__2__R7b__assume4 : us_private
+
+logic tagged_discr__init__2__R7b__assume5 : int
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : bool
+
+logic o10 : integer
+
+logic o11 : float1
+
+logic o12 : us_private
+
+logic temp___211 : e
+
+logic temp___2111 : integer
+
+logic temp___2112 : bool
+
+logic temp___2113 : integer
+
+logic temp___2114 : float1
+
+logic temp___2115 : us_private
+
+logic temp___2116 : int
+
+logic usq_ : e
+
+logic usq_1 : integer
+
+logic usq_2 : bool
+
+logic usq_3 : integer
+
+logic usq_4 : float1
+
+logic usq_5 : us_private
+
+logic usq_6 : int
+
+logic temp___213 : e
+
+logic temp___2131 : integer
+
+logic temp___2132 : bool
+
+logic temp___2133 : integer
+
+logic temp___2134 : float1
+
+logic temp___2135 : us_private
+
+logic temp___2136 : int
+
+logic result : integer
+
+logic result1 : bool
+
+logic result2 : integer
+
+logic result3 : float1
+
+logic result4 : us_private
+
+logic v__split_fields5 : integer
+
+logic v__split_fields6 : bool
+
+logic v__split_fields7 : integer
+
+logic v__split_fields8 : float1
+
+logic v__split_fields9 : us_private
+
+logic v__split_fields10 : integer
+
+logic v__split_fields11 : bool
+
+logic v__split_fields12 : integer
+
+logic v__split_fields13 : float1
+
+logic v__split_fields14 : us_private
+
+logic v__split_fields15 : integer
+
+logic v__split_fields16 : bool
+
+logic v__split_fields17 : integer
+
+logic v__split_fields18 : float1
+
+logic v__split_fields19 : us_private
+
+axiom H : (to_rep1(v__split_discrs) = 0)
+
+axiom H1 : (to_rep1(v__split_discrs) = r5b)
+
+axiom H2 : in_range3(r5b)
+
+axiom H3 : (to_rep(o1) = 0)
+
+axiom H4 : (of_int(0) = o2)
+
+axiom H5 : (o1 = o3)
+
+axiom H6 : (dummy1 = o4)
+
+axiom H7 : (us_null_ext__ = o5)
+
+axiom H8 : (to_rep1(o) = 0)
+
+axiom H9 : (o = o6)
+
+axiom H10 : (tagged_discr__init__2__R7b__assume = o6)
+
+axiom H11 : (tagged_discr__init__2__R7b__assume1 = o2)
+
+axiom H12 : (tagged_discr__init__2__R7b__assume2 = o3)
+
+axiom H13 : (tagged_discr__init__2__R7b__assume3 = o4)
+
+axiom H14 : (tagged_discr__init__2__R7b__assume4 = o5)
+
+axiom H15 : (us_tag3 = tagged_discr__init__2__R7b__assume5)
+
+axiom H16 : ((tagged_discr__init__2__R7b__assume = r7b) and
   (((tagged_discr__init__2__R7b__assume1 = r7b1) and
   ((tagged_discr__init__2__R7b__assume2 = r7b2) and
   ((tagged_discr__init__2__R7b__assume3 = r7b3) and
-  (tagged_discr__init__2__R7b__assume4 = r7b4)))) and (us_tag3 = r7b5)))) and
-  (0 = to_rep1(r7b))) and ((((((to_rep(o7) = 0) and ((o7 = o8) and
-  ((r7b1 = o9) and ((r7b2 = o10) and ((r7b3 = o11) and
-  (us_null_ext__ = o12)))))) and ((r7b = temp___211) and
-  (((temp___2111 = o8) and ((temp___2112 = o9) and ((temp___2113 = o10) and
-  ((temp___2114 = o11) and (temp___2115 = o12))))) and
-  (us_tag2 = temp___2116)))) and ((temp___211 = v__split_discrs) and
-  ((usq_ = temp___211) and (((usq_1 = temp___2111) and
+  (tagged_discr__init__2__R7b__assume4 = r7b4)))) and (us_tag3 = r7b5)))
+
+axiom H17 : (0 = to_rep1(r7b))
+
+axiom H18 : (to_rep(o7) = 0)
+
+axiom H19 : (o7 = o8)
+
+axiom H20 : (r7b1 = o9)
+
+axiom H21 : (r7b2 = o10)
+
+axiom H22 : (r7b3 = o11)
+
+axiom H23 : (us_null_ext__ = o12)
+
+axiom H24 : (r7b = temp___211)
+
+axiom H25 : (temp___2111 = o8)
+
+axiom H26 : (temp___2112 = o9)
+
+axiom H27 : (temp___2113 = o10)
+
+axiom H28 : (temp___2114 = o11)
+
+axiom H29 : (temp___2115 = o12)
+
+axiom H30 : (us_tag2 = temp___2116)
+
+axiom H31 : (temp___211 = v__split_discrs)
+
+axiom H32 : ((usq_ = temp___211) and (((usq_1 = temp___2111) and
   ((usq_2 = temp___2112) and ((usq_3 = temp___2113) and
   ((usq_4 = temp___2114) and (usq_5 = temp___2115))))) and
-  (usq_6 = temp___2116))))) and ((usq_ = temp___213) and
-  (((usq_1 = temp___2131) and ((usq_2 = temp___2132) and
-  ((usq_3 = temp___2133) and ((usq_4 = temp___2134) and
-  (usq_5 = temp___2135))))) and (v__attr__tag = temp___2136)))) and
-  ((((result = v__split_fields) and ((result1 = v__split_fields1) and
-  ((result2 = v__split_fields2) and ((result3 = v__split_fields3) and
-  (result4 = v__split_fields4))))) and ((temp___2131 = v__split_fields5) and
-  ((temp___2132 = v__split_fields6) and ((temp___2133 = v__split_fields7) and
-  ((temp___2134 = v__split_fields8) and
-  (temp___2135 = v__split_fields9)))))) and
-  (v__split_discrs = temp___213))))) and
-  (((v__split_fields10 = v__split_fields5) and
-  ((v__split_fields11 = v__split_fields6) and
-  ((v__split_fields12 = v__split_fields7) and
-  ((v__split_fields13 = v__split_fields8) and
-  (v__split_fields14 = v__split_fields9))))) and
-  ((v__split_fields15 = v__split_fields5) and
+  (usq_6 = temp___2116)))
+
+axiom H33 : (usq_ = temp___213)
+
+axiom H34 : (usq_1 = temp___2131)
+
+axiom H35 : (usq_2 = temp___2132)
+
+axiom H36 : (usq_3 = temp___2133)
+
+axiom H37 : (usq_4 = temp___2134)
+
+axiom H38 : (usq_5 = temp___2135)
+
+axiom H39 : (v__attr__tag = temp___2136)
+
+axiom H40 : (result = v__split_fields)
+
+axiom H41 : (result1 = v__split_fields1)
+
+axiom H42 : (result2 = v__split_fields2)
+
+axiom H43 : (result3 = v__split_fields3)
+
+axiom H44 : (result4 = v__split_fields4)
+
+axiom H45 : (temp___2131 = v__split_fields5)
+
+axiom H46 : (temp___2132 = v__split_fields6)
+
+axiom H47 : (temp___2133 = v__split_fields7)
+
+axiom H48 : (temp___2134 = v__split_fields8)
+
+axiom H49 : (temp___2135 = v__split_fields9)
+
+axiom H50 : (v__split_discrs = temp___213)
+
+axiom H51 : (v__split_fields10 = v__split_fields5)
+
+axiom H52 : (v__split_fields11 = v__split_fields6)
+
+axiom H53 : (v__split_fields12 = v__split_fields7)
+
+axiom H54 : (v__split_fields13 = v__split_fields8)
+
+axiom H55 : (v__split_fields14 = v__split_fields9)
+
+axiom H56 : ((v__split_fields15 = v__split_fields5) and
   ((v__split_fields16 = v__split_fields6) and
   ((v__split_fields17 = v__split_fields7) and
   ((v__split_fields18 = v__split_fields8) and
-  (v__split_fields19 = v__split_fields9)))))))) -> (is_zero__2({
-  us_split_discrs2 = { rec__tagged_discr__t__discr = v__split_discrs };
-  us_split_fields3 = { rec__tagged_discr__u1__w = v__split_fields10;
-  rec__tagged_discr__t__z1 = v__split_fields11; rec__tagged_discr__t__x1 =
-  v__split_fields12; rec__tagged_discr__t__y1 = v__split_fields13;
-  rec__ext__1 = v__split_fields14 }; attr__tag1 = v__attr__tag }) = true)))
+  (v__split_fields19 = v__split_fields9)))))
+
+ (* File "tagged_discr.ads", line 33, characters 0-0 *)
+goal WP_parameter_def : (is_zero__2({ us_split_discrs2 = {
+  rec__tagged_discr__t__discr = v__split_discrs }; us_split_fields3 = {
+  rec__tagged_discr__u1__w = v__split_fields10; rec__tagged_discr__t__z1 =
+  v__split_fields11; rec__tagged_discr__t__x1 = v__split_fields12;
+  rec__tagged_discr__t__y1 = v__split_fields13; rec__ext__1 =
+  v__split_fields14 }; attr__tag1 = v__attr__tag }) = true)

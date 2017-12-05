@@ -250,6 +250,8 @@ axiom private_type__root__compat_axiom1 :
   attr__tag = r5 })) = to_int(is_valid1(us_tag, { us_split_fields1 = {
   rec__private_type__root = r3; rec__ext__ = r4 }; attr__tag = r5 }))))
 
+logic o : int
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : (is_valid({ us_split_fields1 = {
   rec__private_type__root = r; rec__ext__ = r1 }; attr__tag = r2 }) = true)

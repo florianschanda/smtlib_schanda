@@ -104,6 +104,7 @@
 (declare-const o16 Int)
 (declare-const o17 integer)
 (declare-const o18 Int)
+(declare-const o19 Int)
 (declare-const a11 Int)
 (declare-const a21 Int)
 (declare-const call_actuals__fn__y1 Int)

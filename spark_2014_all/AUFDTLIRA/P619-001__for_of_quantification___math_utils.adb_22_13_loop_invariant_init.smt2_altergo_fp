@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type tindexB
 
-predicate in_range2(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq4 : int, int -> bool
 
@@ -418,19 +418,129 @@ function t2b__ref___projection(a: t2b__ref) : tindexB = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result__ : int
+
+logic i : int
+
+logic math_utils__max__result : int
+
+logic temp___160 : int
+
+logic temp___159 : int
+
+logic temp___161 : int
+
+logic k : int
+
+logic k1 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+logic i2 : int
+
+logic temp___1611 : int
+
+logic result3 : int
+
+logic temp___1612 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : int
+
+logic result__4 : int
+
+logic result__5 : int
+
+logic i4 : int
+
+logic result__6 : int
+
+logic i5 : int
+
+logic result__7 : int
+
+logic i6 : int
+
+logic result__8 : int
+
+logic i7 : int
+
+logic result__9 : int
+
+logic i8 : int
+
+logic result__10 : int
+
+logic i9 : int
+
+logic result6 : int
+
+logic math_utils__max__result1 : int
+
+logic math_utils__max__result2 : int
+
+logic math_utils__max__result3 : int
+
+logic result__11 : int
+
+logic i10 : int
+
+logic math_utils__max__result4 : int
+
+logic result__12 : int
+
+logic i11 : int
+
+logic math_utils__max__result5 : int
+
+axiom H : dynamic_property(1, 1000, to_rep1(first(v1)), to_rep1(last(v1)))
+
+axiom H1 : (0 <  length({ elts = v; rt = v1 }))
+
+axiom H2 : (result = result__)
+
+axiom H3 : (result__1 = (- 2147483648))
+
+axiom H4 : in_range1(result__1)
+
+axiom H5 : (0 <  length({ elts = v; rt = v1 }))
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = to_rep1(first(v1)))
+
+axiom H8 : (to_rep1(first(v1)) <= i1)
+
+axiom H9 : (i1 <= to_rep1(last(v1)))
+
+axiom H10 : ((result__1 <  to_rep((v[i1]))) -> (result__1 = result2))
+
+axiom H11 : ((result__1 <  to_rep((v[i1]))) -> (result__2 = to_rep((v[i1]))))
+
+axiom H12 : ((not (result__1 <  to_rep((v[i1])))) -> (result__2 = result__1))
+
+axiom H13 : ((to_rep1(first(v1)) <= i1) and (i1 <= to_rep1(last(v1))))
+
+logic k2 : int
+
+axiom H14 : (to_rep1(first(v1)) <= k2)
+
+axiom H15 : (k2 <= i1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall result:int.
-  forall result__1:int. forall result1:int. forall i1:int.
-  forall result2:int. forall result__2:int. (dynamic_property(1, 1000,
-  to_rep1(first(v1)), to_rep1(last(v1))) -> ((0 <  length({ elts = v; rt = v1
-  })) -> ((({ int__content = result } = { int__content = result__ }) and
-  (result__1 = (-2147483648))) -> (in_range1(result__1) -> ((0 <  length({
-  elts = v; rt = v1 })) -> ((({ int__content = result1 } = { int__content = i
-  }) and (i1 = to_rep1(first(v1)))) -> (((to_rep1(first(v1)) <= i1) and
-  (i1 <= to_rep1(last(v1)))) -> ((((result__1 <  to_rep((v[i1]))) and
-  ((result__1 = result2) and (result__2 = to_rep((v[i1]))))) or
-  ((not (result__1 <  to_rep((v[i1])))) and (result__2 = result__1))) ->
-  (((to_rep1(first(v1)) <= i1) and (i1 <= to_rep1(last(v1)))) ->
-  (forall k:int. (((to_rep1(first(v1)) <= k) and (k <= i1)) ->
-  (to_rep((v[k])) <= result__2)))))))))))))
+goal WP_parameter_def : (to_rep((v[k2])) <= result__2)

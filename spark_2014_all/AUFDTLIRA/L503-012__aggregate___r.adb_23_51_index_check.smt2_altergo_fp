@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -511,6 +511,19 @@ axiom def_axiom1 :
   ((not (temp___268 = 2)) -> ((temp___264(temp___266,
   temp___267)[temp___268]) = of_rep(temp___267))))))
 
+logic a : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : (int,int5) farray
+
+logic o2 : (int,int5) farray
+
+logic temp___269 : (int,int5) farray
+
+axiom H : in_range1(n)
+
+axiom H1 : ((1 <= n) and (n <= 5))
+
  (* File "r.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(n) -> (((1 <= n) and (n <= 5)) ->
-  (1 <= n)))
+goal WP_parameter_def : (1 <= n)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -163,45 +163,194 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : int
+
+logic enums__tick_pos__result : int
+
+logic o : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic r3 : int
+
+logic result3 : int
+
+logic r4 : int
+
+logic result4 : int
+
+logic r5 : int
+
+logic result5 : int
+
+logic r6 : int
+
+logic result6 : int
+
+logic r7 : int
+
+logic result7 : int
+
+logic r8 : int
+
+logic result8 : int
+
+logic r9 : int
+
+logic result9 : int
+
+logic r10 : int
+
+logic result10 : int
+
+logic r11 : int
+
+logic result11 : int
+
+logic enums__tick_pos__result1 : int
+
+logic enums__tick_pos__result2 : int
+
+logic enums__tick_pos__result3 : int
+
+logic r12 : int
+
+logic enums__tick_pos__result4 : int
+
+logic r13 : int
+
+logic enums__tick_pos__result5 : int
+
+logic result12 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(r))
+
+axiom H2 : ((a = 0) -> (result = r))
+
+axiom H3 : ((a = 0) -> (r1 = 0))
+
+axiom H4 : ((not (a = 0)) -> ((a = 1) -> (result1 = r)))
+
+axiom H5 : ((not (a = 0)) -> ((a = 1) -> (r2 = a)))
+
+axiom H6 : ((not (a = 0)) -> ((not (a = 1)) -> ((a = 2) -> (result2 = r))))
+
+axiom H7 : ((not (a = 0)) -> ((not (a = 1)) -> ((a = 2) -> (r3 = 2))))
+
+axiom H8 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) -> ((a = 3) ->
+  (result3 = r)))))
+
+axiom H9 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) -> ((a = 3) ->
+  (r4 = 3)))))
+
+axiom H10 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((a = 4) -> (in_range2(a) -> (result4 = r)))))))
+
+axiom H11 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((a = 4) -> (in_range2(a) -> (r5 = 4)))))))
+
+axiom H12 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((a = 4) -> ((not in_range2(a)) -> (result5 = r)))))))
+
+axiom H13 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((a = 4) -> ((not in_range2(a)) -> (r6 = 0)))))))
+
+axiom H14 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((a = 4) -> ((not in_range2(a)) -> (r5 = r6)))))))
+
+axiom H15 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((a = 5) -> (result6 = r)))))))
+
+axiom H16 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((a = 5) -> (r7 = 5)))))))
+
+axiom H17 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((a = 6) ->
+  (in_range2(a) -> (result7 = r)))))))))
+
+axiom H18 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((a = 6) ->
+  (in_range2(a) -> (r8 = 0)))))))))
+
+axiom H19 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((a = 6) ->
+  ((not in_range2(a)) -> (result8 = r)))))))))
+
+axiom H20 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((a = 6) ->
+  ((not in_range2(a)) -> (r9 = 6)))))))))
+
+axiom H21 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((a = 6) ->
+  ((not in_range2(a)) -> (r8 = r9)))))))))
+
+axiom H22 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  ((a = 8) -> (result9 = r)))))))))
+
+axiom H23 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  ((a = 8) -> (r10 = 8)))))))))
+
+axiom H24 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  ((not (a = 8)) -> (result10 = r)))))))))
+
+axiom H25 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  ((not (a = 8)) -> (r11 = 7)))))))))
+
+axiom H26 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  ((not (a = 8)) -> (r10 = r11)))))))))
+
+axiom H27 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> ((not (a = 6)) ->
+  (r8 = r10))))))))
+
+axiom H28 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> ((not (a = 5)) -> (r7 = r8)))))))
+
+axiom H29 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> ((not (a = 4)) -> (r5 = r7))))))
+
+axiom H30 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  ((not (a = 3)) -> (r4 = r5)))))
+
+axiom H31 : ((not (a = 0)) -> ((not (a = 1)) -> ((not (a = 2)) ->
+  (r3 = r4))))
+
+axiom H32 : ((not (a = 0)) -> ((not (a = 1)) -> (r2 = r3)))
+
+axiom H33 : ((not (a = 0)) -> (r1 = r2))
+
+axiom H34 : (enums__tick_pos__result1 = enums__tick_pos__result2)
+
+axiom H35 : (enums__tick_pos__result3 = enums__tick_pos__result1)
+
+axiom H36 : (result11 = enums__tick_pos__result)
+
+axiom H37 : (enums__tick_pos__result1 = r1)
+
+axiom H38 : (enums__tick_pos__result4 = enums__tick_pos__result2)
+
+axiom H39 : (r1 = r12)
+
+axiom H40 : (enums__tick_pos__result5 = enums__tick_pos__result3)
+
+axiom H41 : (r13 = r1)
+
+axiom H42 : (result12 = enums__tick_pos__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall enums__tick_pos__result:int. forall result:int.
-  forall r1:int. forall result1:int. forall r2:int. forall result2:int.
-  forall r3:int. forall result3:int. forall r4:int. forall result4:int.
-  forall r5:int. forall result5:int. forall r6:int. forall result6:int.
-  forall r7:int. forall result7:int. forall r8:int. forall result8:int.
-  forall r9:int. forall result9:int. forall r10:int. forall result10:int.
-  forall r11:int. forall result11:int. forall enums__tick_pos__result1:int.
-  forall enums__tick_pos__result2:int. forall enums__tick_pos__result3:int.
-  forall r12:int. forall enums__tick_pos__result4:int. forall r13:int.
-  forall enums__tick_pos__result5:int.
-  (forall result12:int. ((in_range1(a) and
-  ((((((-2147483648) <= 2147483647) -> in_range(r)) and ((((a = 0) and (({
-  int__content = result } = { int__content = r }) and (r1 = 0))) or
-  ((not (a = 0)) and ((((a = 1) and (({ int__content = result1 } = {
-  int__content = r }) and (r2 = a))) or ((not (a = 1)) and ((((a = 2) and (({
-  int__content = result2 } = { int__content = r }) and (r3 = 2))) or
-  ((not (a = 2)) and ((((a = 3) and (({ int__content = result3 } = {
-  int__content = r }) and (r4 = 3))) or ((not (a = 3)) and ((((a = 4) and
-  ((in_range2(a) and (({ int__content = result4 } = { int__content = r }) and
-  (r5 = 4))) or ((not in_range2(a)) and ((({ int__content = result5 } = {
-  int__content = r }) and (r6 = 0)) and (r5 = r6))))) or ((not (a = 4)) and
-  ((((a = 5) and (({ int__content = result6 } = { int__content = r }) and
-  (r7 = 5))) or ((not (a = 5)) and ((((a = 6) and ((in_range2(a) and (({
-  int__content = result7 } = { int__content = r }) and (r8 = 0))) or
-  ((not in_range2(a)) and ((({ int__content = result8 } = { int__content = r
-  }) and (r9 = 6)) and (r8 = r9))))) or ((not (a = 6)) and ((((a = 8) and (({
-  int__content = result9 } = { int__content = r }) and (r10 = 8))) or
-  ((not (a = 8)) and ((({ int__content = result10 } = { int__content = r
-  }) and (r11 = 7)) and (r10 = r11)))) and (r8 = r10)))) and (r7 = r8)))) and
-  (r5 = r7)))) and (r4 = r5)))) and (r3 = r4)))) and (r2 = r3)))) and
-  (r1 = r2)))) and
-  (((enums__tick_pos__result1 = enums__tick_pos__result2) and
-  (enums__tick_pos__result3 = enums__tick_pos__result1)) and (({
-  int__content = result11 } = { int__content = enums__tick_pos__result }) and
-  (enums__tick_pos__result1 = r1))))) and ((({ int__content =
-  enums__tick_pos__result4 } = { int__content = enums__tick_pos__result2
-  }) and (r1 = r12)) and
-  ((enums__tick_pos__result5 = enums__tick_pos__result3) and
-  (r13 = r1)))) and (result12 = enums__tick_pos__result4))) ->
-  (enums__tick_pos__result4 = a))))
+goal WP_parameter_def : (enums__tick_pos__result4 = a)

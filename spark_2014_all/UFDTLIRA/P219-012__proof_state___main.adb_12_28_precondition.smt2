@@ -46,6 +46,7 @@
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (= x (f Tuple0)))
+(declare-const main__x__assume Int)
 (assert (not true))
 (check-sat)
 (exit)

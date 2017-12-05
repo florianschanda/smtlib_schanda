@@ -109,5 +109,15 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range(a)
+
  (* File "misovattr.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range(a) -> (a <  (a + 1)))
+goal WP_parameter_def : (a <  (a + 1))

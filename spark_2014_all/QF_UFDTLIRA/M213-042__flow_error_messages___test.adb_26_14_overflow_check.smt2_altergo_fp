@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -115,13 +115,51 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : int
+
+logic n : int
+
+logic m : int
+
+logic o : int
+
+logic n1 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : int
+
+logic n2 : int
+
+logic result2 : int
+
+logic m2 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(n))
+
+axiom H2 : (result = m)
+
+axiom H3 : (m1 = 8)
+
+axiom H4 : in_range(m1)
+
+axiom H5 : ((a = true) -> (result1 = n))
+
+axiom H6 : ((a = true) -> (n2 = 12))
+
+axiom H7 : ((a = true) -> (m2 = m1))
+
+axiom H8 : ((not (a = true)) -> (result2 = m1))
+
+axiom H9 : ((not (a = true)) -> (m2 = 12))
+
+axiom H10 : ((not (a = true)) -> (n2 = n))
+
+axiom H11 : ((not (a = true)) -> (n2 = n1))
+
  (* File "test.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall n:int. forall m:int. forall n1:int.
-  forall result:int. forall m1:int. forall result1:int. forall n2:int.
-  forall result2:int. forall m2:int. ((((-2147483648) <= 2147483647) ->
-  in_range(x)) -> ((((-2147483648) <= 2147483647) -> in_range(n)) ->
-  (((result = m) and (m1 = 8)) -> (in_range(m1) -> ((((a = true) and
-  (((result1 = n) and (n2 = 12)) and (m2 = m1))) or ((not (a = true)) and
-  (((result2 = m1) and (m2 = 12)) and ((n2 = n) and (n2 = n1))))) ->
-  in_range((n2 + m2))))))))
+goal WP_parameter_def : in_range((n2 + m2))

@@ -148,6 +148,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (define-fun default_initial_assumption1 ((temp___expr_528 us_rep) (temp___skip_top_level_529 Bool)) Bool (and (= (attr__constrained temp___expr_528) false) (= (to_rep1 (rec__with_default__bad_nested_defaults2__empty_rec__d (us_split_discrs1 temp___expr_528))) c)))
 (declare-const o Int)
+(declare-const temp___663 Int)
 (declare-const result Bool)
 (assert (in_range c))
 (assert (=> (<= 1 100) (= o (+ (- 100 1) 1))))

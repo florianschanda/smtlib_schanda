@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -257,25 +257,135 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : int
+
+logic b : int
+
+logic i : int
+
+logic temp___154 : int
+
+logic temp___153 : int
+
+logic o : int
+
+logic a1 : int
+
+logic b1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic a2 : int
+
+logic b2 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic a3 : int
+
+logic result2 : int
+
+logic b3 : int
+
+logic a4 : int
+
+logic b4 : int
+
+logic i3 : int
+
+logic a5 : int
+
+logic b5 : int
+
+logic i4 : int
+
+logic a6 : int
+
+logic b6 : int
+
+logic i5 : int
+
+logic a7 : int
+
+logic b7 : int
+
+logic i6 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (a = r11b)
+
+axiom H3 : in_range1(r11b)
+
+axiom H4 : (b = r12b)
+
+axiom H5 : in_range1(r12b)
+
+axiom H6 : (result = i)
+
+axiom H7 : (i1 = r11b)
+
+axiom H8 : (((r11b <= i1) and (i1 <= r12b)) -> (temp___154 = b))
+
+axiom H9 : (((r11b <= i1) and (i1 <= r12b)) -> (temp___153 = a))
+
+axiom H10 : (((r11b <= i1) and (i1 <= r12b)) -> ((in_range1(a2) and
+  in_range1(b2)) and ((r11b <= i2) and (i2 <= r12b))))
+
+axiom H11 : (((r11b <= i1) and (i1 <= r12b)) -> ((o = (a2 * i2)) and
+  in_range1((a2 * i2))))
+
+axiom H12 : (((r11b <= i1) and (i1 <= r12b)) -> (result1 = a2))
+
+axiom H13 : (((r11b <= i1) and (i1 <= r12b)) -> (a3 = o))
+
+axiom H14 : (((r11b <= i1) and (i1 <= r12b)) -> (result2 = b2))
+
+axiom H15 : (((r11b <= i1) and (i1 <= r12b)) -> (b3 = 5))
+
+axiom H16 : (((r11b <= i1) and (i1 <= r12b)) -> (i2 = r12b))
+
+axiom H17 : (((r11b <= i1) and (i1 <= r12b)) -> (i2 = i3))
+
+axiom H18 : (((r11b <= i1) and (i1 <= r12b)) -> (b3 = b4))
+
+axiom H19 : (((r11b <= i1) and (i1 <= r12b)) -> (a3 = a4))
+
+axiom H20 : (((r11b <= i1) and (i1 <= r12b)) -> (i4 = i2))
+
+axiom H21 : (((r11b <= i1) and (i1 <= r12b)) -> (b5 = b3))
+
+axiom H22 : (((r11b <= i1) and (i1 <= r12b)) -> (a5 = a3))
+
+axiom H23 : (((r11b <= i1) and (i1 <= r12b)) -> (i5 = i3))
+
+axiom H24 : (((r11b <= i1) and (i1 <= r12b)) -> (b6 = b4))
+
+axiom H25 : (((r11b <= i1) and (i1 <= r12b)) -> (a6 = a4))
+
+axiom H26 : (((r11b <= i1) and (i1 <= r12b)) -> (i6 = i4))
+
+axiom H27 : (((r11b <= i1) and (i1 <= r12b)) -> (b7 = b5))
+
+axiom H28 : (((r11b <= i1) and (i1 <= r12b)) -> (a7 = a5))
+
+axiom H29 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (i1 = i5))
+
+axiom H30 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (b6 = b))
+
+axiom H31 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (a6 = a))
+
+axiom H32 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (i6 = i1))
+
+axiom H33 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (b7 = b1))
+
+axiom H34 : ((not ((r11b <= i1) and (i1 <= r12b))) -> (a7 = a1))
+
  (* File "test.adb", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall i:int. forall temp___154:int.
-  forall temp___153:int. forall o:int. forall a1:int. forall b1:int.
-  forall result:int. forall i1:int. forall a2:int. forall b2:int.
-  forall i2:int. forall result1:int. forall a3:int. forall result2:int.
-  forall b3:int. forall a4:int. forall b4:int. forall i3:int. forall a5:int.
-  forall b5:int. forall i4:int. forall a6:int. forall b6:int. forall i5:int.
-  forall a7:int. forall b7:int. forall i6:int. (in_range1(a) ->
-  (in_range1(b) -> (((a = r11b) and in_range1(r11b)) -> (((b = r12b) and
-  in_range1(r12b)) -> (((({ int__content = result } = { int__content = i
-  }) and (i1 = r11b)) and ((((r11b <= i1) and (i1 <= r12b)) and
-  ((((temp___154 = b) and ((temp___153 = a) and (((in_range1(a2) and
-  in_range1(b2)) and ((r11b <= i2) and (i2 <= r12b))) and
-  ((((o = (a2 * i2)) and in_range1((a2 * i2))) and ((result1 = a2) and
-  (a3 = o))) and (((result2 = b2) and (b3 = 5)) and (i2 = r12b)))))) and
-  (((i2 = i3) and ((b3 = b4) and (a3 = a4))) and ((i4 = i2) and
-  ((b5 = b3) and (a5 = a3))))) and (((i5 = i3) and ((b4 = b6) and
-  (a4 = a6))) and ((i6 = i4) and ((b7 = b5) and (a7 = a5)))))) or
-  ((not ((r11b <= i1) and (i1 <= r12b))) and (((i1 = i5) and ((b = b6) and
-  (a = a6))) and ((i6 = i1) and ((b7 = b1) and (a7 = a1))))))) ->
-  (not (2 = 0))))))))
+goal WP_parameter_def : (not (2 = 0))

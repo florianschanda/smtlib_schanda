@@ -1477,6 +1477,8 @@
 (declare-const target__split_fields capacity_range1)
 (declare-const us Int)
 (declare-const us1 Int)
+(declare-const us2 Int)
+(declare-const hnco__test2__v_type_owner__vector_type_owner__assign__target__fields us_main_type)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity target__split_discrs)) (to_rep1 target__split_fields)))
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 source))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 source)))))))
 (assert (=> (= (of_int 1) true) (<= (length source) (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity target__split_discrs)))))

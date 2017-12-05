@@ -37,6 +37,7 @@
 (declare-const x0 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range x0))
 (assert (and (= o (read_partial_0 x0)) (in_range o)))
 (assert (= o1 (+ o 1)))

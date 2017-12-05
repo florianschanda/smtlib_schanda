@@ -393,7 +393,12 @@ logic c : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range1(c)
+
+axiom H1 : (has_element({ us_split_fields1 = {
+  rec__declare_iterable__container__content = x } }, c) = true)
+
+axiom H2 : (not (c = 100))
+
  (* File "declare_iterable.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range1(c) -> ((has_element({ us_split_fields1 = {
-  rec__declare_iterable__container__content = x } }, c) = true) ->
-  ((not (c = 100)) -> in_range1((c + 1)))))
+goal WP_parameter_def : in_range1((c + 1))

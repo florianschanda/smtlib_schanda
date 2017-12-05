@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -671,17 +671,24 @@ logic self__1 : (int,character) farray
 
 logic self__2 : t
 
+logic temp___199 : (int,character) farray
+
+logic temp___1991 : t1
+
+axiom H : (to_rep(first2((temp___185(32, 1, to_rep(self__))).rt1)) = 1)
+
+axiom H1 : (to_rep(last2((temp___185(32, 1,
+  to_rep(self__))).rt1)) = to_rep(self__))
+
+axiom H2 : ({ elts1 = temp___199; rt1 = temp___1991 } = temp___185(32, 1,
+  to_rep(self__)))
+
  (* File "p.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___199:(int,character) farray. forall temp___1991:t1.
-  (((to_rep(first2((temp___185(32, 1, to_rep(self__))).rt1)) = 1) and
-  ((to_rep(last2((temp___185(32, 1,
-  to_rep(self__))).rt1)) = to_rep(self__)) and ({ elts1 = temp___199; rt1 =
-  temp___1991 } = temp___185(32, 1, to_rep(self__))))) ->
   (((to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991))) ->
   (((1 <= to_rep(self__)) ->
   (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = ((to_rep(self__) - 1) + 1))) and
   ((not (1 <= to_rep(self__))) ->
   (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = 0)))) and
   ((not (to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991)))) ->
-  ((1 <= to_rep(self__)) -> (0 = ((to_rep(self__) - 1) + 1)))))))
+  ((1 <= to_rep(self__)) -> (0 = ((to_rep(self__) - 1) + 1)))))

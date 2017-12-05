@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1013,60 +1013,203 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic self__ : (t,integer) farray
+
+logic self__1 : message_index
+
+logic self__2 : message_index
+
+logic self__3 : message_count
+
+logic o : integer
+
+logic o1 : (t,integer) farray
+
+logic o2 : (t,integer) farray
+
+logic o3 : message_index
+
+logic o4 : message_index
+
+logic o5 : message_count
+
+logic o6 : (t,integer) farray
+
+logic o7 : message_index
+
+logic o8 : message_index
+
+logic o9 : message_count
+
+logic o10 : message_index
+
+logic o11 : (t,integer) farray
+
+logic o12 : message_index
+
+logic o13 : message_index
+
+logic o14 : message_count
+
+logic o15 : (t,integer) farray
+
+logic o16 : message_index
+
+logic o17 : message_index
+
+logic o18 : message_count
+
+logic o19 : int
+
+logic o20 : message_count
+
+logic o21 : (t,integer) farray
+
+logic o22 : message_index
+
+logic o23 : message_index
+
+logic o24 : message_count
+
+logic o25 : (t,integer) farray
+
+logic o26 : message_index
+
+logic o27 : message_index
+
+logic o28 : message_count
+
+logic self__4 : (t,integer) farray
+
+logic self__5 : message_index
+
+logic self__6 : message_index
+
+logic self__7 : message_count
+
+logic result : (t,integer) farray
+
+logic result1 : message_index
+
+logic result2 : message_index
+
+logic result3 : message_count
+
+logic self__8 : (t,integer) farray
+
+logic self__9 : message_index
+
+logic self__10 : message_index
+
+logic self__11 : message_count
+
+logic result4 : (t,integer) farray
+
+logic result5 : message_index
+
+logic result6 : message_index
+
+logic result7 : message_count
+
+logic self__12 : (t,integer) farray
+
+logic self__13 : message_index
+
+logic self__14 : message_index
+
+logic self__15 : message_count
+
+logic result8 : (t,integer) farray
+
+logic result9 : message_index
+
+logic result10 : message_index
+
+logic result11 : message_count
+
+logic self__16 : (t,integer) farray
+
+logic self__17 : message_index
+
+logic self__18 : message_index
+
+logic self__19 : message_count
+
+logic self__20 : (t,integer) farray
+
+logic self__21 : message_index
+
+logic self__22 : message_index
+
+logic self__23 : message_count
+
+logic self__24 : (t,integer) farray
+
+logic self__25 : message_index
+
+logic self__26 : message_index
+
+logic self__27 : message_count
+
+axiom H : in_range(n)
+
+axiom H1 : (to_rep2(self__3) <  16)
+
+axiom H2 : (to_rep(o) = n)
+
+axiom H3 : (o1 = (self__[to_rep1(self__1) <- o]))
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (self__1 = o3)
+
+axiom H6 : (self__2 = o4)
+
+axiom H7 : (self__3 = o5)
+
+axiom H8 : (o6 = o2)
+
+axiom H9 : (o7 = o3)
+
+axiom H10 : (o8 = o4)
+
+axiom H11 : (o9 = o5)
+
+axiom H12 : ((result = self__) and ((result1 = self__1) and
+  ((result2 = self__2) and (result3 = self__3))))
+
+axiom H13 : ((self__8 = o6) and ((self__9 = o7) and ((self__10 = o8) and
+  (self__11 = o9))))
+
+axiom H14 : (to_rep1(o10) = urem(add(to_rep1(self__9), of_int(1)),
+  of_int(16)))
+
+axiom H15 : (self__8 = o11)
+
+axiom H16 : (o10 = o12)
+
+axiom H17 : (self__10 = o13)
+
+axiom H18 : (self__11 = o14)
+
+axiom H19 : (o15 = o11)
+
+axiom H20 : (o16 = o12)
+
+axiom H21 : (o17 = o13)
+
+axiom H22 : (o18 = o14)
+
+axiom H23 : (result4 = self__8)
+
+axiom H24 : (result5 = self__9)
+
+axiom H25 : (result6 = self__10)
+
+axiom H26 : (result7 = self__11)
+
+axiom H27 : ((self__12 = o15) and ((self__13 = o16) and ((self__14 = o17) and
+  (self__15 = o18))))
+
  (* File "communications.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall self__:(t,integer) farray. forall self__1:message_index.
-  forall self__2:message_index. forall self__3:message_count.
-  forall o:integer. forall o1:(t,integer) farray.
-  forall o2:(t,integer) farray. forall o3:message_index.
-  forall o4:message_index. forall o5:message_count.
-  forall o6:(t,integer) farray. forall o7:message_index.
-  forall o8:message_index. forall o9:message_count. forall o10:message_index.
-  forall o11:(t,integer) farray. forall o12:message_index.
-  forall o13:message_index. forall o14:message_count.
-  forall o15:(t,integer) farray. forall o16:message_index.
-  forall o17:message_index. forall o18:message_count.
-  forall result:(t,integer) farray. forall result1:message_index.
-  forall result2:message_index. forall result3:message_count.
-  forall self__4:(t,integer) farray. forall self__5:message_index.
-  forall self__6:message_index. forall self__7:message_count.
-  forall result4:(t,integer) farray. forall result5:message_index.
-  forall result6:message_index. forall result7:message_count.
-  forall self__8:(t,integer) farray. forall self__9:message_index.
-  forall self__10:message_index. forall self__11:message_count.
-  (in_range(n) -> ((to_rep2(self__3) <  16) -> ((((((to_rep(o) = n) and
-  (o1 = (self__[to_rep1(self__1) <- o]))) and ((o1 = o2) and
-  ((self__1 = o3) and ((self__2 = o4) and (self__3 = o5))))) and
-  ((o6 = o2) and ((o7 = o3) and ((o8 = o4) and (o9 = o5))))) and (({
-  mailboxT__content = { us_split_fields1 = {
-  rec__communications__mailboxT__messages = result;
-  rec__communications__mailboxT__next_in = result1;
-  rec__communications__mailboxT__next_out = result2;
-  rec__communications__mailboxT__count = result3 } } } = {
-  mailboxT__content = { us_split_fields1 = {
-  rec__communications__mailboxT__messages = self__;
-  rec__communications__mailboxT__next_in = self__1;
-  rec__communications__mailboxT__next_out = self__2;
-  rec__communications__mailboxT__count = self__3 } } }) and ({
-  us_split_fields1 = { rec__communications__mailboxT__messages = self__4;
-  rec__communications__mailboxT__next_in = self__5;
-  rec__communications__mailboxT__next_out = self__6;
-  rec__communications__mailboxT__count = self__7 } } = { us_split_fields1 = {
-  rec__communications__mailboxT__messages = o6;
-  rec__communications__mailboxT__next_in = o7;
-  rec__communications__mailboxT__next_out = o8;
-  rec__communications__mailboxT__count = o9 } }))) ->
-  (((((to_rep1(o10) = urem(add(to_rep1(self__5), of_int(1)), of_int(16))) and
-  ((self__4 = o11) and ((o10 = o12) and ((self__6 = o13) and
-  (self__7 = o14))))) and ((o15 = o11) and ((o16 = o12) and ((o17 = o13) and
-  (o18 = o14))))) and (((result4 = self__4) and ((result5 = self__5) and
-  ((result6 = self__6) and (result7 = self__7)))) and ({ us_split_fields1 = {
-  rec__communications__mailboxT__messages = self__8;
-  rec__communications__mailboxT__next_in = self__9;
-  rec__communications__mailboxT__next_out = self__10;
-  rec__communications__mailboxT__count = self__11 } } = { us_split_fields1 =
-  { rec__communications__mailboxT__messages = o15;
-  rec__communications__mailboxT__next_in = o16;
-  rec__communications__mailboxT__next_out = o17;
-  rec__communications__mailboxT__count = o18 } }))) ->
-  in_range2((to_rep2(self__11) + 1)))))))
+goal WP_parameter_def : in_range2((to_rep2(self__15) + 1))

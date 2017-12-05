@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -448,451 +448,1374 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall has_failed:bool. forall o:int.
-  forall o1:character. forall o2:int. forall o3:int. forall o4:character.
-  forall o5:int. forall temp___1007:int. forall o6:int. forall o7:character.
-  forall o8:int. forall temp___1008:int. forall o9:int. forall o10:character.
-  forall o11:int. forall temp___1009:int. forall o12:int.
-  forall o13:character. forall o14:int. forall temp___1010:int.
-  forall o15:int. forall o16:character. forall o17:int.
-  forall temp___1011:int. forall o18:int. forall o19:character.
-  forall o20:int. forall temp___1012:int. forall o21:int.
-  forall o22:character. forall o23:int. forall temp___1013:int.
-  forall o24:int. forall o25:character. forall o26:int.
-  forall temp___1014:int. forall o27:int. forall o28:character.
-  forall o29:int. forall temp___1015:int. forall o30:int.
-  forall o31:character. forall o32:int. forall temp___1016:int.
-  forall o33:int. forall o34:character. forall o35:int.
-  forall temp___1017:int. forall o36:int. forall o37:character.
-  forall o38:int. forall temp___1018:int. forall o39:int.
-  forall o40:character. forall o41:int. forall temp___1019:int.
-  forall o42:int. forall o43:character. forall o44:int.
-  forall temp___1020:int. forall o45:int. forall o46:character.
-  forall o47:int. forall temp___1021:int. forall o48:int.
-  forall o49:character. forall o50:int. forall temp___1022:int.
-  forall o51:int. forall o52:character. forall o53:int.
-  forall temp___1023:int. forall o54:int. forall o55:character.
-  forall o56:int. forall temp___1046:int. forall temp___1047:int.
-  forall o57:int. forall o58:character. forall o59:int. forall o60:bool.
-  forall temp___1048:int. forall o61:int. forall o62:character.
-  forall o63:int. forall o64:bool. forall temp___1049:int. forall o65:int.
-  forall o66:character. forall o67:int. forall o68:bool.
-  forall temp___1050:int. forall o69:int. forall o70:character.
-  forall o71:int. forall o72:bool. forall temp___1051:int. forall o73:int.
-  forall o74:character. forall o75:int. forall o76:bool.
-  forall temp___1052:int. forall o77:int. forall o78:character.
-  forall o79:int. forall temp___1053:int. forall o80:int.
-  forall o81:character. forall o82:int. forall o83:bool. forall o84:bool.
-  forall temp___1054:int. forall o85:int. forall o86:character.
-  forall o87:int. forall o88:bool. forall o89:bool. forall temp___1055:int.
-  forall o90:int. forall o91:character. forall o92:int. forall o93:bool.
-  forall o94:bool. forall temp___1056:int. forall o95:int.
-  forall o96:character. forall o97:int. forall o98:bool. forall o99:bool.
-  forall temp___1057:int. forall o100:int. forall o101:character.
-  forall o102:int. forall o103:bool. forall o104:bool.
-  forall temp___1058:int. forall o105:int. forall o106:character.
-  forall o107:int. forall o108:bool. forall o109:bool. forall o110:bool.
-  forall temp___1059:int. forall o111:int. forall o112:character.
-  forall o113:int. forall temp___1060:int. forall o114:int.
-  forall o115:character. forall o116:int. forall o117:bool. forall o118:bool.
-  forall temp___1061:int. forall o119:int. forall o120:character.
-  forall o121:int. forall o122:bool. forall o123:bool.
-  forall temp___1062:int. forall o124:int. forall o125:character.
-  forall o126:int. forall o127:bool. forall o128:bool.
-  forall temp___1063:int. forall o129:int. forall o130:character.
-  forall o131:int. forall o132:bool. forall o133:bool.
-  forall temp___1064:int. forall o134:int. forall o135:character.
-  forall o136:int. forall o137:bool. forall o138:bool. forall o139:bool.
-  forall temp___1065:int. forall o140:int. forall o141:character.
-  forall o142:int. forall temp___1066:int. forall o143:int.
-  forall o144:character. forall o145:int. forall o146:bool. forall o147:bool.
-  forall temp___1067:int. forall o148:int. forall o149:character.
-  forall o150:int. forall o151:bool. forall o152:bool.
-  forall temp___1068:int. forall o153:int. forall o154:character.
-  forall o155:int. forall o156:bool. forall o157:bool.
-  forall temp___1069:int. forall o158:int. forall o159:character.
-  forall o160:int. forall o161:bool. forall o162:bool. forall o163:bool.
-  forall temp___1070:int. forall o164:int. forall o165:character.
-  forall o166:int. forall temp___1071:int. forall o167:int.
-  forall o168:character. forall o169:int. forall o170:bool. forall o171:bool.
-  forall temp___1072:int. forall o172:int. forall o173:character.
-  forall o174:int. forall o175:bool. forall o176:bool.
-  forall temp___1073:int. forall o177:int. forall o178:character.
-  forall o179:int. forall o180:bool. forall o181:bool. forall o182:bool.
-  forall temp___1074:int. forall o183:int. forall o184:character.
-  forall o185:int. forall temp___1075:int. forall o186:int.
-  forall o187:character. forall o188:int. forall o189:bool. forall o190:bool.
-  forall temp___1076:int. forall o191:int. forall o192:character.
-  forall o193:int. forall o194:bool. forall o195:bool. forall o196:bool.
-  forall temp___1077:int. forall o197:int. forall o198:character.
-  forall o199:int. forall temp___1078:int. forall o200:int.
-  forall o201:character. forall o202:int. forall o203:bool. forall o204:bool.
-  forall o205:bool. forall temp___1079:int. forall o206:int.
-  forall o207:character. forall o208:int. forall o209:bool.
-  forall has_failed1:bool. forall result:int. forall target1:int.
-  forall result1:bool. forall result2:bool. forall has_failed2:bool.
-  forall result3:bool. forall target2:int. forall has_failed3:bool.
-  forall result4:bool. forall result5:bool. forall has_failed4:bool.
-  forall result6:bool. forall target3:int. forall has_failed5:bool.
-  forall result7:bool. forall result8:bool. forall has_failed6:bool.
-  forall result9:bool. forall target4:int. forall has_failed7:bool.
-  forall result10:bool. forall result11:bool. forall has_failed8:bool.
-  forall result12:bool. forall target5:int. forall has_failed9:bool.
-  forall result13:bool. forall result14:bool. forall has_failed10:bool.
-  forall result15:bool. forall target6:int. forall has_failed11:bool.
-  forall result16:bool. forall result17:bool. forall has_failed12:bool.
-  forall result18:bool. forall target7:int. forall has_failed13:bool.
-  forall result19:bool. forall result20:bool. forall has_failed14:bool.
-  forall result21:bool. forall target8:int. forall has_failed15:bool.
-  forall result22:bool. forall result23:bool. forall has_failed16:bool.
-  forall result24:bool. forall target9:int. forall has_failed17:bool.
-  forall result25:bool. forall result26:bool. forall has_failed18:bool.
-  forall result27:bool. forall target10:int. forall has_failed19:bool.
-  forall result28:bool. forall result29:bool. forall has_failed20:bool.
-  forall target11:int. forall has_failed21:bool. forall target12:int.
-  forall has_failed22:bool. forall target13:int. forall has_failed23:bool.
-  forall target14:int. forall has_failed24:bool. forall target15:int.
-  forall has_failed25:bool. forall target16:int. forall has_failed26:bool.
-  forall target17:int. forall has_failed27:bool. forall target18:int.
-  forall has_failed28:bool. forall target19:int. forall has_failed29:bool.
-  forall target20:int. forall has_failed30:bool. forall target21:int.
-  forall has_failed31:bool. forall target22:int. forall has_failed32:bool.
-  forall target23:int. forall has_failed33:bool. forall target24:int.
-  forall has_failed34:bool. forall target25:int. forall has_failed35:bool.
-  forall target26:int. forall has_failed36:bool. forall target27:int.
-  forall has_failed37:bool. forall target28:int. forall has_failed38:bool.
-  forall target29:int. forall has_failed39:bool. forall target30:int.
-  forall has_failed40:bool. forall target31:int. forall has_failed41:bool.
-  forall target32:int. forall has_failed42:bool. forall target33:int.
-  forall has_failed43:bool. forall target34:int. forall has_failed44:bool.
-  forall target35:int. forall has_failed45:bool. forall target36:int.
-  forall has_failed46:bool. forall target37:int. forall has_failed47:bool.
-  forall target38:int. forall has_failed48:bool. forall target39:int.
-  forall has_failed49:bool. forall target40:int.
-  forall has_failed50:bool__ref. forall target41:int.
-  forall has_failed51:bool. forall target42:int__ref.
-  forall has_failed52:bool__ref. forall target43:int.
-  forall has_failed53:bool. forall target44:int__ref.
-  forall has_failed54:bool__ref. forall target45:int.
-  forall has_failed55:bool. forall target46:int__ref.
-  forall has_failed56:bool__ref. forall target47:int.
-  forall has_failed57:bool. forall target48:int. forall has_failed58:bool.
-  forall target49:int__ref. forall has_failed59:bool__ref.
-  forall target50:int. forall has_failed60:bool. forall target51:int__ref.
-  forall has_failed61:bool__ref. forall target52:int.
-  forall has_failed62:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) ->
-  ((((forall index:int. (((to_rep1(first(source1)) <= index) and
-     (index <= to_rep1(last(source1)))) ->
-     (is_digit(to_rep((source[index]))) = true))) and
-  (1 <= length({ elts = source; rt = source1 }))) and (length({ elts =
-  source; rt = source1 }) <= 10)) -> ((((({ int__content = result } = {
-  int__content = target }) and (target1 = 0)) and
-  (((((has_failed59 = has_failed56) and (target49 = target46)) and
+logic target : int
+
+logic has_failed : bool
+
+logic index : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic temp___1007 : int
+
+logic o6 : int
+
+logic o7 : character
+
+logic o8 : int
+
+logic temp___1008 : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic temp___1009 : int
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : int
+
+logic temp___1010 : int
+
+logic o15 : int
+
+logic o16 : character
+
+logic o17 : int
+
+logic temp___1011 : int
+
+logic o18 : int
+
+logic o19 : character
+
+logic o20 : int
+
+logic temp___1012 : int
+
+logic o21 : int
+
+logic o22 : character
+
+logic o23 : int
+
+logic temp___1013 : int
+
+logic o24 : int
+
+logic o25 : character
+
+logic o26 : int
+
+logic temp___1014 : int
+
+logic o27 : int
+
+logic o28 : character
+
+logic o29 : int
+
+logic temp___1015 : int
+
+logic o30 : int
+
+logic o31 : character
+
+logic o32 : int
+
+logic temp___1016 : int
+
+logic o33 : int
+
+logic o34 : character
+
+logic o35 : int
+
+logic temp___1017 : int
+
+logic o36 : int
+
+logic o37 : character
+
+logic o38 : int
+
+logic temp___1018 : int
+
+logic o39 : int
+
+logic o40 : character
+
+logic o41 : int
+
+logic temp___1019 : int
+
+logic o42 : int
+
+logic o43 : character
+
+logic o44 : int
+
+logic temp___1020 : int
+
+logic o45 : int
+
+logic o46 : character
+
+logic o47 : int
+
+logic temp___1021 : int
+
+logic o48 : int
+
+logic o49 : character
+
+logic o50 : int
+
+logic temp___1022 : int
+
+logic o51 : int
+
+logic o52 : character
+
+logic o53 : int
+
+logic temp___1023 : int
+
+logic o54 : int
+
+logic o55 : character
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : character
+
+logic o59 : int
+
+logic o60 : int
+
+logic temp___1025 : int
+
+logic temp___1026 : int
+
+logic o61 : int
+
+logic o62 : character
+
+logic o63 : int
+
+logic o64 : bool
+
+logic temp___1027 : int
+
+logic o65 : int
+
+logic o66 : character
+
+logic o67 : int
+
+logic o68 : bool
+
+logic temp___1028 : int
+
+logic o69 : int
+
+logic o70 : character
+
+logic o71 : int
+
+logic o72 : bool
+
+logic temp___1029 : int
+
+logic o73 : int
+
+logic o74 : character
+
+logic o75 : int
+
+logic o76 : bool
+
+logic temp___1030 : int
+
+logic o77 : int
+
+logic o78 : character
+
+logic o79 : int
+
+logic o80 : bool
+
+logic temp___1031 : int
+
+logic o81 : int
+
+logic o82 : character
+
+logic o83 : int
+
+logic o84 : bool
+
+logic temp___1032 : int
+
+logic o85 : int
+
+logic o86 : character
+
+logic o87 : int
+
+logic o88 : bool
+
+logic temp___1033 : int
+
+logic o89 : int
+
+logic o90 : character
+
+logic o91 : int
+
+logic o92 : bool
+
+logic temp___1034 : int
+
+logic o93 : int
+
+logic o94 : character
+
+logic o95 : int
+
+logic o96 : bool
+
+logic temp___1035 : int
+
+logic o97 : int
+
+logic o98 : character
+
+logic o99 : int
+
+logic temp___1036 : int
+
+logic o100 : int
+
+logic o101 : character
+
+logic o102 : int
+
+logic o103 : bool
+
+logic o104 : bool
+
+logic temp___1037 : int
+
+logic o105 : int
+
+logic o106 : character
+
+logic o107 : int
+
+logic o108 : bool
+
+logic o109 : bool
+
+logic temp___1038 : int
+
+logic o110 : int
+
+logic o111 : character
+
+logic o112 : int
+
+logic o113 : bool
+
+logic o114 : bool
+
+logic temp___1039 : int
+
+logic o115 : int
+
+logic o116 : character
+
+logic o117 : int
+
+logic o118 : bool
+
+logic o119 : bool
+
+logic temp___1040 : int
+
+logic o120 : int
+
+logic o121 : character
+
+logic o122 : int
+
+logic o123 : bool
+
+logic o124 : bool
+
+logic temp___1041 : int
+
+logic o125 : int
+
+logic o126 : character
+
+logic o127 : int
+
+logic o128 : bool
+
+logic o129 : bool
+
+logic temp___1042 : int
+
+logic o130 : int
+
+logic o131 : character
+
+logic o132 : int
+
+logic o133 : bool
+
+logic o134 : bool
+
+logic temp___1043 : int
+
+logic o135 : int
+
+logic o136 : character
+
+logic o137 : int
+
+logic o138 : bool
+
+logic o139 : bool
+
+logic o140 : bool
+
+logic temp___1044 : int
+
+logic o141 : int
+
+logic o142 : character
+
+logic o143 : int
+
+logic temp___1045 : int
+
+logic o144 : int
+
+logic o145 : character
+
+logic o146 : int
+
+logic o147 : bool
+
+logic o148 : bool
+
+logic temp___1046 : int
+
+logic o149 : int
+
+logic o150 : character
+
+logic o151 : int
+
+logic o152 : bool
+
+logic o153 : bool
+
+logic temp___1047 : int
+
+logic o154 : int
+
+logic o155 : character
+
+logic o156 : int
+
+logic o157 : bool
+
+logic o158 : bool
+
+logic temp___1048 : int
+
+logic o159 : int
+
+logic o160 : character
+
+logic o161 : int
+
+logic o162 : bool
+
+logic o163 : bool
+
+logic temp___1049 : int
+
+logic o164 : int
+
+logic o165 : character
+
+logic o166 : int
+
+logic o167 : bool
+
+logic o168 : bool
+
+logic temp___1050 : int
+
+logic o169 : int
+
+logic o170 : character
+
+logic o171 : int
+
+logic o172 : bool
+
+logic o173 : bool
+
+logic temp___1051 : int
+
+logic o174 : int
+
+logic o175 : character
+
+logic o176 : int
+
+logic o177 : bool
+
+logic o178 : bool
+
+logic o179 : bool
+
+logic temp___1052 : int
+
+logic o180 : int
+
+logic o181 : character
+
+logic o182 : int
+
+logic temp___1053 : int
+
+logic o183 : int
+
+logic o184 : character
+
+logic o185 : int
+
+logic o186 : bool
+
+logic o187 : bool
+
+logic temp___1054 : int
+
+logic o188 : int
+
+logic o189 : character
+
+logic o190 : int
+
+logic o191 : bool
+
+logic o192 : bool
+
+logic temp___1055 : int
+
+logic o193 : int
+
+logic o194 : character
+
+logic o195 : int
+
+logic o196 : bool
+
+logic o197 : bool
+
+logic temp___1056 : int
+
+logic o198 : int
+
+logic o199 : character
+
+logic o200 : int
+
+logic o201 : bool
+
+logic o202 : bool
+
+logic temp___1057 : int
+
+logic o203 : int
+
+logic o204 : character
+
+logic o205 : int
+
+logic o206 : bool
+
+logic o207 : bool
+
+logic temp___1058 : int
+
+logic o208 : int
+
+logic o209 : character
+
+logic o210 : int
+
+logic o211 : bool
+
+logic o212 : bool
+
+logic o213 : bool
+
+logic temp___1059 : int
+
+logic o214 : int
+
+logic o215 : character
+
+logic o216 : int
+
+logic temp___1060 : int
+
+logic o217 : int
+
+logic o218 : character
+
+logic o219 : int
+
+logic o220 : bool
+
+logic o221 : bool
+
+logic temp___1061 : int
+
+logic o222 : int
+
+logic o223 : character
+
+logic o224 : int
+
+logic o225 : bool
+
+logic o226 : bool
+
+logic temp___1062 : int
+
+logic o227 : int
+
+logic o228 : character
+
+logic o229 : int
+
+logic o230 : bool
+
+logic o231 : bool
+
+logic temp___1063 : int
+
+logic o232 : int
+
+logic o233 : character
+
+logic o234 : int
+
+logic o235 : bool
+
+logic o236 : bool
+
+logic temp___1064 : int
+
+logic o237 : int
+
+logic o238 : character
+
+logic o239 : int
+
+logic o240 : bool
+
+logic o241 : bool
+
+logic o242 : bool
+
+logic temp___1065 : int
+
+logic o243 : int
+
+logic o244 : character
+
+logic o245 : int
+
+logic temp___1066 : int
+
+logic o246 : int
+
+logic o247 : character
+
+logic o248 : int
+
+logic o249 : bool
+
+logic o250 : bool
+
+logic temp___1067 : int
+
+logic o251 : int
+
+logic o252 : character
+
+logic o253 : int
+
+logic o254 : bool
+
+logic o255 : bool
+
+logic temp___1068 : int
+
+logic o256 : int
+
+logic o257 : character
+
+logic o258 : int
+
+logic o259 : bool
+
+logic o260 : bool
+
+logic temp___1069 : int
+
+logic o261 : int
+
+logic o262 : character
+
+logic o263 : int
+
+logic o264 : bool
+
+logic o265 : bool
+
+logic o266 : bool
+
+logic temp___1070 : int
+
+logic o267 : int
+
+logic o268 : character
+
+logic o269 : int
+
+logic temp___1071 : int
+
+logic o270 : int
+
+logic o271 : character
+
+logic o272 : int
+
+logic o273 : bool
+
+logic o274 : bool
+
+logic temp___1072 : int
+
+logic o275 : int
+
+logic o276 : character
+
+logic o277 : int
+
+logic o278 : bool
+
+logic o279 : bool
+
+logic temp___1073 : int
+
+logic o280 : int
+
+logic o281 : character
+
+logic o282 : int
+
+logic o283 : bool
+
+logic o284 : bool
+
+logic o285 : bool
+
+logic temp___1074 : int
+
+logic o286 : int
+
+logic o287 : character
+
+logic o288 : int
+
+logic temp___1075 : int
+
+logic o289 : int
+
+logic o290 : character
+
+logic o291 : int
+
+logic o292 : bool
+
+logic o293 : bool
+
+logic temp___1076 : int
+
+logic o294 : int
+
+logic o295 : character
+
+logic o296 : int
+
+logic o297 : bool
+
+logic o298 : bool
+
+logic o299 : bool
+
+logic temp___1077 : int
+
+logic o300 : int
+
+logic o301 : character
+
+logic o302 : int
+
+logic temp___1078 : int
+
+logic o303 : int
+
+logic o304 : character
+
+logic o305 : int
+
+logic o306 : bool
+
+logic o307 : bool
+
+logic o308 : bool
+
+logic temp___1079 : int
+
+logic o309 : int
+
+logic o310 : character
+
+logic o311 : int
+
+logic o312 : bool
+
+logic has_failed1 : bool
+
+logic result : int
+
+logic target1 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic has_failed2 : bool
+
+logic result3 : bool
+
+logic target2 : int
+
+logic has_failed3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic has_failed4 : bool
+
+logic result6 : bool
+
+logic target3 : int
+
+logic has_failed5 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic has_failed6 : bool
+
+logic result9 : bool
+
+logic target4 : int
+
+logic has_failed7 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic has_failed8 : bool
+
+logic result12 : bool
+
+logic target5 : int
+
+logic has_failed9 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic has_failed10 : bool
+
+logic result15 : bool
+
+logic target6 : int
+
+logic has_failed11 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic has_failed12 : bool
+
+logic result18 : bool
+
+logic target7 : int
+
+logic has_failed13 : bool
+
+logic result19 : bool
+
+logic result20 : bool
+
+logic has_failed14 : bool
+
+logic result21 : bool
+
+logic target8 : int
+
+logic has_failed15 : bool
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic has_failed16 : bool
+
+logic result24 : bool
+
+logic target9 : int
+
+logic has_failed17 : bool
+
+logic result25 : bool
+
+logic result26 : bool
+
+logic has_failed18 : bool
+
+logic result27 : bool
+
+logic target10 : int
+
+logic has_failed19 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic has_failed20 : bool
+
+logic target11 : int
+
+logic has_failed21 : bool
+
+logic target12 : int
+
+logic has_failed22 : bool
+
+logic target13 : int
+
+logic has_failed23 : bool
+
+logic target14 : int
+
+logic has_failed24 : bool
+
+logic target15 : int
+
+logic has_failed25 : bool
+
+logic target16 : int
+
+logic has_failed26 : bool
+
+logic target17 : int
+
+logic has_failed27 : bool
+
+logic target18 : int
+
+logic has_failed28 : bool
+
+logic target19 : int
+
+logic has_failed29 : bool
+
+logic target20 : int
+
+logic has_failed30 : bool
+
+logic target21 : int
+
+logic has_failed31 : bool
+
+logic target22 : int
+
+logic has_failed32 : bool
+
+logic target23 : int
+
+logic has_failed33 : bool
+
+logic target24 : int
+
+logic has_failed34 : bool
+
+logic target25 : int
+
+logic has_failed35 : bool
+
+logic target26 : int
+
+logic has_failed36 : bool
+
+logic target27 : int
+
+logic has_failed37 : bool
+
+logic target28 : int
+
+logic has_failed38 : bool
+
+logic target29 : int
+
+logic has_failed39 : bool
+
+logic target30 : int
+
+logic has_failed40 : bool
+
+logic target31 : int
+
+logic has_failed41 : bool
+
+logic target32 : int
+
+logic has_failed42 : bool
+
+logic target33 : int
+
+logic has_failed43 : bool
+
+logic target34 : int
+
+logic has_failed44 : bool
+
+logic target35 : int
+
+logic has_failed45 : bool
+
+logic target36 : int
+
+logic has_failed46 : bool
+
+logic target37 : int
+
+logic has_failed47 : bool
+
+logic target38 : int
+
+logic has_failed48 : bool
+
+logic target39 : int
+
+logic has_failed49 : bool
+
+logic target40 : int
+
+logic has_failed50 : bool
+
+logic target41 : int
+
+logic has_failed51 : bool
+
+logic target42 : int
+
+logic has_failed52 : bool
+
+logic target43 : int
+
+logic has_failed53 : bool
+
+logic target44 : int
+
+logic has_failed54 : bool
+
+logic target45 : int
+
+logic has_failed55 : bool
+
+logic target46 : int
+
+logic has_failed56 : bool
+
+logic target47 : int
+
+logic has_failed57 : bool
+
+logic target48 : int
+
+logic has_failed58 : bool
+
+logic target49 : int
+
+logic has_failed59 : bool
+
+logic target50 : int
+
+logic has_failed60 : bool
+
+logic target51 : int
+
+logic has_failed61 : bool
+
+logic target52 : int
+
+logic has_failed62 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 :
+  (((forall index1:int. (((to_rep1(first(source1)) <= index1) and
+    (index1 <= to_rep1(last(source1)))) ->
+    (is_digit(to_rep((source[index1]))) = true))) and (1 <= length({ elts =
+  source; rt = source1 }))) and (length({ elts = source; rt = source1
+  }) <= 10))
+
+axiom H3 : (result = target)
+
+axiom H4 : (target1 = 0)
+
+axiom H5 : (((((has_failed59 = has_failed56) and (target49 = target46)) and
   ((has_failed60 = has_failed57) and (target50 = target47))) and ((length({
-  elts = source; rt = source1 }) = 10) and (((((has_failed56 = {
-  bool__content = has_failed2 }) and (target46 = { int__content = target1
-  })) and ((has_failed57 = has_failed2) and (target47 = target1))) and
+  elts = source; rt = source1 }) = 10) and
+  (((((has_failed56 = has_failed2) and (target46 = target1)) and
+  ((has_failed57 = has_failed2) and (target47 = target1))) and
   (((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o = to_rep1(first(source1)))) and (o1 = (source[o]))) and
-  (o2 = to_rep(o1))) and (((50 <  o2) and (result1 = true)) or
-  ((not (50 <  o2)) and (result1 = false)))) and ((result1 = true) and
+  (o2 = to_rep(o1))) and (((50 <  o2) -> (result1 = true)) and
+  ((not (50 <  o2)) -> (result1 = false)))) and ((result1 = true) and
   ((result2 = has_failed) and (has_failed2 = of_int(1)))))) or
   ((((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o = to_rep1(first(source1)))) and (o1 = (source[o]))) and
-  (o2 = to_rep(o1))) and (((50 <  o2) and (result1 = true)) or
-  ((not (50 <  o2)) and (result1 = false)))) and ((not (result1 = true)) and
+  (o2 = to_rep(o1))) and (((50 <  o2) -> (result1 = true)) and
+  ((not (50 <  o2)) -> (result1 = false)))) and ((not (result1 = true)) and
   ((has_failed2 = has_failed) and (has_failed2 = has_failed1)))) and
   ((((has_failed56 = has_failed54) and (target46 = target44)) and
   ((has_failed57 = has_failed55) and (target47 = target45))) and
-  (((((has_failed54 = { bool__content = has_failed3 }) and (target44 = {
-  int__content = target2 })) and ((has_failed55 = has_failed3) and
-  (target45 = target2))) and
+  (((((has_failed54 = has_failed3) and (target44 = target2)) and
+  ((has_failed55 = has_failed3) and (target45 = target2))) and
   (((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o3 = to_rep1(first(source1)))) and (o4 = (source[o3]))) and
-  (o5 = to_rep(o4))) and (((o5 <  50) and (result3 = true)) or
-  ((not (o5 <  50)) and (result3 = false)))) and ((result3 = true) and
+  (o5 = to_rep(o4))) and (((o5 <  50) -> (result3 = true)) and
+  ((not (o5 <  50)) -> (result3 = false)))) and ((result3 = true) and
   ((not (has_failed3 = true)) and in_range1(target2))))) or
   ((((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o3 = to_rep1(first(source1)))) and (o4 = (source[o3]))) and
-  (o5 = to_rep(o4))) and (((o5 <  50) and (result3 = true)) or
-  ((not (o5 <  50)) and (result3 = false)))) and ((not (result3 = true)) and
-  ((has_failed3 = has_failed2) and (target2 = target1)))) and
-  ((((has_failed54 = has_failed52) and (target44 = target42)) and
-  ((has_failed55 = has_failed53) and (target45 = target43))) and
-  (((((has_failed52 = { bool__content = has_failed4 }) and (target42 = {
-  int__content = target2 })) and ((has_failed53 = has_failed4) and
+  (o5 = to_rep(o4))) and (((o5 <  50) -> (result3 = true)) and
+  ((not (o5 <  50)) -> (result3 = false)))) and ((not (result3 = true)) and
+  ((not (result3 = true)) -> ((has_failed3 = has_failed2) and
+  (target2 = target1))))) and ((((has_failed54 = has_failed52) and
+  (target44 = target42)) and ((has_failed55 = has_failed53) and
+  (target45 = target43))) and (((((has_failed52 = has_failed4) and
+  (target42 = target2)) and ((has_failed53 = has_failed4) and
   (target43 = target2))) and
   (((((((temp___1007 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1007) and
   (temp___1007 <= to_rep1(last(source1)))) and (o6 = temp___1007))) and
-  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) and
-  (result4 = true)) or ((not (49 <  o8)) and (result4 = false)))) and
+  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) ->
+  (result4 = true)) and ((not (49 <  o8)) -> (result4 = false)))) and
   ((result4 = true) and ((result5 = has_failed3) and
   (has_failed4 = of_int(1)))))) or
   ((((((((temp___1007 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1007) and
   (temp___1007 <= to_rep1(last(source1)))) and (o6 = temp___1007))) and
-  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) and
-  (result4 = true)) or ((not (49 <  o8)) and (result4 = false)))) and
+  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) ->
+  (result4 = true)) and ((not (49 <  o8)) -> (result4 = false)))) and
   ((not (result4 = true)) and (has_failed4 = has_failed3))) and
-  ((((has_failed52 = has_failed50) and (target42 = { int__content = target40
-  })) and ((has_failed53 = has_failed51) and (target43 = target41))) and
-  (((((has_failed50 = { bool__content = has_failed5 }) and
-  (target3 = target40)) and ((has_failed51 = has_failed5) and
-  (target41 = target3))) and
+  ((((has_failed52 = has_failed50) and (target42 = target40)) and
+  ((has_failed53 = has_failed51) and (target43 = target41))) and
+  (((((has_failed50 = has_failed5) and (target40 = target3)) and
+  ((has_failed51 = has_failed5) and (target41 = target3))) and
   (((((((temp___1008 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1008) and
   (temp___1008 <= to_rep1(last(source1)))) and (o9 = temp___1008))) and
-  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) and
-  (result6 = true)) or ((not (o11 <  49)) and (result6 = false)))) and
+  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) ->
+  (result6 = true)) and ((not (o11 <  49)) -> (result6 = false)))) and
   ((result6 = true) and ((not (has_failed5 = true)) and
   in_range1(target3))))) or
   ((((((((temp___1008 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1008) and
   (temp___1008 <= to_rep1(last(source1)))) and (o9 = temp___1008))) and
-  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) and
-  (result6 = true)) or ((not (o11 <  49)) and (result6 = false)))) and
-  ((not (result6 = true)) and ((has_failed5 = has_failed4) and
-  (target3 = target2)))) and ((((has_failed50 = { bool__content =
-  has_failed48 }) and ({ int__content = target40 } = { int__content =
-  target38 })) and ((has_failed51 = has_failed49) and
-  (target41 = target39))) and (((((has_failed6 = has_failed48) and
-  (target3 = target38)) and ((has_failed49 = has_failed6) and
-  (target39 = target3))) and
+  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) ->
+  (result6 = true)) and ((not (o11 <  49)) -> (result6 = false)))) and
+  ((not (result6 = true)) and ((not (result6 = true)) ->
+  ((has_failed5 = has_failed4) and (target3 = target2))))) and
+  ((((has_failed50 = has_failed48) and (target40 = target38)) and
+  ((has_failed51 = has_failed49) and (target41 = target39))) and
+  (((((has_failed48 = has_failed6) and (target38 = target3)) and
+  ((has_failed49 = has_failed6) and (target39 = target3))) and
   (((((((temp___1009 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1009) and
   (temp___1009 <= to_rep1(last(source1)))) and (o12 = temp___1009))) and
-  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) and
-  (result7 = true)) or ((not (52 <  o14)) and (result7 = false)))) and
+  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) ->
+  (result7 = true)) and ((not (52 <  o14)) -> (result7 = false)))) and
   ((result7 = true) and ((result8 = has_failed5) and
   (has_failed6 = of_int(1)))))) or
   ((((((((temp___1009 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1009) and
   (temp___1009 <= to_rep1(last(source1)))) and (o12 = temp___1009))) and
-  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) and
-  (result7 = true)) or ((not (52 <  o14)) and (result7 = false)))) and
-  ((not (result7 = true)) and (has_failed6 = has_failed5))) and (((({
-  bool__content = has_failed48 } = { bool__content = has_failed46 }) and ({
-  int__content = target38 } = { int__content = target36 })) and
+  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) ->
+  (result7 = true)) and ((not (52 <  o14)) -> (result7 = false)))) and
+  ((not (result7 = true)) and (has_failed6 = has_failed5))) and
+  ((((has_failed48 = has_failed46) and (target38 = target36)) and
   ((has_failed49 = has_failed47) and (target39 = target37))) and
-  (((((has_failed7 = has_failed46) and (target4 = target36)) and
+  (((((has_failed46 = has_failed7) and (target36 = target4)) and
   ((has_failed47 = has_failed7) and (target37 = target4))) and
   (((((((temp___1010 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1010) and
   (temp___1010 <= to_rep1(last(source1)))) and (o15 = temp___1010))) and
-  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) and
-  (result9 = true)) or ((not (o17 <  52)) and (result9 = false)))) and
+  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) ->
+  (result9 = true)) and ((not (o17 <  52)) -> (result9 = false)))) and
   ((result9 = true) and ((not (has_failed7 = true)) and
   in_range1(target4))))) or
   ((((((((temp___1010 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1010) and
   (temp___1010 <= to_rep1(last(source1)))) and (o15 = temp___1010))) and
-  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) and
-  (result9 = true)) or ((not (o17 <  52)) and (result9 = false)))) and
-  ((not (result9 = true)) and ((has_failed7 = has_failed6) and
-  (target4 = target3)))) and (((({ bool__content = has_failed46 } = {
-  bool__content = has_failed44 }) and ({ int__content = target36 } = {
-  int__content = target34 })) and ((has_failed47 = has_failed45) and
-  (target37 = target35))) and (((((has_failed8 = has_failed44) and
-  (target4 = target34)) and ((has_failed45 = has_failed8) and
-  (target35 = target4))) and
+  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) ->
+  (result9 = true)) and ((not (o17 <  52)) -> (result9 = false)))) and
+  ((not (result9 = true)) and ((not (result9 = true)) ->
+  ((has_failed7 = has_failed6) and (target4 = target3))))) and
+  ((((has_failed46 = has_failed44) and (target36 = target34)) and
+  ((has_failed47 = has_failed45) and (target37 = target35))) and
+  (((((has_failed44 = has_failed8) and (target34 = target4)) and
+  ((has_failed45 = has_failed8) and (target35 = target4))) and
   (((((((temp___1011 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1011) and
   (temp___1011 <= to_rep1(last(source1)))) and (o18 = temp___1011))) and
-  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) and
-  (result10 = true)) or ((not (55 <  o20)) and (result10 = false)))) and
+  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) ->
+  (result10 = true)) and ((not (55 <  o20)) -> (result10 = false)))) and
   ((result10 = true) and ((result11 = has_failed7) and
   (has_failed8 = of_int(1)))))) or
   ((((((((temp___1011 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1011) and
   (temp___1011 <= to_rep1(last(source1)))) and (o18 = temp___1011))) and
-  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) and
-  (result10 = true)) or ((not (55 <  o20)) and (result10 = false)))) and
-  ((not (result10 = true)) and (has_failed8 = has_failed7))) and (((({
-  bool__content = has_failed44 } = { bool__content = has_failed42 }) and ({
-  int__content = target34 } = { int__content = target32 })) and
+  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) ->
+  (result10 = true)) and ((not (55 <  o20)) -> (result10 = false)))) and
+  ((not (result10 = true)) and (has_failed8 = has_failed7))) and
+  ((((has_failed44 = has_failed42) and (target34 = target32)) and
   ((has_failed45 = has_failed43) and (target35 = target33))) and
-  (((((has_failed9 = has_failed42) and (target5 = target32)) and
+  (((((has_failed42 = has_failed9) and (target32 = target5)) and
   ((has_failed43 = has_failed9) and (target33 = target5))) and
   (((((((temp___1012 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1012) and
   (temp___1012 <= to_rep1(last(source1)))) and (o21 = temp___1012))) and
-  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) and
-  (result12 = true)) or ((not (o23 <  55)) and (result12 = false)))) and
+  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) ->
+  (result12 = true)) and ((not (o23 <  55)) -> (result12 = false)))) and
   ((result12 = true) and ((not (has_failed9 = true)) and
   in_range1(target5))))) or
   ((((((((temp___1012 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1012) and
   (temp___1012 <= to_rep1(last(source1)))) and (o21 = temp___1012))) and
-  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) and
-  (result12 = true)) or ((not (o23 <  55)) and (result12 = false)))) and
-  ((not (result12 = true)) and ((has_failed9 = has_failed8) and
-  (target5 = target4)))) and (((({ bool__content = has_failed42 } = {
-  bool__content = has_failed40 }) and ({ int__content = target32 } = {
-  int__content = target30 })) and ((has_failed43 = has_failed41) and
-  (target33 = target31))) and (((((has_failed10 = has_failed40) and
-  (target5 = target30)) and ((has_failed41 = has_failed10) and
-  (target31 = target5))) and
+  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) ->
+  (result12 = true)) and ((not (o23 <  55)) -> (result12 = false)))) and
+  ((not (result12 = true)) and ((not (result12 = true)) ->
+  ((has_failed9 = has_failed8) and (target5 = target4))))) and
+  ((((has_failed42 = has_failed40) and (target32 = target30)) and
+  ((has_failed43 = has_failed41) and (target33 = target31))) and
+  (((((has_failed40 = has_failed10) and (target30 = target5)) and
+  ((has_failed41 = has_failed10) and (target31 = target5))) and
   (((((((temp___1013 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1013) and
   (temp___1013 <= to_rep1(last(source1)))) and (o24 = temp___1013))) and
-  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) and
-  (result13 = true)) or ((not (52 <  o26)) and (result13 = false)))) and
+  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) ->
+  (result13 = true)) and ((not (52 <  o26)) -> (result13 = false)))) and
   ((result13 = true) and ((result14 = has_failed9) and
   (has_failed10 = of_int(1)))))) or
   ((((((((temp___1013 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1013) and
   (temp___1013 <= to_rep1(last(source1)))) and (o24 = temp___1013))) and
-  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) and
-  (result13 = true)) or ((not (52 <  o26)) and (result13 = false)))) and
-  ((not (result13 = true)) and (has_failed10 = has_failed9))) and (((({
-  bool__content = has_failed40 } = { bool__content = has_failed38 }) and ({
-  int__content = target30 } = { int__content = target28 })) and
+  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) ->
+  (result13 = true)) and ((not (52 <  o26)) -> (result13 = false)))) and
+  ((not (result13 = true)) and (has_failed10 = has_failed9))) and
+  ((((has_failed40 = has_failed38) and (target30 = target28)) and
   ((has_failed41 = has_failed39) and (target31 = target29))) and
-  (((((has_failed11 = has_failed38) and (target6 = target28)) and
+  (((((has_failed38 = has_failed11) and (target28 = target6)) and
   ((has_failed39 = has_failed11) and (target29 = target6))) and
   (((((((temp___1014 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1014) and
   (temp___1014 <= to_rep1(last(source1)))) and (o27 = temp___1014))) and
-  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) and
-  (result15 = true)) or ((not (o29 <  52)) and (result15 = false)))) and
+  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) ->
+  (result15 = true)) and ((not (o29 <  52)) -> (result15 = false)))) and
   ((result15 = true) and ((not (has_failed11 = true)) and
   in_range1(target6))))) or
   ((((((((temp___1014 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1014) and
   (temp___1014 <= to_rep1(last(source1)))) and (o27 = temp___1014))) and
-  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) and
-  (result15 = true)) or ((not (o29 <  52)) and (result15 = false)))) and
-  ((not (result15 = true)) and ((has_failed11 = has_failed10) and
-  (target6 = target5)))) and (((({ bool__content = has_failed38 } = {
-  bool__content = has_failed36 }) and ({ int__content = target28 } = {
-  int__content = target26 })) and ((has_failed39 = has_failed37) and
-  (target29 = target27))) and (((((has_failed12 = has_failed36) and
-  (target6 = target26)) and ((has_failed37 = has_failed12) and
-  (target27 = target6))) and
+  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) ->
+  (result15 = true)) and ((not (o29 <  52)) -> (result15 = false)))) and
+  ((not (result15 = true)) and ((not (result15 = true)) ->
+  ((has_failed11 = has_failed10) and (target6 = target5))))) and
+  ((((has_failed38 = has_failed36) and (target28 = target26)) and
+  ((has_failed39 = has_failed37) and (target29 = target27))) and
+  (((((has_failed36 = has_failed12) and (target26 = target6)) and
+  ((has_failed37 = has_failed12) and (target27 = target6))) and
   (((((((temp___1015 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1015) and
   (temp___1015 <= to_rep1(last(source1)))) and (o30 = temp___1015))) and
-  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) and
-  (result16 = true)) or ((not (56 <  o32)) and (result16 = false)))) and
+  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) ->
+  (result16 = true)) and ((not (56 <  o32)) -> (result16 = false)))) and
   ((result16 = true) and ((result17 = has_failed11) and
   (has_failed12 = of_int(1)))))) or
   ((((((((temp___1015 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1015) and
   (temp___1015 <= to_rep1(last(source1)))) and (o30 = temp___1015))) and
-  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) and
-  (result16 = true)) or ((not (56 <  o32)) and (result16 = false)))) and
-  ((not (result16 = true)) and (has_failed12 = has_failed11))) and (((({
-  bool__content = has_failed36 } = { bool__content = has_failed34 }) and ({
-  int__content = target26 } = { int__content = target24 })) and
+  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) ->
+  (result16 = true)) and ((not (56 <  o32)) -> (result16 = false)))) and
+  ((not (result16 = true)) and (has_failed12 = has_failed11))) and
+  ((((has_failed36 = has_failed34) and (target26 = target24)) and
   ((has_failed37 = has_failed35) and (target27 = target25))) and
-  (((((has_failed13 = has_failed34) and (target7 = target24)) and
+  (((((has_failed34 = has_failed13) and (target24 = target7)) and
   ((has_failed35 = has_failed13) and (target25 = target7))) and
   (((((((temp___1016 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1016) and
   (temp___1016 <= to_rep1(last(source1)))) and (o33 = temp___1016))) and
-  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) and
-  (result18 = true)) or ((not (o35 <  56)) and (result18 = false)))) and
+  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) ->
+  (result18 = true)) and ((not (o35 <  56)) -> (result18 = false)))) and
   ((result18 = true) and ((not (has_failed13 = true)) and
   in_range1(target7))))) or
   ((((((((temp___1016 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1016) and
   (temp___1016 <= to_rep1(last(source1)))) and (o33 = temp___1016))) and
-  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) and
-  (result18 = true)) or ((not (o35 <  56)) and (result18 = false)))) and
-  ((not (result18 = true)) and ((has_failed13 = has_failed12) and
-  (target7 = target6)))) and (((({ bool__content = has_failed34 } = {
-  bool__content = has_failed32 }) and ({ int__content = target24 } = {
-  int__content = target22 })) and ((has_failed35 = has_failed33) and
-  (target25 = target23))) and (((((has_failed14 = has_failed32) and
-  (target7 = target22)) and ((has_failed33 = has_failed14) and
-  (target23 = target7))) and
+  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) ->
+  (result18 = true)) and ((not (o35 <  56)) -> (result18 = false)))) and
+  ((not (result18 = true)) and ((not (result18 = true)) ->
+  ((has_failed13 = has_failed12) and (target7 = target6))))) and
+  ((((has_failed34 = has_failed32) and (target24 = target22)) and
+  ((has_failed35 = has_failed33) and (target25 = target23))) and
+  (((((has_failed32 = has_failed14) and (target22 = target7)) and
+  ((has_failed33 = has_failed14) and (target23 = target7))) and
   (((((((temp___1017 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1017) and
   (temp___1017 <= to_rep1(last(source1)))) and (o36 = temp___1017))) and
-  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) and
-  (result19 = true)) or ((not (51 <  o38)) and (result19 = false)))) and
+  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) ->
+  (result19 = true)) and ((not (51 <  o38)) -> (result19 = false)))) and
   ((result19 = true) and ((result20 = has_failed13) and
   (has_failed14 = of_int(1)))))) or
   ((((((((temp___1017 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1017) and
   (temp___1017 <= to_rep1(last(source1)))) and (o36 = temp___1017))) and
-  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) and
-  (result19 = true)) or ((not (51 <  o38)) and (result19 = false)))) and
-  ((not (result19 = true)) and (has_failed14 = has_failed13))) and (((({
-  bool__content = has_failed32 } = { bool__content = has_failed30 }) and ({
-  int__content = target22 } = { int__content = target20 })) and
+  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) ->
+  (result19 = true)) and ((not (51 <  o38)) -> (result19 = false)))) and
+  ((not (result19 = true)) and (has_failed14 = has_failed13))) and
+  ((((has_failed32 = has_failed30) and (target22 = target20)) and
   ((has_failed33 = has_failed31) and (target23 = target21))) and
-  (((((has_failed15 = has_failed30) and (target8 = target20)) and
+  (((((has_failed30 = has_failed15) and (target20 = target8)) and
   ((has_failed31 = has_failed15) and (target21 = target8))) and
   (((((((temp___1018 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1018) and
   (temp___1018 <= to_rep1(last(source1)))) and (o39 = temp___1018))) and
-  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) and
-  (result21 = true)) or ((not (o41 <  51)) and (result21 = false)))) and
+  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) ->
+  (result21 = true)) and ((not (o41 <  51)) -> (result21 = false)))) and
   ((result21 = true) and ((not (has_failed15 = true)) and
   in_range1(target8))))) or
   ((((((((temp___1018 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1018) and
   (temp___1018 <= to_rep1(last(source1)))) and (o39 = temp___1018))) and
-  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) and
-  (result21 = true)) or ((not (o41 <  51)) and (result21 = false)))) and
-  ((not (result21 = true)) and ((has_failed15 = has_failed14) and
-  (target8 = target7)))) and (((({ bool__content = has_failed30 } = {
-  bool__content = has_failed28 }) and ({ int__content = target20 } = {
-  int__content = target18 })) and ((has_failed31 = has_failed29) and
-  (target21 = target19))) and (((((has_failed16 = has_failed28) and
-  (target8 = target18)) and ((has_failed29 = has_failed16) and
-  (target19 = target8))) and
+  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) ->
+  (result21 = true)) and ((not (o41 <  51)) -> (result21 = false)))) and
+  ((not (result21 = true)) and ((not (result21 = true)) ->
+  ((has_failed15 = has_failed14) and (target8 = target7))))) and
+  ((((has_failed30 = has_failed28) and (target20 = target18)) and
+  ((has_failed31 = has_failed29) and (target21 = target19))) and
+  (((((has_failed16 = has_failed28) and (target8 = target18)) and
+  ((has_failed29 = has_failed16) and (target19 = target8))) and
   (((((((temp___1019 = (to_rep1(first(source1)) + 7)) and
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1019) and
   (temp___1019 <= to_rep1(last(source1)))) and (o42 = temp___1019))) and
-  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) and
-  (result22 = true)) or ((not (54 <  o44)) and (result22 = false)))) and
+  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) ->
+  (result22 = true)) and ((not (54 <  o44)) -> (result22 = false)))) and
   ((result22 = true) and ((result23 = has_failed15) and
   (has_failed16 = of_int(1)))))) or
   ((((((((temp___1019 = (to_rep1(first(source1)) + 7)) and
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1019) and
   (temp___1019 <= to_rep1(last(source1)))) and (o42 = temp___1019))) and
-  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) and
-  (result22 = true)) or ((not (54 <  o44)) and (result22 = false)))) and
-  ((not (result22 = true)) and (has_failed16 = has_failed15))) and (((({
-  bool__content = has_failed28 } = { bool__content = has_failed26 }) and ({
-  int__content = target18 } = { int__content = target16 })) and
+  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) ->
+  (result22 = true)) and ((not (54 <  o44)) -> (result22 = false)))) and
+  ((not (result22 = true)) and (has_failed16 = has_failed15))) and
+  ((((has_failed28 = has_failed26) and (target18 = target16)) and
   ((has_failed29 = has_failed27) and (target19 = target17))) and
   (((((has_failed17 = has_failed26) and (target9 = target16)) and
   ((has_failed27 = has_failed17) and (target17 = target9))) and
@@ -900,39 +1823,38 @@ goal WP_parameter_def :
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1020) and
   (temp___1020 <= to_rep1(last(source1)))) and (o45 = temp___1020))) and
-  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) and
-  (result24 = true)) or ((not (o47 <  54)) and (result24 = false)))) and
+  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) ->
+  (result24 = true)) and ((not (o47 <  54)) -> (result24 = false)))) and
   ((result24 = true) and ((not (has_failed17 = true)) and
   in_range1(target9))))) or
   ((((((((temp___1020 = (to_rep1(first(source1)) + 7)) and
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1020) and
   (temp___1020 <= to_rep1(last(source1)))) and (o45 = temp___1020))) and
-  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) and
-  (result24 = true)) or ((not (o47 <  54)) and (result24 = false)))) and
-  ((not (result24 = true)) and ((has_failed17 = has_failed16) and
-  (target9 = target8)))) and (((({ bool__content = has_failed26 } = {
-  bool__content = has_failed24 }) and ({ int__content = target16 } = {
-  int__content = target14 })) and ((has_failed27 = has_failed25) and
-  (target17 = target15))) and (((((has_failed18 = has_failed24) and
-  (target9 = target14)) and ((has_failed25 = has_failed18) and
-  (target15 = target9))) and
+  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) ->
+  (result24 = true)) and ((not (o47 <  54)) -> (result24 = false)))) and
+  ((not (result24 = true)) and ((not (result24 = true)) ->
+  ((has_failed17 = has_failed16) and (target9 = target8))))) and
+  ((((has_failed26 = has_failed24) and (target16 = target14)) and
+  ((has_failed27 = has_failed25) and (target17 = target15))) and
+  (((((has_failed18 = has_failed24) and (target9 = target14)) and
+  ((has_failed25 = has_failed18) and (target15 = target9))) and
   (((((((temp___1021 = (to_rep1(first(source1)) + 8)) and
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1021) and
   (temp___1021 <= to_rep1(last(source1)))) and (o48 = temp___1021))) and
-  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) and
-  (result25 = true)) or ((not (52 <  o50)) and (result25 = false)))) and
+  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) ->
+  (result25 = true)) and ((not (52 <  o50)) -> (result25 = false)))) and
   ((result25 = true) and ((result26 = has_failed17) and
   (has_failed18 = of_int(1)))))) or
   ((((((((temp___1021 = (to_rep1(first(source1)) + 8)) and
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1021) and
   (temp___1021 <= to_rep1(last(source1)))) and (o48 = temp___1021))) and
-  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) and
-  (result25 = true)) or ((not (52 <  o50)) and (result25 = false)))) and
+  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) ->
+  (result25 = true)) and ((not (52 <  o50)) -> (result25 = false)))) and
   ((not (result25 = true)) and (has_failed18 = has_failed17))) and
-  ((((has_failed22 = has_failed24) and (target12 = target14)) and
+  ((((has_failed24 = has_failed22) and (target14 = target12)) and
   ((has_failed25 = has_failed23) and (target15 = target13))) and
   (((((has_failed19 = has_failed22) and (target10 = target12)) and
   ((has_failed23 = has_failed19) and (target13 = target10))) and
@@ -940,425 +1862,760 @@ goal WP_parameter_def :
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1022) and
   (temp___1022 <= to_rep1(last(source1)))) and (o51 = temp___1022))) and
-  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) and
-  (result27 = true)) or ((not (o53 <  52)) and (result27 = false)))) and
+  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) ->
+  (result27 = true)) and ((not (o53 <  52)) -> (result27 = false)))) and
   ((result27 = true) and ((not (has_failed19 = true)) and
   in_range1(target10))))) or
   ((((((((temp___1022 = (to_rep1(first(source1)) + 8)) and
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1022) and
   (temp___1022 <= to_rep1(last(source1)))) and (o51 = temp___1022))) and
-  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) and
-  (result27 = true)) or ((not (o53 <  52)) and (result27 = false)))) and
-  ((not (result27 = true)) and ((has_failed19 = has_failed18) and
-  (target10 = target9)))) and ((((has_failed20 = has_failed22) and
-  (target10 = target12)) and ((has_failed23 = has_failed20) and
-  (target13 = target10))) and
+  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) ->
+  (result27 = true)) and ((not (o53 <  52)) -> (result27 = false)))) and
+  ((not (result27 = true)) and ((not (result27 = true)) ->
+  ((has_failed19 = has_failed18) and (target10 = target9))))) and
+  ((((has_failed20 = has_failed22) and (target10 = target12)) and
+  ((has_failed23 = has_failed20) and (target13 = target10))) and
   (((((((temp___1023 = (to_rep1(first(source1)) + 9)) and
   in_range1((to_rep1(first(source1)) + 9))) and
   (((to_rep1(first(source1)) <= temp___1023) and
   (temp___1023 <= to_rep1(last(source1)))) and (o54 = temp___1023))) and
-  (o55 = (source[o54]))) and (o56 = to_rep(o55))) and (((55 <  o56) and
-  (result28 = true)) or ((not (55 <  o56)) and (result28 = false)))) and
+  (o55 = (source[o54]))) and (o56 = to_rep(o55))) and (((55 <  o56) ->
+  (result28 = true)) and ((not (55 <  o56)) -> (result28 = false)))) and
   ((result28 = true) and ((result29 = has_failed19) and
   (has_failed20 = of_int(1))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) or
-  ((((length({ elts = source; rt = source1 }) = 10) and
+  ((((length({ elts = source; rt = source1 }) = 10) ->
   ((((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o = to_rep1(first(source1)))) and (o1 = (source[o]))) and
-  (o2 = to_rep(o1))) and (((50 <  o2) and (result1 = true)) or
-  ((not (50 <  o2)) and (result1 = false)))) and ((not (result1 = true)) and
+  (o2 = to_rep(o1))) and (((50 <  o2) -> (result1 = true)) and
+  ((not (50 <  o2)) -> (result1 = false)))) and ((not (result1 = true)) and
   ((has_failed2 = has_failed) and (has_failed2 = has_failed1)))) and
   ((((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o3 = to_rep1(first(source1)))) and (o4 = (source[o3]))) and
-  (o5 = to_rep(o4))) and (((o5 <  50) and (result3 = true)) or
-  ((not (o5 <  50)) and (result3 = false)))) and ((not (result3 = true)) and
-  ((has_failed3 = has_failed2) and (target2 = target1)))) and
+  (o5 = to_rep(o4))) and (((o5 <  50) -> (result3 = true)) and
+  ((not (o5 <  50)) -> (result3 = false)))) and ((not (result3 = true)) and
+  ((not (result3 = true)) -> ((has_failed3 = has_failed2) and
+  (target2 = target1))))) and
   ((((((((temp___1007 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1007) and
   (temp___1007 <= to_rep1(last(source1)))) and (o6 = temp___1007))) and
-  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) and
-  (result4 = true)) or ((not (49 <  o8)) and (result4 = false)))) and
+  (o7 = (source[o6]))) and (o8 = to_rep(o7))) and (((49 <  o8) ->
+  (result4 = true)) and ((not (49 <  o8)) -> (result4 = false)))) and
   ((not (result4 = true)) and (has_failed4 = has_failed3))) and
   ((((((((temp___1008 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
   (((to_rep1(first(source1)) <= temp___1008) and
   (temp___1008 <= to_rep1(last(source1)))) and (o9 = temp___1008))) and
-  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) and
-  (result6 = true)) or ((not (o11 <  49)) and (result6 = false)))) and
-  ((not (result6 = true)) and ((has_failed5 = has_failed4) and
-  (target3 = target2)))) and
+  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and (((o11 <  49) ->
+  (result6 = true)) and ((not (o11 <  49)) -> (result6 = false)))) and
+  ((not (result6 = true)) and ((not (result6 = true)) ->
+  ((has_failed5 = has_failed4) and (target3 = target2))))) and
   ((((((((temp___1009 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1009) and
   (temp___1009 <= to_rep1(last(source1)))) and (o12 = temp___1009))) and
-  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) and
-  (result7 = true)) or ((not (52 <  o14)) and (result7 = false)))) and
+  (o13 = (source[o12]))) and (o14 = to_rep(o13))) and (((52 <  o14) ->
+  (result7 = true)) and ((not (52 <  o14)) -> (result7 = false)))) and
   ((not (result7 = true)) and (has_failed6 = has_failed5))) and
   ((((((((temp___1010 = (to_rep1(first(source1)) + 2)) and
   in_range1((to_rep1(first(source1)) + 2))) and
   (((to_rep1(first(source1)) <= temp___1010) and
   (temp___1010 <= to_rep1(last(source1)))) and (o15 = temp___1010))) and
-  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) and
-  (result9 = true)) or ((not (o17 <  52)) and (result9 = false)))) and
-  ((not (result9 = true)) and ((has_failed7 = has_failed6) and
-  (target4 = target3)))) and
+  (o16 = (source[o15]))) and (o17 = to_rep(o16))) and (((o17 <  52) ->
+  (result9 = true)) and ((not (o17 <  52)) -> (result9 = false)))) and
+  ((not (result9 = true)) and ((not (result9 = true)) ->
+  ((has_failed7 = has_failed6) and (target4 = target3))))) and
   ((((((((temp___1011 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1011) and
   (temp___1011 <= to_rep1(last(source1)))) and (o18 = temp___1011))) and
-  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) and
-  (result10 = true)) or ((not (55 <  o20)) and (result10 = false)))) and
+  (o19 = (source[o18]))) and (o20 = to_rep(o19))) and (((55 <  o20) ->
+  (result10 = true)) and ((not (55 <  o20)) -> (result10 = false)))) and
   ((not (result10 = true)) and (has_failed8 = has_failed7))) and
   ((((((((temp___1012 = (to_rep1(first(source1)) + 3)) and
   in_range1((to_rep1(first(source1)) + 3))) and
   (((to_rep1(first(source1)) <= temp___1012) and
   (temp___1012 <= to_rep1(last(source1)))) and (o21 = temp___1012))) and
-  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) and
-  (result12 = true)) or ((not (o23 <  55)) and (result12 = false)))) and
-  ((not (result12 = true)) and ((has_failed9 = has_failed8) and
-  (target5 = target4)))) and
+  (o22 = (source[o21]))) and (o23 = to_rep(o22))) and (((o23 <  55) ->
+  (result12 = true)) and ((not (o23 <  55)) -> (result12 = false)))) and
+  ((not (result12 = true)) and ((not (result12 = true)) ->
+  ((has_failed9 = has_failed8) and (target5 = target4))))) and
   ((((((((temp___1013 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1013) and
   (temp___1013 <= to_rep1(last(source1)))) and (o24 = temp___1013))) and
-  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) and
-  (result13 = true)) or ((not (52 <  o26)) and (result13 = false)))) and
+  (o25 = (source[o24]))) and (o26 = to_rep(o25))) and (((52 <  o26) ->
+  (result13 = true)) and ((not (52 <  o26)) -> (result13 = false)))) and
   ((not (result13 = true)) and (has_failed10 = has_failed9))) and
   ((((((((temp___1014 = (to_rep1(first(source1)) + 4)) and
   in_range1((to_rep1(first(source1)) + 4))) and
   (((to_rep1(first(source1)) <= temp___1014) and
   (temp___1014 <= to_rep1(last(source1)))) and (o27 = temp___1014))) and
-  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) and
-  (result15 = true)) or ((not (o29 <  52)) and (result15 = false)))) and
-  ((not (result15 = true)) and ((has_failed11 = has_failed10) and
-  (target6 = target5)))) and
+  (o28 = (source[o27]))) and (o29 = to_rep(o28))) and (((o29 <  52) ->
+  (result15 = true)) and ((not (o29 <  52)) -> (result15 = false)))) and
+  ((not (result15 = true)) and ((not (result15 = true)) ->
+  ((has_failed11 = has_failed10) and (target6 = target5))))) and
   ((((((((temp___1015 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1015) and
   (temp___1015 <= to_rep1(last(source1)))) and (o30 = temp___1015))) and
-  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) and
-  (result16 = true)) or ((not (56 <  o32)) and (result16 = false)))) and
+  (o31 = (source[o30]))) and (o32 = to_rep(o31))) and (((56 <  o32) ->
+  (result16 = true)) and ((not (56 <  o32)) -> (result16 = false)))) and
   ((not (result16 = true)) and (has_failed12 = has_failed11))) and
   ((((((((temp___1016 = (to_rep1(first(source1)) + 5)) and
   in_range1((to_rep1(first(source1)) + 5))) and
   (((to_rep1(first(source1)) <= temp___1016) and
   (temp___1016 <= to_rep1(last(source1)))) and (o33 = temp___1016))) and
-  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) and
-  (result18 = true)) or ((not (o35 <  56)) and (result18 = false)))) and
-  ((not (result18 = true)) and ((has_failed13 = has_failed12) and
-  (target7 = target6)))) and
+  (o34 = (source[o33]))) and (o35 = to_rep(o34))) and (((o35 <  56) ->
+  (result18 = true)) and ((not (o35 <  56)) -> (result18 = false)))) and
+  ((not (result18 = true)) and ((not (result18 = true)) ->
+  ((has_failed13 = has_failed12) and (target7 = target6))))) and
   ((((((((temp___1017 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1017) and
   (temp___1017 <= to_rep1(last(source1)))) and (o36 = temp___1017))) and
-  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) and
-  (result19 = true)) or ((not (51 <  o38)) and (result19 = false)))) and
+  (o37 = (source[o36]))) and (o38 = to_rep(o37))) and (((51 <  o38) ->
+  (result19 = true)) and ((not (51 <  o38)) -> (result19 = false)))) and
   ((not (result19 = true)) and (has_failed14 = has_failed13))) and
   ((((((((temp___1018 = (to_rep1(first(source1)) + 6)) and
   in_range1((to_rep1(first(source1)) + 6))) and
   (((to_rep1(first(source1)) <= temp___1018) and
   (temp___1018 <= to_rep1(last(source1)))) and (o39 = temp___1018))) and
-  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) and
-  (result21 = true)) or ((not (o41 <  51)) and (result21 = false)))) and
-  ((not (result21 = true)) and ((has_failed15 = has_failed14) and
-  (target8 = target7)))) and
+  (o40 = (source[o39]))) and (o41 = to_rep(o40))) and (((o41 <  51) ->
+  (result21 = true)) and ((not (o41 <  51)) -> (result21 = false)))) and
+  ((not (result21 = true)) and ((not (result21 = true)) ->
+  ((has_failed15 = has_failed14) and (target8 = target7))))) and
   ((((((((temp___1019 = (to_rep1(first(source1)) + 7)) and
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1019) and
   (temp___1019 <= to_rep1(last(source1)))) and (o42 = temp___1019))) and
-  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) and
-  (result22 = true)) or ((not (54 <  o44)) and (result22 = false)))) and
+  (o43 = (source[o42]))) and (o44 = to_rep(o43))) and (((54 <  o44) ->
+  (result22 = true)) and ((not (54 <  o44)) -> (result22 = false)))) and
   ((not (result22 = true)) and (has_failed16 = has_failed15))) and
   ((((((((temp___1020 = (to_rep1(first(source1)) + 7)) and
   in_range1((to_rep1(first(source1)) + 7))) and
   (((to_rep1(first(source1)) <= temp___1020) and
   (temp___1020 <= to_rep1(last(source1)))) and (o45 = temp___1020))) and
-  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) and
-  (result24 = true)) or ((not (o47 <  54)) and (result24 = false)))) and
-  ((not (result24 = true)) and ((has_failed17 = has_failed16) and
-  (target9 = target8)))) and
+  (o46 = (source[o45]))) and (o47 = to_rep(o46))) and (((o47 <  54) ->
+  (result24 = true)) and ((not (o47 <  54)) -> (result24 = false)))) and
+  ((not (result24 = true)) and ((not (result24 = true)) ->
+  ((has_failed17 = has_failed16) and (target9 = target8))))) and
   ((((((((temp___1021 = (to_rep1(first(source1)) + 8)) and
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1021) and
   (temp___1021 <= to_rep1(last(source1)))) and (o48 = temp___1021))) and
-  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) and
-  (result25 = true)) or ((not (52 <  o50)) and (result25 = false)))) and
+  (o49 = (source[o48]))) and (o50 = to_rep(o49))) and (((52 <  o50) ->
+  (result25 = true)) and ((not (52 <  o50)) -> (result25 = false)))) and
   ((not (result25 = true)) and (has_failed18 = has_failed17))) and
   ((((((((temp___1022 = (to_rep1(first(source1)) + 8)) and
   in_range1((to_rep1(first(source1)) + 8))) and
   (((to_rep1(first(source1)) <= temp___1022) and
   (temp___1022 <= to_rep1(last(source1)))) and (o51 = temp___1022))) and
-  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) and
-  (result27 = true)) or ((not (o53 <  52)) and (result27 = false)))) and
-  ((not (result27 = true)) and ((has_failed19 = has_failed18) and
-  (target10 = target9)))) and
+  (o52 = (source[o51]))) and (o53 = to_rep(o52))) and (((o53 <  52) ->
+  (result27 = true)) and ((not (o53 <  52)) -> (result27 = false)))) and
+  ((not (result27 = true)) and ((not (result27 = true)) ->
+  ((has_failed19 = has_failed18) and (target10 = target9))))) and
   ((((((((temp___1023 = (to_rep1(first(source1)) + 9)) and
   in_range1((to_rep1(first(source1)) + 9))) and
   (((to_rep1(first(source1)) <= temp___1023) and
   (temp___1023 <= to_rep1(last(source1)))) and (o54 = temp___1023))) and
-  (o55 = (source[o54]))) and (o56 = to_rep(o55))) and (((55 <  o56) and
-  (result28 = true)) or ((not (55 <  o56)) and (result28 = false)))) and
+  (o55 = (source[o54]))) and (o56 = to_rep(o55))) and (((55 <  o56) ->
+  (result28 = true)) and ((not (55 <  o56)) -> (result28 = false)))) and
   ((not (result28 = true)) and (has_failed20 = has_failed19))) and
   ((not (has_failed21 = true)) and
-  in_range1(target11)))))))))))))))))))))) or ((not (length({ elts = source;
-  rt = source1 }) = 10)) and ((((not (has_failed58 = true)) and (((length({
-  elts = source; rt = source1 }) = 1) and
-  (target48 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))]))))) or
-  ((not (length({ elts = source; rt = source1 }) = 1)) and (((length({ elts =
-  source; rt = source1 }) = 2) and
-  (target48 = ((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10) + convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)])))))) or
-  ((not (length({ elts = source; rt = source1 }) = 2)) and (((length({ elts =
-  source; rt = source1 }) = 3) and
-  (target48 = (((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 100) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 3)) and (((length({ elts =
-  source; rt = source1 }) = 4) and
-  (target48 = ((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 1000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 4)) and (((length({ elts =
-  source; rt = source1 }) = 5) and
-  (target48 = (((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 5)) and (((length({ elts =
-  source; rt = source1 }) = 6) and
-  (target48 = ((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 100000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 6)) and (((length({ elts =
-  source; rt = source1 }) = 7) and
-  (target48 = (((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 1000000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 100000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 6)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 7)) and (((length({ elts =
-  source; rt = source1 }) = 8) and
-  (target48 = ((((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10000000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 1000000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 100000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 6)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 7)]))) * 1)))) or
-  ((not (length({ elts = source; rt = source1 }) = 8)) and ((length({ elts =
+  in_range1(target11)))))))))))))))))))))) and ((not (length({ elts = source;
+  rt = source1 }) = 10)) -> ((((not (has_failed58 = true)) and (((length({
+  elts = source; rt = source1 }) = 1) ->
+  (target48 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))]))))) and
+  ((not (length({ elts = source; rt = source1 }) = 1)) -> (((length({ elts =
+  source; rt = source1 }) = 2) ->
+  (target48 = ((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10) + convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)])))))) and
+  ((not (length({ elts = source; rt = source1 }) = 2)) -> (((length({ elts =
+  source; rt = source1 }) = 3) ->
+  (target48 = (((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 100) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 3)) -> (((length({ elts =
+  source; rt = source1 }) = 4) ->
+  (target48 = ((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 1000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 4)) -> (((length({ elts =
+  source; rt = source1 }) = 5) ->
+  (target48 = (((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 5)) -> (((length({ elts =
+  source; rt = source1 }) = 6) ->
+  (target48 = ((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 100000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 6)) -> (((length({ elts =
+  source; rt = source1 }) = 7) ->
+  (target48 = (((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 1000000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 100000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 6)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 7)) -> (((length({ elts =
+  source; rt = source1 }) = 8) ->
+  (target48 = ((((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 10000000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 1000000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 100000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 6)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 7)]))) * 1)))) and
+  ((not (length({ elts = source; rt = source1 }) = 8)) -> ((length({ elts =
   source; rt = source1 }) = 9) ->
   (target48 = (((((((((convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 0)]))) * 100000000) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 1)]))) * 10000000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 2)]))) * 1000000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 3)]))) * 100000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 4)]))) * 10000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 5)]))) * 1000)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 6)]))) * 100)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 7)]))) * 10)) + (convert_character_digit_to_integer(to_rep((source[(to_rep1(first(source1)) + 8)]))) * 1))))))))))))))))))))) and
   in_range1(target48)) and ((has_failed21 = has_failed58) and
-  (target11 = target48))))) and (((has_failed59 = { bool__content =
-  has_failed21 }) and (target49 = { int__content = target11 })) and
-  ((has_failed60 = has_failed21) and (target50 = target11)))))) and
-  (((has_failed61 = has_failed59) and (target51 = target49)) and
-  ((has_failed62 = has_failed60) and (target52 = target50)))) ->
-  ((((bool_eq(length({ elts = source; rt = source1 }), 1) = true) and
-  ((not ((has_failed61).bool__content = true)) and
-  ((target51).int__content = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))])))))) or
-  (not (bool_eq(length({ elts = source; rt = source1 }), 1) = true))) ->
-  ((((match_bool(bool_le(2, length({ elts = source; rt = source1 })),
-  bool_le(length({ elts = source; rt = source1 }), 9), false) = true) and
-  (not ((has_failed61).bool__content = true))) or (not (match_bool(bool_le(2,
-  length({ elts = source; rt = source1 })), bool_le(length({ elts = source;
-  rt = source1 }), 9), false) = true))) -> ((bool_eq(length({ elts = source;
-  rt = source1 }), 10) = true) ->
-  (((((((temp___1079 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1079) and
-  (temp___1079 <= to_rep1(last(source1)))) and (o206 = temp___1079))) and
-  (o207 = (source[o206]))) and (o208 = to_rep(o207))) and (((o208 <  50) and
-  (o209 = true)) or ((not (o208 <  50)) and (o209 = false)))) ->
-  ((((((((temp___1078 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1078) and
-  (temp___1078 <= to_rep1(last(source1)))) and (o200 = temp___1078))) and
-  (o201 = (source[o200]))) and (o202 = to_rep(o201))) and (((o202 <  49) and
-  (o203 = true)) or ((not (o202 <  49)) and (o203 = false)))) and
-  (((((((temp___1077 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1077) and
-  (temp___1077 <= to_rep1(last(source1)))) and (o197 = temp___1077))) and
-  (o198 = (source[o197]))) and (o199 = to_rep(o198))) and (((o199 = 50) and
-  (o204 = true)) or ((not (o199 = 50)) and (o204 = false)))) and
-  (o205 = match_bool(o204, o203, false)))) ->
-  ((((((((temp___1076 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1076) and
-  (temp___1076 <= to_rep1(last(source1)))) and (o191 = temp___1076))) and
-  (o192 = (source[o191]))) and (o193 = to_rep(o192))) and (((o193 <  52) and
-  (o194 = true)) or ((not (o193 <  52)) and (o194 = false)))) and
-  ((((((((temp___1075 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1075) and
-  (temp___1075 <= to_rep1(last(source1)))) and (o186 = temp___1075))) and
-  (o187 = (source[o186]))) and (o188 = to_rep(o187))) and (((o188 = 49) and
-  (o189 = true)) or ((not (o188 = 49)) and (o189 = false)))) and
-  (((((((temp___1074 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1074) and
-  (temp___1074 <= to_rep1(last(source1)))) and (o183 = temp___1074))) and
-  (o184 = (source[o183]))) and (o185 = to_rep(o184))) and (((o185 = 50) and
-  (o190 = true)) or ((not (o185 = 50)) and (o190 = false)))) and
-  (o195 = match_bool(o190, o189, false)))) and (o196 = match_bool(o195, o194,
-  false)))) -> ((((((((temp___1073 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1073) and
-  (temp___1073 <= to_rep1(last(source1)))) and (o177 = temp___1073))) and
-  (o178 = (source[o177]))) and (o179 = to_rep(o178))) and (((o179 <  55) and
-  (o180 = true)) or ((not (o179 <  55)) and (o180 = false)))) and
-  ((((((((temp___1072 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1072) and
-  (temp___1072 <= to_rep1(last(source1)))) and (o172 = temp___1072))) and
-  (o173 = (source[o172]))) and (o174 = to_rep(o173))) and (((o174 = 52) and
-  (o175 = true)) or ((not (o174 = 52)) and (o175 = false)))) and
-  ((((((((temp___1071 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1071) and
-  (temp___1071 <= to_rep1(last(source1)))) and (o167 = temp___1071))) and
-  (o168 = (source[o167]))) and (o169 = to_rep(o168))) and (((o169 = 49) and
-  (o170 = true)) or ((not (o169 = 49)) and (o170 = false)))) and
-  (((((((temp___1070 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1070) and
-  (temp___1070 <= to_rep1(last(source1)))) and (o164 = temp___1070))) and
-  (o165 = (source[o164]))) and (o166 = to_rep(o165))) and (((o166 = 50) and
-  (o171 = true)) or ((not (o166 = 50)) and (o171 = false)))) and
-  (o176 = match_bool(o171, o170, false)))) and (o181 = match_bool(o176, o175,
-  false)))) and (o182 = match_bool(o181, o180, false)))) ->
-  ((((((((temp___1069 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and
-  (((to_rep1(first(source1)) <= temp___1069) and
-  (temp___1069 <= to_rep1(last(source1)))) and (o158 = temp___1069))) and
-  (o159 = (source[o158]))) and (o160 = to_rep(o159))) and (((o160 <  52) and
-  (o161 = true)) or ((not (o160 <  52)) and (o161 = false)))) and
-  ((((((((temp___1068 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1068) and
-  (temp___1068 <= to_rep1(last(source1)))) and (o153 = temp___1068))) and
-  (o154 = (source[o153]))) and (o155 = to_rep(o154))) and (((o155 = 55) and
-  (o156 = true)) or ((not (o155 = 55)) and (o156 = false)))) and
-  ((((((((temp___1067 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1067) and
-  (temp___1067 <= to_rep1(last(source1)))) and (o148 = temp___1067))) and
-  (o149 = (source[o148]))) and (o150 = to_rep(o149))) and (((o150 = 52) and
-  (o151 = true)) or ((not (o150 = 52)) and (o151 = false)))) and
-  ((((((((temp___1066 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1066) and
-  (temp___1066 <= to_rep1(last(source1)))) and (o143 = temp___1066))) and
-  (o144 = (source[o143]))) and (o145 = to_rep(o144))) and (((o145 = 49) and
-  (o146 = true)) or ((not (o145 = 49)) and (o146 = false)))) and
-  (((((((temp___1065 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1065) and
-  (temp___1065 <= to_rep1(last(source1)))) and (o140 = temp___1065))) and
-  (o141 = (source[o140]))) and (o142 = to_rep(o141))) and (((o142 = 50) and
-  (o147 = true)) or ((not (o142 = 50)) and (o147 = false)))) and
-  (o152 = match_bool(o147, o146, false)))) and (o157 = match_bool(o152, o151,
-  false)))) and (o162 = match_bool(o157, o156, false)))) and
-  (o163 = match_bool(o162, o161, false)))) ->
-  ((((((((temp___1064 = (to_rep1(first(source1)) + 5)) and
-  in_range1((to_rep1(first(source1)) + 5))) and
-  (((to_rep1(first(source1)) <= temp___1064) and
-  (temp___1064 <= to_rep1(last(source1)))) and (o134 = temp___1064))) and
-  (o135 = (source[o134]))) and (o136 = to_rep(o135))) and (((o136 <  56) and
-  (o137 = true)) or ((not (o136 <  56)) and (o137 = false)))) and
-  ((((((((temp___1063 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and
-  (((to_rep1(first(source1)) <= temp___1063) and
-  (temp___1063 <= to_rep1(last(source1)))) and (o129 = temp___1063))) and
-  (o130 = (source[o129]))) and (o131 = to_rep(o130))) and (((o131 = 52) and
-  (o132 = true)) or ((not (o131 = 52)) and (o132 = false)))) and
-  ((((((((temp___1062 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1062) and
-  (temp___1062 <= to_rep1(last(source1)))) and (o124 = temp___1062))) and
-  (o125 = (source[o124]))) and (o126 = to_rep(o125))) and (((o126 = 55) and
-  (o127 = true)) or ((not (o126 = 55)) and (o127 = false)))) and
-  ((((((((temp___1061 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1061) and
-  (temp___1061 <= to_rep1(last(source1)))) and (o119 = temp___1061))) and
-  (o120 = (source[o119]))) and (o121 = to_rep(o120))) and (((o121 = 52) and
-  (o122 = true)) or ((not (o121 = 52)) and (o122 = false)))) and
-  ((((((((temp___1060 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1060) and
-  (temp___1060 <= to_rep1(last(source1)))) and (o114 = temp___1060))) and
-  (o115 = (source[o114]))) and (o116 = to_rep(o115))) and (((o116 = 49) and
-  (o117 = true)) or ((not (o116 = 49)) and (o117 = false)))) and
-  (((((((temp___1059 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1059) and
-  (temp___1059 <= to_rep1(last(source1)))) and (o111 = temp___1059))) and
-  (o112 = (source[o111]))) and (o113 = to_rep(o112))) and (((o113 = 50) and
-  (o118 = true)) or ((not (o113 = 50)) and (o118 = false)))) and
-  (o123 = match_bool(o118, o117, false)))) and (o128 = match_bool(o123, o122,
-  false)))) and (o133 = match_bool(o128, o127, false)))) and
-  (o138 = match_bool(o133, o132, false)))) and (o139 = match_bool(o138, o137,
-  false)))) -> ((((((((temp___1058 = (to_rep1(first(source1)) + 6)) and
-  in_range1((to_rep1(first(source1)) + 6))) and
-  (((to_rep1(first(source1)) <= temp___1058) and
-  (temp___1058 <= to_rep1(last(source1)))) and (o105 = temp___1058))) and
-  (o106 = (source[o105]))) and (o107 = to_rep(o106))) and (((o107 <  51) and
-  (o108 = true)) or ((not (o107 <  51)) and (o108 = false)))) and
-  ((((((((temp___1057 = (to_rep1(first(source1)) + 5)) and
-  in_range1((to_rep1(first(source1)) + 5))) and
-  (((to_rep1(first(source1)) <= temp___1057) and
-  (temp___1057 <= to_rep1(last(source1)))) and (o100 = temp___1057))) and
-  (o101 = (source[o100]))) and (o102 = to_rep(o101))) and (((o102 = 56) and
-  (o103 = true)) or ((not (o102 = 56)) and (o103 = false)))) and
-  ((((((((temp___1056 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and
-  (((to_rep1(first(source1)) <= temp___1056) and
-  (temp___1056 <= to_rep1(last(source1)))) and (o95 = temp___1056))) and
-  (o96 = (source[o95]))) and (o97 = to_rep(o96))) and (((o97 = 52) and
-  (o98 = true)) or ((not (o97 = 52)) and (o98 = false)))) and
-  ((((((((temp___1055 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1055) and
-  (temp___1055 <= to_rep1(last(source1)))) and (o90 = temp___1055))) and
-  (o91 = (source[o90]))) and (o92 = to_rep(o91))) and (((o92 = 55) and
-  (o93 = true)) or ((not (o92 = 55)) and (o93 = false)))) and
-  ((((((((temp___1054 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) and
-  (((to_rep1(first(source1)) <= temp___1054) and
-  (temp___1054 <= to_rep1(last(source1)))) and (o85 = temp___1054))) and
-  (o86 = (source[o85]))) and (o87 = to_rep(o86))) and (((o87 = 52) and
-  (o88 = true)) or ((not (o87 = 52)) and (o88 = false)))) and
-  ((((((((temp___1053 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___1053) and
-  (temp___1053 <= to_rep1(last(source1)))) and (o80 = temp___1053))) and
-  (o81 = (source[o80]))) and (o82 = to_rep(o81))) and (((o82 = 49) and
-  (o83 = true)) or ((not (o82 = 49)) and (o83 = false)))) and
-  (((((((temp___1052 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___1052) and
-  (temp___1052 <= to_rep1(last(source1)))) and (o77 = temp___1052))) and
-  (o78 = (source[o77]))) and (o79 = to_rep(o78))) and (((o79 = 50) and
-  (o84 = true)) or ((not (o79 = 50)) and (o84 = false)))) and
-  (o89 = match_bool(o84, o83, false)))) and (o94 = match_bool(o89, o88,
-  false)))) and (o99 = match_bool(o94, o93, false)))) and
-  (o104 = match_bool(o99, o98, false)))) and (o109 = match_bool(o104, o103,
-  false)))) and (o110 = match_bool(o109, o108, false)))) ->
-  (((((((temp___1051 = (to_rep1(first(source1)) + 7)) and
-  in_range1((to_rep1(first(source1)) + 7))) and
-  (((to_rep1(first(source1)) <= temp___1051) and
-  (temp___1051 <= to_rep1(last(source1)))) and (o73 = temp___1051))) and
-  (o74 = (source[o73]))) and (o75 = to_rep(o74))) and (((o75 <  54) and
-  (o76 = true)) or ((not (o75 <  54)) and (o76 = false)))) ->
-  (((((((temp___1050 = (to_rep1(first(source1)) + 6)) and
-  in_range1((to_rep1(first(source1)) + 6))) and
-  (((to_rep1(first(source1)) <= temp___1050) and
-  (temp___1050 <= to_rep1(last(source1)))) and (o69 = temp___1050))) and
-  (o70 = (source[o69]))) and (o71 = to_rep(o70))) and (((o71 = 51) and
-  (o72 = true)) or ((not (o71 = 51)) and (o72 = false)))) ->
-  (((((((temp___1049 = (to_rep1(first(source1)) + 5)) and
-  in_range1((to_rep1(first(source1)) + 5))) and
-  (((to_rep1(first(source1)) <= temp___1049) and
-  (temp___1049 <= to_rep1(last(source1)))) and (o65 = temp___1049))) and
-  (o66 = (source[o65]))) and (o67 = to_rep(o66))) and (((o67 = 56) and
-  (o68 = true)) or ((not (o67 = 56)) and (o68 = false)))) ->
-  (((((((temp___1048 = (to_rep1(first(source1)) + 4)) and
-  in_range1((to_rep1(first(source1)) + 4))) and
-  (((to_rep1(first(source1)) <= temp___1048) and
-  (temp___1048 <= to_rep1(last(source1)))) and (o61 = temp___1048))) and
-  (o62 = (source[o61]))) and (o63 = to_rep(o62))) and (((o63 = 52) and
-  (o64 = true)) or ((not (o63 = 52)) and (o64 = false)))) ->
-  (((((((temp___1047 = (to_rep1(first(source1)) + 3)) and
-  in_range1((to_rep1(first(source1)) + 3))) and
-  (((to_rep1(first(source1)) <= temp___1047) and
-  (temp___1047 <= to_rep1(last(source1)))) and (o57 = temp___1047))) and
-  (o58 = (source[o57]))) and (o59 = to_rep(o58))) and (((o59 = 55) and
-  (o60 = true)) or ((not (o59 = 55)) and (o60 = false)))) ->
-  (((temp___1046 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) ->
-  (to_rep1(first(source1)) <= temp___1046))))))))))))))))))))))
+  (target11 = target48))))) and (((has_failed59 = has_failed21) and
+  (target49 = target11)) and ((has_failed60 = has_failed21) and
+  (target50 = target11)))))
+
+axiom H6 : (has_failed61 = has_failed59)
+
+axiom H7 : (target51 = target49)
+
+axiom H8 : (has_failed62 = has_failed60)
+
+axiom H9 : (target52 = target50)
+
+axiom H10 : ((bool_eq(length({ elts = source; rt = source1 }), 1) = true) ->
+  ((not (has_failed61 = true)) and
+  (target51 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))]))))))
+
+axiom H11 : ((match_bool(bool_le(2, length({ elts = source; rt = source1 })),
+  bool_le(length({ elts = source; rt = source1 }), 9), false) = true) ->
+  (not (has_failed61 = true)))
+
+axiom H12 : (bool_eq(length({ elts = source; rt = source1 }), 10) = true)
+
+axiom H13 : ((temp___1079 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H14 : ((to_rep1(first(source1)) <= temp___1079) and
+  (temp___1079 <= to_rep1(last(source1))))
+
+axiom H15 : (o309 = temp___1079)
+
+axiom H16 : (o310 = (source[o309]))
+
+axiom H17 : (o311 = to_rep(o310))
+
+axiom H18 : (((o311 <  50) -> (o312 = true)) and ((not (o311 <  50)) ->
+  (o312 = false)))
+
+axiom H19 : ((temp___1078 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H20 : ((to_rep1(first(source1)) <= temp___1078) and
+  (temp___1078 <= to_rep1(last(source1))))
+
+axiom H21 : (o303 = temp___1078)
+
+axiom H22 : (o304 = (source[o303]))
+
+axiom H23 : (o305 = to_rep(o304))
+
+axiom H24 : (((o305 <  49) -> (o306 = true)) and ((not (o305 <  49)) ->
+  (o306 = false)))
+
+axiom H25 : ((temp___1077 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H26 : ((to_rep1(first(source1)) <= temp___1077) and
+  (temp___1077 <= to_rep1(last(source1))))
+
+axiom H27 : (o300 = temp___1077)
+
+axiom H28 : (o301 = (source[o300]))
+
+axiom H29 : (o302 = to_rep(o301))
+
+axiom H30 : (((o302 = 50) -> (o307 = true)) and ((not (o302 = 50)) ->
+  (o307 = false)))
+
+axiom H31 : (o308 = match_bool(o307, o306, false))
+
+axiom H32 : ((temp___1076 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H33 : ((to_rep1(first(source1)) <= temp___1076) and
+  (temp___1076 <= to_rep1(last(source1))))
+
+axiom H34 : (o294 = temp___1076)
+
+axiom H35 : (o295 = (source[o294]))
+
+axiom H36 : (o296 = to_rep(o295))
+
+axiom H37 : (((o296 <  52) -> (o297 = true)) and ((not (o296 <  52)) ->
+  (o297 = false)))
+
+axiom H38 : ((temp___1075 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H39 : ((to_rep1(first(source1)) <= temp___1075) and
+  (temp___1075 <= to_rep1(last(source1))))
+
+axiom H40 : (o289 = temp___1075)
+
+axiom H41 : (o290 = (source[o289]))
+
+axiom H42 : (o291 = to_rep(o290))
+
+axiom H43 : (((o291 = 49) -> (o292 = true)) and ((not (o291 = 49)) ->
+  (o292 = false)))
+
+axiom H44 : ((temp___1074 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H45 : ((to_rep1(first(source1)) <= temp___1074) and
+  (temp___1074 <= to_rep1(last(source1))))
+
+axiom H46 : (o286 = temp___1074)
+
+axiom H47 : (o287 = (source[o286]))
+
+axiom H48 : (o288 = to_rep(o287))
+
+axiom H49 : (((o288 = 50) -> (o293 = true)) and ((not (o288 = 50)) ->
+  (o293 = false)))
+
+axiom H50 : (o298 = match_bool(o293, o292, false))
+
+axiom H51 : (o299 = match_bool(o298, o297, false))
+
+axiom H52 : ((temp___1073 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H53 : ((to_rep1(first(source1)) <= temp___1073) and
+  (temp___1073 <= to_rep1(last(source1))))
+
+axiom H54 : (o280 = temp___1073)
+
+axiom H55 : (o281 = (source[o280]))
+
+axiom H56 : (o282 = to_rep(o281))
+
+axiom H57 : (((o282 <  55) -> (o283 = true)) and ((not (o282 <  55)) ->
+  (o283 = false)))
+
+axiom H58 : ((temp___1072 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H59 : ((to_rep1(first(source1)) <= temp___1072) and
+  (temp___1072 <= to_rep1(last(source1))))
+
+axiom H60 : (o275 = temp___1072)
+
+axiom H61 : (o276 = (source[o275]))
+
+axiom H62 : (o277 = to_rep(o276))
+
+axiom H63 : (((o277 = 52) -> (o278 = true)) and ((not (o277 = 52)) ->
+  (o278 = false)))
+
+axiom H64 : ((temp___1071 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H65 : ((to_rep1(first(source1)) <= temp___1071) and
+  (temp___1071 <= to_rep1(last(source1))))
+
+axiom H66 : (o270 = temp___1071)
+
+axiom H67 : (o271 = (source[o270]))
+
+axiom H68 : (o272 = to_rep(o271))
+
+axiom H69 : (((o272 = 49) -> (o273 = true)) and ((not (o272 = 49)) ->
+  (o273 = false)))
+
+axiom H70 : ((temp___1070 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H71 : ((to_rep1(first(source1)) <= temp___1070) and
+  (temp___1070 <= to_rep1(last(source1))))
+
+axiom H72 : (o267 = temp___1070)
+
+axiom H73 : (o268 = (source[o267]))
+
+axiom H74 : (o269 = to_rep(o268))
+
+axiom H75 : (((o269 = 50) -> (o274 = true)) and ((not (o269 = 50)) ->
+  (o274 = false)))
+
+axiom H76 : (o279 = match_bool(o274, o273, false))
+
+axiom H77 : (o284 = match_bool(o279, o278, false))
+
+axiom H78 : (o285 = match_bool(o284, o283, false))
+
+axiom H79 : ((temp___1069 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H80 : ((to_rep1(first(source1)) <= temp___1069) and
+  (temp___1069 <= to_rep1(last(source1))))
+
+axiom H81 : (o261 = temp___1069)
+
+axiom H82 : (o262 = (source[o261]))
+
+axiom H83 : (o263 = to_rep(o262))
+
+axiom H84 : (((o263 <  52) -> (o264 = true)) and ((not (o263 <  52)) ->
+  (o264 = false)))
+
+axiom H85 : ((temp___1068 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H86 : ((to_rep1(first(source1)) <= temp___1068) and
+  (temp___1068 <= to_rep1(last(source1))))
+
+axiom H87 : (o256 = temp___1068)
+
+axiom H88 : (o257 = (source[o256]))
+
+axiom H89 : (o258 = to_rep(o257))
+
+axiom H90 : (((o258 = 55) -> (o259 = true)) and ((not (o258 = 55)) ->
+  (o259 = false)))
+
+axiom H91 : ((temp___1067 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H92 : ((to_rep1(first(source1)) <= temp___1067) and
+  (temp___1067 <= to_rep1(last(source1))))
+
+axiom H93 : (o251 = temp___1067)
+
+axiom H94 : (o252 = (source[o251]))
+
+axiom H95 : (o253 = to_rep(o252))
+
+axiom H96 : (((o253 = 52) -> (o254 = true)) and ((not (o253 = 52)) ->
+  (o254 = false)))
+
+axiom H97 : ((temp___1066 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H98 : ((to_rep1(first(source1)) <= temp___1066) and
+  (temp___1066 <= to_rep1(last(source1))))
+
+axiom H99 : (o246 = temp___1066)
+
+axiom H100 : (o247 = (source[o246]))
+
+axiom H101 : (o248 = to_rep(o247))
+
+axiom H102 : (((o248 = 49) -> (o249 = true)) and ((not (o248 = 49)) ->
+  (o249 = false)))
+
+axiom H103 : ((temp___1065 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H104 : ((to_rep1(first(source1)) <= temp___1065) and
+  (temp___1065 <= to_rep1(last(source1))))
+
+axiom H105 : (o243 = temp___1065)
+
+axiom H106 : (o244 = (source[o243]))
+
+axiom H107 : (o245 = to_rep(o244))
+
+axiom H108 : (((o245 = 50) -> (o250 = true)) and ((not (o245 = 50)) ->
+  (o250 = false)))
+
+axiom H109 : (o255 = match_bool(o250, o249, false))
+
+axiom H110 : (o260 = match_bool(o255, o254, false))
+
+axiom H111 : (o265 = match_bool(o260, o259, false))
+
+axiom H112 : (o266 = match_bool(o265, o264, false))
+
+axiom H113 : ((temp___1064 = (to_rep1(first(source1)) + 5)) and
+  in_range1((to_rep1(first(source1)) + 5)))
+
+axiom H114 : ((to_rep1(first(source1)) <= temp___1064) and
+  (temp___1064 <= to_rep1(last(source1))))
+
+axiom H115 : (o237 = temp___1064)
+
+axiom H116 : (o238 = (source[o237]))
+
+axiom H117 : (o239 = to_rep(o238))
+
+axiom H118 : (((o239 <  56) -> (o240 = true)) and ((not (o239 <  56)) ->
+  (o240 = false)))
+
+axiom H119 : ((temp___1063 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H120 : ((to_rep1(first(source1)) <= temp___1063) and
+  (temp___1063 <= to_rep1(last(source1))))
+
+axiom H121 : (o232 = temp___1063)
+
+axiom H122 : (o233 = (source[o232]))
+
+axiom H123 : (o234 = to_rep(o233))
+
+axiom H124 : (((o234 = 52) -> (o235 = true)) and ((not (o234 = 52)) ->
+  (o235 = false)))
+
+axiom H125 : ((temp___1062 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H126 : ((to_rep1(first(source1)) <= temp___1062) and
+  (temp___1062 <= to_rep1(last(source1))))
+
+axiom H127 : (o227 = temp___1062)
+
+axiom H128 : (o228 = (source[o227]))
+
+axiom H129 : (o229 = to_rep(o228))
+
+axiom H130 : (((o229 = 55) -> (o230 = true)) and ((not (o229 = 55)) ->
+  (o230 = false)))
+
+axiom H131 : ((temp___1061 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H132 : ((to_rep1(first(source1)) <= temp___1061) and
+  (temp___1061 <= to_rep1(last(source1))))
+
+axiom H133 : (o222 = temp___1061)
+
+axiom H134 : (o223 = (source[o222]))
+
+axiom H135 : (o224 = to_rep(o223))
+
+axiom H136 : (((o224 = 52) -> (o225 = true)) and ((not (o224 = 52)) ->
+  (o225 = false)))
+
+axiom H137 : ((temp___1060 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H138 : ((to_rep1(first(source1)) <= temp___1060) and
+  (temp___1060 <= to_rep1(last(source1))))
+
+axiom H139 : (o217 = temp___1060)
+
+axiom H140 : (o218 = (source[o217]))
+
+axiom H141 : (o219 = to_rep(o218))
+
+axiom H142 : (((o219 = 49) -> (o220 = true)) and ((not (o219 = 49)) ->
+  (o220 = false)))
+
+axiom H143 : ((temp___1059 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H144 : ((to_rep1(first(source1)) <= temp___1059) and
+  (temp___1059 <= to_rep1(last(source1))))
+
+axiom H145 : (o214 = temp___1059)
+
+axiom H146 : (o215 = (source[o214]))
+
+axiom H147 : (o216 = to_rep(o215))
+
+axiom H148 : (((o216 = 50) -> (o221 = true)) and ((not (o216 = 50)) ->
+  (o221 = false)))
+
+axiom H149 : (o226 = match_bool(o221, o220, false))
+
+axiom H150 : (o231 = match_bool(o226, o225, false))
+
+axiom H151 : (o236 = match_bool(o231, o230, false))
+
+axiom H152 : (o241 = match_bool(o236, o235, false))
+
+axiom H153 : (o242 = match_bool(o241, o240, false))
+
+axiom H154 : ((temp___1058 = (to_rep1(first(source1)) + 6)) and
+  in_range1((to_rep1(first(source1)) + 6)))
+
+axiom H155 : ((to_rep1(first(source1)) <= temp___1058) and
+  (temp___1058 <= to_rep1(last(source1))))
+
+axiom H156 : (o208 = temp___1058)
+
+axiom H157 : (o209 = (source[o208]))
+
+axiom H158 : (o210 = to_rep(o209))
+
+axiom H159 : (((o210 <  51) -> (o211 = true)) and ((not (o210 <  51)) ->
+  (o211 = false)))
+
+axiom H160 : ((temp___1057 = (to_rep1(first(source1)) + 5)) and
+  in_range1((to_rep1(first(source1)) + 5)))
+
+axiom H161 : ((to_rep1(first(source1)) <= temp___1057) and
+  (temp___1057 <= to_rep1(last(source1))))
+
+axiom H162 : (o203 = temp___1057)
+
+axiom H163 : (o204 = (source[o203]))
+
+axiom H164 : (o205 = to_rep(o204))
+
+axiom H165 : (((o205 = 56) -> (o206 = true)) and ((not (o205 = 56)) ->
+  (o206 = false)))
+
+axiom H166 : ((temp___1056 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H167 : ((to_rep1(first(source1)) <= temp___1056) and
+  (temp___1056 <= to_rep1(last(source1))))
+
+axiom H168 : (o198 = temp___1056)
+
+axiom H169 : (o199 = (source[o198]))
+
+axiom H170 : (o200 = to_rep(o199))
+
+axiom H171 : (((o200 = 52) -> (o201 = true)) and ((not (o200 = 52)) ->
+  (o201 = false)))
+
+axiom H172 : ((temp___1055 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H173 : ((to_rep1(first(source1)) <= temp___1055) and
+  (temp___1055 <= to_rep1(last(source1))))
+
+axiom H174 : (o193 = temp___1055)
+
+axiom H175 : (o194 = (source[o193]))
+
+axiom H176 : (o195 = to_rep(o194))
+
+axiom H177 : (((o195 = 55) -> (o196 = true)) and ((not (o195 = 55)) ->
+  (o196 = false)))
+
+axiom H178 : ((temp___1054 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+axiom H179 : ((to_rep1(first(source1)) <= temp___1054) and
+  (temp___1054 <= to_rep1(last(source1))))
+
+axiom H180 : (o188 = temp___1054)
+
+axiom H181 : (o189 = (source[o188]))
+
+axiom H182 : (o190 = to_rep(o189))
+
+axiom H183 : (((o190 = 52) -> (o191 = true)) and ((not (o190 = 52)) ->
+  (o191 = false)))
+
+axiom H184 : ((temp___1053 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H185 : ((to_rep1(first(source1)) <= temp___1053) and
+  (temp___1053 <= to_rep1(last(source1))))
+
+axiom H186 : (o183 = temp___1053)
+
+axiom H187 : (o184 = (source[o183]))
+
+axiom H188 : (o185 = to_rep(o184))
+
+axiom H189 : (((o185 = 49) -> (o186 = true)) and ((not (o185 = 49)) ->
+  (o186 = false)))
+
+axiom H190 : ((temp___1052 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H191 : ((to_rep1(first(source1)) <= temp___1052) and
+  (temp___1052 <= to_rep1(last(source1))))
+
+axiom H192 : (o180 = temp___1052)
+
+axiom H193 : (o181 = (source[o180]))
+
+axiom H194 : (o182 = to_rep(o181))
+
+axiom H195 : (((o182 = 50) -> (o187 = true)) and ((not (o182 = 50)) ->
+  (o187 = false)))
+
+axiom H196 : (o192 = match_bool(o187, o186, false))
+
+axiom H197 : (o197 = match_bool(o192, o191, false))
+
+axiom H198 : (o202 = match_bool(o197, o196, false))
+
+axiom H199 : (o207 = match_bool(o202, o201, false))
+
+axiom H200 : (o212 = match_bool(o207, o206, false))
+
+axiom H201 : (o213 = match_bool(o212, o211, false))
+
+axiom H202 : ((temp___1051 = (to_rep1(first(source1)) + 7)) and
+  in_range1((to_rep1(first(source1)) + 7)))
+
+axiom H203 : ((to_rep1(first(source1)) <= temp___1051) and
+  (temp___1051 <= to_rep1(last(source1))))
+
+axiom H204 : (o174 = temp___1051)
+
+axiom H205 : (o175 = (source[o174]))
+
+axiom H206 : (o176 = to_rep(o175))
+
+axiom H207 : (((o176 <  54) -> (o177 = true)) and ((not (o176 <  54)) ->
+  (o177 = false)))
+
+axiom H208 : ((temp___1050 = (to_rep1(first(source1)) + 6)) and
+  in_range1((to_rep1(first(source1)) + 6)))
+
+axiom H209 : ((to_rep1(first(source1)) <= temp___1050) and
+  (temp___1050 <= to_rep1(last(source1))))
+
+axiom H210 : (o169 = temp___1050)
+
+axiom H211 : (o170 = (source[o169]))
+
+axiom H212 : (o171 = to_rep(o170))
+
+axiom H213 : (((o171 = 51) -> (o172 = true)) and ((not (o171 = 51)) ->
+  (o172 = false)))
+
+axiom H214 : ((temp___1049 = (to_rep1(first(source1)) + 5)) and
+  in_range1((to_rep1(first(source1)) + 5)))
+
+axiom H215 : ((to_rep1(first(source1)) <= temp___1049) and
+  (temp___1049 <= to_rep1(last(source1))))
+
+axiom H216 : (o164 = temp___1049)
+
+axiom H217 : (o165 = (source[o164]))
+
+axiom H218 : (o166 = to_rep(o165))
+
+axiom H219 : (((o166 = 56) -> (o167 = true)) and ((not (o166 = 56)) ->
+  (o167 = false)))
+
+axiom H220 : ((temp___1048 = (to_rep1(first(source1)) + 4)) and
+  in_range1((to_rep1(first(source1)) + 4)))
+
+axiom H221 : ((to_rep1(first(source1)) <= temp___1048) and
+  (temp___1048 <= to_rep1(last(source1))))
+
+axiom H222 : (o159 = temp___1048)
+
+axiom H223 : (o160 = (source[o159]))
+
+axiom H224 : (o161 = to_rep(o160))
+
+axiom H225 : (((o161 = 52) -> (o162 = true)) and ((not (o161 = 52)) ->
+  (o162 = false)))
+
+axiom H226 : ((temp___1047 = (to_rep1(first(source1)) + 3)) and
+  in_range1((to_rep1(first(source1)) + 3)))
+
+axiom H227 : ((to_rep1(first(source1)) <= temp___1047) and
+  (temp___1047 <= to_rep1(last(source1))))
+
+axiom H228 : (o154 = temp___1047)
+
+axiom H229 : (o155 = (source[o154]))
+
+axiom H230 : (o156 = to_rep(o155))
+
+axiom H231 : (((o156 = 55) -> (o157 = true)) and ((not (o156 = 55)) ->
+  (o157 = false)))
+
+axiom H232 : ((temp___1046 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___1046)

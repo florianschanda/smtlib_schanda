@@ -1092,10 +1092,36 @@ logic copy : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : t
+
+logic y : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 100000.0))
+
+axiom H1 : ((result = true) <->
+  (exists y1:int. (((0 <= y1) and (y1 <= 100000)) and eq(x,
+  mul(NearestTiesToEven, div(NearestTiesToEven, of_int(NearestTiesToEven,
+  y1), fliteral1), div(NearestTiesToEven, of_int(NearestTiesToEven, y1),
+  fliteral1))))))
+
+axiom H2 : (result = true)
 
 logic fliteral2 : t
 
@@ -1103,9 +1129,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall result:bool. (tqtisFinite(x) -> (((result = true) <->
-  (exists y:int. (((0 <= y) and (y <= 100000)) and eq(x,
-  mul(NearestTiesToEven, div(NearestTiesToEven, of_int(NearestTiesToEven, y),
-  fliteral1), div(NearestTiesToEven, of_int(NearestTiesToEven, y),
-  fliteral1)))))) -> ((result = true) -> le(fliteral2, x)))))
+goal WP_parameter_def : le(fliteral2, x)

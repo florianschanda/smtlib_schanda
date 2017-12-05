@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -508,20 +508,53 @@ axiom def_axiom :
   (forall temp___259:int. (((temp___254(temp___256, temp___257,
   temp___258)).elts1[temp___259]) = of_rep(temp___256)))))
 
+logic a : (int,character) farray
+
+logic b : int
+
+logic temp___261 : (int,character) farray
+
+logic temp___2611 : t1
+
+logic temp___262 : (int,character) farray
+
+logic temp___2621 : t
+
+logic temp___263 : (int,character) farray
+
+logic temp___2631 : t
+
+logic o : (int,character) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : (int,character) farray
+
+logic a1 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : ((0 <= 2147483647) -> in_range3(b))
+
+axiom H2 : (to_rep1(first2((temp___254(32, to_rep1(a__first),
+  to_rep1(a__last))).rt1)) = to_rep1(a__first))
+
+axiom H3 : (to_rep1(last2((temp___254(32, to_rep1(a__first),
+  to_rep1(a__last))).rt1)) = to_rep1(a__last))
+
+axiom H4 : ({ elts1 = temp___261; rt1 = temp___2611 } = temp___254(32,
+  to_rep1(a__first), to_rep1(a__last)))
+
+axiom H5 : (temp___261 = temp___262)
+
+axiom H6 : (mk(to_rep1(first2(temp___2611)),
+  to_rep1(last2(temp___2611))) = temp___2621)
+
  (* File "foo.adb", line 39, characters 0-0 *)
 goal WP_parameter_def :
-  (forall b:int. forall temp___261:(int,character) farray.
-  forall temp___2611:t1. forall temp___262:(int,character) farray.
-  forall temp___2621:t. (dynamic_property(1, 2147483647, to_rep1(a__first),
-  to_rep1(a__last)) -> (((0 <= 2147483647) -> in_range3(b)) ->
-  ((((to_rep1(first2((temp___254(32, to_rep1(a__first),
-  to_rep1(a__last))).rt1)) = to_rep1(a__first)) and
-  ((to_rep1(last2((temp___254(32, to_rep1(a__first),
-  to_rep1(a__last))).rt1)) = to_rep1(a__last)) and ({ elts1 = temp___261;
-  rt1 = temp___2611 } = temp___254(32, to_rep1(a__first),
-  to_rep1(a__last))))) and ((temp___261 = temp___262) and
-  (mk(to_rep1(first2(temp___2611)),
-  to_rep1(last2(temp___2611))) = temp___2621))) ->
   (((to_rep1(first(temp___2621)) <= to_rep1(last(temp___2621))) ->
   (((to_rep1(a__first) <= to_rep1(a__last)) ->
   (((to_rep1(last(temp___2621)) - to_rep1(first(temp___2621))) + 1) = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) and
@@ -529,4 +562,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___2621)) - to_rep1(first(temp___2621))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___2621)) <= to_rep1(last(temp___2621)))) ->
   ((to_rep1(a__first) <= to_rep1(a__last)) ->
-  (0 = ((to_rep1(a__last) - to_rep1(a__first)) + 1)))))))))
+  (0 = ((to_rep1(a__last) - to_rep1(a__first)) + 1)))))

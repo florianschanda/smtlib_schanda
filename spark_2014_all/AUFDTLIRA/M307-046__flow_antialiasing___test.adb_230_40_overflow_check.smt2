@@ -189,6 +189,7 @@
 (declare-const o (Array Int character))
 (declare-const test__op_string_io_i__x__compl (Array Int character))
 (declare-const test__op_string_io_i__x__compl1 t1)
+(declare-const temp___434 Int)
 (assert (dynamic_property 1 2147483647 (to_rep1 a__first) (to_rep1 a__last)))
 (assert (in_range1 n))
 (assert (=> (<= 1 n) (and (and (<= (to_rep1 a__first) 1) (<= 1 (to_rep1 a__last))) (and (<= (to_rep1 a__first) n) (<= n (to_rep1 a__last))))))

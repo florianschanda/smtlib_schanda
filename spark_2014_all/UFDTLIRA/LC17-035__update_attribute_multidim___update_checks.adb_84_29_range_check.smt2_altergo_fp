@@ -367,15 +367,59 @@ axiom def_axiom :
   temp___291, temp___292, temp___293), temp___294, temp___295,
   temp___296) = get(temp___286, temp___294, temp___295, temp___296)))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+axiom H : in_range(x1)
+
+axiom H1 : in_range(x2)
+
+axiom H2 : in_range1(y1)
+
+axiom H3 : in_range1(y2)
+
+axiom H4 : in_range2(z1)
+
+axiom H5 : in_range2(z2)
+
+axiom H6 : in_range3(new_val)
+
+axiom H7 : (1 <  x1)
+
+axiom H8 : (1 <  y1)
+
+axiom H9 : (1 <  z1)
+
+axiom H10 : (x2 <  3)
+
+axiom H11 : (y2 <  5)
+
+axiom H12 : (z2 <  10)
+
+axiom H13 : (new_val <  99)
+
+axiom H14 : ((o = (new_val + 1)) and in_range3((new_val + 1)))
+
+axiom H15 : ((o1 = (z2 + 1)) and in_range2((z2 + 1)))
+
+axiom H16 : ((o2 = (y2 + 1)) and in_range1((y2 + 1)))
+
+axiom H17 : ((o3 = (x2 + 1)) and in_range((x2 + 1)))
+
+axiom H18 : ((o4 = (z1 - 1)) and in_range2((z1 - 1)))
+
+axiom H19 : ((o5 = (y1 - 1)) and in_range1((y1 - 1)))
+
  (* File "update_checks.adb", line 61, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. (in_range(x1) -> (in_range(x2) -> (in_range1(y1) ->
-  (in_range1(y2) -> (in_range2(z1) -> (in_range2(z2) ->
-  (in_range3(new_val) -> ((((((((1 <  x1) and (1 <  y1)) and (1 <  z1)) and
-  (x2 <  3)) and (y2 <  5)) and (z2 <  10)) and (new_val <  99)) ->
-  (((o = (new_val + 1)) and in_range3((new_val + 1))) ->
-  (((o1 = (z2 + 1)) and in_range2((z2 + 1))) -> (((o2 = (y2 + 1)) and
-  in_range1((y2 + 1))) -> (((o3 = (x2 + 1)) and in_range((x2 + 1))) ->
-  (((o4 = (z1 - 1)) and in_range2((z1 - 1))) -> (((o5 = (y1 - 1)) and
-  in_range1((y1 - 1))) -> in_range((x1 - 1)))))))))))))))))
+goal WP_parameter_def : in_range((x1 - 1))

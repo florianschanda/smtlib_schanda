@@ -727,32 +727,136 @@ logic f : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,us_rep2) farray
+
+logic o : et1
+
+logic o1 : et1
+
+logic o2 : et2
+
+logic o3 : et1
+
+logic o4 : et2
+
+logic o5 : et3
+
+logic o6 : et1
+
+logic o7 : et2
+
+logic o8 : enum1ta
+
+logic o9 : et3
+
+logic o10 : et1
+
+logic o11 : et2
+
+logic o12 : enum1ta
+
+logic o13 : et3
+
+logic o14 : et1
+
+logic o15 : et2
+
+logic o16 : enum1ta
+
+logic o17 : et4
+
+logic o18 : et3
+
+logic o19 : et1
+
+logic o20 : et2
+
+logic o21 : enum1ta
+
+logic o22 : et4
+
+logic o23 : (int,us_rep2) farray
+
+logic result : (int,us_rep2) farray
+
+logic a1 : (int,us_rep2) farray
+
+logic a2 : (int,us_rep2) farray
+
+logic a3 : (int,us_rep2) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(f)
+
+axiom H2 : (to_rep(o) = f)
+
+axiom H3 : (o = o1)
+
+axiom H4 :
+  ((((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__g2).us_split_fields1).rec__ar__rec1t__g1 = o2)
+
+axiom H5 : (o3 = o1)
+
+axiom H6 : (o4 = o2)
+
+axiom H7 :
+  ((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__f2 = o5)
+
+axiom H8 : (o6 = o3)
+
+axiom H9 : (o7 = o4)
+
+axiom H10 :
+  ((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__h2 = o8)
+
+axiom H11 : (o9 = o5)
+
+axiom H12 : (o10 = o6)
+
+axiom H13 : (o11 = o7)
+
+axiom H14 : (o12 = o8)
+
+axiom H15 : (o13 = o9)
+
+axiom H16 : (o14 = o10)
+
+axiom H17 : (o15 = o11)
+
+axiom H18 : (o16 = o12)
+
+axiom H19 : ((((a[i])).us_split_fields5).rec__ar__rec3t__g3 = o17)
+
+axiom H20 : (o18 = o13)
+
+axiom H21 : (o19 = o14)
+
+axiom H22 : (o20 = o15)
+
+axiom H23 : (o21 = o16)
+
+axiom H24 : (o22 = o17)
+
+axiom H25 : (o23 = (a[i <- { us_split_fields5 = { rec__ar__rec3t__f3 = {
+  us_split_fields3 = { rec__ar__rec2t__f2 = o18; rec__ar__rec2t__g2 = {
+  us_split_fields1 = { rec__ar__rec1t__f1 = o19; rec__ar__rec1t__g1 = o20 }
+  }; rec__ar__rec2t__h2 = o21 } }; rec__ar__rec3t__g3 = o22 } }]))
+
+axiom H26 : (result = a)
+
+axiom H27 : (a1 = o23)
+
+axiom H28 : (a2 = a1)
+
+axiom H29 : (a3 = a1)
+
+logic n : int
+
+axiom H30 : (1 <= n)
+
+axiom H31 : (n <= 16)
+
  (* File "ar.ads", line 75, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(int,us_rep2) farray. forall o:et1. forall o1:et1. forall o2:et2.
-  forall o3:et1. forall o4:et2. forall o5:et3. forall o6:et1. forall o7:et2.
-  forall o8:enum1ta. forall o9:et3. forall o10:et1. forall o11:et2.
-  forall o12:enum1ta. forall o13:et3. forall o14:et1. forall o15:et2.
-  forall o16:enum1ta. forall o17:et4. forall o18:et3. forall o19:et1.
-  forall o20:et2. forall o21:enum1ta. forall o22:et4.
-  forall o23:(int,us_rep2) farray. forall result:(int,us_rep2) farray.
-  forall a1:(int,us_rep2) farray. forall a2:(int,us_rep2) farray.
-  forall a3:(int,us_rep2) farray. ((in_range1(i) and (in_range2(f) and
-  ((((((((((to_rep(o) = f) and ((o = o1) and
-  ((((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__g2).us_split_fields1).rec__ar__rec1t__g1 = o2))) and
-  ((o3 = o1) and (o4 = o2))) and
-  (((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__f2 = o5) and
-  (((o6 = o3) and (o7 = o4)) and
-  ((((((a[i])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__h2 = o8)))) and
-  ((o9 = o5) and (((o10 = o6) and (o11 = o7)) and (o12 = o8)))) and
-  (((o13 = o9) and (((o14 = o10) and (o15 = o11)) and (o16 = o12))) and
-  ((((a[i])).us_split_fields5).rec__ar__rec3t__g3 = o17))) and
-  (((o18 = o13) and (((o19 = o14) and (o20 = o15)) and (o21 = o16))) and
-  (o22 = o17))) and (o23 = (a[i <- { us_split_fields5 = {
-  rec__ar__rec3t__f3 = { us_split_fields3 = { rec__ar__rec2t__f2 = o18;
-  rec__ar__rec2t__g2 = { us_split_fields1 = { rec__ar__rec1t__f1 = o19;
-  rec__ar__rec1t__g1 = o20 } }; rec__ar__rec2t__h2 = o21 } };
-  rec__ar__rec3t__g3 = o22 } }]))) and ((result = a) and (a1 = o23))) and
-  ((a1 = a2) and (a3 = a1))))) ->
-  (forall n:int. (((1 <= n) and (n <= 16)) ->
-  in_range4(to_rep2((((((a2[n])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__f2))))))
+  in_range4(to_rep2((((((a2[n])).us_split_fields5).rec__ar__rec3t__f3).us_split_fields3).rec__ar__rec2t__f2))

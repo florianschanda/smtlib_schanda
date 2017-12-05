@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -259,7 +259,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type tindexB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq4 : int, int -> bool
 
@@ -502,21 +502,56 @@ type t4b__ref = { t4b__content : us_t1
 
 function t4b__ref___projection(a: t4b__ref) : us_t1 = (a).t4b__content
 
+logic a : (int,integer) farray
+
+logic o : (int,integer) farray
+
+logic temp___150 : (int,integer) farray
+
+logic temp___1501 : t1
+
+logic temp___151 : (int,integer) farray
+
+logic temp___1511 : t
+
+logic o1 : (int,integer) farray
+
+logic temp___152 : (int,integer) farray
+
+logic temp___1521 : t
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range1(k)
+
+axiom H3 : in_range1(l)
+
+axiom H4 : ((j - i) = (l - k))
+
+axiom H5 : ((k <= l) -> (((1 <= k) and (k <= 8)) and ((1 <= l) and
+  (l <= 8))))
+
+axiom H6 : (o = a)
+
+axiom H7 : (o = temp___150)
+
+axiom H8 : (mk1(k, l) = temp___1501)
+
+axiom H9 : (((to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501))) ->
+  (((i <= j) ->
+  (((to_rep1(last2(temp___1501)) - to_rep1(first2(temp___1501))) + 1) = ((j - i) + 1))) and
+  ((not (i <= j)) ->
+  (((to_rep1(last2(temp___1501)) - to_rep1(first2(temp___1501))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501)))) ->
+  ((i <= j) -> (0 = ((j - i) + 1)))))
+
+axiom H10 : (slide(temp___150, to_rep1(first2(temp___1501)), i) = temp___151)
+
+axiom H11 : (mk(i, j) = temp___1511)
+
+axiom H12 : (i <= j)
+
  (* File "slice_test_3.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall o:(int,integer) farray.
-  forall temp___150:(int,integer) farray. forall temp___1501:t1.
-  forall temp___151:(int,integer) farray. forall temp___1511:t.
-  (in_range1(i) -> (in_range1(j) -> (in_range1(k) -> (in_range1(l) ->
-  (((j - i) = (l - k)) -> ((((((k <= l) -> (((1 <= k) and (k <= 8)) and
-  ((1 <= l) and (l <= 8)))) and (o = a)) and ((o = temp___150) and (mk1(k,
-  l) = temp___1501))) and
-  ((((to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501))) and
-  (((i <= j) and
-  (((to_rep1(last2(temp___1501)) - to_rep1(first2(temp___1501))) + 1) = ((j - i) + 1))) or
-  ((not (i <= j)) and
-  (((to_rep1(last2(temp___1501)) - to_rep1(first2(temp___1501))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___1501)) <= to_rep1(last2(temp___1501)))) and
-  (((i <= j) and (0 = ((j - i) + 1))) or (not (i <= j))))) and
-  ((slide(temp___150, to_rep1(first2(temp___1501)), i) = temp___151) and
-  (mk(i, j) = temp___1511)))) -> ((i <= j) -> (1 <= i)))))))))
+goal WP_parameter_def : (1 <= i)

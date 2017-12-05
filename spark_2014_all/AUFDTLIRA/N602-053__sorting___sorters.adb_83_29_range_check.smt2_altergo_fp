@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -498,34 +498,143 @@ type t25b__ref = { t25b__content : us_t1
 
 function t25b__ref___projection(a: t25b__ref) : us_t1 = (a).t25b__content
 
- (* File "sorters.adb", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,integer) farray. forall smallest:int.
-  forall current:int. forall temp___180:int. forall o:(int,integer) farray.
-  forall temp___173:(int,integer) farray. forall temp___1731:t1.
-  forall o1:(int,integer) farray. forall o2:t. forall o3:int.
-  forall result:int. forall current1:int. forall result1:int.
-  forall smallest1:int. (dynamic_property(1, 2147483647,
-  to_rep(values__first), to_rep(values__last)) ->
-  (((((to_rep(values__first) <= to_rep(values__last)) and
-  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) or
-  ((not (to_rep(values__first) <= to_rep(values__last))) and (1 <= 0))) and
-  (to_rep(values__last) <= 2147483647)) -> (((1 <= 2147483647) ->
-  in_range2(smallest)) -> (((temp___180 = (to_rep(values__last) - 1)) and
-  in_range1((to_rep(values__last) - 1))) -> (((result = current) and
-  (current1 = to_rep(values__first))) ->
-  (((to_rep(values__first) <= current1) and (current1 <= temp___180)) ->
-  ((((((((current1 <= to_rep(values__last)) ->
+logic values : (int,integer) farray
+
+logic smallest : int
+
+logic current : int
+
+logic temp___180 : int
+
+logic o : (int,integer) farray
+
+logic temp___173 : (int,integer) farray
+
+logic temp___1731 : t1
+
+logic o1 : (int,integer) farray
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : int
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic j1 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic temp___178 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : (int,integer) farray
+
+logic temp___1732 : (int,integer) farray
+
+logic temp___1733 : t1
+
+logic o14 : (int,integer) farray
+
+logic o15 : t
+
+logic o16 : int
+
+logic o17 : int
+
+logic values1 : (int,integer) farray
+
+logic result : int
+
+logic current1 : int
+
+logic result1 : int
+
+logic smallest1 : int
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+logic smallest2 : int
+
+logic current2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic current3 : int
+
+logic result4 : int
+
+logic smallest3 : int
+
+logic values4 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : ((((to_rep(values__first) <= to_rep(values__last)) ->
+  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) and
+  ((not (to_rep(values__first) <= to_rep(values__last))) -> (1 <= 0))) and
+  (to_rep(values__last) <= 2147483647))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(smallest))
+
+axiom H3 : ((temp___180 = (to_rep(values__last) - 1)) and
+  in_range1((to_rep(values__last) - 1)))
+
+axiom H4 : (result = current)
+
+axiom H5 : (current1 = to_rep(values__first))
+
+axiom H6 : (to_rep(values__first) <= current1)
+
+axiom H7 : (current1 <= temp___180)
+
+axiom H8 : ((current1 <= to_rep(values__last)) ->
   (((to_rep(values__first) <= current1) and
   (current1 <= to_rep(values__last))) and
   ((to_rep(values__first) <= to_rep(values__last)) and
-  (to_rep(values__last) <= to_rep(values__last))))) and (o = values)) and
-  ((o = temp___173) and (mk1(current1,
-  to_rep(values__last)) = temp___1731))) and ((temp___173 = o1) and
-  (mk(to_rep(first2(temp___1731)), to_rep(last2(temp___1731))) = o2))) and
-  ((o3 = index_of_minimum({ elts = o1; rt = o2 })) and (in_range2(o3) and
-  (((to_rep(first(o2)) <= o3) and (o3 <= to_rep(last(o2)))) and
-  (forall j:int. (((to_rep(first(o2)) <= j) and (j <= to_rep(last(o2)))) ->
-  (to_rep((o1[o3])) <= to_rep((o1[j]))))))))) and ((result1 = smallest) and
-  (smallest1 = o3))) -> ((not (smallest1 = current1)) ->
-  in_range2(current1))))))))))
+  (to_rep(values__last) <= to_rep(values__last)))))
+
+axiom H9 : (o = values)
+
+axiom H10 : (o = temp___173)
+
+axiom H11 : (mk1(current1, to_rep(values__last)) = temp___1731)
+
+axiom H12 : (temp___173 = o1)
+
+axiom H13 : (mk(to_rep(first2(temp___1731)),
+  to_rep(last2(temp___1731))) = o2)
+
+axiom H14 : ((o3 = index_of_minimum({ elts = o1; rt = o2 })) and
+  (in_range2(o3) and (((to_rep(first(o2)) <= o3) and
+  (o3 <= to_rep(last(o2)))) and
+  (forall j2:int. (((to_rep(first(o2)) <= j2) and
+  (j2 <= to_rep(last(o2)))) -> (to_rep((o1[o3])) <= to_rep((o1[j2]))))))))
+
+axiom H15 : (result1 = smallest)
+
+axiom H16 : (smallest1 = o3)
+
+axiom H17 : (not (smallest1 = current1))
+
+ (* File "sorters.adb", line 48, characters 0-0 *)
+goal WP_parameter_def : in_range2(current1)

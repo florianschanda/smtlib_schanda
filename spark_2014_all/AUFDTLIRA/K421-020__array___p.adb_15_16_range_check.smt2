@@ -151,6 +151,7 @@
 (assert (forall ((a (Array Int ttmp5C)) (b (Array Int ttmp5C))) (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int)) (! (= (< 0 (compare3 a a_first a_last b b_first b_last)) (exists ((i Int) (j Int)) (and (<= i b_last) (and (< j a_last) (and (= (bool_eq3 a a_first j b b_first i) true) (or (= i b_last) (and (< i b_last) (< (to_rep3 (select b (+ i 1))) (to_rep3 (select a (+ j 1))))))))))) :pattern ((compare3 a a_first a_last b b_first b_last))))))
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (in_range y))
 (assert (not (in_range1 x)))

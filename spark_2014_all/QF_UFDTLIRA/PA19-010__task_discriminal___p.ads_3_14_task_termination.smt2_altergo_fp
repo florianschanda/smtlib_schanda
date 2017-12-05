@@ -109,5 +109,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : false
+
  (* File "p.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

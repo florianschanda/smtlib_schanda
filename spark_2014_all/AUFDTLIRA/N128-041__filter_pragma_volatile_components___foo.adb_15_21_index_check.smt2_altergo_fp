@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -290,24 +290,177 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic a : (int,integer) farray
+
+logic s : int
+
+logic total : int
+
+logic a_lb : int
+
+logic a_ub : int
+
+logic item : int
+
+logic i : int
+
+logic temp___181 : int
+
+logic temp___180 : int
+
+logic temp___179 : (int,integer) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic a1 : (int,integer) farray
+
+logic item1 : int
+
+logic result : int
+
+logic a_lb1 : int
+
+logic result1 : int
+
+logic a_ub1 : int
+
+logic result2 : int
+
+logic total1 : int
+
+logic result3 : int
+
+logic i1 : int
+
+logic total2 : int
+
+logic item2 : int
+
+logic i2 : int
+
+logic a2 : (int,integer) farray
+
+logic result4 : int
+
+logic item3 : int
+
+logic result5 : int
+
+logic total3 : int
+
+logic a3 : (int,integer) farray
+
+logic total4 : int
+
+logic item4 : int
+
+logic i3 : int
+
+logic a4 : (int,integer) farray
+
+logic total5 : int
+
+logic item5 : int
+
+logic i4 : int
+
+logic a5 : (int,integer) farray
+
+logic total6 : int
+
+logic item6 : int
+
+logic i5 : int
+
+logic a6 : (int,integer) farray
+
+logic total7 : int
+
+logic item7 : int
+
+logic i6 : int
+
+logic result6 : int
+
+logic s1 : int
+
+logic a7 : (int,integer) farray
+
+logic s2 : int
+
+logic total8 : int
+
+logic a_lb2 : int
+
+logic a_ub2 : int
+
+logic item8 : int
+
+logic i7 : int
+
+logic a8 : (int,integer) farray
+
+logic s3 : int
+
+logic total9 : int
+
+logic a_lb3 : int
+
+logic a_ub3 : int
+
+logic item9 : int
+
+logic i8 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(s))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(total))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(a_lb))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(a_ub))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(item))
+
+axiom H5 : (result = a_lb)
+
+axiom H6 : (a_lb1 = 1)
+
+axiom H7 : (result1 = a_ub)
+
+axiom H8 : (a_ub1 = 10)
+
+axiom H9 : (result2 = total)
+
+axiom H10 : (total1 = 0)
+
+axiom H11 : (a_lb1 = r1b)
+
+axiom H12 : in_range1(r1b)
+
+axiom H13 : (a_ub1 = r2b)
+
+axiom H14 : in_range1(r2b)
+
+axiom H15 : (result3 = i)
+
+axiom H16 : (i1 = r1b)
+
+axiom H17 : (r1b <= i1)
+
+axiom H18 : (i1 <= r2b)
+
+axiom H19 : (((((- 2147483648) <= 2147483647) -> in_range1(total2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(item2))) and ((r1b <= i2) and
+  (i2 <= r2b)))
+
+axiom H20 : (temp___179 = a2)
+
  (* File "foo.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:int. forall total:int. forall a_lb:int. forall a_ub:int.
-  forall item:int. forall i:int. forall temp___179:(int,integer) farray.
-  forall result:int. forall a_lb1:int. forall result1:int. forall a_ub1:int.
-  forall result2:int. forall total1:int. forall result3:int. forall i1:int.
-  forall total2:int. forall item1:int. forall i2:int.
-  forall a:(int,integer) farray. ((((-2147483648) <= 2147483647) ->
-  in_range1(s)) -> ((((-2147483648) <= 2147483647) -> in_range1(total)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(a_lb)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(a_ub)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(item)) -> ((({ int__content =
-  result } = { int__content = a_lb }) and (a_lb1 = 1)) -> ((({ int__content =
-  result1 } = { int__content = a_ub }) and (a_ub1 = 10)) -> ((({
-  int__content = result2 } = { int__content = total }) and (total1 = 0)) ->
-  (((a_lb1 = r1b) and in_range1(r1b)) -> (((a_ub1 = r2b) and
-  in_range1(r2b)) -> ((({ int__content = result3 } = { int__content = i
-  }) and (i1 = r1b)) -> (((r1b <= i1) and (i1 <= r2b)) ->
-  ((((((-2147483648) <= 2147483647) -> in_range1(total2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(item1))) and ((r1b <= i2) and
-  (i2 <= r2b))) -> ((temp___179 = a) -> (1 <= i2))))))))))))))))
+goal WP_parameter_def : (1 <= i2)

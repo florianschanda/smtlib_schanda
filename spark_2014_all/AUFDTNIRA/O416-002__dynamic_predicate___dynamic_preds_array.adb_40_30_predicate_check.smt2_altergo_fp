@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -400,8 +400,23 @@ axiom def_axiom :
   ((dynamic_preds_array__init_even_pair__tmp__aggregate_def(temp___253,
   temp___254)[2]) = of_rep(temp___254))))
 
+logic x : (int,even) farray
+
+logic temp___256 : int
+
+logic temp___258 : int
+
+logic o : int
+
+axiom H : (in_range1(i11s) and (mod(i11s, 2) = 0))
+
+axiom H1 : true
+
+axiom H2 : in_range(a)
+
+axiom H3 : in_range(b)
+
+axiom H4 : ((temp___258 = b) and in_range1(b))
+
  (* File "dynamic_preds_array.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___258:int. ((in_range1(i11s) and (mod(i11s, 2) = 0)) ->
-  (in_range(a) -> (in_range(b) -> (((temp___258 = b) and in_range1(b)) ->
-  (mod(temp___258, 2) = 0))))))
+goal WP_parameter_def : (mod(temp___258, 2) = 0)

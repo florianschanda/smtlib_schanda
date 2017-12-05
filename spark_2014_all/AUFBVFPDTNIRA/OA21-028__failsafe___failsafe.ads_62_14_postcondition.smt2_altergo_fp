@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1802,24 +1802,50 @@ axiom is_valid__def_axiom :
   (failsafe__counter = time_below_threshold(failsafe__model__battery_level_at,
   failsafe__model__current_time)))))
 
+logic battery_level_at : (t,battery_level_type) farray
+
+logic current_time : t
+
+logic counter : t
+
+logic failsafe__is_raised__result : bool
+
+logic result : bool
+
+logic failsafe__is_raised__result1 : bool
+
+logic failsafe__is_raised__result2 : bool
+
+logic failsafe__is_raised__result3 : bool
+
+logic failsafe__is_raised__result4 : bool
+
+logic failsafe__is_raised__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range4(counter)
+
+axiom H1 : in_range1(current_time)
+
+axiom H2 : (is_valid(battery_level_at, current_time, counter) = true)
+
+axiom H3 : (failsafe__is_raised__result1 = failsafe__is_raised__result2)
+
+axiom H4 : (failsafe__is_raised__result3 = failsafe__is_raised__result1)
+
+axiom H5 : (result = failsafe__is_raised__result)
+
+axiom H6 : ((uge(counter, of_int(50)) ->
+  (failsafe__is_raised__result1 = true)) and ((not uge(counter,
+  of_int(50))) -> (failsafe__is_raised__result1 = false)))
+
+axiom H7 : (failsafe__is_raised__result4 = failsafe__is_raised__result2)
+
+axiom H8 : (failsafe__is_raised__result5 = failsafe__is_raised__result3)
+
+axiom H9 : (result1 = failsafe__is_raised__result4)
+
  (* File "failsafe.ads", line 60, characters 0-0 *)
-goal WP_parameter_def :
-  (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. forall counter:t.
-  forall failsafe__is_raised__result:bool. forall result:bool.
-  forall failsafe__is_raised__result1:bool.
-  forall failsafe__is_raised__result2:bool.
-  forall failsafe__is_raised__result3:bool.
-  forall failsafe__is_raised__result4:bool.
-  forall failsafe__is_raised__result5:bool.
-  (forall result1:bool. ((in_range4(counter) and (in_range1(current_time) and
-  ((is_valid(battery_level_at, current_time, counter) = true) and
-  (((((failsafe__is_raised__result1 = failsafe__is_raised__result2) and
-  (failsafe__is_raised__result3 = failsafe__is_raised__result1)) and
-  ((result = failsafe__is_raised__result) and ((uge(counter, of_int(50)) and
-  (failsafe__is_raised__result1 = true)) or ((not uge(counter,
-  of_int(50))) and (failsafe__is_raised__result1 = false))))) and
-  ((failsafe__is_raised__result4 = failsafe__is_raised__result2) and
-  (failsafe__is_raised__result5 = failsafe__is_raised__result3))) and
-  (result1 = failsafe__is_raised__result4))))) -> (is_valid(battery_level_at,
-  current_time, counter) = true))))
+goal WP_parameter_def : (is_valid(battery_level_at, current_time,
+  counter) = true)

@@ -39,6 +39,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
 (assert (in_range n))
 (assert (not (< n 3)))
 (assert (and (= o1 (- n 2)) (in_range (- n 2))))

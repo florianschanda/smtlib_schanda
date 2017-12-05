@@ -79,14 +79,39 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : bool
+
+logic p__f_y__result : bool
+
+logic result : bool
+
+logic p__f_y__result1 : bool
+
+logic p__f_y__result2 : bool
+
+logic p__f_y__result3 : bool
+
+logic p__f_y__result4 : bool
+
+logic p__f_y__result5 : bool
+
+logic result1 : bool
+
+axiom H : (p__f_y__result1 = p__f_y__result2)
+
+axiom H1 : (p__f_y__result3 = p__f_y__result1)
+
+axiom H2 : (result = p__f_y__result)
+
+axiom H3 : (p__f_y__result1 = x)
+
+axiom H4 : (p__f_y__result4 = p__f_y__result2)
+
+axiom H5 : (p__f_y__result5 = p__f_y__result3)
+
+axiom H6 : (result1 = p__f_y__result4)
+
+axiom H7 : (p__f_y__result4 = true)
+
  (* File "p.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:bool. forall p__f_y__result:bool. forall result:bool.
-  forall p__f_y__result1:bool. forall p__f_y__result2:bool.
-  forall p__f_y__result3:bool. forall p__f_y__result4:bool.
-  forall p__f_y__result5:bool.
-  (forall result1:bool. ((((((p__f_y__result1 = p__f_y__result2) and
-  (p__f_y__result3 = p__f_y__result1)) and ((result = p__f_y__result) and
-  (p__f_y__result1 = x))) and ((p__f_y__result4 = p__f_y__result2) and
-  (p__f_y__result5 = p__f_y__result3))) and (result1 = p__f_y__result4)) ->
-  ((p__f_y__result4 = true) -> (x = true)))))
+goal WP_parameter_def : (x = true)

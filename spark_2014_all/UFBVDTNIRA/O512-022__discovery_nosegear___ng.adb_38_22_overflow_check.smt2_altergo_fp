@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -688,7 +688,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -899,67 +899,238 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
- (* File "ng.adb", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall prevtime:t. forall prevcount:t. forall success:bool.
-  forall result__:int. forall t1:int. forall t2:int. forall d1:int.
-  forall d2:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:int. forall o11:int. forall o12:int.
-  forall success1:bool. forall result__1:int. forall t11:int. forall t21:int.
-  forall d11:int. forall d21:int. forall result:bool. forall success2:bool.
-  forall result1:int. forall result__2:int. forall result2:int.
-  forall t12:int. forall result3:int. forall t22:int. forall result4:int.
-  forall d12:int. forall result5:int. forall d22:int. forall result6:bool.
-  forall success3:bool. forall result7:int. forall result__3:int.
-  forall success4:bool. forall result__4:int. forall t13:int. forall t23:int.
-  forall d13:int. forall d23:int. forall success5:bool. forall result__5:int.
-  forall t14:int. forall t24:int. forall d14:int. forall d24:int.
-  forall success6:bool. forall result__6:int. forall t15:int. forall t25:int.
-  forall d15:int. forall d25:int. forall success7:bool. forall result__7:int.
-  forall t16:int. forall t26:int. forall d16:int. forall d26:int.
-  (((0 <= 2147483647) -> in_range4(result__)) ->
-  (((not (thistime = prevtime)) and (not (thiscount = prevcount))) ->
-  (((((0 <= 2147483647) -> in_range2(t1)) and (((0 <= 2147483647) ->
-  in_range2(t2)) and (((0 <= 2147483647) -> in_range3(d1)) and
-  (((0 <= 2147483647) -> in_range3(d2)) and ((((({ int__content = d23 } = {
-  int__content = d2 }) and (({ int__content = d13 } = { int__content = d1
-  }) and (({ int__content = t23 } = { int__content = t2 }) and (({
-  int__content = t13 } = { int__content = t1 }) and
-  ((result__2 = result__4) and (success2 = success4)))))) and
+logic prevtime : t
+
+logic prevcount : t
+
+logic success : bool
+
+logic result__ : int
+
+logic t1 : int
+
+logic t2 : int
+
+logic d1 : int
+
+logic d2 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic success1 : bool
+
+logic result__1 : int
+
+logic t11 : int
+
+logic t21 : int
+
+logic d11 : int
+
+logic d21 : int
+
+logic result : bool
+
+logic success2 : bool
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic t12 : int
+
+logic result3 : int
+
+logic t22 : int
+
+logic result4 : int
+
+logic d12 : int
+
+logic result5 : int
+
+logic d22 : int
+
+logic result6 : bool
+
+logic success3 : bool
+
+logic result7 : int
+
+logic result__3 : int
+
+logic success4 : bool
+
+logic result__4 : int
+
+logic t13 : int
+
+logic t23 : int
+
+logic d13 : int
+
+logic d23 : int
+
+logic success5 : bool
+
+logic result__5 : int
+
+logic t14 : int
+
+logic t24 : int
+
+logic d14 : int
+
+logic d24 : int
+
+logic success6 : bool
+
+logic result__6 : int
+
+logic t15 : int
+
+logic t25 : int
+
+logic d15 : int
+
+logic d25 : int
+
+logic success7 : bool
+
+logic result__7 : int
+
+logic t16 : int
+
+logic t26 : int
+
+logic d16 : int
+
+logic d26 : int
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : ((0 <= 2147483647) -> in_range4(result__))
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : ((not (thistime = prevtime)) and (not (thiscount = prevcount)))
+
+axiom H7 : ((0 <= 2147483647) -> in_range2(t1))
+
+axiom H8 : ((0 <= 2147483647) -> in_range2(t2))
+
+axiom H9 : ((0 <= 2147483647) -> in_range3(d1))
+
+axiom H10 : ((0 <= 2147483647) -> in_range3(d2))
+
+axiom H11 : (((((d23 = d2) and ((d13 = d1) and ((t23 = t2) and
+  ((t13 = t1) and ((result__2 = result__4) and (success2 = success4)))))) and
   ((d24 = d21) and ((d14 = d11) and ((t24 = t21) and ((t14 = t11) and
   ((result__5 = result__2) and (success5 = success2))))))) and
-  (ult(sub(thiscount, prevcount), sub(thistime, prevtime)) and ((({
-  bool__content = result } = { bool__content = success }) and
-  (success2 = of_int1(0))) and (({ int__content = result1 } = {
-  int__content = result__ }) and (result__2 = 0))))) or
-  (((not ult(sub(thiscount, prevcount), sub(thistime, prevtime))) and
-  (((result__2 = result__) and (success2 = success)) and
-  ((result__2 = result__1) and (success2 = success1)))) and
-  ((((d22 = d23) and ((d12 = d13) and ((t22 = t23) and ((t12 = t13) and
-  ((result__3 = result__4) and (success3 = success4)))))) and
-  ((d24 = d22) and ((d14 = d12) and ((t24 = t22) and ((t14 = t12) and
-  ((result__5 = result__3) and (success5 = success3))))))) and ((({
-  int__content = result2 } = { int__content = t1 }) and
-  (t12 = tqtint(sub(thistime, prevtime)))) and ((({ int__content = result3
-  } = { int__content = t2 }) and (t22 = tqtint(sub(currtime, thistime)))) and
+  (ult(sub(thiscount, prevcount), sub(thistime, prevtime)) and
+  (((result = success) and (success2 = of_int1(0))) and
+  ((result1 = result__) and (result__2 = 0))))) or (((not ult(sub(thiscount,
+  prevcount), sub(thistime, prevtime))) and (((result__2 = result__) and
+  (success2 = success)) and ((result__2 = result__1) and
+  (success2 = success1)))) and ((((d23 = d22) and ((d12 = d13) and
+  ((t22 = t23) and ((t12 = t13) and ((result__3 = result__4) and
+  (success3 = success4)))))) and ((d24 = d22) and ((d14 = d12) and
+  ((t24 = t22) and ((t14 = t12) and ((result__5 = result__3) and
+  (success5 = success3))))))) and (((result2 = t1) and
+  (t12 = tqtint(sub(thistime, prevtime)))) and (((result3 = t2) and
+  (t22 = tqtint(sub(currtime, thistime)))) and
   (((((o = (207 * tqtint(sub(thiscount, prevcount)))) and
   in_range1((207 * tqtint(sub(thiscount, prevcount))))) and ((o1 = o) and
-  in_range3(o))) and (({ int__content = result4 } = { int__content = d1
-  }) and (d12 = o1))) and ((((((o2 = (d12 * t22)) and
-  in_range1((d12 * t22))) and (o3 = comp_div(o2,t12))) and ((o4 = o3) and
-  in_range3(o3))) and (({ int__content = result5 } = { int__content = d2
-  }) and (d22 = o4))) and (((success2 = result6) and
+  in_range3(o))) and ((result4 = d1) and (d12 = o1))) and
+  ((((((o2 = (d12 * t22)) and in_range1((d12 * t22))) and
+  (o3 = comp_div(o2,t12))) and ((o4 = o3) and in_range3(o3))) and
+  ((result5 = d2) and (d22 = o4))) and (((success2 = result6) and
   (success3 = of_int1(1))) and (((((o8 = (t12 + t22)) and
   in_range1((t12 + t22))) and (((((o5 = (d12 + d22)) and
   in_range1((d12 + d22))) and (o6 = (o5 * 3600))) and ((o7 = o6) and
   in_range1(o6))) and (o9 = comp_div(o7,o8)))) and ((o10 = o9) and
-  in_range4(o9))) and ((result__2 = result7) and
-  (result__3 = o10))))))))))))))) and (((d25 = d23) and ((d15 = d13) and
-  ((t25 = t23) and ((t15 = t13) and ((result__6 = result__4) and ({
-  bool__content = success6 } = { bool__content = success4 })))))) and
-  ((d26 = d24) and ((d16 = d14) and ((t26 = t24) and ((t16 = t14) and
-  ((result__7 = result__5) and (success7 = success5)))))))) ->
-  ((success6 = true) -> ((((o11 = (207 * tqtint(sub(thiscount,
-  prevcount)))) and in_range1((207 * tqtint(sub(thiscount, prevcount))))) and
-  (o12 = (o11 * tqtint(sub(currtime, thistime))))) -> in_range1(o12)))))))
+  in_range4(o9))) and ((result__2 = result7) and (result__3 = o10)))))))))))
+
+axiom H12 : (d25 = d23)
+
+axiom H13 : (d15 = d13)
+
+axiom H14 : (t25 = t23)
+
+axiom H15 : (t15 = t13)
+
+axiom H16 : (result__6 = result__4)
+
+axiom H17 : (success6 = success4)
+
+axiom H18 : (d26 = d24)
+
+axiom H19 : (d16 = d14)
+
+axiom H20 : (t26 = t24)
+
+axiom H21 : (t16 = t14)
+
+axiom H22 : (result__7 = result__5)
+
+axiom H23 : (success7 = success5)
+
+axiom H24 : (success6 = true)
+
+axiom H25 : ((o11 = (207 * tqtint(sub(thiscount, prevcount)))) and
+  in_range1((207 * tqtint(sub(thiscount, prevcount)))))
+
+axiom H26 : (o12 = (o11 * tqtint(sub(currtime, thistime))))
+
+ (* File "ng.adb", line 68, characters 0-0 *)
+goal WP_parameter_def : in_range1(o12)

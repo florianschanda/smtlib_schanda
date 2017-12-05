@@ -52,6 +52,11 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : bool
+
+logic y : bool
+
+axiom H : (x = true)
+
  (* File "globs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:bool. forall y:bool. ((x = true) -> (y = true)))
+goal WP_parameter_def : (y = true)

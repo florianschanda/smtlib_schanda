@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1476,80 +1476,338 @@ axiom def_axiom :
   (forall temp___1222:int. (((temp___1217(temp___1219, temp___1220,
   temp___1221)).elts2[temp___1222]) = of_rep1(temp___1219))))))
 
- (* File "very_longs.adb", line 313, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:(int,octet) farray.
-  forall result____split_fields1:t1. forall old_overflow:t.
-  forall overflow_mask:t. forall i:int. forall us:int.
-  forall temp___1224:(int,octet) farray. forall temp___12241:t3.
-  forall temp___1225:(int,octet) farray. forall temp___12251:t2.
-  forall temp___1227:(int,octet) farray. forall temp___12271:t2.
-  forall o:(int,octet) farray. forall o1:t1. forall o2:(int,octet) farray.
-  forall o3:t1. forall temp___1229:digit_index_type.
-  forall temp___12291:(int,octet) farray. forall temp___12292:t1.
-  forall o4:t. forall result:t. forall old_overflow1:t.
-  forall result1:(int,octet) farray. forall result2:t1.
-  forall result____split_fields2:(int,octet) farray.
-  forall result____split_fields3:t1. forall result3:t.
-  forall overflow_mask1:t. forall result4:int__ref. forall i1:int.
-  forall result____split_fields4:us_split_fields. forall i2:int.
-  ((dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
+logic result____split_fields : (int,octet) farray
+
+logic result____split_fields1 : t1
+
+logic old_overflow : t
+
+logic new_overflow : t
+
+logic overflow_mask : t
+
+logic i : int
+
+logic o : int
+
+logic us : int
+
+logic temp___1224 : (int,octet) farray
+
+logic temp___12241 : t3
+
+logic temp___1225 : (int,octet) farray
+
+logic temp___12251 : t2
+
+logic temp___1227 : (int,octet) farray
+
+logic temp___12271 : t2
+
+logic o1 : (int,octet) farray
+
+logic o2 : t1
+
+logic o3 : (int,octet) farray
+
+logic o4 : t1
+
+logic temp___1229 : digit_index_type
+
+logic temp___12291 : (int,octet) farray
+
+logic temp___12292 : t1
+
+logic o5 : t
+
+logic temp___1243 : t
+
+logic temp___1240 : digit_index_type
+
+logic temp___12401 : (int,octet) farray
+
+logic temp___12402 : t1
+
+logic temp___1239 : t
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : int
+
+logic o12 : octet
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : octet
+
+logic o16 : int
+
+logic o17 : (int,octet) farray
+
+logic o18 : (int,octet) farray
+
+logic o19 : t1
+
+logic o20 : (int,octet) farray
+
+logic o21 : t1
+
+logic temp___1234 : digit_index_type
+
+logic temp___12341 : (int,octet) farray
+
+logic temp___12342 : t1
+
+logic o22 : int
+
+logic o23 : octet
+
+logic o24 : t
+
+logic o25 : t
+
+logic o26 : octet
+
+logic o27 : int
+
+logic o28 : (int,octet) farray
+
+logic o29 : (int,octet) farray
+
+logic o30 : t1
+
+logic o31 : (int,octet) farray
+
+logic o32 : t1
+
+logic temp___1238 : digit_index_type
+
+logic temp___12381 : (int,octet) farray
+
+logic temp___12382 : t1
+
+logic o33 : octet
+
+logic new_overflow1 : t
+
+logic result : t
+
+logic old_overflow1 : t
+
+logic result1 : (int,octet) farray
+
+logic result2 : t1
+
+logic result____split_fields2 : (int,octet) farray
+
+logic result____split_fields3 : t1
+
+logic result3 : t
+
+logic overflow_mask1 : t
+
+logic result4 : int
+
+logic i1 : int
+
+logic result____split_fields4 : (int,octet) farray
+
+logic result____split_fields5 : t1
+
+logic old_overflow2 : t
+
+logic new_overflow2 : t
+
+logic i2 : int
+
+logic result5 : t
+
+logic new_overflow3 : t
+
+logic result6 : (int,octet) farray
+
+logic result7 : t1
+
+logic result____split_fields6 : (int,octet) farray
+
+logic result____split_fields7 : t1
+
+logic result8 : (int,octet) farray
+
+logic result9 : t1
+
+logic result____split_fields8 : (int,octet) farray
+
+logic result____split_fields9 : t1
+
+logic result10 : t
+
+logic old_overflow3 : t
+
+logic result____split_fields10 : (int,octet) farray
+
+logic result____split_fields11 : t1
+
+logic old_overflow4 : t
+
+logic new_overflow4 : t
+
+logic i3 : int
+
+logic result____split_fields12 : (int,octet) farray
+
+logic result____split_fields13 : t1
+
+logic old_overflow5 : t
+
+logic new_overflow5 : t
+
+logic i4 : int
+
+logic result____split_fields14 : (int,octet) farray
+
+logic result____split_fields15 : t1
+
+logic old_overflow6 : t
+
+logic new_overflow6 : t
+
+logic i5 : int
+
+logic result____split_fields16 : (int,octet) farray
+
+logic result____split_fields17 : t1
+
+logic old_overflow7 : t
+
+logic new_overflow7 : t
+
+logic i6 : int
+
+axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
   to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number)))) -> ((dynamic_property1(1,
-  to_rep(result____split_discrs), to_rep2(first(result____split_fields1)),
+  (to_rep2(last(number2)) = to_rep(number))))
+
+axiom H1 : (dynamic_property1(1, to_rep(result____split_discrs),
+  to_rep2(first(result____split_fields1)),
   to_rep2(last(result____split_fields1))) and
   ((to_rep2(first(result____split_fields1)) = 1) and
-  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs)))) ->
-  (in_range4(distance) ->
-  ((to_rep(result____split_discrs) = (to_rep(number) + 1)) ->
-  (((us = to_rep(number)) and in_range2(to_rep(number))) ->
-  (((result = old_overflow) and (old_overflow1 = of_int(0))) ->
-  (((to_rep(result____split_discrs) = r124b) and in_range2(r124b)) ->
-  (((((((((to_rep2(first4((temp___1217(of_int(0), 1, r124b)).rt2)) = 1) and
-  ((to_rep2(last4((temp___1217(of_int(0), 1, r124b)).rt2)) = r124b) and ({
-  elts2 = temp___1224; rt2 = temp___12241 } = temp___1217(of_int(0), 1,
-  r124b)))) and
-  ((((to_rep2(first4(temp___12241)) <= to_rep2(last4(temp___12241))) and
-  (((1 <= r124b) and
-  (((to_rep2(last4(temp___12241)) - to_rep2(first4(temp___12241))) + 1) = ((r124b - 1) + 1))) or
-  ((not (1 <= r124b)) and
-  (((to_rep2(last4(temp___12241)) - to_rep2(first4(temp___12241))) + 1) = 0)))) or
-  ((not (to_rep2(first4(temp___12241)) <= to_rep2(last4(temp___12241)))) and
-  (((1 <= r124b) and (0 = ((r124b - 1) + 1))) or (not (1 <= r124b))))) and
-  ((temp___1224 = temp___1225) and (mk1(to_rep2(first4(temp___12241)),
-  to_rep2(last4(temp___12241))) = temp___12251)))) and
-  ((((to_rep2(first2(temp___12251)) <= to_rep2(last2(temp___12251))) and
-  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
-  (((to_rep2(last2(temp___12251)) - to_rep2(first2(temp___12251))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
-  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) and
-  (((to_rep2(last2(temp___12251)) - to_rep2(first2(temp___12251))) + 1) = 0)))) or
-  ((not (to_rep2(first2(temp___12251)) <= to_rep2(last2(temp___12251)))) and
-  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) and
-  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) or
-  (not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))))))) and
-  ((temp___1227 = temp___1225) and (temp___12271 = temp___12251)))) and
-  ((temp___1227 = o) and (mk(to_rep2(first2(temp___12271)),
-  to_rep2(last2(temp___12271))) = o1))) and ((o2 = o) and (o3 = o1))) and
-  ((result____split_discrs = temp___1229) and ((temp___12291 = o2) and
-  (temp___12292 = o3)))) and ((((result1 = result____split_fields) and
-  (result2 = result____split_fields1)) and
-  ((temp___12291 = result____split_fields2) and
-  (temp___12292 = result____split_fields3))) and
-  (result____split_discrs = temp___1229))) -> ((((((8 - distance) <  8) and
-  (o4 = lsl_bv(of_int(255), of_int((8 - distance))))) or
-  ((not ((8 - distance) <  8)) and (o4 = of_int(0)))) and
-  ((result3 = overflow_mask) and (overflow_mask1 = o4))) -> (((result4 = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= to_rep2(last(number2)))) -> ((((dynamic_property1(1,
-  to_rep(result____split_discrs),
-  to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)),
-  to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt))) and
-  ((to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) = 1) and
-  (to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) = to_rep(result____split_discrs)))) and
+  (to_rep2(last(result____split_fields1)) = to_rep(result____split_discrs))))
+
+axiom H2 : in_range4(distance)
+
+axiom H3 : (to_rep(result____split_discrs) = (to_rep(number) + 1))
+
+axiom H4 : ((us = to_rep(number)) and in_range2(to_rep(number)))
+
+axiom H5 : (result = old_overflow)
+
+axiom H6 : (old_overflow1 = of_int(0))
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : (to_rep(result____split_discrs) = r124b)
+
+axiom H11 : in_range2(r124b)
+
+axiom H12 : (to_rep2(first4((temp___1217(of_int(0), 1, r124b)).rt2)) = 1)
+
+axiom H13 : (to_rep2(last4((temp___1217(of_int(0), 1, r124b)).rt2)) = r124b)
+
+axiom H14 : ({ elts2 = temp___1224; rt2 = temp___12241
+  } = temp___1217(of_int(0), 1, r124b))
+
+axiom H15 :
+  (((to_rep2(first4(temp___12241)) <= to_rep2(last4(temp___12241))) ->
+  (((1 <= r124b) ->
+  (((to_rep2(last4(temp___12241)) - to_rep2(first4(temp___12241))) + 1) = ((r124b - 1) + 1))) and
+  ((not (1 <= r124b)) ->
+  (((to_rep2(last4(temp___12241)) - to_rep2(first4(temp___12241))) + 1) = 0)))) and
+  ((not (to_rep2(first4(temp___12241)) <= to_rep2(last4(temp___12241)))) ->
+  ((1 <= r124b) -> (0 = ((r124b - 1) + 1)))))
+
+axiom H16 : (temp___1224 = temp___1225)
+
+axiom H17 : (mk1(to_rep2(first4(temp___12241)),
+  to_rep2(last4(temp___12241))) = temp___12251)
+
+axiom H18 :
+  (((to_rep2(first2(temp___12251)) <= to_rep2(last2(temp___12251))) ->
+  (((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
+  (((to_rep2(last2(temp___12251)) - to_rep2(first2(temp___12251))) + 1) = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1))) and
+  ((not (to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1)))) ->
+  (((to_rep2(last2(temp___12251)) - to_rep2(first2(temp___12251))) + 1) = 0)))) and
+  ((not (to_rep2(first2(temp___12251)) <= to_rep2(last2(temp___12251)))) ->
+  ((to_rep2(first(result____split_fields1)) <= to_rep2(last(result____split_fields1))) ->
+  (0 = ((to_rep2(last(result____split_fields1)) - to_rep2(first(result____split_fields1))) + 1)))))
+
+axiom H19 : ((temp___1227 = temp___1225) and (temp___12271 = temp___12251))
+
+axiom H20 : (temp___1227 = o1)
+
+axiom H21 : (mk(to_rep2(first2(temp___12271)),
+  to_rep2(last2(temp___12271))) = o2)
+
+axiom H22 : (o3 = o1)
+
+axiom H23 : (o4 = o2)
+
+axiom H24 : (result____split_discrs = temp___1229)
+
+axiom H25 : (temp___12291 = o3)
+
+axiom H26 : (temp___12292 = o4)
+
+axiom H27 : ((result1 = result____split_fields) and
+  (result2 = result____split_fields1))
+
+axiom H28 : ((result____split_fields2 = temp___12291) and
+  (result____split_fields3 = temp___12292))
+
+axiom H29 : (result____split_discrs = temp___1229)
+
+axiom H30 : (((8 - distance) <  8) -> (o5 = lsl_bv(of_int(255),
+  of_int((8 - distance)))))
+
+axiom H31 : ((not ((8 - distance) <  8)) -> (o5 = of_int(0)))
+
+axiom H32 : (result3 = overflow_mask)
+
+axiom H33 : (overflow_mask1 = o5)
+
+axiom H34 : (result4 = i)
+
+axiom H35 : (i1 = 1)
+
+axiom H36 : (1 <= i1)
+
+axiom H37 : (i1 <= to_rep2(last(number2)))
+
+axiom H38 : (((dynamic_property1(1, to_rep(result____split_discrs),
+  to_rep2(first(result____split_fields5)),
+  to_rep2(last(result____split_fields5))) and
+  ((to_rep2(first(result____split_fields5)) = 1) and
+  (to_rep2(last(result____split_fields5)) = to_rep(result____split_discrs)))) and
   (forall temp___1242:int.
-  (((to_rep2(first(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)) <= temp___1242) and
-  (temp___1242 <= to_rep2(last(((result____split_fields4).rec__very_longs__very_long__long_digits).rt)))) ->
+  (((to_rep2(first(result____split_fields5)) <= temp___1242) and
+  (temp___1242 <= to_rep2(last(result____split_fields5)))) ->
   ((i2 <= temp___1242) ->
-  ((((result____split_fields4).rec__very_longs__very_long__long_digits).elts[temp___1242]) = (result____split_fields2[temp___1242])))))) and
-  ((1 <= i2) and (i2 <= to_rep2(last(number2))))) ->
-  (to_rep2(first(number2)) <= i2))))))))))))))
+  ((result____split_fields4[temp___1242]) = (result____split_fields2[temp___1242])))))) and
+  ((1 <= i2) and (i2 <= to_rep2(last(number2)))))
+
+ (* File "very_longs.adb", line 313, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(number2)) <= i2)

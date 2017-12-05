@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type even
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -270,8 +270,25 @@ function even__ref___projection(a: even__ref) : even = (a).even__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic result : int
+
+logic x1 : int
+
+logic x2 : int
+
+logic x3 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = 2)
+
+axiom H3 : (x1 = x2)
+
+axiom H4 : (x3 = x1)
+
  (* File "dynamic_preds_array.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall result:int. forall x1:int. forall x2:int.
-  forall x3:int. ((in_range1(x) and (((result = x) and (x1 = 2)) and
-  ((x1 = x2) and (x3 = x1)))) -> in_range2(x2)))
+goal WP_parameter_def : in_range2(x2)

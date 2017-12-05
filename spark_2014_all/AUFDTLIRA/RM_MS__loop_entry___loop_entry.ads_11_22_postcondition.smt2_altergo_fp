@@ -280,7 +280,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -343,37 +343,135 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "loop_entry.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,elementtype) farray. forall i:int.
-  forall temp___160:(int,elementtype) farray. forall temp___159:int.
-  forall temp___157:(int,elementtype) farray. forall o:elementtype.
-  forall o1:(int,elementtype) farray. forall a1:(int,elementtype) farray.
-  forall result:int. forall i1:int. forall result1:(int,elementtype) farray.
-  forall a2:(int,elementtype) farray. forall a3:(int,elementtype) farray.
-  forall i2:int. forall a4:(int,elementtype) farray. forall i3:int.
-  forall a5:(int,elementtype) farray. forall i4:int.
-  forall a6:(int,elementtype) farray. forall i5:int.
-  forall a7:(int,elementtype) farray. forall i6:int.
-  forall a8:(int,elementtype) farray. forall i7:int.
-  forall a9:(int,elementtype) farray. forall i8:int. ((in_range2(l) and
-  (in_range2(u) and (((({ int__content = result } = { int__content = i }) and
-  (i1 = l)) and ((((l <= i1) and (i1 <= u)) and ((((temp___160 = a) and
+logic a : (int,elementtype) farray
+
+logic i : int
+
+logic temp___160 : (int,elementtype) farray
+
+logic temp___159 : int
+
+logic temp___157 : (int,elementtype) farray
+
+logic o : elementtype
+
+logic o1 : (int,elementtype) farray
+
+logic n : int
+
+logic o2 : bool
+
+logic o3 : elementtype
+
+logic o4 : (int,elementtype) farray
+
+logic n1 : int
+
+logic o5 : bool
+
+logic a1 : (int,elementtype) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,elementtype) farray
+
+logic a2 : (int,elementtype) farray
+
+logic a3 : (int,elementtype) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,elementtype) farray
+
+logic a4 : (int,elementtype) farray
+
+logic a5 : (int,elementtype) farray
+
+logic i4 : int
+
+logic a6 : (int,elementtype) farray
+
+logic i5 : int
+
+logic a7 : (int,elementtype) farray
+
+logic i6 : int
+
+logic a8 : (int,elementtype) farray
+
+logic i7 : int
+
+logic a9 : (int,elementtype) farray
+
+logic i8 : int
+
+logic a10 : (int,elementtype) farray
+
+logic i9 : int
+
+logic a11 : (int,elementtype) farray
+
+logic i10 : int
+
+logic a12 : (int,elementtype) farray
+
+logic i11 : int
+
+axiom H : in_range2(l)
+
+axiom H1 : in_range2(u)
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = l)
+
+axiom H4 : (((l <= i1) and (i1 <= u)) -> (((temp___160 = a) and
   ((temp___159 = i1) and ((temp___157 = a) and ((((to_rep(o) = 0) and
-  (o1 = (a[i1 <- o]))) and (({ map__content = result1 } = { map__content = a
-  }) and (a2 = o1))) and
-  (((forall n:int. (((l <= n) and (n <= i2)) -> (to_rep((a3[n])) = 0))) and
-  (forall n:int. (((1 <= n) and (n <= 100)) -> (((n <  l) or (i2 <  n)) ->
-  (to_rep((a3[n])) = to_rep((temp___160[n]))))))) and
+  (o1 = (a[i1 <- o]))) and ((result1 = a) and (a2 = o1))) and
+  (((forall n2:int. (((l <= n2) and (n2 <= i2)) -> (to_rep((a3[n2])) = 0))) and
+  (forall n2:int. (((1 <= n2) and (n2 <= 100)) -> (((n2 <  l) or
+  (i2 <  n2)) -> (to_rep((a3[n2])) = to_rep((temp___160[n2]))))))) and
   ((((forall temp___158:int. (((1 <= temp___158) and (temp___158 <= 100)) ->
      ((i2 <  temp___158) -> ((a3[temp___158]) = (temp___157[temp___158]))))) and
   ((l <= u) -> dynamic_property(l, u, i2))) and ((l <= i2) and
-  (i2 <= u))) and (i2 = u))))))) and (((i2 = i3) and (a3 = a4)) and
-  ((i4 = i2) and (a5 = a3)))) and ((({ int__content = i5 } = { int__content =
-  i3 }) and ({ map__content = a6 } = { map__content = a4 })) and
-  ((i6 = i4) and (a7 = a5))))) or ((not ((l <= i1) and (i1 <= u))) and
-  (((i1 = i5) and ({ map__content = a6 } = { map__content = a })) and
-  ((i6 = i1) and (a7 = a1)))))) and ((({ int__content = i7 } = {
-  int__content = i5 }) and ({ map__content = a8 } = { map__content = a6
-  })) and ((i8 = i6) and (a9 = a7)))))) ->
-  (forall n:int. (((l <= n) and (n <= u)) -> (to_rep((a8[n])) = 0)))))
+  (i2 <= u))) and (i2 = u))))))) and (((i2 = i6) and (a3 = a7)) and
+  ((i7 = i2) and (a8 = a3)))))
+
+axiom H5 : (((l <= i1) and (i1 <= u)) -> (i8 = i6))
+
+axiom H6 : (((l <= i1) and (i1 <= u)) -> (a9 = a7))
+
+axiom H7 : (((l <= i1) and (i1 <= u)) -> (i9 = i7))
+
+axiom H8 : (((l <= i1) and (i1 <= u)) -> (a10 = a8))
+
+axiom H9 : ((not ((l <= i1) and (i1 <= u))) -> (i1 = i8))
+
+axiom H10 : ((not ((l <= i1) and (i1 <= u))) -> (a9 = a))
+
+axiom H11 : ((not ((l <= i1) and (i1 <= u))) -> (i9 = i1))
+
+axiom H12 : ((not ((l <= i1) and (i1 <= u))) -> (a10 = a1))
+
+axiom H13 : (i10 = i8)
+
+axiom H14 : (a11 = a9)
+
+axiom H15 : (i11 = i9)
+
+axiom H16 : (a12 = a10)
+
+logic n2 : int
+
+axiom H17 : (l <= n2)
+
+axiom H18 : (n2 <= u)
+
+ (* File "loop_entry.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (to_rep((a11[n2])) = 0)

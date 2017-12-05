@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -291,55 +291,129 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall math_simple_abstract__gcd__result:int. forall o:int.
-  forall temp___132:int. forall o1:int. forall x:int. forall o2:int.
-  forall o3:bool. forall result:int. forall c1:int. forall c2:int.
-  forall result1:int. forall c3:int. forall c4:int. forall c5:int.
-  forall c6:int. forall c7:int. forall c8:int. forall c9:int.
-  forall result2:int. forall math_simple_abstract__gcd__result1:int.
-  forall math_simple_abstract__gcd__result2:int.
-  forall math_simple_abstract__gcd__result3:int. forall c10:int.
-  forall math_simple_abstract__gcd__result4:int. forall c11:int.
-  forall math_simple_abstract__gcd__result5:int. forall result3:bool.
-  forall result4:bool. (in_range1(a) -> (in_range1(b) -> ((((((o = min(a,
-  b)) and in_range1(min(a, b))) and (({ int__content = result } = {
-  int__content = c }) and (c1 = o))) and (in_range1(c1) and ((((1 <  c1) and
-  ((((temp___132 = c1) and ((((c1 = c4) and (c5 = c1)) and ((mod(a,
+logic c : int
+
+logic math_simple_abstract__gcd__result : int
+
+logic o : int
+
+logic temp___132 : int
+
+logic x : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic x1 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic result : int
+
+logic c1 : int
+
+logic c2 : int
+
+logic result1 : int
+
+logic c3 : int
+
+logic c4 : int
+
+logic c5 : int
+
+logic c6 : int
+
+logic c7 : int
+
+logic c8 : int
+
+logic c9 : int
+
+logic c10 : int
+
+logic c11 : int
+
+logic result2 : int
+
+logic math_simple_abstract__gcd__result1 : int
+
+logic math_simple_abstract__gcd__result2 : int
+
+logic math_simple_abstract__gcd__result3 : int
+
+logic c12 : int
+
+logic math_simple_abstract__gcd__result4 : int
+
+logic c13 : int
+
+logic math_simple_abstract__gcd__result5 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (((((o = min(a, b)) and in_range1(min(a, b))) and
+  ((result = c) and (c1 = o))) and (in_range1(c1) and ((((1 <  c1) ->
+  ((((temp___132 = c1) and ((((c1 = c6) and (c7 = c1)) and ((mod(a,
   c1) = 0) and (mod(b, c1) = 0))) or ((not ((mod(a, c1) = 0) and (mod(b,
-  c1) = 0))) and (((c3 = c4) and (c5 = c3)) and ((((not (mod(a, c1) = 0)) and
-  (not (divides(c1, a) = true))) or ((mod(a, c1) = 0) and (not (divides(c1,
+  c1) = 0))) and (((c3 = c6) and (c7 = c3)) and ((((not (mod(a, c1) = 0)) ->
+  (not (divides(c1, a) = true))) and ((mod(a, c1) = 0) -> (not (divides(c1,
   b) = true)))) and
-  ((forall x1:int. (((c2 <= x1) and (x1 <= min(a, b))) -> (not ((divides(x1,
-   a) = true) and (divides(x1, b) = true))))) and
-  (((1 <= 2147483647) -> in_range1(c2)) and ((((o1 = (c2 - 1)) and
-  in_range1((c2 - 1))) and ((c2 = result1) and (c3 = o1))) and
-  ((not (1 <  c3)) or ((1 <  c3) and ((mod(a, c3) = 0) and (mod(b,
-  c3) = 0)))))))))))) and (({ int__content = c6 } = { int__content = c4
-  }) and (c7 = c5))) and (({ int__content = c8 } = { int__content = c6 }) and
-  (c9 = c7)))) or ((not (1 <  c1)) and ((c1 = c8) and (c9 = c1)))) and
-  ((divides(c8, a) = true) and ((divides(c8, b) = true) and
+  ((forall x2:int. (((c2 <= x2) and (x2 <= min(a, b))) -> (not ((divides(x2,
+   a) = true) and (divides(x2, b) = true))))) and (((1 <= 2147483647) ->
+  in_range1(c2)) and ((((o4 = (c2 - 1)) and in_range1((c2 - 1))) and
+  ((c2 = result1) and (c3 = o4))) and ((not (1 <  c3)) or ((1 <  c3) and
+  ((mod(a, c3) = 0) and (mod(b, c3) = 0)))))))))))) and ((c8 = c6) and
+  (c9 = c7))) and ((c10 = c8) and (c11 = c9)))) and ((not (1 <  c1)) ->
+  ((c1 = c10) and (c11 = c1)))) and ((divides(c10, a) = true) and
+  ((divides(c10, b) = true) and
   (((math_simple_abstract__gcd__result1 = math_simple_abstract__gcd__result2) and
   (math_simple_abstract__gcd__result3 = math_simple_abstract__gcd__result1)) and
-  (({ int__content = result2 } = { int__content =
-  math_simple_abstract__gcd__result }) and
-  (math_simple_abstract__gcd__result1 = c8)))))))) and ((({ int__content =
-  math_simple_abstract__gcd__result4 } = { int__content =
-  math_simple_abstract__gcd__result2 }) and ({ int__content = c10 } = {
-  int__content = c8 })) and
+  ((result2 = math_simple_abstract__gcd__result) and
+  (math_simple_abstract__gcd__result1 = c10)))))))) and
+  (((math_simple_abstract__gcd__result4 = math_simple_abstract__gcd__result2) and
+  (c12 = c10)) and
   ((math_simple_abstract__gcd__result5 = math_simple_abstract__gcd__result3) and
-  (c11 = c9)))) -> (((result3 = divides(math_simple_abstract__gcd__result4,
-  a)) and ((result3 = true) <->
-  (exists c12:int. (((1 <= c12) and (c12 <= 2147483647)) and
-  ((math_simple_abstract__gcd__result4 * c12) = a))))) ->
-  ((result3 = true) ->
-  (((result4 = divides(math_simple_abstract__gcd__result4, b)) and
+  (c13 = c11))))
+
+axiom H3 : ((result3 = divides(math_simple_abstract__gcd__result4, a)) and
+  ((result3 = true) <->
+  (exists c14:int. (((1 <= c14) and (c14 <= 2147483647)) and
+  ((math_simple_abstract__gcd__result4 * c14) = a)))))
+
+axiom H4 : (result3 = true)
+
+axiom H5 : ((result4 = divides(math_simple_abstract__gcd__result4, b)) and
   ((result4 = true) <->
-  (exists c12:int. (((1 <= c12) and (c12 <= 2147483647)) and
-  ((math_simple_abstract__gcd__result4 * c12) = b))))) ->
-  ((result4 = true) -> ((((math_simple_abstract__gcd__result4 + 1) <= x) and
-  (x <= min(a, b))) -> ((((o2 = x) and in_range1(x)) and ((o3 = divides(o2,
-  b)) and ((o3 = true) <->
-  (exists c12:int. (((1 <= c12) and (c12 <= 2147483647)) and
-  ((o2 * c12) = b)))))) -> in_range1(x)))))))))))
+  (exists c14:int. (((1 <= c14) and (c14 <= 2147483647)) and
+  ((math_simple_abstract__gcd__result4 * c14) = b)))))
+
+axiom H6 : (result4 = true)
+
+axiom H7 : ((math_simple_abstract__gcd__result4 + 1) <= x1)
+
+axiom H8 : (x1 <= min(a, b))
+
+axiom H9 : ((o6 = x1) and in_range1(x1))
+
+axiom H10 : ((o7 = divides(o6, b)) and ((o7 = true) <->
+  (exists c14:int. (((1 <= c14) and (c14 <= 2147483647)) and
+  ((o6 * c14) = b)))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(x1)

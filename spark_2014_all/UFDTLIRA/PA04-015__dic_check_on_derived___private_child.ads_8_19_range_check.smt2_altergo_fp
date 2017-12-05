@@ -545,5 +545,7 @@ axiom private_child__TxS__compat_axiom :
   rec__private_child__p_c__nested__c = x1; rec__ext__1 = x2 }; attr__tag1 =
   x3 }))))
 
+logic us : int
+
  (* File "generic_child.ads", line 8, characters 0-0 *)
 goal WP_parameter_def : in_range(10)

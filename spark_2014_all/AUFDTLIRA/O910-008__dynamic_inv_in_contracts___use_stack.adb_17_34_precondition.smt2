@@ -147,6 +147,7 @@
 (declare-const o1 positive)
 (declare-const o2 Int)
 (declare-const o3 (Array Int positive))
+(declare-const o4 Int)
 (declare-const result Int)
 (declare-const top1 Int)
 (declare-const result1 (Array Int positive))

@@ -53,6 +53,7 @@
 (define-fun dynamic_invariant ((temp___expr_202 Int) (temp___is_init_199 Bool) (temp___skip_constant_200 Bool) (temp___do_toplevel_201 Bool)) Bool (=> (or (= temp___is_init_199 true) (<= 0 98)) (in_range temp___expr_202)))
 (define-fun dynamic_invariant1 ((temp___expr_214 Int) (temp___is_init_211 Bool) (temp___skip_constant_212 Bool) (temp___do_toplevel_213 Bool)) Bool (=> (or (= temp___is_init_211 true) (<= 98 98)) (in_range1 temp___expr_214)))
 (declare-const self__ pT)
+(declare-const temp___1528 Bool)
 (assert (not (<= 98 1)))
 (check-sat)
 (exit)

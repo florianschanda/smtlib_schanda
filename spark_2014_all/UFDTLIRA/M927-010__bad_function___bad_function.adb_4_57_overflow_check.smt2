@@ -36,6 +36,7 @@
 (assert (forall ((x Int)) (! (=> (dynamic_invariant x true true true) (= (ident x) x)) :pattern ((ident x)))))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (ident 2147483647)) (and (in_range o) (= o 2147483647))))
 (assert (= o1 (+ o 1)))
 (assert (not (in_range o1)))

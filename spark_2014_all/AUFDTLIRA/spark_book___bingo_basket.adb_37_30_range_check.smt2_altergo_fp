@@ -321,14 +321,45 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic letter : int
+
+logic number : int
+
+logic the_basket : (int,callable_number) farray
+
+logic the_count : int
+
+logic o : int
+
+logic o1 : callable_number
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic number1 : int
+
+axiom H : in_range1(the_count)
+
+axiom H1 : ((0 <= 4) -> in_range3(letter))
+
+axiom H2 : ((1 <= 75) -> in_range2(number))
+
+axiom H3 : (not (empty(the_count) = true))
+
+axiom H4 : ((1 <= the_count) and (the_count <= 75))
+
+axiom H5 : (o = the_count)
+
+axiom H6 : (o1 = (the_basket[o]))
+
+axiom H7 : (o2 = to_rep(o1))
+
+axiom H8 : (result = number)
+
+axiom H9 : (number1 = o2)
+
  (* File "bingo_basket.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall letter:int. forall number:int.
-  forall the_basket:(int,callable_number) farray. forall the_count:int.
-  forall o:int. forall o1:callable_number. forall o2:int. forall result:int.
-  forall number1:int. (in_range1(the_count) -> (((0 <= 4) ->
-  in_range3(letter)) -> (((1 <= 75) -> in_range2(number)) ->
-  ((not (empty(the_count) = true)) -> (((((((1 <= the_count) and
-  (the_count <= 75)) and (o = the_count)) and (o1 = (the_basket[o]))) and
-  (o2 = to_rep(o1))) and ((result = number) and (number1 = o2))) ->
-  in_range1((the_count - 1))))))))
+goal WP_parameter_def : in_range1((the_count - 1))

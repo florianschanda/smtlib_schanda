@@ -498,20 +498,44 @@ logic p : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "road_traffic.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall conflicts:(int,us_rep) farray. forall l:(int,light) farray.
-  forall o:light. forall o1:(int,light) farray.
-  forall result:(int,light) farray. forall l1:(int,light) farray.
-  forall l2:(int,light) farray. forall l3:(int,light) farray.
-  ((in_range1(p) and ((((safety_property(l, conflicts) = true) and
+logic conflicts : (int,us_rep) farray
+
+logic l : (int,light) farray
+
+logic o : light
+
+logic o1 : (int,light) farray
+
+logic result : (int,light) farray
+
+logic l1 : (int,light) farray
+
+logic l2 : (int,light) farray
+
+logic l3 : (int,light) farray
+
+axiom H : in_range1(p)
+
+axiom H1 : (((safety_property(l, conflicts) = true) and
   (to_rep1((l[p])) = 0)) and
   (forall temp___223:int. (((1 <= temp___223) and (temp___223 <= 8)) ->
   (((not (to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__left) = to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__right))) and
   ((to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__left) = p) ->
   (to_rep1((l[to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__right)])) = 0))) and
   ((to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__right) = p) ->
-  (to_rep1((l[to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__left)])) = 0)))))) and
-  ((((to_rep1(o) = 2) and (o1 = (l[p <- o]))) and ((result = l) and
-  (l1 = o1))) and ((l1 = l2) and (l3 = l1))))) -> (safety_property(l2,
-  conflicts) = true)))
+  (to_rep1((l[to_rep((((conflicts[temp___223])).us_split_fields1).rec__road_traffic__conflict__left)])) = 0))))))
+
+axiom H2 : (to_rep1(o) = 2)
+
+axiom H3 : (o1 = (l[p <- o]))
+
+axiom H4 : (result = l)
+
+axiom H5 : (l1 = o1)
+
+axiom H6 : (l1 = l2)
+
+axiom H7 : (l3 = l1)
+
+ (* File "road_traffic.ads", line 22, characters 0-0 *)
+goal WP_parameter_def : (safety_property(l2, conflicts) = true)

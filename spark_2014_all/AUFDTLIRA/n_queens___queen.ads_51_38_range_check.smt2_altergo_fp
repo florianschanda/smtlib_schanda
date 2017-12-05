@@ -281,5 +281,139 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic b : (int,index) farray
+
+logic done__ : bool
+
+logic r : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic temp___192 : (int,index) farray
+
+logic temp___191 : bool
+
+logic temp___190 : int
+
+logic temp___189 : (int,index) farray
+
+logic j1 : int
+
+logic o5 : int
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : bool
+
+logic o10 : index
+
+logic o11 : (int,index) farray
+
+logic o12 : (int,index) farray
+
+logic j2 : int
+
+logic o13 : int
+
+logic o14 : index
+
+logic o15 : int
+
+logic b1 : (int,index) farray
+
+logic done__1 : bool
+
+logic result : int
+
+logic r1 : int
+
+logic b2 : (int,index) farray
+
+logic done__2 : bool
+
+logic r2 : int
+
+logic result1 : (int,index) farray
+
+logic b3 : (int,index) farray
+
+logic b4 : (int,index) farray
+
+logic done__3 : bool
+
+logic b5 : (int,index) farray
+
+logic done__4 : bool
+
+logic result2 : int
+
+logic r3 : int
+
+logic b6 : (int,index) farray
+
+logic done__5 : bool
+
+logic r4 : int
+
+logic b7 : (int,index) farray
+
+logic done__6 : bool
+
+logic r5 : int
+
+logic b8 : (int,index) farray
+
+logic done__7 : bool
+
+logic r6 : int
+
+logic b9 : (int,index) farray
+
+logic done__8 : bool
+
+logic r7 : int
+
+logic b10 : (int,index) farray
+
+logic done__9 : bool
+
+logic r8 : int
+
+logic b11 : (int,index) farray
+
+logic done__10 : bool
+
+logic r9 : int
+
+logic b12 : (int,index) farray
+
+logic done__11 : bool
+
+logic r10 : int
+
+logic b13 : (int,index) farray
+
+logic done__12 : bool
+
+logic r11 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : (1 <  i)
+
  (* File "queen.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> ((1 <  i) -> in_range1((i - 1))))
+goal WP_parameter_def : in_range1((i - 1))

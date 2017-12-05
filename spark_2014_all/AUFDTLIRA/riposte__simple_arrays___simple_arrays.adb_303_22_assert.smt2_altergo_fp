@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -300,15 +300,32 @@ axiom def_axiom1 :
   ((not (temp___544 = temp___542)) -> ((temp___539(temp___541, temp___542,
   temp___543)[temp___544]) = (temp___541[temp___544])))))))
 
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : (bool_eq3(b, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H3 : (bool_eq3(c, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H4 : (bool_eq3(d, (- 2147483648), 2147483647, temp___532(c, i, 42),
+  (- 2147483648), 2147483647) = true)
+
+axiom H5 : (bool_eq3(e, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H6 : (bool_eq3(f, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H7 : (bool_eq3(g, (- 2147483648), 2147483647, temp___539(f, i, 42),
+  (- 2147483648), 2147483647) = true)
+
+axiom H8 : (to_rep((e[i])) = x)
+
+axiom H9 : (bool_eq3(b, (- 2147483648), 2147483647, d, (- 2147483648),
+  2147483647) = true)
+
  (* File "simple_arrays.adb", line 281, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (in_range1(x) -> ((((((((bool_eq3(b,
-  (-2147483648), 2147483647, a, (-2147483648), 2147483647) = true) and
-  (bool_eq3(c, (-2147483648), 2147483647, a, (-2147483648),
-  2147483647) = true)) and (bool_eq3(d, (-2147483648), 2147483647,
-  temp___532(c, i, 42), (-2147483648), 2147483647) = true)) and (bool_eq3(e,
-  (-2147483648), 2147483647, a, (-2147483648), 2147483647) = true)) and
-  (bool_eq3(f, (-2147483648), 2147483647, a, (-2147483648),
-  2147483647) = true)) and (bool_eq3(g, (-2147483648), 2147483647,
-  temp___539(f, i, 42), (-2147483648), 2147483647) = true)) and
-  (to_rep((e[i])) = x)) -> ((bool_eq3(b, (-2147483648), 2147483647, d,
-  (-2147483648), 2147483647) = true) -> (x = to_rep((g[i])))))))
+goal WP_parameter_def : (x = to_rep((g[i])))

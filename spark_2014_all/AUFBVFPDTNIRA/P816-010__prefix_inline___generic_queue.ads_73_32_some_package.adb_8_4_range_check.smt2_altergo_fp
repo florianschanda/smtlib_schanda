@@ -52,7 +52,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -226,18 +226,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2271,18 +2271,29 @@ logic elements__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "generic_queue.ads", line 72, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (dynamic_property(0, 256,
-  to_rep(elements__first), to_rep(elements__last)) -> (((o1 = length1({
-  us_split_fields1 = { rec__some_package__float_buffer__buffer_tag__mode =
-  self; rec__some_package__float_buffer__buffer_tag__buffer = self1;
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : dynamic_property(0, 256, to_rep(elements__first),
+  to_rep(elements__last))
+
+axiom H1 : ((o1 = length1({ us_split_fields1 = {
+  rec__some_package__float_buffer__buffer_tag__mode = self;
+  rec__some_package__float_buffer__buffer_tag__buffer = self1;
   rec__some_package__float_buffer__buffer_tag__index_head = self2;
   rec__some_package__float_buffer__buffer_tag__index_tail = self3;
   rec__some_package__float_buffer__buffer_tag__haselements = self4;
   rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
-  rec__ext__ = self6 }; attr__tag = self7 })) and in_range6(o1)) ->
-  ((((to_rep(elements__first) <= to_rep(elements__last)) and
-  (o = ((to_rep(elements__last) - to_rep(elements__first)) + 1))) or
-  ((not (to_rep(elements__first) <= to_rep(elements__last))) and (o = 0))) ->
-  in_range(o)))))
+  rec__ext__ = self6 }; attr__tag = self7 })) and in_range6(o1))
+
+axiom H2 : ((to_rep(elements__first) <= to_rep(elements__last)) ->
+  (o = ((to_rep(elements__last) - to_rep(elements__first)) + 1)))
+
+axiom H3 : ((not (to_rep(elements__first) <= to_rep(elements__last))) ->
+  (o = 0))
+
+ (* File "generic_queue.ads", line 72, characters 0-0 *)
+goal WP_parameter_def : in_range(o)

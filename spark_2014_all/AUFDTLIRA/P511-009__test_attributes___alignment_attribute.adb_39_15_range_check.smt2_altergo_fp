@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1355,15 +1355,80 @@ axiom temp___String_Literal_259__def_axiom :
 
 axiom int____def_axiom : (int__ = 2)
 
+logic b : bool
+
+logic s : (int,character) farray
+
+logic m : int
+
+logic rt11 : r1
+
+logic rt2__split_fields : bool
+
+logic rst2__split_fields : bool
+
+logic rt3__split_fields : integer
+
+logic rt3__split_fields1 : us_private
+
+logic rt4__split_fields : integer
+
+logic rt4__split_fields1 : integer
+
+logic rt4__split_fields2 : us_private
+
+logic ca : (int,positive) farray
+
+logic ua : (int,natural) farray
+
+logic us : int
+
+logic us1 : int
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result2 : int
+
+logic m1 : int
+
+logic result3 : (int,positive) farray
+
+logic ca1 : (int,positive) farray
+
+logic result4 : (int,natural) farray
+
+logic ua1 : (int,natural) farray
+
+axiom H : ((us = 5) and in_range4(5))
+
+axiom H1 : (result = b)
+
+axiom H2 : (b1 = of_int(1))
+
+axiom H3 : in_range1(int__)
+
+axiom H4 : (result1 = s)
+
+axiom H5 : (s1 = temp___String_Literal_259(void))
+
+axiom H6 : (to_rep1(s__first) = to_rep1(first(mk(1, 4))))
+
+axiom H7 : (to_rep1(s__last) = to_rep1(last(mk(1, 4))))
+
+axiom H8 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H9 : (result2 = m)
+
+axiom H10 : (m1 = 10)
+
+axiom H11 : in_range4(m1)
+
  (* File "alignment_attribute.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall s:(int,character) farray. forall m:int.
-  forall us:int. forall result:bool. forall b1:bool.
-  forall result1:(int,character) farray. forall s1:(int,character) farray.
-  forall result2:int. forall m1:int. (((us = 5) and in_range4(5)) ->
-  (((result = b) and (b1 = of_int(1))) -> (in_range1(int__) ->
-  ((((result1 = s) and (s1 = temp___String_Literal_259(void))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 4)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 4)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result2 = m) and
-  (m1 = 10)) -> (in_range4(m1) -> in_range4(3)))))))))
+goal WP_parameter_def : in_range4(3)

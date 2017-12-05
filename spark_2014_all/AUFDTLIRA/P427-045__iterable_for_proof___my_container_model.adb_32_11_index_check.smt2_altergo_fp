@@ -259,6 +259,9 @@ logic p : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range(p)
+
+axiom H1 : (m_has_element(c, p) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(p) -> ((m_has_element(c, p) = true) ->
-  (1 <= p)))
+goal WP_parameter_def : (1 <= p)

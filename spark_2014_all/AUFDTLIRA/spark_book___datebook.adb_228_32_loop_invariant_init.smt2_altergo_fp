@@ -1241,10 +1241,47 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic event_array : (int,us_rep3) farray
+
+logic count : int
+
+logic index : int
+
+logic o : int
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic count2 : int
+
+logic index2 : int
+
+logic result2 : int
+
+logic count3 : int
+
+logic result3 : int
+
+logic index3 : int
+
+axiom H : (result = count)
+
+axiom H1 : (count1 = 0)
+
+axiom H2 : in_range1(count1)
+
+axiom H3 : (result1 = index)
+
+axiom H4 : (index1 = 1)
+
+axiom H5 : (1 <= index1)
+
+axiom H6 : (index1 <= 64)
+
  (* File "datebook.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall index:int. forall result:int. forall count1:int.
-  forall result1:int. forall index1:int. (((result = count) and
-  (count1 = 0)) -> (in_range1(count1) -> (((result1 = index) and
-  (index1 = 1)) -> (((1 <= index1) and (index1 <= 64)) ->
-  (count1 <  index1))))))
+goal WP_parameter_def : (count1 <  index1)

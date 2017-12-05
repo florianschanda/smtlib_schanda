@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -702,8 +702,102 @@ type twrapperD1__ref = { twrapperD1__content : twrapperD1
 function twrapperD1__ref___projection(a2: twrapperD1__ref) : twrapperD1 =
   (a2).twrapperD1__content
 
+logic dynamic_types__search__search_range__result : (int,integer) farray
+
+logic dynamic_types__search__search_range__result1 : natural
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic us : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : (int,integer) farray
+
+logic o6 : (int,integer) farray
+
+logic o7 : natural
+
+logic o8 : (int,integer) farray
+
+logic o9 : natural
+
+logic us1 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : (int,integer) farray
+
+logic o13 : (int,integer) farray
+
+logic o14 : natural
+
+logic o15 : (int,integer) farray
+
+logic o16 : natural
+
+logic i : int
+
+logic result : bool
+
+logic result1 : (int,integer) farray
+
+logic result2 : natural
+
+logic dynamic_types__search__search_range__result2 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result3 : natural
+
+logic result3 : (int,integer) farray
+
+logic result4 : natural
+
+logic dynamic_types__search__search_range__result4 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result5 : natural
+
+logic dynamic_types__search__search_range__result6 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result7 : natural
+
+logic dynamic_types__search__search_range__result8 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result9 : natural
+
+logic dynamic_types__search__search_range__result10 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result11 : natural
+
+logic dynamic_types__search__search_range__result12 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result13 : natural
+
+logic dynamic_types__search__search_range__result14 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result15 : natural
+
+logic dynamic_types__search__search_range__result16 : (int,integer) farray
+
+logic dynamic_types__search__search_range__result17 : natural
+
+logic result5 : bool
+
+axiom H : in_range1(from)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H2 : in_range1(c)
+
+axiom H3 : ((to_rep1(first(a1)) <= from) and (from <= to_rep1(last(a1))))
+
  (* File "dynamic_types.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range1(from) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range1(c) ->
-  (((to_rep1(first(a1)) <= from) and (from <= to_rep1(last(a1)))) ->
-  (to_rep1(first(a1)) <= from)))))
+goal WP_parameter_def : (to_rep1(first(a1)) <= from)

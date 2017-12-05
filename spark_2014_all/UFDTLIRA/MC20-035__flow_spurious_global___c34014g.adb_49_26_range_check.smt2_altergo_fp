@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -114,7 +114,7 @@ axiom ident_int__post_axiom :
 
 type t
 
-predicate in_range1(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range1(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq2 : int, int -> bool
 
@@ -137,6 +137,11 @@ type t__ref = { t__content : t
 
 function t__ref___projection(a: t__ref) : t = (a).t__content
 
+logic o : int
+
+logic o1 : int
+
+axiom H : ((o = ident_int(1)) and in_range(o))
+
  (* File "c34014g.adb", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (((o = ident_int(1)) and in_range(o)) -> in_range1(o)))
+goal WP_parameter_def : in_range1(o)

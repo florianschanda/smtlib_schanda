@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -316,23 +316,80 @@ axiom def_axiom4 :
   ((not (temp___341 = 2)) -> ((temp___337(temp___339,
   temp___340)[temp___341]) = of_rep(temp___340))))))
 
+logic one : int
+
+logic a : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic result4 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+logic a6 : (int,integer) farray
+
+logic a7 : (int,integer) farray
+
+axiom H : in_range1(one)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (one = 1)
+
+axiom H3 : ((b = 1) -> (result = a))
+
+axiom H4 : ((b = 1) -> (a1 = temp___318(one, 2)))
+
+axiom H5 : ((not (b = 1)) -> ((b = 2) -> (result1 = a)))
+
+axiom H6 : ((not (b = 1)) -> ((b = 2) -> (a2 = temp___323(one))))
+
+axiom H7 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> (result2 = a))))
+
+axiom H8 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
+  (a3 = temp___327(one, one)))))
+
+axiom H9 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
+  (result3 = a)))))
+
+axiom H10 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
+  (a4 = temp___332(2, one))))))
+
+axiom H11 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (result4 = a)))))
+
+axiom H12 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (a5 = temp___337(2, one))))))
+
+axiom H13 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (a4 = a5)))))
+
+axiom H14 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  (a3 = a4))))
+
+axiom H15 : ((not (b = 1)) -> ((not (b = 2)) -> (a2 = a3)))
+
+axiom H16 : ((not (b = 1)) -> (a1 = a2))
+
+axiom H17 : (a1 = a6)
+
+axiom H18 : (a7 = a1)
+
+axiom H19 : (b = 1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall a:(int,integer) farray.
-  forall result:(int,integer) farray. forall a1:(int,integer) farray.
-  forall result1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall result2:(int,integer) farray. forall a3:(int,integer) farray.
-  forall result3:(int,integer) farray. forall a4:(int,integer) farray.
-  forall result4:(int,integer) farray. forall a5:(int,integer) farray.
-  forall a6:(int,integer) farray. forall a7:(int,integer) farray.
-  ((in_range1(one) and (in_range1(b) and ((one = 1) and ((((b = 1) and (({
-  map__content = result } = { map__content = a }) and (a1 = temp___318(one,
-  2)))) or ((not (b = 1)) and ((((b = 2) and (({ map__content = result1 } = {
-  map__content = a }) and (a2 = temp___323(one)))) or ((not (b = 2)) and
-  ((((b = 3) and (({ map__content = result2 } = { map__content = a }) and
-  (a3 = temp___327(one, one)))) or ((not (b = 3)) and ((((b = 4) and (({
-  map__content = result3 } = { map__content = a }) and (a4 = temp___332(2,
-  one)))) or ((not (b = 4)) and ((({ map__content = result4 } = {
-  map__content = a }) and (a5 = temp___337(2, one))) and (a4 = a5)))) and
-  (a3 = a4)))) and (a2 = a3)))) and (a1 = a2)))) and ((a1 = a6) and
-  (a7 = a1)))))) -> ((b = 1) -> (to_rep((a6[one])) = one))))
+goal WP_parameter_def : (to_rep((a6[one])) = one)

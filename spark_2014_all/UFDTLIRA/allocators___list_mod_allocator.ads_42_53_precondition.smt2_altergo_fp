@@ -287,10 +287,26 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : bool
+
+axiom H : in_range1(e)
+
+axiom H1 : ((o = length(s)) and (in_range2(o) and ((0 + o) <= 2147483647)))
+
+axiom H2 : (((i <= o) -> (o1 = true)) and ((not (i <= o)) -> (o1 = false)))
+
+axiom H3 : (((1 <= i) -> (result = o1)) and ((not (1 <= i)) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "list_mod_allocator.ads", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:bool. forall result:bool.
-  (in_range1(e) -> (((((o = length(s)) and (in_range2(o) and
-  ((0 + o) <= 2147483647))) and (((i <= o) and (o1 = true)) or
-  ((not (i <= o)) and (o1 = false)))) and (((1 <= i) and (result = o1)) or
-  ((not (1 <= i)) and (result = false)))) -> ((result = true) -> (1 <= i)))))
+goal WP_parameter_def : (1 <= i)

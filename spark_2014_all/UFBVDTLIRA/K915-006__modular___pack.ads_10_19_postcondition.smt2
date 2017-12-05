@@ -66,6 +66,7 @@
 (declare-const pack__next1__result4 (_ BitVec 8))
 (declare-const pack__next1__result5 (_ BitVec 8))
 (declare-const result1 (_ BitVec 8))
+(assert true)
 (assert (= m ((_ int2bv 8) 1)))
 (assert (= pack__next1__result1 pack__next1__result2))
 (assert (= pack__next1__result3 pack__next1__result1))

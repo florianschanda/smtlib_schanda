@@ -221,6 +221,8 @@
 (assert (forall ((container us_rep2)) (forall ((position Int)) (! (=> (and (dynamic_invariant4 position true true true) (and (<= 1 position) (<= position (last container)))) (dynamic_invariant5 (get container position) true false true)) :pattern ((get container position))))))
 (declare-const us Int)
 (declare-const us1 Int)
+(declare-const us2 Int)
+(declare-const us3 Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 left))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 left)))))))
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 right))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 right)))))))
 (assert (and (= us (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 right)))) (in_range (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 right))))))

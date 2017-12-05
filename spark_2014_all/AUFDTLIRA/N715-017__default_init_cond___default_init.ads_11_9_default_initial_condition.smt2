@@ -85,6 +85,7 @@
 (assert (forall ((default_init__n Int)) (! (= (= (pre_rte_ok default_init__n) true) (and (<= 1 default_init__n) (<= default_init__n 3))) :pattern ((pre_rte_ok default_init__n)))))
 (declare-const n Int)
 (declare-const temp___280 (Array Int nat))
+(declare-const us Bool)
 (assert (forall ((temp___281 Int)) (=> (and (<= 1 temp___281) (<= temp___281 3)) (default_initial_assumption (to_rep (select temp___280 temp___281)) false))))
 (assert (not (= (rte_ok temp___280 n) true)))
 (check-sat)

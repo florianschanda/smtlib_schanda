@@ -1,0 +1,554 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq : bool, bool -> bool
+
+axiom bool_eq_def :
+  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic to_int : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
+  ((not (b = true)) -> (to_int(b) = 0))))
+
+logic of_int : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
+  ((not (i = 0)) -> (of_int(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type interrupt_id
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 63))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq2 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq : interrupt_id, interrupt_id -> bool
+
+logic dummy : interrupt_id
+
+type interrupt_id__ref = { interrupt_id__content : interrupt_id
+}
+
+function interrupt_id__ref___2__projection(a: interrupt_id__ref) : interrupt_id =
+  (a).interrupt_id__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+type us_split_discrs = { rec__r__pt__irq : interrupt_id
+}
+
+function us_split_discrs___2__projection(a: us_split_discrs) : interrupt_id =
+  (a).rec__r__pt__irq
+
+type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
+}
+
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
+  (a).us_split_discrs__content
+
+type us_rep = { us_split_discrs1 : us_split_discrs
+}
+
+function us_rep___30__projection(a: us_rep) : us_split_discrs =
+  (a).us_split_discrs1
+
+logic value__size : int
+
+logic object__size : us_rep -> int
+
+logic value__alignment : int
+
+logic object__alignment : us_rep -> int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom :
+  (forall a:interrupt_id. (0 <= object__size({ us_split_discrs1 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom : (0 <= value__alignment)
+
+axiom object__alignment_axiom :
+  (forall a:interrupt_id. (0 <= object__alignment({ us_split_discrs1 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit : int
+
+logic r__pt__irq__last__bit : int
+
+logic r__pt__irq__position : int
+
+axiom r__pt__irq__first__bit_axiom : (0 <= r__pt__irq__first__bit)
+
+axiom r__pt__irq__last__bit_axiom :
+  (r__pt__irq__first__bit <  r__pt__irq__last__bit)
+
+axiom r__pt__irq__position_axiom : (0 <= r__pt__irq__position)
+
+logic user_eq1 : us_rep, us_rep -> bool
+
+type pt__ref = { pt__content : us_rep
+}
+
+function pt__ref___projection(a: pt__ref) : us_rep = (a).pt__content
+
+type us_rep1 = { us_split_discrs2 : us_split_discrs
+}
+
+function us_rep___31__projection(a: us_rep1) : us_split_discrs =
+  (a).us_split_discrs2
+
+function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs2 }
+
+function of_base(r: us_rep) : us_rep1 = { us_split_discrs2 =
+  (r).us_split_discrs1 }
+
+logic to_rep : interrupt_id -> int
+
+logic of_rep : int -> interrupt_id
+
+axiom inversion_axiom :
+  (forall x:interrupt_id [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:interrupt_id [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+predicate in_range2(rec__r__pt__irq1: int, a: us_rep) =
+  (rec__r__pt__irq1 = to_rep(((a).us_split_discrs1).rec__r__pt__irq))
+
+logic value__size1 : int
+
+logic object__size1 : us_rep1 -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : us_rep1 -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:interrupt_id. (0 <= object__size1({ us_split_discrs2 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:interrupt_id. (0 <= object__alignment1({ us_split_discrs2 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit1 : int
+
+logic r__pt__irq__last__bit1 : int
+
+logic r__pt__irq__position1 : int
+
+axiom r__pt__irq__first__bit_axiom1 : (0 <= r__pt__irq__first__bit1)
+
+axiom r__pt__irq__last__bit_axiom1 :
+  (r__pt__irq__first__bit1 <  r__pt__irq__last__bit1)
+
+axiom r__pt__irq__position_axiom1 : (0 <= r__pt__irq__position1)
+
+logic user_eq2 : us_rep1, us_rep1 -> bool
+
+type constrained__ref = { constrained__content : us_rep1
+}
+
+function constrained__ref___projection(a: constrained__ref) : us_rep1 =
+  (a).constrained__content
+
+type us_rep2 = { us_split_discrs3 : us_split_discrs
+}
+
+function us_rep___34__projection(a: us_rep2) : us_split_discrs =
+  (a).us_split_discrs3
+
+function to_base1(a: us_rep2) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs3 }
+
+function of_base1(r: us_rep) : us_rep2 = { us_split_discrs3 =
+  (r).us_split_discrs1 }
+
+predicate in_range3(rec__r__pt__irq1: int, a: us_rep) =
+  (rec__r__pt__irq1 = to_rep(((a).us_split_discrs1).rec__r__pt__irq))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep2 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep2 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:interrupt_id. (0 <= object__size2({ us_split_discrs3 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:interrupt_id. (0 <= object__alignment2({ us_split_discrs3 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit2 : int
+
+logic r__pt__irq__last__bit2 : int
+
+logic r__pt__irq__position2 : int
+
+axiom r__pt__irq__first__bit_axiom2 : (0 <= r__pt__irq__first__bit2)
+
+axiom r__pt__irq__last__bit_axiom2 :
+  (r__pt__irq__first__bit2 <  r__pt__irq__last__bit2)
+
+axiom r__pt__irq__position_axiom2 : (0 <= r__pt__irq__position2)
+
+logic user_eq3 : us_rep2, us_rep2 -> bool
+
+type derived_constrained__ref = { derived_constrained__content : us_rep2
+}
+
+function derived_constrained__ref___projection(a: derived_constrained__ref) : us_rep2 =
+  (a).derived_constrained__content
+
+type us_rep3 = { us_split_discrs4 : us_split_discrs
+}
+
+function us_rep___36__projection(a: us_rep3) : us_split_discrs =
+  (a).us_split_discrs4
+
+function to_base2(a: us_rep3) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs4 }
+
+function of_base2(r: us_rep) : us_rep3 = { us_split_discrs4 =
+  (r).us_split_discrs1 }
+
+predicate in_range4(rec__r__pt__irq1: int, a: us_rep) =
+  (rec__r__pt__irq1 = to_rep(((a).us_split_discrs1).rec__r__pt__irq))
+
+logic value__size3 : int
+
+logic object__size3 : us_rep3 -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : us_rep3 -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:interrupt_id. (0 <= object__size3({ us_split_discrs4 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:interrupt_id. (0 <= object__alignment3({ us_split_discrs4 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit3 : int
+
+logic r__pt__irq__last__bit3 : int
+
+logic r__pt__irq__position3 : int
+
+axiom r__pt__irq__first__bit_axiom3 : (0 <= r__pt__irq__first__bit3)
+
+axiom r__pt__irq__last__bit_axiom3 :
+  (r__pt__irq__first__bit3 <  r__pt__irq__last__bit3)
+
+axiom r__pt__irq__position_axiom3 : (0 <= r__pt__irq__position3)
+
+logic user_eq4 : us_rep3, us_rep3 -> bool
+
+type tpo1S__ref = { tpo1S__content : us_rep3
+}
+
+function tpo1S__ref___projection(a: tpo1S__ref) : us_rep3 =
+  (a).tpo1S__content
+
+logic po1__split_discrs : interrupt_id
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic po2__split_discrs : interrupt_id
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type us_rep4 = { us_split_discrs5 : us_split_discrs
+}
+
+function us_rep___37__projection(a: us_rep4) : us_split_discrs =
+  (a).us_split_discrs5
+
+function to_base3(a: us_rep4) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs5 }
+
+function of_base3(r: us_rep) : us_rep4 = { us_split_discrs5 =
+  (r).us_split_discrs1 }
+
+predicate in_range5(rec__r__pt__irq1: int, a: us_rep) =
+  (rec__r__pt__irq1 = to_rep(((a).us_split_discrs1).rec__r__pt__irq))
+
+logic value__size4 : int
+
+logic object__size4 : us_rep4 -> int
+
+logic value__alignment4 : int
+
+logic object__alignment4 : us_rep4 -> int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 :
+  (forall a:interrupt_id. (0 <= object__size4({ us_split_discrs5 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom4 : (0 <= value__alignment4)
+
+axiom object__alignment_axiom4 :
+  (forall a:interrupt_id. (0 <= object__alignment4({ us_split_discrs5 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit4 : int
+
+logic r__pt__irq__last__bit4 : int
+
+logic r__pt__irq__position4 : int
+
+axiom r__pt__irq__first__bit_axiom4 : (0 <= r__pt__irq__first__bit4)
+
+axiom r__pt__irq__last__bit_axiom4 :
+  (r__pt__irq__first__bit4 <  r__pt__irq__last__bit4)
+
+axiom r__pt__irq__position_axiom4 : (0 <= r__pt__irq__position4)
+
+logic user_eq5 : us_rep4, us_rep4 -> bool
+
+type tpo3S__ref = { tpo3S__content : us_rep4
+}
+
+function tpo3S__ref___projection(a: tpo3S__ref) : us_rep4 =
+  (a).tpo3S__content
+
+logic po3__split_discrs : interrupt_id
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic po4__split_discrs : interrupt_id
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+type us_rep5 = { us_split_discrs6 : us_split_discrs
+}
+
+function us_rep___38__projection(a: us_rep5) : us_split_discrs =
+  (a).us_split_discrs6
+
+function to_base4(a: us_rep5) : us_rep = { us_split_discrs1 =
+  (a).us_split_discrs6 }
+
+function of_base4(r: us_rep) : us_rep5 = { us_split_discrs6 =
+  (r).us_split_discrs1 }
+
+predicate in_range6(rec__r__pt__irq1: int, a: us_rep) =
+  (rec__r__pt__irq1 = to_rep(((a).us_split_discrs1).rec__r__pt__irq))
+
+logic value__size5 : int
+
+logic object__size5 : us_rep5 -> int
+
+logic value__alignment5 : int
+
+logic object__alignment5 : us_rep5 -> int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 :
+  (forall a:interrupt_id. (0 <= object__size5({ us_split_discrs6 = {
+  rec__r__pt__irq = a } })))
+
+axiom value__alignment_axiom5 : (0 <= value__alignment5)
+
+axiom object__alignment_axiom5 :
+  (forall a:interrupt_id. (0 <= object__alignment5({ us_split_discrs6 = {
+  rec__r__pt__irq = a } })))
+
+logic r__pt__irq__first__bit5 : int
+
+logic r__pt__irq__last__bit5 : int
+
+logic r__pt__irq__position5 : int
+
+axiom r__pt__irq__first__bit_axiom5 : (0 <= r__pt__irq__first__bit5)
+
+axiom r__pt__irq__last__bit_axiom5 :
+  (r__pt__irq__first__bit5 <  r__pt__irq__last__bit5)
+
+axiom r__pt__irq__position_axiom5 : (0 <= r__pt__irq__position5)
+
+logic user_eq6 : us_rep5, us_rep5 -> bool
+
+type tpo5S__ref = { tpo5S__content : us_rep5
+}
+
+function tpo5S__ref___projection(a: tpo5S__ref) : us_rep5 =
+  (a).tpo5S__content
+
+logic po5__split_discrs : interrupt_id
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic x : bool
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic result : bool
+
+logic x1 : bool
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = of_int(1))
+
+axiom H2 : ((us = 2) and in_range1(2))
+
+axiom H3 : ((us1 = 4) and in_range1(4))
+
+axiom H4 : ((us2 = 1) and in_range1(1))
+
+axiom H5 : (to_rep(po1__split_discrs) = 1)
+
+axiom H6 : (1 = to_rep(po1__split_discrs))
+
+axiom H7 : (to_rep(po2__split_discrs) = 2)
+
+axiom H8 : (2 = to_rep(po2__split_discrs))
+
+axiom H9 : ((us3 = 3) and in_range1(3))
+
+axiom H10 : (to_rep(po3__split_discrs) = 3)
+
+axiom H11 : (3 = to_rep(po3__split_discrs))
+
+axiom H12 : (to_rep(po4__split_discrs) = 4)
+
+axiom H13 : (4 = to_rep(po4__split_discrs))
+
+ (* File "r.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : in_range1(5)

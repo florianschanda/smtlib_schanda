@@ -827,6 +827,8 @@
 (assert (<= 0 value__size10))
 (assert (<= 0 value__size12))
 (assert (<= 0 value__size14))
+(assert true)
+(assert true)
 (assert (<= 0 32))
 (assert (<= 0 (object__size s1)))
 (assert (<= 0 (object__size7 ca1)))

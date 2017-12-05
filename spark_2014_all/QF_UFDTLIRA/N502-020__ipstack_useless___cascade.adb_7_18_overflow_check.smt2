@@ -36,6 +36,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const err Int)
+(declare-const o Int)
 (assert (in_range nid))
 (assert (in_range buf))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range err)))

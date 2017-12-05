@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -406,19 +406,104 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,item) farray
+
+logic i : int
+
+logic j : int
+
+logic sp : us_private
+
+logic vec : us_private
+
+logic sp1 : us_private
+
+logic vec1 : us_private
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic sp2 : us_private
+
+logic vec2 : us_private
+
+logic result1 : bool
+
+logic sp3 : us_private
+
+logic vec3 : us_private
+
+logic sp4 : us_private
+
+logic vec4 : us_private
+
+logic sp5 : us_private
+
+logic vec5 : us_private
+
+logic i3 : int
+
+logic sp6 : us_private
+
+logic vec6 : us_private
+
+logic i4 : int
+
+logic sp7 : us_private
+
+logic vec7 : us_private
+
+logic i5 : int
+
+logic sp8 : us_private
+
+logic vec8 : us_private
+
+logic i6 : int
+
+logic sp9 : us_private
+
+logic vec9 : us_private
+
+logic result2 : int
+
+logic j1 : int
+
+logic a1 : (int,item) farray
+
+logic j2 : int
+
+logic sp10 : us_private
+
+logic result3 : bool
+
+logic a_stack_no_spark_contracts_with_body__pop__it : int
+
+axiom H : dynamic_property(1, 10000, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : ((((to_rep(a__first) <= to_rep(a__last)) ->
+  (0 <  ((to_rep(a__last) - to_rep(a__first)) + 1))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (0 <  0))) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (((to_rep(a__last) - to_rep(a__first)) + 1) <= 100)) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (0 <= 100))))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = to_rep(a__first))
+
+axiom H4 : (to_rep(a__first) <= i1)
+
+axiom H5 : (i1 <= to_rep(a__last))
+
+axiom H6 : ((to_rep(a__first) <= i2) and (i2 <= to_rep(a__last)))
+
+axiom H7 : (result1 = is_full(sp2))
+
+axiom H8 : (not (result1 = true))
+
  (* File "reverser_using_a_stack_with_body.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. forall i2:int.
-  forall sp:us_private. forall result1:bool. (dynamic_property(1, 10000,
-  to_rep(a__first), to_rep(a__last)) ->
-  (((((to_rep(a__first) <= to_rep(a__last)) and
-  (0 <  ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (0 <  0))) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (((to_rep(a__last) - to_rep(a__first)) + 1) <= 100)) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (0 <= 100)))) -> ((({
-  int__content = result } = { int__content = i }) and
-  (i1 = to_rep(a__first))) -> (((to_rep(a__first) <= i1) and
-  (i1 <= to_rep(a__last))) -> (((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last))) -> (((result1 = is_full(sp)) and
-  (not (result1 = true))) -> (not (is_full(sp) = true)))))))))
+goal WP_parameter_def : (not (is_full(sp2) = true))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1748,8 +1748,20 @@ logic amount : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t1
+
+logic o1 : t1
+
+axiom H : true
+
+axiom H1 : in_range1(amount)
+
+axiom H2 : (not ((1 <= 8) and (8 <= 8)))
+
+axiom H3 : (not ((9 <= 8) and (8 <= 16)))
+
+axiom H4 : (not ((17 <= 8) and (8 <= 32)))
+
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (in_range1(amount) -> ((not ((1 <= 8) and
-  (8 <= 8))) -> ((not ((9 <= 8) and (8 <= 16))) -> ((not ((17 <= 8) and
-  (8 <= 32))) -> ule3(toBig(of_int(0)), lsr_bv3(toBig(v),
-  of_int3(amount)))))))
+goal WP_parameter_def : ule3(toBig(of_int(0)), lsr_bv3(toBig(v),
+  of_int3(amount)))

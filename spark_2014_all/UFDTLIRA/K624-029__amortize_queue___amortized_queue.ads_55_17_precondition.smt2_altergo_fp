@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -385,7 +385,7 @@ logic element__function_guard : int, us_rep, int -> prop
 
 type element_type
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -719,7 +719,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq11 : int, int -> bool
 
@@ -749,51 +749,139 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range10(get(container, position)))))
 
- (* File "amortized_queue.ads", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:bool. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:int. forall o11:int. forall o12:int.
-  forall result:bool. forall result1:bool. forall result2:bool.
-  (((1000 = to_rep(q)) and (1000 = to_rep(q2))) -> (((((o11 = length({
-  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity = m
-  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = m1 }
-  })) and (in_range4(o11) and (((of_int(1) = true) and (o11 <= to_rep(m))) or
-  ((not (of_int(1) = true)) and (o11 <= 1000))))) and ((((o9 = length({
-  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity =
-  q2 }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  })) and (in_range4(o9) and (((of_int(1) = true) and (o9 <= to_rep(q2))) or
-  ((not (of_int(1) = true)) and (o9 <= 1000))))) and (((o10 = length({
-  us_split_discrs1 = { rec__amortized_queue__my_vectors__vector__capacity = q
-  }; us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 }
-  })) and (in_range4(o10) and (((of_int(1) = true) and (o10 <= to_rep(q))) or
-  ((not (of_int(1) = true)) and (o10 <= 1000))))) and
-  (o12 = (o10 + o9)))) and (((o12 = o11) and (result1 = true)) or
-  ((not (o12 = o11)) and (result1 = false))))) and (((result1 = true) and
-  (((o8 = length({ us_split_discrs1 = {
+logic i : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic i1 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : ((1000 = to_rep(q)) and (1000 = to_rep(q2)))
+
+axiom H1 : ((o21 = length({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = m };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = m1 }
-  })) and (in_range4(o8) and (((of_int(1) = true) and (o8 <= to_rep(m))) or
-  ((not (of_int(1) = true)) and (o8 <= 1000))))) and (((o8 <= 1000) and
-  (result = true)) or ((not (o8 <= 1000)) and (result = false))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (((((o = length({ us_split_discrs1 = {
+  })) and (in_range4(o21) and (((of_int(1) = true) -> (o21 <= to_rep(m))) and
+  ((not (of_int(1) = true)) -> (o21 <= 1000)))))
+
+axiom H2 : ((o19 = length({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  })) and (in_range4(o) and (((of_int(1) = true) and (o <= to_rep(q2))) or
-  ((not (of_int(1) = true)) and (o <= 1000))))) and (((i <= o) and
-  (o1 = true)) or ((not (i <= o)) and (o1 = false)))) and (((1 <= i) and
-  (result2 = o1)) or ((not (1 <= i)) and (result2 = false)))) ->
-  ((result2 = true) -> (((((((o3 = length({ us_split_discrs1 = {
+  })) and (in_range4(o19) and (((of_int(1) = true) ->
+  (o19 <= to_rep(q2))) and ((not (of_int(1) = true)) -> (o19 <= 1000)))))
+
+axiom H3 : ((o20 = length({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = q };
+  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q1 }
+  })) and (in_range4(o20) and (((of_int(1) = true) -> (o20 <= to_rep(q))) and
+  ((not (of_int(1) = true)) -> (o20 <= 1000)))))
+
+axiom H4 : (o22 = (o20 + o19))
+
+axiom H5 : (((o22 = o21) -> (result2 = true)) and ((not (o22 = o21)) ->
+  (result2 = false)))
+
+axiom H6 : ((result2 = true) -> ((o18 = length({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = m };
+  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = m1 }
+  })) and (in_range4(o18) and (((of_int(1) = true) -> (o18 <= to_rep(m))) and
+  ((not (of_int(1) = true)) -> (o18 <= 1000))))))
+
+axiom H7 : ((result2 = true) -> (((o18 <= 1000) -> (result1 = true)) and
+  ((not (o18 <= 1000)) -> (result1 = false))))
+
+axiom H8 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H9 : (result1 = true)
+
+axiom H10 : ((o9 = length({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
-  })) and (in_range4(o3) and (((of_int(1) = true) and (o3 <= to_rep(q2))) or
-  ((not (of_int(1) = true)) and (o3 <= 1000))))) and (o4 = (o3 - i))) and
-  (o5 = (o4 + 1))) and ((o6 = o5) and in_range3(o5))) and
-  ((o7 = get(model__({ us_split_discrs1 = {
+  })) and (in_range4(o9) and (((of_int(1) = true) -> (o9 <= to_rep(q2))) and
+  ((not (of_int(1) = true)) -> (o9 <= 1000)))))
+
+axiom H11 : (((i1 <= o9) -> (o10 = true)) and ((not (i1 <= o9)) ->
+  (o10 = false)))
+
+axiom H12 : (((1 <= i1) -> (result3 = o10)) and ((not (1 <= i1)) ->
+  (result3 = false)))
+
+axiom H13 : (result3 = true)
+
+axiom H14 : ((o12 = length({ us_split_discrs1 = {
+  rec__amortized_queue__my_vectors__vector__capacity = q2 };
+  us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 }
+  })) and (in_range4(o12) and (((of_int(1) = true) ->
+  (o12 <= to_rep(q2))) and ((not (of_int(1) = true)) -> (o12 <= 1000)))))
+
+axiom H15 : (o13 = (o12 - i1))
+
+axiom H16 : (o14 = (o13 + 1))
+
+axiom H17 : ((o15 = o14) and in_range3(o14))
+
+axiom H18 : ((o16 = get(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } }),
-  o6)) and (in_range5(o7) and (o7 = get(model__({ us_split_discrs1 = {
+  o15)) and (in_range5(o16) and (o16 = get(model__({ us_split_discrs1 = {
   rec__amortized_queue__my_vectors__vector__capacity = q2 };
   us_split_fields1 = { rec__amortized_queue__my_vectors__vector = q3 } }),
-  o6))))) -> (((o2 = i) and in_range3(i)) -> (1 <= o2)))))))))
+  o15))))
+
+axiom H19 : ((o11 = i1) and in_range3(i1))
+
+ (* File "amortized_queue.ads", line 51, characters 0-0 *)
+goal WP_parameter_def : (1 <= o11)

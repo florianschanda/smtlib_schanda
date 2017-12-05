@@ -216,7 +216,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -336,7 +336,8 @@ logic x1 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(first(x1)),
+  to_rep1(last(x1)))
+
  (* File "subar.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property((-2147483648), 2147483647,
-  to_rep1(first(x1)), to_rep1(last(x1))) ->
-  (to_rep1(first(x1)) <= to_rep1(first(x1))))
+goal WP_parameter_def : (to_rep1(first(x1)) <= to_rep1(first(x1)))

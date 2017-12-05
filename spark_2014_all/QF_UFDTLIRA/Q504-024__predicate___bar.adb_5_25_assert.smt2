@@ -30,6 +30,8 @@
 (declare-const x Int)
 (declare-const result Int)
 (declare-const x1 Int)
+(declare-const result1 Int)
+(declare-const x2 Int)
 (assert (= result x))
 (assert (= x1 0))
 (assert (not (= (of_int x1) true)))

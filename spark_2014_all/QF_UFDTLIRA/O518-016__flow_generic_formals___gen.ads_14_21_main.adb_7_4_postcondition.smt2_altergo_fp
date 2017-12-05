@@ -89,10 +89,28 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom bounded__def_axiom : (bounded = x)
 
+logic y : bool
+
+logic result : bool
+
+logic y1 : bool
+
+logic y2 : bool
+
+logic y3 : bool
+
+axiom H : (x = bounded)
+
+axiom H1 : (result = y)
+
+axiom H2 : (((not (bounded = true)) -> (y1 = true)) and ((bounded = true) ->
+  (y1 = false)))
+
+axiom H3 : (y1 = y2)
+
+axiom H4 : (y3 = y1)
+
+axiom H5 : (y2 = true)
+
  (* File "gen.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:bool. forall result:bool. forall y1:bool. forall y2:bool.
-  forall y3:bool. (((x = bounded) and (((result = y) and
-  (((not (bounded = true)) and (y1 = true)) or ((bounded = true) and
-  (y1 = false)))) and ((y1 = y2) and (y3 = y1)))) -> ((y2 = true) ->
-  (not (bounded = true)))))
+goal WP_parameter_def : (not (bounded = true))

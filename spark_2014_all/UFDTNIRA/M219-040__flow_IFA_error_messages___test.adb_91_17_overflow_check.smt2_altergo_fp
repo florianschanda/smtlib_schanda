@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -257,12 +257,86 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : int
+
+logic b : int
+
+logic i : int
+
+logic temp___154 : int
+
+logic temp___153 : int
+
+logic o : int
+
+logic a1 : int
+
+logic b1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic a2 : int
+
+logic b2 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic a3 : int
+
+logic result2 : int
+
+logic b3 : int
+
+logic a4 : int
+
+logic b4 : int
+
+logic i3 : int
+
+logic a5 : int
+
+logic b5 : int
+
+logic i4 : int
+
+logic a6 : int
+
+logic b6 : int
+
+logic i5 : int
+
+logic a7 : int
+
+logic b7 : int
+
+logic i6 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (a = r11b)
+
+axiom H3 : in_range1(r11b)
+
+axiom H4 : (b = r12b)
+
+axiom H5 : in_range1(r12b)
+
+axiom H6 : (result = i)
+
+axiom H7 : (i1 = r11b)
+
+axiom H8 : (r11b <= i1)
+
+axiom H9 : (i1 <= r12b)
+
+axiom H10 : ((in_range1(a2) and in_range1(b2)) and ((r11b <= i2) and
+  (i2 <= r12b)))
+
  (* File "test.adb", line 76, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall i:int. forall result:int.
-  forall i1:int. forall a1:int. forall b1:int. forall i2:int.
-  (in_range1(a) -> (in_range1(b) -> (((a = r11b) and in_range1(r11b)) ->
-  (((b = r12b) and in_range1(r12b)) -> ((({ int__content = result } = {
-  int__content = i }) and (i1 = r11b)) -> (((r11b <= i1) and (i1 <= r12b)) ->
-  (((in_range1(a1) and in_range1(b1)) and ((r11b <= i2) and (i2 <= r12b))) ->
-  in_range1((a1 * i2))))))))))
+goal WP_parameter_def : in_range1((a2 * i2))

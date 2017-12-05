@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -653,23 +653,44 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic t2__mmin__result : t
+
+logic result : t
+
+logic t2__mmin__result1 : t
+
+logic t2__mmin__result2 : t
+
+logic t2__mmin__result3 : t
+
+logic t2__mmin__result4 : t
+
+logic t2__mmin__result5 : t
+
+logic result1 : t
+
+axiom H : in_range(x)
+
+axiom H1 : (t2__mmin__result1 = t2__mmin__result2)
+
+axiom H2 : (t2__mmin__result3 = t2__mmin__result1)
+
+axiom H3 : (result = t2__mmin__result)
+
+axiom H4 : (t2__mmin__result1 = urem(sub(of_int(230), x), of_int(230)))
+
+axiom H5 : (t2__mmin__result4 = t2__mmin__result2)
+
+axiom H6 : (t2__mmin__result5 = t2__mmin__result3)
+
+axiom H7 : (result1 = t2__mmin__result4)
+
  (* File "t2.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t2__mmin__result:t. forall result:t. forall t2__mmin__result1:t.
-  forall t2__mmin__result2:t. forall t2__mmin__result3:t.
-  forall t2__mmin__result4:t. forall t2__mmin__result5:t.
-  (forall result1:t. ((in_range(x) and
-  (((((t2__mmin__result1 = t2__mmin__result2) and
-  (t2__mmin__result3 = t2__mmin__result1)) and
-  ((result = t2__mmin__result) and (t2__mmin__result1 = urem(sub(of_int(230),
-  x), of_int(230))))) and ((t2__mmin__result4 = t2__mmin__result2) and
-  (t2__mmin__result5 = t2__mmin__result3))) and
-  (result1 = t2__mmin__result4))) -> ((ult(of_int(229), x) ->
-  ((((ult(of_int(229), x) and ule(sub(of_int(230), add(sub(of_int(229), x),
-  of_int(230))), of_int(1))) or ((not ult(of_int(229), x)) and
-  ule(sub(of_int(230), sub(of_int(229), x)), of_int(1)))) ->
-  (t2__mmin__result4 = sub(add(add(sub(of_int(229), x), of_int(230)),
-  of_int(1)), of_int(230)))) and ((not ((ult(of_int(229), x) ->
+goal WP_parameter_def : ((ult(of_int(229), x) -> ((((ult(of_int(229), x) and
+  ule(sub(of_int(230), add(sub(of_int(229), x), of_int(230))), of_int(1))) or
+  ((not ult(of_int(229), x)) and ule(sub(of_int(230), sub(of_int(229), x)),
+  of_int(1)))) -> (t2__mmin__result4 = sub(add(add(sub(of_int(229), x),
+  of_int(230)), of_int(1)), of_int(230)))) and ((not ((ult(of_int(229), x) ->
   ule(sub(of_int(230), add(sub(of_int(229), x), of_int(230))),
   of_int(1))) and ((not ult(of_int(229), x)) -> ule(sub(of_int(230),
   sub(of_int(229), x)), of_int(1))))) ->
@@ -683,4 +704,4 @@ goal WP_parameter_def :
   add(sub(of_int(229), x), of_int(230))), of_int(1))) and
   ((not ult(of_int(229), x)) -> ule(sub(of_int(230), sub(of_int(229), x)),
   of_int(1))))) -> (t2__mmin__result4 = add(sub(of_int(229), x),
-  of_int(1))))))))))
+  of_int(1)))))))

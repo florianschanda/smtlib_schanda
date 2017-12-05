@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -282,7 +282,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -590,25 +590,157 @@ function t26b__ref___projection(a3: t26b__ref) : integer = (a3).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall i:int. forall us:int. forall o:int.
-  forall o1:value. forall o2:int. forall j:int. forall result:int.
-  forall res1:int. forall result1:int. forall i1:int. forall res2:int.
-  forall i2:int. ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic res : int
+
+logic i : int
+
+logic simple_unc_arrays__min__result : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic temp___844 : int
+
+logic temp___843 : int
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : value
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic res2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic res3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic res4 : int
+
+logic i4 : int
+
+logic res5 : int
+
+logic i5 : int
+
+logic res6 : int
+
+logic i6 : int
+
+logic res7 : int
+
+logic i7 : int
+
+logic res8 : int
+
+logic i8 : int
+
+logic res9 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic simple_unc_arrays__min__result1 : int
+
+logic simple_unc_arrays__min__result2 : int
+
+logic simple_unc_arrays__min__result3 : int
+
+logic res10 : int
+
+logic i10 : int
+
+logic simple_unc_arrays__min__result4 : int
+
+logic res11 : int
+
+logic i11 : int
+
+logic simple_unc_arrays__min__result5 : int
+
+logic result6 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> ((not (empty({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : (not (empty({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true)) ->
-  (((us = to_rep(a)) and in_range1(to_rep(a))) ->
-  (((((((to_rep2(first(a2)) <= 1) and (1 <= to_rep2(last(a2)))) and
-  (o = 1)) and (o1 = (a1[o]))) and (o2 = to_rep1(o1))) and (({ int__content =
-  result } = { int__content = res }) and (res1 = o2))) -> (in_range2(res1) ->
-  (((to_rep(a) = r25b) and in_range1(r25b)) -> ((({ int__content = result1
-  } = { int__content = i }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= r25b)) ->
-  ((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
-   (res2 <= to_rep1((a1[j1]))))) ->
-  (((((2 <= r25b) -> dynamic_property2(2, r25b, i2)) and
-  (((-2147483648) <= 2147483647) -> in_range2(res2))) and ((2 <= i2) and
-  (i2 <= r25b))) -> (((1 <= j) and (j <= (i2 - 1))) ->
-  (to_rep2(first(a2)) <= j)))))))))))))
+  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true))
+
+axiom H2 : ((us = to_rep(a)) and in_range1(to_rep(a)))
+
+axiom H3 : ((to_rep2(first(a2)) <= 1) and (1 <= to_rep2(last(a2))))
+
+axiom H4 : (o = 1)
+
+axiom H5 : (o1 = (a1[o]))
+
+axiom H6 : (o2 = to_rep1(o1))
+
+axiom H7 : (result = res)
+
+axiom H8 : (res1 = o2)
+
+axiom H9 : in_range2(res1)
+
+axiom H10 : (to_rep(a) = r25b)
+
+axiom H11 : in_range1(r25b)
+
+axiom H12 : (result1 = i)
+
+axiom H13 : (i1 = 2)
+
+axiom H14 : (2 <= i1)
+
+axiom H15 : (i1 <= r25b)
+
+axiom H16 :
+  (forall j3:int. (((1 <= j3) and (j3 <= (i2 - 1))) ->
+  (res2 <= to_rep1((a1[j3])))))
+
+axiom H17 : ((((2 <= r25b) -> dynamic_property2(2, r25b, i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range2(res2))) and ((2 <= i2) and
+  (i2 <= r25b)))
+
+axiom H18 : (1 <= j)
+
+axiom H19 : (j <= (i2 - 1))
+
+ (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(a2)) <= j)

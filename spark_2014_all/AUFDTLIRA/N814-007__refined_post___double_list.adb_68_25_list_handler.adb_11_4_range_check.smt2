@@ -188,6 +188,7 @@
 (declare-const o21 index_type)
 (declare-const o22 index_type)
 (declare-const o23 (Array Int us_rep))
+(declare-const o24 Int)
 (declare-const result Int)
 (declare-const status1 Int)
 (declare-const result1 Int)

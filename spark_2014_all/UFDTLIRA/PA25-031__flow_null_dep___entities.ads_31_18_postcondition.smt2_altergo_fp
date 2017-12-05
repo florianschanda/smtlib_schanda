@@ -132,12 +132,27 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic current_cycles : int
+
+logic result : int
+
+logic current_cycles1 : int
+
+logic current_cycles2 : int
+
+logic current_cycles3 : int
+
+axiom H : ((1 <= 2147483647) -> in_range(current_cycles))
+
+axiom H1 : in_range(value)
+
+axiom H2 : (result = current_cycles)
+
+axiom H3 : (current_cycles1 = value)
+
+axiom H4 : (current_cycles1 = current_cycles2)
+
+axiom H5 : (current_cycles3 = current_cycles1)
+
  (* File "entities.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall current_cycles:int. forall result:int. forall current_cycles1:int.
-  forall current_cycles2:int. forall current_cycles3:int.
-  ((((1 <= 2147483647) -> in_range(current_cycles)) and (in_range(value) and
-  (((result = current_cycles) and (current_cycles1 = value)) and
-  ((current_cycles1 = current_cycles2) and
-  (current_cycles3 = current_cycles1))))) ->
-  (get_current_cycles1(current_cycles2) = value)))
+goal WP_parameter_def : (get_current_cycles1(current_cycles2) = value)

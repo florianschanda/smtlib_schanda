@@ -201,7 +201,7 @@
 (assert (=> (not (= res 0)) (= o1 (select data o))))
 (assert (=> (not (= res 0)) (= o2 (to_rep o1))))
 (assert (=> (not (= res 0)) (= result (ite (= o2 1) true false))))
-(assert (=> (not (not (= res 0))) (= result false)))
+(assert (=> (= res 0) (= result false)))
 (assert (=> (= result true) (= (to_rep o3) 0)))
 (assert (=> (= result true) (and (<= 1 res) (<= res 10000))))
 (assert (=> (= result true) (= o4 res)))

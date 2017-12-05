@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1868,14 +1868,83 @@ axiom lemma8__def_axiom : (((lemma81(void) = true) ->
    ((not (n <  256)) and ult(shift_right(val__, (8 - n)), of_int(0)))))))) ->
   (lemma81(void) = true)))
 
+logic i : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result : bool
+
+logic temp___387 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : bool
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic i8 : int
+
+logic i9 : int
+
+logic result2 : bool
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result1 : bool
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result2 : bool
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result3 : bool
+
+logic i10 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result4 : bool
+
+logic i11 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__proofs__make_mask__lemma2__result5 : bool
+
+axiom H : (lemma8(void) = true)
+
+axiom H1 : (make_mask(1) = of_int(1))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 2)
+
+axiom H4 : (2 <= i1)
+
+axiom H5 : (i1 <= 7)
+
+axiom H6 : (((i1 <  256) -> (make_mask(i1) = sub(lsl_bv(of_int(1),
+  of_int(i1)), of_int(1)))) and ((not (i1 <  256)) ->
+  (make_mask(i1) = sub(of_int(0), of_int(1)))))
+
+logic j1 : int
+
+axiom H7 : (1 <= j1)
+
+axiom H8 : (j1 <= (i1 - 1))
+
  (* File "bits_manipulation-functions.ads", line 302, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. ((lemma8(void) = true) ->
-  ((make_mask(1) = of_int(1)) -> ((({ int__content = result } = {
-  int__content = i }) and (i1 = 2)) -> (((2 <= i1) and (i1 <= 7)) ->
-  ((((i1 <  256) and (make_mask(i1) = sub(lsl_bv(of_int(1), of_int(i1)),
-  of_int(1)))) or ((not (i1 <  256)) and (make_mask(i1) = sub(of_int(0),
-  of_int(1))))) ->
-  (forall j:int. (((1 <= j) and (j <= (i1 - 1))) -> (((j <  256) ->
-  (make_mask(j) = sub(lsl_bv(of_int(1), of_int(j)), of_int(1)))) and
-  ((not (j <  256)) -> (make_mask(j) = sub(of_int(0), of_int(1)))))))))))))
+goal WP_parameter_def : (((j1 <  256) ->
+  (make_mask(j1) = sub(lsl_bv(of_int(1), of_int(j1)), of_int(1)))) and
+  ((not (j1 <  256)) -> (make_mask(j1) = sub(of_int(0), of_int(1)))))

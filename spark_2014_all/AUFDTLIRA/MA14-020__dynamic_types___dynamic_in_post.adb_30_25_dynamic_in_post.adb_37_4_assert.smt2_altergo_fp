@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -651,37 +651,109 @@ axiom temp___String_Literal_202__def_axiom :
   (to_rep((temp___String_Literal_202(void)[4])) = 108)) and
   (to_rep((temp___String_Literal_202(void)[5])) = 111))
 
- (* File "dynamic_in_post.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall y:(int,character) farray.
-  forall s:(int,character) farray. forall x1:int.
-  forall o:(int,character) farray. forall o1:(int,character) farray.
-  forall o2:t2. forall o3:int. forall result:(int,character) farray.
-  forall x2:(int,character) farray. forall result1:(int,character) farray.
-  forall y1:(int,character) farray. forall result2:(int,character) farray.
-  forall s1:(int,character) farray. forall result3:int. forall x3:int.
-  forall result4:bool. forall x4:int. ((((({ map__content = result } = {
-  map__content = x }) and (x2 = temp___String_Literal_197(void))) and
-  ((to_rep1(x__first) = to_rep1(first(mk(1, 5)))) and
-  (to_rep1(x__last) = to_rep1(last(mk(1, 5)))))) and (dynamic_property(1,
-  2147483647, to_rep1(x__first), to_rep1(x__last)) and (((({ map__content =
-  result1 } = { map__content = y }) and
-  (y1 = temp___String_Literal_195(void))) and
-  ((to_rep1(y__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(y__last) = to_rep1(last(mk(1, 3)))))) and (dynamic_property(1,
-  2147483647, to_rep1(y__first), to_rep1(y__last)) and (get_last({ elts = x2;
-  rt = mk(to_rep1(x__first), to_rep1(x__last)) }) = get_last({ elts = y1;
-  rt = mk(to_rep1(y__first), to_rep1(y__last)) })))))) ->
-  ((((result2 = s) and (s1 = temp___String_Literal_202(void))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 5)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 5)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result3 = x1) and
-  (x3 = 1)) -> (in_range2(x3) -> (((((((to_rep1(s__first) <= x3) ->
+logic x : (int,character) farray
+
+logic y : (int,character) farray
+
+logic s : (int,character) farray
+
+logic x1 : int
+
+logic o : (int,character) farray
+
+logic o1 : (int,character) farray
+
+logic o2 : t2
+
+logic o3 : int
+
+logic result : (int,character) farray
+
+logic x2 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic y1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result3 : int
+
+logic x3 : int
+
+logic result4 : bool
+
+logic x4 : int
+
+logic result5 : int
+
+logic x5 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x2 = temp___String_Literal_197(void))
+
+axiom H2 : (to_rep1(x__first) = to_rep1(first(mk(1, 5))))
+
+axiom H3 : (to_rep1(x__last) = to_rep1(last(mk(1, 5))))
+
+axiom H4 : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = temp___String_Literal_195(void))
+
+axiom H7 : (to_rep1(y__first) = to_rep1(first(mk(1, 3))))
+
+axiom H8 : (to_rep1(y__last) = to_rep1(last(mk(1, 3))))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(y__first),
+  to_rep1(y__last))
+
+axiom H10 : (get_last({ elts = x2; rt = mk(to_rep1(x__first),
+  to_rep1(x__last)) }) = get_last({ elts = y1; rt = mk(to_rep1(y__first),
+  to_rep1(y__last)) }))
+
+axiom H11 : (result2 = s)
+
+axiom H12 : (s1 = temp___String_Literal_202(void))
+
+axiom H13 : (to_rep1(s__first) = to_rep1(first(mk(1, 5))))
+
+axiom H14 : (to_rep1(s__last) = to_rep1(last(mk(1, 5))))
+
+axiom H15 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H16 : (result3 = x1)
+
+axiom H17 : (x3 = 1)
+
+axiom H18 : in_range2(x3)
+
+axiom H19 : ((to_rep1(s__first) <= x3) ->
   (((to_rep1(s__first) <= to_rep1(s__first)) and
   (to_rep1(s__first) <= to_rep1(s__last))) and ((to_rep1(s__first) <= x3) and
-  (x3 <= to_rep1(s__last))))) and (o = s1)) and ((o = o1) and
-  (mk2(to_rep1(s__first), x3) = o2))) and (o3 = to_rep1(last4(o2)))) and
-  (((o3 = x3) and (result4 = true)) or ((not (o3 = x3)) and
-  (result4 = false)))) -> ((result4 = true) -> ((((1 <= 2147483647) ->
-  in_range2(x4)) and (to_rep1(last4(mk2(to_rep1(s__first), x4))) = x4)) ->
-  (x4 = 1))))))))))
+  (x3 <= to_rep1(s__last)))))
+
+axiom H20 : (o = s1)
+
+axiom H21 : (o = o1)
+
+axiom H22 : (mk2(to_rep1(s__first), x3) = o2)
+
+axiom H23 : (o3 = to_rep1(last4(o2)))
+
+axiom H24 : (((o3 = x3) -> (result4 = true)) and ((not (o3 = x3)) ->
+  (result4 = false)))
+
+axiom H25 : (result4 = true)
+
+axiom H26 : (((1 <= 2147483647) -> in_range2(x4)) and
+  (to_rep1(last4(mk2(to_rep1(s__first), x4))) = x4))
+
+ (* File "dynamic_in_post.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (x4 = 1)

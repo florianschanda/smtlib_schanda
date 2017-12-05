@@ -120,6 +120,7 @@
 (define-fun dynamic_invariant3 ((temp___expr_63 Int) (temp___is_init_60 Bool) (temp___skip_constant_61 Bool) (temp___do_toplevel_62 Bool)) Bool (=> (or (= temp___is_init_60 true) (<= 0 255)) (in_range2 temp___expr_63)))
 (define-fun dynamic_invariant4 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const l Int)
+(declare-const o Int)
 (assert (dynamic_invariant1 s true false true))
 (assert (=> (<= 0 2147483647) (in_range3 l)))
 (assert (not (in_range3 (length s))))

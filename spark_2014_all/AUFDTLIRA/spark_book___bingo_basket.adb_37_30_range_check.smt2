@@ -90,6 +90,7 @@
 (declare-const o Int)
 (declare-const o1 callable_number)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const number1 Int)
 (assert (in_range1 the_count))

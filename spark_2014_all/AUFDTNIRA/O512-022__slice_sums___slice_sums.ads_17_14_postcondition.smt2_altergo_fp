@@ -83,7 +83,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -242,18 +242,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -271,7 +271,7 @@ axiom mod_def :
 
 type vector_element
 
-predicate in_range3(x: int) = ((comp_div((-2147483648),65536) <= x) and
+predicate in_range3(x: int) = ((comp_div((- 2147483648),65536) <= x) and
   (x <= comp_div(2147483647,65536)))
 
 logic bool_eq4 : int, int -> bool
@@ -711,219 +711,997 @@ function t26b__ref___projection(a: t26b__ref) : integer = (a).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "sums.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall max_sum:int. forall current_sum:int. forall current_lo:int.
-  forall result____split_fields:index.
-  forall result____split_fields1:extended_index. forall current_hi:int.
-  forall slice_sums__maximal_sum_slice_bounds_2__result:index.
-  forall slice_sums__maximal_sum_slice_bounds_2__result1:extended_index.
-  forall o:extended_index. forall o1:index. forall o2:index.
-  forall o3:extended_index. forall temp___188:index.
-  forall temp___1881:extended_index. forall o4:int. forall o5:extended_index.
-  forall o6:index. forall o7:index. forall o8:extended_index.
-  forall temp___176:index. forall temp___1761:extended_index.
-  forall temp___185:index. forall temp___1851:extended_index.
-  forall temp___184:int. forall temp___183:int. forall temp___182:int.
-  forall temp___181:int. forall o9:int. forall o10:int. forall o11:index.
-  forall o12:index. forall o13:extended_index. forall temp___178:index.
-  forall temp___1781:extended_index. forall o14:int.
-  forall o15:extended_index. forall o16:index. forall o17:extended_index.
-  forall temp___180:index. forall temp___1801:extended_index. forall o18:int.
-  forall o19:int. forall current_lo1:int. forall current_hi1:int.
-  forall result:int. forall max_sum1:int. forall result1:int.
-  forall current_sum1:int. forall result2:index.
-  forall result3:extended_index.
-  forall result____split_fields2:us_split_fields.
-  forall result4:us_split_fields__ref.
-  forall result____split_fields3:us_split_fields. forall result5:int__ref.
-  forall current_lo2:int. forall result6:int__ref. forall current_hi2:int.
-  forall max_sum2:int. forall current_sum2:int. forall current_lo3:int.
-  forall result____split_fields4:us_split_fields. forall current_hi3:int.
-  forall result7:int__ref. forall current_sum3:int. forall result8:int__ref.
-  forall max_sum3:int. forall result9:us_split_fields__ref.
-  forall result____split_fields5:us_split_fields.
-  forall result10:us_split_fields__ref.
-  forall result____split_fields6:us_split_fields. forall result11:int__ref.
-  forall current_lo4:int. forall result12:int__ref. forall current_sum4:int.
-  forall max_sum4:int__ref. forall current_sum5:int__ref.
-  forall current_lo5:int__ref.
-  forall result____split_fields7:us_split_fields__ref.
-  forall current_hi4:int__ref. forall max_sum5:int. forall current_sum6:int.
-  forall current_lo6:int. forall result____split_fields8:us_split_fields.
-  forall current_hi5:int. forall max_sum6:int__ref.
-  forall current_sum7:int__ref. forall current_lo7:int__ref.
-  forall result____split_fields9:us_split_fields__ref.
-  forall current_hi6:int__ref. forall max_sum7:int. forall current_sum8:int.
-  forall current_lo8:int. forall result____split_fields10:us_split_fields.
-  forall current_hi7:int. forall max_sum8:int__ref.
-  forall current_sum9:int__ref. forall current_lo9:int__ref.
-  forall result____split_fields11:us_split_fields__ref.
-  forall current_hi8:int__ref. forall max_sum9:int. forall current_sum10:int.
-  forall current_lo10:int. forall result____split_fields12:us_split_fields.
-  forall current_hi9:int. forall result13:slice_bounds__ref.
-  forall slice_sums__maximal_sum_slice_bounds_2__result2:slice_bounds.
-  forall slice_sums__maximal_sum_slice_bounds_2__result3:slice_bounds__ref.
-  forall slice_sums__maximal_sum_slice_bounds_2__result4:slice_bounds.
-  forall max_sum10:int__ref. forall current_sum11:int__ref.
-  forall current_lo11:int__ref.
-  forall result____split_fields13:us_split_fields__ref.
-  forall current_hi10:int__ref.
-  forall slice_sums__maximal_sum_slice_bounds_2__result5:slice_bounds__ref.
-  forall max_sum11:int. forall current_sum12:int. forall current_lo12:int.
-  forall result____split_fields14:us_split_fields. forall current_hi11:int.
-  forall slice_sums__maximal_sum_slice_bounds_2__result6:slice_bounds.
-  (forall result14:index. forall result15:extended_index.
-  ((dynamic_invariant({ elts = x; rt = x1 }, true, false, true) and
-  (((((result = max_sum) and (max_sum1 = 0)) and (in_range2(max_sum1) and
-  (((result1 = current_sum) and (current_sum1 = 0)) and
-  (in_range1(current_sum1) and (in_range4(current_lo) and
-  ((((to_rep3(last(x1)) <  to_rep3(first(x1))) and (((((to_rep2(o) = 0) and
-  ((to_rep1(o1) = 1) and ((o1 = o2) and (o = o3)))) and
-  ((temp___188 = o2) and (temp___1881 = o3))) and
-  (((result2 = result____split_fields) and
-  (result3 = result____split_fields1)) and (result____split_fields2 = {
-  rec__sums__slice_bounds__lo = temp___188; rec__sums__slice_bounds__hi =
-  temp___1881 }))) and (((current_hi8 = { int__content = current_hi }) and
-  ((result____split_fields11 = { us_split_fields__content =
-  result____split_fields2 }) and ((current_lo9 = { int__content = current_lo
-  }) and ((current_sum9 = { int__content = current_sum1 }) and (max_sum8 = {
-  int__content = max_sum1 }))))) and ((current_hi9 = current_hi1) and
-  ((result____split_fields12 = result____split_fields2) and
-  ((current_lo10 = current_lo1) and ((current_sum10 = current_sum1) and
-  (max_sum9 = max_sum1)))))))) or
-  ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) and
-  ((((((to_rep2(o5) = 0) and ((((o4 = to_rep3(first(x1))) and
-  in_range4(to_rep3(first(x1)))) and (to_rep1(o6) = o4)) and ((o6 = o7) and
-  (o5 = o8)))) and ((temp___176 = o7) and (temp___1761 = o8))) and
-  ((result4 = { us_split_fields__content = { rec__sums__slice_bounds__lo =
-  result____split_fields; rec__sums__slice_bounds__hi =
-  result____split_fields1 } }) and (result____split_fields3 = {
-  rec__sums__slice_bounds__lo = temp___176; rec__sums__slice_bounds__hi =
-  temp___1761 }))) and (((result5 = { int__content = current_lo }) and
-  (current_lo2 = to_rep1((result____split_fields3).rec__sums__slice_bounds__lo))) and
-  (((result6 = { int__content = current_hi }) and
-  (current_hi2 = to_rep3(first(x1)))) and
-  ((((to_rep3(first(x1)) <= current_hi2) and
-  (current_hi2 <= to_rep3(last(x1)))) and ((((result____split_fields3 = {
-  rec__sums__slice_bounds__lo = temp___185; rec__sums__slice_bounds__hi =
-  temp___1851 }) and ((temp___184 = current_hi2) and
-  ((temp___183 = current_lo2) and ((temp___182 = current_sum1) and
-  ((temp___181 = max_sum1) and ((((((to_rep3(first(x1)) <= current_lo3) and
+logic max_sum : int
+
+logic current_sum : int
+
+logic current_lo : int
+
+logic result____split_fields : index
+
+logic result____split_fields1 : extended_index
+
+logic current_hi : int
+
+logic slice_sums__maximal_sum_slice_bounds_2__result : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result1 : extended_index
+
+logic o : extended_index
+
+logic o1 : index
+
+logic o2 : index
+
+logic o3 : extended_index
+
+logic temp___188 : index
+
+logic temp___1881 : extended_index
+
+logic o4 : int
+
+logic o5 : extended_index
+
+logic o6 : index
+
+logic o7 : index
+
+logic o8 : extended_index
+
+logic temp___176 : index
+
+logic temp___1761 : extended_index
+
+logic temp___185 : index
+
+logic temp___1851 : extended_index
+
+logic temp___184 : int
+
+logic temp___183 : int
+
+logic temp___182 : int
+
+logic temp___181 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : extended_index
+
+logic o15 : index
+
+logic o16 : index
+
+logic o17 : extended_index
+
+logic o18 : index
+
+logic o19 : extended_index
+
+logic o20 : int
+
+logic lo_index : int
+
+logic us : int
+
+logic o21 : int
+
+logic o22 : bool
+
+logic hi_index : int
+
+logic us1 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic o25 : extended_index
+
+logic o26 : index
+
+logic o27 : index
+
+logic o28 : extended_index
+
+logic o29 : index
+
+logic o30 : extended_index
+
+logic o31 : int
+
+logic lo_index1 : int
+
+logic o32 : extended_index
+
+logic o33 : index
+
+logic o34 : index
+
+logic o35 : extended_index
+
+logic o36 : index
+
+logic o37 : extended_index
+
+logic o38 : int
+
+logic hi_index1 : int
+
+logic us2 : int
+
+logic o39 : int
+
+logic o40 : bool
+
+logic o41 : extended_index
+
+logic o42 : index
+
+logic o43 : index
+
+logic o44 : extended_index
+
+logic o45 : index
+
+logic o46 : extended_index
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : index
+
+logic o51 : index
+
+logic o52 : extended_index
+
+logic temp___178 : index
+
+logic temp___1781 : extended_index
+
+logic o53 : int
+
+logic o54 : extended_index
+
+logic o55 : index
+
+logic o56 : extended_index
+
+logic temp___180 : index
+
+logic temp___1801 : extended_index
+
+logic o57 : int
+
+logic o58 : int
+
+logic lo : int
+
+logic hi : int
+
+logic o59 : extended_index
+
+logic o60 : index
+
+logic o61 : index
+
+logic o62 : extended_index
+
+logic o63 : index
+
+logic o64 : extended_index
+
+logic o65 : int
+
+logic current_lo1 : int
+
+logic current_hi1 : int
+
+logic result : int
+
+logic max_sum1 : int
+
+logic result1 : int
+
+logic current_sum1 : int
+
+logic result2 : index
+
+logic result3 : extended_index
+
+logic result____split_fields2 : index
+
+logic result____split_fields3 : extended_index
+
+logic result4 : index
+
+logic result5 : extended_index
+
+logic result____split_fields4 : index
+
+logic result____split_fields5 : extended_index
+
+logic result6 : int
+
+logic current_lo2 : int
+
+logic result7 : int
+
+logic current_hi2 : int
+
+logic max_sum2 : int
+
+logic current_sum2 : int
+
+logic current_lo3 : int
+
+logic result____split_fields6 : index
+
+logic result____split_fields7 : extended_index
+
+logic current_hi3 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : int
+
+logic current_sum3 : int
+
+logic result13 : int
+
+logic max_sum3 : int
+
+logic result14 : index
+
+logic result15 : extended_index
+
+logic result____split_fields8 : index
+
+logic result____split_fields9 : extended_index
+
+logic result16 : index
+
+logic result17 : extended_index
+
+logic result____split_fields10 : index
+
+logic result____split_fields11 : extended_index
+
+logic result18 : int
+
+logic current_lo4 : int
+
+logic result19 : int
+
+logic current_sum4 : int
+
+logic result20 : int
+
+logic current_hi4 : int
+
+logic max_sum4 : int
+
+logic current_sum5 : int
+
+logic current_lo5 : int
+
+logic result____split_fields12 : index
+
+logic result____split_fields13 : extended_index
+
+logic current_hi5 : int
+
+logic max_sum5 : int
+
+logic current_sum6 : int
+
+logic current_lo6 : int
+
+logic result____split_fields14 : index
+
+logic result____split_fields15 : extended_index
+
+logic current_hi6 : int
+
+logic max_sum6 : int
+
+logic current_sum7 : int
+
+logic current_lo7 : int
+
+logic result____split_fields16 : index
+
+logic result____split_fields17 : extended_index
+
+logic current_hi7 : int
+
+logic max_sum7 : int
+
+logic current_sum8 : int
+
+logic current_lo8 : int
+
+logic result____split_fields18 : index
+
+logic result____split_fields19 : extended_index
+
+logic current_hi8 : int
+
+logic max_sum8 : int
+
+logic current_sum9 : int
+
+logic current_lo9 : int
+
+logic result____split_fields20 : index
+
+logic result____split_fields21 : extended_index
+
+logic current_hi9 : int
+
+logic max_sum9 : int
+
+logic current_sum10 : int
+
+logic current_lo10 : int
+
+logic result____split_fields22 : index
+
+logic result____split_fields23 : extended_index
+
+logic current_hi10 : int
+
+logic result21 : index
+
+logic result22 : extended_index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result2 : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result3 : extended_index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result4 : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result5 : extended_index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result6 : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result7 : extended_index
+
+logic max_sum10 : int
+
+logic current_sum11 : int
+
+logic current_lo11 : int
+
+logic result____split_fields24 : index
+
+logic result____split_fields25 : extended_index
+
+logic current_hi11 : int
+
+logic slice_sums__maximal_sum_slice_bounds_2__result8 : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result9 : extended_index
+
+logic max_sum11 : int
+
+logic current_sum12 : int
+
+logic current_lo12 : int
+
+logic result____split_fields26 : index
+
+logic result____split_fields27 : extended_index
+
+logic current_hi12 : int
+
+logic slice_sums__maximal_sum_slice_bounds_2__result10 : index
+
+logic slice_sums__maximal_sum_slice_bounds_2__result11 : extended_index
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic result25 : index
+
+logic result26 : extended_index
+
+axiom H : dynamic_invariant({ elts = x; rt = x1 }, true, false, true)
+
+axiom H1 : (result = max_sum)
+
+axiom H2 : (max_sum1 = 0)
+
+axiom H3 : in_range2(max_sum1)
+
+axiom H4 : (result1 = current_sum)
+
+axiom H5 : (current_sum1 = 0)
+
+axiom H6 : in_range1(current_sum1)
+
+axiom H7 : in_range4(current_lo)
+
+axiom H8 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (to_rep2(o) = 0))
+
+axiom H9 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (to_rep1(o1) = 1))
+
+axiom H10 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (o1 = o2))
+
+axiom H11 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (o = o3))
+
+axiom H12 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (temp___188 = o2))
+
+axiom H13 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) -> (temp___1881 = o3))
+
+axiom H14 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  ((result2 = result____split_fields) and
+  (result3 = result____split_fields1)))
+
+axiom H15 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  ((result____split_fields2 = temp___188) and
+  (result____split_fields3 = temp___1881)))
+
+axiom H16 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_hi9 = current_hi))
+
+axiom H17 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  ((result____split_fields20 = result____split_fields2) and
+  (result____split_fields21 = result____split_fields3)))
+
+axiom H18 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_lo9 = current_lo))
+
+axiom H19 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_sum9 = current_sum1))
+
+axiom H20 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (max_sum8 = max_sum1))
+
+axiom H21 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_hi10 = current_hi1))
+
+axiom H22 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  ((result____split_fields22 = result____split_fields2) and
+  (result____split_fields23 = result____split_fields3)))
+
+axiom H23 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_lo10 = current_lo1))
+
+axiom H24 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (current_sum10 = current_sum1))
+
+axiom H25 : ((to_rep3(last(x1)) <  to_rep3(first(x1))) ->
+  (max_sum9 = max_sum1))
+
+axiom H26 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (to_rep2(o5) = 0))
+
+axiom H27 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((o4 = to_rep3(first(x1))) and in_range4(to_rep3(first(x1)))))
+
+axiom H28 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (to_rep1(o6) = o4))
+
+axiom H29 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) -> (o6 = o7))
+
+axiom H30 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) -> (o5 = o8))
+
+axiom H31 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (temp___176 = o7))
+
+axiom H32 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (temp___1761 = o8))
+
+axiom H33 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((result4 = result____split_fields) and
+  (result5 = result____split_fields1)))
+
+axiom H34 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((result____split_fields4 = temp___176) and
+  (result____split_fields5 = temp___1761)))
+
+axiom H35 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (result6 = current_lo))
+
+axiom H36 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_lo2 = to_rep1(result____split_fields4)))
+
+axiom H37 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (result7 = current_hi))
+
+axiom H38 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_hi2 = to_rep3(first(x1))))
+
+axiom H39 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((result____split_fields4 = temp___185) and
+  (result____split_fields5 = temp___1851))))
+
+axiom H40 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (temp___184 = current_hi2)))
+
+axiom H41 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (temp___183 = current_lo2)))
+
+axiom H42 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (temp___182 = current_sum1)))
+
+axiom H43 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (temp___181 = max_sum1)))
+
+axiom H44 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((((to_rep3(first(x1)) <= current_lo3) and
   (current_lo3 <= current_hi3)) and (0 <= current_sum2)) and
-  (current_sum2 <= ((current_hi3 - current_lo3) * 32767))) and
-  ((current_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 = {
-  rec__sums__slice_bounds__lo = of_rep1(current_lo3);
-  rec__sums__slice_bounds__hi = of_rep2((current_hi3 - 1)) } })) and
-  ((((to_rep1((result____split_fields4).rec__sums__slice_bounds__lo) <= to_rep2((result____split_fields4).rec__sums__slice_bounds__hi)) and
-  (((to_rep3(first(x1)) <= to_rep1((result____split_fields4).rec__sums__slice_bounds__lo)) and
-  (to_rep2((result____split_fields4).rec__sums__slice_bounds__hi) <= to_rep3(last(x1)))) and
-  (max_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 =
-  result____split_fields4 })))) or
-  (not (to_rep1((result____split_fields4).rec__sums__slice_bounds__lo) <= to_rep2((result____split_fields4).rec__sums__slice_bounds__hi)))) and
-  ((forall lo_index:int. (((to_rep3(first(x1)) <= lo_index) and
-   (lo_index <= (current_hi3 - 1))) ->
-   (forall hi_index:int. (((to_rep3(first(x1)) <= hi_index) and
-   (hi_index <= (current_hi3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
-   us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index);
-   rec__sums__slice_bounds__hi = of_rep2(hi_index) } }) <= max_sum2))))) and
-  ((forall lo_index:int. (((to_rep3(first(x1)) <= lo_index) and
-   (lo_index <= (current_lo3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
-   us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index);
-   rec__sums__slice_bounds__hi = of_rep2((current_lo3 - 1)) } }) <= 0))) and
-  (forall hi_index:int. (((current_lo3 <= hi_index) and
-  (hi_index <= (current_hi3 - 1))) -> (0 <= sum__logic({ elts = x; rt = x1 },
-  { us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(current_lo3);
-  rec__sums__slice_bounds__hi = of_rep2(hi_index) } }))))))))) and
-  (((((((0 <= 2147483647) -> in_range2(max_sum2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(current_sum2))) and
-  in_range4(current_lo3)) and ((to_rep3(first(x1)) <= to_rep3(last(x1))) ->
+  (current_sum2 <= ((current_hi3 - current_lo3) * 32767)))))
+
+axiom H45 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum2 = sum__logic({ elts =
+  x; rt = x1 }, { us_split_fields1 = { rec__sums__slice_bounds__lo =
+  of_rep1(current_lo3); rec__sums__slice_bounds__hi =
+  of_rep2((current_hi3 - 1)) } }))))
+
+axiom H46 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((to_rep1(result____split_fields6) <= to_rep2(result____split_fields7)) ->
+  (((to_rep3(first(x1)) <= to_rep1(result____split_fields6)) and
+  (to_rep2(result____split_fields7) <= to_rep3(last(x1)))) and
+  (max_sum2 = sum__logic({ elts = x; rt = x1 }, { us_split_fields1 = {
+  rec__sums__slice_bounds__lo = result____split_fields6;
+  rec__sums__slice_bounds__hi = result____split_fields7 } }))))))
+
+axiom H47 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  (forall lo_index2:int. (((to_rep3(first(x1)) <= lo_index2) and
+  (lo_index2 <= (current_hi3 - 1))) ->
+  (forall hi_index2:int. (((to_rep3(first(x1)) <= hi_index2) and
+  (hi_index2 <= (current_hi3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index2);
+  rec__sums__slice_bounds__hi = of_rep2(hi_index2) } }) <= max_sum2)))))))
+
+axiom H48 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  (forall lo_index2:int. (((to_rep3(first(x1)) <= lo_index2) and
+  (lo_index2 <= (current_lo3 - 1))) -> (sum__logic({ elts = x; rt = x1 }, {
+  us_split_fields1 = { rec__sums__slice_bounds__lo = of_rep1(lo_index2);
+  rec__sums__slice_bounds__hi = of_rep2((current_lo3 - 1)) } }) <= 0)))))
+
+axiom H49 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  (forall hi_index2:int. (((current_lo3 <= hi_index2) and
+  (hi_index2 <= (current_hi3 - 1))) -> (0 <= sum__logic({ elts = x; rt = x1
+  }, { us_split_fields1 = { rec__sums__slice_bounds__lo =
+  of_rep1(current_lo3); rec__sums__slice_bounds__hi = of_rep2(hi_index2) }
+  }))))))
+
+axiom H50 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((((((0 <= 2147483647) ->
+  in_range2(max_sum2)) and (((- 2147483648) <= 2147483647) ->
+  in_range1(current_sum2))) and in_range4(current_lo3)) and
+  ((to_rep3(first(x1)) <= to_rep3(last(x1))) ->
   dynamic_property1(to_rep3(first(x1)), to_rep3(last(x1)), current_hi3))) and
   ((to_rep3(first(x1)) <= current_hi3) and
-  (current_hi3 <= to_rep3(last(x1))))) and
-  ((((o9 = (current_sum2 + to_rep((x[current_hi3])))) and
-  in_range1((current_sum2 + to_rep((x[current_hi3]))))) and ((result7 = {
-  int__content = current_sum2 }) and (current_sum3 = o9))) and
-  ((((max_sum2 <  current_sum3) and (((((o10 = current_sum3) and
-  in_range2(current_sum3)) and ((result8 = { int__content = max_sum2 }) and
-  (max_sum3 = o10))) and (((((to_rep1(o11) = current_lo3) and
-  ((o11 = o12) and
-  ((result____split_fields4).rec__sums__slice_bounds__hi = o13))) and
-  ((temp___178 = o12) and (temp___1781 = o13))) and ((result9 = {
-  us_split_fields__content = result____split_fields4 }) and
-  (result____split_fields5 = { rec__sums__slice_bounds__lo = temp___178;
-  rec__sums__slice_bounds__hi = temp___1781 }))) and
-  ((((((o14 = current_hi3) and in_range5(current_hi3)) and
-  (to_rep2(o15) = o14)) and
-  (((result____split_fields5).rec__sums__slice_bounds__lo = o16) and
-  (o15 = o17))) and ((temp___180 = o16) and (temp___1801 = o17))) and
-  ((result10 = { us_split_fields__content = result____split_fields5 }) and
-  (result____split_fields6 = { rec__sums__slice_bounds__lo = temp___180;
-  rec__sums__slice_bounds__hi = temp___1801 }))))) and
-  ((current_lo4 = current_lo3) and (current_sum4 = current_sum3)))) or
-  ((not (max_sum2 <  current_sum3)) and ((((current_sum3 <  0) and
-  (((not (current_hi3 = 65536)) and (((((o18 = (current_hi3 + 1)) and
-  in_range1((current_hi3 + 1))) and ((o19 = o18) and in_range4(o18))) and
-  ((result11 = { int__content = current_lo3 }) and (current_lo4 = o19))) and
-  ((result12 = { int__content = current_sum3 }) and (current_sum4 = 0)))) or
-  ((current_hi3 = 65536) and ((current_lo4 = current_lo3) and
-  (current_sum4 = current_sum3))))) or ((not (current_sum3 <  0)) and
-  ((current_lo4 = current_lo3) and (current_sum4 = current_sum3)))) and
-  ((result____split_fields6 = result____split_fields4) and
-  (max_sum3 = max_sum2))))) and
-  (current_hi3 = to_rep3(last(x1)))))))))))) and (((current_hi4 = {
-  int__content = current_hi3 }) and ((result____split_fields7 = {
-  us_split_fields__content = result____split_fields6 }) and ((current_lo5 = {
-  int__content = current_lo4 }) and ((current_sum5 = { int__content =
-  current_sum4 }) and (max_sum4 = { int__content = max_sum3 }))))) and
-  ((current_hi5 = current_hi3) and
-  ((result____split_fields8 = result____split_fields6) and
-  ((current_lo6 = current_lo4) and ((current_sum6 = current_sum4) and
-  (max_sum5 = max_sum3))))))) and (((current_hi6 = current_hi4) and
-  ((result____split_fields9 = result____split_fields7) and
-  ((current_lo7 = current_lo5) and ((current_sum7 = current_sum5) and
-  (max_sum6 = max_sum4))))) and ((current_hi7 = current_hi5) and
-  ((result____split_fields10 = result____split_fields8) and
-  ((current_lo8 = current_lo6) and ((current_sum8 = current_sum6) and
-  (max_sum7 = max_sum5)))))))) or
-  ((not ((to_rep3(first(x1)) <= current_hi2) and
-  (current_hi2 <= to_rep3(last(x1))))) and (((current_hi6 = { int__content =
-  current_hi2 }) and ((result____split_fields9 = { us_split_fields__content =
-  result____split_fields3 }) and ((current_lo7 = { int__content = current_lo2
-  }) and ((current_sum7 = { int__content = current_sum1 }) and (max_sum6 = {
-  int__content = max_sum1 }))))) and ((current_hi7 = current_hi2) and
-  ((result____split_fields10 = result____split_fields3) and
-  ((current_lo8 = current_lo2) and ((current_sum8 = current_sum1) and
-  (max_sum7 = max_sum1))))))))))) and (((current_hi8 = current_hi6) and
-  ((result____split_fields11 = result____split_fields9) and
-  ((current_lo9 = current_lo7) and ((current_sum9 = current_sum7) and
-  (max_sum8 = max_sum6))))) and ((current_hi9 = current_hi7) and
+  (current_hi3 <= to_rep3(last(x1)))))))
+
+axiom H51 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((o48 = (current_sum2 + to_rep((x[current_hi3])))) and
+  in_range1((current_sum2 + to_rep((x[current_hi3])))))))
+
+axiom H52 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (result12 = current_sum2)))
+
+axiom H53 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum3 = o48)))
+
+axiom H54 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((o49 = current_sum3) and in_range2(current_sum3)))))
+
+axiom H55 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (result13 = max_sum2))))
+
+axiom H56 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (max_sum3 = o49))))
+
+axiom H57 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (to_rep1(o50) = current_lo3))))
+
+axiom H58 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((o51 = o50) and (o52 = result____split_fields7)))))
+
+axiom H59 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((temp___178 = o51) and (temp___1781 = o52)))))
+
+axiom H60 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((result14 = result____split_fields6) and
+  (result15 = result____split_fields7)))))
+
+axiom H61 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((result____split_fields8 = temp___178) and
+  (result____split_fields9 = temp___1781)))))
+
+axiom H62 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((o53 = current_hi3) and in_range5(current_hi3)))))
+
+axiom H63 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (to_rep2(o54) = o53))))
+
+axiom H64 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((o55 = result____split_fields8) and (o56 = o54)))))
+
+axiom H65 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((temp___180 = o55) and (temp___1801 = o56)))))
+
+axiom H66 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((result16 = result____split_fields8) and
+  (result17 = result____split_fields9)))))
+
+axiom H67 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  ((result____split_fields10 = temp___180) and
+  (result____split_fields11 = temp___1801)))))
+
+axiom H68 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (current_lo4 = current_lo3))))
+
+axiom H69 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((max_sum2 <  current_sum3) ->
+  (current_sum4 = current_sum3))))
+
+axiom H70 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) ->
+  ((o57 = (current_hi3 + 1)) and in_range1((current_hi3 + 1))))))))
+
+axiom H71 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) -> ((o58 = o57) and
+  in_range4(o57)))))))
+
+axiom H72 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) ->
+  (result18 = current_lo3))))))
+
+axiom H73 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) ->
+  (current_lo4 = o58))))))
+
+axiom H74 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) ->
+  (result19 = current_sum3))))))
+
+axiom H75 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((not (current_hi3 = 65536)) ->
+  (current_sum4 = 0))))))
+
+axiom H76 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((current_hi3 = 65536) ->
+  (current_lo4 = current_lo3))))))
+
+axiom H77 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((current_sum3 <  0) -> ((current_hi3 = 65536) ->
+  (current_sum4 = current_sum3))))))
+
+axiom H78 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((not (current_sum3 <  0)) -> (current_lo4 = current_lo3)))))
+
+axiom H79 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((not (current_sum3 <  0)) -> (current_sum4 = current_sum3)))))
+
+axiom H80 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  ((result____split_fields10 = result____split_fields6) and
+  (result____split_fields11 = result____split_fields7)))))
+
+axiom H81 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> ((not (max_sum2 <  current_sum3)) ->
+  (max_sum3 = max_sum2))))
+
+axiom H82 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_hi3 = to_rep3(last(x1)))))
+
+axiom H83 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_hi5 = current_hi3)))
+
+axiom H84 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
   ((result____split_fields12 = result____split_fields10) and
-  ((current_lo10 = current_lo8) and ((current_sum10 = current_sum8) and
-  (max_sum9 = max_sum7))))))))) and
-  (((slice_sums__maximal_sum_slice_bounds_2__result3 = {
-  slice_bounds__content = slice_sums__maximal_sum_slice_bounds_2__result2
-  }) and
-  (slice_sums__maximal_sum_slice_bounds_2__result4 = slice_sums__maximal_sum_slice_bounds_2__result2)) and
-  ((result13 = { slice_bounds__content = { us_split_fields1 = {
-  rec__sums__slice_bounds__lo =
-  slice_sums__maximal_sum_slice_bounds_2__result;
-  rec__sums__slice_bounds__hi =
-  slice_sums__maximal_sum_slice_bounds_2__result1 } } }) and
-  (slice_sums__maximal_sum_slice_bounds_2__result2 = { us_split_fields1 =
-  (result____split_fields11).us_split_fields__content }))))))))) and
-  (((slice_sums__maximal_sum_slice_bounds_2__result5 = slice_sums__maximal_sum_slice_bounds_2__result3) and
-  ((current_hi10 = current_hi8) and
-  ((result____split_fields13 = result____split_fields11) and
-  ((current_lo11 = current_lo9) and ((current_sum11 = current_sum9) and
-  (max_sum10 = max_sum8)))))) and
-  ((slice_sums__maximal_sum_slice_bounds_2__result6 = slice_sums__maximal_sum_slice_bounds_2__result4) and
-  ((current_hi11 = current_hi9) and
-  ((result____split_fields14 = result____split_fields12) and
-  ((current_lo12 = current_lo10) and ((current_sum12 = current_sum10) and
-  (max_sum11 = max_sum9)))))))) and ({ us_split_fields1 = {
-  rec__sums__slice_bounds__lo = result14; rec__sums__slice_bounds__hi =
-  result15 }
-  } = (slice_sums__maximal_sum_slice_bounds_2__result5).slice_bounds__content))) ->
-  ((to_rep1((((slice_sums__maximal_sum_slice_bounds_2__result5).slice_bounds__content).us_split_fields1).rec__sums__slice_bounds__lo) <= to_rep2((((slice_sums__maximal_sum_slice_bounds_2__result5).slice_bounds__content).us_split_fields1).rec__sums__slice_bounds__hi)) ->
-  (to_rep3(first(x1)) <= to_rep1((((slice_sums__maximal_sum_slice_bounds_2__result5).slice_bounds__content).us_split_fields1).rec__sums__slice_bounds__lo))))))
+  (result____split_fields13 = result____split_fields11))))
+
+axiom H85 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_lo5 = current_lo4)))
+
+axiom H86 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum5 = current_sum4)))
+
+axiom H87 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (max_sum4 = max_sum3)))
+
+axiom H88 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_hi6 = current_hi3)))
+
+axiom H89 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((result____split_fields14 = result____split_fields10) and
+  (result____split_fields15 = result____split_fields11))))
+
+axiom H90 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_lo6 = current_lo4)))
+
+axiom H91 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum6 = current_sum4)))
+
+axiom H92 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (max_sum5 = max_sum3)))
+
+axiom H93 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_hi7 = current_hi5)))
+
+axiom H94 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((result____split_fields16 = result____split_fields12) and
+  (result____split_fields17 = result____split_fields13))))
+
+axiom H95 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_lo7 = current_lo5)))
+
+axiom H96 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum7 = current_sum5)))
+
+axiom H97 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (max_sum6 = max_sum4)))
+
+axiom H98 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_hi8 = current_hi6)))
+
+axiom H99 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) ->
+  ((result____split_fields18 = result____split_fields14) and
+  (result____split_fields19 = result____split_fields15))))
+
+axiom H100 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_lo8 = current_lo6)))
+
+axiom H101 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (current_sum8 = current_sum6)))
+
+axiom H102 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1)))) -> (max_sum7 = max_sum5)))
+
+axiom H103 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_hi7 = current_hi2)))
+
+axiom H104 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) ->
+  ((result____split_fields16 = result____split_fields4) and
+  (result____split_fields17 = result____split_fields5))))
+
+axiom H105 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_lo7 = current_lo2)))
+
+axiom H106 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_sum7 = current_sum1)))
+
+axiom H107 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (max_sum6 = max_sum1)))
+
+axiom H108 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_hi8 = current_hi2)))
+
+axiom H109 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) ->
+  ((result____split_fields18 = result____split_fields4) and
+  (result____split_fields19 = result____split_fields5))))
+
+axiom H110 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_lo8 = current_lo2)))
+
+axiom H111 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (current_sum8 = current_sum1)))
+
+axiom H112 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((not ((to_rep3(first(x1)) <= current_hi2) and
+  (current_hi2 <= to_rep3(last(x1))))) -> (max_sum7 = max_sum1)))
+
+axiom H113 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_hi9 = current_hi7))
+
+axiom H114 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((result____split_fields20 = result____split_fields16) and
+  (result____split_fields21 = result____split_fields17)))
+
+axiom H115 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_lo9 = current_lo7))
+
+axiom H116 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_sum9 = current_sum7))
+
+axiom H117 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (max_sum8 = max_sum6))
+
+axiom H118 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_hi10 = current_hi8))
+
+axiom H119 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  ((result____split_fields22 = result____split_fields18) and
+  (result____split_fields23 = result____split_fields19)))
+
+axiom H120 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_lo10 = current_lo8))
+
+axiom H121 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (current_sum10 = current_sum8))
+
+axiom H122 : ((not (to_rep3(last(x1)) <  to_rep3(first(x1)))) ->
+  (max_sum9 = max_sum7))
+
+axiom H123 :
+  ((slice_sums__maximal_sum_slice_bounds_2__result4 = slice_sums__maximal_sum_slice_bounds_2__result2) and
+  (slice_sums__maximal_sum_slice_bounds_2__result5 = slice_sums__maximal_sum_slice_bounds_2__result3))
+
+axiom H124 :
+  ((slice_sums__maximal_sum_slice_bounds_2__result6 = slice_sums__maximal_sum_slice_bounds_2__result2) and
+  (slice_sums__maximal_sum_slice_bounds_2__result7 = slice_sums__maximal_sum_slice_bounds_2__result3))
+
+axiom H125 : ((result21 = slice_sums__maximal_sum_slice_bounds_2__result) and
+  (result22 = slice_sums__maximal_sum_slice_bounds_2__result1))
+
+axiom H126 :
+  ((slice_sums__maximal_sum_slice_bounds_2__result2 = result____split_fields20) and
+  (slice_sums__maximal_sum_slice_bounds_2__result3 = result____split_fields21))
+
+axiom H127 :
+  ((slice_sums__maximal_sum_slice_bounds_2__result8 = slice_sums__maximal_sum_slice_bounds_2__result4) and
+  (slice_sums__maximal_sum_slice_bounds_2__result9 = slice_sums__maximal_sum_slice_bounds_2__result5))
+
+axiom H128 : (current_hi11 = current_hi9)
+
+axiom H129 : ((result____split_fields24 = result____split_fields20) and
+  (result____split_fields25 = result____split_fields21))
+
+axiom H130 : (current_lo11 = current_lo9)
+
+axiom H131 : (current_sum11 = current_sum9)
+
+axiom H132 : (max_sum10 = max_sum8)
+
+axiom H133 :
+  ((slice_sums__maximal_sum_slice_bounds_2__result10 = slice_sums__maximal_sum_slice_bounds_2__result6) and
+  (slice_sums__maximal_sum_slice_bounds_2__result11 = slice_sums__maximal_sum_slice_bounds_2__result7))
+
+axiom H134 : (current_hi12 = current_hi10)
+
+axiom H135 : ((result____split_fields26 = result____split_fields22) and
+  (result____split_fields27 = result____split_fields23))
+
+axiom H136 : (current_lo12 = current_lo10)
+
+axiom H137 : (current_sum12 = current_sum10)
+
+axiom H138 : (max_sum11 = max_sum9)
+
+axiom H139 :
+  ((result25 = slice_sums__maximal_sum_slice_bounds_2__result8) and
+  (result26 = slice_sums__maximal_sum_slice_bounds_2__result9))
+
+axiom H140 :
+  (to_rep1(slice_sums__maximal_sum_slice_bounds_2__result8) <= to_rep2(slice_sums__maximal_sum_slice_bounds_2__result9))
+
+ (* File "sums.ads", line 12, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep3(first(x1)) <= to_rep1(slice_sums__maximal_sum_slice_bounds_2__result8))

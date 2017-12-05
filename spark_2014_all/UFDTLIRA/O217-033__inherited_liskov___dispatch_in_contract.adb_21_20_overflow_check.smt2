@@ -126,6 +126,7 @@
 (declare-const o__split_fields integer)
 (declare-const o__split_fields1 integer)
 (declare-const o__split_fields2 us_private)
+(declare-const o Int)
 (assert (= (less_than_max__2 (mk___rep1 (mk___split_fields1 o__split_fields o__split_fields1 o__split_fields2) o__attr__tag)) true))
 (assert (not (in_range (+ (to_rep o__split_fields1) 1))))
 (check-sat)

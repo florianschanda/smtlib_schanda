@@ -433,6 +433,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range1 e))
 (assert (=> (<= (to_rep2 (first (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag))))) (to_rep2 (last (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag)))))) (= o (+ (- (to_rep2 (last (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag))))) (to_rep2 (first (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag)))))) 1))))
 (assert (=> (not (<= (to_rep2 (first (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag))))) (to_rep2 (last (rt (get_model__3 (mk___rep1 (mk___split_fields1 s__split_fields s__split_fields1 s__split_fields2 s__split_fields3) s__attr__tag))))))) (= o 0)))

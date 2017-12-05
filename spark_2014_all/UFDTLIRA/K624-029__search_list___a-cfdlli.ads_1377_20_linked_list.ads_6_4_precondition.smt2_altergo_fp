@@ -546,29 +546,59 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container2, witness1) = true)) ->
   in_range2(w_get(container2, witness1)))))
 
- (* File "a-cfdlli.ads", line 1356, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:count_type. forall o1:count_type. forall temp___439:count_type.
-  forall o2:us_rep2. (((((to_rep(o) = 0) and (o = o1)) and
-  (temp___439 = o1)) and (temp___439 = no_element)) -> (((has_key(positions({
-  us_split_discrs1 = { rec__linked_list__mylists__list__capacity = container
-  }; us_split_fields1 = { rec__linked_list__mylists__list = container1 } }),
-  { us_split_fields3 = { rec__linked_list__mylists__cursor__node = position }
-  }) = true) or (bool_eq4({ us_split_fields3 = {
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___439 : count_type
+
+logic o2 : us_rep2
+
+logic o3 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___439 = o1)
+
+axiom H3 : (temp___439 = no_element)
+
+axiom H4 : ((has_key(positions({ us_split_discrs1 = {
+  rec__linked_list__mylists__list__capacity = container }; us_split_fields1 =
+  { rec__linked_list__mylists__list = container1 } }), { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = position } }) = true) or
+  (bool_eq4({ us_split_fields3 = { rec__linked_list__mylists__cursor__node =
+  position } }, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = no_element } }) = true))
+
+axiom H5 : (not (bool_eq4({ us_split_fields3 = {
   rec__linked_list__mylists__cursor__node = position } }, {
   us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element }
-  }) = true)) -> ((not (bool_eq4({ us_split_fields3 = {
-  rec__linked_list__mylists__cursor__node = position } }, {
-  us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element }
-  }) = true)) -> (((o2 = positions({ us_split_discrs1 = {
+  }) = true))
+
+axiom H6 : ((o2 = positions({ us_split_discrs1 = {
   rec__linked_list__mylists__list__capacity = container }; us_split_fields1 =
   { rec__linked_list__mylists__list = container1 } })) and ((not (has_key(o2,
   { us_split_fields3 = { rec__linked_list__mylists__cursor__node = no_element
   } }) = true)) and
-  (forall i:us_rep1. ((has_key(o2, i) = true) -> (((1 <= get(o2, i)) and
-  (get(o2, i) <= length1({ us_split_discrs1 = {
-  rec__linked_list__mylists__list__capacity = container }; us_split_fields1 =
-  { rec__linked_list__mylists__list = container1 } }))) and
-  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get(o2, i) = get(o2,
-  j)) -> (bool_eq4(i, j) = true))))))))) -> (has_key(o2, { us_split_fields3 =
-  { rec__linked_list__mylists__cursor__node = position } }) = true))))))
+  (forall i:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = i } }) = true) -> (((1 <= get(o2,
+  { us_split_fields3 = { rec__linked_list__mylists__cursor__node = i }
+  })) and (get(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = i } }) <= length1({
+  us_split_discrs1 = { rec__linked_list__mylists__list__capacity = container
+  }; us_split_fields1 = { rec__linked_list__mylists__list = container1 }
+  }))) and
+  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = j } }) = true) -> ((get(o2, {
+  us_split_fields3 = { rec__linked_list__mylists__cursor__node = i }
+  }) = get(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = j } })) -> (bool_eq4({
+  us_split_fields3 = { rec__linked_list__mylists__cursor__node = i } }, {
+  us_split_fields3 = { rec__linked_list__mylists__cursor__node = j }
+  }) = true)))))))))
+
+ (* File "a-cfdlli.ads", line 1356, characters 0-0 *)
+goal WP_parameter_def : (has_key(o2, { us_split_fields3 = {
+  rec__linked_list__mylists__cursor__node = position } }) = true)

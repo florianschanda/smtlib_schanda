@@ -254,25 +254,58 @@ logic v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic alpha_launch_examples__example_5__result : bool
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+logic alpha_launch_examples__example_5__result1 : bool
+
+logic alpha_launch_examples__example_5__result2 : bool
+
+logic alpha_launch_examples__example_5__result3 : bool
+
+logic alpha_launch_examples__example_5__result4 : bool
+
+logic alpha_launch_examples__example_5__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(v1)
+
+axiom H1 : in_range1(v2)
+
+axiom H2 :
+  (forall i1:int. (((0 <= i1) and (i1 <= 3)) ->
+  (forall j:int. ((((i1 + 1) <= j) and (j <= 4)) ->
+  (not (to_rep((a[i1])) = to_rep((a[j]))))))))
+
+axiom H3 :
+  (alpha_launch_examples__example_5__result1 = alpha_launch_examples__example_5__result2)
+
+axiom H4 :
+  (alpha_launch_examples__example_5__result3 = alpha_launch_examples__example_5__result1)
+
+axiom H5 : (result = alpha_launch_examples__example_5__result)
+
+axiom H6 : (((v1 = v2) ->
+  (alpha_launch_examples__example_5__result1 = true)) and ((not (v1 = v2)) ->
+  (alpha_launch_examples__example_5__result1 = false)))
+
+axiom H7 :
+  (alpha_launch_examples__example_5__result4 = alpha_launch_examples__example_5__result2)
+
+axiom H8 :
+  (alpha_launch_examples__example_5__result5 = alpha_launch_examples__example_5__result3)
+
+axiom H9 : (result1 = alpha_launch_examples__example_5__result4)
+
+axiom H10 : (alpha_launch_examples__example_5__result4 = true)
+
  (* File "alpha_launch_examples.adb", line 46, characters 0-0 *)
-goal WP_parameter_def :
-  (forall alpha_launch_examples__example_5__result:bool. forall result:bool.
-  forall alpha_launch_examples__example_5__result1:bool.
-  forall alpha_launch_examples__example_5__result2:bool.
-  forall alpha_launch_examples__example_5__result3:bool.
-  forall alpha_launch_examples__example_5__result4:bool.
-  forall alpha_launch_examples__example_5__result5:bool.
-  (forall result1:bool. ((in_range1(v1) and (in_range1(v2) and
-  ((forall i:int. (((0 <= i) and (i <= 3)) ->
-   (forall j:int. ((((i + 1) <= j) and (j <= 4)) ->
-   (not (to_rep((a[i])) = to_rep((a[j])))))))) and
-  (((((alpha_launch_examples__example_5__result1 = alpha_launch_examples__example_5__result2) and
-  (alpha_launch_examples__example_5__result3 = alpha_launch_examples__example_5__result1)) and
-  ((result = alpha_launch_examples__example_5__result) and (((v1 = v2) and
-  (alpha_launch_examples__example_5__result1 = true)) or ((not (v1 = v2)) and
-  (alpha_launch_examples__example_5__result1 = false))))) and
-  ((alpha_launch_examples__example_5__result4 = alpha_launch_examples__example_5__result2) and
-  (alpha_launch_examples__example_5__result5 = alpha_launch_examples__example_5__result3))) and
-  (result1 = alpha_launch_examples__example_5__result4))))) ->
-  ((alpha_launch_examples__example_5__result4 = true) ->
-  (to_rep((a[v1])) = to_rep((a[v2])))))))
+goal WP_parameter_def : (to_rep((a[v1])) = to_rep((a[v2])))

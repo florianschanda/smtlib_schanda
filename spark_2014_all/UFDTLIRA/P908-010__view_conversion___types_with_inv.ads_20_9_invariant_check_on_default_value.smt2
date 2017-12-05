@@ -73,6 +73,7 @@
 (define-fun type_invariant1 ((temp___158 us_rep)) Bool (not (= (to_rep (rec__types_with_inv__r1__f (us_split_fields1 temp___158))) 0)))
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const temp___161 Int)
+(declare-const temp___160 integer)
 (assert (in_range1 temp___161))
 (assert (= temp___161 1))
 (assert (not (type_invariant temp___161)))

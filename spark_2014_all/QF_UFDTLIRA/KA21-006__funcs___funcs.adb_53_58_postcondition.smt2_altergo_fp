@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -137,19 +137,40 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic funcs__q4__result : bool
+
+logic result : bool
+
+logic funcs__q4__result1 : bool
+
+logic funcs__q4__result2 : bool
+
+logic funcs__q4__result3 : bool
+
+logic funcs__q4__result4 : bool
+
+logic funcs__q4__result5 : bool
+
+logic result1 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : (funcs__q4__result1 = funcs__q4__result2)
+
+axiom H2 : (funcs__q4__result3 = funcs__q4__result1)
+
+axiom H3 : (result = funcs__q4__result)
+
+axiom H4 : (((0 <  x) -> (funcs__q4__result1 = true)) and ((not (0 <  x)) ->
+  (funcs__q4__result1 = false)))
+
+axiom H5 : (funcs__q4__result4 = funcs__q4__result2)
+
+axiom H6 : (funcs__q4__result5 = funcs__q4__result3)
+
+axiom H7 : (result1 = funcs__q4__result4)
+
+axiom H8 : (funcs__q4__result4 = true)
+
  (* File "funcs.adb", line 53, characters 0-0 *)
-goal WP_parameter_def :
-  (forall funcs__q4__result:bool. forall result:bool.
-  forall funcs__q4__result1:bool. forall funcs__q4__result2:bool.
-  forall funcs__q4__result3:bool. forall funcs__q4__result4:bool.
-  forall funcs__q4__result5:bool.
-  (forall result1:bool. ((in_range1(x) and
-  (((((funcs__q4__result1 = funcs__q4__result2) and
-  (funcs__q4__result3 = funcs__q4__result1)) and
-  ((result = funcs__q4__result) and (((0 <  x) and
-  (funcs__q4__result1 = true)) or ((not (0 <  x)) and
-  (funcs__q4__result1 = false))))) and
-  ((funcs__q4__result4 = funcs__q4__result2) and
-  (funcs__q4__result5 = funcs__q4__result3))) and
-  (result1 = funcs__q4__result4))) -> ((funcs__q4__result4 = true) ->
-  (0 <  x)))))
+goal WP_parameter_def : (0 <  x)

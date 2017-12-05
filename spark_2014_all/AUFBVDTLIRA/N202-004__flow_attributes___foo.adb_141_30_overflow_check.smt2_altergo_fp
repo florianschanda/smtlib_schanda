@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1309,66 +1309,188 @@ axiom def_axiom :
   (forall temp___307:int. (((temp___302(temp___304, temp___305,
   temp___306)).elts2[temp___307]) = of_rep2(temp___304))))))
 
+logic data : (int,octet) farray
+
+logic octet_count : int
+
+logic i : int
+
+logic temp___309 : (int,octet) farray
+
+logic temp___3091 : t3
+
+logic temp___310 : (int,octet) farray
+
+logic temp___3101 : t2
+
+logic temp___311 : (int,octet) farray
+
+logic temp___3111 : t2
+
+logic o : (int,octet) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___313 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___312 : int
+
+logic o10 : int
+
+logic o11 : character
+
+logic o12 : int
+
+logic o13 : t
+
+logic o14 : octet
+
+logic result : (int,octet) farray
+
+logic data1 : (int,octet) farray
+
+logic result1 : int
+
+logic octet_count1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic octet_count2 : int
+
+logic result4 : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(text1)),
+  to_rep1(last(text1)))
+
+axiom H1 : dynamic_property1(0, 2147483647, to_rep1(data__first),
+  to_rep1(data__last))
+
+axiom H2 : ((0 <= 2147483647) -> in_range4(octet_count))
+
+axiom H3 : (to_rep1(first4((temp___302(of_int(0), to_rep1(data__first),
+  to_rep1(data__last))).rt2)) = to_rep1(data__first))
+
+axiom H4 : (to_rep1(last4((temp___302(of_int(0), to_rep1(data__first),
+  to_rep1(data__last))).rt2)) = to_rep1(data__last))
+
+axiom H5 : ({ elts2 = temp___309; rt2 = temp___3091 } = temp___302(of_int(0),
+  to_rep1(data__first), to_rep1(data__last)))
+
+axiom H6 : (temp___309 = temp___310)
+
+axiom H7 : (mk1(to_rep1(first4(temp___3091)),
+  to_rep1(last4(temp___3091))) = temp___3101)
+
+axiom H8 : (((to_rep1(first2(temp___3101)) <= to_rep1(last2(temp___3101))) ->
+  (((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (((to_rep1(last2(temp___3101)) - to_rep1(first2(temp___3101))) + 1) = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) and
+  ((not (to_rep1(data__first) <= to_rep1(data__last))) ->
+  (((to_rep1(last2(temp___3101)) - to_rep1(first2(temp___3101))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___3101)) <= to_rep1(last2(temp___3101)))) ->
+  ((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (0 = ((to_rep1(data__last) - to_rep1(data__first)) + 1)))))
+
+axiom H9 : ((temp___311 = temp___310) and (temp___3111 = temp___3101))
+
+axiom H10 : (o = slide1(temp___311, to_rep1(first2(temp___3111)),
+  to_rep1(data__first)))
+
+axiom H11 : (result = data)
+
+axiom H12 : (data1 = o)
+
+axiom H13 : ((o1 = length({ elts = text; rt = text1 })) and
+  in_range4(length({ elts = text; rt = text1 })))
+
+axiom H14 : (result1 = octet_count)
+
+axiom H15 : (octet_count1 = o1)
+
+axiom H16 : ((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (o2 = ((to_rep1(data__last) - to_rep1(data__first)) + 1)))
+
+axiom H17 : ((not (to_rep1(data__first) <= to_rep1(data__last))) -> (o2 = 0))
+
+axiom H18 : ((o3 = o2) and in_range1(o2))
+
+axiom H19 : (((o3 <  octet_count1) -> (result2 = true)) and
+  ((not (o3 <  octet_count1)) -> (result2 = false)))
+
+axiom H20 : ((result2 = true) ->
+  ((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (o4 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))))
+
+axiom H21 : ((result2 = true) ->
+  ((not (to_rep1(data__first) <= to_rep1(data__last))) -> (o4 = 0)))
+
+axiom H22 : ((result2 = true) -> ((o5 = o4) and in_range4(o4)))
+
+axiom H23 : ((result2 = true) -> (result3 = octet_count1))
+
+axiom H24 : ((result2 = true) -> (octet_count2 = o5))
+
+axiom H25 : ((not (result2 = true)) -> (octet_count2 = octet_count1))
+
+axiom H26 : (octet_count2 = r53b)
+
+axiom H27 : in_range4(r53b)
+
+axiom H28 : (result4 = i)
+
+axiom H29 : (i1 = 1)
+
+axiom H30 : (1 <= i1)
+
+axiom H31 : (i1 <= r53b)
+
+axiom H32 : ((1 <= i2) and (i2 <= r53b))
+
+axiom H33 : ((o8 = (to_rep1(first(text1)) + i2)) and
+  in_range1((to_rep1(first(text1)) + i2)))
+
+axiom H34 : (o9 = (o8 - 1))
+
+axiom H35 : ((temp___312 = o9) and in_range1(o9))
+
+axiom H36 : ((to_rep1(first(text1)) <= temp___312) and
+  (temp___312 <= to_rep1(last(text1))))
+
+axiom H37 : (o10 = temp___312)
+
+axiom H38 : (o11 = (text[o10]))
+
+axiom H39 : (o12 = to_rep(o11))
+
+axiom H40 : (o13 = of_int(o12))
+
+axiom H41 : (to_rep2(o14) = o13)
+
+axiom H42 : ((o6 = (to_rep1(data__first) + i2)) and
+  in_range1((to_rep1(data__first) + i2)))
+
+axiom H43 : (o7 = (o6 - 1))
+
  (* File "foo.adb", line 115, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,octet) farray. forall octet_count:int. forall i:int.
-  forall temp___309:(int,octet) farray. forall temp___3091:t3.
-  forall temp___310:(int,octet) farray. forall temp___3101:t2.
-  forall temp___311:(int,octet) farray. forall temp___3111:t2.
-  forall o:(int,octet) farray. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall temp___312:int. forall o10:int. forall o11:character.
-  forall o12:int. forall o13:t. forall o14:octet.
-  forall result:(int,octet) farray. forall data1:(int,octet) farray.
-  forall result1:int. forall octet_count1:int. forall result2:bool.
-  forall result3:int. forall octet_count2:int. forall result4:int.
-  forall i1:int. forall i2:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(text1)), to_rep1(last(text1))) -> (dynamic_property1(0,
-  2147483647, to_rep1(data__first), to_rep1(data__last)) ->
-  (((0 <= 2147483647) -> in_range4(octet_count)) ->
-  (((((((to_rep1(first4((temp___302(of_int(0), to_rep1(data__first),
-  to_rep1(data__last))).rt2)) = to_rep1(data__first)) and
-  ((to_rep1(last4((temp___302(of_int(0), to_rep1(data__first),
-  to_rep1(data__last))).rt2)) = to_rep1(data__last)) and ({ elts2 =
-  temp___309; rt2 = temp___3091 } = temp___302(of_int(0),
-  to_rep1(data__first), to_rep1(data__last))))) and
-  ((temp___309 = temp___310) and (mk1(to_rep1(first4(temp___3091)),
-  to_rep1(last4(temp___3091))) = temp___3101))) and
-  ((((to_rep1(first2(temp___3101)) <= to_rep1(last2(temp___3101))) and
-  (((to_rep1(data__first) <= to_rep1(data__last)) and
-  (((to_rep1(last2(temp___3101)) - to_rep1(first2(temp___3101))) + 1) = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and
-  (((to_rep1(last2(temp___3101)) - to_rep1(first2(temp___3101))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___3101)) <= to_rep1(last2(temp___3101)))) and
-  (((to_rep1(data__first) <= to_rep1(data__last)) and
-  (0 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  (not (to_rep1(data__first) <= to_rep1(data__last)))))) and
-  ((temp___311 = temp___310) and (temp___3111 = temp___3101)))) and
-  (o = slide1(temp___311, to_rep1(first2(temp___3111)),
-  to_rep1(data__first)))) and ((result = data) and (data1 = o))) ->
-  ((((o1 = length({ elts = text; rt = text1 })) and in_range4(length({ elts =
-  text; rt = text1 }))) and ((result1 = octet_count) and
-  (octet_count1 = o1))) ->
-  (((((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (o2 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and (o2 = 0))) and
-  ((o3 = o2) and in_range1(o2))) and (((o3 <  octet_count1) and
-  (result2 = true)) or ((not (o3 <  octet_count1)) and
-  (result2 = false)))) and (((result2 = true) and
-  (((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (o4 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and (o4 = 0))) and
-  ((o5 = o4) and in_range4(o4))) and ((result3 = octet_count1) and
-  (octet_count2 = o5)))) or ((not (result2 = true)) and
-  (octet_count2 = octet_count1)))) -> (((octet_count2 = r53b) and
-  in_range4(r53b)) -> (((result4 = i) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= r53b)) -> (((1 <= i2) and (i2 <= r53b)) ->
-  ((((((((((o8 = (to_rep1(first(text1)) + i2)) and
-  in_range1((to_rep1(first(text1)) + i2))) and (o9 = (o8 - 1))) and
-  ((temp___312 = o9) and in_range1(o9))) and
-  (((to_rep1(first(text1)) <= temp___312) and
-  (temp___312 <= to_rep1(last(text1)))) and (o10 = temp___312))) and
-  (o11 = (text[o10]))) and (o12 = to_rep(o11))) and (o13 = of_int(o12))) and
-  (to_rep2(o14) = o13)) -> ((((o6 = (to_rep1(data__first) + i2)) and
-  in_range1((to_rep1(data__first) + i2))) and (o7 = (o6 - 1))) ->
-  in_range1(o7))))))))))))))
+goal WP_parameter_def : in_range1(o7)

@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -624,7 +624,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1702,63 +1702,175 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r__split_fields : (t,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic element : int
+
+logic o : ar_index
+
+logic o1 : (t,integer) farray
+
+logic o2 : ar_index
+
+logic o3 : length_type
+
+logic temp___294 : (t,integer) farray
+
+logic temp___2941 : ar_index
+
+logic temp___2942 : length_type
+
+logic o4 : int
+
+logic o5 : length_type
+
+logic o6 : (t,integer) farray
+
+logic o7 : ar_index
+
+logic o8 : length_type
+
+logic temp___296 : (t,integer) farray
+
+logic temp___2961 : ar_index
+
+logic temp___2962 : length_type
+
+logic temp___300 : (t,integer) farray
+
+logic temp___3001 : t1
+
+logic o9 : int
+
+logic o10 : bool
+
+logic result : int
+
+logic element1 : int
+
+logic result1 : (t,integer) farray
+
+logic result2 : ar_index
+
+logic result3 : length_type
+
+logic r__split_fields3 : (t,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic result4 : (t,integer) farray
+
+logic result5 : ar_index
+
+logic result6 : length_type
+
+logic r__split_fields6 : (t,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (t,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic element2 : int
+
+logic r__split_fields12 : (t,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+logic element3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(element))
+
+axiom H1 : (not (is_empty({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
+  rec__ring_buf__ring_buffer__first = r__split_fields1;
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))
+
+axiom H2 : (result = element)
+
+axiom H3 : (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))
+
+axiom H4 : (to_rep1(o) = add(to_rep1(r__split_fields1), of_int(1)))
+
+axiom H5 : (r__split_fields = o1)
+
+axiom H6 : (o = o2)
+
+axiom H7 : (r__split_fields2 = o3)
+
+axiom H8 : (temp___294 = o1)
+
+axiom H9 : (temp___2941 = o2)
+
+axiom H10 : (temp___2942 = o3)
+
+axiom H11 : ((result1 = r__split_fields) and
+  ((result2 = r__split_fields1) and (result3 = r__split_fields2)))
+
+axiom H12 : (temp___294 = r__split_fields3)
+
+axiom H13 : (temp___2941 = r__split_fields4)
+
+axiom H14 : (temp___2942 = r__split_fields5)
+
+axiom H15 : ((o4 = (to_rep2(r__split_fields5) - 1)) and
+  in_range2((to_rep2(r__split_fields5) - 1)))
+
+axiom H16 : (to_rep2(o5) = o4)
+
+axiom H17 : (r__split_fields3 = o6)
+
+axiom H18 : (r__split_fields4 = o7)
+
+axiom H19 : (o5 = o8)
+
+axiom H20 : (temp___296 = o6)
+
+axiom H21 : (temp___2961 = o7)
+
+axiom H22 : (temp___2962 = o8)
+
+axiom H23 : (result4 = r__split_fields3)
+
+axiom H24 : (result5 = r__split_fields4)
+
+axiom H25 : (result6 = r__split_fields5)
+
+axiom H26 : (temp___296 = r__split_fields6)
+
+axiom H27 : (temp___2961 = r__split_fields7)
+
+axiom H28 : (temp___2962 = r__split_fields8)
+
+axiom H29 : (element1 = element2)
+
+axiom H30 : (r__split_fields9 = r__split_fields6)
+
+axiom H31 : (r__split_fields10 = r__split_fields7)
+
+axiom H32 : (r__split_fields11 = r__split_fields8)
+
+axiom H33 : (element3 = element1)
+
+axiom H34 : ((r__split_fields12 = r__split_fields6) and
+  ((r__split_fields13 = r__split_fields7) and
+  (r__split_fields14 = r__split_fields8)))
+
  (* File "ring_buf.ads", line 67, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(t,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall element:int. forall o:ar_index. forall o1:(t,integer) farray.
-  forall o2:ar_index. forall o3:length_type.
-  forall temp___294:(t,integer) farray. forall temp___2941:ar_index.
-  forall temp___2942:length_type. forall o4:int. forall o5:length_type.
-  forall o6:(t,integer) farray. forall o7:ar_index. forall o8:length_type.
-  forall temp___296:(t,integer) farray. forall temp___2961:ar_index.
-  forall temp___2962:length_type. forall result:int. forall element1:int.
-  forall result1:(t,integer) farray. forall result2:ar_index.
-  forall result3:length_type. forall r__split_fields3:(t,integer) farray.
-  forall r__split_fields4:ar_index. forall r__split_fields5:length_type.
-  forall result4:(t,integer) farray. forall result5:ar_index.
-  forall result6:length_type. forall r__split_fields6:(t,integer) farray.
-  forall r__split_fields7:ar_index. forall r__split_fields8:length_type.
-  forall r__split_fields9:(t,integer) farray.
-  forall r__split_fields10:ar_index. forall r__split_fields11:length_type.
-  forall element2:int. forall r__split_fields12:(t,integer) farray.
-  forall r__split_fields13:ar_index. forall r__split_fields14:length_type.
-  forall element3:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(element)) -> ((not (is_empty({ us_split_fields1 = {
+goal WP_parameter_def : (0 <  length(to_model({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)) ->
-  ((((({ int__content = result } = { int__content = element }) and
-  (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))) and
-  (((((to_rep1(o) = add(to_rep1(r__split_fields1), of_int(1))) and
-  ((r__split_fields = o1) and ((o = o2) and (r__split_fields2 = o3)))) and
-  ((temp___294 = o1) and ((temp___2941 = o2) and (temp___2942 = o3)))) and
-  (({ us_split_fields__content = { rec__ring_buf__ring_buffer__data =
-  result1; rec__ring_buf__ring_buffer__first = result2;
-  rec__ring_buf__ring_buffer__length = result3 } } = {
-  us_split_fields__content = { rec__ring_buf__ring_buffer__data =
-  r__split_fields; rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) and
-  ((temp___294 = r__split_fields3) and ((temp___2941 = r__split_fields4) and
-  (temp___2942 = r__split_fields5))))) and
-  ((((((o4 = (to_rep2(r__split_fields5) - 1)) and
-  in_range2((to_rep2(r__split_fields5) - 1))) and (to_rep2(o5) = o4)) and
-  ((r__split_fields3 = o6) and ((r__split_fields4 = o7) and (o5 = o8)))) and
-  ((temp___296 = o6) and ((temp___2961 = o7) and (temp___2962 = o8)))) and
-  (((result4 = r__split_fields3) and ((result5 = r__split_fields4) and
-  (result6 = r__split_fields5))) and ((temp___296 = r__split_fields6) and
-  ((temp___2961 = r__split_fields7) and
-  (temp___2962 = r__split_fields8))))))) and (((element1 = element2) and
-  ((r__split_fields9 = r__split_fields6) and
-  ((r__split_fields10 = r__split_fields7) and
-  (r__split_fields11 = r__split_fields8)))) and ((element3 = element1) and ({
-  rec__ring_buf__ring_buffer__data = r__split_fields12;
-  rec__ring_buf__ring_buffer__first = r__split_fields13;
-  rec__ring_buf__ring_buffer__length = r__split_fields14 } = {
-  rec__ring_buf__ring_buffer__data = r__split_fields6;
-  rec__ring_buf__ring_buffer__first = r__split_fields7;
-  rec__ring_buf__ring_buffer__length = r__split_fields8 })))) ->
-  (0 <  length(to_model({ us_split_fields1 = {
-  rec__ring_buf__ring_buffer__data = r__split_fields;
-  rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } })))))))
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } })))

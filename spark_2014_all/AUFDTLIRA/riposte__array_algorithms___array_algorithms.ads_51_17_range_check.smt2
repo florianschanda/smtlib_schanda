@@ -115,6 +115,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const val__ Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const i Int)
 (assert (dynamic_invariant2 a true false true))
 (assert (in_range2 lastindex))
 (assert (in_range1 val__))

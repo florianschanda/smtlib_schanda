@@ -134,7 +134,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range2(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range2(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq3 : int, int -> bool
 
@@ -375,31 +375,87 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "arrays_of_records.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:value. forall o1:bool.
-  forall o2:value. forall o3:value. forall o4:bool. forall o5:value.
-  forall o6:value. forall o7:(int,us_rep) farray. forall o8:value.
-  forall o9:bool. forall o10:value. forall o11:value. forall o12:bool.
-  forall o13:value. forall o14:value. forall o15:(int,us_rep) farray.
-  forall o16:value. forall o17:bool. forall o18:value. forall o19:value.
-  forall o20:bool. forall o21:value. forall o22:value.
-  forall o23:(int,us_rep) farray. forall result:(int,us_rep) farray.
-  forall a1:(int,us_rep) farray. forall result1:(int,us_rep) farray.
-  forall a2:(int,us_rep) farray. forall result2:(int,us_rep) farray.
-  forall a3:(int,us_rep) farray. forall result3:(int,us_rep) farray.
-  forall a4:(int,us_rep) farray. forall a5:(int,us_rep) farray.
-  forall a6:(int,us_rep) farray. ((in_range1(i) and
-  (((((((to_rep(o) = 69) and
+logic a : (int,us_rep) farray
+
+logic o : value
+
+logic o1 : bool
+
+logic o2 : value
+
+logic o3 : value
+
+logic o4 : bool
+
+logic o5 : value
+
+logic o6 : value
+
+logic o7 : (int,us_rep) farray
+
+logic o8 : value
+
+logic o9 : bool
+
+logic o10 : value
+
+logic o11 : value
+
+logic o12 : bool
+
+logic o13 : value
+
+logic o14 : value
+
+logic o15 : (int,us_rep) farray
+
+logic o16 : value
+
+logic o17 : bool
+
+logic o18 : value
+
+logic o19 : value
+
+logic o20 : bool
+
+logic o21 : value
+
+logic o22 : value
+
+logic o23 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic result3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic a5 : (int,us_rep) farray
+
+logic a6 : (int,us_rep) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (((((((to_rep(o) = 69) and
   (((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1) and
   (((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value = o2) and
   (o = o3)))) and ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and
   (o7 = (a[i <- { us_split_fields1 = {
   rec__arrays_of_records__basic_record__flag = o4;
   rec__arrays_of_records__basic_record__first_value = o5;
-  rec__arrays_of_records__basic_record__second_value = o6 } }]))) and (({
-  map__content = result } = { map__content = a }) and (a1 = o7))) and
-  ((((((to_rep(o8) = 42) and
+  rec__arrays_of_records__basic_record__second_value = o6 } }]))) and
+  ((result = a) and (a1 = o7))) and ((((((to_rep(o8) = 42) and
   (((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o9) and
   ((o8 = o10) and
   ((((a1[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o11)))) and
@@ -423,5 +479,8 @@ goal WP_parameter_def :
   (((a3[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value
   } }]))) and
   (to_rep((((a4[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 69))))) and
-  ((a4 = a5) and (a6 = a4)))) ->
-  (to_rep((((a5[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 42)))
+  ((a4 = a5) and (a6 = a4)))
+
+ (* File "arrays_of_records.adb", line 15, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((a5[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 42)

@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const y Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (in_range y))
 (assert (and (<= 0 x) (and (<= x 10) (and (<= 0 y) (<= y 10)))))

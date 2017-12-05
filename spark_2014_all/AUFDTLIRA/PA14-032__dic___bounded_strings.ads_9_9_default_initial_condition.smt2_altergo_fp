@@ -160,7 +160,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -579,15 +579,15 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
-  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true)) and
+  ((((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
   (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length)))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__bounded_strings__bounded_string__bound) = to_rep(((b).us_split_discrs1).rec__bounded_strings__bounded_string__bound)) and
+  ((bool_eq7(((a).us_split_fields1).rec__bounded_strings__bounded_string__text,
+  ((b).us_split_fields1).rec__bounded_strings__bounded_string__text) = true) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_strings__bounded_string__length) = to_rep1(((b).us_split_fields1).rec__bounded_strings__bounded_string__length))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size2 : int
@@ -831,21 +831,38 @@ axiom def_axiom :
   (forall temp___174:int. (((temp___169(temp___171, temp___172,
   temp___173)).elts1[temp___174]) = of_rep2(temp___171)))))
 
- (* File "bounded_strings.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___179:int. forall temp___178:index_type.
-  forall temp___182:index_type. forall temp___1821:(int,character) farray.
-  forall temp___1822:t. forall temp___1823:length_type.
-  ((in_range(temp___179) and (temp___179 = to_rep(temp___178))) ->
-  (((dynamic_property1(1, to_rep(temp___182), to_rep3(first(temp___1822)),
-  to_rep3(last(temp___1822))) and ((to_rep3(first(temp___1822)) = 1) and
+logic temp___179 : int
+
+logic temp___178 : index_type
+
+logic temp___181 : (int,character) farray
+
+logic temp___1811 : t1
+
+logic temp___182 : index_type
+
+logic temp___1821 : (int,character) farray
+
+logic temp___1822 : t
+
+logic temp___1823 : length_type
+
+axiom H : in_range(temp___179)
+
+axiom H1 : (temp___179 = to_rep(temp___178))
+
+axiom H2 : ((dynamic_property1(1, to_rep(temp___182),
+  to_rep3(first(temp___1822)), to_rep3(last(temp___1822))) and
+  ((to_rep3(first(temp___1822)) = 1) and
   (to_rep3(last(temp___1822)) = to_rep(temp___182)))) and
   (((temp___1821 = (temp___169(32, 1, to_rep(temp___182))).elts1) and
   (temp___1822 = mk(to_rep3(first2((temp___169(32, 1,
   to_rep(temp___182))).rt1)), to_rep3(last2((temp___169(32, 1,
-  to_rep(temp___182))).rt1))))) and (to_rep1(temp___1823) = 0))) ->
-  (length2({ us_split_discrs1 = {
+  to_rep(temp___182))).rt1))))) and (to_rep1(temp___1823) = 0)))
+
+ (* File "bounded_strings.ads", line 29, characters 0-0 *)
+goal WP_parameter_def : (length2({ us_split_discrs1 = {
   rec__bounded_strings__bounded_string__bound = temp___182 };
   us_split_fields1 = { rec__bounded_strings__bounded_string__text = { elts =
   temp___1821; rt = temp___1822 };
-  rec__bounded_strings__bounded_string__length = temp___1823 } }) = 0))))
+  rec__bounded_strings__bounded_string__length = temp___1823 } }) = 0)

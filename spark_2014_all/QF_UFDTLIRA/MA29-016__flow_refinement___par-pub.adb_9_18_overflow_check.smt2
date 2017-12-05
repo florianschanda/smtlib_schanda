@@ -40,6 +40,7 @@
 (declare-const a Int)
 (declare-const d Int)
 (declare-const e Int)
+(declare-const o Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range a)))
 (assert (in_range x))
 (assert (in_range y))

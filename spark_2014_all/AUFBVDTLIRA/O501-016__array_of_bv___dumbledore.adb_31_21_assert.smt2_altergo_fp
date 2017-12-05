@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1972,17 +1972,76 @@ axiom readmem32__post_axiom :
   x86__memory)), lsl_bv1(toBig2(readmem16(add2(addr, of_int2(2)),
   x86__memory)), of_int1(16))))))
 
- (* File "x86.ads", line 121, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rsp:t2. forall rbp:t2. forall rsi:t2.
-  forall memory:(t2,unsigned8) farray. forall memory1:(t2,unsigned8) farray.
-  forall result:t2. forall rsp1:t2. forall result1:t2. forall rbp1:t2.
-  forall memory2:(t2,unsigned8) farray. (((ugt2(rsp,
-  of_int2(18446744069414584320)) and ult2(rsp,
+logic fs : t2
+
+logic gs : t2
+
+logic stackaddresssize : t
+
+logic rax : t2
+
+logic rcx : t2
+
+logic rdx : t2
+
+logic rbx : t2
+
+logic rsp : t2
+
+logic rbp : t2
+
+logic rsi : t2
+
+logic rdi : t2
+
+logic r8 : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic memory1 : (t2,unsigned8) farray
+
+logic result : t2
+
+logic rsp1 : t2
+
+logic result1 : t2
+
+logic rbp1 : t2
+
+logic memory2 : (t2,unsigned8) farray
+
+logic memory3 : (t2,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
+axiom H12 : ((ugt2(rsp, of_int2(18446744069414584320)) and ult2(rsp,
   of_int2(18446744073709551360))) and ((ugt2(rsi, add2(rsp, of_int2(8))) and
   ult2(rsp, of_int2(18446744073709551360))) or (ult2(rsi,
-  of_int2(18446462598732840960)) and ugt2(rsi, of_int2(256))))) ->
-  (((readmem64(sub2(rsp, of_int2(8)), memory1) = rbp) and
+  of_int2(18446462598732840960)) and ugt2(rsi, of_int2(256)))))
+
+axiom H13 : ((readmem64(sub2(rsp, of_int2(8)), memory1) = rbp) and
   (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
   of_int2(18446744073709551615))) -> (((((((((not (i = sub2(rsp,
   of_int2(8)))) and (not (i = add2(sub2(rsp, of_int2(8)), of_int2(1))))) and
@@ -1992,9 +2051,17 @@ goal WP_parameter_def :
   (not (i = add2(sub2(rsp, of_int2(8)), of_int2(5))))) and
   (not (i = add2(sub2(rsp, of_int2(8)), of_int2(6))))) and
   (not (i = add2(sub2(rsp, of_int2(8)), of_int2(7))))) ->
-  (to_rep((memory1[i])) = to_rep((memory[i]))))))) -> (((result = rsp) and
-  (rsp1 = sub2(rsp, of_int2(8)))) -> (((result1 = rbp) and (rbp1 = rsp1)) ->
-  (((readmem64(sub2(rbp1, of_int2(16)), memory2) = rsi) and
+  (to_rep((memory1[i])) = to_rep((memory[i])))))))
+
+axiom H14 : (result = rsp)
+
+axiom H15 : (rsp1 = sub2(rsp, of_int2(8)))
+
+axiom H16 : (result1 = rbp)
+
+axiom H17 : (rbp1 = rsp1)
+
+axiom H18 : ((readmem64(sub2(rbp1, of_int2(16)), memory2) = rsi) and
   (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
   of_int2(18446744073709551615))) -> (((((((((not (i = sub2(rbp1,
   of_int2(16)))) and (not (i = add2(sub2(rbp1, of_int2(16)),
@@ -2004,5 +2071,7 @@ goal WP_parameter_def :
   of_int2(4))))) and (not (i = add2(sub2(rbp1, of_int2(16)),
   of_int2(5))))) and (not (i = add2(sub2(rbp1, of_int2(16)),
   of_int2(6))))) and (not (i = add2(sub2(rbp1, of_int2(16)),
-  of_int2(7))))) -> (to_rep((memory2[i])) = to_rep((memory1[i]))))))) ->
-  (readmem64(sub2(rbp1, of_int2(16)), memory2) = rsi)))))))
+  of_int2(7))))) -> (to_rep((memory2[i])) = to_rep((memory1[i])))))))
+
+ (* File "x86.ads", line 121, characters 0-0 *)
+goal WP_parameter_def : (readmem64(sub2(rbp1, of_int2(16)), memory2) = rsi)

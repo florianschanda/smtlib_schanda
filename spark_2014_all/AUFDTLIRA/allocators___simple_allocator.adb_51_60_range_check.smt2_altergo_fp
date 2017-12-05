@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -630,68 +630,307 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range4(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
- (* File "simple_allocator.ads", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
-  forall r:int. forall o:us_rep. forall o1:us_rep. forall rr:int.
-  forall o2:int. forall o3:status. forall o4:int. forall o5:int.
-  forall o6:bool. forall e:int. forall o7:bool. forall o8:bool.
-  forall e1:int. forall o9:bool. forall o10:bool. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:int. forall avail1:us_rep.
-  forall alloc1:us_rep. forall result:int. forall r1:int.
-  forall result1:us_rep. forall avail2:us_rep. forall result2:us_rep.
-  forall alloc2:us_rep. forall avail3:us_rep. forall alloc3:us_rep.
-  forall r2:int. forall result3:bool. forall result4:bool.
-  forall result5:bool. forall result6:bool. forall result7:bool.
-  forall result8:bool. ((is_empty(avail) = true) ->
-  ((is_empty(alloc) = true) -> ((({ int__content = result } = {
-  int__content = r }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 10000)) ->
-  ((((to_rep((data[r1])) = 0) and ((((o = add(avail, r1)) and
+logic data : (int,status) farray
+
+logic avail : us_rep
+
+logic alloc : us_rep
+
+logic r : int
+
+logic simple_allocator__m__model__result : us_rep
+
+logic simple_allocator__m__model__result1 : us_rep
+
+logic temp___237 : us_rep
+
+logic temp___236 : int
+
+logic temp___235 : us_rep
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic rr : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic e : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic e1 : int
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : us_rep
+
+logic o21 : us_rep
+
+logic avail1 : us_rep
+
+logic alloc1 : us_rep
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic avail2 : us_rep
+
+logic result2 : us_rep
+
+logic alloc2 : us_rep
+
+logic avail3 : us_rep
+
+logic alloc3 : us_rep
+
+logic r2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : int
+
+logic r3 : int
+
+logic result10 : us_rep
+
+logic avail4 : us_rep
+
+logic result11 : us_rep
+
+logic alloc4 : us_rep
+
+logic avail5 : us_rep
+
+logic alloc5 : us_rep
+
+logic r4 : int
+
+logic avail6 : us_rep
+
+logic alloc6 : us_rep
+
+logic r5 : int
+
+logic avail7 : us_rep
+
+logic alloc7 : us_rep
+
+logic r6 : int
+
+logic avail8 : us_rep
+
+logic alloc8 : us_rep
+
+logic r7 : int
+
+logic avail9 : us_rep
+
+logic alloc9 : us_rep
+
+logic r8 : int
+
+logic avail10 : us_rep
+
+logic alloc10 : us_rep
+
+logic r9 : int
+
+logic result12 : us_rep
+
+logic result13 : us_rep
+
+logic simple_allocator__m__model__result2 : us_rep
+
+logic simple_allocator__m__model__result3 : us_rep
+
+logic simple_allocator__m__model__result4 : us_rep
+
+logic simple_allocator__m__model__result5 : us_rep
+
+logic simple_allocator__m__model__result6 : us_rep
+
+logic simple_allocator__m__model__result7 : us_rep
+
+logic avail11 : us_rep
+
+logic alloc11 : us_rep
+
+logic r10 : int
+
+logic simple_allocator__m__model__result8 : us_rep
+
+logic simple_allocator__m__model__result9 : us_rep
+
+logic avail12 : us_rep
+
+logic alloc12 : us_rep
+
+logic r11 : int
+
+logic simple_allocator__m__model__result10 : us_rep
+
+logic simple_allocator__m__model__result11 : us_rep
+
+axiom H : (is_empty(avail) = true)
+
+axiom H1 : (is_empty(alloc) = true)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 10000)
+
+axiom H6 : ((to_rep((data[r1])) = 0) -> ((o = add(avail, r1)) and
   ((((length(o) = (length(avail) + 1)) and (contains(o, r1) = true)) and
-  (ole(avail, o) = true)) and (included_except(o, avail, r1) = true))) and
-  (({ set__content = result1 } = { set__content = avail }) and
-  (avail2 = o))) and ((alloc2 = alloc) and (alloc2 = alloc1)))) or
-  ((not (to_rep((data[r1])) = 0)) and ((((o1 = add(alloc, r1)) and
+  (ole(avail, o) = true)) and (included_except(o, avail, r1) = true))))
+
+axiom H7 : ((to_rep((data[r1])) = 0) -> (result1 = avail))
+
+axiom H8 : ((to_rep((data[r1])) = 0) -> (avail2 = o))
+
+axiom H9 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc))
+
+axiom H10 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc1))
+
+axiom H11 : ((not (to_rep((data[r1])) = 0)) -> ((o1 = add(alloc, r1)) and
   ((((length(o1) = (length(alloc) + 1)) and (contains(o1, r1) = true)) and
-  (ole(alloc, o1) = true)) and (included_except(o1, alloc, r1) = true))) and
-  (({ set__content = result2 } = { set__content = alloc }) and
-  (alloc2 = o1))) and ((avail2 = avail) and (avail2 = avail1))))) ->
-  ((((((length(avail3) + length(alloc3)) = r2) and
+  (ole(alloc, o1) = true)) and (included_except(o1, alloc, r1) = true))))
+
+axiom H12 : ((not (to_rep((data[r1])) = 0)) -> (result2 = alloc))
+
+axiom H13 : ((not (to_rep((data[r1])) = 0)) -> (alloc2 = o1))
+
+axiom H14 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail))
+
+axiom H15 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail1))
+
+axiom H16 : (((((length(avail3) + length(alloc3)) = r2) and
   (forall e2:int. ((in_range4(e2) and (contains(avail3, e2) = true)) ->
   ((1 <= e2) and (e2 <= r2))))) and
   (forall e2:int. ((in_range4(e2) and (contains(alloc3, e2) = true)) ->
   ((1 <= e2) and (e2 <= r2))))) and
   (forall rr1:int. (((1 <= rr1) and (rr1 <= r2)) ->
-  (((to_rep((data[rr1])) = 0) and ((contains(avail3, rr1) = true) and
-  (not (contains(alloc3, rr1) = true)))) or
-  ((not (to_rep((data[rr1])) = 0)) and ((not (contains(avail3,
-  rr1) = true)) and (contains(alloc3, rr1) = true))))))) ->
-  ((((1 <= 10000) -> in_range2(r2)) and ((1 <= r2) and (r2 <= 10000))) ->
-  ((((((((o11 = length(alloc3)) and in_range5(o11)) and
-  (((o12 = length(avail3)) and in_range5(o12)) and (o13 = (o12 + o11)))) and
-  ((o14 = o13) and in_range1(o13))) and (((o14 = r2) and (result5 = true)) or
-  ((not (o14 = r2)) and (result5 = false)))) and (((result5 = true) and
-  ((((o9 = contains(avail3, e1)) and ((of_int(1) = true) ->
+  (((to_rep((data[rr1])) = 0) -> ((contains(avail3, rr1) = true) and
+  (not (contains(alloc3, rr1) = true)))) and
+  ((not (to_rep((data[rr1])) = 0)) -> ((not (contains(avail3,
+  rr1) = true)) and (contains(alloc3, rr1) = true)))))))
+
+axiom H17 : (((1 <= 10000) -> in_range2(r2)) and ((1 <= r2) and
+  (r2 <= 10000)))
+
+axiom H18 : ((o16 = length(alloc3)) and in_range5(o16))
+
+axiom H19 : ((o17 = length(avail3)) and in_range5(o17))
+
+axiom H20 : (o18 = (o17 + o16))
+
+axiom H21 : ((o19 = o18) and in_range1(o18))
+
+axiom H22 : (((o19 = r2) -> (result5 = true)) and ((not (o19 = r2)) ->
+  (result5 = false)))
+
+axiom H23 : ((result5 = true) -> ((o14 = contains(avail3, e1)) and
+  ((of_int(1) = true) ->
   ((exists e2:int. ((in_range4(e2) and (contains(avail3, e2) = true)) and
-   (e2 = e1))) ->
-  (o9 = true)))) and (((o10 = true) <-> in_range4(e1)) and
-  (result6 = match_bool(o10, o9, false)))) and ((result4 = true) <->
+   (e2 = e1))) -> (o14 = true)))))
+
+axiom H24 : ((result5 = true) -> ((o15 = true) <-> in_range4(e1)))
+
+axiom H25 : ((result5 = true) -> (result6 = match_bool(o15, o14, false)))
+
+axiom H26 : ((result5 = true) -> ((result4 = true) <->
   (forall e2:int. ((in_range4(e2) and (contains(avail3, e2) = true)) ->
-  ((1 <= e2) and (e2 <= r2))))))) or ((not (result5 = true)) and
-  (result4 = false)))) and (((result4 = true) and ((((o7 = contains(alloc3,
-  e)) and ((of_int(1) = true) ->
+  ((1 <= e2) and (e2 <= r2))))))
+
+axiom H27 : ((not (result5 = true)) -> (result4 = false))
+
+axiom H28 : ((result4 = true) -> ((o12 = contains(alloc3, e)) and
+  ((of_int(1) = true) ->
   ((exists e2:int. ((in_range4(e2) and (contains(alloc3, e2) = true)) and
-   (e2 = e))) ->
-  (o7 = true)))) and (((o8 = true) <-> in_range4(e)) and
-  (result7 = match_bool(o8, o7, false)))) and ((result3 = true) <->
+   (e2 = e))) -> (o12 = true)))))
+
+axiom H29 : ((result4 = true) -> ((o13 = true) <-> in_range4(e)))
+
+axiom H30 : ((result4 = true) -> (result7 = match_bool(o13, o12, false)))
+
+axiom H31 : ((result4 = true) -> ((result3 = true) <->
   (forall e2:int. ((in_range4(e2) and (contains(alloc3, e2) = true)) ->
-  ((1 <= e2) and (e2 <= r2))))))) or ((not (result4 = true)) and
-  (result3 = false)))) -> ((result3 = true) -> (((1 <= rr) and (rr <= r2)) ->
-  (((((((1 <= rr) and (rr <= 10000)) and (o2 = rr)) and
-  (o3 = (data[o2]))) and (o4 = to_rep(o3))) and (((o4 = 0) and
-  (result8 = true)) or ((not (o4 = 0)) and (result8 = false)))) ->
-  ((not (result8 = true)) -> ((((o5 = rr) and in_range4(rr)) and
-  ((o6 = contains(alloc3, o5)) and ((of_int(1) = true) ->
+  ((1 <= e2) and (e2 <= r2))))))
+
+axiom H32 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H33 : (result3 = true)
+
+axiom H34 : (1 <= rr)
+
+axiom H35 : (rr <= r2)
+
+axiom H36 : ((1 <= rr) and (rr <= 10000))
+
+axiom H37 : (o2 = rr)
+
+axiom H38 : (o3 = (data[o2]))
+
+axiom H39 : (o4 = to_rep(o3))
+
+axiom H40 : (((o4 = 0) -> (result8 = true)) and ((not (o4 = 0)) ->
+  (result8 = false)))
+
+axiom H41 : (not (result8 = true))
+
+axiom H42 : ((o10 = rr) and in_range4(rr))
+
+axiom H43 : ((o11 = contains(alloc3, o10)) and ((of_int(1) = true) ->
   ((exists e2:int. ((in_range4(e2) and (contains(alloc3, e2) = true)) and
-   (e2 = o5))) ->
-  (o6 = true))))) -> in_range4(rr)))))))))))))))
+   (e2 = o10))) -> (o11 = true))))
+
+ (* File "simple_allocator.ads", line 30, characters 0-0 *)
+goal WP_parameter_def : in_range4(rr)

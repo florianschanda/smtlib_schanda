@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -248,24 +248,121 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 axiom max__def_axiom : (max = 100)
 
+logic e : int
+
+logic j : int
+
+logic j1 : int
+
+logic us : int
+
+logic temp___144 : int
+
+logic us1 : int
+
+logic o : int
+
+logic temp___147 : int
+
+logic us2 : int
+
+logic e1 : int
+
+logic result : int
+
+logic j2 : int
+
+logic e2 : int
+
+logic j3 : int
+
+logic result1 : int
+
+logic e3 : int
+
+logic e4 : int
+
+logic j4 : int
+
+logic e5 : int
+
+logic j5 : int
+
+logic e6 : int
+
+logic j6 : int
+
+logic e7 : int
+
+logic j7 : int
+
+logic result2 : int
+
+logic j8 : int
+
+logic j9 : int
+
+axiom H : in_range2(c)
+
+axiom H1 : in_range2(max)
+
+axiom H2 : ((first <= 100) -> dynamic_property(first, 100, e))
+
+axiom H3 : (result = j)
+
+axiom H4 : (j2 = 0)
+
+axiom H5 : (((0 <= j2) and (j2 <= 100)) -> (temp___144 = e))
+
+axiom H6 : (((0 <= j2) and (j2 <= 100)) -> (((first <= 100) ->
+  dynamic_property(first, 100, e2)) and ((0 <= j3) and (j3 <= 100))))
+
+axiom H7 : (((0 <= j2) and (j2 <= 100)) -> ((us1 = c) and
+  dynamic_property(first, 100, c)))
+
+axiom H8 : (((0 <= j2) and (j2 <= 100)) -> (o = c))
+
+axiom H9 : (((0 <= j2) and (j2 <= 100)) -> (result1 = e2))
+
+axiom H10 : (((0 <= j2) and (j2 <= 100)) -> (e3 = o))
+
+axiom H11 : (((0 <= j2) and (j2 <= 100)) -> (j3 = 100))
+
+axiom H12 : (((0 <= j2) and (j2 <= 100)) -> (j3 = j4))
+
+axiom H13 : (((0 <= j2) and (j2 <= 100)) -> (e3 = e4))
+
+axiom H14 : (((0 <= j2) and (j2 <= 100)) -> (j5 = j3))
+
+axiom H15 : (((0 <= j2) and (j2 <= 100)) -> (e5 = e3))
+
+axiom H16 : (((0 <= j2) and (j2 <= 100)) -> (j6 = j4))
+
+axiom H17 : (((0 <= j2) and (j2 <= 100)) -> (e6 = e4))
+
+axiom H18 : (((0 <= j2) and (j2 <= 100)) -> (j7 = j5))
+
+axiom H19 : (((0 <= j2) and (j2 <= 100)) -> (e7 = e5))
+
+axiom H20 : ((not ((0 <= j2) and (j2 <= 100))) -> (j2 = j6))
+
+axiom H21 : ((not ((0 <= j2) and (j2 <= 100))) -> (e6 = e))
+
+axiom H22 : ((not ((0 <= j2) and (j2 <= 100))) -> (j7 = j2))
+
+axiom H23 : ((not ((0 <= j2) and (j2 <= 100))) -> (e7 = e1))
+
+axiom H24 : (result2 = j1)
+
+axiom H25 : (j8 = 0)
+
+axiom H26 : (0 <= j8)
+
+axiom H27 : (j8 <= 100)
+
+axiom H28 : ((0 <= j9) and (j9 <= 100))
+
+axiom H29 : ((temp___147 = (c + 1)) and in_range1((c + 1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall j:int. forall j1:int. forall temp___144:int.
-  forall us:int. forall o:int. forall temp___147:int. forall e1:int.
-  forall result:int. forall j2:int. forall e2:int. forall j3:int.
-  forall result1:int. forall e3:int. forall e4:int. forall j4:int.
-  forall e5:int. forall j5:int. forall e6:int. forall j6:int. forall e7:int.
-  forall j7:int. forall result2:int. forall j8:int. forall j9:int.
-  (in_range2(c) -> (in_range2(max) -> (((first <= 100) ->
-  dynamic_property(first, 100, e)) -> (((({ int__content = result } = {
-  int__content = j }) and (j2 = 0)) and ((((0 <= j2) and (j2 <= 100)) and
-  ((((temp___144 = e) and ((((first <= 100) -> dynamic_property(first, 100,
-  e2)) and ((0 <= j3) and (j3 <= 100))) and (((((us = c) and
-  dynamic_property(first, 100, c)) and (o = c)) and ((result1 = e2) and
-  (e3 = o))) and (j3 = 100)))) and (((j3 = j4) and (e3 = e4)) and
-  ((j5 = j3) and (e5 = e3)))) and (((j6 = j4) and (e4 = e6)) and
-  ((j7 = j5) and (e7 = e5))))) or ((not ((0 <= j2) and (j2 <= 100))) and
-  (((j2 = j6) and (e = e6)) and ((j7 = j2) and (e7 = e1)))))) ->
-  (((result2 = j1) and (j8 = 0)) -> (((0 <= j8) and (j8 <= 100)) ->
-  (((0 <= j9) and (j9 <= 100)) -> (((temp___147 = (c + 1)) and
-  in_range1((c + 1))) -> dynamic_property1(first1, 100, temp___147))))))))))
+goal WP_parameter_def : dynamic_property1(first1, 100, temp___147)

@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -141,103 +141,153 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic region_checks__in_unit_square__result : int
+
+logic result : int
+
+logic region_checks__in_unit_square__result1 : int
+
+logic result1 : int
+
+logic region_checks__in_unit_square__result2 : int
+
+logic result2 : int
+
+logic region_checks__in_unit_square__result3 : int
+
+logic result3 : int
+
+logic region_checks__in_unit_square__result4 : int
+
+logic result4 : int
+
+logic region_checks__in_unit_square__result5 : int
+
+logic region_checks__in_unit_square__result6 : int
+
+logic region_checks__in_unit_square__result7 : int
+
+logic region_checks__in_unit_square__result8 : int
+
+logic region_checks__in_unit_square__result9 : int
+
+logic region_checks__in_unit_square__result10 : int
+
+logic region_checks__in_unit_square__result11 : int
+
+logic region_checks__in_unit_square__result12 : int
+
+logic region_checks__in_unit_square__result13 : int
+
+logic region_checks__in_unit_square__result14 : int
+
+logic region_checks__in_unit_square__result15 : int
+
+logic region_checks__in_unit_square__result16 : int
+
+logic region_checks__in_unit_square__result17 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
  (* File "region_checks.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
-  (((((match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = false))) ->
-  (((((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = false))) ->
-  (((((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 1) + 1) + 1) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+goal WP_parameter_def : (((((match_bool(bool_ge(x, 0), bool_ge(y, 0),
+  false) = true) -> (not (match_bool(bool_le(x, 1), bool_le(y, 1),
+  false) = true))) and (not (match_bool(bool_ge(x, 0), bool_ge(y, 0),
+  false) = false))) -> (((((match_bool(bool_lt(x, 0), bool_ge(y, 0),
+  false) = true) -> (not (match_bool(bool_ge(x, (- 1)), bool_le(y, 1),
+  false) = true))) and (not (match_bool(bool_lt(x, 0), bool_ge(y, 0),
+  false) = false))) -> (((((match_bool(bool_lt(x, 0), bool_lt(y, 0),
+  false) = true) -> (not (match_bool(bool_ge(x, (- 1)), bool_ge(y, (- 1)),
+  false) = true))) and (not (match_bool(bool_lt(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)),
+  false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 1) + 1) + 1) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 1) + 1) + 1) + 0) <= 1)))) and ((not (((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false)))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 1) + 1) + 1) + 0) <= 1)))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false)))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 1) + 1) + 0) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 1) + 1) + 0) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 1) + 1) + 0) + 0) <= 1)))))) and ((not (((match_bool(bool_lt(x,
+  0), bool_ge(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_le(y, 1), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_ge(y, 0), false) = false)))) -> (((((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 1) + 1) + 0) + 0) <= 1)))))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = false)))) ->
-  (((((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 1) + 0) + 1) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 1) + 0) + 1) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 1) + 0) + 1) + 0) <= 1)))) and ((not (((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false)))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 1) + 0) + 1) + 0) <= 1)))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false)))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 1) + 0) + 0) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 1) + 0) + 0) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 1) + 0) + 0) + 0) <= 1)))))))) and ((not (((match_bool(bool_ge(x,
+  0), bool_ge(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1),
+  bool_le(y, 1), false) = true))) and (not (match_bool(bool_ge(x, 0),
+  bool_ge(y, 0), false) = false)))) -> (((((match_bool(bool_lt(x, 0),
+  bool_ge(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_le(y, 1), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_ge(y, 0), false) = false))) -> (((((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 1) + 0) + 0) + 0) <= 1)))))))) and
-  ((not (((match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_ge(y, 0), false) = false)))) ->
-  (((((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = false))) ->
-  (((((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 0) + 1) + 1) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 0) + 1) + 1) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 0) + 1) + 1) + 0) <= 1)))) and ((not (((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false)))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 0) + 1) + 1) + 0) <= 1)))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false)))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 0) + 1) + 0) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 0) + 1) + 0) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 0) + 1) + 0) + 0) <= 1)))))) and ((not (((match_bool(bool_lt(x,
+  0), bool_ge(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_le(y, 1), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_ge(y, 0), false) = false)))) -> (((((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 0) + 1) + 0) + 0) <= 1)))))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_le(y, 1), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_ge(y, 0), false) = false)))) ->
-  (((((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 0) + 0) + 1) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 0) + 0) + 1) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 0) + 0) + 1) + 0) <= 1)))) and ((not (((match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_ge(x, (- 1)),
+  bool_ge(y, (- 1)), false) = true))) and (not (match_bool(bool_lt(x, 0),
+  bool_lt(y, 0), false) = false)))) -> (((((match_bool(bool_ge(x, 0),
   bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 0) + 0) + 1) + 0) <= 1)))) and
-  ((not (((match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_ge(x, (-1)), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_lt(x, 0), bool_lt(y, 0), false) = false)))) ->
-  (((((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
-  (not (match_bool(bool_le(x, 1), bool_ge(y, (-1)), false) = true))) and
-  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false))) ->
-  (((((0 + 0) + 0) + 0) + 1) <= 1)) and ((not (((match_bool(bool_ge(x, 0),
-  bool_lt(y, 0), false) = true) -> (not (match_bool(bool_le(x, 1), bool_ge(y,
-  (-1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
-  false) = false)))) -> (((((0 + 0) + 0) + 0) + 0) <= 1)))))))))))
+  (- 1)), false) = true))) and (not (match_bool(bool_ge(x, 0), bool_lt(y, 0),
+  false) = false))) -> (((((0 + 0) + 0) + 0) + 1) <= 1)) and
+  ((not (((match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = true) ->
+  (not (match_bool(bool_le(x, 1), bool_ge(y, (- 1)), false) = true))) and
+  (not (match_bool(bool_ge(x, 0), bool_lt(y, 0), false) = false)))) ->
+  (((((0 + 0) + 0) + 0) + 0) <= 1)))))))))

@@ -198,18 +198,19 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x1:int. forall y1:int. (((0 <  x1) and (x1 <= y1)) ->
-  (((-x1) / y1) = (-1))))
+  (((-x1) / y1) = (- 1))))
 
 axiom Mod_0 : (forall y1:int. ((not (y1 = 0)) -> ((0 % y1) = 0)))
 
 axiom Div_1_left : (forall y1:int. ((1 <  y1) -> ((1 / y1) = 0)))
 
-axiom Div_minus1_left : (forall y1:int. ((1 <  y1) -> (((-1) / y1) = (-1))))
+axiom Div_minus1_left :
+  (forall y1:int. ((1 <  y1) -> (((- 1) / y1) = (- 1))))
 
 axiom Mod_1_left : (forall y1:int. ((1 <  y1) -> ((1 % y1) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y1:int [((-1) % y1)]. ((1 <  y1) -> (((-1) % y1) = (y1 - 1))))
+  (forall y1:int [((- 1) % y1)]. ((1 <  y1) -> (((- 1) % y1) = (y1 - 1))))
 
 axiom Div_mult1 :
   (forall x1:int. forall y1:int. forall z:int [(((x1 * y1) + z) / x1)].
@@ -228,7 +229,8 @@ axiom mod_def :
 
 type integer
 
-predicate in_range1(x1: int) = (((-2147483648) <= x1) and (x1 <= 2147483647))
+predicate in_range1(x1: int) = (((- 2147483648) <= x1) and
+  (x1 <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -265,7 +267,8 @@ axiom prop____def_axiom :
 
 type ttB
 
-predicate in_range2(x1: int) = (((-2147483648) <= x1) and (x1 <= 2147483647))
+predicate in_range2(x1: int) = (((- 2147483648) <= x1) and
+  (x1 <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -339,6 +342,13 @@ logic i5b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : bool
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : dynamic_property(first, last, i5b)
+
  (* File "pred.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> (in_range(y) ->
-  (dynamic_property(first, last, i5b) -> (not (i5b = 0)))))
+goal WP_parameter_def : (not (i5b = 0))

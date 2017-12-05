@@ -133,6 +133,8 @@
 (declare-const o2 int5)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
+(declare-const temp___298 (Array Int int5))
 (declare-const result Int)
 (declare-const i1 Int)
 (assert (in_range1 n))

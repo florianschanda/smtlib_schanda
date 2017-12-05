@@ -399,7 +399,7 @@ logic get__function_guard : int, us_rep2, int -> prop
 
 type element_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -706,19 +706,211 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
 
- (* File "a-cofuve.ads", line 75, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type.
-  forall current__split_fields:count_type.
-  forall n_last__split_fields:count_type. forall result:count_type.
-  forall current__split_fields1:count_type. forall result1:count_type.
-  forall n_last__split_fields1:count_type.
-  forall n_last__split_fields2:count_type. (((has_key(positions({
-  us_split_discrs1 = { rec__use_lists__my_lists__list__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__use_lists__my_lists__list =
-  l__split_fields } }), { us_split_fields3 = {
-  rec__use_lists__my_lists__cursor__node = fst } }) = true) and
-  ((has_key(positions({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic current__split_fields : count_type
+
+logic n_last__split_fields : count_type
+
+logic o : us_rep3
+
+logic o1 : us_rep3
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : us_rep3
+
+logic o5 : us_rep3
+
+logic temp___540 : count_type
+
+logic temp___5401 : us_main_type
+
+logic temp___543 : us_rep2
+
+logic temp___539 : count_type
+
+logic temp___542 : us_rep3
+
+logic temp___544 : us_rep2
+
+logic temp___541 : int
+
+logic o6 : us_rep3
+
+logic o7 : us_rep3
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : us_rep3
+
+logic o11 : us_rep3
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : bool
+
+logic i : int
+
+logic o15 : us_rep3
+
+logic o16 : int
+
+logic o17 : us_rep3
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : bool
+
+logic o21 : bool
+
+logic o22 : us_rep2
+
+logic o23 : int
+
+logic o24 : int
+
+logic i1 : int
+
+logic o25 : us_rep3
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : bool
+
+logic o29 : us_rep2
+
+logic o30 : int
+
+logic o31 : int
+
+logic i2 : int
+
+logic o32 : us_rep3
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic o36 : bool
+
+logic o37 : us_rep2
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic i3 : int
+
+logic o42 : int
+
+logic o43 : bool
+
+logic o44 : us_rep3
+
+logic o45 : int
+
+logic o46 : us_rep3
+
+logic o47 : int
+
+logic o48 : bool
+
+logic o49 : bool
+
+logic o50 : us_rep2
+
+logic o51 : int
+
+logic o52 : us_rep2
+
+logic o53 : int
+
+logic o54 : int
+
+logic l__split_fields1 : us_main_type
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : count_type
+
+logic current__split_fields1 : count_type
+
+logic result3 : count_type
+
+logic n_last__split_fields1 : count_type
+
+logic n_last__split_fields2 : count_type
+
+logic l__split_fields2 : us_main_type
+
+logic current__split_fields2 : count_type
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic l__split_fields3 : us_main_type
+
+logic current__split_fields3 : count_type
+
+logic l__split_fields4 : us_main_type
+
+logic current__split_fields4 : count_type
+
+logic l__split_fields5 : us_main_type
+
+logic current__split_fields5 : count_type
+
+logic l__split_fields6 : us_main_type
+
+logic current__split_fields6 : count_type
+
+logic l__split_fields7 : us_main_type
+
+logic current__split_fields7 : count_type
+
+logic l__split_fields8 : us_main_type
+
+logic current__split_fields8 : count_type
+
+logic n_last__split_fields3 : count_type
+
+logic l__split_fields9 : us_main_type
+
+logic current__split_fields9 : count_type
+
+logic n_last__split_fields4 : count_type
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : ((has_key(positions({ us_split_discrs1 = {
+  rec__use_lists__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
+  { us_split_fields3 = { rec__use_lists__my_lists__cursor__node = fst }
+  }) = true) and ((has_key(positions({ us_split_discrs1 = {
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
   { us_split_fields3 = { rec__use_lists__my_lists__cursor__node = lst }
@@ -729,29 +921,17 @@ goal WP_parameter_def :
   }) <= get1(positions({ us_split_discrs1 = {
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
-  { us_split_fields3 = { rec__use_lists__my_lists__cursor__node = lst }
-  })))) -> ((({ us_split_fields__content1 = {
-  rec__use_lists__my_lists__cursor__node = result } } = {
-  us_split_fields__content1 = { rec__use_lists__my_lists__cursor__node =
-  current__split_fields } }) and (fst = current__split_fields1)) -> ((({
-  us_split_fields__content1 = { rec__use_lists__my_lists__cursor__node =
-  result1 } } = { us_split_fields__content1 = {
-  rec__use_lists__my_lists__cursor__node = n_last__split_fields } }) and
-  (lst = n_last__split_fields1)) -> ((((match_bool(bool_eq4({
-  us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
-  n_last__split_fields1 } }, { us_split_fields3 = {
-  rec__use_lists__my_lists__cursor__node = no_element } }), true,
-  bool_eq1(get1(positions({ us_split_discrs1 = {
-  rec__use_lists__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
-  { us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
-  n_last__split_fields1 } }), length({ us_split_discrs1 = {
-  rec__use_lists__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields }
-  }))) = true) and (bool_eq4({ us_split_fields3 = {
-  rec__use_lists__my_lists__cursor__node = n_last__split_fields2 } }, {
-  us_split_fields3 = { rec__use_lists__my_lists__cursor__node = no_element }
-  }) = true)) or ((not (match_bool(bool_eq4({ us_split_fields3 = {
+  { us_split_fields3 = { rec__use_lists__my_lists__cursor__node = lst } }))))
+
+axiom H1 : (result2 = current__split_fields)
+
+axiom H2 : (current__split_fields1 = fst)
+
+axiom H3 : (result3 = n_last__split_fields)
+
+axiom H4 : (n_last__split_fields1 = lst)
+
+axiom H5 : (((match_bool(bool_eq4({ us_split_fields3 = {
   rec__use_lists__my_lists__cursor__node = n_last__split_fields1 } }, {
   us_split_fields3 = { rec__use_lists__my_lists__cursor__node = no_element }
   }), true, bool_eq1(get1(positions({ us_split_discrs1 = {
@@ -761,7 +941,20 @@ goal WP_parameter_def :
   n_last__split_fields1 } }), length({ us_split_discrs1 = {
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields }
-  }))) = true)) and ((has_key(positions({ us_split_discrs1 = {
+  }))) = true) -> (bool_eq4({ us_split_fields3 = {
+  rec__use_lists__my_lists__cursor__node = n_last__split_fields2 } }, {
+  us_split_fields3 = { rec__use_lists__my_lists__cursor__node = no_element }
+  }) = true)) and ((not (match_bool(bool_eq4({ us_split_fields3 = {
+  rec__use_lists__my_lists__cursor__node = n_last__split_fields1 } }, {
+  us_split_fields3 = { rec__use_lists__my_lists__cursor__node = no_element }
+  }), true, bool_eq1(get1(positions({ us_split_discrs1 = {
+  rec__use_lists__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
+  { us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
+  n_last__split_fields1 } }), length({ us_split_discrs1 = {
+  rec__use_lists__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields }
+  }))) = true)) -> ((has_key(positions({ us_split_discrs1 = {
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
   { us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
@@ -773,15 +966,20 @@ goal WP_parameter_def :
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
   { us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
-  n_last__split_fields1 } }) + 1))))) -> ((not (bool_eq4({ us_split_fields3 =
-  { rec__use_lists__my_lists__cursor__node = current__split_fields1 } }, {
+  n_last__split_fields1 } }) + 1)))))
+
+axiom H6 : (not (bool_eq4({ us_split_fields3 = {
+  rec__use_lists__my_lists__cursor__node = current__split_fields1 } }, {
   us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
-  n_last__split_fields2 } }) = true)) -> (get1(positions({ us_split_discrs1 =
-  { rec__use_lists__my_lists__list__capacity = l__split_discrs };
+  n_last__split_fields2 } }) = true))
+
+ (* File "a-cofuve.ads", line 75, characters 0-0 *)
+goal WP_parameter_def : (get1(positions({ us_split_discrs1 = {
+  rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
   { us_split_fields3 = { rec__use_lists__my_lists__cursor__node = fst }
   }) <= get1(positions({ us_split_discrs1 = {
   rec__use_lists__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__use_lists__my_lists__list = l__split_fields } }),
   { us_split_fields3 = { rec__use_lists__my_lists__cursor__node =
-  current__split_fields1 } }))))))))
+  current__split_fields1 } }))

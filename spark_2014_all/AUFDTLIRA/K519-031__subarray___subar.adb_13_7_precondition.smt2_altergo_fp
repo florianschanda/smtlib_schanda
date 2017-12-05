@@ -216,10 +216,23 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ab : (int,one_twenty) farray
+
+logic o : one_twenty
+
+logic o1 : (int,one_twenty) farray
+
+logic result : (int,one_twenty) farray
+
+logic ab1 : (int,one_twenty) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = (ab[1 <- o]))
+
+axiom H2 : (result = ab)
+
+axiom H3 : (ab1 = o1)
+
  (* File "subar.adb", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ab:(int,one_twenty) farray. forall o:one_twenty.
-  forall o1:(int,one_twenty) farray. forall result:(int,one_twenty) farray.
-  forall ab1:(int,one_twenty) farray. ((((to_rep(o) = 1) and
-  (o1 = (ab[1 <- o]))) and ((result = ab) and (ab1 = o1))) ->
-  (to_rep((ab1[1])) = 1)))
+goal WP_parameter_def : (to_rep((ab1[1])) = 1)

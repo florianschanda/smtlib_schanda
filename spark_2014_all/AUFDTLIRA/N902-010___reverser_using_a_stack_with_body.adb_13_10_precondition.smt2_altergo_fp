@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -406,47 +406,176 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,item) farray
+
+logic i : int
+
+logic j : int
+
+logic sp : us_private
+
+logic vec : us_private
+
+logic sp1 : us_private
+
+logic vec1 : us_private
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic sp2 : us_private
+
+logic vec2 : us_private
+
+logic result1 : bool
+
+logic sp3 : us_private
+
+logic vec3 : us_private
+
+logic sp4 : us_private
+
+logic vec4 : us_private
+
+logic sp5 : us_private
+
+logic vec5 : us_private
+
+logic i3 : int
+
+logic sp6 : us_private
+
+logic vec6 : us_private
+
+logic i4 : int
+
+logic sp7 : us_private
+
+logic vec7 : us_private
+
+logic i5 : int
+
+logic sp8 : us_private
+
+logic vec8 : us_private
+
+logic i6 : int
+
+logic sp9 : us_private
+
+logic vec9 : us_private
+
+logic result2 : int
+
+logic j1 : int
+
+logic a1 : (int,item) farray
+
+logic j2 : int
+
+logic sp10 : us_private
+
+logic result3 : bool
+
+logic a_stack_no_spark_contracts_with_body__pop__it : int
+
+axiom H : dynamic_property(1, 10000, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : ((((to_rep(a__first) <= to_rep(a__last)) ->
+  (0 <  ((to_rep(a__last) - to_rep(a__first)) + 1))) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (0 <  0))) and
+  (((to_rep(a__first) <= to_rep(a__last)) ->
+  (((to_rep(a__last) - to_rep(a__first)) + 1) <= 100)) and
+  ((not (to_rep(a__first) <= to_rep(a__last))) -> (0 <= 100))))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = to_rep(a__first))
+
+axiom H4 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  ((to_rep(a__first) <= i2) and (i2 <= to_rep(a__last))))
+
+axiom H5 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (((((vec2 = vec4) and (sp2 = sp4)) and ((vec5 = vec2) and (sp5 = sp2))) and
+  ((result1 = is_full(sp2)) and (result1 = true))) or
+  (((result1 = is_full(sp2)) and (not (result1 = true))) and
+  ((((vec3 = vec4) and (sp3 = sp4)) and ((vec5 = vec3) and (sp5 = sp3))) and
+  (i2 = to_rep(a__last))))))
+
+axiom H6 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (vec6 = vec4))
+
+axiom H7 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (sp6 = sp4))
+
+axiom H8 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (i2 = i3))
+
+axiom H9 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (vec7 = vec5))
+
+axiom H10 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (sp7 = sp5))
+
+axiom H11 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (i4 = i2))
+
+axiom H12 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (vec8 = vec6))
+
+axiom H13 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (sp8 = sp6))
+
+axiom H14 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (i5 = i3))
+
+axiom H15 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (vec9 = vec7))
+
+axiom H16 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (sp9 = sp7))
+
+axiom H17 : (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
+  (i6 = i4))
+
+axiom H18 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (vec8 = vec))
+
+axiom H19 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (sp8 = sp))
+
+axiom H20 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (i1 = i5))
+
+axiom H21 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (vec9 = vec1))
+
+axiom H22 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (sp9 = sp1))
+
+axiom H23 : ((not ((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last)))) ->
+  (i6 = i1))
+
+axiom H24 : (result2 = j)
+
+axiom H25 : (j1 = to_rep(a__first))
+
+axiom H26 : (to_rep(a__first) <= j1)
+
+axiom H27 : (j1 <= to_rep(a__last))
+
+axiom H28 :
+  ((forall temp___166:int. (((to_rep(a__first) <= temp___166) and
+   (temp___166 <= to_rep(a__last))) -> ((j2 <= temp___166) ->
+   ((a1[temp___166]) = (a[temp___166]))))) and ((to_rep(a__first) <= j2) and
+  (j2 <= to_rep(a__last))))
+
+axiom H29 : (result3 = is_empty(sp10))
+
+axiom H30 : (not (result3 = true))
+
  (* File "reverser_using_a_stack_with_body.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,item) farray. forall i:int. forall j:int.
-  forall sp:us_private. forall vec:us_private. forall sp1:us_private.
-  forall vec1:us_private. forall result:int. forall i1:int. forall i2:int.
-  forall sp2:us_private. forall vec2:us_private. forall result1:bool.
-  forall sp3:us_private. forall vec3:us_private. forall sp4:us_private.
-  forall vec4:us_private. forall sp5:us_private. forall vec5:us_private.
-  forall i3:int. forall sp6:us_private. forall vec6:us_private.
-  forall i4:int. forall sp7:us_private. forall vec7:us_private.
-  forall i5:int. forall sp8:us_private. forall vec8:us_private.
-  forall i6:int. forall sp9:us_private. forall vec9:us_private.
-  forall result2:int. forall j1:int. forall a1:(int,item) farray.
-  forall j2:int. forall sp10:us_private. forall result3:bool.
-  (dynamic_property(1, 10000, to_rep(a__first), to_rep(a__last)) ->
-  (((((to_rep(a__first) <= to_rep(a__last)) and
-  (0 <  ((to_rep(a__last) - to_rep(a__first)) + 1))) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (0 <  0))) and
-  (((to_rep(a__first) <= to_rep(a__last)) and
-  (((to_rep(a__last) - to_rep(a__first)) + 1) <= 100)) or
-  ((not (to_rep(a__first) <= to_rep(a__last))) and (0 <= 100)))) -> (((({
-  int__content = result } = { int__content = i }) and
-  (i1 = to_rep(a__first))) and ((((to_rep(a__first) <= i1) and
-  (i1 <= to_rep(a__last))) and (((((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last))) and (((((vec2 = vec4) and (sp2 = sp4)) and
-  ((vec5 = vec2) and (sp5 = sp2))) and ((result1 = is_full(sp2)) and
-  (result1 = true))) or (((result1 = is_full(sp2)) and
-  (not (result1 = true))) and ((((vec3 = vec4) and (sp3 = sp4)) and
-  ((vec5 = vec3) and (sp5 = sp3))) and (i2 = to_rep(a__last)))))) and
-  (((vec4 = vec6) and ((sp4 = sp6) and (i2 = i3))) and ((vec7 = vec5) and
-  ((sp7 = sp5) and (i4 = i2))))) and ((({ us_private__content = vec8 } = {
-  us_private__content = vec6 }) and (({ us_private__content = sp8 } = {
-  us_private__content = sp6 }) and (i5 = i3))) and ((vec9 = vec7) and
-  ((sp9 = sp7) and (i6 = i4)))))) or ((not ((to_rep(a__first) <= i1) and
-  (i1 <= to_rep(a__last)))) and (((vec = vec8) and ((sp = sp8) and
-  (i1 = i5))) and ((vec9 = vec1) and ((sp9 = sp1) and (i6 = i1))))))) ->
-  (((result2 = j) and (j1 = to_rep(a__first))) ->
-  (((to_rep(a__first) <= j1) and (j1 <= to_rep(a__last))) ->
-  (((forall temp___166:int. (((to_rep(a__first) <= temp___166) and
-    (temp___166 <= to_rep(a__last))) -> ((j2 <= temp___166) ->
-    ((a1[temp___166]) = (a[temp___166]))))) and
-  ((to_rep(a__first) <= j2) and (j2 <= to_rep(a__last)))) ->
-  (((result3 = is_empty(sp10)) and (not (result3 = true))) ->
-  (not (is_empty(sp10) = true))))))))))
+goal WP_parameter_def : (not (is_empty(sp10) = true))

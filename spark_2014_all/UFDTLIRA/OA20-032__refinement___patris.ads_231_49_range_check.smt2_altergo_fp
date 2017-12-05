@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type px_coord
 
-predicate in_range(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type py_coord
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq2 : int, int -> bool
 
@@ -478,9 +478,25 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range4(a)
+
+axiom H1 : (move_is_possible({ us_split_fields1 = { rec__patris__piece__s =
+  p; rec__patris__piece__d = p1; rec__patris__piece__x = p2;
+  rec__patris__piece__y = p3 } }, a) = true)
+
+axiom H2 : (not (a = 0))
+
+axiom H3 : (not (a = 1))
+
+axiom H4 : (a = 2)
+
  (* File "patris.ads", line 72, characters 0-0 *)
-goal WP_parameter_def : (in_range4(a) -> ((move_is_possible({
-  us_split_fields1 = { rec__patris__piece__s = p; rec__patris__piece__d = p1;
-  rec__patris__piece__x = p2; rec__patris__piece__y = p3 } }, a) = true) ->
-  ((not (a = 0)) -> ((not (a = 1)) -> ((a = 2) ->
-  in_range1((to_rep1(p3) + 1)))))))
+goal WP_parameter_def : in_range1((to_rep1(p3) + 1))

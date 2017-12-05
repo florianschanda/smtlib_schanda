@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -599,7 +599,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -666,32 +666,6 @@ axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
 
-type unsigned_32
-
-logic attr__ATTRIBUTE_MODULUS : t
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic user_eq1 : unsigned_32, unsigned_32 -> bool
-
-logic dummy1 : unsigned_32
-
-type unsigned_32__ref = { unsigned_32__content : unsigned_32
-}
-
-function unsigned_32__ref___projection(a: unsigned_32__ref) : unsigned_32 =
-  (a).unsigned_32__content
-
 type map__ref = { map__content : (int,integer) farray
 }
 
@@ -726,13 +700,13 @@ axiom singleton_def :
   (forall v:integer.
   (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
 
-logic bool_eq4 : (int,integer) farray, int, int, (int,integer) farray, int,
+logic bool_eq3 : (int,integer) farray, int, int, (int,integer) farray, int,
   int -> bool
 
-axiom bool_eq_def3 :
+axiom bool_eq_def2 :
   (forall a:(int,integer) farray. forall a__first:int. forall a__last:int.
   forall b:(int,integer) farray. forall b__first:int. forall b__last:int
-  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq3(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
@@ -740,19 +714,19 @@ axiom bool_eq_def3 :
   (temp___idx_132 <= a__last)) and
   (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
   (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq3(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
   (temp___idx_132 <= a__last)) ->
   (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
+  (bool_eq3(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,integer) farray. forall b:(int,integer) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq3(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
@@ -767,7 +741,7 @@ axiom compare_def_eq :
   (forall a:(int,integer) farray. forall b:(int,integer) farray.
   (forall a_first:int. forall a_last:int. forall b_first:int.
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
+  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq3(a,
   a_first, a_last, b, b_first, b_last) = true))))
 
 axiom compare_def_lt :
@@ -776,7 +750,7 @@ axiom compare_def_lt :
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
   ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
   (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
+  ((bool_eq3(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
   ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
 
 axiom compare_def_gt :
@@ -785,16 +759,42 @@ axiom compare_def_gt :
   forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
   ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
   (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
+  ((bool_eq3(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
   ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+type target
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic user_eq1 : target, target -> bool
+
+logic dummy1 : target
+
+type target__ref = { target__content : target
+}
+
+function target__ref___projection(a: target__ref) : target =
+  (a).target__content
+
 type source
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -818,32 +818,6 @@ type source__ref = { source__content : source
 function source__ref___projection(a: source__ref) : source =
   (a).source__content
 
-type target
-
-logic attr__ATTRIBUTE_MODULUS1 : t
-
-logic bool_eq6 : t, t -> bool
-
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
-
-logic user_eq3 : target, target -> bool
-
-logic dummy3 : target
-
-type target__ref = { target__content : target
-}
-
-function target__ref___projection(a: target__ref) : target =
-  (a).target__content
-
 logic c : int -> t
 
 logic c__function_guard : t, int -> prop
@@ -854,11 +828,33 @@ logic tmp : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic temp___261 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : int
+
+logic legal__rv3uc__tmp__assume : t
+
+logic o2 : int
+
+logic v3 : (int,integer) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : (temp___261 = v3)
+
+axiom H2 : (o = (temp___261[3]))
+
+axiom H3 : (o1 = to_rep(o))
+
+axiom H4 : (legal__rv3uc__tmp__assume = c(o1))
+
+axiom H5 : (legal__rv3uc__tmp__assume = tmp)
+
+axiom H6 : true
+
  (* File "legal.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall temp___261:(int,integer) farray. forall o:integer.
-  forall o1:int. forall legal__rv3uc__tmp__assume:t.
-  forall v3:(int,integer) farray. ((((-2147483648) <= 2147483647) ->
-  in_range(x)) -> ((((((temp___261 = v3) and (o = (temp___261[3]))) and
-  (o1 = to_rep(o))) and (legal__rv3uc__tmp__assume = c(o1))) and
-  (legal__rv3uc__tmp__assume = tmp)) -> in_range(tqtint(tmp)))))
+goal WP_parameter_def : in_range(tqtint(tmp))

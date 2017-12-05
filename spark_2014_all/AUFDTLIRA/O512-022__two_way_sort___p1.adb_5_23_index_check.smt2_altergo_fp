@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -406,9 +406,62 @@ logic t1 : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,bool) farray
+
+logic o : int
+
+logic p1__swap__t__assume : bool
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : (int,bool) farray
+
+logic o5 : int
+
+logic o6 : (int,bool) farray
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : bool
+
+logic k : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : bool
+
+logic result : (int,bool) farray
+
+logic a1 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+logic a2 : (int,bool) farray
+
+logic a3 : (int,bool) farray
+
+logic a4 : (int,bool) farray
+
+axiom H : dynamic_property(0, 1000000, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range2(j)
+
+axiom H3 : (((to_rep(a__first) <= i) and (i <= to_rep(a__last))) and
+  ((to_rep(a__first) <= j) and (j <= to_rep(a__last))))
+
  (* File "p1.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 1000000, to_rep(a__first),
-  to_rep(a__last)) -> (in_range2(i) -> (in_range2(j) ->
-  ((((to_rep(a__first) <= i) and (i <= to_rep(a__last))) and
-  ((to_rep(a__first) <= j) and (j <= to_rep(a__last)))) ->
-  (to_rep(a__first) <= j)))))
+goal WP_parameter_def : (to_rep(a__first) <= j)

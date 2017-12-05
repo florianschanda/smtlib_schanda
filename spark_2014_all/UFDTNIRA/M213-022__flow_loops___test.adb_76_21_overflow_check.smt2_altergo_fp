@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -265,28 +265,194 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic c : int
+
+logic d : int
+
+logic q : int
+
+logic r : int
+
+logic w : int
+
+logic x : int
+
+logic y : int
+
+logic temp___165 : int
+
+logic temp___164 : int
+
+logic temp___163 : int
+
+logic temp___162 : int
+
+logic temp___161 : int
+
+logic temp___160 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic q1 : int
+
+logic w1 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic d1 : int
+
+logic result2 : int
+
+logic x1 : int
+
+logic result3 : int
+
+logic y1 : int
+
+logic c2 : int
+
+logic d2 : int
+
+logic q2 : int
+
+logic w2 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic result4 : int
+
+logic q3 : int
+
+logic result5 : int
+
+logic w3 : int
+
+logic result6 : int
+
+logic c3 : int
+
+logic result7 : int
+
+logic d3 : int
+
+logic result8 : int
+
+logic x3 : int
+
+logic result9 : int
+
+logic y3 : int
+
+logic c4 : int
+
+logic d4 : int
+
+logic q4 : int
+
+logic w4 : int
+
+logic x4 : int
+
+logic y4 : int
+
+logic c5 : int
+
+logic d5 : int
+
+logic q5 : int
+
+logic w5 : int
+
+logic x5 : int
+
+logic y5 : int
+
+logic c6 : int
+
+logic d6 : int
+
+logic q6 : int
+
+logic w6 : int
+
+logic x6 : int
+
+logic y6 : int
+
+logic c7 : int
+
+logic d7 : int
+
+logic q7 : int
+
+logic w7 : int
+
+logic x7 : int
+
+logic y7 : int
+
+axiom H : in_range1(b)
+
+axiom H1 : in_range1(p)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(c))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(d))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(q))
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range1(r))
+
+axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(w))
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
+axiom H9 : (result = c)
+
+axiom H10 : (c1 = p)
+
+axiom H11 : (result1 = d)
+
+axiom H12 : (d1 = b)
+
+axiom H13 : (result2 = x)
+
+axiom H14 : (x1 = 0)
+
+axiom H15 : (result3 = y)
+
+axiom H16 : (y1 = 1)
+
+axiom H17 : (not (d1 = 1))
+
+axiom H18 : (((((((((- 2147483648) <= 2147483647) -> in_range1(y2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(c2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(d2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(q2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(w2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(x2))) and (not (d2 = 1)))
+
+axiom H19 : ((o = comp_div(c2,d2)) and in_range1(comp_div(c2,d2)))
+
+axiom H20 : (q2 = result4)
+
+axiom H21 : (q3 = o)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall d:int. forall q:int. forall r:int. forall w:int.
-  forall x:int. forall y:int. forall o:int. forall result:int. forall c1:int.
-  forall result1:int. forall d1:int. forall result2:int. forall x1:int.
-  forall result3:int. forall y1:int. forall c2:int. forall d2:int.
-  forall q1:int. forall w1:int. forall x2:int. forall y2:int.
-  forall result4:int. forall q2:int. (in_range1(b) -> (in_range1(p) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(c)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(d)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(q)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(r)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(w)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(y)) -> (((result = c) and
-  (c1 = p)) -> (((result1 = d) and (d1 = b)) -> (((result2 = x) and
-  (x1 = 0)) -> (((result3 = y) and (y1 = 1)) -> ((not (d1 = 1)) ->
-  ((((((((((-2147483648) <= 2147483647) -> in_range1(y2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(c2))) and
-  (((-2147483648) <= 2147483647) -> in_range1(d2))) and
-  (((-2147483648) <= 2147483647) -> in_range1(q1))) and
-  (((-2147483648) <= 2147483647) -> in_range1(w1))) and
-  (((-2147483648) <= 2147483647) -> in_range1(x2))) and (not (d2 = 1))) ->
-  ((((o = comp_div(c2,d2)) and in_range1(comp_div(c2,d2))) and
-  ((q1 = result4) and (q2 = o))) -> in_range1((q2 * y2)))))))))))))))))))
+goal WP_parameter_def : in_range1((q3 * y2))

@@ -226,5 +226,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom x1__def_axiom : (x1 = of_int(1))
 
+axiom H : (of_int(1) = x1)
+
+axiom H1 : (not (b = true))
+
+axiom H2 : (query_x1(void) = true)
+
  (* File "user.adb", line 2, characters 0-0 *)
 goal WP_parameter_def : true

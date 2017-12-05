@@ -897,13 +897,25 @@ axiom get__post_axiom1 :
   ((1 <= position) and (position <= (0 + length2(container2))))) ->
   in_range6(get(container2, position)))))
 
- (* File "a-cforma.ads", line 954, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (in_range1(key) -> ((((o = length({
-  us_split_discrs1 = { rec__dic_of_cont__my_orma__map__capacity = container
-  }; us_split_fields1 = { rec__dic_of_cont__my_orma__map = container1 }
-  })) and (in_range2(o) and (o <= to_rep(container)))) and (((o = 0) and
-  (result = true)) or ((not (o = 0)) and (result = false)))) ->
-  ((not (result = true)) -> (not (is_empty({ us_split_discrs1 = {
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+axiom H : in_range1(key)
+
+axiom H1 : ((o1 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_orma__map__capacity = container }; us_split_fields1 =
-  { rec__dic_of_cont__my_orma__map = container1 } }) = true))))))
+  { rec__dic_of_cont__my_orma__map = container1 } })) and (in_range2(o1) and
+  (o1 <= to_rep(container))))
+
+axiom H2 : (((o1 = 0) -> (result = true)) and ((not (o1 = 0)) ->
+  (result = false)))
+
+axiom H3 : (not (result = true))
+
+ (* File "a-cforma.ads", line 954, characters 0-0 *)
+goal WP_parameter_def : (not (is_empty({ us_split_discrs1 = {
+  rec__dic_of_cont__my_orma__map__capacity = container }; us_split_fields1 =
+  { rec__dic_of_cont__my_orma__map = container1 } }) = true))

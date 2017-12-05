@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -572,39 +572,69 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range3(w_get(container, witness1)))))
 
- (* File "a-cfdlli.ads", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type.
-  forall position__split_fields:count_type. forall o:int. forall o1:int.
-  forall o2:us_rep2. forall o3:int. (in_range1(count) ->
-  ((has_key(positions({ us_split_discrs1 = {
+logic container__split_fields : us_main_type
+
+logic position__split_fields : count_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : us_rep2
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : in_range1(count)
+
+axiom H1 : (has_key(positions({ us_split_discrs1 = {
   rec__dic_of_cont__my_dlli__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__dic_of_cont__my_dlli__list =
   container__split_fields } }), { us_split_fields3 = {
   rec__dic_of_cont__my_dlli__cursor__node = position__split_fields }
-  }) = true) -> ((((o2 = positions({ us_split_discrs1 = {
+  }) = true)
+
+axiom H2 : ((o2 = positions({ us_split_discrs1 = {
   rec__dic_of_cont__my_dlli__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__dic_of_cont__my_dlli__list =
   container__split_fields } })) and ((not (has_key(o2, { us_split_fields3 = {
   rec__dic_of_cont__my_dlli__cursor__node = no_element } }) = true)) and
-  (forall i:us_rep1. ((has_key(o2, i) = true) -> (((1 <= get(o2, i)) and
-  (get(o2, i) <= length({ us_split_discrs1 = {
-  rec__dic_of_cont__my_dlli__list__capacity = container__split_discrs };
-  us_split_fields1 = { rec__dic_of_cont__my_dlli__list =
-  container__split_fields } }))) and
-  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get(o2, i) = get(o2,
-  j)) -> (bool_eq4(i, j) = true))))))))) and ((o3 = get(o2, {
+  (forall i:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__dic_of_cont__my_dlli__cursor__node = i } }) = true) -> (((1 <= get(o2,
+  { us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node = i }
+  })) and (get(o2, { us_split_fields3 = {
+  rec__dic_of_cont__my_dlli__cursor__node = i } }) <= length({
+  us_split_discrs1 = { rec__dic_of_cont__my_dlli__list__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__dic_of_cont__my_dlli__list = container__split_fields } }))) and
+  (forall j:count_type. ((has_key(o2, { us_split_fields3 = {
+  rec__dic_of_cont__my_dlli__cursor__node = j } }) = true) -> ((get(o2, {
+  us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node = i }
+  }) = get(o2, { us_split_fields3 = {
+  rec__dic_of_cont__my_dlli__cursor__node = j } })) -> (bool_eq4({
+  us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node = i } }, {
+  us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node = j }
+  }) = true)))))))))
+
+axiom H3 : ((o3 = get(o2, { us_split_fields3 = {
+  rec__dic_of_cont__my_dlli__cursor__node = position__split_fields } })) and
+  (in_range3(o3) and ((of_int(0) = true) -> ((o3 = w_get(o2, witness(o2, {
   us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node =
-  position__split_fields } })) and (in_range3(o3) and ((of_int(0) = true) ->
-  ((o3 = w_get(o2, witness(o2, { us_split_fields3 = {
-  rec__dic_of_cont__my_dlli__cursor__node = position__split_fields } }))) and
+  position__split_fields } }))) and
   (forall k:us_rep1. ((has_key(o2, k) = true) -> ((bool_eq4(k, {
   us_split_fields3 = { rec__dic_of_cont__my_dlli__cursor__node =
   position__split_fields } }) = true) <-> (witness(o2, { us_split_fields3 = {
   rec__dic_of_cont__my_dlli__cursor__node = position__split_fields }
-  }) = witness(o2, k)))))))))) -> ((((o = length({ us_split_discrs1 = {
+  }) = witness(o2, k)))))))))
+
+axiom H4 : ((o = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_dlli__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__dic_of_cont__my_dlli__list =
   container__split_fields } })) and (in_range1(o) and
-  (o <= to_rep(container__split_discrs)))) and (o1 = (o - count))) ->
-  in_range(o1))))))
+  (o <= to_rep(container__split_discrs))))
+
+axiom H5 : (o1 = (o - count))
+
+ (* File "a-cfdlli.ads", line 51, characters 0-0 *)
+goal WP_parameter_def : in_range(o1)

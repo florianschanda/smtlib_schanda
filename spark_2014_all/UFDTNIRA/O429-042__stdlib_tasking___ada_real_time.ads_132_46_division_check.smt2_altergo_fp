@@ -133,18 +133,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -190,7 +190,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -246,7 +246,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type duration
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -383,7 +383,7 @@ function duration__ref___projection(a: duration__ref) : duration =
 
 type tduration_repB
 
-predicate in_range3(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range3(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq3 : int, int -> bool
@@ -410,7 +410,7 @@ function tduration_repB__ref___projection(a: tduration_repB__ref) : tduration_re
 
 type duration_rep
 
-predicate in_range4(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range4(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -516,14 +516,137 @@ logic oge__2__function_guard : bool, us_rep, us_rep -> prop
 
 axiom oge__2__post_axiom : true
 
+logic o : duration
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : duration
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : duration
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : duration
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : us_rep
+
+logic o25 : duration
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : duration
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : duration
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : duration
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+axiom H : in_range1(right)
+
+axiom H1 : (0 <  right)
+
+axiom H2 : (result = ogt__2(left, time_span_zero))
+
+axiom H3 : (result = true)
+
+axiom H4 : (o4 = to_duration__2(time_span_last))
+
+axiom H5 : (o5 = to_fixed(o4))
+
+axiom H6 : (o6 = fxp_div_result_int(o5, 1))
+
+axiom H7 : ((o7 = o6) and in_range3(o6))
+
+axiom H8 : ((o8 = o7) and in_range4(o7))
+
+axiom H9 : (o9 = comp_div(o8,right))
+
+axiom H10 : ((o10 = o9) and in_range3(o9))
+
+axiom H11 : (o = to_duration__2(left))
+
+axiom H12 : (o1 = to_fixed(o))
+
  (* File "ada_real_time.ads", line 210, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:duration. forall o1:int. forall o2:duration. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall result:bool. (in_range1(right) -> ((0 <  right) ->
-  ((result = ogt__2(left, time_span_zero)) -> ((result = true) ->
-  ((((((((o2 = to_duration__2(time_span_last)) and (o3 = to_fixed(o2))) and
-  (o4 = fxp_div_result_int(o3, 1))) and ((o5 = o4) and in_range3(o4))) and
-  ((o6 = o5) and in_range4(o5))) and (o7 = comp_div(o6,right))) and
-  ((o8 = o7) and in_range3(o7))) -> (((o = to_duration__2(left)) and
-  (o1 = to_fixed(o))) -> (not (1 = 0)))))))))
+goal WP_parameter_def : (not (1 = 0))

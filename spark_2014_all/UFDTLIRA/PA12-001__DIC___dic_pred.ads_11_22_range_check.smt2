@@ -78,6 +78,7 @@
 (assert (forall ((x Int)) (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern ((id x)))))
 (assert (= c (id 0)))
 (define-fun default_initial_assumption ((temp___expr_146 us_rep) (temp___skip_top_level_147 Bool)) Bool (and (= (to_rep (rec__dic_pred__s__f (us_split_fields1 temp___expr_146))) c) (=> (not (= temp___skip_top_level_147 true)) (<= 0 c))))
+(declare-const us Int)
 (assert (in_range c))
 (assert (= (id 0) c))
 (assert (not (in_range1 c)))

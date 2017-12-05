@@ -140,6 +140,7 @@
 (declare-const piece_count Int)
 (declare-const create_piece Bool)
 (declare-const game_board (Array Int (Array Int us_rep)))
+(declare-const o Int)
 (declare-const result Bool)
 (declare-const result1 Bool)
 (declare-const create_piece1 Bool)

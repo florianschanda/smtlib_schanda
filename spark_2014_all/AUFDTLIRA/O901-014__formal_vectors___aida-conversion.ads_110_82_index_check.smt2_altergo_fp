@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -500,383 +500,2057 @@ function t19b__ref___projection(a: t19b__ref) : integer = (a).t19b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall has_failed:bool. forall i:int. forall i1:int.
-  forall o:int. forall o1:character. forall o2:int. forall temp___883:int.
-  forall temp___884:int. forall temp___882:int. forall temp___881:int.
-  forall temp___880:bool. forall o3:int. forall o4:character. forall o5:int.
-  forall o6:bool. forall o7:int. forall o8:character. forall o9:int.
-  forall o10:bool. forall temp___877:int. forall temp___878:int.
-  forall temp___876:int. forall temp___875:int. forall temp___874:bool.
-  forall o11:bool. forall o12:bool. forall temp___941:int.
-  forall temp___942:int. forall o13:int. forall o14:character.
-  forall o15:int. forall temp___943:int. forall o16:int.
-  forall o17:character. forall o18:int. forall o19:bool. forall o20:bool.
-  forall o21:bool. forall temp___944:int. forall o22:int.
-  forall o23:character. forall o24:int. forall o25:bool. forall target1:int.
-  forall has_failed1:bool. forall i2:int. forall i3:int. forall result:int.
-  forall target2:int. forall result1:bool. forall has_failed2:bool.
-  forall result2:bool. forall result3:int. forall target3:int.
-  forall result4:bool. forall has_failed3:bool. forall result5:int.
-  forall target4:int. forall result6:bool. forall has_failed4:bool.
-  forall result7:int. forall i4:int. forall result8:bool. forall result9:int.
-  forall target5:int. forall result10:bool. forall has_failed5:bool.
-  forall target6:int. forall has_failed6:bool. forall i5:int.
-  forall result11:int. forall i6:int. forall result12:bool.
-  forall result13:int. forall target7:int. forall result14:bool.
-  forall has_failed7:bool. forall target8:int. forall has_failed8:bool.
-  forall i7:int. forall target9:int. forall has_failed9:bool. forall i8:int.
-  forall target10:int. forall has_failed10:bool. forall i9:int.
-  forall target11:int. forall has_failed11:bool. forall i10:int.
-  forall target12:int. forall has_failed12:bool. forall i11:int.
-  forall target13:int. forall has_failed13:bool. forall i12:int.
-  forall target14:int. forall has_failed14:bool. forall target15:int.
-  forall has_failed15:bool. forall i13:int. forall target16:int.
-  forall has_failed16:bool. forall i14:int. forall target17:int.
-  forall has_failed17:bool. forall i15:int. forall target18:int.
-  forall has_failed18:bool. forall i16:int. forall result15:int.
-  forall target19:int. forall result16:bool. forall has_failed19:bool.
-  forall result17:int. forall i17:int. forall result18:bool.
-  forall result19:int. forall target20:int. forall result20:bool.
-  forall has_failed20:bool. forall target21:int. forall has_failed21:bool.
-  forall i18:int. forall result21:int. forall i19:int. forall result22:bool.
-  forall result23:int. forall target22:int. forall result24:bool.
-  forall has_failed22:bool. forall target23:int__ref.
-  forall has_failed23:bool__ref. forall i20:int__ref. forall target24:int.
-  forall has_failed24:bool. forall i21:int. forall target25:int__ref.
-  forall has_failed25:bool__ref. forall i22:int__ref. forall target26:int.
-  forall has_failed26:bool. forall i23:int. forall target27:int__ref.
-  forall has_failed27:bool__ref. forall i24:int__ref. forall target28:int.
-  forall has_failed28:bool. forall i25:int. forall target29:int.
-  forall has_failed29:bool. forall target30:int__ref.
-  forall has_failed30:bool__ref. forall i26:int__ref. forall target31:int.
-  forall has_failed31:bool. forall i27:int. forall target32:int__ref.
-  forall has_failed32:bool__ref. forall i28:int__ref. forall i29:int__ref.
-  forall target33:int. forall has_failed33:bool. forall i30:int.
-  forall i31:int. forall target34:int__ref. forall has_failed34:bool__ref.
-  forall i32:int__ref. forall i33:int__ref. forall target35:int.
-  forall has_failed35:bool. forall i34:int. forall i35:int.
-  forall target36:int__ref. forall has_failed36:bool__ref.
-  forall i36:int__ref. forall i37:int__ref. forall target37:int.
-  forall has_failed37:bool. forall i38:int. forall i39:int.
-  forall target38:int__ref. forall has_failed38:bool__ref.
-  forall i40:int__ref. forall i41:int__ref. forall target39:int.
-  forall has_failed39:bool. forall i42:int. forall i43:int.
-  forall target40:int__ref. forall has_failed40:bool__ref.
-  forall i44:int__ref. forall i45:int__ref. forall target41:int.
-  forall has_failed41:bool. forall i46:int. forall i47:int.
-  forall result25:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) -> (((((((i41 = {
-  int__content = i1 }) and ((i40 = { int__content = i }) and
-  ((has_failed38 = { bool__content = has_failed2 }) and (target38 = {
-  int__content = target2 })))) and ((i43 = i3) and ((i42 = i2) and
-  ((has_failed39 = has_failed2) and (target39 = target2))))) and ((length({
-  elts = source; rt = source1 }) = 0) and (((result = target) and
-  (target2 = 0)) and ((result1 = has_failed) and
-  (has_failed2 = of_int(1)))))) or (((not (length({ elts = source; rt =
-  source1 }) = 0)) and (((has_failed2 = has_failed) and
-  (target2 = target)) and ((has_failed2 = has_failed1) and
-  (target2 = target1)))) and ((((i41 = i37) and ((i40 = i36) and
-  ((has_failed38 = has_failed36) and (target38 = target36)))) and
-  ((i43 = i39) and ((i42 = i38) and ((has_failed39 = has_failed37) and
-  (target39 = target37))))) and (((((i37 = i33) and ((i36 = i32) and
-  ((has_failed36 = has_failed34) and (target36 = target34)))) and
-  ((i39 = i35) and ((i38 = i34) and ((has_failed37 = has_failed35) and
-  (target37 = target35))))) and
+logic target : int
+
+logic has_failed : bool
+
+logic i : int
+
+logic i1 : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic us : int
+
+logic temp___883 : int
+
+logic temp___884 : int
+
+logic temp___882 : int
+
+logic temp___881 : int
+
+logic temp___880 : bool
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : bool
+
+logic j : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : bool
+
+logic temp___877 : int
+
+logic temp___878 : int
+
+logic temp___876 : int
+
+logic temp___875 : int
+
+logic temp___874 : bool
+
+logic o13 : bool
+
+logic j1 : int
+
+logic o14 : bool
+
+logic o15 : int
+
+logic o16 : character
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : character
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : character
+
+logic o23 : int
+
+logic o24 : int
+
+logic index : int
+
+logic index1 : int
+
+logic us1 : int
+
+logic o25 : int
+
+logic o26 : bool
+
+logic o27 : bool
+
+logic temp___890 : int
+
+logic o28 : int
+
+logic o29 : character
+
+logic o30 : int
+
+logic temp___891 : int
+
+logic o31 : int
+
+logic o32 : character
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : bool
+
+logic temp___892 : int
+
+logic o36 : int
+
+logic o37 : character
+
+logic o38 : int
+
+logic o39 : bool
+
+logic o40 : bool
+
+logic temp___893 : int
+
+logic o41 : int
+
+logic o42 : character
+
+logic o43 : int
+
+logic o44 : bool
+
+logic o45 : bool
+
+logic temp___894 : int
+
+logic o46 : int
+
+logic o47 : character
+
+logic o48 : int
+
+logic o49 : bool
+
+logic o50 : bool
+
+logic temp___895 : int
+
+logic o51 : int
+
+logic o52 : character
+
+logic o53 : int
+
+logic o54 : bool
+
+logic o55 : bool
+
+logic temp___896 : int
+
+logic o56 : int
+
+logic o57 : character
+
+logic o58 : int
+
+logic o59 : bool
+
+logic o60 : bool
+
+logic temp___897 : int
+
+logic o61 : int
+
+logic o62 : character
+
+logic o63 : int
+
+logic o64 : bool
+
+logic o65 : bool
+
+logic temp___898 : int
+
+logic o66 : int
+
+logic o67 : character
+
+logic o68 : int
+
+logic o69 : bool
+
+logic o70 : bool
+
+logic temp___899 : int
+
+logic o71 : int
+
+logic o72 : character
+
+logic o73 : int
+
+logic o74 : bool
+
+logic o75 : bool
+
+logic temp___900 : int
+
+logic o76 : int
+
+logic o77 : character
+
+logic o78 : int
+
+logic temp___901 : int
+
+logic o79 : int
+
+logic o80 : character
+
+logic o81 : int
+
+logic o82 : bool
+
+logic o83 : bool
+
+logic temp___902 : int
+
+logic o84 : int
+
+logic o85 : character
+
+logic o86 : int
+
+logic o87 : bool
+
+logic o88 : bool
+
+logic temp___903 : int
+
+logic o89 : int
+
+logic o90 : character
+
+logic o91 : int
+
+logic o92 : bool
+
+logic o93 : bool
+
+logic temp___904 : int
+
+logic o94 : int
+
+logic o95 : character
+
+logic o96 : int
+
+logic o97 : bool
+
+logic o98 : bool
+
+logic temp___905 : int
+
+logic o99 : int
+
+logic o100 : character
+
+logic o101 : int
+
+logic o102 : bool
+
+logic o103 : bool
+
+logic temp___906 : int
+
+logic o104 : int
+
+logic o105 : character
+
+logic o106 : int
+
+logic o107 : bool
+
+logic o108 : bool
+
+logic temp___907 : int
+
+logic o109 : int
+
+logic o110 : character
+
+logic o111 : int
+
+logic o112 : bool
+
+logic o113 : bool
+
+logic temp___908 : int
+
+logic o114 : int
+
+logic o115 : character
+
+logic o116 : int
+
+logic o117 : bool
+
+logic o118 : bool
+
+logic o119 : bool
+
+logic o120 : bool
+
+logic temp___909 : int
+
+logic o121 : int
+
+logic o122 : character
+
+logic o123 : int
+
+logic temp___910 : int
+
+logic o124 : int
+
+logic o125 : character
+
+logic o126 : int
+
+logic o127 : bool
+
+logic o128 : bool
+
+logic temp___911 : int
+
+logic o129 : int
+
+logic o130 : character
+
+logic o131 : int
+
+logic o132 : bool
+
+logic o133 : bool
+
+logic temp___912 : int
+
+logic o134 : int
+
+logic o135 : character
+
+logic o136 : int
+
+logic o137 : bool
+
+logic o138 : bool
+
+logic temp___913 : int
+
+logic o139 : int
+
+logic o140 : character
+
+logic o141 : int
+
+logic o142 : bool
+
+logic o143 : bool
+
+logic temp___914 : int
+
+logic o144 : int
+
+logic o145 : character
+
+logic o146 : int
+
+logic o147 : bool
+
+logic o148 : bool
+
+logic temp___915 : int
+
+logic o149 : int
+
+logic o150 : character
+
+logic o151 : int
+
+logic o152 : bool
+
+logic o153 : bool
+
+logic temp___916 : int
+
+logic o154 : int
+
+logic o155 : character
+
+logic o156 : int
+
+logic o157 : bool
+
+logic o158 : bool
+
+logic o159 : bool
+
+logic o160 : bool
+
+logic temp___917 : int
+
+logic o161 : int
+
+logic o162 : character
+
+logic o163 : int
+
+logic temp___918 : int
+
+logic o164 : int
+
+logic o165 : character
+
+logic o166 : int
+
+logic o167 : bool
+
+logic o168 : bool
+
+logic temp___919 : int
+
+logic o169 : int
+
+logic o170 : character
+
+logic o171 : int
+
+logic o172 : bool
+
+logic o173 : bool
+
+logic temp___920 : int
+
+logic o174 : int
+
+logic o175 : character
+
+logic o176 : int
+
+logic o177 : bool
+
+logic o178 : bool
+
+logic temp___921 : int
+
+logic o179 : int
+
+logic o180 : character
+
+logic o181 : int
+
+logic o182 : bool
+
+logic o183 : bool
+
+logic temp___922 : int
+
+logic o184 : int
+
+logic o185 : character
+
+logic o186 : int
+
+logic o187 : bool
+
+logic o188 : bool
+
+logic temp___923 : int
+
+logic o189 : int
+
+logic o190 : character
+
+logic o191 : int
+
+logic o192 : bool
+
+logic o193 : bool
+
+logic o194 : bool
+
+logic o195 : bool
+
+logic temp___924 : int
+
+logic o196 : int
+
+logic o197 : character
+
+logic o198 : int
+
+logic temp___925 : int
+
+logic o199 : int
+
+logic o200 : character
+
+logic o201 : int
+
+logic o202 : bool
+
+logic o203 : bool
+
+logic temp___926 : int
+
+logic o204 : int
+
+logic o205 : character
+
+logic o206 : int
+
+logic o207 : bool
+
+logic o208 : bool
+
+logic temp___927 : int
+
+logic o209 : int
+
+logic o210 : character
+
+logic o211 : int
+
+logic o212 : bool
+
+logic o213 : bool
+
+logic temp___928 : int
+
+logic o214 : int
+
+logic o215 : character
+
+logic o216 : int
+
+logic o217 : bool
+
+logic o218 : bool
+
+logic temp___929 : int
+
+logic o219 : int
+
+logic o220 : character
+
+logic o221 : int
+
+logic o222 : bool
+
+logic o223 : bool
+
+logic o224 : bool
+
+logic o225 : bool
+
+logic temp___930 : int
+
+logic o226 : int
+
+logic o227 : character
+
+logic o228 : int
+
+logic temp___931 : int
+
+logic o229 : int
+
+logic o230 : character
+
+logic o231 : int
+
+logic o232 : bool
+
+logic o233 : bool
+
+logic temp___932 : int
+
+logic o234 : int
+
+logic o235 : character
+
+logic o236 : int
+
+logic o237 : bool
+
+logic o238 : bool
+
+logic temp___933 : int
+
+logic o239 : int
+
+logic o240 : character
+
+logic o241 : int
+
+logic o242 : bool
+
+logic o243 : bool
+
+logic temp___934 : int
+
+logic o244 : int
+
+logic o245 : character
+
+logic o246 : int
+
+logic o247 : bool
+
+logic o248 : bool
+
+logic o249 : bool
+
+logic o250 : bool
+
+logic temp___935 : int
+
+logic o251 : int
+
+logic o252 : character
+
+logic o253 : int
+
+logic temp___936 : int
+
+logic o254 : int
+
+logic o255 : character
+
+logic o256 : int
+
+logic o257 : bool
+
+logic o258 : bool
+
+logic temp___937 : int
+
+logic o259 : int
+
+logic o260 : character
+
+logic o261 : int
+
+logic o262 : bool
+
+logic o263 : bool
+
+logic temp___938 : int
+
+logic o264 : int
+
+logic o265 : character
+
+logic o266 : int
+
+logic o267 : bool
+
+logic o268 : bool
+
+logic o269 : bool
+
+logic o270 : bool
+
+logic temp___939 : int
+
+logic o271 : int
+
+logic o272 : character
+
+logic o273 : int
+
+logic temp___940 : int
+
+logic o274 : int
+
+logic o275 : character
+
+logic o276 : int
+
+logic o277 : bool
+
+logic o278 : bool
+
+logic temp___941 : int
+
+logic o279 : int
+
+logic o280 : character
+
+logic o281 : int
+
+logic o282 : bool
+
+logic o283 : bool
+
+logic o284 : bool
+
+logic o285 : bool
+
+logic temp___942 : int
+
+logic o286 : int
+
+logic o287 : character
+
+logic o288 : int
+
+logic temp___943 : int
+
+logic o289 : int
+
+logic o290 : character
+
+logic o291 : int
+
+logic o292 : bool
+
+logic o293 : bool
+
+logic o294 : bool
+
+logic o295 : bool
+
+logic temp___944 : int
+
+logic o296 : int
+
+logic o297 : character
+
+logic o298 : int
+
+logic o299 : bool
+
+logic o300 : bool
+
+logic index2 : int
+
+logic index3 : int
+
+logic us2 : int
+
+logic o301 : int
+
+logic o302 : bool
+
+logic o303 : bool
+
+logic temp___946 : int
+
+logic temp___947 : int
+
+logic o304 : int
+
+logic o305 : character
+
+logic o306 : int
+
+logic o307 : bool
+
+logic temp___948 : int
+
+logic o308 : int
+
+logic o309 : character
+
+logic o310 : int
+
+logic o311 : bool
+
+logic temp___949 : int
+
+logic o312 : int
+
+logic o313 : character
+
+logic o314 : int
+
+logic o315 : bool
+
+logic temp___950 : int
+
+logic o316 : int
+
+logic o317 : character
+
+logic o318 : int
+
+logic o319 : bool
+
+logic temp___951 : int
+
+logic o320 : int
+
+logic o321 : character
+
+logic o322 : int
+
+logic o323 : bool
+
+logic temp___952 : int
+
+logic o324 : int
+
+logic o325 : character
+
+logic o326 : int
+
+logic o327 : bool
+
+logic temp___953 : int
+
+logic o328 : int
+
+logic o329 : character
+
+logic o330 : int
+
+logic o331 : bool
+
+logic temp___954 : int
+
+logic o332 : int
+
+logic o333 : character
+
+logic o334 : int
+
+logic o335 : bool
+
+logic temp___955 : int
+
+logic o336 : int
+
+logic o337 : character
+
+logic o338 : int
+
+logic o339 : bool
+
+logic temp___956 : int
+
+logic o340 : int
+
+logic o341 : character
+
+logic o342 : int
+
+logic temp___957 : int
+
+logic o343 : int
+
+logic o344 : character
+
+logic o345 : int
+
+logic o346 : bool
+
+logic o347 : bool
+
+logic temp___958 : int
+
+logic o348 : int
+
+logic o349 : character
+
+logic o350 : int
+
+logic o351 : bool
+
+logic o352 : bool
+
+logic temp___959 : int
+
+logic o353 : int
+
+logic o354 : character
+
+logic o355 : int
+
+logic o356 : bool
+
+logic o357 : bool
+
+logic temp___960 : int
+
+logic o358 : int
+
+logic o359 : character
+
+logic o360 : int
+
+logic o361 : bool
+
+logic o362 : bool
+
+logic temp___961 : int
+
+logic o363 : int
+
+logic o364 : character
+
+logic o365 : int
+
+logic o366 : bool
+
+logic o367 : bool
+
+logic temp___962 : int
+
+logic o368 : int
+
+logic o369 : character
+
+logic o370 : int
+
+logic o371 : bool
+
+logic o372 : bool
+
+logic temp___963 : int
+
+logic o373 : int
+
+logic o374 : character
+
+logic o375 : int
+
+logic o376 : bool
+
+logic o377 : bool
+
+logic temp___964 : int
+
+logic o378 : int
+
+logic o379 : character
+
+logic o380 : int
+
+logic o381 : bool
+
+logic o382 : bool
+
+logic o383 : bool
+
+logic temp___965 : int
+
+logic o384 : int
+
+logic o385 : character
+
+logic o386 : int
+
+logic temp___966 : int
+
+logic o387 : int
+
+logic o388 : character
+
+logic o389 : int
+
+logic o390 : bool
+
+logic o391 : bool
+
+logic temp___967 : int
+
+logic o392 : int
+
+logic o393 : character
+
+logic o394 : int
+
+logic o395 : bool
+
+logic o396 : bool
+
+logic temp___968 : int
+
+logic o397 : int
+
+logic o398 : character
+
+logic o399 : int
+
+logic o400 : bool
+
+logic o401 : bool
+
+logic temp___969 : int
+
+logic o402 : int
+
+logic o403 : character
+
+logic o404 : int
+
+logic o405 : bool
+
+logic o406 : bool
+
+logic temp___970 : int
+
+logic o407 : int
+
+logic o408 : character
+
+logic o409 : int
+
+logic o410 : bool
+
+logic o411 : bool
+
+logic temp___971 : int
+
+logic o412 : int
+
+logic o413 : character
+
+logic o414 : int
+
+logic o415 : bool
+
+logic o416 : bool
+
+logic temp___972 : int
+
+logic o417 : int
+
+logic o418 : character
+
+logic o419 : int
+
+logic o420 : bool
+
+logic o421 : bool
+
+logic o422 : bool
+
+logic temp___973 : int
+
+logic o423 : int
+
+logic o424 : character
+
+logic o425 : int
+
+logic temp___974 : int
+
+logic o426 : int
+
+logic o427 : character
+
+logic o428 : int
+
+logic o429 : bool
+
+logic o430 : bool
+
+logic temp___975 : int
+
+logic o431 : int
+
+logic o432 : character
+
+logic o433 : int
+
+logic o434 : bool
+
+logic o435 : bool
+
+logic temp___976 : int
+
+logic o436 : int
+
+logic o437 : character
+
+logic o438 : int
+
+logic o439 : bool
+
+logic o440 : bool
+
+logic temp___977 : int
+
+logic o441 : int
+
+logic o442 : character
+
+logic o443 : int
+
+logic o444 : bool
+
+logic o445 : bool
+
+logic temp___978 : int
+
+logic o446 : int
+
+logic o447 : character
+
+logic o448 : int
+
+logic o449 : bool
+
+logic o450 : bool
+
+logic temp___979 : int
+
+logic o451 : int
+
+logic o452 : character
+
+logic o453 : int
+
+logic o454 : bool
+
+logic o455 : bool
+
+logic o456 : bool
+
+logic temp___980 : int
+
+logic o457 : int
+
+logic o458 : character
+
+logic o459 : int
+
+logic temp___981 : int
+
+logic o460 : int
+
+logic o461 : character
+
+logic o462 : int
+
+logic o463 : bool
+
+logic o464 : bool
+
+logic temp___982 : int
+
+logic o465 : int
+
+logic o466 : character
+
+logic o467 : int
+
+logic o468 : bool
+
+logic o469 : bool
+
+logic temp___983 : int
+
+logic o470 : int
+
+logic o471 : character
+
+logic o472 : int
+
+logic o473 : bool
+
+logic o474 : bool
+
+logic temp___984 : int
+
+logic o475 : int
+
+logic o476 : character
+
+logic o477 : int
+
+logic o478 : bool
+
+logic o479 : bool
+
+logic temp___985 : int
+
+logic o480 : int
+
+logic o481 : character
+
+logic o482 : int
+
+logic o483 : bool
+
+logic o484 : bool
+
+logic o485 : bool
+
+logic temp___986 : int
+
+logic o486 : int
+
+logic o487 : character
+
+logic o488 : int
+
+logic temp___987 : int
+
+logic o489 : int
+
+logic o490 : character
+
+logic o491 : int
+
+logic o492 : bool
+
+logic o493 : bool
+
+logic temp___988 : int
+
+logic o494 : int
+
+logic o495 : character
+
+logic o496 : int
+
+logic o497 : bool
+
+logic o498 : bool
+
+logic temp___989 : int
+
+logic o499 : int
+
+logic o500 : character
+
+logic o501 : int
+
+logic o502 : bool
+
+logic o503 : bool
+
+logic temp___990 : int
+
+logic o504 : int
+
+logic o505 : character
+
+logic o506 : int
+
+logic o507 : bool
+
+logic o508 : bool
+
+logic o509 : bool
+
+logic temp___991 : int
+
+logic o510 : int
+
+logic o511 : character
+
+logic o512 : int
+
+logic temp___992 : int
+
+logic o513 : int
+
+logic o514 : character
+
+logic o515 : int
+
+logic o516 : bool
+
+logic o517 : bool
+
+logic temp___993 : int
+
+logic o518 : int
+
+logic o519 : character
+
+logic o520 : int
+
+logic o521 : bool
+
+logic o522 : bool
+
+logic temp___994 : int
+
+logic o523 : int
+
+logic o524 : character
+
+logic o525 : int
+
+logic o526 : bool
+
+logic o527 : bool
+
+logic o528 : bool
+
+logic temp___995 : int
+
+logic o529 : int
+
+logic o530 : character
+
+logic o531 : int
+
+logic temp___996 : int
+
+logic o532 : int
+
+logic o533 : character
+
+logic o534 : int
+
+logic o535 : bool
+
+logic o536 : bool
+
+logic temp___997 : int
+
+logic o537 : int
+
+logic o538 : character
+
+logic o539 : int
+
+logic o540 : bool
+
+logic o541 : bool
+
+logic o542 : bool
+
+logic temp___998 : int
+
+logic o543 : int
+
+logic o544 : character
+
+logic o545 : int
+
+logic temp___999 : int
+
+logic o546 : int
+
+logic o547 : character
+
+logic o548 : int
+
+logic o549 : bool
+
+logic o550 : bool
+
+logic o551 : bool
+
+logic temp___1000 : int
+
+logic o552 : int
+
+logic o553 : character
+
+logic o554 : int
+
+logic o555 : bool
+
+logic o556 : int
+
+logic o557 : character
+
+logic o558 : int
+
+logic index4 : int
+
+logic us3 : int
+
+logic o559 : int
+
+logic o560 : bool
+
+logic o561 : bool
+
+logic o562 : bool
+
+logic target1 : int
+
+logic has_failed1 : bool
+
+logic i2 : int
+
+logic i3 : int
+
+logic result : int
+
+logic target2 : int
+
+logic result1 : bool
+
+logic has_failed2 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic target3 : int
+
+logic result4 : bool
+
+logic has_failed3 : bool
+
+logic result5 : int
+
+logic target4 : int
+
+logic result6 : bool
+
+logic has_failed4 : bool
+
+logic result7 : int
+
+logic i4 : int
+
+logic result8 : bool
+
+logic result9 : int
+
+logic target5 : int
+
+logic result10 : bool
+
+logic has_failed5 : bool
+
+logic target6 : int
+
+logic has_failed6 : bool
+
+logic i5 : int
+
+logic result11 : bool
+
+logic result12 : int
+
+logic i6 : int
+
+logic result13 : bool
+
+logic result14 : int
+
+logic target7 : int
+
+logic result15 : bool
+
+logic has_failed7 : bool
+
+logic target8 : int
+
+logic has_failed8 : bool
+
+logic i7 : int
+
+logic target9 : int
+
+logic has_failed9 : bool
+
+logic i8 : int
+
+logic target10 : int
+
+logic has_failed10 : bool
+
+logic i9 : int
+
+logic target11 : int
+
+logic has_failed11 : bool
+
+logic i10 : int
+
+logic target12 : int
+
+logic has_failed12 : bool
+
+logic i11 : int
+
+logic target13 : int
+
+logic has_failed13 : bool
+
+logic i12 : int
+
+logic target14 : int
+
+logic has_failed14 : bool
+
+logic i13 : int
+
+logic target15 : int
+
+logic has_failed15 : bool
+
+logic i14 : int
+
+logic target16 : int
+
+logic has_failed16 : bool
+
+logic target17 : int
+
+logic has_failed17 : bool
+
+logic i15 : int
+
+logic target18 : int
+
+logic has_failed18 : bool
+
+logic i16 : int
+
+logic target19 : int
+
+logic has_failed19 : bool
+
+logic i17 : int
+
+logic target20 : int
+
+logic has_failed20 : bool
+
+logic i18 : int
+
+logic result16 : int
+
+logic target21 : int
+
+logic result17 : bool
+
+logic has_failed21 : bool
+
+logic result18 : int
+
+logic i19 : int
+
+logic result19 : bool
+
+logic result20 : int
+
+logic target22 : int
+
+logic result21 : bool
+
+logic has_failed22 : bool
+
+logic target23 : int
+
+logic has_failed23 : bool
+
+logic i20 : int
+
+logic result22 : int
+
+logic i21 : int
+
+logic result23 : bool
+
+logic result24 : int
+
+logic target24 : int
+
+logic result25 : bool
+
+logic has_failed24 : bool
+
+logic target25 : int
+
+logic has_failed25 : bool
+
+logic i22 : int
+
+logic target26 : int
+
+logic has_failed26 : bool
+
+logic i23 : int
+
+logic target27 : int
+
+logic has_failed27 : bool
+
+logic i24 : int
+
+logic target28 : int
+
+logic has_failed28 : bool
+
+logic i25 : int
+
+logic target29 : int
+
+logic has_failed29 : bool
+
+logic i26 : int
+
+logic target30 : int
+
+logic has_failed30 : bool
+
+logic i27 : int
+
+logic target31 : int
+
+logic has_failed31 : bool
+
+logic i28 : int
+
+logic target32 : int
+
+logic has_failed32 : bool
+
+logic i29 : int
+
+logic target33 : int
+
+logic has_failed33 : bool
+
+logic target34 : int
+
+logic has_failed34 : bool
+
+logic i30 : int
+
+logic target35 : int
+
+logic has_failed35 : bool
+
+logic i31 : int
+
+logic target36 : int
+
+logic has_failed36 : bool
+
+logic i32 : int
+
+logic i33 : int
+
+logic target37 : int
+
+logic has_failed37 : bool
+
+logic i34 : int
+
+logic i35 : int
+
+logic target38 : int
+
+logic has_failed38 : bool
+
+logic i36 : int
+
+logic i37 : int
+
+logic target39 : int
+
+logic has_failed39 : bool
+
+logic i38 : int
+
+logic i39 : int
+
+logic target40 : int
+
+logic has_failed40 : bool
+
+logic i40 : int
+
+logic i41 : int
+
+logic target41 : int
+
+logic has_failed41 : bool
+
+logic i42 : int
+
+logic i43 : int
+
+logic target42 : int
+
+logic has_failed42 : bool
+
+logic i44 : int
+
+logic i45 : int
+
+logic target43 : int
+
+logic has_failed43 : bool
+
+logic i46 : int
+
+logic i47 : int
+
+logic target44 : int
+
+logic has_failed44 : bool
+
+logic i48 : int
+
+logic i49 : int
+
+logic target45 : int
+
+logic has_failed45 : bool
+
+logic i50 : int
+
+logic i51 : int
+
+logic result26 : bool
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic result30 : bool
+
+logic result31 : bool
+
+logic result32 : bool
+
+logic result33 : bool
+
+logic result34 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (((((i45 = i1) and ((i44 = i) and
+  ((has_failed42 = has_failed2) and (target42 = target2)))) and
+  ((i47 = i3) and ((i46 = i2) and ((has_failed43 = has_failed2) and
+  (target43 = target2))))) and ((length({ elts = source; rt = source1
+  }) = 0) and (((result = target) and (target2 = 0)) and
+  ((result1 = has_failed) and (has_failed2 = of_int(1)))))) or
+  (((not (length({ elts = source; rt = source1 }) = 0)) and
+  (((has_failed2 = has_failed) and (target2 = target)) and
+  ((has_failed2 = has_failed1) and (target2 = target1)))) and
+  ((((i45 = i41) and ((i44 = i40) and ((has_failed42 = has_failed40) and
+  (target42 = target40)))) and ((i47 = i43) and ((i46 = i42) and
+  ((has_failed43 = has_failed41) and (target43 = target41))))) and
+  (((((i41 = i37) and ((i40 = i36) and ((has_failed40 = has_failed38) and
+  (target40 = target38)))) and ((i43 = i39) and ((i42 = i38) and
+  ((has_failed41 = has_failed39) and (target41 = target39))))) and
   (((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o = to_rep1(first(source1)))) and (o1 = (source[o]))) and
-  (o2 = to_rep(o1))) and (((o2 = 45) and (result2 = true)) or
-  ((not (o2 = 45)) and (result2 = false)))) and (((result2 = true) and
-  ((((i33 = { int__content = i1 }) and ((i32 = { int__content = i15 }) and
-  ((has_failed34 = { bool__content = has_failed17 }) and (target34 = {
-  int__content = target17 })))) and ((i35 = i3) and ((i34 = i16) and
-  ((has_failed35 = has_failed18) and (target35 = target18))))) and ((((({
-  int__content = i15 } = { int__content = i }) and
-  ((has_failed3 = has_failed17) and (target3 = target17))) and
-  ((i16 = i2) and ((has_failed18 = has_failed3) and
-  (target18 = target3)))) and ((11 <  length({ elts = source; rt = source1
-  })) and (((result3 = target2) and (target3 = 0)) and
-  ((result4 = has_failed2) and (has_failed3 = of_int(1)))))) or
-  (((not (11 <  length({ elts = source; rt = source1 }))) and
-  ((has_failed3 = has_failed2) and (target3 = target2))) and (((({
-  int__content = i15 } = { int__content = i13 }) and (({ bool__content =
-  has_failed17 } = { bool__content = has_failed15 }) and ({ int__content =
-  target17 } = { int__content = target15 }))) and ((i16 = i14) and
-  ((has_failed18 = has_failed16) and (target18 = target16)))) and ((((({
-  int__content = i13 } = { int__content = i }) and
-  ((has_failed4 = has_failed15) and (target4 = target15))) and
-  ((i14 = i2) and ((has_failed16 = has_failed4) and
-  (target16 = target4)))) and ((length({ elts = source; rt = source1
-  }) = 1) and (((result5 = target3) and (target4 = 0)) and
-  ((result6 = has_failed3) and (has_failed4 = of_int(1)))))) or
-  (((not (length({ elts = source; rt = source1 }) = 1)) and
-  ((has_failed4 = has_failed3) and (target4 = target3))) and (((({
-  int__content = i13 } = { int__content = i7 }) and
-  ((has_failed8 = has_failed15) and (target8 = target15))) and
-  ((i14 = i8) and ((has_failed16 = has_failed9) and
-  (target16 = target9)))) and
+  (o2 = to_rep(o1))) and (((o2 = 45) -> (result2 = true)) and
+  ((not (o2 = 45)) -> (result2 = false)))) and (((result2 = true) ->
+  ((((i37 = i1) and ((i36 = i17) and ((has_failed38 = has_failed19) and
+  (target38 = target19)))) and ((i39 = i3) and ((i38 = i18) and
+  ((has_failed39 = has_failed20) and (target39 = target20))))) and
+  (((((i17 = i) and ((has_failed19 = has_failed3) and
+  (target19 = target3))) and ((i18 = i2) and
+  ((has_failed20 = has_failed3) and (target20 = target3)))) and
+  ((11 <  length({ elts = source; rt = source1 })) and
+  (((result3 = target2) and (target3 = 0)) and ((result4 = has_failed2) and
+  (has_failed3 = of_int(1)))))) or (((not (11 <  length({ elts = source; rt =
+  source1 }))) and ((has_failed3 = has_failed2) and (target3 = target2))) and
+  ((((i17 = i15) and ((has_failed19 = has_failed17) and
+  (target19 = target17))) and ((i18 = i16) and
+  ((has_failed20 = has_failed18) and (target20 = target18)))) and
+  (((((i15 = i) and ((has_failed17 = has_failed4) and
+  (target17 = target4))) and ((i16 = i2) and
+  ((has_failed18 = has_failed4) and (target18 = target4)))) and ((length({
+  elts = source; rt = source1 }) = 1) and (((result5 = target3) and
+  (target4 = 0)) and ((result6 = has_failed3) and
+  (has_failed4 = of_int(1)))))) or (((not (length({ elts = source; rt =
+  source1 }) = 1)) and ((has_failed4 = has_failed3) and
+  (target4 = target3))) and ((((i15 = i9) and
+  ((has_failed17 = has_failed10) and (target17 = target10))) and
+  ((i16 = i10) and ((has_failed18 = has_failed11) and
+  (target18 = target11)))) and
   (((temp___883 = (to_rep1(first(source1)) + 1)) and
   in_range1((to_rep1(first(source1)) + 1))) and
-  ((temp___884 = to_rep1(last(source1))) and ((({ int__content = result7
-  } = { int__content = i }) and (i4 = temp___883)) and
-  (((temp___883 <= i4) and (i4 <= temp___884)) and
+  ((temp___884 = to_rep1(last(source1))) and (((result7 = i) and
+  (i4 = temp___883)) and (((temp___883 <= i4) and (i4 <= temp___884)) and
   ((temp___882 = target4) and ((temp___881 = i4) and
-  ((temp___880 = has_failed4) and (((((i4 = i7) and
-  ((has_failed5 = has_failed8) and (target5 = target8))) and ((i8 = i4) and
-  ((has_failed9 = has_failed5) and (target9 = target5)))) and
-  ((((((((to_rep1(first(source1)) <= i4) and
+  ((temp___880 = has_failed4) and (((((i9 = i4) and
+  ((has_failed5 = has_failed10) and (target5 = target10))) and
+  ((i10 = i4) and ((has_failed11 = has_failed5) and
+  (target11 = target5)))) and ((((((((to_rep1(first(source1)) <= i4) and
   (i4 <= to_rep1(last(source1)))) and (o3 = i4)) and (o4 = (source[o3]))) and
   (o5 = to_rep(o4))) and ((o6 = is_digit(o5)) and (((bool_eq(o5,
-  48) = true) and (o6 = true)) or ((not (bool_eq(o5, 48) = true)) and
-  (((bool_eq(o5, 49) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  49) = true)) and (((bool_eq(o5, 50) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 50) = true)) and (((bool_eq(o5, 51) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 51) = true)) and (((bool_eq(o5,
-  52) = true) and (o6 = true)) or ((not (bool_eq(o5, 52) = true)) and
-  (((bool_eq(o5, 53) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  53) = true)) and (((bool_eq(o5, 54) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 54) = true)) and (((bool_eq(o5, 55) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 55) = true)) and (((bool_eq(o5,
-  56) = true) and (o6 = true)) or ((not (bool_eq(o5, 56) = true)) and
-  (((bool_eq(o5, 57) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  57) = true)) and (((bool_gt(o5, 57) = true) and (not (o6 = true))) or
-  ((not (bool_gt(o5, 57) = true)) and ((bool_lt(o5, 48) = true) ->
-  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) and
-  (result8 = true)) or ((o6 = true) and (result8 = false)))) and
+  48) = true) -> (o6 = true)) and ((not (bool_eq(o5, 48) = true)) ->
+  (((bool_eq(o5, 49) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  49) = true)) -> (((bool_eq(o5, 50) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 50) = true)) -> (((bool_eq(o5, 51) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 51) = true)) -> (((bool_eq(o5,
+  52) = true) -> (o6 = true)) and ((not (bool_eq(o5, 52) = true)) ->
+  (((bool_eq(o5, 53) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  53) = true)) -> (((bool_eq(o5, 54) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 54) = true)) -> (((bool_eq(o5, 55) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 55) = true)) -> (((bool_eq(o5,
+  56) = true) -> (o6 = true)) and ((not (bool_eq(o5, 56) = true)) ->
+  (((bool_eq(o5, 57) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  57) = true)) -> (((bool_gt(o5, 57) = true) -> (not (o6 = true))) and
+  ((not (bool_gt(o5, 57) = true)) -> ((bool_lt(o5, 48) = true) ->
+  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) ->
+  (result8 = true)) and ((o6 = true) -> (result8 = false)))) and
   ((result8 = true) and (((result9 = target4) and (target5 = 0)) and
   ((result10 = has_failed4) and (has_failed5 = of_int(1))))))) or
   (((((((((to_rep1(first(source1)) <= i4) and
   (i4 <= to_rep1(last(source1)))) and (o3 = i4)) and (o4 = (source[o3]))) and
   (o5 = to_rep(o4))) and ((o6 = is_digit(o5)) and (((bool_eq(o5,
-  48) = true) and (o6 = true)) or ((not (bool_eq(o5, 48) = true)) and
-  (((bool_eq(o5, 49) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  49) = true)) and (((bool_eq(o5, 50) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 50) = true)) and (((bool_eq(o5, 51) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 51) = true)) and (((bool_eq(o5,
-  52) = true) and (o6 = true)) or ((not (bool_eq(o5, 52) = true)) and
-  (((bool_eq(o5, 53) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  53) = true)) and (((bool_eq(o5, 54) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 54) = true)) and (((bool_eq(o5, 55) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 55) = true)) and (((bool_eq(o5,
-  56) = true) and (o6 = true)) or ((not (bool_eq(o5, 56) = true)) and
-  (((bool_eq(o5, 57) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  57) = true)) and (((bool_gt(o5, 57) = true) and (not (o6 = true))) or
-  ((not (bool_gt(o5, 57) = true)) and ((bool_lt(o5, 48) = true) ->
-  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) and
-  (result8 = true)) or ((o6 = true) and (result8 = false)))) and
+  48) = true) -> (o6 = true)) and ((not (bool_eq(o5, 48) = true)) ->
+  (((bool_eq(o5, 49) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  49) = true)) -> (((bool_eq(o5, 50) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 50) = true)) -> (((bool_eq(o5, 51) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 51) = true)) -> (((bool_eq(o5,
+  52) = true) -> (o6 = true)) and ((not (bool_eq(o5, 52) = true)) ->
+  (((bool_eq(o5, 53) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  53) = true)) -> (((bool_eq(o5, 54) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 54) = true)) -> (((bool_eq(o5, 55) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 55) = true)) -> (((bool_eq(o5,
+  56) = true) -> (o6 = true)) and ((not (bool_eq(o5, 56) = true)) ->
+  (((bool_eq(o5, 57) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  57) = true)) -> (((bool_gt(o5, 57) = true) -> (not (o6 = true))) and
+  ((not (bool_gt(o5, 57) = true)) -> ((bool_lt(o5, 48) = true) ->
+  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) ->
+  (result8 = true)) and ((o6 = true) -> (result8 = false)))) and
   ((not (result8 = true)) and ((has_failed5 = has_failed4) and
-  (target5 = target4)))) and ((((i6 = i7) and
-  ((has_failed7 = has_failed8) and (target7 = target8))) and ((i8 = i6) and
-  ((has_failed9 = has_failed7) and (target9 = target7)))) and
-  ((forall j:int. ((((to_rep1(first(source1)) + 1) <= j) and (j <= i5)) ->
-   (is_digit(to_rep((source[j]))) = true))) and
+  (target5 = target4)))) and ((((i9 = i6) and
+  ((has_failed7 = has_failed10) and (target7 = target10))) and
+  ((i10 = i6) and ((has_failed11 = has_failed7) and
+  (target11 = target7)))) and
+  ((forall j2:int. ((((to_rep1(first(source1)) + 1) <= j2) and (j2 <= i5)) ->
+   (is_digit(to_rep((source[j2]))) = true))) and
   ((((((to_rep1(first(source1)) + 1) <= to_rep1(last(source1))) ->
   dynamic_property1((to_rep1(first(source1)) + 1), to_rep1(last(source1)),
-  i5)) and (((-2147483648) <= 2147483647) -> in_range1(target6))) and
+  i5)) and (((- 2147483648) <= 2147483647) -> in_range1(target6))) and
   (((to_rep1(first(source1)) + 1) <= i5) and
   (i5 <= to_rep1(last(source1))))) and ((not (i5 = temp___884)) and
-  (((i5 = result11) and (i6 = (i5 + 1))) and
+  (((i5 = result12) and (i6 = (i5 + 1))) and
   ((((((((to_rep1(first(source1)) <= i6) and
-  (i6 <= to_rep1(last(source1)))) and (o7 = i6)) and (o8 = (source[o7]))) and
-  (o9 = to_rep(o8))) and ((o10 = is_digit(o9)) and (((bool_eq(o9,
-  48) = true) and (o10 = true)) or ((not (bool_eq(o9, 48) = true)) and
-  (((bool_eq(o9, 49) = true) and (o10 = true)) or ((not (bool_eq(o9,
-  49) = true)) and (((bool_eq(o9, 50) = true) and (o10 = true)) or
-  ((not (bool_eq(o9, 50) = true)) and (((bool_eq(o9, 51) = true) and
-  (o10 = true)) or ((not (bool_eq(o9, 51) = true)) and (((bool_eq(o9,
-  52) = true) and (o10 = true)) or ((not (bool_eq(o9, 52) = true)) and
-  (((bool_eq(o9, 53) = true) and (o10 = true)) or ((not (bool_eq(o9,
-  53) = true)) and (((bool_eq(o9, 54) = true) and (o10 = true)) or
-  ((not (bool_eq(o9, 54) = true)) and (((bool_eq(o9, 55) = true) and
-  (o10 = true)) or ((not (bool_eq(o9, 55) = true)) and (((bool_eq(o9,
-  56) = true) and (o10 = true)) or ((not (bool_eq(o9, 56) = true)) and
-  (((bool_eq(o9, 57) = true) and (o10 = true)) or ((not (bool_eq(o9,
-  57) = true)) and (((bool_gt(o9, 57) = true) and (not (o10 = true))) or
-  ((not (bool_gt(o9, 57) = true)) and ((bool_lt(o9, 48) = true) ->
-  (not (o10 = true))))))))))))))))))))))))))) and (((not (o10 = true)) and
-  (result12 = true)) or ((o10 = true) and (result12 = false)))) and
-  ((result12 = true) and (((result13 = target6) and (target7 = 0)) and
-  ((result14 = has_failed6) and
-  (has_failed7 = of_int(1)))))))))))))))))))))))))))) or
-  ((not (result2 = true)) and ((((i33 = i26) and ((i32 = { int__content = i
-  }) and ((has_failed34 = has_failed30) and (target34 = target30)))) and
-  ((i35 = i27) and ((i34 = i2) and ((has_failed35 = has_failed31) and
-  (target35 = target31))))) and (((((i26 = { int__content = i1 }) and
-  ((has_failed30 = { bool__content = has_failed19 }) and (target30 = {
-  int__content = target19 }))) and ((i27 = i3) and
-  ((has_failed31 = has_failed19) and (target31 = target19)))) and
-  ((10 <  length({ elts = source; rt = source1 })) and
-  (((result15 = target2) and (target19 = 0)) and
-  ((result16 = has_failed2) and (has_failed19 = of_int(1)))))) or
+  (i6 <= to_rep1(last(source1)))) and (o9 = i6)) and
+  (o10 = (source[o9]))) and (o11 = to_rep(o10))) and
+  ((o12 = is_digit(o11)) and (((bool_eq(o11, 48) = true) -> (o12 = true)) and
+  ((not (bool_eq(o11, 48) = true)) -> (((bool_eq(o11, 49) = true) ->
+  (o12 = true)) and ((not (bool_eq(o11, 49) = true)) -> (((bool_eq(o11,
+  50) = true) -> (o12 = true)) and ((not (bool_eq(o11, 50) = true)) ->
+  (((bool_eq(o11, 51) = true) -> (o12 = true)) and ((not (bool_eq(o11,
+  51) = true)) -> (((bool_eq(o11, 52) = true) -> (o12 = true)) and
+  ((not (bool_eq(o11, 52) = true)) -> (((bool_eq(o11, 53) = true) ->
+  (o12 = true)) and ((not (bool_eq(o11, 53) = true)) -> (((bool_eq(o11,
+  54) = true) -> (o12 = true)) and ((not (bool_eq(o11, 54) = true)) ->
+  (((bool_eq(o11, 55) = true) -> (o12 = true)) and ((not (bool_eq(o11,
+  55) = true)) -> (((bool_eq(o11, 56) = true) -> (o12 = true)) and
+  ((not (bool_eq(o11, 56) = true)) -> (((bool_eq(o11, 57) = true) ->
+  (o12 = true)) and ((not (bool_eq(o11, 57) = true)) -> (((bool_gt(o11,
+  57) = true) -> (not (o12 = true))) and ((not (bool_gt(o11, 57) = true)) ->
+  ((bool_lt(o11, 48) = true) ->
+  (not (o12 = true))))))))))))))))))))))))))) and (((not (o12 = true)) ->
+  (result13 = true)) and ((o12 = true) -> (result13 = false)))) and
+  ((result13 = true) and (((result14 = target6) and (target7 = 0)) and
+  ((result15 = has_failed6) and
+  (has_failed7 = of_int(1)))))))))))))))))))))))))))) and
+  ((not (result2 = true)) -> ((((i37 = i30) and ((i36 = i) and
+  ((has_failed38 = has_failed34) and (target38 = target34)))) and
+  ((i39 = i31) and ((i38 = i2) and ((has_failed39 = has_failed35) and
+  (target39 = target35))))) and (((((i30 = i1) and
+  ((has_failed34 = has_failed21) and (target34 = target21))) and
+  ((i31 = i3) and ((has_failed35 = has_failed21) and
+  (target35 = target21)))) and ((10 <  length({ elts = source; rt = source1
+  })) and (((result16 = target2) and (target21 = 0)) and
+  ((result17 = has_failed2) and (has_failed21 = of_int(1)))))) or
   (((not (10 <  length({ elts = source; rt = source1 }))) and
-  ((has_failed19 = has_failed2) and (target19 = target2))) and
-  ((((i26 = i20) and ((has_failed30 = has_failed23) and
-  (target30 = target23))) and ((i27 = i21) and
-  ((has_failed31 = has_failed24) and (target31 = target24)))) and
+  ((has_failed21 = has_failed2) and (target21 = target2))) and
+  ((((i30 = i24) and ((has_failed34 = has_failed27) and
+  (target34 = target27))) and ((i31 = i25) and
+  ((has_failed35 = has_failed28) and (target35 = target28)))) and
   ((temp___877 = to_rep1(first(source1))) and
-  ((temp___878 = to_rep1(last(source1))) and ((({ int__content = result17
-  } = { int__content = i1 }) and (i17 = temp___877)) and
-  (((temp___877 <= i17) and (i17 <= temp___878)) and
-  ((temp___876 = target19) and ((temp___875 = i17) and
-  ((temp___874 = has_failed19) and (((((i20 = { int__content = i17 }) and
-  ((has_failed23 = { bool__content = has_failed20 }) and (target23 = {
-  int__content = target20 }))) and ((i21 = i17) and
-  ((has_failed24 = has_failed20) and (target24 = target20)))) and
-  ((((o11 = is_digit(to_rep((source[i17])))) and
-  (((bool_eq(to_rep((source[i17])), 48) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 48) = true)) and
-  (((bool_eq(to_rep((source[i17])), 49) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 49) = true)) and
-  (((bool_eq(to_rep((source[i17])), 50) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 50) = true)) and
-  (((bool_eq(to_rep((source[i17])), 51) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 51) = true)) and
-  (((bool_eq(to_rep((source[i17])), 52) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 52) = true)) and
-  (((bool_eq(to_rep((source[i17])), 53) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 53) = true)) and
-  (((bool_eq(to_rep((source[i17])), 54) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 54) = true)) and
-  (((bool_eq(to_rep((source[i17])), 55) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 55) = true)) and
-  (((bool_eq(to_rep((source[i17])), 56) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 56) = true)) and
-  (((bool_eq(to_rep((source[i17])), 57) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 57) = true)) and
-  (((bool_gt(to_rep((source[i17])), 57) = true) and (not (o11 = true))) or
-  ((not (bool_gt(to_rep((source[i17])), 57) = true)) and
-  ((bool_lt(to_rep((source[i17])), 48) = true) ->
-  (not (o11 = true)))))))))))))))))))))))))) and (((not (o11 = true)) and
-  (result18 = true)) or ((o11 = true) and (result18 = false)))) and
-  ((result18 = true) and (((result19 = target19) and (target20 = 0)) and
-  ((result20 = has_failed19) and (has_failed20 = of_int(1))))))) or
-  (((((o11 = is_digit(to_rep((source[i17])))) and
-  (((bool_eq(to_rep((source[i17])), 48) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 48) = true)) and
-  (((bool_eq(to_rep((source[i17])), 49) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 49) = true)) and
-  (((bool_eq(to_rep((source[i17])), 50) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 50) = true)) and
-  (((bool_eq(to_rep((source[i17])), 51) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 51) = true)) and
-  (((bool_eq(to_rep((source[i17])), 52) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 52) = true)) and
-  (((bool_eq(to_rep((source[i17])), 53) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 53) = true)) and
-  (((bool_eq(to_rep((source[i17])), 54) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 54) = true)) and
-  (((bool_eq(to_rep((source[i17])), 55) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 55) = true)) and
-  (((bool_eq(to_rep((source[i17])), 56) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 56) = true)) and
-  (((bool_eq(to_rep((source[i17])), 57) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 57) = true)) and
-  (((bool_gt(to_rep((source[i17])), 57) = true) and (not (o11 = true))) or
-  ((not (bool_gt(to_rep((source[i17])), 57) = true)) and
-  ((bool_lt(to_rep((source[i17])), 48) = true) ->
-  (not (o11 = true)))))))))))))))))))))))))) and (((not (o11 = true)) and
-  (result18 = true)) or ((o11 = true) and (result18 = false)))) and
-  ((not (result18 = true)) and ((has_failed20 = has_failed19) and
-  (target20 = target19)))) and ((((i20 = { int__content = i19 }) and
-  ((has_failed23 = { bool__content = has_failed22 }) and (target23 = {
-  int__content = target22 }))) and ((i21 = i19) and
-  ((has_failed24 = has_failed22) and (target24 = target22)))) and
-  ((forall j:int. (((to_rep1(first(source1)) <= j) and (j <= i18)) ->
-   (is_digit(to_rep((source[j]))) = true))) and
+  ((temp___878 = to_rep1(last(source1))) and (((result18 = i1) and
+  (i19 = temp___877)) and (((temp___877 <= i19) and (i19 <= temp___878)) and
+  ((temp___876 = target21) and ((temp___875 = i19) and
+  ((temp___874 = has_failed21) and (((((i24 = i19) and
+  ((has_failed27 = has_failed22) and (target27 = target22))) and
+  ((i25 = i19) and ((has_failed28 = has_failed22) and
+  (target28 = target22)))) and ((((o13 = is_digit(to_rep((source[i19])))) and
+  (((bool_eq(to_rep((source[i19])), 48) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 48) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 49) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 49) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 50) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 50) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 51) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 51) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 52) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 52) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 53) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 53) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 54) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 54) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 55) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 55) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 56) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 56) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 57) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 57) = true)) ->
+  (((bool_gt(to_rep((source[i19])), 57) = true) -> (not (o13 = true))) and
+  ((not (bool_gt(to_rep((source[i19])), 57) = true)) ->
+  ((bool_lt(to_rep((source[i19])), 48) = true) ->
+  (not (o13 = true)))))))))))))))))))))))))) and (((not (o13 = true)) ->
+  (result19 = true)) and ((o13 = true) -> (result19 = false)))) and
+  ((result19 = true) and (((result20 = target21) and (target22 = 0)) and
+  ((result21 = has_failed21) and (has_failed22 = of_int(1))))))) or
+  (((((o13 = is_digit(to_rep((source[i19])))) and
+  (((bool_eq(to_rep((source[i19])), 48) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 48) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 49) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 49) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 50) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 50) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 51) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 51) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 52) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 52) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 53) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 53) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 54) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 54) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 55) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 55) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 56) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 56) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 57) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 57) = true)) ->
+  (((bool_gt(to_rep((source[i19])), 57) = true) -> (not (o13 = true))) and
+  ((not (bool_gt(to_rep((source[i19])), 57) = true)) ->
+  ((bool_lt(to_rep((source[i19])), 48) = true) ->
+  (not (o13 = true)))))))))))))))))))))))))) and (((not (o13 = true)) ->
+  (result19 = true)) and ((o13 = true) -> (result19 = false)))) and
+  ((not (result19 = true)) and ((has_failed22 = has_failed21) and
+  (target22 = target21)))) and ((((i24 = i21) and
+  ((has_failed27 = has_failed24) and (target27 = target24))) and
+  ((i25 = i21) and ((has_failed28 = has_failed24) and
+  (target28 = target24)))) and
+  ((forall j2:int. (((to_rep1(first(source1)) <= j2) and (j2 <= i20)) ->
+   (is_digit(to_rep((source[j2]))) = true))) and
   (((((to_rep1(first(source1)) <= to_rep1(last(source1))) ->
   dynamic_property2(to_rep1(first(source1)), to_rep1(last(source1)),
-  i18)) and (((-2147483648) <= 2147483647) -> in_range1(target21))) and
-  ((to_rep1(first(source1)) <= i18) and (i18 <= to_rep1(last(source1))))) and
-  ((not (i18 = temp___878)) and (((result21 = i18) and (i19 = (i18 + 1))) and
-  ((((o12 = is_digit(to_rep((source[i19])))) and
-  (((bool_eq(to_rep((source[i19])), 48) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 48) = true)) and
-  (((bool_eq(to_rep((source[i19])), 49) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 49) = true)) and
-  (((bool_eq(to_rep((source[i19])), 50) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 50) = true)) and
-  (((bool_eq(to_rep((source[i19])), 51) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 51) = true)) and
-  (((bool_eq(to_rep((source[i19])), 52) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 52) = true)) and
-  (((bool_eq(to_rep((source[i19])), 53) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 53) = true)) and
-  (((bool_eq(to_rep((source[i19])), 54) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 54) = true)) and
-  (((bool_eq(to_rep((source[i19])), 55) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 55) = true)) and
-  (((bool_eq(to_rep((source[i19])), 56) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 56) = true)) and
-  (((bool_eq(to_rep((source[i19])), 57) = true) and (o12 = true)) or
-  ((not (bool_eq(to_rep((source[i19])), 57) = true)) and
-  (((bool_gt(to_rep((source[i19])), 57) = true) and (not (o12 = true))) or
-  ((not (bool_gt(to_rep((source[i19])), 57) = true)) and
-  ((bool_lt(to_rep((source[i19])), 48) = true) ->
-  (not (o12 = true)))))))))))))))))))))))))) and (((not (o12 = true)) and
-  (result22 = true)) or ((o12 = true) and (result22 = false)))) and
-  ((result22 = true) and (((result23 = target21) and (target22 = 0)) and
-  ((result24 = has_failed21) and
-  (has_failed22 = of_int(1)))))))))))))))))))))))))))) or
+  i20)) and (((- 2147483648) <= 2147483647) -> in_range1(target23))) and
+  ((to_rep1(first(source1)) <= i20) and (i20 <= to_rep1(last(source1))))) and
+  ((not (i20 = temp___878)) and (((result22 = i20) and (i21 = (i20 + 1))) and
+  ((((o14 = is_digit(to_rep((source[i21])))) and
+  (((bool_eq(to_rep((source[i21])), 48) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 48) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 49) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 49) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 50) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 50) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 51) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 51) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 52) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 52) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 53) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 53) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 54) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 54) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 55) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 55) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 56) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 56) = true)) ->
+  (((bool_eq(to_rep((source[i21])), 57) = true) -> (o14 = true)) and
+  ((not (bool_eq(to_rep((source[i21])), 57) = true)) ->
+  (((bool_gt(to_rep((source[i21])), 57) = true) -> (not (o14 = true))) and
+  ((not (bool_gt(to_rep((source[i21])), 57) = true)) ->
+  ((bool_lt(to_rep((source[i21])), 48) = true) ->
+  (not (o14 = true)))))))))))))))))))))))))) and (((not (o14 = true)) ->
+  (result23 = true)) and ((o14 = true) -> (result23 = false)))) and
+  ((result23 = true) and (((result24 = target23) and (target24 = 0)) and
+  ((result25 = has_failed23) and
+  (has_failed24 = of_int(1)))))))))))))))))))))))))))) or
   ((((((((to_rep1(first(source1)) <= to_rep1(first(source1))) and
   (to_rep1(first(source1)) <= to_rep1(last(source1)))) and
   (o = to_rep1(first(source1)))) and (o1 = (source[o]))) and
-  (o2 = to_rep(o1))) and (((o2 = 45) and (result2 = true)) or
-  ((not (o2 = 45)) and (result2 = false)))) and (((result2 = true) and
+  (o2 = to_rep(o1))) and (((o2 = 45) -> (result2 = true)) and
+  ((not (o2 = 45)) -> (result2 = false)))) and (((result2 = true) ->
   ((((not (11 <  length({ elts = source; rt = source1 }))) and
   ((has_failed3 = has_failed2) and (target3 = target2))) and (((not (length({
   elts = source; rt = source1 }) = 1)) and ((has_failed4 = has_failed3) and
   (target4 = target3))) and
   ((((temp___883 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and ((({ int__content = result7
-  } = { int__content = i }) and (i4 = temp___883)) and
-  ((((temp___883 <= i4) and (i4 <= to_rep1(last(source1)))) and
-  ((((temp___882 = target4) and ((temp___881 = i4) and
-  ((temp___880 = has_failed4) and (((((((((to_rep1(first(source1)) <= i4) and
+  in_range1((to_rep1(first(source1)) + 1))) and (((result7 = i) and
+  (i4 = temp___883)) and ((((temp___883 <= i4) and
+  (i4 <= to_rep1(last(source1)))) -> ((((temp___882 = target4) and
+  ((temp___881 = i4) and ((temp___880 = has_failed4) and
+  (((((((((to_rep1(first(source1)) <= i4) and
   (i4 <= to_rep1(last(source1)))) and (o3 = i4)) and (o4 = (source[o3]))) and
   (o5 = to_rep(o4))) and ((o6 = is_digit(o5)) and (((bool_eq(o5,
-  48) = true) and (o6 = true)) or ((not (bool_eq(o5, 48) = true)) and
-  (((bool_eq(o5, 49) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  49) = true)) and (((bool_eq(o5, 50) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 50) = true)) and (((bool_eq(o5, 51) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 51) = true)) and (((bool_eq(o5,
-  52) = true) and (o6 = true)) or ((not (bool_eq(o5, 52) = true)) and
-  (((bool_eq(o5, 53) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  53) = true)) and (((bool_eq(o5, 54) = true) and (o6 = true)) or
-  ((not (bool_eq(o5, 54) = true)) and (((bool_eq(o5, 55) = true) and
-  (o6 = true)) or ((not (bool_eq(o5, 55) = true)) and (((bool_eq(o5,
-  56) = true) and (o6 = true)) or ((not (bool_eq(o5, 56) = true)) and
-  (((bool_eq(o5, 57) = true) and (o6 = true)) or ((not (bool_eq(o5,
-  57) = true)) and (((bool_gt(o5, 57) = true) and (not (o6 = true))) or
-  ((not (bool_gt(o5, 57) = true)) and ((bool_lt(o5, 48) = true) ->
-  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) and
-  (result8 = true)) or ((o6 = true) and (result8 = false)))) and
+  48) = true) -> (o6 = true)) and ((not (bool_eq(o5, 48) = true)) ->
+  (((bool_eq(o5, 49) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  49) = true)) -> (((bool_eq(o5, 50) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 50) = true)) -> (((bool_eq(o5, 51) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 51) = true)) -> (((bool_eq(o5,
+  52) = true) -> (o6 = true)) and ((not (bool_eq(o5, 52) = true)) ->
+  (((bool_eq(o5, 53) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  53) = true)) -> (((bool_eq(o5, 54) = true) -> (o6 = true)) and
+  ((not (bool_eq(o5, 54) = true)) -> (((bool_eq(o5, 55) = true) ->
+  (o6 = true)) and ((not (bool_eq(o5, 55) = true)) -> (((bool_eq(o5,
+  56) = true) -> (o6 = true)) and ((not (bool_eq(o5, 56) = true)) ->
+  (((bool_eq(o5, 57) = true) -> (o6 = true)) and ((not (bool_eq(o5,
+  57) = true)) -> (((bool_gt(o5, 57) = true) -> (not (o6 = true))) and
+  ((not (bool_gt(o5, 57) = true)) -> ((bool_lt(o5, 48) = true) ->
+  (not (o6 = true))))))))))))))))))))))))))) and (((not (o6 = true)) ->
+  (result8 = true)) and ((o6 = true) -> (result8 = false)))) and
   ((not (result8 = true)) and ((has_failed5 = has_failed4) and
   (target5 = target4)))) and
-  ((forall j:int. ((((to_rep1(first(source1)) + 1) <= j) and (j <= i5)) ->
-   (is_digit(to_rep((source[j]))) = true))) and
+  ((forall j2:int. ((((to_rep1(first(source1)) + 1) <= j2) and (j2 <= i5)) ->
+   (is_digit(to_rep((source[j2]))) = true))) and
   ((((((to_rep1(first(source1)) + 1) <= to_rep1(last(source1))) ->
   dynamic_property1((to_rep1(first(source1)) + 1), to_rep1(last(source1)),
-  i5)) and (((-2147483648) <= 2147483647) -> in_range1(target6))) and
+  i5)) and (((- 2147483648) <= 2147483647) -> in_range1(target6))) and
   (((to_rep1(first(source1)) + 1) <= i5) and
   (i5 <= to_rep1(last(source1))))) and
-  (i5 = to_rep1(last(source1))))))))) and (((i5 = i9) and
-  ((has_failed6 = has_failed10) and (target6 = target10))) and
-  ((i10 = i5) and ((has_failed11 = has_failed6) and
-  (target11 = target6))))) and ((({ int__content = i11 } = { int__content =
-  i9 }) and (({ bool__content = has_failed12 } = { bool__content =
-  has_failed10 }) and ({ int__content = target12 } = { int__content =
-  target10 }))) and ((i12 = i10) and ((has_failed13 = has_failed11) and
-  (target13 = target11)))))) or ((not ((temp___883 <= i4) and
-  (i4 <= to_rep1(last(source1))))) and (((i4 = i11) and
-  ((has_failed4 = has_failed12) and (target4 = target12))) and
-  ((i12 = i4) and ((has_failed13 = has_failed4) and
-  (target13 = target4)))))))) and (((((2 <= length({ elts = source; rt =
-  source1 })) and (length({ elts = source; rt = source1 }) <= 10)) and
-  (not (has_failed14 = true))) or ((not ((2 <= length({ elts = source; rt =
-  source1 })) and (length({ elts = source; rt = source1 }) <= 10))) and
+  (i5 = to_rep1(last(source1))))))))) and (((i11 = i5) and
+  ((has_failed12 = has_failed6) and (target12 = target6))) and
+  ((i12 = i5) and ((has_failed13 = has_failed6) and
+  (target13 = target6))))) and (((i13 = i11) and
+  ((has_failed14 = has_failed12) and (target14 = target12))) and
+  ((i14 = i12) and ((has_failed15 = has_failed13) and
+  (target15 = target13)))))) and ((not ((temp___883 <= i4) and
+  (i4 <= to_rep1(last(source1))))) -> (((i13 = i4) and
+  ((has_failed14 = has_failed4) and (target14 = target4))) and
+  ((i14 = i4) and ((has_failed15 = has_failed4) and
+  (target15 = target4)))))))) and (((((2 <= length({ elts = source; rt =
+  source1 })) and (length({ elts = source; rt = source1 }) <= 10)) ->
+  (not (has_failed16 = true))) and ((not ((2 <= length({ elts = source; rt =
+  source1 })) and (length({ elts = source; rt = source1 }) <= 10))) ->
   ((length({ elts = source; rt = source1 }) = 11) ->
   (((((((((((((((((((((to_rep((source[(to_rep1(first(source1)) + 1)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) = 49)) and
@@ -932,8 +2606,8 @@ goal WP_parameter_def :
   (to_rep((source[(to_rep1(first(source1)) + 3)])) <  52))) or
   ((to_rep((source[(to_rep1(first(source1)) + 1)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) <  49))) or
-  (to_rep((source[(to_rep1(first(source1)) + 1)])) <  50)) and
-  (not (has_failed14 = true))) or
+  (to_rep((source[(to_rep1(first(source1)) + 1)])) <  50)) ->
+  (not (has_failed16 = true))) and
   ((not (((((((((((((((((((to_rep((source[(to_rep1(first(source1)) + 1)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) = 49)) and
   (to_rep((source[(to_rep1(first(source1)) + 3)])) = 52)) and
@@ -988,73 +2662,70 @@ goal WP_parameter_def :
   (to_rep((source[(to_rep1(first(source1)) + 3)])) <  52))) or
   ((to_rep((source[(to_rep1(first(source1)) + 1)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) <  49))) or
-  (to_rep((source[(to_rep1(first(source1)) + 1)])) <  50))) and
-  (has_failed14 = true)))))) and in_range1(target14))))) and (((i29 = {
-  int__content = i1 }) and ((i28 = { int__content = i11 }) and
-  ((has_failed32 = { bool__content = has_failed14 }) and (target32 = {
-  int__content = target14 })))) and ((i31 = i3) and ((i30 = i12) and
-  ((has_failed33 = has_failed14) and (target33 = target14))))))) or
-  ((not (result2 = true)) and ((((not (10 <  length({ elts = source; rt =
-  source1 }))) and ((has_failed19 = has_failed2) and
-  (target19 = target2))) and (((({ int__content = result17 } = {
-  int__content = i1 }) and (i17 = to_rep1(first(source1)))) and
-  ((((to_rep1(first(source1)) <= i17) and
-  (i17 <= to_rep1(last(source1)))) and ((((temp___876 = target19) and
-  ((temp___875 = i17) and ((temp___874 = has_failed19) and
-  (((((o11 = is_digit(to_rep((source[i17])))) and
-  (((bool_eq(to_rep((source[i17])), 48) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 48) = true)) and
-  (((bool_eq(to_rep((source[i17])), 49) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 49) = true)) and
-  (((bool_eq(to_rep((source[i17])), 50) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 50) = true)) and
-  (((bool_eq(to_rep((source[i17])), 51) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 51) = true)) and
-  (((bool_eq(to_rep((source[i17])), 52) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 52) = true)) and
-  (((bool_eq(to_rep((source[i17])), 53) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 53) = true)) and
-  (((bool_eq(to_rep((source[i17])), 54) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 54) = true)) and
-  (((bool_eq(to_rep((source[i17])), 55) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 55) = true)) and
-  (((bool_eq(to_rep((source[i17])), 56) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 56) = true)) and
-  (((bool_eq(to_rep((source[i17])), 57) = true) and (o11 = true)) or
-  ((not (bool_eq(to_rep((source[i17])), 57) = true)) and
-  (((bool_gt(to_rep((source[i17])), 57) = true) and (not (o11 = true))) or
-  ((not (bool_gt(to_rep((source[i17])), 57) = true)) and
-  ((bool_lt(to_rep((source[i17])), 48) = true) ->
-  (not (o11 = true)))))))))))))))))))))))))) and (((not (o11 = true)) and
-  (result18 = true)) or ((o11 = true) and (result18 = false)))) and
-  ((not (result18 = true)) and ((has_failed20 = has_failed19) and
-  (target20 = target19)))) and
-  ((forall j:int. (((to_rep1(first(source1)) <= j) and (j <= i18)) ->
-   (is_digit(to_rep((source[j]))) = true))) and
+  (to_rep((source[(to_rep1(first(source1)) + 1)])) <  50))) ->
+  (has_failed16 = true)))))) and in_range1(target16))))) and (((i33 = i1) and
+  ((i32 = i13) and ((has_failed36 = has_failed16) and
+  (target36 = target16)))) and ((i35 = i3) and ((i34 = i14) and
+  ((has_failed37 = has_failed16) and (target37 = target16))))))) and
+  ((not (result2 = true)) -> ((((not (10 <  length({ elts = source; rt =
+  source1 }))) and ((has_failed21 = has_failed2) and
+  (target21 = target2))) and ((((result18 = i1) and
+  (i19 = to_rep1(first(source1)))) and
+  ((((to_rep1(first(source1)) <= i19) and (i19 <= to_rep1(last(source1)))) ->
+  ((((temp___876 = target21) and ((temp___875 = i19) and
+  ((temp___874 = has_failed21) and
+  (((((o13 = is_digit(to_rep((source[i19])))) and
+  (((bool_eq(to_rep((source[i19])), 48) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 48) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 49) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 49) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 50) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 50) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 51) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 51) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 52) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 52) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 53) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 53) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 54) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 54) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 55) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 55) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 56) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 56) = true)) ->
+  (((bool_eq(to_rep((source[i19])), 57) = true) -> (o13 = true)) and
+  ((not (bool_eq(to_rep((source[i19])), 57) = true)) ->
+  (((bool_gt(to_rep((source[i19])), 57) = true) -> (not (o13 = true))) and
+  ((not (bool_gt(to_rep((source[i19])), 57) = true)) ->
+  ((bool_lt(to_rep((source[i19])), 48) = true) ->
+  (not (o13 = true)))))))))))))))))))))))))) and (((not (o13 = true)) ->
+  (result19 = true)) and ((o13 = true) -> (result19 = false)))) and
+  ((not (result19 = true)) and ((has_failed22 = has_failed21) and
+  (target22 = target21)))) and
+  ((forall j2:int. (((to_rep1(first(source1)) <= j2) and (j2 <= i20)) ->
+   (is_digit(to_rep((source[j2]))) = true))) and
   (((((to_rep1(first(source1)) <= to_rep1(last(source1))) ->
   dynamic_property2(to_rep1(first(source1)), to_rep1(last(source1)),
-  i18)) and (((-2147483648) <= 2147483647) -> in_range1(target21))) and
-  ((to_rep1(first(source1)) <= i18) and (i18 <= to_rep1(last(source1))))) and
-  (i18 = to_rep1(last(source1))))))))) and (((i22 = { int__content = i18
-  }) and ((has_failed25 = { bool__content = has_failed21 }) and (target25 = {
-  int__content = target21 }))) and ((i23 = i18) and
-  ((has_failed26 = has_failed21) and (target26 = target21))))) and
-  (((i24 = i22) and ((has_failed27 = has_failed25) and
-  (target27 = target25))) and ((i25 = i23) and
-  ((has_failed28 = has_failed26) and (target28 = target26)))))) or
-  ((not ((to_rep1(first(source1)) <= i17) and
-  (i17 <= to_rep1(last(source1))))) and (((i24 = { int__content = i17 }) and
-  ((has_failed27 = { bool__content = has_failed19 }) and (target27 = {
-  int__content = target19 }))) and ((i25 = i17) and
-  ((has_failed28 = has_failed19) and (target28 = target19))))))) and
-  ((((length({ elts = source; rt = source1 }) = 1) and
-  ((not (has_failed29 = true)) and
-  (target29 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))])))))) or
-  ((not (length({ elts = source; rt = source1 }) = 1)) and ((((2 <= length({
+  i20)) and (((- 2147483648) <= 2147483647) -> in_range1(target23))) and
+  ((to_rep1(first(source1)) <= i20) and (i20 <= to_rep1(last(source1))))) and
+  (i20 = to_rep1(last(source1))))))))) and (((i26 = i20) and
+  ((has_failed29 = has_failed23) and (target29 = target23))) and
+  ((i27 = i20) and ((has_failed30 = has_failed23) and
+  (target30 = target23))))) and (((i28 = i26) and
+  ((has_failed31 = has_failed29) and (target31 = target29))) and
+  ((i29 = i27) and ((has_failed32 = has_failed30) and
+  (target32 = target30)))))) and ((not ((to_rep1(first(source1)) <= i19) and
+  (i19 <= to_rep1(last(source1))))) -> (((i28 = i19) and
+  ((has_failed31 = has_failed21) and (target31 = target21))) and
+  ((i29 = i19) and ((has_failed32 = has_failed21) and
+  (target32 = target21))))))) and ((((length({ elts = source; rt = source1
+  }) = 1) -> ((not (has_failed33 = true)) and
+  (target33 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))])))))) and
+  ((not (length({ elts = source; rt = source1 }) = 1)) -> ((((2 <= length({
   elts = source; rt = source1 })) and (length({ elts = source; rt = source1
-  }) <= 9)) and (not (has_failed29 = true))) or ((not ((2 <= length({ elts =
+  }) <= 9)) -> (not (has_failed33 = true))) and ((not ((2 <= length({ elts =
   source; rt = source1 })) and (length({ elts = source; rt = source1
-  }) <= 9))) and ((length({ elts = source; rt = source1 }) = 10) ->
+  }) <= 9))) -> ((length({ elts = source; rt = source1 }) = 10) ->
   (((((((((((((((((((((to_rep((source[(to_rep1(first(source1)) + 0)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 1)])) = 49)) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) = 52)) and
@@ -1109,8 +2780,8 @@ goal WP_parameter_def :
   (to_rep((source[(to_rep1(first(source1)) + 2)])) <  52))) or
   ((to_rep((source[(to_rep1(first(source1)) + 0)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 1)])) <  49))) or
-  (to_rep((source[(to_rep1(first(source1)) + 0)])) <  50)) and
-  (not (has_failed29 = true))) or
+  (to_rep((source[(to_rep1(first(source1)) + 0)])) <  50)) ->
+  (not (has_failed33 = true))) and
   ((not (((((((((((((((((((to_rep((source[(to_rep1(first(source1)) + 0)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 1)])) = 49)) and
   (to_rep((source[(to_rep1(first(source1)) + 2)])) = 52)) and
@@ -1165,76 +2836,122 @@ goal WP_parameter_def :
   (to_rep((source[(to_rep1(first(source1)) + 2)])) <  52))) or
   ((to_rep((source[(to_rep1(first(source1)) + 0)])) = 50) and
   (to_rep((source[(to_rep1(first(source1)) + 1)])) <  49))) or
-  (to_rep((source[(to_rep1(first(source1)) + 0)])) <  50))) and
-  (has_failed29 = true)))))))) and in_range1(target29)))) and
-  (((i29 = i24) and ((i28 = { int__content = i }) and ((has_failed32 = {
-  bool__content = has_failed29 }) and (target32 = { int__content = target29
-  })))) and ((i31 = i25) and ((i30 = i2) and
-  ((has_failed33 = has_failed29) and (target33 = target29))))))))) and
-  (((i37 = i29) and ((i36 = i28) and ((has_failed36 = has_failed32) and
-  (target36 = target32)))) and ((i39 = i31) and ((i38 = i30) and
-  ((has_failed37 = has_failed33) and (target37 = target33)))))))))) and
-  (((i45 = i41) and ((i44 = i40) and ((has_failed40 = has_failed38) and
-  (target40 = target38)))) and ((i47 = i43) and ((i46 = i42) and
-  ((has_failed41 = has_failed39) and (target41 = target39)))))) ->
-  ((((bool_eq(length({ elts = source; rt = source1 }), 0) = true) and
-  ((has_failed40).bool__content = true)) or (not (bool_eq(length({ elts =
-  source; rt = source1 }), 0) = true))) -> ((((bool_eq(length({ elts =
-  source; rt = source1 }), 1) = true) and
-  (((to_rep((source[to_rep1(first(source1))])) = 45) and
-  ((has_failed40).bool__content = true)) or
-  ((not (to_rep((source[to_rep1(first(source1))])) = 45)) and
-  (((is_digit(to_rep((source[to_rep1(first(source1))]))) = true) and
-  ((not ((has_failed40).bool__content = true)) and
-  ((target40).int__content = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))])))))) or
-  ((not (is_digit(to_rep((source[to_rep1(first(source1))]))) = true)) and
-  ((has_failed40).bool__content = true)))))) or (not (bool_eq(length({ elts =
-  source; rt = source1 }), 1) = true))) -> ((((match_bool(bool_gt(length({
-  elts = source; rt = source1 }), 1), bool_lt(length({ elts = source; rt =
-  source1 }), 10), false) = true) and
-  (((forall index:int. (((to_rep1(first(source1)) <= index) and
-    (index <= to_rep1(last(source1)))) ->
-    (is_digit(to_rep((source[index]))) = true))) and
-  (not ((has_failed40).bool__content = true))) or
-  ((not (forall index:int. (((to_rep1(first(source1)) <= index) and
-        (index <= to_rep1(last(source1)))) ->
-        (is_digit(to_rep((source[index]))) = true)))) and
+  (to_rep((source[(to_rep1(first(source1)) + 0)])) <  50))) ->
+  (has_failed33 = true)))))))) and in_range1(target33)))) and
+  (((i33 = i28) and ((i32 = i) and ((has_failed36 = has_failed33) and
+  (target36 = target33)))) and ((i35 = i29) and ((i34 = i2) and
+  ((has_failed37 = has_failed33) and (target37 = target33))))))))) and
+  (((i41 = i33) and ((i40 = i32) and ((has_failed40 = has_failed36) and
+  (target40 = target36)))) and ((i43 = i35) and ((i42 = i34) and
+  ((has_failed41 = has_failed37) and (target41 = target37))))))))))
+
+axiom H3 : (i49 = i45)
+
+axiom H4 : (i48 = i44)
+
+axiom H5 : (has_failed44 = has_failed42)
+
+axiom H6 : (target44 = target42)
+
+axiom H7 : (i51 = i47)
+
+axiom H8 : (i50 = i46)
+
+axiom H9 : (has_failed45 = has_failed43)
+
+axiom H10 : (target45 = target43)
+
+axiom H11 : ((bool_eq(length({ elts = source; rt = source1 }), 0) = true) ->
+  (has_failed44 = true))
+
+axiom H12 : ((bool_eq(length({ elts = source; rt = source1 }), 1) = true) ->
+  (((to_rep((source[to_rep1(first(source1))])) = 45) ->
+  (has_failed44 = true)) and
+  ((not (to_rep((source[to_rep1(first(source1))])) = 45)) ->
+  (((is_digit(to_rep((source[to_rep1(first(source1))]))) = true) ->
+  ((not (has_failed44 = true)) and
+  (target44 = convert_character_digit_to_integer(to_rep((source[to_rep1(first(source1))])))))) and
+  ((not (is_digit(to_rep((source[to_rep1(first(source1))]))) = true)) ->
+  (has_failed44 = true))))))
+
+axiom H13 : ((match_bool(bool_gt(length({ elts = source; rt = source1 }), 1),
+  bool_lt(length({ elts = source; rt = source1 }), 10), false) = true) ->
+  (((forall index5:int. (((to_rep1(first(source1)) <= index5) and
+    (index5 <= to_rep1(last(source1)))) ->
+    (is_digit(to_rep((source[index5]))) = true))) ->
+  (not (has_failed44 = true))) and
+  ((not (forall index5:int. (((to_rep1(first(source1)) <= index5) and
+        (index5 <= to_rep1(last(source1)))) ->
+        (is_digit(to_rep((source[index5]))) = true)))) ->
   ((((to_rep((source[to_rep1(first(source1))])) = 45) and
-  (forall index:int. ((((to_rep1(first(source1)) + 1) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index]))) = true)))) and
-  (not ((has_failed40).bool__content = true))) or
+  (forall index5:int. ((((to_rep1(first(source1)) + 1) <= index5) and
+  (index5 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index5]))) = true)))) ->
+  (not (has_failed44 = true))) and
   ((not ((to_rep((source[to_rep1(first(source1))])) = 45) and
-  (forall index:int. ((((to_rep1(first(source1)) + 1) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index]))) = true))))) and
-  ((has_failed40).bool__content = true)))))) or
-  (not (match_bool(bool_gt(length({ elts = source; rt = source1 }), 1),
-  bool_lt(length({ elts = source; rt = source1 }), 10), false) = true))) ->
-  ((bool_eq(length({ elts = source; rt = source1 }), 10) = true) ->
-  (((result25 = true) <->
-  (forall index:int. (((to_rep1(first(source1)) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index]))) = true)))) -> ((result25 = true) ->
-  (((((((temp___944 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___944) and
-  (temp___944 <= to_rep1(last(source1)))) and (o22 = temp___944))) and
-  (o23 = (source[o22]))) and (o24 = to_rep(o23))) and (((o24 <  50) and
-  (o25 = true)) or ((not (o24 <  50)) and (o25 = false)))) ->
-  ((((((((temp___943 = (to_rep1(first(source1)) + 1)) and
-  in_range1((to_rep1(first(source1)) + 1))) and
-  (((to_rep1(first(source1)) <= temp___943) and
-  (temp___943 <= to_rep1(last(source1)))) and (o16 = temp___943))) and
-  (o17 = (source[o16]))) and (o18 = to_rep(o17))) and (((o18 <  49) and
-  (o19 = true)) or ((not (o18 <  49)) and (o19 = false)))) and
-  (((((((temp___942 = (to_rep1(first(source1)) + 0)) and
-  in_range1((to_rep1(first(source1)) + 0))) and
-  (((to_rep1(first(source1)) <= temp___942) and
-  (temp___942 <= to_rep1(last(source1)))) and (o13 = temp___942))) and
-  (o14 = (source[o13]))) and (o15 = to_rep(o14))) and (((o15 = 50) and
-  (o20 = true)) or ((not (o15 = 50)) and (o20 = false)))) and
-  (o21 = match_bool(o20, o19, false)))) ->
-  (((temp___941 = (to_rep1(first(source1)) + 2)) and
-  in_range1((to_rep1(first(source1)) + 2))) ->
-  (to_rep1(first(source1)) <= temp___941))))))))))))))
+  (forall index5:int. ((((to_rep1(first(source1)) + 1) <= index5) and
+  (index5 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index5]))) = true))))) ->
+  (has_failed44 = true))))))
+
+axiom H14 : (bool_eq(length({ elts = source; rt = source1 }), 10) = true)
+
+axiom H15 : ((result31 = true) <->
+  (forall index5:int. (((to_rep1(first(source1)) <= index5) and
+  (index5 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index5]))) = true))))
+
+axiom H16 : (result31 = true)
+
+axiom H17 : ((temp___944 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H18 : ((to_rep1(first(source1)) <= temp___944) and
+  (temp___944 <= to_rep1(last(source1))))
+
+axiom H19 : (o296 = temp___944)
+
+axiom H20 : (o297 = (source[o296]))
+
+axiom H21 : (o298 = to_rep(o297))
+
+axiom H22 : (((o298 <  50) -> (o299 = true)) and ((not (o298 <  50)) ->
+  (o299 = false)))
+
+axiom H23 : ((temp___943 = (to_rep1(first(source1)) + 1)) and
+  in_range1((to_rep1(first(source1)) + 1)))
+
+axiom H24 : ((to_rep1(first(source1)) <= temp___943) and
+  (temp___943 <= to_rep1(last(source1))))
+
+axiom H25 : (o289 = temp___943)
+
+axiom H26 : (o290 = (source[o289]))
+
+axiom H27 : (o291 = to_rep(o290))
+
+axiom H28 : (((o291 <  49) -> (o292 = true)) and ((not (o291 <  49)) ->
+  (o292 = false)))
+
+axiom H29 : ((temp___942 = (to_rep1(first(source1)) + 0)) and
+  in_range1((to_rep1(first(source1)) + 0)))
+
+axiom H30 : ((to_rep1(first(source1)) <= temp___942) and
+  (temp___942 <= to_rep1(last(source1))))
+
+axiom H31 : (o286 = temp___942)
+
+axiom H32 : (o287 = (source[o286]))
+
+axiom H33 : (o288 = to_rep(o287))
+
+axiom H34 : (((o288 = 50) -> (o293 = true)) and ((not (o288 = 50)) ->
+  (o293 = false)))
+
+axiom H35 : (o294 = match_bool(o293, o292, false))
+
+axiom H36 : ((temp___941 = (to_rep1(first(source1)) + 2)) and
+  in_range1((to_rep1(first(source1)) + 2)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___941)

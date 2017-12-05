@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -482,31 +482,91 @@ axiom def_axiom3 :
   ((p__B28b__my_s1__aggregate_def(temp___334, temp___335,
   temp___336)[3]) = of_rep(temp___336))))
 
+logic my_s1 : (int,integer) farray
+
+logic my_s2 : (int,integer) farray
+
+logic my_s11 : (int,integer) farray
+
+logic my_s21 : (int,integer) farray
+
+logic my_s12 : (int,integer) farray
+
+logic my_s22 : (int,integer) farray
+
+logic my_s13 : (int,integer) farray
+
+logic my_s23 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic my_s14 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic my_s24 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic my_s15 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic my_s25 : (int,integer) farray
+
+logic result4 : (int,integer) farray
+
+logic my_s16 : (int,integer) farray
+
+logic result5 : (int,integer) farray
+
+logic my_s26 : (int,integer) farray
+
+logic result6 : (int,integer) farray
+
+logic my_s17 : (int,integer) farray
+
+logic result7 : (int,integer) farray
+
+logic my_s27 : (int,integer) farray
+
+axiom H : (result = my_s1)
+
+axiom H1 : (my_s14 = p__B19b__my_s1__aggregate_def(1, 2, 3))
+
+axiom H2 : (result1 = my_s2)
+
+axiom H3 : (my_s24 = slide(my_s14, 1, 2))
+
+axiom H4 : (to_rep((my_s24[2])) = 1)
+
+axiom H5 : (result2 = my_s11)
+
+axiom H6 : (my_s15 = p__B22b__my_s1__aggregate_def(1, 2, 3))
+
+axiom H7 : (result3 = my_s21)
+
+axiom H8 : (my_s25 = slide(my_s15, 1, 2))
+
+axiom H9 : (not (to_rep((my_s25[2])) = 1))
+
+axiom H10 : (result4 = my_s12)
+
+axiom H11 : (my_s16 = p__B25b__my_s1__aggregate_def(1, 2, 3))
+
+axiom H12 : (result5 = my_s22)
+
+axiom H13 : (my_s26 = slide(my_s16, 1, 2))
+
+axiom H14 : (to_rep((my_s26[2])) = 2)
+
+axiom H15 : (result6 = my_s13)
+
+axiom H16 : (my_s17 = p__B28b__my_s1__aggregate_def(1, 2, 3))
+
+axiom H17 : (result7 = my_s23)
+
+axiom H18 : (my_s27 = slide(my_s17, 1, 2))
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_s1:(int,integer) farray. forall my_s2:(int,integer) farray.
-  forall my_s11:(int,integer) farray. forall my_s21:(int,integer) farray.
-  forall my_s12:(int,integer) farray. forall my_s22:(int,integer) farray.
-  forall my_s13:(int,integer) farray. forall my_s23:(int,integer) farray.
-  forall result:(int,integer) farray. forall my_s14:(int,integer) farray.
-  forall result1:(int,integer) farray. forall my_s24:(int,integer) farray.
-  forall result2:(int,integer) farray. forall my_s15:(int,integer) farray.
-  forall result3:(int,integer) farray. forall my_s25:(int,integer) farray.
-  forall result4:(int,integer) farray. forall my_s16:(int,integer) farray.
-  forall result5:(int,integer) farray. forall my_s26:(int,integer) farray.
-  forall result6:(int,integer) farray. forall my_s17:(int,integer) farray.
-  forall result7:(int,integer) farray. forall my_s27:(int,integer) farray.
-  (((({ map__content = result } = { map__content = my_s1 }) and
-  (my_s14 = p__B19b__my_s1__aggregate_def(1, 2, 3))) and ((({ map__content =
-  result1 } = { map__content = my_s2 }) and (my_s24 = slide(my_s14, 1,
-  2))) and (to_rep((my_s24[2])) = 1))) -> (((({ map__content = result2 } = {
-  map__content = my_s11 }) and (my_s15 = p__B22b__my_s1__aggregate_def(1, 2,
-  3))) and ((({ map__content = result3 } = { map__content = my_s21 }) and
-  (my_s25 = slide(my_s15, 1, 2))) and (not (to_rep((my_s25[2])) = 1)))) ->
-  (((({ map__content = result4 } = { map__content = my_s12 }) and
-  (my_s16 = p__B25b__my_s1__aggregate_def(1, 2, 3))) and ((({ map__content =
-  result5 } = { map__content = my_s22 }) and (my_s26 = slide(my_s16, 1,
-  2))) and (to_rep((my_s26[2])) = 2))) -> (((result6 = my_s13) and
-  (my_s17 = p__B28b__my_s1__aggregate_def(1, 2, 3))) ->
-  (((result7 = my_s23) and (my_s27 = slide(my_s17, 1, 2))) ->
-  (not (to_rep((my_s27[2])) = 2))))))))
+goal WP_parameter_def : (not (to_rep((my_s27[2])) = 2))

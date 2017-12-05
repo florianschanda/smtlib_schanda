@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -473,41 +473,153 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "p.ads", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:(int,us_rep) farray.
-  forall p__split_fields1:(int,us_rep) farray. forall c:int.
-  forall result:int. forall c1:int.
-  forall p__split_fields2:(int,us_rep) farray.
-  forall p__split_fields3:(int,us_rep) farray. forall c2:int.
-  forall result1:(int,us_rep) farray. forall result2:(int,us_rep) farray.
-  forall p__split_fields4:(int,us_rep) farray.
-  forall p__split_fields5:(int,us_rep) farray. forall result3:int.
-  forall c3:int.
-  ((exists c4:int. (((0 <= c4) and (c4 <= 2)) and
-   (bool_eq3((p__split_fields[c4]), { us_split_fields1 = { rec__p__dot__x =
-   d; rec__p__dot__y = d1 } }) = true))) ->
-  ((({ int__content = result } = { int__content = c }) and (c1 = 0)) ->
-  (((0 <= c1) and (c1 <= 2)) -> (((bool_eq5(p__split_fields2, 0, 2,
-  p__split_fields, 0, 2) = true) and
+logic p__split_fields : (int,us_rep) farray
+
+logic p__split_fields1 : (int,us_rep) farray
+
+logic c : int
+
+logic temp___210 : (int,us_rep) farray
+
+logic temp___2101 : (int,us_rep) farray
+
+logic temp___209 : int
+
+logic temp___207 : (int,us_rep) farray
+
+logic temp___2071 : (int,us_rep) farray
+
+logic o : int
+
+logic p__split_fields2 : (int,us_rep) farray
+
+logic p__split_fields3 : (int,us_rep) farray
+
+logic result : int
+
+logic c1 : int
+
+logic p__split_fields4 : (int,us_rep) farray
+
+logic p__split_fields5 : (int,us_rep) farray
+
+logic c2 : int
+
+logic result1 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic p__split_fields6 : (int,us_rep) farray
+
+logic p__split_fields7 : (int,us_rep) farray
+
+logic result3 : int
+
+logic c3 : int
+
+logic p__split_fields8 : (int,us_rep) farray
+
+logic p__split_fields9 : (int,us_rep) farray
+
+logic c4 : int
+
+logic p__split_fields10 : (int,us_rep) farray
+
+logic p__split_fields11 : (int,us_rep) farray
+
+logic c5 : int
+
+logic p__split_fields12 : (int,us_rep) farray
+
+logic p__split_fields13 : (int,us_rep) farray
+
+logic c6 : int
+
+logic p__split_fields14 : (int,us_rep) farray
+
+logic p__split_fields15 : (int,us_rep) farray
+
+logic c7 : int
+
+logic p__split_fields16 : (int,us_rep) farray
+
+logic p__split_fields17 : (int,us_rep) farray
+
+logic c8 : int
+
+logic p__split_fields18 : (int,us_rep) farray
+
+logic p__split_fields19 : (int,us_rep) farray
+
+logic c9 : int
+
+logic p__split_fields20 : (int,us_rep) farray
+
+logic p__split_fields21 : (int,us_rep) farray
+
+logic c10 : int
+
+logic p__split_fields22 : (int,us_rep) farray
+
+logic p__split_fields23 : (int,us_rep) farray
+
+logic c11 : int
+
+axiom H :
+  (exists c12:int. (((0 <= c12) and (c12 <= 2)) and
+  (bool_eq3((p__split_fields[c12]), { us_split_fields1 = { rec__p__dot__x =
+  d; rec__p__dot__y = d1 } }) = true)))
+
+axiom H1 : (result = c)
+
+axiom H2 : (c1 = 0)
+
+axiom H3 : (0 <= c1)
+
+axiom H4 : (c1 <= 2)
+
+axiom H5 : ((bool_eq5(p__split_fields4, 0, 2, p__split_fields, 0,
+  2) = true) and
   (forall j:int. (((0 <= j) and (j <= (c2 - 1))) ->
-  ((bool_eq3((p__split_fields2[j]), { us_split_fields1 = { rec__p__dot__x =
-  d; rec__p__dot__y = d1 } }) = true) -> (bool_eq3((p__split_fields3[j]), {
+  ((bool_eq3((p__split_fields4[j]), { us_split_fields1 = { rec__p__dot__x =
+  d; rec__p__dot__y = d1 } }) = true) -> (bool_eq3((p__split_fields5[j]), {
   us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 }
-  }) = true))))) -> ((((((p__split_fields2 = p__split_fields) and
+  }) = true)))))
+
+axiom H6 : ((((p__split_fields4 = p__split_fields) and
   (forall temp___208:int. (((0 <= temp___208) and (temp___208 <= 2)) ->
   ((c2 <= temp___208) ->
-  ((p__split_fields3[temp___208]) = (p__split_fields1[temp___208])))))) and
-  ((0 <= 2) -> in_range2(c2))) and ((0 <= c2) and (c2 <= 2))) and
-  ((((bool_eq3((p__split_fields2[c2]), { us_split_fields1 = {
-  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) and
-  (((result1 = p__split_fields2) and (result2 = p__split_fields3)) and
-  ((p__split_fields2 = p__split_fields4) and ((p__split_fields3[c2 <- {
-  us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 }
-  }]) = p__split_fields5)))) or ((not (bool_eq3((p__split_fields2[c2]), {
-  us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 }
-  }) = true)) and ({ rec__p__painting__plain = p__split_fields4;
-  rec__p__painting__shadow = p__split_fields5 } = { rec__p__painting__plain =
-  p__split_fields2; rec__p__painting__shadow = p__split_fields3 }))) and
-  ((not (c2 = 2)) and ((result3 = c2) and (c3 = (c2 + 1)))))) ->
-  (bool_eq5(p__split_fields4, 0, 2, p__split_fields, 0, 2) = true)))))))
+  ((p__split_fields5[temp___208]) = (p__split_fields1[temp___208])))))) and
+  ((0 <= 2) -> in_range2(c2))) and ((0 <= c2) and (c2 <= 2)))
+
+axiom H7 : ((bool_eq3((p__split_fields4[c2]), { us_split_fields1 = {
+  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) ->
+  (result1 = p__split_fields4))
+
+axiom H8 : ((bool_eq3((p__split_fields4[c2]), { us_split_fields1 = {
+  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) ->
+  (result2 = p__split_fields5))
+
+axiom H9 : ((bool_eq3((p__split_fields4[c2]), { us_split_fields1 = {
+  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) ->
+  (p__split_fields4 = p__split_fields6))
+
+axiom H10 : ((bool_eq3((p__split_fields4[c2]), { us_split_fields1 = {
+  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) ->
+  ((p__split_fields5[c2 <- { us_split_fields1 = { rec__p__dot__x = d;
+  rec__p__dot__y = d1 } }]) = p__split_fields7))
+
+axiom H11 : ((not (bool_eq3((p__split_fields4[c2]), { us_split_fields1 = {
+  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true)) ->
+  ((p__split_fields6 = p__split_fields4) and
+  (p__split_fields7 = p__split_fields5)))
+
+axiom H12 : (not (c2 = 2))
+
+axiom H13 : (result3 = c2)
+
+axiom H14 : (c3 = (c2 + 1))
+
+ (* File "p.ads", line 31, characters 0-0 *)
+goal WP_parameter_def : (bool_eq5(p__split_fields6, 0, 2, p__split_fields, 0,
+  2) = true)

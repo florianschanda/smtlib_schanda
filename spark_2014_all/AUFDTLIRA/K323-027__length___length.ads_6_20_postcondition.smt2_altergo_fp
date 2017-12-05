@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -246,20 +246,63 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : bool
+
+logic length__f__result : bool
+
+logic result : bool
+
+logic res1 : bool
+
+logic result1 : bool
+
+logic res2 : bool
+
+logic result2 : bool
+
+logic length__f__result1 : bool
+
+logic length__f__result2 : bool
+
+logic length__f__result3 : bool
+
+logic res3 : bool
+
+logic length__f__result4 : bool
+
+logic res4 : bool
+
+logic length__f__result5 : bool
+
+logic result3 : bool
+
+axiom H : ((of_int(1) = true) -> (result = res))
+
+axiom H1 : ((of_int(1) = true) -> (res1 = of_int(1)))
+
+axiom H2 : ((not (of_int(1) = true)) -> (result1 = res))
+
+axiom H3 : ((not (of_int(1) = true)) -> (res2 = of_int(0)))
+
+axiom H4 : ((not (of_int(1) = true)) -> (res1 = res2))
+
+axiom H5 : (length__f__result1 = length__f__result2)
+
+axiom H6 : (length__f__result3 = length__f__result1)
+
+axiom H7 : (result2 = length__f__result)
+
+axiom H8 : (length__f__result1 = res1)
+
+axiom H9 : (length__f__result4 = length__f__result2)
+
+axiom H10 : (res3 = res1)
+
+axiom H11 : (length__f__result5 = length__f__result3)
+
+axiom H12 : (res4 = res1)
+
+axiom H13 : (result3 = length__f__result4)
+
  (* File "length.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:bool. forall length__f__result:bool. forall result:bool.
-  forall res1:bool. forall result1:bool. forall res2:bool.
-  forall result2:bool. forall length__f__result1:bool.
-  forall length__f__result2:bool. forall length__f__result3:bool.
-  forall res3:bool. forall length__f__result4:bool. forall res4:bool.
-  forall length__f__result5:bool.
-  (forall result3:bool. (((((((of_int(1) = true) and ((result = res) and
-  (res1 = of_int(1)))) or ((not (of_int(1) = true)) and (((result1 = res) and
-  (res2 = of_int(0))) and (res1 = res2)))) and
-  (((length__f__result1 = length__f__result2) and
-  (length__f__result3 = length__f__result1)) and
-  ((result2 = length__f__result) and (length__f__result1 = res1)))) and
-  (((length__f__result4 = length__f__result2) and (res3 = res1)) and
-  ((length__f__result5 = length__f__result3) and (res4 = res1)))) and
-  (result3 = length__f__result4)) -> (length__f__result4 = true))))
+goal WP_parameter_def : (length__f__result4 = true)

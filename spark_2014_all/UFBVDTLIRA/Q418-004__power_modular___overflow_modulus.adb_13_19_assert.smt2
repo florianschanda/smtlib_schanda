@@ -94,6 +94,7 @@
 (declare-const x1 (_ BitVec 8))
 (declare-const result1 (_ BitVec 8))
 (declare-const y1 (_ BitVec 8))
+(assert true)
 (assert (=> (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 7)) (in_range1 y)))
 (assert (and (= temp___180 (id 257)) (and (in_range temp___180) (= temp___180 257))))
 (assert (=> (< temp___180 256) (= o (bvshl ((_ int2bv 8) 1) ((_ int2bv 8) temp___180)))))

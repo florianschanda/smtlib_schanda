@@ -726,5 +726,21 @@ logic c03__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic us5 : int
+
+logic us6 : int
+
+logic us7 : int
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range1(0)

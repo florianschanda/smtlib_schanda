@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -409,18 +409,57 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic found : bool
+
+logic position : int
+
+logic current : int
+
+logic result : bool
+
+logic found1 : bool
+
+logic result1 : int
+
+logic position1 : int
+
+logic result2 : int
+
+logic current1 : int
+
+logic position2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(text1)),
+  to_rep1(last(text1)))
+
+axiom H1 : in_range3(letter)
+
+axiom H2 : in_range2(start)
+
+axiom H3 : ((1 <= 2147483647) -> in_range2(position))
+
+axiom H4 : ((1 <= 2147483647) -> in_range2(current))
+
+axiom H5 : (result = found)
+
+axiom H6 : (found1 = of_int(0))
+
+axiom H7 : (result1 = position)
+
+axiom H8 : (position1 = 1)
+
+axiom H9 : (to_rep1(first(text1)) <= start)
+
+axiom H10 : (start <= to_rep1(last(text1)))
+
+axiom H11 : (result2 = current)
+
+axiom H12 : (current1 = start)
+
+axiom H13 : (current1 <= to_rep1(last(text1)))
+
+axiom H14 : (((1 <= 2147483647) -> in_range2(position2)) and
+  (current1 <= to_rep1(last(text1))))
+
  (* File "strings.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found:bool. forall position:int. forall current:int.
-  forall result:bool. forall found1:bool. forall result1:int.
-  forall position1:int. forall result2:int. forall current1:int.
-  forall position2:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(text1)), to_rep1(last(text1))) -> (in_range3(letter) ->
-  (in_range2(start) -> (((1 <= 2147483647) -> in_range2(position)) ->
-  (((1 <= 2147483647) -> in_range2(current)) -> (((result = found) and
-  (found1 = of_int(0))) -> (((result1 = position) and (position1 = 1)) ->
-  (((to_rep1(first(text1)) <= start) and (start <= to_rep1(last(text1)))) ->
-  (((result2 = current) and (current1 = start)) ->
-  ((current1 <= to_rep1(last(text1))) -> ((((1 <= 2147483647) ->
-  in_range2(position2)) and (current1 <= to_rep1(last(text1)))) ->
-  (to_rep1(first(text1)) <= current1)))))))))))))
+goal WP_parameter_def : (to_rep1(first(text1)) <= current1)

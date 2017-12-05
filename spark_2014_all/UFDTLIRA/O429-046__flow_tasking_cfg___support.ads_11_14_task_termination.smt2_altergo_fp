@@ -206,11 +206,25 @@ axiom coerce_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : natural
+
+logic us_self__compl : natural
+
+logic prot__split_fields : natural
+
+logic us_self__compl1 : natural
+
+logic result : natural
+
+logic prot__split_fields1 : natural
+
+axiom H : (o = prot__split_fields)
+
+axiom H1 : (us_self__compl = o)
+
+axiom H2 : (result = prot__split_fields)
+
+axiom H3 : (prot__split_fields1 = us_self__compl1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:natural. forall us_self__compl:natural.
-  forall prot__split_fields:natural. forall us_self__compl1:natural.
-  forall result:natural. forall prot__split_fields1:natural.
-  (not (((o = prot__split_fields) and (us_self__compl = o)) and
-  ((result = prot__split_fields) and
-  (prot__split_fields1 = us_self__compl1)))))
+goal WP_parameter_def : false

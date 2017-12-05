@@ -33,6 +33,7 @@
 (declare-const us Int)
 (declare-const us1 Int)
 (declare-const us2 Int)
+(declare-const us3 Int)
 (assert (and (= us 0) (in_range 0)))
 (assert (and (= us1 0) (in_range 0)))
 (assert (and (= us2 1) (in_range 1)))

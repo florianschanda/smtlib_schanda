@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -262,20 +262,73 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic a : (int,integer) farray
+
+logic b : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic b1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic b2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range1(x)
+
+axiom H3 : in_range1(y)
+
+axiom H4 : (to_rep(o) = x)
+
+axiom H5 : (o1 = (a[i <- o]))
+
+axiom H6 : (result = a)
+
+axiom H7 : (a1 = o1)
+
+axiom H8 : (to_rep(o2) = y)
+
+axiom H9 : (o3 = (b[j <- o2]))
+
+axiom H10 : (result1 = b)
+
+axiom H11 : (b1 = o3)
+
+axiom H12 : (b1 = b2)
+
+axiom H13 : (a1 = a2)
+
+axiom H14 : (b3 = b1)
+
+axiom H15 : (a3 = a1)
+
+axiom H16 : (bool_eq3(a, (- 2147483648), 2147483647, b, (- 2147483648),
+  2147483647) = true)
+
+axiom H17 : (i = j)
+
+axiom H18 : (x = y)
+
  (* File "simple_arrays.adb", line 335, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  forall o:integer. forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall b1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall b2:(int,integer) farray. forall a3:(int,integer) farray.
-  forall b3:(int,integer) farray. ((in_range1(i) and (in_range1(j) and
-  (in_range1(x) and (in_range1(y) and (((((to_rep(o) = x) and
-  (o1 = (a[i <- o]))) and ((result = a) and (a1 = o1))) and
-  (((to_rep(o2) = y) and (o3 = (b[j <- o2]))) and ((result1 = b) and
-  (b1 = o3)))) and (((b1 = b2) and (a1 = a2)) and ((b3 = b1) and
-  (a3 = a1)))))))) -> ((((bool_eq3(a, (-2147483648), 2147483647, b,
-  (-2147483648), 2147483647) = true) and (i = j)) and (x = y)) ->
-  (bool_eq3(a2, (-2147483648), 2147483647, b2, (-2147483648),
-  2147483647) = true))))
+goal WP_parameter_def : (bool_eq3(a2, (- 2147483648), 2147483647, b2,
+  (- 2147483648), 2147483647) = true)

@@ -418,25 +418,90 @@ axiom def_axiom :
   rec__array_aggregates__basic_record__b = temp___4691;
   rec__array_aggregates__basic_record__c = temp___4692 } })))))
 
- (* File "array_aggregates.adb", line 176, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,us_rep) farray. forall o:enum_t. forall o1:small_index_t.
-  forall o2:small_index_t. forall o3:bool. forall o4:enum_t.
-  forall o5:enum_t. forall o6:small_index_t. forall o7:small_index_t.
-  forall o8:bool. forall o9:enum_t. forall o10:small_index_t.
-  forall o11:bool. forall o12:enum_t. forall o13:small_index_t.
-  forall o14:bool. forall o15:enum_t. forall o16:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall x1:(int,us_rep) farray.
-  ((((((to_rep(o5) = 1) and ((to_rep1(o6) = 10) and ((o6 = o7) and
-  ((of_int(1) = o8) and (o5 = o9))))) and ((o10 = o7) and ((o11 = o8) and
-  (o12 = o9)))) and ((((to_rep(o) = 0) and ((to_rep1(o1) = 5) and
-  ((o1 = o2) and ((of_int(0) = o3) and (o = o4))))) and ((o13 = o2) and
-  ((o14 = o3) and (o15 = o4)))) and (o16 = temp___466({ us_split_fields1 = {
+logic x : (int,us_rep) farray
+
+logic o : enum_t
+
+logic o1 : small_index_t
+
+logic o2 : small_index_t
+
+logic o3 : bool
+
+logic o4 : enum_t
+
+logic o5 : enum_t
+
+logic o6 : small_index_t
+
+logic o7 : small_index_t
+
+logic o8 : bool
+
+logic o9 : enum_t
+
+logic o10 : small_index_t
+
+logic o11 : bool
+
+logic o12 : enum_t
+
+logic o13 : small_index_t
+
+logic o14 : bool
+
+logic o15 : enum_t
+
+logic o16 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic x1 : (int,us_rep) farray
+
+axiom H : (to_rep(o5) = 1)
+
+axiom H1 : (to_rep1(o6) = 10)
+
+axiom H2 : (o6 = o7)
+
+axiom H3 : (of_int(1) = o8)
+
+axiom H4 : (o5 = o9)
+
+axiom H5 : (o10 = o7)
+
+axiom H6 : (o11 = o8)
+
+axiom H7 : (o12 = o9)
+
+axiom H8 : (to_rep(o) = 0)
+
+axiom H9 : (to_rep1(o1) = 5)
+
+axiom H10 : (o1 = o2)
+
+axiom H11 : (of_int(0) = o3)
+
+axiom H12 : (o = o4)
+
+axiom H13 : (o13 = o2)
+
+axiom H14 : (o14 = o3)
+
+axiom H15 : (o15 = o4)
+
+axiom H16 : (o16 = temp___466({ us_split_fields1 = {
   rec__array_aggregates__basic_record__a = o13;
   rec__array_aggregates__basic_record__b = o14;
   rec__array_aggregates__basic_record__c = o15 } }, { us_split_fields1 = {
   rec__array_aggregates__basic_record__a = o10;
   rec__array_aggregates__basic_record__b = o11;
-  rec__array_aggregates__basic_record__c = o12 } })))) and ((result = x) and
-  (x1 = o16))) ->
-  (to_rep((((x1[3])).us_split_fields1).rec__array_aggregates__basic_record__c) = 1)))
+  rec__array_aggregates__basic_record__c = o12 } }))
+
+axiom H17 : (result = x)
+
+axiom H18 : (x1 = o16)
+
+ (* File "array_aggregates.adb", line 176, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((x1[3])).us_split_fields1).rec__array_aggregates__basic_record__c) = 1)

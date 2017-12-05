@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -228,5 +228,11 @@ axiom id__def_axiom : (forall x:int [id(x)]. (in_range(x) -> (id(x) = x)))
 
 axiom c__def_axiom : (c = id(0))
 
+logic us : int
+
+axiom H : in_range(c)
+
+axiom H1 : (id(0) = c)
+
  (* File "dic_pred.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> ((id(0) = c) -> in_range1(c)))
+goal WP_parameter_def : in_range1(c)

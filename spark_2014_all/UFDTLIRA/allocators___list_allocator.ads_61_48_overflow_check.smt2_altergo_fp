@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -320,11 +320,40 @@ logic result__ : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range1(e)
+
+axiom H1 : ((o6 = length(s)) and (in_range3(o6) and
+  ((0 + o6) <= 2147483647)))
+
+axiom H2 : (((o6 <  2147483647) -> (result2 = true)) and
+  ((not (o6 <  2147483647)) -> (result2 = false)))
+
+axiom H3 : (result2 = true)
+
+axiom H4 : ((o2 = length(s)) and (in_range3(o2) and
+  ((0 + o2) <= 2147483647)))
+
+axiom H5 : (o3 = (o2 + 1))
+
  (* File "list_allocator.ads", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
-  (in_range1(e) -> ((((o2 = length(s)) and (in_range3(o2) and
-  ((0 + o2) <= 2147483647))) and (((o2 <  2147483647) and (result = true)) or
-  ((not (o2 <  2147483647)) and (result = false)))) -> ((result = true) ->
-  ((((o = length(s)) and (in_range3(o) and ((0 + o) <= 2147483647))) and
-  (o1 = (o + 1))) -> in_range(o1))))))
+goal WP_parameter_def : in_range(o3)

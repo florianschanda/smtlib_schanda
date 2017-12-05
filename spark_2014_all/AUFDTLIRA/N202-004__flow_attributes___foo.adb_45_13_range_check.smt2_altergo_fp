@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -395,17 +395,46 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,character) farray
+
+logic b : int
+
+logic o : character
+
+logic o1 : int
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : (int,character) farray
+
+logic a1 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : ((0 <= 2147483647) -> in_range3(b))
+
+axiom H2 : (to_rep(o) = 32)
+
+axiom H3 : ((to_rep1(a__first) <= to_rep1(a__first)) and
+  (to_rep1(a__first) <= to_rep1(a__last)))
+
+axiom H4 : (o1 = to_rep1(a__first))
+
+axiom H5 : (o2 = (a[o1 <- o]))
+
+axiom H6 : (result = a)
+
+axiom H7 : (a1 = o2)
+
+axiom H8 : ((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (o3 = ((to_rep1(a__last) - to_rep1(a__first)) + 1)))
+
+axiom H9 : ((not (to_rep1(a__first) <= to_rep1(a__last))) -> (o3 = 0))
+
  (* File "foo.adb", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,character) farray. forall b:int. forall o:character.
-  forall o1:int. forall o2:(int,character) farray. forall o3:int.
-  forall result:(int,character) farray. forall a1:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(a__first), to_rep1(a__last)) ->
-  (((0 <= 2147483647) -> in_range3(b)) -> ((((to_rep(o) = 32) and
-  ((((to_rep1(a__first) <= to_rep1(a__first)) and
-  (to_rep1(a__first) <= to_rep1(a__last))) and (o1 = to_rep1(a__first))) and
-  (o2 = (a[o1 <- o])))) and ((result = a) and (a1 = o2))) ->
-  ((((to_rep1(a__first) <= to_rep1(a__last)) and
-  (o3 = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and (o3 = 0))) ->
-  in_range3(o3))))))
+goal WP_parameter_def : in_range3(o3)

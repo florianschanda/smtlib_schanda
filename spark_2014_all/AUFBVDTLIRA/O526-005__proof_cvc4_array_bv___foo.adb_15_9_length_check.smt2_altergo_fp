@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1343,20 +1343,33 @@ axiom def_axiom :
   (forall temp___165:t1. (((temp___160(temp___162, temp___163,
   temp___164)).elts1[temp___165]) = of_rep1(temp___162))))))
 
+logic temp___167 : (t1,byte_t) farray
+
+logic temp___1671 : t3
+
+logic temp___168 : (t1,byte_t) farray
+
+logic temp___1681 : t2
+
+axiom H : dynamic_property(of_int1(0), of_int1(18446744073709551615),
+  to_rep(x__first), to_rep(x__last))
+
+axiom H1 : (to_rep(first2((temp___160(of_int(0), to_rep(x__first),
+  to_rep(x__last))).rt1)) = to_rep(x__first))
+
+axiom H2 : (to_rep(last2((temp___160(of_int(0), to_rep(x__first),
+  to_rep(x__last))).rt1)) = to_rep(x__last))
+
+axiom H3 : ({ elts1 = temp___167; rt1 = temp___1671 } = temp___160(of_int(0),
+  to_rep(x__first), to_rep(x__last)))
+
+axiom H4 : (temp___167 = temp___168)
+
+axiom H5 : (mk(to_rep(first2(temp___1671)),
+  to_rep(last2(temp___1671))) = temp___1681)
+
  (* File "foo.adb", line 11, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___167:(t1,byte_t) farray. forall temp___1671:t3.
-  forall temp___168:(t1,byte_t) farray. forall temp___1681:t2.
-  (dynamic_property(of_int1(0), of_int1(18446744073709551615),
-  to_rep(x__first), to_rep(x__last)) ->
-  ((((to_rep(first2((temp___160(of_int(0), to_rep(x__first),
-  to_rep(x__last))).rt1)) = to_rep(x__first)) and
-  ((to_rep(last2((temp___160(of_int(0), to_rep(x__first),
-  to_rep(x__last))).rt1)) = to_rep(x__last)) and ({ elts1 = temp___167; rt1 =
-  temp___1671 } = temp___160(of_int(0), to_rep(x__first),
-  to_rep(x__last))))) and ((temp___167 = temp___168) and
-  (mk(to_rep(first2(temp___1671)),
-  to_rep(last2(temp___1671))) = temp___1681))) ->
   (((tqtint1(to_rep(first(temp___1681))) <= tqtint1(to_rep(last(temp___1681)))) ->
   (((tqtint1(to_rep(x__first)) <= tqtint1(to_rep(x__last))) ->
   (((tqtint1(to_rep(last(temp___1681))) - tqtint1(to_rep(first(temp___1681)))) + 1) = ((tqtint1(to_rep(x__last)) - tqtint1(to_rep(x__first))) + 1))) and
@@ -1364,4 +1377,4 @@ goal WP_parameter_def :
   (((tqtint1(to_rep(last(temp___1681))) - tqtint1(to_rep(first(temp___1681)))) + 1) = 0)))) and
   ((not (tqtint1(to_rep(first(temp___1681))) <= tqtint1(to_rep(last(temp___1681))))) ->
   ((tqtint1(to_rep(x__first)) <= tqtint1(to_rep(x__last))) ->
-  (0 = ((tqtint1(to_rep(x__last)) - tqtint1(to_rep(x__first))) + 1))))))))
+  (0 = ((tqtint1(to_rep(x__last)) - tqtint1(to_rep(x__first))) + 1)))))

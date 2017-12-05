@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -510,75 +510,338 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 axiom empty_line__def_axiom :
   (empty_line = tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0))
 
- (* File "tetris_integrity.adb", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray. forall num_deleted:int.
-  forall to_line:int. forall has_complete_lines:bool. forall del_line:int.
-  forall from_line:int. forall temp___768:(int,(int,cell) farray) farray.
-  forall temp___767:int. forall temp___766:bool. forall o:int.
-  forall cur_board1:(int,(int,cell) farray) farray. forall result:int.
-  forall to_line1:int. forall result1:bool. forall has_complete_lines1:bool.
-  forall result2:int. forall del_line1:int.
-  forall cur_board2:(int,(int,cell) farray) farray. forall to_line2:int.
-  forall has_complete_lines2:bool. forall del_line2:int. forall result3:bool.
-  forall result4:(int,(int,cell) farray) farray.
-  forall cur_board3:(int,(int,cell) farray) farray. forall result5:bool.
-  forall has_complete_lines3:bool. forall result6:int. forall to_line3:int.
-  forall cur_board4:(int,(int,cell) farray) farray. forall to_line4:int.
-  forall has_complete_lines4:bool. forall del_line3:int.
-  forall cur_board5:(int,(int,cell) farray) farray. forall to_line5:int.
-  forall has_complete_lines5:bool. forall del_line4:int.
-  forall cur_board6:(int,(int,cell) farray) farray. forall to_line6:int.
-  forall has_complete_lines6:bool. forall del_line5:int.
-  forall cur_board7:(int,(int,cell) farray) farray. forall to_line7:int.
-  forall has_complete_lines7:bool. forall del_line6:int. forall result7:int.
-  forall num_deleted1:int. forall result8:int. forall from_line1:int.
-  forall num_deleted2:int. forall to_line8:int. forall from_line2:int.
-  (((0 <= 2147483647) -> in_range2(num_deleted)) ->
-  ((tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0) = empty_line) ->
-  (((result = to_line) and (to_line1 = 50)) -> (in_range3(to_line1) ->
-  (((result1 = has_complete_lines) and (has_complete_lines1 = of_int(0))) ->
-  ((((result2 = del_line) and (del_line1 = 1)) and ((((1 <= del_line1) and
-  (del_line1 <= 50)) and ((((temp___768 = cur_board) and
-  ((temp___767 = to_line1) and ((temp___766 = has_complete_lines1) and
-  (((((1 <= 50) -> in_range3(to_line2)) and
+logic cur_board : (int,(int,cell) farray) farray
+
+logic num_deleted : int
+
+logic to_line : int
+
+logic has_complete_lines : bool
+
+logic del_line : int
+
+logic from_line : int
+
+logic temp___768 : (int,(int,cell) farray) farray
+
+logic temp___767 : int
+
+logic temp___766 : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic result : int
+
+logic to_line1 : int
+
+logic result1 : bool
+
+logic has_complete_lines1 : bool
+
+logic result2 : int
+
+logic del_line1 : int
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic to_line2 : int
+
+logic has_complete_lines2 : bool
+
+logic del_line2 : int
+
+logic result3 : bool
+
+logic result4 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result5 : bool
+
+logic has_complete_lines3 : bool
+
+logic result6 : int
+
+logic to_line3 : int
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic to_line4 : int
+
+logic has_complete_lines4 : bool
+
+logic del_line3 : int
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic to_line5 : int
+
+logic has_complete_lines5 : bool
+
+logic del_line4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic to_line6 : int
+
+logic has_complete_lines6 : bool
+
+logic del_line5 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic to_line7 : int
+
+logic has_complete_lines7 : bool
+
+logic del_line6 : int
+
+logic result7 : int
+
+logic num_deleted1 : int
+
+logic result8 : int
+
+logic from_line1 : int
+
+logic cur_board8 : (int,(int,cell) farray) farray
+
+logic num_deleted2 : int
+
+logic to_line8 : int
+
+logic from_line2 : int
+
+logic result9 : bool
+
+logic result10 : (int,(int,cell) farray) farray
+
+logic cur_board9 : (int,(int,cell) farray) farray
+
+logic result11 : (int,(int,cell) farray) farray
+
+logic cur_board10 : (int,(int,cell) farray) farray
+
+logic result12 : int
+
+logic to_line9 : int
+
+logic result13 : int
+
+logic num_deleted3 : int
+
+logic cur_board11 : (int,(int,cell) farray) farray
+
+logic num_deleted4 : int
+
+logic to_line10 : int
+
+logic cur_board12 : (int,(int,cell) farray) farray
+
+logic num_deleted5 : int
+
+logic to_line11 : int
+
+logic result14 : int
+
+logic from_line3 : int
+
+logic cur_board13 : (int,(int,cell) farray) farray
+
+logic num_deleted6 : int
+
+logic to_line12 : int
+
+logic from_line4 : int
+
+logic cur_board14 : (int,(int,cell) farray) farray
+
+logic num_deleted7 : int
+
+logic to_line13 : int
+
+logic from_line5 : int
+
+axiom H : ((0 <= 2147483647) -> in_range2(num_deleted))
+
+axiom H1 :
+  (tetris_integrity__delete_complete_lines__empty_line__aggregate_def(0) = empty_line)
+
+axiom H2 : (result = to_line)
+
+axiom H3 : (to_line1 = 50)
+
+axiom H4 : in_range3(to_line1)
+
+axiom H5 : (result1 = has_complete_lines)
+
+axiom H6 : (has_complete_lines1 = of_int(0))
+
+axiom H7 : (result2 = del_line)
+
+axiom H8 : (del_line1 = 1)
+
+axiom H9 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (temp___768 = cur_board))
+
+axiom H10 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (temp___767 = to_line1))
+
+axiom H11 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (temp___766 = has_complete_lines1))
+
+axiom H12 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((((1 <= 50) ->
+  in_range3(to_line2)) and
   (forall temp___769:int. (((1 <= temp___769) and (temp___769 <= 50)) ->
   ((del_line2 <= temp___769) ->
   ((cur_board2[temp___769]) = (temp___768[temp___769])))))) and
-  ((1 <= del_line2) and (del_line2 <= 50))) and
-  ((((result3 = is_complete_line((cur_board2[del_line2]))) and
+  ((1 <= del_line2) and (del_line2 <= 50))))
+
+axiom H13 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  ((result3 = is_complete_line((cur_board2[del_line2]))) and
   ((result3 = true) <->
   (forall x:int. (((1 <= x) and (x <= 10)) ->
-  (not (to_rep(((cur_board2[del_line2])[x])) = 0)))))) and
-  (((result3 = true) and (((result4 = cur_board2) and
-  (cur_board3 = (cur_board2[del_line2 <- empty_line]))) and
-  (((result5 = has_complete_lines2) and
-  (has_complete_lines3 = of_int(1))) and ((result6 = to_line2) and
-  (to_line3 = del_line2))))) or ((not (result3 = true)) and
-  ((has_complete_lines3 = has_complete_lines2) and ((to_line3 = to_line2) and
-  (cur_board3 = cur_board2)))))) and (del_line2 = 50)))))) and
-  (((del_line2 = del_line3) and
-  ((has_complete_lines3 = has_complete_lines4) and ((to_line3 = to_line4) and
-  (cur_board3 = cur_board4)))) and ((del_line4 = del_line2) and
-  ((has_complete_lines5 = has_complete_lines3) and ((to_line5 = to_line3) and
-  (cur_board5 = cur_board3)))))) and (((del_line3 = del_line5) and
-  ((has_complete_lines4 = has_complete_lines6) and ((to_line4 = to_line6) and
-  (cur_board4 = cur_board6)))) and ((del_line6 = del_line4) and
-  ((has_complete_lines7 = has_complete_lines5) and ((to_line7 = to_line5) and
-  (cur_board7 = cur_board5))))))) or ((not ((1 <= del_line1) and
-  (del_line1 <= 50))) and (((del_line1 = del_line5) and
-  ((has_complete_lines1 = has_complete_lines6) and ((to_line1 = to_line6) and
-  (cur_board = cur_board6)))) and ((del_line6 = del_line1) and
-  ((has_complete_lines7 = has_complete_lines1) and ((to_line7 = to_line1) and
-  (cur_board7 = cur_board1)))))))) -> (((result7 = num_deleted) and
-  (num_deleted1 = 0)) -> ((has_complete_lines6 = true) ->
-  ((((to_line6 - 1) = r3b) and in_range1(r3b)) -> (((result8 = from_line) and
-  (from_line1 = r3b)) -> (((1 <= from_line1) and (from_line1 <= r3b)) ->
-  (((from_line2 <  to_line8) and
-  ((num_deleted2 + to_line8) = (num_deleted1 + to_line6))) ->
-  ((((((1 <= r3b) -> dynamic_property(1, r3b, from_line2)) and ((1 <= 50) ->
-  in_range3(to_line8))) and ((0 <= 2147483647) ->
-  in_range2(num_deleted2))) and ((1 <= from_line2) and
-  (from_line2 <= r3b))) -> (((o = (num_deleted1 + to_line6)) and
-  in_range1((num_deleted1 + to_line6))) ->
-  in_range1((num_deleted2 + to_line8)))))))))))))))))
+  (not (to_rep(((cur_board2[del_line2])[x])) = 0)))))))
+
+axiom H14 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (result4 = cur_board2)))
+
+axiom H15 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (cur_board3 = (cur_board2[del_line2 <- empty_line]))))
+
+axiom H16 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (result5 = has_complete_lines2)))
+
+axiom H17 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (has_complete_lines3 = of_int(1))))
+
+axiom H18 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (result6 = to_line2)))
+
+axiom H19 : (((1 <= del_line1) and (del_line1 <= 50)) -> ((result3 = true) ->
+  (to_line3 = del_line2)))
+
+axiom H20 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  ((not (result3 = true)) -> (has_complete_lines3 = has_complete_lines2)))
+
+axiom H21 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  ((not (result3 = true)) -> (to_line3 = to_line2)))
+
+axiom H22 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  ((not (result3 = true)) -> (cur_board3 = cur_board2)))
+
+axiom H23 : (((1 <= del_line1) and (del_line1 <= 50)) -> (del_line2 = 50))
+
+axiom H24 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (del_line2 = del_line3))
+
+axiom H25 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (has_complete_lines3 = has_complete_lines4))
+
+axiom H26 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (to_line3 = to_line4))
+
+axiom H27 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (cur_board3 = cur_board4))
+
+axiom H28 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (del_line4 = del_line2))
+
+axiom H29 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (has_complete_lines5 = has_complete_lines3))
+
+axiom H30 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (to_line5 = to_line3))
+
+axiom H31 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (cur_board5 = cur_board3))
+
+axiom H32 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (del_line5 = del_line3))
+
+axiom H33 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (has_complete_lines6 = has_complete_lines4))
+
+axiom H34 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (to_line6 = to_line4))
+
+axiom H35 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (cur_board6 = cur_board4))
+
+axiom H36 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (del_line6 = del_line4))
+
+axiom H37 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (has_complete_lines7 = has_complete_lines5))
+
+axiom H38 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (to_line7 = to_line5))
+
+axiom H39 : (((1 <= del_line1) and (del_line1 <= 50)) ->
+  (cur_board7 = cur_board5))
+
+axiom H40 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (del_line5 = del_line1))
+
+axiom H41 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (has_complete_lines6 = has_complete_lines1))
+
+axiom H42 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (to_line6 = to_line1))
+
+axiom H43 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (cur_board6 = cur_board))
+
+axiom H44 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (del_line6 = del_line1))
+
+axiom H45 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (has_complete_lines7 = has_complete_lines1))
+
+axiom H46 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (to_line7 = to_line1))
+
+axiom H47 : ((not ((1 <= del_line1) and (del_line1 <= 50))) ->
+  (cur_board7 = cur_board1))
+
+axiom H48 : (result7 = num_deleted)
+
+axiom H49 : (num_deleted1 = 0)
+
+axiom H50 : (has_complete_lines6 = true)
+
+axiom H51 : ((to_line6 - 1) = r3b)
+
+axiom H52 : in_range1(r3b)
+
+axiom H53 : (result8 = from_line)
+
+axiom H54 : (from_line1 = r3b)
+
+axiom H55 : (1 <= from_line1)
+
+axiom H56 : (from_line1 <= r3b)
+
+axiom H57 : (from_line2 <  to_line8)
+
+axiom H58 : ((num_deleted2 + to_line8) = (num_deleted1 + to_line6))
+
+axiom H59 : (((((1 <= r3b) -> dynamic_property(1, r3b, from_line2)) and
+  ((1 <= 50) -> in_range3(to_line8))) and ((0 <= 2147483647) ->
+  in_range2(num_deleted2))) and ((1 <= from_line2) and (from_line2 <= r3b)))
+
+axiom H60 : ((o = (num_deleted1 + to_line6)) and
+  in_range1((num_deleted1 + to_line6)))
+
+ (* File "tetris_integrity.adb", line 37, characters 0-0 *)
+goal WP_parameter_def : in_range1((num_deleted2 + to_line8))

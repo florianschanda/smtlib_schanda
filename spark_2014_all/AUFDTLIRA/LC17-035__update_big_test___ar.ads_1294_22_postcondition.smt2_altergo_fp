@@ -383,19 +383,68 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,us_rep) farray
+
+logic o : et1
+
+logic o1 : et1
+
+logic o2 : et2
+
+logic o3 : et1
+
+logic o4 : et2
+
+logic o5 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = r;
+  rec__ar__rec1t__g1 = r1 } }]))
+
+axiom H4 : (to_rep(o) = e)
+
+axiom H5 : (o = o1)
+
+axiom H6 : ((((a1[i])).us_split_fields1).rec__ar__rec1t__g1 = o2)
+
+axiom H7 : (o3 = o1)
+
+axiom H8 : (o4 = o2)
+
+axiom H9 : (o5 = (a1[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = o3;
+  rec__ar__rec1t__g1 = o4 } }]))
+
+axiom H10 : (result1 = a1)
+
+axiom H11 : (a2 = o5)
+
+axiom H12 : (a2 = a3)
+
+axiom H13 : (a4 = a2)
+
+logic n : int
+
+axiom H14 : (1 <= n)
+
+axiom H15 : (n <= 10)
+
  (* File "ar.ads", line 1289, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:et1. forall o1:et1. forall o2:et2.
-  forall o3:et1. forall o4:et2. forall o5:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall result1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall a3:(int,us_rep) farray. forall a4:(int,us_rep) farray.
-  ((in_range1(i) and (in_range2(e) and ((((result = a) and (a1 = (a[i <- {
-  us_split_fields1 = { rec__ar__rec1t__f1 = r; rec__ar__rec1t__g1 = r1 }
-  }]))) and (((((to_rep(o) = e) and ((o = o1) and
-  ((((a1[i])).us_split_fields1).rec__ar__rec1t__g1 = o2))) and ((o3 = o1) and
-  (o4 = o2))) and (o5 = (a1[i <- { us_split_fields1 = { rec__ar__rec1t__f1 =
-  o3; rec__ar__rec1t__g1 = o4 } }]))) and ((result1 = a1) and
-  (a2 = o5)))) and ((a2 = a3) and (a4 = a2))))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) ->
-  in_range2(to_rep((((a3[n])).us_split_fields1).rec__ar__rec1t__f1))))))
+  in_range2(to_rep((((a3[n])).us_split_fields1).rec__ar__rec1t__f1))

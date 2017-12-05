@@ -67,6 +67,7 @@
 (declare-const o3 Int)
 (declare-const o4 Int)
 (declare-const o5 Int)
+(declare-const o6 Int)
 (declare-const result Int)
 (declare-const arithmetic__test_rem_b__result1 Int)
 (declare-const arithmetic__test_rem_b__result2 Int)

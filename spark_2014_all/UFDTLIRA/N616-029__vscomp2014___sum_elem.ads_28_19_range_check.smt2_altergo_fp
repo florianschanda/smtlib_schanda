@@ -329,5 +329,7 @@ axiom is_empty__post_axiom :
   us_split_fields1 = { rec__sum_elem__partitions__vector = container1 }
   }) = 0)))
 
+logic us : int
+
  (* File "sum_elem.ads", line 28, characters 0-0 *)
 goal WP_parameter_def : in_range(10)

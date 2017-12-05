@@ -67,6 +67,8 @@
 (declare-const us Int)
 (declare-const temp___178 Int)
 (declare-const o Int)
+(declare-const us1 Int)
+(declare-const temp___181 Int)
 (declare-const result Int)
 (declare-const s1 Int)
 (assert (in_range1 c))

@@ -36,6 +36,7 @@
 (declare-const x Int)
 (declare-const y Int)
 (declare-const z Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const y1 Int)
 (declare-const result1 Int)

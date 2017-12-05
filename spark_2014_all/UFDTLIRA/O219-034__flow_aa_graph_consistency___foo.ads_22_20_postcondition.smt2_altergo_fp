@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -285,58 +285,171 @@ function t__ref___projection(a1: t__ref) : us_rep = (a1).t__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "foo.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall r__split_fields:integer.
-  forall r__split_fields1:integer. forall r__split_fields2:integer.
-  forall r__split_fields3:integer. forall r__split_fields4:integer.
-  forall foo__p__y__fields:integer. forall foo__p__y__fields1:integer.
-  forall foo__p__y__fields2:integer. forall foo__p__y__fields3:integer.
-  forall foo__p__y__fields4:integer. forall foo__p__x__fields:integer.
-  forall foo__p__x__fields1:integer. forall foo__p__x__fields2:integer.
-  forall foo__p__x__fields3:integer. forall foo__p__x__fields4:integer.
-  forall result:integer. forall result1:integer. forall result2:integer.
-  forall result3:integer. forall result4:integer.
-  forall r__split_fields5:integer. forall r__split_fields6:integer.
-  forall r__split_fields7:integer. forall r__split_fields8:integer.
-  forall r__split_fields9:integer. forall result5:integer.
-  forall result6:integer. forall result7:integer. forall result8:integer.
-  forall result9:integer. forall r__split_fields10:integer.
-  forall r__split_fields11:integer. forall r__split_fields12:integer.
-  forall r__split_fields13:integer. forall r__split_fields14:integer.
-  forall result10:int. forall c1:int. forall c2:int.
-  forall r__split_fields15:integer. forall r__split_fields16:integer.
-  forall r__split_fields17:integer. forall r__split_fields18:integer.
-  forall r__split_fields19:integer. forall c3:int.
-  forall r__split_fields20:integer. forall r__split_fields21:integer.
-  forall r__split_fields22:integer. forall r__split_fields23:integer.
-  forall r__split_fields24:integer. ((in_range(a) and (in_range(b) and
-  ((((-2147483648) <= 2147483647) -> in_range(c)) and
-  ((((((result = r__split_fields) and ((result1 = r__split_fields1) and
-  ((result2 = r__split_fields2) and ((result3 = r__split_fields3) and
-  (result4 = r__split_fields4))))) and
-  ((r__split_fields5 = foo__p__x__fields) and
+logic c : int
+
+logic r__split_fields : integer
+
+logic r__split_fields1 : integer
+
+logic r__split_fields2 : integer
+
+logic r__split_fields3 : integer
+
+logic r__split_fields4 : integer
+
+logic foo__p__y__fields : integer
+
+logic foo__p__y__fields1 : integer
+
+logic foo__p__y__fields2 : integer
+
+logic foo__p__y__fields3 : integer
+
+logic foo__p__y__fields4 : integer
+
+logic foo__p__x__fields : integer
+
+logic foo__p__x__fields1 : integer
+
+logic foo__p__x__fields2 : integer
+
+logic foo__p__x__fields3 : integer
+
+logic foo__p__x__fields4 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic result4 : integer
+
+logic r__split_fields5 : integer
+
+logic r__split_fields6 : integer
+
+logic r__split_fields7 : integer
+
+logic r__split_fields8 : integer
+
+logic r__split_fields9 : integer
+
+logic result5 : integer
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic result8 : integer
+
+logic result9 : integer
+
+logic r__split_fields10 : integer
+
+logic r__split_fields11 : integer
+
+logic r__split_fields12 : integer
+
+logic r__split_fields13 : integer
+
+logic r__split_fields14 : integer
+
+logic result10 : int
+
+logic c1 : int
+
+logic c2 : int
+
+logic r__split_fields15 : integer
+
+logic r__split_fields16 : integer
+
+logic r__split_fields17 : integer
+
+logic r__split_fields18 : integer
+
+logic r__split_fields19 : integer
+
+logic c3 : int
+
+logic r__split_fields20 : integer
+
+logic r__split_fields21 : integer
+
+logic r__split_fields22 : integer
+
+logic r__split_fields23 : integer
+
+logic r__split_fields24 : integer
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(c))
+
+axiom H3 : (result = r__split_fields)
+
+axiom H4 : (result1 = r__split_fields1)
+
+axiom H5 : (result2 = r__split_fields2)
+
+axiom H6 : (result3 = r__split_fields3)
+
+axiom H7 : (result4 = r__split_fields4)
+
+axiom H8 : ((r__split_fields5 = foo__p__x__fields) and
   ((r__split_fields6 = foo__p__x__fields1) and
   ((r__split_fields7 = foo__p__x__fields2) and
   ((r__split_fields8 = foo__p__x__fields3) and
-  (r__split_fields9 = foo__p__x__fields4)))))) and
-  (((result5 = r__split_fields5) and ((result6 = r__split_fields6) and
-  ((result7 = r__split_fields7) and ((result8 = r__split_fields8) and
-  (result9 = r__split_fields9))))) and
-  ((r__split_fields10 = foo__p__y__fields) and
+  (r__split_fields9 = foo__p__x__fields4)))))
+
+axiom H9 : (result5 = r__split_fields5)
+
+axiom H10 : (result6 = r__split_fields6)
+
+axiom H11 : (result7 = r__split_fields7)
+
+axiom H12 : (result8 = r__split_fields8)
+
+axiom H13 : (result9 = r__split_fields9)
+
+axiom H14 : ((r__split_fields10 = foo__p__y__fields) and
   ((r__split_fields11 = foo__p__y__fields1) and
   ((r__split_fields12 = foo__p__y__fields2) and
   ((r__split_fields13 = foo__p__y__fields3) and
-  (r__split_fields14 = foo__p__y__fields4))))))) and ((result10 = c) and
-  (c1 = to_rep(r__split_fields10)))) and
-  ((((r__split_fields15 = r__split_fields10) and
-  ((r__split_fields16 = r__split_fields11) and
-  ((r__split_fields17 = r__split_fields12) and
-  ((r__split_fields18 = r__split_fields13) and
-  (r__split_fields19 = r__split_fields14))))) and (c1 = c2)) and
-  (((r__split_fields20 = r__split_fields10) and
-  ((r__split_fields21 = r__split_fields11) and
-  ((r__split_fields22 = r__split_fields12) and
-  ((r__split_fields23 = r__split_fields13) and
-  (r__split_fields24 = r__split_fields14))))) and (c3 = c1))))))) ->
-  (c2 = b)))
+  (r__split_fields14 = foo__p__y__fields4)))))
+
+axiom H15 : (result10 = c)
+
+axiom H16 : (c1 = to_rep(r__split_fields10))
+
+axiom H17 : (r__split_fields15 = r__split_fields10)
+
+axiom H18 : (r__split_fields16 = r__split_fields11)
+
+axiom H19 : (r__split_fields17 = r__split_fields12)
+
+axiom H20 : (r__split_fields18 = r__split_fields13)
+
+axiom H21 : (r__split_fields19 = r__split_fields14)
+
+axiom H22 : (c1 = c2)
+
+axiom H23 : (r__split_fields20 = r__split_fields10)
+
+axiom H24 : (r__split_fields21 = r__split_fields11)
+
+axiom H25 : (r__split_fields22 = r__split_fields12)
+
+axiom H26 : (r__split_fields23 = r__split_fields13)
+
+axiom H27 : (r__split_fields24 = r__split_fields14)
+
+axiom H28 : (c3 = c1)
+
+ (* File "foo.ads", line 10, characters 0-0 *)
+goal WP_parameter_def : (c2 = b)

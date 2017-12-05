@@ -46,6 +46,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const n Int)
+(declare-const o Int)
 (assert (in_range n))
 (assert (not (= a true)))
 (assert (not (in_range1 n)))

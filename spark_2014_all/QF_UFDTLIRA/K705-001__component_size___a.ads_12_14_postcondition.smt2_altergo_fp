@@ -77,15 +77,35 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+logic a__test__result : bool
+
+logic result : bool
+
+logic a__test__result1 : bool
+
+logic a__test__result2 : bool
+
+logic a__test__result3 : bool
+
+logic a__test__result4 : bool
+
+logic a__test__result5 : bool
+
+logic result1 : bool
+
+axiom H : (a__test__result1 = a__test__result2)
+
+axiom H1 : (a__test__result3 = a__test__result1)
+
+axiom H2 : (result = a__test__result)
+
+axiom H3 : (a__test__result1 = of_int(1))
+
+axiom H4 : (a__test__result4 = a__test__result2)
+
+axiom H5 : (a__test__result5 = a__test__result3)
+
+axiom H6 : (result1 = a__test__result4)
+
  (* File "a.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__test__result:bool. forall result:bool.
-  forall a__test__result1:bool. forall a__test__result2:bool.
-  forall a__test__result3:bool. forall a__test__result4:bool.
-  forall a__test__result5:bool.
-  (forall result1:bool. ((((((a__test__result1 = a__test__result2) and
-  (a__test__result3 = a__test__result1)) and ((result = a__test__result) and
-  (a__test__result1 = of_int(1)))) and
-  ((a__test__result4 = a__test__result2) and
-  (a__test__result5 = a__test__result3))) and
-  (result1 = a__test__result4)) -> (a__test__result4 = true))))
+goal WP_parameter_def : (a__test__result4 = true)

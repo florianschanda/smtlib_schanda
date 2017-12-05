@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -357,9 +357,23 @@ function tvec_10_subP1__ref___projection(a: tvec_10_subP1__ref) : tvec_10_subP1 
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : (int,myint) farray
+
+logic o : integer
+
+logic o1 : integer
+
+logic unconstr__p__x : (int,myint) farray
+
+logic result : (int,myint) farray
+
+logic a1 : (int,myint) farray
+
+axiom H : (to_rep(o1) = 10)
+
+axiom H1 : (to_rep(o) = 0)
+
  (* File "unconstr.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:integer. forall o1:integer. ((to_rep(o1) = 10) ->
-  ((to_rep(o) = 0) -> (((to_rep(o) <= to_rep(o1)) ->
+goal WP_parameter_def : (((to_rep(o) <= to_rep(o1)) ->
   (0 <  ((to_rep(o1) - to_rep(o)) + 1))) and
-  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0))))))
+  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0)))

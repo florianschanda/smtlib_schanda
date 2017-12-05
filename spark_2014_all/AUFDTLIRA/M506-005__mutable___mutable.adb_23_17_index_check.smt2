@@ -127,7 +127,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1 a))
 (define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1 a))
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
-(define-fun bool_eq2 ((a us_rep) (b us_rep)) Bool (ite (and (and (= (to_rep1 (rec__mutable__t__k (us_split_discrs1 a))) (to_rep1 (rec__mutable__t__k (us_split_discrs1 b)))) (= (to_rep (rec__mutable__t__som (us_split_fields1 a))) (to_rep (rec__mutable__t__som (us_split_fields1 b))))) (= (bool_eq1 (rec__mutable__t__arr (us_split_fields1 a)) (rec__mutable__t__arr (us_split_fields1 b))) true)) true false))
+(define-fun bool_eq2 ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep1 (rec__mutable__t__k (us_split_discrs1 a))) (to_rep1 (rec__mutable__t__k (us_split_discrs1 b)))) (and (= (to_rep (rec__mutable__t__som (us_split_fields1 a))) (to_rep (rec__mutable__t__som (us_split_fields1 b)))) (= (bool_eq1 (rec__mutable__t__arr (us_split_fields1 a)) (rec__mutable__t__arr (us_split_fields1 b))) true))) true false))
 (declare-const value__size1 Int)
 (declare-fun object__size1 (us_rep) Int)
 (declare-const value__alignment1 Int)

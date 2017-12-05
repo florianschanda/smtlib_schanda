@@ -84,6 +84,7 @@
 (declare-const p2 us_rep1)
 (declare-const p3 us_rep2)
 (declare-const glob us_private)
+(declare-const glob1 us_private)
 (assert (= (simple_priv_ok p1) true))
 (assert (= (wrong_priv_ok p2) true))
 (assert (= (priv_with_glob_ok p3 glob) true))

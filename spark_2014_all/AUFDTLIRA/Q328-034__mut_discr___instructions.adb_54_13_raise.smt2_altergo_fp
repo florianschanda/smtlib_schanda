@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -581,7 +581,21 @@ logic temp___String_Literal_180 : unit -> (int,character) farray
 
 axiom temp___String_Literal_180__def_axiom : true
 
+logic last2 : int
+
+logic tab : us_private
+
+logic o : integer
+
+logic result : bool
+
+axiom H : in_range5(i)
+
+axiom H1 : in_range4(last2)
+
+axiom H2 : (not (i = 0))
+
+axiom H3 : (not (i = 1))
+
  (* File "instructions.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last2:int. (in_range5(i) -> (in_range4(last2) -> ((not (i = 0)) ->
-  (i = 1)))))
+goal WP_parameter_def : false

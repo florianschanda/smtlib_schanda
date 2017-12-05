@@ -62,6 +62,7 @@
 (assert (forall ((i1 Int)) (! (= (= (is_odd i1) true) (= (mod2 i1 2) 1)) :pattern ((is_odd i1)))))
 (assert (forall ((i1 Int)) (! (= (= (is_even i1) true) (= (mod2 i1 2) 0)) :pattern ((is_even i1)))))
 (declare-const rec_post__is_even__result Bool)
+(declare-const o Int)
 (declare-const result Bool)
 (declare-const rec_post__is_even__result1 Bool)
 (declare-const rec_post__is_even__result2 Bool)

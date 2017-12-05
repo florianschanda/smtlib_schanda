@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -399,10 +399,19 @@ type my_array__ref = { my_array__content : us_t
 function my_array__ref___projection(a: my_array__ref) : us_t =
   (a).my_array__content
 
+logic i : int
+
+axiom H : in_range1(max)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : (dynamic_property1(1, max, to_rep1(content__first),
+  to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
+  (to_rep1(content__last) = max)))
+
+axiom H3 : (1 <= i)
+
+axiom H4 : (i <= to_rep1(content__last))
+
  (* File "use_stack.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. (in_range1(max) -> (in_range1(e) -> ((dynamic_property1(1,
-  max, to_rep1(content__first), to_rep1(content__last)) and
-  ((to_rep1(content__first) = 1) and (to_rep1(content__last) = max))) ->
-  (((1 <= i) and (i <= to_rep1(content__last))) ->
-  (to_rep1(content__first) <= i))))))
+goal WP_parameter_def : (to_rep1(content__first) <= i)

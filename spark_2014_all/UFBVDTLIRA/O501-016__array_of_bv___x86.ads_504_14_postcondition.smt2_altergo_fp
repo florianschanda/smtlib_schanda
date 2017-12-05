@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1033,12 +1033,33 @@ axiom dl__post_axiom :
   (forall x86__rdx:t1 [dl(x86__rdx)].
   (dl(x86__rdx) = toSmall(bw_and1(x86__rdx, of_int1(255)))))
 
+logic carryflag : bool
+
+logic rdx : t1
+
+logic rdx1 : t1
+
+logic rdx2 : t1
+
+logic rdx3 : t1
+
+logic rdx4 : t1
+
+axiom H : true
+
+axiom H1 : ((carryflag = true) -> (rdx1 = bw_or1(bw_and1(rdx,
+  of_int1(18446744073709551360)), toBig(of_int(1)))))
+
+axiom H2 : ((not (carryflag = true)) -> (rdx2 = bw_or1(bw_and1(rdx,
+  of_int1(18446744073709551360)), toBig(of_int(0)))))
+
+axiom H3 : ((not (carryflag = true)) -> (rdx1 = rdx2))
+
+axiom H4 : (rdx1 = rdx3)
+
+axiom H5 : (rdx4 = rdx1)
+
+axiom H6 : (carryflag = true)
+
  (* File "x86.ads", line 495, characters 0-0 *)
-goal WP_parameter_def :
-  (forall carryflag:bool. forall rdx:t1. forall rdx1:t1. forall rdx2:t1.
-  forall rdx3:t1. forall rdx4:t1. (((((carryflag = true) and
-  (rdx1 = bw_or1(bw_and1(rdx, of_int1(18446744073709551360)),
-  toBig(of_int(1))))) or ((not (carryflag = true)) and
-  ((rdx2 = bw_or1(bw_and1(rdx, of_int1(18446744073709551360)),
-  toBig(of_int(0)))) and (rdx1 = rdx2)))) and ((rdx1 = rdx3) and
-  (rdx4 = rdx1))) -> ((carryflag = true) -> (dl(rdx3) = of_int(1)))))
+goal WP_parameter_def : (dl(rdx3) = of_int(1))

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1136,68 +1136,133 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 logic fail__create__r__aggregate_def : bool, t, t -> us_t2
 
 axiom def_axiom :
-  (forall temp___632:bool.
-  (forall temp___633:t. forall temp___634:t. ((dynamic_property(of_int(0),
-  of_int(18446744073709551615), temp___633, temp___634) ->
-  ((to_rep(first4((fail__create__r__aggregate_def(temp___632, temp___633,
-  temp___634)).rt2)) = temp___633) and
-  (to_rep(last5((fail__create__r__aggregate_def(temp___632, temp___633,
-  temp___634)).rt2)) = temp___634))) and
-  (forall temp___635:t. (((fail__create__r__aggregate_def(temp___632,
-  temp___633, temp___634)).elts2[temp___635]) = temp___632)))))
+  (forall temp___626:bool.
+  (forall temp___627:t. forall temp___628:t. ((dynamic_property(of_int(0),
+  of_int(18446744073709551615), temp___627, temp___628) ->
+  ((to_rep(first4((fail__create__r__aggregate_def(temp___626, temp___627,
+  temp___628)).rt2)) = temp___627) and
+  (to_rep(last5((fail__create__r__aggregate_def(temp___626, temp___627,
+  temp___628)).rt2)) = temp___628))) and
+  (forall temp___629:t. (((fail__create__r__aggregate_def(temp___626,
+  temp___627, temp___628)).elts2[temp___629]) = temp___626)))))
+
+logic r : (t,bool) farray
+
+logic fail__create__result : (t,bool) farray
+
+logic fail__create__result1 : t1
+
+logic temp___631 : (t,bool) farray
+
+logic temp___6311 : t3
+
+logic fail__create__r__assume : (t,bool) farray
+
+logic fail__create__r__assume1 : t2
+
+logic result : (t,bool) farray
+
+logic r1 : (t,bool) farray
+
+logic result1 : (t,bool) farray
+
+logic result2 : t1
+
+logic fail__create__result2 : (t,bool) farray
+
+logic fail__create__result3 : t1
+
+logic fail__create__result4 : (t,bool) farray
+
+logic fail__create__result5 : t1
+
+logic fail__create__result6 : (t,bool) farray
+
+logic fail__create__result7 : t1
+
+logic r2 : (t,bool) farray
+
+logic fail__create__result8 : (t,bool) farray
+
+logic fail__create__result9 : t1
+
+logic r3 : (t,bool) farray
+
+logic fail__create__result10 : (t,bool) farray
+
+logic fail__create__result11 : t1
+
+logic result3 : (t,bool) farray
+
+logic result4 : t1
+
+axiom H : true
+
+axiom H1 : (to_rep(first4((fail__create__r__aggregate_def(of_int1(0),
+  of_int(0), last2)).rt2)) = of_int(0))
+
+axiom H2 : (to_rep(last5((fail__create__r__aggregate_def(of_int1(0),
+  of_int(0), last2)).rt2)) = last2)
+
+axiom H3 : ({ elts2 = temp___631; rt2 = temp___6311
+  } = fail__create__r__aggregate_def(of_int1(0), of_int(0), last2))
+
+axiom H4 :
+  (((tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311)))) ->
+  (((tqtint(of_int(0)) <= tqtint(last2)) ->
+  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = ((tqtint(last2) - tqtint(of_int(0))) + 1))) and
+  ((not (tqtint(of_int(0)) <= tqtint(last2))) ->
+  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311))))) ->
+  ((tqtint(of_int(0)) <= tqtint(last2)) ->
+  (0 = ((tqtint(last2) - tqtint(of_int(0))) + 1)))))
+
+axiom H5 : (temp___631 = fail__create__r__assume)
+
+axiom H6 : (mk1(to_rep(first4(temp___6311)),
+  to_rep(last5(temp___6311))) = fail__create__r__assume1)
+
+axiom H7 : (result = r)
+
+axiom H8 : (r1 = fail__create__r__assume)
+
+axiom H9 : (to_rep(r__first) = to_rep(first2(fail__create__r__assume1)))
+
+axiom H10 : (to_rep(r__last) = to_rep(last3(fail__create__r__assume1)))
+
+axiom H11 : (dynamic_property2(of_int(0), last2, to_rep(r__first),
+  to_rep(r__last)) and ((to_rep(r__first) = of_int(0)) and
+  (to_rep(r__last) = last2)))
+
+axiom H12 : (fail__create__result4 = fail__create__result2)
+
+axiom H13 : (fail__create__result5 = fail__create__result3)
+
+axiom H14 : ((fail__create__result6 = fail__create__result2) and
+  (fail__create__result7 = fail__create__result3))
+
+axiom H15 : (result1 = fail__create__result)
+
+axiom H16 : (result2 = fail__create__result1)
+
+axiom H17 : (r1 = fail__create__result2)
+
+axiom H18 : (mk(to_rep(r__first), to_rep(r__last)) = fail__create__result3)
+
+axiom H19 : ((fail__create__result8 = fail__create__result4) and
+  (fail__create__result9 = fail__create__result5))
+
+axiom H20 : (r2 = r1)
+
+axiom H21 : (fail__create__result10 = fail__create__result6)
+
+axiom H22 : (fail__create__result11 = fail__create__result7)
+
+axiom H23 : (r3 = r1)
+
+axiom H24 : (result3 = fail__create__result8)
+
+axiom H25 : (result4 = fail__create__result9)
 
  (* File "mod_array.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(t,bool) farray. forall fail__create__result:(t,bool) farray.
-  forall fail__create__result1:t1. forall temp___637:(t,bool) farray.
-  forall temp___6371:t3. forall fail__create__r__assume:(t,bool) farray.
-  forall fail__create__r__assume1:t2. forall result:(t,bool) farray.
-  forall r1:(t,bool) farray. forall result1:(t,bool) farray.
-  forall result2:t1. forall fail__create__result2:(t,bool) farray.
-  forall fail__create__result3:t1.
-  forall fail__create__result4:(t,bool) farray.
-  forall fail__create__result5:t1.
-  forall fail__create__result6:(t,bool) farray.
-  forall fail__create__result7:t1. forall r2:(t,bool) farray.
-  forall fail__create__result8:(t,bool) farray.
-  forall fail__create__result9:t1. forall r3:(t,bool) farray.
-  forall fail__create__result10:(t,bool) farray.
-  forall fail__create__result11:t1.
-  (forall result3:(t,bool) farray. forall result4:t1.
-  ((((((((to_rep(first4((fail__create__r__aggregate_def(of_int1(0),
-  of_int(0), last2)).rt2)) = of_int(0)) and
-  ((to_rep(last5((fail__create__r__aggregate_def(of_int1(0), of_int(0),
-  last2)).rt2)) = last2) and ({ elts2 = temp___637; rt2 = temp___6371
-  } = fail__create__r__aggregate_def(of_int1(0), of_int(0), last2)))) and
-  ((((tqtint(to_rep(first4(temp___6371))) <= tqtint(to_rep(last5(temp___6371)))) and
-  (((tqtint(of_int(0)) <= tqtint(last2)) and
-  (((tqtint(to_rep(last5(temp___6371))) - tqtint(to_rep(first4(temp___6371)))) + 1) = ((tqtint(last2) - tqtint(of_int(0))) + 1))) or
-  ((not (tqtint(of_int(0)) <= tqtint(last2))) and
-  (((tqtint(to_rep(last5(temp___6371))) - tqtint(to_rep(first4(temp___6371)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep(first4(temp___6371))) <= tqtint(to_rep(last5(temp___6371))))) and
-  (((tqtint(of_int(0)) <= tqtint(last2)) and
-  (0 = ((tqtint(last2) - tqtint(of_int(0))) + 1))) or
-  (not (tqtint(of_int(0)) <= tqtint(last2)))))) and
-  ((temp___637 = fail__create__r__assume) and
-  (mk1(to_rep(first4(temp___6371)),
-  to_rep(last5(temp___6371))) = fail__create__r__assume1)))) and
-  (((result = r) and (r1 = fail__create__r__assume)) and
-  ((to_rep(r__first) = to_rep(first2(fail__create__r__assume1))) and
-  (to_rep(r__last) = to_rep(last3(fail__create__r__assume1)))))) and
-  ((dynamic_property2(of_int(0), last2, to_rep(r__first),
-  to_rep(r__last)) and ((to_rep(r__first) = of_int(0)) and
-  (to_rep(r__last) = last2))) and
-  ((((fail__create__result4 = fail__create__result2) and
-  (fail__create__result5 = fail__create__result3)) and
-  ((fail__create__result6 = fail__create__result2) and
-  (fail__create__result7 = fail__create__result3))) and
-  (((result1 = fail__create__result) and
-  (result2 = fail__create__result1)) and ((r1 = fail__create__result2) and
-  (mk(to_rep(r__first), to_rep(r__last)) = fail__create__result3)))))) and
-  ((((fail__create__result8 = fail__create__result4) and
-  (fail__create__result9 = fail__create__result5)) and (r2 = r1)) and
-  (((fail__create__result10 = fail__create__result6) and
-  (fail__create__result11 = fail__create__result7)) and (r3 = r1)))) and
-  ((result3 = fail__create__result8) and
-  (result4 = fail__create__result9))) ->
-  (to_rep(last(fail__create__result9)) = last2))))
+goal WP_parameter_def : (to_rep(last(fail__create__result9)) = last2)

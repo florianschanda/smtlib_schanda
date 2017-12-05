@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -232,15 +232,15 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-  (to_rep1(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep1(((b).us_split_fields1).rec__storage_place_attributes__r2__d3))) and
-  (storage_place_attributes__r2__d2__pred(a) ->
-  (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-  (to_rep1(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep1(((b).us_split_fields1).rec__storage_place_attributes__r2__d3))) and
+  ((((to_rep(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+  ((to_rep1(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep1(((b).us_split_fields1).rec__storage_place_attributes__r2__d3)) and
   (storage_place_attributes__r2__d2__pred(a) ->
   (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2)))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+  ((to_rep1(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep1(((b).us_split_fields1).rec__storage_place_attributes__r2__d3)) and
+  (storage_place_attributes__r2__d2__pred(a) ->
+  (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -635,41 +635,85 @@ logic o2__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "storage_place_attributes.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r2a_arr:(int,us_rep) farray. forall o2a__split_fields:integer.
-  forall o2a__split_fields1:bool. forall o2aa__split_fields:integer.
-  forall o2aa__split_fields1:bool. forall o2b__split_fields:integer.
-  forall o2b__split_fields1:bool. forall o2__split_fields:integer.
-  forall o2__split_fields1:bool. forall o2__split_discrs:my_integer.
-  forall us:int. forall us1:int. forall us2:int. (((us = 5) and
-  in_range1(5)) -> (((us1 = 5) and in_range1(5)) -> (((us2 = 1) and
-  in_range1(1)) ->
-  ((forall temp___239:int. (((1 <= temp___239) and (temp___239 <= 3)) ->
-   ((((r2a_arr[temp___239])).attr__constrained = true) and
-   (((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) and
-   (to_rep1((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d3) = 0)) and
-   ((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) ->
-   ((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d2 = of_int(0))))))) ->
-  ((forall temp___235:int. (((1 <= temp___235) and (temp___235 <= 3)) ->
-   (((5 = to_rep((((r2a_arr[temp___235])).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-   (((r2a_arr[temp___235])).attr__constrained = true)) and
-   (((r2a_arr[temp___235])).attr__constrained = true)))) ->
-  (((o2a__attr__constrained = true) and (((to_rep(o2a__split_discrs) = 5) and
-  (to_rep1(o2a__split_fields) = 0)) and ((to_rep(o2a__split_discrs) = 5) ->
-  (o2a__split_fields1 = of_int(0))))) ->
-  (((5 = to_rep(o2a__split_discrs)) and (o2a__attr__constrained = true)) ->
-  (((o2aa__attr__constrained = true) and
+logic r2a_arr : (int,us_rep) farray
+
+logic o2a__split_fields : integer
+
+logic o2a__split_fields1 : bool
+
+logic o2aa__split_fields : integer
+
+logic o2aa__split_fields1 : bool
+
+logic o2b__split_fields : integer
+
+logic o2b__split_fields1 : bool
+
+logic o2__split_fields : integer
+
+logic o2__split_fields1 : bool
+
+logic o2__split_discrs : my_integer
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+axiom H : ((us = 5) and in_range1(5))
+
+axiom H1 : ((us1 = 5) and in_range1(5))
+
+axiom H2 : ((us2 = 1) and in_range1(1))
+
+axiom H3 :
+  (forall temp___239:int. (((1 <= temp___239) and (temp___239 <= 3)) ->
+  ((((r2a_arr[temp___239])).attr__constrained = true) and
+  (((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) and
+  (to_rep1((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d3) = 0)) and
+  ((to_rep((((r2a_arr[temp___239])).us_split_discrs1).rec__storage_place_attributes__r2__d1) = 5) ->
+  ((((r2a_arr[temp___239])).us_split_fields1).rec__storage_place_attributes__r2__d2 = of_int(0)))))))
+
+axiom H4 :
+  (forall temp___235:int. (((1 <= temp___235) and (temp___235 <= 3)) ->
+  (((5 = to_rep((((r2a_arr[temp___235])).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+  (((r2a_arr[temp___235])).attr__constrained = true)) and
+  (((r2a_arr[temp___235])).attr__constrained = true))))
+
+axiom H5 : ((o2a__attr__constrained = true) and
+  (((to_rep(o2a__split_discrs) = 5) and (to_rep1(o2a__split_fields) = 0)) and
+  ((to_rep(o2a__split_discrs) = 5) -> (o2a__split_fields1 = of_int(0)))))
+
+axiom H6 : ((5 = to_rep(o2a__split_discrs)) and
+  (o2a__attr__constrained = true))
+
+axiom H7 : ((o2aa__attr__constrained = true) and
   (((to_rep(o2aa__split_discrs) = 5) and
   (to_rep1(o2aa__split_fields) = 0)) and ((to_rep(o2aa__split_discrs) = 5) ->
-  (o2aa__split_fields1 = of_int(0))))) ->
-  (((5 = to_rep(o2aa__split_discrs)) and (o2aa__attr__constrained = true)) ->
-  (((o2b__attr__constrained = true) and (((to_rep(o2b__split_discrs) = 1) and
-  ((to_rep(o2b__split_discrs) = 5) -> (o2b__split_fields1 = of_int(0)))) and
-  (to_rep1(o2b__split_fields) = 0))) -> (((1 = to_rep(o2b__split_discrs)) and
-  (o2b__attr__constrained = true)) ->
-  ((storage_place_attributes__r2__d3__first__bit1 = storage_place_attributes__r2__d3__first__bit2) ->
-  (((o2__attr__constrained = false) and (((to_rep(o2__split_discrs) = 1) and
-  (to_rep1(o2__split_fields) = 0)) and ((to_rep(o2__split_discrs) = 5) ->
-  (o2__split_fields1 = of_int(0))))) ->
-  (storage_place_attributes__r2__d3__first__bit = storage_place_attributes__r2__d3__first__bit1)))))))))))))))
+  (o2aa__split_fields1 = of_int(0)))))
+
+axiom H8 : ((5 = to_rep(o2aa__split_discrs)) and
+  (o2aa__attr__constrained = true))
+
+axiom H9 : ((o2b__attr__constrained = true) and
+  (((to_rep(o2b__split_discrs) = 1) and ((to_rep(o2b__split_discrs) = 5) ->
+  (o2b__split_fields1 = of_int(0)))) and (to_rep1(o2b__split_fields) = 0)))
+
+axiom H10 : ((1 = to_rep(o2b__split_discrs)) and
+  (o2b__attr__constrained = true))
+
+axiom H11 :
+  (storage_place_attributes__r2__d3__first__bit1 = storage_place_attributes__r2__d3__first__bit2)
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : ((o2__attr__constrained = false) and
+  (((to_rep(o2__split_discrs) = 1) and (to_rep1(o2__split_fields) = 0)) and
+  ((to_rep(o2__split_discrs) = 5) -> (o2__split_fields1 = of_int(0)))))
+
+ (* File "storage_place_attributes.adb", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (storage_place_attributes__r2__d3__first__bit = storage_place_attributes__r2__d3__first__bit1)

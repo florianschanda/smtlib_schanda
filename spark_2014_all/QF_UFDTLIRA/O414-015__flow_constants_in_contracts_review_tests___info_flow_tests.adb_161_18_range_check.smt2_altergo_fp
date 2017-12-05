@@ -151,7 +151,17 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom c1__def_axiom : (c1 = a)
 
+logic x : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(c1)
+
+axiom H2 : (a = c1)
+
+axiom H3 : ((0 <= 2147483647) -> in_range1(x))
+
+axiom H4 : (c1 <= c2)
+
  (* File "info_flow_tests.adb", line 151, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. (in_range1(a) -> (in_range1(c1) -> ((a = c1) ->
-  (((0 <= 2147483647) -> in_range1(x)) -> ((c1 <= c2) -> (0 <= c1)))))))
+goal WP_parameter_def : (0 <= c1)

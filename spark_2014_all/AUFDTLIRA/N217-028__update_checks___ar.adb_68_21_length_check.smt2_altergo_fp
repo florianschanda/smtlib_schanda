@@ -276,7 +276,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type tnatbyteB
 
-predicate in_range3(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range3(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq5 : int, int -> bool
 
@@ -504,20 +504,43 @@ axiom def_axiom :
   (forall temp___243:int. (((temp___238(temp___240, temp___241,
   temp___242)).elts[temp___243]) = of_rep(temp___240)))))
 
+logic us : int
+
+logic o : int
+
+logic temp___244 : (int,et1) farray
+
+logic temp___2441 : t
+
+logic temp___245 : (int,et1) farray
+
+logic temp___2451 : t
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (i <  10)
+
+axiom H3 : (0 <  e)
+
+axiom H4 : ((o = (e - 1)) and in_range2((e - 1)))
+
+axiom H5 : ({ elts = temp___244; rt = temp___2441 } = temp___238(o, (i + 1),
+  (i + 1)))
+
+axiom H6 : (to_rep1(first(temp___2441)) = (i + 1))
+
+axiom H7 : (to_rep1(last(temp___2441)) = (i + 1))
+
+axiom H8 : ((temp___245 = temp___244) and (temp___2451 = temp___2441))
+
  (* File "ar.adb", line 52, characters 0-0 *)
 goal WP_parameter_def :
-  (forall o:int. forall temp___244:(int,et1) farray. forall temp___2441:t.
-  forall temp___245:(int,et1) farray. forall temp___2451:t. (in_range1(i) ->
-  (in_range2(e) -> (((i <  10) and (0 <  e)) -> (((((o = (e - 1)) and
-  in_range2((e - 1))) and ({ elts = temp___244; rt = temp___2441
-  } = temp___238(o, (i + 1), (i + 1)))) and
-  ((to_rep1(first(temp___2441)) = (i + 1)) and
-  ((to_rep1(last(temp___2441)) = (i + 1)) and ((temp___245 = temp___244) and
-  (temp___2451 = temp___2441))))) ->
   (((to_rep1(first(temp___2451)) <= to_rep1(last(temp___2451))) ->
   (((1 <= 10) ->
   (((to_rep1(last(temp___2451)) - to_rep1(first(temp___2451))) + 1) = ((10 - 1) + 1))) and
   ((not (1 <= 10)) ->
   (((to_rep1(last(temp___2451)) - to_rep1(first(temp___2451))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___2451)) <= to_rep1(last(temp___2451)))) ->
-  ((1 <= 10) -> (0 = ((10 - 1) + 1))))))))))
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))

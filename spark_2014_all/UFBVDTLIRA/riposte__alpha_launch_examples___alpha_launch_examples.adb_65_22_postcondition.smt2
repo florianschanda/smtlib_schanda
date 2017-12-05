@@ -76,6 +76,8 @@
 (declare-const b2 (_ BitVec 64))
 (declare-const a4 (_ BitVec 64))
 (declare-const b3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result a))
 (assert (= a1 (bvxor a b)))
 (assert (= result1 b))

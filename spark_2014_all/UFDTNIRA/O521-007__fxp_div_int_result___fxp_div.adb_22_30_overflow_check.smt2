@@ -97,6 +97,8 @@
 (declare-const right Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant1 ((temp___expr_171 Int) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= (- 9223372036854775808) 9223372036854775807)) (in_range3 temp___expr_171)))
+(declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range right))
 (assert (< 0 right))
 (assert (< 0 (to_fixed left)))

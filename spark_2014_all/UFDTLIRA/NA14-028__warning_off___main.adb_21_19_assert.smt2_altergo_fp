@@ -115,9 +115,23 @@ axiom get_data__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic value : int
+
+logic result : int
+
+logic value1 : int
+
+logic state : us_private
+
+logic value2 : int
+
+axiom H : (result = value)
+
+axiom H1 : (value1 = 0)
+
+axiom H2 : in_range(value1)
+
+axiom H3 : (value2 = value1)
+
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:int. forall result:int. forall value1:int.
-  forall state:us_private. forall value2:int. (((result = value) and
-  (value1 = 0)) -> (in_range(value1) -> ((value2 = value1) ->
-  (get_data(state) = value2)))))
+goal WP_parameter_def : (get_data(state) = value2)

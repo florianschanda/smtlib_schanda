@@ -44,6 +44,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const s Int)
 (declare-const v Int)
+(declare-const o Int)
 (declare-const v1 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 s)))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range v)))

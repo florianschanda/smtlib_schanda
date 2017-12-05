@@ -84,6 +84,7 @@
 (declare-const z Int)
 (declare-const tmp Int)
 (declare-const o us_rep1)
+(declare-const o1 Int)
 (assert (in_range y))
 (assert (in_range z))
 (assert (=> (<= 1 10) (in_range1 tmp)))

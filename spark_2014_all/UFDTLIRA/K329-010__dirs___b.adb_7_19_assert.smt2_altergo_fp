@@ -112,8 +112,21 @@ axiom any____post_axiom : ((2 <  any__(void)) and in_range(any__(void)))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+axiom H : ((1 <= 10) -> in_range(x))
+
+axiom H1 : ((o = any__(void)) and (in_range(o) and (2 <  o)))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = o)
+
  (* File "b.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall o:int. forall result:int. forall x1:int.
-  (((1 <= 10) -> in_range(x)) -> ((((o = any__(void)) and (in_range(o) and
-  (2 <  o))) and ((result = x) and (x1 = o))) -> (2 <  x1))))
+goal WP_parameter_def : (2 <  x1)

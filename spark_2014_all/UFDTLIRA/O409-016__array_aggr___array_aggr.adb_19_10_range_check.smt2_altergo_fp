@@ -139,7 +139,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -434,9 +434,23 @@ axiom def_axiom1 :
 
 axiom first__def_axiom : (first = one)
 
- (* File "array_aggr.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:map. forall result:map. forall b1:map. (in_range1(one) ->
-  ((one <= 1) -> (((result = b) and
+logic b : map
+
+logic result : map
+
+logic b1 : map
+
+axiom H : in_range1(one)
+
+axiom H1 : (one <= 1)
+
+axiom H2 : (result = b)
+
+axiom H3 :
   (b1 = slide(array_aggr__bi_dim_aggr_ok__aggregate_ko2__b__aggregate_def(0),
-  0, 1, 0, 1))) -> ((1 <= 2) -> (first <= 1))))))
+  0, 1, 0, 1))
+
+axiom H4 : (1 <= 2)
+
+ (* File "array_aggr.adb", line 10, characters 0-0 *)
+goal WP_parameter_def : (first <= 1)

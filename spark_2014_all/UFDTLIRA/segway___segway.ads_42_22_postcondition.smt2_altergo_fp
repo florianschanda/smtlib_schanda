@@ -133,7 +133,7 @@ function valid_input__ref___projection(a: valid_input__ref) : valid_input =
 
 type speed_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -217,30 +217,123 @@ axiom current_speed__def_axiom :
   (in_range2(segway__speed) ->
   (current_speed(segway__speed) = segway__speed)))
 
+logic speed : int
+
+logic status : int
+
+logic o : int
+
+logic o1 : int
+
+logic speed1 : int
+
+logic status1 : int
+
+logic result : int
+
+logic speed2 : int
+
+logic result1 : int
+
+logic speed3 : int
+
+logic result2 : int
+
+logic status2 : int
+
+logic result3 : int
+
+logic status3 : int
+
+logic result4 : int
+
+logic status4 : int
+
+logic speed4 : int
+
+logic status5 : int
+
+logic speed5 : int
+
+logic status6 : int
+
+axiom H : in_range2(speed)
+
+axiom H1 : in_range(status)
+
+axiom H2 : in_range1(i)
+
+axiom H3 : (speed_is_valid(speed, status) = true)
+
+axiom H4 : ((i = 1) -> (speed2 = speed))
+
+axiom H5 : ((i = 1) -> (speed2 = speed1))
+
+axiom H6 : ((not (i = 1)) -> ((i = 2) -> ((speed <  100) ->
+  ((o = (speed + 1)) and in_range2((speed + 1))))))
+
+axiom H7 : ((not (i = 1)) -> ((i = 2) -> ((speed <  100) ->
+  (result = speed))))
+
+axiom H8 : ((not (i = 1)) -> ((i = 2) -> ((speed <  100) -> (speed2 = o))))
+
+axiom H9 : ((not (i = 1)) -> ((i = 2) -> ((not (speed <  100)) ->
+  (speed2 = speed))))
+
+axiom H10 : ((not (i = 1)) -> ((i = 2) -> ((not (speed <  100)) ->
+  (speed2 = speed1))))
+
+axiom H11 : ((not (i = 1)) -> ((not (i = 2)) -> (((- 100) <  speed) ->
+  ((o1 = (speed - 1)) and in_range2((speed - 1))))))
+
+axiom H12 : ((not (i = 1)) -> ((not (i = 2)) -> (((- 100) <  speed) ->
+  (result1 = speed))))
+
+axiom H13 : ((not (i = 1)) -> ((not (i = 2)) -> (((- 100) <  speed) ->
+  (speed3 = o1))))
+
+axiom H14 : ((not (i = 1)) -> ((not (i = 2)) -> ((not ((- 100) <  speed)) ->
+  (speed3 = speed))))
+
+axiom H15 : ((not (i = 1)) -> ((not (i = 2)) -> ((not ((- 100) <  speed)) ->
+  (speed3 = speed1))))
+
+axiom H16 : ((not (i = 1)) -> ((not (i = 2)) -> (speed2 = speed3)))
+
+axiom H17 : ((speed2 = 0) -> (result2 = status))
+
+axiom H18 : ((speed2 = 0) -> (status2 = 0))
+
+axiom H19 : ((not (speed2 = 0)) -> (((speed2 = 1) and (i = 2)) ->
+  (result3 = status)))
+
+axiom H20 : ((not (speed2 = 0)) -> (((speed2 = 1) and (i = 2)) ->
+  (status3 = 1)))
+
+axiom H21 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
+  (((speed2 = (- 1)) and (i = 3)) -> (result4 = status))))
+
+axiom H22 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
+  (((speed2 = (- 1)) and (i = 3)) -> (status4 = 2))))
+
+axiom H23 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
+  ((not ((speed2 = (- 1)) and (i = 3))) -> (status4 = status))))
+
+axiom H24 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
+  ((not ((speed2 = (- 1)) and (i = 3))) -> (status4 = status1))))
+
+axiom H25 : ((not (speed2 = 0)) -> ((not ((speed2 = 1) and (i = 2))) ->
+  (status3 = status4)))
+
+axiom H26 : ((not (speed2 = 0)) -> (status2 = status3))
+
+axiom H27 : (status2 = status5)
+
+axiom H28 : (speed2 = speed4)
+
+axiom H29 : (status6 = status2)
+
+axiom H30 : (speed5 = speed2)
+
  (* File "segway.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall speed:int. forall status:int. forall o:int. forall o1:int.
-  forall speed1:int. forall status1:int. forall result:int.
-  forall speed2:int. forall result1:int. forall speed3:int.
-  forall result2:int. forall status2:int. forall result3:int.
-  forall status3:int. forall result4:int. forall status4:int.
-  forall speed4:int. forall status5:int. forall speed5:int.
-  forall status6:int. ((in_range2(speed) and (in_range(status) and
-  (in_range1(i) and ((speed_is_valid(speed, status) = true) and
-  (((((i = 1) and ((speed2 = speed) and (speed2 = speed1))) or
-  ((not (i = 1)) and (((i = 2) and (((speed <  100) and
-  (((o = (speed + 1)) and in_range2((speed + 1))) and ((result = speed) and
-  (speed2 = o)))) or ((not (speed <  100)) and ((speed2 = speed) and
-  (speed2 = speed1))))) or ((not (i = 2)) and (((((-100) <  speed) and
-  (((o1 = (speed - 1)) and in_range2((speed - 1))) and ((result1 = speed) and
-  (speed3 = o1)))) or ((not ((-100) <  speed)) and ((speed3 = speed) and
-  (speed3 = speed1)))) and (speed2 = speed3)))))) and (((speed2 = 0) and
-  ((result2 = status) and (status2 = 0))) or ((not (speed2 = 0)) and
-  (((((speed2 = 1) and (i = 2)) and ((result3 = status) and
-  (status3 = 1))) or ((not ((speed2 = 1) and (i = 2))) and
-  (((((speed2 = (-1)) and (i = 3)) and ((result4 = status) and
-  (status4 = 2))) or ((not ((speed2 = (-1)) and (i = 3))) and
-  ((status4 = status) and (status4 = status1)))) and
-  (status3 = status4)))) and (status2 = status3))))) and
-  (((status2 = status5) and (speed2 = speed4)) and ((status6 = status2) and
-  (speed5 = speed2)))))))) -> (speed_is_valid(speed4, status5) = true)))
+goal WP_parameter_def : (speed_is_valid(speed4, status5) = true)

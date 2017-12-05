@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -212,10 +212,41 @@ axiom e_priv__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic tmp : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : int
+
+logic tmp2 : int
+
+logic result2 : int
+
+logic tmp3 : int
+
+axiom H : in_range2(x)
+
+axiom H1 : (not (x = 0))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
+
+axiom H3 : (not (x = 0))
+
+axiom H4 : ((o = pub(x)) and in_range1(o))
+
+axiom H5 : (result = tmp)
+
+axiom H6 : (tmp1 = o)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall tmp:int. forall o:int. forall result:int.
-  forall tmp1:int. (in_range2(x) -> ((not (x = 0)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(tmp)) -> ((((not (x = 0)) and
-  ((o = pub(x)) and in_range1(o))) and ((result = tmp) and (tmp1 = o))) ->
-  (not (x = 0)))))))
+goal WP_parameter_def : (not (x = 0))

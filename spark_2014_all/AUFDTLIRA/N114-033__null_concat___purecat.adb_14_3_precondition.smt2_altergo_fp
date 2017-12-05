@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -400,9 +400,16 @@ logic temp___String_Literal_192 : unit -> (int,character) farray
 
 axiom temp___String_Literal_192__def_axiom : true
 
+logic x : (int,character) farray
+
+logic result : (int,character) farray
+
+logic x1 : (int,character) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = purecat__x__aggregate_def(88))
+
  (* File "purecat.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall result:(int,character) farray.
-  forall x1:(int,character) farray. (((result = x) and
-  (x1 = purecat__x__aggregate_def(88))) -> (bool_eq4(x1, 1, 1000, x1,
-  to_rep1(first(mk(1, 1000))), to_rep1(last(mk(1, 1000)))) = true)))
+goal WP_parameter_def : (bool_eq4(x1, 1, 1000, x1, to_rep1(first(mk(1,
+  1000))), to_rep1(last(mk(1, 1000)))) = true)

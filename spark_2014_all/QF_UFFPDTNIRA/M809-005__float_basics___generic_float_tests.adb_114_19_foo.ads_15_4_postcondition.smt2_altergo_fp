@@ -1124,23 +1124,56 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic foo__double_tests__sqrt_comedy_1__result : bool
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : bool
+
+logic result : bool
+
+logic foo__double_tests__sqrt_comedy_1__result1 : bool
+
+logic foo__double_tests__sqrt_comedy_1__result2 : bool
+
+logic foo__double_tests__sqrt_comedy_1__result3 : bool
+
+logic foo__double_tests__sqrt_comedy_1__result4 : bool
+
+logic foo__double_tests__sqrt_comedy_1__result5 : bool
+
+logic result1 : bool
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
+axiom H2 : tqtisFinite(c)
+
+axiom H3 : (eq(mul(NearestTiesToEven, a, a), c) and eq(mul(NearestTiesToEven,
+  b, b), c))
+
+axiom H4 :
+  (foo__double_tests__sqrt_comedy_1__result1 = foo__double_tests__sqrt_comedy_1__result2)
+
+axiom H5 :
+  (foo__double_tests__sqrt_comedy_1__result3 = foo__double_tests__sqrt_comedy_1__result1)
+
+axiom H6 : (result = foo__double_tests__sqrt_comedy_1__result)
+
+axiom H7 : ((eq(a, b) ->
+  (foo__double_tests__sqrt_comedy_1__result1 = true)) and ((not eq(a, b)) ->
+  (foo__double_tests__sqrt_comedy_1__result1 = false)))
+
+axiom H8 :
+  (foo__double_tests__sqrt_comedy_1__result4 = foo__double_tests__sqrt_comedy_1__result2)
+
+axiom H9 :
+  (foo__double_tests__sqrt_comedy_1__result5 = foo__double_tests__sqrt_comedy_1__result3)
+
+axiom H10 : (result1 = foo__double_tests__sqrt_comedy_1__result4)
+
  (* File "generic_float_tests.adb", line 112, characters 0-0 *)
-goal WP_parameter_def :
-  (forall foo__double_tests__sqrt_comedy_1__result:bool. forall result:bool.
-  forall foo__double_tests__sqrt_comedy_1__result1:bool.
-  forall foo__double_tests__sqrt_comedy_1__result2:bool.
-  forall foo__double_tests__sqrt_comedy_1__result3:bool.
-  forall foo__double_tests__sqrt_comedy_1__result4:bool.
-  forall foo__double_tests__sqrt_comedy_1__result5:bool.
-  (forall result1:bool. ((tqtisFinite(a) and (tqtisFinite(b) and
-  (tqtisFinite(c) and ((eq(mul(NearestTiesToEven, a, a), c) and
-  eq(mul(NearestTiesToEven, b, b), c)) and
-  (((((foo__double_tests__sqrt_comedy_1__result1 = foo__double_tests__sqrt_comedy_1__result2) and
-  (foo__double_tests__sqrt_comedy_1__result3 = foo__double_tests__sqrt_comedy_1__result1)) and
-  ((result = foo__double_tests__sqrt_comedy_1__result) and ((eq(a, b) and
-  (foo__double_tests__sqrt_comedy_1__result1 = true)) or ((not eq(a, b)) and
-  (foo__double_tests__sqrt_comedy_1__result1 = false))))) and
-  ((foo__double_tests__sqrt_comedy_1__result4 = foo__double_tests__sqrt_comedy_1__result2) and
-  (foo__double_tests__sqrt_comedy_1__result5 = foo__double_tests__sqrt_comedy_1__result3))) and
-  (result1 = foo__double_tests__sqrt_comedy_1__result4)))))) ->
-  (foo__double_tests__sqrt_comedy_1__result4 = true))))
+goal WP_parameter_def : (foo__double_tests__sqrt_comedy_1__result4 = true)

@@ -30,6 +30,8 @@
 (declare-datatypes () ((natural__ref (mk_natural__ref (natural__content natural)))))
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content a))
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range temp___expr_33)))
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (not (in_range 0)))
 (check-sat)
 (exit)

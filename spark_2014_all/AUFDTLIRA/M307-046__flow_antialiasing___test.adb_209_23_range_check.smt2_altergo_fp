@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -417,6 +417,16 @@ type t18b__ref = { t18b__content : t18b
 
 function t18b__ref___projection(a: t18b__ref) : t18b = (a).t18b__content
 
+logic s : (int,character) farray
+
+logic temp___411 : (int,character) farray
+
+logic test__op_string_io_i__x__compl : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H1 : (2 <= 5)
+
  (* File "test.adb", line 196, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(s__first),
-  to_rep1(s__last)) -> ((2 <= 5) -> (to_rep1(s__first) <= 2)))
+goal WP_parameter_def : (to_rep1(s__first) <= 2)

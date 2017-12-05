@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -109,20 +109,43 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic alpha_launch_examples__example_1__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic alpha_launch_examples__example_1__result1 : int
+
+logic alpha_launch_examples__example_1__result2 : int
+
+logic alpha_launch_examples__example_1__result3 : int
+
+logic alpha_launch_examples__example_1__result4 : int
+
+logic alpha_launch_examples__example_1__result5 : int
+
+axiom H : in_range(x)
+
+axiom H1 :
+  (alpha_launch_examples__example_1__result1 = alpha_launch_examples__example_1__result2)
+
+axiom H2 :
+  (alpha_launch_examples__example_1__result3 = alpha_launch_examples__example_1__result1)
+
+axiom H3 : ((o = abs_int(x)) and in_range(abs_int(x)))
+
+axiom H4 : (result = alpha_launch_examples__example_1__result)
+
+axiom H5 : (alpha_launch_examples__example_1__result1 = o)
+
+axiom H6 :
+  (alpha_launch_examples__example_1__result4 = alpha_launch_examples__example_1__result2)
+
+axiom H7 :
+  (alpha_launch_examples__example_1__result5 = alpha_launch_examples__example_1__result3)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall alpha_launch_examples__example_1__result:int. forall o:int.
-  forall result:int. forall alpha_launch_examples__example_1__result1:int.
-  forall alpha_launch_examples__example_1__result2:int.
-  forall alpha_launch_examples__example_1__result3:int.
-  forall alpha_launch_examples__example_1__result4:int.
-  forall alpha_launch_examples__example_1__result5:int. (in_range(x) ->
-  (((((alpha_launch_examples__example_1__result1 = alpha_launch_examples__example_1__result2) and
-  (alpha_launch_examples__example_1__result3 = alpha_launch_examples__example_1__result1)) and
-  (((o = abs_int(x)) and in_range(abs_int(x))) and (({ int__content = result
-  } = { int__content = alpha_launch_examples__example_1__result }) and
-  (alpha_launch_examples__example_1__result1 = o)))) and (({ int__content =
-  alpha_launch_examples__example_1__result4 } = { int__content =
-  alpha_launch_examples__example_1__result2 }) and
-  (alpha_launch_examples__example_1__result5 = alpha_launch_examples__example_1__result3))) ->
-  in_range(abs_int(x)))))
+goal WP_parameter_def : in_range(abs_int(x))

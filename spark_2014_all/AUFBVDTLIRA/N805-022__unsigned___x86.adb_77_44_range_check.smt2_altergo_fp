@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1168,17 +1168,63 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic xdi : (int,unsigned_8) farray
+
+logic o : unsigned_8
+
+logic o1 : (int,unsigned_8) farray
+
+logic o2 : unsigned_8
+
+logic o3 : (int,unsigned_8) farray
+
+logic o4 : unsigned_8
+
+logic o5 : (int,unsigned_8) farray
+
+logic o6 : unsigned_8
+
+logic o7 : (int,unsigned_8) farray
+
+logic result : (int,unsigned_8) farray
+
+logic xdi1 : (int,unsigned_8) farray
+
+logic result1 : (int,unsigned_8) farray
+
+logic xdi2 : (int,unsigned_8) farray
+
+logic result2 : (int,unsigned_8) farray
+
+logic xdi3 : (int,unsigned_8) farray
+
+logic result3 : (int,unsigned_8) farray
+
+logic xdi4 : (int,unsigned_8) farray
+
+logic xdi5 : (int,unsigned_8) farray
+
+logic xdi6 : (int,unsigned_8) farray
+
+axiom H : true
+
+axiom H1 : (to_rep(o) = toSmall(urem1(val__, of_int1(256))))
+
+axiom H2 : (o1 = (xdi[0 <- o]))
+
+axiom H3 : (result = xdi)
+
+axiom H4 : (xdi1 = o1)
+
+axiom H5 : (to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
+  of_int1(256))))
+
+axiom H6 : (o3 = (xdi1[1 <- o2]))
+
+axiom H7 : (xdi1 = result1)
+
+axiom H8 : (xdi2 = o3)
+
  (* File "x86.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall xdi:(int,unsigned_8) farray. forall o:unsigned_8.
-  forall o1:(int,unsigned_8) farray. forall o2:unsigned_8.
-  forall o3:(int,unsigned_8) farray. forall result:(int,unsigned_8) farray.
-  forall xdi1:(int,unsigned_8) farray.
-  forall result1:(int,unsigned_8) farray.
-  forall xdi2:(int,unsigned_8) farray. ((((to_rep(o) = toSmall(urem1(val__,
-  of_int1(256)))) and (o1 = (xdi[0 <- o]))) and (({ map__content = result
-  } = { map__content = xdi }) and (xdi1 = o1))) ->
-  ((((to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
-  of_int1(256)))) and (o3 = (xdi1[1 <- o2]))) and ((xdi1 = result1) and
-  (xdi2 = o3))) -> ule1(toBig(of_int(0)), urem1(udiv1(val__, of_int1(65536)),
-  of_int1(256))))))
+goal WP_parameter_def : ule1(toBig(of_int(0)), urem1(udiv1(val__,
+  of_int1(65536)), of_int1(256)))

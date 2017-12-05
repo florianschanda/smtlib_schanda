@@ -130,6 +130,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
 (declare-const p__R1s__assume Int)
+(declare-const us Int)
 (assert (and (= o (zero Tuple0)) (in_range o)))
 (assert (= p__R1s__assume (div1 10 o)))
 (assert (= p__R1s__assume r1s))

@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1783,75 +1783,212 @@ axiom time_below_threshold__post_axiom :
 
 axiom is_valid__post_axiom : true
 
+logic battery_level_at : (t,battery_level_type) farray
+
+logic current_time : t
+
+logic j : int
+
+logic failsafe_state : us_private
+
+logic temp___280 : t
+
+logic temp___279 : (t,battery_level_type) farray
+
+logic o : bool
+
+logic us : bool
+
+logic us1 : bool
+
+logic o1 : bool
+
+logic battery_level_at1 : (t,battery_level_type) farray
+
+logic current_time1 : t
+
+logic failsafe_state1 : us_private
+
+logic result : int
+
+logic j1 : int
+
+logic battery_level_at2 : (t,battery_level_type) farray
+
+logic current_time2 : t
+
+logic j2 : int
+
+logic failsafe_state2 : us_private
+
+logic battery_level_at3 : (t,battery_level_type) farray
+
+logic current_time3 : t
+
+logic failsafe_state3 : us_private
+
+logic battery_level_at4 : (t,battery_level_type) farray
+
+logic current_time4 : t
+
+logic j3 : int
+
+logic failsafe_state4 : us_private
+
+logic battery_level_at5 : (t,battery_level_type) farray
+
+logic current_time5 : t
+
+logic j4 : int
+
+logic failsafe_state5 : us_private
+
+logic battery_level_at6 : (t,battery_level_type) farray
+
+logic current_time6 : t
+
+logic j5 : int
+
+logic failsafe_state6 : us_private
+
+logic battery_level_at7 : (t,battery_level_type) farray
+
+logic current_time7 : t
+
+logic j6 : int
+
+logic failsafe_state7 : us_private
+
+logic battery_level_at8 : (t,battery_level_type) farray
+
+logic current_time8 : t
+
+logic failsafe_state8 : us_private
+
+logic battery_level_at9 : (t,battery_level_type) farray
+
+logic current_time9 : t
+
+logic failsafe_state9 : us_private
+
+logic battery_level_at10 : (t,battery_level_type) farray
+
+logic current_time10 : t
+
+logic failsafe_state10 : us_private
+
+axiom H : in_range2(current_time)
+
+axiom H1 : (result = j)
+
+axiom H2 : (j1 = 1)
+
+axiom H3 : (((1 <= j1) and (j1 <= 49)) -> (temp___280 = current_time))
+
+axiom H4 : (((1 <= j1) and (j1 <= 49)) -> (temp___279 = battery_level_at))
+
+axiom H5 : (((1 <= j1) and (j1 <= 49)) -> (in_range2(current_time2) and
+  ((1 <= j2) and (j2 <= 49))))
+
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.100000001490116119384765625))
 
- (* File "failsafe.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. forall j:int. forall failsafe_state:us_private.
-  forall temp___280:t. forall temp___279:(t,battery_level_type) farray.
-  forall battery_level_at1:(t,battery_level_type) farray.
-  forall current_time1:t. forall failsafe_state1:us_private.
-  forall result:int. forall j1:int. forall current_time2:t. forall j2:int.
-  forall battery_level_at2:(t,battery_level_type) farray.
-  forall current_time3:t. forall failsafe_state2:us_private.
-  forall battery_level_at3:(t,battery_level_type) farray.
-  forall current_time4:t. forall j3:int. forall failsafe_state3:us_private.
-  forall battery_level_at4:(t,battery_level_type) farray.
-  forall current_time5:t. forall j4:int. forall failsafe_state4:us_private.
-  forall battery_level_at5:(t,battery_level_type) farray.
-  forall current_time6:t. forall j5:int. forall failsafe_state5:us_private.
-  forall battery_level_at6:(t,battery_level_type) farray.
-  forall current_time7:t. forall j6:int. forall failsafe_state6:us_private.
-  forall battery_level_at7:(t,battery_level_type) farray.
-  forall current_time8:t. forall failsafe_state7:us_private.
-  forall battery_level_at8:(t,battery_level_type) farray.
-  forall current_time9:t. forall failsafe_state8:us_private.
-  (in_range2(current_time) -> (((({ int__content = result } = {
-  int__content = j }) and (j1 = 1)) and ((((1 <= j1) and (j1 <= 49)) and
-  ((((temp___280 = current_time) and ((temp___279 = battery_level_at) and
-  ((in_range2(current_time2) and ((1 <= j2) and (j2 <= 49))) and
-  ((((is_valid(failsafe_state2, battery_level_at2, current_time3) = true) and
-  (((ule(sub(of_int(50), current_time2), of_int(1)) and
-  (current_time3 = sub(add(current_time2, of_int(1)), of_int(50)))) or
-  ((not ule(sub(of_int(50), current_time2), of_int(1))) and
-  (current_time3 = add(current_time2, of_int(1))))) and
-  eq(to_rep((battery_level_at2[current_time3])), fliteral2))) and
-  in_range2(current_time3)) and (j2 = 49))))) and
-  (((failsafe_state2 = failsafe_state3) and ((j2 = j3) and
-  ((current_time3 = current_time4) and
-  (battery_level_at2 = battery_level_at3)))) and
-  ((failsafe_state4 = failsafe_state2) and ((j4 = j2) and
-  ((current_time5 = current_time3) and
-  (battery_level_at4 = battery_level_at2)))))) and
-  (((failsafe_state3 = failsafe_state5) and ((j5 = j3) and
-  ((current_time4 = current_time6) and
-  (battery_level_at3 = battery_level_at5)))) and
-  ((failsafe_state6 = failsafe_state4) and ((j6 = j4) and
-  ((current_time7 = current_time5) and
-  (battery_level_at6 = battery_level_at4))))))) or ((not ((1 <= j1) and
-  (j1 <= 49))) and (((failsafe_state = failsafe_state5) and ((j1 = j5) and
-  ((current_time = current_time6) and
-  (battery_level_at = battery_level_at5)))) and
-  ((failsafe_state6 = failsafe_state1) and ((j6 = j1) and
-  ((current_time7 = current_time1) and
-  (battery_level_at6 = battery_level_at1)))))))) ->
-  ((not (is_raised(failsafe_state5, battery_level_at5,
-  current_time6) = true)) -> ((((is_valid(failsafe_state7, battery_level_at7,
+axiom H6 : (((1 <= j1) and (j1 <= 49)) -> (((is_valid(failsafe_state3,
+  battery_level_at3, current_time3) = true) and (((ule(sub(of_int(50),
+  current_time2), of_int(1)) -> (current_time3 = sub(add(current_time2,
+  of_int(1)), of_int(50)))) and ((not ule(sub(of_int(50), current_time2),
+  of_int(1))) -> (current_time3 = add(current_time2, of_int(1))))) and
+  eq(to_rep((battery_level_at3[current_time3])), fliteral2))) and
+  in_range2(current_time3)))
+
+axiom H7 : (((1 <= j1) and (j1 <= 49)) -> (j2 = 49))
+
+axiom H8 : (((1 <= j1) and (j1 <= 49)) ->
+  (failsafe_state3 = failsafe_state4))
+
+axiom H9 : (((1 <= j1) and (j1 <= 49)) -> (j2 = j3))
+
+axiom H10 : (((1 <= j1) and (j1 <= 49)) -> (current_time3 = current_time4))
+
+axiom H11 : (((1 <= j1) and (j1 <= 49)) ->
+  (battery_level_at3 = battery_level_at4))
+
+axiom H12 : (((1 <= j1) and (j1 <= 49)) ->
+  (failsafe_state5 = failsafe_state3))
+
+axiom H13 : (((1 <= j1) and (j1 <= 49)) -> (j4 = j2))
+
+axiom H14 : (((1 <= j1) and (j1 <= 49)) -> (current_time5 = current_time3))
+
+axiom H15 : (((1 <= j1) and (j1 <= 49)) ->
+  (battery_level_at5 = battery_level_at3))
+
+axiom H16 : (((1 <= j1) and (j1 <= 49)) ->
+  (failsafe_state6 = failsafe_state4))
+
+axiom H17 : (((1 <= j1) and (j1 <= 49)) -> (j5 = j3))
+
+axiom H18 : (((1 <= j1) and (j1 <= 49)) -> (current_time6 = current_time4))
+
+axiom H19 : (((1 <= j1) and (j1 <= 49)) ->
+  (battery_level_at6 = battery_level_at4))
+
+axiom H20 : (((1 <= j1) and (j1 <= 49)) ->
+  (failsafe_state7 = failsafe_state5))
+
+axiom H21 : (((1 <= j1) and (j1 <= 49)) -> (j6 = j4))
+
+axiom H22 : (((1 <= j1) and (j1 <= 49)) -> (current_time7 = current_time5))
+
+axiom H23 : (((1 <= j1) and (j1 <= 49)) ->
+  (battery_level_at7 = battery_level_at5))
+
+axiom H24 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (failsafe_state6 = failsafe_state))
+
+axiom H25 : ((not ((1 <= j1) and (j1 <= 49))) -> (j1 = j5))
+
+axiom H26 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (current_time6 = current_time))
+
+axiom H27 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (battery_level_at6 = battery_level_at))
+
+axiom H28 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (failsafe_state7 = failsafe_state1))
+
+axiom H29 : ((not ((1 <= j1) and (j1 <= 49))) -> (j6 = j1))
+
+axiom H30 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (current_time7 = current_time1))
+
+axiom H31 : ((not ((1 <= j1) and (j1 <= 49))) ->
+  (battery_level_at7 = battery_level_at1))
+
+axiom H32 : (not (is_raised(failsafe_state6, battery_level_at6,
+  current_time6) = true))
+
+axiom H33 : (((is_valid(failsafe_state8, battery_level_at8,
   current_time8) = true) and (((ule(sub(of_int(50), current_time6),
-  of_int(1)) and (current_time8 = sub(add(current_time6, of_int(1)),
-  of_int(50)))) or ((not ule(sub(of_int(50), current_time6), of_int(1))) and
+  of_int(1)) -> (current_time8 = sub(add(current_time6, of_int(1)),
+  of_int(50)))) and ((not ule(sub(of_int(50), current_time6), of_int(1))) ->
   (current_time8 = add(current_time6, of_int(1))))) and
-  eq(to_rep((battery_level_at7[current_time8])), fliteral2))) and
-  in_range2(current_time8)) -> ((is_raised(failsafe_state7,
-  battery_level_at7, current_time8) = true) -> ((((is_valid(failsafe_state8,
-  battery_level_at8, current_time9) = true) and (((ule(sub(of_int(50),
-  current_time8), of_int(1)) and (current_time9 = sub(add(current_time8,
-  of_int(1)), of_int(50)))) or ((not ule(sub(of_int(50), current_time8),
-  of_int(1))) and (current_time9 = add(current_time8, of_int(1))))) and
-  eq(to_rep((battery_level_at8[current_time9])), fliteral2))) and
-  in_range2(current_time9)) -> (is_valid(failsafe_state8, battery_level_at8,
-  current_time9) = true))))))))
+  eq(to_rep((battery_level_at8[current_time8])), fliteral2))) and
+  in_range2(current_time8))
+
+axiom H34 : (is_raised(failsafe_state8, battery_level_at8,
+  current_time8) = true)
+
+axiom H35 : (((is_valid(failsafe_state9, battery_level_at9,
+  current_time9) = true) and (((ule(sub(of_int(50), current_time8),
+  of_int(1)) -> (current_time9 = sub(add(current_time8, of_int(1)),
+  of_int(50)))) and ((not ule(sub(of_int(50), current_time8), of_int(1))) ->
+  (current_time9 = add(current_time8, of_int(1))))) and
+  eq(to_rep((battery_level_at9[current_time9])), fliteral2))) and
+  in_range2(current_time9))
+
+ (* File "failsafe.ads", line 20, characters 0-0 *)
+goal WP_parameter_def : (is_valid(failsafe_state9, battery_level_at9,
+  current_time9) = true)

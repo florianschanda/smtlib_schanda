@@ -107,7 +107,7 @@ function any_priority__ref___projection(a: any_priority__ref) : any_priority =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -135,13 +135,13 @@ type us_split_discrs = { rec__interrupt_priority__interrupt_needed_1__c :
 any_priority
 }
 
-function us_split_discrs___2__projection(a: us_split_discrs) : any_priority =
+function us_split_discrs___3__projection(a: us_split_discrs) : any_priority =
   (a).rec__interrupt_priority__interrupt_needed_1__c
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__interrupt_priority__interrupt_needed_1__i :
@@ -161,10 +161,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___31__projection(a: us_rep) : us_split_discrs =
+function us_rep___32__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___32__projection(a: us_rep) : us_split_fields =
+function us_rep___33__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -246,10 +246,10 @@ type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep___35__projection(a: us_rep1) : us_split_discrs =
+function us_rep___36__projection(a: us_rep1) : us_split_discrs =
   (a).us_split_discrs2
 
-function us_rep___36__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___37__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
@@ -356,6 +356,8 @@ axiom coerce_axiom1 :
 logic p__split_discrs : any_priority
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic us : int
 
  (* File "interrupt_priority.ads", line 18, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

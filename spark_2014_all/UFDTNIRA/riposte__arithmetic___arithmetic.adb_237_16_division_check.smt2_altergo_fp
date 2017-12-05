@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type byte
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -222,6 +222,25 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arithmetic__test_rem_a__result : int
+
+logic result : int
+
+logic arithmetic__test_rem_a__result1 : int
+
+logic arithmetic__test_rem_a__result2 : int
+
+logic arithmetic__test_rem_a__result3 : int
+
+logic arithmetic__test_rem_a__result4 : int
+
+logic arithmetic__test_rem_a__result5 : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (not (b = 0))
+
  (* File "arithmetic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (in_range(a) -> (in_range(b) -> ((not (b = 0)) ->
-  (not (b = 0)))))
+goal WP_parameter_def : (not (b = 0))

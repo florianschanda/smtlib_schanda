@@ -123,6 +123,7 @@
 (declare-const x us_t)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_267 (_ BitVec 64)) (temp___is_init_264 Bool) (temp___skip_constant_265 Bool) (temp___do_toplevel_266 Bool)) Bool true)
+(declare-const o Int)
 (assert (dynamic_invariant x true false true))
 (assert (not (uint_in_range (length x))))
 (check-sat)

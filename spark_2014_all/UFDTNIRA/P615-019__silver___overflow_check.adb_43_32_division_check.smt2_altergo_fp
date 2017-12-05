@@ -137,7 +137,7 @@ function oper__ref___projection(a: oper__ref) : oper = (a).oper__content
 
 type tfixedB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -246,18 +246,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -376,7 +376,7 @@ function tfixedB__ref___projection(a: tfixedB__ref) : tfixedB =
 
 type fixed
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic dummy3 : fixed
 
@@ -499,7 +499,21 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+axiom H : in_range1(op)
+
+axiom H1 : in_range(e)
+
+axiom H2 : (not (op = 0))
+
+axiom H3 : (not (op = 1))
+
+axiom H4 : (not (op = 2))
+
+axiom H5 : (not (op = 3))
+
+axiom H6 : (not (op = 4))
+
+axiom H7 : (op = 5)
+
  (* File "overflow_check.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : (in_range1(op) -> (in_range(e) -> ((not (op = 0)) ->
-  ((not (op = 1)) -> ((not (op = 2)) -> ((not (op = 3)) -> ((not (op = 4)) ->
-  ((op = 5) -> (not (to_fixed1(y) = 0))))))))))
+goal WP_parameter_def : (not (to_fixed1(y) = 0))

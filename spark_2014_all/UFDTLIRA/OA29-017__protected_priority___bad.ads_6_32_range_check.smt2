@@ -128,6 +128,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_153 Int) (temp___is_init_150 Bool) (temp___skip_constant_151 Bool) (temp___do_toplevel_152 Bool)) Bool (=> (or (= temp___is_init_150 true) (<= 0 98)) (in_range1 temp___expr_153)))
 (declare-const bad__R1s__assume Int)
+(declare-const us Int)
 (assert (and (= bad__R1s__assume (too_big Tuple0)) (and (in_range bad__R1s__assume) (= bad__R1s__assume 99))))
 (assert (= bad__R1s__assume r1s))
 (assert (in_range r1s))

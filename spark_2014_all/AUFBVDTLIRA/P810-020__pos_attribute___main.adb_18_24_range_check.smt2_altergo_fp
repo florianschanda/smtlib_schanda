@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1054,49 +1054,106 @@ logic off_c2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___String_Literal_519 : unit -> (int,character) farray
+logic temp___String_Literal_513 : unit -> (int,character) farray
 
-axiom temp___String_Literal_519__def_axiom :
-  (((((((to_rep((temp___String_Literal_519(void)[1])) = 80) and
-  (to_rep((temp___String_Literal_519(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_519(void)[3])) = 115)) and
-  (to_rep((temp___String_Literal_519(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_519(void)[5])) = 99)) and
-  (to_rep((temp___String_Literal_519(void)[6])) = 49)) and
-  (to_rep((temp___String_Literal_519(void)[7])) = 61))
+axiom temp___String_Literal_513__def_axiom :
+  (((((((to_rep((temp___String_Literal_513(void)[1])) = 80) and
+  (to_rep((temp___String_Literal_513(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_513(void)[3])) = 115)) and
+  (to_rep((temp___String_Literal_513(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_513(void)[5])) = 99)) and
+  (to_rep((temp___String_Literal_513(void)[6])) = 49)) and
+  (to_rep((temp___String_Literal_513(void)[7])) = 61))
 
-logic temp___String_Literal_522 : unit -> (int,character) farray
+logic temp___String_Literal_516 : unit -> (int,character) farray
 
-axiom temp___String_Literal_522__def_axiom :
-  (((((((to_rep((temp___String_Literal_522(void)[1])) = 80) and
-  (to_rep((temp___String_Literal_522(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_522(void)[3])) = 115)) and
-  (to_rep((temp___String_Literal_522(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_522(void)[5])) = 99)) and
-  (to_rep((temp___String_Literal_522(void)[6])) = 50)) and
-  (to_rep((temp___String_Literal_522(void)[7])) = 61))
+axiom temp___String_Literal_516__def_axiom :
+  (((((((to_rep((temp___String_Literal_516(void)[1])) = 80) and
+  (to_rep((temp___String_Literal_516(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_516(void)[3])) = 115)) and
+  (to_rep((temp___String_Literal_516(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_516(void)[5])) = 99)) and
+  (to_rep((temp___String_Literal_516(void)[6])) = 50)) and
+  (to_rep((temp___String_Literal_516(void)[7])) = 61))
 
 axiom off_c1__def_axiom : (off_c1 = main__some_record__c1__position)
 
 axiom off_c2__def_axiom : (off_c2 = main__some_record__c2__position)
 
+logic foo__split_fields : unsigned_8
+
+logic foo__split_fields1 : unsigned_8
+
+logic main__off_c1__assume : int
+
+logic main__off_c2__assume : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : (int,character) farray
+
+logic o7 : t1
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+axiom H : ((to_rep2(foo__split_fields) = of_int(0)) and
+  (to_rep2(foo__split_fields1) = of_int(0)))
+
+axiom H1 : ((main__off_c1__assume = main__some_record__c1__position) and
+  in_range(main__some_record__c1__position))
+
+axiom H2 : (main__off_c1__assume = off_c1)
+
+axiom H3 : in_range(off_c1)
+
+axiom H4 : ((main__off_c2__assume = main__some_record__c2__position) and
+  in_range(main__some_record__c2__position))
+
+axiom H5 : (main__off_c2__assume = off_c2)
+
+axiom H6 : in_range(off_c2)
+
+axiom H7 : (off_c1 <  10000)
+
+axiom H8 : (off_c2 = 0)
+
+axiom H9 :
+  ((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt))) ->
+  (o = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt))) + 1)))
+
+axiom H10 :
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)))) ->
+  (o = 0))
+
+axiom H11 : ((1 <= 7) -> (o1 = ((7 - 1) + 1)))
+
+axiom H12 : ((not (1 <= 7)) -> (o1 = 0))
+
+axiom H13 : (o2 = (o1 + o))
+
+axiom H14 : (o3 = (1 + o2))
+
+axiom H15 : (o4 = (o3 - 1))
+
  (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall foo__split_fields:unsigned_8. forall foo__split_fields1:unsigned_8.
-  forall main__off_c1__assume:int. forall main__off_c2__assume:int.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  (((to_rep2(foo__split_fields) = of_int(0)) and
-  (to_rep2(foo__split_fields1) = of_int(0))) ->
-  ((((main__off_c1__assume = main__some_record__c1__position) and
-  in_range(main__some_record__c1__position)) and
-  (main__off_c1__assume = off_c1)) -> (in_range(off_c1) ->
-  ((((main__off_c2__assume = main__some_record__c2__position) and
-  in_range(main__some_record__c2__position)) and
-  (main__off_c2__assume = off_c2)) -> (in_range(off_c2) ->
-  ((off_c1 <  10000) -> ((off_c2 = 0) ->
-  (((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt))) and
-  (o = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt))) + 1))) or
-  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(off_c1))).rt)))) and
-  (o = 0))) and ((((1 <= 7) and (o1 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
-  (o1 = 0))) and (o2 = (o1 + o)))) and (o3 = (1 + o2))) and
-  (o4 = (o3 - 1))) -> in_range1(o4))))))))))
+goal WP_parameter_def : in_range1(o4)

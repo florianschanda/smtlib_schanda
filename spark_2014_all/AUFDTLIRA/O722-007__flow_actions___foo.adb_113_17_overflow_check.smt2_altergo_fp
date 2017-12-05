@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -475,25 +475,82 @@ type t86b__ref = { t86b__content : us_t
 
 function t86b__ref___projection(a: t86b__ref) : us_t = (a).t86b__content
 
- (* File "foo.adb", line 90, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray.
-  forall new_sub:(int,character) farray. forall x:int. forall y:int.
-  forall o:int. forall foo__test_08__L_3__R84b:int.
-  forall o1:(int,character) farray. forall temp___196:(int,character) farray.
-  forall temp___1961:t. forall o2:bool. forall result:int. forall x1:int.
-  forall result1:bool. forall x2:int. (in_range2(n) -> (((result = x) and
-  (x1 = n)) -> (in_range1(x1) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(y)) -> (((((o = (y + 5)) and in_range1((y + 5))) and
-  (foo__test_08__L_3__R84b = (o - 1))) and (((x1 <= 1) and
-  ((((((x1 <= foo__test_08__L_3__R84b) -> (((1 <= x1) and (x1 <= 5)) and
-  ((1 <= foo__test_08__L_3__R84b) and (foo__test_08__L_3__R84b <= 5)))) and
-  (o1 = new_str)) and ((o1 = temp___196) and (mk(x1,
-  foo__test_08__L_3__R84b) = temp___1961))) and (o2 = bool_eq5(temp___196,
-  to_rep1(first(temp___1961)), to_rep1(last(temp___1961)), new_sub, 1,
-  5))) and (((not (o2 = true)) and (result1 = true)) or ((o2 = true) and
-  (result1 = false))))) or ((not (x1 <= 1)) and (result1 = false)))) ->
-  ((result1 = true) -> (((((-2147483648) <= 2147483647) -> in_range1(x2)) and
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic x : int
+
+logic y : int
+
+logic o : int
+
+logic foo__test_08__L_3__R84b : int
+
+logic o1 : (int,character) farray
+
+logic temp___196 : (int,character) farray
+
+logic temp___1961 : t
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic foo__test_08__L_3__R84b1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : bool
+
+logic x2 : int
+
+logic result2 : int
+
+logic x3 : int
+
+axiom H : in_range2(n)
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = n)
+
+axiom H3 : in_range1(x1)
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
+axiom H5 : ((o = (y + 5)) and in_range1((y + 5)))
+
+axiom H6 : (foo__test_08__L_3__R84b = (o - 1))
+
+axiom H7 : ((x1 <= 1) -> ((x1 <= foo__test_08__L_3__R84b) -> (((1 <= x1) and
+  (x1 <= 5)) and ((1 <= foo__test_08__L_3__R84b) and
+  (foo__test_08__L_3__R84b <= 5)))))
+
+axiom H8 : ((x1 <= 1) -> (o1 = new_str))
+
+axiom H9 : ((x1 <= 1) -> (o1 = temp___196))
+
+axiom H10 : ((x1 <= 1) -> (mk(x1, foo__test_08__L_3__R84b) = temp___1961))
+
+axiom H11 : ((x1 <= 1) -> (o2 = bool_eq5(temp___196,
+  to_rep1(first(temp___1961)), to_rep1(last(temp___1961)), new_sub, 1, 5)))
+
+axiom H12 : ((x1 <= 1) -> (((not (o2 = true)) -> (result1 = true)) and
+  ((o2 = true) -> (result1 = false))))
+
+axiom H13 : ((not (x1 <= 1)) -> (result1 = false))
+
+axiom H14 : (result1 = true)
+
+axiom H15 : ((((- 2147483648) <= 2147483647) -> in_range1(x2)) and
   ((x2 <= 1) and (not (bool_eq5(new_str, to_rep1(first(mk(x2,
   ((y + 5) - 1)))), to_rep1(last(mk(x2, ((y + 5) - 1)))), new_sub, 1,
-  5) = true)))) -> in_range1((x2 + 1))))))))))
+  5) = true))))
+
+ (* File "foo.adb", line 90, characters 0-0 *)
+goal WP_parameter_def : in_range1((x2 + 1))

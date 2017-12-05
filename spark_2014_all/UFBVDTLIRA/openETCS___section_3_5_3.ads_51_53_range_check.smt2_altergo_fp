@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1237,6 +1237,18 @@ axiom witness__post_axiom :
   witness(container, key)) = true) and in_range(witness(container, key))))))
 
 axiom w_get__post_axiom : true
+
+logic section_3_5_3__R1s__assume : t
+
+logic us : t
+
+logic us1 : int
+
+axiom H : (section_3_5_3__R1s__assume = default_modulus(10))
+
+axiom H1 : (section_3_5_3__R1s__assume = r1s)
+
+axiom H2 : true
 
  (* File "section_3_5_3.ads", line 83, characters 0-0 *)
 goal WP_parameter_def : true

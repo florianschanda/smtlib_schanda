@@ -769,9 +769,22 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic temp___669 : int
+
+logic result : bool
+
+axiom H : in_range(c)
+
+axiom H1 : ((1 <= 0) -> (o = ((0 - 1) + 1)))
+
+axiom H2 : ((not (1 <= 0)) -> (o = 0))
+
+axiom H3 : (((0 <  o) -> (result = true)) and ((not (0 <  o)) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "with_default.adb", line 218, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (in_range(c) -> (((((1 <= 0) and
-  (o = ((0 - 1) + 1))) or ((not (1 <= 0)) and (o = 0))) and (((0 <  o) and
-  (result = true)) or ((not (0 <  o)) and (result = false)))) ->
-  ((result = true) -> in_range1(c)))))
+goal WP_parameter_def : in_range1(c)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -150,7 +150,7 @@ axiom coerce_axiom :
 
 type u
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -294,14 +294,26 @@ axiom bar__post_axiom : true
 axiom bar__def_axiom :
   (forall par:int [bar(par)]. ((bar(par) = true) <-> (par = 1)))
 
- (* File "dic2.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t_var:int. forall u_var:int. forall r_var__split_fields:t.
-  forall r_var__split_fields1:u. (((t_var = 0) and (foo(t_var) = true)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t_var)) -> (((u_var = 1) and
-  (bar(u_var) = true)) -> ((((-2147483648) <= 2147483647) ->
-  in_range2(u_var)) -> ((((to_rep(r_var__split_fields) = 0) and
+logic t_var : int
+
+logic u_var : int
+
+logic r_var__split_fields : t
+
+logic r_var__split_fields1 : u
+
+axiom H : ((t_var = 0) and (foo(t_var) = true))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(t_var))
+
+axiom H2 : ((u_var = 1) and (bar(u_var) = true))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range2(u_var))
+
+axiom H4 : (((to_rep(r_var__split_fields) = 0) and
   (foo(to_rep(r_var__split_fields)) = true)) and
   ((to_rep1(r_var__split_fields1) = 1) and
-  (bar(to_rep1(r_var__split_fields1)) = true))) ->
-  (t_var = to_rep(r_var__split_fields))))))))
+  (bar(to_rep1(r_var__split_fields1)) = true)))
+
+ (* File "dic2.adb", line 4, characters 0-0 *)
+goal WP_parameter_def : (t_var = to_rep(r_var__split_fields))

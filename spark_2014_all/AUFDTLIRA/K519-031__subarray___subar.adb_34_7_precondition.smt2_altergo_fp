@@ -216,7 +216,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -357,10 +357,23 @@ function teP1__ref___projection(a: teP1__ref) : teP1 = (a).teP1__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ae : (int,one_ten) farray
+
+logic o : one_ten
+
+logic o1 : (int,one_ten) farray
+
+logic result : (int,one_ten) farray
+
+logic ae1 : (int,one_ten) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = (ae[1 <- o]))
+
+axiom H2 : (result = ae)
+
+axiom H3 : (ae1 = o1)
+
  (* File "subar.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ae:(int,one_ten) farray. forall o:one_ten.
-  forall o1:(int,one_ten) farray. forall result:(int,one_ten) farray.
-  forall ae1:(int,one_ten) farray. ((((to_rep(o) = 1) and
-  (o1 = (ae[1 <- o]))) and ((result = ae) and (ae1 = o1))) ->
-  (to_rep((ae1[to_rep1(first(mk(1, 10)))])) = 1)))
+goal WP_parameter_def : (to_rep((ae1[to_rep1(first(mk(1, 10)))])) = 1)

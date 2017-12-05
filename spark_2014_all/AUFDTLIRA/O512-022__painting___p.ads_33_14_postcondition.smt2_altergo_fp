@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -523,32 +523,46 @@ axiom get_plain__def_axiom :
   us_split_fields3 = { rec__p__painting__plain = p;
   rec__p__painting__shadow = p1 } }, c) = (p[c])))))
 
- (* File "p.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:(int,us_rep) farray.
-  forall p__split_fields1:(int,us_rep) farray.
-  forall p__split_fields2:(int,us_rep) farray.
-  forall p__split_fields3:(int,us_rep) farray.
-  forall p__split_fields4:(int,us_rep) farray.
-  forall p__split_fields5:(int,us_rep) farray.
-  forall p__split_fields6:(int,us_rep) farray.
-  forall p__split_fields7:(int,us_rep) farray. (((some_plain_is_dot({
-  us_split_fields3 = { rec__p__painting__plain = p__split_fields;
-  rec__p__painting__shadow = p__split_fields1 } }, { us_split_fields1 = {
-  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) and
+logic p__split_fields : (int,us_rep) farray
+
+logic p__split_fields1 : (int,us_rep) farray
+
+logic p__split_fields2 : (int,us_rep) farray
+
+logic p__split_fields3 : (int,us_rep) farray
+
+logic p__split_fields4 : (int,us_rep) farray
+
+logic p__split_fields5 : (int,us_rep) farray
+
+logic p__split_fields6 : (int,us_rep) farray
+
+logic p__split_fields7 : (int,us_rep) farray
+
+axiom H : (some_plain_is_dot({ us_split_fields3 = { rec__p__painting__plain =
+  p__split_fields; rec__p__painting__shadow = p__split_fields1 } }, {
+  us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true)
+
+axiom H1 :
   ((forall c:int. (((0 <= c) and (c <= 2)) ->
    ((bool_eq3((p__split_fields[c]), { us_split_fields1 = { rec__p__dot__x =
    d; rec__p__dot__y = d1 } }) = true) -> (bool_eq3((p__split_fields3[c]), {
    us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 }
-   }) = true)))) and
-  (((p__split_fields4 = p__split_fields2) and
-  (p__split_fields5 = p__split_fields3)) and ({ rec__p__painting__plain =
-  p__split_fields6; rec__p__painting__shadow = p__split_fields7 } = {
-  rec__p__painting__plain = p__split_fields2; rec__p__painting__shadow =
-  p__split_fields3 })))) ->
-  (forall c:int. (((0 <= c) and (c <= 2)) -> ((plain_is_dot({
-  us_split_fields3 = { rec__p__painting__plain = p__split_fields;
-  rec__p__painting__shadow = p__split_fields1 } }, c, { us_split_fields1 = {
-  rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true) ->
-  (bool_eq3((p__split_fields5[c]), { us_split_fields1 = { rec__p__dot__x = d;
-  rec__p__dot__y = d1 } }) = true))))))
+   }) = true)))) and (((p__split_fields4 = p__split_fields2) and
+  (p__split_fields5 = p__split_fields3)) and
+  ((p__split_fields6 = p__split_fields2) and
+  (p__split_fields7 = p__split_fields3))))
+
+logic c : int
+
+axiom H2 : (0 <= c)
+
+axiom H3 : (c <= 2)
+
+axiom H4 : (plain_is_dot({ us_split_fields3 = { rec__p__painting__plain =
+  p__split_fields; rec__p__painting__shadow = p__split_fields1 } }, c, {
+  us_split_fields1 = { rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true)
+
+ (* File "p.ads", line 26, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3((p__split_fields5[c]), { us_split_fields1 =
+  { rec__p__dot__x = d; rec__p__dot__y = d1 } }) = true)

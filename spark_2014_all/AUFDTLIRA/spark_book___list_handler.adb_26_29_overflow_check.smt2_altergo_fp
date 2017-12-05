@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -143,7 +143,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type element_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -588,18 +588,65 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic count : int
+
+logic free : int
+
+logic current : int
+
+logic status : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic current1 : int
+
+logic count1 : int
+
+logic free1 : int
+
+logic current2 : int
+
+logic status1 : int
+
+logic count2 : int
+
+logic free2 : int
+
+logic status2 : int
+
+axiom H : in_range1(lower)
+
+axiom H1 : in_range1(upper)
+
+axiom H2 : in_range3(count)
+
+axiom H3 : in_range3(free)
+
+axiom H4 : (result = current)
+
+axiom H5 : (current1 = lower)
+
+axiom H6 : in_range1(current1)
+
+axiom H7 : ((0 <= 3) -> in_range4(status))
+
+axiom H8 : (current1 <= upper)
+
+axiom H9 : ((((in_range3(free1) and (((- 2147483648) <= 2147483647) ->
+  in_range1(current2))) and ((0 <= 3) -> in_range4(status1))) and
+  in_range3(count1)) and (current2 <= upper))
+
+axiom H10 : ((o = back(void)) and in_range5(o))
+
+axiom H11 : ((in_range4(status2) and in_range3(free2)) and in_range3(count2))
+
+axiom H12 : (status2 = 0)
+
+axiom H13 : (not (current2 = upper))
+
  (* File "double_list.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall free:int. forall current:int. forall status:int.
-  forall o:int. forall result:int. forall current1:int. forall count1:int.
-  forall free1:int. forall current2:int. forall status1:int.
-  forall count2:int. forall free2:int. forall status2:int.
-  (in_range1(lower) -> (in_range1(upper) -> (in_range3(count) ->
-  (in_range3(free) -> (((result = current) and (current1 = lower)) ->
-  (in_range1(current1) -> (((0 <= 3) -> in_range4(status)) ->
-  ((current1 <= upper) -> (((((in_range3(free1) and
-  (((-2147483648) <= 2147483647) -> in_range1(current2))) and ((0 <= 3) ->
-  in_range4(status1))) and in_range3(count1)) and (current2 <= upper)) ->
-  ((((o = back(void)) and in_range5(o)) and ((in_range4(status2) and
-  in_range3(count2)) and in_range3(free2))) -> ((not ((status2 = 0) ->
-  (current2 = upper))) -> in_range1((current2 + 1))))))))))))))
+goal WP_parameter_def : in_range1((current2 + 1))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -277,9 +277,65 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic assert_loop_14__value_present__result : bool
+
+logic temp___149 : int
+
+logic m : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic i8 : int
+
+logic i9 : int
+
+logic result2 : bool
+
+logic assert_loop_14__value_present__result1 : bool
+
+logic assert_loop_14__value_present__result2 : bool
+
+logic assert_loop_14__value_present__result3 : bool
+
+logic i10 : int
+
+logic assert_loop_14__value_present__result4 : bool
+
+logic i11 : int
+
+logic assert_loop_14__value_present__result5 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : in_range2(i1)
+
+axiom H4 : (not (to_rep((a[i1])) = x))
+
+axiom H5 : (i1 <  10)
+
  (* File "assert_loop_14.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. (in_range1(x) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  (in_range2(i1) -> (((not (to_rep((a[i1])) = x)) and (i1 <  10)) ->
-  (i1 <  10))))))
+goal WP_parameter_def : (i1 <  10)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -383,30 +383,132 @@ axiom def_axiom :
   temp___1401 }, temp___141, temp___142, temp___143,
   temp___144)).elts[temp___145]) = (temp___140[temp___145]))))))))))
 
+logic v : (int,integer) farray
+
+logic aux : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic result : int
+
+logic aux1 : int
+
+logic result1 : (int,integer) farray
+
+logic v1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic v2 : (int,integer) farray
+
+logic v3 : (int,integer) farray
+
+logic aux2 : int
+
+logic v4 : (int,integer) farray
+
+logic aux3 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(v__first), to_rep(v__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range2(j)
+
+axiom H3 : (((to_rep(v__first) <= i) and (i <= to_rep(v__last))) and
+  ((to_rep(v__first) <= j) and (j <= to_rep(v__last))))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(aux))
+
+axiom H5 : ((to_rep(v__first) <= i) and (i <= to_rep(v__last)))
+
+axiom H6 : (o = i)
+
+axiom H7 : (o1 = (v[o]))
+
+axiom H8 : (o2 = to_rep(o1))
+
+axiom H9 : (result = aux)
+
+axiom H10 : (aux1 = o2)
+
+axiom H11 : ((to_rep(v__first) <= j) and (j <= to_rep(v__last)))
+
+axiom H12 : (o3 = j)
+
+axiom H13 : (o4 = (v[o3]))
+
+axiom H14 : (o5 = to_rep(o4))
+
+axiom H15 : (to_rep(o6) = o5)
+
+axiom H16 : ((to_rep(v__first) <= i) and (i <= to_rep(v__last)))
+
+axiom H17 : (o7 = i)
+
+axiom H18 : (o8 = (v[o7 <- o6]))
+
+axiom H19 : (result1 = v)
+
+axiom H20 : (v1 = o8)
+
+axiom H21 : (to_rep(o9) = aux1)
+
+axiom H22 : ((to_rep(v__first) <= j) and (j <= to_rep(v__last)))
+
+axiom H23 : (o10 = j)
+
+axiom H24 : (o11 = (v1[o10 <- o9]))
+
+axiom H25 : (v1 = result2)
+
+axiom H26 : (v2 = o11)
+
+axiom H27 : (aux1 = aux2)
+
+axiom H28 : (v2 = v3)
+
+axiom H29 : (aux3 = aux1)
+
+axiom H30 : (v4 = v2)
+
  (* File "p.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:(int,integer) farray. forall aux:int. forall o:int.
-  forall o1:integer. forall o2:int. forall o3:int. forall o4:integer.
-  forall o5:int. forall o6:integer. forall o7:int.
-  forall o8:(int,integer) farray. forall o9:integer. forall o10:int.
-  forall o11:(int,integer) farray. forall result:int. forall aux1:int.
-  forall result1:(int,integer) farray. forall v1:(int,integer) farray.
-  forall result2:(int,integer) farray. forall v2:(int,integer) farray.
-  forall v3:(int,integer) farray. forall aux2:int.
-  forall v4:(int,integer) farray. forall aux3:int. (dynamic_property(0,
-  2147483647, to_rep(v__first), to_rep(v__last)) -> (in_range2(i) ->
-  (in_range2(j) -> ((((to_rep(v__first) <= i) and (i <= to_rep(v__last))) and
-  ((to_rep(v__first) <= j) and (j <= to_rep(v__last)))) ->
-  ((((((-2147483648) <= 2147483647) -> in_range1(aux)) and
-  (((((((to_rep(v__first) <= i) and (i <= to_rep(v__last))) and (o = i)) and
-  (o1 = (v[o]))) and (o2 = to_rep(o1))) and (({ int__content = result } = {
-  int__content = aux }) and (aux1 = o2))) and
-  (((((((((to_rep(v__first) <= j) and (j <= to_rep(v__last))) and
-  (o3 = j)) and (o4 = (v[o3]))) and (o5 = to_rep(o4))) and
-  (to_rep(o6) = o5)) and ((((to_rep(v__first) <= i) and
-  (i <= to_rep(v__last))) and (o7 = i)) and (o8 = (v[o7 <- o6])))) and (({
-  map__content = result1 } = { map__content = v }) and (v1 = o8))) and
-  (((to_rep(o9) = aux1) and ((((to_rep(v__first) <= j) and
-  (j <= to_rep(v__last))) and (o10 = j)) and (o11 = (v1[o10 <- o9])))) and
-  ((v1 = result2) and (v2 = o11)))))) and (((aux1 = aux2) and (v2 = v3)) and
-  ((aux3 = aux1) and (v4 = v2)))) -> (to_rep(v__first) <= i)))))))
+goal WP_parameter_def : (to_rep(v__first) <= i)

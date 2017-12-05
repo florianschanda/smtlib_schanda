@@ -320,6 +320,8 @@
 (declare-const xdi11 (Array Int unsigned_8))
 (declare-const val19 (_ BitVec 8))
 (declare-const val29 (_ BitVec 8))
+(assert true)
+(assert true)
 (assert (and (= o (ecx xcx)) (= o (bvadd (bvadd (bvadd ((_ zero_extend 24) (to_rep (select xcx 0))) (bvmul ((_ zero_extend 24) (to_rep (select xcx 1))) ((_ int2bv 32) 256))) (bvmul ((_ zero_extend 24) (to_rep (select xcx 2))) ((_ int2bv 32) 65536))) (bvmul ((_ zero_extend 24) (to_rep (select xcx 3))) ((_ int2bv 32) 16777216))))))
 (assert (= o1 (ite (= o ((_ int2bv 32) 0)) true false)))
 (assert (= result (ite (not (= o1 true)) true false)))

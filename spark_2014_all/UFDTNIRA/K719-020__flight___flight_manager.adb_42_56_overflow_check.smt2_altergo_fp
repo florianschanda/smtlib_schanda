@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -386,70 +386,304 @@ logic c7b : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic result____split_fields : integer
+
+logic result____split_fields1 : integer
+
+logic flight_manager__set_engine_speed__result : integer
+
+logic flight_manager__set_engine_speed__result1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic temp___145 : integer
+
+logic temp___1451 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic temp___143 : integer
+
+logic temp___1431 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic temp___149 : integer
+
+logic temp___1491 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic temp___147 : integer
+
+logic temp___1471 : integer
+
+logic o12 : int
+
+logic flight_manager__set_engine_speed__C4b__assume : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : integer
+
+logic o17 : integer
+
+logic temp___151 : integer
+
+logic temp___1511 : integer
+
+logic o18 : int
+
+logic flight_manager__set_engine_speed__C7b__assume : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : integer
+
+logic o22 : integer
+
+logic o23 : integer
+
+logic temp___153 : integer
+
+logic temp___1531 : integer
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : bool
+
+logic result____split_fields2 : integer
+
+logic result____split_fields3 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic result____split_fields4 : integer
+
+logic result____split_fields5 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic result____split_fields6 : integer
+
+logic result____split_fields7 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result____split_fields8 : integer
+
+logic result____split_fields9 : integer
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic result____split_fields10 : integer
+
+logic result____split_fields11 : integer
+
+logic result8 : integer
+
+logic result9 : integer
+
+logic result____split_fields12 : integer
+
+logic result____split_fields13 : integer
+
+logic result10 : integer
+
+logic result11 : integer
+
+logic result____split_fields14 : integer
+
+logic result____split_fields15 : integer
+
+logic result12 : integer
+
+logic result13 : integer
+
+logic flight_manager__set_engine_speed__result2 : integer
+
+logic flight_manager__set_engine_speed__result3 : integer
+
+logic flight_manager__set_engine_speed__result4 : integer
+
+logic flight_manager__set_engine_speed__result5 : integer
+
+logic flight_manager__set_engine_speed__result6 : integer
+
+logic flight_manager__set_engine_speed__result7 : integer
+
+logic result____split_fields16 : integer
+
+logic result____split_fields17 : integer
+
+logic flight_manager__set_engine_speed__result8 : integer
+
+logic flight_manager__set_engine_speed__result9 : integer
+
+logic result____split_fields18 : integer
+
+logic result____split_fields19 : integer
+
+logic flight_manager__set_engine_speed__result10 : integer
+
+logic flight_manager__set_engine_speed__result11 : integer
+
+axiom H : in_range1(position_x)
+
+axiom H1 : in_range1(position_y)
+
+axiom H2 : in_range1(target_x)
+
+axiom H3 : in_range1(target_y)
+
+axiom H4 : ((target_x <  position_x) -> (to_rep(o) = (- 100)))
+
+axiom H5 : ((target_x <  position_x) -> (o = o1))
+
+axiom H6 : ((target_x <  position_x) -> (result____split_fields1 = o2))
+
+axiom H7 : ((target_x <  position_x) -> (temp___145 = o1))
+
+axiom H8 : ((target_x <  position_x) -> (temp___1451 = o2))
+
+axiom H9 : ((target_x <  position_x) ->
+  ((result = result____split_fields) and
+  (result1 = result____split_fields1)))
+
+axiom H10 : ((target_x <  position_x) ->
+  ((result____split_fields4 = temp___145) and
+  (result____split_fields5 = temp___1451)))
+
+axiom H11 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  (to_rep(o3) = 100)))
+
+axiom H12 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  (o3 = o4)))
+
+axiom H13 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  (result____split_fields1 = o5)))
+
+axiom H14 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  (temp___143 = o4)))
+
+axiom H15 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  (temp___1431 = o5)))
+
+axiom H16 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  ((result2 = result____split_fields) and
+  (result3 = result____split_fields1))))
+
+axiom H17 : ((not (target_x <  position_x)) -> ((position_x <  target_x) ->
+  ((result____split_fields6 = temp___143) and
+  (result____split_fields7 = temp___1431))))
+
+axiom H18 : ((not (target_x <  position_x)) ->
+  ((not (position_x <  target_x)) ->
+  ((result____split_fields6 = result____split_fields) and
+  (result____split_fields7 = result____split_fields1))))
+
+axiom H19 : ((not (target_x <  position_x)) ->
+  ((not (position_x <  target_x)) ->
+  ((result____split_fields6 = result____split_fields2) and
+  (result____split_fields7 = result____split_fields3))))
+
+axiom H20 : ((not (target_x <  position_x)) ->
+  ((result____split_fields4 = result____split_fields6) and
+  (result____split_fields5 = result____split_fields7)))
+
+axiom H21 : ((target_y <  position_y) -> (to_rep(o6) = (- 100)))
+
+axiom H22 : ((target_y <  position_y) -> (result____split_fields4 = o7))
+
+axiom H23 : ((target_y <  position_y) -> (o6 = o8))
+
+axiom H24 : ((target_y <  position_y) -> (temp___149 = o7))
+
+axiom H25 : ((target_y <  position_y) -> (temp___1491 = o8))
+
+axiom H26 : ((target_y <  position_y) ->
+  ((result4 = result____split_fields4) and
+  (result5 = result____split_fields5)))
+
+axiom H27 : ((target_y <  position_y) ->
+  ((result____split_fields8 = temp___149) and
+  (result____split_fields9 = temp___1491)))
+
+axiom H28 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  (to_rep(o9) = 100)))
+
+axiom H29 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  (result____split_fields4 = o10)))
+
+axiom H30 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  (o9 = o11)))
+
+axiom H31 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  (temp___147 = o10)))
+
+axiom H32 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  (temp___1471 = o11)))
+
+axiom H33 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  ((result6 = result____split_fields4) and
+  (result7 = result____split_fields5))))
+
+axiom H34 : ((not (target_y <  position_y)) -> ((position_y <  target_y) ->
+  ((result____split_fields10 = temp___147) and
+  (result____split_fields11 = temp___1471))))
+
+axiom H35 : ((not (target_y <  position_y)) ->
+  ((not (position_y <  target_y)) ->
+  ((result____split_fields10 = result____split_fields4) and
+  (result____split_fields11 = result____split_fields5))))
+
+axiom H36 : ((not (target_y <  position_y)) ->
+  ((result____split_fields8 = result____split_fields10) and
+  (result____split_fields9 = result____split_fields11)))
+
  (* File "flight_manager.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:integer.
-  forall result____split_fields1:integer. forall o:integer.
-  forall o1:integer. forall o2:integer. forall temp___145:integer.
-  forall temp___1451:integer. forall o3:integer. forall o4:integer.
-  forall o5:integer. forall temp___143:integer. forall temp___1431:integer.
-  forall o6:integer. forall o7:integer. forall o8:integer.
-  forall temp___149:integer. forall temp___1491:integer. forall o9:integer.
-  forall o10:integer. forall o11:integer. forall temp___147:integer.
-  forall temp___1471:integer. forall result____split_fields2:integer.
-  forall result____split_fields3:integer. forall result:integer.
-  forall result1:integer. forall result____split_fields4:integer.
-  forall result____split_fields5:integer. forall result2:integer.
-  forall result3:integer. forall result____split_fields6:integer.
-  forall result____split_fields7:integer. forall result4:integer.
-  forall result5:integer. forall result____split_fields8:integer.
-  forall result____split_fields9:integer. forall result6:integer.
-  forall result7:integer. forall result____split_fields10:integer.
-  forall result____split_fields11:integer. (in_range1(position_x) ->
-  (in_range1(position_y) -> (in_range1(target_x) -> (in_range1(target_y) ->
-  ((((target_x <  position_x) and ((((to_rep(o) = (-100)) and ((o = o1) and
-  (result____split_fields1 = o2))) and ((temp___145 = o1) and
-  (temp___1451 = o2))) and (((result = result____split_fields) and
-  (result1 = result____split_fields1)) and
-  ((temp___145 = result____split_fields4) and
-  (temp___1451 = result____split_fields5))))) or
-  ((not (target_x <  position_x)) and ((((position_x <  target_x) and
-  ((((to_rep(o3) = 100) and ((o3 = o4) and
-  (result____split_fields1 = o5))) and ((temp___143 = o4) and
-  (temp___1431 = o5))) and (((result2 = result____split_fields) and
-  (result3 = result____split_fields1)) and
-  ((temp___143 = result____split_fields6) and
-  (temp___1431 = result____split_fields7))))) or
-  ((not (position_x <  target_x)) and
-  (((result____split_fields = result____split_fields6) and
-  (result____split_fields1 = result____split_fields7)) and
-  ((result____split_fields2 = result____split_fields6) and
-  (result____split_fields3 = result____split_fields7))))) and ({
-  rec__flight_manager__engine_values__x_speed = result____split_fields4;
-  rec__flight_manager__engine_values__y_speed = result____split_fields5 } = {
-  rec__flight_manager__engine_values__x_speed = result____split_fields6;
-  rec__flight_manager__engine_values__y_speed = result____split_fields7
-  })))) -> ((((target_y <  position_y) and ((((to_rep(o6) = (-100)) and
-  ((result____split_fields4 = o7) and (o6 = o8))) and ((temp___149 = o7) and
-  (temp___1491 = o8))) and (((result4 = result____split_fields4) and
-  (result5 = result____split_fields5)) and
-  ((temp___149 = result____split_fields8) and
-  (temp___1491 = result____split_fields9))))) or
-  ((not (target_y <  position_y)) and ((((position_y <  target_y) and
-  ((((to_rep(o9) = 100) and ((result____split_fields4 = o10) and
-  (o9 = o11))) and ((temp___147 = o10) and (temp___1471 = o11))) and
-  (((result6 = result____split_fields4) and
-  (result7 = result____split_fields5)) and
-  ((temp___147 = result____split_fields10) and
-  (temp___1471 = result____split_fields11))))) or
-  ((not (position_y <  target_y)) and ({
-  rec__flight_manager__engine_values__x_speed = result____split_fields10;
-  rec__flight_manager__engine_values__y_speed = result____split_fields11
-  } = { rec__flight_manager__engine_values__x_speed =
-  result____split_fields4; rec__flight_manager__engine_values__y_speed =
-  result____split_fields5 }))) and ({
-  rec__flight_manager__engine_values__x_speed = result____split_fields8;
-  rec__flight_manager__engine_values__y_speed = result____split_fields9 } = {
-  rec__flight_manager__engine_values__x_speed = result____split_fields10;
-  rec__flight_manager__engine_values__y_speed = result____split_fields11
-  })))) -> in_range1((position_x - target_x)))))))))
+goal WP_parameter_def : in_range1((position_x - target_x))

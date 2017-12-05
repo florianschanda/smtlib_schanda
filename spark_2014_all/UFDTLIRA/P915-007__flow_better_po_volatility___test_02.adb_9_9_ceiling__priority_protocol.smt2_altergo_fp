@@ -182,7 +182,7 @@ axiom oadd__post_axiom : true
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -231,7 +231,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref) : us_spl
 type us_rep2 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___28__projection(a: us_rep2) : us_split_fields =
+function us_rep___29__projection(a: us_rep2) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size2 : int

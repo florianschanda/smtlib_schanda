@@ -121,6 +121,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const count Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const o Int)
+(assert true)
 (assert (in_range1 count))
 (assert (not (in_range (- (to_rep (rec__foo__lists__list__capacity container__split_discrs)) count))))
 (check-sat)

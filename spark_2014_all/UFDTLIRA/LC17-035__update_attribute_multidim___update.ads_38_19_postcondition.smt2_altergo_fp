@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -295,11 +295,36 @@ axiom def_axiom :
   temp___182, temp___183, temp___184), temp___185, temp___186,
   temp___187) = get(temp___180, temp___185, temp___186, temp___187)))))))
 
+logic a : map
+
+logic o : integer
+
+logic o1 : map
+
+logic result : map
+
+logic a1 : map
+
+logic a2 : map
+
+logic a3 : map
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range(new_val)
+
+axiom H2 : (to_rep(o) = new_val)
+
+axiom H3 : (o1 = set(a, i, i, i, o))
+
+axiom H4 : (result = a)
+
+axiom H5 : (a1 = o1)
+
+axiom H6 : (a1 = a2)
+
+axiom H7 : (a3 = a1)
+
  (* File "update.ads", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:map. forall o:integer. forall o1:map. forall result:map.
-  forall a1:map. forall a2:map. forall a3:map. ((in_range1(i) and
-  (in_range(new_val) and ((((to_rep(o) = new_val) and (o1 = set(a, i, i, i,
-  o))) and ((result = a) and (a1 = o1))) and ((a1 = a2) and (a3 = a1))))) ->
-  (bool_eq3(a2, 1, 8, 1, 8, 1, 8, temp___178(a, i, i, 5, new_val), 1, 8, 1,
-  8, 1, 8) = true)))
+goal WP_parameter_def : (bool_eq3(a2, 1, 8, 1, 8, 1, 8, temp___178(a, i, i,
+  5, new_val), 1, 8, 1, 8, 1, 8) = true)

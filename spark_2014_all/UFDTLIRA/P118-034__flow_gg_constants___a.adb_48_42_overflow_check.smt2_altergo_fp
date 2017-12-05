@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -205,16 +205,67 @@ axiom add_annotated__def_axiom :
   (forall x:int. forall y:int [add_annotated(x, y)]. ((in_range1(x) and
   in_range1(y)) -> (add_annotated(x, y) = (x + y))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+axiom H : in_range1(c3)
+
+axiom H1 : (add_annotated_local(42, 44) = c3)
+
+axiom H2 : in_range1(c4)
+
+axiom H3 : (add_annotated_local(42, c3) = c4)
+
+axiom H4 : in_range1(c5)
+
+axiom H5 : (add_annotated(c3, c4) = c5)
+
+axiom H6 : in_range1(c6)
+
+axiom H7 : (add_annotated(c3, c5) = c6)
+
+axiom H8 : in_range1(c7)
+
+axiom H9 : (add(c5, c6) = c7)
+
+axiom H10 : in_range1(c8)
+
+axiom H11 : (add(c5, c7) = c8)
+
+axiom H12 : ((o = (86 + c3)) and in_range1((86 + c3)))
+
+axiom H13 : (o1 = (o + c4))
+
+axiom H14 : ((o2 = o1) and in_range1(o1))
+
+axiom H15 : (o3 = (o2 + c5))
+
+axiom H16 : ((o4 = o3) and in_range1(o3))
+
+axiom H17 : (o5 = (o4 + c6))
+
+axiom H18 : ((o6 = o5) and in_range1(o5))
+
+axiom H19 : (o7 = (o6 + c7))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int. (in_range1(c3) ->
-  ((add_annotated_local(42, 44) = c3) -> (in_range1(c4) ->
-  ((add_annotated_local(42, c3) = c4) -> (in_range1(c5) ->
-  ((add_annotated(c3, c4) = c5) -> (in_range1(c6) -> ((add_annotated(c3,
-  c5) = c6) -> (in_range1(c7) -> ((add(c5, c6) = c7) -> (in_range1(c8) ->
-  ((add(c5, c7) = c8) -> ((((((((((o = (86 + c3)) and
-  in_range1((86 + c3))) and (o1 = (o + c4))) and ((o2 = o1) and
-  in_range1(o1))) and (o3 = (o2 + c5))) and ((o4 = o3) and
-  in_range1(o3))) and (o5 = (o4 + c6))) and ((o6 = o5) and
-  in_range1(o5))) and (o7 = (o6 + c7))) -> in_range1(o7)))))))))))))))
+goal WP_parameter_def : in_range1(o7)

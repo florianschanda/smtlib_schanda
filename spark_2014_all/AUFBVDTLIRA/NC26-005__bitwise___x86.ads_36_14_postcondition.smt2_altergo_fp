@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1528,22 +1528,52 @@ axiom readmem8__post_axiom :
   (forall x86__memory:(t2,unsigned8) farray [readmem8(addr1, x86__memory)].
   (readmem8(addr1, x86__memory) = to_rep((x86__memory[addr1])))))
 
- (* File "x86.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t2,unsigned8) farray. forall o:t1. forall o1:t1.
-  forall o2:t1. forall o3:t. forall memory1:(t2,unsigned8) farray.
-  forall memory2:(t2,unsigned8) farray. forall memory3:(t2,unsigned8) farray.
-  forall memory4:(t2,unsigned8) farray. (((((readmem8(addr,
-  memory1) = toSmall(bw_and1(val__, of_int1(255)))) and
+logic memory : (t2,unsigned8) farray
+
+logic o : t1
+
+logic o1 : t1
+
+logic o2 : t1
+
+logic o3 : t
+
+logic memory1 : (t2,unsigned8) farray
+
+logic memory2 : (t2,unsigned8) farray
+
+logic memory3 : (t2,unsigned8) farray
+
+logic memory4 : (t2,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : ((readmem8(addr, memory1) = toSmall(bw_and1(val__,
+  of_int1(255)))) and
   (forall x:t2. ((ule2(of_int2(0), x) and ule2(x,
   of_int2(18446744073709551615))) -> ((x = addr) or
-  (to_rep((memory1[x])) = to_rep((memory[x]))))))) and (((((((8 <  16) and
-  (o = lsr_bv1(val__, of_int1(8)))) or ((not (8 <  16)) and
-  (o = of_int1(0)))) and (o1 = bw_and1(o, of_int1(255)))) and (o2 = o1)) and
-  (o3 = toSmall(o2))) and ((readmem8(add2(addr, of_int2(1)),
-  memory2) = o3) and
+  (to_rep((memory1[x])) = to_rep((memory[x])))))))
+
+axiom H3 : ((8 <  16) -> (o = lsr_bv1(val__, of_int1(8))))
+
+axiom H4 : ((not (8 <  16)) -> (o = of_int1(0)))
+
+axiom H5 : (o1 = bw_and1(o, of_int1(255)))
+
+axiom H6 : (o2 = o1)
+
+axiom H7 : (o3 = toSmall(o2))
+
+axiom H8 : ((readmem8(add2(addr, of_int2(1)), memory2) = o3) and
   (forall x:t2. ((ule2(of_int2(0), x) and ule2(x,
   of_int2(18446744073709551615))) -> ((x = add2(addr, of_int2(1))) or
-  (to_rep((memory2[x])) = to_rep((memory1[x]))))))))) and
-  ((memory2 = memory3) and (memory4 = memory2))) -> (readmem16(addr,
-  memory3) = val__)))
+  (to_rep((memory2[x])) = to_rep((memory1[x])))))))
+
+axiom H9 : (memory2 = memory3)
+
+axiom H10 : (memory4 = memory2)
+
+ (* File "x86.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : (readmem16(addr, memory3) = val__)

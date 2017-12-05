@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -373,27 +373,91 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:even. forall result____split_fields1:even.
-  forall dynamic_preds__get_even_close_pair_error__result__assume:even.
-  forall dynamic_preds__get_even_close_pair_error__result__assume1:even.
-  forall temp___273:int. forall o:int. forall o1:even. forall o2:even.
-  forall o3:even. forall temp___276:even. forall temp___2761:even.
-  forall temp___269:int. forall o4:int. forall o5:even. forall o6:even.
-  forall o7:even. forall temp___272:even. forall temp___2721:even.
-  forall temp___277:int. forall o8:int. forall o9:even. forall o10:even.
-  forall o11:even. forall temp___280:even. forall temp___2801:even.
-  forall result:even. forall result1:even.
-  forall result____split_fields2:even. forall result____split_fields3:even.
-  forall result2:even. forall result3:even.
-  forall result____split_fields4:even. forall result____split_fields5:even.
-  forall result4:even. forall result5:even.
-  forall result____split_fields6:even. forall result____split_fields7:even.
-  forall result6:even. forall result7:even.
-  forall result____split_fields8:even. forall result____split_fields9:even.
-  (in_range(above) -> (((({ us_split_fields1 = {
-  rec__dynamic_preds__even_pair__a =
+logic result____split_fields : even
+
+logic result____split_fields1 : even
+
+logic dynamic_preds__get_even_close_pair_error__result__assume : even
+
+logic dynamic_preds__get_even_close_pair_error__result__assume1 : even
+
+logic temp___273 : int
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : even
+
+logic o3 : even
+
+logic temp___276 : even
+
+logic temp___2761 : even
+
+logic temp___269 : int
+
+logic o4 : int
+
+logic o5 : even
+
+logic o6 : even
+
+logic o7 : even
+
+logic temp___272 : even
+
+logic temp___2721 : even
+
+logic temp___277 : int
+
+logic o8 : int
+
+logic o9 : even
+
+logic o10 : even
+
+logic o11 : even
+
+logic temp___280 : even
+
+logic temp___2801 : even
+
+logic result : even
+
+logic result1 : even
+
+logic result____split_fields2 : even
+
+logic result____split_fields3 : even
+
+logic result2 : even
+
+logic result3 : even
+
+logic result____split_fields4 : even
+
+logic result____split_fields5 : even
+
+logic result4 : even
+
+logic result5 : even
+
+logic result____split_fields6 : even
+
+logic result____split_fields7 : even
+
+logic result6 : even
+
+logic result7 : even
+
+logic result____split_fields8 : even
+
+logic result____split_fields9 : even
+
+axiom H : in_range(above)
+
+axiom H1 : (({ us_split_fields1 = { rec__dynamic_preds__even_pair__a =
   dynamic_preds__get_even_close_pair_error__result__assume;
   rec__dynamic_preds__even_pair__b =
   dynamic_preds__get_even_close_pair_error__result__assume1 }
@@ -403,39 +467,100 @@ goal WP_parameter_def :
   (mod(to_rep(dynamic_preds__get_even_close_pair_error__result__assume1),
   2) = 0)) and
   ((to_rep(dynamic_preds__get_even_close_pair_error__result__assume) = 0) and
-  (to_rep(dynamic_preds__get_even_close_pair_error__result__assume1) = 0)))) and
-  (((result = result____split_fields) and
-  (result1 = result____split_fields1)) and
-  ((dynamic_preds__get_even_close_pair_error__result__assume = result____split_fields2) and
-  (dynamic_preds__get_even_close_pair_error__result__assume1 = result____split_fields3)))) ->
-  (((mod(to_rep(result____split_fields2), 2) = 0) and
-  (mod(to_rep(result____split_fields3), 2) = 0)) -> ((((mod(above,
-  2) = 0) and (((((((temp___273 = (above + 1)) and in_range((above + 1))) and
-  ((mod(temp___273, 2) = 0) and (o = temp___273))) and (to_rep(o1) = o)) and
-  ((o1 = o2) and (result____split_fields3 = o3))) and ((temp___276 = o2) and
-  (temp___2761 = o3))) and (((result2 = result____split_fields2) and
-  (result3 = result____split_fields3)) and
-  ((temp___276 = result____split_fields4) and
-  (temp___2761 = result____split_fields5))))) or ((not (mod(above,
-  2) = 0)) and ((((((((temp___269 = (above + 1)) and
-  in_range((above + 1))) and ((mod(temp___269, 2) = 0) and
-  (o4 = temp___269))) and (to_rep(o5) = o4)) and ((o5 = o6) and
-  (result____split_fields3 = o7))) and ((temp___272 = o6) and
-  (temp___2721 = o7))) and (((result4 = result____split_fields2) and
-  (result5 = result____split_fields3)) and
-  ((temp___272 = result____split_fields6) and
-  (temp___2721 = result____split_fields7)))) and ({
-  rec__dynamic_preds__even_pair__a = result____split_fields4;
-  rec__dynamic_preds__even_pair__b = result____split_fields5 } = {
-  rec__dynamic_preds__even_pair__a = result____split_fields6;
-  rec__dynamic_preds__even_pair__b = result____split_fields7 })))) ->
-  ((((((((temp___277 = (to_rep(result____split_fields4) + 4)) and
-  in_range((to_rep(result____split_fields4) + 4))) and ((mod(temp___277,
-  2) = 0) and (o8 = temp___277))) and (to_rep(o9) = o8)) and
-  ((result____split_fields4 = o10) and (o9 = o11))) and
-  ((temp___280 = o10) and (temp___2801 = o11))) and
-  (((result6 = result____split_fields4) and
-  (result7 = result____split_fields5)) and
-  ((temp___280 = result____split_fields8) and
-  (temp___2801 = result____split_fields9)))) ->
-  (to_rep(result____split_fields9) = (to_rep(result____split_fields8) + 2))))))))
+  (to_rep(dynamic_preds__get_even_close_pair_error__result__assume1) = 0))))
+
+axiom H2 : (result = result____split_fields)
+
+axiom H3 : (result1 = result____split_fields1)
+
+axiom H4 :
+  (dynamic_preds__get_even_close_pair_error__result__assume = result____split_fields2)
+
+axiom H5 :
+  (dynamic_preds__get_even_close_pair_error__result__assume1 = result____split_fields3)
+
+axiom H6 : ((mod(to_rep(result____split_fields2), 2) = 0) and
+  (mod(to_rep(result____split_fields3), 2) = 0))
+
+axiom H7 : ((mod(above, 2) = 0) -> ((temp___273 = (above + 1)) and
+  in_range((above + 1))))
+
+axiom H8 : ((mod(above, 2) = 0) -> (mod(temp___273, 2) = 0))
+
+axiom H9 : ((mod(above, 2) = 0) -> (o = temp___273))
+
+axiom H10 : ((mod(above, 2) = 0) -> (to_rep(o1) = o))
+
+axiom H11 : ((mod(above, 2) = 0) -> (o1 = o2))
+
+axiom H12 : ((mod(above, 2) = 0) -> (result____split_fields3 = o3))
+
+axiom H13 : ((mod(above, 2) = 0) -> (temp___276 = o2))
+
+axiom H14 : ((mod(above, 2) = 0) -> (temp___2761 = o3))
+
+axiom H15 : ((mod(above, 2) = 0) -> (result2 = result____split_fields2))
+
+axiom H16 : ((mod(above, 2) = 0) -> (result3 = result____split_fields3))
+
+axiom H17 : ((mod(above, 2) = 0) -> (temp___276 = result____split_fields4))
+
+axiom H18 : ((mod(above, 2) = 0) -> (temp___2761 = result____split_fields5))
+
+axiom H19 : ((not (mod(above, 2) = 0)) -> ((temp___269 = (above + 1)) and
+  in_range((above + 1))))
+
+axiom H20 : ((not (mod(above, 2) = 0)) -> (mod(temp___269, 2) = 0))
+
+axiom H21 : ((not (mod(above, 2) = 0)) -> (o4 = temp___269))
+
+axiom H22 : ((not (mod(above, 2) = 0)) -> (to_rep(o5) = o4))
+
+axiom H23 : ((not (mod(above, 2) = 0)) -> (o5 = o6))
+
+axiom H24 : ((not (mod(above, 2) = 0)) -> (result____split_fields3 = o7))
+
+axiom H25 : ((not (mod(above, 2) = 0)) -> (temp___272 = o6))
+
+axiom H26 : ((not (mod(above, 2) = 0)) -> (temp___2721 = o7))
+
+axiom H27 : ((not (mod(above, 2) = 0)) ->
+  (result4 = result____split_fields2))
+
+axiom H28 : ((not (mod(above, 2) = 0)) ->
+  (result5 = result____split_fields3))
+
+axiom H29 : ((not (mod(above, 2) = 0)) ->
+  ((result____split_fields6 = temp___272) and
+  (result____split_fields7 = temp___2721)))
+
+axiom H30 : ((not (mod(above, 2) = 0)) ->
+  ((result____split_fields4 = result____split_fields6) and
+  (result____split_fields5 = result____split_fields7)))
+
+axiom H31 : ((temp___277 = (to_rep(result____split_fields4) + 4)) and
+  in_range((to_rep(result____split_fields4) + 4)))
+
+axiom H32 : (mod(temp___277, 2) = 0)
+
+axiom H33 : (o8 = temp___277)
+
+axiom H34 : (to_rep(o9) = o8)
+
+axiom H35 : (result____split_fields4 = o10)
+
+axiom H36 : (o9 = o11)
+
+axiom H37 : (temp___280 = o10)
+
+axiom H38 : (temp___2801 = o11)
+
+axiom H39 : ((result6 = result____split_fields4) and
+  (result7 = result____split_fields5))
+
+axiom H40 : ((result____split_fields8 = temp___280) and
+  (result____split_fields9 = temp___2801))
+
+ (* File "dynamic_preds.ads", line 25, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep(result____split_fields9) = (to_rep(result____split_fields8) + 2))

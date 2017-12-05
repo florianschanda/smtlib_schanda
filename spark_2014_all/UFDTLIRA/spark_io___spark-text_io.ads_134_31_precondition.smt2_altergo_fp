@@ -152,7 +152,13 @@ logic file : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic result : bool
+
+axiom H : (result = is_open(file))
+
+axiom H1 : (result = true)
+
  (* File "spark-text_io.ads", line 133, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. ((result = is_open(file)) -> ((result = true) ->
-  (is_open(file) = true))))
+goal WP_parameter_def : (is_open(file) = true)

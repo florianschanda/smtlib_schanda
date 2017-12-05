@@ -183,15 +183,32 @@ logic bool_eq2 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic temp___1497 : (int,us_rep) farray
+
+logic o : us_rep
+
+logic ada__synchronous_task_control__suspend_until_true__s : us_rep
+
+logic sos : (int,us_rep) farray
+
+logic ada__synchronous_task_control__suspend_until_true__s1 : us_rep
+
+logic result : (int,us_rep) farray
+
+logic sos1 : (int,us_rep) farray
+
+axiom H : in_range(id)
+
+axiom H1 : (temp___1497 = sos)
+
+axiom H2 : (o = (temp___1497[id]))
+
+axiom H3 : (o = ada__synchronous_task_control__suspend_until_true__s)
+
+axiom H4 : (result = sos)
+
+axiom H5 :
+  (sos1 = (sos[id <- ada__synchronous_task_control__suspend_until_true__s1]))
+
  (* File "task_and_so_arrays.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___1507:(int,us_rep) farray. forall o:us_rep.
-  forall ada__synchronous_task_control__suspend_until_true__s:us_rep.
-  forall sos:(int,us_rep) farray.
-  forall ada__synchronous_task_control__suspend_until_true__s1:us_rep.
-  forall result:(int,us_rep) farray. forall sos1:(int,us_rep) farray.
-  (not (in_range(id) and ((((temp___1507 = sos) and
-  (o = (temp___1507[id]))) and
-  (o = ada__synchronous_task_control__suspend_until_true__s)) and
-  ((result = sos) and
-  (sos1 = (sos[id <- ada__synchronous_task_control__suspend_until_true__s1])))))))
+goal WP_parameter_def : false

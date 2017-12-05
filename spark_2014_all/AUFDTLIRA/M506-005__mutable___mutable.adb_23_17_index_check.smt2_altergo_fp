@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -253,7 +253,7 @@ axiom compare_def_gt :
 
 type tdB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -435,15 +435,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som))) and
-  (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
-  ((b).us_split_fields1).rec__mutable__t__arr) = true)) -> (bool_eq7(a,
-  b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som)) and
   (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
   ((b).us_split_fields1).rec__mutable__t__arr) = true))) -> (bool_eq7(a,
+  b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som)) and
+  (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
+  ((b).us_split_fields1).rec__mutable__t__arr) = true)))) -> (bool_eq7(a,
   b) = false))))
 
 logic value__size1 : int
@@ -534,31 +534,68 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "mutable.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer.
-  forall x__split_fields1:(int,integer) farray. forall x__split_fields2:t.
-  forall x__split_discrs:d. forall z:int. forall x__split_fields3:integer.
-  forall x__split_fields4:(int,integer) farray. forall x__split_fields5:t.
-  forall x__split_discrs1:d. forall x__split_fields6:integer.
-  forall x__split_fields7:(int,integer) farray. forall x__split_fields8:t.
-  forall x__split_discrs2:d. ((dynamic_property1(1, to_rep1(x__split_discrs),
+logic x__split_fields : integer
+
+logic x__split_fields1 : (int,integer) farray
+
+logic x__split_fields2 : t
+
+logic x__split_discrs : d
+
+logic z : int
+
+logic x__split_fields3 : integer
+
+logic x__split_fields4 : (int,integer) farray
+
+logic x__split_fields5 : t
+
+logic x__split_discrs1 : d
+
+logic x__split_fields6 : integer
+
+logic x__split_fields7 : (int,integer) farray
+
+logic x__split_fields8 : t
+
+logic x__split_discrs2 : d
+
+axiom H : (dynamic_property1(1, to_rep1(x__split_discrs),
   to_rep2(first(x__split_fields2)), to_rep2(last(x__split_fields2))) and
   ((to_rep2(first(x__split_fields2)) = 1) and
-  (to_rep2(last(x__split_fields2)) = to_rep1(x__split_discrs)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range(z)) ->
-  ((((0 <  to_rep1(x__split_discrs)) and
-  (((x__split_discrs = x__split_discrs2) and
-  ((x__split_fields = x__split_fields6) and
-  ((x__split_fields1 = x__split_fields7) and
-  (x__split_fields2 = x__split_fields8)))) and
-  ((x__split_discrs1 = x__split_discrs2) and
-  ((x__split_fields3 = x__split_fields6) and
-  ((x__split_fields4 = x__split_fields7) and
-  (x__split_fields5 = x__split_fields8)))))) or
-  ((not (0 <  to_rep1(x__split_discrs))) and (dynamic_property1(1,
+  (to_rep2(last(x__split_fields2)) = to_rep1(x__split_discrs))))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(z))
+
+axiom H2 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_discrs = x__split_discrs2))
+
+axiom H3 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields = x__split_fields6))
+
+axiom H4 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields1 = x__split_fields7))
+
+axiom H5 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields2 = x__split_fields8))
+
+axiom H6 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_discrs1 = x__split_discrs2))
+
+axiom H7 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields3 = x__split_fields6))
+
+axiom H8 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields4 = x__split_fields7))
+
+axiom H9 : ((0 <  to_rep1(x__split_discrs)) ->
+  (x__split_fields5 = x__split_fields8))
+
+axiom H10 : ((not (0 <  to_rep1(x__split_discrs))) -> (dynamic_property1(1,
   to_rep1(x__split_discrs2), to_rep2(first(x__split_fields8)),
   to_rep2(last(x__split_fields8))) and
   ((to_rep2(first(x__split_fields8)) = 1) and
-  (to_rep2(last(x__split_fields8)) = to_rep1(x__split_discrs2)))))) ->
-  (to_rep2(first(x__split_fields8)) <= 1)))))
+  (to_rep2(last(x__split_fields8)) = to_rep1(x__split_discrs2)))))
+
+ (* File "mutable.adb", line 2, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(x__split_fields8)) <= 1)

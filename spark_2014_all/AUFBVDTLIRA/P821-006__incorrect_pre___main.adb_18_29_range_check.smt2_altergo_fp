@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer_32
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -650,7 +650,7 @@ function integer_32__ref___2__projection(a: integer_32__ref) : integer_32 =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1046,7 +1046,7 @@ axiom def_axiom1 :
 
 type target
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq11 : int, int -> bool
 
@@ -1074,11 +1074,37 @@ axiom from_byte_array_to_integer_32__post_axiom :
   (forall s:(int,byte) farray [from_byte_array_to_integer_32(s)].
   in_range6(from_byte_array_to_integer_32(s)))
 
+logic arr : (int,byte) farray
+
+logic i32 : int
+
+logic o : (int,byte) farray
+
+logic o1 : (int,byte) farray
+
+logic o2 : t1
+
+logic o3 : int
+
+logic result : (int,byte) farray
+
+logic arr1 : (int,byte) farray
+
+logic result1 : (int,byte) farray
+
+logic arr2 : (int,byte) farray
+
+axiom H : (result = arr)
+
+axiom H1 : (arr1 = main__arr__aggregate_def(of_int(0)))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(i32))
+
+axiom H3 : (result1 = arr1)
+
+axiom H4 : (arr2 = temp___300(of_int(0)))
+
+axiom H5 : (60 <= 64)
+
  (* File "main.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,byte) farray. forall i32:int.
-  forall result:(int,byte) farray. forall arr1:(int,byte) farray.
-  forall result1:(int,byte) farray. forall arr2:(int,byte) farray.
-  (((result = arr) and (arr1 = main__arr__aggregate_def(of_int(0)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range(i32)) -> (((result1 = arr1) and
-  (arr2 = temp___300(of_int(0)))) -> ((60 <= 64) -> (0 <= 60))))))
+goal WP_parameter_def : (0 <= 60)

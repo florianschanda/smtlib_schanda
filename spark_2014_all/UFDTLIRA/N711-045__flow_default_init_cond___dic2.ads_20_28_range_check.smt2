@@ -35,6 +35,8 @@
 (define-fun default_initial_assumption ((temp___expr_136 Int) (temp___skip_top_level_137 Bool)) Bool (and (= temp___expr_136 0) (=> (not (= temp___skip_top_level_137 true)) (= (foo temp___expr_136) true))))
 (assert true)
 (assert (forall ((par1 Int)) (! (= (= (foo par1) true) (= par1 0)) :pattern ((foo par1)))))
+(declare-const us Int)
+(declare-const temp___156 Int)
 (assert (not (in_range 0)))
 (check-sat)
 (exit)

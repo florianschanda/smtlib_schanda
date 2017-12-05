@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -480,14 +480,29 @@ axiom def_axiom :
   })[temp___632]) = { us_split_fields1 = { rec__stack__t__len = temp___631;
   rec__stack__t__elements = temp___6311 } })))
 
- (* File "array_aggregates.adb", line 383, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,us_rep) farray. forall o:length_t.
-  forall o1:(int,integer) farray. forall o2:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall x1:(int,us_rep) farray. ((((({
+logic x : (int,us_rep) farray
+
+logic o : length_t
+
+logic o1 : (int,integer) farray
+
+logic o2 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic x1 : (int,us_rep) farray
+
+axiom H : (({ us_split_fields1 = { rec__stack__t__len = o;
+  rec__stack__t__elements = o1 } } = create_stack(void)) and (get_length({
   us_split_fields1 = { rec__stack__t__len = o; rec__stack__t__elements = o1 }
-  } = create_stack(void)) and (get_length({ us_split_fields1 = {
-  rec__stack__t__len = o; rec__stack__t__elements = o1 } }) = 0)) and
-  (o2 = temp___629({ us_split_fields1 = { rec__stack__t__len = o;
-  rec__stack__t__elements = o1 } }))) and ((result = x) and (x1 = o2))) ->
-  (get_length((x1[2])) = 2)))
+  }) = 0))
+
+axiom H1 : (o2 = temp___629({ us_split_fields1 = { rec__stack__t__len = o;
+  rec__stack__t__elements = o1 } }))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = o2)
+
+ (* File "array_aggregates.adb", line 383, characters 0-0 *)
+goal WP_parameter_def : (get_length((x1[2])) = 2)

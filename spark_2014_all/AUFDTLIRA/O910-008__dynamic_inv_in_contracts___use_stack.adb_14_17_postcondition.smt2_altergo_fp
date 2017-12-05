@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -470,21 +470,80 @@ axiom peek__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "use_stack.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall top:int. forall content:(int,positive) farray.
-  forall o:int. forall o1:positive. forall o2:int. forall us:int.
-  forall o3:int. forall result:int. forall e1:int. forall result1:int.
-  forall top1:int. forall e2:int. forall top2:int. forall e3:int.
-  forall top3:int. ((in_range1(max) and (((1 <= 2147483647) ->
-  in_range1(e)) and (dynamic_property(0, last, top) and
-  ((dynamic_property2(1, max, to_rep1(content__first),
+logic e : int
+
+logic top : int
+
+logic content : (int,positive) farray
+
+logic us : int
+
+logic o : int
+
+logic o1 : positive
+
+logic o2 : int
+
+logic us1 : int
+
+logic o3 : int
+
+logic result : int
+
+logic e1 : int
+
+logic result1 : int
+
+logic top1 : int
+
+logic e2 : int
+
+logic top2 : int
+
+logic e3 : int
+
+logic top3 : int
+
+axiom H : in_range1(max)
+
+axiom H1 : ((1 <= 2147483647) -> in_range1(e))
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
   to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
-  (to_rep1(content__last) = max))) and ((not (is_empty(top) = true)) and
-  ((((((((to_rep1(content__first) <= top) and
-  (top <= to_rep1(content__last))) and (o = top)) and
-  (o1 = (content[o]))) and (o2 = to_rep(o1))) and (({ int__content = result
-  } = { int__content = e }) and (e1 = o2))) and ((((us = (top - 1)) and
-  dynamic_property(0, last, (top - 1))) and (o3 = (top - 1))) and
-  ((result1 = top) and (top1 = o3)))) and (((top1 = top2) and (e1 = e2)) and
-  ((top3 = top1) and (e3 = e1))))))))) -> (not (is_full(top2) = true))))
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (not (is_empty(top) = true))
+
+axiom H5 : ((to_rep1(content__first) <= top) and
+  (top <= to_rep1(content__last)))
+
+axiom H6 : (o = top)
+
+axiom H7 : (o1 = (content[o]))
+
+axiom H8 : (o2 = to_rep(o1))
+
+axiom H9 : (result = e)
+
+axiom H10 : (e1 = o2)
+
+axiom H11 : ((us1 = (top - 1)) and dynamic_property(0, last, (top - 1)))
+
+axiom H12 : (o3 = (top - 1))
+
+axiom H13 : (result1 = top)
+
+axiom H14 : (top1 = o3)
+
+axiom H15 : (top1 = top2)
+
+axiom H16 : (e1 = e2)
+
+axiom H17 : (top3 = top1)
+
+axiom H18 : (e3 = e1)
+
+ (* File "use_stack.adb", line 31, characters 0-0 *)
+goal WP_parameter_def : (not (is_full(top2) = true))

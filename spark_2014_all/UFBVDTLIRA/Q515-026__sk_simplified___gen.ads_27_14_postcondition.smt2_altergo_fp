@@ -187,18 +187,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1096,16 +1096,35 @@ logic e9 : word64
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic gen__get_val__result : int
+
+logic result : int
+
+logic gen__get_val__result1 : int
+
+logic gen__get_val__result2 : int
+
+logic gen__get_val__result3 : int
+
+logic gen__get_val__result4 : int
+
+logic gen__get_val__result5 : int
+
+logic result1 : int
+
+axiom H : (gen__get_val__result1 = gen__get_val__result2)
+
+axiom H1 : (gen__get_val__result3 = gen__get_val__result1)
+
+axiom H2 : (result = gen__get_val__result)
+
+axiom H3 : (gen__get_val__result1 = 0)
+
+axiom H4 : (gen__get_val__result4 = gen__get_val__result2)
+
+axiom H5 : (gen__get_val__result5 = gen__get_val__result3)
+
+axiom H6 : (result1 = gen__get_val__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall gen__get_val__result:int. forall result:int.
-  forall gen__get_val__result1:int. forall gen__get_val__result2:int.
-  forall gen__get_val__result3:int. forall gen__get_val__result4:int.
-  forall gen__get_val__result5:int.
-  (forall result1:int.
-  (not (((((gen__get_val__result1 = gen__get_val__result2) and
-  (gen__get_val__result3 = gen__get_val__result1)) and
-  ((result = gen__get_val__result) and (gen__get_val__result1 = 0))) and
-  ((gen__get_val__result4 = gen__get_val__result2) and
-  (gen__get_val__result5 = gen__get_val__result3))) and
-  (result1 = gen__get_val__result4)))))
+goal WP_parameter_def : false

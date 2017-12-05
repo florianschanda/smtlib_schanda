@@ -437,19 +437,111 @@ axiom def_axiom2 :
   (forall temp___415:int.
   ((temp___412(temp___414)[temp___415]) = temp___414)))
 
+logic seen : (int,bool) farray
+
+logic rank : int
+
+logic stable_marriage__is_permutation_1__result : bool
+
+logic temp___403 : int
+
+logic temp___401 : (int,bool) farray
+
+logic g1 : int
+
+logic prev : int
+
+logic result : (int,bool) farray
+
+logic seen1 : (int,bool) farray
+
+logic result1 : int
+
+logic rank1 : int
+
+logic seen2 : (int,bool) farray
+
+logic rank2 : int
+
+logic result2 : (int,bool) farray
+
+logic seen3 : (int,bool) farray
+
+logic result3 : int
+
+logic rank3 : int
+
+logic seen4 : (int,bool) farray
+
+logic rank4 : int
+
+logic seen5 : (int,bool) farray
+
+logic rank5 : int
+
+logic seen6 : (int,bool) farray
+
+logic rank6 : int
+
+logic seen7 : (int,bool) farray
+
+logic rank7 : int
+
+logic seen8 : (int,bool) farray
+
+logic rank8 : int
+
+logic seen9 : (int,bool) farray
+
+logic rank9 : int
+
+logic result4 : bool
+
+logic stable_marriage__is_permutation_1__result1 : bool
+
+logic stable_marriage__is_permutation_1__result2 : bool
+
+logic stable_marriage__is_permutation_1__result3 : bool
+
+logic seen10 : (int,bool) farray
+
+logic rank10 : int
+
+logic stable_marriage__is_permutation_1__result4 : bool
+
+logic seen11 : (int,bool) farray
+
+logic rank11 : int
+
+logic stable_marriage__is_permutation_1__result5 : bool
+
+axiom H : (result = seen)
+
+axiom H1 :
+  (seen1 = stable_marriage__is_permutation_1__seen__aggregate_def(of_int(0)))
+
+axiom H2 : (result1 = rank)
+
+axiom H3 : (rank1 = 1)
+
+axiom H4 : (1 <= rank1)
+
+axiom H5 : (rank1 <= 64)
+
+axiom H6 :
+  (forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
+  (((seen2[g11]) = true) <->
+  (exists prev1:int. (((1 <= prev1) and (prev1 <= (rank2 - 1))) and
+  (to_rep((r1[prev1])) = g11))))))
+
+axiom H7 : (((1 <= 64) -> in_range2(rank2)) and ((1 <= rank2) and
+  (rank2 <= 64)))
+
+axiom H8 : (1 <= g1)
+
+axiom H9 : (g1 <= 64)
+
+axiom H10 : (1 <= (rank2 - 1))
+
  (* File "stable_marriage.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall seen:(int,bool) farray. forall rank:int. forall g1:int.
-  forall result:(int,bool) farray. forall seen1:(int,bool) farray.
-  forall result1:int. forall rank1:int. forall seen2:(int,bool) farray.
-  forall rank2:int. ((({ map__content1 = result } = { map__content1 = seen
-  }) and
-  (seen1 = stable_marriage__is_permutation_1__seen__aggregate_def(of_int(0)))) ->
-  ((({ int__content = result1 } = { int__content = rank }) and
-  (rank1 = 1)) -> (((1 <= rank1) and (rank1 <= 64)) ->
-  ((forall g11:int. (((1 <= g11) and (g11 <= 64)) ->
-   (((seen2[g11]) = true) <->
-   (exists prev:int. (((1 <= prev) and (prev <= (rank2 - 1))) and
-   (to_rep((r1[prev])) = g11)))))) ->
-  ((((1 <= 64) -> in_range2(rank2)) and ((1 <= rank2) and (rank2 <= 64))) ->
-  (((1 <= g1) and (g1 <= 64)) -> ((1 <= (rank2 - 1)) -> (1 <= 1)))))))))
+goal WP_parameter_def : (1 <= 1)

@@ -232,6 +232,8 @@
 (define-fun dynamic_invariant3 ((temp___expr_178 Int) (temp___is_init_175 Bool) (temp___skip_constant_176 Bool) (temp___do_toplevel_177 Bool)) Bool (=> (or (= temp___is_init_175 true) (<= 3 15)) (in_range3 temp___expr_178)))
 (define-fun dynamic_invariant4 ((temp___expr_189 us_t1) (temp___is_init_186 Bool) (temp___skip_constant_187 Bool) (temp___do_toplevel_188 Bool)) Bool (=> (not (= temp___skip_constant_187 true)) (dynamic_property1 3 15 (first3 temp___expr_189) (last3 temp___expr_189))))
 (define-fun dynamic_invariant5 ((temp___expr_225 us_t2) (temp___is_init_222 Bool) (temp___skip_constant_223 Bool) (temp___do_toplevel_224 Bool)) Bool (=> (not (= temp___skip_constant_223 true)) (and (dynamic_property3 (first1 v) (last1 v) (first5 temp___expr_225) (last5 temp___expr_225)) (and (= (first5 temp___expr_225) (first1 v)) (= (last5 temp___expr_225) (last1 v))))))
+(declare-const temp___264 (Array Int integer))
+(declare-const temp___2641 t3)
 (assert (dynamic_invariant v true false true))
 (assert (<= (to_rep1 (first (rt v))) (to_rep1 (last (rt v)))))
 (assert (not (<= 3 (to_rep1 (first (rt v))))))

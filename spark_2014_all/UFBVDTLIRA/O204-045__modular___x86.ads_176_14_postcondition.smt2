@@ -124,6 +124,8 @@
 (declare-const rbx1 (_ BitVec 64))
 (declare-const rbx2 (_ BitVec 64))
 (declare-const rbx3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result rbx))
 (assert (= rbx1 (bvor (bvand rbx ((_ int2bv 64) 65280)) ((_ zero_extend 48) (bvmul ((_ zero_extend 8) val__) ((_ int2bv 16) 256))))))
 (assert (= rbx1 rbx2))

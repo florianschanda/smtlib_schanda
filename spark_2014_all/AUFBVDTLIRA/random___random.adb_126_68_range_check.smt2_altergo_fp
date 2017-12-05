@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1140,22 +1140,83 @@ axiom upper_mask__def_axiom : (upper_mask = of_int(2147483648))
 
 axiom lower_mask__def_axiom : (lower_mask = of_int(2147483647))
 
- (* File "random.ads", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g__split_fields:(int,unsigned_32) farray.
-  forall g__split_fields1:state_range. forall value:t. forall o:int.
-  forall o1:unsigned_32. forall o2:t. forall o3:t. forall o4:t.
-  forall result:t. forall value1:t.
-  ((random__random__mat__aggregate_def(of_int(0),
-  of_int(2567483615)) = mat) ->
-  ((((((((o = next(to_rep1(g__split_fields1))) and (in_range1(o) and
-  (((to_rep1(g__split_fields1) = 623) and (o = 0)) or
-  ((not (to_rep1(g__split_fields1) = 623)) and
-  (o = (to_rep1(g__split_fields1) + 1)))))) and
-  (o1 = (g__split_fields[o]))) and (o2 = to_rep(o1))) and (o3 = bw_and(o2,
-  of_int(2147483647)))) and
+logic g__split_fields : (int,unsigned_32) farray
+
+logic g__split_fields1 : state_range
+
+logic value : t
+
+logic o : int
+
+logic o1 : unsigned_32
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : int
+
+logic o6 : unsigned_32
+
+logic o7 : t
+
+logic o8 : unsigned_32
+
+logic o9 : (int,unsigned_32) farray
+
+logic o10 : (int,unsigned_32) farray
+
+logic o11 : state_range
+
+logic temp___317 : (int,unsigned_32) farray
+
+logic temp___3171 : state_range
+
+logic result : t
+
+logic value1 : t
+
+logic result1 : (int,unsigned_32) farray
+
+logic result2 : state_range
+
+logic g__split_fields2 : (int,unsigned_32) farray
+
+logic g__split_fields3 : state_range
+
+axiom H : true
+
+axiom H1 : (random__random__mat__aggregate_def(of_int(0),
+  of_int(2567483615)) = mat)
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : ((o = next(to_rep1(g__split_fields1))) and (in_range1(o) and
+  (((to_rep1(g__split_fields1) = 623) -> (o = 0)) and
+  ((not (to_rep1(g__split_fields1) = 623)) ->
+  (o = (to_rep1(g__split_fields1) + 1))))))
+
+axiom H5 : (o1 = (g__split_fields[o]))
+
+axiom H6 : (o2 = to_rep(o1))
+
+axiom H7 : (o3 = bw_and(o2, of_int(2147483647)))
+
+axiom H8 :
   (o4 = bw_or(bw_and(to_rep((g__split_fields[to_rep1(g__split_fields1)])),
-  of_int(2147483648)), o3))) and ((result = value) and (value1 = o4))) ->
-  (((0 <= to_rep1(g__split_fields1)) and
-  (to_rep1(g__split_fields1) <= 226)) ->
-  in_range1((to_rep1(g__split_fields1) + 397))))))
+  of_int(2147483648)), o3))
+
+axiom H9 : (result = value)
+
+axiom H10 : (value1 = o4)
+
+axiom H11 : (0 <= to_rep1(g__split_fields1))
+
+axiom H12 : (to_rep1(g__split_fields1) <= 226)
+
+ (* File "random.ads", line 68, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep1(g__split_fields1) + 397))

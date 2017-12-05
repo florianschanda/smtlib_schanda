@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -436,15 +436,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
-  (to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top))) and
-  (bool_eq6(((a).us_split_fields1).rec__stacks__stack_type__items,
-  ((b).us_split_fields1).rec__stacks__stack_type__items) = true)) ->
-  (bool_eq7(a, b) = true)) and
-  ((not (((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
-  (to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top))) and
+  ((((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
+  ((to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top)) and
   (bool_eq6(((a).us_split_fields1).rec__stacks__stack_type__items,
   ((b).us_split_fields1).rec__stacks__stack_type__items) = true))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__stacks__stack_type__max_size) = to_rep2(((b).us_split_discrs1).rec__stacks__stack_type__max_size)) and
+  ((to_rep1(((a).us_split_fields1).rec__stacks__stack_type__top) = to_rep1(((b).us_split_fields1).rec__stacks__stack_type__top)) and
+  (bool_eq6(((a).us_split_fields1).rec__stacks__stack_type__items,
+  ((b).us_split_fields1).rec__stacks__stack_type__items) = true)))) ->
   (bool_eq7(a, b) = false))))
 
 logic value__size1 : int
@@ -544,8 +544,11 @@ logic stack3 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic us : int
+
+axiom H : (dynamic_property1(1, to_rep2(stack), to_rep(first(stack3)),
+  to_rep(last(stack3))) and ((to_rep(first(stack3)) = 1) and
+  (to_rep(last(stack3)) = to_rep2(stack))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep2(stack),
-  to_rep(first(stack3)), to_rep(last(stack3))) and
-  ((to_rep(first(stack3)) = 1) and
-  (to_rep(last(stack3)) = to_rep2(stack)))) -> in_range2(to_rep2(stack)))
+goal WP_parameter_def : in_range2(to_rep2(stack))

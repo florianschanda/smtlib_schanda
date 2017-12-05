@@ -38,6 +38,7 @@
 (declare-const us5 Int)
 (declare-const us6 Int)
 (declare-const us7 Int)
+(declare-const us8 Int)
 (assert (and (= us 100) (in_range 100)))
 (assert (and (= us1 100) (in_range 100)))
 (assert (and (= us2 100) (in_range 100)))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -856,7 +856,7 @@ axiom compare_def_gt :
 
 type tdigit_count_typeB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1169,43 +1169,199 @@ function t61b__ref___projection(a: t61b__ref) : tdigit_count_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "very_longs.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall digit_count:int. forall index:int. forall us:int. forall o:bool.
-  forall o1:int. forall o2:octet. forall o3:t. forall o4:bool. forall o5:int.
-  forall j:int. forall result:int. forall digit_count1:int.
-  forall result1:bool. forall result2:int. forall index1:int.
-  forall result3:bool. forall result4:int. forall digit_count2:int.
-  forall digit_count3:int. forall index2:int. ((dynamic_property1(1,
-  to_rep(number), to_rep2(first(number2)), to_rep2(last(number2))) and
-  ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number)))) -> (((us = to_rep(number)) and
-  in_range2(to_rep(number))) -> ((({ int__content = result } = {
-  int__content = digit_count }) and (digit_count1 = 0)) ->
-  (in_range1(digit_count1) -> ((((o = is_zero({ us_split_discrs1 = {
+logic digit_count : int
+
+logic index : int
+
+logic very_longs__number_of_digits__result : int
+
+logic us : int
+
+logic o : bool
+
+logic temp___876 : int
+
+logic temp___875 : int
+
+logic o1 : int
+
+logic o2 : octet
+
+logic o3 : t
+
+logic o4 : bool
+
+logic o5 : int
+
+logic j : int
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : bool
+
+logic o10 : int
+
+logic j1 : int
+
+logic o11 : bool
+
+logic index1 : int
+
+logic result : int
+
+logic digit_count1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic index2 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic digit_count2 : int
+
+logic digit_count3 : int
+
+logic index3 : int
+
+logic result5 : int
+
+logic index4 : int
+
+logic result6 : bool
+
+logic result7 : int
+
+logic digit_count4 : int
+
+logic digit_count5 : int
+
+logic index5 : int
+
+logic digit_count6 : int
+
+logic index6 : int
+
+logic digit_count7 : int
+
+logic index7 : int
+
+logic digit_count8 : int
+
+logic index8 : int
+
+logic digit_count9 : int
+
+logic index9 : int
+
+logic digit_count10 : int
+
+logic index10 : int
+
+logic digit_count11 : int
+
+logic index11 : int
+
+logic digit_count12 : int
+
+logic index12 : int
+
+logic result8 : int
+
+logic very_longs__number_of_digits__result1 : int
+
+logic very_longs__number_of_digits__result2 : int
+
+logic very_longs__number_of_digits__result3 : int
+
+logic digit_count13 : int
+
+logic index13 : int
+
+logic very_longs__number_of_digits__result4 : int
+
+logic digit_count14 : int
+
+logic index14 : int
+
+logic very_longs__number_of_digits__result5 : int
+
+axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
+  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep(number))))
+
+axiom H1 : ((us = to_rep(number)) and in_range2(to_rep(number)))
+
+axiom H2 : (result = digit_count)
+
+axiom H3 : (digit_count1 = 0)
+
+axiom H4 : in_range1(digit_count1)
+
+axiom H5 : ((o = is_zero({ us_split_discrs1 = {
   rec__very_longs__very_long__length = number }; us_split_fields1 = {
   rec__very_longs__very_long__long_digits = { elts = number1; rt = number2 }
   } })) and ((o = true) <->
-  (forall j1:int. (((1 <= j1) and (j1 <= to_rep2(last(number2)))) ->
-  (to_rep1((number1[j1])) = of_int(0)))))) and (((not (o = true)) and
-  (result1 = true)) or ((o = true) and (result1 = false)))) ->
-  ((result1 = true) -> ((({ int__content = result2 } = { int__content = index
-  }) and (index1 = 1)) -> (((1 <= index1) and
-  (index1 <= to_rep2(last(number2)))) ->
-  (((((((((to_rep2(first(number2)) <= index1) and
-  (index1 <= to_rep2(last(number2)))) and (o1 = index1)) and
-  (o2 = (number1[o1]))) and (o3 = to_rep1(o2))) and (((o3 = of_int(0)) and
-  (o4 = true)) or ((not (o3 = of_int(0))) and (o4 = false)))) and
-  (((not (o4 = true)) and (result3 = true)) or ((o4 = true) and
-  (result3 = false)))) and (((result3 = true) and (((o5 = index1) and
-  in_range1(index1)) and ((digit_count1 = result4) and
-  (digit_count2 = o5)))) or ((not (result3 = true)) and
-  (digit_count2 = digit_count1)))) -> ((((digit_count3 <  index2) and
-  (forall j1:int. ((((digit_count3 + 1) <= j1) and (j1 <= index2)) ->
-  (to_rep1((number1[j1])) = of_int(0))))) or
-  (not (digit_count3 <  index2))) -> (((((0 <= 65536) ->
-  in_range1(digit_count3)) and ((1 <= to_rep2(last(number2))) ->
-  dynamic_property2(1, to_rep2(last(number2)), index2))) and
-  ((1 <= index2) and (index2 <= to_rep2(last(number2))))) ->
-  ((digit_count3 <  index2) -> ((((digit_count3 + 1) <= j) and
-  (j <= index2)) -> (to_rep2(first(number2)) <= j)))))))))))))))
+  (forall j2:int. (((1 <= j2) and (j2 <= to_rep2(last(number2)))) ->
+  (to_rep1((number1[j2])) = of_int(0))))))
+
+axiom H6 : (((not (o = true)) -> (result1 = true)) and ((o = true) ->
+  (result1 = false)))
+
+axiom H7 : (result1 = true)
+
+axiom H8 : (result2 = index)
+
+axiom H9 : (index2 = 1)
+
+axiom H10 : (1 <= index2)
+
+axiom H11 : (index2 <= to_rep2(last(number2)))
+
+axiom H12 : ((to_rep2(first(number2)) <= index2) and
+  (index2 <= to_rep2(last(number2))))
+
+axiom H13 : (o1 = index2)
+
+axiom H14 : (o2 = (number1[o1]))
+
+axiom H15 : (o3 = to_rep1(o2))
+
+axiom H16 : (((o3 = of_int(0)) -> (o4 = true)) and ((not (o3 = of_int(0))) ->
+  (o4 = false)))
+
+axiom H17 : (((not (o4 = true)) -> (result3 = true)) and ((o4 = true) ->
+  (result3 = false)))
+
+axiom H18 : ((result3 = true) -> ((o5 = index2) and in_range1(index2)))
+
+axiom H19 : ((result3 = true) -> (digit_count1 = result4))
+
+axiom H20 : ((result3 = true) -> (digit_count2 = o5))
+
+axiom H21 : ((not (result3 = true)) -> (digit_count2 = digit_count1))
+
+axiom H22 : ((digit_count3 <  index3) ->
+  (forall j2:int. ((((digit_count3 + 1) <= j2) and (j2 <= index3)) ->
+  (to_rep1((number1[j2])) = of_int(0)))))
+
+axiom H23 : ((((0 <= 65536) -> in_range1(digit_count3)) and
+  ((1 <= to_rep2(last(number2))) -> dynamic_property2(1,
+  to_rep2(last(number2)), index3))) and ((1 <= index3) and
+  (index3 <= to_rep2(last(number2)))))
+
+axiom H24 : (digit_count3 <  index3)
+
+axiom H25 : ((digit_count3 + 1) <= j)
+
+axiom H26 : (j <= index3)
+
+ (* File "very_longs.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(number2)) <= j)

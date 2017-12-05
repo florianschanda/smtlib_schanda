@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -407,9 +407,24 @@ logic this : us_rep
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic us_HEAP : us_type_of_heap
+
+logic us : (int,character) farray
+
+logic us1 : t
+
+logic o : (int,character) farray
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : (({ elts = o; rt = o1 } = to_string1(this)) and dynamic_property(1,
+  2147483647, to_rep1(first(o1)), to_rep1(last(o1))))
+
+axiom H1 : (o2 = length({ elts = o; rt = o1 }))
+
  (* File "shared_ptr.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:(int,character) farray. forall o1:t. forall o2:int. (((({ elts =
-  o; rt = o1 } = to_string1(this)) and dynamic_property(1, 2147483647,
-  to_rep1(first(o1)), to_rep1(last(o1)))) and (o2 = length({ elts = o; rt =
-  o1 }))) -> in_range(o2)))
+goal WP_parameter_def : in_range(o2)

@@ -712,13 +712,19 @@ axiom size__def_axiom :
   rec__stackp__stack_root__content = s5; rec__stackp__stack_root__length =
   s6; rec__ext__ = s7 }; attr__tag = s8 }) = to_rep(s6)))
 
+logic o : bool
+
+logic result : bool
+
+axiom H : ((o = wraps_around({ us_split_fields3 = {
+  rec__stackp__buffer__first = s; rec__stackp__stack_root__content1 = s1;
+  rec__stackp__stack_root__length1 = s2; rec__ext__1 = s3 }; attr__tag1 = s4
+  })) and ((o = true) <-> (100 <  ((to_rep1(s) + to_rep(s2)) - 1))))
+
+axiom H1 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H2 : (not (result = true))
+
  (* File "stackp.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:bool. forall result:bool. ((((o = wraps_around({
-  us_split_fields3 = { rec__stackp__buffer__first = s;
-  rec__stackp__stack_root__content1 = s1; rec__stackp__stack_root__length1 =
-  s2; rec__ext__1 = s3 }; attr__tag1 = s4 })) and ((o = true) <->
-  (100 <  ((to_rep1(s) + to_rep(s2)) - 1)))) and (((not (o = true)) and
-  (result = true)) or ((o = true) and (result = false)))) ->
-  ((not (result = true)) ->
-  in_range((((to_rep1(s) + to_rep(s2)) - 1) - 100)))))
+goal WP_parameter_def : in_range((((to_rep1(s) + to_rep(s2)) - 1) - 100))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -391,12 +391,25 @@ axiom def_axiom :
   (forall temp___200:int.
   ((main__my_array__aggregate_def(temp___199)[temp___200]) = of_rep1(temp___199))))
 
+logic my_array : (int,item) farray
+
+logic o : integer
+
+logic o1 : integer
+
+logic result : (int,item) farray
+
+logic my_array1 : (int,item) farray
+
+axiom H : (result = my_array)
+
+axiom H1 : (my_array1 = main__my_array__aggregate_def(0))
+
+axiom H2 : (to_rep(o1) = 10)
+
+axiom H3 : (to_rep(o) = 1)
+
  (* File "main.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_array:(int,item) farray. forall o:integer. forall o1:integer.
-  forall result:(int,item) farray. forall my_array1:(int,item) farray.
-  (((result = my_array) and
-  (my_array1 = main__my_array__aggregate_def(0))) -> ((to_rep(o1) = 10) ->
-  ((to_rep(o) = 1) -> (((to_rep(o) <= to_rep(o1)) ->
+goal WP_parameter_def : (((to_rep(o) <= to_rep(o1)) ->
   (0 <  ((to_rep(o1) - to_rep(o)) + 1))) and
-  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0)))))))
+  ((not (to_rep(o) <= to_rep(o1))) -> (0 <  0)))

@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -709,7 +709,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1407,11 +1407,59 @@ type t26s__ref = { t26s__content : us_t3
 
 function t26s__ref___projection(a: t26s__ref) : us_t3 = (a).t26s__content
 
+logic o : int
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic temp___242 : t
+
+logic o4 : (t,integer) farray
+
+logic temp___245 : (t,integer) farray
+
+logic temp___2451 : t3
+
+logic o5 : (t,integer) farray
+
+logic temp___244 : (t,integer) farray
+
+logic temp___2441 : t2
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : t
+
+logic o14 : t
+
+logic temp___247 : t
+
+axiom H : (not (65535 <  ((tqtint(to_rep(r1)) + to_rep1(r2)) - 1)))
+
+axiom H1 : ((o12 = to_rep1(r2)) and uint_in_range(to_rep1(r2)))
+
+axiom H2 : (o13 = of_int(o12))
+
+axiom H3 : (o14 = add(to_rep(r1), o13))
+
+axiom H4 : (temp___247 = sub(o14, of_int(1)))
+
+axiom H5 : ule(to_rep(r1), temp___247)
+
  (* File "ring_buf.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:t. forall o2:t. forall temp___247:t.
-  ((not (65535 <  ((tqtint(to_rep(r1)) + to_rep1(r2)) - 1))) ->
-  ((((((o = to_rep1(r2)) and uint_in_range(to_rep1(r2))) and
-  (o1 = of_int(o))) and (o2 = add(to_rep(r1), o1))) and (temp___247 = sub(o2,
-  of_int(1)))) -> (ule(to_rep(r1), temp___247) -> ule(of_int(0),
-  to_rep(r1))))))
+goal WP_parameter_def : ule(of_int(0), to_rep(r1))

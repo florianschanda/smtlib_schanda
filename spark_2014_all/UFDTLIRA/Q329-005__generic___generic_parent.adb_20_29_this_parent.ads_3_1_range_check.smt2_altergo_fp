@@ -212,9 +212,23 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic this__split_fields : element
+
+logic step : int
+
+logic o : int
+
+logic result : int
+
+logic step1 : int
+
+axiom H : (result = step)
+
+axiom H1 : (step1 = 1)
+
+axiom H2 : in_range(step1)
+
+axiom H3 : (to_rep(this__split_fields) <= (9 - step1))
+
  (* File "generic_parent.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall this__split_fields:element. forall step:int. forall result:int.
-  forall step1:int. (((result = step) and (step1 = 1)) -> (in_range(step1) ->
-  ((to_rep(this__split_fields) <= (9 - step1)) ->
-  in_range((to_rep(this__split_fields) + step1))))))
+goal WP_parameter_def : in_range((to_rep(this__split_fields) + step1))

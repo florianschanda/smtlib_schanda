@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -513,7 +513,7 @@ logic kmp__init_next__next__aggregate_def : int, int, int -> us_t2
 
 axiom def_axiom :
   (forall temp___161:int. forall temp___162:int. forall temp___163:int.
-  ((dynamic_property((-2147483648), 2147483647, temp___162, temp___163) ->
+  ((dynamic_property((- 2147483648), 2147483647, temp___162, temp___163) ->
   ((to_rep(first4((kmp__init_next__next__aggregate_def(temp___161,
   temp___162, temp___163)).rt2)) = temp___162) and
   (to_rep(last4((kmp__init_next__next__aggregate_def(temp___161, temp___162,
@@ -521,8 +521,58 @@ axiom def_axiom :
   (forall temp___164:int. (((kmp__init_next__next__aggregate_def(temp___161,
   temp___162, temp___163)).elts2[temp___164]) = of_rep(temp___161)))))
 
+logic next : (int,integer) farray
+
+logic kmp__init_next__result : (int,integer) farray
+
+logic kmp__init_next__result1 : t
+
+logic temp___166 : (int,integer) farray
+
+logic temp___1661 : t2
+
+logic kmp__init_next__next__assume : (int,integer) farray
+
+logic kmp__init_next__next__assume1 : t1
+
+logic result : (int,integer) farray
+
+logic next1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic result2 : t
+
+logic kmp__init_next__result2 : (int,integer) farray
+
+logic kmp__init_next__result3 : t
+
+logic kmp__init_next__result4 : (int,integer) farray
+
+logic kmp__init_next__result5 : t
+
+logic kmp__init_next__result6 : (int,integer) farray
+
+logic kmp__init_next__result7 : t
+
+logic next2 : (int,integer) farray
+
+logic kmp__init_next__result8 : (int,integer) farray
+
+logic kmp__init_next__result9 : t
+
+logic next3 : (int,integer) farray
+
+logic kmp__init_next__result10 : (int,integer) farray
+
+logic kmp__init_next__result11 : t
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(p1)),
+  to_rep(last(p1)))
+
+axiom H1 : (1 <= length({ elts = p; rt = p1 }))
+
+axiom H2 : (to_rep(first(p1)) <= to_rep(last(p1)))
+
  (* File "kmp.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(p1)), to_rep(last(p1))) -> ((1 <= length({ elts = p; rt = p1
-  })) -> ((to_rep(first(p1)) <= to_rep(last(p1))) ->
-  ((-2147483648) <= to_rep(first(p1))))))
+goal WP_parameter_def : ((- 2147483648) <= to_rep(first(p1)))

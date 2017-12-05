@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -244,33 +244,205 @@ function t6b__ref___projection(a: t6b__ref) : integer = (a).t6b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic p1 : int
+
+logic p2 : int
+
+logic i : int
+
+logic i1 : int
+
+logic temp___176 : int
+
+logic temp___175 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___180 : int
+
+logic temp___179 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic p11 : int
+
+logic result1 : int
+
+logic i2 : int
+
+logic p12 : int
+
+logic i3 : int
+
+logic result2 : int
+
+logic p13 : int
+
+logic result3 : int
+
+logic i4 : int
+
+logic p14 : int
+
+logic i5 : int
+
+logic p15 : int
+
+logic i6 : int
+
+logic p16 : int
+
+logic i7 : int
+
+logic p17 : int
+
+logic i8 : int
+
+logic p18 : int
+
+logic i9 : int
+
+logic p19 : int
+
+logic i10 : int
+
+logic result4 : int
+
+logic p21 : int
+
+logic result5 : int
+
+logic i11 : int
+
+logic p22 : int
+
+logic i12 : int
+
+logic result6 : int
+
+logic p23 : int
+
+logic result7 : int
+
+logic i13 : int
+
+logic p24 : int
+
+logic i14 : int
+
+logic p25 : int
+
+logic i15 : int
+
+logic p26 : int
+
+logic i16 : int
+
+logic p27 : int
+
+logic i17 : int
+
+logic p28 : int
+
+logic i18 : int
+
+logic p29 : int
+
+logic i19 : int
+
+logic p210 : int
+
+logic i20 : int
+
+logic p211 : int
+
+logic i21 : int
+
+logic p110 : int
+
+logic p212 : int
+
+logic i22 : int
+
+logic i23 : int
+
+logic p111 : int
+
+logic p213 : int
+
+logic i24 : int
+
+logic i25 : int
+
+axiom H : in_range2(n1)
+
+axiom H1 : in_range2(n2)
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(p1))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(p2))
+
+axiom H4 : ((n1 = n2) and (n1 <= 7))
+
+axiom H5 : (result = p1)
+
+axiom H6 : (p11 = 1)
+
+axiom H7 : (result1 = i)
+
+axiom H8 : (i2 = 2)
+
+axiom H9 : (((2 <= i2) and (i2 <= n1)) -> (((temp___176 = i2) and
+  ((temp___175 = p11) and ((p12 = factorial((i3 - 1))) and
+  (((((0 <= 2147483647) -> in_range2(p12)) and ((2 <= n1) ->
+  dynamic_property(2, n1, i3))) and ((2 <= i3) and (i3 <= n1))) and
+  (((((o1 = (i3 * p12)) and in_range1((i3 * p12))) and ((o2 = o1) and
+  in_range2(o1))) and ((p12 = result2) and (p13 = o2))) and
+  (i3 = n1)))))) and (((i3 = i7) and (p13 = p16)) and ((i8 = i3) and
+  (p17 = p13)))))
+
+axiom H10 : (((2 <= i2) and (i2 <= n1)) -> (i9 = i7))
+
+axiom H11 : (((2 <= i2) and (i2 <= n1)) -> (p18 = p16))
+
+axiom H12 : (((2 <= i2) and (i2 <= n1)) -> (i10 = i8))
+
+axiom H13 : (((2 <= i2) and (i2 <= n1)) -> (p19 = p17))
+
+axiom H14 : ((not ((2 <= i2) and (i2 <= n1))) -> (i2 = i9))
+
+axiom H15 : ((not ((2 <= i2) and (i2 <= n1))) -> (p11 = p18))
+
+axiom H16 : ((not ((2 <= i2) and (i2 <= n1))) -> (i10 = i2))
+
+axiom H17 : ((not ((2 <= i2) and (i2 <= n1))) -> (p19 = p11))
+
+axiom H18 : (result4 = p2)
+
+axiom H19 : (p21 = 1)
+
+axiom H20 : (result5 = i1)
+
+axiom H21 : (i11 = 2)
+
+axiom H22 : (2 <= i11)
+
+axiom H23 : (i11 <= n2)
+
+axiom H24 : (p22 = factorial((i12 - 1)))
+
+axiom H25 : ((((2 <= n2) -> dynamic_property1(2, n2, i12)) and
+  ((0 <= 2147483647) -> in_range2(p22))) and ((2 <= i12) and (i12 <= n2)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p1:int. forall p2:int. forall i:int. forall i1:int.
-  forall temp___176:int. forall temp___175:int. forall o:int. forall o1:int.
-  forall result:int. forall p11:int. forall result1:int. forall i2:int.
-  forall p12:int. forall i3:int. forall result2:int. forall p13:int.
-  forall p14:int. forall i4:int. forall p15:int. forall i5:int.
-  forall p16:int. forall i6:int. forall p17:int. forall i7:int.
-  forall result3:int. forall p21:int. forall result4:int. forall i8:int.
-  forall p22:int. forall i9:int. (in_range2(n1) -> (in_range2(n2) ->
-  (((0 <= 2147483647) -> in_range2(p1)) -> (((0 <= 2147483647) ->
-  in_range2(p2)) -> (((n1 = n2) and (n1 <= 7)) -> ((({ int__content = result
-  } = { int__content = p1 }) and (p11 = 1)) -> (((({ int__content = result1
-  } = { int__content = i }) and (i2 = 2)) and ((((2 <= i2) and
-  (i2 <= n1)) and ((((temp___176 = i2) and ((temp___175 = p11) and
-  ((p12 = factorial((i3 - 1))) and (((((0 <= 2147483647) ->
-  in_range2(p12)) and ((2 <= n1) -> dynamic_property(2, n1, i3))) and
-  ((2 <= i3) and (i3 <= n1))) and (((((o = (i3 * p12)) and
-  in_range1((i3 * p12))) and ((o1 = o) and in_range2(o))) and
-  ((p12 = result2) and (p13 = o1))) and (i3 = n1)))))) and (((i3 = i4) and
-  (p13 = p14)) and ((i5 = i3) and (p15 = p13)))) and ((({ int__content = i6
-  } = { int__content = i4 }) and ({ int__content = p16 } = { int__content =
-  p14 })) and ((i7 = i5) and (p17 = p15))))) or ((not ((2 <= i2) and
-  (i2 <= n1))) and (((i2 = i6) and (p11 = p16)) and ((i7 = i2) and
-  (p17 = p11)))))) -> ((({ int__content = result3 } = { int__content = p2
-  }) and (p21 = 1)) -> ((({ int__content = result4 } = { int__content = i1
-  }) and (i8 = 2)) -> (((2 <= i8) and (i8 <= n2)) ->
-  ((p22 = factorial((i9 - 1))) -> (((((2 <= n2) -> dynamic_property1(2, n2,
-  i9)) and ((0 <= 2147483647) -> in_range2(p22))) and ((2 <= i9) and
-  (i9 <= n2))) -> in_range1((i9 * p22)))))))))))))))
+goal WP_parameter_def : in_range1((i12 * p22))

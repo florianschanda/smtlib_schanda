@@ -256,21 +256,81 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : (int,enum_t) farray
+
+logic b : (int,enum_t) farray
+
+logic tmp : int
+
+logic o : enum_t
+
+logic o1 : (int,enum_t) farray
+
+logic o2 : enum_t
+
+logic o3 : (int,enum_t) farray
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : (int,enum_t) farray
+
+logic a1 : (int,enum_t) farray
+
+logic result2 : (int,enum_t) farray
+
+logic b1 : (int,enum_t) farray
+
+logic a2 : (int,enum_t) farray
+
+logic b2 : (int,enum_t) farray
+
+logic tmp2 : int
+
+logic a3 : (int,enum_t) farray
+
+logic b3 : (int,enum_t) farray
+
+logic tmp3 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : ((0 <= 2) -> in_range1(tmp))
+
+axiom H3 : (result = tmp)
+
+axiom H4 : (tmp1 = to_rep((a[i])))
+
+axiom H5 : (to_rep(o) = to_rep((b[j])))
+
+axiom H6 : (o1 = (a[i <- o]))
+
+axiom H7 : (result1 = a)
+
+axiom H8 : (a1 = o1)
+
+axiom H9 : (to_rep(o2) = tmp1)
+
+axiom H10 : (o3 = (b[j <- o2]))
+
+axiom H11 : (result2 = b)
+
+axiom H12 : (b1 = o3)
+
+axiom H13 : (tmp2 = tmp1)
+
+axiom H14 : (b1 = b2)
+
+axiom H15 : (a1 = a2)
+
+axiom H16 : (tmp3 = tmp1)
+
+axiom H17 : (b3 = b1)
+
+axiom H18 : (a3 = a1)
+
  (* File "simple_arrays.adb", line 503, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,enum_t) farray. forall b:(int,enum_t) farray.
-  forall tmp:int. forall o:enum_t. forall o1:(int,enum_t) farray.
-  forall o2:enum_t. forall o3:(int,enum_t) farray. forall result:int.
-  forall tmp1:int. forall result1:(int,enum_t) farray.
-  forall a1:(int,enum_t) farray. forall result2:(int,enum_t) farray.
-  forall b1:(int,enum_t) farray. forall a2:(int,enum_t) farray.
-  forall b2:(int,enum_t) farray. forall tmp2:int.
-  forall a3:(int,enum_t) farray. forall b3:(int,enum_t) farray.
-  forall tmp3:int. ((in_range1(i) and (in_range1(j) and ((((0 <= 2) ->
-  in_range1(tmp)) and (((result = tmp) and (tmp1 = to_rep((a[i])))) and
-  ((((to_rep(o) = to_rep((b[j]))) and (o1 = (a[i <- o]))) and
-  ((result1 = a) and (a1 = o1))) and (((to_rep(o2) = tmp1) and
-  (o3 = (b[j <- o2]))) and ((result2 = b) and (b1 = o3)))))) and
-  (((tmp2 = tmp1) and ((b1 = b2) and (a1 = a2))) and ((tmp3 = tmp1) and
-  ((b3 = b1) and (a3 = a1))))))) -> (not (bool_eq3(a2, 0, 2, a, 0,
-  2) = true))))
+goal WP_parameter_def : (not (bool_eq3(a2, 0, 2, a, 0, 2) = true))

@@ -31,6 +31,7 @@
 (declare-const f Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (and (= t true) (not (= f true))))
+(assert true)
 (assert (= t true))
 (assert (not (= f true)))
 (check-sat)

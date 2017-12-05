@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -121,10 +121,27 @@ axiom g3__post_axiom : in_range(g3(void))
 
 axiom g3__def_axiom : (g3(void) = 1)
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+axiom H : ((o = g3(void)) and (in_range(o) and (o = 1)))
+
+axiom H1 : ((o1 = g1(void)) and (in_range(o1) and (o1 = 1)))
+
+axiom H2 : (o2 = (o1 + o))
+
+axiom H3 : ((o3 = o2) and in_range(o2))
+
+axiom H4 : (o4 = (o3 - 1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  ((((((o = g3(void)) and (in_range(o) and (o = 1))) and
-  (((o1 = g1(void)) and (in_range(o1) and (o1 = 1))) and
-  (o2 = (o1 + o)))) and ((o3 = o2) and in_range(o2))) and (o4 = (o3 - 1))) ->
-  in_range(o4)))
+goal WP_parameter_def : in_range(o4)

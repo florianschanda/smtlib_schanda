@@ -136,13 +136,13 @@ logic attr__ATTRIBUTE_ADDRESS : int
 type us_split_discrs = { rec__foo__thing__d : natural
 }
 
-function us_split_discrs___projection(a: us_split_discrs) : natural =
+function us_split_discrs___2__projection(a: us_split_discrs) : natural =
   (a).rec__foo__thing__d
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__foo__thing__a : bool; rec__foo__thing__x : bool
@@ -164,10 +164,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___27__projection(a: us_rep) : us_split_discrs =
+function us_rep___28__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___28__projection(a: us_rep) : us_split_fields =
+function us_rep___29__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -265,10 +265,10 @@ type us_rep1 = { us_split_discrs2 : us_split_discrs; us_split_fields3 :
 us_split_fields2
 }
 
-function us_rep___29__projection(a: us_rep1) : us_split_discrs =
+function us_rep___30__projection(a: us_rep1) : us_split_discrs =
   (a).us_split_discrs2
 
-function us_rep___30__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___31__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 function to_base(a: us_rep1) : us_rep = { us_split_discrs1 =
@@ -403,38 +403,142 @@ logic d : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : natural
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : natural
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic us_self__compl : natural
+
+logic us_self__compl1 : bool
+
+logic us_self__compl2 : bool
+
+logic o6 : natural
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : natural
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic o13 : natural
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : natural
+
+logic o17 : bool
+
+logic o18 : bool
+
+logic us_self__compl3 : natural
+
+logic us_self__compl4 : bool
+
+logic us_self__compl5 : bool
+
+logic po_1__split_fields : bool
+
+logic po_1__split_fields1 : bool
+
+logic us_self__compl6 : natural
+
+logic us_self__compl7 : bool
+
+logic us_self__compl8 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic po_1__split_fields2 : bool
+
+logic po_1__split_fields3 : bool
+
+logic b : bool
+
+logic po_1__split_fields4 : bool
+
+logic po_1__split_fields5 : bool
+
+logic result2 : bool
+
+logic b1 : bool
+
+logic po_1__split_fields6 : bool
+
+logic po_1__split_fields7 : bool
+
+axiom H : (12 = to_rep(po_1__split_discrs))
+
+axiom H1 : in_range(d)
+
+axiom H2 : (po_1__split_discrs = o)
+
+axiom H3 : ((po_1__split_fields = o1) and (po_1__split_fields1 = o2))
+
+axiom H4 : (o = o3)
+
+axiom H5 : (o1 = o4)
+
+axiom H6 : (o2 = o5)
+
+axiom H7 : (us_self__compl = o3)
+
+axiom H8 : (us_self__compl1 = o4)
+
+axiom H9 : (us_self__compl2 = o5)
+
+axiom H10 : ((result = po_1__split_fields) and
+  (result1 = po_1__split_fields1))
+
+axiom H11 : ((po_1__split_fields2 = us_self__compl7) and
+  (po_1__split_fields3 = us_self__compl8))
+
+axiom H12 : (po_1__split_discrs = us_self__compl6)
+
+axiom H13 : (po_1__split_discrs = o6)
+
+axiom H14 : ((po_1__split_fields4 = o7) and (po_1__split_fields5 = o8))
+
+axiom H15 : (o6 = o9)
+
+axiom H16 : (o7 = o10)
+
+axiom H17 : (o8 = o11)
+
+axiom H18 : (o12 = p_func({ us_split_discrs1 = { rec__foo__thing__d = o9 };
+  us_split_fields1 = { rec__foo__thing__a = o10; rec__foo__thing__x = o11 }
+  }))
+
+axiom H19 : (result2 = b)
+
+axiom H20 : (b1 = o12)
+
+axiom H21 : (po_1__split_discrs = o13)
+
+axiom H22 : ((po_1__split_fields6 = o14) and (po_1__split_fields7 = o15))
+
+axiom H23 : ((o16 = o13) and ((o17 = o14) and (o18 = o15)))
+
+axiom H24 : ((us_self__compl3 = o16) and ((us_self__compl4 = o17) and
+  (us_self__compl5 = o18)))
+
  (* File "foo.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:natural. forall o1:bool. forall o2:bool. forall o3:natural.
-  forall o4:bool. forall o5:bool. forall us_self__compl:natural.
-  forall us_self__compl1:bool. forall us_self__compl2:bool.
-  forall o6:natural. forall o7:bool. forall o8:bool. forall o9:natural.
-  forall o10:bool. forall o11:bool. forall o12:bool. forall o13:natural.
-  forall o14:bool. forall o15:bool. forall o16:natural. forall o17:bool.
-  forall o18:bool. forall us_self__compl3:natural.
-  forall us_self__compl4:bool. forall us_self__compl5:bool.
-  forall po_1__split_fields:bool. forall po_1__split_fields1:bool.
-  forall us_self__compl6:natural. forall us_self__compl7:bool.
-  forall us_self__compl8:bool. forall result:bool. forall result1:bool.
-  forall po_1__split_fields2:bool. forall po_1__split_fields3:bool.
-  forall b:bool. forall po_1__split_fields4:bool.
-  forall po_1__split_fields5:bool. forall result2:bool. forall b1:bool.
-  forall po_1__split_fields6:bool. forall po_1__split_fields7:bool.
-  ((12 = to_rep(po_1__split_discrs)) -> (in_range(d) ->
-  ((((((po_1__split_discrs = o) and ((o1 = po_1__split_fields) and
-  (o2 = po_1__split_fields1))) and ((o = o3) and ((o1 = o4) and
-  (o2 = o5)))) and ((us_self__compl = o3) and ((us_self__compl1 = o4) and
-  (us_self__compl2 = o5)))) and ((((result = po_1__split_fields) and
-  (result1 = po_1__split_fields1)) and
-  ((po_1__split_fields2 = us_self__compl7) and
-  (po_1__split_fields3 = us_self__compl8))) and
-  (po_1__split_discrs = us_self__compl6))) ->
-  ((((((po_1__split_discrs = o6) and ((po_1__split_fields4 = o7) and
-  (po_1__split_fields5 = o8))) and ((o6 = o9) and ((o7 = o10) and
-  (o8 = o11)))) and (o12 = p_func({ us_split_discrs1 = { rec__foo__thing__d =
-  o9 }; us_split_fields1 = { rec__foo__thing__a = o10; rec__foo__thing__x =
-  o11 } }))) and ((result2 = b) and (b1 = o12))) ->
-  (((((po_1__split_discrs = o13) and ((po_1__split_fields6 = o14) and
-  (po_1__split_fields7 = o15))) and ((o13 = o16) and ((o14 = o17) and
-  (o15 = o18)))) and ((us_self__compl3 = o16) and
-  ((us_self__compl4 = o17) and (us_self__compl5 = o18)))) -> (10 <  42)))))))
+goal WP_parameter_def : (10 <  42)

@@ -1963,7 +1963,7 @@ function tbufD1__ref___projection(a: tbufD1__ref) : tbufD1 =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1992,6 +1992,32 @@ logic f : unit -> int
 logic f__function_guard : int, unit -> prop
 
 axiom f__post_axiom : in_range3(f(void))
+
+logic buf : (int,float1) farray
+
+logic temp___137 : int
+
+logic o : int
+
+logic o1 : float1
+
+logic o2 : t
+
+logic temp___1371 : int
+
+logic o3 : int
+
+logic o4 : float1
+
+logic o5 : t
+
+logic o6 : t1
+
+logic o7 : t1
+
+logic o8 : t1
+
+logic o9 : t1
 
  (* File "repr.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

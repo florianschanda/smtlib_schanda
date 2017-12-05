@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -313,6 +313,8 @@ axiom object__alignment_axiom1 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment1(a)))
 
 logic user_eq3 : (int,us_rep) farray, (int,us_rep) farray -> bool
+
+logic o : int
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : in_range(value__size1)

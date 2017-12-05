@@ -62,6 +62,7 @@
 (declare-const a1 (_ BitVec 32))
 (declare-const a2 (_ BitVec 32))
 (declare-const a3 (_ BitVec 32))
+(assert true)
 (assert (= (mk_t__ref result) (mk_t__ref a)))
 (assert (= a1 (bvlshr a ((_ int2bv 32) 2))))
 (assert (= a1 a2))

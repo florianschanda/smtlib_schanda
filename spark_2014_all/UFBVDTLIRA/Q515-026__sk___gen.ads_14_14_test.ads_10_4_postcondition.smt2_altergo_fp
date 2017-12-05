@@ -197,18 +197,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2621,20 +2621,36 @@ logic e72 : word32
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test__p__get_val__result : us_rep
+
+logic result : us_rep
+
+logic test__p__get_val__result1 : us_rep
+
+logic test__p__get_val__result2 : us_rep
+
+logic test__p__get_val__result3 : us_rep
+
+logic test__p__get_val__result4 : us_rep
+
+logic test__p__get_val__result5 : us_rep
+
+logic result1 : us_rep
+
+axiom H : (test__p__get_val__result1 = test__p__get_val__result2)
+
+axiom H1 : (test__p__get_val__result3 = test__p__get_val__result1)
+
+axiom H2 : (result = test__p__get_val__result)
+
+axiom H3 : (test__p__get_val__result1 = val__)
+
+axiom H4 : (test__p__get_val__result4 = test__p__get_val__result2)
+
+axiom H5 : (test__p__get_val__result5 = test__p__get_val__result3)
+
+axiom H6 : (result1 = test__p__get_val__result4)
+
  (* File "gen.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__p__get_val__result:us_rep. forall result:us_rep.
-  forall test__p__get_val__result1:us_rep.
-  forall test__p__get_val__result2:us_rep.
-  forall test__p__get_val__result3:us_rep.
-  forall test__p__get_val__result4:us_rep.
-  forall test__p__get_val__result5:us_rep.
-  (forall result1:us_rep.
-  ((((((test__p__get_val__result1 = test__p__get_val__result2) and
-  (test__p__get_val__result3 = test__p__get_val__result1)) and
-  ((result = test__p__get_val__result) and
-  (test__p__get_val__result1 = val__))) and
-  ((test__p__get_val__result4 = test__p__get_val__result2) and
-  (test__p__get_val__result5 = test__p__get_val__result3))) and
-  (result1 = test__p__get_val__result4)) ->
-  (bool_eq(test__p__get_val__result4, test__p__get_val__result4) = true))))
+goal WP_parameter_def : (bool_eq(test__p__get_val__result4,
+  test__p__get_val__result4) = true)

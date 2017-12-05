@@ -142,6 +142,7 @@
 (declare-const o15 Int)
 (declare-const o16 Int)
 (declare-const o17 Int)
+(declare-const o18 Int)
 (declare-const result (Array Int character))
 (declare-const s11 (Array Int character))
 (declare-const result1 (Array Int character))

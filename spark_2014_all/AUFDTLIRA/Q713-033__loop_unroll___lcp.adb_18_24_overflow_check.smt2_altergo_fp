@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -388,13 +388,564 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic l : int
+
+logic j : int
+
+logic lcp__result : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic temp___160 : int
+
+logic temp___158 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic temp___159 : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : int
+
+logic temp___1581 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic temp___1591 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : bool
+
+logic o22 : int
+
+logic temp___1582 : int
+
+logic o23 : int
+
+logic o24 : integer
+
+logic temp___1592 : int
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : bool
+
+logic o32 : int
+
+logic temp___1583 : int
+
+logic o33 : int
+
+logic o34 : integer
+
+logic temp___1593 : int
+
+logic o35 : int
+
+logic o36 : integer
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : int
+
+logic temp___1584 : int
+
+logic o43 : int
+
+logic o44 : integer
+
+logic temp___1594 : int
+
+logic o45 : int
+
+logic o46 : integer
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : bool
+
+logic o52 : int
+
+logic temp___1585 : int
+
+logic o53 : int
+
+logic o54 : integer
+
+logic temp___1595 : int
+
+logic o55 : int
+
+logic o56 : integer
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : bool
+
+logic o62 : int
+
+logic temp___1586 : int
+
+logic o63 : int
+
+logic o64 : integer
+
+logic temp___1596 : int
+
+logic o65 : int
+
+logic o66 : integer
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : bool
+
+logic o72 : int
+
+logic temp___1587 : int
+
+logic o73 : int
+
+logic o74 : integer
+
+logic temp___1597 : int
+
+logic o75 : int
+
+logic o76 : integer
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : bool
+
+logic o82 : int
+
+logic temp___1588 : int
+
+logic o83 : int
+
+logic o84 : integer
+
+logic temp___1598 : int
+
+logic o85 : int
+
+logic o86 : integer
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic o91 : bool
+
+logic o92 : int
+
+logic temp___1589 : int
+
+logic o93 : int
+
+logic o94 : integer
+
+logic temp___1599 : int
+
+logic o95 : int
+
+logic o96 : integer
+
+logic o97 : int
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : bool
+
+logic o102 : int
+
+logic temp___163 : int
+
+logic temp___164 : int
+
+logic o103 : int
+
+logic o104 : integer
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : int
+
+logic o108 : int
+
+logic o109 : int
+
+logic k : int
+
+logic temp___165 : int
+
+logic temp___166 : int
+
+logic o110 : int
+
+logic o111 : integer
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : int
+
+logic result : int
+
+logic l1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic l2 : int
+
+logic result6 : int
+
+logic j2 : int
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : int
+
+logic l3 : int
+
+logic result11 : int
+
+logic j3 : int
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : int
+
+logic l4 : int
+
+logic result16 : int
+
+logic j4 : int
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic result20 : int
+
+logic l5 : int
+
+logic result21 : int
+
+logic j5 : int
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic result25 : int
+
+logic l6 : int
+
+logic result26 : int
+
+logic j6 : int
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic result30 : int
+
+logic l7 : int
+
+logic result31 : int
+
+logic j7 : int
+
+logic result32 : bool
+
+logic result33 : bool
+
+logic result34 : bool
+
+logic result35 : int
+
+logic l8 : int
+
+logic result36 : int
+
+logic j8 : int
+
+logic result37 : bool
+
+logic result38 : bool
+
+logic result39 : bool
+
+logic result40 : int
+
+logic l9 : int
+
+logic result41 : int
+
+logic j9 : int
+
+logic result42 : bool
+
+logic result43 : bool
+
+logic result44 : bool
+
+logic result45 : int
+
+logic l10 : int
+
+logic result46 : int
+
+logic j10 : int
+
+logic result47 : bool
+
+logic result48 : bool
+
+logic result49 : bool
+
+logic result50 : int
+
+logic l11 : int
+
+logic l12 : int
+
+logic j11 : int
+
+logic l13 : int
+
+logic j12 : int
+
+logic l14 : int
+
+logic j13 : int
+
+logic l15 : int
+
+logic j14 : int
+
+logic l16 : int
+
+logic j15 : int
+
+logic l17 : int
+
+logic j16 : int
+
+logic l18 : int
+
+logic j17 : int
+
+logic l19 : int
+
+logic j18 : int
+
+logic l20 : int
+
+logic j19 : int
+
+logic l21 : int
+
+logic j20 : int
+
+logic l22 : int
+
+logic j21 : int
+
+logic l23 : int
+
+logic j22 : int
+
+logic l24 : int
+
+logic j23 : int
+
+logic l25 : int
+
+logic j24 : int
+
+logic l26 : int
+
+logic j25 : int
+
+logic l27 : int
+
+logic j26 : int
+
+logic l28 : int
+
+logic j27 : int
+
+logic l29 : int
+
+logic j28 : int
+
+logic l30 : int
+
+logic j29 : int
+
+logic l31 : int
+
+logic j30 : int
+
+logic result51 : int
+
+logic lcp__result1 : int
+
+logic lcp__result2 : int
+
+logic lcp__result3 : int
+
+logic l32 : int
+
+logic j31 : int
+
+logic lcp__result4 : int
+
+logic l33 : int
+
+logic j32 : int
+
+logic lcp__result5 : int
+
+logic result52 : bool
+
+logic result53 : bool
+
+logic result54 : bool
+
+axiom H : dynamic_property(1, 10, to_rep(first(a1)), to_rep(last(a1)))
+
+axiom H1 : in_range1(x)
+
+axiom H2 : in_range1(y)
+
+axiom H3 : (((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
+  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1)))))
+
+axiom H4 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H5 : (result = l)
+
+axiom H6 : (l1 = 0)
+
+axiom H7 : (result1 = j)
+
+axiom H8 : (j1 = 1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l:int. forall j:int. forall result:int. forall l1:int.
-  forall result1:int. forall j1:int. (dynamic_property(1, 10,
-  to_rep(first(a1)), to_rep(last(a1))) -> (in_range1(x) -> (in_range1(y) ->
-  ((((to_rep(first(a1)) <= x) and (x <= to_rep(last(a1)))) and
-  ((to_rep(first(a1)) <= y) and (y <= to_rep(last(a1))))) ->
-  (((0 <= 2147483647) -> in_range2(l)) -> ((({ int__content = result } = {
-  int__content = l }) and (l1 = 0)) -> ((({ int__content = result1 } = {
-  int__content = j }) and (j1 = 1)) -> in_range1((x + l1))))))))))
+goal WP_parameter_def : in_range1((x + l1))

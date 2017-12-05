@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -925,7 +925,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1950,13 +1950,32 @@ logic reg_bytes__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___7870:(int,bits_8) farray. forall temp___78701:t4.
-  ((dynamic_property2(1, 4, to_rep(reg_bytes__first),
+logic reg_bytes : (int,bits_8) farray
+
+logic temp___7870 : (int,bits_8) farray
+
+logic temp___78701 : t4
+
+logic temp___7871 : (int,bits_8) farray
+
+logic temp___78711 : t3
+
+logic o : (int,bits_8) farray
+
+logic o1 : t3
+
+logic o2 : (int,bits_8) farray
+
+logic result : (int,bits_8) farray
+
+logic reg_bytes1 : (int,bits_8) farray
+
+axiom H : (dynamic_property2(1, 4, to_rep(reg_bytes__first),
   to_rep(reg_bytes__last)) and ((to_rep(reg_bytes__first) = 1) and
-  (to_rep(reg_bytes__last) = 4))) -> ((({ elts2 = temp___7870; rt2 =
-  temp___78701 } = register_to_bytes({ us_split_fields1 = {
+  (to_rep(reg_bytes__last) = 4)))
+
+axiom H1 : (({ elts2 = temp___7870; rt2 = temp___78701
+  } = register_to_bytes({ us_split_fields1 = {
   rec__dw1000__register_types__gpio_mode_type__msgp0 = reg;
   rec__dw1000__register_types__gpio_mode_type__msgp1 = reg1;
   rec__dw1000__register_types__gpio_mode_type__msgp2 = reg2;
@@ -1970,11 +1989,14 @@ goal WP_parameter_def :
   rec__dw1000__register_types__gpio_mode_type__reserved_2 = reg10 } })) and
   (dynamic_property3(1, 4, to_rep(first4(temp___78701)),
   to_rep(last4(temp___78701))) and ((to_rep(first4(temp___78701)) = 1) and
-  (to_rep(last4(temp___78701)) = 4)))) ->
+  (to_rep(last4(temp___78701)) = 4))))
+
+ (* File "dw1000-generic_wo_register_driver.adb", line 28, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep(first4(temp___78701)) <= to_rep(last4(temp___78701))) ->
   (((1 <= 4) ->
   (((to_rep(last4(temp___78701)) - to_rep(first4(temp___78701))) + 1) = ((4 - 1) + 1))) and
   ((not (1 <= 4)) ->
   (((to_rep(last4(temp___78701)) - to_rep(first4(temp___78701))) + 1) = 0)))) and
   ((not (to_rep(first4(temp___78701)) <= to_rep(last4(temp___78701)))) ->
-  ((1 <= 4) -> (0 = ((4 - 1) + 1))))))))
+  ((1 <= 4) -> (0 = ((4 - 1) + 1)))))

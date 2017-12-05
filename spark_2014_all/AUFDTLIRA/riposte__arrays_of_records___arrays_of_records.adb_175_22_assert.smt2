@@ -138,6 +138,8 @@
 (declare-const a3 (Array Int us_rep))
 (declare-const result3 (Array Int us_rep))
 (declare-const a4 (Array Int us_rep))
+(declare-const a5 (Array Int us_rep))
+(declare-const a6 (Array Int us_rep))
 (assert (in_range1 i))
 (assert (in_range1 j))
 (assert (not (= i j)))

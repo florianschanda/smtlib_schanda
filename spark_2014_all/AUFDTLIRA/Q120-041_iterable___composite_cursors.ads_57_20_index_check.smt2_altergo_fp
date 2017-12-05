@@ -478,10 +478,14 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(i19s1) <= 100) -> ((to_rep(c1) <= 100) ->
-  ((has_element__2({ us_split_fields3 = {
+axiom H : (to_rep(i19s1) <= 100)
+
+axiom H1 : (to_rep(c1) <= 100)
+
+axiom H2 : (has_element__2({ us_split_fields3 = {
   rec__composite_cursors__cont2__content = c;
   rec__composite_cursors__cont2__length = c1 } }, { us_split_fields1 = {
-  rec__composite_cursors__rec_cursor__content = p } }) = true) ->
-  (1 <= to_rep(p)))))
+  rec__composite_cursors__rec_cursor__content = p } }) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= to_rep(p))

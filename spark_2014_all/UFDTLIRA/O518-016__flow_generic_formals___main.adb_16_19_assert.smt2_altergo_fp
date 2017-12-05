@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -175,10 +175,27 @@ axiom get__def_axiom :
 
 axiom bounded__def_axiom : (bounded = x)
 
+logic var : int
+
+logic result : int
+
+logic var1 : int
+
+logic var2 : int
+
+axiom H : (result = var)
+
+axiom H1 : (var1 = 10)
+
+axiom H2 : in_range1(var1)
+
+axiom H3 : ((x = true) <-> (get_bounded(void) = true))
+
+axiom H4 : (get_bounded1(void) = true)
+
+axiom H5 : ((var2 = 10) and in_range1(var2))
+
+axiom H6 : (var2 = 10)
+
  (* File "main.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall var:int. forall result:int. forall var1:int. forall var2:int.
-  (((result = var) and (var1 = 10)) -> (in_range1(var1) -> (((x = true) <->
-  (get_bounded(void) = true)) -> ((get_bounded1(void) = true) ->
-  (((var2 = 10) and in_range1(var2)) -> ((var2 = 10) ->
-  (get(var2) = var2))))))))
+goal WP_parameter_def : (get(var2) = var2)

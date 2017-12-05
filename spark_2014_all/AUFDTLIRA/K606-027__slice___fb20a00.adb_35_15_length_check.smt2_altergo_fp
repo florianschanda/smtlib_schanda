@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -735,69 +735,234 @@ type t9b__ref = { t9b__content : us_t3
 
 function t9b__ref___projection(a: t9b__ref) : us_t3 = (a).t9b__content
 
- (* File "fb20a00.ads", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray. forall pos:int.
-  forall temp___204:(int,character) farray. forall temp___2041:t.
-  forall temp___205:(int,character) farray. forall temp___2051:t1.
-  forall o:(int,character) farray. forall o1:t1.
-  forall o2:(int,character) farray. forall temp___206:(int,character) farray.
-  forall temp___2061:t. forall temp___207:(int,character) farray.
-  forall temp___2071:t2. forall result:int. forall pos1:int.
-  forall result1:(int,character) farray.
-  forall new_str1:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(sub1)), to_rep1(last(sub1))) ->
-  ((dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic pos : int
+
+logic temp___204 : (int,character) farray
+
+logic temp___2041 : t
+
+logic temp___205 : (int,character) farray
+
+logic temp___2051 : t1
+
+logic o : (int,character) farray
+
+logic o1 : t1
+
+logic o2 : (int,character) farray
+
+logic temp___206 : (int,character) farray
+
+logic temp___2061 : t
+
+logic temp___207 : (int,character) farray
+
+logic temp___2071 : t2
+
+logic o3 : (int,character) farray
+
+logic o4 : t2
+
+logic o5 : (int,character) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic fb20a00__find__L_2__R7b : int
+
+logic o11 : (int,character) farray
+
+logic temp___209 : (int,character) farray
+
+logic temp___2091 : t3
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic temp___208 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic fb20a00__find__L_2__R7b1 : int
+
+logic o25 : (int,character) farray
+
+logic temp___2092 : (int,character) farray
+
+logic temp___2093 : t3
+
+logic o26 : bool
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : bool
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : (int,character) farray
+
+logic new_str1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic new_sub1 : (int,character) farray
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic pos2 : int
+
+logic result5 : int
+
+logic pos3 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic pos4 : int
+
+logic pos5 : int
+
+logic pos6 : int
+
+logic pos7 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(sub1)),
+  to_rep1(last(sub1)))
+
+axiom H2 : (dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
   to_rep1(new_str__first), to_rep1(new_str__last)) and
   ((to_rep1(new_str__first) = to_rep1(first(str1))) and
-  (to_rep1(new_str__last) = to_rep1(last(str1))))) ->
-  ((dynamic_property4(to_rep1(first(sub1)), to_rep1(last(sub1)),
+  (to_rep1(new_str__last) = to_rep1(last(str1)))))
+
+axiom H3 : (dynamic_property4(to_rep1(first(sub1)), to_rep1(last(sub1)),
   to_rep1(new_sub__first), to_rep1(new_sub__last)) and
   ((to_rep1(new_sub__first) = to_rep1(first(sub1))) and
-  (to_rep1(new_sub__last) = to_rep1(last(sub1))))) -> (((result = pos) and
-  (pos1 = to_rep1(first(str1)))) -> (in_range1(pos1) -> ((((((({ elts =
-  temp___204; rt = temp___2041 } = upper_case({ elts = str; rt = str1 })) and
-  dynamic_property(1, 2147483647, to_rep1(first(temp___2041)),
-  to_rep1(last(temp___2041)))) and
-  ((((to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041))) and
-  (((to_rep1(first(str1)) <= to_rep1(last(str1))) and
-  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) or
-  ((not (to_rep1(first(str1)) <= to_rep1(last(str1)))) and
-  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041)))) and
-  (((to_rep1(first(str1)) <= to_rep1(last(str1))) and
-  (0 = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) or
-  (not (to_rep1(first(str1)) <= to_rep1(last(str1))))))) and
-  ((slide(temp___204, to_rep1(first(temp___2041)),
-  to_rep1(first(str1))) = temp___205) and (mk1(to_rep1(first(str1)),
-  to_rep1(last(str1))) = temp___2051)))) and
-  ((((to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051))) and
-  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) and
-  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) or
-  ((not (to_rep1(new_str__first) <= to_rep1(new_str__last))) and
-  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051)))) and
-  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) and
-  (0 = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) or
-  (not (to_rep1(new_str__first) <= to_rep1(new_str__last)))))) and
-  ((o = temp___205) and (o1 = temp___2051)))) and (o2 = o)) and
-  ((result1 = new_str) and (new_str1 = o2))) -> (((({ elts = temp___206; rt =
-  temp___2061 } = upper_case({ elts = sub; rt = sub1 })) and
-  dynamic_property(1, 2147483647, to_rep1(first(temp___2061)),
-  to_rep1(last(temp___2061)))) and
-  ((((to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061))) and
-  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) and
-  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) or
-  ((not (to_rep1(first(sub1)) <= to_rep1(last(sub1)))) and
-  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061)))) and
-  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) and
-  (0 = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) or
-  (not (to_rep1(first(sub1)) <= to_rep1(last(sub1))))))) and
-  ((slide(temp___206, to_rep1(first(temp___2061)),
-  to_rep1(first(sub1))) = temp___207) and (mk2(to_rep1(first(sub1)),
-  to_rep1(last(sub1))) = temp___2071)))) ->
+  (to_rep1(new_sub__last) = to_rep1(last(sub1)))))
+
+axiom H4 : (result = pos)
+
+axiom H5 : (pos1 = to_rep1(first(str1)))
+
+axiom H6 : in_range1(pos1)
+
+axiom H7 : (({ elts = temp___204; rt = temp___2041 } = upper_case({ elts =
+  str; rt = str1 })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2041)), to_rep1(last(temp___2041))))
+
+axiom H8 : (((to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041))) ->
+  (((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
+  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) and
+  ((not (to_rep1(first(str1)) <= to_rep1(last(str1)))) ->
+  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041)))) ->
+  ((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
+  (0 = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1)))))
+
+axiom H9 : (slide(temp___204, to_rep1(first(temp___2041)),
+  to_rep1(first(str1))) = temp___205)
+
+axiom H10 : (mk1(to_rep1(first(str1)), to_rep1(last(str1))) = temp___2051)
+
+axiom H11 :
+  (((to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051))) ->
+  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) ->
+  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) and
+  ((not (to_rep1(new_str__first) <= to_rep1(new_str__last))) ->
+  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051)))) ->
+  ((to_rep1(new_str__first) <= to_rep1(new_str__last)) ->
+  (0 = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1)))))
+
+axiom H12 : ((o = temp___205) and (o1 = temp___2051))
+
+axiom H13 : (o2 = o)
+
+axiom H14 : (result1 = new_str)
+
+axiom H15 : (new_str1 = o2)
+
+axiom H16 : (({ elts = temp___206; rt = temp___2061 } = upper_case({ elts =
+  sub; rt = sub1 })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2061)), to_rep1(last(temp___2061))))
+
+axiom H17 : (((to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061))) ->
+  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) ->
+  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) and
+  ((not (to_rep1(first(sub1)) <= to_rep1(last(sub1)))) ->
+  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061)))) ->
+  ((to_rep1(first(sub1)) <= to_rep1(last(sub1))) ->
+  (0 = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1)))))
+
+axiom H18 : (slide(temp___206, to_rep1(first(temp___2061)),
+  to_rep1(first(sub1))) = temp___207)
+
+axiom H19 : (mk2(to_rep1(first(sub1)), to_rep1(last(sub1))) = temp___2071)
+
+ (* File "fb20a00.ads", line 43, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071))) ->
   (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
   (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) and
@@ -805,4 +970,4 @@ goal WP_parameter_def :
   (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071)))) ->
   ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
-  (0 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))))))))))))))
+  (0 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)))))

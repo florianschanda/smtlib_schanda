@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -214,9 +214,19 @@ axiom is_positive__def_axiom :
 
 axiom one__def_axiom : (one = of_rep(1))
 
+logic o : integer
+
+logic o1 : integer
+
+logic temp___147 : integer
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___147 = o1)
+
  (* File "dyn_pred.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:integer. forall o1:integer. forall temp___147:integer.
-  ((((to_rep(o) = 1) and (o = o1)) and (temp___147 = o1)) ->
-  ((not (to_rep(temp___147) = 0)) and (is_positive({ us_split_fields1 = {
-  rec__dyn_pred__non_zero_type__val = temp___147 } }) = true))))
+goal WP_parameter_def : ((not (to_rep(temp___147) = 0)) and (is_positive({
+  us_split_fields1 = { rec__dyn_pred__non_zero_type__val = temp___147 }
+  }) = true))

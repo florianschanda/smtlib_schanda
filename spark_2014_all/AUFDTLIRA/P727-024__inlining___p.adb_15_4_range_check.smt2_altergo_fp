@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -546,7 +546,7 @@ logic p__a__aggregate_def : int, int, int -> us_t1
 
 axiom def_axiom :
   (forall temp___193:int. forall temp___194:int. forall temp___195:int.
-  ((dynamic_property4((-2147483648), 2147483647, temp___194, temp___195) ->
+  ((dynamic_property4((- 2147483648), 2147483647, temp___194, temp___195) ->
   ((to_rep(first2((p__a__aggregate_def(temp___193, temp___194,
   temp___195)).rt1)) = temp___194) and
   (to_rep(last2((p__a__aggregate_def(temp___193, temp___194,
@@ -554,8 +554,29 @@ axiom def_axiom :
   (forall temp___196:int. (((p__a__aggregate_def(temp___193, temp___194,
   temp___195)).elts1[temp___196]) = of_rep(temp___193)))))
 
+logic a : (int,integer) farray
+
+logic p__R4b__assume : int
+
+logic temp___198 : (int,integer) farray
+
+logic temp___1981 : t1
+
+logic p__a__assume : (int,integer) farray
+
+logic p__a__assume1 : t
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+axiom H : ((p__R4b__assume = f(void)) and in_range(p__R4b__assume))
+
+axiom H1 : (p__R4b__assume = r4b)
+
+axiom H2 : in_range(r4b)
+
+axiom H3 : (r4b <= 10)
+
  (* File "p.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__R4b__assume:int. ((((p__R4b__assume = f(void)) and
-  in_range(p__R4b__assume)) and (p__R4b__assume = r4b)) -> (in_range(r4b) ->
-  ((r4b <= 10) -> ((-2147483648) <= r4b)))))
+goal WP_parameter_def : ((- 2147483648) <= r4b)

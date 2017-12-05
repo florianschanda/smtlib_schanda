@@ -212,18 +212,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1940,31 +1940,9 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((((((((((to_rep4(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep4(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
-  (discrimrec__register_type__value_64__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64)))) and
-  (discrimrec__register_type__ignore_32a__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
-  (discrimrec__register_type__value_32__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__value_32) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__value_32)))) and
-  (discrimrec__register_type__ignore_32b__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32b) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32b)))) and
-  (discrimrec__register_type__ignore_16a__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16a) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16a)))) and
-  (discrimrec__register_type__value_16__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__value_16) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__value_16)))) and
-  (discrimrec__register_type__ignore_32c__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32c) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32c)))) and
-  (discrimrec__register_type__ignore_16b__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16b) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16b)))) and
-  (discrimrec__register_type__value_high__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
-  (discrimrec__register_type__value_low__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_low)))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((((((((((to_rep4(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep4(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
-  (discrimrec__register_type__value_64__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64)))) and
+  ((((to_rep4(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep4(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
+  ((((((((((discrimrec__register_type__value_64__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64))) and
   (discrimrec__register_type__ignore_32a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
   (discrimrec__register_type__value_32__pred(a) ->
@@ -1983,6 +1961,28 @@ axiom bool_eq_def9 :
   (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
   (discrimrec__register_type__value_low__pred(a) ->
   (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_low))))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((to_rep4(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep4(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
+  ((((((((((discrimrec__register_type__value_64__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64))) and
+  (discrimrec__register_type__ignore_32a__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
+  (discrimrec__register_type__value_32__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__value_32) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__value_32)))) and
+  (discrimrec__register_type__ignore_32b__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32b) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32b)))) and
+  (discrimrec__register_type__ignore_16a__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16a) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16a)))) and
+  (discrimrec__register_type__value_16__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__value_16) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__value_16)))) and
+  (discrimrec__register_type__ignore_32c__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32c) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32c)))) and
+  (discrimrec__register_type__ignore_16b__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16b) = to_rep2(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16b)))) and
+  (discrimrec__register_type__value_high__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
+  (discrimrec__register_type__value_low__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_low)))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size : int
@@ -2487,6 +2487,12 @@ logic rax__split_discrs : register_option
 logic rax__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
 
  (* File "discrimrec.adb", line 9, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

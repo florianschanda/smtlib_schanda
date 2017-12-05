@@ -135,7 +135,7 @@ function index_t__ref___projection(a: index_t__ref) : index_t =
 
 type value_t
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -458,35 +458,132 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "usergroup_examples.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall vca:(int,us_rep) farray. forall v:int. forall o:value_t.
-  forall o1:bool. forall o2:value_t. forall o3:bool. forall o4:value_t.
-  forall o5:(int,us_rep) farray. forall vca1:(int,us_rep) farray.
-  forall result:int. forall v1:int. forall result1:(int,us_rep) farray.
-  forall vca2:(int,us_rep) farray. forall result2:(int,us_rep) farray.
-  forall vca3:(int,us_rep) farray. forall result3:int. forall v2:int.
-  (in_range1(i) -> ((((-2147483648) <= 2147483647) -> in_range2(v)) ->
-  (((forall x:int. (((1 <= x) and (x <= 100)) ->
-    (is_valid(to_rep((va[x]))) = true))) and
+logic vca : (int,us_rep) farray
+
+logic v : int
+
+logic o : value_t
+
+logic o1 : bool
+
+logic o2 : value_t
+
+logic o3 : bool
+
+logic o4 : value_t
+
+logic o5 : (int,us_rep) farray
+
+logic vca1 : (int,us_rep) farray
+
+logic result : int
+
+logic v1 : int
+
+logic result1 : (int,us_rep) farray
+
+logic vca2 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic vca3 : (int,us_rep) farray
+
+logic result3 : int
+
+logic v2 : int
+
+logic vca4 : (int,us_rep) farray
+
+logic v3 : int
+
+logic vca5 : (int,us_rep) farray
+
+logic v4 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(v))
+
+axiom H2 :
+  ((forall x:int. (((1 <= x) and (x <= 100)) ->
+   (is_valid(to_rep((va[x]))) = true))) and
   (forall y:int. (((1 <= y) and (y <= 100)) ->
   (((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
-  (to_rep((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache) = to_rep((va[y]))))))) ->
-  (((((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) and
-  ((({ int__content = result } = { int__content = v }) and
-  (v1 = to_rep((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache))) and
-  ((vca3 = vca) and (vca3 = vca1)))) or
-  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) and
-  (((((((to_rep(o) = to_rep((va[i]))) and
-  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = o1) and
-  (o = o2))) and ((o3 = o1) and (o4 = o2))) and (o5 = (vca[i <- {
-  us_split_fields1 = { rec__usergroup_examples__value_cache_t__cached = o3;
-  rec__usergroup_examples__value_cache_t__cache = o4 } }]))) and (({
-  map__content1 = result1 } = { map__content1 = vca }) and (vca2 = o5))) and
-  (((vca2 = result2) and (vca3 = (vca2[i <- { us_split_fields1 = {
+  (to_rep((((vca[y])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache) = to_rep((va[y])))))))
+
+axiom H3 :
+  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
+  (result = v))
+
+axiom H4 :
+  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
+  (v1 = to_rep((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache)))
+
+axiom H5 :
+  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
+  (vca3 = vca))
+
+axiom H6 :
+  (((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true) ->
+  (vca3 = vca1))
+
+axiom H7 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (to_rep(o) = to_rep((va[i]))))
+
+axiom H8 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = o1))
+
+axiom H9 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (o = o2))
+
+axiom H10 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (o3 = o1))
+
+axiom H11 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (o4 = o2))
+
+axiom H12 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (o5 = (vca[i <- { us_split_fields1 = {
+  rec__usergroup_examples__value_cache_t__cached = o3;
+  rec__usergroup_examples__value_cache_t__cache = o4 } }])))
+
+axiom H13 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (result1 = vca))
+
+axiom H14 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (vca2 = o5))
+
+axiom H15 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (vca2 = result2))
+
+axiom H16 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (vca3 = (vca2[i <- { us_split_fields1 = {
   rec__usergroup_examples__value_cache_t__cached = of_int(1);
   rec__usergroup_examples__value_cache_t__cache =
   (((vca2[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache
-  } }]))) and (({ int__content = result3 } = { int__content = v }) and
-  (v2 = to_rep((((vca3[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache))))) and
-  (v1 = v2)))) -> (is_valid(to_rep((va[i]))) = true))))))
+  } }])))
+
+axiom H17 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (result3 = v))
+
+axiom H18 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (v2 = to_rep((((vca3[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cache)))
+
+axiom H19 :
+  ((not ((((vca[i])).us_split_fields1).rec__usergroup_examples__value_cache_t__cached = true)) ->
+  (v1 = v2))
+
+ (* File "usergroup_examples.adb", line 16, characters 0-0 *)
+goal WP_parameter_def : (is_valid(to_rep((va[i]))) = true)

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1530,28 +1530,174 @@ axiom a_first__def_axiom : (a_first = to_rep(first(addresses1)))
 
 axiom d_first__def_axiom : (d_first = to_rep(data__first))
 
+logic data : (int,bits_8) farray
+
+logic i : int
+
+logic temp___3382 : (int,bits_8) farray
+
+logic temp___33821 : t2
+
+logic temp___3383 : (int,bits_8) farray
+
+logic temp___33831 : t1
+
+logic temp___3384 : (int,bits_8) farray
+
+logic temp___33841 : t1
+
+logic o : (int,bits_8) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___3393 : int
+
+logic temp___3385 : int
+
+logic o5 : int
+
+logic o6 : bits_8
+
+logic o7 : bits_8
+
+logic o8 : bits_8
+
+logic o9 : bits_3
+
+logic o10 : bits_1
+
+logic o11 : bits_1
+
+logic o12 : bits_1
+
+logic o13 : bits_1
+
+logic o14 : bits_1
+
+logic o15 : bits_1
+
+logic o16 : bits_1
+
+logic o17 : bits_1
+
+logic o18 : bits_1
+
+logic o19 : bits_1
+
+logic o20 : bits_3
+
+logic o21 : bits_1
+
+logic o22 : bits_1
+
+logic o23 : bits_1
+
+logic o24 : bits_1
+
+logic o25 : bits_1
+
+logic o26 : bits_3
+
+logic o27 : bits_3
+
+logic o28 : bits_1
+
+logic o29 : bits_1
+
+logic o30 : bits_1
+
+logic o31 : bits_1
+
+logic o32 : bits_1
+
+logic o33 : bits_1
+
+logic o34 : bits_1
+
+logic o35 : bits_1
+
+logic o36 : bits_1
+
+logic o37 : bits_1
+
+logic o38 : bits_3
+
+logic o39 : bits_1
+
+logic o40 : bits_1
+
+logic o41 : bits_1
+
+logic o42 : bits_1
+
+logic o43 : bits_1
+
+logic o44 : bits_3
+
+logic temp___3387 : int
+
+logic o45 : bits_8
+
+logic result : (int,bits_8) farray
+
+logic data1 : (int,bits_8) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic aon_rdat_reg__split_fields : bits_8
+
+logic i2 : int
+
+logic dw1000__registers__aon_rdat__read__reg__fields : bits_8
+
+logic result2 : bits_8
+
+logic aon_rdat_reg__split_fields1 : bits_8
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(addresses1)),
+  to_rep(last(addresses1)))
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H2 : (((to_rep(data__first) <= to_rep(data__last)) -> (length({ elts =
+  addresses; rt = addresses1
+  }) = ((to_rep(data__last) - to_rep(data__first)) + 1))) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) -> (length({ elts =
+  addresses; rt = addresses1 }) = 0)))
+
+axiom H3 : (to_rep(first(addresses1)) = a_first)
+
+axiom H4 : in_range1(a_first)
+
+axiom H5 : (to_rep(data__first) = d_first)
+
+axiom H6 : in_range1(d_first)
+
+axiom H7 : (to_rep(first2((temp___3375(of_int(0), to_rep(data__first),
+  to_rep(data__last))).rt1)) = to_rep(data__first))
+
+axiom H8 : (to_rep(last2((temp___3375(of_int(0), to_rep(data__first),
+  to_rep(data__last))).rt1)) = to_rep(data__last))
+
+axiom H9 : ({ elts1 = temp___3382; rt1 = temp___33821
+  } = temp___3375(of_int(0), to_rep(data__first), to_rep(data__last)))
+
+axiom H10 : (temp___3382 = temp___3383)
+
+axiom H11 : (mk(to_rep(first2(temp___33821)),
+  to_rep(last2(temp___33821))) = temp___33831)
+
  (* File "dw1000-driver.adb", line 936, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___3382:(int,bits_8) farray. forall temp___33821:t2.
-  forall temp___3383:(int,bits_8) farray. forall temp___33831:t1.
-  (dynamic_property(0, 2147483647, to_rep(first(addresses1)),
-  to_rep(last(addresses1))) -> (dynamic_property(0, 2147483647,
-  to_rep(data__first), to_rep(data__last)) ->
-  ((((to_rep(data__first) <= to_rep(data__last)) and (length({ elts =
-  addresses; rt = addresses1
-  }) = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (length({ elts =
-  addresses; rt = addresses1 }) = 0))) ->
-  ((to_rep(first(addresses1)) = a_first) -> (in_range1(a_first) ->
-  ((to_rep(data__first) = d_first) -> (in_range1(d_first) ->
-  ((((to_rep(first2((temp___3375(of_int(0), to_rep(data__first),
-  to_rep(data__last))).rt1)) = to_rep(data__first)) and
-  ((to_rep(last2((temp___3375(of_int(0), to_rep(data__first),
-  to_rep(data__last))).rt1)) = to_rep(data__last)) and ({ elts1 =
-  temp___3382; rt1 = temp___33821 } = temp___3375(of_int(0),
-  to_rep(data__first), to_rep(data__last))))) and
-  ((temp___3382 = temp___3383) and (mk(to_rep(first2(temp___33821)),
-  to_rep(last2(temp___33821))) = temp___33831))) ->
   (((to_rep(first(temp___33831)) <= to_rep(last(temp___33831))) ->
   (((to_rep(data__first) <= to_rep(data__last)) ->
   (((to_rep(last(temp___33831)) - to_rep(first(temp___33831))) + 1) = ((to_rep(data__last) - to_rep(data__first)) + 1))) and
@@ -1559,4 +1705,4 @@ goal WP_parameter_def :
   (((to_rep(last(temp___33831)) - to_rep(first(temp___33831))) + 1) = 0)))) and
   ((not (to_rep(first(temp___33831)) <= to_rep(last(temp___33831)))) ->
   ((to_rep(data__first) <= to_rep(data__last)) ->
-  (0 = ((to_rep(data__last) - to_rep(data__first)) + 1))))))))))))))
+  (0 = ((to_rep(data__last) - to_rep(data__first)) + 1)))))

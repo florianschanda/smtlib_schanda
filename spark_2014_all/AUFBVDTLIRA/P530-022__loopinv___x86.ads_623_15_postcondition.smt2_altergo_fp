@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1516,31 +1516,99 @@ logic addr : t2
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic memory : (t2,unsigned8) farray
+
+logic x86__readmem32__result : t1
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t1
+
+logic o3 : t1
+
+logic o4 : t1
+
+logic o5 : t
+
+logic o6 : t1
+
+logic o7 : t1
+
+logic o8 : t1
+
+logic o9 : t
+
+logic o10 : t1
+
+logic o11 : t1
+
+logic o12 : t1
+
+logic o13 : t1
+
+logic result : t1
+
+logic x86__readmem32__result1 : t1
+
+logic x86__readmem32__result2 : t1
+
+logic x86__readmem32__result3 : t1
+
+logic x86__readmem32__result4 : t1
+
+logic x86__readmem32__result5 : t1
+
+logic result1 : t1
+
+axiom H : true
+
+axiom H1 : (x86__readmem32__result1 = x86__readmem32__result2)
+
+axiom H2 : (x86__readmem32__result3 = x86__readmem32__result1)
+
+axiom H3 : ((o9 = readmem8(add2(addr, of_int2(3)), memory)) and
+  (o9 = to_rep((memory[add2(addr, of_int2(3))]))))
+
+axiom H4 : (o10 = toBig(o9))
+
+axiom H5 : (o11 = lsl_bv1(o10, of_int1(24)))
+
+axiom H6 : ((o5 = readmem8(add2(addr, of_int2(2)), memory)) and
+  (o5 = to_rep((memory[add2(addr, of_int2(2))]))))
+
+axiom H7 : (o6 = toBig(o5))
+
+axiom H8 : (o7 = lsl_bv1(o6, of_int1(16)))
+
+axiom H9 : ((o1 = readmem8(add2(addr, of_int2(1)), memory)) and
+  (o1 = to_rep((memory[add2(addr, of_int2(1))]))))
+
+axiom H10 : (o2 = toBig(o1))
+
+axiom H11 : (o3 = lsl_bv1(o2, of_int1(8)))
+
+axiom H12 : ((o = readmem8(addr, memory)) and (o = to_rep((memory[addr]))))
+
+axiom H13 : (o4 = toBig(o))
+
+axiom H14 : (o8 = bw_or1(o4, o3))
+
+axiom H15 : (o12 = bw_or1(o8, o7))
+
+axiom H16 : (o13 = bw_or1(o12, o11))
+
+axiom H17 : (result = x86__readmem32__result)
+
+axiom H18 : (x86__readmem32__result1 = o13)
+
+axiom H19 : (x86__readmem32__result4 = x86__readmem32__result2)
+
+axiom H20 : (x86__readmem32__result5 = x86__readmem32__result3)
+
+axiom H21 : (result1 = x86__readmem32__result4)
+
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t2,unsigned8) farray. forall x86__readmem32__result:t1.
-  forall o:t. forall o1:t. forall o2:t1. forall o3:t1. forall o4:t1.
-  forall o5:t. forall o6:t1. forall o7:t1. forall o8:t1. forall o9:t.
-  forall o10:t1. forall o11:t1. forall o12:t1. forall o13:t1.
-  forall result:t1. forall x86__readmem32__result1:t1.
-  forall x86__readmem32__result2:t1. forall x86__readmem32__result3:t1.
-  forall x86__readmem32__result4:t1. forall x86__readmem32__result5:t1.
-  (forall result1:t1.
-  ((((((x86__readmem32__result1 = x86__readmem32__result2) and
-  (x86__readmem32__result3 = x86__readmem32__result1)) and
-  ((((((o9 = readmem8(add2(addr, of_int2(3)), memory)) and
-  (o9 = to_rep((memory[add2(addr, of_int2(3))])))) and (o10 = toBig(o9))) and
-  (o11 = lsl_bv1(o10, of_int1(24)))) and ((((((o5 = readmem8(add2(addr,
-  of_int2(2)), memory)) and (o5 = to_rep((memory[add2(addr,
-  of_int2(2))])))) and (o6 = toBig(o5))) and (o7 = lsl_bv1(o6,
-  of_int1(16)))) and ((((((o1 = readmem8(add2(addr, of_int2(1)), memory)) and
-  (o1 = to_rep((memory[add2(addr, of_int2(1))])))) and (o2 = toBig(o1))) and
-  (o3 = lsl_bv1(o2, of_int1(8)))) and ((((o = readmem8(addr, memory)) and
-  (o = to_rep((memory[addr])))) and (o4 = toBig(o))) and (o8 = bw_or1(o4,
-  o3)))) and (o12 = bw_or1(o8, o7)))) and (o13 = bw_or1(o12, o11)))) and
-  ((result = x86__readmem32__result) and
-  (x86__readmem32__result1 = o13)))) and
-  ((x86__readmem32__result4 = x86__readmem32__result2) and
-  (x86__readmem32__result5 = x86__readmem32__result3))) and
-  (result1 = x86__readmem32__result4)) -> (bw_and1(x86__readmem32__result4,
-  of_int1(255)) = toBig(to_rep((memory[addr])))))))
+goal WP_parameter_def : (bw_and1(x86__readmem32__result4,
+  of_int1(255)) = toBig(to_rep((memory[addr]))))

@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -432,25 +432,66 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic from : int
+
+logic result__ : int
+
+logic o : int
+
+logic i : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+logic result__4 : int
+
+logic result2 : bool
+
+axiom H : dynamic_property1(first2, last2, from)
+
+axiom H1 : ((0 <= 2147483647) -> in_range1(result__))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H3 : in_range1(c)
+
+axiom H4 : ((first2 = to_rep1(first(a1))) and (last2 = to_rep1(last(a1))))
+
+axiom H5 : ((to_rep((a[from])) = c) -> ((o = from) and in_range1(from)))
+
+axiom H6 : ((to_rep((a[from])) = c) -> (result = result__))
+
+axiom H7 : ((to_rep((a[from])) = c) -> (result__1 = o))
+
+axiom H8 : ((not (to_rep((a[from])) = c)) -> (result1 = result__))
+
+axiom H9 : ((not (to_rep((a[from])) = c)) -> (result__2 = 0))
+
+axiom H10 : ((not (to_rep((a[from])) = c)) -> (result__1 = result__2))
+
+axiom H11 : (result__1 = result__3)
+
+axiom H12 : (result__4 = result__1)
+
+axiom H13 : ((result__3 = 0) -> ((result2 = true) <->
+  (forall i1:int. (((from <= i1) and (i1 <= from)) ->
+  (not (to_rep((a[i1])) = c))))))
+
+axiom H14 : ((not (result__3 = 0)) -> (result2 = false))
+
+axiom H15 : (not (result2 = true))
+
+axiom H16 : (to_rep1(first(a1)) <= result__3)
+
+axiom H17 : (result__3 <= to_rep1(last(a1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall from:int. forall result__:int. forall o:int. forall result:int.
-  forall result__1:int. forall result1:int. forall result__2:int.
-  forall result__3:int. forall result__4:int. forall result2:bool.
-  (dynamic_property1(first2, last2, from) -> (((0 <= 2147483647) ->
-  in_range1(result__)) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range1(c) ->
-  (((first2 = to_rep1(first(a1))) and (last2 = to_rep1(last(a1)))) ->
-  (((((to_rep((a[from])) = c) and (((o = from) and in_range1(from)) and (({
-  int__content = result } = { int__content = result__ }) and
-  (result__1 = o)))) or ((not (to_rep((a[from])) = c)) and ((({
-  int__content = result1 } = { int__content = result__ }) and
-  (result__2 = 0)) and (result__1 = result__2)))) and
-  ((result__1 = result__3) and (result__4 = result__1))) ->
-  ((((result__3 = 0) and ((result2 = true) <->
-  (forall i:int. (((from <= i) and (i <= from)) ->
-  (not (to_rep((a[i])) = c)))))) or ((not (result__3 = 0)) and
-  (result2 = false))) -> ((not (result2 = true)) ->
-  (((to_rep1(first(a1)) <= result__3) and
-  (result__3 <= to_rep1(last(a1)))) ->
-  (to_rep1(first(a1)) <= result__3)))))))))))
+goal WP_parameter_def : (to_rep1(first(a1)) <= result__3)

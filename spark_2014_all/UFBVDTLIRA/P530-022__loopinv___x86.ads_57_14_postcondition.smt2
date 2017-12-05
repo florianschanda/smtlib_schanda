@@ -68,6 +68,8 @@
 (declare-const x86__safedivision64__result4 (_ BitVec 64))
 (declare-const x86__safedivision64__result5 (_ BitVec 64))
 (declare-const result1 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (not (= divisor ((_ int2bv 64) 0))))
 (assert (= x86__safedivision64__result1 x86__safedivision64__result2))
 (assert (= x86__safedivision64__result3 x86__safedivision64__result1))

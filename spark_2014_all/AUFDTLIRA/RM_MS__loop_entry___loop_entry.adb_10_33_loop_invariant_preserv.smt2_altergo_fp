@@ -280,7 +280,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -343,27 +343,135 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,elementtype) farray
+
+logic i : int
+
+logic temp___160 : (int,elementtype) farray
+
+logic temp___159 : int
+
+logic temp___157 : (int,elementtype) farray
+
+logic o : elementtype
+
+logic o1 : (int,elementtype) farray
+
+logic n : int
+
+logic o2 : bool
+
+logic o3 : elementtype
+
+logic o4 : (int,elementtype) farray
+
+logic n1 : int
+
+logic o5 : bool
+
+logic a1 : (int,elementtype) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,elementtype) farray
+
+logic a2 : (int,elementtype) farray
+
+logic a3 : (int,elementtype) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,elementtype) farray
+
+logic a4 : (int,elementtype) farray
+
+logic a5 : (int,elementtype) farray
+
+logic i4 : int
+
+logic a6 : (int,elementtype) farray
+
+logic i5 : int
+
+logic a7 : (int,elementtype) farray
+
+logic i6 : int
+
+logic a8 : (int,elementtype) farray
+
+logic i7 : int
+
+logic a9 : (int,elementtype) farray
+
+logic i8 : int
+
+logic a10 : (int,elementtype) farray
+
+logic i9 : int
+
+logic a11 : (int,elementtype) farray
+
+logic i10 : int
+
+logic a12 : (int,elementtype) farray
+
+logic i11 : int
+
+axiom H : in_range2(l)
+
+axiom H1 : in_range2(u)
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = l)
+
+axiom H4 : (l <= i1)
+
+axiom H5 : (i1 <= u)
+
+axiom H6 : (to_rep(o) = 0)
+
+axiom H7 : (o1 = (a[i1 <- o]))
+
+axiom H8 : (result1 = a)
+
+axiom H9 : (a2 = o1)
+
+axiom H10 :
+  ((forall n2:int. (((l <= n2) and (n2 <= i2)) -> (to_rep((a3[n2])) = 0))) and
+  (forall n2:int. (((1 <= n2) and (n2 <= 100)) -> (((n2 <  l) or
+  (i2 <  n2)) -> (to_rep((a3[n2])) = to_rep((a[n2])))))))
+
+axiom H11 :
+  (((forall temp___158:int. (((1 <= temp___158) and (temp___158 <= 100)) ->
+    ((i2 <  temp___158) -> ((a3[temp___158]) = (a[temp___158]))))) and
+  ((l <= u) -> dynamic_property(l, u, i2))) and ((l <= i2) and (i2 <= u)))
+
+axiom H12 : (not (i2 = u))
+
+axiom H13 : (result2 = i2)
+
+axiom H14 : (i3 = (i2 + 1))
+
+axiom H15 : (to_rep(o3) = 0)
+
+axiom H16 : (o4 = (a3[i3 <- o3]))
+
+axiom H17 : (result3 = a3)
+
+axiom H18 : (a4 = o4)
+
+logic n2 : int
+
+axiom H19 : (l <= n2)
+
+axiom H20 : (n2 <= i3)
+
  (* File "loop_entry.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,elementtype) farray. forall i:int. forall o:elementtype.
-  forall o1:(int,elementtype) farray. forall o2:elementtype.
-  forall o3:(int,elementtype) farray. forall result:int. forall i1:int.
-  forall result1:(int,elementtype) farray.
-  forall a1:(int,elementtype) farray. forall a2:(int,elementtype) farray.
-  forall i2:int. forall result2:int. forall i3:int.
-  forall result3:(int,elementtype) farray.
-  forall a3:(int,elementtype) farray. (in_range2(l) -> (in_range2(u) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = l)) ->
-  (((l <= i1) and (i1 <= u)) -> ((((to_rep(o) = 0) and
-  (o1 = (a[i1 <- o]))) and (({ map__content = result1 } = { map__content = a
-  }) and (a1 = o1))) ->
-  (((forall n:int. (((l <= n) and (n <= i2)) -> (to_rep((a2[n])) = 0))) and
-  (forall n:int. (((1 <= n) and (n <= 100)) -> (((n <  l) or (i2 <  n)) ->
-  (to_rep((a2[n])) = to_rep((a[n]))))))) ->
-  (((((forall temp___158:int. (((1 <= temp___158) and (temp___158 <= 100)) ->
-      ((i2 <  temp___158) -> ((a2[temp___158]) = (a[temp___158]))))) and
-  ((l <= u) -> dynamic_property(l, u, i2))) and ((l <= i2) and
-  (i2 <= u))) and ((not (i2 = u)) and (((result2 = i2) and
-  (i3 = (i2 + 1))) and (((to_rep(o2) = 0) and (o3 = (a2[i3 <- o2]))) and
-  ((result3 = a2) and (a3 = o3)))))) ->
-  (forall n:int. (((l <= n) and (n <= i3)) -> (to_rep((a3[n])) = 0)))))))))))
+goal WP_parameter_def : (to_rep((a4[n2])) = 0)

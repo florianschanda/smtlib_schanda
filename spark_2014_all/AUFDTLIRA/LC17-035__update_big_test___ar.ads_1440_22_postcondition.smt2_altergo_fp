@@ -440,33 +440,116 @@ logic f : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic r__split_fields : (int,et1) farray
+
+logic r__split_fields1 : enum2t
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,et1) farray
+
+logic o3 : enum2t
+
+logic temp___7918 : (int,et1) farray
+
+logic temp___79181 : enum2t
+
+logic o4 : enum2t
+
+logic o5 : (int,et1) farray
+
+logic o6 : enum2t
+
+logic temp___7920 : (int,et1) farray
+
+logic temp___79201 : enum2t
+
+logic result : (int,et1) farray
+
+logic result1 : enum2t
+
+logic r__split_fields2 : (int,et1) farray
+
+logic r__split_fields3 : enum2t
+
+logic result2 : (int,et1) farray
+
+logic result3 : enum2t
+
+logic r__split_fields4 : (int,et1) farray
+
+logic r__split_fields5 : enum2t
+
+logic r__split_fields6 : (int,et1) farray
+
+logic r__split_fields7 : enum2t
+
+logic r__split_fields8 : (int,et1) farray
+
+logic r__split_fields9 : enum2t
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : in_range3(f)
+
+axiom H3 : (to_rep(o) = e)
+
+axiom H4 : (o1 = (r__split_fields[i <- o]))
+
+axiom H5 : (o1 = o2)
+
+axiom H6 : (r__split_fields1 = o3)
+
+axiom H7 : (temp___7918 = o2)
+
+axiom H8 : (temp___79181 = o3)
+
+axiom H9 : (result = r__split_fields)
+
+axiom H10 : (result1 = r__split_fields1)
+
+axiom H11 : (temp___7918 = r__split_fields2)
+
+axiom H12 : (temp___79181 = r__split_fields3)
+
+axiom H13 : (to_rep1(o4) = f)
+
+axiom H14 : (r__split_fields2 = o5)
+
+axiom H15 : (o4 = o6)
+
+axiom H16 : (temp___7920 = o5)
+
+axiom H17 : (temp___79201 = o6)
+
+axiom H18 : (result2 = r__split_fields2)
+
+axiom H19 : (result3 = r__split_fields3)
+
+axiom H20 : (temp___7920 = r__split_fields4)
+
+axiom H21 : (temp___79201 = r__split_fields5)
+
+axiom H22 : (r__split_fields6 = r__split_fields4)
+
+axiom H23 : (r__split_fields7 = r__split_fields5)
+
+axiom H24 : (r__split_fields8 = r__split_fields4)
+
+axiom H25 : (r__split_fields9 = r__split_fields5)
+
+logic n : int
+
+axiom H26 : (1 <= n)
+
+axiom H27 : (n <= 10)
+
+axiom H28 : (not (n = i))
+
  (* File "ar.ads", line 80, characters 0-0 *)
 goal WP_parameter_def :
-  (forall r__split_fields:(int,et1) farray. forall r__split_fields1:enum2t.
-  forall o:et1. forall o1:(int,et1) farray. forall o2:(int,et1) farray.
-  forall o3:enum2t. forall temp___7918:(int,et1) farray.
-  forall temp___79181:enum2t. forall o4:enum2t. forall o5:(int,et1) farray.
-  forall o6:enum2t. forall temp___7920:(int,et1) farray.
-  forall temp___79201:enum2t. forall result:(int,et1) farray.
-  forall result1:enum2t. forall r__split_fields2:(int,et1) farray.
-  forall r__split_fields3:enum2t. forall result2:(int,et1) farray.
-  forall result3:enum2t. forall r__split_fields4:(int,et1) farray.
-  forall r__split_fields5:enum2t. forall r__split_fields6:(int,et1) farray.
-  forall r__split_fields7:enum2t. forall r__split_fields8:(int,et1) farray.
-  forall r__split_fields9:enum2t. ((in_range1(i) and (in_range2(e) and
-  (in_range3(f) and (((((((to_rep(o) = e) and
-  (o1 = (r__split_fields[i <- o]))) and ((o1 = o2) and
-  (r__split_fields1 = o3))) and ((temp___7918 = o2) and
-  (temp___79181 = o3))) and (((result = r__split_fields) and
-  (result1 = r__split_fields1)) and ((temp___7918 = r__split_fields2) and
-  (temp___79181 = r__split_fields3)))) and ((((to_rep1(o4) = f) and
-  ((r__split_fields2 = o5) and (o4 = o6))) and ((temp___7920 = o5) and
-  (temp___79201 = o6))) and (((result2 = r__split_fields2) and
-  (result3 = r__split_fields3)) and ((temp___7920 = r__split_fields4) and
-  (temp___79201 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields4) and
-  (r__split_fields7 = r__split_fields5)) and
-  ((r__split_fields8 = r__split_fields4) and
-  (r__split_fields9 = r__split_fields5))))))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> ((not (n = i)) ->
-  (to_rep((r__split_fields6[n])) = to_rep((r__split_fields[n]))))))))
+  (to_rep((r__split_fields6[n])) = to_rep((r__split_fields[n])))

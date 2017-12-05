@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -242,7 +242,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom decr_int__post_axiom :
   (forall x:integer [decr_int({ us_split_fields1 = { rec__test_type__t__f = x
-  } })]. ((in_range1(to_rep(x)) and ((-2147483648) <  to_rep(x))) ->
+  } })]. ((in_range1(to_rep(x)) and ((- 2147483648) <  to_rep(x))) ->
   in_range1(to_rep(((decr_int({ us_split_fields1 = { rec__test_type__t__f = x
   } })).us_split_fields1).rec__test_type__t__f))))
 
@@ -266,18 +266,33 @@ axiom saturate__def_axiom :
   (saturate({ us_split_fields1 = { rec__test_type__t__f = x } }) = {
   us_split_fields1 = { rec__test_type__t__f = x } })))))
 
- (* File "test.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall y__split_fields:integer.
-  forall test__y__assume:integer. forall result:integer.
-  forall y__split_fields1:integer. ((to_rep(x__split_fields) = 0) ->
-  (in_range1(to_rep(x__split_fields)) -> (((({ us_split_fields1 = {
-  rec__test_type__t__f = test__y__assume } } = decr({ us_split_fields1 = {
-  rec__test_type__t__f = x__split_fields } })) and
-  (in_range1(to_rep(test__y__assume)) and ({ us_split_fields1 = {
+logic x__split_fields : integer
+
+logic y__split_fields : integer
+
+logic test__y__assume : integer
+
+logic result : integer
+
+logic y__split_fields1 : integer
+
+axiom H : (to_rep(x__split_fields) = 0)
+
+axiom H1 : in_range1(to_rep(x__split_fields))
+
+axiom H2 : (({ us_split_fields1 = { rec__test_type__t__f = test__y__assume }
+  } = decr({ us_split_fields1 = { rec__test_type__t__f = x__split_fields }
+  })) and (in_range1(to_rep(test__y__assume)) and ({ us_split_fields1 = {
   rec__test_type__t__f = test__y__assume } } = saturate(decr_int({
-  us_split_fields1 = { rec__test_type__t__f = x__split_fields } }))))) and
-  ((result = y__split_fields) and (test__y__assume = y__split_fields1))) ->
-  (in_range1(to_rep(y__split_fields1)) -> (not (bool_eq2({ us_split_fields1 =
-  { rec__test_type__t__f = x__split_fields } }, { us_split_fields1 = {
-  rec__test_type__t__f = y__split_fields1 } }) = true)))))))
+  us_split_fields1 = { rec__test_type__t__f = x__split_fields } })))))
+
+axiom H3 : (result = y__split_fields)
+
+axiom H4 : (test__y__assume = y__split_fields1)
+
+axiom H5 : in_range1(to_rep(y__split_fields1))
+
+ (* File "test.adb", line 2, characters 0-0 *)
+goal WP_parameter_def : (not (bool_eq2({ us_split_fields1 = {
+  rec__test_type__t__f = x__split_fields } }, { us_split_fields1 = {
+  rec__test_type__t__f = y__split_fields1 } }) = true))

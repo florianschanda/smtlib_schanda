@@ -84,6 +84,7 @@
 (declare-fun dynamic_preds_array__init_constant_even_pair__tmp__aggregate_def (Int Int) (Array Int even))
 (assert (forall ((temp___262 Int) (temp___263 Int)) (let ((temp___261 (dynamic_preds_array__init_constant_even_pair__tmp__aggregate_def temp___262 temp___263))) (and (= (select temp___261 1) (of_rep temp___262)) (= (select temp___261 2) (of_rep temp___263))))))
 (declare-const x (Array Int even))
+(declare-const o Int)
 (assert (dynamic_invariant i11s true false true))
 (assert (dynamic_invariant1 x false false true))
 (assert (not (= (mod2 2 2) 0)))

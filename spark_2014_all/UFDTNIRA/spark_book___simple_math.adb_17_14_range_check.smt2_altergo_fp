@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -251,23 +251,120 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic q : int
+
+logic r : int
+
+logic temp___145 : int
+
+logic temp___144 : int
+
+logic o : int
+
+logic o1 : int
+
+logic r1 : int
+
+logic result : int
+
+logic q1 : int
+
+logic q2 : int
+
+logic r2 : int
+
+logic result1 : int
+
+logic r3 : int
+
+logic q3 : int
+
+logic q4 : int
+
+logic q5 : int
+
+logic r4 : int
+
+logic q6 : int
+
+logic r5 : int
+
+logic q7 : int
+
+logic r6 : int
+
+logic q8 : int
+
+logic r7 : int
+
+logic q9 : int
+
+logic r8 : int
+
+logic q10 : int
+
+logic r9 : int
+
+axiom H : in_range(n)
+
+axiom H1 : ((0 <= 1000000) -> in_range(q))
+
+axiom H2 : ((0 <= 1000000) -> in_range(r))
+
+axiom H3 : (result = q)
+
+axiom H4 : (q1 = n)
+
+axiom H5 : ((0 <  q1) -> (temp___145 = q1))
+
+axiom H6 : ((0 <  q1) -> (temp___144 = r))
+
+axiom H7 : ((0 <  q1) -> (((0 <= 1000000) -> in_range(r2)) and
+  ((0 <= 1000000) -> in_range(q2))))
+
+axiom H8 : ((0 <  q1) -> ((o = comp_div(n,q2)) and in_range(comp_div(n,q2))))
+
+axiom H9 : ((0 <  q1) -> (r2 = result1))
+
+axiom H10 : ((0 <  q1) -> (r3 = o))
+
+axiom H11 : ((0 <  q1) -> (q2 = q3))
+
+axiom H12 : ((0 <  q1) -> (q4 = q2))
+
+axiom H13 : ((0 <  q1) -> (q2 <= r3))
+
+axiom H14 : ((0 <  q1) -> (r3 = r4))
+
+axiom H15 : ((0 <  q1) -> (q5 = q3))
+
+axiom H16 : ((0 <  q1) -> (r5 = r3))
+
+axiom H17 : ((0 <  q1) -> (q6 = q4))
+
+axiom H18 : ((0 <  q1) -> (r6 = r4))
+
+axiom H19 : ((0 <  q1) -> (q7 = q5))
+
+axiom H20 : ((0 <  q1) -> (r7 = r5))
+
+axiom H21 : ((0 <  q1) -> (q8 = q6))
+
+axiom H22 : ((0 <  q1) -> (r8 = r6))
+
+axiom H23 : ((0 <  q1) -> (q9 = q7))
+
+axiom H24 : ((0 <  q1) -> (r9 = r7))
+
+axiom H25 : ((0 <  q1) -> (q10 = q8))
+
+axiom H26 : ((not (0 <  q1)) -> (r8 = r))
+
+axiom H27 : ((not (0 <  q1)) -> (q1 = q9))
+
+axiom H28 : ((not (0 <  q1)) -> (r9 = r1))
+
+axiom H29 : ((not (0 <  q1)) -> (q10 = q1))
+
  (* File "simple_math.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall q:int. forall r:int. forall temp___145:int. forall temp___144:int.
-  forall o:int. forall r1:int. forall result:int. forall q1:int.
-  forall q2:int. forall r2:int. forall result1:int. forall r3:int.
-  forall q3:int. forall q4:int. forall q5:int. forall r4:int. forall q6:int.
-  forall r5:int. forall q7:int. forall r6:int. forall q8:int. forall r7:int.
-  forall q9:int. forall r8:int. forall q10:int. forall r9:int.
-  (in_range(n) -> (((0 <= 1000000) -> in_range(q)) -> (((0 <= 1000000) ->
-  in_range(r)) -> (((result = q) and (q1 = n)) -> ((((0 <  q1) and
-  (((((temp___145 = q1) and ((temp___144 = r) and ((((0 <= 1000000) ->
-  in_range(r2)) and ((0 <= 1000000) -> in_range(q2))) and
-  ((((o = comp_div(n,q2)) and in_range(comp_div(n,q2))) and
-  ((r2 = result1) and (r3 = o))) and (((q2 = q3) and (q4 = q2)) and
-  (q2 <= r3)))))) and (((r3 = r4) and (q3 = q5)) and ((r5 = r3) and
-  (q6 = q4)))) and (((r4 = r6) and ({ int__content = q7 } = { int__content =
-  q5 })) and ((r7 = r5) and (q8 = q6)))) and ((({ int__content = r8 } = {
-  int__content = r6 }) and (q9 = q7)) and ((r9 = r7) and (q10 = q8))))) or
-  ((not (0 <  q1)) and (((r = r8) and (q1 = q9)) and ((r9 = r1) and
-  (q10 = q1))))) -> in_range1(q9)))))))
+goal WP_parameter_def : in_range1(q9)

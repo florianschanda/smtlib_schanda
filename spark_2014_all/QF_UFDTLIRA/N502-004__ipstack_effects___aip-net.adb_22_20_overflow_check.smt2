@@ -36,6 +36,7 @@
 (declare-const room Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (declare-const result Int)
 (declare-const room1 Int)
 (declare-const result1 Int)

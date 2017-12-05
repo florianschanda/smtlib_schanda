@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -735,179 +735,429 @@ type t9b__ref = { t9b__content : us_t3
 
 function t9b__ref___projection(a: t9b__ref) : us_t3 = (a).t9b__content
 
- (* File "fb20a00.ads", line 43, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray.
-  forall new_sub:(int,character) farray. forall pos:int.
-  forall temp___204:(int,character) farray. forall temp___2041:t.
-  forall temp___205:(int,character) farray. forall temp___2051:t1.
-  forall o:(int,character) farray. forall o1:t1.
-  forall o2:(int,character) farray. forall temp___206:(int,character) farray.
-  forall temp___2061:t. forall temp___207:(int,character) farray.
-  forall temp___2071:t2. forall o3:(int,character) farray. forall o4:t2.
-  forall o5:(int,character) farray. forall o6:int. forall o7:int.
-  forall o8:int. forall o9:int. forall o10:int.
-  forall fb20a00__find__L_2__R7b:int. forall o11:(int,character) farray.
-  forall temp___209:(int,character) farray. forall temp___2091:t3.
-  forall o12:bool. forall o13:int. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:int. forall temp___208:int.
-  forall o19:int. forall o20:int. forall o21:int. forall o22:int.
-  forall o23:int. forall o24:int. forall fb20a00__find__L_2__R7b1:int.
-  forall o25:(int,character) farray.
-  forall temp___2092:(int,character) farray. forall temp___2093:t3.
-  forall o26:bool. forall o27:int. forall o28:int. forall o29:int.
-  forall o30:int. forall o31:int. forall o32:int. forall o33:bool.
-  forall o34:int. forall o35:int. forall o36:int. forall o37:int.
-  forall o38:int. forall result:int. forall pos1:int.
-  forall result1:(int,character) farray.
-  forall new_str1:(int,character) farray.
-  forall result2:(int,character) farray.
-  forall new_sub1:(int,character) farray. forall result3:bool.
-  forall result4:bool. forall pos2:int. forall result5:int. forall pos3:int.
-  forall result6:bool. forall result7:bool. forall pos4:int. forall pos5:int.
-  forall pos6:int. forall pos7:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(sub1)), to_rep1(last(sub1))) ->
-  ((dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic pos : int
+
+logic temp___204 : (int,character) farray
+
+logic temp___2041 : t
+
+logic temp___205 : (int,character) farray
+
+logic temp___2051 : t1
+
+logic o : (int,character) farray
+
+logic o1 : t1
+
+logic o2 : (int,character) farray
+
+logic temp___206 : (int,character) farray
+
+logic temp___2061 : t
+
+logic temp___207 : (int,character) farray
+
+logic temp___2071 : t2
+
+logic o3 : (int,character) farray
+
+logic o4 : t2
+
+logic o5 : (int,character) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic fb20a00__find__L_2__R7b : int
+
+logic o11 : (int,character) farray
+
+logic temp___209 : (int,character) farray
+
+logic temp___2091 : t3
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic temp___208 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic fb20a00__find__L_2__R7b1 : int
+
+logic o25 : (int,character) farray
+
+logic temp___2092 : (int,character) farray
+
+logic temp___2093 : t3
+
+logic o26 : bool
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : bool
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : (int,character) farray
+
+logic new_str1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic new_sub1 : (int,character) farray
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic pos2 : int
+
+logic result5 : int
+
+logic pos3 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic pos4 : int
+
+logic pos5 : int
+
+logic pos6 : int
+
+logic pos7 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(sub1)),
+  to_rep1(last(sub1)))
+
+axiom H2 : (dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
   to_rep1(new_str__first), to_rep1(new_str__last)) and
   ((to_rep1(new_str__first) = to_rep1(first(str1))) and
-  (to_rep1(new_str__last) = to_rep1(last(str1))))) ->
-  ((dynamic_property4(to_rep1(first(sub1)), to_rep1(last(sub1)),
+  (to_rep1(new_str__last) = to_rep1(last(str1)))))
+
+axiom H3 : (dynamic_property4(to_rep1(first(sub1)), to_rep1(last(sub1)),
   to_rep1(new_sub__first), to_rep1(new_sub__last)) and
   ((to_rep1(new_sub__first) = to_rep1(first(sub1))) and
-  (to_rep1(new_sub__last) = to_rep1(last(sub1))))) -> (((result = pos) and
-  (pos1 = to_rep1(first(str1)))) -> (in_range1(pos1) -> ((((((({ elts =
-  temp___204; rt = temp___2041 } = upper_case({ elts = str; rt = str1 })) and
-  dynamic_property(1, 2147483647, to_rep1(first(temp___2041)),
-  to_rep1(last(temp___2041)))) and
-  ((((to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041))) and
-  (((to_rep1(first(str1)) <= to_rep1(last(str1))) and
-  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) or
-  ((not (to_rep1(first(str1)) <= to_rep1(last(str1)))) and
-  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041)))) and
-  (((to_rep1(first(str1)) <= to_rep1(last(str1))) and
-  (0 = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) or
-  (not (to_rep1(first(str1)) <= to_rep1(last(str1))))))) and
-  ((slide(temp___204, to_rep1(first(temp___2041)),
-  to_rep1(first(str1))) = temp___205) and (mk1(to_rep1(first(str1)),
-  to_rep1(last(str1))) = temp___2051)))) and
-  ((((to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051))) and
-  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) and
-  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) or
-  ((not (to_rep1(new_str__first) <= to_rep1(new_str__last))) and
-  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051)))) and
-  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) and
-  (0 = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) or
-  (not (to_rep1(new_str__first) <= to_rep1(new_str__last)))))) and
-  ((o = temp___205) and (o1 = temp___2051)))) and (o2 = o)) and
-  ((result1 = new_str) and (new_str1 = o2))) -> ((((((({ elts = temp___206;
-  rt = temp___2061 } = upper_case({ elts = sub; rt = sub1 })) and
-  dynamic_property(1, 2147483647, to_rep1(first(temp___2061)),
-  to_rep1(last(temp___2061)))) and
-  ((((to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061))) and
-  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) and
-  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) or
-  ((not (to_rep1(first(sub1)) <= to_rep1(last(sub1)))) and
-  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061)))) and
-  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) and
-  (0 = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) or
-  (not (to_rep1(first(sub1)) <= to_rep1(last(sub1))))))) and
-  ((slide(temp___206, to_rep1(first(temp___2061)),
-  to_rep1(first(sub1))) = temp___207) and (mk2(to_rep1(first(sub1)),
-  to_rep1(last(sub1))) = temp___2071)))) and
-  ((((to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071))) and
-  (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071)))) and
-  (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (0 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  (not (to_rep1(new_sub__first) <= to_rep1(new_sub__last)))))) and
-  ((o3 = temp___207) and (o4 = temp___2071)))) and (o5 = o3)) and
-  ((result2 = new_sub) and (new_sub1 = o5))) ->
-  (((((((((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (o6 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (o6 = 0))) and ((o7 = o6) and in_range1(o6))) and (o8 = (pos1 + o7))) and
-  ((o9 = o8) and in_range1(o8))) and (o10 = (o9 - 1))) and
-  ((fb20a00__find__L_2__R7b = o10) and in_range1(o10))) and
-  ((((((((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (o13 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (o13 = 0))) and ((o14 = o13) and in_range1(o13))) and
-  (o15 = (to_rep1(new_str__last) - o14))) and ((o16 = o15) and
-  in_range1(o15))) and (o17 = (o16 + 1))) and ((o18 = o17) and
-  in_range1(o17))) and (((pos1 <= o18) and (result4 = true)) or
-  ((not (pos1 <= o18)) and (result4 = false)))) and (((result4 = true) and
-  ((((((pos1 <= fb20a00__find__L_2__R7b) ->
+  (to_rep1(new_sub__last) = to_rep1(last(sub1)))))
+
+axiom H4 : (result = pos)
+
+axiom H5 : (pos1 = to_rep1(first(str1)))
+
+axiom H6 : in_range1(pos1)
+
+axiom H7 : (({ elts = temp___204; rt = temp___2041 } = upper_case({ elts =
+  str; rt = str1 })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2041)), to_rep1(last(temp___2041))))
+
+axiom H8 : (((to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041))) ->
+  (((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
+  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1))) and
+  ((not (to_rep1(first(str1)) <= to_rep1(last(str1)))) ->
+  (((to_rep1(last(temp___2041)) - to_rep1(first(temp___2041))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2041)) <= to_rep1(last(temp___2041)))) ->
+  ((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
+  (0 = ((to_rep1(last(str1)) - to_rep1(first(str1))) + 1)))))
+
+axiom H9 : (slide(temp___204, to_rep1(first(temp___2041)),
+  to_rep1(first(str1))) = temp___205)
+
+axiom H10 : (mk1(to_rep1(first(str1)), to_rep1(last(str1))) = temp___2051)
+
+axiom H11 :
+  (((to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051))) ->
+  (((to_rep1(new_str__first) <= to_rep1(new_str__last)) ->
+  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1))) and
+  ((not (to_rep1(new_str__first) <= to_rep1(new_str__last))) ->
+  (((to_rep1(last2(temp___2051)) - to_rep1(first2(temp___2051))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___2051)) <= to_rep1(last2(temp___2051)))) ->
+  ((to_rep1(new_str__first) <= to_rep1(new_str__last)) ->
+  (0 = ((to_rep1(new_str__last) - to_rep1(new_str__first)) + 1)))))
+
+axiom H12 : ((o = temp___205) and (o1 = temp___2051))
+
+axiom H13 : (o2 = o)
+
+axiom H14 : (result1 = new_str)
+
+axiom H15 : (new_str1 = o2)
+
+axiom H16 : (({ elts = temp___206; rt = temp___2061 } = upper_case({ elts =
+  sub; rt = sub1 })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2061)), to_rep1(last(temp___2061))))
+
+axiom H17 : (((to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061))) ->
+  (((to_rep1(first(sub1)) <= to_rep1(last(sub1))) ->
+  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1))) and
+  ((not (to_rep1(first(sub1)) <= to_rep1(last(sub1)))) ->
+  (((to_rep1(last(temp___2061)) - to_rep1(first(temp___2061))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___2061)) <= to_rep1(last(temp___2061)))) ->
+  ((to_rep1(first(sub1)) <= to_rep1(last(sub1))) ->
+  (0 = ((to_rep1(last(sub1)) - to_rep1(first(sub1))) + 1)))))
+
+axiom H18 : (slide(temp___206, to_rep1(first(temp___2061)),
+  to_rep1(first(sub1))) = temp___207)
+
+axiom H19 : (mk2(to_rep1(first(sub1)), to_rep1(last(sub1))) = temp___2071)
+
+axiom H20 :
+  (((to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071))) ->
+  (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) and
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
+  (((to_rep1(last4(temp___2071)) - to_rep1(first4(temp___2071))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2071)) <= to_rep1(last4(temp___2071)))) ->
+  ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (0 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)))))
+
+axiom H21 : ((o3 = temp___207) and (o4 = temp___2071))
+
+axiom H22 : (o5 = o3)
+
+axiom H23 : (result2 = new_sub)
+
+axiom H24 : (new_sub1 = o5)
+
+axiom H25 : ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (o6 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)))
+
+axiom H26 : ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
+  (o6 = 0))
+
+axiom H27 : ((o7 = o6) and in_range1(o6))
+
+axiom H28 : (o8 = (pos1 + o7))
+
+axiom H29 : ((o9 = o8) and in_range1(o8))
+
+axiom H30 : (o10 = (o9 - 1))
+
+axiom H31 : ((fb20a00__find__L_2__R7b = o10) and in_range1(o10))
+
+axiom H32 : ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (o13 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)))
+
+axiom H33 : ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
+  (o13 = 0))
+
+axiom H34 : ((o14 = o13) and in_range1(o13))
+
+axiom H35 : (o15 = (to_rep1(new_str__last) - o14))
+
+axiom H36 : ((o16 = o15) and in_range1(o15))
+
+axiom H37 : (o17 = (o16 + 1))
+
+axiom H38 : ((o18 = o17) and in_range1(o17))
+
+axiom H39 : (((pos1 <= o18) -> (result4 = true)) and ((not (pos1 <= o18)) ->
+  (result4 = false)))
+
+axiom H40 : ((result4 = true) -> ((pos1 <= fb20a00__find__L_2__R7b) ->
   (((to_rep1(new_str__first) <= pos1) and
   (pos1 <= to_rep1(new_str__last))) and
   ((to_rep1(new_str__first) <= fb20a00__find__L_2__R7b) and
-  (fb20a00__find__L_2__R7b <= to_rep1(new_str__last))))) and
-  (o11 = new_str1)) and ((o11 = temp___209) and (mk3(pos1,
-  fb20a00__find__L_2__R7b) = temp___2091))) and (o12 = bool_eq5(temp___209,
+  (fb20a00__find__L_2__R7b <= to_rep1(new_str__last))))))
+
+axiom H41 : ((result4 = true) -> (o11 = new_str1))
+
+axiom H42 : ((result4 = true) -> (o11 = temp___209))
+
+axiom H43 : ((result4 = true) -> (mk3(pos1,
+  fb20a00__find__L_2__R7b) = temp___2091))
+
+axiom H44 : ((result4 = true) -> (o12 = bool_eq5(temp___209,
   to_rep1(first6(temp___2091)), to_rep1(last6(temp___2091)), new_sub1,
-  to_rep1(new_sub__first), to_rep1(new_sub__last)))) and
-  (((not (o12 = true)) and (result3 = true)) or ((o12 = true) and
-  (result3 = false))))) or ((not (result4 = true)) and
-  (result3 = false))))) and (((result3 = true) and ((((temp___208 = pos1) and
-  (((((-2147483648) <= 2147483647) -> in_range1(pos2)) and
-  (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  ((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (pos2 <= ((to_rep1(new_str__last) - ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
+  to_rep1(new_sub__first), to_rep1(new_sub__last))))
+
+axiom H45 : ((result4 = true) -> (((not (o12 = true)) ->
+  (result3 = true)) and ((o12 = true) -> (result3 = false))))
+
+axiom H46 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H47 : ((result3 = true) -> (temp___208 = pos1))
+
+axiom H48 : ((result3 = true) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(pos2)) and
+  (((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  ((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (pos2 <= ((to_rep1(new_str__last) - ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) + 1))) and
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
   (pos2 <= ((to_rep1(new_str__last) - 0) + 1)))) and (not (bool_eq5(new_str1,
   to_rep1(first6(mk3(pos2,
   ((pos2 + ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) - 1)))),
   to_rep1(last6(mk3(pos2,
   ((pos2 + ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) - 1)))),
-  new_sub1, to_rep1(new_sub__first), to_rep1(new_sub__last)) = true)))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  ((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (pos2 <= ((to_rep1(new_str__last) - ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
+  new_sub1, to_rep1(new_sub__first), to_rep1(new_sub__last)) = true)))) and
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
+  ((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (pos2 <= ((to_rep1(new_str__last) - ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)) + 1))) and
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
   (pos2 <= ((to_rep1(new_str__last) - 0) + 1)))) and (not (bool_eq5(new_str1,
   to_rep1(first6(mk3(pos2, ((pos2 + 0) - 1)))), to_rep1(last6(mk3(pos2,
   ((pos2 + 0) - 1)))), new_sub1, to_rep1(new_sub__first),
-  to_rep1(new_sub__last)) = true)))))) and ((((o19 = (pos2 + 1)) and
-  in_range1((pos2 + 1))) and ((pos2 = result5) and (pos3 = o19))) and
-  (((((((((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (o20 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (o20 = 0))) and ((o21 = o20) and in_range1(o20))) and
-  (o22 = (pos3 + o21))) and ((o23 = o22) and in_range1(o22))) and
-  (o24 = (o23 - 1))) and ((fb20a00__find__L_2__R7b1 = o24) and
-  in_range1(o24))) and
-  ((((((((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (o27 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (o27 = 0))) and ((o28 = o27) and in_range1(o27))) and
-  (o29 = (to_rep1(new_str__last) - o28))) and ((o30 = o29) and
-  in_range1(o29))) and (o31 = (o30 + 1))) and ((o32 = o31) and
-  in_range1(o31))) and (((pos3 <= o32) and (result7 = true)) or
-  ((not (pos3 <= o32)) and (result7 = false)))) and (((result7 = true) and
-  ((((((pos3 <= fb20a00__find__L_2__R7b1) ->
+  to_rep1(new_sub__last)) = true)))))))
+
+axiom H49 : ((result3 = true) -> ((o19 = (pos2 + 1)) and
+  in_range1((pos2 + 1))))
+
+axiom H50 : ((result3 = true) -> (pos2 = result5))
+
+axiom H51 : ((result3 = true) -> (pos3 = o19))
+
+axiom H52 : ((result3 = true) ->
+  ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (o20 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))))
+
+axiom H53 : ((result3 = true) ->
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) -> (o20 = 0)))
+
+axiom H54 : ((result3 = true) -> ((o21 = o20) and in_range1(o20)))
+
+axiom H55 : ((result3 = true) -> (o22 = (pos3 + o21)))
+
+axiom H56 : ((result3 = true) -> ((o23 = o22) and in_range1(o22)))
+
+axiom H57 : ((result3 = true) -> (o24 = (o23 - 1)))
+
+axiom H58 : ((result3 = true) -> ((fb20a00__find__L_2__R7b1 = o24) and
+  in_range1(o24)))
+
+axiom H59 : ((result3 = true) ->
+  ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (o27 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))))
+
+axiom H60 : ((result3 = true) ->
+  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) -> (o27 = 0)))
+
+axiom H61 : ((result3 = true) -> ((o28 = o27) and in_range1(o27)))
+
+axiom H62 : ((result3 = true) -> (o29 = (to_rep1(new_str__last) - o28)))
+
+axiom H63 : ((result3 = true) -> ((o30 = o29) and in_range1(o29)))
+
+axiom H64 : ((result3 = true) -> (o31 = (o30 + 1)))
+
+axiom H65 : ((result3 = true) -> ((o32 = o31) and in_range1(o31)))
+
+axiom H66 : ((result3 = true) -> (((pos3 <= o32) -> (result7 = true)) and
+  ((not (pos3 <= o32)) -> (result7 = false))))
+
+axiom H67 : ((result3 = true) -> ((result7 = true) ->
+  ((pos3 <= fb20a00__find__L_2__R7b1) ->
   (((to_rep1(new_str__first) <= pos3) and
   (pos3 <= to_rep1(new_str__last))) and
   ((to_rep1(new_str__first) <= fb20a00__find__L_2__R7b1) and
-  (fb20a00__find__L_2__R7b1 <= to_rep1(new_str__last))))) and
-  (o25 = new_str1)) and ((o25 = temp___2092) and (mk3(pos3,
-  fb20a00__find__L_2__R7b1) = temp___2093))) and (o26 = bool_eq5(temp___2092,
-  to_rep1(first6(temp___2093)), to_rep1(last6(temp___2093)), new_sub1,
-  to_rep1(new_sub__first), to_rep1(new_sub__last)))) and
-  (((not (o26 = true)) and (o33 = true)) or ((o26 = true) and
-  (o33 = false))))) or ((not (result7 = true)) and (o33 = false))))) and
-  (((not (o33 = true)) and (result6 = true)) or ((o33 = true) and
-  (result6 = false)))) and (result6 = true))))) and ((pos3 = pos4) and
-  (pos5 = pos3))) and ((pos6 = pos4) and (pos7 = pos5)))) or
-  ((not (result3 = true)) and ((pos1 = pos6) and (pos7 = pos1))))) ->
-  ((((((((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) and
-  (o34 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1))) or
-  ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) and
-  (o34 = 0))) and ((o35 = o34) and in_range1(o34))) and
-  (o36 = (to_rep1(new_str__last) - o35))) and ((o37 = o36) and
-  in_range1(o36))) and (o38 = (o37 + 1))) -> in_range1(o38))))))))))))
+  (fb20a00__find__L_2__R7b1 <= to_rep1(new_str__last)))))))
+
+axiom H68 : ((result3 = true) -> ((result7 = true) -> (o25 = new_str1)))
+
+axiom H69 : ((result3 = true) -> ((result7 = true) -> (o25 = temp___2092)))
+
+axiom H70 : ((result3 = true) -> ((result7 = true) -> (mk3(pos3,
+  fb20a00__find__L_2__R7b1) = temp___2093)))
+
+axiom H71 : ((result3 = true) -> ((result7 = true) ->
+  (o26 = bool_eq5(temp___2092, to_rep1(first6(temp___2093)),
+  to_rep1(last6(temp___2093)), new_sub1, to_rep1(new_sub__first),
+  to_rep1(new_sub__last)))))
+
+axiom H72 : ((result3 = true) -> ((result7 = true) -> (((not (o26 = true)) ->
+  (o33 = true)) and ((o26 = true) -> (o33 = false)))))
+
+axiom H73 : ((result3 = true) -> ((not (result7 = true)) -> (o33 = false)))
+
+axiom H74 : ((result3 = true) -> (((not (o33 = true)) ->
+  (result6 = true)) and ((o33 = true) -> (result6 = false))))
+
+axiom H75 : ((result3 = true) -> (result6 = true))
+
+axiom H76 : ((result3 = true) -> (pos3 = pos4))
+
+axiom H77 : ((result3 = true) -> (pos5 = pos3))
+
+axiom H78 : ((result3 = true) -> (pos6 = pos4))
+
+axiom H79 : ((result3 = true) -> (pos7 = pos5))
+
+axiom H80 : ((not (result3 = true)) -> (pos1 = pos6))
+
+axiom H81 : ((not (result3 = true)) -> (pos7 = pos1))
+
+axiom H82 : ((to_rep1(new_sub__first) <= to_rep1(new_sub__last)) ->
+  (o34 = ((to_rep1(new_sub__last) - to_rep1(new_sub__first)) + 1)))
+
+axiom H83 : ((not (to_rep1(new_sub__first) <= to_rep1(new_sub__last))) ->
+  (o34 = 0))
+
+axiom H84 : ((o35 = o34) and in_range1(o34))
+
+axiom H85 : (o36 = (to_rep1(new_str__last) - o35))
+
+axiom H86 : ((o37 = o36) and in_range1(o36))
+
+axiom H87 : (o38 = (o37 + 1))
+
+ (* File "fb20a00.ads", line 43, characters 0-0 *)
+goal WP_parameter_def : in_range1(o38)

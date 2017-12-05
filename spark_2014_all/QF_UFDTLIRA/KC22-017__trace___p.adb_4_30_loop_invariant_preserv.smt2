@@ -37,6 +37,7 @@
 (assert (= b1 0))
 (assert (<= 0 b1))
 (assert (<= b1 1))
+(assert true)
 (assert (and (<= 0 b2) (<= b2 1)))
 (assert (not (= b2 1)))
 (assert (= result1 b2))

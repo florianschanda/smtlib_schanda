@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,13 +113,81 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic b : int
+
+logic c : int
+
+logic simple_test__test__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic b1 : int
+
+logic result2 : int
+
+logic b2 : int
+
+logic result3 : int
+
+logic c2 : int
+
+logic result4 : int
+
+logic simple_test__test__result1 : int
+
+logic simple_test__test__result2 : int
+
+logic simple_test__test__result3 : int
+
+logic b3 : int
+
+logic c3 : int
+
+logic simple_test__test__result4 : int
+
+logic b4 : int
+
+logic c4 : int
+
+logic simple_test__test__result5 : int
+
+axiom H : in_range(a)
+
+axiom H1 : ((a = 0) or (a = 1))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(b))
+
+axiom H3 : (result = c)
+
+axiom H4 : (c1 = 3)
+
+axiom H5 : in_range(c1)
+
+axiom H6 : ((a = 0) -> (result1 = b))
+
+axiom H7 : ((a = 0) -> (b1 = 500))
+
+axiom H8 : ((not (a = 0)) -> (result2 = b))
+
+axiom H9 : ((not (a = 0)) -> (b2 = 1000))
+
+axiom H10 : ((not (a = 0)) -> (b1 = b2))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:int. forall c:int. forall result:int. forall c1:int.
-  forall result1:int. forall b1:int. forall result2:int. forall b2:int.
-  (in_range(a) -> (((a = 0) or (a = 1)) -> ((((-2147483648) <= 2147483647) ->
-  in_range(b)) -> ((({ int__content = result } = { int__content = c }) and
-  (c1 = 3)) -> (in_range(c1) -> ((((a = 0) and (({ int__content = result1
-  } = { int__content = b }) and (b1 = 500))) or ((not (a = 0)) and ((({
-  int__content = result2 } = { int__content = b }) and (b2 = 1000)) and
-  (b1 = b2)))) -> in_range((c1 + b1)))))))))
+goal WP_parameter_def : in_range((c1 + b1))

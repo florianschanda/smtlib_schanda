@@ -292,6 +292,7 @@ axiom blah__def_axiom :
 
 axiom x__def_axiom : (x = p__x__aggregate_def(97, 98, 99))
 
+axiom H : (p__x__aggregate_def(97, 98, 99) = x)
+
  (* File "p.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : ((p__x__aggregate_def(97, 98, 99) = x) ->
-  (blah(slide(x, 5, 1)) = true))
+goal WP_parameter_def : (blah(slide(x, 5, 1)) = true)

@@ -60,6 +60,7 @@
 (define-fun default_initial_assumption ((temp___expr_172 us_rep) (temp___skip_top_level_173 Bool)) Bool (= (to_rep (rec__prot__pT__count (us_split_fields1 temp___expr_172))) 0))
 (define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const self__ integer)
+(declare-const o Int)
 (assert (not (in_range (+ (to_rep self__) 1))))
 (check-sat)
 (exit)

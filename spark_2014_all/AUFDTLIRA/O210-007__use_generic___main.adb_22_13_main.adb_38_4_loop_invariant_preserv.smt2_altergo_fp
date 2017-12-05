@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -705,29 +705,87 @@ axiom def_axiom :
   (forall temp___204:int.
   ((temp___201(temp___203)[temp___204]) = of_rep(temp___203))))
 
+logic b__split_fields : (int,integer) farray
+
+logic i : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : (int,integer) farray
+
+logic temp___209 : natural
+
+logic temp___2091 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic b__split_fields1 : (int,integer) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic b__split_fields2 : (int,integer) farray
+
+logic i2 : int
+
+logic result2 : (int,integer) farray
+
+logic b__split_fields3 : (int,integer) farray
+
+logic result3 : int
+
+logic i3 : int
+
+axiom H : (7 = to_rep1(b__split_discrs))
+
+axiom H1 : (result = b__split_fields)
+
+axiom H2 : (temp___201(0) = b__split_fields1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 0)
+
+axiom H5 : (0 <= i1)
+
+axiom H6 : (i1 <= 7)
+
+axiom H7 : ((0 <= i2) and (i2 <= 7))
+
+axiom H8 :
+  (((forall temp___212:int. (((0 <= temp___212) and (temp___212 <= 7)) ->
+    ((i2 <= temp___212) ->
+    ((b__split_fields2[temp___212]) = (b__split_fields1[temp___212]))))) and
+  ((0 <= 7) -> dynamic_property2(0, 7, i2))) and ((0 <= i2) and (i2 <= 7)))
+
+axiom H9 : ((i2 = 7) -> ((0 <= i2) and (i2 <= 7)))
+
+axiom H10 : ((i2 = 7) -> (to_rep(o) = 0))
+
+axiom H11 : ((i2 = 7) -> (o1 = (b__split_fields2[i2 <- o])))
+
+axiom H12 : ((i2 = 7) -> (o1 = o2))
+
+axiom H13 : ((i2 = 7) -> (b__split_discrs = temp___209))
+
+axiom H14 : ((i2 = 7) -> (temp___2091 = o2))
+
+axiom H15 : ((i2 = 7) -> (result2 = b__split_fields2))
+
+axiom H16 : ((i2 = 7) -> (temp___2091 = b__split_fields3))
+
+axiom H17 : ((i2 = 7) -> (b__split_discrs = temp___209))
+
+axiom H18 : ((not (i2 = 7)) -> (b__split_fields3 = b__split_fields2))
+
+axiom H19 : (not (i2 = 7))
+
+axiom H20 : (result3 = i2)
+
+axiom H21 : (i3 = (i2 + 1))
+
  (* File "main.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b__split_fields:(int,integer) farray. forall i:int.
-  forall o:integer. forall o1:(int,integer) farray.
-  forall o2:(int,integer) farray. forall temp___209:natural.
-  forall temp___2091:(int,integer) farray.
-  forall result:(int,integer) farray.
-  forall b__split_fields1:(int,integer) farray. forall result1:int.
-  forall i1:int. forall b__split_fields2:(int,integer) farray. forall i2:int.
-  forall result2:(int,integer) farray.
-  forall b__split_fields3:(int,integer) farray. forall result3:int.
-  forall i3:int. ((7 = to_rep1(b__split_discrs)) ->
-  (((result = b__split_fields) and (temp___201(0) = b__split_fields1)) ->
-  (((result1 = i) and (i1 = 0)) -> (((0 <= i1) and (i1 <= 7)) ->
-  (((0 <= i2) and (i2 <= 7)) ->
-  (((((forall temp___212:int. (((0 <= temp___212) and (temp___212 <= 7)) ->
-      ((i2 <= temp___212) ->
-      ((b__split_fields2[temp___212]) = (b__split_fields1[temp___212]))))) and
-  ((0 <= 7) -> dynamic_property2(0, 7, i2))) and ((0 <= i2) and
-  (i2 <= 7))) and ((((i2 = 7) and (((0 <= i2) and (i2 <= 7)) and
-  (((((to_rep(o) = 0) and (o1 = (b__split_fields2[i2 <- o]))) and
-  (o1 = o2)) and ((b__split_discrs = temp___209) and (temp___2091 = o2))) and
-  (((result2 = b__split_fields2) and (temp___2091 = b__split_fields3)) and
-  (b__split_discrs = temp___209))))) or ((not (i2 = 7)) and
-  (b__split_fields3 = b__split_fields2))) and ((not (i2 = 7)) and
-  ((result3 = i2) and (i3 = (i2 + 1)))))) -> (0 <= i3))))))))
+goal WP_parameter_def : (0 <= i3)

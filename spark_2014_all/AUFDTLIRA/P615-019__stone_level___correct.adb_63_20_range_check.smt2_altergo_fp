@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -405,13 +405,60 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic j : int
+
+logic correct__find_before_delim__result : int
+
+logic o : int
+
+logic correct__find_before_delim__result1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic correct__find_before_delim__result2 : int
+
+logic correct__find_before_delim__result3 : int
+
+logic j3 : int
+
+logic correct__find_before_delim__result4 : int
+
+logic j4 : int
+
+logic correct__find_before_delim__result5 : int
+
+logic j5 : int
+
+logic correct__find_before_delim__result6 : int
+
+logic j6 : int
+
+logic correct__find_before_delim__result7 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : in_range3(c)
+
+axiom H2 : in_range3(delim)
+
+axiom H3 : (result = j)
+
+axiom H4 : (j1 = to_rep1(first(s1)))
+
+axiom H5 : (to_rep1(first(s1)) <= j1)
+
+axiom H6 : (j1 <= to_rep1(last(s1)))
+
+axiom H7 : ((to_rep1(first(s1)) <= j2) and (j2 <= to_rep1(last(s1))))
+
+axiom H8 : (not (to_rep((s[j2])) = delim))
+
+axiom H9 : (to_rep((s[j2])) = c)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall result:int. forall j1:int. forall j2:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(s1)), to_rep1(last(s1))) ->
-  (in_range3(c) -> (in_range3(delim) -> ((({ int__content = result } = {
-  int__content = j }) and (j1 = to_rep1(first(s1)))) ->
-  (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
-  (((to_rep1(first(s1)) <= j2) and (j2 <= to_rep1(last(s1)))) ->
-  ((not (to_rep((s[j2])) = delim)) -> ((to_rep((s[j2])) = c) ->
-  in_range2(j2))))))))))
+goal WP_parameter_def : in_range2(j2)

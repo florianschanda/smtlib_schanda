@@ -59,6 +59,7 @@
 (declare-const a Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_172 Int) (temp___is_init_169 Bool) (temp___skip_constant_170 Bool) (temp___do_toplevel_171 Bool)) Bool (=> (or (= temp___is_init_169 true) (<= 0 1000)) (in_range1 temp___expr_172)))
+(declare-const o Int)
 (assert (in_range a))
 (assert (< (div1 1000 a) 1000))
 (assert (not (in_range1 (div1 1000 a))))

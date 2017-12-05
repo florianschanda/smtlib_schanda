@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -217,7 +217,7 @@ function machnumber__ref___projection(a: machnumber__ref) : machnumber =
 
 type slipangle
 
-predicate in_range1(x: int) = (((-25) <= x) and (x <= 25))
+predicate in_range1(x: int) = (((- 25) <= x) and (x <= 25))
 
 logic bool_eq2 : int, int -> bool
 
@@ -243,7 +243,7 @@ function slipangle__ref___projection(a: slipangle__ref) : slipangle =
 
 type controlangle
 
-predicate in_range2(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range2(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq3 : int, int -> bool
 
@@ -269,7 +269,7 @@ function controlangle__ref___projection(a: controlangle__ref) : controlangle =
 
 type scaledata
 
-predicate in_range3(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range3(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq4 : int, int -> bool
 
@@ -315,7 +315,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type degreespersec
 
-predicate in_range4(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range4(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq5 : int, int -> bool
 
@@ -341,7 +341,7 @@ function degreespersec__ref___projection(a: degreespersec__ref) : degreespersec 
 
 type degreespersec1
 
-predicate in_range5(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range5(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq6 : int, int -> bool
 
@@ -379,17 +379,44 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic present_sliprate : int
+
+logic rudder_movement : int
+
+logic target_angle : int
+
+logic o : int
+
+logic ap__heading__yaw__rate__calc_yawrate__present_yawrate : int
+
+logic result : int
+
+logic present_sliprate1 : int
+
+axiom H : in_range(mach)
+
+axiom H1 : in_range1(slip)
+
+axiom H2 : (((- 180) <= 180) -> in_range5(present_sliprate))
+
+axiom H3 : (((- 45) <= 45) -> in_range2(rudder_movement))
+
+axiom H4 : in_range4(ap__heading__yaw__rate__calc_yawrate__present_yawrate)
+
+axiom H5 : (result = present_sliprate)
+
+axiom H6 :
+  (present_sliprate1 = ap__heading__yaw__rate__calc_yawrate__present_yawrate)
+
+axiom H7 : (present_sliprate1 = c3b)
+
+axiom H8 : in_range5(c3b)
+
+axiom H9 : (mach = c4b)
+
+axiom H10 : in_range(c4b)
+
+axiom H11 : (((- 45) <= 45) -> in_range2(target_angle))
+
  (* File "ap-heading-yaw-rate.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall present_sliprate:int. forall rudder_movement:int.
-  forall target_angle:int.
-  forall ap__heading__yaw__rate__calc_yawrate__present_yawrate:int.
-  forall result:int. forall present_sliprate1:int. (in_range(mach) ->
-  (in_range1(slip) -> ((((-180) <= 180) -> in_range5(present_sliprate)) ->
-  ((((-45) <= 45) -> in_range2(rudder_movement)) ->
-  ((in_range4(ap__heading__yaw__rate__calc_yawrate__present_yawrate) and
-  ((result = present_sliprate) and
-  (present_sliprate1 = ap__heading__yaw__rate__calc_yawrate__present_yawrate))) ->
-  (((present_sliprate1 = c3b) and in_range5(c3b)) -> (((mach = c4b) and
-  in_range(c4b)) -> ((((-45) <= 45) -> in_range2(target_angle)) ->
-  (not (2 = 0)))))))))))
+goal WP_parameter_def : (not (2 = 0))

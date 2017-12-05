@@ -506,9 +506,16 @@ axiom length__post_axiom :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = container1 }
   }))))
 
+logic container__split_fields : capacity_range1
+
+logic us : int
+
+axiom H :
+  (to_rep(container__split_discrs) = to_rep1(container__split_fields))
+
+axiom H1 : (to_rep(container__split_discrs) = r222s)
+
+axiom H2 : in_range(r222s)
+
  (* File "aida-containers-formal_vectors.adb", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:capacity_range1.
-  ((to_rep(container__split_discrs) = to_rep1(container__split_fields)) ->
-  (((to_rep(container__split_discrs) = r222s) and in_range(r222s)) ->
-  in_range1(r222s))))
+goal WP_parameter_def : in_range1(r222s)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -487,7 +487,7 @@ function s2_index__ref___projection(a: s2_index__ref) : integer =
 
 type tseq_lengthB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -817,13 +817,23 @@ axiom Max_assoc :
 axiom last__def_axiom2 : (last4 = max(length({ elts = s1; rt = s11 }),
   length({ elts = s2; rt = s21 })))
 
- (* File "string_utilities.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lengths:map. (dynamic_property(1, 2147483647, to_rep1(first(s11)),
-  to_rep1(last(s11))) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(s21)), to_rep1(last(s21))) -> ((((dynamic_property6(first2,
-  last2, to_rep1(lengths__first), to_rep1(lengths__last), first3, last3,
-  to_rep1(lengths__first_2), to_rep1(lengths__last_2)) and
+logic lengths : map
+
+logic o : int
+
+logic us : int
+
+logic us1 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s11)),
+  to_rep1(last(s11)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : (((dynamic_property6(first2, last2, to_rep1(lengths__first),
+  to_rep1(lengths__last), first3, last3, to_rep1(lengths__first_2),
+  to_rep1(lengths__last_2)) and
   ((to_rep1(lengths__first) = to_rep1(first(s11))) and
   (to_rep1(lengths__last) = to_rep1(last(s11))))) and
   ((to_rep1(lengths__first_2) = to_rep1(first(s21))) and
@@ -833,6 +843,17 @@ goal WP_parameter_def :
   (temp___292 <= to_rep1(lengths__last))) and
   ((to_rep1(lengths__first_2) <= temp___293) and
   (temp___293 <= to_rep1(lengths__last_2)))) -> dynamic_property3(0, last4,
-  to_rep2(get(lengths, temp___292, temp___293)))))) -> (in_range1(x1) ->
-  (in_range4(x2) -> (((0 <= x1) and (x1 <= 10)) -> ((not ((0 <= x2) and
-  (x2 <= 10))) -> dynamic_property3(0, last4, 0)))))))))
+  to_rep2(get(lengths, temp___292, temp___293))))))
+
+axiom H3 : in_range1(x1)
+
+axiom H4 : in_range4(x2)
+
+axiom H5 : (0 <= x1)
+
+axiom H6 : (x1 <= 10)
+
+axiom H7 : (not ((0 <= x2) and (x2 <= 10)))
+
+ (* File "string_utilities.adb", line 10, characters 0-0 *)
+goal WP_parameter_def : dynamic_property3(0, last4, 0)

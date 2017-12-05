@@ -281,7 +281,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -2924,12 +2924,76 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,element) farray.
-  forall s__split_fields1:less_than_max. forall s__split_fields2:us_private.
-  forall e:int. (((0 <= 2147483647) -> in_range1(e)) -> ((not (is_empty({
-  us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields;
+logic s__split_fields : (int,element) farray
+
+logic s__split_fields1 : less_than_max
+
+logic s__split_fields2 : us_private
+
+logic e : int
+
+logic o : int
+
+logic o1 : element
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : less_than_max
+
+logic o5 : (int,element) farray
+
+logic o6 : less_than_max
+
+logic o7 : us_private
+
+logic temp___487 : (int,element) farray
+
+logic temp___4871 : less_than_max
+
+logic temp___4872 : us_private
+
+logic temp___4873 : int
+
+logic result : int
+
+logic e1 : int
+
+logic result1 : (int,element) farray
+
+logic result2 : less_than_max
+
+logic result3 : us_private
+
+logic s__split_fields3 : (int,element) farray
+
+logic s__split_fields4 : less_than_max
+
+logic s__split_fields5 : us_private
+
+logic s__split_fields6 : (int,element) farray
+
+logic s__split_fields7 : less_than_max
+
+logic s__split_fields8 : us_private
+
+logic e2 : int
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+logic e3 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(e))
+
+axiom H1 : (not (is_empty({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag }) = true)) ->
-  (1 <= to_rep(s__split_fields1)))))
+  s__split_fields2 }; attr__tag = s__attr__tag }) = true))
+
+ (* File "stackp.ads", line 36, characters 0-0 *)
+goal WP_parameter_def : (1 <= to_rep(s__split_fields1))

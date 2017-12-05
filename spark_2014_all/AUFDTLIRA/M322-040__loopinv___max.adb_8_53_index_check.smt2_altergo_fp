@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -277,10 +277,50 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic max : int
+
+logic m : int
+
+logic n : int
+
+logic n1 : int
+
+logic o : bool
+
+logic n2 : int
+
+logic n3 : int
+
+logic o1 : bool
+
+logic m1 : int
+
+logic n4 : int
+
+logic n5 : int
+
+logic o2 : bool
+
+logic max1 : int
+
+logic result : int
+
+logic max2 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range1(max)
+
+axiom H2 : ((- 2147483648) <= m)
+
+axiom H3 : (m <= 2147483647)
+
+axiom H4 : ((o = true) <->
+  (exists n6:int. (((1 <= n6) and (n6 <= i)) and (to_rep((a[n6])) = m))))
+
+axiom H5 : (1 <= n)
+
+axiom H6 : (n <= i)
+
  (* File "max.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall max:int. forall m:int. forall n:int. forall o:bool.
-  (in_range2(i) -> (in_range1(max) -> ((((-2147483648) <= m) and
-  (m <= 2147483647)) -> (((o = true) <->
-  (exists n1:int. (((1 <= n1) and (n1 <= i)) and (to_rep((a[n1])) = m)))) ->
-  (((1 <= n) and (n <= i)) -> (1 <= n)))))))
+goal WP_parameter_def : (1 <= n)

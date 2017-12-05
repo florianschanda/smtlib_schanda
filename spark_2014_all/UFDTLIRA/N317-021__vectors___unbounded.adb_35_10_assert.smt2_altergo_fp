@@ -481,7 +481,7 @@ logic element__function_guard : int, us_rep, int -> prop
 
 type element_type
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -784,7 +784,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type integer
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -894,7 +894,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range9(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range9(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -924,50 +924,189 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range9(get(container, position)))))
 
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:us_main_type. forall w__split_fields:us_main_type.
-  forall us:int. forall unbounded__test__B_1__w__assume:capacity_range.
-  forall unbounded__test__B_1__w__assume1:us_main_type.
-  forall unbounded__vect__clear__container__fields:us_main_type.
-  forall result:us_main_type. forall v__split_fields1:us_main_type.
-  forall unbounded__vect__append__2__container__fields:us_main_type.
-  forall result1:us_main_type. forall v__split_fields2:us_main_type.
-  forall unbounded__vect__append__2__container__fields1:us_main_type.
-  forall result2:us_main_type. forall v__split_fields3:us_main_type.
-  forall unbounded__vect__append__2__container__fields2:us_main_type.
-  forall result3:us_main_type. forall v__split_fields4:us_main_type.
-  forall unbounded__vect__reserve_capacity__container__fields:us_main_type.
-  forall result4:us_main_type. forall v__split_fields5:us_main_type.
-  forall result5:us_main_type. forall w__split_fields1:us_main_type.
-  (((us = 2) and in_range(2)) -> (((to_rep(v__split_discrs) = 2) and
-  (is_empty({ us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields } }) = true)) -> ((2 = to_rep(v__split_discrs)) ->
-  (((length({ us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__clear__container__fields } }) = 0) and
-  ((result = v__split_fields) and ({ rec__unbounded__vect__vector =
-  v__split_fields1 } = { rec__unbounded__vect__vector =
-  unbounded__vect__clear__container__fields }))) -> ((is_empty({
-  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields1 } }) = true) -> ((oeq({ us_split_discrs1 = {
+logic v__split_fields : us_main_type
+
+logic w__split_fields : us_main_type
+
+logic us : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic unbounded__test__B_1__w__assume : capacity_range
+
+logic unbounded__test__B_1__w__assume1 : us_main_type
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : capacity_range
+
+logic o13 : us_main_type
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic unbounded__vect__clear__container__fields : us_main_type
+
+logic result : us_main_type
+
+logic v__split_fields1 : us_main_type
+
+logic unbounded__vect__append__2__container__fields : us_main_type
+
+logic result1 : us_main_type
+
+logic v__split_fields2 : us_main_type
+
+logic unbounded__vect__append__2__container__fields1 : us_main_type
+
+logic result2 : us_main_type
+
+logic v__split_fields3 : us_main_type
+
+logic unbounded__vect__append__2__container__fields2 : us_main_type
+
+logic result3 : us_main_type
+
+logic v__split_fields4 : us_main_type
+
+logic unbounded__vect__reserve_capacity__container__fields : us_main_type
+
+logic result4 : us_main_type
+
+logic v__split_fields5 : us_main_type
+
+logic result5 : us_main_type
+
+logic w__split_fields1 : us_main_type
+
+logic w__split_fields2 : us_main_type
+
+logic w__split_fields3 : us_main_type
+
+logic unbounded__vect__replace_element__container__fields : us_main_type
+
+logic result6 : us_main_type
+
+logic v__split_fields6 : us_main_type
+
+logic unbounded__vect__swap__container__fields : us_main_type
+
+logic result7 : us_main_type
+
+logic v__split_fields7 : us_main_type
+
+logic unbounded__vect__delete_last__container__fields : us_main_type
+
+logic result8 : us_main_type
+
+logic v__split_fields8 : us_main_type
+
+logic unbounded__vect__reverse_elements__container__fields : us_main_type
+
+logic result9 : us_main_type
+
+logic v__split_fields9 : us_main_type
+
+logic unbounded__sort__sort__container__fields : us_main_type
+
+logic result10 : us_main_type
+
+logic v__split_fields10 : us_main_type
+
+logic unbounded__vect__replace_element__container__fields1 : us_main_type
+
+logic result11 : us_main_type
+
+logic v__split_fields11 : us_main_type
+
+axiom H : ((us = 2) and in_range(2))
+
+axiom H1 : ((to_rep(v__split_discrs) = 2) and (is_empty({ us_split_discrs1 =
+  { rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields }
+  }) = true))
+
+axiom H2 : (2 = to_rep(v__split_discrs))
+
+axiom H3 : (length({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
+  unbounded__vect__clear__container__fields } }) = 0)
+
+axiom H4 : (result = v__split_fields)
+
+axiom H5 : (v__split_fields1 = unbounded__vect__clear__container__fields)
+
+axiom H6 : (is_empty({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields1 }
+  }) = true)
+
+axiom H7 : (oeq({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields1 } },
-  empty_vector(void)) = true) -> (((((length({ us_split_discrs1 = {
+  empty_vector(void)) = true)
+
+axiom H8 : (((length({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
   unbounded__vect__append__2__container__fields } }) = (length({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields1 } }) + 1)) and ((bool_lt(length1(model__({
+  v__split_fields1 } }) + 1)) and (((bool_lt(length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
   v__split_fields1 } })), length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields } }))) = true) and
+  unbounded__vect__append__2__container__fields } }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
@@ -977,29 +1116,40 @@ goal WP_parameter_def :
   n) = get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields } }), n)))))) and
+  unbounded__vect__append__2__container__fields } }), n))))) and
+  (not (bool_lt(length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields1 } })),
+  length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
+  unbounded__vect__append__2__container__fields } }))) = false)))) and
   (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
   unbounded__vect__append__2__container__fields } }), ((0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields1 } }))) + 1)) = 1)) and ((result1 = v__split_fields1) and
-  ({ rec__unbounded__vect__vector = v__split_fields2 } = {
-  rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields }))) -> (((((length({
-  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
+  v__split_fields1 } }))) + 1)) = 1))
+
+axiom H9 : (result1 = v__split_fields1)
+
+axiom H10 :
+  (v__split_fields2 = unbounded__vect__append__2__container__fields)
+
+axiom H11 : (((length({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
   unbounded__vect__append__2__container__fields1 } }) = (length({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields2 } }) + 1)) and ((bool_lt(length1(model__({
+  v__split_fields2 } }) + 1)) and (((bool_lt(length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
   v__split_fields2 } })), length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields1 } }))) = true) and
+  unbounded__vect__append__2__container__fields1 } }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
@@ -1009,7 +1159,14 @@ goal WP_parameter_def :
   n) = get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields1 } }), n)))))) and
+  unbounded__vect__append__2__container__fields1 } }), n))))) and
+  (not (bool_lt(length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields2 } })),
+  length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
+  unbounded__vect__append__2__container__fields1 } }))) = false)))) and
   (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
@@ -1017,22 +1174,26 @@ goal WP_parameter_def :
   ((0 + length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields2 }
-  }))) + 1)) = 2)) and ((result2 = v__split_fields2) and ({
-  rec__unbounded__vect__vector = v__split_fields3 } = {
-  rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields1 }))) -> (((((length({
-  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
+  }))) + 1)) = 2))
+
+axiom H12 : (result2 = v__split_fields2)
+
+axiom H13 :
+  (v__split_fields3 = unbounded__vect__append__2__container__fields1)
+
+axiom H14 : (((length({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
   unbounded__vect__append__2__container__fields2 } }) = (length({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields3 } }) + 1)) and ((bool_lt(length1(model__({
+  v__split_fields3 } }) + 1)) and (((bool_lt(length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
   v__split_fields3 } })), length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields2 } }))) = true) and
+  unbounded__vect__append__2__container__fields2 } }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
@@ -1042,7 +1203,14 @@ goal WP_parameter_def :
   n) = get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields2 } }), n)))))) and
+  unbounded__vect__append__2__container__fields2 } }), n))))) and
+  (not (bool_lt(length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields3 } })),
+  length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
+  unbounded__vect__append__2__container__fields2 } }))) = false)))) and
   (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
@@ -1050,32 +1218,46 @@ goal WP_parameter_def :
   ((0 + length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields3 }
-  }))) + 1)) = 3)) and ((result3 = v__split_fields3) and ({
-  rec__unbounded__vect__vector = v__split_fields4 } = {
-  rec__unbounded__vect__vector =
-  unbounded__vect__append__2__container__fields2 }))) -> ((not (is_empty({
-  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields4 } }) = true)) -> ((length({ us_split_discrs1 = {
+  }))) + 1)) = 3))
+
+axiom H15 : (result3 = v__split_fields3)
+
+axiom H16 :
+  (v__split_fields4 = unbounded__vect__append__2__container__fields2)
+
+axiom H17 : (not (is_empty({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 }
-  }) = 3) -> ((get(model__({ us_split_discrs1 = {
+  }) = true))
+
+axiom H18 : (length({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 }
+  }) = 3)
+
+axiom H19 : (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 } }),
-  1) = 1) -> ((get(model__({ us_split_discrs1 = {
+  1) = 1)
+
+axiom H20 : (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 } }),
-  2) = 2) -> ((get(model__({ us_split_discrs1 = {
+  2) = 2)
+
+axiom H21 : (get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 } }),
-  3) = 3) -> ((((bool_eq(length1(model__({ us_split_discrs1 = {
+  3) = 3)
+
+axiom H22 : (((bool_eq(length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector =
   unbounded__vect__reserve_capacity__container__fields } })),
   length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 }
-  }))) = true) and
+  }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
@@ -1087,31 +1269,46 @@ goal WP_parameter_def :
   n) = get(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 } }),
-  n))))) and ((result4 = v__split_fields4) and ({
-  rec__unbounded__vect__vector = v__split_fields5 } = {
-  rec__unbounded__vect__vector =
-  unbounded__vect__reserve_capacity__container__fields }))) ->
-  ((not (is_empty({ us_split_discrs1 = {
+  n))))) and (not (bool_eq(length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector =
+  unbounded__vect__reserve_capacity__container__fields } })),
+  length1(model__({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = v__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields4 }
+  }))) = false)))
+
+axiom H23 : (result4 = v__split_fields4)
+
+axiom H24 :
+  (v__split_fields5 = unbounded__vect__reserve_capacity__container__fields)
+
+axiom H25 : (not (is_empty({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields5 }
-  }) = true)) -> ((length({ us_split_discrs1 = {
+  }) = true))
+
+axiom H26 : (length({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields5 }
-  }) = 3) -> ((((of_int(0) = true) and (10 <= to_rep(v__split_discrs))) or
-  ((not (of_int(0) = true)) and (10 <= 2147483647))) -> (((({
-  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
+  }) = 3)
+
+axiom H27 : (((of_int(0) = true) -> (10 <= to_rep(v__split_discrs))) and
+  ((not (of_int(0) = true)) -> (10 <= 2147483647)))
+
+axiom H28 : (({ us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   unbounded__test__B_1__w__assume }; us_split_fields1 = {
   rec__unbounded__vect__vector = unbounded__test__B_1__w__assume1 }
   } = copy({ us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields5 } }, 0)) and (((bool_eq(length1(model__({
+  v__split_fields5 } }, 0)) and ((((bool_eq(length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   unbounded__test__B_1__w__assume }; us_split_fields1 = {
   rec__unbounded__vect__vector = unbounded__test__B_1__w__assume1 } })),
   length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields5 }
-  }))) = true) and
+  }))) = true) ->
   (forall n:int. (((1 <= n) and (n <= (0 + length1(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   unbounded__test__B_1__w__assume }; us_split_fields1 = {
@@ -1122,16 +1319,31 @@ goal WP_parameter_def :
   unbounded__test__B_1__w__assume1 } }), n) = get(model__({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
   v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  v__split_fields5 } }), n))))) and
-  (to_rep(unbounded__test__B_1__w__assume) = length({ us_split_discrs1 = {
+  v__split_fields5 } }), n))))) and (not (bool_eq(length1(model__({
+  us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
+  unbounded__test__B_1__w__assume }; us_split_fields1 = {
+  rec__unbounded__vect__vector = unbounded__test__B_1__w__assume1 } })),
+  length1(model__({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = v__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = v__split_fields5 }
-  })))) and (((result5 = w__split_fields) and
-  (unbounded__test__B_1__w__assume1 = w__split_fields1)) and
-  (w__split_discrs = unbounded__test__B_1__w__assume))) -> ((not (is_empty({
+  }))) = false))) and (to_rep(unbounded__test__B_1__w__assume) = length({
   us_split_discrs1 = { rec__unbounded__vect__vector__capacity =
-  w__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
-  w__split_fields1 } }) = true)) -> (length({ us_split_discrs1 = {
+  v__split_discrs }; us_split_fields1 = { rec__unbounded__vect__vector =
+  v__split_fields5 } }))))
+
+axiom H29 : (result5 = w__split_fields)
+
+axiom H30 : (w__split_fields1 = unbounded__test__B_1__w__assume1)
+
+axiom H31 : (w__split_discrs = unbounded__test__B_1__w__assume)
+
+axiom H32 : (not (is_empty({ us_split_discrs1 = {
   rec__unbounded__vect__vector__capacity = w__split_discrs };
   us_split_fields1 = { rec__unbounded__vect__vector = w__split_fields1 }
-  }) = 3))))))))))))))))))))))
+  }) = true))
+
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def : (length({ us_split_discrs1 = {
+  rec__unbounded__vect__vector__capacity = w__split_discrs };
+  us_split_fields1 = { rec__unbounded__vect__vector = w__split_fields1 }
+  }) = 3)

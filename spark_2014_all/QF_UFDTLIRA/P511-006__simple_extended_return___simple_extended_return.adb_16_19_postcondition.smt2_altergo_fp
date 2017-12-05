@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -140,6 +140,109 @@ logic attr__ATTRIBUTE_ADDRESS : int
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic a : bool
+
+logic b : bool
+
+logic simple_extended_return__simple_extended_r2__result : bool
+
+logic a1 : bool
+
+logic b1 : bool
+
+logic result : bool
+
+logic a2 : bool
+
+logic result1 : bool
+
+logic simple_extended_return__simple_extended_r2__result1 : bool
+
+logic result2 : bool
+
+logic b2 : bool
+
+logic result3 : bool
+
+logic simple_extended_return__simple_extended_r2__result2 : bool
+
+logic a3 : bool
+
+logic b3 : bool
+
+logic simple_extended_return__simple_extended_r2__result3 : bool
+
+logic a4 : bool
+
+logic b4 : bool
+
+logic simple_extended_return__simple_extended_r2__result4 : bool
+
+logic a5 : bool
+
+logic b5 : bool
+
+logic simple_extended_return__simple_extended_r2__result5 : bool
+
+logic a6 : bool
+
+logic b6 : bool
+
+logic simple_extended_return__simple_extended_r2__result6 : bool
+
+logic a7 : bool
+
+logic b7 : bool
+
+logic simple_extended_return__simple_extended_r2__result7 : bool
+
+logic a8 : bool
+
+logic b8 : bool
+
+logic simple_extended_return__simple_extended_r2__result8 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 :
+  ((((simple_extended_return__simple_extended_r2__result5 = simple_extended_return__simple_extended_r2__result3) and
+  ((b5 = b3) and (a5 = a3))) and
+  ((simple_extended_return__simple_extended_r2__result6 = simple_extended_return__simple_extended_r2__result4) and
+  ((b6 = b4) and (a6 = a4)))) and (((0 <  x) ->
+  ((((simple_extended_return__simple_extended_r2__result1 = simple_extended_return__simple_extended_r2__result3) and
+  ((b3 = b) and (a2 = a3))) and
+  ((simple_extended_return__simple_extended_r2__result4 = simple_extended_return__simple_extended_r2__result1) and
+  ((b4 = b1) and (a4 = a2)))) and (((result = a) and (a2 = of_int(1))) and
+  ((result1 = simple_extended_return__simple_extended_r2__result) and
+  (simple_extended_return__simple_extended_r2__result1 = a2))))) and
+  ((not (0 <  x)) ->
+  ((((simple_extended_return__simple_extended_r2__result2 = simple_extended_return__simple_extended_r2__result3) and
+  ((b2 = b3) and (a3 = a))) and
+  ((simple_extended_return__simple_extended_r2__result4 = simple_extended_return__simple_extended_r2__result2) and
+  ((b4 = b2) and (a4 = a1)))) and (((result2 = b) and (b2 = of_int(1))) and
+  ((result3 = simple_extended_return__simple_extended_r2__result) and
+  (simple_extended_return__simple_extended_r2__result2 = b2)))))))
+
+axiom H2 :
+  (simple_extended_return__simple_extended_r2__result7 = simple_extended_return__simple_extended_r2__result5)
+
+axiom H3 : (b7 = b5)
+
+axiom H4 : (a7 = a5)
+
+axiom H5 :
+  (simple_extended_return__simple_extended_r2__result8 = simple_extended_return__simple_extended_r2__result6)
+
+axiom H6 : (b8 = b6)
+
+axiom H7 : (a8 = a6)
+
+axiom H8 : (result4 = simple_extended_return__simple_extended_r2__result7)
+
+axiom H9 : (simple_extended_return__simple_extended_r2__result7 = true)
 
  (* File "simple_extended_return.adb", line 15, characters 0-0 *)
 goal WP_parameter_def : true

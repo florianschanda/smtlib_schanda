@@ -134,7 +134,7 @@ function t__ref___projection(a: t__ref) : t = (a).t__content
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -166,5 +166,7 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range1(x)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (not (x = 0)))
+goal WP_parameter_def : (not (x = 0))

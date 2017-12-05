@@ -81,6 +81,7 @@
 (declare-const o integer)
 (declare-const o1 integer)
 (declare-const pedantic__v__assume integer)
+(declare-const pedantic__c__assume Int)
 (declare-const result integer)
 (declare-const v__split_fields1 integer)
 (assert (= (to_rep o) 0))

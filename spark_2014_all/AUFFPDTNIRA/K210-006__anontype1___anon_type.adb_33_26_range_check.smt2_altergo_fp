@@ -1037,7 +1037,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1142,7 +1142,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type taS
 
-predicate in_range3(x: int) = (((-10000) <= x) and (x <= 10000))
+predicate in_range3(x: int) = (((- 10000) <= x) and (x <= 10000))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1169,7 +1169,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tbS
 
-predicate in_range4(x: int) = (((-10000) <= x) and (x <= 10000))
+predicate in_range4(x: int) = (((- 10000) <= x) and (x <= 10000))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1605,20 +1605,89 @@ axiom def_axiom1 :
 
 axiom limit__def_axiom : (limit = 10000)
 
+logic var_out : int
+
+logic a : int
+
+logic b : int
+
+logic ten_characters : (int,character) farray
+
+logic board : (int,float1) farray
+
+logic anon_type__increment__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic var_out1 : int
+
+logic result1 : (int,character) farray
+
+logic ten_characters1 : (int,character) farray
+
+logic result2 : (int,float1) farray
+
+logic board1 : (int,float1) farray
+
+logic result3 : int
+
+logic var_out2 : int
+
+logic result4 : int
+
+logic anon_type__increment__result1 : int
+
+logic anon_type__increment__result2 : int
+
+logic anon_type__increment__result3 : int
+
+logic var_out3 : int
+
+logic ten_characters2 : (int,character) farray
+
+logic board2 : (int,float1) farray
+
+logic anon_type__increment__result4 : int
+
+logic var_out4 : int
+
+logic ten_characters3 : (int,character) farray
+
+logic board3 : (int,float1) farray
+
+logic anon_type__increment__result5 : int
+
+axiom H : in_range1(var_in)
+
+axiom H1 : in_range1(limit)
+
+axiom H2 : (result = var_out)
+
+axiom H3 : (var_out1 = 0)
+
+axiom H4 : in_range2(var_out1)
+
+axiom H5 : (((- 10000) <= 10000) -> in_range3(a))
+
+axiom H6 : (((- 10000) <= 10000) -> in_range4(b))
+
+axiom H7 : (result1 = ten_characters)
+
+axiom H8 :
+  (ten_characters1 = anon_type__increment__ten_characters__aggregate_def(32))
+
+axiom H9 : (result2 = board)
+
+axiom H10 : (board1 = temp___184(fliteral))
+
+axiom H11 : ((o = (var_in + (var_out1 + 1))) and
+  in_range1((var_in + (var_out1 + 1))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall var_out:int. forall a:int. forall b:int.
-  forall ten_characters:(int,character) farray.
-  forall board:(int,float1) farray. forall o:int. forall result:int.
-  forall var_out1:int. forall result1:(int,character) farray.
-  forall ten_characters1:(int,character) farray.
-  forall result2:(int,float1) farray. forall board1:(int,float1) farray.
-  (in_range1(var_in) -> (in_range1(limit) -> ((({ int__content = result } = {
-  int__content = var_out }) and (var_out1 = 0)) -> (in_range2(var_out1) ->
-  ((((-10000) <= 10000) -> in_range3(a)) -> ((((-10000) <= 10000) ->
-  in_range4(b)) -> ((({ map__content = result1 } = { map__content =
-  ten_characters }) and
-  (ten_characters1 = anon_type__increment__ten_characters__aggregate_def(32))) ->
-  ((({ map__content1 = result2 } = { map__content1 = board }) and
-  (board1 = temp___184(fliteral))) -> (((o = (var_in + (var_out1 + 1))) and
-  in_range1((var_in + (var_out1 + 1)))) -> in_range2(o)))))))))))
+goal WP_parameter_def : in_range2(o)

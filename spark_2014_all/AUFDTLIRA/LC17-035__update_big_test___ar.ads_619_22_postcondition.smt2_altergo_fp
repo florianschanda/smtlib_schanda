@@ -582,13 +582,26 @@ axiom def_axiom :
   ((not (temp___2405 = temp___2403)) -> ((temp___2400(temp___2402,
   temp___2403, temp___2404)[temp___2405]) = (temp___2402[temp___2405]))))))))
 
+logic a : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a2 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a3 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+axiom H : in_range(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- b]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
  (* File "ar.ads", line 612, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a2:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a3:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  ((in_range(i) and (((result = a) and (a1 = (a[i <- b]))) and ((a1 = a2) and
-  (a3 = a1)))) -> (bool_eq6(a2, 90, 99, temp___2400(a, i, b), 90,
-  99) = true)))
+goal WP_parameter_def : (bool_eq6(a2, 90, 99, temp___2400(a, i, b), 90,
+  99) = true)

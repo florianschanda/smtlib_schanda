@@ -43,6 +43,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
 (assert (and (= o (g3 Tuple0)) (and (in_range o) (= o 1))))
 (assert (and (= o1 (g1 Tuple0)) (and (in_range o1) (= o1 1))))
 (assert (= o2 (+ o1 o)))

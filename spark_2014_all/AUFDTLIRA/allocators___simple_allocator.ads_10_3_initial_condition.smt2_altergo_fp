@@ -268,12 +268,22 @@ axiom def_axiom :
 
 axiom no_resource__def_axiom : (no_resource = 0)
 
+logic data : (int,status) farray
+
+logic result : (int,status) farray
+
+logic data1 : (int,status) farray
+
+logic result1 : bool
+
+axiom H : in_range(no_resource)
+
+axiom H1 : (result = data)
+
+axiom H2 : (data1 = simple_allocator__data__aggregate_def(0))
+
+axiom H3 : ((result1 = all_available(data1)) and ((result1 = true) <->
+  (forall r:int. (((1 <= r) and (r <= 10000)) -> (to_rep((data1[r])) = 0)))))
+
  (* File "simple_allocator.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,status) farray. forall result:(int,status) farray.
-  forall data1:(int,status) farray.
-  (forall result1:bool. ((in_range(no_resource) and (((result = data) and
-  (data1 = simple_allocator__data__aggregate_def(0))) and
-  ((result1 = all_available(data1)) and ((result1 = true) <->
-  (forall r:int. (((1 <= r) and (r <= 10000)) -> (to_rep((data1[r])) = 0))))))) ->
-  (all_available(data1) = true))))
+goal WP_parameter_def : (all_available(data1) = true)

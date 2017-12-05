@@ -55,7 +55,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -298,18 +298,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -327,7 +327,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -358,19 +358,67 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dynamic_preds.adb", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:integer.
-  forall o:integer. forall o1:integer. forall o2:integer.
-  forall temp___209:integer. forall temp___2091:integer.
-  forall dynamic_preds__init_even__x:int. (((in_range1(to_rep(i9s)) and
-  (mod(to_rep(i9s), 2) = 0)) and (in_range1(to_rep(i9s1)) and
-  (mod(to_rep(i9s1), 2) = 0))) -> (((in_range1(to_rep(x__split_fields)) and
+logic x__split_fields : integer
+
+logic x__split_fields1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic temp___209 : integer
+
+logic temp___2091 : integer
+
+logic temp___210 : integer
+
+logic temp___2101 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic temp___212 : integer
+
+logic temp___2121 : integer
+
+logic dynamic_preds__init_even__x : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : integer
+
+logic dynamic_preds__init_ok_even__x : int
+
+axiom H : ((in_range1(to_rep(i9s)) and (mod(to_rep(i9s), 2) = 0)) and
+  (in_range1(to_rep(i9s1)) and (mod(to_rep(i9s1), 2) = 0)))
+
+axiom H1 : ((in_range1(to_rep(x__split_fields)) and
   (mod(to_rep(x__split_fields), 2) = 0)) and
   (in_range1(to_rep(x__split_fields1)) and (mod(to_rep(x__split_fields1),
-  2) = 0))) -> (in_range(dynamic_preds__init_even__x) ->
-  ((((to_rep(o) = dynamic_preds__init_even__x) and ((o = o1) and
-  (x__split_fields1 = o2))) and ((temp___209 = o1) and
-  (temp___2091 = o2))) -> ((in_range1(to_rep(temp___209)) and
+  2) = 0)))
+
+axiom H2 : in_range(dynamic_preds__init_even__x)
+
+axiom H3 : (to_rep(o) = dynamic_preds__init_even__x)
+
+axiom H4 : (o = o1)
+
+axiom H5 : (x__split_fields1 = o2)
+
+axiom H6 : (temp___209 = o1)
+
+axiom H7 : (temp___2091 = o2)
+
+ (* File "dynamic_preds.adb", line 26, characters 0-0 *)
+goal WP_parameter_def : ((in_range1(to_rep(temp___209)) and
   (mod(to_rep(temp___209), 2) = 0)) and (in_range1(to_rep(temp___2091)) and
-  (mod(to_rep(temp___2091), 2) = 0))))))))
+  (mod(to_rep(temp___2091), 2) = 0)))

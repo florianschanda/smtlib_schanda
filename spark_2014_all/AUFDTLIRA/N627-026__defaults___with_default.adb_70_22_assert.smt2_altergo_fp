@@ -174,7 +174,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -258,7 +258,7 @@ axiom coerce_axiom2 :
 
 type tscalar_with_defaultB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -968,48 +968,122 @@ axiom first__def_axiom : (first = c)
 
 axiom first__def_axiom1 : (first1 = c)
 
- (* File "with_default.adb", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall empty1:(int,tscalar_with_defaultB) farray.
-  forall empty2:(int,integer) farray. forall no_def:(int,integer) farray.
-  forall all_0:(int,scalar_with_default) farray.
-  forall all_1:(int,natural) farray.
-  forall all_2:(int,tscalar_with_defaultB) farray. forall us:int.
-  forall o:int. forall o1:(int,integer) farray.
-  forall with_default__ok_array__no_def__assume:(int,integer) farray.
-  forall with_default__ok_array__no_def__assume1:t.
-  forall result:(int,integer) farray. forall no_def1:(int,integer) farray.
-  (in_range1(c) -> ((c <= 2) ->
-  ((forall temp___272:int. (((1 <= temp___272) and (temp___272 <= 0)) ->
-   (to_rep3((empty1[temp___272])) = 0))) ->
-  ((forall temp___269:int. (((1 <= temp___269) and (temp___269 <= 0)) ->
-   ((first <= 2147483647) -> dynamic_property(first, 2147483647,
-   to_rep3((empty1[temp___269])))))) ->
-  ((forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 0)) ->
-   (to_rep1((empty2[temp___281])) = 0))) ->
-  ((forall temp___278:int. (((1 <= temp___278) and (temp___278 <= 0)) ->
-   ((first1 <= 2147483647) -> dynamic_property1(first1, 2147483647,
-   to_rep1((empty2[temp___278])))))) ->
-  (((((((us = c) and dynamic_property1(first1, 2147483647, c)) and
-  (o = c)) and (o1 = with_default__ok_array__no_def__aggregate_def(o))) and
-  ((o1 = with_default__ok_array__no_def__assume) and (mk(1,
-  100) = with_default__ok_array__no_def__assume1))) and
-  (((result = no_def) and
-  (no_def1 = with_default__ok_array__no_def__assume)) and
-  ((to_rep1(no_def__first) = to_rep1(first2(with_default__ok_array__no_def__assume1))) and
-  (to_rep1(no_def__last) = to_rep1(last(with_default__ok_array__no_def__assume1)))))) ->
-  ((dynamic_property2(1, 2147483647, to_rep1(no_def__first),
+logic empty1 : (int,tscalar_with_defaultB) farray
+
+logic empty2 : (int,integer) farray
+
+logic no_def : (int,integer) farray
+
+logic all_0 : (int,scalar_with_default) farray
+
+logic all_1 : (int,natural) farray
+
+logic all_2 : (int,tscalar_with_defaultB) farray
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic with_default__ok_array__no_def__assume : (int,integer) farray
+
+logic with_default__ok_array__no_def__assume1 : t
+
+logic o4 : int
+
+logic us3 : int
+
+logic o5 : int
+
+logic us4 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic no_def1 : (int,integer) farray
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(c)
+
+axiom H1 : (c <= 2)
+
+axiom H2 :
+  (forall temp___272:int. (((1 <= temp___272) and (temp___272 <= 0)) ->
+  (to_rep3((empty1[temp___272])) = 0)))
+
+axiom H3 :
+  (forall temp___269:int. (((1 <= temp___269) and (temp___269 <= 0)) ->
+  ((first <= 2147483647) -> dynamic_property(first, 2147483647,
+  to_rep3((empty1[temp___269]))))))
+
+axiom H4 :
+  (forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 0)) ->
+  (to_rep1((empty2[temp___281])) = 0)))
+
+axiom H5 :
+  (forall temp___278:int. (((1 <= temp___278) and (temp___278 <= 0)) ->
+  ((first1 <= 2147483647) -> dynamic_property1(first1, 2147483647,
+  to_rep1((empty2[temp___278]))))))
+
+axiom H6 : ((us2 = c) and dynamic_property1(first1, 2147483647, c))
+
+axiom H7 : (o2 = c)
+
+axiom H8 : (o3 = with_default__ok_array__no_def__aggregate_def(o2))
+
+axiom H9 : (o3 = with_default__ok_array__no_def__assume)
+
+axiom H10 : (mk(1, 100) = with_default__ok_array__no_def__assume1)
+
+axiom H11 : (result2 = no_def)
+
+axiom H12 : (no_def1 = with_default__ok_array__no_def__assume)
+
+axiom H13 :
+  (to_rep1(no_def__first) = to_rep1(first2(with_default__ok_array__no_def__assume1)))
+
+axiom H14 :
+  (to_rep1(no_def__last) = to_rep1(last(with_default__ok_array__no_def__assume1)))
+
+axiom H15 : (dynamic_property2(1, 2147483647, to_rep1(no_def__first),
   to_rep1(no_def__last)) and
   (forall temp___612:int. (((to_rep1(no_def__first) <= temp___612) and
   (temp___612 <= to_rep1(no_def__last))) -> dynamic_property1(first1,
-  2147483647, to_rep1((no_def1[temp___612])))))) ->
-  ((forall temp___298:int. (((1 <= temp___298) and (temp___298 <= 100)) ->
-   (to_rep2((all_0[temp___298])) = 0))) ->
-  ((forall temp___307:int. (((1 <= temp___307) and (temp___307 <= 100)) ->
-   (to_rep((all_1[temp___307])) = 1))) ->
-  ((forall temp___315:int. (((1 <= temp___315) and (temp___315 <= 100)) ->
-   (to_rep3((all_2[temp___315])) = 2))) ->
-  ((forall temp___312:int. (((1 <= temp___312) and (temp___312 <= 100)) ->
-   ((first <= 2147483647) -> dynamic_property(first, 2147483647,
-   to_rep3((all_2[temp___312])))))) ->
-  ((to_rep2((all_0[1])) = 0) -> (to_rep((all_1[1])) = 1)))))))))))))))
+  2147483647, to_rep1((no_def1[temp___612]))))))
+
+axiom H16 :
+  (forall temp___298:int. (((1 <= temp___298) and (temp___298 <= 100)) ->
+  (to_rep2((all_0[temp___298])) = 0)))
+
+axiom H17 :
+  (forall temp___307:int. (((1 <= temp___307) and (temp___307 <= 100)) ->
+  (to_rep((all_1[temp___307])) = 1)))
+
+axiom H18 :
+  (forall temp___315:int. (((1 <= temp___315) and (temp___315 <= 100)) ->
+  (to_rep3((all_2[temp___315])) = 2)))
+
+axiom H19 :
+  (forall temp___312:int. (((1 <= temp___312) and (temp___312 <= 100)) ->
+  ((first <= 2147483647) -> dynamic_property(first, 2147483647,
+  to_rep3((all_2[temp___312]))))))
+
+axiom H20 : (to_rep2((all_0[1])) = 0)
+
+ (* File "with_default.adb", line 36, characters 0-0 *)
+goal WP_parameter_def : (to_rep((all_1[1])) = 1)

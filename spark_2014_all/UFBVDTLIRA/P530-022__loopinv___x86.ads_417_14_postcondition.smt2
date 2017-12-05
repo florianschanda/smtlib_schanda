@@ -106,6 +106,8 @@
 (declare-const rsi1 (_ BitVec 64))
 (declare-const rsi2 (_ BitVec 64))
 (declare-const rsi3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result rsi))
 (assert (= rsi1 ((_ zero_extend 32) val__)))
 (assert (= rsi1 rsi2))

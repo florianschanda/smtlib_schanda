@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -736,10 +736,36 @@ logic rd__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic au : (int,natural) farray
+
+logic as__ : (int,natural) farray
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : bool
+
+logic result : bool
+
+axiom H : in_range1(c)
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep1(au__first),
+  to_rep1(au__last))
+
+axiom H2 : (dynamic_property2(1, c, to_rep1(ad__first),
+  to_rep1(ad__last)) and ((to_rep1(ad__first) = 1) and
+  (to_rep1(ad__last) = c)))
+
+axiom H3 : (100 = to_rep(rs__split_discrs))
+
+axiom H4 : (c = to_rep(rd__split_discrs))
+
+axiom H5 : ((to_rep1(au__first) = 1) and (to_rep1(au__last) = c))
+
+axiom H6 : (0 <  c)
+
  (* File "test_globals.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (in_range1(c) -> (dynamic_property(0, 2147483647,
-  to_rep1(au__first), to_rep1(au__last)) -> ((dynamic_property2(1, c,
-  to_rep1(ad__first), to_rep1(ad__last)) and ((to_rep1(ad__first) = 1) and
-  (to_rep1(ad__last) = c))) -> ((100 = to_rep(rs__split_discrs)) ->
-  ((c = to_rep(rd__split_discrs)) -> (((to_rep1(au__first) = 1) and
-  (to_rep1(au__last) = c)) -> ((0 <  c) -> (to_rep1(au__first) <= 1))))))))
+goal WP_parameter_def : (to_rep1(au__first) <= 1)

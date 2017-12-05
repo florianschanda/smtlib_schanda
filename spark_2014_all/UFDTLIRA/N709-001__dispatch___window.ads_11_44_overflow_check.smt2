@@ -193,6 +193,7 @@
 (declare-const o3 Int)
 (declare-const o4 Int)
 (declare-const o5 Int)
+(declare-const o6 Int)
 (declare-const result Int)
 (declare-const total_area1 Int)
 (declare-const total_area2 Int)

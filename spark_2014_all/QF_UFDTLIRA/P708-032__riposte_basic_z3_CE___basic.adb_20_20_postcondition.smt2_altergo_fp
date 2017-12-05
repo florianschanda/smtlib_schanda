@@ -143,20 +143,50 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "basic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall basic__min_ub__result:int. forall r1:int.
-  forall result:int. forall basic__min_ub__result1:int.
-  forall basic__min_ub__result2:int. forall basic__min_ub__result3:int.
-  forall r2:int. forall basic__min_ub__result4:int. forall r3:int.
-  forall basic__min_ub__result5:int.
-  (forall result1:int. ((in_range1(a) and (in_range1(b) and (((((0 <= 255) ->
-  in_range1(r)) and ((((a <= b) -> (r1 = a)) and ((b <= a) -> (r1 = b))) and
-  (((0 <= 255) -> in_range1(r1)) and
+logic r : int
+
+logic basic__min_ub__result : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic basic__min_ub__result1 : int
+
+logic basic__min_ub__result2 : int
+
+logic basic__min_ub__result3 : int
+
+logic r3 : int
+
+logic basic__min_ub__result4 : int
+
+logic r4 : int
+
+logic basic__min_ub__result5 : int
+
+logic result3 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : ((((0 <= 255) -> in_range1(r)) and ((((a <= b) -> (r1 = a)) and
+  ((b <= a) -> (r1 = b))) and (((0 <= 255) -> in_range1(r1)) and
   (((basic__min_ub__result1 = basic__min_ub__result2) and
   (basic__min_ub__result3 = basic__min_ub__result1)) and
-  ((result = basic__min_ub__result) and
+  ((result2 = basic__min_ub__result) and
   (basic__min_ub__result1 = r1)))))) and
-  (((basic__min_ub__result4 = basic__min_ub__result2) and (r1 = r2)) and
-  ((basic__min_ub__result5 = basic__min_ub__result3) and (r3 = r1)))) and
-  (result1 = basic__min_ub__result4)))) -> (basic__min_ub__result4 <= a))))
+  (((basic__min_ub__result4 = basic__min_ub__result2) and (r1 = r3)) and
+  ((basic__min_ub__result5 = basic__min_ub__result3) and (r4 = r1))))
+
+axiom H3 : (result3 = basic__min_ub__result4)
+
+ (* File "basic.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (basic__min_ub__result4 <= a)

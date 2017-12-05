@@ -192,18 +192,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -229,7 +229,11 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range(n)
+
+axiom H1 : ((n = 15486209) or ((n = 15487001) or (n = 15487469)))
+
+axiom H2 : (is_prime(n) = true)
+
  (* File "user_lemma.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : ((in_range(n) and (((n = 15486209) or
-  ((n = 15487001) or (n = 15487469))) and (is_prime(n) = true))) ->
-  (is_prime(n) = true))
+goal WP_parameter_def : (is_prime(n) = true)

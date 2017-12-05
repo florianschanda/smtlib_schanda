@@ -95,6 +95,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const count Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const o Int)
 (assert (in_range2 new_item))
 (assert (in_range1 count))
 (assert (not (in_range (- (to_rep (rec__cursors__l__list__capacity container__split_discrs)) count))))

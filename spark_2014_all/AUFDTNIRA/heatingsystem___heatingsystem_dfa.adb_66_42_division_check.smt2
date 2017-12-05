@@ -107,6 +107,8 @@
 (declare-const minute Int)
 (declare-const result Int)
 (declare-const hour1 Int)
+(declare-const result1 Int)
+(declare-const minute1 Int)
 (assert (in_range time))
 (assert (=> (<= 0 23) (in_range2 hour)))
 (assert (=> (<= 0 59) (in_range3 minute)))

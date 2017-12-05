@@ -432,7 +432,7 @@ function stack_root__ref___projection(a: stack_root__ref) : us_rep =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -2645,129 +2645,356 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:positive_less_than_max.
-  forall s__split_fields1:(int,element) farray.
-  forall s__split_fields2:less_than_max. forall s__split_fields3:us_private.
-  forall o:int. forall o1:less_than_max. forall o2:positive_less_than_max.
-  forall o3:(int,element) farray. forall o4:less_than_max.
-  forall o5:us_private. forall temp___551:positive_less_than_max.
-  forall temp___5511:(int,element) farray. forall temp___5512:less_than_max.
-  forall temp___5513:us_private. forall temp___5514:int.
-  forall o6:positive_less_than_max. forall o7:positive_less_than_max.
-  forall o8:(int,element) farray. forall o9:less_than_max.
-  forall o10:us_private. forall temp___555:positive_less_than_max.
-  forall temp___5551:(int,element) farray. forall temp___5552:less_than_max.
-  forall temp___5553:us_private. forall temp___5554:int. forall o11:int.
-  forall o12:positive_less_than_max. forall o13:positive_less_than_max.
-  forall o14:(int,element) farray. forall o15:less_than_max.
-  forall o16:us_private. forall temp___553:positive_less_than_max.
-  forall temp___5531:(int,element) farray. forall temp___5532:less_than_max.
-  forall temp___5533:us_private. forall temp___5534:int. forall o17:element.
-  forall o18:(int,element) farray. forall o19:positive_less_than_max.
-  forall o20:(int,element) farray. forall o21:less_than_max.
-  forall o22:us_private. forall temp___558:positive_less_than_max.
-  forall temp___5581:(int,element) farray. forall temp___5582:less_than_max.
-  forall temp___5583:us_private. forall temp___5584:int.
-  forall result:positive_less_than_max. forall result1:(int,element) farray.
-  forall result2:less_than_max. forall result3:us_private.
-  forall s__split_fields4:positive_less_than_max.
-  forall s__split_fields5:(int,element) farray.
-  forall s__split_fields6:less_than_max. forall s__split_fields7:us_private.
-  forall result4:positive_less_than_max. forall result5:(int,element) farray.
-  forall result6:less_than_max. forall result7:us_private.
-  forall s__split_fields8:positive_less_than_max.
-  forall s__split_fields9:(int,element) farray.
-  forall s__split_fields10:less_than_max.
-  forall s__split_fields11:us_private. forall result8:positive_less_than_max.
-  forall result9:(int,element) farray. forall result10:less_than_max.
-  forall result11:us_private.
-  forall s__split_fields12:positive_less_than_max.
-  forall s__split_fields13:(int,element) farray.
-  forall s__split_fields14:less_than_max.
-  forall s__split_fields15:us_private.
-  forall result12:positive_less_than_max.
-  forall result13:(int,element) farray. forall result14:less_than_max.
-  forall result15:us_private.
-  forall s__split_fields16:positive_less_than_max.
-  forall s__split_fields17:(int,element) farray.
-  forall s__split_fields18:less_than_max.
-  forall s__split_fields19:us_private.
-  forall s__split_fields20:positive_less_than_max.
-  forall s__split_fields21:(int,element) farray.
-  forall s__split_fields22:less_than_max.
-  forall s__split_fields23:us_private.
-  forall s__split_fields24:positive_less_than_max.
-  forall s__split_fields25:(int,element) farray.
-  forall s__split_fields26:less_than_max.
-  forall s__split_fields27:us_private. ((in_range2(e) and ((not (is_full({
-  us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields1;
+logic s__split_fields : positive_less_than_max
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : less_than_max
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : less_than_max
+
+logic o2 : positive_less_than_max
+
+logic o3 : (int,element) farray
+
+logic o4 : less_than_max
+
+logic o5 : us_private
+
+logic temp___551 : positive_less_than_max
+
+logic temp___5511 : (int,element) farray
+
+logic temp___5512 : less_than_max
+
+logic temp___5513 : us_private
+
+logic temp___5514 : int
+
+logic o6 : positive_less_than_max
+
+logic o7 : positive_less_than_max
+
+logic o8 : (int,element) farray
+
+logic o9 : less_than_max
+
+logic o10 : us_private
+
+logic temp___555 : positive_less_than_max
+
+logic temp___5551 : (int,element) farray
+
+logic temp___5552 : less_than_max
+
+logic temp___5553 : us_private
+
+logic temp___5554 : int
+
+logic o11 : int
+
+logic o12 : positive_less_than_max
+
+logic o13 : positive_less_than_max
+
+logic o14 : (int,element) farray
+
+logic o15 : less_than_max
+
+logic o16 : us_private
+
+logic temp___553 : positive_less_than_max
+
+logic temp___5531 : (int,element) farray
+
+logic temp___5532 : less_than_max
+
+logic temp___5533 : us_private
+
+logic temp___5534 : int
+
+logic o17 : element
+
+logic o18 : (int,element) farray
+
+logic o19 : positive_less_than_max
+
+logic o20 : (int,element) farray
+
+logic o21 : less_than_max
+
+logic o22 : us_private
+
+logic temp___558 : positive_less_than_max
+
+logic temp___5581 : (int,element) farray
+
+logic temp___5582 : less_than_max
+
+logic temp___5583 : us_private
+
+logic temp___5584 : int
+
+logic result : positive_less_than_max
+
+logic result1 : (int,element) farray
+
+logic result2 : less_than_max
+
+logic result3 : us_private
+
+logic s__split_fields4 : positive_less_than_max
+
+logic s__split_fields5 : (int,element) farray
+
+logic s__split_fields6 : less_than_max
+
+logic s__split_fields7 : us_private
+
+logic result4 : positive_less_than_max
+
+logic result5 : (int,element) farray
+
+logic result6 : less_than_max
+
+logic result7 : us_private
+
+logic s__split_fields8 : positive_less_than_max
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+logic result8 : positive_less_than_max
+
+logic result9 : (int,element) farray
+
+logic result10 : less_than_max
+
+logic result11 : us_private
+
+logic s__split_fields12 : positive_less_than_max
+
+logic s__split_fields13 : (int,element) farray
+
+logic s__split_fields14 : less_than_max
+
+logic s__split_fields15 : us_private
+
+logic result12 : positive_less_than_max
+
+logic result13 : (int,element) farray
+
+logic result14 : less_than_max
+
+logic result15 : us_private
+
+logic s__split_fields16 : positive_less_than_max
+
+logic s__split_fields17 : (int,element) farray
+
+logic s__split_fields18 : less_than_max
+
+logic s__split_fields19 : us_private
+
+logic s__split_fields20 : positive_less_than_max
+
+logic s__split_fields21 : (int,element) farray
+
+logic s__split_fields22 : less_than_max
+
+logic s__split_fields23 : us_private
+
+logic s__split_fields24 : positive_less_than_max
+
+logic s__split_fields25 : (int,element) farray
+
+logic s__split_fields26 : less_than_max
+
+logic s__split_fields27 : us_private
+
+axiom H : in_range2(e)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s__split_fields1;
   rec__stackp__stack_root__length = s__split_fields2; rec__ext__ =
   hide_ext__(s__split_fields, s__split_fields3) }; attr__tag = s__attr__tag
-  }) = true)) and ((((((((o = (to_rep(s__split_fields2) + 1)) and
-  in_range1((to_rep(s__split_fields2) + 1))) and (to_rep(o1) = o)) and
-  ((s__split_fields = o2) and ((s__split_fields1 = o3) and ((o1 = o4) and
-  (s__split_fields3 = o5))))) and (((temp___551 = o2) and
-  ((temp___5511 = o3) and ((temp___5512 = o4) and (temp___5513 = o5)))) and
-  (s__attr__tag = temp___5514))) and (({ us_split_fields__content1 = {
-  rec__stackp__buffer__first = result; rec__stackp__stack_root__content1 =
-  result1; rec__stackp__stack_root__length1 = result2; rec__ext__1 = result3
-  } } = { us_split_fields__content1 = { rec__stackp__buffer__first =
-  s__split_fields; rec__stackp__stack_root__content1 = s__split_fields1;
-  rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
-  s__split_fields3 } }) and ((temp___551 = s__split_fields4) and
-  ((temp___5511 = s__split_fields5) and ((temp___5512 = s__split_fields6) and
-  (temp___5513 = s__split_fields7)))))) and
-  ((((to_rep3(s__split_fields4) = 1) and ((((to_rep3(o6) = 100) and
-  ((o6 = o7) and ((s__split_fields5 = o8) and ((s__split_fields6 = o9) and
-  (s__split_fields7 = o10))))) and (((temp___555 = o7) and
-  ((temp___5551 = o8) and ((temp___5552 = o9) and (temp___5553 = o10)))) and
-  (s__attr__tag = temp___5554))) and (((result4 = s__split_fields4) and
-  ((result5 = s__split_fields5) and ((result6 = s__split_fields6) and
-  (result7 = s__split_fields7)))) and ((temp___555 = s__split_fields8) and
-  ((temp___5551 = s__split_fields9) and
-  ((temp___5552 = s__split_fields10) and
-  (temp___5553 = s__split_fields11))))))) or
-  ((not (to_rep3(s__split_fields4) = 1)) and
-  (((((((o11 = (to_rep3(s__split_fields4) - 1)) and
-  in_range4((to_rep3(s__split_fields4) - 1))) and (to_rep3(o12) = o11)) and
-  ((o12 = o13) and ((s__split_fields5 = o14) and
-  ((s__split_fields6 = o15) and (s__split_fields7 = o16))))) and
-  (((temp___553 = o13) and ((temp___5531 = o14) and ((temp___5532 = o15) and
-  (temp___5533 = o16)))) and (s__attr__tag = temp___5534))) and
-  (((result8 = s__split_fields4) and ((result9 = s__split_fields5) and
-  ((result10 = s__split_fields6) and (result11 = s__split_fields7)))) and
-  ((temp___553 = s__split_fields12) and
-  ((temp___5531 = s__split_fields13) and
-  ((temp___5532 = s__split_fields14) and
-  (temp___5533 = s__split_fields15)))))) and ({ rec__stackp__buffer__first =
-  s__split_fields8; rec__stackp__stack_root__content1 = s__split_fields9;
-  rec__stackp__stack_root__length1 = s__split_fields10; rec__ext__1 =
-  s__split_fields11 } = { rec__stackp__buffer__first = s__split_fields12;
-  rec__stackp__stack_root__content1 = s__split_fields13;
-  rec__stackp__stack_root__length1 = s__split_fields14; rec__ext__1 =
-  s__split_fields15 })))) and (((((to_rep1(o17) = e) and
-  (o18 = (s__split_fields9[to_rep3(s__split_fields8) <- o17]))) and
-  ((s__split_fields8 = o19) and ((o18 = o20) and
-  ((s__split_fields10 = o21) and (s__split_fields11 = o22))))) and
-  (((temp___558 = o19) and ((temp___5581 = o20) and ((temp___5582 = o21) and
-  (temp___5583 = o22)))) and (s__attr__tag = temp___5584))) and
-  (((result12 = s__split_fields8) and ((result13 = s__split_fields9) and
-  ((result14 = s__split_fields10) and (result15 = s__split_fields11)))) and
-  ((temp___558 = s__split_fields16) and
-  ((temp___5581 = s__split_fields17) and
-  ((temp___5582 = s__split_fields18) and
-  (temp___5583 = s__split_fields19)))))))) and
-  (((s__split_fields20 = s__split_fields16) and
+  }) = true))
+
+axiom H2 : ((o = (to_rep(s__split_fields2) + 1)) and
+  in_range1((to_rep(s__split_fields2) + 1)))
+
+axiom H3 : (to_rep(o1) = o)
+
+axiom H4 : (s__split_fields = o2)
+
+axiom H5 : (s__split_fields1 = o3)
+
+axiom H6 : (o1 = o4)
+
+axiom H7 : (s__split_fields3 = o5)
+
+axiom H8 : (temp___551 = o2)
+
+axiom H9 : (temp___5511 = o3)
+
+axiom H10 : (temp___5512 = o4)
+
+axiom H11 : (temp___5513 = o5)
+
+axiom H12 : (s__attr__tag = temp___5514)
+
+axiom H13 : ((result = s__split_fields) and ((result1 = s__split_fields1) and
+  ((result2 = s__split_fields2) and (result3 = s__split_fields3))))
+
+axiom H14 : (temp___551 = s__split_fields4)
+
+axiom H15 : (temp___5511 = s__split_fields5)
+
+axiom H16 : (temp___5512 = s__split_fields6)
+
+axiom H17 : (temp___5513 = s__split_fields7)
+
+axiom H18 : ((to_rep3(s__split_fields4) = 1) -> (to_rep3(o6) = 100))
+
+axiom H19 : ((to_rep3(s__split_fields4) = 1) -> (o6 = o7))
+
+axiom H20 : ((to_rep3(s__split_fields4) = 1) -> (s__split_fields5 = o8))
+
+axiom H21 : ((to_rep3(s__split_fields4) = 1) -> (s__split_fields6 = o9))
+
+axiom H22 : ((to_rep3(s__split_fields4) = 1) -> (s__split_fields7 = o10))
+
+axiom H23 : ((to_rep3(s__split_fields4) = 1) -> (temp___555 = o7))
+
+axiom H24 : ((to_rep3(s__split_fields4) = 1) -> (temp___5551 = o8))
+
+axiom H25 : ((to_rep3(s__split_fields4) = 1) -> (temp___5552 = o9))
+
+axiom H26 : ((to_rep3(s__split_fields4) = 1) -> (temp___5553 = o10))
+
+axiom H27 : ((to_rep3(s__split_fields4) = 1) -> (s__attr__tag = temp___5554))
+
+axiom H28 : ((to_rep3(s__split_fields4) = 1) -> (result4 = s__split_fields4))
+
+axiom H29 : ((to_rep3(s__split_fields4) = 1) -> (result5 = s__split_fields5))
+
+axiom H30 : ((to_rep3(s__split_fields4) = 1) -> (result6 = s__split_fields6))
+
+axiom H31 : ((to_rep3(s__split_fields4) = 1) -> (result7 = s__split_fields7))
+
+axiom H32 : ((to_rep3(s__split_fields4) = 1) ->
+  (temp___555 = s__split_fields8))
+
+axiom H33 : ((to_rep3(s__split_fields4) = 1) ->
+  (temp___5551 = s__split_fields9))
+
+axiom H34 : ((to_rep3(s__split_fields4) = 1) ->
+  (temp___5552 = s__split_fields10))
+
+axiom H35 : ((to_rep3(s__split_fields4) = 1) ->
+  (temp___5553 = s__split_fields11))
+
+axiom H36 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  ((o11 = (to_rep3(s__split_fields4) - 1)) and
+  in_range4((to_rep3(s__split_fields4) - 1))))
+
+axiom H37 : ((not (to_rep3(s__split_fields4) = 1)) -> (to_rep3(o12) = o11))
+
+axiom H38 : ((not (to_rep3(s__split_fields4) = 1)) -> (o12 = o13))
+
+axiom H39 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (s__split_fields5 = o14))
+
+axiom H40 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (s__split_fields6 = o15))
+
+axiom H41 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (s__split_fields7 = o16))
+
+axiom H42 : ((not (to_rep3(s__split_fields4) = 1)) -> (temp___553 = o13))
+
+axiom H43 : ((not (to_rep3(s__split_fields4) = 1)) -> (temp___5531 = o14))
+
+axiom H44 : ((not (to_rep3(s__split_fields4) = 1)) -> (temp___5532 = o15))
+
+axiom H45 : ((not (to_rep3(s__split_fields4) = 1)) -> (temp___5533 = o16))
+
+axiom H46 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (s__attr__tag = temp___5534))
+
+axiom H47 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (result8 = s__split_fields4))
+
+axiom H48 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (result9 = s__split_fields5))
+
+axiom H49 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (result10 = s__split_fields6))
+
+axiom H50 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  (result11 = s__split_fields7))
+
+axiom H51 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  ((s__split_fields12 = temp___553) and
+  ((s__split_fields13 = temp___5531) and
+  ((s__split_fields14 = temp___5532) and
+  (s__split_fields15 = temp___5533)))))
+
+axiom H52 : ((not (to_rep3(s__split_fields4) = 1)) ->
+  ((s__split_fields8 = s__split_fields12) and
+  ((s__split_fields9 = s__split_fields13) and
+  ((s__split_fields10 = s__split_fields14) and
+  (s__split_fields11 = s__split_fields15)))))
+
+axiom H53 : (to_rep1(o17) = e)
+
+axiom H54 : (o18 = (s__split_fields9[to_rep3(s__split_fields8) <- o17]))
+
+axiom H55 : (s__split_fields8 = o19)
+
+axiom H56 : (o18 = o20)
+
+axiom H57 : (s__split_fields10 = o21)
+
+axiom H58 : (s__split_fields11 = o22)
+
+axiom H59 : (temp___558 = o19)
+
+axiom H60 : (temp___5581 = o20)
+
+axiom H61 : (temp___5582 = o21)
+
+axiom H62 : (temp___5583 = o22)
+
+axiom H63 : (s__attr__tag = temp___5584)
+
+axiom H64 : ((result12 = s__split_fields8) and
+  ((result13 = s__split_fields9) and ((result14 = s__split_fields10) and
+  (result15 = s__split_fields11))))
+
+axiom H65 : ((s__split_fields16 = temp___558) and
+  ((s__split_fields17 = temp___5581) and
+  ((s__split_fields18 = temp___5582) and (s__split_fields19 = temp___5583))))
+
+axiom H66 : ((s__split_fields20 = s__split_fields16) and
   ((s__split_fields21 = s__split_fields17) and
   ((s__split_fields22 = s__split_fields18) and
-  (s__split_fields23 = s__split_fields19)))) and
-  ((s__split_fields24 = s__split_fields16) and
+  (s__split_fields23 = s__split_fields19))))
+
+axiom H67 : ((s__split_fields24 = s__split_fields16) and
   ((s__split_fields25 = s__split_fields17) and
   ((s__split_fields26 = s__split_fields18) and
-  (s__split_fields27 = s__split_fields19)))))))) ->
-  (((to_rep2(first((get_model__3({ us_split_fields3 = {
+  (s__split_fields27 = s__split_fields19))))
+
+ (* File "stackp.ads", line 52, characters 0-0 *)
+goal WP_parameter_def : (((to_rep2(first((get_model__3({ us_split_fields3 = {
   rec__stackp__buffer__first = s__split_fields;
   rec__stackp__stack_root__content1 = s__split_fields1;
   rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
@@ -2986,4 +3213,4 @@ goal WP_parameter_def :
   rec__stackp__stack_root__length1 = s__split_fields2; rec__ext__1 =
   s__split_fields3 }; attr__tag1 = s__attr__tag })).rt))),
   to_rep2(first(mk(1, ((1 + (1 + 0)) - 1)))), to_rep2(last(mk(1,
-  ((1 + (1 + 0)) - 1))))) = true)))))))
+  ((1 + (1 + 0)) - 1))))) = true)))))

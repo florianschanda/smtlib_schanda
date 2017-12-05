@@ -181,6 +181,7 @@
 (declare-const o1 Int)
 (declare-const o2 us_rep2)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range1 count))
 (assert (= (has_key (positions (mk___rep container__split_discrs (mk___split_fields container__split_fields))) (mk___rep1 (mk___split_fields1 position__split_fields))) true))
 (assert (and (= o2 (positions (mk___rep container__split_discrs (mk___split_fields container__split_fields)))) (and (not (= (has_key o2 no_element) true)) (forall ((i us_rep1)) (=> (= (has_key o2 i) true) (and (and (<= 1 (get o2 i)) (<= (get o2 i) (length (mk___rep container__split_discrs (mk___split_fields container__split_fields))))) (forall ((j us_rep1)) (=> (= (has_key o2 j) true) (=> (= (get o2 i) (get o2 j)) (= (bool_eq1 i j) true))))))))))

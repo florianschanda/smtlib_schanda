@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -361,41 +361,146 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dynamic_preds.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:even. forall result____split_fields1:even.
-  forall o:int. forall o1:even. forall o2:even. forall o3:even.
-  forall temp___292:even. forall temp___2921:even. forall temp___293:even.
-  forall temp___2931:even. forall temp___284:int. forall o4:int.
-  forall o5:even. forall o6:even. forall o7:even. forall temp___287:even.
-  forall temp___2871:even. forall temp___288:even. forall temp___2881:even.
-  forall temp___294:int. forall result:even. forall result1:even.
-  forall result____split_fields2:even. forall result____split_fields3:even.
-  forall result2:even. forall result3:even.
-  forall result____split_fields4:even. forall result____split_fields5:even.
-  (in_range(above) -> ((((mod(above, 2) = 0) and (((((((mod(above,
-  2) = 0) and (o = above)) and (to_rep(o1) = o)) and ((o1 = o2) and
-  (result____split_fields1 = o3))) and ((temp___292 = o2) and
-  (temp___2921 = o3))) and
-  ((to_rep(temp___2921) = (to_rep(temp___292) + 2)) and
-  ((temp___293 = temp___292) and (temp___2931 = temp___2921)))) and
-  (((result = result____split_fields) and
-  (result1 = result____split_fields1)) and
-  ((temp___293 = result____split_fields2) and
-  (temp___2931 = result____split_fields3))))) or ((not (mod(above,
-  2) = 0)) and (((((((((temp___284 = (above + 1)) and
-  in_range((above + 1))) and ((mod(temp___284, 2) = 0) and
-  (o4 = temp___284))) and (to_rep(o5) = o4)) and ((o5 = o6) and
-  (result____split_fields1 = o7))) and ((temp___287 = o6) and
-  (temp___2871 = o7))) and
-  ((to_rep(temp___2871) = (to_rep(temp___287) + 2)) and
-  ((temp___288 = temp___287) and (temp___2881 = temp___2871)))) and
-  (((result2 = result____split_fields) and
-  (result3 = result____split_fields1)) and
-  ((temp___288 = result____split_fields4) and
-  (temp___2881 = result____split_fields5)))) and
+logic result____split_fields : even
+
+logic result____split_fields1 : even
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : even
+
+logic o3 : even
+
+logic temp___292 : even
+
+logic temp___2921 : even
+
+logic temp___293 : even
+
+logic temp___2931 : even
+
+logic temp___284 : int
+
+logic o4 : int
+
+logic o5 : even
+
+logic o6 : even
+
+logic o7 : even
+
+logic temp___287 : even
+
+logic temp___2871 : even
+
+logic temp___288 : even
+
+logic temp___2881 : even
+
+logic temp___294 : int
+
+logic o8 : int
+
+logic o9 : even
+
+logic o10 : even
+
+logic o11 : even
+
+logic temp___297 : even
+
+logic temp___2971 : even
+
+logic result : even
+
+logic result1 : even
+
+logic result____split_fields2 : even
+
+logic result____split_fields3 : even
+
+logic result2 : even
+
+logic result3 : even
+
+logic result____split_fields4 : even
+
+logic result____split_fields5 : even
+
+axiom H : in_range(above)
+
+axiom H1 : true
+
+axiom H2 : ((mod(above, 2) = 0) -> (mod(above, 2) = 0))
+
+axiom H3 : ((mod(above, 2) = 0) -> (o = above))
+
+axiom H4 : ((mod(above, 2) = 0) -> (to_rep(o1) = o))
+
+axiom H5 : ((mod(above, 2) = 0) -> (o1 = o2))
+
+axiom H6 : ((mod(above, 2) = 0) -> (result____split_fields1 = o3))
+
+axiom H7 : ((mod(above, 2) = 0) -> (temp___292 = o2))
+
+axiom H8 : ((mod(above, 2) = 0) -> (temp___2921 = o3))
+
+axiom H9 : ((mod(above, 2) = 0) ->
+  (to_rep(temp___2921) = (to_rep(temp___292) + 2)))
+
+axiom H10 : ((mod(above, 2) = 0) -> ((temp___293 = temp___292) and
+  (temp___2931 = temp___2921)))
+
+axiom H11 : ((mod(above, 2) = 0) -> (result = result____split_fields))
+
+axiom H12 : ((mod(above, 2) = 0) -> (result1 = result____split_fields1))
+
+axiom H13 : ((mod(above, 2) = 0) -> (temp___293 = result____split_fields2))
+
+axiom H14 : ((mod(above, 2) = 0) -> (temp___2931 = result____split_fields3))
+
+axiom H15 : ((not (mod(above, 2) = 0)) -> ((temp___284 = (above + 1)) and
+  in_range((above + 1))))
+
+axiom H16 : ((not (mod(above, 2) = 0)) -> (mod(temp___284, 2) = 0))
+
+axiom H17 : ((not (mod(above, 2) = 0)) -> (o4 = temp___284))
+
+axiom H18 : ((not (mod(above, 2) = 0)) -> (to_rep(o5) = o4))
+
+axiom H19 : ((not (mod(above, 2) = 0)) -> (o5 = o6))
+
+axiom H20 : ((not (mod(above, 2) = 0)) -> (result____split_fields1 = o7))
+
+axiom H21 : ((not (mod(above, 2) = 0)) -> (temp___287 = o6))
+
+axiom H22 : ((not (mod(above, 2) = 0)) -> (temp___2871 = o7))
+
+axiom H23 : ((not (mod(above, 2) = 0)) ->
+  (to_rep(temp___2871) = (to_rep(temp___287) + 2)))
+
+axiom H24 : ((not (mod(above, 2) = 0)) -> ((temp___288 = temp___287) and
+  (temp___2881 = temp___2871)))
+
+axiom H25 : ((not (mod(above, 2) = 0)) -> (result2 = result____split_fields))
+
+axiom H26 : ((not (mod(above, 2) = 0)) ->
+  (result3 = result____split_fields1))
+
+axiom H27 : ((not (mod(above, 2) = 0)) ->
+  (temp___288 = result____split_fields4))
+
+axiom H28 : ((not (mod(above, 2) = 0)) ->
+  (temp___2881 = result____split_fields5))
+
+axiom H29 : ((not (mod(above, 2) = 0)) ->
   ((result____split_fields2 = result____split_fields4) and
-  (result____split_fields3 = result____split_fields5))))) ->
-  (((temp___294 = (to_rep(result____split_fields2) + 2)) and
-  in_range((to_rep(result____split_fields2) + 2))) -> (mod(temp___294,
-  2) = 0)))))
+  (result____split_fields3 = result____split_fields5)))
+
+axiom H30 : ((temp___294 = (to_rep(result____split_fields2) + 2)) and
+  in_range((to_rep(result____split_fields2) + 2)))
+
+ (* File "dynamic_preds.ads", line 25, characters 0-0 *)
+goal WP_parameter_def : (mod(temp___294, 2) = 0)

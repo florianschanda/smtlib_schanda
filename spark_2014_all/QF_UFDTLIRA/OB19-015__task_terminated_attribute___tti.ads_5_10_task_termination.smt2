@@ -27,6 +27,7 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

@@ -516,34 +516,94 @@ axiom is_empty__def_axiom :
   { rec__stackp__stack_root__content = s; rec__stackp__stack_root__length =
   s1; rec__ext__ = s2 }; attr__tag = s3 }) = 0)))
 
+logic s__split_fields : (int,element) farray
+
+logic s__split_fields1 : less_than_max
+
+logic s__split_fields2 : us_private
+
+logic o : less_than_max
+
+logic o1 : (int,element) farray
+
+logic o2 : less_than_max
+
+logic o3 : us_private
+
+logic temp___482 : (int,element) farray
+
+logic temp___4821 : less_than_max
+
+logic temp___4822 : us_private
+
+logic temp___4823 : int
+
+logic result : (int,element) farray
+
+logic result1 : less_than_max
+
+logic result2 : us_private
+
+logic s__split_fields3 : (int,element) farray
+
+logic s__split_fields4 : less_than_max
+
+logic s__split_fields5 : us_private
+
+logic s__split_fields6 : (int,element) farray
+
+logic s__split_fields7 : less_than_max
+
+logic s__split_fields8 : us_private
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (s__split_fields = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (s__split_fields2 = o3)
+
+axiom H4 : (temp___482 = o1)
+
+axiom H5 : (temp___4821 = o2)
+
+axiom H6 : (temp___4822 = o3)
+
+axiom H7 : (s__attr__tag = temp___4823)
+
+axiom H8 : (result = s__split_fields)
+
+axiom H9 : (result1 = s__split_fields1)
+
+axiom H10 : (result2 = s__split_fields2)
+
+axiom H11 : (temp___482 = s__split_fields3)
+
+axiom H12 : (temp___4821 = s__split_fields4)
+
+axiom H13 : (temp___4822 = s__split_fields5)
+
+axiom H14 : (s__split_fields6 = s__split_fields3)
+
+axiom H15 : (s__split_fields7 = s__split_fields4)
+
+axiom H16 : (s__split_fields8 = s__split_fields5)
+
+axiom H17 : (s__split_fields9 = s__split_fields3)
+
+axiom H18 : (s__split_fields10 = s__split_fields4)
+
+axiom H19 : (s__split_fields11 = s__split_fields5)
+
  (* File "stackp.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,element) farray.
-  forall s__split_fields1:less_than_max. forall s__split_fields2:us_private.
-  forall o:less_than_max. forall o1:(int,element) farray.
-  forall o2:less_than_max. forall o3:us_private.
-  forall temp___482:(int,element) farray. forall temp___4821:less_than_max.
-  forall temp___4822:us_private. forall temp___4823:int.
-  forall result:(int,element) farray. forall result1:less_than_max.
-  forall result2:us_private. forall s__split_fields3:(int,element) farray.
-  forall s__split_fields4:less_than_max. forall s__split_fields5:us_private.
-  forall s__split_fields6:(int,element) farray.
-  forall s__split_fields7:less_than_max. forall s__split_fields8:us_private.
-  forall s__split_fields9:(int,element) farray.
-  forall s__split_fields10:less_than_max.
-  forall s__split_fields11:us_private. ((((((to_rep(o) = 0) and
-  ((s__split_fields = o1) and ((o = o2) and (s__split_fields2 = o3)))) and
-  (((temp___482 = o1) and ((temp___4821 = o2) and (temp___4822 = o3))) and
-  (s__attr__tag = temp___4823))) and (((result = s__split_fields) and
-  ((result1 = s__split_fields1) and (result2 = s__split_fields2))) and
-  ((temp___482 = s__split_fields3) and ((temp___4821 = s__split_fields4) and
-  (temp___4822 = s__split_fields5))))) and
-  (((s__split_fields6 = s__split_fields3) and
-  ((s__split_fields7 = s__split_fields4) and
-  (s__split_fields8 = s__split_fields5))) and
-  ((s__split_fields9 = s__split_fields3) and
-  ((s__split_fields10 = s__split_fields4) and
-  (s__split_fields11 = s__split_fields5))))) -> (is_empty({
-  us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields6;
+goal WP_parameter_def : (is_empty({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s__split_fields6;
   rec__stackp__stack_root__length = s__split_fields7; rec__ext__ =
-  s__split_fields8 }; attr__tag = s__attr__tag }) = true)))
+  s__split_fields8 }; attr__tag = s__attr__tag }) = true)

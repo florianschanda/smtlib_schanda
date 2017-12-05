@@ -453,21 +453,36 @@ logic container4 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "aida-containers-formal_vectors.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall hnco__test2__v_type_owner__capacity__result:int. forall us:int.
-  forall result:int. forall hnco__test2__v_type_owner__capacity__result1:int.
-  forall hnco__test2__v_type_owner__capacity__result2:int.
-  forall hnco__test2__v_type_owner__capacity__result3:int.
-  forall hnco__test2__v_type_owner__capacity__result4:int.
-  forall hnco__test2__v_type_owner__capacity__result5:int.
-  (forall result1:int. (((to_rep(container) = to_rep1(container1)) and
-  (((((us = to_rep(container)) and in_range(to_rep(container))) and
+logic hnco__test2__v_type_owner__capacity__result : int
+
+logic us : int
+
+logic result : int
+
+logic hnco__test2__v_type_owner__capacity__result1 : int
+
+logic hnco__test2__v_type_owner__capacity__result2 : int
+
+logic hnco__test2__v_type_owner__capacity__result3 : int
+
+logic hnco__test2__v_type_owner__capacity__result4 : int
+
+logic hnco__test2__v_type_owner__capacity__result5 : int
+
+logic result1 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
+axiom H1 : ((((us = to_rep(container)) and in_range(to_rep(container))) and
   (((hnco__test2__v_type_owner__capacity__result1 = hnco__test2__v_type_owner__capacity__result2) and
   (hnco__test2__v_type_owner__capacity__result3 = hnco__test2__v_type_owner__capacity__result1)) and
   ((result = hnco__test2__v_type_owner__capacity__result) and
   (hnco__test2__v_type_owner__capacity__result1 = to_rep(container))))) and
   ((hnco__test2__v_type_owner__capacity__result4 = hnco__test2__v_type_owner__capacity__result2) and
-  (hnco__test2__v_type_owner__capacity__result5 = hnco__test2__v_type_owner__capacity__result3))) and
-  (result1 = hnco__test2__v_type_owner__capacity__result4))) ->
-  (to_rep(container) <= hnco__test2__v_type_owner__capacity__result4))))
+  (hnco__test2__v_type_owner__capacity__result5 = hnco__test2__v_type_owner__capacity__result3)))
+
+axiom H2 : (result1 = hnco__test2__v_type_owner__capacity__result4)
+
+ (* File "aida-containers-formal_vectors.ads", line 22, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep(container) <= hnco__test2__v_type_owner__capacity__result4)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -858,51 +858,411 @@ logic attr__ATTRIBUTE_ADDRESS9 : int
 
 logic attr__ATTRIBUTE_ADDRESS10 : int
 
- (* File "x86.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n1:t. forall x86__rangesintersect__B100b__res__assume:bool.
-  forall temp___205:t. forall temp___204:t. forall o:t. forall result:t.
-  forall n11:t. forall n12:t. forall n2:t. forall n:t. forall result1:t.
-  forall n21:t. forall result2:t. forall n3:t. forall n22:t. forall n4:t.
-  forall n23:t. forall n5:t. forall n24:t. forall n6:t. forall n25:t.
-  forall n7:t. forall n26:t. forall n8:t. (ule(var1_range_size,
-  sub(of_int(18446744073709551615), var2_range_size)) ->
-  ((((x86__rangesintersect__B100b__res__assume = inrange64(var1, sub(var2,
-  var1_range_size), add(var1_range_size, var2_range_size))) and
+logic n : t
+
+logic n1 : t
+
+logic n2 : t
+
+logic n11 : t
+
+logic n21 : t
+
+logic n3 : t
+
+logic x86__rangesintersect__result : bool
+
+logic x86__rangesintersect__B100b__res__assume : bool
+
+logic temp___211 : t
+
+logic temp___208 : t
+
+logic temp___205 : t
+
+logic temp___204 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : bool
+
+logic n4 : t
+
+logic n12 : t
+
+logic n22 : t
+
+logic n13 : t
+
+logic n23 : t
+
+logic n5 : t
+
+logic result : t
+
+logic n6 : t
+
+logic result1 : t
+
+logic n14 : t
+
+logic result2 : t
+
+logic n24 : t
+
+logic result3 : t
+
+logic n15 : t
+
+logic result4 : t
+
+logic n25 : t
+
+logic result5 : t
+
+logic n16 : t
+
+logic result6 : t
+
+logic n26 : t
+
+logic n7 : t
+
+logic n17 : t
+
+logic n27 : t
+
+logic result7 : t
+
+logic n8 : t
+
+logic result8 : t
+
+logic n18 : t
+
+logic result9 : t
+
+logic n28 : t
+
+logic result10 : t
+
+logic n19 : t
+
+logic result11 : t
+
+logic n29 : t
+
+logic result12 : t
+
+logic n110 : t
+
+logic result13 : t
+
+logic n210 : t
+
+logic n9 : t
+
+logic n111 : t
+
+logic n211 : t
+
+logic n10 : t
+
+logic n112 : t
+
+logic n212 : t
+
+logic n20 : t
+
+logic n113 : t
+
+logic n213 : t
+
+logic n30 : t
+
+logic n114 : t
+
+logic n214 : t
+
+logic n31 : t
+
+logic n115 : t
+
+logic n215 : t
+
+logic n32 : t
+
+logic n116 : t
+
+logic n216 : t
+
+logic result14 : t
+
+logic n117 : t
+
+logic n118 : t
+
+logic n217 : t
+
+logic n33 : t
+
+logic result15 : t
+
+logic n218 : t
+
+logic result16 : t
+
+logic n34 : t
+
+logic n219 : t
+
+logic n35 : t
+
+logic result17 : t
+
+logic n220 : t
+
+logic result18 : t
+
+logic n36 : t
+
+logic n221 : t
+
+logic n37 : t
+
+logic n222 : t
+
+logic n38 : t
+
+logic n223 : t
+
+logic n39 : t
+
+logic n224 : t
+
+logic n40 : t
+
+logic n225 : t
+
+logic n41 : t
+
+logic n226 : t
+
+logic n42 : t
+
+logic result19 : t
+
+logic n119 : t
+
+logic n120 : t
+
+logic n227 : t
+
+logic n43 : t
+
+logic n121 : t
+
+logic n228 : t
+
+logic n44 : t
+
+logic n122 : t
+
+logic n229 : t
+
+logic n45 : t
+
+logic n123 : t
+
+logic n230 : t
+
+logic n46 : t
+
+logic n124 : t
+
+logic n231 : t
+
+logic n47 : t
+
+logic n125 : t
+
+logic n232 : t
+
+logic n48 : t
+
+logic n126 : t
+
+logic n233 : t
+
+logic n49 : t
+
+logic n127 : t
+
+logic n234 : t
+
+logic n50 : t
+
+logic n51 : t
+
+logic n128 : t
+
+logic n235 : t
+
+logic n129 : t
+
+logic n236 : t
+
+logic n52 : t
+
+logic n53 : t
+
+logic n130 : t
+
+logic n237 : t
+
+logic n131 : t
+
+logic n238 : t
+
+logic n54 : t
+
+logic result20 : bool
+
+logic x86__rangesintersect__result1 : bool
+
+logic x86__rangesintersect__result2 : bool
+
+logic x86__rangesintersect__result3 : bool
+
+logic n55 : t
+
+logic n132 : t
+
+logic n239 : t
+
+logic n133 : t
+
+logic n240 : t
+
+logic n56 : t
+
+logic x86__rangesintersect__result4 : bool
+
+logic n57 : t
+
+logic n134 : t
+
+logic n241 : t
+
+logic n135 : t
+
+logic n242 : t
+
+logic n58 : t
+
+logic x86__rangesintersect__result5 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : ule(var1_range_size, sub(of_int(18446744073709551615),
+  var2_range_size))
+
+axiom H5 : ((x86__rangesintersect__B100b__res__assume = inrange64(var1,
+  sub(var2, var1_range_size), add(var1_range_size, var2_range_size))) and
   ((x86__rangesintersect__B100b__res__assume = true) <->
-  (exists n9:t. ((ule(of_int(0), n9) and ule(n9, add(var1_range_size,
-  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n9)))))) and
-  (x86__rangesintersect__B100b__res__assume = res)) -> ((not (res = true)) ->
-  (((result = n1) and (n11 = of_int(0))) -> ((ule(of_int(0), n11) and
-  ule(n11, var1_range_size)) -> ((((not (n12 = of_int(0))) and
-  (forall i:t. ((ule(of_int(0), i) and ule(i, sub(n12, of_int(1)))) ->
+  (exists n59:t. ((ule(of_int(0), n59) and ule(n59, add(var1_range_size,
+  var2_range_size))) and (var1 = add(sub(var2, var1_range_size), n59))))))
+
+axiom H6 : (x86__rangesintersect__B100b__res__assume = res)
+
+axiom H7 : (not (res = true))
+
+axiom H8 : (result14 = n11)
+
+axiom H9 : (n117 = of_int(0))
+
+axiom H10 : ule(of_int(0), n117)
+
+axiom H11 : ule(n117, var1_range_size)
+
+axiom H12 : ((not (n118 = of_int(0))) ->
+  (forall i:t. ((ule(of_int(0), i) and ule(i, sub(n118, of_int(1)))) ->
   (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j)))))))) or (n12 = of_int(0))) ->
-  (((ule(of_int(0), var1_range_size) -> dynamic_property1(of_int(0),
-  var1_range_size, n12)) and (ule(of_int(0), n12) and ule(n12,
-  var1_range_size))) -> ((((result1 = n2) and (n21 = of_int(0))) and
-  (((ule(of_int(0), n21) and ule(n21, var2_range_size)) and
-  ((((temp___205 = n) and ((temp___204 = n21) and (((o = add(n21,
-  sub(var1_range_size, n12))) and ((n = result2) and (n3 = o))) and
-  ((ule(of_int(0), n3) and ule(n3, add(var1_range_size,
+  (not (add(var1, i) = add(var2, j))))))))
+
+axiom H13 : ((ule(of_int(0), var1_range_size) -> dynamic_property1(of_int(0),
+  var1_range_size, n118)) and (ule(of_int(0), n118) and ule(n118,
+  var1_range_size)))
+
+axiom H14 : (result15 = n217)
+
+axiom H15 : (n218 = of_int(0))
+
+axiom H16 : ((ule(of_int(0), n218) and ule(n218, var2_range_size)) ->
+  (((temp___205 = n33) and ((temp___204 = n218) and (((o = add(n218,
+  sub(var1_range_size, n118))) and ((result16 = n33) and (n34 = o))) and
+  ((ule(of_int(0), n34) and ule(n34, add(var1_range_size,
   var2_range_size))) and ((not (var1 = add(sub(var2, var1_range_size),
-  n3))) and ((not (add(var1, n12) = add(var2, n21))) and
-  ((forall j:t. ((ule(of_int(0), j) and ule(j, n22)) -> (not (add(var1,
-   n12) = add(var2, j))))) and
-  (((ule(of_int(0), var2_range_size) -> dynamic_property2(of_int(0),
-  var2_range_size, n22)) and (ule(of_int(0), n22) and ule(n22,
-  var2_range_size))) and (n22 = var2_range_size))))))))) and (((n4 = n5) and
-  (n22 = n23)) and ((n6 = n4) and (n24 = n22)))) and ((({ t__content = n7
-  } = { t__content = n5 }) and ({ t__content = n25 } = { t__content = n23
-  })) and ((n8 = n6) and (n26 = n24))))) or ((not (ule(of_int(0), n21) and
-  ule(n21, var2_range_size))) and (((n = n7) and (n21 = n25)) and
-  ((n8 = n) and (n26 = n21)))))) ->
-  ((forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-   (not (add(var1, n12) = add(var2, j))))) ->
-  ((((not (n12 = of_int(0))) and
-  (forall i:t. ((ule(of_int(0), i) and ule(i, n12)) ->
+  n34))) and ((not (add(var1, n118) = add(var2, n218))) and
+  ((forall j:t. ((ule(of_int(0), j) and ule(j, n219)) -> (not (add(var1,
+   n118) = add(var2, j))))) and (((ule(of_int(0), var2_range_size) ->
+  dynamic_property2(of_int(0), var2_range_size, n219)) and (ule(of_int(0),
+  n219) and ule(n219, var2_range_size))) and
+  (n219 = var2_range_size))))))))) and (((n39 = n35) and (n223 = n219)) and
+  ((n40 = n35) and (n224 = n219)))))
+
+axiom H17 : ((ule(of_int(0), n218) and ule(n218, var2_range_size)) ->
+  (n41 = n39))
+
+axiom H18 : ((ule(of_int(0), n218) and ule(n218, var2_range_size)) ->
+  (n225 = n223))
+
+axiom H19 : ((ule(of_int(0), n218) and ule(n218, var2_range_size)) ->
+  (n42 = n40))
+
+axiom H20 : ((ule(of_int(0), n218) and ule(n218, var2_range_size)) ->
+  (n226 = n224))
+
+axiom H21 : ((not (ule(of_int(0), n218) and ule(n218, var2_range_size))) ->
+  (n41 = n33))
+
+axiom H22 : ((not (ule(of_int(0), n218) and ule(n218, var2_range_size))) ->
+  (n225 = n218))
+
+axiom H23 : ((not (ule(of_int(0), n218) and ule(n218, var2_range_size))) ->
+  (n42 = n33))
+
+axiom H24 : ((not (ule(of_int(0), n218) and ule(n218, var2_range_size))) ->
+  (n226 = n218))
+
+axiom H25 :
   (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j)))))))) or (n12 = of_int(0))) ->
-  (forall i:t. ((ule(of_int(0), i) and ule(i, n12)) ->
+  (not (add(var1, n118) = add(var2, j)))))
+
+axiom H26 : ((not (n118 = of_int(0))) ->
+  (forall i:t. ((ule(of_int(0), i) and ule(i, n118)) ->
   (forall j:t. ((ule(of_int(0), j) and ule(j, var2_range_size)) ->
-  (not (add(var1, i) = add(var2, j))))))))))))))))))
+  (not (add(var1, i) = add(var2, j))))))))
+
+logic i : t
+
+axiom H27 : ule(of_int(0), i)
+
+axiom H28 : ule(i, n118)
+
+logic j : t
+
+axiom H29 : ule(of_int(0), j)
+
+axiom H30 : ule(j, var2_range_size)
+
+ (* File "x86.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (not (add(var1, i) = add(var2, j)))

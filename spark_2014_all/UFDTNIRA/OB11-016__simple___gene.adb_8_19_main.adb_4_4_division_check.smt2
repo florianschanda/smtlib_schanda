@@ -57,5 +57,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range1 a))
 (assert (not (= (of_int 1) true)))
+(assert (not false))
 (check-sat)
 (exit)

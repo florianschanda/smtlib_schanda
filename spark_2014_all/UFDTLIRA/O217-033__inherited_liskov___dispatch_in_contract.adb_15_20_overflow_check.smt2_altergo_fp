@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -412,11 +412,48 @@ axiom less_than_max__2__def_axiom :
   o3 }) = true) <-> ((to_rep(o1) <  2147483647) and
   (to_rep(o) <  2147483647))))
 
- (* File "dispatch_in_contract.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o__split_fields:integer. forall o__split_fields1:integer.
-  forall o__split_fields2:us_private. ((less_than_max__2({ us_split_fields3 =
-  { rec__dispatch_in_contract__child__f2 = o__split_fields;
+logic o__split_fields : integer
+
+logic o__split_fields1 : integer
+
+logic o__split_fields2 : us_private
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : us_private
+
+logic temp___166 : integer
+
+logic temp___1661 : integer
+
+logic temp___1662 : us_private
+
+logic temp___1663 : int
+
+logic o5 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : us_private
+
+logic o__split_fields3 : integer
+
+logic o__split_fields4 : integer
+
+logic o__split_fields5 : us_private
+
+axiom H : (less_than_max__2({ us_split_fields3 = {
+  rec__dispatch_in_contract__child__f2 = o__split_fields;
   rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true) ->
-  in_range((to_rep(o__split_fields1) + 1))))
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)
+
+ (* File "dispatch_in_contract.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(o__split_fields1) + 1))

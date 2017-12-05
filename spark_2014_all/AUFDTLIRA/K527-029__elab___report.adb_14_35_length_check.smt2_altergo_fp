@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -432,22 +432,62 @@ function t6b__ref___projection(a: t6b__ref) : us_t = (a).t6b__content
 
 axiom no_name__def_axiom : (no_name = temp___String_Literal_132(void))
 
+logic test_name_len : int
+
+logic test_name : (int,character) farray
+
+logic temp___153 : (int,character) farray
+
+logic temp___1531 : t
+
+logic o : (int,character) farray
+
+logic temp___155 : (int,character) farray
+
+logic temp___1551 : t
+
+logic result : int
+
+logic test_name_len1 : int
+
+logic result1 : int
+
+logic test_name_len2 : int
+
+axiom H : (result = test_name_len)
+
+axiom H1 : (test_name_len1 = 0)
+
+axiom H2 : in_range(test_name_len1)
+
+axiom H3 : (result1 = test_name_len1)
+
+axiom H4 : (test_name_len2 = 7)
+
+axiom H5 : (test_name_len2 = r4b)
+
+axiom H6 : in_range(r4b)
+
+axiom H7 : (((1 <= 7) -> (((1 <= r4b) ->
+  (((7 - 1) + 1) = ((r4b - 1) + 1))) and ((not (1 <= r4b)) ->
+  (((7 - 1) + 1) = 0)))) and ((not (1 <= 7)) -> ((1 <= r4b) ->
+  (0 = ((r4b - 1) + 1)))))
+
+axiom H8 : (no_name = temp___153)
+
+axiom H9 : (mk(1, 7) = temp___1531)
+
+axiom H10 : ((1 <= r4b) -> (((1 <= 1) and (1 <= 15)) and ((1 <= r4b) and
+  (r4b <= 15))))
+
+axiom H11 : (o = test_name)
+
+axiom H12 : (o = temp___155)
+
+axiom H13 : (mk(1, r4b) = temp___1551)
+
  (* File "report.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall test_name_len:int. forall test_name:(int,character) farray.
-  forall temp___153:(int,character) farray. forall temp___1531:t.
-  forall o:(int,character) farray. forall temp___155:(int,character) farray.
-  forall temp___1551:t. forall result:int. forall test_name_len1:int.
-  forall result1:int. forall test_name_len2:int.
-  (((result = test_name_len) and (test_name_len1 = 0)) ->
-  (in_range(test_name_len1) -> (((result1 = test_name_len1) and
-  (test_name_len2 = 7)) -> (((test_name_len2 = r4b) and in_range(r4b)) ->
-  (((((1 <= 7) and (((1 <= r4b) and (((7 - 1) + 1) = ((r4b - 1) + 1))) or
-  ((not (1 <= r4b)) and (((7 - 1) + 1) = 0)))) or ((not (1 <= 7)) and
-  (((1 <= r4b) and (0 = ((r4b - 1) + 1))) or (not (1 <= r4b))))) and
-  ((no_name = temp___153) and (mk(1, 7) = temp___1531))) -> (((((1 <= r4b) ->
-  (((1 <= 1) and (1 <= 15)) and ((1 <= r4b) and (r4b <= 15)))) and
-  (o = test_name)) and ((o = temp___155) and (mk(1, r4b) = temp___1551))) ->
   (((to_rep1(first(temp___1531)) <= to_rep1(last(temp___1531))) ->
   (((to_rep1(first(temp___1551)) <= to_rep1(last(temp___1551))) ->
   (((to_rep1(last(temp___1531)) - to_rep1(first(temp___1531))) + 1) = ((to_rep1(last(temp___1551)) - to_rep1(first(temp___1551))) + 1))) and
@@ -455,4 +495,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___1531)) - to_rep1(first(temp___1531))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___1531)) <= to_rep1(last(temp___1531)))) ->
   ((to_rep1(first(temp___1551)) <= to_rep1(last(temp___1551))) ->
-  (0 = ((to_rep1(last(temp___1551)) - to_rep1(first(temp___1551))) + 1))))))))))))
+  (0 = ((to_rep1(last(temp___1551)) - to_rep1(first(temp___1551))) + 1)))))

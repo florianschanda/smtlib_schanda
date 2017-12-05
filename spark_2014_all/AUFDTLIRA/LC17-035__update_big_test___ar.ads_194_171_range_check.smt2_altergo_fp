@@ -355,30 +355,116 @@ axiom def_axiom4 :
   ((not (temp___4406 = temp___4404)) -> ((temp___4401(temp___4403,
   temp___4404, temp___4405)[temp___4406]) = (temp___4403[temp___4406])))))))
 
+logic a : (int,et1) farray
+
+logic j : int
+
+logic f : int
+
+logic t : (int,et1) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___4415 : (int,et1) farray
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___4413 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic t1 : (int,et1) farray
+
+logic result1 : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic result2 : int
+
+logic j1 : int
+
+logic result3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic j3 : int
+
+logic f3 : int
+
+logic t2 : (int,et1) farray
+
+logic a4 : (int,et1) farray
+
+logic j4 : int
+
+logic f4 : int
+
+logic t3 : (int,et1) farray
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : ((((1 <= 10) -> in_range1(j)) and (((0 <= 99) -> in_range2(f)) and
+  ((((bool_eq4(a1, 1, 10, temp___4401(t1, i, e), 1, 10) = true) and
+  (((i = 10) and (j1 = 1)) or ((i <  10) and (j1 = (i + 1))))) and
+  in_range1(j1)) and (((1 <= 10) -> in_range1(j1)) and ((((e = 0) ->
+  ((result4 = f) and (f1 = 99))) and ((not (e = 0)) -> ((((o3 = (e - 1)) and
+  in_range2((e - 1))) and ((result5 = f) and (f2 = o3))) and (f1 = f2)))) and
+  (((to_rep(o4) = f1) and (o5 = (a1[j1 <- o4]))) and ((a1 = result6) and
+  (a2 = o5)))))))) and (((t1 = t2) and ((f1 = f3) and ((j1 = j3) and
+  (a2 = a3)))) and ((t3 = t1) and ((f4 = f1) and ((j4 = j1) and
+  (a4 = a2))))))
+
+axiom H3 : (i <  10)
+
+axiom H4 : ((0 <  e) -> ((o8 = (e - 1)) and in_range2((e - 1))))
+
+axiom H5 : ((0 <  e) -> ((o9 = (i + 1)) and in_range1((i + 1))))
+
+axiom H6 : ((0 <  e) -> (temp___4413 = temp___681(a, i, e, o9, o8)))
+
+axiom H7 : ((0 <  e) -> (result8 = bool_eq4(a3, 1, 10, temp___4413, 1, 10)))
+
+axiom H8 : ((not (0 <  e)) -> (result8 = false))
+
+axiom H9 : (not (result8 = true))
+
+axiom H10 : (e = 0)
+
  (* File "ar.ads", line 62, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall j:int. forall f:int. forall o:int.
-  forall o1:et1. forall o2:(int,et1) farray. forall o3:int. forall o4:int.
-  forall temp___4413:(int,et1) farray. forall t:(int,et1) farray.
-  forall a1:(int,et1) farray. forall j1:int. forall result:int.
-  forall f1:int. forall result1:int. forall f2:int.
-  forall result2:(int,et1) farray. forall a2:(int,et1) farray.
-  forall a3:(int,et1) farray. forall j2:int. forall f3:int.
-  forall t1:(int,et1) farray. forall a4:(int,et1) farray. forall j3:int.
-  forall f4:int. forall t2:(int,et1) farray. forall result3:bool.
-  (in_range1(i) -> (in_range2(e) -> (((((1 <= 10) -> in_range1(j)) and
-  (((0 <= 99) -> in_range2(f)) and ((((bool_eq4(a1, 1, 10, temp___4401(t, i,
-  e), 1, 10) = true) and (((i = 10) and (j1 = 1)) or ((i <  10) and
-  (j1 = (i + 1))))) and in_range1(j1)) and (((1 <= 10) -> in_range1(j1)) and
-  ((((e = 0) and (({ int__content = result } = { int__content = f }) and
-  (f1 = 99))) or ((not (e = 0)) and ((((o = (e - 1)) and
-  in_range2((e - 1))) and (({ int__content = result1 } = { int__content = f
-  }) and (f2 = o))) and (f1 = f2)))) and (((to_rep(o1) = f1) and
-  (o2 = (a1[j1 <- o1]))) and ((a1 = result2) and (a2 = o2)))))))) and
-  (((t = t1) and ((f1 = f3) and ((j1 = j2) and (a2 = a3)))) and ((t2 = t) and
-  ((f4 = f1) and ((j3 = j1) and (a4 = a2)))))) -> ((i <  10) ->
-  ((((0 <  e) and ((((o3 = (e - 1)) and in_range2((e - 1))) and
-  (((o4 = (i + 1)) and in_range1((i + 1))) and (temp___4413 = temp___681(a,
-  i, e, o4, o3)))) and (result3 = bool_eq4(a3, 1, 10, temp___4413, 1,
-  10)))) or ((not (0 <  e)) and (result3 = false))) ->
-  ((not (result3 = true)) -> ((e = 0) -> in_range1((i + 1))))))))))
+goal WP_parameter_def : in_range1((i + 1))

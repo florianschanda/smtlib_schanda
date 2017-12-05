@@ -135,7 +135,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -790,16 +790,26 @@ axiom found_none__def_axiom :
   (forall fruit:int [found_none(fruit)]. ((found_none(fruit) = true) <->
   (fruit = 0)))
 
+logic o : (int,fruits) farray
+
+logic o1 : t2
+
+logic initial_crate : (int,fruits) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(initial_crate__first),
+  to_rep(initial_crate__last))
+
+axiom H1 : dynamic_property1(1, 2147483647, to_rep(final_crate__first),
+  to_rep(final_crate__last))
+
+axiom H2 : ((to_rep(initial_crate__first) = to_rep(final_crate__first)) and
+  (to_rep(initial_crate__last) = to_rep(final_crate__last)))
+
+axiom H3 :
+  (forall i:int. (((to_rep(initial_crate__first) <= i) and
+  (i <= to_rep(initial_crate__last))) ->
+  (not (found_none(to_rep1((initial_crate[i]))) = true))))
+
  (* File "test.adb", line 142, characters 0-0 *)
-goal WP_parameter_def :
-  (forall initial_crate:(int,fruits) farray. (dynamic_property(1, 2147483647,
-  to_rep(initial_crate__first), to_rep(initial_crate__last)) ->
-  (dynamic_property1(1, 2147483647, to_rep(final_crate__first),
-  to_rep(final_crate__last)) ->
-  (((to_rep(initial_crate__first) = to_rep(final_crate__first)) and
-  (to_rep(initial_crate__last) = to_rep(final_crate__last))) ->
-  ((forall i:int. (((to_rep(initial_crate__first) <= i) and
-   (i <= to_rep(initial_crate__last))) ->
-   (not (found_none(to_rep1((initial_crate[i]))) = true)))) ->
-  dynamic_property2(1, 2147483647, to_rep(initial_crate__first),
-  to_rep(initial_crate__last)))))))
+goal WP_parameter_def : dynamic_property2(1, 2147483647,
+  to_rep(initial_crate__first), to_rep(initial_crate__last))

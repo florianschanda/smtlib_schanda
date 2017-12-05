@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -261,20 +261,38 @@ axiom is_odd__def_axiom :
 axiom is_even__def_axiom :
   (forall i1:int [is_even(i1)]. ((is_even(i1) = true) <-> (mod(i1, 2) = 0)))
 
+logic rec_post__is_even__result : bool
+
+logic o : int
+
+logic result : bool
+
+logic rec_post__is_even__result1 : bool
+
+logic rec_post__is_even__result2 : bool
+
+logic rec_post__is_even__result3 : bool
+
+logic rec_post__is_even__result4 : bool
+
+logic rec_post__is_even__result5 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : (rec_post__is_even__result1 = rec_post__is_even__result2)
+
+axiom H2 : (rec_post__is_even__result3 = rec_post__is_even__result1)
+
+axiom H3 : (result = rec_post__is_even__result)
+
+axiom H4 : (((mod(i, 2) = 0) -> (rec_post__is_even__result1 = true)) and
+  ((not (mod(i, 2) = 0)) -> (rec_post__is_even__result1 = false)))
+
+axiom H5 : (rec_post__is_even__result4 = rec_post__is_even__result2)
+
+axiom H6 : (rec_post__is_even__result5 = rec_post__is_even__result3)
+
+axiom H7 : (not (i = 0))
+
  (* File "rec_post.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rec_post__is_even__result:bool. forall result:bool.
-  forall rec_post__is_even__result1:bool.
-  forall rec_post__is_even__result2:bool.
-  forall rec_post__is_even__result3:bool.
-  forall rec_post__is_even__result4:bool.
-  forall rec_post__is_even__result5:bool. (in_range1(i) ->
-  (((((rec_post__is_even__result1 = rec_post__is_even__result2) and
-  (rec_post__is_even__result3 = rec_post__is_even__result1)) and (({
-  bool__content = result } = { bool__content = rec_post__is_even__result
-  }) and (((mod(i, 2) = 0) and (rec_post__is_even__result1 = true)) or
-  ((not (mod(i, 2) = 0)) and (rec_post__is_even__result1 = false))))) and (({
-  bool__content = rec_post__is_even__result4 } = { bool__content =
-  rec_post__is_even__result2 }) and
-  (rec_post__is_even__result5 = rec_post__is_even__result3))) ->
-  ((not (i = 0)) -> in_range1((i - 1))))))
+goal WP_parameter_def : in_range1((i - 1))

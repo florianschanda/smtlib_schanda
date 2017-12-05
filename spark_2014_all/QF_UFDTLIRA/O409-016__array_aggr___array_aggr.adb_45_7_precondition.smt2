@@ -32,6 +32,8 @@
 (define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range temp___expr_33)))
 (declare-const one Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(assert (in_range one))
+(assert true)
 (assert (not true))
 (check-sat)
 (exit)

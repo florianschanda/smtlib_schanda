@@ -141,6 +141,7 @@
 (assert (= temp___199 o4))
 (assert (= temp___1991 o5))
 (assert (= (mk___rep1 (mk___split_fields (mk___rep (mk___split_discrs temp___199) temp___1991))) null_node))
-(assert (not (not (= branch__split_fields false))))
+(assert (= branch__split_fields false))
+(assert (not false))
 (check-sat)
 (exit)

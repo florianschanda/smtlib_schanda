@@ -64,6 +64,8 @@
 (declare-const res (_ BitVec 32))
 (declare-const result (_ BitVec 32))
 (declare-const res1 (_ BitVec 32))
+(assert true)
+(assert true)
 (assert (= result res))
 (assert (= res1 (bvmul (bvudiv (bvadd x ((_ int2bv 32) 63)) ((_ int2bv 32) 64)) ((_ int2bv 32) 64))))
 (assert (= b true))

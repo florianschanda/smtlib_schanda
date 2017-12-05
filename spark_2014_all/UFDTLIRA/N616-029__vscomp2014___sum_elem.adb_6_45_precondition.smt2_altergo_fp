@@ -497,7 +497,7 @@ logic last_index__function_guard : int, us_rep1 -> prop
 
 type extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq8 : int, int -> bool
 
@@ -625,11 +625,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq6(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq5(get(a, n), get(b, n)) = true))) ->
   (user_eq6(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq5(get(a, n), get(b, n)) = true)))) ->
   (user_eq6(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -647,7 +647,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range7(x1: int) = (((-1) <= x1) and (x1 <= 10000))
+predicate in_range7(x1: int) = (((- 1) <= x1) and (x1 <= 10000))
 
 logic bool_eq10 : int, int -> bool
 
@@ -674,21 +674,84 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range6(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range6(length1(container))))
 
 axiom get__post_axiom : true
 
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def : (in_range2(x) -> ((((0 <= x) and (x <= (length({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
-  us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }) - 1))) and
-  (forall j:int. (((0 <= j) and (j <= ((-1) + length1(model__({
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : index
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : index
+
+logic o10 : index
+
+logic o11 : index
+
+logic o12 : index
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : bool
+
+logic o18 : index
+
+logic o19 : index
+
+logic o20 : index
+
+logic o21 : index
+
+logic o22 : index
+
+logic o23 : index
+
+logic o24 : index
+
+logic o25 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(x)
+
+axiom H1 : (((0 <= x) and (x <= (length({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
+  rec__sum_elem__partitions__vector = p1 } }) - 1))) and
+  (forall j1:int. (((0 <= j1) and (j1 <= ((- 1) + length1(model__({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }))))) ->
   in_range1((to_rep(((get(model__({ us_split_discrs1 = {
   rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
   rec__sum_elem__partitions__vector = p1 } }),
-  j)).us_split_fields1).rec__sum_elem__interval__first) + to_rep(((get(model__({
+  j1)).us_split_fields1).rec__sum_elem__interval__first) + to_rep(((get(model__({
   us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
   us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } }),
-  j)).us_split_fields1).rec__sum_elem__interval__last)))))) -> (0 <= x)))
+  j1)).us_split_fields1).rec__sum_elem__interval__last))))))
+
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def : (0 <= x)

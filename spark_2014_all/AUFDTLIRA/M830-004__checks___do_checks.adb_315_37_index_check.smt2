@@ -146,6 +146,8 @@
 (declare-const x__split_fields1 t)
 (declare-const y__split_fields (Array Int Bool))
 (declare-const y__split_fields1 t)
+(declare-const o Int)
+(declare-const o1 Bool)
 (assert (dynamic_invariant (mk___rep x__split_discrs (mk___split_fields (mk___t x__split_fields x__split_fields1))) true false true))
 (assert (dynamic_invariant (mk___rep y__split_discrs (mk___split_fields (mk___t y__split_fields y__split_fields1))) true false true))
 (assert (not (<= (to_rep (first y__split_fields1)) 10)))

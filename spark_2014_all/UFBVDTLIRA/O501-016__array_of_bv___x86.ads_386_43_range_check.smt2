@@ -100,6 +100,7 @@
 (declare-const x86__r14l__result3 (_ BitVec 8))
 (declare-const x86__r14l__result4 (_ BitVec 8))
 (declare-const x86__r14l__result5 (_ BitVec 8))
+(assert true)
 (assert (= x86__r14l__result1 x86__r14l__result2))
 (assert (= x86__r14l__result3 x86__r14l__result1))
 (assert (= (mk_t__ref result) (mk_t__ref x86__r14l__result)))

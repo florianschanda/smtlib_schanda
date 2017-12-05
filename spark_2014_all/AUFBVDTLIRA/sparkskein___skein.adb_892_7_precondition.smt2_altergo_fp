@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -3192,28 +3192,75 @@ axiom byte_count_of__def_axiom :
   rec__skein__skein_512_context__x = ctx10;
   rec__skein__skein_512_context__b = ctx11 } }) = to_rep2(ctx9))))
 
- (* File "skein.ads", line 110, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:unsigned_64. forall o1:unsigned_64. forall ctx__split_fields:u64.
-  forall ctx__split_fields1:u32. forall ctx__split_fields2:u16.
-  forall ctx__split_fields3:u7. forall ctx__split_fields4:bool.
-  forall ctx__split_fields5:u6. forall ctx__split_fields6:bool.
-  forall ctx__split_fields7:bool. forall ctx__split_fields8:hash_bit_length.
-  forall ctx__split_fields9:u64. forall ctx__split_fields10:(t,u64) farray.
-  forall ctx__split_fields11:(t,byte) farray. forall ctx__split_fields12:u64.
-  forall ctx__split_fields13:u32. forall ctx__split_fields14:u16.
-  forall ctx__split_fields15:u7. forall ctx__split_fields16:bool.
-  forall ctx__split_fields17:u6. forall ctx__split_fields18:bool.
-  forall ctx__split_fields19:bool.
-  forall ctx__split_fields20:hash_bit_length. forall ctx__split_fields21:u64.
-  forall ctx__split_fields22:(t,u64) farray.
-  forall ctx__split_fields23:(t,byte) farray. ((dynamic_property(of_int(0),
-  of_int(18446744073709551615), to_rep(first(data1)),
-  to_rep(last(data1))) and ult(to_rep(last(data1)),
-  of_int(18446744073709551615))) -> ((((to_rep(first(data1)) = of_int(0)) and
+logic result__ : (t,byte) farray
+
+logic o : unsigned_64
+
+logic o1 : unsigned_64
+
+logic ctx__split_fields : u64
+
+logic ctx__split_fields1 : u32
+
+logic ctx__split_fields2 : u16
+
+logic ctx__split_fields3 : u7
+
+logic ctx__split_fields4 : bool
+
+logic ctx__split_fields5 : u6
+
+logic ctx__split_fields6 : bool
+
+logic ctx__split_fields7 : bool
+
+logic ctx__split_fields8 : hash_bit_length
+
+logic ctx__split_fields9 : u64
+
+logic ctx__split_fields10 : (t,u64) farray
+
+logic ctx__split_fields11 : (t,byte) farray
+
+logic ctx__split_fields12 : u64
+
+logic ctx__split_fields13 : u32
+
+logic ctx__split_fields14 : u16
+
+logic ctx__split_fields15 : u7
+
+logic ctx__split_fields16 : bool
+
+logic ctx__split_fields17 : u6
+
+logic ctx__split_fields18 : bool
+
+logic ctx__split_fields19 : bool
+
+logic ctx__split_fields20 : hash_bit_length
+
+logic ctx__split_fields21 : u64
+
+logic ctx__split_fields22 : (t,u64) farray
+
+logic ctx__split_fields23 : (t,byte) farray
+
+logic skein__skein_512_final__hash : (t,byte) farray
+
+logic result : (t,byte) farray
+
+logic result__1 : (t,byte) farray
+
+axiom H : (dynamic_property(of_int(0), of_int(18446744073709551615),
+  to_rep(first(data1)), to_rep(last(data1))) and ult(to_rep(last(data1)),
+  of_int(18446744073709551615)))
+
+axiom H1 : (((to_rep(first(data1)) = of_int(0)) and
   (add_in_range(to_rep(last(data1)), of_int(64)) = true)) and
-  ult(add(to_rep(last(data1)), of_int(64)), of_int(18446744073709551615))) ->
-  (((((in_range6(hash_bit_len_of({ us_split_fields5 = {
+  ult(add(to_rep(last(data1)), of_int(64)), of_int(18446744073709551615)))
+
+axiom H2 : ((((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
@@ -3272,23 +3319,9 @@ goal WP_parameter_def :
   rec__skein__context_header__byte_count = ctx__split_fields9 } };
   rec__skein__skein_512_context__x = ctx__split_fields10;
   rec__skein__skein_512_context__b = ctx__split_fields11 } }))) and
-  ult(to_rep(last(mk(of_int(0), of_int(63)))),
-  of_int(18446744073709551615))) -> ((((in_range6(hash_bit_len_of({
-  us_split_fields5 = { rec__skein__skein_512_context__h = {
-  us_split_fields3 = { rec__skein__context_header__tweak_words = {
-  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb =
-  ctx__split_fields12; rec__skein__tweak_value__byte_count_msb =
-  ctx__split_fields13; rec__skein__tweak_value__reserved =
-  ctx__split_fields14; rec__skein__tweak_value__tree_level =
-  ctx__split_fields15; rec__skein__tweak_value__bit_pad =
-  ctx__split_fields16; rec__skein__tweak_value__field_type =
-  ctx__split_fields17; rec__skein__tweak_value__first_block =
-  ctx__split_fields18; rec__skein__tweak_value__final_block =
-  ctx__split_fields19 } }; rec__skein__context_header__hash_bit_len =
-  ctx__split_fields20; rec__skein__context_header__byte_count =
-  ctx__split_fields21 } }; rec__skein__skein_512_context__x =
-  ctx__split_fields22; rec__skein__skein_512_context__b = ctx__split_fields23
-  } })) and (hash_bit_len_of({ us_split_fields5 = {
+  ult(to_rep(last(mk(of_int(0), of_int(63)))), of_int(18446744073709551615)))
+
+axiom H3 : (((in_range6(hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields12;
@@ -3302,8 +3335,22 @@ goal WP_parameter_def :
   rec__skein__context_header__hash_bit_len = ctx__split_fields20;
   rec__skein__context_header__byte_count = ctx__split_fields21 } };
   rec__skein__skein_512_context__x = ctx__split_fields22;
-  rec__skein__skein_512_context__b = ctx__split_fields23 }
-  }) = hash_bit_len_of({ us_split_fields5 = {
+  rec__skein__skein_512_context__b = ctx__split_fields23 } })) and
+  (hash_bit_len_of({ us_split_fields5 = { rec__skein__skein_512_context__h =
+  { us_split_fields3 = { rec__skein__context_header__tweak_words = {
+  us_split_fields1 = { rec__skein__tweak_value__byte_count_lsb =
+  ctx__split_fields12; rec__skein__tweak_value__byte_count_msb =
+  ctx__split_fields13; rec__skein__tweak_value__reserved =
+  ctx__split_fields14; rec__skein__tweak_value__tree_level =
+  ctx__split_fields15; rec__skein__tweak_value__bit_pad =
+  ctx__split_fields16; rec__skein__tweak_value__field_type =
+  ctx__split_fields17; rec__skein__tweak_value__first_block =
+  ctx__split_fields18; rec__skein__tweak_value__final_block =
+  ctx__split_fields19 } }; rec__skein__context_header__hash_bit_len =
+  ctx__split_fields20; rec__skein__context_header__byte_count =
+  ctx__split_fields21 } }; rec__skein__skein_512_context__x =
+  ctx__split_fields22; rec__skein__skein_512_context__b = ctx__split_fields23
+  } }) = hash_bit_len_of({ us_split_fields5 = {
   rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields;
@@ -3333,10 +3380,15 @@ goal WP_parameter_def :
   rec__skein__context_header__byte_count = ctx__split_fields21 } };
   rec__skein__skein_512_context__x = ctx__split_fields22;
   rec__skein__skein_512_context__b = ctx__split_fields23 } }))) and
-  ult(to_rep(last(mk(of_int(0), of_int(63)))),
-  of_int(18446744073709551615))) -> ((to_rep(o1) = of_int(63)) ->
-  ((to_rep(o) = of_int(0)) -> in_range6(hash_bit_len_of({ us_split_fields5 =
-  { rec__skein__skein_512_context__h = { us_split_fields3 = {
+  ult(to_rep(last(mk(of_int(0), of_int(63)))), of_int(18446744073709551615)))
+
+axiom H4 : (to_rep(o1) = of_int(63))
+
+axiom H5 : (to_rep(o) = of_int(0))
+
+ (* File "skein.ads", line 110, characters 0-0 *)
+goal WP_parameter_def : in_range6(hash_bit_len_of({ us_split_fields5 = {
+  rec__skein__skein_512_context__h = { us_split_fields3 = {
   rec__skein__context_header__tweak_words = { us_split_fields1 = {
   rec__skein__tweak_value__byte_count_lsb = ctx__split_fields12;
   rec__skein__tweak_value__byte_count_msb = ctx__split_fields13;
@@ -3349,4 +3401,4 @@ goal WP_parameter_def :
   rec__skein__context_header__hash_bit_len = ctx__split_fields20;
   rec__skein__context_header__byte_count = ctx__split_fields21 } };
   rec__skein__skein_512_context__x = ctx__split_fields22;
-  rec__skein__skein_512_context__b = ctx__split_fields23 } })))))))))
+  rec__skein__skein_512_context__b = ctx__split_fields23 } }))

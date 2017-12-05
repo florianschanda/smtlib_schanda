@@ -107,7 +107,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -596,43 +596,88 @@ logic temp___String_Literal_154 : unit -> (int,character) farray
 
 axiom temp___String_Literal_154__def_axiom : true
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:(int,character) farray.
-  forall o3:t. forall o4:(int,character) farray. forall o5:t. forall o6:int.
-  forall o7:int. forall result:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(s11)), to_rep1(last(s11))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(s21)), to_rep1(last(s21))) ->
-  ((not (match_bool(bool_eq5(s1, to_rep1(first(s11)), to_rep1(last(s11)),
-  temp___String_Literal_152(void), 1, 0), true, bool_eq5(s2,
-  to_rep1(first(s21)), to_rep1(last(s21)), temp___String_Literal_154(void),
-  1, 0)) = true)) -> ((((o = head({ elts = s2; rt = s21 })) and
-  (in_range3(o) and (o = to_rep((s2[to_rep1(first(s21))]))))) and
-  (((o1 = head({ elts = s1; rt = s11 })) and (in_range3(o1) and
-  (o1 = to_rep((s1[to_rep1(first(s11))]))))) and (((o1 = o) and
-  (result = true)) or ((not (o1 = o)) and (result = false))))) ->
-  ((result = true) -> ((((({ elts = o4; rt = o5 } = tail({ elts = s2; rt =
-  s21 })) and (dynamic_property(1, 2147483647, to_rep1(first(o5)),
-  to_rep1(last(o5))) and ((s2 = o4) and
-  (mk(to_rep1(first2(mk1((to_rep1(first(s21)) + 1), to_rep1(last(s21))))),
-  to_rep1(last2(mk1((to_rep1(first(s21)) + 1),
-  to_rep1(last(s21)))))) = o5)))) and ((({ elts = o2; rt = o3 } = tail({
-  elts = s1; rt = s11 })) and (dynamic_property(1, 2147483647,
-  to_rep1(first(o3)), to_rep1(last(o3))) and ((s1 = o2) and
-  (mk(to_rep1(first2(mk1((to_rep1(first(s11)) + 1), to_rep1(last(s11))))),
-  to_rep1(last2(mk1((to_rep1(first(s11)) + 1),
-  to_rep1(last(s11)))))) = o3)))) and ((o6 = slow_lcs_length({ elts = o2;
-  rt = o3 }, { elts = o4; rt = o5 })) and (in_range4(o6) and ((((bool_eq5(o2,
-  to_rep1(first(o3)), to_rep1(last(o3)), temp___String_Literal_152(void), 1,
-  0) = true) or (bool_eq5(o4, to_rep1(first(o5)), to_rep1(last(o5)),
-  temp___String_Literal_154(void), 1, 0) = true)) and (o6 = 0)) or
+logic o : int
+
+logic o1 : int
+
+logic o2 : (int,character) farray
+
+logic o3 : t
+
+logic o4 : (int,character) farray
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : (int,character) farray
+
+logic o9 : t
+
+logic o10 : (int,character) farray
+
+logic o11 : t
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic result : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s11)),
+  to_rep1(last(s11)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : (not (match_bool(bool_eq5(s1, to_rep1(first(s11)),
+  to_rep1(last(s11)), temp___String_Literal_152(void), 1, 0), true,
+  bool_eq5(s2, to_rep1(first(s21)), to_rep1(last(s21)),
+  temp___String_Literal_154(void), 1, 0)) = true))
+
+axiom H3 : ((o = head({ elts = s2; rt = s21 })) and (in_range3(o) and
+  (o = to_rep((s2[to_rep1(first(s21))])))))
+
+axiom H4 : ((o1 = head({ elts = s1; rt = s11 })) and (in_range3(o1) and
+  (o1 = to_rep((s1[to_rep1(first(s11))])))))
+
+axiom H5 : (((o1 = o) -> (result = true)) and ((not (o1 = o)) ->
+  (result = false)))
+
+axiom H6 : (result = true)
+
+axiom H7 : (({ elts = o4; rt = o5 } = tail({ elts = s2; rt = s21 })) and
+  (dynamic_property(1, 2147483647, to_rep1(first(o5)), to_rep1(last(o5))) and
+  ((s2 = o4) and (mk(to_rep1(first2(mk1((to_rep1(first(s21)) + 1),
+  to_rep1(last(s21))))), to_rep1(last2(mk1((to_rep1(first(s21)) + 1),
+  to_rep1(last(s21)))))) = o5))))
+
+axiom H8 : (({ elts = o2; rt = o3 } = tail({ elts = s1; rt = s11 })) and
+  (dynamic_property(1, 2147483647, to_rep1(first(o3)), to_rep1(last(o3))) and
+  ((s1 = o2) and (mk(to_rep1(first2(mk1((to_rep1(first(s11)) + 1),
+  to_rep1(last(s11))))), to_rep1(last2(mk1((to_rep1(first(s11)) + 1),
+  to_rep1(last(s11)))))) = o3))))
+
+axiom H9 : ((o6 = slow_lcs_length({ elts = o2; rt = o3 }, { elts = o4; rt =
+  o5 })) and (in_range4(o6) and ((((bool_eq5(o2, to_rep1(first(o3)),
+  to_rep1(last(o3)), temp___String_Literal_152(void), 1, 0) = true) or
+  (bool_eq5(o4, to_rep1(first(o5)), to_rep1(last(o5)),
+  temp___String_Literal_154(void), 1, 0) = true)) -> (o6 = 0)) and
   ((not ((bool_eq5(o2, to_rep1(first(o3)), to_rep1(last(o3)),
   temp___String_Literal_152(void), 1, 0) = true) or (bool_eq5(o4,
   to_rep1(first(o5)), to_rep1(last(o5)), temp___String_Literal_154(void), 1,
-  0) = true))) and (((head({ elts = o2; rt = o3 }) = head({ elts = o4; rt =
-  o5 })) and (o6 = (1 + slow_lcs_length(tail({ elts = o2; rt = o3 }), tail({
-  elts = o4; rt = o5 }))))) or ((not (head({ elts = o2; rt = o3 }) = head({
-  elts = o4; rt = o5 }))) and (o6 = max(slow_lcs_length({ elts = o2; rt = o3
+  0) = true))) -> (((head({ elts = o2; rt = o3 }) = head({ elts = o4; rt = o5
+  })) -> (o6 = (1 + slow_lcs_length(tail({ elts = o2; rt = o3 }), tail({
+  elts = o4; rt = o5 }))))) and ((not (head({ elts = o2; rt = o3 }) = head({
+  elts = o4; rt = o5 }))) -> (o6 = max(slow_lcs_length({ elts = o2; rt = o3
   }, tail({ elts = o4; rt = o5 })), slow_lcs_length(tail({ elts = o2; rt = o3
-  }), { elts = o4; rt = o5 }))))))))))) and (o7 = (1 + o6))) ->
-  in_range1(o7))))))))
+  }), { elts = o4; rt = o5 })))))))))
+
+axiom H10 : (o7 = (1 + o6))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(o7)

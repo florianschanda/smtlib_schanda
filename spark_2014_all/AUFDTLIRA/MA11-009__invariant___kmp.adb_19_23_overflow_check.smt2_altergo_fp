@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -755,7 +755,7 @@ logic kmp__init_next__next__aggregate_def : int, int, int -> us_t2
 
 axiom def_axiom :
   (forall temp___159:int. forall temp___160:int. forall temp___161:int.
-  ((dynamic_property((-2147483648), 2147483647, temp___160, temp___161) ->
+  ((dynamic_property((- 2147483648), 2147483647, temp___160, temp___161) ->
   ((to_rep(first4((kmp__init_next__next__aggregate_def(temp___159,
   temp___160, temp___161)).rt2)) = temp___160) and
   (to_rep(last4((kmp__init_next__next__aggregate_def(temp___159, temp___160,
@@ -763,75 +763,435 @@ axiom def_axiom :
   (forall temp___162:int. (((kmp__init_next__next__aggregate_def(temp___159,
   temp___160, temp___161)).elts2[temp___162]) = of_rep(temp___159)))))
 
- (* File "kmp.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall next:(int,integer) farray. forall i:int. forall j:int.
-  forall r8b:int. forall r9b:int. forall r12b:int.
-  forall temp___164:(int,integer) farray. forall temp___1641:t2.
-  forall kmp__init_next__next__assume:(int,integer) farray.
-  forall kmp__init_next__next__assume1:t1. forall o:int. forall o1:int.
-  forall o2:bool. forall o3:int. forall o4:int. forall o5:int.
-  forall o6:integer. forall o7:int. forall o8:integer. forall o9:int.
-  forall o10:int. forall o11:int. forall result:(int,integer) farray.
-  forall next1:(int,integer) farray. forall result1:int. forall i1:int.
-  forall result2:int. forall j1:int. forall result3:bool. forall result4:int.
-  forall r8b1:int. forall result5:int. forall r9b1:int. forall result6:int.
-  forall r12b1:int. forall i2:int. forall j2:int. forall r8b2:int.
-  forall r9b2:int. forall r12b2:int. forall result7:bool. forall result8:int.
-  forall i3:int. (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(p1)), to_rep(last(p1))) -> ((1 <= length({ elts = p; rt = p1
-  })) -> (((((to_rep(first4((kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1))) and
-  ((to_rep(last4((kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
-  to_rep(last(p1)))).rt2)) = to_rep(last(p1))) and ({ elts2 = temp___164;
-  rt2 = temp___1641 } = kmp__init_next__next__aggregate_def(0,
-  to_rep(first(p1)), to_rep(last(p1)))))) and
-  ((((to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641))) and
-  (((to_rep(first(p1)) <= to_rep(last(p1))) and
-  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
-  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) and
-  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = 0)))) or
-  ((not (to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641)))) and
-  (((to_rep(first(p1)) <= to_rep(last(p1))) and
-  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) or
-  (not (to_rep(first(p1)) <= to_rep(last(p1))))))) and ((slide(temp___164,
-  to_rep(first4(temp___1641)),
-  to_rep(first(p1))) = kmp__init_next__next__assume) and
-  (mk1(to_rep(first(p1)),
-  to_rep(last(p1))) = kmp__init_next__next__assume1)))) and ((({
-  map__content = result } = { map__content = next }) and
-  (next1 = kmp__init_next__next__assume)) and
-  ((to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1))) and
-  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))))) ->
-  ((dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
+logic next : (int,integer) farray
+
+logic i : int
+
+logic j : int
+
+logic r8b : int
+
+logic r9b : int
+
+logic r12b : int
+
+logic kmp__init_next__result : (int,integer) farray
+
+logic kmp__init_next__result1 : t
+
+logic temp___164 : (int,integer) farray
+
+logic temp___1641 : t2
+
+logic kmp__init_next__next__assume : (int,integer) farray
+
+logic kmp__init_next__next__assume1 : t1
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic temp___170 : int
+
+logic temp___169 : int
+
+logic temp___167 : (int,integer) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : (int,integer) farray
+
+logic temp___173 : (int,integer) farray
+
+logic temp___1731 : t4
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic o16 : (int,integer) farray
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : int
+
+logic o20 : (int,integer) farray
+
+logic o21 : int
+
+logic o22 : integer
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : bool
+
+logic o26 : bool
+
+logic o27 : int
+
+logic o28 : int
+
+logic j1 : int
+
+logic r8b1 : int
+
+logic r9b1 : int
+
+logic r12b1 : int
+
+logic result : (int,integer) farray
+
+logic next1 : (int,integer) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic j2 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic r8b2 : int
+
+logic result5 : int
+
+logic r9b2 : int
+
+logic result6 : int
+
+logic r12b2 : int
+
+logic next2 : (int,integer) farray
+
+logic i2 : int
+
+logic j3 : int
+
+logic r8b3 : int
+
+logic r9b3 : int
+
+logic r12b3 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic i3 : int
+
+logic result9 : int
+
+logic j4 : int
+
+logic result10 : (int,integer) farray
+
+logic next3 : (int,integer) farray
+
+logic result11 : int
+
+logic i4 : int
+
+logic result12 : (int,integer) farray
+
+logic next4 : (int,integer) farray
+
+logic result13 : int
+
+logic j5 : int
+
+logic result14 : bool
+
+logic result15 : int
+
+logic r8b4 : int
+
+logic result16 : int
+
+logic r9b4 : int
+
+logic result17 : int
+
+logic r12b4 : int
+
+logic next5 : (int,integer) farray
+
+logic i5 : int
+
+logic j6 : int
+
+logic r8b5 : int
+
+logic r9b5 : int
+
+logic r12b5 : int
+
+logic next6 : (int,integer) farray
+
+logic i6 : int
+
+logic j7 : int
+
+logic r8b6 : int
+
+logic r9b6 : int
+
+logic r12b6 : int
+
+logic next7 : (int,integer) farray
+
+logic i7 : int
+
+logic j8 : int
+
+logic r8b7 : int
+
+logic r9b7 : int
+
+logic r12b7 : int
+
+logic next8 : (int,integer) farray
+
+logic i8 : int
+
+logic j9 : int
+
+logic r8b8 : int
+
+logic r9b8 : int
+
+logic r12b8 : int
+
+logic next9 : (int,integer) farray
+
+logic i9 : int
+
+logic j10 : int
+
+logic r8b9 : int
+
+logic r9b9 : int
+
+logic r12b9 : int
+
+logic next10 : (int,integer) farray
+
+logic i10 : int
+
+logic j11 : int
+
+logic r8b10 : int
+
+logic r9b10 : int
+
+logic r12b10 : int
+
+logic result18 : (int,integer) farray
+
+logic result19 : t
+
+logic kmp__init_next__result2 : (int,integer) farray
+
+logic kmp__init_next__result3 : t
+
+logic kmp__init_next__result4 : (int,integer) farray
+
+logic kmp__init_next__result5 : t
+
+logic kmp__init_next__result6 : (int,integer) farray
+
+logic kmp__init_next__result7 : t
+
+logic next11 : (int,integer) farray
+
+logic i11 : int
+
+logic j12 : int
+
+logic r8b11 : int
+
+logic r9b11 : int
+
+logic r12b11 : int
+
+logic kmp__init_next__result8 : (int,integer) farray
+
+logic kmp__init_next__result9 : t
+
+logic next12 : (int,integer) farray
+
+logic i12 : int
+
+logic j13 : int
+
+logic r8b12 : int
+
+logic r9b12 : int
+
+logic r12b12 : int
+
+logic kmp__init_next__result10 : (int,integer) farray
+
+logic kmp__init_next__result11 : t
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(p1)),
+  to_rep(last(p1)))
+
+axiom H1 : (1 <= length({ elts = p; rt = p1 }))
+
+axiom H2 : (to_rep(first4((kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(first(p1)))
+
+axiom H3 : (to_rep(last4((kmp__init_next__next__aggregate_def(0,
+  to_rep(first(p1)), to_rep(last(p1)))).rt2)) = to_rep(last(p1)))
+
+axiom H4 : ({ elts2 = temp___164; rt2 = temp___1641
+  } = kmp__init_next__next__aggregate_def(0, to_rep(first(p1)),
+  to_rep(last(p1))))
+
+axiom H5 : (((to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641))) ->
+  (((to_rep(first(p1)) <= to_rep(last(p1))) ->
+  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = ((to_rep(last(p1)) - to_rep(first(p1))) + 1))) and
+  ((not (to_rep(first(p1)) <= to_rep(last(p1)))) ->
+  (((to_rep(last4(temp___1641)) - to_rep(first4(temp___1641))) + 1) = 0)))) and
+  ((not (to_rep(first4(temp___1641)) <= to_rep(last4(temp___1641)))) ->
+  ((to_rep(first(p1)) <= to_rep(last(p1))) ->
+  (0 = ((to_rep(last(p1)) - to_rep(first(p1))) + 1)))))
+
+axiom H6 : (slide(temp___164, to_rep(first4(temp___1641)),
+  to_rep(first(p1))) = kmp__init_next__next__assume)
+
+axiom H7 : (mk1(to_rep(first(p1)),
+  to_rep(last(p1))) = kmp__init_next__next__assume1)
+
+axiom H8 : (result = next)
+
+axiom H9 : (next1 = kmp__init_next__next__assume)
+
+axiom H10 :
+  (to_rep(next__first) = to_rep(first2(kmp__init_next__next__assume1)))
+
+axiom H11 :
+  (to_rep(next__last) = to_rep(last2(kmp__init_next__next__assume1)))
+
+axiom H12 : (dynamic_property2(to_rep(first(p1)), to_rep(last(p1)),
   to_rep(next__first), to_rep(next__last)) and
   ((to_rep(next__first) = to_rep(first(p1))) and
-  (to_rep(next__last) = to_rep(last(p1))))) -> ((({ int__content = result1
-  } = { int__content = i }) and (i1 = to_rep(first(p1)))) ->
-  (in_range1(i1) -> ((((-2147483648) <= 2147483647) -> in_range1(j)) ->
-  ((1 <  length({ elts = p; rt = p1 })) ->
-  ((((o = (to_rep(first(p1)) + 1)) and
-  in_range1((to_rep(first(p1)) + 1))) and (({ int__content = result2 } = {
-  int__content = j }) and (j1 = o))) -> (((((o1 = (to_rep(last(p1)) - 1)) and
-  in_range1((to_rep(last(p1)) - 1))) and (((i1 <= o1) and (o2 = true)) or
-  ((not (i1 <= o1)) and (o2 = false)))) and (((to_rep(first(p1)) <= i1) and
-  (result3 = o2)) or ((not (to_rep(first(p1)) <= i1)) and
-  (result3 = false)))) -> ((result3 = true) -> (((((o3 = (i1 - j1)) and
-  in_range1((i1 - j1))) and (({ int__content = result4 } = { int__content =
-  r8b }) and (r8b1 = o3))) and in_range1(r8b1)) -> (((({ int__content =
-  result5 } = { int__content = r9b }) and (r9b1 = j1)) and
-  in_range1(r9b1)) -> (((((o4 = (j1 - 1)) and in_range1((j1 - 1))) and (({
-  int__content = result6 } = { int__content = r12b }) and (r12b1 = o4))) and
-  in_range1(r12b1)) -> (((((to_rep(first(p1)) <= j2) and
-  (j2 <= to_rep(last(p1)))) and (i2 <  j2)) and (bool_eq3(p,
-  to_rep(first6(mk3(r8b2, r9b2))), to_rep(last6(mk3(r8b2, r9b2))), p,
-  to_rep(first8(mk4(0, r12b2))), to_rep(last8(mk4(0, r12b2)))) = true)) ->
-  (((((-2147483648) <= 2147483647) -> in_range1(i2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(j2))) ->
-  (((((((to_rep(first(p1)) <= j2) and (j2 <= to_rep(last(p1)))) and
-  (o7 = j2)) and (o8 = (p[o7]))) and (o9 = to_rep(o8))) and
-  ((((((to_rep(first(p1)) <= i2) and (i2 <= to_rep(last(p1)))) and
-  (o5 = i2)) and (o6 = (p[o5]))) and (o10 = to_rep(o6))) and (((o10 = o9) and
-  (result7 = true)) or ((not (o10 = o9)) and (result7 = false))))) ->
-  ((result7 = true) -> ((((o11 = (i2 + 1)) and in_range1((i2 + 1))) and
-  ((i2 = result8) and (i3 = o11))) -> in_range1((j2 + 1))))))))))))))))))))))
+  (to_rep(next__last) = to_rep(last(p1)))))
+
+axiom H13 : (result1 = i)
+
+axiom H14 : (i1 = to_rep(first(p1)))
+
+axiom H15 : in_range1(i1)
+
+axiom H16 : (((- 2147483648) <= 2147483647) -> in_range1(j))
+
+axiom H17 : (1 <  length({ elts = p; rt = p1 }))
+
+axiom H18 : ((o = (to_rep(first(p1)) + 1)) and
+  in_range1((to_rep(first(p1)) + 1)))
+
+axiom H19 : (result2 = j)
+
+axiom H20 : (j2 = o)
+
+axiom H21 : ((o1 = (to_rep(last(p1)) - 1)) and
+  in_range1((to_rep(last(p1)) - 1)))
+
+axiom H22 : (((i1 <= o1) -> (o2 = true)) and ((not (i1 <= o1)) ->
+  (o2 = false)))
+
+axiom H23 : (((to_rep(first(p1)) <= i1) -> (result3 = o2)) and
+  ((not (to_rep(first(p1)) <= i1)) -> (result3 = false)))
+
+axiom H24 : (result3 = true)
+
+axiom H25 : ((o3 = (i1 - j2)) and in_range1((i1 - j2)))
+
+axiom H26 : (result4 = r8b)
+
+axiom H27 : (r8b2 = o3)
+
+axiom H28 : in_range1(r8b2)
+
+axiom H29 : (result5 = r9b)
+
+axiom H30 : (r9b2 = j2)
+
+axiom H31 : in_range1(r9b2)
+
+axiom H32 : ((o4 = (j2 - 1)) and in_range1((j2 - 1)))
+
+axiom H33 : (result6 = r12b)
+
+axiom H34 : (r12b2 = o4)
+
+axiom H35 : in_range1(r12b2)
+
+axiom H36 : (((to_rep(first(p1)) <= j3) and (j3 <= to_rep(last(p1)))) and
+  (i2 <  j3))
+
+axiom H37 : (bool_eq3(p, to_rep(first6(mk3(r8b3, r9b3))),
+  to_rep(last6(mk3(r8b3, r9b3))), p, to_rep(first8(mk4(0, r12b3))),
+  to_rep(last8(mk4(0, r12b3)))) = true)
+
+axiom H38 : ((((- 2147483648) <= 2147483647) -> in_range1(i2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(j3)))
+
+axiom H39 : ((to_rep(first(p1)) <= j3) and (j3 <= to_rep(last(p1))))
+
+axiom H40 : (o8 = j3)
+
+axiom H41 : (o9 = (p[o8]))
+
+axiom H42 : (o10 = to_rep(o9))
+
+axiom H43 : ((to_rep(first(p1)) <= i2) and (i2 <= to_rep(last(p1))))
+
+axiom H44 : (o6 = i2)
+
+axiom H45 : (o7 = (p[o6]))
+
+axiom H46 : (o11 = to_rep(o7))
+
+axiom H47 : (((o11 = o10) -> (result7 = true)) and ((not (o11 = o10)) ->
+  (result7 = false)))
+
+axiom H48 : (result7 = true)
+
+axiom H49 : ((o12 = (i2 + 1)) and in_range1((i2 + 1)))
+
+axiom H50 : (i2 = result8)
+
+axiom H51 : (i3 = o12)
+
+ (* File "kmp.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : in_range1((j3 + 1))

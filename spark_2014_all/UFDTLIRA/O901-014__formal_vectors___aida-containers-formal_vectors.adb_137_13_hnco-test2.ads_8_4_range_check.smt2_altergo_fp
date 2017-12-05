@@ -673,7 +673,7 @@ axiom length__post_axiom1 :
 
 type element_type
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -703,6 +703,11 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container5))))) ->
   in_range7(get(container5, position)))))
 
+logic us : int
+
+logic us1 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
  (* File "aida-containers-formal_vectors.ads", line 18, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(container) = to_rep1(container1)) ->
-  in_range(to_rep(container)))
+goal WP_parameter_def : in_range(to_rep(container))

@@ -385,21 +385,64 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic r : int
+
+logic o : int
+
+logic o1 : status
+
+logic o2 : resource
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : int
+
+logic result : bool
+
+axiom H : in_range1(first_available)
+
+axiom H1 : ((not (first_available = 0)) -> ((1 <= first_available) and
+  (first_available <= 10000)))
+
+axiom H2 : ((not (first_available = 0)) -> (o = first_available))
+
+axiom H3 : ((not (first_available = 0)) -> ({ us_split_fields1 = {
+  rec__list_mod_allocator__cell__stat = o1;
+  rec__list_mod_allocator__cell__next = o2 } } = (data[o])))
+
+axiom H4 : ((not (first_available = 0)) -> (o1 = o3))
+
+axiom H5 : ((not (first_available = 0)) -> (o2 = o4))
+
+axiom H6 : ((not (first_available = 0)) -> (o5 = o3))
+
+axiom H7 : ((not (first_available = 0)) -> (o6 = to_rep1(o5)))
+
+axiom H8 : ((not (first_available = 0)) -> (((o6 = 0) -> (result = true)) and
+  ((not (o6 = 0)) -> (result = false))))
+
+axiom H9 : ((first_available = 0) -> (result = of_int(1)))
+
+axiom H10 : (result = true)
+
+axiom H11 : (1 <= r)
+
+axiom H12 : (r <= 10000)
+
+axiom H13 :
+  (to_rep1((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0)
+
+axiom H14 :
+  (not (to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))
+
  (* File "list_mod_allocator.ads", line 69, characters 0-0 *)
 goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int. forall r:int.
-  forall o:int. forall o1:status. forall o2:resource. forall o3:status.
-  forall o4:resource. forall o5:status. forall o6:int. forall result:bool.
-  (in_range1(first_available) -> ((((not (first_available = 0)) and
-  ((((((((1 <= first_available) and (first_available <= 10000)) and
-  (o = first_available)) and ({ us_split_fields1 = {
-  rec__list_mod_allocator__cell__stat = o1;
-  rec__list_mod_allocator__cell__next = o2 } } = (data[o]))) and
-  ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep1(o5))) and
-  (((o6 = 0) and (result = true)) or ((not (o6 = 0)) and
-  (result = false))))) or ((first_available = 0) and
-  (result = of_int(1)))) -> ((result = true) -> (((1 <= r) and
-  (r <= 10000)) ->
-  (((to_rep1((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__stat) = 0) and
-  (not (to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next) = 0))) ->
-  (1 <= to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next))))))))
+  (1 <= to_rep((((data[r])).us_split_fields1).rec__list_mod_allocator__cell__next))

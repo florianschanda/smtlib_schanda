@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -655,11 +655,41 @@ function my_int__ref___projection(a: my_int__ref) : my_int =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic result2 : t
+
+logic x3 : t
+
+logic x4 : t
+
+logic x5 : t
+
+axiom H : true
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = udiv(x, of_int(4)))
+
+axiom H3 : (x1 = result1)
+
+axiom H4 : (x2 = udiv(x1, of_int(4)))
+
+axiom H5 : (x2 = result2)
+
+axiom H6 : (x3 = udiv(x2, of_int(4)))
+
+axiom H7 : (x3 = x4)
+
+axiom H8 : (x5 = x3)
+
  (* File "my_div.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall result:t. forall x1:t. forall result1:t. forall x2:t.
-  forall result2:t. forall x3:t. forall x4:t. forall x5:t. ((((({
-  t__content = result } = { t__content = x }) and (x1 = udiv(x,
-  of_int(4)))) and (((x1 = result1) and (x2 = udiv(x1, of_int(4)))) and
-  ((x2 = result2) and (x3 = udiv(x2, of_int(4)))))) and ((x3 = x4) and
-  (x5 = x3))) -> (not (of_int(64) = zeros))))
+goal WP_parameter_def : (not (of_int(64) = zeros))

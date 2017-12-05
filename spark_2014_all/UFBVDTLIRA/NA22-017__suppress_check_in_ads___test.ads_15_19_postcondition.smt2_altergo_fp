@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -661,16 +661,39 @@ logic v1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test__xor2__result : t
+
+logic result : t
+
+logic test__xor2__result1 : t
+
+logic test__xor2__result2 : t
+
+logic test__xor2__result3 : t
+
+logic test__xor2__result4 : t
+
+logic test__xor2__result5 : t
+
+logic result1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (test__xor2__result1 = test__xor2__result2)
+
+axiom H3 : (test__xor2__result3 = test__xor2__result1)
+
+axiom H4 : (result = test__xor2__result)
+
+axiom H5 : (test__xor2__result1 = bw_xor(v0, v1))
+
+axiom H6 : (test__xor2__result4 = test__xor2__result2)
+
+axiom H7 : (test__xor2__result5 = test__xor2__result3)
+
+axiom H8 : (result1 = test__xor2__result4)
+
  (* File "test.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__xor2__result:t. forall result:t.
-  forall test__xor2__result1:t. forall test__xor2__result2:t.
-  forall test__xor2__result3:t. forall test__xor2__result4:t.
-  forall test__xor2__result5:t.
-  (forall result1:t. ((((((test__xor2__result1 = test__xor2__result2) and
-  (test__xor2__result3 = test__xor2__result1)) and
-  ((result = test__xor2__result) and (test__xor2__result1 = bw_xor(v0,
-  v1)))) and ((test__xor2__result4 = test__xor2__result2) and
-  (test__xor2__result5 = test__xor2__result3))) and
-  (result1 = test__xor2__result4)) -> (test__xor2__result4 = bw_xor(v0,
-  v1)))))
+goal WP_parameter_def : (test__xor2__result4 = bw_xor(v0, v1))

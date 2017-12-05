@@ -509,13 +509,33 @@ logic b : (int,(int,et1) farray) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range2(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- b]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
+logic n : int
+
+axiom H5 : (1 <= n)
+
+axiom H6 : (n <= 16)
+
+axiom H7 : (not (n = i))
+
  (* File "ar.ads", line 421, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray. ((in_range2(i) and
-  (((result = a) and (a1 = (a[i <- b]))) and ((a1 = a2) and (a3 = a1)))) ->
-  (forall n:int. (((1 <= n) and (n <= 16)) -> ((not (n = i)) ->
-  (bool_eq6((a2[n]), 5, 50, (a[n]), 5, 50) = true))))))
+goal WP_parameter_def : (bool_eq6((a2[n]), 5, 50, (a[n]), 5, 50) = true)

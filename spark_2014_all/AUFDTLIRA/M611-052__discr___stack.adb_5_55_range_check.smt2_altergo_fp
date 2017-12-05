@@ -144,7 +144,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -421,15 +421,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__stack__stack__n) = to_rep(((b).us_split_discrs1).rec__stack__stack__n)) and
-  (to_rep(((a).us_split_fields1).rec__stack__stack__top) = to_rep(((b).us_split_fields1).rec__stack__stack__top))) and
-  (bool_eq6(((a).us_split_fields1).rec__stack__stack__content,
-  ((b).us_split_fields1).rec__stack__stack__content) = true)) -> (bool_eq7(a,
-  b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__stack__stack__n) = to_rep(((b).us_split_discrs1).rec__stack__stack__n)) and
-  (to_rep(((a).us_split_fields1).rec__stack__stack__top) = to_rep(((b).us_split_fields1).rec__stack__stack__top))) and
+  ((((to_rep(((a).us_split_discrs1).rec__stack__stack__n) = to_rep(((b).us_split_discrs1).rec__stack__stack__n)) and
+  ((to_rep(((a).us_split_fields1).rec__stack__stack__top) = to_rep(((b).us_split_fields1).rec__stack__stack__top)) and
   (bool_eq6(((a).us_split_fields1).rec__stack__stack__content,
   ((b).us_split_fields1).rec__stack__stack__content) = true))) ->
+  (bool_eq7(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__stack__stack__n) = to_rep(((b).us_split_discrs1).rec__stack__stack__n)) and
+  ((to_rep(((a).us_split_fields1).rec__stack__stack__top) = to_rep(((b).us_split_fields1).rec__stack__stack__top)) and
+  (bool_eq6(((a).us_split_fields1).rec__stack__stack__content,
+  ((b).us_split_fields1).rec__stack__stack__content) = true)))) ->
   (bool_eq7(a, b) = false))))
 
 logic value__size1 : int
@@ -702,15 +702,26 @@ type t12b__ref = { t12b__content : us_t2
 
 function t12b__ref___projection(a: t12b__ref) : us_t2 = (a).t12b__content
 
+logic o : (int,integer) farray
+
+logic temp___238 : (int,integer) farray
+
+logic temp___2381 : t2
+
+axiom H : (dynamic_property1(1, to_rep(s), to_rep1(first(s3)),
+  to_rep1(last(s3))) and ((to_rep1(first(s3)) = 1) and
+  (to_rep1(last(s3)) = to_rep(s))))
+
+axiom H1 : ((1 <= (to_rep(s1) - 1)) -> (((to_rep1(first(s3)) <= 1) and
+  (1 <= to_rep1(last(s3)))) and ((to_rep1(first(s3)) <= (to_rep(s1) - 1)) and
+  ((to_rep(s1) - 1) <= to_rep1(last(s3))))))
+
+axiom H2 : (o = s2)
+
+axiom H3 : (o = temp___238)
+
+axiom H4 : (mk2(1, (to_rep(s1) - 1)) = temp___2381)
+
  (* File "stack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:(int,integer) farray. forall temp___238:(int,integer) farray.
-  forall temp___2381:t2. ((dynamic_property1(1, to_rep(s),
-  to_rep1(first(s3)), to_rep1(last(s3))) and ((to_rep1(first(s3)) = 1) and
-  (to_rep1(last(s3)) = to_rep(s)))) -> (((((1 <= (to_rep(s1) - 1)) ->
-  (((to_rep1(first(s3)) <= 1) and (1 <= to_rep1(last(s3)))) and
-  ((to_rep1(first(s3)) <= (to_rep(s1) - 1)) and
-  ((to_rep(s1) - 1) <= to_rep1(last(s3)))))) and (o = s2)) and
-  ((o = temp___238) and (mk2(1, (to_rep(s1) - 1)) = temp___2381))) ->
-  dynamic_property2(1, 2147483647, to_rep1(first4(temp___2381)),
-  to_rep1(last4(temp___2381))))))
+goal WP_parameter_def : dynamic_property2(1, 2147483647,
+  to_rep1(first4(temp___2381)), to_rep1(last4(temp___2381)))

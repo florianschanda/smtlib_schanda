@@ -1090,6 +1090,54 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+logic o22 : bool
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1100,28 +1148,35 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 60.0))
 
+axiom H1 : (le(fliteral1, x) and le(x, fliteral2))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 2.0))
+
+axiom H2 : ((o11 = add(NearestTiesToEven, x, fliteral3)) and
+  tqtisFinite(add(NearestTiesToEven, x, fliteral3)))
+
+axiom H3 : (o12 = mul(NearestTiesToEven, o11, x))
+
+axiom H4 : ((o13 = o12) and tqtisFinite(o12))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3.0))
 
+axiom H5 : (o14 = add(NearestTiesToEven, o13, fliteral4))
+
+axiom H6 : ((o15 = o14) and tqtisFinite(o14))
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 4.0))
 
+axiom H7 : (o16 = add(NearestTiesToEven, o15, fliteral5))
+
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. (tqtisFinite(x) -> ((le(fliteral1, x) and le(x, fliteral2)) ->
-  ((((((((o = add(NearestTiesToEven, x, fliteral3)) and
-  tqtisFinite(add(NearestTiesToEven, x, fliteral3))) and
-  (o1 = mul(NearestTiesToEven, o, x))) and ((o2 = o1) and
-  tqtisFinite(o1))) and (o3 = add(NearestTiesToEven, o2, fliteral4))) and
-  ((o4 = o3) and tqtisFinite(o3))) and (o5 = add(NearestTiesToEven, o4,
-  fliteral5))) -> tqtisFinite(o5)))))
+goal WP_parameter_def : tqtisFinite(o16)

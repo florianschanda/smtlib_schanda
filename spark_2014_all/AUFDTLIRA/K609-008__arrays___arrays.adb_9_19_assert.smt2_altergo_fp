@@ -316,11 +316,27 @@ axiom bool_eq_rev1 :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic obj : (int,(int,idx) farray) farray
+
+logic o : idx
+
+logic o1 : (int,idx) farray
+
+logic o2 : (int,(int,idx) farray) farray
+
+logic result : (int,(int,idx) farray) farray
+
+logic obj1 : (int,(int,idx) farray) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = ((obj[1])[1 <- o]))
+
+axiom H2 : (o2 = (obj[1 <- o1]))
+
+axiom H3 : (result = obj)
+
+axiom H4 : (obj1 = o2)
+
  (* File "arrays.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall obj:(int,(int,idx) farray) farray. forall o:idx.
-  forall o1:(int,idx) farray. forall o2:(int,(int,idx) farray) farray.
-  forall result:(int,(int,idx) farray) farray.
-  forall obj1:(int,(int,idx) farray) farray. (((((to_rep(o) = 1) and
-  (o1 = ((obj[1])[1 <- o]))) and (o2 = (obj[1 <- o1]))) and
-  ((result = obj) and (obj1 = o2))) -> (to_rep(((obj1[1])[1])) = 1)))
+goal WP_parameter_def : (to_rep(((obj1[1])[1])) = 1)

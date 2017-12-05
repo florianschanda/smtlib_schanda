@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type scaledata
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -307,13 +307,39 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic calc : int
+
+logic ans : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic calc1 : int
+
+axiom H : in_range2(val__)
+
+axiom H1 : in_range1(flatness)
+
+axiom H2 : (((0 <= val__) and (0 <  flatness)) and (flatness <= 100))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(calc))
+
+axiom H4 : ((0 <= 100) -> in_range3(ans))
+
+axiom H5 : ((o1 = (flatness + val__)) and in_range1((flatness + val__)))
+
+axiom H6 : ((o = (100 * flatness)) and in_range1((100 * flatness)))
+
+axiom H7 : (o2 = comp_div(o,o1))
+
  (* File "scale.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall calc:int. forall ans:int. forall o:int. forall o1:int.
-  forall o2:int. (in_range2(val__) -> (in_range1(flatness) ->
-  ((((0 <= val__) and (0 <  flatness)) and (flatness <= 100)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(calc)) -> (((0 <= 100) ->
-  in_range3(ans)) -> ((((o1 = (flatness + val__)) and
-  in_range1((flatness + val__))) and (((o = (100 * flatness)) and
-  in_range1((100 * flatness))) and (o2 = comp_div(o,o1)))) ->
-  in_range1(o2))))))))
+goal WP_parameter_def : in_range1(o2)

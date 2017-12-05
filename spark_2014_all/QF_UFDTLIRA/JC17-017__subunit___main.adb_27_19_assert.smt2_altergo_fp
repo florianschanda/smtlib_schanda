@@ -50,5 +50,15 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic b : bool
+
+logic b1 : bool
+
+logic b2 : bool
+
+logic b3 : bool
+
+axiom H : (b = true)
+
  (* File "main.adb", line 20, characters 0-0 *)
-goal WP_parameter_def : (forall b:bool. ((b = true) -> (b = true)))
+goal WP_parameter_def : (b = true)

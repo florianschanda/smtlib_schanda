@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -484,32 +484,62 @@ axiom remove__post_axiom :
   elts = a2; rt = a3 }, i)).rt)), to_rep1(last((remove({ elts = a2; rt = a3
   }, i)).rt)))))))
 
+logic perm__shift_perm_l__result : int
+
+logic o : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic perm__shift_perm_l__result1 : int
+
+logic perm__shift_perm_l__result2 : int
+
+logic perm__shift_perm_l__result3 : int
+
+logic perm__shift_perm_l__result4 : int
+
+logic perm__shift_perm_l__result5 : int
+
+logic result4 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : dynamic_property(1, 100, to_rep1(first(c1)), to_rep1(last(c1)))
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and ((invariant__({ elts = c; rt = c1
+  }) = true) and ((bool_eq3(a, to_rep1(first(a1)), to_rep1(last(a1)), c,
+  to_rep1(first(c1)), to_rep1(last(c1))) = true) and (is_perm({ elts = a;
+  rt = a1 }, { elts = b; rt = b1 }) = true)))))
+
+axiom H4 : (perm__shift_perm_l__result1 = perm__shift_perm_l__result2)
+
+axiom H5 : (perm__shift_perm_l__result3 = perm__shift_perm_l__result1)
+
+axiom H6 : ((o = induction_hypothesis({ elts = a; rt = a1 }, { elts = b; rt =
+  b1 }, { elts = c; rt = c1 })) and (in_range4(o) and ((of_int(o) = true) ->
+  (is_perm({ elts = c; rt = c1 }, { elts = b; rt = b1 }) = true))))
+
+axiom H7 : (result3 = perm__shift_perm_l__result)
+
+axiom H8 : (perm__shift_perm_l__result1 = o)
+
+axiom H9 : (perm__shift_perm_l__result4 = perm__shift_perm_l__result2)
+
+axiom H10 : (perm__shift_perm_l__result5 = perm__shift_perm_l__result3)
+
+axiom H11 : (result4 = perm__shift_perm_l__result4)
+
+axiom H12 : (of_int(perm__shift_perm_l__result4) = true)
+
  (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__shift_perm_l__result:int. forall o:int. forall result:int.
-  forall perm__shift_perm_l__result1:int.
-  forall perm__shift_perm_l__result2:int.
-  forall perm__shift_perm_l__result3:int.
-  forall perm__shift_perm_l__result4:int.
-  forall perm__shift_perm_l__result5:int.
-  (forall result1:int. ((dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) and (dynamic_property(1, 100, to_rep1(first(b1)),
-  to_rep1(last(b1))) and (dynamic_property(1, 100, to_rep1(first(c1)),
-  to_rep1(last(c1))) and (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((invariant__({ elts = b; rt = b1 }) = true) and ((invariant__({ elts = c;
-  rt = c1 }) = true) and ((bool_eq3(a, to_rep1(first(a1)), to_rep1(last(a1)),
-  c, to_rep1(first(c1)), to_rep1(last(c1))) = true) and (is_perm({ elts = a;
-  rt = a1 }, { elts = b; rt = b1 }) = true))))) and
-  (((((perm__shift_perm_l__result1 = perm__shift_perm_l__result2) and
-  (perm__shift_perm_l__result3 = perm__shift_perm_l__result1)) and
-  (((o = induction_hypothesis({ elts = a; rt = a1 }, { elts = b; rt = b1 }, {
-  elts = c; rt = c1 })) and (in_range4(o) and ((of_int(o) = true) ->
-  (is_perm({ elts = c; rt = c1 }, { elts = b; rt = b1 }) = true)))) and (({
-  int__content = result } = { int__content = perm__shift_perm_l__result
-  }) and (perm__shift_perm_l__result1 = o)))) and (({ int__content =
-  perm__shift_perm_l__result4 } = { int__content =
-  perm__shift_perm_l__result2 }) and
-  (perm__shift_perm_l__result5 = perm__shift_perm_l__result3))) and
-  (result1 = perm__shift_perm_l__result4)))))) ->
-  ((of_int(perm__shift_perm_l__result4) = true) -> (is_perm({ elts = c; rt =
-  c1 }, { elts = b; rt = b1 }) = true)))))
+goal WP_parameter_def : (is_perm({ elts = c; rt = c1 }, { elts = b; rt = b1
+  }) = true)

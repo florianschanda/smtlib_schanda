@@ -52,6 +52,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const r Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range2 a))
 (assert (in_range2 b))
 (assert (and (= a 6) (= b 40)))

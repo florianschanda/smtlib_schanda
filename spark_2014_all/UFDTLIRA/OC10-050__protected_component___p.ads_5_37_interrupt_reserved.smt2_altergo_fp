@@ -76,5 +76,7 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic self__ : pt
 
+logic temp___1537 : bool
+
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (forall temp___1547:bool. (temp___1547 = false))
+goal WP_parameter_def : (temp___1537 = false)

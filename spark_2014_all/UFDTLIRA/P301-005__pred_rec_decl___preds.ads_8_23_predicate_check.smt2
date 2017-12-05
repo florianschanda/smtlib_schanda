@@ -42,6 +42,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const x Int)
 (declare-const temp___319 Int)
+(declare-const temp___321 int_bad)
 (assert (dynamic_invariant i9s true false true))
 (assert (dynamic_invariant x false false true))
 (assert (and (= temp___319 0) (in_range 0)))

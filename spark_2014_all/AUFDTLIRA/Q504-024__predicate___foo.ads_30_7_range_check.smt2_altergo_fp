@@ -289,7 +289,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tmax_lsid_typeB
 
-predicate in_range3(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range3(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq5 : int, int -> bool
 
@@ -884,8 +884,17 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 axiom cpu_lsid_last__def_axiom :
   (cpu_lsid_last = foo__cpu_lsid_last__aggregate_def(3, 4))
 
+logic temp___max_id_212 : int
+
+logic us : int
+
+axiom H : ((0 <= 1) -> in_range(cpu_id))
+
+axiom H1 : (foo__cpu_lsid_last__aggregate_def(3, 4) = cpu_lsid_last)
+
+axiom H2 : in_range1(temp___max_id_212)
+
+axiom H3 : (0 <= temp___max_id_212)
+
  (* File "foo.ads", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___max_id_212:int. (((0 <= 1) -> in_range(cpu_id)) ->
-  ((foo__cpu_lsid_last__aggregate_def(3, 4) = cpu_lsid_last) ->
-  (in_range1(temp___max_id_212) -> ((0 <= temp___max_id_212) -> (0 <= 0))))))
+goal WP_parameter_def : (0 <= 0)

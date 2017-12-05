@@ -486,7 +486,7 @@ axiom length__post_axiom1 :
 
 type element_type
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -515,6 +515,24 @@ axiom get__post_axiom :
   (forall position:int [get(container, position)]. ((in_range5(position) and
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range6(get(container, position)))))
+
+logic v__split_fields : us_main_type
+
+logic us : int
+
+logic bounded__vect__append__2__container__fields : us_main_type
+
+logic result : us_main_type
+
+logic v__split_fields1 : us_main_type
+
+logic bounded__vect__append__2__container__fields1 : us_main_type
+
+logic result1 : us_main_type
+
+logic v__split_fields2 : us_main_type
+
+logic bounded__vect__append__2__container__fields2 : us_main_type
 
  (* File "a-cofove.ads", line 807, characters 0-0 *)
 goal WP_parameter_def : in_range(2)

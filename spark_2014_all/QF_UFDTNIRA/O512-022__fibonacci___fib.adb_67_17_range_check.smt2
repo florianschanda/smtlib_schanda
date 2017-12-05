@@ -53,6 +53,7 @@
 (declare-const p Int)
 (declare-const i Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const p1 Int)
 (declare-const result1 Int)

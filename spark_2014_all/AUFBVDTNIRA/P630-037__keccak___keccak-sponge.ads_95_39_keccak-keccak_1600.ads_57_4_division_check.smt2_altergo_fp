@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1956,5 +1956,295 @@ axiom def_axiom :
   (forall temp___802:int.
   ((temp___799(temp___801)[temp___802]) = of_rep5(temp___801))))
 
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : (int,byte) farray
+
+logic ctx__split_fields2 : bit_absorption_number
+
+logic ctx__split_fields3 : byte_absorption_number
+
+logic ctx__split_fields4 : rate_number
+
+logic ctx__split_fields5 : states
+
+logic o : bit_absorption_number
+
+logic o1 : map
+
+logic o2 : (int,byte) farray
+
+logic o3 : bit_absorption_number
+
+logic o4 : byte_absorption_number
+
+logic o5 : rate_number
+
+logic o6 : states
+
+logic temp___806 : map
+
+logic temp___8061 : (int,byte) farray
+
+logic temp___8062 : bit_absorption_number
+
+logic temp___8063 : byte_absorption_number
+
+logic temp___8064 : rate_number
+
+logic temp___8065 : states
+
+logic o7 : byte_absorption_number
+
+logic o8 : map
+
+logic o9 : (int,byte) farray
+
+logic o10 : bit_absorption_number
+
+logic o11 : byte_absorption_number
+
+logic o12 : rate_number
+
+logic o13 : states
+
+logic temp___808 : map
+
+logic temp___8081 : (int,byte) farray
+
+logic temp___8082 : bit_absorption_number
+
+logic temp___8083 : byte_absorption_number
+
+logic temp___8084 : rate_number
+
+logic temp___8085 : states
+
+logic o14 : int
+
+logic o15 : rate_number
+
+logic o16 : map
+
+logic o17 : (int,byte) farray
+
+logic o18 : bit_absorption_number
+
+logic o19 : byte_absorption_number
+
+logic o20 : rate_number
+
+logic o21 : states
+
+logic temp___810 : map
+
+logic temp___8101 : (int,byte) farray
+
+logic temp___8102 : bit_absorption_number
+
+logic temp___8103 : byte_absorption_number
+
+logic temp___8104 : rate_number
+
+logic temp___8105 : states
+
+logic o22 : states
+
+logic o23 : map
+
+logic o24 : (int,byte) farray
+
+logic o25 : bit_absorption_number
+
+logic o26 : byte_absorption_number
+
+logic o27 : rate_number
+
+logic o28 : states
+
+logic temp___812 : map
+
+logic temp___8121 : (int,byte) farray
+
+logic temp___8122 : bit_absorption_number
+
+logic temp___8123 : byte_absorption_number
+
+logic temp___8124 : rate_number
+
+logic temp___8125 : states
+
+logic keccak__keccak_1600__keccakf_1600__init__a : map
+
+logic result : map
+
+logic result1 : (int,byte) farray
+
+logic result2 : bit_absorption_number
+
+logic result3 : byte_absorption_number
+
+logic result4 : rate_number
+
+logic result5 : states
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : (int,byte) farray
+
+logic ctx__split_fields8 : bit_absorption_number
+
+logic ctx__split_fields9 : byte_absorption_number
+
+logic ctx__split_fields10 : rate_number
+
+logic ctx__split_fields11 : states
+
+logic result6 : map
+
+logic result7 : (int,byte) farray
+
+logic result8 : bit_absorption_number
+
+logic result9 : byte_absorption_number
+
+logic result10 : rate_number
+
+logic result11 : states
+
+logic ctx__split_fields12 : map
+
+logic ctx__split_fields13 : (int,byte) farray
+
+logic ctx__split_fields14 : bit_absorption_number
+
+logic ctx__split_fields15 : byte_absorption_number
+
+logic ctx__split_fields16 : rate_number
+
+logic ctx__split_fields17 : states
+
+logic result12 : map
+
+logic result13 : (int,byte) farray
+
+logic result14 : bit_absorption_number
+
+logic result15 : byte_absorption_number
+
+logic result16 : rate_number
+
+logic result17 : states
+
+logic ctx__split_fields18 : map
+
+logic ctx__split_fields19 : (int,byte) farray
+
+logic ctx__split_fields20 : bit_absorption_number
+
+logic ctx__split_fields21 : byte_absorption_number
+
+logic ctx__split_fields22 : rate_number
+
+logic ctx__split_fields23 : states
+
+logic result18 : map
+
+logic result19 : (int,byte) farray
+
+logic result20 : bit_absorption_number
+
+logic result21 : byte_absorption_number
+
+logic result22 : rate_number
+
+logic result23 : states
+
+logic ctx__split_fields24 : map
+
+logic ctx__split_fields25 : (int,byte) farray
+
+logic ctx__split_fields26 : bit_absorption_number
+
+logic ctx__split_fields27 : byte_absorption_number
+
+logic ctx__split_fields28 : rate_number
+
+logic ctx__split_fields29 : states
+
+logic result24 : map
+
+logic result25 : (int,byte) farray
+
+logic result26 : bit_absorption_number
+
+logic result27 : byte_absorption_number
+
+logic result28 : rate_number
+
+logic result29 : states
+
+logic ctx__split_fields30 : map
+
+logic ctx__split_fields31 : (int,byte) farray
+
+logic ctx__split_fields32 : bit_absorption_number
+
+logic ctx__split_fields33 : byte_absorption_number
+
+logic ctx__split_fields34 : rate_number
+
+logic ctx__split_fields35 : states
+
+logic result30 : map
+
+logic result31 : (int,byte) farray
+
+logic result32 : bit_absorption_number
+
+logic result33 : byte_absorption_number
+
+logic result34 : rate_number
+
+logic result35 : states
+
+logic ctx__split_fields36 : map
+
+logic ctx__split_fields37 : (int,byte) farray
+
+logic ctx__split_fields38 : bit_absorption_number
+
+logic ctx__split_fields39 : byte_absorption_number
+
+logic ctx__split_fields40 : rate_number
+
+logic ctx__split_fields41 : states
+
+logic ctx__split_fields42 : map
+
+logic ctx__split_fields43 : (int,byte) farray
+
+logic ctx__split_fields44 : bit_absorption_number
+
+logic ctx__split_fields45 : byte_absorption_number
+
+logic ctx__split_fields46 : rate_number
+
+logic ctx__split_fields47 : states
+
+logic ctx__split_fields48 : map
+
+logic ctx__split_fields49 : (int,byte) farray
+
+logic ctx__split_fields50 : bit_absorption_number
+
+logic ctx__split_fields51 : byte_absorption_number
+
+logic ctx__split_fields52 : rate_number
+
+logic ctx__split_fields53 : states
+
+axiom H : in_range1(capacity)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(capacity) -> (not (8 = 0)))
+goal WP_parameter_def : (not (8 = 0))

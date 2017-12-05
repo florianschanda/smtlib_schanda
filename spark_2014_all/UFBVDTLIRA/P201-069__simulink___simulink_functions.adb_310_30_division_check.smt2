@@ -60,6 +60,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const right (_ BitVec 16))
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(assert true)
+(assert true)
 (assert (not (= right ((_ int2bv 16) 0))))
 (assert (not (not (= right #x0000))))
 (check-sat)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tbase_index_typeB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,7 +162,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type contents_type
 
-predicate in_range3(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range3(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq4 : int, int -> bool
 
@@ -310,8 +310,25 @@ logic u : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic temp___171 : int
+
+logic o : int
+
+logic o1 : contents_type
+
+logic o2 : int
+
+axiom H : in_range2(l)
+
+axiom H1 : in_range2(u)
+
+axiom H2 : (l <= i)
+
+axiom H3 : (i <= (u - 1))
+
+axiom H4 : ((temp___171 = (i + 1)) and in_range1((i + 1)))
+
  (* File "t3q5.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall temp___171:int. (in_range2(l) -> (in_range2(u) ->
-  (((l <= i) and (i <= (u - 1))) -> (((temp___171 = (i + 1)) and
-  in_range1((i + 1))) -> (1 <= temp___171))))))
+goal WP_parameter_def : (1 <= temp___171)

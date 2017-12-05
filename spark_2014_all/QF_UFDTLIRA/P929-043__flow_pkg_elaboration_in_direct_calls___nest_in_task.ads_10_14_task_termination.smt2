@@ -30,6 +30,7 @@
 (declare-datatypes () ((priority__ref (mk_priority__ref (priority__content priority)))))
 (define-fun priority__ref___projection ((a priority__ref)) priority (priority__content a))
 (define-fun dynamic_invariant ((temp___expr_159 Int) (temp___is_init_156 Bool) (temp___skip_constant_157 Bool) (temp___do_toplevel_158 Bool)) Bool (=> (or (= temp___is_init_156 true) (<= 0 97)) (in_range temp___expr_159)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

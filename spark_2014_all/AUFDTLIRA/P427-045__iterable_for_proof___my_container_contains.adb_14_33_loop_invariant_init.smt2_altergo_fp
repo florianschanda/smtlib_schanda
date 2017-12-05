@@ -317,15 +317,107 @@ function t7b__ref___projection(a: t7b__ref) : t7b = (a).t7b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic c : (int,natural) farray
+
+logic i : int
+
+logic temp___175 : (int,natural) farray
+
+logic temp___174 : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic j : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic e : int
+
+logic o4 : bool
+
+logic c1 : (int,natural) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,natural) farray
+
+logic c2 : (int,natural) farray
+
+logic c3 : (int,natural) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,natural) farray
+
+logic c4 : (int,natural) farray
+
+logic c5 : (int,natural) farray
+
+logic i4 : int
+
+logic c6 : (int,natural) farray
+
+logic i5 : int
+
+logic c7 : (int,natural) farray
+
+logic i6 : int
+
+logic c8 : (int,natural) farray
+
+logic i7 : int
+
+logic c9 : (int,natural) farray
+
+logic i8 : int
+
+logic c10 : (int,natural) farray
+
+logic i9 : int
+
+logic c11 : (int,natural) farray
+
+logic i10 : int
+
+logic c12 : (int,natural) farray
+
+logic i11 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (1 <= i1)
+
+axiom H3 : (i1 <= 100)
+
+axiom H4 : ((to_rep((c[i1])) = 0) -> (to_rep(o) = 1))
+
+axiom H5 : ((to_rep((c[i1])) = 0) -> (o1 = (c[i1 <- o])))
+
+axiom H6 : ((to_rep((c[i1])) = 0) -> (result1 = c))
+
+axiom H7 : ((to_rep((c[i1])) = 0) -> (c2 = o1))
+
+axiom H8 : ((not (to_rep((c[i1])) = 0)) -> (c2 = c))
+
+axiom H9 : ((not (to_rep((c[i1])) = 0)) -> (c2 = c1))
+
+logic j1 : int
+
+axiom H10 : (1 <= j1)
+
+axiom H11 : (j1 <= i1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:(int,natural) farray. forall i:int. forall o:natural.
-  forall o1:(int,natural) farray. forall c1:(int,natural) farray.
-  forall result:int. forall i1:int. forall result1:(int,natural) farray.
-  forall c2:(int,natural) farray. ((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 100)) ->
-  ((((to_rep((c[i1])) = 0) and (((to_rep(o) = 1) and (o1 = (c[i1 <- o]))) and
-  (({ map__content = result1 } = { map__content = c }) and (c2 = o1)))) or
-  ((not (to_rep((c[i1])) = 0)) and ((c2 = c) and (c2 = c1)))) ->
-  (forall j:int. (((1 <= j) and (j <= i1)) ->
-  (valid(to_rep((c2[j]))) = true)))))))
+goal WP_parameter_def : (valid(to_rep((c2[j1]))) = true)

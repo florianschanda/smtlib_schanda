@@ -538,46 +538,190 @@ axiom def_axiom11 :
   ((not (temp___955 = temp___953)) -> ((temp___950(temp___952, temp___953,
   temp___954)[temp___955]) = (temp___952[temp___955])))))))
 
+logic a : (int,(int,et1) farray) farray
+
+logic j_next : int
+
+logic f : int
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : et1
+
+logic o6 : (int,et1) farray
+
+logic o7 : (int,(int,et1) farray) farray
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : (int,et1) farray
+
+logic o11 : (int,et1) farray
+
+logic o12 : int
+
+logic temp___4589 : (int,(int,et1) farray) farray
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : (int,et1) farray
+
+logic o16 : (int,et1) farray
+
+logic o17 : int
+
+logic temp___4584 : (int,(int,et1) farray) farray
+
+logic result : (int,(int,et1) farray) farray
+
+logic a1 : (int,(int,et1) farray) farray
+
+logic result1 : int
+
+logic j_next1 : int
+
+logic result2 : int
+
+logic j_next2 : int
+
+logic result3 : int
+
+logic f1 : int
+
+logic result4 : int
+
+logic f2 : int
+
+logic result5 : (int,(int,et1) farray) farray
+
+logic a2 : (int,(int,et1) farray) farray
+
+logic a3 : (int,(int,et1) farray) farray
+
+logic j_next3 : int
+
+logic f3 : int
+
+logic a4 : (int,(int,et1) farray) farray
+
+logic j_next4 : int
+
+logic f4 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : in_range(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range2(e)
+
+axiom H3 : ((5 <= 50) -> in_range1(j_next))
+
+axiom H4 : ((0 <= 99) -> in_range2(f))
+
+axiom H5 : (to_rep(o) = e)
+
+axiom H6 : (o1 = ((a[j])[i <- o]))
+
+axiom H7 : (o2 = (a[j <- o1]))
+
+axiom H8 : (result = a)
+
+axiom H9 : (a1 = o2)
+
+axiom H10 : ((j = 50) -> (result1 = j_next))
+
+axiom H11 : ((j = 50) -> (j_next1 = 5))
+
+axiom H12 : ((not (j = 50)) -> ((o3 = (j + 1)) and in_range1((j + 1))))
+
+axiom H13 : ((not (j = 50)) -> (result2 = j_next))
+
+axiom H14 : ((not (j = 50)) -> (j_next2 = o3))
+
+axiom H15 : ((not (j = 50)) -> (j_next1 = j_next2))
+
+axiom H16 : ((e = 0) -> (result3 = f))
+
+axiom H17 : ((e = 0) -> (f1 = 99))
+
+axiom H18 : ((not (e = 0)) -> ((o4 = (e - 1)) and in_range2((e - 1))))
+
+axiom H19 : ((not (e = 0)) -> (result4 = f))
+
+axiom H20 : ((not (e = 0)) -> (f2 = o4))
+
+axiom H21 : ((not (e = 0)) -> (f1 = f2))
+
+axiom H22 : (to_rep(o5) = f1)
+
+axiom H23 : (o6 = ((a1[j_next1])[i <- o5]))
+
+axiom H24 : (o7 = (a1[j_next1 <- o6]))
+
+axiom H25 : (a1 = result5)
+
+axiom H26 : (a2 = o7)
+
+axiom H27 : (f1 = f3)
+
+axiom H28 : (j_next1 = j_next3)
+
+axiom H29 : (a2 = a3)
+
+axiom H30 : (f4 = f1)
+
+axiom H31 : (j_next4 = j_next1)
+
+axiom H32 : (a4 = a2)
+
+axiom H33 : (j <  50)
+
+axiom H34 : ((0 <  e) -> ((o14 = (e - 1)) and in_range2((e - 1))))
+
+axiom H35 : ((0 <  e) -> ((5 <= (j + 1)) and ((j + 1) <= 50)))
+
+axiom H36 : ((0 <  e) -> (o13 = (j + 1)))
+
+axiom H37 : ((0 <  e) -> (o15 = (a[o13])))
+
+axiom H38 : ((0 <  e) -> (o16 = temp___881(o15, i, o14)))
+
+axiom H39 : ((0 <  e) -> ((o17 = (j + 1)) and in_range1((j + 1))))
+
+axiom H40 : ((0 <  e) -> (temp___4584 = temp___866(a, j, temp___874((a[j]),
+  i, e), o17, o16)))
+
+axiom H41 : ((0 <  e) -> (result7 = bool_eq5(a3, 5, 50, temp___4584, 5, 50)))
+
+axiom H42 : ((not (0 <  e)) -> (result7 = false))
+
+axiom H43 : (not (result7 = true))
+
+axiom H44 : (e = 0)
+
+axiom H45 : ((5 <= (j + 1)) and ((j + 1) <= 50))
+
+axiom H46 : (o9 = (j + 1))
+
+axiom H47 : (o10 = (a[o9]))
+
+axiom H48 : (o11 = temp___904(o10, i, 99))
+
  (* File "ar.ads", line 319, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,et1) farray) farray. forall j_next:int. forall f:int.
-  forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray. forall o3:int. forall o4:int.
-  forall o5:et1. forall o6:(int,et1) farray.
-  forall o7:(int,(int,et1) farray) farray. forall o8:int.
-  forall o9:(int,et1) farray. forall o10:(int,et1) farray. forall o11:int.
-  forall o12:int. forall o13:(int,et1) farray. forall o14:(int,et1) farray.
-  forall o15:int. forall temp___4584:(int,(int,et1) farray) farray.
-  forall result:(int,(int,et1) farray) farray.
-  forall a1:(int,(int,et1) farray) farray. forall result1:int.
-  forall j_next1:int. forall result2:int. forall j_next2:int.
-  forall result3:int. forall f1:int. forall result4:int. forall f2:int.
-  forall result5:(int,(int,et1) farray) farray.
-  forall a2:(int,(int,et1) farray) farray.
-  forall a3:(int,(int,et1) farray) farray. forall j_next3:int. forall f3:int.
-  forall a4:(int,(int,et1) farray) farray. forall j_next4:int. forall f4:int.
-  forall result6:bool. (in_range(i) -> (in_range1(j) -> (in_range2(e) ->
-  (((((5 <= 50) -> in_range1(j_next)) and (((0 <= 99) -> in_range2(f)) and
-  (((((to_rep(o) = e) and (o1 = ((a[j])[i <- o]))) and
-  (o2 = (a[j <- o1]))) and (({ map__content1 = result } = { map__content1 = a
-  }) and (a1 = o2))) and ((((j = 50) and (({ int__content = result1 } = {
-  int__content = j_next }) and (j_next1 = 5))) or ((not (j = 50)) and
-  ((((o3 = (j + 1)) and in_range1((j + 1))) and (({ int__content = result2
-  } = { int__content = j_next }) and (j_next2 = o3))) and
-  (j_next1 = j_next2)))) and ((((e = 0) and (({ int__content = result3 } = {
-  int__content = f }) and (f1 = 99))) or ((not (e = 0)) and
-  ((((o4 = (e - 1)) and in_range2((e - 1))) and (({ int__content = result4
-  } = { int__content = f }) and (f2 = o4))) and (f1 = f2)))) and
-  ((((to_rep(o5) = f1) and (o6 = ((a1[j_next1])[i <- o5]))) and
-  (o7 = (a1[j_next1 <- o6]))) and ((a1 = result5) and (a2 = o7)))))))) and
-  (((f1 = f3) and ((j_next1 = j_next3) and (a2 = a3))) and ((f4 = f1) and
-  ((j_next4 = j_next1) and (a4 = a2))))) -> ((j <  50) -> ((((0 <  e) and
-  (((((o12 = (e - 1)) and in_range2((e - 1))) and (((((5 <= (j + 1)) and
-  ((j + 1) <= 50)) and (o11 = (j + 1))) and (o13 = (a[o11]))) and
-  (o14 = temp___881(o13, i, o12)))) and (((o15 = (j + 1)) and
-  in_range1((j + 1))) and (temp___4584 = temp___866(a, j, temp___874((a[j]),
-  i, e), o15, o14)))) and (result6 = bool_eq5(a3, 5, 50, temp___4584, 5,
-  50)))) or ((not (0 <  e)) and (result6 = false))) ->
-  ((not (result6 = true)) -> ((e = 0) -> ((((((5 <= (j + 1)) and
-  ((j + 1) <= 50)) and (o8 = (j + 1))) and (o9 = (a[o8]))) and
-  (o10 = temp___904(o9, i, 99))) -> in_range1((j + 1))))))))))))
+goal WP_parameter_def : in_range1((j + 1))

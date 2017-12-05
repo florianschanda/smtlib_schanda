@@ -326,10 +326,20 @@ axiom rte_ok__def_axiom :
   (forall default_init__n:int [rte_ok(x, default_init__n)]. ((rte_ok(x,
   default_init__n) = true) <-> (to_rep((x[1])) = 0))))
 
+logic n : int
+
+logic r : (int,nat) farray
+
+axiom H : in_range1(n)
+
+axiom H1 :
+  ((forall temp___192:int. (((1 <= temp___192) and (temp___192 <= 3)) ->
+   ((to_rep((r[temp___192])) = 0) and
+   (nat_ok(to_rep((r[temp___192]))) = true)))) and (rte_ok(r, n) = true))
+
+axiom H2 : (1 <= n)
+
+axiom H3 : (n <= 3)
+
  (* File "default_init.adb", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall r:(int,nat) farray. (in_range1(n) ->
-  (((forall temp___192:int. (((1 <= temp___192) and (temp___192 <= 3)) ->
-    ((to_rep((r[temp___192])) = 0) and
-    (nat_ok(to_rep((r[temp___192]))) = true)))) and
-  (rte_ok(r, n) = true)) -> (((1 <= n) and (n <= 3)) -> (1 <= n)))))
+goal WP_parameter_def : (1 <= n)

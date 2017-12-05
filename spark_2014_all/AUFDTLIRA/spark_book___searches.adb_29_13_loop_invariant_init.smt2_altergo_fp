@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -360,28 +360,159 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "searches.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall position:int. forall o:int. forall o1:int. forall o2:integer.
-  forall o3:int. forall o4:int. forall result:int. forall position1:int.
-  forall result1:bool. forall result2:int. forall position2:int.
-  (dynamic_property(1, 2147483647, to_rep(first(list1)),
-  to_rep(last(list1))) -> (in_range1(value) -> (((1 <= 2147483647) ->
-  in_range2(position)) -> (((0 <  length({ elts = list; rt = list1 })) and
+logic found : bool
+
+logic position : int
+
+logic j : int
+
+logic k : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___160 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic j1 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic j2 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic result : int
+
+logic position1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic position2 : int
+
+logic position3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic position4 : int
+
+logic position5 : int
+
+logic position6 : int
+
+logic position7 : int
+
+logic position8 : int
+
+logic position9 : int
+
+logic position10 : int
+
+logic position11 : int
+
+logic position12 : int
+
+logic result6 : bool
+
+logic found1 : bool
+
+logic result7 : int
+
+logic position13 : int
+
+logic position14 : int
+
+logic position15 : int
+
+logic found2 : bool
+
+logic position16 : int
+
+logic found3 : bool
+
+logic position17 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(list1)),
+  to_rep(last(list1)))
+
+axiom H1 : in_range1(value)
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(position))
+
+axiom H3 : ((0 <  length({ elts = list; rt = list1 })) and
   ((to_rep(last(list1)) <  2147483647) and
-  (forall j:int. (((to_rep(first(list1)) <= j) and
-  (j <= to_rep(last(list1)))) ->
-  (forall k:int. (((to_rep(first(list1)) <= k) and
-  (k <= to_rep(last(list1)))) -> ((to_rep((list[j])) = to_rep((list[k]))) ->
-  (j = k)))))))) -> ((((o = to_rep(first(list1))) and
-  in_range2(to_rep(first(list1)))) and (({ int__content = result } = {
-  int__content = position }) and (position1 = o))) ->
-  (((((to_rep(last(list1)) <  position1) and (result1 = true)) or
-  ((not (to_rep(last(list1)) <  position1)) and
-  ((((((to_rep(first(list1)) <= position1) and
-  (position1 <= to_rep(last(list1)))) and (o1 = position1)) and
-  (o2 = (list[o1]))) and (o3 = to_rep(o2))) and (((o3 = value) and
-  (result1 = true)) or ((not (o3 = value)) and (result1 = false)))))) and
-  (not (result1 = true))) -> ((((o4 = (position1 + 1)) and
-  in_range1((position1 + 1))) and ((position1 = result2) and
-  (position2 = o4))) -> (to_rep(first(list1)) <= position2)))))))))
+  (forall j3:int. (((to_rep(first(list1)) <= j3) and
+  (j3 <= to_rep(last(list1)))) ->
+  (forall k1:int. (((to_rep(first(list1)) <= k1) and
+  (k1 <= to_rep(last(list1)))) ->
+  ((to_rep((list[j3])) = to_rep((list[k1]))) -> (j3 = k1))))))))
+
+axiom H4 : ((o3 = to_rep(first(list1))) and in_range2(to_rep(first(list1))))
+
+axiom H5 : (result = position)
+
+axiom H6 : (position1 = o3)
+
+axiom H7 : ((to_rep(last(list1)) <  position1) -> (result1 = true))
+
+axiom H8 : ((not (to_rep(last(list1)) <  position1)) ->
+  ((to_rep(first(list1)) <= position1) and
+  (position1 <= to_rep(last(list1)))))
+
+axiom H9 : ((not (to_rep(last(list1)) <  position1)) -> (o4 = position1))
+
+axiom H10 : ((not (to_rep(last(list1)) <  position1)) -> (o5 = (list[o4])))
+
+axiom H11 : ((not (to_rep(last(list1)) <  position1)) -> (o6 = to_rep(o5)))
+
+axiom H12 : ((not (to_rep(last(list1)) <  position1)) -> (((o6 = value) ->
+  (result1 = true)) and ((not (o6 = value)) -> (result1 = false))))
+
+axiom H13 : (not (result1 = true))
+
+axiom H14 : ((o7 = (position1 + 1)) and in_range1((position1 + 1)))
+
+axiom H15 : (position1 = result2)
+
+axiom H16 : (position2 = o7)
+
+ (* File "searches.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(list1)) <= position2)

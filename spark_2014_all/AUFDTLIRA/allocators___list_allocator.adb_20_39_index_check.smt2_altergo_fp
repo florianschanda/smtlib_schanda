@@ -358,5 +358,9 @@ logic res : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range(res)
+
+axiom H1 : (not (res = 0))
+
  (* File "list_allocator.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : (in_range(res) -> ((not (res = 0)) -> (1 <= res)))
+goal WP_parameter_def : (1 <= res)

@@ -163,6 +163,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_159 Int) (temp___is_init_156 Bool) (temp___skip_constant_157 Bool) (temp___do_toplevel_158 Bool)) Bool (=> (or (= temp___is_init_156 true) (<= 1 3)) (in_range1 temp___expr_159)))
 (declare-const x__split_fields integer)
 (declare-const z__split_fields integer)
+(declare-const a (Array Int us_rep))
+(declare-const c (Array Int us_rep2))
 (assert (= (bool_eq (mk___rep (mk___split_fields x__split_fields)) (mk___rep (mk___split_fields x__split_fields))) true))
 (assert (not (= (oeq (mk___rep2 (mk___split_fields2 z__split_fields)) (mk___rep2 (mk___split_fields2 z__split_fields))) true)))
 (check-sat)

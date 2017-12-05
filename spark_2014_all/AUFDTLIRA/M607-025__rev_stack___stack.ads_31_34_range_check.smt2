@@ -239,6 +239,7 @@
 (declare-const o11 Int)
 (declare-const o12 Int)
 (declare-const o13 Int)
+(declare-const o14 Int)
 (declare-const result r1)
 (declare-const result1 (Array Int integer))
 (declare-const s__split_fields2 r1)

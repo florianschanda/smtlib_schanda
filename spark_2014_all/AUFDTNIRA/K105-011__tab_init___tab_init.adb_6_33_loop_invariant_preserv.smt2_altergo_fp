@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -300,25 +300,100 @@ function t1b__ref___projection(a1: t1b__ref) : t1b = (a1).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "tab_init.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t:(int,integer) farray. forall i:int. forall o:int.
-  forall o1:integer. forall o2:(int,integer) farray. forall o3:int.
-  forall o4:integer. forall o5:(int,integer) farray. forall result:int.
-  forall i1:int. forall result1:(int,integer) farray.
-  forall t1:(int,integer) farray. forall t2:(int,integer) farray.
-  forall i2:int. forall result2:int. forall i3:int.
-  forall result3:(int,integer) farray. forall t3:(int,integer) farray.
-  (in_range1(a) -> (((result = i) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= 10)) -> ((((((o = (a * i1)) and in_range1((a * i1))) and
-  (to_rep(o1) = o)) and (o2 = (t[i1 <- o1]))) and ((result1 = t) and
-  (t1 = o2))) ->
-  ((forall j:int. (((1 <= j) and (j <= i2)) -> (to_rep((t2[j])) = (a * j)))) ->
-  ((((((1 <= 10) -> in_range3(i2)) and
+logic t : (int,integer) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic t1 : (int,integer) farray
+
+logic t2 : (int,integer) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,integer) farray
+
+logic t3 : (int,integer) farray
+
+axiom H : in_range1(a)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (1 <= i1)
+
+axiom H4 : (i1 <= 10)
+
+axiom H5 : ((o = (a * i1)) and in_range1((a * i1)))
+
+axiom H6 : (to_rep(o1) = o)
+
+axiom H7 : (o2 = (t[i1 <- o1]))
+
+axiom H8 : (result1 = t)
+
+axiom H9 : (t1 = o2)
+
+axiom H10 :
+  (forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+  (to_rep((t2[j1])) = (a * j1))))
+
+axiom H11 : ((((1 <= 10) -> in_range3(i2)) and
   (forall temp___151:int. (((1 <= temp___151) and (temp___151 <= 10)) ->
   ((i2 <  temp___151) -> ((t2[temp___151]) = (t[temp___151])))))) and
-  ((1 <= i2) and (i2 <= 10))) and ((to_rep((t2[i2])) = (a * i2)) and
-  ((not (i2 = 10)) and (((i2 = result2) and (i3 = (i2 + 1))) and
-  (((((o3 = (a * i3)) and in_range1((a * i3))) and (to_rep(o4) = o3)) and
-  (o5 = (t2[i3 <- o4]))) and ((result3 = t2) and (t3 = o5))))))) ->
-  (forall j:int. (((1 <= j) and (j <= i3)) -> (to_rep((t3[j])) = (a * j)))))))))))
+  ((1 <= i2) and (i2 <= 10)))
+
+axiom H12 : (to_rep((t2[i2])) = (a * i2))
+
+axiom H13 : (not (i2 = 10))
+
+axiom H14 : (i2 = result2)
+
+axiom H15 : (i3 = (i2 + 1))
+
+axiom H16 : ((o5 = (a * i3)) and in_range1((a * i3)))
+
+axiom H17 : (to_rep(o6) = o5)
+
+axiom H18 : (o7 = (t2[i3 <- o6]))
+
+axiom H19 : (result3 = t2)
+
+axiom H20 : (t3 = o7)
+
+logic j1 : int
+
+axiom H21 : (1 <= j1)
+
+axiom H22 : (j1 <= i3)
+
+ (* File "tab_init.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (to_rep((t3[j1])) = (a * j1))

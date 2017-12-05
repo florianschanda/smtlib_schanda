@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -396,46 +396,154 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic found : bool
+
+logic result__ : int
+
+logic low_index : int
+
+logic mid_index : int
+
+logic high_index : int
+
+logic j : int
+
+logic k : int
+
+logic result : int
+
+logic low_index1 : int
+
+logic result1 : int
+
+logic high_index1 : int
+
+logic result2 : bool
+
+logic found1 : bool
+
+logic result3 : int
+
+logic result__1 : int
+
+logic result4 : int
+
+logic mid_index1 : int
+
+logic found2 : bool
+
+logic result__2 : int
+
+logic found3 : bool
+
+logic result__3 : int
+
+logic low_index2 : int
+
+logic mid_index2 : int
+
+logic high_index2 : int
+
+logic result5 : int
+
+logic low_index3 : int
+
+logic result6 : int
+
+logic high_index3 : int
+
+logic result7 : int
+
+logic mid_index3 : int
+
+logic found4 : bool
+
+logic result__4 : int
+
+axiom H : in_range1(search_item)
+
+axiom H1 : ((1 <= 100) -> in_range2(result__))
+
+axiom H2 :
+  (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
+  (forall k1:int. ((((j1 + 1) <= k1) and (k1 <= 100)) ->
+  (to_rep((items[j1])) <= to_rep((items[k1])))))))
+
+axiom H3 : (result = low_index)
+
+axiom H4 : (low_index1 = 1)
+
+axiom H5 : in_range2(low_index1)
+
+axiom H6 : ((1 <= 100) -> in_range2(mid_index))
+
+axiom H7 : (result1 = high_index)
+
+axiom H8 : (high_index1 = 100)
+
+axiom H9 : in_range2(high_index1)
+
+axiom H10 : (result2 = found)
+
+axiom H11 : (found1 = of_int(0))
+
+axiom H12 : (result3 = result__)
+
+axiom H13 : (result__1 = 1)
+
+axiom H14 : (not (search_item <  to_rep((items[low_index1]))))
+
+axiom H15 : (not (to_rep((items[high_index1])) <  search_item))
+
+axiom H16 : (result4 = mid_index)
+
+axiom H17 : (mid_index1 = comp_div((low_index1 + high_index1),2))
+
+axiom H18 : (not (search_item = to_rep((items[mid_index1]))))
+
+axiom H19 : (result__2 = result__1)
+
+axiom H20 : (found2 = found1)
+
+axiom H21 : (not (low_index1 = high_index1))
+
+axiom H22 : (to_rep((items[low_index2])) <= search_item)
+
+axiom H23 : (search_item <= to_rep((items[high_index2])))
+
+axiom H24 : (((((1 <= 100) -> in_range2(result__3)) and ((1 <= 100) ->
+  in_range2(low_index2))) and ((1 <= 100) -> in_range2(mid_index2))) and
+  ((1 <= 100) -> in_range2(high_index2)))
+
+axiom H25 : ((to_rep((items[mid_index2])) <  search_item) ->
+  (low_index2 = result5))
+
+axiom H26 : ((to_rep((items[mid_index2])) <  search_item) ->
+  (low_index3 = mid_index2))
+
+axiom H27 : ((to_rep((items[mid_index2])) <  search_item) ->
+  (high_index3 = high_index2))
+
+axiom H28 : ((not (to_rep((items[mid_index2])) <  search_item)) ->
+  (high_index2 = result6))
+
+axiom H29 : ((not (to_rep((items[mid_index2])) <  search_item)) ->
+  (high_index3 = mid_index2))
+
+axiom H30 : ((not (to_rep((items[mid_index2])) <  search_item)) ->
+  (low_index3 = low_index2))
+
+axiom H31 : (result7 = mid_index2)
+
+axiom H32 : (mid_index3 = comp_div((low_index3 + high_index3),2))
+
+axiom H33 : (not (search_item = to_rep((items[mid_index3]))))
+
+axiom H34 : (result__4 = result__3)
+
+axiom H35 : (found4 = found3)
+
+axiom H36 : (not (low_index3 = high_index3))
+
  (* File "searchers.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found:bool. forall result__:int. forall low_index:int.
-  forall mid_index:int. forall high_index:int. forall result:int.
-  forall low_index1:int. forall result1:int. forall high_index1:int.
-  forall result2:bool. forall found1:bool. forall result3:int.
-  forall result__1:int. forall result4:int. forall mid_index1:int.
-  forall found2:bool. forall result__2:int. forall found3:bool.
-  forall result__3:int. forall low_index2:int. forall mid_index2:int.
-  forall high_index2:int. forall result5:int. forall low_index3:int.
-  forall result6:int. forall high_index3:int. forall result7:int.
-  forall mid_index3:int. forall found4:bool. forall result__4:int.
-  (in_range1(search_item) -> (((1 <= 100) -> in_range2(result__)) ->
-  ((forall j:int. (((1 <= j) and (j <= 100)) ->
-   (forall k:int. ((((j + 1) <= k) and (k <= 100)) ->
-   (to_rep((items[j])) <= to_rep((items[k]))))))) ->
-  (((result = low_index) and (low_index1 = 1)) -> (in_range2(low_index1) ->
-  (((1 <= 100) -> in_range2(mid_index)) -> (((result1 = high_index) and
-  (high_index1 = 100)) -> (in_range2(high_index1) -> (((result2 = found) and
-  (found1 = of_int(0))) -> (((result3 = result__) and (result__1 = 1)) ->
-  ((not ((not (search_item <  to_rep((items[low_index1])))) ->
-  (to_rep((items[high_index1])) <  search_item))) ->
-  (((result4 = mid_index) and
-  (mid_index1 = comp_div((low_index1 + high_index1),2))) ->
-  (((not (search_item = to_rep((items[mid_index1])))) and
-  ((result__2 = result__1) and (found2 = found1))) ->
-  ((not (low_index1 = high_index1)) ->
-  (((to_rep((items[low_index2])) <= search_item) and
-  (search_item <= to_rep((items[high_index2])))) -> (((((((1 <= 100) ->
-  in_range2(result__3)) and ((1 <= 100) -> in_range2(low_index2))) and
-  ((1 <= 100) -> in_range2(mid_index2))) and ((1 <= 100) ->
-  in_range2(high_index2))) and
-  ((((to_rep((items[mid_index2])) <  search_item) and
-  (((low_index2 = result5) and (low_index3 = mid_index2)) and
-  (high_index3 = high_index2))) or
-  ((not (to_rep((items[mid_index2])) <  search_item)) and
-  (((high_index2 = result6) and (high_index3 = mid_index2)) and
-  (low_index3 = low_index2)))) and (((result7 = mid_index2) and
-  (mid_index3 = comp_div((low_index3 + high_index3),2))) and
-  (((not (search_item = to_rep((items[mid_index3])))) and
-  ((result__4 = result__3) and (found4 = found3))) and
-  (not (low_index3 = high_index3)))))) ->
-  (search_item <= to_rep((items[high_index3]))))))))))))))))))))
+goal WP_parameter_def : (search_item <= to_rep((items[high_index3])))

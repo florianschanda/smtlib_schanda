@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -279,7 +279,19 @@ logic v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v : int
+
+axiom H : in_range1(v1)
+
+axiom H1 : in_range1(v2)
+
+axiom H2 : (0 <  v1)
+
+axiom H3 : (0 <  v2)
+
+axiom H4 : (2 <= v)
+
+axiom H5 : (v <= min(v1, v2))
+
  (* File "prime_and_coprime_numbers.ads", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:int. (in_range1(v1) -> (in_range1(v2) -> (((0 <  v1) and
-  (0 <  v2)) -> (((2 <= v) and (v <= min(v1, v2))) -> (not (v = 0)))))))
+goal WP_parameter_def : (not (v = 0))

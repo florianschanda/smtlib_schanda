@@ -137,31 +137,52 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "sub.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sub__remove_absent__result:int. forall result:int.
-  forall sub__remove_absent__result1:int. forall result1:int.
-  forall sub__remove_absent__result2:int.
-  forall sub__remove_absent__result3:int.
-  forall sub__remove_absent__result4:int.
-  forall sub__remove_absent__result5:int.
-  forall sub__remove_absent__result6:int.
-  forall sub__remove_absent__result7:int.
-  forall sub__remove_absent__result8:int.
-  (forall result2:int. ((in_range1(x) and
-  (((((sub__remove_absent__result3 = sub__remove_absent__result5) and
+logic sub__remove_absent__result : int
+
+logic result : int
+
+logic sub__remove_absent__result1 : int
+
+logic result1 : int
+
+logic sub__remove_absent__result2 : int
+
+logic sub__remove_absent__result3 : int
+
+logic sub__remove_absent__result4 : int
+
+logic sub__remove_absent__result5 : int
+
+logic sub__remove_absent__result6 : int
+
+logic sub__remove_absent__result7 : int
+
+logic sub__remove_absent__result8 : int
+
+logic result2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (((sub__remove_absent__result5 = sub__remove_absent__result3) and
   (sub__remove_absent__result6 = sub__remove_absent__result4)) and
-  ((((not (x = 0)) -> (x = 1)) and
+  ((((not (x = 0)) -> (x = 1)) ->
   (((sub__remove_absent__result1 = sub__remove_absent__result3) and
   (sub__remove_absent__result4 = sub__remove_absent__result1)) and
   ((result = sub__remove_absent__result) and
-  (sub__remove_absent__result1 = 1)))) or ((not ((not (x = 0)) ->
-  (x = 1))) and
+  (sub__remove_absent__result1 = 1)))) and ((not ((not (x = 0)) ->
+  (x = 1))) ->
   (((sub__remove_absent__result2 = sub__remove_absent__result3) and
   (sub__remove_absent__result4 = sub__remove_absent__result2)) and
   ((result1 = sub__remove_absent__result) and
-  (sub__remove_absent__result2 = 2)))))) and
-  ((sub__remove_absent__result7 = sub__remove_absent__result5) and
-  (sub__remove_absent__result8 = sub__remove_absent__result6))) and
-  (result2 = sub__remove_absent__result7))) -> ((x = 2) ->
-  (sub__remove_absent__result7 = 2)))))
+  (sub__remove_absent__result2 = 2))))))
+
+axiom H2 : (sub__remove_absent__result7 = sub__remove_absent__result5)
+
+axiom H3 : (sub__remove_absent__result8 = sub__remove_absent__result6)
+
+axiom H4 : (result2 = sub__remove_absent__result7)
+
+axiom H5 : (x = 2)
+
+ (* File "sub.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (sub__remove_absent__result7 = 2)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -686,7 +686,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1502,13 +1502,45 @@ logic bit_len : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : byte
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : byte
+
+logic data : (int,byte) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H1 : in_range2(bit_len)
+
+axiom H2 : (bit_len <= 1600)
+
+axiom H3 : ((o1 = (bit_len + 7)) and in_range1((bit_len + 7)))
+
+axiom H4 : (o2 = comp_div(o1,8))
+
+axiom H5 : ((to_rep(data__first) <= to_rep(data__last)) ->
+  (o = ((to_rep(data__last) - to_rep(data__first)) + 1)))
+
+axiom H6 : ((not (to_rep(data__first) <= to_rep(data__last))) -> (o = 0))
+
  (* File "keccak-keccakf-byte_lanes.adb", line 90, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. (dynamic_property(0,
-  2147483647, to_rep(data__first), to_rep(data__last)) ->
-  (in_range2(bit_len) -> ((bit_len <= 1600) -> ((((o1 = (bit_len + 7)) and
-  in_range1((bit_len + 7))) and (o2 = comp_div(o1,8))) ->
-  ((((to_rep(data__first) <= to_rep(data__last)) and
-  (o = ((to_rep(data__last) - to_rep(data__first)) + 1))) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and (o = 0))) ->
-  in_range1(o)))))))
+goal WP_parameter_def : in_range1(o)

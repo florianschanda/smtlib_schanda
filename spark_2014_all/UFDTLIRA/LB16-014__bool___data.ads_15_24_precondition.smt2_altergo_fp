@@ -407,75 +407,119 @@ type t8s__ref = { t8s__content : us_rep
 
 function t8s__ref___projection(a: t8s__ref) : us_rep = (a).t8s__content
 
- (* File "data.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data__create_type__result:t_data_type.
-  forall data__create_type__result1:t_nat32.
-  forall data__create_type__result2:bool. forall o:t_data_type.
-  forall o1:t_nat32. forall o2:t_nat32. forall o3:t_data_type.
-  forall o4:t_data_type. forall o5:t_nat32. forall o6:bool.
-  forall result:t_data_type. forall result1:t_nat32. forall result2:bool.
-  forall data__create_type__result3:t_data_type.
-  forall data__create_type__result4:t_nat32.
-  forall data__create_type__result5:bool.
-  forall data__create_type__result6:t_data_type.
-  forall data__create_type__result7:t_nat32.
-  forall data__create_type__result8:bool.
-  forall data__create_type__result9:t_data_type.
-  forall data__create_type__result10:t_nat32.
-  forall data__create_type__result11:bool.
-  forall data__create_type__result12:t_data_type.
-  forall data__create_type__result13:t_nat32.
-  forall data__create_type__result14:bool.
-  forall data__create_type__result15:t_data_type.
-  forall data__create_type__result16:t_nat32.
-  forall data__create_type__result17:bool. forall result3:bool.
-  (in_range(min) ->
-  ((((((data__create_type__result6 = data__create_type__result3) and
-  ((data__create_type__result7 = data__create_type__result4) and
-  (data__create_type__result8 = data__create_type__result5))) and ({
-  us_split_discrs1 = { rec__data__t_strong_data_type__data_type =
-  data__create_type__result9 }; us_split_fields1 = {
-  rec__data__t_strong_data_type__min_nat32 = data__create_type__result10 };
-  attr__constrained = data__create_type__result11 } = { us_split_discrs1 = {
-  rec__data__t_strong_data_type__data_type = data__create_type__result3 };
-  us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
-  data__create_type__result4 }; attr__constrained =
-  data__create_type__result5 })) and ((((to_rep(o1) = min) and (o1 = o2)) and
-  (((to_rep1(o) = 1) and (o = o3)) and ((o4 = o3) and ((o5 = o2) and
-  (true = o6))))) and (({ t_strong_data_type__content = { us_split_discrs1 =
-  { rec__data__t_strong_data_type__data_type = result }; us_split_fields1 = {
-  rec__data__t_strong_data_type__min_nat32 = result1 }; attr__constrained =
-  result2 } } = { t_strong_data_type__content = { us_split_discrs1 = {
-  rec__data__t_strong_data_type__data_type = data__create_type__result };
-  us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
-  data__create_type__result1 }; attr__constrained =
-  data__create_type__result2 } }) and ({ us_split_discrs1 = {
-  rec__data__t_strong_data_type__data_type = data__create_type__result3 };
-  us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
-  data__create_type__result4 }; attr__constrained =
-  data__create_type__result5 } = { us_split_discrs1 = {
-  rec__data__t_strong_data_type__data_type = o4 }; us_split_fields1 = {
-  rec__data__t_strong_data_type__min_nat32 = o5 }; attr__constrained = o6
-  })))) and (({ t_strong_data_type__content = { us_split_discrs1 = {
-  rec__data__t_strong_data_type__data_type = data__create_type__result12 };
-  us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
-  data__create_type__result13 }; attr__constrained =
-  data__create_type__result14 } } = { t_strong_data_type__content = {
-  us_split_discrs1 = { rec__data__t_strong_data_type__data_type =
-  data__create_type__result6 }; us_split_fields1 = {
-  rec__data__t_strong_data_type__min_nat32 = data__create_type__result7 };
-  attr__constrained = data__create_type__result8 } }) and
-  ((data__create_type__result15 = data__create_type__result9) and
+logic data__create_type__result : t_data_type
+
+logic data__create_type__result1 : t_nat32
+
+logic data__create_type__result2 : bool
+
+logic o : t_data_type
+
+logic o1 : t_nat32
+
+logic o2 : t_nat32
+
+logic o3 : t_data_type
+
+logic o4 : t_data_type
+
+logic o5 : t_nat32
+
+logic o6 : bool
+
+logic o7 : int
+
+logic result : t_data_type
+
+logic result1 : t_nat32
+
+logic result2 : bool
+
+logic data__create_type__result3 : t_data_type
+
+logic data__create_type__result4 : t_nat32
+
+logic data__create_type__result5 : bool
+
+logic data__create_type__result6 : t_data_type
+
+logic data__create_type__result7 : t_nat32
+
+logic data__create_type__result8 : bool
+
+logic data__create_type__result9 : t_data_type
+
+logic data__create_type__result10 : t_nat32
+
+logic data__create_type__result11 : bool
+
+logic data__create_type__result12 : t_data_type
+
+logic data__create_type__result13 : t_nat32
+
+logic data__create_type__result14 : bool
+
+logic data__create_type__result15 : t_data_type
+
+logic data__create_type__result16 : t_nat32
+
+logic data__create_type__result17 : bool
+
+logic result3 : bool
+
+axiom H : in_range(min)
+
+axiom H1 : (data__create_type__result6 = data__create_type__result3)
+
+axiom H2 : (data__create_type__result7 = data__create_type__result4)
+
+axiom H3 : (data__create_type__result8 = data__create_type__result5)
+
+axiom H4 : ((data__create_type__result9 = data__create_type__result3) and
+  ((data__create_type__result10 = data__create_type__result4) and
+  (data__create_type__result11 = data__create_type__result5)))
+
+axiom H5 : (to_rep(o1) = min)
+
+axiom H6 : (o1 = o2)
+
+axiom H7 : (to_rep1(o) = 1)
+
+axiom H8 : (o = o3)
+
+axiom H9 : (o4 = o3)
+
+axiom H10 : (o5 = o2)
+
+axiom H11 : (true = o6)
+
+axiom H12 : ((result = data__create_type__result) and
+  ((result1 = data__create_type__result1) and
+  (result2 = data__create_type__result2)))
+
+axiom H13 : ((data__create_type__result3 = o4) and
+  ((data__create_type__result4 = o5) and (data__create_type__result5 = o6)))
+
+axiom H14 : ((data__create_type__result12 = data__create_type__result6) and
+  ((data__create_type__result13 = data__create_type__result7) and
+  (data__create_type__result14 = data__create_type__result8)))
+
+axiom H15 : ((data__create_type__result15 = data__create_type__result9) and
   ((data__create_type__result16 = data__create_type__result10) and
-  (data__create_type__result17 = data__create_type__result11))))) ->
-  (((result3 = is_nat32({ us_split_discrs1 = {
+  (data__create_type__result17 = data__create_type__result11)))
+
+axiom H16 : ((result3 = is_nat32({ us_split_discrs1 = {
   rec__data__t_strong_data_type__data_type = data__create_type__result12 };
   us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
   data__create_type__result13 }; attr__constrained =
   data__create_type__result14 })) and ((result3 = true) <->
-  (to_rep1(data__create_type__result12) = 1))) -> ((result3 = true) ->
-  (is_nat32({ us_split_discrs1 = { rec__data__t_strong_data_type__data_type =
-  data__create_type__result12 }; us_split_fields1 = {
-  rec__data__t_strong_data_type__min_nat32 = data__create_type__result13 };
-  attr__constrained = data__create_type__result14 }) = true))))))
+  (to_rep1(data__create_type__result12) = 1)))
+
+axiom H17 : (result3 = true)
+
+ (* File "data.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (is_nat32({ us_split_discrs1 = {
+  rec__data__t_strong_data_type__data_type = data__create_type__result12 };
+  us_split_fields1 = { rec__data__t_strong_data_type__min_nat32 =
+  data__create_type__result13 }; attr__constrained =
+  data__create_type__result14 }) = true)

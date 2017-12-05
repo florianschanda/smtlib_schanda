@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,9 +111,159 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic i1 : int
+
+logic c3b : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic c3b1 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : int
+
+logic i4 : int
+
+logic result4 : int
+
+logic c3b2 : int
+
+logic result5 : int
+
+logic i5 : int
+
+logic result6 : int
+
+logic i6 : int
+
+logic result7 : int
+
+logic c3b3 : int
+
+logic result8 : int
+
+logic i7 : int
+
+logic result9 : int
+
+logic i8 : int
+
+logic result10 : int
+
+logic c3b4 : int
+
+logic result11 : int
+
+logic i9 : int
+
+logic result12 : int
+
+logic i10 : int
+
+logic result13 : int
+
+logic c3b5 : int
+
+logic result14 : int
+
+logic i11 : int
+
+logic result15 : int
+
+logic i12 : int
+
+logic result16 : int
+
+logic c3b6 : int
+
+logic result17 : int
+
+logic i13 : int
+
+logic result18 : int
+
+logic i14 : int
+
+logic result19 : int
+
+logic c3b7 : int
+
+logic result20 : int
+
+logic i15 : int
+
+logic result21 : int
+
+logic i16 : int
+
+logic result22 : int
+
+logic c3b8 : int
+
+logic result23 : int
+
+logic i17 : int
+
+logic result24 : int
+
+logic i18 : int
+
+logic result25 : int
+
+logic c3b9 : int
+
+logic result26 : int
+
+logic i19 : int
+
+logic result27 : int
+
+logic i20 : int
+
+logic result28 : int
+
+logic c3b10 : int
+
+axiom H : in_range(i)
+
+axiom H1 : (result = i1)
+
+axiom H2 : (i2 = 1)
+
+axiom H3 : (result1 = c3b)
+
+axiom H4 : (c3b1 = i2)
+
+axiom H5 : in_range(c3b1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall i1:int. forall c3b:int. forall result:int.
-  forall i2:int. forall result1:int. forall c3b1:int. (in_range(i) ->
-  (((result = i1) and (i2 = 1)) -> ((((result1 = c3b) and (c3b1 = i2)) and
-  in_range(c3b1)) -> in_range((i + c3b1))))))
+goal WP_parameter_def : in_range((i + c3b1))

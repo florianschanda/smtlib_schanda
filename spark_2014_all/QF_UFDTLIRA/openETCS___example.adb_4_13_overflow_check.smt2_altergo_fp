@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -171,7 +171,41 @@ logic maximum : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic example__saturated_sum__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic example__saturated_sum__result1 : int
+
+logic result2 : int
+
+logic example__saturated_sum__result2 : int
+
+logic example__saturated_sum__result3 : int
+
+logic example__saturated_sum__result4 : int
+
+logic example__saturated_sum__result5 : int
+
+logic example__saturated_sum__result6 : int
+
+logic example__saturated_sum__result7 : int
+
+logic example__saturated_sum__result8 : int
+
+axiom H : in_range2(x1)
+
+axiom H1 : in_range2(x2)
+
+axiom H2 : in_range2(maximum)
+
+axiom H3 : ((x1 <= 1073741823) and (x2 <= 1073741823))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range2(x1) -> (in_range2(x2) ->
-  (in_range2(maximum) -> (((x1 <= 1073741823) and (x2 <= 1073741823)) ->
-  in_range1((x1 + x2))))))
+goal WP_parameter_def : in_range1((x1 + x2))

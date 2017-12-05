@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -827,55 +827,236 @@ axiom is_empty__post_axiom :
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
 
- (* File "list_mod_allocator.ads", line 71, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int. forall o:int.
-  forall temp___281:int. forall j:int. forall o1:int. forall o2:bool.
-  forall j1:int. forall o3:int. forall o4:bool. forall j2:int. forall o5:int.
-  forall o6:bool. forall o7:int. forall o8:int. forall o9:int.
-  forall o10:int. forall result:bool. forall result1:bool.
-  forall result2:bool. forall result3:bool. forall result4:bool.
-  forall result5:bool. forall result6:bool. forall result7:bool.
-  forall result8:bool. (in_range2(first_available) ->
-  ((((((((o10 = length(m)) and (in_range5(o10) and
-  ((0 + o10) <= 2147483647))) and (((o10 <= 10000) and (result4 = true)) or
-  ((not (o10 <= 10000)) and (result4 = false)))) and (((result4 = true) and
-  (((not (first_available = 0)) and ((((o8 = length(m)) and
-  (in_range5(o8) and ((0 + o8) <= 2147483647))) and (((0 <  o8) and
-  (result5 = true)) or ((not (0 <  o8)) and (result5 = false)))) and
-  (((result5 = true) and (((o7 = get(m, 1)) and in_range6(o7)) and
-  (((o7 = first_available) and (result3 = true)) or
-  ((not (o7 = first_available)) and (result3 = false))))) or
-  ((not (result5 = true)) and (result3 = false))))) or
-  ((first_available = 0) and (((o9 = length(m)) and (in_range5(o9) and
-  ((0 + o9) <= 2147483647))) and (((o9 = 0) and (result3 = true)) or
-  ((not (o9 = 0)) and (result3 = false))))))) or ((not (result4 = true)) and
-  (result3 = false)))) and (((result3 = true) and (((((o5 = length(m)) and
-  (in_range5(o5) and ((0 + o5) <= 2147483647))) and (((j2 <= o5) and
-  (o6 = true)) or ((not (j2 <= o5)) and (o6 = false)))) and (((1 <= j2) and
-  (result6 = o6)) or ((not (1 <= j2)) and (result6 = false)))) and
-  ((result2 = true) <->
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic e : int
+
+logic o : bool
+
+logic o1 : int
+
+logic temp___281 : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : resource
+
+logic o7 : resource
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___280 : int
+
+logic o10 : int
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : status
+
+logic o14 : resource
+
+logic o15 : resource
+
+logic o16 : int
+
+logic j : int
+
+logic o17 : int
+
+logic o18 : bool
+
+logic k : int
+
+logic o19 : int
+
+logic o20 : bool
+
+logic o21 : int
+
+logic o22 : int
+
+logic j1 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic temp___279 : int
+
+logic o25 : int
+
+logic o26 : status
+
+logic o27 : resource
+
+logic o28 : status
+
+logic o29 : resource
+
+logic o30 : resource
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic j2 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic o36 : int
+
+logic temp___278 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+axiom H : in_range2(first_available)
+
+axiom H1 : ((o43 = length(m)) and (in_range5(o43) and
+  ((0 + o43) <= 2147483647)))
+
+axiom H2 : (((o43 <= 10000) -> (result5 = true)) and ((not (o43 <= 10000)) ->
+  (result5 = false)))
+
+axiom H3 : ((result5 = true) -> ((not (first_available = 0)) ->
+  ((o41 = length(m)) and (in_range5(o41) and ((0 + o41) <= 2147483647)))))
+
+axiom H4 : ((result5 = true) -> ((not (first_available = 0)) ->
+  (((0 <  o41) -> (result6 = true)) and ((not (0 <  o41)) ->
+  (result6 = false)))))
+
+axiom H5 : ((result5 = true) -> ((not (first_available = 0)) ->
+  ((result6 = true) -> ((o40 = get(m, 1)) and in_range6(o40)))))
+
+axiom H6 : ((result5 = true) -> ((not (first_available = 0)) ->
+  ((result6 = true) -> (((o40 = first_available) -> (result4 = true)) and
+  ((not (o40 = first_available)) -> (result4 = false))))))
+
+axiom H7 : ((result5 = true) -> ((not (first_available = 0)) ->
+  ((not (result6 = true)) -> (result4 = false))))
+
+axiom H8 : ((result5 = true) -> ((first_available = 0) ->
+  ((o42 = length(m)) and (in_range5(o42) and ((0 + o42) <= 2147483647)))))
+
+axiom H9 : ((result5 = true) -> ((first_available = 0) -> (((o42 = 0) ->
+  (result4 = true)) and ((not (o42 = 0)) -> (result4 = false)))))
+
+axiom H10 : ((not (result5 = true)) -> (result4 = false))
+
+axiom H11 : ((result4 = true) -> ((o34 = length(m)) and (in_range5(o34) and
+  ((0 + o34) <= 2147483647))))
+
+axiom H12 : ((result4 = true) -> (((j2 <= o34) -> (o35 = true)) and
+  ((not (j2 <= o34)) -> (o35 = false))))
+
+axiom H13 : ((result4 = true) -> (((1 <= j2) -> (result7 = o35)) and
+  ((not (1 <= j2)) -> (result7 = false))))
+
+axiom H14 : ((result4 = true) -> ((result3 = true) <->
   (forall j3:int. (((1 <= j3) and (j3 <= length(m))) -> (in_range3(get(m,
   j3)) and ((j3 <  length(m)) -> (to_rep((((data[get(m,
   j3)])).us_split_fields1).rec__list_mod_allocator__cell__next) = get(m,
-  (j3 + 1)))))))))) or ((not (result3 = true)) and (result2 = false)))) and
-  (((result2 = true) and (((((o3 = length(m)) and (in_range5(o3) and
-  ((0 + o3) <= 2147483647))) and (((j1 <= o3) and (o4 = true)) or
-  ((not (j1 <= o3)) and (o4 = false)))) and (((1 <= j1) and
-  (result7 = o4)) or ((not (1 <= j1)) and (result7 = false)))) and
-  ((result1 = true) <->
+  (j3 + 1)))))))))
+
+axiom H15 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H16 : ((result3 = true) -> ((o23 = length(m)) and (in_range5(o23) and
+  ((0 + o23) <= 2147483647))))
+
+axiom H17 : ((result3 = true) -> (((j1 <= o23) -> (o24 = true)) and
+  ((not (j1 <= o23)) -> (o24 = false))))
+
+axiom H18 : ((result3 = true) -> (((1 <= j1) -> (result10 = o24)) and
+  ((not (1 <= j1)) -> (result10 = false))))
+
+axiom H19 : ((result3 = true) -> ((result2 = true) <->
   (forall j3:int. (((1 <= j3) and (j3 <= length(m))) -> ((1 <  j3) ->
   (in_range3(get(m, (j3 - 1))) and (get(m, j3) = to_rep((((data[get(m,
-  (j3 - 1))])).us_split_fields1).rec__list_mod_allocator__cell__next))))))))) or
-  ((not (result2 = true)) and (result1 = false)))) and (((result1 = true) and
-  (((((o1 = length(m)) and (in_range5(o1) and ((0 + o1) <= 2147483647))) and
-  (((j <= o1) and (o2 = true)) or ((not (j <= o1)) and (o2 = false)))) and
-  (((1 <= j) and (result8 = o2)) or ((not (1 <= j)) and
-  (result8 = false)))) and ((result = true) <->
+  (j3 - 1))])).us_split_fields1).rec__list_mod_allocator__cell__next))))))))
+
+axiom H20 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H21 : ((result2 = true) -> ((o17 = length(m)) and (in_range5(o17) and
+  ((0 + o17) <= 2147483647))))
+
+axiom H22 : ((result2 = true) -> (((j <= o17) -> (o18 = true)) and
+  ((not (j <= o17)) -> (o18 = false))))
+
+axiom H23 : ((result2 = true) -> (((1 <= j) -> (result12 = o18)) and
+  ((not (1 <= j)) -> (result12 = false))))
+
+axiom H24 : ((result2 = true) -> ((result1 = true) <->
   (forall j3:int. (((1 <= j3) and (j3 <= length(m))) ->
-  (forall k:int. (((1 <= k) and (k <= length(m))) -> ((get(m, j3) = get(m,
-  k)) -> (j3 = k))))))))) or ((not (result1 = true)) and
-  (result = false)))) -> ((result = true) -> ((not (first_available = 0)) ->
-  ((((o = length(m)) and (in_range5(o) and ((0 + o) <= 2147483647))) and
-  ((temp___281 = get(m, o)) and in_range6(temp___281))) ->
-  (1 <= temp___281)))))))
+  (forall k1:int. (((1 <= k1) and (k1 <= length(m))) -> ((get(m, j3) = get(m,
+  k1)) -> (j3 = k1))))))))
+
+axiom H25 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H26 : (result1 = true)
+
+axiom H27 : (not (first_available = 0))
+
+axiom H28 : ((o1 = length(m)) and (in_range5(o1) and
+  ((0 + o1) <= 2147483647)))
+
+axiom H29 : ((temp___281 = get(m, o1)) and in_range6(temp___281))
+
+ (* File "list_mod_allocator.ads", line 71, characters 0-0 *)
+goal WP_parameter_def : (1 <= temp___281)

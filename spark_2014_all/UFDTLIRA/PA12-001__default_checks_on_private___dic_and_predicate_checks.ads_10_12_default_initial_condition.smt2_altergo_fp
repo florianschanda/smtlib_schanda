@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -306,15 +306,26 @@ axiom is_valid__def_axiom1 :
   rec__dic_and_predicate_checks__r__g = x1 } }) = true) <->
   (0 <  to_rep(x))))
 
- (* File "dic_and_predicate_checks.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___215:integer. forall temp___2151:integer.
-  forall temp___218:integer. forall temp___2181:integer.
-  (((to_rep(temp___2151) = 0) and (is_valid({ us_split_fields1 = {
+logic temp___215 : integer
+
+logic temp___2151 : integer
+
+logic temp___218 : integer
+
+logic temp___2181 : integer
+
+axiom H : (to_rep(temp___2151) = 0)
+
+axiom H1 : (is_valid({ us_split_fields1 = {
   rec__dic_and_predicate_checks__r__f = temp___215;
-  rec__dic_and_predicate_checks__r__g = temp___2151 } }) = true)) ->
-  (((is_valid({ us_split_fields1 = { rec__dic_and_predicate_checks__r__f =
-  temp___218; rec__dic_and_predicate_checks__r__g = temp___2181 }
-  }) = true) and (to_rep(temp___2181) = 0)) -> (is_valid1({
-  us_split_fields1 = { rec__dic_and_predicate_checks__r__f = temp___218;
-  rec__dic_and_predicate_checks__r__g = temp___2181 } }) = true))))
+  rec__dic_and_predicate_checks__r__g = temp___2151 } }) = true)
+
+axiom H2 : ((is_valid({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___218;
+  rec__dic_and_predicate_checks__r__g = temp___2181 } }) = true) and
+  (to_rep(temp___2181) = 0))
+
+ (* File "dic_and_predicate_checks.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (is_valid1({ us_split_fields1 = {
+  rec__dic_and_predicate_checks__r__f = temp___218;
+  rec__dic_and_predicate_checks__r__g = temp___2181 } }) = true)

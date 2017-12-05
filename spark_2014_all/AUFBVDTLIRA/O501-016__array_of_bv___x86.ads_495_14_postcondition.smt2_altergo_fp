@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1522,6 +1522,70 @@ axiom readmem8__post_axiom :
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic rcx : t2
+
+logic rsi : t2
+
+logic rdi : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic val1 : t
+
+logic val2 : t
+
+logic o : t
+
+logic o1 : t
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic rcx1 : t2
+
+logic rsi1 : t2
+
+logic rdi1 : t2
+
+logic val11 : t
+
+logic val21 : t
+
+logic temp___340 : t2
+
+logic result : t2
+
+logic temp___3401 : t2
+
+logic result1 : t
+
+logic val12 : t
+
+logic result2 : t
+
+logic val22 : t
+
+logic result3 : bool
+
+logic zeroflag1 : bool
+
+logic result4 : bool
+
+logic carryflag1 : bool
+
+logic result5 : t2
+
+logic rcx2 : t2
+
+logic result6 : t2
+
+logic rsi2 : t2
+
+logic result7 : t2
+
+logic rdi2 : t2
 
  (* File "x86.ads", line 489, characters 0-0 *)
 goal WP_parameter_def : true

@@ -436,17 +436,100 @@ axiom def_axiom1 :
   ((not (temp___4624 = temp___4622)) -> ((temp___4619(temp___4621,
   temp___4622, temp___4623)[temp___4624]) = (temp___4621[temp___4624])))))))
 
+logic a : (int,(int,et1) farray) farray
+
+logic j_next : int
+
+logic f : int
+
+logic t : (int,(int,et1) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : et1
+
+logic o6 : (int,et1) farray
+
+logic o7 : (int,(int,et1) farray) farray
+
+logic result : (int,(int,et1) farray) farray
+
+logic t1 : (int,(int,et1) farray) farray
+
+logic result1 : (int,(int,et1) farray) farray
+
+logic a1 : (int,(int,et1) farray) farray
+
+logic result2 : int
+
+logic j_next1 : int
+
+logic result3 : int
+
+logic j_next2 : int
+
+logic result4 : int
+
+logic f1 : int
+
+logic result5 : int
+
+logic f2 : int
+
+logic result6 : (int,(int,et1) farray) farray
+
+logic a2 : (int,(int,et1) farray) farray
+
+logic a3 : (int,(int,et1) farray) farray
+
+logic j_next3 : int
+
+logic f3 : int
+
+logic t2 : (int,(int,et1) farray) farray
+
+logic a4 : (int,(int,et1) farray) farray
+
+logic j_next4 : int
+
+logic f4 : int
+
+logic t3 : (int,(int,et1) farray) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range3(e)
+
+axiom H3 : ((5 <= 50) -> in_range2(j_next))
+
+axiom H4 : ((0 <= 99) -> in_range3(f))
+
+axiom H5 : (bool_eq6(a1, 5, 50, temp___4613(t1, j, temp___4619((t1[j]), i,
+  e)), 5, 50) = true)
+
+axiom H6 : ((j = 50) -> (result2 = j_next))
+
+axiom H7 : ((j = 50) -> (j_next1 = 5))
+
+axiom H8 : ((not (j = 50)) -> ((o3 = (j + 1)) and in_range2((j + 1))))
+
+axiom H9 : ((not (j = 50)) -> (result3 = j_next))
+
+axiom H10 : ((not (j = 50)) -> (j_next2 = o3))
+
+axiom H11 : ((not (j = 50)) -> (j_next1 = j_next2))
+
+axiom H12 : (not (e = 0))
+
  (* File "ar.ads", line 324, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j_next:int. forall f:int. forall o:int.
-  forall t:(int,(int,et1) farray) farray.
-  forall a:(int,(int,et1) farray) farray. forall result:int.
-  forall j_next1:int. forall result1:int. forall j_next2:int.
-  (in_range1(i) -> (in_range2(j) -> (in_range3(e) -> (((5 <= 50) ->
-  in_range2(j_next)) -> (((0 <= 99) -> in_range3(f)) -> ((bool_eq6(a, 5, 50,
-  temp___4613(t, j, temp___4619((t[j]), i, e)), 5, 50) = true) ->
-  ((((j = 50) and (({ int__content = result } = { int__content = j_next
-  }) and (j_next1 = 5))) or ((not (j = 50)) and ((((o = (j + 1)) and
-  in_range2((j + 1))) and (({ int__content = result1 } = { int__content =
-  j_next }) and (j_next2 = o))) and (j_next1 = j_next2)))) ->
-  ((not (e = 0)) -> in_range3((e - 1)))))))))))
+goal WP_parameter_def : in_range3((e - 1))

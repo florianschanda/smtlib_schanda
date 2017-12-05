@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1061,13 +1061,100 @@ logic coms__split_discrs : positive
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "communications.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : ((compare(i1s, 1, 10, i1s1, 1, 10) <= 0) ->
-  ((dynamic_property((-2147483648), 2147483647, to_rep1(first(a1)),
+logic coms__split_fields : (int,us_rep) farray
+
+logic coms__split_fields1 : t2
+
+logic communications__create__result : positive
+
+logic communications__create__result1 : (int,us_rep) farray
+
+logic communications__create__result2 : t1
+
+logic o : int
+
+logic us : int
+
+logic temp___313 : (int,us_rep) farray
+
+logic temp___3131 : t2
+
+logic o1 : (int,us_rep) farray
+
+logic o2 : t2
+
+logic o3 : (int,us_rep) farray
+
+logic o4 : t2
+
+logic temp___316 : positive
+
+logic temp___3161 : (int,us_rep) farray
+
+logic temp___3162 : t2
+
+logic result : (int,us_rep) farray
+
+logic result1 : t2
+
+logic coms__split_fields2 : (int,us_rep) farray
+
+logic coms__split_fields3 : t2
+
+logic result2 : positive
+
+logic result3 : (int,us_rep) farray
+
+logic result4 : t1
+
+logic communications__create__result3 : positive
+
+logic communications__create__result4 : (int,us_rep) farray
+
+logic communications__create__result5 : t1
+
+logic communications__create__result6 : positive
+
+logic communications__create__result7 : (int,us_rep) farray
+
+logic communications__create__result8 : t1
+
+logic communications__create__result9 : positive
+
+logic communications__create__result10 : (int,us_rep) farray
+
+logic communications__create__result11 : t1
+
+logic coms__split_fields4 : (int,us_rep) farray
+
+logic coms__split_fields5 : t2
+
+logic communications__create__result12 : positive
+
+logic communications__create__result13 : (int,us_rep) farray
+
+logic communications__create__result14 : t1
+
+logic coms__split_fields6 : (int,us_rep) farray
+
+logic coms__split_fields7 : t2
+
+logic communications__create__result15 : positive
+
+logic communications__create__result16 : (int,us_rep) farray
+
+logic communications__create__result17 : t1
+
+axiom H : (compare(i1s, 1, 10, i1s1, 1, 10) <= 0)
+
+axiom H1 : (dynamic_property((- 2147483648), 2147483647, to_rep1(first(a1)),
   to_rep1(last(a1))) and
   (forall temp___179:int. (((to_rep1(first(a1)) <= temp___179) and
   (temp___179 <= to_rep1(last(a1)))) ->
   (compare((((a[temp___179])).us_split_fields1).rec__messages__message__sent,
   1, 10,
   (((a[temp___179])).us_split_fields1).rec__messages__message__received, 1,
-  10) <= 0)))) -> in_range(length({ elts = a; rt = a1 }))))
+  10) <= 0))))
+
+ (* File "communications.ads", line 16, characters 0-0 *)
+goal WP_parameter_def : in_range(length({ elts = a; rt = a1 }))

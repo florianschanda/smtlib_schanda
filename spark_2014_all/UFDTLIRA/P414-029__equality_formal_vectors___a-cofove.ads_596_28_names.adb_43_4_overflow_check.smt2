@@ -256,6 +256,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range4 index))
 (assert (in_range2 count))
 (assert (and (<= 1 index) (<= index (last (model__ (mk___rep container__split_discrs (mk___split_fields container__split_fields)))))))

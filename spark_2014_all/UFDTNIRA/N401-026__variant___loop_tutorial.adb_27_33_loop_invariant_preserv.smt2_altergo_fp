@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -285,40 +285,251 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom maximum_root__def_axiom : (maximum_root = 46341)
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lower:int. forall upper:int. forall middle:int. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall result:int. forall lower1:int. forall result1:int.
-  forall upper1:int. forall result2:int. forall upper2:int.
-  forall lower2:int. forall upper3:int. forall middle1:int.
-  forall temp___136:int. forall temp___135:int. forall result3:int.
-  forall temp___1361:int. forall result4:int. forall temp___1351:int.
-  forall result5:bool. forall result6:int. forall middle2:int.
-  forall result7:bool. forall result8:int. forall upper4:int.
-  forall result9:int. forall lower3:int. (in_range2(n) ->
-  (((0 <= 2147483647) -> in_range2(lower)) -> (((0 <= 2147483647) ->
-  in_range2(upper)) -> (((0 <= 2147483647) -> in_range2(middle)) ->
-  (in_range2(maximum_root) -> ((({ int__content = result } = { int__content =
-  lower }) and (lower1 = 0)) -> ((((46341 <= n) and (({ int__content =
-  result1 } = { int__content = upper }) and (upper1 = 46341))) or
-  ((not (46341 <= n)) and ((((o = (n + 1)) and in_range1((n + 1))) and (({
-  int__content = result2 } = { int__content = upper }) and (upper2 = o))) and
-  (upper1 = upper2)))) -> ((((((0 <= lower2) and (upper3 <= 46341)) and
+logic lower : int
+
+logic upper : int
+
+logic middle : int
+
+logic loop_tutorial__isqrt__result : int
+
+logic o : int
+
+logic temp___134 : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic temp___136 : int
+
+logic temp___135 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : bool
+
+logic result : int
+
+logic lower1 : int
+
+logic result1 : int
+
+logic upper1 : int
+
+logic result2 : int
+
+logic upper2 : int
+
+logic lower2 : int
+
+logic upper3 : int
+
+logic middle1 : int
+
+logic temp___1361 : int
+
+logic temp___1351 : int
+
+logic result3 : int
+
+logic temp___1362 : int
+
+logic result4 : int
+
+logic temp___1352 : int
+
+logic result5 : bool
+
+logic result6 : int
+
+logic middle2 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic upper4 : int
+
+logic result9 : int
+
+logic lower3 : int
+
+logic lower4 : int
+
+logic upper5 : int
+
+logic middle3 : int
+
+logic lower5 : int
+
+logic upper6 : int
+
+logic middle4 : int
+
+logic lower6 : int
+
+logic upper7 : int
+
+logic middle5 : int
+
+logic temp___1363 : int
+
+logic temp___1353 : int
+
+logic lower7 : int
+
+logic upper8 : int
+
+logic middle6 : int
+
+logic temp___1364 : int
+
+logic temp___1354 : int
+
+logic lower8 : int
+
+logic upper9 : int
+
+logic middle7 : int
+
+logic lower9 : int
+
+logic upper10 : int
+
+logic middle8 : int
+
+logic lower10 : int
+
+logic upper11 : int
+
+logic middle9 : int
+
+logic lower11 : int
+
+logic upper12 : int
+
+logic middle10 : int
+
+logic result10 : int
+
+logic loop_tutorial__isqrt__result1 : int
+
+logic loop_tutorial__isqrt__result2 : int
+
+logic loop_tutorial__isqrt__result3 : int
+
+logic lower12 : int
+
+logic upper13 : int
+
+logic middle11 : int
+
+logic loop_tutorial__isqrt__result4 : int
+
+logic lower13 : int
+
+logic upper14 : int
+
+logic middle12 : int
+
+logic loop_tutorial__isqrt__result5 : int
+
+axiom H : in_range2(n)
+
+axiom H1 : ((0 <= 2147483647) -> in_range2(lower))
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(upper))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(middle))
+
+axiom H4 : in_range2(maximum_root)
+
+axiom H5 : (result = lower)
+
+axiom H6 : (lower1 = 0)
+
+axiom H7 : ((46341 <= n) -> (result1 = upper))
+
+axiom H8 : ((46341 <= n) -> (upper1 = 46341))
+
+axiom H9 : ((not (46341 <= n)) -> ((o = (n + 1)) and in_range1((n + 1))))
+
+axiom H10 : ((not (46341 <= n)) -> (result2 = upper))
+
+axiom H11 : ((not (46341 <= n)) -> (upper2 = o))
+
+axiom H12 : ((not (46341 <= n)) -> (upper1 = upper2))
+
+axiom H13 : (((((0 <= lower2) and (upper3 <= 46341)) and
   (lower2 <  upper3)) and (n <  (upper3 * upper3))) and
-  ((lower2 * lower2) <= n)) -> ((((((0 <= 2147483647) ->
-  in_range2(middle1)) and ((0 <= 2147483647) -> in_range2(lower2))) and
-  ((0 <= 2147483647) -> in_range2(upper3))) and (((temp___136 = result3) and
-  (temp___1361 = lower2)) and (((temp___135 = result4) and
-  (temp___1351 = upper3)) and (((((o1 = (lower2 + 1)) and
-  in_range1((lower2 + 1))) and (((o1 = upper3) and (result5 = true)) or
-  ((not (o1 = upper3)) and (result5 = false)))) and
-  (not (result5 = true))) and (((((o2 = (lower2 + upper3)) and
-  in_range1((lower2 + upper3))) and (o3 = comp_div(o2,2))) and
-  ((middle1 = result6) and (middle2 = o3))) and
-  ((((o4 = (middle2 * middle2)) and in_range1((middle2 * middle2))) and
-  (((n <  o4) and (result7 = true)) or ((not (n <  o4)) and
-  (result7 = false)))) and (((result7 = true) and (((upper3 = result8) and
-  (upper4 = middle2)) and (lower3 = lower2))) or ((not (result7 = true)) and
-  (((lower2 = result9) and (lower3 = middle2)) and
-  (upper4 = upper3)))))))))) -> (0 <= lower3)))))))))))
+  ((lower2 * lower2) <= n))
+
+axiom H14 : ((((0 <= 2147483647) -> in_range2(middle1)) and
+  ((0 <= 2147483647) -> in_range2(lower2))) and ((0 <= 2147483647) ->
+  in_range2(upper3)))
+
+axiom H15 : (temp___1361 = result3)
+
+axiom H16 : (temp___1362 = lower2)
+
+axiom H17 : (temp___1351 = result4)
+
+axiom H18 : (temp___1352 = upper3)
+
+axiom H19 : ((o4 = (lower2 + 1)) and in_range1((lower2 + 1)))
+
+axiom H20 : (((o4 = upper3) -> (result5 = true)) and ((not (o4 = upper3)) ->
+  (result5 = false)))
+
+axiom H21 : (not (result5 = true))
+
+axiom H22 : ((o5 = (lower2 + upper3)) and in_range1((lower2 + upper3)))
+
+axiom H23 : (o6 = comp_div(o5,2))
+
+axiom H24 : (middle1 = result6)
+
+axiom H25 : (middle2 = o6)
+
+axiom H26 : ((o7 = (middle2 * middle2)) and in_range1((middle2 * middle2)))
+
+axiom H27 : (((n <  o7) -> (result7 = true)) and ((not (n <  o7)) ->
+  (result7 = false)))
+
+axiom H28 : ((result7 = true) -> (upper3 = result8))
+
+axiom H29 : ((result7 = true) -> (upper4 = middle2))
+
+axiom H30 : ((result7 = true) -> (lower3 = lower2))
+
+axiom H31 : ((not (result7 = true)) -> (lower2 = result9))
+
+axiom H32 : ((not (result7 = true)) -> (lower3 = middle2))
+
+axiom H33 : ((not (result7 = true)) -> (upper4 = upper3))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <= lower3)

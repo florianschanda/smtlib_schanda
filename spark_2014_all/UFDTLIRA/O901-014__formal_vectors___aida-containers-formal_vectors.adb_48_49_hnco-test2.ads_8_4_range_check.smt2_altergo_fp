@@ -508,8 +508,13 @@ axiom length__post_axiom :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = container6 }
   }))))
 
+logic us : int
+
+logic us1 : int
+
+axiom H : (to_rep(container) = to_rep1(container1))
+
+axiom H1 : ((us = to_rep(container)) and in_range(to_rep(container)))
+
  (* File "aida-containers-formal_vectors.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. ((to_rep(container) = to_rep1(container1)) ->
-  (((us = to_rep(container)) and in_range(to_rep(container))) ->
-  in_range1(to_rep(container)))))
+goal WP_parameter_def : in_range1(to_rep(container))

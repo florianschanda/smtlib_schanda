@@ -509,13 +509,34 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic cur_state : int
+
+logic total_pay : int
+
+logic outstanding : int
+
+logic invariant_value : int
+
+logic result : int
+
+logic cur_state1 : int
+
+logic result1 : bool
+
+axiom H : (result = cur_state)
+
+axiom H1 : (cur_state1 = 3)
+
+axiom H2 : in_range3(cur_state1)
+
+axiom H3 : ((0 <= 2147483647) -> in_range(total_pay))
+
+axiom H4 : ((0 <= 2147483647) -> in_range(outstanding))
+
+axiom H5 : ((0 <= 2147483647) -> in_range(invariant_value))
+
+axiom H6 : ((result1 = is_base(cur_state1)) and ((result1 = true) <->
+  (cur_state1 = 3)))
+
  (* File "pumpunit.adb", line 54, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_state:int. forall total_pay:int. forall outstanding:int.
-  forall invariant_value:int. forall result:int. forall cur_state1:int.
-  (forall result1:bool. ((((result = cur_state) and (cur_state1 = 3)) and
-  (in_range3(cur_state1) and (((0 <= 2147483647) -> in_range(total_pay)) and
-  (((0 <= 2147483647) -> in_range(outstanding)) and (((0 <= 2147483647) ->
-  in_range(invariant_value)) and ((result1 = is_base(cur_state1)) and
-  ((result1 = true) <-> (cur_state1 = 3)))))))) ->
-  (is_base(cur_state1) = true))))
+goal WP_parameter_def : (is_base(cur_state1) = true)

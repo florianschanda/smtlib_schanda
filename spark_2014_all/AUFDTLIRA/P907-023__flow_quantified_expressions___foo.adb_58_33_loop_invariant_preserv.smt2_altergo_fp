@@ -300,36 +300,118 @@ function t29b__ref___projection(a: t29b__ref) : t29b = (a).t29b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "foo.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall i:int. forall result:int.
-  forall i1:int. forall result1:(int,us_rep) farray.
-  forall a1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall i2:int. forall result2:int. forall i3:int.
-  forall result3:(int,us_rep) farray. forall a3:(int,us_rep) farray. ((({
-  int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  (((1 <= i1) and (i1 <= 10)) -> ((({ map__content = result1 } = {
-  map__content = a }) and
-  (((not ((((a[i1])).us_split_fields1).rec__foo__r__x = true)) and
-  (a1 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
+logic a : (int,us_rep) farray
+
+logic i : int
+
+logic temp___167 : (int,us_rep) farray
+
+logic temp___166 : int
+
+logic j : int
+
+logic a1 : (int,us_rep) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic a5 : (int,us_rep) farray
+
+logic i4 : int
+
+logic a6 : (int,us_rep) farray
+
+logic i5 : int
+
+logic a7 : (int,us_rep) farray
+
+logic i6 : int
+
+logic a8 : (int,us_rep) farray
+
+logic i7 : int
+
+logic a9 : (int,us_rep) farray
+
+logic i8 : int
+
+logic a10 : (int,us_rep) farray
+
+logic i9 : int
+
+logic a11 : (int,us_rep) farray
+
+logic i10 : int
+
+logic a12 : (int,us_rep) farray
+
+logic i11 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (1 <= i1)
+
+axiom H3 : (i1 <= 10)
+
+axiom H4 : (result1 = a)
+
+axiom H5 : (((not ((((a[i1])).us_split_fields1).rec__foo__r__x = true)) ->
+  (a2 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
   match_bool((((a[i1])).us_split_fields1).rec__foo__r__x, true, true) }
-  }]))) or (((((a[i1])).us_split_fields1).rec__foo__r__x = true) and
-  (a1 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
+  }]))) and (((((a[i1])).us_split_fields1).rec__foo__r__x = true) ->
+  (a2 = (a[i1 <- { us_split_fields1 = { rec__foo__r__x =
   match_bool((((a[i1])).us_split_fields1).rec__foo__r__x, true, false) }
-  }]))))) ->
-  ((forall j:int. (((1 <= j) and (j <= i2)) ->
-   ((((a2[j])).us_split_fields1).rec__foo__r__x = true))) ->
-  ((((((1 <= 10) -> in_range2(i2)) and
+  }]))))
+
+axiom H6 :
+  (forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+  ((((a3[j1])).us_split_fields1).rec__foo__r__x = true)))
+
+axiom H7 : ((((1 <= 10) -> in_range2(i2)) and
   (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 10)) ->
-  ((i2 <  temp___168) -> ((a2[temp___168]) = (a[temp___168])))))) and
-  ((1 <= i2) and (i2 <= 10))) and ((not (i2 = 10)) and (((result2 = i2) and
-  (i3 = (i2 + 1))) and ((result3 = a2) and
-  (((not ((((a2[i3])).us_split_fields1).rec__foo__r__x = true)) and
-  (a3 = (a2[i3 <- { us_split_fields1 = { rec__foo__r__x =
-  match_bool((((a2[i3])).us_split_fields1).rec__foo__r__x, true, true) }
-  }]))) or (((((a2[i3])).us_split_fields1).rec__foo__r__x = true) and
-  (a3 = (a2[i3 <- { us_split_fields1 = { rec__foo__r__x =
-  match_bool((((a2[i3])).us_split_fields1).rec__foo__r__x, true, false) }
-  }])))))))) ->
-  (forall j:int. (((1 <= j) and (j <= i3)) ->
-  ((((a3[j])).us_split_fields1).rec__foo__r__x = true)))))))))
+  ((i2 <  temp___168) -> ((a3[temp___168]) = (a[temp___168])))))) and
+  ((1 <= i2) and (i2 <= 10)))
+
+axiom H8 : (not (i2 = 10))
+
+axiom H9 : (result2 = i2)
+
+axiom H10 : (i3 = (i2 + 1))
+
+axiom H11 : (result3 = a3)
+
+axiom H12 : (((not ((((a3[i3])).us_split_fields1).rec__foo__r__x = true)) ->
+  (a4 = (a3[i3 <- { us_split_fields1 = { rec__foo__r__x =
+  match_bool((((a3[i3])).us_split_fields1).rec__foo__r__x, true, true) }
+  }]))) and (((((a3[i3])).us_split_fields1).rec__foo__r__x = true) ->
+  (a4 = (a3[i3 <- { us_split_fields1 = { rec__foo__r__x =
+  match_bool((((a3[i3])).us_split_fields1).rec__foo__r__x, true, false) }
+  }]))))
+
+logic j1 : int
+
+axiom H13 : (1 <= j1)
+
+axiom H14 : (j1 <= i3)
+
+ (* File "foo.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : ((((a4[j1])).us_split_fields1).rec__foo__r__x = true)

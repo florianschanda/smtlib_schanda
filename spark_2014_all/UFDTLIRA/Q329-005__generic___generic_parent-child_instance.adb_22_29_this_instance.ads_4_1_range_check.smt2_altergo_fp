@@ -347,9 +347,63 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic this__split_fields : element
+
+logic this__split_fields1 : element
+
+logic this__split_fields2 : us_private
+
+logic step : int
+
+logic o : int
+
+logic o1 : element
+
+logic o2 : element
+
+logic o3 : element
+
+logic o4 : us_private
+
+logic temp___551 : element
+
+logic temp___5511 : element
+
+logic temp___5512 : us_private
+
+logic temp___5513 : int
+
+logic o5 : int
+
+logic this__split_fields3 : element
+
+logic this__split_fields4 : element
+
+logic this__split_fields5 : us_private
+
+logic result : int
+
+logic step1 : int
+
+logic result1 : element
+
+logic result2 : element
+
+logic result3 : us_private
+
+logic this__split_fields6 : element
+
+logic this__split_fields7 : element
+
+logic this__split_fields8 : us_private
+
+axiom H : (result = step)
+
+axiom H1 : (step1 = 1)
+
+axiom H2 : in_range(step1)
+
+axiom H3 : (to_rep(this__split_fields1) <= (9 - step1))
+
  (* File "generic_parent-child_instance.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall this__split_fields:element. forall step:int. forall result:int.
-  forall step1:int. (((result = step) and (step1 = 1)) -> (in_range(step1) ->
-  ((to_rep(this__split_fields) <= (9 - step1)) ->
-  in_range((to_rep(this__split_fields) + step1))))))
+goal WP_parameter_def : in_range((to_rep(this__split_fields1) + step1))

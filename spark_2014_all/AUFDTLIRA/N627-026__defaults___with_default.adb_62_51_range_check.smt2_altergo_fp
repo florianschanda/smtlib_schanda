@@ -174,7 +174,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -258,7 +258,7 @@ axiom coerce_axiom2 :
 
 type tscalar_with_defaultB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -968,18 +968,77 @@ axiom first__def_axiom : (first = c)
 
 axiom first__def_axiom1 : (first1 = c)
 
+logic empty1 : (int,tscalar_with_defaultB) farray
+
+logic empty2 : (int,integer) farray
+
+logic no_def : (int,integer) farray
+
+logic all_0 : (int,scalar_with_default) farray
+
+logic all_1 : (int,natural) farray
+
+logic all_2 : (int,tscalar_with_defaultB) farray
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic with_default__ok_array__no_def__assume : (int,integer) farray
+
+logic with_default__ok_array__no_def__assume1 : t
+
+logic o4 : int
+
+logic us3 : int
+
+logic o5 : int
+
+logic us4 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic no_def1 : (int,integer) farray
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(c)
+
+axiom H1 : (c <= 2)
+
+axiom H2 :
+  (forall temp___272:int. (((1 <= temp___272) and (temp___272 <= 0)) ->
+  (to_rep3((empty1[temp___272])) = 0)))
+
+axiom H3 :
+  (forall temp___269:int. (((1 <= temp___269) and (temp___269 <= 0)) ->
+  ((first <= 2147483647) -> dynamic_property(first, 2147483647,
+  to_rep3((empty1[temp___269]))))))
+
+axiom H4 :
+  (forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 0)) ->
+  (to_rep1((empty2[temp___281])) = 0)))
+
+axiom H5 :
+  (forall temp___278:int. (((1 <= temp___278) and (temp___278 <= 0)) ->
+  ((first1 <= 2147483647) -> dynamic_property1(first1, 2147483647,
+  to_rep1((empty2[temp___278]))))))
+
  (* File "with_default.adb", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall empty1:(int,tscalar_with_defaultB) farray.
-  forall empty2:(int,integer) farray. (in_range1(c) -> ((c <= 2) ->
-  ((forall temp___272:int. (((1 <= temp___272) and (temp___272 <= 0)) ->
-   (to_rep3((empty1[temp___272])) = 0))) ->
-  ((forall temp___269:int. (((1 <= temp___269) and (temp___269 <= 0)) ->
-   ((first <= 2147483647) -> dynamic_property(first, 2147483647,
-   to_rep3((empty1[temp___269])))))) ->
-  ((forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 0)) ->
-   (to_rep1((empty2[temp___281])) = 0))) ->
-  ((forall temp___278:int. (((1 <= temp___278) and (temp___278 <= 0)) ->
-   ((first1 <= 2147483647) -> dynamic_property1(first1, 2147483647,
-   to_rep1((empty2[temp___278])))))) ->
-  dynamic_property1(first1, 2147483647, c))))))))
+goal WP_parameter_def : dynamic_property1(first1, 2147483647, c)

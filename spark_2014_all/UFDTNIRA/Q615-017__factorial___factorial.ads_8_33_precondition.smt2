@@ -42,6 +42,8 @@
 (declare-fun mathematical_factorial__function_guard (Int Int) Bool)
 (assert (forall ((x1 Int)) (! (=> (dynamic_invariant x1 true true true) (= (mathematical_factorial x1) (ite (<= x1 1) 1 (* x1 (mathematical_factorial (- x1 1)))))) :pattern ((mathematical_factorial x1)))))
 (declare-const o Int)
+(declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range1 x))
 (assert (and (<= 1 x) (<= x 12)))
 (assert (not (<= x 1)))

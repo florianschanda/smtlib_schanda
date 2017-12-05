@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -248,45 +248,167 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic j : int
+
+logic various__search_for_zero__result : int
+
+logic various__search_for_zero__result1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic various__search_for_zero__result2 : int
+
+logic result1 : int
+
+logic j2 : int
+
+logic various__search_for_zero__result3 : int
+
+logic result2 : int
+
+logic j3 : int
+
+logic various__search_for_zero__result4 : int
+
+logic result3 : int
+
+logic j4 : int
+
+logic various__search_for_zero__result5 : int
+
+logic result4 : int
+
+logic j5 : int
+
+logic various__search_for_zero__result6 : int
+
+logic result5 : int
+
+logic j6 : int
+
+logic various__search_for_zero__result7 : int
+
+logic result6 : int
+
+logic j7 : int
+
+logic various__search_for_zero__result8 : int
+
+logic result7 : int
+
+logic j8 : int
+
+logic various__search_for_zero__result9 : int
+
+logic result8 : int
+
+logic j9 : int
+
+logic various__search_for_zero__result10 : int
+
+logic result9 : int
+
+logic j10 : int
+
+logic various__search_for_zero__result11 : int
+
+axiom H :
+  (exists i:int. (((1 <= i) and (i <= 10)) and (to_rep((values[i])) = 0)))
+
+axiom H1 : (result = j)
+
+axiom H2 : (j1 = 1)
+
+axiom H3 : (not (to_rep((values[j1])) = 0))
+
+axiom H4 :
+  (various__search_for_zero__result2 = various__search_for_zero__result)
+
+axiom H5 :
+  (various__search_for_zero__result2 = various__search_for_zero__result1)
+
+axiom H6 : (result1 = j1)
+
+axiom H7 : (j2 = 2)
+
+axiom H8 : (not (to_rep((values[j2])) = 0))
+
+axiom H9 :
+  (various__search_for_zero__result3 = various__search_for_zero__result2)
+
+axiom H10 : (result2 = j2)
+
+axiom H11 : (j3 = 3)
+
+axiom H12 : (not (to_rep((values[j3])) = 0))
+
+axiom H13 :
+  (various__search_for_zero__result4 = various__search_for_zero__result3)
+
+axiom H14 : (result3 = j3)
+
+axiom H15 : (j4 = 4)
+
+axiom H16 : (not (to_rep((values[j4])) = 0))
+
+axiom H17 :
+  (various__search_for_zero__result5 = various__search_for_zero__result4)
+
+axiom H18 : (result4 = j4)
+
+axiom H19 : (j5 = 5)
+
+axiom H20 : (not (to_rep((values[j5])) = 0))
+
+axiom H21 :
+  (various__search_for_zero__result6 = various__search_for_zero__result5)
+
+axiom H22 : (result5 = j5)
+
+axiom H23 : (j6 = 6)
+
+axiom H24 : (not (to_rep((values[j6])) = 0))
+
+axiom H25 :
+  (various__search_for_zero__result7 = various__search_for_zero__result6)
+
+axiom H26 : (result6 = j6)
+
+axiom H27 : (j7 = 7)
+
+axiom H28 : (not (to_rep((values[j7])) = 0))
+
+axiom H29 :
+  (various__search_for_zero__result8 = various__search_for_zero__result7)
+
+axiom H30 : (result7 = j7)
+
+axiom H31 : (j8 = 8)
+
+axiom H32 : (not (to_rep((values[j8])) = 0))
+
+axiom H33 :
+  (various__search_for_zero__result9 = various__search_for_zero__result8)
+
+axiom H34 : (result8 = j8)
+
+axiom H35 : (j9 = 9)
+
+axiom H36 : (not (to_rep((values[j9])) = 0))
+
+axiom H37 :
+  (various__search_for_zero__result10 = various__search_for_zero__result9)
+
+axiom H38 : (result9 = j9)
+
+axiom H39 : (j10 = 10)
+
+axiom H40 : (not (to_rep((values[j10])) = 0))
+
+axiom H41 :
+  (various__search_for_zero__result11 = various__search_for_zero__result10)
+
  (* File "various.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall various__search_for_zero__result:int.
-  forall various__search_for_zero__result1:int. forall result:int.
-  forall j1:int. forall various__search_for_zero__result2:int.
-  forall result1:int. forall j2:int.
-  forall various__search_for_zero__result3:int. forall result2:int.
-  forall j3:int. forall various__search_for_zero__result4:int.
-  forall result3:int. forall j4:int.
-  forall various__search_for_zero__result5:int. forall result4:int.
-  forall j5:int. forall various__search_for_zero__result6:int.
-  forall result5:int. forall j6:int.
-  forall various__search_for_zero__result7:int. forall result6:int.
-  forall j7:int. forall various__search_for_zero__result8:int.
-  forall result7:int. forall j8:int.
-  forall various__search_for_zero__result9:int. forall result8:int.
-  forall j9:int. forall various__search_for_zero__result10:int.
-  forall result9:int. forall j10:int.
-  forall various__search_for_zero__result11:int.
-  ((exists i:int. (((1 <= i) and (i <= 10)) and (to_rep((values[i])) = 0))) ->
-  (not (((result = j) and (j1 = 1)) and
-  (((not (to_rep((values[j1])) = 0)) and
-  ((various__search_for_zero__result2 = various__search_for_zero__result) and
-  (various__search_for_zero__result2 = various__search_for_zero__result1))) and
-  (((result1 = j1) and (j2 = 2)) and (((not (to_rep((values[j2])) = 0)) and
-  (various__search_for_zero__result3 = various__search_for_zero__result2)) and
-  (((result2 = j2) and (j3 = 3)) and (((not (to_rep((values[j3])) = 0)) and
-  (various__search_for_zero__result4 = various__search_for_zero__result3)) and
-  (((result3 = j3) and (j4 = 4)) and (((not (to_rep((values[j4])) = 0)) and
-  (various__search_for_zero__result5 = various__search_for_zero__result4)) and
-  (((result4 = j4) and (j5 = 5)) and (((not (to_rep((values[j5])) = 0)) and
-  (various__search_for_zero__result6 = various__search_for_zero__result5)) and
-  (((result5 = j5) and (j6 = 6)) and (((not (to_rep((values[j6])) = 0)) and
-  (various__search_for_zero__result7 = various__search_for_zero__result6)) and
-  (((result6 = j6) and (j7 = 7)) and (((not (to_rep((values[j7])) = 0)) and
-  (various__search_for_zero__result8 = various__search_for_zero__result7)) and
-  (((result7 = j7) and (j8 = 8)) and (((not (to_rep((values[j8])) = 0)) and
-  (various__search_for_zero__result9 = various__search_for_zero__result8)) and
-  (((result8 = j8) and (j9 = 9)) and (((not (to_rep((values[j9])) = 0)) and
-  (various__search_for_zero__result10 = various__search_for_zero__result9)) and
-  (((result9 = j9) and (j10 = 10)) and ((not (to_rep((values[j10])) = 0)) and
-  (various__search_for_zero__result11 = various__search_for_zero__result10))))))))))))))))))))))))
+goal WP_parameter_def : false

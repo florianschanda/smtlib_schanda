@@ -160,7 +160,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -475,52 +475,166 @@ axiom def_axiom :
   (forall temp___188:int.
   ((temp___185(temp___187)[temp___188]) = of_rep2(temp___187))))
 
+logic r__split_fields : (int,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic o : length_type
+
+logic o1 : (int,integer) farray
+
+logic o2 : ar_index
+
+logic o3 : length_type
+
+logic temp___182 : (int,integer) farray
+
+logic temp___1821 : ar_index
+
+logic temp___1822 : length_type
+
+logic o4 : ar_index
+
+logic o5 : (int,integer) farray
+
+logic o6 : ar_index
+
+logic o7 : length_type
+
+logic temp___184 : (int,integer) farray
+
+logic temp___1841 : ar_index
+
+logic temp___1842 : length_type
+
+logic result : (int,integer) farray
+
+logic result1 : ar_index
+
+logic result2 : length_type
+
+logic r__split_fields3 : (int,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic result3 : (int,integer) farray
+
+logic result4 : ar_index
+
+logic result5 : length_type
+
+logic r__split_fields6 : (int,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic result6 : (int,integer) farray
+
+logic result7 : ar_index
+
+logic result8 : length_type
+
+logic r__split_fields9 : (int,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic r__split_fields12 : (int,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+logic r__split_fields15 : (int,integer) farray
+
+logic r__split_fields16 : ar_index
+
+logic r__split_fields17 : length_type
+
+axiom H : (to_rep1(o) = 0)
+
+axiom H1 : (r__split_fields = o1)
+
+axiom H2 : (r__split_fields1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___182 = o1)
+
+axiom H5 : (temp___1821 = o2)
+
+axiom H6 : (temp___1822 = o3)
+
+axiom H7 : (result = r__split_fields)
+
+axiom H8 : (result1 = r__split_fields1)
+
+axiom H9 : (result2 = r__split_fields2)
+
+axiom H10 : (temp___182 = r__split_fields3)
+
+axiom H11 : (temp___1821 = r__split_fields4)
+
+axiom H12 : (temp___1822 = r__split_fields5)
+
+axiom H13 : (to_rep(o4) = 0)
+
+axiom H14 : (r__split_fields3 = o5)
+
+axiom H15 : (o4 = o6)
+
+axiom H16 : (r__split_fields5 = o7)
+
+axiom H17 : (temp___184 = o5)
+
+axiom H18 : (temp___1841 = o6)
+
+axiom H19 : (temp___1842 = o7)
+
+axiom H20 : (result3 = r__split_fields3)
+
+axiom H21 : (result4 = r__split_fields4)
+
+axiom H22 : (result5 = r__split_fields5)
+
+axiom H23 : (temp___184 = r__split_fields6)
+
+axiom H24 : (temp___1841 = r__split_fields7)
+
+axiom H25 : (temp___1842 = r__split_fields8)
+
+axiom H26 : (result6 = r__split_fields6)
+
+axiom H27 : (result7 = r__split_fields7)
+
+axiom H28 : (result8 = r__split_fields8)
+
+axiom H29 : (temp___185(0) = r__split_fields9)
+
+axiom H30 : (r__split_fields7 = r__split_fields10)
+
+axiom H31 : (r__split_fields8 = r__split_fields11)
+
+axiom H32 : (r__split_fields12 = r__split_fields9)
+
+axiom H33 : (r__split_fields13 = r__split_fields10)
+
+axiom H34 : (r__split_fields14 = r__split_fields11)
+
+axiom H35 : (r__split_fields15 = r__split_fields9)
+
+axiom H36 : (r__split_fields16 = r__split_fields10)
+
+axiom H37 : (r__split_fields17 = r__split_fields11)
+
  (* File "ring_buf.ads", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(int,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall o:length_type. forall o1:(int,integer) farray. forall o2:ar_index.
-  forall o3:length_type. forall temp___182:(int,integer) farray.
-  forall temp___1821:ar_index. forall temp___1822:length_type.
-  forall o4:ar_index. forall o5:(int,integer) farray. forall o6:ar_index.
-  forall o7:length_type. forall temp___184:(int,integer) farray.
-  forall temp___1841:ar_index. forall temp___1842:length_type.
-  forall result:(int,integer) farray. forall result1:ar_index.
-  forall result2:length_type. forall r__split_fields3:(int,integer) farray.
-  forall r__split_fields4:ar_index. forall r__split_fields5:length_type.
-  forall result3:(int,integer) farray. forall result4:ar_index.
-  forall result5:length_type. forall r__split_fields6:(int,integer) farray.
-  forall r__split_fields7:ar_index. forall r__split_fields8:length_type.
-  forall result6:(int,integer) farray. forall result7:ar_index.
-  forall result8:length_type. forall r__split_fields9:(int,integer) farray.
-  forall r__split_fields10:ar_index. forall r__split_fields11:length_type.
-  forall r__split_fields12:(int,integer) farray.
-  forall r__split_fields13:ar_index. forall r__split_fields14:length_type.
-  forall r__split_fields15:(int,integer) farray.
-  forall r__split_fields16:ar_index. forall r__split_fields17:length_type.
-  (((((((to_rep1(o) = 0) and ((r__split_fields = o1) and
-  ((r__split_fields1 = o2) and (o = o3)))) and ((temp___182 = o1) and
-  ((temp___1821 = o2) and (temp___1822 = o3)))) and
-  (((result = r__split_fields) and ((result1 = r__split_fields1) and
-  (result2 = r__split_fields2))) and ((temp___182 = r__split_fields3) and
-  ((temp___1821 = r__split_fields4) and
-  (temp___1822 = r__split_fields5))))) and (((((to_rep(o4) = 0) and
-  ((r__split_fields3 = o5) and ((o4 = o6) and (r__split_fields5 = o7)))) and
-  ((temp___184 = o5) and ((temp___1841 = o6) and (temp___1842 = o7)))) and
-  (((result3 = r__split_fields3) and ((result4 = r__split_fields4) and
-  (result5 = r__split_fields5))) and ((temp___184 = r__split_fields6) and
-  ((temp___1841 = r__split_fields7) and
-  (temp___1842 = r__split_fields8))))) and (((result6 = r__split_fields6) and
-  ((result7 = r__split_fields7) and (result8 = r__split_fields8))) and
-  ((temp___185(0) = r__split_fields9) and
-  ((r__split_fields7 = r__split_fields10) and
-  (r__split_fields8 = r__split_fields11)))))) and
-  (((r__split_fields12 = r__split_fields9) and
-  ((r__split_fields13 = r__split_fields10) and
-  (r__split_fields14 = r__split_fields11))) and
-  ((r__split_fields15 = r__split_fields9) and
-  ((r__split_fields16 = r__split_fields10) and
-  (r__split_fields17 = r__split_fields11))))) -> (is_empty({
-  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r__split_fields12;
+goal WP_parameter_def : (is_empty({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields12;
   rec__ring_buf__ring_buffer__first = r__split_fields13;
-  rec__ring_buf__ring_buffer__length = r__split_fields14 } }) = true)))
+  rec__ring_buf__ring_buffer__length = r__split_fields14 } }) = true)

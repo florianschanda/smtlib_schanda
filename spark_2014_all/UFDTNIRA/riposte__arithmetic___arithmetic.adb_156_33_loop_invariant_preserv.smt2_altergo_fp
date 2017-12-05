@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -276,18 +276,136 @@ function t34b__ref___projection(a: t34b__ref) : t34b = (a).t34b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r : int
+
+logic i : int
+
+logic arithmetic__halve_d__result : int
+
+logic temp___184 : int
+
+logic temp___183 : int
+
+logic r1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic r3 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : int
+
+logic r4 : int
+
+logic r5 : int
+
+logic i4 : int
+
+logic r6 : int
+
+logic i5 : int
+
+logic r7 : int
+
+logic i6 : int
+
+logic r8 : int
+
+logic i7 : int
+
+logic r9 : int
+
+logic i8 : int
+
+logic r10 : int
+
+logic i9 : int
+
+logic r11 : int
+
+logic i10 : int
+
+logic r12 : int
+
+logic i11 : int
+
+logic r13 : int
+
+logic i12 : int
+
+logic r14 : int
+
+logic i13 : int
+
+logic result4 : int
+
+logic arithmetic__halve_d__result1 : int
+
+logic arithmetic__halve_d__result2 : int
+
+logic arithmetic__halve_d__result3 : int
+
+logic r15 : int
+
+logic i14 : int
+
+logic arithmetic__halve_d__result4 : int
+
+logic r16 : int
+
+logic i15 : int
+
+logic arithmetic__halve_d__result5 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : ((0 <= 255) -> in_range1(r))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 0)
+
+axiom H4 : (0 <= i1)
+
+axiom H5 : (i1 <= 127)
+
+axiom H6 : (result1 = r)
+
+axiom H7 : (r2 = i1)
+
+axiom H8 : (not ((r2 + r2) = n))
+
+axiom H9 : (not (((r2 + r2) + 1) = n))
+
+axiom H10 : (((r3 = i2) and (((r3 + r3) + 1) <  n)) and in_range1(r3))
+
+axiom H11 : ((((0 <= 255) -> in_range1(r3)) and ((0 <= 127) ->
+  in_range2(i2))) and ((0 <= i2) and (i2 <= 127)))
+
+axiom H12 : (not (i2 = 127))
+
+axiom H13 : (i2 = result2)
+
+axiom H14 : (i3 = (i2 + 1))
+
+axiom H15 : (r3 = result3)
+
+axiom H16 : (r4 = i3)
+
+axiom H17 : (not ((r4 + r4) = n))
+
+axiom H18 : (not (((r4 + r4) + 1) = n))
+
  (* File "arithmetic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall i:int. forall result:int. forall i1:int.
-  forall result1:int. forall r1:int. forall r2:int. forall i2:int.
-  forall result2:int. forall i3:int. forall result3:int. forall r3:int.
-  (in_range1(n) -> (((0 <= 255) -> in_range1(r)) -> ((({ int__content =
-  result } = { int__content = i }) and (i1 = 0)) -> (((0 <= i1) and
-  (i1 <= 127)) -> ((({ int__content = result1 } = { int__content = r }) and
-  (r1 = i1)) -> ((not ((not ((r1 + r1) = n)) -> (((r1 + r1) + 1) = n))) ->
-  ((((r2 = i2) and (((r2 + r2) + 1) <  n)) and in_range1(r2)) ->
-  ((((((0 <= 255) -> in_range1(r2)) and ((0 <= 127) -> in_range2(i2))) and
-  ((0 <= i2) and (i2 <= 127))) and ((not (i2 = 127)) and (((i2 = result2) and
-  (i3 = (i2 + 1))) and (((r2 = result3) and (r3 = i3)) and
-  (not ((not ((r3 + r3) = n)) -> (((r3 + r3) + 1) = n))))))) ->
-  (r3 = i3))))))))))
+goal WP_parameter_def : (r4 = i3)

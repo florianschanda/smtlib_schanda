@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type coordinate_type
 
-predicate in_range(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq : int, int -> bool
 
@@ -298,11 +298,17 @@ axiom in_bounds__def_axiom :
   in_range((to_rep(c1) + to_rep1(c2)))) and
   in_range((to_rep(c1) - to_rep1(c2))))))
 
+logic temp___158 : coordinate_type
+
+logic temp___1581 : coordinate_type
+
+logic temp___1582 : radius_type
+
+axiom H : (((to_rep(temp___158) = 0) and (to_rep(temp___1581) = 0)) and
+  (to_rep1(temp___1582) = 0))
+
  (* File "shapes4.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___158:coordinate_type. forall temp___1581:coordinate_type.
-  forall temp___1582:radius_type. ((((to_rep(temp___158) = 0) and
-  (to_rep(temp___1581) = 0)) and (to_rep1(temp___1582) = 0)) -> (in_bounds({
-  us_split_fields1 = { rec__shapes4__circle__center_x = temp___158;
+goal WP_parameter_def : (in_bounds({ us_split_fields1 = {
+  rec__shapes4__circle__center_x = temp___158;
   rec__shapes4__circle__center_y = temp___1581;
-  rec__shapes4__circle__radius = temp___1582 } }) = true)))
+  rec__shapes4__circle__radius = temp___1582 } }) = true)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -268,7 +268,7 @@ axiom compare_def_gt :
 
 type cardindex
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 100))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 100))
 
 logic bool_eq5 : int, int -> bool
 
@@ -928,40 +928,432 @@ logic s7 : (int,cardindex) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic i : int
+
+logic o : int
+
+logic o1 : cardindex
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : cardindex
+
+logic temp___512 : int
+
+logic o5 : int
+
+logic o6 : cardindex
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : cardindex
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : cardindex
+
+logic temp___507 : int
+
+logic o14 : int
+
+logic o15 : card
+
+logic o16 : int
+
+logic o17 : card
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : cardindex
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : cardindex
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : cardindex
+
+logic o28 : int
+
+logic o29 : bool
+
+logic o30 : bool
+
+logic i1 : int
+
+logic j : int
+
+logic o31 : int
+
+logic o32 : cardindex
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic k : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : cardindex
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : bool
+
+logic o43 : int
+
+logic temp___473 : (int,cardindex) farray
+
+logic o44 : int
+
+logic o45 : cardindex
+
+logic temp___474 : int
+
+logic o46 : int
+
+logic temp___477 : (int,cardindex) farray
+
+logic o47 : int
+
+logic o48 : cardindex
+
+logic temp___478 : int
+
+logic o49 : int
+
+logic o50 : card
+
+logic o51 : int
+
+logic i2 : int
+
+logic j1 : int
+
+logic o52 : int
+
+logic o53 : cardindex
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : bool
+
+logic k1 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : cardindex
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : bool
+
+logic o63 : bool
+
+logic o64 : int
+
+logic temp___449 : (int,cardindex) farray
+
+logic o65 : int
+
+logic temp___451 : (int,cardindex) farray
+
+logic o66 : int
+
+logic o67 : cardindex
+
+logic o68 : int
+
+logic ist : int
+
+logic ip : int
+
+logic o69 : int
+
+logic o70 : cardindex
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : bool
+
+logic o74 : int
+
+logic temp___426 : (int,cardindex) farray
+
+logic o75 : int
+
+logic o76 : cardindex
+
+logic temp___427 : int
+
+logic o77 : int
+
+logic temp___430 : (int,cardindex) farray
+
+logic o78 : int
+
+logic o79 : cardindex
+
+logic temp___431 : int
+
+logic o80 : int
+
+logic o81 : cardindex
+
+logic o82 : int
+
+logic o83 : bool
+
+logic i3 : int
+
+logic o84 : int
+
+logic o85 : cardindex
+
+logic temp___411 : int
+
+logic o86 : int
+
+logic temp___412 : (int,cardindex) farray
+
+logic o87 : int
+
+logic o88 : cardindex
+
+logic temp___414 : int
+
+logic o89 : int
+
+logic o90 : cardindex
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : cardindex
+
+logic o94 : int
+
+logic o95 : cardindex
+
+logic temp___408 : int
+
+logic o96 : int
+
+logic o97 : cardindex
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : bool
+
+logic o102 : bool
+
+logic o103 : int
+
+logic o104 : cardindex
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : cardindex
+
+logic o108 : int
+
+logic o109 : bool
+
+logic o110 : bool
+
+logic i4 : int
+
+logic o111 : int
+
+logic o112 : cardindex
+
+logic o113 : int
+
+logic o114 : bool
+
+logic j2 : int
+
+logic o115 : int
+
+logic o116 : cardindex
+
+logic o117 : int
+
+logic o118 : int
+
+logic o119 : bool
+
+logic o120 : int
+
+logic temp___389 : (int,cardindex) farray
+
+logic o121 : int
+
+logic temp___391 : (int,cardindex) farray
+
+logic o122 : int
+
+logic o123 : cardindex
+
+logic o124 : int
+
+logic o125 : bool
+
+logic o126 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+axiom H : (((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) ->
+  ((result4 = true) <->
+  (forall i5:int. (((0 <= i5) and (i5 <= (to_rep1(s2) - 1))) ->
+  (((1 <= to_rep1((s3[i5]))) and (to_rep1((s3[i5])) <= to_rep1(s))) and
+  (forall j3:int. (((0 <= j3) and (j3 <= (to_rep1((s3[i5])) - 1))) ->
+  ((0 <= to_rep1(((s4[i5])[j3]))) and
+  (to_rep1(((s4[i5])[j3])) <  to_rep1(s))))))))))
+
+axiom H1 : ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
+  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) ->
+  (result4 = false))
+
+axiom H2 : ((result4 = true) -> ((result3 = true) <->
+  (forall i5:int. (((0 <= i5) and (i5 <= (to_rep1(s) - 1))) ->
+  ((((0 <= to_rep1((s5[i5]))) and
+  (to_rep1((s5[i5])) <= (to_rep1(s2) - 1))) and ((0 <= to_rep1((s6[i5]))) and
+  (to_rep1((s6[i5])) <= (to_rep1((s3[to_rep1((s5[i5]))])) - 1)))) and
+  (to_rep1(((s4[to_rep1((s5[i5]))])[to_rep1((s6[i5]))])) = i5))))))
+
+axiom H3 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H4 : (result3 = true)
+
+axiom H5 : (0 <= ist)
+
+axiom H6 : (ist <= (to_rep1(s2) - 1))
+
+axiom H7 : ((0 <= ist) and (ist <= 99))
+
+axiom H8 : (o69 = ist)
+
+axiom H9 : (o70 = (s3[o69]))
+
+axiom H10 : (o71 = to_rep1(o70))
+
+axiom H11 : (o72 = (o71 - 1))
+
+axiom H12 : (((ip <= o72) -> (o73 = true)) and ((not (ip <= o72)) ->
+  (o73 = false)))
+
+axiom H13 : (((0 <= ip) -> (result8 = o73)) and ((not (0 <= ip)) ->
+  (result8 = false)))
+
+axiom H14 : (result8 = true)
+
+axiom H15 : ((0 <= ist) and (ist <= 99))
+
+axiom H16 : (o77 = ist)
+
+axiom H17 : (temp___430 = (s4[o77]))
+
+axiom H18 : ((0 <= ip) and (ip <= 99))
+
+axiom H19 : (o78 = ip)
+
+axiom H20 : (o79 = (temp___430[o78]))
+
+axiom H21 : (temp___431 = to_rep1(o79))
+
+axiom H22 : ((0 <= temp___431) and (temp___431 <= 99))
+
+axiom H23 : (o80 = temp___431)
+
+axiom H24 : (o81 = (s6[o80]))
+
+axiom H25 : (o82 = to_rep1(o81))
+
+axiom H26 : (((ip = o82) -> (o83 = true)) and ((not (ip = o82)) ->
+  (o83 = false)))
+
+axiom H27 : ((0 <= ist) and (ist <= 99))
+
+axiom H28 : (o74 = ist)
+
+axiom H29 : (temp___426 = (s4[o74]))
+
  (* File "patience.ads", line 53, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ist:int. forall ip:int. forall o:int. forall o1:cardindex.
-  forall o2:int. forall o3:int. forall o4:bool. forall o5:int.
-  forall temp___426:(int,cardindex) farray. forall o6:int.
-  forall temp___430:(int,cardindex) farray. forall o7:int.
-  forall o8:cardindex. forall temp___431:int. forall o9:int.
-  forall o10:cardindex. forall o11:int. forall o12:bool. forall result:bool.
-  forall result1:bool. forall result2:bool. ((((((((0 <= to_rep1(s2)) and
-  (to_rep1(s2) <= to_rep1(s))) and (to_rep1(s) <= 100)) and
-  ((to_rep1(s) = 0) or (0 <  to_rep1(s2)))) and ((result1 = true) <->
-  (forall i:int. (((0 <= i) and (i <= (to_rep1(s2) - 1))) ->
-  (((1 <= to_rep1((s3[i]))) and (to_rep1((s3[i])) <= to_rep1(s))) and
-  (forall j:int. (((0 <= j) and (j <= (to_rep1((s3[i])) - 1))) ->
-  ((0 <= to_rep1(((s4[i])[j]))) and (to_rep1(((s4[i])[j])) <  to_rep1(s)))))))))) or
-  ((not ((((0 <= to_rep1(s2)) and (to_rep1(s2) <= to_rep1(s))) and
-  (to_rep1(s) <= 100)) and ((to_rep1(s) = 0) or (0 <  to_rep1(s2))))) and
-  (result1 = false))) and (((result1 = true) and ((result = true) <->
-  (forall i:int. (((0 <= i) and (i <= (to_rep1(s) - 1))) ->
-  ((((0 <= to_rep1((s5[i]))) and (to_rep1((s5[i])) <= (to_rep1(s2) - 1))) and
-  ((0 <= to_rep1((s6[i]))) and
-  (to_rep1((s6[i])) <= (to_rep1((s3[to_rep1((s5[i]))])) - 1)))) and
-  (to_rep1(((s4[to_rep1((s5[i]))])[to_rep1((s6[i]))])) = i)))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (((0 <= ist) and (ist <= (to_rep1(s2) - 1))) -> (((((((((0 <= ist) and
-  (ist <= 99)) and (o = ist)) and (o1 = (s3[o]))) and (o2 = to_rep1(o1))) and
-  (o3 = (o2 - 1))) and (((ip <= o3) and (o4 = true)) or ((not (ip <= o3)) and
-  (o4 = false)))) and (((0 <= ip) and (result2 = o4)) or ((not (0 <= ip)) and
-  (result2 = false)))) -> ((result2 = true) -> (((((((((((0 <= ist) and
-  (ist <= 99)) and (o6 = ist)) and (temp___430 = (s4[o6]))) and
-  ((((0 <= ip) and (ip <= 99)) and (o7 = ip)) and
-  (o8 = (temp___430[o7])))) and (temp___431 = to_rep1(o8))) and
-  (((0 <= temp___431) and (temp___431 <= 99)) and (o9 = temp___431))) and
-  (o10 = (s6[o9]))) and (o11 = to_rep1(o10))) and (((ip = o11) and
-  (o12 = true)) or ((not (ip = o11)) and (o12 = false)))) ->
-  (((((0 <= ist) and (ist <= 99)) and (o5 = ist)) and
-  (temp___426 = (s4[o5]))) -> (0 <= ip)))))))))
+goal WP_parameter_def : (0 <= ip)

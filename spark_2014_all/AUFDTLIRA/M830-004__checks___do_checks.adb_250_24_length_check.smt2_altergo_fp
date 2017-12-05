@@ -219,7 +219,7 @@ axiom notb_def :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -422,13 +422,16 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : dynamic_property(0, 2147483647, to_rep(first(x1)),
+  to_rep(last(x1)))
+
+axiom H1 : ((to_rep(first(x1)) = 1) and (to_rep(last(x1)) = 11))
+
  (* File "do_checks.adb", line 235, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483647, to_rep(first(x1)),
-  to_rep(last(x1))) -> (((to_rep(first(x1)) = 1) and
-  (to_rep(last(x1)) = 11)) -> (((to_rep(first(x1)) <= to_rep(last(x1))) ->
+goal WP_parameter_def : (((to_rep(first(x1)) <= to_rep(last(x1))) ->
   (((0 <= 10) ->
   (((to_rep(last(x1)) - to_rep(first(x1))) + 1) = ((10 - 0) + 1))) and
   ((not (0 <= 10)) ->
   (((to_rep(last(x1)) - to_rep(first(x1))) + 1) = 0)))) and
   ((not (to_rep(first(x1)) <= to_rep(last(x1)))) -> ((0 <= 10) ->
-  (0 = ((10 - 0) + 1)))))))
+  (0 = ((10 - 0) + 1)))))

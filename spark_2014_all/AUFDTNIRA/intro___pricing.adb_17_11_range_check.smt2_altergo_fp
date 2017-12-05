@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -528,11 +528,106 @@ axiom mult__post_axiom :
   ((not ((x * y) <  10000)) -> ((10000 <= (x * y)) -> (mult(x,
   y) = 10000)))) and in_range3(mult(x, y)))))
 
+logic total : int
+
+logic it : int
+
+logic pricing__price_of_basket__result : int
+
+logic temp___166 : int
+
+logic temp___165 : int
+
+logic k : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic it1 : int
+
+logic result : int
+
+logic total1 : int
+
+logic result1 : int
+
+logic it2 : int
+
+logic total2 : int
+
+logic it3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic total3 : int
+
+logic result4 : int
+
+logic it4 : int
+
+logic total4 : int
+
+logic it5 : int
+
+logic total5 : int
+
+logic it6 : int
+
+logic total6 : int
+
+logic it7 : int
+
+logic total7 : int
+
+logic it8 : int
+
+logic total8 : int
+
+logic it9 : int
+
+logic total9 : int
+
+logic it10 : int
+
+logic result5 : int
+
+logic pricing__price_of_basket__result1 : int
+
+logic pricing__price_of_basket__result2 : int
+
+logic pricing__price_of_basket__result3 : int
+
+logic total10 : int
+
+logic it11 : int
+
+logic pricing__price_of_basket__result4 : int
+
+logic total11 : int
+
+logic it12 : int
+
+logic pricing__price_of_basket__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(bk1)),
+  to_rep1(last(bk1)))
+
+axiom H1 : (result = total)
+
+axiom H2 : (total1 = 0)
+
+axiom H3 : in_range3(total1)
+
+axiom H4 : (to_rep1(first(bk1)) <= to_rep1(last(bk1)))
+
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall total:int. forall result:int. forall total1:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(bk1)),
-  to_rep1(last(bk1))) -> ((({ int__content = result } = { int__content =
-  total }) and (total1 = 0)) -> (in_range3(total1) ->
-  ((to_rep1(first(bk1)) <= to_rep1(last(bk1))) ->
-  (1 <= to_rep1(first(bk1))))))))
+goal WP_parameter_def : (1 <= to_rep1(first(bk1)))

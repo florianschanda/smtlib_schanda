@@ -86,6 +86,7 @@
 (declare-const target__split_fields us_main_type)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (length (mk___rep target__split_discrs (mk___split_fields target__split_fields)))) (and (in_range1 o) (<= o (to_rep (rec__sorted_lists__my_lists__list__capacity target__split_discrs))))))
 (assert (= o1 (- (to_rep (rec__sorted_lists__my_lists__list__capacity target__split_discrs)) o)))
 (assert (not (in_range o1)))

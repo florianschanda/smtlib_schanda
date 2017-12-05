@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -236,17 +236,17 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((a).us_split_discrs1).rec__test__search_result__found = ((b).us_split_discrs1).rec__test__search_result__found) and
-  (test__search_result__index__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__test__search_result__index) = to_rep(((b).us_split_fields1).rec__test__search_result__index)))) and
-  (test__search_result__reason__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__search_result__reason) = to_rep1(((b).us_split_fields1).rec__test__search_result__reason)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__test__search_result__found = ((b).us_split_discrs1).rec__test__search_result__found) and
-  (test__search_result__index__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__test__search_result__index) = to_rep(((b).us_split_fields1).rec__test__search_result__index)))) and
+  ((((((a).us_split_discrs1).rec__test__search_result__found = ((b).us_split_discrs1).rec__test__search_result__found) and
+  ((test__search_result__index__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__test__search_result__index) = to_rep(((b).us_split_fields1).rec__test__search_result__index))) and
   (test__search_result__reason__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__search_result__reason) = to_rep1(((b).us_split_fields1).rec__test__search_result__reason))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__test__search_result__found = ((b).us_split_discrs1).rec__test__search_result__found) and
+  ((test__search_result__index__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__test__search_result__index) = to_rep(((b).us_split_fields1).rec__test__search_result__index))) and
+  (test__search_result__reason__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__search_result__reason) = to_rep1(((b).us_split_fields1).rec__test__search_result__reason)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -340,7 +340,9 @@ logic x__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x__split_discrs : bool
+
+axiom H : (to_int(x__split_discrs) = 1)
+
  (* File "test.adb", line 88, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_discrs:bool. ((to_int(x__split_discrs) = 1) ->
-  (to_int(x__split_discrs) = 1)))
+goal WP_parameter_def : (to_int(x__split_discrs) = 1)

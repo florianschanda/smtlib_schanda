@@ -95,6 +95,7 @@
 (declare-const y us_rep1)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (= (always_true x x) true))
-(assert (not (not (= (always_true1 y y) true))))
+(assert (= (always_true1 y y) true))
+(assert (not false))
 (check-sat)
 (exit)

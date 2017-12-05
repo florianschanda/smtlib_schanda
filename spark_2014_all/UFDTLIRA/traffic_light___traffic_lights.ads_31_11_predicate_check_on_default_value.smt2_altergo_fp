@@ -146,7 +146,7 @@ function us_split_fields__ref___27__projection(a: us_split_fields__ref) : us_spl
 type us_rep1 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___27__projection(a: us_rep1) : us_split_fields =
+function us_rep___28__projection(a: us_rep1) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq2 : us_rep1, us_rep1 -> bool
@@ -319,7 +319,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref1) : us_sp
 type us_rep2 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___28__projection(a: us_rep2) : us_split_fields2 =
+function us_rep___29__projection(a: us_rep2) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -463,17 +463,25 @@ logic self__5 : bool
 
 logic self__6 : bool
 
+logic temp___1501 : bool
+
+logic temp___15011 : bool
+
+logic temp___15012 : bool
+
+logic temp___15013 : bool
+
+logic temp___15014 : bool
+
+axiom H : (((((temp___1501 = of_int(0)) and (temp___15011 = of_int(0))) and
+  (temp___15012 = of_int(1))) and (temp___15013 = of_int(1))) and
+  (temp___15014 = of_int(0)))
+
  (* File "traffic_lights.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___1511:bool. forall temp___15111:bool.
-  forall temp___15112:bool. forall temp___15113:bool.
-  forall temp___15114:bool. ((((((temp___1511 = of_int(0)) and
-  (temp___15111 = of_int(0))) and (temp___15112 = of_int(1))) and
-  (temp___15113 = of_int(1))) and (temp___15114 = of_int(0))) ->
-  (valid_combination({ us_split_fields1 = {
-  rec__traffic_lights__lights_state__vehicles_green = temp___1511;
-  rec__traffic_lights__lights_state__vehicles_yellow = temp___15111;
-  rec__traffic_lights__lights_state__vehicles_red = temp___15112;
-  rec__traffic_lights__lights_state__pedestrians_green = temp___15113;
-  rec__traffic_lights__lights_state__pedestrians_red = temp___15114 }
-  }) = true)))
+goal WP_parameter_def : (valid_combination({ us_split_fields1 = {
+  rec__traffic_lights__lights_state__vehicles_green = temp___1501;
+  rec__traffic_lights__lights_state__vehicles_yellow = temp___15011;
+  rec__traffic_lights__lights_state__vehicles_red = temp___15012;
+  rec__traffic_lights__lights_state__pedestrians_green = temp___15013;
+  rec__traffic_lights__lights_state__pedestrians_red = temp___15014 }
+  }) = true)

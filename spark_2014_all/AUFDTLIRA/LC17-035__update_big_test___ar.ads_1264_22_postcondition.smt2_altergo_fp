@@ -379,12 +379,34 @@ logic r1 : et2
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = r;
+  rec__ar__rec1t__g1 = r1 } }]))
+
+axiom H3 : (a1 = a2)
+
+axiom H4 : (a3 = a1)
+
+logic n : int
+
+axiom H5 : (1 <= n)
+
+axiom H6 : (n <= 10)
+
+axiom H7 : (not (n = i))
+
  (* File "ar.ads", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall result:(int,us_rep) farray.
-  forall a1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall a3:(int,us_rep) farray. ((in_range1(i) and (((result = a) and
-  (a1 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = r;
-  rec__ar__rec1t__g1 = r1 } }]))) and ((a1 = a2) and (a3 = a1)))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> ((not (n = i)) ->
-  (bool_eq5((a2[n]), (a[n])) = true))))))
+goal WP_parameter_def : (bool_eq5((a2[n]), (a[n])) = true)

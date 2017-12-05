@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -263,18 +263,64 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "math_simple_abstract.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall temp___133:int. forall result:int. forall j1:int.
-  forall j2:int. forall j3:int. forall j4:int. forall j5:int. forall j6:int.
-  forall j7:int. forall j8:int. ((in_range1(arg1) and (in_range1(arg2) and
-  ((not (mod(arg1, arg2) = 0)) and (((({ int__content = result } = {
-  int__content = j }) and (j1 = 1)) and ((((1 <= j1) and
-  (j1 <= 2147483647)) and ((((temp___133 = j1) and
+logic j : int
+
+logic temp___133 : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic result1 : int
+
+logic j3 : int
+
+logic j4 : int
+
+logic j5 : int
+
+logic j6 : int
+
+logic j7 : int
+
+logic j8 : int
+
+logic j9 : int
+
+logic j10 : int
+
+logic j11 : int
+
+axiom H : in_range1(arg1)
+
+axiom H1 : in_range1(arg2)
+
+axiom H2 : (not (mod(arg1, arg2) = 0))
+
+axiom H3 : (result = j)
+
+axiom H4 : (j1 = 1)
+
+axiom H5 : (((1 <= j1) and (j1 <= 2147483647)) -> (((temp___133 = j1) and
   ((comp_div((j1 * arg2),arg2) = j1) and ((not ((arg2 * j1) = arg1)) and
   ((forall k:int. (((1 <= k) and (k <= j2)) -> (not ((arg2 * k) = arg1)))) and
   ((((1 <= 2147483647) -> in_range1(j2)) and ((1 <= j2) and
-  (j2 <= 2147483647))) and (j2 = 2147483647)))))) and ((j2 = j3) and
-  (j4 = j2))) and ((j5 = j3) and (j6 = j4)))) or ((not ((1 <= j1) and
-  (j1 <= 2147483647))) and ((j1 = j5) and (j6 = j1))))) and ((j7 = j5) and
-  (j8 = j6)))))) -> (not (divides(arg2, arg1) = true))))
+  (j2 <= 2147483647))) and (j2 = 2147483647)))))) and ((j2 = j6) and
+  (j7 = j2))))
+
+axiom H6 : (((1 <= j1) and (j1 <= 2147483647)) -> (j8 = j6))
+
+axiom H7 : (((1 <= j1) and (j1 <= 2147483647)) -> (j9 = j7))
+
+axiom H8 : ((not ((1 <= j1) and (j1 <= 2147483647))) -> (j1 = j8))
+
+axiom H9 : ((not ((1 <= j1) and (j1 <= 2147483647))) -> (j9 = j1))
+
+axiom H10 : (j10 = j8)
+
+axiom H11 : (j11 = j9)
+
+ (* File "math_simple_abstract.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (not (divides(arg2, arg1) = true))

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -470,10 +470,51 @@ axiom peek__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic e : int
+
+logic top : int
+
+logic content : (int,positive) farray
+
+logic us : int
+
+logic o : int
+
+logic o1 : positive
+
+logic o2 : int
+
+logic us1 : int
+
+logic o3 : int
+
+logic result : int
+
+logic e1 : int
+
+logic result1 : int
+
+logic top1 : int
+
+logic e2 : int
+
+logic top2 : int
+
+logic e3 : int
+
+logic top3 : int
+
+axiom H : in_range1(max)
+
+axiom H1 : ((1 <= 2147483647) -> in_range1(e))
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
+  to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (not (is_empty(top) = true))
+
  (* File "use_stack.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall top:int. (in_range1(max) -> (((1 <= 2147483647) ->
-  in_range1(e)) -> (dynamic_property(0, last, top) -> ((dynamic_property2(1,
-  max, to_rep1(content__first), to_rep1(content__last)) and
-  ((to_rep1(content__first) = 1) and (to_rep1(content__last) = max))) ->
-  ((not (is_empty(top) = true)) -> (to_rep1(content__first) <= top)))))))
+goal WP_parameter_def : (to_rep1(content__first) <= top)

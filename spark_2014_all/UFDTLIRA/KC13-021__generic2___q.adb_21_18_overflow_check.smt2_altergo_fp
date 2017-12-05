@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -146,7 +146,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type t1
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -374,7 +374,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type t2
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -590,37 +590,120 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic x4 : int
+
+logic r1__split_fields : t1
+
+logic r1__split_fields1 : bool
+
+logic r1__split_fields2 : t3
+
+logic r1__split_fields3 : integer
+
+logic r2__split_fields : bool
+
+logic r2__split_fields1 : t2
+
+logic r2__split_fields2 : t31
+
+logic r2__split_fields3 : integer
+
+logic temp___183 : t1
+
+logic temp___1831 : bool
+
+logic temp___1832 : t3
+
+logic temp___1833 : integer
+
+logic temp___184 : bool
+
+logic temp___1841 : t2
+
+logic temp___1842 : t31
+
+logic temp___1843 : integer
+
+logic o : int
+
+logic result : t1
+
+logic result1 : bool
+
+logic result2 : t3
+
+logic result3 : integer
+
+logic r1__split_fields4 : t1
+
+logic r1__split_fields5 : bool
+
+logic r1__split_fields6 : t3
+
+logic r1__split_fields7 : integer
+
+logic result4 : bool
+
+logic result5 : t2
+
+logic result6 : t31
+
+logic result7 : integer
+
+logic r2__split_fields4 : bool
+
+logic r2__split_fields5 : t2
+
+logic r2__split_fields6 : t31
+
+logic r2__split_fields7 : integer
+
+axiom H : in_range(x2)
+
+axiom H1 : in_range1(x3)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(x4))
+
+axiom H3 : ({ us_split_fields1 = { rec__q__p1__r__a = temp___183;
+  rec__q__p1__r__b = temp___1831; rec__q__p1__r__c = temp___1832;
+  rec__q__p1__r__d = temp___1833 } } = pack(x2, x1, x3))
+
+axiom H4 : (result = r1__split_fields)
+
+axiom H5 : (result1 = r1__split_fields1)
+
+axiom H6 : (result2 = r1__split_fields2)
+
+axiom H7 : (result3 = r1__split_fields3)
+
+axiom H8 : (temp___183 = r1__split_fields4)
+
+axiom H9 : (temp___1831 = r1__split_fields5)
+
+axiom H10 : (temp___1832 = r1__split_fields6)
+
+axiom H11 : (temp___1833 = r1__split_fields7)
+
+axiom H12 : ({ us_split_fields3 = { rec__q__p2__r__a = temp___184;
+  rec__q__p2__r__b = temp___1841; rec__q__p2__r__c = temp___1842;
+  rec__q__p2__r__d = temp___1843 } } = pack1(x1, x2, x3))
+
+axiom H13 : (result4 = r2__split_fields)
+
+axiom H14 : (result5 = r2__split_fields1)
+
+axiom H15 : (result6 = r2__split_fields2)
+
+axiom H16 : (result7 = r2__split_fields3)
+
+axiom H17 : (temp___184 = r2__split_fields4)
+
+axiom H18 : (temp___1841 = r2__split_fields5)
+
+axiom H19 : (temp___1842 = r2__split_fields6)
+
+axiom H20 : (temp___1843 = r2__split_fields7)
+
  (* File "p.ads", line 16, characters 0-0 *)
 goal WP_parameter_def :
-  (forall x4:int. forall r1__split_fields:t1. forall r1__split_fields1:bool.
-  forall r1__split_fields2:t3. forall r1__split_fields3:integer.
-  forall r2__split_fields:bool. forall r2__split_fields1:t2.
-  forall r2__split_fields2:t31. forall r2__split_fields3:integer.
-  forall temp___183:t1. forall temp___1831:bool. forall temp___1832:t3.
-  forall temp___1833:integer. forall temp___184:bool. forall temp___1841:t2.
-  forall temp___1842:t31. forall temp___1843:integer. forall result:t1.
-  forall result1:bool. forall result2:t3. forall result3:integer.
-  forall r1__split_fields4:t1. forall r1__split_fields5:bool.
-  forall r1__split_fields6:t3. forall r1__split_fields7:integer.
-  forall result4:bool. forall result5:t2. forall result6:t31.
-  forall result7:integer. forall r2__split_fields4:bool.
-  forall r2__split_fields5:t2. forall r2__split_fields6:t31.
-  forall r2__split_fields7:integer. (in_range(x2) -> (in_range1(x3) ->
-  ((((-2147483648) <= 2147483647) -> in_range(x4)) -> ((({ us_split_fields1 =
-  { rec__q__p1__r__a = temp___183; rec__q__p1__r__b = temp___1831;
-  rec__q__p1__r__c = temp___1832; rec__q__p1__r__d = temp___1833 }
-  } = pack(x2, x1, x3)) and (((result = r1__split_fields) and
-  ((result1 = r1__split_fields1) and ((result2 = r1__split_fields2) and
-  (result3 = r1__split_fields3)))) and ((temp___183 = r1__split_fields4) and
-  ((temp___1831 = r1__split_fields5) and
-  ((temp___1832 = r1__split_fields6) and
-  (temp___1833 = r1__split_fields7)))))) -> ((({ us_split_fields3 = {
-  rec__q__p2__r__a = temp___184; rec__q__p2__r__b = temp___1841;
-  rec__q__p2__r__c = temp___1842; rec__q__p2__r__d = temp___1843 }
-  } = pack1(x1, x2, x3)) and (((result4 = r2__split_fields) and
-  ((result5 = r2__split_fields1) and ((result6 = r2__split_fields2) and
-  (result7 = r2__split_fields3)))) and ((temp___184 = r2__split_fields4) and
-  ((temp___1841 = r2__split_fields5) and
-  ((temp___1842 = r2__split_fields6) and
-  (temp___1843 = r2__split_fields7)))))) ->
-  in_range((to_rep(r1__split_fields7) + to_rep(r2__split_fields7)))))))))
+  in_range((to_rep(r1__split_fields7) + to_rep(r2__split_fields7)))

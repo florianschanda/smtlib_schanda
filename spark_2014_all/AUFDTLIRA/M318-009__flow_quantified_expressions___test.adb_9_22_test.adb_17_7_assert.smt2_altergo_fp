@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -250,53 +250,348 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic table : (int,integer) farray
+
+logic i : int
+
+logic temp_table : (int,integer) farray
+
+logic i1 : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic o8 : integer
+
+logic o9 : (int,integer) farray
+
+logic o10 : integer
+
+logic o11 : (int,integer) farray
+
+logic o12 : integer
+
+logic o13 : (int,integer) farray
+
+logic o14 : integer
+
+logic o15 : (int,integer) farray
+
+logic o16 : integer
+
+logic o17 : (int,integer) farray
+
+logic o18 : integer
+
+logic o19 : (int,integer) farray
+
+logic o20 : integer
+
+logic o21 : (int,integer) farray
+
+logic o22 : integer
+
+logic o23 : (int,integer) farray
+
+logic o24 : integer
+
+logic o25 : (int,integer) farray
+
+logic o26 : integer
+
+logic o27 : (int,integer) farray
+
+logic o28 : integer
+
+logic o29 : (int,integer) farray
+
+logic o30 : integer
+
+logic o31 : (int,integer) farray
+
+logic o32 : integer
+
+logic o33 : (int,integer) farray
+
+logic o34 : integer
+
+logic o35 : (int,integer) farray
+
+logic o36 : integer
+
+logic o37 : (int,integer) farray
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : (int,integer) farray
+
+logic table1 : (int,integer) farray
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,integer) farray
+
+logic table2 : (int,integer) farray
+
+logic result4 : int
+
+logic i4 : int
+
+logic result5 : (int,integer) farray
+
+logic table3 : (int,integer) farray
+
+logic result6 : int
+
+logic i5 : int
+
+logic result7 : (int,integer) farray
+
+logic table4 : (int,integer) farray
+
+logic result8 : int
+
+logic i6 : int
+
+logic result9 : (int,integer) farray
+
+logic table5 : (int,integer) farray
+
+logic result10 : int
+
+logic i7 : int
+
+logic result11 : (int,integer) farray
+
+logic table6 : (int,integer) farray
+
+logic result12 : int
+
+logic i8 : int
+
+logic result13 : (int,integer) farray
+
+logic table7 : (int,integer) farray
+
+logic result14 : int
+
+logic i9 : int
+
+logic result15 : (int,integer) farray
+
+logic table8 : (int,integer) farray
+
+logic result16 : int
+
+logic i10 : int
+
+logic result17 : (int,integer) farray
+
+logic table9 : (int,integer) farray
+
+logic result18 : bool
+
+logic result19 : (int,integer) farray
+
+logic table10 : (int,integer) farray
+
+logic result20 : int
+
+logic i11 : int
+
+logic result21 : (int,integer) farray
+
+logic temp_table1 : (int,integer) farray
+
+logic result22 : int
+
+logic i12 : int
+
+logic result23 : (int,integer) farray
+
+logic temp_table2 : (int,integer) farray
+
+logic result24 : int
+
+logic i13 : int
+
+logic result25 : (int,integer) farray
+
+logic temp_table3 : (int,integer) farray
+
+logic result26 : int
+
+logic i14 : int
+
+logic result27 : (int,integer) farray
+
+logic temp_table4 : (int,integer) farray
+
+logic result28 : int
+
+logic i15 : int
+
+logic result29 : (int,integer) farray
+
+logic temp_table5 : (int,integer) farray
+
+logic result30 : int
+
+logic i16 : int
+
+logic result31 : (int,integer) farray
+
+logic temp_table6 : (int,integer) farray
+
+logic result32 : int
+
+logic i17 : int
+
+logic result33 : (int,integer) farray
+
+logic temp_table7 : (int,integer) farray
+
+logic result34 : int
+
+logic i18 : int
+
+logic result35 : (int,integer) farray
+
+logic temp_table8 : (int,integer) farray
+
+logic result36 : int
+
+logic i19 : int
+
+logic result37 : (int,integer) farray
+
+logic temp_table9 : (int,integer) farray
+
+axiom H : (result = i)
+
+axiom H1 : (i2 = 9)
+
+axiom H2 : (to_rep(o) = i2)
+
+axiom H3 : (o1 = (table[(10 - i2) <- o]))
+
+axiom H4 : (result1 = table)
+
+axiom H5 : (table1 = o1)
+
+axiom H6 : (i2 = result2)
+
+axiom H7 : (i3 = 8)
+
+axiom H8 : (to_rep(o2) = i3)
+
+axiom H9 : (o3 = (table1[(10 - i3) <- o2]))
+
+axiom H10 : (table1 = result3)
+
+axiom H11 : (table2 = o3)
+
+axiom H12 : (i3 = result4)
+
+axiom H13 : (i4 = 7)
+
+axiom H14 : (to_rep(o4) = i4)
+
+axiom H15 : (o5 = (table2[(10 - i4) <- o4]))
+
+axiom H16 : (table2 = result5)
+
+axiom H17 : (table3 = o5)
+
+axiom H18 : (i4 = result6)
+
+axiom H19 : (i5 = 6)
+
+axiom H20 : (to_rep(o6) = i5)
+
+axiom H21 : (o7 = (table3[(10 - i5) <- o6]))
+
+axiom H22 : (table3 = result7)
+
+axiom H23 : (table4 = o7)
+
+axiom H24 : (i5 = result8)
+
+axiom H25 : (i6 = 5)
+
+axiom H26 : (to_rep(o8) = i6)
+
+axiom H27 : (o9 = (table4[(10 - i6) <- o8]))
+
+axiom H28 : (table4 = result9)
+
+axiom H29 : (table5 = o9)
+
+axiom H30 : (i6 = result10)
+
+axiom H31 : (i7 = 4)
+
+axiom H32 : (to_rep(o10) = i7)
+
+axiom H33 : (o11 = (table5[(10 - i7) <- o10]))
+
+axiom H34 : (table5 = result11)
+
+axiom H35 : (table6 = o11)
+
+axiom H36 : (i7 = result12)
+
+axiom H37 : (i8 = 3)
+
+axiom H38 : (to_rep(o12) = i8)
+
+axiom H39 : (o13 = (table6[(10 - i8) <- o12]))
+
+axiom H40 : (table6 = result13)
+
+axiom H41 : (table7 = o13)
+
+axiom H42 : (i8 = result14)
+
+axiom H43 : (i9 = 2)
+
+axiom H44 : (to_rep(o14) = i9)
+
+axiom H45 : (o15 = (table7[(10 - i9) <- o14]))
+
+axiom H46 : (table7 = result15)
+
+axiom H47 : (table8 = o15)
+
+axiom H48 : (i9 = result16)
+
+axiom H49 : (i10 = 1)
+
+axiom H50 : (to_rep(o16) = i10)
+
+axiom H51 : (o17 = (table8[(10 - i10) <- o16]))
+
+axiom H52 : (result17 = table8)
+
+axiom H53 : (table9 = o17)
+
  (* File "test.adb", line 2, characters 0-0 *)
 goal WP_parameter_def :
-  (forall table:(int,integer) farray. forall i:int. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:integer.
-  forall o5:(int,integer) farray. forall o6:integer.
-  forall o7:(int,integer) farray. forall o8:integer.
-  forall o9:(int,integer) farray. forall o10:integer.
-  forall o11:(int,integer) farray. forall o12:integer.
-  forall o13:(int,integer) farray. forall o14:integer.
-  forall o15:(int,integer) farray. forall o16:integer.
-  forall o17:(int,integer) farray. forall result:int. forall i1:int.
-  forall result1:(int,integer) farray. forall table1:(int,integer) farray.
-  forall result2:int. forall i2:int. forall result3:(int,integer) farray.
-  forall table2:(int,integer) farray. forall result4:int. forall i3:int.
-  forall result5:(int,integer) farray. forall table3:(int,integer) farray.
-  forall result6:int. forall i4:int. forall result7:(int,integer) farray.
-  forall table4:(int,integer) farray. forall result8:int. forall i5:int.
-  forall result9:(int,integer) farray. forall table5:(int,integer) farray.
-  forall result10:int. forall i6:int. forall result11:(int,integer) farray.
-  forall table6:(int,integer) farray. forall result12:int. forall i7:int.
-  forall result13:(int,integer) farray. forall table7:(int,integer) farray.
-  forall result14:int. forall i8:int. forall result15:(int,integer) farray.
-  forall table8:(int,integer) farray. forall result16:int. forall i9:int.
-  forall result17:(int,integer) farray. forall table9:(int,integer) farray.
-  (((({ int__content = result } = { int__content = i }) and (i1 = 9)) and
-  ((((to_rep(o) = i1) and (o1 = (table[(10 - i1) <- o]))) and (({
-  map__content = result1 } = { map__content = table }) and
-  (table1 = o1))) and (((i1 = result2) and (i2 = 8)) and
-  ((((to_rep(o2) = i2) and (o3 = (table1[(10 - i2) <- o2]))) and
-  ((table1 = result3) and (table2 = o3))) and (((i2 = result4) and
-  (i3 = 7)) and ((((to_rep(o4) = i3) and
-  (o5 = (table2[(10 - i3) <- o4]))) and ((table2 = result5) and
-  (table3 = o5))) and (((i3 = result6) and (i4 = 6)) and
-  ((((to_rep(o6) = i4) and (o7 = (table3[(10 - i4) <- o6]))) and
-  ((table3 = result7) and (table4 = o7))) and (((i4 = result8) and
-  (i5 = 5)) and ((((to_rep(o8) = i5) and
-  (o9 = (table4[(10 - i5) <- o8]))) and ((table4 = result9) and
-  (table5 = o9))) and (((i5 = result10) and (i6 = 4)) and
-  ((((to_rep(o10) = i6) and (o11 = (table5[(10 - i6) <- o10]))) and
-  ((table5 = result11) and (table6 = o11))) and (((i6 = result12) and
-  (i7 = 3)) and ((((to_rep(o12) = i7) and
-  (o13 = (table6[(10 - i7) <- o12]))) and ((table6 = result13) and
-  (table7 = o13))) and (((i7 = result14) and (i8 = 2)) and
-  ((((to_rep(o14) = i8) and (o15 = (table7[(10 - i8) <- o14]))) and
-  ((table7 = result15) and (table8 = o15))) and (((i8 = result16) and
-  (i9 = 1)) and (((to_rep(o16) = i9) and
-  (o17 = (table8[(10 - i9) <- o16]))) and ((result17 = table8) and
-  (table9 = o17)))))))))))))))))))) ->
-  (exists x:int. (((1 <= x) and (x <= 9)) and (x = to_rep((table9[x])))))))
+  (exists x:int. (((1 <= x) and (x <= 9)) and (x = to_rep((table9[x])))))

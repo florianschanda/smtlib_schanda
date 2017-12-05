@@ -240,6 +240,7 @@
 (define-fun dynamic_invariant4 ((temp___expr_379 Int) (temp___is_init_376 Bool) (temp___skip_constant_377 Bool) (temp___do_toplevel_378 Bool)) Bool (=> (or (= temp___is_init_376 true) (<= (- 2147483648) 2147483647)) (in_range5 temp___expr_379)))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (and (= o (length right)) (and (in_range1 o) (<= o (to_rep1 (rec__term__tset__set__capacity (us_split_discrs1 right)))))))
 (assert (= o1 (- 2147483647 o)))
 (assert (not (in_range o1)))

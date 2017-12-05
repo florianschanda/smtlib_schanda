@@ -761,24 +761,30 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
 
- (* File "p.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall l__split_fields1:us_main_type.
-  forall l__split_fields2:us_main_type. forall l__split_fields3:us_main_type.
-  forall l__split_fields4:us_main_type. ((((has_key(positions({
-  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } }), {
-  us_split_fields3 = { rec__p__my_lists__cursor__node = cu1 } }) = true) and
-  (has_key(positions({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : ((has_key(positions({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields } }), { us_split_fields3 = {
-  rec__p__my_lists__cursor__node = cu2 } }) = true)) and
-  (((((match_bool(match_bool(bool_eq1(length(model__({ us_split_discrs1 = {
-  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_lists__list = l__split_fields } })), length(model__({
+  rec__p__my_lists__cursor__node = cu1 } }) = true) and (has_key(positions({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }))),
-  bool_eq1(get(model__({ us_split_discrs1 = {
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } }), {
+  us_split_fields3 = { rec__p__my_lists__cursor__node = cu2 } }) = true))
+
+axiom H1 : ((((((match_bool(match_bool(bool_eq1(length(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } })),
+  length(model__({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields1 } }))), bool_eq1(get(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields } }), get1(positions({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
@@ -801,13 +807,13 @@ goal WP_parameter_def :
   get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
   l__split_fields } }), { us_split_fields3 = {
-  rec__p__my_lists__cursor__node = cu1 } }))), false) = true) and
-  ((bool_eq1(length(model__({ us_split_discrs1 = {
+  rec__p__my_lists__cursor__node = cu1 } }))), false) = true) ->
+  (((bool_eq1(length(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields } })), length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 }
-  }))) = true) and
+  }))) = true) ->
   (forall i:int. (((1 <= i) and (i <= (0 + length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields } }))))) ->
@@ -822,7 +828,41 @@ goal WP_parameter_def :
   l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
   l__split_fields } }), i) = get(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_lists__list = l__split_fields1 } }), i))))))) and
+  rec__p__my_lists__list = l__split_fields1 } }), i)))))) and
+  (not (bool_eq1(length(model__({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields } })), length(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 }
+  }))) = false)))) and (not (match_bool(match_bool(bool_eq1(length(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } })),
+  length(model__({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields1 } }))), bool_eq1(get(model__({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields } }), get1(positions({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } }), {
+  us_split_fields3 = { rec__p__my_lists__cursor__node = cu1 } })),
+  get(model__({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields1 } }), get1(positions({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu2 } }))), false), bool_eq1(get(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields } }),
+  get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu2 } })), get(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }),
+  get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu1 } }))), false) = false))) and
   (p_positions_swapped(positions({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields } }), positions({
@@ -830,7 +870,7 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }), {
   us_split_fields3 = { rec__p__my_lists__cursor__node = cu1 } }, {
   us_split_fields3 = { rec__p__my_lists__cursor__node = cu2 } }) = true)) and
-  (((match_bool(match_bool(bool_eq1(length(model__({ us_split_discrs1 = {
+  ((((match_bool(match_bool(bool_eq1(length(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields1 } })), length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
@@ -858,13 +898,13 @@ goal WP_parameter_def :
   get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
   l__split_fields1 } }), { us_split_fields3 = {
-  rec__p__my_lists__cursor__node = cu1 } }))), false) = true) and
-  ((bool_eq1(length(model__({ us_split_discrs1 = {
+  rec__p__my_lists__cursor__node = cu1 } }))), false) = true) ->
+  (((bool_eq1(length(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields1 } })), length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields2 }
-  }))) = true) and
+  }))) = true) ->
   (forall i:int. (((1 <= i) and (i <= (0 + length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }))))) ->
@@ -879,7 +919,41 @@ goal WP_parameter_def :
   l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
   l__split_fields1 } }), i) = get(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_lists__list = l__split_fields2 } }), i))))))) and
+  rec__p__my_lists__list = l__split_fields2 } }), i)))))) and
+  (not (bool_eq1(length(model__({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields1 } })), length(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields2 }
+  }))) = false)))) and (not (match_bool(match_bool(bool_eq1(length(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } })),
+  length(model__({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields2 } }))), bool_eq1(get(model__({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields1 } }), get1(positions({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }), {
+  us_split_fields3 = { rec__p__my_lists__cursor__node = cu1 } })),
+  get(model__({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields2 } }), get1(positions({ us_split_discrs1 = {
+  rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_lists__list = l__split_fields1 } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu2 } }))), false), bool_eq1(get(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields1 } }),
+  get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields1 } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu2 } })), get(model__({
+  us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_lists__list = l__split_fields2 } }),
+  get1(positions({ us_split_discrs1 = { rec__p__my_lists__list__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_lists__list =
+  l__split_fields1 } }), { us_split_fields3 = {
+  rec__p__my_lists__cursor__node = cu1 } }))), false) = false))) and
   (p_positions_swapped(positions({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields1 } }), positions({
@@ -887,9 +961,11 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields2 } }), {
   us_split_fields3 = { rec__p__my_lists__cursor__node = cu1 } }, {
   us_split_fields3 = { rec__p__my_lists__cursor__node = cu2 }
-  }) = true))) and ((l__split_fields3 = l__split_fields2) and ({
-  rec__p__my_lists__list = l__split_fields4 } = { rec__p__my_lists__list =
-  l__split_fields2 })))) -> (((bool_eq1(length(model__({ us_split_discrs1 = {
+  }) = true))) and ((l__split_fields3 = l__split_fields2) and
+  (l__split_fields4 = l__split_fields2)))
+
+ (* File "p.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : (((bool_eq1(length(model__({ us_split_discrs1 = {
   rec__p__my_lists__list__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_lists__list = l__split_fields3 } })), length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
@@ -908,4 +984,4 @@ goal WP_parameter_def :
   rec__p__my_lists__list = l__split_fields3 } })), length(model__({
   us_split_discrs1 = { rec__p__my_lists__list__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_lists__list = l__split_fields }
-  }))) = false)))))
+  }))) = false)))

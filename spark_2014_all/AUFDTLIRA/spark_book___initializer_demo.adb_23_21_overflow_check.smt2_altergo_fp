@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -216,7 +216,7 @@ axiom compare_def_gt :
 
 type taccumulatorB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -242,7 +242,7 @@ function taccumulatorB__ref___projection(a: taccumulatorB__ref) : taccumulatorB 
 
 type accumulator
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -274,10 +274,123 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic sum : int
+
+logic index : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic result2 : int
+
+logic sum2 : int
+
+logic result3 : int
+
+logic index2 : int
+
+logic result4 : int
+
+logic sum3 : int
+
+logic result5 : int
+
+logic index3 : int
+
+logic result6 : int
+
+logic sum4 : int
+
+logic result7 : int
+
+logic index4 : int
+
+logic result8 : int
+
+logic sum5 : int
+
+logic result9 : int
+
+logic index5 : int
+
+logic result10 : int
+
+logic sum6 : int
+
+logic result11 : int
+
+logic index6 : int
+
+logic result12 : int
+
+logic sum7 : int
+
+logic result13 : int
+
+logic index7 : int
+
+logic result14 : int
+
+logic sum8 : int
+
+logic result15 : int
+
+logic index8 : int
+
+logic result16 : int
+
+logic sum9 : int
+
+logic result17 : int
+
+logic index9 : int
+
+logic result18 : int
+
+logic sum10 : int
+
+logic result19 : int
+
+logic index10 : int
+
+axiom H : (sum = 0)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(sum))
+
+axiom H2 : (result = sum)
+
+axiom H3 : (sum1 = 1)
+
+axiom H4 : (result1 = index)
+
+axiom H5 : (index1 = 1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sum:int. forall index:int. forall result:int. forall sum1:int.
-  forall result1:int. forall index1:int. ((sum = 0) ->
-  ((((-2147483648) <= 2147483647) -> in_range2(sum)) -> (((result = sum) and
-  (sum1 = 1)) -> (((result1 = index) and (index1 = 1)) ->
-  in_range1((sum1 + to_rep((a[index1])))))))))
+goal WP_parameter_def : in_range1((sum1 + to_rep((a[index1]))))

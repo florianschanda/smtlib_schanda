@@ -259,25 +259,68 @@ logic value_v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic flags_v1 : (int,flagvalue) farray
+
+logic flags_v2 : (int,flagvalue) farray
+
+logic o : flagvalue
+
+logic o1 : (int,flagvalue) farray
+
+logic o2 : flagvalue
+
+logic o3 : (int,flagvalue) farray
+
+logic result : (int,flagvalue) farray
+
+logic flags_v11 : (int,flagvalue) farray
+
+logic result1 : (int,flagvalue) farray
+
+logic flags_v21 : (int,flagvalue) farray
+
+logic flags_v12 : (int,flagvalue) farray
+
+logic flags_v22 : (int,flagvalue) farray
+
+logic flags_v13 : (int,flagvalue) farray
+
+logic flags_v23 : (int,flagvalue) farray
+
+axiom H : in_range(flag_v1)
+
+axiom H1 : in_range(flag_v2)
+
+axiom H2 : in_range1(value_v1)
+
+axiom H3 : in_range1(value_v2)
+
+axiom H4 : (to_rep(o) = value_v1)
+
+axiom H5 : (o1 = (flags_v1[flag_v1 <- o]))
+
+axiom H6 : (result = flags_v1)
+
+axiom H7 : (flags_v11 = o1)
+
+axiom H8 : (to_rep(o2) = value_v2)
+
+axiom H9 : (o3 = (flags_v2[flag_v2 <- o2]))
+
+axiom H10 : (result1 = flags_v2)
+
+axiom H11 : (flags_v21 = o3)
+
+axiom H12 : (flags_v21 = flags_v22)
+
+axiom H13 : (flags_v11 = flags_v12)
+
+axiom H14 : (flags_v23 = flags_v21)
+
+axiom H15 : (flags_v13 = flags_v11)
+
+axiom H16 : (bool_eq(value_v1, value_v2) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall flags_v1:(int,flagvalue) farray.
-  forall flags_v2:(int,flagvalue) farray. forall o:flagvalue.
-  forall o1:(int,flagvalue) farray. forall o2:flagvalue.
-  forall o3:(int,flagvalue) farray. forall result:(int,flagvalue) farray.
-  forall flags_v11:(int,flagvalue) farray.
-  forall result1:(int,flagvalue) farray.
-  forall flags_v21:(int,flagvalue) farray.
-  forall flags_v12:(int,flagvalue) farray.
-  forall flags_v22:(int,flagvalue) farray.
-  forall flags_v13:(int,flagvalue) farray.
-  forall flags_v23:(int,flagvalue) farray. (in_range(flag_v1) ->
-  (in_range(flag_v2) -> (in_range1(value_v1) -> (in_range1(value_v2) ->
-  ((((((to_rep(o) = value_v1) and (o1 = (flags_v1[flag_v1 <- o]))) and
-  ((result = flags_v1) and (flags_v11 = o1))) and
-  (((to_rep(o2) = value_v2) and (o3 = (flags_v2[flag_v2 <- o2]))) and
-  ((result1 = flags_v2) and (flags_v21 = o3)))) and
-  (((flags_v21 = flags_v22) and (flags_v11 = flags_v12)) and
-  ((flags_v23 = flags_v21) and (flags_v13 = flags_v11)))) ->
-  ((bool_eq(value_v1, value_v2) = true) ->
-  (to_rep((flags_v12[flag_v1])) = to_rep((flags_v22[flag_v2]))))))))))
+  (to_rep((flags_v12[flag_v1])) = to_rep((flags_v22[flag_v2])))

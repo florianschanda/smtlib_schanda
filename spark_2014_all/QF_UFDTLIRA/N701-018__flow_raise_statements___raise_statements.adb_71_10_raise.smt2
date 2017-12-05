@@ -36,5 +36,6 @@
 (declare-const o Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range o)))
 (assert (not (= a true)))
+(assert (not false))
 (check-sat)
 (exit)

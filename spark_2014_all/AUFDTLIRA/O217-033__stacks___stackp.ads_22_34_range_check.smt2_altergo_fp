@@ -436,7 +436,7 @@ logic size__function_guard : int, us_rep -> prop
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -3001,27 +3001,64 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep1(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall temp___463:(int,element) farray.
-  forall temp___4631:t. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall s__split_fields:(int,element) farray.
-  forall s__split_fields1:less_than_max. forall s__split_fields2:us_private.
-  forall e1:int. (((0 <= 2147483647) -> in_range1(e)) -> (in_range1(e1) ->
-  ((({ elts = temp___463; rt = temp___4631 } = get_model({ us_split_fields1 =
-  { rec__stackp__stack_root__content = s__split_fields;
+logic e : int
+
+logic temp___463 : (int,element) farray
+
+logic temp___4631 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic s__split_fields : (int,element) farray
+
+logic s__split_fields1 : less_than_max
+
+logic s__split_fields2 : us_private
+
+logic e1 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(e))
+
+axiom H1 : in_range1(e1)
+
+axiom H2 : (({ elts = temp___463; rt = temp___4631 } = get_model({
+  us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
   s__split_fields2 }; attr__tag = s__attr__tag })) and (dynamic_property(1,
   2147483647, to_rep2(first(temp___4631)), to_rep2(last(temp___4631))) and
   (length({ elts = temp___463; rt = temp___4631 }) = size({
   us_split_fields1 = { rec__stackp__stack_root__content = s__split_fields;
   rec__stackp__stack_root__length = s__split_fields1; rec__ext__ =
-  s__split_fields2 }; attr__tag = s__attr__tag })))) -> ((not (length({
-  elts = temp___463; rt = temp___4631 }) = 0)) -> (((((((1 <= 1) and
-  (o = ((1 - 1) + 1))) or ((not (1 <= 1)) and (o = 0))) and
-  ((((to_rep2(first(temp___4631)) <= to_rep2(last(temp___4631))) and
-  (o1 = ((to_rep2(last(temp___4631)) - to_rep2(first(temp___4631))) + 1))) or
-  ((not (to_rep2(first(temp___4631)) <= to_rep2(last(temp___4631)))) and
-  (o1 = 0))) and (o2 = (o1 + o)))) and
-  (o3 = (to_rep2(first(temp___4631)) + o2))) and (o4 = (o3 - 1))) ->
-  in_range(o4)))))))
+  s__split_fields2 }; attr__tag = s__attr__tag }))))
+
+axiom H3 : (not (length({ elts = temp___463; rt = temp___4631 }) = 0))
+
+axiom H4 : ((1 <= 1) -> (o = ((1 - 1) + 1)))
+
+axiom H5 : ((not (1 <= 1)) -> (o = 0))
+
+axiom H6 : ((to_rep2(first(temp___4631)) <= to_rep2(last(temp___4631))) ->
+  (o1 = ((to_rep2(last(temp___4631)) - to_rep2(first(temp___4631))) + 1)))
+
+axiom H7 :
+  ((not (to_rep2(first(temp___4631)) <= to_rep2(last(temp___4631)))) ->
+  (o1 = 0))
+
+axiom H8 : (o2 = (o1 + o))
+
+axiom H9 : (o3 = (to_rep2(first(temp___4631)) + o2))
+
+axiom H10 : (o4 = (o3 - 1))
+
+ (* File "stackp.ads", line 20, characters 0-0 *)
+goal WP_parameter_def : in_range(o4)

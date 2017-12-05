@@ -569,7 +569,7 @@ logic is_empty__function_guard1 : bool, us_rep1 -> prop
 
 type tchar_table_indexB
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -636,7 +636,7 @@ axiom coerce_axiom4 :
 
 type extended_index
 
-predicate in_range9(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range9(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -922,7 +922,7 @@ axiom valid_tables__def_axiom :
   us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = names__entry_table__fields }
-  }))) <= 2147483647) and (((-1) + length(model__({ us_split_discrs1 = {
+  }))) <= 2147483647) and (((- 1) + length(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = char_table__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
   names__char_table__fields } }))) <= 2147483646)))))
@@ -990,11 +990,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq11(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
     n) = get(b, n)))) ->
   (user_eq11(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
         n) = get(b, n))))) ->
   (user_eq11(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
   false)))))
@@ -1026,7 +1026,7 @@ axiom is_empty__post_axiom :
 
 type extended_index2
 
-predicate in_range12(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range12(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq14 : int, int -> bool
 
@@ -1052,7 +1052,7 @@ function extended_index__ref___2__projection(a: extended_index__ref2) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length(container)].
-  ((((-1) + length(container)) <= 2147483646) and
+  ((((- 1) + length(container)) <= 2147483646) and
   in_range11(length(container))))
 
 type element_type
@@ -1084,7 +1084,7 @@ function element_type__ref___2__projection(a: element_type__ref) : element_type 
 axiom get__post_axiom :
   (forall container:us_rep2.
   (forall position:int [get(container, position)]. ((in_range12(position) and
-  ((0 <= position) and (position <= ((-1) + length(container))))) ->
+  ((0 <= position) and (position <= ((- 1) + length(container))))) ->
   in_range13(get(container, position)))))
 
 logic capacity__function_guard1 : int, us_rep1 -> prop
@@ -1191,20 +1191,34 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
- (* File "names.adb", line 57, characters 0-0 *)
-goal WP_parameter_def :
-  (forall char_table__split_fields:us_main_type.
-  forall entry_table__split_fields:us_main_type1. forall o:int.
-  forall o1:int. ((1024 = to_rep2(char_table__split_discrs)) ->
-  ((256 = to_rep3(entry_table__split_discrs)) -> ((valid_tables({
-  rec__names__data__char_tables__vector = char_table__split_fields }, {
-  rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true) -> ((((o = ((-1) + length(model__({ us_split_discrs1 = {
+logic char_table__split_fields : us_main_type
+
+logic entry_table__split_fields : us_main_type1
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : (1024 = to_rep2(char_table__split_discrs))
+
+axiom H1 : (256 = to_rep3(entry_table__split_discrs))
+
+axiom H2 : (valid_tables({ rec__names__data__char_tables__vector =
+  char_table__split_fields }, { rec__names__data__entry_tables__vector =
+  entry_table__split_fields }) = true)
+
+axiom H3 : ((o = ((- 1) + length(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = char_table__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
   char_table__split_fields } })))) and (in_range9(o) and
-  (o = ((-1) + length(model__({ us_split_discrs1 = {
+  (o = ((- 1) + length(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = char_table__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
-  char_table__split_fields } })))))) and (o1 = (o - to_rep4(e)))) ->
-  in_range7(o1))))))
+  char_table__split_fields } }))))))
+
+axiom H4 : (o1 = (o - to_rep4(e)))
+
+ (* File "names.adb", line 57, characters 0-0 *)
+goal WP_parameter_def : in_range7(o1)

@@ -1219,45 +1219,141 @@ axiom dyn_return__post_axiom :
 
 axiom c__def_axiom : (c = d)
 
+logic x : t
+
+logic y : t
+
+logic test_dynamic_property__c__assume : t
+
+logic us : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic us1 : t
+
+logic o3 : t
+
+logic test_dynamic_property__dyn_param__x : t
+
+logic us2 : t
+
+logic o4 : t
+
+logic us3 : t
+
+logic o5 : t
+
+logic test_dynamic_property__nested__dyn_param__x : t
+
+logic us4 : t
+
+logic o6 : t
+
+logic y1 : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic x2 : t
+
+logic x3 : t
+
+logic test_dynamic_property__dyn_param__x1 : t
+
+logic result2 : t
+
+logic y2 : t
+
+logic test_dynamic_property__nested__dyn_param__x1 : t
+
+logic result3 : t
+
+logic x4 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : (le(fliteral, d) and le(d, fliteral1))
+
+axiom H2 : ((test_dynamic_property__c__assume = d) and tqtisFinite(d))
+
+axiom H3 : (test_dynamic_property__c__assume = c)
+
+axiom H4 : in_range2(c)
+
+axiom H5 : ((us = c) and dynamic_property(fliteral, last, c))
+
+axiom H6 : (o = c)
+
+axiom H7 : (result = x)
+
+axiom H8 : (x1 = o)
+
+axiom H9 : dynamic_property(fliteral, last, x1)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
+
+axiom H10 : dynamic_property1(fliteral2, last1, y)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 30.0))
 
+axiom H11 : ((o1 = dyn_return(fliteral3)) and dynamic_property(fliteral,
+  last, o1))
+
+axiom H12 : (result1 = x1)
+
+axiom H13 : (x2 = o1)
+
+axiom H14 : le(x2, c)
+
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 40.0))
 
+axiom H15 : le(dyn_return(fliteral4), c)
+
+axiom H16 : dynamic_property(fliteral, last, x3)
+
+axiom H17 : le(x3, c)
+
+axiom H18 : (le(fliteral, y) -> ((us1 = y) and dynamic_property(fliteral,
+  last, y)))
+
+axiom H19 : (le(fliteral, y) -> (o3 = y))
+
+axiom H20 : (le(fliteral, y) -> (o3 = test_dynamic_property__dyn_param__x))
+
+axiom H21 : (le(fliteral, y) -> dynamic_property(fliteral, last,
+  test_dynamic_property__dyn_param__x1))
+
+axiom H22 : (le(fliteral, y) ->
+  ((us2 = test_dynamic_property__dyn_param__x1) and
+  dynamic_property1(fliteral2, last1, test_dynamic_property__dyn_param__x1)))
+
+axiom H23 : (le(fliteral, y) -> (o4 = test_dynamic_property__dyn_param__x1))
+
+axiom H24 : (le(fliteral, y) -> (result2 = y))
+
+axiom H25 : (le(fliteral, y) -> (y2 = o4))
+
+axiom H26 : (le(fliteral, y) -> le(y2, c))
+
+axiom H27 : ((not le(fliteral, y)) -> (y2 = y))
+
+axiom H28 : ((not le(fliteral, y)) -> (y2 = y1))
+
  (* File "test_dynamic_property.adb", line 40, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall test_dynamic_property__c__assume:t.
-  forall us:t. forall o:t. forall o1:t. forall us1:t. forall o2:t.
-  forall test_dynamic_property__dyn_param__x:t. forall us2:t. forall o3:t.
-  forall y1:t. forall result:t. forall x1:t. forall result1:t. forall x2:t.
-  forall x3:t. forall test_dynamic_property__dyn_param__x1:t.
-  forall result2:t. forall y2:t. (tqtisFinite(d) -> ((le(fliteral, d) and
-  le(d, fliteral1)) -> ((((test_dynamic_property__c__assume = d) and
-  tqtisFinite(d)) and (test_dynamic_property__c__assume = c)) ->
-  (in_range2(c) -> (((((us = c) and dynamic_property(fliteral, last, c)) and
-  (o = c)) and ((result = x) and (x1 = o))) -> (dynamic_property(fliteral,
-  last, x1) -> (dynamic_property1(fliteral2, last1, y) ->
-  ((((o1 = dyn_return(fliteral3)) and dynamic_property(fliteral, last,
-  o1)) and ((result1 = x1) and (x2 = o1))) -> (le(x2, c) ->
-  (le(dyn_return(fliteral4), c) -> (dynamic_property(fliteral, last, x3) ->
-  (le(x3, c) -> (((le(fliteral, y) and ((((((us1 = y) and
-  dynamic_property(fliteral, last, y)) and (o2 = y)) and
-  (o2 = test_dynamic_property__dyn_param__x)) and (dynamic_property(fliteral,
-  last, test_dynamic_property__dyn_param__x1) and
-  ((((us2 = test_dynamic_property__dyn_param__x1) and
-  dynamic_property1(fliteral2, last1,
-  test_dynamic_property__dyn_param__x1)) and
-  (o3 = test_dynamic_property__dyn_param__x1)) and (({ t__content = result2
-  } = { t__content = y }) and (y2 = o3))))) and le(y2, c))) or
-  ((not le(fliteral, y)) and ((y2 = y) and (y2 = y1)))) ->
-  dynamic_property1(fliteral2, last1, x3)))))))))))))))
+goal WP_parameter_def : dynamic_property1(fliteral2, last1, x3)

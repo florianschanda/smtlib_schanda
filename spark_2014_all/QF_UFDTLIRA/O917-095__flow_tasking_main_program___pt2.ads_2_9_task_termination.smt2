@@ -21,6 +21,7 @@
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

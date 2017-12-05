@@ -1365,60 +1365,161 @@ axiom is_available__def_axiom :
   ((is_available(account, database__availability__links) = true) <->
   ((((database__availability__links[account])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
- (* File "money.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall account:int. forall links:(int,us_rep1) farray.
-  forall first_available:int. forall accounts:(int,us_rep2) farray.
-  forall accounts_balance:(int,us_rep3) farray. forall o:ext_account_num.
-  forall o1:(int,character) farray. forall o2:(int,num) farray.
-  forall o3:ext_account_num. forall o4:(int,character) farray.
-  forall o5:(int,num) farray. forall o6:ext_account_num.
-  forall o7:(int,us_rep2) farray. forall o8:raw_amount. forall o9:cur.
-  forall o10:cur. forall o11:raw_amount. forall o12:ext_account_num.
-  forall o13:cur. forall o14:raw_amount. forall o15:cur.
-  forall o16:raw_amount. forall o17:ext_account_num. forall o18:cur.
-  forall o19:raw_amount. forall o20:ext_account_num.
-  forall o21:(int,us_rep3) farray. forall account1:int.
-  forall links1:(int,us_rep1) farray. forall first_available1:int.
-  forall accounts1:(int,us_rep2) farray.
-  forall accounts_balance1:(int,us_rep3) farray. forall result:bool.
-  forall result1:int. forall account2:int. forall account3:int.
-  forall links2:(int,us_rep1) farray. forall first_available2:int.
-  forall result2:(int,us_rep2) farray. forall accounts2:(int,us_rep2) farray.
-  forall result3:(int,us_rep3) farray.
-  forall accounts_balance2:(int,us_rep3) farray. forall account4:int.
-  forall links3:(int,us_rep1) farray. forall first_available3:int.
-  forall accounts3:(int,us_rep2) farray.
-  forall accounts_balance3:(int,us_rep3) farray. forall account5:int.
-  forall links4:(int,us_rep1) farray. forall first_available4:int.
-  forall accounts4:(int,us_rep2) farray.
-  forall accounts_balance4:(int,us_rep3) farray. forall account6:int.
-  forall links5:(int,us_rep1) farray. forall first_available5:int.
-  forall accounts5:(int,us_rep2) farray.
-  forall accounts_balance5:(int,us_rep3) farray. forall account7:int.
-  forall links6:(int,us_rep1) farray. forall first_available6:int.
-  forall accounts6:(int,us_rep2) farray.
-  forall accounts_balance6:(int,us_rep3) farray. forall result4:bool.
-  forall result5:bool. (in_range4(first_available) -> (in_range2(cur1) ->
-  (((1 <= 200000) -> in_range5(account)) ->
-  ((not (max_account_reached(first_available) = true)) -> ((((((({
-  map__content4 = accounts_balance3 } = { map__content4 = accounts_balance
-  }) and (({ map__content3 = accounts3 } = { map__content3 = accounts }) and
-  (({ int__content = first_available3 } = { int__content = first_available
-  }) and (({ map__content2 = links3 } = { map__content2 = links }) and
-  (account2 = account4))))) and ((accounts_balance4 = accounts_balance1) and
-  ((accounts4 = accounts1) and ((first_available4 = first_available1) and
-  ((links4 = links1) and (account5 = account2)))))) and
+logic account : int
+
+logic links : (int,us_rep1) farray
+
+logic first_available : int
+
+logic accounts : (int,us_rep2) farray
+
+logic accounts_balance : (int,us_rep3) farray
+
+logic o : ext_account_num
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,num) farray
+
+logic o3 : ext_account_num
+
+logic o4 : (int,character) farray
+
+logic o5 : (int,num) farray
+
+logic o6 : ext_account_num
+
+logic o7 : (int,us_rep2) farray
+
+logic o8 : raw_amount
+
+logic o9 : cur
+
+logic o10 : cur
+
+logic o11 : raw_amount
+
+logic o12 : ext_account_num
+
+logic o13 : cur
+
+logic o14 : raw_amount
+
+logic o15 : cur
+
+logic o16 : raw_amount
+
+logic o17 : ext_account_num
+
+logic o18 : cur
+
+logic o19 : raw_amount
+
+logic o20 : ext_account_num
+
+logic o21 : (int,us_rep3) farray
+
+logic o22 : cur
+
+logic o23 : raw_amount
+
+logic account1 : int
+
+logic links1 : (int,us_rep1) farray
+
+logic first_available1 : int
+
+logic accounts1 : (int,us_rep2) farray
+
+logic accounts_balance1 : (int,us_rep3) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic account2 : int
+
+logic account3 : int
+
+logic links2 : (int,us_rep1) farray
+
+logic first_available2 : int
+
+logic result2 : (int,us_rep2) farray
+
+logic accounts2 : (int,us_rep2) farray
+
+logic result3 : (int,us_rep3) farray
+
+logic accounts_balance2 : (int,us_rep3) farray
+
+logic account4 : int
+
+logic links3 : (int,us_rep1) farray
+
+logic first_available3 : int
+
+logic accounts3 : (int,us_rep2) farray
+
+logic accounts_balance3 : (int,us_rep3) farray
+
+logic account5 : int
+
+logic links4 : (int,us_rep1) farray
+
+logic first_available4 : int
+
+logic accounts4 : (int,us_rep2) farray
+
+logic accounts_balance4 : (int,us_rep3) farray
+
+logic account6 : int
+
+logic links5 : (int,us_rep1) farray
+
+logic first_available5 : int
+
+logic accounts5 : (int,us_rep2) farray
+
+logic accounts_balance5 : (int,us_rep3) farray
+
+logic account7 : int
+
+logic links6 : (int,us_rep1) farray
+
+logic first_available6 : int
+
+logic accounts6 : (int,us_rep2) farray
+
+logic accounts_balance6 : (int,us_rep3) farray
+
+logic result4 : bool
+
+logic result5 : bool
+
+axiom H : in_range4(first_available)
+
+axiom H1 : in_range2(cur1)
+
+axiom H2 : ((1 <= 200000) -> in_range5(account))
+
+axiom H3 : (not (max_account_reached(first_available) = true))
+
+axiom H4 : ((((((accounts_balance3 = accounts_balance) and
+  ((accounts3 = accounts) and ((first_available3 = first_available) and
+  ((links3 = links) and (account4 = account2))))) and
+  ((accounts_balance4 = accounts_balance1) and ((accounts4 = accounts1) and
+  ((first_available4 = first_available1) and ((links4 = links1) and
+  (account5 = account2)))))) and
   (((result = max_account_reached(first_available)) and ((result = true) <->
   (not (some_available(first_available) = true)))) and ((result = true) and
-  (({ int__content = result1 } = { int__content = account }) and
-  (account2 = 200000))))) or
+  ((result1 = account) and (account2 = 200000))))) or
   ((((result = max_account_reached(first_available)) and ((result = true) <->
   (not (some_available(first_available) = true)))) and
   ((not (result = true)) and ((account2 = account) and
-  (account2 = account1)))) and ((((accounts_balance2 = accounts_balance3) and
-  ((accounts2 = accounts3) and ((first_available2 = first_available3) and
-  ((links2 = links3) and (account3 = account4))))) and
+  (account2 = account1)))) and ((((accounts_balance3 = accounts_balance2) and
+  ((accounts3 = accounts2) and ((first_available3 = first_available2) and
+  ((links3 = links2) and (account4 = account3))))) and
   ((accounts_balance4 = accounts_balance2) and ((accounts4 = accounts2) and
   ((first_available4 = first_available2) and ((links4 = links2) and
   (account5 = account3)))))) and ((((not (is_available(account3,
@@ -1443,19 +1544,25 @@ goal WP_parameter_def :
   rec__database__account_balance__value = { us_split_fields1 = {
   rec__money__amount__currency = o18; rec__money__amount__raw = o19 } };
   rec__database__account_balance__account = o20 } }]))) and
-  ((result3 = accounts_balance) and (accounts_balance2 = o21)))))))) and ((({
-  map__content4 = accounts_balance5 } = { map__content4 = accounts_balance3
-  }) and (({ map__content3 = accounts5 } = { map__content3 = accounts3 }) and
-  (({ int__content = first_available5 } = { int__content = first_available3
-  }) and (({ map__content2 = links5 } = { map__content2 = links3 }) and ({
-  int__content = account6 } = { int__content = account4 }))))) and
-  ((accounts_balance6 = accounts_balance4) and ((accounts6 = accounts4) and
-  ((first_available6 = first_available4) and ((links6 = links4) and
-  (account7 = account5))))))) -> (((result4 = existing(account6, links5)) and
-  ((result4 = true) <-> (not (is_available(account6, links5) = true)))) ->
-  ((result4 = true) -> (((result5 = belongs_to(account6, customer, id,
-  accounts5)) and ((result5 = true) <-> (bool_eq12((accounts5[account6]), {
+  ((result3 = accounts_balance) and (accounts_balance2 = o21)))))))) and
+  (((accounts_balance5 = accounts_balance3) and ((accounts5 = accounts3) and
+  ((first_available5 = first_available3) and ((links5 = links3) and
+  (account6 = account4))))) and ((accounts_balance6 = accounts_balance4) and
+  ((accounts6 = accounts4) and ((first_available6 = first_available4) and
+  ((links6 = links4) and (account7 = account5)))))))
+
+axiom H5 : ((result4 = existing(account6, links5)) and ((result4 = true) <->
+  (not (is_available(account6, links5) = true))))
+
+axiom H6 : (result4 = true)
+
+axiom H7 : ((result5 = belongs_to(account6, customer, id, accounts5)) and
+  ((result5 = true) <-> (bool_eq12((accounts5[account6]), {
   us_split_fields5 = { rec__database__account_rec__owner_name = customer;
   rec__database__account_rec__owner_id = id;
-  rec__database__account_rec__account = of_rep4(account6) } }) = true))) ->
-  ((result5 = true) -> (existing(account6, links5) = true)))))))))))
+  rec__database__account_rec__account = of_rep4(account6) } }) = true)))
+
+axiom H8 : (result5 = true)
+
+ (* File "money.ads", line 17, characters 0-0 *)
+goal WP_parameter_def : (existing(account6, links5) = true)

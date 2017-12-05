@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1188,7 +1188,7 @@ axiom compare_def_gt :
 
 type tdigit_index_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1784,22 +1784,139 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "aco-math-very_longs.ads", line 108, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:(int,octet) farray.
-  forall result____split_fields1:t3. forall us:int. forall us1:int.
-  forall us2:int. forall us3:int. ((dynamic_property1(1, to_rep(l),
-  to_rep2(first(l2)), to_rep2(last(l2))) and ((to_rep2(first(l2)) = 1) and
-  (to_rep2(last(l2)) = to_rep(l)))) -> ((dynamic_property1(1, to_rep(r),
-  to_rep2(first(r2)), to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
-  (to_rep2(last(r2)) = to_rep(r)))) -> ((dynamic_property1(1, to_rep(p),
-  to_rep2(first(p2)), to_rep2(last(p2))) and ((to_rep2(first(p2)) = 1) and
-  (to_rep2(last(p2)) = to_rep(p)))) -> (((to_rep(l) = to_rep(r)) and
-  (to_rep(l) = to_rep(p))) -> (((us = to_rep(p)) and in_range1(to_rep(p))) ->
-  (((us1 = to_rep(r)) and in_range1(to_rep(r))) -> (((us2 = to_rep(l)) and
-  in_range1(to_rep(l))) -> (((us3 = to_rep(l)) and in_range1(to_rep(l))) ->
-  ((to_rep(result____split_discrs) = to_rep(l)) ->
-  (((to_rep(l) = to_rep(((to_base({ us_split_discrs2 = {
+logic result____split_fields : (int,octet) farray
+
+logic result____split_fields1 : t3
+
+logic borrow : t
+
+logic aco__math__very_longs__subtract_fp__result : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result1 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result2 : t2
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic o : digit_index_type
+
+logic o1 : (int,octet) farray
+
+logic o2 : t2
+
+logic o3 : digit_index_type
+
+logic o4 : (int,octet) farray
+
+logic o5 : t2
+
+logic temp___1359 : digit_index_type
+
+logic temp___13591 : (int,octet) farray
+
+logic temp___13592 : t3
+
+logic borrow1 : t
+
+logic aco__math__very_longs__modsubtract_and_borrow__result__fields : (int,octet) farray
+
+logic aco__math__very_longs__modsubtract_and_borrow__result__fields1 : t2
+
+logic result : (int,octet) farray
+
+logic result1 : t3
+
+logic result____split_fields2 : (int,octet) farray
+
+logic result____split_fields3 : t3
+
+logic result2 : (int,octet) farray
+
+logic result3 : t3
+
+logic result____split_fields4 : (int,octet) farray
+
+logic result____split_fields5 : t3
+
+logic result4 : digit_index_type
+
+logic result5 : (int,octet) farray
+
+logic result6 : t2
+
+logic aco__math__very_longs__subtract_fp__result3 : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result4 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result5 : t2
+
+logic aco__math__very_longs__subtract_fp__result6 : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result7 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result8 : t2
+
+logic aco__math__very_longs__subtract_fp__result9 : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result10 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result11 : t2
+
+logic result____split_fields6 : (int,octet) farray
+
+logic result____split_fields7 : t3
+
+logic borrow2 : t
+
+logic aco__math__very_longs__subtract_fp__result12 : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result13 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result14 : t2
+
+logic result____split_fields8 : (int,octet) farray
+
+logic result____split_fields9 : t3
+
+logic borrow3 : t
+
+logic aco__math__very_longs__subtract_fp__result15 : digit_index_type
+
+logic aco__math__very_longs__subtract_fp__result16 : (int,octet) farray
+
+logic aco__math__very_longs__subtract_fp__result17 : t2
+
+axiom H : (dynamic_property1(1, to_rep(l), to_rep2(first(l2)),
+  to_rep2(last(l2))) and ((to_rep2(first(l2)) = 1) and
+  (to_rep2(last(l2)) = to_rep(l))))
+
+axiom H1 : (dynamic_property1(1, to_rep(r), to_rep2(first(r2)),
+  to_rep2(last(r2))) and ((to_rep2(first(r2)) = 1) and
+  (to_rep2(last(r2)) = to_rep(r))))
+
+axiom H2 : (dynamic_property1(1, to_rep(p), to_rep2(first(p2)),
+  to_rep2(last(p2))) and ((to_rep2(first(p2)) = 1) and
+  (to_rep2(last(p2)) = to_rep(p))))
+
+axiom H3 : ((to_rep(l) = to_rep(r)) and (to_rep(l) = to_rep(p)))
+
+axiom H4 : ((us = to_rep(p)) and in_range1(to_rep(p)))
+
+axiom H5 : ((us1 = to_rep(r)) and in_range1(to_rep(r)))
+
+axiom H6 : ((us2 = to_rep(l)) and in_range1(to_rep(l)))
+
+axiom H7 : ((us3 = to_rep(l)) and in_range1(to_rep(l)))
+
+axiom H8 : (to_rep(result____split_discrs) = to_rep(l))
+
+axiom H9 : ((to_rep(l) = to_rep(((to_base({ us_split_discrs2 = {
   rec__aco__math__very_longs__very_long__octet_length =
   result____split_discrs }; us_split_fields3 = {
   rec__aco__math__very_longs__very_long__long_digits1 = { elts1 =
@@ -1808,5 +1925,9 @@ goal WP_parameter_def :
   (dynamic_property3(1, to_rep(l), to_rep2(first2(result____split_fields1)),
   to_rep2(last2(result____split_fields1))) and
   ((to_rep2(first2(result____split_fields1)) = 1) and
-  (to_rep2(last2(result____split_fields1)) = to_rep(l))))) ->
-  (to_rep(l) = to_rep(r)))))))))))))
+  (to_rep2(last2(result____split_fields1)) = to_rep(l)))))
+
+axiom H10 : true
+
+ (* File "aco-math-very_longs.ads", line 108, characters 0-0 *)
+goal WP_parameter_def : (to_rep(l) = to_rep(r))

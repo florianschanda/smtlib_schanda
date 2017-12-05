@@ -81,18 +81,38 @@ logic x : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic original__result : bool
+
+logic result : bool
+
+logic original__result1 : bool
+
+logic original__result2 : bool
+
+logic original__result3 : bool
+
+logic original__result4 : bool
+
+logic original__result5 : bool
+
+logic result1 : bool
+
+axiom H : (original__result1 = original__result2)
+
+axiom H1 : (original__result3 = original__result1)
+
+axiom H2 : (result = original__result)
+
+axiom H3 : (((not (x = true)) -> (original__result1 = true)) and
+  ((x = true) -> (original__result1 = false)))
+
+axiom H4 : (original__result4 = original__result2)
+
+axiom H5 : (original__result5 = original__result3)
+
+axiom H6 : (result1 = original__result4)
+
+axiom H7 : (original__result4 = true)
+
  (* File "original.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall original__result:bool. forall result:bool.
-  forall original__result1:bool. forall original__result2:bool.
-  forall original__result3:bool. forall original__result4:bool.
-  forall original__result5:bool.
-  (forall result1:bool. ((((((original__result1 = original__result2) and
-  (original__result3 = original__result1)) and
-  ((result = original__result) and (((not (x = true)) and
-  (original__result1 = true)) or ((x = true) and
-  (original__result1 = false))))) and
-  ((original__result4 = original__result2) and
-  (original__result5 = original__result3))) and
-  (result1 = original__result4)) -> ((original__result4 = true) ->
-  (not (x = true))))))
+goal WP_parameter_def : (not (x = true))

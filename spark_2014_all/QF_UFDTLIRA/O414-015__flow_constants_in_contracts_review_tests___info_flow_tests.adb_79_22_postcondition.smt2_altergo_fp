@@ -113,19 +113,45 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic info_flow_tests__test_04__f4__result : int
+
+logic result : int
+
+logic info_flow_tests__test_04__f4__result1 : int
+
+logic info_flow_tests__test_04__f4__result2 : int
+
+logic info_flow_tests__test_04__f4__result3 : int
+
+logic info_flow_tests__test_04__f4__result4 : int
+
+logic info_flow_tests__test_04__f4__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (0 <  y)
+
+axiom H3 :
+  (info_flow_tests__test_04__f4__result1 = info_flow_tests__test_04__f4__result2)
+
+axiom H4 :
+  (info_flow_tests__test_04__f4__result3 = info_flow_tests__test_04__f4__result1)
+
+axiom H5 : (result = info_flow_tests__test_04__f4__result)
+
+axiom H6 : (info_flow_tests__test_04__f4__result1 = x)
+
+axiom H7 :
+  (info_flow_tests__test_04__f4__result4 = info_flow_tests__test_04__f4__result2)
+
+axiom H8 :
+  (info_flow_tests__test_04__f4__result5 = info_flow_tests__test_04__f4__result3)
+
+axiom H9 : (result1 = info_flow_tests__test_04__f4__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall info_flow_tests__test_04__f4__result:int. forall result:int.
-  forall info_flow_tests__test_04__f4__result1:int.
-  forall info_flow_tests__test_04__f4__result2:int.
-  forall info_flow_tests__test_04__f4__result3:int.
-  forall info_flow_tests__test_04__f4__result4:int.
-  forall info_flow_tests__test_04__f4__result5:int.
-  (forall result1:int. ((in_range(x) and (in_range(y) and ((0 <  y) and
-  (((((info_flow_tests__test_04__f4__result1 = info_flow_tests__test_04__f4__result2) and
-  (info_flow_tests__test_04__f4__result3 = info_flow_tests__test_04__f4__result1)) and
-  ((result = info_flow_tests__test_04__f4__result) and
-  (info_flow_tests__test_04__f4__result1 = x))) and
-  ((info_flow_tests__test_04__f4__result4 = info_flow_tests__test_04__f4__result2) and
-  (info_flow_tests__test_04__f4__result5 = info_flow_tests__test_04__f4__result3))) and
-  (result1 = info_flow_tests__test_04__f4__result4))))) -> (0 <  y))))
+goal WP_parameter_def : (0 <  y)

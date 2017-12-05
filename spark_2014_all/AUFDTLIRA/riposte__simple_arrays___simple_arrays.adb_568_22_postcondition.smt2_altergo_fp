@@ -216,14 +216,47 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : (int,enum_t) farray
+
+logic o : enum_t
+
+logic o1 : (int,enum_t) farray
+
+logic o2 : enum_t
+
+logic o3 : (int,enum_t) farray
+
+logic result : (int,enum_t) farray
+
+logic a1 : (int,enum_t) farray
+
+logic result1 : (int,enum_t) farray
+
+logic a2 : (int,enum_t) farray
+
+logic a3 : (int,enum_t) farray
+
+logic a4 : (int,enum_t) farray
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (o1 = (a[42 <- o]))
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = o1)
+
+axiom H4 : (to_rep(o2) = 0)
+
+axiom H5 : (o3 = (a1[42 <- o2]))
+
+axiom H6 : (result1 = a1)
+
+axiom H7 : (a2 = o3)
+
+axiom H8 : (a2 = a3)
+
+axiom H9 : (a4 = a2)
+
  (* File "simple_arrays.adb", line 557, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,enum_t) farray. forall o:enum_t.
-  forall o1:(int,enum_t) farray. forall o2:enum_t.
-  forall o3:(int,enum_t) farray. forall result:(int,enum_t) farray.
-  forall a1:(int,enum_t) farray. forall result1:(int,enum_t) farray.
-  forall a2:(int,enum_t) farray. forall a3:(int,enum_t) farray.
-  forall a4:(int,enum_t) farray. ((((((to_rep(o) = 1) and
-  (o1 = (a[42 <- o]))) and ((result = a) and (a1 = o1))) and
-  (((to_rep(o2) = 0) and (o3 = (a1[42 <- o2]))) and ((result1 = a1) and
-  (a2 = o3)))) and ((a2 = a3) and (a4 = a2))) -> (to_rep((a3[42])) = 1)))
+goal WP_parameter_def : (to_rep((a3[42])) = 1)

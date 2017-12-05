@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -3649,43 +3649,97 @@ axiom length__post_axiom11 :
   container }; us_split_fields11 = { rec__dic_of_cont__my_fove__vector =
   container1 } }))))
 
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dlli__split_fields:us_main_type.
-  forall dhama__split_fields:us_main_type1.
-  forall dhase__split_fields:us_main_type2.
-  forall dorma__split_fields:us_main_type3. forall us:int.
-  forall dic_of_cont__main__R2b__assume:t. forall us1:t. forall us2:int.
-  forall dic_of_cont__main__R5b__assume:t. forall us3:t. forall us4:int.
-  forall us5:int. (in_range(capacity) -> (((us = capacity) and
-  in_range(capacity)) -> (((to_rep(dlli__split_discrs) = capacity) and
-  (is_empty({ us_split_discrs1 = {
-  rec__dic_of_cont__my_dlli__list__capacity = dlli__split_discrs };
-  us_split_fields1 = { rec__dic_of_cont__my_dlli__list = dlli__split_fields }
-  }) = true)) -> ((capacity = to_rep(dlli__split_discrs)) ->
-  (((dic_of_cont__main__R2b__assume = default_modulus(capacity)) and
-  (dic_of_cont__main__R2b__assume = r2b)) -> ((us1 = r2b) ->
-  (((us2 = capacity) and in_range(capacity)) ->
-  ((((to_rep(dhama__split_discrs) = capacity) and
+logic dlli__split_fields : us_main_type
+
+logic dhama__split_fields : us_main_type1
+
+logic dhase__split_fields : us_main_type2
+
+logic dorma__split_fields : us_main_type3
+
+logic dorse__split_fields : us_main_type4
+
+logic dfove__split_fields : us_main_type5
+
+logic us : int
+
+logic dic_of_cont__main__R2b__assume : t
+
+logic us1 : t
+
+logic us2 : int
+
+logic dic_of_cont__main__R5b__assume : t
+
+logic us3 : t
+
+logic us4 : int
+
+logic us5 : int
+
+logic us6 : int
+
+logic us7 : int
+
+axiom H : in_range(capacity)
+
+axiom H1 : ((us = capacity) and in_range(capacity))
+
+axiom H2 : ((to_rep(dlli__split_discrs) = capacity) and (is_empty({
+  us_split_discrs1 = { rec__dic_of_cont__my_dlli__list__capacity =
+  dlli__split_discrs }; us_split_fields1 = {
+  rec__dic_of_cont__my_dlli__list = dlli__split_fields } }) = true))
+
+axiom H3 : (capacity = to_rep(dlli__split_discrs))
+
+axiom H4 : (dic_of_cont__main__R2b__assume = default_modulus(capacity))
+
+axiom H5 : (dic_of_cont__main__R2b__assume = r2b)
+
+axiom H6 : true
+
+axiom H7 : (us1 = r2b)
+
+axiom H8 : ((us2 = capacity) and in_range(capacity))
+
+axiom H9 : (((to_rep(dhama__split_discrs) = capacity) and
   (to_rep1(dhama__split_discrs1) = r2b)) and (is_empty1({ us_split_discrs3 =
   { rec__dic_of_cont__my_hama__map__capacity = dhama__split_discrs;
   rec__dic_of_cont__my_hama__map__modulus = dhama__split_discrs1 };
   us_split_fields3 = { rec__dic_of_cont__my_hama__map = dhama__split_fields }
-  }) = true)) -> (((capacity = to_rep(dhama__split_discrs)) and
-  (r2b = to_rep1(dhama__split_discrs1))) ->
-  (((dic_of_cont__main__R5b__assume = default_modulus1(capacity)) and
-  (dic_of_cont__main__R5b__assume = r5b)) -> ((us3 = r5b) ->
-  (((us4 = capacity) and in_range(capacity)) ->
-  ((((to_rep(dhase__split_discrs) = capacity) and
+  }) = true))
+
+axiom H10 : ((capacity = to_rep(dhama__split_discrs)) and
+  (r2b = to_rep1(dhama__split_discrs1)))
+
+axiom H11 : (dic_of_cont__main__R5b__assume = default_modulus1(capacity))
+
+axiom H12 : (dic_of_cont__main__R5b__assume = r5b)
+
+axiom H13 : true
+
+axiom H14 : (us3 = r5b)
+
+axiom H15 : ((us4 = capacity) and in_range(capacity))
+
+axiom H16 : (((to_rep(dhase__split_discrs) = capacity) and
   (to_rep1(dhase__split_discrs1) = r5b)) and (is_empty3({ us_split_discrs5 =
   { rec__dic_of_cont__my_hase__set__capacity = dhase__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = dhase__split_discrs1 };
   us_split_fields5 = { rec__dic_of_cont__my_hase__set = dhase__split_fields }
-  }) = true)) -> (((capacity = to_rep(dhase__split_discrs)) and
-  (r5b = to_rep1(dhase__split_discrs1))) -> (((us5 = capacity) and
-  in_range(capacity)) -> (((to_rep(dorma__split_discrs) = capacity) and
-  (is_empty5({ us_split_discrs7 = {
-  rec__dic_of_cont__my_orma__map__capacity = dorma__split_discrs };
-  us_split_fields7 = { rec__dic_of_cont__my_orma__map = dorma__split_fields }
-  }) = true)) -> ((capacity = to_rep(dorma__split_discrs)) ->
-  in_range(capacity)))))))))))))))))))
+  }) = true))
+
+axiom H17 : ((capacity = to_rep(dhase__split_discrs)) and
+  (r5b = to_rep1(dhase__split_discrs1)))
+
+axiom H18 : ((us5 = capacity) and in_range(capacity))
+
+axiom H19 : ((to_rep(dorma__split_discrs) = capacity) and (is_empty5({
+  us_split_discrs7 = { rec__dic_of_cont__my_orma__map__capacity =
+  dorma__split_discrs }; us_split_fields7 = {
+  rec__dic_of_cont__my_orma__map = dorma__split_fields } }) = true))
+
+axiom H20 : (capacity = to_rep(dorma__split_discrs))
+
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def : in_range(capacity)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -330,46 +330,338 @@ logic attr__ATTRIBUTE_ADDRESS10 : int
 
 logic attr__ATTRIBUTE_ADDRESS11 : int
 
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic i5 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic temp___195 : (int,integer) farray
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic o11 : (int,integer) farray
+
+logic us : int
+
+logic temp___202 : int
+
+logic temp___200 : (int,integer) farray
+
+logic temp___199 : int
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : (int,integer) farray
+
+logic temp___204 : (int,integer) farray
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : integer
+
+logic o22 : int
+
+logic o23 : (int,integer) farray
+
+logic us1 : int
+
+logic temp___211 : int
+
+logic temp___209 : (int,integer) farray
+
+logic temp___208 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : integer
+
+logic o28 : int
+
+logic o29 : (int,integer) farray
+
+logic a11 : (int,integer) farray
+
+logic a21 : (int,integer) farray
+
+logic result : bool
+
+logic result1 : int
+
+logic i6 : int
+
+logic a12 : (int,integer) farray
+
+logic i7 : int
+
+logic result2 : (int,integer) farray
+
+logic a13 : (int,integer) farray
+
+logic a14 : (int,integer) farray
+
+logic i8 : int
+
+logic a15 : (int,integer) farray
+
+logic i9 : int
+
+logic a16 : (int,integer) farray
+
+logic i10 : int
+
+logic a17 : (int,integer) farray
+
+logic i11 : int
+
+logic result3 : int
+
+logic i12 : int
+
+logic a18 : (int,integer) farray
+
+logic i13 : int
+
+logic result4 : (int,integer) farray
+
+logic a19 : (int,integer) farray
+
+logic a110 : (int,integer) farray
+
+logic i14 : int
+
+logic a111 : (int,integer) farray
+
+logic i15 : int
+
+logic a112 : (int,integer) farray
+
+logic i16 : int
+
+logic a113 : (int,integer) farray
+
+logic i17 : int
+
+logic result5 : int
+
+logic i18 : int
+
+logic a22 : (int,integer) farray
+
+logic i19 : int
+
+logic result6 : (int,integer) farray
+
+logic a23 : (int,integer) farray
+
+logic a24 : (int,integer) farray
+
+logic i20 : int
+
+logic a25 : (int,integer) farray
+
+logic i21 : int
+
+logic a26 : (int,integer) farray
+
+logic i22 : int
+
+logic a27 : (int,integer) farray
+
+logic i23 : int
+
+logic result7 : int
+
+logic i24 : int
+
+logic a28 : (int,integer) farray
+
+logic i25 : int
+
+logic result8 : (int,integer) farray
+
+logic a29 : (int,integer) farray
+
+logic a210 : (int,integer) farray
+
+logic i26 : int
+
+logic a211 : (int,integer) farray
+
+logic i27 : int
+
+logic a212 : (int,integer) farray
+
+logic i28 : int
+
+logic a213 : (int,integer) farray
+
+logic i29 : int
+
+logic a114 : (int,integer) farray
+
+logic a214 : (int,integer) farray
+
+logic i30 : int
+
+logic i31 : int
+
+logic i32 : int
+
+logic i33 : int
+
+logic a115 : (int,integer) farray
+
+logic a215 : (int,integer) farray
+
+logic i34 : int
+
+logic i35 : int
+
+logic i36 : int
+
+logic i37 : int
+
+axiom H : in_range2(k1)
+
+axiom H1 : in_range2(k2)
+
+axiom H2 : ((k1 = k2) and ((0 <= k1) and ((k1 <= 100) and ((0 <= k2) and
+  ((k2 <= 100) and
+  ((forall i38:int. (((0 <= i38) and (i38 <= k1)) ->
+   (to_rep((b1[i38])) = to_rep((b2[i38]))))) and
+  (forall i38:int. ((((k1 + 1) <= i38) and (i38 <= 100)) ->
+  (to_rep((c1[(i38 - k1)])) = to_rep((c2[(i38 - k2)])))))))))))
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i6 = 0)
+
+axiom H5 : (((0 <= i6) and (i6 <= k1)) -> (temp___195 = a1))
+
+axiom H6 : (((0 <= i6) and (i6 <= k1)) ->
+  ((forall temp___196:int. (((0 <= temp___196) and (temp___196 <= 100)) ->
+   ((i7 <= temp___196) -> ((a12[temp___196]) = (temp___195[temp___196]))))) and
+  ((0 <= i7) and (i7 <= k1))))
+
+axiom H7 : (((0 <= i6) and (i6 <= k1)) -> ((0 <= i7) and (i7 <= 100)))
+
+axiom H8 : (((0 <= i6) and (i6 <= k1)) -> (o6 = i7))
+
+axiom H9 : (((0 <= i6) and (i6 <= k1)) -> (o7 = (b1[o6])))
+
+axiom H10 : (((0 <= i6) and (i6 <= k1)) -> (o8 = to_rep(o7)))
+
+axiom H11 : (((0 <= i6) and (i6 <= k1)) -> (to_rep(o9) = o8))
+
+axiom H12 : (((0 <= i6) and (i6 <= k1)) -> ((0 <= i7) and (i7 <= 100)))
+
+axiom H13 : (((0 <= i6) and (i6 <= k1)) -> (o10 = i7))
+
+axiom H14 : (((0 <= i6) and (i6 <= k1)) -> (o11 = (a12[o10 <- o9])))
+
+axiom H15 : (((0 <= i6) and (i6 <= k1)) -> (a12 = result2))
+
+axiom H16 : (((0 <= i6) and (i6 <= k1)) -> (a13 = o11))
+
+axiom H17 : (((0 <= i6) and (i6 <= k1)) -> (i7 = k1))
+
+axiom H18 : (((0 <= i6) and (i6 <= k1)) -> (i7 = i8))
+
+axiom H19 : (((0 <= i6) and (i6 <= k1)) -> (a13 = a14))
+
+axiom H20 : (((0 <= i6) and (i6 <= k1)) -> (i9 = i7))
+
+axiom H21 : (((0 <= i6) and (i6 <= k1)) -> (a15 = a13))
+
+axiom H22 : (((0 <= i6) and (i6 <= k1)) -> (i10 = i8))
+
+axiom H23 : (((0 <= i6) and (i6 <= k1)) -> (a16 = a14))
+
+axiom H24 : (((0 <= i6) and (i6 <= k1)) -> (i11 = i9))
+
+axiom H25 : (((0 <= i6) and (i6 <= k1)) -> (a17 = a15))
+
+axiom H26 : ((not ((0 <= i6) and (i6 <= k1))) -> (i6 = i10))
+
+axiom H27 : ((not ((0 <= i6) and (i6 <= k1))) -> (a16 = a1))
+
+axiom H28 : ((not ((0 <= i6) and (i6 <= k1))) -> (i11 = i6))
+
+axiom H29 : ((not ((0 <= i6) and (i6 <= k1))) -> (a17 = a11))
+
+axiom H30 : ((temp___202 = (k1 + 1)) and in_range1((k1 + 1)))
+
+axiom H31 : (result3 = i1)
+
+axiom H32 : (i12 = temp___202)
+
+axiom H33 : (temp___202 <= i12)
+
+axiom H34 : (i12 <= 0)
+
+axiom H35 :
+  ((forall temp___201:int. (((0 <= temp___201) and (temp___201 <= 100)) ->
+   ((i13 <= temp___201) -> ((a18[temp___201]) = (a16[temp___201]))))) and
+  (((k1 + 1) <= i13) and (i13 <= 0)))
+
+axiom H36 : ((temp___199 = (i13 - k1)) and in_range1((i13 - k1)))
+
+axiom H37 : ((0 <= temp___199) and (temp___199 <= 100))
+
+axiom H38 : (o12 = temp___199)
+
+axiom H39 : (o13 = (c1[o12]))
+
+axiom H40 : (o14 = to_rep(o13))
+
+axiom H41 : (to_rep(o15) = o14)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a1:(int,integer) farray. forall i:int. forall i1:int.
-  forall temp___195:(int,integer) farray. forall o:int. forall o1:integer.
-  forall o2:int. forall o3:integer. forall o4:int.
-  forall o5:(int,integer) farray. forall temp___202:int.
-  forall temp___199:int. forall o6:int. forall o7:integer. forall o8:int.
-  forall o9:integer. forall a11:(int,integer) farray. forall result:int.
-  forall i2:int. forall a12:(int,integer) farray. forall i3:int.
-  forall result1:(int,integer) farray. forall a13:(int,integer) farray.
-  forall a14:(int,integer) farray. forall i4:int.
-  forall a15:(int,integer) farray. forall i5:int.
-  forall a16:(int,integer) farray. forall i6:int.
-  forall a17:(int,integer) farray. forall i7:int. forall result2:int.
-  forall i8:int. forall a18:(int,integer) farray. forall i9:int.
-  (in_range2(k1) -> (in_range2(k2) -> (((k1 = k2) and ((0 <= k1) and
-  ((k1 <= 100) and ((0 <= k2) and ((k2 <= 100) and
-  ((forall i10:int. (((0 <= i10) and (i10 <= k1)) ->
-   (to_rep((b1[i10])) = to_rep((b2[i10]))))) and
-  (forall i10:int. ((((k1 + 1) <= i10) and (i10 <= 100)) ->
-  (to_rep((c1[(i10 - k1)])) = to_rep((c2[(i10 - k2)]))))))))))) -> (((({
-  int__content = result } = { int__content = i }) and (i2 = 0)) and
-  ((((0 <= i2) and (i2 <= k1)) and ((((temp___195 = a1) and
-  (((forall temp___196:int. (((0 <= temp___196) and (temp___196 <= 100)) ->
-    ((i3 <= temp___196) -> ((a12[temp___196]) = (temp___195[temp___196]))))) and
-  ((0 <= i3) and (i3 <= k1))) and (((((((((0 <= i3) and (i3 <= 100)) and
-  (o = i3)) and (o1 = (b1[o]))) and (o2 = to_rep(o1))) and
-  (to_rep(o3) = o2)) and ((((0 <= i3) and (i3 <= 100)) and (o4 = i3)) and
-  (o5 = (a12[o4 <- o3])))) and ((a12 = result1) and (a13 = o5))) and
-  (i3 = k1)))) and (((i3 = i4) and (a13 = a14)) and ((i5 = i3) and
-  (a15 = a13)))) and ((({ int__content = i6 } = { int__content = i4 }) and ({
-  map__content = a16 } = { map__content = a14 })) and ((i7 = i5) and
-  (a17 = a15))))) or ((not ((0 <= i2) and (i2 <= k1))) and (((i2 = i6) and ({
-  map__content = a16 } = { map__content = a1 })) and ((i7 = i2) and
-  (a17 = a11)))))) -> (((temp___202 = (k1 + 1)) and in_range1((k1 + 1))) ->
-  ((({ int__content = result2 } = { int__content = i1 }) and
-  (i8 = temp___202)) -> (((temp___202 <= i8) and (i8 <= 0)) ->
-  (((forall temp___201:int. (((0 <= temp___201) and (temp___201 <= 100)) ->
-    ((i9 <= temp___201) -> ((a18[temp___201]) = (a16[temp___201]))))) and
-  (((k1 + 1) <= i9) and (i9 <= 0))) -> (((((((temp___199 = (i9 - k1)) and
-  in_range1((i9 - k1))) and (((0 <= temp___199) and (temp___199 <= 100)) and
-  (o6 = temp___199))) and (o7 = (c1[o6]))) and (o8 = to_rep(o7))) and
-  (to_rep(o9) = o8)) -> (0 <= i9)))))))))))
+goal WP_parameter_def : (0 <= i13)

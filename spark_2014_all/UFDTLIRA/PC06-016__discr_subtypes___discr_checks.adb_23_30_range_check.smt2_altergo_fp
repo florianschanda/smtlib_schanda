@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -147,17 +147,31 @@ logic r5b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "discr_checks.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall discr_checks__check_derived_priv__R4b__assume:int. forall us:int.
-  forall discr_checks__check_derived_priv__R5b__assume:int.
-  ((((discr_checks__check_derived_priv__R4b__assume = bad(void)) and
+logic discr_checks__check_derived_priv__R4b__assume : int
+
+logic us : int
+
+logic discr_checks__check_derived_priv__R5b__assume : int
+
+logic us1 : int
+
+axiom H : ((discr_checks__check_derived_priv__R4b__assume = bad(void)) and
   (in_range(discr_checks__check_derived_priv__R4b__assume) and
-  (discr_checks__check_derived_priv__R4b__assume = 6))) and
-  (discr_checks__check_derived_priv__R4b__assume = r4b)) -> (in_range(r4b) ->
-  (((us = r4b) and in_range1(r4b)) ->
-  ((((discr_checks__check_derived_priv__R5b__assume = bad(void)) and
+  (discr_checks__check_derived_priv__R4b__assume = 6)))
+
+axiom H1 : (discr_checks__check_derived_priv__R4b__assume = r4b)
+
+axiom H2 : in_range(r4b)
+
+axiom H3 : ((us = r4b) and in_range1(r4b))
+
+axiom H4 : ((discr_checks__check_derived_priv__R5b__assume = bad(void)) and
   (in_range(discr_checks__check_derived_priv__R5b__assume) and
-  (discr_checks__check_derived_priv__R5b__assume = 6))) and
-  (discr_checks__check_derived_priv__R5b__assume = r5b)) -> (in_range(r5b) ->
-  in_range1(r4b)))))))
+  (discr_checks__check_derived_priv__R5b__assume = 6)))
+
+axiom H5 : (discr_checks__check_derived_priv__R5b__assume = r5b)
+
+axiom H6 : in_range(r5b)
+
+ (* File "discr_checks.adb", line 16, characters 0-0 *)
+goal WP_parameter_def : in_range1(r4b)

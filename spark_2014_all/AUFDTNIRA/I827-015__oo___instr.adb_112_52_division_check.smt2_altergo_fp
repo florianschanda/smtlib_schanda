@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1649,13 +1649,41 @@ axiom temp___String_Literal_376__def_axiom :
   ((to_rep((temp___String_Literal_376(void)[1])) = 62) and
   (to_rep((temp___String_Literal_376(void)[2])) = 62))
 
+logic v : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic v1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(v))
+
+axiom H1 : ((o2 = (to_rep5(x2) * 3600)) and in_range((to_rep5(x2) * 3600)))
+
+axiom H2 : ((o = (to_rep4(x1) * 60)) and in_range((to_rep4(x1) * 60)))
+
+axiom H3 : (o1 = (to_rep4(x) + o))
+
+axiom H4 : ((o3 = o1) and in_range(o1))
+
+axiom H5 : (o4 = (o3 + o2))
+
+axiom H6 : ((o5 = o4) and in_range(o4))
+
+axiom H7 : (result = v)
+
+axiom H8 : (v1 = o5)
+
  (* File "instr.ads", line 75, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall result:int. forall v1:int.
-  ((((-2147483648) <= 2147483647) -> in_range(v)) ->
-  ((((((o2 = (to_rep5(x2) * 3600)) and in_range((to_rep5(x2) * 3600))) and
-  (((((o = (to_rep4(x1) * 60)) and in_range((to_rep4(x1) * 60))) and
-  (o1 = (to_rep4(x) + o))) and ((o3 = o1) and in_range(o1))) and
-  (o4 = (o3 + o2)))) and ((o5 = o4) and in_range(o4))) and ((result = v) and
-  (v1 = o5))) -> (not (100 = 0)))))
+goal WP_parameter_def : (not (100 = 0))

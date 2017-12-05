@@ -138,7 +138,7 @@ function scalar_with_default__ref___3__projection(a: scalar_with_default__ref) :
 
 type tscalar_with_defaultB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -341,10 +341,22 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom first__def_axiom : (first = c)
 
+logic o : int
+
+logic us : int
+
+logic result : bool
+
+axiom H : in_range(c)
+
+axiom H1 : ((1 <= 100) -> (o = ((100 - 1) + 1)))
+
+axiom H2 : ((not (1 <= 100)) -> (o = 0))
+
+axiom H3 : (((0 <  o) -> (result = true)) and ((not (0 <  o)) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "with_default.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (in_range(c) -> (((((1 <= 100) and
-  (o = ((100 - 1) + 1))) or ((not (1 <= 100)) and (o = 0))) and
-  (((0 <  o) and (result = true)) or ((not (0 <  o)) and
-  (result = false)))) -> ((result = true) -> dynamic_property(first,
-  2147483647, 0)))))
+goal WP_parameter_def : dynamic_property(first, 2147483647, 0)

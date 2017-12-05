@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -641,49 +641,237 @@ type t3b__ref = { t3b__content : us_t1
 
 function t3b__ref___projection(a: t3b__ref) : us_t1 = (a).t3b__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall int__:int. forall s:(int,character) farray. forall first4:int.
-  forall val__:int. forall o:int. forall temp___524:int.
-  forall temp___523:int. forall temp___521:(int,character) farray.
-  forall temp___520:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:character. forall o7:int.
-  forall o8:(int,character) farray. forall o9:int. forall o10:character.
-  forall result:int. forall first5:int. forall result1:int.
-  forall int__1:int. forall int__2:int. forall s1:(int,character) farray.
-  forall first6:int. forall val__1:int. forall result2:int.
-  forall val__2:int. forall result3:int. forall int__3:int.
-  forall result4:int. forall first7:int.
-  forall result5:(int,character) farray. forall s2:(int,character) farray.
-  forall int__4:int. forall s3:(int,character) farray. forall first8:int.
-  forall val__3:int. forall int__5:int. forall s4:(int,character) farray.
-  forall first9:int. forall val__4:int. forall int__6:int.
-  forall s5:(int,character) farray. forall first10:int. forall val__5:int.
-  forall int__7:int. forall s6:(int,character) farray. forall first11:int.
-  forall val__6:int. forall result6:int. forall first12:int. (in_range(x) ->
-  ((((-2147483648) <= 2147483647) -> in_range(int__)) ->
-  (((result = first4) and (first5 = 12)) -> (in_range3(first5) ->
-  ((((-2147483648) <= 2147483647) -> in_range(val__)) -> (((((x <  0) and
-  (o = x)) or ((not (x <  0)) and ((o = (-x)) and in_range((-x))))) and
-  ((result1 = int__) and (int__1 = o))) -> (((((temp___524 = val__) and
-  ((temp___523 = first5) and ((temp___521 = s) and ((temp___520 = int__1) and
-  ((((((-2147483648) <= 2147483647) -> in_range(int__2)) and
+logic int__ : int
+
+logic s : (int,character) farray
+
+logic first4 : int
+
+logic val__ : int
+
+logic o : int
+
+logic temp___518 : int
+
+logic temp___517 : int
+
+logic temp___515 : (int,character) farray
+
+logic temp___514 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : (int,character) farray
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : (int,character) farray
+
+logic result : int
+
+logic first5 : int
+
+logic result1 : int
+
+logic int__1 : int
+
+logic int__2 : int
+
+logic s1 : (int,character) farray
+
+logic first6 : int
+
+logic val__1 : int
+
+logic result2 : int
+
+logic val__2 : int
+
+logic result3 : int
+
+logic int__3 : int
+
+logic result4 : int
+
+logic first7 : int
+
+logic result5 : (int,character) farray
+
+logic s2 : (int,character) farray
+
+logic int__4 : int
+
+logic s3 : (int,character) farray
+
+logic first8 : int
+
+logic val__3 : int
+
+logic int__5 : int
+
+logic s4 : (int,character) farray
+
+logic first9 : int
+
+logic val__4 : int
+
+logic int__6 : int
+
+logic s5 : (int,character) farray
+
+logic first10 : int
+
+logic val__5 : int
+
+logic int__7 : int
+
+logic s6 : (int,character) farray
+
+logic first11 : int
+
+logic val__6 : int
+
+logic result6 : int
+
+logic first12 : int
+
+logic result7 : (int,character) farray
+
+logic s7 : (int,character) farray
+
+logic s8 : (int,character) farray
+
+logic first13 : int
+
+logic s9 : (int,character) farray
+
+logic first14 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(int__))
+
+axiom H2 : (result = first4)
+
+axiom H3 : (first5 = 12)
+
+axiom H4 : in_range3(first5)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(val__))
+
+axiom H6 : ((x <  0) -> (o = x))
+
+axiom H7 : ((not (x <  0)) -> ((o = (-x)) and in_range((-x))))
+
+axiom H8 : (result1 = int__)
+
+axiom H9 : (int__1 = o)
+
+axiom H10 : (temp___518 = val__)
+
+axiom H11 : (temp___517 = first5)
+
+axiom H12 : (temp___515 = s)
+
+axiom H13 : (temp___514 = int__1)
+
+axiom H14 : (((((- 2147483648) <= 2147483647) -> in_range(int__2)) and
   ((0 <= 2147483647) -> in_range3(first6))) and
-  (((-2147483648) <= 2147483647) -> in_range(val__1))) and
-  (((val__1 = result2) and (val__2 = comp_mod(int__2,10))) and
-  (((((o1 = (int__2 - val__2)) and in_range((int__2 - val__2))) and
-  (o2 = comp_div(o1,10))) and ((int__2 = result3) and (int__3 = o2))) and
-  ((((o3 = (first6 - 1)) and in_range3((first6 - 1))) and
-  ((first6 = result4) and (first7 = o3))) and (((((((o4 = (48 - val__2)) and
-  in_range((48 - val__2))) and ((o5 = o4) and in_range2(o4))) and
-  (to_rep(o6) = o5)) and ((((1 <= first7) and (first7 <= 11)) and
-  (o7 = first7)) and (o8 = (s1[o7 <- o6])))) and ((result5 = s1) and
-  (s2 = o8))) and (int__3 = 0)))))))))) and (((val__2 = val__3) and
-  ((first7 = first8) and ((s2 = s3) and (int__3 = int__4)))) and
-  ((val__4 = val__2) and ((first9 = first7) and ((s4 = s2) and
-  (int__5 = int__3)))))) and (((val__5 = val__3) and ((first8 = first10) and
-  ((s3 = s5) and (int__6 = int__4)))) and ((val__6 = val__4) and
-  ((first11 = first9) and ((s6 = s4) and (int__7 = int__5)))))) ->
-  ((x <  0) -> ((((o9 = (first10 - 1)) and in_range3((first10 - 1))) and
-  ((result6 = first10) and (first12 = o9))) -> ((to_rep(o10) = 45) ->
-  (1 <= first12))))))))))))
+  (((- 2147483648) <= 2147483647) -> in_range(val__1)))
+
+axiom H15 : (val__1 = result2)
+
+axiom H16 : (val__2 = comp_mod(int__2,10))
+
+axiom H17 : ((o1 = (int__2 - val__2)) and in_range((int__2 - val__2)))
+
+axiom H18 : (o2 = comp_div(o1,10))
+
+axiom H19 : (int__2 = result3)
+
+axiom H20 : (int__3 = o2)
+
+axiom H21 : ((o3 = (first6 - 1)) and in_range3((first6 - 1)))
+
+axiom H22 : (first6 = result4)
+
+axiom H23 : (first7 = o3)
+
+axiom H24 : ((o4 = (48 - val__2)) and in_range((48 - val__2)))
+
+axiom H25 : ((o5 = o4) and in_range2(o4))
+
+axiom H26 : (to_rep(o6) = o5)
+
+axiom H27 : ((1 <= first7) and (first7 <= 11))
+
+axiom H28 : (o7 = first7)
+
+axiom H29 : (o8 = (s1[o7 <- o6]))
+
+axiom H30 : (result5 = s1)
+
+axiom H31 : (s2 = o8)
+
+axiom H32 : (int__3 = 0)
+
+axiom H33 : (val__2 = val__3)
+
+axiom H34 : (first7 = first8)
+
+axiom H35 : (s2 = s3)
+
+axiom H36 : (int__3 = int__4)
+
+axiom H37 : (val__4 = val__2)
+
+axiom H38 : (first9 = first7)
+
+axiom H39 : (s4 = s2)
+
+axiom H40 : (int__5 = int__3)
+
+axiom H41 : (val__5 = val__3)
+
+axiom H42 : (first10 = first8)
+
+axiom H43 : (s5 = s3)
+
+axiom H44 : (int__6 = int__4)
+
+axiom H45 : (val__6 = val__4)
+
+axiom H46 : (first11 = first9)
+
+axiom H47 : (s6 = s4)
+
+axiom H48 : (int__7 = int__5)
+
+axiom H49 : (x <  0)
+
+axiom H50 : ((o9 = (first10 - 1)) and in_range3((first10 - 1)))
+
+axiom H51 : (result6 = first10)
+
+axiom H52 : (first12 = o9)
+
+axiom H53 : (to_rep(o10) = 45)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= first12)

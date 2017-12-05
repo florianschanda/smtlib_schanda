@@ -57,6 +57,7 @@
 (declare-const var Int)
 (declare-const result Int)
 (declare-const var1 Int)
+(declare-const var2 Int)
 (assert (= result var))
 (assert (= var1 10))
 (assert (in_range1 var1))

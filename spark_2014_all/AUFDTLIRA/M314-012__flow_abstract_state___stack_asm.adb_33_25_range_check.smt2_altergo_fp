@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -279,7 +279,37 @@ type index_t__ref = { index_t__content : index_t
 function index_t__ref___projection(a: index_t__ref) : index_t =
   (a).index_t__content
 
+logic the_stack : (int,integer) farray
+
+logic the_ptr : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic result : int
+
+logic the_ptr1 : int
+
+logic result1 : (int,integer) farray
+
+logic the_stack1 : (int,integer) farray
+
+logic the_stack2 : (int,integer) farray
+
+logic the_ptr2 : int
+
+logic the_stack3 : (int,integer) farray
+
+logic the_ptr3 : int
+
+axiom H : in_range1(the_ptr)
+
+axiom H1 : in_range(v)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_ptr:int. (in_range1(the_ptr) -> (in_range(v) ->
-  in_range1((the_ptr + 1)))))
+goal WP_parameter_def : in_range1((the_ptr + 1))

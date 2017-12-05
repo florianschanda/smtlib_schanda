@@ -597,28 +597,84 @@ axiom def_axiom4 :
   ((not (temp___1326 = temp___1324)) -> ((temp___1321(temp___1323,
   temp___1324, temp___1325)[temp___1326]) = (temp___1323[temp___1326])))))))
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : et1
+
+logic o5 : (int,et1) farray
+
+logic o6 : (int,(int,et1) farray) farray
+
+logic o7 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range(i1)
+
+axiom H1 : in_range(i2)
+
+axiom H2 : in_range1(j1)
+
+axiom H3 : in_range1(j2)
+
+axiom H4 : in_range2(k1)
+
+axiom H5 : in_range2(k2)
+
+axiom H6 : in_range3(e)
+
+axiom H7 : in_range3(f)
+
+axiom H8 : ((not (i1 = i2)) and ((not (j1 = j2)) and (not (k1 = k2))))
+
+axiom H9 : (to_rep(o) = e)
+
+axiom H10 : (o1 = (((a[k1])[j1])[i1 <- o]))
+
+axiom H11 : (o2 = ((a[k1])[j1 <- o1]))
+
+axiom H12 : (o3 = (a[k1 <- o2]))
+
+axiom H13 : (result = a)
+
+axiom H14 : (a1 = o3)
+
+axiom H15 : (to_rep(o4) = f)
+
+axiom H16 : (o5 = (((a1[k2])[j2])[i2 <- o4]))
+
+axiom H17 : (o6 = ((a1[k2])[j2 <- o5]))
+
+axiom H18 : (o7 = (a1[k2 <- o6]))
+
+axiom H19 : (result1 = a1)
+
+axiom H20 : (a2 = o7)
+
+axiom H21 : (a2 = a3)
+
+axiom H22 : (a4 = a2)
+
  (* File "ar.ads", line 407, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall o:et1.
-  forall o1:(int,et1) farray. forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray. forall o4:et1.
-  forall o5:(int,et1) farray. forall o6:(int,(int,et1) farray) farray.
-  forall o7:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall result1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray.
-  forall a4:(int,(int,(int,et1) farray) farray) farray. ((in_range(i1) and
-  (in_range(i2) and (in_range1(j1) and (in_range1(j2) and (in_range2(k1) and
-  (in_range2(k2) and (in_range3(e) and (in_range3(f) and
-  (((not (i1 = i2)) and ((not (j1 = j2)) and (not (k1 = k2)))) and
-  (((((((to_rep(o) = e) and (o1 = (((a[k1])[j1])[i1 <- o]))) and
-  (o2 = ((a[k1])[j1 <- o1]))) and (o3 = (a[k1 <- o2]))) and ((result = a) and
-  (a1 = o3))) and (((((to_rep(o4) = f) and
-  (o5 = (((a1[k2])[j2])[i2 <- o4]))) and (o6 = ((a1[k2])[j2 <- o5]))) and
-  (o7 = (a1[k2 <- o6]))) and ((result1 = a1) and (a2 = o7)))) and
-  ((a2 = a3) and (a4 = a2)))))))))))) -> (bool_eq7(a3, 1, 16, temp___1291(a,
-  k1, temp___1299((a[k1]), j1, temp___1306(((a[k1])[j1]), i1, e)), k2,
+goal WP_parameter_def : (bool_eq7(a3, 1, 16, temp___1291(a, k1,
+  temp___1299((a[k1]), j1, temp___1306(((a[k1])[j1]), i1, e)), k2,
   temp___1314((a[k2]), j2, temp___1321(((a[k2])[j2]), i2, f))), 1,
-  16) = true)))
+  16) = true)

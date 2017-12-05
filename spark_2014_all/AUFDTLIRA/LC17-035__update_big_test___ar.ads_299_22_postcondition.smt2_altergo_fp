@@ -486,24 +486,72 @@ axiom def_axiom4 :
   ((not (temp___828 = temp___826)) -> ((temp___823(temp___825, temp___826,
   temp___827)[temp___828]) = (temp___825[temp___828])))))))
 
+logic a : (int,(int,et1) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : et1
+
+logic o4 : (int,et1) farray
+
+logic o5 : (int,(int,et1) farray) farray
+
+logic result : (int,(int,et1) farray) farray
+
+logic a1 : (int,(int,et1) farray) farray
+
+logic result1 : (int,(int,et1) farray) farray
+
+logic a2 : (int,(int,et1) farray) farray
+
+logic a3 : (int,(int,et1) farray) farray
+
+logic a4 : (int,(int,et1) farray) farray
+
+axiom H : in_range1(i1)
+
+axiom H1 : in_range1(i2)
+
+axiom H2 : in_range2(j1)
+
+axiom H3 : in_range2(j2)
+
+axiom H4 : in_range3(e)
+
+axiom H5 : in_range3(f)
+
+axiom H6 : ((not (i1 = i2)) or (not (j1 = j2)))
+
+axiom H7 : (to_rep(o) = e)
+
+axiom H8 : (o1 = ((a[j1])[i1 <- o]))
+
+axiom H9 : (o2 = (a[j1 <- o1]))
+
+axiom H10 : (result = a)
+
+axiom H11 : (a1 = o2)
+
+axiom H12 : (to_rep(o3) = f)
+
+axiom H13 : (o4 = ((a1[j2])[i2 <- o3]))
+
+axiom H14 : (o5 = (a1[j2 <- o4]))
+
+axiom H15 : (result1 = a1)
+
+axiom H16 : (a2 = o5)
+
+axiom H17 : (a2 = a3)
+
+axiom H18 : (a4 = a2)
+
+axiom H19 : (not (j1 = j2))
+
  (* File "ar.ads", line 290, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,et1) farray) farray. forall o:et1.
-  forall o1:(int,et1) farray. forall o2:(int,(int,et1) farray) farray.
-  forall o3:et1. forall o4:(int,et1) farray.
-  forall o5:(int,(int,et1) farray) farray.
-  forall result:(int,(int,et1) farray) farray.
-  forall a1:(int,(int,et1) farray) farray.
-  forall result1:(int,(int,et1) farray) farray.
-  forall a2:(int,(int,et1) farray) farray.
-  forall a3:(int,(int,et1) farray) farray.
-  forall a4:(int,(int,et1) farray) farray. ((in_range1(i1) and
-  (in_range1(i2) and (in_range2(j1) and (in_range2(j2) and (in_range3(e) and
-  (in_range3(f) and (((not (i1 = i2)) or (not (j1 = j2))) and
-  ((((((to_rep(o) = e) and (o1 = ((a[j1])[i1 <- o]))) and
-  (o2 = (a[j1 <- o1]))) and ((result = a) and (a1 = o2))) and
-  ((((to_rep(o3) = f) and (o4 = ((a1[j2])[i2 <- o3]))) and
-  (o5 = (a1[j2 <- o4]))) and ((result1 = a1) and (a2 = o5)))) and
-  ((a2 = a3) and (a4 = a2)))))))))) -> ((not (j1 = j2)) -> (bool_eq6(a3, 5,
-  50, temp___808(a, j1, temp___816((a[j1]), i1, e), j2, temp___823((a[j2]),
-  i2, f)), 5, 50) = true))))
+goal WP_parameter_def : (bool_eq6(a3, 5, 50, temp___808(a, j1,
+  temp___816((a[j1]), i1, e), j2, temp___823((a[j2]), i2, f)), 5, 50) = true)

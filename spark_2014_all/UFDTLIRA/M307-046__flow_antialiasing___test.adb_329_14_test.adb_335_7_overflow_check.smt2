@@ -50,6 +50,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const x Int)
 (declare-const test__test_tc_1__C113b__assume Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (and (= test__test_tc_1__C113b__assume x) (in_range1 x)))
 (assert (= test__test_tc_1__C113b__assume c113b))

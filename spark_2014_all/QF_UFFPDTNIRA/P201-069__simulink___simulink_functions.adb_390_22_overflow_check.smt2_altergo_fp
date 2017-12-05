@@ -1060,7 +1060,7 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type tinteger_32B
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1116,7 +1116,7 @@ function tinteger_32B__ref___projection(a: tinteger_32B__ref) : tinteger_32B =
 
 type integer_32
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1148,14 +1148,43 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+axiom H : in_range2(left)
+
+axiom H1 : in_range2(right)
+
+axiom H2 : (not (right = 0))
+
+axiom H3 : ((o = div(NearestTiesToEven, of_int(NearestTiesToEven, left),
+  of_int(NearestTiesToEven, right))) and tqtisFinite(div(NearestTiesToEven,
+  of_int(NearestTiesToEven, left), of_int(NearestTiesToEven, right))))
+
+axiom H4 : (o1 = roundToIntegral(Down, o))
+
+axiom H5 : (o2 = to_int(NearestTiesToAway, o1))
+
+axiom H6 : ((o3 = o2) and in_range2(o2))
+
+axiom H7 : (o4 = (o3 * right))
+
+axiom H8 : ((o5 = o4) and in_range1(o4))
+
+axiom H9 : (o6 = (left - o5))
+
  (* File "interfac.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. (in_range2(left) -> (in_range2(right) ->
-  ((not (right = 0)) -> (((((((((o = div(NearestTiesToEven,
-  of_int(NearestTiesToEven, left), of_int(NearestTiesToEven, right))) and
-  tqtisFinite(div(NearestTiesToEven, of_int(NearestTiesToEven, left),
-  of_int(NearestTiesToEven, right)))) and (o1 = roundToIntegral(Down,
-  o))) and (o2 = to_int(NearestTiesToAway, o1))) and ((o3 = o2) and
-  in_range2(o2))) and (o4 = (o3 * right))) and ((o5 = o4) and
-  in_range1(o4))) and (o6 = (left - o5))) -> in_range1(o6))))))
+goal WP_parameter_def : in_range1(o6)

@@ -44,6 +44,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const u Int)
+(declare-const o Int)
 (assert (in_range x))
 (assert (=> (<= 0 2147483647) (in_range1 u)))
 (assert (not (in_range1 x)))

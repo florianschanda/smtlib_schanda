@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -658,7 +658,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2064,62 +2064,196 @@ axiom def_axiom :
   (forall temp___1102:int.
   ((keccak__keccak_1600__duplex__duplex_mute__block__aggregate_def(temp___1101)[temp___1102]) = of_rep1(temp___1101))))
 
- (* File "keccak-duplex.ads", line 137, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ctx__split_fields:map. forall ctx__split_fields1:rate_number.
-  forall block:(int,byte) farray. forall temp___1103:(int,byte) farray.
-  forall temp___11031:t3. forall o:int. forall temp___1105:int.
-  forall o1:(int,byte) farray. forall temp___1106:(int,byte) farray.
-  forall temp___11061:t3. forall temp___1107:(int,byte) farray.
-  forall temp___11071:t3. forall o2:(int,byte) farray. forall o3:int.
-  forall o4:int. forall result:(int,byte) farray.
-  forall block1:(int,byte) farray. forall result1:(int,byte) farray.
-  forall block2:(int,byte) farray. (dynamic_property(0, 2147483647,
-  to_rep(first(in_data1)), to_rep(last(in_data1))) ->
-  (in_range1(in_data_bit_length) ->
-  (((in_data_bit_length <= max_input_length({ us_split_fields1 = {
+logic ctx__split_fields : map
+
+logic ctx__split_fields1 : rate_number
+
+logic block : (int,byte) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___1103 : (int,byte) farray
+
+logic temp___11031 : t3
+
+logic o4 : int
+
+logic temp___1105 : int
+
+logic o5 : (int,byte) farray
+
+logic temp___1106 : (int,byte) farray
+
+logic temp___11061 : t3
+
+logic temp___1107 : (int,byte) farray
+
+logic temp___11071 : t3
+
+logic o6 : (int,byte) farray
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic keccak__keccak_1600__duplex__duplex_mute__R196s__assume : int
+
+logic o10 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block__compl1 : t4
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : int
+
+logic o14 : (int,byte) farray
+
+logic o15 : (int,byte) farray
+
+logic temp___1114 : (int,byte) farray
+
+logic temp___11141 : t5
+
+logic o16 : (int,byte) farray
+
+logic o17 : t1
+
+logic o18 : int
+
+logic result : bool
+
+logic result1 : (int,byte) farray
+
+logic block1 : (int,byte) farray
+
+logic result2 : (int,byte) farray
+
+logic block2 : (int,byte) farray
+
+logic keccak__padding__pad101_single_block__block : (int,byte) farray
+
+logic result3 : (int,byte) farray
+
+logic block3 : (int,byte) farray
+
+logic keccak__keccak_1600__keccakf_1600_lanes__xor_bits_into_state__a : map
+
+logic result4 : map
+
+logic result5 : rate_number
+
+logic ctx__split_fields2 : map
+
+logic ctx__split_fields3 : rate_number
+
+logic keccak__keccak_1600__keccakf_1600_permutation__permute__a : map
+
+logic result6 : map
+
+logic result7 : rate_number
+
+logic ctx__split_fields4 : map
+
+logic ctx__split_fields5 : rate_number
+
+logic ctx__split_fields6 : map
+
+logic ctx__split_fields7 : rate_number
+
+logic block4 : (int,byte) farray
+
+logic ctx__split_fields8 : map
+
+logic ctx__split_fields9 : rate_number
+
+logic block5 : (int,byte) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(in_data1)),
+  to_rep(last(in_data1)))
+
+axiom H1 : in_range1(in_data_bit_length)
+
+axiom H2 : ((in_data_bit_length <= max_input_length({ us_split_fields1 = {
   rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
   rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
   })) and (comp_div((in_data_bit_length + 7),8) <= length({ elts = in_data;
-  rt = in_data1 }))) -> ((({ map__content = result } = { map__content = block
-  }) and
-  (block1 = keccak__keccak_1600__duplex__duplex_mute__block__aggregate_def(of_int(0)))) ->
-  ((((((((to_rep(first(in_data1)) <= to_rep(last(in_data1))) and
-  (((0 <= (length({ elts = in_data; rt = in_data1 }) - 1)) and
+  rt = in_data1 })))
+
+axiom H3 : (result1 = block)
+
+axiom H4 :
+  (block1 = keccak__keccak_1600__duplex__duplex_mute__block__aggregate_def(of_int(0)))
+
+axiom H5 : (((to_rep(first(in_data1)) <= to_rep(last(in_data1))) ->
+  (((0 <= (length({ elts = in_data; rt = in_data1 }) - 1)) ->
   (((to_rep(last(in_data1)) - to_rep(first(in_data1))) + 1) = (((length({
-  elts = in_data; rt = in_data1 }) - 1) - 0) + 1))) or ((not (0 <= (length({
-  elts = in_data; rt = in_data1 }) - 1))) and
-  (((to_rep(last(in_data1)) - to_rep(first(in_data1))) + 1) = 0)))) or
-  ((not (to_rep(first(in_data1)) <= to_rep(last(in_data1)))) and
-  (((0 <= (length({ elts = in_data; rt = in_data1 }) - 1)) and
-  (0 = (((length({ elts = in_data; rt = in_data1 }) - 1) - 0) + 1))) or
-  (not (0 <= (length({ elts = in_data; rt = in_data1 }) - 1)))))) and
-  ((slide(in_data, to_rep(first(in_data1)), 0) = temp___1103) and (mk1(0,
-  (length({ elts = in_data; rt = in_data1 }) - 1)) = temp___11031))) and
-  (((((o = length({ elts = in_data; rt = in_data1 })) and in_range(length({
-  elts = in_data; rt = in_data1 }))) and (temp___1105 = (o - 1))) and
-  ((((0 <= temp___1105) -> (((0 <= 0) and (0 <= 199)) and
-  ((0 <= temp___1105) and (temp___1105 <= 199)))) and (o1 = block1)) and
-  ((o1 = temp___1106) and (mk1(0, temp___1105) = temp___11061)))) and
-  ((((to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031))) and
-  (((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) and
-  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1))) or
-  ((not (to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061)))) and
-  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031)))) and
-  (((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) and
-  (0 = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1))) or
-  (not (to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))))))) and
-  ({ elts1 = temp___1107; rt1 = temp___11071 } = { elts1 = temp___1103; rt1 =
-  temp___11031 })))) and
+  elts = in_data; rt = in_data1 }) - 1) - 0) + 1))) and ((not (0 <= (length({
+  elts = in_data; rt = in_data1 }) - 1))) ->
+  (((to_rep(last(in_data1)) - to_rep(first(in_data1))) + 1) = 0)))) and
+  ((not (to_rep(first(in_data1)) <= to_rep(last(in_data1)))) ->
+  ((0 <= (length({ elts = in_data; rt = in_data1 }) - 1)) -> (0 = (((length({
+  elts = in_data; rt = in_data1 }) - 1) - 0) + 1)))))
+
+axiom H6 : (slide(in_data, to_rep(first(in_data1)), 0) = temp___1103)
+
+axiom H7 : (mk1(0, (length({ elts = in_data; rt = in_data1
+  }) - 1)) = temp___11031)
+
+axiom H8 : ((o4 = length({ elts = in_data; rt = in_data1 })) and
+  in_range(length({ elts = in_data; rt = in_data1 })))
+
+axiom H9 : (temp___1105 = (o4 - 1))
+
+axiom H10 : ((0 <= temp___1105) -> (((0 <= 0) and (0 <= 199)) and
+  ((0 <= temp___1105) and (temp___1105 <= 199))))
+
+axiom H11 : (o5 = block1)
+
+axiom H12 : (o5 = temp___1106)
+
+axiom H13 : (mk1(0, temp___1105) = temp___11061)
+
+axiom H14 :
+  (((to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031))) ->
+  (((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) ->
+  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1))) and
+  ((not (to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061)))) ->
+  (((to_rep(last2(temp___11031)) - to_rep(first2(temp___11031))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___11031)) <= to_rep(last2(temp___11031)))) ->
+  ((to_rep(first2(temp___11061)) <= to_rep(last2(temp___11061))) ->
+  (0 = ((to_rep(last2(temp___11061)) - to_rep(first2(temp___11061))) + 1)))))
+
+axiom H15 : ((temp___1107 = temp___1103) and (temp___11071 = temp___11031))
+
+axiom H16 :
   (forall temp___1108:int. ((((0 <= temp___1108) and
-  (temp___1108 <= (length({ elts = in_data; rt = in_data1 }) - 1))) and
-  ((o2[temp___1108]) = (temp___1107[temp___1108]))) or
+  (temp___1108 <= (length({ elts = in_data; rt = in_data1 }) - 1))) ->
+  ((o6[temp___1108]) = (temp___1107[temp___1108]))) and
   ((not ((0 <= temp___1108) and (temp___1108 <= (length({ elts = in_data;
-  rt = in_data1 }) - 1)))) and ((o2[temp___1108]) = (block1[temp___1108])))))) and
-  ((block1 = result1) and (block2 = o2))) -> ((((o3 = rate_of({
-  us_split_fields1 = { rec__keccak__keccak_1600__duplex__context__state =
-  ctx__split_fields; rec__keccak__keccak_1600__duplex__context__rate =
-  ctx__split_fields1 } })) and (in_range3(o3) and
-  (o3 = to_rep3(ctx__split_fields1)))) and (o4 = (o3 + 7))) ->
-  (not (8 = 0)))))))))
+  rt = in_data1 }) - 1)))) -> ((o6[temp___1108]) = (block1[temp___1108])))))
+
+axiom H17 : (block1 = result2)
+
+axiom H18 : (block2 = o6)
+
+axiom H19 : ((o7 = rate_of({ us_split_fields1 = {
+  rec__keccak__keccak_1600__duplex__context__state = ctx__split_fields;
+  rec__keccak__keccak_1600__duplex__context__rate = ctx__split_fields1 }
+  })) and (in_range3(o7) and (o7 = to_rep3(ctx__split_fields1))))
+
+axiom H20 : (o8 = (o7 + 7))
+
+ (* File "keccak-duplex.ads", line 137, characters 0-0 *)
+goal WP_parameter_def : (not (8 = 0))

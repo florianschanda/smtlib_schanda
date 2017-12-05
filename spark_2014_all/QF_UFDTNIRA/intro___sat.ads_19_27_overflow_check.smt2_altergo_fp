@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -139,5 +139,37 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic sat__mult__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic sat__mult__result1 : int
+
+logic sat__mult__result2 : int
+
+logic sat__mult__result3 : int
+
+logic sat__mult__result4 : int
+
+logic sat__mult__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) -> in_range((x * y))))
+goal WP_parameter_def : in_range((x * y))

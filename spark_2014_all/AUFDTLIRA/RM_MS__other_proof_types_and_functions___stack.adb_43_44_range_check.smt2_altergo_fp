@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -477,17 +477,72 @@ type index_range__ref = { index_range__content : index_range
 function index_range__ref___projection(a: index_range__ref) : index_range =
   (a).index_range__content
 
+logic x : int
+
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : pointer_range
+
+logic o5 : (int,integer) farray
+
+logic o6 : pointer_range
+
+logic temp___205 : (int,integer) farray
+
+logic temp___2051 : pointer_range
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : (int,integer) farray
+
+logic result2 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic x2 : int
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic x3 : int
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : (not (is_empty({ rec__stack__stack_type__s =
+  my_stack__split_fields; rec__stack__stack_type__pointer =
+  my_stack__split_fields1 }) = true))
+
+axiom H2 : ((1 <= to_rep1(my_stack__split_fields1)) and
+  (to_rep1(my_stack__split_fields1) <= 100))
+
+axiom H3 : (o = to_rep1(my_stack__split_fields1))
+
+axiom H4 : (o1 = (my_stack__split_fields[o]))
+
+axiom H5 : (o2 = to_rep(o1))
+
+axiom H6 : (result = x)
+
+axiom H7 : (x1 = o2)
+
  (* File "stack.ads", line 50, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall o:int.
-  forall o1:integer. forall o2:int. forall result:int. forall x1:int.
-  ((((-2147483648) <= 2147483647) -> in_range(x)) -> ((not (is_empty({
-  rec__stack__stack_type__s = my_stack__split_fields;
-  rec__stack__stack_type__pointer = my_stack__split_fields1 }) = true)) ->
-  (((((((1 <= to_rep1(my_stack__split_fields1)) and
-  (to_rep1(my_stack__split_fields1) <= 100)) and
-  (o = to_rep1(my_stack__split_fields1))) and
-  (o1 = (my_stack__split_fields[o]))) and (o2 = to_rep(o1))) and (({
-  int__content = result } = { int__content = x }) and (x1 = o2))) ->
-  in_range1((to_rep1(my_stack__split_fields1) - 1))))))
+goal WP_parameter_def : in_range1((to_rep1(my_stack__split_fields1) - 1))

@@ -451,18 +451,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -520,27 +520,57 @@ axiom has_prime__def_axiom :
   high) = true) <->
   (exists v:int. (((low <= v) and (v <= high)) and (is_prime(v) = true)))))
 
- (* File "prime_and_coprime_numbers.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall is_prime1:(int,bool) farray. forall result__:int. forall o:int.
-  forall o1:int. forall result:int. forall result__1:int.
-  ((valid_prime_data(is_prime1) = true) -> (((1 <= 2147483647) ->
-  in_range(result__)) -> (((((o = nearest_prime_number(555, 1,
-  is_prime1)) and (in_range2(o) and ((((0 <= o) and (o <= 100000)) and
-  (is_prime(o) = true)) and (((is_prime(555) = true) and (o = 555)) or
-  ((not (is_prime(555) = true)) and (((match_bool(is_prime(555), false,
-  bool_eq(1, 0)) = true) and ((555 <  o) and
+logic is_prime1 : (int,bool) farray
+
+logic coprimes : (int,bool) farray
+
+logic result__ : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : (int,bool) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : (int,bool) farray
+
+logic coprimes1 : (int,bool) farray
+
+axiom H : (valid_prime_data(is_prime1) = true)
+
+axiom H1 : ((1 <= 2147483647) -> in_range(result__))
+
+axiom H2 : ((o = nearest_prime_number(555, 1, is_prime1)) and
+  (in_range2(o) and ((((0 <= o) and (o <= 100000)) and
+  (is_prime(o) = true)) and (((is_prime(555) = true) -> (o = 555)) and
+  ((not (is_prime(555) = true)) -> (((match_bool(is_prime(555), false,
+  bool_eq(1, 0)) = true) -> ((555 <  o) and
   (forall v:int. (((555 <= v) and (v <= (o - 1))) ->
-  (not (is_prime(v) = true)))))) or ((not (match_bool(is_prime(555), false,
-  bool_eq(1, 0)) = true)) and (((match_bool(is_prime(555), false, bool_eq(1,
-  1)) = true) and ((o <  555) and
+  (not (is_prime(v) = true)))))) and ((not (match_bool(is_prime(555), false,
+  bool_eq(1, 0)) = true)) -> (((match_bool(is_prime(555), false, bool_eq(1,
+  1)) = true) -> ((o <  555) and
   (forall v:int. ((((o + 1) <= v) and (v <= 555)) ->
-  (not (is_prime(v) = true)))))) or ((not (match_bool(is_prime(555), false,
-  bool_eq(1, 1)) = true)) and ((match_bool(is_prime(555), false, bool_eq(1,
+  (not (is_prime(v) = true)))))) and ((not (match_bool(is_prime(555), false,
+  bool_eq(1, 1)) = true)) -> ((match_bool(is_prime(555), false, bool_eq(1,
   2)) = true) ->
   ((forall v:int. (((max(0, ((555 - abs_int((555 - o))) + 1)) <= v) and
    (v <= 555)) -> (not (is_prime(v) = true)))) and
   (forall v:int. (((555 <= v) and (v <= min(100000,
-  ((555 + abs_int((555 - o))) - 1)))) -> (not (is_prime(v) = true))))))))))))))) and
-  ((o1 = o) and in_range(o))) and ((result = result__) and
-  (result__1 = o1))) -> (2 <= 2000)))))
+  ((555 + abs_int((555 - o))) - 1)))) -> (not (is_prime(v) = true)))))))))))))))
+
+axiom H3 : ((o1 = o) and in_range(o))
+
+axiom H4 : (result = result__)
+
+axiom H5 : (result__1 = o1)
+
+ (* File "prime_and_coprime_numbers.adb", line 12, characters 0-0 *)
+goal WP_parameter_def : (2 <= 2000)

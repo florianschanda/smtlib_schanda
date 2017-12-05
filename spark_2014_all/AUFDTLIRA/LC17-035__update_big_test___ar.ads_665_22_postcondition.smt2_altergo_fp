@@ -674,20 +674,46 @@ axiom def_axiom2 :
   ((not (temp___2582 = temp___2580)) -> ((temp___2577(temp___2579,
   temp___2580, temp___2581)[temp___2582]) = (temp___2579[temp___2582]))))))))
 
+logic a : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a2 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result2 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a3 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a4 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a5 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range(k)
+
+axiom H3 : (result = a)
+
+axiom H4 : (a1 = (a[i <- b]))
+
+axiom H5 : (result1 = a1)
+
+axiom H6 : (a2 = (a1[i <- ((a1[i])[j <- c])]))
+
+axiom H7 : (result2 = a2)
+
+axiom H8 : (a3 = (a2[i <- ((a2[i])[j <- (((a2[i])[j])[k <- d])])]))
+
+axiom H9 : (a3 = a4)
+
+axiom H10 : (a5 = a3)
+
  (* File "ar.ads", line 657, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a2:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result2:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a3:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a4:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a5:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  ((in_range2(i) and (in_range1(j) and (in_range(k) and ((((result = a) and
-  (a1 = (a[i <- b]))) and (((result1 = a1) and
-  (a2 = (a1[i <- ((a1[i])[j <- c])]))) and ((result2 = a2) and
-  (a3 = (a2[i <- ((a2[i])[j <- (((a2[i])[j])[k <- d])])]))))) and
-  ((a3 = a4) and (a5 = a3)))))) -> (bool_eq8(a4, 90, 99, temp___2565(a, i,
-  temp___2571(b, j, temp___2577(c, k, d))), 90, 99) = true)))
+goal WP_parameter_def : (bool_eq8(a4, 90, 99, temp___2565(a, i,
+  temp___2571(b, j, temp___2577(c, k, d))), 90, 99) = true)

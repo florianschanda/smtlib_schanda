@@ -117,6 +117,7 @@
 (declare-const rcx2 (_ BitVec 64))
 (declare-const rcx3 (_ BitVec 64))
 (declare-const rcx4 (_ BitVec 64))
+(assert true)
 (assert (=> (and (not (= carryflag true)) (not (= zeroflag true))) (= (writereglow8post rcx rcx1 ((_ int2bv 8) 1)) true)))
 (assert (=> (not (and (not (= carryflag true)) (not (= zeroflag true)))) (= (writereglow8post rcx rcx2 ((_ int2bv 8) 0)) true)))
 (assert (=> (not (and (not (= carryflag true)) (not (= zeroflag true)))) (= rcx1 rcx2)))

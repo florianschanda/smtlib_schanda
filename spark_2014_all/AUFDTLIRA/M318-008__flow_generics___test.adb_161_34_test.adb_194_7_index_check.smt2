@@ -198,6 +198,8 @@
 (declare-const new_inventory (Array Int fruits_and_weapons))
 (declare-const i Int)
 (declare-const o fruits_and_weapons)
+(declare-const o1 Int)
+(declare-const o2 fruits_and_weapons)
 (declare-const result Int)
 (declare-const i1 Int)
 (declare-const new_inventory1 (Array Int fruits_and_weapons))

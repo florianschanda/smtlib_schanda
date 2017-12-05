@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -451,17 +451,48 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic result__ : int
+
+logic index : int
+
+logic o : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic result__2 : int
+
+logic index2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : in_range4(pattern)
+
+axiom H2 : (result = result__)
+
+axiom H3 : (result__1 = 0)
+
+axiom H4 : in_range2(result__1)
+
+axiom H5 : (result1 = index)
+
+axiom H6 : (index1 = to_rep1(first(source1)))
+
+axiom H7 : (to_rep1(first(source1)) <= index1)
+
+axiom H8 : (index1 <= to_rep1(last(source1)))
+
+axiom H9 : (((0 <= 2147483647) -> in_range2(result__2)) and
+  ((to_rep1(first(source1)) <= index2) and
+  (index2 <= to_rep1(last(source1)))))
+
+axiom H10 : (to_rep((source[index2])) = pattern)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall index:int. forall result:int.
-  forall result__1:int. forall result1:int. forall index1:int.
-  forall result__2:int. forall index2:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) -> (in_range4(pattern) ->
-  (((result = result__) and (result__1 = 0)) -> (in_range2(result__1) ->
-  (((result1 = index) and (index1 = to_rep1(first(source1)))) ->
-  (((to_rep1(first(source1)) <= index1) and
-  (index1 <= to_rep1(last(source1)))) -> ((((0 <= 2147483647) ->
-  in_range2(result__2)) and ((to_rep1(first(source1)) <= index2) and
-  (index2 <= to_rep1(last(source1))))) ->
-  ((to_rep((source[index2])) = pattern) ->
-  in_range1((result__2 + 1)))))))))))
+goal WP_parameter_def : in_range1((result__2 + 1))

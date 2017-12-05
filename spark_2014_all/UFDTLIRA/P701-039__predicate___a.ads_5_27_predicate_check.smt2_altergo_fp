@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type pred
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -206,17 +206,17 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__a__rec__disc) = to_rep1(((b).us_split_discrs1).rec__a__rec__disc)) and
-  (a__rec__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__a__rec__a) = to_rep(((b).us_split_fields1).rec__a__rec__a)))) and
-  (a__rec__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__a__rec__b) = to_rep(((b).us_split_fields1).rec__a__rec__b)))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__a__rec__disc) = to_rep1(((b).us_split_discrs1).rec__a__rec__disc)) and
-  (a__rec__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__a__rec__a) = to_rep(((b).us_split_fields1).rec__a__rec__a)))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__a__rec__disc) = to_rep1(((b).us_split_discrs1).rec__a__rec__disc)) and
+  ((a__rec__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__a__rec__a) = to_rep(((b).us_split_fields1).rec__a__rec__a))) and
   (a__rec__b__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__a__rec__b) = to_rep(((b).us_split_fields1).rec__a__rec__b))))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__a__rec__disc) = to_rep1(((b).us_split_discrs1).rec__a__rec__disc)) and
+  ((a__rec__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__a__rec__a) = to_rep(((b).us_split_fields1).rec__a__rec__a))) and
+  (a__rec__b__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__a__rec__b) = to_rep(((b).us_split_fields1).rec__a__rec__b)))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int

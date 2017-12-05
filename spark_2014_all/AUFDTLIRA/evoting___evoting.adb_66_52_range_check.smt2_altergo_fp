@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -909,23 +909,23 @@ type t22b__ref = { t22b__content : us_t2
 
 function t22b__ref___projection(a: t22b__ref) : us_t2 = (a).t22b__content
 
-logic temp___622 : (int,character) farray -> (int,(int,character) farray) farray
+logic temp___616 : (int,character) farray -> (int,(int,character) farray) farray
 
 axiom def_axiom :
-  (forall temp___624:(int,character) farray.
-  (forall temp___625:int.
-  ((temp___622(temp___624)[temp___625]) = temp___624)))
+  (forall temp___618:(int,character) farray.
+  (forall temp___619:int.
+  ((temp___616(temp___618)[temp___619]) = temp___618)))
 
-logic temp___626 : int -> (int,character) farray
+logic temp___620 : int -> (int,character) farray
 
 axiom def_axiom1 :
-  (forall temp___628:int.
-  (forall temp___629:int.
-  ((temp___626(temp___628)[temp___629]) = of_rep(temp___628))))
+  (forall temp___622:int.
+  (forall temp___623:int.
+  ((temp___620(temp___622)[temp___623]) = of_rep(temp___622))))
 
-logic temp___String_Literal_633 : unit -> (int,character) farray
+logic temp___String_Literal_627 : unit -> (int,character) farray
 
-axiom temp___String_Literal_633__def_axiom : true
+axiom temp___String_Literal_627__def_axiom : true
 
 axiom candidates_filename__def_axiom :
   ((candidates_filename = temp___String_Literal_155(void)) and
@@ -934,58 +934,296 @@ axiom candidates_filename__def_axiom :
 axiom no_vote_entry__def_axiom :
   (no_vote_entry = temp___String_Literal_151(void))
 
+logic candidates : (int,(int,character) farray) farray
+
+logic last_candidate : int
+
+logic current_candidate : int
+
+logic last6 : int
+
+logic item : (int,character) farray
+
+logic o : (int,character) farray
+
+logic o1 : (int,(int,character) farray) farray
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic temp___643 : int
+
+logic temp___640 : (int,(int,character) farray) farray
+
+logic temp___639 : (int,character) farray
+
+logic temp___638 : int
+
+logic o4 : int
+
+logic i : int
+
+logic j : int
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : (int,character) farray
+
+logic temp___630 : (int,character) farray
+
+logic temp___6301 : t2
+
+logic temp___631 : (int,character) farray
+
+logic temp___6311 : t1
+
+logic o8 : (int,character) farray
+
+logic temp___634 : (int,character) farray
+
+logic temp___6341 : t1
+
+logic temp___636 : (int,character) farray
+
+logic temp___6361 : t1
+
+logic o9 : (int,character) farray
+
+logic o10 : (int,(int,character) farray) farray
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic o14 : int
+
+logic i1 : int
+
+logic j1 : int
+
+logic last7 : int
+
+logic item1 : (int,character) farray
+
+logic result : int
+
+logic current_candidate1 : int
+
+logic result1 : (int,(int,character) farray) farray
+
+logic candidates1 : (int,(int,character) farray) farray
+
+logic result2 : (int,(int,character) farray) farray
+
+logic candidates2 : (int,(int,character) farray) farray
+
+logic file : us_rep
+
+logic result3 : bool
+
+logic result4 : int
+
+logic current_candidate2 : int
+
+logic candidates3 : (int,(int,character) farray) farray
+
+logic current_candidate3 : int
+
+logic last8 : int
+
+logic item2 : (int,character) farray
+
+logic last9 : int
+
+logic ada__text_io__get_line__item : (int,character) farray
+
+logic result5 : (int,character) farray
+
+logic item3 : (int,character) farray
+
+logic result6 : (int,(int,character) farray) farray
+
+logic candidates4 : (int,(int,character) farray) farray
+
+logic result7 : bool
+
+logic result8 : int
+
+logic current_candidate4 : int
+
+logic candidates5 : (int,(int,character) farray) farray
+
+logic current_candidate5 : int
+
+logic last10 : int
+
+logic item4 : (int,character) farray
+
+logic candidates6 : (int,(int,character) farray) farray
+
+logic current_candidate6 : int
+
+logic last11 : int
+
+logic item5 : (int,character) farray
+
+logic candidates7 : (int,(int,character) farray) farray
+
+logic current_candidate7 : int
+
+logic last12 : int
+
+logic item6 : (int,character) farray
+
+logic candidates8 : (int,(int,character) farray) farray
+
+logic current_candidate8 : int
+
+logic last13 : int
+
+logic item7 : (int,character) farray
+
+logic candidates9 : (int,(int,character) farray) farray
+
+logic current_candidate9 : int
+
+logic last14 : int
+
+logic item8 : (int,character) farray
+
+logic candidates10 : (int,(int,character) farray) farray
+
+logic current_candidate10 : int
+
+logic last15 : int
+
+logic item9 : (int,character) farray
+
+logic file1 : us_rep
+
+logic result9 : int
+
+logic last_candidate1 : int
+
+logic candidates11 : (int,(int,character) farray) farray
+
+logic last_candidate2 : int
+
+logic file2 : us_rep
+
+logic current_candidate11 : int
+
+logic last16 : int
+
+logic item10 : (int,character) farray
+
+logic candidates12 : (int,(int,character) farray) farray
+
+logic last_candidate3 : int
+
+logic file3 : us_rep
+
+logic current_candidate12 : int
+
+logic last17 : int
+
+logic item11 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647,
+  to_rep1(first(candidates_filename1)), to_rep1(last(candidates_filename1)))
+
+axiom H1 : ((temp___String_Literal_155(void) = candidates_filename) and
+  (mk(1, 14) = candidates_filename1))
+
+axiom H2 : (temp___String_Literal_151(void) = no_vote_entry)
+
+axiom H3 : in_range6(program_phase)
+
+axiom H4 : ((0 <= 20) -> in_range7(last_candidate))
+
+axiom H5 : (program_phase = 0)
+
+axiom H6 : (result = current_candidate)
+
+axiom H7 : (current_candidate1 = 0)
+
+axiom H8 : in_range7(current_candidate1)
+
+axiom H9 : ((0 <= 2147483647) -> in_range4(last6))
+
+axiom H10 : true
+
+axiom H11 : (result1 = candidates)
+
+axiom H12 : (candidates1 = temp___616(temp___620(32)))
+
+axiom H13 :
+  (forall temp___626:int. ((((1 <= temp___626) and (temp___626 <= 7)) ->
+  ((o[temp___626]) = (no_vote_entry[temp___626]))) and
+  ((not ((1 <= temp___626) and (temp___626 <= 7))) ->
+  ((o[temp___626]) = ((candidates1[0])[temp___626])))))
+
+axiom H14 : (o1 = (candidates1[0 <- o]))
+
+axiom H15 : (candidates1 = result2)
+
+axiom H16 : (candidates2 = o1)
+
+axiom H17 : (o2 = end_of_file(file))
+
+axiom H18 : (((not (o2 = true)) -> (o3 = true)) and ((o2 = true) ->
+  (o3 = false)))
+
+axiom H19 : (((current_candidate1 <  20) -> (result3 = match_bool(o3, true,
+  false))) and ((not (current_candidate1 <  20)) -> (result3 = match_bool(o3,
+  false, false))))
+
+axiom H20 : (result3 = true)
+
+axiom H21 : ((o4 = (current_candidate1 + 1)) and
+  in_range7((current_candidate1 + 1)))
+
+axiom H22 : (current_candidate1 = result4)
+
+axiom H23 : (current_candidate2 = o4)
+
+axiom H24 :
+  (forall i2:int. (((current_candidate3 <= i2) and (i2 <= 20)) ->
+  (forall j2:int. (((1 <= j2) and (j2 <= 70)) ->
+  (to_rep(((candidates3[i2])[j2])) = 32)))))
+
+axiom H25 : ((((0 <= 2147483647) -> in_range4(last8)) and
+  (forall temp___641:int. (((0 <= temp___641) and (temp___641 <= 20)) ->
+  (forall temp___642:int. (((1 <= temp___642) and (temp___642 <= 70)) ->
+  ((temp___642 <  1) ->
+  (((candidates3[temp___641])[temp___642]) = ((candidates2[temp___641])[temp___642])))))))) and
+  ((0 <= 20) -> in_range7(current_candidate3)))
+
+axiom H26 : (to_rep1(o6) = 70)
+
+axiom H27 : (to_rep1(o5) = 1)
+
+axiom H28 : in_range4(last9)
+
+axiom H29 : (item2 = result5)
+
+axiom H30 : (item3 = slide(ada__text_io__get_line__item, to_rep1(first(mk(1,
+  70))), 1))
+
+axiom H31 : (last9 = r17b)
+
+axiom H32 : in_range4(r17b)
+
+axiom H33 : (last9 = r20b)
+
+axiom H34 : in_range4(r20b)
+
+axiom H35 : (1 <= r20b)
+
  (* File "evoting.adb", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall candidates:(int,(int,character) farray) farray.
-  forall last_candidate:int. forall current_candidate:int. forall last6:int.
-  forall o:(int,character) farray.
-  forall o1:(int,(int,character) farray) farray. forall o2:bool.
-  forall o3:bool. forall o4:int. forall o5:integer. forall o6:integer.
-  forall result:int. forall current_candidate1:int.
-  forall result1:(int,(int,character) farray) farray.
-  forall candidates1:(int,(int,character) farray) farray.
-  forall result2:(int,(int,character) farray) farray.
-  forall candidates2:(int,(int,character) farray) farray. forall file:us_rep.
-  forall result3:bool. forall result4:int. forall current_candidate2:int.
-  forall candidates3:(int,(int,character) farray) farray.
-  forall current_candidate3:int. forall last7:int.
-  forall item:(int,character) farray. forall last8:int.
-  forall ada__text_io__get_line__item:(int,character) farray.
-  forall result5:(int,character) farray. forall item1:(int,character) farray.
-  (dynamic_property(1, 2147483647, to_rep1(first(candidates_filename1)),
-  to_rep1(last(candidates_filename1))) ->
-  (((temp___String_Literal_155(void) = candidates_filename) and (mk(1,
-  14) = candidates_filename1)) ->
-  ((temp___String_Literal_151(void) = no_vote_entry) ->
-  (in_range6(program_phase) -> (((0 <= 20) -> in_range7(last_candidate)) ->
-  ((program_phase = 0) -> ((({ int__content = result } = { int__content =
-  current_candidate }) and (current_candidate1 = 0)) ->
-  (in_range7(current_candidate1) -> (((0 <= 2147483647) ->
-  in_range4(last6)) -> ((({ map__content1 = result1 } = { map__content1 =
-  candidates }) and (candidates1 = temp___622(temp___626(32)))) ->
-  ((((forall temp___632:int. ((((1 <= temp___632) and (temp___632 <= 7)) and
-     ((o[temp___632]) = (no_vote_entry[temp___632]))) or
-     ((not ((1 <= temp___632) and (temp___632 <= 7))) and
-     ((o[temp___632]) = ((candidates1[0])[temp___632]))))) and
-  (o1 = (candidates1[0 <- o]))) and ((candidates1 = result2) and
-  (candidates2 = o1))) -> ((((o2 = end_of_file(file)) and
-  (((not (o2 = true)) and (o3 = true)) or ((o2 = true) and
-  (o3 = false)))) and (((current_candidate1 <  20) and
-  (result3 = match_bool(o3, true, false))) or
-  ((not (current_candidate1 <  20)) and (result3 = match_bool(o3, false,
-  false))))) -> ((result3 = true) -> ((((o4 = (current_candidate1 + 1)) and
-  in_range7((current_candidate1 + 1))) and
-  ((current_candidate1 = result4) and (current_candidate2 = o4))) ->
-  ((forall i:int. (((current_candidate3 <= i) and (i <= 20)) ->
-   (forall j:int. (((1 <= j) and (j <= 70)) ->
-   (to_rep(((candidates3[i])[j])) = 32))))) ->
-  (((((0 <= 2147483647) -> in_range4(last7)) and
-  (forall temp___647:int. (((0 <= temp___647) and (temp___647 <= 20)) ->
-  (forall temp___648:int. (((1 <= temp___648) and (temp___648 <= 70)) ->
-  ((temp___648 <  1) ->
-  (((candidates3[temp___647])[temp___648]) = ((candidates2[temp___647])[temp___648])))))))) and
-  ((0 <= 20) -> in_range7(current_candidate3))) -> ((((to_rep1(o6) = 70) and
-  ((to_rep1(o5) = 1) and in_range4(last8))) and ((item = result5) and
-  (item1 = slide(ada__text_io__get_line__item, to_rep1(first(mk(1, 70))),
-  1)))) -> (((last8 = r17b) and in_range4(r17b)) -> (((last8 = r20b) and
-  in_range4(r20b)) -> ((1 <= r20b) -> (1 <= 1))))))))))))))))))))))
+goal WP_parameter_def : (1 <= 1)

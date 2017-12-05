@@ -178,7 +178,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -292,17 +292,17 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
-  (dynamic_array__rec__f2__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
-  (dynamic_array__rec__f1__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1)))) and
+  ((((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
   (dynamic_array__rec__f2__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__dynamic_array__rec__b = ((b).us_split_discrs1).rec__dynamic_array__rec__b) and
+  ((dynamic_array__rec__f1__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f1) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f1))) and
+  (dynamic_array__rec__f2__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__dynamic_array__rec__f2) = to_rep1(((b).us_split_fields1).rec__dynamic_array__rec__f2)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -1451,6 +1451,181 @@ axiom def_axiom1 :
 
 axiom last__def_axiom : (last = c)
 
+logic dynamic_array__new_holder__result : natural
+
+logic dynamic_array__new_holder__result1 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result2 : t
+
+logic o : natural
+
+logic us : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic usq_ : bool
+
+logic usq_1 : integer
+
+logic usq_2 : integer
+
+logic usq_3 : bool
+
+logic o5 : bool
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : bool
+
+logic o9 : (int,us_rep) farray
+
+logic o10 : (int,us_rep) farray
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : (int,us_rep) farray
+
+logic o14 : natural
+
+logic o15 : (int,us_rep) farray
+
+logic o16 : t
+
+logic o17 : natural
+
+logic us1 : int
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic usq_4 : bool
+
+logic usq_5 : integer
+
+logic usq_6 : integer
+
+logic usq_7 : bool
+
+logic o22 : bool
+
+logic o23 : integer
+
+logic o24 : integer
+
+logic o25 : bool
+
+logic temp___236 : (int,us_rep) farray
+
+logic temp___2361 : t2
+
+logic temp___237 : (int,us_rep) farray
+
+logic temp___2371 : t2
+
+logic o26 : (int,us_rep) farray
+
+logic o27 : t1
+
+logic o28 : (int,us_rep) farray
+
+logic o29 : t1
+
+logic o30 : natural
+
+logic o31 : natural
+
+logic o32 : (int,us_rep) farray
+
+logic o33 : t1
+
+logic o34 : natural
+
+logic o35 : (int,us_rep) farray
+
+logic o36 : t
+
+logic result : natural
+
+logic result1 : (int,us_rep) farray
+
+logic result2 : t
+
+logic dynamic_array__new_holder__result3 : natural
+
+logic dynamic_array__new_holder__result4 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result5 : t
+
+logic result3 : natural
+
+logic result4 : (int,us_rep) farray
+
+logic result5 : t
+
+logic dynamic_array__new_holder__result6 : natural
+
+logic dynamic_array__new_holder__result7 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result8 : t
+
+logic dynamic_array__new_holder__result9 : natural
+
+logic dynamic_array__new_holder__result10 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result11 : t
+
+logic dynamic_array__new_holder__result12 : natural
+
+logic dynamic_array__new_holder__result13 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result14 : t
+
+logic dynamic_array__new_holder__result15 : natural
+
+logic dynamic_array__new_holder__result16 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result17 : t
+
+logic dynamic_array__new_holder__result18 : natural
+
+logic dynamic_array__new_holder__result19 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result20 : t
+
+logic dynamic_array__new_holder__result21 : natural
+
+logic dynamic_array__new_holder__result22 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result23 : t
+
+logic dynamic_array__new_holder__result24 : natural
+
+logic dynamic_array__new_holder__result25 : (int,us_rep) farray
+
+logic dynamic_array__new_holder__result26 : t
+
+axiom H : in_range1(c)
+
+axiom H1 : in_range1(d)
+
+axiom H2 : (not (c = 0))
+
+axiom H3 : (1 <= d)
+
  (* File "dynamic_array.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (in_range1(c) -> (in_range1(d) -> ((not (c = 0)) ->
-  ((1 <= d) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

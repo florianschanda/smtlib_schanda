@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -472,25 +472,82 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic top : int
+
+logic content : (int,positive) farray
+
+logic temp___216 : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : positive
+
+logic o2 : int
+
+logic o3 : (int,positive) farray
+
+logic o4 : int
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : (int,positive) farray
+
+logic content1 : (int,positive) farray
+
+logic top2 : int
+
+logic content2 : (int,positive) farray
+
+logic top3 : int
+
+logic content3 : (int,positive) farray
+
+axiom H : in_range2(max)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
+  to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (not (is_full(top) = true))
+
+axiom H5 : ((temp___216 = (top + 1)) and in_range1((top + 1)))
+
+axiom H6 : ((us = temp___216) and dynamic_property(0, last, temp___216))
+
+axiom H7 : (o = temp___216)
+
+axiom H8 : (result = top)
+
+axiom H9 : (top1 = o)
+
+axiom H10 : (to_rep(o1) = e)
+
+axiom H11 : ((to_rep1(content__first) <= top1) and
+  (top1 <= to_rep1(content__last)))
+
+axiom H12 : (o2 = top1)
+
+axiom H13 : (o3 = (content[o2 <- o1]))
+
+axiom H14 : (result1 = content)
+
+axiom H15 : (content1 = o3)
+
+axiom H16 : (content1 = content2)
+
+axiom H17 : (top1 = top2)
+
+axiom H18 : (content3 = content1)
+
+axiom H19 : (top3 = top1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. forall content:(int,positive) farray.
-  forall temp___216:int. forall us:int. forall o:int. forall o1:positive.
-  forall o2:int. forall o3:(int,positive) farray. forall result:int.
-  forall top1:int. forall result1:(int,positive) farray.
-  forall content1:(int,positive) farray. forall top2:int.
-  forall content2:(int,positive) farray. forall top3:int.
-  forall content3:(int,positive) farray. (in_range2(max) -> (in_range2(e) ->
-  (dynamic_property(0, last, top) -> ((dynamic_property2(1, max,
-  to_rep1(content__first), to_rep1(content__last)) and
-  ((to_rep1(content__first) = 1) and (to_rep1(content__last) = max))) ->
-  ((not (is_full(top) = true)) -> (((((((temp___216 = (top + 1)) and
-  in_range1((top + 1))) and (((us = temp___216) and dynamic_property(0, last,
-  temp___216)) and (o = temp___216))) and (({ int__content = result } = {
-  int__content = top }) and (top1 = o))) and (((to_rep(o1) = e) and
-  ((((to_rep1(content__first) <= top1) and
-  (top1 <= to_rep1(content__last))) and (o2 = top1)) and
-  (o3 = (content[o2 <- o1])))) and (({ map__content = result1 } = {
-  map__content = content }) and (content1 = o3)))) and
-  (((content1 = content2) and (top1 = top2)) and ((content3 = content1) and
-  (top3 = top1)))) -> (not (is_empty(top2) = true)))))))))
+goal WP_parameter_def : (not (is_empty(top2) = true))

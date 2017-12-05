@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -836,43 +836,129 @@ axiom is_empty__def_axiom :
   ((is_empty({ us_split_fields1 = { rec__stack__stack__top = s;
   rec__stack__stack__content = s1 } }) = true) <-> (to_rep1(s) <  1)))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:r1. forall s__split_fields1:(int,integer) farray.
-  forall o:int. forall o1:r1. forall o2:r1. forall o3:(int,integer) farray.
-  forall temp___221:r1. forall temp___2211:(int,integer) farray.
-  forall o4:integer. forall o5:int. forall o6:(int,integer) farray.
-  forall o7:r1. forall o8:(int,integer) farray. forall temp___225:r1.
-  forall temp___2251:(int,integer) farray. forall result:r1.
-  forall result1:(int,integer) farray. forall s__split_fields2:r1.
-  forall s__split_fields3:(int,integer) farray. forall result2:r1.
-  forall result3:(int,integer) farray. forall s__split_fields4:r1.
-  forall s__split_fields5:(int,integer) farray. forall s__split_fields6:r1.
-  forall s__split_fields7:(int,integer) farray. forall s__split_fields8:r1.
-  forall s__split_fields9:(int,integer) farray. ((in_range1(x) and
-  ((not (is_full({ us_split_fields1 = { rec__stack__stack__top =
+logic s__split_fields : r1
+
+logic s__split_fields1 : (int,integer) farray
+
+logic o : int
+
+logic o1 : r1
+
+logic o2 : r1
+
+logic o3 : (int,integer) farray
+
+logic temp___221 : r1
+
+logic temp___2211 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : r1
+
+logic o8 : (int,integer) farray
+
+logic temp___225 : r1
+
+logic temp___2251 : (int,integer) farray
+
+logic o9 : int
+
+logic temp___229 : (int,integer) farray
+
+logic temp___2291 : t
+
+logic temp___228 : (int,integer) farray
+
+logic temp___2281 : t
+
+logic o10 : bool
+
+logic result : r1
+
+logic result1 : (int,integer) farray
+
+logic s__split_fields2 : r1
+
+logic s__split_fields3 : (int,integer) farray
+
+logic result2 : r1
+
+logic result3 : (int,integer) farray
+
+logic s__split_fields4 : r1
+
+logic s__split_fields5 : (int,integer) farray
+
+logic s__split_fields6 : r1
+
+logic s__split_fields7 : (int,integer) farray
+
+logic s__split_fields8 : r1
+
+logic s__split_fields9 : (int,integer) farray
+
+axiom H : in_range1(x)
+
+axiom H1 : (not (is_full({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields; rec__stack__stack__content = s__split_fields1 }
-  }) = true)) and ((((((((o = (to_rep1(s__split_fields) + 1)) and
-  in_range2((to_rep1(s__split_fields) + 1))) and (to_rep1(o1) = o)) and
-  ((o1 = o2) and (s__split_fields1 = o3))) and ((temp___221 = o2) and
-  (temp___2211 = o3))) and (({ us_split_fields__content = {
-  rec__stack__stack__top = result; rec__stack__stack__content = result1 }
-  } = { us_split_fields__content = { rec__stack__stack__top =
-  s__split_fields; rec__stack__stack__content = s__split_fields1 } }) and
-  ((temp___221 = s__split_fields2) and
-  (temp___2211 = s__split_fields3)))) and (((((to_rep(o4) = x) and
-  ((((1 <= to_rep1(s__split_fields2)) and
-  (to_rep1(s__split_fields2) <= 100)) and
-  (o5 = to_rep1(s__split_fields2))) and
-  (o6 = (s__split_fields3[o5 <- o4])))) and ((s__split_fields2 = o7) and
-  (o6 = o8))) and ((temp___225 = o7) and (temp___2251 = o8))) and
-  (((result2 = s__split_fields2) and (result3 = s__split_fields3)) and
-  ((temp___225 = s__split_fields4) and
-  (temp___2251 = s__split_fields5))))) and
-  (((s__split_fields6 = s__split_fields4) and
-  (s__split_fields7 = s__split_fields5)) and ({ rec__stack__stack__top =
-  s__split_fields8; rec__stack__stack__content = s__split_fields9 } = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 }))))) -> (top({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields6; rec__stack__stack__content =
-  s__split_fields7 } }) = x)))
+  }) = true))
+
+axiom H2 : ((o = (to_rep1(s__split_fields) + 1)) and
+  in_range2((to_rep1(s__split_fields) + 1)))
+
+axiom H3 : (to_rep1(o1) = o)
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (s__split_fields1 = o3)
+
+axiom H6 : (temp___221 = o2)
+
+axiom H7 : (temp___2211 = o3)
+
+axiom H8 : ((result = s__split_fields) and (result1 = s__split_fields1))
+
+axiom H9 : (temp___221 = s__split_fields2)
+
+axiom H10 : (temp___2211 = s__split_fields3)
+
+axiom H11 : (to_rep(o4) = x)
+
+axiom H12 : ((1 <= to_rep1(s__split_fields2)) and
+  (to_rep1(s__split_fields2) <= 100))
+
+axiom H13 : (o5 = to_rep1(s__split_fields2))
+
+axiom H14 : (o6 = (s__split_fields3[o5 <- o4]))
+
+axiom H15 : (s__split_fields2 = o7)
+
+axiom H16 : (o6 = o8)
+
+axiom H17 : (temp___225 = o7)
+
+axiom H18 : (temp___2251 = o8)
+
+axiom H19 : (result2 = s__split_fields2)
+
+axiom H20 : (result3 = s__split_fields3)
+
+axiom H21 : (temp___225 = s__split_fields4)
+
+axiom H22 : (temp___2251 = s__split_fields5)
+
+axiom H23 : (s__split_fields6 = s__split_fields4)
+
+axiom H24 : (s__split_fields7 = s__split_fields5)
+
+axiom H25 : ((s__split_fields8 = s__split_fields4) and
+  (s__split_fields9 = s__split_fields5))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (top({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields6; rec__stack__stack__content = s__split_fields7 } }) = x)

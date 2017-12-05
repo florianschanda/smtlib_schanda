@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -399,45 +399,314 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  forall i:int. forall j:int. forall temp___266:(int,integer) farray.
-  forall temp___264:(int,integer) farray. forall temp___262:int.
-  forall temp___261:int. forall o:int. forall o1:int. forall k:int.
-  forall o2:int. forall o3:int. forall result:int. forall i1:int.
-  forall result1:int. forall j1:int. forall b1:(int,integer) farray.
-  forall i2:int. forall j2:int. forall b2:(int,integer) farray.
-  forall i3:int. forall j3:int. forall b3:(int,integer) farray.
-  forall i4:int. forall j4:int. forall b4:(int,integer) farray.
-  forall i5:int. forall j5:int. forall b5:(int,integer) farray.
-  forall i6:int. forall j6:int. forall b6:(int,integer) farray.
-  forall i7:int. forall j7:int. forall b7:(int,integer) farray.
-  forall i8:int. forall j8:int. forall a1:(int,integer) farray.
-  forall a2:(int,integer) farray. forall b8:(int,integer) farray.
-  forall i9:int. forall j9:int. forall a3:(int,integer) farray.
-  forall b9:(int,integer) farray. forall i10:int. forall j10:int.
-  (dynamic_property(0, 2147483647, to_rep(a__first), to_rep(a__last)) ->
-  (dynamic_property(0, 2147483647, to_rep(b__first), to_rep(b__last)) ->
-  (in_range2(a_first) -> (in_range2(length1) -> (in_range2(length2) ->
-  ((((((((to_rep(a__first) <= a_first) and
+logic a : (int,integer) farray
+
+logic b : (int,integer) farray
+
+logic i : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : bool
+
+logic temp___266 : (int,integer) farray
+
+logic temp___264 : (int,integer) farray
+
+logic temp___262 : int
+
+logic temp___261 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : bool
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : bool
+
+logic temp___257 : int
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : int
+
+logic temp___258 : int
+
+logic o36 : int
+
+logic o37 : integer
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic temp___260 : int
+
+logic temp___259 : int
+
+logic o42 : int
+
+logic o43 : integer
+
+logic o44 : int
+
+logic o45 : integer
+
+logic o46 : int
+
+logic o47 : (int,integer) farray
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic temp___256 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic temp___255 : int
+
+logic o53 : int
+
+logic o54 : integer
+
+logic o55 : int
+
+logic o56 : integer
+
+logic o57 : int
+
+logic o58 : (int,integer) farray
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : bool
+
+logic k : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : bool
+
+logic o70 : bool
+
+logic o71 : int
+
+logic o72 : integer
+
+logic o73 : int
+
+logic o74 : bool
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic b1 : (int,integer) farray
+
+logic i2 : int
+
+logic j2 : int
+
+logic result2 : bool
+
+logic result3 : (int,integer) farray
+
+logic b2 : (int,integer) farray
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+logic result6 : int
+
+logic j3 : int
+
+logic b4 : (int,integer) farray
+
+logic i4 : int
+
+logic j4 : int
+
+logic b5 : (int,integer) farray
+
+logic i5 : int
+
+logic j5 : int
+
+logic b6 : (int,integer) farray
+
+logic i6 : int
+
+logic j6 : int
+
+logic b7 : (int,integer) farray
+
+logic i7 : int
+
+logic j7 : int
+
+logic b8 : (int,integer) farray
+
+logic i8 : int
+
+logic j8 : int
+
+logic b9 : (int,integer) farray
+
+logic i9 : int
+
+logic j9 : int
+
+logic b10 : (int,integer) farray
+
+logic i10 : int
+
+logic j10 : int
+
+logic b11 : (int,integer) farray
+
+logic i11 : int
+
+logic j11 : int
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic b12 : (int,integer) farray
+
+logic i12 : int
+
+logic j12 : int
+
+logic a3 : (int,integer) farray
+
+logic b13 : (int,integer) farray
+
+logic i13 : int
+
+logic j13 : int
+
+logic result7 : bool
+
+axiom H : dynamic_property(0, 2147483647, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep(b__first), to_rep(b__last))
+
+axiom H2 : in_range2(a_first)
+
+axiom H3 : in_range2(length1)
+
+axiom H4 : in_range2(length2)
+
+axiom H5 : (((((((to_rep(a__first) <= a_first) and
   (((a_first + length1) + length2) <= (to_rep(a__last) + 1))) and
-  (((to_rep(b__first) <= to_rep(b__last)) and
-  ((length1 + length2) <= ((to_rep(b__last) - to_rep(b__first)) + 1))) or
-  ((not (to_rep(b__first) <= to_rep(b__last))) and
+  (((to_rep(b__first) <= to_rep(b__last)) ->
+  ((length1 + length2) <= ((to_rep(b__last) - to_rep(b__first)) + 1))) and
+  ((not (to_rep(b__first) <= to_rep(b__last))) ->
   ((length1 + length2) <= 0)))) and ((length1 + length2) <= 2147483647)) and
   (sorted({ elts = a; rt = mk(to_rep(a__first), to_rep(a__last)) }, a_first,
   length1) = true)) and (sorted({ elts = a; rt = mk(to_rep(a__first),
   to_rep(a__last)) }, (a_first + length1), length2) = true)) and
-  (to_rep(b__first) <= to_rep(b__last))) -> (((((0 <= 2147483647) ->
-  in_range2(i)) and (((0 <= 2147483647) -> in_range2(j)) and ((({
-  int__content = result } = { int__content = i }) and (i1 = 0)) and ((({
-  int__content = result1 } = { int__content = j }) and (j1 = 0)) and
-  (((((temp___266 = a) and ((temp___264 = b) and ((temp___262 = j1) and
-  ((temp___261 = i1) and ((((((((i2 <= length1) and (j2 <= length2)) and
-  (sorted({ elts = b1; rt = mk(to_rep(b__first), to_rep(b__last)) },
-  to_rep(b__first), (i2 + j2)) = true)) and (perm2({ elts = a; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, { elts = b1; rt =
+  (to_rep(b__first) <= to_rep(b__last)))
+
+axiom H6 : ((((0 <= 2147483647) -> in_range2(i)) and (((0 <= 2147483647) ->
+  in_range2(j)) and (((result = i) and (i1 = 0)) and (((result1 = j) and
+  (j1 = 0)) and (((((temp___266 = a) and ((temp___264 = b) and
+  ((temp___262 = j1) and ((temp___261 = i1) and ((((((((i2 <= length1) and
+  (j2 <= length2)) and (sorted({ elts = b1; rt = mk(to_rep(b__first),
+  to_rep(b__last)) }, to_rep(b__first), (i2 + j2)) = true)) and (perm2({
+  elts = a; rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts = b1; rt =
   mk(to_rep(b__first), to_rep(b__last)) }, a_first, (a_first + length1),
   to_rep(b__first), i2, j2) = true)) and (le_array({ elts = b1; rt =
   mk(to_rep(b__first), to_rep(b__last)) }, { elts = a; rt =
@@ -449,26 +718,30 @@ goal WP_parameter_def :
   (bool_eq4(a, to_rep(a__first), to_rep(a__last), temp___266,
   to_rep(a__first), to_rep(a__last)) = true)) and ((((0 <= 2147483647) ->
   in_range2(i2)) and ((0 <= 2147483647) -> in_range2(j2))) and
-  ((((j2 = j3) and ((i2 = i3) and (b1 = b2))) and ((j4 = j2) and
-  ((i4 = i2) and (b3 = b1)))) and (not ((i2 <  length1) or
-  (j2 <  length2)))))))))) and ((({ int__content = j5 } = { int__content = j3
-  }) and (({ int__content = i5 } = { int__content = i3 }) and ({
-  map__content = b4 } = { map__content = b2 }))) and ((j6 = j4) and
-  ((i6 = i4) and (b5 = b3))))) and ((({ int__content = j7 } = {
-  int__content = j5 }) and (({ int__content = i7 } = { int__content = i5
-  }) and ({ map__content = b6 } = { map__content = b4 }))) and ((j8 = j6) and
-  ((i8 = i6) and (b7 = b5))))) and (((o1 = (length1 + length2)) and
-  in_range1((length1 + length2))) and (((o = to_rep(b__first)) and
+  ((((j2 = j4) and ((i2 = i4) and (b1 = b4))) and ((j5 = j2) and
+  ((i5 = i2) and (b5 = b1)))) and (not ((i2 <  length1) or
+  (j2 <  length2)))))))))) and (((j8 = j4) and ((i8 = i4) and (b8 = b4))) and
+  ((j9 = j5) and ((i9 = i5) and (b9 = b5))))) and (((j10 = j8) and
+  ((i10 = i8) and (b10 = b8))) and ((j11 = j9) and ((i11 = i9) and
+  (b11 = b9))))) and (((o61 = (length1 + length2)) and
+  in_range1((length1 + length2))) and (((o60 = to_rep(b__first)) and
   in_range2(to_rep(b__first))) and
-  (forall j11:int. (((to_rep(a__first) <= j11) and
-  (j11 <= to_rep(a__last))) -> ((((a_first <= j11) and
-  (j11 <= ((a_first + o1) - 1))) ->
-  (to_rep((a1[j11])) = to_rep((b6[((o + j11) - a_first)])))) and
-  (((a_first <= j11) -> (not (j11 <= ((a_first + o1) - 1)))) ->
-  (to_rep((a1[j11])) = to_rep((a[j11])))))))))))))) and ((({ int__content =
-  j9 } = { int__content = j7 }) and (({ int__content = i9 } = {
-  int__content = i7 }) and (({ map__content = b8 } = { map__content = b6
-  }) and (a1 = a2)))) and ((j10 = j8) and ((i10 = i8) and ((b9 = b7) and
-  (a3 = a1)))))) -> (((to_rep(a__first) <= k) and (k <= to_rep(a__last))) ->
-  ((((o2 = (a_first + length1)) and in_range1((a_first + length1))) and
-  (o3 = (o2 + length2))) -> in_range1(o3)))))))))))
+  (forall j14:int. (((to_rep(a__first) <= j14) and
+  (j14 <= to_rep(a__last))) -> ((((a_first <= j14) and
+  (j14 <= ((a_first + o61) - 1))) ->
+  (to_rep((a1[j14])) = to_rep((b10[((o60 + j14) - a_first)])))) and
+  (((a_first <= j14) -> (not (j14 <= ((a_first + o61) - 1)))) ->
+  (to_rep((a1[j14])) = to_rep((a[j14])))))))))))))) and (((j12 = j10) and
+  ((i12 = i10) and ((b12 = b10) and (a2 = a1)))) and ((j13 = j11) and
+  ((i13 = i11) and ((b13 = b11) and (a3 = a1))))))
+
+axiom H7 : (to_rep(a__first) <= k)
+
+axiom H8 : (k <= to_rep(a__last))
+
+axiom H9 : ((o65 = (a_first + length1)) and in_range1((a_first + length1)))
+
+axiom H10 : (o66 = (o65 + length2))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(o66)

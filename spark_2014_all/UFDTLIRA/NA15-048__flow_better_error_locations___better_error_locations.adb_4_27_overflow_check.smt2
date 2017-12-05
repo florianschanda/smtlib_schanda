@@ -43,6 +43,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range x)))
 (assert (and (= o (return_state1 state1)) (in_range o)))
 (assert (and (= o1 (return_state state)) (in_range o1)))

@@ -105,5 +105,7 @@ type subtree_enum__ref = { subtree_enum__content : subtree_enum
 function subtree_enum__ref___projection(a: subtree_enum__ref) : subtree_enum =
   (a).subtree_enum__content
 
+logic us : int
+
  (* File "primitives.ads", line 16, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

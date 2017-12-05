@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type tindexB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -370,14 +370,43 @@ logic new_val : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,integer) farray
+
+logic o : integer
+
+logic o1 : int
+
+logic o2 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep1(a__first), to_rep1(a__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range(new_val)
+
+axiom H3 : (to_rep(o) = new_val)
+
+axiom H4 : ((to_rep1(a__first) <= i) and (i <= to_rep1(a__last)))
+
+axiom H5 : (o1 = i)
+
+axiom H6 : (o2 = (a[o1 <- o]))
+
+axiom H7 : (result = a)
+
+axiom H8 : (a1 = o2)
+
+axiom H9 : (a1 = a2)
+
+axiom H10 : (a3 = a1)
+
  (* File "update_checks_1.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall o:integer. forall o1:int.
-  forall o2:(int,integer) farray. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. (dynamic_property(1, 8, to_rep1(a__first),
-  to_rep1(a__last)) -> (in_range2(i) -> (in_range(new_val) ->
-  (((((to_rep(o) = new_val) and ((((to_rep1(a__first) <= i) and
-  (i <= to_rep1(a__last))) and (o1 = i)) and (o2 = (a[o1 <- o])))) and (({
-  map__content = result } = { map__content = a }) and (a1 = o2))) and
-  ((a1 = a2) and (a3 = a1))) -> (to_rep1(a__first) <= i))))))
+goal WP_parameter_def : (to_rep1(a__first) <= i)

@@ -76,6 +76,7 @@
 (declare-const o5 Int)
 (declare-const o6 Int)
 (declare-const o7 Int)
+(declare-const o8 Int)
 (assert (in_range2 x))
 (assert (and (<= 2 x) (<= x 29)))
 (assert (and (= o5 (+ x 1)) (in_range1 (+ x 1))))

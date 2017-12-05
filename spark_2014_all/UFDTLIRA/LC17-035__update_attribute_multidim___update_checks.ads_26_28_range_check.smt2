@@ -125,6 +125,7 @@
 (declare-const o19 Int)
 (declare-const o20 Int)
 (declare-const o21 Int)
+(declare-const o22 Int)
 (declare-const result map1)
 (declare-const a1 map1)
 (declare-const a2 map1)

@@ -43,6 +43,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (= gdebug (- 1)))
 (define-fun dynamic_invariant1 ((temp___expr_324 Int) (temp___is_init_321 Bool) (temp___skip_constant_322 Bool) (temp___do_toplevel_323 Bool)) Bool (=> (or (= temp___is_init_321 true) (<= 0 2147483647)) (in_range1 temp___expr_324)))
+(declare-const us Int)
 (assert (not (in_range1 1000)))
 (check-sat)
 (exit)

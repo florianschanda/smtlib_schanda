@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -274,13 +274,41 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : (int,small) farray
+
+logic temp___212 : int
+
+logic o : int
+
+logic o1 : small
+
+logic o2 : (int,small) farray
+
+logic temp___214 : int
+
+logic result : (int,small) farray
+
+logic x1 : (int,small) farray
+
+axiom H : (in_range1(i3s) and ((2 * i3s) <  100000))
+
+axiom H1 : true
+
+axiom H2 : in_range(y)
+
+axiom H3 : ((temp___212 = y) and in_range1(y))
+
+axiom H4 : ((2 * temp___212) <  100000)
+
+axiom H5 : (o = temp___212)
+
+axiom H6 : (to_rep(o1) = o)
+
+axiom H7 : (o2 = (x[1 <- o1]))
+
+axiom H8 : (result = x)
+
+axiom H9 : (x1 = o2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,small) farray. forall temp___212:int. forall o:int.
-  forall o1:small. forall o2:(int,small) farray.
-  forall result:(int,small) farray. forall x1:(int,small) farray.
-  ((in_range1(i3s) and ((2 * i3s) <  100000)) -> (in_range(y) ->
-  (((((((temp___212 = y) and in_range1(y)) and
-  (((2 * temp___212) <  100000) and (o = temp___212))) and
-  (to_rep(o1) = o)) and (o2 = (x[1 <- o1]))) and ((result = x) and
-  (x1 = o2))) -> in_range1(y)))))
+goal WP_parameter_def : in_range1(y)

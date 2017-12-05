@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref) : us_spl
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep) : us_split_fields =
+function us_rep___30__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -180,5 +180,7 @@ axiom coerce_axiom :
 
 logic self__ : integer
 
+logic temp___1529 : bool
+
  (* File "attach_test.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (forall temp___1539:bool. (temp___1539 = false))
+goal WP_parameter_def : (temp___1529 = false)

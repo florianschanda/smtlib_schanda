@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type value_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type index_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type tindex_typeB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -400,9 +400,19 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(lastindex)
+
+axiom H2 : in_range1(val__)
+
+axiom H3 : ((to_rep1(first(a1)) <= lastindex) and
+  (lastindex <= to_rep1(last(a1))))
+
+axiom H4 : (to_rep1(first(a1)) <= lastindex)
+
  (* File "array_algorithms.ads", line 39, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property((-2147483648), 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(lastindex) ->
-  (in_range1(val__) -> (((to_rep1(first(a1)) <= lastindex) and
-  (lastindex <= to_rep1(last(a1)))) -> ((to_rep1(first(a1)) <= lastindex) ->
-  ((-2147483648) <= to_rep1(first(a1))))))))
+goal WP_parameter_def : ((- 2147483648) <= to_rep1(first(a1)))

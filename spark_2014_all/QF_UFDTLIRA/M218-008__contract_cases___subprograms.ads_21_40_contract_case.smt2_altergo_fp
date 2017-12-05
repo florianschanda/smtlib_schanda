@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -109,19 +109,39 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic subprograms__f3__result : int
+
+logic result : int
+
+logic subprograms__f3__result1 : int
+
+logic subprograms__f3__result2 : int
+
+logic subprograms__f3__result3 : int
+
+logic subprograms__f3__result4 : int
+
+logic subprograms__f3__result5 : int
+
+axiom H : in_range(val__)
+
+axiom H1 : (subprograms__f3__result1 = subprograms__f3__result2)
+
+axiom H2 : (subprograms__f3__result3 = subprograms__f3__result1)
+
+axiom H3 : (result = subprograms__f3__result)
+
+axiom H4 : (subprograms__f3__result1 = val__)
+
+axiom H5 : (subprograms__f3__result4 = subprograms__f3__result2)
+
+axiom H6 : (subprograms__f3__result5 = subprograms__f3__result3)
+
+axiom H7 : ((bool_ge(val__, 0) = true) -> (subprograms__f3__result4 = 1))
+
+axiom H8 : ((bool_eq(val__, 0) = true) -> (subprograms__f3__result4 = 2))
+
+axiom H9 : (bool_le(val__, 0) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall subprograms__f3__result:int. forall result:int.
-  forall subprograms__f3__result1:int. forall subprograms__f3__result2:int.
-  forall subprograms__f3__result3:int. forall subprograms__f3__result4:int.
-  forall subprograms__f3__result5:int. (in_range(val__) ->
-  (((((subprograms__f3__result1 = subprograms__f3__result2) and
-  (subprograms__f3__result3 = subprograms__f3__result1)) and
-  ((result = subprograms__f3__result) and
-  (subprograms__f3__result1 = val__))) and
-  ((subprograms__f3__result4 = subprograms__f3__result2) and
-  (subprograms__f3__result5 = subprograms__f3__result3))) ->
-  ((((bool_ge(val__, 0) = true) and (subprograms__f3__result4 = 1)) or
-  (not (bool_ge(val__, 0) = true))) -> ((((bool_eq(val__, 0) = true) and
-  (subprograms__f3__result4 = 2)) or (not (bool_eq(val__, 0) = true))) ->
-  ((bool_le(val__, 0) = true) -> (subprograms__f3__result4 = 3)))))))
+goal WP_parameter_def : (subprograms__f3__result4 = 3)

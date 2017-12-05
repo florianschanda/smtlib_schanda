@@ -1092,13 +1092,37 @@ logic distance_to_target : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic f : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic f1 : t
+
+logic result : t
+
+logic f2 : t
+
+logic f3 : t
+
+logic f4 : t
+
+axiom H : tqtisFinite(f)
+
+axiom H1 : tqtisFinite(distance_to_target)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
 
+axiom H2 : lt(distance_to_target, fliteral1)
+
  (* File "flight_manager.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall f:t. (tqtisFinite(f) -> (tqtisFinite(distance_to_target) ->
-  (lt(distance_to_target, fliteral1) -> tqtisFinite(mul(NearestTiesToEven, f,
-  distance_to_target))))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, f,
+  distance_to_target))

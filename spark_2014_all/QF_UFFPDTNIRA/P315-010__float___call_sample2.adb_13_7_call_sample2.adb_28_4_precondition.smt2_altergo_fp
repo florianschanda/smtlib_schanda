@@ -1215,36 +1215,115 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic nb_of_fp : int
+
+logic nb_of_pp : int
+
+logic delta_time : t
+
+logic time : t
+
+logic nb_of_fp1 : int
+
+logic nb_of_pp1 : int
+
+logic delta_time1 : t
+
+logic time1 : t
+
+logic result : int
+
+logic nb_of_fp2 : int
+
+logic result1 : int
+
+logic nb_of_pp2 : int
+
+logic result2 : t
+
+logic delta_time2 : t
+
+logic result3 : t
+
+logic time2 : t
+
+logic time3 : t
+
+logic result4 : int
+
+logic nb_of_fp3 : int
+
+logic result5 : int
+
+logic nb_of_pp3 : int
+
+logic result6 : t
+
+logic delta_time3 : t
+
+logic result7 : t
+
+logic time4 : t
+
+axiom H : (result = nb_of_fp)
+
+axiom H1 : (nb_of_fp2 = 2)
+
+axiom H2 : in_range1(nb_of_fp2)
+
+axiom H3 : (result1 = nb_of_pp)
+
+axiom H4 : (nb_of_pp2 = 46)
+
+axiom H5 : in_range1(nb_of_pp2)
+
+axiom H6 : (result2 = delta_time)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.000000000000000000000000000000000000007346836890042368275170461510179868906534397169301663256398154650103540092009879458601062651723623275756835937500))
+
+axiom H7 : (delta_time2 = fliteral2)
+
+axiom H8 : in_range2(delta_time2)
+
+axiom H9 : (result3 = time)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000000000000000000000000000000003644032711756845566673814613185694927624444230835382016919653770594018926676227465577539987862110137939453125))
 
+axiom H10 : (time2 = fliteral3)
+
+axiom H11 : tqtisFinite(time2)
+
+axiom H12 : (((0 <  nb_of_fp2) -> le(time2, time3)) and tqtisFinite(time3))
+
+axiom H13 : (result4 = nb_of_fp1)
+
+axiom H14 : (nb_of_fp3 = 2)
+
+axiom H15 : in_range3(nb_of_fp3)
+
+axiom H16 : (result5 = nb_of_pp1)
+
+axiom H17 : (nb_of_pp3 = 46)
+
+axiom H18 : in_range3(nb_of_pp3)
+
+axiom H19 : (result6 = delta_time1)
+
+axiom H20 : (delta_time3 = fliteral2)
+
+axiom H21 : in_range4(delta_time3)
+
+axiom H22 : (result7 = time1)
+
+axiom H23 : (time4 = fliteral3)
+
+axiom H24 : tqtisFinite(time4)
+
  (* File "call_sample2.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall nb_of_fp:int. forall nb_of_pp:int. forall delta_time:t.
-  forall time:t. forall nb_of_fp1:int. forall nb_of_pp1:int.
-  forall delta_time1:t. forall time1:t. forall result:int.
-  forall nb_of_fp2:int. forall result1:int. forall nb_of_pp2:int.
-  forall result2:t. forall delta_time2:t. forall result3:t. forall time2:t.
-  forall time3:t. forall result4:int. forall nb_of_fp3:int.
-  forall result5:int. forall nb_of_pp3:int. forall result6:t.
-  forall delta_time3:t. forall result7:t. forall time4:t. (((({
-  int__content = result } = { int__content = nb_of_fp }) and
-  (nb_of_fp2 = 2)) and (in_range1(nb_of_fp2) and ((({ int__content = result1
-  } = { int__content = nb_of_pp }) and (nb_of_pp2 = 46)) and
-  (in_range1(nb_of_pp2) and ((({ t__content = result2 } = { t__content =
-  delta_time }) and (delta_time2 = fliteral2)) and
-  (in_range2(delta_time2) and ((({ t__content = result3 } = { t__content =
-  time }) and (time2 = fliteral3)) and (tqtisFinite(time2) and
-  (((0 <  nb_of_fp2) -> le(time2, time3)) and tqtisFinite(time3)))))))))) ->
-  (((result4 = nb_of_fp1) and (nb_of_fp3 = 2)) -> (in_range3(nb_of_fp3) ->
-  (((result5 = nb_of_pp1) and (nb_of_pp3 = 46)) -> (in_range3(nb_of_pp3) ->
-  (((result6 = delta_time1) and (delta_time3 = fliteral2)) ->
-  (in_range4(delta_time3) -> (((result7 = time1) and (time4 = fliteral3)) ->
-  (tqtisFinite(time4) -> (0 <  nb_of_pp3)))))))))))
+goal WP_parameter_def : (0 <  nb_of_pp3)

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -492,10 +492,103 @@ function t18b__ref___projection(a: t18b__ref) : integer = (a).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "use_stack.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall top:int. (in_range1(max) -> (in_range1(e) -> (dynamic_property(0,
-  last, top) -> ((dynamic_property2(1, max, to_rep1(content__first),
+logic top : int
+
+logic content : (int,positive) farray
+
+logic i : int
+
+logic us : int
+
+logic o : int
+
+logic temp___224 : int
+
+logic temp___222 : (int,positive) farray
+
+logic o1 : positive
+
+logic o2 : (int,positive) farray
+
+logic j : int
+
+logic o3 : positive
+
+logic o4 : (int,positive) farray
+
+logic content1 : (int,positive) farray
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,positive) farray
+
+logic content2 : (int,positive) farray
+
+logic content3 : (int,positive) farray
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : (int,positive) farray
+
+logic content4 : (int,positive) farray
+
+logic content5 : (int,positive) farray
+
+logic i4 : int
+
+logic content6 : (int,positive) farray
+
+logic i5 : int
+
+logic content7 : (int,positive) farray
+
+logic i6 : int
+
+logic content8 : (int,positive) farray
+
+logic i7 : int
+
+logic content9 : (int,positive) farray
+
+logic i8 : int
+
+logic content10 : (int,positive) farray
+
+logic i9 : int
+
+logic top2 : int
+
+logic content11 : (int,positive) farray
+
+logic i10 : int
+
+logic top3 : int
+
+logic content12 : (int,positive) farray
+
+logic i11 : int
+
+axiom H : in_range1(max)
+
+axiom H1 : in_range1(e)
+
+axiom H2 : dynamic_property(0, last, top)
+
+axiom H3 : (dynamic_property2(1, max, to_rep1(content__first),
   to_rep1(content__last)) and ((to_rep1(content__first) = 1) and
-  (to_rep1(content__last) = max))) -> ((is_empty(top) = true) ->
-  dynamic_property(0, last, max)))))))
+  (to_rep1(content__last) = max)))
+
+axiom H4 : (is_empty(top) = true)
+
+ (* File "use_stack.adb", line 15, characters 0-0 *)
+goal WP_parameter_def : dynamic_property(0, last, max)

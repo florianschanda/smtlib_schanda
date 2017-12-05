@@ -79,9 +79,33 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic v : bool
+
+logic result : bool
+
+logic v1 : bool
+
+logic result1 : bool
+
+logic v2 : bool
+
+logic v3 : bool
+
+logic v4 : bool
+
+axiom H : (not (v = true))
+
+axiom H1 : (result = v)
+
+axiom H2 : (v1 = of_int(0))
+
+axiom H3 : (result1 = v1)
+
+axiom H4 : (v2 = of_int(1))
+
+axiom H5 : (v2 = v3)
+
+axiom H6 : (v4 = v2)
+
  (* File "read_write.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:bool. forall result:bool. forall v1:bool. forall result1:bool.
-  forall v2:bool. forall v3:bool. forall v4:bool. (((not (v = true)) and
-  ((((result = v) and (v1 = of_int(0))) and ((result1 = v1) and
-  (v2 = of_int(1)))) and ((v2 = v3) and (v4 = v2)))) -> (v3 = true)))
+goal WP_parameter_def : (v3 = true)

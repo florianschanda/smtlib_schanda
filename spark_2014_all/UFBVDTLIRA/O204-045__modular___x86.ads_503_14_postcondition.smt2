@@ -108,6 +108,7 @@
 (declare-const rdx2 (_ BitVec 64))
 (declare-const rdx3 (_ BitVec 64))
 (declare-const rdx4 (_ BitVec 64))
+(assert true)
 (assert (=> (= carryflag true) (= rdx1 (bvor (bvand rdx ((_ int2bv 64) 18446744073709551360)) ((_ zero_extend 56) ((_ int2bv 8) 1))))))
 (assert (=> (not (= carryflag true)) (= rdx2 (bvor (bvand rdx ((_ int2bv 64) 18446744073709551360)) ((_ zero_extend 56) ((_ int2bv 8) 0))))))
 (assert (=> (not (= carryflag true)) (= rdx1 rdx2)))

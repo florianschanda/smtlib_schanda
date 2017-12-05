@@ -356,44 +356,170 @@ function tlast_charS__ref___projection(a: tlast_charS__ref) : tlast_charS =
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall line:(int,character) farray. forall first_char:int.
-  forall last_char:int. forall line_num:int. forall c:int.
-  forall temp___651:int. forall temp___650:(int,character) farray.
-  forall temp___649:int. forall temp___648:int.
-  forall line1:(int,character) farray. forall first_char1:int.
-  forall last_char1:int. forall line_num1:int. forall first_char2:int.
-  forall last_char2:int. forall line_num2:int.
-  forall line2:(int,character) farray. forall first_char3:int.
-  forall last_char3:int. forall line_num3:int.
-  forall line3:(int,character) farray. forall first_char4:int.
-  forall last_char4:int. forall line_num4:int.
-  forall line4:(int,character) farray. forall first_char5:int.
-  forall last_char5:int. forall line_num5:int.
-  forall line5:(int,character) farray. forall first_char6:int.
-  forall last_char6:int. forall line_num6:int.
-  forall line6:(int,character) farray. forall first_char7:int.
-  forall last_char7:int. forall line_num7:int. (in_range4(first_char) ->
-  (in_range5(last_char) -> (in_range1(line_num) -> (((0 <= 255) ->
-  in_range2(c)) -> ((first_char <= 1024) ->
-  ((((last_char <  (first_char + 0)) and ((((temp___651 = first_char) and
-  ((temp___650 = line) and ((temp___649 = line_num) and
-  ((temp___648 = last_char) and ((((in_range5(last_char2) and
+logic line : (int,character) farray
+
+logic first_char : int
+
+logic last_char : int
+
+logic line_num : int
+
+logic c : int
+
+logic temp___645 : int
+
+logic temp___644 : (int,character) farray
+
+logic temp___643 : int
+
+logic temp___642 : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : int
+
+logic line1 : (int,character) farray
+
+logic first_char1 : int
+
+logic last_char1 : int
+
+logic line_num1 : int
+
+logic first_char2 : int
+
+logic last_char2 : int
+
+logic line_num2 : int
+
+logic line2 : (int,character) farray
+
+logic first_char3 : int
+
+logic last_char3 : int
+
+logic line_num3 : int
+
+logic line3 : (int,character) farray
+
+logic first_char4 : int
+
+logic last_char4 : int
+
+logic line_num4 : int
+
+logic line4 : (int,character) farray
+
+logic first_char5 : int
+
+logic last_char5 : int
+
+logic line_num5 : int
+
+logic line5 : (int,character) farray
+
+logic first_char6 : int
+
+logic last_char6 : int
+
+logic line_num6 : int
+
+logic line6 : (int,character) farray
+
+logic first_char7 : int
+
+logic last_char7 : int
+
+logic line_num7 : int
+
+logic result : int
+
+logic c1 : int
+
+axiom H : in_range4(first_char)
+
+axiom H1 : in_range5(last_char)
+
+axiom H2 : in_range1(line_num)
+
+axiom H3 : ((0 <= 255) -> in_range2(c))
+
+axiom H4 : (first_char <= 1024)
+
+axiom H5 : ((last_char <  (first_char + 0)) -> (temp___645 = first_char))
+
+axiom H6 : ((last_char <  (first_char + 0)) -> (temp___644 = line))
+
+axiom H7 : ((last_char <  (first_char + 0)) -> (temp___643 = line_num))
+
+axiom H8 : ((last_char <  (first_char + 0)) -> (temp___642 = last_char))
+
+axiom H9 : ((last_char <  (first_char + 0)) -> (((in_range5(last_char2) and
   in_range1(line_num2)) and in_range4(first_char2)) and
-  (last_char2 <  (first_char2 + 0))) and (((in_range4(first_char3) and
-  in_range5(last_char3)) and in_range1(line_num3)) and
-  (not (last_char3 <  (first_char3 + 0))))))))) and
-  (((line_num3 = line_num4) and ((last_char3 = last_char4) and
-  ((first_char3 = first_char4) and (line2 = line3)))) and
-  ((line_num5 = line_num3) and ((last_char5 = last_char3) and
-  ((first_char5 = first_char3) and (line4 = line2)))))) and
-  (((line_num4 = line_num6) and ((last_char4 = last_char6) and
-  ((first_char4 = first_char6) and (line3 = line5)))) and
-  ((line_num7 = line_num5) and ((last_char7 = last_char5) and
-  ((first_char7 = first_char5) and (line6 = line4))))))) or
-  ((not (last_char <  (first_char + 0))) and (((line_num = line_num6) and
-  ((last_char = last_char6) and ((first_char = first_char6) and
-  (line = line5)))) and ((line_num7 = line_num1) and
-  ((last_char7 = last_char1) and ((first_char7 = first_char1) and
-  (line6 = line1))))))) -> (1 <= first_char6))))))))
+  (last_char2 <  (first_char2 + 0))))
+
+axiom H10 : ((last_char <  (first_char + 0)) -> ((in_range5(last_char3) and
+  in_range1(line_num3)) and in_range4(first_char3)))
+
+axiom H11 : ((last_char <  (first_char + 0)) ->
+  (not (last_char3 <  (first_char3 + 0))))
+
+axiom H12 : ((last_char <  (first_char + 0)) -> (line_num3 = line_num4))
+
+axiom H13 : ((last_char <  (first_char + 0)) -> (last_char3 = last_char4))
+
+axiom H14 : ((last_char <  (first_char + 0)) -> (first_char3 = first_char4))
+
+axiom H15 : ((last_char <  (first_char + 0)) -> (line2 = line3))
+
+axiom H16 : ((last_char <  (first_char + 0)) -> (line_num5 = line_num3))
+
+axiom H17 : ((last_char <  (first_char + 0)) -> (last_char5 = last_char3))
+
+axiom H18 : ((last_char <  (first_char + 0)) -> (first_char5 = first_char3))
+
+axiom H19 : ((last_char <  (first_char + 0)) -> (line4 = line2))
+
+axiom H20 : ((last_char <  (first_char + 0)) -> (line_num6 = line_num4))
+
+axiom H21 : ((last_char <  (first_char + 0)) -> (last_char6 = last_char4))
+
+axiom H22 : ((last_char <  (first_char + 0)) -> (first_char6 = first_char4))
+
+axiom H23 : ((last_char <  (first_char + 0)) -> (line5 = line3))
+
+axiom H24 : ((last_char <  (first_char + 0)) -> (line_num7 = line_num5))
+
+axiom H25 : ((last_char <  (first_char + 0)) -> (last_char7 = last_char5))
+
+axiom H26 : ((last_char <  (first_char + 0)) -> (first_char7 = first_char5))
+
+axiom H27 : ((last_char <  (first_char + 0)) -> (line6 = line4))
+
+axiom H28 : ((not (last_char <  (first_char + 0))) -> (line_num6 = line_num))
+
+axiom H29 : ((not (last_char <  (first_char + 0))) ->
+  (last_char6 = last_char))
+
+axiom H30 : ((not (last_char <  (first_char + 0))) ->
+  (first_char6 = first_char))
+
+axiom H31 : ((not (last_char <  (first_char + 0))) -> (line5 = line))
+
+axiom H32 : ((not (last_char <  (first_char + 0))) ->
+  (line_num7 = line_num1))
+
+axiom H33 : ((not (last_char <  (first_char + 0))) ->
+  (last_char7 = last_char1))
+
+axiom H34 : ((not (last_char <  (first_char + 0))) ->
+  (first_char7 = first_char1))
+
+axiom H35 : ((not (last_char <  (first_char + 0))) -> (line6 = line1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= first_char6)

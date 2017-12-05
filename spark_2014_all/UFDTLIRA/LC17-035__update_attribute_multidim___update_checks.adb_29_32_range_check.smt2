@@ -88,6 +88,8 @@
 (assert (forall ((temp___240 map1)) (forall ((temp___241 Int) (temp___242 Int) (temp___243 Int) (temp___244 Int)) (let ((temp___239 (temp___238 temp___240 temp___241 temp___242 temp___243 temp___244))) (forall ((temp___245 Int) (temp___246 Int) (temp___247 Int)) (ite (and (and (= temp___245 temp___241) (= temp___246 temp___242)) (= temp___247 temp___243)) (= (get temp___239 temp___245 temp___246 temp___247) (of_rep temp___244)) (= (get temp___239 temp___245 temp___246 temp___247) (get temp___240 temp___245 temp___246 temp___247))))))))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range x))
 (assert (in_range1 y))
 (assert (in_range2 z))

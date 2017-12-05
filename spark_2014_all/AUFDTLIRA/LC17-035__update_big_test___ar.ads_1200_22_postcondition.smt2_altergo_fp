@@ -377,16 +377,60 @@ logic f : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,us_rep) farray
+
+logic o : et1
+
+logic o1 : et1
+
+logic o2 : et2
+
+logic o3 : et1
+
+logic o4 : et2
+
+logic o5 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(f)
+
+axiom H2 : (to_rep(o) = f)
+
+axiom H3 : (o = o1)
+
+axiom H4 : ((((a[i])).us_split_fields1).rec__ar__rec1t__g1 = o2)
+
+axiom H5 : (o3 = o1)
+
+axiom H6 : (o4 = o2)
+
+axiom H7 : (o5 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 = o3;
+  rec__ar__rec1t__g1 = o4 } }]))
+
+axiom H8 : (result = a)
+
+axiom H9 : (a1 = o5)
+
+axiom H10 : (a1 = a2)
+
+axiom H11 : (a3 = a1)
+
+logic n : int
+
+axiom H12 : (1 <= n)
+
+axiom H13 : (n <= 10)
+
+axiom H14 : (not (n = i))
+
  (* File "ar.ads", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:et1. forall o1:et1. forall o2:et2.
-  forall o3:et1. forall o4:et2. forall o5:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall a2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
-  ((in_range1(i) and (in_range2(f) and ((((((to_rep(o) = f) and ((o = o1) and
-  ((((a[i])).us_split_fields1).rec__ar__rec1t__g1 = o2))) and ((o3 = o1) and
-  (o4 = o2))) and (o5 = (a[i <- { us_split_fields1 = { rec__ar__rec1t__f1 =
-  o3; rec__ar__rec1t__g1 = o4 } }]))) and ((result = a) and (a1 = o5))) and
-  ((a1 = a2) and (a3 = a1))))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> ((not (n = i)) ->
-  (bool_eq5((a2[n]), (a[n])) = true))))))
+goal WP_parameter_def : (bool_eq5((a2[n]), (a[n])) = true)

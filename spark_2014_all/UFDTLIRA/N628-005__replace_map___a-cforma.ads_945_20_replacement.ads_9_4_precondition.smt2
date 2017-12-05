@@ -246,6 +246,7 @@
 (declare-const o1 count_type)
 (declare-const temp___576 count_type)
 (declare-const o2 us_rep2)
+(declare-const o3 Int)
 (assert (= (to_rep o) 0))
 (assert (= o o1))
 (assert (= temp___576 o1))

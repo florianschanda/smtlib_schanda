@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -693,7 +693,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -833,17 +833,79 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : t
+
+logic y : t
+
+logic z : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic y1 : t
+
+logic result2 : int
+
+logic z1 : int
+
+logic result3 : t
+
+logic x2 : t
+
+logic result4 : t
+
+logic y2 : t
+
+logic result5 : int
+
+logic z2 : int
+
+axiom H : ((o = id(of_int(2))) and (o = of_int(2)))
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = o)
+
+axiom H3 : true
+
+axiom H4 : ((o1 = id__2(of_int(2))) and (in_range1(o1) and (o1 = of_int(2))))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = o1)
+
+axiom H7 : in_range1(y1)
+
+axiom H8 : ((o2 = id__3(2)) and (in_range(o2) and (o2 = 2)))
+
+axiom H9 : (result2 = z)
+
+axiom H10 : (z1 = o2)
+
+axiom H11 : in_range(z1)
+
+axiom H12 : (result3 = x1)
+
+axiom H13 : (x2 = power1(x1, 4))
+
+axiom H14 : (result4 = y1)
+
+axiom H15 : (y2 = of_int(comp_mod(power(tqtint(y1), 4),5)))
+
+axiom H16 : ((o3 = power(z1, 4)) and in_range(power(z1, 4)))
+
  (* File "non_binary_mod_power.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall z:int. forall o:t. forall o1:t.
-  forall o2:int. forall o3:int. forall result:t. forall x1:t.
-  forall result1:t. forall y1:t. forall result2:int. forall z1:int.
-  forall result3:t. forall x2:t. forall result4:t. forall y2:t.
-  ((((o = id(of_int(2))) and (o = of_int(2))) and ((result = x) and
-  (x1 = o))) -> ((((o1 = id__2(of_int(2))) and (in_range1(o1) and
-  (o1 = of_int(2)))) and ((result1 = y) and (y1 = o1))) -> (in_range1(y1) ->
-  ((((o2 = id__3(2)) and (in_range(o2) and (o2 = 2))) and ((result2 = z) and
-  (z1 = o2))) -> (in_range(z1) -> (((result3 = x1) and (x2 = power1(x1,
-  4))) -> (((result4 = y1) and (y2 = of_int(comp_mod(power(tqtint(y1),
-  4),5)))) -> (((o3 = power(z1, 4)) and in_range(power(z1, 4))) ->
-  (not (5 = 0)))))))))))
+goal WP_parameter_def : (not (5 = 0))

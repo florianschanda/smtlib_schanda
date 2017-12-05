@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tcount_typeB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -847,50 +847,180 @@ axiom is_empty__post_axiom :
   item) = true))))) and ((is_empty(container) = true) <->
   (length1(container) = 0))))
 
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep2
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic e : int
+
+logic o : bool
+
+logic j : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic k : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___276 : int
+
+logic o5 : int
+
+logic o6 : status
+
+logic o7 : resource
+
+logic o8 : status
+
+logic o9 : resource
+
+logic o10 : resource
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+axiom H : in_range3(first_available)
+
+axiom H1 : ((o24 = length(model____split_fields)) and (in_range6(o24) and
+  ((0 + o24) <= 2147483647)))
+
+axiom H2 : (((o24 <= 10000) -> (result4 = true)) and ((not (o24 <= 10000)) ->
+  (result4 = false)))
+
+axiom H3 : ((result4 = true) -> ((o23 = length1(model____split_fields1)) and
+  in_range6(o23)))
+
+axiom H4 : ((result4 = true) -> (((o23 <= 10000) -> (result3 = true)) and
+  ((not (o23 <= 10000)) -> (result3 = false))))
+
+axiom H5 : ((not (result4 = true)) -> (result3 = false))
+
+axiom H6 : ((result3 = true) -> ((o19 = length1(model____split_fields1)) and
+  in_range6(o19)))
+
+axiom H7 : ((result3 = true) -> ((o20 = length(model____split_fields)) and
+  (in_range6(o20) and ((0 + o20) <= 2147483647))))
+
+axiom H8 : ((result3 = true) -> (o21 = (o20 + o19)))
+
+axiom H9 : ((result3 = true) -> ((o22 = o21) and in_range2(o21)))
+
+axiom H10 : ((result3 = true) -> (((o22 = 10000) -> (result2 = true)) and
+  ((not (o22 = 10000)) -> (result2 = false))))
+
+axiom H11 : ((not (result3 = true)) -> (result2 = false))
+
+axiom H12 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((o17 = length(model____split_fields)) and (in_range6(o17) and
+  ((0 + o17) <= 2147483647)))))
+
+axiom H13 : ((result2 = true) -> ((not (first_available = 0)) ->
+  (((0 <  o17) -> (result5 = true)) and ((not (0 <  o17)) ->
+  (result5 = false)))))
+
+axiom H14 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((result5 = true) -> ((o16 = get(model____split_fields, 1)) and
+  in_range7(o16)))))
+
+axiom H15 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((result5 = true) -> (((o16 = first_available) -> (result1 = true)) and
+  ((not (o16 = first_available)) -> (result1 = false))))))
+
+axiom H16 : ((result2 = true) -> ((not (first_available = 0)) ->
+  ((not (result5 = true)) -> (result1 = false))))
+
+axiom H17 : ((result2 = true) -> ((first_available = 0) ->
+  ((o18 = length(model____split_fields)) and (in_range6(o18) and
+  ((0 + o18) <= 2147483647)))))
+
+axiom H18 : ((result2 = true) -> ((first_available = 0) -> (((o18 = 0) ->
+  (result1 = true)) and ((not (o18 = 0)) -> (result1 = false)))))
+
+axiom H19 : ((not (result2 = true)) -> (result1 = false))
+
+axiom H20 : (result1 = true)
+
+axiom H21 : ((o1 = length(model____split_fields)) and (in_range6(o1) and
+  ((0 + o1) <= 2147483647)))
+
+axiom H22 : (((j <= o1) -> (o2 = true)) and ((not (j <= o1)) ->
+  (o2 = false)))
+
+axiom H23 : (((1 <= j) -> (result6 = o2)) and ((not (1 <= j)) ->
+  (result6 = false)))
+
+axiom H24 : (result6 = true)
+
+axiom H25 : ((o15 = get(model____split_fields, j)) and in_range7(o15))
+
+axiom H26 : ((in_range4(o15) -> (result8 = true)) and
+  ((not in_range4(o15)) -> (result8 = false)))
+
+axiom H27 : (result8 = true)
+
+axiom H28 : ((o11 = length(model____split_fields)) and (in_range6(o11) and
+  ((0 + o11) <= 2147483647)))
+
+axiom H29 : (((j <  o11) -> (result9 = true)) and ((not (j <  o11)) ->
+  (result9 = false)))
+
+axiom H30 : (result9 = true)
+
+axiom H31 : ((o12 = (j + 1)) and in_range1((j + 1)))
+
  (* File "list_allocator.ads", line 82, characters 0-0 *)
-goal WP_parameter_def :
-  (forall model____split_fields:us_rep1.
-  forall model____split_fields1:us_rep2. forall first_available:int.
-  forall j:int. forall o:int. forall o1:bool. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:int. forall o11:int. forall o12:int.
-  forall o13:int. forall result:bool. forall result1:bool.
-  forall result2:bool. forall result3:bool. forall result4:bool.
-  forall result5:bool. forall result6:bool. forall result7:bool.
-  (in_range3(first_available) ->
-  (((((((o13 = length(model____split_fields)) and (in_range6(o13) and
-  ((0 + o13) <= 2147483647))) and (((o13 <= 10000) and (result3 = true)) or
-  ((not (o13 <= 10000)) and (result3 = false)))) and (((result3 = true) and
-  (((o12 = length1(model____split_fields1)) and in_range6(o12)) and
-  (((o12 <= 10000) and (result2 = true)) or ((not (o12 <= 10000)) and
-  (result2 = false))))) or ((not (result3 = true)) and
-  (result2 = false)))) and (((result2 = true) and
-  (((((o8 = length1(model____split_fields1)) and in_range6(o8)) and
-  (((o9 = length(model____split_fields)) and (in_range6(o9) and
-  ((0 + o9) <= 2147483647))) and (o10 = (o9 + o8)))) and ((o11 = o10) and
-  in_range2(o10))) and (((o11 = 10000) and (result1 = true)) or
-  ((not (o11 = 10000)) and (result1 = false))))) or
-  ((not (result2 = true)) and (result1 = false)))) and (((result1 = true) and
-  (((not (first_available = 0)) and
-  ((((o6 = length(model____split_fields)) and (in_range6(o6) and
-  ((0 + o6) <= 2147483647))) and (((0 <  o6) and (result4 = true)) or
-  ((not (0 <  o6)) and (result4 = false)))) and (((result4 = true) and
-  (((o5 = get(model____split_fields, 1)) and in_range7(o5)) and
-  (((o5 = first_available) and (result = true)) or
-  ((not (o5 = first_available)) and (result = false))))) or
-  ((not (result4 = true)) and (result = false))))) or
-  ((first_available = 0) and (((o7 = length(model____split_fields)) and
-  (in_range6(o7) and ((0 + o7) <= 2147483647))) and (((o7 = 0) and
-  (result = true)) or ((not (o7 = 0)) and (result = false))))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (((((o = length(model____split_fields)) and (in_range6(o) and
-  ((0 + o) <= 2147483647))) and (((j <= o) and (o1 = true)) or
-  ((not (j <= o)) and (o1 = false)))) and (((1 <= j) and (result5 = o1)) or
-  ((not (1 <= j)) and (result5 = false)))) -> ((result5 = true) ->
-  ((((o4 = get(model____split_fields, j)) and in_range7(o4)) and
-  ((in_range4(o4) and (result6 = true)) or ((not in_range4(o4)) and
-  (result6 = false)))) -> ((result6 = true) ->
-  ((((o2 = length(model____split_fields)) and (in_range6(o2) and
-  ((0 + o2) <= 2147483647))) and (((j <  o2) and (result7 = true)) or
-  ((not (j <  o2)) and (result7 = false)))) -> ((result7 = true) ->
-  (((o3 = (j + 1)) and in_range1((j + 1))) -> (1 <= o3))))))))))))
+goal WP_parameter_def : (1 <= o12)

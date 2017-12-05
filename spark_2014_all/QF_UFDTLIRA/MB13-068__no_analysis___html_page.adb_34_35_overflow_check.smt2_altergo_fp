@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,7 +113,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type html_section
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -139,7 +139,7 @@ function html_section__ref___projection(a: html_section__ref) : html_section =
 
 type list_of_fonts
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -165,7 +165,7 @@ function list_of_fonts__ref___projection(a: list_of_fonts__ref) : list_of_fonts 
 
 type list_of_styles
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -191,8 +191,19 @@ function list_of_styles__ref___projection(a: list_of_styles__ref) : list_of_styl
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic content_body : int
+
+logic fonts : int
+
+logic title_styles : int
+
+logic o : int
+
+axiom H : in_range1(content_body)
+
+axiom H1 : in_range2(fonts)
+
+axiom H2 : in_range3(title_styles)
+
  (* File "html_page.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall content_body:int. forall fonts:int. forall title_styles:int.
-  (in_range1(content_body) -> (in_range2(fonts) ->
-  (in_range3(title_styles) -> in_range((content_body + title_styles))))))
+goal WP_parameter_def : in_range((content_body + title_styles))

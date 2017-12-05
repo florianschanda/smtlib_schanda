@@ -83,5 +83,29 @@ logic recurse : bool -> bool
 
 logic recurse__function_guard : bool, bool -> prop
 
+logic res : bool
+
+logic o : bool
+
+logic result : bool
+
+logic res1 : bool
+
+logic res2 : bool
+
+logic res3 : bool
+
+axiom H : (o = recurse(of_int(0)))
+
+axiom H1 : (result = res)
+
+axiom H2 : (res1 = o)
+
+axiom H3 : (res1 = res2)
+
+axiom H4 : (res3 = res1)
+
+axiom H5 : (res2 = true)
+
  (* File "no_inlining.adb", line 6, characters 0-0 *)
 goal WP_parameter_def : true

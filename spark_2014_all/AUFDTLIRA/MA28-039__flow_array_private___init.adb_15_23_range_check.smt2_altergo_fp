@@ -216,7 +216,145 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,index) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : (int,index) farray
+
+logic o3 : int
+
+logic o4 : index
+
+logic o5 : (int,index) farray
+
+logic o6 : int
+
+logic o7 : index
+
+logic o8 : (int,index) farray
+
+logic o9 : int
+
+logic o10 : index
+
+logic o11 : (int,index) farray
+
+logic o12 : int
+
+logic o13 : index
+
+logic o14 : (int,index) farray
+
+logic o15 : int
+
+logic o16 : index
+
+logic o17 : (int,index) farray
+
+logic o18 : int
+
+logic o19 : index
+
+logic o20 : (int,index) farray
+
+logic o21 : int
+
+logic o22 : index
+
+logic o23 : (int,index) farray
+
+logic o24 : int
+
+logic o25 : index
+
+logic o26 : (int,index) farray
+
+logic o27 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,index) farray
+
+logic a1 : (int,index) farray
+
+logic result2 : int
+
+logic i2 : int
+
+logic result3 : (int,index) farray
+
+logic a2 : (int,index) farray
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,index) farray
+
+logic a3 : (int,index) farray
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : (int,index) farray
+
+logic a4 : (int,index) farray
+
+logic result8 : int
+
+logic i5 : int
+
+logic result9 : (int,index) farray
+
+logic a5 : (int,index) farray
+
+logic result10 : int
+
+logic i6 : int
+
+logic result11 : (int,index) farray
+
+logic a6 : (int,index) farray
+
+logic result12 : int
+
+logic i7 : int
+
+logic result13 : (int,index) farray
+
+logic a7 : (int,index) farray
+
+logic result14 : int
+
+logic i8 : int
+
+logic result15 : (int,index) farray
+
+logic a8 : (int,index) farray
+
+logic result16 : int
+
+logic i9 : int
+
+logic result17 : (int,index) farray
+
+logic a9 : (int,index) farray
+
+logic result18 : int
+
+logic i10 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
  (* File "init.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. (((result = i) and
-  (i1 = 1)) -> in_range((i1 + 1))))
+goal WP_parameter_def : in_range((i1 + 1))

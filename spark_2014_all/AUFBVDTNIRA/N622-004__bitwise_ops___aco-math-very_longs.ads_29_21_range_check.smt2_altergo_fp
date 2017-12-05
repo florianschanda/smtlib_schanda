@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1073,7 +1073,7 @@ axiom compare_def_gt1 :
 
 type tdigit_index_typeB
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1699,15 +1699,175 @@ axiom def_axiom :
   (forall temp___1057:int. (((temp___1052(temp___1054, temp___1055,
   temp___1056)).elts3[temp___1057]) = of_rep2(temp___1054))))))
 
+logic result____split_fields : (int,octet) farray
+
+logic result____split_fields1 : t2
+
+logic valid : bool
+
+logic index : int
+
+logic string_index : int
+
+logic h_digit : t
+
+logic l_digit : t
+
+logic o : int
+
+logic o1 : int
+
+logic temp___1059 : (int,octet) farray
+
+logic temp___10591 : t4
+
+logic temp___1060 : (int,octet) farray
+
+logic temp___10601 : t3
+
+logic temp___1062 : (int,octet) farray
+
+logic temp___10621 : t3
+
+logic o2 : (int,octet) farray
+
+logic o3 : t2
+
+logic o4 : (int,octet) farray
+
+logic o5 : t2
+
+logic temp___1064 : digit_index_type
+
+logic temp___10641 : (int,octet) farray
+
+logic temp___10642 : t2
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : character
+
+logic o16 : int
+
+logic temp___1065 : int
+
+logic o17 : int
+
+logic o18 : character
+
+logic o19 : int
+
+logic o20 : octet
+
+logic o21 : int
+
+logic o22 : (int,octet) farray
+
+logic o23 : (int,octet) farray
+
+logic o24 : t2
+
+logic o25 : (int,octet) farray
+
+logic o26 : t2
+
+logic temp___1068 : digit_index_type
+
+logic temp___10681 : (int,octet) farray
+
+logic temp___10682 : t2
+
+logic o27 : int
+
+logic o28 : int
+
+logic result : (int,octet) farray
+
+logic result1 : t2
+
+logic result____split_fields2 : (int,octet) farray
+
+logic result____split_fields3 : t2
+
+logic result2 : bool
+
+logic valid1 : bool
+
+logic result3 : int
+
+logic index1 : int
+
+logic result4 : int
+
+logic string_index1 : int
+
+logic result____split_fields4 : (int,octet) farray
+
+logic result____split_fields5 : t2
+
+logic valid2 : bool
+
+logic index2 : int
+
+logic string_index2 : int
+
+logic h_digit1 : t
+
+logic l_digit1 : t
+
+logic h_digit2 : t
+
+logic h_okay : bool
+
+logic l_digit2 : t
+
+logic l_okay : bool
+
+logic valid3 : bool
+
+logic result5 : (int,octet) farray
+
+logic result6 : t2
+
+logic result____split_fields6 : (int,octet) farray
+
+logic result____split_fields7 : t2
+
+logic result7 : int
+
+logic index3 : int
+
+logic result8 : int
+
+logic string_index3 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(number1)),
+  to_rep1(last(number1)))
+
+axiom H1 : (dynamic_property2(1, to_rep3(result____split_discrs),
+  to_rep4(first2(result____split_fields1)),
+  to_rep4(last2(result____split_fields1))) and
+  ((to_rep4(first2(result____split_fields1)) = 1) and
+  (to_rep4(last2(result____split_fields1)) = to_rep3(result____split_discrs))))
+
+axiom H2 : ((o = (2 * to_rep3(result____split_discrs))) and
+  in_range4((2 * to_rep3(result____split_discrs))))
+
  (* File "aco-math-very_longs.ads", line 108, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:t2. forall o:int. (dynamic_property(1,
-  2147483647, to_rep1(first(number1)), to_rep1(last(number1))) ->
-  ((dynamic_property2(1, to_rep3(result____split_discrs),
-  to_rep4(first2(result____split_fields)),
-  to_rep4(last2(result____split_fields))) and
-  ((to_rep4(first2(result____split_fields)) = 1) and
-  (to_rep4(last2(result____split_fields)) = to_rep3(result____split_discrs)))) ->
-  (((o = (2 * to_rep3(result____split_discrs))) and
-  in_range4((2 * to_rep3(result____split_discrs)))) -> in_range4(length({
-  elts = number; rt = number1 }))))))
+goal WP_parameter_def : in_range4(length({ elts = number; rt = number1 }))

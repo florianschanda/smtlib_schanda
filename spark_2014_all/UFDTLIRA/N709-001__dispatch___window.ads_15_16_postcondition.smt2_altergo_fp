@@ -107,7 +107,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -816,20 +816,49 @@ axiom get_stored_area__def_axiom :
   rec__object__t__max_width = obj1; rec__object__t__max_height = obj2;
   rec__ext__ = obj3 }; attr__tag = obj4 }) = to_rep(obj)))
 
- (* File "window.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall obj__split_fields:integer. forall obj__split_fields1:integer.
-  forall obj__split_fields2:integer. forall obj__split_fields3:us_private.
-  forall tmp:int. forall obj__split_fields4:integer.
-  forall obj__split_fields5:integer. forall obj__split_fields6:integer.
-  forall obj__split_fields7:us_private. forall tmp1:int.
-  forall obj__split_fields8:integer. forall obj__split_fields9:integer.
-  forall obj__split_fields10:integer. forall obj__split_fields11:us_private.
-  forall tmp2:int. forall obj__split_fields12:integer.
-  forall obj__split_fields13:integer. forall obj__split_fields14:integer.
-  forall obj__split_fields15:us_private. forall tmp3:int.
-  (((((0 <= 2147483647) -> in_range(tmp)) and
-  ((((has_stored_area1(obj__attr__tag, { us_split_fields1 = {
+logic obj__split_fields : integer
+
+logic obj__split_fields1 : integer
+
+logic obj__split_fields2 : integer
+
+logic obj__split_fields3 : us_private
+
+logic tmp : int
+
+logic obj__split_fields4 : integer
+
+logic obj__split_fields5 : integer
+
+logic obj__split_fields6 : integer
+
+logic obj__split_fields7 : us_private
+
+logic tmp1 : int
+
+logic obj__split_fields8 : integer
+
+logic obj__split_fields9 : integer
+
+logic obj__split_fields10 : integer
+
+logic obj__split_fields11 : us_private
+
+logic tmp2 : int
+
+logic obj__split_fields12 : integer
+
+logic obj__split_fields13 : integer
+
+logic obj__split_fields14 : integer
+
+logic obj__split_fields15 : us_private
+
+logic tmp3 : int
+
+axiom H : ((0 <= 2147483647) -> in_range(tmp))
+
+axiom H1 : ((((has_stored_area1(obj__attr__tag, { us_split_fields1 = {
   rec__object__t__area = obj__split_fields4; rec__object__t__max_width =
   obj__split_fields5; rec__object__t__max_height = obj__split_fields6;
   rec__ext__ = obj__split_fields7 }; attr__tag = obj__attr__tag
@@ -844,16 +873,31 @@ goal WP_parameter_def :
   rec__ext__ = obj__split_fields7 }, obj__attr__tag, tmp1, {
   rec__object__t__area = obj__split_fields; rec__object__t__max_width =
   obj__split_fields1; rec__object__t__max_height = obj__split_fields2;
-  rec__ext__ = obj__split_fields3 }, tmp))) and (((tmp2 = tmp1) and
-  ((obj__split_fields8 = obj__split_fields4) and
-  ((obj__split_fields9 = obj__split_fields5) and
-  ((obj__split_fields10 = obj__split_fields6) and
-  (obj__split_fields11 = obj__split_fields7))))) and ((tmp3 = tmp1) and
-  ((obj__split_fields12 = obj__split_fields4) and
-  ((obj__split_fields13 = obj__split_fields5) and
-  ((obj__split_fields14 = obj__split_fields6) and
-  (obj__split_fields15 = obj__split_fields7))))))) ->
-  (has_stored_area1(obj__attr__tag, { us_split_fields1 = {
-  rec__object__t__area = obj__split_fields8; rec__object__t__max_width =
-  obj__split_fields9; rec__object__t__max_height = obj__split_fields10;
-  rec__ext__ = obj__split_fields11 }; attr__tag = obj__attr__tag }) = true)))
+  rec__ext__ = obj__split_fields3 }, tmp))
+
+axiom H2 : (tmp2 = tmp1)
+
+axiom H3 : (obj__split_fields8 = obj__split_fields4)
+
+axiom H4 : (obj__split_fields9 = obj__split_fields5)
+
+axiom H5 : (obj__split_fields10 = obj__split_fields6)
+
+axiom H6 : (obj__split_fields11 = obj__split_fields7)
+
+axiom H7 : (tmp3 = tmp1)
+
+axiom H8 : (obj__split_fields12 = obj__split_fields4)
+
+axiom H9 : (obj__split_fields13 = obj__split_fields5)
+
+axiom H10 : (obj__split_fields14 = obj__split_fields6)
+
+axiom H11 : (obj__split_fields15 = obj__split_fields7)
+
+ (* File "window.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : (has_stored_area1(obj__attr__tag, {
+  us_split_fields1 = { rec__object__t__area = obj__split_fields8;
+  rec__object__t__max_width = obj__split_fields9;
+  rec__object__t__max_height = obj__split_fields10; rec__ext__ =
+  obj__split_fields11 }; attr__tag = obj__attr__tag }) = true)

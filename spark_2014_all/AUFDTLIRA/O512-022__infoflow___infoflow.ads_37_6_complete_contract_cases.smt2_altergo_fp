@@ -259,8 +259,43 @@ logic value_v2 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic flags_v1 : (int,flagvalue) farray
+
+logic flags_v2 : (int,flagvalue) farray
+
+logic o : flagvalue
+
+logic o1 : (int,flagvalue) farray
+
+logic o2 : flagvalue
+
+logic o3 : (int,flagvalue) farray
+
+logic result : (int,flagvalue) farray
+
+logic flags_v11 : (int,flagvalue) farray
+
+logic result1 : (int,flagvalue) farray
+
+logic flags_v21 : (int,flagvalue) farray
+
+logic flags_v12 : (int,flagvalue) farray
+
+logic flags_v22 : (int,flagvalue) farray
+
+logic flags_v13 : (int,flagvalue) farray
+
+logic flags_v23 : (int,flagvalue) farray
+
+axiom H : in_range(flag_v1)
+
+axiom H1 : in_range(flag_v2)
+
+axiom H2 : in_range1(value_v1)
+
+axiom H3 : in_range1(value_v2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(flag_v1) -> (in_range(flag_v2) ->
-  (in_range1(value_v1) -> (in_range1(value_v2) -> (((bool_eq(value_v1,
-  value_v2) = true) -> (1 <= (0 + 1))) and ((not (bool_eq(value_v1,
-  value_v2) = true)) -> (1 <= (0 + 0))))))))
+goal WP_parameter_def : (((bool_eq(value_v1, value_v2) = true) ->
+  (1 <= (0 + 1))) and ((not (bool_eq(value_v1, value_v2) = true)) ->
+  (1 <= (0 + 0))))

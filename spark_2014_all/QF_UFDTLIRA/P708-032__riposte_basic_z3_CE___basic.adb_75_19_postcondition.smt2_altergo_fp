@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -143,23 +143,69 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r : int
+
+logic basic__int_min_a__result : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic basic__int_min_a__result1 : int
+
+logic basic__int_min_a__result2 : int
+
+logic basic__int_min_a__result3 : int
+
+logic r3 : int
+
+logic basic__int_min_a__result4 : int
+
+logic r4 : int
+
+logic basic__int_min_a__result5 : int
+
+logic result3 : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(r))
+
+axiom H3 : ((a <  b) -> (result = r))
+
+axiom H4 : ((a <  b) -> (r1 = a))
+
+axiom H5 : ((not (a <  b)) -> (result1 = r))
+
+axiom H6 : ((not (a <  b)) -> (r2 = b))
+
+axiom H7 : ((not (a <  b)) -> (r1 = r2))
+
+axiom H8 : (basic__int_min_a__result1 = basic__int_min_a__result2)
+
+axiom H9 : (basic__int_min_a__result3 = basic__int_min_a__result1)
+
+axiom H10 : (result2 = basic__int_min_a__result)
+
+axiom H11 : (basic__int_min_a__result1 = r1)
+
+axiom H12 : (basic__int_min_a__result4 = basic__int_min_a__result2)
+
+axiom H13 : (r3 = r1)
+
+axiom H14 : (basic__int_min_a__result5 = basic__int_min_a__result3)
+
+axiom H15 : (r4 = r1)
+
+axiom H16 : (result3 = basic__int_min_a__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall basic__int_min_a__result:int. forall result:int.
-  forall r1:int. forall result1:int. forall r2:int. forall result2:int.
-  forall basic__int_min_a__result1:int. forall basic__int_min_a__result2:int.
-  forall basic__int_min_a__result3:int. forall r3:int.
-  forall basic__int_min_a__result4:int. forall r4:int.
-  forall basic__int_min_a__result5:int.
-  (forall result3:int. ((in_range(a) and (in_range(b) and
-  ((((((-2147483648) <= 2147483647) -> in_range(r)) and ((((a <  b) and
-  ((result = r) and (r1 = a))) or ((not (a <  b)) and (((result1 = r) and
-  (r2 = b)) and (r1 = r2)))) and
-  (((basic__int_min_a__result1 = basic__int_min_a__result2) and
-  (basic__int_min_a__result3 = basic__int_min_a__result1)) and
-  ((result2 = basic__int_min_a__result) and
-  (basic__int_min_a__result1 = r1))))) and
-  (((basic__int_min_a__result4 = basic__int_min_a__result2) and
-  (r3 = r1)) and ((basic__int_min_a__result5 = basic__int_min_a__result3) and
-  (r4 = r1)))) and (result3 = basic__int_min_a__result4)))) ->
-  (basic__int_min_a__result4 = min(a, b)))))
+goal WP_parameter_def : (basic__int_min_a__result4 = min(a, b))

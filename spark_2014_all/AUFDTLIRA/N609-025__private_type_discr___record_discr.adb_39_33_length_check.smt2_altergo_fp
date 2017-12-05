@@ -386,7 +386,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1070,24 +1070,136 @@ axiom result1__def_axiom : ((result1 = result__) and (result11 = result__1))
 axiom result1_base__def_axiom : ((result1_base = result1) and
   (result1_base1 = result11))
 
- (* File "private_record.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:int.
-  forall record_discr__search_upto__result__assume:bool.
-  forall record_discr__search_upto__result__assume1:us_main_type.
-  forall o1:int. forall o2:natural. forall o3:int.
-  forall o4:(int,natural) farray. forall temp___265:(int,natural) farray.
-  forall temp___2651:t2. forall result:bool. ((dynamic_property1(1,
-  to_rep(r), to_rep1(first(r2)), to_rep1(last(r2))) and
-  ((to_rep1(first(r2)) = 1) and (to_rep1(last(r2)) = to_rep(r)))) ->
-  (in_range1(e) -> (((us = to_rep(r)) and in_range1(to_rep(r))) ->
-  ((((((to_rep(r) = 0) and (o = 1)) or ((not (to_rep(r) = 0)) and
-  ((o = to_rep(r)) and in_range2(to_rep(r))))) and
-  ((((not (to_rep(r) = 0)) and ({ us_split_discrs1 = {
+logic record_discr__search_upto__result : bool
+
+logic record_discr__search_upto__result1 : us_main_type
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic o : int
+
+logic record_discr__search_upto__result__assume : bool
+
+logic record_discr__search_upto__result__assume1 : us_main_type
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : (int,natural) farray
+
+logic temp___265 : (int,natural) farray
+
+logic temp___2651 : t2
+
+logic o7 : (int,natural) farray
+
+logic o8 : t1
+
+logic o9 : (int,natural) farray
+
+logic o10 : t1
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : (int,natural) farray
+
+logic o14 : t1
+
+logic o15 : natural
+
+logic o16 : (int,natural) farray
+
+logic o17 : t
+
+logic o18 : bool
+
+logic o19 : us_main_type
+
+logic temp___270 : int
+
+logic o20 : int
+
+logic i : int
+
+logic result : bool
+
+logic result2 : bool
+
+logic result3 : us_main_type
+
+logic record_discr__search_upto__result2 : bool
+
+logic record_discr__search_upto__result3 : us_main_type
+
+logic result4 : bool
+
+logic result5 : us_main_type
+
+logic record_discr__search_upto__result4 : bool
+
+logic record_discr__search_upto__result5 : us_main_type
+
+logic record_discr__search_upto__result6 : bool
+
+logic record_discr__search_upto__result7 : us_main_type
+
+logic record_discr__search_upto__result8 : bool
+
+logic record_discr__search_upto__result9 : us_main_type
+
+logic record_discr__search_upto__result10 : bool
+
+logic record_discr__search_upto__result11 : us_main_type
+
+logic record_discr__search_upto__result12 : bool
+
+logic record_discr__search_upto__result13 : us_main_type
+
+logic record_discr__search_upto__result14 : bool
+
+logic record_discr__search_upto__result15 : us_main_type
+
+logic record_discr__search_upto__result16 : bool
+
+logic record_discr__search_upto__result17 : us_main_type
+
+logic result6 : bool
+
+axiom H : (dynamic_property1(1, to_rep(r), to_rep1(first(r2)),
+  to_rep1(last(r2))) and ((to_rep1(first(r2)) = 1) and
+  (to_rep1(last(r2)) = to_rep(r))))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((us = to_rep(r)) and in_range1(to_rep(r)))
+
+axiom H3 : ((to_rep(r) = 0) -> (o = 1))
+
+axiom H4 : ((not (to_rep(r) = 0)) -> ((o = to_rep(r)) and
+  in_range2(to_rep(r))))
+
+axiom H5 : ((((not (to_rep(r) = 0)) -> ({ us_split_discrs1 = {
   rec__private_record__result_ty__found =
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
-  } } = mk_result(true, o))) or ((to_rep(r) = 0) and ({ us_split_discrs1 = {
+  } } = mk_result(true, o))) and ((to_rep(r) = 0) -> ({ us_split_discrs1 = {
   rec__private_record__result_ty__found =
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
@@ -1097,25 +1209,49 @@ goal WP_parameter_def :
   us_split_discrs1 = { rec__private_record__result_ty__found =
   record_discr__search_upto__result__assume }; us_split_fields1 = {
   rec__private_record__result_ty = record_discr__search_upto__result__assume1
-  } }) = o))))) and
-  ((result__ = record_discr__search_upto__result__assume) and
-  (result__1 = record_discr__search_upto__result__assume1))) ->
-  (((result__ = result1) and (result__1 = result11)) -> ((bool_ne(to_rep(r),
-  0) = result1) -> (((result1 = result1_base) and
-  (result11 = result1_base1)) -> ((((to_rep(r) = 0) and (result = true)) or
-  ((not (to_rep(r) = 0)) and ((((((to_rep1(first(r2)) <= to_rep(r)) and
-  (to_rep(r) <= to_rep1(last(r2)))) and (o1 = to_rep(r))) and
-  (o2 = (r1[o1]))) and (o3 = to_rep(o2))) and (((o3 = e) and
-  (result = true)) or ((not (o3 = e)) and (result = false)))))) ->
-  ((not (result = true)) -> (((((1 <= (to_rep(r) - 1)) ->
-  (((to_rep1(first(r2)) <= 1) and (1 <= to_rep1(last(r2)))) and
-  ((to_rep1(first(r2)) <= (to_rep(r) - 1)) and
-  ((to_rep(r) - 1) <= to_rep1(last(r2)))))) and (o4 = r1)) and
-  ((o4 = temp___265) and (mk2(1, (to_rep(r) - 1)) = temp___2651))) ->
+  } }) = o))))
+
+axiom H6 : ((record_discr__search_upto__result__assume = result__) and
+  (record_discr__search_upto__result__assume1 = result__1))
+
+axiom H7 : ((result__ = result1) and (result__1 = result11))
+
+axiom H8 : (bool_ne(to_rep(r), 0) = result1)
+
+axiom H9 : ((result1 = result1_base) and (result11 = result1_base1))
+
+axiom H10 : ((to_rep(r) = 0) -> (result = true))
+
+axiom H11 : ((not (to_rep(r) = 0)) -> ((to_rep1(first(r2)) <= to_rep(r)) and
+  (to_rep(r) <= to_rep1(last(r2)))))
+
+axiom H12 : ((not (to_rep(r) = 0)) -> (o1 = to_rep(r)))
+
+axiom H13 : ((not (to_rep(r) = 0)) -> (o2 = (r1[o1])))
+
+axiom H14 : ((not (to_rep(r) = 0)) -> (o3 = to_rep(o2)))
+
+axiom H15 : ((not (to_rep(r) = 0)) -> (((o3 = e) -> (result = true)) and
+  ((not (o3 = e)) -> (result = false))))
+
+axiom H16 : (not (result = true))
+
+axiom H17 : ((1 <= (to_rep(r) - 1)) -> (((to_rep1(first(r2)) <= 1) and
+  (1 <= to_rep1(last(r2)))) and ((to_rep1(first(r2)) <= (to_rep(r) - 1)) and
+  ((to_rep(r) - 1) <= to_rep1(last(r2))))))
+
+axiom H18 : (o6 = r1)
+
+axiom H19 : (o6 = temp___265)
+
+axiom H20 : (mk2(1, (to_rep(r) - 1)) = temp___2651)
+
+ (* File "private_record.ads", line 2, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651))) ->
   (((1 <= (to_rep(r) - 1)) ->
   (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = (((to_rep(r) - 1) - 1) + 1))) and
   ((not (1 <= (to_rep(r) - 1))) ->
   (((to_rep1(last4(temp___2651)) - to_rep1(first4(temp___2651))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___2651)) <= to_rep1(last4(temp___2651)))) ->
-  ((1 <= (to_rep(r) - 1)) -> (0 = (((to_rep(r) - 1) - 1) + 1))))))))))))))))
+  ((1 <= (to_rep(r) - 1)) -> (0 = (((to_rep(r) - 1) - 1) + 1)))))

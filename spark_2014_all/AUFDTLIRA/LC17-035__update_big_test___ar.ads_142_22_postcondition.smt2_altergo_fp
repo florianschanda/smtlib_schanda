@@ -274,12 +274,43 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,et1) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a1 : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (to_rep(o) = e)
+
+axiom H3 : (o1 = (a[i <- o]))
+
+axiom H4 : (result = a)
+
+axiom H5 : (a1 = o1)
+
+axiom H6 : (a1 = a2)
+
+axiom H7 : (a3 = a1)
+
+logic n : int
+
+axiom H8 : (1 <= n)
+
+axiom H9 : (n <= 10)
+
+axiom H10 : (not (n = i))
+
  (* File "ar.ads", line 62, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall o:et1. forall o1:(int,et1) farray.
-  forall result:(int,et1) farray. forall a1:(int,et1) farray.
-  forall a2:(int,et1) farray. forall a3:(int,et1) farray. ((in_range1(i) and
-  (in_range2(e) and ((((to_rep(o) = e) and (o1 = (a[i <- o]))) and
-  ((result = a) and (a1 = o1))) and ((a1 = a2) and (a3 = a1))))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) -> ((not (n = i)) ->
-  (to_rep((a2[n])) = to_rep((a[n]))))))))
+goal WP_parameter_def : (to_rep((a2[n])) = to_rep((a[n])))

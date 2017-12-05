@@ -497,7 +497,7 @@ logic last_index__function_guard : int, us_rep1 -> prop
 
 type extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq8 : int, int -> bool
 
@@ -625,11 +625,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq6(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq5(get(a, n), get(b, n)) = true))) ->
   (user_eq6(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq5(get(a, n), get(b, n)) = true)))) ->
   (user_eq6(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -647,7 +647,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range7(x1: int) = (((-1) <= x1) and (x1 <= 10000))
+predicate in_range7(x1: int) = (((- 1) <= x1) and (x1 <= 10000))
 
 logic bool_eq10 : int, int -> bool
 
@@ -674,41 +674,124 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range6(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range6(length1(container))))
 
 axiom get__post_axiom : true
 
- (* File "a-cofove.ads", line 807, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall o:int. forall o1:int. forall o2:bool. forall o3:bool.
-  forall o4:int. forall o5:index. forall o6:index. forall o7:index.
-  forall o8:index. forall o9:index. forall o10:int. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:bool. forall result:bool.
-  forall result1:bool. (in_range2(x) -> (((((((o11 = length({
-  us_split_discrs1 = { rec__sum_elem__partitions__vector__capacity = p };
-  us_split_fields3 = { rec__sum_elem__partitions__vector = p1 } })) and
-  (in_range4(o11) and (((of_int(1) = true) and (o11 <= to_rep1(p))) or
-  ((not (of_int(1) = true)) and (o11 <= 10001))))) and ((o12 = o11) and
-  in_range2(o11))) and (o13 = (o12 - 1))) and (((x <= o13) and
-  (o14 = true)) or ((not (x <= o13)) and (o14 = false)))) and (((0 <= x) and
-  (result = o14)) or ((not (0 <= x)) and (result = false)))) ->
-  ((result = true) -> (((((o1 = ((-1) + length1(model__({ us_split_discrs1 =
-  { rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : index
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : index
+
+logic o10 : index
+
+logic o11 : index
+
+logic o12 : index
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : bool
+
+logic o18 : index
+
+logic o19 : index
+
+logic o20 : index
+
+logic o21 : index
+
+logic o22 : index
+
+logic o23 : index
+
+logic o24 : index
+
+logic o25 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(x)
+
+axiom H1 : ((o14 = length({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
+  rec__sum_elem__partitions__vector = p1 } })) and (in_range4(o14) and
+  (((of_int(1) = true) -> (o14 <= to_rep1(p))) and
+  ((not (of_int(1) = true)) -> (o14 <= 10001)))))
+
+axiom H2 : ((o15 = o14) and in_range2(o14))
+
+axiom H3 : (o16 = (o15 - 1))
+
+axiom H4 : (((x <= o16) -> (o17 = true)) and ((not (x <= o16)) ->
+  (o17 = false)))
+
+axiom H5 : (((0 <= x) -> (result = o17)) and ((not (0 <= x)) ->
+  (result = false)))
+
+axiom H6 : (result = true)
+
+axiom H7 : ((o1 = ((- 1) + length1(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
   rec__sum_elem__partitions__vector = p1 } })))) and (in_range5(o1) and
-  (o1 = ((-1) + length1(model__({ us_split_discrs1 = {
+  (o1 = ((- 1) + length1(model__({ us_split_discrs1 = {
   rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
-  rec__sum_elem__partitions__vector = p1 } })))))) and (((j <= o1) and
-  (o2 = true)) or ((not (j <= o1)) and (o2 = false)))) and ((((o = 0) and
-  (in_range3(o) and (o = 0))) and (((o <= j) and (o3 = true)) or
-  ((not (o <= j)) and (o3 = false)))) and (result1 = match_bool(o3, o2,
-  false)))) -> ((result1 = true) -> (((((((o4 = j) and in_range3(j)) and (({
-  us_split_fields1 = { rec__sum_elem__interval__first = o5;
-  rec__sum_elem__interval__last = o6 } } = get(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector = p1 } }))))))
+
+axiom H8 : (((j <= o1) -> (o2 = true)) and ((not (j <= o1)) -> (o2 = false)))
+
+axiom H9 : ((o = 0) and (in_range3(o) and (o = 0)))
+
+axiom H10 : (((o <= j) -> (o3 = true)) and ((not (o <= j)) -> (o3 = false)))
+
+axiom H11 : (result1 = match_bool(o3, o2, false))
+
+axiom H12 : (result1 = true)
+
+axiom H13 : ((o7 = j) and in_range3(j))
+
+axiom H14 : (({ us_split_fields1 = { rec__sum_elem__interval__first = o8;
+  rec__sum_elem__interval__last = o9 } } = get(model__({ us_split_discrs1 = {
   rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
-  rec__sum_elem__partitions__vector = p1 } }), o4)) and (bool_eq5({
-  us_split_fields1 = { rec__sum_elem__interval__first = o5;
-  rec__sum_elem__interval__last = o6 } }, get(model__({ us_split_discrs1 = {
+  rec__sum_elem__partitions__vector = p1 } }), o7)) and (bool_eq5({
+  us_split_fields1 = { rec__sum_elem__interval__first = o8;
+  rec__sum_elem__interval__last = o9 } }, get(model__({ us_split_discrs1 = {
   rec__sum_elem__partitions__vector__capacity = p }; us_split_fields3 = {
-  rec__sum_elem__partitions__vector = p1 } }), o4)) = true))) and
-  ((o5 = o7) and (o6 = o8))) and (o9 = o8)) and (o10 = to_rep(o9))) ->
-  in_range3(j))))))))
+  rec__sum_elem__partitions__vector = p1 } }), o7)) = true))
+
+axiom H15 : (o8 = o10)
+
+axiom H16 : (o9 = o11)
+
+axiom H17 : (o12 = o11)
+
+axiom H18 : (o13 = to_rep(o12))
+
+ (* File "a-cofove.ads", line 807, characters 0-0 *)
+goal WP_parameter_def : in_range3(j)

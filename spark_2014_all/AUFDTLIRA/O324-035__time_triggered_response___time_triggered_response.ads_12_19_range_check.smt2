@@ -61,6 +61,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const from Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const t Int)
 (assert (in_range1 from))
 (assert (<= 0 from))
 (assert (not (<= 0 0)))

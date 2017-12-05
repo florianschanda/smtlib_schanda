@@ -173,6 +173,7 @@
 (declare-const g2 Int)
 (declare-const g3 Int)
 (declare-const i Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const i1 Int)
 (declare-const i2 Int)

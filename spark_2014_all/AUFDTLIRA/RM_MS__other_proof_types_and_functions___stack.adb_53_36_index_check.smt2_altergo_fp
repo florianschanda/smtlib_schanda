@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -515,41 +515,162 @@ function index_range__ref___projection(a: index_range__ref) : index_range =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic my_stack__split_fields : (int,integer) farray
+
+logic my_stack__split_fields1 : pointer_range
+
+logic temp : int
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic us1 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : (int,integer) farray
+
+logic o13 : (int,integer) farray
+
+logic o14 : pointer_range
+
+logic temp___216 : (int,integer) farray
+
+logic temp___2161 : pointer_range
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : (int,integer) farray
+
+logic o18 : (int,integer) farray
+
+logic o19 : pointer_range
+
+logic temp___220 : (int,integer) farray
+
+logic temp___2201 : pointer_range
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : bool
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : (int,integer) farray
+
+logic result2 : pointer_range
+
+logic my_stack__split_fields2 : (int,integer) farray
+
+logic my_stack__split_fields3 : pointer_range
+
+logic result3 : (int,integer) farray
+
+logic result4 : pointer_range
+
+logic my_stack__split_fields4 : (int,integer) farray
+
+logic my_stack__split_fields5 : pointer_range
+
+logic my_stack__split_fields6 : (int,integer) farray
+
+logic my_stack__split_fields7 : pointer_range
+
+logic temp2 : int
+
+logic my_stack__split_fields8 : (int,integer) farray
+
+logic my_stack__split_fields9 : pointer_range
+
+logic temp3 : int
+
+axiom H : (2 <= count({ rec__stack__stack_type__s = my_stack__split_fields;
+  rec__stack__stack_type__pointer = my_stack__split_fields1 }))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(temp))
+
+axiom H2 : ((1 <= to_rep1(my_stack__split_fields1)) and
+  (to_rep1(my_stack__split_fields1) <= 100))
+
+axiom H3 : (o4 = to_rep1(my_stack__split_fields1))
+
+axiom H4 : (o5 = (my_stack__split_fields[o4]))
+
+axiom H5 : (o6 = to_rep(o5))
+
+axiom H6 : (result = temp)
+
+axiom H7 : (temp1 = o6)
+
+axiom H8 : ((1 <= (to_rep1(my_stack__split_fields1) - 1)) and
+  ((to_rep1(my_stack__split_fields1) - 1) <= 100))
+
+axiom H9 : (o7 = (to_rep1(my_stack__split_fields1) - 1))
+
+axiom H10 : (o8 = (my_stack__split_fields[o7]))
+
+axiom H11 : (o9 = to_rep(o8))
+
+axiom H12 : (to_rep(o10) = o9)
+
+axiom H13 : ((1 <= to_rep1(my_stack__split_fields1)) and
+  (to_rep1(my_stack__split_fields1) <= 100))
+
+axiom H14 : (o11 = to_rep1(my_stack__split_fields1))
+
+axiom H15 : (o12 = (my_stack__split_fields[o11 <- o10]))
+
+axiom H16 : (o12 = o13)
+
+axiom H17 : (my_stack__split_fields1 = o14)
+
+axiom H18 : (temp___216 = o13)
+
+axiom H19 : (temp___2161 = o14)
+
+axiom H20 : ((result1 = my_stack__split_fields) and
+  (result2 = my_stack__split_fields1))
+
+axiom H21 : (temp___216 = my_stack__split_fields2)
+
+axiom H22 : (temp___2161 = my_stack__split_fields3)
+
+axiom H23 : (to_rep(o15) = temp1)
+
  (* File "stack.ads", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall my_stack__split_fields:(int,integer) farray.
-  forall my_stack__split_fields1:pointer_range. forall temp:int.
-  forall o:int. forall o1:integer. forall o2:int. forall o3:int.
-  forall o4:integer. forall o5:int. forall o6:integer. forall o7:int.
-  forall o8:(int,integer) farray. forall o9:(int,integer) farray.
-  forall o10:pointer_range. forall temp___216:(int,integer) farray.
-  forall temp___2161:pointer_range. forall o11:integer. forall result:int.
-  forall temp1:int. forall result1:(int,integer) farray.
-  forall result2:pointer_range.
-  forall my_stack__split_fields2:(int,integer) farray.
-  forall my_stack__split_fields3:pointer_range. ((2 <= count({
-  rec__stack__stack_type__s = my_stack__split_fields;
-  rec__stack__stack_type__pointer = my_stack__split_fields1 })) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(temp)) ->
-  (((((((1 <= to_rep1(my_stack__split_fields1)) and
-  (to_rep1(my_stack__split_fields1) <= 100)) and
-  (o = to_rep1(my_stack__split_fields1))) and
-  (o1 = (my_stack__split_fields[o]))) and (o2 = to_rep(o1))) and (({
-  int__content = result } = { int__content = temp }) and (temp1 = o2))) ->
-  (((((((((((1 <= (to_rep1(my_stack__split_fields1) - 1)) and
-  ((to_rep1(my_stack__split_fields1) - 1) <= 100)) and
-  (o3 = (to_rep1(my_stack__split_fields1) - 1))) and
-  (o4 = (my_stack__split_fields[o3]))) and (o5 = to_rep(o4))) and
-  (to_rep(o6) = o5)) and ((((1 <= to_rep1(my_stack__split_fields1)) and
-  (to_rep1(my_stack__split_fields1) <= 100)) and
-  (o7 = to_rep1(my_stack__split_fields1))) and
-  (o8 = (my_stack__split_fields[o7 <- o6])))) and ((o8 = o9) and
-  (my_stack__split_fields1 = o10))) and ((temp___216 = o9) and
-  (temp___2161 = o10))) and (({ us_split_fields__content = {
-  rec__stack__stack_type__s = result1; rec__stack__stack_type__pointer =
-  result2 } } = { us_split_fields__content = { rec__stack__stack_type__s =
-  my_stack__split_fields; rec__stack__stack_type__pointer =
-  my_stack__split_fields1 } }) and
-  ((temp___216 = my_stack__split_fields2) and
-  (temp___2161 = my_stack__split_fields3)))) -> ((to_rep(o11) = temp1) ->
-  (1 <= (to_rep1(my_stack__split_fields3) - 1))))))))
+goal WP_parameter_def : (1 <= (to_rep1(my_stack__split_fields3) - 1))

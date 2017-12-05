@@ -1064,10 +1064,18 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x_new : t
+
+logic o : t
+
+axiom H : tqtisFinite(x)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(x_new))
 
 logic fliteral2 : t
 
@@ -1075,6 +1083,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x_new:t. (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(x_new)) -> tqtisFinite(mul(NearestTiesToEven, x, fliteral2)))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, x, fliteral2))

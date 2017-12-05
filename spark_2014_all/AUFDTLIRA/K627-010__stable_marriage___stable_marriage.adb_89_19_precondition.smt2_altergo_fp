@@ -415,6 +415,45 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic inverted : (int,ranking) farray
+
+logic stable_marriage__is_preferred_1__result : bool
+
+logic o : (int,ranking) farray
+
+logic temp___471 : (int,ranking) farray
+
+logic temp___472 : (int,ranking) farray
+
+logic o1 : ranking
+
+logic o2 : int
+
+logic result : (int,ranking) farray
+
+logic inverted1 : (int,ranking) farray
+
+logic result1 : bool
+
+logic stable_marriage__is_preferred_1__result1 : bool
+
+logic stable_marriage__is_preferred_1__result2 : bool
+
+logic stable_marriage__is_preferred_1__result3 : bool
+
+logic inverted2 : (int,ranking) farray
+
+logic stable_marriage__is_preferred_1__result4 : bool
+
+logic inverted3 : (int,ranking) farray
+
+logic stable_marriage__is_preferred_1__result5 : bool
+
+axiom H : in_range1(g1_a)
+
+axiom H1 : in_range1(g1_b)
+
+axiom H2 : (is_permutation_1(r1) = true)
+
  (* File "stable_marriage.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : (in_range1(g1_a) -> (in_range1(g1_b) ->
-  ((is_permutation_1(r1) = true) -> (is_permutation_1(r1) = true))))
+goal WP_parameter_def : (is_permutation_1(r1) = true)

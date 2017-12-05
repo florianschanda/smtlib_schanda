@@ -35,6 +35,7 @@
 (declare-fun mul (Int Int) Int)
 (declare-fun mul__function_guard (Int Int Int) Bool)
 (assert (forall ((x1 Int) (y Int)) (! (=> (and (and (dynamic_invariant x1 true true true) (dynamic_invariant y true true true)) (and (<= 0 x1) (and (<= x1 10) (and (<= 0 y) (<= y 10))))) (dynamic_invariant (mul x1 y) true false true)) :pattern ((mul x1 y)))))
+(declare-const o Int)
 (assert (in_range x))
 (assert (= x 3))
 (assert (not (<= 0 2)))

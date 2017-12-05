@@ -152,6 +152,7 @@
 (declare-const buffer (Array (_ BitVec 8) us_rep))
 (declare-const count Int)
 (declare-const next_out (_ BitVec 8))
+(declare-const o Int)
 (declare-const result time_type)
 (declare-const result1 temperature_type)
 (declare-const item__split_fields2 time_type)

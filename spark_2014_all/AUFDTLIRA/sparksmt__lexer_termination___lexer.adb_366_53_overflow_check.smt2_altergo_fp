@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -594,19 +594,19 @@ logic bool_eq11 : us_rep, us_rep -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep. forall b:us_rep [bool_eq11(a, b)].
-  (((((((to_rep4(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep4(((b).us_split_discrs1).rec__lexer__token__kind)) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line))) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
-  (lexer__token__value__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__lexer__token__value) = to_rep3(((b).us_split_fields1).rec__lexer__token__value)))) ->
-  (bool_eq11(a, b) = true)) and
-  ((not (((((to_rep4(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep4(((b).us_split_discrs1).rec__lexer__token__kind)) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line))) and
+  ((((to_rep4(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep4(((b).us_split_discrs1).rec__lexer__token__kind)) and
+  ((((to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line)) and
   (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
   (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
   (lexer__token__value__pred(a) ->
   (to_rep3(((a).us_split_fields1).rec__lexer__token__value) = to_rep3(((b).us_split_fields1).rec__lexer__token__value))))) ->
+  (bool_eq11(a, b) = true)) and
+  ((not ((to_rep4(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep4(((b).us_split_discrs1).rec__lexer__token__kind)) and
+  ((((to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line)) and
+  (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
+  (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
+  (lexer__token__value__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__lexer__token__value) = to_rep3(((b).us_split_fields1).rec__lexer__token__value)))))) ->
   (bool_eq11(a, b) = false))))
 
 logic value__size1 : int
@@ -1532,13 +1532,537 @@ type t47b__ref = { t47b__content : us_rep
 
 function t47b__ref___projection(a: t47b__ref) : us_rep = (a).t47b__content
 
+logic t__split_fields : natural
+
+logic t__split_fields1 : natural
+
+logic t__split_fields2 : natural
+
+logic t__split_fields3 : name_id
+
+logic t__split_discrs : token_kind
+
+logic current_idx : int
+
+logic first_line : int
+
+logic first_col : int
+
+logic first_idx : int
+
+logic n : int
+
+logic name_table : us_private
+
+logic o : int
+
+logic lexer__read_token__new_token__2__t_length__assume : int
+
+logic o1 : token_kind
+
+logic o2 : name_id
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : name_id
+
+logic o10 : token_kind
+
+logic temp___976 : token_kind
+
+logic temp___9761 : natural
+
+logic temp___9762 : natural
+
+logic temp___9763 : natural
+
+logic temp___9764 : name_id
+
+logic temp___9765 : bool
+
+logic usq_ : token_kind
+
+logic usq_1 : natural
+
+logic usq_2 : natural
+
+logic usq_3 : natural
+
+logic usq_4 : name_id
+
+logic usq_5 : bool
+
+logic temp___978 : token_kind
+
+logic temp___9781 : natural
+
+logic temp___9782 : natural
+
+logic temp___9783 : natural
+
+logic temp___9784 : name_id
+
+logic temp___9785 : bool
+
+logic o11 : token_kind
+
+logic o12 : name_id
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : natural
+
+logic o18 : natural
+
+logic o19 : name_id
+
+logic o20 : token_kind
+
+logic temp___979 : token_kind
+
+logic temp___9791 : natural
+
+logic temp___9792 : natural
+
+logic temp___9793 : natural
+
+logic temp___9794 : name_id
+
+logic temp___9795 : bool
+
+logic usq_6 : token_kind
+
+logic usq_7 : natural
+
+logic usq_8 : natural
+
+logic usq_9 : natural
+
+logic usq_10 : name_id
+
+logic usq_11 : bool
+
+logic temp___981 : token_kind
+
+logic temp___9811 : natural
+
+logic temp___9812 : natural
+
+logic temp___9813 : natural
+
+logic temp___9814 : name_id
+
+logic temp___9815 : bool
+
+logic o21 : token_kind
+
+logic o22 : name_id
+
+logic o23 : natural
+
+logic o24 : natural
+
+logic o25 : natural
+
+logic o26 : natural
+
+logic o27 : natural
+
+logic o28 : natural
+
+logic o29 : name_id
+
+logic o30 : token_kind
+
+logic temp___982 : token_kind
+
+logic temp___9821 : natural
+
+logic temp___9822 : natural
+
+logic temp___9823 : natural
+
+logic temp___9824 : name_id
+
+logic temp___9825 : bool
+
+logic usq_12 : token_kind
+
+logic usq_13 : natural
+
+logic usq_14 : natural
+
+logic usq_15 : natural
+
+logic usq_16 : name_id
+
+logic usq_17 : bool
+
+logic temp___984 : token_kind
+
+logic temp___9841 : natural
+
+logic temp___9842 : natural
+
+logic temp___9843 : natural
+
+logic temp___9844 : name_id
+
+logic temp___9845 : bool
+
+logic o31 : token_kind
+
+logic o32 : name_id
+
+logic o33 : natural
+
+logic o34 : natural
+
+logic o35 : natural
+
+logic o36 : natural
+
+logic o37 : natural
+
+logic o38 : natural
+
+logic o39 : name_id
+
+logic o40 : token_kind
+
+logic temp___985 : token_kind
+
+logic temp___9851 : natural
+
+logic temp___9852 : natural
+
+logic temp___9853 : natural
+
+logic temp___9854 : name_id
+
+logic temp___9855 : bool
+
+logic usq_18 : token_kind
+
+logic usq_19 : natural
+
+logic usq_20 : natural
+
+logic usq_21 : natural
+
+logic usq_22 : name_id
+
+logic usq_23 : bool
+
+logic temp___987 : token_kind
+
+logic temp___9871 : natural
+
+logic temp___9872 : natural
+
+logic temp___9873 : natural
+
+logic temp___9874 : name_id
+
+logic temp___9875 : bool
+
+logic o41 : token_kind
+
+logic o42 : name_id
+
+logic o43 : natural
+
+logic o44 : natural
+
+logic o45 : natural
+
+logic o46 : natural
+
+logic o47 : natural
+
+logic o48 : natural
+
+logic o49 : name_id
+
+logic o50 : token_kind
+
+logic temp___988 : token_kind
+
+logic temp___9881 : natural
+
+logic temp___9882 : natural
+
+logic temp___9883 : natural
+
+logic temp___9884 : name_id
+
+logic temp___9885 : bool
+
+logic usq_24 : token_kind
+
+logic usq_25 : natural
+
+logic usq_26 : natural
+
+logic usq_27 : natural
+
+logic usq_28 : name_id
+
+logic usq_29 : bool
+
+logic temp___990 : token_kind
+
+logic temp___9901 : natural
+
+logic temp___9902 : natural
+
+logic temp___9903 : natural
+
+logic temp___9904 : name_id
+
+logic temp___9905 : bool
+
+logic o51 : token_kind
+
+logic o52 : name_id
+
+logic o53 : natural
+
+logic o54 : natural
+
+logic o55 : natural
+
+logic o56 : natural
+
+logic o57 : natural
+
+logic o58 : natural
+
+logic o59 : name_id
+
+logic o60 : token_kind
+
+logic temp___991 : token_kind
+
+logic temp___9911 : natural
+
+logic temp___9912 : natural
+
+logic temp___9913 : natural
+
+logic temp___9914 : name_id
+
+logic temp___9915 : bool
+
+logic usq_30 : token_kind
+
+logic usq_31 : natural
+
+logic usq_32 : natural
+
+logic usq_33 : natural
+
+logic usq_34 : name_id
+
+logic usq_35 : bool
+
+logic temp___993 : token_kind
+
+logic temp___9931 : natural
+
+logic temp___9932 : natural
+
+logic temp___9933 : natural
+
+logic temp___9934 : name_id
+
+logic temp___9935 : bool
+
+logic o61 : int
+
+logic n1 : int
+
+logic name_table1 : us_private
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : natural
+
+logic result3 : name_id
+
+logic t__split_fields4 : natural
+
+logic t__split_fields5 : natural
+
+logic t__split_fields6 : natural
+
+logic t__split_fields7 : name_id
+
+logic result4 : token_kind
+
+logic t__split_discrs1 : token_kind
+
+logic result5 : natural
+
+logic result6 : natural
+
+logic result7 : natural
+
+logic result8 : name_id
+
+logic t__split_fields8 : natural
+
+logic t__split_fields9 : natural
+
+logic t__split_fields10 : natural
+
+logic t__split_fields11 : name_id
+
+logic result9 : token_kind
+
+logic t__split_discrs2 : token_kind
+
+logic result10 : natural
+
+logic result11 : natural
+
+logic result12 : natural
+
+logic result13 : name_id
+
+logic t__split_fields12 : natural
+
+logic t__split_fields13 : natural
+
+logic t__split_fields14 : natural
+
+logic t__split_fields15 : name_id
+
+logic result14 : token_kind
+
+logic t__split_discrs3 : token_kind
+
+logic result15 : natural
+
+logic result16 : natural
+
+logic result17 : natural
+
+logic result18 : name_id
+
+logic t__split_fields16 : natural
+
+logic t__split_fields17 : natural
+
+logic t__split_fields18 : natural
+
+logic t__split_fields19 : name_id
+
+logic result19 : token_kind
+
+logic t__split_discrs4 : token_kind
+
+logic result20 : natural
+
+logic result21 : natural
+
+logic result22 : natural
+
+logic result23 : name_id
+
+logic t__split_fields20 : natural
+
+logic t__split_fields21 : natural
+
+logic t__split_fields22 : natural
+
+logic t__split_fields23 : name_id
+
+logic result24 : token_kind
+
+logic t__split_discrs5 : token_kind
+
+logic result25 : natural
+
+logic result26 : natural
+
+logic result27 : natural
+
+logic result28 : name_id
+
+logic t__split_fields24 : natural
+
+logic t__split_fields25 : natural
+
+logic t__split_fields26 : natural
+
+logic t__split_fields27 : name_id
+
+logic result29 : token_kind
+
+logic t__split_discrs6 : token_kind
+
+logic t__split_fields28 : natural
+
+logic t__split_fields29 : natural
+
+logic t__split_fields30 : natural
+
+logic t__split_fields31 : name_id
+
+logic t__split_discrs7 : token_kind
+
+logic n2 : int
+
+logic name_table2 : us_private
+
+logic t__split_fields32 : natural
+
+logic t__split_fields33 : natural
+
+logic t__split_fields34 : natural
+
+logic t__split_fields35 : name_id
+
+logic t__split_discrs8 : token_kind
+
+logic n3 : int
+
+logic name_table3 : us_private
+
+axiom H : in_range2(current_idx)
+
+axiom H1 : in_range2(first_line)
+
+axiom H2 : in_range2(first_col)
+
+axiom H3 : in_range2(first_idx)
+
+axiom H4 : in_range7(kind)
+
+axiom H5 : dynamic_property(1, 2147483647, to_rep2(first(value1)),
+  to_rep2(last(value1)))
+
+axiom H6 : (((not (t__attr__constrained = true)) and
+  (invariant__(name_table) = true)) and (first_idx <= current_idx))
+
  (* File "lexer.ads", line 79, characters 0-0 *)
-goal WP_parameter_def :
-  (forall current_idx:int. forall first_line:int. forall first_col:int.
-  forall first_idx:int. forall name_table:us_private.
-  (in_range2(current_idx) -> (in_range2(first_line) ->
-  (in_range2(first_col) -> (in_range2(first_idx) -> (in_range7(kind) ->
-  (dynamic_property(1, 2147483647, to_rep2(first(value1)),
-  to_rep2(last(value1))) -> ((((not (t__attr__constrained = true)) and
-  (invariant__(name_table) = true)) and (first_idx <= current_idx)) ->
-  in_range1((current_idx - first_idx))))))))))
+goal WP_parameter_def : in_range1((current_idx - first_idx))

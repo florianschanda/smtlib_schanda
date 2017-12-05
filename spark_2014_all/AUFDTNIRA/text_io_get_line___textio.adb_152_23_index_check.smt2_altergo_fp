@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -217,7 +217,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,7 +555,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type int__
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -593,7 +593,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type file_descr
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1444,21 +1444,242 @@ axiom fpeek__def_axiom1 :
   (fpeek1(stream, helpers__cur_position,
   helpers__the_file) = to_rep((helpers__the_file[helpers__cur_position]))))))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_file:(int,character) farray. forall cur_position:int.
-  forall file__split_fields:file_descr. forall file__split_fields1:bool.
-  forall file__split_fields2:bool. forall file__split_fields3:count.
-  forall file__split_fields4:count. forall file__split_fields5:count.
-  forall file__split_fields6:bool. forall num:int. forall idx:int.
-  forall o:int. forall o1:character. forall o2:int. forall o3:bool.
-  forall result:bool. (in_range2(cur_position_at_start) ->
-  (dynamic_property(1, 2147483647, to_rep1(first(s1)), to_rep1(last(s1))) ->
-  (dynamic_property(1, 2147483647, to_rep1(result____first),
-  to_rep1(result____last)) -> (((0 <= 2147483647) -> in_range4(num)) ->
-  (in_range2(cur_position) -> (in_range3(eof_ch) -> ((mod(eof,
-  256) = eof_ch) -> (in_range5(eof) -> ((((o3 = end_of_file({
-  us_split_fields1 = { rec__textio__file_type__descr = file__split_fields;
+logic the_file : (int,character) farray
+
+logic cur_position : int
+
+logic file__split_fields : file_descr
+
+logic file__split_fields1 : bool
+
+logic file__split_fields2 : bool
+
+logic file__split_fields3 : count
+
+logic file__split_fields4 : count
+
+logic file__split_fields5 : count
+
+logic file__split_fields6 : bool
+
+logic result__ : (int,character) farray
+
+logic num : int
+
+logic last10 : int
+
+logic idx : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : (int,character) farray
+
+logic temp___655 : (int,character) farray
+
+logic temp___6551 : t2
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic textio__get_line_function__get_rest__B_1__r__assume : (int,character) farray
+
+logic textio__get_line_function__get_rest__B_1__r__assume1 : t
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic temp___649 : (int,character) farray
+
+logic temp___6491 : t3
+
+logic o18 : (int,character) farray
+
+logic temp___651 : (int,character) farray
+
+logic temp___6511 : t3
+
+logic temp___652 : (int,character) farray
+
+logic temp___6521 : t3
+
+logic o19 : (int,character) farray
+
+logic temp___644 : (int,character) farray
+
+logic temp___6441 : t4
+
+logic o20 : (int,character) farray
+
+logic temp___646 : (int,character) farray
+
+logic temp___6461 : t4
+
+logic temp___647 : (int,character) farray
+
+logic temp___6471 : t4
+
+logic o21 : (int,character) farray
+
+logic idx1 : int
+
+logic the_file1 : (int,character) farray
+
+logic result : bool
+
+logic cur_position1 : int
+
+logic file__split_fields7 : file_descr
+
+logic file__split_fields8 : bool
+
+logic file__split_fields9 : bool
+
+logic file__split_fields10 : count
+
+logic file__split_fields11 : count
+
+logic file__split_fields12 : count
+
+logic file__split_fields13 : bool
+
+logic buffer : (int,character) farray
+
+logic last11 : int
+
+logic result1 : int
+
+logic num1 : int
+
+logic result2 : (int,character) farray
+
+logic result__1 : (int,character) farray
+
+logic result3 : bool
+
+logic result4 : (int,character) farray
+
+logic result__2 : (int,character) farray
+
+logic the_file2 : (int,character) farray
+
+logic cur_position2 : int
+
+logic file__split_fields14 : file_descr
+
+logic file__split_fields15 : bool
+
+logic file__split_fields16 : bool
+
+logic file__split_fields17 : count
+
+logic file__split_fields18 : count
+
+logic file__split_fields19 : count
+
+logic file__split_fields20 : bool
+
+logic result__3 : (int,character) farray
+
+logic num2 : int
+
+logic the_file3 : (int,character) farray
+
+logic cur_position3 : int
+
+logic file__split_fields21 : file_descr
+
+logic file__split_fields22 : bool
+
+logic file__split_fields23 : bool
+
+logic file__split_fields24 : count
+
+logic file__split_fields25 : count
+
+logic file__split_fields26 : count
+
+logic file__split_fields27 : bool
+
+logic result__4 : (int,character) farray
+
+logic num3 : int
+
+logic buffer1 : (int,character) farray
+
+logic last12 : int
+
+logic the_file4 : (int,character) farray
+
+logic cur_position4 : int
+
+logic file__split_fields28 : file_descr
+
+logic file__split_fields29 : bool
+
+logic file__split_fields30 : bool
+
+logic file__split_fields31 : count
+
+logic file__split_fields32 : count
+
+logic file__split_fields33 : count
+
+logic file__split_fields34 : bool
+
+logic result__5 : (int,character) farray
+
+logic num4 : int
+
+logic buffer2 : (int,character) farray
+
+logic last13 : int
+
+axiom H : in_range2(cur_position_at_start)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(result____first),
+  to_rep1(result____last))
+
+axiom H3 : ((0 <= 2147483647) -> in_range4(num))
+
+axiom H4 : in_range2(cur_position)
+
+axiom H5 : in_range3(eof_ch)
+
+axiom H6 : (mod(eof, 256) = eof_ch)
+
+axiom H7 : in_range5(eof)
+
+axiom H8 : ((o3 = end_of_file({ us_split_fields1 = {
+  rec__textio__file_type__descr = file__split_fields;
   rec__textio__file_type__before_lm = file__split_fields1;
   rec__textio__file_type__before_lm_pm = file__split_fields2;
   rec__textio__file_type__col = file__split_fields3;
@@ -1473,14 +1694,32 @@ goal WP_parameter_def :
   rec__textio__file_type__line = file__split_fields4;
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
-  cur_position, the_file) = eof))) and (((not (o3 = true)) and
-  (result = true)) or ((o3 = true) and (result = false)))) ->
-  ((result = true) -> ((to_rep1(result____first) = 1) ->
-  ((to_rep1(result____last) = 2147483647) ->
-  ((cur_position = (((cur_position_at_start + to_rep1(last(s1))) - to_rep1(first(s1))) + 1)) ->
-  (((to_rep1(first(s1)) <= idx) and (idx <= to_rep1(last(s1)))) ->
-  ((((((1 <= ((idx - to_rep1(first(s1))) + cur_position_at_start)) and
-  (((idx - to_rep1(first(s1))) + cur_position_at_start) <= 2147483647)) and
-  (o = ((idx - to_rep1(first(s1))) + cur_position_at_start))) and
-  (o1 = (the_file[o]))) and (o2 = to_rep(o1))) ->
-  (to_rep1(first(s1)) <= idx)))))))))))))))))
+  cur_position, the_file) = eof)))
+
+axiom H9 : (((not (o3 = true)) -> (result = true)) and ((o3 = true) ->
+  (result = false)))
+
+axiom H10 : (result = true)
+
+axiom H11 : (to_rep1(result____first) = 1)
+
+axiom H12 : (to_rep1(result____last) = 2147483647)
+
+axiom H13 :
+  (cur_position = (((cur_position_at_start + to_rep1(last(s1))) - to_rep1(first(s1))) + 1))
+
+axiom H14 : (to_rep1(first(s1)) <= idx)
+
+axiom H15 : (idx <= to_rep1(last(s1)))
+
+axiom H16 : ((1 <= ((idx - to_rep1(first(s1))) + cur_position_at_start)) and
+  (((idx - to_rep1(first(s1))) + cur_position_at_start) <= 2147483647))
+
+axiom H17 : (o = ((idx - to_rep1(first(s1))) + cur_position_at_start))
+
+axiom H18 : (o1 = (the_file[o]))
+
+axiom H19 : (o2 = to_rep(o1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(s1)) <= idx)

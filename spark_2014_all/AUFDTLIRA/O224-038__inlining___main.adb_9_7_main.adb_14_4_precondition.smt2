@@ -244,6 +244,8 @@
 (declare-const v__split_fields1 (Array Int natural))
 (declare-const v__split_fields2 t1)
 (declare-const us Int)
+(declare-const priv__init__p__fields (Array Int natural))
+(declare-const priv__init__p__fields1 t)
 (assert (in_range max))
 (assert (and (= us max) (in_range max)))
 (assert (= (to_rep v__split_fields) max))

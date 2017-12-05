@@ -412,13 +412,13 @@ logic bool_eq4 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq4(a, b)].
-  (((((to_rep(((a).us_split_discrs2).rec__record_equality__root__c) = to_rep(((b).us_split_discrs2).rec__record_equality__root__c)) and
-  (to_rep(((a).us_split_fields3).rec__record_equality__child__f2) = to_rep(((b).us_split_fields3).rec__record_equality__child__f2))) and
-  (to_rep(((a).us_split_fields3).rec__record_equality__root__f11) = to_rep(((b).us_split_fields3).rec__record_equality__root__f11))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs2).rec__record_equality__root__c) = to_rep(((b).us_split_discrs2).rec__record_equality__root__c)) and
-  (to_rep(((a).us_split_fields3).rec__record_equality__child__f2) = to_rep(((b).us_split_fields3).rec__record_equality__child__f2))) and
+  ((((to_rep(((a).us_split_discrs2).rec__record_equality__root__c) = to_rep(((b).us_split_discrs2).rec__record_equality__root__c)) and
+  ((to_rep(((a).us_split_fields3).rec__record_equality__child__f2) = to_rep(((b).us_split_fields3).rec__record_equality__child__f2)) and
   (to_rep(((a).us_split_fields3).rec__record_equality__root__f11) = to_rep(((b).us_split_fields3).rec__record_equality__root__f11)))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs2).rec__record_equality__root__c) = to_rep(((b).us_split_discrs2).rec__record_equality__root__c)) and
+  ((to_rep(((a).us_split_fields3).rec__record_equality__child__f2) = to_rep(((b).us_split_fields3).rec__record_equality__child__f2)) and
+  (to_rep(((a).us_split_fields3).rec__record_equality__root__f11) = to_rep(((b).us_split_fields3).rec__record_equality__root__f11))))) ->
   (bool_eq4(a, b) = false))))
 
 logic us_tag2 : int
@@ -522,6 +522,20 @@ logic c_pu1__split_discrs : natural
 logic c_pu1__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic r_pu1__split_fields : natural
+
+logic r_pu1__split_fields1 : us_private
+
+logic c_pu1__split_fields : natural
+
+logic c_pu1__split_fields1 : natural
+
+logic c_pu1__split_fields2 : us_private
+
+logic us : int
+
+logic us1 : int
 
  (* File "record_equality.adb", line 20, characters 0-0 *)
 goal WP_parameter_def : in_range1(0)

@@ -133,7 +133,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -437,14 +437,41 @@ type my_array__ref = { my_array__content : us_t
 function my_array__ref___projection(a: my_array__ref) : us_t =
   (a).my_array__content
 
- (* File "use_stack.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall top:int. forall us:int. forall o:int.
-  forall result:int. forall top1:int.
-  (forall result1:bool. ((in_range1(c) and ((c = max) and (in_range1(max) and
-  (((((us = 0) and dynamic_property(0, last, 0)) and (o = 0)) and
-  ((result = top) and (top1 = o))) and (dynamic_property(0, last, top1) and
-  ((dynamic_property2(1, max, to_rep(content__first),
+logic c : int
+
+logic top : int
+
+logic us : int
+
+logic o : int
+
+logic result : int
+
+logic top1 : int
+
+logic result1 : bool
+
+axiom H : in_range1(c)
+
+axiom H1 : (c = max)
+
+axiom H2 : in_range1(max)
+
+axiom H3 : ((us = 0) and dynamic_property(0, last, 0))
+
+axiom H4 : (o = 0)
+
+axiom H5 : (result = top)
+
+axiom H6 : (top1 = o)
+
+axiom H7 : dynamic_property(0, last, top1)
+
+axiom H8 : (dynamic_property2(1, max, to_rep(content__first),
   to_rep(content__last)) and ((to_rep(content__first) = 1) and
-  (to_rep(content__last) = max))) and ((result1 = is_empty(top1)) and
-  ((result1 = true) <-> (top1 = 0))))))))) -> (is_empty(top1) = true))))
+  (to_rep(content__last) = max)))
+
+axiom H9 : ((result1 = is_empty(top1)) and ((result1 = true) <-> (top1 = 0)))
+
+ (* File "use_stack.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : (is_empty(top1) = true)

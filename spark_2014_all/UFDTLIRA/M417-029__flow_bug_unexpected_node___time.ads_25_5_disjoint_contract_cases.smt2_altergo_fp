@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -385,22 +385,348 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 axiom max__def_axiom : ((max = of_rep(2147483647)) and
   ((max1 = of_rep1(59)) and (max2 = of_rep2(59))))
 
+logic result____split_fields : natural
+
+logic result____split_fields1 : minutes_t
+
+logic result____split_fields2 : seconds_t
+
+logic time__t_increment__result : natural
+
+logic time__t_increment__result1 : minutes_t
+
+logic time__t_increment__result2 : seconds_t
+
+logic o : seconds_t
+
+logic o1 : minutes_t
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : minutes_t
+
+logic o5 : seconds_t
+
+logic temp___166 : natural
+
+logic temp___1661 : minutes_t
+
+logic temp___1662 : seconds_t
+
+logic o6 : int
+
+logic o7 : seconds_t
+
+logic o8 : natural
+
+logic o9 : minutes_t
+
+logic o10 : seconds_t
+
+logic temp___165 : natural
+
+logic temp___1651 : minutes_t
+
+logic temp___1652 : seconds_t
+
+logic o11 : seconds_t
+
+logic o12 : natural
+
+logic o13 : minutes_t
+
+logic o14 : seconds_t
+
+logic temp___157 : natural
+
+logic temp___1571 : minutes_t
+
+logic temp___1572 : seconds_t
+
+logic o15 : int
+
+logic o16 : minutes_t
+
+logic o17 : natural
+
+logic o18 : minutes_t
+
+logic o19 : seconds_t
+
+logic temp___163 : natural
+
+logic temp___1631 : minutes_t
+
+logic temp___1632 : seconds_t
+
+logic o20 : minutes_t
+
+logic o21 : natural
+
+logic o22 : minutes_t
+
+logic o23 : seconds_t
+
+logic temp___159 : natural
+
+logic temp___1591 : minutes_t
+
+logic temp___1592 : seconds_t
+
+logic o24 : int
+
+logic o25 : natural
+
+logic o26 : natural
+
+logic o27 : minutes_t
+
+logic o28 : seconds_t
+
+logic temp___161 : natural
+
+logic temp___1611 : minutes_t
+
+logic temp___1612 : seconds_t
+
+logic o29 : int
+
+logic result : natural
+
+logic result1 : minutes_t
+
+logic result2 : seconds_t
+
+logic result____split_fields3 : natural
+
+logic result____split_fields4 : minutes_t
+
+logic result____split_fields5 : seconds_t
+
+logic result3 : natural
+
+logic result4 : minutes_t
+
+logic result5 : seconds_t
+
+logic result____split_fields6 : natural
+
+logic result____split_fields7 : minutes_t
+
+logic result____split_fields8 : seconds_t
+
+logic result6 : natural
+
+logic result7 : minutes_t
+
+logic result8 : seconds_t
+
+logic time__t_increment__result3 : natural
+
+logic time__t_increment__result4 : minutes_t
+
+logic time__t_increment__result5 : seconds_t
+
+logic result9 : natural
+
+logic result10 : minutes_t
+
+logic result11 : seconds_t
+
+logic result____split_fields9 : natural
+
+logic result____split_fields10 : minutes_t
+
+logic result____split_fields11 : seconds_t
+
+logic result12 : natural
+
+logic result13 : minutes_t
+
+logic result14 : seconds_t
+
+logic result____split_fields12 : natural
+
+logic result____split_fields13 : minutes_t
+
+logic result____split_fields14 : seconds_t
+
+logic result15 : natural
+
+logic result16 : minutes_t
+
+logic result17 : seconds_t
+
+logic time__t_increment__result6 : natural
+
+logic time__t_increment__result7 : minutes_t
+
+logic time__t_increment__result8 : seconds_t
+
+logic result18 : natural
+
+logic result19 : minutes_t
+
+logic result20 : seconds_t
+
+logic result____split_fields15 : natural
+
+logic result____split_fields16 : minutes_t
+
+logic result____split_fields17 : seconds_t
+
+logic result21 : natural
+
+logic result22 : minutes_t
+
+logic result23 : seconds_t
+
+logic result____split_fields18 : natural
+
+logic result____split_fields19 : minutes_t
+
+logic result____split_fields20 : seconds_t
+
+logic result24 : natural
+
+logic result25 : minutes_t
+
+logic result26 : seconds_t
+
+logic time__t_increment__result9 : natural
+
+logic time__t_increment__result10 : minutes_t
+
+logic time__t_increment__result11 : seconds_t
+
+logic result____split_fields21 : natural
+
+logic result____split_fields22 : minutes_t
+
+logic result____split_fields23 : seconds_t
+
+logic time__t_increment__result12 : natural
+
+logic time__t_increment__result13 : minutes_t
+
+logic time__t_increment__result14 : seconds_t
+
+logic result____split_fields24 : natural
+
+logic result____split_fields25 : minutes_t
+
+logic result____split_fields26 : seconds_t
+
+logic time__t_increment__result15 : natural
+
+logic time__t_increment__result16 : minutes_t
+
+logic time__t_increment__result17 : seconds_t
+
+logic result____split_fields27 : natural
+
+logic result____split_fields28 : minutes_t
+
+logic result____split_fields29 : seconds_t
+
+logic time__t_increment__result18 : natural
+
+logic time__t_increment__result19 : minutes_t
+
+logic time__t_increment__result20 : seconds_t
+
+logic result____split_fields30 : natural
+
+logic result____split_fields31 : minutes_t
+
+logic result____split_fields32 : seconds_t
+
+logic time__t_increment__result21 : natural
+
+logic time__t_increment__result22 : minutes_t
+
+logic time__t_increment__result23 : seconds_t
+
+logic result____split_fields33 : natural
+
+logic result____split_fields34 : minutes_t
+
+logic result____split_fields35 : seconds_t
+
+logic time__t_increment__result24 : natural
+
+logic time__t_increment__result25 : minutes_t
+
+logic time__t_increment__result26 : seconds_t
+
+logic result____split_fields36 : natural
+
+logic result____split_fields37 : minutes_t
+
+logic result____split_fields38 : seconds_t
+
+logic time__t_increment__result27 : natural
+
+logic time__t_increment__result28 : minutes_t
+
+logic time__t_increment__result29 : seconds_t
+
+logic result____split_fields39 : natural
+
+logic result____split_fields40 : minutes_t
+
+logic result____split_fields41 : seconds_t
+
+logic time__t_increment__result30 : natural
+
+logic time__t_increment__result31 : minutes_t
+
+logic time__t_increment__result32 : seconds_t
+
+logic result____split_fields42 : natural
+
+logic result____split_fields43 : minutes_t
+
+logic result____split_fields44 : seconds_t
+
+logic time__t_increment__result33 : natural
+
+logic time__t_increment__result34 : minutes_t
+
+logic time__t_increment__result35 : seconds_t
+
+axiom H : (to_rep2(o) = 59)
+
+axiom H1 : (to_rep1(o1) = 59)
+
+axiom H2 : (to_rep(o2) = 2147483647)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (o = o5)
+
+axiom H6 : (temp___166 = o3)
+
+axiom H7 : (temp___1661 = o4)
+
+axiom H8 : (temp___1662 = o5)
+
+axiom H9 : ((temp___166 = max) and ((temp___1661 = max1) and
+  (temp___1662 = max2)))
+
+axiom H10 : (not (bool_eq6({ us_split_fields1 = { rec__time__t__hours = x;
+  rec__time__t__minutes = x1; rec__time__t__seconds = x2 } }, {
+  us_split_fields1 = { rec__time__t__hours = max; rec__time__t__minutes =
+  max1; rec__time__t__seconds = max2 } }) = true))
+
  (* File "time.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:seconds_t. forall o1:minutes_t. forall o2:natural.
-  forall o3:natural. forall o4:minutes_t. forall o5:seconds_t.
-  forall temp___166:natural. forall temp___1661:minutes_t.
-  forall temp___1662:seconds_t. (((((to_rep2(o) = 59) and
-  ((to_rep1(o1) = 59) and ((to_rep(o2) = 2147483647) and ((o2 = o3) and
-  ((o1 = o4) and (o = o5)))))) and ((temp___166 = o3) and
-  ((temp___1661 = o4) and (temp___1662 = o5)))) and ((temp___166 = max) and
-  ((temp___1661 = max1) and (temp___1662 = max2)))) -> ((not (bool_eq6({
-  us_split_fields1 = { rec__time__t__hours = x; rec__time__t__minutes = x1;
-  rec__time__t__seconds = x2 } }, { us_split_fields1 = {
-  rec__time__t__hours = max; rec__time__t__minutes = max1;
-  rec__time__t__seconds = max2 } }) = true)) -> (((bool_lt(to_rep2(x2),
-  59) = true) -> (((match_bool(bool_eq(to_rep2(x2), 59), bool_lt(to_rep1(x1),
-  59), false) = true) -> (((match_bool(bool_eq(to_rep2(x2), 59),
+goal WP_parameter_def : (((bool_lt(to_rep2(x2), 59) = true) ->
+  (((match_bool(bool_eq(to_rep2(x2), 59), bool_lt(to_rep1(x1), 59),
+  false) = true) -> (((match_bool(bool_eq(to_rep2(x2), 59),
   bool_eq(to_rep1(x1), 59), false) = true) -> ((((0 + 1) + 1) + 1) <= 1)) and
   ((not (match_bool(bool_eq(to_rep2(x2), 59), bool_eq(to_rep1(x1), 59),
   false) = true)) -> ((((0 + 1) + 1) + 0) <= 1)))) and
@@ -419,4 +745,4 @@ goal WP_parameter_def :
   false) = true)) -> (((match_bool(bool_eq(to_rep2(x2), 59),
   bool_eq(to_rep1(x1), 59), false) = true) -> ((((0 + 0) + 0) + 1) <= 1)) and
   ((not (match_bool(bool_eq(to_rep2(x2), 59), bool_eq(to_rep1(x1), 59),
-  false) = true)) -> ((((0 + 0) + 0) + 0) <= 1))))))))))
+  false) = true)) -> ((((0 + 0) + 0) + 0) <= 1)))))))

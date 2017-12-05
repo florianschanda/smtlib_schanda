@@ -114,6 +114,7 @@
 (declare-const present_sliprate Int)
 (declare-const rudder_movement Int)
 (declare-const target_angle Int)
+(declare-const o Int)
 (declare-const ap__heading__yaw__rate__calc_yawrate__present_yawrate Int)
 (declare-const result Int)
 (declare-const present_sliprate1 Int)

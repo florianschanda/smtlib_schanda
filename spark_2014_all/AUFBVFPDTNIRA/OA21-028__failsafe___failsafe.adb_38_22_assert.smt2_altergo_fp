@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1835,11 +1835,100 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic battery_level_at : (t,battery_level_type) farray
+
+logic current_time : t
+
+logic counter : t
+
+logic o : t
+
+logic o1 : battery_level_type
+
+logic o2 : (t,battery_level_type) farray
+
+logic o3 : t
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : t
+
+logic o7 : t
+
+logic temp___280 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic temp___282 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic temp___279 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : battery_level_type
+
+logic o15 : t1
+
+logic result : t
+
+logic current_time1 : t
+
+logic result1 : (t,battery_level_type) farray
+
+logic battery_level_at1 : (t,battery_level_type) farray
+
+logic result2 : t
+
+logic counter1 : t
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : t
+
+logic counter2 : t
+
+logic battery_level_at2 : (t,battery_level_type) farray
+
+logic current_time2 : t
+
+logic counter3 : t
+
+logic battery_level_at3 : (t,battery_level_type) farray
+
+logic current_time3 : t
+
+logic counter4 : t
+
+axiom H : in_range4(counter)
+
+axiom H1 : in_range2(current_time)
+
+axiom H2 : tqtisFinite(battery_level)
+
+axiom H3 : (is_valid(battery_level_at, current_time, counter) = true)
+
+axiom H4 : (counter = c)
+
+axiom H5 : true
+
  (* File "failsafe.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. forall counter:t. (in_range4(counter) ->
-  (in_range2(current_time) -> (tqtisFinite(battery_level) ->
-  ((is_valid(battery_level_at, current_time, counter) = true) ->
-  ((counter = c) -> (counter = time_below_threshold(battery_level_at,
-  current_time))))))))
+goal WP_parameter_def : (counter = time_below_threshold(battery_level_at,
+  current_time))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -384,7 +384,7 @@ logic a31 : t
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom a1__def_axiom : ((a1 = null_concat__p_bad__a1__aggregate_def(0)) and
-  (a11 = mk(1, (-5))))
+  (a11 = mk(1, (- 5))))
 
 axiom a2__def_axiom : ((a2 = null_concat__p_bad__a2__aggregate_def(1, 2)) and
   (a21 = mk(1, 10)))
@@ -407,20 +407,51 @@ axiom a3__def_axiom : (((length({ elts = a1; rt = a11 }) = 0) ->
   ((not (to_rep(first(a21)) <= to_rep(last(a21)))) ->
   (a31 = mk(to_rep(first(a11)), ((to_rep(first(a11)) + (0 + 0)) - 1))))))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic null_concat__p_bad__a3__assume : (int,integer) farray
+
+logic null_concat__p_bad__a3__assume1 : t
+
+axiom H : ((null_concat__p_bad__a1__aggregate_def(0) = a1) and (mk(1,
+  (- 5)) = a11))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a11)),
+  to_rep(last(a11)))
+
+axiom H2 : ((null_concat__p_bad__a2__aggregate_def(1, 2) = a2) and (mk(1,
+  10) = a21))
+
+axiom H3 : dynamic_property((- 2147483648), 2147483647, to_rep(first(a21)),
+  to_rep(last(a21)))
+
+axiom H4 : (not (length({ elts = a1; rt = a11 }) = 0))
+
+axiom H5 : ((to_rep(first(a21)) <= to_rep(last(a21))) ->
+  (o = ((to_rep(last(a21)) - to_rep(first(a21))) + 1)))
+
+axiom H6 : ((not (to_rep(first(a21)) <= to_rep(last(a21)))) -> (o = 0))
+
+axiom H7 : ((to_rep(first(a11)) <= to_rep(last(a11))) ->
+  (o1 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1)))
+
+axiom H8 : ((not (to_rep(first(a11)) <= to_rep(last(a11)))) -> (o1 = 0))
+
+axiom H9 : (o2 = (o1 + o))
+
+axiom H10 : (o3 = (to_rep(first(a11)) + o2))
+
+axiom H11 : (o4 = (o3 - 1))
+
  (* File "null_concat.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  (((null_concat__p_bad__a1__aggregate_def(0) = a1) and (mk(1,
-  (-5)) = a11)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a11)), to_rep(last(a11))) ->
-  (((null_concat__p_bad__a2__aggregate_def(1, 2) = a2) and (mk(1,
-  10) = a21)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a21)), to_rep(last(a21))) -> ((not (length({ elts = a1; rt =
-  a11 }) = 0)) -> (((((((to_rep(first(a21)) <= to_rep(last(a21))) and
-  (o = ((to_rep(last(a21)) - to_rep(first(a21))) + 1))) or
-  ((not (to_rep(first(a21)) <= to_rep(last(a21)))) and (o = 0))) and
-  ((((to_rep(first(a11)) <= to_rep(last(a11))) and
-  (o1 = ((to_rep(last(a11)) - to_rep(first(a11))) + 1))) or
-  ((not (to_rep(first(a11)) <= to_rep(last(a11)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep(first(a11)) + o2))) and
-  (o4 = (o3 - 1))) -> in_range1(o4))))))))
+goal WP_parameter_def : in_range1(o4)

@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -245,12 +245,53 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : map
+
+logic o : value
+
+logic o1 : map
+
+logic o2 : value
+
+logic o3 : map
+
+logic result : map
+
+logic a1 : map
+
+logic result1 : map
+
+logic a2 : map
+
+logic a3 : map
+
+logic a4 : map
+
+axiom H : in_range(i)
+
+axiom H1 : in_range(j)
+
+axiom H2 : (not (i = j))
+
+axiom H3 : (to_rep(o) = 23)
+
+axiom H4 : (o1 = set(a, i, j, o))
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = o1)
+
+axiom H7 : (to_rep(o2) = 42)
+
+axiom H8 : (o3 = set(a1, j, i, o2))
+
+axiom H9 : (result1 = a1)
+
+axiom H10 : (a2 = o3)
+
+axiom H11 : (a2 = a3)
+
+axiom H12 : (a4 = a2)
+
  (* File "arrays_multidim.adb", line 111, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:map. forall o:value. forall o1:map. forall o2:value.
-  forall o3:map. forall result:map. forall a1:map. forall result1:map.
-  forall a2:map. forall a3:map. forall a4:map. ((in_range(i) and
-  (in_range(j) and ((not (i = j)) and (((((to_rep(o) = 23) and (o1 = set(a,
-  i, j, o))) and ((result = a) and (a1 = o1))) and (((to_rep(o2) = 42) and
-  (o3 = set(a1, j, i, o2))) and ((result1 = a1) and (a2 = o3)))) and
-  ((a2 = a3) and (a4 = a2)))))) -> (not (to_rep(get(a3, i, j)) = 23))))
+goal WP_parameter_def : (not (to_rep(get(a3, i, j)) = 23))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -137,12 +137,181 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic i : int
+
+logic j : int
+
+logic temp___169 : int
+
+logic temp___168 : int
+
+logic temp___171 : int
+
+logic temp___170 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : int
+
+logic j2 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : int
+
+logic i2 : int
+
+logic i3 : int
+
+logic j4 : int
+
+logic temp___1711 : int
+
+logic temp___1701 : int
+
+logic result5 : int
+
+logic temp___1712 : int
+
+logic result6 : int
+
+logic temp___1702 : int
+
+logic result7 : int
+
+logic j5 : int
+
+logic result8 : int
+
+logic j6 : int
+
+logic result9 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic j7 : int
+
+logic i6 : int
+
+logic j8 : int
+
+logic i7 : int
+
+logic j9 : int
+
+logic i8 : int
+
+logic j10 : int
+
+logic result10 : int
+
+logic i9 : int
+
+logic result11 : int
+
+logic j11 : int
+
+logic result12 : int
+
+logic j12 : int
+
+logic result13 : int
+
+logic j13 : int
+
+logic result14 : int
+
+logic i10 : int
+
+logic i11 : int
+
+logic j14 : int
+
+logic i12 : int
+
+logic j15 : int
+
+logic i13 : int
+
+logic j16 : int
+
+logic temp___175 : int
+
+logic temp___174 : int
+
+logic result15 : int
+
+logic temp___1751 : int
+
+logic result16 : int
+
+logic temp___1741 : int
+
+logic result17 : int
+
+logic j17 : int
+
+logic result18 : int
+
+logic j18 : int
+
+logic result19 : int
+
+logic i14 : int
+
+logic i15 : int
+
+logic j19 : int
+
+logic i16 : int
+
+logic j20 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(i))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(j))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 1)
+
+axiom H4 : (result1 = j)
+
+axiom H5 : (j1 = 3)
+
+axiom H6 : (i1 <  3)
+
+axiom H7 : (not (0 <  j1))
+
+axiom H8 : (j1 = result3)
+
+axiom H9 : (j3 = 3)
+
  (* File "loopvariant.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall j:int. forall result:int. forall i1:int.
-  forall result1:int. forall j1:int. forall result2:int. forall j2:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(i)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(j)) -> (((result = i) and
-  (i1 = 1)) -> (((result1 = j) and (j1 = 3)) -> ((i1 <  3) ->
-  ((not (0 <  j1)) -> (((j1 = result2) and (j2 = 3)) ->
-  in_range1((i1 + 1))))))))))
+goal WP_parameter_def : in_range1((i1 + 1))

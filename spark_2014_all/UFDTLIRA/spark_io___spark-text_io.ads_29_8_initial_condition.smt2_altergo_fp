@@ -228,28 +228,73 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
- (* File "spark-text_io.ads", line 81, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_input:us_rep. forall standard_output:us_rep.
-  forall standard_error:us_rep. forall o:bool. forall o1:bool.
-  forall o2:bool. forall o3:bool. forall o4:int. forall o5:bool.
-  forall o6:bool. forall o7:int. forall o8:bool. forall o9:bool.
-  forall o10:int. forall o11:bool. forall o12:bool.
-  (forall result:bool. (((((o10 = status(standard_error)) and
-  in_range1(o10)) and (((o10 = 1) and (o11 = true)) or ((not (o10 = 1)) and
-  (o11 = false)))) and (((((o7 = status(standard_output)) and
-  in_range1(o7)) and (((o7 = 1) and (o8 = true)) or ((not (o7 = 1)) and
-  (o8 = false)))) and (((((o4 = status(standard_input)) and
-  in_range1(o4)) and (((o4 = 1) and (o5 = true)) or ((not (o4 = 1)) and
-  (o5 = false)))) and ((((o2 = is_writable(standard_error)) and
-  ((o2 = true) <-> ((is_open(standard_error) = true) and
-  ((mode__2(standard_error) = 1) or (mode__2(standard_error) = 2))))) and
-  ((((o = is_writable(standard_output)) and ((o = true) <->
+logic standard_input : us_rep
+
+logic standard_output : us_rep
+
+logic standard_error : us_rep
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : bool
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : bool
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic result : bool
+
+axiom H : ((o10 = status(standard_error)) and in_range1(o10))
+
+axiom H1 : (((o10 = 1) -> (o11 = true)) and ((not (o10 = 1)) ->
+  (o11 = false)))
+
+axiom H2 : ((o7 = status(standard_output)) and in_range1(o7))
+
+axiom H3 : (((o7 = 1) -> (o8 = true)) and ((not (o7 = 1)) -> (o8 = false)))
+
+axiom H4 : ((o4 = status(standard_input)) and in_range1(o4))
+
+axiom H5 : (((o4 = 1) -> (o5 = true)) and ((not (o4 = 1)) -> (o5 = false)))
+
+axiom H6 : ((o2 = is_writable(standard_error)) and ((o2 = true) <->
+  ((is_open(standard_error) = true) and ((mode__2(standard_error) = 1) or
+  (mode__2(standard_error) = 2)))))
+
+axiom H7 : ((o = is_writable(standard_output)) and ((o = true) <->
   ((is_open(standard_output) = true) and ((mode__2(standard_output) = 1) or
-  (mode__2(standard_output) = 2))))) and
-  (((o1 = is_readable(standard_input)) and ((o1 = true) <->
-  ((is_open(standard_input) = true) and (mode__2(standard_input) = 0)))) and
-  (o3 = match_bool(o1, o, false)))) and (o6 = match_bool(o3, o2,
-  false)))) and (o9 = match_bool(o6, o5, false)))) and (o12 = match_bool(o9,
-  o8, false)))) and (result = match_bool(o12, o11, false)))) ->
-  (is_readable(standard_input) = true))))
+  (mode__2(standard_output) = 2)))))
+
+axiom H8 : ((o1 = is_readable(standard_input)) and ((o1 = true) <->
+  ((is_open(standard_input) = true) and (mode__2(standard_input) = 0))))
+
+axiom H9 : (o3 = match_bool(o1, o, false))
+
+axiom H10 : (o6 = match_bool(o3, o2, false))
+
+axiom H11 : (o9 = match_bool(o6, o5, false))
+
+axiom H12 : (o12 = match_bool(o9, o8, false))
+
+axiom H13 : (result = match_bool(o12, o11, false))
+
+ (* File "spark-text_io.ads", line 81, characters 0-0 *)
+goal WP_parameter_def : (is_readable(standard_input) = true)

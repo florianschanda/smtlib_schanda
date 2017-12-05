@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type byte
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -250,21 +250,45 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arithmetic__test_mod_c__result : int
+
+logic result : int
+
+logic arithmetic__test_mod_c__result1 : int
+
+logic arithmetic__test_mod_c__result2 : int
+
+logic arithmetic__test_mod_c__result3 : int
+
+logic arithmetic__test_mod_c__result4 : int
+
+logic arithmetic__test_mod_c__result5 : int
+
+logic result1 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : ((((- 10) <= b) and (b <= 20)) and (not (b = 0)))
+
+axiom H3 :
+  (arithmetic__test_mod_c__result1 = arithmetic__test_mod_c__result2)
+
+axiom H4 :
+  (arithmetic__test_mod_c__result3 = arithmetic__test_mod_c__result1)
+
+axiom H5 : (result = arithmetic__test_mod_c__result)
+
+axiom H6 : (arithmetic__test_mod_c__result1 = mod(a, b))
+
+axiom H7 :
+  (arithmetic__test_mod_c__result4 = arithmetic__test_mod_c__result2)
+
+axiom H8 :
+  (arithmetic__test_mod_c__result5 = arithmetic__test_mod_c__result3)
+
+axiom H9 : (result1 = arithmetic__test_mod_c__result4)
+
  (* File "arithmetic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arithmetic__test_mod_c__result:int. forall result:int.
-  forall arithmetic__test_mod_c__result1:int.
-  forall arithmetic__test_mod_c__result2:int.
-  forall arithmetic__test_mod_c__result3:int.
-  forall arithmetic__test_mod_c__result4:int.
-  forall arithmetic__test_mod_c__result5:int.
-  (forall result1:int. ((in_range1(a) and (in_range1(b) and
-  (((((-10) <= b) and (b <= 20)) and (not (b = 0))) and
-  (((((arithmetic__test_mod_c__result1 = arithmetic__test_mod_c__result2) and
-  (arithmetic__test_mod_c__result3 = arithmetic__test_mod_c__result1)) and
-  ((result = arithmetic__test_mod_c__result) and
-  (arithmetic__test_mod_c__result1 = mod(a, b)))) and
-  ((arithmetic__test_mod_c__result4 = arithmetic__test_mod_c__result2) and
-  (arithmetic__test_mod_c__result5 = arithmetic__test_mod_c__result3))) and
-  (result1 = arithmetic__test_mod_c__result4))))) ->
-  (arithmetic__test_mod_c__result4 = a))))
+goal WP_parameter_def : (arithmetic__test_mod_c__result4 = a)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -529,21 +529,21 @@ logic bool_eq5 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq5(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__use_unchecked_union__myunion__discr) = to_rep(((b).us_split_discrs1).rec__use_unchecked_union__myunion__discr)) and
-  (use_unchecked_union__myunion__record1__pred(a) ->
+  ((((to_rep(((a).us_split_discrs1).rec__use_unchecked_union__myunion__discr) = to_rep(((b).us_split_discrs1).rec__use_unchecked_union__myunion__discr)) and
+  ((use_unchecked_union__myunion__record1__pred(a) ->
   (bool_eq3(((a).us_split_fields5).rec__use_unchecked_union__myunion__record1,
-  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record1) = true))) and
-  (use_unchecked_union__myunion__record2__pred(a) ->
-  (bool_eq4(((a).us_split_fields5).rec__use_unchecked_union__myunion__record2,
-  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record2) = true))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__use_unchecked_union__myunion__discr) = to_rep(((b).us_split_discrs1).rec__use_unchecked_union__myunion__discr)) and
-  (use_unchecked_union__myunion__record1__pred(a) ->
-  (bool_eq3(((a).us_split_fields5).rec__use_unchecked_union__myunion__record1,
-  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record1) = true))) and
+  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record1) = true)) and
   (use_unchecked_union__myunion__record2__pred(a) ->
   (bool_eq4(((a).us_split_fields5).rec__use_unchecked_union__myunion__record2,
   ((b).us_split_fields5).rec__use_unchecked_union__myunion__record2) = true)))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__use_unchecked_union__myunion__discr) = to_rep(((b).us_split_discrs1).rec__use_unchecked_union__myunion__discr)) and
+  ((use_unchecked_union__myunion__record1__pred(a) ->
+  (bool_eq3(((a).us_split_fields5).rec__use_unchecked_union__myunion__record1,
+  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record1) = true)) and
+  (use_unchecked_union__myunion__record2__pred(a) ->
+  (bool_eq4(((a).us_split_fields5).rec__use_unchecked_union__myunion__record2,
+  ((b).us_split_fields5).rec__use_unchecked_union__myunion__record2) = true))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size4 : int
@@ -1028,22 +1028,136 @@ axiom def_axiom4 :
   temp___221)[2]) = of_rep(temp___220))) and ((temp___216(temp___218,
   temp___219, temp___220, temp___221)[3]) = of_rep(temp___221))))
 
+logic output__split_discrs : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic o8 : integer
+
+logic o9 : (int,integer) farray
+
+logic o10 : integer
+
+logic temp___203 : integer
+
+logic temp___2031 : integer
+
+logic temp___2032 : (int,integer) farray
+
+logic temp___2033 : integer
+
+logic temp___2034 : (int,integer) farray
+
+logic temp___2035 : bool
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : (int,integer) farray
+
+logic o15 : integer
+
+logic o16 : (int,integer) farray
+
+logic o17 : integer
+
+logic o18 : (int,integer) farray
+
+logic o19 : integer
+
+logic o20 : (int,integer) farray
+
+logic o21 : integer
+
+logic temp___213 : integer
+
+logic temp___2131 : integer
+
+logic temp___2132 : (int,integer) farray
+
+logic temp___2133 : integer
+
+logic temp___2134 : (int,integer) farray
+
+logic temp___2135 : bool
+
+logic o22 : integer
+
+logic o23 : integer
+
+logic o24 : integer
+
+logic o25 : (int,integer) farray
+
+logic o26 : integer
+
+logic o27 : (int,integer) farray
+
+logic o28 : integer
+
+logic o29 : (int,integer) farray
+
+logic o30 : integer
+
+logic o31 : (int,integer) farray
+
+logic o32 : integer
+
+logic temp___223 : integer
+
+logic temp___2231 : integer
+
+logic temp___2232 : (int,integer) farray
+
+logic temp___2233 : integer
+
+logic temp___2234 : (int,integer) farray
+
+logic temp___2235 : bool
+
+axiom H : in_range(num)
+
+axiom H1 : (not (output__attr__constrained = true))
+
+axiom H2 : (not (num = 0))
+
+axiom H3 : (num = 1)
+
+axiom H4 : (to_rep(o12) = 1)
+
+axiom H5 : ((o13 = o12) and (o14 = temp___206(1, 2, 3, 4)))
+
+axiom H6 : ((o15 = o13) and (o16 = o14))
+
+axiom H7 : (((o17 = dummy2) and (o18 = dummy3)) and ((o19 = o15) and
+  (o20 = o16)))
+
+axiom H8 : (to_rep(o11) = 1)
+
+axiom H9 : (o21 = o11)
+
+axiom H10 : ((temp___213 = o21) and ((((temp___2131 = o17) and
+  (temp___2132 = o18)) and ((temp___2133 = o19) and (temp___2134 = o20))) and
+  (temp___2135 = true)))
+
+axiom H11 : (output__attr__constrained = true)
+
  (* File "use_unchecked_union.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall output__split_discrs:integer. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:(int,integer) farray. forall o4:integer.
-  forall o5:(int,integer) farray. forall o6:integer.
-  forall o7:(int,integer) farray. forall o8:integer.
-  forall o9:(int,integer) farray. forall o10:integer.
-  forall temp___213:integer. forall temp___2131:integer.
-  forall temp___2132:(int,integer) farray. forall temp___2133:integer.
-  forall temp___2134:(int,integer) farray. forall temp___2135:bool.
-  (in_range(num) -> ((not (output__attr__constrained = true)) ->
-  ((not (num = 0)) -> ((num = 1) -> ((((((to_rep(o1) = 1) and ((o1 = o2) and
-  (temp___206(1, 2, 3, 4) = o3))) and ((o4 = o2) and (o5 = o3))) and
-  (((dummy2 = o6) and (dummy3 = o7)) and ((o8 = o4) and (o9 = o5)))) and
-  (((to_rep(o) = 1) and (o = o10)) and ((temp___213 = o10) and
-  ((((temp___2131 = o6) and (temp___2132 = o7)) and ((temp___2133 = o8) and
-  (temp___2134 = o9))) and (true = temp___2135))))) ->
-  ((output__attr__constrained = true) ->
-  (temp___213 = output__split_discrs))))))))
+goal WP_parameter_def : (temp___213 = output__split_discrs)

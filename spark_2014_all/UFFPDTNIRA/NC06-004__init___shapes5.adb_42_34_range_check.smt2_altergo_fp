@@ -1039,7 +1039,7 @@ type t__ref = { t__content : t
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1366,12 +1366,33 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic wild_man : int
+
+logic delta_x : t
+
+logic delta_y : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic delta_x1 : t
+
+axiom H : in_range2(x)
+
+axiom H1 : in_range2(y)
+
+axiom H2 : in_range1(wild_man)
+
+axiom H3 : (in_bounds({ us_split_fields1 = { rec__shapes5__circle__center_x =
+  c; rec__shapes5__circle__center_y = c1; rec__shapes5__circle__radius = c2 }
+  }, wild_man) = true)
+
+axiom H4 : (le(fliteral4, fliteral5) -> in_range4(delta_x))
+
+axiom H5 : (le(fliteral4, fliteral5) -> in_range4(delta_y))
+
  (* File "shapes5.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall wild_man:int. forall delta_x:t. forall delta_y:t. (in_range2(x) ->
-  (in_range2(y) -> (in_range1(wild_man) -> ((in_bounds({ us_split_fields1 = {
-  rec__shapes5__circle__center_x = c; rec__shapes5__circle__center_y = c1;
-  rec__shapes5__circle__radius = c2 } }, wild_man) = true) -> ((le(fliteral4,
-  fliteral5) -> in_range4(delta_x)) -> ((le(fliteral4, fliteral5) ->
-  in_range4(delta_y)) -> in_range4(abs(sub(NearestTiesToEven, x,
-  to_rep(c)))))))))))
+goal WP_parameter_def : in_range4(abs(sub(NearestTiesToEven, x, to_rep(c))))

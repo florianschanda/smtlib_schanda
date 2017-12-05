@@ -187,18 +187,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -683,7 +683,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type long_long_integer
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq4 : int, int -> bool
@@ -1242,60 +1242,542 @@ function t5b__ref___projection(a: t5b__ref) : t5b = (a).t5b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "random.ads", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall j:int.
-  forall g__split_fields:(int,unsigned_32) farray.
-  forall g__split_fields1:state_range. forall k:int. forall k1:int.
-  forall random__reset__2__R3b__g__assume:(int,unsigned_32) farray.
-  forall random__reset__2__R3b__g__assume1:state_range.
-  forall temp___285:int. forall temp___284:int. forall temp___283:int.
-  forall temp___281:(int,unsigned_32) farray. forall temp___2811:state_range.
-  forall o:int. forall o1:unsigned_32. forall o2:int. forall o3:unsigned_32.
-  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall o8:t.
-  forall o9:int. forall o10:unsigned_32. forall o11:t. forall o12:t.
-  forall o13:t. forall o14:t. forall o15:t. forall o16:unsigned_32.
-  forall o17:(int,unsigned_32) farray. forall o18:(int,unsigned_32) farray.
-  forall o19:state_range. forall temp___276:(int,unsigned_32) farray.
-  forall temp___2761:state_range. forall o20:unsigned_32.
-  forall o21:(int,unsigned_32) farray. forall o22:(int,unsigned_32) farray.
-  forall o23:state_range. forall temp___280:(int,unsigned_32) farray.
-  forall temp___2801:state_range. forall o24:int. forall o25:int.
-  forall o26:t. forall result:int. forall i1:int. forall result1:int.
-  forall j1:int. forall result2:(int,unsigned_32) farray.
-  forall result3:state_range.
-  forall g__split_fields2:(int,unsigned_32) farray.
-  forall g__split_fields3:state_range. forall result4:int. forall k2:int.
-  forall result5:(int,unsigned_32) farray. forall result6:state_range.
-  forall g__split_fields4:(int,unsigned_32) farray.
-  forall g__split_fields5:state_range. forall result7:us_split_fields__ref.
-  forall g__split_fields6:us_split_fields. forall result8:int__ref.
-  forall i2:int. forall result9:int__ref. forall i3:int.
-  forall result10:int__ref. forall j2:int. forall i4:int. forall j3:int.
-  forall g__split_fields7:us_split_fields. forall k3:int. forall i5:int__ref.
-  forall j4:int__ref. forall g__split_fields8:us_split_fields__ref.
-  forall k4:int__ref. forall i6:int. forall j5:int.
-  forall g__split_fields9:us_split_fields. forall k5:int. forall i7:int__ref.
-  forall j6:int__ref. forall g__split_fields10:us_split_fields__ref.
-  forall k6:int__ref. forall i8:int. forall j7:int.
-  forall g__split_fields11:us_split_fields. forall k7:int.
-  forall result11:int__ref. forall k8:int. (dynamic_property(0, 2147483647,
-  to_rep2(first(initiator1)), to_rep2(last(initiator1))) ->
-  (((to_rep2(first(initiator1)) = 0) and (1 <= length({ elts = initiator;
-  rt = initiator1 }))) -> (((result = i) and (i1 = 1)) -> (in_range4(i1) ->
-  (((result1 = j) and (j1 = 0)) -> (in_range3(j1) -> ((({ us_split_fields1 =
-  { rec__random__generator__state = random__reset__2__R3b__g__assume;
-  rec__random__generator__index = random__reset__2__R3b__g__assume1 }
-  } = reset(of_int(19650218))) and (((result2 = g__split_fields) and
-  (result3 = g__split_fields1)) and
-  ((random__reset__2__R3b__g__assume = g__split_fields2) and
-  (random__reset__2__R3b__g__assume1 = g__split_fields3)))) ->
-  ((((result4 = k) and (k2 = 1)) and ((((1 <= k2) and (k2 <= max(624,
-  length({ elts = initiator; rt = initiator1 })))) and
-  ((((temp___285 = j1) and ((temp___284 = i1) and ((temp___283 = k2) and
-  (((temp___281 = g__split_fields2) and (temp___2811 = g__split_fields3)) and
-  (((((((((o13 = to_state__2(j1)) and (o13 = of_int(j1))) and
-  (((((((to_rep2(first(initiator1)) <= j1) and
+logic i : int
+
+logic j : int
+
+logic g__split_fields : (int,unsigned_32) farray
+
+logic g__split_fields1 : state_range
+
+logic k : int
+
+logic k1 : int
+
+logic random__reset__2__R3b__g__assume : (int,unsigned_32) farray
+
+logic random__reset__2__R3b__g__assume1 : state_range
+
+logic temp___285 : int
+
+logic temp___284 : int
+
+logic temp___283 : int
+
+logic temp___281 : (int,unsigned_32) farray
+
+logic temp___2811 : state_range
+
+logic o : int
+
+logic o1 : unsigned_32
+
+logic o2 : int
+
+logic o3 : unsigned_32
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : unsigned_32
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : unsigned_32
+
+logic o17 : (int,unsigned_32) farray
+
+logic o18 : (int,unsigned_32) farray
+
+logic o19 : state_range
+
+logic temp___276 : (int,unsigned_32) farray
+
+logic temp___2761 : state_range
+
+logic o20 : unsigned_32
+
+logic o21 : (int,unsigned_32) farray
+
+logic o22 : (int,unsigned_32) farray
+
+logic o23 : state_range
+
+logic temp___280 : (int,unsigned_32) farray
+
+logic temp___2801 : state_range
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : unsigned_32
+
+logic o28 : int
+
+logic o29 : unsigned_32
+
+logic o30 : t
+
+logic o31 : t
+
+logic o32 : t
+
+logic o33 : t
+
+logic o34 : t
+
+logic o35 : int
+
+logic o36 : unsigned_32
+
+logic o37 : t
+
+logic o38 : t
+
+logic o39 : t
+
+logic o40 : t
+
+logic o41 : t
+
+logic o42 : unsigned_32
+
+logic o43 : (int,unsigned_32) farray
+
+logic o44 : (int,unsigned_32) farray
+
+logic o45 : state_range
+
+logic temp___2762 : (int,unsigned_32) farray
+
+logic temp___2763 : state_range
+
+logic o46 : unsigned_32
+
+logic o47 : (int,unsigned_32) farray
+
+logic o48 : (int,unsigned_32) farray
+
+logic o49 : state_range
+
+logic temp___2802 : (int,unsigned_32) farray
+
+logic temp___2803 : state_range
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : unsigned_32
+
+logic o54 : int
+
+logic o55 : unsigned_32
+
+logic o56 : t
+
+logic o57 : t
+
+logic o58 : t
+
+logic o59 : t
+
+logic o60 : t
+
+logic o61 : t
+
+logic o62 : t
+
+logic o63 : t
+
+logic o64 : unsigned_32
+
+logic o65 : (int,unsigned_32) farray
+
+logic o66 : (int,unsigned_32) farray
+
+logic o67 : state_range
+
+logic temp___295 : (int,unsigned_32) farray
+
+logic temp___2951 : state_range
+
+logic o68 : unsigned_32
+
+logic o69 : (int,unsigned_32) farray
+
+logic o70 : (int,unsigned_32) farray
+
+logic o71 : state_range
+
+logic temp___299 : (int,unsigned_32) farray
+
+logic temp___2991 : state_range
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : unsigned_32
+
+logic o75 : int
+
+logic o76 : unsigned_32
+
+logic o77 : t
+
+logic o78 : t
+
+logic o79 : t
+
+logic o80 : t
+
+logic o81 : t
+
+logic o82 : t
+
+logic o83 : t
+
+logic o84 : t
+
+logic o85 : unsigned_32
+
+logic o86 : (int,unsigned_32) farray
+
+logic o87 : (int,unsigned_32) farray
+
+logic o88 : state_range
+
+logic temp___2952 : (int,unsigned_32) farray
+
+logic temp___2953 : state_range
+
+logic o89 : unsigned_32
+
+logic o90 : (int,unsigned_32) farray
+
+logic o91 : (int,unsigned_32) farray
+
+logic o92 : state_range
+
+logic temp___2992 : (int,unsigned_32) farray
+
+logic temp___2993 : state_range
+
+logic o93 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : (int,unsigned_32) farray
+
+logic result3 : state_range
+
+logic g__split_fields2 : (int,unsigned_32) farray
+
+logic g__split_fields3 : state_range
+
+logic result4 : int
+
+logic k2 : int
+
+logic result5 : (int,unsigned_32) farray
+
+logic result6 : state_range
+
+logic g__split_fields4 : (int,unsigned_32) farray
+
+logic g__split_fields5 : state_range
+
+logic result7 : (int,unsigned_32) farray
+
+logic result8 : state_range
+
+logic g__split_fields6 : (int,unsigned_32) farray
+
+logic g__split_fields7 : state_range
+
+logic result9 : int
+
+logic i2 : int
+
+logic result10 : int
+
+logic i3 : int
+
+logic result11 : int
+
+logic j2 : int
+
+logic i4 : int
+
+logic j3 : int
+
+logic g__split_fields8 : (int,unsigned_32) farray
+
+logic g__split_fields9 : state_range
+
+logic k3 : int
+
+logic result12 : int
+
+logic k4 : int
+
+logic result13 : (int,unsigned_32) farray
+
+logic result14 : state_range
+
+logic g__split_fields10 : (int,unsigned_32) farray
+
+logic g__split_fields11 : state_range
+
+logic result15 : (int,unsigned_32) farray
+
+logic result16 : state_range
+
+logic g__split_fields12 : (int,unsigned_32) farray
+
+logic g__split_fields13 : state_range
+
+logic result17 : int
+
+logic i5 : int
+
+logic result18 : int
+
+logic i6 : int
+
+logic result19 : int
+
+logic j4 : int
+
+logic i7 : int
+
+logic j5 : int
+
+logic g__split_fields14 : (int,unsigned_32) farray
+
+logic g__split_fields15 : state_range
+
+logic k5 : int
+
+logic i8 : int
+
+logic j6 : int
+
+logic g__split_fields16 : (int,unsigned_32) farray
+
+logic g__split_fields17 : state_range
+
+logic k6 : int
+
+logic i9 : int
+
+logic j7 : int
+
+logic g__split_fields18 : (int,unsigned_32) farray
+
+logic g__split_fields19 : state_range
+
+logic k7 : int
+
+logic i10 : int
+
+logic j8 : int
+
+logic g__split_fields20 : (int,unsigned_32) farray
+
+logic g__split_fields21 : state_range
+
+logic k8 : int
+
+logic i11 : int
+
+logic j9 : int
+
+logic g__split_fields22 : (int,unsigned_32) farray
+
+logic g__split_fields23 : state_range
+
+logic k9 : int
+
+logic i12 : int
+
+logic j10 : int
+
+logic g__split_fields24 : (int,unsigned_32) farray
+
+logic g__split_fields25 : state_range
+
+logic k10 : int
+
+logic result20 : int
+
+logic k11 : int
+
+logic result21 : (int,unsigned_32) farray
+
+logic result22 : state_range
+
+logic g__split_fields26 : (int,unsigned_32) farray
+
+logic g__split_fields27 : state_range
+
+logic result23 : (int,unsigned_32) farray
+
+logic result24 : state_range
+
+logic g__split_fields28 : (int,unsigned_32) farray
+
+logic g__split_fields29 : state_range
+
+logic result25 : int
+
+logic i13 : int
+
+logic result26 : int
+
+logic i14 : int
+
+logic i15 : int
+
+logic g__split_fields30 : (int,unsigned_32) farray
+
+logic g__split_fields31 : state_range
+
+logic i16 : int
+
+logic g__split_fields32 : (int,unsigned_32) farray
+
+logic g__split_fields33 : state_range
+
+logic i17 : int
+
+logic g__split_fields34 : (int,unsigned_32) farray
+
+logic g__split_fields35 : state_range
+
+logic k12 : int
+
+logic result27 : int
+
+logic k13 : int
+
+logic result28 : (int,unsigned_32) farray
+
+logic result29 : state_range
+
+logic g__split_fields36 : (int,unsigned_32) farray
+
+logic g__split_fields37 : state_range
+
+logic result30 : (int,unsigned_32) farray
+
+logic result31 : state_range
+
+logic g__split_fields38 : (int,unsigned_32) farray
+
+logic g__split_fields39 : state_range
+
+logic result32 : int
+
+logic i18 : int
+
+logic result33 : int
+
+logic i19 : int
+
+logic i20 : int
+
+logic g__split_fields40 : (int,unsigned_32) farray
+
+logic g__split_fields41 : state_range
+
+logic i21 : int
+
+logic g__split_fields42 : (int,unsigned_32) farray
+
+logic g__split_fields43 : state_range
+
+logic i22 : int
+
+logic g__split_fields44 : (int,unsigned_32) farray
+
+logic g__split_fields45 : state_range
+
+logic k14 : int
+
+logic i23 : int
+
+logic g__split_fields46 : (int,unsigned_32) farray
+
+logic g__split_fields47 : state_range
+
+logic k15 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep2(first(initiator1)),
+  to_rep2(last(initiator1)))
+
+axiom H1 : ((to_rep2(first(initiator1)) = 0) and (1 <= length({ elts =
+  initiator; rt = initiator1 })))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i1 = 1)
+
+axiom H4 : in_range4(i1)
+
+axiom H5 : (result1 = j)
+
+axiom H6 : (j1 = 0)
+
+axiom H7 : in_range3(j1)
+
+axiom H8 : ({ us_split_fields1 = { rec__random__generator__state =
+  random__reset__2__R3b__g__assume; rec__random__generator__index =
+  random__reset__2__R3b__g__assume1 } } = reset(of_int(19650218)))
+
+axiom H9 : ((result2 = g__split_fields) and (result3 = g__split_fields1))
+
+axiom H10 : ((g__split_fields2 = random__reset__2__R3b__g__assume) and
+  (g__split_fields3 = random__reset__2__R3b__g__assume1))
+
+axiom H11 : (result4 = k)
+
+axiom H12 : (k2 = 1)
+
+axiom H13 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (((temp___285 = j1) and ((temp___284 = i1) and
+  ((temp___283 = k2) and (((g__split_fields2 = temp___281) and
+  (g__split_fields3 = temp___2811)) and (((((((((o13 = to_state__2(j1)) and
+  (o13 = of_int(j1))) and (((((((to_rep2(first(initiator1)) <= j1) and
   (j1 <= to_rep2(last(initiator1)))) and (o9 = j1)) and
   (o10 = (initiator[o9]))) and (o11 = to_rep(o10))) and
   ((((((((((0 <= (i1 - 1)) and ((i1 - 1) <= 623)) and (o2 = (i1 - 1))) and
@@ -1308,48 +1790,96 @@ goal WP_parameter_def :
   (to_rep(o16) = o15)) and (o17 = (g__split_fields2[i1 <- o16]))) and
   ((o17 = o18) and (g__split_fields3 = o19))) and ((temp___276 = o18) and
   (temp___2761 = o19))) and (((result5 = g__split_fields2) and
-  (result6 = g__split_fields3)) and ((temp___276 = g__split_fields4) and
-  (temp___2761 = g__split_fields5)))) and ((((i1 = 623) and
+  (result6 = g__split_fields3)) and ((g__split_fields4 = temp___276) and
+  (g__split_fields5 = temp___2761)))) and ((((i1 = 623) ->
   ((((((to_rep(o20) = to_rep((g__split_fields4[623]))) and
   (o21 = (g__split_fields4[0 <- o20]))) and ((o21 = o22) and
   (g__split_fields5 = o23))) and ((temp___280 = o22) and
-  (temp___2801 = o23))) and ((result7 = { us_split_fields__content = {
-  rec__random__generator__state = g__split_fields4;
-  rec__random__generator__index = g__split_fields5 } }) and
-  (g__split_fields6 = { rec__random__generator__state = temp___280;
-  rec__random__generator__index = temp___2801 }))) and ((result8 = {
-  int__content = i1 }) and (i2 = 1)))) or ((not (i1 = 623)) and
-  ((((o24 = (i1 + 1)) and in_range4((i1 + 1))) and ((result9 = {
-  int__content = i1 }) and (i3 = o24))) and ((g__split_fields6 = {
-  rec__random__generator__state = g__split_fields4;
-  rec__random__generator__index = g__split_fields5 }) and (i2 = i3))))) and
-  (((((j1 = to_rep2(last(initiator1))) and (o25 = 0)) or
-  ((not (j1 = to_rep2(last(initiator1)))) and ((o25 = (j1 + 1)) and
-  in_range1((j1 + 1))))) and ((result10 = { int__content = j1 }) and
-  (j2 = o25))) and (((0 <  i4) and ((to_rep2(first(initiator1)) <= j3) and
+  (temp___2801 = o23))) and (((result7 = g__split_fields4) and
+  (result8 = g__split_fields5)) and ((g__split_fields6 = temp___280) and
+  (g__split_fields7 = temp___2801)))) and ((result9 = i1) and (i2 = 1)))) and
+  ((not (i1 = 623)) -> ((((o24 = (i1 + 1)) and in_range4((i1 + 1))) and
+  ((result10 = i1) and (i3 = o24))) and
+  (((g__split_fields6 = g__split_fields4) and
+  (g__split_fields7 = g__split_fields5)) and (i2 = i3))))) and
+  (((((j1 = to_rep2(last(initiator1))) -> (o25 = 0)) and
+  ((not (j1 = to_rep2(last(initiator1)))) -> ((o25 = (j1 + 1)) and
+  in_range1((j1 + 1))))) and ((result11 = j1) and (j2 = o25))) and
+  (((0 <  i4) and ((to_rep2(first(initiator1)) <= j3) and
   (j3 <= to_rep2(last(initiator1))))) and
-  (((((((g__split_fields7).rec__random__generator__index = temp___2811) and
-  ((1 <= max(624, length({ elts = initiator; rt = initiator1 }))) ->
-  dynamic_property1(1, max(624, length({ elts = initiator; rt = initiator1
-  })), k3))) and ((0 <= 623) -> in_range4(i4))) and ((0 <= 2147483647) ->
-  in_range3(j3))) and ((1 <= k3) and (k3 <= max(624, length({ elts =
-  initiator; rt = initiator1 }))))) and (k3 = max(624, length({ elts =
-  initiator; rt = initiator1 })))))))))))) and (((k4 = { int__content = k3
-  }) and ((g__split_fields8 = { us_split_fields__content = g__split_fields7
-  }) and ((j4 = { int__content = j3 }) and (i5 = { int__content = i4
-  })))) and ((k5 = k3) and ((g__split_fields9 = g__split_fields7) and
-  ((j5 = j3) and (i6 = i4)))))) and (((k6 = k4) and
-  ((g__split_fields10 = g__split_fields8) and ((j6 = j4) and (i7 = i5)))) and
-  ((k7 = k5) and ((g__split_fields11 = g__split_fields9) and ((j7 = j5) and
-  (i8 = i6))))))) or ((not ((1 <= k2) and (k2 <= max(624, length({ elts =
-  initiator; rt = initiator1 }))))) and (((k6 = { int__content = k2 }) and
-  ((g__split_fields10 = { us_split_fields__content = {
-  rec__random__generator__state = g__split_fields2;
-  rec__random__generator__index = g__split_fields3 } }) and ((j6 = {
-  int__content = j1 }) and (i7 = { int__content = i1 })))) and ((k7 = k2) and
-  ((g__split_fields11 = { rec__random__generator__state = g__split_fields2;
-  rec__random__generator__index = g__split_fields3 }) and ((j7 = j1) and
-  (i8 = i1)))))))) -> (((result11 = { int__content = k1 }) and (k8 = 1)) ->
-  (((1 <= k8) and (k8 <= 623)) -> (((o26 = to_state((i7).int__content)) and
-  (o26 = of_int((i7).int__content))) ->
-  (0 <= ((i7).int__content - 1))))))))))))))
+  ((((((g__split_fields9 = temp___2811) and ((1 <= max(624, length({ elts =
+  initiator; rt = initiator1 }))) -> dynamic_property1(1, max(624, length({
+  elts = initiator; rt = initiator1 })), k3))) and ((0 <= 623) ->
+  in_range4(i4))) and ((0 <= 2147483647) -> in_range3(j3))) and
+  ((1 <= k3) and (k3 <= max(624, length({ elts = initiator; rt = initiator1
+  }))))) and (k3 = max(624, length({ elts = initiator; rt = initiator1
+  })))))))))))) and (((k7 = k3) and
+  (((g__split_fields18 = g__split_fields8) and
+  (g__split_fields19 = g__split_fields9)) and ((j7 = j3) and (i9 = i4)))) and
+  ((k8 = k3) and (((g__split_fields20 = g__split_fields8) and
+  (g__split_fields21 = g__split_fields9)) and ((j8 = j3) and (i10 = i4)))))))
+
+axiom H14 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (k9 = k7))
+
+axiom H15 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> ((g__split_fields22 = g__split_fields18) and
+  (g__split_fields23 = g__split_fields19)))
+
+axiom H16 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (j9 = j7))
+
+axiom H17 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (i11 = i9))
+
+axiom H18 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (k10 = k8))
+
+axiom H19 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> ((g__split_fields24 = g__split_fields20) and
+  (g__split_fields25 = g__split_fields21)))
+
+axiom H20 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (j10 = j8))
+
+axiom H21 : (((1 <= k2) and (k2 <= max(624, length({ elts = initiator; rt =
+  initiator1 })))) -> (i12 = i10))
+
+axiom H22 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (k9 = k2))
+
+axiom H23 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> ((g__split_fields22 = g__split_fields2) and
+  (g__split_fields23 = g__split_fields3)))
+
+axiom H24 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (j9 = j1))
+
+axiom H25 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (i11 = i1))
+
+axiom H26 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (k10 = k2))
+
+axiom H27 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> ((g__split_fields24 = g__split_fields2) and
+  (g__split_fields25 = g__split_fields3)))
+
+axiom H28 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (j10 = j1))
+
+axiom H29 : ((not ((1 <= k2) and (k2 <= max(624, length({ elts = initiator;
+  rt = initiator1 }))))) -> (i12 = i1))
+
+axiom H30 : (result20 = k1)
+
+axiom H31 : (k11 = 1)
+
+axiom H32 : (1 <= k11)
+
+axiom H33 : (k11 <= 623)
+
+axiom H34 : ((o61 = to_state(i11)) and (o61 = of_int(i11)))
+
+ (* File "random.ads", line 68, characters 0-0 *)
+goal WP_parameter_def : (0 <= (i11 - 1))

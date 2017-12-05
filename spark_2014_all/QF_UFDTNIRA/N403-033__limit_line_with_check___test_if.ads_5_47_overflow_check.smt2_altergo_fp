@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -141,43 +141,171 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic b : int
+
+logic c : int
+
+logic test_if__test__result : int
+
+logic o : int
+
+logic temp___132 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic b1 : int
+
+logic result2 : int
+
+logic b2 : int
+
+logic result3 : int
+
+logic c2 : int
+
+logic b3 : int
+
+logic result4 : int
+
+logic b4 : int
+
+logic b5 : int
+
+logic b6 : int
+
+logic b7 : int
+
+logic b8 : int
+
+logic b9 : int
+
+logic b10 : int
+
+logic result5 : int
+
+logic c3 : int
+
+logic result6 : int
+
+logic test_if__test__result1 : int
+
+logic test_if__test__result2 : int
+
+logic test_if__test__result3 : int
+
+logic b11 : int
+
+logic c4 : int
+
+logic test_if__test__result4 : int
+
+logic b12 : int
+
+logic c5 : int
+
+logic test_if__test__result5 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : ((a = 0) or (a = 1))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(b))
+
+axiom H3 : (result = c)
+
+axiom H4 : (c1 = 3)
+
+axiom H5 : in_range1(c1)
+
+axiom H6 : ((a = 0) -> (result1 = b))
+
+axiom H7 : ((a = 0) -> (b1 = 500))
+
+axiom H8 : ((not (a = 0)) -> (result2 = b))
+
+axiom H9 : ((not (a = 0)) -> (b2 = 1000))
+
+axiom H10 : ((not (a = 0)) -> (b1 = b2))
+
+axiom H11 : ((o = (c1 + b1)) and in_range1((c1 + b1)))
+
+axiom H12 : (c1 = result3)
+
+axiom H13 : (c2 = o)
+
+axiom H14 : ((b1 <  1073741823) -> (((temp___132 = b1) and
+  ((b3 <  1073741822) and (((((- 2147483648) <= 2147483647) ->
+  in_range1(b3)) and (b3 <  1073741823)) and ((((o1 = (1 + b3)) and
+  in_range1((1 + b3))) and ((b3 = result4) and (b4 = o1))) and
+  (not (b4 <  1073741823)))))) and ((b4 = b7) and (b8 = b4))))
+
+axiom H15 : ((b1 <  1073741823) -> (b9 = b7))
+
+axiom H16 : ((b1 <  1073741823) -> (b10 = b8))
+
+axiom H17 : ((not (b1 <  1073741823)) -> (b1 = b9))
+
+axiom H18 : ((not (b1 <  1073741823)) -> (b10 = b1))
+
+axiom H19 : ((o2 = (c2 + b9)) and in_range1((c2 + b9)))
+
+axiom H20 : (c2 = result5)
+
+axiom H21 : (c3 = o2)
+
+axiom H22 : (test_if__test__result1 = test_if__test__result2)
+
+axiom H23 : (test_if__test__result3 = test_if__test__result1)
+
+axiom H24 : (result6 = test_if__test__result)
+
+axiom H25 : (test_if__test__result1 = c3)
+
+axiom H26 : (test_if__test__result4 = test_if__test__result2)
+
+axiom H27 : (c3 = c4)
+
+axiom H28 : (b11 = b9)
+
+axiom H29 : (test_if__test__result5 = test_if__test__result3)
+
+axiom H30 : (c5 = c3)
+
+axiom H31 : (b12 = b10)
+
+axiom H32 : ((o3 = (a * 500)) and in_range1((a * 500)))
+
+axiom H33 : (o4 = (o3 + 500))
+
+axiom H34 : ((o5 = o4) and in_range1(o4))
+
+axiom H35 : (o6 = (o5 + 3))
+
+axiom H36 : ((o7 = o6) and in_range1(o6))
+
+axiom H37 : (o8 = (o7 + 1073741823))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:int. forall c:int. forall test_if__test__result:int.
-  forall o:int. forall temp___132:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int. forall o6:int. forall o7:int.
-  forall o8:int. forall result:int. forall c1:int. forall result1:int.
-  forall b1:int. forall result2:int. forall b2:int. forall result3:int.
-  forall c2:int. forall b3:int. forall result4:int. forall b4:int.
-  forall b5:int. forall b6:int. forall b7:int. forall b8:int.
-  forall result5:int. forall c3:int. forall result6:int.
-  forall test_if__test__result1:int. forall test_if__test__result2:int.
-  forall test_if__test__result3:int. forall b9:int. forall c4:int.
-  forall test_if__test__result4:int. forall b10:int. forall c5:int.
-  forall test_if__test__result5:int. (in_range1(a) -> (((a = 0) or
-  (a = 1)) -> ((((((-2147483648) <= 2147483647) -> in_range1(b)) and ((({
-  int__content = result } = { int__content = c }) and (c1 = 3)) and
-  (in_range1(c1) and ((((a = 0) and (({ int__content = result1 } = {
-  int__content = b }) and (b1 = 500))) or ((not (a = 0)) and ((({
-  int__content = result2 } = { int__content = b }) and (b2 = 1000)) and
-  (b1 = b2)))) and ((((o = (c1 + b1)) and in_range1((c1 + b1))) and
-  ((c1 = result3) and (c2 = o))) and ((((b1 <  1073741823) and
-  ((((temp___132 = b1) and ((b3 <  1073741822) and
-  (((((-2147483648) <= 2147483647) -> in_range1(b3)) and
-  (b3 <  1073741823)) and ((((o1 = (1 + b3)) and in_range1((1 + b3))) and
-  ((b3 = result4) and (b4 = o1))) and (not (b4 <  1073741823)))))) and
-  ((b4 = b5) and (b6 = b4))) and (({ int__content = b7 } = { int__content =
-  b5 }) and (b8 = b6)))) or ((not (b1 <  1073741823)) and ((b1 = b7) and
-  (b8 = b1)))) and ((((o2 = (c2 + b7)) and in_range1((c2 + b7))) and
-  ((c2 = result5) and (c3 = o2))) and
-  (((test_if__test__result1 = test_if__test__result2) and
-  (test_if__test__result3 = test_if__test__result1)) and (({ int__content =
-  result6 } = { int__content = test_if__test__result }) and
-  (test_if__test__result1 = c3)))))))))) and ((({ int__content =
-  test_if__test__result4 } = { int__content = test_if__test__result2 }) and
-  ((c3 = c4) and ({ int__content = b9 } = { int__content = b7 }))) and
-  ((test_if__test__result5 = test_if__test__result3) and ((c5 = c3) and
-  (b10 = b8))))) -> ((((((((o3 = (a * 500)) and in_range1((a * 500))) and
-  (o4 = (o3 + 500))) and ((o5 = o4) and in_range1(o4))) and
-  (o6 = (o5 + 3))) and ((o7 = o6) and in_range1(o6))) and
-  (o8 = (o7 + 1073741823))) -> in_range1(o8))))))
+goal WP_parameter_def : in_range1(o8)

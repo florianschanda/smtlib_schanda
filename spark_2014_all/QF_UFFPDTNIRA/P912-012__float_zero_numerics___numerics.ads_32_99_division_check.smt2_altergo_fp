@@ -1091,11 +1091,34 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic numerics__Odivide__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic numerics__Odivide__result1 : t
+
+logic numerics__Odivide__result2 : t
+
+logic numerics__Odivide__result3 : t
+
+logic numerics__Odivide__result4 : t
+
+logic numerics__Odivide__result5 : t
+
+axiom H : tqtisFinite(left)
+
+axiom H1 : tqtisFinite(right)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H2 : neq(right, fliteral1)
+
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  (neq(right, fliteral1) -> (not is_zero(right)))))
+goal WP_parameter_def : (not is_zero(right))

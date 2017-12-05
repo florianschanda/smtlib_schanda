@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -599,7 +599,7 @@ axiom bv_max_to_uint :
 
 type tinteger_8B
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -655,7 +655,7 @@ function tinteger_8B__ref___projection(a: tinteger_8B__ref) : tinteger_8B =
 
 type integer_8
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -681,7 +681,7 @@ function integer_8__ref___2__projection(a: integer_8__ref) : integer_8 =
 
 type tinteger_32B
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -707,7 +707,7 @@ function tinteger_32B__ref___projection(a: tinteger_32B__ref) : tinteger_32B =
 
 type integer_32
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -783,17 +783,91 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic apply_brakes : int
+
+logic sum_out1 : int
+
+logic sum_1_out1 : int
+
+logic at_rest_switch_out1 : int
+
+logic sum_1_out1_sat : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic sum_out11 : int
+
+logic sum_1_out11 : int
+
+logic sum_1_out1_sat1 : int
+
+logic result : int
+
+logic sum_out12 : int
+
+logic result1 : int
+
+logic sum_1_out1_sat2 : int
+
+logic result2 : int
+
+logic sum_1_out12 : int
+
+logic result3 : int
+
+logic sum_1_out13 : int
+
+logic result4 : int
+
+logic sum_1_out14 : int
+
+logic result5 : int
+
+logic at_rest_switch_out11 : int
+
+logic result6 : int
+
+logic at_rest_switch_out12 : int
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range3(apply_brakes))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range3(sum_out1))
+
+axiom H4 : (((- 128) <= 127) -> in_range1(sum_1_out1))
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1))
+
+axiom H6 : (((- 2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat))
+
+axiom H7 : ugt(vehicle_speed, of_int(0))
+
+axiom H8 : ((o = tqtint(mul(of_int(8), vehicle_speed))) and
+  in_range3(tqtint(mul(of_int(8), vehicle_speed))))
+
+axiom H9 : ((o1 = tqtint(mul(of_int(10), wheel_speed))) and
+  in_range3(tqtint(mul(of_int(10), wheel_speed))))
+
+axiom H10 : (o2 = (o1 - o))
+
  (* File "abs_controller_supplier_with_property.ads", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall apply_brakes:int. forall sum_out1:int. forall sum_1_out1:int.
-  forall at_rest_switch_out1:int. forall sum_1_out1_sat:int. forall o:int.
-  forall o1:int. forall o2:int. ((((-2147483648) <= 2147483647) ->
-  in_range3(apply_brakes)) -> ((((-2147483648) <= 2147483647) ->
-  in_range3(sum_out1)) -> ((((-128) <= 127) -> in_range1(sum_1_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(at_rest_switch_out1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(sum_1_out1_sat)) ->
-  (ugt(vehicle_speed, of_int(0)) -> ((((o = tqtint(mul(of_int(8),
-  vehicle_speed))) and in_range3(tqtint(mul(of_int(8), vehicle_speed)))) and
-  (((o1 = tqtint(mul(of_int(10), wheel_speed))) and
-  in_range3(tqtint(mul(of_int(10), wheel_speed)))) and (o2 = (o1 - o)))) ->
-  in_range2(o2)))))))))
+goal WP_parameter_def : in_range2(o2)

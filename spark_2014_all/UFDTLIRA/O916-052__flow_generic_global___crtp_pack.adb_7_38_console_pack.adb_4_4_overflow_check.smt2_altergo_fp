@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -219,7 +219,9 @@ function crtp_packet_handler__ref___projection(a: crtp_packet_handler__ref) : us
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic handler__split_fields : positive
+
+logic o : int
+
  (* File "console_pack.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall handler__split_fields:positive.
-  in_range((to_rep(handler__split_fields) + 0)))
+goal WP_parameter_def : in_range((to_rep(handler__split_fields) + 0))

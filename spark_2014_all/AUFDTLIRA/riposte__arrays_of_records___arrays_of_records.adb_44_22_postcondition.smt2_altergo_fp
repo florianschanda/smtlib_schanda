@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -347,20 +347,63 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,us_rep) farray
+
+logic o : value
+
+logic o1 : bool
+
+logic o2 : value
+
+logic o3 : value
+
+logic o4 : bool
+
+logic o5 : value
+
+logic o6 : value
+
+logic o7 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+axiom H : in_range(i)
+
+axiom H1 : (to_rep(o) = 42)
+
+axiom H2 :
+  ((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1)
+
+axiom H3 : (o = o2)
+
+axiom H4 :
+  ((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)
+
+axiom H5 : (o4 = o1)
+
+axiom H6 : (o5 = o2)
+
+axiom H7 : (o6 = o3)
+
+axiom H8 : (o7 = (a[i <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__flag = o4;
+  rec__arrays_of_records__basic_record__first_value = o5;
+  rec__arrays_of_records__basic_record__second_value = o6 } }]))
+
+axiom H9 : (result = a)
+
+axiom H10 : (a1 = o7)
+
+axiom H11 : (a1 = a2)
+
+axiom H12 : (a3 = a1)
+
  (* File "arrays_of_records.adb", line 15, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:value. forall o1:bool.
-  forall o2:value. forall o3:value. forall o4:bool. forall o5:value.
-  forall o6:value. forall o7:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall a2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
-  ((in_range(i) and ((((((to_rep(o) = 42) and
-  (((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__flag = o1) and
-  ((o = o2) and
-  ((((a[i])).us_split_fields1).rec__arrays_of_records__basic_record__second_value = o3)))) and
-  ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and (o7 = (a[i <- {
-  us_split_fields1 = { rec__arrays_of_records__basic_record__flag = o4;
-  rec__arrays_of_records__basic_record__first_value = o5;
-  rec__arrays_of_records__basic_record__second_value = o6 } }]))) and
-  ((result = a) and (a1 = o7))) and ((a1 = a2) and (a3 = a1)))) ->
-  (to_rep((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23)))
+  (to_rep((((a2[i])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23)

@@ -139,6 +139,17 @@ logic t : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+axiom H : in_range(d)
+
+axiom H1 : in_range1(t)
+
+axiom H2 : (t = 3)
+
+axiom H3 : (not (d = 0))
+
  (* File "tetris_integrity.ads", line 63, characters 0-0 *)
-goal WP_parameter_def : (in_range(d) -> (in_range1(t) -> ((t = 3) ->
-  ((not (d = 0)) -> (not (d = 0))))))
+goal WP_parameter_def : (not (d = 0))

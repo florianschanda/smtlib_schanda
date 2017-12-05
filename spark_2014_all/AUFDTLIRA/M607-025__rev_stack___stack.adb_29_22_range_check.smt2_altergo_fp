@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -726,9 +726,43 @@ type t15s__ref = { t15s__content : us_t2
 
 function t15s__ref___projection(a: t15s__ref) : us_t2 = (a).t15s__content
 
- (* File "stack.ads", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:r1. forall s__split_fields1:(int,integer) farray.
-  ((not (is_empty({ us_split_fields1 = { rec__stack__stack__top =
+logic s__split_fields : r1
+
+logic s__split_fields1 : (int,integer) farray
+
+logic o : int
+
+logic o1 : r1
+
+logic o2 : r1
+
+logic o3 : (int,integer) farray
+
+logic temp___250 : r1
+
+logic temp___2501 : (int,integer) farray
+
+logic temp___254 : int
+
+logic result : r1
+
+logic result1 : (int,integer) farray
+
+logic s__split_fields2 : r1
+
+logic s__split_fields3 : (int,integer) farray
+
+logic s__split_fields4 : r1
+
+logic s__split_fields5 : (int,integer) farray
+
+logic s__split_fields6 : r1
+
+logic s__split_fields7 : (int,integer) farray
+
+axiom H : (not (is_empty({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields; rec__stack__stack__content = s__split_fields1 }
-  }) = true)) -> in_range1((to_rep(s__split_fields) - 1))))
+  }) = true))
+
+ (* File "stack.ads", line 31, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep(s__split_fields) - 1))

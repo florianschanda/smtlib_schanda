@@ -219,18 +219,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1334,7 +1334,7 @@ axiom valid_tables__def_axiom :
   us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = names__entry_table__fields }
-  }))) <= 2147483647) and (((-1) + length(model__({ us_split_discrs1 = {
+  }))) <= 2147483647) and (((- 1) + length(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = char_table__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
   names__char_table__fields } }))) <= 2147483646)))))
@@ -1558,7 +1558,7 @@ axiom valid_entry__def_axiom :
   rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = names__entry_table__fields }
-  })))) and ((to_rep3(e1) - 1) <= (((-1) + length(model__({
+  })))) and ((to_rep3(e1) - 1) <= (((- 1) + length(model__({
   us_split_discrs1 = { rec__names__data__char_tables__vector__capacity =
   char_table__split_discrs }; us_split_fields1 = {
   rec__names__data__char_tables__vector = names__char_table__fields }
@@ -1636,7 +1636,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index
 
-predicate in_range8(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1717,11 +1717,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq8(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get1(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get1(a,
     n) = get1(b, n)))) ->
   (user_eq8(a, b) = match_bool(bool_eq(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get1(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get1(a,
         n) = get1(b, n))))) ->
   (user_eq8(a, b) = match_bool(bool_eq(length(a), length(b)), false,
   false)))))
@@ -1753,7 +1753,7 @@ axiom is_empty__post_axiom :
 
 type extended_index1
 
-predicate in_range10(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range10(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq14 : int, int -> bool
 
@@ -1779,7 +1779,7 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length(container)].
-  ((((-1) + length(container)) <= 2147483646) and
+  ((((- 1) + length(container)) <= 2147483646) and
   in_range7(length(container))))
 
 type element_type
@@ -1812,7 +1812,7 @@ axiom get__post_axiom :
   (forall container:us_rep2.
   (forall position:int [get1(container, position)].
   ((in_range10(position) and ((0 <= position) and
-  (position <= ((-1) + length(container))))) -> in_range11(get1(container,
+  (position <= ((- 1) + length(container))))) -> in_range11(get1(container,
   position)))))
 
 type extended_index2
@@ -1961,29 +1961,49 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
- (* File "names.adb", line 72, characters 0-0 *)
-goal WP_parameter_def :
-  (forall hash_table:(t,name_id) farray.
-  forall char_table__split_fields:us_main_type.
-  forall entry_table__split_fields:us_main_type1. forall us:int.
-  forall us1:int. forall result:(t,name_id) farray.
-  forall hash_table1:(t,name_id) farray.
-  (forall result1:bool. ((in_range(no_name) and ((({ map__content = result
-  } = { map__content = hash_table }) and
-  (hash_table1 = names__hash_table__aggregate_def(0))) and (((us = 1024) and
-  in_range1(1024)) and (((to_rep1(char_table__split_discrs) = 1024) and
-  (is_empty({ us_split_discrs1 = {
-  rec__names__data__char_tables__vector__capacity = char_table__split_discrs
-  }; us_split_fields1 = { rec__names__data__char_tables__vector =
-  char_table__split_fields } }) = true)) and
-  ((1024 = to_rep1(char_table__split_discrs)) and (((us1 = 256) and
-  in_range3(256)) and (((to_rep2(entry_table__split_discrs) = 256) and
-  (is_empty1({ us_split_discrs3 = {
-  rec__names__data__entry_tables__vector__capacity =
+logic hash_table : (t,name_id) farray
+
+logic char_table__split_fields : us_main_type
+
+logic entry_table__split_fields : us_main_type1
+
+logic us : int
+
+logic us1 : int
+
+logic result : (t,name_id) farray
+
+logic hash_table1 : (t,name_id) farray
+
+logic result1 : bool
+
+axiom H : in_range(no_name)
+
+axiom H1 : (result = hash_table)
+
+axiom H2 : (hash_table1 = names__hash_table__aggregate_def(0))
+
+axiom H3 : ((us = 1024) and in_range1(1024))
+
+axiom H4 : ((to_rep1(char_table__split_discrs) = 1024) and (is_empty({
+  us_split_discrs1 = { rec__names__data__char_tables__vector__capacity =
+  char_table__split_discrs }; us_split_fields1 = {
+  rec__names__data__char_tables__vector = char_table__split_fields }
+  }) = true))
+
+axiom H5 : (1024 = to_rep1(char_table__split_discrs))
+
+axiom H6 : ((us1 = 256) and in_range3(256))
+
+axiom H7 : ((to_rep2(entry_table__split_discrs) = 256) and (is_empty1({
+  us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = entry_table__split_fields }
-  }) = true)) and ((256 = to_rep2(entry_table__split_discrs)) and
-  ((result1 = invariant__(hash_table1, {
+  }) = true))
+
+axiom H8 : (256 = to_rep2(entry_table__split_discrs))
+
+axiom H9 : ((result1 = invariant__(hash_table1, {
   rec__names__data__char_tables__vector = char_table__split_fields }, {
   rec__names__data__entry_tables__vector = entry_table__split_fields })) and
   ((result1 = true) <-> (((valid_tables({
@@ -1993,7 +2013,10 @@ goal WP_parameter_def :
   char_table__split_fields }, { rec__names__data__entry_tables__vector =
   entry_table__split_fields }) = true)) and (valid_hashes(hash_table1, {
   rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true)))))))))))) -> (invariant__(hash_table1, {
+  }) = true))))
+
+ (* File "names.adb", line 72, characters 0-0 *)
+goal WP_parameter_def : (invariant__(hash_table1, {
   rec__names__data__char_tables__vector = char_table__split_fields }, {
   rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true))))
+  }) = true)

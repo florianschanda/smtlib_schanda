@@ -325,10 +325,23 @@ axiom get__def_axiom1 :
   (get({ us_split_fields1 = { rec__ext__ = x }; attr__tag = x1 },
   extension_pkg__body_elaborated) = true)))
 
+logic body_elaborated : bool
+
+logic extension_pkg__early_call__assume : bool
+
+logic result : bool
+
+logic body_elaborated1 : bool
+
+logic result1 : bool
+
+logic body_elaborated2 : bool
+
+axiom H : (result = body_elaborated)
+
+axiom H1 : (body_elaborated1 = of_int(0))
+
  (* File "extension_pkg.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall body_elaborated:bool. forall result:bool.
-  forall body_elaborated1:bool. ((({ bool__content = result } = {
-  bool__content = body_elaborated }) and (body_elaborated1 = of_int(0))) ->
-  (get1(us_tag1, { us_split_fields1 = { rec__ext__ = hide_ext__(of_int(0),
-  us_null_ext__) }; attr__tag = us_tag1 }, body_elaborated1) = true)))
+goal WP_parameter_def : (get1(us_tag1, { us_split_fields1 = { rec__ext__ =
+  hide_ext__(of_int(0), us_null_ext__) }; attr__tag = us_tag1 },
+  body_elaborated1) = true)

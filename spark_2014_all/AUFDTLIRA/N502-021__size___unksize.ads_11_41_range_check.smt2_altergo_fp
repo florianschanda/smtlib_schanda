@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -287,6 +287,11 @@ axiom v2v__def_axiom : (v2v = 6)
 
 axiom v3v__def_axiom : (v3v = value__size)
 
+logic unksize__v3v__assume : int
+
+axiom H : in_range(v1v)
+
+axiom H1 : in_range(v2v)
+
  (* File "unksize.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : (in_range(v1v) -> (in_range(v2v) ->
-  in_range(value__size)))
+goal WP_parameter_def : in_range(value__size)

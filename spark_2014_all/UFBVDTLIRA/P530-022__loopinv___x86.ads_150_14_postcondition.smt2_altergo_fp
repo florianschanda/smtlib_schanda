@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1070,27 +1070,58 @@ logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x86__writereg32post__result : bool
+
+logic o : t
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic result : bool
+
+logic x86__writereg32post__result1 : bool
+
+logic x86__writereg32post__result2 : bool
+
+logic x86__writereg32post__result3 : bool
+
+logic x86__writereg32post__result4 : bool
+
+logic x86__writereg32post__result5 : bool
+
+logic result1 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (x86__writereg32post__result1 = x86__writereg32post__result2)
+
+axiom H3 : (x86__writereg32post__result3 = x86__writereg32post__result1)
+
+axiom H4 : ((o = readreg32(regnew)) and (o = toSmall(bw_and1(regnew,
+  of_int1(4294967295)))))
+
+axiom H5 : (((o = val__) -> (o1 = true)) and ((not (o = val__)) ->
+  (o1 = false)))
+
+axiom H6 : (((bw_and1(regnew, of_int1(18446744069414584320)) = of_int1(0)) ->
+  (o2 = match_bool(o1, true, false))) and ((not (bw_and1(regnew,
+  of_int1(18446744069414584320)) = of_int1(0))) -> (o2 = match_bool(o1,
+  false, false))))
+
+axiom H7 : (result = x86__writereg32post__result)
+
+axiom H8 : (x86__writereg32post__result1 = o2)
+
+axiom H9 : (x86__writereg32post__result4 = x86__writereg32post__result2)
+
+axiom H10 : (x86__writereg32post__result5 = x86__writereg32post__result3)
+
+axiom H11 : (result1 = x86__writereg32post__result4)
+
+axiom H12 : (x86__writereg32post__result4 = true)
+
  (* File "x86.ads", line 148, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x86__writereg32post__result:bool. forall o:t. forall o1:bool.
-  forall o2:bool. forall result:bool.
-  forall x86__writereg32post__result1:bool.
-  forall x86__writereg32post__result2:bool.
-  forall x86__writereg32post__result3:bool.
-  forall x86__writereg32post__result4:bool.
-  forall x86__writereg32post__result5:bool.
-  (forall result1:bool.
-  ((((((x86__writereg32post__result1 = x86__writereg32post__result2) and
-  (x86__writereg32post__result3 = x86__writereg32post__result1)) and
-  (((((o = readreg32(regnew)) and (o = toSmall(bw_and1(regnew,
-  of_int1(4294967295))))) and (((o = val__) and (o1 = true)) or
-  ((not (o = val__)) and (o1 = false)))) and (((bw_and1(regnew,
-  of_int1(18446744069414584320)) = of_int1(0)) and (o2 = match_bool(o1, true,
-  false))) or ((not (bw_and1(regnew,
-  of_int1(18446744069414584320)) = of_int1(0))) and (o2 = match_bool(o1,
-  false, false))))) and ((result = x86__writereg32post__result) and
-  (x86__writereg32post__result1 = o2)))) and
-  ((x86__writereg32post__result4 = x86__writereg32post__result2) and
-  (x86__writereg32post__result5 = x86__writereg32post__result3))) and
-  (result1 = x86__writereg32post__result4)) ->
-  ((x86__writereg32post__result4 = true) -> (readreg32(regnew) = val__)))))
+goal WP_parameter_def : (readreg32(regnew) = val__)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,19 +162,109 @@ function t4b__ref___projection(a: t4b__ref) : t4b = (a).t4b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic j : int
+
+logic o : int
+
+logic temp___141 : int
+
+logic temp___142 : int
+
+logic o1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : int
+
+logic j2 : int
+
+logic j3 : int
+
+logic i : int
+
+logic temp___146 : int
+
+logic rho : int
+
+logic result2 : int
+
+logic temp___1461 : int
+
+logic result3 : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic temp___1421 : int
+
+logic result4 : int
+
+logic temp___1422 : int
+
+logic result5 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic rho1 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic rho2 : int
+
+logic result6 : int
+
+logic j4 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 2)
+
+axiom H2 : in_range1(j1)
+
+axiom H3 : (j1 <  5)
+
+axiom H4 : ((o = (j1 + 1)) and in_range1((j1 + 1)))
+
+axiom H5 : (result1 = j1)
+
+axiom H6 : (j2 = o)
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(j3))
+
+axiom H8 : (result2 = temp___146)
+
+axiom H9 : (temp___1461 = j3)
+
+axiom H10 : (i = result3)
+
+axiom H11 : (i1 = 1)
+
+axiom H12 : (1 <= i1)
+
+axiom H13 : (i1 <= 5)
+
+axiom H14 : (((1 <= 5) -> in_range2(i2)) and ((1 <= i2) and (i2 <= 5)))
+
+axiom H15 : (temp___1421 = result4)
+
+axiom H16 : (temp___1422 = i2)
+
+axiom H17 : ((of_int(1) = true) -> (not (of_int(1) = true)))
+
+axiom H18 : (not (i2 = 5))
+
+axiom H19 : (result5 = i2)
+
+axiom H20 : (i3 = (i2 + 1))
+
  (* File "nested_loops.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall o:int. forall result:int. forall j1:int.
-  forall result1:int. forall j2:int. forall j3:int. forall i:int.
-  forall temp___146:int. forall result2:int. forall temp___1461:int.
-  forall result3:int. forall i1:int. forall i2:int. forall temp___142:int.
-  forall result4:int. forall temp___1421:int. forall result5:int.
-  forall i3:int. (((result = j) and (j1 = 2)) -> (in_range1(j1) ->
-  ((j1 <  5) -> ((((o = (j1 + 1)) and in_range1((j1 + 1))) and
-  ((result1 = j1) and (j2 = o))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(j3)) -> (((result2 = temp___146) and (temp___1461 = j3)) ->
-  (((i = result3) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 5)) ->
-  ((((1 <= 5) -> in_range2(i2)) and ((1 <= i2) and (i2 <= 5))) ->
-  (((temp___142 = result4) and (temp___1421 = i2)) -> (((of_int(1) = true) ->
-  (not (of_int(1) = true))) -> ((not (i2 = 5)) -> (((result5 = i2) and
-  (i3 = (i2 + 1))) -> (temp___1421 <  i3)))))))))))))))
+goal WP_parameter_def : (temp___1422 <  i3)

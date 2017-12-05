@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -507,149 +507,491 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "prefixsum.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall output_space:int. forall space:int.
-  forall left:int. forall right:int. forall temp___188:(int,integer) farray.
-  forall temp___194:(int,integer) farray.
-  forall temp___187:(int,integer) farray.
-  forall temp___202:(int,integer) farray.
-  forall temp___186:(int,integer) farray.
-  forall temp___201:(int,integer) farray.
-  forall temp___193:(int,integer) farray. forall temp___185:int.
-  forall temp___183:(int,integer) farray.
-  forall temp___192:(int,integer) farray. forall temp___182:int.
-  forall temp___199:(int,integer) farray.
-  forall temp___191:(int,integer) farray.
-  forall temp___190:(int,integer) farray.
-  forall temp___197:(int,integer) farray. forall temp___181:int.
-  forall temp___189:(int,integer) farray.
-  forall temp___204:(int,integer) farray.
-  forall temp___195:(int,integer) farray. forall temp___205:int.
-  forall temp___179:(int,integer) farray. forall temp___175:int.
-  forall temp___173:(int,integer) farray.
-  forall temp___177:(int,integer) farray. forall temp___172:int.
-  forall temp___176:(int,integer) farray. forall temp___180:int.
-  forall o:int. forall o1:int. forall o2:integer. forall o3:int.
-  forall o4:integer. forall o5:int. forall o6:int. forall o7:int.
-  forall o8:int. forall o9:integer. forall o10:int.
-  forall o11:(int,integer) farray. forall o12:int. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:int.
-  forall a1:(int,integer) farray. forall left1:int. forall right1:int.
-  forall result:int. forall space1:int. forall a2:(int,integer) farray.
-  forall space2:int. forall left2:int. forall right2:int.
-  forall temp___2051:int. forall rho:int. forall result1:int.
-  forall temp___2052:int. forall result2:int. forall left3:int.
-  forall a3:(int,integer) farray. forall left4:int. forall right3:int.
-  forall temp___1801:int. forall result3:int. forall temp___1802:int.
-  forall result4:int. forall right4:int. forall result5:(int,integer) farray.
-  forall a4:(int,integer) farray. forall result6:int. forall left5:int.
-  forall a5:(int,integer) farray. forall left6:int. forall right5:int.
-  forall a6:(int,integer) farray. forall left7:int. forall right6:int.
-  forall rho1:int. forall a7:(int,integer) farray. forall left8:int.
-  forall right7:int. forall a8:(int,integer) farray. forall left9:int.
-  forall right8:int. forall rho2:int. forall result7:int. forall space3:int.
-  forall a9:(int,integer) farray. forall space4:int. forall left10:int.
-  forall right9:int. forall a10:(int,integer) farray. forall space5:int.
-  forall left11:int. forall right10:int. forall a11:(int,integer) farray.
-  forall space6:int. forall left12:int. forall right11:int__ref.
-  forall a12:(int,integer) farray. forall space7:int. forall left13:int.
-  forall right12:int. forall result8:int__ref. forall output_space1:int.
-  forall a13:map__ref. forall output_space2:int__ref. forall space8:int__ref.
-  forall left14:int__ref. forall right13:int__ref.
-  forall a14:(int,integer) farray. forall output_space3:int.
-  forall space9:int. forall left15:int. forall right14:int.
-  forall result9:bool. (((1 <= 2147483647) -> in_range3(output_space)) ->
-  ((all_elements_in(a, 1000000) = true) -> ((((({ int__content = result } = {
-  int__content = space }) and (space1 = 1)) and (in_range3(space1) and
-  (((0 <= 2147483647) -> in_range2(left)) and (((0 <= 2147483647) ->
-  in_range2(right)) and ((((space1 <  8) and ((((temp___188 = a) and
-  ((temp___194 = a) and ((temp___187 = a) and ((temp___202 = a) and
-  ((temp___186 = a) and ((temp___201 = a) and ((temp___193 = a) and
-  ((temp___185 = right) and ((temp___183 = a) and ((temp___192 = a) and
-  ((temp___182 = left) and ((temp___199 = a) and ((temp___191 = a) and
-  ((temp___190 = a) and ((temp___197 = a) and ((temp___181 = space1) and
-  ((temp___189 = a) and ((temp___204 = a) and ((temp___195 = a) and
-  ((0 = temp___205) and ((((all_elements_in(a2,
-  (space2 * 1000000)) = true) and (((space2 = 1) or (space2 = 2)) or
-  (space2 = 4))) and
-  (forall k:int. (((0 <= k) and (k <= 7)) -> ((((mod((k + 1), 8) = 0) and
-  (space2 = 8)) and
-  (to_rep((a2[k])) = (((((((to_rep((temp___186[0])) + to_rep((temp___187[1]))) + to_rep((temp___188[2]))) + to_rep((temp___189[3]))) + to_rep((temp___190[4]))) + to_rep((temp___191[5]))) + to_rep((temp___192[6]))) + to_rep((temp___193[7]))))) or
-  ((not ((mod((k + 1), 8) = 0) and (space2 = 8))) and ((((mod((k + 1),
-  4) = 0) and (4 <= space2)) and
-  (to_rep((a2[k])) = (((to_rep((temp___194[k])) + to_rep((temp___195[(k - 1)]))) + to_rep((temp___197[(k - 2)]))) + to_rep((temp___199[(k - 3)]))))) or
-  ((not ((mod((k + 1), 4) = 0) and (4 <= space2))) and ((((mod((k + 1),
-  2) = 0) and (2 <= space2)) and
-  (to_rep((a2[k])) = (to_rep((temp___201[k])) + to_rep((temp___202[(k - 1)]))))) or
-  ((not ((mod((k + 1), 2) = 0) and (2 <= space2))) and
-  (to_rep((a2[k])) = to_rep((temp___204[k])))))))))))) and
-  (((((1 <= 2147483647) -> in_range3(space2)) and ((0 <= 2147483647) ->
+logic a : (int,integer) farray
+
+logic output_space : int
+
+logic space : int
+
+logic left : int
+
+logic right : int
+
+logic temp___188 : (int,integer) farray
+
+logic temp___194 : (int,integer) farray
+
+logic temp___187 : (int,integer) farray
+
+logic temp___202 : (int,integer) farray
+
+logic temp___186 : (int,integer) farray
+
+logic temp___201 : (int,integer) farray
+
+logic temp___193 : (int,integer) farray
+
+logic temp___185 : int
+
+logic temp___183 : (int,integer) farray
+
+logic temp___192 : (int,integer) farray
+
+logic temp___182 : int
+
+logic temp___199 : (int,integer) farray
+
+logic temp___191 : (int,integer) farray
+
+logic temp___190 : (int,integer) farray
+
+logic temp___197 : (int,integer) farray
+
+logic temp___181 : int
+
+logic temp___189 : (int,integer) farray
+
+logic temp___204 : (int,integer) farray
+
+logic temp___195 : (int,integer) farray
+
+logic temp___205 : int
+
+logic k : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : integer
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic temp___179 : (int,integer) farray
+
+logic temp___175 : int
+
+logic temp___173 : (int,integer) farray
+
+logic temp___177 : (int,integer) farray
+
+logic temp___172 : int
+
+logic temp___176 : (int,integer) farray
+
+logic temp___180 : int
+
+logic k1 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : integer
+
+logic o22 : int
+
+logic o23 : (int,integer) farray
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic a1 : (int,integer) farray
+
+logic left1 : int
+
+logic right1 : int
+
+logic result : int
+
+logic space1 : int
+
+logic a2 : (int,integer) farray
+
+logic space2 : int
+
+logic left2 : int
+
+logic right2 : int
+
+logic temp___2051 : int
+
+logic rho : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic temp___2052 : int
+
+logic result3 : int
+
+logic left3 : int
+
+logic a3 : (int,integer) farray
+
+logic left4 : int
+
+logic right3 : int
+
+logic temp___1801 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : int
+
+logic temp___1802 : int
+
+logic result9 : int
+
+logic right4 : int
+
+logic result10 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic result11 : int
+
+logic left5 : int
+
+logic a5 : (int,integer) farray
+
+logic left6 : int
+
+logic right5 : int
+
+logic temp___1803 : int
+
+logic a6 : (int,integer) farray
+
+logic left7 : int
+
+logic right6 : int
+
+logic temp___1804 : int
+
+logic a7 : (int,integer) farray
+
+logic left8 : int
+
+logic right7 : int
+
+logic a8 : (int,integer) farray
+
+logic left9 : int
+
+logic right8 : int
+
+logic rho1 : int
+
+logic a9 : (int,integer) farray
+
+logic left10 : int
+
+logic right9 : int
+
+logic a10 : (int,integer) farray
+
+logic left11 : int
+
+logic right10 : int
+
+logic rho2 : int
+
+logic result12 : int
+
+logic space3 : int
+
+logic a11 : (int,integer) farray
+
+logic space4 : int
+
+logic left12 : int
+
+logic right11 : int
+
+logic temp___2053 : int
+
+logic a12 : (int,integer) farray
+
+logic space5 : int
+
+logic left13 : int
+
+logic right12 : int
+
+logic temp___2054 : int
+
+logic rho3 : int
+
+logic a13 : (int,integer) farray
+
+logic space6 : int
+
+logic left14 : int
+
+logic right13 : int
+
+logic temp___2055 : int
+
+logic a14 : (int,integer) farray
+
+logic space7 : int
+
+logic left15 : int
+
+logic right14 : int
+
+logic temp___2056 : int
+
+logic a15 : (int,integer) farray
+
+logic space8 : int
+
+logic left16 : int
+
+logic right15 : int
+
+logic a16 : (int,integer) farray
+
+logic space9 : int
+
+logic left17 : int
+
+logic right16 : int
+
+logic a17 : (int,integer) farray
+
+logic space10 : int
+
+logic left18 : int
+
+logic right17 : int
+
+logic a18 : (int,integer) farray
+
+logic space11 : int
+
+logic left19 : int
+
+logic right18 : int
+
+logic result13 : int
+
+logic output_space1 : int
+
+logic a19 : (int,integer) farray
+
+logic output_space2 : int
+
+logic space12 : int
+
+logic left20 : int
+
+logic right19 : int
+
+logic a20 : (int,integer) farray
+
+logic output_space3 : int
+
+logic space13 : int
+
+logic left21 : int
+
+logic right20 : int
+
+logic result14 : bool
+
+axiom H : ((1 <= 2147483647) -> in_range3(output_space))
+
+axiom H1 : (all_elements_in(a, 1000000) = true)
+
+axiom H2 : (result = space)
+
+axiom H3 : (space1 = 1)
+
+axiom H4 : in_range3(space1)
+
+axiom H5 : ((0 <= 2147483647) -> in_range2(left))
+
+axiom H6 : ((0 <= 2147483647) -> in_range2(right))
+
+axiom H7 : ((space1 <  8) -> (((temp___188 = a) and ((temp___194 = a) and
+  ((temp___187 = a) and ((temp___202 = a) and ((temp___186 = a) and
+  ((temp___201 = a) and ((temp___193 = a) and ((temp___185 = right) and
+  ((temp___183 = a) and ((temp___192 = a) and ((temp___182 = left) and
+  ((temp___199 = a) and ((temp___191 = a) and ((temp___190 = a) and
+  ((temp___197 = a) and ((temp___181 = space1) and ((temp___189 = a) and
+  ((temp___204 = a) and ((temp___195 = a) and ((0 = temp___205) and
+  ((((all_elements_in(a2, (space2 * 1000000)) = true) and (((space2 = 1) or
+  (space2 = 2)) or (space2 = 4))) and
+  (forall k2:int. (((0 <= k2) and (k2 <= 7)) -> ((((mod((k2 + 1), 8) = 0) and
+  (space2 = 8)) ->
+  (to_rep((a2[k2])) = (((((((to_rep((temp___186[0])) + to_rep((temp___187[1]))) + to_rep((temp___188[2]))) + to_rep((temp___189[3]))) + to_rep((temp___190[4]))) + to_rep((temp___191[5]))) + to_rep((temp___192[6]))) + to_rep((temp___193[7]))))) and
+  ((not ((mod((k2 + 1), 8) = 0) and (space2 = 8))) -> ((((mod((k2 + 1),
+  4) = 0) and (4 <= space2)) ->
+  (to_rep((a2[k2])) = (((to_rep((temp___194[k2])) + to_rep((temp___195[(k2 - 1)]))) + to_rep((temp___197[(k2 - 2)]))) + to_rep((temp___199[(k2 - 3)]))))) and
+  ((not ((mod((k2 + 1), 4) = 0) and (4 <= space2))) -> ((((mod((k2 + 1),
+  2) = 0) and (2 <= space2)) ->
+  (to_rep((a2[k2])) = (to_rep((temp___201[k2])) + to_rep((temp___202[(k2 - 1)]))))) and
+  ((not ((mod((k2 + 1), 2) = 0) and (2 <= space2))) ->
+  (to_rep((a2[k2])) = to_rep((temp___204[k2])))))))))))) and
+  ((((((1 <= 2147483647) -> in_range3(space2)) and ((0 <= 2147483647) ->
   in_range2(left2))) and ((0 <= 2147483647) -> in_range2(right2))) and
-  (((temp___2051 = result1) and (temp___2052 = space2)) and
-  (((left2 = result2) and (left3 = (space2 - 1))) and ((((left3 <  8) and
-  ((((temp___179 = a2) and ((temp___175 = right2) and ((temp___173 = a2) and
-  ((temp___177 = a2) and ((temp___172 = left3) and ((temp___176 = a2) and
-  ((0 = temp___180) and (((((((mod((left4 + 1), space2) = 0) and
-  (all_left_elements_in(a3, left4, ((space2 * 2) * 1000000)) = true)) and
-  (all_right_elements_in(a3, (left4 - 1), (space2 * 1000000)) = true)) and
-  (mod((left4 + 1), (space2 * 2)) = space2)) and ((8 <= left4) ->
-  ((left4 = 8) or (left4 = 9)))) and
-  (forall k:int. (((0 <= k) and (k <= 7)) -> (((((0 <= k) and
-  (k <= (left4 - space2))) and (mod((k + 1), (2 * space2)) = 0)) and
-  (to_rep((a3[k])) = (to_rep((temp___176[k])) + to_rep((temp___177[(k - space2)]))))) or
-  ((not (((0 <= k) and (k <= (left4 - space2))) and (mod((k + 1),
-  (2 * space2)) = 0))) and (to_rep((a3[k])) = to_rep((temp___179[k])))))))) and
+  (space2 <  8)) and (((temp___2051 = result2) and
+  (temp___2052 = space2)) and (((left2 = result3) and
+  (left3 = (space2 - 1))) and ((((left3 <  8) -> ((((temp___179 = a2) and
+  ((temp___175 = right2) and ((temp___173 = a2) and ((temp___177 = a2) and
+  ((temp___172 = left3) and ((temp___176 = a2) and ((0 = temp___180) and
+  (((((((mod((left4 + 1), space2) = 0) and (all_left_elements_in(a3, left4,
+  ((space2 * 2) * 1000000)) = true)) and (all_right_elements_in(a3,
+  (left4 - 1), (space2 * 1000000)) = true)) and (mod((left4 + 1),
+  (space2 * 2)) = space2)) and ((8 <= left4) -> ((left4 = 8) or
+  (left4 = 9)))) and
+  (forall k2:int. (((0 <= k2) and (k2 <= 7)) -> (((((0 <= k2) and
+  (k2 <= (left4 - space2))) and (mod((k2 + 1), (2 * space2)) = 0)) ->
+  (to_rep((a3[k2])) = (to_rep((temp___176[k2])) + to_rep((temp___177[(k2 - space2)]))))) and
+  ((not (((0 <= k2) and (k2 <= (left4 - space2))) and (mod((k2 + 1),
+  (2 * space2)) = 0))) -> (to_rep((a3[k2])) = to_rep((temp___179[k2])))))))) and
   (((((0 <= 2147483647) -> in_range2(left4)) and ((0 <= 2147483647) ->
-  in_range2(right3))) and (left4 <  8)) and (((temp___1801 = result3) and
-  (temp___1802 = left4)) and ((((o = (left4 + space2)) and
-  in_range1((left4 + space2))) and ((right3 = result4) and (right4 = o))) and
-  (((((((((((0 <= right4) and (right4 <= 7)) and (o3 = right4)) and
-  (o4 = (a3[o3]))) and (o5 = to_rep(o4))) and ((((((0 <= left4) and
-  (left4 <= 7)) and (o1 = left4)) and (o2 = (a3[o1]))) and
-  (o6 = to_rep(o2))) and (o7 = (o6 + o5)))) and ((o8 = o7) and
-  in_range1(o7))) and (to_rep(o9) = o8)) and ((((0 <= right4) and
-  (right4 <= 7)) and (o10 = right4)) and (o11 = (a3[o10 <- o9])))) and
-  ((a3 = result5) and (a4 = o11))) and (((((((o12 = (space2 * 2)) and
-  in_range1((space2 * 2))) and (o13 = (left4 + o12))) and ((o14 = o13) and
-  in_range1(o13))) and ((o15 = o14) and in_range2(o14))) and
-  ((left4 = result6) and (left5 = o15))) and
-  (not (left5 <  8))))))))))))))) and (((right4 = right5) and
-  ((left5 = left6) and (a4 = a5))) and ((rho1 = temp___1802) and
-  ((right6 = right4) and ((left7 = left5) and (a6 = a4)))))) and ((({
-  int__content = right7 } = { int__content = right5 }) and (({ int__content =
-  left8 } = { int__content = left6 }) and ({ map__content = a7 } = {
-  map__content = a5 }))) and ((rho2 = rho1) and ((right8 = right6) and
-  ((left9 = left7) and (a8 = a6))))))) or ((not (left3 <  8)) and
-  (((right2 = right7) and ((left3 = left8) and (a2 = a7))) and
-  ((rho2 = rho) and ((right8 = right2) and ((left9 = left3) and
-  (a8 = a2))))))) and (((((o16 = (space2 * 2)) and
-  in_range1((space2 * 2))) and ((o17 = o16) and in_range3(o16))) and
-  ((result7 = space2) and (space3 = o17))) and
-  (not (space3 <  8)))))))))))))))))))))))))))) and ((({ int__content =
-  right9 } = { int__content = right7 }) and (({ int__content = left10 } = {
-  int__content = left8 }) and ((space3 = space4) and ({ map__content = a9
-  } = { map__content = a7 })))) and ((right10 = right8) and
-  ((left11 = left9) and ((space5 = space3) and (a10 = a8)))))) and
-  (((right11 = { int__content = right9 }) and (({ int__content = left12 } = {
-  int__content = left10 }) and (({ int__content = space6 } = { int__content =
-  space4 }) and ({ map__content = a11 } = { map__content = a9 })))) and
-  ((right12 = right10) and ((left13 = left11) and ((space7 = space5) and
-  (a12 = a10))))))) or ((not (space1 <  8)) and (((right11 = { int__content =
-  right }) and (({ int__content = left12 } = { int__content = left }) and
-  ((space1 = space6) and ({ map__content = a11 } = { map__content = a
-  })))) and ((right12 = right1) and ((left13 = left1) and
-  ((space7 = space1) and (a12 = a1))))))) and ((result8 = { int__content =
-  output_space }) and (output_space1 = space6))))))) and
-  (((right13 = right11) and ((left14 = { int__content = left12 }) and
-  ((space8 = { int__content = space6 }) and ((output_space2 = {
-  int__content = output_space1 }) and (a13 = { map__content = a11 }))))) and
-  ((right14 = right12) and ((left15 = left13) and ((space9 = space7) and
-  ((output_space3 = output_space1) and (a14 = a12))))))) ->
-  (((result9 = all_elements_in((a13).map__content, 8000000)) and
-  ((result9 = true) <->
-  (forall k:int. (((0 <= k) and (k <= 7)) ->
-  (((-8000000) <= to_rep(((a13).map__content[k]))) and
-  (to_rep(((a13).map__content[k])) <= 8000000)))))) -> ((result9 = true) ->
-  (((output_space2).int__content = 8) -> (all_elements_in((a13).map__content,
-  8000000) = true))))))))
+  in_range2(right3))) and (left4 <  8)) and (((temp___1801 = result8) and
+  (temp___1802 = left4)) and ((((o12 = (left4 + space2)) and
+  in_range1((left4 + space2))) and ((right3 = result9) and
+  (right4 = o12))) and (((((((((((0 <= right4) and (right4 <= 7)) and
+  (o15 = right4)) and (o16 = (a3[o15]))) and (o17 = to_rep(o16))) and
+  ((((((0 <= left4) and (left4 <= 7)) and (o13 = left4)) and
+  (o14 = (a3[o13]))) and (o18 = to_rep(o14))) and (o19 = (o18 + o17)))) and
+  ((o20 = o19) and in_range1(o19))) and (to_rep(o21) = o20)) and
+  ((((0 <= right4) and (right4 <= 7)) and (o22 = right4)) and
+  (o23 = (a3[o22 <- o21])))) and ((a3 = result10) and (a4 = o23))) and
+  (((((((o24 = (space2 * 2)) and in_range1((space2 * 2))) and
+  (o25 = (left4 + o24))) and ((o26 = o25) and in_range1(o25))) and
+  ((o27 = o26) and in_range2(o26))) and ((left4 = result11) and
+  (left5 = o27))) and (not (left5 <  8))))))))))))))) and
+  (((right4 = right7) and ((left5 = left8) and (a4 = a7))) and
+  ((rho1 = temp___1802) and ((right8 = right4) and ((left9 = left5) and
+  (a8 = a4)))))) and (((right9 = right7) and ((left10 = left8) and
+  (a9 = a7))) and ((rho2 = rho1) and ((right10 = right8) and
+  ((left11 = left9) and (a10 = a8))))))) and ((not (left3 <  8)) ->
+  (((right9 = right2) and ((left10 = left3) and (a9 = a2))) and
+  ((rho2 = rho) and ((right10 = right2) and ((left11 = left3) and
+  (a10 = a2))))))) and (((((o28 = (space2 * 2)) and
+  in_range1((space2 * 2))) and ((o29 = o28) and in_range3(o28))) and
+  ((result12 = space2) and (space3 = o29))) and
+  (not (space3 <  8)))))))))))))))))))))))))))) and (((right15 = right9) and
+  ((left16 = left10) and ((space8 = space3) and (a15 = a9)))) and
+  ((right16 = right10) and ((left17 = left11) and ((space9 = space3) and
+  (a16 = a10)))))))
+
+axiom H8 : ((space1 <  8) -> (right17 = right15))
+
+axiom H9 : ((space1 <  8) -> (left18 = left16))
+
+axiom H10 : ((space1 <  8) -> (space10 = space8))
+
+axiom H11 : ((space1 <  8) -> (a17 = a15))
+
+axiom H12 : ((space1 <  8) -> (right18 = right16))
+
+axiom H13 : ((space1 <  8) -> (left19 = left17))
+
+axiom H14 : ((space1 <  8) -> (space11 = space9))
+
+axiom H15 : ((space1 <  8) -> (a18 = a16))
+
+axiom H16 : ((not (space1 <  8)) -> (right17 = right))
+
+axiom H17 : ((not (space1 <  8)) -> (left18 = left))
+
+axiom H18 : ((not (space1 <  8)) -> (space10 = space1))
+
+axiom H19 : ((not (space1 <  8)) -> (a17 = a))
+
+axiom H20 : ((not (space1 <  8)) -> (right18 = right1))
+
+axiom H21 : ((not (space1 <  8)) -> (left19 = left1))
+
+axiom H22 : ((not (space1 <  8)) -> (space11 = space1))
+
+axiom H23 : ((not (space1 <  8)) -> (a18 = a1))
+
+axiom H24 : (result13 = output_space)
+
+axiom H25 : (output_space1 = space10)
+
+axiom H26 : (right19 = right17)
+
+axiom H27 : (left20 = left18)
+
+axiom H28 : (space12 = space10)
+
+axiom H29 : (output_space2 = output_space1)
+
+axiom H30 : (a19 = a17)
+
+axiom H31 : (right20 = right18)
+
+axiom H32 : (left21 = left19)
+
+axiom H33 : (space13 = space11)
+
+axiom H34 : (output_space3 = output_space1)
+
+axiom H35 : (a20 = a18)
+
+axiom H36 : ((result14 = all_elements_in(a19, 8000000)) and
+  ((result14 = true) <->
+  (forall k2:int. (((0 <= k2) and (k2 <= 7)) ->
+  (((-8000000) <= to_rep((a19[k2]))) and (to_rep((a19[k2])) <= 8000000))))))
+
+axiom H37 : (result14 = true)
+
+axiom H38 : (output_space2 = 8)
+
+ (* File "prefixsum.ads", line 24, characters 0-0 *)
+goal WP_parameter_def : (all_elements_in(a19, 8000000) = true)

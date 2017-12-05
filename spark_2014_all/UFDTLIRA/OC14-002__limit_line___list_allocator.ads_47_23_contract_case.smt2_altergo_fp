@@ -316,7 +316,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -387,94 +387,198 @@ axiom oeq__post_axiom :
 
 axiom oeq__post__dispatch_axiom : true
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall list_allocator__m__find__result:int.
-  forall list_allocator__m__find__L_1__R29b__assume:int.
-  forall temp___383:int. forall temp___384:int. forall temp___382:int.
-  forall o:int. forall o1:int. forall list_allocator__m__find__result1:int.
-  forall result:int. forall j1:int. forall result1:bool. forall result2:int.
-  forall list_allocator__m__find__result2:int. forall j2:int.
-  forall list_allocator__m__find__result3:int. forall result3:int.
-  forall j3:int. forall result4:bool. forall result5:int.
-  forall list_allocator__m__find__result4:int. forall j4:int.
-  forall list_allocator__m__find__result5:int. forall j5:int.
-  forall list_allocator__m__find__result6:int. forall j6:int.
-  forall list_allocator__m__find__result7:int. forall j7:int.
-  forall list_allocator__m__find__result8:int. forall j8:int.
-  forall list_allocator__m__find__result9:int. forall j9:int.
-  forall list_allocator__m__find__result10:int. forall result6:int.
-  forall list_allocator__m__find__result11:int.
-  forall list_allocator__m__find__result12:int.
-  forall list_allocator__m__find__result13:int. forall j10:int.
-  forall list_allocator__m__find__result14:int. forall j11:int.
-  forall list_allocator__m__find__result15:int. forall j12:int.
-  forall list_allocator__m__find__result16:int. forall j13:int.
-  forall list_allocator__m__find__result17:int. (in_range3(r) ->
-  (((((((list_allocator__m__find__L_1__R29b__assume = length(s)) and
-  in_range1(list_allocator__m__find__L_1__R29b__assume)) and
-  (list_allocator__m__find__L_1__R29b__assume = r29b)) and
-  in_range1(r29b)) and
-  (((((list_allocator__m__find__result5 = list_allocator__m__find__result14) and
-  (j4 = j10)) and
-  ((list_allocator__m__find__result15 = list_allocator__m__find__result6) and
-  (j11 = j5))) and ((temp___383 = 1) and ((temp___384 = r29b) and ((({
-  int__content = result } = { int__content = j }) and (j1 = temp___383)) and
-  (((temp___383 <= j1) and (j1 <= temp___384)) and ((temp___382 = j1) and
-  (((((list_allocator__m__find__result2 = list_allocator__m__find__result5) and
-  (j1 = j4)) and
-  ((list_allocator__m__find__result6 = list_allocator__m__find__result2) and
-  (j5 = j1))) and ((((o = get(s, j1)) and in_range4(o)) and (((o = r) and
-  (result1 = true)) or ((not (o = r)) and (result1 = false)))) and
+logic j : int
+
+logic list_allocator__m__find__result : int
+
+logic list_allocator__m__find__L_1__R29b__assume : int
+
+logic temp___383 : int
+
+logic temp___384 : int
+
+logic temp___382 : int
+
+logic o : int
+
+logic k : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic list_allocator__m__find__result1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic list_allocator__m__find__result2 : int
+
+logic j2 : int
+
+logic list_allocator__m__find__result3 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic list_allocator__m__find__result4 : int
+
+logic j4 : int
+
+logic list_allocator__m__find__result5 : int
+
+logic j5 : int
+
+logic list_allocator__m__find__result6 : int
+
+logic j6 : int
+
+logic list_allocator__m__find__result7 : int
+
+logic j7 : int
+
+logic list_allocator__m__find__result8 : int
+
+logic j8 : int
+
+logic list_allocator__m__find__result9 : int
+
+logic j9 : int
+
+logic list_allocator__m__find__result10 : int
+
+logic j10 : int
+
+logic list_allocator__m__find__result11 : int
+
+logic j11 : int
+
+logic list_allocator__m__find__result12 : int
+
+logic result6 : int
+
+logic list_allocator__m__find__result13 : int
+
+logic list_allocator__m__find__result14 : int
+
+logic list_allocator__m__find__result15 : int
+
+logic j12 : int
+
+logic list_allocator__m__find__result16 : int
+
+logic j13 : int
+
+logic list_allocator__m__find__result17 : int
+
+logic j14 : int
+
+logic list_allocator__m__find__result18 : int
+
+logic j15 : int
+
+logic list_allocator__m__find__result19 : int
+
+logic result7 : bool
+
+axiom H : in_range3(r)
+
+axiom H1 : ((list_allocator__m__find__L_1__R29b__assume = length(s)) and
+  in_range1(list_allocator__m__find__L_1__R29b__assume))
+
+axiom H2 : (list_allocator__m__find__L_1__R29b__assume = r29b)
+
+axiom H3 : in_range1(r29b)
+
+axiom H4 :
+  (((((list_allocator__m__find__result16 = list_allocator__m__find__result7) and
+  (j12 = j6)) and
+  ((list_allocator__m__find__result17 = list_allocator__m__find__result8) and
+  (j13 = j7))) and ((temp___383 = 1) and ((temp___384 = r29b) and
+  (((result = j) and (j1 = temp___383)) and (((temp___383 <= j1) and
+  (j1 <= temp___384)) and ((temp___382 = j1) and
+  (((((list_allocator__m__find__result2 = list_allocator__m__find__result7) and
+  (j1 = j6)) and
+  ((list_allocator__m__find__result8 = list_allocator__m__find__result2) and
+  (j7 = j1))) and ((((o = get(s, j1)) and in_range4(o)) and (((o = r) ->
+  (result1 = true)) and ((not (o = r)) -> (result1 = false)))) and
   ((result1 = true) and ((result2 = list_allocator__m__find__result) and
   (list_allocator__m__find__result2 = j1))))) or (((((o = get(s, j1)) and
-  in_range4(o)) and (((o = r) and (result1 = true)) or ((not (o = r)) and
+  in_range4(o)) and (((o = r) -> (result1 = true)) and ((not (o = r)) ->
   (result1 = false)))) and ((not (result1 = true)) and
   ((list_allocator__m__find__result2 = list_allocator__m__find__result) and
   (list_allocator__m__find__result2 = list_allocator__m__find__result1)))) and
-  ((((list_allocator__m__find__result4 = list_allocator__m__find__result5) and
-  (j3 = j4)) and
-  ((list_allocator__m__find__result6 = list_allocator__m__find__result4) and
-  (j5 = j3))) and
-  ((forall k:int. (((1 <= k) and (k <= j2)) -> (not (get(s, k) = r)))) and
+  ((((list_allocator__m__find__result4 = list_allocator__m__find__result7) and
+  (j3 = j6)) and
+  ((list_allocator__m__find__result8 = list_allocator__m__find__result4) and
+  (j7 = j3))) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= j2)) -> (not (get(s, k1) = r)))) and
   ((((1 <= r29b) -> dynamic_property(1, r29b, j2)) and ((1 <= j2) and
   (j2 <= r29b))) and ((not (j2 = temp___384)) and (((j2 = result3) and
-  (j3 = (j2 + 1))) and ((((o1 = get(s, j3)) and in_range4(o1)) and
-  (((o1 = r) and (result4 = true)) or ((not (o1 = r)) and
+  (j3 = (j2 + 1))) and ((((o2 = get(s, j3)) and in_range4(o2)) and
+  (((o2 = r) -> (result4 = true)) and ((not (o2 = r)) ->
   (result4 = false)))) and ((result4 = true) and
   ((result5 = list_allocator__m__find__result3) and
-  (list_allocator__m__find__result4 = j3))))))))))))))))) or (((({
-  int__content = result } = { int__content = j }) and (j1 = 1)) and
-  ((((1 <= j1) and (j1 <= r29b)) and ((((temp___382 = j1) and (((((o = get(s,
-  j1)) and in_range4(o)) and (((o = r) and (result1 = true)) or
-  ((not (o = r)) and (result1 = false)))) and ((not (result1 = true)) and
+  (list_allocator__m__find__result4 = j3))))))))))))))))) or
+  ((((result = j) and (j1 = 1)) and ((((1 <= j1) and (j1 <= r29b)) ->
+  ((((temp___382 = j1) and (((((o = get(s, j1)) and in_range4(o)) and
+  (((o = r) -> (result1 = true)) and ((not (o = r)) ->
+  (result1 = false)))) and ((not (result1 = true)) and
   ((list_allocator__m__find__result2 = list_allocator__m__find__result) and
   (list_allocator__m__find__result2 = list_allocator__m__find__result1)))) and
-  ((forall k:int. (((1 <= k) and (k <= j2)) -> (not (get(s, k) = r)))) and
+  ((forall k1:int. (((1 <= k1) and (k1 <= j2)) -> (not (get(s, k1) = r)))) and
   ((((1 <= r29b) -> dynamic_property(1, r29b, j2)) and ((1 <= j2) and
   (j2 <= r29b))) and (j2 = r29b))))) and
-  (((list_allocator__m__find__result3 = list_allocator__m__find__result7) and
-  (j2 = j6)) and
-  ((list_allocator__m__find__result8 = list_allocator__m__find__result3) and
-  (j7 = j2)))) and ((({ int__content = list_allocator__m__find__result9 } = {
-  int__content = list_allocator__m__find__result7 }) and ({ int__content = j8
-  } = { int__content = j6 })) and
-  ((list_allocator__m__find__result10 = list_allocator__m__find__result8) and
-  (j9 = j7))))) or ((not ((1 <= j1) and (j1 <= r29b))) and
-  (((list_allocator__m__find__result = list_allocator__m__find__result9) and
-  (j1 = j8)) and
-  ((list_allocator__m__find__result10 = list_allocator__m__find__result1) and
-  (j9 = j1)))))) and
-  ((((list_allocator__m__find__result12 = list_allocator__m__find__result14) and
-  ({ int__content = j10 } = { int__content = j8 })) and
-  ((list_allocator__m__find__result15 = list_allocator__m__find__result13) and
-  (j11 = j9))) and
-  (((list_allocator__m__find__result11 = list_allocator__m__find__result12) and
-  (list_allocator__m__find__result13 = list_allocator__m__find__result11)) and
-  ((result6 = list_allocator__m__find__result9) and
-  (list_allocator__m__find__result11 = 0))))))) and
-  (((list_allocator__m__find__result16 = list_allocator__m__find__result14) and
+  (((list_allocator__m__find__result3 = list_allocator__m__find__result9) and
+  (j2 = j8)) and
+  ((list_allocator__m__find__result10 = list_allocator__m__find__result3) and
+  (j9 = j2)))) and
+  (((list_allocator__m__find__result11 = list_allocator__m__find__result9) and
+  (j10 = j8)) and
+  ((list_allocator__m__find__result12 = list_allocator__m__find__result10) and
+  (j11 = j9))))) and ((not ((1 <= j1) and (j1 <= r29b))) ->
+  (((list_allocator__m__find__result11 = list_allocator__m__find__result) and
+  (j1 = j10)) and
+  ((list_allocator__m__find__result12 = list_allocator__m__find__result1) and
+  (j11 = j1)))))) and
+  ((((list_allocator__m__find__result16 = list_allocator__m__find__result14) and
   (j12 = j10)) and
   ((list_allocator__m__find__result17 = list_allocator__m__find__result15) and
-  (j13 = j11)))) -> ((mem(s, r) = true) ->
-  (1 <= list_allocator__m__find__result16)))))
+  (j13 = j11))) and
+  (((list_allocator__m__find__result13 = list_allocator__m__find__result14) and
+  (list_allocator__m__find__result15 = list_allocator__m__find__result13)) and
+  ((result6 = list_allocator__m__find__result11) and
+  (list_allocator__m__find__result13 = 0))))))
+
+axiom H5 :
+  (list_allocator__m__find__result18 = list_allocator__m__find__result16)
+
+axiom H6 : (j14 = j12)
+
+axiom H7 :
+  (list_allocator__m__find__result19 = list_allocator__m__find__result17)
+
+axiom H8 : (j15 = j13)
+
+axiom H9 : (mem(s, r) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= list_allocator__m__find__result18)

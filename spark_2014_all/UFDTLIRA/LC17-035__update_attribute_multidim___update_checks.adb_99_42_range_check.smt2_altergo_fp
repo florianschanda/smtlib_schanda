@@ -393,17 +393,65 @@ axiom def_axiom :
   temp___310), temp___311, temp___312, temp___313) = get(temp___299,
   temp___311, temp___312, temp___313)))))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+axiom H : in_range(x1)
+
+axiom H1 : in_range(x2)
+
+axiom H2 : in_range(x3)
+
+axiom H3 : in_range1(y1)
+
+axiom H4 : in_range1(y2)
+
+axiom H5 : in_range1(y3)
+
+axiom H6 : in_range2(z1)
+
+axiom H7 : in_range2(z2)
+
+axiom H8 : in_range2(z3)
+
+axiom H9 : in_range3(new_val_1)
+
+axiom H10 : in_range3(new_val_2)
+
+axiom H11 : ((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1)))
+
+axiom H12 : ((o1 = (z3 + 1)) and in_range2((z3 + 1)))
+
+axiom H13 : ((o2 = (y3 + 1)) and in_range1((y3 + 1)))
+
+axiom H14 : ((o3 = (x3 + 1)) and in_range((x3 + 1)))
+
+axiom H15 : ((o4 = (new_val_1 + 1)) and in_range3((new_val_1 + 1)))
+
+axiom H16 : ((o5 = (z2 + 1)) and in_range2((z2 + 1)))
+
+axiom H17 : ((o6 = (y2 + 1)) and in_range1((y2 + 1)))
+
+axiom H18 : ((o7 = (x2 + 1)) and in_range((x2 + 1)))
+
  (* File "update_checks.adb", line 74, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:int. forall o7:int. (in_range(x1) ->
-  (in_range(x2) -> (in_range(x3) -> (in_range1(y1) -> (in_range1(y2) ->
-  (in_range1(y3) -> (in_range2(z1) -> (in_range2(z2) -> (in_range2(z3) ->
-  (in_range3(new_val_1) -> (in_range3(new_val_2) ->
-  (((o = (new_val_2 - 1)) and in_range3((new_val_2 - 1))) ->
-  (((o1 = (z3 + 1)) and in_range2((z3 + 1))) -> (((o2 = (y3 + 1)) and
-  in_range1((y3 + 1))) -> (((o3 = (x3 + 1)) and in_range((x3 + 1))) ->
-  (((o4 = (new_val_1 + 1)) and in_range3((new_val_1 + 1))) ->
-  (((o5 = (z2 + 1)) and in_range2((z2 + 1))) -> (((o6 = (y2 + 1)) and
-  in_range1((y2 + 1))) -> (((o7 = (x2 + 1)) and in_range((x2 + 1))) ->
-  in_range2((z1 - 1))))))))))))))))))))))
+goal WP_parameter_def : in_range2((z1 - 1))

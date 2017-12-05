@@ -1432,23 +1432,89 @@ axiom def_axiom1 :
 
 axiom no_id__def_axiom : (no_id = identity__no_id__aggregate_def(0, 0, 0))
 
- (* File "database.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep1) farray. forall first_available:int.
-  forall accounts:(int,us_rep2) farray. forall o:ext_account_num.
-  forall o1:(int,character) farray. forall o2:(int,num) farray.
-  forall o3:ext_account_num. forall temp___402:(int,character) farray.
-  forall temp___4021:(int,num) farray. forall temp___4022:ext_account_num.
-  forall result:bool. forall result1:bool. (((((to_rep4(o) = 0) and
-  ((no_name = o1) and ((no_id = o2) and (o = o3)))) and
-  ((temp___402 = o1) and ((temp___4021 = o2) and (temp___4022 = o3)))) and
-  ((temp___402 = no_account_rec) and ((temp___4021 = no_account_rec1) and
-  (temp___4022 = no_account_rec2)))) -> (in_range6(first_available) ->
-  (in_range7(account) -> (((result = existing(account, links)) and
-  ((result = true) <-> (not (is_available(account, links) = true)))) ->
-  ((result = true) -> (((result1 = belongs_to(account, customer, id,
-  accounts)) and ((result1 = true) <-> (bool_eq14((accounts[account]), {
-  us_split_fields5 = { rec__database__account_rec__owner_name = customer;
+logic links : (int,us_rep1) farray
+
+logic first_available : int
+
+logic accounts : (int,us_rep2) farray
+
+logic accounts_balance : (int,us_rep3) farray
+
+logic o : ext_account_num
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,num) farray
+
+logic o3 : ext_account_num
+
+logic temp___402 : (int,character) farray
+
+logic temp___4021 : (int,num) farray
+
+logic temp___4022 : ext_account_num
+
+logic o4 : cur
+
+logic o5 : raw_amount
+
+logic o6 : cur
+
+logic o7 : raw_amount
+
+logic o8 : cur
+
+logic o9 : raw_amount
+
+logic o10 : raw_amount
+
+logic o11 : int
+
+logic o12 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : (int,us_rep2) farray
+
+logic accounts1 : (int,us_rep2) farray
+
+axiom H : (to_rep4(o) = 0)
+
+axiom H1 : (no_name = o1)
+
+axiom H2 : (no_id = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___402 = o1)
+
+axiom H5 : (temp___4021 = o2)
+
+axiom H6 : (temp___4022 = o3)
+
+axiom H7 : ((temp___402 = no_account_rec) and
+  ((temp___4021 = no_account_rec1) and (temp___4022 = no_account_rec2)))
+
+axiom H8 : in_range6(first_available)
+
+axiom H9 : in_range7(account)
+
+axiom H10 : ((result = existing(account, links)) and ((result = true) <->
+  (not (is_available(account, links) = true))))
+
+axiom H11 : (result = true)
+
+axiom H12 : ((result1 = belongs_to(account, customer, id, accounts)) and
+  ((result1 = true) <-> (bool_eq14((accounts[account]), { us_split_fields5 =
+  { rec__database__account_rec__owner_name = customer;
   rec__database__account_rec__owner_id = id;
-  rec__database__account_rec__account = of_rep4(account) } }) = true))) ->
-  ((result1 = true) -> (existing(account, links) = true)))))))))
+  rec__database__account_rec__account = of_rep4(account) } }) = true)))
+
+axiom H13 : (result1 = true)
+
+ (* File "database.ads", line 26, characters 0-0 *)
+goal WP_parameter_def : (existing(account, links) = true)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -276,27 +276,201 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "infoflow.ads", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cache_v1:(int,integer) farray. forall i:int. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall result:int. forall i1:int.
-  forall result1:(int,integer) farray. forall cache_v11:(int,integer) farray.
-  forall cache_v12:(int,integer) farray. forall i2:int. forall result2:int.
-  forall i3:int. forall result3:(int,integer) farray.
-  forall cache_v13:(int,integer) farray. ((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  ((((to_rep(o) = 0) and (o1 = (cache_v1[i1 <- o]))) and (({ map__content =
-  result1 } = { map__content = cache_v1 }) and (cache_v11 = o1))) ->
-  ((forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i2) ->
-   (to_rep((cache_v12[k])) = 0)))) ->
-  ((((((1 <= 10) -> in_range2(i2)) and
-  (forall temp___351:int. (((1 <= temp___351) and (temp___351 <= 10)) ->
-  ((i2 <  temp___351) ->
-  ((cache_v12[temp___351]) = (cache_v1[temp___351])))))) and ((1 <= i2) and
-  (i2 <= 10))) and ((not (i2 = 10)) and (((result2 = i2) and
-  (i3 = (i2 + 1))) and (((to_rep(o2) = 0) and
-  (o3 = (cache_v12[i3 <- o2]))) and ((result3 = cache_v12) and
-  (cache_v13 = o3)))))) ->
+logic cache_v1 : (int,integer) farray
+
+logic cache_v2 : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic temp___350 : (int,integer) farray
+
+logic temp___349 : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic temp___355 : (int,integer) farray
+
+logic temp___354 : int
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic cache_v11 : (int,integer) farray
+
+logic cache_v21 : (int,integer) farray
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : (int,integer) farray
+
+logic cache_v12 : (int,integer) farray
+
+logic cache_v13 : (int,integer) farray
+
+logic i3 : int
+
+logic result2 : int
+
+logic i4 : int
+
+logic result3 : (int,integer) farray
+
+logic cache_v14 : (int,integer) farray
+
+logic cache_v15 : (int,integer) farray
+
+logic i5 : int
+
+logic cache_v16 : (int,integer) farray
+
+logic i6 : int
+
+logic cache_v17 : (int,integer) farray
+
+logic i7 : int
+
+logic cache_v18 : (int,integer) farray
+
+logic i8 : int
+
+logic cache_v19 : (int,integer) farray
+
+logic i9 : int
+
+logic cache_v110 : (int,integer) farray
+
+logic i10 : int
+
+logic result4 : int
+
+logic i11 : int
+
+logic result5 : (int,integer) farray
+
+logic cache_v22 : (int,integer) farray
+
+logic cache_v23 : (int,integer) farray
+
+logic i12 : int
+
+logic result6 : int
+
+logic i13 : int
+
+logic result7 : (int,integer) farray
+
+logic cache_v24 : (int,integer) farray
+
+logic cache_v25 : (int,integer) farray
+
+logic i14 : int
+
+logic cache_v26 : (int,integer) farray
+
+logic i15 : int
+
+logic cache_v27 : (int,integer) farray
+
+logic i16 : int
+
+logic cache_v28 : (int,integer) farray
+
+logic i17 : int
+
+logic cache_v29 : (int,integer) farray
+
+logic i18 : int
+
+logic cache_v210 : (int,integer) farray
+
+logic i19 : int
+
+logic cache_v211 : (int,integer) farray
+
+logic i20 : int
+
+logic cache_v212 : (int,integer) farray
+
+logic i21 : int
+
+logic cache_v111 : (int,integer) farray
+
+logic cache_v213 : (int,integer) farray
+
+logic i22 : int
+
+logic i23 : int
+
+logic cache_v112 : (int,integer) farray
+
+logic cache_v214 : (int,integer) farray
+
+logic i24 : int
+
+logic i25 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i2 = 1)
+
+axiom H2 : (1 <= i2)
+
+axiom H3 : (i2 <= 10)
+
+axiom H4 : (to_rep(o) = 0)
+
+axiom H5 : (o1 = (cache_v1[i2 <- o]))
+
+axiom H6 : (result1 = cache_v1)
+
+axiom H7 : (cache_v12 = o1)
+
+axiom H8 :
   (forall k:int. (((1 <= k) and (k <= 10)) -> ((k <= i3) ->
-  (to_rep((cache_v13[k])) = 0))))))))))
+  (to_rep((cache_v13[k])) = 0))))
+
+axiom H9 : ((((1 <= 10) -> in_range2(i3)) and
+  (forall temp___351:int. (((1 <= temp___351) and (temp___351 <= 10)) ->
+  ((i3 <  temp___351) ->
+  ((cache_v13[temp___351]) = (cache_v1[temp___351])))))) and ((1 <= i3) and
+  (i3 <= 10)))
+
+axiom H10 : (not (i3 = 10))
+
+axiom H11 : (result2 = i3)
+
+axiom H12 : (i4 = (i3 + 1))
+
+axiom H13 : (to_rep(o2) = 0)
+
+axiom H14 : (o3 = (cache_v13[i4 <- o2]))
+
+axiom H15 : (result3 = cache_v13)
+
+axiom H16 : (cache_v14 = o3)
+
+logic k : int
+
+axiom H17 : (1 <= k)
+
+axiom H18 : (k <= 10)
+
+axiom H19 : (k <= i4)
+
+ (* File "infoflow.ads", line 35, characters 0-0 *)
+goal WP_parameter_def : (to_rep((cache_v14[k])) = 0)

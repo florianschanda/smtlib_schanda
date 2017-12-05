@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -275,10 +275,69 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic max : int
+
+logic i : int
+
+logic n : int
+
+logic n1 : int
+
+logic o : bool
+
+logic m : int
+
+logic n2 : int
+
+logic n3 : int
+
+logic o1 : bool
+
+logic n4 : int
+
+logic n5 : int
+
+logic o2 : bool
+
+logic result : int
+
+logic max1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic max2 : int
+
+logic max3 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic max4 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(max))
+
+axiom H1 : (result = max)
+
+axiom H2 : (max1 = to_rep((a[1])))
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 10)
+
+axiom H7 : (1 <= (i1 - 1))
+
  (* File "max.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall max:int. forall i:int. forall result:int. forall max1:int.
-  forall result1:int. forall i1:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(max)) -> (((result = max) and (max1 = to_rep((a[1])))) ->
-  (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) ->
-  ((1 <= (i1 - 1)) -> (1 <= 1)))))))
+goal WP_parameter_def : (1 <= 1)

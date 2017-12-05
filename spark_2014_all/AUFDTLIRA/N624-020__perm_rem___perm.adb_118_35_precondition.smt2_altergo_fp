@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -468,10 +468,122 @@ axiom a12__def_axiom : ({ elts = a121; rt = a122 } = remove(remove({ elts =
 axiom a21__def_axiom : ({ elts = a211; rt = a212 } = remove(remove({ elts =
   a; rt = a1 }, i2), i1))
 
+logic perm__remove_swap__result : int
+
+logic perm__remove_swap__a1__assume : (int,natural) farray
+
+logic perm__remove_swap__a1__assume1 : t
+
+logic perm__remove_swap__a2__assume : (int,natural) farray
+
+logic perm__remove_swap__a2__assume1 : t
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : int
+
+logic perm__remove_swap__a12__assume : (int,natural) farray
+
+logic perm__remove_swap__a12__assume1 : t
+
+logic o3 : (int,natural) farray
+
+logic o4 : t
+
+logic perm__remove_swap__a21__assume : (int,natural) farray
+
+logic perm__remove_swap__a21__assume1 : t
+
+logic i : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic temp___553 : int
+
+logic o8 : int
+
+logic o9 : natural
+
+logic o10 : int
+
+logic temp___554 : int
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : int
+
+logic i3 : int
+
+logic o14 : int
+
+logic o15 : natural
+
+logic o16 : int
+
+logic temp___555 : int
+
+logic o17 : int
+
+logic o18 : natural
+
+logic o19 : int
+
+logic temp___556 : int
+
+logic o20 : int
+
+logic o21 : natural
+
+logic o22 : int
+
+logic o23 : (int,natural) farray
+
+logic o24 : t
+
+logic temp___558 : (int,natural) farray
+
+logic temp___5581 : t
+
+logic o25 : (int,natural) farray
+
+logic o26 : t
+
+logic o27 : int
+
+logic temp___557 : (int,natural) farray
+
+logic temp___5571 : t
+
+logic result : int
+
+logic perm__remove_swap__result1 : int
+
+logic perm__remove_swap__result2 : int
+
+logic perm__remove_swap__result3 : int
+
+logic perm__remove_swap__result4 : int
+
+logic perm__remove_swap__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i1)
+
+axiom H2 : in_range3(i2)
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and
+  (((to_rep1(first(a1)) <= i1) and (i1 <= to_rep1(last(a1)))) and
+  (((to_rep1(first(a1)) <= i2) and (i2 <= to_rep1(last(a1)))) and
+  (i1 <  i2))))
+
  (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range3(i1) -> (in_range3(i2) -> (((invariant__({
-  elts = a; rt = a1 }) = true) and (((to_rep1(first(a1)) <= i1) and
-  (i1 <= to_rep1(last(a1)))) and (((to_rep1(first(a1)) <= i2) and
-  (i2 <= to_rep1(last(a1)))) and (i1 <  i2)))) -> (invariant__({ elts = a;
-  rt = a1 }) = true)))))
+goal WP_parameter_def : (invariant__({ elts = a; rt = a1 }) = true)

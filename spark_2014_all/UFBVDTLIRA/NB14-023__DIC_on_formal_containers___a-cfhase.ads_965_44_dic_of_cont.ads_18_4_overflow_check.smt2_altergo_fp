@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -254,18 +254,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1606,14 +1606,43 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length2(container))))) ->
   in_range6(get(container, position)))))
 
- (* File "a-cfhase.ads", line 930, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target__split_fields:us_main_type. forall o:int. forall o1:int.
-  forall o2:count_type. forall o3:hash_type. forall o4:us_main_type.
-  forall o5:int. forall o6:int. forall o7:int. ((((({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } } = intersection__2({
+logic target__split_fields : us_main_type
+
+logic o : count_type
+
+logic o1 : hash_type
+
+logic o2 : us_main_type
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : count_type
+
+logic o9 : hash_type
+
+logic o10 : us_main_type
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+axiom H : (({ us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
+  o8; rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } } = intersection__2({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
   target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
   target__split_discrs1 }; us_split_fields1 = {
@@ -1621,9 +1650,9 @@ goal WP_parameter_def :
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = source;
   rec__dic_of_cont__my_hase__set__modulus = source1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = source2 } })) and ((((((length({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }) = num_overlaps(model__({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }) = num_overlaps(model__({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
   target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
   target__split_discrs1 }; us_split_fields1 = {
@@ -1631,23 +1660,23 @@ goal WP_parameter_def :
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = source;
   rec__dic_of_cont__my_hase__set__modulus = source1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = source2 } }))) and (ole(model__({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), model__({ us_split_discrs1 = {
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), model__({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
   } })) = true)) and (ole(model__({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), model__({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), model__({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = source;
   rec__dic_of_cont__my_hase__set__modulus = source1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = source2 } })) = true)) and
   (includes_intersection(model__({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), model__({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), model__({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
@@ -1656,16 +1685,16 @@ goal WP_parameter_def :
   rec__dic_of_cont__my_hase__set__modulus = source1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = source2 } })) = true)) and
   (forall i:int. (((1 <= i) and (i <= length2(elements({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } })))) -> ((0 <  find(elements({
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } })))) -> ((0 <  find(elements({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
   target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
   target__split_discrs1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = target__split_fields } }), get(elements({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), i))) and (get(elements({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), i))) and (get(elements({
   us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
   target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
   target__split_discrs1 }; us_split_fields1 = {
@@ -1674,12 +1703,12 @@ goal WP_parameter_def :
   target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
   target__split_discrs1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = target__split_fields } }), get(elements({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), i))) = get(elements({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), i)))))) and
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), i))) = get(elements({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), i)))))) and
   (forall i:int. (((1 <= i) and (i <= length2(elements({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
@@ -1693,34 +1722,47 @@ goal WP_parameter_def :
   target__split_discrs1 }; us_split_fields1 = {
   rec__dic_of_cont__my_hase__set = target__split_fields } }), i)) = true) ->
   ((0 <  find(elements({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), get(elements({ us_split_discrs1 =
-  { rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
-  rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
-  us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } }), i))) and (get(elements({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), find(elements({
-  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } }), get(elements({ us_split_discrs1 =
-  { rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
-  rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
-  us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } }), i))) = get(elements({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), get(elements({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
+  target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
+  target__split_discrs1 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = target__split_fields } }), i))) and
+  (get(elements({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), find(elements({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } }), get(elements({
+  us_split_discrs1 = { rec__dic_of_cont__my_hase__set__capacity =
+  target__split_discrs; rec__dic_of_cont__my_hase__set__modulus =
+  target__split_discrs1 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = target__split_fields } }),
+  i))) = get(elements({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } }), i)))))))) and ((o5 = length({ us_split_discrs1 = {
-  rec__dic_of_cont__my_hase__set__capacity = o2;
-  rec__dic_of_cont__my_hase__set__modulus = o3 }; us_split_fields1 = {
-  rec__dic_of_cont__my_hase__set = o4 } })) and (in_range1(o5) and
-  (o5 <= to_rep(o2))))) and (((((o = length({ us_split_discrs1 = {
+  } }), i))))))))
+
+axiom H1 : ((o11 = length({ us_split_discrs1 = {
+  rec__dic_of_cont__my_hase__set__capacity = o8;
+  rec__dic_of_cont__my_hase__set__modulus = o9 }; us_split_fields1 = {
+  rec__dic_of_cont__my_hase__set = o10 } })) and (in_range1(o11) and
+  (o11 <= to_rep(o8))))
+
+axiom H2 : ((o6 = length({ us_split_discrs1 = {
   rec__dic_of_cont__my_hase__set__capacity = target__split_discrs;
   rec__dic_of_cont__my_hase__set__modulus = target__split_discrs1 };
   us_split_fields1 = { rec__dic_of_cont__my_hase__set = target__split_fields
-  } })) and (in_range1(o) and (o <= to_rep(target__split_discrs)))) and
-  (o1 = (to_rep(target__split_discrs) - o))) and ((o6 = o1) and
-  in_range(o1))) and (o7 = (o6 + o5)))) -> in_range(o7)))
+  } })) and (in_range1(o6) and (o6 <= to_rep(target__split_discrs))))
+
+axiom H3 : (o7 = (to_rep(target__split_discrs) - o6))
+
+axiom H4 : ((o12 = o7) and in_range(o7))
+
+axiom H5 : (o13 = (o12 + o11))
+
+ (* File "a-cfhase.ads", line 930, characters 0-0 *)
+goal WP_parameter_def : in_range(o13)

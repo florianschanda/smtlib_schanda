@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -114,16 +114,30 @@ logic do_something : int -> int
 logic do_something__function_guard : int, int -> prop
 
 axiom do_something__post_axiom :
-  (forall x:int [do_something(x)]. ((in_range(x) and (((-100) <= x) and
+  (forall x:int [do_something(x)]. ((in_range(x) and (((- 100) <= x) and
   (x <= 100))) -> in_range(do_something(x))))
 
 axiom do_something__def_axiom :
   (forall x:int [do_something(x)]. (in_range(x) ->
   (do_something(x) = (x * 2))))
 
+logic x : int
+
+logic y : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 0)
+
+axiom H2 : in_range(x1)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
+
  (* File "pkg_a.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall result:int. forall x1:int.
-  (((result = x) and (x1 = 0)) -> (in_range(x1) ->
-  ((((-2147483648) <= 2147483647) -> in_range(y)) ->
-  ((-100) <= 2147483647)))))
+goal WP_parameter_def : ((- 100) <= 2147483647)

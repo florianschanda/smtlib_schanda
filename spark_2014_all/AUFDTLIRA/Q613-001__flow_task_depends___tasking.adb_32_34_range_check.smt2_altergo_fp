@@ -482,45 +482,159 @@ axiom def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "tasking.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:int. forall self__:message_index_type.
-  forall self__1:message_index_type. forall self__2:message_count_type.
-  forall self__3:bool. forall self__4:(int,message_type) farray.
-  forall o:int. forall o1:message_count_type. forall o2:message_index_type.
-  forall o3:message_index_type. forall o4:message_count_type. forall o5:bool.
-  forall o6:(int,message_type) farray. forall o7:message_index_type.
-  forall o8:message_index_type. forall o9:message_count_type.
-  forall o10:bool. forall o11:(int,message_type) farray. forall result:int.
-  forall m1:int. forall result1:message_index_type.
-  forall result2:message_index_type. forall result3:message_count_type.
-  forall result4:bool. forall result5:(int,message_type) farray.
-  forall self__5:message_index_type. forall self__6:message_index_type.
-  forall self__7:message_count_type. forall self__8:bool.
-  forall self__9:(int,message_type) farray.
-  forall result6:message_index_type. forall result7:message_index_type.
-  forall result8:message_count_type. forall result9:bool.
-  forall result10:(int,message_type) farray.
-  forall self__10:message_index_type. forall self__11:message_index_type.
-  forall self__12:message_count_type. forall self__13:bool.
-  forall self__14:(int,message_type) farray. (((0 <= 1) -> in_range1(m)) ->
-  ((self__3 = true) -> (((result = m) and
-  (m1 = to_rep((self__4[to_rep1(self__1)])))) ->
-  (((((((o = (to_rep2(self__2) - 1)) and
-  in_range3((to_rep2(self__2) - 1))) and (to_rep2(o1) = o)) and
-  ((self__ = o2) and ((self__1 = o3) and ((o1 = o4) and ((self__3 = o5) and
-  (self__4 = o6)))))) and ((o7 = o2) and ((o8 = o3) and ((o9 = o4) and
-  ((o10 = o5) and (o11 = o6)))))) and (((result1 = self__) and
-  ((result2 = self__1) and ((result3 = self__2) and ((result4 = self__3) and
-  (result5 = self__4))))) and ((o7 = self__5) and ((o8 = self__6) and
-  ((o9 = self__7) and ((o10 = self__8) and (o11 = self__9))))))) ->
-  ((((to_rep2(self__7) = 0) and (((result6 = self__5) and
-  ((result7 = self__6) and ((result8 = self__7) and ((result9 = self__8) and
-  (result10 = self__9))))) and ((self__5 = self__10) and
-  ((self__6 = self__11) and ((self__7 = self__12) and
-  ((of_int(0) = self__13) and (self__9 = self__14))))))) or
-  ((not (to_rep2(self__7) = 0)) and ((self__10 = self__5) and
+logic m : int
+
+logic self__ : message_index_type
+
+logic self__1 : message_index_type
+
+logic self__2 : message_count_type
+
+logic self__3 : bool
+
+logic self__4 : (int,message_type) farray
+
+logic o : int
+
+logic o1 : message_count_type
+
+logic o2 : message_index_type
+
+logic o3 : message_index_type
+
+logic o4 : message_count_type
+
+logic o5 : bool
+
+logic o6 : (int,message_type) farray
+
+logic o7 : message_index_type
+
+logic o8 : message_index_type
+
+logic o9 : message_count_type
+
+logic o10 : bool
+
+logic o11 : (int,message_type) farray
+
+logic o12 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : message_index_type
+
+logic result2 : message_index_type
+
+logic result3 : message_count_type
+
+logic result4 : bool
+
+logic result5 : (int,message_type) farray
+
+logic self__5 : message_index_type
+
+logic self__6 : message_index_type
+
+logic self__7 : message_count_type
+
+logic self__8 : bool
+
+logic self__9 : (int,message_type) farray
+
+logic result6 : message_index_type
+
+logic result7 : message_index_type
+
+logic result8 : message_count_type
+
+logic result9 : bool
+
+logic result10 : (int,message_type) farray
+
+logic self__10 : message_index_type
+
+logic self__11 : message_index_type
+
+logic self__12 : message_count_type
+
+logic self__13 : bool
+
+logic self__14 : (int,message_type) farray
+
+axiom H : ((0 <= 1) -> in_range1(m))
+
+axiom H1 : (self__3 = true)
+
+axiom H2 : (result = m)
+
+axiom H3 : (m1 = to_rep((self__4[to_rep1(self__1)])))
+
+axiom H4 : ((o = (to_rep2(self__2) - 1)) and
+  in_range3((to_rep2(self__2) - 1)))
+
+axiom H5 : (to_rep2(o1) = o)
+
+axiom H6 : (self__ = o2)
+
+axiom H7 : (self__1 = o3)
+
+axiom H8 : (o1 = o4)
+
+axiom H9 : (self__3 = o5)
+
+axiom H10 : (self__4 = o6)
+
+axiom H11 : (o7 = o2)
+
+axiom H12 : (o8 = o3)
+
+axiom H13 : (o9 = o4)
+
+axiom H14 : (o10 = o5)
+
+axiom H15 : (o11 = o6)
+
+axiom H16 : (result1 = self__)
+
+axiom H17 : (result2 = self__1)
+
+axiom H18 : (result3 = self__2)
+
+axiom H19 : (result4 = self__3)
+
+axiom H20 : (result5 = self__4)
+
+axiom H21 : ((self__5 = o7) and ((self__6 = o8) and ((self__7 = o9) and
+  ((self__8 = o10) and (self__9 = o11)))))
+
+axiom H22 : ((to_rep2(self__7) = 0) -> (result6 = self__5))
+
+axiom H23 : ((to_rep2(self__7) = 0) -> (result7 = self__6))
+
+axiom H24 : ((to_rep2(self__7) = 0) -> (result8 = self__7))
+
+axiom H25 : ((to_rep2(self__7) = 0) -> (result9 = self__8))
+
+axiom H26 : ((to_rep2(self__7) = 0) -> (result10 = self__9))
+
+axiom H27 : ((to_rep2(self__7) = 0) -> (self__5 = self__10))
+
+axiom H28 : ((to_rep2(self__7) = 0) -> (self__6 = self__11))
+
+axiom H29 : ((to_rep2(self__7) = 0) -> (self__7 = self__12))
+
+axiom H30 : ((to_rep2(self__7) = 0) -> (of_int(0) = self__13))
+
+axiom H31 : ((to_rep2(self__7) = 0) -> (self__9 = self__14))
+
+axiom H32 : ((not (to_rep2(self__7) = 0)) -> ((self__10 = self__5) and
   ((self__11 = self__6) and ((self__12 = self__7) and
-  ((self__13 = self__8) and (self__14 = self__9))))))) ->
-  ((not (to_rep1(self__11) = 64)) ->
-  in_range2((to_rep1(self__11) + 1)))))))))
+  ((self__13 = self__8) and (self__14 = self__9))))))
+
+axiom H33 : (not (to_rep1(self__11) = 64))
+
+ (* File "tasking.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : in_range2((to_rep1(self__11) + 1))

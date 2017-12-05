@@ -300,34 +300,71 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "cursor_location.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall other_side:int.
-  forall cursor_location__fulfill_condition__result:bool. forall o:int.
-  forall result:int. forall other_side1:int. forall result1:bool.
-  forall cursor_location__fulfill_condition__result1:bool.
-  forall cursor_location__fulfill_condition__result2:bool.
-  forall cursor_location__fulfill_condition__result3:bool.
-  forall other_side2:int.
-  forall cursor_location__fulfill_condition__result4:bool.
-  forall other_side3:int.
-  forall cursor_location__fulfill_condition__result5:bool.
-  (forall result2:bool. ((in_range1(side) and (((((1 <= 2) ->
-  in_range1(other_side)) and ((((o = change_side(side)) and (in_range1(o) and
-  (((side = 1) and (o = 2)) or ((not (side = 1)) and (o = 1))))) and
-  ((result = other_side) and (other_side1 = o))) and
-  (((cursor_location__fulfill_condition__result1 = cursor_location__fulfill_condition__result2) and
-  (cursor_location__fulfill_condition__result3 = cursor_location__fulfill_condition__result1)) and
-  ((result1 = cursor_location__fulfill_condition__result) and
-  (((((du_available[side]) = true) and (((request[side]) = true) or
-  (not ((du_available[other_side1]) = true)))) and
-  (cursor_location__fulfill_condition__result1 = true)) or
+logic other_side : int
+
+logic cursor_location__fulfill_condition__result : bool
+
+logic o : int
+
+logic result : int
+
+logic other_side1 : int
+
+logic result1 : bool
+
+logic cursor_location__fulfill_condition__result1 : bool
+
+logic cursor_location__fulfill_condition__result2 : bool
+
+logic cursor_location__fulfill_condition__result3 : bool
+
+logic other_side2 : int
+
+logic cursor_location__fulfill_condition__result4 : bool
+
+logic other_side3 : int
+
+logic cursor_location__fulfill_condition__result5 : bool
+
+logic result2 : bool
+
+axiom H : in_range1(side)
+
+axiom H1 : ((1 <= 2) -> in_range1(other_side))
+
+axiom H2 : ((o = change_side(side)) and (in_range1(o) and (((side = 1) ->
+  (o = 2)) and ((not (side = 1)) -> (o = 1)))))
+
+axiom H3 : (result = other_side)
+
+axiom H4 : (other_side1 = o)
+
+axiom H5 :
+  (cursor_location__fulfill_condition__result1 = cursor_location__fulfill_condition__result2)
+
+axiom H6 :
+  (cursor_location__fulfill_condition__result3 = cursor_location__fulfill_condition__result1)
+
+axiom H7 : (result1 = cursor_location__fulfill_condition__result)
+
+axiom H8 : (((((du_available[side]) = true) and (((request[side]) = true) or
+  (not ((du_available[other_side1]) = true)))) ->
+  (cursor_location__fulfill_condition__result1 = true)) and
   ((not (((du_available[side]) = true) and (((request[side]) = true) or
-  (not ((du_available[other_side1]) = true))))) and
-  (cursor_location__fulfill_condition__result1 = false))))))) and
-  (((cursor_location__fulfill_condition__result4 = cursor_location__fulfill_condition__result2) and
-  (other_side2 = other_side1)) and
-  ((cursor_location__fulfill_condition__result5 = cursor_location__fulfill_condition__result3) and
-  (other_side3 = other_side1)))) and
-  (result2 = cursor_location__fulfill_condition__result4))) ->
-  ((du_available[side]) = true))))
+  (not ((du_available[other_side1]) = true))))) ->
+  (cursor_location__fulfill_condition__result1 = false)))
+
+axiom H9 :
+  (cursor_location__fulfill_condition__result4 = cursor_location__fulfill_condition__result2)
+
+axiom H10 : (other_side2 = other_side1)
+
+axiom H11 :
+  (cursor_location__fulfill_condition__result5 = cursor_location__fulfill_condition__result3)
+
+axiom H12 : (other_side3 = other_side1)
+
+axiom H13 : (result2 = cursor_location__fulfill_condition__result4)
+
+ (* File "cursor_location.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : ((du_available[side]) = true)

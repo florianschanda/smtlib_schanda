@@ -83,6 +83,8 @@
 (declare-const o duration)
 (declare-const o1 duration)
 (declare-const o2 Int)
+(declare-const o3 Int)
+(declare-const o4 Int)
 (assert (in_range right))
 (assert (< 0 right))
 (assert (= (to_fixed o) (- 9223372036854775808)))

@@ -142,6 +142,7 @@
 (assert (and (= o (id ((_ int2bv 8) 2))) (= o ((_ int2bv 8) 2))))
 (assert (= result x))
 (assert (= x1 o))
+(assert true)
 (assert (and (= o1 (id__2 ((_ int2bv 8) 2))) (and (in_range1 o1) (= o1 ((_ int2bv 8) 2)))))
 (assert (= result1 y))
 (assert (= y1 o1))

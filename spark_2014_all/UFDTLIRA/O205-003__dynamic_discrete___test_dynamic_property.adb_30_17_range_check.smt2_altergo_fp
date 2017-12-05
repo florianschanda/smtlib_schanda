@@ -139,7 +139,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -209,6 +209,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom last__def_axiom : (last = c)
 
+logic us : int
+
+logic us1 : int
+
+axiom H : in_range1(c)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : (not (c <  x))
+
  (* File "test_dynamic_property.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range1(c) -> (in_range1(x) -> ((not (c <  x)) ->
-  dynamic_property(1, last, x))))
+goal WP_parameter_def : dynamic_property(1, last, x)

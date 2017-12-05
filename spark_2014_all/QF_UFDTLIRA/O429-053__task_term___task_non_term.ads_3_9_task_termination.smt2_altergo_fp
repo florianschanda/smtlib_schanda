@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,5 +111,33 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : int
+
+logic f : int
+
+logic tmp : int
+
+logic o : int
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic f1 : int
+
+logic a2 : int
+
+logic f2 : int
+
+logic tmp1 : int
+
+logic result2 : int
+
+logic tmp2 : int
+
+axiom H : false
+
  (* File "task_non_term.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -239,11 +239,55 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 axiom last_index__def_axiom : (last_index = lst1)
 
+logic g : int
+
+logic i : int
+
+logic result : int
+
+logic g1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic g2 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic g3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+axiom H : dynamic_property(first, last, fst)
+
+axiom H1 : dynamic_property(first, last, lst)
+
+axiom H2 : (fst <= lst)
+
+axiom H3 : (result = g)
+
+axiom H4 : (g1 = 0)
+
+axiom H5 : in_range1(g1)
+
+axiom H6 : (result1 = i)
+
+axiom H7 : (i1 = fst)
+
+axiom H8 : (fst <= i1)
+
+axiom H9 : (i1 <= lst)
+
+logic j : int
+
+axiom H10 : (first <= j)
+
+axiom H11 : (j <= (fst - 2))
+
  (* File "use_quantif.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:int. forall i:int. forall result:int. forall g1:int.
-  forall result1:int. forall i1:int. (dynamic_property(first, last, fst) ->
-  (dynamic_property(first, last, lst) -> ((fst <= lst) -> (((result = g) and
-  (g1 = 0)) -> (in_range1(g1) -> (((result1 = i) and (i1 = fst)) ->
-  (((fst <= i1) and (i1 <= lst)) ->
-  (forall j:int. (((first <= j) and (j <= (fst - 2))) -> (id(j) = j)))))))))))
+goal WP_parameter_def : (id(j) = j)

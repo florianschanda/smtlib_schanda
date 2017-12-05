@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -195,38 +195,104 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall totalsum:int.
-  forall temp___514:int. forall temp___513:int. forall o:int. forall o1:int.
-  forall o2:int. forall result:int. forall i1:int. forall result1:int.
-  forall totalsum1:int. forall i2:int. forall totalsum2:int.
-  forall result2:int. forall totalsum3:int. forall result3:int.
-  forall i3:int. forall i4:int. forall totalsum4:int. forall i5:int.
-  forall totalsum5:int. forall i6:int. forall totalsum6:int. forall i7:int.
-  forall totalsum7:int. forall result4:int. forall result__1:int.
-  forall result__2:int. forall i8:int. forall totalsum8:int.
-  forall result__3:int. forall i9:int. forall totalsum9:int.
-  ((in_range3(n) and (((1 <= 2147483647) -> in_range3(result__)) and (((({
-  int__content = result } = { int__content = i }) and (i1 = 1)) and
-  (in_range3(i1) and ((({ int__content = result1 } = { int__content =
-  totalsum }) and (totalsum1 = 0)) and (in_range2(totalsum1) and
-  ((((i1 <= n) and ((((temp___514 = totalsum1) and ((temp___513 = i1) and
+logic result__ : int
+
+logic i : int
+
+logic totalsum : int
+
+logic temp___508 : int
+
+logic temp___507 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic totalsum1 : int
+
+logic i2 : int
+
+logic totalsum2 : int
+
+logic result2 : int
+
+logic totalsum3 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic totalsum4 : int
+
+logic i5 : int
+
+logic totalsum5 : int
+
+logic i6 : int
+
+logic totalsum6 : int
+
+logic i7 : int
+
+logic totalsum7 : int
+
+logic i8 : int
+
+logic totalsum8 : int
+
+logic i9 : int
+
+logic totalsum9 : int
+
+logic result4 : int
+
+logic result__1 : int
+
+logic result__2 : int
+
+logic i10 : int
+
+logic totalsum10 : int
+
+logic result__3 : int
+
+logic i11 : int
+
+logic totalsum11 : int
+
+axiom H : in_range3(n)
+
+axiom H1 : ((1 <= 2147483647) -> in_range3(result__))
+
+axiom H2 : ((((result = i) and (i1 = 1)) and (in_range3(i1) and
+  (((result1 = totalsum) and (totalsum1 = 0)) and (in_range2(totalsum1) and
+  ((((i1 <= n) -> ((((temp___508 = totalsum1) and ((temp___507 = i1) and
   (((2 * totalsum2) = (i2 * (i2 - 1))) and (((((1 <= 2147483647) ->
   in_range3(i2)) and ((0 <= 2147483647) -> in_range2(totalsum2))) and
   (i2 <= n)) and ((((o = (totalsum2 + i2)) and
   in_range1((totalsum2 + i2))) and ((totalsum2 = result2) and
   (totalsum3 = o))) and ((((o1 = (i2 + 1)) and in_range1((i2 + 1))) and
   ((i2 = result3) and (i3 = o1))) and (not (i3 <= n)))))))) and
-  (((totalsum3 = totalsum4) and (i3 = i4)) and ((totalsum5 = totalsum3) and
-  (i5 = i3)))) and ((({ int__content = totalsum6 } = { int__content =
-  totalsum4 }) and ({ int__content = i6 } = { int__content = i4 })) and
-  ((totalsum7 = totalsum5) and (i7 = i5))))) or ((not (i1 <= n)) and
-  (((totalsum1 = totalsum6) and (i1 = i6)) and ((totalsum7 = totalsum1) and
-  (i7 = i1))))) and (((2 * totalsum6) = (n * (n + 1))) and
-  (((o2 = totalsum6) and in_range3(totalsum6)) and ((result4 = result__) and
-  (result__1 = o2))))))))) and ((({ int__content = totalsum8 } = {
-  int__content = totalsum6 }) and (({ int__content = i8 } = { int__content =
-  i6 }) and (result__1 = result__2))) and ((totalsum9 = totalsum7) and
-  ((i9 = i7) and (result__3 = result__1))))))) ->
-  ((2 * result__2) = (n * (n + 1)))))
+  (((totalsum3 = totalsum6) and (i3 = i6)) and ((totalsum7 = totalsum3) and
+  (i7 = i3)))) and (((totalsum8 = totalsum6) and (i8 = i6)) and
+  ((totalsum9 = totalsum7) and (i9 = i7))))) and ((not (i1 <= n)) ->
+  (((totalsum1 = totalsum8) and (i1 = i8)) and ((totalsum9 = totalsum1) and
+  (i9 = i1))))) and (((2 * totalsum8) = (n * (n + 1))) and
+  (((o2 = totalsum8) and in_range3(totalsum8)) and ((result4 = result__) and
+  (result__1 = o2))))))))) and (((totalsum10 = totalsum8) and ((i10 = i8) and
+  (result__1 = result__2))) and ((totalsum11 = totalsum9) and ((i11 = i9) and
+  (result__3 = result__1)))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : ((2 * result__2) = (n * (n + 1)))

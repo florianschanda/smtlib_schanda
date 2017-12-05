@@ -49,13 +49,35 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
+logic p__m__result : int
+
+logic result : int
+
+logic p__m__result1 : int
+
+logic p__m__result2 : int
+
+logic p__m__result3 : int
+
+logic p__m__result4 : int
+
+logic p__m__result5 : int
+
+logic result1 : int
+
+axiom H : (p__m__result1 = p__m__result2)
+
+axiom H1 : (p__m__result3 = p__m__result1)
+
+axiom H2 : (result = p__m__result)
+
+axiom H3 : (p__m__result1 = 16)
+
+axiom H4 : (p__m__result4 = p__m__result2)
+
+axiom H5 : (p__m__result5 = p__m__result3)
+
+axiom H6 : (result1 = p__m__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__m__result:int. forall result:int. forall p__m__result1:int.
-  forall p__m__result2:int. forall p__m__result3:int.
-  forall p__m__result4:int. forall p__m__result5:int.
-  (forall result1:int. ((((((p__m__result1 = p__m__result2) and
-  (p__m__result3 = p__m__result1)) and ((result = p__m__result) and
-  (p__m__result1 = 16))) and ((p__m__result4 = p__m__result2) and
-  (p__m__result5 = p__m__result3))) and (result1 = p__m__result4)) ->
-  (p__m__result4 = 16))))
+goal WP_parameter_def : (p__m__result4 = 16)

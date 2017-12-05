@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -305,56 +305,195 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic pos : int
+
+logic i : int
+
+logic search__search__result : int
+
+logic temp___151 : int
+
+logic temp___150 : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic pos1 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic result : int
+
+logic pos2 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic pos3 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic pos4 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic pos5 : int
+
+logic pos6 : int
+
+logic pos7 : int
+
+logic i4 : int
+
+logic pos8 : int
+
+logic i5 : int
+
+logic pos9 : int
+
+logic i6 : int
+
+logic pos10 : int
+
+logic i7 : int
+
+logic pos11 : int
+
+logic i8 : int
+
+logic pos12 : int
+
+logic i9 : int
+
+logic result4 : int
+
+logic search__search__result1 : int
+
+logic search__search__result2 : int
+
+logic search__search__result3 : int
+
+logic pos13 : int
+
+logic i10 : int
+
+logic search__search__result4 : int
+
+logic pos14 : int
+
+logic i11 : int
+
+logic search__search__result5 : int
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : in_range1(v)
+
+axiom H1 : (result = pos)
+
+axiom H2 : (pos2 = 0)
+
+axiom H3 : in_range1(pos2)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (((1 <= i1) and (i1 <= 10)) -> (((temp___151 = i1) and
+  ((temp___150 = pos2) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) ->
+   (not (to_rep((t[j1])) = v)))) and ((((((- 2147483648) <= 2147483647) ->
+  in_range1(pos3)) and ((1 <= 10) -> in_range3(i2))) and ((1 <= i2) and
+  (i2 <= 10))) and ((((pos4 = pos5) and (pos6 = pos4)) and
+  ((to_rep((t[i2])) = v) and ((pos3 = result2) and (pos4 = i2)))) or
+  (((not (to_rep((t[i2])) = v)) and (pos4 = pos3)) and (((pos4 = pos5) and
+  (pos6 = pos4)) and (i2 = 10)))))))) and (((i2 = i6) and (pos9 = pos5)) and
+  ((i7 = i2) and (pos10 = pos6)))))
+
+axiom H7 : (((1 <= i1) and (i1 <= 10)) -> (i8 = i6))
+
+axiom H8 : (((1 <= i1) and (i1 <= 10)) -> (pos11 = pos9))
+
+axiom H9 : (((1 <= i1) and (i1 <= 10)) -> (i9 = i7))
+
+axiom H10 : (((1 <= i1) and (i1 <= 10)) -> (pos12 = pos10))
+
+axiom H11 : ((not ((1 <= i1) and (i1 <= 10))) -> (i1 = i8))
+
+axiom H12 : ((not ((1 <= i1) and (i1 <= 10))) -> (pos2 = pos11))
+
+axiom H13 : ((not ((1 <= i1) and (i1 <= 10))) -> (i9 = i1))
+
+axiom H14 : ((not ((1 <= i1) and (i1 <= 10))) -> (pos12 = pos2))
+
+axiom H15 : (search__search__result1 = search__search__result2)
+
+axiom H16 : (search__search__result3 = search__search__result1)
+
+axiom H17 : (result4 = search__search__result)
+
+axiom H18 : (search__search__result1 = pos11)
+
+axiom H19 : (search__search__result4 = search__search__result2)
+
+axiom H20 : (i10 = i8)
+
+axiom H21 : (pos13 = pos11)
+
+axiom H22 : (search__search__result5 = search__search__result3)
+
+axiom H23 : (i11 = i9)
+
+axiom H24 : (pos14 = pos12)
+
+axiom H25 : ((search__search__result4 = 0) -> ((result5 = true) <->
+  (forall pos15:int. (((1 <= pos15) and (pos15 <= 10)) ->
+  (not (to_rep((t[pos15])) = v))))))
+
+axiom H26 : ((not (search__search__result4 = 0)) -> (result5 = of_int(1)))
+
+axiom H27 : (result5 = true)
+
+axiom H28 : ((1 <= search__search__result4) and
+  (search__search__result4 <= 10))
+
+axiom H29 : (o = search__search__result4)
+
+axiom H30 : (o1 = (t[o]))
+
+axiom H31 : (o2 = to_rep(o1))
+
+axiom H32 : (((o2 = v) -> (result6 = true)) and ((not (o2 = v)) ->
+  (result6 = false)))
+
+axiom H33 : (result6 = true)
+
+axiom H34 : ((o3 = (search__search__result4 - 1)) and
+  in_range1((search__search__result4 - 1)))
+
+axiom H35 : (((pos1 <= o3) -> (o4 = true)) and ((not (pos1 <= o3)) ->
+  (o4 = false)))
+
+axiom H36 : (((1 <= pos1) -> (result7 = o4)) and ((not (1 <= pos1)) ->
+  (result7 = false)))
+
+axiom H37 : (result7 = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pos:int. forall i:int. forall search__search__result:int.
-  forall temp___151:int. forall temp___150:int. forall o:int.
-  forall o1:integer. forall o2:int. forall pos1:int. forall o3:int.
-  forall o4:bool. forall result:int. forall pos2:int. forall result1:int.
-  forall i1:int. forall pos3:int. forall i2:int. forall result2:int.
-  forall pos4:int. forall pos5:int. forall pos6:int. forall pos7:int.
-  forall i3:int. forall pos8:int. forall i4:int. forall pos9:int.
-  forall i5:int. forall pos10:int. forall i6:int. forall result3:int.
-  forall search__search__result1:int. forall search__search__result2:int.
-  forall search__search__result3:int. forall pos11:int. forall i7:int.
-  forall search__search__result4:int. forall pos12:int. forall i8:int.
-  forall search__search__result5:int. forall result4:bool.
-  forall result5:bool. forall result6:bool. (in_range1(v) -> ((((({
-  int__content = result } = { int__content = pos }) and (pos2 = 0)) and
-  (in_range1(pos2) and (((({ int__content = result1 } = { int__content = i
-  }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= 10)) and
-  ((((temp___151 = i1) and ((temp___150 = pos2) and
-  ((forall j:int. (((1 <= j) and (j <= (i2 - 1))) ->
-   (not (to_rep((t[j])) = v)))) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(pos3)) and ((1 <= 10) ->
-  in_range3(i2))) and ((1 <= i2) and (i2 <= 10))) and ((((pos4 = pos5) and
-  (pos6 = pos4)) and ((to_rep((t[i2])) = v) and ((pos3 = result2) and
-  (pos4 = i2)))) or (((not (to_rep((t[i2])) = v)) and (pos4 = pos3)) and
-  (((pos4 = pos5) and (pos6 = pos4)) and (i2 = 10)))))))) and (((i2 = i3) and
-  ({ int__content = pos7 } = { int__content = pos5 })) and ((i4 = i2) and
-  (pos8 = pos6)))) and ((({ int__content = i5 } = { int__content = i3 }) and
-  ({ int__content = pos9 } = { int__content = pos7 })) and ((i6 = i4) and
-  (pos10 = pos8))))) or ((not ((1 <= i1) and (i1 <= 10))) and (((i1 = i5) and
-  (pos2 = pos9)) and ((i6 = i1) and (pos10 = pos2)))))) and
-  (((search__search__result1 = search__search__result2) and
-  (search__search__result3 = search__search__result1)) and (({ int__content =
-  result3 } = { int__content = search__search__result }) and
-  (search__search__result1 = pos9)))))) and ((({ int__content =
-  search__search__result4 } = { int__content = search__search__result2 }) and
-  (({ int__content = i7 } = { int__content = i5 }) and ({ int__content =
-  pos11 } = { int__content = pos9 }))) and
-  ((search__search__result5 = search__search__result3) and ((i8 = i6) and
-  (pos12 = pos10))))) -> ((((search__search__result4 = 0) and
-  ((result4 = true) <->
-  (forall pos13:int. (((1 <= pos13) and (pos13 <= 10)) ->
-  (not (to_rep((t[pos13])) = v)))))) or
-  ((not (search__search__result4 = 0)) and (result4 = of_int(1)))) ->
-  ((result4 = true) -> (((((((1 <= search__search__result4) and
-  (search__search__result4 <= 10)) and (o = search__search__result4)) and
-  (o1 = (t[o]))) and (o2 = to_rep(o1))) and (((o2 = v) and
-  (result5 = true)) or ((not (o2 = v)) and (result5 = false)))) ->
-  ((result5 = true) -> (((((o3 = (search__search__result4 - 1)) and
-  in_range1((search__search__result4 - 1))) and (((pos1 <= o3) and
-  (o4 = true)) or ((not (pos1 <= o3)) and (o4 = false)))) and
-  (((1 <= pos1) and (result6 = o4)) or ((not (1 <= pos1)) and
-  (result6 = false)))) -> ((result6 = true) -> (1 <= pos1))))))))))
+goal WP_parameter_def : (1 <= pos1)

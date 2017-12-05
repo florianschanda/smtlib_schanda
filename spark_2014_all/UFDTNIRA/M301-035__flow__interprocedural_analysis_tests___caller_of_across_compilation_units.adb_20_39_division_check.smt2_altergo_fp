@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -271,24 +271,65 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "caller_of_across_compilation_units.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int.
-  forall caller_of_across_compilation_units__coprime__result:bool.
-  forall caller_of_across_compilation_units__coprime__L_1__R4b__assume:int.
-  forall caller_of_across_compilation_units__coprime__result1:bool.
-  forall result:bool. forall result1:bool.
-  forall caller_of_across_compilation_units__coprime__result2:bool.
-  forall result2:int. forall i1:int. forall i2:int. (in_range1(x) ->
-  (in_range1(y) -> ((((result1 = prime(x)) and (((result1 = true) and
-  (result = true)) or ((not (result1 = true)) and (result = prime(y))))) and
-  ((not (result = true)) and
-  ((caller_of_across_compilation_units__coprime__result2 = caller_of_across_compilation_units__coprime__result) and
-  (caller_of_across_compilation_units__coprime__result2 = caller_of_across_compilation_units__coprime__result1)))) ->
-  (((((caller_of_across_compilation_units__coprime__L_1__R4b__assume = min(x,
+logic i : int
+
+logic caller_of_across_compilation_units__coprime__result : bool
+
+logic caller_of_across_compilation_units__coprime__L_1__R4b__assume : int
+
+logic caller_of_across_compilation_units__coprime__result1 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic caller_of_across_compilation_units__coprime__result2 : bool
+
+logic result2 : int
+
+logic i1 : int
+
+logic i2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : (result1 = prime(x))
+
+axiom H3 : ((result1 = true) -> (result = true))
+
+axiom H4 : ((not (result1 = true)) -> (result = prime(y)))
+
+axiom H5 : (not (result = true))
+
+axiom H6 :
+  (caller_of_across_compilation_units__coprime__result2 = caller_of_across_compilation_units__coprime__result)
+
+axiom H7 :
+  (caller_of_across_compilation_units__coprime__result2 = caller_of_across_compilation_units__coprime__result1)
+
+axiom H8 :
+  ((caller_of_across_compilation_units__coprime__L_1__R4b__assume = min(x,
   y)) and
-  in_range1(caller_of_across_compilation_units__coprime__L_1__R4b__assume)) and
-  (caller_of_across_compilation_units__coprime__L_1__R4b__assume = r4b)) and
-  in_range1(r4b)) -> (((result2 = i) and (i1 = 2)) -> (((2 <= i1) and
-  (i1 <= r4b)) -> (((2 <= i2) and (i2 <= r4b)) -> ((mod(x, i2) = 0) ->
-  (not (i2 = 0)))))))))))
+  in_range1(caller_of_across_compilation_units__coprime__L_1__R4b__assume))
+
+axiom H9 :
+  (caller_of_across_compilation_units__coprime__L_1__R4b__assume = r4b)
+
+axiom H10 : in_range1(r4b)
+
+axiom H11 : (result2 = i)
+
+axiom H12 : (i1 = 2)
+
+axiom H13 : (2 <= i1)
+
+axiom H14 : (i1 <= r4b)
+
+axiom H15 : ((2 <= i2) and (i2 <= r4b))
+
+axiom H16 : (mod(x, i2) = 0)
+
+ (* File "caller_of_across_compilation_units.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : (not (i2 = 0))

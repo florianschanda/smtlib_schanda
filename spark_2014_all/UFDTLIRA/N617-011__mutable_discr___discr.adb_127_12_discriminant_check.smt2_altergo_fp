@@ -264,13 +264,24 @@ logic r26b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic d__split_discrs : natural
+
+logic temp___354 : natural
+
+logic temp___3541 : us_main_type
+
+logic temp___3542 : bool
+
+axiom H : (to_rep(d__split_discrs) = r26b)
+
+axiom H1 : in_range1(r26b)
+
+axiom H2 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+  temp___354 }; us_split_fields1 = { rec__private_discr__p_with_default =
+  temp___3541 }; attr__constrained = temp___3542 } = new_with_default(0)) and
+  (to_rep(temp___354) = 0))
+
+axiom H3 : (d__attr__constrained = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_discrs:natural. forall temp___354:natural.
-  forall temp___3541:us_main_type. forall temp___3542:bool.
-  (((to_rep(d__split_discrs) = r26b) and in_range1(r26b)) -> ((({
-  us_split_discrs1 = { rec__private_discr__p_with_default__c = temp___354 };
-  us_split_fields1 = { rec__private_discr__p_with_default = temp___3541 };
-  attr__constrained = temp___3542 } = new_with_default(0)) and
-  (to_rep(temp___354) = 0)) -> ((d__attr__constrained = true) ->
-  (temp___354 = d__split_discrs)))))
+goal WP_parameter_def : (temp___354 = d__split_discrs)

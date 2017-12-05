@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -707,200 +707,1129 @@ axiom partial_match_at__def_axiom :
   (forall i:int. (((1 <= i) and (i <= len)) ->
   (to_rep1((needle2[i])) = to_rep1((haystack2[(loc + (i - 1))]))))))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall r52b:int. forall r53b:int. forall shift:int.
-  forall r58b:int. forall r59b:int. forall k:int.
-  forall string_search__qs__result:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
-  forall o7:int. forall o8:int. forall o9:(int,character) farray.
-  forall temp___296:(int,character) farray. forall temp___2961:t1.
-  forall o10:int. forall o11:int. forall o12:int. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:int.
-  forall temp___297:int. forall o18:int. forall o19:character.
-  forall o20:int. forall o21:positive. forall o22:int. forall o23:int.
-  forall o24:int. forall o25:int. forall temp___300:int. forall o26:int.
-  forall o27:int. forall temp___303:int. forall o28:int.
-  forall o29:character. forall o30:int. forall o31:positive. forall o32:int.
-  forall o33:int. forall o34:int. forall o35:int. forall o36:int.
-  forall o37:int. forall o38:int. forall o39:int. forall o40:int.
-  forall o41:bool. forall o42:int. forall o43:int. forall o44:int.
-  forall o45:(int,character) farray.
-  forall temp___2962:(int,character) farray. forall temp___2963:t1.
-  forall o46:int. forall o47:int. forall o48:int. forall o49:int.
-  forall o50:int. forall o51:int. forall o52:int. forall o53:int.
-  forall temp___2971:int. forall o54:int. forall o55:character.
-  forall o56:int. forall o57:positive. forall o58:int. forall o59:int.
-  forall o60:int. forall o61:int. forall temp___3001:int.
-  forall string_search__qs__result1:int.
-  forall bad_shift:(int,positive) farray. forall result:int. forall i1:int.
-  forall result1:bool. forall result2:int. forall r52b1:int.
-  forall result3:int. forall r53b1:int. forall result4:bool.
-  forall string_search__qs__result2:int. forall result5:bool.
-  forall result6:int. forall shift1:int. forall result7:int.
-  forall r58b1:int. forall result8:int. forall r59b1:int. forall result9:int.
-  forall k1:int. forall k2:int. forall k3:int. forall k4:int. forall k5:int.
-  forall k6:int. forall i2:int. forall r52b2:int. forall r53b2:int.
-  forall shift2:int. forall r58b2:int. forall r59b2:int. forall k7:int.
-  forall string_search__qs__result3:int. forall temp___311:int.
-  forall result10:int. forall temp___3111:int. forall result11:int.
-  forall i3:int. forall result12:bool. forall result13:int. forall r52b3:int.
-  forall result14:int. forall r53b3:int. forall result15:bool.
-  forall string_search__qs__result4:int.
-  forall string_search__qs__result5:int. forall result16:bool.
-  forall result17:int. forall shift3:int. forall result18:int.
-  forall r58b3:int. forall result19:int. forall r59b3:int.
-  forall result20:int. forall k8:int. forall k9:int. forall k10:int.
-  forall k11:int. forall k12:int. forall k13:int. ((dynamic_property(1,
-  2147483647, to_rep2(first(needle1)), to_rep2(last(needle1))) and
-  (to_rep2(first(needle1)) = 1)) -> ((dynamic_property(1, 2147483647,
-  to_rep2(first(haystack1)), to_rep2(last(haystack1))) and
-  (to_rep2(first(haystack1)) = 1)) -> (((length({ elts = needle; rt = needle1
-  }) <  2147483647) and ((length({ elts = haystack; rt = haystack1
-  }) <  2147483646) and ((1 <= length({ elts = needle; rt = needle1 })) and
-  (length({ elts = needle; rt = needle1 }) <= length({ elts = haystack; rt =
-  haystack1 }))))) -> (((1 <= 2147483647) -> in_range2(i)) ->
-  (((forall c:int. (((0 <= c) and (c <= 255)) ->
-    ((1 <= to_rep((bad_shift[c]))) and (to_rep((bad_shift[c])) <= (length({
-    elts = needle; rt = needle1 }) + 1))))) and
+logic i : int
+
+logic r52b : int
+
+logic r53b : int
+
+logic shift : int
+
+logic r58b : int
+
+logic r59b : int
+
+logic k : int
+
+logic string_search__qs__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___309 : int
+
+logic temp___308 : int
+
+logic temp___307 : int
+
+logic temp___306 : int
+
+logic temp___305 : int
+
+logic temp___304 : int
+
+logic temp___311 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : (int,character) farray
+
+logic temp___296 : (int,character) farray
+
+logic temp___2961 : t1
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic temp___297 : int
+
+logic o20 : int
+
+logic o21 : character
+
+logic o22 : int
+
+logic o23 : positive
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic temp___300 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic temp___298 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic temp___299 : int
+
+logic o36 : int
+
+logic o37 : character
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic temp___2981 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic temp___2991 : int
+
+logic o47 : int
+
+logic o48 : character
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic temp___310 : int
+
+logic o56 : int
+
+logic o57 : character
+
+logic o58 : int
+
+logic o59 : positive
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic temp___303 : int
+
+logic o65 : int
+
+logic o66 : character
+
+logic o67 : int
+
+logic o68 : positive
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : bool
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : (int,character) farray
+
+logic temp___2962 : (int,character) farray
+
+logic temp___2963 : t1
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic temp___2971 : int
+
+logic o91 : int
+
+logic o92 : character
+
+logic o93 : int
+
+logic o94 : positive
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic temp___3001 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic temp___2982 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : int
+
+logic o106 : int
+
+logic temp___2992 : int
+
+logic o107 : int
+
+logic o108 : character
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : int
+
+logic temp___2983 : int
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic o117 : int
+
+logic temp___2993 : int
+
+logic o118 : int
+
+logic o119 : character
+
+logic o120 : int
+
+logic o121 : int
+
+logic k1 : int
+
+logic o122 : int
+
+logic o123 : int
+
+logic o124 : int
+
+logic o125 : int
+
+logic o126 : int
+
+logic o127 : int
+
+logic o128 : int
+
+logic o129 : bool
+
+logic r52b1 : int
+
+logic r53b1 : int
+
+logic shift1 : int
+
+logic r58b1 : int
+
+logic r59b1 : int
+
+logic k2 : int
+
+logic string_search__qs__result1 : int
+
+logic result : bool
+
+logic bad_shift : (int,positive) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : bool
+
+logic temp___3111 : int
+
+logic result3 : int
+
+logic r52b2 : int
+
+logic result4 : int
+
+logic r53b2 : int
+
+logic result5 : bool
+
+logic result6 : int
+
+logic string_search__qs__result2 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic shift2 : int
+
+logic result9 : int
+
+logic r58b2 : int
+
+logic result10 : int
+
+logic r59b2 : int
+
+logic result11 : int
+
+logic k3 : int
+
+logic k4 : int
+
+logic result12 : int
+
+logic k5 : int
+
+logic k6 : int
+
+logic k7 : int
+
+logic k8 : int
+
+logic k9 : int
+
+logic k10 : int
+
+logic k11 : int
+
+logic i2 : int
+
+logic r52b3 : int
+
+logic r53b3 : int
+
+logic shift3 : int
+
+logic r58b3 : int
+
+logic r59b3 : int
+
+logic k12 : int
+
+logic string_search__qs__result3 : int
+
+logic temp___3112 : int
+
+logic result13 : int
+
+logic temp___3113 : int
+
+logic result14 : int
+
+logic i3 : int
+
+logic result15 : bool
+
+logic result16 : int
+
+logic r52b4 : int
+
+logic result17 : int
+
+logic r53b4 : int
+
+logic result18 : bool
+
+logic result19 : int
+
+logic string_search__qs__result4 : int
+
+logic string_search__qs__result5 : int
+
+logic string_search__qs__result6 : int
+
+logic result20 : bool
+
+logic result21 : int
+
+logic shift4 : int
+
+logic result22 : int
+
+logic r58b4 : int
+
+logic result23 : int
+
+logic r59b4 : int
+
+logic result24 : int
+
+logic k13 : int
+
+logic k14 : int
+
+logic result25 : int
+
+logic k15 : int
+
+logic k16 : int
+
+logic k17 : int
+
+logic k18 : int
+
+logic k19 : int
+
+logic k20 : int
+
+logic k21 : int
+
+logic k22 : int
+
+logic k23 : int
+
+logic r52b5 : int
+
+logic r53b5 : int
+
+logic string_search__qs__result7 : int
+
+logic r52b6 : int
+
+logic r53b6 : int
+
+logic string_search__qs__result8 : int
+
+logic i4 : int
+
+logic r52b7 : int
+
+logic r53b7 : int
+
+logic shift5 : int
+
+logic r58b5 : int
+
+logic r59b5 : int
+
+logic k24 : int
+
+logic string_search__qs__result9 : int
+
+logic temp___3114 : int
+
+logic i5 : int
+
+logic r52b8 : int
+
+logic r53b8 : int
+
+logic shift6 : int
+
+logic r58b6 : int
+
+logic r59b6 : int
+
+logic k25 : int
+
+logic string_search__qs__result10 : int
+
+logic temp___3115 : int
+
+logic i6 : int
+
+logic r52b9 : int
+
+logic r53b9 : int
+
+logic shift7 : int
+
+logic r58b7 : int
+
+logic r59b7 : int
+
+logic k26 : int
+
+logic string_search__qs__result11 : int
+
+logic temp___3116 : int
+
+logic i7 : int
+
+logic r52b10 : int
+
+logic r53b10 : int
+
+logic shift8 : int
+
+logic r58b8 : int
+
+logic r59b8 : int
+
+logic k27 : int
+
+logic string_search__qs__result12 : int
+
+logic temp___3117 : int
+
+logic i8 : int
+
+logic r52b11 : int
+
+logic r53b11 : int
+
+logic shift9 : int
+
+logic r58b9 : int
+
+logic r59b9 : int
+
+logic k28 : int
+
+logic string_search__qs__result13 : int
+
+logic temp___3118 : int
+
+logic i9 : int
+
+logic r52b12 : int
+
+logic r53b12 : int
+
+logic shift10 : int
+
+logic r58b10 : int
+
+logic r59b10 : int
+
+logic k29 : int
+
+logic string_search__qs__result14 : int
+
+logic temp___3119 : int
+
+logic i10 : int
+
+logic r52b13 : int
+
+logic r53b13 : int
+
+logic shift11 : int
+
+logic r58b11 : int
+
+logic r59b11 : int
+
+logic k30 : int
+
+logic string_search__qs__result15 : int
+
+logic i11 : int
+
+logic r52b14 : int
+
+logic r53b14 : int
+
+logic shift12 : int
+
+logic r58b12 : int
+
+logic r59b12 : int
+
+logic k31 : int
+
+logic string_search__qs__result16 : int
+
+logic i12 : int
+
+logic r52b15 : int
+
+logic r53b15 : int
+
+logic shift13 : int
+
+logic r58b13 : int
+
+logic r59b13 : int
+
+logic k32 : int
+
+logic string_search__qs__result17 : int
+
+logic i13 : int
+
+logic r52b16 : int
+
+logic r53b16 : int
+
+logic shift14 : int
+
+logic r58b14 : int
+
+logic r59b14 : int
+
+logic k33 : int
+
+logic string_search__qs__result18 : int
+
+logic result26 : int
+
+logic string_search__qs__result19 : int
+
+logic string_search__qs__result20 : int
+
+logic string_search__qs__result21 : int
+
+logic i14 : int
+
+logic r52b17 : int
+
+logic r53b17 : int
+
+logic shift15 : int
+
+logic r58b15 : int
+
+logic r59b15 : int
+
+logic k34 : int
+
+logic string_search__qs__result22 : int
+
+logic i15 : int
+
+logic r52b18 : int
+
+logic r53b18 : int
+
+logic shift16 : int
+
+logic r58b16 : int
+
+logic r59b16 : int
+
+logic k35 : int
+
+logic string_search__qs__result23 : int
+
+logic bad_shift1 : (int,positive) farray
+
+logic i16 : int
+
+logic r52b19 : int
+
+logic r53b19 : int
+
+logic shift17 : int
+
+logic r58b17 : int
+
+logic r59b17 : int
+
+logic k36 : int
+
+logic string_search__qs__result24 : int
+
+logic bad_shift2 : (int,positive) farray
+
+logic i17 : int
+
+logic r52b20 : int
+
+logic r53b20 : int
+
+logic shift18 : int
+
+logic r58b18 : int
+
+logic r59b18 : int
+
+logic k37 : int
+
+logic string_search__qs__result25 : int
+
+logic result27 : bool
+
+axiom H : (dynamic_property(1, 2147483647, to_rep2(first(needle1)),
+  to_rep2(last(needle1))) and (to_rep2(first(needle1)) = 1))
+
+axiom H1 : (dynamic_property(1, 2147483647, to_rep2(first(haystack1)),
+  to_rep2(last(haystack1))) and (to_rep2(first(haystack1)) = 1))
+
+axiom H2 : ((length({ elts = needle; rt = needle1 }) <  2147483647) and
+  ((length({ elts = haystack; rt = haystack1 }) <  2147483646) and
+  ((1 <= length({ elts = needle; rt = needle1 })) and (length({ elts =
+  needle; rt = needle1 }) <= length({ elts = haystack; rt = haystack1 })))))
+
+axiom H3 : ((1 <= 2147483647) -> in_range2(i))
+
+axiom H4 :
+  ((forall c:int. (((0 <= c) and (c <= 255)) ->
+   ((1 <= to_rep((bad_shift[c]))) and (to_rep((bad_shift[c])) <= (length({
+   elts = needle; rt = needle1 }) + 1))))) and
   (forall c:int. (((0 <= c) and (c <= 255)) ->
   (((to_rep((bad_shift[c])) = (length({ elts = needle; rt = needle1
-  }) + 1)) and
-  (forall k14:int. (((to_rep2(first(needle1)) <= k14) and
-  (k14 <= to_rep2(last(needle1)))) -> (not (c = to_rep1((needle[k14]))))))) or
+  }) + 1)) ->
+  (forall k38:int. (((to_rep2(first(needle1)) <= k38) and
+  (k38 <= to_rep2(last(needle1)))) -> (not (c = to_rep1((needle[k38]))))))) and
   ((not (to_rep((bad_shift[c])) = (length({ elts = needle; rt = needle1
-  }) + 1))) and ((to_rep1((needle[((length({ elts = needle; rt = needle1
+  }) + 1))) -> ((to_rep1((needle[((length({ elts = needle; rt = needle1
   }) - to_rep((bad_shift[c]))) + 1)])) = c) and
-  (forall k14:int. (((((length({ elts = needle; rt = needle1
-  }) - to_rep((bad_shift[c]))) + 2) <= k14) and
-  (k14 <= to_rep2(last(needle1)))) -> (not (to_rep1((needle[k14])) = c)))))))))) ->
-  ((({ int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  ((((((((o = length({ elts = needle; rt = needle1 })) and in_range1(length({
-  elts = needle; rt = needle1 }))) and (((o1 = length({ elts = haystack; rt =
-  haystack1 })) and in_range1(length({ elts = haystack; rt = haystack1
-  }))) and (o2 = (o1 - o)))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (o3 + 1))) and ((o5 = o4) and in_range1(o4))) and (((i1 <= o5) and
-  (result1 = true)) or ((not (i1 <= o5)) and (result1 = false)))) ->
-  ((result1 = true) -> (((({ int__content = result2 } = { int__content = r52b
-  }) and (r52b1 = i1)) and in_range2(r52b1)) ->
-  (((((((o6 = (to_rep2(last(needle1)) - 1)) and
-  in_range1((to_rep2(last(needle1)) - 1))) and (o7 = (i1 + o6))) and
-  ((o8 = o7) and in_range1(o7))) and (({ int__content = result3 } = {
-  int__content = r53b }) and (r53b1 = o8))) and in_range1(r53b1)) ->
-  (((((((r52b1 <= r53b1) -> (((to_rep2(first(haystack1)) <= r52b1) and
-  (r52b1 <= to_rep2(last(haystack1)))) and
-  ((to_rep2(first(haystack1)) <= r53b1) and
-  (r53b1 <= to_rep2(last(haystack1)))))) and (o9 = haystack)) and
-  ((o9 = temp___296) and (mk1(r52b1, r53b1) = temp___2961))) and
-  (result4 = bool_eq5(needle, to_rep2(first(needle1)),
+  (forall k38:int. (((((length({ elts = needle; rt = needle1
+  }) - to_rep((bad_shift[c]))) + 2) <= k38) and
+  (k38 <= to_rep2(last(needle1)))) -> (not (to_rep1((needle[k38])) = c))))))))))
+
+axiom H5 : (result1 = i)
+
+axiom H6 : (i1 = 1)
+
+axiom H7 : ((o2 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H8 : ((o3 = length({ elts = haystack; rt = haystack1 })) and
+  in_range1(length({ elts = haystack; rt = haystack1 })))
+
+axiom H9 : (o4 = (o3 - o2))
+
+axiom H10 : ((o5 = o4) and in_range1(o4))
+
+axiom H11 : (o6 = (o5 + 1))
+
+axiom H12 : ((o7 = o6) and in_range1(o6))
+
+axiom H13 : (((i1 <= o7) -> (result2 = true)) and ((not (i1 <= o7)) ->
+  (result2 = false)))
+
+axiom H14 : (result2 = true)
+
+axiom H15 : (result3 = r52b)
+
+axiom H16 : (r52b2 = i1)
+
+axiom H17 : in_range2(r52b2)
+
+axiom H18 : ((o8 = (to_rep2(last(needle1)) - 1)) and
+  in_range1((to_rep2(last(needle1)) - 1)))
+
+axiom H19 : (o9 = (i1 + o8))
+
+axiom H20 : ((o10 = o9) and in_range1(o9))
+
+axiom H21 : (result4 = r53b)
+
+axiom H22 : (r53b2 = o10)
+
+axiom H23 : in_range1(r53b2)
+
+axiom H24 : ((r52b2 <= r53b2) -> (((to_rep2(first(haystack1)) <= r52b2) and
+  (r52b2 <= to_rep2(last(haystack1)))) and
+  ((to_rep2(first(haystack1)) <= r53b2) and
+  (r53b2 <= to_rep2(last(haystack1))))))
+
+axiom H25 : (o11 = haystack)
+
+axiom H26 : (o11 = temp___296)
+
+axiom H27 : (mk1(r52b2, r53b2) = temp___2961)
+
+axiom H28 : (result5 = bool_eq5(needle, to_rep2(first(needle1)),
   to_rep2(last(needle1)), temp___296, to_rep2(first2(temp___2961)),
-  to_rep2(last2(temp___2961))))) and ((not (result4 = true)) and
-  ((string_search__qs__result2 = string_search__qs__result) and
-  (string_search__qs__result2 = string_search__qs__result1)))) ->
-  (((((((((o10 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and (((o11 = length({
-  elts = haystack; rt = haystack1 })) and in_range1(length({ elts = haystack;
-  rt = haystack1 }))) and (o12 = (o11 - o10)))) and ((o13 = o12) and
-  in_range1(o12))) and (o14 = (o13 + 1))) and ((o15 = o14) and
-  in_range1(o14))) and (((i1 = o15) and (result5 = true)) or
-  ((not (i1 = o15)) and (result5 = false)))) and (not (result5 = true))) ->
-  ((((((((((((o16 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and
-  (o17 = (i1 + o16))) and ((temp___297 = o17) and in_range1(o17))) and
-  (((to_rep2(first(haystack1)) <= temp___297) and
-  (temp___297 <= to_rep2(last(haystack1)))) and (o18 = temp___297))) and
-  (o19 = (haystack[o18]))) and (o20 = to_rep1(o19))) and
-  (o21 = (bad_shift[o20]))) and (o22 = to_rep(o21))) and (({ int__content =
-  result6 } = { int__content = shift }) and (shift1 = o22))) and
-  in_range2(shift1)) -> (((((o23 = (i1 + 1)) and in_range1((i1 + 1))) and (({
-  int__content = result7 } = { int__content = r58b }) and (r58b1 = o23))) and
-  in_range1(r58b1)) -> ((((((o24 = (i1 + shift1)) and
-  in_range1((i1 + shift1))) and (o25 = (o24 - 1))) and (({ int__content =
-  result8 } = { int__content = r59b }) and (r59b1 = o25))) and
-  in_range1(r59b1)) -> (((({ int__content = result9 } = { int__content = k
-  }) and (k1 = r58b1)) and ((((r58b1 <= k1) and (k1 <= r59b1)) and
-  ((((temp___300 = k1) and ((not (to_rep1((haystack[(i1 + length({ elts =
-  needle; rt = needle1 }))])) = to_rep1((needle[(((i1 + length({ elts =
-  needle; rt = needle1 })) - k1) + 1)])))) and
-  ((forall l:int. (((1 <= l) and (l <= k2)) -> (not (match_at({ elts =
+  to_rep2(last2(temp___2961))))
+
+axiom H29 : (not (result5 = true))
+
+axiom H30 : (string_search__qs__result2 = string_search__qs__result)
+
+axiom H31 : (string_search__qs__result2 = string_search__qs__result1)
+
+axiom H32 : ((o12 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H33 : ((o13 = length({ elts = haystack; rt = haystack1 })) and
+  in_range1(length({ elts = haystack; rt = haystack1 })))
+
+axiom H34 : (o14 = (o13 - o12))
+
+axiom H35 : ((o15 = o14) and in_range1(o14))
+
+axiom H36 : (o16 = (o15 + 1))
+
+axiom H37 : ((o17 = o16) and in_range1(o16))
+
+axiom H38 : (((i1 = o17) -> (result7 = true)) and ((not (i1 = o17)) ->
+  (result7 = false)))
+
+axiom H39 : (not (result7 = true))
+
+axiom H40 : ((o18 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H41 : (o19 = (i1 + o18))
+
+axiom H42 : ((temp___297 = o19) and in_range1(o19))
+
+axiom H43 : ((to_rep2(first(haystack1)) <= temp___297) and
+  (temp___297 <= to_rep2(last(haystack1))))
+
+axiom H44 : (o20 = temp___297)
+
+axiom H45 : (o21 = (haystack[o20]))
+
+axiom H46 : (o22 = to_rep1(o21))
+
+axiom H47 : (o23 = (bad_shift[o22]))
+
+axiom H48 : (o24 = to_rep(o23))
+
+axiom H49 : (result8 = shift)
+
+axiom H50 : (shift2 = o24)
+
+axiom H51 : in_range2(shift2)
+
+axiom H52 : ((o25 = (i1 + 1)) and in_range1((i1 + 1)))
+
+axiom H53 : (result9 = r58b)
+
+axiom H54 : (r58b2 = o25)
+
+axiom H55 : in_range1(r58b2)
+
+axiom H56 : ((o26 = (i1 + shift2)) and in_range1((i1 + shift2)))
+
+axiom H57 : (o27 = (o26 - 1))
+
+axiom H58 : (result10 = r59b)
+
+axiom H59 : (r59b2 = o27)
+
+axiom H60 : in_range1(r59b2)
+
+axiom H61 : (result11 = k)
+
+axiom H62 : (k3 = r58b2)
+
+axiom H63 : (((r58b2 <= k3) and (k3 <= r59b2)) -> (((temp___300 = k3) and
+  ((not (to_rep1((haystack[(i1 + length({ elts = needle; rt = needle1
+  }))])) = to_rep1((needle[(((i1 + length({ elts = needle; rt = needle1
+  })) - k3) + 1)])))) and
+  ((forall l:int. (((1 <= l) and (l <= k4)) -> (not (match_at({ elts =
    needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, l) = true)))) and
-  ((((r58b1 <= r59b1) -> dynamic_property3(r58b1, r59b1, k2)) and
-  ((r58b1 <= k2) and (k2 <= r59b1))) and (k2 = r59b1))))) and ((k2 = k3) and
-  (k4 = k2))) and (({ int__content = k5 } = { int__content = k3 }) and
-  (k6 = k4)))) or ((not ((r58b1 <= k1) and (k1 <= r59b1))) and ((k1 = k5) and
-  (k6 = k1))))) -> (((i2 <= (length({ elts = haystack; rt = haystack1
-  }) - length({ elts = needle; rt = needle1 }))) and
-  (forall k14:int. (((1 <= k14) and
-  (k14 <= ((i2 + to_rep((bad_shift[to_rep1((haystack[(i2 + length({ elts =
+  ((((r58b2 <= r59b2) -> dynamic_property3(r58b2, r59b2, k4)) and
+  ((r58b2 <= k4) and (k4 <= r59b2))) and (k4 = r59b2))))) and ((k8 = k4) and
+  (k9 = k4))))
+
+axiom H64 : (((r58b2 <= k3) and (k3 <= r59b2)) -> (k10 = k8))
+
+axiom H65 : (((r58b2 <= k3) and (k3 <= r59b2)) -> (k11 = k9))
+
+axiom H66 : ((not ((r58b2 <= k3) and (k3 <= r59b2))) -> (k10 = k3))
+
+axiom H67 : ((not ((r58b2 <= k3) and (k3 <= r59b2))) -> (k11 = k3))
+
+axiom H68 : (i2 <= (length({ elts = haystack; rt = haystack1 }) - length({
+  elts = needle; rt = needle1 })))
+
+axiom H69 :
+  (forall k38:int. (((1 <= k38) and
+  (k38 <= ((i2 + to_rep((bad_shift[to_rep1((haystack[(i2 + length({ elts =
   needle; rt = needle1 }))]))]))) - 1))) -> (not (match_at({ elts = needle;
-  rt = needle1 }, { elts = haystack; rt = haystack1 }, k14) = true))))) ->
-  ((((((((1 <= 2147483647) -> in_range2(i2)) and ((1 <= 2147483647) ->
-  in_range2(r52b2))) and (((-2147483648) <= 2147483647) ->
-  in_range1(r53b2))) and (((-2147483648) <= 2147483647) ->
-  in_range1(r58b2))) and (((-2147483648) <= 2147483647) ->
-  in_range1(r59b2))) and ((1 <= 2147483647) -> in_range2(shift2))) ->
-  (((result10 = temp___311) and (temp___3111 = i2)) ->
-  (((((((((((((o26 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and
-  (o27 = (i2 + o26))) and ((temp___303 = o27) and in_range1(o27))) and
-  (((to_rep2(first(haystack1)) <= temp___303) and
-  (temp___303 <= to_rep2(last(haystack1)))) and (o28 = temp___303))) and
-  (o29 = (haystack[o28]))) and (o30 = to_rep1(o29))) and
-  (o31 = (bad_shift[o30]))) and (o32 = to_rep(o31))) and
-  (o33 = (i2 + o32))) and ((o34 = o33) and in_range1(o33))) and
-  ((result11 = i2) and (i3 = o34))) -> ((((((((((o35 = length({ elts =
-  needle; rt = needle1 })) and in_range1(length({ elts = needle; rt = needle1
-  }))) and (((o36 = length({ elts = haystack; rt = haystack1 })) and
-  in_range1(length({ elts = haystack; rt = haystack1 }))) and
-  (o37 = (o36 - o35)))) and ((o38 = o37) and in_range1(o37))) and
-  (o39 = (o38 + 1))) and ((o40 = o39) and in_range1(o39))) and
-  (((i3 <= o40) and (o41 = true)) or ((not (i3 <= o40)) and
-  (o41 = false)))) and (((not (o41 = true)) and (result12 = true)) or
-  ((o41 = true) and (result12 = false)))) and (not (result12 = true))) ->
-  ((((result13 = r52b2) and (r52b3 = i3)) and in_range2(r52b3)) ->
-  (((((((o42 = (to_rep2(last(needle1)) - 1)) and
-  in_range1((to_rep2(last(needle1)) - 1))) and (o43 = (i3 + o42))) and
-  ((o44 = o43) and in_range1(o43))) and ((result14 = r53b2) and
-  (r53b3 = o44))) and in_range1(r53b3)) -> (((((((r52b3 <= r53b3) ->
-  (((to_rep2(first(haystack1)) <= r52b3) and
-  (r52b3 <= to_rep2(last(haystack1)))) and
-  ((to_rep2(first(haystack1)) <= r53b3) and
-  (r53b3 <= to_rep2(last(haystack1)))))) and (o45 = haystack)) and
-  ((o45 = temp___2962) and (mk1(r52b3, r53b3) = temp___2963))) and
-  (result15 = bool_eq5(needle, to_rep2(first(needle1)),
+  rt = needle1 }, { elts = haystack; rt = haystack1 }, k38) = true))))
+
+axiom H70 : (((((((1 <= 2147483647) -> in_range2(i2)) and
+  ((1 <= 2147483647) -> in_range2(shift3))) and ((1 <= 2147483647) ->
+  in_range2(r52b3))) and (((- 2147483648) <= 2147483647) ->
+  in_range1(r53b3))) and (((- 2147483648) <= 2147483647) ->
+  in_range1(r58b3))) and (((- 2147483648) <= 2147483647) ->
+  in_range1(r59b3)))
+
+axiom H71 : (result13 = temp___3112)
+
+axiom H72 : (temp___3113 = i2)
+
+axiom H73 : ((o63 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H74 : (o64 = (i2 + o63))
+
+axiom H75 : ((temp___303 = o64) and in_range1(o64))
+
+axiom H76 : ((to_rep2(first(haystack1)) <= temp___303) and
+  (temp___303 <= to_rep2(last(haystack1))))
+
+axiom H77 : (o65 = temp___303)
+
+axiom H78 : (o66 = (haystack[o65]))
+
+axiom H79 : (o67 = to_rep1(o66))
+
+axiom H80 : (o68 = (bad_shift[o67]))
+
+axiom H81 : (o69 = to_rep(o68))
+
+axiom H82 : (o70 = (i2 + o69))
+
+axiom H83 : ((o71 = o70) and in_range1(o70))
+
+axiom H84 : (result14 = i2)
+
+axiom H85 : (i3 = o71)
+
+axiom H86 : ((o72 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H87 : ((o73 = length({ elts = haystack; rt = haystack1 })) and
+  in_range1(length({ elts = haystack; rt = haystack1 })))
+
+axiom H88 : (o74 = (o73 - o72))
+
+axiom H89 : ((o75 = o74) and in_range1(o74))
+
+axiom H90 : (o76 = (o75 + 1))
+
+axiom H91 : ((o77 = o76) and in_range1(o76))
+
+axiom H92 : (((i3 <= o77) -> (o78 = true)) and ((not (i3 <= o77)) ->
+  (o78 = false)))
+
+axiom H93 : (((not (o78 = true)) -> (result15 = true)) and ((o78 = true) ->
+  (result15 = false)))
+
+axiom H94 : (not (result15 = true))
+
+axiom H95 : (result16 = r52b3)
+
+axiom H96 : (r52b4 = i3)
+
+axiom H97 : in_range2(r52b4)
+
+axiom H98 : ((o79 = (to_rep2(last(needle1)) - 1)) and
+  in_range1((to_rep2(last(needle1)) - 1)))
+
+axiom H99 : (o80 = (i3 + o79))
+
+axiom H100 : ((o81 = o80) and in_range1(o80))
+
+axiom H101 : (result17 = r53b3)
+
+axiom H102 : (r53b4 = o81)
+
+axiom H103 : in_range1(r53b4)
+
+axiom H104 : ((r52b4 <= r53b4) -> (((to_rep2(first(haystack1)) <= r52b4) and
+  (r52b4 <= to_rep2(last(haystack1)))) and
+  ((to_rep2(first(haystack1)) <= r53b4) and
+  (r53b4 <= to_rep2(last(haystack1))))))
+
+axiom H105 : (o82 = haystack)
+
+axiom H106 : (o82 = temp___2962)
+
+axiom H107 : (mk1(r52b4, r53b4) = temp___2963)
+
+axiom H108 : (result18 = bool_eq5(needle, to_rep2(first(needle1)),
   to_rep2(last(needle1)), temp___2962, to_rep2(first2(temp___2963)),
-  to_rep2(last2(temp___2963))))) and ((not (result15 = true)) and
-  ((string_search__qs__result4 = string_search__qs__result3) and
-  (string_search__qs__result5 = string_search__qs__result3)))) ->
-  (((((((((o46 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and (((o47 = length({
-  elts = haystack; rt = haystack1 })) and in_range1(length({ elts = haystack;
-  rt = haystack1 }))) and (o48 = (o47 - o46)))) and ((o49 = o48) and
-  in_range1(o48))) and (o50 = (o49 + 1))) and ((o51 = o50) and
-  in_range1(o50))) and (((i3 = o51) and (result16 = true)) or
-  ((not (i3 = o51)) and (result16 = false)))) and (not (result16 = true))) ->
-  ((((((((((((o52 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and
-  (o53 = (i3 + o52))) and ((temp___2971 = o53) and in_range1(o53))) and
-  (((to_rep2(first(haystack1)) <= temp___2971) and
-  (temp___2971 <= to_rep2(last(haystack1)))) and (o54 = temp___2971))) and
-  (o55 = (haystack[o54]))) and (o56 = to_rep1(o55))) and
-  (o57 = (bad_shift[o56]))) and (o58 = to_rep(o57))) and
-  ((result17 = shift2) and (shift3 = o58))) and in_range2(shift3)) ->
-  (((((o59 = (i3 + 1)) and in_range1((i3 + 1))) and ((result18 = r58b2) and
-  (r58b3 = o59))) and in_range1(r58b3)) -> ((((((o60 = (i3 + shift3)) and
-  in_range1((i3 + shift3))) and (o61 = (o60 - 1))) and
-  ((result19 = r59b2) and (r59b3 = o61))) and in_range1(r59b3)) ->
-  ((((result20 = k7) and (k8 = r58b3)) and ((((r58b3 <= k8) and
-  (k8 <= r59b3)) and ((((temp___3001 = k8) and
-  ((not (to_rep1((haystack[(i3 + length({ elts = needle; rt = needle1
-  }))])) = to_rep1((needle[(((i3 + length({ elts = needle; rt = needle1
-  })) - k8) + 1)])))) and
-  ((forall l:int. (((1 <= l) and (l <= k9)) -> (not (match_at({ elts =
+  to_rep2(last2(temp___2963))))
+
+axiom H109 : (not (result18 = true))
+
+axiom H110 : (string_search__qs__result5 = string_search__qs__result3)
+
+axiom H111 : (string_search__qs__result6 = string_search__qs__result3)
+
+axiom H112 : ((o83 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H113 : ((o84 = length({ elts = haystack; rt = haystack1 })) and
+  in_range1(length({ elts = haystack; rt = haystack1 })))
+
+axiom H114 : (o85 = (o84 - o83))
+
+axiom H115 : ((o86 = o85) and in_range1(o85))
+
+axiom H116 : (o87 = (o86 + 1))
+
+axiom H117 : ((o88 = o87) and in_range1(o87))
+
+axiom H118 : (((i3 = o88) -> (result20 = true)) and ((not (i3 = o88)) ->
+  (result20 = false)))
+
+axiom H119 : (not (result20 = true))
+
+axiom H120 : ((o89 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H121 : (o90 = (i3 + o89))
+
+axiom H122 : ((temp___2971 = o90) and in_range1(o90))
+
+axiom H123 : ((to_rep2(first(haystack1)) <= temp___2971) and
+  (temp___2971 <= to_rep2(last(haystack1))))
+
+axiom H124 : (o91 = temp___2971)
+
+axiom H125 : (o92 = (haystack[o91]))
+
+axiom H126 : (o93 = to_rep1(o92))
+
+axiom H127 : (o94 = (bad_shift[o93]))
+
+axiom H128 : (o95 = to_rep(o94))
+
+axiom H129 : (result21 = shift3)
+
+axiom H130 : (shift4 = o95)
+
+axiom H131 : in_range2(shift4)
+
+axiom H132 : ((o96 = (i3 + 1)) and in_range1((i3 + 1)))
+
+axiom H133 : (result22 = r58b3)
+
+axiom H134 : (r58b4 = o96)
+
+axiom H135 : in_range1(r58b4)
+
+axiom H136 : ((o97 = (i3 + shift4)) and in_range1((i3 + shift4)))
+
+axiom H137 : (o98 = (o97 - 1))
+
+axiom H138 : (result23 = r59b3)
+
+axiom H139 : (r59b4 = o98)
+
+axiom H140 : in_range1(r59b4)
+
+axiom H141 : (result24 = k12)
+
+axiom H142 : (k13 = r58b4)
+
+axiom H143 : (((r58b4 <= k13) and (k13 <= r59b4)) ->
+  (((temp___3001 = k13) and ((not (to_rep1((haystack[(i3 + length({ elts =
+  needle; rt = needle1 }))])) = to_rep1((needle[(((i3 + length({ elts =
+  needle; rt = needle1 })) - k13) + 1)])))) and
+  ((forall l:int. (((1 <= l) and (l <= k14)) -> (not (match_at({ elts =
    needle; rt = needle1 }, { elts = haystack; rt = haystack1 }, l) = true)))) and
-  ((((r58b3 <= r59b3) -> dynamic_property3(r58b3, r59b3, k9)) and
-  ((r58b3 <= k9) and (k9 <= r59b3))) and (k9 = r59b3))))) and ((k9 = k10) and
-  (k11 = k9))) and (({ int__content = k12 } = { int__content = k10 }) and
-  (k13 = k11)))) or ((not ((r58b3 <= k8) and (k8 <= r59b3))) and
-  ((k8 = k12) and (k13 = k8))))) ->
-  (temp___3111 <  i3)))))))))))))))))))))))))))))))
+  ((((r58b4 <= r59b4) -> dynamic_property3(r58b4, r59b4, k14)) and
+  ((r58b4 <= k14) and (k14 <= r59b4))) and (k14 = r59b4))))) and
+  ((k20 = k14) and (k21 = k14))))
+
+axiom H144 : (((r58b4 <= k13) and (k13 <= r59b4)) -> (k22 = k20))
+
+axiom H145 : (((r58b4 <= k13) and (k13 <= r59b4)) -> (k23 = k21))
+
+axiom H146 : ((not ((r58b4 <= k13) and (k13 <= r59b4))) -> (k22 = k13))
+
+axiom H147 : ((not ((r58b4 <= k13) and (k13 <= r59b4))) -> (k23 = k13))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (temp___3113 <  i3)

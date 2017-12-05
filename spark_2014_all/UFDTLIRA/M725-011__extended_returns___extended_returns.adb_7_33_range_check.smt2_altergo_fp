@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,23 +218,23 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__extended_returns__record_t__discr) = to_rep1(((b).us_split_discrs1).rec__extended_returns__record_t__discr)) and
-  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__a) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__a))) and
-  (extended_returns__record_t__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__b) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__b)))) and
-  (extended_returns__record_t__c__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__c) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__c)))) and
-  (extended_returns__record_t__d__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__d) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__d)))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__extended_returns__record_t__discr) = to_rep1(((b).us_split_discrs1).rec__extended_returns__record_t__discr)) and
-  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__a) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__a))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__extended_returns__record_t__discr) = to_rep1(((b).us_split_discrs1).rec__extended_returns__record_t__discr)) and
+  ((((to_rep(((a).us_split_fields1).rec__extended_returns__record_t__a) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__a)) and
   (extended_returns__record_t__b__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__b) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__b)))) and
   (extended_returns__record_t__c__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__c) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__c)))) and
   (extended_returns__record_t__d__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__d) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__d))))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__extended_returns__record_t__discr) = to_rep1(((b).us_split_discrs1).rec__extended_returns__record_t__discr)) and
+  ((((to_rep(((a).us_split_fields1).rec__extended_returns__record_t__a) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__a)) and
+  (extended_returns__record_t__b__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__b) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__b)))) and
+  (extended_returns__record_t__c__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__c) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__c)))) and
+  (extended_returns__record_t__d__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__extended_returns__record_t__d) = to_rep(((b).us_split_fields1).rec__extended_returns__record_t__d)))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -505,6 +505,287 @@ logic result____attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result____split_fields : integer
+
+logic result____split_fields1 : integer
+
+logic result____split_fields2 : integer
+
+logic result____split_fields3 : integer
+
+logic extended_returns__init__result : natural
+
+logic extended_returns__init__result1 : integer
+
+logic extended_returns__init__result2 : integer
+
+logic extended_returns__init__result3 : integer
+
+logic extended_returns__init__result4 : integer
+
+logic extended_returns__init__result5 : bool
+
+logic us : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic temp___163 : natural
+
+logic temp___1631 : integer
+
+logic temp___1632 : integer
+
+logic temp___1633 : integer
+
+logic temp___1634 : integer
+
+logic temp___1635 : bool
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic temp___169 : natural
+
+logic temp___1691 : integer
+
+logic temp___1692 : integer
+
+logic temp___1693 : integer
+
+logic temp___1694 : integer
+
+logic temp___1695 : bool
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : integer
+
+logic temp___165 : natural
+
+logic temp___1651 : integer
+
+logic temp___1652 : integer
+
+logic temp___1653 : integer
+
+logic temp___1654 : integer
+
+logic temp___1655 : bool
+
+logic o15 : integer
+
+logic o16 : integer
+
+logic o17 : integer
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic temp___167 : natural
+
+logic temp___1671 : integer
+
+logic temp___1672 : integer
+
+logic temp___1673 : integer
+
+logic temp___1674 : integer
+
+logic temp___1675 : bool
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic result____split_fields4 : integer
+
+logic result____split_fields5 : integer
+
+logic result____split_fields6 : integer
+
+logic result____split_fields7 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic result____split_fields8 : integer
+
+logic result____split_fields9 : integer
+
+logic result____split_fields10 : integer
+
+logic result____split_fields11 : integer
+
+logic result8 : integer
+
+logic result9 : integer
+
+logic result10 : integer
+
+logic result11 : integer
+
+logic result____split_fields12 : integer
+
+logic result____split_fields13 : integer
+
+logic result____split_fields14 : integer
+
+logic result____split_fields15 : integer
+
+logic result12 : integer
+
+logic result13 : integer
+
+logic result14 : integer
+
+logic result15 : integer
+
+logic result____split_fields16 : integer
+
+logic result____split_fields17 : integer
+
+logic result____split_fields18 : integer
+
+logic result____split_fields19 : integer
+
+logic result16 : natural
+
+logic result17 : integer
+
+logic result18 : integer
+
+logic result19 : integer
+
+logic result20 : integer
+
+logic result21 : bool
+
+logic extended_returns__init__result6 : natural
+
+logic extended_returns__init__result7 : integer
+
+logic extended_returns__init__result8 : integer
+
+logic extended_returns__init__result9 : integer
+
+logic extended_returns__init__result10 : integer
+
+logic extended_returns__init__result11 : bool
+
+logic result____split_fields20 : integer
+
+logic result____split_fields21 : integer
+
+logic result____split_fields22 : integer
+
+logic result____split_fields23 : integer
+
+logic extended_returns__init__result12 : natural
+
+logic extended_returns__init__result13 : integer
+
+logic extended_returns__init__result14 : integer
+
+logic extended_returns__init__result15 : integer
+
+logic extended_returns__init__result16 : integer
+
+logic extended_returns__init__result17 : bool
+
+logic result____split_fields24 : integer
+
+logic result____split_fields25 : integer
+
+logic result____split_fields26 : integer
+
+logic result____split_fields27 : integer
+
+logic extended_returns__init__result18 : natural
+
+logic extended_returns__init__result19 : integer
+
+logic extended_returns__init__result20 : integer
+
+logic extended_returns__init__result21 : integer
+
+logic extended_returns__init__result22 : integer
+
+logic extended_returns__init__result23 : bool
+
+logic result____split_fields28 : integer
+
+logic result____split_fields29 : integer
+
+logic result____split_fields30 : integer
+
+logic result____split_fields31 : integer
+
+logic extended_returns__init__result24 : natural
+
+logic extended_returns__init__result25 : integer
+
+logic extended_returns__init__result26 : integer
+
+logic extended_returns__init__result27 : integer
+
+logic extended_returns__init__result28 : integer
+
+logic extended_returns__init__result29 : bool
+
+logic result____split_fields32 : integer
+
+logic result____split_fields33 : integer
+
+logic result____split_fields34 : integer
+
+logic result____split_fields35 : integer
+
+logic extended_returns__init__result30 : natural
+
+logic extended_returns__init__result31 : integer
+
+logic extended_returns__init__result32 : integer
+
+logic extended_returns__init__result33 : integer
+
+logic extended_returns__init__result34 : integer
+
+logic extended_returns__init__result35 : bool
+
+axiom H : in_range(discr)
+
+axiom H1 : in_range1(init_val)
+
  (* File "extended_returns.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range(discr) -> (in_range1(init_val) ->
-  in_range1(discr)))
+goal WP_parameter_def : in_range1(discr)

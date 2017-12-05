@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type element_t
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -306,7 +306,7 @@ axiom valid__def_axiom :
   ((forall i:int. (((1 <= i) and (i <= s)) -> ((0 <= to_rep((t[i]))) and
    (to_rep((t[i])) <= 2147483647)))) and
   (forall i:int. ((((s + 1) <= i) and (i <= 100)) ->
-  (to_rep((t[i])) = (-1))))))))
+  (to_rep((t[i])) = (- 1))))))))
 
 logic t : (int,element_t) farray
 
@@ -339,59 +339,132 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "stack.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall index:int. forall stack__size__result:int. forall temp___171:int.
-  forall temp___172:int. forall temp___170:int.
-  forall stack__size__result1:int. forall result:int. forall index1:int.
-  forall index2:int. forall stack__size__result2:int. forall result1:int.
-  forall stack__size__result3:int. forall index3:int.
-  forall stack__size__result4:int. forall index4:int.
-  forall stack__size__result5:int. forall index5:int.
-  forall stack__size__result6:int. forall index6:int.
-  forall stack__size__result7:int. forall result2:int.
-  forall stack__size__result8:int. forall stack__size__result9:int.
-  forall stack__size__result10:int. forall index7:int.
-  forall stack__size__result11:int. forall index8:int.
-  forall stack__size__result12:int. forall index9:int.
-  forall stack__size__result13:int. forall index10:int.
-  forall stack__size__result14:int.
-  (forall result3:int.
-  (((exists s:int. (((0 <= s) and (s <= 100)) and (valid(t, s) = true))) and
-  (((((((stack__size__result3 = stack__size__result11) and
-  (index2 = index7)) and ((stack__size__result12 = stack__size__result3) and
-  (index8 = index2))) and ((temp___171 = 1) and ((temp___172 = 100) and ((({
-  int__content = result } = { int__content = index }) and
-  (index1 = temp___171)) and (((temp___171 <= index1) and
-  (index1 <= temp___172)) and ((temp___170 = index1) and
-  ((forall i:int. (((1 <= i) and (i <= (index2 - 1))) ->
-   (not (to_rep((t[i])) = (-1))))) and
-  ((((1 <= 100) -> in_range4(index2)) and ((1 <= index2) and
-  (index2 <= 100))) and ((to_rep((t[index2])) = (-1)) and
-  ((result1 = stack__size__result2) and
-  (stack__size__result3 = (index2 - 1)))))))))))) or (((({ int__content =
-  result } = { int__content = index }) and (index1 = 1)) and
-  ((((1 <= index1) and (index1 <= 100)) and ((((temp___170 = index1) and
-  ((forall i:int. (((1 <= i) and (i <= (index2 - 1))) ->
-   (not (to_rep((t[i])) = (-1))))) and
-  ((((1 <= 100) -> in_range4(index2)) and ((1 <= index2) and
-  (index2 <= 100))) and (((not (to_rep((t[index2])) = (-1))) and
+logic index : int
+
+logic stack__size__result : int
+
+logic temp___171 : int
+
+logic temp___172 : int
+
+logic temp___170 : int
+
+logic i : int
+
+logic stack__size__result1 : int
+
+logic result : int
+
+logic index1 : int
+
+logic index2 : int
+
+logic stack__size__result2 : int
+
+logic result1 : int
+
+logic stack__size__result3 : int
+
+logic result2 : int
+
+logic index3 : int
+
+logic index4 : int
+
+logic stack__size__result4 : int
+
+logic index5 : int
+
+logic stack__size__result5 : int
+
+logic index6 : int
+
+logic stack__size__result6 : int
+
+logic index7 : int
+
+logic stack__size__result7 : int
+
+logic index8 : int
+
+logic stack__size__result8 : int
+
+logic index9 : int
+
+logic stack__size__result9 : int
+
+logic result3 : int
+
+logic stack__size__result10 : int
+
+logic stack__size__result11 : int
+
+logic stack__size__result12 : int
+
+logic index10 : int
+
+logic stack__size__result13 : int
+
+logic index11 : int
+
+logic stack__size__result14 : int
+
+logic index12 : int
+
+logic stack__size__result15 : int
+
+logic index13 : int
+
+logic stack__size__result16 : int
+
+logic result4 : int
+
+axiom H :
+  (exists s:int. (((0 <= s) and (s <= 100)) and (valid(t, s) = true)))
+
+axiom H1 : (((((stack__size__result3 = stack__size__result13) and
+  (index2 = index10)) and ((stack__size__result14 = stack__size__result3) and
+  (index11 = index2))) and ((temp___171 = 1) and ((temp___172 = 100) and
+  (((result = index) and (index1 = temp___171)) and
+  (((temp___171 <= index1) and (index1 <= temp___172)) and
+  ((temp___170 = index1) and
+  ((forall i1:int. (((1 <= i1) and (i1 <= (index2 - 1))) ->
+   (not (to_rep((t[i1])) = (- 1))))) and ((((1 <= 100) ->
+  in_range4(index2)) and ((1 <= index2) and (index2 <= 100))) and
+  ((to_rep((t[index2])) = (- 1)) and ((result1 = stack__size__result2) and
+  (stack__size__result3 = (index2 - 1)))))))))))) or ((((result = index) and
+  (index1 = 1)) and ((((1 <= index1) and (index1 <= 100)) ->
+  ((((temp___170 = index1) and
+  ((forall i1:int. (((1 <= i1) and (i1 <= (index2 - 1))) ->
+   (not (to_rep((t[i1])) = (- 1))))) and ((((1 <= 100) ->
+  in_range4(index2)) and ((1 <= index2) and (index2 <= 100))) and
+  (((not (to_rep((t[index2])) = (- 1))) and
   (stack__size__result3 = stack__size__result2)) and (index2 = 100))))) and
-  (((stack__size__result3 = stack__size__result4) and (index2 = index3)) and
-  ((stack__size__result5 = stack__size__result3) and (index4 = index2)))) and
-  ((({ int__content = stack__size__result6 } = { int__content =
-  stack__size__result4 }) and ({ int__content = index5 } = { int__content =
-  index3 })) and ((stack__size__result7 = stack__size__result5) and
-  (index6 = index4))))) or ((not ((1 <= index1) and (index1 <= 100))) and
-  (((stack__size__result = stack__size__result6) and (index1 = index5)) and
-  ((stack__size__result7 = stack__size__result1) and
-  (index6 = index1)))))) and
-  ((((stack__size__result9 = stack__size__result11) and
-  (index7 = index5)) and ((stack__size__result12 = stack__size__result10) and
-  (index8 = index6))) and (((stack__size__result8 = stack__size__result9) and
-  (stack__size__result10 = stack__size__result8)) and
-  ((result2 = stack__size__result6) and (stack__size__result8 = 100)))))) and
-  (((stack__size__result13 = stack__size__result11) and
-  (index9 = index7)) and ((stack__size__result14 = stack__size__result12) and
-  (index10 = index8)))) and (result3 = stack__size__result13))) -> (valid(t,
-  stack__size__result13) = true))))
+  (((stack__size__result3 = stack__size__result6) and (index2 = index6)) and
+  ((stack__size__result7 = stack__size__result3) and (index7 = index2)))) and
+  (((stack__size__result8 = stack__size__result6) and (index8 = index6)) and
+  ((stack__size__result9 = stack__size__result7) and
+  (index9 = index7))))) and ((not ((1 <= index1) and (index1 <= 100))) ->
+  (((stack__size__result8 = stack__size__result) and (index1 = index8)) and
+  ((stack__size__result9 = stack__size__result1) and
+  (index9 = index1)))))) and
+  ((((stack__size__result13 = stack__size__result11) and
+  (index10 = index8)) and
+  ((stack__size__result14 = stack__size__result12) and
+  (index11 = index9))) and
+  (((stack__size__result10 = stack__size__result11) and
+  (stack__size__result12 = stack__size__result10)) and
+  ((result3 = stack__size__result8) and (stack__size__result10 = 100))))))
+
+axiom H2 : (stack__size__result15 = stack__size__result13)
+
+axiom H3 : (index12 = index10)
+
+axiom H4 : (stack__size__result16 = stack__size__result14)
+
+axiom H5 : (index13 = index11)
+
+axiom H6 : (result4 = stack__size__result15)
+
+ (* File "stack.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : (valid(t, stack__size__result15) = true)

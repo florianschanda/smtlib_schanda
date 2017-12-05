@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type ttB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -169,8 +169,53 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic mint : int
+
+logic maxt : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : int
+
+logic mint1 : int
+
+logic result1 : int
+
+logic maxt1 : int
+
+logic result2 : int
+
+logic mint2 : int
+
+logic result3 : int
+
+logic maxt2 : int
+
+axiom H : ((1 <= 127) -> in_range1(mint))
+
+axiom H1 : ((1 <= 127) -> in_range1(maxt))
+
+axiom H2 : in_range1(x)
+
+axiom H3 : in_range1(y)
+
+axiom H4 : (x <  y)
+
  (* File "minmax.adb", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mint:int. forall maxt:int. (((1 <= 127) -> in_range1(mint)) ->
-  (((1 <= 127) -> in_range1(maxt)) -> (in_range1(x) -> (in_range1(y) ->
-  ((x <  y) -> in_range1(min(x, y))))))))
+goal WP_parameter_def : in_range1(min(x, y))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -666,24 +666,90 @@ type t4b__ref = { t4b__content : us_t1
 
 function t4b__ref___projection(a: t4b__ref) : us_t1 = (a).t4b__content
 
+logic target__split_fields : str_length
+
+logic target__split_fields1 : (int,character) farray
+
+logic o : str_length
+
+logic o1 : str_length
+
+logic o2 : (int,character) farray
+
+logic temp___176 : str_length
+
+logic temp___1761 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : str_length
+
+logic o6 : str_length
+
+logic o7 : (int,character) farray
+
+logic temp___178 : str_length
+
+logic temp___1781 : (int,character) farray
+
+logic temp___179 : (int,character) farray
+
+logic temp___1791 : t1
+
+logic o8 : (int,character) farray
+
+logic temp___182 : (int,character) farray
+
+logic temp___1821 : t1
+
+logic result : str_length
+
+logic result1 : (int,character) farray
+
+logic target__split_fields2 : str_length
+
+logic target__split_fields3 : (int,character) farray
+
+logic result2 : bool
+
+logic result3 : str_length
+
+logic result4 : (int,character) farray
+
+logic target__split_fields4 : str_length
+
+logic target__split_fields5 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (to_rep2(o) = 0)
+
+axiom H2 : (o = o1)
+
+axiom H3 : (target__split_fields1 = o2)
+
+axiom H4 : (temp___176 = o1)
+
+axiom H5 : (temp___1761 = o2)
+
+axiom H6 : (result = target__split_fields)
+
+axiom H7 : (result1 = target__split_fields1)
+
+axiom H8 : (temp___176 = target__split_fields2)
+
+axiom H9 : (temp___1761 = target__split_fields3)
+
+axiom H10 : ((o3 = length({ elts = source; rt = source1 })) and
+  in_range(length({ elts = source; rt = source1 })))
+
+axiom H11 : (((o3 <= 10) -> (result2 = true)) and ((not (o3 <= 10)) ->
+  (result2 = false)))
+
+axiom H12 : (result2 = true)
+
  (* File "p.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target__split_fields:str_length.
-  forall target__split_fields1:(int,character) farray. forall o:str_length.
-  forall o1:str_length. forall o2:(int,character) farray.
-  forall temp___176:str_length. forall temp___1761:(int,character) farray.
-  forall o3:int. forall result:str_length.
-  forall result1:(int,character) farray.
-  forall target__split_fields2:str_length.
-  forall target__split_fields3:(int,character) farray. forall result2:bool.
-  (dynamic_property(1, 2147483647, to_rep1(first(source1)),
-  to_rep1(last(source1))) -> (((((to_rep2(o) = 0) and ((o = o1) and
-  (target__split_fields1 = o2))) and ((temp___176 = o1) and
-  (temp___1761 = o2))) and (((result = target__split_fields) and
-  (result1 = target__split_fields1)) and
-  ((temp___176 = target__split_fields2) and
-  (temp___1761 = target__split_fields3)))) -> ((((o3 = length({ elts =
-  source; rt = source1 })) and in_range(length({ elts = source; rt = source1
-  }))) and (((o3 <= 10) and (result2 = true)) or ((not (o3 <= 10)) and
-  (result2 = false)))) -> ((result2 = true) -> in_range3(length({ elts =
-  source; rt = source1 })))))))
+goal WP_parameter_def : in_range3(length({ elts = source; rt = source1 }))

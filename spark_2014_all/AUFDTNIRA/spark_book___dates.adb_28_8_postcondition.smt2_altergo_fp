@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -487,40 +487,131 @@ axiom month_length__def_axiom :
   (month_length = dates__get_month_length__month_length__aggregate_def(31,
   28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31))
 
+logic length : int
+
+logic c9b : bool
+
+logic result__ : bool
+
+logic dates__get_month_length__result : int
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : bool
+
+logic result__2 : bool
+
+logic result2 : bool
+
+logic c9b1 : bool
+
+logic result3 : int
+
+logic length1 : int
+
+logic result4 : int
+
+logic length2 : int
+
+logic result5 : int
+
+logic dates__get_month_length__result1 : int
+
+logic dates__get_month_length__result2 : int
+
+logic dates__get_month_length__result3 : int
+
+logic length3 : int
+
+logic c9b2 : bool
+
+logic result__3 : bool
+
+logic dates__get_month_length__result4 : int
+
+logic length4 : int
+
+logic c9b3 : bool
+
+logic result__4 : bool
+
+logic dates__get_month_length__result5 : int
+
+logic result6 : int
+
+axiom H : in_range1(year)
+
+axiom H1 : in_range2(month)
+
+axiom H2 : (dates__get_month_length__month_length__aggregate_def(31, 28, 31,
+  30, 31, 30, 31, 31, 30, 31, 30, 31) = month_length)
+
+axiom H3 : ((1 <= 31) -> in_range3(length))
+
+axiom H4 : (year = c8b)
+
+axiom H5 : in_range1(c8b)
+
+axiom H6 : (result = result__)
+
+axiom H7 : (result__1 = of_int(0))
+
+axiom H8 : ((mod(c8b, 4) = 0) -> (result1 = result__1))
+
+axiom H9 : ((mod(c8b, 4) = 0) -> (result__2 = of_int(1)))
+
+axiom H10 : ((not (mod(c8b, 4) = 0)) -> (result__2 = result__1))
+
+axiom H11 : (result2 = c9b)
+
+axiom H12 : (c9b1 = result__2)
+
+axiom H13 : (((c9b1 = true) and (month = 2)) -> (result3 = length))
+
+axiom H14 : (((c9b1 = true) and (month = 2)) -> (length1 = 29))
+
+axiom H15 : ((not (((c9b1 = true) -> (month = 2)) and
+  (not (c9b1 = false)))) -> (result4 = length))
+
+axiom H16 : ((not (((c9b1 = true) -> (month = 2)) and
+  (not (c9b1 = false)))) -> (length2 = to_rep((month_length[month]))))
+
+axiom H17 : ((not (((c9b1 = true) -> (month = 2)) and
+  (not (c9b1 = false)))) -> (length1 = length2))
+
+axiom H18 :
+  (dates__get_month_length__result1 = dates__get_month_length__result2)
+
+axiom H19 :
+  (dates__get_month_length__result3 = dates__get_month_length__result1)
+
+axiom H20 : (result5 = dates__get_month_length__result)
+
+axiom H21 : (dates__get_month_length__result1 = length1)
+
+axiom H22 :
+  (dates__get_month_length__result4 = dates__get_month_length__result2)
+
+axiom H23 : (result__3 = result__2)
+
+axiom H24 : (c9b2 = c9b1)
+
+axiom H25 : (length3 = length1)
+
+axiom H26 :
+  (dates__get_month_length__result5 = dates__get_month_length__result3)
+
+axiom H27 : (result__4 = result__2)
+
+axiom H28 : (c9b3 = c9b1)
+
+axiom H29 : (length4 = length1)
+
+axiom H30 : (result6 = dates__get_month_length__result4)
+
+axiom H31 : (month = 1)
+
  (* File "dates.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall length:int. forall c9b:bool. forall result__:bool.
-  forall dates__get_month_length__result:int. forall result:bool.
-  forall result__1:bool. forall result1:bool. forall result__2:bool.
-  forall result2:bool. forall c9b1:bool. forall result3:int.
-  forall length1:int. forall result4:int. forall length2:int.
-  forall result5:int. forall dates__get_month_length__result1:int.
-  forall dates__get_month_length__result2:int.
-  forall dates__get_month_length__result3:int. forall length3:int.
-  forall c9b2:bool. forall result__3:bool.
-  forall dates__get_month_length__result4:int. forall length4:int.
-  forall c9b3:bool. forall result__4:bool.
-  forall dates__get_month_length__result5:int.
-  (forall result6:int. ((in_range1(year) and (in_range2(month) and
-  ((((dates__get_month_length__month_length__aggregate_def(31, 28, 31, 30,
-  31, 30, 31, 31, 30, 31, 30, 31) = month_length) and (((1 <= 31) ->
-  in_range3(length)) and (((year = c8b) and in_range1(c8b)) and (((({
-  bool__content = result } = { bool__content = result__ }) and
-  (result__1 = of_int(0))) and ((((mod(c8b, 4) = 0) and
-  ((result1 = result__1) and (result__2 = of_int(1)))) or ((not (mod(c8b,
-  4) = 0)) and (result__2 = result__1))) and ((result2 = c9b) and
-  (c9b1 = result__2)))) and (((((c9b1 = true) and (month = 2)) and
-  ((result3 = length) and (length1 = 29))) or ((not (((c9b1 = true) ->
-  (month = 2)) and (not (c9b1 = false)))) and (((result4 = length) and
-  (length2 = to_rep((month_length[month])))) and (length1 = length2)))) and
-  (((dates__get_month_length__result1 = dates__get_month_length__result2) and
-  (dates__get_month_length__result3 = dates__get_month_length__result1)) and
-  ((result5 = dates__get_month_length__result) and
-  (dates__get_month_length__result1 = length1)))))))) and
-  (((dates__get_month_length__result4 = dates__get_month_length__result2) and
-  ((result__3 = result__2) and ((c9b2 = c9b1) and (length3 = length1)))) and
-  ((dates__get_month_length__result5 = dates__get_month_length__result3) and
-  ((result__4 = result__2) and ((c9b3 = c9b1) and
-  (length4 = length1)))))) and
-  (result6 = dates__get_month_length__result4)))) -> ((month = 1) ->
-  (dates__get_month_length__result4 = 31)))))
+goal WP_parameter_def : (dates__get_month_length__result4 = 31)

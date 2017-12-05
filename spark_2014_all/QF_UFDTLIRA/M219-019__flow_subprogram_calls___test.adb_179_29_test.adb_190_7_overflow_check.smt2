@@ -37,6 +37,7 @@
 (declare-const n Int)
 (declare-const counter Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const n1 Int)
 (declare-const result1 Int)

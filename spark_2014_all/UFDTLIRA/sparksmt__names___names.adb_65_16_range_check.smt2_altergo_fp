@@ -915,7 +915,7 @@ axiom valid_tables__def_axiom :
   us_split_discrs3 = { rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = names__entry_table__fields }
-  }))) <= 2147483647) and (((-1) + length1(model__1({ us_split_discrs1 = {
+  }))) <= 2147483647) and (((- 1) + length1(model__1({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = char_table__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
   names__char_table__fields } }))) <= 2147483646)))))
@@ -946,7 +946,7 @@ axiom valid_entry__def_axiom :
   rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
   rec__names__data__entry_tables__vector = names__entry_table__fields }
-  })))) and ((to_rep2(e1) - 1) <= (((-1) + length1(model__1({
+  })))) and ((to_rep2(e1) - 1) <= (((- 1) + length1(model__1({
   us_split_discrs1 = { rec__names__data__char_tables__vector__capacity =
   char_table__split_discrs }; us_split_fields1 = {
   rec__names__data__char_tables__vector = names__char_table__fields }
@@ -980,7 +980,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index1
 
-predicate in_range11(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range11(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq13 : int, int -> bool
 
@@ -1033,12 +1033,12 @@ logic oeq__function_guard : bool, us_rep4, us_rep4 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep4. forall b:us_rep4 [user_eq13(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get1(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) -> (get1(a,
     n) = get1(b, n)))) ->
   (user_eq13(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get1(a,
-        n) = get1(b, n))))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
+        (get1(a, n) = get1(b, n))))) ->
   (user_eq13(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
 
@@ -1070,7 +1070,7 @@ axiom is_empty__post_axiom :
 
 type extended_index2
 
-predicate in_range12(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range12(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq14 : int, int -> bool
 
@@ -1096,7 +1096,7 @@ function extended_index__ref___2__projection(a: extended_index__ref2) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep4 [length1(container)].
-  ((((-1) + length1(container)) <= 2147483646) and
+  ((((- 1) + length1(container)) <= 2147483646) and
   in_range10(length1(container))))
 
 type element_type
@@ -1129,7 +1129,7 @@ axiom get__post_axiom :
   (forall container:us_rep4.
   (forall position:int [get1(container, position)].
   ((in_range12(position) and ((0 <= position) and
-  (position <= ((-1) + length1(container))))) -> in_range13(get1(container,
+  (position <= ((- 1) + length1(container))))) -> in_range13(get1(container,
   position)))))
 
 logic capacity__function_guard1 : int, us_rep1 -> prop
@@ -1226,16 +1226,44 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
- (* File "names.adb", line 64, characters 0-0 *)
-goal WP_parameter_def :
-  (forall char_table__split_fields:us_main_type.
-  forall entry_table__split_fields:us_main_type1.
-  ((1024 = to_rep(char_table__split_discrs)) ->
-  ((256 = to_rep1(entry_table__split_discrs)) -> ((valid_tables({
-  rec__names__data__char_tables__vector = char_table__split_fields }, {
-  rec__names__data__entry_tables__vector = entry_table__split_fields
-  }) = true) -> ((1 <= (0 + length(model__({ us_split_discrs3 = {
+logic char_table__split_fields : us_main_type
+
+logic entry_table__split_fields : us_main_type1
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : char_table_index
+
+logic o6 : positive
+
+logic o7 : name_id
+
+logic us : bool
+
+logic result : bool
+
+axiom H : (1024 = to_rep(char_table__split_discrs))
+
+axiom H1 : (256 = to_rep1(entry_table__split_discrs))
+
+axiom H2 : (valid_tables({ rec__names__data__char_tables__vector =
+  char_table__split_fields }, { rec__names__data__entry_tables__vector =
+  entry_table__split_fields }) = true)
+
+axiom H3 : (1 <= (0 + length(model__({ us_split_discrs3 = {
   rec__names__data__entry_tables__vector__capacity =
   entry_table__split_discrs }; us_split_fields3 = {
-  rec__names__data__entry_tables__vector = entry_table__split_fields }
-  })))) -> (0 <= 1))))))
+  rec__names__data__entry_tables__vector = entry_table__split_fields } }))))
+
+ (* File "names.adb", line 64, characters 0-0 *)
+goal WP_parameter_def : (0 <= 1)

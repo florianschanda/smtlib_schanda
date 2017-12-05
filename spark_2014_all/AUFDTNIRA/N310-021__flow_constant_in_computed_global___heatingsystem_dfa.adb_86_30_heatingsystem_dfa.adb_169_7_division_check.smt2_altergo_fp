@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -404,10 +404,25 @@ axiom isbetween__def_axiom :
   (time <  offtime))) or ((not (ontime <= offtime)) and ((ontime <  time) or
   (time <= offtime)))) -> (isbetween(time, ontime, offtime) = true))))
 
+logic clockoffset : int
+
+logic currenttime : int
+
+logic modesetting : int
+
+logic modesetting1 : int
+
+logic currenttime1 : int
+
+axiom H : in_range1(clockoffset)
+
+axiom H1 : ((0 <= 86399) -> in_range1(currenttime))
+
+axiom H2 : ((0 <= 2) -> in_range2(modesetting))
+
+axiom H3 : in_range2(modesetting1)
+
+axiom H4 : in_range1(currenttime1)
+
  (* File "heatingsystem_dfa.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall clockoffset:int. forall currenttime:int. forall modesetting:int.
-  forall modesetting1:int. forall currenttime1:int.
-  (in_range1(clockoffset) -> (((0 <= 86399) -> in_range1(currenttime)) ->
-  (((0 <= 2) -> in_range2(modesetting)) -> (in_range2(modesetting1) ->
-  (in_range1(currenttime1) -> (not (86400 = 0))))))))
+goal WP_parameter_def : (not (86400 = 0))

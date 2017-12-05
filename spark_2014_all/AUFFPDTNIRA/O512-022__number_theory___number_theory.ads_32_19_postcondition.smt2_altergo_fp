@@ -1153,15 +1153,15 @@ axiom Power_3 :
   mul(NearestTiesToEven, x, x)))))
 
 axiom Power_neg1 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-1)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 1)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), x)))))
 
 axiom Power_neg2 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 2))))))
 
 axiom Power_neg3 :
-  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (-2)),
+  (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 3))))))
 
 axiom fib__def_axiom :
@@ -1775,26 +1775,48 @@ axiom lookup_table__def_axiom :
   24157817, 39088169, 63245986, 102334155, 165580141, 267914296, 433494437,
   701408733, 1134903170, 1836311903))
 
+logic number_theory__fibonacci2__result : int
+
+logic result : int
+
+logic number_theory__fibonacci2__result1 : int
+
+logic number_theory__fibonacci2__result2 : int
+
+logic number_theory__fibonacci2__result3 : int
+
+logic number_theory__fibonacci2__result4 : int
+
+logic number_theory__fibonacci2__result5 : int
+
+logic result1 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : (number_theory__fibonacci2__lookup_table__aggregate_def(0, 1, 1,
+  2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181,
+  6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229,
+  832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817,
+  39088169, 63245986, 102334155, 165580141, 267914296, 433494437, 701408733,
+  1134903170, 1836311903) = lookup_table)
+
+axiom H2 :
+  (number_theory__fibonacci2__result1 = number_theory__fibonacci2__result2)
+
+axiom H3 :
+  (number_theory__fibonacci2__result3 = number_theory__fibonacci2__result1)
+
+axiom H4 : (result = number_theory__fibonacci2__result)
+
+axiom H5 : (number_theory__fibonacci2__result1 = to_rep((lookup_table[n])))
+
+axiom H6 :
+  (number_theory__fibonacci2__result4 = number_theory__fibonacci2__result2)
+
+axiom H7 :
+  (number_theory__fibonacci2__result5 = number_theory__fibonacci2__result3)
+
+axiom H8 : (result1 = number_theory__fibonacci2__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number_theory__fibonacci2__result:int. forall result:int.
-  forall number_theory__fibonacci2__result1:int.
-  forall number_theory__fibonacci2__result2:int.
-  forall number_theory__fibonacci2__result3:int.
-  forall number_theory__fibonacci2__result4:int.
-  forall number_theory__fibonacci2__result5:int.
-  (forall result1:int. ((in_range1(n) and
-  ((((number_theory__fibonacci2__lookup_table__aggregate_def(0, 1, 1, 2, 3,
-  5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765,
-  10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040,
-  1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169,
-  63245986, 102334155, 165580141, 267914296, 433494437, 701408733,
-  1134903170, 1836311903) = lookup_table) and
-  (((number_theory__fibonacci2__result1 = number_theory__fibonacci2__result2) and
-  (number_theory__fibonacci2__result3 = number_theory__fibonacci2__result1)) and
-  ((result = number_theory__fibonacci2__result) and
-  (number_theory__fibonacci2__result1 = to_rep((lookup_table[n])))))) and
-  ((number_theory__fibonacci2__result4 = number_theory__fibonacci2__result2) and
-  (number_theory__fibonacci2__result5 = number_theory__fibonacci2__result3))) and
-  (result1 = number_theory__fibonacci2__result4))) ->
-  (number_theory__fibonacci2__result4 = fib(n)))))
+goal WP_parameter_def : (number_theory__fibonacci2__result4 = fib(n))

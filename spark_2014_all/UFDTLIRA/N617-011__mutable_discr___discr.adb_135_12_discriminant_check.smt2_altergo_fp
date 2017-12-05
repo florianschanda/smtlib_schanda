@@ -236,14 +236,26 @@ logic r29b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic d__split_discrs : natural
+
+logic temp___357 : natural
+
+logic temp___3571 : us_main_type
+
+logic temp___3572 : bool
+
+axiom H : (not (d__attr__constrained = true))
+
+axiom H1 : (to_rep(d__split_discrs) = r29b)
+
+axiom H2 : in_range(r29b)
+
+axiom H3 : (({ us_split_discrs1 = { rec__private_discr__p_with_default__c =
+  temp___357 }; us_split_fields1 = { rec__private_discr__p_with_default =
+  temp___3571 }; attr__constrained = temp___3572 } = new_with_default(0)) and
+  (to_rep(temp___357) = 0))
+
+axiom H4 : (d__attr__constrained = true)
+
  (* File "discr.adb", line 125, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_discrs:natural. forall temp___357:natural.
-  forall temp___3571:us_main_type. forall temp___3572:bool.
-  ((not (d__attr__constrained = true)) ->
-  (((to_rep(d__split_discrs) = r29b) and in_range(r29b)) -> ((({
-  us_split_discrs1 = { rec__private_discr__p_with_default__c = temp___357 };
-  us_split_fields1 = { rec__private_discr__p_with_default = temp___3571 };
-  attr__constrained = temp___3572 } = new_with_default(0)) and
-  (to_rep(temp___357) = 0)) -> ((d__attr__constrained = true) ->
-  (temp___357 = d__split_discrs))))))
+goal WP_parameter_def : (temp___357 = d__split_discrs)

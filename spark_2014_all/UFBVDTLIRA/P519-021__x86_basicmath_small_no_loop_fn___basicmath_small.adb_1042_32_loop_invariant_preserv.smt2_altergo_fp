@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1098,6 +1098,34 @@ axiom writereg32post__post_axiom :
   (forall val__:t [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and1(regnew,
   of_int1(18446744069414584320)) = of_int1(0))))))
+
+logic rax : t1
+
+logic rcx : t1
+
+logic rdx : t1
+
+logic rsp : t1
+
+logic rdi : t1
+
+logic r8 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : (rsp = of_int1(12105675798371893247))
+
+axiom H7 : true
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

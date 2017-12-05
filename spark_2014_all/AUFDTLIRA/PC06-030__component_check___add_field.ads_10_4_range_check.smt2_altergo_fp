@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,7 +421,29 @@ logic x__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic c : int
+
+logic x : (int,integer) farray
+
+logic add_field__x__assume : (int,integer) farray
+
+logic add_field__x__assume1 : t
+
+logic i : int
+
+logic result : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+axiom H : in_range1(c)
+
+axiom H1 : (c = 0)
+
+axiom H2 : (c = d)
+
+axiom H3 : in_range1(d)
+
+axiom H4 : (d <= 2147483647)
+
  (* File "add_field.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. (in_range1(c) -> ((c = 0) -> ((c = d) -> (in_range1(d) ->
-  ((d <= 2147483647) -> (0 <= d)))))))
+goal WP_parameter_def : (0 <= d)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -691,7 +691,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type xdr_integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -800,7 +800,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1425,7 +1425,7 @@ function source__ref___2__projection(a: source__ref) : source =
 
 type target
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1459,14 +1459,49 @@ axiom xdr_unsigned_to_integer__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "cubedos-lib-xdr.ads", line 155, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:int. forall last2:int. (dynamic_property(0, 65535,
-  to_rep(first(data1)), to_rep(last(data1))) -> (in_range2(position) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(value)) -> (((0 <= 65535) ->
-  in_range2(last2)) -> (((((comp_mod(position,4) = 0) and (comp_mod(length({
-  elts = data; rt = data1 }),4) = 0)) and
-  ((to_rep(first(data1)) <= position) and
+logic value : int
+
+logic last2 : int
+
+logic temp : t
+
+logic o : int
+
+logic last3 : int
+
+logic temp1 : t
+
+logic result : int
+
+logic value1 : int
+
+logic value2 : int
+
+logic last4 : int
+
+logic temp2 : t
+
+logic value3 : int
+
+logic last5 : int
+
+logic temp3 : t
+
+axiom H : dynamic_property(0, 65535, to_rep(first(data1)),
+  to_rep(last(data1)))
+
+axiom H1 : in_range2(position)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(value))
+
+axiom H3 : ((0 <= 65535) -> in_range2(last2))
+
+axiom H4 : ((((comp_mod(position,4) = 0) and (comp_mod(length({ elts = data;
+  rt = data1 }),4) = 0)) and ((to_rep(first(data1)) <= position) and
   (position <= to_rep(last(data1))))) and
-  ((position + 3) <= to_rep(last(data1)))) ->
-  (comp_mod(position,4) = 0)))))))
+  ((position + 3) <= to_rep(last(data1))))
+
+axiom H5 : true
+
+ (* File "cubedos-lib-xdr.ads", line 155, characters 0-0 *)
+goal WP_parameter_def : (comp_mod(position,4) = 0)

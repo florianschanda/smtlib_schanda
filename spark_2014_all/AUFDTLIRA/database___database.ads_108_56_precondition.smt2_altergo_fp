@@ -793,74 +793,146 @@ axiom is_available__def_axiom :
   ((is_available(account1, database__availability__links) = true) <->
   ((((database__availability__links[account1])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
- (* File "database.adb", line 265, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep1) farray.
-  forall accounts_balance:(int,us_rep2) farray. forall o:cur.
-  forall o1:raw_amount. forall o2:cur. forall o3:raw_amount.
-  forall o4:raw_amount. forall o5:int. forall o6:int. forall o7:int.
-  forall o8:bool. forall o9:cur. forall o10:raw_amount. forall o11:cur.
-  forall o12:raw_amount. forall o13:ext_account_num. forall o14:cur.
-  forall o15:raw_amount. forall o16:ext_account_num.
-  forall o17:(int,us_rep2) farray.
-  forall accounts_balance1:(int,us_rep2) farray. forall result:bool.
-  forall result1:bool. forall result2:(int,us_rep2) farray.
-  forall accounts_balance2:(int,us_rep2) farray.
-  forall accounts_balance3:(int,us_rep2) farray.
-  forall accounts_balance4:(int,us_rep2) farray.
-  forall accounts_balance5:(int,us_rep2) farray.
-  forall accounts_balance6:(int,us_rep2) farray. (in_range2(account) ->
-  (((existing(account, links) = true) and ((currency(account,
+logic links : (int,us_rep1) farray
+
+logic accounts_balance : (int,us_rep2) farray
+
+logic o : cur
+
+logic o1 : raw_amount
+
+logic o2 : int
+
+logic us : cur
+
+logic us1 : raw_amount
+
+logic o3 : cur
+
+logic o4 : raw_amount
+
+logic o5 : cur
+
+logic o6 : raw_amount
+
+logic o7 : raw_amount
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : cur
+
+logic o13 : raw_amount
+
+logic o14 : cur
+
+logic o15 : raw_amount
+
+logic o16 : ext_account_num
+
+logic o17 : cur
+
+logic o18 : raw_amount
+
+logic o19 : ext_account_num
+
+logic o20 : (int,us_rep2) farray
+
+logic o21 : cur
+
+logic o22 : raw_amount
+
+logic o23 : cur
+
+logic o24 : raw_amount
+
+logic accounts_balance1 : (int,us_rep2) farray
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : (int,us_rep2) farray
+
+logic accounts_balance2 : (int,us_rep2) farray
+
+logic accounts_balance3 : (int,us_rep2) farray
+
+logic accounts_balance4 : (int,us_rep2) farray
+
+logic accounts_balance5 : (int,us_rep2) farray
+
+logic accounts_balance6 : (int,us_rep2) farray
+
+axiom H : in_range2(account)
+
+axiom H1 : ((existing(account, links) = true) and ((currency(account,
   accounts_balance) = to_rep(sum)) and ((to_rep1(((balance(account, links,
-  accounts_balance)).us_split_fields1).rec__money__amount__raw) + to_rep1(sum1)) <= 1000000))) ->
-  (((((({ map__content1 = accounts_balance3 } = { map__content1 =
-  accounts_balance }) and (accounts_balance4 = accounts_balance1)) and
-  ((((((o7 = currency(account, accounts_balance)) and (in_range(o7) and
-  (o7 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
-  (((o7 = to_rep(sum)) and (o8 = true)) or ((not (o7 = to_rep(sum))) and
-  (o8 = false)))) and (((not (o8 = true)) and (result1 = true)) or
-  ((o8 = true) and (result1 = false)))) and (((result1 = true) and
-  (result = true)) or ((not (result1 = true)) and ((((((({ us_split_fields1 =
-  { rec__money__amount__currency = o; rec__money__amount__raw = o1 }
-  } = balance(account, links, accounts_balance)) and ({ us_split_fields1 = {
-  rec__money__amount__currency = o; rec__money__amount__raw = o1 }
+  accounts_balance)).us_split_fields1).rec__money__amount__raw) + to_rep1(sum1)) <= 1000000)))
+
+axiom H2 : ((((accounts_balance3 = accounts_balance) and
+  (accounts_balance4 = accounts_balance1)) and ((((((o10 = currency(account,
+  accounts_balance)) and (in_range(o10) and
+  (o10 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
+  (((o10 = to_rep(sum)) -> (o11 = true)) and ((not (o10 = to_rep(sum))) ->
+  (o11 = false)))) and (((not (o11 = true)) -> (result3 = true)) and
+  ((o11 = true) -> (result3 = false)))) and (((result3 = true) ->
+  (result2 = true)) and ((not (result3 = true)) -> ((((((({
+  us_split_fields1 = { rec__money__amount__currency = o3;
+  rec__money__amount__raw = o4 } } = balance(account, links,
+  accounts_balance)) and ({ us_split_fields1 = {
+  rec__money__amount__currency = o3; rec__money__amount__raw = o4 }
   } = (((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value)) and
-  ((o = o2) and (o1 = o3))) and (o4 = o3)) and (o5 = to_rep1(o4))) and
-  (o6 = (o5 + to_rep1(sum1)))) and (((1000000 <  o6) and (result = true)) or
-  ((not (1000000 <  o6)) and (result = false))))))) and (result = true))) or
-  (((((((o7 = currency(account, accounts_balance)) and (in_range(o7) and
-  (o7 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
-  (((o7 = to_rep(sum)) and (o8 = true)) or ((not (o7 = to_rep(sum))) and
-  (o8 = false)))) and (((not (o8 = true)) and (result1 = true)) or
-  ((o8 = true) and (result1 = false)))) and (((result1 = true) and
-  (result = true)) or ((not (result1 = true)) and ((((((({ us_split_fields1 =
-  { rec__money__amount__currency = o; rec__money__amount__raw = o1 }
-  } = balance(account, links, accounts_balance)) and ({ us_split_fields1 = {
-  rec__money__amount__currency = o; rec__money__amount__raw = o1 }
+  ((o3 = o5) and (o4 = o6))) and (o7 = o6)) and (o8 = to_rep1(o7))) and
+  (o9 = (o8 + to_rep1(sum1)))) and (((1000000 <  o9) -> (result2 = true)) and
+  ((not (1000000 <  o9)) -> (result2 = false))))))) and (result2 = true))) or
+  (((((((o10 = currency(account, accounts_balance)) and (in_range(o10) and
+  (o10 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
+  (((o10 = to_rep(sum)) -> (o11 = true)) and ((not (o10 = to_rep(sum))) ->
+  (o11 = false)))) and (((not (o11 = true)) -> (result3 = true)) and
+  ((o11 = true) -> (result3 = false)))) and (((result3 = true) ->
+  (result2 = true)) and ((not (result3 = true)) -> ((((((({
+  us_split_fields1 = { rec__money__amount__currency = o3;
+  rec__money__amount__raw = o4 } } = balance(account, links,
+  accounts_balance)) and ({ us_split_fields1 = {
+  rec__money__amount__currency = o3; rec__money__amount__raw = o4 }
   } = (((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value)) and
-  ((o = o2) and (o1 = o3))) and (o4 = o3)) and (o5 = to_rep1(o4))) and
-  (o6 = (o5 + to_rep1(sum1)))) and (((1000000 <  o6) and (result = true)) or
-  ((not (1000000 <  o6)) and (result = false))))))) and
-  (not (result = true))) and (((accounts_balance2 = accounts_balance3) and
+  ((o3 = o5) and (o4 = o6))) and (o7 = o6)) and (o8 = to_rep1(o7))) and
+  (o9 = (o8 + to_rep1(sum1)))) and (((1000000 <  o9) -> (result2 = true)) and
+  ((not (1000000 <  o9)) -> (result2 = false))))))) and
+  (not (result2 = true))) and (((accounts_balance3 = accounts_balance2) and
   (accounts_balance4 = accounts_balance2)) and (((((({ us_split_fields1 = {
-  rec__money__amount__currency = o9; rec__money__amount__raw = o10 }
+  rec__money__amount__currency = o12; rec__money__amount__raw = o13 }
   } = oadd((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value,
   { us_split_fields1 = { rec__money__amount__currency = sum;
   rec__money__amount__raw = sum1 } })) and (bool_eq3({ us_split_fields1 = {
-  rec__money__amount__currency = o9; rec__money__amount__raw = o10 } }, {
+  rec__money__amount__currency = o12; rec__money__amount__raw = o13 } }, {
   us_split_fields1 = { rec__money__amount__currency =
   (((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency;
   rec__money__amount__raw =
   of_rep1((to_rep1((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__raw) + to_rep1(sum1)))
-  } }) = true)) and (((o11 = o9) and (o12 = o10)) and
-  ((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__account = o13))) and
-  (((o14 = o11) and (o15 = o12)) and (o16 = o13))) and
-  (o17 = (accounts_balance[account <- { us_split_fields5 = {
+  } }) = true)) and (((o14 = o12) and (o15 = o13)) and
+  ((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__account = o16))) and
+  (((o17 = o14) and (o18 = o15)) and (o19 = o16))) and
+  (o20 = (accounts_balance[account <- { us_split_fields5 = {
   rec__database__account_balance__value = { us_split_fields1 = {
-  rec__money__amount__currency = o14; rec__money__amount__raw = o15 } };
-  rec__database__account_balance__account = o16 } }]))) and
-  ((result2 = accounts_balance) and (accounts_balance2 = o17)))))) and
-  ((accounts_balance5 = accounts_balance3) and
-  (accounts_balance6 = accounts_balance4))) -> (to_rep(((balance(account,
-  links,
-  accounts_balance)).us_split_fields1).rec__money__amount__currency) = to_rep(sum))))))
+  rec__money__amount__currency = o17; rec__money__amount__raw = o18 } };
+  rec__database__account_balance__account = o19 } }]))) and
+  ((result4 = accounts_balance) and (accounts_balance2 = o20))))))
+
+axiom H3 : (accounts_balance5 = accounts_balance3)
+
+axiom H4 : (accounts_balance6 = accounts_balance4)
+
+ (* File "database.adb", line 265, characters 0-0 *)
+goal WP_parameter_def : (to_rep(((balance(account, links,
+  accounts_balance)).us_split_fields1).rec__money__amount__currency) = to_rep(sum))

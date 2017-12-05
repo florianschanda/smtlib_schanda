@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -865,7 +865,7 @@ axiom coerce_axiom1 :
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1199,14 +1199,49 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic digit_number : int
+
+logic bit_position : int
+
+logic mask : t
+
+logic digit : t
+
+logic result__ : int
+
+logic us : int
+
+logic o : t
+
+logic result : int
+
+logic digit_number1 : int
+
+logic result1 : int
+
+logic bit_position1 : int
+
+logic result2 : t
+
+logic mask1 : t
+
+axiom H : (dynamic_property1(1, to_rep1(number), to_rep2(first(number2)),
+  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep1(number))))
+
+axiom H1 : in_range3(bit_number)
+
+axiom H2 : ((us = to_rep1(number)) and in_range(to_rep1(number)))
+
+axiom H3 : ((1 <= 2147483647) -> in_range(digit_number))
+
+axiom H4 : ((0 <= 2147483647) -> in_range3(bit_position))
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : ((0 <= 1) -> in_range2(result__))
+
  (* File "aco-math-very_longs.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall digit_number:int. forall bit_position:int. forall result__:int.
-  forall us:int. ((dynamic_property1(1, to_rep1(number),
-  to_rep2(first(number2)), to_rep2(last(number2))) and
-  ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep1(number)))) -> (in_range3(bit_number) ->
-  (((us = to_rep1(number)) and in_range(to_rep1(number))) ->
-  (((1 <= 2147483647) -> in_range(digit_number)) -> (((0 <= 2147483647) ->
-  in_range3(bit_position)) -> (((0 <= 1) -> in_range2(result__)) ->
-  (not (8 = 0)))))))))
+goal WP_parameter_def : (not (8 = 0))

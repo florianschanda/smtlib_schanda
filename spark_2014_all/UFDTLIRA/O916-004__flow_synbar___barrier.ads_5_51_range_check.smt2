@@ -82,6 +82,7 @@
 (declare-const sb__split_discrs us_split_discrs)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant ((temp___expr_171 Int) (temp___is_init_168 Bool) (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)) Bool (=> (or (= temp___is_init_168 true) (<= 1 2147483647)) (in_range temp___expr_171)))
+(declare-const us Int)
 (assert (not (in_range 1)))
 (check-sat)
 (exit)

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1734,88 +1734,494 @@ axiom writereg32post__post_axiom :
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and2(regnew,
   of_int2(18446744069414584320)) = of_int2(0))))))
 
- (* File "x86.ads", line 334, characters 0-0 *)
-goal WP_parameter_def :
-  (forall zeroflag:bool. forall carryflag:bool. forall signflag:bool.
-  forall overflowflag:bool. forall rax:t2. forall rcx:t2. forall rdx:t2.
-  forall rsp:t2. forall rbp:t2. forall memory:(t2,unsigned8) farray.
-  forall saved_32:t2. forall saved_72:t2. forall tmp_register:t2.
-  forall saved_rbp:t2. forall saved_ra:t2.
-  forall saved_mem:(t2,unsigned8) farray. forall o:t2. forall o1:t2.
-  forall o2:t2. forall o3:t2. forall o4:t2. forall o5:t2. forall o6:t2.
-  forall o7:t2. forall o8:t2. forall o9:t2. forall temp___581:t2.
-  forall temp___580:(t2,unsigned8) farray. forall temp___579:bool.
-  forall temp___578:bool. forall temp___572:(t2,unsigned8) farray.
-  forall temp___577:t2. forall temp___576:bool. forall temp___575:t2.
-  forall temp___582:(t2,unsigned8) farray. forall temp___573:t2.
-  forall temp___574:bool. forall o10:t2. forall o11:t2. forall o12:bool.
-  forall o13:t2. forall o14:t2. forall o15:bool. forall o16:t2.
-  forall o17:bool. forall o18:t2. forall o19:bool. forall o20:t2.
-  forall o21:bool. forall o22:bool. forall o23:bool. forall o24:t2.
-  forall o25:t2. forall o26:t. forall o27:t1. forall o28:t. forall o29:t2.
-  forall o30:t2. forall o31:bool. forall o32:t2. forall o33:t2.
-  forall o34:bool. forall o35:t2. forall o36:bool. forall o37:t2.
-  forall o38:bool. forall o39:t2. forall o40:bool. forall o41:bool.
-  forall o42:bool. forall rcx1:t2. forall rdx1:t2.
-  forall memory1:(t2,unsigned8) farray. forall result:t2.
-  forall saved_321:t2. forall result1:t2. forall saved_721:t2.
-  forall result2:t2. forall tmp_register1:t2. forall result3:t2.
-  forall saved_rbp1:t2. forall result4:t2. forall saved_ra1:t2.
-  forall result5:(t2,unsigned8) farray.
-  forall saved_mem1:(t2,unsigned8) farray. forall result6:t2. forall rax1:t2.
-  forall result7:bool. forall zeroflag1:bool. forall result8:bool.
-  forall signflag1:bool. forall result9:bool. forall carryflag1:bool.
-  forall result10:bool. forall overflowflag1:bool. forall zeroflag2:bool.
-  forall carryflag2:bool. forall signflag2:bool. forall overflowflag2:bool.
-  forall rax2:t2. forall rcx2:t2. forall rdx2:t2.
-  forall memory2:(t2,unsigned8) farray. forall tmp_register2:t2.
-  forall result11:t2. forall rdx3:t2. forall result12:t2. forall rax3:t2.
-  forall result13:bool. forall zeroflag3:bool. forall result14:bool.
-  forall signflag3:bool. forall result15:t2. forall rdx4:t2.
-  forall result16:t2. forall rcx3:t2. forall result17:t2. forall rax4:t2.
-  forall result18:bool. forall zeroflag4:bool. forall result19:bool.
-  forall signflag4:bool. forall result20:t2. forall rax5:t2. forall rax6:t2.
-  forall memory3:(t2,unsigned8) farray. forall result21:t2.
-  forall tmp_register3:t2. forall result22:t2. forall rax7:t2.
-  forall result23:bool. forall zeroflag5:bool. forall result24:bool.
-  forall signflag5:bool. forall result25:bool. forall carryflag3:bool.
-  forall result26:bool__ref. forall overflowflag3:bool.
-  forall zeroflag6:bool__ref. forall carryflag4:bool__ref.
-  forall signflag6:bool__ref. forall overflowflag4:bool__ref.
-  forall rax8:t__ref2. forall zeroflag7:bool. forall carryflag5:bool.
-  forall signflag7:bool. forall overflowflag5:bool. forall rax9:t2.
-  forall zeroflag8:bool__ref. forall carryflag6:bool__ref.
-  forall signflag8:bool__ref. forall overflowflag6:bool__ref.
-  forall rax10:t__ref2. forall rcx4:t__ref2. forall rdx5:t__ref2.
-  forall memory4:map__ref. forall tmp_register4:t__ref2.
-  forall zeroflag9:bool. forall carryflag7:bool. forall signflag9:bool.
-  forall overflowflag7:bool. forall rax11:t2. forall rcx5:t2. forall rdx6:t2.
-  forall memory5:(t2,unsigned8) farray. forall tmp_register5:t2.
-  forall zeroflag10:bool__ref. forall carryflag8:bool__ref.
-  forall signflag10:bool__ref. forall overflowflag8:bool__ref.
-  forall rax12:t__ref2. forall rcx6:t__ref2. forall rdx7:t__ref2.
-  forall memory6:map__ref. forall tmp_register6:t__ref2.
-  forall zeroflag11:bool. forall carryflag9:bool. forall signflag11:bool.
-  forall overflowflag9:bool. forall rax13:t2. forall rcx7:t2. forall rdx8:t2.
-  forall memory7:(t2,unsigned8) farray. forall tmp_register7:t2.
-  forall zeroflag12:bool__ref. forall carryflag10:bool__ref.
-  forall signflag12:bool__ref. forall overflowflag10:bool__ref.
-  forall rax14:t__ref2. forall rcx8:t__ref2. forall rdx9:t__ref2.
-  forall memory8:map__ref. forall tmp_register8:t__ref2.
-  forall zeroflag13:bool. forall carryflag11:bool. forall signflag13:bool.
-  forall overflowflag11:bool. forall rax15:t2. forall rcx9:t2.
-  forall rdx10:t2. forall memory9:(t2,unsigned8) farray.
-  forall tmp_register9:t2. forall memory10:(t2,unsigned8) farray.
-  ((((rbp = rsp) and (readmem64(sub2(rbp, of_int2(8)),
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic rax : t2
+
+logic rcx : t2
+
+logic rdx : t2
+
+logic rsp : t2
+
+logic rbp : t2
+
+logic memory : (t2,unsigned8) farray
+
+logic saved_32 : t2
+
+logic saved_72 : t2
+
+logic tmp_register : t2
+
+logic saved_rbp : t2
+
+logic saved_ra : t2
+
+logic saved_mem : (t2,unsigned8) farray
+
+logic o : t2
+
+logic o1 : t2
+
+logic o2 : t2
+
+logic o3 : t2
+
+logic o4 : t2
+
+logic o5 : t2
+
+logic o6 : t2
+
+logic o7 : t2
+
+logic o8 : t2
+
+logic o9 : t2
+
+logic temp___581 : t2
+
+logic temp___580 : (t2,unsigned8) farray
+
+logic temp___579 : bool
+
+logic temp___578 : bool
+
+logic temp___572 : (t2,unsigned8) farray
+
+logic temp___577 : t2
+
+logic temp___576 : bool
+
+logic temp___575 : t2
+
+logic temp___582 : (t2,unsigned8) farray
+
+logic temp___573 : t2
+
+logic temp___574 : bool
+
+logic o10 : t2
+
+logic o11 : t2
+
+logic o12 : bool
+
+logic o13 : t2
+
+logic o14 : t2
+
+logic o15 : bool
+
+logic o16 : t2
+
+logic o17 : bool
+
+logic o18 : t2
+
+logic o19 : bool
+
+logic o20 : t2
+
+logic o21 : bool
+
+logic o22 : bool
+
+logic o23 : bool
+
+logic o24 : t2
+
+logic o25 : t2
+
+logic o26 : t
+
+logic o27 : t1
+
+logic o28 : t
+
+logic o29 : t2
+
+logic o30 : t2
+
+logic o31 : bool
+
+logic o32 : t2
+
+logic o33 : t2
+
+logic o34 : bool
+
+logic o35 : t2
+
+logic o36 : bool
+
+logic o37 : t2
+
+logic o38 : bool
+
+logic o39 : t2
+
+logic o40 : bool
+
+logic o41 : bool
+
+logic o42 : bool
+
+logic o43 : t2
+
+logic o44 : t2
+
+logic rcx1 : t2
+
+logic rdx1 : t2
+
+logic memory1 : (t2,unsigned8) farray
+
+logic result : t2
+
+logic saved_321 : t2
+
+logic result1 : t2
+
+logic saved_721 : t2
+
+logic result2 : t2
+
+logic tmp_register1 : t2
+
+logic result3 : t2
+
+logic saved_rbp1 : t2
+
+logic result4 : t2
+
+logic saved_ra1 : t2
+
+logic result5 : (t2,unsigned8) farray
+
+logic saved_mem1 : (t2,unsigned8) farray
+
+logic result6 : t2
+
+logic rax1 : t2
+
+logic result7 : bool
+
+logic zeroflag1 : bool
+
+logic result8 : bool
+
+logic signflag1 : bool
+
+logic result9 : bool
+
+logic carryflag1 : bool
+
+logic result10 : bool
+
+logic overflowflag1 : bool
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic rax2 : t2
+
+logic rcx2 : t2
+
+logic rdx2 : t2
+
+logic memory2 : (t2,unsigned8) farray
+
+logic tmp_register2 : t2
+
+logic result11 : t2
+
+logic rdx3 : t2
+
+logic result12 : t2
+
+logic rax3 : t2
+
+logic result13 : bool
+
+logic zeroflag3 : bool
+
+logic result14 : bool
+
+logic signflag3 : bool
+
+logic result15 : t2
+
+logic rdx4 : t2
+
+logic result16 : t2
+
+logic rcx3 : t2
+
+logic result17 : t2
+
+logic rax4 : t2
+
+logic result18 : bool
+
+logic zeroflag4 : bool
+
+logic result19 : bool
+
+logic signflag4 : bool
+
+logic result20 : t2
+
+logic rax5 : t2
+
+logic rax6 : t2
+
+logic memory3 : (t2,unsigned8) farray
+
+logic result21 : t2
+
+logic tmp_register3 : t2
+
+logic result22 : t2
+
+logic rax7 : t2
+
+logic result23 : bool
+
+logic zeroflag5 : bool
+
+logic result24 : bool
+
+logic signflag5 : bool
+
+logic result25 : bool
+
+logic carryflag3 : bool
+
+logic result26 : bool
+
+logic overflowflag3 : bool
+
+logic zeroflag6 : bool
+
+logic carryflag4 : bool
+
+logic signflag6 : bool
+
+logic overflowflag4 : bool
+
+logic rax8 : t2
+
+logic zeroflag7 : bool
+
+logic carryflag5 : bool
+
+logic signflag7 : bool
+
+logic overflowflag5 : bool
+
+logic rax9 : t2
+
+logic zeroflag8 : bool
+
+logic carryflag6 : bool
+
+logic signflag8 : bool
+
+logic overflowflag6 : bool
+
+logic rax10 : t2
+
+logic rcx4 : t2
+
+logic rdx5 : t2
+
+logic memory4 : (t2,unsigned8) farray
+
+logic tmp_register4 : t2
+
+logic zeroflag9 : bool
+
+logic carryflag7 : bool
+
+logic signflag9 : bool
+
+logic overflowflag7 : bool
+
+logic rax11 : t2
+
+logic rcx5 : t2
+
+logic rdx6 : t2
+
+logic memory5 : (t2,unsigned8) farray
+
+logic tmp_register5 : t2
+
+logic zeroflag10 : bool
+
+logic carryflag8 : bool
+
+logic signflag10 : bool
+
+logic overflowflag8 : bool
+
+logic rax12 : t2
+
+logic rcx6 : t2
+
+logic rdx7 : t2
+
+logic memory6 : (t2,unsigned8) farray
+
+logic tmp_register6 : t2
+
+logic zeroflag11 : bool
+
+logic carryflag9 : bool
+
+logic signflag11 : bool
+
+logic overflowflag9 : bool
+
+logic rax13 : t2
+
+logic rcx7 : t2
+
+logic rdx8 : t2
+
+logic memory7 : (t2,unsigned8) farray
+
+logic tmp_register7 : t2
+
+logic zeroflag12 : bool
+
+logic carryflag10 : bool
+
+logic signflag12 : bool
+
+logic overflowflag10 : bool
+
+logic rax14 : t2
+
+logic rcx8 : t2
+
+logic rdx9 : t2
+
+logic memory8 : (t2,unsigned8) farray
+
+logic tmp_register8 : t2
+
+logic zeroflag13 : bool
+
+logic carryflag11 : bool
+
+logic signflag13 : bool
+
+logic overflowflag11 : bool
+
+logic rax15 : t2
+
+logic rcx9 : t2
+
+logic rdx10 : t2
+
+logic memory9 : (t2,unsigned8) farray
+
+logic tmp_register9 : t2
+
+logic memory10 : (t2,unsigned8) farray
+
+logic zeroflag14 : bool
+
+logic carryflag12 : bool
+
+logic signflag14 : bool
+
+logic overflowflag12 : bool
+
+logic rax16 : t2
+
+logic rcx10 : t2
+
+logic rdx11 : t2
+
+logic memory11 : (t2,unsigned8) farray
+
+logic saved_322 : t2
+
+logic saved_722 : t2
+
+logic tmp_register10 : t2
+
+logic saved_rbp2 : t2
+
+logic saved_ra2 : t2
+
+logic saved_mem2 : (t2,unsigned8) farray
+
+logic zeroflag15 : bool
+
+logic carryflag13 : bool
+
+logic signflag15 : bool
+
+logic overflowflag13 : bool
+
+logic rax17 : t2
+
+logic rcx11 : t2
+
+logic rdx12 : t2
+
+logic memory12 : (t2,unsigned8) farray
+
+logic saved_323 : t2
+
+logic saved_723 : t2
+
+logic tmp_register11 : t2
+
+logic saved_rbp3 : t2
+
+logic saved_ra3 : t2
+
+logic saved_mem3 : (t2,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : (((rbp = rsp) and (readmem64(sub2(rbp, of_int2(8)),
   memory) = of_int2(0))) and
   (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
   of_int2(18446744073709551615))) -> ((inrange64(i, readmem64(sub2(rbp,
   of_int2(32)), memory), readmem64(sub2(rbp, of_int2(72)),
-  memory)) = true) -> (insaferegion64(i, add2(rsp, of_int2(8))) = true))))) ->
-  (((((o = readmem64(sub2(rbp, of_int2(32)), memory)) and ((((((((bw_and2(o,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(32))])))) and
-  (bw_and2(o, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o,
+  memory)) = true) -> (insaferegion64(i, add2(rsp, of_int2(8))) = true)))))
+
+axiom H6 : ((o = readmem64(sub2(rbp, of_int2(32)), memory)) and
+  ((((((((bw_and2(o, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
+  of_int2(32))])))) and (bw_and2(o,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(32)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(32)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
@@ -1827,13 +2233,21 @@ goal WP_parameter_def :
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(32)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(32)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o1 = o)) and (({ t__content2 = result } = { t__content2 = saved_32 }) and
-  (saved_321 = o1))) -> (((((o2 = readmem64(sub2(rbp, of_int2(72)),
-  memory)) and ((((((((bw_and2(o2,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o2, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o2,
+  of_int2(32)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H7 : (o1 = o)
+
+axiom H8 : (result = saved_32)
+
+axiom H9 : (saved_321 = o1)
+
+axiom H10 : true
+
+axiom H11 : ((o2 = readmem64(sub2(rbp, of_int2(72)), memory)) and
+  ((((((((bw_and2(o2, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
+  of_int2(72))])))) and (bw_and2(o2,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o2,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o2,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
@@ -1845,13 +2259,21 @@ goal WP_parameter_def :
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o2,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o3 = o2)) and (({ t__content2 = result1 } = { t__content2 = saved_72
-  }) and (saved_721 = o3))) -> (((((o4 = readmem64(sub2(rbp, of_int2(8)),
-  memory)) and ((((((((bw_and2(o4,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(8))])))) and
-  (bw_and2(o4, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o4,
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H12 : (o3 = o2)
+
+axiom H13 : (result1 = saved_72)
+
+axiom H14 : (saved_721 = o3)
+
+axiom H15 : true
+
+axiom H16 : ((o4 = readmem64(sub2(rbp, of_int2(8)), memory)) and
+  ((((((((bw_and2(o4, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
+  of_int2(8))])))) and (bw_and2(o4,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(8)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o4,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(8)),
   of_int2(2))]))), of_int2(65536)))) and (bw_and2(o4,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
@@ -1863,12 +2285,20 @@ goal WP_parameter_def :
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(8)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o4,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o5 = o4)) and (({ t__content2 = result2 } = { t__content2 = tmp_register
-  }) and (tmp_register1 = o5))) -> (((((o6 = readmem64(rbp, memory)) and
-  ((((((((bw_and2(o6, of_int2(255)) = toBig1(to_rep((memory[rbp])))) and
-  (bw_and2(o6, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(1))]))), of_int2(256)))) and (bw_and2(o6,
+  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H17 : (o5 = o4)
+
+axiom H18 : (result2 = tmp_register)
+
+axiom H19 : (tmp_register1 = o5)
+
+axiom H20 : true
+
+axiom H21 : ((o6 = readmem64(rbp, memory)) and ((((((((bw_and2(o6,
+  of_int2(255)) = toBig1(to_rep((memory[rbp])))) and (bw_and2(o6,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(rbp, of_int2(1))]))),
+  of_int2(256)))) and (bw_and2(o6,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(rbp, of_int2(2))]))),
   of_int2(65536)))) and (bw_and2(o6,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(rbp,
@@ -1880,13 +2310,21 @@ goal WP_parameter_def :
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(rbp,
   of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o6,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(rbp,
-  of_int2(7))]))), of_int2(72057594037927936))))) and (o7 = o6)) and (({
-  t__content2 = result3 } = { t__content2 = saved_rbp }) and
-  (saved_rbp1 = o7))) -> (((((o8 = readmem64(add2(rsp, of_int2(8)),
-  memory)) and ((((((((bw_and2(o8,
-  of_int2(255)) = toBig1(to_rep((memory[add2(rsp, of_int2(8))])))) and
-  (bw_and2(o8, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o8,
+  of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H22 : (o7 = o6)
+
+axiom H23 : (result3 = saved_rbp)
+
+axiom H24 : (saved_rbp1 = o7)
+
+axiom H25 : true
+
+axiom H26 : ((o8 = readmem64(add2(rsp, of_int2(8)), memory)) and
+  ((((((((bw_and2(o8, of_int2(255)) = toBig1(to_rep((memory[add2(rsp,
+  of_int2(8))])))) and (bw_and2(o8,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(add2(rsp, of_int2(8)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o8,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(add2(rsp, of_int2(8)),
   of_int2(2))]))), of_int2(65536)))) and (bw_and2(o8,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
@@ -1898,21 +2336,53 @@ goal WP_parameter_def :
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
   of_int2(8)), of_int2(6))]))), of_int2(281474976710656)))) and (bw_and2(o8,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(add2(rsp,
-  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o9 = o8)) and (({ t__content2 = result4 } = { t__content2 = saved_ra
-  }) and (saved_ra1 = o9))) -> (((result5 = saved_mem) and
-  (saved_mem1 = memory)) -> ((rsp = of_int2(12105675798371893255)) ->
-  (((((temp___581 = tmp_register1) and ((temp___580 = memory) and
-  ((temp___579 = overflowflag) and ((temp___578 = signflag) and
-  ((temp___572 = memory) and ((temp___577 = rax) and
-  ((temp___576 = carryflag) and ((temp___575 = rcx) and
-  ((temp___582 = memory) and ((temp___573 = rdx) and
-  ((temp___574 = zeroflag) and (((result6 = rax) and
-  (rax1 = tmp_register1)) and ((((((o10 = readmem64(sub2(rbp, of_int2(72)),
-  memory)) and ((((((((bw_and2(o10,
-  of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o10, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o10,
+  of_int2(8)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H27 : (o9 = o8)
+
+axiom H28 : (result4 = saved_ra)
+
+axiom H29 : (saved_ra1 = o9)
+
+axiom H30 : true
+
+axiom H31 : (result5 = saved_mem)
+
+axiom H32 : (saved_mem1 = memory)
+
+axiom H33 : (rsp = of_int2(12105675798371893255))
+
+axiom H34 : (temp___581 = tmp_register1)
+
+axiom H35 : (temp___580 = memory)
+
+axiom H36 : (temp___579 = overflowflag)
+
+axiom H37 : (temp___578 = signflag)
+
+axiom H38 : (temp___572 = memory)
+
+axiom H39 : (temp___577 = rax)
+
+axiom H40 : (temp___576 = carryflag)
+
+axiom H41 : (temp___575 = rcx)
+
+axiom H42 : (temp___582 = memory)
+
+axiom H43 : (temp___573 = rdx)
+
+axiom H44 : (temp___574 = zeroflag)
+
+axiom H45 : (result6 = rax)
+
+axiom H46 : (rax1 = tmp_register1)
+
+axiom H47 : ((o10 = readmem64(sub2(rbp, of_int2(72)), memory)) and
+  ((((((((bw_and2(o10, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
+  of_int2(72))])))) and (bw_and2(o10,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o10,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o10,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
@@ -1925,11 +2395,18 @@ goal WP_parameter_def :
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
   (bw_and2(o10,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o11 = sub2(rax1, o10))) and (((o11 = of_int2(0)) and (o12 = true)) or
-  ((not (o11 = of_int2(0))) and (o12 = false)))) and
-  ((result7 = zeroflag) and (zeroflag1 = o12))) and
-  ((((((o13 = readmem64(sub2(rbp, of_int2(72)), memory)) and
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H48 : (o11 = sub2(rax1, o10))
+
+axiom H49 : (((o11 = of_int2(0)) -> (o12 = true)) and
+  ((not (o11 = of_int2(0))) -> (o12 = false)))
+
+axiom H50 : (result7 = zeroflag)
+
+axiom H51 : (zeroflag1 = o12)
+
+axiom H52 : ((o13 = readmem64(sub2(rbp, of_int2(72)), memory)) and
   ((((((((bw_and2(o13, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
   of_int2(72))])))) and (bw_and2(o13,
   of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
@@ -1946,11 +2423,18 @@ goal WP_parameter_def :
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
   (bw_and2(o13,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o14 = sub2(rax1, o13))) and ((ugt2(o14, of_int2(9223372036854775807)) and
-  (o15 = true)) or ((not ugt2(o14, of_int2(9223372036854775807))) and
-  (o15 = false)))) and ((result8 = signflag) and (signflag1 = o15))) and
-  (((((o16 = readmem64(sub2(rbp, of_int2(72)), memory)) and
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H53 : (o14 = sub2(rax1, o13))
+
+axiom H54 : ((ugt2(o14, of_int2(9223372036854775807)) -> (o15 = true)) and
+  ((not ugt2(o14, of_int2(9223372036854775807))) -> (o15 = false)))
+
+axiom H55 : (result8 = signflag)
+
+axiom H56 : (signflag1 = o15)
+
+axiom H57 : ((o16 = readmem64(sub2(rbp, of_int2(72)), memory)) and
   ((((((((bw_and2(o16, of_int2(255)) = toBig1(to_rep((memory[sub2(rbp,
   of_int2(72))])))) and (bw_and2(o16,
   of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp, of_int2(72)),
@@ -1967,12 +2451,18 @@ goal WP_parameter_def :
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
   (bw_and2(o16,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ult2(rax1, o16) and (o17 = true)) or ((not ult2(rax1, o16)) and
-  (o17 = false)))) and ((result9 = carryflag) and (carryflag1 = o17))) and
-  (((((((not (signflag1 = true)) and ugt2(rax1,
-  of_int2(9223372036854775807))) and (((o20 = readmem64(sub2(rbp,
-  of_int2(72)), memory)) and ((((((((bw_and2(o20,
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936)))))
+
+axiom H58 : ((ult2(rax1, o16) -> (o17 = true)) and ((not ult2(rax1, o16)) ->
+  (o17 = false)))
+
+axiom H59 : (result9 = carryflag)
+
+axiom H60 : (carryflag1 = o17)
+
+axiom H61 : (((not (signflag1 = true)) and ugt2(rax1,
+  of_int2(9223372036854775807))) -> ((o20 = readmem64(sub2(rbp, of_int2(72)),
+  memory)) and ((((((((bw_and2(o20,
   of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
   (bw_and2(o20, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
   of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o20,
@@ -1988,12 +2478,17 @@ goal WP_parameter_def :
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
   (bw_and2(o20,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ule2(o20, of_int2(9223372036854775807)) and (o21 = true)) or
-  ((not ule2(o20, of_int2(9223372036854775807))) and (o21 = false))))) or
-  ((not ((not (signflag1 = true)) and ugt2(rax1,
-  of_int2(9223372036854775807)))) and (o21 = false))) and
-  (((((signflag1 = true) and (((o18 = readmem64(sub2(rbp, of_int2(72)),
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
+
+axiom H62 : (((not (signflag1 = true)) and ugt2(rax1,
+  of_int2(9223372036854775807))) -> ((ule2(o20,
+  of_int2(9223372036854775807)) -> (o21 = true)) and ((not ule2(o20,
+  of_int2(9223372036854775807))) -> (o21 = false))))
+
+axiom H63 : ((not ((not (signflag1 = true)) and ugt2(rax1,
+  of_int2(9223372036854775807)))) -> (o21 = false))
+
+axiom H64 : ((signflag1 = true) -> ((o18 = readmem64(sub2(rbp, of_int2(72)),
   memory)) and ((((((((bw_and2(o18,
   of_int2(255)) = toBig1(to_rep((memory[sub2(rbp, of_int2(72))])))) and
   (bw_and2(o18, of_int2(65280)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
@@ -2010,28 +2505,35 @@ goal WP_parameter_def :
   of_int2(72)), of_int2(6))]))), of_int2(281474976710656)))) and
   (bw_and2(o18,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory[add2(sub2(rbp,
-  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ugt2(o18, of_int2(9223372036854775807)) and (o19 = true)) or
-  ((not ugt2(o18, of_int2(9223372036854775807))) and (o19 = false))))) or
-  ((not (signflag1 = true)) and (o19 = false))) and ((((o19 = true) and
-  ule2(rax1, of_int2(9223372036854775807))) and (o22 = true)) or
-  ((not ((o19 = true) and ule2(rax1, of_int2(9223372036854775807)))) and
-  (o22 = false)))) and (o23 = match_bool(o22, true, o21)))) and
-  ((result10 = overflowflag) and (overflowflag1 = o23))) and
-  (((((tmp_register4 = { t__content2 = tmp_register1 }) and ((memory4 = {
-  map__content = memory }) and ((rdx5 = { t__content2 = rdx }) and ((rcx4 = {
-  t__content2 = rcx }) and ((rax10 = { t__content2 = rax1 }) and
-  ((overflowflag6 = { bool__content = overflowflag1 }) and ((signflag8 = {
-  bool__content = signflag1 }) and ((carryflag6 = { bool__content =
-  carryflag1 }) and (zeroflag8 = { bool__content = zeroflag1 }))))))))) and
+  of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))))
+
+axiom H65 : ((signflag1 = true) -> ((ugt2(o18,
+  of_int2(9223372036854775807)) -> (o19 = true)) and ((not ugt2(o18,
+  of_int2(9223372036854775807))) -> (o19 = false))))
+
+axiom H66 : ((not (signflag1 = true)) -> (o19 = false))
+
+axiom H67 : ((((o19 = true) and ule2(rax1, of_int2(9223372036854775807))) ->
+  (o22 = true)) and ((not ((o19 = true) and ule2(rax1,
+  of_int2(9223372036854775807)))) -> (o22 = false)))
+
+axiom H68 : (o23 = match_bool(o22, true, o21))
+
+axiom H69 : (result10 = overflowflag)
+
+axiom H70 : (overflowflag1 = o23)
+
+axiom H71 : (((((tmp_register4 = tmp_register1) and ((memory4 = memory) and
+  ((rdx5 = rdx) and ((rcx4 = rcx) and ((rax10 = rax1) and
+  ((overflowflag6 = overflowflag1) and ((signflag8 = signflag1) and
+  ((carryflag6 = carryflag1) and (zeroflag8 = zeroflag1))))))))) and
   ((tmp_register5 = tmp_register1) and ((memory5 = memory1) and
   ((rdx6 = rdx1) and ((rcx5 = rcx1) and ((rax11 = rax1) and
   ((overflowflag7 = overflowflag1) and ((signflag9 = signflag1) and
   ((carryflag7 = carryflag1) and (zeroflag9 = zeroflag1)))))))))) and
   (not (carryflag1 = true))) or ((carryflag1 = true) and
-  ((((tmp_register4 = { t__content2 = tmp_register3 }) and ((memory4 = {
-  map__content = memory3 }) and ((rdx5 = { t__content2 = rdx4 }) and
-  ((rcx4 = { t__content2 = rcx3 }) and ((rax10 = rax8) and
+  ((((tmp_register4 = tmp_register3) and ((memory4 = memory3) and
+  ((rdx5 = rdx4) and ((rcx4 = rcx3) and ((rax10 = rax8) and
   ((overflowflag6 = overflowflag4) and ((signflag8 = signflag6) and
   ((carryflag6 = carryflag4) and (zeroflag8 = zeroflag6))))))))) and
   ((tmp_register5 = tmp_register3) and ((memory5 = memory3) and
@@ -2070,11 +2572,11 @@ goal WP_parameter_def :
   of_int2(32)), of_int2(7))]))), of_int2(72057594037927936))))) and
   ((result11 = rdx2) and (rdx3 = o24))) and (((result12 = rax2) and
   (rax3 = tmp_register2)) and (((result13 = zeroflag2) and (((add2(rdx3,
-  rax3) = of_int2(0)) and (zeroflag3 = true)) or ((not (add2(rdx3,
-  rax3) = of_int2(0))) and (zeroflag3 = false)))) and
+  rax3) = of_int2(0)) -> (zeroflag3 = true)) and ((not (add2(rdx3,
+  rax3) = of_int2(0))) -> (zeroflag3 = false)))) and
   (((result14 = signflag2) and ((ugt2(add2(rdx3, rax3),
-  of_int2(9223372036854775807)) and (signflag3 = true)) or
-  ((not ugt2(add2(rdx3, rax3), of_int2(9223372036854775807))) and
+  of_int2(9223372036854775807)) -> (signflag3 = true)) and
+  ((not ugt2(add2(rdx3, rax3), of_int2(9223372036854775807))) ->
   (signflag3 = false)))) and (((result15 = rdx3) and (rdx4 = add2(rdx3,
   rax3))) and ((((o25 = readmem64(sub2(rbp, of_int2(40)), memory2)) and
   ((((((((bw_and2(o25, of_int2(255)) = toBig1(to_rep((memory2[sub2(rbp,
@@ -2096,11 +2598,11 @@ goal WP_parameter_def :
   of_int2(40)), of_int2(7))]))), of_int2(72057594037927936))))) and
   ((result16 = rcx2) and (rcx3 = o25))) and (((result17 = rax3) and
   (rax4 = tmp_register2)) and (((result18 = zeroflag3) and (((add2(rax4,
-  rcx3) = of_int2(0)) and (zeroflag4 = true)) or ((not (add2(rax4,
-  rcx3) = of_int2(0))) and (zeroflag4 = false)))) and
+  rcx3) = of_int2(0)) -> (zeroflag4 = true)) and ((not (add2(rax4,
+  rcx3) = of_int2(0))) -> (zeroflag4 = false)))) and
   (((result19 = signflag3) and ((ugt2(add2(rax4, rcx3),
-  of_int2(9223372036854775807)) and (signflag4 = true)) or
-  ((not ugt2(add2(rax4, rcx3), of_int2(9223372036854775807))) and
+  of_int2(9223372036854775807)) -> (signflag4 = true)) and
+  ((not ugt2(add2(rax4, rcx3), of_int2(9223372036854775807))) ->
   (signflag4 = false)))) and (((result20 = rax4) and (rax5 = add2(rax4,
   rcx3))) and (((((o26 = readmem8(rax5, memory2)) and
   (o26 = to_rep((memory2[rax5])))) and (o27 = toBig(o26))) and
@@ -2122,18 +2624,17 @@ goal WP_parameter_def :
   of_int2(18446744073709551615))) -> ((not (i = rdx4)) ->
   (to_rep((memory3[i])) = to_rep((memory2[i])))))))) and
   (((result21 = tmp_register2) and (tmp_register3 = add2(tmp_register2,
-  of_int2(1)))) and ((((rax8 = { t__content2 = rax7 }) and
-  ((overflowflag4 = { bool__content = overflowflag3 }) and ((signflag6 = {
-  bool__content = signflag5 }) and ((carryflag4 = { bool__content =
-  carryflag3 }) and (zeroflag6 = { bool__content = zeroflag5 }))))) and
-  ((rax9 = rax7) and ((overflowflag5 = overflowflag3) and
-  ((signflag7 = signflag5) and ((carryflag5 = carryflag3) and
-  (zeroflag7 = zeroflag5)))))) and (((result22 = rax6) and
-  (rax7 = tmp_register3)) and ((((((o29 = readmem64(sub2(rbp, of_int2(72)),
-  memory3)) and ((((((((bw_and2(o29,
-  of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp, of_int2(72))])))) and
-  (bw_and2(o29, of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
-  of_int2(72)), of_int2(1))]))), of_int2(256)))) and (bw_and2(o29,
+  of_int2(1)))) and ((((rax8 = rax7) and ((overflowflag4 = overflowflag3) and
+  ((signflag6 = signflag5) and ((carryflag4 = carryflag3) and
+  (zeroflag6 = zeroflag5))))) and ((rax9 = rax7) and
+  ((overflowflag5 = overflowflag3) and ((signflag7 = signflag5) and
+  ((carryflag5 = carryflag3) and (zeroflag7 = zeroflag5)))))) and
+  (((result22 = rax6) and (rax7 = tmp_register3)) and
+  ((((((o29 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
+  ((((((((bw_and2(o29, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
+  of_int2(72))])))) and (bw_and2(o29,
+  of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp, of_int2(72)),
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(o29,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(o29,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
@@ -2147,8 +2648,8 @@ goal WP_parameter_def :
   (bw_and2(o29,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o30 = sub2(rax7, o29))) and (((o30 = of_int2(0)) and (o31 = true)) or
-  ((not (o30 = of_int2(0))) and (o31 = false)))) and
+  (o30 = sub2(rax7, o29))) and (((o30 = of_int2(0)) -> (o31 = true)) and
+  ((not (o30 = of_int2(0))) -> (o31 = false)))) and
   ((result23 = zeroflag4) and (zeroflag5 = o31))) and
   ((((((o32 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
   ((((((((bw_and2(o32, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
@@ -2168,8 +2669,8 @@ goal WP_parameter_def :
   (bw_and2(o32,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  (o33 = sub2(rax7, o32))) and ((ugt2(o33, of_int2(9223372036854775807)) and
-  (o34 = true)) or ((not ugt2(o33, of_int2(9223372036854775807))) and
+  (o33 = sub2(rax7, o32))) and ((ugt2(o33, of_int2(9223372036854775807)) ->
+  (o34 = true)) and ((not ugt2(o33, of_int2(9223372036854775807))) ->
   (o34 = false)))) and ((result24 = signflag4) and (signflag5 = o34))) and
   (((((o35 = readmem64(sub2(rbp, of_int2(72)), memory3)) and
   ((((((((bw_and2(o35, of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp,
@@ -2189,10 +2690,10 @@ goal WP_parameter_def :
   (bw_and2(o35,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ult2(rax7, o35) and (o36 = true)) or ((not ult2(rax7, o35)) and
+  ((ult2(rax7, o35) -> (o36 = true)) and ((not ult2(rax7, o35)) ->
   (o36 = false)))) and ((result25 = carryflag2) and (carryflag3 = o36))) and
   (((((((not (signflag5 = true)) and ugt2(rax7,
-  of_int2(9223372036854775807))) and (((o39 = readmem64(sub2(rbp,
+  of_int2(9223372036854775807))) -> (((o39 = readmem64(sub2(rbp,
   of_int2(72)), memory3)) and ((((((((bw_and2(o39,
   of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp, of_int2(72))])))) and
   (bw_and2(o39, of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
@@ -2210,11 +2711,11 @@ goal WP_parameter_def :
   (bw_and2(o39,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ule2(o39, of_int2(9223372036854775807)) and (o40 = true)) or
-  ((not ule2(o39, of_int2(9223372036854775807))) and (o40 = false))))) or
+  ((ule2(o39, of_int2(9223372036854775807)) -> (o40 = true)) and
+  ((not ule2(o39, of_int2(9223372036854775807))) -> (o40 = false))))) and
   ((not ((not (signflag5 = true)) and ugt2(rax7,
-  of_int2(9223372036854775807)))) and (o40 = false))) and
-  (((((signflag5 = true) and (((o37 = readmem64(sub2(rbp, of_int2(72)),
+  of_int2(9223372036854775807)))) -> (o40 = false))) and
+  (((((signflag5 = true) -> (((o37 = readmem64(sub2(rbp, of_int2(72)),
   memory3)) and ((((((((bw_and2(o37,
   of_int2(255)) = toBig1(to_rep((memory3[sub2(rbp, of_int2(72))])))) and
   (bw_and2(o37, of_int2(65280)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
@@ -2232,51 +2733,106 @@ goal WP_parameter_def :
   (bw_and2(o37,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory3[add2(sub2(rbp,
   of_int2(72)), of_int2(7))]))), of_int2(72057594037927936))))) and
-  ((ugt2(o37, of_int2(9223372036854775807)) and (o38 = true)) or
-  ((not ugt2(o37, of_int2(9223372036854775807))) and (o38 = false))))) or
-  ((not (signflag5 = true)) and (o38 = false))) and ((((o38 = true) and
-  ule2(rax7, of_int2(9223372036854775807))) and (o41 = true)) or
-  ((not ((o38 = true) and ule2(rax7, of_int2(9223372036854775807)))) and
+  ((ugt2(o37, of_int2(9223372036854775807)) -> (o38 = true)) and
+  ((not ugt2(o37, of_int2(9223372036854775807))) -> (o38 = false))))) and
+  ((not (signflag5 = true)) -> (o38 = false))) and ((((o38 = true) and
+  ule2(rax7, of_int2(9223372036854775807))) -> (o41 = true)) and
+  ((not ((o38 = true) and ule2(rax7, of_int2(9223372036854775807)))) ->
   (o41 = false)))) and (o42 = match_bool(o41, true, o40)))) and
-  ((result26 = { bool__content = overflowflag2 }) and
-  (overflowflag3 = o42))) and
-  (not (carryflag3 = true))))))))))))))))))))))))))))))))))))))))))))))) and
-  (((tmp_register6 = tmp_register4) and ((memory6 = memory4) and
-  ((rdx7 = rdx5) and ((rcx6 = rcx4) and ((rax12 = rax10) and
-  ((overflowflag8 = overflowflag6) and ((signflag10 = signflag8) and
-  ((carryflag8 = carryflag6) and (zeroflag10 = zeroflag8))))))))) and
-  ((tmp_register7 = tmp_register5) and ((memory7 = memory5) and
-  ((rdx8 = rdx6) and ((rcx7 = rcx5) and ((rax13 = rax11) and
-  ((overflowflag9 = overflowflag7) and ((signflag11 = signflag9) and
-  ((carryflag9 = carryflag7) and (zeroflag11 = zeroflag9))))))))))) and
-  (((tmp_register8 = tmp_register6) and ((memory8 = memory6) and
-  ((rdx9 = rdx7) and ((rcx8 = rcx6) and ((rax14 = rax12) and
-  ((overflowflag10 = overflowflag8) and ((signflag12 = signflag10) and
-  ((carryflag10 = carryflag8) and (zeroflag12 = zeroflag10))))))))) and
-  ((tmp_register9 = tmp_register7) and ((memory9 = memory7) and
-  ((rdx10 = rdx8) and ((rcx9 = rcx7) and ((rax15 = rax13) and
-  ((overflowflag11 = overflowflag9) and ((signflag13 = signflag11) and
-  ((carryflag11 = carryflag9) and (zeroflag13 = zeroflag11))))))))))) ->
-  ((((((((((bw_and2((tmp_register8).t__content2,
+  ((result26 = overflowflag2) and (overflowflag3 = o42))) and
+  (not (carryflag3 = true)))))))))))))))))))))))))))))))
+
+axiom H72 : (tmp_register6 = tmp_register4)
+
+axiom H73 : (memory6 = memory4)
+
+axiom H74 : (rdx7 = rdx5)
+
+axiom H75 : (rcx6 = rcx4)
+
+axiom H76 : (rax12 = rax10)
+
+axiom H77 : (overflowflag8 = overflowflag6)
+
+axiom H78 : (signflag10 = signflag8)
+
+axiom H79 : (carryflag8 = carryflag6)
+
+axiom H80 : (zeroflag10 = zeroflag8)
+
+axiom H81 : (tmp_register7 = tmp_register5)
+
+axiom H82 : (memory7 = memory5)
+
+axiom H83 : (rdx8 = rdx6)
+
+axiom H84 : (rcx7 = rcx5)
+
+axiom H85 : (rax13 = rax11)
+
+axiom H86 : (overflowflag9 = overflowflag7)
+
+axiom H87 : (signflag11 = signflag9)
+
+axiom H88 : (carryflag9 = carryflag7)
+
+axiom H89 : (zeroflag11 = zeroflag9)
+
+axiom H90 : (tmp_register8 = tmp_register6)
+
+axiom H91 : (memory8 = memory6)
+
+axiom H92 : (rdx9 = rdx7)
+
+axiom H93 : (rcx8 = rcx6)
+
+axiom H94 : (rax14 = rax12)
+
+axiom H95 : (overflowflag10 = overflowflag8)
+
+axiom H96 : (signflag12 = signflag10)
+
+axiom H97 : (carryflag10 = carryflag8)
+
+axiom H98 : (zeroflag12 = zeroflag10)
+
+axiom H99 : (tmp_register9 = tmp_register7)
+
+axiom H100 : (memory9 = memory7)
+
+axiom H101 : (rdx10 = rdx8)
+
+axiom H102 : (rcx9 = rcx7)
+
+axiom H103 : (rax15 = rax13)
+
+axiom H104 : (overflowflag11 = overflowflag9)
+
+axiom H105 : (signflag13 = signflag11)
+
+axiom H106 : (carryflag11 = carryflag9)
+
+axiom H107 : (zeroflag13 = zeroflag11)
+
+axiom H108 : (((((((((bw_and2(tmp_register8,
   of_int2(255)) = toBig1(to_rep((memory10[sub2(rbp, of_int2(8))])))) and
-  (bw_and2((tmp_register8).t__content2,
+  (bw_and2(tmp_register8,
   of_int2(65280)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp, of_int2(8)),
-  of_int2(1))]))), of_int2(256)))) and (bw_and2((tmp_register8).t__content2,
+  of_int2(1))]))), of_int2(256)))) and (bw_and2(tmp_register8,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
-  of_int2(8)), of_int2(2))]))), of_int2(65536)))) and
-  (bw_and2((tmp_register8).t__content2,
+  of_int2(8)), of_int2(2))]))), of_int2(65536)))) and (bw_and2(tmp_register8,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
   of_int2(8)), of_int2(3))]))), of_int2(16777216)))) and
-  (bw_and2((tmp_register8).t__content2,
+  (bw_and2(tmp_register8,
   of_int2(1095216660480)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
   of_int2(8)), of_int2(4))]))), of_int2(4294967296)))) and
-  (bw_and2((tmp_register8).t__content2,
+  (bw_and2(tmp_register8,
   of_int2(280375465082880)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
   of_int2(8)), of_int2(5))]))), of_int2(1099511627776)))) and
-  (bw_and2((tmp_register8).t__content2,
+  (bw_and2(tmp_register8,
   of_int2(71776119061217280)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
   of_int2(8)), of_int2(6))]))), of_int2(281474976710656)))) and
-  (bw_and2((tmp_register8).t__content2,
+  (bw_and2(tmp_register8,
   of_int2(18374686479671623680)) = mul2(toBig1(to_rep((memory10[add2(sub2(rbp,
   of_int2(8)), of_int2(7))]))), of_int2(72057594037927936)))) and
   (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
@@ -2288,13 +2844,19 @@ goal WP_parameter_def :
   (not (i = add2(sub2(rbp, of_int2(8)), of_int2(5))))) and
   (not (i = add2(sub2(rbp, of_int2(8)), of_int2(6))))) and
   (not (i = add2(sub2(rbp, of_int2(8)), of_int2(7))))) ->
-  (to_rep((memory10[i])) = to_rep(((memory8).map__content[i]))))))) ->
-  ((forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
-   of_int2(18446744073709551615))) -> (((not (inrange64(i, saved_321,
-   saved_721) = true)) and (not (inrange64(i, sub2(rbp, of_int2(8)),
-   of_int2(8)) = true))) ->
-   (to_rep((memory10[i])) = to_rep((saved_mem1[i])))))) ->
-  ((saved_321 = readmem64(sub2(rbp, of_int2(32)), memory10)) ->
-  ((saved_721 = readmem64(sub2(rbp, of_int2(72)), memory10)) ->
-  uge2(readmem64(sub2(rbp, of_int2(8)), memory10), udiv2(readmem64(sub2(rbp,
-  of_int2(72)), memory10), of_int2(8)))))))))))))))))
+  (to_rep((memory10[i])) = to_rep((memory8[i])))))))
+
+axiom H109 :
+  (forall i:t2. ((ule2(of_int2(0), i) and ule2(i,
+  of_int2(18446744073709551615))) -> (((not (inrange64(i, saved_321,
+  saved_721) = true)) and (not (inrange64(i, sub2(rbp, of_int2(8)),
+  of_int2(8)) = true))) ->
+  (to_rep((memory10[i])) = to_rep((saved_mem1[i]))))))
+
+axiom H110 : (saved_321 = readmem64(sub2(rbp, of_int2(32)), memory10))
+
+axiom H111 : (saved_721 = readmem64(sub2(rbp, of_int2(72)), memory10))
+
+ (* File "x86.ads", line 334, characters 0-0 *)
+goal WP_parameter_def : uge2(readmem64(sub2(rbp, of_int2(8)), memory10),
+  udiv2(readmem64(sub2(rbp, of_int2(72)), memory10), of_int2(8)))

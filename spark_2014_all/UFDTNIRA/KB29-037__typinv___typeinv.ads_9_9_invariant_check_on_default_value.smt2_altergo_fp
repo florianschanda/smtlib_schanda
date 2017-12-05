@@ -55,7 +55,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type ttB
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq : int, int -> bool
 
@@ -191,18 +191,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -248,7 +248,9 @@ axiom is_valid__post_axiom : true
 axiom is_valid__def_axiom :
   (forall x:int [is_valid(x)]. ((is_valid(x) = true) <-> (mod(x, 2) = 0)))
 
+logic temp___140 : int
+
+axiom H : in_range(temp___140)
+
  (* File "typeinv.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___140:int. (in_range(temp___140) ->
-  (is_valid(temp___140) = true)))
+goal WP_parameter_def : (is_valid(temp___140) = true)

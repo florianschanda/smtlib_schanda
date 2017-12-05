@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -306,5 +306,115 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 axiom z__def_axiom : (z = (x + 1))
 
+logic m : int
+
+logic oa : int
+
+logic ob : int
+
+logic oe : int
+
+logic of_o : int
+
+logic og : int
+
+logic dynamic__p__result : int
+
+logic dynamic__p__z__assume : int
+
+logic o : int
+
+logic us : int
+
+logic o1 : int
+
+logic us1 : int
+
+logic o2 : int
+
+logic us2 : int
+
+logic o3 : int
+
+logic us3 : int
+
+logic o4 : int
+
+logic us4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : int
+
+logic m1 : int
+
+logic result1 : int
+
+logic oa1 : int
+
+logic result2 : int
+
+logic ob1 : int
+
+logic result3 : int
+
+logic oe1 : int
+
+logic result4 : int
+
+logic of_o1 : int
+
+logic result5 : int
+
+logic og1 : int
+
+logic result6 : int
+
+logic m2 : int
+
+logic result7 : int
+
+logic dynamic__p__result1 : int
+
+logic dynamic__p__result2 : int
+
+logic dynamic__p__result3 : int
+
+logic m3 : int
+
+logic oa2 : int
+
+logic ob2 : int
+
+logic oe2 : int
+
+logic of_o2 : int
+
+logic og2 : int
+
+logic dynamic__p__result4 : int
+
+logic m4 : int
+
+logic oa3 : int
+
+logic ob3 : int
+
+logic oe3 : int
+
+logic of_o3 : int
+
+logic og3 : int
+
+logic dynamic__p__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (x <= 10)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> ((x <= 10) -> in_range((x + 1))))
+goal WP_parameter_def : in_range((x + 1))

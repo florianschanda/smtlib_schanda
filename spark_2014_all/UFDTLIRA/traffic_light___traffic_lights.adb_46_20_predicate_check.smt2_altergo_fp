@@ -142,7 +142,7 @@ function us_split_fields__ref___27__projection(a: us_split_fields__ref) : us_spl
 type us_rep1 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___27__projection(a: us_rep1) : us_split_fields =
+function us_rep___28__projection(a: us_rep1) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq2 : us_rep1, us_rep1 -> bool
@@ -351,7 +351,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref1) : us_sp
 type us_rep2 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___28__projection(a: us_rep2) : us_split_fields2 =
+function us_rep___29__projection(a: us_rep2) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -451,218 +451,627 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "traffic_lights.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ls__split_fields:bool. forall ls__split_fields1:bool.
-  forall ls__split_fields2:bool. forall ls__split_fields3:bool.
-  forall ls__split_fields4:bool. forall self__:bool. forall self__1:bool.
-  forall self__2:bool. forall self__3:bool. forall self__4:bool.
-  forall self__5:bool. forall result:bool. forall result1:bool.
-  forall result2:bool. forall result3:bool. forall result4:bool.
-  forall ls__split_fields5:bool. forall ls__split_fields6:bool.
-  forall ls__split_fields7:bool. forall ls__split_fields8:bool.
-  forall ls__split_fields9:bool. forall result5:bool. forall result6:bool.
-  forall result7:bool. forall result8:bool. forall result9:bool.
-  forall ls__split_fields10:bool. forall ls__split_fields11:bool.
-  forall ls__split_fields12:bool. forall ls__split_fields13:bool.
-  forall ls__split_fields14:bool. forall result10:bool. forall result11:bool.
-  forall result12:bool. forall result13:bool. forall result14:bool.
-  forall ls__split_fields15:bool. forall ls__split_fields16:bool.
-  forall ls__split_fields17:bool. forall ls__split_fields18:bool.
-  forall ls__split_fields19:bool. forall result15:bool. forall result16:bool.
-  forall result17:bool. forall result18:bool. forall result19:bool.
-  forall ls__split_fields20:bool. forall ls__split_fields21:bool.
-  forall ls__split_fields22:bool. forall ls__split_fields23:bool.
-  forall ls__split_fields24:bool. forall result20:bool. forall result21:bool.
-  forall result22:bool. forall result23:bool. forall result24:bool.
-  forall ls__split_fields25:bool. forall ls__split_fields26:bool.
-  forall ls__split_fields27:bool. forall ls__split_fields28:bool.
-  forall ls__split_fields29:bool. forall result25:bool. forall result26:bool.
-  forall result27:bool. forall result28:bool. forall result29:bool.
-  forall ls__split_fields30:bool. forall ls__split_fields31:bool.
-  forall ls__split_fields32:bool. forall ls__split_fields33:bool.
-  forall ls__split_fields34:bool. forall result30:bool. forall result31:bool.
-  forall result32:bool. forall result33:bool. forall result34:bool.
-  forall ls__split_fields35:bool. forall ls__split_fields36:bool.
-  forall ls__split_fields37:bool. forall ls__split_fields38:bool.
-  forall ls__split_fields39:bool. forall result35:bool. forall result36:bool.
-  forall result37:bool. forall result38:bool. forall result39:bool.
-  forall ls__split_fields40:bool. forall ls__split_fields41:bool.
-  forall ls__split_fields42:bool. forall ls__split_fields43:bool.
-  forall ls__split_fields44:bool. forall result40:bool. forall result41:bool.
-  forall result42:bool. forall result43:bool. forall result44:bool.
-  forall ls__split_fields45:bool. forall ls__split_fields46:bool.
-  forall ls__split_fields47:bool. forall ls__split_fields48:bool.
-  forall ls__split_fields49:bool. forall result45:bool. forall result46:bool.
-  forall result47:bool. forall result48:bool. forall result49:bool.
-  forall ls__split_fields50:bool. forall ls__split_fields51:bool.
-  forall ls__split_fields52:bool. forall ls__split_fields53:bool.
-  forall ls__split_fields54:bool. forall result50:bool. forall result51:bool.
-  forall result52:bool. forall result53:bool. forall result54:bool.
-  forall ls__split_fields55:bool. forall ls__split_fields56:bool.
-  forall ls__split_fields57:bool. forall ls__split_fields58:bool.
-  forall ls__split_fields59:bool. forall result55:bool. forall result56:bool.
-  forall result57:bool. forall result58:bool. forall result59:bool.
-  forall ls__split_fields60:us_split_fields.
-  forall result60:us_split_fields__ref.
-  forall ls__split_fields61:us_split_fields. ((valid_combination({
-  us_split_fields1 = { rec__traffic_lights__lights_state__vehicles_green =
-  self__1; rec__traffic_lights__lights_state__vehicles_yellow = self__2;
+logic ls__split_fields : bool
+
+logic ls__split_fields1 : bool
+
+logic ls__split_fields2 : bool
+
+logic ls__split_fields3 : bool
+
+logic ls__split_fields4 : bool
+
+logic self__ : bool
+
+logic self__1 : bool
+
+logic self__2 : bool
+
+logic self__3 : bool
+
+logic self__4 : bool
+
+logic self__5 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic ls__split_fields5 : bool
+
+logic ls__split_fields6 : bool
+
+logic ls__split_fields7 : bool
+
+logic ls__split_fields8 : bool
+
+logic ls__split_fields9 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic ls__split_fields10 : bool
+
+logic ls__split_fields11 : bool
+
+logic ls__split_fields12 : bool
+
+logic ls__split_fields13 : bool
+
+logic ls__split_fields14 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic ls__split_fields15 : bool
+
+logic ls__split_fields16 : bool
+
+logic ls__split_fields17 : bool
+
+logic ls__split_fields18 : bool
+
+logic ls__split_fields19 : bool
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic ls__split_fields20 : bool
+
+logic ls__split_fields21 : bool
+
+logic ls__split_fields22 : bool
+
+logic ls__split_fields23 : bool
+
+logic ls__split_fields24 : bool
+
+logic result20 : bool
+
+logic result21 : bool
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic result24 : bool
+
+logic ls__split_fields25 : bool
+
+logic ls__split_fields26 : bool
+
+logic ls__split_fields27 : bool
+
+logic ls__split_fields28 : bool
+
+logic ls__split_fields29 : bool
+
+logic result25 : bool
+
+logic result26 : bool
+
+logic result27 : bool
+
+logic result28 : bool
+
+logic result29 : bool
+
+logic ls__split_fields30 : bool
+
+logic ls__split_fields31 : bool
+
+logic ls__split_fields32 : bool
+
+logic ls__split_fields33 : bool
+
+logic ls__split_fields34 : bool
+
+logic result30 : bool
+
+logic result31 : bool
+
+logic result32 : bool
+
+logic result33 : bool
+
+logic result34 : bool
+
+logic ls__split_fields35 : bool
+
+logic ls__split_fields36 : bool
+
+logic ls__split_fields37 : bool
+
+logic ls__split_fields38 : bool
+
+logic ls__split_fields39 : bool
+
+logic result35 : bool
+
+logic result36 : bool
+
+logic result37 : bool
+
+logic result38 : bool
+
+logic result39 : bool
+
+logic ls__split_fields40 : bool
+
+logic ls__split_fields41 : bool
+
+logic ls__split_fields42 : bool
+
+logic ls__split_fields43 : bool
+
+logic ls__split_fields44 : bool
+
+logic result40 : bool
+
+logic result41 : bool
+
+logic result42 : bool
+
+logic result43 : bool
+
+logic result44 : bool
+
+logic ls__split_fields45 : bool
+
+logic ls__split_fields46 : bool
+
+logic ls__split_fields47 : bool
+
+logic ls__split_fields48 : bool
+
+logic ls__split_fields49 : bool
+
+logic result45 : bool
+
+logic result46 : bool
+
+logic result47 : bool
+
+logic result48 : bool
+
+logic result49 : bool
+
+logic ls__split_fields50 : bool
+
+logic ls__split_fields51 : bool
+
+logic ls__split_fields52 : bool
+
+logic ls__split_fields53 : bool
+
+logic ls__split_fields54 : bool
+
+logic result50 : bool
+
+logic result51 : bool
+
+logic result52 : bool
+
+logic result53 : bool
+
+logic result54 : bool
+
+logic ls__split_fields55 : bool
+
+logic ls__split_fields56 : bool
+
+logic ls__split_fields57 : bool
+
+logic ls__split_fields58 : bool
+
+logic ls__split_fields59 : bool
+
+logic result55 : bool
+
+logic result56 : bool
+
+logic result57 : bool
+
+logic result58 : bool
+
+logic result59 : bool
+
+logic ls__split_fields60 : bool
+
+logic ls__split_fields61 : bool
+
+logic ls__split_fields62 : bool
+
+logic ls__split_fields63 : bool
+
+logic ls__split_fields64 : bool
+
+logic result60 : bool
+
+logic result61 : bool
+
+logic result62 : bool
+
+logic result63 : bool
+
+logic result64 : bool
+
+logic ls__split_fields65 : bool
+
+logic ls__split_fields66 : bool
+
+logic ls__split_fields67 : bool
+
+logic ls__split_fields68 : bool
+
+logic ls__split_fields69 : bool
+
+axiom H : (valid_combination({ us_split_fields1 = {
+  rec__traffic_lights__lights_state__vehicles_green = self__1;
+  rec__traffic_lights__lights_state__vehicles_yellow = self__2;
   rec__traffic_lights__lights_state__vehicles_red = self__3;
   rec__traffic_lights__lights_state__pedestrians_green = self__4;
-  rec__traffic_lights__lights_state__pedestrians_red = self__5 }
-  }) = true) -> ((self__ = true) -> ((((result = ls__split_fields) and
-  ((result1 = ls__split_fields1) and ((result2 = ls__split_fields2) and
-  ((result3 = ls__split_fields3) and (result4 = ls__split_fields4))))) and
-  ((self__1 = ls__split_fields5) and ((self__2 = ls__split_fields6) and
-  ((self__3 = ls__split_fields7) and ((self__4 = ls__split_fields8) and
-  (self__5 = ls__split_fields9)))))) -> ((valid_combination({
-  us_split_fields1 = { rec__traffic_lights__lights_state__vehicles_green =
-  self__1; rec__traffic_lights__lights_state__vehicles_yellow = self__2;
+  rec__traffic_lights__lights_state__pedestrians_red = self__5 } }) = true)
+
+axiom H1 : (self__ = true)
+
+axiom H2 : (result = ls__split_fields)
+
+axiom H3 : (result1 = ls__split_fields1)
+
+axiom H4 : (result2 = ls__split_fields2)
+
+axiom H5 : (result3 = ls__split_fields3)
+
+axiom H6 : (result4 = ls__split_fields4)
+
+axiom H7 : (self__1 = ls__split_fields5)
+
+axiom H8 : (self__2 = ls__split_fields6)
+
+axiom H9 : (self__3 = ls__split_fields7)
+
+axiom H10 : (self__4 = ls__split_fields8)
+
+axiom H11 : (self__5 = ls__split_fields9)
+
+axiom H12 : (valid_combination({ us_split_fields1 = {
+  rec__traffic_lights__lights_state__vehicles_green = self__1;
+  rec__traffic_lights__lights_state__vehicles_yellow = self__2;
   rec__traffic_lights__lights_state__vehicles_red = self__3;
   rec__traffic_lights__lights_state__pedestrians_green = self__4;
-  rec__traffic_lights__lights_state__pedestrians_red = self__5 }
-  }) = true) -> ((((ls__split_fields5 = true) and
-  ((((result5 = ls__split_fields5) and ((result6 = ls__split_fields6) and
-  ((result7 = ls__split_fields7) and ((result8 = ls__split_fields8) and
-  (result9 = ls__split_fields9))))) and ((of_int(0) = ls__split_fields10) and
-  ((ls__split_fields6 = ls__split_fields11) and
-  ((ls__split_fields7 = ls__split_fields12) and
-  ((ls__split_fields8 = ls__split_fields13) and
-  (ls__split_fields9 = ls__split_fields14)))))) and
-  (((result10 = ls__split_fields10) and ((result11 = ls__split_fields11) and
-  ((result12 = ls__split_fields12) and ((result13 = ls__split_fields13) and
-  (result14 = ls__split_fields14))))) and
-  ((ls__split_fields10 = ls__split_fields15) and
-  ((of_int(1) = ls__split_fields16) and
-  ((ls__split_fields12 = ls__split_fields17) and
-  ((ls__split_fields13 = ls__split_fields18) and
-  (ls__split_fields14 = ls__split_fields19)))))))) or
-  ((not (ls__split_fields5 = true)) and (((((ls__split_fields6 = true) and
-  (not (ls__split_fields7 = true))) and ((((result15 = ls__split_fields5) and
-  ((result16 = ls__split_fields6) and ((result17 = ls__split_fields7) and
-  ((result18 = ls__split_fields8) and (result19 = ls__split_fields9))))) and
-  ((ls__split_fields5 = ls__split_fields20) and
-  ((of_int(0) = ls__split_fields21) and
-  ((ls__split_fields7 = ls__split_fields22) and
-  ((ls__split_fields8 = ls__split_fields23) and
-  (ls__split_fields9 = ls__split_fields24)))))) and
-  ((((result20 = ls__split_fields20) and ((result21 = ls__split_fields21) and
-  ((result22 = ls__split_fields22) and ((result23 = ls__split_fields23) and
-  (result24 = ls__split_fields24))))) and
-  ((ls__split_fields20 = ls__split_fields25) and
-  ((ls__split_fields21 = ls__split_fields26) and
-  ((of_int(1) = ls__split_fields27) and
-  ((ls__split_fields23 = ls__split_fields28) and
-  (ls__split_fields24 = ls__split_fields29)))))) and
-  ((((result25 = ls__split_fields25) and ((result26 = ls__split_fields26) and
+  rec__traffic_lights__lights_state__pedestrians_red = self__5 } }) = true)
+
+axiom H13 : ((ls__split_fields5 = true) -> (result5 = ls__split_fields5))
+
+axiom H14 : ((ls__split_fields5 = true) -> (result6 = ls__split_fields6))
+
+axiom H15 : ((ls__split_fields5 = true) -> (result7 = ls__split_fields7))
+
+axiom H16 : ((ls__split_fields5 = true) -> (result8 = ls__split_fields8))
+
+axiom H17 : ((ls__split_fields5 = true) -> (result9 = ls__split_fields9))
+
+axiom H18 : ((ls__split_fields5 = true) -> (of_int(0) = ls__split_fields10))
+
+axiom H19 : ((ls__split_fields5 = true) ->
+  (ls__split_fields6 = ls__split_fields11))
+
+axiom H20 : ((ls__split_fields5 = true) ->
+  (ls__split_fields7 = ls__split_fields12))
+
+axiom H21 : ((ls__split_fields5 = true) ->
+  (ls__split_fields8 = ls__split_fields13))
+
+axiom H22 : ((ls__split_fields5 = true) ->
+  (ls__split_fields9 = ls__split_fields14))
+
+axiom H23 : ((ls__split_fields5 = true) -> (result10 = ls__split_fields10))
+
+axiom H24 : ((ls__split_fields5 = true) -> (result11 = ls__split_fields11))
+
+axiom H25 : ((ls__split_fields5 = true) -> (result12 = ls__split_fields12))
+
+axiom H26 : ((ls__split_fields5 = true) -> (result13 = ls__split_fields13))
+
+axiom H27 : ((ls__split_fields5 = true) -> (result14 = ls__split_fields14))
+
+axiom H28 : ((ls__split_fields5 = true) ->
+  (ls__split_fields10 = ls__split_fields15))
+
+axiom H29 : ((ls__split_fields5 = true) -> (of_int(1) = ls__split_fields16))
+
+axiom H30 : ((ls__split_fields5 = true) ->
+  (ls__split_fields12 = ls__split_fields17))
+
+axiom H31 : ((ls__split_fields5 = true) ->
+  (ls__split_fields13 = ls__split_fields18))
+
+axiom H32 : ((ls__split_fields5 = true) ->
+  (ls__split_fields14 = ls__split_fields19))
+
+axiom H33 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result15 = ls__split_fields5)))
+
+axiom H34 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result16 = ls__split_fields6)))
+
+axiom H35 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result17 = ls__split_fields7)))
+
+axiom H36 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result18 = ls__split_fields8)))
+
+axiom H37 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result19 = ls__split_fields9)))
+
+axiom H38 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (ls__split_fields5 = ls__split_fields20)))
+
+axiom H39 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (of_int(0) = ls__split_fields21)))
+
+axiom H40 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (ls__split_fields7 = ls__split_fields22)))
+
+axiom H41 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (ls__split_fields8 = ls__split_fields23)))
+
+axiom H42 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (ls__split_fields9 = ls__split_fields24)))
+
+axiom H43 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result20 = ls__split_fields20)))
+
+axiom H44 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result21 = ls__split_fields21)))
+
+axiom H45 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result22 = ls__split_fields22)))
+
+axiom H46 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result23 = ls__split_fields23)))
+
+axiom H47 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  (result24 = ls__split_fields24)))
+
+axiom H48 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  ((ls__split_fields25 = ls__split_fields20) and
+  ((ls__split_fields26 = ls__split_fields21) and
+  ((ls__split_fields27 = of_int(1)) and
+  ((ls__split_fields28 = ls__split_fields23) and
+  (ls__split_fields29 = ls__split_fields24)))))))
+
+axiom H49 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  ((result25 = ls__split_fields25) and ((result26 = ls__split_fields26) and
   ((result27 = ls__split_fields27) and ((result28 = ls__split_fields28) and
-  (result29 = ls__split_fields29))))) and
-  ((ls__split_fields25 = ls__split_fields30) and
-  ((ls__split_fields26 = ls__split_fields31) and
-  ((ls__split_fields27 = ls__split_fields32) and
-  ((of_int(1) = ls__split_fields33) and
-  (ls__split_fields29 = ls__split_fields34)))))) and
-  (((result30 = ls__split_fields30) and ((result31 = ls__split_fields31) and
+  (result29 = ls__split_fields29)))))))
+
+axiom H50 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  ((ls__split_fields30 = ls__split_fields25) and
+  ((ls__split_fields31 = ls__split_fields26) and
+  ((ls__split_fields32 = ls__split_fields27) and
+  ((ls__split_fields33 = of_int(1)) and
+  (ls__split_fields34 = ls__split_fields29)))))))
+
+axiom H51 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  ((result30 = ls__split_fields30) and ((result31 = ls__split_fields31) and
   ((result32 = ls__split_fields32) and ((result33 = ls__split_fields33) and
-  (result34 = ls__split_fields34))))) and
-  ((ls__split_fields30 = ls__split_fields35) and
-  ((ls__split_fields31 = ls__split_fields36) and
-  ((ls__split_fields32 = ls__split_fields37) and
-  ((ls__split_fields33 = ls__split_fields38) and
-  (of_int(0) = ls__split_fields39)))))))))) or
+  (result34 = ls__split_fields34)))))))
+
+axiom H52 : ((not (ls__split_fields5 = true)) ->
+  (((ls__split_fields6 = true) and (not (ls__split_fields7 = true))) ->
+  ((ls__split_fields35 = ls__split_fields30) and
+  ((ls__split_fields36 = ls__split_fields31) and
+  ((ls__split_fields37 = ls__split_fields32) and
+  ((ls__split_fields38 = ls__split_fields33) and
+  (ls__split_fields39 = of_int(0))))))))
+
+axiom H53 : ((not (ls__split_fields5 = true)) ->
   ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
-  (not (ls__split_fields6 = false)))) and (((((ls__split_fields7 = true) and
-  (not (ls__split_fields6 = true))) and ((((result35 = ls__split_fields5) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) -> ((result35 = ls__split_fields5) and
   ((result36 = ls__split_fields6) and ((result37 = ls__split_fields7) and
-  ((result38 = ls__split_fields8) and (result39 = ls__split_fields9))))) and
-  ((ls__split_fields5 = ls__split_fields40) and
-  ((of_int(1) = ls__split_fields41) and
-  ((ls__split_fields7 = ls__split_fields42) and
-  ((ls__split_fields8 = ls__split_fields43) and
-  (ls__split_fields9 = ls__split_fields44)))))) and
-  ((((result40 = ls__split_fields40) and ((result41 = ls__split_fields41) and
-  ((result42 = ls__split_fields42) and ((result43 = ls__split_fields43) and
-  (result44 = ls__split_fields44))))) and
-  ((ls__split_fields40 = ls__split_fields45) and
-  ((ls__split_fields41 = ls__split_fields46) and
-  ((ls__split_fields42 = ls__split_fields47) and
-  ((of_int(0) = ls__split_fields48) and
-  (ls__split_fields44 = ls__split_fields49)))))) and
-  (((result45 = ls__split_fields45) and ((result46 = ls__split_fields46) and
-  ((result47 = ls__split_fields47) and ((result48 = ls__split_fields48) and
-  (result49 = ls__split_fields49))))) and
-  ((ls__split_fields45 = ls__split_fields50) and
-  ((ls__split_fields46 = ls__split_fields51) and
-  ((ls__split_fields47 = ls__split_fields52) and
-  ((ls__split_fields48 = ls__split_fields53) and
-  (of_int(1) = ls__split_fields54))))))))) or
+  ((result38 = ls__split_fields8) and (result39 = ls__split_fields9))))))))
+
+axiom H54 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) ->
+  ((ls__split_fields40 = ls__split_fields5) and
+  ((ls__split_fields41 = of_int(1)) and
+  ((ls__split_fields42 = ls__split_fields7) and
+  ((ls__split_fields43 = ls__split_fields8) and
+  (ls__split_fields44 = ls__split_fields9))))))))
+
+axiom H55 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) -> ((result40 = ls__split_fields40) and
+  ((result41 = ls__split_fields41) and ((result42 = ls__split_fields42) and
+  ((result43 = ls__split_fields43) and (result44 = ls__split_fields44))))))))
+
+axiom H56 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) ->
+  ((ls__split_fields45 = ls__split_fields40) and
+  ((ls__split_fields46 = ls__split_fields41) and
+  ((ls__split_fields47 = ls__split_fields42) and
+  ((ls__split_fields48 = of_int(0)) and
+  (ls__split_fields49 = ls__split_fields44))))))))
+
+axiom H57 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) -> ((result45 = ls__split_fields45) and
+  ((result46 = ls__split_fields46) and ((result47 = ls__split_fields47) and
+  ((result48 = ls__split_fields48) and (result49 = ls__split_fields49))))))))
+
+axiom H58 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) -> (((ls__split_fields7 = true) and
+  (not (ls__split_fields6 = true))) ->
+  ((ls__split_fields50 = ls__split_fields45) and
+  ((ls__split_fields51 = ls__split_fields46) and
+  ((ls__split_fields52 = ls__split_fields47) and
+  ((ls__split_fields53 = ls__split_fields48) and
+  (ls__split_fields54 = of_int(1)))))))))
+
+axiom H59 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
   ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
-  (not (ls__split_fields7 = false)))) and ((((match_bool(ls__split_fields7,
-  ls__split_fields6, false) = true) and ((((result50 = ls__split_fields5) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) -> ((result50 = ls__split_fields5) and
   ((result51 = ls__split_fields6) and ((result52 = ls__split_fields7) and
-  ((result53 = ls__split_fields8) and (result54 = ls__split_fields9))))) and
-  ((of_int(1) = ls__split_fields55) and
-  ((ls__split_fields6 = ls__split_fields56) and
-  ((ls__split_fields7 = ls__split_fields57) and
-  ((ls__split_fields8 = ls__split_fields58) and
-  (ls__split_fields9 = ls__split_fields59)))))) and
-  ((((result55 = ls__split_fields55) and ((result56 = ls__split_fields56) and
-  ((result57 = ls__split_fields57) and ((result58 = ls__split_fields58) and
-  (result59 = ls__split_fields59))))) and (ls__split_fields60 = {
-  rec__traffic_lights__lights_state__vehicles_green = ls__split_fields55;
-  rec__traffic_lights__lights_state__vehicles_yellow = of_int(0);
-  rec__traffic_lights__lights_state__vehicles_red = ls__split_fields57;
-  rec__traffic_lights__lights_state__pedestrians_green = ls__split_fields58;
-  rec__traffic_lights__lights_state__pedestrians_red = ls__split_fields59
-  })) and ((result60 = { us_split_fields__content = ls__split_fields60 }) and
-  (ls__split_fields61 = { rec__traffic_lights__lights_state__vehicles_green =
-  (ls__split_fields60).rec__traffic_lights__lights_state__vehicles_green;
-  rec__traffic_lights__lights_state__vehicles_yellow =
-  (ls__split_fields60).rec__traffic_lights__lights_state__vehicles_yellow;
-  rec__traffic_lights__lights_state__vehicles_red = of_int(0);
-  rec__traffic_lights__lights_state__pedestrians_green =
-  (ls__split_fields60).rec__traffic_lights__lights_state__pedestrians_green;
-  rec__traffic_lights__lights_state__pedestrians_red =
-  (ls__split_fields60).rec__traffic_lights__lights_state__pedestrians_red
-  }))))) or ((not (match_bool(ls__split_fields7, ls__split_fields6,
-  false) = true)) and (ls__split_fields61 = {
-  rec__traffic_lights__lights_state__vehicles_green = ls__split_fields5;
-  rec__traffic_lights__lights_state__vehicles_yellow = ls__split_fields6;
-  rec__traffic_lights__lights_state__vehicles_red = ls__split_fields7;
-  rec__traffic_lights__lights_state__pedestrians_green = ls__split_fields8;
-  rec__traffic_lights__lights_state__pedestrians_red = ls__split_fields9
-  }))) and ({ rec__traffic_lights__lights_state__vehicles_green =
-  ls__split_fields50; rec__traffic_lights__lights_state__vehicles_yellow =
-  ls__split_fields51; rec__traffic_lights__lights_state__vehicles_red =
-  ls__split_fields52; rec__traffic_lights__lights_state__pedestrians_green =
-  ls__split_fields53; rec__traffic_lights__lights_state__pedestrians_red =
-  ls__split_fields54 } = ls__split_fields61)))) and ({
-  rec__traffic_lights__lights_state__vehicles_green = ls__split_fields35;
-  rec__traffic_lights__lights_state__vehicles_yellow = ls__split_fields36;
-  rec__traffic_lights__lights_state__vehicles_red = ls__split_fields37;
-  rec__traffic_lights__lights_state__pedestrians_green = ls__split_fields38;
-  rec__traffic_lights__lights_state__pedestrians_red = ls__split_fields39
-  } = { rec__traffic_lights__lights_state__vehicles_green =
-  ls__split_fields50; rec__traffic_lights__lights_state__vehicles_yellow =
-  ls__split_fields51; rec__traffic_lights__lights_state__vehicles_red =
-  ls__split_fields52; rec__traffic_lights__lights_state__pedestrians_green =
-  ls__split_fields53; rec__traffic_lights__lights_state__pedestrians_red =
-  ls__split_fields54 })))) and ({
-  rec__traffic_lights__lights_state__vehicles_green = ls__split_fields15;
-  rec__traffic_lights__lights_state__vehicles_yellow = ls__split_fields16;
-  rec__traffic_lights__lights_state__vehicles_red = ls__split_fields17;
-  rec__traffic_lights__lights_state__pedestrians_green = ls__split_fields18;
-  rec__traffic_lights__lights_state__pedestrians_red = ls__split_fields19
-  } = { rec__traffic_lights__lights_state__vehicles_green =
-  ls__split_fields35; rec__traffic_lights__lights_state__vehicles_yellow =
-  ls__split_fields36; rec__traffic_lights__lights_state__vehicles_red =
-  ls__split_fields37; rec__traffic_lights__lights_state__pedestrians_green =
-  ls__split_fields38; rec__traffic_lights__lights_state__pedestrians_red =
-  ls__split_fields39 })))) -> (valid_combination({ us_split_fields1 = {
+  ((result53 = ls__split_fields8) and (result54 = ls__split_fields9)))))))))
+
+axiom H60 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) -> ((ls__split_fields55 = of_int(1)) and
+  ((ls__split_fields56 = ls__split_fields6) and
+  ((ls__split_fields57 = ls__split_fields7) and
+  ((ls__split_fields58 = ls__split_fields8) and
+  (ls__split_fields59 = ls__split_fields9)))))))))
+
+axiom H61 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) -> ((result55 = ls__split_fields55) and
+  ((result56 = ls__split_fields56) and ((result57 = ls__split_fields57) and
+  ((result58 = ls__split_fields58) and
+  (result59 = ls__split_fields59)))))))))
+
+axiom H62 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) ->
+  ((ls__split_fields60 = ls__split_fields55) and
+  ((ls__split_fields61 = of_int(0)) and
+  ((ls__split_fields62 = ls__split_fields57) and
+  ((ls__split_fields63 = ls__split_fields58) and
+  (ls__split_fields64 = ls__split_fields59)))))))))
+
+axiom H63 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) -> ((result60 = ls__split_fields60) and
+  ((result61 = ls__split_fields61) and ((result62 = ls__split_fields62) and
+  ((result63 = ls__split_fields63) and
+  (result64 = ls__split_fields64)))))))))
+
+axiom H64 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true) ->
+  ((ls__split_fields65 = ls__split_fields60) and
+  ((ls__split_fields66 = ls__split_fields61) and
+  ((ls__split_fields67 = of_int(0)) and
+  ((ls__split_fields68 = ls__split_fields63) and
+  (ls__split_fields69 = ls__split_fields64)))))))))
+
+axiom H65 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) -> ((not (match_bool(ls__split_fields7,
+  ls__split_fields6, false) = true)) ->
+  ((ls__split_fields65 = ls__split_fields5) and
+  ((ls__split_fields66 = ls__split_fields6) and
+  ((ls__split_fields67 = ls__split_fields7) and
+  ((ls__split_fields68 = ls__split_fields8) and
+  (ls__split_fields69 = ls__split_fields9)))))))))
+
+axiom H66 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((not (((ls__split_fields7 = true) -> (not (ls__split_fields6 = true))) and
+  (not (ls__split_fields7 = false)))) ->
+  ((ls__split_fields50 = ls__split_fields65) and
+  ((ls__split_fields51 = ls__split_fields66) and
+  ((ls__split_fields52 = ls__split_fields67) and
+  ((ls__split_fields53 = ls__split_fields68) and
+  (ls__split_fields54 = ls__split_fields69))))))))
+
+axiom H67 : ((not (ls__split_fields5 = true)) ->
+  ((not (((ls__split_fields6 = true) -> (not (ls__split_fields7 = true))) and
+  (not (ls__split_fields6 = false)))) ->
+  ((ls__split_fields35 = ls__split_fields50) and
+  ((ls__split_fields36 = ls__split_fields51) and
+  ((ls__split_fields37 = ls__split_fields52) and
+  ((ls__split_fields38 = ls__split_fields53) and
+  (ls__split_fields39 = ls__split_fields54)))))))
+
+axiom H68 : ((not (ls__split_fields5 = true)) ->
+  ((ls__split_fields15 = ls__split_fields35) and
+  ((ls__split_fields16 = ls__split_fields36) and
+  ((ls__split_fields17 = ls__split_fields37) and
+  ((ls__split_fields18 = ls__split_fields38) and
+  (ls__split_fields19 = ls__split_fields39))))))
+
+ (* File "traffic_lights.ads", line 33, characters 0-0 *)
+goal WP_parameter_def : (valid_combination({ us_split_fields1 = {
   rec__traffic_lights__lights_state__vehicles_green = ls__split_fields15;
   rec__traffic_lights__lights_state__vehicles_yellow = ls__split_fields16;
   rec__traffic_lights__lights_state__vehicles_red = ls__split_fields17;
   rec__traffic_lights__lights_state__pedestrians_green = ls__split_fields18;
   rec__traffic_lights__lights_state__pedestrians_red = ls__split_fields19 }
-  }) = true)))))))
+  }) = true)

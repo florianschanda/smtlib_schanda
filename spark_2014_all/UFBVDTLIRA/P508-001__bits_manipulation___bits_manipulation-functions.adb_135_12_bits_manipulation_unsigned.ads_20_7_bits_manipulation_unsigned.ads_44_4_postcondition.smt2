@@ -169,6 +169,7 @@
 (declare-const bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result4 Int)
 (declare-const bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result5 Int)
 (declare-const result1 Int)
+(assert true)
 (assert (not (= value ((_ int2bv 32) 0))))
 (assert (= bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result1 bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result2))
 (assert (= bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result3 bits_manipulation_unsigned__unsigned_32__functions__msb_index_slow_inline__result1))

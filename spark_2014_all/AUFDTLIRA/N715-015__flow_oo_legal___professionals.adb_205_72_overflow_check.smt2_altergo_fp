@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -608,17 +608,17 @@ logic to_unbounded_string1 : int, us_t -> us_rep
 
 logic to_unbounded_string__function_guard1 : us_rep, int, us_t -> prop
 
-logic temp___String_Literal_928 : unit -> (int,character) farray
+logic temp___String_Literal_922 : unit -> (int,character) farray
 
-axiom temp___String_Literal_928__def_axiom :
-  ((((((((to_rep2((temp___String_Literal_928(void)[1])) = 78) and
-  (to_rep2((temp___String_Literal_928(void)[2])) = 97)) and
-  (to_rep2((temp___String_Literal_928(void)[3])) = 109)) and
-  (to_rep2((temp___String_Literal_928(void)[4])) = 101)) and
-  (to_rep2((temp___String_Literal_928(void)[5])) = 108)) and
-  (to_rep2((temp___String_Literal_928(void)[6])) = 101)) and
-  (to_rep2((temp___String_Literal_928(void)[7])) = 115)) and
-  (to_rep2((temp___String_Literal_928(void)[8])) = 115))
+axiom temp___String_Literal_922__def_axiom :
+  ((((((((to_rep2((temp___String_Literal_922(void)[1])) = 78) and
+  (to_rep2((temp___String_Literal_922(void)[2])) = 97)) and
+  (to_rep2((temp___String_Literal_922(void)[3])) = 109)) and
+  (to_rep2((temp___String_Literal_922(void)[4])) = 101)) and
+  (to_rep2((temp___String_Literal_922(void)[5])) = 108)) and
+  (to_rep2((temp___String_Literal_922(void)[6])) = 101)) and
+  (to_rep2((temp___String_Literal_922(void)[7])) = 115)) and
+  (to_rep2((temp___String_Literal_922(void)[8])) = 115))
 
 logic is_alive : us_rep1 -> bool
 
@@ -1209,16 +1209,143 @@ axiom people__person__compat_axiom1 :
   rec__people__person__dob = p1; rec__people__person__alive = p2;
   rec__ext__ = p3 }; attr__tag = p4 }))))
 
- (* File "professionals.ads", line 65, characters 0-0 *)
-goal WP_parameter_def :
-  (forall killer__split_fields:professions.
-  forall killer__split_fields1:(int,skills) farray.
-  forall killer__split_fields2:natural. forall killer__split_fields3:us_rep.
-  forall killer__split_fields4:integer. forall killer__split_fields5:bool.
-  forall killer__split_fields6:us_private.
-  forall victim__split_fields:us_rep. forall victim__split_fields1:integer.
-  forall victim__split_fields2:bool. forall victim__split_fields3:us_private.
-  ((((is_alive({ us_split_fields1 = { rec__people__person__name =
+logic killer__split_fields : professions
+
+logic killer__split_fields1 : (int,skills) farray
+
+logic killer__split_fields2 : natural
+
+logic killer__split_fields3 : us_rep
+
+logic killer__split_fields4 : integer
+
+logic killer__split_fields5 : bool
+
+logic killer__split_fields6 : us_private
+
+logic victim__split_fields : us_rep
+
+logic victim__split_fields1 : integer
+
+logic victim__split_fields2 : bool
+
+logic victim__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : professions
+
+logic o3 : (int,skills) farray
+
+logic o4 : natural
+
+logic o5 : us_rep
+
+logic o6 : integer
+
+logic o7 : bool
+
+logic o8 : us_private
+
+logic temp___1125 : professions
+
+logic temp___11251 : (int,skills) farray
+
+logic temp___11252 : natural
+
+logic temp___11253 : us_rep
+
+logic temp___11254 : integer
+
+logic temp___11255 : bool
+
+logic temp___11256 : us_private
+
+logic temp___11257 : int
+
+logic result : professions
+
+logic result1 : (int,skills) farray
+
+logic result2 : natural
+
+logic result3 : us_rep
+
+logic result4 : integer
+
+logic result5 : bool
+
+logic result6 : us_private
+
+logic killer__split_fields7 : professions
+
+logic killer__split_fields8 : (int,skills) farray
+
+logic killer__split_fields9 : natural
+
+logic killer__split_fields10 : us_rep
+
+logic killer__split_fields11 : integer
+
+logic killer__split_fields12 : bool
+
+logic killer__split_fields13 : us_private
+
+logic victim__split_fields4 : us_rep
+
+logic victim__split_fields5 : integer
+
+logic victim__split_fields6 : bool
+
+logic victim__split_fields7 : us_private
+
+logic killer__split_fields14 : professions
+
+logic killer__split_fields15 : (int,skills) farray
+
+logic killer__split_fields16 : natural
+
+logic killer__split_fields17 : us_rep
+
+logic killer__split_fields18 : integer
+
+logic killer__split_fields19 : bool
+
+logic killer__split_fields20 : us_private
+
+logic victim__split_fields8 : us_rep
+
+logic victim__split_fields9 : integer
+
+logic victim__split_fields10 : bool
+
+logic victim__split_fields11 : us_private
+
+logic killer__split_fields21 : professions
+
+logic killer__split_fields22 : (int,skills) farray
+
+logic killer__split_fields23 : natural
+
+logic killer__split_fields24 : us_rep
+
+logic killer__split_fields25 : integer
+
+logic killer__split_fields26 : bool
+
+logic killer__split_fields27 : us_private
+
+logic victim__split_fields12 : us_rep
+
+logic victim__split_fields13 : integer
+
+logic victim__split_fields14 : bool
+
+logic victim__split_fields15 : us_private
+
+axiom H : (((is_alive({ us_split_fields1 = { rec__people__person__name =
   killer__split_fields3; rec__people__person__dob = killer__split_fields4;
   rec__people__person__alive = killer__split_fields5; rec__ext__ =
   hide_ext__(killer__split_fields, killer__split_fields1,
@@ -1235,5 +1362,7 @@ goal WP_parameter_def :
   killer__split_fields2; rec__people__person__name1 = killer__split_fields3;
   rec__people__person__dob1 = killer__split_fields4;
   rec__people__person__alive1 = killer__split_fields5; rec__ext__1 =
-  killer__split_fields6 }; attr__tag1 = killer__attr__tag }) = true)) ->
-  in_range((to_rep(killer__split_fields2) + 1))))
+  killer__split_fields6 }; attr__tag1 = killer__attr__tag }) = true))
+
+ (* File "professionals.ads", line 65, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(killer__split_fields2) + 1))

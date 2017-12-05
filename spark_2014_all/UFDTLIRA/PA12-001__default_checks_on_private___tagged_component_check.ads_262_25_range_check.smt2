@@ -111,6 +111,7 @@
 (define-fun default_initial_assumption ((temp___expr_526 us_rep) (temp___skip_top_level_527 Bool)) Bool (= (attr__tag temp___expr_526) us_tag))
 (define-fun default_initial_assumption1 ((temp___expr_560 us_rep1) (temp___skip_top_level_561 Bool)) Bool (and (= (attr__tag1 temp___expr_560) us_tag1) (= (to_rep (rec__tagged_component_check__s__d5__h (us_split_fields3 temp___expr_560))) (hide 44))))
 (declare-const o Int)
+(declare-const us Int)
 (assert (and (= o (hide 44)) (in_range1 o)))
 (assert (not (in_range o)))
 (check-sat)

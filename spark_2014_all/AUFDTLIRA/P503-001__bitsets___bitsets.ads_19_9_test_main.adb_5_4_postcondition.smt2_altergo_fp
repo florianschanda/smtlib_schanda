@@ -293,31 +293,77 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : (int,bool) farray
+
+logic test_main__my_sets__add__result : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic res1 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+logic res2 : (int,bool) farray
+
+logic result2 : (int,bool) farray
+
+logic test_main__my_sets__add__result1 : (int,bool) farray
+
+logic test_main__my_sets__add__result2 : (int,bool) farray
+
+logic test_main__my_sets__add__result3 : (int,bool) farray
+
+logic res3 : (int,bool) farray
+
+logic test_main__my_sets__add__result4 : (int,bool) farray
+
+logic res4 : (int,bool) farray
+
+logic test_main__my_sets__add__result5 : (int,bool) farray
+
+logic result3 : (int,bool) farray
+
+axiom H : in_range1(e)
+
+axiom H1 : (result = res)
+
+axiom H2 : (res1 = s)
+
+axiom H3 : (result1 = res1)
+
+axiom H4 : (res2 = (res1[e <- of_int(1)]))
+
+axiom H5 :
+  (test_main__my_sets__add__result1 = test_main__my_sets__add__result2)
+
+axiom H6 :
+  (test_main__my_sets__add__result3 = test_main__my_sets__add__result1)
+
+axiom H7 : (result2 = test_main__my_sets__add__result)
+
+axiom H8 : (test_main__my_sets__add__result1 = res2)
+
+axiom H9 :
+  (test_main__my_sets__add__result4 = test_main__my_sets__add__result2)
+
+axiom H10 : (res3 = res2)
+
+axiom H11 :
+  (test_main__my_sets__add__result5 = test_main__my_sets__add__result3)
+
+axiom H12 : (res4 = res2)
+
+axiom H13 : (result3 = test_main__my_sets__add__result4)
+
+logic elt : int
+
+axiom H14 : (1 <= elt)
+
+axiom H15 : (elt <= 10)
+
+axiom H16 : (mem(test_main__my_sets__add__result4, elt) = true)
+
+axiom H17 : (not (elt = e))
+
  (* File "bitsets.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:(int,bool) farray.
-  forall test_main__my_sets__add__result:(int,bool) farray.
-  forall result:(int,bool) farray. forall res1:(int,bool) farray.
-  forall result1:(int,bool) farray. forall res2:(int,bool) farray.
-  forall result2:(int,bool) farray.
-  forall test_main__my_sets__add__result1:(int,bool) farray.
-  forall test_main__my_sets__add__result2:(int,bool) farray.
-  forall test_main__my_sets__add__result3:(int,bool) farray.
-  forall res3:(int,bool) farray.
-  forall test_main__my_sets__add__result4:(int,bool) farray.
-  forall res4:(int,bool) farray.
-  forall test_main__my_sets__add__result5:(int,bool) farray.
-  (forall result3:(int,bool) farray. ((in_range1(e) and
-  (((((result = res) and (res1 = s)) and (((result1 = res1) and
-  (res2 = (res1[e <- of_int(1)]))) and
-  (((test_main__my_sets__add__result1 = test_main__my_sets__add__result2) and
-  (test_main__my_sets__add__result3 = test_main__my_sets__add__result1)) and
-  ((result2 = test_main__my_sets__add__result) and
-  (test_main__my_sets__add__result1 = res2))))) and
-  (((test_main__my_sets__add__result4 = test_main__my_sets__add__result2) and
-  (res3 = res2)) and
-  ((test_main__my_sets__add__result5 = test_main__my_sets__add__result3) and
-  (res4 = res2)))) and (result3 = test_main__my_sets__add__result4))) ->
-  (forall elt:int. (((1 <= elt) and (elt <= 10)) ->
-  ((mem(test_main__my_sets__add__result4, elt) = true) -> ((not (elt = e)) ->
-  (mem(s, elt) = true))))))))
+goal WP_parameter_def : (mem(s, elt) = true)

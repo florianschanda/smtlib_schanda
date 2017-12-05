@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type duration
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -315,7 +315,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -380,7 +380,7 @@ logic x : duration
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom time_span_first__def_axiom :
-  (time_span_first = of_fixed((-9223372036854775808)))
+  (time_span_first = of_fixed((- 9223372036854775808)))
 
 axiom time_span_last__def_axiom :
   (time_span_last = of_fixed(9223372036854775807))
@@ -391,6 +391,11 @@ axiom time_span_unit__def_axiom : (time_span_unit = of_fixed(1))
 
 axiom x__def_axiom : (x = multiply(of_fixed(9223372036854775807), 1))
 
+logic o : duration
+
+logic fxp_div__x__assume : duration
+
+axiom H : (to_fixed(o) = 9223372036854775807)
+
  (* File "fxp_div.adb", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:duration. ((to_fixed(o) = 9223372036854775807) -> (0 <  1)))
+goal WP_parameter_def : (0 <  1)

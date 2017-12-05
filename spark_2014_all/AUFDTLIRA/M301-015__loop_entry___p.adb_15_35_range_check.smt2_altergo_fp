@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1337,31 +1337,340 @@ axiom def_axiom2 :
   (forall temp___229:int.
   ((temp___226(temp___228)[temp___229]) = of_rep(temp___228))))
 
- (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,map) farray. forall i3:int. forall result:(int,map) farray.
-  forall x1:(int,map) farray. forall result1:int. forall i31:int.
-  forall x2:(int,map) farray. forall i32:int. forall i21:int.
-  forall result2:int. forall i211:int. forall x3:(int,map) farray.
-  forall i212:int. (((result = x) and
-  (x1 = p__x__aggregate_def(temp___221(temp___226(0))))) ->
-  (((result1 = i3) and (i31 = 1)) -> (((1 <= i31) and (i31 <= 3)) ->
-  ((bool_eq6(x2, to_rep(first(mk((i32 + 1), 3))), to_rep(last(mk((i32 + 1),
-  3))), x1, to_rep(first2(mk1((i32 + 1), 3))), to_rep(last2(mk1((i32 + 1),
-  3)))) = true) ->
-  ((((forall temp___297:int. (((1 <= temp___297) and (temp___297 <= 3)) ->
-     ((i32 <= temp___297) -> ((x2[temp___297]) = (x1[temp___297]))))) and
-  ((1 <= 3) -> in_range2(i32))) and ((1 <= i32) and (i32 <= 3))) ->
-  (((i21 = result2) and (i211 = 1)) -> (((1 <= i211) and (i211 <= 3)) ->
-  ((bool_eq6(x3, to_rep(first4(mk2((i32 + 1), 3))),
+logic x : (int,map) farray
+
+logic i3 : int
+
+logic o : (int,map) farray
+
+logic temp___308 : (int,map) farray
+
+logic temp___3081 : t1
+
+logic temp___285 : (int,map) farray
+
+logic temp___280 : int
+
+logic temp___275 : (int,map) farray
+
+logic o1 : (int,map) farray
+
+logic temp___287 : (int,map) farray
+
+logic temp___2871 : t3
+
+logic temp___259 : int
+
+logic temp___264 : (int,map) farray
+
+logic temp___254 : (int,map) farray
+
+logic o2 : (int,map) farray
+
+logic temp___266 : (int,map) farray
+
+logic temp___2661 : t5
+
+logic temp___238 : int
+
+logic temp___233 : (int,map) farray
+
+logic temp___243 : (int,map) farray
+
+logic o3 : integer
+
+logic o4 : (int,integer) farray
+
+logic o5 : map
+
+logic o6 : (int,map) farray
+
+logic o7 : (int,map) farray
+
+logic temp___245 : (int,map) farray
+
+logic temp___2451 : t7
+
+logic o8 : integer
+
+logic o9 : (int,integer) farray
+
+logic o10 : map
+
+logic o11 : (int,map) farray
+
+logic result : (int,map) farray
+
+logic x1 : (int,map) farray
+
+logic result1 : int
+
+logic i31 : int
+
+logic x2 : (int,map) farray
+
+logic i32 : int
+
+logic i21 : int
+
+logic i22 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic i211 : int
+
+logic x3 : (int,map) farray
+
+logic i212 : int
+
+logic i221 : int
+
+logic i11 : int
+
+logic result3 : int
+
+logic i222 : int
+
+logic x4 : (int,map) farray
+
+logic i223 : int
+
+logic i12 : int
+
+logic result4 : int
+
+logic i13 : int
+
+logic result5 : (int,map) farray
+
+logic x5 : (int,map) farray
+
+logic x6 : (int,map) farray
+
+logic i14 : int
+
+logic result6 : int
+
+logic i15 : int
+
+logic result7 : (int,map) farray
+
+logic x7 : (int,map) farray
+
+logic x8 : (int,map) farray
+
+logic i16 : int
+
+logic x9 : (int,map) farray
+
+logic i17 : int
+
+logic x10 : (int,map) farray
+
+logic i18 : int
+
+logic x11 : (int,map) farray
+
+logic i19 : int
+
+logic x12 : (int,map) farray
+
+logic i110 : int
+
+logic x13 : (int,map) farray
+
+logic i111 : int
+
+logic result8 : int
+
+logic i224 : int
+
+logic x14 : (int,map) farray
+
+logic i225 : int
+
+logic i112 : int
+
+logic x15 : (int,map) farray
+
+logic i226 : int
+
+logic i113 : int
+
+logic x16 : (int,map) farray
+
+logic i227 : int
+
+logic i114 : int
+
+logic x17 : (int,map) farray
+
+logic i228 : int
+
+logic i115 : int
+
+logic x18 : (int,map) farray
+
+logic i229 : int
+
+logic i116 : int
+
+logic x19 : (int,map) farray
+
+logic i2210 : int
+
+logic i117 : int
+
+logic x20 : (int,map) farray
+
+logic i2211 : int
+
+logic i118 : int
+
+logic x21 : (int,map) farray
+
+logic i2212 : int
+
+logic i119 : int
+
+logic result9 : int
+
+logic i213 : int
+
+logic x22 : (int,map) farray
+
+logic i214 : int
+
+logic i2213 : int
+
+logic i120 : int
+
+logic x23 : (int,map) farray
+
+logic i215 : int
+
+logic i2214 : int
+
+logic i121 : int
+
+logic x24 : (int,map) farray
+
+logic i216 : int
+
+logic i2215 : int
+
+logic i122 : int
+
+logic x25 : (int,map) farray
+
+logic i217 : int
+
+logic i2216 : int
+
+logic i123 : int
+
+logic x26 : (int,map) farray
+
+logic i218 : int
+
+logic i2217 : int
+
+logic i124 : int
+
+logic x27 : (int,map) farray
+
+logic i219 : int
+
+logic i2218 : int
+
+logic i125 : int
+
+logic x28 : (int,map) farray
+
+logic i2110 : int
+
+logic i2219 : int
+
+logic i126 : int
+
+logic x29 : (int,map) farray
+
+logic i2111 : int
+
+logic i2220 : int
+
+logic i127 : int
+
+logic result10 : int
+
+logic i33 : int
+
+logic x30 : (int,map) farray
+
+logic i34 : int
+
+logic i2112 : int
+
+logic i2221 : int
+
+logic i128 : int
+
+logic x31 : (int,map) farray
+
+logic i35 : int
+
+logic i2113 : int
+
+logic i2222 : int
+
+logic i129 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = p__x__aggregate_def(temp___221(temp___226(0))))
+
+axiom H2 : (result1 = i3)
+
+axiom H3 : (i31 = 1)
+
+axiom H4 : (1 <= i31)
+
+axiom H5 : (i31 <= 3)
+
+axiom H6 : (bool_eq6(x2, to_rep(first(mk((i32 + 1), 3))),
+  to_rep(last(mk((i32 + 1), 3))), x1, to_rep(first2(mk1((i32 + 1), 3))),
+  to_rep(last2(mk1((i32 + 1), 3)))) = true)
+
+axiom H7 :
+  (((forall temp___297:int. (((1 <= temp___297) and (temp___297 <= 3)) ->
+    ((i32 <= temp___297) -> ((x2[temp___297]) = (x1[temp___297]))))) and
+  ((1 <= 3) -> in_range2(i32))) and ((1 <= i32) and (i32 <= 3)))
+
+axiom H8 : (i21 = result2)
+
+axiom H9 : (i211 = 1)
+
+axiom H10 : (1 <= i211)
+
+axiom H11 : (i211 <= 3)
+
+axiom H12 : (bool_eq6(x3, to_rep(first4(mk2((i32 + 1), 3))),
   to_rep(last4(mk2((i32 + 1), 3))), x2, to_rep(first6(mk3((i32 + 1), 3))),
-  to_rep(last6(mk3((i32 + 1), 3)))) = true) ->
-  ((((forall temp___276:int. (((1 <= temp___276) and (temp___276 <= 3)) ->
-     (((not (i32 = temp___276)) and ((x3[temp___276]) = (x2[temp___276]))) or
-     ((i32 = temp___276) and
-     (forall temp___277:int. forall temp___278:int. ((((1 <= temp___277) and
-     (temp___277 <= 3)) and ((1 <= temp___278) and (temp___278 <= 3))) ->
-     ((i212 <= temp___277) -> (get((x3[temp___276]), temp___277,
-     temp___278) = get((x2[temp___276]), temp___277, temp___278))))))))) and
-  ((1 <= 3) -> in_range2(i212))) and ((1 <= i212) and (i212 <= 3))) ->
-  (((i32 + 1) <= 3) -> (1 <= (i32 + 1)))))))))))))
+  to_rep(last6(mk3((i32 + 1), 3)))) = true)
+
+axiom H13 :
+  (((forall temp___276:int. (((1 <= temp___276) and (temp___276 <= 3)) ->
+    (((not (i32 = temp___276)) -> ((x3[temp___276]) = (x2[temp___276]))) and
+    ((i32 = temp___276) ->
+    (forall temp___277:int. forall temp___278:int. ((((1 <= temp___277) and
+    (temp___277 <= 3)) and ((1 <= temp___278) and (temp___278 <= 3))) ->
+    ((i212 <= temp___277) -> (get((x3[temp___276]), temp___277,
+    temp___278) = get((x2[temp___276]), temp___277, temp___278))))))))) and
+  ((1 <= 3) -> in_range2(i212))) and ((1 <= i212) and (i212 <= 3)))
+
+axiom H14 : ((i32 + 1) <= 3)
+
+ (* File "p.adb", line 1, characters 0-0 *)
+goal WP_parameter_def : (1 <= (i32 + 1))

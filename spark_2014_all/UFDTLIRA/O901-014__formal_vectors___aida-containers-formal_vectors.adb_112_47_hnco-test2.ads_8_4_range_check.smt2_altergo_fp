@@ -645,7 +645,7 @@ axiom length__post_axiom1 :
 
 type element_type
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -675,9 +675,20 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length1(container))))) ->
   in_range6(get(container, position)))))
 
+logic container__split_fields : capacity_range1
+
+logic container__split_fields1 : us_main_type
+
+logic us : int
+
+logic hnco__test2__v_type_owner__vector_type_owner__delete_last__container__fields : us_main_type
+
+axiom H :
+  (to_rep(container__split_discrs) = to_rep1(container__split_fields))
+
+axiom H1 : (to_rep(container__split_discrs) = r262s)
+
+axiom H2 : in_range(r262s)
+
  (* File "aida-containers-formal_vectors.ads", line 108, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:capacity_range1.
-  ((to_rep(container__split_discrs) = to_rep1(container__split_fields)) ->
-  (((to_rep(container__split_discrs) = r262s) and in_range(r262s)) ->
-  in_range1(r262s))))
+goal WP_parameter_def : in_range1(r262s)

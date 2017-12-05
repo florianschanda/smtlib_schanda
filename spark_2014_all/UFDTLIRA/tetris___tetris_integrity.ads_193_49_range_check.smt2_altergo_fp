@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type px_coord
 
-predicate in_range(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type py_coord
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq2 : int, int -> bool
 
@@ -485,9 +485,22 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range4(a)
+
+axiom H1 : (move_is_possible({ us_split_fields1 = {
+  rec__tetris_integrity__piece__s = p; rec__tetris_integrity__piece__d = p1;
+  rec__tetris_integrity__piece__x = p2; rec__tetris_integrity__piece__y = p3
+  } }, a) = true)
+
+axiom H2 : (a = 0)
+
  (* File "tetris_integrity.ads", line 65, characters 0-0 *)
-goal WP_parameter_def : (in_range4(a) -> ((move_is_possible({
-  us_split_fields1 = { rec__tetris_integrity__piece__s = p;
-  rec__tetris_integrity__piece__d = p1; rec__tetris_integrity__piece__x = p2;
-  rec__tetris_integrity__piece__y = p3 } }, a) = true) -> ((a = 0) ->
-  in_range((to_rep(p2) - 1)))))
+goal WP_parameter_def : in_range((to_rep(p2) - 1))

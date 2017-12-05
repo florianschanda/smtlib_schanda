@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const g Int)
 (declare-const x Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (assert (in_range g))

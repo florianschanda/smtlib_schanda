@@ -111,7 +111,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -218,12 +218,81 @@ axiom dyn_return__post_axiom :
   (forall x:int [dyn_return(x)]. (in_range(x) -> dynamic_property(1, last,
   dyn_return(x))))
 
+logic x : int
+
+logic y : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic us1 : int
+
+logic o3 : int
+
+logic test_dynamic_property__dyn_param__x : int
+
+logic us2 : int
+
+logic o4 : int
+
+logic us3 : int
+
+logic o5 : int
+
+logic test_dynamic_property__nested__dyn_param__x : int
+
+logic us4 : int
+
+logic o6 : int
+
+logic y1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic test_dynamic_property__dyn_param__x1 : int
+
+logic result2 : int
+
+logic y2 : int
+
+logic test_dynamic_property__nested__dyn_param__x1 : int
+
+logic result3 : int
+
+logic x4 : int
+
+axiom H : in_range(c)
+
+axiom H1 : ((us = c) and dynamic_property(1, last, c))
+
+axiom H2 : (o = c)
+
+axiom H3 : (result = x)
+
+axiom H4 : (x1 = o)
+
+axiom H5 : dynamic_property(1, last, x1)
+
+axiom H6 : dynamic_property1(0, last1, y)
+
+axiom H7 : ((o1 = dyn_return(30)) and dynamic_property(1, last, o1))
+
+axiom H8 : (result1 = x1)
+
+axiom H9 : (x2 = o1)
+
  (* File "test_dynamic_property.adb", line 34, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall us:int. forall o:int. forall o1:int.
-  forall result:int. forall x1:int. forall result1:int. forall x2:int.
-  (in_range(c) -> (((((us = c) and dynamic_property(1, last, c)) and
-  (o = c)) and ((result = x) and (x1 = o))) -> (dynamic_property(1, last,
-  x1) -> (dynamic_property1(0, last1, y) -> ((((o1 = dyn_return(30)) and
-  dynamic_property(1, last, o1)) and ((result1 = x1) and (x2 = o1))) ->
-  (x2 <= c)))))))
+goal WP_parameter_def : (x2 <= c)

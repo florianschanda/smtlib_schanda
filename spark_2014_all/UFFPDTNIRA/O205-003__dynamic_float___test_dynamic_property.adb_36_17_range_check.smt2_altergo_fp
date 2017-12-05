@@ -1178,7 +1178,21 @@ axiom c__def_axiom : (c = d)
 
 axiom last__def_axiom : (last = c)
 
+logic us : t
+
+logic us1 : t
+
+axiom H : tqtisFinite(d)
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (d = c)
+
+axiom H3 : tqtisFinite(x)
+
+axiom H4 : (not lt(c, x))
+
+axiom H5 : (not lt(x, fliteral))
+
  (* File "test_dynamic_property.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(d) -> (in_range2(c) -> ((d = c) ->
-  (tqtisFinite(x) -> ((not (lt(c, x) or lt(x, fliteral))) ->
-  dynamic_property(fliteral, last, x))))))
+goal WP_parameter_def : dynamic_property(fliteral, last, x)

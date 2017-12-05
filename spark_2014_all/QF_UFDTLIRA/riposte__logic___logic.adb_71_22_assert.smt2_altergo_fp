@@ -85,6 +85,9 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : true
+
+axiom H1 : (not ((a = true) and (b = true)))
+
  (* File "logic.adb", line 38, characters 0-0 *)
-goal WP_parameter_def : ((not ((a = true) and (b = true))) ->
-  (not (a = true)))
+goal WP_parameter_def : (not (a = true))

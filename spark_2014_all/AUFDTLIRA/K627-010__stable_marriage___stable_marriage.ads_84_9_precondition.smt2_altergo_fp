@@ -415,43 +415,88 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "stable_marriage.ads", line 80, characters 0-0 *)
-goal WP_parameter_def :
-  (forall inverted:(int,ranking) farray.
-  forall stable_marriage__is_preferred_2__result:bool.
-  forall o:(int,ranking) farray. forall temp___477:(int,ranking) farray.
-  forall o1:ranking. forall o2:int. forall result:(int,ranking) farray.
-  forall inverted1:(int,ranking) farray. forall result1:bool.
-  forall stable_marriage__is_preferred_2__result1:bool.
-  forall stable_marriage__is_preferred_2__result2:bool.
-  forall stable_marriage__is_preferred_2__result3:bool.
-  forall inverted2:(int,ranking) farray.
-  forall stable_marriage__is_preferred_2__result4:bool.
-  forall inverted3:(int,ranking) farray.
-  forall stable_marriage__is_preferred_2__result5:bool. (in_range1(g2_a) ->
-  (in_range1(g2_b) -> ((is_permutation_2(r2) = true) ->
-  ((((((o = invert_2(r2)) and
+logic inverted : (int,ranking) farray
+
+logic stable_marriage__is_preferred_2__result : bool
+
+logic o : (int,ranking) farray
+
+logic temp___476 : (int,ranking) farray
+
+logic temp___477 : (int,ranking) farray
+
+logic o1 : ranking
+
+logic o2 : int
+
+logic result : (int,ranking) farray
+
+logic inverted1 : (int,ranking) farray
+
+logic result1 : bool
+
+logic stable_marriage__is_preferred_2__result1 : bool
+
+logic stable_marriage__is_preferred_2__result2 : bool
+
+logic stable_marriage__is_preferred_2__result3 : bool
+
+logic inverted2 : (int,ranking) farray
+
+logic stable_marriage__is_preferred_2__result4 : bool
+
+logic inverted3 : (int,ranking) farray
+
+logic stable_marriage__is_preferred_2__result5 : bool
+
+axiom H : in_range1(g2_a)
+
+axiom H1 : in_range1(g2_b)
+
+axiom H2 : (is_permutation_2(r2) = true)
+
+axiom H3 : ((o = invert_2(r2)) and
   ((forall rank:int. (((1 <= rank) and (rank <= 64)) ->
    (to_rep((o[to_rep1((r2[rank]))])) = rank))) and
   (forall g2:int. (((1 <= g2) and (g2 <= 64)) ->
-  (to_rep1((r2[to_rep((o[g2]))])) = g2))))) and (({ map__content1 = result
-  } = { map__content1 = inverted }) and (inverted1 = o))) and
-  (((stable_marriage__is_preferred_2__result1 = stable_marriage__is_preferred_2__result2) and
-  (stable_marriage__is_preferred_2__result3 = stable_marriage__is_preferred_2__result1)) and
-  (({ bool__content = result1 } = { bool__content =
-  stable_marriage__is_preferred_2__result }) and
-  (((to_rep((inverted1[g2_a])) <= to_rep((inverted1[g2_b]))) and
-  (stable_marriage__is_preferred_2__result1 = true)) or
-  ((not (to_rep((inverted1[g2_a])) <= to_rep((inverted1[g2_b])))) and
-  (stable_marriage__is_preferred_2__result1 = false)))))) and ((({
-  bool__content = stable_marriage__is_preferred_2__result4 } = {
-  bool__content = stable_marriage__is_preferred_2__result2 }) and
-  (inverted1 = inverted2)) and
-  ((stable_marriage__is_preferred_2__result5 = stable_marriage__is_preferred_2__result3) and
-  (inverted3 = inverted1)))) -> (((((temp___477 = invert_2(r2)) and
+  (to_rep1((r2[to_rep((o[g2]))])) = g2)))))
+
+axiom H4 : (result = inverted)
+
+axiom H5 : (inverted1 = o)
+
+axiom H6 :
+  (stable_marriage__is_preferred_2__result1 = stable_marriage__is_preferred_2__result2)
+
+axiom H7 :
+  (stable_marriage__is_preferred_2__result3 = stable_marriage__is_preferred_2__result1)
+
+axiom H8 : (result1 = stable_marriage__is_preferred_2__result)
+
+axiom H9 : (((to_rep((inverted1[g2_a])) <= to_rep((inverted1[g2_b]))) ->
+  (stable_marriage__is_preferred_2__result1 = true)) and
+  ((not (to_rep((inverted1[g2_a])) <= to_rep((inverted1[g2_b])))) ->
+  (stable_marriage__is_preferred_2__result1 = false)))
+
+axiom H10 :
+  (stable_marriage__is_preferred_2__result4 = stable_marriage__is_preferred_2__result2)
+
+axiom H11 : (inverted1 = inverted2)
+
+axiom H12 :
+  (stable_marriage__is_preferred_2__result5 = stable_marriage__is_preferred_2__result3)
+
+axiom H13 : (inverted3 = inverted1)
+
+axiom H14 : ((temp___477 = invert_2(r2)) and
   ((forall rank:int. (((1 <= rank) and (rank <= 64)) ->
    (to_rep((temp___477[to_rep1((r2[rank]))])) = rank))) and
   (forall g2:int. (((1 <= g2) and (g2 <= 64)) ->
-  (to_rep1((r2[to_rep((temp___477[g2]))])) = g2))))) and
-  (o1 = (temp___477[g2_b]))) and (o2 = to_rep(o1))) ->
-  (is_permutation_2(r2) = true)))))))
+  (to_rep1((r2[to_rep((temp___477[g2]))])) = g2)))))
+
+axiom H15 : (o1 = (temp___477[g2_b]))
+
+axiom H16 : (o2 = to_rep(o1))
+
+ (* File "stable_marriage.ads", line 80, characters 0-0 *)
+goal WP_parameter_def : (is_permutation_2(r2) = true)

@@ -64,6 +64,7 @@
 (assert (forall ((x Int)) (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep (of_rep x))))))
 (define-fun default_initial_assumption ((temp___expr_172 us_rep) (temp___skip_top_level_173 Bool)) Bool (= (to_rep (rec__init_concurrent__wrong_initT__v (us_split_fields1 temp___expr_172))) (id 0)))
 (declare-const self__ us_rep)
+(declare-const us Int)
 (assert (not (< 0 0)))
 (check-sat)
 (exit)

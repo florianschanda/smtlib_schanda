@@ -96,6 +96,7 @@
 (declare-const tmp4 Int)
 (declare-const tmp5 Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const tmp11 Int)
 (assert (in_range x))

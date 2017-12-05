@@ -123,6 +123,7 @@
 (declare-const o5 integer)
 (declare-const o6 integer)
 (declare-const o7 (Array Int us_rep))
+(declare-const o8 Int)
 (declare-const result (Array Int us_rep))
 (declare-const ar1 (Array Int us_rep))
 (assert (in_range1 current))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -527,7 +527,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type int__
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -557,7 +557,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type file_descr
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1040,12 +1040,12 @@ logic attr__ATTRIBUTE_ADDRESS15 : int
 
 logic attr__ATTRIBUTE_ADDRESS16 : int
 
-logic temp___594 : int -> (int,character) farray
+logic temp___588 : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___596:int.
-  (forall temp___597:int.
-  ((temp___594(temp___596)[temp___597]) = of_rep(temp___596))))
+  (forall temp___590:int.
+  (forall temp___591:int.
+  ((temp___588(temp___590)[temp___591]) = of_rep(temp___590))))
 
 axiom fpeek__post_axiom :
   (forall file:file_descr. forall file1:bool. forall file2:bool.
@@ -1151,67 +1151,390 @@ axiom find_char_in_string__post_axiom :
   ch, n1)])) = ch))) and in_range2(find_char_in_string({ elts = s; rt = s1 },
   ch, n1))))))
 
- (* File "textio.adb", line 102, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_file:(int,character) farray. forall cur_position:int.
-  forall file__split_fields:file_descr. forall file__split_fields1:bool.
-  forall file__split_fields2:bool. forall file__split_fields3:count.
-  forall file__split_fields4:count. forall file__split_fields5:count.
-  forall file__split_fields6:bool. forall item:(int,character) farray.
-  forall last2:int. forall rest:int. forall buf:(int,character) farray.
-  forall p:int. forall success:bool. forall k:int.
-  forall textio__get_line__get_chunk__eof_at_start__assume:bool.
-  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:int. forall o5:bool. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall temp___600:int. forall o10:int. forall o11:character.
-  forall o12:int. forall o13:bool. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:int. forall o19:int.
-  forall o20:int. forall idx:int. forall o21:int. forall o22:int.
-  forall o23:int. forall o24:bool. forall o25:int. forall o26:int.
-  forall o27:int. forall o28:int. forall cur_position1:int.
-  forall item1:(int,character) farray. forall last3:int. forall rest1:int.
-  forall p1:int. forall success1:bool. forall k1:int.
-  forall result:(int,character) farray. forall buf1:(int,character) farray.
-  forall result1:int. forall rest2:int.
-  forall textio__memset__b:(int,character) farray.
-  forall result2:(int,character) farray. forall buf2:(int,character) farray.
-  forall cur_position2:int. forall success2:bool.
-  forall helpers__fgets__strng:(int,character) farray.
-  forall result3:(int,character) farray. forall buf3:(int,character) farray.
-  forall result4:bool. forall result5:int. forall rest3:int.
-  forall result6:int. forall p2:int. forall item2:(int,character) farray.
-  forall result7:int. forall last4:int. forall result8:int. forall rest4:int.
-  forall result9:int. forall k2:int. forall result10:bool.
-  forall result11:bool. forall result12:int. forall k3:int.
-  forall item3:(int,character) farray. forall result13:int. forall last5:int.
-  forall result14:int. forall rest5:int. forall item4:(int,character) farray.
-  forall last6:int. forall rest6:int. forall k4:int.
-  forall item5:(int,character) farray. forall last7:int. forall rest7:int.
-  forall k5:int. forall item6:(int,character) farray. forall last8:int.
-  forall rest8:int. forall k6:int. forall item7:(int,character) farray.
-  forall last9:int. forall rest9:int. forall k7:int.
-  forall item8:(int,character) farray. forall last10:int. forall rest10:int.
-  forall p3:int. forall k8:int. forall item9:(int,character) farray.
-  forall last11:int. forall rest11:int. forall p4:int. forall k9:int.
-  forall cur_position3:int. forall item10:(int,character) farray.
-  forall last12:int. forall rest12:int. forall buf4:(int,character) farray.
-  forall p5:int. forall success3:bool__ref. forall k10:int__ref.
-  forall cur_position4:int. forall item11:(int,character) farray.
-  forall last13:int. forall rest13:int. forall buf5:(int,character) farray.
-  forall p6:int. forall success4:bool. forall k11:int.
-  forall cur_position5:int__ref. forall item12:map__ref.
-  forall last14:int__ref. forall rest14:int__ref. forall buf6:map__ref.
-  forall p7:int__ref. forall success5:bool__ref. forall k12:int__ref.
-  forall cur_position6:int. forall item13:(int,character) farray.
-  forall last15:int. forall rest15:int. forall buf7:(int,character) farray.
-  forall p8:int. forall success6:bool. forall k13:int. forall result15:bool.
-  forall result16:bool. forall result17:bool. forall result18:bool.
-  forall result19:bool. forall result20:bool. forall result21:bool.
-  (dynamic_property(1, 2147483647, to_rep1(item__first),
-  to_rep1(item__last)) -> (in_range4(last2) -> (in_range2(cur_position) ->
-  (in_range3(eof_ch) -> ((mod(eof, 256) = eof_ch) -> (in_range5(eof) ->
-  (in_range2(n) -> (((0 <= 2147483647) -> in_range4(rest)) -> (((n <= 80) and
-  ((((to_rep1(item__first) - 1) <= last2) and
+logic the_file : (int,character) farray
+
+logic cur_position : int
+
+logic file__split_fields : file_descr
+
+logic file__split_fields1 : bool
+
+logic file__split_fields2 : bool
+
+logic file__split_fields3 : count
+
+logic file__split_fields4 : count
+
+logic file__split_fields5 : count
+
+logic file__split_fields6 : bool
+
+logic item : (int,character) farray
+
+logic last2 : int
+
+logic rest : int
+
+logic buf : (int,character) farray
+
+logic p : int
+
+logic success : bool
+
+logic k : int
+
+logic textio__get_line__get_chunk__eof_at_start__assume : bool
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___594 : int
+
+logic o13 : int
+
+logic o14 : character
+
+logic o15 : int
+
+logic o16 : bool
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic idx : int
+
+logic o23 : int
+
+logic idx1 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : character
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic idx2 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : bool
+
+logic o39 : int
+
+logic o40 : character
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic idx3 : int
+
+logic o46 : int
+
+logic o47 : character
+
+logic o48 : int
+
+logic idx4 : int
+
+logic o49 : int
+
+logic o50 : character
+
+logic o51 : int
+
+logic cur_position1 : int
+
+logic item1 : (int,character) farray
+
+logic last3 : int
+
+logic rest1 : int
+
+logic p1 : int
+
+logic success1 : bool
+
+logic k1 : int
+
+logic result : (int,character) farray
+
+logic buf1 : (int,character) farray
+
+logic result1 : int
+
+logic rest2 : int
+
+logic textio__memset__b : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic buf2 : (int,character) farray
+
+logic cur_position2 : int
+
+logic success2 : bool
+
+logic helpers__fgets__strng : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic buf3 : (int,character) farray
+
+logic result4 : bool
+
+logic result5 : int
+
+logic rest3 : int
+
+logic result6 : int
+
+logic p2 : int
+
+logic item2 : (int,character) farray
+
+logic result7 : int
+
+logic last4 : int
+
+logic result8 : int
+
+logic rest4 : int
+
+logic result9 : int
+
+logic k2 : int
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : int
+
+logic k3 : int
+
+logic item3 : (int,character) farray
+
+logic result14 : int
+
+logic last5 : int
+
+logic result15 : int
+
+logic rest5 : int
+
+logic item4 : (int,character) farray
+
+logic last6 : int
+
+logic rest6 : int
+
+logic k4 : int
+
+logic item5 : (int,character) farray
+
+logic last7 : int
+
+logic rest7 : int
+
+logic k5 : int
+
+logic item6 : (int,character) farray
+
+logic last8 : int
+
+logic rest8 : int
+
+logic k6 : int
+
+logic item7 : (int,character) farray
+
+logic last9 : int
+
+logic rest9 : int
+
+logic k7 : int
+
+logic item8 : (int,character) farray
+
+logic last10 : int
+
+logic rest10 : int
+
+logic p3 : int
+
+logic k8 : int
+
+logic item9 : (int,character) farray
+
+logic last11 : int
+
+logic rest11 : int
+
+logic p4 : int
+
+logic k9 : int
+
+logic cur_position3 : int
+
+logic item10 : (int,character) farray
+
+logic last12 : int
+
+logic rest12 : int
+
+logic buf4 : (int,character) farray
+
+logic p5 : int
+
+logic success3 : bool
+
+logic k10 : int
+
+logic cur_position4 : int
+
+logic item11 : (int,character) farray
+
+logic last13 : int
+
+logic rest13 : int
+
+logic buf5 : (int,character) farray
+
+logic p6 : int
+
+logic success4 : bool
+
+logic k11 : int
+
+logic cur_position5 : int
+
+logic item12 : (int,character) farray
+
+logic last14 : int
+
+logic rest14 : int
+
+logic buf6 : (int,character) farray
+
+logic p7 : int
+
+logic success5 : bool
+
+logic k12 : int
+
+logic cur_position6 : int
+
+logic item13 : (int,character) farray
+
+logic last15 : int
+
+logic rest15 : int
+
+logic buf7 : (int,character) farray
+
+logic p8 : int
+
+logic success6 : bool
+
+logic k13 : int
+
+logic result16 : bool
+
+logic result17 : bool
+
+logic result18 : bool
+
+logic result19 : bool
+
+logic result20 : bool
+
+logic result21 : bool
+
+logic result22 : bool
+
+logic result23 : bool
+
+logic result24 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(item__first),
+  to_rep1(item__last))
+
+axiom H1 : in_range4(last2)
+
+axiom H2 : in_range2(cur_position)
+
+axiom H3 : in_range3(eof_ch)
+
+axiom H4 : (mod(eof, 256) = eof_ch)
+
+axiom H5 : in_range5(eof)
+
+axiom H6 : in_range2(n)
+
+axiom H7 : ((0 <= 2147483647) -> in_range4(rest))
+
+axiom H8 : ((n <= 80) and ((((to_rep1(item__first) - 1) <= last2) and
   (last2 <= to_rep1(item__last))) and (((1 <  n) ->
   ((to_rep1(item__first) <= (last2 + 1)) and
   (((last2 + n) - 1) <= to_rep1(item__last)))) and (((end_of_file({
@@ -1223,7 +1546,9 @@ goal WP_parameter_def :
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
   cur_position, the_file) = true) -> (to_rep1(item__first) <= last2)) and
-  (cur_position <= 10000))))) -> (((((0 <= 2147483647) -> in_range4(p)) and
+  (cur_position <= 10000)))))
+
+axiom H9 : ((((0 <= 2147483647) -> in_range4(p)) and
   ((((textio__get_line__get_chunk__eof_at_start__assume = end_of_file({
   us_split_fields1 = { rec__textio__file_type__descr = file__split_fields;
   rec__textio__file_type__before_lm = file__split_fields1;
@@ -1248,230 +1573,259 @@ goal WP_parameter_def :
   (in_range2(cur_position_at_start) and (((item = item_at_start) and
   (mk(to_rep1(item__first), to_rep1(item__last)) = item_at_start1)) and
   (dynamic_property(1, 2147483647, to_rep1(first(item_at_start1)),
-  to_rep1(last(item_at_start1))) and ((({ map__content = result } = {
-  map__content = buf }) and (buf1 = temp___594(32))) and (((((k10 = {
-  int__content = k }) and ((success3 = { bool__content = success }) and (({
-  int__content = p5 } = { int__content = p }) and ((buf1 = buf4) and
-  ((rest2 = rest12) and (({ int__content = last12 } = { int__content = last2
-  }) and (({ map__content = item10 } = { map__content = item }) and ({
-  int__content = cur_position3 } = { int__content = cur_position
-  })))))))) and ((k11 = k1) and ((success4 = success1) and ((p6 = p1) and
-  ((buf5 = buf1) and ((rest13 = rest2) and ((last13 = last3) and
-  ((item11 = item1) and (cur_position4 = cur_position1))))))))) and
-  ((n = 1) and (({ int__content = result1 } = { int__content = rest }) and
-  (rest2 = n)))) or (((not (n = 1)) and ((rest2 = rest) and
-  (rest2 = rest1))) and ((((k10 = { int__content = k8 }) and ((success3 = {
-  bool__content = success2 }) and (({ int__content = p5 } = { int__content =
-  p3 }) and ((buf3 = buf4) and (({ int__content = rest12 } = { int__content =
-  rest10 }) and (({ int__content = last12 } = { int__content = last10 }) and
-  (({ map__content = item10 } = { map__content = item8 }) and
-  (cur_position2 = cur_position3)))))))) and ((k11 = k9) and
+  to_rep1(last(item_at_start1))) and (((result = buf) and
+  (buf1 = temp___588(32))) and (((((k10 = k) and ((success3 = success) and
+  ((p5 = p) and ((buf4 = buf1) and ((rest12 = rest2) and
+  ((last12 = last2) and ((item10 = item) and
+  (cur_position3 = cur_position)))))))) and ((k11 = k1) and
+  ((success4 = success1) and ((p6 = p1) and ((buf5 = buf1) and
+  ((rest13 = rest2) and ((last13 = last3) and ((item11 = item1) and
+  (cur_position4 = cur_position1))))))))) and ((n = 1) and
+  ((result1 = rest) and (rest2 = n)))) or (((not (n = 1)) and
+  ((rest2 = rest) and (rest2 = rest1))) and ((((k10 = k8) and
+  ((success3 = success2) and ((p5 = p3) and ((buf4 = buf3) and
+  ((rest12 = rest10) and ((last12 = last10) and ((item10 = item8) and
+  (cur_position3 = cur_position2)))))))) and ((k11 = k9) and
   ((success4 = success2) and ((p6 = p4) and ((buf5 = buf3) and
   ((rest13 = rest11) and ((last13 = last11) and ((item11 = item9) and
   (cur_position4 = cur_position2))))))))) and ((((to_rep1(o1) = 80) and
   ((to_rep1(o) = 1) and
-  (forall idx1:int. (((to_rep1(o) <= idx1) and (idx1 <= to_rep1(o1))) ->
-  (((idx1 <  (to_rep1(o) + n)) and
-  (to_rep((textio__memset__b[idx1])) = 10)) or
-  ((not (idx1 <  (to_rep1(o) + n))) and
-  (to_rep((textio__memset__b[idx1])) = to_rep((buf1[idx1]))))))))) and
+  (forall idx5:int. (((to_rep1(o) <= idx5) and (idx5 <= to_rep1(o1))) ->
+  (((idx5 <  (to_rep1(o) + n)) ->
+  (to_rep((textio__memset__b[idx5])) = 10)) and
+  ((not (idx5 <  (to_rep1(o) + n))) ->
+  (to_rep((textio__memset__b[idx5])) = to_rep((buf1[idx5]))))))))) and
   ((buf1 = result2) and (buf2 = slide(textio__memset__b, to_rep1(first(mk(1,
   80))), 1)))) and ((to_rep((buf2[n])) = 10) and ((((to_rep1(o3) = 80) and
-  ((to_rep1(o2) = 1) and ((((success2 = true) and
+  ((to_rep1(o2) = 1) and ((((success2 = true) ->
   (((ferror(to_rep2(file__split_fields)) = 0) and
   (not (fpeek(to_rep2(file__split_fields), cur_position,
   the_file) = eof))) and ((((no_char_in_slice(10, cur_position,
   ((cur_position + n) - 2), the_file) = true) and (no_char_in_slice(eof_ch,
-  cur_position, ((cur_position + n) - 2), the_file) = true)) and
+  cur_position, ((cur_position + n) - 2), the_file) = true)) ->
   ((((cur_position2 = ((cur_position + n) - 1)) and
-  (forall idx1:int. (((1 <= idx1) and (idx1 <= (n - 1))) ->
-  (to_rep((helpers__fgets__strng[idx1])) = to_rep((the_file[((cur_position + idx1) - 1)])))))) and
+  (forall idx5:int. (((1 <= idx5) and (idx5 <= (n - 1))) ->
+  (to_rep((helpers__fgets__strng[idx5])) = to_rep((the_file[((cur_position + idx5) - 1)])))))) and
   (to_rep((helpers__fgets__strng[n])) = 0)) and
-  (forall idx1:int. ((((n + 1) <= idx1) and (idx1 <= to_rep1(o3))) ->
-  (to_rep((helpers__fgets__strng[idx1])) = to_rep((buf2[idx1]))))))) or
+  (forall idx5:int. ((((n + 1) <= idx5) and (idx5 <= to_rep1(o3))) ->
+  (to_rep((helpers__fgets__strng[idx5])) = to_rep((buf2[idx5]))))))) and
   ((not ((no_char_in_slice(10, cur_position, ((cur_position + n) - 2),
   the_file) = true) and (no_char_in_slice(eof_ch, cur_position,
-  ((cur_position + n) - 2), the_file) = true))) and ((((has_char_in_slice(10,
+  ((cur_position + n) - 2), the_file) = true))) -> ((((has_char_in_slice(10,
   cur_position, ((cur_position + n) - 2), the_file) = true) and
   (no_char_in_slice(eof_ch, cur_position, ((cur_position + n) - 2),
-  the_file) = true)) and (((((cur_position2 = find_char_in_slice(10,
+  the_file) = true)) -> (((((cur_position2 = find_char_in_slice(10,
   cur_position, ((cur_position + n) - 2), the_file)) and
-  (forall idx1:int. (((cur_position <= idx1) and
-  (idx1 <= (find_char_in_slice(10, cur_position, ((cur_position + n) - 2),
+  (forall idx5:int. (((cur_position <= idx5) and
+  (idx5 <= (find_char_in_slice(10, cur_position, ((cur_position + n) - 2),
   the_file) - 1))) ->
-  (to_rep((helpers__fgets__strng[((idx1 - cur_position) + 1)])) = to_rep((the_file[idx1])))))) and
+  (to_rep((helpers__fgets__strng[((idx5 - cur_position) + 1)])) = to_rep((the_file[idx5])))))) and
   (to_rep((helpers__fgets__strng[((find_char_in_slice(10, cur_position,
   ((cur_position + n) - 2), the_file) - cur_position) + 1)])) = 10)) and
   (to_rep((helpers__fgets__strng[((find_char_in_slice(10, cur_position,
   ((cur_position + n) - 2), the_file) - cur_position) + 2)])) = 0)) and
-  (forall idx1:int. (((((find_char_in_slice(10, cur_position,
-  ((cur_position + n) - 2), the_file) - cur_position) + 3) <= idx1) and
-  (idx1 <= to_rep1(o3))) ->
-  (to_rep((helpers__fgets__strng[idx1])) = to_rep((buf2[idx1]))))))) or
+  (forall idx5:int. (((((find_char_in_slice(10, cur_position,
+  ((cur_position + n) - 2), the_file) - cur_position) + 3) <= idx5) and
+  (idx5 <= to_rep1(o3))) ->
+  (to_rep((helpers__fgets__strng[idx5])) = to_rep((buf2[idx5]))))))) and
   ((not ((has_char_in_slice(10, cur_position, ((cur_position + n) - 2),
   the_file) = true) and (no_char_in_slice(eof_ch, cur_position,
-  ((cur_position + n) - 2), the_file) = true))) and (((no_char_in_slice(10,
+  ((cur_position + n) - 2), the_file) = true))) -> (((no_char_in_slice(10,
   cur_position, ((cur_position + n) - 2), the_file) = true) and
   (has_char_in_slice(eof_ch, cur_position, ((cur_position + n) - 2),
   the_file) = true)) and (((((cur_position2 = find_char_in_slice(eof_ch,
   cur_position, ((cur_position + n) - 2), the_file)) and
-  (forall idx1:int. (((cur_position <= idx1) and
-  (idx1 <= (find_char_in_slice(eof_ch, cur_position,
+  (forall idx5:int. (((cur_position <= idx5) and
+  (idx5 <= (find_char_in_slice(eof_ch, cur_position,
   ((cur_position + n) - 2), the_file) - 1))) ->
-  (to_rep((helpers__fgets__strng[((idx1 - cur_position) + 1)])) = to_rep((the_file[idx1])))))) and
+  (to_rep((helpers__fgets__strng[((idx5 - cur_position) + 1)])) = to_rep((the_file[idx5])))))) and
   (to_rep((helpers__fgets__strng[((find_char_in_slice(eof_ch, cur_position,
   ((cur_position + n) - 2), the_file) - cur_position) + 1)])) = 0)) and
-  (forall idx1:int. (((((find_char_in_slice(eof_ch, cur_position,
-  ((cur_position + n) - 2), the_file) - cur_position) + 2) <= idx1) and
-  (idx1 <= to_rep1(o3))) ->
-  (to_rep((helpers__fgets__strng[idx1])) = to_rep((buf2[idx1])))))) and
+  (forall idx5:int. (((((find_char_in_slice(eof_ch, cur_position,
+  ((cur_position + n) - 2), the_file) - cur_position) + 2) <= idx5) and
+  (idx5 <= to_rep1(o3))) ->
+  (to_rep((helpers__fgets__strng[idx5])) = to_rep((buf2[idx5])))))) and
   (no_char_in_string({ elts = helpers__fgets__strng; rt = mk(to_rep1(o2),
   to_rep1(o3)) }, 10, ((find_char_in_slice(eof_ch, cur_position,
   ((cur_position + n) - 2),
-  the_file) - cur_position) + 1)) = true))))))))) or
-  ((not (success2 = true)) and
+  the_file) - cur_position) + 1)) = true))))))))) and
+  ((not (success2 = true)) ->
   ((not (ferror(to_rep2(file__split_fields)) = 0)) or
   ((fpeek(to_rep2(file__split_fields), cur_position, the_file) = eof) and
   (cur_position2 = cur_position))))) and in_range2(cur_position2)))) and
   ((buf2 = result3) and (buf3 = slide(helpers__fgets__strng,
-  to_rep1(first(mk(1, 80))), 1)))) and ((((({ int__content = k8 } = {
-  int__content = k }) and (({ int__content = p3 } = { int__content = p }) and
-  ((rest3 = rest10) and (({ int__content = last10 } = { int__content = last2
-  }) and ({ map__content = item8 } = { map__content = item }))))) and
+  to_rep1(first(mk(1, 80))), 1)))) and (((((k8 = k) and ((p3 = p) and
+  ((rest10 = rest3) and ((last10 = last2) and (item8 = item))))) and
   ((k9 = k1) and ((p4 = p1) and ((rest11 = rest3) and ((last11 = last3) and
   (item9 = item1)))))) and ((not (success2 = true)) and
   (((((o4 = ferror(to_rep2(file__split_fields))) and in_range5(o4)) and
-  (((o4 = 0) and (o5 = true)) or ((not (o4 = 0)) and (o5 = false)))) and
-  (((not (o5 = true)) and (result4 = true)) or ((o5 = true) and
+  (((o4 = 0) -> (o5 = true)) and ((not (o4 = 0)) -> (o5 = false)))) and
+  (((not (o5 = true)) -> (result4 = true)) and ((o5 = true) ->
   (result4 = false)))) and ((not (result4 = true)) and
   ((to_rep1(item__first) <= last2) and ((rest2 = result5) and
-  (rest3 = 0))))))) or (((success2 = true) and (rest3 = rest2)) and (((({
-  int__content = k8 } = { int__content = k6 }) and ((p2 = p3) and (({
-  int__content = rest10 } = { int__content = rest8 }) and (({ int__content =
-  last10 } = { int__content = last8 }) and ({ map__content = item8 } = {
-  map__content = item6 }))))) and ((k9 = k7) and ((p4 = p2) and
-  ((rest11 = rest9) and ((last11 = last9) and (item9 = item7)))))) and
-  ((((o6 = memchr({ elts = buf3; rt = mk(1, 80) }, 10, n)) and
-  (in_range4(o6) and (((has_char_in_string({ elts = buf3; rt = mk(1, 80) },
-  10, n) = true) and (o6 = find_char_in_string({ elts = buf3; rt = mk(1, 80)
-  }, 10, n))) or ((not (has_char_in_string({ elts = buf3; rt = mk(1, 80) },
-  10, n) = true)) and (o6 = 0))))) and (({ int__content = result6 } = {
-  int__content = p }) and (p2 = o6))) and (((({ int__content = k6 } = {
-  int__content = k4 }) and (({ int__content = rest8 } = { int__content =
-  rest6 }) and (({ int__content = last8 } = { int__content = last6 }) and ({
-  map__content = item6 } = { map__content = item4 })))) and ((k7 = k5) and
-  ((rest9 = rest7) and ((last9 = last7) and (item7 = item5))))) and
-  (((p2 = 0) and (((({ int__content = k4 } = { int__content = k }) and
-  ((rest4 = rest6) and ((last4 = last6) and (item2 = item4)))) and
+  (rest3 = 0))))))) or ((((not (success2 = true)) ->
+  (((((o4 = ferror(to_rep2(file__split_fields))) and in_range5(o4)) and
+  (((o4 = 0) -> (o5 = true)) and ((not (o4 = 0)) -> (o5 = false)))) and
+  (((not (o5 = true)) -> (result4 = true)) and ((o5 = true) ->
+  (result4 = false)))) and ((not (result4 = true)) and
+  (result4 = true)))) and ((success2 = true) -> (rest3 = rest2))) and
+  ((((k8 = k6) and ((p3 = p2) and ((rest10 = rest8) and ((last10 = last8) and
+  (item8 = item6))))) and ((k9 = k7) and ((p4 = p2) and ((rest11 = rest9) and
+  ((last11 = last9) and (item9 = item7)))))) and ((((o6 = memchr({ elts =
+  buf3; rt = mk(1, 80) }, 10, n)) and (in_range4(o6) and
+  (((has_char_in_string({ elts = buf3; rt = mk(1, 80) }, 10, n) = true) ->
+  (o6 = find_char_in_string({ elts = buf3; rt = mk(1, 80) }, 10, n))) and
+  ((not (has_char_in_string({ elts = buf3; rt = mk(1, 80) }, 10,
+  n) = true)) -> (o6 = 0))))) and ((result6 = p) and (p2 = o6))) and
+  ((((k6 = k4) and ((rest8 = rest6) and ((last8 = last6) and
+  (item6 = item4)))) and ((k7 = k5) and ((rest9 = rest7) and
+  ((last9 = last7) and (item7 = item5))))) and (((p2 = 0) -> ((((k4 = k) and
+  ((rest6 = rest4) and ((last6 = last4) and (item4 = item2)))) and
   ((k5 = k1) and ((rest7 = rest4) and ((last7 = last4) and
   (item5 = item2))))) and ((((o7 = (last2 + 1)) and
-  in_range1((last2 + 1))) and (((bool_eq1((n - 1), 0) = true) and
+  in_range1((last2 + 1))) and (((bool_eq1((n - 1), 0) = true) ->
   (bool_eq5(item2, to_rep1(item__first), to_rep1(item__last), item,
-  to_rep1(item__first), to_rep1(item__last)) = true)) or
-  ((not (bool_eq1((n - 1), 0) = true)) and ((bool_ne((n - 1), 0) = true) ->
-  (forall idx1:int. (((to_rep1(item__first) <= idx1) and
-  (idx1 <= to_rep1(item__last))) -> ((((o7 <= idx1) and
-  (idx1 <= ((o7 + (n - 1)) - 1))) and
-  (to_rep((item2[idx1])) = to_rep((buf3[((idx1 - o7) + 1)])))) or
-  ((not ((o7 <= idx1) and (idx1 <= ((o7 + (n - 1)) - 1)))) and
-  (to_rep((item2[idx1])) = to_rep((item[idx1]))))))))))) and
-  ((((o8 = ((last2 - 1) + n)) and in_range1(((last2 - 1) + n))) and (({
-  int__content = result7 } = { int__content = last2 }) and (last4 = o8))) and
-  ((rest3 = result8) and (rest4 = 1)))))) or ((not (p2 = 0)) and
-  ((((k3 = k4) and ((rest5 = rest6) and ((last5 = last6) and
-  (item3 = item4)))) and ((k5 = k3) and ((rest7 = rest5) and
-  ((last7 = last5) and (item5 = item3))))) and (((((o9 = (p2 - 1)) and
-  in_range4((p2 - 1))) and (({ int__content = result9 } = { int__content = k
-  }) and (k2 = o9))) and (in_range4(k2) and ((((no_char_in_slice(eof_ch,
-  cur_position_at_start, ((cur_position_at_start + n) - 2),
-  the_file) = true) and (k2 = (find_char_in_slice(10, cur_position_at_start,
-  ((cur_position_at_start + n) - 2), the_file) - cur_position_at_start))) or
-  (not (no_char_in_slice(eof_ch, cur_position_at_start,
-  ((cur_position_at_start + n) - 2), the_file) = true))) and
-  ((((((o14 = (k2 + 2)) and in_range1((k2 + 2))) and (((n <  o14) and
-  (result11 = true)) or ((not (n <  o14)) and (result11 = false)))) and
-  (((result11 = true) and (result10 = true)) or ((not (result11 = true)) and
-  (((((((temp___600 = (k2 + 2)) and in_range1((k2 + 2))) and
-  (((1 <= temp___600) and (temp___600 <= 80)) and (o10 = temp___600))) and
-  (o11 = (buf3[o10]))) and (o12 = to_rep(o11))) and (((o12 = 0) and
-  (o13 = true)) or ((not (o12 = 0)) and (o13 = false)))) and
-  (((not (o13 = true)) and (result10 = true)) or ((o13 = true) and
-  (result10 = false))))))) and (((result10 = true) and
-  ((to_rep((buf3[k2])) = 0) and (((o15 = (k2 - 1)) and
-  in_range4((k2 - 1))) and ((k2 = result12) and (k3 = o15))))) or
-  ((not (result10 = true)) and (k3 = k2)))) and ((((o16 = (last2 + 1)) and
-  in_range1((last2 + 1))) and (((bool_eq1(k3, 0) = true) and (bool_eq5(item3,
+  to_rep1(item__first), to_rep1(item__last)) = true)) and
+  ((not (bool_eq1((n - 1), 0) = true)) -> ((bool_ne((n - 1), 0) = true) ->
+  (forall idx5:int. (((to_rep1(item__first) <= idx5) and
+  (idx5 <= to_rep1(item__last))) -> ((((o7 <= idx5) and
+  (idx5 <= ((o7 + (n - 1)) - 1))) ->
+  (to_rep((item2[idx5])) = to_rep((buf3[((idx5 - o7) + 1)])))) and
+  ((not ((o7 <= idx5) and (idx5 <= ((o7 + (n - 1)) - 1)))) ->
+  (to_rep((item2[idx5])) = to_rep((item[idx5]))))))))))) and
+  ((((o8 = ((last2 - 1) + n)) and in_range1(((last2 - 1) + n))) and
+  ((result7 = last2) and (last4 = o8))) and ((rest3 = result8) and
+  (rest4 = 1)))))) and ((not (p2 = 0)) -> ((((k4 = k3) and
+  ((rest6 = rest5) and ((last6 = last5) and (item4 = item3)))) and
+  ((k5 = k3) and ((rest7 = rest5) and ((last7 = last5) and
+  (item5 = item3))))) and (((((o9 = (p2 - 1)) and in_range4((p2 - 1))) and
+  ((result9 = k) and (k2 = o9))) and (in_range4(k2) and
+  (((no_char_in_slice(eof_ch, cur_position_at_start,
+  ((cur_position_at_start + n) - 2), the_file) = true) ->
+  (k2 = (find_char_in_slice(10, cur_position_at_start,
+  ((cur_position_at_start + n) - 2), the_file) - cur_position_at_start))) and
+  ((((((o17 = (k2 + 2)) and in_range1((k2 + 2))) and (((n <  o17) ->
+  (result12 = true)) and ((not (n <  o17)) -> (result12 = false)))) and
+  (((result12 = true) -> (result11 = true)) and ((not (result12 = true)) ->
+  (((((((temp___594 = (k2 + 2)) and in_range1((k2 + 2))) and
+  (((1 <= temp___594) and (temp___594 <= 80)) and (o13 = temp___594))) and
+  (o14 = (buf3[o13]))) and (o15 = to_rep(o14))) and (((o15 = 0) ->
+  (o16 = true)) and ((not (o15 = 0)) -> (o16 = false)))) and
+  (((not (o16 = true)) -> (result11 = true)) and ((o16 = true) ->
+  (result11 = false))))))) and (((result11 = true) ->
+  ((to_rep((buf3[k2])) = 0) and (((o18 = (k2 - 1)) and
+  in_range4((k2 - 1))) and ((k2 = result13) and (k3 = o18))))) and
+  ((not (result11 = true)) -> (k3 = k2)))) and ((((o19 = (last2 + 1)) and
+  in_range1((last2 + 1))) and (((bool_eq1(k3, 0) = true) -> (bool_eq5(item3,
   to_rep1(item__first), to_rep1(item__last), item, to_rep1(item__first),
-  to_rep1(item__last)) = true)) or ((not (bool_eq1(k3, 0) = true)) and
+  to_rep1(item__last)) = true)) and ((not (bool_eq1(k3, 0) = true)) ->
   ((bool_ne(k3, 0) = true) ->
-  (forall idx1:int. (((to_rep1(item__first) <= idx1) and
-  (idx1 <= to_rep1(item__last))) -> ((((o16 <= idx1) and
-  (idx1 <= ((o16 + k3) - 1))) and
-  (to_rep((item3[idx1])) = to_rep((buf3[((idx1 - o16) + 1)])))) or
-  ((not ((o16 <= idx1) and (idx1 <= ((o16 + k3) - 1)))) and
-  (to_rep((item3[idx1])) = to_rep((item[idx1]))))))))))) and
-  (((o17 = (last2 + k3)) and in_range1((last2 + k3))) and
-  ((result13 = last2) and (last5 = o17)))))))) and ((result14 = rest3) and
+  (forall idx5:int. (((to_rep1(item__first) <= idx5) and
+  (idx5 <= to_rep1(item__last))) -> ((((o19 <= idx5) and
+  (idx5 <= ((o19 + k3) - 1))) ->
+  (to_rep((item3[idx5])) = to_rep((buf3[((idx5 - o19) + 1)])))) and
+  ((not ((o19 <= idx5) and (idx5 <= ((o19 + k3) - 1)))) ->
+  (to_rep((item3[idx5])) = to_rep((item[idx5]))))))))))) and
+  (((o20 = (last2 + k3)) and in_range1((last2 + k3))) and
+  ((result14 = last2) and (last5 = o20)))))))) and ((result15 = rest3) and
   (rest5 = 0)))))))))))))))))))))))))) and (((k12 = k10) and
-  ((success5 = success3) and ((p7 = { int__content = p5 }) and ((buf6 = {
-  map__content = buf4 }) and ((rest14 = { int__content = rest12 }) and
-  ((last14 = { int__content = last12 }) and ((item12 = { map__content =
-  item10 }) and (cur_position5 = { int__content = cur_position3 })))))))) and
-  ((k13 = k11) and ((success6 = success4) and ((p8 = p6) and
-  ((buf7 = buf5) and ((rest15 = rest13) and ((last15 = last13) and
-  ((item13 = item11) and (cur_position6 = cur_position4)))))))))) ->
-  (((result15 = true) <->
-  (forall idx1:int. (((to_rep1(item__first) <= idx1) and (idx1 <= last2)) ->
-  (to_rep(((item12).map__content[idx1])) = to_rep((item[idx1])))))) ->
-  ((result15 = true) ->
-  ((((cur_position5).int__content - cur_position) = ((last14).int__content - last2)) ->
-  (((result16 = true) <->
-  (forall idx1:int. ((((last2 + 1) <= idx1) and
-  (idx1 <= (last14).int__content)) ->
-  (to_rep(((item12).map__content[idx1])) = to_rep((the_file[(((idx1 - last2) - 1) + cur_position)])))))) ->
-  ((result16 = true) -> ((not (n = 1)) -> ((not (end_of_file({
-  us_split_fields1 = { rec__textio__file_type__descr = file__split_fields;
+  ((success5 = success3) and ((p7 = p5) and ((buf6 = buf4) and
+  ((rest14 = rest12) and ((last14 = last12) and ((item12 = item10) and
+  (cur_position5 = cur_position3)))))))) and ((k13 = k11) and
+  ((success6 = success4) and ((p8 = p6) and ((buf7 = buf5) and
+  ((rest15 = rest13) and ((last15 = last13) and ((item13 = item11) and
+  (cur_position6 = cur_position4))))))))))
+
+axiom H10 : ((result16 = true) <->
+  (forall idx5:int. (((to_rep1(item__first) <= idx5) and (idx5 <= last2)) ->
+  (to_rep((item12[idx5])) = to_rep((item[idx5]))))))
+
+axiom H11 : (result16 = true)
+
+axiom H12 : ((cur_position5 - cur_position) = (last14 - last2))
+
+axiom H13 : ((result17 = true) <->
+  (forall idx5:int. ((((last2 + 1) <= idx5) and (idx5 <= last14)) ->
+  (to_rep((item12[idx5])) = to_rep((the_file[(((idx5 - last2) - 1) + cur_position)]))))))
+
+axiom H14 : (result17 = true)
+
+axiom H15 : (not (n = 1))
+
+axiom H16 : (not (end_of_file({ us_split_fields1 = {
+  rec__textio__file_type__descr = file__split_fields;
   rec__textio__file_type__before_lm = file__split_fields1;
   rec__textio__file_type__before_lm_pm = file__split_fields2;
   rec__textio__file_type__col = file__split_fields3;
   rec__textio__file_type__line = file__split_fields4;
   rec__textio__file_type__page = file__split_fields5;
   rec__textio__file_type__is_regular_file = file__split_fields6 } },
-  cur_position, the_file) = true)) ->
-  (((((o19 = ((cur_position + n) - 2)) and
-  in_range2(((cur_position + n) - 2))) and ((result18 = no_char_in_slice(10,
-  cur_position, o19, the_file)) and ((result18 = true) <->
-  (forall idx1:int. (((cur_position <= idx1) and (idx1 <= o19)) ->
-  (not (to_rep((the_file[idx1])) = 10))))))) and (((result18 = true) and
-  (((o18 = ((cur_position + n) - 2)) and
-  in_range2(((cur_position + n) - 2))) and
-  ((result17 = no_char_in_slice(eof_ch, cur_position, o18, the_file)) and
-  ((result17 = true) <->
-  (forall idx1:int. (((cur_position <= idx1) and (idx1 <= o18)) ->
-  (not (to_rep((the_file[idx1])) = eof_ch)))))))) or
-  ((not (result18 = true)) and (result17 = false)))) ->
-  ((not (result17 = true)) -> ((((o20 = ((cur_position + n) - 2)) and
-  in_range2(((cur_position + n) - 2))) and
-  ((result19 = no_char_in_slice(eof_ch, cur_position, o20, the_file)) and
-  ((result19 = true) <->
-  (forall idx1:int. (((cur_position <= idx1) and (idx1 <= o20)) ->
-  (not (to_rep((the_file[idx1])) = eof_ch))))))) ->
-  ((not (result19 = true)) -> (((((((o25 = ((cur_position + n) - 2)) and
-  in_range2(((cur_position + n) - 2))) and ((o26 = find_char_in_slice(eof_ch,
-  cur_position, o25, the_file)) and (in_range2(o26) and
-  (((cur_position <= o26) and (o26 <= o25)) and ((no_char_in_slice(eof_ch,
-  cur_position, (o26 - 1), the_file) = true) and
-  (to_rep((the_file[o26])) = eof_ch)))))) and (o27 = (last2 + o26))) and
-  (o28 = (o27 - cur_position))) and ((((last14).int__content = o28) and
-  (result20 = true)) or ((not ((last14).int__content = o28)) and
-  (result20 = false)))) -> ((result20 = true) ->
-  (((((((o21 = ((cur_position + n) - 2)) and
-  in_range2(((cur_position + n) - 2))) and ((o22 = find_char_in_slice(eof_ch,
-  cur_position, o21, the_file)) and (in_range2(o22) and
-  (((cur_position <= o22) and (o22 <= o21)) and ((no_char_in_slice(eof_ch,
-  cur_position, (o22 - 1), the_file) = true) and
-  (to_rep((the_file[o22])) = eof_ch)))))) and (o23 = (o22 - 1))) and
-  (((idx <= o23) and (o24 = true)) or ((not (idx <= o23)) and
-  (o24 = false)))) and (((cur_position <= idx) and (result21 = o24)) or
-  ((not (cur_position <= idx)) and (result21 = false)))) ->
-  ((result21 = true) -> (1 <= idx)))))))))))))))))))))))))))
+  cur_position, the_file) = true))
+
+axiom H17 : ((o22 = ((cur_position + n) - 2)) and
+  in_range2(((cur_position + n) - 2)))
+
+axiom H18 : ((result19 = no_char_in_slice(10, cur_position, o22,
+  the_file)) and ((result19 = true) <->
+  (forall idx5:int. (((cur_position <= idx5) and (idx5 <= o22)) ->
+  (not (to_rep((the_file[idx5])) = 10))))))
+
+axiom H19 : ((result19 = true) -> ((o21 = ((cur_position + n) - 2)) and
+  in_range2(((cur_position + n) - 2))))
+
+axiom H20 : ((result19 = true) -> ((result18 = no_char_in_slice(eof_ch,
+  cur_position, o21, the_file)) and ((result18 = true) <->
+  (forall idx5:int. (((cur_position <= idx5) and (idx5 <= o21)) ->
+  (not (to_rep((the_file[idx5])) = eof_ch)))))))
+
+axiom H21 : ((not (result19 = true)) -> (result18 = false))
+
+axiom H22 : (not (result18 = true))
+
+axiom H23 : ((o23 = ((cur_position + n) - 2)) and
+  in_range2(((cur_position + n) - 2)))
+
+axiom H24 : ((result20 = no_char_in_slice(eof_ch, cur_position, o23,
+  the_file)) and ((result20 = true) <->
+  (forall idx5:int. (((cur_position <= idx5) and (idx5 <= o23)) ->
+  (not (to_rep((the_file[idx5])) = eof_ch))))))
+
+axiom H25 : (not (result20 = true))
+
+axiom H26 : ((o42 = ((cur_position + n) - 2)) and
+  in_range2(((cur_position + n) - 2)))
+
+axiom H27 : ((o43 = find_char_in_slice(eof_ch, cur_position, o42,
+  the_file)) and (in_range2(o43) and (((cur_position <= o43) and
+  (o43 <= o42)) and ((no_char_in_slice(eof_ch, cur_position, (o43 - 1),
+  the_file) = true) and (to_rep((the_file[o43])) = eof_ch)))))
+
+axiom H28 : (o44 = (last2 + o43))
+
+axiom H29 : (o45 = (o44 - cur_position))
+
+axiom H30 : (((last14 = o45) -> (result23 = true)) and
+  ((not (last14 = o45)) -> (result23 = false)))
+
+axiom H31 : (result23 = true)
+
+axiom H32 : ((o35 = ((cur_position + n) - 2)) and
+  in_range2(((cur_position + n) - 2)))
+
+axiom H33 : ((o36 = find_char_in_slice(eof_ch, cur_position, o35,
+  the_file)) and (in_range2(o36) and (((cur_position <= o36) and
+  (o36 <= o35)) and ((no_char_in_slice(eof_ch, cur_position, (o36 - 1),
+  the_file) = true) and (to_rep((the_file[o36])) = eof_ch)))))
+
+axiom H34 : (o37 = (o36 - 1))
+
+axiom H35 : (((idx2 <= o37) -> (o38 = true)) and ((not (idx2 <= o37)) ->
+  (o38 = false)))
+
+axiom H36 : (((cur_position <= idx2) -> (result24 = o38)) and
+  ((not (cur_position <= idx2)) -> (result24 = false)))
+
+axiom H37 : (result24 = true)
+
+ (* File "textio.adb", line 102, characters 0-0 *)
+goal WP_parameter_def : (1 <= idx2)

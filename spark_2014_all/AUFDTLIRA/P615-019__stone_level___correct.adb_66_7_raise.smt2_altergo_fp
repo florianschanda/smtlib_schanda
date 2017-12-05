@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -405,35 +405,104 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic j : int
+
+logic correct__find_before_delim__result : int
+
+logic o : int
+
+logic correct__find_before_delim__result1 : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic correct__find_before_delim__result2 : int
+
+logic correct__find_before_delim__result3 : int
+
+logic j3 : int
+
+logic correct__find_before_delim__result4 : int
+
+logic j4 : int
+
+logic correct__find_before_delim__result5 : int
+
+logic j5 : int
+
+logic correct__find_before_delim__result6 : int
+
+logic j6 : int
+
+logic correct__find_before_delim__result7 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : in_range3(c)
+
+axiom H2 : in_range3(delim)
+
+axiom H3 : (result = j)
+
+axiom H4 : (j1 = to_rep1(first(s1)))
+
+axiom H5 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  ((to_rep1(first(s1)) <= j2) and (j2 <= to_rep1(last(s1)))))
+
+axiom H6 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (not (to_rep((s[j2])) = delim)))
+
+axiom H7 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  ((not (to_rep((s[j2])) = delim)) -> (not (to_rep((s[j2])) = c))))
+
+axiom H8 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  ((not (to_rep((s[j2])) = delim)) ->
+  (correct__find_before_delim__result3 = correct__find_before_delim__result2)))
+
+axiom H9 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (j2 = to_rep1(last(s1))))
+
+axiom H10 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (correct__find_before_delim__result3 = correct__find_before_delim__result4))
+
+axiom H11 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (j2 = j3))
+
+axiom H12 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (correct__find_before_delim__result5 = correct__find_before_delim__result3))
+
+axiom H13 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (j4 = j2))
+
+axiom H14 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (correct__find_before_delim__result6 = correct__find_before_delim__result4))
+
+axiom H15 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (j5 = j3))
+
+axiom H16 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (correct__find_before_delim__result7 = correct__find_before_delim__result5))
+
+axiom H17 : (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
+  (j6 = j4))
+
+axiom H18 : ((not ((to_rep1(first(s1)) <= j1) and
+  (j1 <= to_rep1(last(s1))))) ->
+  (correct__find_before_delim__result6 = correct__find_before_delim__result))
+
+axiom H19 : ((not ((to_rep1(first(s1)) <= j1) and
+  (j1 <= to_rep1(last(s1))))) -> (j1 = j5))
+
+axiom H20 : ((not ((to_rep1(first(s1)) <= j1) and
+  (j1 <= to_rep1(last(s1))))) ->
+  (correct__find_before_delim__result7 = correct__find_before_delim__result1))
+
+axiom H21 : ((not ((to_rep1(first(s1)) <= j1) and
+  (j1 <= to_rep1(last(s1))))) -> (j6 = j1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall correct__find_before_delim__result:int.
-  forall correct__find_before_delim__result1:int. forall result:int.
-  forall j1:int. forall j2:int.
-  forall correct__find_before_delim__result2:int.
-  forall correct__find_before_delim__result3:int. forall j3:int.
-  forall correct__find_before_delim__result4:int. forall j4:int.
-  forall correct__find_before_delim__result5:int. forall j5:int.
-  forall correct__find_before_delim__result6:int. forall j6:int.
-  forall correct__find_before_delim__result7:int. (dynamic_property(1,
-  2147483647, to_rep1(first(s1)), to_rep1(last(s1))) -> (in_range3(c) ->
-  (in_range3(delim) -> (not ((({ int__content = result } = { int__content = j
-  }) and (j1 = to_rep1(first(s1)))) and ((((to_rep1(first(s1)) <= j1) and
-  (j1 <= to_rep1(last(s1)))) and (((((to_rep1(first(s1)) <= j2) and
-  (j2 <= to_rep1(last(s1)))) and (((not (to_rep((s[j2])) = delim)) and
-  ((not (to_rep((s[j2])) = c)) and
-  (correct__find_before_delim__result3 = correct__find_before_delim__result2))) and
-  (j2 = to_rep1(last(s1))))) and
-  (((correct__find_before_delim__result3 = correct__find_before_delim__result4) and
-  (j2 = j3)) and
-  ((correct__find_before_delim__result5 = correct__find_before_delim__result3) and
-  (j4 = j2)))) and
-  (((correct__find_before_delim__result4 = correct__find_before_delim__result6) and
-  (j5 = j3)) and
-  ((correct__find_before_delim__result7 = correct__find_before_delim__result5) and
-  (j6 = j4))))) or ((not ((to_rep1(first(s1)) <= j1) and
-  (j1 <= to_rep1(last(s1))))) and
-  (((correct__find_before_delim__result = correct__find_before_delim__result6) and
-  (j1 = j5)) and
-  ((correct__find_before_delim__result7 = correct__find_before_delim__result1) and
-  (j6 = j1)))))))))))
+goal WP_parameter_def : false

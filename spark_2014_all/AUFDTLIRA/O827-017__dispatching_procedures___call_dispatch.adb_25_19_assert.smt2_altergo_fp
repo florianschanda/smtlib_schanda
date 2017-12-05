@@ -56,7 +56,7 @@ axiom us_compatible_tags_refl :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1478,260 +1478,735 @@ axiom id__def_axiom : (forall x:int [id(x)]. (in_range1(x) -> (id(x) = x)))
 
 axiom b_max__def_axiom : (b_max = id(100))
 
- (* File "dispatch.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c1:int. forall c2:int. forall c3:int.
-  forall a1:(int,natural) farray. forall a2:(int,natural) farray.
-  forall a3:(int,natural) farray. forall r1__split_fields:integer.
-  forall r1__split_discrs:bool. forall r2__split_fields:integer.
-  forall r2__split_discrs:bool. forall r3__split_fields:integer.
-  forall r3__split_discrs:bool. forall x1__split_fields:integer.
-  forall x1__split_fields1:us_private. forall x2__split_fields:integer.
-  forall x2__split_fields1:us_private. forall x3__split_fields:integer.
-  forall x3__split_fields1:us_private. forall v1__split_fields:integer.
-  forall v1__split_fields1:us_private. forall v2__split_fields:integer.
-  forall v2__split_fields1:us_private. forall v3__split_fields:integer.
-  forall v3__split_fields1:us_private. forall y1:int. forall y2:int.
-  forall y3:int. forall z1:(int,natural) farray.
-  forall z2:(int,natural) farray. forall z3:(int,natural) farray.
-  forall w1__split_fields:integer. forall w1__split_discrs:bool.
-  forall w2__split_fields:integer. forall w2__split_discrs:bool.
-  forall w3__split_fields:us_split_fields__ref.
-  forall w3__split_discrs:us_split_discrs__ref. forall o:integer.
-  forall o1:us_split_fields2. forall call_dispatch__x1__assume:us_rep1.
-  forall o2:integer. forall o3:us_split_fields2.
-  forall call_dispatch__x2__assume:us_rep1. forall o4:integer.
-  forall o5:us_split_fields2. forall call_dispatch__x3__assume:us_rep1.
-  forall o6:integer. forall o7:integer. forall o8:us_split_fields4.
-  forall o9:us_rep2. forall call_dispatch__v1__assume:us_rep1.
-  forall o10:integer. forall o11:integer. forall o12:us_split_fields4.
-  forall o13:us_rep2. forall call_dispatch__v2__assume:us_rep1.
-  forall o14:integer. forall o15:integer. forall o16:us_split_fields4.
-  forall o17:us_rep2. forall call_dispatch__v3__assume:us_rep1.
-  forall o18:int. forall o19:int. forall call_dispatch__z1__assume:us_t.
-  forall call_dispatch__z2__assume:us_t.
-  forall call_dispatch__z3__assume:us_t.
-  forall call_dispatch__w1__assume:us_rep.
-  forall call_dispatch__w2__assume:us_rep.
-  forall call_dispatch__w3__assume:us_rep.
-  forall result:us_split_fields__ref1.
-  forall x1__split_fields2:us_split_fields2.
-  forall result1:us_split_fields__ref1.
-  forall x2__split_fields2:us_split_fields2.
-  forall result2:us_split_fields__ref1.
-  forall x3__split_fields2:us_split_fields2.
-  forall result3:us_split_fields__ref1.
-  forall v1__split_fields2:us_split_fields2.
-  forall result4:us_split_fields__ref1.
-  forall v2__split_fields2:us_split_fields2.
-  forall result5:us_split_fields__ref1.
-  forall v3__split_fields2:us_split_fields2. forall result6:int__ref.
-  forall y11:int. forall result7:int__ref. forall y31:int.
-  forall result8:map__ref. forall z11:(int,natural) farray.
-  forall result9:map__ref. forall z21:(int,natural) farray.
-  forall result10:map__ref. forall z31:(int,natural) farray.
-  forall result11:us_split_fields__ref.
-  forall w1__split_fields1:us_split_fields.
-  forall result12:us_split_discrs__ref.
-  forall w1__split_discrs1:us_split_discrs.
-  forall result13:us_split_fields__ref.
-  forall w2__split_fields1:us_split_fields.
-  forall result14:us_split_discrs__ref.
-  forall w2__split_discrs1:us_split_discrs.
-  forall result15:us_split_fields__ref.
-  forall w3__split_fields1:us_split_fields.
-  forall result16:us_split_discrs__ref.
-  forall w3__split_discrs1:us_split_discrs. forall c21:int. forall c31:int.
-  forall a21:(int,natural) farray. forall a31:(int,natural) farray.
-  forall r2__split_fields1:us_split_fields.
-  forall r2__split_discrs1:us_split_discrs.
-  forall r3__split_fields1:us_split_fields.
-  forall r3__split_discrs1:us_split_discrs.
-  forall x2__split_fields3:us_split_fields2.
-  forall x3__split_fields3:us_split_fields2. forall y21:int. forall y32:int.
-  forall z22:(int,natural) farray. forall z32:(int,natural) farray.
-  forall w2__split_fields2:us_split_fields.
-  forall w2__split_discrs2:us_split_discrs.
-  forall w3__split_fields2:us_split_fields.
-  forall w3__split_discrs2:us_split_discrs. forall c22:int. forall c32:int.
-  forall a22:(int,natural) farray. forall a32:(int,natural) farray.
-  forall r2__split_fields2:us_split_fields.
-  forall r2__split_discrs2:us_split_discrs.
-  forall r3__split_fields2:us_split_fields.
-  forall r3__split_discrs2:us_split_discrs.
-  forall v2__split_fields3:us_split_fields2.
-  forall v3__split_fields3:us_split_fields2. forall y22:int. forall y33:int.
-  forall z23:(int,natural) farray. forall z33:(int,natural) farray.
-  forall w2__split_fields3:us_split_fields.
-  forall w2__split_discrs3:us_split_discrs.
-  forall w3__split_fields3:us_split_fields.
-  forall w3__split_discrs3:us_split_discrs. (in_range1(b_max) ->
-  ((id(100) = b_max) -> (in_range1(b_max) -> ((id(100) = b_max) ->
-  (in_range(c1) -> ((((-2147483648) <= 2147483647) -> in_range(c2)) ->
-  (in_range(c3) -> ((dynamic_property2(1, b_max, to_rep(a1__first),
+logic c1 : int
+
+logic c2 : int
+
+logic c3 : int
+
+logic a1 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic r1__split_fields : integer
+
+logic r1__split_discrs : bool
+
+logic r2__split_fields : integer
+
+logic r2__split_discrs : bool
+
+logic r3__split_fields : integer
+
+logic r3__split_discrs : bool
+
+logic x1__split_fields : integer
+
+logic x1__split_fields1 : us_private
+
+logic x2__split_fields : integer
+
+logic x2__split_fields1 : us_private
+
+logic x3__split_fields : integer
+
+logic x3__split_fields1 : us_private
+
+logic v1__split_fields : integer
+
+logic v1__split_fields1 : us_private
+
+logic v2__split_fields : integer
+
+logic v2__split_fields1 : us_private
+
+logic v3__split_fields : integer
+
+logic v3__split_fields1 : us_private
+
+logic y1 : int
+
+logic y2 : int
+
+logic y3 : int
+
+logic z1 : (int,natural) farray
+
+logic z2 : (int,natural) farray
+
+logic z3 : (int,natural) farray
+
+logic w1__split_fields : integer
+
+logic w1__split_discrs : bool
+
+logic w2__split_fields : integer
+
+logic w2__split_discrs : bool
+
+logic w3__split_fields : integer
+
+logic w3__split_discrs : bool
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : us_private
+
+logic call_dispatch__x1__assume : integer
+
+logic call_dispatch__x1__assume1 : us_private
+
+logic call_dispatch__x1__assume2 : int
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : us_private
+
+logic call_dispatch__x2__assume : integer
+
+logic call_dispatch__x2__assume1 : us_private
+
+logic call_dispatch__x2__assume2 : int
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : us_private
+
+logic call_dispatch__x3__assume : integer
+
+logic call_dispatch__x3__assume1 : us_private
+
+logic call_dispatch__x3__assume2 : int
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : us_private
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic o16 : us_private
+
+logic o17 : int
+
+logic call_dispatch__v1__assume : integer
+
+logic call_dispatch__v1__assume1 : us_private
+
+logic call_dispatch__v1__assume2 : int
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : us_private
+
+logic o23 : integer
+
+logic o24 : integer
+
+logic o25 : us_private
+
+logic o26 : int
+
+logic call_dispatch__v2__assume : integer
+
+logic call_dispatch__v2__assume1 : us_private
+
+logic call_dispatch__v2__assume2 : int
+
+logic o27 : integer
+
+logic o28 : integer
+
+logic o29 : integer
+
+logic o30 : integer
+
+logic o31 : us_private
+
+logic o32 : integer
+
+logic o33 : integer
+
+logic o34 : us_private
+
+logic o35 : int
+
+logic call_dispatch__v3__assume : integer
+
+logic call_dispatch__v3__assume1 : us_private
+
+logic call_dispatch__v3__assume2 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic call_dispatch__z1__assume : (int,natural) farray
+
+logic call_dispatch__z1__assume1 : t
+
+logic call_dispatch__z2__assume : (int,natural) farray
+
+logic call_dispatch__z2__assume1 : t
+
+logic call_dispatch__z3__assume : (int,natural) farray
+
+logic call_dispatch__z3__assume1 : t
+
+logic call_dispatch__w1__assume : bool
+
+logic call_dispatch__w1__assume1 : integer
+
+logic call_dispatch__w1__assume2 : bool
+
+logic call_dispatch__w2__assume : bool
+
+logic call_dispatch__w2__assume1 : integer
+
+logic call_dispatch__w2__assume2 : bool
+
+logic call_dispatch__w3__assume : bool
+
+logic call_dispatch__w3__assume1 : integer
+
+logic call_dispatch__w3__assume2 : bool
+
+logic result : integer
+
+logic result1 : us_private
+
+logic x1__split_fields2 : integer
+
+logic x1__split_fields3 : us_private
+
+logic result2 : integer
+
+logic result3 : us_private
+
+logic x2__split_fields2 : integer
+
+logic x2__split_fields3 : us_private
+
+logic result4 : integer
+
+logic result5 : us_private
+
+logic x3__split_fields2 : integer
+
+logic x3__split_fields3 : us_private
+
+logic result6 : integer
+
+logic result7 : us_private
+
+logic v1__split_fields2 : integer
+
+logic v1__split_fields3 : us_private
+
+logic result8 : integer
+
+logic result9 : us_private
+
+logic v2__split_fields2 : integer
+
+logic v2__split_fields3 : us_private
+
+logic result10 : integer
+
+logic result11 : us_private
+
+logic v3__split_fields2 : integer
+
+logic v3__split_fields3 : us_private
+
+logic result12 : int
+
+logic y11 : int
+
+logic result13 : int
+
+logic y31 : int
+
+logic result14 : (int,natural) farray
+
+logic z11 : (int,natural) farray
+
+logic result15 : (int,natural) farray
+
+logic z21 : (int,natural) farray
+
+logic result16 : (int,natural) farray
+
+logic z31 : (int,natural) farray
+
+logic result17 : integer
+
+logic w1__split_fields1 : integer
+
+logic result18 : bool
+
+logic w1__split_discrs1 : bool
+
+logic result19 : integer
+
+logic w2__split_fields1 : integer
+
+logic result20 : bool
+
+logic w2__split_discrs1 : bool
+
+logic result21 : integer
+
+logic w3__split_fields1 : integer
+
+logic result22 : bool
+
+logic w3__split_discrs1 : bool
+
+logic c21 : int
+
+logic c31 : int
+
+logic a21 : (int,natural) farray
+
+logic a31 : (int,natural) farray
+
+logic r2__split_fields1 : integer
+
+logic r2__split_discrs1 : bool
+
+logic r3__split_fields1 : integer
+
+logic r3__split_discrs1 : bool
+
+logic x2__split_fields4 : integer
+
+logic x2__split_fields5 : us_private
+
+logic x3__split_fields4 : integer
+
+logic x3__split_fields5 : us_private
+
+logic y21 : int
+
+logic y32 : int
+
+logic z22 : (int,natural) farray
+
+logic z32 : (int,natural) farray
+
+logic w2__split_fields2 : integer
+
+logic w2__split_discrs2 : bool
+
+logic w3__split_fields2 : integer
+
+logic w3__split_discrs2 : bool
+
+logic c22 : int
+
+logic c32 : int
+
+logic a22 : (int,natural) farray
+
+logic a32 : (int,natural) farray
+
+logic r2__split_fields2 : integer
+
+logic r2__split_discrs2 : bool
+
+logic r3__split_fields2 : integer
+
+logic r3__split_discrs2 : bool
+
+logic v2__split_fields4 : integer
+
+logic v2__split_fields5 : us_private
+
+logic v3__split_fields4 : integer
+
+logic v3__split_fields5 : us_private
+
+logic y22 : int
+
+logic y33 : int
+
+logic z23 : (int,natural) farray
+
+logic z33 : (int,natural) farray
+
+logic w2__split_fields3 : integer
+
+logic w2__split_discrs3 : bool
+
+logic w3__split_fields3 : integer
+
+logic w3__split_discrs3 : bool
+
+axiom H : in_range1(b_max)
+
+axiom H1 : (id(100) = b_max)
+
+axiom H2 : in_range1(b_max)
+
+axiom H3 : (id(100) = b_max)
+
+axiom H4 : in_range(c1)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(c2))
+
+axiom H6 : in_range(c3)
+
+axiom H7 : (dynamic_property2(1, b_max, to_rep(a1__first),
   to_rep(a1__last)) and ((to_rep(a1__first) = 1) and
-  (to_rep(a1__last) = b_max))) -> ((dynamic_property4(1, b_max,
-  to_rep(a2__first), to_rep(a2__last)) and ((to_rep(a2__first) = 1) and
-  (to_rep(a2__last) = b_max))) -> ((dynamic_property6(1, b_max,
-  to_rep(a3__first), to_rep(a3__last)) and ((to_rep(a3__first) = 1) and
-  (to_rep(a3__last) = b_max))) -> ((r1__attr__constrained = false) ->
-  ((r2__attr__constrained = false) -> ((r3__attr__constrained = false) ->
-  (((((to_rep(o) = 1) and (o1 = { rec__dispatch__root__i = o; rec__ext__ =
-  us_null_ext__ })) and (call_dispatch__x1__assume = { us_split_fields3 = o1;
-  attr__tag = us_tag })) and (((result = { us_split_fields__content1 = {
-  rec__dispatch__root__i = x1__split_fields; rec__ext__ = x1__split_fields1 }
-  }) and
-  (x1__split_fields2 = (call_dispatch__x1__assume).us_split_fields3)) and
-  (x1__attr__tag = (call_dispatch__x1__assume).attr__tag))) ->
-  (((((to_rep(o2) = 2) and (o3 = { rec__dispatch__root__i = o2; rec__ext__ =
-  us_null_ext__ })) and (call_dispatch__x2__assume = { us_split_fields3 = o3;
-  attr__tag = us_tag })) and (((result1 = { us_split_fields__content1 = {
-  rec__dispatch__root__i = x2__split_fields; rec__ext__ = x2__split_fields1 }
-  }) and
-  (x2__split_fields2 = (call_dispatch__x2__assume).us_split_fields3)) and
-  (x2__attr__tag = (call_dispatch__x2__assume).attr__tag))) ->
-  (((((to_rep(o4) = 3) and (o5 = { rec__dispatch__root__i = o4; rec__ext__ =
-  us_null_ext__ })) and (call_dispatch__x3__assume = { us_split_fields3 = o5;
-  attr__tag = us_tag })) and (((result2 = { us_split_fields__content1 = {
-  rec__dispatch__root__i = x3__split_fields; rec__ext__ = x3__split_fields1 }
-  }) and
-  (x3__split_fields2 = (call_dispatch__x3__assume).us_split_fields3)) and
-  (x3__attr__tag = (call_dispatch__x3__assume).attr__tag))) ->
-  ((((((to_rep(o6) = 1) and ((to_rep(o7) = 1) and (o8 = {
-  rec__dispatch__child__j = o7; rec__dispatch__root__i1 = o6; rec__ext__1 =
-  us_null_ext__ }))) and (o9 = { us_split_fields5 = o8; attr__tag1 = us_tag1
-  })) and (call_dispatch__v1__assume = { us_split_fields3 = {
-  rec__dispatch__root__i = ((o9).us_split_fields5).rec__dispatch__root__i1;
-  rec__ext__ = hide_ext__(((o9).us_split_fields5).rec__dispatch__child__j,
-  ((o9).us_split_fields5).rec__ext__1) }; attr__tag = (o9).attr__tag1 })) and
-  (((result3 = { us_split_fields__content1 = { rec__dispatch__root__i =
-  v1__split_fields; rec__ext__ = v1__split_fields1 } }) and
-  (v1__split_fields2 = (call_dispatch__v1__assume).us_split_fields3)) and
-  (v1__attr__tag = (call_dispatch__v1__assume).attr__tag))) ->
-  ((((((to_rep(o10) = 2) and ((to_rep(o11) = 2) and (o12 = {
-  rec__dispatch__child__j = o11; rec__dispatch__root__i1 = o10; rec__ext__1 =
-  us_null_ext__ }))) and (o13 = { us_split_fields5 = o12; attr__tag1 =
-  us_tag1 })) and (call_dispatch__v2__assume = { us_split_fields3 = {
-  rec__dispatch__root__i = ((o13).us_split_fields5).rec__dispatch__root__i1;
-  rec__ext__ = hide_ext__(((o13).us_split_fields5).rec__dispatch__child__j,
-  ((o13).us_split_fields5).rec__ext__1) }; attr__tag = (o13).attr__tag1
-  })) and (((result4 = { us_split_fields__content1 = {
-  rec__dispatch__root__i = v2__split_fields; rec__ext__ = v2__split_fields1 }
-  }) and
-  (v2__split_fields2 = (call_dispatch__v2__assume).us_split_fields3)) and
-  (v2__attr__tag = (call_dispatch__v2__assume).attr__tag))) ->
-  ((((((to_rep(o14) = 3) and ((to_rep(o15) = 3) and (o16 = {
-  rec__dispatch__child__j = o15; rec__dispatch__root__i1 = o14; rec__ext__1 =
-  us_null_ext__ }))) and (o17 = { us_split_fields5 = o16; attr__tag1 =
-  us_tag1 })) and (call_dispatch__v3__assume = { us_split_fields3 = {
-  rec__dispatch__root__i = ((o17).us_split_fields5).rec__dispatch__root__i1;
-  rec__ext__ = hide_ext__(((o17).us_split_fields5).rec__dispatch__child__j,
-  ((o17).us_split_fields5).rec__ext__1) }; attr__tag = (o17).attr__tag1
-  })) and (((result5 = { us_split_fields__content1 = {
-  rec__dispatch__root__i = v3__split_fields; rec__ext__ = v3__split_fields1 }
-  }) and
-  (v3__split_fields2 = (call_dispatch__v3__assume).us_split_fields3)) and
-  (v3__attr__tag = (call_dispatch__v3__assume).attr__tag))) ->
-  ((((o18 = init(c1)) and in_range(o18)) and ((result6 = { int__content = y1
-  }) and (y11 = o18))) -> (in_range(y11) ->
-  ((((-2147483648) <= 2147483647) -> in_range(y2)) -> ((((o19 = init(c3)) and
-  in_range(o19)) and ((result7 = { int__content = y3 }) and (y31 = o19))) ->
-  (in_range(y31) -> ((((call_dispatch__z1__assume = init__2({ elts = a1; rt =
+  (to_rep(a1__last) = b_max)))
+
+axiom H8 : (dynamic_property4(1, b_max, to_rep(a2__first),
+  to_rep(a2__last)) and ((to_rep(a2__first) = 1) and
+  (to_rep(a2__last) = b_max)))
+
+axiom H9 : (dynamic_property6(1, b_max, to_rep(a3__first),
+  to_rep(a3__last)) and ((to_rep(a3__first) = 1) and
+  (to_rep(a3__last) = b_max)))
+
+axiom H10 : (r1__attr__constrained = false)
+
+axiom H11 : (r2__attr__constrained = false)
+
+axiom H12 : (r3__attr__constrained = false)
+
+axiom H13 : (to_rep(o) = 1)
+
+axiom H14 : ((o1 = o) and (o2 = us_null_ext__))
+
+axiom H15 : (((call_dispatch__x1__assume = o1) and
+  (call_dispatch__x1__assume1 = o2)) and
+  (call_dispatch__x1__assume2 = us_tag))
+
+axiom H16 : ((result = x1__split_fields) and (result1 = x1__split_fields1))
+
+axiom H17 : ((x1__split_fields2 = call_dispatch__x1__assume) and
+  (x1__split_fields3 = call_dispatch__x1__assume1))
+
+axiom H18 : (x1__attr__tag = call_dispatch__x1__assume2)
+
+axiom H19 : (to_rep(o3) = 2)
+
+axiom H20 : ((o4 = o3) and (o5 = us_null_ext__))
+
+axiom H21 : (((call_dispatch__x2__assume = o4) and
+  (call_dispatch__x2__assume1 = o5)) and
+  (call_dispatch__x2__assume2 = us_tag))
+
+axiom H22 : ((result2 = x2__split_fields) and (result3 = x2__split_fields1))
+
+axiom H23 : ((x2__split_fields2 = call_dispatch__x2__assume) and
+  (x2__split_fields3 = call_dispatch__x2__assume1))
+
+axiom H24 : (x2__attr__tag = call_dispatch__x2__assume2)
+
+axiom H25 : (to_rep(o6) = 3)
+
+axiom H26 : ((o7 = o6) and (o8 = us_null_ext__))
+
+axiom H27 : (((call_dispatch__x3__assume = o7) and
+  (call_dispatch__x3__assume1 = o8)) and
+  (call_dispatch__x3__assume2 = us_tag))
+
+axiom H28 : ((result4 = x3__split_fields) and (result5 = x3__split_fields1))
+
+axiom H29 : ((x3__split_fields2 = call_dispatch__x3__assume) and
+  (x3__split_fields3 = call_dispatch__x3__assume1))
+
+axiom H30 : (x3__attr__tag = call_dispatch__x3__assume2)
+
+axiom H31 : (to_rep(o9) = 1)
+
+axiom H32 : (to_rep(o10) = 1)
+
+axiom H33 : ((o11 = o10) and ((o12 = o9) and (o13 = us_null_ext__)))
+
+axiom H34 : (((o14 = o11) and ((o15 = o12) and (o16 = o13))) and
+  (o17 = us_tag1))
+
+axiom H35 : (((call_dispatch__v1__assume = o15) and
+  (call_dispatch__v1__assume1 = hide_ext__(o14, o16))) and
+  (call_dispatch__v1__assume2 = o17))
+
+axiom H36 : ((result6 = v1__split_fields) and (result7 = v1__split_fields1))
+
+axiom H37 : ((v1__split_fields2 = call_dispatch__v1__assume) and
+  (v1__split_fields3 = call_dispatch__v1__assume1))
+
+axiom H38 : (v1__attr__tag = call_dispatch__v1__assume2)
+
+axiom H39 : (to_rep(o18) = 2)
+
+axiom H40 : (to_rep(o19) = 2)
+
+axiom H41 : ((o20 = o19) and ((o21 = o18) and (o22 = us_null_ext__)))
+
+axiom H42 : (((o23 = o20) and ((o24 = o21) and (o25 = o22))) and
+  (o26 = us_tag1))
+
+axiom H43 : (((call_dispatch__v2__assume = o24) and
+  (call_dispatch__v2__assume1 = hide_ext__(o23, o25))) and
+  (call_dispatch__v2__assume2 = o26))
+
+axiom H44 : ((result8 = v2__split_fields) and (result9 = v2__split_fields1))
+
+axiom H45 : ((v2__split_fields2 = call_dispatch__v2__assume) and
+  (v2__split_fields3 = call_dispatch__v2__assume1))
+
+axiom H46 : (v2__attr__tag = call_dispatch__v2__assume2)
+
+axiom H47 : (to_rep(o27) = 3)
+
+axiom H48 : (to_rep(o28) = 3)
+
+axiom H49 : ((o29 = o28) and ((o30 = o27) and (o31 = us_null_ext__)))
+
+axiom H50 : (((o32 = o29) and ((o33 = o30) and (o34 = o31))) and
+  (o35 = us_tag1))
+
+axiom H51 : (((call_dispatch__v3__assume = o33) and
+  (call_dispatch__v3__assume1 = hide_ext__(o32, o34))) and
+  (call_dispatch__v3__assume2 = o35))
+
+axiom H52 : ((result10 = v3__split_fields) and
+  (result11 = v3__split_fields1))
+
+axiom H53 : ((v3__split_fields2 = call_dispatch__v3__assume) and
+  (v3__split_fields3 = call_dispatch__v3__assume1))
+
+axiom H54 : (v3__attr__tag = call_dispatch__v3__assume2)
+
+axiom H55 : ((o36 = init(c1)) and in_range(o36))
+
+axiom H56 : (result12 = y1)
+
+axiom H57 : (y11 = o36)
+
+axiom H58 : in_range(y11)
+
+axiom H59 : (((- 2147483648) <= 2147483647) -> in_range(y2))
+
+axiom H60 : ((o37 = init(c3)) and in_range(o37))
+
+axiom H61 : (result13 = y3)
+
+axiom H62 : (y31 = o37)
+
+axiom H63 : in_range(y31)
+
+axiom H64 : (({ elts = call_dispatch__z1__assume; rt =
+  call_dispatch__z1__assume1 } = init__2({ elts = a1; rt =
   mk(to_rep(a1__first), to_rep(a1__last)) })) and dynamic_property(1,
-  2147483647, to_rep(first((call_dispatch__z1__assume).rt)),
-  to_rep(last((call_dispatch__z1__assume).rt)))) and (((result8 = {
-  map__content = z1 }) and (z11 = (call_dispatch__z1__assume).elts)) and
-  ((to_rep(z1__first) = to_rep(first((call_dispatch__z1__assume).rt))) and
-  (to_rep(z1__last) = to_rep(last((call_dispatch__z1__assume).rt)))))) ->
-  (dynamic_property(1, 2147483647, to_rep(z1__first), to_rep(z1__last)) ->
-  ((((call_dispatch__z2__assume = init__2({ elts = a2; rt =
+  2147483647, to_rep(first(call_dispatch__z1__assume1)),
+  to_rep(last(call_dispatch__z1__assume1))))
+
+axiom H65 : (result14 = z1)
+
+axiom H66 : (z11 = call_dispatch__z1__assume)
+
+axiom H67 : (to_rep(z1__first) = to_rep(first(call_dispatch__z1__assume1)))
+
+axiom H68 : (to_rep(z1__last) = to_rep(last(call_dispatch__z1__assume1)))
+
+axiom H69 : dynamic_property(1, 2147483647, to_rep(z1__first),
+  to_rep(z1__last))
+
+axiom H70 : (({ elts = call_dispatch__z2__assume; rt =
+  call_dispatch__z2__assume1 } = init__2({ elts = a2; rt =
   mk(to_rep(a2__first), to_rep(a2__last)) })) and dynamic_property(1,
-  2147483647, to_rep(first((call_dispatch__z2__assume).rt)),
-  to_rep(last((call_dispatch__z2__assume).rt)))) and (((result9 = {
-  map__content = z2 }) and (z21 = (call_dispatch__z2__assume).elts)) and
-  ((to_rep(z2__first) = to_rep(first((call_dispatch__z2__assume).rt))) and
-  (to_rep(z2__last) = to_rep(last((call_dispatch__z2__assume).rt)))))) ->
-  (dynamic_property(1, 2147483647, to_rep(z2__first), to_rep(z2__last)) ->
-  ((((call_dispatch__z3__assume = init__2({ elts = a3; rt =
+  2147483647, to_rep(first(call_dispatch__z2__assume1)),
+  to_rep(last(call_dispatch__z2__assume1))))
+
+axiom H71 : (result15 = z2)
+
+axiom H72 : (z21 = call_dispatch__z2__assume)
+
+axiom H73 : (to_rep(z2__first) = to_rep(first(call_dispatch__z2__assume1)))
+
+axiom H74 : (to_rep(z2__last) = to_rep(last(call_dispatch__z2__assume1)))
+
+axiom H75 : dynamic_property(1, 2147483647, to_rep(z2__first),
+  to_rep(z2__last))
+
+axiom H76 : (({ elts = call_dispatch__z3__assume; rt =
+  call_dispatch__z3__assume1 } = init__2({ elts = a3; rt =
   mk(to_rep(a3__first), to_rep(a3__last)) })) and dynamic_property(1,
-  2147483647, to_rep(first((call_dispatch__z3__assume).rt)),
-  to_rep(last((call_dispatch__z3__assume).rt)))) and (((result10 = {
-  map__content = z3 }) and (z31 = (call_dispatch__z3__assume).elts)) and
-  ((to_rep(z3__first) = to_rep(first((call_dispatch__z3__assume).rt))) and
-  (to_rep(z3__last) = to_rep(last((call_dispatch__z3__assume).rt)))))) ->
-  (dynamic_property(1, 2147483647, to_rep(z3__first), to_rep(z3__last)) ->
-  (((call_dispatch__w1__assume = init__3({ us_split_discrs1 = {
-  rec__dispatch__mut_rec__d = r1__split_discrs }; us_split_fields1 = {
-  rec__dispatch__mut_rec__i = r1__split_fields }; attr__constrained =
-  r1__attr__constrained })) and (((result11 = { us_split_fields__content = {
-  rec__dispatch__mut_rec__i = w1__split_fields } }) and
-  (w1__split_fields1 = (call_dispatch__w1__assume).us_split_fields1)) and
-  (((result12 = { us_split_discrs__content = { rec__dispatch__mut_rec__d =
-  w1__split_discrs } }) and
-  (w1__split_discrs1 = (call_dispatch__w1__assume).us_split_discrs1)) and
-  (w1__attr__constrained = false)))) ->
-  (((call_dispatch__w2__assume = init__3({ us_split_discrs1 = {
-  rec__dispatch__mut_rec__d = r2__split_discrs }; us_split_fields1 = {
-  rec__dispatch__mut_rec__i = r2__split_fields }; attr__constrained =
-  r2__attr__constrained })) and (((result13 = { us_split_fields__content = {
-  rec__dispatch__mut_rec__i = w2__split_fields } }) and
-  (w2__split_fields1 = (call_dispatch__w2__assume).us_split_fields1)) and
-  (((result14 = { us_split_discrs__content = { rec__dispatch__mut_rec__d =
-  w2__split_discrs } }) and
-  (w2__split_discrs1 = (call_dispatch__w2__assume).us_split_discrs1)) and
-  (w2__attr__constrained = false)))) ->
-  (((call_dispatch__w3__assume = init__3({ us_split_discrs1 = {
-  rec__dispatch__mut_rec__d = r3__split_discrs }; us_split_fields1 = {
-  rec__dispatch__mut_rec__i = r3__split_fields }; attr__constrained =
-  r3__attr__constrained })) and (((result15 = w3__split_fields) and
-  (w3__split_fields1 = (call_dispatch__w3__assume).us_split_fields1)) and
-  (((result16 = w3__split_discrs) and
-  (w3__split_discrs1 = (call_dispatch__w3__assume).us_split_discrs1)) and
-  (w3__attr__constrained = false)))) ->
-  ((((x1__attr__tag = x2__attr__tag) and (x1__attr__tag = x3__attr__tag)) and
-  ((((in_range(y21) and in_range(y32)) and in_range(c21)) and
-  in_range(c31)) and p__specific_post(x1__attr__tag, { us_split_fields3 =
-  x1__split_fields2; attr__tag = x1__attr__tag }, x2__split_fields3,
-  x2__attr__tag, x3__split_fields3, x3__attr__tag, y11, y21, y32, { elts =
-  z11; rt = mk(to_rep(z1__first), to_rep(z1__last)) }, z22, z2__first,
-  z2__last, z32, z3__first, z3__last, { us_split_discrs1 = w1__split_discrs1;
-  us_split_fields1 = w1__split_fields1; attr__constrained =
-  w1__attr__constrained }, w2__split_fields2, w2__split_discrs2,
-  w2__attr__constrained, w3__split_fields2, w3__split_discrs2,
-  w3__attr__constrained, c1, c31, a1, a31, { rec__dispatch__mut_rec__i =
-  r1__split_fields }, { rec__dispatch__mut_rec__d = r1__split_discrs },
-  r3__split_fields1, r3__split_discrs1, c21, a21, r2__split_fields1,
-  r2__split_discrs1, x2__split_fields2, x3__split_fields2, y2, y31, z21, z31,
-  w2__split_fields1, w2__split_discrs1, w3__split_fields1, w3__split_discrs1,
-  c1, c3, a1, a3, { rec__dispatch__mut_rec__i = r1__split_fields }, {
+  2147483647, to_rep(first(call_dispatch__z3__assume1)),
+  to_rep(last(call_dispatch__z3__assume1))))
+
+axiom H77 : (result16 = z3)
+
+axiom H78 : (z31 = call_dispatch__z3__assume)
+
+axiom H79 : (to_rep(z3__first) = to_rep(first(call_dispatch__z3__assume1)))
+
+axiom H80 : (to_rep(z3__last) = to_rep(last(call_dispatch__z3__assume1)))
+
+axiom H81 : dynamic_property(1, 2147483647, to_rep(z3__first),
+  to_rep(z3__last))
+
+axiom H82 : ({ us_split_discrs1 = { rec__dispatch__mut_rec__d =
+  call_dispatch__w1__assume }; us_split_fields1 = {
+  rec__dispatch__mut_rec__i = call_dispatch__w1__assume1 };
+  attr__constrained = call_dispatch__w1__assume2 } = init__3({
+  us_split_discrs1 = { rec__dispatch__mut_rec__d = r1__split_discrs };
+  us_split_fields1 = { rec__dispatch__mut_rec__i = r1__split_fields };
+  attr__constrained = r1__attr__constrained }))
+
+axiom H83 : (result17 = w1__split_fields)
+
+axiom H84 : (w1__split_fields1 = call_dispatch__w1__assume1)
+
+axiom H85 : (result18 = w1__split_discrs)
+
+axiom H86 : (w1__split_discrs1 = call_dispatch__w1__assume)
+
+axiom H87 : (w1__attr__constrained = false)
+
+axiom H88 : ({ us_split_discrs1 = { rec__dispatch__mut_rec__d =
+  call_dispatch__w2__assume }; us_split_fields1 = {
+  rec__dispatch__mut_rec__i = call_dispatch__w2__assume1 };
+  attr__constrained = call_dispatch__w2__assume2 } = init__3({
+  us_split_discrs1 = { rec__dispatch__mut_rec__d = r2__split_discrs };
+  us_split_fields1 = { rec__dispatch__mut_rec__i = r2__split_fields };
+  attr__constrained = r2__attr__constrained }))
+
+axiom H89 : (result19 = w2__split_fields)
+
+axiom H90 : (w2__split_fields1 = call_dispatch__w2__assume1)
+
+axiom H91 : (result20 = w2__split_discrs)
+
+axiom H92 : (w2__split_discrs1 = call_dispatch__w2__assume)
+
+axiom H93 : (w2__attr__constrained = false)
+
+axiom H94 : ({ us_split_discrs1 = { rec__dispatch__mut_rec__d =
+  call_dispatch__w3__assume }; us_split_fields1 = {
+  rec__dispatch__mut_rec__i = call_dispatch__w3__assume1 };
+  attr__constrained = call_dispatch__w3__assume2 } = init__3({
+  us_split_discrs1 = { rec__dispatch__mut_rec__d = r3__split_discrs };
+  us_split_fields1 = { rec__dispatch__mut_rec__i = r3__split_fields };
+  attr__constrained = r3__attr__constrained }))
+
+axiom H95 : (result21 = w3__split_fields)
+
+axiom H96 : (w3__split_fields1 = call_dispatch__w3__assume1)
+
+axiom H97 : (result22 = w3__split_discrs)
+
+axiom H98 : (w3__split_discrs1 = call_dispatch__w3__assume)
+
+axiom H99 : (w3__attr__constrained = false)
+
+axiom H100 : ((x1__attr__tag = x2__attr__tag) and
+  (x1__attr__tag = x3__attr__tag))
+
+axiom H101 : ((((in_range(y21) and in_range(y32)) and in_range(c21)) and
+  in_range(c31)) and p__specific_post(x1__attr__tag, { us_split_fields3 = {
+  rec__dispatch__root__i = x1__split_fields2; rec__ext__ = x1__split_fields3
+  }; attr__tag = x1__attr__tag }, { rec__dispatch__root__i =
+  x2__split_fields4; rec__ext__ = x2__split_fields5 }, x2__attr__tag, {
+  rec__dispatch__root__i = x3__split_fields4; rec__ext__ = x3__split_fields5
+  }, x3__attr__tag, y11, y21, y32, { elts = z11; rt = mk(to_rep(z1__first),
+  to_rep(z1__last)) }, z22, z2__first, z2__last, z32, z3__first, z3__last, {
+  us_split_discrs1 = { rec__dispatch__mut_rec__d = w1__split_discrs1 };
+  us_split_fields1 = { rec__dispatch__mut_rec__i = w1__split_fields1 };
+  attr__constrained = w1__attr__constrained }, { rec__dispatch__mut_rec__i =
+  w2__split_fields2 }, { rec__dispatch__mut_rec__d = w2__split_discrs2 },
+  w2__attr__constrained, { rec__dispatch__mut_rec__i = w3__split_fields2 }, {
+  rec__dispatch__mut_rec__d = w3__split_discrs2 }, w3__attr__constrained, c1,
+  c31, a1, a31, { rec__dispatch__mut_rec__i = r1__split_fields }, {
+  rec__dispatch__mut_rec__d = r1__split_discrs }, {
+  rec__dispatch__mut_rec__i = r3__split_fields1 }, {
+  rec__dispatch__mut_rec__d = r3__split_discrs1 }, c21, a21, {
+  rec__dispatch__mut_rec__i = r2__split_fields1 }, {
+  rec__dispatch__mut_rec__d = r2__split_discrs1 }, { rec__dispatch__root__i =
+  x2__split_fields2; rec__ext__ = x2__split_fields3 }, {
+  rec__dispatch__root__i = x3__split_fields2; rec__ext__ = x3__split_fields3
+  }, y2, y31, z21, z31, { rec__dispatch__mut_rec__i = w2__split_fields1 }, {
+  rec__dispatch__mut_rec__d = w2__split_discrs1 }, {
+  rec__dispatch__mut_rec__i = w3__split_fields1 }, {
+  rec__dispatch__mut_rec__d = w3__split_discrs1 }, c1, c3, a1, a3, {
+  rec__dispatch__mut_rec__i = r1__split_fields }, {
   rec__dispatch__mut_rec__d = r1__split_discrs }, {
   rec__dispatch__mut_rec__i = r3__split_fields }, {
   rec__dispatch__mut_rec__d = r3__split_discrs }, c2, a2, {
   rec__dispatch__mut_rec__i = r2__split_fields }, {
-  rec__dispatch__mut_rec__d = r2__split_discrs }))) ->
-  ((to_rep((x2__split_fields3).rec__dispatch__root__i) = to_rep((x1__split_fields2).rec__dispatch__root__i)) ->
-  ((to_rep((x3__split_fields3).rec__dispatch__root__i) = 3) ->
-  ((((v1__attr__tag = v2__attr__tag) and (v1__attr__tag = v3__attr__tag)) and
-  ((((in_range(y22) and in_range(y33)) and in_range(c22)) and
-  in_range(c32)) and p__specific_post(v1__attr__tag, { us_split_fields3 =
-  v1__split_fields2; attr__tag = v1__attr__tag }, v2__split_fields3,
-  v2__attr__tag, v3__split_fields3, v3__attr__tag, y11, y22, y33, { elts =
-  z11; rt = mk(to_rep(z1__first), to_rep(z1__last)) }, z23, z2__first,
-  z2__last, z33, z3__first, z3__last, { us_split_discrs1 = w1__split_discrs1;
-  us_split_fields1 = w1__split_fields1; attr__constrained =
-  w1__attr__constrained }, w2__split_fields3, w2__split_discrs3,
-  w2__attr__constrained, w3__split_fields3, w3__split_discrs3,
-  w3__attr__constrained, c1, c32, a1, a32, { rec__dispatch__mut_rec__i =
-  r1__split_fields }, { rec__dispatch__mut_rec__d = r1__split_discrs },
-  r3__split_fields2, r3__split_discrs2, c22, a22, r2__split_fields2,
-  r2__split_discrs2, v2__split_fields2, v3__split_fields2, y21, y32, z22,
-  z32, w2__split_fields2, w2__split_discrs2, w3__split_fields2,
-  w3__split_discrs2, c1, c31, a1, a31, { rec__dispatch__mut_rec__i =
-  r1__split_fields }, { rec__dispatch__mut_rec__d = r1__split_discrs },
-  r3__split_fields1, r3__split_discrs1, c21, a21, r2__split_fields1,
-  r2__split_discrs1))) ->
-  ((to_rep((v2__split_fields3).rec__dispatch__root__i) = to_rep((v1__split_fields2).rec__dispatch__root__i)) ->
-  ((to_rep((v3__split_fields3).rec__dispatch__root__i) = 3) ->
-  (to_rep(((of_base({ us_split_fields3 = v2__split_fields3; attr__tag =
-  v2__attr__tag
-  })).us_split_fields5).rec__dispatch__child__j) <  0)))))))))))))))))))))))))))))))))))))))))
+  rec__dispatch__mut_rec__d = r2__split_discrs }))
+
+axiom H102 : (to_rep(x2__split_fields4) = to_rep(x1__split_fields2))
+
+axiom H103 : (to_rep(x3__split_fields4) = 3)
+
+axiom H104 : ((v1__attr__tag = v2__attr__tag) and
+  (v1__attr__tag = v3__attr__tag))
+
+axiom H105 : ((((in_range(y22) and in_range(y33)) and in_range(c22)) and
+  in_range(c32)) and p__specific_post(v1__attr__tag, { us_split_fields3 = {
+  rec__dispatch__root__i = v1__split_fields2; rec__ext__ = v1__split_fields3
+  }; attr__tag = v1__attr__tag }, { rec__dispatch__root__i =
+  v2__split_fields4; rec__ext__ = v2__split_fields5 }, v2__attr__tag, {
+  rec__dispatch__root__i = v3__split_fields4; rec__ext__ = v3__split_fields5
+  }, v3__attr__tag, y11, y22, y33, { elts = z11; rt = mk(to_rep(z1__first),
+  to_rep(z1__last)) }, z23, z2__first, z2__last, z33, z3__first, z3__last, {
+  us_split_discrs1 = { rec__dispatch__mut_rec__d = w1__split_discrs1 };
+  us_split_fields1 = { rec__dispatch__mut_rec__i = w1__split_fields1 };
+  attr__constrained = w1__attr__constrained }, { rec__dispatch__mut_rec__i =
+  w2__split_fields3 }, { rec__dispatch__mut_rec__d = w2__split_discrs3 },
+  w2__attr__constrained, { rec__dispatch__mut_rec__i = w3__split_fields3 }, {
+  rec__dispatch__mut_rec__d = w3__split_discrs3 }, w3__attr__constrained, c1,
+  c32, a1, a32, { rec__dispatch__mut_rec__i = r1__split_fields }, {
+  rec__dispatch__mut_rec__d = r1__split_discrs }, {
+  rec__dispatch__mut_rec__i = r3__split_fields2 }, {
+  rec__dispatch__mut_rec__d = r3__split_discrs2 }, c22, a22, {
+  rec__dispatch__mut_rec__i = r2__split_fields2 }, {
+  rec__dispatch__mut_rec__d = r2__split_discrs2 }, { rec__dispatch__root__i =
+  v2__split_fields2; rec__ext__ = v2__split_fields3 }, {
+  rec__dispatch__root__i = v3__split_fields2; rec__ext__ = v3__split_fields3
+  }, y21, y32, z22, z32, { rec__dispatch__mut_rec__i = w2__split_fields2 }, {
+  rec__dispatch__mut_rec__d = w2__split_discrs2 }, {
+  rec__dispatch__mut_rec__i = w3__split_fields2 }, {
+  rec__dispatch__mut_rec__d = w3__split_discrs2 }, c1, c31, a1, a31, {
+  rec__dispatch__mut_rec__i = r1__split_fields }, {
+  rec__dispatch__mut_rec__d = r1__split_discrs }, {
+  rec__dispatch__mut_rec__i = r3__split_fields1 }, {
+  rec__dispatch__mut_rec__d = r3__split_discrs1 }, c21, a21, {
+  rec__dispatch__mut_rec__i = r2__split_fields1 }, {
+  rec__dispatch__mut_rec__d = r2__split_discrs1 }))
+
+axiom H106 : (to_rep(v2__split_fields4) = to_rep(v1__split_fields2))
+
+axiom H107 : (to_rep(v3__split_fields4) = 3)
+
+ (* File "dispatch.ads", line 24, characters 0-0 *)
+goal WP_parameter_def : (to_rep(((of_base({ us_split_fields3 = {
+  rec__dispatch__root__i = v2__split_fields4; rec__ext__ = v2__split_fields5
+  }; attr__tag = v2__attr__tag
+  })).us_split_fields5).rec__dispatch__child__j) <  0)

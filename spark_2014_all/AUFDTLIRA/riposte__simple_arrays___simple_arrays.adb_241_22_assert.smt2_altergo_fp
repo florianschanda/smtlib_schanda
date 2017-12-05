@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -284,11 +284,19 @@ axiom def_axiom1 :
   ((not (temp___480 = temp___478)) -> ((temp___475(temp___477, temp___478,
   temp___479)[temp___480]) = (temp___477[temp___480])))))))
 
+axiom H : in_range1(i)
+
+axiom H1 : (bool_eq3(b, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H2 : (bool_eq3(c, (- 2147483648), 2147483647, a, (- 2147483648),
+  2147483647) = true)
+
+axiom H3 : (bool_eq3(d, (- 2147483648), 2147483647, temp___475(c, i, 42),
+  (- 2147483648), 2147483647) = true)
+
+axiom H4 : (bool_eq3(b, (- 2147483648), 2147483647, d, (- 2147483648),
+  2147483647) = true)
+
  (* File "simple_arrays.adb", line 223, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> ((((bool_eq3(b, (-2147483648),
-  2147483647, a, (-2147483648), 2147483647) = true) and (bool_eq3(c,
-  (-2147483648), 2147483647, a, (-2147483648), 2147483647) = true)) and
-  (bool_eq3(d, (-2147483648), 2147483647, temp___475(c, i, 42),
-  (-2147483648), 2147483647) = true)) -> ((bool_eq3(b, (-2147483648),
-  2147483647, d, (-2147483648), 2147483647) = true) ->
-  (to_rep((a[i])) = to_rep((temp___468(a, i, 42)[i]))))))
+goal WP_parameter_def : (to_rep((a[i])) = to_rep((temp___468(a, i, 42)[i])))

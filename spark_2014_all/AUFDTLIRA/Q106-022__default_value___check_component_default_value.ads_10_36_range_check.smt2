@@ -92,6 +92,7 @@
 (declare-const o Int)
 (declare-const check_component_default_value__p__one__assume Int)
 (declare-const o1 Int)
+(declare-const us Int)
 (declare-const result Bool)
 (assert (and (= o (id 1)) (and (in_range1 o) (= o 1))))
 (assert (and (= check_component_default_value__p__one__assume o) (in_range o)))

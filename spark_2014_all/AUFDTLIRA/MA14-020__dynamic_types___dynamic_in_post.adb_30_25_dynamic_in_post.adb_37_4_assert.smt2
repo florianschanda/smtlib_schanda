@@ -224,6 +224,8 @@
 (declare-const x3 Int)
 (declare-const result4 Bool)
 (declare-const x4 Int)
+(declare-const result5 Int)
+(declare-const x5 Int)
 (assert (= (mk_map__ref result) (mk_map__ref x)))
 (assert (= x2 (temp___String_Literal_197 Tuple0)))
 (assert (= (to_rep1 x__first) (to_rep1 (first (mk 1 5)))))

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -690,10 +690,23 @@ logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic al_test : t
+
+logic result : t
+
+logic al_test1 : t
+
+logic al_test2 : t
+
+logic al_test3 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (((val__ = bw_or(bw_and(al_test, of_int(0)), val__)) and
+  ((result = al_test) and (al_test1 = bw_or(bw_and(al_test, of_int(0)),
+  val__)))) and ((al_test1 = al_test2) and (al_test3 = al_test1)))
+
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall al_test:t. forall result:t. forall al_test1:t. forall al_test2:t.
-  forall al_test3:t. ((((val__ = bw_or(bw_and(al_test, of_int(0)),
-  val__)) and ((result = al_test) and (al_test1 = bw_or(bw_and(al_test,
-  of_int(0)), val__)))) and ((al_test1 = al_test2) and
-  (al_test3 = al_test1))) -> (al(al_test2) = val__)))
+goal WP_parameter_def : (al(al_test2) = val__)

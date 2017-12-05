@@ -280,19 +280,19 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep1(((b).us_split_discrs1).rec__lexer__token__kind)) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line))) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
-  (lexer__token__value__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__lexer__token__value) = to_rep2(((b).us_split_fields1).rec__lexer__token__value)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep1(((b).us_split_discrs1).rec__lexer__token__kind)) and
-  (to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep1(((b).us_split_discrs1).rec__lexer__token__kind)) and
+  ((((to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line)) and
   (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
   (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
   (lexer__token__value__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__lexer__token__value) = to_rep2(((b).us_split_fields1).rec__lexer__token__value))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__lexer__token__kind) = to_rep1(((b).us_split_discrs1).rec__lexer__token__kind)) and
+  ((((to_rep(((a).us_split_fields1).rec__lexer__token__line) = to_rep(((b).us_split_fields1).rec__lexer__token__line)) and
+  (to_rep(((a).us_split_fields1).rec__lexer__token__col) = to_rep(((b).us_split_fields1).rec__lexer__token__col))) and
+  (to_rep(((a).us_split_fields1).rec__lexer__token__length) = to_rep(((b).us_split_fields1).rec__lexer__token__length))) and
+  (lexer__token__value__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__lexer__token__value) = to_rep2(((b).us_split_fields1).rec__lexer__token__value)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -686,22 +686,234 @@ type t23b__ref = { t23b__content : us_rep
 
 function t23b__ref___projection(a: t23b__ref) : us_rep = (a).t23b__content
 
+logic t__split_fields : natural
+
+logic t__split_fields1 : natural
+
+logic t__split_fields2 : natural
+
+logic t__split_fields3 : name_id
+
+logic t__split_discrs : token_kind
+
+logic first_line : int
+
+logic first_col : int
+
+logic o : token_kind
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : name_id
+
+logic o8 : token_kind
+
+logic temp___934 : token_kind
+
+logic temp___9341 : natural
+
+logic temp___9342 : natural
+
+logic temp___9343 : natural
+
+logic temp___9344 : name_id
+
+logic temp___9345 : bool
+
+logic usq_ : token_kind
+
+logic usq_1 : natural
+
+logic usq_2 : natural
+
+logic usq_3 : natural
+
+logic usq_4 : name_id
+
+logic usq_5 : bool
+
+logic temp___936 : token_kind
+
+logic temp___9361 : natural
+
+logic temp___9362 : natural
+
+logic temp___9363 : natural
+
+logic temp___9364 : name_id
+
+logic temp___9365 : bool
+
+logic o9 : token_kind
+
+logic o10 : natural
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : name_id
+
+logic o17 : token_kind
+
+logic temp___937 : token_kind
+
+logic temp___9371 : natural
+
+logic temp___9372 : natural
+
+logic temp___9373 : natural
+
+logic temp___9374 : name_id
+
+logic temp___9375 : bool
+
+logic usq_6 : token_kind
+
+logic usq_7 : natural
+
+logic usq_8 : natural
+
+logic usq_9 : natural
+
+logic usq_10 : name_id
+
+logic usq_11 : bool
+
+logic temp___939 : token_kind
+
+logic temp___9391 : natural
+
+logic temp___9392 : natural
+
+logic temp___9393 : natural
+
+logic temp___9394 : name_id
+
+logic temp___9395 : bool
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : natural
+
+logic result3 : name_id
+
+logic t__split_fields4 : natural
+
+logic t__split_fields5 : natural
+
+logic t__split_fields6 : natural
+
+logic t__split_fields7 : name_id
+
+logic result4 : token_kind
+
+logic t__split_discrs1 : token_kind
+
+logic result5 : natural
+
+logic result6 : natural
+
+logic result7 : natural
+
+logic result8 : name_id
+
+logic t__split_fields8 : natural
+
+logic t__split_fields9 : natural
+
+logic t__split_fields10 : natural
+
+logic t__split_fields11 : name_id
+
+logic result9 : token_kind
+
+logic t__split_discrs2 : token_kind
+
+logic t__split_fields12 : natural
+
+logic t__split_fields13 : natural
+
+logic t__split_fields14 : natural
+
+logic t__split_fields15 : name_id
+
+logic t__split_discrs3 : token_kind
+
+logic t__split_fields16 : natural
+
+logic t__split_fields17 : natural
+
+logic t__split_fields18 : natural
+
+logic t__split_fields19 : name_id
+
+logic t__split_discrs4 : token_kind
+
+axiom H : in_range1(first_line)
+
+axiom H1 : in_range1(first_col)
+
+axiom H2 : in_range3(kind)
+
+axiom H3 : ((not (t__attr__constrained = true)) and ((kind = 1) or
+  (kind = 2)))
+
+axiom H4 : (kind = 1)
+
+axiom H5 : (to_rep1(t__split_discrs) = r19b)
+
+axiom H6 : in_range3(r19b)
+
+axiom H7 : (to_rep(o1) = 1)
+
+axiom H8 : (to_rep(o2) = first_col)
+
+axiom H9 : (to_rep(o3) = first_line)
+
+axiom H10 : (o3 = o4)
+
+axiom H11 : (o2 = o5)
+
+axiom H12 : (o1 = o6)
+
+axiom H13 : (dummy1 = o7)
+
+axiom H14 : (to_rep1(o) = 1)
+
+axiom H15 : (o = o8)
+
+axiom H16 : (temp___934 = o8)
+
+axiom H17 : (temp___9341 = o4)
+
+axiom H18 : (temp___9342 = o5)
+
+axiom H19 : (temp___9343 = o6)
+
+axiom H20 : (temp___9344 = o7)
+
+axiom H21 : (true = temp___9345)
+
+axiom H22 : (t__attr__constrained = true)
+
  (* File "lexer.adb", line 220, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t__split_discrs:token_kind. forall first_line:int.
-  forall first_col:int. forall o:token_kind. forall o1:natural.
-  forall o2:natural. forall o3:natural. forall o4:natural. forall o5:natural.
-  forall o6:natural. forall o7:name_id. forall o8:token_kind.
-  forall temp___944:token_kind. forall temp___9441:natural.
-  forall temp___9442:natural. forall temp___9443:natural.
-  forall temp___9444:name_id. forall temp___9445:bool.
-  (in_range1(first_line) -> (in_range1(first_col) -> (in_range3(kind) ->
-  (((not (t__attr__constrained = true)) and ((kind = 1) or (kind = 2))) ->
-  ((kind = 1) -> (((to_rep1(t__split_discrs) = r19b) and in_range3(r19b)) ->
-  ((((to_rep(o1) = 1) and ((to_rep(o2) = first_col) and
-  ((to_rep(o3) = first_line) and ((o3 = o4) and ((o2 = o5) and ((o1 = o6) and
-  (dummy1 = o7))))))) and (((to_rep1(o) = 1) and (o = o8)) and
-  ((temp___944 = o8) and (((temp___9441 = o4) and ((temp___9442 = o5) and
-  ((temp___9443 = o6) and (temp___9444 = o7)))) and
-  (true = temp___9445))))) -> ((t__attr__constrained = true) ->
-  (temp___944 = t__split_discrs))))))))))
+goal WP_parameter_def : (temp___934 = t__split_discrs)

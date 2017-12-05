@@ -249,6 +249,7 @@
 (declare-const o us_rep1)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Bool)
 (declare-const result Bool)
 (assert (in_range1 index))
 (assert (and (= o1 (last (model__ container))) (and (in_range6 o1) (= o1 (last (model__ container))))))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -591,37 +591,101 @@ type t10b__ref = { t10b__content : us_t2
 
 function t10b__ref___projection(a: t10b__ref) : us_t2 = (a).t10b__content
 
- (* File "strings.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:int. forall equals_position:int. forall o:int.
-  forall o1:(int,character) farray. forall temp___166:(int,character) farray.
-  forall temp___1661:t1. forall strings__get_value__R8b__assume:int.
-  forall o2:(int,character) farray. forall temp___168:(int,character) farray.
-  forall temp___1681:t2. forall o3:(int,character) farray. forall o4:t.
-  forall o5:us_image. forall equals_found:bool. forall equals_position1:int.
-  forall result:bool. (dynamic_property(1, 2147483647, to_rep1(first(text1)),
-  to_rep1(last(text1))) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(name1)), to_rep1(last(name1))) -> (in_range(value) ->
-  (((1 <= 2147483647) -> in_range1(equals_position)) -> ((0 <  length({
-  elts = text; rt = text1 })) -> ((((o = to_rep1(first(text1))) and
-  in_range1(to_rep1(first(text1)))) and in_range1(equals_position1)) ->
-  ((equals_found = true) -> ((((equals_position1 - 1) = r5b) and
-  in_range(r5b)) -> ((((((to_rep1(first(text1)) <= r5b) ->
+logic value : int
+
+logic equals_position : int
+
+logic o : int
+
+logic o1 : (int,character) farray
+
+logic temp___166 : (int,character) farray
+
+logic temp___1661 : t1
+
+logic strings__get_value__R8b__assume : int
+
+logic o2 : (int,character) farray
+
+logic temp___168 : (int,character) farray
+
+logic temp___1681 : t2
+
+logic o3 : (int,character) farray
+
+logic o4 : t
+
+logic o5 : us_image
+
+logic equals_found : bool
+
+logic equals_position1 : int
+
+logic result : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(text1)),
+  to_rep1(last(text1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(name1)),
+  to_rep1(last(name1)))
+
+axiom H2 : in_range(value)
+
+axiom H3 : ((1 <= 2147483647) -> in_range1(equals_position))
+
+axiom H4 : (0 <  length({ elts = text; rt = text1 }))
+
+axiom H5 : ((o = to_rep1(first(text1))) and in_range1(to_rep1(first(text1))))
+
+axiom H6 : in_range1(equals_position1)
+
+axiom H7 : (equals_found = true)
+
+axiom H8 : ((equals_position1 - 1) = r5b)
+
+axiom H9 : in_range(r5b)
+
+axiom H10 : ((to_rep1(first(text1)) <= r5b) ->
   (((to_rep1(first(text1)) <= to_rep1(first(text1))) and
   (to_rep1(first(text1)) <= to_rep1(last(text1)))) and
-  ((to_rep1(first(text1)) <= r5b) and (r5b <= to_rep1(last(text1)))))) and
-  (o1 = text)) and ((o1 = temp___166) and (mk1(to_rep1(first(text1)),
-  r5b) = temp___1661))) and (result = bool_eq4(name, to_rep1(first(name1)),
+  ((to_rep1(first(text1)) <= r5b) and (r5b <= to_rep1(last(text1))))))
+
+axiom H11 : (o1 = text)
+
+axiom H12 : (o1 = temp___166)
+
+axiom H13 : (mk1(to_rep1(first(text1)), r5b) = temp___1661)
+
+axiom H14 : (result = bool_eq4(name, to_rep1(first(name1)),
   to_rep1(last(name1)), temp___166, to_rep1(first2(temp___1661)),
-  to_rep1(last2(temp___1661))))) -> ((result = true) ->
-  (((((strings__get_value__R8b__assume = (equals_position1 + 1)) and
-  in_range((equals_position1 + 1))) and
-  (strings__get_value__R8b__assume = r8b)) and in_range(r8b)) ->
-  (((((((r8b <= to_rep1(last(text1))) -> (((to_rep1(first(text1)) <= r8b) and
-  (r8b <= to_rep1(last(text1)))) and
+  to_rep1(last2(temp___1661))))
+
+axiom H15 : (result = true)
+
+axiom H16 : ((strings__get_value__R8b__assume = (equals_position1 + 1)) and
+  in_range((equals_position1 + 1)))
+
+axiom H17 : (strings__get_value__R8b__assume = r8b)
+
+axiom H18 : in_range(r8b)
+
+axiom H19 : ((r8b <= to_rep1(last(text1))) ->
+  (((to_rep1(first(text1)) <= r8b) and (r8b <= to_rep1(last(text1)))) and
   ((to_rep1(first(text1)) <= to_rep1(last(text1))) and
-  (to_rep1(last(text1)) <= to_rep1(last(text1)))))) and (o2 = text)) and
-  ((o2 = temp___168) and (mk2(r8b, to_rep1(last(text1))) = temp___1681))) and
-  ((temp___168 = o3) and (mk(to_rep1(first4(temp___1681)),
-  to_rep1(last4(temp___1681))) = o4))) and (o5 = from_string({ elts = o3;
-  rt = o4 }))) -> attr__ATTRIBUTE_VALUE__pre_check(o5))))))))))))))
+  (to_rep1(last(text1)) <= to_rep1(last(text1))))))
+
+axiom H20 : (o2 = text)
+
+axiom H21 : (o2 = temp___168)
+
+axiom H22 : (mk2(r8b, to_rep1(last(text1))) = temp___1681)
+
+axiom H23 : (temp___168 = o3)
+
+axiom H24 : (mk(to_rep1(first4(temp___1681)),
+  to_rep1(last4(temp___1681))) = o4)
+
+axiom H25 : (o5 = from_string({ elts = o3; rt = o4 }))
+
+ (* File "strings.adb", line 5, characters 0-0 *)
+goal WP_parameter_def : attr__ATTRIBUTE_VALUE__pre_check(o5)

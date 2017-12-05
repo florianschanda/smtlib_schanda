@@ -97,6 +97,8 @@
 (declare-const res (_ BitVec 8))
 (declare-const result (_ BitVec 8))
 (declare-const res1 (_ BitVec 8))
+(assert true)
+(assert true)
 (assert (= result res))
 (assert (= res1 ((_ extract 7 0) (bvand (bvor (bvand x ((_ int2bv 32) 4294967040)) ((_ int2bv 32) 1)) ((_ int2bv 32) 255)))))
 (assert (not (= res1 ((_ int2bv 8) 1))))

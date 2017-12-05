@@ -73,6 +73,7 @@
 (declare-fun temp___258 ((Array Int et1) Int Int) (Array Int et1))
 (assert (forall ((temp___260 (Array Int et1))) (forall ((temp___261 Int) (temp___262 Int)) (let ((temp___259 (temp___258 temp___260 temp___261 temp___262))) (forall ((temp___263 Int)) (ite (= temp___263 temp___261) (= (select temp___259 temp___263) (of_rep temp___262)) (= (select temp___259 temp___263) (select temp___260 temp___263))))))))
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (in_range1 i))
 (assert (in_range2 e))
 (assert (< i 10))

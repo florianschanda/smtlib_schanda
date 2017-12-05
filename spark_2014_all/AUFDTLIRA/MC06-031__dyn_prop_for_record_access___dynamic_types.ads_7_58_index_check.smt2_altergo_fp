@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -710,102 +710,291 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall from:int. forall result__:int.
-  forall tmp__split_fields:(int,integer) farray.
-  forall tmp__split_fields1:natural. forall us:int. forall o:int.
-  forall temp___185:(int,integer) farray. forall temp___1851:natural.
-  forall temp___184:int. forall temp___183:int. forall o1:int.
-  forall temp___180:(int,integer) farray. forall temp___1801:natural.
-  forall result:int. forall from1:int. forall from2:int.
-  forall result__1:int. forall tmp__split_fields2:(int,integer) farray.
-  forall tmp__split_fields3:natural.
-  forall dynamic_types__search__result:int.
-  forall result1:(int,integer) farray. forall result2:natural.
-  forall tmp__split_fields4:(int,integer) farray.
-  forall tmp__split_fields5:natural. forall result3:int.
-  forall result__2:int. forall result4:int. forall from3:int.
-  forall result5:int. forall dynamic_types__search__result1:int.
-  forall result6:int. forall dynamic_types__search__result2:int.
-  forall dynamic_types__search__result3:int.
-  forall dynamic_types__search__result4:int. forall from4:int.
-  forall result__3:int. forall tmp__split_fields6:(int,integer) farray.
-  forall tmp__split_fields7:natural.
-  forall dynamic_types__search__result5:int__ref. forall from5:int.
-  forall result__4:int. forall tmp__split_fields8:us_split_fields.
-  forall dynamic_types__search__result6:int. forall from6:int__ref.
-  forall result__5:int__ref. forall tmp__split_fields9:us_split_fields__ref.
-  forall dynamic_types__search__result7:int__ref. forall from7:int.
-  forall result__6:int. forall tmp__split_fields10:us_split_fields.
-  forall dynamic_types__search__result8:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range2(c) ->
-  ((to_rep1(first(a1)) <= to_rep1(last(a1))) ->
-  (((((((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
-  to_rep1(first(a1)))) and (o = to_rep1(first(a1)))) and (({ int__content =
-  result } = { int__content = from }) and (from1 = o))) and
-  (dynamic_property1(first2, last2, from1) and (((0 <= 2147483647) ->
-  in_range2(result__)) and
-  ((forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
-   ((first2 <= last2) -> dynamic_property1(first2, last2,
-   to_rep1((tmp__split_fields[temp___168])))))) and
-  ((((dynamic_types__search__result5 = { int__content =
-  dynamic_types__search__result3 }) and
-  (((tmp__split_fields6 = tmp__split_fields4) and
-  (tmp__split_fields7 = tmp__split_fields5)) and ((result__2 = result__3) and
-  (from3 = from4)))) and
-  ((dynamic_types__search__result6 = dynamic_types__search__result4) and
-  ((tmp__split_fields8 = { rec__dynamic_types__search__result_type__from =
-  tmp__split_fields4; rec__dynamic_types__search__result_type__result =
-  tmp__split_fields5 }) and ((result__4 = result__2) and
-  (from5 = from3))))) and (((tmp__split_fields = temp___185) and
-  (tmp__split_fields1 = temp___1851)) and ((temp___184 = result__) and
-  ((temp___183 = from1) and
-  ((forall i:int. (((to_rep1(first(a1)) <= i) and (i <= (from2 - 1))) ->
-   (not (to_rep((a[i])) = c)))) and
-  (((((first2 <= last2) -> dynamic_property1(first2, last2, from2)) and
-  ((0 <= 2147483647) -> in_range2(result__1))) and
+logic from : int
+
+logic result__ : int
+
+logic tmp__split_fields : (int,integer) farray
+
+logic tmp__split_fields1 : natural
+
+logic us : int
+
+logic o : int
+
+logic temp___185 : (int,integer) farray
+
+logic temp___1851 : natural
+
+logic temp___184 : int
+
+logic temp___183 : int
+
+logic i : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic temp___180 : (int,integer) farray
+
+logic temp___1801 : natural
+
+logic temp___182 : int
+
+logic us1 : int
+
+logic o4 : int
+
+logic result : int
+
+logic from1 : int
+
+logic from2 : int
+
+logic result__1 : int
+
+logic tmp__split_fields2 : (int,integer) farray
+
+logic tmp__split_fields3 : natural
+
+logic dynamic_types__search__result : int
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic result3 : natural
+
+logic tmp__split_fields4 : (int,integer) farray
+
+logic tmp__split_fields5 : natural
+
+logic result4 : int
+
+logic result__2 : int
+
+logic result5 : int
+
+logic from3 : int
+
+logic result6 : int
+
+logic dynamic_types__search__result1 : int
+
+logic result7 : int
+
+logic dynamic_types__search__result2 : int
+
+logic result8 : int
+
+logic from4 : int
+
+logic dynamic_types__search__result3 : int
+
+logic dynamic_types__search__result4 : int
+
+logic from5 : int
+
+logic result__3 : int
+
+logic tmp__split_fields6 : (int,integer) farray
+
+logic tmp__split_fields7 : natural
+
+logic dynamic_types__search__result5 : int
+
+logic from6 : int
+
+logic result__4 : int
+
+logic tmp__split_fields8 : (int,integer) farray
+
+logic tmp__split_fields9 : natural
+
+logic dynamic_types__search__result6 : int
+
+logic from7 : int
+
+logic result__5 : int
+
+logic tmp__split_fields10 : (int,integer) farray
+
+logic tmp__split_fields11 : natural
+
+logic dynamic_types__search__result7 : int
+
+logic from8 : int
+
+logic result__6 : int
+
+logic tmp__split_fields12 : (int,integer) farray
+
+logic tmp__split_fields13 : natural
+
+logic dynamic_types__search__result8 : int
+
+logic from9 : int
+
+logic result__7 : int
+
+logic tmp__split_fields14 : (int,integer) farray
+
+logic tmp__split_fields15 : natural
+
+logic dynamic_types__search__result9 : int
+
+logic from10 : int
+
+logic result__8 : int
+
+logic tmp__split_fields16 : (int,integer) farray
+
+logic tmp__split_fields17 : natural
+
+logic dynamic_types__search__result10 : int
+
+logic from11 : int
+
+logic result__9 : int
+
+logic tmp__split_fields18 : (int,integer) farray
+
+logic tmp__split_fields19 : natural
+
+logic dynamic_types__search__result11 : int
+
+logic from12 : int
+
+logic result__10 : int
+
+logic tmp__split_fields20 : (int,integer) farray
+
+logic tmp__split_fields21 : natural
+
+logic dynamic_types__search__result12 : int
+
+logic from13 : int
+
+logic result__11 : int
+
+logic tmp__split_fields22 : (int,integer) farray
+
+logic tmp__split_fields23 : natural
+
+logic dynamic_types__search__result13 : int
+
+logic from14 : int
+
+logic result__12 : int
+
+logic tmp__split_fields24 : (int,integer) farray
+
+logic tmp__split_fields25 : natural
+
+logic dynamic_types__search__result14 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(c)
+
+axiom H2 : (to_rep1(first(a1)) <= to_rep1(last(a1)))
+
+axiom H3 : ((us = to_rep1(first(a1))) and dynamic_property1(first2, last2,
+  to_rep1(first(a1))))
+
+axiom H4 : (o = to_rep1(first(a1)))
+
+axiom H5 : (result = from)
+
+axiom H6 : (from1 = o)
+
+axiom H7 : dynamic_property1(first2, last2, from1)
+
+axiom H8 : ((0 <= 2147483647) -> in_range2(result__))
+
+axiom H9 :
   (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
   ((first2 <= last2) -> dynamic_property1(first2, last2,
-  to_rep1((tmp__split_fields2[temp___168]))))))) and (((((o1 = from2) and
+  to_rep1((tmp__split_fields[temp___168]))))))
+
+axiom H10 :
+  ((((dynamic_types__search__result11 = dynamic_types__search__result3) and
+  (((tmp__split_fields18 = tmp__split_fields4) and
+  (tmp__split_fields19 = tmp__split_fields5)) and
+  ((result__9 = result__2) and (from11 = from3)))) and
+  ((dynamic_types__search__result12 = dynamic_types__search__result4) and
+  (((tmp__split_fields20 = tmp__split_fields4) and
+  (tmp__split_fields21 = tmp__split_fields5)) and
+  ((result__10 = result__2) and (from12 = from3))))) and
+  (((tmp__split_fields = temp___185) and
+  (tmp__split_fields1 = temp___1851)) and ((temp___184 = result__) and
+  ((temp___183 = from1) and
+  ((forall i1:int. (((to_rep1(first(a1)) <= i1) and (i1 <= (from2 - 1))) ->
+   (not (to_rep((a[i1])) = c)))) and (((((first2 <= last2) ->
+  dynamic_property1(first2, last2, from2)) and ((0 <= 2147483647) ->
+  in_range2(result__1))) and
+  (forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
+  ((first2 <= last2) -> dynamic_property1(first2, last2,
+  to_rep1((tmp__split_fields2[temp___168]))))))) and (((((o3 = from2) and
   in_range2(from2)) and (({ us_split_fields1 = {
   rec__dynamic_types__search__result_type__from = temp___180;
   rec__dynamic_types__search__result_type__result = temp___1801 }
-  } = search_range(o1)) and
+  } = search_range(o3)) and
   ((forall temp___168:int. (((1 <= temp___168) and (temp___168 <= 1)) ->
    dynamic_property1(first2, last2, to_rep1((temp___180[temp___168]))))) and
   (((to_rep(temp___1801) = 0) and
-  (forall i:int. (((o1 <= i) and (i <= to_rep1((temp___180[1])))) ->
-  (not (to_rep((a[i])) = c))))) or
+  (forall i1:int. (((o3 <= i1) and (i1 <= to_rep1((temp___180[1])))) ->
+  (not (to_rep((a[i1])) = c))))) or
   (((to_rep1(first(a1)) <= to_rep(temp___1801)) and
   (to_rep(temp___1801) <= to_rep1(last(a1)))) and
   (to_rep((a[to_rep(temp___1801)])) = c)))))) and
-  (((result1 = tmp__split_fields2) and (result2 = tmp__split_fields3)) and
+  (((result2 = tmp__split_fields2) and (result3 = tmp__split_fields3)) and
   ((temp___180 = tmp__split_fields4) and
-  (temp___1801 = tmp__split_fields5)))) and (((result__1 = result3) and
-  (result__2 = to_rep(tmp__split_fields5))) and (((from2 = result4) and
+  (temp___1801 = tmp__split_fields5)))) and (((result__1 = result4) and
+  (result__2 = to_rep(tmp__split_fields5))) and (((from2 = result5) and
   (from3 = to_rep1((tmp__split_fields4[1])))) and
   ((((dynamic_types__search__result1 = dynamic_types__search__result3) and
   (dynamic_types__search__result4 = dynamic_types__search__result1)) and
-  ((0 <  result__2) and ((dynamic_types__search__result = result5) and
+  ((0 <  result__2) and ((dynamic_types__search__result = result6) and
   (dynamic_types__search__result1 = result__2)))) or
   (((not (0 <  result__2)) and
   (dynamic_types__search__result1 = dynamic_types__search__result)) and
   (((dynamic_types__search__result2 = dynamic_types__search__result3) and
   (dynamic_types__search__result4 = dynamic_types__search__result2)) and
   ((from3 = to_rep1(last(a1))) and
-  ((dynamic_types__search__result1 = result6) and
-  (dynamic_types__search__result2 = 0))))))))))))))))))) and
-  (((dynamic_types__search__result7 = dynamic_types__search__result5) and
-  ((tmp__split_fields9 = { us_split_fields__content = {
-  rec__dynamic_types__search__result_type__from = tmp__split_fields6;
-  rec__dynamic_types__search__result_type__result = tmp__split_fields7 }
-  }) and ((result__5 = { int__content = result__3 }) and (from6 = {
-  int__content = from4 })))) and
-  ((dynamic_types__search__result8 = dynamic_types__search__result6) and
-  ((tmp__split_fields10 = tmp__split_fields8) and
-  ((result__6 = result__4) and (from7 = from5)))))) ->
-  ((not ((dynamic_types__search__result7).int__content = 0)) ->
-  (((to_rep1(first(a1)) <= (dynamic_types__search__result7).int__content) and
-  ((dynamic_types__search__result7).int__content <= to_rep1(last(a1)))) ->
-  (to_rep1(first(a1)) <= (dynamic_types__search__result7).int__content))))))))
+  ((dynamic_types__search__result1 = result7) and
+  (dynamic_types__search__result2 = 0)))))))))))))))
+
+axiom H11 :
+  (dynamic_types__search__result13 = dynamic_types__search__result11)
+
+axiom H12 : ((tmp__split_fields22 = tmp__split_fields18) and
+  (tmp__split_fields23 = tmp__split_fields19))
+
+axiom H13 : (result__11 = result__9)
+
+axiom H14 : (from13 = from11)
+
+axiom H15 :
+  (dynamic_types__search__result14 = dynamic_types__search__result12)
+
+axiom H16 : ((tmp__split_fields24 = tmp__split_fields20) and
+  (tmp__split_fields25 = tmp__split_fields21))
+
+axiom H17 : (result__12 = result__10)
+
+axiom H18 : (from14 = from12)
+
+axiom H19 : (not (dynamic_types__search__result13 = 0))
+
+axiom H20 : (to_rep1(first(a1)) <= dynamic_types__search__result13)
+
+axiom H21 : (dynamic_types__search__result13 <= to_rep1(last(a1)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(first(a1)) <= dynamic_types__search__result13)

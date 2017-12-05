@@ -52,6 +52,7 @@
 (declare-const dummy2 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const eleven Int)
+(declare-const p__B6b__dummy__assume Int)
 (declare-const result Int)
 (declare-const eleven1 Int)
 (assert (= result eleven))

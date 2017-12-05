@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -219,23 +219,94 @@ function record_t__ref___projection(a: record_t__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic z : int
+
+logic r__split_fields : integer
+
+logic r__split_fields1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic temp___154 : integer
+
+logic temp___1541 : integer
+
+logic o12 : int
+
+logic result : bool
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic r__split_fields2 : integer
+
+logic r__split_fields3 : integer
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(z))
+
+axiom H1 : (to_rep(o) = z)
+
+axiom H2 : (r__split_fields = o1)
+
+axiom H3 : (o = o2)
+
+axiom H4 : (o3 = o1)
+
+axiom H5 : (o4 = o2)
+
+axiom H6 : (o3 = o5)
+
+axiom H7 : (o4 = o6)
+
+axiom H8 : (o7 = o5)
+
+axiom H9 : (o8 = to_rep(o7))
+
+axiom H10 : (((o8 = 10) -> (result = true)) and ((not (o8 = 10)) ->
+  (result = false)))
+
+axiom H11 : (result = true)
+
+axiom H12 : (to_rep(o9) = to_rep(r__split_fields1))
+
+axiom H13 : (o9 = o10)
+
+axiom H14 : (r__split_fields1 = o11)
+
+axiom H15 : (temp___154 = o10)
+
+axiom H16 : (temp___1541 = o11)
+
+axiom H17 : (result1 = r__split_fields)
+
+axiom H18 : (result2 = r__split_fields1)
+
+axiom H19 : (temp___154 = r__split_fields2)
+
+axiom H20 : (temp___1541 = r__split_fields3)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:int. forall r__split_fields:integer.
-  forall r__split_fields1:integer. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:integer. forall o4:integer. forall o5:integer.
-  forall o6:integer. forall o7:integer. forall o8:int. forall o9:integer.
-  forall o10:integer. forall o11:integer. forall temp___154:integer.
-  forall temp___1541:integer. forall result:bool. forall result1:integer.
-  forall result2:integer. forall r__split_fields2:integer.
-  forall r__split_fields3:integer. ((((-2147483648) <= 2147483647) ->
-  in_range(z)) -> ((((((((to_rep(o) = z) and ((r__split_fields = o1) and
-  (o = o2))) and ((o3 = o1) and (o4 = o2))) and ((o3 = o5) and
-  (o4 = o6))) and (o7 = o5)) and (o8 = to_rep(o7))) and (((o8 = 10) and
-  (result = true)) or ((not (o8 = 10)) and (result = false)))) ->
-  ((result = true) -> (((((to_rep(o9) = to_rep(r__split_fields1)) and
-  ((o9 = o10) and (r__split_fields1 = o11))) and ((temp___154 = o10) and
-  (temp___1541 = o11))) and (((result1 = r__split_fields) and
-  (result2 = r__split_fields1)) and ((temp___154 = r__split_fields2) and
-  (temp___1541 = r__split_fields3)))) ->
-  in_range((to_rep(r__split_fields3) + 1)))))))
+goal WP_parameter_def : in_range((to_rep(r__split_fields3) + 1))

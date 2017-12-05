@@ -269,7 +269,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -477,23 +477,244 @@ function t18b__ref___projection(a2: t18b__ref) : integer = (a2).t18b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "perm.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ib:int. forall o:int. forall o1:int. forall o2:natural.
-  forall o3:int. forall result:int. forall ib1:int. forall result1:bool.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1))) ->
-  (in_range2(ia) -> (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((invariant__({ elts = b; rt = b1 }) = true) and
-  (((to_rep1(first(a1)) <= ia) and (ia <= to_rep1(last(a1)))) and
-  (exists ib2:int. (((to_rep1(first(b1)) <= ib2) and
-  (ib2 <= to_rep1(last(b1)))) and ((to_rep((a[ia])) = to_rep((b[ib2]))) and
+logic ib : int
+
+logic perm__get_witness__result : int
+
+logic ib1 : int
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : (int,natural) farray
+
+logic o4 : t
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : natural
+
+logic o9 : int
+
+logic o10 : int
+
+logic temp___584 : int
+
+logic temp___585 : int
+
+logic temp___583 : int
+
+logic o11 : (int,natural) farray
+
+logic o12 : t
+
+logic o13 : int
+
+logic o14 : (int,natural) farray
+
+logic o15 : t
+
+logic o16 : int
+
+logic o17 : natural
+
+logic o18 : int
+
+logic o19 : int
+
+logic kb : int
+
+logic o20 : (int,natural) farray
+
+logic o21 : t
+
+logic o22 : int
+
+logic o23 : (int,natural) farray
+
+logic o24 : t
+
+logic o25 : int
+
+logic o26 : natural
+
+logic o27 : int
+
+logic o28 : natural
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : (int,natural) farray
+
+logic o32 : t
+
+logic o33 : int
+
+logic o34 : (int,natural) farray
+
+logic o35 : t
+
+logic o36 : int
+
+logic o37 : natural
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : (int,natural) farray
+
+logic o41 : t
+
+logic o42 : (int,natural) farray
+
+logic o43 : t
+
+logic o44 : int
+
+logic o45 : natural
+
+logic o46 : int
+
+logic o47 : natural
+
+logic o48 : int
+
+logic o49 : int
+
+logic perm__get_witness__result1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : int
+
+logic ib2 : int
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic perm__get_witness__result2 : int
+
+logic ib3 : int
+
+logic perm__get_witness__result3 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic ib4 : int
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : int
+
+logic perm__get_witness__result4 : int
+
+logic ib5 : int
+
+logic perm__get_witness__result5 : int
+
+logic ib6 : int
+
+logic perm__get_witness__result6 : int
+
+logic ib7 : int
+
+logic perm__get_witness__result7 : int
+
+logic ib8 : int
+
+logic perm__get_witness__result8 : int
+
+logic ib9 : int
+
+logic perm__get_witness__result9 : int
+
+logic ib10 : int
+
+logic perm__get_witness__result10 : int
+
+logic ib11 : int
+
+logic perm__get_witness__result11 : int
+
+logic ib12 : int
+
+logic perm__get_witness__result12 : int
+
+logic ib13 : int
+
+logic perm__get_witness__result13 : int
+
+logic ib14 : int
+
+logic perm__get_witness__result14 : int
+
+logic ib15 : int
+
+logic perm__get_witness__result15 : int
+
+logic ib16 : int
+
+logic perm__get_witness__result16 : int
+
+logic result12 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : in_range2(ia)
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and (((to_rep1(first(a1)) <= ia) and
+  (ia <= to_rep1(last(a1)))) and
+  (exists ib17:int. (((to_rep1(first(b1)) <= ib17) and
+  (ib17 <= to_rep1(last(b1)))) and ((to_rep((a[ia])) = to_rep((b[ib17]))) and
   (is_perm(remove({ elts = a; rt = a1 }, ia), remove({ elts = b; rt = b1 },
-  ib2)) = true))))))) -> ((({ int__content = result } = { int__content = ib
-  }) and (ib1 = to_rep1(first(b1)))) -> (((to_rep1(first(b1)) <= ib1) and
-  (ib1 <= to_rep1(last(b1)))) -> (((((((to_rep1(first(a1)) <= ia) and
-  (ia <= to_rep1(last(a1)))) and (o1 = ia)) and (o2 = (a[o1]))) and
-  (o3 = to_rep(o2))) and (((o3 = to_rep((b[ib1]))) and (result1 = true)) or
-  ((not (o3 = to_rep((b[ib1])))) and (result1 = false)))) ->
-  ((result1 = true) -> (((o = ib1) and in_range2(ib1)) -> (invariant__({
-  elts = b; rt = b1 }) = true)))))))))))
+  ib17)) = true)))))))
+
+axiom H4 : (result3 = ib)
+
+axiom H5 : (ib2 = to_rep1(first(b1)))
+
+axiom H6 : (to_rep1(first(b1)) <= ib2)
+
+axiom H7 : (ib2 <= to_rep1(last(b1)))
+
+axiom H8 : ((to_rep1(first(a1)) <= ia) and (ia <= to_rep1(last(a1))))
+
+axiom H9 : (o16 = ia)
+
+axiom H10 : (o17 = (a[o16]))
+
+axiom H11 : (o18 = to_rep(o17))
+
+axiom H12 : (((o18 = to_rep((b[ib2]))) -> (result5 = true)) and
+  ((not (o18 = to_rep((b[ib2])))) -> (result5 = false)))
+
+axiom H13 : (result5 = true)
+
+axiom H14 : ((o13 = ib2) and in_range2(ib2))
+
+ (* File "perm.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = b; rt = b1 }) = true)

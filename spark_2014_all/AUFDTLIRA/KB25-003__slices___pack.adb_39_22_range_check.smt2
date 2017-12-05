@@ -191,6 +191,8 @@
 (declare-const temp___422 (Array Int character))
 (declare-const o (Array Int character))
 (declare-const pack__an21__my_b__assume (Array Int integer))
+(declare-const temp___429 (Array Int character))
+(declare-const temp___431 (Array Int character))
 (declare-const temp___442 (Array Int character))
 (declare-const temp___444 (Array Int character))
 (declare-const result (Array Int character))

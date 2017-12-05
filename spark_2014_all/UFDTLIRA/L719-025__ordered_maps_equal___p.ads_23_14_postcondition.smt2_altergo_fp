@@ -1407,27 +1407,46 @@ axiom w_get__post_axiom1 :
   ((in_range3(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range11(w_get1(container, witness2)))))
 
- (* File "p.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall e:int. forall o:int.
-  forall result:int. forall e1:int. forall l__split_fields1:us_main_type.
-  forall l__split_fields2:us_main_type. forall l__split_fields3:us_main_type.
-  forall e2:int. forall l__split_fields4:us_main_type. forall e3:int.
-  ((in_range2(k) and ((has_key(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields4 : us_main_type
+
+logic e3 : int
+
+axiom H : in_range2(k)
+
+axiom H1 : (has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }), k) = true) and
-  (((((o = get(model__({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }), k) = true)
+
+axiom H2 : (((((o = get(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }), k)) and (in_range7(o) and
   (o = get(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
-  l__split_fields } }), k)))) and (({ int__content = result } = {
-  int__content = e }) and (e1 = o))) and (in_range1(e1) and ((((((((length3({
+  l__split_fields } }), k)))) and ((result = e) and (e1 = o))) and
+  (in_range1(e1) and ((((((((length3({ us_split_discrs1 = {
+  rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_maps__map = l__split_fields1 } }) = (length3({
   us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_maps__map = l__split_fields1 }
-  }) = (length3({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
-  l__split_fields } }) - 1)) and (not (has_key(model__({ us_split_discrs1 = {
+  us_split_fields1 = { rec__p__my_maps__map = l__split_fields } }) - 1)) and
+  (not (has_key(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields1 } }), k) = true))) and
   (ole(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
@@ -1536,10 +1555,12 @@ goal WP_parameter_def :
   find(keys({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_maps__map =
   l__split_fields2 } }), k), 1) = true))))) and (((e1 = e2) and
-  (l__split_fields3 = l__split_fields2)) and ((e3 = e1) and ({
-  rec__p__my_maps__map = l__split_fields4 } = { rec__p__my_maps__map =
-  l__split_fields2 })))))) -> (oeq2(model__({ us_split_discrs1 = {
+  (l__split_fields3 = l__split_fields2)) and ((e3 = e1) and
+  (l__split_fields4 = l__split_fields2))))
+
+ (* File "p.ads", line 16, characters 0-0 *)
+goal WP_parameter_def : (oeq2(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields3 } }), model__({ us_split_discrs1 =
   { rec__p__my_maps__map__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } })) = true)))
+  rec__p__my_maps__map = l__split_fields } })) = true)

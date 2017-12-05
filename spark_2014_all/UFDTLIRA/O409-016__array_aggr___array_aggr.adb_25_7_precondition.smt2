@@ -133,6 +133,7 @@
 (assert (= a1 (slide (array_aggr__bi_dim_aggr_ok__a__aggregate_def 0) 3 1 3 1)))
 (assert (= result1 c))
 (assert (= c1 (slide (array_aggr__bi_dim_aggr_ok__c__aggregate_def 0) 3 1 3 1)))
+(assert true)
 (assert (not (<= one 1)))
 (check-sat)
 (exit)

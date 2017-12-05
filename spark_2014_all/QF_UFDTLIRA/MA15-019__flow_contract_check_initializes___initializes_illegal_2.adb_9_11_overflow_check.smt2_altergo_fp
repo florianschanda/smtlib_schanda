@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -119,15 +119,73 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic x : int
+
+logic y : int
+
+logic x1 : int
+
+logic y1 : int
+
+logic a : int
+
+logic b : int
+
+logic c : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic x2 : int
+
+logic result1 : int
+
+logic y2 : int
+
+logic result2 : int
+
+logic a1 : int
+
+logic result3 : int
+
+logic b1 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : ((x + y) = 0)
+
+axiom H3 : (result = x1)
+
+axiom H4 : (x2 = x)
+
+axiom H5 : in_range(x2)
+
+axiom H6 : ((o = (y + x2)) and in_range((y + x2)))
+
+axiom H7 : (result1 = y1)
+
+axiom H8 : (y2 = o)
+
+axiom H9 : in_range(y2)
+
+axiom H10 : (result2 = a)
+
+axiom H11 : (a1 = 1)
+
+axiom H12 : in_range(a1)
+
+axiom H13 : (result3 = b)
+
+axiom H14 : (b1 = 1)
+
+axiom H15 : in_range(b1)
+
+axiom H16 : (((- 2147483648) <= 2147483647) -> in_range(c))
+
  (* File "init.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall x1:int. forall y1:int. forall a:int.
-  forall b:int. forall c:int. forall o:int. forall result:int. forall x2:int.
-  forall result1:int. forall y2:int. forall result2:int. forall a1:int.
-  forall result3:int. forall b1:int. (in_range(x) -> (in_range(y) ->
-  (((x + y) = 0) -> (((result = x1) and (x2 = x)) -> (in_range(x2) ->
-  ((((o = (y + x2)) and in_range((y + x2))) and ((result1 = y1) and
-  (y2 = o))) -> (in_range(y2) -> (((result2 = a) and (a1 = 1)) ->
-  (in_range(a1) -> (((result3 = b) and (b1 = 1)) -> (in_range(b1) ->
-  ((((-2147483648) <= 2147483647) -> in_range(c)) ->
-  in_range((b1 + x2)))))))))))))))
+goal WP_parameter_def : in_range((b1 + x2))

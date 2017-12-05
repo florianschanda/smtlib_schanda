@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -495,69 +495,219 @@ axiom oeq__def_axiom1 :
   rec__user_eq__nested__r1__a = y; rec__user_eq__nested__r1__b = y1 }
   }) = true) <-> (to_rep(x1) = to_rep(y1))))
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : integer
+
+logic y__split_fields : integer
+
+logic y__split_fields1 : integer
+
+logic z__split_fields : integer
+
+logic z__split_fields1 : integer
+
+logic w__split_fields : integer
+
+logic w__split_fields1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic user_eq__x__assume : integer
+
+logic user_eq__x__assume1 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic user_eq__y__assume : integer
+
+logic user_eq__y__assume1 : integer
+
+logic o16 : integer
+
+logic o17 : integer
+
+logic o18 : integer
+
+logic o19 : integer
+
+logic o20 : integer
+
+logic o21 : integer
+
+logic o22 : integer
+
+logic o23 : integer
+
+logic user_eq__z__assume : integer
+
+logic user_eq__z__assume1 : integer
+
+logic o24 : integer
+
+logic o25 : integer
+
+logic o26 : integer
+
+logic o27 : integer
+
+logic o28 : integer
+
+logic o29 : integer
+
+logic o30 : integer
+
+logic o31 : integer
+
+logic user_eq__w__assume : integer
+
+logic user_eq__w__assume1 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic y__split_fields2 : integer
+
+logic y__split_fields3 : integer
+
+logic result4 : integer
+
+logic result5 : integer
+
+logic z__split_fields2 : integer
+
+logic z__split_fields3 : integer
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic w__split_fields2 : integer
+
+logic w__split_fields3 : integer
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (to_rep(o1) = 1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (o4 = o2)
+
+axiom H5 : (o5 = o3)
+
+axiom H6 : (o6 = o4)
+
+axiom H7 : (o7 = o5)
+
+axiom H8 : ((user_eq__x__assume = o6) and (user_eq__x__assume1 = o7))
+
+axiom H9 : ((result = x__split_fields) and (result1 = x__split_fields1))
+
+axiom H10 : ((x__split_fields2 = user_eq__x__assume) and
+  (x__split_fields3 = user_eq__x__assume1))
+
+axiom H11 : (to_rep(o8) = 2)
+
+axiom H12 : (to_rep(o9) = 1)
+
+axiom H13 : ((o10 = o9) and (o11 = o8))
+
+axiom H14 : ((o12 = o10) and (o13 = o11))
+
+axiom H15 : ((o14 = o12) and (o15 = o13))
+
+axiom H16 : ((user_eq__y__assume = o14) and (user_eq__y__assume1 = o15))
+
+axiom H17 : ((result2 = y__split_fields) and (result3 = y__split_fields1))
+
+axiom H18 : ((y__split_fields2 = user_eq__y__assume) and
+  (y__split_fields3 = user_eq__y__assume1))
+
+axiom H19 : (to_rep(o16) = 1)
+
+axiom H20 : (to_rep(o17) = 1)
+
+axiom H21 : ((o18 = o17) and (o19 = o16))
+
+axiom H22 : ((o20 = o18) and (o21 = o19))
+
+axiom H23 : ((o22 = o20) and (o23 = o21))
+
+axiom H24 : ((user_eq__z__assume = o22) and (user_eq__z__assume1 = o23))
+
+axiom H25 : ((result4 = z__split_fields) and (result5 = z__split_fields1))
+
+axiom H26 : ((z__split_fields2 = user_eq__z__assume) and
+  (z__split_fields3 = user_eq__z__assume1))
+
+axiom H27 : (to_rep(o24) = 2)
+
+axiom H28 : (to_rep(o25) = 1)
+
+axiom H29 : ((o26 = o25) and (o27 = o24))
+
+axiom H30 : ((o28 = o26) and (o29 = o27))
+
+axiom H31 : ((o30 = o28) and (o31 = o29))
+
+axiom H32 : ((user_eq__w__assume = o30) and (user_eq__w__assume1 = o31))
+
+axiom H33 : ((result6 = w__split_fields) and (result7 = w__split_fields1))
+
+axiom H34 : ((w__split_fields2 = user_eq__w__assume) and
+  (w__split_fields3 = user_eq__w__assume1))
+
+axiom H35 : (bool_eq3({ us_split_fields3 = { rec__user_eq__rr1__f = {
+  us_split_fields1 = { rec__user_eq__nested__r1__a = x__split_fields2;
+  rec__user_eq__nested__r1__b = x__split_fields3 } } } }, {
+  us_split_fields3 = { rec__user_eq__rr1__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = y__split_fields2;
+  rec__user_eq__nested__r1__b = y__split_fields3 } } } }) = true)
+
  (* File "user_eq.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:integer.
-  forall y__split_fields:integer. forall y__split_fields1:integer.
-  forall z__split_fields:integer. forall z__split_fields1:integer.
-  forall w__split_fields:integer. forall w__split_fields1:integer.
-  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
-  forall user_eq__x__assume:integer. forall user_eq__x__assume1:integer.
-  forall o8:integer. forall o9:integer. forall o10:integer.
-  forall o11:integer. forall o12:integer. forall o13:integer.
-  forall o14:integer. forall o15:integer. forall user_eq__y__assume:integer.
-  forall user_eq__y__assume1:integer. forall o16:integer. forall o17:integer.
-  forall o18:integer. forall o19:integer. forall o20:integer.
-  forall o21:integer. forall o22:integer. forall o23:integer.
-  forall user_eq__z__assume:integer. forall user_eq__z__assume1:integer.
-  forall o24:integer. forall o25:integer. forall o26:us_split_fields.
-  forall o27:us_rep. forall o28:us_split_fields4.
-  forall user_eq__w__assume:us_rep2. forall result:us_split_fields__ref1.
-  forall x__split_fields2:us_split_fields2.
-  forall result1:us_split_fields__ref1.
-  forall y__split_fields2:us_split_fields2.
-  forall result2:us_split_fields__ref2.
-  forall z__split_fields2:us_split_fields4.
-  forall result3:us_split_fields__ref2.
-  forall w__split_fields2:us_split_fields4. (((((((to_rep(o) = 1) and
-  ((to_rep(o1) = 1) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
-  (o5 = o3))) and ((o6 = o4) and (o7 = o5))) and
-  ((o6 = user_eq__x__assume) and (o7 = user_eq__x__assume1))) and
-  ((result = { us_split_fields__content1 = { rec__user_eq__rr1__f = {
-  us_split_fields1 = { rec__user_eq__nested__r1__a = x__split_fields;
-  rec__user_eq__nested__r1__b = x__split_fields1 } } } }) and
-  (x__split_fields2 = { rec__user_eq__rr1__f = { us_split_fields1 = {
-  rec__user_eq__nested__r1__a = user_eq__x__assume;
-  rec__user_eq__nested__r1__b = user_eq__x__assume1 } } }))) ->
-  (((((((to_rep(o8) = 2) and ((to_rep(o9) = 1) and ((o9 = o10) and
-  (o8 = o11)))) and ((o12 = o10) and (o13 = o11))) and ((o14 = o12) and
-  (o15 = o13))) and ((user_eq__y__assume = o14) and
-  (user_eq__y__assume1 = o15))) and ((result1 = { us_split_fields__content1 =
-  { rec__user_eq__rr1__f = { us_split_fields1 = {
-  rec__user_eq__nested__r1__a = y__split_fields;
-  rec__user_eq__nested__r1__b = y__split_fields1 } } } }) and
-  (y__split_fields2 = { rec__user_eq__rr1__f = { us_split_fields1 = {
-  rec__user_eq__nested__r1__a = user_eq__y__assume;
-  rec__user_eq__nested__r1__b = user_eq__y__assume1 } } }))) ->
-  (((((((to_rep(o16) = 1) and ((to_rep(o17) = 1) and ((o17 = o18) and
-  (o16 = o19)))) and ((o20 = o18) and (o21 = o19))) and ((o22 = o20) and
-  (o23 = o21))) and ((user_eq__z__assume = o22) and
-  (user_eq__z__assume1 = o23))) and ((result2 = { us_split_fields__content2 =
-  { rec__user_eq__rr2__f = { us_split_fields1 = {
-  rec__user_eq__nested__r1__a = z__split_fields;
-  rec__user_eq__nested__r1__b = z__split_fields1 } } } }) and
-  (z__split_fields2 = { rec__user_eq__rr2__f = { us_split_fields1 = {
-  rec__user_eq__nested__r1__a = user_eq__z__assume;
-  rec__user_eq__nested__r1__b = user_eq__z__assume1 } } }))) ->
-  (((((((to_rep(o24) = 2) and ((to_rep(o25) = 1) and (o26 = {
-  rec__user_eq__nested__r1__a = o25; rec__user_eq__nested__r1__b = o24
-  }))) and (o27 = { us_split_fields1 = o26 })) and (o28 = {
-  rec__user_eq__rr2__f = o27 })) and (user_eq__w__assume = {
-  us_split_fields5 = o28 })) and ((result3 = { us_split_fields__content2 = {
+goal WP_parameter_def : (bool_eq4({ us_split_fields5 = {
   rec__user_eq__rr2__f = { us_split_fields1 = { rec__user_eq__nested__r1__a =
-  w__split_fields; rec__user_eq__nested__r1__b = w__split_fields1 } } }
-  }) and (w__split_fields2 = (user_eq__w__assume).us_split_fields5))) ->
-  ((bool_eq3({ us_split_fields3 = x__split_fields2 }, { us_split_fields3 =
-  y__split_fields2 }) = true) -> (bool_eq4({ us_split_fields5 =
-  z__split_fields2 }, { us_split_fields5 = w__split_fields2 }) = true)))))))
+  z__split_fields2; rec__user_eq__nested__r1__b = z__split_fields3 } } } }, {
+  us_split_fields5 = { rec__user_eq__rr2__f = { us_split_fields1 = {
+  rec__user_eq__nested__r1__a = w__split_fields2;
+  rec__user_eq__nested__r1__b = w__split_fields3 } } } }) = true)

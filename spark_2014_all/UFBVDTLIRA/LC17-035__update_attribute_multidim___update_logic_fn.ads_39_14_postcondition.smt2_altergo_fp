@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -860,17 +860,67 @@ axiom def_axiom1 :
 axiom a_2d_arr__def_axiom :
   (a_2d_arr = update_logic_fn__a_2d_arr__aggregate_def(100))
 
+logic a : map
+
+logic o : integer
+
+logic o1 : map
+
+logic o2 : integer
+
+logic o3 : map
+
+logic result : map
+
+logic a1 : map
+
+logic result1 : map
+
+logic a2 : map
+
+logic result2 : map
+
+logic a3 : map
+
+logic a4 : map
+
+logic a5 : map
+
+axiom H : (update_logic_fn__a_2d_arr__aggregate_def(100) = a_2d_arr)
+
+axiom H1 : in_range1(x)
+
+axiom H2 : in_range2(y)
+
+axiom H3 : in_range(v1)
+
+axiom H4 : in_range(v2)
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = a_2d_arr)
+
+axiom H7 : (to_rep(o) = v1)
+
+axiom H8 : (o1 = set(a1, 5, of_int(7), o))
+
+axiom H9 : (result1 = a1)
+
+axiom H10 : (a2 = o1)
+
+axiom H11 : (to_rep(o2) = v2)
+
+axiom H12 : (o3 = set(a2, x, y, o2))
+
+axiom H13 : (result2 = a2)
+
+axiom H14 : (a3 = o3)
+
+axiom H15 : (a3 = a4)
+
+axiom H16 : (a5 = a3)
+
  (* File "update_logic_fn.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:map. forall o:integer. forall o1:map. forall o2:integer.
-  forall o3:map. forall result:map. forall a1:map. forall result1:map.
-  forall a2:map. forall result2:map. forall a3:map. forall a4:map.
-  forall a5:map.
-  (((update_logic_fn__a_2d_arr__aggregate_def(100) = a_2d_arr) and
-  (in_range1(x) and (in_range2(y) and (in_range(v1) and (in_range(v2) and
-  ((((result = a) and (a1 = a_2d_arr)) and ((((to_rep(o) = v1) and
-  (o1 = set(a1, 5, of_int(7), o))) and ((result1 = a1) and (a2 = o1))) and
-  (((to_rep(o2) = v2) and (o3 = set(a2, x, y, o2))) and ((result2 = a2) and
-  (a3 = o3))))) and ((a3 = a4) and (a5 = a3)))))))) -> (bool_eq5(a4, 1, 10,
-  of_int(0), of_int(7), temp___202(a_2d_arr, 5, of_int(7), v1, x, y, v2), 1,
-  10, of_int(0), of_int(7)) = true)))
+goal WP_parameter_def : (bool_eq5(a4, 1, 10, of_int(0), of_int(7),
+  temp___202(a_2d_arr, 5, of_int(7), v1, x, y, v2), 1, 10, of_int(0),
+  of_int(7)) = true)

@@ -5331,7 +5331,7 @@ axiom length__post_axiom2 :
 
 type element_type
 
-predicate in_range47(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range47(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -5541,14 +5541,26 @@ logic container54 : int
 
 logic attr__ATTRIBUTE_ADDRESS17 : int
 
- (* File "aida-containers-formal_vectors.ads", line 88, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:capacity_range1.
-  forall container__split_fields1:us_main_type.
-  forall container__split_fields2:us_private.
-  ((to_rep(container__split_discrs) = to_rep1(container__split_fields)) ->
-  ((to_rep(new_item) = to_rep1(new_item1)) -> (((of_int(1) = true) ->
-  ((length({ us_split_discrs3 = {
+logic container__split_fields : capacity_range1
+
+logic container__split_fields1 : us_main_type
+
+logic container__split_fields2 : us_private
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic hnco__test2__v_type_owner__vector_type_owner__append__container__fields : us_main_type
+
+axiom H :
+  (to_rep(container__split_discrs) = to_rep1(container__split_fields))
+
+axiom H1 : (to_rep(new_item) = to_rep1(new_item1))
+
+axiom H2 : ((of_int(1) = true) -> ((length({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity =
   container__split_discrs }; us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -5566,4 +5578,7 @@ goal WP_parameter_def :
   new_item1 }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = new_item2 } };
   rec__ext__ = new_item3 }; attr__tag = new_item4
-  })) <= to_rep(container__split_discrs))) -> in_range1(to_rep(new_item))))))
+  })) <= to_rep(container__split_discrs)))
+
+ (* File "aida-containers-formal_vectors.ads", line 88, characters 0-0 *)
+goal WP_parameter_def : in_range1(to_rep(new_item))

@@ -1423,11 +1423,33 @@ axiom find__post_axiom2 :
   rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
   rec__p__my_sets__set = container1 } }, key1))))) = true))))))))))
 
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields3 : us_main_type
+
+logic e3 : int
+
+axiom H : in_range3(k)
+
+axiom H1 : (contains({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
+  l__split_fields } }, k) = true)
+
  (* File "a-cforse.ads", line 1732, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. (in_range3(k) -> ((contains({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } },
-  k) = true) -> (contains({ us_split_discrs1 = {
+goal WP_parameter_def : (contains({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }, k) = true))))
+  rec__p__my_sets__set = l__split_fields } }, k) = true)

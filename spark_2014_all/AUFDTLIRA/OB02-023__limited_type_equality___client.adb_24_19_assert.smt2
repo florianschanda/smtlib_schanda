@@ -164,6 +164,7 @@
 (declare-const x__split_fields integer)
 (declare-const z__split_fields integer)
 (declare-const a (Array Int us_rep))
+(declare-const c (Array Int us_rep2))
 (assert (= (bool_eq (mk___rep (mk___split_fields x__split_fields)) (mk___rep (mk___split_fields x__split_fields))) true))
 (assert (= (oeq (mk___rep2 (mk___split_fields2 z__split_fields)) (mk___rep2 (mk___split_fields2 z__split_fields))) true))
 (assert (not (= (bool_eq1 a 1 3 a 1 3) true)))

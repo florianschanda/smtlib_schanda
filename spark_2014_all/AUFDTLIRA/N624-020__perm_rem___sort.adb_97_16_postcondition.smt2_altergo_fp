@@ -335,7 +335,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -398,50 +398,163 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic min : int
+
+logic index1 : int
+
+logic sort__index_of_minimum__result : int
+
+logic temp___272 : int
+
+logic temp___271 : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index2 : int
+
+logic min2 : int
+
+logic index3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min3 : int
+
+logic result4 : int
+
+logic index4 : int
+
+logic min4 : int
+
+logic index5 : int
+
+logic min5 : int
+
+logic index6 : int
+
+logic min6 : int
+
+logic index7 : int
+
+logic min7 : int
+
+logic index8 : int
+
+logic min8 : int
+
+logic index9 : int
+
+logic min9 : int
+
+logic index10 : int
+
+logic result5 : int
+
+logic sort__index_of_minimum__result1 : int
+
+logic sort__index_of_minimum__result2 : int
+
+logic sort__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index11 : int
+
+logic sort__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index12 : int
+
+logic sort__index_of_minimum__result5 : int
+
+logic result6 : int
+
+axiom H : in_range3(first)
+
+axiom H1 : in_range3(last)
+
+axiom H2 : ((first <= last) and (((1 <= first) and (first <= 100)) and
+  ((1 <= last) and (last <= 100))))
+
+axiom H3 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = first)
+
+axiom H6 : (result1 = index1)
+
+axiom H7 : (index2 = first)
+
+axiom H8 : (((first <= index2) and (index2 <= last)) ->
+  (((temp___272 = index2) and ((temp___271 = min1) and (((first <= min2) and
+  (min2 <= last)) and (((((1 <= 2147483647) -> in_range2(min2)) and
+  ((first <= last) -> dynamic_property(first, last, index3))) and
+  ((first <= index3) and (index3 <= last))) and ((((((((1 <= min2) and
+  (min2 <= 100)) and (o = min2)) and (o1 = (values[o]))) and
+  (o2 = to_rep(o1))) and (((to_rep((values[index3])) <  o2) ->
+  (result2 = true)) and ((not (to_rep((values[index3])) <  o2)) ->
+  (result2 = false)))) and (((result2 = true) -> ((min2 = result3) and
+  (min3 = index3))) and ((not (result2 = true)) -> (min3 = min2)))) and
+  (index3 = last)))))) and (((index3 = index7) and (min3 = min6)) and
+  ((index8 = index3) and (min7 = min3)))))
+
+axiom H9 : (((first <= index2) and (index2 <= last)) -> (index9 = index7))
+
+axiom H10 : (((first <= index2) and (index2 <= last)) -> (min8 = min6))
+
+axiom H11 : (((first <= index2) and (index2 <= last)) -> (index10 = index8))
+
+axiom H12 : (((first <= index2) and (index2 <= last)) -> (min9 = min7))
+
+axiom H13 : ((not ((first <= index2) and (index2 <= last))) ->
+  (index2 = index9))
+
+axiom H14 : ((not ((first <= index2) and (index2 <= last))) -> (min1 = min8))
+
+axiom H15 : ((not ((first <= index2) and (index2 <= last))) ->
+  (index10 = index2))
+
+axiom H16 : ((not ((first <= index2) and (index2 <= last))) -> (min9 = min1))
+
+axiom H17 :
+  (sort__index_of_minimum__result1 = sort__index_of_minimum__result2)
+
+axiom H18 :
+  (sort__index_of_minimum__result3 = sort__index_of_minimum__result1)
+
+axiom H19 : (result5 = sort__index_of_minimum__result)
+
+axiom H20 : (sort__index_of_minimum__result1 = min8)
+
+axiom H21 :
+  (sort__index_of_minimum__result4 = sort__index_of_minimum__result2)
+
+axiom H22 : (index11 = index9)
+
+axiom H23 : (min10 = min8)
+
+axiom H24 :
+  (sort__index_of_minimum__result5 = sort__index_of_minimum__result3)
+
+axiom H25 : (index12 = index10)
+
+axiom H26 : (min11 = min9)
+
+axiom H27 : (result6 = sort__index_of_minimum__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index1:int.
-  forall sort__index_of_minimum__result:int. forall temp___272:int.
-  forall temp___271:int. forall o:int. forall o1:natural. forall o2:int.
-  forall result:int. forall min1:int. forall result1:int. forall index2:int.
-  forall min2:int. forall index3:int. forall result2:bool.
-  forall result3:int. forall min3:int. forall min4:int. forall index4:int.
-  forall min5:int. forall index5:int. forall min6:int. forall index6:int.
-  forall min7:int. forall index7:int. forall result4:int.
-  forall sort__index_of_minimum__result1:int.
-  forall sort__index_of_minimum__result2:int.
-  forall sort__index_of_minimum__result3:int. forall min8:int.
-  forall index8:int. forall sort__index_of_minimum__result4:int.
-  forall min9:int. forall index9:int.
-  forall sort__index_of_minimum__result5:int.
-  (forall result5:int. ((in_range3(first) and (in_range3(last) and
-  (((first <= last) and (((1 <= first) and (first <= 100)) and
-  ((1 <= last) and (last <= 100)))) and (((((1 <= 2147483647) ->
-  in_range2(min)) and ((({ int__content = result } = { int__content = min
-  }) and (min1 = first)) and (((({ int__content = result1 } = {
-  int__content = index1 }) and (index2 = first)) and ((((first <= index2) and
-  (index2 <= last)) and ((((temp___272 = index2) and ((temp___271 = min1) and
-  (((first <= min2) and (min2 <= last)) and (((((1 <= 2147483647) ->
-  in_range2(min2)) and ((first <= last) -> dynamic_property(first, last,
-  index3))) and ((first <= index3) and (index3 <= last))) and
-  ((((((((1 <= min2) and (min2 <= 100)) and (o = min2)) and
-  (o1 = (values[o]))) and (o2 = to_rep(o1))) and
-  (((to_rep((values[index3])) <  o2) and (result2 = true)) or
-  ((not (to_rep((values[index3])) <  o2)) and (result2 = false)))) and
-  (((result2 = true) and ((min2 = result3) and (min3 = index3))) or
-  ((not (result2 = true)) and (min3 = min2)))) and (index3 = last)))))) and
-  (((index3 = index4) and (min3 = min4)) and ((index5 = index3) and
-  (min5 = min3)))) and (((index6 = index4) and (min6 = min4)) and
-  ((index7 = index5) and (min7 = min5))))) or ((not ((first <= index2) and
-  (index2 <= last))) and (((index2 = index6) and (min1 = min6)) and
-  ((index7 = index2) and (min7 = min1)))))) and
-  (((sort__index_of_minimum__result1 = sort__index_of_minimum__result2) and
-  (sort__index_of_minimum__result3 = sort__index_of_minimum__result1)) and
-  ((result4 = sort__index_of_minimum__result) and
-  (sort__index_of_minimum__result1 = min6)))))) and
-  (((sort__index_of_minimum__result4 = sort__index_of_minimum__result2) and
-  ((index8 = index6) and (min8 = min6))) and
-  ((sort__index_of_minimum__result5 = sort__index_of_minimum__result3) and
-  ((index9 = index7) and (min9 = min7))))) and
-  (result5 = sort__index_of_minimum__result4))))) ->
-  (first <= sort__index_of_minimum__result4))))
+goal WP_parameter_def : (first <= sort__index_of_minimum__result4)

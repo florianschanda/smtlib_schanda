@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -231,9 +231,15 @@ axiom foo__def_axiom :
   rec__dic__pr_record_t2__y = par1 } }, dic__g) = true) <->
   ((to_rep(par) + to_rep(par1)) = dic__g))))
 
+logic g : int
+
+logic temp___177 : integer
+
+logic temp___1771 : integer
+
+axiom H : ((to_rep(temp___177) = 0) and (to_rep(temp___1771) = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g:int. forall temp___177:integer. forall temp___1771:integer.
-  (((to_rep(temp___177) = 0) and (to_rep(temp___1771) = 0)) -> (foo({
-  us_split_fields1 = { rec__dic__pr_record_t2__x = temp___177;
-  rec__dic__pr_record_t2__y = temp___1771 } }, g) = true)))
+goal WP_parameter_def : (foo({ us_split_fields1 = {
+  rec__dic__pr_record_t2__x = temp___177; rec__dic__pr_record_t2__y =
+  temp___1771 } }, g) = true)

@@ -79,7 +79,7 @@ axiom Max_assoc :
 
 type ttB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -169,19 +169,91 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic mint : int
+
+logic maxt : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : int
+
+logic mint1 : int
+
+logic result1 : int
+
+logic maxt1 : int
+
+logic result2 : int
+
+logic mint2 : int
+
+logic result3 : int
+
+logic maxt2 : int
+
+axiom H : ((1 <= 127) -> in_range1(mint))
+
+axiom H1 : ((1 <= 127) -> in_range1(maxt))
+
+axiom H2 : in_range1(x)
+
+axiom H3 : in_range1(y)
+
+axiom H4 : (x <  y)
+
+axiom H5 : ((o = min(x, y)) and in_range1(min(x, y)))
+
+axiom H6 : (result = mint)
+
+axiom H7 : (mint1 = o)
+
+axiom H8 : ((o1 = max(x, y)) and in_range1(max(x, y)))
+
+axiom H9 : (result1 = maxt)
+
+axiom H10 : (maxt1 = o1)
+
+axiom H11 : (mint1 = x)
+
+axiom H12 : (maxt1 = y)
+
+axiom H13 : ((o2 = (x + y)) and in_range((x + y)))
+
+axiom H14 : (o3 = min(x, o2))
+
+axiom H15 : ((o4 = o3) and in_range1(o3))
+
+axiom H16 : (result2 = mint1)
+
+axiom H17 : (mint2 = o4)
+
+axiom H18 : ((o5 = (x + y)) and in_range((x + y)))
+
+axiom H19 : (o6 = max(o5, y))
+
+axiom H20 : ((o7 = o6) and in_range1(o6))
+
+axiom H21 : (result3 = maxt1)
+
+axiom H22 : (maxt2 = o7)
+
+axiom H23 : (mint2 = x)
+
  (* File "minmax.adb", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mint:int. forall maxt:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
-  forall o7:int. forall result:int. forall mint1:int. forall result1:int.
-  forall maxt1:int. forall result2:int. forall mint2:int. forall result3:int.
-  forall maxt2:int. (((1 <= 127) -> in_range1(mint)) -> (((1 <= 127) ->
-  in_range1(maxt)) -> (in_range1(x) -> (in_range1(y) -> ((x <  y) ->
-  ((((o = min(x, y)) and in_range1(min(x, y))) and ((result = mint) and
-  (mint1 = o))) -> ((((o1 = max(x, y)) and in_range1(max(x, y))) and
-  ((result1 = maxt) and (maxt1 = o1))) -> ((mint1 = x) -> ((maxt1 = y) ->
-  ((((((o2 = (x + y)) and in_range((x + y))) and (o3 = min(x, o2))) and
-  ((o4 = o3) and in_range1(o3))) and ((result2 = mint1) and (mint2 = o4))) ->
-  ((((((o5 = (x + y)) and in_range((x + y))) and (o6 = max(o5, y))) and
-  ((o7 = o6) and in_range1(o6))) and ((result3 = maxt1) and (maxt2 = o7))) ->
-  ((mint2 = x) -> in_range((x + y)))))))))))))))
+goal WP_parameter_def : in_range((x + y))

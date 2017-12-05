@@ -421,7 +421,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1079,7 +1079,7 @@ axiom def_axiom :
   (forall temp___327:(int,character) farray.
   forall temp___3271:(int,character) farray.
   (forall temp___328:int. forall temp___329:int.
-  ((dynamic_property6((-2147483648), 2147483647, temp___328, temp___329) ->
+  ((dynamic_property6((- 2147483648), 2147483647, temp___328, temp___329) ->
   ((to_rep2(first4((temp___325({ us_split_fields1 = {
   rec__messages__message__sent = temp___327;
   rec__messages__message__received = temp___3271 } }, temp___328,
@@ -1097,24 +1097,60 @@ axiom def_axiom :
 axiom null_msg__def_axiom : ((null_msg = temp___String_Literal_133(void)) and
   (null_msg1 = temp___String_Literal_134(void)))
 
- (* File "communications.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall com__split_fields:(int,us_rep) farray. forall com__split_fields1:t.
-  forall communications__mark_duplicates__null_msg__assume:(int,character) farray.
-  forall communications__mark_duplicates__null_msg__assume1:(int,character) farray.
-  forall temp___332:(int,us_rep) farray. forall temp___3321:t2.
-  forall temp___333:(int,us_rep) farray. forall temp___3331:t1.
-  forall temp___335:(int,us_rep) farray. forall temp___3351:t1.
-  forall o:(int,us_rep) farray. forall o1:t. forall o2:(int,us_rep) farray.
-  forall o3:t. forall temp___337:positive.
-  forall temp___3371:(int,us_rep) farray. forall temp___3372:t.
-  forall result:(int,us_rep) farray. forall result1:t.
-  forall com__split_fields2:(int,us_rep) farray. forall com__split_fields3:t.
-  forall com__split_fields4:(int,us_rep) farray. forall com__split_fields5:t.
-  forall com__split_fields6:(int,us_rep) farray. forall com__split_fields7:t.
-  ((compare(i1s, 1, 10, i1s1, 1, 10) <= 0) -> (((dynamic_property1(1,
-  to_rep(com__split_discrs), to_rep2(first(com__split_fields1)),
-  to_rep2(last(com__split_fields1))) and
+logic com__split_fields : (int,us_rep) farray
+
+logic com__split_fields1 : t
+
+logic communications__mark_duplicates__null_msg__assume : (int,character) farray
+
+logic communications__mark_duplicates__null_msg__assume1 : (int,character) farray
+
+logic temp___332 : (int,us_rep) farray
+
+logic temp___3321 : t2
+
+logic temp___333 : (int,us_rep) farray
+
+logic temp___3331 : t1
+
+logic temp___335 : (int,us_rep) farray
+
+logic temp___3351 : t1
+
+logic o : (int,us_rep) farray
+
+logic o1 : t
+
+logic o2 : (int,us_rep) farray
+
+logic o3 : t
+
+logic temp___337 : positive
+
+logic temp___3371 : (int,us_rep) farray
+
+logic temp___3372 : t
+
+logic result : (int,us_rep) farray
+
+logic result1 : t
+
+logic com__split_fields2 : (int,us_rep) farray
+
+logic com__split_fields3 : t
+
+logic com__split_fields4 : (int,us_rep) farray
+
+logic com__split_fields5 : t
+
+logic com__split_fields6 : (int,us_rep) farray
+
+logic com__split_fields7 : t
+
+axiom H : (compare(i1s, 1, 10, i1s1, 1, 10) <= 0)
+
+axiom H1 : ((dynamic_property1(1, to_rep(com__split_discrs),
+  to_rep2(first(com__split_fields1)), to_rep2(last(com__split_fields1))) and
   ((to_rep2(first(com__split_fields1)) = 1) and
   (to_rep2(last(com__split_fields1)) = to_rep(com__split_discrs)))) and
   (forall temp___190:int.
@@ -1123,62 +1159,110 @@ goal WP_parameter_def :
   (compare((((com__split_fields[temp___190])).us_split_fields1).rec__messages__message__sent,
   1, 10,
   (((com__split_fields[temp___190])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0)))) ->
-  ((forall idx:int. (((1 <= idx) and
-   (idx <= (to_rep(com__split_discrs) - 1))) ->
-   (compare((((com__split_fields[idx])).us_split_fields1).rec__messages__message__received,
-   1, 10,
-   (((com__split_fields[(idx + 1)])).us_split_fields1).rec__messages__message__received,
-   1, 10) <= 0))) ->
-  ((((((compare(temp___String_Literal_133(void), 1, 10,
-  temp___String_Literal_134(void), 1, 10) <= 0) and
-  ((temp___String_Literal_133(void) = communications__mark_duplicates__null_msg__assume) and
-  (temp___String_Literal_134(void) = communications__mark_duplicates__null_msg__assume1))) and
-  ((null_msg = communications__mark_duplicates__null_msg__assume) and
-  (null_msg1 = communications__mark_duplicates__null_msg__assume1))) and
-  ((compare(null_msg, 1, 10, null_msg1, 1, 10) <= 0) and
-  (((to_rep(com__split_discrs) = r4b) and in_range(r4b)) and
-  ((((((((to_rep2(first4((temp___325({ us_split_fields1 = {
+  1, 10) <= 0))))
+
+axiom H2 :
+  (forall idx:int. (((1 <= idx) and
+  (idx <= (to_rep(com__split_discrs) - 1))) ->
+  (compare((((com__split_fields[idx])).us_split_fields1).rec__messages__message__received,
+  1, 10,
+  (((com__split_fields[(idx + 1)])).us_split_fields1).rec__messages__message__received,
+  1, 10) <= 0)))
+
+axiom H3 : (compare(temp___String_Literal_133(void), 1, 10,
+  temp___String_Literal_134(void), 1, 10) <= 0)
+
+axiom H4 :
+  (temp___String_Literal_133(void) = communications__mark_duplicates__null_msg__assume)
+
+axiom H5 :
+  (temp___String_Literal_134(void) = communications__mark_duplicates__null_msg__assume1)
+
+axiom H6 :
+  ((communications__mark_duplicates__null_msg__assume = null_msg) and
+  (communications__mark_duplicates__null_msg__assume1 = null_msg1))
+
+axiom H7 : (compare(null_msg, 1, 10, null_msg1, 1, 10) <= 0)
+
+axiom H8 : (to_rep(com__split_discrs) = r4b)
+
+axiom H9 : in_range(r4b)
+
+axiom H10 : (to_rep2(first4((temp___325({ us_split_fields1 = {
   rec__messages__message__sent = null_msg; rec__messages__message__received =
-  null_msg1 } }, 1, r4b)).rt2)) = 1) and ((to_rep2(last4((temp___325({
+  null_msg1 } }, 1, r4b)).rt2)) = 1)
+
+axiom H11 : (to_rep2(last4((temp___325({ us_split_fields1 = {
+  rec__messages__message__sent = null_msg; rec__messages__message__received =
+  null_msg1 } }, 1, r4b)).rt2)) = r4b)
+
+axiom H12 : ({ elts2 = temp___332; rt2 = temp___3321 } = temp___325({
   us_split_fields1 = { rec__messages__message__sent = null_msg;
-  rec__messages__message__received = null_msg1 } }, 1, r4b)).rt2)) = r4b) and
-  ({ elts2 = temp___332; rt2 = temp___3321 } = temp___325({
-  us_split_fields1 = { rec__messages__message__sent = null_msg;
-  rec__messages__message__received = null_msg1 } }, 1, r4b)))) and
-  ((((to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321))) and
-  (((1 <= r4b) and
-  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = ((r4b - 1) + 1))) or
-  ((not (1 <= r4b)) and
-  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = 0)))) or
-  ((not (to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321)))) and
-  (((1 <= r4b) and (0 = ((r4b - 1) + 1))) or (not (1 <= r4b))))) and
-  ((temp___332 = temp___333) and (mk1(to_rep2(first4(temp___3321)),
-  to_rep2(last4(temp___3321))) = temp___3331)))) and
-  ((((to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331))) and
-  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) and
-  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) or
-  ((not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1)))) and
-  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = 0)))) or
-  ((not (to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331)))) and
-  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) and
-  (0 = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) or
-  (not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))))))) and
-  ((temp___335 = temp___333) and (temp___3351 = temp___3331)))) and
-  ((temp___335 = o) and (mk(to_rep2(first2(temp___3351)),
-  to_rep2(last2(temp___3351))) = o1))) and ((o2 = o) and (o3 = o1))) and
-  ((com__split_discrs = temp___337) and ((temp___3371 = o2) and
-  (temp___3372 = o3)))) and ((((result = com__split_fields) and
-  (result1 = com__split_fields1)) and ((temp___3371 = com__split_fields2) and
-  (temp___3372 = com__split_fields3))) and
-  (com__split_discrs = temp___337)))))) and
-  (((com__split_fields4 = com__split_fields2) and
-  (com__split_fields5 = com__split_fields3)) and
-  ((com__split_fields6 = com__split_fields2) and
-  (com__split_fields7 = com__split_fields3)))) ->
+  rec__messages__message__received = null_msg1 } }, 1, r4b))
+
+axiom H13 :
+  (((to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321))) ->
+  (((1 <= r4b) ->
+  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = ((r4b - 1) + 1))) and
+  ((not (1 <= r4b)) ->
+  (((to_rep2(last4(temp___3321)) - to_rep2(first4(temp___3321))) + 1) = 0)))) and
+  ((not (to_rep2(first4(temp___3321)) <= to_rep2(last4(temp___3321)))) ->
+  ((1 <= r4b) -> (0 = ((r4b - 1) + 1)))))
+
+axiom H14 : (temp___332 = temp___333)
+
+axiom H15 : (mk1(to_rep2(first4(temp___3321)),
+  to_rep2(last4(temp___3321))) = temp___3331)
+
+axiom H16 :
+  (((to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331))) ->
+  (((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) ->
+  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1))) and
+  ((not (to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1)))) ->
+  (((to_rep2(last2(temp___3331)) - to_rep2(first2(temp___3331))) + 1) = 0)))) and
+  ((not (to_rep2(first2(temp___3331)) <= to_rep2(last2(temp___3331)))) ->
+  ((to_rep2(first(com__split_fields1)) <= to_rep2(last(com__split_fields1))) ->
+  (0 = ((to_rep2(last(com__split_fields1)) - to_rep2(first(com__split_fields1))) + 1)))))
+
+axiom H17 : ((temp___335 = temp___333) and (temp___3351 = temp___3331))
+
+axiom H18 : (temp___335 = o)
+
+axiom H19 : (mk(to_rep2(first2(temp___3351)),
+  to_rep2(last2(temp___3351))) = o1)
+
+axiom H20 : (o2 = o)
+
+axiom H21 : (o3 = o1)
+
+axiom H22 : (com__split_discrs = temp___337)
+
+axiom H23 : (temp___3371 = o2)
+
+axiom H24 : (temp___3372 = o3)
+
+axiom H25 : (result = com__split_fields)
+
+axiom H26 : (result1 = com__split_fields1)
+
+axiom H27 : (temp___3371 = com__split_fields2)
+
+axiom H28 : (temp___3372 = com__split_fields3)
+
+axiom H29 : (com__split_discrs = temp___337)
+
+axiom H30 : (com__split_fields4 = com__split_fields2)
+
+axiom H31 : (com__split_fields5 = com__split_fields3)
+
+axiom H32 : ((com__split_fields6 = com__split_fields2) and
+  (com__split_fields7 = com__split_fields3))
+
+ (* File "communications.ads", line 16, characters 0-0 *)
+goal WP_parameter_def :
   (forall idx:int. (((1 <= idx) and
   (idx <= (to_rep(com__split_discrs) - 1))) ->
   (compare((((com__split_fields4[idx])).us_split_fields1).rec__messages__message__received,
   1, 10,
   (((com__split_fields4[(idx + 1)])).us_split_fields1).rec__messages__message__received,
-  1, 10) <= 0))))))))
+  1, 10) <= 0)))

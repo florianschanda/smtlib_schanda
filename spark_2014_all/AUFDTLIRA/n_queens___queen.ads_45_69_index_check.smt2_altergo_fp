@@ -256,7 +256,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -352,74 +352,276 @@ axiom def_axiom :
   (forall temp___175:int.
   ((queen__copy_until__r__aggregate_def(temp___174)[temp___175]) = of_rep(temp___174))))
 
- (* File "queen.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:(int,index) farray. forall j:int. forall j1:int.
-  forall queen__copy_until__result:(int,index) farray. forall temp___178:int.
-  forall temp___176:(int,index) farray. forall o:index.
-  forall o1:(int,index) farray. forall temp___183:int.
-  forall temp___181:(int,index) farray. forall o2:index.
-  forall o3:(int,index) farray. forall j2:int. forall o4:int.
-  forall o5:index. forall o6:int. forall result:(int,index) farray.
-  forall r1:(int,index) farray. forall result1:int. forall j3:int.
-  forall r2:(int,index) farray. forall j4:int.
-  forall result2:(int,index) farray. forall r3:(int,index) farray.
-  forall r4:(int,index) farray. forall j5:int. forall r5:(int,index) farray.
-  forall j6:int. forall r6:(int,index) farray. forall j7:int.
-  forall r7:(int,index) farray. forall j8:int. forall result3:int.
-  forall j9:int. forall r8:(int,index) farray. forall j10:int.
-  forall result4:(int,index) farray. forall r9:(int,index) farray.
-  forall r10:(int,index) farray. forall j11:int.
-  forall r11:(int,index) farray. forall j12:int.
-  forall r12:(int,index) farray. forall j13:int.
-  forall r13:(int,index) farray. forall j14:int.
-  forall result5:(int,index) farray.
-  forall queen__copy_until__result1:(int,index) farray.
-  forall queen__copy_until__result2:(int,index) farray.
-  forall queen__copy_until__result3:(int,index) farray.
-  forall r14:(int,index) farray. forall j15:int. forall j16:int.
-  forall queen__copy_until__result4:(int,index) farray.
-  forall r15:(int,index) farray. forall j17:int. forall j18:int.
-  forall queen__copy_until__result5:(int,index) farray. (in_range1(i) ->
-  ((((({ map__content = result } = { map__content = r }) and
-  (r1 = queen__copy_until__r__aggregate_def(1))) and (((({ int__content =
-  result1 } = { int__content = j }) and (j3 = 1)) and ((((1 <= j3) and
-  (j3 <= i)) and ((((temp___178 = j3) and ((temp___176 = r1) and
-  ((forall k:int. (((1 <= k) and (k <= (j4 - 1))) ->
-   (to_rep((r2[k])) = to_rep((b[k]))))) and
+logic r : (int,index) farray
+
+logic j : int
+
+logic j1 : int
+
+logic queen__copy_until__result : (int,index) farray
+
+logic temp___178 : int
+
+logic temp___176 : (int,index) farray
+
+logic k : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : index
+
+logic o4 : (int,index) farray
+
+logic temp___183 : int
+
+logic temp___181 : (int,index) farray
+
+logic k1 : int
+
+logic o5 : int
+
+logic o6 : index
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : (int,index) farray
+
+logic j2 : int
+
+logic o10 : int
+
+logic o11 : index
+
+logic o12 : int
+
+logic result : (int,index) farray
+
+logic r1 : (int,index) farray
+
+logic result1 : int
+
+logic j3 : int
+
+logic r2 : (int,index) farray
+
+logic j4 : int
+
+logic result2 : (int,index) farray
+
+logic r3 : (int,index) farray
+
+logic result3 : int
+
+logic j5 : int
+
+logic r4 : (int,index) farray
+
+logic j6 : int
+
+logic r5 : (int,index) farray
+
+logic j7 : int
+
+logic r6 : (int,index) farray
+
+logic j8 : int
+
+logic r7 : (int,index) farray
+
+logic j9 : int
+
+logic r8 : (int,index) farray
+
+logic j10 : int
+
+logic r9 : (int,index) farray
+
+logic j11 : int
+
+logic result4 : int
+
+logic j12 : int
+
+logic r10 : (int,index) farray
+
+logic j13 : int
+
+logic result5 : (int,index) farray
+
+logic r11 : (int,index) farray
+
+logic result6 : int
+
+logic j14 : int
+
+logic r12 : (int,index) farray
+
+logic j15 : int
+
+logic r13 : (int,index) farray
+
+logic j16 : int
+
+logic r14 : (int,index) farray
+
+logic j17 : int
+
+logic r15 : (int,index) farray
+
+logic j18 : int
+
+logic r16 : (int,index) farray
+
+logic j19 : int
+
+logic r17 : (int,index) farray
+
+logic j20 : int
+
+logic r18 : (int,index) farray
+
+logic j21 : int
+
+logic r19 : (int,index) farray
+
+logic j22 : int
+
+logic result7 : (int,index) farray
+
+logic queen__copy_until__result1 : (int,index) farray
+
+logic queen__copy_until__result2 : (int,index) farray
+
+logic queen__copy_until__result3 : (int,index) farray
+
+logic r20 : (int,index) farray
+
+logic j23 : int
+
+logic j24 : int
+
+logic queen__copy_until__result4 : (int,index) farray
+
+logic r21 : (int,index) farray
+
+logic j25 : int
+
+logic j26 : int
+
+logic queen__copy_until__result5 : (int,index) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = queen__copy_until__r__aggregate_def(1))
+
+axiom H3 : (result1 = j)
+
+axiom H4 : (j3 = 1)
+
+axiom H5 : (((1 <= j3) and (j3 <= i)) -> (((temp___178 = j3) and
+  ((temp___176 = r1) and
+  ((forall k2:int. (((1 <= k2) and (k2 <= (j4 - 1))) ->
+   (to_rep((r2[k2])) = to_rep((b[k2]))))) and
   ((((forall temp___177:int. (((1 <= temp___177) and (temp___177 <= 8)) ->
      ((j4 <= temp___177) -> ((r2[temp___177]) = (temp___176[temp___177]))))) and
   ((1 <= i) -> dynamic_property(1, i, j4))) and ((1 <= j4) and
-  (j4 <= i))) and ((((to_rep(o) = to_rep((b[j4]))) and
-  (o1 = (r2[j4 <- o]))) and ((r2 = result2) and (r3 = o1))) and
-  (j4 = i)))))) and (((j4 = j5) and (r3 = r4)) and ((j6 = j4) and
-  (r5 = r3)))) and ((({ int__content = j7 } = { int__content = j5 }) and ({
-  map__content = r6 } = { map__content = r4 })) and ((j8 = j6) and
-  (r7 = r5))))) or ((not ((1 <= j3) and (j3 <= i))) and (((j3 = j7) and
-  (r1 = r6)) and ((j8 = j3) and (r7 = r1)))))) and (((({ int__content =
-  result3 } = { int__content = j1 }) and (j9 = (i + 1))) and
-  (((((i + 1) <= j9) and (j9 <= 8)) and ((((temp___183 = j9) and
-  ((temp___181 = r6) and
-  ((forall k:int. (((1 <= k) and (k <= i)) ->
-   (to_rep((r8[k])) = to_rep((b[k]))))) and
+  (j4 <= i))) and ((((to_rep(o3) = to_rep((b[j4]))) and
+  (o4 = (r2[j4 <- o3]))) and ((r2 = result2) and (r3 = o4))) and
+  (j4 = i)))))) and (((j4 = j8) and (r3 = r6)) and ((j9 = j4) and
+  (r7 = r3)))))
+
+axiom H6 : (((1 <= j3) and (j3 <= i)) -> (j10 = j8))
+
+axiom H7 : (((1 <= j3) and (j3 <= i)) -> (r8 = r6))
+
+axiom H8 : (((1 <= j3) and (j3 <= i)) -> (j11 = j9))
+
+axiom H9 : (((1 <= j3) and (j3 <= i)) -> (r9 = r7))
+
+axiom H10 : ((not ((1 <= j3) and (j3 <= i))) -> (j3 = j10))
+
+axiom H11 : ((not ((1 <= j3) and (j3 <= i))) -> (r1 = r8))
+
+axiom H12 : ((not ((1 <= j3) and (j3 <= i))) -> (j11 = j3))
+
+axiom H13 : ((not ((1 <= j3) and (j3 <= i))) -> (r9 = r1))
+
+axiom H14 : (result4 = j1)
+
+axiom H15 : (j12 = (i + 1))
+
+axiom H16 : ((((i + 1) <= j12) and (j12 <= 8)) -> (((temp___183 = j12) and
+  ((temp___181 = r8) and
+  ((forall k2:int. (((1 <= k2) and (k2 <= i)) ->
+   (to_rep((r10[k2])) = to_rep((b[k2]))))) and
   ((((forall temp___182:int. (((1 <= temp___182) and (temp___182 <= 8)) ->
-     ((j10 <= temp___182) -> ((r8[temp___182]) = (temp___181[temp___182]))))) and
-  (((i + 1) <= 8) -> dynamic_property1((i + 1), 8, j10))) and
-  (((i + 1) <= j10) and (j10 <= 8))) and
-  ((((to_rep(o2) = to_rep((c[j10]))) and (o3 = (r8[j10 <- o2]))) and
-  ((r8 = result4) and (r9 = o3))) and (j10 = 8)))))) and (((j10 = j11) and
-  (r9 = r10)) and ((j12 = j10) and (r11 = r9)))) and ((({ int__content = j13
-  } = { int__content = j11 }) and ({ map__content = r12 } = { map__content =
-  r10 })) and ((j14 = j12) and (r13 = r11))))) or ((not (((i + 1) <= j9) and
-  (j9 <= 8))) and (((j9 = j13) and ({ map__content = r12 } = { map__content =
-  r6 })) and ((j14 = j9) and (r13 = r7)))))) and
-  (((queen__copy_until__result1 = queen__copy_until__result2) and
-  (queen__copy_until__result3 = queen__copy_until__result1)) and
-  ((result5 = queen__copy_until__result) and
-  (queen__copy_until__result1 = r12)))))) and
-  (((queen__copy_until__result4 = queen__copy_until__result2) and
-  ((j16 = j13) and ((j15 = j7) and (r14 = r12)))) and
-  ((queen__copy_until__result5 = queen__copy_until__result3) and
-  ((j18 = j14) and ((j17 = j8) and (r15 = r13)))))) -> (((1 <= j2) and
-  (j2 <= i)) -> ((((((1 <= j2) and (j2 <= 8)) and (o4 = j2)) and
-  (o5 = (b[o4]))) and (o6 = to_rep(o5))) -> (1 <= j2))))))
+     ((j13 <= temp___182) ->
+     ((r10[temp___182]) = (temp___181[temp___182]))))) and (((i + 1) <= 8) ->
+  dynamic_property1((i + 1), 8, j13))) and (((i + 1) <= j13) and
+  (j13 <= 8))) and ((((to_rep(o8) = to_rep((c[j13]))) and
+  (o9 = (r10[j13 <- o8]))) and ((r10 = result5) and (r11 = o9))) and
+  (j13 = 8)))))) and (((j19 = j13) and (r16 = r11)) and ((j20 = j13) and
+  (r17 = r11)))))
+
+axiom H17 : ((((i + 1) <= j12) and (j12 <= 8)) -> (j21 = j19))
+
+axiom H18 : ((((i + 1) <= j12) and (j12 <= 8)) -> (r18 = r16))
+
+axiom H19 : ((((i + 1) <= j12) and (j12 <= 8)) -> (j22 = j20))
+
+axiom H20 : ((((i + 1) <= j12) and (j12 <= 8)) -> (r19 = r17))
+
+axiom H21 : ((not (((i + 1) <= j12) and (j12 <= 8))) -> (j21 = j12))
+
+axiom H22 : ((not (((i + 1) <= j12) and (j12 <= 8))) -> (r18 = r8))
+
+axiom H23 : ((not (((i + 1) <= j12) and (j12 <= 8))) -> (j22 = j12))
+
+axiom H24 : ((not (((i + 1) <= j12) and (j12 <= 8))) -> (r19 = r9))
+
+axiom H25 : (queen__copy_until__result2 = queen__copy_until__result1)
+
+axiom H26 : (queen__copy_until__result3 = queen__copy_until__result1)
+
+axiom H27 : (result7 = queen__copy_until__result)
+
+axiom H28 : (queen__copy_until__result1 = r18)
+
+axiom H29 : (queen__copy_until__result4 = queen__copy_until__result2)
+
+axiom H30 : (j24 = j21)
+
+axiom H31 : (j23 = j10)
+
+axiom H32 : (r20 = r18)
+
+axiom H33 : (queen__copy_until__result5 = queen__copy_until__result3)
+
+axiom H34 : (j26 = j22)
+
+axiom H35 : (j25 = j11)
+
+axiom H36 : (r21 = r19)
+
+axiom H37 : (1 <= j2)
+
+axiom H38 : (j2 <= i)
+
+axiom H39 : ((1 <= j2) and (j2 <= 8))
+
+axiom H40 : (o10 = j2)
+
+axiom H41 : (o11 = (b[o10]))
+
+axiom H42 : (o12 = to_rep(o11))
+
+ (* File "queen.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (1 <= j2)

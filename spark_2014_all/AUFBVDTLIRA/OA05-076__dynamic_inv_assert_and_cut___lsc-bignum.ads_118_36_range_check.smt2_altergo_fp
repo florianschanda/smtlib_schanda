@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1112,43 +1112,415 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 axiom from_word32__post_axiom : true
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,word32) farray. forall carry:bool. forall j:int.
-  forall new_carry:bool. forall i:int. forall temp___585:bool.
-  forall temp___577:(int,word32) farray. forall temp___584:int.
-  forall temp___582:(int,word32) farray.
-  forall temp___576:(int,word32) farray.
-  forall temp___586:(int,word32) farray.
-  forall temp___587:(int,word32) farray. forall temp___580:bool.
-  forall temp___579:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:us_rep. forall a1:(int,word32) farray. forall j1:int.
-  forall new_carry1:bool. forall result:bool. forall carry1:bool.
-  forall result1:int. forall i1:int. forall a2:(int,word32) farray.
-  forall carry2:bool. forall j2:int. forall i2:int. forall j3:int.
-  forall new_carry2:bool. forall a3:(int,word32) farray. forall carry3:bool.
-  forall a4:(int,word32) farray. forall carry4:bool. forall j4:int.
-  forall new_carry3:bool. forall i3:int. forall a5:(int,word32) farray.
-  forall carry5:bool. forall j5:int. forall new_carry4:bool. forall i4:int.
-  forall a6:(int,word32) farray. forall carry6:bool. forall j6:int.
-  forall new_carry5:bool. forall i5:int. forall a7:(int,word32) farray.
-  forall carry7:bool. forall j7:int. forall new_carry6:bool. forall i6:int.
-  forall a8:(int,word32) farray. forall carry8:bool. forall j8:int.
-  forall new_carry7:bool. forall i7:int. forall a9:(int,word32) farray.
-  forall carry9:bool. forall j9:int. forall new_carry8:bool. forall i8:int.
-  (dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last)) ->
-  (in_range2(a_first) -> (in_range2(a_last) -> (dynamic_property(0,
-  2147483646, to_rep(first(b1)), to_rep(last(b1))) -> (in_range2(b_first) ->
-  (((((((to_rep(a__first) <= a_first) and (a_first <= to_rep(a__last))) and
-  ((to_rep(a__first) <= a_last) and (a_last <= to_rep(a__last)))) and
-  ((to_rep(first(b1)) <= b_first) and (b_first <= to_rep(last(b1))))) and
+logic a : (int,word32) farray
+
+logic carry : bool
+
+logic j : int
+
+logic new_carry : bool
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic temp___585 : bool
+
+logic temp___577 : (int,word32) farray
+
+logic temp___584 : int
+
+logic temp___582 : (int,word32) farray
+
+logic temp___576 : (int,word32) farray
+
+logic temp___586 : (int,word32) farray
+
+logic temp___587 : (int,word32) farray
+
+logic temp___580 : bool
+
+logic temp___579 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : us_rep
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : us_rep
+
+logic o15 : us_rep
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : us_rep
+
+logic o19 : us_rep
+
+logic o20 : us_rep
+
+logic o21 : us_rep
+
+logic k : int
+
+logic o22 : int
+
+logic o23 : word32
+
+logic o24 : t
+
+logic o25 : bool
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : word32
+
+logic o32 : int
+
+logic o33 : word32
+
+logic o34 : t
+
+logic o35 : t
+
+logic o36 : bool
+
+logic o37 : int
+
+logic o38 : word32
+
+logic o39 : int
+
+logic o40 : word32
+
+logic o41 : t
+
+logic o42 : t
+
+logic o43 : bool
+
+logic o44 : int
+
+logic o45 : word32
+
+logic o46 : int
+
+logic o47 : word32
+
+logic o48 : t
+
+logic o49 : t
+
+logic o50 : t
+
+logic o51 : t
+
+logic o52 : t
+
+logic o53 : word32
+
+logic o54 : int
+
+logic o55 : (int,word32) farray
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : us_rep
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : us_rep
+
+logic o70 : us_rep
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : us_rep
+
+logic o76 : us_rep
+
+logic o77 : us_rep
+
+logic o78 : us_rep
+
+logic k1 : int
+
+logic us : int
+
+logic o79 : int
+
+logic o80 : bool
+
+logic o81 : int
+
+logic o82 : word32
+
+logic o83 : t
+
+logic o84 : bool
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : us_rep
+
+logic o94 : int
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : us_rep
+
+logic o99 : us_rep
+
+logic o100 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : us_rep
+
+logic o105 : us_rep
+
+logic o106 : us_rep
+
+logic o107 : us_rep
+
+logic a1 : (int,word32) farray
+
+logic j1 : int
+
+logic new_carry1 : bool
+
+logic result : bool
+
+logic carry1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic a2 : (int,word32) farray
+
+logic carry2 : bool
+
+logic j2 : int
+
+logic new_carry2 : bool
+
+logic i2 : int
+
+logic result2 : int
+
+logic j3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic new_carry3 : bool
+
+logic result5 : (int,word32) farray
+
+logic a3 : (int,word32) farray
+
+logic result6 : bool
+
+logic carry3 : bool
+
+logic result7 : bool
+
+logic result8 : int
+
+logic i3 : int
+
+logic a4 : (int,word32) farray
+
+logic carry4 : bool
+
+logic j4 : int
+
+logic new_carry4 : bool
+
+logic i4 : int
+
+logic a5 : (int,word32) farray
+
+logic carry5 : bool
+
+logic j5 : int
+
+logic new_carry5 : bool
+
+logic i5 : int
+
+logic a6 : (int,word32) farray
+
+logic carry6 : bool
+
+logic j6 : int
+
+logic new_carry6 : bool
+
+logic i6 : int
+
+logic a7 : (int,word32) farray
+
+logic carry7 : bool
+
+logic j7 : int
+
+logic new_carry7 : bool
+
+logic i7 : int
+
+logic a8 : (int,word32) farray
+
+logic carry8 : bool
+
+logic j8 : int
+
+logic new_carry8 : bool
+
+logic i8 : int
+
+logic a9 : (int,word32) farray
+
+logic carry9 : bool
+
+logic j9 : int
+
+logic new_carry9 : bool
+
+logic i9 : int
+
+logic a10 : (int,word32) farray
+
+logic carry10 : bool
+
+logic j10 : int
+
+logic new_carry10 : bool
+
+logic i10 : int
+
+logic a11 : (int,word32) farray
+
+logic carry11 : bool
+
+logic j11 : int
+
+logic new_carry11 : bool
+
+logic i11 : int
+
+axiom H : dynamic_property(0, 2147483646, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(a_last)
+
+axiom H3 : dynamic_property(0, 2147483646, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H4 : in_range2(b_first)
+
+axiom H5 : ((((((to_rep(a__first) <= a_first) and
+  (a_first <= to_rep(a__last))) and ((to_rep(a__first) <= a_last) and
+  (a_last <= to_rep(a__last)))) and ((to_rep(first(b1)) <= b_first) and
+  (b_first <= to_rep(last(b1))))) and
   ((to_rep(first(b1)) <= (b_first + (a_last - a_first))) and
   ((b_first + (a_last - a_first)) <= to_rep(last(b1))))) and
-  (a_first <= a_last)) -> (((((0 <= 2147483647) -> in_range2(j)) and ((({
-  bool__content = result } = { bool__content = carry }) and
-  (carry1 = of_int1(0))) and ((({ int__content = result1 } = { int__content =
-  i }) and (i1 = a_first)) and ((((a_first <= i1) and (i1 <= a_last)) and
-  ((((temp___585 = new_carry) and ((temp___577 = a) and ((temp___584 = j) and
+  (a_first <= a_last))
+
+axiom H6 : ((0 <= 2147483647) -> in_range2(j))
+
+axiom H7 : (result = carry)
+
+axiom H8 : (carry1 = of_int1(0))
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = a_first)
+
+axiom H11 : (((a_first <= i1) and (i1 <= a_last)) ->
+  (((temp___585 = new_carry) and ((temp___577 = a) and ((temp___584 = j) and
   ((temp___582 = a) and ((temp___576 = a) and ((temp___586 = a) and
   ((temp___587 = a) and ((temp___580 = carry1) and ((temp___579 = i1) and
   (((oeq(osubtract(num_of_big_int({ elts = temp___586; rt =
@@ -1157,8 +1529,8 @@ goal WP_parameter_def :
   osubtract(num_of_big_int({ elts = a2; rt = mk(to_rep(a__first),
   to_rep(a__last)) }, a_first, (i2 - a_first)), omultiply(oexpon(base(void),
   (i2 - a_first)), num_of_boolean(carry2)))) = true) and
-  (forall k:int. (((i2 <= k) and (k <= a_last)) ->
-  (to_rep1((a2[k])) = to_rep1((temp___587[k])))))) and
+  (forall k2:int. (((i2 <= k2) and (k2 <= a_last)) ->
+  (to_rep1((a2[k2])) = to_rep1((temp___587[k2])))))) and
   ((((((a_first <= a_last) -> dynamic_property1(a_first, a_last, i2)) and
   (forall temp___583:int. (((to_rep(a__first) <= temp___583) and
   (temp___583 <= to_rep(a__last))) -> ((i2 <= temp___583) ->
@@ -1171,28 +1543,85 @@ goal WP_parameter_def :
   to_rep(a__last)) }, a_first, ((i2 + 1) - a_first)),
   omultiply(oexpon(base(void), ((i2 + 1) - a_first)),
   num_of_boolean(carry3)))) = true) and
-  (forall k:int. ((((i2 + 1) <= k) and (k <= a_last)) ->
-  (to_rep1((a3[k])) = to_rep1((temp___577[k])))))) and
+  (forall k2:int. ((((i2 + 1) <= k2) and (k2 <= a_last)) ->
+  (to_rep1((a3[k2])) = to_rep1((temp___577[k2])))))) and
   (((a_first <= a_last) -> dynamic_property1(a_first, a_last, i2)) and
-  (i2 = a_last)))))))))))))) and (((i2 = i3) and
-  ((new_carry2 = new_carry3) and ((j3 = j4) and ((carry3 = carry4) and
-  (a3 = a4))))) and ((i4 = i2) and ((new_carry4 = new_carry2) and
-  ((j5 = j3) and ((carry5 = carry3) and (a5 = a3))))))) and ((({
-  int__content = i5 } = { int__content = i3 }) and (({ bool__content =
-  new_carry5 } = { bool__content = new_carry3 }) and (({ int__content = j6
-  } = { int__content = j4 }) and (({ bool__content = carry6 } = {
-  bool__content = carry4 }) and ({ map__content = a6 } = { map__content = a4
-  }))))) and ((i6 = i4) and ((new_carry6 = new_carry4) and ((j7 = j5) and
-  ((carry7 = carry5) and (a7 = a5)))))))) or ((not ((a_first <= i1) and
-  (i1 <= a_last))) and (((i1 = i5) and (({ bool__content = new_carry5 } = {
-  bool__content = new_carry }) and (({ int__content = j6 } = { int__content =
-  j }) and ((carry1 = carry6) and ({ map__content = a6 } = { map__content = a
-  }))))) and ((i6 = i1) and ((new_carry6 = new_carry1) and ((j7 = j1) and
-  ((carry7 = carry1) and (a7 = a1))))))))))) and (((i7 = i5) and
-  ((new_carry7 = new_carry5) and ((j8 = j6) and (({ bool__content = carry8
-  } = { bool__content = carry6 }) and (a8 = a6))))) and ((i8 = i6) and
-  ((new_carry8 = new_carry6) and ((j9 = j7) and ((carry9 = carry7) and
-  (a9 = a7))))))) -> ((o3 = num_of_boolean(carry8)) ->
-  (((((o = (a_last - a_first)) and in_range1((a_last - a_first))) and
-  (o1 = (o + 1))) and ((o2 = o1) and in_range1(o1))) ->
-  in_range2(o2)))))))))))
+  (i2 = a_last)))))))))))))) and (((i6 = i2) and
+  ((new_carry3 = new_carry6) and ((j3 = j6) and ((carry3 = carry6) and
+  (a3 = a6))))) and ((i7 = i2) and ((new_carry7 = new_carry3) and
+  ((j7 = j3) and ((carry7 = carry3) and (a7 = a3))))))))
+
+axiom H12 : (((a_first <= i1) and (i1 <= a_last)) -> (i8 = i6))
+
+axiom H13 : (((a_first <= i1) and (i1 <= a_last)) ->
+  (new_carry8 = new_carry6))
+
+axiom H14 : (((a_first <= i1) and (i1 <= a_last)) -> (j8 = j6))
+
+axiom H15 : (((a_first <= i1) and (i1 <= a_last)) -> (carry8 = carry6))
+
+axiom H16 : (((a_first <= i1) and (i1 <= a_last)) -> (a8 = a6))
+
+axiom H17 : (((a_first <= i1) and (i1 <= a_last)) -> (i9 = i7))
+
+axiom H18 : (((a_first <= i1) and (i1 <= a_last)) ->
+  (new_carry9 = new_carry7))
+
+axiom H19 : (((a_first <= i1) and (i1 <= a_last)) -> (j9 = j7))
+
+axiom H20 : (((a_first <= i1) and (i1 <= a_last)) -> (carry9 = carry7))
+
+axiom H21 : (((a_first <= i1) and (i1 <= a_last)) -> (a9 = a7))
+
+axiom H22 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (i8 = i1))
+
+axiom H23 : ((not ((a_first <= i1) and (i1 <= a_last))) ->
+  (new_carry8 = new_carry))
+
+axiom H24 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (j8 = j))
+
+axiom H25 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (carry8 = carry1))
+
+axiom H26 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (a8 = a))
+
+axiom H27 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (i9 = i1))
+
+axiom H28 : ((not ((a_first <= i1) and (i1 <= a_last))) ->
+  (new_carry9 = new_carry1))
+
+axiom H29 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (j9 = j1))
+
+axiom H30 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (carry9 = carry1))
+
+axiom H31 : ((not ((a_first <= i1) and (i1 <= a_last))) -> (a9 = a1))
+
+axiom H32 : (i10 = i8)
+
+axiom H33 : (new_carry10 = new_carry8)
+
+axiom H34 : (j10 = j8)
+
+axiom H35 : (carry10 = carry8)
+
+axiom H36 : (a10 = a8)
+
+axiom H37 : (i11 = i9)
+
+axiom H38 : (new_carry11 = new_carry9)
+
+axiom H39 : (j11 = j9)
+
+axiom H40 : (carry11 = carry9)
+
+axiom H41 : (a11 = a9)
+
+axiom H42 : (o105 = num_of_boolean(carry10))
+
+axiom H43 : ((o100 = (a_last - a_first)) and in_range1((a_last - a_first)))
+
+axiom H44 : (o101 = (o100 + 1))
+
+axiom H45 : ((o102 = o101) and in_range1(o101))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range2(o102)

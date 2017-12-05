@@ -91,6 +91,8 @@
 (declare-const o Int)
 (declare-const o1 (_ BitVec 8))
 (declare-const o2 Int)
+(declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const result (_ BitVec 8))
 (declare-const modular__add_byte_c__result1 (_ BitVec 8))
 (declare-const modular__add_byte_c__result2 (_ BitVec 8))

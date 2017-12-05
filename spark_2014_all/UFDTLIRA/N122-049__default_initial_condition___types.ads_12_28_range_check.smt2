@@ -83,6 +83,8 @@
 (define-fun default_initial_assumption ((temp___expr_221 us_rep) (temp___skip_top_level_222 Bool)) Bool (and (= (to_rep (rec__q__t6__f1 (us_split_fields1 temp___expr_221))) 3) (= (to_rep1 (rec__q__t6__f2 (us_split_fields1 temp___expr_221))) 1)))
 (define-fun dynamic_invariant ((temp___expr_142 Int) (temp___is_init_139 Bool) (temp___skip_constant_140 Bool) (temp___do_toplevel_141 Bool)) Bool (=> (or (= temp___is_init_139 true) (<= 1 10)) (in_range temp___expr_142)))
 (define-fun dynamic_invariant1 ((temp___expr_148 Int) (temp___is_init_145 Bool) (temp___skip_constant_146 Bool) (temp___do_toplevel_147 Bool)) Bool (=> (or (= temp___is_init_145 true) (<= 0 2)) (in_range1 temp___expr_148)))
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (not (in_range1 1)))
 (check-sat)
 (exit)

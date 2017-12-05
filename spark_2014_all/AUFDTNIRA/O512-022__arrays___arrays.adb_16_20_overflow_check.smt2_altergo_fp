@@ -162,18 +162,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -219,7 +219,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -504,14 +504,91 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic c : int
+
+logic j : int
+
+logic arrays__count_even__result : int
+
+logic temp___169 : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic c2 : int
+
+logic j2 : int
+
+logic result2 : int
+
+logic c3 : int
+
+logic c4 : int
+
+logic j3 : int
+
+logic c5 : int
+
+logic j4 : int
+
+logic c6 : int
+
+logic j5 : int
+
+logic c7 : int
+
+logic j6 : int
+
+logic result3 : int
+
+logic arrays__count_even__result1 : int
+
+logic arrays__count_even__result2 : int
+
+logic arrays__count_even__result3 : int
+
+logic c8 : int
+
+logic j7 : int
+
+logic arrays__count_even__result4 : int
+
+logic c9 : int
+
+logic j8 : int
+
+logic arrays__count_even__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(x1)),
+  to_rep1(last(x1)))
+
+axiom H1 : (result = c)
+
+axiom H2 : (c1 = 0)
+
+axiom H3 : in_range2(c1)
+
+axiom H4 : (result1 = j)
+
+axiom H5 : (j1 = to_rep1(first(x1)))
+
+axiom H6 : (to_rep1(first(x1)) <= j1)
+
+axiom H7 : (j1 <= to_rep1(last(x1)))
+
+axiom H8 : (((0 <= 2147483647) -> in_range2(c2)) and
+  ((to_rep1(first(x1)) <= j2) and (j2 <= to_rep1(last(x1)))))
+
+axiom H9 : (mod(to_rep((x[j2])), 2) = 0)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall j:int. forall result:int. forall c1:int.
-  forall result1:int. forall j1:int. forall c2:int. forall j2:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(x1)), to_rep1(last(x1))) ->
-  ((({ int__content = result } = { int__content = c }) and (c1 = 0)) ->
-  (in_range2(c1) -> ((({ int__content = result1 } = { int__content = j }) and
-  (j1 = to_rep1(first(x1)))) -> (((to_rep1(first(x1)) <= j1) and
-  (j1 <= to_rep1(last(x1)))) -> ((((0 <= 2147483647) -> in_range2(c2)) and
-  ((to_rep1(first(x1)) <= j2) and (j2 <= to_rep1(last(x1))))) ->
-  ((mod(to_rep((x[j2])), 2) = 0) -> in_range1((c2 + 1))))))))))
+goal WP_parameter_def : in_range1((c2 + 1))

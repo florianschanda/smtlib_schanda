@@ -376,12 +376,38 @@ function index_type__ref___2__projection(a: index_type__ref1) : index_type1 =
 axiom primes__def_axiom : (primes = prime_search__primes__aggregate_def(2, 3,
   5, 7, 11, 13, 17, 19, 23, 29))
 
+logic prime_index : int
+
+logic position : int
+
+logic i : int
+
+logic j : int
+
+logic found : bool
+
+logic prime_search__natural_search__result : int
+
+axiom H : in_range1(search_item)
+
+axiom H1 : ((0 <= 2147483647) -> in_range1(prime_index))
+
+axiom H2 : (prime_search__primes__aggregate_def(2, 3, 5, 7, 11, 13, 17, 19,
+  23, 29) = primes)
+
+axiom H3 : ((1 <= 2147483647) -> in_range2(position))
+
+logic i1 : int
+
+axiom H4 : (1 <= i1)
+
+axiom H5 : (i1 <= 10)
+
+logic j1 : int
+
+axiom H6 : ((i1 + 1) <= j1)
+
+axiom H7 : (j1 <= 10)
+
  (* File "generic_searchers.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall prime_index:int. forall position:int. (in_range1(search_item) ->
-  (((0 <= 2147483647) -> in_range1(prime_index)) ->
-  ((prime_search__primes__aggregate_def(2, 3, 5, 7, 11, 13, 17, 19, 23,
-  29) = primes) -> (((1 <= 2147483647) -> in_range2(position)) ->
-  (forall i:int. (((1 <= i) and (i <= 10)) ->
-  (forall j:int. ((((i + 1) <= j) and (j <= 10)) ->
-  (to_rep((primes[i])) <  to_rep((primes[j]))))))))))))
+goal WP_parameter_def : (to_rep((primes[i1])) <  to_rep((primes[j1])))

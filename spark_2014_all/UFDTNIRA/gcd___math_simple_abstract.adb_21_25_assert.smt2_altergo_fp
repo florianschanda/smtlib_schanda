@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -263,10 +263,51 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic j : int
+
+logic temp___133 : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic result1 : int
+
+logic j3 : int
+
+logic j4 : int
+
+logic j5 : int
+
+logic j6 : int
+
+logic j7 : int
+
+logic j8 : int
+
+logic j9 : int
+
+logic j10 : int
+
+logic j11 : int
+
+axiom H : in_range1(arg1)
+
+axiom H1 : in_range1(arg2)
+
+axiom H2 : (not (mod(arg1, arg2) = 0))
+
+axiom H3 : (result = j)
+
+axiom H4 : (j1 = 1)
+
+axiom H5 : (1 <= j1)
+
+axiom H6 : (j1 <= 2147483647)
+
+axiom H7 : (comp_div((j1 * arg2),arg2) = j1)
+
  (* File "math_simple_abstract.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall result:int. forall j1:int. (in_range1(arg1) ->
-  (in_range1(arg2) -> ((not (mod(arg1, arg2) = 0)) -> ((({ int__content =
-  result } = { int__content = j }) and (j1 = 1)) -> (((1 <= j1) and
-  (j1 <= 2147483647)) -> ((comp_div((j1 * arg2),arg2) = j1) ->
-  (not ((arg2 * j1) = arg1)))))))))
+goal WP_parameter_def : (not ((arg2 * j1) = arg1))

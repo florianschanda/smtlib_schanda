@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1058,9 +1058,28 @@ axiom readreglow8__post_axiom :
   (forall reg:t [readreglow8(reg)]. (readreglow8(reg) = toSmall(bw_and(reg,
   of_int(255)))))
 
+logic r11 : t
+
+logic result : t
+
+logic r111 : t
+
+logic r112 : t
+
+logic r113 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = r11)
+
+axiom H3 : (r111 = bw_or(bw_and(r11, of_int(18446744073709551360)),
+  toBig(val__)))
+
+axiom H4 : (r111 = r112)
+
+axiom H5 : (r113 = r111)
+
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r11:t. forall result:t. forall r111:t. forall r112:t.
-  forall r113:t. ((((result = r11) and (r111 = bw_or(bw_and(r11,
-  of_int(18446744073709551360)), toBig(val__)))) and ((r111 = r112) and
-  (r113 = r111))) -> (writereglow8post(r11, r112, val__) = true)))
+goal WP_parameter_def : (writereglow8post(r11, r112, val__) = true)

@@ -360,64 +360,165 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 
+logic r__split_fields : natural
+
+logic r__split_discrs : bool
+
+logic o : natural
+
+logic o1 : natural
+
+logic temp___241 : bool
+
+logic temp___2411 : natural
+
+logic temp___2412 : bool
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic temp___237 : bool
+
+logic temp___2371 : natural
+
+logic temp___2372 : bool
+
+logic usq_ : bool
+
+logic usq_1 : natural
+
+logic usq_2 : bool
+
+logic temp___239 : bool
+
+logic temp___2391 : natural
+
+logic temp___2392 : bool
+
+logic r__split_fields1 : natural
+
+logic r__split_discrs1 : bool
+
+logic result : natural
+
+logic r__split_fields2 : natural
+
+logic result1 : bool
+
+logic r__split_discrs2 : bool
+
+logic result2 : natural
+
+logic r__split_fields3 : natural
+
+logic result3 : bool
+
+logic r__split_discrs3 : bool
+
+logic r__split_fields4 : natural
+
+logic r__split_discrs4 : bool
+
+logic r__split_fields5 : natural
+
+logic r__split_discrs5 : bool
+
+axiom H : in_range1(new_field)
+
+axiom H1 : ((r__split_discrs = true) -> (to_rep(o) = new_field))
+
+axiom H2 : ((r__split_discrs = true) -> (o = o1))
+
+axiom H3 : ((r__split_discrs = true) -> (r__split_discrs = temp___241))
+
+axiom H4 : ((r__split_discrs = true) -> (temp___2411 = o1))
+
+axiom H5 : ((r__split_discrs = true) -> (r__attr__constrained = temp___2412))
+
+axiom H6 : ((r__split_discrs = true) -> (result = r__split_fields))
+
+axiom H7 : ((r__split_discrs = true) -> (r__split_fields2 = temp___2411))
+
+axiom H8 : ((r__split_discrs = true) -> (result1 = r__split_discrs))
+
+axiom H9 : ((r__split_discrs = true) -> (r__split_discrs2 = temp___241))
+
+axiom H10 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (r__split_discrs = r2b)))
+
+axiom H11 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (to_rep(o2) = new_field)))
+
+axiom H12 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (o2 = o3)))
+
+axiom H13 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (of_int(1) = temp___237)))
+
+axiom H14 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (temp___2371 = o3)))
+
+axiom H15 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (true = temp___2372)))
+
+axiom H16 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> ((r__attr__constrained = true) ->
+  (temp___237 = r__split_discrs))))
+
+axiom H17 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> ((usq_ = temp___237) and
+  ((usq_1 = temp___2371) and (usq_2 = temp___2372)))))
+
+axiom H18 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (usq_ = temp___239)))
+
+axiom H19 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (usq_1 = temp___2391)))
+
+axiom H20 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) ->
+  (r__attr__constrained = temp___2392)))
+
+axiom H21 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (result2 = r__split_fields)))
+
+axiom H22 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (r__split_fields3 = temp___2391)))
+
+axiom H23 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (result3 = r__split_discrs)))
+
+axiom H24 : ((not (r__split_discrs = true)) ->
+  ((not (r__attr__constrained = true)) -> (r__split_discrs3 = temp___239)))
+
+axiom H25 : ((not (r__split_discrs = true)) ->
+  ((r__attr__constrained = true) -> (r__split_discrs3 = r__split_discrs)))
+
+axiom H26 : ((not (r__split_discrs = true)) ->
+  ((r__attr__constrained = true) -> (r__split_fields3 = r__split_fields)))
+
+axiom H27 : ((not (r__split_discrs = true)) ->
+  ((r__attr__constrained = true) -> (r__split_discrs3 = r__split_discrs1)))
+
+axiom H28 : ((not (r__split_discrs = true)) ->
+  ((r__attr__constrained = true) -> (r__split_fields3 = r__split_fields1)))
+
+axiom H29 : ((not (r__split_discrs = true)) ->
+  (r__split_discrs2 = r__split_discrs3))
+
+axiom H30 : ((not (r__split_discrs = true)) ->
+  (r__split_fields2 = r__split_fields3))
+
+axiom H31 : (r__split_discrs4 = r__split_discrs2)
+
+axiom H32 : (r__split_fields4 = r__split_fields2)
+
+axiom H33 : (r__split_discrs5 = r__split_discrs2)
+
+axiom H34 : (r__split_fields5 = r__split_fields2)
+
+axiom H35 : (r__split_discrs4 = true)
+
  (* File "split_records.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:natural. forall r__split_discrs:bool.
-  forall o:natural. forall o1:natural. forall temp___241:bool.
-  forall temp___2411:natural. forall temp___2412:bool. forall o2:natural.
-  forall o3:natural. forall temp___237:bool. forall temp___2371:natural.
-  forall temp___2372:bool. forall usq_:bool. forall usq_1:natural.
-  forall usq_2:bool. forall temp___239:bool. forall temp___2391:natural.
-  forall temp___2392:bool. forall r__split_fields1:natural.
-  forall r__split_discrs1:bool. forall result:natural.
-  forall r__split_fields2:natural. forall result1:bool.
-  forall r__split_discrs2:bool. forall result2:natural.
-  forall r__split_fields3:natural. forall result3:bool.
-  forall r__split_discrs3:bool. forall r__split_fields4:natural.
-  forall r__split_discrs4:bool. forall r__split_fields5:natural.
-  forall r__split_discrs5:bool. (in_range1(new_field) ->
-  (((((r__split_discrs = true) and ((((to_rep(o) = new_field) and
-  (o = o1)) and ((r__split_discrs = temp___241) and ((temp___2411 = o1) and
-  (r__attr__constrained = temp___2412)))) and ((({ us_split_fields__content =
-  { rec__split_records__record_with_mutable_discrs__field = result } } = {
-  us_split_fields__content = {
-  rec__split_records__record_with_mutable_discrs__field = r__split_fields }
-  }) and (temp___2411 = r__split_fields2)) and
-  ((result1 = r__split_discrs) and (temp___241 = r__split_discrs2))))) or
-  ((not (r__split_discrs = true)) and
-  ((((not (r__attr__constrained = true)) and ((r__split_discrs = r2b) and
-  ((((((to_rep(o2) = new_field) and (o2 = o3)) and
-  ((of_int(1) = temp___237) and ((temp___2371 = o3) and
-  (true = temp___2372)))) and ((((r__attr__constrained = true) and
-  (temp___237 = r__split_discrs)) or (not (r__attr__constrained = true))) and
-  ({ us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = usq_ };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = usq_1 };
-  attr__constrained = usq_2 } = { us_split_discrs1 = {
-  rec__split_records__record_with_mutable_discrs__present = temp___237 };
-  us_split_fields1 = {
-  rec__split_records__record_with_mutable_discrs__field = temp___2371 };
-  attr__constrained = temp___2372 }))) and ((usq_ = temp___239) and
-  ((usq_1 = temp___2391) and (r__attr__constrained = temp___2392)))) and
-  (((result2 = r__split_fields) and (temp___2391 = r__split_fields3)) and
-  ((result3 = r__split_discrs) and (temp___239 = r__split_discrs3)))))) or
-  ((r__attr__constrained = true) and
-  (((r__split_discrs = r__split_discrs3) and
-  (r__split_fields = r__split_fields3)) and (({
-  rec__split_records__record_with_mutable_discrs__present = r__split_discrs3
-  } = { rec__split_records__record_with_mutable_discrs__present =
-  r__split_discrs1 }) and ({
-  rec__split_records__record_with_mutable_discrs__field = r__split_fields3
-  } = { rec__split_records__record_with_mutable_discrs__field =
-  r__split_fields1 }))))) and (({
-  rec__split_records__record_with_mutable_discrs__present = r__split_discrs2
-  } = { rec__split_records__record_with_mutable_discrs__present =
-  r__split_discrs3 }) and ({
-  rec__split_records__record_with_mutable_discrs__field = r__split_fields2
-  } = { rec__split_records__record_with_mutable_discrs__field =
-  r__split_fields3 }))))) and (((r__split_discrs4 = r__split_discrs2) and
-  (r__split_fields4 = r__split_fields2)) and
-  ((r__split_discrs5 = r__split_discrs2) and
-  (r__split_fields5 = r__split_fields2)))) -> ((r__split_discrs4 = true) ->
-  (to_int(r__split_discrs4) = 1)))))
+goal WP_parameter_def : (to_int(r__split_discrs4) = 1)

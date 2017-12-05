@@ -793,29 +793,121 @@ axiom is_available__def_axiom :
   ((is_available(account1, database__availability__links) = true) <->
   ((((database__availability__links[account1])).us_split_fields3).rec__database__availability__account_link__available = true))))
 
- (* File "database.ads", line 103, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep1) farray.
-  forall accounts_balance:(int,us_rep2) farray. forall o:cur.
-  forall o1:raw_amount. forall o2:cur. forall o3:raw_amount.
-  forall o4:raw_amount. forall o5:int. forall o6:int. forall o7:bool.
-  forall result:bool. forall result1:bool. (in_range2(account) ->
-  (((existing(account, links) = true) and ((currency(account,
+logic links : (int,us_rep1) farray
+
+logic accounts_balance : (int,us_rep2) farray
+
+logic o : cur
+
+logic o1 : raw_amount
+
+logic o2 : int
+
+logic us : cur
+
+logic us1 : raw_amount
+
+logic o3 : cur
+
+logic o4 : raw_amount
+
+logic o5 : cur
+
+logic o6 : raw_amount
+
+logic o7 : raw_amount
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : cur
+
+logic o12 : raw_amount
+
+logic o13 : cur
+
+logic o14 : raw_amount
+
+logic o15 : ext_account_num
+
+logic o16 : cur
+
+logic o17 : raw_amount
+
+logic o18 : ext_account_num
+
+logic o19 : (int,us_rep2) farray
+
+logic o20 : cur
+
+logic o21 : raw_amount
+
+logic o22 : cur
+
+logic o23 : raw_amount
+
+logic accounts_balance1 : (int,us_rep2) farray
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : (int,us_rep2) farray
+
+logic accounts_balance2 : (int,us_rep2) farray
+
+logic accounts_balance3 : (int,us_rep2) farray
+
+logic accounts_balance4 : (int,us_rep2) farray
+
+logic accounts_balance5 : (int,us_rep2) farray
+
+logic accounts_balance6 : (int,us_rep2) farray
+
+axiom H : in_range2(account)
+
+axiom H1 : ((existing(account, links) = true) and ((currency(account,
   accounts_balance) = to_rep(sum)) and
   (to_rep1(sum1) <= to_rep1(((balance(account, links,
-  accounts_balance)).us_split_fields1).rec__money__amount__raw)))) ->
-  (((((((o6 = currency(account, accounts_balance)) and (in_range(o6) and
-  (o6 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency)))) and
-  (((o6 = to_rep(sum)) and (o7 = true)) or ((not (o6 = to_rep(sum))) and
-  (o7 = false)))) and (((not (o7 = true)) and (result1 = true)) or
-  ((o7 = true) and (result1 = false)))) and (((result1 = true) and
-  (result = true)) or ((not (result1 = true)) and (((((({ us_split_fields1 =
-  { rec__money__amount__currency = o; rec__money__amount__raw = o1 }
+  accounts_balance)).us_split_fields1).rec__money__amount__raw))))
+
+axiom H2 : ((o9 = currency(account, accounts_balance)) and (in_range(o9) and
+  (o9 = to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency))))
+
+axiom H3 : (((o9 = to_rep(sum)) -> (o10 = true)) and
+  ((not (o9 = to_rep(sum))) -> (o10 = false)))
+
+axiom H4 : (((not (o10 = true)) -> (result3 = true)) and ((o10 = true) ->
+  (result3 = false)))
+
+axiom H5 : ((result3 = true) -> (result2 = true))
+
+axiom H6 : ((not (result3 = true)) -> (({ us_split_fields1 = {
+  rec__money__amount__currency = o3; rec__money__amount__raw = o4 }
   } = balance(account, links, accounts_balance)) and ({ us_split_fields1 = {
-  rec__money__amount__currency = o; rec__money__amount__raw = o1 }
-  } = (((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value)) and
-  ((o = o2) and (o1 = o3))) and (o4 = o3)) and (o5 = to_rep1(o4))) and
-  (((o5 <  to_rep1(sum1)) and (result = true)) or
-  ((not (o5 <  to_rep1(sum1))) and (result = false))))))) and
-  (not (result = true))) ->
-  (to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency) = to_rep(sum))))))
+  rec__money__amount__currency = o3; rec__money__amount__raw = o4 }
+  } = (((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value)))
+
+axiom H7 : ((not (result3 = true)) -> (o3 = o5))
+
+axiom H8 : ((not (result3 = true)) -> (o4 = o6))
+
+axiom H9 : ((not (result3 = true)) -> (o7 = o6))
+
+axiom H10 : ((not (result3 = true)) -> (o8 = to_rep1(o7)))
+
+axiom H11 : ((not (result3 = true)) -> (((o8 <  to_rep1(sum1)) ->
+  (result2 = true)) and ((not (o8 <  to_rep1(sum1))) -> (result2 = false))))
+
+axiom H12 : (not (result2 = true))
+
+ (* File "database.ads", line 103, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((((accounts_balance[account])).us_split_fields5).rec__database__account_balance__value).us_split_fields1).rec__money__amount__currency) = to_rep(sum))

@@ -432,7 +432,7 @@ function stack_root__ref___projection(a: stack_root__ref) : us_rep =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -2645,13 +2645,187 @@ axiom last__def_axiom :
   s2; rec__ext__1 = s3 }; attr__tag1 = s4
   }) = (((to_rep3(s) + to_rep(s2)) - 1) - 100)))))
 
- (* File "stackp.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:positive_less_than_max.
-  forall s__split_fields1:(int,element) farray.
-  forall s__split_fields2:less_than_max. forall s__split_fields3:us_private.
-  (in_range2(e) -> ((not (is_full({ us_split_fields1 = {
+logic s__split_fields : positive_less_than_max
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : less_than_max
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : less_than_max
+
+logic o2 : positive_less_than_max
+
+logic o3 : (int,element) farray
+
+logic o4 : less_than_max
+
+logic o5 : us_private
+
+logic temp___551 : positive_less_than_max
+
+logic temp___5511 : (int,element) farray
+
+logic temp___5512 : less_than_max
+
+logic temp___5513 : us_private
+
+logic temp___5514 : int
+
+logic o6 : positive_less_than_max
+
+logic o7 : positive_less_than_max
+
+logic o8 : (int,element) farray
+
+logic o9 : less_than_max
+
+logic o10 : us_private
+
+logic temp___555 : positive_less_than_max
+
+logic temp___5551 : (int,element) farray
+
+logic temp___5552 : less_than_max
+
+logic temp___5553 : us_private
+
+logic temp___5554 : int
+
+logic o11 : int
+
+logic o12 : positive_less_than_max
+
+logic o13 : positive_less_than_max
+
+logic o14 : (int,element) farray
+
+logic o15 : less_than_max
+
+logic o16 : us_private
+
+logic temp___553 : positive_less_than_max
+
+logic temp___5531 : (int,element) farray
+
+logic temp___5532 : less_than_max
+
+logic temp___5533 : us_private
+
+logic temp___5534 : int
+
+logic o17 : element
+
+logic o18 : (int,element) farray
+
+logic o19 : positive_less_than_max
+
+logic o20 : (int,element) farray
+
+logic o21 : less_than_max
+
+logic o22 : us_private
+
+logic temp___558 : positive_less_than_max
+
+logic temp___5581 : (int,element) farray
+
+logic temp___5582 : less_than_max
+
+logic temp___5583 : us_private
+
+logic temp___5584 : int
+
+logic result : positive_less_than_max
+
+logic result1 : (int,element) farray
+
+logic result2 : less_than_max
+
+logic result3 : us_private
+
+logic s__split_fields4 : positive_less_than_max
+
+logic s__split_fields5 : (int,element) farray
+
+logic s__split_fields6 : less_than_max
+
+logic s__split_fields7 : us_private
+
+logic result4 : positive_less_than_max
+
+logic result5 : (int,element) farray
+
+logic result6 : less_than_max
+
+logic result7 : us_private
+
+logic s__split_fields8 : positive_less_than_max
+
+logic s__split_fields9 : (int,element) farray
+
+logic s__split_fields10 : less_than_max
+
+logic s__split_fields11 : us_private
+
+logic result8 : positive_less_than_max
+
+logic result9 : (int,element) farray
+
+logic result10 : less_than_max
+
+logic result11 : us_private
+
+logic s__split_fields12 : positive_less_than_max
+
+logic s__split_fields13 : (int,element) farray
+
+logic s__split_fields14 : less_than_max
+
+logic s__split_fields15 : us_private
+
+logic result12 : positive_less_than_max
+
+logic result13 : (int,element) farray
+
+logic result14 : less_than_max
+
+logic result15 : us_private
+
+logic s__split_fields16 : positive_less_than_max
+
+logic s__split_fields17 : (int,element) farray
+
+logic s__split_fields18 : less_than_max
+
+logic s__split_fields19 : us_private
+
+logic s__split_fields20 : positive_less_than_max
+
+logic s__split_fields21 : (int,element) farray
+
+logic s__split_fields22 : less_than_max
+
+logic s__split_fields23 : us_private
+
+logic s__split_fields24 : positive_less_than_max
+
+logic s__split_fields25 : (int,element) farray
+
+logic s__split_fields26 : less_than_max
+
+logic s__split_fields27 : us_private
+
+axiom H : in_range2(e)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
   rec__stackp__stack_root__content = s__split_fields1;
   rec__stackp__stack_root__length = s__split_fields2; rec__ext__ =
   hide_ext__(s__split_fields, s__split_fields3) }; attr__tag = s__attr__tag
-  }) = true)) -> in_range1((to_rep(s__split_fields2) + 1)))))
+  }) = true))
+
+ (* File "stackp.ads", line 52, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep(s__split_fields2) + 1))

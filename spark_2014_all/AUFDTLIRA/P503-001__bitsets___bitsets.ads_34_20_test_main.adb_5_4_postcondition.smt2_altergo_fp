@@ -290,22 +290,46 @@ axiom def_axiom :
   (forall temp___319:int.
   ((temp___316(temp___318)[temp___319]) = temp___318)))
 
+logic test_main__my_sets__empty__result : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic test_main__my_sets__empty__result1 : (int,bool) farray
+
+logic test_main__my_sets__empty__result2 : (int,bool) farray
+
+logic test_main__my_sets__empty__result3 : (int,bool) farray
+
+logic test_main__my_sets__empty__result4 : (int,bool) farray
+
+logic test_main__my_sets__empty__result5 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+axiom H :
+  (test_main__my_sets__empty__result1 = test_main__my_sets__empty__result2)
+
+axiom H1 :
+  (test_main__my_sets__empty__result3 = test_main__my_sets__empty__result1)
+
+axiom H2 : (result = test_main__my_sets__empty__result)
+
+axiom H3 : (test_main__my_sets__empty__result1 = temp___316(of_int(0)))
+
+axiom H4 :
+  (test_main__my_sets__empty__result4 = test_main__my_sets__empty__result2)
+
+axiom H5 :
+  (test_main__my_sets__empty__result5 = test_main__my_sets__empty__result3)
+
+axiom H6 : (result1 = test_main__my_sets__empty__result4)
+
+logic elt : int
+
+axiom H7 : (1 <= elt)
+
+axiom H8 : (elt <= 10)
+
  (* File "bitsets.ads", line 52, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test_main__my_sets__empty__result:(int,bool) farray.
-  forall result:(int,bool) farray.
-  forall test_main__my_sets__empty__result1:(int,bool) farray.
-  forall test_main__my_sets__empty__result2:(int,bool) farray.
-  forall test_main__my_sets__empty__result3:(int,bool) farray.
-  forall test_main__my_sets__empty__result4:(int,bool) farray.
-  forall test_main__my_sets__empty__result5:(int,bool) farray.
-  (forall result1:(int,bool) farray.
-  ((((((test_main__my_sets__empty__result1 = test_main__my_sets__empty__result2) and
-  (test_main__my_sets__empty__result3 = test_main__my_sets__empty__result1)) and
-  ((result = test_main__my_sets__empty__result) and
-  (test_main__my_sets__empty__result1 = temp___316(of_int(0))))) and
-  ((test_main__my_sets__empty__result4 = test_main__my_sets__empty__result2) and
-  (test_main__my_sets__empty__result5 = test_main__my_sets__empty__result3))) and
-  (result1 = test_main__my_sets__empty__result4)) ->
-  (forall elt:int. (((1 <= elt) and (elt <= 10)) ->
-  (not (mem(test_main__my_sets__empty__result4, elt) = true)))))))
+goal WP_parameter_def : (not (mem(test_main__my_sets__empty__result4,
+  elt) = true))

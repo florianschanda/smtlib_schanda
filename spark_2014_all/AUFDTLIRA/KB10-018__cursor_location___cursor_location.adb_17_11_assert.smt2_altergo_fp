@@ -221,25 +221,40 @@ logic du_available : (int,bool) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "cursor_location.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cursor_location__none_available__result:bool. forall result:bool.
-  forall cursor_location__none_available__result1:bool.
-  forall cursor_location__none_available__result2:bool.
-  forall cursor_location__none_available__result3:bool.
-  forall cursor_location__none_available__result4:bool.
-  forall cursor_location__none_available__result5:bool.
-  (((((cursor_location__none_available__result1 = cursor_location__none_available__result2) and
-  (cursor_location__none_available__result3 = cursor_location__none_available__result1)) and
-  (({ bool__content = result } = { bool__content =
-  cursor_location__none_available__result }) and
-  ((((not ((du_available[1]) = true)) and
-  (not ((du_available[2]) = true))) and
-  (cursor_location__none_available__result1 = true)) or
+logic cursor_location__none_available__result : bool
+
+logic result : bool
+
+logic cursor_location__none_available__result1 : bool
+
+logic cursor_location__none_available__result2 : bool
+
+logic cursor_location__none_available__result3 : bool
+
+logic cursor_location__none_available__result4 : bool
+
+logic cursor_location__none_available__result5 : bool
+
+axiom H :
+  (cursor_location__none_available__result1 = cursor_location__none_available__result2)
+
+axiom H1 :
+  (cursor_location__none_available__result3 = cursor_location__none_available__result1)
+
+axiom H2 : (result = cursor_location__none_available__result)
+
+axiom H3 : ((((not ((du_available[1]) = true)) and
+  (not ((du_available[2]) = true))) ->
+  (cursor_location__none_available__result1 = true)) and
   ((not ((not ((du_available[1]) = true)) and
-  (not ((du_available[2]) = true)))) and
-  (cursor_location__none_available__result1 = false))))) and (({
-  bool__content = cursor_location__none_available__result4 } = {
-  bool__content = cursor_location__none_available__result2 }) and
-  (cursor_location__none_available__result5 = cursor_location__none_available__result3))) ->
-  (not ((du_available[1]) = true))))
+  (not ((du_available[2]) = true)))) ->
+  (cursor_location__none_available__result1 = false)))
+
+axiom H4 :
+  (cursor_location__none_available__result4 = cursor_location__none_available__result2)
+
+axiom H5 :
+  (cursor_location__none_available__result5 = cursor_location__none_available__result3)
+
+ (* File "cursor_location.adb", line 15, characters 0-0 *)
+goal WP_parameter_def : (not ((du_available[1]) = true))

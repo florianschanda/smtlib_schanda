@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -535,34 +535,255 @@ axiom def_axiom :
   (forall temp___286:int.
   ((temp___283(temp___285)[temp___286]) = of_rep(temp___285))))
 
+logic bad_shift : (int,positive) farray
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : (int,positive) farray
+
+logic temp___289 : int
+
+logic temp___287 : (int,positive) farray
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : positive
+
+logic o12 : (int,positive) farray
+
+logic c : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic c1 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic k : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic temp___290 : int
+
+logic k1 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : bool
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : positive
+
+logic o35 : (int,positive) farray
+
+logic c2 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic k2 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic temp___294 : int
+
+logic k3 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : bool
+
+logic o47 : bool
+
+logic c3 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic result : (int,positive) farray
+
+logic bad_shift1 : (int,positive) farray
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : (int,positive) farray
+
+logic bad_shift2 : (int,positive) farray
+
+logic bad_shift3 : (int,positive) farray
+
+logic j2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic j3 : int
+
+logic result6 : (int,positive) farray
+
+logic bad_shift4 : (int,positive) farray
+
+logic bad_shift5 : (int,positive) farray
+
+logic j4 : int
+
+logic bad_shift6 : (int,positive) farray
+
+logic j5 : int
+
+logic bad_shift7 : (int,positive) farray
+
+logic j6 : int
+
+logic bad_shift8 : (int,positive) farray
+
+logic j7 : int
+
+logic bad_shift9 : (int,positive) farray
+
+logic j8 : int
+
+logic bad_shift10 : (int,positive) farray
+
+logic j9 : int
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+axiom H : (dynamic_property(1, 2147483647, to_rep2(first(needle1)),
+  to_rep2(last(needle1))) and (to_rep2(first(needle1)) = 1))
+
+axiom H1 : (length({ elts = needle; rt = needle1 }) <  2147483647)
+
+axiom H2 : ((o1 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H3 : (o2 = (o1 + 1))
+
+axiom H4 : ((o3 = o2) and in_range1(o2))
+
+axiom H5 : (o4 = temp___283(o3))
+
+axiom H6 : (result = bad_shift)
+
+axiom H7 : (bad_shift1 = o4)
+
+axiom H8 : (result1 = j)
+
+axiom H9 : (j1 = to_rep2(first(needle1)))
+
+axiom H10 : (to_rep2(first(needle1)) <= j1)
+
+axiom H11 : (j1 <= to_rep2(last(needle1)))
+
+axiom H12 : ((o5 = length({ elts = needle; rt = needle1 })) and
+  in_range1(length({ elts = needle; rt = needle1 })))
+
+axiom H13 : (o6 = (o5 - j1))
+
+axiom H14 : ((o7 = o6) and in_range1(o6))
+
+axiom H15 : (o8 = (o7 + 1))
+
+axiom H16 : ((o9 = o8) and in_range1(o8))
+
+axiom H17 : ((o10 = o9) and in_range2(o9))
+
+axiom H18 : (to_rep(o11) = o10)
+
+axiom H19 : (o12 = (bad_shift1[to_rep1((needle[j1])) <- o11]))
+
+axiom H20 : (bad_shift1 = result2)
+
+axiom H21 : (bad_shift2 = o12)
+
+logic c4 : int
+
+axiom H22 : (0 <= c4)
+
+axiom H23 : (c4 <= 255)
+
+axiom H24 : (to_rep((bad_shift2[c4])) = (length({ elts = needle; rt = needle1
+  }) + 1))
+
+logic k4 : int
+
+axiom H25 : (1 <= k4)
+
+axiom H26 : (k4 <= j1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall bad_shift:(int,positive) farray. forall j:int. forall o:int.
-  forall o1:int. forall o2:int. forall o3:(int,positive) farray.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:positive. forall o11:(int,positive) farray.
-  forall result:(int,positive) farray.
-  forall bad_shift1:(int,positive) farray. forall result1:int. forall j1:int.
-  forall result2:(int,positive) farray.
-  forall bad_shift2:(int,positive) farray. ((dynamic_property(1, 2147483647,
-  to_rep2(first(needle1)), to_rep2(last(needle1))) and
-  (to_rep2(first(needle1)) = 1)) -> ((length({ elts = needle; rt = needle1
-  }) <  2147483647) -> (((((((o = length({ elts = needle; rt = needle1
-  })) and in_range1(length({ elts = needle; rt = needle1 }))) and
-  (o1 = (o + 1))) and ((o2 = o1) and in_range1(o1))) and
-  (o3 = temp___283(o2))) and (({ map__content1 = result } = { map__content1 =
-  bad_shift }) and (bad_shift1 = o3))) -> ((({ int__content = result1 } = {
-  int__content = j }) and (j1 = to_rep2(first(needle1)))) ->
-  (((to_rep2(first(needle1)) <= j1) and (j1 <= to_rep2(last(needle1)))) ->
-  (((((((((((o4 = length({ elts = needle; rt = needle1 })) and
-  in_range1(length({ elts = needle; rt = needle1 }))) and
-  (o5 = (o4 - j1))) and ((o6 = o5) and in_range1(o5))) and
-  (o7 = (o6 + 1))) and ((o8 = o7) and in_range1(o7))) and ((o9 = o8) and
-  in_range2(o8))) and (to_rep(o10) = o9)) and
-  (o11 = (bad_shift1[to_rep1((needle[j1])) <- o10]))) and
-  ((bad_shift1 = result2) and (bad_shift2 = o11))) ->
-  (forall c:int. (((0 <= c) and (c <= 255)) ->
-  ((to_rep((bad_shift2[c])) = (length({ elts = needle; rt = needle1
-  }) + 1)) ->
-  (forall k:int. (((1 <= k) and (k <= j1)) ->
-  (not (c = to_rep1((needle[k]))))))))))))))))
+goal WP_parameter_def : (not (c4 = to_rep1((needle[k4]))))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type tinteger_16B
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function tinteger_16B__ref___projection(a: tinteger_16B__ref) : tinteger_16B =
 
 type integer_16
 
-predicate in_range1(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq2 : int, int -> bool
 
@@ -249,10 +249,29 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : in_range1(left)
+
+axiom H1 : in_range1(right)
+
+axiom H2 : (not (right = 0))
+
+axiom H3 : ((o = comp_div(left,right)) and in_range(comp_div(left,right)))
+
+axiom H4 : (o1 = (o * right))
+
+axiom H5 : ((o2 = o1) and in_range(o1))
+
+axiom H6 : (o3 = (left - o2))
+
  (* File "interfac.ads", line 49, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  (in_range1(left) -> (in_range1(right) -> ((not (right = 0)) ->
-  ((((((o = comp_div(left,right)) and in_range(comp_div(left,right))) and
-  (o1 = (o * right))) and ((o2 = o1) and in_range(o1))) and
-  (o3 = (left - o2))) -> in_range(o3))))))
+goal WP_parameter_def : in_range(o3)

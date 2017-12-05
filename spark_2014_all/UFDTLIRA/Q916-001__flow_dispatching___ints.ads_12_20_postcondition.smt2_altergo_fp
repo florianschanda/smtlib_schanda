@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -251,41 +251,125 @@ logic arg__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic arg__split_fields : integer
+
+logic arg__split_fields1 : integer
+
+logic arg__split_fields2 : integer
+
+logic arg__split_fields3 : us_private
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : us_private
+
+logic temp___563 : integer
+
+logic temp___5631 : integer
+
+logic temp___5632 : integer
+
+logic temp___5633 : us_private
+
+logic temp___5634 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : us_private
+
+logic arg__split_fields4 : integer
+
+logic arg__split_fields5 : integer
+
+logic arg__split_fields6 : integer
+
+logic arg__split_fields7 : us_private
+
+logic arg__split_fields8 : integer
+
+logic arg__split_fields9 : integer
+
+logic arg__split_fields10 : integer
+
+logic arg__split_fields11 : us_private
+
+logic arg__split_fields12 : integer
+
+logic arg__split_fields13 : integer
+
+logic arg__split_fields14 : integer
+
+logic arg__split_fields15 : us_private
+
+axiom H : (to_rep(arg__split_fields2) <  (to_rep(arg__split_fields1) - 10))
+
+axiom H1 : ((o = (to_rep(arg__split_fields2) + 1)) and
+  in_range((to_rep(arg__split_fields2) + 1)))
+
+axiom H2 : (to_rep(o1) = o)
+
+axiom H3 : (arg__split_fields = o2)
+
+axiom H4 : (arg__split_fields1 = o3)
+
+axiom H5 : (o1 = o4)
+
+axiom H6 : (arg__split_fields3 = o5)
+
+axiom H7 : (temp___563 = o2)
+
+axiom H8 : (temp___5631 = o3)
+
+axiom H9 : (temp___5632 = o4)
+
+axiom H10 : (temp___5633 = o5)
+
+axiom H11 : (arg__attr__tag = temp___5634)
+
+axiom H12 : (result = arg__split_fields)
+
+axiom H13 : (result1 = arg__split_fields1)
+
+axiom H14 : (result2 = arg__split_fields2)
+
+axiom H15 : (result3 = arg__split_fields3)
+
+axiom H16 : (temp___563 = arg__split_fields4)
+
+axiom H17 : (temp___5631 = arg__split_fields5)
+
+axiom H18 : (temp___5632 = arg__split_fields6)
+
+axiom H19 : (temp___5633 = arg__split_fields7)
+
+axiom H20 : (arg__split_fields8 = arg__split_fields4)
+
+axiom H21 : (arg__split_fields9 = arg__split_fields5)
+
+axiom H22 : (arg__split_fields10 = arg__split_fields6)
+
+axiom H23 : (arg__split_fields11 = arg__split_fields7)
+
+axiom H24 : (arg__split_fields12 = arg__split_fields4)
+
+axiom H25 : (arg__split_fields13 = arg__split_fields5)
+
+axiom H26 : (arg__split_fields14 = arg__split_fields6)
+
+axiom H27 : (arg__split_fields15 = arg__split_fields7)
+
  (* File "ints.ads", line 9, characters 0-0 *)
 goal WP_parameter_def :
-  (forall arg__split_fields:integer. forall arg__split_fields1:integer.
-  forall arg__split_fields2:integer. forall arg__split_fields3:us_private.
-  forall o:int. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall o5:us_private. forall temp___569:integer.
-  forall temp___5691:integer. forall temp___5692:integer.
-  forall temp___5693:us_private. forall temp___5694:int.
-  forall result:integer. forall result1:integer. forall result2:integer.
-  forall result3:us_private. forall arg__split_fields4:integer.
-  forall arg__split_fields5:integer. forall arg__split_fields6:integer.
-  forall arg__split_fields7:us_private. forall arg__split_fields8:integer.
-  forall arg__split_fields9:integer. forall arg__split_fields10:integer.
-  forall arg__split_fields11:us_private. forall arg__split_fields12:integer.
-  forall arg__split_fields13:integer. forall arg__split_fields14:integer.
-  forall arg__split_fields15:us_private.
-  (((to_rep(arg__split_fields2) <  (to_rep(arg__split_fields1) - 10)) and
-  (((((((o = (to_rep(arg__split_fields2) + 1)) and
-  in_range((to_rep(arg__split_fields2) + 1))) and (to_rep(o1) = o)) and
-  ((arg__split_fields = o2) and ((arg__split_fields1 = o3) and ((o1 = o4) and
-  (arg__split_fields3 = o5))))) and (((temp___569 = o2) and
-  ((temp___5691 = o3) and ((temp___5692 = o4) and (temp___5693 = o5)))) and
-  (arg__attr__tag = temp___5694))) and (((result = arg__split_fields) and
-  ((result1 = arg__split_fields1) and ((result2 = arg__split_fields2) and
-  (result3 = arg__split_fields3)))) and
-  ((temp___569 = arg__split_fields4) and
-  ((temp___5691 = arg__split_fields5) and
-  ((temp___5692 = arg__split_fields6) and
-  (temp___5693 = arg__split_fields7)))))) and
-  (((arg__split_fields8 = arg__split_fields4) and
-  ((arg__split_fields9 = arg__split_fields5) and
-  ((arg__split_fields10 = arg__split_fields6) and
-  (arg__split_fields11 = arg__split_fields7)))) and
-  ((arg__split_fields12 = arg__split_fields4) and
-  ((arg__split_fields13 = arg__split_fields5) and
-  ((arg__split_fields14 = arg__split_fields6) and
-  (arg__split_fields15 = arg__split_fields7))))))) ->
-  (to_rep(arg__split_fields2) <  to_rep(arg__split_fields10))))
+  (to_rep(arg__split_fields2) <  to_rep(arg__split_fields10))

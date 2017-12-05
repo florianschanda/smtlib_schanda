@@ -161,6 +161,7 @@
 (declare-const amount Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_177 (_ BitVec 8)) (temp___is_init_174 Bool) (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool)) Bool true)
+(assert true)
 (assert (in_range1 amount))
 (assert (not (and (<= 1 16) (<= 16 8))))
 (assert (not (and (<= 9 16) (<= 16 16))))

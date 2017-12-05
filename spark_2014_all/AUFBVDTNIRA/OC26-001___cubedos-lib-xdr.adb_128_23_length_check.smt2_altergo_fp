@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -686,7 +686,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1067,7 +1067,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type octet_array_extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 65535))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 65535))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1554,47 +1554,168 @@ axiom def_axiom :
   (forall temp___504:int. (((temp___499(temp___501, temp___502,
   temp___503)).elts3[temp___504]) = of_rep2(temp___501))))))
 
- (* File "cubedos-lib-xdr.ads", line 138, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last8:int. forall temp___506:(int,octet) farray.
-  forall temp___5061:t4. forall temp___507:(int,octet) farray.
-  forall temp___5071:t3. (dynamic_property(1, 2147483647,
-  to_rep1(first(value1)), to_rep1(last(value1))) -> (dynamic_property1(0,
-  65535, to_rep1(data__first), to_rep1(data__last)) ->
-  (in_range4(position) -> ((((-1) <= 65535) -> in_range5(last8)) ->
-  (((comp_mod(position,4) = 0) and
-  ((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (0 <  ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and (0 <  0))) and
-  ((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (comp_mod(((to_rep1(data__last) - to_rep1(data__first)) + 1),4) = 0)) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and
+logic last8 : int
+
+logic temporary_array : (int,octet) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___506 : (int,octet) farray
+
+logic temp___5061 : t4
+
+logic temp___507 : (int,octet) farray
+
+logic temp___5071 : t3
+
+logic o9 : (int,octet) farray
+
+logic o10 : t3
+
+logic o11 : (int,octet) farray
+
+logic temp___510 : (int,octet) farray
+
+logic temp___508 : int
+
+logic o12 : octet
+
+logic o13 : int
+
+logic o14 : (int,octet) farray
+
+logic o15 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : (int,octet) farray
+
+logic temporary_array1 : (int,octet) farray
+
+logic result4 : int
+
+logic i1 : int
+
+logic temporary_array2 : (int,octet) farray
+
+logic i2 : int
+
+logic result5 : (int,octet) farray
+
+logic temporary_array3 : (int,octet) farray
+
+logic temporary_array4 : (int,octet) farray
+
+logic i3 : int
+
+logic temporary_array5 : (int,octet) farray
+
+logic i4 : int
+
+logic temporary_array6 : (int,octet) farray
+
+logic i5 : int
+
+logic temporary_array7 : (int,octet) farray
+
+logic i6 : int
+
+logic data : (int,octet) farray
+
+logic last9 : int
+
+logic data1 : (int,octet) farray
+
+logic last10 : int
+
+logic temporary_array8 : (int,octet) farray
+
+logic i7 : int
+
+logic data2 : (int,octet) farray
+
+logic last11 : int
+
+logic temporary_array9 : (int,octet) farray
+
+logic i8 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(value1)),
+  to_rep1(last(value1)))
+
+axiom H1 : dynamic_property1(0, 65535, to_rep1(data__first),
+  to_rep1(data__last))
+
+axiom H2 : in_range4(position)
+
+axiom H3 : (((- 1) <= 65535) -> in_range5(last8))
+
+axiom H4 : ((comp_mod(position,4) = 0) and
+  ((((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (0 <  ((to_rep1(data__last) - to_rep1(data__first)) + 1))) and
+  ((not (to_rep1(data__first) <= to_rep1(data__last))) -> (0 <  0))) and
+  ((((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (comp_mod(((to_rep1(data__last) - to_rep1(data__first)) + 1),4) = 0)) and
+  ((not (to_rep1(data__first) <= to_rep1(data__last))) ->
   (comp_mod(0,4) = 0))) and ((length({ elts = value; rt = value1
   }) <= 65536) and (((to_rep1(data__first) <= position) and
   (position <= to_rep1(data__last))) and (length_with_padding(length({ elts =
-  value; rt = value1 })) <= ((to_rep1(data__last) - position) + 1))))))) ->
-  ((dynamic_property3(0, (length({ elts = value; rt = value1 }) - 1),
+  value; rt = value1 })) <= ((to_rep1(data__last) - position) + 1)))))))
+
+axiom H5 : (dynamic_property3(0, (length({ elts = value; rt = value1 }) - 1),
   to_rep1(temporary_array__first), to_rep1(temporary_array__last)) and
   ((to_rep1(temporary_array__first) = 0) and
   (to_rep1(temporary_array__last) = (length({ elts = value; rt = value1
-  }) - 1)))) -> ((((to_rep1(first6((temp___499(of_int(0), 0, (length({ elts =
-  value; rt = value1 }) - 1))).rt3)) = 0) and
-  ((to_rep1(last6((temp___499(of_int(0), 0, (length({ elts = value; rt =
-  value1 }) - 1))).rt3)) = (length({ elts = value; rt = value1 }) - 1)) and
-  ({ elts3 = temp___506; rt3 = temp___5061 } = temp___499(of_int(0), 0,
-  (length({ elts = value; rt = value1 }) - 1))))) and
-  ((((to_rep1(first6(temp___5061)) <= to_rep1(last6(temp___5061))) and
-  (((0 <= (length({ elts = value; rt = value1 }) - 1)) and
+  }) - 1))))
+
+axiom H6 : (to_rep1(first6((temp___499(of_int(0), 0, (length({ elts = value;
+  rt = value1 }) - 1))).rt3)) = 0)
+
+axiom H7 : (to_rep1(last6((temp___499(of_int(0), 0, (length({ elts = value;
+  rt = value1 }) - 1))).rt3)) = (length({ elts = value; rt = value1 }) - 1))
+
+axiom H8 : ({ elts3 = temp___506; rt3 = temp___5061 } = temp___499(of_int(0),
+  0, (length({ elts = value; rt = value1 }) - 1)))
+
+axiom H9 : (((to_rep1(first6(temp___5061)) <= to_rep1(last6(temp___5061))) ->
+  (((0 <= (length({ elts = value; rt = value1 }) - 1)) ->
   (((to_rep1(last6(temp___5061)) - to_rep1(first6(temp___5061))) + 1) = (((length({
-  elts = value; rt = value1 }) - 1) - 0) + 1))) or ((not (0 <= (length({
-  elts = value; rt = value1 }) - 1))) and
-  (((to_rep1(last6(temp___5061)) - to_rep1(first6(temp___5061))) + 1) = 0)))) or
-  ((not (to_rep1(first6(temp___5061)) <= to_rep1(last6(temp___5061)))) and
-  (((0 <= (length({ elts = value; rt = value1 }) - 1)) and (0 = (((length({
-  elts = value; rt = value1 }) - 1) - 0) + 1))) or (not (0 <= (length({
-  elts = value; rt = value1 }) - 1)))))) and ((temp___506 = temp___507) and
-  (mk2(to_rep1(first6(temp___5061)),
-  to_rep1(last6(temp___5061))) = temp___5071)))) ->
+  elts = value; rt = value1 }) - 1) - 0) + 1))) and ((not (0 <= (length({
+  elts = value; rt = value1 }) - 1))) ->
+  (((to_rep1(last6(temp___5061)) - to_rep1(first6(temp___5061))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___5061)) <= to_rep1(last6(temp___5061)))) ->
+  ((0 <= (length({ elts = value; rt = value1 }) - 1)) -> (0 = (((length({
+  elts = value; rt = value1 }) - 1) - 0) + 1)))))
+
+axiom H10 : (temp___506 = temp___507)
+
+axiom H11 : (mk2(to_rep1(first6(temp___5061)),
+  to_rep1(last6(temp___5061))) = temp___5071)
+
+ (* File "cubedos-lib-xdr.ads", line 138, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep1(first4(temp___5071)) <= to_rep1(last4(temp___5071))) ->
   (((to_rep1(temporary_array__first) <= to_rep1(temporary_array__last)) ->
   (((to_rep1(last4(temp___5071)) - to_rep1(first4(temp___5071))) + 1) = ((to_rep1(temporary_array__last) - to_rep1(temporary_array__first)) + 1))) and
@@ -1602,4 +1723,4 @@ goal WP_parameter_def :
   (((to_rep1(last4(temp___5071)) - to_rep1(first4(temp___5071))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___5071)) <= to_rep1(last4(temp___5071)))) ->
   ((to_rep1(temporary_array__first) <= to_rep1(temporary_array__last)) ->
-  (0 = ((to_rep1(temporary_array__last) - to_rep1(temporary_array__first)) + 1)))))))))))))
+  (0 = ((to_rep1(temporary_array__last) - to_rep1(temporary_array__first)) + 1)))))

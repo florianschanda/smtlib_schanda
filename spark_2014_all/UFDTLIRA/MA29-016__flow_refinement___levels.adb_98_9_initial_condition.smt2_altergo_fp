@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -119,12 +119,38 @@ axiom read_partial_2__post_axiom :
   (in_range(levels__nested_1__nested_2__x2) ->
   in_range(read_partial_2(levels__nested_1__nested_2__x2))))
 
+logic x2 : int
+
+logic y2 : int
+
+logic o : int
+
+logic result : int
+
+logic x21 : int
+
+logic result1 : int
+
+logic y21 : int
+
+logic result2 : bool
+
+axiom H : (result = x2)
+
+axiom H1 : (x21 = 0)
+
+axiom H2 : in_range(x21)
+
+axiom H3 : (result1 = y2)
+
+axiom H4 : (y21 = 0)
+
+axiom H5 : in_range(y21)
+
+axiom H6 : ((o = read_partial_2(x21)) and in_range(o))
+
+axiom H7 : (((o = 0) -> (result2 = true)) and ((not (o = 0)) ->
+  (result2 = false)))
+
  (* File "levels.adb", line 80, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x2:int. forall y2:int. forall o:int. forall result:int.
-  forall x21:int. forall result1:int. forall y21:int.
-  (forall result2:bool. ((((result = x2) and (x21 = 0)) and
-  (in_range(x21) and (((result1 = y2) and (y21 = 0)) and (in_range(y21) and
-  (((o = read_partial_2(x21)) and in_range(o)) and (((o = 0) and
-  (result2 = true)) or ((not (o = 0)) and (result2 = false)))))))) ->
-  (read_partial_2(x21) = 0))))
+goal WP_parameter_def : (read_partial_2(x21) = 0)

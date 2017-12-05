@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -542,7 +542,7 @@ logic p__a__aggregate_def : int, int, int -> us_t1
 
 axiom def_axiom :
   (forall temp___194:int. forall temp___195:int. forall temp___196:int.
-  ((dynamic_property4((-2147483648), 2147483647, temp___195, temp___196) ->
+  ((dynamic_property4((- 2147483648), 2147483647, temp___195, temp___196) ->
   ((to_rep(first2((p__a__aggregate_def(temp___194, temp___195,
   temp___196)).rt1)) = temp___195) and
   (to_rep(last2((p__a__aggregate_def(temp___194, temp___195,
@@ -550,33 +550,63 @@ axiom def_axiom :
   (forall temp___197:int. (((p__a__aggregate_def(temp___194, temp___195,
   temp___196)).elts1[temp___197]) = of_rep(temp___194)))))
 
+logic a : (int,integer) farray
+
+logic p__R4b__assume : int
+
+logic temp___199 : (int,integer) farray
+
+logic temp___1991 : t1
+
+logic p__a__assume : (int,integer) farray
+
+logic p__a__assume1 : t
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+axiom H : ((p__R4b__assume = f(void)) and in_range(p__R4b__assume))
+
+axiom H1 : (p__R4b__assume = r4b)
+
+axiom H2 : in_range(r4b)
+
+axiom H3 : (to_rep(first2((p__a__aggregate_def(0, r4b, 10)).rt1)) = r4b)
+
+axiom H4 : (to_rep(last2((p__a__aggregate_def(0, r4b, 10)).rt1)) = 10)
+
+axiom H5 : ({ elts1 = temp___199; rt1 = temp___1991
+  } = p__a__aggregate_def(0, r4b, 10))
+
+axiom H6 : (((to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991))) ->
+  (((r4b <= 10) ->
+  (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = ((10 - r4b) + 1))) and
+  ((not (r4b <= 10)) ->
+  (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = 0)))) and
+  ((not (to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991)))) ->
+  ((r4b <= 10) -> (0 = ((10 - r4b) + 1)))))
+
+axiom H7 : (slide(temp___199, to_rep(first2(temp___1991)),
+  r4b) = p__a__assume)
+
+axiom H8 : (mk(r4b, 10) = p__a__assume1)
+
+axiom H9 : (result = a)
+
+axiom H10 : (a1 = p__a__assume)
+
+axiom H11 : (to_rep(a__first) = to_rep(first(p__a__assume1)))
+
+axiom H12 : (to_rep(a__last) = to_rep(last(p__a__assume1)))
+
+axiom H13 : (dynamic_property1(r4b, 10, to_rep(a__first),
+  to_rep(a__last)) and ((to_rep(a__first) = r4b) and (to_rep(a__last) = 10)))
+
  (* File "p.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall p__R4b__assume:int.
-  forall temp___199:(int,integer) farray. forall temp___1991:t1.
-  forall p__a__assume:(int,integer) farray. forall p__a__assume1:t.
-  forall result:(int,integer) farray. forall a1:(int,integer) farray.
-  ((((p__R4b__assume = f(void)) and in_range(p__R4b__assume)) and
-  (p__R4b__assume = r4b)) -> (in_range(r4b) ->
-  (((((to_rep(first2((p__a__aggregate_def(0, r4b, 10)).rt1)) = r4b) and
-  ((to_rep(last2((p__a__aggregate_def(0, r4b, 10)).rt1)) = 10) and ({ elts1 =
-  temp___199; rt1 = temp___1991 } = p__a__aggregate_def(0, r4b, 10)))) and
-  ((((to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991))) and
-  (((r4b <= 10) and
-  (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = ((10 - r4b) + 1))) or
-  ((not (r4b <= 10)) and
-  (((to_rep(last2(temp___1991)) - to_rep(first2(temp___1991))) + 1) = 0)))) or
-  ((not (to_rep(first2(temp___1991)) <= to_rep(last2(temp___1991)))) and
-  (((r4b <= 10) and (0 = ((10 - r4b) + 1))) or (not (r4b <= 10))))) and
-  ((slide(temp___199, to_rep(first2(temp___1991)), r4b) = p__a__assume) and
-  (mk(r4b, 10) = p__a__assume1)))) and (((result = a) and
-  (a1 = p__a__assume)) and
-  ((to_rep(a__first) = to_rep(first(p__a__assume1))) and
-  (to_rep(a__last) = to_rep(last(p__a__assume1)))))) ->
-  ((dynamic_property1(r4b, 10, to_rep(a__first), to_rep(a__last)) and
-  ((to_rep(a__first) = r4b) and (to_rep(a__last) = 10))) ->
-  (((to_rep(a__first) <= to_rep(a__last)) -> (((0 <= 10) ->
+goal WP_parameter_def : (((to_rep(a__first) <= to_rep(a__last)) ->
+  (((0 <= 10) ->
   (((to_rep(a__last) - to_rep(a__first)) + 1) = ((10 - 0) + 1))) and
   ((not (0 <= 10)) -> (((to_rep(a__last) - to_rep(a__first)) + 1) = 0)))) and
   ((not (to_rep(a__first) <= to_rep(a__last))) -> ((0 <= 10) ->
-  (0 = ((10 - 0) + 1))))))))))
+  (0 = ((10 - 0) + 1)))))

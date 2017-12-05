@@ -47,6 +47,7 @@
 (declare-const par2 Int)
 (declare-const x Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const par21 Int)
 (declare-const par22 Int)

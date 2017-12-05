@@ -134,7 +134,7 @@ function tarD1__ref___projection(a: tarD1__ref) : tarD1 = (a).tarD1__content
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -275,17 +275,37 @@ logic b : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic pack__equal__result : bool
+
+logic result : bool
+
+logic pack__equal__result1 : bool
+
+logic pack__equal__result2 : bool
+
+logic pack__equal__result3 : bool
+
+logic pack__equal__result4 : bool
+
+logic pack__equal__result5 : bool
+
+logic result1 : bool
+
+axiom H : (pack__equal__result1 = pack__equal__result2)
+
+axiom H1 : (pack__equal__result3 = pack__equal__result1)
+
+axiom H2 : (result = pack__equal__result)
+
+axiom H3 : (pack__equal__result1 = bool_eq4(a, 1, 10, b, 1, 10))
+
+axiom H4 : (pack__equal__result4 = pack__equal__result2)
+
+axiom H5 : (pack__equal__result5 = pack__equal__result3)
+
+axiom H6 : (result1 = pack__equal__result4)
+
+axiom H7 : (pack__equal__result4 = true)
+
  (* File "pack.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall pack__equal__result:bool. forall result:bool.
-  forall pack__equal__result1:bool. forall pack__equal__result2:bool.
-  forall pack__equal__result3:bool. forall pack__equal__result4:bool.
-  forall pack__equal__result5:bool.
-  (forall result1:bool.
-  ((((((pack__equal__result1 = pack__equal__result2) and
-  (pack__equal__result3 = pack__equal__result1)) and
-  ((result = pack__equal__result) and (pack__equal__result1 = bool_eq4(a, 1,
-  10, b, 1, 10)))) and ((pack__equal__result4 = pack__equal__result2) and
-  (pack__equal__result5 = pack__equal__result3))) and
-  (result1 = pack__equal__result4)) -> ((pack__equal__result4 = true) ->
-  (bool_eq4(a, 1, 10, b, 1, 10) = true)))))
+goal WP_parameter_def : (bool_eq4(a, 1, 10, b, 1, 10) = true)

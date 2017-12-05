@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -402,8 +402,35 @@ axiom temp___String_Literal_177__def_axiom :
   (to_rep((temp___String_Literal_177(void)[4])) = 52)) and
   (to_rep((temp___String_Literal_177(void)[5])) = 53))
 
+logic m2 : (int,character) farray
+
+logic p : int
+
+logic bcheck__R2b__assume : int
+
+logic temp___179 : (int,character) farray
+
+logic temp___1791 : t
+
+logic o : (int,character) farray
+
+logic temp___180 : (int,character) farray
+
+logic temp___1801 : t
+
+logic result : int
+
+logic p1 : int
+
+axiom H : (result = p)
+
+axiom H1 : (p1 = 1)
+
+axiom H2 : in_range(p1)
+
+axiom H3 : (p1 = r1b)
+
+axiom H4 : in_range(r1b)
+
  (* File "bcheck.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p:int. forall result:int. forall p1:int. (((result = p) and
-  (p1 = 1)) -> (in_range(p1) -> (((p1 = r1b) and in_range(r1b)) ->
-  in_range((p1 + 4))))))
+goal WP_parameter_def : in_range((p1 + 4))

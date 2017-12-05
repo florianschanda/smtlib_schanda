@@ -107,9 +107,25 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic counter : int
+
+logic o : int
+
+logic result : int
+
+logic counter1 : int
+
+logic counter2 : int
+
+axiom H : (result = counter)
+
+axiom H1 : (counter1 = 5)
+
+axiom H2 : in_range(counter1)
+
+axiom H3 : ((0 <= 2147483647) -> in_range(counter2))
+
+axiom H4 : (not (counter2 = 0))
+
  (* File "p.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall counter:int. forall result:int. forall counter1:int.
-  forall counter2:int. (((result = counter) and (counter1 = 5)) ->
-  (in_range(counter1) -> (((0 <= 2147483647) -> in_range(counter2)) ->
-  ((not (counter2 = 0)) -> in_range((counter2 - 1)))))))
+goal WP_parameter_def : in_range((counter2 - 1))

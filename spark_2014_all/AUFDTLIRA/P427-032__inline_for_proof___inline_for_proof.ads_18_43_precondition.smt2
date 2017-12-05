@@ -75,6 +75,7 @@
 (declare-const i Int)
 (declare-const j Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (forall ((temp___173 Int)) (=> (and (<= 1 temp___173) (<= temp___173 100)) (exists ((temp___174 Int)) (and (and (<= 1 temp___174) (<= temp___174 100)) (= (to_rep (select x temp___173)) (to_rep (select y temp___174))))))))
 (assert (<= 1 i))
 (assert (<= i 100))

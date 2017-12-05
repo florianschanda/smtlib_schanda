@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -369,6 +369,16 @@ axiom def_axiom :
   (forall temp___188:int.
   (forall temp___189:int.
   ((bad__bad_lo__aggregate_def(temp___188)[temp___189]) = of_rep(temp___188))))
+
+logic bad_lo : (int,character) farray
+
+logic result : (int,character) farray
+
+logic bad_lo1 : (int,character) farray
+
+axiom H : (result = bad_lo)
+
+axiom H1 : (bad_lo1 = bad__bad_lo__aggregate_def(32))
 
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def : true

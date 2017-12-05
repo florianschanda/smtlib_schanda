@@ -253,18 +253,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -823,6 +823,56 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 logic y2 : t
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic arrays_multidim__tuple_test__result : bool
+
+logic result : bool
+
+logic arrays_multidim__tuple_test__result1 : bool
+
+logic arrays_multidim__tuple_test__result2 : bool
+
+logic arrays_multidim__tuple_test__result3 : bool
+
+logic arrays_multidim__tuple_test__result4 : bool
+
+logic arrays_multidim__tuple_test__result5 : bool
+
+logic result1 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 :
+  (arrays_multidim__tuple_test__result1 = arrays_multidim__tuple_test__result2)
+
+axiom H5 :
+  (arrays_multidim__tuple_test__result3 = arrays_multidim__tuple_test__result1)
+
+axiom H6 : (result = arrays_multidim__tuple_test__result)
+
+axiom H7 : (((not (x1 = x2)) ->
+  (arrays_multidim__tuple_test__result1 = true)) and ((x1 = x2) ->
+  (((not (y1 = y2)) -> (arrays_multidim__tuple_test__result1 = true)) and
+  ((y1 = y2) -> (((to_rep(get(map1, x1, y1)) = to_rep(get(map1, x2, y2))) ->
+  (arrays_multidim__tuple_test__result1 = true)) and ((not (to_rep(get(map1,
+  x1, y1)) = to_rep(get(map1, x2, y2)))) ->
+  (arrays_multidim__tuple_test__result1 = false)))))))
+
+axiom H8 :
+  (arrays_multidim__tuple_test__result4 = arrays_multidim__tuple_test__result2)
+
+axiom H9 :
+  (arrays_multidim__tuple_test__result5 = arrays_multidim__tuple_test__result3)
+
+axiom H10 : (result1 = arrays_multidim__tuple_test__result4)
+
+axiom H11 : (arrays_multidim__tuple_test__result4 = true)
 
  (* File "arrays_multidim.adb", line 76, characters 0-0 *)
 goal WP_parameter_def : true

@@ -167,6 +167,8 @@
 (declare-const memory2 (Array (_ BitVec 64) unsigned8))
 (declare-const memory3 (Array (_ BitVec 64) unsigned8))
 (declare-const memory4 (Array (_ BitVec 64) unsigned8))
+(assert true)
+(assert true)
 (assert (and (= (to_rep (select memory1 addr)) ((_ extract 7 0) (bvand val__ ((_ int2bv 16) 255)))) (forall ((i (_ BitVec 64))) (=> (and (bvule ((_ int2bv 64) 0) i) (bvule i ((_ int2bv 64) 18446744073709551615))) (=> (not (= i addr)) (= (to_rep (select memory1 i)) (to_rep (select memory i))))))))
 (assert (=> (< 8 16) (= o (bvlshr val__ ((_ int2bv 16) 8)))))
 (assert (=> (not (< 8 16)) (= o ((_ int2bv 16) 0))))

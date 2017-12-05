@@ -43,7 +43,7 @@
 (declare-const p_state2 Int)
 (declare-const p_state3 Int)
 (assert (in_range value))
-(assert (in_range p_state))
+(assert (=> (<= (- 2147483648) 2147483647) (in_range p_state)))
 (assert (= result p_state))
 (assert (= p_state1 value))
 (assert (= p_state1 p_state2))

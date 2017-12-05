@@ -241,6 +241,7 @@
 (declare-const o3 (Array Int integer))
 (declare-const temp___250 r1)
 (declare-const temp___2501 (Array Int integer))
+(declare-const temp___254 Int)
 (declare-const result r1)
 (declare-const result1 (Array Int integer))
 (declare-const s__split_fields2 r1)

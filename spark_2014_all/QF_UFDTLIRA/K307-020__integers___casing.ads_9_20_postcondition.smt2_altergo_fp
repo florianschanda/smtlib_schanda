@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,23 +111,70 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : int
+
+logic casing__g__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic casing__g__result1 : int
+
+logic casing__g__result2 : int
+
+logic casing__g__result3 : int
+
+logic res2 : int
+
+logic casing__g__result4 : int
+
+logic res3 : int
+
+logic casing__g__result5 : int
+
+logic result2 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (x <  2147483647)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(res))
+
+axiom H3 : ((x = 0) -> (o = 1))
+
+axiom H4 : ((not (x = 0)) -> ((x = 1) -> (o = 2)))
+
+axiom H5 : ((not (x = 0)) -> ((not (x = 1)) -> ((o = (x + 1)) and
+  in_range((x + 1)))))
+
+axiom H6 : (result = res)
+
+axiom H7 : (res1 = o)
+
+axiom H8 : (casing__g__result1 = casing__g__result2)
+
+axiom H9 : (casing__g__result3 = casing__g__result1)
+
+axiom H10 : (result1 = casing__g__result)
+
+axiom H11 : (casing__g__result1 = res1)
+
+axiom H12 : (casing__g__result4 = casing__g__result2)
+
+axiom H13 : (res1 = res2)
+
+axiom H14 : (casing__g__result5 = casing__g__result3)
+
+axiom H15 : (res3 = res1)
+
+axiom H16 : (result2 = casing__g__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall casing__g__result:int. forall o:int.
-  forall result:int. forall res1:int. forall result1:int.
-  forall casing__g__result1:int. forall casing__g__result2:int.
-  forall casing__g__result3:int. forall res2:int.
-  forall casing__g__result4:int. forall res3:int.
-  forall casing__g__result5:int.
-  (forall result2:int. ((in_range(x) and ((x <  2147483647) and
-  ((((((-2147483648) <= 2147483647) -> in_range(res)) and (((((x = 0) and
-  (o = 1)) or ((not (x = 0)) and (((x = 1) and (o = 2)) or ((not (x = 1)) and
-  ((o = (x + 1)) and in_range((x + 1))))))) and (({ int__content = result
-  } = { int__content = res }) and (res1 = o))) and
-  (((casing__g__result1 = casing__g__result2) and
-  (casing__g__result3 = casing__g__result1)) and (({ int__content = result1
-  } = { int__content = casing__g__result }) and
-  (casing__g__result1 = res1))))) and ((({ int__content = casing__g__result4
-  } = { int__content = casing__g__result2 }) and (res1 = res2)) and
-  ((casing__g__result5 = casing__g__result3) and (res3 = res1)))) and
-  (result2 = casing__g__result4)))) -> (casing__g__result4 = (x + 1)))))
+goal WP_parameter_def : (casing__g__result4 = (x + 1))

@@ -198,5 +198,21 @@ logic bool_eq3 : (int,pt) farray, int, int, (int,pt) farray, int, int -> bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic temp___202 : (int,pt) farray
+
+logic o : pt
+
+logic us_self__compl : pt
+
+logic pos : (int,pt) farray
+
+logic us_self__compl1 : pt
+
+logic result : (int,pt) farray
+
+logic pos1 : (int,pt) farray
+
+axiom H : in_range1(id)
+
  (* File "task_and_po_arrays.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (in_range1(id) -> (97 <= 97))
+goal WP_parameter_def : (97 <= 97)

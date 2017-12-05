@@ -81,7 +81,7 @@ axiom bool_ge_axiom :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -212,105 +212,164 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "dispatch.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dispatch__incr6__result:integer.
-  forall dispatch__incr6__result1:us_private.
-  forall dispatch__incr6__result2:int. forall o:int. forall o1:integer.
-  forall o2:integer. forall o3:us_private. forall o4:integer.
-  forall o5:us_private. forall o6:int. forall o7:integer. forall o8:integer.
-  forall o9:us_private. forall o10:integer. forall o11:us_private.
-  forall o12:int. forall result:integer. forall result1:us_private.
-  forall result2:int. forall dispatch__incr6__result3:integer.
-  forall dispatch__incr6__result4:us_private.
-  forall dispatch__incr6__result5:int. forall result3:integer.
-  forall result4:us_private. forall result5:int.
-  forall dispatch__incr6__result6:integer.
-  forall dispatch__incr6__result7:us_private.
-  forall dispatch__incr6__result8:int.
-  forall dispatch__incr6__result9:integer.
-  forall dispatch__incr6__result10:us_private.
-  forall dispatch__incr6__result11:int.
-  forall dispatch__incr6__result12:integer.
-  forall dispatch__incr6__result13:us_private.
-  forall dispatch__incr6__result14:int.
-  forall dispatch__incr6__result15:integer.
-  forall dispatch__incr6__result16:us_private.
-  forall dispatch__incr6__result17:int.
-  forall dispatch__incr6__result18:integer.
-  forall dispatch__incr6__result19:us_private.
-  forall dispatch__incr6__result20:int.
-  forall dispatch__incr6__result21:integer.
-  forall dispatch__incr6__result22:us_private.
-  forall dispatch__incr6__result23:int.
-  forall dispatch__incr6__result24:integer.
-  forall dispatch__incr6__result25:us_private.
-  forall dispatch__incr6__result26:int.
-  (forall result6:integer. forall result7:us_private. forall result8:int.
-  (((to_rep(x) <  2147483647) and ((((({ root__content = { us_split_fields1 =
-  { rec__dispatch__root__f = dispatch__incr6__result15; rec__ext__ =
-  dispatch__incr6__result16 }; attr__tag = dispatch__incr6__result17 } } = {
-  root__content = { us_split_fields1 = { rec__dispatch__root__f =
-  dispatch__incr6__result9; rec__ext__ = dispatch__incr6__result10 };
-  attr__tag = dispatch__incr6__result11 } }) and ({ us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result18; rec__ext__ =
-  dispatch__incr6__result19 }; attr__tag = dispatch__incr6__result20 } = {
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr6__result12;
-  rec__ext__ = dispatch__incr6__result13 }; attr__tag =
-  dispatch__incr6__result14 })) and (((to_rep(x) <  2147483647) and
+logic dispatch__incr6__result : integer
+
+logic dispatch__incr6__result1 : us_private
+
+logic dispatch__incr6__result2 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : us_private
+
+logic o4 : integer
+
+logic o5 : us_private
+
+logic o6 : int
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic o9 : us_private
+
+logic o10 : integer
+
+logic o11 : us_private
+
+logic o12 : int
+
+logic o13 : int
+
+logic result : integer
+
+logic result1 : us_private
+
+logic result2 : int
+
+logic dispatch__incr6__result3 : integer
+
+logic dispatch__incr6__result4 : us_private
+
+logic dispatch__incr6__result5 : int
+
+logic result3 : integer
+
+logic result4 : us_private
+
+logic result5 : int
+
+logic dispatch__incr6__result6 : integer
+
+logic dispatch__incr6__result7 : us_private
+
+logic dispatch__incr6__result8 : int
+
+logic dispatch__incr6__result9 : integer
+
+logic dispatch__incr6__result10 : us_private
+
+logic dispatch__incr6__result11 : int
+
+logic dispatch__incr6__result12 : integer
+
+logic dispatch__incr6__result13 : us_private
+
+logic dispatch__incr6__result14 : int
+
+logic dispatch__incr6__result15 : integer
+
+logic dispatch__incr6__result16 : us_private
+
+logic dispatch__incr6__result17 : int
+
+logic dispatch__incr6__result18 : integer
+
+logic dispatch__incr6__result19 : us_private
+
+logic dispatch__incr6__result20 : int
+
+logic dispatch__incr6__result21 : integer
+
+logic dispatch__incr6__result22 : us_private
+
+logic dispatch__incr6__result23 : int
+
+logic dispatch__incr6__result24 : integer
+
+logic dispatch__incr6__result25 : us_private
+
+logic dispatch__incr6__result26 : int
+
+logic result6 : integer
+
+logic result7 : us_private
+
+logic result8 : int
+
+axiom H : (to_rep(x) <  2147483647)
+
+axiom H1 : (((((dispatch__incr6__result15 = dispatch__incr6__result9) and
+  (dispatch__incr6__result16 = dispatch__incr6__result10)) and
+  (dispatch__incr6__result17 = dispatch__incr6__result11)) and
+  (((dispatch__incr6__result18 = dispatch__incr6__result12) and
+  (dispatch__incr6__result19 = dispatch__incr6__result13)) and
+  (dispatch__incr6__result20 = dispatch__incr6__result14))) and
+  (((to_rep(x) <  2147483647) ->
   (((((dispatch__incr6__result9 = dispatch__incr6__result3) and
   (dispatch__incr6__result10 = dispatch__incr6__result4)) and
-  (dispatch__incr6__result11 = dispatch__incr6__result5)) and ({
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr6__result12;
-  rec__ext__ = dispatch__incr6__result13 }; attr__tag =
-  dispatch__incr6__result14 } = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result3; rec__ext__ =
-  dispatch__incr6__result4 }; attr__tag = dispatch__incr6__result5 })) and
+  (dispatch__incr6__result11 = dispatch__incr6__result5)) and
+  (((dispatch__incr6__result12 = dispatch__incr6__result3) and
+  (dispatch__incr6__result13 = dispatch__incr6__result4)) and
+  (dispatch__incr6__result14 = dispatch__incr6__result5))) and
   ((((((o = (to_rep(x) + 1)) and in_range((to_rep(x) + 1))) and
   (to_rep(o1) = o)) and ((o1 = o2) and (us_null_ext__ = o3))) and
-  (((o4 = o2) and (o5 = o3)) and (us_tag = o6))) and (({ root__content = {
-  us_split_fields1 = { rec__dispatch__root__f = result; rec__ext__ = result1
-  }; attr__tag = result2 } } = { root__content = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result; rec__ext__ =
-  dispatch__incr6__result1 }; attr__tag = dispatch__incr6__result2 } }) and
-  ({ us_split_fields1 = { rec__dispatch__root__f = dispatch__incr6__result3;
-  rec__ext__ = dispatch__incr6__result4 }; attr__tag =
-  dispatch__incr6__result5 } = { us_split_fields1 = {
-  rec__dispatch__root__f = o4; rec__ext__ = o5 }; attr__tag = o6 }))))) or
-  ((not (to_rep(x) <  2147483647)) and
+  (((o4 = o2) and (o5 = o3)) and (us_tag = o6))) and
+  ((((result = dispatch__incr6__result) and
+  (result1 = dispatch__incr6__result1)) and
+  (result2 = dispatch__incr6__result2)) and
+  (((dispatch__incr6__result3 = o4) and (dispatch__incr6__result4 = o5)) and
+  (dispatch__incr6__result5 = o6)))))) and
+  ((not (to_rep(x) <  2147483647)) ->
   (((((dispatch__incr6__result9 = dispatch__incr6__result6) and
   (dispatch__incr6__result10 = dispatch__incr6__result7)) and
-  (dispatch__incr6__result11 = dispatch__incr6__result8)) and ({
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr6__result12;
-  rec__ext__ = dispatch__incr6__result13 }; attr__tag =
-  dispatch__incr6__result14 } = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result6; rec__ext__ =
-  dispatch__incr6__result7 }; attr__tag = dispatch__incr6__result8 })) and
+  (dispatch__incr6__result11 = dispatch__incr6__result8)) and
+  (((dispatch__incr6__result12 = dispatch__incr6__result6) and
+  (dispatch__incr6__result13 = dispatch__incr6__result7)) and
+  (dispatch__incr6__result14 = dispatch__incr6__result8))) and
   ((((to_rep(o7) = 0) and ((o7 = o8) and (us_null_ext__ = o9))) and
-  (((o10 = o8) and (o11 = o9)) and (us_tag = o12))) and (({ root__content = {
-  us_split_fields1 = { rec__dispatch__root__f = result3; rec__ext__ = result4
-  }; attr__tag = result5 } } = { root__content = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result; rec__ext__ =
-  dispatch__incr6__result1 }; attr__tag = dispatch__incr6__result2 } }) and
-  ({ us_split_fields1 = { rec__dispatch__root__f = dispatch__incr6__result6;
-  rec__ext__ = dispatch__incr6__result7 }; attr__tag =
-  dispatch__incr6__result8 } = { us_split_fields1 = {
-  rec__dispatch__root__f = o10; rec__ext__ = o11 }; attr__tag = o12
-  }))))))) and (({ root__content = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr6__result21; rec__ext__ =
-  dispatch__incr6__result22 }; attr__tag = dispatch__incr6__result23 } } = {
-  root__content = { us_split_fields1 = { rec__dispatch__root__f =
-  dispatch__incr6__result15; rec__ext__ = dispatch__incr6__result16 };
-  attr__tag = dispatch__incr6__result17 } }) and
-  (((dispatch__incr6__result24 = dispatch__incr6__result18) and
+  (((o10 = o8) and (o11 = o9)) and (us_tag = o12))) and
+  ((((result3 = dispatch__incr6__result) and
+  (result4 = dispatch__incr6__result1)) and
+  (result5 = dispatch__incr6__result2)) and
+  (((dispatch__incr6__result6 = o10) and
+  (dispatch__incr6__result7 = o11)) and
+  (dispatch__incr6__result8 = o12))))))))
+
+axiom H2 : (((dispatch__incr6__result21 = dispatch__incr6__result15) and
+  (dispatch__incr6__result22 = dispatch__incr6__result16)) and
+  (dispatch__incr6__result23 = dispatch__incr6__result17))
+
+axiom H3 : (((dispatch__incr6__result24 = dispatch__incr6__result18) and
   (dispatch__incr6__result25 = dispatch__incr6__result19)) and
-  (dispatch__incr6__result26 = dispatch__incr6__result20)))) and
-  ((((bool_lt(to_rep(x), 2147483647) = true) and
-  (to_rep(dispatch__incr6__result21) = (to_rep(x) + 1))) or
-  (not (bool_lt(to_rep(x), 2147483647) = true))) and
-  ((((not (bool_lt(to_rep(x), 2147483647) = true)) and
-  (to_rep(dispatch__incr6__result21) = 0)) or (bool_lt(to_rep(x),
-  2147483647) = true)) and (((result6 = dispatch__incr6__result21) and
+  (dispatch__incr6__result26 = dispatch__incr6__result20))
+
+axiom H4 : ((bool_lt(to_rep(x), 2147483647) = true) ->
+  (to_rep(dispatch__incr6__result21) = (to_rep(x) + 1)))
+
+axiom H5 : ((not (bool_lt(to_rep(x), 2147483647) = true)) ->
+  (to_rep(dispatch__incr6__result21) = 0))
+
+axiom H6 : (((result6 = dispatch__incr6__result21) and
   (result7 = dispatch__incr6__result22)) and
-  (result8 = dispatch__incr6__result23)))))) -> ((to_rep(x) <  2147483647) ->
-  (to_rep(dispatch__incr6__result21) = (to_rep(x) + 1))))))
+  (result8 = dispatch__incr6__result23))
+
+axiom H7 : (to_rep(x) <  2147483647)
+
+ (* File "dispatch.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (to_rep(dispatch__incr6__result21) = (to_rep(x) + 1))

@@ -72,6 +72,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const u (_ BitVec 32))
+(declare-const o (_ BitVec 32))
+(assert true)
 (assert (=> (bvule ((_ int2bv 32) 0) ((_ int2bv 32) 10)) (in_range u)))
 (assert (not (in_range x)))
 (check-sat)

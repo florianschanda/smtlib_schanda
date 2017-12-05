@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -747,7 +747,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type int__
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -1082,7 +1082,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1121,7 +1121,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq11 : int, int -> bool
 
@@ -1816,7 +1816,7 @@ logic attr__ATTRIBUTE_ADDRESS15 : int
 
 type integer
 
-predicate in_range10(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range10(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq18 : int, int -> bool
 
@@ -2968,85 +2968,454 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall redraw_board:bool. forall redraw_score:bool.
-  forall redraw_current_piece:bool. forall score_nbr:t. forall level_nbr:t.
-  forall line_counter:t. forall best_score_nbr:t.
-  forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord.
-  forall next_piece__split_fields:shape.
-  forall next_piece__split_fields1:direction.
-  forall next_piece__split_fields2:px_coord.
-  forall next_piece__split_fields3:py_coord. forall cur_state:int.
-  forall action_request_nbr:int. forall speed_up:bool. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:py_coord. forall o6:px_coord. forall o7:direction.
-  forall o8:shape. forall o9:shape. forall o10:direction.
-  forall o11:px_coord. forall o12:py_coord. forall temp___2220:shape.
-  forall temp___22201:direction. forall temp___22202:px_coord.
-  forall temp___22203:py_coord. forall o13:bool. forall o14:int.
-  forall o15:int. forall o16:int. forall o17:py_coord. forall o18:px_coord.
-  forall o19:direction. forall next_piece__split_fields4:shape.
-  forall next_piece__split_fields5:direction.
-  forall next_piece__split_fields6:px_coord.
-  forall next_piece__split_fields7:py_coord. forall result:bool.
-  forall redraw_board1:bool. forall result1:bool.
-  forall redraw_current_piece1:bool. forall result2:bool.
-  forall redraw_score1:bool. forall result3:bool. forall speed_up1:bool.
-  forall result4:shape. forall result5:direction. forall result6:px_coord.
-  forall result7:py_coord. forall next_piece__split_fields8:shape.
-  forall next_piece__split_fields9:direction.
-  forall next_piece__split_fields10:px_coord.
-  forall next_piece__split_fields11:py_coord. forall result8:bool.
-  forall result9:shape. forall result10:direction. forall result11:px_coord.
-  forall result12:py_coord. forall cur_piece__split_fields4:shape.
-  forall cur_piece__split_fields5:direction.
-  forall cur_piece__split_fields6:px_coord.
-  forall cur_piece__split_fields7:py_coord. (in_range3(score_nbr) ->
-  (in_range3(level_nbr) -> (in_range3(line_counter) ->
-  (in_range3(best_score_nbr) -> (in_range9(cur_state) ->
-  (in_range1(action_request_nbr) -> ((valid_configuration__2(cur_state, {
-  rec__patris__piece__s = cur_piece__split_fields; rec__patris__piece__d =
-  cur_piece__split_fields1; rec__patris__piece__x = cur_piece__split_fields2;
-  rec__patris__piece__y = cur_piece__split_fields3 }, cur_board) = true) ->
-  (((result = redraw_board) and (redraw_board1 = of_int1(0))) ->
-  (((result1 = redraw_current_piece) and
-  (redraw_current_piece1 = of_int1(0))) -> (((result2 = redraw_score) and
-  (redraw_score1 = of_int1(0))) -> ((not (cur_state = 0)) ->
-  ((cur_state = 3) -> (((result3 = speed_up) and (speed_up1 = of_int1(0))) ->
-  ((((to_rep(next_piece__split_fields) = 0) and ((((to_rep3(o5) = 1) and
-  ((to_rep2(o6) = 5) and (((((o3 = rand(void)) and in_range2(o3)) and
-  (o4 = mod(o3, 4))) and (to_rep4(o7) = o4)) and ((((((o = rand(void)) and
-  in_range2(o)) and (o1 = mod(o, 7))) and (o2 = (1 + o1))) and
-  (to_rep(o8) = o2)) and ((o8 = o9) and ((o7 = o10) and ((o6 = o11) and
-  (o5 = o12)))))))) and ((temp___2220 = o9) and ((temp___22201 = o10) and
-  ((temp___22202 = o11) and (temp___22203 = o12))))) and
-  (((result4 = next_piece__split_fields) and
-  ((result5 = next_piece__split_fields1) and
-  ((result6 = next_piece__split_fields2) and
-  (result7 = next_piece__split_fields3)))) and
-  ((temp___2220 = next_piece__split_fields8) and
-  ((temp___22201 = next_piece__split_fields9) and
-  ((temp___22202 = next_piece__split_fields10) and
-  (temp___22203 = next_piece__split_fields11))))))) or
-  ((not (to_rep(next_piece__split_fields) = 0)) and
-  (((next_piece__split_fields = next_piece__split_fields8) and
-  ((next_piece__split_fields1 = next_piece__split_fields9) and
-  ((next_piece__split_fields2 = next_piece__split_fields10) and
-  (next_piece__split_fields3 = next_piece__split_fields11)))) and
-  ((next_piece__split_fields4 = next_piece__split_fields8) and
-  ((next_piece__split_fields5 = next_piece__split_fields9) and
-  ((next_piece__split_fields6 = next_piece__split_fields10) and
-  (next_piece__split_fields7 = next_piece__split_fields11))))))) ->
-  ((((o13 = no_overlap(cur_board, { us_split_fields1 = {
+logic redraw_board : bool
+
+logic redraw_score : bool
+
+logic redraw_current_piece : bool
+
+logic score_nbr : t
+
+logic level_nbr : t
+
+logic line_counter : t
+
+logic best_score_nbr : t
+
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic next_piece__split_fields : shape
+
+logic next_piece__split_fields1 : direction
+
+logic next_piece__split_fields2 : px_coord
+
+logic next_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic action_request_nbr : int
+
+logic speed_up : bool
+
+logic success : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : py_coord
+
+logic o6 : px_coord
+
+logic o7 : direction
+
+logic o8 : shape
+
+logic o9 : shape
+
+logic o10 : direction
+
+logic o11 : px_coord
+
+logic o12 : py_coord
+
+logic temp___2214 : shape
+
+logic temp___22141 : direction
+
+logic temp___22142 : px_coord
+
+logic temp___22143 : py_coord
+
+logic o13 : bool
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : py_coord
+
+logic o20 : px_coord
+
+logic o21 : direction
+
+logic o22 : shape
+
+logic o23 : shape
+
+logic o24 : direction
+
+logic o25 : px_coord
+
+logic o26 : py_coord
+
+logic temp___2216 : shape
+
+logic temp___22161 : direction
+
+logic temp___22162 : px_coord
+
+logic temp___22163 : py_coord
+
+logic score_nbr1 : t
+
+logic level_nbr1 : t
+
+logic line_counter1 : t
+
+logic best_score_nbr1 : t
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields4 : shape
+
+logic cur_piece__split_fields5 : direction
+
+logic cur_piece__split_fields6 : px_coord
+
+logic cur_piece__split_fields7 : py_coord
+
+logic next_piece__split_fields4 : shape
+
+logic next_piece__split_fields5 : direction
+
+logic next_piece__split_fields6 : px_coord
+
+logic next_piece__split_fields7 : py_coord
+
+logic cur_state1 : int
+
+logic action_request_nbr1 : int
+
+logic speed_up1 : bool
+
+logic success1 : bool
+
+logic result : bool
+
+logic redraw_board1 : bool
+
+logic result1 : bool
+
+logic redraw_current_piece1 : bool
+
+logic result2 : bool
+
+logic redraw_score1 : bool
+
+logic result3 : int
+
+logic action_request_nbr2 : int
+
+logic cur_piece__split_fields8 : shape
+
+logic cur_piece__split_fields9 : direction
+
+logic cur_piece__split_fields10 : px_coord
+
+logic cur_piece__split_fields11 : py_coord
+
+logic success2 : bool
+
+logic result4 : bool
+
+logic redraw_current_piece2 : bool
+
+logic result5 : int
+
+logic cur_state2 : int
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic cur_state3 : int
+
+logic score_nbr2 : t
+
+logic level_nbr2 : t
+
+logic line_counter2 : t
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic cur_state4 : int
+
+logic result6 : bool
+
+logic redraw_board2 : bool
+
+logic result7 : bool
+
+logic speed_up2 : bool
+
+logic result8 : shape
+
+logic result9 : direction
+
+logic result10 : px_coord
+
+logic result11 : py_coord
+
+logic next_piece__split_fields8 : shape
+
+logic next_piece__split_fields9 : direction
+
+logic next_piece__split_fields10 : px_coord
+
+logic next_piece__split_fields11 : py_coord
+
+logic result12 : bool
+
+logic result13 : int
+
+logic cur_state5 : int
+
+logic result14 : t
+
+logic best_score_nbr2 : t
+
+logic result15 : shape
+
+logic result16 : direction
+
+logic result17 : px_coord
+
+logic result18 : py_coord
+
+logic cur_piece__split_fields12 : shape
+
+logic cur_piece__split_fields13 : direction
+
+logic cur_piece__split_fields14 : px_coord
+
+logic cur_piece__split_fields15 : py_coord
+
+logic result19 : shape
+
+logic result20 : direction
+
+logic result21 : px_coord
+
+logic result22 : py_coord
+
+logic next_piece__split_fields12 : shape
+
+logic next_piece__split_fields13 : direction
+
+logic next_piece__split_fields14 : px_coord
+
+logic next_piece__split_fields15 : py_coord
+
+logic result23 : int
+
+logic cur_state6 : int
+
+logic result24 : bool
+
+logic redraw_score2 : bool
+
+logic redraw_board3 : bool
+
+logic redraw_score3 : bool
+
+logic redraw_current_piece3 : bool
+
+logic score_nbr3 : t
+
+logic level_nbr3 : t
+
+logic line_counter3 : t
+
+logic best_score_nbr3 : t
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields16 : shape
+
+logic cur_piece__split_fields17 : direction
+
+logic cur_piece__split_fields18 : px_coord
+
+logic cur_piece__split_fields19 : py_coord
+
+logic next_piece__split_fields16 : shape
+
+logic next_piece__split_fields17 : direction
+
+logic next_piece__split_fields18 : px_coord
+
+logic next_piece__split_fields19 : py_coord
+
+logic cur_state7 : int
+
+logic action_request_nbr3 : int
+
+logic speed_up3 : bool
+
+logic success3 : bool
+
+logic redraw_board4 : bool
+
+logic redraw_score4 : bool
+
+logic redraw_current_piece4 : bool
+
+logic score_nbr4 : t
+
+logic level_nbr4 : t
+
+logic line_counter4 : t
+
+logic best_score_nbr4 : t
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields20 : shape
+
+logic cur_piece__split_fields21 : direction
+
+logic cur_piece__split_fields22 : px_coord
+
+logic cur_piece__split_fields23 : py_coord
+
+logic next_piece__split_fields20 : shape
+
+logic next_piece__split_fields21 : direction
+
+logic next_piece__split_fields22 : px_coord
+
+logic next_piece__split_fields23 : py_coord
+
+logic cur_state8 : int
+
+logic action_request_nbr4 : int
+
+logic speed_up4 : bool
+
+logic success4 : bool
+
+axiom H : in_range3(score_nbr)
+
+axiom H1 : in_range3(level_nbr)
+
+axiom H2 : in_range3(line_counter)
+
+axiom H3 : in_range3(best_score_nbr)
+
+axiom H4 : in_range9(cur_state)
+
+axiom H5 : in_range1(action_request_nbr)
+
+axiom H6 : (valid_configuration__2(cur_state, { rec__patris__piece__s =
+  cur_piece__split_fields; rec__patris__piece__d = cur_piece__split_fields1;
+  rec__patris__piece__x = cur_piece__split_fields2; rec__patris__piece__y =
+  cur_piece__split_fields3 }, cur_board) = true)
+
+axiom H7 : (result = redraw_board)
+
+axiom H8 : (redraw_board1 = of_int1(0))
+
+axiom H9 : (result1 = redraw_current_piece)
+
+axiom H10 : (redraw_current_piece1 = of_int1(0))
+
+axiom H11 : (result2 = redraw_score)
+
+axiom H12 : (redraw_score1 = of_int1(0))
+
+axiom H13 : (not (cur_state = 0))
+
+axiom H14 : (cur_state = 3)
+
+axiom H15 : (result7 = speed_up)
+
+axiom H16 : (speed_up2 = of_int1(0))
+
+axiom H17 : ((to_rep(next_piece__split_fields) = 0) -> (to_rep3(o5) = 1))
+
+axiom H18 : ((to_rep(next_piece__split_fields) = 0) -> (to_rep2(o6) = 5))
+
+axiom H19 : ((to_rep(next_piece__split_fields) = 0) -> ((o3 = rand(void)) and
+  in_range2(o3)))
+
+axiom H20 : ((to_rep(next_piece__split_fields) = 0) -> (o4 = mod(o3, 4)))
+
+axiom H21 : ((to_rep(next_piece__split_fields) = 0) -> (to_rep4(o7) = o4))
+
+axiom H22 : ((to_rep(next_piece__split_fields) = 0) -> ((o = rand(void)) and
+  in_range2(o)))
+
+axiom H23 : ((to_rep(next_piece__split_fields) = 0) -> (o1 = mod(o, 7)))
+
+axiom H24 : ((to_rep(next_piece__split_fields) = 0) -> (o2 = (1 + o1)))
+
+axiom H25 : ((to_rep(next_piece__split_fields) = 0) -> (to_rep(o8) = o2))
+
+axiom H26 : ((to_rep(next_piece__split_fields) = 0) -> (o8 = o9))
+
+axiom H27 : ((to_rep(next_piece__split_fields) = 0) -> (o7 = o10))
+
+axiom H28 : ((to_rep(next_piece__split_fields) = 0) -> (o6 = o11))
+
+axiom H29 : ((to_rep(next_piece__split_fields) = 0) -> (o5 = o12))
+
+axiom H30 : ((to_rep(next_piece__split_fields) = 0) -> (temp___2214 = o9))
+
+axiom H31 : ((to_rep(next_piece__split_fields) = 0) -> (temp___22141 = o10))
+
+axiom H32 : ((to_rep(next_piece__split_fields) = 0) -> (temp___22142 = o11))
+
+axiom H33 : ((to_rep(next_piece__split_fields) = 0) -> (temp___22143 = o12))
+
+axiom H34 : ((to_rep(next_piece__split_fields) = 0) ->
+  ((result8 = next_piece__split_fields) and
+  ((result9 = next_piece__split_fields1) and
+  ((result10 = next_piece__split_fields2) and
+  (result11 = next_piece__split_fields3)))))
+
+axiom H35 : ((to_rep(next_piece__split_fields) = 0) ->
+  ((next_piece__split_fields8 = temp___2214) and
+  ((next_piece__split_fields9 = temp___22141) and
+  ((next_piece__split_fields10 = temp___22142) and
+  (next_piece__split_fields11 = temp___22143)))))
+
+axiom H36 : ((not (to_rep(next_piece__split_fields) = 0)) ->
+  ((next_piece__split_fields8 = next_piece__split_fields) and
+  ((next_piece__split_fields9 = next_piece__split_fields1) and
+  ((next_piece__split_fields10 = next_piece__split_fields2) and
+  (next_piece__split_fields11 = next_piece__split_fields3)))))
+
+axiom H37 : ((not (to_rep(next_piece__split_fields) = 0)) ->
+  ((next_piece__split_fields8 = next_piece__split_fields4) and
+  ((next_piece__split_fields9 = next_piece__split_fields5) and
+  ((next_piece__split_fields10 = next_piece__split_fields6) and
+  (next_piece__split_fields11 = next_piece__split_fields7)))))
+
+axiom H38 : ((o13 = no_overlap(cur_board, { us_split_fields1 = {
   rec__patris__piece__s = next_piece__split_fields8; rec__patris__piece__d =
   next_piece__split_fields9; rec__patris__piece__x =
   next_piece__split_fields10; rec__patris__piece__y =
-  next_piece__split_fields11 } })) and (((o13 = true) or
+  next_piece__split_fields11 } })) and (((o13 = true) ->
   (((to_rep(next_piece__split_fields8) = 2) -> ((((is_empty(cur_board,
   to_rep3(next_piece__split_fields11),
   to_rep2(next_piece__split_fields10)) = true) and (is_empty(cur_board,
@@ -3070,9 +3439,9 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep(next_piece__split_fields8),
   to_rep4(next_piece__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(next_piece__split_fields11) + y),
-  (to_rep2(next_piece__split_fields10) + x)) = true))))))))))) ->
-  ((o13 = true) and (((to_rep(next_piece__split_fields8) = 2) and
-  ((((is_empty(cur_board, to_rep3(next_piece__split_fields11),
+  (to_rep2(next_piece__split_fields10) + x)) = true))))))))))) and
+  ((((to_rep(next_piece__split_fields8) = 2) and ((((is_empty(cur_board,
+  to_rep3(next_piece__split_fields11),
   to_rep2(next_piece__split_fields10)) = true) and (is_empty(cur_board,
   to_rep3(next_piece__split_fields11),
   (to_rep2(next_piece__split_fields10) + 1)) = true)) and
@@ -3094,18 +3463,35 @@ goal WP_parameter_def :
   ((get(get1(possible_three_shapes, to_rep(next_piece__split_fields8),
   to_rep4(next_piece__split_fields9)), y, x) = true) -> (is_empty(cur_board,
   (to_rep3(next_piece__split_fields11) + y),
-  (to_rep2(next_piece__split_fields10) + x)) = true))))))))))))) and
-  (((not (o13 = true)) and (result8 = true)) or ((o13 = true) and
-  (result8 = false)))) -> ((not (result8 = true)) ->
-  ((((result9 = cur_piece__split_fields) and
-  ((result10 = cur_piece__split_fields1) and
-  ((result11 = cur_piece__split_fields2) and
-  (result12 = cur_piece__split_fields3)))) and
-  ((cur_piece__split_fields4 = next_piece__split_fields8) and
-  ((cur_piece__split_fields5 = next_piece__split_fields9) and
-  ((cur_piece__split_fields6 = next_piece__split_fields10) and
-  (cur_piece__split_fields7 = next_piece__split_fields11))))) ->
-  ((to_rep3(o17) = 1) -> ((to_rep2(o18) = 5) -> (((((o15 = rand(void)) and
-  in_range2(o15)) and (o16 = mod(o15, 4))) and (to_rep4(o19) = o16)) ->
-  (((o14 = rand(void)) and in_range2(o14)) ->
-  (not (7 = 0))))))))))))))))))))))))
+  (to_rep2(next_piece__split_fields10) + x)) = true)))))))))) ->
+  (o13 = true))))
+
+axiom H39 : (((not (o13 = true)) -> (result12 = true)) and ((o13 = true) ->
+  (result12 = false)))
+
+axiom H40 : (not (result12 = true))
+
+axiom H41 : ((result15 = cur_piece__split_fields) and
+  ((result16 = cur_piece__split_fields1) and
+  ((result17 = cur_piece__split_fields2) and
+  (result18 = cur_piece__split_fields3))))
+
+axiom H42 : ((cur_piece__split_fields12 = next_piece__split_fields8) and
+  ((cur_piece__split_fields13 = next_piece__split_fields9) and
+  ((cur_piece__split_fields14 = next_piece__split_fields10) and
+  (cur_piece__split_fields15 = next_piece__split_fields11))))
+
+axiom H43 : (to_rep3(o19) = 1)
+
+axiom H44 : (to_rep2(o20) = 5)
+
+axiom H45 : ((o17 = rand(void)) and in_range2(o17))
+
+axiom H46 : (o18 = mod(o17, 4))
+
+axiom H47 : (to_rep4(o21) = o18)
+
+axiom H48 : ((o14 = rand(void)) and in_range2(o14))
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (not (7 = 0))

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type element_t
 
-predicate in_range2(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -415,20 +415,35 @@ logic s1 : (int,element_t) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic natural_set__members__result : int
+
+logic result : int
+
+logic natural_set__members__result1 : int
+
+logic natural_set__members__result2 : int
+
+logic natural_set__members__result3 : int
+
+logic natural_set__members__result4 : int
+
+logic natural_set__members__result5 : int
+
+logic result1 : int
+
+axiom H : (natural_set__members__result1 = natural_set__members__result2)
+
+axiom H1 : (natural_set__members__result3 = natural_set__members__result1)
+
+axiom H2 : (result = natural_set__members__result)
+
+axiom H3 : (natural_set__members__result1 = to_rep(s))
+
+axiom H4 : (natural_set__members__result4 = natural_set__members__result2)
+
+axiom H5 : (natural_set__members__result5 = natural_set__members__result3)
+
+axiom H6 : (result1 = natural_set__members__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall natural_set__members__result:int. forall result:int.
-  forall natural_set__members__result1:int.
-  forall natural_set__members__result2:int.
-  forall natural_set__members__result3:int.
-  forall natural_set__members__result4:int.
-  forall natural_set__members__result5:int.
-  (forall result1:int.
-  ((((((natural_set__members__result1 = natural_set__members__result2) and
-  (natural_set__members__result3 = natural_set__members__result1)) and
-  ((result = natural_set__members__result) and
-  (natural_set__members__result1 = to_rep(s)))) and
-  ((natural_set__members__result4 = natural_set__members__result2) and
-  (natural_set__members__result5 = natural_set__members__result3))) and
-  (result1 = natural_set__members__result4)) ->
-  (0 <= natural_set__members__result4))))
+goal WP_parameter_def : (0 <= natural_set__members__result4)

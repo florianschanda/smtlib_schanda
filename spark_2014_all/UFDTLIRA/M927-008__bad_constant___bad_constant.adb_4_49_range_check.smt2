@@ -50,6 +50,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const bad_constant__x__assume Int)
 (assert (and (= o (ident 2147483647)) (and (in_range o) (= o 2147483647))))
 (assert (= o1 (+ o 1)))
 (assert (and (= o2 o1) (in_range o1)))

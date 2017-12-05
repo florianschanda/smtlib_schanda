@@ -372,14 +372,26 @@ axiom nat_ok__post_axiom : true
 axiom nat_ok__def_axiom :
   (forall x:int [nat_ok(x)]. ((nat_ok(x) = true) <-> (x = 0)))
 
+logic r__split_fields : natural
+
+logic n : int
+
+logic a : (int,natural) farray
+
+axiom H : ((to_rep(r__split_fields) = 0) and (rec_ok({ us_split_fields1 = {
+  rec__default_init__rec__f = r__split_fields } }) = true))
+
+axiom H1 : ((n = 0) and (nat_ok(n) = true))
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(n))
+
+axiom H3 :
+  ((forall temp___169:int. (((1 <= temp___169) and (temp___169 <= 3)) ->
+   (to_rep((a[temp___169])) = 0))) and (arr_ok(a) = true))
+
+axiom H4 : (to_rep(r__split_fields) = 0)
+
+axiom H5 : (n = 0)
+
  (* File "default_init.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:natural. forall n:int.
-  forall a:(int,natural) farray. (((to_rep(r__split_fields) = 0) and
-  (rec_ok({ us_split_fields1 = { rec__default_init__rec__f = r__split_fields
-  } }) = true)) -> (((n = 0) and (nat_ok(n) = true)) ->
-  (((0 <= 2147483647) -> in_range2(n)) ->
-  (((forall temp___169:int. (((1 <= temp___169) and (temp___169 <= 3)) ->
-    (to_rep((a[temp___169])) = 0))) and
-  (arr_ok(a) = true)) -> ((to_rep(r__split_fields) = 0) -> ((n = 0) ->
-  (to_rep((a[1])) = 0))))))))
+goal WP_parameter_def : (to_rep((a[1])) = 0)

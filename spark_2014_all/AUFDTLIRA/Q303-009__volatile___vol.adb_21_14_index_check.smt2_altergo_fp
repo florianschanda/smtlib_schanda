@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -247,7 +247,11 @@ type taD1__ref = { taD1__content : taD1
 
 function taD1__ref___projection(a: taD1__ref) : taD1 = (a).taD1__content
 
+logic val__ : int
+
+axiom H : in_range(idx)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(val__))
+
  (* File "vol.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall val__:int. (in_range(idx) -> ((((-2147483648) <= 2147483647) ->
-  in_range(val__)) -> (1 <= idx))))
+goal WP_parameter_def : (1 <= idx)

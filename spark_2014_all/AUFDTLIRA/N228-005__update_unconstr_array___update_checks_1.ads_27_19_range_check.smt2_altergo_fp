@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tindexB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -828,50 +828,109 @@ axiom def_axiom1 :
   (forall temp___465:int. (((temp___460(temp___462, temp___463,
   temp___464)).elts4[temp___465]) = of_rep1(temp___462)))))
 
+logic a : (int,integer) farray
+
+logic temp___467 : (int,integer) farray
+
+logic temp___4671 : t4
+
+logic temp___468 : (int,integer) farray
+
+logic temp___4681 : t3
+
+logic o : (int,integer) farray
+
+logic temp___470 : (int,integer) farray
+
+logic temp___4701 : t3
+
+logic temp___471 : (int,integer) farray
+
+logic temp___4711 : t3
+
+logic o1 : (int,integer) farray
+
+logic temp___477 : (int,integer) farray
+
+logic temp___4771 : t2
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : in_range1(new_val)
+
+axiom H3 : (to_rep(first8((temp___460(new_val, 2, i)).rt4)) = 2)
+
+axiom H4 : (to_rep(last8((temp___460(new_val, 2, i)).rt4)) = i)
+
+axiom H5 : ({ elts4 = temp___467; rt4 = temp___4671 } = temp___460(new_val,
+  2, i))
+
+axiom H6 : (((to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671))) ->
+  (((2 <= i) ->
+  (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = ((i - 2) + 1))) and
+  ((not (2 <= i)) ->
+  (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = 0)))) and
+  ((not (to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671)))) ->
+  ((2 <= i) -> (0 = ((i - 2) + 1)))))
+
+axiom H7 : (temp___467 = temp___468)
+
+axiom H8 : (mk3(to_rep(first8(temp___4671)),
+  to_rep(last8(temp___4671))) = temp___4681)
+
+axiom H9 : ((2 <= i) -> (((to_rep(a__first) <= 2) and
+  (2 <= to_rep(a__last))) and ((to_rep(a__first) <= i) and
+  (i <= to_rep(a__last)))))
+
+axiom H10 : (o = a)
+
+axiom H11 : (o = temp___470)
+
+axiom H12 : (mk3(2, i) = temp___4701)
+
+axiom H13 : (((to_rep(first6(temp___4681)) <= to_rep(last6(temp___4681))) ->
+  (((to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701))) ->
+  (((to_rep(last6(temp___4681)) - to_rep(first6(temp___4681))) + 1) = ((to_rep(last6(temp___4701)) - to_rep(first6(temp___4701))) + 1))) and
+  ((not (to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701)))) ->
+  (((to_rep(last6(temp___4681)) - to_rep(first6(temp___4681))) + 1) = 0)))) and
+  ((not (to_rep(first6(temp___4681)) <= to_rep(last6(temp___4681)))) ->
+  ((to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701))) ->
+  (0 = ((to_rep(last6(temp___4701)) - to_rep(first6(temp___4701))) + 1)))))
+
+axiom H14 : ((temp___471 = temp___468) and (temp___4711 = temp___4681))
+
+axiom H15 :
+  (forall temp___472:int. ((((2 <= temp___472) and (temp___472 <= i)) ->
+  ((o1[temp___472]) = (temp___471[temp___472]))) and
+  ((not ((2 <= temp___472) and (temp___472 <= i))) ->
+  ((o1[temp___472]) = (a[temp___472])))))
+
+axiom H16 : (result = a)
+
+axiom H17 : (a1 = o1)
+
+axiom H18 : (a1 = a2)
+
+axiom H19 : (a3 = a1)
+
+axiom H20 : (to_rep(first4((temp___274(new_val, 1, i)).rt2)) = 1)
+
+axiom H21 : (to_rep(last4((temp___274(new_val, 1, i)).rt2)) = i)
+
+axiom H22 : ({ elts2 = temp___477; rt2 = temp___4771 } = temp___274(new_val,
+  1, i))
+
+axiom H23 : (1 <= i)
+
  (* File "update_checks_1.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall temp___467:(int,integer) farray.
-  forall temp___4671:t4. forall temp___468:(int,integer) farray.
-  forall temp___4681:t3. forall o:(int,integer) farray.
-  forall temp___470:(int,integer) farray. forall temp___4701:t3.
-  forall temp___471:(int,integer) farray. forall temp___4711:t3.
-  forall o1:(int,integer) farray. forall temp___477:(int,integer) farray.
-  forall temp___4771:t2. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. (dynamic_property(1, 8, to_rep(a__first),
-  to_rep(a__last)) -> (in_range3(i) -> (in_range1(new_val) ->
-  ((((((((to_rep(first8((temp___460(new_val, 2, i)).rt4)) = 2) and
-  ((to_rep(last8((temp___460(new_val, 2, i)).rt4)) = i) and ({ elts4 =
-  temp___467; rt4 = temp___4671 } = temp___460(new_val, 2, i)))) and
-  ((((to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671))) and
-  (((2 <= i) and
-  (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = ((i - 2) + 1))) or
-  ((not (2 <= i)) and
-  (((to_rep(last8(temp___4671)) - to_rep(first8(temp___4671))) + 1) = 0)))) or
-  ((not (to_rep(first8(temp___4671)) <= to_rep(last8(temp___4671)))) and
-  (((2 <= i) and (0 = ((i - 2) + 1))) or (not (2 <= i))))) and
-  ((temp___467 = temp___468) and (mk3(to_rep(first8(temp___4671)),
-  to_rep(last8(temp___4671))) = temp___4681)))) and (((((2 <= i) ->
-  (((to_rep(a__first) <= 2) and (2 <= to_rep(a__last))) and
-  ((to_rep(a__first) <= i) and (i <= to_rep(a__last))))) and (o = a)) and
-  ((o = temp___470) and (mk3(2, i) = temp___4701))) and
-  ((((to_rep(first6(temp___4681)) <= to_rep(last6(temp___4681))) and
-  (((to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701))) and
-  (((to_rep(last6(temp___4681)) - to_rep(first6(temp___4681))) + 1) = ((to_rep(last6(temp___4701)) - to_rep(first6(temp___4701))) + 1))) or
-  ((not (to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701)))) and
-  (((to_rep(last6(temp___4681)) - to_rep(first6(temp___4681))) + 1) = 0)))) or
-  ((not (to_rep(first6(temp___4681)) <= to_rep(last6(temp___4681)))) and
-  (((to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701))) and
-  (0 = ((to_rep(last6(temp___4701)) - to_rep(first6(temp___4701))) + 1))) or
-  (not (to_rep(first6(temp___4701)) <= to_rep(last6(temp___4701))))))) and ({
-  elts3 = temp___471; rt3 = temp___4711 } = { elts3 = temp___468; rt3 =
-  temp___4681 })))) and
-  (forall temp___472:int. ((((2 <= temp___472) and (temp___472 <= i)) and
-  ((o1[temp___472]) = (temp___471[temp___472]))) or
-  ((not ((2 <= temp___472) and (temp___472 <= i))) and
-  ((o1[temp___472]) = (a[temp___472])))))) and (({ map__content = result
-  } = { map__content = a }) and (a1 = o1))) and ((a1 = a2) and (a3 = a1))) ->
-  (((to_rep(first4((temp___274(new_val, 1, i)).rt2)) = 1) and
-  ((to_rep(last4((temp___274(new_val, 1, i)).rt2)) = i) and ({ elts2 =
-  temp___477; rt2 = temp___4771 } = temp___274(new_val, 1, i)))) ->
-  ((1 <= i) -> (to_rep(a__first) <= 1))))))))
+goal WP_parameter_def : (to_rep(a__first) <= 1)

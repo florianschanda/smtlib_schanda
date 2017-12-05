@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -603,9 +603,67 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep1(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
+logic b : (int,natural) farray
+
+logic perm__occ_set__b__assume : (int,natural) farray
+
+logic perm__occ_set__b__assume1 : t
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : (int,natural) farray
+
+logic o5 : (int,natural) farray
+
+logic o6 : t
+
+logic o7 : (int,natural) farray
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : int
+
+logic result : (int,natural) farray
+
+logic b1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic b2 : (int,natural) farray
+
+logic b3 : (int,natural) farray
+
+logic b4 : (int,natural) farray
+
+logic b5 : (int,natural) farray
+
+logic b6 : (int,natural) farray
+
+logic result2 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : in_range1(v)
+
+axiom H3 : in_range1(e)
+
+axiom H4 : dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1)))
+
+axiom H5 : (to_rep1(first(a1)) <= i)
+
+axiom H6 : (i <= to_rep1(last(a1)))
+
  (* File "perm.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range3(i) -> (in_range1(v) -> (in_range1(e) ->
-  (dynamic_property(1, 100, to_rep1(first(r1)), to_rep1(last(r1))) ->
-  (((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))) ->
-  (to_rep1(first(a1)) <= i)))))))
+goal WP_parameter_def : (to_rep1(first(a1)) <= i)

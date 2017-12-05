@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -579,13 +579,31 @@ type t64b__ref = { t64b__content : us_t2
 
 function t64b__ref___projection(a: t64b__ref) : us_t2 = (a).t64b__content
 
+logic a : (int,character) farray
+
+logic o : (int,character) farray
+
+logic test__op_string_io_i__x__compl : (int,character) farray
+
+logic test__op_string_io_i__x__compl1 : t1
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : in_range1(n)
+
+axiom H2 : in_range1(m)
+
+axiom H3 : ((n <= n) -> ((to_rep1(a__first) <= n) and
+  (n <= to_rep1(a__last))))
+
+axiom H4 : (o = a)
+
+axiom H5 : (test__op_string_io_i__x__compl = o)
+
+axiom H6 : (test__op_string_io_i__x__compl1 = mk1(n, n))
+
+axiom H7 : (m <= m)
+
  (* File "test.adb", line 226, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,character) farray. forall o:(int,character) farray.
-  forall test__op_string_io_i__x__compl:(int,character) farray.
-  forall test__op_string_io_i__x__compl1:t1. (dynamic_property(1, 2147483647,
-  to_rep1(a__first), to_rep1(a__last)) -> (in_range1(n) -> (in_range1(m) ->
-  (((((n <= n) -> ((to_rep1(a__first) <= n) and (n <= to_rep1(a__last)))) and
-  (o = a)) and ((test__op_string_io_i__x__compl = o) and
-  (test__op_string_io_i__x__compl1 = mk1(n, n)))) -> ((m <= m) ->
-  (to_rep1(a__first) <= m)))))))
+goal WP_parameter_def : (to_rep1(a__first) <= m)

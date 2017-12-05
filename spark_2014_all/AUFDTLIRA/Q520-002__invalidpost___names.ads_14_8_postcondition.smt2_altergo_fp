@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -517,283 +517,621 @@ function t3b__ref___projection(a: t3b__ref) : integer = (a).t3b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "names.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:int. forall label_length:int. forall ch:int. forall i:int.
-  forall names__is_domain_name__result:bool. forall temp___204:int.
-  forall temp___205:int. forall temp___203:int. forall temp___202:int.
-  forall temp___201:int. forall temp___200:int. forall o:bool. forall o1:int.
-  forall o2:int. forall o3:bool. forall o4:bool. forall o5:bool.
-  forall o6:int. forall o7:int. forall o8:bool. forall o9:bool.
-  forall o10:bool. forall o11:int. forall ch1:int. forall i1:int.
-  forall names__is_domain_name__result1:bool. forall result:int.
-  forall state1:int. forall result1:int. forall label_length1:int.
-  forall result2:bool. forall names__is_domain_name__result2:bool.
-  forall result3:int. forall i2:int. forall state2:int.
-  forall label_length2:int. forall ch2:int. forall i3:int.
-  forall names__is_domain_name__result3:bool. forall result4:int.
-  forall ch3:int. forall result5:bool.
-  forall names__is_domain_name__result4:bool. forall result6:bool.
-  forall result7:bool. forall names__is_domain_name__result5:bool.
-  forall result8:int. forall state3:int. forall result9:int.
-  forall label_length3:int. forall result10:bool.
-  forall names__is_domain_name__result6:bool. forall result11:int.
-  forall state4:int. forall result12:int. forall label_length4:int.
-  forall result13:int. forall state5:int. forall result14:int.
-  forall label_length5:int. forall result15:bool. forall result16:bool.
-  forall names__is_domain_name__result7:bool. forall result17:int.
-  forall label_length6:int. forall names__is_domain_name__result8:bool.
-  forall names__is_domain_name__result9:bool. forall result18:int.
-  forall label_length7:int. forall result19:bool. forall result20:bool.
-  forall names__is_domain_name__result10:bool. forall result21:int.
-  forall state6:int. forall result22:int. forall label_length8:int.
-  forall names__is_domain_name__result11:bool.
-  forall names__is_domain_name__result12:bool.
-  forall names__is_domain_name__result13:bool.
-  forall names__is_domain_name__result14:bool.
-  forall names__is_domain_name__result15:bool.
-  forall names__is_domain_name__result16:bool. forall state7:int.
-  forall label_length9:int. forall ch4:int. forall i4:int.
-  forall names__is_domain_name__result17:bool. forall state8:int.
-  forall label_length10:int. forall ch5:int. forall i5:int.
-  forall names__is_domain_name__result18:bool. forall state9:int.
-  forall label_length11:int. forall ch6:int__ref. forall i6:int__ref.
-  forall names__is_domain_name__result19:bool__ref. forall state10:int.
-  forall label_length12:int. forall ch7:int. forall i7:int.
-  forall names__is_domain_name__result20:bool. forall result23:bool__ref.
-  forall names__is_domain_name__result21:bool. forall result24:bool__ref.
-  forall names__is_domain_name__result22:bool.
-  forall names__is_domain_name__result23:bool__ref.
-  forall names__is_domain_name__result24:bool.
-  forall names__is_domain_name__result25:bool__ref.
-  forall names__is_domain_name__result26:bool.
-  forall names__is_domain_name__result27:bool__ref.
-  forall names__is_domain_name__result28:bool. forall result25:bool__ref.
-  forall names__is_domain_name__result29:bool.
-  forall names__is_domain_name__result30:bool__ref.
-  forall names__is_domain_name__result31:bool. forall state11:int__ref.
-  forall label_length13:int__ref. forall ch8:int__ref. forall i8:int__ref.
-  forall names__is_domain_name__result32:bool__ref. forall state12:int.
-  forall label_length14:int. forall ch9:int. forall i9:int.
-  forall names__is_domain_name__result33:bool. forall state13:int__ref.
-  forall label_length15:int__ref. forall ch10:int__ref. forall i10:int__ref.
-  forall names__is_domain_name__result34:bool__ref. forall state14:int.
-  forall label_length16:int. forall ch11:int. forall i11:int.
-  forall names__is_domain_name__result35:bool. forall state15:int__ref.
-  forall label_length17:int__ref. forall ch12:int__ref. forall i12:int__ref.
-  forall names__is_domain_name__result36:bool__ref. forall state16:int.
-  forall label_length18:int. forall ch13:int. forall i13:int.
-  forall names__is_domain_name__result37:bool. forall state17:int__ref.
-  forall label_length19:int__ref. forall ch14:int__ref. forall i14:int__ref.
-  forall names__is_domain_name__result38:bool__ref. forall state18:int.
-  forall label_length20:int. forall ch15:int. forall i15:int.
-  forall names__is_domain_name__result39:bool.
-  (forall result26:bool. ((dynamic_property(1, 2147483647,
-  to_rep1(first(name1)), to_rep1(last(name1))) and (((((0 <= 2) ->
-  in_range5(state)) and (((0 <= 255) -> in_range6(label_length)) and
-  (((0 <= 255) -> in_range3(ch)) and ((({ int__content = result } = {
-  int__content = state }) and (state1 = 0)) and ((({ int__content = result1
-  } = { int__content = label_length }) and (label_length1 = 0)) and
-  ((((names__is_domain_name__result36 = names__is_domain_name__result34) and
-  ((i12 = i10) and ((ch12 = ch10) and ((label_length17 = label_length15) and
-  (state15 = state13))))) and
-  ((names__is_domain_name__result37 = names__is_domain_name__result35) and
-  ((i13 = i11) and ((ch13 = ch11) and ((label_length18 = label_length16) and
-  (state16 = state14)))))) and ((((not (length({ elts = name; rt = name1
-  }) <  1)) -> (255 <  length({ elts = name; rt = name1 }))) and
-  ((((names__is_domain_name__result34 = { bool__content =
-  names__is_domain_name__result2 }) and ((i10 = { int__content = i }) and
-  ((ch10 = { int__content = ch }) and ((label_length15 = { int__content =
-  label_length1 }) and (state13 = { int__content = state1 }))))) and
-  ((names__is_domain_name__result35 = names__is_domain_name__result2) and
-  ((i11 = i1) and ((ch11 = ch1) and ((label_length16 = label_length1) and
-  (state14 = state1)))))) and (({ bool__content = result2 } = {
-  bool__content = names__is_domain_name__result }) and
-  (names__is_domain_name__result2 = of_int(0))))) or ((not ((not (length({
+logic state : int
+
+logic label_length : int
+
+logic ch : int
+
+logic i : int
+
+logic names__is_domain_name__result : bool
+
+logic temp___204 : int
+
+logic temp___205 : int
+
+logic temp___203 : int
+
+logic temp___202 : int
+
+logic temp___201 : int
+
+logic temp___200 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic o14 : int
+
+logic i1 : int
+
+logic o15 : int
+
+logic o16 : character
+
+logic o17 : int
+
+logic o18 : bool
+
+logic o19 : int
+
+logic o20 : character
+
+logic o21 : int
+
+logic o22 : bool
+
+logic ch1 : int
+
+logic i2 : int
+
+logic names__is_domain_name__result1 : bool
+
+logic result : int
+
+logic state1 : int
+
+logic result1 : int
+
+logic label_length1 : int
+
+logic result2 : bool
+
+logic names__is_domain_name__result2 : bool
+
+logic result3 : int
+
+logic i3 : int
+
+logic state2 : int
+
+logic label_length2 : int
+
+logic ch2 : int
+
+logic i4 : int
+
+logic names__is_domain_name__result3 : bool
+
+logic result4 : int
+
+logic ch3 : int
+
+logic result5 : bool
+
+logic names__is_domain_name__result4 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic names__is_domain_name__result5 : bool
+
+logic result8 : int
+
+logic state3 : int
+
+logic result9 : int
+
+logic label_length3 : int
+
+logic result10 : bool
+
+logic names__is_domain_name__result6 : bool
+
+logic result11 : int
+
+logic state4 : int
+
+logic result12 : int
+
+logic label_length4 : int
+
+logic result13 : int
+
+logic state5 : int
+
+logic result14 : int
+
+logic label_length5 : int
+
+logic result15 : bool
+
+logic result16 : bool
+
+logic names__is_domain_name__result7 : bool
+
+logic result17 : int
+
+logic label_length6 : int
+
+logic names__is_domain_name__result8 : bool
+
+logic names__is_domain_name__result9 : bool
+
+logic result18 : int
+
+logic label_length7 : int
+
+logic result19 : bool
+
+logic result20 : bool
+
+logic names__is_domain_name__result10 : bool
+
+logic result21 : int
+
+logic state6 : int
+
+logic result22 : int
+
+logic label_length8 : int
+
+logic names__is_domain_name__result11 : bool
+
+logic names__is_domain_name__result12 : bool
+
+logic names__is_domain_name__result13 : bool
+
+logic names__is_domain_name__result14 : bool
+
+logic result23 : int
+
+logic i5 : int
+
+logic names__is_domain_name__result15 : bool
+
+logic names__is_domain_name__result16 : bool
+
+logic state7 : int
+
+logic label_length9 : int
+
+logic ch4 : int
+
+logic i6 : int
+
+logic names__is_domain_name__result17 : bool
+
+logic state8 : int
+
+logic label_length10 : int
+
+logic ch5 : int
+
+logic i7 : int
+
+logic names__is_domain_name__result18 : bool
+
+logic state9 : int
+
+logic label_length11 : int
+
+logic ch6 : int
+
+logic i8 : int
+
+logic names__is_domain_name__result19 : bool
+
+logic state10 : int
+
+logic label_length12 : int
+
+logic ch7 : int
+
+logic i9 : int
+
+logic names__is_domain_name__result20 : bool
+
+logic state11 : int
+
+logic label_length13 : int
+
+logic ch8 : int
+
+logic i10 : int
+
+logic names__is_domain_name__result21 : bool
+
+logic state12 : int
+
+logic label_length14 : int
+
+logic ch9 : int
+
+logic i11 : int
+
+logic names__is_domain_name__result22 : bool
+
+logic result24 : bool
+
+logic names__is_domain_name__result23 : bool
+
+logic result25 : bool
+
+logic names__is_domain_name__result24 : bool
+
+logic names__is_domain_name__result25 : bool
+
+logic names__is_domain_name__result26 : bool
+
+logic names__is_domain_name__result27 : bool
+
+logic names__is_domain_name__result28 : bool
+
+logic names__is_domain_name__result29 : bool
+
+logic names__is_domain_name__result30 : bool
+
+logic result26 : bool
+
+logic names__is_domain_name__result31 : bool
+
+logic names__is_domain_name__result32 : bool
+
+logic names__is_domain_name__result33 : bool
+
+logic state13 : int
+
+logic label_length15 : int
+
+logic ch10 : int
+
+logic i12 : int
+
+logic names__is_domain_name__result34 : bool
+
+logic state14 : int
+
+logic label_length16 : int
+
+logic ch11 : int
+
+logic i13 : int
+
+logic names__is_domain_name__result35 : bool
+
+logic state15 : int
+
+logic label_length17 : int
+
+logic ch12 : int
+
+logic i14 : int
+
+logic names__is_domain_name__result36 : bool
+
+logic state16 : int
+
+logic label_length18 : int
+
+logic ch13 : int
+
+logic i15 : int
+
+logic names__is_domain_name__result37 : bool
+
+logic state17 : int
+
+logic label_length19 : int
+
+logic ch14 : int
+
+logic i16 : int
+
+logic names__is_domain_name__result38 : bool
+
+logic state18 : int
+
+logic label_length20 : int
+
+logic ch15 : int
+
+logic i17 : int
+
+logic names__is_domain_name__result39 : bool
+
+logic state19 : int
+
+logic label_length21 : int
+
+logic ch16 : int
+
+logic i18 : int
+
+logic names__is_domain_name__result40 : bool
+
+logic state20 : int
+
+logic label_length22 : int
+
+logic ch17 : int
+
+logic i19 : int
+
+logic names__is_domain_name__result41 : bool
+
+logic state21 : int
+
+logic label_length23 : int
+
+logic ch18 : int
+
+logic i20 : int
+
+logic names__is_domain_name__result42 : bool
+
+logic state22 : int
+
+logic label_length24 : int
+
+logic ch19 : int
+
+logic i21 : int
+
+logic names__is_domain_name__result43 : bool
+
+logic result27 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(name1)),
+  to_rep1(last(name1)))
+
+axiom H1 : ((0 <= 2) -> in_range5(state))
+
+axiom H2 : ((0 <= 255) -> in_range6(label_length))
+
+axiom H3 : ((0 <= 255) -> in_range3(ch))
+
+axiom H4 : (result = state)
+
+axiom H5 : (state1 = 0)
+
+axiom H6 : (result1 = label_length)
+
+axiom H7 : (label_length1 = 0)
+
+axiom H8 :
+  ((((names__is_domain_name__result40 = names__is_domain_name__result38) and
+  ((i18 = i16) and ((ch16 = ch14) and ((label_length21 = label_length19) and
+  (state19 = state17))))) and
+  ((names__is_domain_name__result41 = names__is_domain_name__result39) and
+  ((i19 = i17) and ((ch17 = ch15) and ((label_length22 = label_length20) and
+  (state20 = state18)))))) and ((((not (length({ elts = name; rt = name1
+  }) <  1)) -> (255 <  length({ elts = name; rt = name1 }))) ->
+  ((((names__is_domain_name__result38 = names__is_domain_name__result2) and
+  ((i16 = i) and ((ch14 = ch) and ((label_length19 = label_length1) and
+  (state17 = state1))))) and
+  ((names__is_domain_name__result39 = names__is_domain_name__result2) and
+  ((i17 = i2) and ((ch15 = ch1) and ((label_length20 = label_length1) and
+  (state18 = state1)))))) and ((result2 = names__is_domain_name__result) and
+  (names__is_domain_name__result2 = of_int(0))))) and ((not ((not (length({
   elts = name; rt = name1 }) <  1)) -> (255 <  length({ elts = name; rt =
-  name1 })))) and
-  ((((names__is_domain_name__result34 = names__is_domain_name__result32) and
-  ((i10 = i8) and ((ch10 = ch8) and ((label_length15 = label_length13) and
-  (state13 = state11))))) and
-  ((names__is_domain_name__result35 = names__is_domain_name__result33) and
-  ((i11 = i9) and ((ch11 = ch9) and ((label_length16 = label_length14) and
-  (state14 = state12)))))) and (((((names__is_domain_name__result32 = {
-  bool__content = names__is_domain_name__result15 }) and ((i8 = {
-  int__content = i3 }) and ((ch8 = { int__content = ch3 }) and
-  ((label_length13 = { int__content = label_length2 }) and (state11 = {
-  int__content = state2 }))))) and
-  ((names__is_domain_name__result33 = names__is_domain_name__result16) and
-  ((i9 = i3) and ((ch9 = ch3) and ((label_length14 = label_length2) and
-  (state12 = state2)))))) and ((temp___204 = to_rep1(first(name1))) and
-  ((temp___205 = to_rep1(last(name1))) and ((({ int__content = result3 } = {
-  int__content = i }) and (i2 = temp___204)) and (((temp___204 <= i2) and
-  (i2 <= temp___205)) and ((temp___203 = ch) and
-  ((temp___202 = label_length1) and ((temp___201 = state1) and
-  ((temp___200 = i2) and
-  ((label_length2 <  ((i3 - to_rep1(first(name1))) + 1)) and
+  name1 })))) ->
+  ((((names__is_domain_name__result38 = names__is_domain_name__result34) and
+  ((i16 = i12) and ((ch14 = ch10) and ((label_length19 = label_length15) and
+  (state17 = state13))))) and
+  ((names__is_domain_name__result39 = names__is_domain_name__result35) and
+  ((i17 = i13) and ((ch15 = ch11) and ((label_length20 = label_length16) and
+  (state18 = state14)))))) and
+  (((((names__is_domain_name__result34 = names__is_domain_name__result15) and
+  ((i12 = i4) and ((ch10 = ch3) and ((label_length15 = label_length2) and
+  (state13 = state2))))) and
+  ((names__is_domain_name__result35 = names__is_domain_name__result16) and
+  ((i13 = i4) and ((ch11 = ch3) and ((label_length16 = label_length2) and
+  (state14 = state2)))))) and ((temp___204 = to_rep1(first(name1))) and
+  ((temp___205 = to_rep1(last(name1))) and (((result3 = i) and
+  (i3 = temp___204)) and (((temp___204 <= i3) and (i3 <= temp___205)) and
+  ((temp___203 = ch) and ((temp___202 = label_length1) and
+  ((temp___201 = state1) and ((temp___200 = i3) and
+  ((label_length2 <  ((i4 - to_rep1(first(name1))) + 1)) and
   (((((((to_rep1(first(name1)) <= to_rep1(last(name1))) ->
-  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i3)) and
+  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i4)) and
   ((0 <= 2) -> in_range5(state2))) and ((0 <= 255) ->
   in_range6(label_length2))) and ((0 <= 255) -> in_range3(ch2))) and
-  ((to_rep1(first(name1)) <= i3) and (i3 <= to_rep1(last(name1))))) and
-  (((ch2 = result4) and (ch3 = to_rep((name[i3])))) and
-  ((((names__is_domain_name__result4 = names__is_domain_name__result15) and
+  ((to_rep1(first(name1)) <= i4) and (i4 <= to_rep1(last(name1))))) and
+  (((ch2 = result4) and (ch3 = to_rep((name[i4])))) and
+  ((((names__is_domain_name__result15 = names__is_domain_name__result4) and
   (names__is_domain_name__result16 = names__is_domain_name__result4)) and
   ((not in_range4(ch3)) and ((names__is_domain_name__result3 = result5) and
   (names__is_domain_name__result4 = of_int(0))))) or ((in_range4(ch3) and
-  (names__is_domain_name__result4 = names__is_domain_name__result3)) and ((({
-  bool__content = names__is_domain_name__result15 } = { bool__content =
-  names__is_domain_name__result13 }) and
+  (names__is_domain_name__result4 = names__is_domain_name__result3)) and
+  (((names__is_domain_name__result15 = names__is_domain_name__result13) and
   (names__is_domain_name__result16 = names__is_domain_name__result14)) and
-  (((state2 = 0) and
-  (((names__is_domain_name__result5 = names__is_domain_name__result13) and
+  (((state2 = 0) ->
+  (((names__is_domain_name__result13 = names__is_domain_name__result5) and
   (names__is_domain_name__result14 = names__is_domain_name__result5)) and
-  (((o = is_letter(ch3)) and (((not (o = true)) and (result6 = true)) or
-  ((o = true) and (result6 = false)))) and ((result6 = true) and
+  (((o3 = is_letter(ch3)) and (((not (o3 = true)) -> (result6 = true)) and
+  ((o3 = true) -> (result6 = false)))) and ((result6 = true) and
   ((names__is_domain_name__result4 = result7) and
-  (names__is_domain_name__result5 = of_int(0))))))) or
-  ((not (state2 = 0)) and ((({ bool__content =
-  names__is_domain_name__result13 } = { bool__content =
-  names__is_domain_name__result11 }) and
+  (names__is_domain_name__result5 = of_int(0))))))) and
+  ((not (state2 = 0)) ->
+  (((names__is_domain_name__result13 = names__is_domain_name__result11) and
   (names__is_domain_name__result14 = names__is_domain_name__result12)) and
-  (((state2 = 1) and ((({ bool__content = names__is_domain_name__result11
-  } = { bool__content = names__is_domain_name__result8 }) and
+  (((state2 = 1) ->
+  (((names__is_domain_name__result11 = names__is_domain_name__result8) and
   (names__is_domain_name__result12 = names__is_domain_name__result9)) and
-  (((ch3 = 46) and
-  (((names__is_domain_name__result6 = names__is_domain_name__result8) and
+  (((ch3 = 46) ->
+  (((names__is_domain_name__result8 = names__is_domain_name__result6) and
   (names__is_domain_name__result9 = names__is_domain_name__result6)) and
   ((63 <  label_length2) and ((names__is_domain_name__result4 = result10) and
-  (names__is_domain_name__result6 = of_int(0)))))) or ((not (ch3 = 46)) and
-  (((names__is_domain_name__result7 = names__is_domain_name__result8) and
+  (names__is_domain_name__result6 = of_int(0)))))) and ((not (ch3 = 46)) ->
+  (((names__is_domain_name__result8 = names__is_domain_name__result7) and
   (names__is_domain_name__result9 = names__is_domain_name__result7)) and
-  ((not (ch3 = 45)) and ((((o3 = is_digit(ch3)) and
-  ((o4 = is_letter(ch3)) and (o5 = match_bool(o4, true, o3)))) and
-  (((not (o5 = true)) and (result15 = true)) or ((o5 = true) and
+  ((not (ch3 = 45)) and ((((o6 = is_digit(ch3)) and
+  ((o7 = is_letter(ch3)) and (o8 = match_bool(o7, true, o6)))) and
+  (((not (o8 = true)) -> (result15 = true)) and ((o8 = true) ->
   (result15 = false)))) and ((result15 = true) and
   ((names__is_domain_name__result4 = result16) and
-  (names__is_domain_name__result7 = of_int(0))))))))))) or
-  ((not (state2 = 1)) and
-  (((names__is_domain_name__result10 = names__is_domain_name__result11) and
+  (names__is_domain_name__result7 = of_int(0))))))))))) and
+  ((not (state2 = 1)) ->
+  (((names__is_domain_name__result11 = names__is_domain_name__result10) and
   (names__is_domain_name__result12 = names__is_domain_name__result10)) and
-  ((not (ch3 = 45)) and ((((o8 = is_digit(ch3)) and
-  ((o9 = is_letter(ch3)) and (o10 = match_bool(o9, true, o8)))) and
-  (((not (o10 = true)) and (result19 = true)) or ((o10 = true) and
+  ((not (ch3 = 45)) and ((((o11 = is_digit(ch3)) and
+  ((o12 = is_letter(ch3)) and (o13 = match_bool(o12, true, o11)))) and
+  (((not (o13 = true)) -> (result19 = true)) and ((o13 = true) ->
   (result19 = false)))) and ((result19 = true) and
   ((result20 = names__is_domain_name__result4) and
   (names__is_domain_name__result10 = of_int(0))))))))))))))))))))))))))) or
-  (((({ int__content = result3 } = { int__content = i }) and
-  (i2 = to_rep1(first(name1)))) and ((((to_rep1(first(name1)) <= i2) and
-  (i2 <= to_rep1(last(name1)))) and ((((temp___203 = ch) and
-  ((temp___202 = label_length1) and ((temp___201 = state1) and
-  ((temp___200 = i2) and
-  ((label_length2 <  ((i3 - to_rep1(first(name1))) + 1)) and
+  ((((result3 = i) and (i3 = to_rep1(first(name1)))) and
+  ((((to_rep1(first(name1)) <= i3) and (i3 <= to_rep1(last(name1)))) ->
+  ((((temp___203 = ch) and ((temp___202 = label_length1) and
+  ((temp___201 = state1) and ((temp___200 = i3) and
+  ((label_length2 <  ((i4 - to_rep1(first(name1))) + 1)) and
   (((((((to_rep1(first(name1)) <= to_rep1(last(name1))) ->
-  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i3)) and
+  dynamic_property1(to_rep1(first(name1)), to_rep1(last(name1)), i4)) and
   ((0 <= 2) -> in_range5(state2))) and ((0 <= 255) ->
   in_range6(label_length2))) and ((0 <= 255) -> in_range3(ch2))) and
-  ((to_rep1(first(name1)) <= i3) and (i3 <= to_rep1(last(name1))))) and
-  (((ch2 = result4) and (ch3 = to_rep((name[i3])))) and ((in_range4(ch3) and
+  ((to_rep1(first(name1)) <= i4) and (i4 <= to_rep1(last(name1))))) and
+  (((ch2 = result4) and (ch3 = to_rep((name[i4])))) and ((in_range4(ch3) and
   (names__is_domain_name__result4 = names__is_domain_name__result3)) and
-  ((((state2 = 0) and (((o = is_letter(ch3)) and (((not (o = true)) and
-  (result6 = true)) or ((o = true) and (result6 = false)))) and
+  ((((state2 = 0) -> (((o3 = is_letter(ch3)) and (((not (o3 = true)) ->
+  (result6 = true)) and ((o3 = true) -> (result6 = false)))) and
   ((not (result6 = true)) and ((((state2 = result8) and (state3 = 1)) and
-  (((o1 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
-  ((label_length2 = result9) and (label_length3 = o1)))) and
-  (names__is_domain_name__result5 = names__is_domain_name__result4))))) or
-  ((not (state2 = 0)) and ((((state2 = 1) and (((ch3 = 46) and
+  (((o4 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
+  ((label_length2 = result9) and (label_length3 = o4)))) and
+  (names__is_domain_name__result5 = names__is_domain_name__result4))))) and
+  ((not (state2 = 0)) -> ((((state2 = 1) -> (((ch3 = 46) ->
   (((not (63 <  label_length2)) and
   (names__is_domain_name__result6 = names__is_domain_name__result4)) and
   (((state2 = result11) and (state4 = 0)) and ((label_length2 = result12) and
-  (label_length4 = 0))))) or ((not (ch3 = 46)) and ((((ch3 = 45) and
+  (label_length4 = 0))))) and ((not (ch3 = 46)) -> ((((ch3 = 45) ->
   ((((state2 = result13) and (state5 = 2)) and
-  (((o2 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
-  ((label_length2 = result14) and (label_length5 = o2)))) and
-  (names__is_domain_name__result7 = names__is_domain_name__result4))) or
-  ((not (ch3 = 45)) and (((((o3 = is_digit(ch3)) and
-  ((o4 = is_letter(ch3)) and (o5 = match_bool(o4, true, o3)))) and
-  (((not (o5 = true)) and (result15 = true)) or ((o5 = true) and
+  (((o5 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
+  ((label_length2 = result14) and (label_length5 = o5)))) and
+  (names__is_domain_name__result7 = names__is_domain_name__result4))) and
+  ((not (ch3 = 45)) -> (((((o6 = is_digit(ch3)) and
+  ((o7 = is_letter(ch3)) and (o8 = match_bool(o7, true, o6)))) and
+  (((not (o8 = true)) -> (result15 = true)) and ((o8 = true) ->
   (result15 = false)))) and ((not (result15 = true)) and
-  ((((o6 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
-  ((label_length2 = result17) and (label_length6 = o6))) and
+  ((((o9 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
+  ((label_length2 = result17) and (label_length6 = o9))) and
   (names__is_domain_name__result7 = names__is_domain_name__result4)))) and
   ((label_length5 = label_length6) and (state5 = state2))))) and
   ((names__is_domain_name__result6 = names__is_domain_name__result7) and
-  ((label_length4 = label_length5) and (state4 = state5))))))) or
-  ((not (state2 = 1)) and ((((ch3 = 45) and ((((o7 = (label_length2 + 1)) and
+  ((label_length4 = label_length5) and (state4 = state5))))))) and
+  ((not (state2 = 1)) -> ((((ch3 = 45) -> ((((o10 = (label_length2 + 1)) and
   in_range6((label_length2 + 1))) and ((result18 = label_length2) and
-  (label_length7 = o7))) and
+  (label_length7 = o10))) and
   ((names__is_domain_name__result10 = names__is_domain_name__result4) and
-  (state6 = state2)))) or ((not (ch3 = 45)) and (((((o8 = is_digit(ch3)) and
-  ((o9 = is_letter(ch3)) and (o10 = match_bool(o9, true, o8)))) and
-  (((not (o10 = true)) and (result19 = true)) or ((o10 = true) and
+  (state6 = state2)))) and ((not (ch3 = 45)) -> (((((o11 = is_digit(ch3)) and
+  ((o12 = is_letter(ch3)) and (o13 = match_bool(o12, true, o11)))) and
+  (((not (o13 = true)) -> (result19 = true)) and ((o13 = true) ->
   (result19 = false)))) and ((not (result19 = true)) and
   ((((result21 = state2) and (state6 = 1)) and
-  (((o11 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
-  ((result22 = label_length2) and (label_length8 = o11)))) and
+  (((o14 = (label_length2 + 1)) and in_range6((label_length2 + 1))) and
+  ((result22 = label_length2) and (label_length8 = o14)))) and
   (names__is_domain_name__result10 = names__is_domain_name__result4)))) and
   (label_length7 = label_length8)))) and
   ((names__is_domain_name__result6 = names__is_domain_name__result10) and
   ((label_length4 = label_length7) and (state4 = state6)))))) and
   ((names__is_domain_name__result5 = names__is_domain_name__result6) and
   ((label_length3 = label_length4) and (state3 = state4)))))) and
-  (i3 = to_rep1(last(name1)))))))))))) and
-  (((names__is_domain_name__result5 = names__is_domain_name__result17) and
-  ((i3 = i4) and ((ch3 = ch4) and ((label_length3 = label_length9) and
-  (state3 = state7))))) and
-  ((names__is_domain_name__result18 = names__is_domain_name__result5) and
-  ((i5 = i3) and ((ch5 = ch3) and ((label_length10 = label_length3) and
-  (state8 = state3))))))) and (((names__is_domain_name__result19 = {
-  bool__content = names__is_domain_name__result17 }) and ((i6 = {
-  int__content = i4 }) and ((ch6 = { int__content = ch4 }) and (({
-  int__content = label_length11 } = { int__content = label_length9 }) and ({
-  int__content = state9 } = { int__content = state7 }))))) and
-  ((names__is_domain_name__result20 = names__is_domain_name__result18) and
-  ((i7 = i5) and ((ch7 = ch5) and ((label_length12 = label_length10) and
-  (state10 = state8)))))))) or ((not ((to_rep1(first(name1)) <= i2) and
-  (i2 <= to_rep1(last(name1))))) and (((names__is_domain_name__result19 = {
-  bool__content = names__is_domain_name__result }) and ((i6 = {
-  int__content = i2 }) and ((ch6 = { int__content = ch }) and
-  ((label_length1 = label_length11) and (state1 = state9))))) and
-  ((names__is_domain_name__result20 = names__is_domain_name__result1) and
-  ((i7 = i2) and ((ch7 = ch1) and ((label_length12 = label_length1) and
-  (state10 = state1))))))))) and
-  ((((names__is_domain_name__result32 = names__is_domain_name__result30) and
-  ((i8 = i6) and ((ch8 = ch6) and ((label_length13 = { int__content =
-  label_length11 }) and (state11 = { int__content = state9 }))))) and
-  ((names__is_domain_name__result33 = names__is_domain_name__result31) and
-  ((i9 = i7) and ((ch9 = ch7) and ((label_length14 = label_length12) and
-  (state12 = state10)))))) and
-  ((((names__is_domain_name__result30 = names__is_domain_name__result27) and
-  (names__is_domain_name__result31 = names__is_domain_name__result28)) and
-  (((state9 = 0) and (((names__is_domain_name__result27 = { bool__content =
-  names__is_domain_name__result21 }) and
-  (names__is_domain_name__result28 = names__is_domain_name__result21)) and
-  ((result23 = names__is_domain_name__result19) and
-  (names__is_domain_name__result21 = of_int(0))))) or ((not (state9 = 0)) and
-  (((names__is_domain_name__result27 = { bool__content =
-  names__is_domain_name__result22 }) and
-  (names__is_domain_name__result28 = names__is_domain_name__result22)) and
-  ((not (state9 = 1)) and ((result24 = names__is_domain_name__result19) and
-  (names__is_domain_name__result22 = of_int(0)))))))) or
-  (((not (state9 = 0)) and (((state9 = 1) and
-  ((names__is_domain_name__result23 = names__is_domain_name__result19) and
-  (names__is_domain_name__result24 = names__is_domain_name__result20))) and
-  ((names__is_domain_name__result25 = names__is_domain_name__result23) and
-  (names__is_domain_name__result26 = names__is_domain_name__result24)))) and
-  (((names__is_domain_name__result30 = { bool__content =
-  names__is_domain_name__result29 }) and
-  (names__is_domain_name__result31 = names__is_domain_name__result29)) and
-  ((result25 = names__is_domain_name__result25) and
-  (names__is_domain_name__result29 = of_int(1)))))))))))))))))) and
-  (((names__is_domain_name__result38 = names__is_domain_name__result36) and
-  ((i14 = i12) and ((ch14 = ch12) and ((label_length19 = label_length17) and
-  (state17 = state15))))) and
-  ((names__is_domain_name__result39 = names__is_domain_name__result37) and
-  ((i15 = i13) and ((ch15 = ch13) and ((label_length20 = label_length18) and
-  (state18 = state16))))))) and
-  (result26 = (names__is_domain_name__result38).bool__content))) ->
-  (((names__is_domain_name__result38).bool__content = true) ->
-  (forall i16:int. (((to_rep1(first(name1)) <= i16) and
-  (i16 <= to_rep1(last(name1)))) ->
-  (((is_letter(to_rep((name[i16]))) = true) or
-  (is_digit(to_rep((name[i16]))) = true)) or (to_rep((name[i16])) = 45))))))))
+  (i4 = to_rep1(last(name1)))))))))))) and
+  (((names__is_domain_name__result19 = names__is_domain_name__result5) and
+  ((i8 = i4) and ((ch6 = ch3) and ((label_length11 = label_length3) and
+  (state9 = state3))))) and
+  ((names__is_domain_name__result20 = names__is_domain_name__result5) and
+  ((i9 = i4) and ((ch7 = ch3) and ((label_length12 = label_length3) and
+  (state10 = state3))))))) and
+  (((names__is_domain_name__result21 = names__is_domain_name__result19) and
+  ((i10 = i8) and ((ch8 = ch6) and ((label_length13 = label_length11) and
+  (state11 = state9))))) and
+  ((names__is_domain_name__result22 = names__is_domain_name__result20) and
+  ((i11 = i9) and ((ch9 = ch7) and ((label_length14 = label_length12) and
+  (state12 = state10)))))))) and ((not ((to_rep1(first(name1)) <= i3) and
+  (i3 <= to_rep1(last(name1))))) ->
+  (((names__is_domain_name__result21 = names__is_domain_name__result) and
+  ((i10 = i3) and ((ch8 = ch) and ((label_length13 = label_length1) and
+  (state11 = state1))))) and
+  ((names__is_domain_name__result22 = names__is_domain_name__result1) and
+  ((i11 = i3) and ((ch9 = ch1) and ((label_length14 = label_length1) and
+  (state12 = state1))))))))) and
+  ((((names__is_domain_name__result34 = names__is_domain_name__result32) and
+  ((i12 = i10) and ((ch10 = ch8) and ((label_length15 = label_length13) and
+  (state13 = state11))))) and
+  ((names__is_domain_name__result35 = names__is_domain_name__result33) and
+  ((i13 = i11) and ((ch11 = ch9) and ((label_length16 = label_length14) and
+  (state14 = state12)))))) and
+  ((((names__is_domain_name__result32 = names__is_domain_name__result29) and
+  (names__is_domain_name__result33 = names__is_domain_name__result30)) and
+  (((state11 = 0) ->
+  (((names__is_domain_name__result29 = names__is_domain_name__result23) and
+  (names__is_domain_name__result30 = names__is_domain_name__result23)) and
+  ((result24 = names__is_domain_name__result21) and
+  (names__is_domain_name__result23 = of_int(0))))) and
+  ((not (state11 = 0)) ->
+  (((names__is_domain_name__result29 = names__is_domain_name__result24) and
+  (names__is_domain_name__result30 = names__is_domain_name__result24)) and
+  ((not (state11 = 1)) and ((result25 = names__is_domain_name__result21) and
+  (names__is_domain_name__result24 = of_int(0)))))))) or
+  (((not (state11 = 0)) and (((state11 = 1) and
+  ((names__is_domain_name__result25 = names__is_domain_name__result21) and
+  (names__is_domain_name__result26 = names__is_domain_name__result22))) and
+  ((names__is_domain_name__result27 = names__is_domain_name__result25) and
+  (names__is_domain_name__result28 = names__is_domain_name__result26)))) and
+  (((names__is_domain_name__result32 = names__is_domain_name__result31) and
+  (names__is_domain_name__result33 = names__is_domain_name__result31)) and
+  ((result26 = names__is_domain_name__result27) and
+  (names__is_domain_name__result31 = of_int(1)))))))))))))
+
+axiom H9 :
+  (names__is_domain_name__result42 = names__is_domain_name__result40)
+
+axiom H10 : (i20 = i18)
+
+axiom H11 : (ch18 = ch16)
+
+axiom H12 : (label_length23 = label_length21)
+
+axiom H13 : (state21 = state19)
+
+axiom H14 :
+  (names__is_domain_name__result43 = names__is_domain_name__result41)
+
+axiom H15 : (i21 = i19)
+
+axiom H16 : (ch19 = ch17)
+
+axiom H17 : (label_length24 = label_length22)
+
+axiom H18 : (state22 = state20)
+
+axiom H19 : (result27 = names__is_domain_name__result42)
+
+axiom H20 : (names__is_domain_name__result42 = true)
+
+logic i22 : int
+
+axiom H21 : (to_rep1(first(name1)) <= i22)
+
+axiom H22 : (i22 <= to_rep1(last(name1)))
+
+ (* File "names.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (((is_letter(to_rep((name[i22]))) = true) or
+  (is_digit(to_rep((name[i22]))) = true)) or (to_rep((name[i22])) = 45))

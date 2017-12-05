@@ -95,5 +95,7 @@ axiom wakeup_time__def_axiom :
   (forall p__wakeup:us_rep [wakeup_time(p__wakeup)].
   (wakeup_time(p__wakeup) = p__wakeup))
 
+axiom H : false
+
  (* File "a-reatim.ads", line 51, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

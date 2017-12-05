@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -991,7 +991,7 @@ function us_split_fields__ref___137__projection(a: us_split_fields__ref) : us_sp
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___138__projection(a: us_rep) : us_split_fields =
+function us_rep___139__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq9 : us_rep, us_rep -> bool
@@ -1276,7 +1276,7 @@ function us_split_fields__ref___138__projection(a: us_split_fields__ref1) : us_s
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___139__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___140__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -1393,28 +1393,28 @@ type receiver_type__ref = { receiver_type__content : us_rep1
 function receiver_type__ref___projection(a: receiver_type__ref) : us_rep1 =
   (a).receiver_type__content
 
-logic temp___4475 : us_rep -> (t,us_rep) farray
+logic temp___4465 : us_rep -> (t,us_rep) farray
 
 axiom def_axiom :
-  (forall temp___4477:frame_length. forall temp___44771:(int,bits_8) farray.
-  forall temp___44772:rx_errors. forall temp___44773:bool.
-  (forall temp___4478:t. ((temp___4475({ us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 }
-  })[temp___4478]) = { us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 } })))
+  (forall temp___4467:frame_length. forall temp___44671:(int,bits_8) farray.
+  forall temp___44672:rx_errors. forall temp___44673:bool.
+  (forall temp___4468:t. ((temp___4465({ us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 }
+  })[temp___4468]) = { us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 } })))
 
-logic temp___4479 : t -> (int,bits_8) farray
+logic temp___4469 : t -> (int,bits_8) farray
 
 axiom def_axiom1 :
-  (forall temp___4481:t.
-  (forall temp___4482:int.
-  ((temp___4479(temp___4481)[temp___4482]) = of_rep3(temp___4481))))
+  (forall temp___4471:t.
+  (forall temp___4472:int.
+  ((temp___4469(temp___4471)[temp___4472]) = of_rep3(temp___4471))))
 
 logic error : int
 
@@ -1422,91 +1422,350 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "decadriver.ads", line 77, characters 0-0 *)
-goal WP_parameter_def :
-  (forall next_idx:t. forall self__:(t,us_rep) farray.
-  forall self__1:rx_frame_queue_index. forall self__2:natural.
-  forall self__3:bool. forall self__4:bool. forall o:int. forall o1:t.
-  forall o2:t. forall o3:t. forall o4:int. forall o5:natural.
-  forall o6:(t,us_rep) farray. forall o7:rx_frame_queue_index.
-  forall o8:natural. forall o9:bool. forall o10:bool.
-  forall o11:(t,us_rep) farray. forall o12:rx_frame_queue_index.
-  forall o13:natural. forall o14:bool. forall o15:bool.
-  forall o16:frame_length. forall o17:frame_length.
-  forall o18:(int,bits_8) farray. forall o19:rx_errors. forall o20:bool.
-  forall temp___4589:frame_length. forall temp___45891:(int,bits_8) farray.
-  forall temp___45892:rx_errors. forall temp___45893:bool.
-  forall o21:frame_length. forall o22:(int,bits_8) farray.
-  forall o23:rx_errors. forall o24:bool. forall o25:(t,us_rep) farray.
-  forall o26:(t,us_rep) farray. forall o27:rx_frame_queue_index.
-  forall o28:natural. forall o29:bool. forall o30:bool.
-  forall o31:(t,us_rep) farray. forall o32:rx_frame_queue_index.
-  forall o33:natural. forall o34:bool. forall o35:bool. forall o36:rx_errors.
-  forall o37:frame_length. forall o38:(int,bits_8) farray.
-  forall o39:rx_errors. forall o40:bool. forall temp___4593:frame_length.
-  forall temp___45931:(int,bits_8) farray. forall temp___45932:rx_errors.
-  forall temp___45933:bool. forall result:t. forall next_idx1:t.
-  forall result1:(t,us_rep) farray. forall result2:rx_frame_queue_index.
-  forall result3:natural. forall result4:bool. forall result5:bool.
-  forall self__5:(t,us_rep) farray. forall self__6:rx_frame_queue_index.
-  forall self__7:natural. forall self__8:bool. forall self__9:bool.
-  forall result6:(t,us_rep) farray. forall result7:rx_frame_queue_index.
-  forall result8:natural. forall result9:bool. forall result10:bool.
-  forall self__10:(t,us_rep) farray. forall self__11:rx_frame_queue_index.
-  forall self__12:natural. forall self__13:bool. forall self__14:bool.
-  ((forall temp___4470:t. ((ule(of_int(0), temp___4470) and ule(temp___4470,
-   of_int(1))) ->
-   (((to_rep2((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) and
-   (0 <  to_rep1((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__size))) or
-   ((not (to_rep2((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0)) and
-   (to_rep1((((self__[temp___4470])).us_split_fields1).rec__decadriver__rx_frame_type__size) = 0))))) ->
-  (in_range4(error) -> ((not (error = 0)) -> ((ule(of_int(0), of_int(1)) ->
-  in_range5(next_idx)) -> ((not (2 <= to_rep(self__2))) ->
-  (((((((o = to_rep(self__2)) and in_range_int(to_rep(self__2))) and
-  (o1 = of_int(o))) and (o2 = add(to_rep4(self__1), o1))) and (o3 = urem(o2,
-  of_int(2)))) and ((result = next_idx) and (next_idx1 = o3))) ->
-  (((((((o4 = (to_rep(self__2) + 1)) and
-  in_range1((to_rep(self__2) + 1))) and (to_rep(o5) = o4)) and
-  ((self__ = o6) and ((self__1 = o7) and ((o5 = o8) and ((self__3 = o9) and
-  (self__4 = o10)))))) and ((o11 = o6) and ((o12 = o7) and ((o13 = o8) and
-  ((o14 = o9) and (o15 = o10)))))) and (((result1 = self__) and
-  ((result2 = self__1) and ((result3 = self__2) and ((result4 = self__3) and
-  (result5 = self__4))))) and ((o11 = self__5) and ((o12 = self__6) and
-  ((o13 = self__7) and ((o14 = self__8) and (o15 = self__9))))))) ->
-  (((((((((to_rep1(o16) = 0) and ((o16 = o17) and
-  (((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__frame = o18) and
-  (((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__error = o19) and
-  ((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__overrun = o20))))) and
-  ((temp___4589 = o17) and ((temp___45891 = o18) and
-  ((temp___45892 = o19) and (temp___45893 = o20))))) and
-  ((((to_rep2(temp___45892) = 0) and (0 <  to_rep1(temp___4589))) or
-  ((not (to_rep2(temp___45892) = 0)) and (to_rep1(temp___4589) = 0))) and ({
-  us_split_fields1 = { rec__decadriver__rx_frame_type__size = o21;
-  rec__decadriver__rx_frame_type__frame = o22;
-  rec__decadriver__rx_frame_type__error = o23;
-  rec__decadriver__rx_frame_type__overrun = o24 } } = { us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4589;
-  rec__decadriver__rx_frame_type__frame = temp___45891;
-  rec__decadriver__rx_frame_type__error = temp___45892;
-  rec__decadriver__rx_frame_type__overrun = temp___45893 } }))) and
-  (o25 = (self__5[next_idx1 <- { us_split_fields1 = {
+logic next_idx : t
+
+logic self__ : (t,us_rep) farray
+
+logic self__1 : rx_frame_queue_index
+
+logic self__2 : natural
+
+logic self__3 : bool
+
+logic self__4 : bool
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : (t,us_rep) farray
+
+logic o7 : rx_frame_queue_index
+
+logic o8 : natural
+
+logic o9 : bool
+
+logic o10 : bool
+
+logic o11 : (t,us_rep) farray
+
+logic o12 : rx_frame_queue_index
+
+logic o13 : natural
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : frame_length
+
+logic o17 : frame_length
+
+logic o18 : (int,bits_8) farray
+
+logic o19 : rx_errors
+
+logic o20 : bool
+
+logic temp___4579 : frame_length
+
+logic temp___45791 : (int,bits_8) farray
+
+logic temp___45792 : rx_errors
+
+logic temp___45793 : bool
+
+logic o21 : frame_length
+
+logic o22 : (int,bits_8) farray
+
+logic o23 : rx_errors
+
+logic o24 : bool
+
+logic o25 : (t,us_rep) farray
+
+logic o26 : (t,us_rep) farray
+
+logic o27 : rx_frame_queue_index
+
+logic o28 : natural
+
+logic o29 : bool
+
+logic o30 : bool
+
+logic o31 : (t,us_rep) farray
+
+logic o32 : rx_frame_queue_index
+
+logic o33 : natural
+
+logic o34 : bool
+
+logic o35 : bool
+
+logic o36 : rx_errors
+
+logic o37 : frame_length
+
+logic o38 : (int,bits_8) farray
+
+logic o39 : rx_errors
+
+logic o40 : bool
+
+logic temp___4583 : frame_length
+
+logic temp___45831 : (int,bits_8) farray
+
+logic temp___45832 : rx_errors
+
+logic temp___45833 : bool
+
+logic o41 : frame_length
+
+logic o42 : (int,bits_8) farray
+
+logic o43 : rx_errors
+
+logic o44 : bool
+
+logic o45 : (t,us_rep) farray
+
+logic o46 : (t,us_rep) farray
+
+logic o47 : rx_frame_queue_index
+
+logic o48 : natural
+
+logic o49 : bool
+
+logic o50 : bool
+
+logic o51 : (t,us_rep) farray
+
+logic o52 : rx_frame_queue_index
+
+logic o53 : natural
+
+logic o54 : bool
+
+logic o55 : bool
+
+logic result : t
+
+logic next_idx1 : t
+
+logic result1 : (t,us_rep) farray
+
+logic result2 : rx_frame_queue_index
+
+logic result3 : natural
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic self__5 : (t,us_rep) farray
+
+logic self__6 : rx_frame_queue_index
+
+logic self__7 : natural
+
+logic self__8 : bool
+
+logic self__9 : bool
+
+logic result6 : (t,us_rep) farray
+
+logic result7 : rx_frame_queue_index
+
+logic result8 : natural
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic self__10 : (t,us_rep) farray
+
+logic self__11 : rx_frame_queue_index
+
+logic self__12 : natural
+
+logic self__13 : bool
+
+logic self__14 : bool
+
+logic result11 : (t,us_rep) farray
+
+logic result12 : rx_frame_queue_index
+
+logic result13 : natural
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic self__15 : (t,us_rep) farray
+
+logic self__16 : rx_frame_queue_index
+
+logic self__17 : natural
+
+logic self__18 : bool
+
+logic self__19 : bool
+
+axiom H :
+  (forall temp___4460:t. ((ule(of_int(0), temp___4460) and ule(temp___4460,
+  of_int(1))) ->
+  (((to_rep2((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0) ->
+  (0 <  to_rep1((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__size))) and
+  ((not (to_rep2((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__error) = 0)) ->
+  (to_rep1((((self__[temp___4460])).us_split_fields1).rec__decadriver__rx_frame_type__size) = 0)))))
+
+axiom H1 : in_range4(error)
+
+axiom H2 : (not (error = 0))
+
+axiom H3 : (ule(of_int(0), of_int(1)) -> in_range5(next_idx))
+
+axiom H4 : (not (2 <= to_rep(self__2)))
+
+axiom H5 : ((o = to_rep(self__2)) and in_range_int(to_rep(self__2)))
+
+axiom H6 : (o1 = of_int(o))
+
+axiom H7 : (o2 = add(to_rep4(self__1), o1))
+
+axiom H8 : (o3 = urem(o2, of_int(2)))
+
+axiom H9 : (result = next_idx)
+
+axiom H10 : (next_idx1 = o3)
+
+axiom H11 : ((o4 = (to_rep(self__2) + 1)) and
+  in_range1((to_rep(self__2) + 1)))
+
+axiom H12 : (to_rep(o5) = o4)
+
+axiom H13 : (self__ = o6)
+
+axiom H14 : (self__1 = o7)
+
+axiom H15 : (o5 = o8)
+
+axiom H16 : (self__3 = o9)
+
+axiom H17 : (self__4 = o10)
+
+axiom H18 : (o11 = o6)
+
+axiom H19 : (o12 = o7)
+
+axiom H20 : (o13 = o8)
+
+axiom H21 : (o14 = o9)
+
+axiom H22 : (o15 = o10)
+
+axiom H23 : ((result1 = self__) and ((result2 = self__1) and
+  ((result3 = self__2) and ((result4 = self__3) and (result5 = self__4)))))
+
+axiom H24 : ((self__5 = o11) and ((self__6 = o12) and ((self__7 = o13) and
+  ((self__8 = o14) and (self__9 = o15)))))
+
+axiom H25 : (to_rep1(o16) = 0)
+
+axiom H26 : (o16 = o17)
+
+axiom H27 :
+  ((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__frame = o18)
+
+axiom H28 :
+  ((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__error = o19)
+
+axiom H29 :
+  ((((self__5[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__overrun = o20)
+
+axiom H30 : (temp___4579 = o17)
+
+axiom H31 : (temp___45791 = o18)
+
+axiom H32 : (temp___45792 = o19)
+
+axiom H33 : (temp___45793 = o20)
+
+axiom H34 : (((to_rep2(temp___45792) = 0) -> (0 <  to_rep1(temp___4579))) and
+  ((not (to_rep2(temp___45792) = 0)) -> (to_rep1(temp___4579) = 0)))
+
+axiom H35 : ((o21 = temp___4579) and ((o22 = temp___45791) and
+  ((o23 = temp___45792) and (o24 = temp___45793))))
+
+axiom H36 : (o25 = (self__5[next_idx1 <- { us_split_fields1 = {
   rec__decadriver__rx_frame_type__size = o21;
   rec__decadriver__rx_frame_type__frame = o22;
   rec__decadriver__rx_frame_type__error = o23;
-  rec__decadriver__rx_frame_type__overrun = o24 } }]))) and ((o25 = o26) and
-  ((self__6 = o27) and ((self__7 = o28) and ((self__8 = o29) and
-  (self__9 = o30)))))) and ((o31 = o26) and ((o32 = o27) and ((o33 = o28) and
-  ((o34 = o29) and (o35 = o30)))))) and (((result6 = self__5) and
-  ((result7 = self__6) and ((result8 = self__7) and ((result9 = self__8) and
-  (result10 = self__9))))) and ((o31 = self__10) and ((o32 = self__11) and
-  ((o33 = self__12) and ((o34 = self__13) and (o35 = self__14))))))) ->
-  ((((to_rep2(o36) = error) and
-  (((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__size = o37) and
-  (((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__frame = o38) and
-  ((o36 = o39) and
-  ((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__overrun = o40))))) and
-  ((temp___4593 = o37) and ((temp___45931 = o38) and
-  ((temp___45932 = o39) and (temp___45933 = o40))))) ->
-  (((to_rep2(temp___45932) = 0) -> (0 <  to_rep1(temp___4593))) and
-  ((not (to_rep2(temp___45932) = 0)) ->
-  (to_rep1(temp___4593) = 0)))))))))))))
+  rec__decadriver__rx_frame_type__overrun = o24 } }]))
+
+axiom H37 : (o25 = o26)
+
+axiom H38 : (self__6 = o27)
+
+axiom H39 : (self__7 = o28)
+
+axiom H40 : (self__8 = o29)
+
+axiom H41 : (self__9 = o30)
+
+axiom H42 : (o31 = o26)
+
+axiom H43 : (o32 = o27)
+
+axiom H44 : (o33 = o28)
+
+axiom H45 : (o34 = o29)
+
+axiom H46 : (o35 = o30)
+
+axiom H47 : ((result6 = self__5) and ((result7 = self__6) and
+  ((result8 = self__7) and ((result9 = self__8) and (result10 = self__9)))))
+
+axiom H48 : ((self__10 = o31) and ((self__11 = o32) and ((self__12 = o33) and
+  ((self__13 = o34) and (self__14 = o35)))))
+
+axiom H49 : (to_rep2(o36) = error)
+
+axiom H50 :
+  ((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__size = o37)
+
+axiom H51 :
+  ((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__frame = o38)
+
+axiom H52 : (o36 = o39)
+
+axiom H53 :
+  ((((self__10[next_idx1])).us_split_fields1).rec__decadriver__rx_frame_type__overrun = o40)
+
+axiom H54 : (temp___4583 = o37)
+
+axiom H55 : (temp___45831 = o38)
+
+axiom H56 : (temp___45832 = o39)
+
+axiom H57 : (temp___45833 = o40)
+
+ (* File "decadriver.ads", line 77, characters 0-0 *)
+goal WP_parameter_def : (((to_rep2(temp___45832) = 0) ->
+  (0 <  to_rep1(temp___4583))) and ((not (to_rep2(temp___45832) = 0)) ->
+  (to_rep1(temp___4583) = 0)))

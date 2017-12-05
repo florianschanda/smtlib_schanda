@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1060,9 +1060,27 @@ axiom readreg32__post_axiom :
   (forall reg:t [readreg32(reg)]. (readreg32(reg) = toSmall(bw_and(reg,
   of_int(4294967295)))))
 
+logic reg : t
+
+logic result : t
+
+logic reg1 : t
+
+logic reg2 : t
+
+logic reg3 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = reg)
+
+axiom H3 : (reg1 = toBig(val__))
+
+axiom H4 : (reg1 = reg2)
+
+axiom H5 : (reg3 = reg1)
+
  (* File "x86.adb", line 105, characters 0-0 *)
-goal WP_parameter_def :
-  (forall reg:t. forall result:t. forall reg1:t. forall reg2:t.
-  forall reg3:t. ((((result = reg) and (reg1 = toBig(val__))) and
-  ((reg1 = reg2) and (reg3 = reg1))) -> (writereg32post(reg2,
-  val__) = true)))
+goal WP_parameter_def : (writereg32post(reg2, val__) = true)

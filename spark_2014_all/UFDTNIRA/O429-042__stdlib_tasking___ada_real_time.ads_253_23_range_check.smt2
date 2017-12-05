@@ -97,6 +97,7 @@
 (declare-const o duration)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (= o (to_duration__2 ts)))
 (assert (= o1 (to_fixed o)))
 (assert (= o2 (to_int1 o1)))

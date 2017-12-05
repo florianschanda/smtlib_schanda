@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -120,7 +120,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type tdyn_tyB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -186,11 +186,17 @@ function dyn_ty__ref___projection(a: dyn_ty__ref) : tdyn_tyB =
 
 axiom last__def_axiom : (last = dyn_ty_LAST)
 
- (* File "scalar_types.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall scalar_types__dyn_ty_LAST__assume:int.
-  ((((scalar_types__dyn_ty_LAST__assume = id(10)) and
+logic scalar_types__dyn_ty_LAST__assume : int
+
+axiom H : ((scalar_types__dyn_ty_LAST__assume = id(10)) and
   (in_range(scalar_types__dyn_ty_LAST__assume) and
-  (scalar_types__dyn_ty_LAST__assume = 10))) and
-  (scalar_types__dyn_ty_LAST__assume = dyn_ty_LAST)) ->
-  (in_range(dyn_ty_LAST) -> ((1 <= dyn_ty_LAST) -> ((-2147483648) <= 1)))))
+  (scalar_types__dyn_ty_LAST__assume = 10)))
+
+axiom H1 : (scalar_types__dyn_ty_LAST__assume = dyn_ty_LAST)
+
+axiom H2 : in_range(dyn_ty_LAST)
+
+axiom H3 : (1 <= dyn_ty_LAST)
+
+ (* File "scalar_types.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : ((- 2147483648) <= 1)

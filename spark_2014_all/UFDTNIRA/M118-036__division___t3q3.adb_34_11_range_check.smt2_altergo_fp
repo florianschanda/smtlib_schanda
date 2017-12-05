@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -281,8 +281,53 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic k : int
+
+logic l : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic result : int
+
+logic k1 : int
+
+logic result1 : int
+
+logic l1 : int
+
+logic k2 : int
+
+logic l2 : int
+
+logic k3 : int
+
+logic l3 : int
+
+axiom H : in_range2(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(k))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H4 : (not (j = 0))
+
  (* File "t3q3.adb", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall l:int. (in_range2(i) -> (in_range2(j) ->
-  (((0 <= 2147483647) -> in_range2(k)) -> (((0 <= 2147483647) ->
-  in_range2(l)) -> ((not (j = 0)) -> in_range2(comp_div(i,j))))))))
+goal WP_parameter_def : in_range2(comp_div(i,j))

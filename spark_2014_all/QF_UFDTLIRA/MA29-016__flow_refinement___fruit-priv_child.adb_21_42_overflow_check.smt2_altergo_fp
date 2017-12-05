@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -135,8 +135,19 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic price_of_orange : int
+
+logic extra_cost : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : bool
+
+axiom H : in_range1(extra_cost)
+
+axiom H1 : in_range1(price_of_orange)
+
  (* File "fruit-priv_child.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall price_of_orange:int. forall extra_cost:int.
-  (in_range1(extra_cost) -> (in_range1(price_of_orange) ->
-  in_range((2147483647 - extra_cost)))))
+goal WP_parameter_def : in_range((2147483647 - extra_cost))

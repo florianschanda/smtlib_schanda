@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -644,7 +644,11 @@ logic b__split_discrs : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic temp___m_height_204 : int
+
+logic us : int
+
+axiom H : in_range(temp___m_height_204)
+
  (* File "main.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___m_height_204:int. (in_range(temp___m_height_204) ->
-  in_range(7)))
+goal WP_parameter_def : in_range(7)

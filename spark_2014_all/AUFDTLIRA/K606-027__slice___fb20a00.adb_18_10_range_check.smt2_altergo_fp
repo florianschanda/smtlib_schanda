@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -533,8 +533,32 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic ret : (int,character) farray
+
+logic pos : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic ret1 : (int,character) farray
+
+logic pos1 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic pos2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : (to_rep1(first(str1)) <= to_rep1(last(str1)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) ->
-  ((to_rep1(first(str1)) <= to_rep1(last(str1))) ->
-  (1 <= to_rep1(first(str1)))))
+goal WP_parameter_def : (1 <= to_rep1(first(str1)))

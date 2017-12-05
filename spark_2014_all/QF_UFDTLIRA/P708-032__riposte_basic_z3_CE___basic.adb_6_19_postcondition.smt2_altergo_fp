@@ -113,18 +113,43 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic basic__add_ub__result : int
+
+logic o : int
+
+logic result : int
+
+logic basic__add_ub__result1 : int
+
+logic basic__add_ub__result2 : int
+
+logic basic__add_ub__result3 : int
+
+logic basic__add_ub__result4 : int
+
+logic basic__add_ub__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (basic__add_ub__result1 = basic__add_ub__result2)
+
+axiom H3 : (basic__add_ub__result3 = basic__add_ub__result1)
+
+axiom H4 : ((o = (a + b)) and in_range((a + b)))
+
+axiom H5 : (result = basic__add_ub__result)
+
+axiom H6 : (basic__add_ub__result1 = o)
+
+axiom H7 : (basic__add_ub__result4 = basic__add_ub__result2)
+
+axiom H8 : (basic__add_ub__result5 = basic__add_ub__result3)
+
+axiom H9 : (result1 = basic__add_ub__result4)
+
  (* File "basic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall basic__add_ub__result:int. forall o:int. forall result:int.
-  forall basic__add_ub__result1:int. forall basic__add_ub__result2:int.
-  forall basic__add_ub__result3:int. forall basic__add_ub__result4:int.
-  forall basic__add_ub__result5:int.
-  (forall result1:int. ((in_range(a) and (in_range(b) and
-  (((((basic__add_ub__result1 = basic__add_ub__result2) and
-  (basic__add_ub__result3 = basic__add_ub__result1)) and (((o = (a + b)) and
-  in_range((a + b))) and ((result = basic__add_ub__result) and
-  (basic__add_ub__result1 = o)))) and
-  ((basic__add_ub__result4 = basic__add_ub__result2) and
-  (basic__add_ub__result5 = basic__add_ub__result3))) and
-  (result1 = basic__add_ub__result4)))) ->
-  (basic__add_ub__result4 = (a + b)))))
+goal WP_parameter_def : (basic__add_ub__result4 = (a + b))

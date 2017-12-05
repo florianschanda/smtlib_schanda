@@ -43,6 +43,7 @@
 (declare-const b2 Bool)
 (declare-const result Bool)
 (declare-const b21 Bool)
+(declare-const b12 Int)
 (assert (in_range1 b1))
 (assert (in_range1 b11))
 (assert (= result b2))

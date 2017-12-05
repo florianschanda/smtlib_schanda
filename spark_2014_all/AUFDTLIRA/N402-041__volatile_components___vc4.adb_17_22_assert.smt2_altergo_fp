@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -258,15 +258,57 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic v0 : (int,integer) farray
+
+logic t1 : int
+
+logic t2 : int
+
+logic t3 : int
+
+logic t4 : int
+
+logic result : int
+
+logic t11 : int
+
+logic result1 : int
+
+logic t21 : int
+
+logic result2 : int
+
+logic t31 : int
+
+logic result3 : int
+
+logic t41 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(t1))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(t2))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(t3))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(t4))
+
+axiom H4 : (result = t1)
+
+axiom H5 : (t11 = to_rep((x[2])))
+
+axiom H6 : (result1 = t2)
+
+axiom H7 : (t21 = to_rep((x[2])))
+
+axiom H8 : (t11 = t21)
+
+axiom H9 : (result2 = t3)
+
+axiom H10 : (t31 = to_rep((v0[2])))
+
+axiom H11 : (result3 = t4)
+
+axiom H12 : (t41 = to_rep((v0[2])))
+
  (* File "vc4.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v0:(int,integer) farray. forall t1:int. forall t2:int.
-  forall t3:int. forall t4:int. forall result:int. forall t11:int.
-  forall result1:int. forall t21:int. forall result2:int. forall t31:int.
-  forall result3:int. forall t41:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(t1)) -> ((((-2147483648) <= 2147483647) -> in_range1(t2)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t3)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(t4)) -> (((result = t1) and
-  (t11 = to_rep((x[2])))) -> (((result1 = t2) and (t21 = to_rep((x[2])))) ->
-  ((t11 = t21) -> (((result2 = t3) and (t31 = to_rep((v0[2])))) ->
-  (((result3 = t4) and (t41 = to_rep((v0[2])))) -> (t31 = t41)))))))))))
+goal WP_parameter_def : (t31 = t41)

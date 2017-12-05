@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -277,18 +277,35 @@ logic r2 : integer
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic mixed__get_i__result : int
+
+logic result : int
+
+logic mixed__get_i__result1 : int
+
+logic mixed__get_i__result2 : int
+
+logic mixed__get_i__result3 : int
+
+logic mixed__get_i__result4 : int
+
+logic mixed__get_i__result5 : int
+
+logic result1 : int
+
+axiom H : (mixed__get_i__result1 = mixed__get_i__result2)
+
+axiom H1 : (mixed__get_i__result3 = mixed__get_i__result1)
+
+axiom H2 : (result = mixed__get_i__result)
+
+axiom H3 : (mixed__get_i__result1 = to_rep(r2))
+
+axiom H4 : (mixed__get_i__result4 = mixed__get_i__result2)
+
+axiom H5 : (mixed__get_i__result5 = mixed__get_i__result3)
+
+axiom H6 : (result1 = mixed__get_i__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mixed__get_i__result:int. forall result:int.
-  forall mixed__get_i__result1:int. forall mixed__get_i__result2:int.
-  forall mixed__get_i__result3:int. forall mixed__get_i__result4:int.
-  forall mixed__get_i__result5:int.
-  (forall result1:int.
-  ((((((mixed__get_i__result1 = mixed__get_i__result2) and
-  (mixed__get_i__result3 = mixed__get_i__result1)) and
-  ((result = mixed__get_i__result) and
-  (mixed__get_i__result1 = to_rep(r2)))) and
-  ((mixed__get_i__result4 = mixed__get_i__result2) and
-  (mixed__get_i__result5 = mixed__get_i__result3))) and
-  (result1 = mixed__get_i__result4)) ->
-  (mixed__get_i__result4 = to_rep(r2)))))
+goal WP_parameter_def : (mixed__get_i__result4 = to_rep(r2))

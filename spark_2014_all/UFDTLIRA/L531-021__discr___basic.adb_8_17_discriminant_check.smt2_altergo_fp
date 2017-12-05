@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -253,23 +253,23 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep2(((a).us_split_discrs1).rec__basic__r__x) = to_rep2(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base))) and
-  (basic__r__a_field__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
-  (basic__r__c_field1__pred(a) ->
-  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
-  (basic__r__c_field2__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep1(((b).us_split_fields1).rec__basic__r__c_field2)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep2(((a).us_split_discrs1).rec__basic__r__x) = to_rep2(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base))) and
+  ((((to_rep2(((a).us_split_discrs1).rec__basic__r__x) = to_rep2(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base)) and
   (basic__r__a_field__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
   (basic__r__c_field1__pred(a) ->
   (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
   (basic__r__c_field2__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep1(((b).us_split_fields1).rec__basic__r__c_field2))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__basic__r__x) = to_rep2(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep(((a).us_split_fields1).rec__basic__r__base) = to_rep(((b).us_split_fields1).rec__basic__r__base)) and
+  (basic__r__a_field__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__basic__r__a_field) = to_rep(((b).us_split_fields1).rec__basic__r__a_field)))) and
+  (basic__r__c_field1__pred(a) ->
+  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
+  (basic__r__c_field2__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep1(((b).us_split_fields1).rec__basic__r__c_field2)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -399,8 +399,15 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic z : int
+
+logic us : int
+
+axiom H : ((us = to_rep2(v)) and in_range2(to_rep2(v)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(z))
+
+axiom H2 : (to_rep2(v) = 0)
+
  (* File "basic.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:int. forall us:int. (((us = to_rep2(v)) and
-  in_range2(to_rep2(v))) -> ((((-2147483648) <= 2147483647) ->
-  in_range(z)) -> ((to_rep2(v) = 0) -> (to_rep2(v) = 0)))))
+goal WP_parameter_def : (to_rep2(v) = 0)

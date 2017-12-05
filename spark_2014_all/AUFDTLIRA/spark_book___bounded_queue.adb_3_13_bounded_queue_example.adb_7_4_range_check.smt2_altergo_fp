@@ -159,7 +159,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -488,19 +488,19 @@ logic bool_eq8 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear))) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items,
-  ((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items) = true)) ->
-  (bool_eq8(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count)) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front))) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear))) and
   (bool_eq7(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items,
   ((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items) = true))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_example__char_queue__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__count)) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__front))) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__rear))) and
+  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items,
+  ((b).us_split_fields1).rec__bounded_queue_example__char_queue__queue_type__items) = true)))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size1 : int
@@ -648,8 +648,11 @@ logic queue5 : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic us : int
+
+axiom H : (dynamic_property1(1, to_rep1(queue), to_rep2(first(queue5)),
+  to_rep2(last(queue5))) and ((to_rep2(first(queue5)) = 1) and
+  (to_rep2(last(queue5)) = to_rep1(queue))))
+
  (* File "bounded_queue.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep1(queue),
-  to_rep2(first(queue5)), to_rep2(last(queue5))) and
-  ((to_rep2(first(queue5)) = 1) and
-  (to_rep2(last(queue5)) = to_rep1(queue)))) -> in_range1(to_rep1(queue)))
+goal WP_parameter_def : in_range1(to_rep1(queue))

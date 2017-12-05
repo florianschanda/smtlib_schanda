@@ -242,7 +242,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -428,11 +428,14 @@ axiom num_item_per_category__def_axiom :
   ((num_item_per_category = counter_example__num_item_per_category__aggregate_def(3,
   8, 10000, 42, 98, 76, 0, 1)) and (num_item_per_category1 = mk(1, 8)))
 
+axiom H : dynamic_property(1, 8, to_rep1(first(num_item_per_category1)),
+  to_rep1(last(num_item_per_category1)))
+
+axiom H1 : ((counter_example__num_item_per_category__aggregate_def(3, 8,
+  10000, 42, 98, 76, 0, 1) = num_item_per_category) and (mk(1,
+  8) = num_item_per_category1))
+
+axiom H2 : in_range1(cat)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 8,
-  to_rep1(first(num_item_per_category1)),
-  to_rep1(last(num_item_per_category1))) ->
-  (((counter_example__num_item_per_category__aggregate_def(3, 8, 10000, 42,
-  98, 76, 0, 1) = num_item_per_category) and (mk(1,
-  8) = num_item_per_category1)) -> (in_range1(cat) ->
-  (to_rep1(first(num_item_per_category1)) <= cat))))
+goal WP_parameter_def : (to_rep1(first(num_item_per_category1)) <= cat)

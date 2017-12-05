@@ -109,6 +109,7 @@
 (declare-const x1 Int)
 (declare-const x2__split_fields integer)
 (declare-const x3 (Array Int integer))
+(declare-const us Int)
 (assert (in_range1 c))
 (assert (= x1 100))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range2 x1)))

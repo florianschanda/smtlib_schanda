@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -879,47 +879,313 @@ axiom def_axiom :
   (((aida__conversion__calculate_positive_target_length_3__n__aggregate_def(temp___1721,
   temp___1722, temp___1723)).elts2[temp___1724]) = of_rep1(temp___1721)))))
 
- (* File "aida-conversion.adb", line 997, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall n:(int,integer) farray.
-  forall temp___1726:(int,integer) farray. forall temp___17261:t2.
-  forall aida__conversion__calculate_positive_target_length_3__n__assume:(int,integer) farray.
-  forall aida__conversion__calculate_positive_target_length_3__n__assume1:t1.
-  forall result:(int,integer) farray. forall n1:(int,integer) farray.
-  (dynamic_property(1, 2147483647, to_rep1(first(source1)),
-  to_rep1(last(source1))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(target)) -> (((length({ elts = source; rt = source1 }) = 3) and
-  (forall index:int. (((to_rep1(first(source1)) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (is_digit(to_rep((source[index]))) = true)))) ->
-  (((((to_rep1(first4((aida__conversion__calculate_positive_target_length_3__n__aggregate_def(0,
+logic target : int
+
+logic has_failed : bool
+
+logic n : (int,integer) farray
+
+logic index : int
+
+logic index1 : int
+
+logic us : int
+
+logic temp___1726 : (int,integer) farray
+
+logic temp___17261 : t2
+
+logic aida__conversion__calculate_positive_target_length_3__n__assume : (int,integer) farray
+
+logic aida__conversion__calculate_positive_target_length_3__n__assume1 : t1
+
+logic us1 : int
+
+logic temp___1733 : int
+
+logic temp___1730 : (int,integer) farray
+
+logic temp___1728 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic j : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target1 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : (int,integer) farray
+
+logic temp___1734 : int
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic temp___1735 : int
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic temp___1736 : int
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic temp___1737 : int
+
+logic o39 : int
+
+logic o40 : character
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic temp___1738 : int
+
+logic o44 : int
+
+logic o45 : character
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic temp___1739 : int
+
+logic o52 : int
+
+logic o53 : character
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic result : (int,integer) farray
+
+logic n1 : (int,integer) farray
+
+logic result1 : int
+
+logic index2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target2 : int
+
+logic result2 : (int,integer) farray
+
+logic n2 : (int,integer) farray
+
+logic n3 : (int,integer) farray
+
+logic index3 : int
+
+logic result3 : int
+
+logic index4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target3 : int
+
+logic result4 : (int,integer) farray
+
+logic n4 : (int,integer) farray
+
+logic n5 : (int,integer) farray
+
+logic index5 : int
+
+logic n6 : (int,integer) farray
+
+logic index6 : int
+
+logic n7 : (int,integer) farray
+
+logic index7 : int
+
+logic n8 : (int,integer) farray
+
+logic index8 : int
+
+logic n9 : (int,integer) farray
+
+logic index9 : int
+
+logic n10 : (int,integer) farray
+
+logic index10 : int
+
+logic result5 : int
+
+logic target1 : int
+
+logic result6 : int
+
+logic target2 : int
+
+logic result7 : int
+
+logic target3 : int
+
+logic result8 : bool
+
+logic has_failed1 : bool
+
+logic target4 : int
+
+logic has_failed2 : bool
+
+logic n11 : (int,integer) farray
+
+logic index11 : int
+
+logic target5 : int
+
+logic has_failed3 : bool
+
+logic n12 : (int,integer) farray
+
+logic index12 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : ((length({ elts = source; rt = source1 }) = 3) and
+  (forall index13:int. (((to_rep1(first(source1)) <= index13) and
+  (index13 <= to_rep1(last(source1)))) ->
+  (is_digit(to_rep((source[index13]))) = true))))
+
+axiom H3 :
+  (to_rep1(first4((aida__conversion__calculate_positive_target_length_3__n__aggregate_def(0,
   to_rep1(first(source1)),
-  (to_rep1(first(source1)) + 2))).rt2)) = to_rep1(first(source1))) and
-  ((to_rep1(last4((aida__conversion__calculate_positive_target_length_3__n__aggregate_def(0,
+  (to_rep1(first(source1)) + 2))).rt2)) = to_rep1(first(source1)))
+
+axiom H4 :
+  (to_rep1(last4((aida__conversion__calculate_positive_target_length_3__n__aggregate_def(0,
   to_rep1(first(source1)),
-  (to_rep1(first(source1)) + 2))).rt2)) = (to_rep1(first(source1)) + 2)) and
-  ({ elts2 = temp___1726; rt2 = temp___17261
+  (to_rep1(first(source1)) + 2))).rt2)) = (to_rep1(first(source1)) + 2))
+
+axiom H5 : ({ elts2 = temp___1726; rt2 = temp___17261
   } = aida__conversion__calculate_positive_target_length_3__n__aggregate_def(0,
-  to_rep1(first(source1)), (to_rep1(first(source1)) + 2))))) and
-  ((((to_rep1(first4(temp___17261)) <= to_rep1(last4(temp___17261))) and
-  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2)) and
-  (((to_rep1(last4(temp___17261)) - to_rep1(first4(temp___17261))) + 1) = (((to_rep1(first(source1)) + 2) - to_rep1(first(source1))) + 1))) or
-  ((not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2))) and
-  (((to_rep1(last4(temp___17261)) - to_rep1(first4(temp___17261))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___17261)) <= to_rep1(last4(temp___17261)))) and
-  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2)) and
-  (0 = (((to_rep1(first(source1)) + 2) - to_rep1(first(source1))) + 1))) or
-  (not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2)))))) and
-  ((slide1(temp___1726, to_rep1(first4(temp___17261)),
-  to_rep1(first(source1))) = aida__conversion__calculate_positive_target_length_3__n__assume) and
-  (mk1(to_rep1(first(source1)),
-  (to_rep1(first(source1)) + 2)) = aida__conversion__calculate_positive_target_length_3__n__assume1)))) and
-  ((({ map__content1 = result } = { map__content1 = n }) and
-  (n1 = aida__conversion__calculate_positive_target_length_3__n__assume)) and
-  ((to_rep1(n__first) = to_rep1(first2(aida__conversion__calculate_positive_target_length_3__n__assume1))) and
-  (to_rep1(n__last) = to_rep1(last2(aida__conversion__calculate_positive_target_length_3__n__assume1)))))) ->
-  ((dynamic_property2(to_rep1(first(source1)), (to_rep1(first(source1)) + 2),
-  to_rep1(n__first), to_rep1(n__last)) and
+  to_rep1(first(source1)), (to_rep1(first(source1)) + 2)))
+
+axiom H6 :
+  (((to_rep1(first4(temp___17261)) <= to_rep1(last4(temp___17261))) ->
+  (((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2)) ->
+  (((to_rep1(last4(temp___17261)) - to_rep1(first4(temp___17261))) + 1) = (((to_rep1(first(source1)) + 2) - to_rep1(first(source1))) + 1))) and
+  ((not (to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2))) ->
+  (((to_rep1(last4(temp___17261)) - to_rep1(first4(temp___17261))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___17261)) <= to_rep1(last4(temp___17261)))) ->
+  ((to_rep1(first(source1)) <= (to_rep1(first(source1)) + 2)) ->
+  (0 = (((to_rep1(first(source1)) + 2) - to_rep1(first(source1))) + 1)))))
+
+axiom H7 : (slide1(temp___1726, to_rep1(first4(temp___17261)),
+  to_rep1(first(source1))) = aida__conversion__calculate_positive_target_length_3__n__assume)
+
+axiom H8 : (mk1(to_rep1(first(source1)),
+  (to_rep1(first(source1)) + 2)) = aida__conversion__calculate_positive_target_length_3__n__assume1)
+
+axiom H9 : (result = n)
+
+axiom H10 :
+  (n1 = aida__conversion__calculate_positive_target_length_3__n__assume)
+
+axiom H11 :
+  (to_rep1(n__first) = to_rep1(first2(aida__conversion__calculate_positive_target_length_3__n__assume1)))
+
+axiom H12 :
+  (to_rep1(n__last) = to_rep1(last2(aida__conversion__calculate_positive_target_length_3__n__assume1)))
+
+axiom H13 : (dynamic_property2(to_rep1(first(source1)),
+  (to_rep1(first(source1)) + 2), to_rep1(n__first), to_rep1(n__last)) and
   ((to_rep1(n__first) = to_rep1(first(source1))) and
-  (to_rep1(n__last) = (to_rep1(first(source1)) + 2)))) ->
-  in_range1((to_rep1(first(source1)) + 2))))))))
+  (to_rep1(n__last) = (to_rep1(first(source1)) + 2))))
+
+ (* File "aida-conversion.adb", line 997, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep1(first(source1)) + 2))

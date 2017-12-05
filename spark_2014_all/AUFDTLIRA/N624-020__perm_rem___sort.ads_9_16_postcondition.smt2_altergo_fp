@@ -161,7 +161,7 @@ function true_bool__ref___projection(a: true_bool__ref) : true_bool =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -600,82 +600,298 @@ axiom remove__post_axiom :
   elts = a; rt = a1 }, i)).rt)), to_rep(last((remove({ elts = a; rt = a1 },
   i)).rt)))))))
 
- (* File "sort.adb", line 92, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,natural) farray. forall smallest:int.
-  forall prec:(int,natural) farray. forall hr:int. forall current:int.
-  forall o:int. forall temp___206:(int,natural) farray.
-  forall temp___205:int. forall temp___204:int.
-  forall temp___203:(int,natural) farray. forall temp___202:int.
-  forall temp___201:(int,natural) farray. forall o1:int. forall o2:int.
-  forall values1:(int,natural) farray. forall smallest1:int.
-  forall result:(int,natural) farray. forall prec1:(int,natural) farray.
-  forall result1:int. forall hr1:int. forall result2:int.
-  forall current1:int. forall result3:int. forall smallest2:int.
-  forall result4:(int,natural) farray. forall prec2:(int,natural) farray.
-  forall values2:(int,natural) farray. forall result5:int. forall hr2:int.
-  forall values3:(int,natural) farray. forall smallest3:int.
-  forall prec3:(int,natural) farray. forall hr3:int. forall current2:int.
-  forall values4:(int,natural) farray. forall smallest4:int.
-  forall prec4:(int,natural) farray. forall hr4:int. forall current3:int.
-  forall values5:(int,natural) farray. forall smallest5:int.
-  forall prec5:(int,natural) farray. forall hr5:int. forall current4:int.
-  forall values6:(int,natural) farray. forall smallest6:int.
-  forall prec6:(int,natural) farray. forall hr6:int. forall current5:int.
-  forall values7:(int,natural) farray. forall smallest7:int.
-  forall prec7:(int,natural) farray. forall hr7:int. forall current6:int.
-  forall values8:(int,natural) farray. forall smallest8:int.
-  forall prec8:(int,natural) farray. forall hr8:int. forall current7:int.
-  forall values9:(int,natural) farray. forall smallest9:int.
-  forall prec9:(int,natural) farray. forall hr9:int. forall current8:int.
-  (((((1 <= 2147483647) -> in_range1(smallest)) and ((values = init) and ((({
-  map__content = result } = { map__content = prec }) and
-  (prec1 = values)) and (((1 <= 1) -> in_range2(hr)) and
-  ((((o = perm_reflexive({ elts = values; rt = mk(1, 100) }, { elts = values;
-  rt = mk(1, 100) })) and (in_range2(o) and ((of_int(o) = true) -> (is_perm({
-  elts = values; rt = mk(1, 100) }, { elts = values; rt = mk(1, 100)
-  }) = true)))) and (({ int__content = result1 } = { int__content = hr }) and
-  (hr1 = o))) and ((({ int__content = result2 } = { int__content = current
-  }) and (current1 = 1)) and ((((1 <= current1) and (current1 <= 99)) and
-  ((((temp___206 = values) and ((temp___205 = current1) and
+logic values : (int,natural) farray
+
+logic smallest : int
+
+logic prec : (int,natural) farray
+
+logic hr : int
+
+logic current : int
+
+logic o : int
+
+logic temp___206 : (int,natural) farray
+
+logic temp___205 : int
+
+logic temp___204 : int
+
+logic temp___203 : (int,natural) farray
+
+logic temp___202 : int
+
+logic temp___201 : (int,natural) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic us : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic us1 : bool
+
+logic values1 : (int,natural) farray
+
+logic smallest1 : int
+
+logic result : (int,natural) farray
+
+logic prec1 : (int,natural) farray
+
+logic result1 : int
+
+logic hr1 : int
+
+logic result2 : int
+
+logic current1 : int
+
+logic result3 : int
+
+logic smallest2 : int
+
+logic result4 : (int,natural) farray
+
+logic prec2 : (int,natural) farray
+
+logic values2 : (int,natural) farray
+
+logic result5 : int
+
+logic hr2 : int
+
+logic values3 : (int,natural) farray
+
+logic smallest3 : int
+
+logic prec3 : (int,natural) farray
+
+logic hr3 : int
+
+logic current2 : int
+
+logic result6 : int
+
+logic current3 : int
+
+logic result7 : int
+
+logic smallest4 : int
+
+logic result8 : (int,natural) farray
+
+logic prec4 : (int,natural) farray
+
+logic values4 : (int,natural) farray
+
+logic result9 : int
+
+logic hr4 : int
+
+logic values5 : (int,natural) farray
+
+logic smallest5 : int
+
+logic prec5 : (int,natural) farray
+
+logic hr5 : int
+
+logic current4 : int
+
+logic values6 : (int,natural) farray
+
+logic smallest6 : int
+
+logic prec6 : (int,natural) farray
+
+logic hr6 : int
+
+logic current5 : int
+
+logic values7 : (int,natural) farray
+
+logic smallest7 : int
+
+logic prec7 : (int,natural) farray
+
+logic hr7 : int
+
+logic current6 : int
+
+logic values8 : (int,natural) farray
+
+logic smallest8 : int
+
+logic prec8 : (int,natural) farray
+
+logic hr8 : int
+
+logic current7 : int
+
+logic values9 : (int,natural) farray
+
+logic smallest9 : int
+
+logic prec9 : (int,natural) farray
+
+logic hr9 : int
+
+logic current8 : int
+
+logic values10 : (int,natural) farray
+
+logic smallest10 : int
+
+logic prec10 : (int,natural) farray
+
+logic hr10 : int
+
+logic current9 : int
+
+logic values11 : (int,natural) farray
+
+logic smallest11 : int
+
+logic prec11 : (int,natural) farray
+
+logic hr11 : int
+
+logic current10 : int
+
+logic values12 : (int,natural) farray
+
+logic smallest12 : int
+
+logic prec12 : (int,natural) farray
+
+logic hr12 : int
+
+logic current11 : int
+
+axiom H : ((1 <= 2147483647) -> in_range1(smallest))
+
+axiom H1 : (values = init)
+
+axiom H2 : (result = prec)
+
+axiom H3 : (prec1 = values)
+
+axiom H4 : ((1 <= 1) -> in_range2(hr))
+
+axiom H5 : ((o = perm_reflexive({ elts = values; rt = mk(1, 100) }, { elts =
+  values; rt = mk(1, 100) })) and (in_range2(o) and ((of_int(o) = true) ->
+  (is_perm({ elts = values; rt = mk(1, 100) }, { elts = values; rt = mk(1,
+  100) }) = true))))
+
+axiom H6 : (result1 = hr)
+
+axiom H7 : (hr1 = o)
+
+axiom H8 : (result2 = current)
+
+axiom H9 : (current1 = 1)
+
+axiom H10 : (((1 <= current1) and (current1 <= 99)) ->
+  (((temp___206 = values) and ((temp___205 = current1) and
   ((temp___204 = smallest) and ((temp___203 = values) and
   ((temp___202 = hr1) and ((temp___201 = prec1) and
   ((((o1 = index_of_minimum(values, current1, 100)) and (in_range1(o1) and
-  ((current1 <= o1) and (o1 <= 100)))) and (({ int__content = result3 } = {
-  int__content = smallest }) and (smallest2 = o1))) and
-  ((((not (smallest2 = current1)) and (((prec1 = result4) and
-  (prec2 = values)) and ((is_perm({ elts = values; rt = mk(1, 100) }, {
-  elts = values2; rt = mk(1, 100) }) = true) and (((o2 = perm_transitive({
-  elts = init; rt = mk(1, 100) }, { elts = prec2; rt = mk(1, 100) }, { elts =
-  values2; rt = mk(1, 100) })) and (in_range2(o2) and ((of_int(o2) = true) ->
-  (is_perm({ elts = init; rt = mk(1, 100) }, { elts = values2; rt = mk(1,
-  100) }) = true)))) and ((hr1 = result5) and (hr2 = o2)))))) or
-  ((smallest2 = current1) and (((hr2 = hr1) and ((prec2 = prec1) and
-  (values2 = values))) and ((hr2 = hr1) and ((prec2 = prec1) and
-  (values2 = values1)))))) and ((is_perm({ elts = temp___206; rt = mk(1, 100)
-  }, { elts = values3; rt = mk(1, 100) }) = true) and ((((((1 <= 1) ->
-  in_range2(hr3)) and ((1 <= 2147483647) -> in_range1(smallest3))) and
-  ((1 <= 99) -> in_range7(current2))) and ((1 <= current2) and
-  (current2 <= 99))) and (current2 = 99))))))))))) and
-  (((current2 = current3) and ((hr3 = hr4) and ((prec3 = prec4) and
-  ((smallest3 = smallest4) and (values3 = values4))))) and
-  ((current4 = current2) and ((hr5 = hr3) and ((prec5 = prec3) and
-  ((smallest5 = smallest3) and (values5 = values3))))))) and ((({
-  int__content = current5 } = { int__content = current3 }) and (({
-  int__content = hr6 } = { int__content = hr4 }) and (({ map__content = prec6
-  } = { map__content = prec4 }) and (({ int__content = smallest6 } = {
-  int__content = smallest4 }) and ({ map__content = values6 } = {
-  map__content = values4 }))))) and ((current6 = current4) and
-  ((hr7 = hr5) and ((prec7 = prec5) and ((smallest7 = smallest5) and
-  (values7 = values5)))))))) or ((not ((1 <= current1) and
-  (current1 <= 99))) and (((current1 = current5) and ((hr1 = hr6) and
-  ((prec1 = prec6) and (({ int__content = smallest6 } = { int__content =
-  smallest }) and ({ map__content = values6 } = { map__content = values
-  }))))) and ((current6 = current1) and ((hr7 = hr1) and ((prec7 = prec1) and
-  ((smallest7 = smallest1) and (values7 = values1)))))))))))))) and
-  (((current7 = current5) and ((hr8 = hr6) and ((prec8 = prec6) and
-  ((smallest8 = smallest6) and ({ map__content = values8 } = { map__content =
-  values6 }))))) and ((current8 = current6) and ((hr9 = hr7) and
-  ((prec9 = prec7) and ((smallest9 = smallest7) and
-  (values9 = values7))))))) -> (is_perm({ elts = values; rt = mk(1, 100) }, {
-  elts = values8; rt = mk(1, 100) }) = true)))
+  ((current1 <= o1) and (o1 <= 100)))) and ((result3 = smallest) and
+  (smallest2 = o1))) and ((((not (smallest2 = current1)) ->
+  (((prec1 = result4) and (prec2 = values)) and ((is_perm({ elts = values;
+  rt = mk(1, 100) }, { elts = values2; rt = mk(1, 100) }) = true) and
+  (((o2 = perm_transitive({ elts = init; rt = mk(1, 100) }, { elts = prec2;
+  rt = mk(1, 100) }, { elts = values2; rt = mk(1, 100) })) and
+  (in_range2(o2) and ((of_int(o2) = true) -> (is_perm({ elts = init; rt =
+  mk(1, 100) }, { elts = values2; rt = mk(1, 100) }) = true)))) and
+  ((hr1 = result5) and (hr2 = o2)))))) and ((smallest2 = current1) ->
+  (((hr2 = hr1) and ((prec2 = prec1) and (values2 = values))) and
+  ((hr2 = hr1) and ((prec2 = prec1) and (values2 = values1)))))) and
+  ((is_perm({ elts = temp___206; rt = mk(1, 100) }, { elts = values3; rt =
+  mk(1, 100) }) = true) and ((((((1 <= 1) -> in_range2(hr3)) and
+  ((1 <= 2147483647) -> in_range1(smallest3))) and ((1 <= 99) ->
+  in_range7(current2))) and ((1 <= current2) and (current2 <= 99))) and
+  (current2 = 99))))))))))) and (((current6 = current2) and ((hr7 = hr3) and
+  ((prec7 = prec3) and ((smallest7 = smallest3) and
+  (values3 = values7))))) and ((current7 = current2) and ((hr8 = hr3) and
+  ((prec8 = prec3) and ((smallest8 = smallest3) and
+  (values8 = values3))))))))
+
+axiom H11 : (((1 <= current1) and (current1 <= 99)) -> (current8 = current6))
+
+axiom H12 : (((1 <= current1) and (current1 <= 99)) -> (hr9 = hr7))
+
+axiom H13 : (((1 <= current1) and (current1 <= 99)) -> (prec9 = prec7))
+
+axiom H14 : (((1 <= current1) and (current1 <= 99)) ->
+  (smallest9 = smallest7))
+
+axiom H15 : (((1 <= current1) and (current1 <= 99)) -> (values9 = values7))
+
+axiom H16 : (((1 <= current1) and (current1 <= 99)) -> (current9 = current7))
+
+axiom H17 : (((1 <= current1) and (current1 <= 99)) -> (hr10 = hr8))
+
+axiom H18 : (((1 <= current1) and (current1 <= 99)) -> (prec10 = prec8))
+
+axiom H19 : (((1 <= current1) and (current1 <= 99)) ->
+  (smallest10 = smallest8))
+
+axiom H20 : (((1 <= current1) and (current1 <= 99)) -> (values10 = values8))
+
+axiom H21 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (current8 = current1))
+
+axiom H22 : ((not ((1 <= current1) and (current1 <= 99))) -> (hr9 = hr1))
+
+axiom H23 : ((not ((1 <= current1) and (current1 <= 99))) -> (prec9 = prec1))
+
+axiom H24 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (smallest9 = smallest))
+
+axiom H25 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (values9 = values))
+
+axiom H26 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (current9 = current1))
+
+axiom H27 : ((not ((1 <= current1) and (current1 <= 99))) -> (hr10 = hr1))
+
+axiom H28 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (prec10 = prec1))
+
+axiom H29 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (smallest10 = smallest1))
+
+axiom H30 : ((not ((1 <= current1) and (current1 <= 99))) ->
+  (values10 = values1))
+
+axiom H31 : (current10 = current8)
+
+axiom H32 : (hr11 = hr9)
+
+axiom H33 : (prec11 = prec9)
+
+axiom H34 : (smallest11 = smallest9)
+
+axiom H35 : (values11 = values9)
+
+axiom H36 : (current11 = current9)
+
+axiom H37 : (hr12 = hr10)
+
+axiom H38 : (prec12 = prec10)
+
+axiom H39 : (smallest12 = smallest10)
+
+axiom H40 : (values12 = values10)
+
+ (* File "sort.adb", line 92, characters 0-0 *)
+goal WP_parameter_def : (is_perm({ elts = values; rt = mk(1, 100) }, { elts =
+  values11; rt = mk(1, 100) }) = true)

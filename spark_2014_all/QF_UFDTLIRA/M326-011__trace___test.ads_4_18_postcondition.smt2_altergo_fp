@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -109,23 +109,46 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__test__result:int. forall result:int.
-  forall test__test__result1:int. forall result1:int.
-  forall test__test__result2:int. forall test__test__result3:int.
-  forall test__test__result4:int. forall test__test__result5:int.
-  forall test__test__result6:int. forall test__test__result7:int.
-  forall test__test__result8:int.
-  (forall result2:int. ((in_range(x) and
-  (((((test__test__result3 = test__test__result5) and
-  (test__test__result6 = test__test__result4)) and (((x = 0) and
+logic test__test__result : int
+
+logic result : int
+
+logic test__test__result1 : int
+
+logic result1 : int
+
+logic test__test__result2 : int
+
+logic test__test__result3 : int
+
+logic test__test__result4 : int
+
+logic test__test__result5 : int
+
+logic test__test__result6 : int
+
+logic test__test__result7 : int
+
+logic test__test__result8 : int
+
+logic result2 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((test__test__result5 = test__test__result3) and
+  (test__test__result6 = test__test__result4)) and (((x = 0) ->
   (((test__test__result1 = test__test__result3) and
   (test__test__result4 = test__test__result1)) and
-  ((result = test__test__result) and (test__test__result1 = 0)))) or
-  ((not (x = 0)) and (((test__test__result2 = test__test__result3) and
+  ((result = test__test__result) and (test__test__result1 = 0)))) and
+  ((not (x = 0)) -> (((test__test__result2 = test__test__result3) and
   (test__test__result4 = test__test__result2)) and
-  ((result1 = test__test__result) and (test__test__result2 = 1)))))) and
-  ((test__test__result7 = test__test__result5) and
-  (test__test__result8 = test__test__result6))) and
-  (result2 = test__test__result7))) -> (test__test__result7 = 1))))
+  ((result1 = test__test__result) and (test__test__result2 = 1))))))
+
+axiom H2 : (test__test__result7 = test__test__result5)
+
+axiom H3 : (test__test__result8 = test__test__result6)
+
+axiom H4 : (result2 = test__test__result7)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (test__test__result7 = 1)

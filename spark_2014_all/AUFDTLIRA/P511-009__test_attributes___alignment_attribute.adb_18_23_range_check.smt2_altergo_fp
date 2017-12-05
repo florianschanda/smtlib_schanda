@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1354,6 +1354,56 @@ axiom temp___String_Literal_259__def_axiom :
   (to_rep((temp___String_Literal_259(void)[4])) = 116))
 
 axiom int____def_axiom : (int__ = 2)
+
+logic b : bool
+
+logic s : (int,character) farray
+
+logic m : int
+
+logic rt11 : r1
+
+logic rt2__split_fields : bool
+
+logic rst2__split_fields : bool
+
+logic rt3__split_fields : integer
+
+logic rt3__split_fields1 : us_private
+
+logic rt4__split_fields : integer
+
+logic rt4__split_fields1 : integer
+
+logic rt4__split_fields2 : us_private
+
+logic ca : (int,positive) farray
+
+logic ua : (int,natural) farray
+
+logic us : int
+
+logic us1 : int
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result2 : int
+
+logic m1 : int
+
+logic result3 : (int,positive) farray
+
+logic ca1 : (int,positive) farray
+
+logic result4 : (int,natural) farray
+
+logic ua1 : (int,natural) farray
 
  (* File "alignment_attribute.adb", line 33, characters 0-0 *)
 goal WP_parameter_def : in_range4(5)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -193,10 +193,51 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic result__ : int
+
+logic success : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : bool
+
+logic success1 : bool
+
+logic result1 : int
+
+logic result__1 : int
+
+logic result2 : bool
+
+logic success2 : bool
+
+logic result3 : int
+
+logic result__2 : int
+
+logic result__3 : int
+
+logic success3 : bool
+
+logic result__4 : int
+
+logic success4 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : ((3 <= 5) -> in_range3(result__))
+
+axiom H2 : (3 <= i)
+
+axiom H3 : (i <= 5)
+
+axiom H4 : (result = success)
+
+axiom H5 : (success1 = of_int(1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall success:bool. forall result:bool.
-  forall success1:bool. (in_range1(i) -> (((3 <= 5) ->
-  in_range3(result__)) -> (((3 <= i) and (i <= 5)) -> ((({ bool__content =
-  result } = { bool__content = success }) and (success1 = of_int(1))) ->
-  in_range2(i))))))
+goal WP_parameter_def : in_range2(i)

@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral64 ((x Float64)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float64) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float64) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort tframeB 0)
 (define-fun in_range ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
@@ -60,6 +60,7 @@
 (define-fun dynamic_invariant ((temp___expr_141 Int) (temp___is_init_138 Bool) (temp___skip_constant_139 Bool) (temp___do_toplevel_140 Bool)) Bool (=> (or (= temp___is_init_138 true) (<= 0 25000)) (in_range1 temp___expr_141)))
 (declare-const n Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const o Int)
 (assert (in_range1 n))
 (assert (not (in_range (* n n))))
 (check-sat)

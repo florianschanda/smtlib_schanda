@@ -113,10 +113,30 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic sat__add__result : int
+
+logic o : int
+
+logic result : int
+
+logic sat__add__result1 : int
+
+logic sat__add__result2 : int
+
+logic sat__add__result3 : int
+
+logic sat__add__result4 : int
+
+logic sat__add__result5 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
  (* File "sat.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> (in_range(y) -> (((bool_lt((x + y),
-  10000) = true) -> (((bool_ge((x + y), 10000) = true) ->
-  (((0 + 1) + 1) <= 1)) and ((not (bool_ge((x + y), 10000) = true)) ->
-  (((0 + 1) + 0) <= 1)))) and ((not (bool_lt((x + y), 10000) = true)) ->
-  (((bool_ge((x + y), 10000) = true) -> (((0 + 0) + 1) <= 1)) and
-  ((not (bool_ge((x + y), 10000) = true)) -> (((0 + 0) + 0) <= 1)))))))
+goal WP_parameter_def : (((bool_lt((x + y), 10000) = true) ->
+  (((bool_ge((x + y), 10000) = true) -> (((0 + 1) + 1) <= 1)) and
+  ((not (bool_ge((x + y), 10000) = true)) -> (((0 + 1) + 0) <= 1)))) and
+  ((not (bool_lt((x + y), 10000) = true)) -> (((bool_ge((x + y),
+  10000) = true) -> (((0 + 0) + 1) <= 1)) and ((not (bool_ge((x + y),
+  10000) = true)) -> (((0 + 0) + 0) <= 1)))))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -918,17 +918,17 @@ logic bool_eq13 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq13(a, b)].
-  ((((((to_rep(((a).us_split_discrs4).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__unused)) and
+  (((((to_rep(((a).us_split_discrs4).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__unused)) and
   (to_rep(((a).us_split_discrs4).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__c))) and
-  (bool_eq12(((a).us_split_fields5).rec__static_discr__holder__content,
-  ((b).us_split_fields5).rec__static_discr__holder__content) = true)) and
-  (to_rep(((a).us_split_fields5).rec__static_discr__holder__length) = to_rep(((b).us_split_fields5).rec__static_discr__holder__length))) ->
-  (bool_eq13(a, b) = true)) and
-  ((not ((((to_rep(((a).us_split_discrs4).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__unused)) and
-  (to_rep(((a).us_split_discrs4).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__c))) and
-  (bool_eq12(((a).us_split_fields5).rec__static_discr__holder__content,
-  ((b).us_split_fields5).rec__static_discr__holder__content) = true)) and
+  ((bool_eq12(((a).us_split_fields5).rec__static_discr__holder__content,
+  ((b).us_split_fields5).rec__static_discr__holder__content) = true) and
   (to_rep(((a).us_split_fields5).rec__static_discr__holder__length) = to_rep(((b).us_split_fields5).rec__static_discr__holder__length)))) ->
+  (bool_eq13(a, b) = true)) and
+  ((not (((to_rep(((a).us_split_discrs4).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__unused)) and
+  (to_rep(((a).us_split_discrs4).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs4).rec__static_discr__holder__c))) and
+  ((bool_eq12(((a).us_split_fields5).rec__static_discr__holder__content,
+  ((b).us_split_fields5).rec__static_discr__holder__content) = true) and
+  (to_rep(((a).us_split_fields5).rec__static_discr__holder__length) = to_rep(((b).us_split_fields5).rec__static_discr__holder__length))))) ->
   (bool_eq13(a, b) = false))))
 
 logic value__size5 : int
@@ -1346,17 +1346,17 @@ logic bool_eq17 : us_rep4, us_rep4 -> bool
 
 axiom bool_eq_def12 :
   (forall a2:us_rep4. forall b:us_rep4 [bool_eq17(a2, b)].
-  ((((((to_rep(((a2).us_split_discrs6).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__unused)) and
+  (((((to_rep(((a2).us_split_discrs6).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__unused)) and
   (to_rep(((a2).us_split_discrs6).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__c))) and
-  (bool_eq16(((a2).us_split_fields9).rec__static_discr__holder__content1,
-  ((b).us_split_fields9).rec__static_discr__holder__content1) = true)) and
-  (to_rep(((a2).us_split_fields9).rec__static_discr__holder__length1) = to_rep(((b).us_split_fields9).rec__static_discr__holder__length1))) ->
-  (bool_eq17(a2, b) = true)) and
-  ((not ((((to_rep(((a2).us_split_discrs6).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__unused)) and
-  (to_rep(((a2).us_split_discrs6).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__c))) and
-  (bool_eq16(((a2).us_split_fields9).rec__static_discr__holder__content1,
-  ((b).us_split_fields9).rec__static_discr__holder__content1) = true)) and
+  ((bool_eq16(((a2).us_split_fields9).rec__static_discr__holder__content1,
+  ((b).us_split_fields9).rec__static_discr__holder__content1) = true) and
   (to_rep(((a2).us_split_fields9).rec__static_discr__holder__length1) = to_rep(((b).us_split_fields9).rec__static_discr__holder__length1)))) ->
+  (bool_eq17(a2, b) = true)) and
+  ((not (((to_rep(((a2).us_split_discrs6).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__unused)) and
+  (to_rep(((a2).us_split_discrs6).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs6).rec__static_discr__holder__c))) and
+  ((bool_eq16(((a2).us_split_fields9).rec__static_discr__holder__content1,
+  ((b).us_split_fields9).rec__static_discr__holder__content1) = true) and
+  (to_rep(((a2).us_split_fields9).rec__static_discr__holder__length1) = to_rep(((b).us_split_fields9).rec__static_discr__holder__length1))))) ->
   (bool_eq17(a2, b) = false))))
 
 predicate in_range6(rec__static_discr__holder__unused1: int,
@@ -1769,17 +1769,17 @@ logic bool_eq21 : us_rep6, us_rep6 -> bool
 
 axiom bool_eq_def15 :
   (forall a2:us_rep6. forall b:us_rep6 [bool_eq21(a2, b)].
-  ((((((to_rep(((a2).us_split_discrs8).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__unused)) and
+  (((((to_rep(((a2).us_split_discrs8).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__unused)) and
   (to_rep(((a2).us_split_discrs8).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__c))) and
-  (bool_eq20(((a2).us_split_fields13).rec__static_discr__holder__content2,
-  ((b).us_split_fields13).rec__static_discr__holder__content2) = true)) and
-  (to_rep(((a2).us_split_fields13).rec__static_discr__holder__length2) = to_rep(((b).us_split_fields13).rec__static_discr__holder__length2))) ->
-  (bool_eq21(a2, b) = true)) and
-  ((not ((((to_rep(((a2).us_split_discrs8).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__unused)) and
-  (to_rep(((a2).us_split_discrs8).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__c))) and
-  (bool_eq20(((a2).us_split_fields13).rec__static_discr__holder__content2,
-  ((b).us_split_fields13).rec__static_discr__holder__content2) = true)) and
+  ((bool_eq20(((a2).us_split_fields13).rec__static_discr__holder__content2,
+  ((b).us_split_fields13).rec__static_discr__holder__content2) = true) and
   (to_rep(((a2).us_split_fields13).rec__static_discr__holder__length2) = to_rep(((b).us_split_fields13).rec__static_discr__holder__length2)))) ->
+  (bool_eq21(a2, b) = true)) and
+  ((not (((to_rep(((a2).us_split_discrs8).rec__static_discr__holder__unused) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__unused)) and
+  (to_rep(((a2).us_split_discrs8).rec__static_discr__holder__c) = to_rep(((b).us_split_discrs8).rec__static_discr__holder__c))) and
+  ((bool_eq20(((a2).us_split_fields13).rec__static_discr__holder__content2,
+  ((b).us_split_fields13).rec__static_discr__holder__content2) = true) and
+  (to_rep(((a2).us_split_fields13).rec__static_discr__holder__length2) = to_rep(((b).us_split_fields13).rec__static_discr__holder__length2))))) ->
   (bool_eq21(a2, b) = false))))
 
 predicate in_range8(rec__static_discr__holder__unused1: int,
@@ -2155,8 +2155,347 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic current__split_fields : natural
+
+logic current__split_fields1 : natural
+
+logic current__split_fields2 : (int,natural) farray
+
+logic current__split_fields3 : t3
+
+logic current__split_fields4 : natural
+
+logic result__ : int
+
+logic static_discr__search_array__result : int
+
+logic us : int
+
+logic us1 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : (int,natural) farray
+
+logic o9 : t5
+
+logic o10 : (int,natural) farray
+
+logic o11 : t5
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : (int,natural) farray
+
+logic o17 : t5
+
+logic o18 : natural
+
+logic o19 : natural
+
+logic o20 : (int,natural) farray
+
+logic o21 : t1
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic o24 : (int,natural) farray
+
+logic o25 : t1
+
+logic o26 : int
+
+logic o27 : natural
+
+logic o28 : natural
+
+logic o29 : natural
+
+logic o30 : (int,natural) farray
+
+logic o31 : t4
+
+logic o32 : natural
+
+logic o33 : natural
+
+logic o34 : (int,natural) farray
+
+logic o35 : t4
+
+logic o36 : natural
+
+logic o37 : natural
+
+logic o38 : natural
+
+logic o39 : natural
+
+logic o40 : natural
+
+logic o41 : natural
+
+logic o42 : natural
+
+logic o43 : (int,natural) farray
+
+logic o44 : t4
+
+logic o45 : natural
+
+logic o46 : natural
+
+logic o47 : natural
+
+logic o48 : natural
+
+logic o49 : natural
+
+logic o50 : (int,natural) farray
+
+logic o51 : t2
+
+logic o52 : natural
+
+logic o53 : natural
+
+logic o54 : natural
+
+logic o55 : natural
+
+logic o56 : natural
+
+logic o57 : (int,natural) farray
+
+logic o58 : t2
+
+logic o59 : natural
+
+logic static_discr__search_array__current__assume : natural
+
+logic static_discr__search_array__current__assume1 : natural
+
+logic static_discr__search_array__current__assume2 : natural
+
+logic static_discr__search_array__current__assume3 : natural
+
+logic static_discr__search_array__current__assume4 : (int,natural) farray
+
+logic static_discr__search_array__current__assume5 : t3
+
+logic static_discr__search_array__current__assume6 : natural
+
+logic temp___366 : int
+
+logic temp___365 : natural
+
+logic temp___3651 : natural
+
+logic temp___3652 : natural
+
+logic temp___3653 : natural
+
+logic temp___3654 : (int,natural) farray
+
+logic temp___3655 : t3
+
+logic temp___3656 : natural
+
+logic i : int
+
+logic o60 : int
+
+logic o61 : bool
+
+logic i1 : int
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : (int,natural) farray
+
+logic result3 : t3
+
+logic result4 : natural
+
+logic current__split_fields5 : natural
+
+logic current__split_fields6 : natural
+
+logic current__split_fields7 : (int,natural) farray
+
+logic current__split_fields8 : t3
+
+logic current__split_fields9 : natural
+
+logic result5 : int
+
+logic result__1 : int
+
+logic current__split_fields10 : natural
+
+logic current__split_fields11 : natural
+
+logic current__split_fields12 : (int,natural) farray
+
+logic current__split_fields13 : t3
+
+logic current__split_fields14 : natural
+
+logic result__2 : int
+
+logic result6 : bool
+
+logic current__split_fields15 : natural
+
+logic current__split_fields16 : natural
+
+logic current__split_fields17 : (int,natural) farray
+
+logic current__split_fields18 : t3
+
+logic current__split_fields19 : natural
+
+logic result__3 : int
+
+logic current__split_fields20 : natural
+
+logic current__split_fields21 : natural
+
+logic current__split_fields22 : (int,natural) farray
+
+logic current__split_fields23 : t3
+
+logic current__split_fields24 : natural
+
+logic result__4 : int
+
+logic current__split_fields25 : natural
+
+logic current__split_fields26 : natural
+
+logic current__split_fields27 : (int,natural) farray
+
+logic current__split_fields28 : t3
+
+logic current__split_fields29 : natural
+
+logic result__5 : int
+
+logic current__split_fields30 : natural
+
+logic current__split_fields31 : natural
+
+logic current__split_fields32 : (int,natural) farray
+
+logic current__split_fields33 : t3
+
+logic current__split_fields34 : natural
+
+logic result__6 : int
+
+logic current__split_fields35 : natural
+
+logic current__split_fields36 : natural
+
+logic current__split_fields37 : (int,natural) farray
+
+logic current__split_fields38 : t3
+
+logic current__split_fields39 : natural
+
+logic result__7 : int
+
+logic current__split_fields40 : natural
+
+logic current__split_fields41 : natural
+
+logic current__split_fields42 : (int,natural) farray
+
+logic current__split_fields43 : t3
+
+logic current__split_fields44 : natural
+
+logic result__8 : int
+
+logic current__split_fields45 : natural
+
+logic current__split_fields46 : natural
+
+logic current__split_fields47 : (int,natural) farray
+
+logic current__split_fields48 : t3
+
+logic current__split_fields49 : natural
+
+logic result__9 : int
+
+logic result7 : int
+
+logic static_discr__search_array__result1 : int
+
+logic static_discr__search_array__result2 : int
+
+logic static_discr__search_array__result3 : int
+
+logic current__split_fields50 : natural
+
+logic current__split_fields51 : natural
+
+logic current__split_fields52 : (int,natural) farray
+
+logic current__split_fields53 : t3
+
+logic current__split_fields54 : natural
+
+logic result__10 : int
+
+logic static_discr__search_array__result4 : int
+
+logic current__split_fields55 : natural
+
+logic current__split_fields56 : natural
+
+logic current__split_fields57 : (int,natural) farray
+
+logic current__split_fields58 : t3
+
+logic current__split_fields59 : natural
+
+logic result__11 : int
+
+logic static_discr__search_array__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range2(e)
+
+axiom H2 : ((to_rep1(first(a1)) = 1) and ((0 <= to_rep1(last(a1))) and
+  (to_rep1(last(a1)) <= 100)))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(first(a1)),
-  to_rep1(last(a1))) -> (in_range2(e) -> (((to_rep1(first(a1)) = 1) and
-  ((0 <= to_rep1(last(a1))) and (to_rep1(last(a1)) <= 100))) ->
-  in_range2(to_rep1(last(a1))))))
+goal WP_parameter_def : in_range2(to_rep1(last(a1)))

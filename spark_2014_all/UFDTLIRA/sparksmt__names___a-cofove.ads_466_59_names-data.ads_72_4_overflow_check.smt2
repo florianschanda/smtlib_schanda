@@ -188,6 +188,7 @@
 (declare-const container__split_fields us_main_type)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range1 count))
 (assert (and (= o (capacity (mk___rep container__split_discrs (mk___split_fields container__split_fields)))) (and (in_range2 o) (= o (ite (= (of_int 0) true) (to_rep (rec__names__data__entry_tables__vector__capacity container__split_discrs)) 2147483647)))))
 (assert (= o1 (- o count)))

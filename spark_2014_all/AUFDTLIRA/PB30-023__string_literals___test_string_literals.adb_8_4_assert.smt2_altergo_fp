@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -424,15 +424,36 @@ axiom temp___String_Literal_183__def_axiom :
   (to_rep((temp___String_Literal_183(void)[7])) = 116)) and
   (to_rep((temp___String_Literal_183(void)[8])) = 111))
 
+logic s : (int,character) farray
+
+logic t1 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic t2 : (int,character) farray
+
+axiom H : (result = s)
+
+axiom H1 : (s1 = temp___String_Literal_181(void))
+
+axiom H2 : (to_rep1(s__first) = to_rep1(first(mk(1, 4))))
+
+axiom H3 : (to_rep1(s__last) = to_rep1(last(mk(1, 4))))
+
+axiom H4 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H5 : (result1 = t1)
+
+axiom H6 : (t2 = temp___String_Literal_183(void))
+
+axiom H7 : (to_rep1(first((id({ elts = s1; rt = mk(to_rep1(s__first),
+  to_rep1(s__last)) })).rt)) = 1)
+
  (* File "test_string_literals.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:(int,character) farray. forall t1:(int,character) farray.
-  forall result:(int,character) farray. forall s1:(int,character) farray.
-  forall result1:(int,character) farray. forall t2:(int,character) farray.
-  ((((result = s) and (s1 = temp___String_Literal_181(void))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 4)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 4)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result1 = t1) and
-  (t2 = temp___String_Literal_183(void))) -> ((to_rep1(first((id({ elts = s1;
-  rt = mk(to_rep1(s__first), to_rep1(s__last)) })).rt)) = 1) ->
-  (to_rep1(first((id({ elts = t2; rt = mk(5, 8) })).rt)) = 5))))))
+goal WP_parameter_def : (to_rep1(first((id({ elts = t2; rt = mk(5, 8)
+  })).rt)) = 5)

@@ -269,7 +269,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -494,18 +494,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1638,20 +1638,75 @@ axiom w_get__post_axiom :
   ((in_range4(witness1) and (has_witness(container, witness1) = true)) ->
   in_range9(w_get(container, witness1)))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result:bool. (((100 = to_rep3(m)) and (r258s = to_rep2(m1))) ->
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range1(e) -> (in_range2(last2) -> ((0 <  length({ elts = a; rt = a1
-  })) -> (((result = has_key(model__({ us_split_discrs1 = {
+logic find_map__find_upto__find_map_bad__result : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : bool
+
+logic o8 : int
+
+logic o9 : int
+
+logic i1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic find_map__find_upto__find_map_bad__result1 : int
+
+logic find_map__find_upto__find_map_bad__result2 : int
+
+logic find_map__find_upto__find_map_bad__result3 : int
+
+logic find_map__find_upto__find_map_bad__result4 : int
+
+logic find_map__find_upto__find_map_bad__result5 : int
+
+axiom H : ((100 = to_rep3(m)) and (r258s = to_rep2(m1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H2 : in_range1(e)
+
+axiom H3 : in_range2(last2)
+
+axiom H4 : (0 <  length({ elts = a; rt = a1 }))
+
+axiom H5 : ((result1 = has_key(model__({ us_split_discrs1 = {
   rec__find_map__index_maps__map__capacity = m;
   rec__find_map__index_maps__map__modulus = m1 }; us_split_fields1 = {
-  rec__find_map__index_maps__map = m2 } }), e)) and ((result = true) <->
+  rec__find_map__index_maps__map = m2 } }), e)) and ((result1 = true) <->
   (has_key(model__({ us_split_discrs1 = {
   rec__find_map__index_maps__map__capacity = m;
   rec__find_map__index_maps__map__modulus = m1 }; us_split_fields1 = {
-  rec__find_map__index_maps__map = m2 } }), e) = true))) ->
-  ((result = true) -> (has_key(model__({ us_split_discrs1 = {
+  rec__find_map__index_maps__map = m2 } }), e) = true)))
+
+axiom H6 : (result1 = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (has_key(model__({ us_split_discrs1 = {
   rec__find_map__index_maps__map__capacity = m;
   rec__find_map__index_maps__map__modulus = m1 }; us_split_fields1 = {
-  rec__find_map__index_maps__map = m2 } }), e) = true)))))))))
+  rec__find_map__index_maps__map = m2 } }), e) = true)

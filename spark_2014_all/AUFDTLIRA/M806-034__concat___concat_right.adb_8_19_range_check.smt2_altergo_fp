@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -307,14 +307,62 @@ logic z__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic z : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : (int,integer) farray
+
+logic concat_right__one__z__assume : (int,integer) farray
+
+logic concat_right__one__z__assume1 : t
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic result : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+axiom H : in_range(x)
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(y1)),
+  to_rep(last(y1)))
+
+axiom H2 : ((to_rep(last(y1)) <  2147483647) and
+  (to_rep(first(y1)) <= to_rep(last(y1))))
+
+axiom H3 : (not (length({ elts = y; rt = y1 }) = 0))
+
+axiom H4 : ((to_rep(first(y1)) <= to_rep(last(y1))) ->
+  (o4 = ((to_rep(last(y1)) - to_rep(first(y1))) + 1)))
+
+axiom H5 : ((not (to_rep(first(y1)) <= to_rep(last(y1)))) -> (o4 = 0))
+
+axiom H6 : (o5 = (o4 + 1))
+
+axiom H7 : (o6 = (to_rep(first(y1)) + o5))
+
+axiom H8 : (o7 = (o6 - 1))
+
  (* File "concat_right.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. (in_range(x) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(y1)),
-  to_rep(last(y1))) -> (((to_rep(last(y1)) <  2147483647) and
-  (to_rep(first(y1)) <= to_rep(last(y1)))) -> ((not (length({ elts = y; rt =
-  y1 }) = 0)) -> (((((((to_rep(first(y1)) <= to_rep(last(y1))) and
-  (o = ((to_rep(last(y1)) - to_rep(first(y1))) + 1))) or
-  ((not (to_rep(first(y1)) <= to_rep(last(y1)))) and (o = 0))) and
-  (o1 = (o + 1))) and (o2 = (to_rep(first(y1)) + o1))) and
-  (o3 = (o2 - 1))) -> in_range(o3)))))))
+goal WP_parameter_def : in_range(o7)

@@ -900,5 +900,19 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length3(container2))))) ->
   in_range8(get(container2, position)))))
 
+logic temp___656 : us_rep1
+
+logic e : int
+
+logic o : bool
+
+axiom H : in_range5(key1)
+
+axiom H1 : ((temp___656 = model__({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = container }; us_split_fields1 = {
+  rec__p__my_sets__set = container1 } })) and (length2(temp___656) = length({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = container };
+  us_split_fields1 = { rec__p__my_sets__set = container1 } })))
+
  (* File "a-cforse.ads", line 1750, characters 0-0 *)
 goal WP_parameter_def : true

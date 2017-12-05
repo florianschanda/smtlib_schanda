@@ -1686,36 +1686,95 @@ axiom is_valid_speed_km_per_h__def_axiom :
 axiom maximum_valid_speed__def_axiom :
   (maximum_valid_speed = m_per_s_from_km_per_h(fliteral4))
 
+logic initial_speed : t
+
+logic target__split_fields : bool
+
+logic target__split_fields1 : distance_t
+
+logic target__split_fields2 : speed_t
+
+logic o : t
+
+logic o1 : speed_t
+
+logic o2 : distance_t
+
+logic o3 : bool
+
+logic o4 : distance_t
+
+logic o5 : speed_t
+
+logic deceleration_curve_test__target__assume : bool
+
+logic deceleration_curve_test__target__assume1 : distance_t
+
+logic deceleration_curve_test__target__assume2 : speed_t
+
+logic o6 : int
+
+logic result : t
+
+logic initial_speed1 : t
+
+logic result1 : bool
+
+logic result2 : distance_t
+
+logic result3 : speed_t
+
+logic target__split_fields3 : bool
+
+logic target__split_fields4 : distance_t
+
+logic target__split_fields5 : speed_t
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 160.0))
 
- (* File "deceleration_curve_test.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall initial_speed:t. forall target__split_fields:bool.
-  forall target__split_fields1:distance_t.
-  forall target__split_fields2:speed_t. forall o:t. forall o1:speed_t.
-  forall o2:distance_t. forall o3:bool. forall o4:distance_t.
-  forall o5:speed_t. forall deceleration_curve_test__target__assume:bool.
-  forall deceleration_curve_test__target__assume1:distance_t.
-  forall deceleration_curve_test__target__assume2:speed_t. forall result:t.
-  forall initial_speed1:t. forall result1:bool. forall result2:distance_t.
-  forall result3:speed_t. forall target__split_fields3:bool.
-  forall target__split_fields4:distance_t.
-  forall target__split_fields5:speed_t.
-  ((((o = m_per_s_from_km_per_h(fliteral5)) and (tqtisFinite(o) and
+axiom H : ((o = m_per_s_from_km_per_h(fliteral5)) and (tqtisFinite(o) and
   (o = div(NearestTiesToEven, mul(NearestTiesToEven, fliteral5, fliteral1),
-  fliteral2)))) and ((result = initial_speed) and (initial_speed1 = o))) ->
-  (tqtisFinite(initial_speed1) -> (((((to_rep(o1) = fliteral3) and
-  ((to_rep1(o2) = 2500) and ((of_int1(1) = o3) and ((o2 = o4) and
-  (o1 = o5))))) and ((deceleration_curve_test__target__assume = o3) and
-  ((deceleration_curve_test__target__assume1 = o4) and
-  (deceleration_curve_test__target__assume2 = o5)))) and
-  (((result1 = target__split_fields) and
-  ((result2 = target__split_fields1) and
-  (result3 = target__split_fields2))) and
-  ((deceleration_curve_test__target__assume = target__split_fields3) and
-  ((deceleration_curve_test__target__assume1 = target__split_fields4) and
-  (deceleration_curve_test__target__assume2 = target__split_fields5))))) ->
-  (distance_to_speed(initial_speed1, fliteral3, neg(fliteral)) = 1000)))))
+  fliteral2))))
+
+axiom H1 : (result = initial_speed)
+
+axiom H2 : (initial_speed1 = o)
+
+axiom H3 : tqtisFinite(initial_speed1)
+
+axiom H4 : (to_rep(o1) = fliteral3)
+
+axiom H5 : (to_rep1(o2) = 2500)
+
+axiom H6 : (of_int1(1) = o3)
+
+axiom H7 : (o2 = o4)
+
+axiom H8 : (o1 = o5)
+
+axiom H9 : (deceleration_curve_test__target__assume = o3)
+
+axiom H10 : (deceleration_curve_test__target__assume1 = o4)
+
+axiom H11 : (deceleration_curve_test__target__assume2 = o5)
+
+axiom H12 : (result1 = target__split_fields)
+
+axiom H13 : (result2 = target__split_fields1)
+
+axiom H14 : (result3 = target__split_fields2)
+
+axiom H15 : (deceleration_curve_test__target__assume = target__split_fields3)
+
+axiom H16 :
+  (deceleration_curve_test__target__assume1 = target__split_fields4)
+
+axiom H17 :
+  (deceleration_curve_test__target__assume2 = target__split_fields5)
+
+ (* File "deceleration_curve_test.adb", line 5, characters 0-0 *)
+goal WP_parameter_def : (distance_to_speed(initial_speed1, fliteral3,
+  neg(fliteral)) = 1000)

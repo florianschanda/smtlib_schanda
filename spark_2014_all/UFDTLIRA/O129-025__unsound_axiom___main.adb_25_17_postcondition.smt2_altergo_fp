@@ -367,5 +367,29 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom null_node__def_axiom : ((null_node = of_rep(0)) and
   (null_node1 = false))
 
+logic branch__split_fields : bool
+
+logic o : node_enum
+
+logic o1 : node_enum
+
+logic usq_ : node_enum
+
+logic usq_1 : bool
+
+logic o2 : node_enum
+
+logic o3 : bool
+
+logic o4 : node_enum
+
+logic o5 : bool
+
+logic temp___199 : node_enum
+
+logic temp___1991 : bool
+
+axiom H : false
+
  (* File "main.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

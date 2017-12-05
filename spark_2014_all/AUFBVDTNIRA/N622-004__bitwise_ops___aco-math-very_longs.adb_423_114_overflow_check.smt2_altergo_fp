@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1159,7 +1159,7 @@ axiom compare_def_gt :
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1972,15 +1972,151 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "aco-math-very_longs.adb", line 398, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall u__split_fields:(int,octet) farray.
-  forall u__split_fields1:t3. forall v__split_fields:(int,octet) farray.
-  forall v__split_fields1:t4. forall j:int. ((dynamic_property1(1,
-  to_rep1(divisor), to_rep2(first(divisor2)), to_rep2(last(divisor2))) and
-  ((to_rep2(first(divisor2)) = 1) and
-  (to_rep2(last(divisor2)) = to_rep1(divisor)))) -> (dynamic_property2(1,
-  last2, n) -> (((((2 * to_rep1(divisor)) + 1) = to_rep1(((to_base({
+logic n : int
+
+logic u__split_fields : (int,octet) farray
+
+logic u__split_fields1 : t3
+
+logic v__split_fields : (int,octet) farray
+
+logic v__split_fields1 : t4
+
+logic j : int
+
+logic q_hat : t1
+
+logic temporary_digit : t1
+
+logic r_hat : t1
+
+logic o : int
+
+logic temp___1520 : int
+
+logic o1 : int
+
+logic o2 : octet
+
+logic o3 : t
+
+logic o4 : t1
+
+logic o5 : int
+
+logic temp___1522 : int
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : t1
+
+logic o10 : t1
+
+logic o11 : t1
+
+logic o12 : int
+
+logic o13 : octet
+
+logic o14 : t
+
+logic o15 : t1
+
+logic o16 : t1
+
+logic o17 : int
+
+logic o18 : octet
+
+logic o19 : t
+
+logic o20 : t1
+
+logic o21 : t1
+
+logic o22 : int
+
+logic o23 : octet
+
+logic o24 : t
+
+logic o25 : t1
+
+logic o26 : int
+
+logic temp___1530 : int
+
+logic o27 : int
+
+logic o28 : octet
+
+logic o29 : t
+
+logic o30 : t1
+
+logic o31 : t1
+
+logic o32 : t1
+
+logic o33 : bool
+
+logic o34 : int
+
+logic o35 : octet
+
+logic o36 : t
+
+logic o37 : t1
+
+logic o38 : t1
+
+logic o39 : int
+
+logic temp___1536 : int
+
+logic o40 : int
+
+logic o41 : octet
+
+logic o42 : t
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic result : t1
+
+logic temporary_digit1 : t1
+
+logic result1 : t1
+
+logic q_hat1 : t1
+
+logic result2 : t1
+
+logic r_hat1 : t1
+
+logic result3 : bool
+
+logic result4 : t1
+
+logic q_hat2 : t1
+
+logic result5 : t1
+
+logic r_hat2 : t1
+
+axiom H : (dynamic_property1(1, to_rep1(divisor), to_rep2(first(divisor2)),
+  to_rep2(last(divisor2))) and ((to_rep2(first(divisor2)) = 1) and
+  (to_rep2(last(divisor2)) = to_rep1(divisor))))
+
+axiom H1 : dynamic_property2(1, last2, n)
+
+axiom H2 : ((((2 * to_rep1(divisor)) + 1) = to_rep1(((to_base({
   us_split_discrs2 = { rec__aco__math__very_longs__very_long__octet_length =
   u__split_discrs }; us_split_fields3 = {
   rec__aco__math__very_longs__very_long__long_digits1 = { elts1 =
@@ -1989,8 +2125,9 @@ goal WP_parameter_def :
   (dynamic_property4(1, ((2 * to_rep1(divisor)) + 1),
   to_rep2(first2(u__split_fields1)), to_rep2(last3(u__split_fields1))) and
   ((to_rep2(first2(u__split_fields1)) = 1) and
-  (to_rep2(last3(u__split_fields1)) = ((2 * to_rep1(divisor)) + 1))))) ->
-  (((to_rep1(divisor) = to_rep1(((to_base1({ us_split_discrs3 = {
+  (to_rep2(last3(u__split_fields1)) = ((2 * to_rep1(divisor)) + 1)))))
+
+axiom H3 : ((to_rep1(divisor) = to_rep1(((to_base1({ us_split_discrs3 = {
   rec__aco__math__very_longs__very_long__octet_length = v__split_discrs };
   us_split_fields5 = { rec__aco__math__very_longs__very_long__long_digits2 =
   { elts2 = v__split_fields; rt2 = v__split_fields1 } }
@@ -1998,5 +2135,15 @@ goal WP_parameter_def :
   (dynamic_property6(1, to_rep1(divisor), to_rep2(first4(v__split_fields1)),
   to_rep2(last5(v__split_fields1))) and
   ((to_rep2(first4(v__split_fields1)) = 1) and
-  (to_rep2(last5(v__split_fields1)) = to_rep1(divisor))))) ->
-  (in_range2(j) -> in_range1((j + n))))))))
+  (to_rep2(last5(v__split_fields1)) = to_rep1(divisor)))))
+
+axiom H4 : in_range2(j)
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+ (* File "aco-math-very_longs.adb", line 398, characters 0-0 *)
+goal WP_parameter_def : in_range1((j + n))

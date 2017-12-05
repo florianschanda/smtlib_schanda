@@ -272,7 +272,27 @@ type tTcontentSP1__ref = { tTcontentSP1__content : tTcontentSP1
 function tTcontentSP1__ref___projection(a: tTcontentSP1__ref) : tTcontentSP1 =
   (a).tTcontentSP1__content
 
+logic e : int
+
+logic top : int
+
+logic content : (int,element) farray
+
+logic o : int
+
+logic o1 : element
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : int
+
+logic e1 : int
+
+axiom H : in_range(top)
+
+axiom H1 : ((1 <= 2147483647) -> in_range1(e))
+
  (* File "stack.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e:int. forall top:int. (in_range(top) -> (((1 <= 2147483647) ->
-  in_range1(e)) -> (1 <= top))))
+goal WP_parameter_def : (1 <= top)

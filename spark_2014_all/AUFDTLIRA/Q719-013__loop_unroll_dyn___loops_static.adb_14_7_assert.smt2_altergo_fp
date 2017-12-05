@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -475,46 +475,142 @@ logic a_begins1 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "loops_static.adb", line 160, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall i:int.
-  forall temp___283:(int,natural) farray. forall o:natural. forall o1:int.
-  forall o2:(int,natural) farray. forall o3:(int,natural) farray.
-  forall temp___281:(int,natural) farray. forall temp___2811:t1.
-  forall loops_static__loop1__B_2__a_begins__assume:(int,natural) farray.
-  forall loops_static__loop1__B_2__a_begins__assume1:t.
-  forall a1:(int,natural) farray. forall result:int. forall i1:int.
-  forall a2:(int,natural) farray. forall i2:int.
-  forall result1:(int,natural) farray. forall a3:(int,natural) farray.
-  forall a4:(int,natural) farray. forall i3:int.
-  forall a5:(int,natural) farray. forall i4:int.
-  forall a6:(int,natural) farray. forall i5:int.
-  forall a7:(int,natural) farray. forall i6:int.
-  (dynamic_property((-2147483648), 2147483647, to_rep1(a__first),
-  to_rep1(a__last)) -> (not ((({ int__content = result } = { int__content = i
-  }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= 2)) and
-  ((((temp___283 = a) and
-  (((forall temp___284:int. (((to_rep1(a__first) <= temp___284) and
-    (temp___284 <= to_rep1(a__last))) -> ((i2 <= temp___284) ->
-    ((a2[temp___284]) = (temp___283[temp___284]))))) and
-  ((1 <= i2) and (i2 <= 2))) and ((((to_rep(o) = 0) and
-  ((((to_rep1(a__first) <= i2) and (i2 <= to_rep1(a__last))) and
-  (o1 = i2)) and (o2 = (a2[o1 <- o])))) and ((a2 = result1) and
-  (a3 = o2))) and ((((((((to_rep1(a__first) <= i2) ->
+logic a : (int,natural) farray
+
+logic i : int
+
+logic temp___283 : (int,natural) farray
+
+logic o : natural
+
+logic o1 : int
+
+logic o2 : (int,natural) farray
+
+logic o3 : (int,natural) farray
+
+logic temp___281 : (int,natural) farray
+
+logic temp___2811 : t1
+
+logic loops_static__loop1__B_2__a_begins__assume : (int,natural) farray
+
+logic loops_static__loop1__B_2__a_begins__assume1 : t
+
+logic i1 : int
+
+logic a1 : (int,natural) farray
+
+logic result : int
+
+logic i2 : int
+
+logic a2 : (int,natural) farray
+
+logic i3 : int
+
+logic result1 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic a4 : (int,natural) farray
+
+logic i4 : int
+
+logic a5 : (int,natural) farray
+
+logic i5 : int
+
+logic a6 : (int,natural) farray
+
+logic i6 : int
+
+logic a7 : (int,natural) farray
+
+logic i7 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : (result = i)
+
+axiom H2 : (i2 = 1)
+
+axiom H3 : (((1 <= i2) and (i2 <= 2)) -> (temp___283 = a))
+
+axiom H4 : (((1 <= i2) and (i2 <= 2)) ->
+  ((forall temp___284:int. (((to_rep1(a__first) <= temp___284) and
+   (temp___284 <= to_rep1(a__last))) -> ((i3 <= temp___284) ->
+   ((a2[temp___284]) = (temp___283[temp___284]))))) and ((1 <= i3) and
+  (i3 <= 2))))
+
+axiom H5 : (((1 <= i2) and (i2 <= 2)) -> (to_rep(o) = 0))
+
+axiom H6 : (((1 <= i2) and (i2 <= 2)) -> ((to_rep1(a__first) <= i3) and
+  (i3 <= to_rep1(a__last))))
+
+axiom H7 : (((1 <= i2) and (i2 <= 2)) -> (o1 = i3))
+
+axiom H8 : (((1 <= i2) and (i2 <= 2)) -> (o2 = (a2[o1 <- o])))
+
+axiom H9 : (((1 <= i2) and (i2 <= 2)) -> (a2 = result1))
+
+axiom H10 : (((1 <= i2) and (i2 <= 2)) -> (a3 = o2))
+
+axiom H11 : (((1 <= i2) and (i2 <= 2)) -> ((to_rep1(a__first) <= i3) ->
   (((to_rep1(a__first) <= to_rep1(a__first)) and
-  (to_rep1(a__first) <= to_rep1(a__last))) and ((to_rep1(a__first) <= i2) and
-  (i2 <= to_rep1(a__last))))) and (o3 = a3)) and ((o3 = temp___281) and
-  (mk1(to_rep1(a__first), i2) = temp___2811))) and
-  ((temp___281 = loops_static__loop1__B_2__a_begins__assume) and
-  (mk(to_rep1(first2(temp___2811)),
-  to_rep1(last2(temp___2811))) = loops_static__loop1__B_2__a_begins__assume1))) and
-  ((a_begins = loops_static__loop1__B_2__a_begins__assume) and
-  (a_begins1 = loops_static__loop1__B_2__a_begins__assume1))) and
-  dynamic_property((-2147483648), 2147483647, to_rep1(first(a_begins1)),
-  to_rep1(last(a_begins1)))) and
-  ((forall i7:int. (((to_rep1(first(a_begins1)) <= i7) and
-   (i7 <= to_rep1(last(a_begins1)))) -> (to_rep((a_begins[i7])) = 0))) and
-  (i2 = 2)))))) and (((i2 = i3) and (a3 = a4)) and ((i4 = i2) and
-  (a5 = a3)))) and (((i5 = i3) and (a4 = a6)) and ((i6 = i4) and
-  (a7 = a5))))) or ((not ((1 <= i1) and (i1 <= 2))) and (((i1 = i5) and
-  (a = a6)) and ((i6 = i1) and (a7 = a1)))))))))
+  (to_rep1(a__first) <= to_rep1(a__last))) and ((to_rep1(a__first) <= i3) and
+  (i3 <= to_rep1(a__last))))))
+
+axiom H12 : (((1 <= i2) and (i2 <= 2)) -> (o3 = a3))
+
+axiom H13 : (((1 <= i2) and (i2 <= 2)) -> (o3 = temp___281))
+
+axiom H14 : (((1 <= i2) and (i2 <= 2)) -> (mk1(to_rep1(a__first),
+  i3) = temp___2811))
+
+axiom H15 : (((1 <= i2) and (i2 <= 2)) ->
+  (temp___281 = loops_static__loop1__B_2__a_begins__assume))
+
+axiom H16 : (((1 <= i2) and (i2 <= 2)) -> (mk(to_rep1(first2(temp___2811)),
+  to_rep1(last2(temp___2811))) = loops_static__loop1__B_2__a_begins__assume1))
+
+axiom H17 : (((1 <= i2) and (i2 <= 2)) ->
+  ((loops_static__loop1__B_2__a_begins__assume = a_begins) and
+  (loops_static__loop1__B_2__a_begins__assume1 = a_begins1)))
+
+axiom H18 : (((1 <= i2) and (i2 <= 2)) -> dynamic_property((- 2147483648),
+  2147483647, to_rep1(first(a_begins1)), to_rep1(last(a_begins1))))
+
+axiom H19 : (((1 <= i2) and (i2 <= 2)) ->
+  (forall i8:int. (((to_rep1(first(a_begins1)) <= i8) and
+  (i8 <= to_rep1(last(a_begins1)))) -> (to_rep((a_begins[i8])) = 0))))
+
+axiom H20 : (((1 <= i2) and (i2 <= 2)) -> (i3 = 2))
+
+axiom H21 : (((1 <= i2) and (i2 <= 2)) -> (i3 = i4))
+
+axiom H22 : (((1 <= i2) and (i2 <= 2)) -> (a3 = a4))
+
+axiom H23 : (((1 <= i2) and (i2 <= 2)) -> (i5 = i3))
+
+axiom H24 : (((1 <= i2) and (i2 <= 2)) -> (a5 = a3))
+
+axiom H25 : (((1 <= i2) and (i2 <= 2)) -> (i6 = i4))
+
+axiom H26 : (((1 <= i2) and (i2 <= 2)) -> (a6 = a4))
+
+axiom H27 : (((1 <= i2) and (i2 <= 2)) -> (i7 = i5))
+
+axiom H28 : (((1 <= i2) and (i2 <= 2)) -> (a7 = a5))
+
+axiom H29 : ((not ((1 <= i2) and (i2 <= 2))) -> (i2 = i6))
+
+axiom H30 : ((not ((1 <= i2) and (i2 <= 2))) -> (a6 = a))
+
+axiom H31 : ((not ((1 <= i2) and (i2 <= 2))) -> (i7 = i2))
+
+axiom H32 : ((not ((1 <= i2) and (i2 <= 2))) -> (a7 = a1))
+
+ (* File "loops_static.adb", line 160, characters 0-0 *)
+goal WP_parameter_def : false

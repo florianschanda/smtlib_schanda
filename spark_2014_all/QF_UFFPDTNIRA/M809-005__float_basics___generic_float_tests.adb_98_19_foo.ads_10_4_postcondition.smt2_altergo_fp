@@ -1117,29 +1117,56 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic foo__float_tests__underflow_2__result : bool
+
+logic o : t
+
+logic result : bool
+
+logic foo__float_tests__underflow_2__result1 : bool
+
+logic foo__float_tests__underflow_2__result2 : bool
+
+logic foo__float_tests__underflow_2__result3 : bool
+
+logic foo__float_tests__underflow_2__result4 : bool
+
+logic foo__float_tests__underflow_2__result5 : bool
+
+logic result1 : bool
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom H2 : eq(mul(NearestTiesToEven, a, b), fliteral1)
+
+axiom H3 :
+  (foo__float_tests__underflow_2__result1 = foo__float_tests__underflow_2__result2)
+
+axiom H4 :
+  (foo__float_tests__underflow_2__result3 = foo__float_tests__underflow_2__result1)
+
+axiom H5 : (result = foo__float_tests__underflow_2__result)
+
+axiom H6 : ((eq(a, fliteral1) ->
+  (foo__float_tests__underflow_2__result1 = true)) and ((not eq(a,
+  fliteral1)) -> ((eq(b, fliteral1) ->
+  (foo__float_tests__underflow_2__result1 = true)) and ((not eq(b,
+  fliteral1)) -> (foo__float_tests__underflow_2__result1 = false)))))
+
+axiom H7 :
+  (foo__float_tests__underflow_2__result4 = foo__float_tests__underflow_2__result2)
+
+axiom H8 :
+  (foo__float_tests__underflow_2__result5 = foo__float_tests__underflow_2__result3)
+
+axiom H9 : (result1 = foo__float_tests__underflow_2__result4)
+
  (* File "generic_float_tests.adb", line 96, characters 0-0 *)
-goal WP_parameter_def :
-  (forall foo__float_tests__underflow_2__result:bool. forall result:bool.
-  forall foo__float_tests__underflow_2__result1:bool.
-  forall foo__float_tests__underflow_2__result2:bool.
-  forall foo__float_tests__underflow_2__result3:bool.
-  forall foo__float_tests__underflow_2__result4:bool.
-  forall foo__float_tests__underflow_2__result5:bool.
-  (forall result1:bool. ((tqtisFinite(a) and (tqtisFinite(b) and
-  (eq(mul(NearestTiesToEven, a, b), fliteral1) and
-  (((((foo__float_tests__underflow_2__result1 = foo__float_tests__underflow_2__result2) and
-  (foo__float_tests__underflow_2__result3 = foo__float_tests__underflow_2__result1)) and
-  ((result = foo__float_tests__underflow_2__result) and ((eq(a,
-  fliteral1) and (foo__float_tests__underflow_2__result1 = true)) or
-  ((not eq(a, fliteral1)) and ((eq(b, fliteral1) and
-  (foo__float_tests__underflow_2__result1 = true)) or ((not eq(b,
-  fliteral1)) and (foo__float_tests__underflow_2__result1 = false))))))) and
-  ((foo__float_tests__underflow_2__result4 = foo__float_tests__underflow_2__result2) and
-  (foo__float_tests__underflow_2__result5 = foo__float_tests__underflow_2__result3))) and
-  (result1 = foo__float_tests__underflow_2__result4))))) ->
-  (foo__float_tests__underflow_2__result4 = true))))
+goal WP_parameter_def : (foo__float_tests__underflow_2__result4 = true)

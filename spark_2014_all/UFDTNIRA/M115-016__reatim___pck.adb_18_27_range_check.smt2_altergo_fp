@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -217,7 +217,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tuint_64B
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -290,6 +290,107 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic v_hi : int
+
+logic v_lo : int
+
+logic result_hi : int
+
+logic result_lo : int
+
+logic remainder : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic result : int
+
+logic v_hi1 : int
+
+logic result1 : int
+
+logic v_lo1 : int
+
+logic result2 : int
+
+logic v_hi2 : int
+
+logic result3 : int
+
+logic v_lo2 : int
+
+logic result4 : int
+
+logic v_hi3 : int
+
+logic result5 : int
+
+logic v_lo3 : int
+
+logic result6 : int
+
+logic result_hi1 : int
+
+logic result7 : int
+
+logic remainder1 : int
+
+logic result8 : int
+
+logic result_hi2 : int
+
+logic result9 : int
+
+logic result_lo1 : int
+
+axiom H : in_range2(v)
+
+axiom H1 : in_range(m)
+
+axiom H2 : in_range(d)
+
+axiom H3 : (not (d = 0))
+
  (* File "pck.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range2(v) -> (in_range(m) -> (in_range(d) ->
-  ((not (d = 0)) -> in_range2(comp_div(v,4294967296))))))
+goal WP_parameter_def : in_range2(comp_div(v,4294967296))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -295,7 +295,7 @@ axiom coerce_axiom1 :
 
 type element_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -597,19 +597,19 @@ logic bool_eq8 : us_rep, us_rep -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
-  (((((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__count))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__front))) and
-  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__rear))) and
-  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__items,
-  ((b).us_split_fields1).rec__bounded_queue_v2__queue_type__items) = true)) ->
-  (bool_eq8(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size)) and
-  (to_rep(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__count))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__count)) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__front))) and
   (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__rear))) and
   (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__items,
   ((b).us_split_fields1).rec__bounded_queue_v2__queue_type__items) = true))) ->
+  (bool_eq8(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size) = to_rep1(((b).us_split_discrs1).rec__bounded_queue_v2__queue_type__max_size)) and
+  ((((to_rep(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__count) = to_rep(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__count)) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__front) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__front))) and
+  (to_rep1(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__rear) = to_rep1(((b).us_split_fields1).rec__bounded_queue_v2__queue_type__rear))) and
+  (bool_eq7(((a).us_split_fields1).rec__bounded_queue_v2__queue_type__items,
+  ((b).us_split_fields1).rec__bounded_queue_v2__queue_type__items) = true)))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size1 : int
@@ -803,29 +803,178 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "bounded_queue_v2.ads", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall queue__split_fields:natural. forall queue__split_fields1:positive.
-  forall queue__split_fields2:positive.
-  forall queue__split_fields3:(int,element_type) farray.
-  forall queue__split_fields4:t. forall item:int. forall o:int.
-  forall o1:element_type. forall o2:int. forall result:int. forall item1:int.
-  ((dynamic_property1(1, to_rep1(queue__split_discrs),
+logic queue__split_fields : natural
+
+logic queue__split_fields1 : positive
+
+logic queue__split_fields2 : positive
+
+logic queue__split_fields3 : (int,element_type) farray
+
+logic queue__split_fields4 : t
+
+logic item : int
+
+logic o : int
+
+logic o1 : element_type
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : positive
+
+logic o6 : natural
+
+logic o7 : positive
+
+logic o8 : positive
+
+logic o9 : (int,element_type) farray
+
+logic o10 : t
+
+logic temp___295 : positive
+
+logic temp___2951 : natural
+
+logic temp___2952 : positive
+
+logic temp___2953 : positive
+
+logic temp___2954 : (int,element_type) farray
+
+logic temp___2955 : t
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : positive
+
+logic o15 : positive
+
+logic o16 : (int,element_type) farray
+
+logic o17 : t
+
+logic temp___297 : positive
+
+logic temp___2971 : natural
+
+logic temp___2972 : positive
+
+logic temp___2973 : positive
+
+logic temp___2974 : (int,element_type) farray
+
+logic temp___2975 : t
+
+logic o18 : int
+
+logic result : int
+
+logic item1 : int
+
+logic result1 : natural
+
+logic result2 : positive
+
+logic result3 : positive
+
+logic result4 : (int,element_type) farray
+
+logic result5 : t
+
+logic queue__split_fields5 : natural
+
+logic queue__split_fields6 : positive
+
+logic queue__split_fields7 : positive
+
+logic queue__split_fields8 : (int,element_type) farray
+
+logic queue__split_fields9 : t
+
+logic result6 : natural
+
+logic result7 : positive
+
+logic result8 : positive
+
+logic result9 : (int,element_type) farray
+
+logic result10 : t
+
+logic queue__split_fields10 : natural
+
+logic queue__split_fields11 : positive
+
+logic queue__split_fields12 : positive
+
+logic queue__split_fields13 : (int,element_type) farray
+
+logic queue__split_fields14 : t
+
+logic queue__split_fields15 : natural
+
+logic queue__split_fields16 : positive
+
+logic queue__split_fields17 : positive
+
+logic queue__split_fields18 : (int,element_type) farray
+
+logic queue__split_fields19 : t
+
+logic item2 : int
+
+logic queue__split_fields20 : natural
+
+logic queue__split_fields21 : positive
+
+logic queue__split_fields22 : positive
+
+logic queue__split_fields23 : (int,element_type) farray
+
+logic queue__split_fields24 : t
+
+logic item3 : int
+
+axiom H : (dynamic_property1(1, to_rep1(queue__split_discrs),
   to_rep3(first(queue__split_fields4)),
   to_rep3(last(queue__split_fields4))) and
   ((to_rep3(first(queue__split_fields4)) = 1) and
-  (to_rep3(last(queue__split_fields4)) = to_rep1(queue__split_discrs)))) ->
-  ((((-2147483648) <= 2147483647) -> in_range3(item)) -> ((not (empty({
-  us_split_discrs1 = { rec__bounded_queue_v2__queue_type__max_size =
-  queue__split_discrs }; us_split_fields1 = {
-  rec__bounded_queue_v2__queue_type__count = queue__split_fields;
-  rec__bounded_queue_v2__queue_type__front = queue__split_fields1;
-  rec__bounded_queue_v2__queue_type__rear = queue__split_fields2;
-  rec__bounded_queue_v2__queue_type__items = { elts = queue__split_fields3;
-  rt = queue__split_fields4 } } }) = true)) ->
-  (((((((to_rep3(first(queue__split_fields4)) <= to_rep1(queue__split_fields1)) and
-  (to_rep1(queue__split_fields1) <= to_rep3(last(queue__split_fields4)))) and
-  (o = to_rep1(queue__split_fields1))) and
-  (o1 = (queue__split_fields3[o]))) and (o2 = to_rep2(o1))) and (({
-  int__content = result } = { int__content = item }) and (item1 = o2))) ->
-  in_range((comp_mod(to_rep1(queue__split_fields1),to_rep1(queue__split_discrs)) + 1)))))))
+  (to_rep3(last(queue__split_fields4)) = to_rep1(queue__split_discrs))))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range3(item))
+
+axiom H2 : (not (empty({ us_split_discrs1 = {
+  rec__bounded_queue_v2__queue_type__max_size = queue__split_discrs };
+  us_split_fields1 = { rec__bounded_queue_v2__queue_type__count =
+  queue__split_fields; rec__bounded_queue_v2__queue_type__front =
+  queue__split_fields1; rec__bounded_queue_v2__queue_type__rear =
+  queue__split_fields2; rec__bounded_queue_v2__queue_type__items = { elts =
+  queue__split_fields3; rt = queue__split_fields4 } } }) = true))
+
+axiom H3 :
+  ((to_rep3(first(queue__split_fields4)) <= to_rep1(queue__split_fields1)) and
+  (to_rep1(queue__split_fields1) <= to_rep3(last(queue__split_fields4))))
+
+axiom H4 : (o = to_rep1(queue__split_fields1))
+
+axiom H5 : (o1 = (queue__split_fields3[o]))
+
+axiom H6 : (o2 = to_rep2(o1))
+
+axiom H7 : (result = item)
+
+axiom H8 : (item1 = o2)
+
+ (* File "bounded_queue_v2.ads", line 28, characters 0-0 *)
+goal WP_parameter_def :
+  in_range((comp_mod(to_rep1(queue__split_fields1),to_rep1(queue__split_discrs)) + 1))

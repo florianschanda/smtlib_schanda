@@ -84,7 +84,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type ttB
 
-predicate in_range1(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -193,18 +193,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -322,7 +322,7 @@ function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
 type t
 
-predicate in_range2(x: int) = (((-160) <= x) and (x <= 160))
+predicate in_range2(x: int) = (((- 160) <= x) and (x <= 160))
 
 logic dummy1 : t
 
@@ -430,8 +430,13 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (((- 80) <= to_fixed1(x)) and (to_fixed1(x) <= 80))
+
+axiom H1 : (0 <= to_fixed1(x))
+
+axiom H2 : (not (to_fixed1(x) <  0))
+
+axiom H3 : (to_fixed1(x) <= (to_fixed1(x) * 2))
+
  (* File "decimal_fixed.adb", line 77, characters 0-0 *)
-goal WP_parameter_def : ((((-80) <= to_fixed1(x)) and
-  (to_fixed1(x) <= 80)) -> ((0 <= to_fixed1(x)) ->
-  ((not (to_fixed1(x) <  0)) -> ((to_fixed1(x) <= (to_fixed1(x) * 2)) ->
-  (to_fixed1(x) <= (to_fixed1(x) + to_fixed1(x)))))))
+goal WP_parameter_def : (to_fixed1(x) <= (to_fixed1(x) + to_fixed1(x)))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -380,12 +380,30 @@ logic int1 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic tc_items : (int,integer) farray
+
+logic tc_last : int
+
+logic o : (int,integer) farray
+
+logic temp___155 : (int,integer) farray
+
+logic temp___1551 : t
+
+axiom H : in_range1(tc_last)
+
+axiom H1 : (tc_last = r5b)
+
+axiom H2 : in_range1(r5b)
+
+axiom H3 : ((1 <= r5b) -> (((1 <= 1) and (1 <= 10)) and ((1 <= r5b) and
+  (r5b <= 10))))
+
+axiom H4 : (o = tc_items)
+
+axiom H5 : (o = temp___155)
+
+axiom H6 : (mk(1, r5b) = temp___1551)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tc_items:(int,integer) farray. forall tc_last:int.
-  forall o:(int,integer) farray. forall temp___155:(int,integer) farray.
-  forall temp___1551:t. (in_range1(tc_last) -> ((tc_last = r5b) ->
-  (in_range1(r5b) -> (((((1 <= r5b) -> (((1 <= 1) and (1 <= 10)) and
-  ((1 <= r5b) and (r5b <= 10)))) and (o = tc_items)) and
-  ((o = temp___155) and (mk(1, r5b) = temp___1551))) ->
-  (to_rep(first(temp___1551)) <= 1))))))
+goal WP_parameter_def : (to_rep(first(temp___1551)) <= 1)

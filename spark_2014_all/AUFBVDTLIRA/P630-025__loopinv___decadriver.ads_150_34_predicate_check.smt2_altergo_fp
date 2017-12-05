@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -925,7 +925,7 @@ function us_split_fields__ref___137__projection(a: us_split_fields__ref) : us_sp
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___138__projection(a: us_rep) : us_split_fields =
+function us_rep___139__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq7 : us_rep, us_rep -> bool
@@ -1217,7 +1217,7 @@ function us_split_fields__ref___138__projection(a: us_split_fields__ref1) : us_s
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___139__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___140__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -1334,28 +1334,28 @@ type receiver_type__ref = { receiver_type__content : us_rep1
 function receiver_type__ref___projection(a: receiver_type__ref) : us_rep1 =
   (a).receiver_type__content
 
-logic temp___4475 : us_rep -> (t,us_rep) farray
+logic temp___4465 : us_rep -> (t,us_rep) farray
 
 axiom def_axiom :
-  (forall temp___4477:frame_length. forall temp___44771:(int,bits_8) farray.
-  forall temp___44772:rx_errors. forall temp___44773:bool.
-  (forall temp___4478:t. ((temp___4475({ us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 }
-  })[temp___4478]) = { us_split_fields1 = {
-  rec__decadriver__rx_frame_type__size = temp___4477;
-  rec__decadriver__rx_frame_type__frame = temp___44771;
-  rec__decadriver__rx_frame_type__error = temp___44772;
-  rec__decadriver__rx_frame_type__overrun = temp___44773 } })))
+  (forall temp___4467:frame_length. forall temp___44671:(int,bits_8) farray.
+  forall temp___44672:rx_errors. forall temp___44673:bool.
+  (forall temp___4468:t. ((temp___4465({ us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 }
+  })[temp___4468]) = { us_split_fields1 = {
+  rec__decadriver__rx_frame_type__size = temp___4467;
+  rec__decadriver__rx_frame_type__frame = temp___44671;
+  rec__decadriver__rx_frame_type__error = temp___44672;
+  rec__decadriver__rx_frame_type__overrun = temp___44673 } })))
 
-logic temp___4479 : t -> (int,bits_8) farray
+logic temp___4469 : t -> (int,bits_8) farray
 
 axiom def_axiom1 :
-  (forall temp___4481:t.
-  (forall temp___4482:int.
-  ((temp___4479(temp___4481)[temp___4482]) = of_rep2(temp___4481))))
+  (forall temp___4471:t.
+  (forall temp___4472:int.
+  ((temp___4469(temp___4471)[temp___4472]) = of_rep2(temp___4471))))
 
 logic to_rep3 : natural -> int
 
@@ -1399,15 +1399,47 @@ logic self__3 : bool
 
 logic self__4 : bool
 
+logic o : rx_errors
+
+logic o1 : frame_length
+
+logic o2 : frame_length
+
+logic o3 : (int,bits_8) farray
+
+logic o4 : rx_errors
+
+logic o5 : bool
+
+logic temp___4527 : frame_length
+
+logic temp___45271 : (int,bits_8) farray
+
+logic temp___45272 : rx_errors
+
+logic temp___45273 : bool
+
+axiom H : (to_rep1(o) = 0)
+
+axiom H1 : (to_rep(o1) = 0)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (temp___4469(of_int(0)) = o3)
+
+axiom H4 : (o = o4)
+
+axiom H5 : (of_int1(0) = o5)
+
+axiom H6 : (temp___4527 = o2)
+
+axiom H7 : (temp___45271 = o3)
+
+axiom H8 : (temp___45272 = o4)
+
+axiom H9 : (temp___45273 = o5)
+
  (* File "decadriver.ads", line 77, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:rx_errors. forall o1:frame_length. forall o2:frame_length.
-  forall o3:(int,bits_8) farray. forall o4:rx_errors. forall o5:bool.
-  forall temp___4537:frame_length. forall temp___45371:(int,bits_8) farray.
-  forall temp___45372:rx_errors. forall temp___45373:bool.
-  ((((to_rep1(o) = 0) and ((to_rep(o1) = 0) and ((o1 = o2) and
-  ((temp___4479(of_int(0)) = o3) and ((o = o4) and (of_int1(0) = o5)))))) and
-  ((temp___4537 = o2) and ((temp___45371 = o3) and ((temp___45372 = o4) and
-  (temp___45373 = o5))))) -> (((to_rep1(temp___45372) = 0) ->
-  (0 <  to_rep(temp___4537))) and ((not (to_rep1(temp___45372) = 0)) ->
-  (to_rep(temp___4537) = 0)))))
+goal WP_parameter_def : (((to_rep1(temp___45272) = 0) ->
+  (0 <  to_rep(temp___4527))) and ((not (to_rep1(temp___45272) = 0)) ->
+  (to_rep(temp___4527) = 0)))

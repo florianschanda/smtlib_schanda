@@ -93,6 +93,7 @@
 (declare-const o2 Int)
 (declare-const o3 Int)
 (declare-const o4 Int)
+(declare-const o5 Int)
 (assert (in_range1 i))
 (assert (in_range2 k))
 (assert (= (to_rep (get m i k)) 0))

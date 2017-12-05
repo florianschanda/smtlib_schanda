@@ -379,18 +379,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1247,8 +1247,21 @@ axiom is_empty__post_axiom1 :
   us_split_fields1 = { rec__names__entry_tables__vector = container1 }
   }) = 0)))
 
+logic hash_table : (t,name_id) farray
+
+logic char_table__split_fields : us_main_type1
+
+logic us : int
+
+logic us1 : int
+
+logic result : (t,name_id) farray
+
+logic hash_table1 : (t,name_id) farray
+
+axiom H : (result = hash_table)
+
+axiom H1 : (hash_table1 = names__hash_table__aggregate_def(0))
+
  (* File "a-cofove.ads", line 806, characters 0-0 *)
-goal WP_parameter_def :
-  (forall hash_table:(t,name_id) farray. forall result:(t,name_id) farray.
-  forall hash_table1:(t,name_id) farray. (((result = hash_table) and
-  (hash_table1 = names__hash_table__aggregate_def(0))) -> in_range3(1024)))
+goal WP_parameter_def : in_range3(1024)

@@ -239,6 +239,8 @@
 (declare-const result__3 (_ BitVec 64))
 (declare-const x86__readmem64__result5 (_ BitVec 64))
 (declare-const result2 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (and (= o25 (readmem8 (bvadd addr ((_ int2bv 64) 7)) memory)) (= o25 (to_rep (select memory (bvadd addr ((_ int2bv 64) 7)))))))
 (assert (= o26 ((_ zero_extend 56) o25)))
 (assert (= o27 (bvshl o26 ((_ int2bv 64) 56))))

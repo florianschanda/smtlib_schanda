@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -360,15 +360,142 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic found : bool
+
+logic position : int
+
+logic j : int
+
+logic k : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___160 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic j1 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic j2 : int
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic result : int
+
+logic position1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic position2 : int
+
+logic position3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : int
+
+logic position4 : int
+
+logic position5 : int
+
+logic position6 : int
+
+logic position7 : int
+
+logic position8 : int
+
+logic position9 : int
+
+logic position10 : int
+
+logic position11 : int
+
+logic position12 : int
+
+logic result6 : bool
+
+logic found1 : bool
+
+logic result7 : int
+
+logic position13 : int
+
+logic position14 : int
+
+logic position15 : int
+
+logic found2 : bool
+
+logic position16 : int
+
+logic found3 : bool
+
+logic position17 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(list1)),
+  to_rep(last(list1)))
+
+axiom H1 : in_range1(value)
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(position))
+
+axiom H3 : (0 <  length({ elts = list; rt = list1 }))
+
+axiom H4 : (to_rep(last(list1)) <  2147483647)
+
+axiom H5 : (to_rep(first(list1)) <= j)
+
+axiom H6 : (j <= to_rep(last(list1)))
+
+axiom H7 : (to_rep(first(list1)) <= k)
+
+axiom H8 : (k <= to_rep(last(list1)))
+
+axiom H9 : ((to_rep(first(list1)) <= k) and (k <= to_rep(last(list1))))
+
+axiom H10 : (o = k)
+
+axiom H11 : (o1 = (list[o]))
+
+axiom H12 : (o2 = to_rep(o1))
+
  (* File "searches.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall position:int. forall j:int. forall k:int. forall o:int.
-  forall o1:integer. forall o2:int. (dynamic_property(1, 2147483647,
-  to_rep(first(list1)), to_rep(last(list1))) -> (in_range1(value) ->
-  (((1 <= 2147483647) -> in_range2(position)) -> ((0 <  length({ elts = list;
-  rt = list1 })) -> ((to_rep(last(list1)) <  2147483647) ->
-  (((to_rep(first(list1)) <= j) and (j <= to_rep(last(list1)))) ->
-  (((to_rep(first(list1)) <= k) and (k <= to_rep(last(list1)))) ->
-  ((((((to_rep(first(list1)) <= k) and (k <= to_rep(last(list1)))) and
-  (o = k)) and (o1 = (list[o]))) and (o2 = to_rep(o1))) ->
-  (to_rep(first(list1)) <= j))))))))))
+goal WP_parameter_def : (to_rep(first(list1)) <= j)

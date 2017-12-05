@@ -64,6 +64,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_141 Int) (temp___is_init_138 Bool) (temp___skip_constant_139 Bool) (temp___do_toplevel_140 Bool)) Bool (=> (or (= temp___is_init_138 true) (<= first 2147483647)) (dynamic_property first 2147483647 temp___expr_141)))
 (assert (= first one))
 (declare-const o Int)
+(declare-const check_default_value__p__one__assume Int)
 (assert (and (= o (id 1)) (and (in_range1 o) (= o 1))))
 (assert (not (in_range o)))
 (check-sat)

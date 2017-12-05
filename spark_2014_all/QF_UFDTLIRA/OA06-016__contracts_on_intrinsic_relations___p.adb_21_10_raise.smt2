@@ -53,5 +53,6 @@
 (assert (and (= o (abs x)) (in_range1 (abs x))))
 (assert (= result (ite (<= 0 o) true false)))
 (assert (not (= result true)))
+(assert (not false))
 (check-sat)
 (exit)

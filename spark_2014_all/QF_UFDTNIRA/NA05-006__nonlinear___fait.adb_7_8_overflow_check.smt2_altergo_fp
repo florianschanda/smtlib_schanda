@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -147,13 +147,59 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic r : int
+
+logic k : int
+
+logic q : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic k1 : int
+
+logic result2 : int
+
+logic q1 : int
+
+logic r2 : int
+
+logic k2 : int
+
+logic q2 : int
+
+logic r3 : int
+
+logic k3 : int
+
+logic q3 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(r))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(k))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(q))
+
+axiom H5 : (((((- 10) <= i) and (i <= (- 1))) and (1 <= j)) and (j <= 10))
+
+axiom H6 : ((o = (i * j)) and in_range1((i * j)))
+
+axiom H7 : (result = r)
+
+axiom H8 : (r1 = o)
+
  (* File "fait.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall k:int. forall q:int. forall o:int. forall result:int.
-  forall r1:int. (in_range1(i) -> (in_range1(j) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(r)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(k)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(q)) -> ((((((-10) <= i) and
-  (i <= (-1))) and (1 <= j)) and (j <= 10)) -> ((((o = (i * j)) and
-  in_range1((i * j))) and (({ int__content = result } = { int__content = r
-  }) and (r1 = o))) -> in_range1((r1 + 1))))))))))
+goal WP_parameter_def : in_range1((r1 + 1))

@@ -110,6 +110,7 @@
 (declare-const o7 Int)
 (declare-const o8 Int)
 (declare-const o9 Int)
+(declare-const o10 Int)
 (assert (in_range x1))
 (assert (in_range x2))
 (assert (in_range x3))

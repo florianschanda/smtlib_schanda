@@ -455,15 +455,41 @@ logic b : (int,(int,(int,et1) farray) farray) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = b)
+
+axiom H2 : (a1 = a2)
+
+axiom H3 : (a3 = a1)
+
+logic o : int
+
+axiom H4 : (1 <= o)
+
+axiom H5 : (o <= 16)
+
+logic n : int
+
+axiom H6 : (5 <= n)
+
+axiom H7 : (n <= 50)
+
+logic m : int
+
+axiom H8 : (1 <= m)
+
+axiom H9 : (m <= 10)
+
  (* File "ar.ads", line 555, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray. ((((result = a) and
-  (a1 = b)) and ((a1 = a2) and (a3 = a1))) ->
-  (forall o:int. (((1 <= o) and (o <= 16)) ->
-  (forall n:int. (((5 <= n) and (n <= 50)) ->
-  (forall m:int. (((1 <= m) and (m <= 10)) ->
-  in_range1(to_rep((((a2[o])[n])[m])))))))))))
+goal WP_parameter_def : in_range1(to_rep((((a2[o])[n])[m])))

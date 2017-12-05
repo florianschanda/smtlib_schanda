@@ -1226,18 +1226,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1355,7 +1355,7 @@ function volt__ref___projection(a: volt__ref) : volt = (a).volt__content
 
 type money
 
-predicate in_range4(x: int) = (((-999999999999999) <= x) and
+predicate in_range4(x: int) = (((- 999999999999999) <= x) and
   (x <= 999999999999999))
 
 logic dummy4 : money
@@ -1512,20 +1512,80 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic n : int
+
+logic c : int
+
+logic v : volt
+
+logic m : money
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : volt
+
+logic o3 : volt
+
+logic o4 : money
+
+logic o5 : money
+
+logic o6 : t
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : int
+
+logic c1 : int
+
+logic result2 : volt
+
+logic v1 : volt
+
+logic result3 : money
+
+logic m1 : money
+
+axiom H : ((o = ident(5)) and in_range1(o))
+
+axiom H1 : (result = n)
+
+axiom H2 : (n1 = o)
+
+axiom H3 : in_range1(n1)
+
+axiom H4 : ((o1 = ident__2(0)) and in_range2(o1))
+
+axiom H5 : (result1 = c)
+
+axiom H6 : (c1 = o1)
+
+axiom H7 : in_range2(c1)
+
+axiom H8 : (to_fixed(o2) = 5)
+
+axiom H9 : (o3 = ident__3(o2))
+
+axiom H10 : (result2 = v)
+
+axiom H11 : (v1 = o3)
+
+axiom H12 : (to_fixed1(o4) = 120)
+
+axiom H13 : (o5 = ident__4(o4))
+
+axiom H14 : (result3 = m)
+
+axiom H15 : (m1 = o5)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.112000003457069396972656250))
 
  (* File "p.adb", line 40, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall c:int. forall v:volt. forall m:money. forall o:int.
-  forall o1:int. forall o2:volt. forall o3:volt. forall o4:money.
-  forall o5:money. forall result:int. forall n1:int. forall result1:int.
-  forall c1:int. forall result2:volt. forall v1:volt. forall result3:money.
-  forall m1:money. ((((o = ident(5)) and in_range1(o)) and ((result = n) and
-  (n1 = o))) -> (in_range1(n1) -> ((((o1 = ident__2(0)) and
-  in_range2(o1)) and ((result1 = c) and (c1 = o1))) -> (in_range2(c1) ->
-  ((((to_fixed(o2) = 5) and (o3 = ident__3(o2))) and ((result2 = v) and
-  (v1 = o3))) -> ((((to_fixed1(o4) = 120) and (o5 = ident__4(o4))) and
-  ((result3 = m) and (m1 = o5))) -> le(neg(fliteral1), neg(fliteral2)))))))))
+goal WP_parameter_def : le(neg(fliteral1), neg(fliteral2))

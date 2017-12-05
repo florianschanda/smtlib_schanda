@@ -106,7 +106,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -273,21 +273,38 @@ axiom def_axiom1 :
   ((temp___392(temp___394, temp___395, temp___396,
   temp___397)[temp___398]) = (temp___394[temp___398])))))))
 
+logic arrays__f2__result : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic arrays__f2__result1 : (int,integer) farray
+
+logic arrays__f2__result2 : (int,integer) farray
+
+logic arrays__f2__result3 : (int,integer) farray
+
+logic arrays__f2__result4 : (int,integer) farray
+
+logic arrays__f2__result5 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+axiom H : in_range(i)
+
+axiom H1 : (arrays__f2__result1 = arrays__f2__result2)
+
+axiom H2 : (arrays__f2__result3 = arrays__f2__result1)
+
+axiom H3 : (result = arrays__f2__result)
+
+axiom H4 : (arrays__f2__result1 = temp___392(arr_in, 1, i, 7))
+
+axiom H5 : (arrays__f2__result4 = arrays__f2__result2)
+
+axiom H6 : (arrays__f2__result5 = arrays__f2__result3)
+
+axiom H7 : (result1 = arrays__f2__result4)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arrays__f2__result:(int,integer) farray.
-  forall result:(int,integer) farray.
-  forall arrays__f2__result1:(int,integer) farray.
-  forall arrays__f2__result2:(int,integer) farray.
-  forall arrays__f2__result3:(int,integer) farray.
-  forall arrays__f2__result4:(int,integer) farray.
-  forall arrays__f2__result5:(int,integer) farray.
-  (forall result1:(int,integer) farray. ((in_range(i) and
-  (((((arrays__f2__result1 = arrays__f2__result2) and
-  (arrays__f2__result3 = arrays__f2__result1)) and
-  ((result = arrays__f2__result) and
-  (arrays__f2__result1 = temp___392(arr_in, 1, i, 7)))) and
-  ((arrays__f2__result4 = arrays__f2__result2) and
-  (arrays__f2__result5 = arrays__f2__result3))) and
-  (result1 = arrays__f2__result4))) -> (bool_eq3(arrays__f2__result4, 1, 8,
-  temp___222(arr_in, 1, i, 7), 1, 8) = true))))
+goal WP_parameter_def : (bool_eq3(arrays__f2__result4, 1, 8,
+  temp___222(arr_in, 1, i, 7), 1, 8) = true)

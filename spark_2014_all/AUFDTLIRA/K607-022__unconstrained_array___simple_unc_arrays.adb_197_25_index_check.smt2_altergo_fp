@@ -135,7 +135,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -174,7 +174,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -400,9 +400,102 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,value) farray
+
+logic tmp : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : value
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic o9 : value
+
+logic o10 : int
+
+logic o11 : (int,value) farray
+
+logic o12 : value
+
+logic o13 : int
+
+logic o14 : (int,value) farray
+
+logic o15 : int
+
+logic o16 : value
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : value
+
+logic o20 : int
+
+logic o21 : value
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic k : int
+
+logic o25 : int
+
+logic o26 : value
+
+logic o27 : int
+
+logic o28 : bool
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : int
+
+logic tmp2 : int
+
+logic result2 : (int,value) farray
+
+logic a1 : (int,value) farray
+
+logic result3 : (int,value) farray
+
+logic a2 : (int,value) farray
+
+logic a3 : (int,value) farray
+
+logic tmp3 : int
+
+logic a4 : (int,value) farray
+
+logic tmp4 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range1(i)
+
+axiom H2 : in_range1(j)
+
+axiom H3 : (((to_rep(a__first) <= i) and (i <= to_rep(a__last))) and
+  ((to_rep(a__first) <= j) and (j <= to_rep(a__last))))
+
  (* File "simple_unc_arrays.ads", line 115, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep(a__first),
-  to_rep(a__last)) -> (in_range1(i) -> (in_range1(j) ->
-  ((((to_rep(a__first) <= i) and (i <= to_rep(a__last))) and
-  ((to_rep(a__first) <= j) and (j <= to_rep(a__last)))) ->
-  (to_rep(a__first) <= i)))))
+goal WP_parameter_def : (to_rep(a__first) <= i)

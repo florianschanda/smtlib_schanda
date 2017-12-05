@@ -147,6 +147,7 @@
 (declare-const i Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const temp___267 Int)
 (declare-const temp___266 Int)
 (declare-const o2 Int)
 (declare-const o3 character)

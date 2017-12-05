@@ -196,6 +196,7 @@
 (assert (in_range2 last_index))
 (assert (= result bits))
 (assert (= bits1 ((_ int2bv 8) 0)))
+(assert true)
 (assert (=> (bvule ((_ int2bv 8) 0) ((_ int2bv 8) 1)) (in_range1 bit)))
 (assert (and (<= (to_rep (first (rt array_of_bits))) first_index) (<= first_index (to_rep (last (rt array_of_bits))))))
 (assert (= o first_index))

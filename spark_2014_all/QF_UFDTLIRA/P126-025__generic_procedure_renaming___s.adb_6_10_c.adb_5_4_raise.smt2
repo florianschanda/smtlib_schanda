@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range e))
 (assert (not (= e 0)))
-(assert (not (not (= e 0))))
+(assert (= e 0))
+(assert (not false))
 (check-sat)
 (exit)

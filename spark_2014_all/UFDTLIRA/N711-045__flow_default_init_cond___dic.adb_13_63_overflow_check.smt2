@@ -76,6 +76,7 @@
 (assert true)
 (assert (forall ((par2 us_rep)) (forall ((dic__g Int)) (! (= (= (foo par2 dic__g) true) (= (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields1 par2))) (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par2)))) dic__g)) :pattern ((foo par2 dic__g))))))
 (declare-const g Int)
+(declare-const o Int)
 (assert (in_range g))
 (assert (not (in_range (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields1 par1))) (to_rep (rec__dic__pr_record_t2__y (us_split_fields1 par1)))))))
 (check-sat)

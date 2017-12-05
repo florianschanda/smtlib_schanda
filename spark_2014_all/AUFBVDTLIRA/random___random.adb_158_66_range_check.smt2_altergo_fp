@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -627,7 +627,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1017,9 +1017,111 @@ axiom n__def_axiom : (n = of_int(((max1 - min1) + 1)))
 
 axiom slop__def_axiom : (slop = add(urem(of_int(4294967295), n), of_int(1)))
 
+logic g__split_fields : (int,unsigned_32) farray
+
+logic g__split_fields1 : state_range
+
+logic value : int
+
+logic x : t
+
+logic o : int
+
+logic random__random_integer__B_4__n__assume : t
+
+logic temp___329 : (int,unsigned_32) farray
+
+logic temp___3291 : state_range
+
+logic temp___328 : t
+
+logic o1 : int
+
+logic g__split_fields2 : (int,unsigned_32) farray
+
+logic g__split_fields3 : state_range
+
+logic x1 : t
+
+logic x2 : t
+
+logic g__split_fields4 : (int,unsigned_32) farray
+
+logic g__split_fields5 : state_range
+
+logic x3 : t
+
+logic g__split_fields6 : (int,unsigned_32) farray
+
+logic g__split_fields7 : state_range
+
+logic x4 : t
+
+logic g__split_fields8 : (int,unsigned_32) farray
+
+logic g__split_fields9 : state_range
+
+logic x5 : t
+
+logic g__split_fields10 : (int,unsigned_32) farray
+
+logic g__split_fields11 : state_range
+
+logic x6 : t
+
+logic g__split_fields12 : (int,unsigned_32) farray
+
+logic g__split_fields13 : state_range
+
+logic x7 : t
+
+logic result : t
+
+logic x8 : t
+
+logic g__split_fields14 : (int,unsigned_32) farray
+
+logic g__split_fields15 : state_range
+
+logic x9 : t
+
+logic g__split_fields16 : (int,unsigned_32) farray
+
+logic g__split_fields17 : state_range
+
+logic x10 : t
+
+logic result1 : int
+
+logic value1 : int
+
+logic g__split_fields18 : (int,unsigned_32) farray
+
+logic g__split_fields19 : state_range
+
+logic value2 : int
+
+logic x11 : t
+
+logic g__split_fields20 : (int,unsigned_32) farray
+
+logic g__split_fields21 : state_range
+
+logic value3 : int
+
+logic x12 : t
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(value))
+
+axiom H1 : in_range1(min1)
+
+axiom H2 : in_range1(max1)
+
+axiom H3 : (min1 <= max1)
+
+axiom H4 : true
+
+axiom H5 : (not ((min1 = (- 2147483648)) and (max1 = 2147483647)))
+
  (* File "random.adb", line 106, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:int. ((((-2147483648) <= 2147483647) -> in_range1(value)) ->
-  (in_range1(min1) -> (in_range1(max1) -> ((min1 <= max1) ->
-  ((not ((min1 = (-2147483648)) and (max1 = 2147483647))) ->
-  uint_in_range(((max1 - min1) + 1))))))))
+goal WP_parameter_def : uint_in_range(((max1 - min1) + 1))

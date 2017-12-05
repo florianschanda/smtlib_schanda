@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type controlangle
 
-predicate in_range2(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range2(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq3 : int, int -> bool
 
@@ -297,7 +297,7 @@ function machnumber__ref___projection(a: machnumber__ref) : machnumber =
 
 type scaledata
 
-predicate in_range4(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range4(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq5 : int, int -> bool
 
@@ -381,49 +381,204 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic target_angle : int
+
+logic k1 : int
+
+logic k2 : int
+
+logic gap : int
+
+logic scale__scale_movement__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic k11 : int
+
+logic k21 : int
+
+logic gap1 : int
+
+logic result : int
+
+logic target_angle1 : int
+
+logic result1 : int
+
+logic gap2 : int
+
+logic result2 : int
+
+logic gap3 : int
+
+logic result3 : int
+
+logic gap4 : int
+
+logic result4 : int
+
+logic k12 : int
+
+logic result5 : int
+
+logic k22 : int
+
+logic result6 : int
+
+logic k23 : int
+
+logic result7 : int
+
+logic target_angle2 : int
+
+logic result8 : int
+
+logic target_angle3 : int
+
+logic result9 : int
+
+logic scale__scale_movement__result1 : int
+
+logic scale__scale_movement__result2 : int
+
+logic scale__scale_movement__result3 : int
+
+logic target_angle4 : int
+
+logic k13 : int
+
+logic k24 : int
+
+logic gap5 : int
+
+logic scale__scale_movement__result4 : int
+
+logic target_angle5 : int
+
+logic k14 : int
+
+logic k25 : int
+
+logic gap6 : int
+
+logic scale__scale_movement__result5 : int
+
+logic result10 : int
+
+axiom H : in_range3(mach)
+
+axiom H1 : in_range4(present)
+
+axiom H2 : in_range4(target)
+
+axiom H3 : in_range2(max)
+
+axiom H4 : (0 <  max)
+
+axiom H5 : (((- 45) <= 45) -> in_range2(target_angle))
+
+axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(k1))
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(k2))
+
+axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(gap))
+
+axiom H9 : ((present = target) -> (result = target_angle))
+
+axiom H10 : ((present = target) -> (target_angle1 = 0))
+
+axiom H11 : ((present = target) -> (gap4 = gap))
+
+axiom H12 : ((present = target) -> (k23 = k2))
+
+axiom H13 : ((present = target) -> (k12 = k1))
+
+axiom H14 : ((present = target) -> (gap4 = gap1))
+
+axiom H15 : ((present = target) -> (k23 = k21))
+
+axiom H16 : ((present = target) -> (k12 = k11))
+
+axiom H17 : ((not (present = target)) -> ((in_range5(k12) and (0 <  k23)) and
+  (k12 <= k23)))
+
+axiom H18 : ((not (present = target)) -> (((- 2147483648) <= 2147483647) ->
+  in_range1(k12)))
+
+axiom H19 : ((not (present = target)) -> (((- 2147483648) <= 2147483647) ->
+  in_range1(k23)))
+
+axiom H20 : ((not (present = target)) -> ((o6 = (max * k12)) and
+  in_range1((max * k12))))
+
+axiom H21 : ((not (present = target)) -> (o7 = comp_div(o6,k23)))
+
+axiom H22 : ((not (present = target)) -> ((o8 = o7) and in_range1(o7)))
+
+axiom H23 : ((not (present = target)) -> ((o9 = o8) and in_range2(o8)))
+
+axiom H24 : ((not (present = target)) -> (result7 = target_angle))
+
+axiom H25 : ((not (present = target)) -> (target_angle2 = o9))
+
+axiom H26 : ((not (present = target)) -> ((target <  present) ->
+  (result8 = target_angle2)))
+
+axiom H27 : ((not (present = target)) -> ((target <  present) ->
+  (target_angle3 = (-target_angle2))))
+
+axiom H28 : ((not (present = target)) -> ((not (target <  present)) ->
+  (target_angle3 = target_angle2)))
+
+axiom H29 : ((not (present = target)) -> (target_angle1 = target_angle3))
+
+axiom H30 : (scale__scale_movement__result1 = scale__scale_movement__result2)
+
+axiom H31 : (scale__scale_movement__result3 = scale__scale_movement__result1)
+
+axiom H32 : (result9 = scale__scale_movement__result)
+
+axiom H33 : (scale__scale_movement__result1 = target_angle1)
+
+axiom H34 : (scale__scale_movement__result4 = scale__scale_movement__result2)
+
+axiom H35 : (gap5 = gap4)
+
+axiom H36 : (k24 = k23)
+
+axiom H37 : (k13 = k12)
+
+axiom H38 : (target_angle4 = target_angle1)
+
+axiom H39 : (scale__scale_movement__result5 = scale__scale_movement__result3)
+
+axiom H40 : (gap6 = gap4)
+
+axiom H41 : (k25 = k23)
+
+axiom H42 : (k14 = k12)
+
+axiom H43 : (target_angle5 = target_angle1)
+
+axiom H44 : (result10 = scale__scale_movement__result4)
+
  (* File "surfaces.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target_angle:int. forall k1:int. forall k2:int. forall gap:int.
-  forall scale__scale_movement__result:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall k11:int. forall k21:int.
-  forall gap1:int. forall result:int. forall target_angle1:int.
-  forall gap2:int. forall k12:int. forall k22:int. forall result1:int.
-  forall target_angle2:int. forall result2:int. forall target_angle3:int.
-  forall result3:int. forall scale__scale_movement__result1:int.
-  forall scale__scale_movement__result2:int.
-  forall scale__scale_movement__result3:int. forall target_angle4:int.
-  forall k13:int. forall k23:int. forall gap3:int.
-  forall scale__scale_movement__result4:int. forall target_angle5:int.
-  forall k14:int. forall k24:int. forall gap4:int.
-  forall scale__scale_movement__result5:int.
-  (forall result4:int. ((in_range3(mach) and (in_range4(present) and
-  (in_range4(target) and (in_range2(max) and ((0 <  max) and
-  ((((((-45) <= 45) -> in_range2(target_angle)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(k1)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(k2)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(gap)) and
-  ((((present = target) and (((result = target_angle) and
-  (target_angle1 = 0)) and (((gap2 = gap) and ((k22 = k2) and
-  (k12 = k1))) and ((gap2 = gap1) and ((k22 = k21) and (k12 = k11)))))) or
-  ((not (present = target)) and ((((in_range5(k12) and (0 <  k22)) and
-  (k12 <= k22)) and ((((-2147483648) <= 2147483647) -> in_range1(k12)) and
-  ((((-2147483648) <= 2147483647) -> in_range1(k22)) and
-  (((((((o = (max * k12)) and in_range1((max * k12))) and
-  (o1 = comp_div(o,k22))) and ((o2 = o1) and in_range1(o1))) and
-  ((o3 = o2) and in_range2(o2))) and ((result1 = target_angle) and
-  (target_angle2 = o3))) and (((target <  present) and
-  ((result2 = target_angle2) and (target_angle3 = (-target_angle2)))) or
-  ((not (target <  present)) and (target_angle3 = target_angle2))))))) and
-  (target_angle1 = target_angle3)))) and
-  (((scale__scale_movement__result1 = scale__scale_movement__result2) and
-  (scale__scale_movement__result3 = scale__scale_movement__result1)) and
-  ((result3 = scale__scale_movement__result) and
-  (scale__scale_movement__result1 = target_angle1)))))))) and
-  (((scale__scale_movement__result4 = scale__scale_movement__result2) and
-  ((gap3 = gap2) and ((k23 = k22) and ((k13 = k12) and
-  (target_angle4 = target_angle1))))) and
-  ((scale__scale_movement__result5 = scale__scale_movement__result3) and
-  ((gap4 = gap2) and ((k24 = k22) and ((k14 = k12) and
-  (target_angle5 = target_angle1))))))) and
-  (result4 = scale__scale_movement__result4))))))) ->
-  ((-max) <= scale__scale_movement__result4))))
+goal WP_parameter_def : ((-max) <= scale__scale_movement__result4)

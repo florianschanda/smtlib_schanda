@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tframeB
 
-predicate in_range2(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1148,5 +1148,25 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : t
+
+axiom H : in_range3(n)
+
  (* File "mult.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range3(n) -> in_range2(((n + 1) * 65)))
+goal WP_parameter_def : in_range2(((n + 1) * 65))

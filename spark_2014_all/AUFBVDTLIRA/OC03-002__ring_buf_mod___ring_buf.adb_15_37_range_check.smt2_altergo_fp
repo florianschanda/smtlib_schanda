@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -596,7 +596,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1568,12 +1568,94 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(t,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall o:integer. (in_range(x) -> ((not (is_full({ us_split_fields1 = {
+logic r__split_fields : (t,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : integer
+
+logic o3 : t
+
+logic o4 : (t,integer) farray
+
+logic o5 : (t,integer) farray
+
+logic o6 : ar_index
+
+logic o7 : length_type
+
+logic temp___282 : (t,integer) farray
+
+logic temp___2821 : ar_index
+
+logic temp___2822 : length_type
+
+logic o8 : int
+
+logic o9 : length_type
+
+logic o10 : (t,integer) farray
+
+logic o11 : ar_index
+
+logic o12 : length_type
+
+logic temp___284 : (t,integer) farray
+
+logic temp___2841 : ar_index
+
+logic temp___2842 : length_type
+
+logic result : (t,integer) farray
+
+logic result1 : ar_index
+
+logic result2 : length_type
+
+logic r__split_fields3 : (t,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic result3 : (t,integer) farray
+
+logic result4 : ar_index
+
+logic result5 : length_type
+
+logic r__split_fields6 : (t,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (t,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic r__split_fields12 : (t,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+axiom H : in_range(x)
+
+axiom H1 : (not (is_full({ us_split_fields1 = {
   rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)) ->
-  ((to_rep(o) = x) -> uint_in_range(to_rep2(r__split_fields2))))))
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))
+
+axiom H2 : (to_rep(o2) = x)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : uint_in_range(to_rep2(r__split_fields2))

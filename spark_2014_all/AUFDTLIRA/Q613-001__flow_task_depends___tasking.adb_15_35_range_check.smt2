@@ -170,6 +170,7 @@
 (declare-const o21 message_count_type)
 (declare-const o22 Bool)
 (declare-const o23 (Array Int message_type))
+(declare-const o24 Int)
 (declare-const result message_index_type)
 (declare-const result1 message_index_type)
 (declare-const result2 message_count_type)

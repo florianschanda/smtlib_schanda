@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -480,19 +480,33 @@ axiom def_axiom :
   (forall temp___166:int. (((temp___161(temp___163, temp___164,
   temp___165)).elts1[temp___166]) = of_rep(temp___163)))))
 
+logic temp___168 : (int,character) farray
+
+logic temp___1681 : t1
+
+logic temp___169 : (int,character) farray
+
+logic temp___1691 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H1 : (to_rep1(first2((temp___161(120, to_rep1(x__first),
+  to_rep1(x__last))).rt1)) = to_rep1(x__first))
+
+axiom H2 : (to_rep1(last2((temp___161(120, to_rep1(x__first),
+  to_rep1(x__last))).rt1)) = to_rep1(x__last))
+
+axiom H3 : ({ elts1 = temp___168; rt1 = temp___1681 } = temp___161(120,
+  to_rep1(x__first), to_rep1(x__last)))
+
+axiom H4 : (temp___168 = temp___169)
+
+axiom H5 : (mk(to_rep1(first2(temp___1681)),
+  to_rep1(last2(temp___1681))) = temp___1691)
+
  (* File "foo.adb", line 4, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___168:(int,character) farray. forall temp___1681:t1.
-  forall temp___169:(int,character) farray. forall temp___1691:t.
-  (dynamic_property(1, 2147483647, to_rep1(x__first), to_rep1(x__last)) ->
-  ((((to_rep1(first2((temp___161(120, to_rep1(x__first),
-  to_rep1(x__last))).rt1)) = to_rep1(x__first)) and
-  ((to_rep1(last2((temp___161(120, to_rep1(x__first),
-  to_rep1(x__last))).rt1)) = to_rep1(x__last)) and ({ elts1 = temp___168;
-  rt1 = temp___1681 } = temp___161(120, to_rep1(x__first),
-  to_rep1(x__last))))) and ((temp___168 = temp___169) and
-  (mk(to_rep1(first2(temp___1681)),
-  to_rep1(last2(temp___1681))) = temp___1691))) ->
   (((to_rep1(first(temp___1691)) <= to_rep1(last(temp___1691))) ->
   (((to_rep1(x__first) <= to_rep1(x__last)) ->
   (((to_rep1(last(temp___1691)) - to_rep1(first(temp___1691))) + 1) = ((to_rep1(x__last) - to_rep1(x__first)) + 1))) and
@@ -500,4 +514,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___1691)) - to_rep1(first(temp___1691))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___1691)) <= to_rep1(last(temp___1691)))) ->
   ((to_rep1(x__first) <= to_rep1(x__last)) ->
-  (0 = ((to_rep1(x__last) - to_rep1(x__first)) + 1))))))))
+  (0 = ((to_rep1(x__last) - to_rep1(x__first)) + 1)))))

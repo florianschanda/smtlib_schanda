@@ -121,6 +121,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range1 temp___expr_33)))
 (define-fun dynamic_invariant2 ((temp___expr_189 us_rep) (temp___is_init_186 Bool) (temp___skip_constant_187 Bool) (temp___do_toplevel_188 Bool)) Bool (=> (not (= temp___skip_constant_187 true)) (in_range2 0 temp___expr_189)))
 (define-fun default_initial_assumption1 ((temp___expr_191 us_rep) (temp___skip_top_level_192 Bool)) Bool (and (= (attr__tag temp___expr_191) us_tag1) (= (to_rep (rec__membership_discr__root__c (us_split_discrs1 temp___expr_191))) 0)))
+(declare-const us Int)
 (assert (not (in_range1 1)))
 (check-sat)
 (exit)

@@ -218,6 +218,7 @@
 (declare-fun length__function_guard (Int us_rep) Bool)
 (assert (forall ((container us_rep)) (! (let ((result (length container))) (and (<= result (capacity container)) (dynamic_invariant2 result true false true))) :pattern ((length container)))))
 (assert (forall ((container us_rep)) (! (= (= (is_empty1 container) true) (= (length container) 0)) :pattern ((is_empty1 container)))))
+(declare-const us Int)
 (assert (not (in_range 10)))
 (check-sat)
 (exit)

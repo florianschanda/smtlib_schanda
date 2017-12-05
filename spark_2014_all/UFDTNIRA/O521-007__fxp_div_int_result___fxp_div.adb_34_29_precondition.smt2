@@ -93,6 +93,7 @@
 (assert (= time_span_unit (of_fixed 1)))
 (assert (= x (multiply (of_fixed 9223372036854775807) 1)))
 (declare-const o duration)
+(declare-const fxp_div__x__assume duration)
 (assert (= (to_fixed o) 9223372036854775807))
 (assert (not (< 0 1)))
 (check-sat)

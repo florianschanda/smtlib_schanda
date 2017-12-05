@@ -70,6 +70,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const e Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const o Int)
+(declare-const o1 et1)
 (assert (in_range1 i))
 (assert (in_range2 e))
 (assert (< i 10))

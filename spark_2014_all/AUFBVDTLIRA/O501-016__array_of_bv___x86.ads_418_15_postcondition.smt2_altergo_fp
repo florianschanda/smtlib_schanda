@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1173,12 +1173,35 @@ logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic memory : (t1,unsigned8) farray
+
+logic o : unsigned8
+
+logic o1 : (t1,unsigned8) farray
+
+logic result : (t1,unsigned8) farray
+
+logic memory1 : (t1,unsigned8) farray
+
+logic memory2 : (t1,unsigned8) farray
+
+logic memory3 : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (to_rep(o) = val__)
+
+axiom H3 : (o1 = (memory[addr <- o]))
+
+axiom H4 : (result = memory)
+
+axiom H5 : (memory1 = o1)
+
+axiom H6 : (memory1 = memory2)
+
+axiom H7 : (memory3 = memory1)
+
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t1,unsigned8) farray. forall o:unsigned8.
-  forall o1:(t1,unsigned8) farray. forall result:(t1,unsigned8) farray.
-  forall memory1:(t1,unsigned8) farray. forall memory2:(t1,unsigned8) farray.
-  forall memory3:(t1,unsigned8) farray. (((((to_rep(o) = val__) and
-  (o1 = (memory[addr <- o]))) and ((result = memory) and (memory1 = o1))) and
-  ((memory1 = memory2) and (memory3 = memory1))) -> (readmem8(addr,
-  memory2) = val__)))
+goal WP_parameter_def : (readmem8(addr, memory2) = val__)

@@ -1825,11 +1825,16 @@ logic x : t1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+axiom H : tqtisFinite1(x)
+
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite1(fliteral2) and
   (tqtreal1(fliteral2) = 340282346638528859811704183484516925440.0))
 
+axiom H1 : (le1(neg1(fliteral2), x) and le1(x, fliteral2))
+
  (* File "reduced_02.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite1(x) -> ((le1(neg1(fliteral2), x) and
-  le1(x, fliteral2)) -> tqtisFinite(to_float32(NearestTiesToEven, x))))
+goal WP_parameter_def : tqtisFinite(to_float32(NearestTiesToEven, x))

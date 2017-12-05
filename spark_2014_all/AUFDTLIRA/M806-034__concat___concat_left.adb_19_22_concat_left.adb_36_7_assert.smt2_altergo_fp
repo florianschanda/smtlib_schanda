@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -451,30 +451,113 @@ function t21b__ref___projection(a: t21b__ref) : t21b = (a).t21b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : (int,integer) farray
+
+logic y : (int,integer) farray
+
+logic z : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+logic temp___184 : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,integer) farray
+
+logic temp___185 : (int,integer) farray
+
+logic temp___1851 : t
+
+logic o8 : (int,integer) farray
+
+logic temp___189 : (int,integer) farray
+
+logic o9 : integer
+
+logic o10 : (int,integer) farray
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : (int,integer) farray
+
+logic temp___190 : (int,integer) farray
+
+logic temp___1901 : t1
+
+logic o17 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic z2 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic z3 : (int,integer) farray
+
+axiom H : true
+
+axiom H1 : ((1 <= 9) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 9) and
+  (9 <= 10))))
+
+axiom H2 : (temp___184 = x)
+
+axiom H3 : ((1 <= 9) -> (o2 = ((9 - 1) + 1)))
+
+axiom H4 : ((not (1 <= 9)) -> (o2 = 0))
+
+axiom H5 : (o3 = (1 + o2))
+
+axiom H6 : (o4 = ((- 2147483648) + o3))
+
+axiom H7 : (o5 = (o4 - 1))
+
+axiom H8 : ((o6 = o5) and in_range(o5))
+
+axiom H9 : (to_rep(o) = 1)
+
+axiom H10 : (o1 = singleton(o, (- 2147483648)))
+
+axiom H11 : (o7 = concat(o1, (- 2147483648), (- 2147483648), temp___184, 1,
+  9))
+
+axiom H12 : (o7 = temp___185)
+
+axiom H13 : (mk((- 2147483648), o6) = temp___1851)
+
+axiom H14 : (((to_rep(first(temp___1851)) <= to_rep(last(temp___1851))) ->
+  (((1 <= 10) ->
+  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = ((10 - 1) + 1))) and
+  ((not (1 <= 10)) ->
+  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = 0)))) and
+  ((not (to_rep(first(temp___1851)) <= to_rep(last(temp___1851)))) ->
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))
+
+axiom H15 : (o8 = slide(temp___185, to_rep(first(temp___1851)), 1))
+
+axiom H16 : (result = z)
+
+axiom H17 : (z2 = o8)
+
  (* File "concat.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall z:(int,integer) farray.
-  forall temp___184:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int.
-  forall o7:(int,integer) farray. forall temp___185:(int,integer) farray.
-  forall temp___1851:t. forall o8:(int,integer) farray.
-  forall result:(int,integer) farray. forall z1:(int,integer) farray.
-  (((((((1 <= 9) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 9) and
-  (9 <= 10)))) and (temp___184 = x)) and ((((((((1 <= 9) and
-  (o2 = ((9 - 1) + 1))) or ((not (1 <= 9)) and (o2 = 0))) and
-  (o3 = (1 + o2))) and (o4 = ((-2147483648) + o3))) and (o5 = (o4 - 1))) and
-  ((o6 = o5) and in_range(o5))) and ((((to_rep(o) = 1) and (o1 = singleton(o,
-  (-2147483648)))) and (o7 = concat(o1, (-2147483648), (-2147483648),
-  temp___184, 1, 9))) and ((o7 = temp___185) and (mk((-2147483648),
-  o6) = temp___1851))))) and
-  ((((to_rep(first(temp___1851)) <= to_rep(last(temp___1851))) and
-  (((1 <= 10) and
-  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = ((10 - 1) + 1))) or
-  ((not (1 <= 10)) and
-  (((to_rep(last(temp___1851)) - to_rep(first(temp___1851))) + 1) = 0)))) or
-  ((not (to_rep(first(temp___1851)) <= to_rep(last(temp___1851)))) and
-  (((1 <= 10) and (0 = ((10 - 1) + 1))) or (not (1 <= 10))))) and
-  (o8 = slide(temp___185, to_rep(first(temp___1851)), 1)))) and (({
-  map__content = result } = { map__content = z }) and (z1 = o8))) ->
-  (to_rep((z1[1])) = 1)))
+goal WP_parameter_def : (to_rep((z2[1])) = 1)

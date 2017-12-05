@@ -165,19 +165,89 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic y : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic y1 : int
+
+logic result1 : int
+
+logic y2 : int
+
+logic result2 : int
+
+logic y3 : int
+
+logic result3 : int
+
+logic y4 : int
+
+logic result4 : int
+
+logic y5 : int
+
+logic y6 : int
+
+logic temp___134 : int
+
+logic result5 : int
+
+logic temp___1341 : int
+
+logic result6 : int
+
+logic y7 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (result = y)
+
+axiom H2 : (y1 = x)
+
+axiom H3 : in_range1(y1)
+
+axiom H4 : ((o = f_rec(y1)) and in_range1(o))
+
+axiom H5 : (result1 = y1)
+
+axiom H6 : (y2 = o)
+
+axiom H7 : ((o1 = f_while(y2)) and in_range1(o1))
+
+axiom H8 : (result2 = y2)
+
+axiom H9 : (y3 = o1)
+
+axiom H10 : ((o2 = f_not_spark(y3)) and in_range1(o2))
+
+axiom H11 : (result3 = y3)
+
+axiom H12 : (y4 = o2)
+
+axiom H13 : ((o3 = f_call(y4)) and in_range1(o3))
+
+axiom H14 : (result4 = y4)
+
+axiom H15 : (y5 = o3)
+
+axiom H16 : (0 <  y5)
+
+axiom H17 : (((0 <= 2147483647) -> in_range1(y6)) and (0 <  y6))
+
+axiom H18 : (result5 = temp___134)
+
+axiom H19 : (temp___1341 = y6)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall result:int. forall y1:int. forall result1:int. forall y2:int.
-  forall result2:int. forall y3:int. forall result3:int. forall y4:int.
-  forall result4:int. forall y5:int. forall y6:int. forall temp___134:int.
-  forall result5:int. forall temp___1341:int. (in_range1(x) ->
-  (((result = y) and (y1 = x)) -> (in_range1(y1) -> ((((o = f_rec(y1)) and
-  in_range1(o)) and ((result1 = y1) and (y2 = o))) ->
-  ((((o1 = f_while(y2)) and in_range1(o1)) and ((result2 = y2) and
-  (y3 = o1))) -> ((((o2 = f_not_spark(y3)) and in_range1(o2)) and
-  ((result3 = y3) and (y4 = o2))) -> ((((o3 = f_call(y4)) and
-  in_range1(o3)) and ((result4 = y4) and (y5 = o3))) -> ((0 <  y5) ->
-  ((((0 <= 2147483647) -> in_range1(y6)) and (0 <  y6)) ->
-  (((result5 = temp___134) and (temp___1341 = y6)) ->
-  in_range1((y6 - 1)))))))))))))
+goal WP_parameter_def : in_range1((y6 - 1))

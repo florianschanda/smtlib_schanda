@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -372,36 +372,228 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic found1 : bool
+
+logic found2 : bool
+
+logic index1 : int
+
+logic index2 : int
+
+logic found : int
+
+logic i : int
+
+logic temp___163 : int
+
+logic temp___162 : int
+
+logic temp___161 : bool
+
+logic temp___160 : bool
+
+logic temp___159 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic result : int
+
+logic found3 : int
+
+logic result1 : bool
+
+logic found11 : bool
+
+logic result2 : int
+
+logic index11 : int
+
+logic result3 : bool
+
+logic found21 : bool
+
+logic result4 : int
+
+logic index21 : int
+
+logic result5 : int
+
+logic i1 : int
+
+logic found12 : bool
+
+logic found22 : bool
+
+logic index12 : int
+
+logic index22 : int
+
+logic found4 : int
+
+logic i2 : int
+
+logic result6 : bool
+
+logic found13 : bool
+
+logic result7 : int
+
+logic index13 : int
+
+logic result8 : int
+
+logic found5 : int
+
+logic result9 : bool
+
+logic found23 : bool
+
+logic result10 : int
+
+logic index23 : int
+
+logic result11 : int
+
+logic found6 : int
+
+logic found14 : bool
+
+logic found24 : bool
+
+logic index14 : int
+
+logic index24 : int
+
+logic found7 : int
+
+logic i3 : int
+
+logic found15 : bool
+
+logic found25 : bool
+
+logic index15 : int
+
+logic index25 : int
+
+logic found8 : int
+
+logic i4 : int
+
+logic found16 : bool
+
+logic found26 : bool
+
+logic index16 : int
+
+logic index26 : int
+
+logic found9 : int
+
+logic i5 : int
+
+logic found17 : bool
+
+logic found27 : bool
+
+logic index17 : int
+
+logic index27 : int
+
+logic found10 : int
+
+logic i6 : int
+
+logic found18 : bool
+
+logic found28 : bool
+
+logic index18 : int
+
+logic index28 : int
+
+logic found19 : int
+
+logic i7 : int
+
+logic found110 : bool
+
+logic found29 : bool
+
+logic index19 : int
+
+logic index29 : int
+
+logic found20 : int
+
+logic i8 : int
+
+logic result12 : bool
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(table1)),
+  to_rep(last(table1)))
+
+axiom H1 : in_range1(value1)
+
+axiom H2 : in_range1(value2)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(index1))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(index2))
+
+axiom H5 : (result = found)
+
+axiom H6 : (found3 = 0)
+
+axiom H7 : in_range2(found3)
+
+axiom H8 : (result1 = found1)
+
+axiom H9 : (found11 = of_int(0))
+
+axiom H10 : (result2 = index1)
+
+axiom H11 : (index11 = 0)
+
+axiom H12 : (result3 = found2)
+
+axiom H13 : (found21 = of_int(0))
+
+axiom H14 : (result4 = index2)
+
+axiom H15 : (index21 = 0)
+
+axiom H16 : (result5 = i)
+
+axiom H17 : (i1 = to_rep(first(table1)))
+
+axiom H18 : (to_rep(first(table1)) <= i1)
+
+axiom H19 : (i1 <= to_rep(last(table1)))
+
+axiom H20 : (((((0 <= 2147483647) -> in_range2(found4)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(index12))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(index22))) and
+  ((to_rep(first(table1)) <= i2) and (i2 <= to_rep(last(table1)))))
+
+axiom H21 : (((((found4 = 0) and (not (found12 = true))) and
+  (not (found22 = true))) or ((found4 = 1) and ((found12 = true) or
+  (found22 = true)))) or (((found4 = 2) and (found12 = true)) and
+  (found22 = true)))
+
+axiom H22 : ((not (found12 = true)) or (not (found22 = true)))
+
+axiom H23 : ((not (found12 = true)) or (to_rep((table[index12])) = value1))
+
+axiom H24 : (found22 = true)
+
  (* File "search.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found1:bool. forall found2:bool. forall index1:int.
-  forall index2:int. forall found:int. forall i:int. forall result:int.
-  forall found3:int. forall result1:bool. forall found11:bool.
-  forall result2:int. forall index11:int. forall result3:bool.
-  forall found21:bool. forall result4:int. forall index21:int.
-  forall result5:int. forall i1:int. forall found12:bool.
-  forall found22:bool. forall index12:int. forall index22:int.
-  forall found4:int. forall i2:int. (dynamic_property((-2147483648),
-  2147483647, to_rep(first(table1)), to_rep(last(table1))) ->
-  (in_range1(value1) -> (in_range1(value2) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(index1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(index2)) -> ((({
-  int__content = result } = { int__content = found }) and (found3 = 0)) ->
-  (in_range2(found3) -> ((({ bool__content = result1 } = { bool__content =
-  found1 }) and (found11 = of_int(0))) -> ((({ int__content = result2 } = {
-  int__content = index1 }) and (index11 = 0)) -> ((({ bool__content = result3
-  } = { bool__content = found2 }) and (found21 = of_int(0))) -> ((({
-  int__content = result4 } = { int__content = index2 }) and (index21 = 0)) ->
-  ((({ int__content = result5 } = { int__content = i }) and
-  (i1 = to_rep(first(table1)))) -> (((to_rep(first(table1)) <= i1) and
-  (i1 <= to_rep(last(table1)))) -> ((((((0 <= 2147483647) ->
-  in_range2(found4)) and (((-2147483648) <= 2147483647) ->
-  in_range1(index12))) and (((-2147483648) <= 2147483647) ->
-  in_range1(index22))) and ((to_rep(first(table1)) <= i2) and
-  (i2 <= to_rep(last(table1))))) -> ((((((found4 = 0) and
-  (not (found12 = true))) and (not (found22 = true))) or ((found4 = 1) and
-  ((found12 = true) or (found22 = true)))) or (((found4 = 2) and
-  (found12 = true)) and (found22 = true))) -> (((not (found12 = true)) or
-  (not (found22 = true))) -> (((not (found12 = true)) or
-  (to_rep((table[index12])) = value1)) -> ((found22 = true) ->
-  (to_rep(first(table1)) <= index22))))))))))))))))))))
+goal WP_parameter_def : (to_rep(first(table1)) <= index22)

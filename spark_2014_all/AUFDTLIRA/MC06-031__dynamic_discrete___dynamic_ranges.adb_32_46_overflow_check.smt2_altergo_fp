@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -470,9 +470,176 @@ axiom c__def_axiom : (c = (last2 - 1))
 
 axiom last__def_axiom2 : (last4 = c)
 
+logic i : int
+
+logic e : int
+
+logic dynamic_ranges__search_0__nested__result : int
+
+logic o : int
+
+logic temp___263 : int
+
+logic temp___264 : int
+
+logic temp___262 : int
+
+logic temp___261 : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic us : int
+
+logic o4 : int
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic us1 : int
+
+logic o8 : int
+
+logic us2 : int
+
+logic o9 : int
+
+logic i1 : int
+
+logic e1 : int
+
+logic dynamic_ranges__search_0__nested__result1 : int
+
+logic result : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic e2 : int
+
+logic result2 : int
+
+logic dynamic_ranges__search_0__nested__result2 : int
+
+logic i3 : int
+
+logic e3 : int
+
+logic dynamic_ranges__search_0__nested__result3 : int
+
+logic result3 : int
+
+logic i4 : int
+
+logic result4 : int
+
+logic e4 : int
+
+logic result5 : int
+
+logic dynamic_ranges__search_0__nested__result4 : int
+
+logic i5 : int
+
+logic e5 : int
+
+logic dynamic_ranges__search_0__nested__result5 : int
+
+logic i6 : int
+
+logic e6 : int
+
+logic dynamic_ranges__search_0__nested__result6 : int
+
+logic i7 : int
+
+logic e7 : int
+
+logic dynamic_ranges__search_0__nested__result7 : int
+
+logic i8 : int
+
+logic e8 : int
+
+logic dynamic_ranges__search_0__nested__result8 : int
+
+logic i9 : int
+
+logic e9 : int
+
+logic dynamic_ranges__search_0__nested__result9 : int
+
+logic i10 : int
+
+logic e10 : int
+
+logic dynamic_ranges__search_0__nested__result10 : int
+
+logic i11 : int
+
+logic e11 : int
+
+logic dynamic_ranges__search_0__nested__result11 : int
+
+logic i12 : int
+
+logic e12 : int
+
+logic dynamic_ranges__search_0__nested__result12 : int
+
+logic result6 : int
+
+logic dynamic_ranges__search_0__nested__result13 : int
+
+logic dynamic_ranges__search_0__nested__result14 : int
+
+logic dynamic_ranges__search_0__nested__result15 : int
+
+logic i13 : int
+
+logic e13 : int
+
+logic dynamic_ranges__search_0__nested__result16 : int
+
+logic i14 : int
+
+logic e14 : int
+
+logic dynamic_ranges__search_0__nested__result17 : int
+
+logic i15 : int
+
+logic e15 : int
+
+logic dynamic_ranges__search_0__nested__result18 : int
+
+logic i16 : int
+
+logic e16 : int
+
+logic dynamic_ranges__search_0__nested__result19 : int
+
+logic result7 : bool
+
+axiom H : dynamic_property1(0, last2, c)
+
+axiom H1 : ((last2 - 1) = c)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H3 : (c <= to_rep(last(a1)))
+
+axiom H4 : (to_rep(first(a1)) <= to_rep(last(a1)))
+
  (* File "dynamic_ranges.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property1(0, last2, c) ->
-  (((last2 - 1) = c) -> (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> ((c <= to_rep(last(a1))) ->
-  ((to_rep(first(a1)) <= to_rep(last(a1))) ->
-  in_range1((to_rep(last(a1)) - to_rep(first(a1)))))))))
+goal WP_parameter_def : in_range1((to_rep(last(a1)) - to_rep(first(a1))))

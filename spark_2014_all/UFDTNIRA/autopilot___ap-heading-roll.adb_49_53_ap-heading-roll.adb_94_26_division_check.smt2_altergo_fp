@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type bankangle
 
-predicate in_range1(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range1(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq1 : int, int -> bool
 
@@ -297,7 +297,7 @@ function machnumber__ref___projection(a: machnumber__ref) : machnumber =
 
 type controlangle
 
-predicate in_range4(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range4(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq5 : int, int -> bool
 
@@ -323,7 +323,7 @@ function controlangle__ref___projection(a: controlangle__ref) : controlangle =
 
 type scaledata
 
-predicate in_range5(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range5(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq6 : int, int -> bool
 
@@ -386,7 +386,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type degreespersec
 
-predicate in_range6(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range6(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq7 : int, int -> bool
 
@@ -412,7 +412,7 @@ function degreespersec__ref___projection(a: degreespersec__ref) : degreespersec 
 
 type degreespersec1
 
-predicate in_range7(x: int) = (((-180) <= x) and (x <= 180))
+predicate in_range7(x: int) = (((- 180) <= x) and (x <= 180))
 
 logic bool_eq8 : int, int -> bool
 
@@ -484,45 +484,179 @@ logic attr__ATTRIBUTE_ADDRESS18 : int
 
 logic attr__ATTRIBUTE_ADDRESS19 : int
 
+logic present_rollrate : int
+
+logic target_rollrate : int
+
+logic aileron_movement : int
+
+logic target_bank : int
+
+logic result__ : int
+
+logic result__1 : int
+
+logic offset : int
+
+logic target_angle : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic ap__heading__roll__rate__calc_rollrate__present_rollrate : int
+
+logic result : int
+
+logic present_rollrate1 : int
+
+logic result1 : int
+
+logic offset1 : int
+
+logic result2 : int
+
+logic result__2 : int
+
+logic result3 : int
+
+logic result__3 : int
+
+logic result4 : int
+
+logic result__4 : int
+
+logic result5 : int
+
+logic result__5 : int
+
+logic result6 : int
+
+logic target_bank1 : int
+
+logic result7 : int
+
+logic result__6 : int
+
+logic result8 : int
+
+logic result__7 : int
+
+logic result9 : int
+
+logic result__8 : int
+
+logic result10 : int
+
+logic target_rollrate1 : int
+
+axiom H : in_range3(mach)
+
+axiom H1 : in_range2(present_heading)
+
+axiom H2 : in_range2(target_heading)
+
+axiom H3 : in_range1(bank)
+
+axiom H4 : (((- 180) <= 180) -> in_range7(present_rollrate))
+
+axiom H5 : (((- 180) <= 180) -> in_range7(target_rollrate))
+
+axiom H6 : (((- 45) <= 45) -> in_range4(aileron_movement))
+
+axiom H7 :
+  in_range6(ap__heading__roll__rate__calc_rollrate__present_rollrate)
+
+axiom H8 : (result = present_rollrate)
+
+axiom H9 :
+  (present_rollrate1 = ap__heading__roll__rate__calc_rollrate__present_rollrate)
+
+axiom H10 : (present_heading = c11b)
+
+axiom H11 : in_range2(c11b)
+
+axiom H12 : (target_heading = c12b)
+
+axiom H13 : in_range2(c12b)
+
+axiom H14 : (bank = c13b)
+
+axiom H15 : in_range1(c13b)
+
+axiom H16 : (((- 45) <= 45) -> in_range1(target_bank))
+
+axiom H17 : (((- 180) <= 180) -> in_range7(result__))
+
+axiom H18 : (c11b = c16b)
+
+axiom H19 : in_range2(c16b)
+
+axiom H20 : (c12b = c17b)
+
+axiom H21 : in_range2(c17b)
+
+axiom H22 : (((- 45) <= 45) -> in_range1(result__1))
+
+axiom H23 : ((0 <= 359) -> in_range2(offset))
+
+axiom H24 : ((o = heading_offset(c16b, c17b)) and in_range2(o))
+
+axiom H25 : (result1 = offset)
+
+axiom H26 : (offset1 = o)
+
+axiom H27 : (((40 <  offset1) and (offset1 <= 180)) -> (result2 = result__1))
+
+axiom H28 : (((40 <  offset1) and (offset1 <= 180)) -> (result__2 = 40))
+
+axiom H29 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  (((180 <  offset1) and (offset1 <  320)) -> (result3 = result__1)))
+
+axiom H30 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  (((180 <  offset1) and (offset1 <  320)) -> (result__3 = (- 40))))
+
+axiom H31 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((offset1 <= 40) ->
+  ((o1 = offset1) and in_range1(offset1)))))
+
+axiom H32 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((offset1 <= 40) ->
+  (result4 = result__1))))
+
+axiom H33 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((offset1 <= 40) ->
+  (result__4 = o1))))
+
+axiom H34 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((not (offset1 <= 40)) ->
+  ((o2 = (360 - offset1)) and in_range1((360 - offset1))))))
+
+axiom H35 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((not (offset1 <= 40)) ->
+  (result5 = result__1))))
+
+axiom H36 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((not (offset1 <= 40)) ->
+  (result__5 = o2))))
+
+axiom H37 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> ((not (offset1 <= 40)) ->
+  (result__4 = result__5))))
+
+axiom H38 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  ((not ((180 <  offset1) and (offset1 <  320))) -> (result__3 = result__4)))
+
+axiom H39 : ((not ((40 <  offset1) and (offset1 <= 180))) ->
+  (result__2 = result__3))
+
+axiom H40 : (result6 = target_bank)
+
+axiom H41 : (target_bank1 = result__2)
+
  (* File "ap-heading-roll-rate.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall present_rollrate:int. forall target_rollrate:int.
-  forall aileron_movement:int. forall target_bank:int. forall result__:int.
-  forall result__1:int. forall offset:int. forall o:int. forall o1:int.
-  forall o2:int.
-  forall ap__heading__roll__rate__calc_rollrate__present_rollrate:int.
-  forall result:int. forall present_rollrate1:int. forall result1:int.
-  forall offset1:int. forall result2:int. forall result__2:int.
-  forall result3:int. forall result__3:int. forall result4:int.
-  forall result__4:int. forall result5:int. forall result__5:int.
-  forall result6:int. forall target_bank1:int. (in_range3(mach) ->
-  (in_range2(present_heading) -> (in_range2(target_heading) ->
-  (in_range1(bank) -> ((((-180) <= 180) -> in_range7(present_rollrate)) ->
-  ((((-180) <= 180) -> in_range7(target_rollrate)) -> ((((-45) <= 45) ->
-  in_range4(aileron_movement)) ->
-  ((in_range6(ap__heading__roll__rate__calc_rollrate__present_rollrate) and
-  ((result = present_rollrate) and
-  (present_rollrate1 = ap__heading__roll__rate__calc_rollrate__present_rollrate))) ->
-  (((present_heading = c11b) and in_range2(c11b)) ->
-  (((target_heading = c12b) and in_range2(c12b)) -> (((bank = c13b) and
-  in_range1(c13b)) -> ((((-45) <= 45) -> in_range1(target_bank)) ->
-  ((((-180) <= 180) -> in_range7(result__)) -> (((c11b = c16b) and
-  in_range2(c16b)) -> (((c12b = c17b) and in_range2(c17b)) ->
-  (((((-45) <= 45) -> in_range1(result__1)) and (((0 <= 359) ->
-  in_range2(offset)) and ((((o = heading_offset(c16b, c17b)) and
-  in_range2(o)) and (({ int__content = result1 } = { int__content = offset
-  }) and (offset1 = o))) and (((((40 <  offset1) and (offset1 <= 180)) and
-  (({ int__content = result2 } = { int__content = result__1 }) and
-  (result__2 = 40))) or ((not ((40 <  offset1) and (offset1 <= 180))) and
-  (((((180 <  offset1) and (offset1 <  320)) and (({ int__content = result3
-  } = { int__content = result__1 }) and (result__3 = (-40)))) or
-  ((not ((180 <  offset1) and (offset1 <  320))) and ((((offset1 <= 40) and
-  (((o1 = offset1) and in_range1(offset1)) and (({ int__content = result4
-  } = { int__content = result__1 }) and (result__4 = o1)))) or
-  ((not (offset1 <= 40)) and ((((o2 = (360 - offset1)) and
-  in_range1((360 - offset1))) and (({ int__content = result5 } = {
-  int__content = result__1 }) and (result__5 = o2))) and
-  (result__4 = result__5)))) and (result__3 = result__4)))) and
-  (result__2 = result__3)))) and (({ int__content = result6 } = {
-  int__content = target_bank }) and (target_bank1 = result__2)))))) ->
-  (not (5 = 0)))))))))))))))))))
+goal WP_parameter_def : (not (5 = 0))

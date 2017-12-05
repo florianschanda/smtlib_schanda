@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -357,8 +357,62 @@ function even_pair__ref___projection(a: even_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : even
+
+logic x__split_fields1 : even
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : even
+
+logic o3 : even
+
+logic temp___310 : even
+
+logic temp___3101 : even
+
+logic o4 : int
+
+logic o5 : even
+
+logic o6 : even
+
+logic o7 : even
+
+logic temp___314 : even
+
+logic temp___3141 : even
+
+logic result : even
+
+logic result1 : even
+
+logic x__split_fields2 : even
+
+logic x__split_fields3 : even
+
+logic result2 : even
+
+logic result3 : even
+
+logic x__split_fields4 : even
+
+logic x__split_fields5 : even
+
+logic x__split_fields6 : even
+
+logic x__split_fields7 : even
+
+logic x__split_fields8 : even
+
+logic x__split_fields9 : even
+
+axiom H : (in_range1(i7s) and (mod(i7s, 2) = 0))
+
+axiom H1 : ((mod(to_rep(x__split_fields), 2) = 0) and
+  (mod(to_rep(x__split_fields1), 2) = 0))
+
  (* File "dynamic_preds.adb", line 125, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:even. forall x__split_fields1:even.
-  ((in_range1(i7s) and (mod(i7s, 2) = 0)) -> (((mod(to_rep(x__split_fields),
-  2) = 0) and (mod(to_rep(x__split_fields1), 2) = 0)) -> (mod(0, 2) = 0))))
+goal WP_parameter_def : (mod(0, 2) = 0)

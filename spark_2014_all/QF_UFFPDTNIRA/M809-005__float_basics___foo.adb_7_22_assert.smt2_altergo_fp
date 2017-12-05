@@ -1858,7 +1858,13 @@ logic y : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite1(y)
+
+axiom H2 : eq(to_float32(NearestTiesToEven, y), x)
+
  (* File "generic_float_tests.adb", line 444, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite1(y) ->
-  (eq(to_float32(NearestTiesToEven, y), x) ->
-  eq1(to_float64(NearestTiesToEven, x), y))))
+goal WP_parameter_def : eq1(to_float64(NearestTiesToEven, x), y)

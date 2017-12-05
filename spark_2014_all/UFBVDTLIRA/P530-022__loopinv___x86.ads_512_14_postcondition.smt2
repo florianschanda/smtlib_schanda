@@ -106,6 +106,8 @@
 (declare-const r111 (_ BitVec 64))
 (declare-const r112 (_ BitVec 64))
 (declare-const r113 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result r11))
 (assert (= r111 (bvor (bvand r11 ((_ int2bv 64) 18446744073709551360)) ((_ zero_extend 56) val__))))
 (assert (= r111 r112))

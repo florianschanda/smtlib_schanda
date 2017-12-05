@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -220,10 +220,24 @@ logic b : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = b)
+
+axiom H2 : (a1 = a2)
+
+axiom H3 : (a3 = a1)
+
  (* File "simple_arrays.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall result:(int,integer) farray.
-  forall a1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. ((((result = a) and (a1 = b)) and
-  ((a1 = a2) and (a3 = a1))) -> (bool_eq2(a2, (-2147483648), 2147483647, b,
-  (-2147483648), 2147483647) = true)))
+goal WP_parameter_def : (bool_eq2(a2, (- 2147483648), 2147483647, b,
+  (- 2147483648), 2147483647) = true)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1030,10 +1030,29 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r10 : t
+
+logic result : t
+
+logic r101 : t
+
+logic r102 : t
+
+logic r103 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = r10)
+
+axiom H3 : (r101 = bw_or(bw_and(r10, of_int(18446744073709551360)),
+  toBig(val__)))
+
+axiom H4 : (r101 = r102)
+
+axiom H5 : (r103 = r101)
+
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r10:t. forall result:t. forall r101:t. forall r102:t.
-  forall r103:t. ((((result = r10) and (r101 = bw_or(bw_and(r10,
-  of_int(18446744073709551360)), toBig(val__)))) and ((r101 = r102) and
-  (r103 = r101))) -> (r102 = bw_or(bw_and(r10, of_int(18446744073709551360)),
-  toBig(val__)))))
+goal WP_parameter_def : (r102 = bw_or(bw_and(r10,
+  of_int(18446744073709551360)), toBig(val__)))

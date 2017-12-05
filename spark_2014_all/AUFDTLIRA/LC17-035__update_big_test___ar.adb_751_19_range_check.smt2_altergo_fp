@@ -546,17 +546,93 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next : int
+
+logic f : int
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : et1
+
+logic o7 : (int,et1) farray
+
+logic o8 : (int,(int,et1) farray) farray
+
+logic o9 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : int
+
+logic k_next1 : int
+
+logic result2 : int
+
+logic k_next2 : int
+
+logic result3 : int
+
+logic f1 : int
+
+logic result4 : int
+
+logic f2 : int
+
+logic result5 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next3 : int
+
+logic f3 : int
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+logic k_next4 : int
+
+logic f4 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range3(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : ((1 <= 16) -> in_range3(k_next))
+
+axiom H5 : ((0 <= 99) -> in_range4(f))
+
+axiom H6 : (to_rep(o) = e)
+
+axiom H7 : (o1 = (((a[k])[j])[i <- o]))
+
+axiom H8 : (o2 = ((a[k])[j <- o1]))
+
+axiom H9 : (o3 = (a[k <- o2]))
+
+axiom H10 : (result = a)
+
+axiom H11 : (a1 = o3)
+
+axiom H12 : (not (k = 16))
+
  (* File "ar.ads", line 461, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall k_next:int.
-  forall f:int. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray. (in_range1(i) ->
-  (in_range2(j) -> (in_range3(k) -> (in_range4(e) -> (((1 <= 16) ->
-  in_range3(k_next)) -> (((0 <= 99) -> in_range4(f)) ->
-  ((((((to_rep(o) = e) and (o1 = (((a[k])[j])[i <- o]))) and
-  (o2 = ((a[k])[j <- o1]))) and (o3 = (a[k <- o2]))) and (({ map__content2 =
-  result } = { map__content2 = a }) and (a1 = o3))) -> ((not (k = 16)) ->
-  in_range3((k + 1)))))))))))
+goal WP_parameter_def : in_range3((k + 1))

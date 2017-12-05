@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -590,42 +590,254 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ret:(int,character) farray. forall to_up:bool. forall idx:int.
-  forall hello__to_camel_case__ret__assume:(int,character) farray.
-  forall hello__to_camel_case__ret__assume1:t1. forall o:int.
-  forall o1:character. forall o2:(int,character) farray. forall o3:int.
-  forall o4:character. forall o5:(int,character) farray.
-  forall result:(int,character) farray. forall ret1:(int,character) farray.
-  forall result1:bool. forall to_up1:bool. forall result2:int.
-  forall idx1:int. forall result3:(int,character) farray.
-  forall ret2:(int,character) farray. forall result4:(int,character) farray.
-  forall ret3:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) -> ((((slide(str,
-  to_rep1(first(str1)),
-  to_rep1(first(str1))) = hello__to_camel_case__ret__assume) and
-  (mk1(to_rep1(first(str1)),
-  to_rep1(last(str1))) = hello__to_camel_case__ret__assume1)) and ((({
-  map__content = result } = { map__content = ret }) and
-  (ret1 = hello__to_camel_case__ret__assume)) and
-  ((to_rep1(ret__first) = to_rep1(first2(hello__to_camel_case__ret__assume1))) and
-  (to_rep1(ret__last) = to_rep1(last2(hello__to_camel_case__ret__assume1)))))) ->
-  ((dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
+logic ret : (int,character) farray
+
+logic to_up : bool
+
+logic idx : int
+
+logic hello__to_camel_case__result : (int,character) farray
+
+logic hello__to_camel_case__result1 : t
+
+logic hello__to_camel_case__ret__assume : (int,character) farray
+
+logic hello__to_camel_case__ret__assume1 : t1
+
+logic temp___592 : int
+
+logic temp___591 : bool
+
+logic temp___589 : (int,character) farray
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : (int,character) farray
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : (int,character) farray
+
+logic us : bool
+
+logic j : int
+
+logic o6 : int
+
+logic o7 : character
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : (int,character) farray
+
+logic o12 : int
+
+logic o13 : character
+
+logic o14 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic ret1 : (int,character) farray
+
+logic result1 : bool
+
+logic to_up1 : bool
+
+logic result2 : int
+
+logic idx1 : int
+
+logic result3 : (int,character) farray
+
+logic ret2 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic ret3 : (int,character) farray
+
+logic ret4 : (int,character) farray
+
+logic to_up2 : bool
+
+logic idx2 : int
+
+logic result5 : bool
+
+logic to_up3 : bool
+
+logic result6 : bool
+
+logic to_up4 : bool
+
+logic result7 : int
+
+logic idx3 : int
+
+logic result8 : (int,character) farray
+
+logic ret5 : (int,character) farray
+
+logic result9 : (int,character) farray
+
+logic ret6 : (int,character) farray
+
+logic ret7 : (int,character) farray
+
+logic to_up5 : bool
+
+logic idx4 : int
+
+logic ret8 : (int,character) farray
+
+logic to_up6 : bool
+
+logic idx5 : int
+
+logic ret9 : (int,character) farray
+
+logic to_up7 : bool
+
+logic idx6 : int
+
+logic ret10 : (int,character) farray
+
+logic to_up8 : bool
+
+logic idx7 : int
+
+logic ret11 : (int,character) farray
+
+logic to_up9 : bool
+
+logic idx8 : int
+
+logic ret12 : (int,character) farray
+
+logic to_up10 : bool
+
+logic idx9 : int
+
+logic result10 : (int,character) farray
+
+logic result11 : t
+
+logic hello__to_camel_case__result2 : (int,character) farray
+
+logic hello__to_camel_case__result3 : t
+
+logic hello__to_camel_case__result4 : (int,character) farray
+
+logic hello__to_camel_case__result5 : t
+
+logic hello__to_camel_case__result6 : (int,character) farray
+
+logic hello__to_camel_case__result7 : t
+
+logic ret13 : (int,character) farray
+
+logic to_up11 : bool
+
+logic idx10 : int
+
+logic hello__to_camel_case__result8 : (int,character) farray
+
+logic hello__to_camel_case__result9 : t
+
+logic ret14 : (int,character) farray
+
+logic to_up12 : bool
+
+logic idx11 : int
+
+logic hello__to_camel_case__result10 : (int,character) farray
+
+logic hello__to_camel_case__result11 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : true
+
+axiom H2 : (slide(str, to_rep1(first(str1)),
+  to_rep1(first(str1))) = hello__to_camel_case__ret__assume)
+
+axiom H3 : (mk1(to_rep1(first(str1)),
+  to_rep1(last(str1))) = hello__to_camel_case__ret__assume1)
+
+axiom H4 : (result = ret)
+
+axiom H5 : (ret1 = hello__to_camel_case__ret__assume)
+
+axiom H6 :
+  (to_rep1(ret__first) = to_rep1(first2(hello__to_camel_case__ret__assume1)))
+
+axiom H7 :
+  (to_rep1(ret__last) = to_rep1(last2(hello__to_camel_case__ret__assume1)))
+
+axiom H8 : (dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
   to_rep1(ret__first), to_rep1(ret__last)) and
   ((to_rep1(ret__first) = to_rep1(first(str1))) and
-  (to_rep1(ret__last) = to_rep1(last(str1))))) -> ((({ bool__content =
-  result1 } = { bool__content = to_up }) and (to_up1 = of_int(1))) -> ((({
-  int__content = result2 } = { int__content = idx }) and
-  (idx1 = to_rep1(first(str1)))) -> (((to_rep1(first(str1)) <= idx1) and
-  (idx1 <= to_rep1(last(str1)))) -> ((((to_up1 = true) and
-  (((((o = to_upper(to_rep((ret1[idx1])))) and in_range3(o)) and
-  (to_rep(o1) = o)) and (o2 = (ret1[idx1 <- o1]))) and ((ret1 = result3) and
-  (ret2 = o2)))) or ((not (to_up1 = true)) and
-  ((((((o3 = to_lower(to_rep((ret1[idx1])))) and in_range3(o3)) and
-  (to_rep(o4) = o3)) and (o5 = (ret1[idx1 <- o4]))) and ((ret1 = result4) and
-  (ret3 = o5))) and (ret2 = ret3)))) -> (((to_rep1(first(str1)) <= idx1) and
-  (idx1 <= to_rep1(last(str1)))) -> (((to_rep1(ret__first) <= idx1) and
-  (idx1 <= to_rep1(ret__last))) ->
-  (forall j:int. (((idx1 <= j) and (j <= to_rep1(last(str1)))) ->
-  ((idx1 <  j) -> (to_rep((ret2[j])) = to_rep((str[j]))))))))))))))))
+  (to_rep1(ret__last) = to_rep1(last(str1)))))
+
+axiom H9 : (result1 = to_up)
+
+axiom H10 : (to_up1 = of_int(1))
+
+axiom H11 : (result2 = idx)
+
+axiom H12 : (idx1 = to_rep1(first(str1)))
+
+axiom H13 : (to_rep1(first(str1)) <= idx1)
+
+axiom H14 : (idx1 <= to_rep1(last(str1)))
+
+axiom H15 : ((to_up1 = true) -> ((o = to_upper(to_rep((ret1[idx1])))) and
+  in_range3(o)))
+
+axiom H16 : ((to_up1 = true) -> (to_rep(o1) = o))
+
+axiom H17 : ((to_up1 = true) -> (o2 = (ret1[idx1 <- o1])))
+
+axiom H18 : ((to_up1 = true) -> (ret1 = result3))
+
+axiom H19 : ((to_up1 = true) -> (ret2 = o2))
+
+axiom H20 : ((not (to_up1 = true)) ->
+  ((o3 = to_lower(to_rep((ret1[idx1])))) and in_range3(o3)))
+
+axiom H21 : ((not (to_up1 = true)) -> (to_rep(o4) = o3))
+
+axiom H22 : ((not (to_up1 = true)) -> (o5 = (ret1[idx1 <- o4])))
+
+axiom H23 : ((not (to_up1 = true)) -> (ret1 = result4))
+
+axiom H24 : ((not (to_up1 = true)) -> (ret3 = o5))
+
+axiom H25 : ((not (to_up1 = true)) -> (ret2 = ret3))
+
+axiom H26 : true
+
+axiom H27 : ((to_rep1(first(str1)) <= idx1) and
+  (idx1 <= to_rep1(last(str1))))
+
+axiom H28 : ((to_rep1(ret__first) <= idx1) and (idx1 <= to_rep1(ret__last)))
+
+logic j1 : int
+
+axiom H29 : (idx1 <= j1)
+
+axiom H30 : (j1 <= to_rep1(last(str1)))
+
+axiom H31 : (idx1 <  j1)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep((ret2[j1])) = to_rep((str[j1])))

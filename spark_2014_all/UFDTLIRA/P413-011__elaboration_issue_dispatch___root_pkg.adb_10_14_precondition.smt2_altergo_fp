@@ -372,9 +372,13 @@ axiom extension_pkg__ext__compat_axiom3 :
   us_split_fields3 = { rec__extension_pkg__ext__flag = x; rec__ext__1 = x1 };
   attr__tag1 = x2 }, extension_pkg__body_elaborated)))))
 
+logic body_elaborated : bool
+
+logic o : bool
+
+axiom H : (get1(y1, { us_split_fields1 = { rec__ext__ = y }; attr__tag = y1
+  }, body_elaborated) = true)
+
  (* File "root_pkg.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall body_elaborated:bool. ((get1(y1, { us_split_fields1 = {
-  rec__ext__ = y }; attr__tag = y1 }, body_elaborated) = true) -> (get1(y1, {
-  us_split_fields1 = { rec__ext__ = y }; attr__tag = y1 },
-  body_elaborated) = true)))
+goal WP_parameter_def : (get1(y1, { us_split_fields1 = { rec__ext__ = y };
+  attr__tag = y1 }, body_elaborated) = true)

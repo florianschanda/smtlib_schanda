@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -193,17 +193,17 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
-  (q__t__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a)))) and
-  (q__t__c__pred(a) ->
-  (((a).us_split_fields1).rec__q__t__c = ((b).us_split_fields1).rec__q__t__c))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
-  (q__t__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a)))) and
+  ((((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
+  ((q__t__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a))) and
   (q__t__c__pred(a) ->
   (((a).us_split_fields1).rec__q__t__c = ((b).us_split_fields1).rec__q__t__c)))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((((a).us_split_discrs1).rec__q__t__b = ((b).us_split_discrs1).rec__q__t__b) and
+  ((q__t__a__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__q__t__a) = to_rep(((b).us_split_fields1).rec__q__t__a))) and
+  (q__t__c__pred(a) ->
+  (((a).us_split_fields1).rec__q__t__c = ((b).us_split_fields1).rec__q__t__c))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -289,12 +289,27 @@ logic res__split_discrs : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res__split_fields : integer
+
+logic res__split_fields1 : bool
+
+logic result : integer
+
+logic result1 : bool
+
+logic res__split_fields2 : integer
+
+logic res__split_fields3 : bool
+
+axiom H : (result = res__split_fields)
+
+axiom H1 : (result1 = res__split_fields1)
+
+axiom H2 : ((res__split_fields2 = x1) and (res__split_fields3 = x2))
+
+axiom H3 : (res__split_discrs = x)
+
+axiom H4 : (to_int(res__split_discrs) = 1)
+
  (* File "q.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res__split_fields:integer. forall res__split_fields1:bool.
-  forall result:integer. forall result1:bool.
-  forall res__split_fields2:integer. forall res__split_fields3:bool.
-  (((((result = res__split_fields) and (result1 = res__split_fields1)) and
-  ((res__split_fields2 = x1) and (res__split_fields3 = x2))) and
-  (res__split_discrs = x)) -> ((to_int(res__split_discrs) = 1) ->
-  (to_int(res__split_discrs) = 1))))
+goal WP_parameter_def : (to_int(res__split_discrs) = 1)

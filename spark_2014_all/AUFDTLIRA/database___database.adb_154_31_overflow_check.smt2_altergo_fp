@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -446,15 +446,59 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic links : (int,us_rep) farray
+
+logic count : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic count2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic count3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+axiom H : (result = count)
+
+axiom H1 : (count1 = 0)
+
+axiom H2 : in_range2(count1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 200000)
+
+axiom H7 : (count2 <  i2)
+
+axiom H8 : ((((0 <= 2147483647) -> in_range2(count2)) and ((1 <= 200000) ->
+  in_range3(i2))) and ((1 <= i2) and (i2 <= 200000)))
+
+axiom H9 : ((result2 = is_available(i2, links)) and ((result2 = true) <->
+  ((((links[i2])).us_split_fields1).rec__database__availability__account_link__available = true)))
+
+axiom H10 : (result2 = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall links:(int,us_rep) farray. forall count:int. forall i:int.
-  forall result:int. forall count1:int. forall result1:int. forall i1:int.
-  forall count2:int. forall i2:int. forall result2:bool.
-  (((result = count) and (count1 = 0)) -> (in_range2(count1) ->
-  (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 200000)) ->
-  ((count2 <  i2) -> (((((0 <= 2147483647) -> in_range2(count2)) and
-  ((1 <= 200000) -> in_range3(i2))) and ((1 <= i2) and (i2 <= 200000))) ->
-  (((result2 = is_available(i2, links)) and ((result2 = true) <->
-  ((((links[i2])).us_split_fields1).rec__database__availability__account_link__available = true))) ->
-  ((result2 = true) -> in_range1((count2 + 1)))))))))))
+goal WP_parameter_def : in_range1((count2 + 1))

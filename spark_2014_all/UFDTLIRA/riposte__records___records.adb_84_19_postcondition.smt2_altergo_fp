@@ -276,38 +276,84 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:unsigned_byte.
-  forall r__split_fields1:unsigned_byte.
-  forall records__safe_add_pair_b__result:unsigned_byte.
-  forall records__safe_add_pair_b__result1:unsigned_byte.
-  forall temp___276:unsigned_byte. forall temp___2761:unsigned_byte.
-  forall o:unsigned_byte. forall o1:unsigned_byte. forall o2:unsigned_byte.
-  forall o3:unsigned_byte. forall temp___275:unsigned_byte.
-  forall temp___2751:unsigned_byte. forall result:unsigned_byte.
-  forall result1:unsigned_byte. forall r__split_fields2:unsigned_byte.
-  forall r__split_fields3:unsigned_byte. forall result2:unsigned_byte.
-  forall result3:unsigned_byte. forall r__split_fields4:unsigned_byte.
-  forall r__split_fields5:unsigned_byte. forall result4:unsigned_byte.
-  forall result5:unsigned_byte.
-  forall records__safe_add_pair_b__result2:unsigned_byte.
-  forall records__safe_add_pair_b__result3:unsigned_byte.
-  forall records__safe_add_pair_b__result4:unsigned_byte.
-  forall records__safe_add_pair_b__result5:unsigned_byte.
-  forall records__safe_add_pair_b__result6:unsigned_byte.
-  forall records__safe_add_pair_b__result7:unsigned_byte.
-  forall r__split_fields6:unsigned_byte.
-  forall r__split_fields7:unsigned_byte.
-  forall records__safe_add_pair_b__result8:unsigned_byte.
-  forall records__safe_add_pair_b__result9:unsigned_byte.
-  forall r__split_fields8:unsigned_byte.
-  forall r__split_fields9:unsigned_byte.
-  forall records__safe_add_pair_b__result10:unsigned_byte.
-  forall records__safe_add_pair_b__result11:unsigned_byte.
-  (forall result6:unsigned_byte. forall result7:unsigned_byte.
-  (((((((((to_rep(a) + 1) <= (255 - to_rep(b))) and
-  (to_rep(a1) <= (255 - to_rep(b1)))) and ((({ us_split_fields1 = {
+logic r__split_fields : unsigned_byte
+
+logic r__split_fields1 : unsigned_byte
+
+logic records__safe_add_pair_b__result : unsigned_byte
+
+logic records__safe_add_pair_b__result1 : unsigned_byte
+
+logic temp___276 : unsigned_byte
+
+logic temp___2761 : unsigned_byte
+
+logic o : unsigned_byte
+
+logic o1 : unsigned_byte
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic temp___275 : unsigned_byte
+
+logic temp___2751 : unsigned_byte
+
+logic result : unsigned_byte
+
+logic result1 : unsigned_byte
+
+logic r__split_fields2 : unsigned_byte
+
+logic r__split_fields3 : unsigned_byte
+
+logic result2 : unsigned_byte
+
+logic result3 : unsigned_byte
+
+logic r__split_fields4 : unsigned_byte
+
+logic r__split_fields5 : unsigned_byte
+
+logic result4 : unsigned_byte
+
+logic result5 : unsigned_byte
+
+logic records__safe_add_pair_b__result2 : unsigned_byte
+
+logic records__safe_add_pair_b__result3 : unsigned_byte
+
+logic records__safe_add_pair_b__result4 : unsigned_byte
+
+logic records__safe_add_pair_b__result5 : unsigned_byte
+
+logic records__safe_add_pair_b__result6 : unsigned_byte
+
+logic records__safe_add_pair_b__result7 : unsigned_byte
+
+logic r__split_fields6 : unsigned_byte
+
+logic r__split_fields7 : unsigned_byte
+
+logic records__safe_add_pair_b__result8 : unsigned_byte
+
+logic records__safe_add_pair_b__result9 : unsigned_byte
+
+logic r__split_fields8 : unsigned_byte
+
+logic r__split_fields9 : unsigned_byte
+
+logic records__safe_add_pair_b__result10 : unsigned_byte
+
+logic records__safe_add_pair_b__result11 : unsigned_byte
+
+logic result6 : unsigned_byte
+
+logic result7 : unsigned_byte
+
+axiom H : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> (({ us_split_fields1 = {
   rec__records_prooffuncs__pair__a = temp___276;
   rec__records_prooffuncs__pair__b = temp___2761 } } = add_pair_a({
   us_split_fields1 = { rec__records_prooffuncs__pair__a = a;
@@ -318,46 +364,96 @@ goal WP_parameter_def :
   rec__records_prooffuncs__pair__b = temp___2761 } }, { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = of_rep((to_rep(a) + to_rep(b)));
   rec__records_prooffuncs__pair__b = of_rep((to_rep(a1) + to_rep(b1))) }
-  }) = true)) and (((result = r__split_fields) and
-  (result1 = r__split_fields1)) and ((temp___276 = r__split_fields2) and
-  (temp___2761 = r__split_fields3))))) or
-  ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
-  (to_rep(a1) <= (255 - to_rep(b1))))) and (((((to_rep(o) = 0) and
-  ((to_rep(o1) = 0) and ((o1 = o2) and (o = o3)))) and ((temp___275 = o2) and
-  (temp___2751 = o3))) and (((result2 = r__split_fields) and
-  (result3 = r__split_fields1)) and ((temp___275 = r__split_fields4) and
-  (temp___2751 = r__split_fields5)))) and
-  ((r__split_fields4 = r__split_fields2) and
-  (r__split_fields5 = r__split_fields3))))) and
-  ((((records__safe_add_pair_b__result4 = records__safe_add_pair_b__result2) and
-  (records__safe_add_pair_b__result5 = records__safe_add_pair_b__result3)) and
-  ({ us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  records__safe_add_pair_b__result6; rec__records_prooffuncs__pair__b =
-  records__safe_add_pair_b__result7 } } = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__safe_add_pair_b__result2;
-  rec__records_prooffuncs__pair__b = records__safe_add_pair_b__result3 }
-  })) and (((result4 = records__safe_add_pair_b__result) and
-  (result5 = records__safe_add_pair_b__result1)) and
-  ((records__safe_add_pair_b__result2 = r__split_fields2) and
-  (records__safe_add_pair_b__result3 = r__split_fields3))))) and ((({
-  pair__content = { us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  records__safe_add_pair_b__result8; rec__records_prooffuncs__pair__b =
-  records__safe_add_pair_b__result9 } } } = { pair__content = {
-  us_split_fields1 = { rec__records_prooffuncs__pair__a =
-  records__safe_add_pair_b__result4; rec__records_prooffuncs__pair__b =
-  records__safe_add_pair_b__result5 } } }) and
-  ((r__split_fields6 = r__split_fields2) and
-  (r__split_fields7 = r__split_fields3))) and
-  (((records__safe_add_pair_b__result10 = records__safe_add_pair_b__result6) and
-  (records__safe_add_pair_b__result11 = records__safe_add_pair_b__result7)) and
-  ((r__split_fields8 = r__split_fields2) and
-  (r__split_fields9 = r__split_fields3))))) and
-  ((result6 = records__safe_add_pair_b__result8) and
-  (result7 = records__safe_add_pair_b__result9))) ->
-  ((in_range1((to_rep(a) + to_rep(b))) and
-  in_range1((to_rep(a1) + to_rep(b1)))) -> (bool_eq3({ us_split_fields1 = {
+  }) = true)))
+
+axiom H1 : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> (result = r__split_fields))
+
+axiom H2 : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> (result1 = r__split_fields1))
+
+axiom H3 : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> (temp___276 = r__split_fields2))
+
+axiom H4 : ((((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1)))) -> (temp___2761 = r__split_fields3))
+
+axiom H5 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (to_rep(o) = 0))
+
+axiom H6 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (to_rep(o1) = 0))
+
+axiom H7 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (o1 = o2))
+
+axiom H8 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (o = o3))
+
+axiom H9 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (temp___275 = o2))
+
+axiom H10 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (temp___2751 = o3))
+
+axiom H11 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (result2 = r__split_fields))
+
+axiom H12 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (result3 = r__split_fields1))
+
+axiom H13 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (temp___275 = r__split_fields4))
+
+axiom H14 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) -> (temp___2751 = r__split_fields5))
+
+axiom H15 : ((not (((to_rep(a) + 1) <= (255 - to_rep(b))) and
+  (to_rep(a1) <= (255 - to_rep(b1))))) ->
+  ((r__split_fields2 = r__split_fields4) and
+  (r__split_fields3 = r__split_fields5)))
+
+axiom H16 :
+  ((records__safe_add_pair_b__result4 = records__safe_add_pair_b__result2) and
+  (records__safe_add_pair_b__result5 = records__safe_add_pair_b__result3))
+
+axiom H17 :
+  ((records__safe_add_pair_b__result6 = records__safe_add_pair_b__result2) and
+  (records__safe_add_pair_b__result7 = records__safe_add_pair_b__result3))
+
+axiom H18 : (result4 = records__safe_add_pair_b__result)
+
+axiom H19 : (result5 = records__safe_add_pair_b__result1)
+
+axiom H20 : (records__safe_add_pair_b__result2 = r__split_fields2)
+
+axiom H21 : (records__safe_add_pair_b__result3 = r__split_fields3)
+
+axiom H22 :
+  ((records__safe_add_pair_b__result8 = records__safe_add_pair_b__result4) and
+  (records__safe_add_pair_b__result9 = records__safe_add_pair_b__result5))
+
+axiom H23 : ((r__split_fields6 = r__split_fields2) and
+  (r__split_fields7 = r__split_fields3))
+
+axiom H24 :
+  ((records__safe_add_pair_b__result10 = records__safe_add_pair_b__result6) and
+  (records__safe_add_pair_b__result11 = records__safe_add_pair_b__result7))
+
+axiom H25 : ((r__split_fields8 = r__split_fields2) and
+  (r__split_fields9 = r__split_fields3))
+
+axiom H26 : ((result6 = records__safe_add_pair_b__result8) and
+  (result7 = records__safe_add_pair_b__result9))
+
+axiom H27 : in_range1((to_rep(a) + to_rep(b)))
+
+axiom H28 : in_range1((to_rep(a1) + to_rep(b1)))
+
+ (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3({ us_split_fields1 = {
   rec__records_prooffuncs__pair__a = records__safe_add_pair_b__result8;
   rec__records_prooffuncs__pair__b = records__safe_add_pair_b__result9 } }, {
   us_split_fields1 = { rec__records_prooffuncs__pair__a =
   of_rep((to_rep(a) + to_rep(b))); rec__records_prooffuncs__pair__b =
-  of_rep((to_rep(a1) + to_rep(b1))) } }) = true)))))
+  of_rep((to_rep(a1) + to_rep(b1))) } }) = true)

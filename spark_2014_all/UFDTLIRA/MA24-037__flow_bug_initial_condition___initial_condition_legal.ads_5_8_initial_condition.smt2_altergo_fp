@@ -91,9 +91,19 @@ axiom f1__def_axiom :
   ((f1(initial_condition_legal__flag) = true) <->
   (initial_condition_legal__flag = true)))
 
+logic flag : bool
+
+logic result : bool
+
+logic flag1 : bool
+
+logic result1 : bool
+
+axiom H : (result = flag)
+
+axiom H1 : (flag1 = of_int(1))
+
+axiom H2 : ((result1 = f1(flag1)) and ((result1 = true) <-> (flag1 = true)))
+
  (* File "initial_condition_legal.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall flag:bool. forall result:bool. forall flag1:bool.
-  (forall result1:bool. ((((result = flag) and (flag1 = of_int(1))) and
-  ((result1 = f1(flag1)) and ((result1 = true) <-> (flag1 = true)))) ->
-  (f1(flag1) = true))))
+goal WP_parameter_def : (f1(flag1) = true)

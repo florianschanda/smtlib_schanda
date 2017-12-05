@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -984,14 +984,403 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range8(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic avail : us_rep1
+
+logic alloc : us_rep2
+
+logic unseen : us_rep2
+
+logic r : int
+
+logic r1 : int
+
+logic list_mod_allocator__m__model__result : us_rep1
+
+logic list_mod_allocator__m__model__result1 : us_rep2
+
+logic temp___290 : int
+
+logic temp___289 : us_rep2
+
+logic temp___288 : us_rep2
+
+logic e : int
+
+logic o : bool
+
+logic e1 : int
+
+logic o1 : bool
+
+logic e2 : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : status
+
+logic o6 : resource
+
+logic o7 : status
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : us_rep2
+
+logic o12 : us_rep2
+
+logic o13 : bool
+
+logic o14 : bool
+
+logic temp___295 : int
+
+logic temp___294 : us_rep2
+
+logic temp___293 : us_rep1
+
+logic temp___299 : int
+
+logic o15 : us_rep2
+
+logic o16 : us_rep1
+
+logic o17 : int
+
+logic o18 : status
+
+logic o19 : resource
+
+logic o20 : status
+
+logic o21 : resource
+
+logic o22 : resource
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic j : int
+
+logic o26 : int
+
+logic o27 : bool
+
+logic o28 : int
+
+logic o29 : int
+
+logic temp___296 : int
+
+logic j1 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : bool
+
+logic temp___297 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic j2 : int
+
+logic o35 : int
+
+logic o36 : bool
+
+logic temp___298 : int
+
+logic o37 : int
+
+logic o38 : status
+
+logic o39 : resource
+
+logic o40 : status
+
+logic o41 : resource
+
+logic o42 : resource
+
+logic o43 : int
+
+logic o44 : int
+
+logic j3 : int
+
+logic o45 : int
+
+logic o46 : bool
+
+logic k : int
+
+logic o47 : int
+
+logic o48 : bool
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : bool
+
+logic o52 : bool
+
+logic o53 : bool
+
+logic o54 : us_rep2
+
+logic o55 : us_rep1
+
+logic o56 : int
+
+logic o57 : status
+
+logic o58 : resource
+
+logic o59 : status
+
+logic o60 : resource
+
+logic o61 : resource
+
+logic o62 : int
+
+logic avail1 : us_rep1
+
+logic alloc1 : us_rep2
+
+logic unseen1 : us_rep2
+
+logic result : int
+
+logic r2 : int
+
+logic alloc2 : us_rep2
+
+logic unseen2 : us_rep2
+
+logic r3 : int
+
+logic result1 : bool
+
+logic result2 : us_rep2
+
+logic alloc3 : us_rep2
+
+logic result3 : us_rep2
+
+logic unseen3 : us_rep2
+
+logic result4 : int
+
+logic r4 : int
+
+logic alloc4 : us_rep2
+
+logic unseen4 : us_rep2
+
+logic r5 : int
+
+logic alloc5 : us_rep2
+
+logic unseen5 : us_rep2
+
+logic r6 : int
+
+logic alloc6 : us_rep2
+
+logic unseen6 : us_rep2
+
+logic r7 : int
+
+logic alloc7 : us_rep2
+
+logic unseen7 : us_rep2
+
+logic r8 : int
+
+logic result5 : int
+
+logic r9 : int
+
+logic result6 : bool
+
+logic result7 : us_rep2
+
+logic unseen8 : us_rep2
+
+logic result8 : us_rep1
+
+logic avail2 : us_rep1
+
+logic result9 : int
+
+logic r10 : int
+
+logic avail3 : us_rep1
+
+logic unseen9 : us_rep2
+
+logic r11 : int
+
+logic temp___2991 : int
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+logic result14 : bool
+
+logic result15 : bool
+
+logic result16 : int
+
+logic temp___2992 : int
+
+logic result17 : bool
+
+logic result18 : us_rep2
+
+logic unseen10 : us_rep2
+
+logic result19 : us_rep1
+
+logic avail4 : us_rep1
+
+logic result20 : int
+
+logic r12 : int
+
+logic avail5 : us_rep1
+
+logic unseen11 : us_rep2
+
+logic r13 : int
+
+logic temp___2993 : int
+
+logic avail6 : us_rep1
+
+logic unseen12 : us_rep2
+
+logic r14 : int
+
+logic temp___2994 : int
+
+logic avail7 : us_rep1
+
+logic unseen13 : us_rep2
+
+logic r15 : int
+
+logic avail8 : us_rep1
+
+logic unseen14 : us_rep2
+
+logic r16 : int
+
+logic avail9 : us_rep1
+
+logic unseen15 : us_rep2
+
+logic r17 : int
+
+logic avail10 : us_rep1
+
+logic unseen16 : us_rep2
+
+logic r18 : int
+
+logic result21 : us_rep1
+
+logic result22 : us_rep2
+
+logic list_mod_allocator__m__model__result2 : us_rep1
+
+logic list_mod_allocator__m__model__result3 : us_rep2
+
+logic list_mod_allocator__m__model__result4 : us_rep1
+
+logic list_mod_allocator__m__model__result5 : us_rep2
+
+logic list_mod_allocator__m__model__result6 : us_rep1
+
+logic list_mod_allocator__m__model__result7 : us_rep2
+
+logic avail11 : us_rep1
+
+logic alloc8 : us_rep2
+
+logic unseen17 : us_rep2
+
+logic r19 : int
+
+logic r20 : int
+
+logic list_mod_allocator__m__model__result8 : us_rep1
+
+logic list_mod_allocator__m__model__result9 : us_rep2
+
+logic avail12 : us_rep1
+
+logic alloc9 : us_rep2
+
+logic unseen18 : us_rep2
+
+logic r21 : int
+
+logic r22 : int
+
+logic list_mod_allocator__m__model__result10 : us_rep1
+
+logic list_mod_allocator__m__model__result11 : us_rep2
+
+axiom H : in_range2(first_available)
+
+axiom H1 : (is_well_formed(data, first_available) = true)
+
+axiom H2 : (length(avail) = 0)
+
+axiom H3 : (is_empty(alloc) = true)
+
+axiom H4 : (is_empty(unseen) = true)
+
+axiom H5 : (result = r)
+
+axiom H6 : (r2 = 1)
+
+axiom H7 : (1 <= r2)
+
+axiom H8 : (r2 <= 10000)
+
+logic e3 : int
+
+axiom H9 : in_range8(e3)
+
+axiom H10 : (contains(unseen, e3) = true)
+
  (* File "list_mod_allocator.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int.
-  forall avail:us_rep1. forall alloc:us_rep2. forall unseen:us_rep2.
-  forall r:int. forall result:int. forall r1:int.
-  (in_range2(first_available) -> ((is_well_formed(data,
-  first_available) = true) -> ((length(avail) = 0) ->
-  ((is_empty(alloc) = true) -> ((is_empty(unseen) = true) ->
-  (((result = r) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 10000)) ->
-  (forall e:int. ((in_range8(e) and (contains(unseen, e) = true)) ->
-  (1 <= e)))))))))))
+goal WP_parameter_def : (1 <= e3)

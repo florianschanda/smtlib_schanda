@@ -588,18 +588,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -7966,8 +7966,78 @@ axiom null_event__def_axiom : ((null_event = of_rep(7)) and
   ((null_event1 = of_rep1(256)) and ((null_event2 = of_int(0)) and
   (null_event3 = of_int(0)))))
 
+logic skp__subjects__get_event__result : dst_subject_type
+
+logic skp__subjects__get_event__result1 : dst_vector_range
+
+logic skp__subjects__get_event__result2 : bool
+
+logic skp__subjects__get_event__result3 : bool
+
+logic result : dst_subject_type
+
+logic result1 : dst_vector_range
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic skp__subjects__get_event__result4 : dst_subject_type
+
+logic skp__subjects__get_event__result5 : dst_vector_range
+
+logic skp__subjects__get_event__result6 : bool
+
+logic skp__subjects__get_event__result7 : bool
+
+logic skp__subjects__get_event__result8 : dst_subject_type
+
+logic skp__subjects__get_event__result9 : dst_vector_range
+
+logic skp__subjects__get_event__result10 : bool
+
+logic skp__subjects__get_event__result11 : bool
+
+logic skp__subjects__get_event__result12 : dst_subject_type
+
+logic skp__subjects__get_event__result13 : dst_vector_range
+
+logic skp__subjects__get_event__result14 : bool
+
+logic skp__subjects__get_event__result15 : bool
+
+logic skp__subjects__get_event__result16 : dst_subject_type
+
+logic skp__subjects__get_event__result17 : dst_vector_range
+
+logic skp__subjects__get_event__result18 : bool
+
+logic skp__subjects__get_event__result19 : bool
+
+logic skp__subjects__get_event__result20 : dst_subject_type
+
+logic skp__subjects__get_event__result21 : dst_vector_range
+
+logic skp__subjects__get_event__result22 : bool
+
+logic skp__subjects__get_event__result23 : bool
+
+axiom H : in_range1(subject_id)
+
+axiom H1 : in_range4(event_nr)
+
+logic subject : int
+
+axiom H2 : (0 <= subject)
+
+axiom H3 : (subject <= 6)
+
+logic event : int
+
+axiom H4 : (0 <= event)
+
+axiom H5 : (event <= 31)
+
  (* File "skp-subjects.ads", line 21, characters 0-0 *)
-goal WP_parameter_def : (in_range1(subject_id) -> (in_range4(event_nr) ->
-  (forall subject:int. (((0 <= subject) and (subject <= 6)) ->
-  (forall event:int. (((0 <= event) and (event <= 31)) ->
-  (not (to_rep(((((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__event_table[event])).us_split_fields1).rec__skp__subjects__event_entry_type__dst_subject) = subject))))))))
+goal WP_parameter_def :
+  (not (to_rep(((((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__event_table[event])).us_split_fields1).rec__skp__subjects__event_entry_type__dst_subject) = subject))

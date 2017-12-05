@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -857,24 +857,257 @@ axiom occ__def_axiom :
   (forall e:int [occ({ elts = a; rt = a1 }, e)]. (in_range2(e) -> (occ({
   elts = a; rt = a1 }, e) = occ_def({ elts = a; rt = a1 }, e)))))
 
- (* File "sort.adb", line 59, characters 0-0 *)
-goal WP_parameter_def :
-  (forall smallest:int. forall current:int. forall o:int.
-  forall temp___249:int. forall result:bool. forall result1:int.
-  forall current1:int. (dynamic_property(1, 100, to_rep1(values__first),
-  to_rep1(values__last)) -> (((1 <= 2147483647) -> in_range3(smallest)) ->
-  ((dynamic_property2(to_rep1(values__first), to_rep1(values__last),
+logic values : (int,natural) farray
+
+logic smallest : int
+
+logic previous : (int,natural) farray
+
+logic current : int
+
+logic o : int
+
+logic temp___249 : int
+
+logic temp___246 : (int,natural) farray
+
+logic temp___244 : int
+
+logic temp___242 : (int,natural) farray
+
+logic temp___243 : int
+
+logic temp___247 : (int,natural) farray
+
+logic o1 : (int,natural) farray
+
+logic temp___239 : (int,natural) farray
+
+logic temp___2391 : t2
+
+logic o2 : (int,natural) farray
+
+logic o3 : t
+
+logic o4 : int
+
+logic temp___240 : (int,natural) farray
+
+logic temp___2401 : t1
+
+logic o5 : (int,natural) farray
+
+logic o6 : t1
+
+logic o7 : (int,natural) farray
+
+logic o8 : int
+
+logic i : int
+
+logic j : int
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : int
+
+logic o14 : (int,natural) farray
+
+logic temp___2392 : (int,natural) farray
+
+logic temp___2393 : t2
+
+logic o15 : (int,natural) farray
+
+logic o16 : t
+
+logic o17 : int
+
+logic temp___2402 : (int,natural) farray
+
+logic temp___2403 : t1
+
+logic o18 : (int,natural) farray
+
+logic o19 : t1
+
+logic o20 : (int,natural) farray
+
+logic o21 : int
+
+logic o22 : int
+
+logic i1 : int
+
+logic o23 : int
+
+logic o24 : bool
+
+logic temp___251 : int
+
+logic o25 : int
+
+logic o26 : natural
+
+logic o27 : int
+
+logic values1 : (int,natural) farray
+
+logic smallest1 : int
+
+logic previous1 : (int,natural) farray
+
+logic current1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic current2 : int
+
+logic result2 : int
+
+logic smallest2 : int
+
+logic result3 : (int,natural) farray
+
+logic previous2 : (int,natural) farray
+
+logic values2 : (int,natural) farray
+
+logic values3 : (int,natural) farray
+
+logic smallest3 : int
+
+logic previous3 : (int,natural) farray
+
+logic current3 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic current4 : int
+
+logic result6 : int
+
+logic smallest4 : int
+
+logic result7 : (int,natural) farray
+
+logic previous4 : (int,natural) farray
+
+logic values4 : (int,natural) farray
+
+logic values5 : (int,natural) farray
+
+logic smallest5 : int
+
+logic previous5 : (int,natural) farray
+
+logic current5 : int
+
+logic values6 : (int,natural) farray
+
+logic smallest6 : int
+
+logic previous6 : (int,natural) farray
+
+logic current6 : int
+
+logic values7 : (int,natural) farray
+
+logic smallest7 : int
+
+logic previous7 : (int,natural) farray
+
+logic current7 : int
+
+logic values8 : (int,natural) farray
+
+logic smallest8 : int
+
+logic previous8 : (int,natural) farray
+
+logic current8 : int
+
+logic values9 : (int,natural) farray
+
+logic smallest9 : int
+
+logic previous9 : (int,natural) farray
+
+logic current9 : int
+
+logic values10 : (int,natural) farray
+
+logic smallest10 : int
+
+logic previous10 : (int,natural) farray
+
+logic current10 : int
+
+logic values11 : (int,natural) farray
+
+logic smallest11 : int
+
+logic previous11 : (int,natural) farray
+
+logic current11 : int
+
+logic values12 : (int,natural) farray
+
+logic smallest12 : int
+
+logic previous12 : (int,natural) farray
+
+logic current12 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(values__first),
+  to_rep1(values__last))
+
+axiom H1 : ((1 <= 2147483647) -> in_range3(smallest))
+
+axiom H2 : (dynamic_property2(to_rep1(values__first), to_rep1(values__last),
   to_rep1(previous__first), to_rep1(previous__last)) and
   ((to_rep1(previous__first) = to_rep1(values__first)) and
-  (to_rep1(previous__last) = to_rep1(values__last)))) ->
-  ((((((to_rep1(values__first) <= to_rep1(values__last)) and
-  (o = ((to_rep1(values__last) - to_rep1(values__first)) + 1))) or
-  ((not (to_rep1(values__first) <= to_rep1(values__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (not (result = true))) ->
-  (((temp___249 = (to_rep1(values__last) - 1)) and
-  in_range1((to_rep1(values__last) - 1))) -> ((({ int__content = result1
-  } = { int__content = current }) and (current1 = to_rep1(values__first))) ->
-  (((to_rep1(values__first) <= current1) and (current1 <= temp___249)) ->
-  ((current1 <= to_rep1(values__last)) ->
-  (to_rep1(values__first) <= current1))))))))))
+  (to_rep1(previous__last) = to_rep1(values__last))))
+
+axiom H3 : ((to_rep1(values__first) <= to_rep1(values__last)) ->
+  (o = ((to_rep1(values__last) - to_rep1(values__first)) + 1)))
+
+axiom H4 : ((not (to_rep1(values__first) <= to_rep1(values__last))) ->
+  (o = 0))
+
+axiom H5 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
+  (result = false)))
+
+axiom H6 : (not (result = true))
+
+axiom H7 : ((temp___249 = (to_rep1(values__last) - 1)) and
+  in_range1((to_rep1(values__last) - 1)))
+
+axiom H8 : (result1 = current)
+
+axiom H9 : (current2 = to_rep1(values__first))
+
+axiom H10 : (to_rep1(values__first) <= current2)
+
+axiom H11 : (current2 <= temp___249)
+
+axiom H12 : (current2 <= to_rep1(values__last))
+
+ (* File "sort.adb", line 59, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(values__first) <= current2)

@@ -77,6 +77,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+axiom H : (not (of_int(0) = true))
+
+axiom H1 : (of_int(0) = true)
+
  (* File "c45253a.adb", line 33, characters 0-0 *)
-goal WP_parameter_def : ((not (of_int(0) = true)) ->
-  (not (of_int(0) = true)))
+goal WP_parameter_def : false

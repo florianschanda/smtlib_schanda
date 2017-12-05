@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -475,18 +475,57 @@ logic x__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : (int,natural) farray
+
+logic x : (int,natural) farray
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : natural
+
+axiom H : in_range(c)
+
+axiom H1 : (dynamic_property2(1, c, to_rep1(i__first), to_rep1(i__last)) and
+  ((to_rep1(i__first) = 1) and (to_rep1(i__last) = c)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H3 : ((to_rep1(x__first) <= 1) and (1 <= to_rep1(x__last)))
+
+axiom H4 : (o2 = 1)
+
+axiom H5 : (o3 = (x[o2]))
+
+axiom H6 : (o4 = to_rep(o3))
+
+axiom H7 : ((to_rep1(i__first) <= 1) and (1 <= to_rep1(i__last)))
+
+axiom H8 : (o = 1)
+
+axiom H9 : (o1 = (i[o]))
+
+axiom H10 : (o5 = to_rep(o1))
+
+axiom H11 : (o6 = (o5 + o4))
+
+axiom H12 : ((o7 = o6) and in_range(o6))
+
+axiom H13 : (to_rep(o8) = o7)
+
  (* File "alias.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:(int,natural) farray. forall x:(int,natural) farray.
-  forall o:int. forall o1:natural. forall o2:int. forall o3:natural.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int.
-  forall o8:natural. (in_range(c) -> ((dynamic_property2(1, c,
-  to_rep1(i__first), to_rep1(i__last)) and ((to_rep1(i__first) = 1) and
-  (to_rep1(i__last) = c))) -> (dynamic_property(1, 2147483647,
-  to_rep1(x__first), to_rep1(x__last)) ->
-  (((((((((to_rep1(x__first) <= 1) and (1 <= to_rep1(x__last))) and
-  (o2 = 1)) and (o3 = (x[o2]))) and (o4 = to_rep(o3))) and
-  ((((((to_rep1(i__first) <= 1) and (1 <= to_rep1(i__last))) and (o = 1)) and
-  (o1 = (i[o]))) and (o5 = to_rep(o1))) and (o6 = (o5 + o4)))) and
-  ((o7 = o6) and in_range(o6))) and (to_rep(o8) = o7)) ->
-  (to_rep1(x__first) <= 1))))))
+goal WP_parameter_def : (to_rep1(x__first) <= 1)

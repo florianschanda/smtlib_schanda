@@ -1347,23 +1347,39 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
- (* File "a-cforse.ads", line 1427, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall result:bool.
-  forall l__split_fields1:us_main_type. forall l__split_fields2:us_main_type.
-  forall l__split_fields3:us_main_type. forall l__split_fields4:us_main_type.
-  ((in_range2(e) and (((contains(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic o : count_type
+
+logic o1 : int
+
+logic result : bool
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range2(e)
+
+axiom H1 : ((contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), e) = true) or (length({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
-  }) <  to_rep(l__split_discrs))) and ((((result = contains(model__({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }), e)) and
-  ((result = true) <-> (contains(model__({ us_split_discrs1 = {
+  }) <  to_rep(l__split_discrs)))
+
+axiom H2 : ((result = contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }), e) = true))) and
-  (((result = true) and ((((oeq2(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields } }), e)) and ((result = true) <->
+  (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
+  l__split_fields } }), e) = true)))
+
+axiom H3 : ((result = true) -> ((((oeq2(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
@@ -1377,12 +1393,12 @@ goal WP_parameter_def :
   rec__p__my_sets__set = l__split_fields1 } }), find(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 } }),
-  e)) = e)) and ((bool_eq1(length2(elements({ us_split_discrs1 = {
+  e)) = e)) and (((bool_eq1(length2(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } })), length2(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields1 }
-  }))) = true) and
+  }))) = true) ->
   (forall i:int. (((1 <= i) and (i <= (0 + length2(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }))))) ->
@@ -1393,11 +1409,17 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
   i) = get(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields1 } }), i)))))))) or ((not (result = true)) and
-  (((((((((length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_fields1 } }), i)))))) and (not (bool_eq1(length2(elements({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } })),
+  length2(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields2 } }) = (length({ us_split_discrs1 = {
+  l__split_fields1 } }))) = false)))))
+
+axiom H4 : ((not (result = true)) -> ((((((((length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields2 } }) = (length({ us_split_discrs1 =
+  { rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }) + 1)) and (contains(model__({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields2 } }),
@@ -1451,14 +1473,19 @@ goal WP_parameter_def :
   rec__p__my_sets__set = l__split_fields2 } }), find(elements({
   us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
   us_split_fields1 = { rec__p__my_sets__set = l__split_fields2 } }), e),
-  1) = true)) and ({ rec__p__my_sets__set = l__split_fields1 } = {
-  rec__p__my_sets__set = l__split_fields2 }))))) and
-  ((l__split_fields3 = l__split_fields1) and ({ rec__p__my_sets__set =
-  l__split_fields4 } = { rec__p__my_sets__set = l__split_fields1 }))))) ->
-  (get(elements({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields3 } }), get1(positions({ us_split_discrs1 = {
+  1) = true)))
+
+axiom H5 : ((not (result = true)) -> (l__split_fields1 = l__split_fields2))
+
+axiom H6 : (l__split_fields3 = l__split_fields1)
+
+axiom H7 : (l__split_fields4 = l__split_fields1)
+
+ (* File "a-cforse.ads", line 1427, characters 0-0 *)
+goal WP_parameter_def : (get(elements({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields3 } }), find1({ us_split_discrs1 = {
-  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields3 } }, e))) = e)))
+  rec__p__my_sets__set = l__split_fields3 } }), get1(positions({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields3 } }), find1({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields3 } }, e))) = e)

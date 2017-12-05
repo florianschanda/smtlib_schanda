@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -109,10 +109,35 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic y : int
+
+logic x1 : int
+
+logic y1 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic x3 : int
+
+logic y3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(y))
+
+axiom H2 : (((x1 = 0) and (y1 = 0)) and (in_range(y1) and in_range(x1)))
+
+axiom H3 : (y2 = y1)
+
+axiom H4 : (x1 = x2)
+
+axiom H5 : (y3 = y1)
+
+axiom H6 : (x3 = x1)
+
  (* File "locfunc.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall x1:int. forall y1:int. forall x2:int.
-  forall y2:int. forall x3:int. forall y3:int. ((in_range(x) and
-  (((((-2147483648) <= 2147483647) -> in_range(y)) and (((x1 = 0) and
-  (y1 = 0)) and (in_range(x1) and in_range(y1)))) and (((y2 = y1) and
-  (x1 = x2)) and ((y3 = y1) and (x3 = x1))))) -> (x2 = 0)))
+goal WP_parameter_def : (x2 = 0)

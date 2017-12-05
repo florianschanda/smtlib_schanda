@@ -154,6 +154,7 @@
 (declare-const val__ (_ BitVec 32))
 (declare-const n Int)
 (declare-const j Int)
+(declare-const o Int)
 (declare-const result Bool)
 (assert (bvule ((_ int2bv 32) 0) val__))
 (assert (bvule val__ ((_ int2bv 32) 4294967295)))

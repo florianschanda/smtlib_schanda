@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -999,7 +999,7 @@ axiom get_board__def_axiom :
 
 type px_coord
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -1038,7 +1038,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1366,23 +1366,23 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic temp___2204 : (int,cell) farray -> (int,(int,cell) farray) farray
+logic temp___2198 : (int,cell) farray -> (int,(int,cell) farray) farray
 
 axiom def_axiom :
-  (forall temp___2206:(int,cell) farray.
-  (forall temp___2207:int.
-  ((temp___2204(temp___2206)[temp___2207]) = temp___2206)))
+  (forall temp___2200:(int,cell) farray.
+  (forall temp___2201:int.
+  ((temp___2198(temp___2200)[temp___2201]) = temp___2200)))
 
-logic temp___2208 : int -> (int,cell) farray
+logic temp___2202 : int -> (int,cell) farray
 
 axiom def_axiom1 :
-  (forall temp___2210:int.
-  (forall temp___2211:int.
-  ((temp___2208(temp___2210)[temp___2211]) = of_rep1(temp___2210))))
+  (forall temp___2204:int.
+  (forall temp___2205:int.
+  ((temp___2202(temp___2204)[temp___2205]) = of_rep1(temp___2204))))
 
 type integer
 
-predicate in_range9(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range9(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq14 : int, int -> bool
 
@@ -2901,121 +2901,357 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall score_nbr:t. forall level_nbr:t. forall line_counter:t.
-  forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord.
-  forall next_piece__split_fields:shape.
-  forall next_piece__split_fields1:direction.
-  forall next_piece__split_fields2:px_coord.
-  forall next_piece__split_fields3:py_coord. forall cur_state:int.
-  forall action_request_nbr:int. forall speed_up:bool. forall o:py_coord.
-  forall o1:px_coord. forall o2:direction. forall o3:shape. forall o4:shape.
-  forall o5:direction. forall o6:px_coord. forall o7:py_coord.
-  forall temp___2212:shape. forall temp___22121:direction.
-  forall temp___22122:px_coord. forall temp___22123:py_coord.
-  forall o8:py_coord. forall o9:px_coord. forall o10:direction.
-  forall o11:shape. forall o12:shape. forall o13:direction.
-  forall o14:px_coord. forall o15:py_coord. forall temp___2213:shape.
-  forall temp___22131:direction. forall temp___22132:px_coord.
-  forall temp___22133:py_coord. forall result:t. forall level_nbr1:t.
-  forall result1:t. forall score_nbr1:t. forall result2:t.
-  forall line_counter1:t. forall result3:(int,(int,cell) farray) farray.
-  forall cur_board1:(int,(int,cell) farray) farray. forall result4:shape.
-  forall result5:direction. forall result6:px_coord. forall result7:py_coord.
-  forall cur_piece__split_fields4:shape.
-  forall cur_piece__split_fields5:direction.
-  forall cur_piece__split_fields6:px_coord.
-  forall cur_piece__split_fields7:py_coord. forall result8:shape.
-  forall result9:direction. forall result10:px_coord.
-  forall result11:py_coord. forall next_piece__split_fields4:shape.
-  forall next_piece__split_fields5:direction.
-  forall next_piece__split_fields6:px_coord.
-  forall next_piece__split_fields7:py_coord. forall result12:int.
-  forall cur_state1:int. forall result13:int. forall action_request_nbr1:int.
-  forall result14:bool. forall speed_up1:bool. forall score_nbr2:t.
-  forall level_nbr2:t. forall line_counter2:t.
-  forall cur_board2:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields8:shape.
-  forall cur_piece__split_fields9:direction.
-  forall cur_piece__split_fields10:px_coord.
-  forall cur_piece__split_fields11:py_coord.
-  forall next_piece__split_fields8:shape.
-  forall next_piece__split_fields9:direction.
-  forall next_piece__split_fields10:px_coord.
-  forall next_piece__split_fields11:py_coord. forall cur_state2:int.
-  forall action_request_nbr2:int. forall speed_up2:bool. forall score_nbr3:t.
-  forall level_nbr3:t. forall line_counter3:t.
-  forall cur_board3:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields12:shape.
-  forall cur_piece__split_fields13:direction.
-  forall cur_piece__split_fields14:px_coord.
-  forall cur_piece__split_fields15:py_coord.
-  forall next_piece__split_fields12:us_split_fields. forall cur_state3:int.
-  forall action_request_nbr3:int. forall speed_up3:bool. (((ule(of_int(0),
-  of_int(99999)) -> in_range2(score_nbr)) and ((ule(of_int(0),
-  of_int(99999)) -> in_range2(level_nbr)) and ((ule(of_int(0),
-  of_int(99999)) -> in_range2(line_counter)) and (((0 <= 4) ->
-  in_range8(cur_state)) and (((0 <= 2147483647) ->
-  in_range1(action_request_nbr)) and ((((result = level_nbr) and
-  (level_nbr1 = of_int(0))) and (((result1 = score_nbr) and
-  (score_nbr1 = of_int(0))) and (((result2 = line_counter) and
-  (line_counter1 = of_int(0))) and (((result3 = cur_board) and
-  (cur_board1 = temp___2204(temp___2208(0)))) and (((((to_rep3(o) = 0) and
-  ((to_rep2(o1) = 0) and ((to_rep4(o2) = 0) and ((to_rep(o3) = 1) and
-  ((o3 = o4) and ((o2 = o5) and ((o1 = o6) and (o = o7)))))))) and
-  ((temp___2212 = o4) and ((temp___22121 = o5) and ((temp___22122 = o6) and
-  (temp___22123 = o7))))) and (((result4 = cur_piece__split_fields) and
+logic score_nbr : t
+
+logic level_nbr : t
+
+logic line_counter : t
+
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic next_piece__split_fields : shape
+
+logic next_piece__split_fields1 : direction
+
+logic next_piece__split_fields2 : px_coord
+
+logic next_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic action_request_nbr : int
+
+logic speed_up : bool
+
+logic o : py_coord
+
+logic o1 : px_coord
+
+logic o2 : direction
+
+logic o3 : shape
+
+logic o4 : shape
+
+logic o5 : direction
+
+logic o6 : px_coord
+
+logic o7 : py_coord
+
+logic temp___2206 : shape
+
+logic temp___22061 : direction
+
+logic temp___22062 : px_coord
+
+logic temp___22063 : py_coord
+
+logic o8 : py_coord
+
+logic o9 : px_coord
+
+logic o10 : direction
+
+logic o11 : shape
+
+logic o12 : shape
+
+logic o13 : direction
+
+logic o14 : px_coord
+
+logic o15 : py_coord
+
+logic temp___2207 : shape
+
+logic temp___22071 : direction
+
+logic temp___22072 : px_coord
+
+logic temp___22073 : py_coord
+
+logic result : t
+
+logic level_nbr1 : t
+
+logic result1 : t
+
+logic score_nbr1 : t
+
+logic result2 : t
+
+logic line_counter1 : t
+
+logic result3 : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic result4 : shape
+
+logic result5 : direction
+
+logic result6 : px_coord
+
+logic result7 : py_coord
+
+logic cur_piece__split_fields4 : shape
+
+logic cur_piece__split_fields5 : direction
+
+logic cur_piece__split_fields6 : px_coord
+
+logic cur_piece__split_fields7 : py_coord
+
+logic result8 : shape
+
+logic result9 : direction
+
+logic result10 : px_coord
+
+logic result11 : py_coord
+
+logic next_piece__split_fields4 : shape
+
+logic next_piece__split_fields5 : direction
+
+logic next_piece__split_fields6 : px_coord
+
+logic next_piece__split_fields7 : py_coord
+
+logic result12 : int
+
+logic cur_state1 : int
+
+logic result13 : int
+
+logic action_request_nbr1 : int
+
+logic result14 : bool
+
+logic speed_up1 : bool
+
+logic score_nbr2 : t
+
+logic level_nbr2 : t
+
+logic line_counter2 : t
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields8 : shape
+
+logic cur_piece__split_fields9 : direction
+
+logic cur_piece__split_fields10 : px_coord
+
+logic cur_piece__split_fields11 : py_coord
+
+logic next_piece__split_fields8 : shape
+
+logic next_piece__split_fields9 : direction
+
+logic next_piece__split_fields10 : px_coord
+
+logic next_piece__split_fields11 : py_coord
+
+logic cur_state2 : int
+
+logic action_request_nbr2 : int
+
+logic speed_up2 : bool
+
+logic score_nbr3 : t
+
+logic level_nbr3 : t
+
+logic line_counter3 : t
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields12 : shape
+
+logic cur_piece__split_fields13 : direction
+
+logic cur_piece__split_fields14 : px_coord
+
+logic cur_piece__split_fields15 : py_coord
+
+logic next_piece__split_fields12 : shape
+
+logic next_piece__split_fields13 : direction
+
+logic next_piece__split_fields14 : px_coord
+
+logic next_piece__split_fields15 : py_coord
+
+logic cur_state3 : int
+
+logic action_request_nbr3 : int
+
+logic speed_up3 : bool
+
+axiom H : (ule(of_int(0), of_int(99999)) -> in_range2(score_nbr))
+
+axiom H1 : (ule(of_int(0), of_int(99999)) -> in_range2(level_nbr))
+
+axiom H2 : (ule(of_int(0), of_int(99999)) -> in_range2(line_counter))
+
+axiom H3 : ((0 <= 4) -> in_range8(cur_state))
+
+axiom H4 : ((0 <= 2147483647) -> in_range1(action_request_nbr))
+
+axiom H5 : (result = level_nbr)
+
+axiom H6 : (level_nbr1 = of_int(0))
+
+axiom H7 : (result1 = score_nbr)
+
+axiom H8 : (score_nbr1 = of_int(0))
+
+axiom H9 : (result2 = line_counter)
+
+axiom H10 : (line_counter1 = of_int(0))
+
+axiom H11 : (result3 = cur_board)
+
+axiom H12 : (cur_board1 = temp___2198(temp___2202(0)))
+
+axiom H13 : (to_rep3(o) = 0)
+
+axiom H14 : (to_rep2(o1) = 0)
+
+axiom H15 : (to_rep4(o2) = 0)
+
+axiom H16 : (to_rep(o3) = 1)
+
+axiom H17 : (o3 = o4)
+
+axiom H18 : (o2 = o5)
+
+axiom H19 : (o1 = o6)
+
+axiom H20 : (o = o7)
+
+axiom H21 : (temp___2206 = o4)
+
+axiom H22 : (temp___22061 = o5)
+
+axiom H23 : (temp___22062 = o6)
+
+axiom H24 : (temp___22063 = o7)
+
+axiom H25 : ((result4 = cur_piece__split_fields) and
   ((result5 = cur_piece__split_fields1) and
   ((result6 = cur_piece__split_fields2) and
-  (result7 = cur_piece__split_fields3)))) and
-  ((temp___2212 = cur_piece__split_fields4) and
-  ((temp___22121 = cur_piece__split_fields5) and
-  ((temp___22122 = cur_piece__split_fields6) and
-  (temp___22123 = cur_piece__split_fields7)))))) and
-  (((((to_rep3(o8) = 0) and ((to_rep2(o9) = 0) and ((to_rep4(o10) = 0) and
-  ((to_rep(o11) = 1) and ((o11 = o12) and ((o10 = o13) and ((o9 = o14) and
-  (o8 = o15)))))))) and ((temp___2213 = o12) and ((temp___22131 = o13) and
-  ((temp___22132 = o14) and (temp___22133 = o15))))) and
-  (((result8 = next_piece__split_fields) and
+  (result7 = cur_piece__split_fields3))))
+
+axiom H26 : ((cur_piece__split_fields4 = temp___2206) and
+  ((cur_piece__split_fields5 = temp___22061) and
+  ((cur_piece__split_fields6 = temp___22062) and
+  (cur_piece__split_fields7 = temp___22063))))
+
+axiom H27 : (to_rep3(o8) = 0)
+
+axiom H28 : (to_rep2(o9) = 0)
+
+axiom H29 : (to_rep4(o10) = 0)
+
+axiom H30 : (to_rep(o11) = 1)
+
+axiom H31 : (o11 = o12)
+
+axiom H32 : (o10 = o13)
+
+axiom H33 : (o9 = o14)
+
+axiom H34 : (o8 = o15)
+
+axiom H35 : (temp___2207 = o12)
+
+axiom H36 : (temp___22071 = o13)
+
+axiom H37 : (temp___22072 = o14)
+
+axiom H38 : (temp___22073 = o15)
+
+axiom H39 : ((result8 = next_piece__split_fields) and
   ((result9 = next_piece__split_fields1) and
   ((result10 = next_piece__split_fields2) and
-  (result11 = next_piece__split_fields3)))) and
-  ((temp___2213 = next_piece__split_fields4) and
-  ((temp___22131 = next_piece__split_fields5) and
-  ((temp___22132 = next_piece__split_fields6) and
-  (temp___22133 = next_piece__split_fields7)))))) and
-  (((result12 = cur_state) and (cur_state1 = 3)) and
-  (((result13 = action_request_nbr) and (action_request_nbr1 = 0)) and
-  ((result14 = speed_up) and (speed_up1 = of_int1(0))))))))))) and
-  (((speed_up2 = speed_up1) and
-  ((action_request_nbr2 = action_request_nbr1) and
-  ((cur_state1 = cur_state2) and
-  (((next_piece__split_fields8 = next_piece__split_fields4) and
+  (result11 = next_piece__split_fields3))))
+
+axiom H40 : ((next_piece__split_fields4 = temp___2207) and
+  ((next_piece__split_fields5 = temp___22071) and
+  ((next_piece__split_fields6 = temp___22072) and
+  (next_piece__split_fields7 = temp___22073))))
+
+axiom H41 : (result12 = cur_state)
+
+axiom H42 : (cur_state1 = 3)
+
+axiom H43 : (result13 = action_request_nbr)
+
+axiom H44 : (action_request_nbr1 = 0)
+
+axiom H45 : (result14 = speed_up)
+
+axiom H46 : (speed_up1 = of_int1(0))
+
+axiom H47 : (speed_up2 = speed_up1)
+
+axiom H48 : (action_request_nbr2 = action_request_nbr1)
+
+axiom H49 : (cur_state2 = cur_state1)
+
+axiom H50 : ((next_piece__split_fields8 = next_piece__split_fields4) and
   ((next_piece__split_fields9 = next_piece__split_fields5) and
   ((next_piece__split_fields10 = next_piece__split_fields6) and
-  (next_piece__split_fields11 = next_piece__split_fields7)))) and
-  (((cur_piece__split_fields8 = cur_piece__split_fields4) and
+  (next_piece__split_fields11 = next_piece__split_fields7))))
+
+axiom H51 : ((cur_piece__split_fields8 = cur_piece__split_fields4) and
   ((cur_piece__split_fields9 = cur_piece__split_fields5) and
   ((cur_piece__split_fields10 = cur_piece__split_fields6) and
-  (cur_piece__split_fields11 = cur_piece__split_fields7)))) and
-  ((cur_board2 = cur_board1) and ((line_counter2 = line_counter1) and
-  ((level_nbr2 = level_nbr1) and (score_nbr2 = score_nbr1))))))))) and
-  ((speed_up3 = speed_up1) and
-  ((action_request_nbr3 = action_request_nbr1) and
-  ((cur_state3 = cur_state1) and ((next_piece__split_fields12 = {
-  rec__patris__piece__s = next_piece__split_fields4; rec__patris__piece__d =
-  next_piece__split_fields5; rec__patris__piece__x =
-  next_piece__split_fields6; rec__patris__piece__y =
-  next_piece__split_fields7 }) and
-  (((cur_piece__split_fields12 = cur_piece__split_fields4) and
+  (cur_piece__split_fields11 = cur_piece__split_fields7))))
+
+axiom H52 : (cur_board2 = cur_board1)
+
+axiom H53 : (line_counter2 = line_counter1)
+
+axiom H54 : (level_nbr2 = level_nbr1)
+
+axiom H55 : (score_nbr2 = score_nbr1)
+
+axiom H56 : (speed_up3 = speed_up1)
+
+axiom H57 : (action_request_nbr3 = action_request_nbr1)
+
+axiom H58 : (cur_state3 = cur_state1)
+
+axiom H59 : ((next_piece__split_fields12 = next_piece__split_fields4) and
+  ((next_piece__split_fields13 = next_piece__split_fields5) and
+  ((next_piece__split_fields14 = next_piece__split_fields6) and
+  (next_piece__split_fields15 = next_piece__split_fields7))))
+
+axiom H60 : ((cur_piece__split_fields12 = cur_piece__split_fields4) and
   ((cur_piece__split_fields13 = cur_piece__split_fields5) and
   ((cur_piece__split_fields14 = cur_piece__split_fields6) and
-  (cur_piece__split_fields15 = cur_piece__split_fields7)))) and
-  ((cur_board3 = cur_board1) and ((line_counter3 = line_counter1) and
-  ((level_nbr3 = level_nbr1) and (score_nbr3 = score_nbr1)))))))))))))))) ->
-  (get_state(cur_state2) = 3)))
+  (cur_piece__split_fields15 = cur_piece__split_fields7))))
+
+axiom H61 : (cur_board3 = cur_board1)
+
+axiom H62 : (line_counter3 = line_counter1)
+
+axiom H63 : (level_nbr3 = level_nbr1)
+
+axiom H64 : (score_nbr3 = score_nbr1)
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (get_state(cur_state2) = 3)

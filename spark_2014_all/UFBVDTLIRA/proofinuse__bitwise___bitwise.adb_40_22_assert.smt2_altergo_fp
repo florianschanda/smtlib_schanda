@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1026,15 +1026,51 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic fsthalf : t
+
+logic sndhalf : t
+
+logic o : t1
+
+logic o1 : t1
+
+logic o2 : t1
+
+logic o3 : t
+
+logic result : t
+
+logic fsthalf1 : t
+
+logic result1 : t
+
+logic sndhalf1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (result = fsthalf)
+
+axiom H4 : (fsthalf1 = toSmall(bw_and1(val__, of_int1(255))))
+
+axiom H5 : ((8 <  16) -> (o = lsr_bv1(val__, of_int1(8))))
+
+axiom H6 : ((not (8 <  16)) -> (o = of_int1(0)))
+
+axiom H7 : (o1 = bw_and1(o, of_int1(255)))
+
+axiom H8 : (o2 = o1)
+
+axiom H9 : (o3 = toSmall(o2))
+
+axiom H10 : (result1 = sndhalf)
+
+axiom H11 : (sndhalf1 = o3)
+
  (* File "bitwise.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall fsthalf:t. forall sndhalf:t. forall o:t1. forall o1:t1.
-  forall o2:t1. forall o3:t. forall result:t. forall fsthalf1:t.
-  forall result1:t. forall sndhalf1:t. (((result = fsthalf) and
-  (fsthalf1 = toSmall(bw_and1(val__, of_int1(255))))) -> ((((((((8 <  16) and
-  (o = lsr_bv1(val__, of_int1(8)))) or ((not (8 <  16)) and
-  (o = of_int1(0)))) and (o1 = bw_and1(o, of_int1(255)))) and (o2 = o1)) and
-  (o3 = toSmall(o2))) and ((result1 = sndhalf) and (sndhalf1 = o3))) ->
-  (((8 <  16) -> (val__ = bw_or1(toBig(fsthalf1), lsl_bv1(toBig(sndhalf1),
-  of_int1(8))))) and ((not (8 <  16)) -> (val__ = bw_or1(toBig(fsthalf1),
-  of_int1(0))))))))
+goal WP_parameter_def : (((8 <  16) -> (val__ = bw_or1(toBig(fsthalf1),
+  lsl_bv1(toBig(sndhalf1), of_int1(8))))) and ((not (8 <  16)) ->
+  (val__ = bw_or1(toBig(fsthalf1), of_int1(0)))))

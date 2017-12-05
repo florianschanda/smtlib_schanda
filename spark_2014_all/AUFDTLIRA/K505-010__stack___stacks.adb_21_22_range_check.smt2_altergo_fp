@@ -186,7 +186,7 @@ axiom coerce_axiom1 :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -225,7 +225,7 @@ axiom coerce_axiom2 :
 
 type element
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -507,15 +507,15 @@ logic bool_eq9 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq9(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
-  (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
-  ((b).us_split_fields1).rec__stacks__stack__data) = true)) -> (bool_eq9(a,
-  b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
   (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
   ((b).us_split_fields1).rec__stacks__stack__data) = true))) -> (bool_eq9(a,
+  b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
+  (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
+  ((b).us_split_fields1).rec__stacks__stack__data) = true)))) -> (bool_eq9(a,
   b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -745,17 +745,32 @@ axiom size__def_axiom :
   rec__stacks__stack__top = s1; rec__stacks__stack__data = { elts = s2; rt =
   s3 }; rec__ext__ = s4 }; attr__tag = s5 }) = to_rep(s1))))
 
- (* File "stacks.ads", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mystate:int. forall s__split_fields:natural.
-  forall s__split_fields1:(int,element) farray. forall s__split_fields2:t.
-  forall s__split_fields3:us_private. forall mystate1:int.
-  forall result:bool. forall mystate2:int. ((dynamic_property1(1,
-  to_rep1(s__split_discrs), to_rep2(first(s__split_fields2)),
-  to_rep2(last(s__split_fields2))) and
+logic mystate : int
+
+logic s__split_fields : natural
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : t
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic mystate1 : int
+
+logic result : bool
+
+logic mystate2 : int
+
+axiom H : (dynamic_property1(1, to_rep1(s__split_discrs),
+  to_rep2(first(s__split_fields2)), to_rep2(last(s__split_fields2))) and
   ((to_rep2(first(s__split_fields2)) = 1) and
-  (to_rep2(last(s__split_fields2)) = to_rep1(s__split_discrs)))) ->
-  (in_range1(mystate) -> ((((result = is_empty({ us_split_discrs1 = {
+  (to_rep2(last(s__split_fields2)) = to_rep1(s__split_discrs))))
+
+axiom H1 : in_range1(mystate)
+
+axiom H2 : ((result = is_empty({ us_split_discrs1 = {
   rec__stacks__stack__max = s__split_discrs }; us_split_fields1 = {
   rec__stacks__stack__top = s__split_fields; rec__stacks__stack__data = {
   elts = s__split_fields1; rt = s__split_fields2 }; rec__ext__ =
@@ -763,6 +778,13 @@ goal WP_parameter_def :
   (size({ us_split_discrs1 = { rec__stacks__stack__max = s__split_discrs };
   us_split_fields1 = { rec__stacks__stack__top = s__split_fields;
   rec__stacks__stack__data = { elts = s__split_fields1; rt = s__split_fields2
-  }; rec__ext__ = s__split_fields3 }; attr__tag = s__attr__tag }) = 0))) and
-  ((not (result = true)) and ((mystate2 = mystate) and
-  (mystate2 = mystate1)))) -> in_range((to_rep(s__split_fields) - 1))))))
+  }; rec__ext__ = s__split_fields3 }; attr__tag = s__attr__tag }) = 0)))
+
+axiom H3 : (not (result = true))
+
+axiom H4 : (mystate2 = mystate)
+
+axiom H5 : (mystate2 = mystate1)
+
+ (* File "stacks.ads", line 21, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(s__split_fields) - 1))

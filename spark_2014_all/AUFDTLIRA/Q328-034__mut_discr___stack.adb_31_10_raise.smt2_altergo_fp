@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -609,7 +609,59 @@ axiom temp___String_Literal_171__def_axiom :
   (to_rep((temp___String_Literal_171(void)[10])) = 62)) and
   (to_rep((temp___String_Literal_171(void)[11])) = 32))
 
+logic last2 : int
+
+logic tab : (int,us_rep) farray
+
+logic temp___173 : (int,character) farray
+
+logic temp___1731 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : (int,character) farray
+
+logic o7 : t
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : (int,us_rep) farray
+
+logic o11 : int
+
+logic result : int
+
+logic last3 : int
+
+logic result1 : (int,us_rep) farray
+
+logic tab1 : (int,us_rep) farray
+
+logic last4 : int
+
+logic tab2 : (int,us_rep) farray
+
+logic last5 : int
+
+logic tab3 : (int,us_rep) farray
+
+axiom H : in_range3(last2)
+
+axiom H1 : (not (full(last2) = true))
+
+axiom H2 : (last2 = 200)
+
  (* File "stack.ads", line 60, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last2:int. (in_range3(last2) -> ((not (full(last2) = true)) ->
-  (not (last2 = 200)))))
+goal WP_parameter_def : false

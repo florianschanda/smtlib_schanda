@@ -196,6 +196,7 @@
 (declare-const result__6 Int)
 (declare-const bits_manipulation_unsigned__unsigned_64__functions__msb_index__result5 Int)
 (declare-const result3 Int)
+(assert true)
 (assert (not (= value ((_ int2bv 64) 0))))
 (assert (= bits_manipulation_unsigned__unsigned_64__functions__msb_index__result1 bits_manipulation_unsigned__unsigned_64__functions__msb_index__result2))
 (assert (= result__1 result__3))

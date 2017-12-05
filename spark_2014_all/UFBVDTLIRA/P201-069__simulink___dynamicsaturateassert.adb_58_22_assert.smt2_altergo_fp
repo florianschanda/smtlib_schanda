@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -700,22 +700,63 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic saturated_value : t
+
+logic saturation_dynamic_out1 : t
+
+logic result : t
+
+logic saturation_dynamic_out11 : t
+
+logic result1 : t
+
+logic saturation_dynamic_out12 : t
+
+logic result2 : t
+
+logic saturation_dynamic_out13 : t
+
+logic result3 : t
+
+logic saturated_value1 : t
+
+axiom H : in_range(value)
+
+axiom H1 : in_range(max1)
+
+axiom H2 : in_range(min1)
+
+axiom H3 : true
+
+axiom H4 : uge(max1, min1)
+
+axiom H5 : true
+
+axiom H6 : (ult(value, min1) -> (result = saturation_dynamic_out1))
+
+axiom H7 : (ult(value, min1) -> (saturation_dynamic_out11 = min1))
+
+axiom H8 : ((not ult(value, min1)) -> (ugt(value, max1) ->
+  (result1 = saturation_dynamic_out1)))
+
+axiom H9 : ((not ult(value, min1)) -> (ugt(value, max1) ->
+  (saturation_dynamic_out12 = max1)))
+
+axiom H10 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
+  (result2 = saturation_dynamic_out1)))
+
+axiom H11 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
+  (saturation_dynamic_out13 = value)))
+
+axiom H12 : ((not ult(value, min1)) -> ((not ugt(value, max1)) ->
+  (saturation_dynamic_out12 = saturation_dynamic_out13)))
+
+axiom H13 : ((not ult(value, min1)) ->
+  (saturation_dynamic_out11 = saturation_dynamic_out12))
+
+axiom H14 : (result3 = saturated_value)
+
+axiom H15 : (saturated_value1 = saturation_dynamic_out11)
+
  (* File "dynamicsaturateassert.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall saturated_value:t. forall saturation_dynamic_out1:t.
-  forall result:t. forall saturation_dynamic_out11:t. forall result1:t.
-  forall saturation_dynamic_out12:t. forall result2:t.
-  forall saturation_dynamic_out13:t. forall result3:t.
-  forall saturated_value1:t. (in_range(value) -> (in_range(max1) ->
-  (in_range(min1) -> (uge(max1, min1) -> (((ult(value, min1) and
-  ((result = saturation_dynamic_out1) and
-  (saturation_dynamic_out11 = min1))) or ((not ult(value, min1)) and
-  (((ugt(value, max1) and ((result1 = saturation_dynamic_out1) and
-  (saturation_dynamic_out12 = max1))) or ((not ugt(value, max1)) and
-  (((result2 = saturation_dynamic_out1) and
-  (saturation_dynamic_out13 = value)) and
-  (saturation_dynamic_out12 = saturation_dynamic_out13)))) and
-  (saturation_dynamic_out11 = saturation_dynamic_out12)))) ->
-  (((result3 = saturated_value) and
-  (saturated_value1 = saturation_dynamic_out11)) ->
-  ule(saturation_dynamic_out11, max1))))))))
+goal WP_parameter_def : ule(saturation_dynamic_out11, max1)

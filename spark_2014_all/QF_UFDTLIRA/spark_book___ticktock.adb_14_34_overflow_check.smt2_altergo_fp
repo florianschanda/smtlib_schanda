@@ -53,7 +53,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type tclock_typeB
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq : int, int -> bool
@@ -134,7 +134,11 @@ type clock_type__ref = { clock_type__content : clock_type
 function clock_type__ref___projection(a: clock_type__ref) : clock_type =
   (a).clock_type__content
 
+logic clock_value : int
+
+logic o : int
+
+axiom H : in_range1(clock_value)
+
  (* File "ticktock.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall clock_value:int. (in_range1(clock_value) ->
-  in_range((clock_value + 1))))
+goal WP_parameter_def : in_range((clock_value + 1))

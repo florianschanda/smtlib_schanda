@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const alpha_launch_examples__example_1__result Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const alpha_launch_examples__example_1__result1 Int)
 (declare-const alpha_launch_examples__example_1__result2 Int)

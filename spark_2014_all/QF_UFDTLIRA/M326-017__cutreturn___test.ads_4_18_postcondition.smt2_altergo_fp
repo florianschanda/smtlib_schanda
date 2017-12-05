@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,11 +107,28 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic x1 : int
+
+logic result : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic x4 : int
+
+logic x5 : int
+
+logic x6 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((((x3 = x) and (x4 = x1)) and (x = 0)) or ((not (x = 0)) and
+  (((x2 = x3) and (x4 = x2)) and ((((- 2147483648) <= 2147483647) ->
+  in_range(x)) and ((result = x) and (x2 = 0)))))) and ((x5 = x3) and
+  (x6 = x4)))
+
  (* File "test.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall x1:int. forall result:int. forall x2:int.
-  forall x3:int. forall x4:int. forall x5:int. forall x6:int.
-  ((in_range(x) and (((((x = x3) and (x4 = x1)) and (x = 0)) or
-  ((not (x = 0)) and (((x2 = x3) and (x4 = x2)) and
-  ((((-2147483648) <= 2147483647) -> in_range(x)) and ((result = x) and
-  (x2 = 0)))))) and ((x5 = x3) and (x6 = x4)))) -> (x5 = 0)))
+goal WP_parameter_def : (x5 = 0)

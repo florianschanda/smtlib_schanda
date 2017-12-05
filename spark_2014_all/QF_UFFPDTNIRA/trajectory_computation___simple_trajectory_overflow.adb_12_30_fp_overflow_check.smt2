@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite64 ((x Float64)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral64 ((x Float64)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float64) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float64) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort tfloat64B 0)
 (declare-fun user_eq (tfloat64B tfloat64B) Bool)
@@ -87,6 +87,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 (assert (= delta_speed (fp.add RNE drag (fp.mul RNE (fp.mul RNE factor (fp #b0 #b10000000010 #b0011100111010010111100011010100111111011111001110111)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))))
 (declare-const new_speed Float64)
+(declare-const o Float64)
 (assert (in_range factor))
 (assert (in_range1 drag))
 (assert (fp.isFinite64 old_speed))

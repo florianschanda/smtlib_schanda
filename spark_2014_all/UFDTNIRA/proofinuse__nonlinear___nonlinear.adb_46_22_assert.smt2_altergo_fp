@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type tinteger_32B
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function tinteger_32B__ref___projection(a: tinteger_32B__ref) : tinteger_32B =
 
 type integer_32
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -281,10 +281,29 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic res : int
+
+logic o : int
+
+logic result : int
+
+logic res1 : int
+
+axiom H : in_range2(x)
+
+axiom H1 : in_range2(y)
+
+axiom H2 : in_range2(z)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(res))
+
+axiom H4 : ((y = 0) or (x <= comp_div(z,y)))
+
+axiom H5 : ((o = (x * y)) and in_range((x * y)))
+
+axiom H6 : (result = res)
+
+axiom H7 : (res1 = o)
+
  (* File "nonlinear.adb", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall o:int. forall result:int. forall res1:int.
-  (in_range2(x) -> (in_range2(y) -> (in_range2(z) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(res)) -> (((y = 0) or
-  (x <= comp_div(z,y))) -> ((((o = (x * y)) and in_range((x * y))) and
-  ((result = res) and (res1 = o))) -> (res1 <= z))))))))
+goal WP_parameter_def : (res1 <= z)

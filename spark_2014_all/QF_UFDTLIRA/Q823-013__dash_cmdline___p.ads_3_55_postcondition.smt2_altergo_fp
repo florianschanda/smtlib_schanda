@@ -77,14 +77,35 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+logic p__foo__result : bool
+
+logic result : bool
+
+logic p__foo__result1 : bool
+
+logic p__foo__result2 : bool
+
+logic p__foo__result3 : bool
+
+logic p__foo__result4 : bool
+
+logic p__foo__result5 : bool
+
+logic result1 : bool
+
+axiom H : (p__foo__result1 = p__foo__result2)
+
+axiom H1 : (p__foo__result3 = p__foo__result1)
+
+axiom H2 : (result = p__foo__result)
+
+axiom H3 : (p__foo__result1 = of_int(1))
+
+axiom H4 : (p__foo__result4 = p__foo__result2)
+
+axiom H5 : (p__foo__result5 = p__foo__result3)
+
+axiom H6 : (result1 = p__foo__result4)
+
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__foo__result:bool. forall result:bool.
-  forall p__foo__result1:bool. forall p__foo__result2:bool.
-  forall p__foo__result3:bool. forall p__foo__result4:bool.
-  forall p__foo__result5:bool.
-  (forall result1:bool. (not (((((p__foo__result1 = p__foo__result2) and
-  (p__foo__result3 = p__foo__result1)) and ((result = p__foo__result) and
-  (p__foo__result1 = of_int(1)))) and
-  ((p__foo__result4 = p__foo__result2) and
-  (p__foo__result5 = p__foo__result3))) and (result1 = p__foo__result4)))))
+goal WP_parameter_def : false

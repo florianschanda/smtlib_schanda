@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -425,19 +425,118 @@ logic b : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic k : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : integer
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+axiom H : ((all_elements_in(a, 8000000) = true) and (all_elements_in(b,
+  1000000) = true))
+
+axiom H1 : (0 <= k)
+
+axiom H2 : (k <= 7)
+
+axiom H3 : (not (mod((k + 1), 8) = 0))
+
+axiom H4 : (mod((k + 1), 4) = 0)
+
+axiom H5 : ((0 <= (k - 3)) and ((k - 3) <= 7))
+
+axiom H6 : (o22 = (k - 3))
+
+axiom H7 : (o23 = (b[o22]))
+
+axiom H8 : (o24 = to_rep(o23))
+
+axiom H9 : ((0 <= (k - 2)) and ((k - 2) <= 7))
+
+axiom H10 : (o17 = (k - 2))
+
+axiom H11 : (o18 = (b[o17]))
+
+axiom H12 : (o19 = to_rep(o18))
+
+axiom H13 : ((0 <= (k - 1)) and ((k - 1) <= 7))
+
+axiom H14 : (o13 = (k - 1))
+
+axiom H15 : (o14 = (b[o13]))
+
+axiom H16 : (o15 = to_rep(o14))
+
+axiom H17 : (o16 = (to_rep((b[k])) + o15))
+
+axiom H18 : ((o20 = o16) and in_range1(o16))
+
+axiom H19 : (o21 = (o20 + o19))
+
+axiom H20 : ((o25 = o21) and in_range1(o21))
+
+axiom H21 : (o26 = (o25 + o24))
+
  (* File "prefixsum.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall o:int. forall o1:integer. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:integer. forall o6:int.
-  forall o7:int. forall o8:int. forall o9:int. forall o10:integer.
-  forall o11:int. forall o12:int. forall o13:int. (((all_elements_in(a,
-  8000000) = true) and (all_elements_in(b, 1000000) = true)) ->
-  (((0 <= k) and (k <= 7)) -> ((not (mod((k + 1), 8) = 0)) -> ((mod((k + 1),
-  4) = 0) -> (((((((0 <= (k - 3)) and ((k - 3) <= 7)) and (o9 = (k - 3))) and
-  (o10 = (b[o9]))) and (o11 = to_rep(o10))) and ((((((((0 <= (k - 2)) and
-  ((k - 2) <= 7)) and (o4 = (k - 2))) and (o5 = (b[o4]))) and
-  (o6 = to_rep(o5))) and ((((((((0 <= (k - 1)) and ((k - 1) <= 7)) and
-  (o = (k - 1))) and (o1 = (b[o]))) and (o2 = to_rep(o1))) and
-  (o3 = (to_rep((b[k])) + o2))) and ((o7 = o3) and in_range1(o3))) and
-  (o8 = (o7 + o6)))) and ((o12 = o8) and in_range1(o8))) and
-  (o13 = (o12 + o11)))) -> in_range1(o13)))))))
+goal WP_parameter_def : in_range1(o26)

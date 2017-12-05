@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const result__ Int)
 (declare-const count Int)
+(declare-const o Int)
 (assert (in_range count))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range result__)))
 (assert (not (in_range (+ count 1))))

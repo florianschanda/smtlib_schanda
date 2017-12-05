@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,13 +135,51 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic b4 : int
+
+logic temp___184 : int
+
+logic o : int
+
+logic b41 : int
+
+logic b42 : int
+
+logic result : int
+
+logic b43 : int
+
+logic b44 : int
+
+logic b45 : int
+
+logic b46 : int
+
+logic b47 : int
+
+axiom H : ((b4 <= 10000) -> (temp___184 = b4))
+
+axiom H1 : ((b4 <= 10000) -> (in_range1(b42) and (b42 <= 10000)))
+
+axiom H2 : ((b4 <= 10000) -> ((o = (b42 + 1)) and in_range1((b42 + 1))))
+
+axiom H3 : ((b4 <= 10000) -> (result = b42))
+
+axiom H4 : ((b4 <= 10000) -> (b43 = o))
+
+axiom H5 : ((b4 <= 10000) -> (not (b43 <= 10000)))
+
+axiom H6 : ((b4 <= 10000) -> (b43 = b44))
+
+axiom H7 : ((b4 <= 10000) -> (b45 = b43))
+
+axiom H8 : ((b4 <= 10000) -> (b46 = b44))
+
+axiom H9 : ((b4 <= 10000) -> (b47 = b45))
+
+axiom H10 : ((not (b4 <= 10000)) -> (b46 = b4))
+
+axiom H11 : ((not (b4 <= 10000)) -> (b47 = b41))
+
  (* File "tp.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b4:int. forall temp___184:int. forall o:int. forall b41:int.
-  forall b42:int. forall result:int. forall b43:int. forall b44:int.
-  forall b45:int. forall b46:int. forall b47:int. (not (((b4 <= 10000) and
-  ((((temp___184 = b4) and ((in_range1(b42) and (b42 <= 10000)) and
-  ((((o = (b42 + 1)) and in_range1((b42 + 1))) and ((result = b42) and
-  (b43 = o))) and (not (b43 <= 10000))))) and ((b43 = b44) and
-  (b45 = b43))) and ((b44 = b46) and (b47 = b45)))) or
-  ((not (b4 <= 10000)) and ((b4 = b46) and (b47 = b41))))))
+goal WP_parameter_def : false

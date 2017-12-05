@@ -463,7 +463,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -502,7 +502,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq10 : int, int -> bool
 
@@ -2033,14 +2033,124 @@ axiom possible_three_shapes__def_axiom :
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0), of_int(0))))
 
- (* File "tetris_initial.adb", line 107, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:py_coord. forall y:int. forall result:int.
-  forall y1:int. forall cur_board:(int,(int,cell) farray) farray.
-  forall y2:int. forall x:int. forall result1:int. forall x1:int.
-  forall cur_board1:(int,(int,cell) farray) farray. forall x2:int.
-  ((tetris_initial__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic y : int
+
+logic y1 : int
+
+logic o : cell
+
+logic o1 : int
+
+logic o2 : (int,cell) farray
+
+logic o3 : int
+
+logic o4 : (int,(int,cell) farray) farray
+
+logic o5 : cell
+
+logic o6 : int
+
+logic o7 : (int,cell) farray
+
+logic o8 : int
+
+logic o9 : (int,(int,cell) farray) farray
+
+logic o10 : cell
+
+logic o11 : int
+
+logic o12 : (int,cell) farray
+
+logic o13 : int
+
+logic o14 : (int,(int,cell) farray) farray
+
+logic o15 : cell
+
+logic o16 : int
+
+logic o17 : (int,cell) farray
+
+logic o18 : cell
+
+logic o19 : int
+
+logic o20 : (int,cell) farray
+
+logic o21 : int
+
+logic temp___727 : map
+
+logic o22 : cell
+
+logic o23 : int
+
+logic o24 : (int,cell) farray
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic result1 : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result2 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result3 : int
+
+logic y2 : int
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic y3 : int
+
+logic x : int
+
+logic result4 : int
+
+logic x1 : int
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic x2 : int
+
+logic result5 : int
+
+logic y4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic y5 : int
+
+logic x3 : int
+
+logic result6 : int
+
+logic x4 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic x5 : int
+
+logic result7 : bool
+
+axiom H :
+  (tetris_initial__possible_i_shapes__aggregate_def(temp___143(of_int(0),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
   of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
@@ -2052,8 +2162,10 @@ goal WP_parameter_def :
   of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) ->
-  ((tetris_initial__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (tetris_initial__possible_three_shapes__aggregate_def(temp___248(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -2087,13 +2199,35 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) ->
-  ((not (to_rep1(cur_piece__split_fields) = 2)) ->
-  ((not (to_rep1(cur_piece__split_fields) = 1)) -> (((result = y) and
-  (y1 = 0)) -> (((0 <= y1) and (y1 <= 2)) -> (((0 <= y2) and (y2 <= 2)) ->
-  (((result1 = x) and (x1 = 0)) -> (((0 <= x1) and (x1 <= 2)) ->
-  (((forall temp___732:int. (((1 <= temp___732) and (temp___732 <= 50)) ->
-    ((not ((to_rep3(cur_piece__split_fields1) + y2) = temp___732)) ->
-    ((cur_board1[temp___732]) = (cur_board[temp___732]))))) and
-  ((0 <= x2) and (x2 <= 2))) ->
-  (3 <= to_rep1(cur_piece__split_fields)))))))))))))
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : (not (to_rep1(cur_piece__split_fields) = 2))
+
+axiom H3 : (not (to_rep1(cur_piece__split_fields) = 1))
+
+axiom H4 : (result5 = y1)
+
+axiom H5 : (y4 = 0)
+
+axiom H6 : (0 <= y4)
+
+axiom H7 : (y4 <= 2)
+
+axiom H8 : ((0 <= y5) and (y5 <= 2))
+
+axiom H9 : (result6 = x3)
+
+axiom H10 : (x4 = 0)
+
+axiom H11 : (0 <= x4)
+
+axiom H12 : (x4 <= 2)
+
+axiom H13 :
+  ((forall temp___732:int. (((1 <= temp___732) and (temp___732 <= 50)) ->
+   ((not ((to_rep3(cur_piece__split_fields3) + y5) = temp___732)) ->
+   ((cur_board7[temp___732]) = (cur_board6[temp___732]))))) and
+  ((0 <= x5) and (x5 <= 2)))
+
+ (* File "tetris_initial.adb", line 107, characters 0-0 *)
+goal WP_parameter_def : (3 <= to_rep1(cur_piece__split_fields))

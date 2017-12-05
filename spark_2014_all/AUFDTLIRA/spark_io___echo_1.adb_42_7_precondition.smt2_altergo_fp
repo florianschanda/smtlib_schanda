@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -650,60 +650,60 @@ logic c__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic temp___String_Literal_811 : unit -> (int,character) farray
+logic temp___String_Literal_805 : unit -> (int,character) farray
 
-axiom temp___String_Literal_811__def_axiom :
-  (((((((((((((((((((((((to_rep((temp___String_Literal_811(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_811(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_811(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_811(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_811(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_811(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_811(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_811(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_811(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_811(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_811(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_811(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_811(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_811(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_811(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_811(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_811(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_811(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_811(void)[19])) = 73)) and
-  (to_rep((temp___String_Literal_811(void)[20])) = 110)) and
-  (to_rep((temp___String_Literal_811(void)[21])) = 112)) and
-  (to_rep((temp___String_Literal_811(void)[22])) = 117)) and
-  (to_rep((temp___String_Literal_811(void)[23])) = 116))
+axiom temp___String_Literal_805__def_axiom :
+  (((((((((((((((((((((((to_rep((temp___String_Literal_805(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_805(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_805(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_805(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_805(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_805(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_805(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_805(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_805(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_805(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_805(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_805(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_805(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_805(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_805(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_805(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_805(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_805(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_805(void)[19])) = 73)) and
+  (to_rep((temp___String_Literal_805(void)[20])) = 110)) and
+  (to_rep((temp___String_Literal_805(void)[21])) = 112)) and
+  (to_rep((temp___String_Literal_805(void)[22])) = 117)) and
+  (to_rep((temp___String_Literal_805(void)[23])) = 116))
 
-logic temp___String_Literal_812 : unit -> (int,character) farray
+logic temp___String_Literal_806 : unit -> (int,character) farray
 
-axiom temp___String_Literal_812__def_axiom :
-  ((((((((((((((((((((((((to_rep((temp___String_Literal_812(void)[1])) = 69) and
-  (to_rep((temp___String_Literal_812(void)[2])) = 114)) and
-  (to_rep((temp___String_Literal_812(void)[3])) = 114)) and
-  (to_rep((temp___String_Literal_812(void)[4])) = 111)) and
-  (to_rep((temp___String_Literal_812(void)[5])) = 114)) and
-  (to_rep((temp___String_Literal_812(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_812(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_812(void)[8])) = 110)) and
-  (to_rep((temp___String_Literal_812(void)[9])) = 32)) and
-  (to_rep((temp___String_Literal_812(void)[10])) = 83)) and
-  (to_rep((temp___String_Literal_812(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_812(void)[12])) = 97)) and
-  (to_rep((temp___String_Literal_812(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_812(void)[14])) = 100)) and
-  (to_rep((temp___String_Literal_812(void)[15])) = 97)) and
-  (to_rep((temp___String_Literal_812(void)[16])) = 114)) and
-  (to_rep((temp___String_Literal_812(void)[17])) = 100)) and
-  (to_rep((temp___String_Literal_812(void)[18])) = 95)) and
-  (to_rep((temp___String_Literal_812(void)[19])) = 79)) and
-  (to_rep((temp___String_Literal_812(void)[20])) = 117)) and
-  (to_rep((temp___String_Literal_812(void)[21])) = 116)) and
-  (to_rep((temp___String_Literal_812(void)[22])) = 112)) and
-  (to_rep((temp___String_Literal_812(void)[23])) = 117)) and
-  (to_rep((temp___String_Literal_812(void)[24])) = 116))
+axiom temp___String_Literal_806__def_axiom :
+  ((((((((((((((((((((((((to_rep((temp___String_Literal_806(void)[1])) = 69) and
+  (to_rep((temp___String_Literal_806(void)[2])) = 114)) and
+  (to_rep((temp___String_Literal_806(void)[3])) = 114)) and
+  (to_rep((temp___String_Literal_806(void)[4])) = 111)) and
+  (to_rep((temp___String_Literal_806(void)[5])) = 114)) and
+  (to_rep((temp___String_Literal_806(void)[6])) = 32)) and
+  (to_rep((temp___String_Literal_806(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_806(void)[8])) = 110)) and
+  (to_rep((temp___String_Literal_806(void)[9])) = 32)) and
+  (to_rep((temp___String_Literal_806(void)[10])) = 83)) and
+  (to_rep((temp___String_Literal_806(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_806(void)[12])) = 97)) and
+  (to_rep((temp___String_Literal_806(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_806(void)[14])) = 100)) and
+  (to_rep((temp___String_Literal_806(void)[15])) = 97)) and
+  (to_rep((temp___String_Literal_806(void)[16])) = 114)) and
+  (to_rep((temp___String_Literal_806(void)[17])) = 100)) and
+  (to_rep((temp___String_Literal_806(void)[18])) = 95)) and
+  (to_rep((temp___String_Literal_806(void)[19])) = 79)) and
+  (to_rep((temp___String_Literal_806(void)[20])) = 117)) and
+  (to_rep((temp___String_Literal_806(void)[21])) = 116)) and
+  (to_rep((temp___String_Literal_806(void)[22])) = 112)) and
+  (to_rep((temp___String_Literal_806(void)[23])) = 117)) and
+  (to_rep((temp___String_Literal_806(void)[24])) = 116))
 
 type file_mode
 
@@ -774,23 +774,72 @@ axiom is_standard_file__def_axiom :
   ((is_standard_file(file) = true) <-> (((is_standard_input(file) = true) or
   (is_standard_output(file) = true)) or (is_standard_error(file) = true))))
 
- (* File "spark-text_io.ads", line 80, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_input:us_rep. forall standard_output:us_rep.
-  forall standard_error:us_rep. forall c__split_discrs:file_status.
-  forall o:bool. forall result:bool. forall standard_input1:us_rep.
-  forall standard_output1:us_rep. forall standard_error1:us_rep.
-  (((((((is_readable(standard_input) = true) and
+logic standard_input : us_rep
+
+logic standard_output : us_rep
+
+logic standard_error : us_rep
+
+logic c__split_discrs : file_status
+
+logic o : bool
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic result : bool
+
+logic standard_input1 : us_rep
+
+logic standard_output1 : us_rep
+
+logic standard_error1 : us_rep
+
+logic standard_input2 : us_rep
+
+logic c__split_discrs1 : file_status
+
+logic result1 : bool
+
+logic standard_output2 : us_rep
+
+logic result2 : bool
+
+logic standard_error2 : us_rep
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : ((((((is_readable(standard_input) = true) and
   (is_writable(standard_output) = true)) and
   (is_writable(standard_error) = true)) and (status(standard_input) = 1)) and
-  (status(standard_output) = 1)) and (status(standard_error) = 1)) ->
-  ((((is_readable(standard_input) = true) and
+  (status(standard_output) = 1)) and (status(standard_error) = 1))
+
+axiom H1 : (((is_readable(standard_input) = true) and
   (is_writable(standard_output) = true)) and
-  (is_writable(standard_error) = true)) ->
-  (((c__attr__constrained = false) and (to_rep2(c__split_discrs) = 3)) ->
-  (((o = end_of_file(standard_input)) and (((not (o = true)) and
-  (result = true)) or ((o = true) and (result = false)))) ->
-  ((result = true) -> ((((is_writable(standard_error1) = true) and
+  (is_writable(standard_error) = true))
+
+axiom H2 : ((c__attr__constrained = false) and
+  (to_rep2(c__split_discrs) = 3))
+
+axiom H3 : (o = end_of_file(standard_input))
+
+axiom H4 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : (((is_writable(standard_error1) = true) and
   (is_writable(standard_output1) = true)) and
-  (is_readable(standard_input1) = true)) ->
-  (is_readable(standard_input1) = true))))))))
+  (is_readable(standard_input1) = true))
+
+ (* File "spark-text_io.ads", line 80, characters 0-0 *)
+goal WP_parameter_def : (is_readable(standard_input1) = true)

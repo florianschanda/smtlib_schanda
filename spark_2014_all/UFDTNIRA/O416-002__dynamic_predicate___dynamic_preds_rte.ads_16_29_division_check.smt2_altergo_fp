@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -383,9 +383,12 @@ logic i7s1 : very_small
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : (in_range(i3s) and ((2 * i3s) <  100000))
+
+axiom H1 : (in_range1(i5s) and ((i5s * i5s) <  100000))
+
+axiom H2 : (((2 * to_rep(i7s)) <  100000) and
+  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000))
+
  (* File "dynamic_preds_rte.ads", line 14, characters 0-0 *)
-goal WP_parameter_def : ((in_range(i3s) and ((2 * i3s) <  100000)) ->
-  ((in_range1(i5s) and ((i5s * i5s) <  100000)) ->
-  ((((2 * to_rep(i7s)) <  100000) and
-  ((to_rep1(i7s1) * to_rep1(i7s1)) <  100000)) ->
-  (not (to_rep1(i7s1) = 0)))))
+goal WP_parameter_def : (not (to_rep1(i7s1) = 0))

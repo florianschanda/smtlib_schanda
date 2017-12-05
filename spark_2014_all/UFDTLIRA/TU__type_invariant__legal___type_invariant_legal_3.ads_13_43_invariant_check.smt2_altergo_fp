@@ -125,5 +125,7 @@ axiom g__post_axiom : true
 axiom g__def_axiom :
   (forall x1:int [g(x1)]. ((g(x1) = true) <-> (f__2(x1) = true)))
 
+axiom H : in_range(x)
+
  (* File "type_invariant_legal_3.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> (g(x) = true))
+goal WP_parameter_def : (g(x) = true)

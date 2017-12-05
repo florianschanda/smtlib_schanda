@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -274,21 +274,77 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,integer) farray
+
+logic b : (int,integer) farray
+
+logic tmp : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic result : int
+
+logic tmp1 : int
+
+logic result1 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic b1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic b2 : (int,integer) farray
+
+logic tmp2 : int
+
+logic a3 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+logic tmp3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
+
+axiom H1 : (result = tmp)
+
+axiom H2 : (tmp1 = to_rep((a[0])))
+
+axiom H3 : (to_rep(o) = to_rep((b[1])))
+
+axiom H4 : (o1 = (a[0 <- o]))
+
+axiom H5 : (result1 = a)
+
+axiom H6 : (a1 = o1)
+
+axiom H7 : (to_rep(o2) = tmp1)
+
+axiom H8 : (o3 = (b[1 <- o2]))
+
+axiom H9 : (result2 = b)
+
+axiom H10 : (b1 = o3)
+
+axiom H11 : (tmp2 = tmp1)
+
+axiom H12 : (b1 = b2)
+
+axiom H13 : (a1 = a2)
+
+axiom H14 : (tmp3 = tmp1)
+
+axiom H15 : (b3 = b1)
+
+axiom H16 : (a3 = a1)
+
  (* File "simple_arrays.adb", line 750, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall b:(int,integer) farray.
-  forall tmp:int. forall o:integer. forall o1:(int,integer) farray.
-  forall o2:integer. forall o3:(int,integer) farray. forall result:int.
-  forall tmp1:int. forall result1:(int,integer) farray.
-  forall a1:(int,integer) farray. forall result2:(int,integer) farray.
-  forall b1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall b2:(int,integer) farray. forall tmp2:int.
-  forall a3:(int,integer) farray. forall b3:(int,integer) farray.
-  forall tmp3:int. ((((((-2147483648) <= 2147483647) -> in_range1(tmp)) and
-  (((result = tmp) and (tmp1 = to_rep((a[0])))) and
-  ((((to_rep(o) = to_rep((b[1]))) and (o1 = (a[0 <- o]))) and
-  ((result1 = a) and (a1 = o1))) and (((to_rep(o2) = tmp1) and
-  (o3 = (b[1 <- o2]))) and ((result2 = b) and (b1 = o3)))))) and
-  (((tmp2 = tmp1) and ((b1 = b2) and (a1 = a2))) and ((tmp3 = tmp1) and
-  ((b3 = b1) and (a3 = a1))))) -> (not (bool_eq4(a2, 0, 2, a, 0,
-  2) = true))))
+goal WP_parameter_def : (not (bool_eq4(a2, 0, 2, a, 0, 2) = true))

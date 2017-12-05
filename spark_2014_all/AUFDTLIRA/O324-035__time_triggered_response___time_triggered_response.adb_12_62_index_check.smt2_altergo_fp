@@ -348,13 +348,28 @@ axiom always_set_until_now__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "time_triggered_response.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall idle_history:(int,bool) farray. forall time_idle:int. forall o:int.
-  forall result:bool. (in_range1(time_idle) -> ((((not (time_idle = 0)) and
-  (((o = min(50, (time_idle - 1))) and in_range2(min(50,
-  (time_idle - 1)))) and ((result = always_set_until_now(o,
+logic idle_history : (int,bool) farray
+
+logic time_idle : int
+
+logic o : int
+
+logic result : bool
+
+axiom H : in_range1(time_idle)
+
+axiom H1 : ((not (time_idle = 0)) -> ((o = min(50, (time_idle - 1))) and
+  in_range2(min(50, (time_idle - 1)))))
+
+axiom H2 : ((not (time_idle = 0)) -> ((result = always_set_until_now(o,
   idle_history)) and ((result = true) <->
-  (forall t:int. (((0 <= t) and (t <= o)) -> ((idle_history[t]) = true))))))) or
-  ((time_idle = 0) and (result = of_int(1)))) -> ((result = true) ->
-  ((time_idle <= 50) -> (0 <= time_idle))))))
+  (forall t:int. (((0 <= t) and (t <= o)) -> ((idle_history[t]) = true))))))
+
+axiom H3 : ((time_idle = 0) -> (result = of_int(1)))
+
+axiom H4 : (result = true)
+
+axiom H5 : (time_idle <= 50)
+
+ (* File "time_triggered_response.ads", line 14, characters 0-0 *)
+goal WP_parameter_def : (0 <= time_idle)

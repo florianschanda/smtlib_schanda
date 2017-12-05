@@ -211,52 +211,123 @@ logic v : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "dispatching_result.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dispatching_result__init__result:natural.
-  forall dispatching_result__init__result1:us_private.
-  forall dispatching_result__init__result2:int. forall o:natural.
-  forall o1:natural. forall o2:us_private. forall o3:natural.
-  forall o4:us_private. forall o5:int. forall result:natural.
-  forall result1:us_private. forall result2:int.
-  forall dispatching_result__init__result3:natural.
-  forall dispatching_result__init__result4:us_private.
-  forall dispatching_result__init__result5:int.
-  forall dispatching_result__init__result6:natural.
-  forall dispatching_result__init__result7:us_private.
-  forall dispatching_result__init__result8:int.
-  forall dispatching_result__init__result9:natural.
-  forall dispatching_result__init__result10:us_private.
-  forall dispatching_result__init__result11:int.
-  forall dispatching_result__init__result12:natural.
-  forall dispatching_result__init__result13:us_private.
-  forall dispatching_result__init__result14:int.
-  forall dispatching_result__init__result15:natural.
-  forall dispatching_result__init__result16:us_private.
-  forall dispatching_result__init__result17:int.
-  (forall result3:natural. forall result4:us_private. forall result5:int.
-  ((in_range(v) and
-  (((((((dispatching_result__init__result6 = dispatching_result__init__result3) and
-  (dispatching_result__init__result7 = dispatching_result__init__result4)) and
-  (dispatching_result__init__result8 = dispatching_result__init__result5)) and
+logic dispatching_result__init__result : natural
+
+logic dispatching_result__init__result1 : us_private
+
+logic dispatching_result__init__result2 : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : us_private
+
+logic o3 : natural
+
+logic o4 : us_private
+
+logic o5 : int
+
+logic result : natural
+
+logic result1 : us_private
+
+logic result2 : int
+
+logic dispatching_result__init__result3 : natural
+
+logic dispatching_result__init__result4 : us_private
+
+logic dispatching_result__init__result5 : int
+
+logic dispatching_result__init__result6 : natural
+
+logic dispatching_result__init__result7 : us_private
+
+logic dispatching_result__init__result8 : int
+
+logic dispatching_result__init__result9 : natural
+
+logic dispatching_result__init__result10 : us_private
+
+logic dispatching_result__init__result11 : int
+
+logic dispatching_result__init__result12 : natural
+
+logic dispatching_result__init__result13 : us_private
+
+logic dispatching_result__init__result14 : int
+
+logic dispatching_result__init__result15 : natural
+
+logic dispatching_result__init__result16 : us_private
+
+logic dispatching_result__init__result17 : int
+
+logic result3 : natural
+
+logic result4 : us_private
+
+logic result5 : int
+
+axiom H : in_range(v)
+
+axiom H1 :
+  (dispatching_result__init__result6 = dispatching_result__init__result3)
+
+axiom H2 :
+  (dispatching_result__init__result7 = dispatching_result__init__result4)
+
+axiom H3 :
+  (dispatching_result__init__result8 = dispatching_result__init__result5)
+
+axiom H4 :
   (((dispatching_result__init__result9 = dispatching_result__init__result3) and
   (dispatching_result__init__result10 = dispatching_result__init__result4)) and
-  (dispatching_result__init__result11 = dispatching_result__init__result5))) and
-  ((((to_rep(o) = v) and ((o = o1) and (us_null_ext__ = o2))) and
-  (((o3 = o1) and (o4 = o2)) and (us_tag = o5))) and
-  ((((result = dispatching_result__init__result) and
-  (result1 = dispatching_result__init__result1)) and
-  (result2 = dispatching_result__init__result2)) and
-  (((o3 = dispatching_result__init__result3) and
-  (o4 = dispatching_result__init__result4)) and
-  (o5 = dispatching_result__init__result5))))) and
-  ((((dispatching_result__init__result12 = dispatching_result__init__result6) and
+  (dispatching_result__init__result11 = dispatching_result__init__result5))
+
+axiom H5 : (to_rep(o) = v)
+
+axiom H6 : (o = o1)
+
+axiom H7 : (us_null_ext__ = o2)
+
+axiom H8 : (o3 = o1)
+
+axiom H9 : (o4 = o2)
+
+axiom H10 : (us_tag = o5)
+
+axiom H11 : (result = dispatching_result__init__result)
+
+axiom H12 : (result1 = dispatching_result__init__result1)
+
+axiom H13 : (result2 = dispatching_result__init__result2)
+
+axiom H14 : (((dispatching_result__init__result3 = o3) and
+  (dispatching_result__init__result4 = o4)) and
+  (dispatching_result__init__result5 = o5))
+
+axiom H15 :
+  (((dispatching_result__init__result12 = dispatching_result__init__result6) and
   (dispatching_result__init__result13 = dispatching_result__init__result7)) and
-  (dispatching_result__init__result14 = dispatching_result__init__result8)) and
-  (((dispatching_result__init__result15 = dispatching_result__init__result9) and
-  (dispatching_result__init__result16 = dispatching_result__init__result10)) and
-  (dispatching_result__init__result17 = dispatching_result__init__result11)))) and
-  (((result3 = dispatching_result__init__result12) and
-  (result4 = dispatching_result__init__result13)) and
-  (result5 = dispatching_result__init__result14)))) ->
-  (to_rep(dispatching_result__init__result12) = v))))
+  (dispatching_result__init__result14 = dispatching_result__init__result8))
+
+axiom H16 :
+  (dispatching_result__init__result15 = dispatching_result__init__result9)
+
+axiom H17 :
+  (dispatching_result__init__result16 = dispatching_result__init__result10)
+
+axiom H18 :
+  (dispatching_result__init__result17 = dispatching_result__init__result11)
+
+axiom H19 : (result3 = dispatching_result__init__result12)
+
+axiom H20 : (result4 = dispatching_result__init__result13)
+
+axiom H21 : (result5 = dispatching_result__init__result14)
+
+ (* File "dispatching_result.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (to_rep(dispatching_result__init__result12) = v)

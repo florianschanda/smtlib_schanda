@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -261,5 +261,23 @@ axiom is_even__def_axiom :
 axiom is_odd__def_axiom :
   (forall i1:int [is_odd(i1)]. ((is_odd(i1) = true) <-> (mod(i1, 2) = 1)))
 
+logic rec_post__is_odd__result : bool
+
+logic o : int
+
+logic result : bool
+
+logic rec_post__is_odd__result1 : bool
+
+logic rec_post__is_odd__result2 : bool
+
+logic rec_post__is_odd__result3 : bool
+
+logic rec_post__is_odd__result4 : bool
+
+logic rec_post__is_odd__result5 : bool
+
+axiom H : in_range1(i)
+
  (* File "rec_post.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (not (2 = 0)))
+goal WP_parameter_def : (not (2 = 0))

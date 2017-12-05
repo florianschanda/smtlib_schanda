@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -187,7 +187,7 @@ axiom coerce_axiom1 :
 
 type value
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -766,109 +766,313 @@ type s58b__ref = { s58b__content : us_t2
 
 function s58b__ref___projection(a3: s58b__ref) : us_t2 = (a3).s58b__content
 
- (* File "simple_unc_arrays.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall bull:bool. forall res__split_fields:(int,value) farray.
-  forall res__split_fields1:t1. forall i:int.
-  forall simple_unc_arrays__bubble_sort__result:natural.
-  forall simple_unc_arrays__bubble_sort__result1:(int,value) farray.
-  forall simple_unc_arrays__bubble_sort__result2:t1. forall us:int.
-  forall temp___919:natural. forall temp___9191:(int,value) farray.
-  forall temp___9192:t1. forall temp___918:bool. forall temp___914:natural.
-  forall temp___9141:(int,value) farray. forall temp___9142:t1.
-  forall temp___913:bool. forall temp___906:int. forall o:int.
-  forall o1:value. forall o2:int. forall o3:value. forall o4:int.
-  forall o5:int.
-  forall simple_unc_arrays__swap_cells__a__compl:(int,value) farray.
-  forall simple_unc_arrays__swap_cells__a__compl1:t2. forall o6:integer.
-  forall o7:integer. forall o8:int. forall j:int. forall temp___931:int.
-  forall i1:int. forall result:bool. forall bull1:bool.
-  forall result1:(int,value) farray. forall result2:t1.
-  forall res__split_fields2:(int,value) farray. forall res__split_fields3:t1.
-  forall bull2:bool. forall res__split_fields4:(int,value) farray.
-  forall res__split_fields5:t1. forall i2:int. forall rho:(int,value) farray.
-  forall result3:bool. forall bull3:bool. forall result4:int. forall i3:int.
-  forall bull4:bool. forall res__split_fields6:(int,value) farray.
-  forall res__split_fields7:t1. forall i4:int.
-  forall rho1:(int,value) farray. forall result5:bool.
-  forall simple_unc_arrays__swap_cells__a:(int,value) farray.
-  forall result6:(int,value) farray. forall result7:t1.
-  forall res__split_fields8:(int,value) farray. forall res__split_fields9:t1.
-  forall result8:bool. forall bull5:bool. forall bull6:bool.
-  forall res__split_fields10:(int,value) farray.
-  forall res__split_fields11:t1. forall i5:int. forall bull7:bool.
-  forall res__split_fields12:(int,value) farray.
-  forall res__split_fields13:t1. forall i6:int.
-  forall rho2:(int,value) farray. forall bull8:bool__ref.
-  forall res__split_fields14:us_split_fields__ref. forall i7:int__ref.
-  forall bull9:bool. forall res__split_fields15:us_split_fields.
-  forall i8:int. forall rho3:(int,value) farray. forall bull10:bool__ref.
-  forall res__split_fields16:us_split_fields__ref. forall i9:int__ref.
-  forall bull11:bool. forall res__split_fields17:us_split_fields.
-  forall i10:int. forall bull12:bool__ref.
-  forall res__split_fields18:us_split_fields__ref. forall i11:int__ref.
-  forall bull13:bool. forall res__split_fields19:us_split_fields.
-  forall i12:int. forall result9:table__ref.
-  forall simple_unc_arrays__bubble_sort__result3:us_rep.
-  forall simple_unc_arrays__bubble_sort__result4:table__ref.
-  forall simple_unc_arrays__bubble_sort__result5:us_rep.
-  forall bull14:bool__ref. forall res__split_fields20:us_split_fields__ref.
-  forall i13:int__ref.
-  forall simple_unc_arrays__bubble_sort__result6:table__ref.
-  forall bull15:bool. forall res__split_fields21:us_split_fields.
-  forall i14:int. forall simple_unc_arrays__bubble_sort__result7:us_rep.
-  ((dynamic_property2(1, to_rep(a), to_rep1(first2(a2)),
+logic bull : bool
+
+logic res__split_fields : (int,value) farray
+
+logic res__split_fields1 : t1
+
+logic i : int
+
+logic simple_unc_arrays__bubble_sort__result : natural
+
+logic simple_unc_arrays__bubble_sort__result1 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result2 : t1
+
+logic us : int
+
+logic temp___913 : natural
+
+logic temp___9131 : (int,value) farray
+
+logic temp___9132 : t1
+
+logic temp___912 : bool
+
+logic temp___908 : natural
+
+logic temp___9081 : (int,value) farray
+
+logic temp___9082 : t1
+
+logic temp___907 : bool
+
+logic temp___900 : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic o3 : value
+
+logic o4 : int
+
+logic o5 : int
+
+logic simple_unc_arrays__swap_cells__a__compl : (int,value) farray
+
+logic simple_unc_arrays__swap_cells__a__compl1 : t2
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : int
+
+logic j : int
+
+logic k : int
+
+logic o9 : int
+
+logic o10 : value
+
+logic o11 : int
+
+logic j1 : int
+
+logic temp___925 : int
+
+logic o12 : int
+
+logic o13 : value
+
+logic o14 : int
+
+logic i1 : int
+
+logic result : bool
+
+logic bull1 : bool
+
+logic result1 : (int,value) farray
+
+logic result2 : t1
+
+logic res__split_fields2 : (int,value) farray
+
+logic res__split_fields3 : t1
+
+logic bull2 : bool
+
+logic res__split_fields4 : (int,value) farray
+
+logic res__split_fields5 : t1
+
+logic i2 : int
+
+logic rho : (int,value) farray
+
+logic result3 : bool
+
+logic bull3 : bool
+
+logic result4 : int
+
+logic i3 : int
+
+logic bull4 : bool
+
+logic res__split_fields6 : (int,value) farray
+
+logic res__split_fields7 : t1
+
+logic i4 : int
+
+logic rho1 : (int,value) farray
+
+logic result5 : bool
+
+logic simple_unc_arrays__swap_cells__a : (int,value) farray
+
+logic result6 : (int,value) farray
+
+logic result7 : t1
+
+logic res__split_fields8 : (int,value) farray
+
+logic res__split_fields9 : t1
+
+logic result8 : bool
+
+logic bull5 : bool
+
+logic bull6 : bool
+
+logic res__split_fields10 : (int,value) farray
+
+logic res__split_fields11 : t1
+
+logic i5 : int
+
+logic bull7 : bool
+
+logic res__split_fields12 : (int,value) farray
+
+logic res__split_fields13 : t1
+
+logic i6 : int
+
+logic rho2 : (int,value) farray
+
+logic bull8 : bool
+
+logic res__split_fields14 : (int,value) farray
+
+logic res__split_fields15 : t1
+
+logic i7 : int
+
+logic bull9 : bool
+
+logic res__split_fields16 : (int,value) farray
+
+logic res__split_fields17 : t1
+
+logic i8 : int
+
+logic rho3 : (int,value) farray
+
+logic bull10 : bool
+
+logic res__split_fields18 : (int,value) farray
+
+logic res__split_fields19 : t1
+
+logic i9 : int
+
+logic bull11 : bool
+
+logic res__split_fields20 : (int,value) farray
+
+logic res__split_fields21 : t1
+
+logic i10 : int
+
+logic bull12 : bool
+
+logic res__split_fields22 : (int,value) farray
+
+logic res__split_fields23 : t1
+
+logic i11 : int
+
+logic bull13 : bool
+
+logic res__split_fields24 : (int,value) farray
+
+logic res__split_fields25 : t1
+
+logic i12 : int
+
+logic result9 : natural
+
+logic result10 : (int,value) farray
+
+logic result11 : t1
+
+logic simple_unc_arrays__bubble_sort__result3 : natural
+
+logic simple_unc_arrays__bubble_sort__result4 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result5 : t1
+
+logic simple_unc_arrays__bubble_sort__result6 : natural
+
+logic simple_unc_arrays__bubble_sort__result7 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result8 : t1
+
+logic simple_unc_arrays__bubble_sort__result9 : natural
+
+logic simple_unc_arrays__bubble_sort__result10 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result11 : t1
+
+logic bull14 : bool
+
+logic res__split_fields26 : (int,value) farray
+
+logic res__split_fields27 : t1
+
+logic i13 : int
+
+logic simple_unc_arrays__bubble_sort__result12 : natural
+
+logic simple_unc_arrays__bubble_sort__result13 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result14 : t1
+
+logic bull15 : bool
+
+logic res__split_fields28 : (int,value) farray
+
+logic res__split_fields29 : t1
+
+logic i14 : int
+
+logic simple_unc_arrays__bubble_sort__result15 : natural
+
+logic simple_unc_arrays__bubble_sort__result16 : (int,value) farray
+
+logic simple_unc_arrays__bubble_sort__result17 : t1
+
+logic result12 : bool
+
+axiom H : (dynamic_property2(1, to_rep(a), to_rep1(first2(a2)),
   to_rep1(last2(a2))) and ((to_rep1(first2(a2)) = 1) and
-  (to_rep1(last2(a2)) = to_rep(a)))) -> (((((us = to_rep(a)) and
-  in_range2(to_rep(a))) and ((({ bool__content = result } = { bool__content =
-  bull }) and (bull1 = of_int(1))) and (((({ us_split_fields__content = {
-  rec__simple_unc_arrays__table__v = { elts1 = result1; rt1 = result2 } }
-  } = { us_split_fields__content = { rec__simple_unc_arrays__table__v = {
-  elts1 = res__split_fields; rt1 = res__split_fields1 } } }) and
-  ((a1 = res__split_fields2) and (a2 = res__split_fields3))) and
+  (to_rep1(last2(a2)) = to_rep(a))))
+
+axiom H1 : ((((us = to_rep(a)) and in_range2(to_rep(a))) and
+  (((result = bull) and (bull1 = of_int(1))) and
+  (((((result1 = res__split_fields) and (result2 = res__split_fields1)) and
+  ((res__split_fields2 = a1) and (res__split_fields3 = a2))) and
   (res__split_discrs = a)) and ((dynamic_property2(1,
   to_rep(res__split_discrs), to_rep1(first2(res__split_fields3)),
   to_rep1(last2(res__split_fields3))) and
   ((to_rep1(first2(res__split_fields3)) = 1) and
   (to_rep1(last2(res__split_fields3)) = to_rep(res__split_discrs)))) and
-  ((((bull1 = true) and (((((res__split_discrs = temp___919) and
-  ((temp___9191 = res__split_fields2) and
-  (temp___9192 = res__split_fields3))) and ((temp___918 = bull1) and
+  ((((bull1 = true) -> (((((res__split_discrs = temp___913) and
+  ((res__split_fields2 = temp___9131) and
+  (res__split_fields3 = temp___9132))) and ((temp___912 = bull1) and
   ((((dynamic_property2(1, to_rep(res__split_discrs),
   to_rep1(first2(res__split_fields5)),
   to_rep1(last2(res__split_fields5))) and
   ((to_rep1(first2(res__split_fields5)) = 1) and
   (to_rep1(last2(res__split_fields5)) = to_rep(res__split_discrs)))) and
-  (res__split_discrs = temp___919)) and (bull2 = true)) and
+  (res__split_discrs = temp___913)) and (bull2 = true)) and
   (((result3 = bull2) and (bull3 = of_int(0))) and
   ((((to_rep(res__split_discrs) - 1) = r56b) and in_range1(r56b)) and
-  ((((result4 = i2) and (i3 = 1)) and ((((1 <= i3) and (i3 <= r56b)) and
-  (((((res__split_discrs = temp___914) and
-  ((temp___9141 = res__split_fields4) and
-  (temp___9142 = res__split_fields5))) and ((temp___913 = bull3) and
+  ((((result4 = i2) and (i3 = 1)) and ((((1 <= i3) and (i3 <= r56b)) ->
+  (((((res__split_discrs = temp___908) and
+  ((res__split_fields4 = temp___9081) and
+  (res__split_fields5 = temp___9082))) and ((temp___907 = bull3) and
   ((((dynamic_property2(1, to_rep(res__split_discrs),
   to_rep1(first2(res__split_fields7)),
   to_rep1(last2(res__split_fields7))) and
   ((to_rep1(first2(res__split_fields7)) = 1) and
   (to_rep1(last2(res__split_fields7)) = to_rep(res__split_discrs)))) and
-  (res__split_discrs = temp___914)) and ((1 <= i4) and (i4 <= r56b))) and
+  (res__split_discrs = temp___908)) and ((1 <= i4) and (i4 <= r56b))) and
   ((((((((to_rep1(first2(res__split_fields7)) <= i4) and
   (i4 <= to_rep1(last2(res__split_fields7)))) and (o2 = i4)) and
   (o3 = (res__split_fields6[o2]))) and (o4 = to_rep2(o3))) and
-  ((((((temp___906 = (i4 + 1)) and in_range1((i4 + 1))) and
-  (((to_rep1(first2(res__split_fields7)) <= temp___906) and
-  (temp___906 <= to_rep1(last2(res__split_fields7)))) and
-  (o = temp___906))) and (o1 = (res__split_fields6[o]))) and
-  (o5 = to_rep2(o1))) and (((o5 <  o4) and (result5 = true)) or
-  ((not (o5 <  o4)) and (result5 = false))))) and (((result5 = true) and
+  ((((((temp___900 = (i4 + 1)) and in_range1((i4 + 1))) and
+  (((to_rep1(first2(res__split_fields7)) <= temp___900) and
+  (temp___900 <= to_rep1(last2(res__split_fields7)))) and
+  (o = temp___900))) and (o1 = (res__split_fields6[o]))) and
+  (o5 = to_rep2(o1))) and (((o5 <  o4) -> (result5 = true)) and
+  ((not (o5 <  o4)) -> (result5 = false))))) and (((result5 = true) ->
   (((to_rep(res__split_discrs) = r59b) and in_range2(r59b)) and
-  ((((((to_rep1(first2(res__split_fields7)) <= to_rep1(last2(res__split_fields7))) and
-  (((1 <= r59b) and
-  (((to_rep1(last2(res__split_fields7)) - to_rep1(first2(res__split_fields7))) + 1) = ((r59b - 1) + 1))) or
-  ((not (1 <= r59b)) and
-  (((to_rep1(last2(res__split_fields7)) - to_rep1(first2(res__split_fields7))) + 1) = 0)))) or
-  ((not (to_rep1(first2(res__split_fields7)) <= to_rep1(last2(res__split_fields7)))) and
-  (((1 <= r59b) and (0 = ((r59b - 1) + 1))) or (not (1 <= r59b))))) and
+  ((((((to_rep1(first2(res__split_fields7)) <= to_rep1(last2(res__split_fields7))) ->
+  (((1 <= r59b) ->
+  (((to_rep1(last2(res__split_fields7)) - to_rep1(first2(res__split_fields7))) + 1) = ((r59b - 1) + 1))) and
+  ((not (1 <= r59b)) ->
+  (((to_rep1(last2(res__split_fields7)) - to_rep1(first2(res__split_fields7))) + 1) = 0)))) and
+  ((not (to_rep1(first2(res__split_fields7)) <= to_rep1(last2(res__split_fields7)))) ->
+  ((1 <= r59b) -> (0 = ((r59b - 1) + 1))))) and
   ((res__split_fields6 = simple_unc_arrays__swap_cells__a__compl) and
   (mk2(to_rep1(first2(res__split_fields7)),
   to_rep1(last2(res__split_fields7))) = simple_unc_arrays__swap_cells__a__compl1))) and
@@ -877,76 +1081,81 @@ goal WP_parameter_def :
   ((to_rep1(o6) = to_rep1(first4(simple_unc_arrays__swap_cells__a__compl1))) and
   (((to_rep2((simple_unc_arrays__swap_cells__a[i4])) = to_rep2((simple_unc_arrays__swap_cells__a__compl[o8]))) and
   (to_rep2((simple_unc_arrays__swap_cells__a[o8])) = to_rep2((simple_unc_arrays__swap_cells__a__compl[i4])))) and
-  (forall k:int. (((to_rep1(o6) <= k) and (k <= to_rep1(o7))) ->
-  (((not (k = i4)) and (not (k = o8))) ->
-  (to_rep2((simple_unc_arrays__swap_cells__a[k])) = to_rep2((simple_unc_arrays__swap_cells__a__compl[k])))))))))) and
+  (forall k1:int. (((to_rep1(o6) <= k1) and (k1 <= to_rep1(o7))) ->
+  (((not (k1 = i4)) and (not (k1 = o8))) ->
+  (to_rep2((simple_unc_arrays__swap_cells__a[k1])) = to_rep2((simple_unc_arrays__swap_cells__a__compl[k1])))))))))) and
   (((result6 = res__split_fields6) and (result7 = res__split_fields7)) and
-  ((slide(simple_unc_arrays__swap_cells__a,
+  ((res__split_fields8 = slide(simple_unc_arrays__swap_cells__a,
   to_rep1(first(mk(to_rep1(first4(simple_unc_arrays__swap_cells__a__compl1)),
-  to_rep1(last4(simple_unc_arrays__swap_cells__a__compl1))))),
-  1) = res__split_fields8) and (mk1(to_rep1(first4(mk2(1, r59b))),
-  to_rep1(last4(mk2(1, r59b)))) = res__split_fields9))))) and
-  ((result8 = bull4) and (bull5 = of_int(1)))))) or
-  ((not (result5 = true)) and ((({ rec__simple_unc_arrays__table__v = {
-  elts1 = res__split_fields8; rt1 = res__split_fields9 } } = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields6; rt1 =
-  res__split_fields7 } }) and (bull5 = bull4)) and
-  ((simple_unc_arrays__swap_cells__a = rho1) and (({
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields8; rt1 =
-  res__split_fields9 } } = { rec__simple_unc_arrays__table__v = { elts1 =
-  res__split_fields6; rt1 = res__split_fields7 } }) and
-  (bull5 = bull4))))))) and (i4 = r56b))))) and (((i4 = i5) and
+  to_rep1(last4(simple_unc_arrays__swap_cells__a__compl1))))), 1)) and
+  (res__split_fields9 = mk1(to_rep1(first4(mk2(1, r59b))),
+  to_rep1(last4(mk2(1, r59b))))))))) and ((result8 = bull4) and
+  (bull5 = of_int(1)))))) and ((not (result5 = true)) ->
+  ((((res__split_fields8 = res__split_fields6) and
+  (res__split_fields9 = res__split_fields7)) and (bull5 = bull4)) and
+  ((simple_unc_arrays__swap_cells__a = rho1) and
+  (((res__split_fields8 = res__split_fields6) and
+  (res__split_fields9 = res__split_fields7)) and (bull5 = bull4))))))) and
+  (i4 = r56b))))) and (((i5 = i4) and
   (((res__split_fields10 = res__split_fields8) and
-  (res__split_fields11 = res__split_fields9)) and (bull5 = bull6))) and
-  ((rho2 = simple_unc_arrays__swap_cells__a) and ((i6 = i4) and (({
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields12; rt1 =
-  res__split_fields13 } } = { rec__simple_unc_arrays__table__v = { elts1 =
-  res__split_fields8; rt1 = res__split_fields9 } }) and
-  (bull7 = bull5)))))) and (((i7 = { int__content = i5 }) and
-  ((res__split_fields14 = { us_split_fields__content = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields10; rt1 =
-  res__split_fields11 } } }) and (bull8 = { bool__content = bull6 }))) and
-  ((rho3 = rho2) and ((i8 = i6) and ((res__split_fields15 = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields12; rt1 =
-  res__split_fields13 } }) and (bull9 = bull7))))))) or ((not ((1 <= i3) and
-  (i3 <= r56b))) and (((i7 = { int__content = i3 }) and
-  ((res__split_fields14 = { us_split_fields__content = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields4; rt1 =
-  res__split_fields5 } } }) and (bull8 = { bool__content = bull3 }))) and
-  ((rho3 = rho) and ((i8 = i3) and ((res__split_fields15 = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields4; rt1 =
-  res__split_fields5 } }) and (bull9 = bull3)))))))) and
-  (not ((bull8).bool__content = true)))))))) and (((i9 = i7) and
-  ((res__split_fields16 = res__split_fields14) and (bull10 = bull8))) and
-  ((i10 = i8) and ((res__split_fields17 = res__split_fields15) and
-  (bull11 = bull9))))) and (((i11 = i9) and
-  ((res__split_fields18 = res__split_fields16) and (bull12 = bull10))) and
-  ((i12 = i10) and ((res__split_fields19 = res__split_fields17) and
-  (bull13 = bull11)))))) or ((not (bull1 = true)) and (((i11 = {
-  int__content = i }) and ((res__split_fields18 = {
-  us_split_fields__content = { rec__simple_unc_arrays__table__v = { elts1 =
-  res__split_fields2; rt1 = res__split_fields3 } } }) and (bull12 = {
-  bool__content = bull1 }))) and ((i12 = i1) and ((res__split_fields19 = {
-  rec__simple_unc_arrays__table__v = { elts1 = res__split_fields2; rt1 =
-  res__split_fields3 } }) and (bull13 = bull1)))))) and
-  (((simple_unc_arrays__bubble_sort__result4 = { table__content =
-  simple_unc_arrays__bubble_sort__result3 }) and
-  (simple_unc_arrays__bubble_sort__result5 = simple_unc_arrays__bubble_sort__result3)) and
-  ((result9 = { table__content = { us_split_discrs1 = {
-  rec__simple_unc_arrays__table__last =
-  simple_unc_arrays__bubble_sort__result }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts1 =
-  simple_unc_arrays__bubble_sort__result1; rt1 =
-  simple_unc_arrays__bubble_sort__result2 } } } }) and
-  (simple_unc_arrays__bubble_sort__result3 = { us_split_discrs1 = {
-  rec__simple_unc_arrays__table__last = res__split_discrs };
-  us_split_fields1 = (res__split_fields18).us_split_fields__content
-  })))))))) and
-  (((simple_unc_arrays__bubble_sort__result6 = simple_unc_arrays__bubble_sort__result4) and
-  ((i13 = i11) and ((res__split_fields20 = res__split_fields18) and
-  (bull14 = bull12)))) and
-  ((simple_unc_arrays__bubble_sort__result7 = simple_unc_arrays__bubble_sort__result5) and
-  ((i14 = i12) and ((res__split_fields21 = res__split_fields19) and
-  (bull15 = bull13)))))) -> (((1 <= j) and (j <= (to_rep(a) - 1))) ->
-  (((temp___931 = (j + 1)) and in_range1((j + 1))) ->
-  (to_rep1(first2(((((simple_unc_arrays__bubble_sort__result6).table__content).us_split_fields1).rec__simple_unc_arrays__table__v).rt1)) <= temp___931))))))
+  (res__split_fields11 = res__split_fields9)) and (bull6 = bull5))) and
+  ((rho2 = simple_unc_arrays__swap_cells__a) and ((i6 = i4) and
+  (((res__split_fields12 = res__split_fields8) and
+  (res__split_fields13 = res__split_fields9)) and (bull7 = bull5)))))) and
+  (((i7 = i5) and (((res__split_fields14 = res__split_fields10) and
+  (res__split_fields15 = res__split_fields11)) and (bull8 = bull6))) and
+  ((rho3 = rho2) and ((i8 = i6) and
+  (((res__split_fields16 = res__split_fields12) and
+  (res__split_fields17 = res__split_fields13)) and (bull9 = bull7))))))) and
+  ((not ((1 <= i3) and (i3 <= r56b))) -> (((i7 = i3) and
+  (((res__split_fields14 = res__split_fields4) and
+  (res__split_fields15 = res__split_fields5)) and (bull8 = bull3))) and
+  ((rho3 = rho) and ((i8 = i3) and
+  (((res__split_fields16 = res__split_fields4) and
+  (res__split_fields17 = res__split_fields5)) and (bull9 = bull3)))))))) and
+  (not (bull8 = true)))))))) and (((i9 = i7) and
+  (((res__split_fields18 = res__split_fields14) and
+  (res__split_fields19 = res__split_fields15)) and (bull10 = bull8))) and
+  ((i10 = i8) and (((res__split_fields20 = res__split_fields16) and
+  (res__split_fields21 = res__split_fields17)) and (bull11 = bull9))))) and
+  (((i11 = i9) and (((res__split_fields22 = res__split_fields18) and
+  (res__split_fields23 = res__split_fields19)) and (bull12 = bull10))) and
+  ((i12 = i10) and (((res__split_fields24 = res__split_fields20) and
+  (res__split_fields25 = res__split_fields21)) and (bull13 = bull11)))))) and
+  ((not (bull1 = true)) -> (((i11 = i) and
+  (((res__split_fields22 = res__split_fields2) and
+  (res__split_fields23 = res__split_fields3)) and (bull12 = bull1))) and
+  ((i12 = i1) and (((res__split_fields24 = res__split_fields2) and
+  (res__split_fields25 = res__split_fields3)) and (bull13 = bull1)))))) and
+  ((((simple_unc_arrays__bubble_sort__result6 = simple_unc_arrays__bubble_sort__result3) and
+  ((simple_unc_arrays__bubble_sort__result7 = simple_unc_arrays__bubble_sort__result4) and
+  (simple_unc_arrays__bubble_sort__result8 = simple_unc_arrays__bubble_sort__result5))) and
+  ((simple_unc_arrays__bubble_sort__result9 = simple_unc_arrays__bubble_sort__result3) and
+  ((simple_unc_arrays__bubble_sort__result10 = simple_unc_arrays__bubble_sort__result4) and
+  (simple_unc_arrays__bubble_sort__result11 = simple_unc_arrays__bubble_sort__result5)))) and
+  (((result9 = simple_unc_arrays__bubble_sort__result) and
+  ((result10 = simple_unc_arrays__bubble_sort__result1) and
+  (result11 = simple_unc_arrays__bubble_sort__result2))) and
+  ((simple_unc_arrays__bubble_sort__result3 = res__split_discrs) and
+  ((simple_unc_arrays__bubble_sort__result4 = res__split_fields22) and
+  (simple_unc_arrays__bubble_sort__result5 = res__split_fields23)))))))))) and
+  ((((simple_unc_arrays__bubble_sort__result12 = simple_unc_arrays__bubble_sort__result6) and
+  ((simple_unc_arrays__bubble_sort__result13 = simple_unc_arrays__bubble_sort__result7) and
+  (simple_unc_arrays__bubble_sort__result14 = simple_unc_arrays__bubble_sort__result8))) and
+  ((i13 = i11) and (((res__split_fields26 = res__split_fields22) and
+  (res__split_fields27 = res__split_fields23)) and (bull14 = bull12)))) and
+  (((simple_unc_arrays__bubble_sort__result15 = simple_unc_arrays__bubble_sort__result9) and
+  ((simple_unc_arrays__bubble_sort__result16 = simple_unc_arrays__bubble_sort__result10) and
+  (simple_unc_arrays__bubble_sort__result17 = simple_unc_arrays__bubble_sort__result11))) and
+  ((i14 = i12) and (((res__split_fields28 = res__split_fields24) and
+  (res__split_fields29 = res__split_fields25)) and (bull15 = bull13))))))
+
+axiom H2 : (1 <= j1)
+
+axiom H3 : (j1 <= (to_rep(a) - 1))
+
+axiom H4 : ((temp___925 = (j1 + 1)) and in_range1((j1 + 1)))
+
+ (* File "simple_unc_arrays.ads", line 10, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(first2(simple_unc_arrays__bubble_sort__result14)) <= temp___925)

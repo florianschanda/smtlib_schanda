@@ -172,12 +172,119 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom half_range__def_axiom : (half_range = 127)
 
+logic r : int
+
+logic i : int
+
+logic arithmetic__halve_c__result : int
+
+logic temp___180 : int
+
+logic temp___179 : int
+
+logic r1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic r3 : int
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : int
+
+logic r4 : int
+
+logic r5 : int
+
+logic i4 : int
+
+logic r6 : int
+
+logic i5 : int
+
+logic r7 : int
+
+logic i6 : int
+
+logic r8 : int
+
+logic i7 : int
+
+logic r9 : int
+
+logic i8 : int
+
+logic r10 : int
+
+logic i9 : int
+
+logic r11 : int
+
+logic i10 : int
+
+logic r12 : int
+
+logic i11 : int
+
+logic r13 : int
+
+logic i12 : int
+
+logic r14 : int
+
+logic i13 : int
+
+logic result4 : int
+
+logic arithmetic__halve_c__result1 : int
+
+logic arithmetic__halve_c__result2 : int
+
+logic arithmetic__halve_c__result3 : int
+
+logic r15 : int
+
+logic i14 : int
+
+logic arithmetic__halve_c__result4 : int
+
+logic r16 : int
+
+logic i15 : int
+
+logic arithmetic__halve_c__result5 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : in_range1(half_range)
+
+axiom H2 : ((0 <= 255) -> in_range1(r))
+
+axiom H3 : (result = i)
+
+axiom H4 : (i1 = 0)
+
+axiom H5 : (0 <= i1)
+
+axiom H6 : (i1 <= 127)
+
+axiom H7 : (result1 = r)
+
+axiom H8 : (r2 = i1)
+
+axiom H9 : (not ((r2 + r2) = n))
+
+axiom H10 : (not (((r2 + r2) + 1) = n))
+
  (* File "arithmetic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall i:int. forall result:int. forall i1:int.
-  forall result1:int. forall r1:int. (in_range1(n) ->
-  (in_range1(half_range) -> (((0 <= 255) -> in_range1(r)) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = 0)) ->
-  (((0 <= i1) and (i1 <= 127)) -> ((({ int__content = result1 } = {
-  int__content = r }) and (r1 = i1)) -> ((not ((not ((r1 + r1) = n)) ->
-  (((r1 + r1) + 1) = n))) -> (r1 = i1)))))))))
+goal WP_parameter_def : (r2 = i1)

@@ -110,99 +110,260 @@ logic attr__ATTRIBUTE_ADDRESS24 : int
 
 logic attr__ATTRIBUTE_ADDRESS25 : int
 
- (* File "at_most_one_lateral_mode_active.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall hdg_active_out1:bool. forall lappr_active_out1:bool.
-  forall lga_active_out1:bool. forall nav_active_out1:bool.
-  forall roll_active_out1:bool. forall nor_lga_out1:bool.
-  forall not1_out1:bool. forall not5_out1:bool. forall nor_lappr_out1:bool.
-  forall not1_out1_1:bool. forall not5_out1_1:bool. forall nor_nav_out1:bool.
-  forall not1_out1_2:bool. forall not5_out1_2:bool. forall nor_hdg_out1:bool.
-  forall not1_out1_3:bool. forall not5_out1_3:bool.
-  forall nor_roll_out1:bool. forall not1_out1_4:bool.
-  forall not5_out1_4:bool. forall and_out1:bool. forall result:bool.
-  forall hdg_active_out11:bool. forall result1:bool.
-  forall lappr_active_out11:bool. forall result2:bool.
-  forall lga_active_out11:bool. forall result3:bool.
-  forall nav_active_out11:bool. forall result4:bool.
-  forall roll_active_out11:bool. forall result5:bool.
-  forall nor_lga_out11:bool. forall result6:bool. forall not1_out11:bool.
-  forall result7:bool. forall not5_out11:bool. forall result8:bool.
-  forall nor_lappr_out11:bool. forall result9:bool. forall not1_out1_11:bool.
-  forall result10:bool. forall not5_out1_11:bool. forall result11:bool.
-  forall nor_nav_out11:bool. forall result12:bool. forall not1_out1_21:bool.
-  forall result13:bool. forall not5_out1_21:bool. forall result14:bool.
-  forall nor_hdg_out11:bool. forall result15:bool. forall not1_out1_31:bool.
-  forall result16:bool. forall not5_out1_31:bool. forall result17:bool.
-  forall nor_roll_out11:bool. forall result18:bool. forall not1_out1_41:bool.
-  forall result19:bool. forall not5_out1_41:bool. forall result20:bool.
-  forall and_out11:bool. (((result = hdg_active_out1) and
-  (hdg_active_out11 = hdg_active)) -> (((result1 = lappr_active_out1) and
-  (lappr_active_out11 = lappr_active)) -> (((result2 = lga_active_out1) and
-  (lga_active_out11 = lga_active)) -> (((result3 = nav_active_out1) and
-  (nav_active_out11 = nav_active)) -> (((result4 = roll_active_out1) and
-  (roll_active_out11 = roll_active)) -> (((result5 = nor_lga_out1) and
-  (((not ((((roll_active_out11 = true) or (hdg_active_out11 = true)) or
-  (nav_active_out11 = true)) or (lappr_active_out11 = true))) and
-  (nor_lga_out11 = true)) or (((((roll_active_out11 = true) or
+logic hdg_active_out1 : bool
+
+logic lappr_active_out1 : bool
+
+logic lga_active_out1 : bool
+
+logic nav_active_out1 : bool
+
+logic roll_active_out1 : bool
+
+logic nor_lga_out1 : bool
+
+logic not1_out1 : bool
+
+logic not5_out1 : bool
+
+logic nor_lappr_out1 : bool
+
+logic not1_out1_1 : bool
+
+logic not5_out1_1 : bool
+
+logic nor_nav_out1 : bool
+
+logic not1_out1_2 : bool
+
+logic not5_out1_2 : bool
+
+logic nor_hdg_out1 : bool
+
+logic not1_out1_3 : bool
+
+logic not5_out1_3 : bool
+
+logic nor_roll_out1 : bool
+
+logic not1_out1_4 : bool
+
+logic not5_out1_4 : bool
+
+logic and_out1 : bool
+
+logic result : bool
+
+logic hdg_active_out11 : bool
+
+logic result1 : bool
+
+logic lappr_active_out11 : bool
+
+logic result2 : bool
+
+logic lga_active_out11 : bool
+
+logic result3 : bool
+
+logic nav_active_out11 : bool
+
+logic result4 : bool
+
+logic roll_active_out11 : bool
+
+logic result5 : bool
+
+logic nor_lga_out11 : bool
+
+logic result6 : bool
+
+logic not1_out11 : bool
+
+logic result7 : bool
+
+logic not5_out11 : bool
+
+logic result8 : bool
+
+logic nor_lappr_out11 : bool
+
+logic result9 : bool
+
+logic not1_out1_11 : bool
+
+logic result10 : bool
+
+logic not5_out1_11 : bool
+
+logic result11 : bool
+
+logic nor_nav_out11 : bool
+
+logic result12 : bool
+
+logic not1_out1_21 : bool
+
+logic result13 : bool
+
+logic not5_out1_21 : bool
+
+logic result14 : bool
+
+logic nor_hdg_out11 : bool
+
+logic result15 : bool
+
+logic not1_out1_31 : bool
+
+logic result16 : bool
+
+logic not5_out1_31 : bool
+
+logic result17 : bool
+
+logic nor_roll_out11 : bool
+
+logic result18 : bool
+
+logic not1_out1_41 : bool
+
+logic result19 : bool
+
+logic not5_out1_41 : bool
+
+logic result20 : bool
+
+logic and_out11 : bool
+
+axiom H : (result = hdg_active_out1)
+
+axiom H1 : (hdg_active_out11 = hdg_active)
+
+axiom H2 : (result1 = lappr_active_out1)
+
+axiom H3 : (lappr_active_out11 = lappr_active)
+
+axiom H4 : (result2 = lga_active_out1)
+
+axiom H5 : (lga_active_out11 = lga_active)
+
+axiom H6 : (result3 = nav_active_out1)
+
+axiom H7 : (nav_active_out11 = nav_active)
+
+axiom H8 : (result4 = roll_active_out1)
+
+axiom H9 : (roll_active_out11 = roll_active)
+
+axiom H10 : (result5 = nor_lga_out1)
+
+axiom H11 : (((not ((((roll_active_out11 = true) or
   (hdg_active_out11 = true)) or (nav_active_out11 = true)) or
-  (lappr_active_out11 = true)) and (nor_lga_out11 = false)))) ->
-  (((result6 = not1_out1) and (((not (lga_active_out11 = true)) and
-  (not1_out11 = true)) or ((lga_active_out11 = true) and
-  (not1_out11 = false)))) -> (((result7 = not5_out1) and
-  ((((not1_out11 = true) or (nor_lga_out11 = true)) and
-  (not5_out11 = true)) or ((not ((not1_out11 = true) or
-  (nor_lga_out11 = true))) and (not5_out11 = false)))) ->
-  (((result8 = nor_lappr_out1) and (((not ((((roll_active_out11 = true) or
-  (hdg_active_out11 = true)) or (nav_active_out11 = true)) or
-  (lga_active_out11 = true))) and (nor_lappr_out11 = true)) or
+  (lappr_active_out11 = true))) -> (nor_lga_out11 = true)) and
   (((((roll_active_out11 = true) or (hdg_active_out11 = true)) or
-  (nav_active_out11 = true)) or (lga_active_out11 = true)) and
-  (nor_lappr_out11 = false)))) -> (((result9 = not1_out1_1) and
-  (((not (lappr_active_out11 = true)) and (not1_out1_11 = true)) or
-  ((lappr_active_out11 = true) and (not1_out1_11 = false)))) ->
-  (((result10 = not5_out1_1) and ((((not1_out1_11 = true) or
-  (nor_lappr_out11 = true)) and (not5_out1_11 = true)) or
-  ((not ((not1_out1_11 = true) or (nor_lappr_out11 = true))) and
-  (not5_out1_11 = false)))) -> (((result11 = nor_nav_out1) and
-  (((not ((((roll_active_out11 = true) or (hdg_active_out11 = true)) or
-  (lappr_active_out11 = true)) or (lga_active_out11 = true))) and
-  (nor_nav_out11 = true)) or (((((roll_active_out11 = true) or
+  (nav_active_out11 = true)) or (lappr_active_out11 = true)) ->
+  (nor_lga_out11 = false)))
+
+axiom H12 : (result6 = not1_out1)
+
+axiom H13 : (((not (lga_active_out11 = true)) -> (not1_out11 = true)) and
+  ((lga_active_out11 = true) -> (not1_out11 = false)))
+
+axiom H14 : (result7 = not5_out1)
+
+axiom H15 : ((((not1_out11 = true) or (nor_lga_out11 = true)) ->
+  (not5_out11 = true)) and ((not ((not1_out11 = true) or
+  (nor_lga_out11 = true))) -> (not5_out11 = false)))
+
+axiom H16 : (result8 = nor_lappr_out1)
+
+axiom H17 : (((not ((((roll_active_out11 = true) or
+  (hdg_active_out11 = true)) or (nav_active_out11 = true)) or
+  (lga_active_out11 = true))) -> (nor_lappr_out11 = true)) and
+  (((((roll_active_out11 = true) or (hdg_active_out11 = true)) or
+  (nav_active_out11 = true)) or (lga_active_out11 = true)) ->
+  (nor_lappr_out11 = false)))
+
+axiom H18 : (result9 = not1_out1_1)
+
+axiom H19 : (((not (lappr_active_out11 = true)) -> (not1_out1_11 = true)) and
+  ((lappr_active_out11 = true) -> (not1_out1_11 = false)))
+
+axiom H20 : (result10 = not5_out1_1)
+
+axiom H21 : ((((not1_out1_11 = true) or (nor_lappr_out11 = true)) ->
+  (not5_out1_11 = true)) and ((not ((not1_out1_11 = true) or
+  (nor_lappr_out11 = true))) -> (not5_out1_11 = false)))
+
+axiom H22 : (result11 = nor_nav_out1)
+
+axiom H23 : (((not ((((roll_active_out11 = true) or
   (hdg_active_out11 = true)) or (lappr_active_out11 = true)) or
-  (lga_active_out11 = true)) and (nor_nav_out11 = false)))) ->
-  (((result12 = not1_out1_2) and (((not (nav_active_out11 = true)) and
-  (not1_out1_21 = true)) or ((nav_active_out11 = true) and
-  (not1_out1_21 = false)))) -> (((result13 = not5_out1_2) and
-  ((((not1_out1_21 = true) or (nor_nav_out11 = true)) and
-  (not5_out1_21 = true)) or ((not ((not1_out1_21 = true) or
-  (nor_nav_out11 = true))) and (not5_out1_21 = false)))) ->
-  (((result14 = nor_hdg_out1) and (((not ((((roll_active_out11 = true) or
+  (lga_active_out11 = true))) -> (nor_nav_out11 = true)) and
+  (((((roll_active_out11 = true) or (hdg_active_out11 = true)) or
+  (lappr_active_out11 = true)) or (lga_active_out11 = true)) ->
+  (nor_nav_out11 = false)))
+
+axiom H24 : (result12 = not1_out1_2)
+
+axiom H25 : (((not (nav_active_out11 = true)) -> (not1_out1_21 = true)) and
+  ((nav_active_out11 = true) -> (not1_out1_21 = false)))
+
+axiom H26 : (result13 = not5_out1_2)
+
+axiom H27 : ((((not1_out1_21 = true) or (nor_nav_out11 = true)) ->
+  (not5_out1_21 = true)) and ((not ((not1_out1_21 = true) or
+  (nor_nav_out11 = true))) -> (not5_out1_21 = false)))
+
+axiom H28 : (result14 = nor_hdg_out1)
+
+axiom H29 : (((not ((((roll_active_out11 = true) or
   (nav_active_out11 = true)) or (lappr_active_out11 = true)) or
-  (lga_active_out11 = true))) and (nor_hdg_out11 = true)) or
+  (lga_active_out11 = true))) -> (nor_hdg_out11 = true)) and
   (((((roll_active_out11 = true) or (nav_active_out11 = true)) or
-  (lappr_active_out11 = true)) or (lga_active_out11 = true)) and
-  (nor_hdg_out11 = false)))) -> (((result15 = not1_out1_3) and
-  (((not (hdg_active_out11 = true)) and (not1_out1_31 = true)) or
-  ((hdg_active_out11 = true) and (not1_out1_31 = false)))) ->
-  (((result16 = not5_out1_3) and ((((not1_out1_31 = true) or
-  (nor_hdg_out11 = true)) and (not5_out1_31 = true)) or
-  ((not ((not1_out1_31 = true) or (nor_hdg_out11 = true))) and
-  (not5_out1_31 = false)))) -> (((result17 = nor_roll_out1) and
-  (((not ((((hdg_active_out11 = true) or (nav_active_out11 = true)) or
-  (lappr_active_out11 = true)) or (lga_active_out11 = true))) and
-  (nor_roll_out11 = true)) or (((((hdg_active_out11 = true) or
+  (lappr_active_out11 = true)) or (lga_active_out11 = true)) ->
+  (nor_hdg_out11 = false)))
+
+axiom H30 : (result15 = not1_out1_3)
+
+axiom H31 : (((not (hdg_active_out11 = true)) -> (not1_out1_31 = true)) and
+  ((hdg_active_out11 = true) -> (not1_out1_31 = false)))
+
+axiom H32 : (result16 = not5_out1_3)
+
+axiom H33 : ((((not1_out1_31 = true) or (nor_hdg_out11 = true)) ->
+  (not5_out1_31 = true)) and ((not ((not1_out1_31 = true) or
+  (nor_hdg_out11 = true))) -> (not5_out1_31 = false)))
+
+axiom H34 : (result17 = nor_roll_out1)
+
+axiom H35 : (((not ((((hdg_active_out11 = true) or
   (nav_active_out11 = true)) or (lappr_active_out11 = true)) or
-  (lga_active_out11 = true)) and (nor_roll_out11 = false)))) ->
-  (((result18 = not1_out1_4) and (((not (roll_active_out11 = true)) and
-  (not1_out1_41 = true)) or ((roll_active_out11 = true) and
-  (not1_out1_41 = false)))) -> (((result19 = not5_out1_4) and
-  ((((not1_out1_41 = true) or (nor_roll_out11 = true)) and
-  (not5_out1_41 = true)) or ((not ((not1_out1_41 = true) or
-  (nor_roll_out11 = true))) and (not5_out1_41 = false)))) ->
-  (((result20 = and_out1) and (((((((not5_out1_41 = true) and
-  (not5_out1_31 = true)) and (not5_out1_21 = true)) and
-  (not5_out1_11 = true)) and (not5_out11 = true)) and (and_out11 = true)) or
+  (lga_active_out11 = true))) -> (nor_roll_out11 = true)) and
+  (((((hdg_active_out11 = true) or (nav_active_out11 = true)) or
+  (lappr_active_out11 = true)) or (lga_active_out11 = true)) ->
+  (nor_roll_out11 = false)))
+
+axiom H36 : (result18 = not1_out1_4)
+
+axiom H37 : (((not (roll_active_out11 = true)) -> (not1_out1_41 = true)) and
+  ((roll_active_out11 = true) -> (not1_out1_41 = false)))
+
+axiom H38 : (result19 = not5_out1_4)
+
+axiom H39 : ((((not1_out1_41 = true) or (nor_roll_out11 = true)) ->
+  (not5_out1_41 = true)) and ((not ((not1_out1_41 = true) or
+  (nor_roll_out11 = true))) -> (not5_out1_41 = false)))
+
+axiom H40 : (result20 = and_out1)
+
+axiom H41 : (((((((not5_out1_41 = true) and (not5_out1_31 = true)) and
+  (not5_out1_21 = true)) and (not5_out1_11 = true)) and
+  (not5_out11 = true)) -> (and_out11 = true)) and
   ((not (((((not5_out1_41 = true) and (not5_out1_31 = true)) and
   (not5_out1_21 = true)) and (not5_out1_11 = true)) and
-  (not5_out11 = true))) and (and_out11 = false)))) ->
-  (and_out11 = true)))))))))))))))))))))))
+  (not5_out11 = true))) -> (and_out11 = false)))
+
+ (* File "at_most_one_lateral_mode_active.ads", line 20, characters 0-0 *)
+goal WP_parameter_def : (and_out11 = true)

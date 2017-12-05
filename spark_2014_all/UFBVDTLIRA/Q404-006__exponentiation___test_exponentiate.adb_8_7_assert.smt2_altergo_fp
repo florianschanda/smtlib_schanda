@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -689,10 +689,35 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic val__ : t
+
+logic exp : int
+
+logic result : t
+
+logic val__1 : t
+
+logic result1 : int
+
+logic exp1 : int
+
+logic exp2 : int
+
+axiom H : (result = val__)
+
+axiom H1 : (val__1 = of_int(12329))
+
+axiom H2 : true
+
+axiom H3 : (result1 = exp)
+
+axiom H4 : (exp1 = 1)
+
+axiom H5 : (1 <= exp1)
+
+axiom H6 : (exp1 <= 100)
+
+axiom H7 : ((1 <= exp2) and (exp2 <= 100))
+
  (* File "test_exponentiate.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall val__:t. forall exp:int. forall result:t. forall val__1:t.
-  forall result1:int. forall exp1:int. forall exp2:int.
-  (((result = val__) and (val__1 = of_int(12329))) -> (((result1 = exp) and
-  (exp1 = 1)) -> (((1 <= exp1) and (exp1 <= 100)) -> (((1 <= exp2) and
-  (exp2 <= 100)) -> (exponentiate(val__1, exp2) = power(val__1, exp2)))))))
+goal WP_parameter_def : (exponentiate(val__1, exp2) = power(val__1, exp2))

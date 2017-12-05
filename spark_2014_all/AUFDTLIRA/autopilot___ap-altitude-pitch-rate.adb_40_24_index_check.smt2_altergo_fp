@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type pitchangle
 
-predicate in_range(x: int) = (((-10) <= x) and (x <= 20))
+predicate in_range(x: int) = (((- 10) <= x) and (x <= 20))
 
 logic bool_eq : int, int -> bool
 
@@ -248,7 +248,255 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic h : (int,pitchangle) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : pitchangle
+
+logic o2 : int
+
+logic o3 : pitchangle
+
+logic o4 : (int,pitchangle) farray
+
+logic o5 : pitchangle
+
+logic o6 : (int,pitchangle) farray
+
+logic o7 : int
+
+logic o8 : pitchangle
+
+logic o9 : int
+
+logic o10 : pitchangle
+
+logic o11 : (int,pitchangle) farray
+
+logic o12 : pitchangle
+
+logic o13 : (int,pitchangle) farray
+
+logic o14 : int
+
+logic o15 : pitchangle
+
+logic o16 : int
+
+logic o17 : pitchangle
+
+logic o18 : (int,pitchangle) farray
+
+logic o19 : pitchangle
+
+logic o20 : (int,pitchangle) farray
+
+logic o21 : int
+
+logic o22 : pitchangle
+
+logic o23 : int
+
+logic o24 : pitchangle
+
+logic o25 : (int,pitchangle) farray
+
+logic o26 : pitchangle
+
+logic o27 : (int,pitchangle) farray
+
+logic o28 : int
+
+logic o29 : pitchangle
+
+logic o30 : int
+
+logic o31 : pitchangle
+
+logic o32 : (int,pitchangle) farray
+
+logic o33 : pitchangle
+
+logic o34 : (int,pitchangle) farray
+
+logic o35 : int
+
+logic o36 : pitchangle
+
+logic o37 : int
+
+logic o38 : pitchangle
+
+logic o39 : (int,pitchangle) farray
+
+logic o40 : pitchangle
+
+logic o41 : (int,pitchangle) farray
+
+logic o42 : int
+
+logic o43 : pitchangle
+
+logic o44 : int
+
+logic o45 : pitchangle
+
+logic o46 : (int,pitchangle) farray
+
+logic o47 : pitchangle
+
+logic o48 : (int,pitchangle) farray
+
+logic o49 : int
+
+logic o50 : pitchangle
+
+logic o51 : int
+
+logic o52 : pitchangle
+
+logic o53 : (int,pitchangle) farray
+
+logic o54 : pitchangle
+
+logic o55 : (int,pitchangle) farray
+
+logic o56 : int
+
+logic o57 : pitchangle
+
+logic o58 : int
+
+logic o59 : pitchangle
+
+logic o60 : (int,pitchangle) farray
+
+logic o61 : pitchangle
+
+logic o62 : (int,pitchangle) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,pitchangle) farray
+
+logic h1 : (int,pitchangle) farray
+
+logic result2 : (int,pitchangle) farray
+
+logic h2 : (int,pitchangle) farray
+
+logic result3 : int
+
+logic i2 : int
+
+logic result4 : (int,pitchangle) farray
+
+logic h3 : (int,pitchangle) farray
+
+logic result5 : (int,pitchangle) farray
+
+logic h4 : (int,pitchangle) farray
+
+logic result6 : int
+
+logic i3 : int
+
+logic result7 : (int,pitchangle) farray
+
+logic h5 : (int,pitchangle) farray
+
+logic result8 : (int,pitchangle) farray
+
+logic h6 : (int,pitchangle) farray
+
+logic result9 : int
+
+logic i4 : int
+
+logic result10 : (int,pitchangle) farray
+
+logic h7 : (int,pitchangle) farray
+
+logic result11 : (int,pitchangle) farray
+
+logic h8 : (int,pitchangle) farray
+
+logic result12 : int
+
+logic i5 : int
+
+logic result13 : (int,pitchangle) farray
+
+logic h9 : (int,pitchangle) farray
+
+logic result14 : (int,pitchangle) farray
+
+logic h10 : (int,pitchangle) farray
+
+logic result15 : int
+
+logic i6 : int
+
+logic result16 : (int,pitchangle) farray
+
+logic h11 : (int,pitchangle) farray
+
+logic result17 : (int,pitchangle) farray
+
+logic h12 : (int,pitchangle) farray
+
+logic result18 : int
+
+logic i7 : int
+
+logic result19 : (int,pitchangle) farray
+
+logic h13 : (int,pitchangle) farray
+
+logic result20 : (int,pitchangle) farray
+
+logic h14 : (int,pitchangle) farray
+
+logic result21 : int
+
+logic i8 : int
+
+logic result22 : (int,pitchangle) farray
+
+logic h15 : (int,pitchangle) farray
+
+logic result23 : (int,pitchangle) farray
+
+logic h16 : (int,pitchangle) farray
+
+logic result24 : int
+
+logic i9 : int
+
+logic result25 : (int,pitchangle) farray
+
+logic h17 : (int,pitchangle) farray
+
+logic result26 : (int,pitchangle) farray
+
+logic h18 : (int,pitchangle) farray
+
+logic result27 : int
+
+logic i10 : int
+
+axiom H : in_range(v)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : (i1 <  10)
+
  (* File "ap-altitude-pitch-rate.adb", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. (in_range(v) ->
-  (((result = i) and (i1 = 1)) -> ((i1 <  10) -> (1 <= (i1 + 1))))))
+goal WP_parameter_def : (1 <= (i1 + 1))

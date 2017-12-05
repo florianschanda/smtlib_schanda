@@ -92,6 +92,7 @@
 (declare-const i15s (Array Int even))
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const o Int)
 (assert (dynamic_invariant i11s true false true))
 (assert (dynamic_invariant1 i15s true false false))
 (assert (not (in_range (+ (to_rep (select i15s 1)) 2))))

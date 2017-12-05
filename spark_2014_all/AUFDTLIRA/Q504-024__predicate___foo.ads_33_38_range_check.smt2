@@ -260,6 +260,7 @@
 (assert (= cpu_lsid_last (foo__cpu_lsid_last__aggregate_def 3 4)))
 (define-fun dynamic_invariant4 ((temp___expr_178 us_rep) (temp___is_init_175 Bool) (temp___skip_constant_176 Bool) (temp___do_toplevel_177 Bool)) Bool (let ((temp___179 (rec__foo__subject_state__max_id (us_split_discrs1 temp___expr_178)))) (and (dynamic_property1 0 (to_rep temp___179) (first1 (rec__foo__subject_state__states (us_split_fields1 temp___expr_178))) (last1 (rec__foo__subject_state__states (us_split_fields1 temp___expr_178)))) (and (= (first1 (rec__foo__subject_state__states (us_split_fields1 temp___expr_178))) 0) (= (last1 (rec__foo__subject_state__states (us_split_fields1 temp___expr_178))) (to_rep temp___179))))))
 (declare-const temp___max_id_212 Int)
+(declare-const us Int)
 (assert (=> (<= 0 1) (in_range cpu_id)))
 (assert (= (foo__cpu_lsid_last__aggregate_def 3 4) cpu_lsid_last))
 (assert (in_range1 temp___max_id_212))

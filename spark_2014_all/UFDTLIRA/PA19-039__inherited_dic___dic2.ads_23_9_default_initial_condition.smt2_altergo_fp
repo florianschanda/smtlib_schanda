@@ -245,9 +245,15 @@ axiom dic2__child__compat_axiom1 :
   rec__dic2__nested__parent = obj; rec__ext__ = obj1 }; attr__tag = obj2
   }))))
 
+logic temp___158 : us_main_type
+
+logic temp___1581 : us_private
+
+logic temp___1582 : int
+
+axiom H : (temp___1582 = us_tag)
+
  (* File "dic2.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___158:us_main_type. forall temp___1581:us_private.
-  forall temp___1582:int. ((temp___1582 = us_tag) -> (is_ok({
-  us_split_fields1 = { rec__dic2__nested__parent = temp___158; rec__ext__ =
-  temp___1581 }; attr__tag = temp___1582 }) = true)))
+goal WP_parameter_def : (is_ok({ us_split_fields1 = {
+  rec__dic2__nested__parent = temp___158; rec__ext__ = temp___1581 };
+  attr__tag = temp___1582 }) = true)

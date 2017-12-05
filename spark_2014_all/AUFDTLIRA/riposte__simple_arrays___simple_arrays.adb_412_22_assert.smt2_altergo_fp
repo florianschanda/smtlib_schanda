@@ -222,5 +222,7 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range(i)
+
  (* File "simple_arrays.adb", line 401, characters 0-0 *)
-goal WP_parameter_def : (in_range(i) -> (to_rep((a[i])) = 0))
+goal WP_parameter_def : (to_rep((a[i])) = 0)

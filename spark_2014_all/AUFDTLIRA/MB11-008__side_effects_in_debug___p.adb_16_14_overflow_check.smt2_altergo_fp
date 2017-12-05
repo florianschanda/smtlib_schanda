@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -363,14 +363,20 @@ function string__ref___projection(a: string__ref) : us_t =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic temp___String_Literal_511 : unit -> (int,character) farray
+logic temp___String_Literal_505 : unit -> (int,character) farray
 
-axiom temp___String_Literal_511__def_axiom :
-  (((((to_rep((temp___String_Literal_511(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_511(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_511(void)[3])) = 108)) and
-  (to_rep((temp___String_Literal_511(void)[4])) = 108)) and
-  (to_rep((temp___String_Literal_511(void)[5])) = 111))
+axiom temp___String_Literal_505__def_axiom :
+  (((((to_rep((temp___String_Literal_505(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_505(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_505(void)[3])) = 108)) and
+  (to_rep((temp___String_Literal_505(void)[4])) = 108)) and
+  (to_rep((temp___String_Literal_505(void)[5])) = 111))
+
+logic x : int
+
+logic o : int
+
+axiom H : in_range(x)
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (forall x:int. (in_range(x) -> in_range((x + 1))))
+goal WP_parameter_def : in_range((x + 1))

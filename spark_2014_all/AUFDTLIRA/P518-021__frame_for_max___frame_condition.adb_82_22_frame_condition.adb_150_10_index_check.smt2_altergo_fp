@@ -174,7 +174,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -562,17 +562,340 @@ axiom first__def_axiom1 : (first3 = last2)
 
 axiom last__def_axiom1 : (last3 = first2)
 
+logic a : (int,us_rep) farray
+
+logic k : int
+
+logic max : int
+
+logic c267b : int
+
+logic c268b : int
+
+logic temp___303 : int
+
+logic temp___302 : int
+
+logic temp___301 : int
+
+logic temp___304 : (int,us_rep) farray
+
+logic temp___300 : int
+
+logic temp___298 : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : natural
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : int
+
+logic o18 : natural
+
+logic o19 : natural
+
+logic o20 : natural
+
+logic o21 : natural
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic o24 : natural
+
+logic o25 : int
+
+logic o26 : (int,us_rep) farray
+
+logic i : int
+
+logic i1 : int
+
+logic o27 : bool
+
+logic i2 : int
+
+logic j : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic i3 : int
+
+logic j1 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : bool
+
+logic us : bool
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : natural
+
+logic o36 : natural
+
+logic o37 : natural
+
+logic o38 : natural
+
+logic o39 : natural
+
+logic o40 : natural
+
+logic o41 : natural
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : natural
+
+logic o45 : natural
+
+logic o46 : natural
+
+logic o47 : natural
+
+logic o48 : natural
+
+logic o49 : natural
+
+logic o50 : natural
+
+logic o51 : int
+
+logic o52 : natural
+
+logic o53 : natural
+
+logic o54 : natural
+
+logic o55 : natural
+
+logic o56 : natural
+
+logic o57 : natural
+
+logic o58 : natural
+
+logic o59 : int
+
+logic o60 : (int,us_rep) farray
+
+logic i4 : int
+
+logic j2 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic i5 : int
+
+logic j3 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : bool
+
+logic o66 : bool
+
+logic result : int
+
+logic k1 : int
+
+logic result1 : int
+
+logic max1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic max2 : int
+
+logic result4 : int
+
+logic c267b1 : int
+
+logic result5 : int
+
+logic c268b1 : int
+
+logic result6 : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic k2 : int
+
+logic max3 : int
+
+logic c267b2 : int
+
+logic c268b2 : int
+
+logic result7 : int
+
+logic k3 : int
+
+logic result8 : bool
+
+logic result9 : int
+
+logic max4 : int
+
+logic result10 : int
+
+logic c267b3 : int
+
+logic result11 : int
+
+logic c268b3 : int
+
+logic result12 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic k4 : int
+
+logic k5 : int
+
+logic a4 : (int,us_rep) farray
+
+logic k6 : int
+
+logic max5 : int
+
+logic c267b4 : int
+
+logic c268b4 : int
+
+logic a5 : (int,us_rep) farray
+
+logic k7 : int
+
+logic max6 : int
+
+logic c267b5 : int
+
+logic c268b5 : int
+
+logic a6 : (int,us_rep) farray
+
+logic k8 : int
+
+logic max7 : int
+
+logic c267b6 : int
+
+logic c268b6 : int
+
+logic a7 : (int,us_rep) farray
+
+logic k9 : int
+
+logic max8 : int
+
+logic c267b7 : int
+
+logic c268b7 : int
+
+logic a8 : (int,us_rep) farray
+
+logic k10 : int
+
+logic max9 : int
+
+logic c267b8 : int
+
+logic c268b8 : int
+
+logic a9 : (int,us_rep) farray
+
+logic k11 : int
+
+logic max10 : int
+
+logic c267b9 : int
+
+logic c268b9 : int
+
+axiom H : in_range2(first2)
+
+axiom H1 : (to_rep1(a__first) = first2)
+
+axiom H2 : in_range2(last2)
+
+axiom H3 : (to_rep1(a__last) = last2)
+
+axiom H4 : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H5 : in_range2(first3)
+
+axiom H6 : (last2 = first3)
+
+axiom H7 : in_range2(last3)
+
+axiom H8 : (first2 = last3)
+
+axiom H9 : (((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (0 <  ((to_rep1(a__last) - to_rep1(a__first)) + 1))) and
+  ((not (to_rep1(a__first) <= to_rep1(a__last))) -> (0 <  0)))
+
+axiom H10 : (result = k)
+
+axiom H11 : (k1 = first3)
+
+axiom H12 : in_range2(k1)
+
+axiom H13 : (result1 = max)
+
+axiom H14 : (max1 = 0)
+
+axiom H15 : in_range1(max1)
+
  (* File "frame_condition.adb", line 60, characters 0-0 *)
-goal WP_parameter_def :
-  (forall k:int. forall max:int. forall result:int. forall k1:int.
-  forall result1:int. forall max1:int. (in_range2(first2) ->
-  ((to_rep1(a__first) = first2) -> (in_range2(last2) ->
-  ((to_rep1(a__last) = last2) -> (dynamic_property(1, 2147483647,
-  to_rep1(a__first), to_rep1(a__last)) -> (in_range2(first3) ->
-  ((last2 = first3) -> (in_range2(last3) -> ((first2 = last3) ->
-  ((((to_rep1(a__first) <= to_rep1(a__last)) and
-  (0 <  ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and (0 <  0))) ->
-  (((result = k) and (k1 = first3)) -> (in_range2(k1) ->
-  (((result1 = max) and (max1 = 0)) -> (in_range1(max1) ->
-  (to_rep1(a__first) <= k1))))))))))))))))
+goal WP_parameter_def : (to_rep1(a__first) <= k1)

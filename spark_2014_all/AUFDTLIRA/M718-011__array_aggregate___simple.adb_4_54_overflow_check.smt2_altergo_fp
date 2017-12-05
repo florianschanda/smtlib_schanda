@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -261,5 +261,45 @@ axiom def_axiom1 :
   (forall temp___159:int.
   ((simple__foo__arr__aggregate_def(temp___158)[temp___159]) = of_rep(temp___158))))
 
+logic arr : (int,integer) farray
+
+logic simple__foo__result : (int,integer) farray
+
+logic o : int
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : int
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic simple__foo__result1 : (int,integer) farray
+
+logic simple__foo__result2 : (int,integer) farray
+
+logic simple__foo__result3 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic simple__foo__result4 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic simple__foo__result5 : (int,integer) farray
+
+axiom H : in_range(init_val)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (in_range(init_val) -> in_range((init_val + 1)))
+goal WP_parameter_def : in_range((init_val + 1))

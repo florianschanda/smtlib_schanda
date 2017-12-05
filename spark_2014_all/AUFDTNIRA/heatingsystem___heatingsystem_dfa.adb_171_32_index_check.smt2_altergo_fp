@@ -351,18 +351,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -382,10 +382,41 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic onofftime : (int,times) farray
+
+logic clockoffset : int
+
+logic switchposition : int
+
+logic timer : int
+
+logic o : int
+
+logic o1 : times
+
+logic o2 : int
+
+logic o3 : times
+
+logic switchposition1 : int
+
+logic result : int
+
+logic timer1 : int
+
+logic timer2 : int
+
+axiom H : in_range(clockoffset)
+
+axiom H1 : ((0 <= 5) -> in_range1(switchposition))
+
+axiom H2 : ((0 <= 86399) -> in_range(timer))
+
+axiom H3 : in_range1(switchposition1)
+
+axiom H4 : (not (switchposition1 = 0))
+
+axiom H5 : (not (switchposition1 = 1))
+
  (* File "clock.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall clockoffset:int. forall switchposition:int. forall timer:int.
-  forall switchposition1:int. (in_range(clockoffset) -> (((0 <= 5) ->
-  in_range1(switchposition)) -> (((0 <= 86399) -> in_range(timer)) ->
-  (in_range1(switchposition1) -> ((not (switchposition1 = 0)) ->
-  ((not (switchposition1 = 1)) -> (2 <= switchposition1))))))))
+goal WP_parameter_def : (2 <= switchposition1)

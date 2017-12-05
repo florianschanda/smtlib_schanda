@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -231,17 +231,17 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__p__s__d) = to_rep(((b).us_split_discrs1).rec__p__s__d)) and
-  (p__s__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__p__s__bool_field = ((b).us_split_fields1).rec__p__s__bool_field))) and
-  (p__s__int_field__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__p__s__int_field) = to_rep1(((b).us_split_fields1).rec__p__s__int_field)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__p__s__d) = to_rep(((b).us_split_discrs1).rec__p__s__d)) and
-  (p__s__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__p__s__bool_field = ((b).us_split_fields1).rec__p__s__bool_field))) and
+  ((((to_rep(((a).us_split_discrs1).rec__p__s__d) = to_rep(((b).us_split_discrs1).rec__p__s__d)) and
+  ((p__s__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__p__s__bool_field = ((b).us_split_fields1).rec__p__s__bool_field)) and
   (p__s__int_field__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__p__s__int_field) = to_rep1(((b).us_split_fields1).rec__p__s__int_field))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__p__s__d) = to_rep(((b).us_split_discrs1).rec__p__s__d)) and
+  ((p__s__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__p__s__bool_field = ((b).us_split_fields1).rec__p__s__bool_field)) and
+  (p__s__int_field__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__p__s__int_field) = to_rep1(((b).us_split_fields1).rec__p__s__int_field)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -520,9 +520,17 @@ logic r2b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v__split_fields : enum
+
+logic us : int
+
+axiom H : (to_rep(v__split_discrs) = to_rep(v__split_fields))
+
+axiom H1 : (to_rep(v__split_discrs) = r2b)
+
+axiom H2 : in_range1(r2b)
+
+axiom H3 : ((us = r2b) and in_range1(r2b))
+
  (* File "p.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:enum. forall us:int.
-  ((to_rep(v__split_discrs) = to_rep(v__split_fields)) ->
-  (((to_rep(v__split_discrs) = r2b) and in_range1(r2b)) -> (((us = r2b) and
-  in_range1(r2b)) -> (to_rep(v__split_fields) = 0)))))
+goal WP_parameter_def : (to_rep(v__split_fields) = 0)

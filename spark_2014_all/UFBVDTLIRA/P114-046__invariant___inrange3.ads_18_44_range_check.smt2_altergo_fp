@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -697,31 +697,109 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "inrange3.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:t. forall inrange3__inrange64__result:bool. forall temp___204:t.
-  forall temp___205:t. forall inrange3__inrange64__result1:bool.
-  forall result:t. forall i1:t. forall i2:t.
-  forall inrange3__inrange64__result2:bool. forall temp___2051:t.
-  forall result1:t. forall temp___2052:t. forall result2:bool.
-  forall inrange3__inrange64__result3:bool. forall result3:t. forall i3:t.
-  forall i4:t. forall inrange3__inrange64__result4:bool. forall i5:t.
-  forall inrange3__inrange64__result5:bool. forall i6:t.
-  forall inrange3__inrange64__result6:bool. forall i7:t.
-  forall inrange3__inrange64__result7:bool. forall result4:bool.
-  forall inrange3__inrange64__result8:bool.
-  forall inrange3__inrange64__result9:bool.
-  forall inrange3__inrange64__result10:bool. forall i8:t.
-  forall inrange3__inrange64__result11:bool. forall i9:t.
-  forall inrange3__inrange64__result12:bool. forall i10:t.
-  forall inrange3__inrange64__result13:bool. forall i11:t.
-  forall inrange3__inrange64__result14:bool. ((uge(range_size, of_int(2)) and
-  ule(range_size, of_int(65535))) -> ((((({ t__content = result } = {
-  t__content = i }) and (i1 = of_int(0))) and
-  (((((inrange3__inrange64__result3 = inrange3__inrange64__result11) and
-  (i2 = i8)) and
-  ((inrange3__inrange64__result12 = inrange3__inrange64__result3) and
-  (i9 = i2))) and (ult(i1, range_size) and ((temp___204 = i1) and
+logic i : t
+
+logic inrange3__inrange64__result : bool
+
+logic temp___204 : t
+
+logic temp___205 : t
+
+logic inrange3__inrange64__result1 : bool
+
+logic result : t
+
+logic i1 : t
+
+logic i2 : t
+
+logic inrange3__inrange64__result2 : bool
+
+logic temp___2051 : t
+
+logic result1 : t
+
+logic temp___2052 : t
+
+logic result2 : bool
+
+logic inrange3__inrange64__result3 : bool
+
+logic result3 : t
+
+logic i3 : t
+
+logic i4 : t
+
+logic inrange3__inrange64__result4 : bool
+
+logic temp___2053 : t
+
+logic i5 : t
+
+logic inrange3__inrange64__result5 : bool
+
+logic temp___2054 : t
+
+logic i6 : t
+
+logic inrange3__inrange64__result6 : bool
+
+logic i7 : t
+
+logic inrange3__inrange64__result7 : bool
+
+logic i8 : t
+
+logic inrange3__inrange64__result8 : bool
+
+logic i9 : t
+
+logic inrange3__inrange64__result9 : bool
+
+logic result4 : bool
+
+logic inrange3__inrange64__result10 : bool
+
+logic inrange3__inrange64__result11 : bool
+
+logic inrange3__inrange64__result12 : bool
+
+logic i10 : t
+
+logic inrange3__inrange64__result13 : bool
+
+logic i11 : t
+
+logic inrange3__inrange64__result14 : bool
+
+logic i12 : t
+
+logic inrange3__inrange64__result15 : bool
+
+logic i13 : t
+
+logic inrange3__inrange64__result16 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
+
+axiom H4 : (result = i)
+
+axiom H5 : (i1 = of_int(0))
+
+axiom H6 : true
+
+axiom H7 :
+  (((((inrange3__inrange64__result3 = inrange3__inrange64__result13) and
+  (i2 = i10)) and
+  ((inrange3__inrange64__result14 = inrange3__inrange64__result3) and
+  (i11 = i2))) and (ult(i1, range_size) and ((temp___204 = i1) and
   ((of_int(0) = temp___205) and (((ule(of_int(0), i2) and ule(i2,
   sub(range_size, of_int(1)))) and ((i2 = of_int(0)) or
   (forall n:t. ((ule(of_int(0), n) and ule(n, sub(i2, of_int(1)))) ->
@@ -729,7 +807,7 @@ goal WP_parameter_def :
   (((temp___2051 = result1) and (temp___2052 = i2)) and ((var = add(bottom,
   i2)) and ((inrange3__inrange64__result2 = result2) and
   (inrange3__inrange64__result3 = of_int1(1))))))))))) or (((ult(i1,
-  range_size) and ((((temp___204 = i1) and ((of_int(0) = temp___205) and
+  range_size) -> ((((temp___204 = i1) and ((of_int(0) = temp___205) and
   (((ule(of_int(0), i2) and ule(i2, sub(range_size, of_int(1)))) and
   ((i2 = of_int(0)) or
   (forall n:t. ((ule(of_int(0), n) and ule(n, sub(i2, of_int(1)))) ->
@@ -739,29 +817,36 @@ goal WP_parameter_def :
   (inrange3__inrange64__result3 = inrange3__inrange64__result2)) and
   (((i2 = result3) and (i3 = add(i2, of_int(1)))) and (not ult(i3,
   range_size))))))))) and
-  (((inrange3__inrange64__result3 = inrange3__inrange64__result4) and
-  (i3 = i4)) and
-  ((inrange3__inrange64__result5 = inrange3__inrange64__result3) and
-  (i5 = i3)))) and ((({ bool__content = inrange3__inrange64__result6 } = {
-  bool__content = inrange3__inrange64__result4 }) and ({ t__content = i6
-  } = { t__content = i4 })) and
-  ((inrange3__inrange64__result7 = inrange3__inrange64__result5) and
-  (i7 = i5))))) or ((not ult(i1, range_size)) and ((({ bool__content =
-  inrange3__inrange64__result6 } = { bool__content =
-  inrange3__inrange64__result }) and (i1 = i6)) and
-  ((inrange3__inrange64__result7 = inrange3__inrange64__result1) and
-  (i7 = i1))))) and (((({ bool__content = inrange3__inrange64__result11 } = {
-  bool__content = inrange3__inrange64__result9 }) and ({ t__content = i8
-  } = { t__content = i6 })) and
-  ((inrange3__inrange64__result12 = inrange3__inrange64__result10) and
-  (i9 = i7))) and
-  (((inrange3__inrange64__result8 = inrange3__inrange64__result9) and
-  (inrange3__inrange64__result10 = inrange3__inrange64__result8)) and (({
-  bool__content = result4 } = { bool__content = inrange3__inrange64__result6
-  }) and (inrange3__inrange64__result8 = of_int1(0)))))))) and ((({
-  bool__content = inrange3__inrange64__result13 } = { bool__content =
-  inrange3__inrange64__result11 }) and ({ t__content = i10 } = { t__content =
-  i8 })) and
+  (((inrange3__inrange64__result3 = inrange3__inrange64__result6) and
+  (i3 = i6)) and
+  ((inrange3__inrange64__result7 = inrange3__inrange64__result3) and
+  (i7 = i3)))) and
+  (((inrange3__inrange64__result8 = inrange3__inrange64__result6) and
+  (i8 = i6)) and
+  ((inrange3__inrange64__result9 = inrange3__inrange64__result7) and
+  (i9 = i7))))) and ((not ult(i1, range_size)) ->
+  (((inrange3__inrange64__result8 = inrange3__inrange64__result) and
+  (i1 = i8)) and
+  ((inrange3__inrange64__result9 = inrange3__inrange64__result1) and
+  (i9 = i1))))) and
+  ((((inrange3__inrange64__result13 = inrange3__inrange64__result11) and
+  (i10 = i8)) and
   ((inrange3__inrange64__result14 = inrange3__inrange64__result12) and
-  (i11 = i9)))) -> (ule(of_int(0), sub(range_size, of_int(1))) ->
-  uge(of_int(0), of_int(0))))))
+  (i11 = i9))) and
+  (((inrange3__inrange64__result10 = inrange3__inrange64__result11) and
+  (inrange3__inrange64__result12 = inrange3__inrange64__result10)) and
+  ((result4 = inrange3__inrange64__result8) and
+  (inrange3__inrange64__result10 = of_int1(0)))))))
+
+axiom H8 : (inrange3__inrange64__result15 = inrange3__inrange64__result13)
+
+axiom H9 : (i12 = i10)
+
+axiom H10 : (inrange3__inrange64__result16 = inrange3__inrange64__result14)
+
+axiom H11 : (i13 = i11)
+
+axiom H12 : ule(of_int(0), sub(range_size, of_int(1)))
+
+ (* File "inrange3.ads", line 15, characters 0-0 *)
+goal WP_parameter_def : uge(of_int(0), of_int(0))

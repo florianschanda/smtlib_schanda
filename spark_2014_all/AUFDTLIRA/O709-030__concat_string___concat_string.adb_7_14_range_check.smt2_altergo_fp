@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -397,61 +397,179 @@ axiom temp___String_Literal_148__def_axiom :
   (to_rep((temp___String_Literal_148(void)[8])) = 115)) and
   (to_rep((temp___String_Literal_148(void)[9])) = 32))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s11:(int,character) farray. forall s2:(int,character) farray.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall concat_string__s1__assume:(int,character) farray.
-  forall concat_string__s1__assume1:t. forall o6:int. forall o7:int.
-  forall o8:int. forall o9:int. forall o10:int. forall o11:int.
-  forall concat_string__s2__assume:(int,character) farray.
-  forall concat_string__s2__assume1:t. forall o12:int. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:int.
-  forall result:(int,character) farray. forall s12:(int,character) farray.
-  forall result1:(int,character) farray. forall s21:(int,character) farray.
-  forall result2:bool. (dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1))) -> (((((length({ elts = s; rt = s1 }) = 0) and
-  ((temp___String_Literal_145(void) = concat_string__s1__assume) and (mk(1,
-  1) = concat_string__s1__assume1))) or ((not (length({ elts = s; rt = s1
-  }) = 0)) and ((((((((1 <= 1) and (o = ((1 - 1) + 1))) or
-  ((not (1 <= 1)) and (o = 0))) and
-  ((((to_rep1(first(s1)) <= to_rep1(last(s1))) and
-  (o1 = ((to_rep1(last(s1)) - to_rep1(first(s1))) + 1))) or
-  ((not (to_rep1(first(s1)) <= to_rep1(last(s1)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep1(first(s1)) + o2))) and
-  (o4 = (o3 - 1))) and ((o5 = o4) and in_range1(o4))) and ((concat(s,
+logic s11 : (int,character) farray
+
+logic s2 : (int,character) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic concat_string__s1__assume : (int,character) farray
+
+logic concat_string__s1__assume1 : t
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic concat_string__s2__assume : (int,character) farray
+
+logic concat_string__s2__assume1 : t
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic result : (int,character) farray
+
+logic s12 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic s21 : (int,character) farray
+
+logic result2 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : ((length({ elts = s; rt = s1 }) = 0) ->
+  (temp___String_Literal_145(void) = concat_string__s1__assume))
+
+axiom H2 : ((length({ elts = s; rt = s1 }) = 0) -> (mk(1,
+  1) = concat_string__s1__assume1))
+
+axiom H3 : ((not (length({ elts = s; rt = s1 }) = 0)) -> ((1 <= 1) ->
+  (o = ((1 - 1) + 1))))
+
+axiom H4 : ((not (length({ elts = s; rt = s1 }) = 0)) -> ((not (1 <= 1)) ->
+  (o = 0)))
+
+axiom H5 : ((not (length({ elts = s; rt = s1 }) = 0)) ->
+  ((to_rep1(first(s1)) <= to_rep1(last(s1))) ->
+  (o1 = ((to_rep1(last(s1)) - to_rep1(first(s1))) + 1))))
+
+axiom H6 : ((not (length({ elts = s; rt = s1 }) = 0)) ->
+  ((not (to_rep1(first(s1)) <= to_rep1(last(s1)))) -> (o1 = 0)))
+
+axiom H7 : ((not (length({ elts = s; rt = s1 }) = 0)) -> (o2 = (o1 + o)))
+
+axiom H8 : ((not (length({ elts = s; rt = s1 }) = 0)) ->
+  (o3 = (to_rep1(first(s1)) + o2)))
+
+axiom H9 : ((not (length({ elts = s; rt = s1 }) = 0)) -> (o4 = (o3 - 1)))
+
+axiom H10 : ((not (length({ elts = s; rt = s1 }) = 0)) -> ((o5 = o4) and
+  in_range1(o4)))
+
+axiom H11 : ((not (length({ elts = s; rt = s1 }) = 0)) -> (concat(s,
   to_rep1(first(s1)), to_rep1(last(s1)), temp___String_Literal_145(void), 1,
-  1) = concat_string__s1__assume) and (mk(to_rep1(first(s1)),
-  o5) = concat_string__s1__assume1))))) and (((result = s11) and
-  (s12 = concat_string__s1__assume)) and
-  ((to_rep1(s1__first) = to_rep1(first(concat_string__s1__assume1))) and
-  (to_rep1(s1__last) = to_rep1(last(concat_string__s1__assume1)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(s1__first), to_rep1(s1__last)) ->
-  ((((((((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) and
-  (o6 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) + 1))) or
-  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)))) and
-  (o6 = 0))) and ((((1 <= 9) and (o7 = ((9 - 1) + 1))) or ((not (1 <= 9)) and
-  (o7 = 0))) and (o8 = (o7 + o6)))) and (o9 = (1 + o8))) and
-  (o10 = (o9 - 1))) and ((o11 = o10) and in_range1(o10))) and
-  ((concat(temp___String_Literal_148(void), 1, 9,
+  1) = concat_string__s1__assume))
+
+axiom H12 : ((not (length({ elts = s; rt = s1 }) = 0)) ->
+  (mk(to_rep1(first(s1)), o5) = concat_string__s1__assume1))
+
+axiom H13 : (result = s11)
+
+axiom H14 : (s12 = concat_string__s1__assume)
+
+axiom H15 : (to_rep1(s1__first) = to_rep1(first(concat_string__s1__assume1)))
+
+axiom H16 : (to_rep1(s1__last) = to_rep1(last(concat_string__s1__assume1)))
+
+axiom H17 : dynamic_property(1, 2147483647, to_rep1(s1__first),
+  to_rep1(s1__last))
+
+axiom H18 :
+  ((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) ->
+  (o6 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) + 1)))
+
+axiom H19 :
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)))) ->
+  (o6 = 0))
+
+axiom H20 : ((1 <= 9) -> (o7 = ((9 - 1) + 1)))
+
+axiom H21 : ((not (1 <= 9)) -> (o7 = 0))
+
+axiom H22 : (o8 = (o7 + o6))
+
+axiom H23 : (o9 = (1 + o8))
+
+axiom H24 : (o10 = (o9 - 1))
+
+axiom H25 : ((o11 = o10) and in_range1(o10))
+
+axiom H26 : (concat(temp___String_Literal_148(void), 1, 9,
   (to_string(attr__ATTRIBUTE_IMAGE(32))).elts,
   to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(32))).rt)),
-  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) = concat_string__s2__assume) and
-  (mk(1, o11) = concat_string__s2__assume1))) and (((result1 = s2) and
-  (s21 = concat_string__s2__assume)) and
-  ((to_rep1(s2__first) = to_rep1(first(concat_string__s2__assume1))) and
-  (to_rep1(s2__last) = to_rep1(last(concat_string__s2__assume1)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(s2__first), to_rep1(s2__last)) ->
-  (((((to_rep1(s1__first) <= to_rep1(s1__last)) and
-  (o12 = ((to_rep1(s1__last) - to_rep1(s1__first)) + 1))) or
-  ((not (to_rep1(s1__first) <= to_rep1(s1__last))) and (o12 = 0))) and
-  (((o12 = 0) and (result2 = true)) or ((not (o12 = 0)) and
-  (result2 = false)))) -> ((not (result2 = true)) ->
-  (((((((to_rep1(s2__first) <= to_rep1(s2__last)) and
-  (o13 = ((to_rep1(s2__last) - to_rep1(s2__first)) + 1))) or
-  ((not (to_rep1(s2__first) <= to_rep1(s2__last))) and (o13 = 0))) and
-  ((((to_rep1(s1__first) <= to_rep1(s1__last)) and
-  (o14 = ((to_rep1(s1__last) - to_rep1(s1__first)) + 1))) or
-  ((not (to_rep1(s1__first) <= to_rep1(s1__last))) and (o14 = 0))) and
-  (o15 = (o14 + o13)))) and (o16 = (to_rep1(s1__first) + o15))) and
-  (o17 = (o16 - 1))) -> in_range1(o17))))))))))
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(32))).rt))) = concat_string__s2__assume)
+
+axiom H27 : (mk(1, o11) = concat_string__s2__assume1)
+
+axiom H28 : (result1 = s2)
+
+axiom H29 : (s21 = concat_string__s2__assume)
+
+axiom H30 : (to_rep1(s2__first) = to_rep1(first(concat_string__s2__assume1)))
+
+axiom H31 : (to_rep1(s2__last) = to_rep1(last(concat_string__s2__assume1)))
+
+axiom H32 : dynamic_property(1, 2147483647, to_rep1(s2__first),
+  to_rep1(s2__last))
+
+axiom H33 : ((to_rep1(s1__first) <= to_rep1(s1__last)) ->
+  (o12 = ((to_rep1(s1__last) - to_rep1(s1__first)) + 1)))
+
+axiom H34 : ((not (to_rep1(s1__first) <= to_rep1(s1__last))) -> (o12 = 0))
+
+axiom H35 : (((o12 = 0) -> (result2 = true)) and ((not (o12 = 0)) ->
+  (result2 = false)))
+
+axiom H36 : (not (result2 = true))
+
+axiom H37 : ((to_rep1(s2__first) <= to_rep1(s2__last)) ->
+  (o13 = ((to_rep1(s2__last) - to_rep1(s2__first)) + 1)))
+
+axiom H38 : ((not (to_rep1(s2__first) <= to_rep1(s2__last))) -> (o13 = 0))
+
+axiom H39 : ((to_rep1(s1__first) <= to_rep1(s1__last)) ->
+  (o14 = ((to_rep1(s1__last) - to_rep1(s1__first)) + 1)))
+
+axiom H40 : ((not (to_rep1(s1__first) <= to_rep1(s1__last))) -> (o14 = 0))
+
+axiom H41 : (o15 = (o14 + o13))
+
+axiom H42 : (o16 = (to_rep1(s1__first) + o15))
+
+axiom H43 : (o17 = (o16 - 1))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(o17)

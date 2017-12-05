@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -143,5 +143,9 @@ logic f5__function_guard : bool, int -> prop
 
 axiom f5__post_axiom : true
 
+axiom H : in_range1(x)
+
+axiom H1 : (f5(3) = true)
+
  (* File "p.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> ((f5(3) = true) -> (f5(3) = true)))
+goal WP_parameter_def : (f5(3) = true)

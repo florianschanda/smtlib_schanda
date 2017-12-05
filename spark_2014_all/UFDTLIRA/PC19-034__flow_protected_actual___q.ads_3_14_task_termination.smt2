@@ -33,6 +33,7 @@
 (declare-datatypes () ((pt__ref (mk_pt__ref (pt__content pt)))))
 (define-fun pt__ref___projection ((a pt__ref)) pt (pt__content a))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

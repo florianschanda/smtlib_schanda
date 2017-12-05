@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -651,20 +651,69 @@ axiom temp___String_Literal_202__def_axiom :
   (to_rep((temp___String_Literal_202(void)[4])) = 108)) and
   (to_rep((temp___String_Literal_202(void)[5])) = 111))
 
+logic x : (int,character) farray
+
+logic y : (int,character) farray
+
+logic s : (int,character) farray
+
+logic x1 : int
+
+logic o : (int,character) farray
+
+logic o1 : (int,character) farray
+
+logic o2 : t2
+
+logic o3 : int
+
+logic result : (int,character) farray
+
+logic x2 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic y1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result3 : int
+
+logic x3 : int
+
+logic result4 : bool
+
+logic x4 : int
+
+logic result5 : int
+
+logic x5 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x2 = temp___String_Literal_197(void))
+
+axiom H2 : (to_rep1(x__first) = to_rep1(first(mk(1, 5))))
+
+axiom H3 : (to_rep1(x__last) = to_rep1(last(mk(1, 5))))
+
+axiom H4 : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = temp___String_Literal_195(void))
+
+axiom H7 : (to_rep1(y__first) = to_rep1(first(mk(1, 3))))
+
+axiom H8 : (to_rep1(y__last) = to_rep1(last(mk(1, 3))))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(y__first),
+  to_rep1(y__last))
+
  (* File "dynamic_in_post.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall y:(int,character) farray.
-  forall result:(int,character) farray. forall x1:(int,character) farray.
-  forall result1:(int,character) farray. forall y1:(int,character) farray.
-  (((({ map__content = result } = { map__content = x }) and
-  (x1 = temp___String_Literal_197(void))) and
-  ((to_rep1(x__first) = to_rep1(first(mk(1, 5)))) and
-  (to_rep1(x__last) = to_rep1(last(mk(1, 5)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(x__first), to_rep1(x__last)) -> (((({ map__content =
-  result1 } = { map__content = y }) and
-  (y1 = temp___String_Literal_195(void))) and
-  ((to_rep1(y__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(y__last) = to_rep1(last(mk(1, 3)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(y__first), to_rep1(y__last)) -> (get_last({ elts = x1;
-  rt = mk(to_rep1(x__first), to_rep1(x__last)) }) = get_last({ elts = y1;
-  rt = mk(to_rep1(y__first), to_rep1(y__last)) })))))))
+goal WP_parameter_def : (get_last({ elts = x2; rt = mk(to_rep1(x__first),
+  to_rep1(x__last)) }) = get_last({ elts = y1; rt = mk(to_rep1(y__first),
+  to_rep1(y__last)) }))

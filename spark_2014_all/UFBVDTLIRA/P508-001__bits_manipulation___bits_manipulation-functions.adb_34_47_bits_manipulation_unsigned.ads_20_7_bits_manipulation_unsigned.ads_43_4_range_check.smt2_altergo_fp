@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1844,11 +1844,74 @@ axiom len__def_axiom : (len = ((to__ - from) + 1))
 
 axiom mask__def_axiom : (mask = make_mask(len))
 
+logic result__ : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume : int
+
+logic o : int
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__mask__assume : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic result : t
+
+logic result__1 : t
+
+logic result1 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result1 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result2 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result3 : t
+
+logic result__2 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result4 : t
+
+logic result__3 : t
+
+logic bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__result5 : t
+
+logic result2 : bool
+
+logic result3 : bool
+
+axiom H : true
+
+axiom H1 : in_range1(from)
+
+axiom H2 : in_range1(to__)
+
+axiom H3 : (from <= to__)
+
+axiom H4 :
+  ((bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume = ((to__ - from) + 1)) and
+  in_range(((to__ - from) + 1)))
+
+axiom H5 :
+  (bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume = len)
+
+axiom H6 : in_range(len)
+
  (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume:int.
-  (in_range1(from) -> (in_range1(to__) -> ((from <= to__) ->
-  ((((bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume = ((to__ - from) + 1)) and
-  in_range(((to__ - from) + 1))) and
-  (bits_manipulation_unsigned__unsigned_16__functions__extract_bits_inline_always__len__assume = len)) ->
-  (in_range(len) -> in_range2(len)))))))
+goal WP_parameter_def : in_range2(len)

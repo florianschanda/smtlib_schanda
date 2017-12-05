@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -875,41 +875,95 @@ logic a : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "counter.ads", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:t. forall inputs:(t,bool) farray. forall o:t.
-  forall counter__p__B_3__a__assume:t. forall count1:t.
-  forall inputs1:(t,bool) farray. forall result:t. forall count2:t.
-  forall result1:t. forall count3:t. forall count4:t.
-  forall inputs2:(t,bool) farray. forall count5:t.
-  forall inputs3:(t,bool) farray. ((in_range1(count) and
-  ((current_chain_length(inputs) = count) and
-  ((((forall k:t. ((ule(of_int(1), k) and ule(k, of_int(9))) ->
-     (((inputs1[k]) = true) <-> ((inputs[add(k, of_int(1))]) = true)))) and
-  (((inputs1[of_int(10)]) = true) <-> (input = true))) and
-  ((((not (input = true)) and (({ t__content = result } = { t__content =
-  count }) and (count2 = of_int(0)))) or ((input = true) and (((ult(count,
-  of_int(10)) and (((o = add(count, of_int(1))) and in_range1(add(count,
-  of_int(1)))) and (({ t__content = result1 } = { t__content = count }) and
-  (count3 = o)))) or ((not ult(count, of_int(10))) and ((count3 = count) and
-  (count3 = count1)))) and (count2 = count3)))) and
-  ((((counter__p__B_3__a__assume = current_chain_length(inputs1)) and
+logic count : t
+
+logic inputs : (t,bool) farray
+
+logic o : t
+
+logic counter__p__B_3__a__assume : t
+
+logic i : t
+
+logic count1 : t
+
+logic inputs1 : (t,bool) farray
+
+logic result : t
+
+logic count2 : t
+
+logic result1 : t
+
+logic count3 : t
+
+logic count4 : t
+
+logic inputs2 : (t,bool) farray
+
+logic count5 : t
+
+logic inputs3 : (t,bool) farray
+
+axiom H : in_range1(count)
+
+axiom H1 : (current_chain_length(inputs) = count)
+
+axiom H2 :
+  ((forall k:t. ((ule(of_int(1), k) and ule(k, of_int(9))) ->
+   (((inputs1[k]) = true) <-> ((inputs[add(k, of_int(1))]) = true)))) and
+  (((inputs1[of_int(10)]) = true) <-> (input = true)))
+
+axiom H3 : ((not (input = true)) -> (result = count))
+
+axiom H4 : ((not (input = true)) -> (count2 = of_int(0)))
+
+axiom H5 : ((input = true) -> (ult(count, of_int(10)) -> ((o = add(count,
+  of_int(1))) and in_range1(add(count, of_int(1))))))
+
+axiom H6 : ((input = true) -> (ult(count, of_int(10)) -> (result1 = count)))
+
+axiom H7 : ((input = true) -> (ult(count, of_int(10)) -> (count3 = o)))
+
+axiom H8 : ((input = true) -> ((not ult(count, of_int(10))) ->
+  (count3 = count)))
+
+axiom H9 : ((input = true) -> ((not ult(count, of_int(10))) ->
+  (count3 = count1)))
+
+axiom H10 : ((input = true) -> (count2 = count3))
+
+axiom H11 : ((counter__p__B_3__a__assume = current_chain_length(inputs1)) and
   (in_range1(counter__p__B_3__a__assume) and
-  (((not ((inputs1[of_int(10)]) = true)) and
-  (counter__p__B_3__a__assume = of_int(0))) or
-  (((inputs1[of_int(10)]) = true) and
-  ((forall i:t. ((ule(add(sub(of_int(10), counter__p__B_3__a__assume),
-   of_int(1)), i) and ule(i, of_int(10))) -> ((inputs1[i]) = true))) and
+  (((not ((inputs1[of_int(10)]) = true)) ->
+  (counter__p__B_3__a__assume = of_int(0))) and
+  (((inputs1[of_int(10)]) = true) ->
+  ((forall i1:t. ((ule(add(sub(of_int(10), counter__p__B_3__a__assume),
+   of_int(1)), i1) and ule(i1, of_int(10))) -> ((inputs1[i1]) = true))) and
   ((counter__p__B_3__a__assume = of_int(10)) or
-  (not ((inputs1[sub(of_int(10),
-  counter__p__B_3__a__assume)]) = true)))))))) and
-  (counter__p__B_3__a__assume = a)) and (in_range1(a) and
-  ((((input = true) and
-  (forall i:t. ((ule(add(sub(of_int(10), a), of_int(1)), i) and ule(i,
-  of_int(10))) -> ((inputs1[i]) = true)))) or (not (input = true))) and
-  ((((input = true) and ((a = of_int(10)) or (not ((inputs1[sub(of_int(10),
-  a)]) = true)))) or (not (input = true))) and ((((input = true) and
-  ult(count2, of_int(10))) and (current_chain_length(inputs1) = count2)) or
-  (not ((input = true) and ult(count2, of_int(10))))))))))) and
-  (((inputs1 = inputs2) and (count2 = count4)) and ((inputs3 = inputs1) and
-  (count5 = count2)))))) -> (current_chain_length(inputs2) = count4)))
+  (not ((inputs1[sub(of_int(10), counter__p__B_3__a__assume)]) = true))))))))
+
+axiom H12 : (counter__p__B_3__a__assume = a)
+
+axiom H13 : in_range1(a)
+
+axiom H14 : ((input = true) ->
+  (forall i1:t. ((ule(add(sub(of_int(10), a), of_int(1)), i1) and ule(i1,
+  of_int(10))) -> ((inputs1[i1]) = true))))
+
+axiom H15 : ((input = true) -> ((a = of_int(10)) or
+  (not ((inputs1[sub(of_int(10), a)]) = true))))
+
+axiom H16 : (((input = true) and ult(count2, of_int(10))) ->
+  (current_chain_length(inputs1) = count2))
+
+axiom H17 : (inputs1 = inputs2)
+
+axiom H18 : (count2 = count4)
+
+axiom H19 : (inputs3 = inputs1)
+
+axiom H20 : (count5 = count2)
+
+ (* File "counter.ads", line 35, characters 0-0 *)
+goal WP_parameter_def : (current_chain_length(inputs2) = count4)

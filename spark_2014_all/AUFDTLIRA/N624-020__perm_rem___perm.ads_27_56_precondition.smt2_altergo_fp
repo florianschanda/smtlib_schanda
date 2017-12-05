@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -452,23 +452,102 @@ axiom aa__def_axiom : ({ elts = aa; rt = aa1 } = remove({ elts = a; rt = a1
 axiom bb__def_axiom : ({ elts = bb; rt = bb1 } = remove({ elts = b; rt = b1
   }, i))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__remove_eq__result:int.
-  forall perm__remove_eq__aa__assume:(int,natural) farray.
-  forall perm__remove_eq__aa__assume1:t.
-  forall perm__remove_eq__bb__assume:(int,natural) farray.
-  forall perm__remove_eq__bb__assume1:t. forall result:int.
-  forall perm__remove_eq__result1:int. forall perm__remove_eq__result2:int.
-  forall perm__remove_eq__result3:int. forall perm__remove_eq__result4:int.
-  forall perm__remove_eq__result5:int. (dynamic_property(1, 100,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (dynamic_property(1, 100,
-  to_rep1(first(b1)), to_rep1(last(b1))) -> (in_range3(i) -> (((invariant__({
-  elts = a; rt = a1 }) = true) and ((invariant__({ elts = b; rt = b1
-  }) = true) and (((to_rep1(first(a1)) <= i) and
+logic perm__remove_eq__result : int
+
+logic perm__remove_eq__aa__assume : (int,natural) farray
+
+logic perm__remove_eq__aa__assume1 : t
+
+logic perm__remove_eq__bb__assume : (int,natural) farray
+
+logic perm__remove_eq__bb__assume1 : t
+
+logic j : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic j1 : int
+
+logic o3 : int
+
+logic o4 : natural
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : natural
+
+logic o8 : int
+
+logic o9 : natural
+
+logic o10 : int
+
+logic o11 : int
+
+logic temp___563 : int
+
+logic o12 : int
+
+logic o13 : natural
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : natural
+
+logic temp___562 : int
+
+logic o17 : int
+
+logic o18 : natural
+
+logic o19 : int
+
+logic o20 : int
+
+logic temp___565 : (int,natural) farray
+
+logic temp___5651 : t
+
+logic temp___564 : (int,natural) farray
+
+logic temp___5641 : t
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic perm__remove_eq__result1 : int
+
+logic perm__remove_eq__result2 : int
+
+logic perm__remove_eq__result3 : int
+
+logic perm__remove_eq__result4 : int
+
+logic perm__remove_eq__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : in_range3(i)
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and (((to_rep1(first(a1)) <= i) and
   (i <= to_rep1(last(a1)))) and (bool_eq5(a, to_rep1(first(a1)),
-  to_rep1(last(a1)), b, to_rep1(first(b1)), to_rep1(last(b1))) = true)))) ->
-  (((((({ elts = perm__remove_eq__aa__assume; rt =
+  to_rep1(last(a1)), b, to_rep1(first(b1)), to_rep1(last(b1))) = true))))
+
+axiom H4 : ((((({ elts = perm__remove_eq__aa__assume; rt =
   perm__remove_eq__aa__assume1 } = remove({ elts = a; rt = a1 }, i)) and
   (dynamic_property(1, 100, to_rep1(first(perm__remove_eq__aa__assume1)),
   to_rep1(last(perm__remove_eq__aa__assume1))) and ((invariant__({ elts =
@@ -481,8 +560,8 @@ goal WP_parameter_def :
    (to_rep((a[k])) = to_rep((perm__remove_eq__aa__assume[(k - 1)]))))) and
   (forall k:int. (((i <= k) and (k <= (to_rep1(last(a1)) - 1))) ->
   (to_rep((a[(k + 1)])) = to_rep((perm__remove_eq__aa__assume[k]))))))))))) and
-  ((aa = perm__remove_eq__aa__assume) and
-  (aa1 = perm__remove_eq__aa__assume1))) and (dynamic_property(1, 100,
+  ((perm__remove_eq__aa__assume = aa) and
+  (perm__remove_eq__aa__assume1 = aa1))) and (dynamic_property(1, 100,
   to_rep1(first(aa1)), to_rep1(last(aa1))) and (((({ elts =
   perm__remove_eq__bb__assume; rt = perm__remove_eq__bb__assume1 } = remove({
   elts = b; rt = b1 }, i)) and (dynamic_property(1, 100,
@@ -497,22 +576,25 @@ goal WP_parameter_def :
    (to_rep((b[k])) = to_rep((perm__remove_eq__bb__assume[(k - 1)]))))) and
   (forall k:int. (((i <= k) and (k <= (to_rep1(last(b1)) - 1))) ->
   (to_rep((b[(k + 1)])) = to_rep((perm__remove_eq__bb__assume[k]))))))))))) and
-  ((bb = perm__remove_eq__bb__assume) and
-  (bb1 = perm__remove_eq__bb__assume1))) and (dynamic_property(1, 100,
+  ((perm__remove_eq__bb__assume = bb) and
+  (perm__remove_eq__bb__assume1 = bb1))) and (dynamic_property(1, 100,
   to_rep1(first(bb1)), to_rep1(last(bb1))) and
-  ((forall j:int. (((to_rep1(first(a1)) <= j) and
-   (j <= to_rep1(last(a1)))) -> (to_rep((a[j])) = to_rep((b[j]))))) and
-  ((forall j:int. (((to_rep1(first(aa1)) <= j) and
-   (j <= to_rep1(last(aa1)))) -> (((j <  i) and
-   ((to_rep((aa[j])) = to_rep((a[j]))) and
-   (to_rep((aa[j])) = to_rep((b[j]))))) or ((not (j <  i)) and
-   ((to_rep((aa[j])) = to_rep((a[(j + 1)]))) and
-   (to_rep((aa[j])) = to_rep((b[(j + 1)])))))))) and
+  ((forall j2:int. (((to_rep1(first(a1)) <= j2) and
+   (j2 <= to_rep1(last(a1)))) -> (to_rep((a[j2])) = to_rep((b[j2]))))) and
+  ((forall j2:int. (((to_rep1(first(aa1)) <= j2) and
+   (j2 <= to_rep1(last(aa1)))) -> (((j2 <  i) ->
+   ((to_rep((aa[j2])) = to_rep((a[j2]))) and
+   (to_rep((aa[j2])) = to_rep((b[j2]))))) and ((not (j2 <  i)) ->
+   ((to_rep((aa[j2])) = to_rep((a[(j2 + 1)]))) and
+   (to_rep((aa[j2])) = to_rep((b[(j2 + 1)])))))))) and
   (((perm__remove_eq__result1 = perm__remove_eq__result2) and
-  (perm__remove_eq__result3 = perm__remove_eq__result1)) and (({
-  int__content = result } = { int__content = perm__remove_eq__result }) and
-  (perm__remove_eq__result1 = 1))))))))) and (({ int__content =
-  perm__remove_eq__result4 } = { int__content = perm__remove_eq__result2
-  }) and (perm__remove_eq__result5 = perm__remove_eq__result3))) ->
-  ((of_int(perm__remove_eq__result4) = true) -> (invariant__({ elts = b; rt =
-  b1 }) = true))))))))
+  (perm__remove_eq__result3 = perm__remove_eq__result1)) and
+  ((result2 = perm__remove_eq__result) and
+  (perm__remove_eq__result1 = 1))))))))) and
+  ((perm__remove_eq__result4 = perm__remove_eq__result2) and
+  (perm__remove_eq__result5 = perm__remove_eq__result3)))
+
+axiom H5 : (of_int(perm__remove_eq__result4) = true)
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = b; rt = b1 }) = true)

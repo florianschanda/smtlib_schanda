@@ -40,6 +40,7 @@
 (declare-const state1 Int)
 (declare-const level_a Int)
 (declare-const level_b Int)
+(declare-const o Int)
 (declare-const level_a1 Int)
 (declare-const level_b1 Int)
 (assert (in_range state))

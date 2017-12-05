@@ -45,6 +45,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range1 temp___expr_15)))
 (assert (forall ((r Int)) (! (=> (dynamic_invariant r true true true) (dynamic_invariant1 (to_int1 r) true false true)) :pattern ((to_int1 r)))))
 (assert (forall ((r Int)) (! (=> (dynamic_invariant r true true true) (= (to_int1 r) r)) :pattern ((to_int1 r)))))
+(declare-const us Int)
+(declare-const temp___146 Int)
 (assert (not (in_range 5)))
 (check-sat)
 (exit)

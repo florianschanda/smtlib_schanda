@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -114,20 +114,46 @@ logic do_something : int -> int
 logic do_something__function_guard : int, int -> prop
 
 axiom do_something__post_axiom :
-  (forall x:int [do_something(x)]. ((in_range(x) and (((-100) <= x) and
+  (forall x:int [do_something(x)]. ((in_range(x) and (((- 100) <= x) and
   (x <= 100))) -> in_range(do_something(x))))
 
 axiom do_something__def_axiom :
   (forall x:int [do_something(x)]. (in_range(x) ->
   (do_something(x) = (x * 2))))
 
+logic x : int
+
+logic y : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : bool
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 0)
+
+axiom H2 : in_range(x1)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(y))
+
+axiom H4 : ((o = do_something(2147483647)) and (in_range(o) and
+  (o = (2147483647 * 2))))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = o)
+
+axiom H7 : (((x1 = y1) -> (result2 = true)) and ((not (x1 = y1)) ->
+  (result2 = false)))
+
  (* File "pkg_a.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall o:int. forall result:int.
-  forall x1:int. forall result1:int. forall y1:int.
-  (forall result2:bool. (((({ int__content = result } = { int__content = x
-  }) and (x1 = 0)) and (in_range(x1) and ((((-2147483648) <= 2147483647) ->
-  in_range(y)) and ((((o = do_something(2147483647)) and (in_range(o) and
-  (o = (2147483647 * 2)))) and ((result1 = y) and (y1 = o))) and
-  (((x1 = y1) and (result2 = true)) or ((not (x1 = y1)) and
-  (result2 = false))))))) -> (x1 = y1))))
+goal WP_parameter_def : (x1 = y1)

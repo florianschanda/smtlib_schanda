@@ -30,6 +30,7 @@
 (declare-datatypes () ((enum__ref (mk_enum__ref (enum__content enum)))))
 (define-fun enum__ref___projection ((a enum__ref)) enum (enum__content a))
 (define-fun dynamic_invariant ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 0 2)) (in_range temp___expr_135)))
+(declare-const us Int)
 (assert (not (in_range 0)))
 (check-sat)
 (exit)

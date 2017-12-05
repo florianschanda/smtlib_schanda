@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -419,20 +419,56 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic s__split_fields : (int,integer) farray
+
+logic s__split_fields1 : pointer_range
+
+logic o : int
+
+logic o1 : pointer_range
+
+logic o2 : (int,integer) farray
+
+logic o3 : pointer_range
+
+logic temp___187 : (int,integer) farray
+
+logic temp___1871 : pointer_range
+
+logic o4 : integer
+
+logic result : (int,integer) farray
+
+logic result1 : pointer_range
+
+logic s__split_fields2 : (int,integer) farray
+
+logic s__split_fields3 : pointer_range
+
+axiom H : in_range(x)
+
+axiom H1 : ((o = (to_rep1(s__split_fields1) + 1)) and
+  in_range2((to_rep1(s__split_fields1) + 1)))
+
+axiom H2 : (to_rep1(o1) = o)
+
+axiom H3 : (s__split_fields = o2)
+
+axiom H4 : (o1 = o3)
+
+axiom H5 : (temp___187 = o2)
+
+axiom H6 : (temp___1871 = o3)
+
+axiom H7 : (result = s__split_fields)
+
+axiom H8 : (result1 = s__split_fields1)
+
+axiom H9 : (temp___187 = s__split_fields2)
+
+axiom H10 : (temp___1871 = s__split_fields3)
+
+axiom H11 : (to_rep(o4) = x)
+
  (* File "stacks_14.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:(int,integer) farray.
-  forall s__split_fields1:pointer_range. forall o:int.
-  forall o1:pointer_range. forall o2:(int,integer) farray.
-  forall o3:pointer_range. forall temp___187:(int,integer) farray.
-  forall temp___1871:pointer_range. forall o4:integer.
-  forall result:(int,integer) farray. forall result1:pointer_range.
-  forall s__split_fields2:(int,integer) farray.
-  forall s__split_fields3:pointer_range. (in_range(x) ->
-  (((((((o = (to_rep1(s__split_fields1) + 1)) and
-  in_range2((to_rep1(s__split_fields1) + 1))) and (to_rep1(o1) = o)) and
-  ((s__split_fields = o2) and (o1 = o3))) and ((temp___187 = o2) and
-  (temp___1871 = o3))) and (((result = s__split_fields) and
-  (result1 = s__split_fields1)) and ((temp___187 = s__split_fields2) and
-  (temp___1871 = s__split_fields3)))) -> ((to_rep(o4) = x) ->
-  (1 <= to_rep1(s__split_fields3))))))
+goal WP_parameter_def : (1 <= to_rep1(s__split_fields3))

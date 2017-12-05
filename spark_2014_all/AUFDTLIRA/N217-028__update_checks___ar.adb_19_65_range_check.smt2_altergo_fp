@@ -316,6 +316,51 @@ axiom def_axiom1 :
   temp___220, temp___221, temp___222, temp___223,
   temp___224)[temp___225]) = (temp___218[temp___225])))))))))
 
+logic a : (int,et1) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : (int,et1) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic a1 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic a4 : (int,et1) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range2(e)
+
+axiom H3 : (1 <  i)
+
+axiom H4 : (j <  0)
+
+axiom H5 : (0 <  e)
+
  (* File "ar.ads", line 19, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (in_range1(j) -> (in_range2(e) ->
-  (((1 <  i) and ((j <  0) and (0 <  e))) -> in_range2((e + 1))))))
+goal WP_parameter_def : in_range2((e + 1))

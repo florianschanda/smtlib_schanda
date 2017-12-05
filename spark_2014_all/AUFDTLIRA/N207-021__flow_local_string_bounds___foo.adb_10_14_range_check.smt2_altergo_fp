@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -384,21 +384,56 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 axiom tmp_c__def_axiom : ({ elts = tmp_c; rt = tmp_c1
   } = to_string(attr__ATTRIBUTE_IMAGE(a)))
 
+logic b : int
+
+logic c : int
+
+logic tmp_b : (int,character) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : (int,character) farray
+
+logic tmp_b1 : (int,character) farray
+
+logic result1 : int
+
+logic b1 : int
+
+axiom H : in_range(a)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(b))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(c))
+
+axiom H3 : (result = tmp_b)
+
+axiom H4 : (tmp_b1 = (to_string(attr__ATTRIBUTE_IMAGE(a))).elts)
+
+axiom H5 :
+  (to_rep1(tmp_b__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(a))).rt)))
+
+axiom H6 :
+  (to_rep1(tmp_b__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(a))).rt)))
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(tmp_b__first),
+  to_rep1(tmp_b__last))
+
+axiom H8 : (to_string(attr__ATTRIBUTE_IMAGE(a)) = { elts = tmp_c; rt = tmp_c1
+  })
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(first(tmp_c1)),
+  to_rep1(last(tmp_c1)))
+
+axiom H10 : ((to_rep1(tmp_b__first) <= to_rep1(tmp_b__last)) ->
+  (o = ((to_rep1(tmp_b__last) - to_rep1(tmp_b__first)) + 1)))
+
+axiom H11 : ((not (to_rep1(tmp_b__first) <= to_rep1(tmp_b__last))) ->
+  (o = 0))
+
  (* File "foo.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:int. forall c:int. forall tmp_b:(int,character) farray.
-  forall o:int. forall result:(int,character) farray.
-  forall tmp_b1:(int,character) farray. (in_range(a) ->
-  ((((-2147483648) <= 2147483647) -> in_range(b)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(c)) -> ((((result = tmp_b) and
-  (tmp_b1 = (to_string(attr__ATTRIBUTE_IMAGE(a))).elts)) and
-  ((to_rep1(tmp_b__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE(a))).rt))) and
-  (to_rep1(tmp_b__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE(a))).rt))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(tmp_b__first),
-  to_rep1(tmp_b__last)) -> ((to_string(attr__ATTRIBUTE_IMAGE(a)) = { elts =
-  tmp_c; rt = tmp_c1 }) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(tmp_c1)), to_rep1(last(tmp_c1))) ->
-  ((((to_rep1(tmp_b__first) <= to_rep1(tmp_b__last)) and
-  (o = ((to_rep1(tmp_b__last) - to_rep1(tmp_b__first)) + 1))) or
-  ((not (to_rep1(tmp_b__first) <= to_rep1(tmp_b__last))) and (o = 0))) ->
-  in_range(o))))))))))
+goal WP_parameter_def : in_range(o)

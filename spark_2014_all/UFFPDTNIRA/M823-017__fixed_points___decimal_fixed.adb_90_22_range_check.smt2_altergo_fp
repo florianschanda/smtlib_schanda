@@ -1799,7 +1799,7 @@ logic of_float64 : t1 -> int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1878,7 +1878,7 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type ttB
 
-predicate in_range4(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range4(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom Div_mod :
   (forall x:int. forall y:int. ((not (y = 0)) ->
@@ -1959,18 +1959,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2088,7 +2088,7 @@ function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
 type t2
 
-predicate in_range5(x: int) = (((-160) <= x) and (x <= 160))
+predicate in_range5(x: int) = (((- 160) <= x) and (x <= 160))
 
 logic dummy3 : t2
 
@@ -2322,14 +2322,127 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic y1 : int
+
+logic y2 : int
+
+logic y3 : int
+
+logic z1 : t
+
+logic z2 : t
+
+logic z3 : t
+
+logic u : t2
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : t2
+
+logic o7 : t2
+
+logic o8 : t2
+
+logic o9 : t2
+
+logic o10 : t2
+
+logic o11 : t2
+
+logic o12 : t2
+
+logic result : t
+
+logic z11 : t
+
+logic result1 : t
+
+logic z21 : t
+
+logic result2 : t
+
+logic z31 : t
+
+logic result3 : int
+
+logic y11 : int
+
+logic result4 : int
+
+logic y21 : int
+
+logic result5 : int
+
+logic y31 : int
+
+logic result6 : int
+
+logic y32 : int
+
+logic result7 : t2
+
+logic u1 : t2
+
+logic result8 : t2
+
+logic u2 : t2
+
+logic result9 : t2
+
+logic u3 : t2
+
+logic result10 : t2
+
+logic u4 : t2
+
+logic result11 : t2
+
+logic u5 : t2
+
+logic result12 : t2
+
+logic u6 : t2
+
+logic result13 : t2
+
+logic u7 : t2
+
+axiom H : (((- 80) <= to_fixed1(x)) and (to_fixed1(x) <= 80))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range3(y1))
+
+axiom H2 : ((0 <= 10) -> in_range6(y2))
+
+axiom H3 : ((0 <= 10) -> in_range7(y3))
+
+axiom H4 : (result = z1)
+
+axiom H5 : (z11 = fliteral)
+
+axiom H6 : tqtisFinite(z11)
+
+axiom H7 : (result1 = z2)
+
+axiom H8 : (z21 = fliteral)
+
+axiom H9 : in_range8(z21)
+
+axiom H10 : (result2 = z3)
+
+axiom H11 : (z31 = fliteral)
+
+axiom H12 : in_range9(z31)
+
  (* File "decimal_fixed.adb", line 57, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y1:int. forall y2:int. forall y3:int. forall z1:t. forall z2:t.
-  forall z3:t. forall result:t. forall z11:t. forall result1:t. forall z21:t.
-  forall result2:t. forall z31:t. ((((-80) <= to_fixed1(x)) and
-  (to_fixed1(x) <= 80)) -> ((((-2147483648) <= 2147483647) ->
-  in_range3(y1)) -> (((0 <= 10) -> in_range6(y2)) -> (((0 <= 10) ->
-  in_range7(y3)) -> (((result = z1) and (z11 = fliteral)) ->
-  (tqtisFinite(z11) -> (((result1 = z2) and (z21 = fliteral)) ->
-  (in_range8(z21) -> (((result2 = z3) and (z31 = fliteral)) ->
-  (in_range9(z31) -> in_range3(to_int4(to_fixed1(x))))))))))))))
+goal WP_parameter_def : in_range3(to_int4(to_fixed1(x)))

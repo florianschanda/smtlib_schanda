@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -837,19 +837,71 @@ axiom def_axiom1 :
   (((fixed_string__null_string__value__aggregate_def(temp___222, temp___223,
   temp___224)).elts2[temp___225]) = of_rep(temp___222)))))
 
+logic value : (int,character) farray
+
+logic fixed_string__null_string__result : (int,character) farray
+
+logic fixed_string__null_string__result1 : t
+
+logic temp___227 : (int,character) farray
+
+logic temp___2271 : t2
+
+logic fixed_string__null_string__value__assume : (int,character) farray
+
+logic fixed_string__null_string__value__assume1 : t1
+
+logic o : int
+
+logic o1 : int
+
+logic result : (int,character) farray
+
+logic value1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic result2 : t
+
+logic fixed_string__null_string__result2 : (int,character) farray
+
+logic fixed_string__null_string__result3 : t
+
+logic fixed_string__null_string__result4 : (int,character) farray
+
+logic fixed_string__null_string__result5 : t
+
+logic fixed_string__null_string__result6 : (int,character) farray
+
+logic fixed_string__null_string__result7 : t
+
+logic value2 : (int,character) farray
+
+logic fixed_string__null_string__result8 : (int,character) farray
+
+logic fixed_string__null_string__result9 : t
+
+logic value3 : (int,character) farray
+
+logic fixed_string__null_string__result10 : (int,character) farray
+
+logic fixed_string__null_string__result11 : t
+
+axiom H : (to_rep1(first4((fixed_string__null_string__value__aggregate_def(0,
+  1, to_rep2(this))).rt2)) = 1)
+
+axiom H1 : (to_rep1(last4((fixed_string__null_string__value__aggregate_def(0,
+  1, to_rep2(this))).rt2)) = to_rep2(this))
+
+axiom H2 : ({ elts2 = temp___227; rt2 = temp___2271
+  } = fixed_string__null_string__value__aggregate_def(0, 1, to_rep2(this)))
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___227:(int,character) farray. forall temp___2271:t2.
-  (((to_rep1(first4((fixed_string__null_string__value__aggregate_def(0, 1,
-  to_rep2(this))).rt2)) = 1) and
-  ((to_rep1(last4((fixed_string__null_string__value__aggregate_def(0, 1,
-  to_rep2(this))).rt2)) = to_rep2(this)) and ({ elts2 = temp___227; rt2 =
-  temp___2271 } = fixed_string__null_string__value__aggregate_def(0, 1,
-  to_rep2(this))))) ->
   (((to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271))) ->
   (((1 <= to_rep2(this)) ->
   (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = ((to_rep2(this) - 1) + 1))) and
   ((not (1 <= to_rep2(this))) ->
   (((to_rep1(last4(temp___2271)) - to_rep1(first4(temp___2271))) + 1) = 0)))) and
   ((not (to_rep1(first4(temp___2271)) <= to_rep1(last4(temp___2271)))) ->
-  ((1 <= to_rep2(this)) -> (0 = ((to_rep2(this) - 1) + 1)))))))
+  ((1 <= to_rep2(this)) -> (0 = ((to_rep2(this) - 1) + 1)))))

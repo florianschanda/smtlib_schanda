@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -352,53 +352,191 @@ function t2b__ref___projection(a: t2b__ref) : integer = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "incr_loop.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall i:int.
-  forall temp___155:(int,integer) farray.
-  forall temp___153:(int,integer) farray.
-  forall temp___156:(int,integer) farray. forall temp___151:int.
-  forall o:int. forall o1:integer. forall o2:(int,integer) farray.
-  forall i1:int. forall o3:int. forall o4:integer. forall o5:int.
-  forall o6:int. forall a1:(int,integer) farray. forall result:int.
-  forall i2:int. forall a2:(int,integer) farray. forall i3:int.
-  forall result1:(int,integer) farray. forall a3:(int,integer) farray.
-  forall a4:(int,integer) farray. forall i4:int.
-  forall a5:(int,integer) farray. forall i5:int.
-  forall a6:(int,integer) farray. forall i6:int.
-  forall a7:(int,integer) farray. forall i7:int.
-  forall a8:(int,integer) farray. forall i8:int.
-  forall a9:(int,integer) farray. forall i9:int.
-  (dynamic_property((-2147483648), 2147483647, to_rep(a__first),
-  to_rep(a__last)) ->
-  ((forall i10:int. (((to_rep(a__first) <= i10) and
-   (i10 <= to_rep(a__last))) -> (to_rep((a[i10])) <  2147483647))) ->
-  ((((({ int__content = result } = { int__content = i }) and
-  (i2 = to_rep(a__first))) and ((((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last))) and ((((temp___155 = a) and ((temp___153 = a) and
-  ((temp___156 = a) and ((temp___151 = i2) and
-  (((forall k:int. (((to_rep(a__first) <= k) and (k <= (i3 - 1))) ->
-    (to_rep((a2[k])) = (to_rep((temp___155[k])) + 1)))) and
-  (forall k:int. (((i3 <= k) and (k <= to_rep(a__last))) ->
-  (to_rep((a2[k])) = to_rep((temp___156[k])))))) and
+logic a : (int,integer) farray
+
+logic i : int
+
+logic i1 : int
+
+logic temp___155 : (int,integer) farray
+
+logic temp___153 : (int,integer) farray
+
+logic temp___156 : (int,integer) farray
+
+logic temp___151 : int
+
+logic k : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic k1 : int
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : (int,integer) farray
+
+logic i2 : int
+
+logic o14 : int
+
+logic o15 : integer
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic a1 : (int,integer) farray
+
+logic result : int
+
+logic i3 : int
+
+logic a2 : (int,integer) farray
+
+logic i4 : int
+
+logic result1 : bool
+
+logic result2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic result3 : int
+
+logic i5 : int
+
+logic a4 : (int,integer) farray
+
+logic i6 : int
+
+logic a5 : (int,integer) farray
+
+logic i7 : int
+
+logic a6 : (int,integer) farray
+
+logic i8 : int
+
+logic a7 : (int,integer) farray
+
+logic i9 : int
+
+logic a8 : (int,integer) farray
+
+logic i10 : int
+
+logic a9 : (int,integer) farray
+
+logic i11 : int
+
+logic a10 : (int,integer) farray
+
+logic i12 : int
+
+logic a11 : (int,integer) farray
+
+logic i13 : int
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(a__first),
+  to_rep(a__last))
+
+axiom H1 :
+  (forall i14:int. (((to_rep(a__first) <= i14) and
+  (i14 <= to_rep(a__last))) -> (to_rep((a[i14])) <  2147483647)))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i3 = to_rep(a__first))
+
+axiom H4 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (((temp___155 = a) and ((temp___153 = a) and ((temp___156 = a) and
+  ((temp___151 = i3) and
+  (((forall k2:int. (((to_rep(a__first) <= k2) and (k2 <= (i4 - 1))) ->
+    (to_rep((a2[k2])) = (to_rep((temp___155[k2])) + 1)))) and
+  (forall k2:int. (((i4 <= k2) and (k2 <= to_rep(a__last))) ->
+  (to_rep((a2[k2])) = to_rep((temp___156[k2])))))) and
   (((((to_rep(a__first) <= to_rep(a__last)) ->
-  dynamic_property1(to_rep(a__first), to_rep(a__last), i3)) and
+  dynamic_property1(to_rep(a__first), to_rep(a__last), i4)) and
   (forall temp___154:int. (((to_rep(a__first) <= temp___154) and
-  (temp___154 <= to_rep(a__last))) -> ((i3 <= temp___154) ->
+  (temp___154 <= to_rep(a__last))) -> ((i4 <= temp___154) ->
   ((a2[temp___154]) = (temp___153[temp___154])))))) and
-  ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) and
-  ((((((o = (to_rep((a2[i3])) + 1)) and
-  in_range1((to_rep((a2[i3])) + 1))) and (to_rep(o1) = o)) and
-  (o2 = (a2[i3 <- o1]))) and ((a2 = result1) and (a3 = o2))) and
-  (i3 = to_rep(a__last))))))))) and (((i3 = i4) and (a3 = a4)) and
-  ((i5 = i3) and (a5 = a3)))) and ((({ int__content = i6 } = { int__content =
-  i4 }) and ({ map__content = a6 } = { map__content = a4 })) and
-  ((i7 = i5) and (a7 = a5))))) or ((not ((to_rep(a__first) <= i2) and
-  (i2 <= to_rep(a__last)))) and (((i2 = i6) and ({ map__content = a6 } = {
-  map__content = a })) and ((i7 = i2) and (a7 = a1)))))) and ((({
-  int__content = i8 } = { int__content = i6 }) and ({ map__content = a8 } = {
-  map__content = a6 })) and ((i9 = i7) and (a9 = a7)))) ->
-  (((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) ->
-  (((((((to_rep(a__first) <= i1) and (i1 <= to_rep(a__last))) and
-  (o3 = i1)) and (o4 = (a[o3]))) and (o5 = to_rep(o4))) and
-  (o6 = (o5 + 1))) -> in_range1(o6)))))))
+  ((to_rep(a__first) <= i4) and (i4 <= to_rep(a__last)))) and
+  ((((((o11 = (to_rep((a2[i4])) + 1)) and
+  in_range1((to_rep((a2[i4])) + 1))) and (to_rep(o12) = o11)) and
+  (o13 = (a2[i4 <- o12]))) and ((a2 = result2) and (a3 = o13))) and
+  (i4 = to_rep(a__last))))))))) and (((i4 = i8) and (a3 = a6)) and
+  ((i9 = i4) and (a7 = a3)))))
+
+axiom H5 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (i10 = i8))
+
+axiom H6 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (a8 = a6))
+
+axiom H7 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (i11 = i9))
+
+axiom H8 : (((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last))) ->
+  (a9 = a7))
+
+axiom H9 : ((not ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) ->
+  (i3 = i10))
+
+axiom H10 : ((not ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) ->
+  (a8 = a))
+
+axiom H11 : ((not ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) ->
+  (i11 = i3))
+
+axiom H12 : ((not ((to_rep(a__first) <= i3) and (i3 <= to_rep(a__last)))) ->
+  (a9 = a1))
+
+axiom H13 : (i12 = i10)
+
+axiom H14 : (a10 = a8)
+
+axiom H15 : (i13 = i11)
+
+axiom H16 : (a11 = a9)
+
+axiom H17 : (to_rep(a__first) <= i2)
+
+axiom H18 : (i2 <= to_rep(a__last))
+
+axiom H19 : ((to_rep(a__first) <= i2) and (i2 <= to_rep(a__last)))
+
+axiom H20 : (o14 = i2)
+
+axiom H21 : (o15 = (a[o14]))
+
+axiom H22 : (o16 = to_rep(o15))
+
+axiom H23 : (o17 = (o16 + 1))
+
+ (* File "incr_loop.ads", line 5, characters 0-0 *)
+goal WP_parameter_def : in_range1(o17)

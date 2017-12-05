@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -997,7 +997,7 @@ axiom bv_max_to_uint1 :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1301,8 +1301,21 @@ axiom xqueue_create__post_axiom :
 
 axiom null_address__def_axiom : (null_address = of_int1(0))
 
+logic worker_queue : t1
+
+logic o : int
+
+logic o1 : int
+
+axiom H : true
+
+axiom H1 : (of_int1(0) = null_address)
+
+axiom H2 : in_range1(worker_queue)
+
+axiom H3 : (worker_queue = null_address)
+
+axiom H4 : ((o = value__size) and in_range(value__size))
+
  (* File "worker_pack.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall worker_queue:t1. forall o:int. ((of_int1(0) = null_address) ->
-  (in_range1(worker_queue) -> ((worker_queue = null_address) ->
-  (((o = value__size) and in_range(value__size)) -> (not (8 = 0)))))))
+goal WP_parameter_def : (not (8 = 0))

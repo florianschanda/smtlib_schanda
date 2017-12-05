@@ -312,10 +312,23 @@ axiom mem__def_axiom :
   (forall s:(int,bool) farray.
   (forall e:int [mem(s, e)]. ((mem(s, e) = true) <-> ((s[e]) = true))))
 
+logic a : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic a1 : (int,bool) farray
+
+logic a2 : (int,bool) farray
+
+logic a3 : (int,bool) farray
+
+axiom H : (result = a)
+
+axiom H1 : (a1 = orb1(a, 1, 10, b, 1, 10))
+
+axiom H2 : (a1 = a2)
+
+axiom H3 : (a3 = a1)
+
  (* File "bitsets.ads", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,bool) farray. forall result:(int,bool) farray.
-  forall a1:(int,bool) farray. forall a2:(int,bool) farray.
-  forall a3:(int,bool) farray. ((((result = a) and (a1 = orb1(a, 1, 10, b, 1,
-  10))) and ((a1 = a2) and (a3 = a1))) -> (ext_equal(a2, union(a,
-  b)) = true)))
+goal WP_parameter_def : (ext_equal(a2, union(a, b)) = true)

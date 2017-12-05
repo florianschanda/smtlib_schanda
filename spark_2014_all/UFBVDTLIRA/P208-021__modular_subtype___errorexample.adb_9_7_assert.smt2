@@ -60,6 +60,7 @@
 (define-fun dynamic_invariant ((temp___expr_141 (_ BitVec 32)) (temp___is_init_138 Bool) (temp___skip_constant_139 Bool) (temp___do_toplevel_140 Bool)) Bool (=> (or (= temp___is_init_138 true) (bvule ((_ int2bv 32) 1) ((_ int2bv 32) 100))) (in_range temp___expr_141)))
 (declare-const calculated_force (_ BitVec 32))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-(assert (not (not (in_range calculated_force))))
+(assert (in_range calculated_force))
+(assert (not false))
 (check-sat)
 (exit)

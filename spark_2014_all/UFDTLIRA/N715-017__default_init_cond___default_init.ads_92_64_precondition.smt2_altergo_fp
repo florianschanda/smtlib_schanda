@@ -150,5 +150,9 @@ axiom wrong_ok__post_axiom : true
 axiom wrong_ok__def_axiom :
   (forall x1:int [wrong_ok(x1)]. ((wrong_ok(x1) = true) <-> (x1 = init(0))))
 
+logic o : int
+
+axiom H : in_range(x)
+
  (* File "default_init.ads", line 25, characters 0-0 *)
 goal WP_parameter_def : true

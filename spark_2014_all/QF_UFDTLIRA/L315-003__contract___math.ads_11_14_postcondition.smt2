@@ -33,6 +33,7 @@
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const math__bad__result Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const math__bad__result1 Int)
 (declare-const math__bad__result2 Int)

@@ -463,7 +463,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type px_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq9 : int, int -> bool
 
@@ -502,7 +502,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq10 : int, int -> bool
 
@@ -2034,7 +2034,7 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type integer
 
-predicate in_range9(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range9(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq16 : int, int -> bool
 
@@ -2114,22 +2114,124 @@ axiom within_bounds__def_axiom :
   (forall y:int. forall x:int [within_bounds(y, x)]. ((within_bounds(y,
   x) = true) <-> (in_range5(y) and in_range4(x))))
 
- (* File "tetris_integrity.adb", line 109, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall o:cell. forall o1:int.
-  forall o2:(int,cell) farray. forall o3:int.
-  forall o4:(int,(int,cell) farray) farray. forall o5:cell. forall o6:int.
-  forall o7:(int,cell) farray. forall o8:int.
-  forall o9:(int,(int,cell) farray) farray. forall o10:cell.
-  forall result:(int,(int,cell) farray) farray.
-  forall cur_board1:(int,(int,cell) farray) farray.
-  forall result1:(int,(int,cell) farray) farray.
-  forall cur_board2:(int,(int,cell) farray) farray.
-  ((tetris_integrity__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic y : int
+
+logic y1 : int
+
+logic o : cell
+
+logic o1 : int
+
+logic o2 : (int,cell) farray
+
+logic o3 : int
+
+logic o4 : (int,(int,cell) farray) farray
+
+logic o5 : cell
+
+logic o6 : int
+
+logic o7 : (int,cell) farray
+
+logic o8 : int
+
+logic o9 : (int,(int,cell) farray) farray
+
+logic o10 : cell
+
+logic o11 : int
+
+logic o12 : (int,cell) farray
+
+logic o13 : int
+
+logic o14 : (int,(int,cell) farray) farray
+
+logic o15 : cell
+
+logic o16 : int
+
+logic o17 : (int,cell) farray
+
+logic o18 : cell
+
+logic o19 : int
+
+logic o20 : (int,cell) farray
+
+logic o21 : int
+
+logic temp___743 : map
+
+logic o22 : cell
+
+logic o23 : int
+
+logic o24 : (int,cell) farray
+
+logic result : (int,(int,cell) farray) farray
+
+logic cur_board1 : (int,(int,cell) farray) farray
+
+logic result1 : (int,(int,cell) farray) farray
+
+logic cur_board2 : (int,(int,cell) farray) farray
+
+logic result2 : (int,(int,cell) farray) farray
+
+logic cur_board3 : (int,(int,cell) farray) farray
+
+logic result3 : int
+
+logic y2 : int
+
+logic cur_board4 : (int,(int,cell) farray) farray
+
+logic y3 : int
+
+logic x : int
+
+logic result4 : int
+
+logic x1 : int
+
+logic cur_board5 : (int,(int,cell) farray) farray
+
+logic x2 : int
+
+logic result5 : int
+
+logic y4 : int
+
+logic cur_board6 : (int,(int,cell) farray) farray
+
+logic y5 : int
+
+logic x3 : int
+
+logic result6 : int
+
+logic x4 : int
+
+logic cur_board7 : (int,(int,cell) farray) farray
+
+logic x5 : int
+
+logic result7 : bool
+
+axiom H :
+  (tetris_integrity__possible_i_shapes__aggregate_def(temp___143(of_int(0),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
   of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
@@ -2141,8 +2243,10 @@ goal WP_parameter_def :
   of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) ->
-  ((tetris_integrity__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (tetris_integrity__possible_three_shapes__aggregate_def(temp___248(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -2176,31 +2280,58 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) -> ((within_bounds__2({
-  us_split_fields1 = { rec__tetris_integrity__piece__s =
-  cur_piece__split_fields; rec__tetris_integrity__piece__d =
-  cur_piece__split_fields1; rec__tetris_integrity__piece__x =
-  cur_piece__split_fields2; rec__tetris_integrity__piece__y =
-  cur_piece__split_fields3 } }) = true) ->
-  ((to_rep1(cur_piece__split_fields) = 2) ->
-  (((((to_rep(o) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o1 = to_rep2(cur_piece__split_fields2))) and
-  (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o])))) and
-  ((((1 <= to_rep3(cur_piece__split_fields3)) and
-  (to_rep3(cur_piece__split_fields3) <= 50)) and
-  (o3 = to_rep3(cur_piece__split_fields3))) and
-  (o4 = (cur_board[o3 <- o2])))) and ((result = cur_board) and
-  (cur_board1 = o4))) ->
-  (((((to_rep(o5) = to_rep1(cur_piece__split_fields)) and
-  ((((1 <= to_rep2(cur_piece__split_fields2)) and
-  (to_rep2(cur_piece__split_fields2) <= 10)) and
-  (o6 = to_rep2(cur_piece__split_fields2))) and
-  (o7 = ((cur_board1[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5])))) and
-  ((((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
-  ((to_rep3(cur_piece__split_fields3) + 1) <= 50)) and
-  (o8 = (to_rep3(cur_piece__split_fields3) + 1))) and
-  (o9 = (cur_board1[o8 <- o7])))) and ((result1 = cur_board1) and
-  (cur_board2 = o9))) -> ((to_rep(o10) = to_rep1(cur_piece__split_fields)) ->
-  (1 <= (to_rep2(cur_piece__split_fields2) + 1))))))))))
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : (within_bounds__2({ us_split_fields1 = {
+  rec__tetris_integrity__piece__s = cur_piece__split_fields;
+  rec__tetris_integrity__piece__d = cur_piece__split_fields1;
+  rec__tetris_integrity__piece__x = cur_piece__split_fields2;
+  rec__tetris_integrity__piece__y = cur_piece__split_fields3 } }) = true)
+
+axiom H3 : (to_rep1(cur_piece__split_fields) = 2)
+
+axiom H4 : (to_rep(o) = to_rep1(cur_piece__split_fields))
+
+axiom H5 : ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10))
+
+axiom H6 : (o1 = to_rep2(cur_piece__split_fields2))
+
+axiom H7 : (o2 = ((cur_board[to_rep3(cur_piece__split_fields3)])[o1 <- o]))
+
+axiom H8 : ((1 <= to_rep3(cur_piece__split_fields3)) and
+  (to_rep3(cur_piece__split_fields3) <= 50))
+
+axiom H9 : (o3 = to_rep3(cur_piece__split_fields3))
+
+axiom H10 : (o4 = (cur_board[o3 <- o2]))
+
+axiom H11 : (result = cur_board)
+
+axiom H12 : (cur_board1 = o4)
+
+axiom H13 : (to_rep(o5) = to_rep1(cur_piece__split_fields))
+
+axiom H14 : ((1 <= to_rep2(cur_piece__split_fields2)) and
+  (to_rep2(cur_piece__split_fields2) <= 10))
+
+axiom H15 : (o6 = to_rep2(cur_piece__split_fields2))
+
+axiom H16 :
+  (o7 = ((cur_board1[(to_rep3(cur_piece__split_fields3) + 1)])[o6 <- o5]))
+
+axiom H17 : ((1 <= (to_rep3(cur_piece__split_fields3) + 1)) and
+  ((to_rep3(cur_piece__split_fields3) + 1) <= 50))
+
+axiom H18 : (o8 = (to_rep3(cur_piece__split_fields3) + 1))
+
+axiom H19 : (o9 = (cur_board1[o8 <- o7]))
+
+axiom H20 : (result1 = cur_board1)
+
+axiom H21 : (cur_board2 = o9)
+
+axiom H22 : (to_rep(o10) = to_rep1(cur_piece__split_fields))
+
+ (* File "tetris_integrity.adb", line 109, characters 0-0 *)
+goal WP_parameter_def : (1 <= (to_rep2(cur_piece__split_fields2) + 1))

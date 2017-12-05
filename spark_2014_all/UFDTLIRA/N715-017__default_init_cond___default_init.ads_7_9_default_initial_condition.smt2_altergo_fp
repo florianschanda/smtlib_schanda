@@ -113,8 +113,13 @@ axiom nat_ok__post_axiom : true
 axiom nat_ok__def_axiom :
   (forall x:int [nat_ok(x)]. ((nat_ok(x) = true) <-> (x = 0)))
 
+logic us : int
+
+logic temp___276 : int
+
+axiom H : ((us = 0) and in_range(0))
+
+axiom H1 : (in_range(temp___276) and (temp___276 = 0))
+
  (* File "default_init.ads", line 58, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall temp___276:int. (((us = 0) and in_range(0)) ->
-  ((in_range(temp___276) and (temp___276 = 0)) ->
-  (nat_ok(temp___276) = true))))
+goal WP_parameter_def : (nat_ok(temp___276) = true)

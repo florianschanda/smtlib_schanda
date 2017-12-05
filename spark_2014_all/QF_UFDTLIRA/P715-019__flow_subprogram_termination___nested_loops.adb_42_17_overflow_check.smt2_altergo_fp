@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -137,9 +137,25 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic j : int
+
+logic o : int
+
+logic result : int
+
+logic j1 : int
+
+logic j2 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 2)
+
+axiom H2 : in_range1(j1)
+
+axiom H3 : (j1 <  5)
+
+axiom H4 : ((((- 2147483648) <= 2147483647) -> in_range1(j2)) and (j2 <  5))
+
  (* File "nested_loops.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall result:int. forall j1:int. forall j2:int.
-  (((result = j) and (j1 = 2)) -> (in_range1(j1) -> ((j1 <  5) ->
-  (((((-2147483648) <= 2147483647) -> in_range1(j2)) and (j2 <  5)) ->
-  in_range1((j2 + 1)))))))
+goal WP_parameter_def : in_range1((j2 + 1))

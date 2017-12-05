@@ -219,5 +219,11 @@ axiom notb_def :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic a : (int,bool) farray
+
+axiom H : false
+
+axiom H1 : ((a[5]) = true)
+
  (* File "foo.ads", line 6, characters 0-0 *)
 goal WP_parameter_def : true

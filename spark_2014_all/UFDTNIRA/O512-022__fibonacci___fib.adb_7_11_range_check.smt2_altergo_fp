@@ -113,7 +113,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -242,11 +242,71 @@ function t1b__ref___projection(a: t1b__ref) : integer = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : int
+
+logic b : int
+
+logic t : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic b1 : int
+
+logic result2 : int
+
+logic i1 : int
+
+logic a2 : int
+
+logic b2 : int
+
+logic t1 : int
+
+logic i2 : int
+
+logic result3 : int
+
+logic t2 : int
+
+logic result4 : int
+
+logic a3 : int
+
+logic result5 : int
+
+logic b3 : int
+
+logic result6 : int
+
+logic i3 : int
+
+axiom H : in_range2(n)
+
+axiom H1 : (n <= 23)
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(a))
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(b))
+
+axiom H4 : ((0 <= 2147483647) -> in_range2(t))
+
+axiom H5 : (result = a)
+
+axiom H6 : (a1 = 1)
+
+axiom H7 : (result1 = b)
+
+axiom H8 : (b1 = 1)
+
+axiom H9 : (2 <= n)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall t:int. forall result:int.
-  forall a1:int. forall result1:int. forall b1:int. (in_range2(n) ->
-  ((n <= 23) -> (((0 <= 2147483647) -> in_range2(a)) ->
-  (((0 <= 2147483647) -> in_range2(b)) -> (((0 <= 2147483647) ->
-  in_range2(t)) -> (((result = a) and (a1 = 1)) -> (((result1 = b) and
-  (b1 = 1)) -> ((2 <= n) -> (0 <= 2))))))))))
+goal WP_parameter_def : (0 <= 2)

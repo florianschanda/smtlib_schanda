@@ -258,13 +258,34 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
+logic file : us_rep
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range1(to__)
+
+axiom H1 : ((result1 = is_writable(file)) and ((result1 = true) <->
+  ((is_open(file) = true) and ((mode__2(file) = 1) or (mode__2(file) = 2)))))
+
+axiom H2 : ((result1 = true) -> ((o = line_length__2(file)) and
+  in_range2(o)))
+
+axiom H3 : ((result1 = true) -> (((0 <  o) -> (result = true)) and
+  ((not (0 <  o)) -> (result = false))))
+
+axiom H4 : ((not (result1 = true)) -> (result = false))
+
+axiom H5 : (result = true)
+
  (* File "spark-text_io.ads", line 484, characters 0-0 *)
-goal WP_parameter_def :
-  (forall file:us_rep. forall o:int. forall result:bool. forall result1:bool.
-  (in_range1(to__) -> ((((result1 = is_writable(file)) and
-  ((result1 = true) <-> ((is_open(file) = true) and ((mode__2(file) = 1) or
-  (mode__2(file) = 2))))) and (((result1 = true) and
-  (((o = line_length__2(file)) and in_range2(o)) and (((0 <  o) and
-  (result = true)) or ((not (0 <  o)) and (result = false))))) or
-  ((not (result1 = true)) and (result = false)))) -> ((result = true) ->
-  (is_writable(file) = true)))))
+goal WP_parameter_def : (is_writable(file) = true)

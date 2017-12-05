@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -802,10 +802,29 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic data : t
+
+logic value : (int,unsigned_64) farray
+
+logic result : t
+
+logic data1 : t
+
+logic data2 : t
+
+logic data3 : t
+
+axiom H : in_range(field)
+
+axiom H1 : true
+
+axiom H2 : (result = data)
+
+axiom H3 : (data1 = to_rep((value[field])))
+
+axiom H4 : (data1 = data2)
+
+axiom H5 : (data3 = data1)
+
  (* File "foo.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:t. forall value:(int,unsigned_64) farray. forall result:t.
-  forall data1:t. forall data2:t. forall data3:t. (in_range(field) ->
-  ((((result = data) and (data1 = to_rep((value[field])))) and
-  ((data1 = data2) and (data3 = data1))) ->
-  (data2 = to_rep((value[field]))))))
+goal WP_parameter_def : (data2 = to_rep((value[field])))

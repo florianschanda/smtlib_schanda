@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -879,11 +879,418 @@ axiom def_axiom :
   (((aida__conversion__calculate_positive_target_length_7__n__aggregate_def(temp___1621,
   temp___1622, temp___1623)).elts2[temp___1624]) = of_rep1(temp___1621)))))
 
+logic target : int
+
+logic has_failed : bool
+
+logic n : (int,integer) farray
+
+logic index : int
+
+logic index1 : int
+
+logic us : int
+
+logic temp___1626 : (int,integer) farray
+
+logic temp___16261 : t2
+
+logic aida__conversion__calculate_positive_target_length_7__n__assume : (int,integer) farray
+
+logic aida__conversion__calculate_positive_target_length_7__n__assume1 : t1
+
+logic us1 : int
+
+logic temp___1633 : int
+
+logic temp___1631 : int
+
+logic temp___1629 : (int,integer) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : (int,integer) farray
+
+logic j : int
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : integer
+
+logic o15 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target1 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : integer
+
+logic o20 : int
+
+logic o21 : (int,integer) farray
+
+logic temp___1634 : int
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : int
+
+logic temp___1635 : int
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic temp___1636 : int
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic temp___1637 : int
+
+logic o39 : int
+
+logic o40 : integer
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic temp___1638 : int
+
+logic o46 : int
+
+logic o47 : integer
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic temp___1639 : int
+
+logic o53 : int
+
+logic o54 : integer
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic temp___1640 : int
+
+logic o60 : int
+
+logic o61 : integer
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic temp___1641 : int
+
+logic o67 : int
+
+logic o68 : character
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic temp___1642 : int
+
+logic o72 : int
+
+logic o73 : character
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : int
+
+logic temp___1643 : int
+
+logic o80 : int
+
+logic o81 : character
+
+logic o82 : int
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic temp___1644 : int
+
+logic o88 : int
+
+logic o89 : character
+
+logic o90 : int
+
+logic o91 : int
+
+logic o92 : int
+
+logic o93 : int
+
+logic o94 : int
+
+logic o95 : int
+
+logic temp___1645 : int
+
+logic o96 : int
+
+logic o97 : character
+
+logic o98 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic temp___1646 : int
+
+logic o104 : int
+
+logic o105 : character
+
+logic o106 : int
+
+logic o107 : int
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : int
+
+logic temp___1647 : int
+
+logic o112 : int
+
+logic o113 : character
+
+logic o114 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic o117 : int
+
+logic o118 : int
+
+logic o119 : int
+
+logic o120 : int
+
+logic result : (int,integer) farray
+
+logic n1 : (int,integer) farray
+
+logic result1 : int
+
+logic index2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target2 : int
+
+logic result2 : (int,integer) farray
+
+logic n2 : (int,integer) farray
+
+logic n3 : (int,integer) farray
+
+logic index3 : int
+
+logic result3 : int
+
+logic index4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__2__target3 : int
+
+logic result4 : (int,integer) farray
+
+logic n4 : (int,integer) farray
+
+logic n5 : (int,integer) farray
+
+logic index5 : int
+
+logic n6 : (int,integer) farray
+
+logic index6 : int
+
+logic n7 : (int,integer) farray
+
+logic index7 : int
+
+logic n8 : (int,integer) farray
+
+logic index8 : int
+
+logic n9 : (int,integer) farray
+
+logic index9 : int
+
+logic n10 : (int,integer) farray
+
+logic index10 : int
+
+logic result5 : int
+
+logic target1 : int
+
+logic result6 : int
+
+logic target2 : int
+
+logic result7 : int
+
+logic target3 : int
+
+logic result8 : int
+
+logic target4 : int
+
+logic result9 : int
+
+logic target5 : int
+
+logic result10 : int
+
+logic target6 : int
+
+logic result11 : int
+
+logic target7 : int
+
+logic result12 : bool
+
+logic has_failed1 : bool
+
+logic target8 : int
+
+logic has_failed2 : bool
+
+logic n11 : (int,integer) farray
+
+logic index11 : int
+
+logic target9 : int
+
+logic has_failed3 : bool
+
+logic n12 : (int,integer) farray
+
+logic index12 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(target))
+
+axiom H2 : (to_rep1(first(source1)) <= index1)
+
+axiom H3 : (index1 <= to_rep1(last(source1)))
+
  (* File "aida-conversion.adb", line 805, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target:int. forall index:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(target)) ->
-  (((to_rep1(first(source1)) <= index) and
-  (index <= to_rep1(last(source1)))) ->
-  (to_rep1(first(source1)) <= index)))))
+goal WP_parameter_def : (to_rep1(first(source1)) <= index1)

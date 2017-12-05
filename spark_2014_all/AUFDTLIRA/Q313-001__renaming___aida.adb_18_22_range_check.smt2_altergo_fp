@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -485,15 +485,37 @@ logic c5b : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall from:int. forall code:int. forall result:int. forall from1:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(value1)),
-  to_rep1(last(value1))) -> ((dynamic_property2(1, length({ elts = value;
-  rt = value1 }), to_rep1(result____first), to_rep1(result____last)) and
+logic from : int
+
+logic code : int
+
+logic us : int
+
+logic aida__to_lowercase__L_1__C5b__assume : int
+
+logic result : int
+
+logic from1 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(value1)),
+  to_rep1(last(value1)))
+
+axiom H1 : (dynamic_property2(1, length({ elts = value; rt = value1 }),
+  to_rep1(result____first), to_rep1(result____last)) and
   ((to_rep1(result____first) = 1) and (to_rep1(result____last) = length({
-  elts = value; rt = value1 })))) -> (((result = from) and
-  (from1 = to_rep1(first(value1)))) -> (in_range(from1) ->
-  ((((-2147483648) <= 2147483647) -> in_range(code)) ->
-  ((from1 <= to_rep1(last(value1))) -> ((from1 <= to_rep1(last(value1))) ->
-  in_range1(from1)))))))))
+  elts = value; rt = value1 }))))
+
+axiom H2 : (result = from)
+
+axiom H3 : (from1 = to_rep1(first(value1)))
+
+axiom H4 : in_range(from1)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(code))
+
+axiom H6 : (from1 <= to_rep1(last(value1)))
+
+axiom H7 : (from1 <= to_rep1(last(value1)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range1(from1)

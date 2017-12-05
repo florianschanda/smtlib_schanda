@@ -66,6 +66,7 @@
 (declare-fun add (us_rep us_rep) us_rep)
 (declare-fun add__function_guard (us_rep us_rep us_rep) Bool)
 (declare-const use_simple_private_type__add__result us_rep)
+(declare-const o us_rep)
 (declare-const use_simple_private_type__add__result1 us_rep)
 (declare-const result Bool)
 (declare-const use_simple_private_type__add__result2 us_rep)

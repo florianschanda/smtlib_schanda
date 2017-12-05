@@ -118,7 +118,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq2 : int, int -> bool
 
@@ -418,48 +418,111 @@ function record_with_arrays__ref___projection(a: record_with_arrays__ref) : us_r
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "arrays_in_records.adb", line 44, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a__split_fields:index. forall a__split_fields1:(int,value) farray.
-  forall a__split_fields2:(int,value) farray. forall o:index.
-  forall o1:index. forall o2:(int,value) farray.
-  forall o3:(int,value) farray. forall temp___202:index.
-  forall temp___2021:(int,value) farray.
-  forall temp___2022:(int,value) farray. forall o4:value.
-  forall o5:(int,value) farray. forall o6:index.
-  forall o7:(int,value) farray. forall o8:(int,value) farray.
-  forall temp___205:index. forall temp___2051:(int,value) farray.
-  forall temp___2052:(int,value) farray. forall o9:value.
-  forall o10:(int,value) farray. forall o11:index.
-  forall o12:(int,value) farray. forall o13:(int,value) farray.
-  forall temp___208:index. forall temp___2081:(int,value) farray.
-  forall temp___2082:(int,value) farray. forall result:index.
-  forall result1:(int,value) farray. forall result2:(int,value) farray.
-  forall a__split_fields3:index. forall a__split_fields4:(int,value) farray.
-  forall a__split_fields5:(int,value) farray. forall result3:index.
-  forall result4:(int,value) farray. forall result5:(int,value) farray.
-  forall a__split_fields6:index. forall a__split_fields7:(int,value) farray.
-  forall a__split_fields8:(int,value) farray. forall result6:index.
-  forall result7:(int,value) farray. forall result8:(int,value) farray.
-  forall a__split_fields9:index. forall a__split_fields10:(int,value) farray.
-  forall a__split_fields11:(int,value) farray.
-  forall a__split_fields12:index.
-  forall a__split_fields13:(int,value) farray.
-  forall a__split_fields14:(int,value) farray.
-  forall a__split_fields15:index.
-  forall a__split_fields16:(int,value) farray.
-  forall a__split_fields17:(int,value) farray. (((((((to_rep(o) = 100) and
-  ((o = o1) and ((a__split_fields1 = o2) and (a__split_fields2 = o3)))) and
+logic a__split_fields : index
+
+logic a__split_fields1 : (int,value) farray
+
+logic a__split_fields2 : (int,value) farray
+
+logic o : index
+
+logic o1 : index
+
+logic o2 : (int,value) farray
+
+logic o3 : (int,value) farray
+
+logic temp___202 : index
+
+logic temp___2021 : (int,value) farray
+
+logic temp___2022 : (int,value) farray
+
+logic o4 : value
+
+logic o5 : (int,value) farray
+
+logic o6 : index
+
+logic o7 : (int,value) farray
+
+logic o8 : (int,value) farray
+
+logic temp___205 : index
+
+logic temp___2051 : (int,value) farray
+
+logic temp___2052 : (int,value) farray
+
+logic o9 : value
+
+logic o10 : (int,value) farray
+
+logic o11 : index
+
+logic o12 : (int,value) farray
+
+logic o13 : (int,value) farray
+
+logic temp___208 : index
+
+logic temp___2081 : (int,value) farray
+
+logic temp___2082 : (int,value) farray
+
+logic result : index
+
+logic result1 : (int,value) farray
+
+logic result2 : (int,value) farray
+
+logic a__split_fields3 : index
+
+logic a__split_fields4 : (int,value) farray
+
+logic a__split_fields5 : (int,value) farray
+
+logic result3 : index
+
+logic result4 : (int,value) farray
+
+logic result5 : (int,value) farray
+
+logic a__split_fields6 : index
+
+logic a__split_fields7 : (int,value) farray
+
+logic a__split_fields8 : (int,value) farray
+
+logic result6 : index
+
+logic result7 : (int,value) farray
+
+logic result8 : (int,value) farray
+
+logic a__split_fields9 : index
+
+logic a__split_fields10 : (int,value) farray
+
+logic a__split_fields11 : (int,value) farray
+
+logic a__split_fields12 : index
+
+logic a__split_fields13 : (int,value) farray
+
+logic a__split_fields14 : (int,value) farray
+
+logic a__split_fields15 : index
+
+logic a__split_fields16 : (int,value) farray
+
+logic a__split_fields17 : (int,value) farray
+
+axiom H : ((((((to_rep(o) = 100) and ((o = o1) and
+  ((a__split_fields1 = o2) and (a__split_fields2 = o3)))) and
   ((temp___202 = o1) and ((temp___2021 = o2) and (temp___2022 = o3)))) and
-  (({ us_split_fields__content = {
-  rec__arrays_in_records__record_with_arrays__counter = result;
-  rec__arrays_in_records__record_with_arrays__first_array = result1;
-  rec__arrays_in_records__record_with_arrays__second_array = result2 } } = {
-  us_split_fields__content = {
-  rec__arrays_in_records__record_with_arrays__counter = a__split_fields;
-  rec__arrays_in_records__record_with_arrays__first_array = a__split_fields1;
-  rec__arrays_in_records__record_with_arrays__second_array = a__split_fields2
-  } }) and ((temp___202 = a__split_fields3) and
+  (((result = a__split_fields) and ((result1 = a__split_fields1) and
+  (result2 = a__split_fields2))) and ((temp___202 = a__split_fields3) and
   ((temp___2021 = a__split_fields4) and
   (temp___2022 = a__split_fields5))))) and ((((((to_rep1(o4) = 42) and
   (o5 = (a__split_fields4[17 <- o4]))) and ((a__split_fields3 = o6) and
@@ -479,14 +542,10 @@ goal WP_parameter_def :
   (to_rep1((a__split_fields11[101])) = 23)))) and
   (((a__split_fields12 = a__split_fields9) and
   ((a__split_fields13 = a__split_fields10) and
-  (a__split_fields14 = a__split_fields11))) and ({
-  rec__arrays_in_records__record_with_arrays__counter = a__split_fields15;
-  rec__arrays_in_records__record_with_arrays__first_array =
-  a__split_fields16;
-  rec__arrays_in_records__record_with_arrays__second_array =
-  a__split_fields17 } = {
-  rec__arrays_in_records__record_with_arrays__counter = a__split_fields9;
-  rec__arrays_in_records__record_with_arrays__first_array =
-  a__split_fields10;
-  rec__arrays_in_records__record_with_arrays__second_array =
-  a__split_fields11 }))) -> (to_rep1((a__split_fields13[17])) = 23)))
+  (a__split_fields14 = a__split_fields11))) and
+  ((a__split_fields15 = a__split_fields9) and
+  ((a__split_fields16 = a__split_fields10) and
+  (a__split_fields17 = a__split_fields11)))))
+
+ (* File "arrays_in_records.adb", line 44, characters 0-0 *)
+goal WP_parameter_def : (to_rep1((a__split_fields13[17])) = 23)

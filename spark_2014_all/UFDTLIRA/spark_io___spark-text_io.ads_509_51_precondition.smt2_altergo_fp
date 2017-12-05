@@ -369,8 +369,16 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
+logic file : us_rep
+
+logic o : bool
+
+logic result : bool
+
+axiom H : ((result = is_readable(file)) and ((result = true) <->
+  ((is_open(file) = true) and (mode__2(file) = 0))))
+
+axiom H1 : (result = true)
+
  (* File "spark-text_io.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall file:us_rep. forall result:bool. (((result = is_readable(file)) and
-  ((result = true) <-> ((is_open(file) = true) and (mode__2(file) = 0)))) ->
-  ((result = true) -> (is_readable(file) = true))))
+goal WP_parameter_def : (is_readable(file) = true)

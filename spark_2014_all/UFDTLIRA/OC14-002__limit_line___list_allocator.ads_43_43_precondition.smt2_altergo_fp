@@ -307,10 +307,26 @@ axiom oeq__post_axiom :
 
 axiom oeq__post__dispatch_axiom : true
 
+logic j : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : bool
+
+axiom H : in_range1(r)
+
+axiom H1 : ((o = length(s)) and in_range2(o))
+
+axiom H2 : (((j <= o) -> (o1 = true)) and ((not (j <= o)) -> (o1 = false)))
+
+axiom H3 : (((1 <= j) -> (result = o1)) and ((not (1 <= j)) ->
+  (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "list_allocator.ads", line 42, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall o:int. forall o1:bool. forall result:bool.
-  (in_range1(r) -> (((((o = length(s)) and in_range2(o)) and (((j <= o) and
-  (o1 = true)) or ((not (j <= o)) and (o1 = false)))) and (((1 <= j) and
-  (result = o1)) or ((not (1 <= j)) and (result = false)))) ->
-  ((result = true) -> (1 <= j)))))
+goal WP_parameter_def : (1 <= j)

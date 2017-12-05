@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,17 +245,90 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom fst__def_axiom : (fst = 51)
 
+logic j : int
+
+logic i : int
+
+logic lst : int
+
+logic c : int
+
+logic init_in_loop__B_2__fst__assume : int
+
+logic o : int
+
+logic o1 : int
+
+logic init_in_loop__B_2__fst__assume1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic lst1 : int
+
+logic j2 : int
+
+logic i2 : int
+
+logic lst2 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : int
+
+logic lst3 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 1)
+
+axiom H2 : in_range2(j1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 100)
+
+axiom H7 : ((of_int(0) = true) -> (init_in_loop__B_2__fst__assume = 0))
+
+axiom H8 : ((not (of_int(0) = true)) ->
+  (init_in_loop__B_2__fst__assume = 51))
+
+axiom H9 : (init_in_loop__B_2__fst__assume = fst)
+
+axiom H10 : in_range2(fst)
+
+axiom H11 : ((1 <  i1) -> (o = 100))
+
+axiom H12 : ((not (1 <  i1)) -> (o = 50))
+
+axiom H13 : (result2 = lst)
+
+axiom H14 : (lst1 = o)
+
+axiom H15 : in_range2(lst1)
+
+axiom H16 : ((first <= last(lst1)) -> dynamic_property(first, last(lst1), c))
+
+axiom H17 : (fst <= lst1)
+
  (* File "init_in_loop.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall j:int. forall i:int. forall lst:int. forall c:int.
-  forall init_in_loop__B_2__fst__assume:int. forall o:int. forall result:int.
-  forall j1:int. forall result1:int. forall i1:int. forall result2:int.
-  forall lst1:int. (((result = j) and (j1 = 1)) -> (in_range2(j1) ->
-  (((result1 = i) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 100)) ->
-  ((((((of_int(0) = true) and (init_in_loop__B_2__fst__assume = 0)) or
-  ((not (of_int(0) = true)) and (init_in_loop__B_2__fst__assume = 51))) and
-  (init_in_loop__B_2__fst__assume = fst)) and in_range2(fst)) ->
-  ((((((1 <  i1) and (o = 100)) or ((not (1 <  i1)) and (o = 50))) and
-  ((result2 = lst) and (lst1 = o))) and in_range2(lst1)) ->
-  (((first <= last(lst1)) -> dynamic_property(first, last(lst1), c)) ->
-  ((fst <= lst1) -> (i1 = j1))))))))))
+goal WP_parameter_def : (i1 = j1)

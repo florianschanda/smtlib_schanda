@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -809,13 +809,13 @@ function us_split_fields_MaxFAR__projection(a: us_split_fields) : fart =
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
-function us_split_fields__ref___12__projection(a: us_split_fields__ref) : us_split_fields =
+function us_split_fields__ref___14__projection(a: us_split_fields__ref) : us_split_fields =
   (a).us_split_fields__content
 
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___13__projection(a: us_rep) : us_split_fields =
+function us_rep___15__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq14 : us_rep, us_rep -> bool
@@ -1145,13 +1145,13 @@ function us_split_fields_Data__2__projection(a: us_split_fields2) : us_rep =
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
-function us_split_fields__ref___13__projection(a: us_split_fields__ref1) : us_split_fields2 =
+function us_split_fields__ref___15__projection(a: us_split_fields__ref1) : us_split_fields2 =
   (a).us_split_fields__content1
 
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___14__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___16__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic bool_eq15 : us_rep1, us_rep1 -> bool
@@ -1384,13 +1384,13 @@ function us_split_fields_Y__projection(a: us_split_fields4) : screenycoordt =
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
-function us_split_fields__ref___10__projection(a: us_split_fields__ref2) : us_split_fields4 =
+function us_split_fields__ref___12__projection(a: us_split_fields__ref2) : us_split_fields4 =
   (a).us_split_fields__content2
 
 type us_rep2 = { us_split_fields5 : us_split_fields4
 }
 
-function us_rep___11__projection(a: us_rep2) : us_split_fields4 =
+function us_rep___13__projection(a: us_rep2) : us_split_fields4 =
   (a).us_split_fields5
 
 logic bool_eq18 : us_rep2, us_rep2 -> bool
@@ -1668,17 +1668,23 @@ logic row7 : int
 
 logic attr__ATTRIBUTE_ADDRESS25 : int
 
+logic secondsstring : int -> (int,character) farray
+
+logic secondsstring__function_guard : (int,character) farray, int -> prop
+
+axiom secondsstring__post_axiom : true
+
 logic c111b : int
 
 logic attr__ATTRIBUTE_ADDRESS26 : int
 
 logic attr__ATTRIBUTE_ADDRESS27 : int
 
+logic data__first : integer
+
+logic data__last : integer
+
 logic attr__ATTRIBUTE_ADDRESS28 : int
-
-logic valuestr__first : integer
-
-logic valuestr__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS29 : int
 
@@ -1701,11 +1707,11 @@ logic user_eq21 : integer, integer -> bool
 
 logic dummy48 : integer
 
-type t116b__ref = { t116b__content : integer
+type t117b__ref = { t117b__content : integer
 }
 
-function t116b__ref___projection(a: t116b__ref) : integer =
-  (a).t116b__content
+function t117b__ref___projection(a: t117b__ref) : integer =
+  (a).t117b__content
 
 type t1
 
@@ -1780,10 +1786,42 @@ logic dummy49 : (int,character) farray
 
 logic dummy50 : t1
 
-type t117b__ref = { t117b__content : us_t1
+type t118b__ref = { t118b__content : us_t1
 }
 
-function t117b__ref___projection(a: t117b__ref) : us_t1 = (a).t117b__content
+function t118b__ref___projection(a: t118b__ref) : us_t1 = (a).t118b__content
+
+logic c119b : int
+
+logic attr__ATTRIBUTE_ADDRESS30 : int
+
+logic attr__ATTRIBUTE_ADDRESS31 : int
+
+logic c125b : int
+
+logic attr__ATTRIBUTE_ADDRESS32 : int
+
+logic attr__ATTRIBUTE_ADDRESS33 : int
+
+logic c131b : int
+
+logic attr__ATTRIBUTE_ADDRESS34 : int
+
+logic attr__ATTRIBUTE_ADDRESS35 : int
+
+logic c137b : int
+
+logic attr__ATTRIBUTE_ADDRESS36 : int
+
+logic attr__ATTRIBUTE_ADDRESS37 : int
+
+logic data__first1 : integer
+
+logic data__last1 : integer
+
+logic attr__ATTRIBUTE_ADDRESS38 : int
+
+logic attr__ATTRIBUTE_ADDRESS39 : int
 
 predicate dynamic_property3(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -1804,11 +1842,11 @@ logic user_eq23 : integer, integer -> bool
 
 logic dummy51 : integer
 
-type t119b__ref = { t119b__content : integer
+type t143b__ref = { t143b__content : integer
 }
 
-function t119b__ref___projection(a: t119b__ref) : integer =
-  (a).t119b__content
+function t143b__ref___projection(a: t143b__ref) : integer =
+  (a).t143b__content
 
 type t2
 
@@ -1883,24 +1921,24 @@ logic dummy52 : (int,character) farray
 
 logic dummy53 : t2
 
-type t120b__ref = { t120b__content : us_t2
+type t144b__ref = { t144b__content : us_t2
 }
 
-function t120b__ref___projection(a: t120b__ref) : us_t2 = (a).t120b__content
+function t144b__ref___projection(a: t144b__ref) : us_t2 = (a).t144b__content
 
-logic c121b : int
+logic c145b : int
 
-logic attr__ATTRIBUTE_ADDRESS30 : int
+logic attr__ATTRIBUTE_ADDRESS40 : int
 
-logic attr__ATTRIBUTE_ADDRESS31 : int
+logic attr__ATTRIBUTE_ADDRESS41 : int
 
-logic attr__ATTRIBUTE_ADDRESS32 : int
+logic data__first2 : integer
 
-logic valuestr__first1 : integer
+logic data__last2 : integer
 
-logic valuestr__last1 : integer
+logic attr__ATTRIBUTE_ADDRESS42 : int
 
-logic attr__ATTRIBUTE_ADDRESS33 : int
+logic attr__ATTRIBUTE_ADDRESS43 : int
 
 predicate dynamic_property5(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -1921,11 +1959,11 @@ logic user_eq25 : integer, integer -> bool
 
 logic dummy54 : integer
 
-type t126b__ref = { t126b__content : integer
+type t151b__ref = { t151b__content : integer
 }
 
-function t126b__ref___projection(a: t126b__ref) : integer =
-  (a).t126b__content
+function t151b__ref___projection(a: t151b__ref) : integer =
+  (a).t151b__content
 
 type t3
 
@@ -2000,10 +2038,24 @@ logic dummy55 : (int,character) farray
 
 logic dummy56 : t3
 
-type t127b__ref = { t127b__content : us_t3
+type t152b__ref = { t152b__content : us_t3
 }
 
-function t127b__ref___projection(a: t127b__ref) : us_t3 = (a).t127b__content
+function t152b__ref___projection(a: t152b__ref) : us_t3 = (a).t152b__content
+
+logic c153b : int
+
+logic attr__ATTRIBUTE_ADDRESS44 : int
+
+logic attr__ATTRIBUTE_ADDRESS45 : int
+
+logic data__first3 : integer
+
+logic data__last3 : integer
+
+logic attr__ATTRIBUTE_ADDRESS46 : int
+
+logic attr__ATTRIBUTE_ADDRESS47 : int
 
 predicate dynamic_property7(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2024,11 +2076,11 @@ logic user_eq27 : integer, integer -> bool
 
 logic dummy57 : integer
 
-type t129b__ref = { t129b__content : integer
+type t160b__ref = { t160b__content : integer
 }
 
-function t129b__ref___projection(a: t129b__ref) : integer =
-  (a).t129b__content
+function t160b__ref___projection(a: t160b__ref) : integer =
+  (a).t160b__content
 
 type t4
 
@@ -2103,24 +2155,10 @@ logic dummy58 : (int,character) farray
 
 logic dummy59 : t4
 
-type t130b__ref = { t130b__content : us_t4
+type t161b__ref = { t161b__content : us_t4
 }
 
-function t130b__ref___projection(a: t130b__ref) : us_t4 = (a).t130b__content
-
-logic c131b : int
-
-logic attr__ATTRIBUTE_ADDRESS34 : int
-
-logic attr__ATTRIBUTE_ADDRESS35 : int
-
-logic attr__ATTRIBUTE_ADDRESS36 : int
-
-logic valuestr__first2 : integer
-
-logic valuestr__last2 : integer
-
-logic attr__ATTRIBUTE_ADDRESS37 : int
+function t161b__ref___projection(a: t161b__ref) : us_t4 = (a).t161b__content
 
 predicate dynamic_property9(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2141,11 +2179,11 @@ logic user_eq29 : integer, integer -> bool
 
 logic dummy60 : integer
 
-type t136b__ref = { t136b__content : integer
+type t163b__ref = { t163b__content : integer
 }
 
-function t136b__ref___projection(a: t136b__ref) : integer =
-  (a).t136b__content
+function t163b__ref___projection(a: t163b__ref) : integer =
+  (a).t163b__content
 
 type t5
 
@@ -2220,10 +2258,24 @@ logic dummy61 : (int,character) farray
 
 logic dummy62 : t5
 
-type t137b__ref = { t137b__content : us_t5
+type t164b__ref = { t164b__content : us_t5
 }
 
-function t137b__ref___projection(a: t137b__ref) : us_t5 = (a).t137b__content
+function t164b__ref___projection(a: t164b__ref) : us_t5 = (a).t164b__content
+
+logic c165b : int
+
+logic attr__ATTRIBUTE_ADDRESS48 : int
+
+logic attr__ATTRIBUTE_ADDRESS49 : int
+
+logic data__first4 : integer
+
+logic data__last4 : integer
+
+logic attr__ATTRIBUTE_ADDRESS50 : int
+
+logic attr__ATTRIBUTE_ADDRESS51 : int
 
 predicate dynamic_property11(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2244,11 +2296,11 @@ logic user_eq31 : integer, integer -> bool
 
 logic dummy63 : integer
 
-type t139b__ref = { t139b__content : integer
+type t172b__ref = { t172b__content : integer
 }
 
-function t139b__ref___projection(a: t139b__ref) : integer =
-  (a).t139b__content
+function t172b__ref___projection(a: t172b__ref) : integer =
+  (a).t172b__content
 
 type t6
 
@@ -2323,24 +2375,10 @@ logic dummy64 : (int,character) farray
 
 logic dummy65 : t6
 
-type t140b__ref = { t140b__content : us_t6
+type t173b__ref = { t173b__content : us_t6
 }
 
-function t140b__ref___projection(a: t140b__ref) : us_t6 = (a).t140b__content
-
-logic c141b : int
-
-logic attr__ATTRIBUTE_ADDRESS38 : int
-
-logic attr__ATTRIBUTE_ADDRESS39 : int
-
-logic attr__ATTRIBUTE_ADDRESS40 : int
-
-logic valuestr__first3 : integer
-
-logic valuestr__last3 : integer
-
-logic attr__ATTRIBUTE_ADDRESS41 : int
+function t173b__ref___projection(a: t173b__ref) : us_t6 = (a).t173b__content
 
 predicate dynamic_property13(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2361,11 +2399,11 @@ logic user_eq33 : integer, integer -> bool
 
 logic dummy66 : integer
 
-type t146b__ref = { t146b__content : integer
+type t175b__ref = { t175b__content : integer
 }
 
-function t146b__ref___projection(a: t146b__ref) : integer =
-  (a).t146b__content
+function t175b__ref___projection(a: t175b__ref) : integer =
+  (a).t175b__content
 
 type t7
 
@@ -2440,10 +2478,24 @@ logic dummy67 : (int,character) farray
 
 logic dummy68 : t7
 
-type t147b__ref = { t147b__content : us_t7
+type t176b__ref = { t176b__content : us_t7
 }
 
-function t147b__ref___projection(a: t147b__ref) : us_t7 = (a).t147b__content
+function t176b__ref___projection(a: t176b__ref) : us_t7 = (a).t176b__content
+
+logic c177b : int
+
+logic attr__ATTRIBUTE_ADDRESS52 : int
+
+logic attr__ATTRIBUTE_ADDRESS53 : int
+
+logic data__first5 : integer
+
+logic data__last5 : integer
+
+logic attr__ATTRIBUTE_ADDRESS54 : int
+
+logic attr__ATTRIBUTE_ADDRESS55 : int
 
 predicate dynamic_property15(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2464,11 +2516,11 @@ logic user_eq35 : integer, integer -> bool
 
 logic dummy69 : integer
 
-type t149b__ref = { t149b__content : integer
+type t183b__ref = { t183b__content : integer
 }
 
-function t149b__ref___projection(a: t149b__ref) : integer =
-  (a).t149b__content
+function t183b__ref___projection(a: t183b__ref) : integer =
+  (a).t183b__content
 
 type t8
 
@@ -2543,24 +2595,10 @@ logic dummy70 : (int,character) farray
 
 logic dummy71 : t8
 
-type t150b__ref = { t150b__content : us_t8
+type t184b__ref = { t184b__content : us_t8
 }
 
-function t150b__ref___projection(a: t150b__ref) : us_t8 = (a).t150b__content
-
-logic c151b : int
-
-logic attr__ATTRIBUTE_ADDRESS42 : int
-
-logic attr__ATTRIBUTE_ADDRESS43 : int
-
-logic data__first : integer
-
-logic data__last : integer
-
-logic attr__ATTRIBUTE_ADDRESS44 : int
-
-logic attr__ATTRIBUTE_ADDRESS45 : int
+function t184b__ref___projection(a: t184b__ref) : us_t8 = (a).t184b__content
 
 predicate dynamic_property17(first_int: int, last_int: int, x: int) =
   ((first_int <= x) and (x <= last_int))
@@ -2581,11 +2619,11 @@ logic user_eq37 : integer, integer -> bool
 
 logic dummy72 : integer
 
-type t157b__ref = { t157b__content : integer
+type t186b__ref = { t186b__content : integer
 }
 
-function t157b__ref___projection(a: t157b__ref) : integer =
-  (a).t157b__content
+function t186b__ref___projection(a: t186b__ref) : integer =
+  (a).t186b__content
 
 type t9
 
@@ -2660,1038 +2698,74 @@ logic dummy73 : (int,character) farray
 
 logic dummy74 : t9
 
-type t158b__ref = { t158b__content : us_t9
+type t187b__ref = { t187b__content : us_t9
 }
 
-function t158b__ref___projection(a: t158b__ref) : us_t9 = (a).t158b__content
+function t187b__ref___projection(a: t187b__ref) : us_t9 = (a).t187b__content
 
-logic c159b : int
-
-logic attr__ATTRIBUTE_ADDRESS46 : int
-
-logic attr__ATTRIBUTE_ADDRESS47 : int
-
-logic c165b : int
-
-logic attr__ATTRIBUTE_ADDRESS48 : int
-
-logic attr__ATTRIBUTE_ADDRESS49 : int
-
-logic c171b : int
-
-logic attr__ATTRIBUTE_ADDRESS50 : int
-
-logic attr__ATTRIBUTE_ADDRESS51 : int
-
-logic c177b : int
-
-logic attr__ATTRIBUTE_ADDRESS52 : int
-
-logic attr__ATTRIBUTE_ADDRESS53 : int
-
-logic data__first1 : integer
-
-logic data__last1 : integer
-
-logic attr__ATTRIBUTE_ADDRESS54 : int
-
-logic attr__ATTRIBUTE_ADDRESS55 : int
-
-predicate dynamic_property19(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq42 : int, int -> bool
-
-axiom bool_eq_def31 :
-  (forall x:int. forall y:int [bool_eq42(x, y)]. (((x = y) -> (bool_eq42(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq42(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE27 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check27 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE27 : us_image -> int
-
-logic user_eq39 : integer, integer -> bool
-
-logic dummy75 : integer
-
-type t183b__ref = { t183b__content : integer
-}
-
-function t183b__ref___projection(a: t183b__ref) : integer =
-  (a).t183b__content
-
-type t10
-
-logic first20 : t10 -> integer
-
-logic last20 : t10 -> integer
-
-logic mk10 : int, int -> t10
-
-axiom mk_def10 :
-  (forall f:int. forall l:int [mk10(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first20(mk10(f, l))) = f) and (to_rep1(last20(mk10(f,
-  l))) = l)))))
-
-predicate dynamic_property20(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property19(range_first, range_last, low) and
-  dynamic_property19(range_first, range_last, high)))))
-
-type us_t10 = { elts10 : (int,character) farray; rt10 : t10
-}
-
-function to_array10(a: us_t10) : (int,character) farray = (a).elts10
-
-function of_array10(a: (int,character) farray, f: int, l: int) : us_t10 = {
-  elts10 = a; rt10 = mk10(f, l) }
-
-function first21(a: us_t10) : int = to_rep1(first20((a).rt10))
-
-function last21(a: us_t10) : int = to_rep1(last20((a).rt10))
-
-logic length10 : us_t10 -> int
-
-axiom length_def10 :
-  (forall a:us_t10 [length10(a)]. (((first21(a) <= last21(a)) ->
-  (length10(a) = ((last21(a) - first21(a)) + 1))) and
-  ((not (first21(a) <= last21(a))) -> (length10(a) = 0))))
-
-logic value__size13 : int
-
-logic object__size13 : (int,character) farray -> int
-
-logic value__component__size10 : int
-
-logic object__component__size10 : (int,character) farray -> int
-
-logic value__alignment13 : int
-
-logic object__alignment13 : (int,character) farray -> int
-
-axiom value__size_axiom13 : (0 <= value__size13)
-
-axiom object__size_axiom13 :
-  (forall a:(int,character) farray. (0 <= object__size13(a)))
-
-axiom value__component__size_axiom10 : (0 <= value__component__size10)
-
-axiom object__component__size_axiom10 :
-  (forall a:(int,character) farray. (0 <= object__component__size10(a)))
-
-axiom value__alignment_axiom13 : (0 <= value__alignment13)
-
-axiom object__alignment_axiom13 :
-  (forall a:(int,character) farray. (0 <= object__alignment13(a)))
-
-function bool_eq43(x: us_t10, y: us_t10) : bool = bool_eq5((x).elts10,
-  to_rep1(first20((x).rt10)), to_rep1(last20((x).rt10)), (y).elts10,
-  to_rep1(first20((y).rt10)), to_rep1(last20((y).rt10)))
-
-logic user_eq40 : us_t10, us_t10 -> bool
-
-logic dummy76 : (int,character) farray
-
-logic dummy77 : t10
-
-type t184b__ref = { t184b__content : us_t10
-}
-
-function t184b__ref___projection(a: t184b__ref) : us_t10 = (a).t184b__content
-
-logic c185b : int
-
-logic attr__ATTRIBUTE_ADDRESS56 : int
-
-logic attr__ATTRIBUTE_ADDRESS57 : int
-
-logic data__first2 : integer
-
-logic data__last2 : integer
-
-logic attr__ATTRIBUTE_ADDRESS58 : int
-
-logic attr__ATTRIBUTE_ADDRESS59 : int
-
-predicate dynamic_property21(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq44 : int, int -> bool
-
-axiom bool_eq_def32 :
-  (forall x:int. forall y:int [bool_eq44(x, y)]. (((x = y) -> (bool_eq44(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq44(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE28 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check28 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE28 : us_image -> int
-
-logic user_eq41 : integer, integer -> bool
-
-logic dummy78 : integer
-
-type t191b__ref = { t191b__content : integer
-}
-
-function t191b__ref___projection(a: t191b__ref) : integer =
-  (a).t191b__content
-
-type t11
-
-logic first22 : t11 -> integer
-
-logic last22 : t11 -> integer
-
-logic mk11 : int, int -> t11
-
-axiom mk_def11 :
-  (forall f:int. forall l:int [mk11(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first22(mk11(f, l))) = f) and (to_rep1(last22(mk11(f,
-  l))) = l)))))
-
-predicate dynamic_property22(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property21(range_first, range_last, low) and
-  dynamic_property21(range_first, range_last, high)))))
-
-type us_t11 = { elts11 : (int,character) farray; rt11 : t11
-}
-
-function to_array11(a: us_t11) : (int,character) farray = (a).elts11
-
-function of_array11(a: (int,character) farray, f: int, l: int) : us_t11 = {
-  elts11 = a; rt11 = mk11(f, l) }
-
-function first23(a: us_t11) : int = to_rep1(first22((a).rt11))
-
-function last23(a: us_t11) : int = to_rep1(last22((a).rt11))
-
-logic length11 : us_t11 -> int
-
-axiom length_def11 :
-  (forall a:us_t11 [length11(a)]. (((first23(a) <= last23(a)) ->
-  (length11(a) = ((last23(a) - first23(a)) + 1))) and
-  ((not (first23(a) <= last23(a))) -> (length11(a) = 0))))
-
-logic value__size14 : int
-
-logic object__size14 : (int,character) farray -> int
-
-logic value__component__size11 : int
-
-logic object__component__size11 : (int,character) farray -> int
-
-logic value__alignment14 : int
-
-logic object__alignment14 : (int,character) farray -> int
-
-axiom value__size_axiom14 : (0 <= value__size14)
-
-axiom object__size_axiom14 :
-  (forall a:(int,character) farray. (0 <= object__size14(a)))
-
-axiom value__component__size_axiom11 : (0 <= value__component__size11)
-
-axiom object__component__size_axiom11 :
-  (forall a:(int,character) farray. (0 <= object__component__size11(a)))
-
-axiom value__alignment_axiom14 : (0 <= value__alignment14)
-
-axiom object__alignment_axiom14 :
-  (forall a:(int,character) farray. (0 <= object__alignment14(a)))
-
-function bool_eq45(x: us_t11, y: us_t11) : bool = bool_eq5((x).elts11,
-  to_rep1(first22((x).rt11)), to_rep1(last22((x).rt11)), (y).elts11,
-  to_rep1(first22((y).rt11)), to_rep1(last22((y).rt11)))
-
-logic user_eq42 : us_t11, us_t11 -> bool
-
-logic dummy79 : (int,character) farray
-
-logic dummy80 : t11
-
-type t192b__ref = { t192b__content : us_t11
-}
-
-function t192b__ref___projection(a: t192b__ref) : us_t11 = (a).t192b__content
-
-logic c193b : int
-
-logic attr__ATTRIBUTE_ADDRESS60 : int
-
-logic attr__ATTRIBUTE_ADDRESS61 : int
-
-logic data__first3 : integer
-
-logic data__last3 : integer
-
-logic attr__ATTRIBUTE_ADDRESS62 : int
-
-logic attr__ATTRIBUTE_ADDRESS63 : int
-
-predicate dynamic_property23(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq46 : int, int -> bool
-
-axiom bool_eq_def33 :
-  (forall x:int. forall y:int [bool_eq46(x, y)]. (((x = y) -> (bool_eq46(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq46(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE29 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check29 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE29 : us_image -> int
-
-logic user_eq43 : integer, integer -> bool
-
-logic dummy81 : integer
-
-type t200b__ref = { t200b__content : integer
-}
-
-function t200b__ref___projection(a: t200b__ref) : integer =
-  (a).t200b__content
-
-type t12
-
-logic first24 : t12 -> integer
-
-logic last24 : t12 -> integer
-
-logic mk12 : int, int -> t12
-
-axiom mk_def12 :
-  (forall f:int. forall l:int [mk12(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first24(mk12(f, l))) = f) and (to_rep1(last24(mk12(f,
-  l))) = l)))))
-
-predicate dynamic_property24(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property23(range_first, range_last, low) and
-  dynamic_property23(range_first, range_last, high)))))
-
-type us_t12 = { elts12 : (int,character) farray; rt12 : t12
-}
-
-function to_array12(a: us_t12) : (int,character) farray = (a).elts12
-
-function of_array12(a: (int,character) farray, f: int, l: int) : us_t12 = {
-  elts12 = a; rt12 = mk12(f, l) }
-
-function first25(a: us_t12) : int = to_rep1(first24((a).rt12))
-
-function last25(a: us_t12) : int = to_rep1(last24((a).rt12))
-
-logic length12 : us_t12 -> int
-
-axiom length_def12 :
-  (forall a:us_t12 [length12(a)]. (((first25(a) <= last25(a)) ->
-  (length12(a) = ((last25(a) - first25(a)) + 1))) and
-  ((not (first25(a) <= last25(a))) -> (length12(a) = 0))))
-
-logic value__size15 : int
-
-logic object__size15 : (int,character) farray -> int
-
-logic value__component__size12 : int
-
-logic object__component__size12 : (int,character) farray -> int
-
-logic value__alignment15 : int
-
-logic object__alignment15 : (int,character) farray -> int
-
-axiom value__size_axiom15 : (0 <= value__size15)
-
-axiom object__size_axiom15 :
-  (forall a:(int,character) farray. (0 <= object__size15(a)))
-
-axiom value__component__size_axiom12 : (0 <= value__component__size12)
-
-axiom object__component__size_axiom12 :
-  (forall a:(int,character) farray. (0 <= object__component__size12(a)))
-
-axiom value__alignment_axiom15 : (0 <= value__alignment15)
-
-axiom object__alignment_axiom15 :
-  (forall a:(int,character) farray. (0 <= object__alignment15(a)))
-
-function bool_eq47(x: us_t12, y: us_t12) : bool = bool_eq5((x).elts12,
-  to_rep1(first24((x).rt12)), to_rep1(last24((x).rt12)), (y).elts12,
-  to_rep1(first24((y).rt12)), to_rep1(last24((y).rt12)))
-
-logic user_eq44 : us_t12, us_t12 -> bool
-
-logic dummy82 : (int,character) farray
-
-logic dummy83 : t12
-
-type t201b__ref = { t201b__content : us_t12
-}
-
-function t201b__ref___projection(a: t201b__ref) : us_t12 = (a).t201b__content
-
-predicate dynamic_property25(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq48 : int, int -> bool
-
-axiom bool_eq_def34 :
-  (forall x:int. forall y:int [bool_eq48(x, y)]. (((x = y) -> (bool_eq48(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq48(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE30 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check30 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE30 : us_image -> int
-
-logic user_eq45 : integer, integer -> bool
-
-logic dummy84 : integer
-
-type t203b__ref = { t203b__content : integer
-}
-
-function t203b__ref___projection(a: t203b__ref) : integer =
-  (a).t203b__content
-
-type t13
-
-logic first26 : t13 -> integer
-
-logic last26 : t13 -> integer
-
-logic mk13 : int, int -> t13
-
-axiom mk_def13 :
-  (forall f:int. forall l:int [mk13(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first26(mk13(f, l))) = f) and (to_rep1(last26(mk13(f,
-  l))) = l)))))
-
-predicate dynamic_property26(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property25(range_first, range_last, low) and
-  dynamic_property25(range_first, range_last, high)))))
-
-type us_t13 = { elts13 : (int,character) farray; rt13 : t13
-}
-
-function to_array13(a: us_t13) : (int,character) farray = (a).elts13
-
-function of_array13(a: (int,character) farray, f: int, l: int) : us_t13 = {
-  elts13 = a; rt13 = mk13(f, l) }
-
-function first27(a: us_t13) : int = to_rep1(first26((a).rt13))
-
-function last27(a: us_t13) : int = to_rep1(last26((a).rt13))
-
-logic length13 : us_t13 -> int
-
-axiom length_def13 :
-  (forall a:us_t13 [length13(a)]. (((first27(a) <= last27(a)) ->
-  (length13(a) = ((last27(a) - first27(a)) + 1))) and
-  ((not (first27(a) <= last27(a))) -> (length13(a) = 0))))
-
-logic value__size16 : int
-
-logic object__size16 : (int,character) farray -> int
-
-logic value__component__size13 : int
-
-logic object__component__size13 : (int,character) farray -> int
-
-logic value__alignment16 : int
-
-logic object__alignment16 : (int,character) farray -> int
-
-axiom value__size_axiom16 : (0 <= value__size16)
-
-axiom object__size_axiom16 :
-  (forall a:(int,character) farray. (0 <= object__size16(a)))
-
-axiom value__component__size_axiom13 : (0 <= value__component__size13)
-
-axiom object__component__size_axiom13 :
-  (forall a:(int,character) farray. (0 <= object__component__size13(a)))
-
-axiom value__alignment_axiom16 : (0 <= value__alignment16)
-
-axiom object__alignment_axiom16 :
-  (forall a:(int,character) farray. (0 <= object__alignment16(a)))
-
-function bool_eq49(x: us_t13, y: us_t13) : bool = bool_eq5((x).elts13,
-  to_rep1(first26((x).rt13)), to_rep1(last26((x).rt13)), (y).elts13,
-  to_rep1(first26((y).rt13)), to_rep1(last26((y).rt13)))
-
-logic user_eq46 : us_t13, us_t13 -> bool
-
-logic dummy85 : (int,character) farray
-
-logic dummy86 : t13
-
-type t204b__ref = { t204b__content : us_t13
-}
-
-function t204b__ref___projection(a: t204b__ref) : us_t13 = (a).t204b__content
-
-logic c205b : int
-
-logic attr__ATTRIBUTE_ADDRESS64 : int
-
-logic attr__ATTRIBUTE_ADDRESS65 : int
-
-logic data__first4 : integer
-
-logic data__last4 : integer
-
-logic attr__ATTRIBUTE_ADDRESS66 : int
-
-logic attr__ATTRIBUTE_ADDRESS67 : int
-
-predicate dynamic_property27(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq50 : int, int -> bool
-
-axiom bool_eq_def35 :
-  (forall x:int. forall y:int [bool_eq50(x, y)]. (((x = y) -> (bool_eq50(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq50(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE31 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check31 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE31 : us_image -> int
-
-logic user_eq47 : integer, integer -> bool
-
-logic dummy87 : integer
-
-type t212b__ref = { t212b__content : integer
-}
-
-function t212b__ref___projection(a: t212b__ref) : integer =
-  (a).t212b__content
-
-type t14
-
-logic first28 : t14 -> integer
-
-logic last28 : t14 -> integer
-
-logic mk14 : int, int -> t14
-
-axiom mk_def14 :
-  (forall f:int. forall l:int [mk14(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first28(mk14(f, l))) = f) and (to_rep1(last28(mk14(f,
-  l))) = l)))))
-
-predicate dynamic_property28(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property27(range_first, range_last, low) and
-  dynamic_property27(range_first, range_last, high)))))
-
-type us_t14 = { elts14 : (int,character) farray; rt14 : t14
-}
-
-function to_array14(a: us_t14) : (int,character) farray = (a).elts14
-
-function of_array14(a: (int,character) farray, f: int, l: int) : us_t14 = {
-  elts14 = a; rt14 = mk14(f, l) }
-
-function first29(a: us_t14) : int = to_rep1(first28((a).rt14))
-
-function last29(a: us_t14) : int = to_rep1(last28((a).rt14))
-
-logic length14 : us_t14 -> int
-
-axiom length_def14 :
-  (forall a:us_t14 [length14(a)]. (((first29(a) <= last29(a)) ->
-  (length14(a) = ((last29(a) - first29(a)) + 1))) and
-  ((not (first29(a) <= last29(a))) -> (length14(a) = 0))))
-
-logic value__size17 : int
-
-logic object__size17 : (int,character) farray -> int
-
-logic value__component__size14 : int
-
-logic object__component__size14 : (int,character) farray -> int
-
-logic value__alignment17 : int
-
-logic object__alignment17 : (int,character) farray -> int
-
-axiom value__size_axiom17 : (0 <= value__size17)
-
-axiom object__size_axiom17 :
-  (forall a:(int,character) farray. (0 <= object__size17(a)))
-
-axiom value__component__size_axiom14 : (0 <= value__component__size14)
-
-axiom object__component__size_axiom14 :
-  (forall a:(int,character) farray. (0 <= object__component__size14(a)))
-
-axiom value__alignment_axiom17 : (0 <= value__alignment17)
-
-axiom object__alignment_axiom17 :
-  (forall a:(int,character) farray. (0 <= object__alignment17(a)))
-
-function bool_eq51(x: us_t14, y: us_t14) : bool = bool_eq5((x).elts14,
-  to_rep1(first28((x).rt14)), to_rep1(last28((x).rt14)), (y).elts14,
-  to_rep1(first28((y).rt14)), to_rep1(last28((y).rt14)))
-
-logic user_eq48 : us_t14, us_t14 -> bool
-
-logic dummy88 : (int,character) farray
-
-logic dummy89 : t14
-
-type t213b__ref = { t213b__content : us_t14
-}
-
-function t213b__ref___projection(a: t213b__ref) : us_t14 = (a).t213b__content
-
-predicate dynamic_property29(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq52 : int, int -> bool
-
-axiom bool_eq_def36 :
-  (forall x:int. forall y:int [bool_eq52(x, y)]. (((x = y) -> (bool_eq52(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq52(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE32 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check32 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE32 : us_image -> int
-
-logic user_eq49 : integer, integer -> bool
-
-logic dummy90 : integer
-
-type t215b__ref = { t215b__content : integer
-}
-
-function t215b__ref___projection(a: t215b__ref) : integer =
-  (a).t215b__content
-
-type t15
-
-logic first30 : t15 -> integer
-
-logic last30 : t15 -> integer
-
-logic mk15 : int, int -> t15
-
-axiom mk_def15 :
-  (forall f:int. forall l:int [mk15(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first30(mk15(f, l))) = f) and (to_rep1(last30(mk15(f,
-  l))) = l)))))
-
-predicate dynamic_property30(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property29(range_first, range_last, low) and
-  dynamic_property29(range_first, range_last, high)))))
-
-type us_t15 = { elts15 : (int,character) farray; rt15 : t15
-}
-
-function to_array15(a: us_t15) : (int,character) farray = (a).elts15
-
-function of_array15(a: (int,character) farray, f: int, l: int) : us_t15 = {
-  elts15 = a; rt15 = mk15(f, l) }
-
-function first31(a: us_t15) : int = to_rep1(first30((a).rt15))
-
-function last31(a: us_t15) : int = to_rep1(last30((a).rt15))
-
-logic length15 : us_t15 -> int
-
-axiom length_def15 :
-  (forall a:us_t15 [length15(a)]. (((first31(a) <= last31(a)) ->
-  (length15(a) = ((last31(a) - first31(a)) + 1))) and
-  ((not (first31(a) <= last31(a))) -> (length15(a) = 0))))
-
-logic value__size18 : int
-
-logic object__size18 : (int,character) farray -> int
-
-logic value__component__size15 : int
-
-logic object__component__size15 : (int,character) farray -> int
-
-logic value__alignment18 : int
-
-logic object__alignment18 : (int,character) farray -> int
-
-axiom value__size_axiom18 : (0 <= value__size18)
-
-axiom object__size_axiom18 :
-  (forall a:(int,character) farray. (0 <= object__size18(a)))
-
-axiom value__component__size_axiom15 : (0 <= value__component__size15)
-
-axiom object__component__size_axiom15 :
-  (forall a:(int,character) farray. (0 <= object__component__size15(a)))
-
-axiom value__alignment_axiom18 : (0 <= value__alignment18)
-
-axiom object__alignment_axiom18 :
-  (forall a:(int,character) farray. (0 <= object__alignment18(a)))
-
-function bool_eq53(x: us_t15, y: us_t15) : bool = bool_eq5((x).elts15,
-  to_rep1(first30((x).rt15)), to_rep1(last30((x).rt15)), (y).elts15,
-  to_rep1(first30((y).rt15)), to_rep1(last30((y).rt15)))
-
-logic user_eq50 : us_t15, us_t15 -> bool
-
-logic dummy91 : (int,character) farray
-
-logic dummy92 : t15
-
-type t216b__ref = { t216b__content : us_t15
-}
-
-function t216b__ref___projection(a: t216b__ref) : us_t15 = (a).t216b__content
-
-logic c217b : int
-
-logic attr__ATTRIBUTE_ADDRESS68 : int
-
-logic attr__ATTRIBUTE_ADDRESS69 : int
-
-logic data__first5 : integer
-
-logic data__last5 : integer
-
-logic attr__ATTRIBUTE_ADDRESS70 : int
-
-logic attr__ATTRIBUTE_ADDRESS71 : int
-
-predicate dynamic_property31(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq54 : int, int -> bool
-
-axiom bool_eq_def37 :
-  (forall x:int. forall y:int [bool_eq54(x, y)]. (((x = y) -> (bool_eq54(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq54(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE33 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check33 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE33 : us_image -> int
-
-logic user_eq51 : integer, integer -> bool
-
-logic dummy93 : integer
-
-type t223b__ref = { t223b__content : integer
-}
-
-function t223b__ref___projection(a: t223b__ref) : integer =
-  (a).t223b__content
-
-type t16
-
-logic first32 : t16 -> integer
-
-logic last32 : t16 -> integer
-
-logic mk16 : int, int -> t16
-
-axiom mk_def16 :
-  (forall f:int. forall l:int [mk16(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first32(mk16(f, l))) = f) and (to_rep1(last32(mk16(f,
-  l))) = l)))))
-
-predicate dynamic_property32(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property31(range_first, range_last, low) and
-  dynamic_property31(range_first, range_last, high)))))
-
-type us_t16 = { elts16 : (int,character) farray; rt16 : t16
-}
-
-function to_array16(a: us_t16) : (int,character) farray = (a).elts16
-
-function of_array16(a: (int,character) farray, f: int, l: int) : us_t16 = {
-  elts16 = a; rt16 = mk16(f, l) }
-
-function first33(a: us_t16) : int = to_rep1(first32((a).rt16))
-
-function last33(a: us_t16) : int = to_rep1(last32((a).rt16))
-
-logic length16 : us_t16 -> int
-
-axiom length_def16 :
-  (forall a:us_t16 [length16(a)]. (((first33(a) <= last33(a)) ->
-  (length16(a) = ((last33(a) - first33(a)) + 1))) and
-  ((not (first33(a) <= last33(a))) -> (length16(a) = 0))))
-
-logic value__size19 : int
-
-logic object__size19 : (int,character) farray -> int
-
-logic value__component__size16 : int
-
-logic object__component__size16 : (int,character) farray -> int
-
-logic value__alignment19 : int
-
-logic object__alignment19 : (int,character) farray -> int
-
-axiom value__size_axiom19 : (0 <= value__size19)
-
-axiom object__size_axiom19 :
-  (forall a:(int,character) farray. (0 <= object__size19(a)))
-
-axiom value__component__size_axiom16 : (0 <= value__component__size16)
-
-axiom object__component__size_axiom16 :
-  (forall a:(int,character) farray. (0 <= object__component__size16(a)))
-
-axiom value__alignment_axiom19 : (0 <= value__alignment19)
-
-axiom object__alignment_axiom19 :
-  (forall a:(int,character) farray. (0 <= object__alignment19(a)))
-
-function bool_eq55(x: us_t16, y: us_t16) : bool = bool_eq5((x).elts16,
-  to_rep1(first32((x).rt16)), to_rep1(last32((x).rt16)), (y).elts16,
-  to_rep1(first32((y).rt16)), to_rep1(last32((y).rt16)))
-
-logic user_eq52 : us_t16, us_t16 -> bool
-
-logic dummy94 : (int,character) farray
-
-logic dummy95 : t16
-
-type t224b__ref = { t224b__content : us_t16
-}
-
-function t224b__ref___projection(a: t224b__ref) : us_t16 = (a).t224b__content
-
-predicate dynamic_property33(first_int: int, last_int: int, x: int) =
-  ((first_int <= x) and (x <= last_int))
-
-logic bool_eq56 : int, int -> bool
-
-axiom bool_eq_def38 :
-  (forall x:int. forall y:int [bool_eq56(x, y)]. (((x = y) -> (bool_eq56(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq56(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE34 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check34 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE34 : us_image -> int
-
-logic user_eq53 : integer, integer -> bool
-
-logic dummy96 : integer
-
-type t226b__ref = { t226b__content : integer
-}
-
-function t226b__ref___projection(a: t226b__ref) : integer =
-  (a).t226b__content
-
-type t17
-
-logic first34 : t17 -> integer
-
-logic last34 : t17 -> integer
-
-logic mk17 : int, int -> t17
-
-axiom mk_def17 :
-  (forall f:int. forall l:int [mk17(f, l)]. (in_range1(f) -> (in_range1(l) ->
-  ((to_rep1(first34(mk17(f, l))) = f) and (to_rep1(last34(mk17(f,
-  l))) = l)))))
-
-predicate dynamic_property34(range_first: int, range_last: int, low: int,
-  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
-  (dynamic_property33(range_first, range_last, low) and
-  dynamic_property33(range_first, range_last, high)))))
-
-type us_t17 = { elts17 : (int,character) farray; rt17 : t17
-}
-
-function to_array17(a: us_t17) : (int,character) farray = (a).elts17
-
-function of_array17(a: (int,character) farray, f: int, l: int) : us_t17 = {
-  elts17 = a; rt17 = mk17(f, l) }
-
-function first35(a: us_t17) : int = to_rep1(first34((a).rt17))
-
-function last35(a: us_t17) : int = to_rep1(last34((a).rt17))
-
-logic length17 : us_t17 -> int
-
-axiom length_def17 :
-  (forall a:us_t17 [length17(a)]. (((first35(a) <= last35(a)) ->
-  (length17(a) = ((last35(a) - first35(a)) + 1))) and
-  ((not (first35(a) <= last35(a))) -> (length17(a) = 0))))
-
-logic value__size20 : int
-
-logic object__size20 : (int,character) farray -> int
-
-logic value__component__size17 : int
-
-logic object__component__size17 : (int,character) farray -> int
-
-logic value__alignment20 : int
-
-logic object__alignment20 : (int,character) farray -> int
-
-axiom value__size_axiom20 : (0 <= value__size20)
-
-axiom object__size_axiom20 :
-  (forall a:(int,character) farray. (0 <= object__size20(a)))
-
-axiom value__component__size_axiom17 : (0 <= value__component__size17)
-
-axiom object__component__size_axiom17 :
-  (forall a:(int,character) farray. (0 <= object__component__size17(a)))
-
-axiom value__alignment_axiom20 : (0 <= value__alignment20)
-
-axiom object__alignment_axiom20 :
-  (forall a:(int,character) farray. (0 <= object__alignment20(a)))
-
-function bool_eq57(x: us_t17, y: us_t17) : bool = bool_eq5((x).elts17,
-  to_rep1(first34((x).rt17)), to_rep1(last34((x).rt17)), (y).elts17,
-  to_rep1(first34((y).rt17)), to_rep1(last34((y).rt17)))
-
-logic user_eq54 : us_t17, us_t17 -> bool
-
-logic dummy97 : (int,character) farray
-
-logic dummy98 : t17
-
-type t227b__ref = { t227b__content : us_t17
-}
-
-function t227b__ref___projection(a: t227b__ref) : us_t17 = (a).t227b__content
-
-logic temp___String_Literal_1272 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1272__def_axiom :
-  (((((((to_rep((temp___String_Literal_1272(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1272(void)[2])) = 32)) and
-  (to_rep((temp___String_Literal_1272(void)[3])) = 48)) and
-  (to_rep((temp___String_Literal_1272(void)[4])) = 46)) and
-  (to_rep((temp___String_Literal_1272(void)[5])) = 48)) and
-  (to_rep((temp___String_Literal_1272(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_1272(void)[7])) = 115))
-
-logic temp___String_Literal_1284 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1284__def_axiom :
-  (((((((to_rep((temp___String_Literal_1284(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1284(void)[2])) = 32)) and
-  (to_rep((temp___String_Literal_1284(void)[3])) = 48)) and
-  (to_rep((temp___String_Literal_1284(void)[4])) = 46)) and
-  (to_rep((temp___String_Literal_1284(void)[5])) = 48)) and
-  (to_rep((temp___String_Literal_1284(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_1284(void)[7])) = 115))
-
-logic temp___String_Literal_1296 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1296__def_axiom :
-  (((((((to_rep((temp___String_Literal_1296(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1296(void)[2])) = 32)) and
-  (to_rep((temp___String_Literal_1296(void)[3])) = 48)) and
-  (to_rep((temp___String_Literal_1296(void)[4])) = 46)) and
-  (to_rep((temp___String_Literal_1296(void)[5])) = 48)) and
-  (to_rep((temp___String_Literal_1296(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_1296(void)[7])) = 115))
-
-logic temp___String_Literal_1308 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1308__def_axiom :
-  (((((((to_rep((temp___String_Literal_1308(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1308(void)[2])) = 32)) and
-  (to_rep((temp___String_Literal_1308(void)[3])) = 48)) and
-  (to_rep((temp___String_Literal_1308(void)[4])) = 46)) and
-  (to_rep((temp___String_Literal_1308(void)[5])) = 48)) and
-  (to_rep((temp___String_Literal_1308(void)[6])) = 32)) and
-  (to_rep((temp___String_Literal_1308(void)[7])) = 115))
-
-logic screen__writeconfigdata__B154b__result__aggregate_def : int -> (int,character) farray
+logic screen__writeconfigdata__B114b__result__aggregate_def : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___1316:int.
-  (forall temp___1317:int.
-  ((screen__writeconfigdata__B154b__result__aggregate_def(temp___1316)[temp___1317]) = of_rep(temp___1316))))
+  (forall temp___1727:int.
+  (forall temp___1728:int.
+  ((screen__writeconfigdata__B114b__result__aggregate_def(temp___1727)[temp___1728]) = of_rep(temp___1727))))
+
+logic screen__writeconfigdata__B140b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom1 :
+  (forall temp___1746:int.
+  (forall temp___1747:int.
+  ((screen__writeconfigdata__B140b__result__aggregate_def(temp___1746)[temp___1747]) = of_rep(temp___1746))))
+
+logic screen__writeconfigdata__B148b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom2 :
+  (forall temp___1756:int.
+  (forall temp___1757:int.
+  ((screen__writeconfigdata__B148b__result__aggregate_def(temp___1756)[temp___1757]) = of_rep(temp___1756))))
+
+logic screen__writeconfigdata__B156b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom3 :
+  (forall temp___1769:int.
+  (forall temp___1770:int.
+  ((screen__writeconfigdata__B156b__result__aggregate_def(temp___1769)[temp___1770]) = of_rep(temp___1769))))
+
+logic temp___String_Literal_1771 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1771__def_axiom :
+  (((((((to_rep((temp___String_Literal_1771(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1771(void)[2])) = 107)) and
+  (to_rep((temp___String_Literal_1771(void)[3])) = 66)) and
+  (to_rep((temp___String_Literal_1771(void)[4])) = 121)) and
+  (to_rep((temp___String_Literal_1771(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_1771(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1771(void)[7])) = 115))
+
+logic screen__writeconfigdata__B168b__result__aggregate_def : int -> (int,character) farray
+
+axiom def_axiom4 :
+  (forall temp___1785:int.
+  (forall temp___1786:int.
+  ((screen__writeconfigdata__B168b__result__aggregate_def(temp___1785)[temp___1786]) = of_rep(temp___1785))))
+
+logic temp___String_Literal_1787 : unit -> (int,character) farray
+
+axiom temp___String_Literal_1787__def_axiom :
+  (((((((to_rep((temp___String_Literal_1787(void)[1])) = 32) and
+  (to_rep((temp___String_Literal_1787(void)[2])) = 107)) and
+  (to_rep((temp___String_Literal_1787(void)[3])) = 66)) and
+  (to_rep((temp___String_Literal_1787(void)[4])) = 121)) and
+  (to_rep((temp___String_Literal_1787(void)[5])) = 116)) and
+  (to_rep((temp___String_Literal_1787(void)[6])) = 101)) and
+  (to_rep((temp___String_Literal_1787(void)[7])) = 115))
 
 logic screen__writeconfigdata__B180b__result__aggregate_def : int -> (int,character) farray
 
-axiom def_axiom1 :
-  (forall temp___1335:int.
-  (forall temp___1336:int.
-  ((screen__writeconfigdata__B180b__result__aggregate_def(temp___1335)[temp___1336]) = of_rep(temp___1335))))
-
-logic screen__writeconfigdata__B188b__result__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom2 :
-  (forall temp___1345:int.
-  (forall temp___1346:int.
-  ((screen__writeconfigdata__B188b__result__aggregate_def(temp___1345)[temp___1346]) = of_rep(temp___1345))))
-
-logic screen__writeconfigdata__B196b__result__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom3 :
-  (forall temp___1358:int.
-  (forall temp___1359:int.
-  ((screen__writeconfigdata__B196b__result__aggregate_def(temp___1358)[temp___1359]) = of_rep(temp___1358))))
-
-logic temp___String_Literal_1360 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1360__def_axiom :
-  (((((((to_rep((temp___String_Literal_1360(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1360(void)[2])) = 107)) and
-  (to_rep((temp___String_Literal_1360(void)[3])) = 66)) and
-  (to_rep((temp___String_Literal_1360(void)[4])) = 121)) and
-  (to_rep((temp___String_Literal_1360(void)[5])) = 116)) and
-  (to_rep((temp___String_Literal_1360(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_1360(void)[7])) = 115))
-
-logic screen__writeconfigdata__B208b__result__aggregate_def : int -> (int,character) farray
-
-axiom def_axiom4 :
-  (forall temp___1374:int.
-  (forall temp___1375:int.
-  ((screen__writeconfigdata__B208b__result__aggregate_def(temp___1374)[temp___1375]) = of_rep(temp___1374))))
-
-logic temp___String_Literal_1376 : unit -> (int,character) farray
-
-axiom temp___String_Literal_1376__def_axiom :
-  (((((((to_rep((temp___String_Literal_1376(void)[1])) = 32) and
-  (to_rep((temp___String_Literal_1376(void)[2])) = 107)) and
-  (to_rep((temp___String_Literal_1376(void)[3])) = 66)) and
-  (to_rep((temp___String_Literal_1376(void)[4])) = 121)) and
-  (to_rep((temp___String_Literal_1376(void)[5])) = 116)) and
-  (to_rep((temp___String_Literal_1376(void)[6])) = 101)) and
-  (to_rep((temp___String_Literal_1376(void)[7])) = 115))
-
-logic screen__writeconfigdata__B220b__result__aggregate_def : int -> (int,character) farray
-
 axiom def_axiom5 :
-  (forall temp___1390:int.
-  (forall temp___1391:int.
-  ((screen__writeconfigdata__B220b__result__aggregate_def(temp___1390)[temp___1391]) = of_rep(temp___1390))))
+  (forall temp___1801:int.
+  (forall temp___1802:int.
+  ((screen__writeconfigdata__B180b__result__aggregate_def(temp___1801)[temp___1802]) = of_rep(temp___1801))))
 
 axiom column1__def_axiom : (column1 = 25)
 
@@ -3711,208 +2785,858 @@ axiom row6__def_axiom : (row6 = 16)
 
 axiom row7__def_axiom : (row7 = 18)
 
- (* File "screen.adb", line 276, characters 0-0 *)
-goal WP_parameter_def :
-  (forall currentconfig__split_fields:bool.
-  forall currentconfig__split_fields1:durationt.
-  forall currentconfig__split_fields2:durationt.
-  forall currentconfig__split_fields3:durationt.
-  forall currentconfig__split_fields4:durationt.
-  forall currentconfig__split_fields5:durationt.
-  forall currentconfig__split_fields6:durationt.
-  forall currentconfig__split_fields7:durationt.
-  forall currentconfig__split_fields8:accesspolicyt.
-  forall currentconfig__split_fields9:filesizet.
-  forall currentconfig__split_fields10:filesizet.
-  forall currentconfig__split_fields11:classt.
-  forall currentconfig__split_fields12:classt.
-  forall currentconfig__split_fields13:fart. forall latchunlock:int.
-  forall alarmsilent:int. forall fingerwait:int. forall tokenremove:int.
-  forall workstart:int. forall workend:int. forall authduration:int.
-  forall policy:int. forall minpreservedlog:int. forall alarmthreshold:int.
-  forall minentry:int. forall clearance:int. forall maxfar:int.
-  forall newconfig__split_fields:durationt.
-  forall newconfig__split_fields1:durationt.
-  forall newconfig__split_fields2:durationt.
-  forall newconfig__split_fields3:durationt.
-  forall newconfig__split_fields4:durationt.
-  forall newconfig__split_fields5:durationt.
-  forall newconfig__split_fields6:durationt.
-  forall newconfig__split_fields7:accesspolicyt.
-  forall newconfig__split_fields8:filesizet.
-  forall newconfig__split_fields9:filesizet.
-  forall newconfig__split_fields10:classt.
-  forall newconfig__split_fields11:classt.
-  forall newconfig__split_fields12:fart. forall c112b:(int,character) farray.
-  forall str:(int,character) farray. forall valuestr:(int,character) farray.
-  forall c122b:(int,character) farray. forall str1:(int,character) farray.
-  forall valuestr1:(int,character) farray.
-  forall c132b:(int,character) farray. forall str2:(int,character) farray.
-  forall valuestr2:(int,character) farray.
-  forall c142b:(int,character) farray. forall str3:(int,character) farray.
-  forall valuestr3:(int,character) farray.
-  forall c152b:(int,character) farray. forall data:(int,character) farray.
-  forall result__:(int,character) farray.
-  forall c160b:(int,character) farray. forall c166b:(int,character) farray.
-  forall c172b:(int,character) farray. forall c178b:(int,character) farray.
-  forall data1:(int,character) farray.
-  forall result__1:(int,character) farray. forall c186b:map__ref.
-  forall data2:map__ref. forall result__2:map__ref. forall c194b:map__ref.
-  forall data3:map__ref. forall result__3:map__ref. forall data4:map__ref.
-  forall result__4:map__ref. forall o:fart. forall o1:classt.
-  forall o2:classt. forall o3:filesizet. forall o4:filesizet.
-  forall o5:accesspolicyt. forall o6:durationt. forall o7:durationt.
-  forall o8:durationt. forall o9:durationt. forall o10:durationt.
-  forall o11:durationt. forall o12:durationt. forall o13:us_split_fields.
-  forall temp___1260:us_rep.
-  forall screen__writeconfigdata__C111b__assume:int. forall o14:int.
-  forall o15:character. forall o16:int. forall o17:character.
-  forall o18:(int,character) farray. forall temp___1263:int.
-  forall o19:(int,character) farray. forall temp___1264:us_t2.
-  forall temp___1265:us_t1. forall temp___1266:int.
-  forall o20:(int,character) farray. forall temp___1268:us_t1.
-  forall temp___1269:us_t1. forall o21:(int,character) farray.
-  forall o22:screenycoordt. forall o23:screenxcoordt.
-  forall o24:us_split_fields4. forall o25:us_rep2.
-  forall screen__writeconfigdata__C121b__assume:int. forall o26:int.
-  forall o27:character. forall o28:int. forall o29:character.
-  forall o30:(int,character) farray. forall temp___1275:int.
-  forall o31:(int,character) farray. forall temp___1276:us_t4.
-  forall temp___1277:us_t3. forall temp___1278:int.
-  forall o32:(int,character) farray. forall temp___1280:us_t3.
-  forall temp___1281:us_t3. forall o33:(int,character) farray.
-  forall o34:screenycoordt. forall o35:screenxcoordt.
-  forall o36:us_split_fields4. forall o37:us_rep2.
-  forall screen__writeconfigdata__C131b__assume:int. forall o38:int.
-  forall o39:character. forall o40:int. forall o41:character.
-  forall o42:(int,character) farray. forall temp___1287:int.
-  forall o43:(int,character) farray. forall temp___1288:us_t6.
-  forall temp___1289:us_t5. forall temp___1290:int.
-  forall o44:(int,character) farray. forall temp___1292:us_t5.
-  forall temp___1293:us_t5. forall o45:(int,character) farray.
-  forall o46:screenycoordt. forall o47:screenxcoordt.
-  forall o48:us_split_fields4. forall o49:us_rep2.
-  forall screen__writeconfigdata__C141b__assume:int. forall o50:int.
-  forall o51:character. forall o52:int. forall o53:character.
-  forall o54:(int,character) farray. forall temp___1299:int.
-  forall o55:(int,character) farray. forall temp___1300:us_t8.
-  forall temp___1301:us_t7. forall temp___1302:int.
-  forall o56:(int,character) farray. forall temp___1304:us_t7.
-  forall temp___1305:us_t7. forall o57:(int,character) farray.
-  forall o58:screenycoordt. forall o59:screenxcoordt.
-  forall o60:us_split_fields4. forall o61:us_rep2. forall temp___1309:us_t9.
-  forall o62:(int,character) farray. forall temp___1312:us_t9.
-  forall temp___1313:us_t9. forall o63:(int,character) farray.
-  forall o64:screenycoordt. forall o65:screenxcoordt.
-  forall o66:us_split_fields4. forall o67:us_rep2.
-  forall temp___1321:(int,character) farray.
-  forall o68:(int,character) farray. forall o69:screenycoordt.
-  forall o70:screenxcoordt. forall o71:us_split_fields4. forall o72:us_rep2.
-  forall temp___1324:(int,character) farray.
-  forall o73:(int,character) farray. forall o74:screenycoordt.
-  forall o75:screenxcoordt. forall o76:us_split_fields4. forall o77:us_rep2.
-  forall temp___1327:(int,character) farray.
-  forall o78:(int,character) farray. forall o79:screenycoordt.
-  forall o80:screenxcoordt. forall o81:us_split_fields4. forall o82:us_rep2.
-  forall temp___1328:us_t10. forall o83:(int,character) farray.
-  forall temp___1331:us_t10. forall temp___1332:us_t10.
-  forall o84:(int,character) farray. forall o85:screenycoordt.
-  forall o86:screenxcoordt. forall o87:us_split_fields4. forall o88:us_rep2.
-  forall temp___1338:us_t11. forall o89:(int,character) farray.
-  forall temp___1341:us_t11. forall temp___1342:us_t11.
-  forall o90:(int,character) farray. forall o91:screenycoordt.
-  forall o92:screenxcoordt. forall o93:us_split_fields4. forall o94:us_rep2.
-  forall o95:int. forall o96:int. forall o97:int. forall o98:int.
-  forall o99:int. forall o100:int.
-  forall screen__writeconfigdata__B196b__data__assume:us_t.
-  forall o101:(int,character) farray. forall temp___1350:us_t13.
-  forall temp___1351:us_t12. forall temp___1353:int.
-  forall o102:(int,character) farray. forall temp___1354:us_t12.
-  forall temp___1355:us_t12. forall o103:(int,character) farray.
-  forall o104:screenycoordt. forall o105:screenxcoordt.
-  forall o106:us_split_fields4. forall o107:us_rep2. forall o108:int.
-  forall o109:int. forall o110:int. forall o111:int. forall o112:int.
-  forall o113:int. forall screen__writeconfigdata__B208b__data__assume:us_t.
-  forall o114:(int,character) farray. forall temp___1366:us_t15.
-  forall temp___1367:us_t14. forall temp___1369:int. forall workstart1:int.
-  forall workend1:int. forall authduration1:int. forall policy1:int.
-  forall minpreservedlog1:int. forall alarmthreshold1:int.
-  forall minentry1:int. forall clearance1:int. forall maxfar1:int.
-  forall configdata__thedisplayfields__thetokenremovalduration:int.
-  forall configdata__thedisplayfields__thefingerwaitduration:int.
-  forall configdata__thedisplayfields__thealarmsilentduration:int.
-  forall configdata__thedisplayfields__thelatchunlockduration:int.
-  forall result:int__ref. forall latchunlock1:int. forall result1:int__ref.
-  forall alarmsilent1:int. forall result2:int__ref. forall fingerwait1:int.
-  forall result3:int__ref. forall tokenremove1:int.
-  forall result4:us_split_fields__ref.
-  forall newconfig__split_fields13:us_split_fields. forall ok:bool.
-  forall consoleok:bool. forall result5:bool__ref. forall ok1:bool.
-  forall result6:map__ref. forall str4:(int,character) farray.
-  forall result7:map__ref. forall valuestr4:(int,character) farray.
-  forall result8:map__ref. forall str5:(int,character) farray.
-  forall result9:map__ref. forall str6:(int,character) farray.
-  forall result10:map__ref. forall c112b1:(int,character) farray.
-  forall consoleok1:bool. forall result11:bool__ref. forall ok2:bool.
-  forall result12:map__ref. forall str7:(int,character) farray.
-  forall result13:map__ref. forall valuestr5:(int,character) farray.
-  forall result14:map__ref. forall str8:(int,character) farray.
-  forall result15:map__ref. forall str9:(int,character) farray.
-  forall result16:map__ref. forall c122b1:(int,character) farray.
-  forall consoleok2:bool. forall result17:bool__ref. forall ok3:bool.
-  forall result18:map__ref. forall str10:(int,character) farray.
-  forall result19:map__ref. forall valuestr6:(int,character) farray.
-  forall result20:map__ref. forall str11:(int,character) farray.
-  forall result21:map__ref. forall str12:(int,character) farray.
-  forall result22:map__ref. forall c132b1:(int,character) farray.
-  forall consoleok3:bool. forall result23:bool__ref. forall ok4:bool.
-  forall result24:map__ref. forall str13:(int,character) farray.
-  forall result25:map__ref. forall valuestr7:(int,character) farray.
-  forall result26:map__ref. forall str14:(int,character) farray.
-  forall result27:map__ref. forall str15:(int,character) farray.
-  forall result28:map__ref. forall c142b1:(int,character) farray.
-  forall consoleok4:bool. forall result29:bool__ref. forall ok5:bool.
-  forall result30:map__ref. forall data5:(int,character) farray.
-  forall result31:map__ref. forall result__5:(int,character) farray.
-  forall result32:map__ref. forall result__6:(int,character) farray.
-  forall result33:map__ref. forall c152b1:(int,character) farray.
-  forall consoleok5:bool. forall result34:bool__ref. forall ok6:bool.
-  forall result35:map__ref. forall c160b1:(int,character) farray.
-  forall consoleok6:bool. forall result36:bool__ref. forall ok7:bool.
-  forall result37:map__ref. forall c166b1:(int,character) farray.
-  forall consoleok7:bool. forall result38:bool__ref. forall ok8:bool.
-  forall result39:map__ref. forall c172b1:(int,character) farray.
-  forall consoleok8:bool. forall result40:bool__ref. forall ok9:bool.
-  forall result41:map__ref. forall data6:(int,character) farray.
-  forall result42:map__ref. forall result__7:(int,character) farray.
-  forall result43:map__ref. forall result__8:(int,character) farray.
-  forall result44:map__ref. forall c178b1:(int,character) farray.
-  forall consoleok9:bool. forall result45:bool__ref. forall ok10:bool.
-  forall result46:map__ref. forall data7:(int,character) farray.
-  forall result47:map__ref. forall result__9:(int,character) farray.
-  forall result48:map__ref. forall result__10:(int,character) farray.
-  forall result49:map__ref. forall c186b1:(int,character) farray.
-  forall consoleok10:bool. forall result50:bool__ref. forall ok11:bool.
-  forall result51:map__ref. forall data8:(int,character) farray.
-  forall result52:map__ref. forall result__11:(int,character) farray.
-  forall result53:map__ref. forall result__12:(int,character) farray.
-  forall result54:map__ref. forall c194b1:(int,character) farray.
-  forall consoleok11:bool. forall result55:bool__ref. forall ok12:bool.
-  forall result56:map__ref. forall data9:(int,character) farray.
-  forall result57:map__ref. forall result__13:(int,character) farray.
-  (((0 <= 864000) -> in_range5(latchunlock)) -> (((0 <= 864000) ->
-  in_range5(alarmsilent)) -> (((0 <= 864000) -> in_range5(fingerwait)) ->
-  (((0 <= 864000) -> in_range5(tokenremove)) -> (((0 <= 864000) ->
-  in_range5(workstart)) -> (((0 <= 864000) -> in_range5(workend)) ->
-  (((0 <= 864000) -> in_range5(authduration)) -> (((0 <= 1) ->
-  in_range10(policy)) -> (((0 <= 4194304) -> in_range4(minpreservedlog)) ->
-  (((0 <= 4194304) -> in_range4(alarmthreshold)) -> (((0 <= 5) ->
-  in_range8(minentry)) -> (((0 <= 5) -> in_range8(clearance)) ->
-  (((0 <= 2147483647) -> in_range7(maxfar)) -> (in_range11(column1) ->
-  (in_range11(column2) -> (in_range12(row1) -> (in_range12(row2) ->
-  (in_range12(row3) -> (in_range12(row4) -> (in_range12(row5) ->
-  (in_range12(row6) -> (in_range12(row7) ->
-  ((((((((((((((in_range9(configdata__thedisplayfields__thelatchunlockduration) and
+logic currentconfig__split_fields : bool
+
+logic currentconfig__split_fields1 : durationt
+
+logic currentconfig__split_fields2 : durationt
+
+logic currentconfig__split_fields3 : durationt
+
+logic currentconfig__split_fields4 : durationt
+
+logic currentconfig__split_fields5 : durationt
+
+logic currentconfig__split_fields6 : durationt
+
+logic currentconfig__split_fields7 : durationt
+
+logic currentconfig__split_fields8 : accesspolicyt
+
+logic currentconfig__split_fields9 : filesizet
+
+logic currentconfig__split_fields10 : filesizet
+
+logic currentconfig__split_fields11 : classt
+
+logic currentconfig__split_fields12 : classt
+
+logic currentconfig__split_fields13 : fart
+
+logic latchunlock : int
+
+logic alarmsilent : int
+
+logic fingerwait : int
+
+logic tokenremove : int
+
+logic workstart : int
+
+logic workend : int
+
+logic authduration : int
+
+logic policy : int
+
+logic minpreservedlog : int
+
+logic alarmthreshold : int
+
+logic minentry : int
+
+logic clearance : int
+
+logic maxfar : int
+
+logic newconfig__split_fields : durationt
+
+logic newconfig__split_fields1 : durationt
+
+logic newconfig__split_fields2 : durationt
+
+logic newconfig__split_fields3 : durationt
+
+logic newconfig__split_fields4 : durationt
+
+logic newconfig__split_fields5 : durationt
+
+logic newconfig__split_fields6 : durationt
+
+logic newconfig__split_fields7 : accesspolicyt
+
+logic newconfig__split_fields8 : filesizet
+
+logic newconfig__split_fields9 : filesizet
+
+logic newconfig__split_fields10 : classt
+
+logic newconfig__split_fields11 : classt
+
+logic newconfig__split_fields12 : fart
+
+logic c112b : (int,character) farray
+
+logic data : (int,character) farray
+
+logic result__ : (int,character) farray
+
+logic c120b : (int,character) farray
+
+logic c126b : (int,character) farray
+
+logic c132b : (int,character) farray
+
+logic c138b : (int,character) farray
+
+logic data1 : (int,character) farray
+
+logic result__1 : (int,character) farray
+
+logic c146b : (int,character) farray
+
+logic data2 : (int,character) farray
+
+logic result__2 : (int,character) farray
+
+logic c154b : (int,character) farray
+
+logic data3 : (int,character) farray
+
+logic result__3 : (int,character) farray
+
+logic c166b : (int,character) farray
+
+logic data4 : (int,character) farray
+
+logic result__4 : (int,character) farray
+
+logic data5 : (int,character) farray
+
+logic result__5 : (int,character) farray
+
+logic o : fart
+
+logic o1 : classt
+
+logic o2 : classt
+
+logic o3 : filesizet
+
+logic o4 : filesizet
+
+logic o5 : accesspolicyt
+
+logic o6 : durationt
+
+logic o7 : durationt
+
+logic o8 : durationt
+
+logic o9 : durationt
+
+logic o10 : durationt
+
+logic o11 : durationt
+
+logic o12 : durationt
+
+logic o13 : durationt
+
+logic o14 : durationt
+
+logic o15 : durationt
+
+logic o16 : durationt
+
+logic o17 : durationt
+
+logic o18 : durationt
+
+logic o19 : durationt
+
+logic o20 : accesspolicyt
+
+logic o21 : filesizet
+
+logic o22 : filesizet
+
+logic o23 : classt
+
+logic o24 : classt
+
+logic o25 : fart
+
+logic temp___1719 : durationt
+
+logic temp___17191 : durationt
+
+logic temp___17192 : durationt
+
+logic temp___17193 : durationt
+
+logic temp___17194 : durationt
+
+logic temp___17195 : durationt
+
+logic temp___17196 : durationt
+
+logic temp___17197 : accesspolicyt
+
+logic temp___17198 : filesizet
+
+logic temp___17199 : filesizet
+
+logic temp___171910 : classt
+
+logic temp___171911 : classt
+
+logic temp___171912 : fart
+
+logic o26 : int
+
+logic o27 : (int,character) farray
+
+logic o28 : (int,character) farray
+
+logic o29 : t
+
+logic o30 : screenycoordt
+
+logic o31 : screenxcoordt
+
+logic o32 : screenxcoordt
+
+logic o33 : screenycoordt
+
+logic o34 : screenxcoordt
+
+logic o35 : screenycoordt
+
+logic o36 : int
+
+logic o37 : (int,character) farray
+
+logic o38 : (int,character) farray
+
+logic o39 : t
+
+logic o40 : screenycoordt
+
+logic o41 : screenxcoordt
+
+logic o42 : screenxcoordt
+
+logic o43 : screenycoordt
+
+logic o44 : screenxcoordt
+
+logic o45 : screenycoordt
+
+logic o46 : int
+
+logic o47 : (int,character) farray
+
+logic o48 : (int,character) farray
+
+logic o49 : t
+
+logic o50 : screenycoordt
+
+logic o51 : screenxcoordt
+
+logic o52 : screenxcoordt
+
+logic o53 : screenycoordt
+
+logic o54 : screenxcoordt
+
+logic o55 : screenycoordt
+
+logic o56 : int
+
+logic o57 : (int,character) farray
+
+logic o58 : (int,character) farray
+
+logic o59 : t
+
+logic o60 : screenycoordt
+
+logic o61 : screenxcoordt
+
+logic o62 : screenxcoordt
+
+logic o63 : screenycoordt
+
+logic o64 : screenxcoordt
+
+logic o65 : screenycoordt
+
+logic temp___1720 : (int,character) farray
+
+logic temp___17201 : t1
+
+logic o66 : (int,character) farray
+
+logic temp___1723 : (int,character) farray
+
+logic temp___17231 : t1
+
+logic temp___1724 : (int,character) farray
+
+logic temp___17241 : t1
+
+logic o67 : (int,character) farray
+
+logic o68 : screenycoordt
+
+logic o69 : screenxcoordt
+
+logic o70 : screenxcoordt
+
+logic o71 : screenycoordt
+
+logic o72 : screenxcoordt
+
+logic o73 : screenycoordt
+
+logic temp___1732 : (int,character) farray
+
+logic o74 : (int,character) farray
+
+logic o75 : screenycoordt
+
+logic o76 : screenxcoordt
+
+logic o77 : screenxcoordt
+
+logic o78 : screenycoordt
+
+logic o79 : screenxcoordt
+
+logic o80 : screenycoordt
+
+logic temp___1735 : (int,character) farray
+
+logic o81 : (int,character) farray
+
+logic o82 : screenycoordt
+
+logic o83 : screenxcoordt
+
+logic o84 : screenxcoordt
+
+logic o85 : screenycoordt
+
+logic o86 : screenxcoordt
+
+logic o87 : screenycoordt
+
+logic temp___1738 : (int,character) farray
+
+logic o88 : (int,character) farray
+
+logic o89 : screenycoordt
+
+logic o90 : screenxcoordt
+
+logic o91 : screenxcoordt
+
+logic o92 : screenycoordt
+
+logic o93 : screenxcoordt
+
+logic o94 : screenycoordt
+
+logic temp___1739 : (int,character) farray
+
+logic temp___17391 : t2
+
+logic o95 : (int,character) farray
+
+logic temp___1742 : (int,character) farray
+
+logic temp___17421 : t2
+
+logic temp___1743 : (int,character) farray
+
+logic temp___17431 : t2
+
+logic o96 : (int,character) farray
+
+logic o97 : screenycoordt
+
+logic o98 : screenxcoordt
+
+logic o99 : screenxcoordt
+
+logic o100 : screenycoordt
+
+logic o101 : screenxcoordt
+
+logic o102 : screenycoordt
+
+logic temp___1749 : (int,character) farray
+
+logic temp___17491 : t3
+
+logic o103 : (int,character) farray
+
+logic temp___1752 : (int,character) farray
+
+logic temp___17521 : t3
+
+logic temp___1753 : (int,character) farray
+
+logic temp___17531 : t3
+
+logic o104 : (int,character) farray
+
+logic o105 : screenycoordt
+
+logic o106 : screenxcoordt
+
+logic o107 : screenxcoordt
+
+logic o108 : screenycoordt
+
+logic o109 : screenxcoordt
+
+logic o110 : screenycoordt
+
+logic o111 : int
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic screen__writeconfigdata__B156b__data__assume : (int,character) farray
+
+logic screen__writeconfigdata__B156b__data__assume1 : t
+
+logic o117 : (int,character) farray
+
+logic temp___1761 : (int,character) farray
+
+logic temp___17611 : t5
+
+logic temp___1762 : (int,character) farray
+
+logic temp___17621 : t4
+
+logic temp___1764 : int
+
+logic o118 : (int,character) farray
+
+logic temp___1765 : (int,character) farray
+
+logic temp___17651 : t4
+
+logic temp___1766 : (int,character) farray
+
+logic temp___17661 : t4
+
+logic o119 : (int,character) farray
+
+logic o120 : screenycoordt
+
+logic o121 : screenxcoordt
+
+logic o122 : screenxcoordt
+
+logic o123 : screenycoordt
+
+logic o124 : screenxcoordt
+
+logic o125 : screenycoordt
+
+logic o126 : int
+
+logic o127 : int
+
+logic o128 : int
+
+logic o129 : int
+
+logic o130 : int
+
+logic o131 : int
+
+logic screen__writeconfigdata__B168b__data__assume : (int,character) farray
+
+logic screen__writeconfigdata__B168b__data__assume1 : t
+
+logic o132 : (int,character) farray
+
+logic temp___1777 : (int,character) farray
+
+logic temp___17771 : t7
+
+logic temp___1778 : (int,character) farray
+
+logic temp___17781 : t6
+
+logic temp___1780 : int
+
+logic o133 : (int,character) farray
+
+logic temp___1781 : (int,character) farray
+
+logic temp___17811 : t6
+
+logic temp___1782 : (int,character) farray
+
+logic temp___17821 : t6
+
+logic o134 : (int,character) farray
+
+logic o135 : screenycoordt
+
+logic o136 : screenxcoordt
+
+logic o137 : screenxcoordt
+
+logic o138 : screenycoordt
+
+logic o139 : screenxcoordt
+
+logic o140 : screenycoordt
+
+logic o141 : (int,character) farray
+
+logic temp___1793 : (int,character) farray
+
+logic temp___17931 : t9
+
+logic temp___1794 : (int,character) farray
+
+logic temp___17941 : t8
+
+logic temp___1796 : int
+
+logic o142 : (int,character) farray
+
+logic temp___1797 : (int,character) farray
+
+logic temp___17971 : t8
+
+logic workstart1 : int
+
+logic workend1 : int
+
+logic authduration1 : int
+
+logic policy1 : int
+
+logic minpreservedlog1 : int
+
+logic alarmthreshold1 : int
+
+logic minentry1 : int
+
+logic clearance1 : int
+
+logic maxfar1 : int
+
+logic configdata__thedisplayfields__thetokenremovalduration : int
+
+logic configdata__thedisplayfields__thefingerwaitduration : int
+
+logic configdata__thedisplayfields__thealarmsilentduration : int
+
+logic configdata__thedisplayfields__thelatchunlockduration : int
+
+logic result : int
+
+logic latchunlock1 : int
+
+logic result1 : int
+
+logic alarmsilent1 : int
+
+logic result2 : int
+
+logic fingerwait1 : int
+
+logic result3 : int
+
+logic tokenremove1 : int
+
+logic result4 : durationt
+
+logic result5 : durationt
+
+logic result6 : durationt
+
+logic result7 : durationt
+
+logic result8 : durationt
+
+logic result9 : durationt
+
+logic result10 : durationt
+
+logic result11 : accesspolicyt
+
+logic result12 : filesizet
+
+logic result13 : filesizet
+
+logic result14 : classt
+
+logic result15 : classt
+
+logic result16 : fart
+
+logic newconfig__split_fields13 : durationt
+
+logic newconfig__split_fields14 : durationt
+
+logic newconfig__split_fields15 : durationt
+
+logic newconfig__split_fields16 : durationt
+
+logic newconfig__split_fields17 : durationt
+
+logic newconfig__split_fields18 : durationt
+
+logic newconfig__split_fields19 : durationt
+
+logic newconfig__split_fields20 : accesspolicyt
+
+logic newconfig__split_fields21 : filesizet
+
+logic newconfig__split_fields22 : filesizet
+
+logic newconfig__split_fields23 : classt
+
+logic newconfig__split_fields24 : classt
+
+logic newconfig__split_fields25 : fart
+
+logic ok : bool
+
+logic consoleok : bool
+
+logic result17 : bool
+
+logic ok1 : bool
+
+logic consoleok1 : bool
+
+logic result18 : bool
+
+logic ok2 : bool
+
+logic consoleok2 : bool
+
+logic result19 : bool
+
+logic ok3 : bool
+
+logic consoleok3 : bool
+
+logic result20 : bool
+
+logic ok4 : bool
+
+logic consoleok4 : bool
+
+logic result21 : bool
+
+logic ok5 : bool
+
+logic result22 : (int,character) farray
+
+logic data6 : (int,character) farray
+
+logic result23 : (int,character) farray
+
+logic result__6 : (int,character) farray
+
+logic result24 : (int,character) farray
+
+logic result__7 : (int,character) farray
+
+logic result25 : (int,character) farray
+
+logic c112b1 : (int,character) farray
+
+logic consoleok5 : bool
+
+logic result26 : bool
+
+logic ok6 : bool
+
+logic result27 : (int,character) farray
+
+logic c120b1 : (int,character) farray
+
+logic consoleok6 : bool
+
+logic result28 : bool
+
+logic ok7 : bool
+
+logic result29 : (int,character) farray
+
+logic c126b1 : (int,character) farray
+
+logic consoleok7 : bool
+
+logic result30 : bool
+
+logic ok8 : bool
+
+logic result31 : (int,character) farray
+
+logic c132b1 : (int,character) farray
+
+logic consoleok8 : bool
+
+logic result32 : bool
+
+logic ok9 : bool
+
+logic result33 : (int,character) farray
+
+logic data7 : (int,character) farray
+
+logic result34 : (int,character) farray
+
+logic result__8 : (int,character) farray
+
+logic result35 : (int,character) farray
+
+logic result__9 : (int,character) farray
+
+logic result36 : (int,character) farray
+
+logic c138b1 : (int,character) farray
+
+logic consoleok9 : bool
+
+logic result37 : bool
+
+logic ok10 : bool
+
+logic result38 : (int,character) farray
+
+logic data8 : (int,character) farray
+
+logic result39 : (int,character) farray
+
+logic result__10 : (int,character) farray
+
+logic result40 : (int,character) farray
+
+logic result__11 : (int,character) farray
+
+logic result41 : (int,character) farray
+
+logic c146b1 : (int,character) farray
+
+logic consoleok10 : bool
+
+logic result42 : bool
+
+logic ok11 : bool
+
+logic result43 : (int,character) farray
+
+logic data9 : (int,character) farray
+
+logic result44 : (int,character) farray
+
+logic result__12 : (int,character) farray
+
+logic result45 : (int,character) farray
+
+logic result__13 : (int,character) farray
+
+logic result46 : (int,character) farray
+
+logic c154b1 : (int,character) farray
+
+logic consoleok11 : bool
+
+logic result47 : bool
+
+logic ok12 : bool
+
+logic result48 : (int,character) farray
+
+logic data10 : (int,character) farray
+
+logic result49 : (int,character) farray
+
+logic result__14 : (int,character) farray
+
+logic result50 : (int,character) farray
+
+logic result__15 : (int,character) farray
+
+logic result51 : (int,character) farray
+
+logic c166b1 : (int,character) farray
+
+logic consoleok12 : bool
+
+logic result52 : bool
+
+logic ok13 : bool
+
+logic result53 : (int,character) farray
+
+logic data11 : (int,character) farray
+
+logic result54 : (int,character) farray
+
+logic result__16 : (int,character) farray
+
+axiom H : ((0 <= 864000) -> in_range5(latchunlock))
+
+axiom H1 : ((0 <= 864000) -> in_range5(alarmsilent))
+
+axiom H2 : ((0 <= 864000) -> in_range5(fingerwait))
+
+axiom H3 : ((0 <= 864000) -> in_range5(tokenremove))
+
+axiom H4 : ((0 <= 864000) -> in_range5(workstart))
+
+axiom H5 : ((0 <= 864000) -> in_range5(workend))
+
+axiom H6 : ((0 <= 864000) -> in_range5(authduration))
+
+axiom H7 : ((0 <= 1) -> in_range10(policy))
+
+axiom H8 : ((0 <= 4194304) -> in_range4(minpreservedlog))
+
+axiom H9 : ((0 <= 4194304) -> in_range4(alarmthreshold))
+
+axiom H10 : ((0 <= 5) -> in_range8(minentry))
+
+axiom H11 : ((0 <= 5) -> in_range8(clearance))
+
+axiom H12 : ((0 <= 2147483647) -> in_range7(maxfar))
+
+axiom H13 : in_range11(column1)
+
+axiom H14 : in_range11(column2)
+
+axiom H15 : in_range12(row1)
+
+axiom H16 : in_range12(row2)
+
+axiom H17 : in_range12(row3)
+
+axiom H18 : in_range12(row4)
+
+axiom H19 : in_range12(row5)
+
+axiom H20 : in_range12(row6)
+
+axiom H21 : in_range12(row7)
+
+axiom H22 :
+  ((((((((((((in_range9(configdata__thedisplayfields__thelatchunlockduration) and
   in_range9(configdata__thedisplayfields__thealarmsilentduration)) and
   in_range9(configdata__thedisplayfields__thefingerwaitduration)) and
   in_range9(configdata__thedisplayfields__thetokenremovalduration)) and
@@ -3920,51 +3644,96 @@ goal WP_parameter_def :
   in_range5(workend1)) and in_range5(authduration1)) and
   in_range10(policy1)) and in_range8(minentry1)) and
   in_range4(minpreservedlog1)) and in_range4(alarmthreshold1)) and
-  in_range7(maxfar1)) and (((result = { int__content = latchunlock }) and
-  (latchunlock1 = configdata__thedisplayfields__thelatchunlockduration)) and
-  (((result1 = { int__content = alarmsilent }) and
-  (alarmsilent1 = configdata__thedisplayfields__thealarmsilentduration)) and
-  (((result2 = { int__content = fingerwait }) and
-  (fingerwait1 = configdata__thedisplayfields__thefingerwaitduration)) and
-  ((result3 = { int__content = tokenremove }) and
-  (tokenremove1 = configdata__thedisplayfields__thetokenremovalduration)))))) ->
-  (((((to_rep4(o) = maxfar1) and ((to_rep5(o1) = clearance1) and
-  ((to_rep5(o2) = minentry1) and ((to_rep2(o3) = alarmthreshold1) and
-  ((to_rep2(o4) = minpreservedlog1) and ((to_rep6(o5) = policy1) and
-  ((to_rep3(o6) = authduration1) and ((to_rep3(o7) = workend1) and
-  ((to_rep3(o8) = workstart1) and ((to_rep3(o9) = tokenremove1) and
-  ((to_rep3(o10) = fingerwait1) and ((to_rep3(o11) = alarmsilent1) and
-  ((to_rep3(o12) = latchunlock1) and (o13 = {
-  rec__screen__displayedconfigt__latchunlock = o12;
-  rec__screen__displayedconfigt__alarmsilent = o11;
-  rec__screen__displayedconfigt__fingerwait = o10;
-  rec__screen__displayedconfigt__tokenremove = o9;
-  rec__screen__displayedconfigt__workstart = o8;
-  rec__screen__displayedconfigt__workend = o7;
-  rec__screen__displayedconfigt__authduration = o6;
-  rec__screen__displayedconfigt__policy = o5;
-  rec__screen__displayedconfigt__minpreservedlog = o4;
-  rec__screen__displayedconfigt__alarmthreshold = o3;
-  rec__screen__displayedconfigt__minentry = o2;
-  rec__screen__displayedconfigt__clearance = o1;
-  rec__screen__displayedconfigt__maxfar = o })))))))))))))) and
-  (temp___1260 = { us_split_fields1 = o13 })) and ((result4 = {
-  us_split_fields__content = { rec__screen__displayedconfigt__latchunlock =
-  newconfig__split_fields; rec__screen__displayedconfigt__alarmsilent =
-  newconfig__split_fields1; rec__screen__displayedconfigt__fingerwait =
-  newconfig__split_fields2; rec__screen__displayedconfigt__tokenremove =
-  newconfig__split_fields3; rec__screen__displayedconfigt__workstart =
-  newconfig__split_fields4; rec__screen__displayedconfigt__workend =
-  newconfig__split_fields5; rec__screen__displayedconfigt__authduration =
-  newconfig__split_fields6; rec__screen__displayedconfigt__policy =
-  newconfig__split_fields7; rec__screen__displayedconfigt__minpreservedlog =
-  newconfig__split_fields8; rec__screen__displayedconfigt__alarmthreshold =
-  newconfig__split_fields9; rec__screen__displayedconfigt__minentry =
-  newconfig__split_fields10; rec__screen__displayedconfigt__clearance =
-  newconfig__split_fields11; rec__screen__displayedconfigt__maxfar =
-  newconfig__split_fields12 } }) and
-  (newconfig__split_fields13 = (temp___1260).us_split_fields1))) ->
-  (((currentconfig__split_fields = true) -> (not (bool_eq14({
+  in_range7(maxfar1))
+
+axiom H23 : (result = latchunlock)
+
+axiom H24 :
+  (latchunlock1 = configdata__thedisplayfields__thelatchunlockduration)
+
+axiom H25 : (result1 = alarmsilent)
+
+axiom H26 :
+  (alarmsilent1 = configdata__thedisplayfields__thealarmsilentduration)
+
+axiom H27 : (result2 = fingerwait)
+
+axiom H28 :
+  (fingerwait1 = configdata__thedisplayfields__thefingerwaitduration)
+
+axiom H29 : (result3 = tokenremove)
+
+axiom H30 :
+  (tokenremove1 = configdata__thedisplayfields__thetokenremovalduration)
+
+axiom H31 : (to_rep4(o) = maxfar1)
+
+axiom H32 : (to_rep5(o1) = clearance1)
+
+axiom H33 : (to_rep5(o2) = minentry1)
+
+axiom H34 : (to_rep2(o3) = alarmthreshold1)
+
+axiom H35 : (to_rep2(o4) = minpreservedlog1)
+
+axiom H36 : (to_rep6(o5) = policy1)
+
+axiom H37 : (to_rep3(o6) = authduration1)
+
+axiom H38 : (to_rep3(o7) = workend1)
+
+axiom H39 : (to_rep3(o8) = workstart1)
+
+axiom H40 : (to_rep3(o9) = tokenremove1)
+
+axiom H41 : (to_rep3(o10) = fingerwait1)
+
+axiom H42 : (to_rep3(o11) = alarmsilent1)
+
+axiom H43 : (to_rep3(o12) = latchunlock1)
+
+axiom H44 : ((o13 = o12) and ((o14 = o11) and ((o15 = o10) and
+  ((o16 = o9) and ((o17 = o8) and ((o18 = o7) and ((o19 = o6) and
+  ((o20 = o5) and ((o21 = o4) and ((o22 = o3) and ((o23 = o2) and
+  ((o24 = o1) and (o25 = o)))))))))))))
+
+axiom H45 : ((temp___1719 = o13) and ((temp___17191 = o14) and
+  ((temp___17192 = o15) and ((temp___17193 = o16) and
+  ((temp___17194 = o17) and ((temp___17195 = o18) and
+  ((temp___17196 = o19) and ((temp___17197 = o20) and
+  ((temp___17198 = o21) and ((temp___17199 = o22) and
+  ((temp___171910 = o23) and ((temp___171911 = o24) and
+  (temp___171912 = o25)))))))))))))
+
+axiom H46 : ((result4 = newconfig__split_fields) and
+  ((result5 = newconfig__split_fields1) and
+  ((result6 = newconfig__split_fields2) and
+  ((result7 = newconfig__split_fields3) and
+  ((result8 = newconfig__split_fields4) and
+  ((result9 = newconfig__split_fields5) and
+  ((result10 = newconfig__split_fields6) and
+  ((result11 = newconfig__split_fields7) and
+  ((result12 = newconfig__split_fields8) and
+  ((result13 = newconfig__split_fields9) and
+  ((result14 = newconfig__split_fields10) and
+  ((result15 = newconfig__split_fields11) and
+  (result16 = newconfig__split_fields12)))))))))))))
+
+axiom H47 : ((newconfig__split_fields13 = temp___1719) and
+  ((newconfig__split_fields14 = temp___17191) and
+  ((newconfig__split_fields15 = temp___17192) and
+  ((newconfig__split_fields16 = temp___17193) and
+  ((newconfig__split_fields17 = temp___17194) and
+  ((newconfig__split_fields18 = temp___17195) and
+  ((newconfig__split_fields19 = temp___17196) and
+  ((newconfig__split_fields20 = temp___17197) and
+  ((newconfig__split_fields21 = temp___17198) and
+  ((newconfig__split_fields22 = temp___17199) and
+  ((newconfig__split_fields23 = temp___171910) and
+  ((newconfig__split_fields24 = temp___171911) and
+  (newconfig__split_fields25 = temp___171912)))))))))))))
+
+axiom H48 : ((currentconfig__split_fields = true) -> (not (bool_eq14({
   us_split_fields1 = { rec__screen__displayedconfigt__latchunlock =
   currentconfig__split_fields1; rec__screen__displayedconfigt__alarmsilent =
   currentconfig__split_fields2; rec__screen__displayedconfigt__fingerwait =
@@ -3980,526 +3749,661 @@ goal WP_parameter_def :
   currentconfig__split_fields10; rec__screen__displayedconfigt__minentry =
   currentconfig__split_fields11; rec__screen__displayedconfigt__clearance =
   currentconfig__split_fields12; rec__screen__displayedconfigt__maxfar =
-  currentconfig__split_fields13 } }, { us_split_fields1 =
-  newconfig__split_fields13 }) = true))) -> (((result5 = { bool__content = ok
-  }) and (ok1 = match_bool(ok, consoleok, false))) ->
-  (((((screen__writeconfigdata__C111b__assume = latchunlock1) and
-  in_range9(latchunlock1)) and
-  (screen__writeconfigdata__C111b__assume = c111b)) and in_range9(c111b)) ->
-  ((((result6 = { map__content = str }) and
-  (str4 = temp___String_Literal_1272(void))) and ((((result7 = {
-  map__content = valuestr }) and
-  (valuestr4 = (to_string(attr__ATTRIBUTE_IMAGE9(c111b))).elts)) and
-  ((to_rep1(valuestr__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE9(c111b))).rt))) and
-  (to_rep1(valuestr__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE9(c111b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(valuestr__first),
-  to_rep1(valuestr__last)) and
-  (((((((((to_rep1(valuestr__first) <= to_rep1(valuestr__last)) and
-  (to_rep1(valuestr__last) <= to_rep1(valuestr__last))) and
-  (o14 = to_rep1(valuestr__last))) and (o15 = (valuestr4[o14]))) and
-  (o16 = to_rep(o15))) and (to_rep(o17) = o16)) and
-  (o18 = (str4[5 <- o17]))) and ((result8 = { map__content = str4 }) and
-  (str5 = o18))) and ((((10 <= c111b) and
-  (((((((temp___1263 = (to_rep1(valuestr__last) - 1)) and
-  in_range1((to_rep1(valuestr__last) - 1))) and ((((2 <= temp___1263) ->
-  (((to_rep1(valuestr__first) <= 2) and (2 <= to_rep1(valuestr__last))) and
-  ((to_rep1(valuestr__first) <= temp___1263) and
-  (temp___1263 <= to_rep1(valuestr__last))))) and (o19 = valuestr4)) and
-  (temp___1264 = { elts2 = o19; rt2 = mk2(2, temp___1263) }))) and
-  ((((to_rep1(first4((temp___1264).rt2)) <= to_rep1(last4((temp___1264).rt2))) and
-  ((((6 - to_rep1(valuestr__last)) <= 3) and
-  (((to_rep1(last4((temp___1264).rt2)) - to_rep1(first4((temp___1264).rt2))) + 1) = ((3 - (6 - to_rep1(valuestr__last))) + 1))) or
-  ((not ((6 - to_rep1(valuestr__last)) <= 3)) and
-  (((to_rep1(last4((temp___1264).rt2)) - to_rep1(first4((temp___1264).rt2))) + 1) = 0)))) or
-  ((not (to_rep1(first4((temp___1264).rt2)) <= to_rep1(last4((temp___1264).rt2)))) and
-  ((((6 - to_rep1(valuestr__last)) <= 3) and
-  (0 = ((3 - (6 - to_rep1(valuestr__last))) + 1))) or
-  (not ((6 - to_rep1(valuestr__last)) <= 3))))) and (temp___1265 = { elts1 =
-  slide((temp___1264).elts2, to_rep1(first4((temp___1264).rt2)),
-  (6 - to_rep1(valuestr__last))); rt1 = mk1((6 - to_rep1(valuestr__last)), 3)
-  }))) and ((((temp___1266 = (6 - to_rep1(valuestr__last))) and
-  in_range1((6 - to_rep1(valuestr__last)))) and ((((temp___1266 <= 3) ->
-  (((1 <= temp___1266) and (temp___1266 <= 7)) and ((1 <= 3) and
-  (3 <= 7)))) and (o20 = str5)) and (temp___1268 = { elts1 = o20; rt1 =
-  mk1(temp___1266, 3) }))) and
-  ((((to_rep1(first2((temp___1265).rt1)) <= to_rep1(last2((temp___1265).rt1))) and
-  (((to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))) and
-  (((to_rep1(last2((temp___1265).rt1)) - to_rep1(first2((temp___1265).rt1))) + 1) = ((to_rep1(last2((temp___1268).rt1)) - to_rep1(first2((temp___1268).rt1))) + 1))) or
-  ((not (to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1)))) and
-  (((to_rep1(last2((temp___1265).rt1)) - to_rep1(first2((temp___1265).rt1))) + 1) = 0)))) or
-  ((not (to_rep1(first2((temp___1265).rt1)) <= to_rep1(last2((temp___1265).rt1)))) and
-  (((to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))) and
-  (0 = ((to_rep1(last2((temp___1268).rt1)) - to_rep1(first2((temp___1268).rt1))) + 1))) or
-  (not (to_rep1(first2((temp___1268).rt1)) <= to_rep1(last2((temp___1268).rt1))))))) and
-  (temp___1269 = temp___1265)))) and
-  (forall temp___1270:int.
-  (((((6 - to_rep1(valuestr__last)) <= temp___1270) and
-  (temp___1270 <= 3)) and
-  ((o21[temp___1270]) = ((temp___1269).elts1[temp___1270]))) or
-  ((not (((6 - to_rep1(valuestr__last)) <= temp___1270) and
-  (temp___1270 <= 3))) and ((o21[temp___1270]) = (str5[temp___1270])))))) and
-  ((result9 = { map__content = str5 }) and (str6 = o21)))) or
-  ((not (10 <= c111b)) and (str6 = str5))) and ((result10 = { map__content =
-  c112b }) and (c112b1 = str6))))))) -> ((((to_rep8(o22) = 9) and
-  ((to_rep7(o23) = 25) and (o24 = { rec__screen__interfac__xycoordt__x = o23;
-  rec__screen__interfac__xycoordt__y = o22 }))) and (o25 = {
-  us_split_fields5 = o24 })) -> (((result11 = { bool__content = ok1 }) and
-  (ok2 = match_bool(ok1, consoleok1, false))) ->
-  (((((screen__writeconfigdata__C121b__assume = alarmsilent1) and
-  in_range9(alarmsilent1)) and
-  (screen__writeconfigdata__C121b__assume = c121b)) and in_range9(c121b)) ->
-  ((((result12 = { map__content = str1 }) and
-  (str7 = temp___String_Literal_1284(void))) and ((((result13 = {
-  map__content = valuestr1 }) and
-  (valuestr5 = (to_string(attr__ATTRIBUTE_IMAGE9(c121b))).elts)) and
-  ((to_rep1(valuestr__first1) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE9(c121b))).rt))) and
-  (to_rep1(valuestr__last1) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE9(c121b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(valuestr__first1),
-  to_rep1(valuestr__last1)) and
-  (((((((((to_rep1(valuestr__first1) <= to_rep1(valuestr__last1)) and
-  (to_rep1(valuestr__last1) <= to_rep1(valuestr__last1))) and
-  (o26 = to_rep1(valuestr__last1))) and (o27 = (valuestr5[o26]))) and
-  (o28 = to_rep(o27))) and (to_rep(o29) = o28)) and
-  (o30 = (str7[5 <- o29]))) and ((result14 = { map__content = str7 }) and
-  (str8 = o30))) and ((((10 <= c121b) and
-  (((((((temp___1275 = (to_rep1(valuestr__last1) - 1)) and
-  in_range1((to_rep1(valuestr__last1) - 1))) and ((((2 <= temp___1275) ->
-  (((to_rep1(valuestr__first1) <= 2) and (2 <= to_rep1(valuestr__last1))) and
-  ((to_rep1(valuestr__first1) <= temp___1275) and
-  (temp___1275 <= to_rep1(valuestr__last1))))) and (o31 = valuestr5)) and
-  (temp___1276 = { elts4 = o31; rt4 = mk4(2, temp___1275) }))) and
-  ((((to_rep1(first8((temp___1276).rt4)) <= to_rep1(last8((temp___1276).rt4))) and
-  ((((6 - to_rep1(valuestr__last1)) <= 3) and
-  (((to_rep1(last8((temp___1276).rt4)) - to_rep1(first8((temp___1276).rt4))) + 1) = ((3 - (6 - to_rep1(valuestr__last1))) + 1))) or
-  ((not ((6 - to_rep1(valuestr__last1)) <= 3)) and
-  (((to_rep1(last8((temp___1276).rt4)) - to_rep1(first8((temp___1276).rt4))) + 1) = 0)))) or
-  ((not (to_rep1(first8((temp___1276).rt4)) <= to_rep1(last8((temp___1276).rt4)))) and
-  ((((6 - to_rep1(valuestr__last1)) <= 3) and
-  (0 = ((3 - (6 - to_rep1(valuestr__last1))) + 1))) or
-  (not ((6 - to_rep1(valuestr__last1)) <= 3))))) and (temp___1277 = { elts3 =
-  slide((temp___1276).elts4, to_rep1(first8((temp___1276).rt4)),
-  (6 - to_rep1(valuestr__last1))); rt3 = mk3((6 - to_rep1(valuestr__last1)),
-  3) }))) and ((((temp___1278 = (6 - to_rep1(valuestr__last1))) and
-  in_range1((6 - to_rep1(valuestr__last1)))) and ((((temp___1278 <= 3) ->
-  (((1 <= temp___1278) and (temp___1278 <= 7)) and ((1 <= 3) and
-  (3 <= 7)))) and (o32 = str8)) and (temp___1280 = { elts3 = o32; rt3 =
-  mk3(temp___1278, 3) }))) and
-  ((((to_rep1(first6((temp___1277).rt3)) <= to_rep1(last6((temp___1277).rt3))) and
-  (((to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))) and
-  (((to_rep1(last6((temp___1277).rt3)) - to_rep1(first6((temp___1277).rt3))) + 1) = ((to_rep1(last6((temp___1280).rt3)) - to_rep1(first6((temp___1280).rt3))) + 1))) or
-  ((not (to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3)))) and
-  (((to_rep1(last6((temp___1277).rt3)) - to_rep1(first6((temp___1277).rt3))) + 1) = 0)))) or
-  ((not (to_rep1(first6((temp___1277).rt3)) <= to_rep1(last6((temp___1277).rt3)))) and
-  (((to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))) and
-  (0 = ((to_rep1(last6((temp___1280).rt3)) - to_rep1(first6((temp___1280).rt3))) + 1))) or
-  (not (to_rep1(first6((temp___1280).rt3)) <= to_rep1(last6((temp___1280).rt3))))))) and
-  (temp___1281 = temp___1277)))) and
-  (forall temp___1282:int.
-  (((((6 - to_rep1(valuestr__last1)) <= temp___1282) and
-  (temp___1282 <= 3)) and
-  ((o33[temp___1282]) = ((temp___1281).elts3[temp___1282]))) or
-  ((not (((6 - to_rep1(valuestr__last1)) <= temp___1282) and
-  (temp___1282 <= 3))) and ((o33[temp___1282]) = (str8[temp___1282])))))) and
-  ((result15 = { map__content = str8 }) and (str9 = o33)))) or
-  ((not (10 <= c121b)) and (str9 = str8))) and ((result16 = { map__content =
-  c122b }) and (c122b1 = str9))))))) -> ((((to_rep8(o34) = 10) and
-  ((to_rep7(o35) = 25) and (o36 = { rec__screen__interfac__xycoordt__x = o35;
-  rec__screen__interfac__xycoordt__y = o34 }))) and (o37 = {
-  us_split_fields5 = o36 })) -> (((result17 = { bool__content = ok2 }) and
-  (ok3 = match_bool(ok2, consoleok2, false))) ->
-  (((((screen__writeconfigdata__C131b__assume = fingerwait1) and
-  in_range9(fingerwait1)) and
-  (screen__writeconfigdata__C131b__assume = c131b)) and in_range9(c131b)) ->
-  ((((result18 = { map__content = str2 }) and
-  (str10 = temp___String_Literal_1296(void))) and ((((result19 = {
-  map__content = valuestr2 }) and
-  (valuestr6 = (to_string(attr__ATTRIBUTE_IMAGE9(c131b))).elts)) and
-  ((to_rep1(valuestr__first2) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE9(c131b))).rt))) and
-  (to_rep1(valuestr__last2) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE9(c131b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(valuestr__first2),
-  to_rep1(valuestr__last2)) and
-  (((((((((to_rep1(valuestr__first2) <= to_rep1(valuestr__last2)) and
-  (to_rep1(valuestr__last2) <= to_rep1(valuestr__last2))) and
-  (o38 = to_rep1(valuestr__last2))) and (o39 = (valuestr6[o38]))) and
-  (o40 = to_rep(o39))) and (to_rep(o41) = o40)) and
-  (o42 = (str10[5 <- o41]))) and ((result20 = { map__content = str10 }) and
-  (str11 = o42))) and ((((10 <= c131b) and
-  (((((((temp___1287 = (to_rep1(valuestr__last2) - 1)) and
-  in_range1((to_rep1(valuestr__last2) - 1))) and ((((2 <= temp___1287) ->
-  (((to_rep1(valuestr__first2) <= 2) and (2 <= to_rep1(valuestr__last2))) and
-  ((to_rep1(valuestr__first2) <= temp___1287) and
-  (temp___1287 <= to_rep1(valuestr__last2))))) and (o43 = valuestr6)) and
-  (temp___1288 = { elts6 = o43; rt6 = mk6(2, temp___1287) }))) and
-  ((((to_rep1(first12((temp___1288).rt6)) <= to_rep1(last12((temp___1288).rt6))) and
-  ((((6 - to_rep1(valuestr__last2)) <= 3) and
-  (((to_rep1(last12((temp___1288).rt6)) - to_rep1(first12((temp___1288).rt6))) + 1) = ((3 - (6 - to_rep1(valuestr__last2))) + 1))) or
-  ((not ((6 - to_rep1(valuestr__last2)) <= 3)) and
-  (((to_rep1(last12((temp___1288).rt6)) - to_rep1(first12((temp___1288).rt6))) + 1) = 0)))) or
-  ((not (to_rep1(first12((temp___1288).rt6)) <= to_rep1(last12((temp___1288).rt6)))) and
-  ((((6 - to_rep1(valuestr__last2)) <= 3) and
-  (0 = ((3 - (6 - to_rep1(valuestr__last2))) + 1))) or
-  (not ((6 - to_rep1(valuestr__last2)) <= 3))))) and (temp___1289 = { elts5 =
-  slide((temp___1288).elts6, to_rep1(first12((temp___1288).rt6)),
-  (6 - to_rep1(valuestr__last2))); rt5 = mk5((6 - to_rep1(valuestr__last2)),
-  3) }))) and ((((temp___1290 = (6 - to_rep1(valuestr__last2))) and
-  in_range1((6 - to_rep1(valuestr__last2)))) and ((((temp___1290 <= 3) ->
-  (((1 <= temp___1290) and (temp___1290 <= 7)) and ((1 <= 3) and
-  (3 <= 7)))) and (o44 = str11)) and (temp___1292 = { elts5 = o44; rt5 =
-  mk5(temp___1290, 3) }))) and
-  ((((to_rep1(first10((temp___1289).rt5)) <= to_rep1(last10((temp___1289).rt5))) and
-  (((to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))) and
-  (((to_rep1(last10((temp___1289).rt5)) - to_rep1(first10((temp___1289).rt5))) + 1) = ((to_rep1(last10((temp___1292).rt5)) - to_rep1(first10((temp___1292).rt5))) + 1))) or
-  ((not (to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5)))) and
-  (((to_rep1(last10((temp___1289).rt5)) - to_rep1(first10((temp___1289).rt5))) + 1) = 0)))) or
-  ((not (to_rep1(first10((temp___1289).rt5)) <= to_rep1(last10((temp___1289).rt5)))) and
-  (((to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))) and
-  (0 = ((to_rep1(last10((temp___1292).rt5)) - to_rep1(first10((temp___1292).rt5))) + 1))) or
-  (not (to_rep1(first10((temp___1292).rt5)) <= to_rep1(last10((temp___1292).rt5))))))) and
-  (temp___1293 = temp___1289)))) and
-  (forall temp___1294:int.
-  (((((6 - to_rep1(valuestr__last2)) <= temp___1294) and
-  (temp___1294 <= 3)) and
-  ((o45[temp___1294]) = ((temp___1293).elts5[temp___1294]))) or
-  ((not (((6 - to_rep1(valuestr__last2)) <= temp___1294) and
-  (temp___1294 <= 3))) and ((o45[temp___1294]) = (str11[temp___1294])))))) and
-  ((result21 = { map__content = str11 }) and (str12 = o45)))) or
-  ((not (10 <= c131b)) and (str12 = str11))) and ((result22 = {
-  map__content = c132b }) and (c132b1 = str12))))))) ->
-  ((((to_rep8(o46) = 9) and ((to_rep7(o47) = 63) and (o48 = {
-  rec__screen__interfac__xycoordt__x = o47;
-  rec__screen__interfac__xycoordt__y = o46 }))) and (o49 = {
-  us_split_fields5 = o48 })) -> (((result23 = { bool__content = ok3 }) and
-  (ok4 = match_bool(ok3, consoleok3, false))) ->
-  (((((screen__writeconfigdata__C141b__assume = tokenremove1) and
-  in_range9(tokenremove1)) and
-  (screen__writeconfigdata__C141b__assume = c141b)) and in_range9(c141b)) ->
-  ((((result24 = { map__content = str3 }) and
-  (str13 = temp___String_Literal_1308(void))) and ((((result25 = {
-  map__content = valuestr3 }) and
-  (valuestr7 = (to_string(attr__ATTRIBUTE_IMAGE9(c141b))).elts)) and
-  ((to_rep1(valuestr__first3) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE9(c141b))).rt))) and
-  (to_rep1(valuestr__last3) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE9(c141b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(valuestr__first3),
-  to_rep1(valuestr__last3)) and
-  (((((((((to_rep1(valuestr__first3) <= to_rep1(valuestr__last3)) and
-  (to_rep1(valuestr__last3) <= to_rep1(valuestr__last3))) and
-  (o50 = to_rep1(valuestr__last3))) and (o51 = (valuestr7[o50]))) and
-  (o52 = to_rep(o51))) and (to_rep(o53) = o52)) and
-  (o54 = (str13[5 <- o53]))) and ((result26 = { map__content = str13 }) and
-  (str14 = o54))) and ((((10 <= c141b) and
-  (((((((temp___1299 = (to_rep1(valuestr__last3) - 1)) and
-  in_range1((to_rep1(valuestr__last3) - 1))) and ((((2 <= temp___1299) ->
-  (((to_rep1(valuestr__first3) <= 2) and (2 <= to_rep1(valuestr__last3))) and
-  ((to_rep1(valuestr__first3) <= temp___1299) and
-  (temp___1299 <= to_rep1(valuestr__last3))))) and (o55 = valuestr7)) and
-  (temp___1300 = { elts8 = o55; rt8 = mk8(2, temp___1299) }))) and
-  ((((to_rep1(first16((temp___1300).rt8)) <= to_rep1(last16((temp___1300).rt8))) and
-  ((((6 - to_rep1(valuestr__last3)) <= 3) and
-  (((to_rep1(last16((temp___1300).rt8)) - to_rep1(first16((temp___1300).rt8))) + 1) = ((3 - (6 - to_rep1(valuestr__last3))) + 1))) or
-  ((not ((6 - to_rep1(valuestr__last3)) <= 3)) and
-  (((to_rep1(last16((temp___1300).rt8)) - to_rep1(first16((temp___1300).rt8))) + 1) = 0)))) or
-  ((not (to_rep1(first16((temp___1300).rt8)) <= to_rep1(last16((temp___1300).rt8)))) and
-  ((((6 - to_rep1(valuestr__last3)) <= 3) and
-  (0 = ((3 - (6 - to_rep1(valuestr__last3))) + 1))) or
-  (not ((6 - to_rep1(valuestr__last3)) <= 3))))) and (temp___1301 = { elts7 =
-  slide((temp___1300).elts8, to_rep1(first16((temp___1300).rt8)),
-  (6 - to_rep1(valuestr__last3))); rt7 = mk7((6 - to_rep1(valuestr__last3)),
-  3) }))) and ((((temp___1302 = (6 - to_rep1(valuestr__last3))) and
-  in_range1((6 - to_rep1(valuestr__last3)))) and ((((temp___1302 <= 3) ->
-  (((1 <= temp___1302) and (temp___1302 <= 7)) and ((1 <= 3) and
-  (3 <= 7)))) and (o56 = str14)) and (temp___1304 = { elts7 = o56; rt7 =
-  mk7(temp___1302, 3) }))) and
-  ((((to_rep1(first14((temp___1301).rt7)) <= to_rep1(last14((temp___1301).rt7))) and
-  (((to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))) and
-  (((to_rep1(last14((temp___1301).rt7)) - to_rep1(first14((temp___1301).rt7))) + 1) = ((to_rep1(last14((temp___1304).rt7)) - to_rep1(first14((temp___1304).rt7))) + 1))) or
-  ((not (to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7)))) and
-  (((to_rep1(last14((temp___1301).rt7)) - to_rep1(first14((temp___1301).rt7))) + 1) = 0)))) or
-  ((not (to_rep1(first14((temp___1301).rt7)) <= to_rep1(last14((temp___1301).rt7)))) and
-  (((to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))) and
-  (0 = ((to_rep1(last14((temp___1304).rt7)) - to_rep1(first14((temp___1304).rt7))) + 1))) or
-  (not (to_rep1(first14((temp___1304).rt7)) <= to_rep1(last14((temp___1304).rt7))))))) and
-  (temp___1305 = temp___1301)))) and
-  (forall temp___1306:int.
-  (((((6 - to_rep1(valuestr__last3)) <= temp___1306) and
-  (temp___1306 <= 3)) and
-  ((o57[temp___1306]) = ((temp___1305).elts7[temp___1306]))) or
-  ((not (((6 - to_rep1(valuestr__last3)) <= temp___1306) and
-  (temp___1306 <= 3))) and ((o57[temp___1306]) = (str14[temp___1306])))))) and
-  ((result27 = { map__content = str14 }) and (str15 = o57)))) or
-  ((not (10 <= c141b)) and (str15 = str14))) and ((result28 = {
-  map__content = c142b }) and (c142b1 = str15))))))) ->
-  ((((to_rep8(o58) = 10) and ((to_rep7(o59) = 63) and (o60 = {
-  rec__screen__interfac__xycoordt__x = o59;
-  rec__screen__interfac__xycoordt__y = o58 }))) and (o61 = {
-  us_split_fields5 = o60 })) -> (((result29 = { bool__content = ok4 }) and
-  (ok5 = match_bool(ok4, consoleok4, false))) -> (((policy1 = c151b) and
-  in_range10(c151b)) -> (((((result30 = { map__content = data }) and
-  (data5 = (to_string(attr__ATTRIBUTE_IMAGE10(c151b))).elts)) and
-  ((to_rep1(data__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(c151b))).rt))) and
-  (to_rep1(data__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(c151b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(data__first),
-  to_rep1(data__last)) and (((result31 = { map__content = result__ }) and
-  (result__5 = screen__writeconfigdata__B154b__result__aggregate_def(32))) and
-  ((((((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (((1 <= to_rep1(data__last)) and
-  (((to_rep1(data__last) - to_rep1(data__first)) + 1) = ((to_rep1(data__last) - 1) + 1))) or
-  ((not (1 <= to_rep1(data__last))) and
-  (((to_rep1(data__last) - to_rep1(data__first)) + 1) = 0)))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and
-  (((1 <= to_rep1(data__last)) and (0 = ((to_rep1(data__last) - 1) + 1))) or
-  (not (1 <= to_rep1(data__last)))))) and (temp___1309 = { elts9 =
-  slide(data5, to_rep1(data__first), 1); rt9 = mk9(1, to_rep1(data__last))
-  })) and (((((1 <= to_rep1(data__last)) -> (((1 <= 1) and (1 <= 12)) and
-  ((1 <= to_rep1(data__last)) and (to_rep1(data__last) <= 12)))) and
-  (o62 = result__5)) and (temp___1312 = { elts9 = o62; rt9 = mk9(1,
-  to_rep1(data__last)) })) and
-  ((((to_rep1(first18((temp___1309).rt9)) <= to_rep1(last18((temp___1309).rt9))) and
-  (((to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))) and
-  (((to_rep1(last18((temp___1309).rt9)) - to_rep1(first18((temp___1309).rt9))) + 1) = ((to_rep1(last18((temp___1312).rt9)) - to_rep1(first18((temp___1312).rt9))) + 1))) or
-  ((not (to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9)))) and
-  (((to_rep1(last18((temp___1309).rt9)) - to_rep1(first18((temp___1309).rt9))) + 1) = 0)))) or
-  ((not (to_rep1(first18((temp___1309).rt9)) <= to_rep1(last18((temp___1309).rt9)))) and
-  (((to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))) and
-  (0 = ((to_rep1(last18((temp___1312).rt9)) - to_rep1(first18((temp___1312).rt9))) + 1))) or
-  (not (to_rep1(first18((temp___1312).rt9)) <= to_rep1(last18((temp___1312).rt9))))))) and
-  (temp___1313 = temp___1309)))) and
-  (forall temp___1314:int. ((((1 <= temp___1314) and
-  (temp___1314 <= to_rep1(data__last))) and
-  ((o63[temp___1314]) = ((temp___1313).elts9[temp___1314]))) or
-  ((not ((1 <= temp___1314) and (temp___1314 <= to_rep1(data__last)))) and
-  ((o63[temp___1314]) = (result__5[temp___1314])))))) and ((result32 = {
-  map__content = result__5 }) and (result__6 = o63))) and ((result33 = {
-  map__content = c152b }) and (c152b1 = result__6)))))) ->
-  ((((to_rep8(o64) = 12) and ((to_rep7(o65) = 25) and (o66 = {
-  rec__screen__interfac__xycoordt__x = o65;
-  rec__screen__interfac__xycoordt__y = o64 }))) and (o67 = {
-  us_split_fields5 = o66 })) -> (((result34 = { bool__content = ok5 }) and
-  (ok6 = match_bool(ok5, consoleok5, false))) -> (((workstart1 = c159b) and
-  in_range5(c159b)) -> ((((temp___1321 = printduration(c159b)) and
-  (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
-  (o68 = temp___1321))) and ((result35 = { map__content = c160b }) and
-  (c160b1 = o68))) -> ((((to_rep8(o69) = 12) and ((to_rep7(o70) = 63) and
-  (o71 = { rec__screen__interfac__xycoordt__x = o70;
-  rec__screen__interfac__xycoordt__y = o69 }))) and (o72 = {
-  us_split_fields5 = o71 })) -> (((result36 = { bool__content = ok6 }) and
-  (ok7 = match_bool(ok6, consoleok6, false))) -> (((workend1 = c165b) and
-  in_range5(c165b)) -> ((((temp___1324 = printduration(c165b)) and
-  (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
-  (o73 = temp___1324))) and ((result37 = { map__content = c166b }) and
-  (c166b1 = o73))) -> ((((to_rep8(o74) = 13) and ((to_rep7(o75) = 63) and
-  (o76 = { rec__screen__interfac__xycoordt__x = o75;
-  rec__screen__interfac__xycoordt__y = o74 }))) and (o77 = {
-  us_split_fields5 = o76 })) -> (((result38 = { bool__content = ok7 }) and
-  (ok8 = match_bool(ok7, consoleok7, false))) ->
-  (((authduration1 = c171b) and in_range5(c171b)) ->
-  ((((temp___1327 = printduration(c171b)) and (((1 <= 5) -> (((1 <= 1) and
-  (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and (o78 = temp___1327))) and
-  ((result39 = { map__content = c172b }) and (c172b1 = o78))) ->
-  ((((to_rep8(o79) = 13) and ((to_rep7(o80) = 25) and (o81 = {
-  rec__screen__interfac__xycoordt__x = o80;
-  rec__screen__interfac__xycoordt__y = o79 }))) and (o82 = {
-  us_split_fields5 = o81 })) -> (((result40 = { bool__content = ok8 }) and
-  (ok9 = match_bool(ok8, consoleok8, false))) -> (((clearance1 = c177b) and
-  in_range8(c177b)) -> (((((result41 = { map__content = data1 }) and
-  (data6 = (to_string(attr__ATTRIBUTE_IMAGE8(c177b))).elts)) and
-  ((to_rep1(data__first1) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(c177b))).rt))) and
-  (to_rep1(data__last1) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(c177b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(data__first1),
-  to_rep1(data__last1)) and (((result42 = { map__content = result__1 }) and
-  (result__7 = screen__writeconfigdata__B180b__result__aggregate_def(32))) and
-  ((((((((to_rep1(data__first1) <= to_rep1(data__last1)) and
-  (((1 <= to_rep1(data__last1)) and
-  (((to_rep1(data__last1) - to_rep1(data__first1)) + 1) = ((to_rep1(data__last1) - 1) + 1))) or
-  ((not (1 <= to_rep1(data__last1))) and
-  (((to_rep1(data__last1) - to_rep1(data__first1)) + 1) = 0)))) or
-  ((not (to_rep1(data__first1) <= to_rep1(data__last1))) and
-  (((1 <= to_rep1(data__last1)) and
-  (0 = ((to_rep1(data__last1) - 1) + 1))) or
-  (not (1 <= to_rep1(data__last1)))))) and (temp___1328 = { elts10 =
-  slide(data6, to_rep1(data__first1), 1); rt10 = mk10(1,
-  to_rep1(data__last1)) })) and (((((1 <= to_rep1(data__last1)) ->
-  (((1 <= 1) and (1 <= 12)) and ((1 <= to_rep1(data__last1)) and
-  (to_rep1(data__last1) <= 12)))) and (o83 = result__7)) and (temp___1331 = {
-  elts10 = o83; rt10 = mk10(1, to_rep1(data__last1)) })) and
-  ((((to_rep1(first20((temp___1328).rt10)) <= to_rep1(last20((temp___1328).rt10))) and
-  (((to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))) and
-  (((to_rep1(last20((temp___1328).rt10)) - to_rep1(first20((temp___1328).rt10))) + 1) = ((to_rep1(last20((temp___1331).rt10)) - to_rep1(first20((temp___1331).rt10))) + 1))) or
-  ((not (to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10)))) and
-  (((to_rep1(last20((temp___1328).rt10)) - to_rep1(first20((temp___1328).rt10))) + 1) = 0)))) or
-  ((not (to_rep1(first20((temp___1328).rt10)) <= to_rep1(last20((temp___1328).rt10)))) and
-  (((to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))) and
-  (0 = ((to_rep1(last20((temp___1331).rt10)) - to_rep1(first20((temp___1331).rt10))) + 1))) or
-  (not (to_rep1(first20((temp___1331).rt10)) <= to_rep1(last20((temp___1331).rt10))))))) and
-  (temp___1332 = temp___1328)))) and
-  (forall temp___1333:int. ((((1 <= temp___1333) and
-  (temp___1333 <= to_rep1(data__last1))) and
-  ((o84[temp___1333]) = ((temp___1332).elts10[temp___1333]))) or
-  ((not ((1 <= temp___1333) and (temp___1333 <= to_rep1(data__last1)))) and
-  ((o84[temp___1333]) = (result__7[temp___1333])))))) and ((result43 = {
-  map__content = result__7 }) and (result__8 = o84))) and ((result44 = {
-  map__content = c178b }) and (c178b1 = result__8)))))) ->
-  ((((to_rep8(o85) = 15) and ((to_rep7(o86) = 25) and (o87 = {
-  rec__screen__interfac__xycoordt__x = o86;
-  rec__screen__interfac__xycoordt__y = o85 }))) and (o88 = {
-  us_split_fields5 = o87 })) -> (((result45 = { bool__content = ok9 }) and
-  (ok10 = match_bool(ok9, consoleok9, false))) -> (((minentry1 = c185b) and
-  in_range8(c185b)) -> (((((result46 = data2) and
-  (data7 = (to_string(attr__ATTRIBUTE_IMAGE8(c185b))).elts)) and
-  ((to_rep1(data__first2) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(c185b))).rt))) and
-  (to_rep1(data__last2) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(c185b))).rt))))) and
-  (dynamic_property(1, 2147483647, to_rep1(data__first2),
-  to_rep1(data__last2)) and (((result47 = result__2) and
-  (result__9 = screen__writeconfigdata__B188b__result__aggregate_def(32))) and
-  ((((((((to_rep1(data__first2) <= to_rep1(data__last2)) and
-  (((1 <= to_rep1(data__last2)) and
-  (((to_rep1(data__last2) - to_rep1(data__first2)) + 1) = ((to_rep1(data__last2) - 1) + 1))) or
-  ((not (1 <= to_rep1(data__last2))) and
-  (((to_rep1(data__last2) - to_rep1(data__first2)) + 1) = 0)))) or
-  ((not (to_rep1(data__first2) <= to_rep1(data__last2))) and
-  (((1 <= to_rep1(data__last2)) and
-  (0 = ((to_rep1(data__last2) - 1) + 1))) or
-  (not (1 <= to_rep1(data__last2)))))) and (temp___1338 = { elts11 =
-  slide(data7, to_rep1(data__first2), 1); rt11 = mk11(1,
-  to_rep1(data__last2)) })) and (((((1 <= to_rep1(data__last2)) ->
-  (((1 <= 1) and (1 <= 12)) and ((1 <= to_rep1(data__last2)) and
-  (to_rep1(data__last2) <= 12)))) and (o89 = result__9)) and (temp___1341 = {
-  elts11 = o89; rt11 = mk11(1, to_rep1(data__last2)) })) and
-  ((((to_rep1(first22((temp___1338).rt11)) <= to_rep1(last22((temp___1338).rt11))) and
-  (((to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))) and
-  (((to_rep1(last22((temp___1338).rt11)) - to_rep1(first22((temp___1338).rt11))) + 1) = ((to_rep1(last22((temp___1341).rt11)) - to_rep1(first22((temp___1341).rt11))) + 1))) or
-  ((not (to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11)))) and
-  (((to_rep1(last22((temp___1338).rt11)) - to_rep1(first22((temp___1338).rt11))) + 1) = 0)))) or
-  ((not (to_rep1(first22((temp___1338).rt11)) <= to_rep1(last22((temp___1338).rt11)))) and
-  (((to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))) and
-  (0 = ((to_rep1(last22((temp___1341).rt11)) - to_rep1(first22((temp___1341).rt11))) + 1))) or
-  (not (to_rep1(first22((temp___1341).rt11)) <= to_rep1(last22((temp___1341).rt11))))))) and
-  (temp___1342 = temp___1338)))) and
-  (forall temp___1343:int. ((((1 <= temp___1343) and
-  (temp___1343 <= to_rep1(data__last2))) and
-  ((o90[temp___1343]) = ((temp___1342).elts11[temp___1343]))) or
-  ((not ((1 <= temp___1343) and (temp___1343 <= to_rep1(data__last2)))) and
-  ((o90[temp___1343]) = (result__9[temp___1343])))))) and ((result48 = {
-  map__content = result__9 }) and (result__10 = o90))) and
-  ((result49 = c186b) and (c186b1 = result__10)))))) ->
-  ((((to_rep8(o91) = 16) and ((to_rep7(o92) = 25) and (o93 = {
-  rec__screen__interfac__xycoordt__x = o92;
-  rec__screen__interfac__xycoordt__y = o91 }))) and (o94 = {
-  us_split_fields5 = o93 })) -> (((result50 = { bool__content = ok10 }) and
-  (ok11 = match_bool(ok10, consoleok10, false))) ->
-  (((minpreservedlog1 = c193b) and in_range4(c193b)) ->
-  ((((((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))) = 0) and
-  (screen__writeconfigdata__B196b__data__assume = { elts =
-  temp___String_Literal_1360(void); rt = mk(1, 7) })) or
-  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))) = 0)) and
-  ((((((((1 <= 7) and (o95 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
-  (o95 = 0))) and
-  ((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt))) and
-  (o96 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt))) + 1))) or
-  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)))) and
-  (o96 = 0))) and (o97 = (o96 + o95)))) and
-  (o98 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)) + o97))) and
-  (o99 = (o98 - 1))) and ((o100 = o99) and in_range2(o99))) and
-  (screen__writeconfigdata__B196b__data__assume = { elts =
-  concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).elts,
-  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
-  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
-  temp___String_Literal_1360(void), 1, 7); rt =
-  mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c193b,1024)))).rt)),
-  o100) })))) and (((result51 = data3) and
-  (data8 = (screen__writeconfigdata__B196b__data__assume).elts)) and
-  ((to_rep1(data__first3) = to_rep1(first((screen__writeconfigdata__B196b__data__assume).rt))) and
-  (to_rep1(data__last3) = to_rep1(last((screen__writeconfigdata__B196b__data__assume).rt)))))) and
-  (dynamic_property(1, 2147483647, to_rep1(data__first3),
-  to_rep1(data__last3)) and (((result52 = result__3) and
-  (result__11 = screen__writeconfigdata__B196b__result__aggregate_def(32))) and
-  (((((((((2 <= to_rep1(data__last3)) -> (((to_rep1(data__first3) <= 2) and
-  (2 <= to_rep1(data__last3))) and
+  currentconfig__split_fields13 } }, { us_split_fields1 = {
+  rec__screen__displayedconfigt__latchunlock = newconfig__split_fields13;
+  rec__screen__displayedconfigt__alarmsilent = newconfig__split_fields14;
+  rec__screen__displayedconfigt__fingerwait = newconfig__split_fields15;
+  rec__screen__displayedconfigt__tokenremove = newconfig__split_fields16;
+  rec__screen__displayedconfigt__workstart = newconfig__split_fields17;
+  rec__screen__displayedconfigt__workend = newconfig__split_fields18;
+  rec__screen__displayedconfigt__authduration = newconfig__split_fields19;
+  rec__screen__displayedconfigt__policy = newconfig__split_fields20;
+  rec__screen__displayedconfigt__minpreservedlog = newconfig__split_fields21;
+  rec__screen__displayedconfigt__alarmthreshold = newconfig__split_fields22;
+  rec__screen__displayedconfigt__minentry = newconfig__split_fields23;
+  rec__screen__displayedconfigt__clearance = newconfig__split_fields24;
+  rec__screen__displayedconfigt__maxfar = newconfig__split_fields25 }
+  }) = true)))
+
+axiom H49 : (result17 = ok)
+
+axiom H50 : (ok1 = match_bool(ok, consoleok, false))
+
+axiom H51 : (to_rep8(o30) = 9)
+
+axiom H52 : (to_rep7(o31) = 25)
+
+axiom H53 : ((o32 = o31) and (o33 = o30))
+
+axiom H54 : ((o34 = o32) and (o35 = o33))
+
+axiom H55 : ((o26 = latchunlock1) and in_range9(latchunlock1))
+
+axiom H56 : (o27 = secondsstring(o26))
+
+axiom H57 : ((o28 = o27) and (o29 = mk(1, 7)))
+
+axiom H58 : (result18 = ok1)
+
+axiom H59 : (ok2 = match_bool(ok1, consoleok1, false))
+
+axiom H60 : (to_rep8(o40) = 10)
+
+axiom H61 : (to_rep7(o41) = 25)
+
+axiom H62 : ((o42 = o41) and (o43 = o40))
+
+axiom H63 : ((o44 = o42) and (o45 = o43))
+
+axiom H64 : ((o36 = alarmsilent1) and in_range9(alarmsilent1))
+
+axiom H65 : (o37 = secondsstring(o36))
+
+axiom H66 : ((o38 = o37) and (o39 = mk(1, 7)))
+
+axiom H67 : (result19 = ok2)
+
+axiom H68 : (ok3 = match_bool(ok2, consoleok2, false))
+
+axiom H69 : (to_rep8(o50) = 9)
+
+axiom H70 : (to_rep7(o51) = 63)
+
+axiom H71 : ((o52 = o51) and (o53 = o50))
+
+axiom H72 : ((o54 = o52) and (o55 = o53))
+
+axiom H73 : ((o46 = fingerwait1) and in_range9(fingerwait1))
+
+axiom H74 : (o47 = secondsstring(o46))
+
+axiom H75 : ((o48 = o47) and (o49 = mk(1, 7)))
+
+axiom H76 : (result20 = ok3)
+
+axiom H77 : (ok4 = match_bool(ok3, consoleok3, false))
+
+axiom H78 : (to_rep8(o60) = 10)
+
+axiom H79 : (to_rep7(o61) = 63)
+
+axiom H80 : ((o62 = o61) and (o63 = o60))
+
+axiom H81 : ((o64 = o62) and (o65 = o63))
+
+axiom H82 : ((o56 = tokenremove1) and in_range9(tokenremove1))
+
+axiom H83 : (o57 = secondsstring(o56))
+
+axiom H84 : ((o58 = o57) and (o59 = mk(1, 7)))
+
+axiom H85 : (result21 = ok4)
+
+axiom H86 : (ok5 = match_bool(ok4, consoleok4, false))
+
+axiom H87 : (policy1 = c111b)
+
+axiom H88 : in_range10(c111b)
+
+axiom H89 : (result22 = data)
+
+axiom H90 : (data6 = (to_string(attr__ATTRIBUTE_IMAGE10(c111b))).elts)
+
+axiom H91 :
+  (to_rep1(data__first) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE10(c111b))).rt)))
+
+axiom H92 :
+  (to_rep1(data__last) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE10(c111b))).rt)))
+
+axiom H93 : dynamic_property(1, 2147483647, to_rep1(data__first),
+  to_rep1(data__last))
+
+axiom H94 : (result23 = result__)
+
+axiom H95 :
+  (result__6 = screen__writeconfigdata__B114b__result__aggregate_def(32))
+
+axiom H96 : (((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (((1 <= to_rep1(data__last)) ->
+  (((to_rep1(data__last) - to_rep1(data__first)) + 1) = ((to_rep1(data__last) - 1) + 1))) and
+  ((not (1 <= to_rep1(data__last))) ->
+  (((to_rep1(data__last) - to_rep1(data__first)) + 1) = 0)))) and
+  ((not (to_rep1(data__first) <= to_rep1(data__last))) ->
+  ((1 <= to_rep1(data__last)) -> (0 = ((to_rep1(data__last) - 1) + 1)))))
+
+axiom H97 : ((temp___1720 = slide(data6, to_rep1(data__first), 1)) and
+  (temp___17201 = mk1(1, to_rep1(data__last))))
+
+axiom H98 : ((1 <= to_rep1(data__last)) -> (((1 <= 1) and (1 <= 12)) and
+  ((1 <= to_rep1(data__last)) and (to_rep1(data__last) <= 12))))
+
+axiom H99 : (o66 = result__6)
+
+axiom H100 : ((temp___1723 = o66) and (temp___17231 = mk1(1,
+  to_rep1(data__last))))
+
+axiom H101 :
+  (((to_rep1(first2(temp___17201)) <= to_rep1(last2(temp___17201))) ->
+  (((to_rep1(first2(temp___17231)) <= to_rep1(last2(temp___17231))) ->
+  (((to_rep1(last2(temp___17201)) - to_rep1(first2(temp___17201))) + 1) = ((to_rep1(last2(temp___17231)) - to_rep1(first2(temp___17231))) + 1))) and
+  ((not (to_rep1(first2(temp___17231)) <= to_rep1(last2(temp___17231)))) ->
+  (((to_rep1(last2(temp___17201)) - to_rep1(first2(temp___17201))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___17201)) <= to_rep1(last2(temp___17201)))) ->
+  ((to_rep1(first2(temp___17231)) <= to_rep1(last2(temp___17231))) ->
+  (0 = ((to_rep1(last2(temp___17231)) - to_rep1(first2(temp___17231))) + 1)))))
+
+axiom H102 : ((temp___1724 = temp___1720) and (temp___17241 = temp___17201))
+
+axiom H103 :
+  (forall temp___1725:int. ((((1 <= temp___1725) and
+  (temp___1725 <= to_rep1(data__last))) ->
+  ((o67[temp___1725]) = (temp___1724[temp___1725]))) and
+  ((not ((1 <= temp___1725) and (temp___1725 <= to_rep1(data__last)))) ->
+  ((o67[temp___1725]) = (result__6[temp___1725])))))
+
+axiom H104 : (result24 = result__6)
+
+axiom H105 : (result__7 = o67)
+
+axiom H106 : (result25 = c112b)
+
+axiom H107 : (c112b1 = result__7)
+
+axiom H108 : (to_rep8(o68) = 12)
+
+axiom H109 : (to_rep7(o69) = 25)
+
+axiom H110 : ((o70 = o69) and (o71 = o68))
+
+axiom H111 : ((o72 = o70) and (o73 = o71))
+
+axiom H112 : (result26 = ok5)
+
+axiom H113 : (ok6 = match_bool(ok5, consoleok5, false))
+
+axiom H114 : (workstart1 = c119b)
+
+axiom H115 : in_range5(c119b)
+
+axiom H116 : (temp___1732 = printduration(c119b))
+
+axiom H117 : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
+  (5 <= 10))))
+
+axiom H118 : (o74 = temp___1732)
+
+axiom H119 : (result27 = c120b)
+
+axiom H120 : (c120b1 = o74)
+
+axiom H121 : (to_rep8(o75) = 12)
+
+axiom H122 : (to_rep7(o76) = 63)
+
+axiom H123 : ((o77 = o76) and (o78 = o75))
+
+axiom H124 : ((o79 = o77) and (o80 = o78))
+
+axiom H125 : (result28 = ok6)
+
+axiom H126 : (ok7 = match_bool(ok6, consoleok6, false))
+
+axiom H127 : (workend1 = c125b)
+
+axiom H128 : in_range5(c125b)
+
+axiom H129 : (temp___1735 = printduration(c125b))
+
+axiom H130 : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
+  (5 <= 10))))
+
+axiom H131 : (o81 = temp___1735)
+
+axiom H132 : (result29 = c126b)
+
+axiom H133 : (c126b1 = o81)
+
+axiom H134 : (to_rep8(o82) = 13)
+
+axiom H135 : (to_rep7(o83) = 63)
+
+axiom H136 : ((o84 = o83) and (o85 = o82))
+
+axiom H137 : ((o86 = o84) and (o87 = o85))
+
+axiom H138 : (result30 = ok7)
+
+axiom H139 : (ok8 = match_bool(ok7, consoleok7, false))
+
+axiom H140 : (authduration1 = c131b)
+
+axiom H141 : in_range5(c131b)
+
+axiom H142 : (temp___1738 = printduration(c131b))
+
+axiom H143 : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
+  (5 <= 10))))
+
+axiom H144 : (o88 = temp___1738)
+
+axiom H145 : (result31 = c132b)
+
+axiom H146 : (c132b1 = o88)
+
+axiom H147 : (to_rep8(o89) = 13)
+
+axiom H148 : (to_rep7(o90) = 25)
+
+axiom H149 : ((o91 = o90) and (o92 = o89))
+
+axiom H150 : ((o93 = o91) and (o94 = o92))
+
+axiom H151 : (result32 = ok8)
+
+axiom H152 : (ok9 = match_bool(ok8, consoleok8, false))
+
+axiom H153 : (clearance1 = c137b)
+
+axiom H154 : in_range8(c137b)
+
+axiom H155 : (result33 = data1)
+
+axiom H156 : (data7 = (to_string(attr__ATTRIBUTE_IMAGE8(c137b))).elts)
+
+axiom H157 :
+  (to_rep1(data__first1) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(c137b))).rt)))
+
+axiom H158 :
+  (to_rep1(data__last1) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(c137b))).rt)))
+
+axiom H159 : dynamic_property(1, 2147483647, to_rep1(data__first1),
+  to_rep1(data__last1))
+
+axiom H160 : (result34 = result__1)
+
+axiom H161 :
+  (result__8 = screen__writeconfigdata__B140b__result__aggregate_def(32))
+
+axiom H162 : (((to_rep1(data__first1) <= to_rep1(data__last1)) ->
+  (((1 <= to_rep1(data__last1)) ->
+  (((to_rep1(data__last1) - to_rep1(data__first1)) + 1) = ((to_rep1(data__last1) - 1) + 1))) and
+  ((not (1 <= to_rep1(data__last1))) ->
+  (((to_rep1(data__last1) - to_rep1(data__first1)) + 1) = 0)))) and
+  ((not (to_rep1(data__first1) <= to_rep1(data__last1))) ->
+  ((1 <= to_rep1(data__last1)) -> (0 = ((to_rep1(data__last1) - 1) + 1)))))
+
+axiom H163 : ((temp___1739 = slide(data7, to_rep1(data__first1), 1)) and
+  (temp___17391 = mk2(1, to_rep1(data__last1))))
+
+axiom H164 : ((1 <= to_rep1(data__last1)) -> (((1 <= 1) and (1 <= 12)) and
+  ((1 <= to_rep1(data__last1)) and (to_rep1(data__last1) <= 12))))
+
+axiom H165 : (o95 = result__8)
+
+axiom H166 : ((temp___1742 = o95) and (temp___17421 = mk2(1,
+  to_rep1(data__last1))))
+
+axiom H167 :
+  (((to_rep1(first4(temp___17391)) <= to_rep1(last4(temp___17391))) ->
+  (((to_rep1(first4(temp___17421)) <= to_rep1(last4(temp___17421))) ->
+  (((to_rep1(last4(temp___17391)) - to_rep1(first4(temp___17391))) + 1) = ((to_rep1(last4(temp___17421)) - to_rep1(first4(temp___17421))) + 1))) and
+  ((not (to_rep1(first4(temp___17421)) <= to_rep1(last4(temp___17421)))) ->
+  (((to_rep1(last4(temp___17391)) - to_rep1(first4(temp___17391))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___17391)) <= to_rep1(last4(temp___17391)))) ->
+  ((to_rep1(first4(temp___17421)) <= to_rep1(last4(temp___17421))) ->
+  (0 = ((to_rep1(last4(temp___17421)) - to_rep1(first4(temp___17421))) + 1)))))
+
+axiom H168 : ((temp___1743 = temp___1739) and (temp___17431 = temp___17391))
+
+axiom H169 :
+  (forall temp___1744:int. ((((1 <= temp___1744) and
+  (temp___1744 <= to_rep1(data__last1))) ->
+  ((o96[temp___1744]) = (temp___1743[temp___1744]))) and
+  ((not ((1 <= temp___1744) and (temp___1744 <= to_rep1(data__last1)))) ->
+  ((o96[temp___1744]) = (result__8[temp___1744])))))
+
+axiom H170 : (result35 = result__8)
+
+axiom H171 : (result__9 = o96)
+
+axiom H172 : (result36 = c138b)
+
+axiom H173 : (c138b1 = result__9)
+
+axiom H174 : (to_rep8(o97) = 15)
+
+axiom H175 : (to_rep7(o98) = 25)
+
+axiom H176 : ((o99 = o98) and (o100 = o97))
+
+axiom H177 : ((o101 = o99) and (o102 = o100))
+
+axiom H178 : (result37 = ok9)
+
+axiom H179 : (ok10 = match_bool(ok9, consoleok9, false))
+
+axiom H180 : (minentry1 = c145b)
+
+axiom H181 : in_range8(c145b)
+
+axiom H182 : (result38 = data2)
+
+axiom H183 : (data8 = (to_string(attr__ATTRIBUTE_IMAGE8(c145b))).elts)
+
+axiom H184 :
+  (to_rep1(data__first2) = to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE8(c145b))).rt)))
+
+axiom H185 :
+  (to_rep1(data__last2) = to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE8(c145b))).rt)))
+
+axiom H186 : dynamic_property(1, 2147483647, to_rep1(data__first2),
+  to_rep1(data__last2))
+
+axiom H187 : (result39 = result__2)
+
+axiom H188 :
+  (result__10 = screen__writeconfigdata__B148b__result__aggregate_def(32))
+
+axiom H189 : (((to_rep1(data__first2) <= to_rep1(data__last2)) ->
+  (((1 <= to_rep1(data__last2)) ->
+  (((to_rep1(data__last2) - to_rep1(data__first2)) + 1) = ((to_rep1(data__last2) - 1) + 1))) and
+  ((not (1 <= to_rep1(data__last2))) ->
+  (((to_rep1(data__last2) - to_rep1(data__first2)) + 1) = 0)))) and
+  ((not (to_rep1(data__first2) <= to_rep1(data__last2))) ->
+  ((1 <= to_rep1(data__last2)) -> (0 = ((to_rep1(data__last2) - 1) + 1)))))
+
+axiom H190 : ((temp___1749 = slide(data8, to_rep1(data__first2), 1)) and
+  (temp___17491 = mk3(1, to_rep1(data__last2))))
+
+axiom H191 : ((1 <= to_rep1(data__last2)) -> (((1 <= 1) and (1 <= 12)) and
+  ((1 <= to_rep1(data__last2)) and (to_rep1(data__last2) <= 12))))
+
+axiom H192 : (o103 = result__10)
+
+axiom H193 : ((temp___1752 = o103) and (temp___17521 = mk3(1,
+  to_rep1(data__last2))))
+
+axiom H194 :
+  (((to_rep1(first6(temp___17491)) <= to_rep1(last6(temp___17491))) ->
+  (((to_rep1(first6(temp___17521)) <= to_rep1(last6(temp___17521))) ->
+  (((to_rep1(last6(temp___17491)) - to_rep1(first6(temp___17491))) + 1) = ((to_rep1(last6(temp___17521)) - to_rep1(first6(temp___17521))) + 1))) and
+  ((not (to_rep1(first6(temp___17521)) <= to_rep1(last6(temp___17521)))) ->
+  (((to_rep1(last6(temp___17491)) - to_rep1(first6(temp___17491))) + 1) = 0)))) and
+  ((not (to_rep1(first6(temp___17491)) <= to_rep1(last6(temp___17491)))) ->
+  ((to_rep1(first6(temp___17521)) <= to_rep1(last6(temp___17521))) ->
+  (0 = ((to_rep1(last6(temp___17521)) - to_rep1(first6(temp___17521))) + 1)))))
+
+axiom H195 : ((temp___1753 = temp___1749) and (temp___17531 = temp___17491))
+
+axiom H196 :
+  (forall temp___1754:int. ((((1 <= temp___1754) and
+  (temp___1754 <= to_rep1(data__last2))) ->
+  ((o104[temp___1754]) = (temp___1753[temp___1754]))) and
+  ((not ((1 <= temp___1754) and (temp___1754 <= to_rep1(data__last2)))) ->
+  ((o104[temp___1754]) = (result__10[temp___1754])))))
+
+axiom H197 : (result40 = result__10)
+
+axiom H198 : (result__11 = o104)
+
+axiom H199 : (result41 = c146b)
+
+axiom H200 : (c146b1 = result__11)
+
+axiom H201 : (to_rep8(o105) = 16)
+
+axiom H202 : (to_rep7(o106) = 25)
+
+axiom H203 : ((o107 = o106) and (o108 = o105))
+
+axiom H204 : ((o109 = o107) and (o110 = o108))
+
+axiom H205 : (result42 = ok10)
+
+axiom H206 : (ok11 = match_bool(ok10, consoleok10, false))
+
+axiom H207 : (minpreservedlog1 = c153b)
+
+axiom H208 : in_range4(c153b)
+
+axiom H209 :
+  ((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0) ->
+  ((screen__writeconfigdata__B156b__data__assume = temp___String_Literal_1771(void)) and
+  (screen__writeconfigdata__B156b__data__assume1 = mk(1, 7))))
+
+axiom H210 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((1 <= 7) -> (o111 = ((7 - 1) + 1))))
+
+axiom H211 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((not (1 <= 7)) -> (o111 = 0)))
+
+axiom H212 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt))) ->
+  (o112 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt))) + 1))))
+
+axiom H213 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)))) ->
+  (o112 = 0)))
+
+axiom H214 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  (o113 = (o112 + o111)))
+
+axiom H215 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  (o114 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)) + o113)))
+
+axiom H216 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  (o115 = (o114 - 1)))
+
+axiom H217 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((o116 = o115) and in_range2(o115)))
+
+axiom H218 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))) = 0)) ->
+  ((screen__writeconfigdata__B156b__data__assume = concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)),
+  temp___String_Literal_1771(void), 1, 7)) and
+  (screen__writeconfigdata__B156b__data__assume1 = mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c153b,1024)))).rt)),
+  o116))))
+
+axiom H219 : (result43 = data3)
+
+axiom H220 : (data9 = screen__writeconfigdata__B156b__data__assume)
+
+axiom H221 :
+  (to_rep1(data__first3) = to_rep1(first(screen__writeconfigdata__B156b__data__assume1)))
+
+axiom H222 :
+  (to_rep1(data__last3) = to_rep1(last(screen__writeconfigdata__B156b__data__assume1)))
+
+axiom H223 : dynamic_property(1, 2147483647, to_rep1(data__first3),
+  to_rep1(data__last3))
+
+axiom H224 : (result44 = result__3)
+
+axiom H225 :
+  (result__12 = screen__writeconfigdata__B156b__result__aggregate_def(32))
+
+axiom H226 : ((2 <= to_rep1(data__last3)) ->
+  (((to_rep1(data__first3) <= 2) and (2 <= to_rep1(data__last3))) and
   ((to_rep1(data__first3) <= to_rep1(data__last3)) and
-  (to_rep1(data__last3) <= to_rep1(data__last3))))) and (o101 = data8)) and
-  (temp___1350 = { elts13 = o101; rt13 = mk13(2, to_rep1(data__last3))
-  })) and
-  ((((to_rep1(first26((temp___1350).rt13)) <= to_rep1(last26((temp___1350).rt13))) and
-  (((1 <= (to_rep1(data__last3) - 1)) and
-  (((to_rep1(last26((temp___1350).rt13)) - to_rep1(first26((temp___1350).rt13))) + 1) = (((to_rep1(data__last3) - 1) - 1) + 1))) or
-  ((not (1 <= (to_rep1(data__last3) - 1))) and
-  (((to_rep1(last26((temp___1350).rt13)) - to_rep1(first26((temp___1350).rt13))) + 1) = 0)))) or
-  ((not (to_rep1(first26((temp___1350).rt13)) <= to_rep1(last26((temp___1350).rt13)))) and
-  (((1 <= (to_rep1(data__last3) - 1)) and
-  (0 = (((to_rep1(data__last3) - 1) - 1) + 1))) or
-  (not (1 <= (to_rep1(data__last3) - 1)))))) and (temp___1351 = { elts12 =
-  slide((temp___1350).elts13, to_rep1(first26((temp___1350).rt13)), 1);
-  rt12 = mk12(1, (to_rep1(data__last3) - 1)) }))) and
-  ((((temp___1353 = (to_rep1(data__last3) - 1)) and
-  in_range1((to_rep1(data__last3) - 1))) and ((((1 <= temp___1353) ->
-  (((1 <= 1) and (1 <= 15)) and ((1 <= temp___1353) and
-  (temp___1353 <= 15)))) and (o102 = result__11)) and (temp___1354 = {
-  elts12 = o102; rt12 = mk12(1, temp___1353) }))) and
-  ((((to_rep1(first24((temp___1351).rt12)) <= to_rep1(last24((temp___1351).rt12))) and
-  (((to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))) and
-  (((to_rep1(last24((temp___1351).rt12)) - to_rep1(first24((temp___1351).rt12))) + 1) = ((to_rep1(last24((temp___1354).rt12)) - to_rep1(first24((temp___1354).rt12))) + 1))) or
-  ((not (to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12)))) and
-  (((to_rep1(last24((temp___1351).rt12)) - to_rep1(first24((temp___1351).rt12))) + 1) = 0)))) or
-  ((not (to_rep1(first24((temp___1351).rt12)) <= to_rep1(last24((temp___1351).rt12)))) and
-  (((to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))) and
-  (0 = ((to_rep1(last24((temp___1354).rt12)) - to_rep1(first24((temp___1354).rt12))) + 1))) or
-  (not (to_rep1(first24((temp___1354).rt12)) <= to_rep1(last24((temp___1354).rt12))))))) and
-  (temp___1355 = temp___1351)))) and
-  (forall temp___1356:int. ((((1 <= temp___1356) and
-  (temp___1356 <= (to_rep1(data__last3) - 1))) and
-  ((o103[temp___1356]) = ((temp___1355).elts12[temp___1356]))) or
-  ((not ((1 <= temp___1356) and
-  (temp___1356 <= (to_rep1(data__last3) - 1)))) and
-  ((o103[temp___1356]) = (result__11[temp___1356])))))) and ((result53 = {
-  map__content = result__11 }) and (result__12 = o103))) and
-  ((result54 = c194b) and (c194b1 = result__12)))))) ->
-  ((((to_rep8(o104) = 15) and ((to_rep7(o105) = 63) and (o106 = {
-  rec__screen__interfac__xycoordt__x = o105;
-  rec__screen__interfac__xycoordt__y = o104 }))) and (o107 = {
-  us_split_fields5 = o106 })) -> (((result55 = { bool__content = ok11 }) and
-  (ok12 = match_bool(ok11, consoleok11, false))) ->
-  (((alarmthreshold1 = c205b) and in_range4(c205b)) ->
-  (((((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))) = 0) and
-  (screen__writeconfigdata__B208b__data__assume = { elts =
-  temp___String_Literal_1376(void); rt = mk(1, 7) })) or
-  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))) = 0)) and
-  ((((((((1 <= 7) and (o108 = ((7 - 1) + 1))) or ((not (1 <= 7)) and
-  (o108 = 0))) and
-  ((((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt))) and
-  (o109 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt))) + 1))) or
-  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)))) and
-  (o109 = 0))) and (o110 = (o109 + o108)))) and
-  (o111 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)) + o110))) and
-  (o112 = (o111 - 1))) and ((o113 = o112) and in_range2(o112))) and
-  (screen__writeconfigdata__B208b__data__assume = { elts =
-  concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).elts,
-  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
-  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
-  temp___String_Literal_1376(void), 1, 7); rt =
-  mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c205b,1024)))).rt)),
-  o113) })))) and (((result56 = data4) and
-  (data9 = (screen__writeconfigdata__B208b__data__assume).elts)) and
-  ((to_rep1(data__first4) = to_rep1(first((screen__writeconfigdata__B208b__data__assume).rt))) and
-  (to_rep1(data__last4) = to_rep1(last((screen__writeconfigdata__B208b__data__assume).rt)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(data__first4),
-  to_rep1(data__last4)) -> (((result57 = result__4) and
-  (result__13 = screen__writeconfigdata__B208b__result__aggregate_def(32))) ->
-  ((((((2 <= to_rep1(data__last4)) -> (((to_rep1(data__first4) <= 2) and
-  (2 <= to_rep1(data__last4))) and
+  (to_rep1(data__last3) <= to_rep1(data__last3)))))
+
+axiom H227 : (o117 = data9)
+
+axiom H228 : ((temp___1761 = o117) and (temp___17611 = mk5(2,
+  to_rep1(data__last3))))
+
+axiom H229 :
+  (((to_rep1(first10(temp___17611)) <= to_rep1(last10(temp___17611))) ->
+  (((1 <= (to_rep1(data__last3) - 1)) ->
+  (((to_rep1(last10(temp___17611)) - to_rep1(first10(temp___17611))) + 1) = (((to_rep1(data__last3) - 1) - 1) + 1))) and
+  ((not (1 <= (to_rep1(data__last3) - 1))) ->
+  (((to_rep1(last10(temp___17611)) - to_rep1(first10(temp___17611))) + 1) = 0)))) and
+  ((not (to_rep1(first10(temp___17611)) <= to_rep1(last10(temp___17611)))) ->
+  ((1 <= (to_rep1(data__last3) - 1)) ->
+  (0 = (((to_rep1(data__last3) - 1) - 1) + 1)))))
+
+axiom H230 : ((temp___1762 = slide(temp___1761,
+  to_rep1(first10(temp___17611)), 1)) and (temp___17621 = mk4(1,
+  (to_rep1(data__last3) - 1))))
+
+axiom H231 : ((temp___1764 = (to_rep1(data__last3) - 1)) and
+  in_range1((to_rep1(data__last3) - 1)))
+
+axiom H232 : ((1 <= temp___1764) -> (((1 <= 1) and (1 <= 15)) and
+  ((1 <= temp___1764) and (temp___1764 <= 15))))
+
+axiom H233 : (o118 = result__12)
+
+axiom H234 : ((temp___1765 = o118) and (temp___17651 = mk4(1, temp___1764)))
+
+axiom H235 :
+  (((to_rep1(first8(temp___17621)) <= to_rep1(last8(temp___17621))) ->
+  (((to_rep1(first8(temp___17651)) <= to_rep1(last8(temp___17651))) ->
+  (((to_rep1(last8(temp___17621)) - to_rep1(first8(temp___17621))) + 1) = ((to_rep1(last8(temp___17651)) - to_rep1(first8(temp___17651))) + 1))) and
+  ((not (to_rep1(first8(temp___17651)) <= to_rep1(last8(temp___17651)))) ->
+  (((to_rep1(last8(temp___17621)) - to_rep1(first8(temp___17621))) + 1) = 0)))) and
+  ((not (to_rep1(first8(temp___17621)) <= to_rep1(last8(temp___17621)))) ->
+  ((to_rep1(first8(temp___17651)) <= to_rep1(last8(temp___17651))) ->
+  (0 = ((to_rep1(last8(temp___17651)) - to_rep1(first8(temp___17651))) + 1)))))
+
+axiom H236 : ((temp___1766 = temp___1762) and (temp___17661 = temp___17621))
+
+axiom H237 :
+  (forall temp___1767:int. ((((1 <= temp___1767) and
+  (temp___1767 <= (to_rep1(data__last3) - 1))) ->
+  ((o119[temp___1767]) = (temp___1766[temp___1767]))) and
+  ((not ((1 <= temp___1767) and
+  (temp___1767 <= (to_rep1(data__last3) - 1)))) ->
+  ((o119[temp___1767]) = (result__12[temp___1767])))))
+
+axiom H238 : (result45 = result__12)
+
+axiom H239 : (result__13 = o119)
+
+axiom H240 : (result46 = c154b)
+
+axiom H241 : (c154b1 = result__13)
+
+axiom H242 : (to_rep8(o120) = 15)
+
+axiom H243 : (to_rep7(o121) = 63)
+
+axiom H244 : ((o122 = o121) and (o123 = o120))
+
+axiom H245 : ((o124 = o122) and (o125 = o123))
+
+axiom H246 : (result47 = ok11)
+
+axiom H247 : (ok12 = match_bool(ok11, consoleok11, false))
+
+axiom H248 : (alarmthreshold1 = c165b)
+
+axiom H249 : in_range4(c165b)
+
+axiom H250 :
+  ((length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0) ->
+  ((screen__writeconfigdata__B168b__data__assume = temp___String_Literal_1787(void)) and
+  (screen__writeconfigdata__B168b__data__assume1 = mk(1, 7))))
+
+axiom H251 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((1 <= 7) -> (o126 = ((7 - 1) + 1))))
+
+axiom H252 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((not (1 <= 7)) -> (o126 = 0)))
+
+axiom H253 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt))) ->
+  (o127 = ((to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)) - to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt))) + 1))))
+
+axiom H254 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((not (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)) <= to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)))) ->
+  (o127 = 0)))
+
+axiom H255 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  (o128 = (o127 + o126)))
+
+axiom H256 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  (o129 = (to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)) + o128)))
+
+axiom H257 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  (o130 = (o129 - 1)))
+
+axiom H258 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((o131 = o130) and in_range2(o130)))
+
+axiom H259 :
+  ((not (length(to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))) = 0)) ->
+  ((screen__writeconfigdata__B168b__data__assume = concat((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).elts,
+  to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)),
+  to_rep1(last((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)),
+  temp___String_Literal_1787(void), 1, 7)) and
+  (screen__writeconfigdata__B168b__data__assume1 = mk(to_rep1(first((to_string(attr__ATTRIBUTE_IMAGE4(comp_div(c165b,1024)))).rt)),
+  o131))))
+
+axiom H260 : (result48 = data4)
+
+axiom H261 : (data10 = screen__writeconfigdata__B168b__data__assume)
+
+axiom H262 :
+  (to_rep1(data__first4) = to_rep1(first(screen__writeconfigdata__B168b__data__assume1)))
+
+axiom H263 :
+  (to_rep1(data__last4) = to_rep1(last(screen__writeconfigdata__B168b__data__assume1)))
+
+axiom H264 : dynamic_property(1, 2147483647, to_rep1(data__first4),
+  to_rep1(data__last4))
+
+axiom H265 : (result49 = result__4)
+
+axiom H266 :
+  (result__14 = screen__writeconfigdata__B168b__result__aggregate_def(32))
+
+axiom H267 : ((2 <= to_rep1(data__last4)) ->
+  (((to_rep1(data__first4) <= 2) and (2 <= to_rep1(data__last4))) and
   ((to_rep1(data__first4) <= to_rep1(data__last4)) and
-  (to_rep1(data__last4) <= to_rep1(data__last4))))) and (o114 = data9)) and
-  (temp___1366 = { elts15 = o114; rt15 = mk15(2, to_rep1(data__last4))
-  })) and
-  ((((to_rep1(first30((temp___1366).rt15)) <= to_rep1(last30((temp___1366).rt15))) and
-  (((1 <= (to_rep1(data__last4) - 1)) and
-  (((to_rep1(last30((temp___1366).rt15)) - to_rep1(first30((temp___1366).rt15))) + 1) = (((to_rep1(data__last4) - 1) - 1) + 1))) or
-  ((not (1 <= (to_rep1(data__last4) - 1))) and
-  (((to_rep1(last30((temp___1366).rt15)) - to_rep1(first30((temp___1366).rt15))) + 1) = 0)))) or
-  ((not (to_rep1(first30((temp___1366).rt15)) <= to_rep1(last30((temp___1366).rt15)))) and
-  (((1 <= (to_rep1(data__last4) - 1)) and
-  (0 = (((to_rep1(data__last4) - 1) - 1) + 1))) or
-  (not (1 <= (to_rep1(data__last4) - 1)))))) and (temp___1367 = { elts14 =
-  slide((temp___1366).elts15, to_rep1(first30((temp___1366).rt15)), 1);
-  rt14 = mk14(1, (to_rep1(data__last4) - 1)) }))) ->
-  (((temp___1369 = (to_rep1(data__last4) - 1)) and
-  in_range1((to_rep1(data__last4) - 1))) -> ((1 <= temp___1369) ->
-  (1 <= 1)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+  (to_rep1(data__last4) <= to_rep1(data__last4)))))
+
+axiom H268 : (o132 = data10)
+
+axiom H269 : ((temp___1777 = o132) and (temp___17771 = mk7(2,
+  to_rep1(data__last4))))
+
+axiom H270 :
+  (((to_rep1(first14(temp___17771)) <= to_rep1(last14(temp___17771))) ->
+  (((1 <= (to_rep1(data__last4) - 1)) ->
+  (((to_rep1(last14(temp___17771)) - to_rep1(first14(temp___17771))) + 1) = (((to_rep1(data__last4) - 1) - 1) + 1))) and
+  ((not (1 <= (to_rep1(data__last4) - 1))) ->
+  (((to_rep1(last14(temp___17771)) - to_rep1(first14(temp___17771))) + 1) = 0)))) and
+  ((not (to_rep1(first14(temp___17771)) <= to_rep1(last14(temp___17771)))) ->
+  ((1 <= (to_rep1(data__last4) - 1)) ->
+  (0 = (((to_rep1(data__last4) - 1) - 1) + 1)))))
+
+axiom H271 : ((temp___1778 = slide(temp___1777,
+  to_rep1(first14(temp___17771)), 1)) and (temp___17781 = mk6(1,
+  (to_rep1(data__last4) - 1))))
+
+axiom H272 : ((temp___1780 = (to_rep1(data__last4) - 1)) and
+  in_range1((to_rep1(data__last4) - 1)))
+
+axiom H273 : (1 <= temp___1780)
+
+ (* File "screen.adb", line 276, characters 0-0 *)
+goal WP_parameter_def : (1 <= 1)

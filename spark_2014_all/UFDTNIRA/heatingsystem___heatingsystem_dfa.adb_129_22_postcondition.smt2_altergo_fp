@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -218,10 +218,29 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic clockoffset : int
+
+logic t : int
+
+logic result : int
+
+logic t1 : int
+
+logic t2 : int
+
+logic t3 : int
+
+axiom H : in_range(clockoffset)
+
+axiom H1 : in_range(t)
+
+axiom H2 : (result = t)
+
+axiom H3 : (t1 = mod((t + clockoffset), 86400))
+
+axiom H4 : (t1 = t2)
+
+axiom H5 : (t3 = t1)
+
  (* File "heatingsystem_dfa.adb", line 77, characters 0-0 *)
-goal WP_parameter_def :
-  (forall clockoffset:int. forall t:int. forall result:int. forall t1:int.
-  forall t2:int. forall t3:int. ((in_range(clockoffset) and (in_range(t) and
-  ((({ int__content = result } = { int__content = t }) and
-  (t1 = mod((t + clockoffset), 86400))) and ((t1 = t2) and (t3 = t1))))) ->
-  (t2 = mod((t + clockoffset), 86400))))
+goal WP_parameter_def : (t2 = mod((t + clockoffset), 86400))

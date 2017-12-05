@@ -141,7 +141,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -440,18 +440,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -528,93 +528,213 @@ axiom has_true__def_axiom :
   (exists v:int. (((low <= v) and (v <= high)) and
   ((number_list[v]) = true))))))
 
- (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall is_prime1:(int,bool) farray.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result:int.
-  forall o:int. forall v:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:bool. forall v1:int. forall o10:int. forall o11:int.
-  forall o12:int. forall o13:int. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:bool. forall result:int.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result1:int.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result2:int.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result3:int.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result4:int.
-  forall test_prime_and_coprime_numbers__p__nearest_prime_number__result5:int.
-  forall result1:bool. forall result2:bool. forall result3:bool.
-  (in_range2(value) -> (in_range3(mode) -> ((((0 <= value) and
-  (value <= 100000)) and ((valid_prime_data(is_prime1) = true) and
-  (((mode = 0) and (has_prime(value, 100000) = true)) or
-  ((not (mode = 0)) and (((mode = 1) and (has_prime(0, value) = true)) or
-  ((not (mode = 1)) and (has_prime(0, 100000) = true))))))) ->
-  (((((test_prime_and_coprime_numbers__p__nearest_prime_number__result1 = test_prime_and_coprime_numbers__p__nearest_prime_number__result2) and
-  (test_prime_and_coprime_numbers__p__nearest_prime_number__result3 = test_prime_and_coprime_numbers__p__nearest_prime_number__result1)) and
-  (((o = nearest_number(is_prime1, mode, value)) and (in_range2(o) and
-  ((((0 <= o) and (o <= 100000)) and ((is_prime1[o]) = true)) and
-  (((bool_eq(to_int((is_prime1[value])), to_int(of_int(1))) = true) and
-  (o = value)) or ((not (bool_eq(to_int((is_prime1[value])),
-  to_int(of_int(1))) = true)) and
+logic is_prime1 : (int,bool) farray
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result : int
+
+logic o : int
+
+logic v : int
+
+logic o1 : int
+
+logic v1 : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic o4 : int
+
+logic v2 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : bool
+
+logic o14 : int
+
+logic v3 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic o24 : int
+
+logic result : int
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result1 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result2 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result3 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result4 : int
+
+logic test_prime_and_coprime_numbers__p__nearest_prime_number__result5 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : in_range2(value)
+
+axiom H1 : in_range3(mode)
+
+axiom H2 : (((0 <= value) and (value <= 100000)) and
+  ((valid_prime_data(is_prime1) = true) and (((mode = 0) -> (has_prime(value,
+  100000) = true)) and ((not (mode = 0)) -> (((mode = 1) -> (has_prime(0,
+  value) = true)) and ((not (mode = 1)) -> (has_prime(0,
+  100000) = true)))))))
+
+axiom H3 :
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result1 = test_prime_and_coprime_numbers__p__nearest_prime_number__result2)
+
+axiom H4 :
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result3 = test_prime_and_coprime_numbers__p__nearest_prime_number__result1)
+
+axiom H5 : ((o = nearest_number(is_prime1, mode, value)) and
+  (in_range2(o) and ((((0 <= o) and (o <= 100000)) and
+  ((is_prime1[o]) = true)) and (((bool_eq(to_int((is_prime1[value])),
+  to_int(of_int(1))) = true) -> (o = value)) and
+  ((not (bool_eq(to_int((is_prime1[value])), to_int(of_int(1))) = true)) ->
   (((match_bool(bool_eq(to_int((is_prime1[value])), to_int(of_int(0))),
-  bool_eq(mode, 0), false) = true) and ((value <  o) and
-  (forall v2:int. (((value <= v2) and (v2 <= (o - 1))) ->
-  (not ((is_prime1[v2]) = true)))))) or
+  bool_eq(mode, 0), false) = true) -> ((value <  o) and
+  (forall v4:int. (((value <= v4) and (v4 <= (o - 1))) ->
+  (not ((is_prime1[v4]) = true)))))) and
   ((not (match_bool(bool_eq(to_int((is_prime1[value])), to_int(of_int(0))),
-  bool_eq(mode, 0), false) = true)) and
+  bool_eq(mode, 0), false) = true)) ->
   (((match_bool(bool_eq(to_int((is_prime1[value])), to_int(of_int(0))),
-  bool_eq(mode, 1), false) = true) and ((o <  value) and
-  (forall v2:int. ((((o + 1) <= v2) and (v2 <= value)) ->
-  (not ((is_prime1[v2]) = true)))))) or
+  bool_eq(mode, 1), false) = true) -> ((o <  value) and
+  (forall v4:int. ((((o + 1) <= v4) and (v4 <= value)) ->
+  (not ((is_prime1[v4]) = true)))))) and
   ((not (match_bool(bool_eq(to_int((is_prime1[value])), to_int(of_int(0))),
-  bool_eq(mode, 1), false) = true)) and
+  bool_eq(mode, 1), false) = true)) ->
   ((match_bool(bool_eq(to_int((is_prime1[value])), to_int(of_int(0))),
   bool_eq(mode, 2), false) = true) ->
-  ((forall v2:int. (((max(0, ((value - abs_int((value - o))) + 1)) <= v2) and
-   (v2 <= value)) -> (not ((is_prime1[v2]) = true)))) and
-  (forall v2:int. (((value <= v2) and (v2 <= min(100000,
-  ((value + abs_int((value - o))) - 1)))) -> (not ((is_prime1[v2]) = true))))))))))))))) and
-  (({ int__content = result } = { int__content =
-  test_prime_and_coprime_numbers__p__nearest_prime_number__result }) and
-  (test_prime_and_coprime_numbers__p__nearest_prime_number__result1 = o)))) and
-  (({ int__content =
-  test_prime_and_coprime_numbers__p__nearest_prime_number__result4 } = {
-  int__content =
-  test_prime_and_coprime_numbers__p__nearest_prime_number__result2 }) and
-  (test_prime_and_coprime_numbers__p__nearest_prime_number__result5 = test_prime_and_coprime_numbers__p__nearest_prime_number__result3))) ->
-  ((((is_prime(value) = true) and
-  (test_prime_and_coprime_numbers__p__nearest_prime_number__result4 = value)) or
-  (not (is_prime(value) = true))) -> ((((match_bool(is_prime(value), false,
-  bool_eq(mode, 0)) = true) and
+  ((forall v4:int. (((max(0, ((value - abs_int((value - o))) + 1)) <= v4) and
+   (v4 <= value)) -> (not ((is_prime1[v4]) = true)))) and
+  (forall v4:int. (((value <= v4) and (v4 <= min(100000,
+  ((value + abs_int((value - o))) - 1)))) -> (not ((is_prime1[v4]) = true)))))))))))))))
+
+axiom H6 :
+  (result = test_prime_and_coprime_numbers__p__nearest_prime_number__result)
+
+axiom H7 :
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result1 = o)
+
+axiom H8 :
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result4 = test_prime_and_coprime_numbers__p__nearest_prime_number__result2)
+
+axiom H9 :
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result5 = test_prime_and_coprime_numbers__p__nearest_prime_number__result3)
+
+axiom H10 : ((is_prime(value) = true) ->
+  (test_prime_and_coprime_numbers__p__nearest_prime_number__result4 = value))
+
+axiom H11 : ((match_bool(is_prime(value), false, bool_eq(mode, 0)) = true) ->
   ((value <  test_prime_and_coprime_numbers__p__nearest_prime_number__result4) and
-  (forall v2:int. (((value <= v2) and
-  (v2 <= (test_prime_and_coprime_numbers__p__nearest_prime_number__result4 - 1))) ->
-  (not (is_prime(v2) = true)))))) or (not (match_bool(is_prime(value), false,
-  bool_eq(mode, 0)) = true))) -> ((((match_bool(is_prime(value), false,
-  bool_eq(mode, 1)) = true) and
+  (forall v4:int. (((value <= v4) and
+  (v4 <= (test_prime_and_coprime_numbers__p__nearest_prime_number__result4 - 1))) ->
+  (not (is_prime(v4) = true))))))
+
+axiom H12 : ((match_bool(is_prime(value), false, bool_eq(mode, 1)) = true) ->
   ((test_prime_and_coprime_numbers__p__nearest_prime_number__result4 <  value) and
-  (forall v2:int.
-  ((((test_prime_and_coprime_numbers__p__nearest_prime_number__result4 + 1) <= v2) and
-  (v2 <= value)) -> (not (is_prime(v2) = true)))))) or
-  (not (match_bool(is_prime(value), false, bool_eq(mode, 1)) = true))) ->
-  ((match_bool(is_prime(value), false, bool_eq(mode, 2)) = true) ->
-  (((((((((((((o10 = (value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)) and
-  in_range1((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) and
-  (o11 = abs_int(o10))) and ((o12 = o11) and in_range1(o11))) and
-  (o13 = (value - o12))) and ((o14 = o13) and in_range1(o13))) and
-  (o15 = (o14 + 1))) and ((o16 = o15) and in_range1(o15))) and (o17 = max(0,
-  o16))) and (((o17 <= v1) and (o18 = true)) or ((not (o17 <= v1)) and
-  (o18 = false)))) and (((v1 <= value) and (result2 = match_bool(o18, true,
-  false))) or ((not (v1 <= value)) and (result2 = match_bool(o18, false,
-  false))))) and ((result1 = true) <->
-  (forall v2:int. (((max(0,
-  ((value - abs_int((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) + 1)) <= v2) and
-  (v2 <= value)) -> (not (is_prime(v2) = true)))))) -> ((result1 = true) ->
-  ((((((((((((o1 = (value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)) and
-  in_range1((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) and
-  (o2 = abs_int(o1))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (value + o3))) and ((o5 = o4) and in_range1(o4))) and
-  (o6 = (o5 - 1))) and ((o7 = o6) and in_range1(o6))) and (o8 = min(100000,
-  o7))) and (((v <= o8) and (o9 = true)) or ((not (v <= o8)) and
-  (o9 = false)))) and (((value <= v) and (result3 = o9)) or
-  ((not (value <= v)) and (result3 = false)))) -> ((result3 = true) ->
-  in_range2(v))))))))))))))
+  (forall v4:int.
+  ((((test_prime_and_coprime_numbers__p__nearest_prime_number__result4 + 1) <= v4) and
+  (v4 <= value)) -> (not (is_prime(v4) = true))))))
+
+axiom H13 : (match_bool(is_prime(value), false, bool_eq(mode, 2)) = true)
+
+axiom H14 :
+  ((o15 = (value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)) and
+  in_range1((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)))
+
+axiom H15 : (o16 = abs_int(o15))
+
+axiom H16 : ((o17 = o16) and in_range1(o16))
+
+axiom H17 : (o18 = (value - o17))
+
+axiom H18 : ((o19 = o18) and in_range1(o18))
+
+axiom H19 : (o20 = (o19 + 1))
+
+axiom H20 : ((o21 = o20) and in_range1(o20))
+
+axiom H21 : (o22 = max(0, o21))
+
+axiom H22 : (((o22 <= v3) -> (o23 = true)) and ((not (o22 <= v3)) ->
+  (o23 = false)))
+
+axiom H23 : (((v3 <= value) -> (result3 = match_bool(o23, true, false))) and
+  ((not (v3 <= value)) -> (result3 = match_bool(o23, false, false))))
+
+axiom H24 : ((result2 = true) <->
+  (forall v4:int. (((max(0,
+  ((value - abs_int((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4))) + 1)) <= v4) and
+  (v4 <= value)) -> (not (is_prime(v4) = true)))))
+
+axiom H25 : (result2 = true)
+
+axiom H26 :
+  ((o5 = (value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)) and
+  in_range1((value - test_prime_and_coprime_numbers__p__nearest_prime_number__result4)))
+
+axiom H27 : (o6 = abs_int(o5))
+
+axiom H28 : ((o7 = o6) and in_range1(o6))
+
+axiom H29 : (o8 = (value + o7))
+
+axiom H30 : ((o9 = o8) and in_range1(o8))
+
+axiom H31 : (o10 = (o9 - 1))
+
+axiom H32 : ((o11 = o10) and in_range1(o10))
+
+axiom H33 : (o12 = min(100000, o11))
+
+axiom H34 : (((v2 <= o12) -> (o13 = true)) and ((not (v2 <= o12)) ->
+  (o13 = false)))
+
+axiom H35 : (((value <= v2) -> (result4 = o13)) and ((not (value <= v2)) ->
+  (result4 = false)))
+
+axiom H36 : (result4 = true)
+
+ (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : in_range2(v2)

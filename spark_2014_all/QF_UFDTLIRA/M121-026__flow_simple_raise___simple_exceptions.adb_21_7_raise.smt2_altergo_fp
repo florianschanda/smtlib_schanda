@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,13 +113,30 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic simple_exceptions__in_spark_2__result : int
+
+logic simple_exceptions__in_spark_2__result1 : int
+
+logic simple_exceptions__in_spark_2__result2 : int
+
+logic simple_exceptions__in_spark_2__result3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (not (x <  y))
+
+axiom H3 : (not (y <= x))
+
+axiom H4 :
+  (simple_exceptions__in_spark_2__result3 = simple_exceptions__in_spark_2__result)
+
+axiom H5 :
+  (simple_exceptions__in_spark_2__result3 = simple_exceptions__in_spark_2__result1)
+
+axiom H6 :
+  (simple_exceptions__in_spark_2__result2 = simple_exceptions__in_spark_2__result3)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall simple_exceptions__in_spark_2__result:int.
-  forall simple_exceptions__in_spark_2__result1:int.
-  forall simple_exceptions__in_spark_2__result2:int.
-  forall simple_exceptions__in_spark_2__result3:int. (in_range(x) ->
-  (in_range(y) -> (not ((not (x <  y)) and (((not (y <= x)) and
-  ((simple_exceptions__in_spark_2__result3 = simple_exceptions__in_spark_2__result) and
-  (simple_exceptions__in_spark_2__result3 = simple_exceptions__in_spark_2__result1))) and
-  (simple_exceptions__in_spark_2__result2 = simple_exceptions__in_spark_2__result3)))))))
+goal WP_parameter_def : false

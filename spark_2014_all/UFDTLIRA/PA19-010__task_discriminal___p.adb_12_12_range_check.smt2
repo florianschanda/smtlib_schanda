@@ -113,6 +113,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range1 temp___expr_39)))
 (declare-const p__R2b__assume Int)
+(declare-const us Int)
 (assert (and (= p__R2b__assume (zero Tuple0)) (and (in_range p__R2b__assume) (= p__R2b__assume 0))))
 (assert (= p__R2b__assume r2b))
 (assert (in_range r2b))

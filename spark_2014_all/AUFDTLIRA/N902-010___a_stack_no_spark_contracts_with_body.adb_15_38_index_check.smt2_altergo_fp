@@ -279,7 +279,11 @@ type index__ref = { index__content : index
 
 function index__ref___projection(a: index__ref) : index = (a).index__content
 
+logic sp : int
+
+axiom H : in_range1(sp)
+
+axiom H1 : (not (is_empty(sp) = true))
+
  (* File "a_stack_no_spark_contracts_with_body.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sp:int. (in_range1(sp) -> ((not (is_empty(sp) = true)) ->
-  (1 <= sp))))
+goal WP_parameter_def : (1 <= sp)

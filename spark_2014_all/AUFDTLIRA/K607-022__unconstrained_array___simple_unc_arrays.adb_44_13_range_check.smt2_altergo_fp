@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type value
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -282,7 +282,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -590,10 +590,117 @@ function t26b__ref___projection(a3: t26b__ref) : integer = (a3).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
+logic res : int
+
+logic i : int
+
+logic simple_unc_arrays__min__result : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : value
+
+logic o2 : int
+
+logic temp___844 : int
+
+logic temp___843 : int
+
+logic j : int
+
+logic o3 : int
+
+logic o4 : value
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic j1 : int
+
+logic j2 : int
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic res2 : int
+
+logic i2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic res3 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic res4 : int
+
+logic i4 : int
+
+logic res5 : int
+
+logic i5 : int
+
+logic res6 : int
+
+logic i6 : int
+
+logic res7 : int
+
+logic i7 : int
+
+logic res8 : int
+
+logic i8 : int
+
+logic res9 : int
+
+logic i9 : int
+
+logic result5 : int
+
+logic simple_unc_arrays__min__result1 : int
+
+logic simple_unc_arrays__min__result2 : int
+
+logic simple_unc_arrays__min__result3 : int
+
+logic res10 : int
+
+logic i10 : int
+
+logic simple_unc_arrays__min__result4 : int
+
+logic res11 : int
+
+logic i11 : int
+
+logic simple_unc_arrays__min__result5 : int
+
+logic result6 : bool
+
+axiom H : (dynamic_property1(1, to_rep(a), to_rep2(first(a2)),
   to_rep2(last(a2))) and ((to_rep2(first(a2)) = 1) and
-  (to_rep2(last(a2)) = to_rep(a)))) -> ((not (empty({ us_split_discrs1 = {
+  (to_rep2(last(a2)) = to_rep(a))))
+
+axiom H1 : (not (empty({ us_split_discrs1 = {
   rec__simple_unc_arrays__table__last = a }; us_split_fields1 = {
-  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true)) ->
-  in_range1(to_rep(a))))
+  rec__simple_unc_arrays__table__v = { elts = a1; rt = a2 } } }) = true))
+
+ (* File "simple_unc_arrays.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : in_range1(to_rep(a))

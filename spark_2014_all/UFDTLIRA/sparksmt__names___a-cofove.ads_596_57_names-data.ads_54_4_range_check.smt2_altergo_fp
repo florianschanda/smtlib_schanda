@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -161,7 +161,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type tchar_table_indexB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -188,7 +188,7 @@ function tchar_table_indexB__ref___projection(a: tchar_table_indexB__ref) : tcha
 
 type extended_index
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -456,11 +456,11 @@ logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep1. forall b:us_rep1 [user_eq6(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) -> (get(a,
     n) = get(b, n)))) ->
   (user_eq6(a, b) = match_bool(bool_eq(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) -> (get(a,
         n) = get(b, n))))) ->
   (user_eq6(a, b) = match_bool(bool_eq(length1(a), length1(b)), false,
   false)))))
@@ -479,7 +479,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range7(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range7(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq9 : int, int -> bool
 
@@ -505,7 +505,7 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep1 [length1(container)].
-  ((((-1) + length1(container)) <= 2147483646) and
+  ((((- 1) + length1(container)) <= 2147483646) and
   in_range2(length1(container))))
 
 type element_type
@@ -537,15 +537,31 @@ function element_type__ref___2__projection(a: element_type__ref) : element_type 
 axiom get__post_axiom :
   (forall container:us_rep1.
   (forall position:int [get(container, position)]. ((in_range7(position) and
-  ((0 <= position) and (position <= ((-1) + length1(container))))) ->
+  ((0 <= position) and (position <= ((- 1) + length1(container))))) ->
   in_range8(get(container, position)))))
 
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : in_range4(index)
+
+axiom H1 : in_range2(count)
+
+axiom H2 : ((0 <= index) and (index <= ((- 1) + length1(model__({
+  us_split_discrs1 = { rec__names__data__char_tables__vector__capacity =
+  container__split_discrs }; us_split_fields1 = {
+  rec__names__data__char_tables__vector = container__split_fields } })))))
+
+axiom H3 : ((o2 = (index - 0)) and in_range3((index - 0)))
+
  (* File "a-cofove.ads", line 549, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:int.
-  (in_range4(index) -> (in_range2(count) -> (((0 <= index) and
-  (index <= ((-1) + length1(model__({ us_split_discrs1 = {
-  rec__names__data__char_tables__vector__capacity = container__split_discrs
-  }; us_split_fields1 = { rec__names__data__char_tables__vector =
-  container__split_fields } }))))) -> (((o = (index - 0)) and
-  in_range3((index - 0))) -> in_range2(o))))))
+goal WP_parameter_def : in_range2(o2)

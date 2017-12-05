@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -628,12 +628,211 @@ type t27b__ref = { t27b__content : us_t2
 
 function t27b__ref___projection(a: t27b__ref) : us_t2 = (a).t27b__content
 
+logic values : (int,integer) farray
+
+logic values_last : (int,integer) farray
+
+logic smallest : int
+
+logic current : int
+
+logic temp___202 : int
+
+logic temp___198 : int
+
+logic temp___197 : (int,integer) farray
+
+logic temp___199 : (int,integer) farray
+
+logic temp___195 : (int,integer) farray
+
+logic temp___193 : int
+
+logic temp___192 : (int,integer) farray
+
+logic temp___189 : (int,integer) farray
+
+logic temp___1891 : t1
+
+logic o : (int,integer) farray
+
+logic o1 : t1
+
+logic o2 : (int,integer) farray
+
+logic o3 : (int,integer) farray
+
+logic temp___191 : (int,integer) farray
+
+logic temp___1911 : t2
+
+logic o4 : (int,integer) farray
+
+logic o5 : t
+
+logic o6 : int
+
+logic o7 : int
+
+logic j : int
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic j1 : int
+
+logic temp___200 : int
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : int
+
+logic temp___1892 : (int,integer) farray
+
+logic temp___1893 : t1
+
+logic o14 : (int,integer) farray
+
+logic o15 : t1
+
+logic o16 : (int,integer) farray
+
+logic o17 : (int,integer) farray
+
+logic temp___1912 : (int,integer) farray
+
+logic temp___1913 : t2
+
+logic o18 : (int,integer) farray
+
+logic o19 : t
+
+logic o20 : int
+
+logic o21 : int
+
+logic j2 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic temp___204 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic values1 : (int,integer) farray
+
+logic values_last1 : (int,integer) farray
+
+logic smallest1 : int
+
+logic result : int
+
+logic current1 : int
+
+logic result1 : (int,integer) farray
+
+logic values_last2 : (int,integer) farray
+
+logic result2 : int
+
+logic smallest2 : int
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+logic values_last3 : (int,integer) farray
+
+logic smallest3 : int
+
+logic current2 : int
+
+logic result3 : int
+
+logic current3 : int
+
+logic result4 : (int,integer) farray
+
+logic values_last4 : (int,integer) farray
+
+logic result5 : int
+
+logic smallest4 : int
+
+logic values4 : (int,integer) farray
+
+logic values5 : (int,integer) farray
+
+logic values_last5 : (int,integer) farray
+
+logic smallest5 : int
+
+logic current4 : int
+
+logic values6 : (int,integer) farray
+
+logic values_last6 : (int,integer) farray
+
+logic smallest6 : int
+
+logic current5 : int
+
+logic values7 : (int,integer) farray
+
+logic values_last7 : (int,integer) farray
+
+logic smallest7 : int
+
+logic current6 : int
+
+logic values8 : (int,integer) farray
+
+logic values_last8 : (int,integer) farray
+
+logic smallest8 : int
+
+logic current7 : int
+
+logic values9 : (int,integer) farray
+
+logic values_last9 : (int,integer) farray
+
+logic smallest9 : int
+
+logic current8 : int
+
+logic values10 : (int,integer) farray
+
+logic values_last10 : (int,integer) farray
+
+logic smallest10 : int
+
+logic current9 : int
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : ((((to_rep(values__first) <= to_rep(values__last)) ->
+  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) and
+  ((not (to_rep(values__first) <= to_rep(values__last))) -> (1 <= 0))) and
+  (to_rep(values__last) <= 2147483647))
+
+axiom H2 : (to_rep(values__first) <= to_rep(values__last))
+
  (* File "sorters.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep(values__first), to_rep(values__last)) ->
-  (((((to_rep(values__first) <= to_rep(values__last)) and
-  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) or
-  ((not (to_rep(values__first) <= to_rep(values__last))) and (1 <= 0))) and
-  (to_rep(values__last) <= 2147483647)) ->
-  ((to_rep(values__first) <= to_rep(values__last)) ->
-  (1 <= to_rep(values__first)))))
+goal WP_parameter_def : (1 <= to_rep(values__first))

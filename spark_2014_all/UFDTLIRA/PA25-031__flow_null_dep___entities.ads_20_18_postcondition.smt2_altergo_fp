@@ -207,9 +207,27 @@ logic value : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic current_id : int
+
+logic current_cycles : int
+
+logic result : int
+
+logic current_id1 : int
+
+logic current_id2 : int
+
+logic current_id3 : int
+
+axiom H : ((1 <= 10) -> in_range2(current_id))
+
+axiom H1 : in_range1(current_cycles)
+
+axiom H2 : in_range2(value)
+
+axiom H3 : (current_id2 = value)
+
+axiom H4 : in_range2(current_id2)
+
  (* File "entities.ads", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall current_id:int. forall current_cycles:int. forall current_id1:int.
-  ((((1 <= 10) -> in_range2(current_id)) and (in_range1(current_cycles) and
-  (in_range2(value) and ((current_id1 = value) and
-  in_range2(current_id1))))) -> (get_current_id1(current_id1) = value)))
+goal WP_parameter_def : (get_current_id1(current_id2) = value)

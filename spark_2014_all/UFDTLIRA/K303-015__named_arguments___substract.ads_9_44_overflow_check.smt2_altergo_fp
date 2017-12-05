@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -122,21 +122,42 @@ logic second : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic substract__oppsub__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic substract__oppsub__result1 : int
+
+logic substract__oppsub__result2 : int
+
+logic substract__oppsub__result3 : int
+
+logic substract__oppsub__result4 : int
+
+logic substract__oppsub__result5 : int
+
+axiom H : in_range(first)
+
+axiom H1 : in_range(second)
+
+axiom H2 : (substract__oppsub__result1 = substract__oppsub__result2)
+
+axiom H3 : (substract__oppsub__result3 = substract__oppsub__result1)
+
+axiom H4 : ((o = sub(second, first)) and (in_range(o) and
+  (o = (second - first))))
+
+axiom H5 : (result = substract__oppsub__result)
+
+axiom H6 : (substract__oppsub__result1 = o)
+
+axiom H7 : (substract__oppsub__result4 = substract__oppsub__result2)
+
+axiom H8 : (substract__oppsub__result5 = substract__oppsub__result3)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall substract__oppsub__result:int. forall o:int. forall result:int.
-  forall substract__oppsub__result1:int.
-  forall substract__oppsub__result2:int.
-  forall substract__oppsub__result3:int.
-  forall substract__oppsub__result4:int.
-  forall substract__oppsub__result5:int. (in_range(first) ->
-  (in_range(second) ->
-  (((((substract__oppsub__result1 = substract__oppsub__result2) and
-  (substract__oppsub__result3 = substract__oppsub__result1)) and
-  (((o = sub(second, first)) and (in_range(o) and
-  (o = (second - first)))) and (({ int__content = result } = { int__content =
-  substract__oppsub__result }) and (substract__oppsub__result1 = o)))) and
-  (({ int__content = substract__oppsub__result4 } = { int__content =
-  substract__oppsub__result2 }) and
-  (substract__oppsub__result5 = substract__oppsub__result3))) ->
-  in_range((second - first))))))
+goal WP_parameter_def : in_range((second - first))

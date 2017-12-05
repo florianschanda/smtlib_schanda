@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -600,12 +600,12 @@ type messaget__ref = { messaget__content : us_rep
 function messaget__ref___projection(a: messaget__ref) : us_rep =
   (a).messaget__content
 
-logic temp___571 : int -> (int,character) farray
+logic temp___572 : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___573:int.
   (forall temp___574:int.
-  ((temp___571(temp___573)[temp___574]) = of_rep(temp___573))))
+  (forall temp___575:int.
+  ((temp___572(temp___574)[temp___575]) = of_rep(temp___574))))
 
 logic nullmsg : (int,character) farray
 
@@ -744,24 +744,24 @@ logic outmsg1 : messagelengtht
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___String_Literal_143 : unit -> (int,character) farray
+logic temp___String_Literal_144 : unit -> (int,character) farray
 
-axiom temp___String_Literal_143__def_axiom :
-  (((((((((((((((to_rep((temp___String_Literal_143(void)[1])) = 100) and
-  (to_rep((temp___String_Literal_143(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_143(void)[3])) = 111)) and
-  (to_rep((temp___String_Literal_143(void)[4])) = 114)) and
-  (to_rep((temp___String_Literal_143(void)[5])) = 46)) and
-  (to_rep((temp___String_Literal_143(void)[6])) = 103)) and
-  (to_rep((temp___String_Literal_143(void)[7])) = 101)) and
-  (to_rep((temp___String_Literal_143(void)[8])) = 116)) and
-  (to_rep((temp___String_Literal_143(void)[9])) = 83)) and
-  (to_rep((temp___String_Literal_143(void)[10])) = 116)) and
-  (to_rep((temp___String_Literal_143(void)[11])) = 97)) and
-  (to_rep((temp___String_Literal_143(void)[12])) = 116)) and
-  (to_rep((temp___String_Literal_143(void)[13])) = 101)) and
-  (to_rep((temp___String_Literal_143(void)[14])) = 40)) and
-  (to_rep((temp___String_Literal_143(void)[15])) = 41))
+axiom temp___String_Literal_144__def_axiom :
+  (((((((((((((((to_rep((temp___String_Literal_144(void)[1])) = 100) and
+  (to_rep((temp___String_Literal_144(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_144(void)[3])) = 111)) and
+  (to_rep((temp___String_Literal_144(void)[4])) = 114)) and
+  (to_rep((temp___String_Literal_144(void)[5])) = 46)) and
+  (to_rep((temp___String_Literal_144(void)[6])) = 103)) and
+  (to_rep((temp___String_Literal_144(void)[7])) = 101)) and
+  (to_rep((temp___String_Literal_144(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_144(void)[9])) = 83)) and
+  (to_rep((temp___String_Literal_144(void)[10])) = 116)) and
+  (to_rep((temp___String_Literal_144(void)[11])) = 97)) and
+  (to_rep((temp___String_Literal_144(void)[12])) = 116)) and
+  (to_rep((temp___String_Literal_144(void)[13])) = 101)) and
+  (to_rep((temp___String_Literal_144(void)[14])) = 40)) and
+  (to_rep((temp___String_Literal_144(void)[15])) = 41))
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
@@ -783,63 +783,152 @@ logic statedict__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic temp___String_Literal_629 : unit -> (int,character) farray
+logic temp___String_Literal_755 : unit -> (int,character) farray
 
-axiom temp___String_Literal_629__def_axiom :
-  ((((((((((((to_rep((temp___String_Literal_629(void)[1])) = 111) and
-  (to_rep((temp___String_Literal_629(void)[2])) = 112)) and
-  (to_rep((temp___String_Literal_629(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_629(void)[4])) = 114)) and
-  (to_rep((temp___String_Literal_629(void)[5])) = 97)) and
-  (to_rep((temp___String_Literal_629(void)[6])) = 116)) and
-  (to_rep((temp___String_Literal_629(void)[7])) = 105)) and
-  (to_rep((temp___String_Literal_629(void)[8])) = 111)) and
-  (to_rep((temp___String_Literal_629(void)[9])) = 110)) and
-  (to_rep((temp___String_Literal_629(void)[10])) = 97)) and
-  (to_rep((temp___String_Literal_629(void)[11])) = 108)) and
-  (to_rep((temp___String_Literal_629(void)[12])) = 63))
+axiom temp___String_Literal_755__def_axiom :
+  ((((((((((((to_rep((temp___String_Literal_755(void)[1])) = 111) and
+  (to_rep((temp___String_Literal_755(void)[2])) = 112)) and
+  (to_rep((temp___String_Literal_755(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_755(void)[4])) = 114)) and
+  (to_rep((temp___String_Literal_755(void)[5])) = 97)) and
+  (to_rep((temp___String_Literal_755(void)[6])) = 116)) and
+  (to_rep((temp___String_Literal_755(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_755(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_755(void)[9])) = 110)) and
+  (to_rep((temp___String_Literal_755(void)[10])) = 97)) and
+  (to_rep((temp___String_Literal_755(void)[11])) = 108)) and
+  (to_rep((temp___String_Literal_755(void)[12])) = 63))
 
-logic temp___String_Literal_630 : unit -> (int,character) farray
+logic temp___String_Literal_756 : unit -> (int,character) farray
 
-axiom temp___String_Literal_630__def_axiom :
-  (((((((to_rep((temp___String_Literal_630(void)[1])) = 99) and
-  (to_rep((temp___String_Literal_630(void)[2])) = 108)) and
-  (to_rep((temp___String_Literal_630(void)[3])) = 111)) and
-  (to_rep((temp___String_Literal_630(void)[4])) = 115)) and
-  (to_rep((temp___String_Literal_630(void)[5])) = 101)) and
-  (to_rep((temp___String_Literal_630(void)[6])) = 100)) and
-  (to_rep((temp___String_Literal_630(void)[7])) = 63))
+axiom temp___String_Literal_756__def_axiom :
+  (((((((to_rep((temp___String_Literal_756(void)[1])) = 99) and
+  (to_rep((temp___String_Literal_756(void)[2])) = 108)) and
+  (to_rep((temp___String_Literal_756(void)[3])) = 111)) and
+  (to_rep((temp___String_Literal_756(void)[4])) = 115)) and
+  (to_rep((temp___String_Literal_756(void)[5])) = 101)) and
+  (to_rep((temp___String_Literal_756(void)[6])) = 100)) and
+  (to_rep((temp___String_Literal_756(void)[7])) = 63))
 
 axiom outmsg__def_axiom : ((outmsg = slide((overwrite({ elts = nullmsg; rt =
-  mk(1, 4096) }, 1, { elts = temp___String_Literal_143(void); rt = mk(1, 15)
+  mk(1, 4096) }, 1, { elts = temp___String_Literal_144(void); rt = mk(1, 15)
   })).elts, to_rep1(first((overwrite({ elts = nullmsg; rt = mk(1, 4096) }, 1,
-  { elts = temp___String_Literal_143(void); rt = mk(1, 15) })).rt)), 1)) and
+  { elts = temp___String_Literal_144(void); rt = mk(1, 15) })).rt)), 1)) and
   (outmsg1 = of_rep2(15)))
 
 axiom nullmsg__def_axiom : ((nullmsg = temp___139(0)) and
   (nullmsg1 = of_rep2(0)))
 
+logic inmsg__split_fields : (int,character) farray
+
+logic inmsg__split_fields1 : messagelengtht
+
+logic doorstate : int
+
+logic isop : bool
+
+logic msg : (int,character) farray
+
+logic statedict : (int,character) farray
+
+logic o : messagelengtht
+
+logic o1 : (int,character) farray
+
+logic o2 : messagelengtht
+
+logic temp___759 : (int,character) farray
+
+logic temp___7591 : messagelengtht
+
+logic temp___754 : (int,character) farray
+
+logic temp___7541 : t
+
+logic o3 : messagelengtht
+
+logic o4 : (int,character) farray
+
+logic o5 : (int,character) farray
+
+logic o6 : messagelengtht
+
+logic doorapi__getdoorstateraw__outmsg__assume : (int,character) farray
+
+logic doorapi__getdoorstateraw__outmsg__assume1 : messagelengtht
+
+logic doorapi__getdoorstateraw__B_1__msg__assume : (int,character) farray
+
+logic doorapi__getdoorstateraw__B_1__msg__assume1 : t
+
+logic doorapi__getdoorstateraw__B_1__statedict__assume : (int,character) farray
+
+logic doorapi__getdoorstateraw__B_1__statedict__assume1 : t1
+
+logic o7 : (int,character) farray
+
+logic o8 : t
+
+logic o9 : us_image
+
+logic o10 : bool
+
+logic o11 : (int,character) farray
+
+logic o12 : t
+
+logic o13 : us_image
+
+logic result : int
+
+logic doorstate1 : int
+
+logic inmsg__split_fields2 : (int,character) farray
+
+logic inmsg__split_fields3 : messagelengtht
+
+logic commsisok : bool
+
+logic result1 : (int,character) farray
+
+logic msg1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic statedict1 : (int,character) farray
+
+logic result3 : bool
+
+logic isop1 : bool
+
+axiom H : (to_rep2(o) = 0)
+
+axiom H1 : (temp___139(0) = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (temp___759 = o1)
+
+axiom H4 : (temp___7591 = o2)
+
+axiom H5 : ((temp___759 = nullmsg) and (temp___7591 = nullmsg1))
+
+axiom H6 : ((inmsg__split_fields = temp___572(0)) and
+  (to_rep2(inmsg__split_fields1) = 0))
+
+axiom H7 : (to_rep2(o3) = 15)
+
+axiom H8 : (({ elts = temp___754; rt = temp___7541 } = overwrite({ elts =
+  nullmsg; rt = mk(1, 4096) }, 1, { elts = temp___String_Literal_144(void);
+  rt = mk(1, 15) })) and dynamic_property(1, 2147483647,
+  to_rep1(first(temp___7541)), to_rep1(last(temp___7541))))
+
  (* File "doorapi.ads", line 30, characters 0-0 *)
 goal WP_parameter_def :
-  (forall inmsg__split_fields:(int,character) farray.
-  forall inmsg__split_fields1:messagelengtht. forall o:messagelengtht.
-  forall o1:(int,character) farray. forall o2:messagelengtht.
-  forall temp___633:(int,character) farray.
-  forall temp___6331:messagelengtht.
-  forall temp___628:(int,character) farray. forall temp___6281:t.
-  forall o3:messagelengtht. (((((to_rep2(o) = 0) and
-  ((temp___139(0) = o1) and (o = o2))) and ((temp___633 = o1) and
-  (temp___6331 = o2))) and ((temp___633 = nullmsg) and
-  (temp___6331 = nullmsg1))) -> (((inmsg__split_fields = temp___571(0)) and
-  (to_rep2(inmsg__split_fields1) = 0)) -> ((to_rep2(o3) = 15) -> ((({ elts =
-  temp___628; rt = temp___6281 } = overwrite({ elts = nullmsg; rt = mk(1,
-  4096) }, 1, { elts = temp___String_Literal_143(void); rt = mk(1, 15)
-  })) and dynamic_property(1, 2147483647, to_rep1(first(temp___6281)),
-  to_rep1(last(temp___6281)))) ->
-  (((to_rep1(first(temp___6281)) <= to_rep1(last(temp___6281))) ->
+  (((to_rep1(first(temp___7541)) <= to_rep1(last(temp___7541))) ->
   (((1 <= 4096) ->
-  (((to_rep1(last(temp___6281)) - to_rep1(first(temp___6281))) + 1) = ((4096 - 1) + 1))) and
+  (((to_rep1(last(temp___7541)) - to_rep1(first(temp___7541))) + 1) = ((4096 - 1) + 1))) and
   ((not (1 <= 4096)) ->
-  (((to_rep1(last(temp___6281)) - to_rep1(first(temp___6281))) + 1) = 0)))) and
-  ((not (to_rep1(first(temp___6281)) <= to_rep1(last(temp___6281)))) ->
-  ((1 <= 4096) -> (0 = ((4096 - 1) + 1))))))))))
+  (((to_rep1(last(temp___7541)) - to_rep1(first(temp___7541))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___7541)) <= to_rep1(last(temp___7541)))) ->
+  ((1 <= 4096) -> (0 = ((4096 - 1) + 1)))))

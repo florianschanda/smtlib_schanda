@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,26 +421,56 @@ logic x__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "add_field.ads", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall x:(int,integer) farray.
-  forall add_field__x__assume:(int,integer) farray.
-  forall add_field__x__assume1:t. forall result:(int,integer) farray.
-  forall x1:(int,integer) farray. (in_range1(c) -> ((c = 0) -> ((c = d) ->
-  (in_range1(d) -> (((({ elts = add_field__x__assume; rt =
-  add_field__x__assume1 } = init_array(void)) and (dynamic_property1(1,
-  2147483647, to_rep(first(add_field__x__assume1)),
+logic c : int
+
+logic x : (int,integer) farray
+
+logic add_field__x__assume : (int,integer) farray
+
+logic add_field__x__assume1 : t
+
+logic i : int
+
+logic result : (int,integer) farray
+
+logic x1 : (int,integer) farray
+
+axiom H : in_range1(c)
+
+axiom H1 : (c = 0)
+
+axiom H2 : (c = d)
+
+axiom H3 : in_range1(d)
+
+axiom H4 : (({ elts = add_field__x__assume; rt = add_field__x__assume1
+  } = init_array(void)) and (dynamic_property1(1, 2147483647,
+  to_rep(first(add_field__x__assume1)),
   to_rep(last(add_field__x__assume1))) and
   (forall temp___160:int.
   (((to_rep(first(add_field__x__assume1)) <= temp___160) and
   (temp___160 <= to_rep(last(add_field__x__assume1)))) -> dynamic_property(d,
-  2147483647, to_rep((add_field__x__assume[temp___160]))))))) and
-  (((result = x) and (x1 = add_field__x__assume)) and
-  ((to_rep(x__first) = to_rep(first(add_field__x__assume1))) and
-  (to_rep(x__last) = to_rep(last(add_field__x__assume1)))))) ->
-  ((dynamic_property1(1, 2147483647, to_rep(x__first), to_rep(x__last)) and
+  2147483647, to_rep((add_field__x__assume[temp___160])))))))
+
+axiom H5 : (result = x)
+
+axiom H6 : (x1 = add_field__x__assume)
+
+axiom H7 : (to_rep(x__first) = to_rep(first(add_field__x__assume1)))
+
+axiom H8 : (to_rep(x__last) = to_rep(last(add_field__x__assume1)))
+
+axiom H9 : (dynamic_property1(1, 2147483647, to_rep(x__first),
+  to_rep(x__last)) and
   (forall temp___164:int. (((to_rep(x__first) <= temp___164) and
   (temp___164 <= to_rep(x__last))) -> dynamic_property(d, 2147483647,
-  to_rep((x1[temp___164])))))) ->
-  (forall i:int. (((to_rep(x__first) <= i) and (i <= to_rep(x__last))) ->
-  (0 <= to_rep((x1[i]))))))))))))
+  to_rep((x1[temp___164]))))))
+
+logic i1 : int
+
+axiom H10 : (to_rep(x__first) <= i1)
+
+axiom H11 : (i1 <= to_rep(x__last))
+
+ (* File "add_field.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (0 <= to_rep((x1[i1])))

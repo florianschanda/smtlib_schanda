@@ -279,7 +279,13 @@ logic from : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t : int
+
+axiom H : in_range1(from)
+
+axiom H1 : (0 <= t)
+
+axiom H2 : (t <= from)
+
  (* File "time_triggered_response.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t:int. (in_range1(from) -> (((0 <= t) and (t <= from)) ->
-  (0 <= t))))
+goal WP_parameter_def : (0 <= t)

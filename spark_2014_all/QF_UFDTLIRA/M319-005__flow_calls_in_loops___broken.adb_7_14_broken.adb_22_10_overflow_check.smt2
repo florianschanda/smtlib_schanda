@@ -34,6 +34,7 @@
 (declare-const c5b Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const i Int)
+(declare-const o Int)
 (declare-const i1 Int)
 (assert (in_range i))
 (assert (in_range i1))

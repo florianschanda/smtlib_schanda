@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -428,24 +428,217 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "lt.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall i:int. forall j:int. forall temp___179:int.
-  forall temp___178:int. forall o:int. forall result:int. forall r1:int.
-  forall result1:int. forall i1:int. forall result2:int. forall j1:int.
-  forall result3:int. forall r2:int. forall r3:int. forall j2:int.
-  forall r4:int. forall j3:int. forall r5:int. forall j4:int. forall r6:int.
-  forall j5:int. forall r7:int. forall j6:int. (((0 <= 100) ->
-  in_range4(r)) -> (((result = r) and (r1 = 0)) -> (((result1 = i) and
-  (i1 = 0)) -> (((0 <= i1) and (i1 <= 9)) -> (((({ int__content = result2
-  } = { int__content = j }) and (j1 = 0)) and ((((0 <= j1) and (j1 <= 9)) and
-  ((((temp___179 = j1) and ((temp___178 = r1) and
-  ((((o = (r1 + to_rep(((x[i1])[j1])))) and
+logic r : int
+
+logic i : int
+
+logic j : int
+
+logic temp___179 : int
+
+logic temp___178 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___1791 : int
+
+logic temp___1781 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic j1 : int
+
+logic result3 : int
+
+logic r2 : int
+
+logic r3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic j3 : int
+
+logic result5 : int
+
+logic r4 : int
+
+logic r5 : int
+
+logic j4 : int
+
+logic r6 : int
+
+logic j5 : int
+
+logic r7 : int
+
+logic j6 : int
+
+logic r8 : int
+
+logic j7 : int
+
+logic r9 : int
+
+logic j8 : int
+
+logic r10 : int
+
+logic j9 : int
+
+logic r11 : int
+
+logic i2 : int
+
+logic j10 : int
+
+logic result6 : int
+
+logic i3 : int
+
+logic result7 : int
+
+logic j11 : int
+
+logic result8 : int
+
+logic r12 : int
+
+logic r13 : int
+
+logic j12 : int
+
+logic result9 : int
+
+logic j13 : int
+
+logic result10 : int
+
+logic r14 : int
+
+logic r15 : int
+
+logic j14 : int
+
+logic r16 : int
+
+logic j15 : int
+
+logic r17 : int
+
+logic j16 : int
+
+logic r18 : int
+
+logic j17 : int
+
+logic r19 : int
+
+logic j18 : int
+
+logic r20 : int
+
+logic j19 : int
+
+logic r21 : int
+
+logic j20 : int
+
+logic r22 : int
+
+logic j21 : int
+
+logic r23 : int
+
+logic i4 : int
+
+logic j22 : int
+
+logic r24 : int
+
+logic i5 : int
+
+logic j23 : int
+
+axiom H : ((0 <= 100) -> in_range4(r))
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = 0)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 0)
+
+axiom H5 : (0 <= i1)
+
+axiom H6 : (i1 <= 9)
+
+axiom H7 : (result2 = j)
+
+axiom H8 : (j1 = 0)
+
+axiom H9 : (((0 <= j1) and (j1 <= 9)) -> (((temp___179 = j1) and
+  ((temp___178 = r1) and ((((o = (r1 + to_rep(((x[i1])[j1])))) and
   in_range4((r1 + to_rep(((x[i1])[j1]))))) and ((r1 = result3) and
   (r2 = o))) and ((r3 <= (((i1 * 10) + j2) + 1)) and (((((0 <= 100) ->
   in_range4(r3)) and ((0 <= 9) -> in_range3(j2))) and ((0 <= j2) and
-  (j2 <= 9))) and (j2 = 9)))))) and (((j2 = j3) and (r3 = r4)) and
-  ((j4 = j2) and (r5 = r3)))) and (((j5 = j3) and (r6 = r4)) and
-  ((j6 = j4) and (r7 = r5))))) or ((not ((0 <= j1) and (j1 <= 9))) and
-  (((j1 = j5) and (r1 = r6)) and ((j6 = j1) and (r7 = r1)))))) ->
-  (r6 <= ((i1 + 1) * 10))))))))
+  (j2 <= 9))) and (j2 = 9)))))) and (((j2 = j6) and (r3 = r7)) and
+  ((j7 = j2) and (r8 = r3)))))
+
+axiom H10 : (((0 <= j1) and (j1 <= 9)) -> (j8 = j6))
+
+axiom H11 : (((0 <= j1) and (j1 <= 9)) -> (r9 = r7))
+
+axiom H12 : (((0 <= j1) and (j1 <= 9)) -> (j9 = j7))
+
+axiom H13 : (((0 <= j1) and (j1 <= 9)) -> (r10 = r8))
+
+axiom H14 : ((not ((0 <= j1) and (j1 <= 9))) -> (j1 = j8))
+
+axiom H15 : ((not ((0 <= j1) and (j1 <= 9))) -> (r1 = r9))
+
+axiom H16 : ((not ((0 <= j1) and (j1 <= 9))) -> (j9 = j1))
+
+axiom H17 : ((not ((0 <= j1) and (j1 <= 9))) -> (r10 = r1))
+
+ (* File "lt.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (r9 <= ((i1 + 1) * 10))

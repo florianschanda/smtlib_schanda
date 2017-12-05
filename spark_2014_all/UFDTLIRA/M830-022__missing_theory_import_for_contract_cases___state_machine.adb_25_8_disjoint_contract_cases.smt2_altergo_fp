@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -189,14 +189,60 @@ axiom state_d__def_axiom :
   state_machine__num) = true) <-> ((not (state_machine__flag = true)) and
   (state_machine__num <  0)))))
 
+logic flag : bool
+
+logic num : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic flag1 : bool
+
+logic num1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic num2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic flag2 : bool
+
+logic result5 : int
+
+logic num3 : int
+
+logic result6 : bool
+
+logic result7 : int
+
+logic num4 : int
+
+logic flag3 : bool
+
+logic num5 : int
+
+logic flag4 : bool
+
+logic num6 : int
+
+axiom H : in_range1(num)
+
  (* File "state_machine.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall flag:bool. forall num:int. (in_range1(num) -> (((state_a(flag,
-  num) = true) -> (((state_b(flag, num) = true) -> (((state_c(flag,
-  num) = true) -> (((state_d(flag, num) = true) ->
-  (((((0 + 1) + 1) + 1) + 1) <= 1)) and ((not (state_d(flag, num) = true)) ->
-  (((((0 + 1) + 1) + 1) + 0) <= 1)))) and ((not (state_c(flag,
-  num) = true)) -> (((state_d(flag, num) = true) ->
+goal WP_parameter_def : (((state_a(flag, num) = true) -> (((state_b(flag,
+  num) = true) -> (((state_c(flag, num) = true) -> (((state_d(flag,
+  num) = true) -> (((((0 + 1) + 1) + 1) + 1) <= 1)) and ((not (state_d(flag,
+  num) = true)) -> (((((0 + 1) + 1) + 1) + 0) <= 1)))) and
+  ((not (state_c(flag, num) = true)) -> (((state_d(flag, num) = true) ->
   (((((0 + 1) + 1) + 0) + 1) <= 1)) and ((not (state_d(flag, num) = true)) ->
   (((((0 + 1) + 1) + 0) + 0) <= 1)))))) and ((not (state_b(flag,
   num) = true)) -> (((state_c(flag, num) = true) -> (((state_d(flag,
@@ -217,4 +263,4 @@ goal WP_parameter_def :
   num) = true)) -> (((((0 + 0) + 0) + 1) + 0) <= 1)))) and
   ((not (state_c(flag, num) = true)) -> (((state_d(flag, num) = true) ->
   (((((0 + 0) + 0) + 0) + 1) <= 1)) and ((not (state_d(flag, num) = true)) ->
-  (((((0 + 0) + 0) + 0) + 0) <= 1)))))))))))
+  (((((0 + 0) + 0) + 0) + 0) <= 1)))))))))

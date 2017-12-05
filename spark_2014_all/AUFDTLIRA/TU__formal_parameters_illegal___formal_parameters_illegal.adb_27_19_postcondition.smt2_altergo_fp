@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -227,10 +227,23 @@ axiom def_axiom :
   ((not (temp___158 = temp___156)) -> ((temp___153(temp___155, temp___156,
   temp___157)[temp___158]) = (temp___155[temp___158])))))))
 
+logic arr : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+axiom H : (result = arr)
+
+axiom H1 : (arr1 = temp___153(arr, 5, 5))
+
+axiom H2 : (arr1 = arr2)
+
+axiom H3 : (arr3 = arr1)
+
  (* File "formal_parameters_illegal.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,integer) farray. forall result:(int,integer) farray.
-  forall arr1:(int,integer) farray. forall arr2:(int,integer) farray.
-  forall arr3:(int,integer) farray. ((((result = arr) and
-  (arr1 = temp___153(arr, 5, 5))) and ((arr1 = arr2) and (arr3 = arr1))) ->
-  (to_rep((arr2[2])) = to_rep((arr[2])))))
+goal WP_parameter_def : (to_rep((arr2[2])) = to_rep((arr[2])))

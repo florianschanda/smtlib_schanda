@@ -39,6 +39,7 @@
 (declare-const t Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range t))
 (assert (in_range val__))
 (assert (and (= o (get_val val__)) (in_range o)))

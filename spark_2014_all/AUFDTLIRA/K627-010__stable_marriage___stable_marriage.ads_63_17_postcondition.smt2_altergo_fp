@@ -246,11 +246,25 @@ logic g2_to_g1 : (int,group1_id) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H :
+  (forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
+  (exists g2:int. (((1 <= g2) and (g2 <= 64)) and
+  (to_rep((g2_to_g1[g2])) = g1)))))
+
+logic g21 : int
+
+axiom H1 : (1 <= g21)
+
+axiom H2 : (g21 <= 64)
+
+logic g22 : int
+
+axiom H3 : (1 <= g22)
+
+axiom H4 : (g22 <= 64)
+
+axiom H5 : (not (g21 = g22))
+
  (* File "stable_marriage.ads", line 45, characters 0-0 *)
 goal WP_parameter_def :
-  ((forall g1:int. (((1 <= g1) and (g1 <= 64)) ->
-   (exists g2:int. (((1 <= g2) and (g2 <= 64)) and
-   (to_rep((g2_to_g1[g2])) = g1))))) ->
-  (forall g21:int. (((1 <= g21) and (g21 <= 64)) ->
-  (forall g22:int. (((1 <= g22) and (g22 <= 64)) -> ((not (g21 = g22)) ->
-  (not (to_rep((g2_to_g1[g21])) = to_rep((g2_to_g1[g22]))))))))))
+  (not (to_rep((g2_to_g1[g21])) = to_rep((g2_to_g1[g22]))))

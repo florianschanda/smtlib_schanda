@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1177,16 +1177,97 @@ logic val__ : t1
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic memory : (t1,unsigned8) farray
+
+logic o : unsigned8
+
+logic o1 : (t1,unsigned8) farray
+
+logic o2 : unsigned8
+
+logic o3 : (t1,unsigned8) farray
+
+logic o4 : unsigned8
+
+logic o5 : (t1,unsigned8) farray
+
+logic o6 : unsigned8
+
+logic o7 : (t1,unsigned8) farray
+
+logic o8 : unsigned8
+
+logic o9 : (t1,unsigned8) farray
+
+logic o10 : unsigned8
+
+logic o11 : (t1,unsigned8) farray
+
+logic o12 : unsigned8
+
+logic o13 : (t1,unsigned8) farray
+
+logic o14 : unsigned8
+
+logic o15 : (t1,unsigned8) farray
+
+logic result : (t1,unsigned8) farray
+
+logic memory1 : (t1,unsigned8) farray
+
+logic result1 : (t1,unsigned8) farray
+
+logic memory2 : (t1,unsigned8) farray
+
+logic result2 : (t1,unsigned8) farray
+
+logic memory3 : (t1,unsigned8) farray
+
+logic result3 : (t1,unsigned8) farray
+
+logic memory4 : (t1,unsigned8) farray
+
+logic result4 : (t1,unsigned8) farray
+
+logic memory5 : (t1,unsigned8) farray
+
+logic result5 : (t1,unsigned8) farray
+
+logic memory6 : (t1,unsigned8) farray
+
+logic result6 : (t1,unsigned8) farray
+
+logic memory7 : (t1,unsigned8) farray
+
+logic result7 : (t1,unsigned8) farray
+
+logic memory8 : (t1,unsigned8) farray
+
+logic memory9 : (t1,unsigned8) farray
+
+logic memory10 : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (to_rep(o) = toSmall(urem1(val__, of_int1(256))))
+
+axiom H3 : (o1 = (memory[addr <- o]))
+
+axiom H4 : (result = memory)
+
+axiom H5 : (memory1 = o1)
+
+axiom H6 : (to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
+  of_int1(256))))
+
+axiom H7 : (o3 = (memory1[add1(addr, of_int1(1)) <- o2]))
+
+axiom H8 : (memory1 = result1)
+
+axiom H9 : (memory2 = o3)
+
  (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall memory:(t1,unsigned8) farray. forall o:unsigned8.
-  forall o1:(t1,unsigned8) farray. forall o2:unsigned8.
-  forall o3:(t1,unsigned8) farray. forall result:(t1,unsigned8) farray.
-  forall memory1:(t1,unsigned8) farray. forall result1:(t1,unsigned8) farray.
-  forall memory2:(t1,unsigned8) farray. ((((to_rep(o) = toSmall(urem1(val__,
-  of_int1(256)))) and (o1 = (memory[addr <- o]))) and (({ map__content =
-  result } = { map__content = memory }) and (memory1 = o1))) ->
-  ((((to_rep(o2) = toSmall(urem1(udiv1(val__, of_int1(256)),
-  of_int1(256)))) and (o3 = (memory1[add1(addr, of_int1(1)) <- o2]))) and
-  ((memory1 = result1) and (memory2 = o3))) -> ule1(toBig(of_int(0)),
-  urem1(udiv1(val__, of_int1(65536)), of_int1(256))))))
+goal WP_parameter_def : ule1(toBig(of_int(0)), urem1(udiv1(val__,
+  of_int1(65536)), of_int1(256)))

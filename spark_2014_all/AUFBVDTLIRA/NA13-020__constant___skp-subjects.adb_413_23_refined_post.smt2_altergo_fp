@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -7928,16 +7928,26 @@ axiom null_event__def_axiom : ((null_event = of_rep4(7)) and
   ((null_event1 = of_rep5(256)) and ((null_event2 = of_int1(0)) and
   (null_event3 = of_int1(0)))))
 
- (* File "sk.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall skp__subjects__get_pml4_address__result:t. forall result:t.
-  forall skp__subjects__get_pml4_address__result1:t.
-  forall skp__subjects__get_pml4_address__result2:t.
-  forall skp__subjects__get_pml4_address__result3:t.
-  forall skp__subjects__get_pml4_address__result4:t.
-  forall skp__subjects__get_pml4_address__result5:t.
-  (in_range1(subject_id) ->
-  ((((urem(to_rep((((subject_specs[0])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+logic skp__subjects__get_pml4_address__result : t
+
+logic subject : int
+
+logic result : t
+
+logic skp__subjects__get_pml4_address__result1 : t
+
+logic skp__subjects__get_pml4_address__result2 : t
+
+logic skp__subjects__get_pml4_address__result3 : t
+
+logic skp__subjects__get_pml4_address__result4 : t
+
+logic skp__subjects__get_pml4_address__result5 : t
+
+axiom H : in_range1(subject_id)
+
+axiom H1 :
+  (((urem(to_rep((((subject_specs[0])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
   of_int(4096)) = of_int(0)) and
   ((urem(to_rep((((subject_specs[1])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
   of_int(4096)) = of_int(0)) and
@@ -7951,16 +7961,16 @@ goal WP_parameter_def :
   of_int(4096)) = of_int(0)) and
   ((urem(to_rep((((subject_specs[6])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
   of_int(4096)) = of_int(0)) and
-  ((forall subject:int. (((0 <= subject) and (subject <= 6)) ->
-   (urem(to_rep((((subject_specs[subject])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
+  ((forall subject1:int. (((0 <= subject1) and (subject1 <= 6)) ->
+   (urem(to_rep((((subject_specs[subject1])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address),
    of_int(4096)) = of_int(0)))) and
   (((skp__subjects__get_pml4_address__result1 = skp__subjects__get_pml4_address__result2) and
   (skp__subjects__get_pml4_address__result3 = skp__subjects__get_pml4_address__result1)) and
-  (({ t__content = result } = { t__content =
-  skp__subjects__get_pml4_address__result }) and
+  ((result = skp__subjects__get_pml4_address__result) and
   (skp__subjects__get_pml4_address__result1 = to_rep((((subject_specs[subject_id])).us_split_fields7).rec__skp__subjects__subject_spec_type__pml4_address)))))))))))) and
-  (({ t__content = skp__subjects__get_pml4_address__result4 } = {
-  t__content = skp__subjects__get_pml4_address__result2 }) and
-  (skp__subjects__get_pml4_address__result5 = skp__subjects__get_pml4_address__result3))) ->
-  (urem(skp__subjects__get_pml4_address__result4,
-  of_int(4096)) = of_int(0)))))
+  ((skp__subjects__get_pml4_address__result4 = skp__subjects__get_pml4_address__result2) and
+  (skp__subjects__get_pml4_address__result5 = skp__subjects__get_pml4_address__result3)))
+
+ (* File "sk.ads", line 23, characters 0-0 *)
+goal WP_parameter_def : (urem(skp__subjects__get_pml4_address__result4,
+  of_int(4096)) = of_int(0))

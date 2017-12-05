@@ -126,6 +126,7 @@
 (declare-const o16 Int)
 (declare-const o17 Int)
 (declare-const o18 Int)
+(declare-const o19 Int)
 (declare-const result Int)
 (declare-const aux1 Int)
 (declare-const result1 (Array Int integer))

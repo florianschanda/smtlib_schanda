@@ -33,6 +33,7 @@
 (declare-const x Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range x))
-(assert (not (not (= x 0))))
+(assert (= x 0))
+(assert (not false))
 (check-sat)
 (exit)

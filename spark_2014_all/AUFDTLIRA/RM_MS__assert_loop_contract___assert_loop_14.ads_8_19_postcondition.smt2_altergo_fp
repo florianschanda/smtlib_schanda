@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -277,38 +277,108 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : int
+
+logic assert_loop_14__value_present__result : bool
+
+logic temp___149 : int
+
+logic m : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic i3 : int
+
+logic i4 : int
+
+logic i5 : int
+
+logic i6 : int
+
+logic i7 : int
+
+logic i8 : int
+
+logic i9 : int
+
+logic result2 : bool
+
+logic assert_loop_14__value_present__result1 : bool
+
+logic assert_loop_14__value_present__result2 : bool
+
+logic assert_loop_14__value_present__result3 : bool
+
+logic i10 : int
+
+logic assert_loop_14__value_present__result4 : bool
+
+logic i11 : int
+
+logic assert_loop_14__value_present__result5 : bool
+
+logic result3 : bool
+
+axiom H : in_range1(x)
+
+axiom H1 : (result = i)
+
+axiom H2 : (i1 = 1)
+
+axiom H3 : in_range2(i1)
+
+axiom H4 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) ->
+  (((temp___149 = i1) and (((i2 <  10) and
+  (forall m1:int. (((1 <= m1) and (m1 <= i2)) ->
+  (not (to_rep((a[m1])) = x))))) and ((((1 <= 10) -> in_range2(i2)) and
+  ((not (to_rep((a[i2])) = x)) and (i2 <  10))) and ((((o = (i2 + 1)) and
+  in_range2((i2 + 1))) and ((i2 = result1) and (i3 = o))) and
+  (not ((not (to_rep((a[i3])) = x)) and (i3 <  10))))))) and ((i3 = i6) and
+  (i7 = i3))))
+
+axiom H5 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) -> (i8 = i6))
+
+axiom H6 : (((not (to_rep((a[i1])) = x)) and (i1 <  10)) -> (i9 = i7))
+
+axiom H7 : ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) -> (i1 = i8))
+
+axiom H8 : ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) -> (i9 = i1))
+
+axiom H9 :
+  (assert_loop_14__value_present__result1 = assert_loop_14__value_present__result2)
+
+axiom H10 :
+  (assert_loop_14__value_present__result3 = assert_loop_14__value_present__result1)
+
+axiom H11 : (result2 = assert_loop_14__value_present__result)
+
+axiom H12 : (((to_rep((a[i8])) = x) ->
+  (assert_loop_14__value_present__result1 = true)) and
+  ((not (to_rep((a[i8])) = x)) ->
+  (assert_loop_14__value_present__result1 = false)))
+
+axiom H13 :
+  (assert_loop_14__value_present__result4 = assert_loop_14__value_present__result2)
+
+axiom H14 : (i10 = i8)
+
+axiom H15 :
+  (assert_loop_14__value_present__result5 = assert_loop_14__value_present__result3)
+
+axiom H16 : (i11 = i9)
+
+axiom H17 : (result3 = assert_loop_14__value_present__result4)
+
+axiom H18 : (assert_loop_14__value_present__result4 = true)
+
  (* File "assert_loop_14.ads", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  (forall i:int. forall assert_loop_14__value_present__result:bool.
-  forall temp___149:int. forall o:int. forall result:int. forall i1:int.
-  forall i2:int. forall result1:int. forall i3:int. forall i4:int.
-  forall i5:int. forall i6:int. forall i7:int. forall result2:bool.
-  forall assert_loop_14__value_present__result1:bool.
-  forall assert_loop_14__value_present__result2:bool.
-  forall assert_loop_14__value_present__result3:bool. forall i8:int.
-  forall assert_loop_14__value_present__result4:bool. forall i9:int.
-  forall assert_loop_14__value_present__result5:bool.
-  (forall result3:bool. ((in_range1(x) and ((((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) and (in_range2(i1) and
-  (((((not (to_rep((a[i1])) = x)) and (i1 <  10)) and
-  ((((temp___149 = i1) and (((i2 <  10) and
-  (forall m:int. (((1 <= m) and (m <= i2)) -> (not (to_rep((a[m])) = x))))) and
-  ((((1 <= 10) -> in_range2(i2)) and ((not (to_rep((a[i2])) = x)) and
-  (i2 <  10))) and ((((o = (i2 + 1)) and in_range2((i2 + 1))) and
-  ((i2 = result1) and (i3 = o))) and (not ((not (to_rep((a[i3])) = x)) and
-  (i3 <  10))))))) and ((i3 = i4) and (i5 = i3))) and ((i6 = i4) and
-  (i7 = i5)))) or ((not ((not (to_rep((a[i1])) = x)) and (i1 <  10))) and
-  ((i1 = i6) and (i7 = i1)))) and
-  (((assert_loop_14__value_present__result1 = assert_loop_14__value_present__result2) and
-  (assert_loop_14__value_present__result3 = assert_loop_14__value_present__result1)) and
-  ((result2 = assert_loop_14__value_present__result) and
-  (((to_rep((a[i6])) = x) and
-  (assert_loop_14__value_present__result1 = true)) or
-  ((not (to_rep((a[i6])) = x)) and
-  (assert_loop_14__value_present__result1 = false)))))))) and
-  (((assert_loop_14__value_present__result4 = assert_loop_14__value_present__result2) and
-  (i8 = i6)) and
-  ((assert_loop_14__value_present__result5 = assert_loop_14__value_present__result3) and
-  (i9 = i7)))) and (result3 = assert_loop_14__value_present__result4))) ->
-  ((assert_loop_14__value_present__result4 = true) ->
-  (exists m:int. (((1 <= m) and (m <= 10)) and (to_rep((a[m])) = x)))))))
+  (exists m1:int. (((1 <= m1) and (m1 <= 10)) and (to_rep((a[m1])) = x)))

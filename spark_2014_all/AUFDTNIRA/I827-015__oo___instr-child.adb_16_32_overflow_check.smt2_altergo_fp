@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1187,30 +1187,80 @@ logic inc : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "instr-child.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:thousand.
-  forall x__split_fields1:(int,character) farray.
-  forall x__split_fields2:sixty. forall x__split_fields3:sixty.
-  forall x__split_fields4:twenty_four. forall x__split_fields5:us_private.
-  forall o:int. forall o1:int. forall instr__increment__x__fields:sixty.
-  forall instr__increment__x__fields1:sixty.
-  forall instr__increment__x__fields2:twenty_four.
-  forall instr__increment__x__fields3:(int,character) farray.
-  forall instr__increment__x__fields4:us_private. forall result:thousand.
-  forall result1:(int,character) farray. forall result2:sixty.
-  forall result3:sixty. forall result4:twenty_four.
-  forall result5:us_private. forall x__split_fields6:thousand.
-  forall x__split_fields7:(int,character) farray.
-  forall x__split_fields8:sixty. forall x__split_fields9:sixty.
-  forall x__split_fields10:twenty_four. forall x__split_fields11:us_private.
-  (in_range(inc) -> (((((o = (to_rep3(x__split_fields) + inc)) and
-  in_range((to_rep3(x__split_fields) + inc))) and
-  (o1 = comp_div(o,1000))) and (((result = x__split_fields) and
-  ((result1 = x__split_fields1) and ((result2 = x__split_fields2) and
-  ((result3 = x__split_fields3) and ((result4 = x__split_fields4) and
-  (result5 = x__split_fields5)))))) and ({
-  rec__instr__child__accurate_clock__millisec = x__split_fields6;
+logic x__split_fields : thousand
+
+logic x__split_fields1 : (int,character) farray
+
+logic x__split_fields2 : sixty
+
+logic x__split_fields3 : sixty
+
+logic x__split_fields4 : twenty_four
+
+logic x__split_fields5 : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic instr__increment__x__fields : sixty
+
+logic instr__increment__x__fields1 : sixty
+
+logic instr__increment__x__fields2 : twenty_four
+
+logic instr__increment__x__fields3 : (int,character) farray
+
+logic instr__increment__x__fields4 : us_private
+
+logic result : thousand
+
+logic result1 : (int,character) farray
+
+logic result2 : sixty
+
+logic result3 : sixty
+
+logic result4 : twenty_four
+
+logic result5 : us_private
+
+logic x__split_fields6 : thousand
+
+logic x__split_fields7 : (int,character) farray
+
+logic x__split_fields8 : sixty
+
+logic x__split_fields9 : sixty
+
+logic x__split_fields10 : twenty_four
+
+logic x__split_fields11 : us_private
+
+axiom H : in_range(inc)
+
+axiom H1 : ((o = (to_rep3(x__split_fields) + inc)) and
+  in_range((to_rep3(x__split_fields) + inc)))
+
+axiom H2 : (o1 = comp_div(o,1000))
+
+axiom H3 : (result = x__split_fields)
+
+axiom H4 : (result1 = x__split_fields1)
+
+axiom H5 : (result2 = x__split_fields2)
+
+axiom H6 : (result3 = x__split_fields3)
+
+axiom H7 : (result4 = x__split_fields4)
+
+axiom H8 : (result5 = x__split_fields5)
+
+axiom H9 : ({ rec__instr__child__accurate_clock__millisec = x__split_fields6;
   rec__instr__instrument__name2 = x__split_fields7;
   rec__instr__clock__seconds1 = x__split_fields8;
   rec__instr__clock__minutes1 = x__split_fields9; rec__instr__clock__hours1 =
@@ -1222,5 +1272,7 @@ goal WP_parameter_def :
   (of_base({ us_split_fields1 = { rec__instr__instrument__name =
   x__split_fields1; rec__ext__ = hide_ext__1(x__split_fields,
   x__split_fields2, x__split_fields3, x__split_fields4, x__split_fields5) };
-  attr__tag = x__attr__tag })).attr__tag1 })).us_split_fields5))) ->
-  in_range((to_rep3(x__split_fields6) + inc)))))
+  attr__tag = x__attr__tag })).attr__tag1 })).us_split_fields5)
+
+ (* File "instr-child.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep3(x__split_fields6) + inc))

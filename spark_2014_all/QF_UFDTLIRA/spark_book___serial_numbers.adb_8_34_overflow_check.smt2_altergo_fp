@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tserial_numberB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -135,9 +135,23 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic number : int
+
+logic next_number : int
+
+logic o : int
+
+logic result : int
+
+logic number1 : int
+
+axiom H : in_range1(next_number)
+
+axiom H1 : ((1000 <= 2147483647) -> in_range1(number))
+
+axiom H2 : (result = number)
+
+axiom H3 : (number1 = next_number)
+
  (* File "serial_numbers.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number:int. forall next_number:int. forall result:int.
-  forall number1:int. (in_range1(next_number) -> (((1000 <= 2147483647) ->
-  in_range1(number)) -> (((result = number) and (number1 = next_number)) ->
-  in_range((next_number + 1))))))
+goal WP_parameter_def : in_range((next_number + 1))

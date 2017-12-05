@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -738,6 +738,81 @@ logic pos : t
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic res : t
+
+logic bitset__bit_set__result : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic res2 : t
+
+logic result2 : t
+
+logic bitset__bit_set__result1 : t
+
+logic bitset__bit_set__result2 : t
+
+logic bitset__bit_set__result3 : t
+
+logic res3 : t
+
+logic bitset__bit_set__result4 : t
+
+logic res4 : t
+
+logic bitset__bit_set__result5 : t
+
+logic result3 : t
+
+axiom H : true
+
+axiom H1 : in_range1(pos)
+
+axiom H2 : (result = res)
+
+axiom H3 : (res1 = value)
+
+axiom H4 : true
+
+axiom H5 : ((tqtint(pos) <  18446744073709551616) -> (o = lsl_bv(of_int(1),
+  of_int(tqtint(pos)))))
+
+axiom H6 : ((not (tqtint(pos) <  18446744073709551616)) -> (o = of_int(0)))
+
+axiom H7 : (o1 = bw_or(res1, o))
+
+axiom H8 : (result1 = res1)
+
+axiom H9 : (res2 = o1)
+
+axiom H10 : (bitset__bit_set__result1 = bitset__bit_set__result2)
+
+axiom H11 : (bitset__bit_set__result3 = bitset__bit_set__result1)
+
+axiom H12 : (result2 = bitset__bit_set__result)
+
+axiom H13 : (bitset__bit_set__result1 = res2)
+
+axiom H14 : (bitset__bit_set__result4 = bitset__bit_set__result2)
+
+axiom H15 : (res3 = res2)
+
+axiom H16 : (bitset__bit_set__result5 = bitset__bit_set__result3)
+
+axiom H17 : (res4 = res2)
+
+axiom H18 : (result3 = bitset__bit_set__result4)
+
+axiom H19 : (bit_test(bitset__bit_set__result4, pos) = true)
 
  (* File "bitset.ads", line 4, characters 0-0 *)
 goal WP_parameter_def : true

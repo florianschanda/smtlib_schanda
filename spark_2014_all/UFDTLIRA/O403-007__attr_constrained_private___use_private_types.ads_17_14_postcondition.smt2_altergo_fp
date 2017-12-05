@@ -295,26 +295,53 @@ axiom d_zero__def_axiom :
   }; us_split_fields1 = { rec__private_types__simple = s1 };
   attr__constrained = s2 }) = true) <-> (to_rep(s) = 0)))
 
+logic s__split_fields : us_main_type
+
+logic s__split_discrs : natural
+
+logic private_types__private_reinit__s__discrs : natural
+
+logic private_types__private_reinit__s__fields : us_main_type
+
+logic result : us_main_type
+
+logic s__split_fields1 : us_main_type
+
+logic result1 : natural
+
+logic s__split_discrs1 : natural
+
+logic s__split_fields2 : us_main_type
+
+logic s__split_discrs2 : natural
+
+logic s__split_fields3 : us_main_type
+
+logic s__split_discrs3 : natural
+
+axiom H : (to_rep(private_types__private_reinit__s__discrs) = 0)
+
+axiom H1 : (result = s__split_fields)
+
+axiom H2 : (s__split_fields1 = private_types__private_reinit__s__fields)
+
+axiom H3 : (result1 = s__split_discrs)
+
+axiom H4 : (s__split_discrs1 = private_types__private_reinit__s__discrs)
+
+axiom H5 : ((s__attr__constrained = true) ->
+  (s__split_discrs = private_types__private_reinit__s__discrs))
+
+axiom H6 : (s__split_discrs2 = s__split_discrs1)
+
+axiom H7 : (s__split_fields2 = s__split_fields1)
+
+axiom H8 : (s__split_discrs3 = s__split_discrs1)
+
+axiom H9 : (s__split_fields3 = s__split_fields1)
+
  (* File "use_private_types.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:us_main_type. forall s__split_discrs:natural.
-  forall private_types__private_reinit__s__discrs:natural.
-  forall private_types__private_reinit__s__fields:us_main_type.
-  forall result:us_main_type. forall s__split_fields1:us_main_type.
-  forall result1:natural. forall s__split_discrs1:natural.
-  forall s__split_fields2:us_main_type. forall s__split_discrs2:natural.
-  forall s__split_fields3:us_main_type. forall s__split_discrs3:natural.
-  ((((to_rep(private_types__private_reinit__s__discrs) = 0) and
-  ((((result = s__split_fields) and
-  (s__split_fields1 = private_types__private_reinit__s__fields)) and
-  ((result1 = s__split_discrs) and
-  (s__split_discrs1 = private_types__private_reinit__s__discrs))) and
-  ((s__attr__constrained = true) ->
-  (s__split_discrs = private_types__private_reinit__s__discrs)))) and
-  (((s__split_discrs2 = s__split_discrs1) and
-  (s__split_fields2 = s__split_fields1)) and
-  ((s__split_discrs3 = s__split_discrs1) and
-  (s__split_fields3 = s__split_fields1)))) -> (d_zero({ us_split_discrs1 = {
+goal WP_parameter_def : (d_zero({ us_split_discrs1 = {
   rec__private_types__simple__d = s__split_discrs2 }; us_split_fields1 = {
   rec__private_types__simple = s__split_fields2 }; attr__constrained =
-  s__attr__constrained }) = true)))
+  s__attr__constrained }) = true)

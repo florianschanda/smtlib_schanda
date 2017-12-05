@@ -565,37 +565,120 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r__split_fields : (int,us_rep) farray
+
+logic r__split_fields1 : bool
+
+logic r__split_fields2 : enum1t
+
+logic o : et1
+
+logic o1 : et1
+
+logic o2 : et2
+
+logic o3 : et1
+
+logic o4 : et2
+
+logic o5 : (int,us_rep) farray
+
+logic o6 : (int,us_rep) farray
+
+logic o7 : bool
+
+logic o8 : enum1t
+
+logic temp___9276 : (int,us_rep) farray
+
+logic temp___92761 : bool
+
+logic temp___92762 : enum1t
+
+logic result : (int,us_rep) farray
+
+logic result1 : bool
+
+logic result2 : enum1t
+
+logic r__split_fields3 : (int,us_rep) farray
+
+logic r__split_fields4 : bool
+
+logic r__split_fields5 : enum1t
+
+logic r__split_fields6 : (int,us_rep) farray
+
+logic r__split_fields7 : bool
+
+logic r__split_fields8 : enum1t
+
+logic r__split_fields9 : (int,us_rep) farray
+
+logic r__split_fields10 : bool
+
+logic r__split_fields11 : enum1t
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (to_rep(o) = e)
+
+axiom H3 : (o = o1)
+
+axiom H4 :
+  ((((r__split_fields[i])).us_split_fields1).rec__ar__rec1t__g1 = o2)
+
+axiom H5 : (o3 = o1)
+
+axiom H6 : (o4 = o2)
+
+axiom H7 : (o5 = (r__split_fields[i <- { us_split_fields1 = {
+  rec__ar__rec1t__f1 = o3; rec__ar__rec1t__g1 = o4 } }]))
+
+axiom H8 : (o5 = o6)
+
+axiom H9 : (r__split_fields1 = o7)
+
+axiom H10 : (r__split_fields2 = o8)
+
+axiom H11 : (temp___9276 = o6)
+
+axiom H12 : (temp___92761 = o7)
+
+axiom H13 : (temp___92762 = o8)
+
+axiom H14 : (result = r__split_fields)
+
+axiom H15 : (result1 = r__split_fields1)
+
+axiom H16 : (result2 = r__split_fields2)
+
+axiom H17 : (temp___9276 = r__split_fields3)
+
+axiom H18 : (temp___92761 = r__split_fields4)
+
+axiom H19 : (temp___92762 = r__split_fields5)
+
+axiom H20 : (r__split_fields6 = r__split_fields3)
+
+axiom H21 : (r__split_fields7 = r__split_fields4)
+
+axiom H22 : (r__split_fields8 = r__split_fields5)
+
+axiom H23 : (r__split_fields9 = r__split_fields3)
+
+axiom H24 : (r__split_fields10 = r__split_fields4)
+
+axiom H25 : (r__split_fields11 = r__split_fields5)
+
+logic n : int
+
+axiom H26 : (1 <= n)
+
+axiom H27 : (n <= 10)
+
  (* File "ar.ads", line 1758, characters 0-0 *)
 goal WP_parameter_def :
-  (forall r__split_fields:(int,us_rep) farray. forall r__split_fields1:bool.
-  forall r__split_fields2:enum1t. forall o:et1. forall o1:et1. forall o2:et2.
-  forall o3:et1. forall o4:et2. forall o5:(int,us_rep) farray.
-  forall o6:(int,us_rep) farray. forall o7:bool. forall o8:enum1t.
-  forall temp___9276:(int,us_rep) farray. forall temp___92761:bool.
-  forall temp___92762:enum1t. forall result:(int,us_rep) farray.
-  forall result1:bool. forall result2:enum1t.
-  forall r__split_fields3:(int,us_rep) farray. forall r__split_fields4:bool.
-  forall r__split_fields5:enum1t.
-  forall r__split_fields6:(int,us_rep) farray. forall r__split_fields7:bool.
-  forall r__split_fields8:enum1t.
-  forall r__split_fields9:(int,us_rep) farray. forall r__split_fields10:bool.
-  forall r__split_fields11:enum1t. ((in_range1(i) and (in_range2(e) and
-  ((((((((to_rep(o) = e) and ((o = o1) and
-  ((((r__split_fields[i])).us_split_fields1).rec__ar__rec1t__g1 = o2))) and
-  ((o3 = o1) and (o4 = o2))) and (o5 = (r__split_fields[i <- {
-  us_split_fields1 = { rec__ar__rec1t__f1 = o3; rec__ar__rec1t__g1 = o4 }
-  }]))) and ((o5 = o6) and ((r__split_fields1 = o7) and
-  (r__split_fields2 = o8)))) and ((temp___9276 = o6) and
-  ((temp___92761 = o7) and (temp___92762 = o8)))) and
-  (((result = r__split_fields) and ((result1 = r__split_fields1) and
-  (result2 = r__split_fields2))) and ((temp___9276 = r__split_fields3) and
-  ((temp___92761 = r__split_fields4) and
-  (temp___92762 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields3) and
-  ((r__split_fields7 = r__split_fields4) and
-  (r__split_fields8 = r__split_fields5))) and
-  ((r__split_fields9 = r__split_fields3) and
-  ((r__split_fields10 = r__split_fields4) and
-  (r__split_fields11 = r__split_fields5))))))) ->
-  (forall n:int. (((1 <= n) and (n <= 10)) ->
-  in_range2(to_rep((((r__split_fields6[n])).us_split_fields1).rec__ar__rec1t__f1))))))
+  in_range2(to_rep((((r__split_fields6[n])).us_split_fields1).rec__ar__rec1t__f1))

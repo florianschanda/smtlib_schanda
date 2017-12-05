@@ -76,6 +76,7 @@
 (declare-const a1 (_ BitVec 32))
 (declare-const a2 (_ BitVec 32))
 (declare-const a3 (_ BitVec 32))
+(assert true)
 (assert (and (= o (shift_right a 17)) (= o (bvudiv a (ite (< 17 4294967296) (bvshl ((_ int2bv 32) 1) ((_ int2bv 32) 17)) ((_ int2bv 32) 0))))))
 (assert (= (mk_t__ref result) (mk_t__ref a)))
 (assert (= a1 o))

@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -439,18 +439,29 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "helpers.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(s1__first),
-  to_rep1(s1__last)) -> (dynamic_property(1, 2147483647, to_rep1(first(s21)),
-  to_rep1(last(s21))) -> (in_range2(from1) -> (in_range2(from2) ->
-  (in_range4(n) -> (((not (n = 0)) -> (((((to_rep1(s1__first) <= from1) and
+axiom H : dynamic_property(1, 2147483647, to_rep1(s1__first),
+  to_rep1(s1__last))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : in_range2(from1)
+
+axiom H3 : in_range2(from2)
+
+axiom H4 : in_range4(n)
+
+axiom H5 : ((not (n = 0)) -> (((((to_rep1(s1__first) <= from1) and
   (from1 <= to_rep1(s1__last))) and
   ((to_rep1(s1__first) <= ((from1 + n) - 1)) and
   (((from1 + n) - 1) <= to_rep1(s1__last)))) and
   ((to_rep1(first(s21)) <= from2) and (from2 <= to_rep1(last(s21))))) and
   ((to_rep1(first(s21)) <= ((from2 + n) - 1)) and
-  (((from2 + n) - 1) <= to_rep1(last(s21)))))) -> (((bool_eq(n, 0) = true) ->
-  (((bool_ne(n, 0) = true) -> (1 <= ((0 + 1) + 1))) and ((not (bool_ne(n,
-  0) = true)) -> (1 <= ((0 + 1) + 0))))) and ((not (bool_eq(n, 0) = true)) ->
-  (((bool_ne(n, 0) = true) -> (1 <= ((0 + 0) + 1))) and ((not (bool_ne(n,
-  0) = true)) -> (1 <= ((0 + 0) + 0))))))))))))
+  (((from2 + n) - 1) <= to_rep1(last(s21))))))
+
+ (* File "helpers.ads", line 12, characters 0-0 *)
+goal WP_parameter_def : (((bool_eq(n, 0) = true) -> (((bool_ne(n,
+  0) = true) -> (1 <= ((0 + 1) + 1))) and ((not (bool_ne(n, 0) = true)) ->
+  (1 <= ((0 + 1) + 0))))) and ((not (bool_eq(n, 0) = true)) -> (((bool_ne(n,
+  0) = true) -> (1 <= ((0 + 0) + 1))) and ((not (bool_ne(n, 0) = true)) ->
+  (1 <= ((0 + 0) + 0))))))

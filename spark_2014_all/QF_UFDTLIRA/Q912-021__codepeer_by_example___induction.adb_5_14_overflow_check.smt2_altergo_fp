@@ -1,0 +1,227 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type integer
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq1 : int, int -> bool
+
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+logic user_eq : integer, integer -> bool
+
+logic dummy : integer
+
+type integer__ref = { integer__content : integer
+}
+
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic x : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : int
+
+logic x2 : int
+
+logic result3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic x3 : int
+
+logic result5 : int
+
+logic j3 : int
+
+logic result6 : int
+
+logic x4 : int
+
+logic result7 : int
+
+logic j4 : int
+
+logic result8 : int
+
+logic x5 : int
+
+logic result9 : int
+
+logic j5 : int
+
+logic result10 : int
+
+logic x6 : int
+
+logic result11 : int
+
+logic j6 : int
+
+logic result12 : int
+
+logic x7 : int
+
+logic result13 : int
+
+logic j7 : int
+
+logic result14 : int
+
+logic x8 : int
+
+logic result15 : int
+
+logic j8 : int
+
+logic result16 : int
+
+logic x9 : int
+
+logic result17 : int
+
+logic j9 : int
+
+logic result18 : int
+
+logic x10 : int
+
+logic result19 : int
+
+logic j10 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H1 : (result = x)
+
+axiom H2 : (x1 = 0)
+
+axiom H3 : (result1 = j)
+
+axiom H4 : (j1 = 1)
+
+ (* File "induction.adb", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range((x1 + 1))

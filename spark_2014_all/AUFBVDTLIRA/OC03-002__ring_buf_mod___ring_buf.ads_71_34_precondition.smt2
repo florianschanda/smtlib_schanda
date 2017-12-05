@@ -389,6 +389,8 @@
 (declare-const temp___296 (Array (_ BitVec 16) integer))
 (declare-const temp___2961 ar_index)
 (declare-const temp___2962 length_type)
+(declare-const temp___300 (Array (_ BitVec 16) integer))
+(declare-const temp___3001 t)
 (declare-const o9 Int)
 (declare-const o10 Bool)
 (declare-const result Int)

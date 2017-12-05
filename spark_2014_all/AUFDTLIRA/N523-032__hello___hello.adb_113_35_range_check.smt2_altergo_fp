@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -449,10 +449,10 @@ logic temp___String_Literal_154 : unit -> (int,character) farray
 axiom temp___String_Literal_154__def_axiom :
   (to_rep((temp___String_Literal_154(void)[1])) = 32)
 
-logic temp___String_Literal_585 : unit -> (int,character) farray
+logic temp___String_Literal_579 : unit -> (int,character) farray
 
-axiom temp___String_Literal_585__def_axiom :
-  (to_rep((temp___String_Literal_585(void)[1])) = 33)
+axiom temp___String_Literal_579__def_axiom :
+  (to_rep((temp___String_Literal_579(void)[1])) = 33)
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
@@ -541,47 +541,132 @@ axiom to_upper__post_axiom :
   (forall item:int [to_upper(item)]. (in_range2(item) ->
   in_range2(to_upper(item))))
 
+logic g_lang_level : int
+
+logic hello__say_hello__hello__assume : (int,character) farray
+
+logic hello__say_hello__hello__assume1 : t
+
+logic hello__say_hello__prefix__assume : (int,character) farray
+
+logic hello__say_hello__prefix__assume1 : t
+
+logic temp___578 : (int,character) farray
+
+logic temp___5781 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___577 : (int,character) farray
+
+logic temp___5771 : t
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic temp___580 : (int,character) farray
+
+logic temp___5801 : t
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+axiom H : in_range3(g_lang_level)
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(who1)),
+  to_rep1(last(who1)))
+
+axiom H2 : ((g_lang_level = 0) ->
+  (temp___String_Literal_151(void) = hello__say_hello__hello__assume))
+
+axiom H3 : ((g_lang_level = 0) -> (mk(1,
+  5) = hello__say_hello__hello__assume1))
+
+axiom H4 : ((not (g_lang_level = 0)) ->
+  (temp___String_Literal_152(void) = hello__say_hello__hello__assume))
+
+axiom H5 : ((not (g_lang_level = 0)) -> (mk(1,
+  2) = hello__say_hello__hello__assume1))
+
+axiom H6 : ((hello__say_hello__hello__assume = hello) and
+  (hello__say_hello__hello__assume1 = hello1))
+
+axiom H7 : dynamic_property(1, 2147483647, to_rep1(first(hello1)),
+  to_rep1(last(hello1)))
+
+axiom H8 : ((length({ elts = who; rt = who1 }) = 0) ->
+  (temp___String_Literal_153(void) = hello__say_hello__prefix__assume))
+
+axiom H9 : ((length({ elts = who; rt = who1 }) = 0) -> (mk(1,
+  0) = hello__say_hello__prefix__assume1))
+
+axiom H10 : ((not (length({ elts = who; rt = who1 }) = 0)) ->
+  (temp___String_Literal_154(void) = hello__say_hello__prefix__assume))
+
+axiom H11 : ((not (length({ elts = who; rt = who1 }) = 0)) -> (mk(1,
+  1) = hello__say_hello__prefix__assume1))
+
+axiom H12 : ((hello__say_hello__prefix__assume = prefix) and
+  (hello__say_hello__prefix__assume1 = prefix1))
+
+axiom H13 : dynamic_property(1, 2147483647, to_rep1(first(prefix1)),
+  to_rep1(last(prefix1)))
+
+axiom H14 : (({ elts = temp___578; rt = temp___5781 } = to_camel_case({
+  elts = who; rt = who1 })) and (dynamic_property(1, 2147483647,
+  to_rep1(first(temp___5781)), to_rep1(last(temp___5781))) and
+  ((to_rep1(first(temp___5781)) = to_rep1(first(who1))) and
+  ((to_rep1(last(temp___5781)) = to_rep1(last(who1))) and (to_caml_char2({
+  elts = who; rt = who1 }, { elts = temp___578; rt = temp___5781 },
+  to_rep1(last(who1))) = true)))))
+
+axiom H15 : (not (length({ elts = hello; rt = hello1 }) = 0))
+
+axiom H16 : ((to_rep1(first(prefix1)) <= to_rep1(last(prefix1))) ->
+  (o = ((to_rep1(last(prefix1)) - to_rep1(first(prefix1))) + 1)))
+
+axiom H17 : ((not (to_rep1(first(prefix1)) <= to_rep1(last(prefix1)))) ->
+  (o = 0))
+
+axiom H18 : ((to_rep1(first(hello1)) <= to_rep1(last(hello1))) ->
+  (o1 = ((to_rep1(last(hello1)) - to_rep1(first(hello1))) + 1)))
+
+axiom H19 : ((not (to_rep1(first(hello1)) <= to_rep1(last(hello1)))) ->
+  (o1 = 0))
+
+axiom H20 : (o2 = (o1 + o))
+
+axiom H21 : (o3 = (to_rep1(first(hello1)) + o2))
+
+axiom H22 : (o4 = (o3 - 1))
+
  (* File "hello.adb", line 90, characters 0-0 *)
-goal WP_parameter_def :
-  (forall g_lang_level:int.
-  forall hello__say_hello__hello__assume:(int,character) farray.
-  forall hello__say_hello__hello__assume1:t.
-  forall hello__say_hello__prefix__assume:(int,character) farray.
-  forall hello__say_hello__prefix__assume1:t.
-  forall temp___584:(int,character) farray. forall temp___5841:t.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  (in_range3(g_lang_level) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(who1)), to_rep1(last(who1))) -> (((((g_lang_level = 0) and
-  ((temp___String_Literal_151(void) = hello__say_hello__hello__assume) and
-  (mk(1, 5) = hello__say_hello__hello__assume1))) or
-  ((not (g_lang_level = 0)) and
-  ((temp___String_Literal_152(void) = hello__say_hello__hello__assume) and
-  (mk(1, 2) = hello__say_hello__hello__assume1)))) and
-  ((hello__say_hello__hello__assume = hello) and
-  (hello__say_hello__hello__assume1 = hello1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(hello1)), to_rep1(last(hello1))) -> (((((length({
-  elts = who; rt = who1 }) = 0) and
-  ((temp___String_Literal_153(void) = hello__say_hello__prefix__assume) and
-  (mk(1, 0) = hello__say_hello__prefix__assume1))) or ((not (length({ elts =
-  who; rt = who1 }) = 0)) and
-  ((temp___String_Literal_154(void) = hello__say_hello__prefix__assume) and
-  (mk(1, 1) = hello__say_hello__prefix__assume1)))) and
-  ((hello__say_hello__prefix__assume = prefix) and
-  (hello__say_hello__prefix__assume1 = prefix1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(prefix1)), to_rep1(last(prefix1))) -> ((({ elts =
-  temp___584; rt = temp___5841 } = to_camel_case({ elts = who; rt = who1
-  })) and (dynamic_property(1, 2147483647, to_rep1(first(temp___5841)),
-  to_rep1(last(temp___5841))) and
-  ((to_rep1(first(temp___5841)) = to_rep1(first(who1))) and
-  ((to_rep1(last(temp___5841)) = to_rep1(last(who1))) and (to_caml_char2({
-  elts = who; rt = who1 }, { elts = temp___584; rt = temp___5841 },
-  to_rep1(last(who1))) = true))))) -> ((not (length({ elts = hello; rt =
-  hello1 }) = 0)) ->
-  (((((((to_rep1(first(prefix1)) <= to_rep1(last(prefix1))) and
-  (o = ((to_rep1(last(prefix1)) - to_rep1(first(prefix1))) + 1))) or
-  ((not (to_rep1(first(prefix1)) <= to_rep1(last(prefix1)))) and
-  (o = 0))) and ((((to_rep1(first(hello1)) <= to_rep1(last(hello1))) and
-  (o1 = ((to_rep1(last(hello1)) - to_rep1(first(hello1))) + 1))) or
-  ((not (to_rep1(first(hello1)) <= to_rep1(last(hello1)))) and (o1 = 0))) and
-  (o2 = (o1 + o)))) and (o3 = (to_rep1(first(hello1)) + o2))) and
-  (o4 = (o3 - 1))) -> in_range1(o4)))))))))))
+goal WP_parameter_def : in_range1(o4)

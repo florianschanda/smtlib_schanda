@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -135,7 +135,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type coordinate_type
 
-predicate in_range2(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range2(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
 
@@ -382,22 +382,71 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "shapes.ads", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall delta_x:int. forall delta_y:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall result:int.
-  forall delta_x1:int. forall result1:int. forall delta_y1:int.
-  (in_range2(x) -> (in_range2(y) ->
-  ((((in_range2((to_rep(c) + to_rep1(c2))) and
+logic delta_x : int
+
+logic delta_y : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic delta_x1 : int
+
+logic result1 : int
+
+logic delta_y1 : int
+
+axiom H : in_range2(x)
+
+axiom H1 : in_range2(y)
+
+axiom H2 : (((in_range2((to_rep(c) + to_rep1(c2))) and
   in_range2((to_rep(c) - to_rep1(c2)))) and
   in_range2((to_rep(c1) + to_rep1(c2)))) and
-  in_range2((to_rep(c1) - to_rep1(c2)))) -> (((0 <= 200) ->
-  in_range4(delta_x)) -> (((0 <= 200) -> in_range4(delta_y)) ->
-  (((((o = abs_int((x - to_rep(c)))) and
-  in_range1(abs_int((x - to_rep(c))))) and ((o1 = o) and in_range4(o))) and
-  ((result = delta_x) and (delta_x1 = o1))) ->
-  (((((o2 = abs_int((y - to_rep(c1)))) and
-  in_range1(abs_int((y - to_rep(c1))))) and ((o3 = o2) and
-  in_range4(o2))) and ((result1 = delta_y) and (delta_y1 = o3))) ->
-  (((o4 = (to_rep1(c2) * to_rep1(c2))) and
-  in_range1((to_rep1(c2) * to_rep1(c2)))) -> in_range4(o4))))))))))
+  in_range2((to_rep(c1) - to_rep1(c2))))
+
+axiom H3 : ((0 <= 200) -> in_range4(delta_x))
+
+axiom H4 : ((0 <= 200) -> in_range4(delta_y))
+
+axiom H5 : ((o = abs_int((x - to_rep(c)))) and
+  in_range1(abs_int((x - to_rep(c)))))
+
+axiom H6 : ((o1 = o) and in_range4(o))
+
+axiom H7 : (result = delta_x)
+
+axiom H8 : (delta_x1 = o1)
+
+axiom H9 : ((o2 = abs_int((y - to_rep(c1)))) and
+  in_range1(abs_int((y - to_rep(c1)))))
+
+axiom H10 : ((o3 = o2) and in_range4(o2))
+
+axiom H11 : (result1 = delta_y)
+
+axiom H12 : (delta_y1 = o3)
+
+axiom H13 : ((o7 = (to_rep1(c2) * to_rep1(c2))) and
+  in_range1((to_rep1(c2) * to_rep1(c2))))
+
+ (* File "shapes.ads", line 15, characters 0-0 *)
+goal WP_parameter_def : in_range4(o7)

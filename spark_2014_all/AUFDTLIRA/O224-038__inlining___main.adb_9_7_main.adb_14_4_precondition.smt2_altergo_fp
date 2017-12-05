@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -775,21 +775,35 @@ function r__ref___projection(a: r__ref) : us_rep2 = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:natural.
-  forall v__split_fields1:(int,natural) farray. forall v__split_fields2:t1.
-  forall us:int. (in_range(max) -> (((us = max) and in_range(max)) ->
-  ((to_rep(v__split_fields) = max) -> (((max = to_rep(((to_base({
-  us_split_discrs2 = { rec__priv__priv_rec__c = v__split_fields };
-  us_split_fields3 = { rec__priv__priv_rec__content1 = { elts1 =
-  v__split_fields1; rt1 = v__split_fields2 } }
-  })).us_split_discrs1).rec__priv__priv_rec__c)) and (dynamic_property3(1,
-  max, to_rep1(first2(v__split_fields2)),
+logic v__split_fields : natural
+
+logic v__split_fields1 : (int,natural) farray
+
+logic v__split_fields2 : t1
+
+logic us : int
+
+logic priv__init__p__fields : (int,natural) farray
+
+logic priv__init__p__fields1 : t
+
+axiom H : in_range(max)
+
+axiom H1 : ((us = max) and in_range(max))
+
+axiom H2 : (to_rep(v__split_fields) = max)
+
+axiom H3 : ((max = to_rep(((to_base({ us_split_discrs2 = {
+  rec__priv__priv_rec__c = v__split_fields }; us_split_fields3 = {
+  rec__priv__priv_rec__content1 = { elts1 = v__split_fields1; rt1 =
+  v__split_fields2 } } })).us_split_discrs1).rec__priv__priv_rec__c)) and
+  (dynamic_property3(1, max, to_rep1(first2(v__split_fields2)),
   to_rep1(last2(v__split_fields2))) and
   ((to_rep1(first2(v__split_fields2)) = 1) and
-  (to_rep1(last2(v__split_fields2)) = max)))) -> (0 <  to_rep(((to_base({
-  us_split_discrs2 = { rec__priv__priv_rec__c = v__split_fields };
-  us_split_fields3 = { rec__priv__priv_rec__content1 = { elts1 =
-  v__split_fields1; rt1 = v__split_fields2 } }
-  })).us_split_discrs1).rec__priv__priv_rec__c)))))))
+  (to_rep1(last2(v__split_fields2)) = max))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (0 <  to_rep(((to_base({ us_split_discrs2 = {
+  rec__priv__priv_rec__c = v__split_fields }; us_split_fields3 = {
+  rec__priv__priv_rec__content1 = { elts1 = v__split_fields1; rt1 =
+  v__split_fields2 } } })).us_split_discrs1).rec__priv__priv_rec__c))

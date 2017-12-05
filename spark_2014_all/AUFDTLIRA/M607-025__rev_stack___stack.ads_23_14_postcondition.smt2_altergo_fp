@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -659,55 +659,133 @@ axiom to____def_axiom :
   mk(to_rep1(first2(mk1(1, to_rep(s)))), to_rep1(last2(mk1(1, to_rep(s)))))
   }))
 
+logic e__split_fields : r1
+
+logic e__split_fields1 : (int,integer) farray
+
+logic stack__empty_stack__result : r1
+
+logic stack__empty_stack__result1 : (int,integer) farray
+
+logic o : r1
+
+logic o1 : r1
+
+logic o2 : (int,integer) farray
+
+logic temp___219 : r1
+
+logic temp___2191 : (int,integer) farray
+
+logic result : r1
+
+logic result1 : (int,integer) farray
+
+logic e__split_fields2 : r1
+
+logic e__split_fields3 : (int,integer) farray
+
+logic result2 : r1
+
+logic result3 : (int,integer) farray
+
+logic e__split_fields4 : r1
+
+logic e__split_fields5 : (int,integer) farray
+
+logic result4 : r1
+
+logic result5 : (int,integer) farray
+
+logic stack__empty_stack__result2 : r1
+
+logic stack__empty_stack__result3 : (int,integer) farray
+
+logic stack__empty_stack__result4 : r1
+
+logic stack__empty_stack__result5 : (int,integer) farray
+
+logic stack__empty_stack__result6 : r1
+
+logic stack__empty_stack__result7 : (int,integer) farray
+
+logic e__split_fields6 : r1
+
+logic e__split_fields7 : (int,integer) farray
+
+logic stack__empty_stack__result8 : r1
+
+logic stack__empty_stack__result9 : (int,integer) farray
+
+logic e__split_fields8 : r1
+
+logic e__split_fields9 : (int,integer) farray
+
+logic stack__empty_stack__result10 : r1
+
+logic stack__empty_stack__result11 : (int,integer) farray
+
+logic result6 : r1
+
+logic result7 : (int,integer) farray
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (e__split_fields1 = o2)
+
+axiom H3 : (temp___219 = o1)
+
+axiom H4 : (temp___2191 = o2)
+
+axiom H5 : (result = e__split_fields)
+
+axiom H6 : (result1 = e__split_fields1)
+
+axiom H7 : (temp___219 = e__split_fields2)
+
+axiom H8 : (temp___2191 = e__split_fields3)
+
+axiom H9 : (result2 = e__split_fields2)
+
+axiom H10 : (result3 = e__split_fields3)
+
+axiom H11 : (e__split_fields2 = e__split_fields4)
+
+axiom H12 : (temp___220(0) = e__split_fields5)
+
+axiom H13 : (stack__empty_stack__result4 = stack__empty_stack__result2)
+
+axiom H14 : (stack__empty_stack__result5 = stack__empty_stack__result3)
+
+axiom H15 : ((stack__empty_stack__result6 = stack__empty_stack__result2) and
+  (stack__empty_stack__result7 = stack__empty_stack__result3))
+
+axiom H16 : (result4 = stack__empty_stack__result)
+
+axiom H17 : (result5 = stack__empty_stack__result1)
+
+axiom H18 : (stack__empty_stack__result2 = e__split_fields4)
+
+axiom H19 : (stack__empty_stack__result3 = e__split_fields5)
+
+axiom H20 : ((stack__empty_stack__result8 = stack__empty_stack__result4) and
+  (stack__empty_stack__result9 = stack__empty_stack__result5))
+
+axiom H21 : ((e__split_fields6 = e__split_fields4) and
+  (e__split_fields7 = e__split_fields5))
+
+axiom H22 : ((stack__empty_stack__result10 = stack__empty_stack__result6) and
+  (stack__empty_stack__result11 = stack__empty_stack__result7))
+
+axiom H23 : ((e__split_fields8 = e__split_fields4) and
+  (e__split_fields9 = e__split_fields5))
+
+axiom H24 : ((result6 = stack__empty_stack__result8) and
+  (result7 = stack__empty_stack__result9))
+
  (* File "stack.ads", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall e__split_fields:r1. forall e__split_fields1:(int,integer) farray.
-  forall stack__empty_stack__result:r1.
-  forall stack__empty_stack__result1:(int,integer) farray. forall o:r1.
-  forall o1:r1. forall o2:(int,integer) farray. forall temp___219:r1.
-  forall temp___2191:(int,integer) farray. forall result:r1.
-  forall result1:(int,integer) farray. forall e__split_fields2:r1.
-  forall e__split_fields3:(int,integer) farray. forall result2:r1.
-  forall result3:(int,integer) farray. forall e__split_fields4:r1.
-  forall e__split_fields5:(int,integer) farray. forall result4:r1.
-  forall result5:(int,integer) farray. forall stack__empty_stack__result2:r1.
-  forall stack__empty_stack__result3:(int,integer) farray.
-  forall stack__empty_stack__result4:r1.
-  forall stack__empty_stack__result5:(int,integer) farray.
-  forall stack__empty_stack__result6:r1.
-  forall stack__empty_stack__result7:(int,integer) farray.
-  forall e__split_fields6:r1. forall e__split_fields7:(int,integer) farray.
-  forall stack__empty_stack__result8:r1.
-  forall stack__empty_stack__result9:(int,integer) farray.
-  forall e__split_fields8:r1. forall e__split_fields9:(int,integer) farray.
-  forall stack__empty_stack__result10:r1.
-  forall stack__empty_stack__result11:(int,integer) farray.
-  (forall result6:r1. forall result7:(int,integer) farray.
-  ((((((((to_rep(o) = 0) and ((o = o1) and (e__split_fields1 = o2))) and
-  ((temp___219 = o1) and (temp___2191 = o2))) and
-  (((result = e__split_fields) and (result1 = e__split_fields1)) and
-  ((temp___219 = e__split_fields2) and
-  (temp___2191 = e__split_fields3)))) and ((((result2 = e__split_fields2) and
-  (result3 = e__split_fields3)) and
-  ((e__split_fields2 = e__split_fields4) and
-  (temp___220(0) = e__split_fields5))) and
-  ((((stack__empty_stack__result4 = stack__empty_stack__result2) and
-  (stack__empty_stack__result5 = stack__empty_stack__result3)) and
-  ((stack__empty_stack__result2 = stack__empty_stack__result6) and
-  (stack__empty_stack__result3 = stack__empty_stack__result7))) and
-  (((result4 = stack__empty_stack__result) and
-  (result5 = stack__empty_stack__result1)) and
-  ((stack__empty_stack__result2 = e__split_fields4) and
-  (stack__empty_stack__result3 = e__split_fields5)))))) and
-  ((((stack__empty_stack__result4 = stack__empty_stack__result8) and
-  (stack__empty_stack__result5 = stack__empty_stack__result9)) and
-  ((e__split_fields6 = e__split_fields4) and
-  (e__split_fields7 = e__split_fields5))) and
-  (((stack__empty_stack__result10 = stack__empty_stack__result6) and
-  (stack__empty_stack__result11 = stack__empty_stack__result7)) and
-  ((e__split_fields8 = e__split_fields4) and
-  (e__split_fields9 = e__split_fields5))))) and
-  ((result6 = stack__empty_stack__result8) and
-  (result7 = stack__empty_stack__result9))) -> (is_empty({ us_split_fields1 =
-  { rec__stack__stack__top = stack__empty_stack__result8;
-  rec__stack__stack__content = stack__empty_stack__result9 } }) = true))))
+goal WP_parameter_def : (is_empty({ us_split_fields1 = {
+  rec__stack__stack__top = stack__empty_stack__result8;
+  rec__stack__stack__content = stack__empty_stack__result9 } }) = true)

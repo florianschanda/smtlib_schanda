@@ -1862,32 +1862,85 @@ axiom fliteral_axiom3 : (tqtisFinite1(fliteral3) and
 
 axiom max_double__def_axiom : (max_double = fliteral3)
 
+logic x : t
+
+logic y : t
+
+logic z : t
+
+logic t2 : t
+
+logic o : t
+
+logic o1 : t
+
+logic result : t
+
+logic x1 : t
+
+logic result1 : t
+
+logic y1 : t
+
+logic result2 : t
+
+logic z1 : t
+
+logic result3 : t
+
+logic t3 : t
+
+axiom H : tqtisFinite(max_float)
+
+axiom H1 : tqtisFinite1(max_double)
+
+axiom H2 : (result = x)
+
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
+
+axiom H3 : (x1 = fliteral4)
+
+axiom H4 : tqtisFinite(x1)
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = fliteral)
+
+axiom H7 : tqtisFinite(y1)
+
+axiom H8 : (result2 = z)
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.500000000000000000000000))
 
+axiom H9 : (z1 = fliteral5)
+
+axiom H10 : tqtisFinite(z1)
+
+axiom H11 : ((o = add(NearestTiesToEven, x1, y1)) and
+  tqtisFinite(add(NearestTiesToEven, x1, y1)))
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.0))
 
+axiom H12 : (o1 = div(NearestTiesToEven, o, fliteral6))
+
+axiom H13 : (result3 = t2)
+
+axiom H14 : (t3 = o1)
+
+axiom H15 : tqtisFinite(t3)
+
+axiom H16 : eq(roundToIntegral(Down, x1), x1)
+
+axiom H17 : eq(roundToIntegral(Down, y1), y1)
+
  (* File "testfloat.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall z:t. forall t2:t. forall o:t. forall o1:t.
-  forall result:t. forall x1:t. forall result1:t. forall y1:t.
-  forall result2:t. forall z1:t. forall result3:t. forall t3:t.
-  (tqtisFinite(max_float) -> (tqtisFinite1(max_double) -> (((result = x) and
-  (x1 = fliteral4)) -> (tqtisFinite(x1) -> (((result1 = y) and
-  (y1 = fliteral)) -> (tqtisFinite(y1) -> (((result2 = z) and
-  (z1 = fliteral5)) -> (tqtisFinite(z1) -> (((((o = add(NearestTiesToEven,
-  x1, y1)) and tqtisFinite(add(NearestTiesToEven, x1, y1))) and
-  (o1 = div(NearestTiesToEven, o, fliteral6))) and ((result3 = t2) and
-  (t3 = o1))) -> (tqtisFinite(t3) -> (eq(roundToIntegral(Down, x1), x1) ->
-  (eq(roundToIntegral(Down, y1), y1) -> eq(roundToIntegral(Down, z1),
-  x1))))))))))))))
+goal WP_parameter_def : eq(roundToIntegral(Down, z1), x1)

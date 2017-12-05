@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -279,18 +279,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -947,7 +947,7 @@ function us_split_fields__ref___139__projection(a: us_split_fields__ref) : us_sp
 type us_rep = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___140__projection(a: us_rep) : us_split_fields =
+function us_rep___141__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size1 : int
@@ -1003,9 +1003,22 @@ logic offset : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(data1)),
+  to_rep(last(data1)))
+
+axiom H1 : in_range2(offset)
+
+axiom H2 : (1 <= length({ elts = data; rt = data1 }))
+
+axiom H3 : (length({ elts = data; rt = data1 }) <= 1024)
+
+axiom H4 : (offset <  1024)
+
  (* File "decadriver.ads", line 163, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483647,
-  to_rep(first(data1)), to_rep(last(data1))) -> (in_range2(offset) ->
-  (((1 <= length({ elts = data; rt = data1 })) and (length({ elts = data;
-  rt = data1 }) <= 1024)) -> ((offset <  1024) -> in_range1(length({ elts =
-  data; rt = data1 }))))))
+goal WP_parameter_def : in_range1(length({ elts = data; rt = data1 }))

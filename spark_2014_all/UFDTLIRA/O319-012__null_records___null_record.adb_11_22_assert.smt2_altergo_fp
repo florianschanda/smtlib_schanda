@@ -218,5 +218,37 @@ logic t3__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic o1 : null_rec
+
+logic o3 : null_rec
+
+logic t2__split_fields : us_private
+
+logic t3__split_fields : us_private
+
+logic result : null_rec
+
+logic o31 : null_rec
+
+logic result1 : us_private
+
+logic t3__split_fields1 : us_private
+
+axiom H : (result = o3)
+
+axiom H1 : (o31 = o1)
+
+axiom H2 : (t1__attr__tag = us_tag)
+
+axiom H3 : (t2__attr__tag = us_tag1)
+
+axiom H4 : (result1 = t3__split_fields)
+
+axiom H5 : (t2__split_fields = t3__split_fields1)
+
+axiom H6 : (t3__attr__tag = us_tag)
+
+axiom H7 : true
+
  (* File "null_record.adb", line 47, characters 0-0 *)
 goal WP_parameter_def : true

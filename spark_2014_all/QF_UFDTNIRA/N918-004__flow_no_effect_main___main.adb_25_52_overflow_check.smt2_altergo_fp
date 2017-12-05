@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -171,9 +171,61 @@ logic side_3 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic main__is_right_angle_triangle__result : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic main__is_right_angle_triangle__result1 : bool
+
+logic result2 : bool
+
+logic main__is_right_angle_triangle__result2 : bool
+
+logic main__is_right_angle_triangle__result3 : bool
+
+logic main__is_right_angle_triangle__result4 : bool
+
+logic main__is_right_angle_triangle__result5 : bool
+
+logic main__is_right_angle_triangle__result6 : bool
+
+logic main__is_right_angle_triangle__result7 : bool
+
+logic main__is_right_angle_triangle__result8 : bool
+
+axiom H : in_range2(long_side)
+
+axiom H1 : in_range2(side_2)
+
+axiom H2 : in_range2(side_3)
+
+axiom H3 : ((o = (side_3 * side_3)) and in_range1((side_3 * side_3)))
+
+axiom H4 : ((o1 = (side_2 * side_2)) and in_range1((side_2 * side_2)))
+
+axiom H5 : (o2 = (o1 + o))
+
  (* File "main.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. (in_range2(long_side) ->
-  (in_range2(side_2) -> (in_range2(side_3) -> ((((o = (side_3 * side_3)) and
-  in_range1((side_3 * side_3))) and (((o1 = (side_2 * side_2)) and
-  in_range1((side_2 * side_2))) and (o2 = (o1 + o)))) -> in_range1(o2))))))
+goal WP_parameter_def : in_range1(o2)

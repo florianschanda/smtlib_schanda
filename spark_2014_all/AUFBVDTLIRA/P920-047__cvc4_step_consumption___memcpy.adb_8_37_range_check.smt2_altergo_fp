@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2053,6 +2053,271 @@ axiom writereg32post__post_axiom :
   (forall val__:t2 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and3(regnew,
   of_int3(18446744069414584320)) = of_int3(0))))))
+
+logic fs : t3
+
+logic gs : t3
+
+logic stackaddresssize : t1
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic rax : t3
+
+logic rcx : t3
+
+logic rdx : t3
+
+logic rbx : t3
+
+logic rsp : t3
+
+logic rbp : t3
+
+logic rsi : t3
+
+logic rdi : t3
+
+logic r8 : t3
+
+logic r9 : t3
+
+logic r10 : t3
+
+logic r11 : t3
+
+logic r12 : t3
+
+logic r13 : t3
+
+logic r14 : t3
+
+logic r15 : t3
+
+logic memory : (t3,unsigned8) farray
+
+logic rdx_400586 : t3
+
+logic rdi_400586 : t3
+
+logic o : t3
+
+logic o1 : t3
+
+logic o2 : t3
+
+logic o3 : t2
+
+logic o4 : t2
+
+logic o5 : t3
+
+logic o6 : t3
+
+logic o7 : bool
+
+logic o8 : t3
+
+logic o9 : t3
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : t3
+
+logic o13 : t3
+
+logic o14 : t3
+
+logic o15 : t3
+
+logic o16 : t3
+
+logic o17 : t3
+
+logic result : t3
+
+logic rdx_4005861 : t3
+
+logic result1 : t3
+
+logic rdi_4005861 : t3
+
+logic memory1 : (t3,unsigned8) farray
+
+logic result2 : t3
+
+logic rsp1 : t3
+
+logic result3 : t3
+
+logic rbp1 : t3
+
+logic memory2 : (t3,unsigned8) farray
+
+logic memory3 : (t3,unsigned8) farray
+
+logic memory4 : (t3,unsigned8) farray
+
+logic result4 : t3
+
+logic rax1 : t3
+
+logic rax2 : t3
+
+logic result5 : bool
+
+logic zeroflag1 : bool
+
+logic result6 : bool
+
+logic signflag1 : bool
+
+logic result7 : bool
+
+logic carryflag1 : bool
+
+logic result8 : bool
+
+logic overflowflag1 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : t3
+
+logic rax3 : t3
+
+logic memory5 : (t3,unsigned8) farray
+
+logic result12 : t3
+
+logic rax4 : t3
+
+logic memory6 : (t3,unsigned8) farray
+
+logic memory7 : (t3,unsigned8) farray
+
+logic result13 : t3
+
+logic rax5 : t3
+
+logic memory8 : (t3,unsigned8) farray
+
+logic result14 : t3
+
+logic rax6 : t3
+
+logic memory9 : (t3,unsigned8) farray
+
+logic memory10 : (t3,unsigned8) farray
+
+logic result15 : t3
+
+logic rax7 : t3
+
+logic result16 : t3
+
+logic rbp2 : t3
+
+logic result17 : t3
+
+logic rsp2 : t3
+
+logic result18 : t3
+
+logic rsp3 : t3
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic rax8 : t3
+
+logic rsp4 : t3
+
+logic rbp3 : t3
+
+logic memory11 : (t3,unsigned8) farray
+
+logic rdx_4005862 : t3
+
+logic rdi_4005862 : t3
+
+logic zeroflag3 : bool
+
+logic carryflag3 : bool
+
+logic signflag3 : bool
+
+logic overflowflag3 : bool
+
+logic rax9 : t3
+
+logic rsp5 : t3
+
+logic rbp4 : t3
+
+logic memory12 : (t3,unsigned8) farray
+
+logic rdx_4005863 : t3
+
+logic rdi_4005863 : t3
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : true
+
+axiom H15 : true
+
+axiom H16 : true
+
+axiom H17 : true
+
+axiom H18 : true
+
+axiom H19 :
+  (forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
+  of_int3(18446744073709551615))) -> ((inmemoryrange(i, rdi, add3(rdi,
+  rdx)) = true) -> (insaferegion64(i, rsp) = true))))
 
  (* File "x86.ads", line 201, characters 0-0 *)
 goal WP_parameter_def : true

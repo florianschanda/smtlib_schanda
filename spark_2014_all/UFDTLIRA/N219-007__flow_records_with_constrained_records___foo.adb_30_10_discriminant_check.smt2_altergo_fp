@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -208,17 +208,17 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__foo__value__kind) = to_rep1(((b).us_split_discrs1).rec__foo__value__kind)) and
-  (foo__value__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field))) and
-  (foo__value__int_field__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__foo__value__int_field) = to_rep(((b).us_split_fields1).rec__foo__value__int_field)))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__foo__value__kind) = to_rep1(((b).us_split_discrs1).rec__foo__value__kind)) and
-  (foo__value__bool_field__pred(a) ->
-  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__foo__value__kind) = to_rep1(((b).us_split_discrs1).rec__foo__value__kind)) and
+  ((foo__value__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field)) and
   (foo__value__int_field__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__foo__value__int_field) = to_rep(((b).us_split_fields1).rec__foo__value__int_field))))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__foo__value__kind) = to_rep1(((b).us_split_discrs1).rec__foo__value__kind)) and
+  ((foo__value__bool_field__pred(a) ->
+  (((a).us_split_fields1).rec__foo__value__bool_field = ((b).us_split_fields1).rec__foo__value__bool_field)) and
+  (foo__value__int_field__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__foo__value__int_field) = to_rep(((b).us_split_fields1).rec__foo__value__int_field)))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -699,16 +699,35 @@ function record_a__ref___projection(a: record_a__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic v__split_fields : value_kind
+
+logic v__split_fields1 : bool
+
+logic v__split_fields2 : integer
+
+logic v__split_fields3 : bool
+
+logic v__split_fields4 : value_kind
+
+logic v__split_fields5 : bool
+
+logic v__split_fields6 : integer
+
+logic v__split_fields7 : bool
+
+logic v__split_fields8 : value_kind
+
+logic v__split_fields9 : bool
+
+logic v__split_fields10 : integer
+
+logic v__split_fields11 : bool
+
+axiom H : (((((1 = to_rep1(v__split_fields)) and
+  (v__split_fields3 = true)) and (v__split_fields3 = true)) and
+  (((2 = to_rep1(v__split_fields4)) and (v__split_fields7 = true)) and
+  (v__split_fields7 = true))) and (((0 = to_rep1(v__split_fields8)) and
+  (v__split_fields11 = true)) and (v__split_fields11 = true)))
+
  (* File "foo.adb", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:us_split_fields__ref1.
-  ((((((1 = to_rep1(((((v__split_fields).us_split_fields__content1).rec__foo__record_a__x).us_split_discrs1).rec__foo__value__kind)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__x).attr__constrained = true)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__x).attr__constrained = true)) and
-  (((2 = to_rep1(((((v__split_fields).us_split_fields__content1).rec__foo__record_a__y).us_split_discrs1).rec__foo__value__kind)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__y).attr__constrained = true)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__y).attr__constrained = true))) and
-  (((0 = to_rep1(((((v__split_fields).us_split_fields__content1).rec__foo__record_a__z).us_split_discrs1).rec__foo__value__kind)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__z).attr__constrained = true)) and
-  ((((v__split_fields).us_split_fields__content1).rec__foo__record_a__z).attr__constrained = true))) ->
-  (to_rep1(((((v__split_fields).us_split_fields__content1).rec__foo__record_a__x).us_split_discrs1).rec__foo__value__kind) = 1)))
+goal WP_parameter_def : (to_rep1(v__split_fields) = 1)

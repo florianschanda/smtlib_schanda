@@ -48,6 +48,8 @@
 (declare-const y1 Int)
 (declare-const result2 Int)
 (declare-const z1 Int)
+(declare-const result3 Int)
+(declare-const x2 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 x)))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 y)))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 z)))

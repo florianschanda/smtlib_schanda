@@ -121,6 +121,7 @@
 (declare-const tmp_b (Array Int character))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (declare-const result (Array Int character))
 (declare-const tmp_b1 (Array Int character))
 (declare-const result1 Int)

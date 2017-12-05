@@ -133,8 +133,15 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : int
+
+logic o : int
+
+logic out_subcheck__read__z : int
+
+axiom H : ((1 <= 10) -> in_range(x))
+
+axiom H1 : in_range1(out_subcheck__read__z)
+
  (* File "out_subcheck.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall out_subcheck__read__z:int. (((1 <= 10) ->
-  in_range(x)) -> (in_range1(out_subcheck__read__z) ->
-  in_range(out_subcheck__read__z))))
+goal WP_parameter_def : in_range(out_subcheck__read__z)

@@ -81,5 +81,7 @@ logic bad : unit -> bool
 
 logic bad__function_guard : bool, unit -> prop
 
+axiom H : (bad(void) = true)
+
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not (bad(void) = true))
+goal WP_parameter_def : false

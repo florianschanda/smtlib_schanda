@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -139,14 +139,51 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic y : int
+
+logic z : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : int
+
+logic z1 : int
+
+logic result3 : int
+
+logic x2 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(x))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(z))
+
+axiom H3 : (result = x)
+
+axiom H4 : (x1 = 0)
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = 0)
+
+axiom H7 : (result2 = z)
+
+axiom H8 : (z1 = 0)
+
+axiom H9 : (((x1 = 0) and (y1 = 0)) and (z1 = 0))
+
+axiom H10 : (result3 = x1)
+
+axiom H11 : (x2 = 1)
+
  (* File "p.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall z:int. forall result:int.
-  forall x1:int. forall result1:int. forall y1:int. forall result2:int.
-  forall z1:int. forall result3:int. forall x2:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(x)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(y)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(z)) -> (((result = x) and
-  (x1 = 0)) -> (((result1 = y) and (y1 = 0)) -> (((result2 = z) and
-  (z1 = 0)) -> ((((x1 = 0) and (y1 = 0)) and (z1 = 0)) ->
-  (((result3 = x1) and (x2 = 1)) -> (y1 = 0))))))))))
+goal WP_parameter_def : (y1 = 0)

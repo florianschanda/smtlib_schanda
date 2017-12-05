@@ -141,9 +141,29 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic left : int
+
+logic right : int
+
+logic result : int
+
+logic left1 : int
+
+logic result1 : int
+
+logic right1 : int
+
+axiom H : (result = left)
+
+axiom H1 : (left1 = 0)
+
+axiom H2 : in_range(left1)
+
+axiom H3 : (result1 = right)
+
+axiom H4 : (right1 = 0)
+
+axiom H5 : in_range1(right1)
+
  (* File "regpat.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall left:int. forall right:int. forall result:int. forall left1:int.
-  forall result1:int. forall right1:int. (((result = left) and
-  (left1 = 0)) -> (in_range(left1) -> (((result1 = right) and
-  (right1 = 0)) -> (in_range1(right1) -> (oeq(left1, right1) = true))))))
+goal WP_parameter_def : (oeq(left1, right1) = true)

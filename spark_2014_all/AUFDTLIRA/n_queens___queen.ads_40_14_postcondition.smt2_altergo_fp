@@ -267,45 +267,109 @@ logic c : (int,index) farray
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "queen.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:(int,index) farray. forall done__:bool. forall o:int.
-  forall b1:(int,index) farray. forall done__1:bool. forall result:bool.
-  forall result1:bool. forall done__2:bool. forall b2:(int,index) farray.
-  forall done__3:bool. forall b3:(int,index) farray. forall done__4:bool.
-  forall b4:(int,index) farray. forall done__5:bool.
-  forall b5:(int,index) farray. forall done__6:bool.
-  forall b6:(int,index) farray. forall done__7:bool. ((in_range1(i) and
-  ((((not (done__ = true)) and
-  (forall j:int. (((1 <= j) and (j <= i)) ->
-  (to_rep((c[j])) = to_rep((b[j])))))) and ((1 <  i) -> (consistent(b,
-  (i - 1)) = true))) and ((((((done__2 = done__4) and (b2 = b3)) and
+logic b : (int,index) farray
+
+logic done__ : bool
+
+logic j : int
+
+logic o : int
+
+logic o1 : index
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic o5 : int
+
+logic j1 : int
+
+logic o6 : int
+
+logic j2 : int
+
+logic o7 : int
+
+logic o8 : index
+
+logic o9 : int
+
+logic b1 : (int,index) farray
+
+logic done__1 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+logic done__2 : bool
+
+logic b2 : (int,index) farray
+
+logic done__3 : bool
+
+logic b3 : (int,index) farray
+
+logic done__4 : bool
+
+logic b4 : (int,index) farray
+
+logic done__5 : bool
+
+logic b5 : (int,index) farray
+
+logic done__6 : bool
+
+logic b6 : (int,index) farray
+
+logic done__7 : bool
+
+axiom H : in_range1(i)
+
+axiom H1 : (((not (done__ = true)) and
+  (forall j3:int. (((1 <= j3) and (j3 <= i)) ->
+  (to_rep((c[j3])) = to_rep((b[j3])))))) and ((1 <  i) -> (consistent(b,
+  (i - 1)) = true)))
+
+axiom H2 : (((((done__2 = done__4) and (b2 = b3)) and
   ((done__5 = done__2) and (b4 = b2))) and (((result = consistent(b, i)) and
   ((result = true) <->
   (forall i1:int. (((1 <= i1) and (i1 <= i)) ->
-  (forall j:int. (((1 <= j) and (j <= (i1 - 1))) ->
-  (((not (to_rep((b[i1])) = to_rep((b[j])))) and
-  (not ((i1 - j) = (to_rep((b[i1])) - to_rep((b[j])))))) and
-  (not ((i1 - j) = (to_rep((b[j])) - to_rep((b[i1])))))))))))) and
-  ((result = true) and (((8 = i) and ((({ bool__content = result1 } = {
-  bool__content = done__ }) and (done__2 = of_int(1))) and ((b2 = b) and
-  (b2 = b1)))) or ((not (8 = i)) and ((((o = (i + 1)) and
-  in_range1((i + 1))) and ((((done__3 = true) and (consistent(b2,
-  8) = true)) or ((not (done__3 = true)) and (not (consistent(c,
-  8) = true)))) and
-  (forall j:int. (((1 <= j) and (j <= (o - 1))) ->
-  (to_rep((b2[j])) = to_rep((b[j]))))))) and (done__2 = done__3))))))) or
+  (forall j3:int. (((1 <= j3) and (j3 <= (i1 - 1))) ->
+  (((not (to_rep((b[i1])) = to_rep((b[j3])))) and
+  (not ((i1 - j3) = (to_rep((b[i1])) - to_rep((b[j3])))))) and
+  (not ((i1 - j3) = (to_rep((b[j3])) - to_rep((b[i1])))))))))))) and
+  ((result = true) and (((8 = i) -> (((result1 = done__) and
+  (done__2 = of_int(1))) and ((b2 = b) and (b2 = b1)))) and ((not (8 = i)) ->
+  ((((o5 = (i + 1)) and in_range1((i + 1))) and ((((done__3 = true) ->
+  (consistent(b2, 8) = true)) and ((not (done__3 = true)) ->
+  (not (consistent(c, 8) = true)))) and
+  (forall j3:int. (((1 <= j3) and (j3 <= (o5 - 1))) ->
+  (to_rep((b2[j3])) = to_rep((b[j3]))))))) and (done__2 = done__3))))))) or
   ((((result = consistent(b, i)) and ((result = true) <->
   (forall i1:int. (((1 <= i1) and (i1 <= i)) ->
-  (forall j:int. (((1 <= j) and (j <= (i1 - 1))) ->
-  (((not (to_rep((b[i1])) = to_rep((b[j])))) and
-  (not ((i1 - j) = (to_rep((b[i1])) - to_rep((b[j])))))) and
-  (not ((i1 - j) = (to_rep((b[j])) - to_rep((b[i1])))))))))))) and
+  (forall j3:int. (((1 <= j3) and (j3 <= (i1 - 1))) ->
+  (((not (to_rep((b[i1])) = to_rep((b[j3])))) and
+  (not ((i1 - j3) = (to_rep((b[i1])) - to_rep((b[j3])))))) and
+  (not ((i1 - j3) = (to_rep((b[j3])) - to_rep((b[i1])))))))))))) and
   ((not (result = true)) and (((not (consistent(c, i) = true)) and
-  (not (forall j:int. (((i <= j) and (j <= 8)) -> (consistent(c, j) = true))))) and
-  (((done__2 = done__) and (b2 = b)) and ((done__2 = done__1) and
-  (b2 = b1)))))) and (((done__2 = done__4) and (b2 = b3)) and
-  ((done__5 = done__2) and (b4 = b2))))) and ((({ bool__content = done__6
-  } = { bool__content = done__4 }) and ({ map__content = b5 } = {
-  map__content = b3 })) and ((done__7 = done__5) and (b6 = b4)))))) ->
-  ((done__6 = true) -> (consistent(b5, 8) = true))))
+  (not (forall j3:int. (((i <= j3) and (j3 <= 8)) -> (consistent(c,
+       j3) = true))))) and (((done__2 = done__) and (b2 = b)) and
+  ((done__2 = done__1) and (b2 = b1)))))) and (((done__2 = done__4) and
+  (b2 = b3)) and ((done__5 = done__2) and (b4 = b2)))))
+
+axiom H3 : (done__6 = done__4)
+
+axiom H4 : (b5 = b3)
+
+axiom H5 : (done__7 = done__5)
+
+axiom H6 : (b6 = b4)
+
+axiom H7 : (done__6 = true)
+
+ (* File "queen.ads", line 27, characters 0-0 *)
+goal WP_parameter_def : (consistent(b5, 8) = true)

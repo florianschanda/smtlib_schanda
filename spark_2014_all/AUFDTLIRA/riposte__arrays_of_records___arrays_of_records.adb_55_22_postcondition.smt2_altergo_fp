@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type value
 
-predicate in_range1(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range1(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq1 : int, int -> bool
 
@@ -346,20 +346,59 @@ axiom bool_eq_rev :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "arrays_of_records.adb", line 42, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall o:value. forall o1:bool.
-  forall o2:value. forall o3:value. forall o4:bool. forall o5:value.
-  forall o6:value. forall o7:(int,us_rep) farray. forall o8:value.
-  forall o9:bool. forall o10:value. forall o11:value. forall o12:bool.
-  forall o13:value. forall o14:value. forall o15:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall a1:(int,us_rep) farray.
-  forall result1:(int,us_rep) farray. forall a2:(int,us_rep) farray.
-  forall result2:(int,us_rep) farray. forall a3:(int,us_rep) farray.
-  forall a4:(int,us_rep) farray. forall a5:(int,us_rep) farray. ((((({
-  map__content = result } = { map__content = a }) and (a1 = (a[17 <- {
-  us_split_fields1 = { rec__arrays_of_records__basic_record__flag =
-  of_int(1); rec__arrays_of_records__basic_record__first_value =
+logic a : (int,us_rep) farray
+
+logic o : value
+
+logic o1 : bool
+
+logic o2 : value
+
+logic o3 : value
+
+logic o4 : bool
+
+logic o5 : value
+
+logic o6 : value
+
+logic o7 : (int,us_rep) farray
+
+logic o8 : value
+
+logic o9 : bool
+
+logic o10 : value
+
+logic o11 : value
+
+logic o12 : bool
+
+logic o13 : value
+
+logic o14 : value
+
+logic o15 : (int,us_rep) farray
+
+logic result : (int,us_rep) farray
+
+logic a1 : (int,us_rep) farray
+
+logic result1 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic result2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic a5 : (int,us_rep) farray
+
+axiom H : ((((result = a) and (a1 = (a[17 <- { us_split_fields1 = {
+  rec__arrays_of_records__basic_record__flag = of_int(1);
+  rec__arrays_of_records__basic_record__first_value =
   (((a[17])).us_split_fields1).rec__arrays_of_records__basic_record__first_value;
   rec__arrays_of_records__basic_record__second_value =
   (((a[17])).us_split_fields1).rec__arrays_of_records__basic_record__second_value
@@ -381,5 +420,8 @@ goal WP_parameter_def :
   rec__arrays_of_records__basic_record__second_value = o14 } }]))) and
   ((a2 = result2) and (a3 = o15))) and
   (to_rep((((a3[101])).us_split_fields1).rec__arrays_of_records__basic_record__second_value) = 23)))) and
-  ((a3 = a4) and (a5 = a3))) ->
-  (to_rep((((a4[17])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23)))
+  ((a3 = a4) and (a5 = a3)))
+
+ (* File "arrays_of_records.adb", line 42, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep((((a4[17])).us_split_fields1).rec__arrays_of_records__basic_record__first_value) = 23)

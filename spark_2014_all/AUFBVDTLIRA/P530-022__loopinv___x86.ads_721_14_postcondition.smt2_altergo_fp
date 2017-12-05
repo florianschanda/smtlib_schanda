@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1306,46 +1306,173 @@ axiom nooverlap8equal__def_axiom :
   of_int1(18446744073709551615))) -> ((nooverlap8(i, addr) = true) ->
   (to_rep((mem1[i])) = to_rep((mem2[i])))))))))
 
- (* File "x86.ads", line 714, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t1. forall rcx:t1. forall rdi:t1.
-  forall memory:(t1,unsigned8) farray. forall mem:(t1,unsigned8) farray.
-  forall temp___339:t1. forall temp___348:t1.
-  forall temp___343:(t1,unsigned8) farray. forall temp___337:t1.
-  forall temp___347:t1. forall temp___342:(t1,unsigned8) farray.
-  forall temp___353:t1. forall temp___352:t1.
-  forall temp___344:(t1,unsigned8) farray. forall temp___346:t1.
-  forall temp___345:t1. forall temp___351:t1. forall temp___355:t1.
-  forall temp___341:t1. forall temp___340:t1. forall temp___354:t1.
-  forall temp___350:t1. forall temp___349:t1. forall temp___338:t1.
-  forall rcx1:t1. forall rdi1:t1. forall memory1:(t1,unsigned8) farray.
-  forall mem1:(t1,unsigned8) farray. forall result:(t1,unsigned8) farray.
-  forall mem2:(t1,unsigned8) farray. forall memory2:(t1,unsigned8) farray.
-  forall rcx2:t1. forall rdi2:t1. forall memory3:(t1,unsigned8) farray.
-  forall mem3:(t1,unsigned8) farray. forall result1:t1. forall rdi3:t1.
-  forall result2:t1. forall rcx3:t1. forall rcx4:t1. forall rdi4:t1.
-  forall memory4:(t1,unsigned8) farray. forall mem4:(t1,unsigned8) farray.
-  forall rcx5:t1. forall rdi5:t1. forall memory5:(t1,unsigned8) farray.
-  forall mem5:(t1,unsigned8) farray. forall rcx6:t1. forall rdi6:t1.
-  forall memory6:(t1,unsigned8) farray. forall mem6:(t1,unsigned8) farray.
-  forall rcx7:t1. forall rdi7:t1. forall memory7:(t1,unsigned8) farray.
-  forall mem7:(t1,unsigned8) farray. forall rcx8:t1. forall rdi8:t1.
-  forall memory8:(t1,unsigned8) farray. forall mem8:(t1,unsigned8) farray.
-  forall rcx9:t1. forall rdi9:t1. forall memory9:(t1,unsigned8) farray.
-  forall mem9:(t1,unsigned8) farray. ((ult1(rcx,
-  of_int1(2305843009213693951)) and (((rcx = rcx_start) and
-  ((rdi = rdi_start) and ((((not (rcx = of_int1(0))) and
-  ((((temp___339 = rcx) and ((temp___348 = rcx) and ((temp___343 = mem) and
-  ((temp___337 = rcx) and ((temp___347 = rdi) and ((temp___342 = memory) and
-  ((temp___353 = rcx) and ((temp___352 = rdi) and ((temp___344 = memory) and
-  ((temp___346 = rcx) and ((temp___345 = rdi) and ((temp___351 = rcx) and
-  ((temp___355 = rdi) and ((temp___341 = rcx) and ((temp___340 = rdi) and
-  ((temp___354 = rcx) and ((temp___350 = rcx) and ((temp___349 = rdi) and
-  ((temp___338 = rdi) and
+logic rax : t1
+
+logic rcx : t1
+
+logic rdi : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic mem : (t1,unsigned8) farray
+
+logic temp___339 : t1
+
+logic temp___348 : t1
+
+logic temp___343 : (t1,unsigned8) farray
+
+logic temp___337 : t1
+
+logic temp___347 : t1
+
+logic temp___342 : (t1,unsigned8) farray
+
+logic temp___353 : t1
+
+logic temp___352 : t1
+
+logic temp___344 : (t1,unsigned8) farray
+
+logic temp___346 : t1
+
+logic temp___345 : t1
+
+logic temp___351 : t1
+
+logic temp___355 : t1
+
+logic temp___341 : t1
+
+logic temp___340 : t1
+
+logic temp___354 : t1
+
+logic temp___350 : t1
+
+logic temp___349 : t1
+
+logic temp___338 : t1
+
+logic rcx1 : t1
+
+logic rdi1 : t1
+
+logic memory1 : (t1,unsigned8) farray
+
+logic mem1 : (t1,unsigned8) farray
+
+logic result : (t1,unsigned8) farray
+
+logic mem2 : (t1,unsigned8) farray
+
+logic memory2 : (t1,unsigned8) farray
+
+logic rcx2 : t1
+
+logic rdi2 : t1
+
+logic memory3 : (t1,unsigned8) farray
+
+logic mem3 : (t1,unsigned8) farray
+
+logic result1 : t1
+
+logic rdi3 : t1
+
+logic result2 : t1
+
+logic rcx3 : t1
+
+logic result3 : (t1,unsigned8) farray
+
+logic mem4 : (t1,unsigned8) farray
+
+logic memory4 : (t1,unsigned8) farray
+
+logic rcx4 : t1
+
+logic rdi4 : t1
+
+logic memory5 : (t1,unsigned8) farray
+
+logic mem5 : (t1,unsigned8) farray
+
+logic rcx5 : t1
+
+logic rdi5 : t1
+
+logic memory6 : (t1,unsigned8) farray
+
+logic mem6 : (t1,unsigned8) farray
+
+logic rcx6 : t1
+
+logic rdi6 : t1
+
+logic memory7 : (t1,unsigned8) farray
+
+logic mem7 : (t1,unsigned8) farray
+
+logic rcx7 : t1
+
+logic rdi7 : t1
+
+logic memory8 : (t1,unsigned8) farray
+
+logic mem8 : (t1,unsigned8) farray
+
+logic rcx8 : t1
+
+logic rdi8 : t1
+
+logic memory9 : (t1,unsigned8) farray
+
+logic mem9 : (t1,unsigned8) farray
+
+logic rcx9 : t1
+
+logic rdi9 : t1
+
+logic memory10 : (t1,unsigned8) farray
+
+logic mem10 : (t1,unsigned8) farray
+
+logic rcx10 : t1
+
+logic rdi10 : t1
+
+logic memory11 : (t1,unsigned8) farray
+
+logic mem11 : (t1,unsigned8) farray
+
+logic rcx11 : t1
+
+logic rdi11 : t1
+
+logic memory12 : (t1,unsigned8) farray
+
+logic mem12 : (t1,unsigned8) farray
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : ult1(rcx, of_int1(2305843009213693951))
+
+axiom H4 : (((rcx = rcx_start) and ((rdi = rdi_start) and
+  ((((not (rcx = of_int1(0))) -> ((((temp___339 = rcx) and
+  ((temp___348 = rcx) and ((temp___343 = mem) and ((temp___337 = rcx) and
+  ((temp___347 = rdi) and ((temp___342 = memory) and ((temp___353 = rcx) and
+  ((temp___352 = rdi) and ((temp___344 = memory) and ((temp___346 = rcx) and
+  ((temp___345 = rdi) and ((temp___351 = rcx) and ((temp___355 = rdi) and
+  ((temp___341 = rcx) and ((temp___340 = rdi) and ((temp___354 = rcx) and
+  ((temp___350 = rcx) and ((temp___349 = rdi) and ((temp___338 = rdi) and
   ((forall i:t1. ((ule1(of_int1(0), i) and ule1(i, sub1(temp___337, rcx))) ->
    ((not (i = sub1(temp___339, rcx))) -> (readmem64(add1(temp___338, mul1(i,
-   of_int1(8))), memory) = rax)))) and
-  ((({ map__content = result } = { map__content = mem }) and
+   of_int1(8))), memory) = rax)))) and (((result = mem) and
   (mem2 = memory)) and (((hasmem64(memory2, rdi, rax) = true) and
   (nooverlap8equal(memory2, memory, rdi) = true)) and
   ((forall i:t1. ((ule1(of_int1(0), i) and ule1(i, sub1(rcx_start, rcx))) ->
@@ -1353,9 +1480,8 @@ goal WP_parameter_def :
    mul1(i, of_int1(8))), rax) = true)))) and
   ((forall i:t1. ((ule1(of_int1(0), i) and ule1(i, sub1(rcx_start, rcx))) ->
    ((not (i = sub1(rcx_start, rcx))) -> (readmem64(add1(rdi_start, mul1(i,
-   of_int1(8))), memory2) = rax)))) and
-  ((readmem64(add1(rdi_start, mul1(sub1(rcx_start, rcx), of_int1(8))),
-  memory2) = rax) and
+   of_int1(8))), memory2) = rax)))) and ((readmem64(add1(rdi_start,
+  mul1(sub1(rcx_start, rcx), of_int1(8))), memory2) = rax) and
   (((forall i:t1. ((ule1(of_int1(0), i) and ule1(i,
     of_int1(18446744073709551615))) -> ((not (inrange64(i, temp___345,
     mul1(temp___346, of_int1(8))) = true)) ->
@@ -1369,24 +1495,20 @@ goal WP_parameter_def :
   (readmem64(add1(temp___355, mul1(i, of_int1(8))), memory3) = rax))))))))) and
   (((rdi2 = result1) and (rdi3 = add1(rdi2, of_int1(8)))) and
   (((rcx2 = result2) and (rcx3 = sub1(rcx2, of_int1(1)))) and
-  (rcx3 = of_int1(0)))))))))))))))))))))))))))))) and (((mem3 = mem4) and
-  ((memory3 = memory4) and ((rdi3 = rdi4) and (rcx3 = rcx4)))) and
-  ((mem5 = mem3) and ((memory5 = memory3) and ((rdi5 = rdi3) and
-  (rcx5 = rcx3)))))) and ((({ map__content = mem6 } = { map__content = mem4
-  }) and (({ map__content = memory6 } = { map__content = memory4 }) and (({
-  t__content1 = rdi6 } = { t__content1 = rdi4 }) and ({ t__content1 = rcx6
-  } = { t__content1 = rcx4 })))) and ((mem7 = mem5) and
-  ((memory7 = memory5) and ((rdi7 = rdi5) and (rcx7 = rcx5))))))) or
-  ((rcx = of_int1(0)) and ((({ map__content = mem6 } = { map__content = mem
-  }) and (({ map__content = memory6 } = { map__content = memory }) and (({
-  t__content1 = rdi6 } = { t__content1 = rdi }) and ({ t__content1 = rcx6
-  } = { t__content1 = rcx })))) and ((mem7 = mem1) and
-  ((memory7 = memory1) and ((rdi7 = rdi1) and (rcx7 = rcx1))))))) and
-  (((not (rcx_start = of_int1(0))) and (all_equal_rax(rdi_start,
-  sub1(rcx_start, of_int1(1)), memory6, rax) = true)) or
-  (rcx_start = of_int1(0)))))) and ((({ map__content = mem8 } = {
-  map__content = mem6 }) and (({ map__content = memory8 } = { map__content =
-  memory6 }) and (({ t__content1 = rdi8 } = { t__content1 = rdi6 }) and ({
-  t__content1 = rcx8 } = { t__content1 = rcx6 })))) and ((mem9 = mem7) and
-  ((memory9 = memory7) and ((rdi9 = rdi7) and (rcx9 = rcx7))))))) ->
-  (rcx8 = of_int1(0))))
+  (rcx3 = of_int1(0)))))))))))))))))))))))))))))) and (((mem3 = mem7) and
+  ((memory3 = memory7) and ((rdi3 = rdi6) and (rcx3 = rcx6)))) and
+  ((mem8 = mem3) and ((memory8 = memory3) and ((rdi7 = rdi3) and
+  (rcx7 = rcx3)))))) and (((mem9 = mem7) and ((memory9 = memory7) and
+  ((rdi8 = rdi6) and (rcx8 = rcx6)))) and ((mem10 = mem8) and
+  ((memory10 = memory8) and ((rdi9 = rdi7) and (rcx9 = rcx7))))))) and
+  ((rcx = of_int1(0)) -> (((mem9 = mem) and ((memory9 = memory) and
+  ((rdi8 = rdi) and (rcx8 = rcx)))) and ((mem10 = mem1) and
+  ((memory10 = memory1) and ((rdi9 = rdi1) and (rcx9 = rcx1))))))) and
+  ((not (rcx_start = of_int1(0))) -> (all_equal_rax(rdi_start,
+  sub1(rcx_start, of_int1(1)), memory9, rax) = true))))) and
+  (((mem11 = mem9) and ((memory11 = memory9) and ((rdi10 = rdi8) and
+  (rcx10 = rcx8)))) and ((mem12 = mem10) and ((memory12 = memory10) and
+  ((rdi11 = rdi9) and (rcx11 = rcx9))))))
+
+ (* File "x86.ads", line 714, characters 0-0 *)
+goal WP_parameter_def : (rcx10 = of_int1(0))

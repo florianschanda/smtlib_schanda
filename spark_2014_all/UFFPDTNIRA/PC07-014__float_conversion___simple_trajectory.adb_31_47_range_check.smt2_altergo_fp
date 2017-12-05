@@ -1282,30 +1282,126 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
 axiom delta_speed__def_axiom : (delta_speed = mul(NearestTiesToEven,
   mul(NearestTiesToEven, factor, fliteral3), fliteral4))
 
+logic new_speed : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : int
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : int
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : t
+
+logic o22 : t
+
+logic o23 : t
+
+logic o24 : t
+
+logic o25 : int
+
+logic o26 : t
+
+logic o27 : t
+
+logic o28 : int
+
+logic o29 : int
+
+logic result : t
+
+logic new_speed1 : t
+
+logic new_speed2 : t
+
+logic new_speed3 : t
+
+axiom H : in_range2(n)
+
+axiom H1 : in_range3(factor)
+
+axiom H2 : tqtisFinite(old_speed)
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
+axiom H3 : (le(neg(fliteral5), fliteral5) -> tqtisFinite(new_speed))
+
+axiom H4 : ((n <  25000) and (invariant__(n, old_speed) = true))
+
+axiom H5 : (mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral3),
+  fliteral4) = delta_speed)
+
+axiom H6 : tqtisFinite(delta_speed)
+
+axiom H7 : ((o = add(NearestTiesToEven, old_speed, delta_speed)) and
+  tqtisFinite(add(NearestTiesToEven, old_speed, delta_speed)))
+
+axiom H8 : (result = new_speed)
+
+axiom H9 : (new_speed1 = o)
+
+axiom H10 : (le(neg(fliteral), delta_speed) and le(delta_speed, fliteral))
+
+axiom H11 : (in_bounds(old_speed) = true)
+
+axiom H12 : (in_bounds(high_bound(n)) = true)
+
+axiom H13 : (in_bounds(low_bound(n)) = true)
+
+axiom H14 : le(new_speed1, add(NearestTiesToEven, old_speed, fliteral))
+
+axiom H15 : le(old_speed, high_bound(n))
+
+axiom H16 : le(add(NearestTiesToEven, old_speed, fliteral),
+  add(NearestTiesToEven, high_bound(n), fliteral))
+
+axiom H17 : le(new_speed1, add(NearestTiesToEven, high_bound(n), fliteral))
+
+axiom H18 : le(add(NearestTiesToEven, mul(NearestTiesToEven,
+  of_int(NearestTiesToEven, n), fliteral1), fliteral), mul(NearestTiesToEven,
+  of_int(NearestTiesToEven, (n + 1)), fliteral1))
+
+axiom H19 : le(add(NearestTiesToEven, high_bound(n), fliteral),
+  high_bound((n + 1)))
+
  (* File "simple_trajectory.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_speed:t. forall o:t. forall result:t. forall new_speed1:t.
-  (in_range2(n) -> (in_range3(factor) -> (tqtisFinite(old_speed) ->
-  ((le(neg(fliteral5), fliteral5) -> tqtisFinite(new_speed)) ->
-  (((n <  25000) and (invariant__(n, old_speed) = true)) ->
-  ((mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral3),
-  fliteral4) = delta_speed) -> (tqtisFinite(delta_speed) ->
-  ((((o = add(NearestTiesToEven, old_speed, delta_speed)) and
-  tqtisFinite(add(NearestTiesToEven, old_speed, delta_speed))) and (({
-  t__content = result } = { t__content = new_speed }) and
-  (new_speed1 = o))) -> ((le(neg(fliteral), delta_speed) and le(delta_speed,
-  fliteral)) -> ((in_bounds(old_speed) = true) ->
-  ((in_bounds(high_bound(n)) = true) -> ((in_bounds(low_bound(n)) = true) ->
-  (le(new_speed1, add(NearestTiesToEven, old_speed, fliteral)) ->
-  (le(old_speed, high_bound(n)) -> (le(add(NearestTiesToEven, old_speed,
-  fliteral), add(NearestTiesToEven, high_bound(n), fliteral)) ->
-  (le(new_speed1, add(NearestTiesToEven, high_bound(n), fliteral)) ->
-  (le(add(NearestTiesToEven, mul(NearestTiesToEven, of_int(NearestTiesToEven,
-  n), fliteral1), fliteral), mul(NearestTiesToEven, of_int(NearestTiesToEven,
-  (n + 1)), fliteral1)) -> (le(add(NearestTiesToEven, high_bound(n),
-  fliteral), high_bound((n + 1))) -> in_range2((n + 1)))))))))))))))))))))
+goal WP_parameter_def : in_range2((n + 1))

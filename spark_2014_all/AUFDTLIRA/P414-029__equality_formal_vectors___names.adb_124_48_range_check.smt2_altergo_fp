@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -824,7 +824,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type tchar_table_indexB
 
-predicate in_range9(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range9(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1382,7 +1382,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index
 
-predicate in_range15(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range15(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq21 : int, int -> bool
 
@@ -1430,11 +1430,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq15(a, b)].
-  (((forall n1:int. (((0 <= n1) and (n1 <= ((-1) + length1(a)))) -> (get(a,
+  (((forall n1:int. (((0 <= n1) and (n1 <= ((- 1) + length1(a)))) -> (get(a,
     n1) = get(b, n1)))) ->
   (user_eq15(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n1:int. (((0 <= n1) and (n1 <= ((-1) + length1(a)))) ->
+  ((not (forall n1:int. (((0 <= n1) and (n1 <= ((- 1) + length1(a)))) ->
         (get(a, n1) = get(b, n1))))) ->
   (user_eq15(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -1462,7 +1462,7 @@ axiom is_empty__post_axiom :
 
 type extended_index1
 
-predicate in_range16(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range16(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq22 : int, int -> bool
 
@@ -1488,7 +1488,7 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 2147483646) and
+  ((((- 1) + length1(container)) <= 2147483646) and
   in_range14(length1(container))))
 
 type element_type1
@@ -1520,7 +1520,7 @@ function element_type__ref___2__projection(a: element_type__ref3) : element_type
 axiom get__post_axiom :
   (forall container:us_rep2.
   (forall position:int [get(container, position)]. ((in_range16(position) and
-  ((0 <= position) and (position <= ((-1) + length1(container))))) ->
+  ((0 <= position) and (position <= ((- 1) + length1(container))))) ->
   in_range17(get(container, position)))))
 
 type extended_index2
@@ -1640,33 +1640,73 @@ axiom length__post_axiom3 :
 
 axiom get__post_axiom1 : true
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall entry_table__split_fields:us_main_type.
-  forall s:(int,character) farray. forall i:int.
-  forall names__to_string__result:(int,character) farray.
-  forall names__to_string__result1:t. forall o:int.
-  forall names__to_string__B_3__e__assume:char_table_index.
-  forall names__to_string__B_3__e__assume1:positive.
-  forall names__to_string__B_3__e__assume2:name_id. forall o1:int.
-  forall names__to_string__result2:(int,character) farray.
-  forall names__to_string__result3:t.
-  forall names__to_string__result4:(int,character) farray.
-  forall names__to_string__result5:t. forall result:int. forall i1:int.
-  forall s1:(int,character) farray. forall i2:int.
-  ((1024 = to_rep4(char_table__split_discrs)) ->
-  ((128 = to_rep3(entry_table__split_discrs)) -> (in_range4(n) ->
-  ((invariant__(void) = true) -> (((not (n = 0)) and
-  (((names__to_string__result = names__to_string__result4) and
-  (names__to_string__result1 = names__to_string__result5)) and
-  ((names__to_string__result2 = names__to_string__result4) and
-  (names__to_string__result3 = names__to_string__result5)))) ->
-  (((((o = n) and in_range13(n)) and (({ us_split_fields5 = {
-  rec__names__name_entry__table_index = names__to_string__B_3__e__assume;
-  rec__names__name_entry__length = names__to_string__B_3__e__assume1;
-  rec__names__name_entry__next_hash = names__to_string__B_3__e__assume2 }
-  } = get1(model__1({ us_split_discrs1 = {
-  rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
+logic char_table__split_fields : us_main_type1
+
+logic entry_table__split_fields : us_main_type
+
+logic s : (int,character) farray
+
+logic i : int
+
+logic names__to_string__result : (int,character) farray
+
+logic names__to_string__result1 : t
+
+logic o : int
+
+logic names__to_string__B_3__e__assume : char_table_index
+
+logic names__to_string__B_3__e__assume1 : positive
+
+logic names__to_string__B_3__e__assume2 : name_id
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic names__to_string__result2 : (int,character) farray
+
+logic names__to_string__result3 : t
+
+logic names__to_string__result4 : (int,character) farray
+
+logic names__to_string__result5 : t
+
+logic result : int
+
+logic i1 : int
+
+logic s1 : (int,character) farray
+
+logic i2 : int
+
+axiom H : (1024 = to_rep4(char_table__split_discrs))
+
+axiom H1 : (128 = to_rep3(entry_table__split_discrs))
+
+axiom H2 : in_range4(n)
+
+axiom H3 : (invariant__(void) = true)
+
+axiom H4 : (not (n = 0))
+
+axiom H5 : (names__to_string__result = names__to_string__result4)
+
+axiom H6 : (names__to_string__result1 = names__to_string__result5)
+
+axiom H7 : (names__to_string__result2 = names__to_string__result4)
+
+axiom H8 : (names__to_string__result3 = names__to_string__result5)
+
+axiom H9 : ((o = n) and in_range13(n))
+
+axiom H10 : (({ us_split_fields5 = { rec__names__name_entry__table_index =
+  names__to_string__B_3__e__assume; rec__names__name_entry__length =
+  names__to_string__B_3__e__assume1; rec__names__name_entry__next_hash =
+  names__to_string__B_3__e__assume2 } } = get1(model__1({ us_split_discrs1 =
+  { rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
   entry_table__split_fields } }), o)) and (bool_eq15({ us_split_fields5 = {
   rec__names__name_entry__table_index = names__to_string__B_3__e__assume;
@@ -1675,16 +1715,34 @@ goal WP_parameter_def :
   get1(model__1({ us_split_discrs1 = {
   rec__names__entry_tables__vector__capacity = entry_table__split_discrs };
   us_split_fields1 = { rec__names__entry_tables__vector =
-  entry_table__split_fields } }), o)) = true))) and
-  ((e = names__to_string__B_3__e__assume) and
-  ((e1 = names__to_string__B_3__e__assume1) and
-  (e2 = names__to_string__B_3__e__assume2)))) -> ((to_rep2(e1) = l) ->
-  (in_range2(l) -> ((dynamic_property2(1, l, to_rep1(s__first),
-  to_rep1(s__last)) and ((to_rep1(s__first) = 1) and
-  (to_rep1(s__last) = l))) -> (((result = i) and (i1 = 1)) -> (((1 <= i1) and
-  (i1 <= l)) ->
-  (((forall temp___626:int. (((to_rep1(s__first) <= temp___626) and
-    (temp___626 <= to_rep1(s__last))) -> ((i2 <= temp___626) ->
-    ((s1[temp___626]) = (s[temp___626]))))) and
-  ((1 <= i2) and (i2 <= l))) -> (((o1 = (to_rep5(e) + (i2 - 1))) and
-  in_range9((to_rep5(e) + (i2 - 1)))) -> in_range11(o1)))))))))))))))
+  entry_table__split_fields } }), o)) = true))
+
+axiom H11 : ((names__to_string__B_3__e__assume = e) and
+  ((names__to_string__B_3__e__assume1 = e1) and
+  (names__to_string__B_3__e__assume2 = e2)))
+
+axiom H12 : (to_rep2(e1) = l)
+
+axiom H13 : in_range2(l)
+
+axiom H14 : (dynamic_property2(1, l, to_rep1(s__first), to_rep1(s__last)) and
+  ((to_rep1(s__first) = 1) and (to_rep1(s__last) = l)))
+
+axiom H15 : (result = i)
+
+axiom H16 : (i1 = 1)
+
+axiom H17 : (1 <= i1)
+
+axiom H18 : (i1 <= l)
+
+axiom H19 :
+  ((forall temp___626:int. (((to_rep1(s__first) <= temp___626) and
+   (temp___626 <= to_rep1(s__last))) -> ((i2 <= temp___626) ->
+   ((s1[temp___626]) = (s[temp___626]))))) and ((1 <= i2) and (i2 <= l)))
+
+axiom H20 : ((o1 = (to_rep5(e) + (i2 - 1))) and
+  in_range9((to_rep5(e) + (i2 - 1))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range11(o1)

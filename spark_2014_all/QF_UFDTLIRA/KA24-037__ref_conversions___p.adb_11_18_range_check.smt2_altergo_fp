@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -222,9 +222,34 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic a : int
+
+logic b : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic b1 : int
+
+axiom H : in_range1(havok_a)
+
+axiom H1 : in_range1(havok_b)
+
+axiom H2 : (((1 <= havok_a) and (havok_a <= 10)) and ((1 <= havok_b) and
+  (havok_b <= 11)))
+
+axiom H3 : (result = a)
+
+axiom H4 : (a1 = 1)
+
+axiom H5 : in_range2(a1)
+
  (* File "p.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall result:int. forall a1:int. (in_range1(havok_a) ->
-  (in_range1(havok_b) -> ((((1 <= havok_a) and (havok_a <= 10)) and
-  ((1 <= havok_b) and (havok_b <= 11))) -> (((result = a) and (a1 = 1)) ->
-  (in_range2(a1) -> in_range3(havok_a)))))))
+goal WP_parameter_def : in_range3(havok_a)

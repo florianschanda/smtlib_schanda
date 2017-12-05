@@ -373,13 +373,28 @@ type file_mode__ref = { file_mode__content : file_mode
 function file_mode__ref___3__projection(a: file_mode__ref) : file_mode =
   (a).file_mode__content
 
+logic standard_input : us_rep
+
+logic o : bool
+
+logic o1 : bool
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : ((o1 = end_of_file__2(standard_input)) and ((o1 = true) <->
+  (end_of_file(standard_input) = true)))
+
+axiom H1 : (((not (o1 = true)) -> (result = true)) and ((o1 = true) ->
+  (result = false)))
+
+axiom H2 : (not (result = true))
+
+axiom H3 : ((result1 = is_readable(standard_input)) and ((result1 = true) <->
+  ((is_open(standard_input) = true) and (mode__2(standard_input) = 0))))
+
+axiom H4 : (result1 = true)
+
  (* File "spark-text_io.ads", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall standard_input:us_rep. forall o:bool. forall result:bool.
-  forall result1:bool. ((((o = end_of_file__2(standard_input)) and
-  ((o = true) <-> (end_of_file(standard_input) = true))) and
-  (((not (o = true)) and (result = true)) or ((o = true) and
-  (result = false)))) -> ((not (result = true)) ->
-  (((result1 = is_readable(standard_input)) and ((result1 = true) <->
-  ((is_open(standard_input) = true) and (mode__2(standard_input) = 0)))) ->
-  ((result1 = true) -> (is_readable(standard_input) = true))))))
+goal WP_parameter_def : (is_readable(standard_input) = true)

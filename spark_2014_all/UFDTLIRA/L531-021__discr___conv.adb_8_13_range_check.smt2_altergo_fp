@@ -118,7 +118,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -252,23 +252,23 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep(((a).us_split_discrs1).rec__basic__r__x) = to_rep(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep1(((a).us_split_fields1).rec__basic__r__base) = to_rep1(((b).us_split_fields1).rec__basic__r__base))) and
-  (basic__r__a_field__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__basic__r__a_field) = to_rep1(((b).us_split_fields1).rec__basic__r__a_field)))) and
-  (basic__r__c_field1__pred(a) ->
-  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
-  (basic__r__c_field2__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep(((a).us_split_discrs1).rec__basic__r__x) = to_rep(((b).us_split_discrs1).rec__basic__r__x)) and
-  (to_rep1(((a).us_split_fields1).rec__basic__r__base) = to_rep1(((b).us_split_fields1).rec__basic__r__base))) and
+  ((((to_rep(((a).us_split_discrs1).rec__basic__r__x) = to_rep(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep1(((a).us_split_fields1).rec__basic__r__base) = to_rep1(((b).us_split_fields1).rec__basic__r__base)) and
   (basic__r__a_field__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__basic__r__a_field) = to_rep1(((b).us_split_fields1).rec__basic__r__a_field)))) and
   (basic__r__c_field1__pred(a) ->
   (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
   (basic__r__c_field2__pred(a) ->
   (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__basic__r__x) = to_rep(((b).us_split_discrs1).rec__basic__r__x)) and
+  ((((to_rep1(((a).us_split_fields1).rec__basic__r__base) = to_rep1(((b).us_split_fields1).rec__basic__r__base)) and
+  (basic__r__a_field__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__basic__r__a_field) = to_rep1(((b).us_split_fields1).rec__basic__r__a_field)))) and
+  (basic__r__c_field1__pred(a) ->
+  (((a).us_split_fields1).rec__basic__r__c_field1 = ((b).us_split_fields1).rec__basic__r__c_field1))) and
+  (basic__r__c_field2__pred(a) ->
+  (to_rep2(((a).us_split_fields1).rec__basic__r__c_field2) = to_rep2(((b).us_split_fields1).rec__basic__r__c_field2)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -395,6 +395,78 @@ logic x3 : bool
 logic x4 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic conv__id__result : enum
+
+logic conv__id__result1 : integer
+
+logic conv__id__result2 : integer
+
+logic conv__id__result3 : bool
+
+logic conv__id__result4 : natural
+
+logic us : int
+
+logic result : enum
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : bool
+
+logic result4 : natural
+
+logic conv__id__result5 : enum
+
+logic conv__id__result6 : integer
+
+logic conv__id__result7 : integer
+
+logic conv__id__result8 : bool
+
+logic conv__id__result9 : natural
+
+logic conv__id__result10 : enum
+
+logic conv__id__result11 : integer
+
+logic conv__id__result12 : integer
+
+logic conv__id__result13 : bool
+
+logic conv__id__result14 : natural
+
+logic conv__id__result15 : enum
+
+logic conv__id__result16 : integer
+
+logic conv__id__result17 : integer
+
+logic conv__id__result18 : bool
+
+logic conv__id__result19 : natural
+
+logic conv__id__result20 : enum
+
+logic conv__id__result21 : integer
+
+logic conv__id__result22 : integer
+
+logic conv__id__result23 : bool
+
+logic conv__id__result24 : natural
+
+logic conv__id__result25 : enum
+
+logic conv__id__result26 : integer
+
+logic conv__id__result27 : integer
+
+logic conv__id__result28 : bool
+
+logic conv__id__result29 : natural
 
  (* File "basic.ads", line 4, characters 0-0 *)
 goal WP_parameter_def : in_range(to_rep(x))

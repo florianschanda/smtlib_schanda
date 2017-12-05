@@ -107,7 +107,7 @@ function priority__ref___projection(a: priority__ref) : priority =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -270,20 +270,65 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : integer
+
+logic us_self__compl : integer
+
+logic o1 : integer
+
+logic us_self__compl1 : integer
+
+logic o2 : integer
+
+logic us_self__compl2 : integer
+
+logic p__split_fields : integer
+
+logic us_self__compl3 : integer
+
+logic result : integer
+
+logic p__split_fields1 : integer
+
+logic q__split_fields : integer
+
+logic us_self__compl4 : integer
+
+logic result1 : integer
+
+logic q__split_fields1 : integer
+
+logic p__split_fields2 : integer
+
+logic us_self__compl5 : integer
+
+logic result2 : integer
+
+logic p__split_fields3 : integer
+
+axiom H : (o = p__split_fields)
+
+axiom H1 : (us_self__compl = o)
+
+axiom H2 : (result = p__split_fields)
+
+axiom H3 : (p__split_fields1 = us_self__compl3)
+
+axiom H4 : (q__split_fields = o1)
+
+axiom H5 : (us_self__compl1 = o1)
+
+axiom H6 : (result1 = q__split_fields)
+
+axiom H7 : (q__split_fields1 = us_self__compl4)
+
+axiom H8 : (p__split_fields2 = o2)
+
+axiom H9 : (us_self__compl2 = o2)
+
+axiom H10 : (result2 = p__split_fields2)
+
+axiom H11 : (p__split_fields3 = us_self__compl5)
+
  (* File "active_prio.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:integer. forall us_self__compl:integer. forall o1:integer.
-  forall us_self__compl1:integer. forall o2:integer.
-  forall us_self__compl2:integer. forall p__split_fields:integer.
-  forall us_self__compl3:integer. forall result:integer.
-  forall p__split_fields1:integer. forall q__split_fields:integer.
-  forall us_self__compl4:integer. forall result1:integer.
-  forall q__split_fields1:integer. forall p__split_fields2:integer.
-  forall us_self__compl5:integer. forall result2:integer.
-  forall p__split_fields3:integer. (not ((((o = p__split_fields) and
-  (us_self__compl = o)) and ((result = p__split_fields) and
-  (p__split_fields1 = us_self__compl3))) and ((((o1 = q__split_fields) and
-  (us_self__compl1 = o1)) and ((result1 = q__split_fields) and
-  (q__split_fields1 = us_self__compl4))) and (((o2 = p__split_fields2) and
-  (us_self__compl2 = o2)) and ((result2 = p__split_fields2) and
-  (p__split_fields3 = us_self__compl5)))))))
+goal WP_parameter_def : false

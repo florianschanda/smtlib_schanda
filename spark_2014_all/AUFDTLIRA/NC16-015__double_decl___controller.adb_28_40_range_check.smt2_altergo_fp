@@ -490,13 +490,33 @@ type piece_count_type__ref = { piece_count_type__content : piece_count_type
 function piece_count_type__ref___projection(a: piece_count_type__ref) : piece_count_type =
   (a).piece_count_type__content
 
+logic piece_count : int
+
+logic create_piece : bool
+
+logic game_board : (int,(int,us_rep) farray) farray
+
+logic o : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic create_piece1 : bool
+
+axiom H : in_range4(piece_count)
+
+axiom H1 : (to_int(create_piece) = to_int(of_int(1)))
+
+axiom H2 : ((result = is_empty_cell(game_board, 4, 1)) and
+  ((result = true) <->
+  (to_rep(((((game_board[1])[4])).us_split_fields1).rec__tetris__cell__kind) = 0)))
+
+axiom H3 : (result = true)
+
+axiom H4 : (result1 = create_piece)
+
+axiom H5 : (create_piece1 = of_int(0))
+
  (* File "tetris.ads", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall piece_count:int. forall create_piece:bool.
-  forall game_board:(int,(int,us_rep) farray) farray. forall result:bool.
-  forall result1:bool. forall create_piece1:bool. (in_range4(piece_count) ->
-  ((to_int(create_piece) = to_int(of_int(1))) ->
-  (((result = is_empty_cell(game_board, 4, 1)) and ((result = true) <->
-  (to_rep(((((game_board[1])[4])).us_split_fields1).rec__tetris__cell__kind) = 0))) ->
-  ((result = true) -> (((result1 = create_piece) and
-  (create_piece1 = of_int(0))) -> in_range4((piece_count + 1))))))))
+goal WP_parameter_def : in_range4((piece_count + 1))

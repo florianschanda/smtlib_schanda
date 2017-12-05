@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,42 +555,155 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "test.adb", line 31, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:(int,integer) farray. forall o1:t1.
-  forall o2:(int,integer) farray. forall o3:t1. forall o4:int.
-  forall o5:integer. forall o6:int. forall o7:int. forall o8:int.
-  forall temp___425:int. forall o9:int. forall o10:integer. forall o11:int.
-  forall o12:integer. forall o13:int. forall o14:(int,integer) farray.
-  forall o15:int. forall o16:int. forall temp___426:int. forall o17:integer.
-  forall result:int. forall i1:int. forall c:(int,integer) farray.
-  forall i2:int. forall temp:int. forall result1:int. forall temp1:int.
-  forall result2:(int,integer) farray. forall c1:(int,integer) farray.
-  (dynamic_property(1, 2147483647, to_rep(first(a1)), to_rep(last(a1))) ->
-  (dynamic_property(1, 2147483647, to_rep(first(b1)), to_rep(last(b1))) ->
-  (dynamic_property(1, 2147483647, to_rep(c__first), to_rep(c__last)) ->
-  ((((to_rep(first(a1)) = to_rep(c__first)) and
+logic i : int
+
+logic o : (int,integer) farray
+
+logic o1 : t1
+
+logic o2 : (int,integer) farray
+
+logic o3 : t1
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___425 : int
+
+logic o9 : int
+
+logic o10 : integer
+
+logic o11 : int
+
+logic o12 : integer
+
+logic o13 : int
+
+logic o14 : (int,integer) farray
+
+logic o15 : int
+
+logic o16 : int
+
+logic temp___426 : int
+
+logic o17 : integer
+
+logic result : int
+
+logic i1 : int
+
+logic c : (int,integer) farray
+
+logic i2 : int
+
+logic temp : int
+
+logic result1 : int
+
+logic temp1 : int
+
+logic result2 : (int,integer) farray
+
+logic c1 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(c__first), to_rep(c__last))
+
+axiom H3 : (((to_rep(first(a1)) = to_rep(c__first)) and
   (to_rep(last(a1)) = to_rep(c__last))) and (length({ elts = a; rt = a1
-  }) = length({ elts = b; rt = b1 }))) -> (((dynamic_property1(1, 2147483647,
-  to_rep(first(b1)), to_rep(last(b1))) and ((b = o2) and
-  (mk1(to_rep(first(b1)), to_rep(last(b1))) = o3))) and (dynamic_property1(1,
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) and ((a = o) and
-  (mk1(to_rep(first(a1)), to_rep(last(a1))) = o1)))) -> (((result = i) and
-  (i1 = to_rep(c__first))) -> (((to_rep(c__first) <= i1) and
-  (i1 <= comp_div(to_rep(c__last),2))) -> (((to_rep(c__first) <= i2) and
-  (i2 <= comp_div(to_rep(c__last),2))) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(temp)) -> (((((((to_rep(c__first) <= i2) and
-  (i2 <= to_rep(c__last))) and (o4 = i2)) and (o5 = (c[o4]))) and
-  (o6 = to_rep(o5))) and ((result1 = temp) and (temp1 = o6))) ->
-  (((((((((((o7 = (to_rep(c__last) - i2)) and
-  in_range1((to_rep(c__last) - i2))) and (o8 = (o7 + to_rep(c__first)))) and
-  ((temp___425 = o8) and in_range1(o8))) and
-  (((to_rep(c__first) <= temp___425) and (temp___425 <= to_rep(c__last))) and
-  (o9 = temp___425))) and (o10 = (c[o9]))) and (o11 = to_rep(o10))) and
-  (to_rep(o12) = o11)) and ((((to_rep(c__first) <= i2) and
-  (i2 <= to_rep(c__last))) and (o13 = i2)) and (o14 = (c[o13 <- o12])))) and
-  ((result2 = c) and (c1 = o14))) -> ((to_rep(o17) = temp1) ->
-  (((((o15 = (to_rep(c__last) - i2)) and
-  in_range1((to_rep(c__last) - i2))) and
-  (o16 = (o15 + to_rep(c__first)))) and ((temp___426 = o16) and
-  in_range1(o16))) -> (to_rep(c__first) <= temp___426)))))))))))))))
+  }) = length({ elts = b; rt = b1 })))
+
+axiom H4 : dynamic_property1(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H5 : (b = o2)
+
+axiom H6 : (mk1(to_rep(first(b1)), to_rep(last(b1))) = o3)
+
+axiom H7 : dynamic_property1(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H8 : (a = o)
+
+axiom H9 : (mk1(to_rep(first(a1)), to_rep(last(a1))) = o1)
+
+axiom H10 : true
+
+axiom H11 : (result = i)
+
+axiom H12 : (i1 = to_rep(c__first))
+
+axiom H13 : (to_rep(c__first) <= i1)
+
+axiom H14 : (i1 <= comp_div(to_rep(c__last),2))
+
+axiom H15 : ((to_rep(c__first) <= i2) and
+  (i2 <= comp_div(to_rep(c__last),2)))
+
+axiom H16 : (((- 2147483648) <= 2147483647) -> in_range1(temp))
+
+axiom H17 : ((to_rep(c__first) <= i2) and (i2 <= to_rep(c__last)))
+
+axiom H18 : (o4 = i2)
+
+axiom H19 : (o5 = (c[o4]))
+
+axiom H20 : (o6 = to_rep(o5))
+
+axiom H21 : (result1 = temp)
+
+axiom H22 : (temp1 = o6)
+
+axiom H23 : ((o7 = (to_rep(c__last) - i2)) and
+  in_range1((to_rep(c__last) - i2)))
+
+axiom H24 : (o8 = (o7 + to_rep(c__first)))
+
+axiom H25 : ((temp___425 = o8) and in_range1(o8))
+
+axiom H26 : ((to_rep(c__first) <= temp___425) and
+  (temp___425 <= to_rep(c__last)))
+
+axiom H27 : (o9 = temp___425)
+
+axiom H28 : (o10 = (c[o9]))
+
+axiom H29 : (o11 = to_rep(o10))
+
+axiom H30 : (to_rep(o12) = o11)
+
+axiom H31 : ((to_rep(c__first) <= i2) and (i2 <= to_rep(c__last)))
+
+axiom H32 : (o13 = i2)
+
+axiom H33 : (o14 = (c[o13 <- o12]))
+
+axiom H34 : (result2 = c)
+
+axiom H35 : (c1 = o14)
+
+axiom H36 : (to_rep(o17) = temp1)
+
+axiom H37 : ((o15 = (to_rep(c__last) - i2)) and
+  in_range1((to_rep(c__last) - i2)))
+
+axiom H38 : (o16 = (o15 + to_rep(c__first)))
+
+axiom H39 : ((temp___426 = o16) and in_range1(o16))
+
+ (* File "test.adb", line 31, characters 0-0 *)
+goal WP_parameter_def : (to_rep(c__first) <= temp___426)

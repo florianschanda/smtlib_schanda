@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer_32
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -249,22 +249,46 @@ axiom def_axiom :
   (forall temp___199:int.
   ((temp___196(temp___198)[temp___199]) = of_rep(temp___198))))
 
+logic quantifiers__previous_seen__all_zero__result : (int,integer_32) farray
+
+logic result : (int,integer_32) farray
+
+logic quantifiers__previous_seen__all_zero__result1 : (int,integer_32) farray
+
+logic quantifiers__previous_seen__all_zero__result2 : (int,integer_32) farray
+
+logic quantifiers__previous_seen__all_zero__result3 : (int,integer_32) farray
+
+logic quantifiers__previous_seen__all_zero__result4 : (int,integer_32) farray
+
+logic quantifiers__previous_seen__all_zero__result5 : (int,integer_32) farray
+
+logic result1 : (int,integer_32) farray
+
+axiom H :
+  (quantifiers__previous_seen__all_zero__result1 = quantifiers__previous_seen__all_zero__result2)
+
+axiom H1 :
+  (quantifiers__previous_seen__all_zero__result3 = quantifiers__previous_seen__all_zero__result1)
+
+axiom H2 : (result = quantifiers__previous_seen__all_zero__result)
+
+axiom H3 : (quantifiers__previous_seen__all_zero__result1 = temp___196(0))
+
+axiom H4 :
+  (quantifiers__previous_seen__all_zero__result4 = quantifiers__previous_seen__all_zero__result2)
+
+axiom H5 :
+  (quantifiers__previous_seen__all_zero__result5 = quantifiers__previous_seen__all_zero__result3)
+
+axiom H6 : (result1 = quantifiers__previous_seen__all_zero__result4)
+
+logic j : int
+
+axiom H7 : (1 <= j)
+
+axiom H8 : (j <= 10)
+
  (* File "types.ads", line 50, characters 0-0 *)
 goal WP_parameter_def :
-  (forall quantifiers__previous_seen__all_zero__result:(int,integer_32) farray.
-  forall result:(int,integer_32) farray.
-  forall quantifiers__previous_seen__all_zero__result1:(int,integer_32) farray.
-  forall quantifiers__previous_seen__all_zero__result2:(int,integer_32) farray.
-  forall quantifiers__previous_seen__all_zero__result3:(int,integer_32) farray.
-  forall quantifiers__previous_seen__all_zero__result4:(int,integer_32) farray.
-  forall quantifiers__previous_seen__all_zero__result5:(int,integer_32) farray.
-  (forall result1:(int,integer_32) farray.
-  ((((((quantifiers__previous_seen__all_zero__result1 = quantifiers__previous_seen__all_zero__result2) and
-  (quantifiers__previous_seen__all_zero__result3 = quantifiers__previous_seen__all_zero__result1)) and
-  ((result = quantifiers__previous_seen__all_zero__result) and
-  (quantifiers__previous_seen__all_zero__result1 = temp___196(0)))) and
-  ((quantifiers__previous_seen__all_zero__result4 = quantifiers__previous_seen__all_zero__result2) and
-  (quantifiers__previous_seen__all_zero__result5 = quantifiers__previous_seen__all_zero__result3))) and
-  (result1 = quantifiers__previous_seen__all_zero__result4)) ->
-  (forall j:int. (((1 <= j) and (j <= 10)) ->
-  (to_rep((quantifiers__previous_seen__all_zero__result4[j])) = 0))))))
+  (to_rep((quantifiers__previous_seen__all_zero__result4[j])) = 0)

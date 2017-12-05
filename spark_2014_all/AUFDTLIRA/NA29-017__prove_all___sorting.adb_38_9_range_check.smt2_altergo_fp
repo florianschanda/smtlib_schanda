@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -396,12 +396,257 @@ function t7b__ref___projection(a2: t7b__ref) : integer = (a2).t7b__content
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "sorting.adb", line 12, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(0, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> (dynamic_property(0, 2147483647, to_rep(b__first),
-  to_rep(b__last)) -> (in_range2(a_first) -> (in_range2(length1) ->
-  (in_range2(b_first) -> (((((to_rep(first(a1)) <= a_first) and
+logic b : (int,integer) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic temp___245 : (int,integer) farray
+
+logic temp___243 : int
+
+logic temp___240 : (int,integer) farray
+
+logic temp___248 : (int,integer) farray
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___247 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : bool
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : int
+
+logic o20 : integer
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : bool
+
+logic temp___238 : int
+
+logic temp___237 : int
+
+logic o24 : int
+
+logic o25 : integer
+
+logic o26 : int
+
+logic o27 : integer
+
+logic o28 : int
+
+logic o29 : (int,integer) farray
+
+logic j1 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : bool
+
+logic o35 : int
+
+logic o36 : int
+
+logic temp___241 : int
+
+logic o37 : int
+
+logic o38 : integer
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : bool
+
+logic o45 : bool
+
+logic o46 : int
+
+logic o47 : integer
+
+logic o48 : int
+
+logic o49 : integer
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : bool
+
+logic j2 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : bool
+
+logic o56 : int
+
+logic o57 : int
+
+logic temp___251 : int
+
+logic o58 : int
+
+logic o59 : integer
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : bool
+
+logic o64 : bool
+
+logic o65 : int
+
+logic o66 : integer
+
+logic o67 : int
+
+logic o68 : integer
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : bool
+
+logic b1 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic b2 : (int,integer) farray
+
+logic i2 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic i3 : int
+
+logic b4 : (int,integer) farray
+
+logic i4 : int
+
+logic b5 : (int,integer) farray
+
+logic i5 : int
+
+logic b6 : (int,integer) farray
+
+logic i6 : int
+
+logic b7 : (int,integer) farray
+
+logic i7 : int
+
+logic b8 : (int,integer) farray
+
+logic i8 : int
+
+logic b9 : (int,integer) farray
+
+logic i9 : int
+
+logic b10 : (int,integer) farray
+
+logic i10 : int
+
+logic b11 : (int,integer) farray
+
+logic i11 : int
+
+logic result7 : bool
+
+logic result8 : bool
+
+axiom H : dynamic_property(0, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : dynamic_property(0, 2147483647, to_rep(b__first), to_rep(b__last))
+
+axiom H2 : in_range2(a_first)
+
+axiom H3 : in_range2(length1)
+
+axiom H4 : in_range2(b_first)
+
+axiom H5 : ((((to_rep(first(a1)) <= a_first) and
   ((a_first + length1) <= (to_rep(last(a1)) + 1))) and
   (to_rep(b__first) <= b_first)) and
-  ((b_first + length1) <= (to_rep(b__last) + 1))) -> ((0 <= (length1 - 1)) ->
-  (0 <= 0))))))))
+  ((b_first + length1) <= (to_rep(b__last) + 1)))
+
+axiom H6 : (0 <= (length1 - 1))
+
+ (* File "sorting.adb", line 12, characters 0-0 *)
+goal WP_parameter_def : (0 <= 0)

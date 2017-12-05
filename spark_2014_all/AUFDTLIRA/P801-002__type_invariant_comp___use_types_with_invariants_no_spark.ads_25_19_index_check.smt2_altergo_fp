@@ -249,7 +249,7 @@ axiom bool_eq_rev :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -521,8 +521,13 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "types_with_invariants_no_spark.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep(c), to_rep1(first(c2)),
+axiom H : (dynamic_property1(1, to_rep(c), to_rep1(first(c2)),
   to_rep1(last(c2))) and ((to_rep1(first(c2)) = 1) and
-  (to_rep1(last(c2)) = to_rep(c)))) -> (in_range1(i) -> ((i <= to_rep(c)) ->
-  (to_rep1(first(c2)) <= i))))
+  (to_rep1(last(c2)) = to_rep(c))))
+
+axiom H1 : in_range1(i)
+
+axiom H2 : (i <= to_rep(c))
+
+ (* File "types_with_invariants_no_spark.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(c2)) <= i)

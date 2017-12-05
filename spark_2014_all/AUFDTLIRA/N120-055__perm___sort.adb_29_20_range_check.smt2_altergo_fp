@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -435,9 +435,100 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic min : int
+
+logic index1 : int
+
+logic sort__index_of_minimum__result : int
+
+logic o : int
+
+logic temp___182 : int
+
+logic temp___181 : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index2 : int
+
+logic min2 : int
+
+logic index3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min3 : int
+
+logic result4 : int
+
+logic index4 : int
+
+logic min4 : int
+
+logic index5 : int
+
+logic min5 : int
+
+logic index6 : int
+
+logic min6 : int
+
+logic index7 : int
+
+logic min7 : int
+
+logic index8 : int
+
+logic min8 : int
+
+logic index9 : int
+
+logic min9 : int
+
+logic index10 : int
+
+logic result5 : int
+
+logic sort__index_of_minimum__result1 : int
+
+logic sort__index_of_minimum__result2 : int
+
+logic sort__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index11 : int
+
+logic sort__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index12 : int
+
+logic sort__index_of_minimum__result5 : int
+
+axiom H : dynamic_invariant({ elts = values; rt = values1 }, true, false,
+  true)
+
+axiom H1 : (0 <  length({ elts = values; rt = values1 }))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(min))
+
  (* File "perm.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. (dynamic_invariant({ elts = values; rt = values1 }, true,
-  false, true) -> ((0 <  length({ elts = values; rt = values1 })) ->
-  (((1 <= 2147483647) -> in_range2(min)) ->
-  in_range2(to_rep1(first(values1)))))))
+goal WP_parameter_def : in_range2(to_rep1(first(values1)))

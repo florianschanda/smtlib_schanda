@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -849,55 +849,152 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "counter.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall inputs:(t,bool) farray. forall res:t.
-  forall counter__model__current_chain_length__result:t. forall o:t.
-  forall temp___228:t. forall temp___229:t. forall o1:t. forall o2:t.
-  forall o3:bool. forall result:t. forall res1:t. forall result1:bool.
-  forall res2:t. forall temp___2291:t. forall result2:t.
-  forall temp___2292:t. forall result3:t. forall res3:t. forall result4:bool.
-  forall res4:t. forall res5:t. forall res6:t. forall res7:t.
-  forall result5:t. forall counter__model__current_chain_length__result1:t.
-  forall counter__model__current_chain_length__result2:t.
-  forall counter__model__current_chain_length__result3:t. forall res8:t.
-  forall counter__model__current_chain_length__result4:t. forall res9:t.
-  forall counter__model__current_chain_length__result5:t.
-  forall result6:bool. ((((({ t__content = result } = { t__content = res
-  }) and (res1 = of_int(0))) and (in_range1(res1) and ((((ult(res1,
-  of_int(10)) and (((ule(of_int(1), sub(of_int(10), res1)) and
-  ule(sub(of_int(10), res1), of_int(10))) and (o = sub(of_int(10),
-  res1))) and (result1 = (inputs[o])))) or ((not ult(res1, of_int(10))) and
-  (result1 = false))) and (((result1 = true) and ((((temp___228 = res1) and
+logic inputs : (t,bool) farray
+
+logic res : t
+
+logic counter__model__current_chain_length__result : t
+
+logic o : t
+
+logic temp___228 : t
+
+logic temp___229 : t
+
+logic i : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : bool
+
+logic i1 : t
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : bool
+
+logic res2 : t
+
+logic temp___2291 : t
+
+logic result2 : t
+
+logic temp___2292 : t
+
+logic result3 : t
+
+logic res3 : t
+
+logic result4 : bool
+
+logic res4 : t
+
+logic temp___2293 : t
+
+logic res5 : t
+
+logic temp___2294 : t
+
+logic res6 : t
+
+logic res7 : t
+
+logic res8 : t
+
+logic res9 : t
+
+logic result5 : t
+
+logic counter__model__current_chain_length__result1 : t
+
+logic counter__model__current_chain_length__result2 : t
+
+logic counter__model__current_chain_length__result3 : t
+
+logic res10 : t
+
+logic counter__model__current_chain_length__result4 : t
+
+logic res11 : t
+
+logic counter__model__current_chain_length__result5 : t
+
+logic result6 : bool
+
+axiom H : (result = res)
+
+axiom H1 : (res1 = of_int(0))
+
+axiom H2 : in_range1(res1)
+
+axiom H3 : (ult(res1, of_int(10)) -> (ule(of_int(1), sub(of_int(10),
+  res1)) and ule(sub(of_int(10), res1), of_int(10))))
+
+axiom H4 : (ult(res1, of_int(10)) -> (o = sub(of_int(10), res1)))
+
+axiom H5 : (ult(res1, of_int(10)) -> (result1 = (inputs[o])))
+
+axiom H6 : ((not ult(res1, of_int(10))) -> (result1 = false))
+
+axiom H7 : ((result1 = true) -> (((temp___228 = res1) and
   ((of_int(0) = temp___229) and
-  ((forall i:t. ((ule(sub(of_int(10), res2), i) and ule(i, of_int(10))) ->
-   ((inputs[i]) = true))) and
-  (((ule(of_int(0), of_int(10)) -> in_range1(res2)) and (ult(res2,
-  of_int(10)) and ((inputs[sub(of_int(10), res2)]) = true))) and
-  (((temp___2291 = result2) and (temp___2292 = res2)) and ((((o1 = add(res2,
-  of_int(1))) and in_range1(add(res2, of_int(1)))) and ((res2 = result3) and
-  (res3 = o1))) and ((((ult(res3, of_int(10)) and (((ule(of_int(1),
+  ((forall i2:t. ((ule(sub(of_int(10), res2), i2) and ule(i2, of_int(10))) ->
+   ((inputs[i2]) = true))) and (((ule(of_int(0), of_int(10)) ->
+  in_range1(res2)) and (ult(res2, of_int(10)) and ((inputs[sub(of_int(10),
+  res2)]) = true))) and (((temp___2291 = result2) and
+  (temp___2292 = res2)) and ((((o1 = add(res2, of_int(1))) and
+  in_range1(add(res2, of_int(1)))) and ((res2 = result3) and
+  (res3 = o1))) and ((((ult(res3, of_int(10)) -> (((ule(of_int(1),
   sub(of_int(10), res3)) and ule(sub(of_int(10), res3), of_int(10))) and
-  (o2 = sub(of_int(10), res3))) and (o3 = (inputs[o2])))) or ((not ult(res3,
-  of_int(10))) and (o3 = false))) and (((not (o3 = true)) and
-  (result4 = true)) or ((o3 = true) and (result4 = false)))) and
-  (result4 = true)))))))) and ((res3 = res4) and (res5 = res3))) and (({
-  t__content = res6 } = { t__content = res4 }) and (res7 = res5)))) or
-  ((not (result1 = true)) and ((res1 = res6) and (res7 = res1))))) and
-  (((counter__model__current_chain_length__result1 = counter__model__current_chain_length__result2) and
-  (counter__model__current_chain_length__result3 = counter__model__current_chain_length__result1)) and
-  (({ t__content = result5 } = { t__content =
-  counter__model__current_chain_length__result }) and
-  (counter__model__current_chain_length__result1 = res6)))))) and ((({
-  t__content = counter__model__current_chain_length__result4 } = {
-  t__content = counter__model__current_chain_length__result2 }) and ({
-  t__content = res8 } = { t__content = res6 })) and
-  ((counter__model__current_chain_length__result5 = counter__model__current_chain_length__result3) and
-  (res9 = res7)))) -> (((inputs[of_int(10)]) = true) ->
-  (((result6 = true) <->
-  (forall i:t. ((ule(add(sub(of_int(10),
-  counter__model__current_chain_length__result4), of_int(1)), i) and ule(i,
-  of_int(10))) -> ((inputs[i]) = true)))) -> ((result6 = true) ->
-  ((not (counter__model__current_chain_length__result4 = of_int(10))) ->
-  ule(of_int(1), sub(of_int(10),
-  counter__model__current_chain_length__result4))))))))
+  (o2 = sub(of_int(10), res3))) and (o3 = (inputs[o2])))) and ((not ult(res3,
+  of_int(10))) -> (o3 = false))) and (((not (o3 = true)) ->
+  (result4 = true)) and ((o3 = true) -> (result4 = false)))) and
+  (result4 = true)))))))) and ((res3 = res6) and (res7 = res3))))
+
+axiom H8 : ((result1 = true) -> (res8 = res6))
+
+axiom H9 : ((result1 = true) -> (res9 = res7))
+
+axiom H10 : ((not (result1 = true)) -> (res1 = res8))
+
+axiom H11 : ((not (result1 = true)) -> (res9 = res1))
+
+axiom H12 :
+  (counter__model__current_chain_length__result1 = counter__model__current_chain_length__result2)
+
+axiom H13 :
+  (counter__model__current_chain_length__result3 = counter__model__current_chain_length__result1)
+
+axiom H14 : (result5 = counter__model__current_chain_length__result)
+
+axiom H15 : (counter__model__current_chain_length__result1 = res8)
+
+axiom H16 :
+  (counter__model__current_chain_length__result4 = counter__model__current_chain_length__result2)
+
+axiom H17 : (res10 = res8)
+
+axiom H18 :
+  (counter__model__current_chain_length__result5 = counter__model__current_chain_length__result3)
+
+axiom H19 : (res11 = res9)
+
+axiom H20 : ((inputs[of_int(10)]) = true)
+
+axiom H21 : ((result6 = true) <->
+  (forall i2:t. ((ule(add(sub(of_int(10),
+  counter__model__current_chain_length__result4), of_int(1)), i2) and ule(i2,
+  of_int(10))) -> ((inputs[i2]) = true))))
+
+axiom H22 : (result6 = true)
+
+axiom H23 :
+  (not (counter__model__current_chain_length__result4 = of_int(10)))
+
+ (* File "counter.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : ule(of_int(1), sub(of_int(10),
+  counter__model__current_chain_length__result4))

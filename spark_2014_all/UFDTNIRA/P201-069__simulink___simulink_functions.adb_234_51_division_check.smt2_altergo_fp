@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tinteger_8B
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function tinteger_8B__ref___projection(a: tinteger_8B__ref) : tinteger_8B =
 
 type integer_8
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -279,11 +279,61 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic quotient : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic result : int
+
+logic quotient1 : int
+
+axiom H : in_range2(left)
+
+axiom H1 : in_range2(right)
+
+axiom H2 : (not (right = 0))
+
+axiom H3 : ((left <  0) -> ((left <  0) -> (not (right <  0))))
+
+axiom H4 : ((not (left <  0)) -> (right <  0))
+
+axiom H5 : ((not (left <  0)) -> ((left <  0) -> (not (right <  0))))
+
+axiom H6 : ((o1 = abs_int(right)) and in_range1(abs_int(right)))
+
+axiom H7 : ((o = abs_int(left)) and in_range1(abs_int(left)))
+
  (* File "interfac.ads", line 46, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (in_range2(left) -> (in_range2(right) ->
-  ((not (right = 0)) -> ((((left <  0) and ((left <  0) ->
-  (not (right <  0)))) or ((not (left <  0)) and ((right <  0) and
-  ((left <  0) -> (not (right <  0)))))) -> (((o1 = abs_int(right)) and
-  in_range1(abs_int(right))) -> (((o = abs_int(left)) and
-  in_range1(abs_int(left))) -> (not (o1 = 0)))))))))
+goal WP_parameter_def : (not (o1 = 0))

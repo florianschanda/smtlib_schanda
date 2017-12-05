@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -214,6 +214,30 @@ logic y1 : us_private
 logic y2 : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic x__split_fields : integer
+
+logic x__split_fields1 : us_private
+
+logic usq_ : integer
+
+logic usq_1 : us_private
+
+logic usq_2 : int
+
+logic temp___149 : integer
+
+logic temp___1491 : us_private
+
+logic temp___1492 : int
+
+logic result : integer
+
+logic result1 : us_private
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : us_private
 
  (* File "tag_check.ads", line 10, characters 0-0 *)
 goal WP_parameter_def : (x__attr__tag = y2)

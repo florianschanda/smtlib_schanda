@@ -85,6 +85,9 @@ logic b : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (not (a = true))
+
+axiom H1 : (not (b = true))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((not ((a = true) or (b = true))) ->
-  (not (a = true)))
+goal WP_parameter_def : (not (a = true))

@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -469,14 +469,26 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : length_t
+
+logic x__split_fields1 : (int,integer) farray
+
+logic result : length_t
+
+logic result1 : (int,integer) farray
+
+logic x__split_fields2 : length_t
+
+logic x__split_fields3 : (int,integer) farray
+
+axiom H : (result = x__split_fields)
+
+axiom H1 : (result1 = x__split_fields1)
+
+axiom H2 : ({ rec__stack__t__len = x__split_fields2;
+  rec__stack__t__elements = x__split_fields3 } = ((a[5])).us_split_fields1)
+
  (* File "private_a.adb", line 77, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:length_t.
-  forall x__split_fields1:(int,integer) farray. forall result:length_t.
-  forall result1:(int,integer) farray. forall x__split_fields2:length_t.
-  forall x__split_fields3:(int,integer) farray.
-  ((((result = x__split_fields) and (result1 = x__split_fields1)) and ({
+goal WP_parameter_def : (0 <= get_length({ us_split_fields1 = {
   rec__stack__t__len = x__split_fields2; rec__stack__t__elements =
-  x__split_fields3 } = ((a[5])).us_split_fields1)) -> (0 <= get_length({
-  us_split_fields1 = { rec__stack__t__len = x__split_fields2;
-  rec__stack__t__elements = x__split_fields3 } }))))
+  x__split_fields3 } }))

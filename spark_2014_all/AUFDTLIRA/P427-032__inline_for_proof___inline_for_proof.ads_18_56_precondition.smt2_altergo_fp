@@ -274,10 +274,30 @@ logic x : (int,t) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic y : (int,t) farray
+
+logic b : bool
+
+logic i : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+axiom H :
+  (forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
+  (exists temp___174:int. (((1 <= temp___174) and (temp___174 <= 100)) and
+  (to_rep((x[temp___173])) = to_rep((y[temp___174])))))))
+
+axiom H1 : (1 <= i)
+
+axiom H2 : (i <= 100)
+
+axiom H3 : (1 <= j)
+
+axiom H4 : (j <= 100)
+
  (* File "inline_for_proof.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:(int,t) farray. forall i:int. forall j:int.
-  ((forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
-   (exists temp___174:int. (((1 <= temp___174) and (temp___174 <= 100)) and
-   (to_rep((x[temp___173])) = to_rep((y[temp___174]))))))) ->
-  (((1 <= i) and (i <= 100)) -> (((1 <= j) and (j <= 100)) -> (1 <= j)))))
+goal WP_parameter_def : (1 <= j)

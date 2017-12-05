@@ -1092,11 +1092,14 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : tqtisFinite(f)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
+axiom H1 : eq(f, fliteral1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(f) -> (eq(f, fliteral1) ->
-  (not (next_representable(f) = neg(fliteral1)))))
+goal WP_parameter_def : (not (next_representable(f) = neg(fliteral1)))

@@ -64,6 +64,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const l1 Int)
 (declare-const c1 Int)

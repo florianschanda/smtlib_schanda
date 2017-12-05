@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -325,19 +325,108 @@ function even_pair__ref___projection(a: even_pair__ref) : us_rep =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic result____split_fields : even
+
+logic result____split_fields1 : even
+
+logic dynamic_preds__get_constant_even_pair__result : even
+
+logic dynamic_preds__get_constant_even_pair__result1 : even
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : even
+
+logic o3 : even
+
+logic temp___249 : even
+
+logic temp___2491 : even
+
+logic o4 : int
+
+logic o5 : even
+
+logic o6 : even
+
+logic o7 : even
+
+logic temp___253 : even
+
+logic temp___2531 : even
+
+logic result : even
+
+logic result1 : even
+
+logic result____split_fields2 : even
+
+logic result____split_fields3 : even
+
+logic result2 : even
+
+logic result3 : even
+
+logic result____split_fields4 : even
+
+logic result____split_fields5 : even
+
+logic result4 : even
+
+logic result5 : even
+
+logic dynamic_preds__get_constant_even_pair__result2 : even
+
+logic dynamic_preds__get_constant_even_pair__result3 : even
+
+logic dynamic_preds__get_constant_even_pair__result4 : even
+
+logic dynamic_preds__get_constant_even_pair__result5 : even
+
+logic dynamic_preds__get_constant_even_pair__result6 : even
+
+logic dynamic_preds__get_constant_even_pair__result7 : even
+
+logic result____split_fields6 : even
+
+logic result____split_fields7 : even
+
+logic dynamic_preds__get_constant_even_pair__result8 : even
+
+logic dynamic_preds__get_constant_even_pair__result9 : even
+
+logic result____split_fields8 : even
+
+logic result____split_fields9 : even
+
+logic dynamic_preds__get_constant_even_pair__result10 : even
+
+logic dynamic_preds__get_constant_even_pair__result11 : even
+
+axiom H : true
+
+axiom H1 : (mod(0, 2) = 0)
+
+axiom H2 : (o = 0)
+
+axiom H3 : (to_rep(o1) = o)
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (result____split_fields1 = o3)
+
+axiom H6 : (temp___249 = o2)
+
+axiom H7 : (temp___2491 = o3)
+
+axiom H8 : ((result = result____split_fields) and
+  (result1 = result____split_fields1))
+
+axiom H9 : (temp___249 = result____split_fields2)
+
+axiom H10 : (temp___2491 = result____split_fields3)
+
  (* File "dynamic_preds.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:even. forall result____split_fields1:even.
-  forall o:int. forall o1:even. forall o2:even. forall o3:even.
-  forall temp___249:even. forall temp___2491:even. forall result:even.
-  forall result1:even. forall result____split_fields2:even.
-  forall result____split_fields3:even. (((((((mod(0, 2) = 0) and (o = 0)) and
-  (to_rep(o1) = o)) and ((o1 = o2) and (result____split_fields1 = o3))) and
-  ((temp___249 = o2) and (temp___2491 = o3))) and (({
-  us_split_fields__content = { rec__dynamic_preds__even_pair__a = result;
-  rec__dynamic_preds__even_pair__b = result1 } } = {
-  us_split_fields__content = { rec__dynamic_preds__even_pair__a =
-  result____split_fields; rec__dynamic_preds__even_pair__b =
-  result____split_fields1 } }) and
-  ((temp___249 = result____split_fields2) and
-  (temp___2491 = result____split_fields3)))) -> (mod(0, 2) = 0)))
+goal WP_parameter_def : (mod(0, 2) = 0)

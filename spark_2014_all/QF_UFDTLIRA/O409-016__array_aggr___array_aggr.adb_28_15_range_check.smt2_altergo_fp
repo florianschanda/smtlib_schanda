@@ -109,6 +109,9 @@ logic one : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : in_range(one)
+
+axiom H1 : (one <= 2147483647)
+
  (* File "array_aggr.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (in_range(one) -> ((one <= 2147483647) ->
-  (0 <= one)))
+goal WP_parameter_def : (0 <= one)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -545,9 +545,59 @@ type t33b__ref = { t33b__content : us_t1
 
 function t33b__ref___projection(a: t33b__ref) : us_t1 = (a).t33b__content
 
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic b : bool
+
+logic pos : int
+
+logic o : (int,character) farray
+
+logic temp___172 : (int,character) farray
+
+logic temp___1721 : t
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : (int,character) farray
+
+logic temp___170 : (int,character) farray
+
+logic temp___1701 : t1
+
+logic o4 : bool
+
+logic o5 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : bool
+
+logic b1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+axiom H : (result = pos)
+
+axiom H1 : (pos1 = 1)
+
+axiom H2 : in_range1(pos1)
+
+axiom H3 : (result1 = b)
+
+axiom H4 : (b1 = of_int(1))
+
+axiom H5 : (b1 = true)
+
+axiom H6 : (pos1 <= 5)
+
  (* File "foo.adb", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall pos:int. forall result:int. forall pos1:int.
-  forall result1:bool. forall b1:bool. (((result = pos) and (pos1 = 1)) ->
-  (in_range1(pos1) -> (((result1 = b) and (b1 = of_int(1))) ->
-  ((b1 = true) -> ((pos1 <= 5) -> (1 <= pos1)))))))
+goal WP_parameter_def : (1 <= pos1)

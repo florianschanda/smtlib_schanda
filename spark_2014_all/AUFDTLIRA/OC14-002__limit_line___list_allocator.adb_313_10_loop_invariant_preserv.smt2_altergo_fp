@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tresourceB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -821,99 +821,469 @@ axiom is_add__post_axiom :
 
 axiom is_add__post__dispatch_axiom : true
 
- (* File "list_allocator.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,us_rep) farray. forall first_available:int.
-  forall first_allocated:int. forall r:int. forall o:resource.
-  forall o1:resource. forall o2:status. forall o3:status. forall o4:resource.
-  forall o5:resource. forall o6:status. forall o7:resource.
-  forall o8:resource. forall o9:(int,us_rep) farray. forall o10:resource.
-  forall o11:status. forall o12:resource. forall o13:resource.
-  forall o14:status. forall o15:resource. forall o16:resource.
-  forall o17:(int,us_rep) farray. forall o18:int. forall o19:resource.
-  forall o20:status. forall o21:resource. forall o22:resource.
-  forall o23:status. forall o24:resource. forall o25:resource.
-  forall o26:(int,us_rep) farray. forall o27:resource. forall o28:status.
-  forall o29:resource. forall o30:resource. forall o31:status.
-  forall o32:resource. forall o33:resource. forall o34:(int,us_rep) farray.
-  forall o35:int. forall o36:resource. forall o37:status.
-  forall o38:resource. forall o39:resource. forall o40:status.
-  forall o41:resource. forall o42:resource. forall o43:(int,us_rep) farray.
-  forall result:(int,us_rep) farray. forall data1:(int,us_rep) farray.
-  forall result1:int. forall first_available1:int. forall result2:int.
-  forall first_allocated1:int. forall result3:int. forall r1:int.
-  forall result4:(int,us_rep) farray. forall data2:(int,us_rep) farray.
-  forall result5:(int,us_rep) farray. forall data3:(int,us_rep) farray.
-  forall data4:(int,us_rep) farray. forall r2:int. forall result6:int.
-  forall r3:int. forall result7:(int,us_rep) farray.
-  forall data5:(int,us_rep) farray. forall result8:(int,us_rep) farray.
-  forall data6:(int,us_rep) farray. (in_range2(no_resource) ->
-  ((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and ((to_rep1(o2) = 0) and
-  ((o2 = o3) and ((o1 = o4) and (o = o5)))))) and ((o6 = o3) and
-  ((o7 = o4) and (o8 = o5)))) and (o9 = list_allocator__data__aggregate_def({
-  us_split_fields1 = { rec__list_allocator__cell__stat = o6;
-  rec__list_allocator__cell__prev = o7; rec__list_allocator__cell__next = o8
-  } }))) and ((result = data) and (data1 = o9))) ->
-  (((result1 = first_available) and (first_available1 = 1)) ->
-  (in_range2(first_available1) -> (((result2 = first_allocated) and
-  (first_allocated1 = 0)) -> (in_range2(first_allocated1) ->
-  (((result3 = r) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 3)) ->
-  ((((1 <  r1) and (((((to_rep(o10) = (r1 - 1)) and
-  (((((data1[r1])).us_split_fields1).rec__list_allocator__cell__stat = o11) and
-  ((o10 = o12) and
-  ((((data1[r1])).us_split_fields1).rec__list_allocator__cell__next = o13)))) and
-  ((o14 = o11) and ((o15 = o12) and (o16 = o13)))) and (o17 = (data1[r1 <- {
-  us_split_fields1 = { rec__list_allocator__cell__stat = o14;
-  rec__list_allocator__cell__prev = o15; rec__list_allocator__cell__next =
-  o16 } }]))) and ((result4 = data1) and (data2 = o17)))) or
-  ((not (1 <  r1)) and (data2 = data1))) -> ((((r1 <  3) and
-  (((((((o18 = (r1 + 1)) and in_range2((r1 + 1))) and
-  (to_rep(o19) = o18)) and
-  (((((data2[r1])).us_split_fields1).rec__list_allocator__cell__stat = o20) and
-  (((((data2[r1])).us_split_fields1).rec__list_allocator__cell__prev = o21) and
-  (o19 = o22)))) and ((o23 = o20) and ((o24 = o21) and (o25 = o22)))) and
-  (o26 = (data2[r1 <- { us_split_fields1 = {
+logic model____split_fields : us_rep1
+
+logic model____split_fields1 : us_rep1
+
+logic data : (int,us_rep) farray
+
+logic first_available : int
+
+logic first_allocated : int
+
+logic r : int
+
+logic r1 : int
+
+logic o : resource
+
+logic o1 : resource
+
+logic o2 : status
+
+logic o3 : status
+
+logic o4 : resource
+
+logic o5 : resource
+
+logic o6 : status
+
+logic o7 : resource
+
+logic o8 : resource
+
+logic o9 : (int,us_rep) farray
+
+logic temp___359 : int
+
+logic temp___357 : (int,us_rep) farray
+
+logic o10 : resource
+
+logic o11 : status
+
+logic o12 : resource
+
+logic o13 : resource
+
+logic o14 : status
+
+logic o15 : resource
+
+logic o16 : resource
+
+logic o17 : (int,us_rep) farray
+
+logic o18 : int
+
+logic o19 : resource
+
+logic o20 : status
+
+logic o21 : resource
+
+logic o22 : resource
+
+logic o23 : status
+
+logic o24 : resource
+
+logic o25 : resource
+
+logic o26 : (int,us_rep) farray
+
+logic rr : int
+
+logic o27 : int
+
+logic rr1 : int
+
+logic o28 : int
+
+logic o29 : resource
+
+logic o30 : status
+
+logic o31 : resource
+
+logic o32 : resource
+
+logic o33 : status
+
+logic o34 : resource
+
+logic o35 : resource
+
+logic o36 : (int,us_rep) farray
+
+logic o37 : int
+
+logic o38 : resource
+
+logic o39 : status
+
+logic o40 : resource
+
+logic o41 : resource
+
+logic o42 : status
+
+logic o43 : resource
+
+logic o44 : resource
+
+logic o45 : (int,us_rep) farray
+
+logic temp___365 : int
+
+logic temp___364 : us_rep1
+
+logic temp___3641 : us_rep1
+
+logic o46 : us_rep1
+
+logic o47 : us_rep1
+
+logic o48 : us_rep1
+
+logic temp___363 : us_rep1
+
+logic temp___3631 : us_rep1
+
+logic rr2 : int
+
+logic o49 : int
+
+logic o50 : us_rep1
+
+logic o51 : us_rep1
+
+logic o52 : us_rep1
+
+logic temp___3632 : us_rep1
+
+logic temp___3633 : us_rep1
+
+logic model____split_fields2 : us_rep1
+
+logic model____split_fields3 : us_rep1
+
+logic result : (int,us_rep) farray
+
+logic data1 : (int,us_rep) farray
+
+logic result1 : int
+
+logic first_available1 : int
+
+logic result2 : int
+
+logic first_allocated1 : int
+
+logic result3 : int
+
+logic r2 : int
+
+logic result4 : (int,us_rep) farray
+
+logic data2 : (int,us_rep) farray
+
+logic result5 : (int,us_rep) farray
+
+logic data3 : (int,us_rep) farray
+
+logic data4 : (int,us_rep) farray
+
+logic r3 : int
+
+logic result6 : int
+
+logic r4 : int
+
+logic result7 : (int,us_rep) farray
+
+logic data5 : (int,us_rep) farray
+
+logic result8 : (int,us_rep) farray
+
+logic data6 : (int,us_rep) farray
+
+logic data7 : (int,us_rep) farray
+
+logic r5 : int
+
+logic data8 : (int,us_rep) farray
+
+logic r6 : int
+
+logic data9 : (int,us_rep) farray
+
+logic r7 : int
+
+logic data10 : (int,us_rep) farray
+
+logic r8 : int
+
+logic result9 : int
+
+logic r9 : int
+
+logic result10 : us_rep1
+
+logic result11 : us_rep1
+
+logic model____split_fields4 : us_rep1
+
+logic model____split_fields5 : us_rep1
+
+logic model____split_fields6 : us_rep1
+
+logic model____split_fields7 : us_rep1
+
+logic r10 : int
+
+logic result12 : int
+
+logic r11 : int
+
+logic result13 : us_rep1
+
+logic result14 : us_rep1
+
+logic model____split_fields8 : us_rep1
+
+logic model____split_fields9 : us_rep1
+
+logic model____split_fields10 : us_rep1
+
+logic model____split_fields11 : us_rep1
+
+logic r12 : int
+
+logic model____split_fields12 : us_rep1
+
+logic model____split_fields13 : us_rep1
+
+logic r13 : int
+
+logic model____split_fields14 : us_rep1
+
+logic model____split_fields15 : us_rep1
+
+logic r14 : int
+
+logic model____split_fields16 : us_rep1
+
+logic model____split_fields17 : us_rep1
+
+logic r15 : int
+
+logic model____split_fields18 : us_rep1
+
+logic model____split_fields19 : us_rep1
+
+logic r16 : int
+
+logic model____split_fields20 : us_rep1
+
+logic model____split_fields21 : us_rep1
+
+logic r17 : int
+
+axiom H : in_range2(no_resource)
+
+axiom H1 : (to_rep(o) = 0)
+
+axiom H2 : (to_rep(o1) = 0)
+
+axiom H3 : (to_rep1(o2) = 0)
+
+axiom H4 : (o2 = o3)
+
+axiom H5 : (o1 = o4)
+
+axiom H6 : (o = o5)
+
+axiom H7 : (o6 = o3)
+
+axiom H8 : (o7 = o4)
+
+axiom H9 : (o8 = o5)
+
+axiom H10 : (o9 = list_allocator__data__aggregate_def({ us_split_fields1 = {
+  rec__list_allocator__cell__stat = o6; rec__list_allocator__cell__prev = o7;
+  rec__list_allocator__cell__next = o8 } }))
+
+axiom H11 : (result = data)
+
+axiom H12 : (data1 = o9)
+
+axiom H13 : (result1 = first_available)
+
+axiom H14 : (first_available1 = 1)
+
+axiom H15 : in_range2(first_available1)
+
+axiom H16 : (result2 = first_allocated)
+
+axiom H17 : (first_allocated1 = 0)
+
+axiom H18 : in_range2(first_allocated1)
+
+axiom H19 : (result3 = r)
+
+axiom H20 : (r2 = 1)
+
+axiom H21 : (1 <= r2)
+
+axiom H22 : (r2 <= 3)
+
+axiom H23 : ((1 <  r2) -> (to_rep(o10) = (r2 - 1)))
+
+axiom H24 : ((1 <  r2) ->
+  ((((data1[r2])).us_split_fields1).rec__list_allocator__cell__stat = o11))
+
+axiom H25 : ((1 <  r2) -> (o10 = o12))
+
+axiom H26 : ((1 <  r2) ->
+  ((((data1[r2])).us_split_fields1).rec__list_allocator__cell__next = o13))
+
+axiom H27 : ((1 <  r2) -> (o14 = o11))
+
+axiom H28 : ((1 <  r2) -> (o15 = o12))
+
+axiom H29 : ((1 <  r2) -> (o16 = o13))
+
+axiom H30 : ((1 <  r2) -> (o17 = (data1[r2 <- { us_split_fields1 = {
+  rec__list_allocator__cell__stat = o14; rec__list_allocator__cell__prev =
+  o15; rec__list_allocator__cell__next = o16 } }])))
+
+axiom H31 : ((1 <  r2) -> (result4 = data1))
+
+axiom H32 : ((1 <  r2) -> (data2 = o17))
+
+axiom H33 : ((not (1 <  r2)) -> (data2 = data1))
+
+axiom H34 : ((r2 <  3) -> ((o18 = (r2 + 1)) and in_range2((r2 + 1))))
+
+axiom H35 : ((r2 <  3) -> (to_rep(o19) = o18))
+
+axiom H36 : ((r2 <  3) ->
+  ((((data2[r2])).us_split_fields1).rec__list_allocator__cell__stat = o20))
+
+axiom H37 : ((r2 <  3) ->
+  ((((data2[r2])).us_split_fields1).rec__list_allocator__cell__prev = o21))
+
+axiom H38 : ((r2 <  3) -> (o19 = o22))
+
+axiom H39 : ((r2 <  3) -> (o23 = o20))
+
+axiom H40 : ((r2 <  3) -> (o24 = o21))
+
+axiom H41 : ((r2 <  3) -> (o25 = o22))
+
+axiom H42 : ((r2 <  3) -> (o26 = (data2[r2 <- { us_split_fields1 = {
   rec__list_allocator__cell__stat = o23; rec__list_allocator__cell__prev =
-  o24; rec__list_allocator__cell__next = o25 } }]))) and
-  ((result5 = data2) and (data3 = o26)))) or ((not (r1 <  3)) and
-  (data3 = data2))) ->
-  (((forall rr:int. (((1 <= rr) and (rr <= r2)) -> (((rr = 1) and
-    (to_rep((((data4[rr])).us_split_fields1).rec__list_allocator__cell__prev) = 0)) or
-    ((not (rr = 1)) and
-    (to_rep((((data4[rr])).us_split_fields1).rec__list_allocator__cell__prev) = (rr - 1)))))) and
-  ((forall rr:int. (((1 <= rr) and (rr <= r2)) -> (((rr = 3) and
-   (to_rep((((data4[rr])).us_split_fields1).rec__list_allocator__cell__next) = 0)) or
-   ((not (rr = 3)) and
-   (to_rep((((data4[rr])).us_split_fields1).rec__list_allocator__cell__next) = (rr + 1)))))) and
-  (forall rr:int. (((1 <= rr) and (rr <= 3)) ->
-  (to_rep1((((data4[rr])).us_split_fields1).rec__list_allocator__cell__stat) = 0))))) ->
-  (((((forall temp___358:int. (((1 <= temp___358) and (temp___358 <= 3)) ->
-      (((r2 <  temp___358) and
-      ((data4[temp___358]) = (data1[temp___358]))) or
-      ((not (r2 <  temp___358)) and
-      ((((data4[temp___358])).us_split_fields1).rec__list_allocator__cell__stat = (((data1[temp___358])).us_split_fields1).rec__list_allocator__cell__stat))))) and
-  ((1 <= 3) -> in_range3(r2))) and ((1 <= r2) and (r2 <= 3))) and
-  ((not (r2 = 3)) and (((result6 = r2) and (r3 = (r2 + 1))) and
-  ((((1 <  r3) and (((((to_rep(o27) = (r3 - 1)) and
-  (((((data4[r3])).us_split_fields1).rec__list_allocator__cell__stat = o28) and
-  ((o27 = o29) and
-  ((((data4[r3])).us_split_fields1).rec__list_allocator__cell__next = o30)))) and
-  ((o31 = o28) and ((o32 = o29) and (o33 = o30)))) and (o34 = (data4[r3 <- {
-  us_split_fields1 = { rec__list_allocator__cell__stat = o31;
-  rec__list_allocator__cell__prev = o32; rec__list_allocator__cell__next =
-  o33 } }]))) and ((result7 = data4) and (data5 = o34)))) or
-  ((not (1 <  r3)) and (data5 = data4))) and (((r3 <  3) and
-  (((((((o35 = (r3 + 1)) and in_range2((r3 + 1))) and
-  (to_rep(o36) = o35)) and
-  (((((data5[r3])).us_split_fields1).rec__list_allocator__cell__stat = o37) and
-  (((((data5[r3])).us_split_fields1).rec__list_allocator__cell__prev = o38) and
-  (o36 = o39)))) and ((o40 = o37) and ((o41 = o38) and (o42 = o39)))) and
-  (o43 = (data5[r3 <- { us_split_fields1 = {
-  rec__list_allocator__cell__stat = o40; rec__list_allocator__cell__prev =
-  o41; rec__list_allocator__cell__next = o42 } }]))) and
-  ((result8 = data5) and (data6 = o43)))) or ((not (r3 <  3)) and
-  (data6 = data5))))))) ->
-  (forall rr:int. (((1 <= rr) and (rr <= r3)) -> (((rr = 1) ->
-  (to_rep((((data6[rr])).us_split_fields1).rec__list_allocator__cell__prev) = 0)) and
-  ((not (rr = 1)) ->
-  (to_rep((((data6[rr])).us_split_fields1).rec__list_allocator__cell__prev) = (rr - 1)))))))))))))))))))
+  o24; rec__list_allocator__cell__next = o25 } }])))
+
+axiom H43 : ((r2 <  3) -> (result5 = data2))
+
+axiom H44 : ((r2 <  3) -> (data3 = o26))
+
+axiom H45 : ((not (r2 <  3)) -> (data3 = data2))
+
+axiom H46 :
+  (forall rr3:int. (((1 <= rr3) and (rr3 <= r3)) -> (((rr3 = 1) ->
+  (to_rep((((data4[rr3])).us_split_fields1).rec__list_allocator__cell__prev) = 0)) and
+  ((not (rr3 = 1)) ->
+  (to_rep((((data4[rr3])).us_split_fields1).rec__list_allocator__cell__prev) = (rr3 - 1))))))
+
+axiom H47 :
+  (forall rr3:int. (((1 <= rr3) and (rr3 <= r3)) -> (((rr3 = 3) ->
+  (to_rep((((data4[rr3])).us_split_fields1).rec__list_allocator__cell__next) = 0)) and
+  ((not (rr3 = 3)) ->
+  (to_rep((((data4[rr3])).us_split_fields1).rec__list_allocator__cell__next) = (rr3 + 1))))))
+
+axiom H48 :
+  (forall rr3:int. (((1 <= rr3) and (rr3 <= 3)) ->
+  (to_rep1((((data4[rr3])).us_split_fields1).rec__list_allocator__cell__stat) = 0)))
+
+axiom H49 :
+  (((forall temp___358:int. (((1 <= temp___358) and (temp___358 <= 3)) ->
+    (((r3 <  temp___358) -> ((data4[temp___358]) = (data1[temp___358]))) and
+    ((not (r3 <  temp___358)) ->
+    ((((data4[temp___358])).us_split_fields1).rec__list_allocator__cell__stat = (((data1[temp___358])).us_split_fields1).rec__list_allocator__cell__stat))))) and
+  ((1 <= 3) -> in_range3(r3))) and ((1 <= r3) and (r3 <= 3)))
+
+axiom H50 : (not (r3 = 3))
+
+axiom H51 : (result6 = r3)
+
+axiom H52 : (r4 = (r3 + 1))
+
+axiom H53 : ((1 <  r4) -> (to_rep(o29) = (r4 - 1)))
+
+axiom H54 : ((1 <  r4) ->
+  ((((data4[r4])).us_split_fields1).rec__list_allocator__cell__stat = o30))
+
+axiom H55 : ((1 <  r4) -> (o29 = o31))
+
+axiom H56 : ((1 <  r4) ->
+  ((((data4[r4])).us_split_fields1).rec__list_allocator__cell__next = o32))
+
+axiom H57 : ((1 <  r4) -> (o33 = o30))
+
+axiom H58 : ((1 <  r4) -> (o34 = o31))
+
+axiom H59 : ((1 <  r4) -> (o35 = o32))
+
+axiom H60 : ((1 <  r4) -> (o36 = (data4[r4 <- { us_split_fields1 = {
+  rec__list_allocator__cell__stat = o33; rec__list_allocator__cell__prev =
+  o34; rec__list_allocator__cell__next = o35 } }])))
+
+axiom H61 : ((1 <  r4) -> (result7 = data4))
+
+axiom H62 : ((1 <  r4) -> (data5 = o36))
+
+axiom H63 : ((not (1 <  r4)) -> (data5 = data4))
+
+axiom H64 : ((r4 <  3) -> ((o37 = (r4 + 1)) and in_range2((r4 + 1))))
+
+axiom H65 : ((r4 <  3) -> (to_rep(o38) = o37))
+
+axiom H66 : ((r4 <  3) ->
+  ((((data5[r4])).us_split_fields1).rec__list_allocator__cell__stat = o39))
+
+axiom H67 : ((r4 <  3) ->
+  ((((data5[r4])).us_split_fields1).rec__list_allocator__cell__prev = o40))
+
+axiom H68 : ((r4 <  3) -> (o38 = o41))
+
+axiom H69 : ((r4 <  3) -> (o42 = o39))
+
+axiom H70 : ((r4 <  3) -> (o43 = o40))
+
+axiom H71 : ((r4 <  3) -> (o44 = o41))
+
+axiom H72 : ((r4 <  3) -> (o45 = (data5[r4 <- { us_split_fields1 = {
+  rec__list_allocator__cell__stat = o42; rec__list_allocator__cell__prev =
+  o43; rec__list_allocator__cell__next = o44 } }])))
+
+axiom H73 : ((r4 <  3) -> (result8 = data5))
+
+axiom H74 : ((r4 <  3) -> (data6 = o45))
+
+axiom H75 : ((not (r4 <  3)) -> (data6 = data5))
+
+logic rr3 : int
+
+axiom H76 : (1 <= rr3)
+
+axiom H77 : (rr3 <= r4)
+
+ (* File "list_allocator.adb", line 14, characters 0-0 *)
+goal WP_parameter_def : (((rr3 = 1) ->
+  (to_rep((((data6[rr3])).us_split_fields1).rec__list_allocator__cell__prev) = 0)) and
+  ((not (rr3 = 1)) ->
+  (to_rep((((data6[rr3])).us_split_fields1).rec__list_allocator__cell__prev) = (rr3 - 1))))

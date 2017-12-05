@@ -107,6 +107,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant2 ((temp___expr_135 (_ BitVec 8)) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool true)
 (declare-const o (_ BitVec 16))
+(declare-const o1 (_ BitVec 16))
+(assert true)
 (assert (and (= o (shift_right value 8)) (= o (bvudiv value (ite (< 8 65536) (bvshl ((_ int2bv 16) 1) ((_ int2bv 16) 8)) ((_ int2bv 16) 0))))))
 (assert (not (bvule ((_ zero_extend 8) ((_ int2bv 8) 0)) o)))
 (check-sat)

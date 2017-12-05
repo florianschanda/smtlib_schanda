@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -996,6 +996,24 @@ function unsigned64__ref___projection(a: unsigned64__ref) : unsigned64 =
   (a).unsigned64__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
+
+logic rax : t1
+
+logic x86__ah__result : t
+
+logic result : t
+
+logic x86__ah__result1 : t
+
+logic x86__ah__result2 : t
+
+logic x86__ah__result3 : t
+
+logic x86__ah__result4 : t
+
+logic x86__ah__result5 : t
+
+axiom H : true
 
  (* File "x86.ads", line 10, characters 0-0 *)
 goal WP_parameter_def : (not (of_int1(256) = zeros1))

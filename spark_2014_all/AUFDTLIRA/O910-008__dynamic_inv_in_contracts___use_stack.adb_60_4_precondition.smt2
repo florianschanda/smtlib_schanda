@@ -144,6 +144,8 @@
 (declare-const e1 Int)
 (declare-const top1 Int)
 (declare-const content (Array Int positive))
+(declare-const top2 Int)
+(declare-const e2 Int)
 (assert (in_range c))
 (assert (in_range max))
 (assert (dynamic_property 0 last top))

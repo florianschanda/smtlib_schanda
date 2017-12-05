@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,15 +218,35 @@ logic x : (int,integer) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ar__get__result : int
+
+logic result : int
+
+logic ar__get__result1 : int
+
+logic ar__get__result2 : int
+
+logic ar__get__result3 : int
+
+logic ar__get__result4 : int
+
+logic ar__get__result5 : int
+
+logic result1 : int
+
+axiom H : (ar__get__result1 = ar__get__result2)
+
+axiom H1 : (ar__get__result3 = ar__get__result1)
+
+axiom H2 : (result = ar__get__result)
+
+axiom H3 : (ar__get__result1 = to_rep((x[1])))
+
+axiom H4 : (ar__get__result4 = ar__get__result2)
+
+axiom H5 : (ar__get__result5 = ar__get__result3)
+
+axiom H6 : (result1 = ar__get__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ar__get__result:int. forall result:int.
-  forall ar__get__result1:int. forall ar__get__result2:int.
-  forall ar__get__result3:int. forall ar__get__result4:int.
-  forall ar__get__result5:int.
-  (forall result1:int. ((((((ar__get__result1 = ar__get__result2) and
-  (ar__get__result3 = ar__get__result1)) and ((result = ar__get__result) and
-  (ar__get__result1 = to_rep((x[1]))))) and
-  ((ar__get__result4 = ar__get__result2) and
-  (ar__get__result5 = ar__get__result3))) and
-  (result1 = ar__get__result4)) -> (ar__get__result4 = to_rep((x[1]))))))
+goal WP_parameter_def : (ar__get__result4 = to_rep((x[1])))

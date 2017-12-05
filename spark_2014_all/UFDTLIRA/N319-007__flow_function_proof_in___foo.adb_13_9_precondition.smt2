@@ -40,6 +40,7 @@
 (assert (forall ((us_void_param tuple0)) (! (=> (< 0 b) (dynamic_invariant (f us_void_param) true false true)) :pattern ((f us_void_param)))))
 (assert (forall ((us_void_param tuple0)) (! (= (f us_void_param) a) :pattern ((f us_void_param)))))
 (declare-const c Int)
+(declare-const o Int)
 (assert (in_range a))
 (assert (in_range b))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range c)))

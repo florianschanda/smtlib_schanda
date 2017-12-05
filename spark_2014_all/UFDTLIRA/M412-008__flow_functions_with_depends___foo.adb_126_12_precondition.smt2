@@ -48,6 +48,7 @@
 (declare-const b Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Bool)
 (declare-const result Bool)
 (declare-const result1 Bool)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range g1)))

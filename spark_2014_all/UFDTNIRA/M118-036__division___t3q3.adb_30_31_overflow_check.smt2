@@ -78,6 +78,8 @@
 (declare-const o4 Int)
 (declare-const o5 Int)
 (declare-const o6 Int)
+(declare-const o7 Int)
+(declare-const o8 Bool)
 (declare-const result Int)
 (declare-const k1 Int)
 (declare-const result1 Int)

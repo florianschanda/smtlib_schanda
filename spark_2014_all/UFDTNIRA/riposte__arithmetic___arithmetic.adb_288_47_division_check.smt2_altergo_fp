@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -249,7 +249,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type ttB
 
-predicate in_range2(x1: int) = (((-9223372036854775808) <= x1) and
+predicate in_range2(x1: int) = (((- 9223372036854775808) <= x1) and
   (x1 <= 9223372036854775807))
 
 logic bool_eq3 : int, int -> bool
@@ -273,8 +273,39 @@ type ttB__ref = { ttB__content : ttB
 
 function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
+logic arithmetic__ispositive__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : int
+
+logic arithmetic__ispositive__result1 : int
+
+logic arithmetic__ispositive__result2 : int
+
+logic arithmetic__ispositive__result3 : int
+
+logic arithmetic__ispositive__result4 : int
+
+logic arithmetic__ispositive__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : ((o = (2 * x)) and in_range2((2 * x)))
+
+axiom H2 : (o1 = (o - 1))
+
+axiom H3 : ((o2 = o1) and in_range2(o1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. (in_range1(x) ->
-  (((((o = (2 * x)) and in_range2((2 * x))) and (o1 = (o - 1))) and
-  ((o2 = o1) and in_range2(o1))) -> (not (2 = 0)))))
+goal WP_parameter_def : (not (2 = 0))

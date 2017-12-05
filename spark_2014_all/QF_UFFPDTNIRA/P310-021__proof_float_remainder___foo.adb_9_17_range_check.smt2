@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort angle 0)
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x) (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x) (fp.leq x (fp #b0 #b10000111 #b01101000000000000000000)))))
@@ -55,6 +55,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const c Float32)
+(declare-const o Float32)
 (assert (in_range a))
 (assert (in_range b))
 (assert (=> (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)) (in_range c)))

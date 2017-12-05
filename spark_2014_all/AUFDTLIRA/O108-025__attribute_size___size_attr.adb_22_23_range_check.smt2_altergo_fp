@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2366,6 +2366,110 @@ axiom def_axiom7 :
   (forall temp___412:int. forall temp___413:int. forall temp___414:int.
   forall temp___415:int. (get2(size_attr__ua4__aggregate_def(temp___411),
   temp___412, temp___413, temp___414, temp___415) = of_rep2(temp___411))))
+
+logic b : bool
+
+logic i : int
+
+logic s : (int,character) farray
+
+logic mi : int
+
+logic v : r
+
+logic v1__split_fields : character
+
+logic v2__split_fields : character
+
+logic v2__split_discrs : bool
+
+logic v3__split_fields : character
+
+logic v4__split_fields : integer
+
+logic v5__split_fields : integer
+
+logic v5__split_fields1 : us_private
+
+logic v6__split_fields : integer
+
+logic v6__split_fields1 : integer
+
+logic v6__split_fields2 : us_private
+
+logic ca : (int,natural) farray
+
+logic ua : (int,natural) farray
+
+logic ca2 : (int,natural) farray
+
+logic ca3 : (int,natural) farray
+
+logic ca4 : (int,natural) farray
+
+logic ua2 : map
+
+logic ua3 : map1
+
+logic ua4 : map2
+
+logic o : integer
+
+logic o1 : integer
+
+logic size_attr__v4__assume : integer
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result3 : int
+
+logic mi1 : int
+
+logic result4 : integer
+
+logic v4__split_fields1 : integer
+
+logic result5 : (int,natural) farray
+
+logic ca1 : (int,natural) farray
+
+logic result6 : (int,natural) farray
+
+logic ua1 : (int,natural) farray
+
+logic result7 : (int,natural) farray
+
+logic ca21 : (int,natural) farray
+
+logic result8 : (int,natural) farray
+
+logic ca31 : (int,natural) farray
+
+logic result9 : (int,natural) farray
+
+logic ca41 : (int,natural) farray
+
+logic result10 : map
+
+logic ua21 : map
+
+logic result11 : map1
+
+logic ua31 : map1
+
+logic result12 : map2
+
+logic ua41 : map2
 
  (* File "size_attr.adb", line 3, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

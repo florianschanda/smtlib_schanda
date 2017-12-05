@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -319,64 +319,216 @@ function t15b__ref___projection(a: t15b__ref) : integer = (a).t15b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "sorters_not_global.adb", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,integer) farray. forall smallest:int.
-  forall current:int. forall temp___161:int. forall temp___160:int.
-  forall temp___159:(int,integer) farray. forall o:int. forall j:int.
-  forall temp___166:int. forall values1:(int,integer) farray.
-  forall smallest1:int. forall result:int. forall current1:int.
-  forall result1:int. forall smallest2:int.
-  forall values2:(int,integer) farray. forall values3:(int,integer) farray.
-  forall smallest3:int. forall current2:int.
-  forall values4:(int,integer) farray. forall smallest4:int.
-  forall current3:int. forall values5:(int,integer) farray.
-  forall smallest5:int. forall current4:int.
-  forall values6:(int,integer) farray. forall smallest6:int.
-  forall current5:int. forall values7:(int,integer) farray.
-  forall smallest7:int. forall current6:int.
-  forall values8:(int,integer) farray. forall smallest8:int.
-  forall current7:int. forall values9:(int,integer) farray.
-  forall smallest9:int. forall current8:int. (in_range2(limit) ->
-  (((((1 <= 64) -> in_range2(smallest)) and ((({ int__content = result } = {
-  int__content = current }) and (current1 = 1)) and ((((1 <= current1) and
-  (current1 <= limit)) and ((((temp___161 = current1) and
-  ((temp___160 = smallest) and ((temp___159 = values) and
-  ((((o = index_of_minimum(current1, limit, values)) and (in_range2(o) and
-  (((current1 <= o) and (o <= limit)) and
-  (forall j1:int. (((current1 <= j1) and (j1 <= limit)) ->
-  (to_rep((values[o])) <= to_rep((values[j1])))))))) and (({ int__content =
-  result1 } = { int__content = smallest }) and (smallest2 = o))) and
-  ((((not (smallest2 = current1)) and
+logic values : (int,integer) farray
+
+logic smallest : int
+
+logic current : int
+
+logic temp___161 : int
+
+logic temp___160 : int
+
+logic temp___159 : (int,integer) farray
+
+logic o : int
+
+logic j : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic j1 : int
+
+logic temp___162 : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic j2 : int
+
+logic temp___166 : int
+
+logic o8 : int
+
+logic o9 : integer
+
+logic o10 : int
+
+logic values1 : (int,integer) farray
+
+logic smallest1 : int
+
+logic result : int
+
+logic current1 : int
+
+logic result1 : int
+
+logic smallest2 : int
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+logic smallest3 : int
+
+logic current2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic current3 : int
+
+logic result4 : int
+
+logic smallest4 : int
+
+logic values4 : (int,integer) farray
+
+logic values5 : (int,integer) farray
+
+logic smallest5 : int
+
+logic current4 : int
+
+logic values6 : (int,integer) farray
+
+logic smallest6 : int
+
+logic current5 : int
+
+logic values7 : (int,integer) farray
+
+logic smallest7 : int
+
+logic current6 : int
+
+logic values8 : (int,integer) farray
+
+logic smallest8 : int
+
+logic current7 : int
+
+logic values9 : (int,integer) farray
+
+logic smallest9 : int
+
+logic current8 : int
+
+logic values10 : (int,integer) farray
+
+logic smallest10 : int
+
+logic current9 : int
+
+logic values11 : (int,integer) farray
+
+logic smallest11 : int
+
+logic current10 : int
+
+logic values12 : (int,integer) farray
+
+logic smallest12 : int
+
+logic current11 : int
+
+axiom H : in_range2(limit)
+
+axiom H1 : ((1 <= 64) -> in_range2(smallest))
+
+axiom H2 : (result = current)
+
+axiom H3 : (current1 = 1)
+
+axiom H4 : (((1 <= current1) and (current1 <= limit)) ->
+  (((temp___161 = current1) and ((temp___160 = smallest) and
+  ((temp___159 = values) and ((((o = index_of_minimum(current1, limit,
+  values)) and (in_range2(o) and (((current1 <= o) and (o <= limit)) and
+  (forall j3:int. (((current1 <= j3) and (j3 <= limit)) ->
+  (to_rep((values[o])) <= to_rep((values[j3])))))))) and
+  ((result1 = smallest) and (smallest2 = o))) and
+  ((((not (smallest2 = current1)) ->
   (((to_rep((values2[current1])) = to_rep((values[smallest2]))) and
   (to_rep((values2[smallest2])) = to_rep((values[current1])))) and
-  (forall j1:int. (((1 <= j1) and (j1 <= 64)) -> (((not (j1 = current1)) and
-  (not (j1 = smallest2))) ->
-  (to_rep((values2[j1])) = to_rep((values[j1])))))))) or
-  ((smallest2 = current1) and ((values2 = values) and
+  (forall j3:int. (((1 <= j3) and (j3 <= 64)) -> (((not (j3 = current1)) and
+  (not (j3 = smallest2))) ->
+  (to_rep((values2[j3])) = to_rep((values[j3])))))))) and
+  ((smallest2 = current1) -> ((values2 = values) and
   (values2 = values1)))) and
-  (((forall j1:int. (((1 <= j1) and (j1 <= (current2 - 1))) ->
-    (to_rep((values3[j1])) <= to_rep((values3[(j1 + 1)]))))) and
-  (forall j1:int. (((current2 <= j1) and (j1 <= limit)) ->
-  (to_rep((values3[current2])) <= to_rep((values3[j1])))))) and
+  (((forall j3:int. (((1 <= j3) and (j3 <= (current2 - 1))) ->
+    (to_rep((values3[j3])) <= to_rep((values3[(j3 + 1)]))))) and
+  (forall j3:int. (((current2 <= j3) and (j3 <= limit)) ->
+  (to_rep((values3[current2])) <= to_rep((values3[j3])))))) and
   (((((1 <= 64) -> in_range2(smallest3)) and ((1 <= limit) ->
   dynamic_property(1, limit, current2))) and ((1 <= current2) and
   (current2 <= limit))) and (current2 = limit)))))))) and
-  (((current2 = current3) and ((smallest3 = smallest4) and
-  (values3 = values4))) and ((current4 = current2) and
-  ((smallest5 = smallest3) and (values5 = values3))))) and ((({
-  int__content = current5 } = { int__content = current3 }) and (({
-  int__content = smallest6 } = { int__content = smallest4 }) and ({
-  map__content = values6 } = { map__content = values4 }))) and
-  ((current6 = current4) and ((smallest7 = smallest5) and
-  (values7 = values5)))))) or ((not ((1 <= current1) and
-  (current1 <= limit))) and (((current1 = current5) and (({ int__content =
-  smallest6 } = { int__content = smallest }) and ({ map__content = values6
-  } = { map__content = values }))) and ((current6 = current1) and
-  ((smallest7 = smallest1) and (values7 = values1)))))))) and ((({
-  int__content = current7 } = { int__content = current5 }) and (({
-  int__content = smallest8 } = { int__content = smallest6 }) and ({
-  map__content = values8 } = { map__content = values6 }))) and
-  ((current8 = current6) and ((smallest9 = smallest7) and
-  (values9 = values7))))) -> (((1 <= j) and (j <= (limit - 1))) ->
-  (((temp___166 = (j + 1)) and in_range1((j + 1))) -> (1 <= temp___166))))))
+  (((current2 = current6) and ((smallest3 = smallest7) and
+  (values3 = values7))) and ((current7 = current2) and
+  ((smallest8 = smallest3) and (values8 = values3))))))
+
+axiom H5 : (((1 <= current1) and (current1 <= limit)) ->
+  (current8 = current6))
+
+axiom H6 : (((1 <= current1) and (current1 <= limit)) ->
+  (smallest9 = smallest7))
+
+axiom H7 : (((1 <= current1) and (current1 <= limit)) -> (values9 = values7))
+
+axiom H8 : (((1 <= current1) and (current1 <= limit)) ->
+  (current9 = current7))
+
+axiom H9 : (((1 <= current1) and (current1 <= limit)) ->
+  (smallest10 = smallest8))
+
+axiom H10 : (((1 <= current1) and (current1 <= limit)) ->
+  (values10 = values8))
+
+axiom H11 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (current1 = current8))
+
+axiom H12 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (smallest9 = smallest))
+
+axiom H13 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (values9 = values))
+
+axiom H14 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (current9 = current1))
+
+axiom H15 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (smallest10 = smallest1))
+
+axiom H16 : ((not ((1 <= current1) and (current1 <= limit))) ->
+  (values10 = values1))
+
+axiom H17 : (current10 = current8)
+
+axiom H18 : (smallest11 = smallest9)
+
+axiom H19 : (values11 = values9)
+
+axiom H20 : (current11 = current9)
+
+axiom H21 : (smallest12 = smallest10)
+
+axiom H22 : (values12 = values10)
+
+axiom H23 : (1 <= j2)
+
+axiom H24 : (j2 <= (limit - 1))
+
+axiom H25 : ((temp___166 = (j2 + 1)) and in_range1((j2 + 1)))
+
+ (* File "sorters_not_global.adb", line 30, characters 0-0 *)
+goal WP_parameter_def : (1 <= temp___166)

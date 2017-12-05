@@ -346,17 +346,106 @@ axiom get_month_length__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "dates.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall current_date__split_fields:day_type.
-  forall current_date__split_fields1:month_type.
-  forall current_date__split_fields2:year_type. forall o:int.
-  forall result:bool. ((not (bool_eq4({ us_split_fields1 = {
-  rec__dates__date__day = current_date__split_fields;
-  rec__dates__date__month = current_date__split_fields1;
-  rec__dates__date__year = current_date__split_fields2 } },
-  maximum_date(void)) = true)) ->
-  ((((o = get_month_length(to_rep(current_date__split_fields2),
+logic current_date__split_fields : day_type
+
+logic current_date__split_fields1 : month_type
+
+logic current_date__split_fields2 : year_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : day_type
+
+logic o3 : day_type
+
+logic o4 : month_type
+
+logic o5 : year_type
+
+logic temp___265 : day_type
+
+logic temp___2651 : month_type
+
+logic temp___2652 : year_type
+
+logic o6 : int
+
+logic o7 : day_type
+
+logic o8 : day_type
+
+logic o9 : month_type
+
+logic o10 : year_type
+
+logic temp___259 : day_type
+
+logic temp___2591 : month_type
+
+logic temp___2592 : year_type
+
+logic o11 : month_type
+
+logic o12 : day_type
+
+logic o13 : month_type
+
+logic o14 : year_type
+
+logic temp___261 : day_type
+
+logic temp___2611 : month_type
+
+logic temp___2612 : year_type
+
+logic o15 : int
+
+logic result : bool
+
+logic result1 : day_type
+
+logic result2 : month_type
+
+logic result3 : year_type
+
+logic current_date__split_fields3 : day_type
+
+logic current_date__split_fields4 : month_type
+
+logic current_date__split_fields5 : year_type
+
+logic result4 : day_type
+
+logic result5 : month_type
+
+logic result6 : year_type
+
+logic current_date__split_fields6 : day_type
+
+logic current_date__split_fields7 : month_type
+
+logic current_date__split_fields8 : year_type
+
+logic result7 : day_type
+
+logic result8 : month_type
+
+logic result9 : year_type
+
+logic current_date__split_fields9 : day_type
+
+logic current_date__split_fields10 : month_type
+
+logic current_date__split_fields11 : year_type
+
+axiom H : (not (bool_eq4({ us_split_fields1 = { rec__dates__date__day =
+  current_date__split_fields; rec__dates__date__month =
+  current_date__split_fields1; rec__dates__date__year =
+  current_date__split_fields2 } }, maximum_date(void)) = true))
+
+axiom H1 : ((o = get_month_length(to_rep(current_date__split_fields2),
   to_rep1(current_date__split_fields1))) and (in_range2(o) and
   (((((((((((((to_rep1(current_date__split_fields1) = 1) -> (o = 31)) and
   ((to_rep1(current_date__split_fields1) = 2) -> ((o = 28) or (o = 29)))) and
@@ -369,8 +458,13 @@ goal WP_parameter_def :
   ((to_rep1(current_date__split_fields1) = 9) -> (o = 30))) and
   ((to_rep1(current_date__split_fields1) = 10) -> (o = 31))) and
   ((to_rep1(current_date__split_fields1) = 11) -> (o = 30))) and
-  ((to_rep1(current_date__split_fields1) = 12) -> (o = 31))))) and
-  (((to_rep2(current_date__split_fields) <  o) and (result = true)) or
-  ((not (to_rep2(current_date__split_fields) <  o)) and
-  (result = false)))) -> ((result = true) ->
-  in_range2((to_rep2(current_date__split_fields) + 1))))))
+  ((to_rep1(current_date__split_fields1) = 12) -> (o = 31)))))
+
+axiom H2 : (((to_rep2(current_date__split_fields) <  o) ->
+  (result = true)) and ((not (to_rep2(current_date__split_fields) <  o)) ->
+  (result = false)))
+
+axiom H3 : (result = true)
+
+ (* File "dates.ads", line 6, characters 0-0 *)
+goal WP_parameter_def : in_range2((to_rep2(current_date__split_fields) + 1))

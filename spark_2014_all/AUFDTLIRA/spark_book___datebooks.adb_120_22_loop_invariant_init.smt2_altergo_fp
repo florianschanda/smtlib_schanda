@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -1554,62 +1554,192 @@ axiom def_axiom :
   (forall temp___411:int. (((temp___406(temp___408, temp___409,
   temp___410)).elts1[temp___411]) = of_rep(temp___408)))))
 
- (* File "datebooks.adb", line 81, characters 0-0 *)
-goal WP_parameter_def :
-  (forall description:(int,character) farray. forall status:int.
-  forall i:int. forall temp___413:(int,character) farray.
-  forall temp___4131:t1. forall temp___414:(int,character) farray.
-  forall temp___4141:t. forall temp___415:(int,character) farray.
-  forall temp___4151:t. forall o:(int,character) farray. forall o1:int.
-  forall o2:int. forall result:int. forall status1:int.
-  forall result1:(int,character) farray.
-  forall description1:(int,character) farray. forall result2:int.
-  forall i1:int. forall status2:int. forall i2:int. forall j:int.
-  forall result3:bool. forall result4:int. forall j1:int.
-  (dynamic_property(1, 2147483647, to_rep1(description__first),
-  to_rep1(description__last)) -> (((0 <= 3) -> in_range12(status)) ->
-  (((1 <= 64) -> in_range11(i)) -> (((result = status) and (status1 = 3)) ->
-  (((((((to_rep1(first2((temp___406(32, to_rep1(description__first),
-  to_rep1(description__last))).rt1)) = to_rep1(description__first)) and
-  ((to_rep1(last2((temp___406(32, to_rep1(description__first),
-  to_rep1(description__last))).rt1)) = to_rep1(description__last)) and ({
-  elts1 = temp___413; rt1 = temp___4131 } = temp___406(32,
-  to_rep1(description__first), to_rep1(description__last))))) and
-  ((temp___413 = temp___414) and (mk(to_rep1(first2(temp___4131)),
-  to_rep1(last2(temp___4131))) = temp___4141))) and
-  ((((to_rep1(first(temp___4141)) <= to_rep1(last(temp___4141))) and
-  (((to_rep1(description__first) <= to_rep1(description__last)) and
-  (((to_rep1(last(temp___4141)) - to_rep1(first(temp___4141))) + 1) = ((to_rep1(description__last) - to_rep1(description__first)) + 1))) or
-  ((not (to_rep1(description__first) <= to_rep1(description__last))) and
-  (((to_rep1(last(temp___4141)) - to_rep1(first(temp___4141))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___4141)) <= to_rep1(last(temp___4141)))) and
-  (((to_rep1(description__first) <= to_rep1(description__last)) and
-  (0 = ((to_rep1(description__last) - to_rep1(description__first)) + 1))) or
-  (not (to_rep1(description__first) <= to_rep1(description__last)))))) and
-  ((temp___415 = temp___414) and (temp___4151 = temp___4141)))) and
-  (o = slide(temp___415, to_rep1(first(temp___4151)),
-  to_rep1(description__first)))) and ((result1 = description) and
-  (description1 = o))) -> (((result2 = i) and (i1 = 1)) -> ((((0 <= 3) ->
-  in_range12(status2)) and ((1 <= 64) -> in_range11(i2))) ->
-  ((bool_eq15((((book[i2])).us_split_fields7).rec__datebooks__event_record__date,
+logic description : (int,character) farray
+
+logic status : int
+
+logic i : int
+
+logic temp___413 : (int,character) farray
+
+logic temp___4131 : t1
+
+logic temp___414 : (int,character) farray
+
+logic temp___4141 : t
+
+logic temp___415 : (int,character) farray
+
+logic temp___4151 : t
+
+logic o : (int,character) farray
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic temp___417 : int
+
+logic o8 : character
+
+logic o9 : int
+
+logic o10 : (int,character) farray
+
+logic o11 : int
+
+logic result : int
+
+logic status1 : int
+
+logic result1 : (int,character) farray
+
+logic description1 : (int,character) farray
+
+logic result2 : int
+
+logic i1 : int
+
+logic description2 : (int,character) farray
+
+logic status2 : int
+
+logic i2 : int
+
+logic j : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic j1 : int
+
+logic description3 : (int,character) farray
+
+logic j2 : int
+
+logic result5 : (int,character) farray
+
+logic description4 : (int,character) farray
+
+logic result6 : int
+
+logic j3 : int
+
+logic description5 : (int,character) farray
+
+logic status3 : int
+
+logic j4 : int
+
+logic description6 : (int,character) farray
+
+logic status4 : int
+
+logic j5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(description__first),
+  to_rep1(description__last))
+
+axiom H1 : ((0 <= 3) -> in_range12(status))
+
+axiom H2 : ((1 <= 64) -> in_range11(i))
+
+axiom H3 : (result = status)
+
+axiom H4 : (status1 = 3)
+
+axiom H5 : (to_rep1(first2((temp___406(32, to_rep1(description__first),
+  to_rep1(description__last))).rt1)) = to_rep1(description__first))
+
+axiom H6 : (to_rep1(last2((temp___406(32, to_rep1(description__first),
+  to_rep1(description__last))).rt1)) = to_rep1(description__last))
+
+axiom H7 : ({ elts1 = temp___413; rt1 = temp___4131 } = temp___406(32,
+  to_rep1(description__first), to_rep1(description__last)))
+
+axiom H8 : (temp___413 = temp___414)
+
+axiom H9 : (mk(to_rep1(first2(temp___4131)),
+  to_rep1(last2(temp___4131))) = temp___4141)
+
+axiom H10 : (((to_rep1(first(temp___4141)) <= to_rep1(last(temp___4141))) ->
+  (((to_rep1(description__first) <= to_rep1(description__last)) ->
+  (((to_rep1(last(temp___4141)) - to_rep1(first(temp___4141))) + 1) = ((to_rep1(description__last) - to_rep1(description__first)) + 1))) and
+  ((not (to_rep1(description__first) <= to_rep1(description__last))) ->
+  (((to_rep1(last(temp___4141)) - to_rep1(first(temp___4141))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___4141)) <= to_rep1(last(temp___4141)))) ->
+  ((to_rep1(description__first) <= to_rep1(description__last)) ->
+  (0 = ((to_rep1(description__last) - to_rep1(description__first)) + 1)))))
+
+axiom H11 : ((temp___415 = temp___414) and (temp___4151 = temp___4141))
+
+axiom H12 : (o = slide(temp___415, to_rep1(first(temp___4151)),
+  to_rep1(description__first)))
+
+axiom H13 : (result1 = description)
+
+axiom H14 : (description1 = o)
+
+axiom H15 : (result2 = i)
+
+axiom H16 : (i1 = 1)
+
+axiom H17 : (((0 <= 3) -> in_range12(status2)) and ((1 <= 64) ->
+  in_range11(i2)))
+
+axiom H18 :
+  (bool_eq15((((book[i2])).us_split_fields7).rec__datebooks__event_record__date,
   { us_split_fields5 = { rec__dates__datetime__date_part = {
   us_split_fields1 = { rec__dates__date__day = date;
   rec__dates__date__month = date1; rec__dates__date__year = date2 } };
   rec__dates__datetime__time_part = { us_split_fields3 = {
   rec__dates__time__hour = date3; rec__dates__time__minute = date4;
-  rec__dates__time__second = date5 } } } }) = true) ->
-  ((((((to_rep1(description__first) <= to_rep1(description__last)) and
-  (o1 = ((to_rep1(description__last) - to_rep1(description__first)) + 1))) or
-  ((not (to_rep1(description__first) <= to_rep1(description__last))) and
-  (o1 = 0))) and ((o2 = o1) and in_range1(o1))) and
-  (((o2 <  to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size)) and
-  (result3 = true)) or
-  ((not (o2 <  to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size))) and
-  (result3 = false)))) -> ((not (result3 = true)) ->
-  (((to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size) = r12b) and
-  in_range10(r12b)) -> (((result4 = j) and (j1 = 1)) -> (((1 <= j1) and
-  (j1 <= r12b)) ->
+  rec__dates__time__second = date5 } } } }) = true)
+
+axiom H19 : ((to_rep1(description__first) <= to_rep1(description__last)) ->
+  (o1 = ((to_rep1(description__last) - to_rep1(description__first)) + 1)))
+
+axiom H20 :
+  ((not (to_rep1(description__first) <= to_rep1(description__last))) ->
+  (o1 = 0))
+
+axiom H21 : ((o2 = o1) and in_range1(o1))
+
+axiom H22 :
+  (((o2 <  to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size)) ->
+  (result3 = true)) and
+  ((not (o2 <  to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size))) ->
+  (result3 = false)))
+
+axiom H23 : (not (result3 = true))
+
+axiom H24 :
+  (to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size) = r12b)
+
+axiom H25 : in_range10(r12b)
+
+axiom H26 : (result4 = j)
+
+axiom H27 : (j1 = 1)
+
+axiom H28 : (1 <= j1)
+
+axiom H29 : (j1 <= r12b)
+
+ (* File "datebooks.adb", line 81, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep1(description__first) <= to_rep1(description__last)) ->
   (to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size) <= ((to_rep1(description__last) - to_rep1(description__first)) + 1))) and
   ((not (to_rep1(description__first) <= to_rep1(description__last))) ->
-  (to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size) <= 0)))))))))))))))))
+  (to_rep8((((book[i2])).us_split_fields7).rec__datebooks__event_record__description_size) <= 0)))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -487,12 +487,74 @@ axiom month_length__def_axiom :
   (month_length = dates__get_month_length__month_length__aggregate_def(31,
   28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31))
 
+logic length : int
+
+logic c9b : bool
+
+logic result__ : bool
+
+logic dates__get_month_length__result : int
+
+logic result : bool
+
+logic result__1 : bool
+
+logic result1 : bool
+
+logic result__2 : bool
+
+logic result2 : bool
+
+logic c9b1 : bool
+
+logic result3 : int
+
+logic length1 : int
+
+logic result4 : int
+
+logic length2 : int
+
+logic result5 : int
+
+logic dates__get_month_length__result1 : int
+
+logic dates__get_month_length__result2 : int
+
+logic dates__get_month_length__result3 : int
+
+logic length3 : int
+
+logic c9b2 : bool
+
+logic result__3 : bool
+
+logic dates__get_month_length__result4 : int
+
+logic length4 : int
+
+logic c9b3 : bool
+
+logic result__4 : bool
+
+logic dates__get_month_length__result5 : int
+
+axiom H : in_range1(year)
+
+axiom H1 : in_range2(month)
+
+axiom H2 : (dates__get_month_length__month_length__aggregate_def(31, 28, 31,
+  30, 31, 30, 31, 31, 30, 31, 30, 31) = month_length)
+
+axiom H3 : ((1 <= 31) -> in_range3(length))
+
+axiom H4 : (year = c8b)
+
+axiom H5 : in_range1(c8b)
+
+axiom H6 : (result = result__)
+
+axiom H7 : (result__1 = of_int(0))
+
  (* File "dates.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall length:int. forall result__:bool. forall result:bool.
-  forall result__1:bool. (in_range1(year) -> (in_range2(month) ->
-  ((dates__get_month_length__month_length__aggregate_def(31, 28, 31, 30, 31,
-  30, 31, 31, 30, 31, 30, 31) = month_length) -> (((1 <= 31) ->
-  in_range3(length)) -> (((year = c8b) and in_range1(c8b)) -> ((({
-  bool__content = result } = { bool__content = result__ }) and
-  (result__1 = of_int(0))) -> (not (4 = 0)))))))))
+goal WP_parameter_def : (not (4 = 0))

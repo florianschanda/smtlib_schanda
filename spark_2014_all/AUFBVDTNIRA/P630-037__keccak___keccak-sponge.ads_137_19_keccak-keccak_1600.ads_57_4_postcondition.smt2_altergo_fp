@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -277,18 +277,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1727,23 +1727,48 @@ logic ctx5 : states
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic keccak__keccak_1600__sponge__rate_of__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic keccak__keccak_1600__sponge__rate_of__result1 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result2 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result3 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result4 : int
+
+logic keccak__keccak_1600__sponge__rate_of__result5 : int
+
+logic result1 : int
+
+axiom H :
+  (keccak__keccak_1600__sponge__rate_of__result1 = keccak__keccak_1600__sponge__rate_of__result2)
+
+axiom H1 :
+  (keccak__keccak_1600__sponge__rate_of__result3 = keccak__keccak_1600__sponge__rate_of__result1)
+
+axiom H2 : ((o = (to_rep(ctx4) * 8)) and in_range((to_rep(ctx4) * 8)))
+
+axiom H3 : ((o1 = o) and in_range1(o))
+
+axiom H4 : (result = keccak__keccak_1600__sponge__rate_of__result)
+
+axiom H5 : (keccak__keccak_1600__sponge__rate_of__result1 = o1)
+
+axiom H6 :
+  (keccak__keccak_1600__sponge__rate_of__result4 = keccak__keccak_1600__sponge__rate_of__result2)
+
+axiom H7 :
+  (keccak__keccak_1600__sponge__rate_of__result5 = keccak__keccak_1600__sponge__rate_of__result3)
+
+axiom H8 : (result1 = keccak__keccak_1600__sponge__rate_of__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall keccak__keccak_1600__sponge__rate_of__result:int. forall o:int.
-  forall o1:int. forall result:int.
-  forall keccak__keccak_1600__sponge__rate_of__result1:int.
-  forall keccak__keccak_1600__sponge__rate_of__result2:int.
-  forall keccak__keccak_1600__sponge__rate_of__result3:int.
-  forall keccak__keccak_1600__sponge__rate_of__result4:int.
-  forall keccak__keccak_1600__sponge__rate_of__result5:int.
-  (forall result1:int.
-  ((((((keccak__keccak_1600__sponge__rate_of__result1 = keccak__keccak_1600__sponge__rate_of__result2) and
-  (keccak__keccak_1600__sponge__rate_of__result3 = keccak__keccak_1600__sponge__rate_of__result1)) and
-  ((((o = (to_rep(ctx4) * 8)) and in_range((to_rep(ctx4) * 8))) and
-  ((o1 = o) and in_range1(o))) and
-  ((result = keccak__keccak_1600__sponge__rate_of__result) and
-  (keccak__keccak_1600__sponge__rate_of__result1 = o1)))) and
-  ((keccak__keccak_1600__sponge__rate_of__result4 = keccak__keccak_1600__sponge__rate_of__result2) and
-  (keccak__keccak_1600__sponge__rate_of__result5 = keccak__keccak_1600__sponge__rate_of__result3))) and
-  (result1 = keccak__keccak_1600__sponge__rate_of__result4)) ->
-  (keccak__keccak_1600__sponge__rate_of__result4 <  1600))))
+  (keccak__keccak_1600__sponge__rate_of__result4 <  1600)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type reading
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 100))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 100))
 
 logic bool_eq1 : int, int -> bool
 
@@ -155,10 +155,27 @@ logic r : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic high_reading : int
+
+logic high_reading1 : int
+
+logic result : int
+
+logic high_reading2 : int
+
+logic high_reading3 : int
+
+logic high_reading4 : int
+
+axiom H : in_range1(high_reading)
+
+axiom H1 : in_range1(r)
+
+axiom H2 : ((0 <= r) and (r <= 100))
+
+axiom H3 : ((- 1) <  get_highest_reading(high_reading3))
+
+axiom H4 : in_range1(high_reading3)
+
  (* File "refinement.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall high_reading:int. forall high_reading1:int.
-  ((in_range1(high_reading) and (in_range1(r) and (((0 <= r) and
-  (r <= 100)) and (((-1) <  get_highest_reading(high_reading1)) and
-  in_range1(high_reading1))))) ->
-  ((-1) <  get_highest_reading(high_reading1))))
+goal WP_parameter_def : ((- 1) <  get_highest_reading(high_reading3))

@@ -157,6 +157,7 @@
 (declare-fun capacity__function_guard (Int us_rep) Bool)
 (assert (forall ((container us_rep)) (! (let ((result (length container))) (and (<= result (capacity container)) (dynamic_invariant2 result true false true))) :pattern ((length container)))))
 (declare-const container__split_fields capacity_range1)
+(declare-const us Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) (to_rep1 container__split_fields)))
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity container__split_discrs)) r222s))
 (assert (in_range r222s))

@@ -834,5 +834,21 @@ type s18b__ref = { s18b__content : us_rep
 
 function s18b__ref___projection(a: s18b__ref) : us_rep = (a).s18b__content
 
+logic h1__split_fields : bool
+
+logic h1__split_fields1 : natural
+
+logic h1__split_fields2 : bool
+
+logic temp___present_389 : bool
+
+logic tests__test_15__R17b__assume : bool
+
+logic tests__test_15__R17b__assume1 : bool
+
+logic tests__test_15__R17b__assume2 : natural
+
+logic tests__test_15__R17b__assume3 : bool
+
  (* File "tests.adb", line 301, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

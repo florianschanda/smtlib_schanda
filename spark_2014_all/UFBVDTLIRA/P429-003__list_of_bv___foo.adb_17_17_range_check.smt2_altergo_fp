@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1356,6 +1356,20 @@ axiom w_get__post_axiom :
   (forall witness1:int [w_get(container, witness1)]. ((in_range(witness1) and
   (has_witness(container, witness1) = true)) -> in_range4(w_get(container,
   witness1)))))
+
+logic x : t
+
+logic l__split_fields : us_main_type
+
+logic us : int
+
+logic result : t
+
+logic x1 : t
+
+logic foo__lists__append__container__fields : us_main_type
+
+axiom H : true
 
  (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
 goal WP_parameter_def : in_range(5)

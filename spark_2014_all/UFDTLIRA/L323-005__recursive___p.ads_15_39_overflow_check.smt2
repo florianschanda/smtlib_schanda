@@ -48,6 +48,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range1 x))
 (assert (< 1 x))
 (assert (and (= o (- x 1)) (in_range1 (- x 1))))

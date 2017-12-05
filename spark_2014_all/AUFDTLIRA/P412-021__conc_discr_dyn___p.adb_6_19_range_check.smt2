@@ -291,6 +291,7 @@
 (declare-const self__3 natural)
 (declare-const self__4 (Array Int natural))
 (declare-const self__5 t1)
+(declare-const us Int)
 (assert (dynamic_invariant (mk___rep2 (mk___split_discrs1 self__ self__1) (mk___split_fields2 self__2 (mk___rep1 (mk___split_discrs self__3) (mk___split_fields1 (mk___t1 self__4 self__5))))) true false true))
 (assert (not (dynamic_property4 1 (last4 (mk___rep2 (mk___split_discrs1 self__ self__1) (mk___split_fields2 self__2 (mk___rep1 (mk___split_discrs self__3) (mk___split_fields1 (mk___t1 self__4 self__5)))))) 3)))
 (check-sat)

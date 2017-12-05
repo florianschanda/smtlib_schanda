@@ -152,5 +152,39 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom x1__def_axiom : (x1 = of_int(1))
 
+logic pack__query_x1_bis__result : bool
+
+logic result : bool
+
+logic pack__query_x1_bis__result1 : bool
+
+logic pack__query_x1_bis__result2 : bool
+
+logic pack__query_x1_bis__result3 : bool
+
+logic pack__query_x1_bis__result4 : bool
+
+logic pack__query_x1_bis__result5 : bool
+
+logic result1 : bool
+
+axiom H : (of_int(1) = x1)
+
+axiom H1 : (pack__query_x1_bis__result1 = pack__query_x1_bis__result2)
+
+axiom H2 : (pack__query_x1_bis__result3 = pack__query_x1_bis__result1)
+
+axiom H3 : (result = pack__query_x1_bis__result)
+
+axiom H4 : (pack__query_x1_bis__result1 = x1)
+
+axiom H5 : (pack__query_x1_bis__result4 = pack__query_x1_bis__result2)
+
+axiom H6 : (pack__query_x1_bis__result5 = pack__query_x1_bis__result3)
+
+axiom H7 : (result1 = pack__query_x1_bis__result4)
+
+axiom H8 : (pack__query_x1_bis__result4 = true)
+
  (* File "pack.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

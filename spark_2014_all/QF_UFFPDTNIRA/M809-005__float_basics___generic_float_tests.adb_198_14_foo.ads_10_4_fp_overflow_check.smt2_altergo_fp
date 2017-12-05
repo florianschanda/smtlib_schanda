@@ -1119,10 +1119,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic z : t
+
+logic o : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(y)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(z))
 
 logic fliteral2 : t
 
@@ -1134,8 +1144,7 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0e-1))
 
+axiom H3 : (eq(x, fliteral2) and eq(y, fliteral3))
+
  (* File "generic_float_tests.adb", line 187, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(z)) -> ((eq(x, fliteral2) and eq(y,
-  fliteral3)) -> tqtisFinite(div(NearestTiesToEven, x, y)))))))
+goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, x, y))

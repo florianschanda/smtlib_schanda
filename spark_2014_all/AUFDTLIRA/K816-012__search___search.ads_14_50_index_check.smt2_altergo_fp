@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -372,103 +372,503 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
+logic found1 : bool
+
+logic found2 : bool
+
+logic index1 : int
+
+logic index2 : int
+
+logic found : int
+
+logic i : int
+
+logic temp___163 : int
+
+logic temp___162 : int
+
+logic temp___161 : bool
+
+logic temp___160 : bool
+
+logic temp___159 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : int
+
+logic result : int
+
+logic found3 : int
+
+logic result1 : bool
+
+logic found11 : bool
+
+logic result2 : int
+
+logic index11 : int
+
+logic result3 : bool
+
+logic found21 : bool
+
+logic result4 : int
+
+logic index21 : int
+
+logic result5 : int
+
+logic i1 : int
+
+logic found12 : bool
+
+logic found22 : bool
+
+logic index12 : int
+
+logic index22 : int
+
+logic found4 : int
+
+logic i2 : int
+
+logic result6 : bool
+
+logic found13 : bool
+
+logic result7 : int
+
+logic index13 : int
+
+logic result8 : int
+
+logic found5 : int
+
+logic result9 : bool
+
+logic found23 : bool
+
+logic result10 : int
+
+logic index23 : int
+
+logic result11 : int
+
+logic found6 : int
+
+logic found14 : bool
+
+logic found24 : bool
+
+logic index14 : int
+
+logic index24 : int
+
+logic found7 : int
+
+logic i3 : int
+
+logic found15 : bool
+
+logic found25 : bool
+
+logic index15 : int
+
+logic index25 : int
+
+logic found8 : int
+
+logic i4 : int
+
+logic found16 : bool
+
+logic found26 : bool
+
+logic index16 : int
+
+logic index26 : int
+
+logic found9 : int
+
+logic i5 : int
+
+logic found17 : bool
+
+logic found27 : bool
+
+logic index17 : int
+
+logic index27 : int
+
+logic found10 : int
+
+logic i6 : int
+
+logic found18 : bool
+
+logic found28 : bool
+
+logic index18 : int
+
+logic index28 : int
+
+logic found19 : int
+
+logic i7 : int
+
+logic found110 : bool
+
+logic found29 : bool
+
+logic index19 : int
+
+logic index29 : int
+
+logic found20 : int
+
+logic i8 : int
+
+logic result12 : bool
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(table1)),
+  to_rep(last(table1)))
+
+axiom H1 : in_range1(value1)
+
+axiom H2 : in_range1(value2)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(index1))
+
+axiom H4 : (((- 2147483648) <= 2147483647) -> in_range1(index2))
+
+axiom H5 : (result = found)
+
+axiom H6 : (found3 = 0)
+
+axiom H7 : in_range2(found3)
+
+axiom H8 : (result1 = found1)
+
+axiom H9 : (found11 = of_int(0))
+
+axiom H10 : (result2 = index1)
+
+axiom H11 : (index11 = 0)
+
+axiom H12 : (result3 = found2)
+
+axiom H13 : (found21 = of_int(0))
+
+axiom H14 : (result4 = index2)
+
+axiom H15 : (index21 = 0)
+
+axiom H16 : (result5 = i)
+
+axiom H17 : (i1 = to_rep(first(table1)))
+
+axiom H18 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (temp___163 = index21))
+
+axiom H19 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (temp___162 = index11))
+
+axiom H20 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (temp___161 = found21))
+
+axiom H21 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (temp___160 = found11))
+
+axiom H22 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (temp___159 = found3))
+
+axiom H23 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((((0 <= 2147483647) ->
+  in_range2(found4)) and (((- 2147483648) <= 2147483647) ->
+  in_range1(index12))) and (((- 2147483648) <= 2147483647) ->
+  in_range1(index22))) and ((to_rep(first(table1)) <= i2) and
+  (i2 <= to_rep(last(table1))))))
+
+axiom H24 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((((found4 = 0) and
+  (not (found12 = true))) and (not (found22 = true))) or ((found4 = 1) and
+  ((found12 = true) or (found22 = true)))) or (((found4 = 2) and
+  (found12 = true)) and (found22 = true))))
+
+axiom H25 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not (found12 = true)) or
+  (not (found22 = true))))
+
+axiom H26 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not (found12 = true)) or
+  (to_rep((table[index12])) = value1)))
+
+axiom H27 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not (found22 = true)) or
+  (to_rep((table[index22])) = value2)))
+
+axiom H28 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found4 <  2))
+
+axiom H29 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (found12 = result6)))
+
+axiom H30 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (found13 = of_int(1))))
+
+axiom H31 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (index12 = result7)))
+
+axiom H32 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (index13 = i2)))
+
+axiom H33 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> ((o = (found4 + 1)) and
+  in_range1((found4 + 1)))))
+
+axiom H34 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (found4 = result8)))
+
+axiom H35 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (found5 = o)))
+
+axiom H36 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> ((found13 = true) and (index13 = i2))))
+
+axiom H37 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found12 = true)) and
+  (to_rep((table[i2])) = value1)) -> (found5 <= 2)))
+
+axiom H38 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found12 = true)) and
+  (to_rep((table[i2])) = value1))) -> (found5 = found4)))
+
+axiom H39 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found12 = true)) and
+  (to_rep((table[i2])) = value1))) -> (index13 = index12)))
+
+axiom H40 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found12 = true)) and
+  (to_rep((table[i2])) = value1))) -> (found13 = found12)))
+
+axiom H41 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (found22 = result9)))
+
+axiom H42 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (found23 = of_int(1))))
+
+axiom H43 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (index22 = result10)))
+
+axiom H44 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (index23 = i2)))
+
+axiom H45 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> ((o1 = (found5 + 1)) and
+  in_range1((found5 + 1)))))
+
+axiom H46 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (found5 = result11)))
+
+axiom H47 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (found6 = o1)))
+
+axiom H48 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> ((found23 = true) and (index23 = i2))))
+
+axiom H49 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (((not (found22 = true)) and
+  (to_rep((table[i2])) = value2)) -> (found6 <= 2)))
+
+axiom H50 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found22 = true)) and
+  (to_rep((table[i2])) = value2))) -> (found6 = found5)))
+
+axiom H51 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found22 = true)) and
+  (to_rep((table[i2])) = value2))) -> (index23 = index22)))
+
+axiom H52 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((not ((not (found22 = true)) and
+  (to_rep((table[i2])) = value2))) -> (found23 = found22)))
+
+axiom H53 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> ((found6 = 2) or ((not (found6 = 2)) and
+  (i2 = to_rep(last(table1))))))
+
+axiom H54 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (i3 = i2))
+
+axiom H55 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found7 = found6))
+
+axiom H56 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index24 = index23))
+
+axiom H57 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index14 = index13))
+
+axiom H58 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found24 = found23))
+
+axiom H59 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found14 = found13))
+
+axiom H60 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (i4 = i2))
+
+axiom H61 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found8 = found6))
+
+axiom H62 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index25 = index23))
+
+axiom H63 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index15 = index13))
+
+axiom H64 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found25 = found23))
+
+axiom H65 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found15 = found13))
+
+axiom H66 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (i5 = i3))
+
+axiom H67 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found9 = found7))
+
+axiom H68 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index26 = index24))
+
+axiom H69 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index16 = index14))
+
+axiom H70 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found26 = found24))
+
+axiom H71 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found16 = found14))
+
+axiom H72 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (i6 = i4))
+
+axiom H73 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found10 = found8))
+
+axiom H74 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index27 = index25))
+
+axiom H75 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (index17 = index15))
+
+axiom H76 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found27 = found25))
+
+axiom H77 : (((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1)))) -> (found17 = found15))
+
+axiom H78 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (i5 = i1))
+
+axiom H79 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found9 = found3))
+
+axiom H80 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (index26 = index21))
+
+axiom H81 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (index16 = index11))
+
+axiom H82 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found26 = found21))
+
+axiom H83 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found16 = found11))
+
+axiom H84 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (i6 = i1))
+
+axiom H85 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found10 = found3))
+
+axiom H86 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (index27 = index21))
+
+axiom H87 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (index17 = index11))
+
+axiom H88 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found27 = found21))
+
+axiom H89 : ((not ((to_rep(first(table1)) <= i1) and
+  (i1 <= to_rep(last(table1))))) -> (found17 = found11))
+
+axiom H90 : (i7 = i5)
+
+axiom H91 : (found19 = found9)
+
+axiom H92 : (index28 = index26)
+
+axiom H93 : (index18 = index16)
+
+axiom H94 : (found28 = found26)
+
+axiom H95 : (found18 = found16)
+
+axiom H96 : (i8 = i6)
+
+axiom H97 : (found20 = found10)
+
+axiom H98 : (index29 = index27)
+
+axiom H99 : (index19 = index17)
+
+axiom H100 : (found29 = found27)
+
+axiom H101 : (found110 = found17)
+
+axiom H102 : ((not (found18 = true)) -> (result12 = true))
+
+axiom H103 : ((found18 = true) -> ((to_rep(first(table1)) <= index18) and
+  (index18 <= to_rep(last(table1)))))
+
+axiom H104 : ((found18 = true) -> (o2 = index18))
+
+axiom H105 : ((found18 = true) -> (o3 = (table[o2])))
+
+axiom H106 : ((found18 = true) -> (o4 = to_rep(o3)))
+
+axiom H107 : ((found18 = true) -> (((o4 = value1) -> (result12 = true)) and
+  ((not (o4 = value1)) -> (result12 = false))))
+
+axiom H108 : (result12 = true)
+
+axiom H109 : (found28 = true)
+
  (* File "search.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found1:bool. forall found2:bool. forall index1:int.
-  forall index2:int. forall found:int. forall i:int. forall temp___163:int.
-  forall temp___162:int. forall temp___161:bool. forall temp___160:bool.
-  forall temp___159:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:integer. forall o4:int. forall result:int. forall found3:int.
-  forall result1:bool. forall found11:bool. forall result2:int.
-  forall index11:int. forall result3:bool. forall found21:bool.
-  forall result4:int. forall index21:int. forall result5:int. forall i1:int.
-  forall found12:bool. forall found22:bool. forall index12:int.
-  forall index22:int. forall found4:int. forall i2:int. forall result6:bool.
-  forall found13:bool. forall result7:int. forall index13:int.
-  forall result8:int. forall found5:int. forall result9:bool.
-  forall found23:bool. forall result10:int. forall index23:int.
-  forall result11:int. forall found6:int. forall found14:bool.
-  forall found24:bool. forall index14:int. forall index24:int.
-  forall found7:int. forall i3:int. forall found15:bool. forall found25:bool.
-  forall index15:int. forall index25:int. forall found8:int. forall i4:int.
-  forall found16:bool. forall found26:bool. forall index16:int.
-  forall index26:int. forall found9:int. forall i5:int. forall found17:bool.
-  forall found27:bool. forall index17:int. forall index27:int.
-  forall found10:int. forall i6:int. forall found18:bool.
-  forall found28:bool. forall index18:int. forall index28:int.
-  forall found19:int. forall i7:int. forall found110:bool.
-  forall found29:bool. forall index19:int. forall index29:int.
-  forall found20:int. forall i8:int. forall result12:bool.
-  (dynamic_property((-2147483648), 2147483647, to_rep(first(table1)),
-  to_rep(last(table1))) -> (in_range1(value1) -> (in_range1(value2) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(index1)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(index2)) -> ((((({
-  int__content = result } = { int__content = found }) and (found3 = 0)) and
-  (in_range2(found3) and ((({ bool__content = result1 } = { bool__content =
-  found1 }) and (found11 = of_int(0))) and ((({ int__content = result2 } = {
-  int__content = index1 }) and (index11 = 0)) and ((({ bool__content =
-  result3 } = { bool__content = found2 }) and (found21 = of_int(0))) and ((({
-  int__content = result4 } = { int__content = index2 }) and
-  (index21 = 0)) and ((({ int__content = result5 } = { int__content = i
-  }) and (i1 = to_rep(first(table1)))) and
-  ((((to_rep(first(table1)) <= i1) and (i1 <= to_rep(last(table1)))) and
-  ((((temp___163 = index21) and ((temp___162 = index11) and
-  ((temp___161 = found21) and ((temp___160 = found11) and
-  ((temp___159 = found3) and ((((((0 <= 2147483647) -> in_range2(found4)) and
-  (((-2147483648) <= 2147483647) -> in_range1(index12))) and
-  (((-2147483648) <= 2147483647) -> in_range1(index22))) and
-  ((to_rep(first(table1)) <= i2) and (i2 <= to_rep(last(table1))))) and
-  ((((((found4 = 0) and (not (found12 = true))) and
-  (not (found22 = true))) or ((found4 = 1) and ((found12 = true) or
-  (found22 = true)))) or (((found4 = 2) and (found12 = true)) and
-  (found22 = true))) and (((not (found12 = true)) or
-  (not (found22 = true))) and (((not (found12 = true)) or
-  (to_rep((table[index12])) = value1)) and (((not (found22 = true)) or
-  (to_rep((table[index22])) = value2)) and ((found4 <  2) and
-  (((((not (found12 = true)) and (to_rep((table[i2])) = value1)) and
-  (((found12 = result6) and (found13 = of_int(1))) and
-  (((index12 = result7) and (index13 = i2)) and ((((o = (found4 + 1)) and
-  in_range1((found4 + 1))) and ((found4 = result8) and (found5 = o))) and
-  (((found13 = true) and (index13 = i2)) and (found5 <= 2)))))) or
-  ((not ((not (found12 = true)) and (to_rep((table[i2])) = value1))) and
-  ((found5 = found4) and ((index13 = index12) and (found13 = found12))))) and
-  (((((not (found22 = true)) and (to_rep((table[i2])) = value2)) and
-  (((found22 = result9) and (found23 = of_int(1))) and
-  (((index22 = result10) and (index23 = i2)) and ((((o1 = (found5 + 1)) and
-  in_range1((found5 + 1))) and ((found5 = result11) and (found6 = o1))) and
-  (((found23 = true) and (index23 = i2)) and (found6 <= 2)))))) or
-  ((not ((not (found22 = true)) and (to_rep((table[i2])) = value2))) and
-  ((found6 = found5) and ((index23 = index22) and (found23 = found22))))) and
-  ((found6 = 2) or ((not (found6 = 2)) and
-  (i2 = to_rep(last(table1)))))))))))))))))) and (((i2 = i3) and
-  ((found6 = found7) and ((index23 = index24) and ((index13 = index14) and
-  ((found23 = found24) and (found13 = found14)))))) and ((i4 = i2) and
-  ((found8 = found6) and ((index25 = index23) and ((index15 = index13) and
-  ((found25 = found23) and (found15 = found13)))))))) and ((({ int__content =
-  i5 } = { int__content = i3 }) and (({ int__content = found9 } = {
-  int__content = found7 }) and (({ int__content = index26 } = {
-  int__content = index24 }) and (({ int__content = index16 } = {
-  int__content = index14 }) and (({ bool__content = found26 } = {
-  bool__content = found24 }) and ({ bool__content = found16 } = {
-  bool__content = found14 })))))) and ((i6 = i4) and ((found10 = found8) and
-  ((index27 = index25) and ((index17 = index15) and ((found27 = found25) and
-  (found17 = found15))))))))) or ((not ((to_rep(first(table1)) <= i1) and
-  (i1 <= to_rep(last(table1))))) and (((i1 = i5) and ((found3 = found9) and
-  ((index21 = index26) and ((index11 = index16) and ((found21 = found26) and
-  (found11 = found16)))))) and ((i6 = i1) and ((found10 = found3) and
-  ((index27 = index21) and ((index17 = index11) and ((found27 = found21) and
-  (found17 = found11)))))))))))))))) and (((i7 = i5) and
-  ((found19 = found9) and (({ int__content = index28 } = { int__content =
-  index26 }) and (({ int__content = index18 } = { int__content = index16
-  }) and (({ bool__content = found28 } = { bool__content = found26 }) and ({
-  bool__content = found18 } = { bool__content = found16 })))))) and
-  ((i8 = i6) and ((found20 = found10) and ((index29 = index27) and
-  ((index19 = index17) and ((found29 = found27) and
-  (found110 = found17)))))))) -> ((((not (found18 = true)) and
-  (result12 = true)) or ((found18 = true) and
-  ((((((to_rep(first(table1)) <= index18) and
-  (index18 <= to_rep(last(table1)))) and (o2 = index18)) and
-  (o3 = (table[o2]))) and (o4 = to_rep(o3))) and (((o4 = value1) and
-  (result12 = true)) or ((not (o4 = value1)) and (result12 = false)))))) ->
-  ((result12 = true) -> ((found28 = true) ->
-  (to_rep(first(table1)) <= index28)))))))))))
+goal WP_parameter_def : (to_rep(first(table1)) <= index28)

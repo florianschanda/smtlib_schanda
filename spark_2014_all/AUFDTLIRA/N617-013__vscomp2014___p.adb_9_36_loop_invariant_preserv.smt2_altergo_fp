@@ -250,22 +250,718 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic f : (int,index) farray
+
+logic j : int
+
+logic i : int
+
+logic temp___152 : int
+
+logic temp___150 : (int,index) farray
+
+logic temp___153 : (int,index) farray
+
+logic o : index
+
+logic o1 : (int,index) farray
+
+logic o2 : index
+
+logic o3 : (int,index) farray
+
+logic temp___1521 : int
+
+logic temp___1501 : (int,index) farray
+
+logic temp___1531 : (int,index) farray
+
+logic o4 : index
+
+logic o5 : (int,index) farray
+
+logic o6 : index
+
+logic o7 : (int,index) farray
+
+logic temp___1522 : int
+
+logic temp___1502 : (int,index) farray
+
+logic temp___1532 : (int,index) farray
+
+logic o8 : index
+
+logic o9 : (int,index) farray
+
+logic o10 : index
+
+logic o11 : (int,index) farray
+
+logic temp___1523 : int
+
+logic temp___1503 : (int,index) farray
+
+logic temp___1533 : (int,index) farray
+
+logic o12 : index
+
+logic o13 : (int,index) farray
+
+logic o14 : index
+
+logic o15 : (int,index) farray
+
+logic temp___1524 : int
+
+logic temp___1504 : (int,index) farray
+
+logic temp___1534 : (int,index) farray
+
+logic o16 : index
+
+logic o17 : (int,index) farray
+
+logic o18 : index
+
+logic o19 : (int,index) farray
+
+logic temp___1525 : int
+
+logic temp___1505 : (int,index) farray
+
+logic temp___1535 : (int,index) farray
+
+logic o20 : index
+
+logic o21 : (int,index) farray
+
+logic o22 : index
+
+logic o23 : (int,index) farray
+
+logic temp___1526 : int
+
+logic temp___1506 : (int,index) farray
+
+logic temp___1536 : (int,index) farray
+
+logic o24 : index
+
+logic o25 : (int,index) farray
+
+logic o26 : index
+
+logic o27 : (int,index) farray
+
+logic temp___1527 : int
+
+logic temp___1507 : (int,index) farray
+
+logic temp___1537 : (int,index) farray
+
+logic o28 : index
+
+logic o29 : (int,index) farray
+
+logic o30 : index
+
+logic o31 : (int,index) farray
+
+logic temp___1528 : int
+
+logic temp___1508 : (int,index) farray
+
+logic temp___1538 : (int,index) farray
+
+logic o32 : index
+
+logic o33 : (int,index) farray
+
+logic o34 : index
+
+logic o35 : (int,index) farray
+
+logic o36 : index
+
+logic o37 : (int,index) farray
+
+logic o38 : index
+
+logic o39 : (int,index) farray
+
+logic f1 : (int,index) farray
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,index) farray
+
+logic f2 : (int,index) farray
+
+logic f3 : (int,index) farray
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : (int,index) farray
+
+logic f4 : (int,index) farray
+
+logic f5 : (int,index) farray
+
+logic i4 : int
+
+logic f6 : (int,index) farray
+
+logic i5 : int
+
+logic f7 : (int,index) farray
+
+logic i6 : int
+
+logic f8 : (int,index) farray
+
+logic i7 : int
+
+logic f9 : (int,index) farray
+
+logic i8 : int
+
+logic f10 : (int,index) farray
+
+logic i9 : int
+
+logic result5 : int
+
+logic j2 : int
+
+logic result6 : int
+
+logic i10 : int
+
+logic result7 : (int,index) farray
+
+logic f11 : (int,index) farray
+
+logic f12 : (int,index) farray
+
+logic i11 : int
+
+logic result8 : int
+
+logic i12 : int
+
+logic result9 : (int,index) farray
+
+logic f13 : (int,index) farray
+
+logic f14 : (int,index) farray
+
+logic i13 : int
+
+logic f15 : (int,index) farray
+
+logic i14 : int
+
+logic f16 : (int,index) farray
+
+logic i15 : int
+
+logic f17 : (int,index) farray
+
+logic i16 : int
+
+logic f18 : (int,index) farray
+
+logic i17 : int
+
+logic f19 : (int,index) farray
+
+logic i18 : int
+
+logic f20 : (int,index) farray
+
+logic i19 : int
+
+logic f21 : (int,index) farray
+
+logic i20 : int
+
+logic result10 : int
+
+logic j3 : int
+
+logic result11 : int
+
+logic i21 : int
+
+logic result12 : (int,index) farray
+
+logic f22 : (int,index) farray
+
+logic f23 : (int,index) farray
+
+logic i22 : int
+
+logic result13 : int
+
+logic i23 : int
+
+logic result14 : (int,index) farray
+
+logic f24 : (int,index) farray
+
+logic f25 : (int,index) farray
+
+logic i24 : int
+
+logic f26 : (int,index) farray
+
+logic i25 : int
+
+logic f27 : (int,index) farray
+
+logic i26 : int
+
+logic f28 : (int,index) farray
+
+logic i27 : int
+
+logic f29 : (int,index) farray
+
+logic i28 : int
+
+logic f30 : (int,index) farray
+
+logic i29 : int
+
+logic f31 : (int,index) farray
+
+logic i30 : int
+
+logic f32 : (int,index) farray
+
+logic i31 : int
+
+logic result15 : int
+
+logic j4 : int
+
+logic result16 : int
+
+logic i32 : int
+
+logic result17 : (int,index) farray
+
+logic f33 : (int,index) farray
+
+logic f34 : (int,index) farray
+
+logic i33 : int
+
+logic result18 : int
+
+logic i34 : int
+
+logic result19 : (int,index) farray
+
+logic f35 : (int,index) farray
+
+logic f36 : (int,index) farray
+
+logic i35 : int
+
+logic f37 : (int,index) farray
+
+logic i36 : int
+
+logic f38 : (int,index) farray
+
+logic i37 : int
+
+logic f39 : (int,index) farray
+
+logic i38 : int
+
+logic f40 : (int,index) farray
+
+logic i39 : int
+
+logic f41 : (int,index) farray
+
+logic i40 : int
+
+logic f42 : (int,index) farray
+
+logic i41 : int
+
+logic f43 : (int,index) farray
+
+logic i42 : int
+
+logic result20 : int
+
+logic j5 : int
+
+logic result21 : int
+
+logic i43 : int
+
+logic result22 : (int,index) farray
+
+logic f44 : (int,index) farray
+
+logic f45 : (int,index) farray
+
+logic i44 : int
+
+logic result23 : int
+
+logic i45 : int
+
+logic result24 : (int,index) farray
+
+logic f46 : (int,index) farray
+
+logic f47 : (int,index) farray
+
+logic i46 : int
+
+logic f48 : (int,index) farray
+
+logic i47 : int
+
+logic f49 : (int,index) farray
+
+logic i48 : int
+
+logic f50 : (int,index) farray
+
+logic i49 : int
+
+logic f51 : (int,index) farray
+
+logic i50 : int
+
+logic f52 : (int,index) farray
+
+logic i51 : int
+
+logic f53 : (int,index) farray
+
+logic i52 : int
+
+logic f54 : (int,index) farray
+
+logic i53 : int
+
+logic result25 : int
+
+logic j6 : int
+
+logic result26 : int
+
+logic i54 : int
+
+logic result27 : (int,index) farray
+
+logic f55 : (int,index) farray
+
+logic f56 : (int,index) farray
+
+logic i55 : int
+
+logic result28 : int
+
+logic i56 : int
+
+logic result29 : (int,index) farray
+
+logic f57 : (int,index) farray
+
+logic f58 : (int,index) farray
+
+logic i57 : int
+
+logic f59 : (int,index) farray
+
+logic i58 : int
+
+logic f60 : (int,index) farray
+
+logic i59 : int
+
+logic f61 : (int,index) farray
+
+logic i60 : int
+
+logic f62 : (int,index) farray
+
+logic i61 : int
+
+logic f63 : (int,index) farray
+
+logic i62 : int
+
+logic f64 : (int,index) farray
+
+logic i63 : int
+
+logic f65 : (int,index) farray
+
+logic i64 : int
+
+logic result30 : int
+
+logic j7 : int
+
+logic result31 : int
+
+logic i65 : int
+
+logic result32 : (int,index) farray
+
+logic f66 : (int,index) farray
+
+logic f67 : (int,index) farray
+
+logic i66 : int
+
+logic result33 : int
+
+logic i67 : int
+
+logic result34 : (int,index) farray
+
+logic f68 : (int,index) farray
+
+logic f69 : (int,index) farray
+
+logic i68 : int
+
+logic f70 : (int,index) farray
+
+logic i69 : int
+
+logic f71 : (int,index) farray
+
+logic i70 : int
+
+logic f72 : (int,index) farray
+
+logic i71 : int
+
+logic f73 : (int,index) farray
+
+logic i72 : int
+
+logic f74 : (int,index) farray
+
+logic i73 : int
+
+logic f75 : (int,index) farray
+
+logic i74 : int
+
+logic f76 : (int,index) farray
+
+logic i75 : int
+
+logic result35 : int
+
+logic j8 : int
+
+logic result36 : int
+
+logic i76 : int
+
+logic result37 : (int,index) farray
+
+logic f77 : (int,index) farray
+
+logic f78 : (int,index) farray
+
+logic i77 : int
+
+logic result38 : int
+
+logic i78 : int
+
+logic result39 : (int,index) farray
+
+logic f79 : (int,index) farray
+
+logic f80 : (int,index) farray
+
+logic i79 : int
+
+logic f81 : (int,index) farray
+
+logic i80 : int
+
+logic f82 : (int,index) farray
+
+logic i81 : int
+
+logic f83 : (int,index) farray
+
+logic i82 : int
+
+logic f84 : (int,index) farray
+
+logic i83 : int
+
+logic f85 : (int,index) farray
+
+logic i84 : int
+
+logic f86 : (int,index) farray
+
+logic i85 : int
+
+logic f87 : (int,index) farray
+
+logic i86 : int
+
+logic result40 : int
+
+logic j9 : int
+
+logic result41 : int
+
+logic i87 : int
+
+logic result42 : (int,index) farray
+
+logic f88 : (int,index) farray
+
+logic f89 : (int,index) farray
+
+logic i88 : int
+
+logic result43 : int
+
+logic i89 : int
+
+logic result44 : (int,index) farray
+
+logic f90 : (int,index) farray
+
+logic f91 : (int,index) farray
+
+logic i90 : int
+
+logic f92 : (int,index) farray
+
+logic i91 : int
+
+logic f93 : (int,index) farray
+
+logic i92 : int
+
+logic f94 : (int,index) farray
+
+logic i93 : int
+
+logic f95 : (int,index) farray
+
+logic i94 : int
+
+logic f96 : (int,index) farray
+
+logic i95 : int
+
+logic f97 : (int,index) farray
+
+logic i96 : int
+
+logic f98 : (int,index) farray
+
+logic i97 : int
+
+logic result45 : int
+
+logic j10 : int
+
+logic result46 : int
+
+logic i98 : int
+
+logic result47 : (int,index) farray
+
+logic f99 : (int,index) farray
+
+logic f100 : (int,index) farray
+
+logic i99 : int
+
+logic result48 : int
+
+logic i100 : int
+
+logic result49 : (int,index) farray
+
+logic f101 : (int,index) farray
+
+logic f102 : (int,index) farray
+
+logic i101 : int
+
+logic f103 : (int,index) farray
+
+logic i102 : int
+
+axiom H : (f = saved)
+
+axiom H1 : (result = j)
+
+axiom H2 : (j1 = 1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (1 <= i1)
+
+axiom H6 : (i1 <= 10)
+
+axiom H7 : (to_rep(o) = j1)
+
+axiom H8 : (o1 = (f[i1 <- o]))
+
+axiom H9 : (result2 = f)
+
+axiom H10 : (f2 = o1)
+
+axiom H11 : (bool_eq3(f, 1, 10, saved, 1, 10) = true)
+
+axiom H12 :
+  (((forall temp___151:int. (((1 <= temp___151) and (temp___151 <= 10)) ->
+    ((i2 <  temp___151) -> ((f3[temp___151]) = (f[temp___151]))))) and
+  ((1 <= 10) -> in_range1(i2))) and ((1 <= i2) and (i2 <= 10)))
+
+axiom H13 : (not (i2 = 10))
+
+axiom H14 : (result3 = i2)
+
+axiom H15 : (i3 = (i2 + 1))
+
+axiom H16 : (to_rep(o2) = j1)
+
+axiom H17 : (o3 = (f3[i3 <- o2]))
+
+axiom H18 : (result4 = f3)
+
+axiom H19 : (f4 = o3)
+
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall f:(int,index) farray. forall j:int. forall i:int. forall o:index.
-  forall o1:(int,index) farray. forall o2:index.
-  forall o3:(int,index) farray. forall result:int. forall j1:int.
-  forall result1:int. forall i1:int. forall result2:(int,index) farray.
-  forall f1:(int,index) farray. forall f2:(int,index) farray. forall i2:int.
-  forall result3:int. forall i3:int. forall result4:(int,index) farray.
-  forall f3:(int,index) farray. ((f = saved) -> (((result = j) and
-  (j1 = 1)) -> ((({ int__content = result1 } = { int__content = i }) and
-  (i1 = 1)) -> (((1 <= i1) and (i1 <= 10)) -> ((((to_rep(o) = j1) and
-  (o1 = (f[i1 <- o]))) and (({ map__content = result2 } = { map__content = f
-  }) and (f1 = o1))) -> ((bool_eq3(f, 1, 10, saved, 1, 10) = true) ->
-  (((((forall temp___151:int. (((1 <= temp___151) and (temp___151 <= 10)) ->
-      ((i2 <  temp___151) -> ((f2[temp___151]) = (f[temp___151]))))) and
-  ((1 <= 10) -> in_range1(i2))) and ((1 <= i2) and (i2 <= 10))) and
-  ((not (i2 = 10)) and (((result3 = i2) and (i3 = (i2 + 1))) and
-  (((to_rep(o2) = j1) and (o3 = (f2[i3 <- o2]))) and ((result4 = f2) and
-  (f3 = o3)))))) -> (bool_eq3(f, 1, 10, saved, 1, 10) = true)))))))))
+goal WP_parameter_def : (bool_eq3(f, 1, 10, saved, 1, 10) = true)

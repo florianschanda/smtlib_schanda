@@ -62,6 +62,7 @@
 (declare-const rsp1 (_ BitVec 64))
 (declare-const rsp2 (_ BitVec 64))
 (declare-const rsp3 (_ BitVec 64))
+(assert true)
 (assert (= result rsp))
 (assert (= rsp1 (bvadd rsp ((_ int2bv 64) 8))))
 (assert (= rsp1 rsp2))

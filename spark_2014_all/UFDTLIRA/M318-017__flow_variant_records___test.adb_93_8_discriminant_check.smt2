@@ -69,7 +69,7 @@
 (define-fun us_rep___9__projection ((a us_rep)) Bool (attr__constrained a))
 (define-fun test__search_result__index__pred ((a us_rep)) Bool (= (to_int1 (rec__test__search_result__found (us_split_discrs1 a))) 1))
 (define-fun test__search_result__reason__pred ((a us_rep)) Bool (= (to_int1 (rec__test__search_result__found (us_split_discrs1 a))) 0))
-(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (and (= (rec__test__search_result__found (us_split_discrs1 a)) (rec__test__search_result__found (us_split_discrs1 b))) (=> (test__search_result__index__pred a) (= (to_rep (rec__test__search_result__index (us_split_fields1 a))) (to_rep (rec__test__search_result__index (us_split_fields1 b)))))) (=> (test__search_result__reason__pred a) (= (to_rep1 (rec__test__search_result__reason (us_split_fields1 a))) (to_rep1 (rec__test__search_result__reason (us_split_fields1 b)))))) true false))
+(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (= (rec__test__search_result__found (us_split_discrs1 a)) (rec__test__search_result__found (us_split_discrs1 b))) (and (=> (test__search_result__index__pred a) (= (to_rep (rec__test__search_result__index (us_split_fields1 a))) (to_rep (rec__test__search_result__index (us_split_fields1 b))))) (=> (test__search_result__reason__pred a) (= (to_rep1 (rec__test__search_result__reason (us_split_fields1 a))) (to_rep1 (rec__test__search_result__reason (us_split_fields1 b))))))) true false))
 (declare-const value__size Int)
 (declare-fun object__size (us_rep) Int)
 (declare-const value__alignment Int)

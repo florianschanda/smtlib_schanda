@@ -71,6 +71,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_123 Int) (temp___is_init_120 Bool) (temp___skip_constant_121 Bool) (temp___do_toplevel_122 Bool)) Bool (=> (or (= temp___is_init_120 true) (<= (- 9223372036854775808) 9223372036854775807)) (in_range2 temp___expr_123)))
 (declare-const result__ Int)
 (declare-const j Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const result__1 Int)
 (declare-const result1 Int)

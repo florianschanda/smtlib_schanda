@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
 (declare-fun user_eq (float float) Bool)
@@ -81,6 +81,7 @@
 (assert (forall ((speed1 Float32)) (! (=> (and (dynamic_invariant2 speed1 true true true) (= (is_valid_speed_km_per_h speed1) true)) (dynamic_invariant (m_per_s_from_km_per_h speed1) true false true)) :pattern ((m_per_s_from_km_per_h speed1)))))
 (assert (forall ((speed1 Float32)) (! (=> (dynamic_invariant2 speed1 true true true) (= (m_per_s_from_km_per_h speed1) (fp.div RNE (fp.mul RNE speed1 (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern ((m_per_s_from_km_per_h speed1)))))
 (declare-const o Float32)
+(declare-const o1 Float32)
 (assert (fp.isFinite32 speed))
 (assert (= (is_valid_speed speed) true))
 (assert (and (= o (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000))) (fp.isFinite32 (fp.mul RNE speed (fp #b0 #b10001010 #b11000010000000000000000)))))

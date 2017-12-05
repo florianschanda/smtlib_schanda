@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -141,16 +141,79 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic y : int
+
+logic z1 : int
+
+logic z2 : int
+
+logic z3 : int
+
+logic x : int
+
+logic y1 : int
+
+logic result : int
+
+logic z11 : int
+
+logic result1 : int
+
+logic z21 : int
+
+logic result2 : int
+
+logic z31 : int
+
+logic result3 : int
+
+logic x1 : int
+
+logic result4 : int
+
+logic y2 : int
+
+logic result5 : int
+
+logic y3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(y))
+
+axiom H1 : (result = z1)
+
+axiom H2 : (z11 = 0)
+
+axiom H3 : in_range1(z11)
+
+axiom H4 : (result1 = z2)
+
+axiom H5 : (z21 = 0)
+
+axiom H6 : in_range1(z21)
+
+axiom H7 : (result2 = z3)
+
+axiom H8 : (z31 = 0)
+
+axiom H9 : in_range1(z31)
+
+axiom H10 : (result3 = x)
+
+axiom H11 : (x1 = 0)
+
+axiom H12 : in_range1(x1)
+
+axiom H13 : ((x1 = 0) -> (result4 = y))
+
+axiom H14 : ((x1 = 0) -> (y2 = x1))
+
+axiom H15 : ((not (x1 = 0)) -> (y2 = y))
+
+axiom H16 : ((not (x1 = 0)) -> (y2 = y1))
+
+axiom H17 : (result5 = y2)
+
+axiom H18 : (y3 = x1)
+
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:int. forall z1:int. forall z2:int. forall z3:int. forall x:int.
-  forall y1:int. forall result:int. forall z11:int. forall result1:int.
-  forall z21:int. forall result2:int. forall z31:int. forall result3:int.
-  forall x1:int. forall result4:int. forall y2:int. forall result5:int.
-  forall y3:int. ((((-2147483648) <= 2147483647) -> in_range(y)) ->
-  (((result = z1) and (z11 = 0)) -> (in_range1(z11) -> (((result1 = z2) and
-  (z21 = 0)) -> (in_range1(z21) -> (((result2 = z3) and (z31 = 0)) ->
-  (in_range1(z31) -> (((result3 = x) and (x1 = 0)) -> (in_range1(x1) ->
-  ((((x1 = 0) and ((result4 = y) and (y2 = x1))) or ((not (x1 = 0)) and
-  ((y2 = y) and (y2 = y1)))) -> (((result5 = y2) and (y3 = x1)) ->
-  (x1 = 0)))))))))))))
+goal WP_parameter_def : (x1 = 0)

@@ -170,7 +170,7 @@ function us_split_fields__ref___27__projection(a: us_split_fields__ref) : us_spl
 type us_rep1 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___27__projection(a: us_rep1) : us_split_fields =
+function us_rep___28__projection(a: us_rep1) : us_split_fields =
   (a).us_split_fields1
 
 logic bool_eq3 : us_rep1, us_rep1 -> bool
@@ -343,7 +343,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref1) : us_sp
 type us_rep2 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___28__projection(a: us_rep2) : us_split_fields2 =
+function us_rep___29__projection(a: us_rep2) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size2 : int
@@ -507,14 +507,18 @@ axiom valid_combination__def_axiom :
   rec__traffic_lights__lights_state__pedestrians_green = ls3;
   rec__traffic_lights__lights_state__pedestrians_red = ls4 } }) = true))))
 
- (* File "traffic_lights.adb", line 51, characters 0-0 *)
-goal WP_parameter_def :
-  (forall traffic_light__split_fields:bool.
-  forall traffic_light__split_fields1:bool.
-  forall traffic_light__split_fields2:bool.
-  forall traffic_light__split_fields3:bool.
-  forall traffic_light__split_fields4:bool. ((valid_combination({
-  us_split_fields1 = { rec__traffic_lights__lights_state__vehicles_green =
+logic traffic_light__split_fields : bool
+
+logic traffic_light__split_fields1 : bool
+
+logic traffic_light__split_fields2 : bool
+
+logic traffic_light__split_fields3 : bool
+
+logic traffic_light__split_fields4 : bool
+
+axiom H : (valid_combination({ us_split_fields1 = {
+  rec__traffic_lights__lights_state__vehicles_green =
   traffic_light__split_fields;
   rec__traffic_lights__lights_state__vehicles_yellow =
   traffic_light__split_fields1;
@@ -523,4 +527,7 @@ goal WP_parameter_def :
   rec__traffic_lights__lights_state__pedestrians_green =
   traffic_light__split_fields3;
   rec__traffic_lights__lights_state__pedestrians_red =
-  traffic_light__split_fields4 } }) = true) -> (97 <= 97)))
+  traffic_light__split_fields4 } }) = true)
+
+ (* File "traffic_lights.adb", line 51, characters 0-0 *)
+goal WP_parameter_def : (97 <= 97)

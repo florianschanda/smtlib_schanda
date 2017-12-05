@@ -30,6 +30,7 @@
 (declare-datatypes () ((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
 (define-fun index_type__ref___projection ((a index_type__ref)) index_type (index_type__content a))
 (define-fun dynamic_invariant ((temp___expr_136 Int) (temp___is_init_133 Bool) (temp___skip_constant_134 Bool) (temp___do_toplevel_135 Bool)) Bool (=> (or (= temp___is_init_133 true) (<= 1 65536)) (in_range temp___expr_136)))
+(declare-const us Int)
 (assert (not (in_range 60)))
 (check-sat)
 (exit)

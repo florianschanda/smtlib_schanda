@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,75 +555,173 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "pumpunit.ads", line 40, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_state:int.
-  forall cur_pump__split_fields:(int,character) farray.
-  forall cur_pump__split_fields1:nat_type.
-  forall cur_pump__split_fields2:nat_type.
-  forall cur_pump__split_fields3:nat_type.
-  forall pump_one__split_fields:(int,character) farray.
-  forall pump_one__split_fields1:nat_type.
-  forall pump_one__split_fields2:nat_type.
-  forall pump_one__split_fields3:nat_type.
-  forall pump_two__split_fields:(int,character) farray.
-  forall pump_two__split_fields1:nat_type.
-  forall pump_two__split_fields2:nat_type.
-  forall pump_two__split_fields3:nat_type. forall cur_state1:int.
-  forall result:(int,character) farray. forall result1:nat_type.
-  forall result2:nat_type. forall result3:nat_type.
-  forall cur_pump__split_fields4:(int,character) farray.
-  forall cur_pump__split_fields5:nat_type.
-  forall cur_pump__split_fields6:nat_type.
-  forall cur_pump__split_fields7:nat_type.
-  forall result4:(int,character) farray. forall result5:nat_type.
-  forall result6:nat_type. forall result7:nat_type.
-  forall cur_pump__split_fields8:(int,character) farray.
-  forall cur_pump__split_fields9:nat_type.
-  forall cur_pump__split_fields10:nat_type.
-  forall cur_pump__split_fields11:nat_type. forall result8:int.
-  forall cur_state2:int. forall cur_state3:int.
-  forall cur_pump__split_fields12:(int,character) farray.
-  forall cur_pump__split_fields13:nat_type.
-  forall cur_pump__split_fields14:nat_type.
-  forall cur_pump__split_fields15:nat_type. forall cur_state4:int.
-  forall cur_pump__split_fields16:(int,character) farray.
-  forall cur_pump__split_fields17:nat_type.
-  forall cur_pump__split_fields18:nat_type.
-  forall cur_pump__split_fields19:nat_type. ((in_range4(cur_state) and
-  (in_range1(pump_index) and ((((is_base(cur_state) = true) or
+logic cur_state : int
+
+logic cur_pump__split_fields : (int,character) farray
+
+logic cur_pump__split_fields1 : nat_type
+
+logic cur_pump__split_fields2 : nat_type
+
+logic cur_pump__split_fields3 : nat_type
+
+logic pump_one__split_fields : (int,character) farray
+
+logic pump_one__split_fields1 : nat_type
+
+logic pump_one__split_fields2 : nat_type
+
+logic pump_one__split_fields3 : nat_type
+
+logic pump_two__split_fields : (int,character) farray
+
+logic pump_two__split_fields1 : nat_type
+
+logic pump_two__split_fields2 : nat_type
+
+logic pump_two__split_fields3 : nat_type
+
+logic cur_state1 : int
+
+logic result : (int,character) farray
+
+logic result1 : nat_type
+
+logic result2 : nat_type
+
+logic result3 : nat_type
+
+logic cur_pump__split_fields4 : (int,character) farray
+
+logic cur_pump__split_fields5 : nat_type
+
+logic cur_pump__split_fields6 : nat_type
+
+logic cur_pump__split_fields7 : nat_type
+
+logic result4 : (int,character) farray
+
+logic result5 : nat_type
+
+logic result6 : nat_type
+
+logic result7 : nat_type
+
+logic cur_pump__split_fields8 : (int,character) farray
+
+logic cur_pump__split_fields9 : nat_type
+
+logic cur_pump__split_fields10 : nat_type
+
+logic cur_pump__split_fields11 : nat_type
+
+logic result8 : int
+
+logic cur_state2 : int
+
+logic cur_state3 : int
+
+logic cur_pump__split_fields12 : (int,character) farray
+
+logic cur_pump__split_fields13 : nat_type
+
+logic cur_pump__split_fields14 : nat_type
+
+logic cur_pump__split_fields15 : nat_type
+
+logic cur_state4 : int
+
+logic cur_pump__split_fields16 : (int,character) farray
+
+logic cur_pump__split_fields17 : nat_type
+
+logic cur_pump__split_fields18 : nat_type
+
+logic cur_pump__split_fields19 : nat_type
+
+axiom H : in_range4(cur_state)
+
+axiom H1 : in_range1(pump_index)
+
+axiom H2 : (((is_base(cur_state) = true) or
   (is_waiting(cur_state) = true)) and ((1 <= pump_index) and
-  (pump_index <= 2))) and (((((pump_index <  2) and
-  (((result = cur_pump__split_fields) and
-  ((result1 = cur_pump__split_fields1) and
-  ((result2 = cur_pump__split_fields2) and
-  (result3 = cur_pump__split_fields3)))) and
-  ((pump_one__split_fields = cur_pump__split_fields4) and
-  ((pump_one__split_fields1 = cur_pump__split_fields5) and
-  ((pump_one__split_fields2 = cur_pump__split_fields6) and
-  (pump_one__split_fields3 = cur_pump__split_fields7)))))) or
-  ((not (pump_index <  2)) and ((((result4 = cur_pump__split_fields) and
-  ((result5 = cur_pump__split_fields1) and
-  ((result6 = cur_pump__split_fields2) and
-  (result7 = cur_pump__split_fields3)))) and
-  ((pump_two__split_fields = cur_pump__split_fields8) and
-  ((pump_two__split_fields1 = cur_pump__split_fields9) and
-  ((pump_two__split_fields2 = cur_pump__split_fields10) and
-  (pump_two__split_fields3 = cur_pump__split_fields11))))) and
+  (pump_index <= 2)))
+
+axiom H3 : ((pump_index <  2) -> (result = cur_pump__split_fields))
+
+axiom H4 : ((pump_index <  2) -> (result1 = cur_pump__split_fields1))
+
+axiom H5 : ((pump_index <  2) -> (result2 = cur_pump__split_fields2))
+
+axiom H6 : ((pump_index <  2) -> (result3 = cur_pump__split_fields3))
+
+axiom H7 : ((pump_index <  2) ->
+  (pump_one__split_fields = cur_pump__split_fields4))
+
+axiom H8 : ((pump_index <  2) ->
+  (pump_one__split_fields1 = cur_pump__split_fields5))
+
+axiom H9 : ((pump_index <  2) ->
+  (pump_one__split_fields2 = cur_pump__split_fields6))
+
+axiom H10 : ((pump_index <  2) ->
+  (pump_one__split_fields3 = cur_pump__split_fields7))
+
+axiom H11 : ((not (pump_index <  2)) -> (result4 = cur_pump__split_fields))
+
+axiom H12 : ((not (pump_index <  2)) -> (result5 = cur_pump__split_fields1))
+
+axiom H13 : ((not (pump_index <  2)) -> (result6 = cur_pump__split_fields2))
+
+axiom H14 : ((not (pump_index <  2)) -> (result7 = cur_pump__split_fields3))
+
+axiom H15 : ((not (pump_index <  2)) ->
+  (pump_two__split_fields = cur_pump__split_fields8))
+
+axiom H16 : ((not (pump_index <  2)) ->
+  (pump_two__split_fields1 = cur_pump__split_fields9))
+
+axiom H17 : ((not (pump_index <  2)) ->
+  (pump_two__split_fields2 = cur_pump__split_fields10))
+
+axiom H18 : ((not (pump_index <  2)) ->
+  (pump_two__split_fields3 = cur_pump__split_fields11))
+
+axiom H19 : ((not (pump_index <  2)) ->
   ((cur_pump__split_fields4 = cur_pump__split_fields8) and
   ((cur_pump__split_fields5 = cur_pump__split_fields9) and
   ((cur_pump__split_fields6 = cur_pump__split_fields10) and
-  (cur_pump__split_fields7 = cur_pump__split_fields11))))))) and
-  ((((cur_state = 2) or (cur_state = 3)) and ((result8 = cur_state) and
-  (cur_state2 = 1))) or ((not ((cur_state = 2) or (cur_state = 3))) and
-  ((cur_state2 = cur_state) and (cur_state2 = cur_state1))))) and
-  ((((cur_pump__split_fields12 = cur_pump__split_fields4) and
-  ((cur_pump__split_fields13 = cur_pump__split_fields5) and
-  ((cur_pump__split_fields14 = cur_pump__split_fields6) and
-  (cur_pump__split_fields15 = cur_pump__split_fields7)))) and
-  (cur_state2 = cur_state3)) and
-  (((cur_pump__split_fields16 = cur_pump__split_fields4) and
-  ((cur_pump__split_fields17 = cur_pump__split_fields5) and
-  ((cur_pump__split_fields18 = cur_pump__split_fields6) and
-  (cur_pump__split_fields19 = cur_pump__split_fields7)))) and
-  (cur_state4 = cur_state2))))))) -> (is_ready(cur_state3) = true)))
+  (cur_pump__split_fields7 = cur_pump__split_fields11)))))
+
+axiom H20 : (((cur_state = 2) or (cur_state = 3)) -> (result8 = cur_state))
+
+axiom H21 : (((cur_state = 2) or (cur_state = 3)) -> (cur_state2 = 1))
+
+axiom H22 : ((not ((cur_state = 2) or (cur_state = 3))) ->
+  (cur_state2 = cur_state))
+
+axiom H23 : ((not ((cur_state = 2) or (cur_state = 3))) ->
+  (cur_state2 = cur_state1))
+
+axiom H24 : (cur_pump__split_fields12 = cur_pump__split_fields4)
+
+axiom H25 : (cur_pump__split_fields13 = cur_pump__split_fields5)
+
+axiom H26 : (cur_pump__split_fields14 = cur_pump__split_fields6)
+
+axiom H27 : (cur_pump__split_fields15 = cur_pump__split_fields7)
+
+axiom H28 : (cur_state2 = cur_state3)
+
+axiom H29 : (cur_pump__split_fields16 = cur_pump__split_fields4)
+
+axiom H30 : (cur_pump__split_fields17 = cur_pump__split_fields5)
+
+axiom H31 : (cur_pump__split_fields18 = cur_pump__split_fields6)
+
+axiom H32 : (cur_pump__split_fields19 = cur_pump__split_fields7)
+
+axiom H33 : (cur_state4 = cur_state2)
+
+ (* File "pumpunit.ads", line 40, characters 0-0 *)
+goal WP_parameter_def : (is_ready(cur_state3) = true)

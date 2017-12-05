@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -240,23 +240,23 @@ logic bool_eq4 : us_rep, us_rep -> bool
 
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
-  (((((((to_rep(((a).us_split_discrs1).rec__test__wibble__d) = to_rep(((b).us_split_discrs1).rec__test__wibble__d)) and
-  (((a).us_split_fields1).rec__test__wibble__flag = ((b).us_split_fields1).rec__test__wibble__flag)) and
-  (test__wibble__x__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__test__wibble__x) = to_rep1(((b).us_split_fields1).rec__test__wibble__x)))) and
-  (test__wibble__y__pred(a) ->
-  (((a).us_split_fields1).rec__test__wibble__y = ((b).us_split_fields1).rec__test__wibble__y))) and
-  (test__wibble__z__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__test__wibble__z) = to_rep(((b).us_split_fields1).rec__test__wibble__z)))) ->
-  (bool_eq4(a, b) = true)) and
-  ((not (((((to_rep(((a).us_split_discrs1).rec__test__wibble__d) = to_rep(((b).us_split_discrs1).rec__test__wibble__d)) and
-  (((a).us_split_fields1).rec__test__wibble__flag = ((b).us_split_fields1).rec__test__wibble__flag)) and
+  ((((to_rep(((a).us_split_discrs1).rec__test__wibble__d) = to_rep(((b).us_split_discrs1).rec__test__wibble__d)) and
+  ((((((a).us_split_fields1).rec__test__wibble__flag = ((b).us_split_fields1).rec__test__wibble__flag) and
   (test__wibble__x__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__test__wibble__x) = to_rep1(((b).us_split_fields1).rec__test__wibble__x)))) and
   (test__wibble__y__pred(a) ->
   (((a).us_split_fields1).rec__test__wibble__y = ((b).us_split_fields1).rec__test__wibble__y))) and
   (test__wibble__z__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__test__wibble__z) = to_rep(((b).us_split_fields1).rec__test__wibble__z))))) ->
+  (bool_eq4(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__test__wibble__d) = to_rep(((b).us_split_discrs1).rec__test__wibble__d)) and
+  ((((((a).us_split_fields1).rec__test__wibble__flag = ((b).us_split_fields1).rec__test__wibble__flag) and
+  (test__wibble__x__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__test__wibble__x) = to_rep1(((b).us_split_fields1).rec__test__wibble__x)))) and
+  (test__wibble__y__pred(a) ->
+  (((a).us_split_fields1).rec__test__wibble__y = ((b).us_split_fields1).rec__test__wibble__y))) and
+  (test__wibble__z__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__test__wibble__z) = to_rep(((b).us_split_fields1).rec__test__wibble__z)))))) ->
   (bool_eq4(a, b) = false))))
 
 logic value__size : int
@@ -499,35 +499,131 @@ logic r16b : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v__split_fields : bool
+
+logic v__split_fields1 : integer
+
+logic v__split_fields2 : bool
+
+logic v__split_fields3 : dt
+
+logic us : int
+
+logic o : dt
+
+logic o1 : bool
+
+logic o2 : integer
+
+logic o3 : bool
+
+logic o4 : dt
+
+logic temp___259 : dt
+
+logic temp___2591 : bool
+
+logic temp___2592 : integer
+
+logic temp___2593 : bool
+
+logic temp___2594 : dt
+
+logic result : bool
+
+logic result1 : integer
+
+logic result2 : bool
+
+logic result3 : dt
+
+logic v__split_fields4 : bool
+
+logic v__split_fields5 : integer
+
+logic v__split_fields6 : bool
+
+logic v__split_fields7 : dt
+
+logic result4 : bool
+
+logic result5 : integer
+
+logic result6 : bool
+
+logic result7 : dt
+
+logic v__split_fields8 : bool
+
+logic v__split_fields9 : integer
+
+logic v__split_fields10 : bool
+
+logic v__split_fields11 : dt
+
+axiom H : ((us = 2) and in_range1(2))
+
+axiom H1 : (to_rep(v__split_discrs) = 2)
+
+axiom H2 : (2 = to_rep(v__split_discrs))
+
+axiom H3 : (result = v__split_fields)
+
+axiom H4 : (result1 = v__split_fields1)
+
+axiom H5 : (result2 = v__split_fields2)
+
+axiom H6 : (result3 = v__split_fields3)
+
+axiom H7 : (of_int(1) = v__split_fields4)
+
+axiom H8 : (v__split_fields1 = v__split_fields5)
+
+axiom H9 : (v__split_fields2 = v__split_fields6)
+
+axiom H10 : (v__split_fields3 = v__split_fields7)
+
+axiom H11 : (to_rep(o) = 0)
+
+axiom H12 : (v__split_fields4 = o1)
+
+axiom H13 : (v__split_fields5 = o2)
+
+axiom H14 : (v__split_fields6 = o3)
+
+axiom H15 : (o = o4)
+
+axiom H16 : (v__split_discrs = temp___259)
+
+axiom H17 : (temp___2591 = o1)
+
+axiom H18 : (temp___2592 = o2)
+
+axiom H19 : (temp___2593 = o3)
+
+axiom H20 : (temp___2594 = o4)
+
+axiom H21 : (result4 = v__split_fields4)
+
+axiom H22 : (result5 = v__split_fields5)
+
+axiom H23 : (result6 = v__split_fields6)
+
+axiom H24 : (result7 = v__split_fields7)
+
+axiom H25 : (temp___2591 = v__split_fields8)
+
+axiom H26 : (temp___2592 = v__split_fields9)
+
+axiom H27 : (temp___2593 = v__split_fields10)
+
+axiom H28 : (temp___2594 = v__split_fields11)
+
+axiom H29 : (v__split_discrs = temp___259)
+
+axiom H30 : (to_rep(r__split_discrs) = r16b)
+
+axiom H31 : in_range1(r16b)
+
  (* File "test.adb", line 33, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:bool. forall v__split_fields1:integer.
-  forall v__split_fields2:bool. forall v__split_fields3:dt. forall us:int.
-  forall o:dt. forall o1:bool. forall o2:integer. forall o3:bool.
-  forall o4:dt. forall temp___259:dt. forall temp___2591:bool.
-  forall temp___2592:integer. forall temp___2593:bool. forall temp___2594:dt.
-  forall result:bool. forall result1:integer. forall result2:bool.
-  forall result3:dt. forall v__split_fields4:bool.
-  forall v__split_fields5:integer. forall v__split_fields6:bool.
-  forall v__split_fields7:dt. forall result4:bool. forall result5:integer.
-  forall result6:bool. forall result7:dt. forall v__split_fields8:bool.
-  forall v__split_fields9:integer. forall v__split_fields10:bool.
-  forall v__split_fields11:dt. (((us = 2) and in_range1(2)) ->
-  ((to_rep(v__split_discrs) = 2) -> ((2 = to_rep(v__split_discrs)) ->
-  ((((result = v__split_fields) and ((result1 = v__split_fields1) and
-  ((result2 = v__split_fields2) and (result3 = v__split_fields3)))) and
-  ((of_int(1) = v__split_fields4) and
-  ((v__split_fields1 = v__split_fields5) and
-  ((v__split_fields2 = v__split_fields6) and
-  (v__split_fields3 = v__split_fields7))))) -> (((((to_rep(o) = 0) and
-  ((v__split_fields4 = o1) and ((v__split_fields5 = o2) and
-  ((v__split_fields6 = o3) and (o = o4))))) and
-  ((v__split_discrs = temp___259) and ((temp___2591 = o1) and
-  ((temp___2592 = o2) and ((temp___2593 = o3) and (temp___2594 = o4)))))) and
-  ((((result4 = v__split_fields4) and ((result5 = v__split_fields5) and
-  ((result6 = v__split_fields6) and (result7 = v__split_fields7)))) and
-  ((temp___2591 = v__split_fields8) and ((temp___2592 = v__split_fields9) and
-  ((temp___2593 = v__split_fields10) and
-  (temp___2594 = v__split_fields11))))) and
-  (v__split_discrs = temp___259))) -> (((to_rep(r__split_discrs) = r16b) and
-  in_range1(r16b)) -> (v__split_discrs = r__split_discrs))))))))
+goal WP_parameter_def : (v__split_discrs = r__split_discrs)

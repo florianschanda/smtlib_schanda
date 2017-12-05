@@ -69,6 +69,8 @@
 (declare-const saturate__result4 (_ BitVec 16))
 (declare-const saturate__result5 (_ BitVec 16))
 (declare-const result1 (_ BitVec 16))
+(assert true)
+(assert true)
 (assert (= saturate__result1 saturate__result2))
 (assert (= saturate__result3 saturate__result1))
 (assert (= result saturate__result))

@@ -1784,45 +1784,132 @@ axiom a_brake_emergency_model__def_axiom :
   of_rep2(0); rec__step_function__delimiter_entry__value = of_rep(fliteral1)
   } })))
 
- (* File "units.ads", line 26, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sec_3_13_6_deceleration__a_brake_emergency__result:t.
-  forall o:float1. forall o1:function_range. forall o2:function_range.
-  forall o3:float1. forall o4:float1. forall o5:function_range.
-  forall o6:function_range. forall o7:float1. forall o8:function_range.
-  forall o9:float1. forall o10:function_range. forall o11:float1.
-  forall o12:(int,us_rep) farray. forall o13:num_delimiters_range.
-  forall o14:num_delimiters_range. forall o15:(int,us_rep) farray.
-  forall temp___301:num_delimiters_range.
-  forall temp___3011:(int,us_rep) farray. forall o16:int. forall o17:t.
-  forall o18:t. forall result:t.
-  forall sec_3_13_6_deceleration__a_brake_emergency__result1:t.
-  forall sec_3_13_6_deceleration__a_brake_emergency__result2:t.
-  forall sec_3_13_6_deceleration__a_brake_emergency__result3:t.
-  forall sec_3_13_6_deceleration__a_brake_emergency__result4:t.
-  forall sec_3_13_6_deceleration__a_brake_emergency__result5:t.
-  (forall result1:t. (((((((((to_rep(o4) = fliteral1) and
-  ((to_rep2(o5) = 0) and ((o5 = o6) and (o4 = o7)))) and ((o8 = o6) and
-  (o9 = o7))) and ((((to_rep(o) = fliteral) and ((to_rep2(o1) = 0) and
-  ((o1 = o2) and (o = o3)))) and ((o10 = o2) and (o11 = o3))) and
-  (o12 = temp___133({ us_split_fields1 = {
+logic sec_3_13_6_deceleration__a_brake_emergency__result : t
+
+logic o : float1
+
+logic o1 : function_range
+
+logic o2 : function_range
+
+logic o3 : float1
+
+logic o4 : float1
+
+logic o5 : function_range
+
+logic o6 : function_range
+
+logic o7 : float1
+
+logic o8 : function_range
+
+logic o9 : float1
+
+logic o10 : function_range
+
+logic o11 : float1
+
+logic o12 : (int,us_rep) farray
+
+logic o13 : num_delimiters_range
+
+logic o14 : num_delimiters_range
+
+logic o15 : (int,us_rep) farray
+
+logic temp___301 : num_delimiters_range
+
+logic temp___3011 : (int,us_rep) farray
+
+logic o16 : int
+
+logic o17 : t
+
+logic o18 : t
+
+logic o19 : int
+
+logic o20 : t
+
+logic o21 : t
+
+logic result : t
+
+logic sec_3_13_6_deceleration__a_brake_emergency__result1 : t
+
+logic sec_3_13_6_deceleration__a_brake_emergency__result2 : t
+
+logic sec_3_13_6_deceleration__a_brake_emergency__result3 : t
+
+logic sec_3_13_6_deceleration__a_brake_emergency__result4 : t
+
+logic sec_3_13_6_deceleration__a_brake_emergency__result5 : t
+
+logic result1 : t
+
+axiom H : (to_rep(o4) = fliteral1)
+
+axiom H1 : (to_rep2(o5) = 0)
+
+axiom H2 : (o5 = o6)
+
+axiom H3 : (o4 = o7)
+
+axiom H4 : (o8 = o6)
+
+axiom H5 : (o9 = o7)
+
+axiom H6 : (to_rep(o) = fliteral)
+
+axiom H7 : (to_rep2(o1) = 0)
+
+axiom H8 : (o1 = o2)
+
+axiom H9 : (o = o3)
+
+axiom H10 : (o10 = o2)
+
+axiom H11 : (o11 = o3)
+
+axiom H12 : (o12 = temp___133({ us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = o10;
   rec__step_function__delimiter_entry__value = o11 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o8;
-  rec__step_function__delimiter_entry__value = o9 } })))) and
-  ((to_rep1(o13) = 0) and ((o13 = o14) and (o12 = o15)))) and
-  ((temp___301 = o14) and (temp___3011 = o15))) and
-  ((a_brake_emergency_model = temp___301) and
-  (a_brake_emergency_model1 = temp___3011))) and (tqtisFinite(v) and
-  (in_range3(d) and (((is_valid_deceleration_model({ us_split_fields3 = {
+  rec__step_function__delimiter_entry__value = o9 } }))
+
+axiom H13 : (to_rep1(o13) = 0)
+
+axiom H14 : (o13 = o14)
+
+axiom H15 : (o12 = o15)
+
+axiom H16 : (temp___301 = o14)
+
+axiom H17 : (temp___3011 = o15)
+
+axiom H18 : ((temp___301 = a_brake_emergency_model) and
+  (temp___3011 = a_brake_emergency_model1))
+
+axiom H19 : tqtisFinite(v)
+
+axiom H20 : in_range3(d)
+
+axiom H21 : ((is_valid_deceleration_model({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
-  a_brake_emergency_model1 } }) = true) and (is_valid_speed(v) = true)) and
-  (((((sec_3_13_6_deceleration__a_brake_emergency__result1 = sec_3_13_6_deceleration__a_brake_emergency__result2) and
-  (sec_3_13_6_deceleration__a_brake_emergency__result3 = sec_3_13_6_deceleration__a_brake_emergency__result1)) and
-  (((((o16 = to_int(NearestTiesToAway, v)) and
-  in_range5(to_int(NearestTiesToAway, v))) and ((o17 = get_value({
-  us_split_fields3 = {
+  a_brake_emergency_model1 } }) = true) and (is_valid_speed(v) = true))
+
+axiom H22 :
+  (sec_3_13_6_deceleration__a_brake_emergency__result1 = sec_3_13_6_deceleration__a_brake_emergency__result2)
+
+axiom H23 :
+  (sec_3_13_6_deceleration__a_brake_emergency__result3 = sec_3_13_6_deceleration__a_brake_emergency__result1)
+
+axiom H24 : ((o16 = to_int(NearestTiesToAway, v)) and
+  in_range5(to_int(NearestTiesToAway, v)))
+
+axiom H25 : ((o17 = get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
   a_brake_emergency_model1 } }, o16)) and (tqtisFinite(o17) and
@@ -1834,16 +1921,26 @@ goal WP_parameter_def :
    to_rep((((a_brake_emergency_model1[i])).us_split_fields1).rec__step_function__delimiter_entry__value))))) or
   ((to_rep2((((a_brake_emergency_model1[to_rep1(a_brake_emergency_model)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= o16) and
   eq(o17,
-  to_rep((((a_brake_emergency_model1[to_rep1(a_brake_emergency_model)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))) and
-  ((o18 = o17) and tqtisFinite(o17))) and (({ t__content = result } = {
-  t__content = sec_3_13_6_deceleration__a_brake_emergency__result }) and
-  (sec_3_13_6_deceleration__a_brake_emergency__result1 = o18)))) and (({
-  t__content = sec_3_13_6_deceleration__a_brake_emergency__result4 } = {
-  t__content = sec_3_13_6_deceleration__a_brake_emergency__result2 }) and
-  (sec_3_13_6_deceleration__a_brake_emergency__result5 = sec_3_13_6_deceleration__a_brake_emergency__result3))) and
-  (result1 = sec_3_13_6_deceleration__a_brake_emergency__result4)))))) ->
+  to_rep((((a_brake_emergency_model1[to_rep1(a_brake_emergency_model)])).us_split_fields1).rec__step_function__delimiter_entry__value))))))
+
+axiom H26 : ((o18 = o17) and tqtisFinite(o17))
+
+axiom H27 : (result = sec_3_13_6_deceleration__a_brake_emergency__result)
+
+axiom H28 : (sec_3_13_6_deceleration__a_brake_emergency__result1 = o18)
+
+axiom H29 :
+  (sec_3_13_6_deceleration__a_brake_emergency__result4 = sec_3_13_6_deceleration__a_brake_emergency__result2)
+
+axiom H30 :
+  (sec_3_13_6_deceleration__a_brake_emergency__result5 = sec_3_13_6_deceleration__a_brake_emergency__result3)
+
+axiom H31 : (result1 = sec_3_13_6_deceleration__a_brake_emergency__result4)
+
+ (* File "units.ads", line 26, characters 0-0 *)
+goal WP_parameter_def :
   eq(sec_3_13_6_deceleration__a_brake_emergency__result4, get_value({
   us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
-  a_brake_emergency_model1 } }, to_int(NearestTiesToAway, v))))))
+  a_brake_emergency_model1 } }, to_int(NearestTiesToAway, v)))

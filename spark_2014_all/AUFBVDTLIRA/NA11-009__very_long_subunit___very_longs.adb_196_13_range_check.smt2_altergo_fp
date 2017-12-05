@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -856,7 +856,7 @@ axiom compare_def_gt :
 
 type tdigit_count_typeB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1169,8 +1169,133 @@ function t59b__ref___projection(a: t59b__ref) : tdigit_count_typeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic digit_count : int
+
+logic i : int
+
+logic very_longs__number_of_digits__result : int
+
+logic us : int
+
+logic o : bool
+
+logic temp___876 : int
+
+logic temp___875 : int
+
+logic o1 : int
+
+logic o2 : octet
+
+logic o3 : t
+
+logic o4 : bool
+
+logic o5 : int
+
+logic j : int
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : bool
+
+logic o10 : int
+
+logic i1 : int
+
+logic o11 : bool
+
+logic i2 : int
+
+logic result : int
+
+logic digit_count1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic digit_count2 : int
+
+logic digit_count3 : int
+
+logic i4 : int
+
+logic result5 : int
+
+logic i5 : int
+
+logic result6 : bool
+
+logic result7 : int
+
+logic digit_count4 : int
+
+logic digit_count5 : int
+
+logic i6 : int
+
+logic digit_count6 : int
+
+logic i7 : int
+
+logic digit_count7 : int
+
+logic i8 : int
+
+logic digit_count8 : int
+
+logic i9 : int
+
+logic digit_count9 : int
+
+logic i10 : int
+
+logic digit_count10 : int
+
+logic i11 : int
+
+logic digit_count11 : int
+
+logic i12 : int
+
+logic digit_count12 : int
+
+logic i13 : int
+
+logic result8 : int
+
+logic very_longs__number_of_digits__result1 : int
+
+logic very_longs__number_of_digits__result2 : int
+
+logic very_longs__number_of_digits__result3 : int
+
+logic digit_count13 : int
+
+logic i14 : int
+
+logic very_longs__number_of_digits__result4 : int
+
+logic digit_count14 : int
+
+logic i15 : int
+
+logic very_longs__number_of_digits__result5 : int
+
+axiom H : (dynamic_property1(1, to_rep(number), to_rep2(first(number2)),
+  to_rep2(last(number2))) and ((to_rep2(first(number2)) = 1) and
+  (to_rep2(last(number2)) = to_rep(number))))
+
  (* File "very_longs.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property1(1, to_rep(number),
-  to_rep2(first(number2)), to_rep2(last(number2))) and
-  ((to_rep2(first(number2)) = 1) and
-  (to_rep2(last(number2)) = to_rep(number)))) -> in_range2(to_rep(number)))
+goal WP_parameter_def : in_range2(to_rep(number))

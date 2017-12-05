@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -372,50 +372,163 @@ function trS__ref___projection(a: trS__ref) : trS = (a).trS__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. forall r:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result:int.
-  forall o:int. forall o1:int. forall temp___249:int. forall temp___248:int.
-  forall temp___247:int. forall o2:int. forall a1:int. forall b1:int.
-  forall r1:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1:int.
-  forall result:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2:int.
-  forall result1:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5:int.
-  forall result2:int. forall a2:int. forall result3:int. forall b2:int.
-  forall a3:int. forall b3:int. forall r2:int. forall result4:int.
-  forall r3:int. forall a4:int. forall b4:int. forall a5:int. forall b5:int.
-  forall a6:int. forall b6:int. forall r4:int. forall a7:int. forall b7:int.
-  forall r5:int. forall a8:int. forall b8:int. forall r6:int. forall a9:int.
-  forall b9:int. forall r7:int. forall result5:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8:int.
-  forall a10:int. forall b10:int. forall r8:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9:int.
-  forall a11:int. forall b11:int. forall r9:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10:int.
-  forall a12:int. forall b12:int. forall r10:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11:int.
-  forall a13:int. forall b13:int. forall r11:int.
-  forall test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12:int.
-  (in_range1(left) -> (in_range1(right) -> (((2 <= left) and (0 <= right)) ->
-  (((((1 <= 2147483647) -> in_range2(a)) and (((1 <= 2147483647) ->
+logic a : int
+
+logic b : int
+
+logic r : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___249 : int
+
+logic temp___248 : int
+
+logic temp___247 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic a1 : int
+
+logic b1 : int
+
+logic r1 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1 : int
+
+logic result : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 : int
+
+logic result1 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 : int
+
+logic result2 : int
+
+logic a2 : int
+
+logic result3 : int
+
+logic b2 : int
+
+logic a3 : int
+
+logic b3 : int
+
+logic r2 : int
+
+logic result4 : int
+
+logic r3 : int
+
+logic result5 : int
+
+logic a4 : int
+
+logic result6 : int
+
+logic b4 : int
+
+logic a5 : int
+
+logic b5 : int
+
+logic a6 : int
+
+logic b6 : int
+
+logic a7 : int
+
+logic b7 : int
+
+logic r4 : int
+
+logic a8 : int
+
+logic b8 : int
+
+logic r5 : int
+
+logic a9 : int
+
+logic b9 : int
+
+logic r6 : int
+
+logic a10 : int
+
+logic b10 : int
+
+logic r7 : int
+
+logic result7 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8 : int
+
+logic a11 : int
+
+logic b11 : int
+
+logic r8 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 : int
+
+logic a12 : int
+
+logic b12 : int
+
+logic r9 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 : int
+
+logic a13 : int
+
+logic b13 : int
+
+logic r10 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 : int
+
+logic a14 : int
+
+logic b14 : int
+
+logic r11 : int
+
+logic test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12 : int
+
+axiom H : in_range1(left)
+
+axiom H1 : in_range1(right)
+
+axiom H2 : ((2 <= left) and (0 <= right))
+
+axiom H3 : ((((1 <= 2147483647) -> in_range2(a)) and (((1 <= 2147483647) ->
   in_range3(b)) and (((0 <= 2147483647) -> in_range4(r)) and
-  (((((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9) and
-  ((r = r8) and (({ int__content = b10 } = { int__content = b }) and ({
-  int__content = a10 } = { int__content = a })))) and
+  (((((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4) and
+  ((r8 = r) and ((b11 = b) and (a11 = a)))) and
   ((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5) and
-  ((r9 = r1) and ((b11 = b1) and (a11 = a1))))) and (((left = 0) and
+  ((r9 = r1) and ((b12 = b1) and (a12 = a1))))) and (((left = 0) ->
   (((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4) and
   (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2)) and
   ((result = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result) and
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = right)))) or
-  ((not (left = 0)) and
+  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = right)))) and
+  ((not (left = 0)) ->
   (((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result4) and
   (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result5 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3)) and
   ((right = 0) and
@@ -425,44 +538,34 @@ goal WP_parameter_def :
   ((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result) and
   (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result1))) and
   (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result3))) and
-  (((({ int__content =
-  test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9
-  } = { int__content =
-  test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7
-  }) and (({ int__content = r8 } = { int__content = r6 }) and (({
-  int__content = b10 } = { int__content = b8 }) and ({ int__content = a10
-  } = { int__content = a8 })))) and
+  ((((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7) and
+  ((r8 = r6) and ((b11 = b9) and (a11 = a9)))) and
   ((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8) and
-  ((r9 = r7) and ((b11 = b9) and (a11 = a9))))) and ((((o = left) and
-  in_range2(left)) and (({ int__content = result2 } = { int__content = a
-  }) and (a2 = o))) and ((((o1 = right) and in_range3(right)) and (({
-  int__content = result3 } = { int__content = b }) and (b2 = o1))) and
+  ((r9 = r7) and ((b12 = b10) and (a12 = a10))))) and ((((o = left) and
+  in_range2(left)) and ((result2 = a) and (a2 = o))) and ((((o1 = right) and
+  in_range3(right)) and ((result3 = b) and (b2 = o1))) and
   (((((temp___249 = a2) and ((temp___248 = r) and ((temp___247 = b2) and
   ((((0 <  a3) and (0 <  b3)) and ((not ((a3 = 1) and (b3 = 1))) and
   ((are_coprime(a3, b3) = true) <-> (are_coprime(left, right) = true)))) and
   (((((1 <= 2147483647) -> in_range3(b3)) and ((0 <= 2147483647) ->
   in_range4(r2))) and ((1 <= 2147483647) -> in_range2(a3))) and
   ((((o2 = mod(a3, b3)) and in_range4(mod(a3, b3))) and ((r2 = result4) and
-  (r3 = o2))) and ((((b3 = b4) and (a3 = a4)) and ((b5 = b3) and
-  (a5 = a3))) and (r3 = 0)))))))) and (((r3 = r4) and (({ int__content = b6
-  } = { int__content = b4 }) and ({ int__content = a6 } = { int__content = a4
-  }))) and ((r5 = r3) and ((b7 = b5) and (a7 = a5))))) and ((({
-  int__content = r6 } = { int__content = r4 }) and (({ int__content = b8
-  } = { int__content = b6 }) and ({ int__content = a8 } = { int__content = a6
-  }))) and ((r7 = r5) and ((b9 = b7) and (a9 = a7))))) and
-  ((not ((a8 = 1) and (0 <  b8))) and
-  (((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7) and
+  (r3 = o2))) and ((((b3 = b5) and (a3 = a5)) and ((b6 = b3) and
+  (a6 = a3))) and (r3 = 0)))))))) and (((r3 = r4) and ((b7 = b5) and
+  (a7 = a5))) and ((r5 = r3) and ((b8 = b6) and (a8 = a6))))) and
+  (((r6 = r4) and ((b9 = b7) and (a9 = a7))) and ((r7 = r5) and
+  ((b10 = b8) and (a10 = a8))))) and ((not ((a9 = 1) and (0 <  b9))) and
+  (((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result7 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6) and
   (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result8 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6)) and
-  ((result5 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2) and
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 = b8))))))))))))) and
-  ((({ int__content =
-  test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11
-  } = { int__content =
-  test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9
-  }) and (({ int__content = r10 } = { int__content = r8 }) and (({
-  int__content = b12 } = { int__content = b10 }) and ({ int__content = a12
-  } = { int__content = a10 })))) and
+  ((result7 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result2) and
+  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result6 = b9))))))))))))) and
+  (((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result9) and
+  ((r10 = r8) and ((b13 = b11) and (a13 = a11)))) and
   ((test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result12 = test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result10) and
-  ((r11 = r9) and ((b13 = b11) and (a13 = a11)))))) -> ((are_coprime(left,
-  right) = true) ->
-  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 = 1)))))))
+  ((r11 = r9) and ((b14 = b12) and (a14 = a12))))))
+
+axiom H4 : (are_coprime(left, right) = true)
+
+ (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (test_prime_and_coprime_numbers__p__initialize_coprime_list__euclid__result11 = 1)

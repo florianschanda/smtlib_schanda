@@ -153,6 +153,8 @@
 (declare-fun first_index__function_guard (Int us_rep) Bool)
 (define-fun dynamic_invariant2 ((temp___expr_213 Int) (temp___is_init_210 Bool) (temp___skip_constant_211 Bool) (temp___do_toplevel_212 Bool)) Bool (=> (or (= temp___is_init_210 true) (<= 0 2147483647)) (in_range temp___expr_213)))
 (define-fun dynamic_invariant3 ((temp___expr_219 Int) (temp___is_init_216 Bool) (temp___skip_constant_217 Bool) (temp___do_toplevel_218 Bool)) Bool (=> (or (= temp___is_init_216 true) (<= 0 2147483647)) (in_range1 temp___expr_219)))
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 container)))))))
 (assert (not (in_range (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))))))
 (check-sat)

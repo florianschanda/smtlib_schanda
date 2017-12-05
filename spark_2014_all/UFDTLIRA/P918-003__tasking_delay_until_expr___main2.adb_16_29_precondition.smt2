@@ -74,6 +74,7 @@
 (assert true)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const zero Int)
+(declare-const o us_rep1)
 (declare-const result Int)
 (declare-const zero1 Int)
 (assert (= result zero))

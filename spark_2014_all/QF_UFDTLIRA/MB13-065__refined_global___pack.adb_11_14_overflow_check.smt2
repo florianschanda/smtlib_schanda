@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const a Int)
 (declare-const b Int)
+(declare-const o Int)
 (assert (in_range a))
 (assert (not (in_range (+ a b))))
 (check-sat)

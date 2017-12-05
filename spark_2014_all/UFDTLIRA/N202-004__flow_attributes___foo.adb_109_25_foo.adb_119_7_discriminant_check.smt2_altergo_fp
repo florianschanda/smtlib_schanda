@@ -391,10 +391,25 @@ type t46b__ref = { t46b__content : us_rep
 
 function t46b__ref___projection(a: t46b__ref) : us_rep = (a).t46b__content
 
+logic o : positive
+
+logic o1 : positive
+
+logic temp___296 : bool
+
+logic temp___2961 : positive
+
+axiom H : (to_int(a__split_discrs) = 1)
+
+axiom H1 : (a__split_discrs = r42b)
+
+axiom H2 : (to_rep(o) = 1)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (of_int(1) = temp___296)
+
+axiom H5 : (temp___2961 = o1)
+
  (* File "foo.adb", line 98, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:positive. forall o1:positive. forall temp___296:bool.
-  forall temp___2961:positive. ((to_int(a__split_discrs) = 1) ->
-  ((a__split_discrs = r42b) -> ((((to_rep(o) = 1) and (o = o1)) and
-  ((of_int(1) = temp___296) and (temp___2961 = o1))) ->
-  (temp___296 = a__split_discrs)))))
+goal WP_parameter_def : (temp___296 = a__split_discrs)

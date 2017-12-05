@@ -89,7 +89,7 @@ axiom func__def_axiom : ((func(void) = true) <-> (r(void) = true))
 
 type tt1B
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -144,7 +144,7 @@ function tt1B__ref___projection(a: tt1B__ref) : tt1B = (a).tt1B__content
 
 type t1
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -267,7 +267,33 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic to1 : int
+
+logic to2 : int
+
+logic to3__split_fields : bool
+
+logic temp___166 : int
+
+logic o : int
+
+logic usobject : bool
+
+logic result : int
+
+logic to11 : int
+
+logic result1 : int
+
+logic to21 : int
+
+logic to22 : int
+
+axiom H : (result = to1)
+
+axiom H1 : (to11 = 3)
+
+axiom H2 : in_range2(to11)
+
  (* File "types.ads", line 24, characters 0-0 *)
-goal WP_parameter_def :
-  (forall to1:int. forall result:int. forall to11:int. (((result = to1) and
-  (to11 = 3)) -> (in_range2(to11) -> (not (of_int(1) = true)))))
+goal WP_parameter_def : (not (of_int(1) = true))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -776,34 +776,82 @@ axiom lookup_table__def_axiom :
   (lookup_table = scrabble__lookup_table__aggregate_def(1, 3, 3, 2, 1, 4, 2,
   4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10))
 
- (* File "scrabble.ads", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall total_score:int. forall letter_index:int. forall o:int.
-  forall result:int. forall total_score1:int. forall result1:int.
-  forall letter_index1:int. forall total_score2:int.
-  forall letter_index2:int.
-  ((forall temp___194:int. (((65 <= temp___194) and (temp___194 <= 90)) ->
-   (((1 <= to_rep1((lookup_table[temp___194]))) and
-   (to_rep1((lookup_table[temp___194])) <= 5)) or
-   (((8 <= to_rep1((lookup_table[temp___194]))) and
-   (to_rep1((lookup_table[temp___194])) <= 8)) or
-   ((10 <= to_rep1((lookup_table[temp___194]))) and
-   (to_rep1((lookup_table[temp___194])) <= 10)))))) ->
-  ((scrabble__lookup_table__aggregate_def(1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1,
-  3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10) = lookup_table) ->
-  (dynamic_property(1, 2147483647, to_rep2(first(word1)),
-  to_rep2(last(word1))) -> ((length({ elts = word; rt = word1 }) <= 10) ->
-  (((result = total_score) and (total_score1 = 0)) ->
-  (in_range5(total_score1) -> (((result1 = letter_index) and
-  (letter_index1 = to_rep2(first(word1)))) ->
-  (((to_rep2(first(word1)) <= letter_index1) and
-  (letter_index1 <= to_rep2(last(word1)))) ->
-  ((total_score2 <= (10 * (letter_index2 - to_rep2(first(word1))))) ->
-  (((((to_rep2(first(word1)) <= to_rep2(last(word1))) ->
+logic total_score : int
+
+logic letter_index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic total_score1 : int
+
+logic result1 : int
+
+logic letter_index1 : int
+
+logic total_score2 : int
+
+logic letter_index2 : int
+
+logic result2 : int
+
+logic total_score3 : int
+
+logic result3 : int
+
+logic letter_index3 : int
+
+axiom H :
+  (forall temp___194:int. (((65 <= temp___194) and (temp___194 <= 90)) ->
+  (((1 <= to_rep1((lookup_table[temp___194]))) and
+  (to_rep1((lookup_table[temp___194])) <= 5)) or
+  (((8 <= to_rep1((lookup_table[temp___194]))) and
+  (to_rep1((lookup_table[temp___194])) <= 8)) or
+  ((10 <= to_rep1((lookup_table[temp___194]))) and
+  (to_rep1((lookup_table[temp___194])) <= 10))))))
+
+axiom H1 : (scrabble__lookup_table__aggregate_def(1, 3, 3, 2, 1, 4, 2, 4, 1,
+  8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10) = lookup_table)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep2(first(word1)),
+  to_rep2(last(word1)))
+
+axiom H3 : (length({ elts = word; rt = word1 }) <= 10)
+
+axiom H4 : (result = total_score)
+
+axiom H5 : (total_score1 = 0)
+
+axiom H6 : in_range5(total_score1)
+
+axiom H7 : (result1 = letter_index)
+
+axiom H8 : (letter_index1 = to_rep2(first(word1)))
+
+axiom H9 : (to_rep2(first(word1)) <= letter_index1)
+
+axiom H10 : (letter_index1 <= to_rep2(last(word1)))
+
+axiom H11 : (total_score2 <= (10 * (letter_index2 - to_rep2(first(word1)))))
+
+axiom H12 : ((((to_rep2(first(word1)) <= to_rep2(last(word1))) ->
   dynamic_property1(to_rep2(first(word1)), to_rep2(last(word1)),
   letter_index2)) and ((0 <= 100) -> in_range5(total_score2))) and
   ((to_rep2(first(word1)) <= letter_index2) and
-  (letter_index2 <= to_rep2(last(word1))))) ->
-  (((o = (total_score2 + to_rep1((lookup_table[to_rep((word[letter_index2]))])))) and
-  in_range1((total_score2 + to_rep1((lookup_table[to_rep((word[letter_index2]))]))))) ->
-  in_range5(o)))))))))))))
+  (letter_index2 <= to_rep2(last(word1)))))
+
+axiom H13 :
+  ((o3 = (total_score2 + to_rep1((lookup_table[to_rep((word[letter_index2]))])))) and
+  in_range1((total_score2 + to_rep1((lookup_table[to_rep((word[letter_index2]))])))))
+
+ (* File "scrabble.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : in_range5(o3)

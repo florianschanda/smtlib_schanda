@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -200,7 +200,7 @@ axiom coerce_axiom :
 
 type t
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -542,17 +542,60 @@ type t23s__ref = { t23s__content : us_t1
 
 function t23s__ref___projection(a2: t23s__ref) : us_t1 = (a2).t23s__content
 
+logic o : int
+
+logic o1 : int
+
+logic i : int
+
+logic o2 : int
+
+logic o3 : bool
+
+logic temp___172 : int
+
+logic o4 : (int,t) farray
+
+logic temp___174 : (int,t) farray
+
+logic temp___1741 : t2
+
+logic o5 : (int,t) farray
+
+logic o6 : t1
+
+logic us : bool
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : in_range2(size_a)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H3 : in_range2(size_b)
+
+axiom H4 : ((size_a <= length({ elts = a; rt = a1 })) and (size_b <= length({
+  elts = b; rt = b1 })))
+
+axiom H5 : ((o2 = (size_a - size_b)) and in_range1((size_a - size_b)))
+
+axiom H6 : (((i <= o2) -> (o3 = true)) and ((not (i <= o2)) -> (o3 = false)))
+
+axiom H7 : (((0 <= i) -> (result1 = o3)) and ((not (0 <= i)) ->
+  (result1 = false)))
+
+axiom H8 : (result1 = true)
+
+axiom H9 : ((temp___172 = (to_rep(first(a1)) + i)) and
+  in_range1((to_rep(first(a1)) + i)))
+
+axiom H10 : (temp___172 <= to_rep(last(a1)))
+
  (* File "bug.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall o1:bool. forall temp___172:int.
-  forall result:bool. (dynamic_property(1, 2147483647, to_rep(first(a1)),
-  to_rep(last(a1))) -> (in_range2(size_a) -> (dynamic_property(1, 2147483647,
-  to_rep(first(b1)), to_rep(last(b1))) -> (in_range2(size_b) ->
-  (((size_a <= length({ elts = a; rt = a1 })) and (size_b <= length({ elts =
-  b; rt = b1 }))) -> (((((o = (size_a - size_b)) and
-  in_range1((size_a - size_b))) and (((i <= o) and (o1 = true)) or
-  ((not (i <= o)) and (o1 = false)))) and (((0 <= i) and (result = o1)) or
-  ((not (0 <= i)) and (result = false)))) -> ((result = true) ->
-  (((temp___172 = (to_rep(first(a1)) + i)) and
-  in_range1((to_rep(first(a1)) + i))) -> ((temp___172 <= to_rep(last(a1))) ->
-  (to_rep(first(a1)) <= temp___172)))))))))))
+goal WP_parameter_def : (to_rep(first(a1)) <= temp___172)

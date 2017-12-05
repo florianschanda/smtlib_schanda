@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2229,186 +2229,1258 @@ axiom writereg32post__post_axiom :
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and3(regnew,
   of_int3(18446744069414584320)) = of_int3(0))))))
 
- (* File "x86.ads", line 334, characters 0-0 *)
-goal WP_parameter_def :
-  (forall zeroflag:bool. forall carryflag:bool. forall signflag:bool.
-  forall overflowflag:bool. forall xmm0:t3. forall xmm1:t3. forall xmm2:t3.
-  forall xmm3:t3. forall xmm6:t3. forall rbx:t3. forall rsp:t3.
-  forall rbp:t3. forall rsi:t3. forall r12:t3. forall r13:t3. forall r14:t3.
-  forall r15:t3. forall memory:(t3,unsigned8) farray. forall savestackptr:t3.
-  forall ra0:t. forall ra1:t. forall ra2:t. forall ra3:t. forall ra4:t.
-  forall ra5:t__ref. forall ra6:t__ref. forall ra7:t__ref.
-  forall saverbx:t__ref3. forall saverbp:t__ref3. forall saver12:t__ref3.
-  forall saver13:t__ref3. forall saver14:t__ref3. forall saver15:t__ref3.
-  forall o:t3. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
-  forall o10:t. forall o11:t. forall o12:t. forall o13:t. forall o14:t.
-  forall o15:t. forall o16:t. forall o17:t3. forall o18:t3. forall o19:t3.
-  forall o20:t3. forall o21:t3. forall o22:t3. forall o23:t3. forall o24:t3.
-  forall o25:t3. forall o26:t3. forall o27:t2. forall o28:t2. forall o29:t3.
-  forall o30:t2. forall o31:t2. forall o32:t2. forall o33:t2.
-  forall o34:bool. forall o35:t2. forall o36:t2. forall o37:t2.
-  forall o38:bool. forall o39:t3. forall o40:t3. forall o41:t3.
-  forall o42:t3. forall o43:t2. forall o44:t2. forall o45:t3. forall o46:t2.
-  forall o47:t2. forall o48:t2. forall o49:t2. forall o50:bool.
-  forall o51:t2. forall o52:t2. forall o53:t2. forall o54:bool.
-  forall o55:t3. forall o56:t3. forall o57:t3. forall o58:t3. forall o59:t2.
-  forall o60:t2. forall o61:t3. forall o62:t2. forall o63:t2. forall o64:t2.
-  forall o65:t2. forall o66:bool. forall o67:t2. forall o68:t2.
-  forall o69:t2. forall o70:bool. forall o71:t3. forall o72:t3.
-  forall o73:t3. forall o74:t2. forall o75:t2. forall o76:t3. forall o77:t2.
-  forall o78:t2. forall o79:t2. forall o80:t2. forall o81:bool.
-  forall o82:t2. forall o83:t2. forall o84:t2. forall o85:bool.
-  forall o86:t3. forall o87:t2. forall o88:t2. forall o89:t3. forall o90:t2.
-  forall o91:t2. forall o92:t3. forall o93:t2. forall o94:t3. forall o95:t3.
-  forall o96:t3. forall o97:t3. forall o98:t3. forall o99:t3.
-  forall result:t__ref3. forall savestackptr1:t3. forall result1:t__ref.
-  forall ra01:t. forall result2:t__ref. forall ra11:t. forall result3:t__ref.
-  forall ra21:t. forall result4:t__ref. forall ra31:t. forall result5:t__ref.
-  forall ra41:t. forall result6:t__ref. forall ra51:t. forall result7:t__ref.
-  forall ra61:t. forall result8:t__ref. forall ra71:t.
-  forall result9:t__ref3. forall saverbx1:t3. forall result10:t__ref3.
-  forall saverbp1:t3. forall result11:t__ref3. forall saver121:t3.
-  forall result12:t__ref3. forall saver131:t3. forall result13:t__ref3.
-  forall saver141:t3. forall result14:t__ref3. forall saver151:t3.
-  forall memory1:(t3,unsigned8) farray. forall result15:t__ref3.
-  forall rsp1:t3. forall memory2:(t3,unsigned8) farray.
-  forall result16:t__ref3. forall rsp2:t3. forall rdi:t3.
-  forall memory3:(t3,unsigned8) farray. forall result17:t__ref3.
-  forall rsp3:t3. forall memory4:(t3,unsigned8) farray.
-  forall result18:t__ref3. forall rsp4:t3.
-  forall memory5:(t3,unsigned8) farray. forall result19:t__ref3.
-  forall rsp5:t3. forall memory6:(t3,unsigned8) farray.
-  forall result20:t__ref3. forall rsp6:t3. forall rbx1:t3.
-  forall result21:t__ref3. forall rsp7:t3. forall result22:t__ref3.
-  forall rsp8:t3. forall rsp9:t3. forall result23:t__ref3. forall rsi1:t3.
-  forall result24:t__ref3. forall rdi1:t3. forall result25:t__ref3.
-  forall rbp1:t3. forall result26:t__ref3. forall xmm31:t3.
-  forall result27:t__ref3. forall xmm21:t3. forall result28:t__ref3.
-  forall xmm11:t3. forall result29:t__ref3. forall xmm01:t3.
-  forall result30:t__ref3. forall rsp10:t3. forall rsp11:t3. forall rdi2:t3.
-  forall rax:t3. forall result31:t__ref3. forall rsp12:t3. forall rsp13:t3.
-  forall rdi3:t3. forall result32:bool__ref. forall zeroflag1:bool.
-  forall result33:bool__ref. forall signflag1:bool.
-  forall result34:bool__ref. forall carryflag1:bool.
-  forall result35:bool__ref. forall overflowflag1:bool.
-  forall zeroflag2:bool. forall carryflag2:bool. forall signflag2:bool.
-  forall overflowflag2:bool. forall xmm02:t3. forall rsp14:t3.
-  forall rbp2:t3. forall rdi4:t3. forall rbx2:t3. forall result36:t__ref3.
-  forall rbp3:t3. forall result37:t__ref3. forall rsp15:t3. forall rsp16:t3.
-  forall result38:t__ref3. forall rsi2:t3. forall result39:t__ref3.
-  forall rdi5:t3. forall result40:t__ref3. forall xmm32:t3.
-  forall result41:t__ref3. forall xmm22:t3. forall result42:t__ref3.
-  forall xmm12:t3. forall result43:t__ref3. forall xmm03:t3.
-  forall result44:t__ref3. forall rsp17:t3. forall rsp18:t3. forall rax1:t3.
-  forall rdi6:t3. forall result45:t__ref3. forall rsp19:t3. forall rsp20:t3.
-  forall rsi3:t3. forall result46:bool__ref. forall zeroflag3:bool.
-  forall result47:bool__ref. forall signflag3:bool.
-  forall result48:bool__ref. forall carryflag3:bool.
-  forall result49:bool__ref. forall overflowflag3:bool.
-  forall zeroflag4:bool. forall carryflag4:bool. forall signflag4:bool.
-  forall overflowflag4:bool. forall xmm04:t3. forall rsp21:t3.
-  forall rbp4:t3. forall rdi7:t3. forall rbx3:t3. forall result50:t__ref3.
-  forall rbp5:t3. forall result51:t__ref3. forall rsp22:t3. forall rsp23:t3.
-  forall result52:t__ref3. forall rsi4:t3. forall result53:t__ref3.
-  forall rdi8:t3. forall result54:t__ref3. forall xmm33:t3.
-  forall result55:t__ref3. forall xmm23:t3. forall result56:t__ref3.
-  forall xmm13:t3. forall result57:t__ref3. forall xmm05:t3.
-  forall result58:t__ref3. forall rsp24:t3. forall rsp25:t3. forall rax2:t3.
-  forall rdi9:t3. forall result59:t__ref3. forall rsp26:t3. forall rsp27:t3.
-  forall rcx:t3. forall result60:bool__ref. forall zeroflag5:bool.
-  forall result61:bool__ref. forall signflag5:bool.
-  forall result62:bool__ref. forall carryflag5:bool.
-  forall result63:bool__ref. forall overflowflag5:bool.
-  forall zeroflag6:bool. forall carryflag6:bool. forall signflag6:bool.
-  forall overflowflag6:bool. forall xmm06:t3. forall rsp28:t3.
-  forall rbp6:t3. forall rdi10:t3. forall rbx4:t3. forall result64:t__ref3.
-  forall rbp7:t3. forall result65:t__ref3. forall rsp29:t3. forall rsp30:t3.
-  forall result66:t__ref3. forall xmm24:t3. forall result67:t__ref3.
-  forall rsi5:t3. forall result68:t__ref3. forall rdi11:t3.
-  forall result69:t__ref3. forall xmm34:t3. forall result70:t__ref3.
-  forall xmm14:t3. forall result71:t__ref3. forall xmm07:t3.
-  forall result72:t__ref3. forall rsp31:t3. forall rsp32:t3. forall rax3:t3.
-  forall rdi12:t3. forall result73:t__ref3. forall rsp33:t3. forall rsp34:t3.
-  forall rdx:t3. forall result74:bool__ref. forall zeroflag7:bool.
-  forall result75:bool__ref. forall signflag7:bool.
-  forall result76:bool__ref. forall carryflag7:bool.
-  forall result77:bool__ref. forall overflowflag7:bool. forall rsp35:t3.
-  forall rdi13:t3. forall result78:t__ref3. forall r151:t3.
-  forall result79:t__ref3. forall rsp36:t3. forall rsp37:t3.
-  forall result80:t__ref3. forall xmm61:t3.
-  forall memory7:(t3,unsigned8) farray. forall xmm25:t3. forall xmm35:t3.
-  forall xmm4:t3. forall xmm5:t3. forall xmm62:t3. forall xmm7:t3.
-  forall rsp38:t3. forall r121:t3. forall r131:t3. forall r141:t3.
-  forall r152:t3. forall memory8:(t3,unsigned8) farray. forall rdi14:t3.
-  forall rbx5:t3. forall rbx6:t3. forall rsp39:t3. forall rsi6:t3.
-  forall memory9:(t3,unsigned8) farray. forall result81:t__ref3.
-  forall rsi7:t3. forall rdi15:t3. forall rbx7:t3. forall result82:t__ref3.
-  forall rsp40:t3. forall exit_called:bool. forall carryflag8:bool.
-  forall signflag8:bool. forall overflowflag8:bool. forall rcx1:t3.
-  forall rsp41:t3. forall r8:t3. forall memory10:(t3,unsigned8) farray.
-  forall rdx1:t3. forall rsi8:t3. forall rdi16:t3. forall rax4:t3.
-  forall result83:t__ref3. forall rsp42:t3. forall rsp43:t3. forall rdi17:t3.
-  forall result84:t__ref3. forall rsp44:t3. forall rsp45:t3.
-  forall result85:t__ref3. forall xmm26:t3. forall xmm27:t3. forall rsp46:t3.
-  forall memory11:(t3,unsigned8) farray. forall rdi18:t3. forall rbx8:t3.
-  forall result86:t__ref3. forall rsp47:t3. forall rsp48:t3.
-  forall result87:t__ref3. forall xmm28:t3. forall zeroflag8:bool.
-  forall xmm08:t3. forall xmm15:t3. forall xmm29:t3. forall rbx9:t3.
-  forall rsp49:t3. forall rbp8:t3. forall rdi19:t3.
-  forall memory12:(t3,unsigned8) farray. forall result88:t__ref3.
-  forall rsp50:t3. forall rax5:t3. forall result89:t__ref3. forall rbx10:t3.
-  forall result90:t__ref3. forall rsp51:t3. forall result91:t__ref3.
-  forall rbp9:t3. forall result92:t__ref3. forall rsp52:t3.
-  forall result93:t__ref3. forall r122:t3. forall result94:t__ref3.
-  forall rsp53:t3. forall result95:t__ref3. forall r132:t3.
-  forall result96:t__ref3. forall rsp54:t3. forall result97:t__ref3.
-  forall r142:t3. forall result98:t__ref3. forall rsp55:t3.
-  forall result99:t__ref3. forall r153:t3. forall result100:t__ref3.
-  forall rsp56:t3. forall result101:t__ref3. forall rsp57:t3.
-  forall exit_called1:bool__ref. forall zeroflag9:bool__ref.
-  forall carryflag9:bool__ref. forall signflag9:bool__ref.
-  forall overflowflag9:bool__ref. forall xmm09:t__ref3. forall xmm16:t__ref3.
-  forall xmm210:t__ref3. forall xmm36:t__ref3. forall xmm41:t__ref3.
-  forall xmm51:t__ref3. forall xmm63:t__ref3. forall xmm71:t__ref3.
-  forall rax6:t__ref3. forall rcx2:t__ref3. forall rdx2:t__ref3.
-  forall rbx11:t__ref3. forall rsp58:t__ref3. forall rbp10:t__ref3.
-  forall rsi9:t__ref3. forall rdi20:t__ref3. forall r81:t__ref3.
-  forall r123:t__ref3. forall r133:t__ref3. forall r143:t__ref3.
-  forall r154:t__ref3. forall memory13:map__ref.
-  forall savestackptr2:t__ref3. forall ra02:t__ref. forall ra12:t__ref.
-  forall ra22:t__ref. forall ra32:t__ref. forall ra42:t__ref.
-  forall ra52:t__ref. forall ra62:t__ref. forall ra72:t__ref.
-  forall saverbx2:t__ref3. forall saverbp2:t__ref3. forall saver122:t__ref3.
-  forall saver132:t__ref3. forall saver142:t__ref3. forall saver152:t__ref3.
-  forall exit_called2:bool. forall zeroflag10:bool. forall carryflag10:bool.
-  forall signflag10:bool. forall overflowflag10:bool. forall xmm010:t3.
-  forall xmm17:t3. forall xmm211:t3. forall xmm37:t3. forall xmm42:t3.
-  forall xmm52:t3. forall xmm64:t3. forall xmm72:t3. forall rax7:t3.
-  forall rcx3:t3. forall rdx3:t3. forall rbx12:t3. forall rsp59:t3.
-  forall rbp11:t3. forall rsi10:t3. forall rdi21:t3. forall r82:t3.
-  forall r124:t3. forall r134:t3. forall r144:t3. forall r155:t3.
-  forall memory14:(t3,unsigned8) farray. forall savestackptr3:t3.
-  forall ra03:t. forall ra13:t. forall ra23:t. forall ra33:t. forall ra43:t.
-  forall ra53:t. forall ra63:t. forall ra73:t. forall saverbx3:t3.
-  forall saverbp3:t3. forall saver123:t3. forall saver133:t3.
-  forall saver143:t3. forall saver153:t3. (((((o = rsp) and ((result = {
-  t__content3 = savestackptr }) and (savestackptr1 = o))) and
-  (((((o1 = readmem8(rsp, memory)) and (o1 = to_rep((memory[rsp])))) and
-  (o2 = o1)) and ((result1 = { t__content = ra0 }) and (ra01 = o2))) and
-  (((((o3 = readmem8(add3(rsp, of_int3(1)), memory)) and
+logic ds : t3
+
+logic fs : t3
+
+logic gs : t3
+
+logic ss : t3
+
+logic stackaddresssize : t1
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic xmm0 : t3
+
+logic xmm1 : t3
+
+logic xmm2 : t3
+
+logic xmm3 : t3
+
+logic xmm4 : t3
+
+logic xmm5 : t3
+
+logic xmm6 : t3
+
+logic xmm7 : t3
+
+logic rax : t3
+
+logic rcx : t3
+
+logic rdx : t3
+
+logic rbx : t3
+
+logic rsp : t3
+
+logic rbp : t3
+
+logic rsi : t3
+
+logic rdi : t3
+
+logic r8 : t3
+
+logic r9 : t3
+
+logic r10 : t3
+
+logic r11 : t3
+
+logic r12 : t3
+
+logic r13 : t3
+
+logic r14 : t3
+
+logic r15 : t3
+
+logic memory : (t3,unsigned8) farray
+
+logic dummy_var : t3
+
+logic savestackptr : t3
+
+logic ra0 : t
+
+logic ra1 : t
+
+logic ra2 : t
+
+logic ra3 : t
+
+logic ra4 : t
+
+logic ra5 : t
+
+logic ra6 : t
+
+logic ra7 : t
+
+logic saverbx : t3
+
+logic saverbp : t3
+
+logic saver12 : t3
+
+logic saver13 : t3
+
+logic saver14 : t3
+
+logic saver15 : t3
+
+logic o : t3
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t3
+
+logic o18 : t3
+
+logic o19 : t3
+
+logic o20 : t3
+
+logic o21 : t3
+
+logic o22 : t3
+
+logic o23 : t3
+
+logic o24 : t3
+
+logic o25 : t3
+
+logic o26 : t3
+
+logic o27 : t2
+
+logic o28 : t2
+
+logic o29 : t3
+
+logic o30 : t2
+
+logic o31 : t2
+
+logic o32 : t2
+
+logic o33 : t2
+
+logic o34 : bool
+
+logic o35 : t2
+
+logic o36 : t2
+
+logic o37 : t2
+
+logic o38 : bool
+
+logic o39 : t3
+
+logic o40 : t3
+
+logic o41 : t3
+
+logic o42 : t3
+
+logic o43 : t2
+
+logic o44 : t2
+
+logic o45 : t3
+
+logic o46 : t2
+
+logic o47 : t2
+
+logic o48 : t2
+
+logic o49 : t2
+
+logic o50 : bool
+
+logic o51 : t2
+
+logic o52 : t2
+
+logic o53 : t2
+
+logic o54 : bool
+
+logic o55 : t3
+
+logic o56 : t3
+
+logic o57 : t3
+
+logic o58 : t3
+
+logic o59 : t2
+
+logic o60 : t2
+
+logic o61 : t3
+
+logic o62 : t2
+
+logic o63 : t2
+
+logic o64 : t2
+
+logic o65 : t2
+
+logic o66 : bool
+
+logic o67 : t2
+
+logic o68 : t2
+
+logic o69 : t2
+
+logic o70 : bool
+
+logic o71 : t3
+
+logic o72 : t3
+
+logic o73 : t3
+
+logic o74 : t2
+
+logic o75 : t2
+
+logic o76 : t3
+
+logic o77 : t2
+
+logic o78 : t2
+
+logic o79 : t2
+
+logic o80 : t2
+
+logic o81 : bool
+
+logic o82 : t2
+
+logic o83 : t2
+
+logic o84 : t2
+
+logic o85 : bool
+
+logic o86 : t3
+
+logic o87 : t2
+
+logic o88 : t2
+
+logic o89 : t3
+
+logic o90 : t2
+
+logic o91 : t2
+
+logic o92 : t3
+
+logic o93 : t2
+
+logic o94 : t3
+
+logic o95 : t3
+
+logic o96 : t3
+
+logic o97 : t3
+
+logic o98 : t3
+
+logic o99 : t3
+
+logic result : t3
+
+logic savestackptr1 : t3
+
+logic result1 : t
+
+logic ra01 : t
+
+logic result2 : t
+
+logic ra11 : t
+
+logic result3 : t
+
+logic ra21 : t
+
+logic result4 : t
+
+logic ra31 : t
+
+logic result5 : t
+
+logic ra41 : t
+
+logic result6 : t
+
+logic ra51 : t
+
+logic result7 : t
+
+logic ra61 : t
+
+logic result8 : t
+
+logic ra71 : t
+
+logic result9 : t3
+
+logic saverbx1 : t3
+
+logic result10 : t3
+
+logic saverbp1 : t3
+
+logic result11 : t3
+
+logic saver121 : t3
+
+logic result12 : t3
+
+logic saver131 : t3
+
+logic result13 : t3
+
+logic saver141 : t3
+
+logic result14 : t3
+
+logic saver151 : t3
+
+logic memory1 : (t3,unsigned8) farray
+
+logic result15 : t3
+
+logic rsp1 : t3
+
+logic memory2 : (t3,unsigned8) farray
+
+logic result16 : t3
+
+logic rsp2 : t3
+
+logic rdi1 : t3
+
+logic memory3 : (t3,unsigned8) farray
+
+logic result17 : t3
+
+logic rsp3 : t3
+
+logic memory4 : (t3,unsigned8) farray
+
+logic result18 : t3
+
+logic rsp4 : t3
+
+logic memory5 : (t3,unsigned8) farray
+
+logic result19 : t3
+
+logic rsp5 : t3
+
+logic memory6 : (t3,unsigned8) farray
+
+logic result20 : t3
+
+logic rsp6 : t3
+
+logic rbx1 : t3
+
+logic result21 : t3
+
+logic rsp7 : t3
+
+logic result22 : t3
+
+logic rsp8 : t3
+
+logic rsp9 : t3
+
+logic result23 : t3
+
+logic rsi1 : t3
+
+logic result24 : t3
+
+logic rdi2 : t3
+
+logic result25 : t3
+
+logic rbp1 : t3
+
+logic result26 : t3
+
+logic xmm31 : t3
+
+logic result27 : t3
+
+logic xmm21 : t3
+
+logic result28 : t3
+
+logic xmm11 : t3
+
+logic result29 : t3
+
+logic xmm01 : t3
+
+logic result30 : t3
+
+logic rsp10 : t3
+
+logic rsp11 : t3
+
+logic rdi3 : t3
+
+logic rax1 : t3
+
+logic result31 : t3
+
+logic rsp12 : t3
+
+logic rsp13 : t3
+
+logic rdi4 : t3
+
+logic result32 : bool
+
+logic zeroflag1 : bool
+
+logic result33 : bool
+
+logic signflag1 : bool
+
+logic result34 : bool
+
+logic carryflag1 : bool
+
+logic result35 : bool
+
+logic overflowflag1 : bool
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic xmm02 : t3
+
+logic rax2 : t3
+
+logic rbx2 : t3
+
+logic rsp14 : t3
+
+logic rbp2 : t3
+
+logic rdi5 : t3
+
+logic rdi6 : t3
+
+logic rbx3 : t3
+
+logic result36 : t3
+
+logic rbp3 : t3
+
+logic result37 : t3
+
+logic rsp15 : t3
+
+logic rsp16 : t3
+
+logic result38 : t3
+
+logic rsi2 : t3
+
+logic result39 : t3
+
+logic rdi7 : t3
+
+logic result40 : t3
+
+logic xmm32 : t3
+
+logic result41 : t3
+
+logic xmm22 : t3
+
+logic result42 : t3
+
+logic xmm12 : t3
+
+logic result43 : t3
+
+logic xmm03 : t3
+
+logic result44 : t3
+
+logic rsp17 : t3
+
+logic rsp18 : t3
+
+logic rax3 : t3
+
+logic rdi8 : t3
+
+logic result45 : t3
+
+logic rsp19 : t3
+
+logic rsp20 : t3
+
+logic rsi3 : t3
+
+logic result46 : bool
+
+logic zeroflag3 : bool
+
+logic result47 : bool
+
+logic signflag3 : bool
+
+logic result48 : bool
+
+logic carryflag3 : bool
+
+logic result49 : bool
+
+logic overflowflag3 : bool
+
+logic zeroflag4 : bool
+
+logic carryflag4 : bool
+
+logic signflag4 : bool
+
+logic overflowflag4 : bool
+
+logic xmm04 : t3
+
+logic rax4 : t3
+
+logic rbx4 : t3
+
+logic rsp21 : t3
+
+logic rbp4 : t3
+
+logic rdi9 : t3
+
+logic rdi10 : t3
+
+logic rbx5 : t3
+
+logic result50 : t3
+
+logic rbp5 : t3
+
+logic result51 : t3
+
+logic rsp22 : t3
+
+logic rsp23 : t3
+
+logic result52 : t3
+
+logic rsi4 : t3
+
+logic result53 : t3
+
+logic rdi11 : t3
+
+logic result54 : t3
+
+logic xmm33 : t3
+
+logic result55 : t3
+
+logic xmm23 : t3
+
+logic result56 : t3
+
+logic xmm13 : t3
+
+logic result57 : t3
+
+logic xmm05 : t3
+
+logic result58 : t3
+
+logic rsp24 : t3
+
+logic rsp25 : t3
+
+logic rax5 : t3
+
+logic rdi12 : t3
+
+logic result59 : t3
+
+logic rsp26 : t3
+
+logic rsp27 : t3
+
+logic rcx1 : t3
+
+logic result60 : bool
+
+logic zeroflag5 : bool
+
+logic result61 : bool
+
+logic signflag5 : bool
+
+logic result62 : bool
+
+logic carryflag5 : bool
+
+logic result63 : bool
+
+logic overflowflag5 : bool
+
+logic zeroflag6 : bool
+
+logic carryflag6 : bool
+
+logic signflag6 : bool
+
+logic overflowflag6 : bool
+
+logic xmm06 : t3
+
+logic rax6 : t3
+
+logic rbx6 : t3
+
+logic rsp28 : t3
+
+logic rbp6 : t3
+
+logic rdi13 : t3
+
+logic rdi14 : t3
+
+logic rbx7 : t3
+
+logic result64 : t3
+
+logic rbp7 : t3
+
+logic result65 : t3
+
+logic rsp29 : t3
+
+logic rsp30 : t3
+
+logic result66 : t3
+
+logic xmm24 : t3
+
+logic result67 : t3
+
+logic rsi5 : t3
+
+logic result68 : t3
+
+logic rdi15 : t3
+
+logic result69 : t3
+
+logic xmm34 : t3
+
+logic result70 : t3
+
+logic xmm14 : t3
+
+logic result71 : t3
+
+logic xmm07 : t3
+
+logic result72 : t3
+
+logic rsp31 : t3
+
+logic rsp32 : t3
+
+logic rax7 : t3
+
+logic rdi16 : t3
+
+logic result73 : t3
+
+logic rsp33 : t3
+
+logic rsp34 : t3
+
+logic rdx1 : t3
+
+logic result74 : bool
+
+logic zeroflag7 : bool
+
+logic result75 : bool
+
+logic signflag7 : bool
+
+logic result76 : bool
+
+logic carryflag7 : bool
+
+logic result77 : bool
+
+logic overflowflag7 : bool
+
+logic xmm08 : t3
+
+logic rax8 : t3
+
+logic rbx8 : t3
+
+logic rsp35 : t3
+
+logic rbp8 : t3
+
+logic rdi17 : t3
+
+logic rdi18 : t3
+
+logic result78 : t3
+
+logic r151 : t3
+
+logic result79 : t3
+
+logic rsp36 : t3
+
+logic rsp37 : t3
+
+logic result80 : t3
+
+logic xmm61 : t3
+
+logic memory7 : (t3,unsigned8) farray
+
+logic xmm09 : t3
+
+logic xmm15 : t3
+
+logic xmm25 : t3
+
+logic xmm35 : t3
+
+logic xmm41 : t3
+
+logic xmm51 : t3
+
+logic xmm62 : t3
+
+logic xmm71 : t3
+
+logic rax9 : t3
+
+logic rbx9 : t3
+
+logic rsp38 : t3
+
+logic rbp9 : t3
+
+logic rsi6 : t3
+
+logic rdi19 : t3
+
+logic r121 : t3
+
+logic r131 : t3
+
+logic r141 : t3
+
+logic r152 : t3
+
+logic memory8 : (t3,unsigned8) farray
+
+logic rdi20 : t3
+
+logic rbx10 : t3
+
+logic rax10 : t3
+
+logic rcx2 : t3
+
+logic rdx2 : t3
+
+logic rbx11 : t3
+
+logic rsp39 : t3
+
+logic rbp10 : t3
+
+logic rsi7 : t3
+
+logic rdi21 : t3
+
+logic r81 : t3
+
+logic memory9 : (t3,unsigned8) farray
+
+logic result81 : t3
+
+logic rsi8 : t3
+
+logic rdi22 : t3
+
+logic rbx12 : t3
+
+logic result82 : t3
+
+logic rsp40 : t3
+
+logic exit_called : bool
+
+logic carryflag8 : bool
+
+logic signflag8 : bool
+
+logic overflowflag8 : bool
+
+logic rax11 : t3
+
+logic rcx3 : t3
+
+logic rdx3 : t3
+
+logic rsp41 : t3
+
+logic rdi23 : t3
+
+logic r82 : t3
+
+logic memory10 : (t3,unsigned8) farray
+
+logic rdx4 : t3
+
+logic rsi9 : t3
+
+logic rdi24 : t3
+
+logic rax12 : t3
+
+logic result83 : t3
+
+logic rsp42 : t3
+
+logic rsp43 : t3
+
+logic rdi25 : t3
+
+logic result84 : t3
+
+logic rsp44 : t3
+
+logic rsp45 : t3
+
+logic result85 : t3
+
+logic xmm26 : t3
+
+logic xmm010 : t3
+
+logic xmm16 : t3
+
+logic xmm27 : t3
+
+logic rax13 : t3
+
+logic rbx13 : t3
+
+logic rsp46 : t3
+
+logic rbp11 : t3
+
+logic rdi26 : t3
+
+logic memory11 : (t3,unsigned8) farray
+
+logic rdi27 : t3
+
+logic rbx14 : t3
+
+logic result86 : t3
+
+logic rsp47 : t3
+
+logic rsp48 : t3
+
+logic result87 : t3
+
+logic xmm28 : t3
+
+logic zeroflag8 : bool
+
+logic xmm011 : t3
+
+logic xmm17 : t3
+
+logic xmm29 : t3
+
+logic rax14 : t3
+
+logic rbx15 : t3
+
+logic rsp49 : t3
+
+logic rbp12 : t3
+
+logic rdi28 : t3
+
+logic memory12 : (t3,unsigned8) farray
+
+logic result88 : t3
+
+logic rsp50 : t3
+
+logic rax15 : t3
+
+logic result89 : t3
+
+logic rbx16 : t3
+
+logic result90 : t3
+
+logic rsp51 : t3
+
+logic result91 : t3
+
+logic rbp13 : t3
+
+logic result92 : t3
+
+logic rsp52 : t3
+
+logic result93 : t3
+
+logic r122 : t3
+
+logic result94 : t3
+
+logic rsp53 : t3
+
+logic result95 : t3
+
+logic r132 : t3
+
+logic result96 : t3
+
+logic rsp54 : t3
+
+logic result97 : t3
+
+logic r142 : t3
+
+logic result98 : t3
+
+logic rsp55 : t3
+
+logic result99 : t3
+
+logic r153 : t3
+
+logic result100 : t3
+
+logic rsp56 : t3
+
+logic result101 : t3
+
+logic rsp57 : t3
+
+logic exit_called1 : bool
+
+logic zeroflag9 : bool
+
+logic carryflag9 : bool
+
+logic signflag9 : bool
+
+logic overflowflag9 : bool
+
+logic xmm012 : t3
+
+logic xmm18 : t3
+
+logic xmm210 : t3
+
+logic xmm36 : t3
+
+logic xmm42 : t3
+
+logic xmm52 : t3
+
+logic xmm63 : t3
+
+logic xmm72 : t3
+
+logic rax16 : t3
+
+logic rcx4 : t3
+
+logic rdx5 : t3
+
+logic rbx17 : t3
+
+logic rsp58 : t3
+
+logic rbp14 : t3
+
+logic rsi10 : t3
+
+logic rdi29 : t3
+
+logic r83 : t3
+
+logic r123 : t3
+
+logic r133 : t3
+
+logic r143 : t3
+
+logic r154 : t3
+
+logic memory13 : (t3,unsigned8) farray
+
+logic savestackptr2 : t3
+
+logic ra02 : t
+
+logic ra12 : t
+
+logic ra22 : t
+
+logic ra32 : t
+
+logic ra42 : t
+
+logic ra52 : t
+
+logic ra62 : t
+
+logic ra72 : t
+
+logic saverbx2 : t3
+
+logic saverbp2 : t3
+
+logic saver122 : t3
+
+logic saver132 : t3
+
+logic saver142 : t3
+
+logic saver152 : t3
+
+logic exit_called2 : bool
+
+logic zeroflag10 : bool
+
+logic carryflag10 : bool
+
+logic signflag10 : bool
+
+logic overflowflag10 : bool
+
+logic xmm013 : t3
+
+logic xmm19 : t3
+
+logic xmm211 : t3
+
+logic xmm37 : t3
+
+logic xmm43 : t3
+
+logic xmm53 : t3
+
+logic xmm64 : t3
+
+logic xmm73 : t3
+
+logic rax17 : t3
+
+logic rcx5 : t3
+
+logic rdx6 : t3
+
+logic rbx18 : t3
+
+logic rsp59 : t3
+
+logic rbp15 : t3
+
+logic rsi11 : t3
+
+logic rdi30 : t3
+
+logic r84 : t3
+
+logic r124 : t3
+
+logic r134 : t3
+
+logic r144 : t3
+
+logic r155 : t3
+
+logic memory14 : (t3,unsigned8) farray
+
+logic savestackptr3 : t3
+
+logic ra03 : t
+
+logic ra13 : t
+
+logic ra23 : t
+
+logic ra33 : t
+
+logic ra43 : t
+
+logic ra53 : t
+
+logic ra63 : t
+
+logic ra73 : t
+
+logic saverbx3 : t3
+
+logic saverbp3 : t3
+
+logic saver123 : t3
+
+logic saver133 : t3
+
+logic saver143 : t3
+
+logic saver153 : t3
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : true
+
+axiom H15 : true
+
+axiom H16 : true
+
+axiom H17 : true
+
+axiom H18 : true
+
+axiom H19 : true
+
+axiom H20 : true
+
+axiom H21 : true
+
+axiom H22 : true
+
+axiom H23 : true
+
+axiom H24 : true
+
+axiom H25 : true
+
+axiom H26 : true
+
+axiom H27 : true
+
+axiom H28 : true
+
+axiom H29 : true
+
+axiom H30 : ((((o = rsp) and ((result = savestackptr) and
+  (savestackptr1 = o))) and (((((o1 = readmem8(rsp, memory)) and
+  (o1 = to_rep((memory[rsp])))) and (o2 = o1)) and ((result1 = ra0) and
+  (ra01 = o2))) and (((((o3 = readmem8(add3(rsp, of_int3(1)), memory)) and
   (o3 = to_rep((memory[add3(rsp, of_int3(1))])))) and (o4 = o3)) and
-  ((result2 = { t__content = ra1 }) and (ra11 = o4))) and
-  (((((o5 = readmem8(add3(rsp, of_int3(2)), memory)) and
-  (o5 = to_rep((memory[add3(rsp, of_int3(2))])))) and (o6 = o5)) and
-  ((result3 = { t__content = ra2 }) and (ra21 = o6))) and
+  ((result2 = ra1) and (ra11 = o4))) and (((((o5 = readmem8(add3(rsp,
+  of_int3(2)), memory)) and (o5 = to_rep((memory[add3(rsp,
+  of_int3(2))])))) and (o6 = o5)) and ((result3 = ra2) and (ra21 = o6))) and
   (((((o7 = readmem8(add3(rsp, of_int3(3)), memory)) and
   (o7 = to_rep((memory[add3(rsp, of_int3(3))])))) and (o8 = o7)) and
-  ((result4 = { t__content = ra3 }) and (ra31 = o8))) and
-  (((((o9 = readmem8(add3(rsp, of_int3(4)), memory)) and
-  (o9 = to_rep((memory[add3(rsp, of_int3(4))])))) and (o10 = o9)) and
-  ((result5 = { t__content = ra4 }) and (ra41 = o10))) and
-  (((((o11 = readmem8(add3(rsp, of_int3(5)), memory)) and
+  ((result4 = ra3) and (ra31 = o8))) and (((((o9 = readmem8(add3(rsp,
+  of_int3(4)), memory)) and (o9 = to_rep((memory[add3(rsp,
+  of_int3(4))])))) and (o10 = o9)) and ((result5 = ra4) and
+  (ra41 = o10))) and (((((o11 = readmem8(add3(rsp, of_int3(5)), memory)) and
   (o11 = to_rep((memory[add3(rsp, of_int3(5))])))) and (o12 = o11)) and
   ((result6 = ra5) and (ra51 = o12))) and (((((o13 = readmem8(add3(rsp,
   of_int3(6)), memory)) and (o13 = to_rep((memory[add3(rsp,
@@ -2447,12 +3519,11 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory1[i])) = to_rep((memory[i]))))))) and (((result15 = {
-  t__content3 = rsp }) and (rsp1 = sub3(rsp, of_int3(8)))) and
-  ((((((((((bw_and3(r14, of_int3(255)) = toBig2(to_rep((memory2[sub3(rsp1,
-  of_int3(8))])))) and (bw_and3(r14,
-  of_int3(65280)) = mul3(toBig2(to_rep((memory2[add3(sub3(rsp1, of_int3(8)),
-  of_int3(1))]))), of_int3(256)))) and (bw_and3(r14,
+  (to_rep((memory1[i])) = to_rep((memory[i]))))))) and (((result15 = rsp) and
+  (rsp1 = sub3(rsp, of_int3(8)))) and ((((((((((bw_and3(r14,
+  of_int3(255)) = toBig2(to_rep((memory2[sub3(rsp1, of_int3(8))])))) and
+  (bw_and3(r14, of_int3(65280)) = mul3(toBig2(to_rep((memory2[add3(sub3(rsp1,
+  of_int3(8)), of_int3(1))]))), of_int3(256)))) and (bw_and3(r14,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory2[add3(sub3(rsp1,
   of_int3(8)), of_int3(2))]))), of_int3(65536)))) and (bw_and3(r14,
   of_int3(4278190080)) = mul3(toBig2(to_rep((memory2[add3(sub3(rsp1,
@@ -2474,9 +3545,9 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp1, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp1, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp1, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory2[i])) = to_rep((memory1[i]))))))) and (((result16 = {
-  t__content3 = rsp1 }) and (rsp2 = sub3(rsp1, of_int3(8)))) and
-  ((writereg32post(rdi, of_int2(4198504)) = true) and ((((((((((bw_and3(r13,
+  (to_rep((memory2[i])) = to_rep((memory1[i]))))))) and
+  (((result16 = rsp1) and (rsp2 = sub3(rsp1, of_int3(8)))) and
+  ((writereg32post(rdi1, of_int2(4198504)) = true) and ((((((((((bw_and3(r13,
   of_int3(255)) = toBig2(to_rep((memory3[sub3(rsp2, of_int3(8))])))) and
   (bw_and3(r13, of_int3(65280)) = mul3(toBig2(to_rep((memory3[add3(sub3(rsp2,
   of_int3(8)), of_int3(1))]))), of_int3(256)))) and (bw_and3(r13,
@@ -2501,8 +3572,8 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp2, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp2, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp2, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory3[i])) = to_rep((memory2[i]))))))) and (((result17 = {
-  t__content3 = rsp2 }) and (rsp3 = sub3(rsp2, of_int3(8)))) and
+  (to_rep((memory3[i])) = to_rep((memory2[i]))))))) and
+  (((result17 = rsp2) and (rsp3 = sub3(rsp2, of_int3(8)))) and
   ((((((((((bw_and3(r12, of_int3(255)) = toBig2(to_rep((memory4[sub3(rsp3,
   of_int3(8))])))) and (bw_and3(r12,
   of_int3(65280)) = mul3(toBig2(to_rep((memory4[add3(sub3(rsp3, of_int3(8)),
@@ -2528,8 +3599,8 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp3, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp3, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp3, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory4[i])) = to_rep((memory3[i]))))))) and (((result18 = {
-  t__content3 = rsp3 }) and (rsp4 = sub3(rsp3, of_int3(8)))) and
+  (to_rep((memory4[i])) = to_rep((memory3[i]))))))) and
+  (((result18 = rsp3) and (rsp4 = sub3(rsp3, of_int3(8)))) and
   ((((((((((bw_and3(rbp, of_int3(255)) = toBig2(to_rep((memory5[sub3(rsp4,
   of_int3(8))])))) and (bw_and3(rbp,
   of_int3(65280)) = mul3(toBig2(to_rep((memory5[add3(sub3(rsp4, of_int3(8)),
@@ -2555,8 +3626,8 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp4, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp4, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp4, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory5[i])) = to_rep((memory4[i]))))))) and (((result19 = {
-  t__content3 = rsp4 }) and (rsp5 = sub3(rsp4, of_int3(8)))) and
+  (to_rep((memory5[i])) = to_rep((memory4[i]))))))) and
+  (((result19 = rsp4) and (rsp5 = sub3(rsp4, of_int3(8)))) and
   ((((((((((bw_and3(rbx, of_int3(255)) = toBig2(to_rep((memory6[sub3(rsp5,
   of_int3(8))])))) and (bw_and3(rbx,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(sub3(rsp5, of_int3(8)),
@@ -2582,17 +3653,15 @@ goal WP_parameter_def :
   (not (i = add3(sub3(rsp5, of_int3(8)), of_int3(5))))) and
   (not (i = add3(sub3(rsp5, of_int3(8)), of_int3(6))))) and
   (not (i = add3(sub3(rsp5, of_int3(8)), of_int3(7))))) ->
-  (to_rep((memory6[i])) = to_rep((memory5[i]))))))) and (((result20 = {
-  t__content3 = rsp5 }) and (rsp6 = sub3(rsp5, of_int3(8)))) and
-  ((writereg32post(rbx1, of_int2(0)) = true) and (((result21 = {
-  t__content3 = rsp6 }) and (rsp7 = sub3(rsp6, of_int3(104)))) and
-  (((result22 = { t__content3 = rsp7 }) and (rsp8 = sub3(rsp7,
-  of_int3(8)))) and ((rsp9 = add3(rsp8, of_int3(8))) and (((result23 = {
-  t__content3 = rsi }) and (rsi1 = add3(rsp9, of_int3(64)))) and
-  (((result24 = { t__content3 = rdi }) and (rdi1 = add3(rsp9,
-  of_int3(44)))) and (((result25 = { t__content3 = rbp }) and
-  (rbp1 = add3(rsp9, of_int3(64)))) and ((((o23 = readmem64(of_int3(4198776),
-  memory6)) and ((((((((bw_and3(o23,
+  (to_rep((memory6[i])) = to_rep((memory5[i]))))))) and
+  (((result20 = rsp5) and (rsp6 = sub3(rsp5, of_int3(8)))) and
+  ((writereg32post(rbx1, of_int2(0)) = true) and (((result21 = rsp6) and
+  (rsp7 = sub3(rsp6, of_int3(104)))) and (((result22 = rsp7) and
+  (rsp8 = sub3(rsp7, of_int3(8)))) and ((rsp9 = add3(rsp8, of_int3(8))) and
+  (((result23 = rsi) and (rsi1 = add3(rsp9, of_int3(64)))) and
+  (((result24 = rdi1) and (rdi2 = add3(rsp9, of_int3(44)))) and
+  (((result25 = rbp) and (rbp1 = add3(rsp9, of_int3(64)))) and
+  ((((o23 = readmem64(of_int3(4198776), memory6)) and ((((((((bw_and3(o23,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198776)])))) and
   (bw_and3(o23,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
@@ -2608,9 +3677,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o23,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result26 = {
-  t__content3 = xmm3 }) and (xmm31 = o23))) and
-  ((((o24 = readmem64(of_int3(4198784), memory6)) and ((((((((bw_and3(o24,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result26 = xmm3) and
+  (xmm31 = o23))) and ((((o24 = readmem64(of_int3(4198784), memory6)) and
+  ((((((((bw_and3(o24,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198784)])))) and
   (bw_and3(o24,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198784),
@@ -2626,9 +3695,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198784),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o24,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198784),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result27 = {
-  t__content3 = xmm2 }) and (xmm21 = o24))) and
-  ((((o25 = readmem64(of_int3(4198792), memory6)) and ((((((((bw_and3(o25,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result27 = xmm2) and
+  (xmm21 = o24))) and ((((o25 = readmem64(of_int3(4198792), memory6)) and
+  ((((((((bw_and3(o25,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198792)])))) and
   (bw_and3(o25,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198792),
@@ -2644,9 +3713,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198792),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o25,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198792),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result28 = {
-  t__content3 = xmm1 }) and (xmm11 = o25))) and
-  ((((o26 = readmem64(of_int3(4198768), memory6)) and ((((((((bw_and3(o26,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result28 = xmm1) and
+  (xmm11 = o25))) and ((((o26 = readmem64(of_int3(4198768), memory6)) and
+  ((((((((bw_and3(o26,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198768)])))) and
   (bw_and3(o26,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
@@ -2662,43 +3731,42 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o26,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result29 = {
-  t__content3 = xmm0 }) and (xmm01 = o26))) and (((result30 = { t__content3 =
-  rsp9 }) and (rsp10 = sub3(rsp9, of_int3(8)))) and ((rsp11 = add3(rsp10,
-  of_int3(8))) and ((writereg32post(rdi2, of_int2(4198688)) = true) and
-  ((writereg32post(rax, of_int2(0)) = true) and (((result31 = { t__content3 =
-  rsp11 }) and (rsp12 = sub3(rsp11, of_int3(8)))) and ((rsp13 = add3(rsp12,
-  of_int3(8))) and (((((((o27 = esp(rsp13)) and (o27 = readreg32(rsp13))) and
-  (o28 = add2(o27, of_int2(44)))) and (o29 = toBig(o28))) and
-  ((o30 = readmem32(o29, memory6)) and ((((bw_and2(o30,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result29 = xmm0) and
+  (xmm01 = o26))) and (((result30 = rsp9) and (rsp10 = sub3(rsp9,
+  of_int3(8)))) and ((rsp11 = add3(rsp10, of_int3(8))) and
+  ((writereg32post(rdi3, of_int2(4198688)) = true) and ((writereg32post(rax1,
+  of_int2(0)) = true) and (((result31 = rsp11) and (rsp12 = sub3(rsp11,
+  of_int3(8)))) and ((rsp13 = add3(rsp12, of_int3(8))) and
+  (((((((o27 = esp(rsp13)) and (o27 = readreg32(rsp13))) and (o28 = add2(o27,
+  of_int2(44)))) and (o29 = toBig(o28))) and ((o30 = readmem32(o29,
+  memory6)) and ((((bw_and2(o30,
   of_int2(255)) = toBig1(to_rep((memory6[o29])))) and (bw_and2(o30,
   of_int2(65280)) = mul2(toBig1(to_rep((memory6[add3(o29, of_int3(1))]))),
   of_int2(256)))) and (bw_and2(o30,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory6[add3(o29, of_int3(2))]))),
   of_int2(65536)))) and (bw_and2(o30,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory6[add3(o29,
-  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdi3,
-  o30) = true)) and ((((((o31 = edi(rdi3)) and (o31 = readreg32(rdi3))) and
-  (((o32 = edi(rdi3)) and (o32 = readreg32(rdi3))) and (o33 = bw_and2(o32,
-  o31)))) and (((o33 = of_int2(0)) and (o34 = true)) or
-  ((not (o33 = of_int2(0))) and (o34 = false)))) and ((result32 = {
-  bool__content = zeroflag }) and (zeroflag1 = o34))) and
-  ((((((o35 = edi(rdi3)) and (o35 = readreg32(rdi3))) and
-  (((o36 = edi(rdi3)) and (o36 = readreg32(rdi3))) and (o37 = bw_and2(o36,
-  o35)))) and ((ugt2(o37, of_int2(2147483647)) and (o38 = true)) or
-  ((not ugt2(o37, of_int2(2147483647))) and (o38 = false)))) and
-  ((result33 = { bool__content = signflag }) and (signflag1 = o38))) and
-  (((result34 = { bool__content = carryflag }) and
-  (carryflag1 = of_int4(0))) and (((result35 = { bool__content = overflowflag
-  }) and (overflowflag1 = of_int4(0))) and ((rsp14 = rsp13) and
-  ((writereg32post(rdi4, of_int2(10)) = true) and ((writereg32post(rbx2,
-  of_int2(0)) = true) and (((result36 = { t__content3 = rbp2 }) and
-  (rbp3 = add3(rsp14, of_int3(64)))) and (((result37 = { t__content3 = rsp14
-  }) and (rsp15 = sub3(rsp14, of_int3(8)))) and ((rsp16 = add3(rsp15,
-  of_int3(8))) and (((result38 = { t__content3 = rsi1 }) and
-  (rsi2 = add3(rsp16, of_int3(64)))) and (((result39 = { t__content3 = rdi4
-  }) and (rdi5 = add3(rsp16, of_int3(44)))) and
-  ((((o39 = readmem64(of_int3(4198776), memory6)) and ((((((((bw_and3(o39,
+  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdi4,
+  o30) = true)) and ((((((o31 = edi(rdi4)) and (o31 = readreg32(rdi4))) and
+  (((o32 = edi(rdi4)) and (o32 = readreg32(rdi4))) and (o33 = bw_and2(o32,
+  o31)))) and (((o33 = of_int2(0)) -> (o34 = true)) and
+  ((not (o33 = of_int2(0))) -> (o34 = false)))) and
+  ((result32 = zeroflag) and (zeroflag1 = o34))) and
+  ((((((o35 = edi(rdi4)) and (o35 = readreg32(rdi4))) and
+  (((o36 = edi(rdi4)) and (o36 = readreg32(rdi4))) and (o37 = bw_and2(o36,
+  o35)))) and ((ugt2(o37, of_int2(2147483647)) -> (o38 = true)) and
+  ((not ugt2(o37, of_int2(2147483647))) -> (o38 = false)))) and
+  ((result33 = signflag) and (signflag1 = o38))) and
+  (((result34 = carryflag) and (carryflag1 = of_int4(0))) and
+  (((result35 = overflowflag) and (overflowflag1 = of_int4(0))) and
+  ((rsp14 = rsp13) and ((writereg32post(rdi6, of_int2(10)) = true) and
+  ((writereg32post(rbx3, of_int2(0)) = true) and (((result36 = rbp2) and
+  (rbp3 = add3(rsp14, of_int3(64)))) and (((result37 = rsp14) and
+  (rsp15 = sub3(rsp14, of_int3(8)))) and ((rsp16 = add3(rsp15,
+  of_int3(8))) and (((result38 = rsi1) and (rsi2 = add3(rsp16,
+  of_int3(64)))) and (((result39 = rdi6) and (rdi7 = add3(rsp16,
+  of_int3(44)))) and ((((o39 = readmem64(of_int3(4198776), memory6)) and
+  ((((((((bw_and3(o39,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198776)])))) and
   (bw_and3(o39,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
@@ -2714,9 +3782,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o39,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198776),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result40 = {
-  t__content3 = xmm31 }) and (xmm32 = o39))) and
-  ((((o40 = readmem64(of_int3(4198800), memory6)) and ((((((((bw_and3(o40,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result40 = xmm31) and
+  (xmm32 = o39))) and ((((o40 = readmem64(of_int3(4198800), memory6)) and
+  ((((((((bw_and3(o40,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198800)])))) and
   (bw_and3(o40,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198800),
@@ -2732,9 +3800,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198800),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o40,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198800),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result41 = {
-  t__content3 = xmm21 }) and (xmm22 = o40))) and
-  ((((o41 = readmem64(of_int3(4198808), memory6)) and ((((((((bw_and3(o41,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result41 = xmm21) and
+  (xmm22 = o40))) and ((((o41 = readmem64(of_int3(4198808), memory6)) and
+  ((((((((bw_and3(o41,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198808)])))) and
   (bw_and3(o41,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198808),
@@ -2750,9 +3818,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198808),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o41,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198808),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result42 = {
-  t__content3 = xmm11 }) and (xmm12 = o41))) and
-  ((((o42 = readmem64(of_int3(4198768), memory6)) and ((((((((bw_and3(o42,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result42 = xmm11) and
+  (xmm12 = o41))) and ((((o42 = readmem64(of_int3(4198768), memory6)) and
+  ((((((((bw_and3(o42,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198768)])))) and
   (bw_and3(o42,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
@@ -2768,16 +3836,15 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o42,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result43 = {
-  t__content3 = xmm02 }) and (xmm03 = o42))) and (((result44 = {
-  t__content3 = rsp16 }) and (rsp17 = sub3(rsp16, of_int3(8)))) and
-  ((rsp18 = add3(rsp17, of_int3(8))) and ((writereg32post(rax1,
-  of_int2(0)) = true) and ((writereg32post(rdi6,
-  of_int2(4198688)) = true) and (((result45 = { t__content3 = rsp18 }) and
-  (rsp19 = sub3(rsp18, of_int3(8)))) and ((rsp20 = add3(rsp19,
-  of_int3(8))) and (((((((o43 = esp(rsp20)) and (o43 = readreg32(rsp20))) and
-  (o44 = add2(o43, of_int2(44)))) and (o45 = toBig(o44))) and
-  ((o46 = readmem32(o45, memory6)) and ((((bw_and2(o46,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result43 = xmm02) and
+  (xmm03 = o42))) and (((result44 = rsp16) and (rsp17 = sub3(rsp16,
+  of_int3(8)))) and ((rsp18 = add3(rsp17, of_int3(8))) and
+  ((writereg32post(rax3, of_int2(0)) = true) and ((writereg32post(rdi8,
+  of_int2(4198688)) = true) and (((result45 = rsp18) and (rsp19 = sub3(rsp18,
+  of_int3(8)))) and ((rsp20 = add3(rsp19, of_int3(8))) and
+  (((((((o43 = esp(rsp20)) and (o43 = readreg32(rsp20))) and (o44 = add2(o43,
+  of_int2(44)))) and (o45 = toBig(o44))) and ((o46 = readmem32(o45,
+  memory6)) and ((((bw_and2(o46,
   of_int2(255)) = toBig1(to_rep((memory6[o45])))) and (bw_and2(o46,
   of_int2(65280)) = mul2(toBig1(to_rep((memory6[add3(o45, of_int3(1))]))),
   of_int2(256)))) and (bw_and2(o46,
@@ -2787,25 +3854,24 @@ goal WP_parameter_def :
   of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rsi3,
   o46) = true)) and ((((((o47 = esi(rsi3)) and (o47 = readreg32(rsi3))) and
   (((o48 = esi(rsi3)) and (o48 = readreg32(rsi3))) and (o49 = bw_and2(o48,
-  o47)))) and (((o49 = of_int2(0)) and (o50 = true)) or
-  ((not (o49 = of_int2(0))) and (o50 = false)))) and ((result46 = {
-  bool__content = zeroflag2 }) and (zeroflag3 = o50))) and
+  o47)))) and (((o49 = of_int2(0)) -> (o50 = true)) and
+  ((not (o49 = of_int2(0))) -> (o50 = false)))) and
+  ((result46 = zeroflag2) and (zeroflag3 = o50))) and
   ((((((o51 = esi(rsi3)) and (o51 = readreg32(rsi3))) and
   (((o52 = esi(rsi3)) and (o52 = readreg32(rsi3))) and (o53 = bw_and2(o52,
-  o51)))) and ((ugt2(o53, of_int2(2147483647)) and (o54 = true)) or
-  ((not ugt2(o53, of_int2(2147483647))) and (o54 = false)))) and
-  ((result47 = { bool__content = signflag2 }) and (signflag3 = o54))) and
-  (((result48 = { bool__content = carryflag2 }) and
-  (carryflag3 = of_int4(0))) and (((result49 = { bool__content =
-  overflowflag2 }) and (overflowflag3 = of_int4(0))) and ((rsp21 = rsp20) and
-  ((writereg32post(rdi7, of_int2(10)) = true) and ((writereg32post(rbx3,
-  of_int2(0)) = true) and (((result50 = { t__content3 = rbp4 }) and
-  (rbp5 = add3(rsp21, of_int3(64)))) and (((result51 = { t__content3 = rsp21
-  }) and (rsp22 = sub3(rsp21, of_int3(8)))) and ((rsp23 = add3(rsp22,
-  of_int3(8))) and (((result52 = { t__content3 = rsi3 }) and
-  (rsi4 = add3(rsp23, of_int3(64)))) and (((result53 = { t__content3 = rdi7
-  }) and (rdi8 = add3(rsp23, of_int3(44)))) and
-  ((((o55 = readmem64(of_int3(4198816), memory6)) and ((((((((bw_and3(o55,
+  o51)))) and ((ugt2(o53, of_int2(2147483647)) -> (o54 = true)) and
+  ((not ugt2(o53, of_int2(2147483647))) -> (o54 = false)))) and
+  ((result47 = signflag2) and (signflag3 = o54))) and
+  (((result48 = carryflag2) and (carryflag3 = of_int4(0))) and
+  (((result49 = overflowflag2) and (overflowflag3 = of_int4(0))) and
+  ((rsp21 = rsp20) and ((writereg32post(rdi10, of_int2(10)) = true) and
+  ((writereg32post(rbx5, of_int2(0)) = true) and (((result50 = rbp4) and
+  (rbp5 = add3(rsp21, of_int3(64)))) and (((result51 = rsp21) and
+  (rsp22 = sub3(rsp21, of_int3(8)))) and ((rsp23 = add3(rsp22,
+  of_int3(8))) and (((result52 = rsi3) and (rsi4 = add3(rsp23,
+  of_int3(64)))) and (((result53 = rdi10) and (rdi11 = add3(rsp23,
+  of_int3(44)))) and ((((o55 = readmem64(of_int3(4198816), memory6)) and
+  ((((((((bw_and3(o55,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198816)])))) and
   (bw_and3(o55,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198816),
@@ -2821,9 +3887,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198816),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o55,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198816),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result54 = {
-  t__content3 = xmm32 }) and (xmm33 = o55))) and
-  ((((o56 = readmem64(of_int3(4198824), memory6)) and ((((((((bw_and3(o56,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result54 = xmm32) and
+  (xmm33 = o55))) and ((((o56 = readmem64(of_int3(4198824), memory6)) and
+  ((((((((bw_and3(o56,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198824)])))) and
   (bw_and3(o56,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198824),
@@ -2839,9 +3905,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198824),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o56,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198824),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result55 = {
-  t__content3 = xmm22 }) and (xmm23 = o56))) and
-  ((((o57 = readmem64(of_int3(4198832), memory6)) and ((((((((bw_and3(o57,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result55 = xmm22) and
+  (xmm23 = o56))) and ((((o57 = readmem64(of_int3(4198832), memory6)) and
+  ((((((((bw_and3(o57,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198832)])))) and
   (bw_and3(o57,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198832),
@@ -2857,9 +3923,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198832),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o57,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198832),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result56 = {
-  t__content3 = xmm12 }) and (xmm13 = o57))) and
-  ((((o58 = readmem64(of_int3(4198768), memory6)) and ((((((((bw_and3(o58,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result56 = xmm12) and
+  (xmm13 = o57))) and ((((o58 = readmem64(of_int3(4198768), memory6)) and
+  ((((((((bw_and3(o58,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198768)])))) and
   (bw_and3(o58,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
@@ -2875,40 +3941,38 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o58,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result57 = {
-  t__content3 = xmm04 }) and (xmm05 = o58))) and (((result58 = {
-  t__content3 = rsp23 }) and (rsp24 = sub3(rsp23, of_int3(8)))) and
-  ((rsp25 = add3(rsp24, of_int3(8))) and ((writereg32post(rax2,
-  of_int2(0)) = true) and ((writereg32post(rdi9,
-  of_int2(4198688)) = true) and (((result59 = { t__content3 = rsp25 }) and
-  (rsp26 = sub3(rsp25, of_int3(8)))) and ((rsp27 = add3(rsp26,
-  of_int3(8))) and (((((((o59 = esp(rsp27)) and (o59 = readreg32(rsp27))) and
-  (o60 = add2(o59, of_int2(44)))) and (o61 = toBig(o60))) and
-  ((o62 = readmem32(o61, memory6)) and ((((bw_and2(o62,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result57 = xmm04) and
+  (xmm05 = o58))) and (((result58 = rsp23) and (rsp24 = sub3(rsp23,
+  of_int3(8)))) and ((rsp25 = add3(rsp24, of_int3(8))) and
+  ((writereg32post(rax5, of_int2(0)) = true) and ((writereg32post(rdi12,
+  of_int2(4198688)) = true) and (((result59 = rsp25) and (rsp26 = sub3(rsp25,
+  of_int3(8)))) and ((rsp27 = add3(rsp26, of_int3(8))) and
+  (((((((o59 = esp(rsp27)) and (o59 = readreg32(rsp27))) and (o60 = add2(o59,
+  of_int2(44)))) and (o61 = toBig(o60))) and ((o62 = readmem32(o61,
+  memory6)) and ((((bw_and2(o62,
   of_int2(255)) = toBig1(to_rep((memory6[o61])))) and (bw_and2(o62,
   of_int2(65280)) = mul2(toBig1(to_rep((memory6[add3(o61, of_int3(1))]))),
   of_int2(256)))) and (bw_and2(o62,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory6[add3(o61, of_int3(2))]))),
   of_int2(65536)))) and (bw_and2(o62,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory6[add3(o61,
-  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rcx,
-  o62) = true)) and ((((((o63 = ecx(rcx)) and (o63 = readreg32(rcx))) and
-  (((o64 = ecx(rcx)) and (o64 = readreg32(rcx))) and (o65 = bw_and2(o64,
-  o63)))) and (((o65 = of_int2(0)) and (o66 = true)) or
-  ((not (o65 = of_int2(0))) and (o66 = false)))) and ((result60 = {
-  bool__content = zeroflag4 }) and (zeroflag5 = o66))) and
-  ((((((o67 = ecx(rcx)) and (o67 = readreg32(rcx))) and
-  (((o68 = ecx(rcx)) and (o68 = readreg32(rcx))) and (o69 = bw_and2(o68,
-  o67)))) and ((ugt2(o69, of_int2(2147483647)) and (o70 = true)) or
-  ((not ugt2(o69, of_int2(2147483647))) and (o70 = false)))) and
-  ((result61 = { bool__content = signflag4 }) and (signflag5 = o70))) and
-  (((result62 = { bool__content = carryflag4 }) and
-  (carryflag5 = of_int4(0))) and (((result63 = { bool__content =
-  overflowflag4 }) and (overflowflag5 = of_int4(0))) and ((rsp28 = rsp27) and
-  ((writereg32post(rdi10, of_int2(10)) = true) and ((writereg32post(rbx4,
-  of_int2(0)) = true) and (((result64 = { t__content3 = rbp6 }) and
-  (rbp7 = add3(rsp28, of_int3(64)))) and (((result65 = { t__content3 = rsp28
-  }) and (rsp29 = sub3(rsp28, of_int3(8)))) and ((rsp30 = add3(rsp29,
+  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rcx1,
+  o62) = true)) and ((((((o63 = ecx(rcx1)) and (o63 = readreg32(rcx1))) and
+  (((o64 = ecx(rcx1)) and (o64 = readreg32(rcx1))) and (o65 = bw_and2(o64,
+  o63)))) and (((o65 = of_int2(0)) -> (o66 = true)) and
+  ((not (o65 = of_int2(0))) -> (o66 = false)))) and
+  ((result60 = zeroflag4) and (zeroflag5 = o66))) and
+  ((((((o67 = ecx(rcx1)) and (o67 = readreg32(rcx1))) and
+  (((o68 = ecx(rcx1)) and (o68 = readreg32(rcx1))) and (o69 = bw_and2(o68,
+  o67)))) and ((ugt2(o69, of_int2(2147483647)) -> (o70 = true)) and
+  ((not ugt2(o69, of_int2(2147483647))) -> (o70 = false)))) and
+  ((result61 = signflag4) and (signflag5 = o70))) and
+  (((result62 = carryflag4) and (carryflag5 = of_int4(0))) and
+  (((result63 = overflowflag4) and (overflowflag5 = of_int4(0))) and
+  ((rsp28 = rsp27) and ((writereg32post(rdi14, of_int2(10)) = true) and
+  ((writereg32post(rbx7, of_int2(0)) = true) and (((result64 = rbp6) and
+  (rbp7 = add3(rsp28, of_int3(64)))) and (((result65 = rsp28) and
+  (rsp29 = sub3(rsp28, of_int3(8)))) and ((rsp30 = add3(rsp29,
   of_int3(8))) and ((((o71 = readmem64(of_int3(4198768), memory6)) and
   ((((((((bw_and3(o71,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198768)])))) and
@@ -2926,10 +3990,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o71,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result66 = {
-  t__content3 = xmm23 }) and (xmm24 = o71))) and (((result67 = {
-  t__content3 = rsi4 }) and (rsi5 = add3(rsp30, of_int3(64)))) and
-  (((result68 = { t__content3 = rdi10 }) and (rdi11 = add3(rsp30,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result66 = xmm23) and
+  (xmm24 = o71))) and (((result67 = rsi4) and (rsi5 = add3(rsp30,
+  of_int3(64)))) and (((result68 = rdi14) and (rdi15 = add3(rsp30,
   of_int3(44)))) and ((((o72 = readmem64(of_int3(4198840), memory6)) and
   ((((((((bw_and3(o72,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198840)])))) and
@@ -2947,9 +4010,9 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198840),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o72,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198840),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result69 = {
-  t__content3 = xmm33 }) and (xmm34 = o72))) and
-  ((((o73 = readmem64(of_int3(4198848), memory6)) and ((((((((bw_and3(o73,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result69 = xmm33) and
+  (xmm34 = o72))) and ((((o73 = readmem64(of_int3(4198848), memory6)) and
+  ((((((((bw_and3(o73,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198848)])))) and
   (bw_and3(o73,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198848),
@@ -2965,42 +4028,40 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198848),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o73,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198848),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result70 = {
-  t__content3 = xmm13 }) and (xmm14 = o73))) and (((result71 = {
-  t__content3 = xmm06 }) and (xmm07 = xmm24)) and (((result72 = {
-  t__content3 = rsp30 }) and (rsp31 = sub3(rsp30, of_int3(8)))) and
-  ((rsp32 = add3(rsp31, of_int3(8))) and ((writereg32post(rax3,
-  of_int2(0)) = true) and ((writereg32post(rdi12,
-  of_int2(4198688)) = true) and (((result73 = { t__content3 = rsp32 }) and
-  (rsp33 = sub3(rsp32, of_int3(8)))) and ((rsp34 = add3(rsp33,
-  of_int3(8))) and (((((((o74 = esp(rsp34)) and (o74 = readreg32(rsp34))) and
-  (o75 = add2(o74, of_int2(44)))) and (o76 = toBig(o75))) and
-  ((o77 = readmem32(o76, memory6)) and ((((bw_and2(o77,
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result70 = xmm13) and
+  (xmm14 = o73))) and (((result71 = xmm06) and (xmm07 = xmm24)) and
+  (((result72 = rsp30) and (rsp31 = sub3(rsp30, of_int3(8)))) and
+  ((rsp32 = add3(rsp31, of_int3(8))) and ((writereg32post(rax7,
+  of_int2(0)) = true) and ((writereg32post(rdi16,
+  of_int2(4198688)) = true) and (((result73 = rsp32) and (rsp33 = sub3(rsp32,
+  of_int3(8)))) and ((rsp34 = add3(rsp33, of_int3(8))) and
+  (((((((o74 = esp(rsp34)) and (o74 = readreg32(rsp34))) and (o75 = add2(o74,
+  of_int2(44)))) and (o76 = toBig(o75))) and ((o77 = readmem32(o76,
+  memory6)) and ((((bw_and2(o77,
   of_int2(255)) = toBig1(to_rep((memory6[o76])))) and (bw_and2(o77,
   of_int2(65280)) = mul2(toBig1(to_rep((memory6[add3(o76, of_int3(1))]))),
   of_int2(256)))) and (bw_and2(o77,
   of_int2(16711680)) = mul2(toBig1(to_rep((memory6[add3(o76, of_int3(2))]))),
   of_int2(65536)))) and (bw_and2(o77,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory6[add3(o76,
-  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdx,
-  o77) = true)) and ((((((o78 = edx(rdx)) and (o78 = readreg32(rdx))) and
-  (((o79 = edx(rdx)) and (o79 = readreg32(rdx))) and (o80 = bw_and2(o79,
-  o78)))) and (((o80 = of_int2(0)) and (o81 = true)) or
-  ((not (o80 = of_int2(0))) and (o81 = false)))) and ((result74 = {
-  bool__content = zeroflag6 }) and (zeroflag7 = o81))) and
-  ((((((o82 = edx(rdx)) and (o82 = readreg32(rdx))) and
-  (((o83 = edx(rdx)) and (o83 = readreg32(rdx))) and (o84 = bw_and2(o83,
-  o82)))) and ((ugt2(o84, of_int2(2147483647)) and (o85 = true)) or
-  ((not ugt2(o84, of_int2(2147483647))) and (o85 = false)))) and
-  ((result75 = { bool__content = signflag6 }) and (signflag7 = o85))) and
-  (((result76 = { bool__content = carryflag6 }) and
-  (carryflag7 = of_int4(0))) and (((result77 = { bool__content =
-  overflowflag6 }) and (overflowflag7 = of_int4(0))) and ((rsp35 = rsp34) and
-  ((writereg32post(rdi13, of_int2(10)) = true) and (((result78 = {
-  t__content3 = r15 }) and (r151 = of_int3(9))) and (((result79 = {
-  t__content3 = rsp35 }) and (rsp36 = sub3(rsp35, of_int3(8)))) and
-  ((rsp37 = add3(rsp36, of_int3(8))) and
-  ((((o86 = readmem64(of_int3(4198768), memory6)) and ((((((((bw_and3(o86,
+  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdx1,
+  o77) = true)) and ((((((o78 = edx(rdx1)) and (o78 = readreg32(rdx1))) and
+  (((o79 = edx(rdx1)) and (o79 = readreg32(rdx1))) and (o80 = bw_and2(o79,
+  o78)))) and (((o80 = of_int2(0)) -> (o81 = true)) and
+  ((not (o80 = of_int2(0))) -> (o81 = false)))) and
+  ((result74 = zeroflag6) and (zeroflag7 = o81))) and
+  ((((((o82 = edx(rdx1)) and (o82 = readreg32(rdx1))) and
+  (((o83 = edx(rdx1)) and (o83 = readreg32(rdx1))) and (o84 = bw_and2(o83,
+  o82)))) and ((ugt2(o84, of_int2(2147483647)) -> (o85 = true)) and
+  ((not ugt2(o84, of_int2(2147483647))) -> (o85 = false)))) and
+  ((result75 = signflag6) and (signflag7 = o85))) and
+  (((result76 = carryflag6) and (carryflag7 = of_int4(0))) and
+  (((result77 = overflowflag6) and (overflowflag7 = of_int4(0))) and
+  ((rsp35 = rsp34) and ((writereg32post(rdi18, of_int2(10)) = true) and
+  (((result78 = r15) and (r151 = of_int3(9))) and (((result79 = rsp35) and
+  (rsp36 = sub3(rsp35, of_int3(8)))) and ((rsp37 = add3(rsp36,
+  of_int3(8))) and ((((o86 = readmem64(of_int3(4198768), memory6)) and
+  ((((((((bw_and3(o86,
   of_int3(255)) = toBig2(to_rep((memory6[of_int3(4198768)])))) and
   (bw_and3(o86,
   of_int3(65280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
@@ -3016,8 +4077,8 @@ goal WP_parameter_def :
   of_int3(71776119061217280)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
   of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o86,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory6[add3(of_int3(4198768),
-  of_int3(7))]))), of_int3(72057594037927936))))) and ((result80 = {
-  t__content3 = xmm6 }) and (xmm61 = o86))) and ((((((o87 = esp(rsp37)) and
+  of_int3(7))]))), of_int3(72057594037927936))))) and ((result80 = xmm6) and
+  (xmm61 = o86))) and ((((((o87 = esp(rsp37)) and
   (o87 = readreg32(rsp37))) and (o88 = add2(o87, of_int2(24)))) and
   (o89 = toBig(o88))) and (((((((((bw_and3(xmm61,
   of_int3(255)) = toBig2(to_rep((memory7[o89])))) and (bw_and3(xmm61,
@@ -3067,9 +4128,9 @@ goal WP_parameter_def :
     (not (i = add3(rsp38, of_int3(28))))) and (not (i = add3(rsp38,
     of_int3(29))))) and (not (i = add3(rsp38, of_int3(30))))) and
     (not (i = add3(rsp38, of_int3(31))))) ->
-    (to_rep((memory8[i])) = to_rep((memory7[i])))))) and
-  (rsp38 = rsp37)) and ((writereg32post(rdi14, of_int2(4198544)) = true) and
-  ((writereg32post(rbx5, of_int2(0)) = true) and
+    (to_rep((memory8[i])) = to_rep((memory7[i])))))) and (rsp38 = rsp37)) and
+  ((writereg32post(rdi20, of_int2(4198544)) = true) and
+  ((writereg32post(rbx10, of_int2(0)) = true) and
   (((forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
     of_int3(18446744073709551615))) -> (((((((((not (i = sub3(add3(rsp39,
     of_int3(152)), of_int3(104)))) and (not (i = add3(sub3(add3(rsp39,
@@ -3082,13 +4143,12 @@ goal WP_parameter_def :
     of_int3(5))))) and (not (i = add3(sub3(add3(rsp39, of_int3(152)),
     of_int3(104)), of_int3(6))))) and (not (i = add3(sub3(add3(rsp39,
     of_int3(152)), of_int3(104)), of_int3(7))))) ->
-    (to_rep((memory9[i])) = to_rep((memory8[i])))))) and
-  (rsp39 = rsp38)) and (((result81 = { t__content3 = rsi6 }) and
-  (rsi7 = add3(rsp39, of_int3(48)))) and ((writereg32post(rdi15,
-  of_int2(1072497001)) = true) and ((writereg16post(rbx6, rbx7,
-  of_int1(361)) = true) and (((result82 = { t__content3 = rsp39 }) and
-  (rsp40 = sub3(rsp39, of_int3(8)))) and (((((((((((rsp41 = add3(rsp40,
-  of_int3(8))) and
+    (to_rep((memory9[i])) = to_rep((memory8[i])))))) and (rsp39 = rsp38)) and
+  (((result81 = rsi7) and (rsi8 = add3(rsp39, of_int3(48)))) and
+  ((writereg32post(rdi22, of_int2(1072497001)) = true) and
+  ((writereg16post(rbx11, rbx12, of_int1(361)) = true) and
+  (((result82 = rsp39) and (rsp40 = sub3(rsp39, of_int3(8)))) and
+  (((((((((((rsp41 = add3(rsp40, of_int3(8))) and
   (to_rep((memory10[rsp40])) = to_rep((memory9[rsp40])))) and
   (to_rep((memory10[add3(rsp40, of_int3(1))])) = to_rep((memory9[add3(rsp40,
   of_int3(1))])))) and (to_rep((memory10[add3(rsp40,
@@ -3102,7 +4162,7 @@ goal WP_parameter_def :
   (to_rep((memory10[add3(rsp40, of_int3(7))])) = to_rep((memory9[add3(rsp40,
   of_int3(7))])))) and
   (forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
-  of_int3(18446744073709551615))) -> ((not (inrange64(i, rsi7,
+  of_int3(18446744073709551615))) -> ((not (inrange64(i, rsi8,
   of_int3(8)) = true)) -> (to_rep((memory10[i])) = to_rep((memory9[i]))))))) and
   (((((((o90 = esp(rsp41)) and (o90 = readreg32(rsp41))) and (o91 = add2(o90,
   of_int2(48)))) and (o92 = toBig(o91))) and ((o93 = readmem32(o92,
@@ -3113,15 +4173,14 @@ goal WP_parameter_def :
   of_int2(16711680)) = mul2(toBig1(to_rep((memory10[add3(o92,
   of_int3(2))]))), of_int2(65536)))) and (bw_and2(o93,
   of_int2(4278190080)) = mul2(toBig1(to_rep((memory10[add3(o92,
-  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdx1,
-  o93) = true)) and ((writereg32post(rsi8, of_int2(1072497001)) = true) and
-  ((writereg32post(rdi16, of_int2(4198720)) = true) and
-  ((writereg32post(rax4, of_int2(0)) = true) and (((result83 = {
-  t__content3 = rsp41 }) and (rsp42 = sub3(rsp41, of_int3(8)))) and
-  ((rsp43 = add3(rsp42, of_int3(8))) and ((writereg32post(rdi17,
-  of_int2(4198584)) = true) and (((result84 = { t__content3 = rsp43 }) and
-  (rsp44 = sub3(rsp43, of_int3(8)))) and ((rsp45 = add3(rsp44,
-  of_int3(8))) and (((result85 = { t__content3 = xmm25 }) and
+  of_int3(3))]))), of_int2(16777216)))))) and (writereg32post(rdx4,
+  o93) = true)) and ((writereg32post(rsi9, of_int2(1072497001)) = true) and
+  ((writereg32post(rdi24, of_int2(4198720)) = true) and
+  ((writereg32post(rax12, of_int2(0)) = true) and (((result83 = rsp41) and
+  (rsp42 = sub3(rsp41, of_int3(8)))) and ((rsp43 = add3(rsp42,
+  of_int3(8))) and ((writereg32post(rdi25, of_int2(4198584)) = true) and
+  (((result84 = rsp43) and (rsp44 = sub3(rsp43, of_int3(8)))) and
+  ((rsp45 = add3(rsp44, of_int3(8))) and (((result85 = xmm25) and
   (xmm26 = bw_xor3(xmm25, xmm25))) and
   (((forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
     of_int3(18446744073709551615))) -> (((((((((not (i = rsp46)) and
@@ -3131,11 +4190,11 @@ goal WP_parameter_def :
     of_int3(5))))) and (not (i = add3(rsp46, of_int3(6))))) and
     (not (i = add3(rsp46, of_int3(7))))) ->
     (to_rep((memory11[i])) = to_rep((memory10[i])))))) and
-  (rsp46 = rsp45)) and ((writereg32post(rdi18, of_int2(4198736)) = true) and
-  ((writereg32post(rbx8, of_int2(361)) = true) and (((result86 = {
-  t__content3 = rsp46 }) and (rsp47 = sub3(rsp46, of_int3(8)))) and
-  ((rsp48 = add3(rsp47, of_int3(8))) and (((result87 = { t__content3 = xmm27
-  }) and (xmm28 = bw_xor3(xmm27, xmm27))) and
+  (rsp46 = rsp45)) and ((writereg32post(rdi27, of_int2(4198736)) = true) and
+  ((writereg32post(rbx14, of_int2(361)) = true) and (((result86 = rsp46) and
+  (rsp47 = sub3(rsp46, of_int3(8)))) and ((rsp48 = add3(rsp47,
+  of_int3(8))) and (((result87 = xmm27) and (xmm28 = bw_xor3(xmm27,
+  xmm27))) and
   (((forall i:t3. ((ule3(of_int3(0), i) and ule3(i,
     of_int3(18446744073709551615))) -> (((((((((not (i = rsp49)) and
     (not (i = add3(rsp49, of_int3(1))))) and (not (i = add3(rsp49,
@@ -3144,12 +4203,11 @@ goal WP_parameter_def :
     of_int3(5))))) and (not (i = add3(rsp49, of_int3(6))))) and
     (not (i = add3(rsp49, of_int3(7))))) ->
     (to_rep((memory12[i])) = to_rep((memory11[i])))))) and
-  (rsp49 = rsp48)) and (((result88 = { t__content3 = rsp49 }) and
-  (rsp50 = add3(rsp49, of_int3(104)))) and ((writereg32post(rax5,
-  of_int2(0)) = true) and ((((o94 = readmem64(add3(rsp50, of_int3(0)),
-  memory12)) and ((((((((bw_and3(o94,
-  of_int3(255)) = toBig2(to_rep((memory12[add3(rsp50, of_int3(0))])))) and
-  (bw_and3(o94,
+  (rsp49 = rsp48)) and (((result88 = rsp49) and (rsp50 = add3(rsp49,
+  of_int3(104)))) and ((writereg32post(rax15, of_int2(0)) = true) and
+  ((((o94 = readmem64(add3(rsp50, of_int3(0)), memory12)) and
+  ((((((((bw_and3(o94, of_int3(255)) = toBig2(to_rep((memory12[add3(rsp50,
+  of_int3(0))])))) and (bw_and3(o94,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp50,
   of_int3(0)), of_int3(1))]))), of_int3(256)))) and (bw_and3(o94,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp50,
@@ -3164,10 +4222,9 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o94,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp50,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result89 = { t__content3 = rbx9 }) and (rbx10 = o94))) and
-  (((result90 = { t__content3 = rsp50 }) and (rsp51 = add3(rsp50,
-  of_int3(8)))) and ((((o95 = readmem64(add3(rsp51, of_int3(0)),
-  memory12)) and ((((((((bw_and3(o95,
+  ((result89 = rbx15) and (rbx16 = o94))) and (((result90 = rsp50) and
+  (rsp51 = add3(rsp50, of_int3(8)))) and ((((o95 = readmem64(add3(rsp51,
+  of_int3(0)), memory12)) and ((((((((bw_and3(o95,
   of_int3(255)) = toBig2(to_rep((memory12[add3(rsp51, of_int3(0))])))) and
   (bw_and3(o95,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp51,
@@ -3184,11 +4241,11 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o95,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp51,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result91 = { t__content3 = rbp8 }) and (rbp9 = o95))) and (((result92 = {
-  t__content3 = rsp51 }) and (rsp52 = add3(rsp51, of_int3(8)))) and
-  ((((o96 = readmem64(add3(rsp52, of_int3(0)), memory12)) and
-  ((((((((bw_and3(o96, of_int3(255)) = toBig2(to_rep((memory12[add3(rsp52,
-  of_int3(0))])))) and (bw_and3(o96,
+  ((result91 = rbp12) and (rbp13 = o95))) and (((result92 = rsp51) and
+  (rsp52 = add3(rsp51, of_int3(8)))) and ((((o96 = readmem64(add3(rsp52,
+  of_int3(0)), memory12)) and ((((((((bw_and3(o96,
+  of_int3(255)) = toBig2(to_rep((memory12[add3(rsp52, of_int3(0))])))) and
+  (bw_and3(o96,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp52,
   of_int3(0)), of_int3(1))]))), of_int3(256)))) and (bw_and3(o96,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp52,
@@ -3203,11 +4260,11 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o96,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp52,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result93 = { t__content3 = r121 }) and (r122 = o96))) and (((result94 = {
-  t__content3 = rsp52 }) and (rsp53 = add3(rsp52, of_int3(8)))) and
-  ((((o97 = readmem64(add3(rsp53, of_int3(0)), memory12)) and
-  ((((((((bw_and3(o97, of_int3(255)) = toBig2(to_rep((memory12[add3(rsp53,
-  of_int3(0))])))) and (bw_and3(o97,
+  ((result93 = r121) and (r122 = o96))) and (((result94 = rsp52) and
+  (rsp53 = add3(rsp52, of_int3(8)))) and ((((o97 = readmem64(add3(rsp53,
+  of_int3(0)), memory12)) and ((((((((bw_and3(o97,
+  of_int3(255)) = toBig2(to_rep((memory12[add3(rsp53, of_int3(0))])))) and
+  (bw_and3(o97,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp53,
   of_int3(0)), of_int3(1))]))), of_int3(256)))) and (bw_and3(o97,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp53,
@@ -3222,11 +4279,11 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o97,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp53,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result95 = { t__content3 = r131 }) and (r132 = o97))) and (((result96 = {
-  t__content3 = rsp53 }) and (rsp54 = add3(rsp53, of_int3(8)))) and
-  ((((o98 = readmem64(add3(rsp54, of_int3(0)), memory12)) and
-  ((((((((bw_and3(o98, of_int3(255)) = toBig2(to_rep((memory12[add3(rsp54,
-  of_int3(0))])))) and (bw_and3(o98,
+  ((result95 = r131) and (r132 = o97))) and (((result96 = rsp53) and
+  (rsp54 = add3(rsp53, of_int3(8)))) and ((((o98 = readmem64(add3(rsp54,
+  of_int3(0)), memory12)) and ((((((((bw_and3(o98,
+  of_int3(255)) = toBig2(to_rep((memory12[add3(rsp54, of_int3(0))])))) and
+  (bw_and3(o98,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp54,
   of_int3(0)), of_int3(1))]))), of_int3(256)))) and (bw_and3(o98,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp54,
@@ -3241,11 +4298,11 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o98,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp54,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result97 = { t__content3 = r141 }) and (r142 = o98))) and (((result98 = {
-  t__content3 = rsp54 }) and (rsp55 = add3(rsp54, of_int3(8)))) and
-  ((((o99 = readmem64(add3(rsp55, of_int3(0)), memory12)) and
-  ((((((((bw_and3(o99, of_int3(255)) = toBig2(to_rep((memory12[add3(rsp55,
-  of_int3(0))])))) and (bw_and3(o99,
+  ((result97 = r141) and (r142 = o98))) and (((result98 = rsp54) and
+  (rsp55 = add3(rsp54, of_int3(8)))) and ((((o99 = readmem64(add3(rsp55,
+  of_int3(0)), memory12)) and ((((((((bw_and3(o99,
+  of_int3(255)) = toBig2(to_rep((memory12[add3(rsp55, of_int3(0))])))) and
+  (bw_and3(o99,
   of_int3(65280)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp55,
   of_int3(0)), of_int3(1))]))), of_int3(256)))) and (bw_and3(o99,
   of_int3(16711680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp55,
@@ -3260,49 +4317,42 @@ goal WP_parameter_def :
   of_int3(0)), of_int3(6))]))), of_int3(281474976710656)))) and (bw_and3(o99,
   of_int3(18374686479671623680)) = mul3(toBig2(to_rep((memory12[add3(add3(rsp55,
   of_int3(0)), of_int3(7))]))), of_int3(72057594037927936))))) and
-  ((result99 = { t__content3 = r152 }) and (r153 = o99))) and
-  (((result100 = { t__content3 = rsp55 }) and (rsp56 = add3(rsp55,
-  of_int3(8)))) and ((result101 = { t__content3 = rsp56 }) and
+  ((result99 = r152) and (r153 = o99))) and (((result100 = rsp55) and
+  (rsp56 = add3(rsp55, of_int3(8)))) and ((result101 = rsp56) and
   (rsp57 = add3(rsp56,
   of_int3(8))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) and
-  (((saver152 = { t__content3 = saver151 }) and ((saver142 = { t__content3 =
-  saver141 }) and ((saver132 = { t__content3 = saver131 }) and ((saver122 = {
-  t__content3 = saver121 }) and ((saverbp2 = { t__content3 = saverbp1 }) and
-  ((saverbx2 = { t__content3 = saverbx1 }) and ((ra72 = { t__content = ra71
-  }) and ((ra62 = { t__content = ra61 }) and ((ra52 = { t__content = ra51
-  }) and ((ra42 = { t__content = ra41 }) and ((ra32 = { t__content = ra31
-  }) and ((ra22 = { t__content = ra21 }) and ((ra12 = { t__content = ra11
-  }) and ((ra02 = { t__content = ra01 }) and ((savestackptr2 = {
-  t__content3 = savestackptr1 }) and ((memory13 = { map__content = memory12
-  }) and ((r154 = { t__content3 = r153 }) and ((r143 = { t__content3 = r142
-  }) and ((r133 = { t__content3 = r132 }) and ((r123 = { t__content3 = r122
-  }) and ((r81 = { t__content3 = r8 }) and ((rdi20 = { t__content3 = rdi19
-  }) and ((rsi9 = { t__content3 = rsi8 }) and ((rbp10 = { t__content3 = rbp9
-  }) and ((rsp58 = { t__content3 = rsp57 }) and ((rbx11 = { t__content3 =
-  rbx10 }) and ((rdx2 = { t__content3 = rdx1 }) and ((rcx2 = { t__content3 =
-  rcx1 }) and ((rax6 = { t__content3 = rax5 }) and ((xmm71 = { t__content3 =
-  xmm7 }) and ((xmm63 = { t__content3 = xmm62 }) and ((xmm51 = {
-  t__content3 = xmm5 }) and ((xmm41 = { t__content3 = xmm4 }) and ((xmm36 = {
-  t__content3 = xmm35 }) and ((xmm210 = { t__content3 = xmm29 }) and
-  ((xmm16 = { t__content3 = xmm15 }) and ((xmm09 = { t__content3 = xmm08
-  }) and ((overflowflag9 = { bool__content = overflowflag8 }) and
-  ((signflag9 = { bool__content = signflag8 }) and ((carryflag9 = {
-  bool__content = carryflag8 }) and ((zeroflag9 = { bool__content = zeroflag8
-  }) and (exit_called1 = { bool__content = exit_called
-  })))))))))))))))))))))))))))))))))))))))))) and ((saver153 = saver151) and
-  ((saver143 = saver141) and ((saver133 = saver131) and
-  ((saver123 = saver121) and ((saverbp3 = saverbp1) and
-  ((saverbx3 = saverbx1) and ((ra73 = ra71) and ((ra63 = ra61) and
-  ((ra53 = ra51) and ((ra43 = ra41) and ((ra33 = ra31) and ((ra23 = ra21) and
-  ((ra13 = ra11) and ((ra03 = ra01) and ((savestackptr3 = savestackptr1) and
-  ((memory14 = memory12) and ((r155 = r153) and ((r144 = r142) and
-  ((r134 = r132) and ((r124 = r122) and ((r82 = r8) and ((rdi21 = rdi19) and
-  ((rsi10 = rsi8) and ((rbp11 = rbp9) and ((rsp59 = rsp57) and
-  ((rbx12 = rbx10) and ((rdx3 = rdx1) and ((rcx3 = rcx1) and
-  ((rax7 = rax5) and ((xmm72 = xmm7) and ((xmm64 = xmm62) and
-  ((xmm52 = xmm5) and ((xmm42 = xmm4) and ((xmm37 = xmm35) and
-  ((xmm211 = xmm29) and ((xmm17 = xmm15) and ((xmm010 = xmm08) and
+  (((saver152 = saver151) and ((saver142 = saver141) and
+  ((saver132 = saver131) and ((saver122 = saver121) and
+  ((saverbp2 = saverbp1) and ((saverbx2 = saverbx1) and ((ra72 = ra71) and
+  ((ra62 = ra61) and ((ra52 = ra51) and ((ra42 = ra41) and ((ra32 = ra31) and
+  ((ra22 = ra21) and ((ra12 = ra11) and ((ra02 = ra01) and
+  ((savestackptr2 = savestackptr1) and ((memory13 = memory12) and
+  ((r154 = r153) and ((r143 = r142) and ((r133 = r132) and ((r123 = r122) and
+  ((r83 = r82) and ((rdi29 = rdi28) and ((rsi10 = rsi9) and
+  ((rbp14 = rbp13) and ((rsp58 = rsp57) and ((rbx17 = rbx16) and
+  ((rdx5 = rdx4) and ((rcx4 = rcx3) and ((rax16 = rax15) and
+  ((xmm72 = xmm71) and ((xmm63 = xmm62) and ((xmm52 = xmm51) and
+  ((xmm42 = xmm41) and ((xmm36 = xmm35) and ((xmm210 = xmm29) and
+  ((xmm18 = xmm17) and ((xmm012 = xmm011) and
+  ((overflowflag9 = overflowflag8) and ((signflag9 = signflag8) and
+  ((carryflag9 = carryflag8) and ((zeroflag9 = zeroflag8) and
+  (exit_called1 = exit_called)))))))))))))))))))))))))))))))))))))))))) and
+  ((saver153 = saver151) and ((saver143 = saver141) and
+  ((saver133 = saver131) and ((saver123 = saver121) and
+  ((saverbp3 = saverbp1) and ((saverbx3 = saverbx1) and ((ra73 = ra71) and
+  ((ra63 = ra61) and ((ra53 = ra51) and ((ra43 = ra41) and ((ra33 = ra31) and
+  ((ra23 = ra21) and ((ra13 = ra11) and ((ra03 = ra01) and
+  ((savestackptr3 = savestackptr1) and ((memory14 = memory12) and
+  ((r155 = r153) and ((r144 = r142) and ((r134 = r132) and ((r124 = r122) and
+  ((r84 = r82) and ((rdi30 = rdi28) and ((rsi11 = rsi9) and
+  ((rbp15 = rbp13) and ((rsp59 = rsp57) and ((rbx18 = rbx16) and
+  ((rdx6 = rdx4) and ((rcx5 = rcx3) and ((rax17 = rax15) and
+  ((xmm73 = xmm71) and ((xmm64 = xmm62) and ((xmm53 = xmm51) and
+  ((xmm43 = xmm41) and ((xmm37 = xmm35) and ((xmm211 = xmm29) and
+  ((xmm19 = xmm17) and ((xmm013 = xmm011) and
   ((overflowflag10 = overflowflag8) and ((signflag10 = signflag8) and
   ((carryflag10 = carryflag8) and ((zeroflag10 = zeroflag8) and
-  (exit_called2 = exit_called)))))))))))))))))))))))))))))))))))))))))))) ->
-  ((rsp58).t__content3 = add3(rsp, of_int3(8)))))
+  (exit_called2 = exit_called))))))))))))))))))))))))))))))))))))))))))))
+
+ (* File "x86.ads", line 334, characters 0-0 *)
+goal WP_parameter_def : (rsp58 = add3(rsp, of_int3(8)))

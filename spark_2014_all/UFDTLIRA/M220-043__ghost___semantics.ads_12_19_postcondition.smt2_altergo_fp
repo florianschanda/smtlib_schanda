@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -168,37 +168,144 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall formal:int. forall i:int. forall temp___135:int.
-  forall temp___134:int. forall temp___136:int. forall o:int.
-  forall formal1:int. forall result:int. forall i1:int. forall result1:int.
-  forall formal2:int. forall formal3:int. forall i2:int.
-  forall temp___1361:int. forall result2:int. forall temp___1362:int.
-  forall formal4:int. forall i3:int. forall formal5:int. forall i4:int.
-  forall formal6:int. forall i5:int. forall formal7:int. forall i6:int.
-  forall formal8:int. forall i7:int. forall formal9:int. forall i8:int.
-  ((in_range1(formal) and ((formal = ghost_func(void)) and
-  ((((0 <  (formal + ghost_func(void))) and
-  ((0 <  (formal + ghost_func(void))) and ((({ int__content = result } = {
-  int__content = i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= 2)) and
-  ((((temp___135 = i1) and ((temp___134 = formal) and ((0 = temp___136) and
-  ((((o = (formal + 1)) and in_range1((formal + 1))) and (({ int__content =
-  result1 } = { int__content = formal }) and (formal2 = o))) and
+logic formal : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___135 : int
+
+logic temp___134 : int
+
+logic temp___136 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic us : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic formal1 : int
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : int
+
+logic formal2 : int
+
+logic formal3 : int
+
+logic i2 : int
+
+logic temp___1361 : int
+
+logic result2 : int
+
+logic temp___1362 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : int
+
+logic formal4 : int
+
+logic formal5 : int
+
+logic i4 : int
+
+logic temp___1363 : int
+
+logic formal6 : int
+
+logic i5 : int
+
+logic temp___1364 : int
+
+logic formal7 : int
+
+logic i6 : int
+
+logic formal8 : int
+
+logic i7 : int
+
+logic formal9 : int
+
+logic i8 : int
+
+logic formal10 : int
+
+logic i9 : int
+
+logic formal11 : int
+
+logic i10 : int
+
+logic formal12 : int
+
+logic i11 : int
+
+axiom H : in_range1(formal)
+
+axiom H1 : (formal = ghost_func(void))
+
+axiom H2 : (((0 <  (formal + ghost_func(void))) and
+  ((0 <  (formal + ghost_func(void))) and (((result = i) and (i1 = 1)) and
+  ((((1 <= i1) and (i1 <= 2)) -> ((((temp___135 = i1) and
+  ((temp___134 = formal) and ((0 = temp___136) and ((((o6 = (formal + 1)) and
+  in_range1((formal + 1))) and ((result1 = formal) and (formal2 = o6))) and
   ((0 <  (formal3 + ghost_func(void))) and (((in_range1(formal3) and
   ((1 <= 2) -> in_range2(i2))) and ((1 <= i2) and (i2 <= 2))) and
   (((temp___1361 = result2) and
   (temp___1362 = (formal3 + ghost_func(void)))) and (i2 = 2)))))))) and
-  (((i2 = i3) and (formal3 = formal4)) and ((i4 = i2) and
-  (formal5 = formal3)))) and ((({ int__content = i5 } = { int__content = i3
-  }) and ({ int__content = formal6 } = { int__content = formal4 })) and
-  ((i6 = i4) and (formal7 = formal5))))) or ((not ((1 <= i1) and
-  (i1 <= 2))) and (((i1 = i5) and ({ int__content = formal6 } = {
-  int__content = formal })) and ((i6 = i1) and (formal7 = formal1)))))))) and
-  ((({ int__content = i7 } = { int__content = i5 }) and ({ int__content =
-  formal8 } = { int__content = formal6 })) and ((i8 = i6) and
-  (formal9 = formal7)))) and ((((bool_eq(formal, 0) = true) and
-  (formal8 = ghost_func(void))) or (not (bool_eq(formal, 0) = true))) and
-  (((not (bool_eq(formal, 0) = true)) and
-  (formal8 = (ghost_func(void) + 1))) or (bool_eq(formal, 0) = true)))))) ->
-  (formal8 = (ghost_func(void) + 1))))
+  (((i2 = i6) and (formal3 = formal7)) and ((i7 = i2) and
+  (formal8 = formal3)))) and (((i8 = i6) and (formal9 = formal7)) and
+  ((i9 = i7) and (formal10 = formal8))))) and ((not ((1 <= i1) and
+  (i1 <= 2))) -> (((i1 = i8) and (formal9 = formal)) and ((i9 = i1) and
+  (formal10 = formal1)))))))) and (((i10 = i8) and (formal11 = formal9)) and
+  ((i11 = i9) and (formal12 = formal10))))
+
+axiom H3 : ((bool_eq(formal, 0) = true) -> (formal11 = ghost_func(void)))
+
+axiom H4 : ((not (bool_eq(formal, 0) = true)) ->
+  (formal11 = (ghost_func(void) + 1)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (formal11 = (ghost_func(void) + 1))

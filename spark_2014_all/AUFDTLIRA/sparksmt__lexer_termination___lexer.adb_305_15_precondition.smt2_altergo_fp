@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -482,36 +482,98 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic temp___String_Literal_943 : unit -> (int,character) farray
+logic temp___String_Literal_933 : unit -> (int,character) farray
 
-axiom temp___String_Literal_943__def_axiom :
-  (to_rep((temp___String_Literal_943(void)[1])) = 58)
+axiom temp___String_Literal_933__def_axiom :
+  (to_rep((temp___String_Literal_933(void)[1])) = 58)
 
-logic temp___String_Literal_944 : unit -> (int,character) farray
+logic temp___String_Literal_934 : unit -> (int,character) farray
 
-axiom temp___String_Literal_944__def_axiom :
-  (to_rep((temp___String_Literal_944(void)[1])) = 58)
+axiom temp___String_Literal_934__def_axiom :
+  (to_rep((temp___String_Literal_934(void)[1])) = 58)
 
-logic temp___String_Literal_945 : unit -> (int,character) farray
+logic temp___String_Literal_935 : unit -> (int,character) farray
 
-axiom temp___String_Literal_945__def_axiom :
-  ((to_rep((temp___String_Literal_945(void)[1])) = 58) and
-  (to_rep((temp___String_Literal_945(void)[2])) = 32))
+axiom temp___String_Literal_935__def_axiom :
+  ((to_rep((temp___String_Literal_935(void)[1])) = 58) and
+  (to_rep((temp___String_Literal_935(void)[2])) = 32))
+
+logic the_filename : int
+
+logic current_line : int
+
+logic current_col : int
+
+logic first_line : int
+
+logic first_col : int
+
+logic l : int
+
+logic c : int
+
+logic name_table : us_private
+
+logic o : (int,character) farray
+
+logic o1 : t
+
+logic result : int
+
+logic l1 : int
+
+logic result1 : int
+
+logic c1 : int
+
+logic result2 : int
+
+logic l2 : int
+
+logic result3 : int
+
+logic c2 : int
+
+axiom H : in_range4(the_filename)
+
+axiom H1 : in_range1(current_line)
+
+axiom H2 : in_range3(current_col)
+
+axiom H3 : in_range3(first_line)
+
+axiom H4 : in_range3(first_col)
+
+axiom H5 : in_range5(location)
+
+axiom H6 : dynamic_property(1, 2147483647, to_rep1(first(msg1)),
+  to_rep1(last(msg1)))
+
+axiom H7 : (invariant__(name_table) = true)
+
+axiom H8 : ((0 <= 2147483647) -> in_range3(l))
+
+axiom H9 : ((0 <= 2147483647) -> in_range3(c))
+
+axiom H10 : ((location = 0) -> (result = l))
+
+axiom H11 : ((location = 0) -> (l1 = first_line))
+
+axiom H12 : ((location = 0) -> (result1 = c))
+
+axiom H13 : ((location = 0) -> (c1 = first_col))
+
+axiom H14 : ((not (location = 0)) -> (result2 = l))
+
+axiom H15 : ((not (location = 0)) -> (l2 = current_line))
+
+axiom H16 : ((not (location = 0)) -> (result3 = c))
+
+axiom H17 : ((not (location = 0)) -> (c2 = current_col))
+
+axiom H18 : ((not (location = 0)) -> (c1 = c2))
+
+axiom H19 : ((not (location = 0)) -> (l1 = l2))
 
  (* File "lexer.adb", line 48, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_filename:int. forall current_line:int. forall current_col:int.
-  forall first_line:int. forall first_col:int. forall l:int. forall c:int.
-  forall name_table:us_private. forall result:int. forall l1:int.
-  forall result1:int. forall c1:int. forall result2:int. forall l2:int.
-  forall result3:int. forall c2:int. (in_range4(the_filename) ->
-  (in_range1(current_line) -> (in_range3(current_col) ->
-  (in_range3(first_line) -> (in_range3(first_col) -> (in_range5(location) ->
-  (dynamic_property(1, 2147483647, to_rep1(first(msg1)),
-  to_rep1(last(msg1))) -> ((invariant__(name_table) = true) ->
-  (((0 <= 2147483647) -> in_range3(l)) -> (((0 <= 2147483647) ->
-  in_range3(c)) -> ((((location = 0) and (((result = l) and
-  (l1 = first_line)) and ((result1 = c) and (c1 = first_col)))) or
-  ((not (location = 0)) and ((((result2 = l) and (l2 = current_line)) and
-  ((result3 = c) and (c2 = current_col))) and ((c1 = c2) and (l1 = l2))))) ->
-  (invariant__(name_table) = true)))))))))))))
+goal WP_parameter_def : (invariant__(name_table) = true)

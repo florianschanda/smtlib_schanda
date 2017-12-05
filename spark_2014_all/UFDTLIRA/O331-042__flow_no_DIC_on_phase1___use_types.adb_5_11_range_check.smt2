@@ -111,6 +111,7 @@
 (assert true)
 (assert true)
 (assert (forall ((x us_rep)) (! (= (valid x) true) :pattern ((valid x)))))
+(declare-const us Int)
 (assert (not (in_range 3)))
 (check-sat)
 (exit)

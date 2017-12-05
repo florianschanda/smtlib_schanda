@@ -295,7 +295,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -484,23 +484,63 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 axiom ih__def_axiom : (ih = induction_hypothesis(remove({ elts = a; rt = a1
   }, to_rep1(first(a1))), remove({ elts = b; rt = b1 }, to_rep1(first(b1)))))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__perm_reflexive__induction_hypothesis__result:int.
-  forall o:int. forall o1:(int,natural) farray. forall o2:t. forall o3:int.
-  forall o4:(int,natural) farray. forall o5:t.
-  forall perm__perm_reflexive__induction_hypothesis__result1:int.
-  forall perm__perm_reflexive__induction_hypothesis__result2:int.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1))) ->
-  (((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({ elts = b;
-  rt = b1 }) = true) and (bool_eq5(a, to_rep1(first(a1)), to_rep1(last(a1)),
-  b, to_rep1(first(b1)), to_rep1(last(b1))) = true))) -> (((not (length({
-  elts = a; rt = a1 }) = 0)) and
-  ((perm__perm_reflexive__induction_hypothesis__result2 = perm__perm_reflexive__induction_hypothesis__result) and
-  (perm__perm_reflexive__induction_hypothesis__result2 = perm__perm_reflexive__induction_hypothesis__result1))) ->
-  ((((o3 = to_rep1(first(b1))) and in_range2(to_rep1(first(b1)))) and (({
-  elts = o4; rt = o5 } = remove({ elts = b; rt = b1 }, o3)) and
+logic perm__perm_reflexive__induction_hypothesis__result : int
+
+logic o : int
+
+logic o1 : (int,natural) farray
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : (int,natural) farray
+
+logic o5 : t
+
+logic perm__perm_reflexive__induction_hypothesis__B_3__ih__assume : int
+
+logic perm__perm_reflexive__induction_hypothesis__result1 : int
+
+logic result : int
+
+logic perm__perm_reflexive__induction_hypothesis__result2 : int
+
+logic result1 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result3 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result4 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result5 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result6 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result7 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result8 : int
+
+logic perm__perm_reflexive__induction_hypothesis__result9 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and (bool_eq5(a, to_rep1(first(a1)),
+  to_rep1(last(a1)), b, to_rep1(first(b1)), to_rep1(last(b1))) = true)))
+
+axiom H3 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H4 :
+  (perm__perm_reflexive__induction_hypothesis__result2 = perm__perm_reflexive__induction_hypothesis__result)
+
+axiom H5 :
+  (perm__perm_reflexive__induction_hypothesis__result2 = perm__perm_reflexive__induction_hypothesis__result1)
+
+axiom H6 : ((o3 = to_rep1(first(b1))) and in_range2(to_rep1(first(b1))))
+
+axiom H7 : (({ elts = o4; rt = o5 } = remove({ elts = b; rt = b1 }, o3)) and
   (dynamic_property(1, 100, to_rep1(first(o5)), to_rep1(last(o5))) and
   ((invariant__({ elts = o4; rt = o5 }) = true) and
   ((to_rep1(last(o5)) = (to_rep1(last(b1)) - 1)) and
@@ -509,9 +549,11 @@ goal WP_parameter_def :
   ((forall k:int. ((((o3 + 1) <= k) and (k <= to_rep1(last(b1)))) ->
    (to_rep((b[k])) = to_rep((o4[(k - 1)]))))) and
   (forall k:int. (((o3 <= k) and (k <= (to_rep1(last(b1)) - 1))) ->
-  (to_rep((b[(k + 1)])) = to_rep((o4[k])))))))))))) ->
-  ((((o = to_rep1(first(a1))) and in_range2(to_rep1(first(a1)))) and (({
-  elts = o1; rt = o2 } = remove({ elts = a; rt = a1 }, o)) and
+  (to_rep((b[(k + 1)])) = to_rep((o4[k])))))))))))
+
+axiom H8 : ((o = to_rep1(first(a1))) and in_range2(to_rep1(first(a1))))
+
+axiom H9 : (({ elts = o1; rt = o2 } = remove({ elts = a; rt = a1 }, o)) and
   (dynamic_property(1, 100, to_rep1(first(o2)), to_rep1(last(o2))) and
   ((invariant__({ elts = o1; rt = o2 }) = true) and
   ((to_rep1(last(o2)) = (to_rep1(last(a1)) - 1)) and
@@ -520,5 +562,7 @@ goal WP_parameter_def :
   ((forall k:int. ((((o + 1) <= k) and (k <= to_rep1(last(a1)))) ->
    (to_rep((a[k])) = to_rep((o1[(k - 1)]))))) and
   (forall k:int. (((o <= k) and (k <= (to_rep1(last(a1)) - 1))) ->
-  (to_rep((a[(k + 1)])) = to_rep((o1[k])))))))))))) -> (invariant__({ elts =
-  o1; rt = o2 }) = true))))))))
+  (to_rep((a[(k + 1)])) = to_rep((o1[k])))))))))))
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = o1; rt = o2 }) = true)

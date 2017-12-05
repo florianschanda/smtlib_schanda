@@ -89,6 +89,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 (Array Int Bool))
+(declare-const o4 Int)
 (declare-const result (Array Int Bool))
 (declare-const p1 (Array Int Bool))
 (declare-const result1 Int)

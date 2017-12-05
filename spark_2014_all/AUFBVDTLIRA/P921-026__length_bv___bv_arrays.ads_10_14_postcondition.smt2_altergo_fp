@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1118,61 +1118,125 @@ axiom def_axiom :
   (forall temp___165:t. (((bv_arrays__create__a__aggregate_def(temp___162,
   temp___163, temp___164)).elts2[temp___165]) = of_rep1(temp___162))))))
 
+logic a : (t,natural) farray
+
+logic bv_arrays__create__result : (t,natural) farray
+
+logic bv_arrays__create__result1 : t1
+
+logic temp___167 : (t,natural) farray
+
+logic temp___1671 : t3
+
+logic bv_arrays__create__a__assume : (t,natural) farray
+
+logic bv_arrays__create__a__assume1 : t2
+
+logic result : (t,natural) farray
+
+logic a1 : (t,natural) farray
+
+logic result1 : (t,natural) farray
+
+logic result2 : t1
+
+logic bv_arrays__create__result2 : (t,natural) farray
+
+logic bv_arrays__create__result3 : t1
+
+logic bv_arrays__create__result4 : (t,natural) farray
+
+logic bv_arrays__create__result5 : t1
+
+logic bv_arrays__create__result6 : (t,natural) farray
+
+logic bv_arrays__create__result7 : t1
+
+logic a2 : (t,natural) farray
+
+logic bv_arrays__create__result8 : (t,natural) farray
+
+logic bv_arrays__create__result9 : t1
+
+logic a3 : (t,natural) farray
+
+logic bv_arrays__create__result10 : (t,natural) farray
+
+logic bv_arrays__create__result11 : t1
+
+logic result3 : (t,natural) farray
+
+logic result4 : t1
+
+axiom H : true
+
+axiom H1 : (to_rep(first4((bv_arrays__create__a__aggregate_def(0, of_int(0),
+  c)).rt2)) = of_int(0))
+
+axiom H2 : (to_rep(last4((bv_arrays__create__a__aggregate_def(0, of_int(0),
+  c)).rt2)) = c)
+
+axiom H3 : ({ elts2 = temp___167; rt2 = temp___1671
+  } = bv_arrays__create__a__aggregate_def(0, of_int(0), c))
+
+axiom H4 :
+  (((tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671)))) ->
+  (((tqtint(of_int(0)) <= tqtint(c)) ->
+  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = ((tqtint(c) - tqtint(of_int(0))) + 1))) and
+  ((not (tqtint(of_int(0)) <= tqtint(c))) ->
+  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671))))) ->
+  ((tqtint(of_int(0)) <= tqtint(c)) ->
+  (0 = ((tqtint(c) - tqtint(of_int(0))) + 1)))))
+
+axiom H5 : (temp___167 = bv_arrays__create__a__assume)
+
+axiom H6 : (mk1(to_rep(first4(temp___1671)),
+  to_rep(last4(temp___1671))) = bv_arrays__create__a__assume1)
+
+axiom H7 : (result = a)
+
+axiom H8 : (a1 = bv_arrays__create__a__assume)
+
+axiom H9 : (to_rep(a__first) = to_rep(first2(bv_arrays__create__a__assume1)))
+
+axiom H10 : (to_rep(a__last) = to_rep(last2(bv_arrays__create__a__assume1)))
+
+axiom H11 : (dynamic_property2(of_int(0), c, to_rep(a__first),
+  to_rep(a__last)) and ((to_rep(a__first) = of_int(0)) and
+  (to_rep(a__last) = c)))
+
+axiom H12 : (bv_arrays__create__result4 = bv_arrays__create__result2)
+
+axiom H13 : (bv_arrays__create__result5 = bv_arrays__create__result3)
+
+axiom H14 : ((bv_arrays__create__result6 = bv_arrays__create__result2) and
+  (bv_arrays__create__result7 = bv_arrays__create__result3))
+
+axiom H15 : (result1 = bv_arrays__create__result)
+
+axiom H16 : (result2 = bv_arrays__create__result1)
+
+axiom H17 : (a1 = bv_arrays__create__result2)
+
+axiom H18 : (mk(to_rep(a__first),
+  to_rep(a__last)) = bv_arrays__create__result3)
+
+axiom H19 : ((bv_arrays__create__result8 = bv_arrays__create__result4) and
+  (bv_arrays__create__result9 = bv_arrays__create__result5))
+
+axiom H20 : (a2 = a1)
+
+axiom H21 : (bv_arrays__create__result10 = bv_arrays__create__result6)
+
+axiom H22 : (bv_arrays__create__result11 = bv_arrays__create__result7)
+
+axiom H23 : (a3 = a1)
+
+axiom H24 : (result3 = bv_arrays__create__result8)
+
+axiom H25 : (result4 = bv_arrays__create__result9)
+
  (* File "bv_arrays.ads", line 5, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(t,natural) farray.
-  forall bv_arrays__create__result:(t,natural) farray.
-  forall bv_arrays__create__result1:t1. forall temp___167:(t,natural) farray.
-  forall temp___1671:t3.
-  forall bv_arrays__create__a__assume:(t,natural) farray.
-  forall bv_arrays__create__a__assume1:t2. forall result:(t,natural) farray.
-  forall a1:(t,natural) farray. forall result1:(t,natural) farray.
-  forall result2:t1. forall bv_arrays__create__result2:(t,natural) farray.
-  forall bv_arrays__create__result3:t1.
-  forall bv_arrays__create__result4:(t,natural) farray.
-  forall bv_arrays__create__result5:t1.
-  forall bv_arrays__create__result6:(t,natural) farray.
-  forall bv_arrays__create__result7:t1. forall a2:(t,natural) farray.
-  forall bv_arrays__create__result8:(t,natural) farray.
-  forall bv_arrays__create__result9:t1. forall a3:(t,natural) farray.
-  forall bv_arrays__create__result10:(t,natural) farray.
-  forall bv_arrays__create__result11:t1.
-  (forall result3:(t,natural) farray. forall result4:t1.
-  ((((((((to_rep(first4((bv_arrays__create__a__aggregate_def(0, of_int(0),
-  c)).rt2)) = of_int(0)) and
-  ((to_rep(last4((bv_arrays__create__a__aggregate_def(0, of_int(0),
-  c)).rt2)) = c) and ({ elts2 = temp___167; rt2 = temp___1671
-  } = bv_arrays__create__a__aggregate_def(0, of_int(0), c)))) and
-  ((((tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671)))) and
-  (((tqtint(of_int(0)) <= tqtint(c)) and
-  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = ((tqtint(c) - tqtint(of_int(0))) + 1))) or
-  ((not (tqtint(of_int(0)) <= tqtint(c))) and
-  (((tqtint(to_rep(last4(temp___1671))) - tqtint(to_rep(first4(temp___1671)))) + 1) = 0)))) or
-  ((not (tqtint(to_rep(first4(temp___1671))) <= tqtint(to_rep(last4(temp___1671))))) and
-  (((tqtint(of_int(0)) <= tqtint(c)) and
-  (0 = ((tqtint(c) - tqtint(of_int(0))) + 1))) or
-  (not (tqtint(of_int(0)) <= tqtint(c)))))) and
-  ((temp___167 = bv_arrays__create__a__assume) and
-  (mk1(to_rep(first4(temp___1671)),
-  to_rep(last4(temp___1671))) = bv_arrays__create__a__assume1)))) and
-  (((result = a) and (a1 = bv_arrays__create__a__assume)) and
-  ((to_rep(a__first) = to_rep(first2(bv_arrays__create__a__assume1))) and
-  (to_rep(a__last) = to_rep(last2(bv_arrays__create__a__assume1)))))) and
-  ((dynamic_property2(of_int(0), c, to_rep(a__first), to_rep(a__last)) and
-  ((to_rep(a__first) = of_int(0)) and (to_rep(a__last) = c))) and
-  ((((bv_arrays__create__result4 = bv_arrays__create__result2) and
-  (bv_arrays__create__result5 = bv_arrays__create__result3)) and
-  ((bv_arrays__create__result6 = bv_arrays__create__result2) and
-  (bv_arrays__create__result7 = bv_arrays__create__result3))) and
-  (((result1 = bv_arrays__create__result) and
-  (result2 = bv_arrays__create__result1)) and
-  ((a1 = bv_arrays__create__result2) and (mk(to_rep(a__first),
-  to_rep(a__last)) = bv_arrays__create__result3)))))) and
-  ((((bv_arrays__create__result8 = bv_arrays__create__result4) and
-  (bv_arrays__create__result9 = bv_arrays__create__result5)) and
-  (a2 = a1)) and
-  (((bv_arrays__create__result10 = bv_arrays__create__result6) and
-  (bv_arrays__create__result11 = bv_arrays__create__result7)) and
-  (a3 = a1)))) and ((result3 = bv_arrays__create__result8) and
-  (result4 = bv_arrays__create__result9))) ->
-  (to_rep(first(bv_arrays__create__result9)) = of_int(0)))))
+  (to_rep(first(bv_arrays__create__result9)) = of_int(0))

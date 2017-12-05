@@ -73,6 +73,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (= b ((_ int2bv 8) 10)))
 (assert (= c ((_ int2bv 8) 2)))
+(assert true)
 (assert (in_range c))
 (assert (not (= (ite (< 256 8) (bvshl ((_ int2bv 8) 10) ((_ int2bv 8) 256)) ((_ int2bv 8) 0)) ((_ int2bv 8) 0))))
 (check-sat)

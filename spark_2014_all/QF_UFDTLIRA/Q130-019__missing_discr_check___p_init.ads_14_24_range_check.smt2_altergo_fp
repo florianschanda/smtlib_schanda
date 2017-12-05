@@ -104,5 +104,9 @@ type enum__ref = { enum__content : enum
 
 function enum__ref___projection(a: enum__ref) : enum = (a).enum__content
 
+logic us : int
+
+logic us1 : int
+
  (* File "p_init.adb", line 6, characters 0-0 *)
 goal WP_parameter_def : in_range(0)

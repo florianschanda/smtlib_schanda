@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -265,23 +265,45 @@ axiom def_axiom :
   ((not (temp___208 = temp___206)) -> ((temp___203(temp___205, temp___206,
   temp___207)[temp___208]) = (temp___205[temp___208])))))))
 
+logic simple_arrays__array_axiom_transitivity__result : int
+
+logic result : int
+
+logic simple_arrays__array_axiom_transitivity__result1 : int
+
+logic simple_arrays__array_axiom_transitivity__result2 : int
+
+logic simple_arrays__array_axiom_transitivity__result3 : int
+
+logic simple_arrays__array_axiom_transitivity__result4 : int
+
+logic simple_arrays__array_axiom_transitivity__result5 : int
+
+logic result1 : int
+
+axiom H : ((bool_eq3(a, (- 2147483648), 2147483647, temp___203(b, 23, 42),
+  (- 2147483648), 2147483647) = true) and (bool_eq3(a, (- 2147483648),
+  2147483647, c, (- 2147483648), 2147483647) = true))
+
+axiom H1 :
+  (simple_arrays__array_axiom_transitivity__result1 = simple_arrays__array_axiom_transitivity__result2)
+
+axiom H2 :
+  (simple_arrays__array_axiom_transitivity__result3 = simple_arrays__array_axiom_transitivity__result1)
+
+axiom H3 : (result = simple_arrays__array_axiom_transitivity__result)
+
+axiom H4 :
+  (simple_arrays__array_axiom_transitivity__result1 = to_rep((c[23])))
+
+axiom H5 :
+  (simple_arrays__array_axiom_transitivity__result4 = simple_arrays__array_axiom_transitivity__result2)
+
+axiom H6 :
+  (simple_arrays__array_axiom_transitivity__result5 = simple_arrays__array_axiom_transitivity__result3)
+
+axiom H7 : (result1 = simple_arrays__array_axiom_transitivity__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall simple_arrays__array_axiom_transitivity__result:int.
-  forall result:int.
-  forall simple_arrays__array_axiom_transitivity__result1:int.
-  forall simple_arrays__array_axiom_transitivity__result2:int.
-  forall simple_arrays__array_axiom_transitivity__result3:int.
-  forall simple_arrays__array_axiom_transitivity__result4:int.
-  forall simple_arrays__array_axiom_transitivity__result5:int.
-  (forall result1:int. ((((bool_eq3(a, (-2147483648), 2147483647,
-  temp___203(b, 23, 42), (-2147483648), 2147483647) = true) and (bool_eq3(a,
-  (-2147483648), 2147483647, c, (-2147483648), 2147483647) = true)) and
-  (((((simple_arrays__array_axiom_transitivity__result1 = simple_arrays__array_axiom_transitivity__result2) and
-  (simple_arrays__array_axiom_transitivity__result3 = simple_arrays__array_axiom_transitivity__result1)) and
-  ((result = simple_arrays__array_axiom_transitivity__result) and
-  (simple_arrays__array_axiom_transitivity__result1 = to_rep((c[23]))))) and
-  ((simple_arrays__array_axiom_transitivity__result4 = simple_arrays__array_axiom_transitivity__result2) and
-  (simple_arrays__array_axiom_transitivity__result5 = simple_arrays__array_axiom_transitivity__result3))) and
-  (result1 = simple_arrays__array_axiom_transitivity__result4))) ->
-  (simple_arrays__array_axiom_transitivity__result4 = 42))))
+  (simple_arrays__array_axiom_transitivity__result4 = 42)

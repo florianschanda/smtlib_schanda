@@ -316,20 +316,76 @@ axiom def_axiom1 :
   temp___220, temp___221, temp___222, temp___223,
   temp___224)[temp___225]) = (temp___218[temp___225])))))))))
 
+logic a : (int,et1) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : (int,et1) farray
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic a1 : (int,et1) farray
+
+logic result : (int,et1) farray
+
+logic a2 : (int,et1) farray
+
+logic a3 : (int,et1) farray
+
+logic a4 : (int,et1) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : in_range2(e)
+
+axiom H3 : (((1 <  i) and ((j <  0) and (0 <  e))) -> ((o = (e + 1)) and
+  in_range2((e + 1))))
+
+axiom H4 : (((1 <  i) and ((j <  0) and (0 <  e))) -> ((o1 = (j + 2)) and
+  in_range1((j + 2))))
+
+axiom H5 : (((1 <  i) and ((j <  0) and (0 <  e))) -> ((o2 = (e - 1)) and
+  in_range2((e - 1))))
+
+axiom H6 : (((1 <  i) and ((j <  0) and (0 <  e))) -> ((o3 = (j + 1)) and
+  in_range1((j + 1))))
+
+axiom H7 : (((1 <  i) and ((j <  0) and (0 <  e))) -> ((o4 = (i - 1)) and
+  in_range1((i - 1))))
+
+axiom H8 : (((1 <  i) and ((j <  0) and (0 <  e))) -> (o5 = temp___216(a, o4,
+  i, o3, o2, o1, o)))
+
+axiom H9 : (((1 <  i) and ((j <  0) and (0 <  e))) -> (result = a))
+
+axiom H10 : (((1 <  i) and ((j <  0) and (0 <  e))) -> (a2 = o5))
+
+axiom H11 : ((not ((1 <  i) and ((j <  0) and (0 <  e)))) -> (a2 = a))
+
+axiom H12 : ((not ((1 <  i) and ((j <  0) and (0 <  e)))) -> (a2 = a1))
+
+axiom H13 : (a2 = a3)
+
+axiom H14 : (a4 = a2)
+
  (* File "ar.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,et1) farray. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:(int,et1) farray.
-  forall a1:(int,et1) farray. forall result:(int,et1) farray.
-  forall a2:(int,et1) farray. forall a3:(int,et1) farray.
-  forall a4:(int,et1) farray. ((in_range1(i) and (in_range1(j) and
-  (in_range2(e) and (((((1 <  i) and ((j <  0) and (0 <  e))) and
-  ((((o = (e + 1)) and in_range2((e + 1))) and (((o1 = (j + 2)) and
-  in_range1((j + 2))) and (((o2 = (e - 1)) and in_range2((e - 1))) and
-  (((o3 = (j + 1)) and in_range1((j + 1))) and (((o4 = (i - 1)) and
-  in_range1((i - 1))) and (o5 = temp___216(a, o4, i, o3, o2, o1, o))))))) and
-  (({ map__content = result } = { map__content = a }) and (a2 = o5)))) or
-  ((not ((1 <  i) and ((j <  0) and (0 <  e)))) and ((a2 = a) and
-  (a2 = a1)))) and ((a2 = a3) and (a4 = a2)))))) -> (bool_eq4(a3, 1, 10,
-  temp___188(a, (i - 1), i, (j + 2), (e - 1), (j + 1), (e + 1)), 1,
-  10) = true)))
+goal WP_parameter_def : (bool_eq4(a3, 1, 10, temp___188(a, (i - 1), i,
+  (j + 2), (e - 1), (j + 1), (e + 1)), 1, 10) = true)

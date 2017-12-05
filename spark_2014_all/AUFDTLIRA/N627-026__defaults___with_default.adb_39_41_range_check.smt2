@@ -85,6 +85,7 @@
 (define-fun dynamic_invariant3 ((temp___expr_201 Int) (temp___is_init_198 Bool) (temp___skip_constant_199 Bool) (temp___do_toplevel_200 Bool)) Bool (=> (or (= temp___is_init_198 true) (<= first 2147483647)) (dynamic_property first 2147483647 temp___expr_201)))
 (assert (= first c))
 (declare-const o Int)
+(declare-const us Int)
 (declare-const result Bool)
 (assert (in_range c))
 (assert (=> (<= 1 100) (= o (+ (- 100 1) 1))))

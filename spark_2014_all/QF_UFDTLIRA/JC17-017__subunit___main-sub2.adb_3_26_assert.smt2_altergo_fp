@@ -79,8 +79,23 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : bool
+
+logic result : bool
+
+logic x1 : bool
+
+logic x2 : bool
+
+logic x3 : bool
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = of_int(0))
+
+axiom H2 : (x1 = x2)
+
+axiom H3 : (x3 = x1)
+
  (* File "main.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:bool. forall result:bool. forall x1:bool. forall x2:bool.
-  forall x3:bool. ((((result = x) and (x1 = of_int(0))) and ((x1 = x2) and
-  (x3 = x1))) -> (not (x2 = true))))
+goal WP_parameter_def : (not (x2 = true))

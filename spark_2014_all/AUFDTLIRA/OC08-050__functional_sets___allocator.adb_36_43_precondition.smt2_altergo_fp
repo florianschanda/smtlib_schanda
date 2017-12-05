@@ -581,11 +581,195 @@ axiom is_add__post_axiom :
 
 axiom is_add__post__dispatch_axiom : true
 
+logic data : (int,status) farray
+
+logic avail : us_rep
+
+logic alloc : us_rep
+
+logic r : int
+
+logic allocator__m__model__result : us_rep
+
+logic allocator__m__model__result1 : us_rep
+
+logic temp___368 : us_rep
+
+logic temp___367 : us_rep
+
+logic temp___366 : int
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic rr : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic e : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic e1 : int
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : us_rep
+
+logic o17 : us_rep
+
+logic avail1 : us_rep
+
+logic alloc1 : us_rep
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic avail2 : us_rep
+
+logic result2 : us_rep
+
+logic alloc2 : us_rep
+
+logic avail3 : us_rep
+
+logic alloc3 : us_rep
+
+logic r2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : int
+
+logic r3 : int
+
+logic result9 : us_rep
+
+logic avail4 : us_rep
+
+logic result10 : us_rep
+
+logic alloc4 : us_rep
+
+logic avail5 : us_rep
+
+logic alloc5 : us_rep
+
+logic r4 : int
+
+logic avail6 : us_rep
+
+logic alloc6 : us_rep
+
+logic r5 : int
+
+logic avail7 : us_rep
+
+logic alloc7 : us_rep
+
+logic r6 : int
+
+logic avail8 : us_rep
+
+logic alloc8 : us_rep
+
+logic r7 : int
+
+logic avail9 : us_rep
+
+logic alloc9 : us_rep
+
+logic r8 : int
+
+logic avail10 : us_rep
+
+logic alloc10 : us_rep
+
+logic r9 : int
+
+logic result11 : us_rep
+
+logic result12 : us_rep
+
+logic allocator__m__model__result2 : us_rep
+
+logic allocator__m__model__result3 : us_rep
+
+logic allocator__m__model__result4 : us_rep
+
+logic allocator__m__model__result5 : us_rep
+
+logic allocator__m__model__result6 : us_rep
+
+logic allocator__m__model__result7 : us_rep
+
+logic avail11 : us_rep
+
+logic alloc11 : us_rep
+
+logic r10 : int
+
+logic allocator__m__model__result8 : us_rep
+
+logic allocator__m__model__result9 : us_rep
+
+logic avail12 : us_rep
+
+logic alloc12 : us_rep
+
+logic r11 : int
+
+logic allocator__m__model__result10 : us_rep
+
+logic allocator__m__model__result11 : us_rep
+
+axiom H : (is_empty(avail) = true)
+
+axiom H1 : (is_empty(alloc) = true)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 3)
+
+axiom H6 : (to_rep((data[r1])) = 0)
+
  (* File "allocator.ads", line 29, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
-  forall r:int. forall result:int. forall r1:int.
-  ((is_empty(avail) = true) -> ((is_empty(alloc) = true) -> ((({
-  int__content = result } = { int__content = r }) and (r1 = 1)) ->
-  (((1 <= r1) and (r1 <= 3)) -> ((to_rep((data[r1])) = 0) ->
-  (not (r1 = 0))))))))
+goal WP_parameter_def : (not (r1 = 0))

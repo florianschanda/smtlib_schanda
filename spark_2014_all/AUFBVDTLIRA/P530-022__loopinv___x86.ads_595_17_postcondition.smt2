@@ -130,6 +130,8 @@
 (declare-const memory1 (Array (_ BitVec 64) unsigned8))
 (declare-const memory2 (Array (_ BitVec 64) unsigned8))
 (declare-const memory3 (Array (_ BitVec 64) unsigned8))
+(assert true)
+(assert true)
 (assert (= (to_rep o) val__))
 (assert (= o1 (store memory addr o)))
 (assert (= result memory))

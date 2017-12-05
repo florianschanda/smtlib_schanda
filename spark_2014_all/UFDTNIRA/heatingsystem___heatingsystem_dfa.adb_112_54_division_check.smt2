@@ -66,6 +66,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 (declare-const time Int)
 (declare-const heatingsystem_dfa__checkadvancebutton__currentmode__assume Int)
+(declare-const slowadvance Bool)
 (declare-const fastadvance Bool)
 (assert (in_range time))
 (assert (in_range1 heatingsystem_dfa__checkadvancebutton__currentmode__assume))

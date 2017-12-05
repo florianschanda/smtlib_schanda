@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type tbyteB
 
-predicate in_range(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function tbyteB__ref___projection(a: tbyteB__ref) : tbyteB =
 
 type byte
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -248,22 +248,59 @@ logic b : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arithmetic__test_rem_b__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic result : int
+
+logic arithmetic__test_rem_b__result1 : int
+
+logic arithmetic__test_rem_b__result2 : int
+
+logic arithmetic__test_rem_b__result3 : int
+
+logic arithmetic__test_rem_b__result4 : int
+
+logic arithmetic__test_rem_b__result5 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (not (b = 0))
+
+axiom H3 :
+  (arithmetic__test_rem_b__result1 = arithmetic__test_rem_b__result2)
+
+axiom H4 :
+  (arithmetic__test_rem_b__result3 = arithmetic__test_rem_b__result1)
+
+axiom H5 : (result = arithmetic__test_rem_b__result)
+
+axiom H6 : (arithmetic__test_rem_b__result1 = comp_mod(a,b))
+
+axiom H7 :
+  (arithmetic__test_rem_b__result4 = arithmetic__test_rem_b__result2)
+
+axiom H8 :
+  (arithmetic__test_rem_b__result5 = arithmetic__test_rem_b__result3)
+
+axiom H9 : ((o = comp_div(a,b)) and in_range(comp_div(a,b)))
+
+axiom H10 : (o1 = (o * b))
+
  (* File "arithmetic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arithmetic__test_rem_b__result:int. forall o:int. forall o1:int.
-  forall result:int. forall arithmetic__test_rem_b__result1:int.
-  forall arithmetic__test_rem_b__result2:int.
-  forall arithmetic__test_rem_b__result3:int.
-  forall arithmetic__test_rem_b__result4:int.
-  forall arithmetic__test_rem_b__result5:int. (in_range1(a) ->
-  (in_range1(b) -> ((not (b = 0)) ->
-  (((((arithmetic__test_rem_b__result1 = arithmetic__test_rem_b__result2) and
-  (arithmetic__test_rem_b__result3 = arithmetic__test_rem_b__result1)) and
-  (({ int__content = result } = { int__content =
-  arithmetic__test_rem_b__result }) and
-  (arithmetic__test_rem_b__result1 = comp_mod(a,b)))) and (({ int__content =
-  arithmetic__test_rem_b__result4 } = { int__content =
-  arithmetic__test_rem_b__result2 }) and
-  (arithmetic__test_rem_b__result5 = arithmetic__test_rem_b__result3))) ->
-  ((((o = comp_div(a,b)) and in_range(comp_div(a,b))) and (o1 = (o * b))) ->
-  in_range(o1)))))))
+goal WP_parameter_def : in_range(o1)

@@ -107,7 +107,7 @@ function size_t__ref___projection(a: size_t__ref) : size_t =
 
 type element_t
 
-predicate in_range1(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -274,5 +274,9 @@ logic s : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : in_range(s)
+
+axiom H1 : (0 <  s)
+
  (* File "stack.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : (in_range(s) -> ((0 <  s) -> (1 <= s)))
+goal WP_parameter_def : (1 <= s)

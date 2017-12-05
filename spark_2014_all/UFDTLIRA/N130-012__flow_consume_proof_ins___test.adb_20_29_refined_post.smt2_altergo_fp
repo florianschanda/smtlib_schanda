@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -121,11 +121,39 @@ axiom some_func__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+logic foo : int
+
+logic o : int
+
+logic x1 : int
+
+logic result : int
+
+logic x2 : int
+
+logic x3 : int
+
+logic x4 : int
+
+axiom H : in_range(foo)
+
+axiom H1 : in_range(x)
+
+axiom H2 : ((x <  foo) -> ((o = (foo + 1)) and in_range((foo + 1))))
+
+axiom H3 : ((x <  foo) -> (result = x))
+
+axiom H4 : ((x <  foo) -> (x2 = o))
+
+axiom H5 : ((not (x <  foo)) -> (x2 = x))
+
+axiom H6 : ((not (x <  foo)) -> (x2 = x1))
+
+axiom H7 : (x2 = x3)
+
+axiom H8 : (x4 = x2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall foo:int. forall o:int. forall x1:int.
-  forall result:int. forall x2:int. forall x3:int. forall x4:int.
-  (in_range(foo) -> (in_range(x) -> (((((x <  foo) and (((o = (foo + 1)) and
-  in_range((foo + 1))) and ((result = x) and (x2 = o)))) or
-  ((not (x <  foo)) and ((x2 = x) and (x2 = x1)))) and ((x2 = x3) and
-  (x4 = x2))) -> (foo <= x3)))))
+goal WP_parameter_def : (foo <= x3)

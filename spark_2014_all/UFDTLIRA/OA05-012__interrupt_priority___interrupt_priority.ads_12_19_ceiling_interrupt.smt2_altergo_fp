@@ -147,7 +147,7 @@ function interrupt_priority__ref___projection(a: interrupt_priority__ref) : inte
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -175,13 +175,13 @@ type us_split_discrs = { rec__interrupt_priority__interrupt_needed_1__c :
 any_priority
 }
 
-function us_split_discrs___2__projection(a: us_split_discrs) : any_priority =
+function us_split_discrs___3__projection(a: us_split_discrs) : any_priority =
   (a).rec__interrupt_priority__interrupt_needed_1__c
 
 type us_split_discrs__ref = { us_split_discrs__content : us_split_discrs
 }
 
-function us_split_discrs__ref___2__projection(a: us_split_discrs__ref) : us_split_discrs =
+function us_split_discrs__ref___3__projection(a: us_split_discrs__ref) : us_split_discrs =
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__interrupt_priority__interrupt_needed_1__i :
@@ -201,10 +201,10 @@ type us_rep = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
 us_split_fields
 }
 
-function us_rep___31__projection(a: us_rep) : us_split_discrs =
+function us_rep___32__projection(a: us_rep) : us_split_discrs =
   (a).us_split_discrs1
 
-function us_rep___32__projection(a: us_rep) : us_split_fields =
+function us_rep___33__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size : int
@@ -272,6 +272,8 @@ function interrupt_needed_1__ref___projection(a: interrupt_needed_1__ref) : us_r
 logic self__ : any_priority
 
 logic self__1 : integer
+
+logic temp___1538 : bool
 
  (* File "interrupt_priority.ads", line 12, characters 0-0 *)
 goal WP_parameter_def : (98 <= to_rep(self__))

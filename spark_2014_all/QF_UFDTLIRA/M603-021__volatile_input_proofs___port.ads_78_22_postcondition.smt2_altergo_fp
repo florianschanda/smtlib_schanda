@@ -138,5 +138,65 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v1 : int
+
+logic x : int
+
+logic t : int
+
+logic o : int
+
+logic v11 : int
+
+logic result : int
+
+logic t1 : int
+
+logic result1 : int
+
+logic x1 : int
+
+logic v12 : int
+
+logic x2 : int
+
+logic t2 : int
+
+logic v13 : int
+
+logic x3 : int
+
+logic t3 : int
+
+axiom H : in_range1(v1)
+
+axiom H1 : ((0 <= 17) -> in_range1(x))
+
+axiom H2 : ((0 <= 17) -> in_range1(t))
+
+axiom H3 : in_range1(v11)
+
+axiom H4 : (o = v11)
+
+axiom H5 : (result = t)
+
+axiom H6 : (t1 = o)
+
+axiom H7 : (result1 = x)
+
+axiom H8 : (x1 = t1)
+
+axiom H9 : (t2 = t1)
+
+axiom H10 : (x1 = x2)
+
+axiom H11 : (v12 = v11)
+
+axiom H12 : (t3 = t1)
+
+axiom H13 : (x3 = x1)
+
+axiom H14 : (v13 = v11)
+
  (* File "port.ads", line 21, characters 0-0 *)
 goal WP_parameter_def : true

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -145,7 +145,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tt1B
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -208,7 +208,7 @@ function t1__ref___projection(a: t1__ref) : tt1B = (a).t1__content
 
 type tt2B
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -274,7 +274,29 @@ axiom last__def_axiom : (last = c1)
 
 axiom last__def_axiom1 : (last1 = c2)
 
+logic a : int
+
+logic b : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic a1 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (a = c1)
+
+axiom H3 : in_range1(c1)
+
+axiom H4 : (b = c2)
+
+axiom H5 : in_range1(c2)
+
  (* File "info_flow_tests.adb", line 236, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall b:int. (in_range1(a) -> (in_range1(b) -> ((a = c1) ->
-  (in_range1(c1) -> ((b = c2) -> (in_range1(c2) -> in_range1(last1))))))))
+goal WP_parameter_def : in_range1(last1)

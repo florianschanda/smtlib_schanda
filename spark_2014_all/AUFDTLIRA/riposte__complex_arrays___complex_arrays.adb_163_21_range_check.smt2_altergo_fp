@@ -134,7 +134,7 @@ function index__ref___projection(a: index__ref) : index = (a).index__content
 
 type value
 
-predicate in_range2(x: int) = (((-23) <= x) and (x <= 69))
+predicate in_range2(x: int) = (((- 23) <= x) and (x <= 69))
 
 logic bool_eq3 : int, int -> bool
 
@@ -273,7 +273,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type tcounterB
 
-predicate in_range3(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range3(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq5 : int, int -> bool
 
@@ -369,47 +369,241 @@ axiom def_axiom :
   (forall temp___241:int.
   ((temp___238(temp___240)[temp___241]) = of_rep(temp___240))))
 
- (* File "complex_arrays.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp:(int,value) farray. forall j:int. forall j1:int.
-  forall temp___245:int. forall temp___244:int.
-  forall temp___242:(int,value) farray. forall o:value.
-  forall o1:(int,value) farray. forall o2:value.
-  forall o3:(int,value) farray. forall result:(int,value) farray.
-  forall tmp1:(int,value) farray. forall result1:int. forall j2:int.
-  forall result2:(int,value) farray. forall tmp2:(int,value) farray.
-  forall tmp3:(int,value) farray. forall j3:int.
-  forall tmp4:(int,value) farray. forall j4:int.
-  forall tmp5:(int,value) farray. forall j5:int.
-  forall tmp6:(int,value) farray. forall j6:int.
-  forall tmp7:(int,value) farray. forall j7:int. forall result3:int.
-  forall j8:int. forall result4:(int,value) farray.
-  forall tmp8:(int,value) farray. forall tmp9:(int,value) farray.
-  forall j9:int. (in_range1(i) -> ((({ map__content = result } = {
-  map__content = tmp }) and (tmp1 = temp___238(0))) -> (((({ int__content =
-  result1 } = { int__content = j }) and (j2 = 0)) and ((((0 <= j2) and
-  (j2 <= i)) and ((((temp___245 = i) and ((temp___244 = j2) and
-  ((temp___242 = tmp1) and ((((to_rep(o) = (-23)) and
+logic tmp : (int,value) farray
+
+logic j : int
+
+logic j1 : int
+
+logic complex_arrays__create_step_array__result : (int,value) farray
+
+logic temp___245 : int
+
+logic temp___244 : int
+
+logic temp___242 : (int,value) farray
+
+logic o : value
+
+logic o1 : (int,value) farray
+
+logic k : int
+
+logic o2 : value
+
+logic o3 : (int,value) farray
+
+logic temp___249 : (int,value) farray
+
+logic temp___248 : int
+
+logic o4 : value
+
+logic o5 : (int,value) farray
+
+logic k1 : int
+
+logic o6 : int
+
+logic o7 : value
+
+logic o8 : int
+
+logic o9 : bool
+
+logic o10 : value
+
+logic o11 : (int,value) farray
+
+logic result : (int,value) farray
+
+logic tmp1 : (int,value) farray
+
+logic result1 : int
+
+logic j2 : int
+
+logic result2 : (int,value) farray
+
+logic tmp2 : (int,value) farray
+
+logic tmp3 : (int,value) farray
+
+logic j3 : int
+
+logic result3 : int
+
+logic j4 : int
+
+logic result4 : (int,value) farray
+
+logic tmp4 : (int,value) farray
+
+logic tmp5 : (int,value) farray
+
+logic j5 : int
+
+logic tmp6 : (int,value) farray
+
+logic j6 : int
+
+logic tmp7 : (int,value) farray
+
+logic j7 : int
+
+logic tmp8 : (int,value) farray
+
+logic j8 : int
+
+logic tmp9 : (int,value) farray
+
+logic j9 : int
+
+logic tmp10 : (int,value) farray
+
+logic j10 : int
+
+logic result5 : int
+
+logic j11 : int
+
+logic result6 : (int,value) farray
+
+logic tmp11 : (int,value) farray
+
+logic tmp12 : (int,value) farray
+
+logic j12 : int
+
+logic result7 : int
+
+logic j13 : int
+
+logic result8 : (int,value) farray
+
+logic tmp13 : (int,value) farray
+
+logic tmp14 : (int,value) farray
+
+logic j14 : int
+
+logic tmp15 : (int,value) farray
+
+logic j15 : int
+
+logic tmp16 : (int,value) farray
+
+logic j16 : int
+
+logic tmp17 : (int,value) farray
+
+logic j17 : int
+
+logic tmp18 : (int,value) farray
+
+logic j18 : int
+
+logic tmp19 : (int,value) farray
+
+logic j19 : int
+
+logic tmp20 : (int,value) farray
+
+logic j20 : int
+
+logic tmp21 : (int,value) farray
+
+logic j21 : int
+
+logic result9 : (int,value) farray
+
+logic complex_arrays__create_step_array__result1 : (int,value) farray
+
+logic complex_arrays__create_step_array__result2 : (int,value) farray
+
+logic complex_arrays__create_step_array__result3 : (int,value) farray
+
+logic tmp22 : (int,value) farray
+
+logic j22 : int
+
+logic j23 : int
+
+logic complex_arrays__create_step_array__result4 : (int,value) farray
+
+logic tmp23 : (int,value) farray
+
+logic j24 : int
+
+logic j25 : int
+
+logic complex_arrays__create_step_array__result5 : (int,value) farray
+
+axiom H : in_range1(i)
+
+axiom H1 : (result = tmp)
+
+axiom H2 : (tmp1 = temp___238(0))
+
+axiom H3 : (result1 = j)
+
+axiom H4 : (j2 = 0)
+
+axiom H5 : (((0 <= j2) and (j2 <= i)) -> (((temp___245 = i) and
+  ((temp___244 = j2) and ((temp___242 = tmp1) and ((((to_rep(o) = (- 23)) and
   (o1 = (tmp1[j2 <- o]))) and ((tmp1 = result2) and (tmp2 = o1))) and
-  (((forall k:int. (((0 <= k) and (k <= j3)) -> ((k <= j3) ->
-    (to_rep((tmp3[k])) = (-23))))) and
-  (i = temp___245)) and
+  (((forall k2:int. (((0 <= k2) and (k2 <= j3)) -> ((k2 <= j3) ->
+    (to_rep((tmp3[k2])) = (- 23))))) and (i = temp___245)) and
   ((((forall temp___243:int. (((0 <= temp___243) and (temp___243 <= 1001)) ->
      ((j3 <  temp___243) ->
-     ((tmp3[temp___243]) = (temp___242[temp___243]))))) and
-  ((0 <= i) -> dynamic_property(0, i, j3))) and ((0 <= j3) and
-  (j3 <= i))) and (j3 = i))))))) and (((j3 = j4) and (tmp3 = tmp4)) and
-  ((j5 = j3) and (tmp5 = tmp3)))) and ((({ int__content = j6 } = {
-  int__content = j4 }) and ({ map__content = tmp6 } = { map__content = tmp4
-  })) and ((j7 = j5) and (tmp7 = tmp5))))) or ((not ((0 <= j2) and
-  (j2 <= i))) and (((j2 = j6) and (tmp1 = tmp6)) and ((j7 = j2) and
-  (tmp7 = tmp1)))))) -> ((({ int__content = result3 } = { int__content = j1
-  }) and (j8 = i)) -> (((i <= j8) and (j8 <= 1001)) ->
-  ((((to_rep(o2) = 69) and (o3 = (tmp6[j8 <- o2]))) and (({ map__content =
-  result4 } = { map__content = tmp6 }) and (tmp8 = o3))) ->
-  ((forall k:int. (((0 <= k) and (k <= j9)) -> (((k <  i) ->
-   (to_rep((tmp9[k])) = (-23))) and ((i <= k) -> (to_rep((tmp9[k])) = 69))))) ->
-  (((((i <= 1001) -> dynamic_property1(i, 1001, j9)) and
+     ((tmp3[temp___243]) = (temp___242[temp___243]))))) and ((0 <= i) ->
+  dynamic_property(0, i, j3))) and ((0 <= j3) and (j3 <= i))) and
+  (j3 = i))))))) and (((j3 = j7) and (tmp3 = tmp7)) and ((j8 = j3) and
+  (tmp8 = tmp3)))))
+
+axiom H6 : (((0 <= j2) and (j2 <= i)) -> (j9 = j7))
+
+axiom H7 : (((0 <= j2) and (j2 <= i)) -> (tmp9 = tmp7))
+
+axiom H8 : (((0 <= j2) and (j2 <= i)) -> (j10 = j8))
+
+axiom H9 : (((0 <= j2) and (j2 <= i)) -> (tmp10 = tmp8))
+
+axiom H10 : ((not ((0 <= j2) and (j2 <= i))) -> (j2 = j9))
+
+axiom H11 : ((not ((0 <= j2) and (j2 <= i))) -> (tmp1 = tmp9))
+
+axiom H12 : ((not ((0 <= j2) and (j2 <= i))) -> (j10 = j2))
+
+axiom H13 : ((not ((0 <= j2) and (j2 <= i))) -> (tmp10 = tmp1))
+
+axiom H14 : (result5 = j1)
+
+axiom H15 : (j11 = i)
+
+axiom H16 : (i <= j11)
+
+axiom H17 : (j11 <= 1001)
+
+axiom H18 : (to_rep(o4) = 69)
+
+axiom H19 : (o5 = (tmp9[j11 <- o4]))
+
+axiom H20 : (result6 = tmp9)
+
+axiom H21 : (tmp11 = o5)
+
+axiom H22 :
+  (forall k2:int. (((0 <= k2) and (k2 <= j12)) -> (((k2 <  i) ->
+  (to_rep((tmp12[k2])) = (- 23))) and ((i <= k2) ->
+  (to_rep((tmp12[k2])) = 69)))))
+
+axiom H23 : ((((i <= 1001) -> dynamic_property1(i, 1001, j12)) and
   (forall temp___250:int. (((0 <= temp___250) and (temp___250 <= 1001)) ->
-  ((j9 <  temp___250) -> ((tmp9[temp___250]) = (tmp6[temp___250])))))) and
-  ((i <= j9) and (j9 <= 1001))) -> ((0 <= j9) -> (0 <= 0)))))))))))
+  ((j12 <  temp___250) -> ((tmp12[temp___250]) = (tmp9[temp___250])))))) and
+  ((i <= j12) and (j12 <= 1001)))
+
+axiom H24 : (0 <= j12)
+
+ (* File "complex_arrays.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : (0 <= 0)

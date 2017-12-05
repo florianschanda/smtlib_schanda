@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -904,21 +904,51 @@ logic y__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "discr_init.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:(int,bool) farray.
-  forall y__split_fields:(int,bool) farray. forall temp___j_197:int.
-  forall us:int. (in_range1(temp___j_197) -> (((us = 10) and
-  in_range1(10)) -> (((to_rep(x__split_discrs) = 10) and
-  (discr_init__r1__arr__pred1({ us_split_discrs2 = { rec__discr_init__r1__j =
-  x__split_discrs }; us_split_fields3 = { rec__discr_init__r1__arr1 =
-  x__split_fields } }) -> (x__split_fields = (temp___190(of_int(1), 1,
-  to_rep(x__split_discrs))).elts))) -> ((10 = to_rep(x__split_discrs)) ->
-  (((to_rep(y__split_discrs) = 10) and (discr_init__r1__arr__pred1({
+logic x__split_fields : (int,bool) farray
+
+logic y__split_fields : (int,bool) farray
+
+logic temp___j_197 : int
+
+logic us : int
+
+logic temp___198 : integer
+
+logic temp___1981 : (int,bool) farray
+
+logic temp___201 : (int,bool) farray
+
+logic temp___2011 : t
+
+logic temp___203 : integer
+
+logic temp___2031 : (int,bool) farray
+
+logic temp___206 : (int,bool) farray
+
+logic temp___2061 : t
+
+axiom H : in_range1(temp___j_197)
+
+axiom H1 : ((us = 10) and in_range1(10))
+
+axiom H2 : ((to_rep(x__split_discrs) = 10) and (discr_init__r1__arr__pred1({
+  us_split_discrs2 = { rec__discr_init__r1__j = x__split_discrs };
+  us_split_fields3 = { rec__discr_init__r1__arr1 = x__split_fields } }) ->
+  (x__split_fields = (temp___190(of_int(1), 1,
+  to_rep(x__split_discrs))).elts)))
+
+axiom H3 : (10 = to_rep(x__split_discrs))
+
+axiom H4 : ((to_rep(y__split_discrs) = 10) and (discr_init__r1__arr__pred1({
   us_split_discrs2 = { rec__discr_init__r1__j = y__split_discrs };
   us_split_fields3 = { rec__discr_init__r1__arr1 = y__split_fields } }) ->
   (y__split_fields = (temp___190(of_int(1), 1,
-  to_rep(y__split_discrs))).elts))) -> ((10 = to_rep(y__split_discrs)) ->
-  discr_init__r1__arr__pred1({ us_split_discrs2 = { rec__discr_init__r1__j =
-  y__split_discrs }; us_split_fields3 = { rec__discr_init__r1__arr1 =
-  y__split_fields } }))))))))
+  to_rep(y__split_discrs))).elts)))
+
+axiom H5 : (10 = to_rep(y__split_discrs))
+
+ (* File "discr_init.adb", line 1, characters 0-0 *)
+goal WP_parameter_def : discr_init__r1__arr__pred1({ us_split_discrs2 = {
+  rec__discr_init__r1__j = y__split_discrs }; us_split_fields3 = {
+  rec__discr_init__r1__arr1 = y__split_fields } })

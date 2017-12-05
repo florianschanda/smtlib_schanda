@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -514,10 +514,55 @@ axiom def_axiom :
   (forall temp___168:int.
   ((temp___165(temp___167)[temp___168]) = temp___167)))
 
+logic x : int
+
+logic y : int
+
+logic z__split_discrs : bool
+
+logic n : int
+
+logic m : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic temp___162 : bool
+
+logic temp___1621 : natural
+
+logic temp___1622 : bool
+
+logic result : int
+
+logic n1 : int
+
+logic result1 : int
+
+logic y1 : int
+
+logic result2 : bool
+
+logic m1 : bool
+
+axiom H : ((0 <= 2147483647) -> in_range2(x))
+
+axiom H1 : ((0 <= 2147483647) -> in_range2(y))
+
+axiom H2 : (z__attr__constrained = false)
+
+axiom H3 : ((0 <= 2147483647) -> in_range2(n))
+
+axiom H4 : ((0 <= 2147483647) -> in_range2(o))
+
+axiom H5 : (result = n)
+
+axiom H6 : (n1 = x)
+
  (* File "foo.adb", line 36, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall n:int. forall o:int. forall result:int.
-  forall n1:int. (((0 <= 2147483647) -> in_range2(x)) ->
-  (((0 <= 2147483647) -> in_range2(y)) -> ((z__attr__constrained = false) ->
-  (((0 <= 2147483647) -> in_range2(n)) -> (((0 <= 2147483647) ->
-  in_range2(o)) -> (((result = n) and (n1 = x)) -> in_range1((y + 1)))))))))
+goal WP_parameter_def : in_range1((y + 1))

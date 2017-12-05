@@ -43,6 +43,7 @@
 (declare-const temp___r_237 Int)
 (declare-const temp___c_236 Int)
 (declare-const us Int)
+(declare-const us1 Int)
 (assert (in_range1 temp___r_237))
 (assert (in_range1 temp___c_236))
 (assert (and (= us 4) (in_range1 4)))

@@ -60,6 +60,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range1 i1))
 (assert (in_range1 i2))
 (assert (and (= o (addthree i1 i2 i1)) (and (in_range o) (= o (+ (+ i1 i2) i1)))))

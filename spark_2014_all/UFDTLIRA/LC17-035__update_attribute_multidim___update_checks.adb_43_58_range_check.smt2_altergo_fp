@@ -350,7 +350,29 @@ axiom def_axiom :
   temp___252, temp___253, temp___254), temp___255, temp___256,
   temp___257) = get(temp___250, temp___255, temp___256, temp___257)))))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : in_range2(z)
+
+axiom H3 : in_range3(new_val)
+
+axiom H4 : (1 <  x)
+
+axiom H5 : (1 <  y)
+
+axiom H6 : (z <  10)
+
+axiom H7 : (new_val <  99)
+
  (* File "update_checks.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> (in_range1(y) -> (in_range2(z) ->
-  (in_range3(new_val) -> (((((1 <  x) and (1 <  y)) and (z <  10)) and
-  (new_val <  99)) -> in_range3((new_val + 1)))))))
+goal WP_parameter_def : in_range3((new_val + 1))

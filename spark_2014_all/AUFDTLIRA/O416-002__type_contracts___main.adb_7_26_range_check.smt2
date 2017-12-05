@@ -341,6 +341,7 @@
 (declare-const o4 (Array Int us_rep))
 (declare-const main__a__assume (Array Int us_rep))
 (declare-const main__a__assume1 t)
+(declare-const us Int)
 (declare-const result (Array Int us_rep))
 (declare-const a1 (Array Int us_rep))
 (assert (<= (compare (temp___String_Literal_269 Tuple0) 1 10 (temp___String_Literal_270 Tuple0) 1 10) 0))

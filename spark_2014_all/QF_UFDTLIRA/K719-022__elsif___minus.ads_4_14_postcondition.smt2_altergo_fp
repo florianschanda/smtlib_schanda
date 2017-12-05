@@ -137,31 +137,63 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall minus__minus__result:int. forall minus__minus__result1:int.
-  forall result:int. forall minus__minus__result2:int. forall result1:int.
-  forall minus__minus__result3:int. forall result2:int.
-  forall minus__minus__result4:int. forall minus__minus__result5:int.
-  forall minus__minus__result6:int. forall minus__minus__result7:int.
-  forall minus__minus__result8:int. forall result3:int.
-  forall minus__minus__result9:int. forall minus__minus__result10:int.
-  forall minus__minus__result11:int. forall minus__minus__result12:int.
-  forall minus__minus__result13:int. forall minus__minus__result14:int.
-  forall minus__minus__result15:int.
-  (forall result4:int. ((in_range1(x) and (((1 <= x) and (x <= 3)) and
-  (((((({ int__content = minus__minus__result12 } = { int__content =
-  minus__minus__result7 }) and
-  (minus__minus__result13 = minus__minus__result8)) and (((x = 1) and
+logic minus__minus__result : int
+
+logic minus__minus__result1 : int
+
+logic result : int
+
+logic minus__minus__result2 : int
+
+logic result1 : int
+
+logic minus__minus__result3 : int
+
+logic result2 : int
+
+logic minus__minus__result4 : int
+
+logic minus__minus__result5 : int
+
+logic minus__minus__result6 : int
+
+logic minus__minus__result7 : int
+
+logic minus__minus__result8 : int
+
+logic result3 : int
+
+logic minus__minus__result9 : int
+
+logic minus__minus__result10 : int
+
+logic minus__minus__result11 : int
+
+logic minus__minus__result12 : int
+
+logic minus__minus__result13 : int
+
+logic minus__minus__result14 : int
+
+logic minus__minus__result15 : int
+
+logic result4 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : ((1 <= x) and (x <= 3))
+
+axiom H2 : ((((minus__minus__result12 = minus__minus__result7) and
+  (minus__minus__result13 = minus__minus__result8)) and (((x = 1) ->
   (((minus__minus__result2 = minus__minus__result7) and
   (minus__minus__result8 = minus__minus__result2)) and
-  ((result = minus__minus__result) and (minus__minus__result2 = 0)))) or
-  ((not (x = 1)) and (((minus__minus__result5 = minus__minus__result7) and
-  (minus__minus__result8 = minus__minus__result6)) and (((x = 2) and
+  ((result = minus__minus__result) and (minus__minus__result2 = 0)))) and
+  ((not (x = 1)) -> (((minus__minus__result7 = minus__minus__result5) and
+  (minus__minus__result8 = minus__minus__result6)) and (((x = 2) ->
   (((minus__minus__result3 = minus__minus__result5) and
   (minus__minus__result6 = minus__minus__result3)) and
-  ((result1 = minus__minus__result) and (minus__minus__result3 = 1)))) or
-  ((not (x = 2)) and (((minus__minus__result4 = minus__minus__result5) and
+  ((result1 = minus__minus__result) and (minus__minus__result3 = 1)))) and
+  ((not (x = 2)) -> (((minus__minus__result4 = minus__minus__result5) and
   (minus__minus__result6 = minus__minus__result4)) and ((x = 3) and
   ((result2 = minus__minus__result) and
   (minus__minus__result4 = 2)))))))))) or (((not (x = 1)) and
@@ -170,12 +202,17 @@ goal WP_parameter_def :
   (minus__minus__result4 = minus__minus__result1))) and
   (minus__minus__result3 = minus__minus__result4))) and
   (minus__minus__result2 = minus__minus__result3))) and
-  (((minus__minus__result10 = minus__minus__result12) and
+  (((minus__minus__result12 = minus__minus__result10) and
   (minus__minus__result13 = minus__minus__result11)) and
   (((minus__minus__result9 = minus__minus__result10) and
   (minus__minus__result11 = minus__minus__result9)) and
-  ((result3 = minus__minus__result2) and (minus__minus__result9 = x)))))) and
-  ((minus__minus__result14 = minus__minus__result12) and
-  (minus__minus__result15 = minus__minus__result13))) and
-  (result4 = minus__minus__result14)))) ->
-  (minus__minus__result14 = (x - 1)))))
+  ((result3 = minus__minus__result2) and (minus__minus__result9 = x))))))
+
+axiom H3 : (minus__minus__result14 = minus__minus__result12)
+
+axiom H4 : (minus__minus__result15 = minus__minus__result13)
+
+axiom H5 : (result4 = minus__minus__result14)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (minus__minus__result14 = (x - 1))

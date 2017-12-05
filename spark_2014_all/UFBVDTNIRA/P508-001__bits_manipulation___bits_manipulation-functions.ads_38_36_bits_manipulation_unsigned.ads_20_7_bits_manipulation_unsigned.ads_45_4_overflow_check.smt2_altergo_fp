@@ -193,18 +193,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -664,7 +664,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type universal_integer
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -1828,8 +1828,27 @@ axiom shift_right__def_axiom :
   ((not ((17 <= 64) and (64 <= 32))) -> (shift_right(v, amount) = lsr_bv(v,
   of_int(amount))))))))))))
 
+logic val__ : t
+
+logic n : int
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : int
+
+logic o3 : bool
+
+logic result : bool
+
+axiom H : ule(of_int(0), val__)
+
+axiom H1 : ule(val__, of_int(18446744073709551615))
+
+axiom H2 : (0 <= n)
+
+axiom H3 : (n <= 63)
+
  (* File "bits_manipulation-functions.ads", line 35, characters 0-0 *)
-goal WP_parameter_def :
-  (forall val__:t. forall n:int. ((ule(of_int(0), val__) and ule(val__,
-  of_int(18446744073709551615))) -> (((0 <= n) and (n <= 63)) ->
-  in_range1(power(2, n)))))
+goal WP_parameter_def : in_range1(power(2, n))

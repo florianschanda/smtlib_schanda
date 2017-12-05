@@ -30,6 +30,7 @@
 (declare-datatypes () ((capacity_range__ref (mk_capacity_range__ref (capacity_range__content capacity_range)))))
 (define-fun capacity_range__ref___projection ((a capacity_range__ref)) capacity_range (capacity_range__content a))
 (define-fun dynamic_invariant ((temp___expr_183 Int) (temp___is_init_180 Bool) (temp___skip_constant_181 Bool) (temp___do_toplevel_182 Bool)) Bool (=> (or (= temp___is_init_180 true) (<= 0 3)) (in_range temp___expr_183)))
+(declare-const us Int)
 (assert (not (in_range 3)))
 (check-sat)
 (exit)

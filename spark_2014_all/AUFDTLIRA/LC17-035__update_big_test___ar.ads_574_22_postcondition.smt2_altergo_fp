@@ -683,25 +683,77 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic a : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic result : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a1 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a2 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+logic a3 : (int,(int,(int,(int,et1) farray) farray) farray) farray
+
+axiom H : in_range1(i1)
+
+axiom H1 : in_range2(i2)
+
+axiom H2 : in_range3(i3)
+
+axiom H3 : in_range4(i4)
+
+axiom H4 : in_range5(e)
+
+axiom H5 : (to_rep(o) = e)
+
+axiom H6 : (o1 = ((((a[i4])[i3])[i2])[i1 <- o]))
+
+axiom H7 : (o2 = (((a[i4])[i3])[i2 <- o1]))
+
+axiom H8 : (o3 = ((a[i4])[i3 <- o2]))
+
+axiom H9 : (o4 = (a[i4 <- o3]))
+
+axiom H10 : (result = a)
+
+axiom H11 : (a1 = o4)
+
+axiom H12 : (a1 = a2)
+
+axiom H13 : (a3 = a1)
+
+logic m : int
+
+axiom H14 : (90 <= m)
+
+axiom H15 : (m <= 99)
+
+logic n : int
+
+axiom H16 : (1 <= n)
+
+axiom H17 : (n <= 16)
+
+logic o5 : int
+
+axiom H18 : (5 <= o5)
+
+axiom H19 : (o5 <= 50)
+
+logic p : int
+
+axiom H20 : (1 <= p)
+
+axiom H21 : (p <= 10)
+
  (* File "ar.ads", line 566, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray.
-  forall o4:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall result:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a1:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a2:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  forall a3:(int,(int,(int,(int,et1) farray) farray) farray) farray.
-  ((in_range1(i1) and (in_range2(i2) and (in_range3(i3) and
-  (in_range4(i4) and (in_range5(e) and (((((((to_rep(o) = e) and
-  (o1 = ((((a[i4])[i3])[i2])[i1 <- o]))) and
-  (o2 = (((a[i4])[i3])[i2 <- o1]))) and (o3 = ((a[i4])[i3 <- o2]))) and
-  (o4 = (a[i4 <- o3]))) and ((result = a) and (a1 = o4))) and ((a1 = a2) and
-  (a3 = a1)))))))) ->
-  (forall m:int. (((90 <= m) and (m <= 99)) ->
-  (forall n:int. (((1 <= n) and (n <= 16)) ->
-  (forall o5:int. (((5 <= o5) and (o5 <= 50)) ->
-  (forall p:int. (((1 <= p) and (p <= 10)) ->
-  in_range5(to_rep(((((a2[m])[n])[o5])[p])))))))))))))
+goal WP_parameter_def : in_range5(to_rep(((((a2[m])[n])[o5])[p])))

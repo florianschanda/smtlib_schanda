@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1136,29 +1136,80 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 logic fail__create__r__aggregate_def : bool, t, t -> us_t2
 
 axiom def_axiom :
-  (forall temp___632:bool.
-  (forall temp___633:t. forall temp___634:t. ((dynamic_property(of_int(0),
-  of_int(18446744073709551615), temp___633, temp___634) ->
-  ((to_rep(first4((fail__create__r__aggregate_def(temp___632, temp___633,
-  temp___634)).rt2)) = temp___633) and
-  (to_rep(last5((fail__create__r__aggregate_def(temp___632, temp___633,
-  temp___634)).rt2)) = temp___634))) and
-  (forall temp___635:t. (((fail__create__r__aggregate_def(temp___632,
-  temp___633, temp___634)).elts2[temp___635]) = temp___632)))))
+  (forall temp___626:bool.
+  (forall temp___627:t. forall temp___628:t. ((dynamic_property(of_int(0),
+  of_int(18446744073709551615), temp___627, temp___628) ->
+  ((to_rep(first4((fail__create__r__aggregate_def(temp___626, temp___627,
+  temp___628)).rt2)) = temp___627) and
+  (to_rep(last5((fail__create__r__aggregate_def(temp___626, temp___627,
+  temp___628)).rt2)) = temp___628))) and
+  (forall temp___629:t. (((fail__create__r__aggregate_def(temp___626,
+  temp___627, temp___628)).elts2[temp___629]) = temp___626)))))
+
+logic r : (t,bool) farray
+
+logic fail__create__result : (t,bool) farray
+
+logic fail__create__result1 : t1
+
+logic temp___631 : (t,bool) farray
+
+logic temp___6311 : t3
+
+logic fail__create__r__assume : (t,bool) farray
+
+logic fail__create__r__assume1 : t2
+
+logic result : (t,bool) farray
+
+logic r1 : (t,bool) farray
+
+logic result1 : (t,bool) farray
+
+logic result2 : t1
+
+logic fail__create__result2 : (t,bool) farray
+
+logic fail__create__result3 : t1
+
+logic fail__create__result4 : (t,bool) farray
+
+logic fail__create__result5 : t1
+
+logic fail__create__result6 : (t,bool) farray
+
+logic fail__create__result7 : t1
+
+logic r2 : (t,bool) farray
+
+logic fail__create__result8 : (t,bool) farray
+
+logic fail__create__result9 : t1
+
+logic r3 : (t,bool) farray
+
+logic fail__create__result10 : (t,bool) farray
+
+logic fail__create__result11 : t1
+
+axiom H : true
+
+axiom H1 : (to_rep(first4((fail__create__r__aggregate_def(of_int1(0),
+  of_int(0), last2)).rt2)) = of_int(0))
+
+axiom H2 : (to_rep(last5((fail__create__r__aggregate_def(of_int1(0),
+  of_int(0), last2)).rt2)) = last2)
+
+axiom H3 : ({ elts2 = temp___631; rt2 = temp___6311
+  } = fail__create__r__aggregate_def(of_int1(0), of_int(0), last2))
 
  (* File "mod_array.ads", line 4, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___637:(t,bool) farray. forall temp___6371:t3.
-  (((to_rep(first4((fail__create__r__aggregate_def(of_int1(0), of_int(0),
-  last2)).rt2)) = of_int(0)) and
-  ((to_rep(last5((fail__create__r__aggregate_def(of_int1(0), of_int(0),
-  last2)).rt2)) = last2) and ({ elts2 = temp___637; rt2 = temp___6371
-  } = fail__create__r__aggregate_def(of_int1(0), of_int(0), last2)))) ->
-  (((tqtint(to_rep(first4(temp___6371))) <= tqtint(to_rep(last5(temp___6371)))) ->
+  (((tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311)))) ->
   (((tqtint(of_int(0)) <= tqtint(last2)) ->
-  (((tqtint(to_rep(last5(temp___6371))) - tqtint(to_rep(first4(temp___6371)))) + 1) = ((tqtint(last2) - tqtint(of_int(0))) + 1))) and
+  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = ((tqtint(last2) - tqtint(of_int(0))) + 1))) and
   ((not (tqtint(of_int(0)) <= tqtint(last2))) ->
-  (((tqtint(to_rep(last5(temp___6371))) - tqtint(to_rep(first4(temp___6371)))) + 1) = 0)))) and
-  ((not (tqtint(to_rep(first4(temp___6371))) <= tqtint(to_rep(last5(temp___6371))))) ->
+  (((tqtint(to_rep(last5(temp___6311))) - tqtint(to_rep(first4(temp___6311)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep(first4(temp___6311))) <= tqtint(to_rep(last5(temp___6311))))) ->
   ((tqtint(of_int(0)) <= tqtint(last2)) ->
-  (0 = ((tqtint(last2) - tqtint(of_int(0))) + 1)))))))
+  (0 = ((tqtint(last2) - tqtint(of_int(0))) + 1)))))

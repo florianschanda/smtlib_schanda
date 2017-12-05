@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -497,8 +497,22 @@ type t6b__ref = { t6b__content : us_t1
 
 function t6b__ref___projection(a: t6b__ref) : us_t1 = (a).t6b__content
 
+logic s : (int,character) farray
+
+logic idx : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H1 : (of_int(1) = true)
+
+axiom H2 : (to_rep1(s__first) <= to_rep1(s__last))
+
  (* File "string_old.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(s__first),
-  to_rep1(s__last)) -> ((of_int(1) = true) ->
-  ((to_rep1(s__first) <= to_rep1(s__last)) ->
-  (to_rep1(s__first) <= to_rep1(s__first)))))
+goal WP_parameter_def : (to_rep1(s__first) <= to_rep1(s__first))

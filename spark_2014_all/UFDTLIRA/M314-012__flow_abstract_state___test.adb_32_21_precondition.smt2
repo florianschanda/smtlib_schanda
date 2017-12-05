@@ -38,6 +38,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert true)
 (declare-const i Int)
+(declare-const o Int)
 (declare-const state us_private)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range i)))
 (assert (= (is_empty state) true))

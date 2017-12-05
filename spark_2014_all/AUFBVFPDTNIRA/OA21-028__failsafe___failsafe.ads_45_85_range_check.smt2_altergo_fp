@@ -157,18 +157,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1677,126 +1677,343 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic battery_level_at : (t,battery_level_type) farray
+
+logic current_time : t
+
+logic res : t
+
+logic s : t
+
+logic failsafe__model__time_below_threshold__result : t
+
+logic temp___256 : t
+
+logic temp___255 : t
+
+logic o : t
+
+logic o1 : battery_level_type
+
+logic o2 : t1
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic temp___257 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic temp___259 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : battery_level_type
+
+logic o11 : t1
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic temp___266 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic temp___268 : t
+
+logic o17 : t
+
+logic o18 : t
+
+logic temp___265 : t
+
+logic o19 : t
+
+logic o20 : t
+
+logic o21 : battery_level_type
+
+logic o22 : t1
+
+logic result : t
+
+logic res1 : t
+
+logic result1 : t
+
+logic s1 : t
+
+logic result2 : bool
+
+logic result3 : t
+
+logic res2 : t
+
+logic res3 : t
+
+logic s2 : t
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : t
+
+logic s3 : t
+
+logic result7 : bool
+
+logic result8 : t
+
+logic res4 : t
+
+logic s4 : t
+
+logic s5 : t
+
+logic res5 : t
+
+logic s6 : t
+
+logic res6 : t
+
+logic s7 : t
+
+logic res7 : t
+
+logic s8 : t
+
+logic res8 : t
+
+logic s9 : t
+
+logic res9 : t
+
+logic s10 : t
+
+logic res10 : t
+
+logic s11 : t
+
+logic res11 : t
+
+logic s12 : t
+
+logic res12 : t
+
+logic s13 : t
+
+logic result9 : t
+
+logic failsafe__model__time_below_threshold__result1 : t
+
+logic failsafe__model__time_below_threshold__result2 : t
+
+logic failsafe__model__time_below_threshold__result3 : t
+
+logic res13 : t
+
+logic s14 : t
+
+logic failsafe__model__time_below_threshold__result4 : t
+
+logic res14 : t
+
+logic s15 : t
+
+logic failsafe__model__time_below_threshold__result5 : t
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic result12 : bool
+
+logic result13 : bool
+
+axiom H : in_range2(current_time)
+
+axiom H1 : (result = res)
+
+axiom H2 : (res1 = of_int(0))
+
+axiom H3 : in_range3(res1)
+
+axiom H4 : (result1 = s)
+
+axiom H5 : (s1 = of_int(0))
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.20000000298023223876953125))
 
- (* File "failsafe.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. forall res:t. forall s:t.
-  forall failsafe__model__time_below_threshold__result:t.
-  forall temp___256:t. forall temp___255:t. forall o:t.
-  forall o1:battery_level_type. forall o2:t1. forall o3:t. forall o4:t.
-  forall o5:battery_level_type. forall o6:t1. forall o7:t. forall o8:t.
-  forall temp___265:t. forall o9:t. forall o10:t.
-  forall o11:battery_level_type. forall o12:t1. forall result:t.
-  forall res1:t. forall result1:t. forall s1:t. forall result2:bool.
-  forall result3:t. forall res2:t. forall res3:t. forall s2:t.
-  forall result4:t. forall s3:t. forall result5:bool. forall s4:t.
-  forall s5:t. forall res4:t. forall s6:t. forall res5:t. forall s7:t.
-  forall res6:t. forall s8:t. forall res7:t. forall s9:t. forall res8:t.
-  forall s10:t. forall res9:t. forall s11:t. forall result6:t.
-  forall failsafe__model__time_below_threshold__result1:t.
-  forall failsafe__model__time_below_threshold__result2:t.
-  forall failsafe__model__time_below_threshold__result3:t. forall res10:t.
-  forall s12:t. forall failsafe__model__time_below_threshold__result4:t.
-  forall res11:t. forall s13:t.
-  forall failsafe__model__time_below_threshold__result5:t.
-  forall result7:bool. forall result8:bool. forall result9:bool.
-  forall result10:bool. (in_range2(current_time) -> ((((({ t__content =
-  result } = { t__content = res }) and (res1 = of_int(0))) and
-  (in_range3(res1) and (((({ t__content = result1 } = { t__content = s }) and
-  (s1 = of_int(0))) and (((ule(of_int(0), s1) and ule(s1, of_int(49))) and
-  ((((temp___256 = res1) and ((temp___255 = s1) and (((((s1 = s6) and
-  (res1 = res4)) and ((s7 = s1) and (res5 = res1))) and
-  ((((((ult(current_time, s1) and (o = add(sub(current_time, s1),
-  of_int(50)))) or ((not ult(current_time, s1)) and (o = sub(current_time,
+axiom H6 : ((ule(of_int(0), s1) and ule(s1, of_int(49))) ->
+  (((temp___256 = res1) and ((temp___255 = s1) and (((((s1 = s8) and
+  (res1 = res7)) and ((s9 = s1) and (res8 = res1))) and
+  ((((((ult(current_time, s1) -> (o = add(sub(current_time, s1),
+  of_int(50)))) and ((not ult(current_time, s1)) -> (o = sub(current_time,
   s1)))) and (o1 = (battery_level_at[o]))) and (o2 = to_rep(o1))) and
-  ((lt(o2, fliteral1) and (result2 = true)) or ((not lt(o2, fliteral1)) and
+  ((lt(o2, fliteral1) -> (result2 = true)) and ((not lt(o2, fliteral1)) ->
   (result2 = false)))) and (not (result2 = true)))) or
-  (((((((ult(current_time, s1) and (o = add(sub(current_time, s1),
-  of_int(50)))) or ((not ult(current_time, s1)) and (o = sub(current_time,
+  (((((((ult(current_time, s1) -> (o = add(sub(current_time, s1),
+  of_int(50)))) and ((not ult(current_time, s1)) -> (o = sub(current_time,
   s1)))) and (o1 = (battery_level_at[o]))) and (o2 = to_rep(o1))) and
-  ((lt(o2, fliteral1) and (result2 = true)) or ((not lt(o2, fliteral1)) and
+  ((lt(o2, fliteral1) -> (result2 = true)) and ((not lt(o2, fliteral1)) ->
   (result2 = false)))) and ((result2 = true) and (((o3 = add(res1,
   of_int(1))) and in_range3(add(res1, of_int(1)))) and ((res1 = result3) and
-  (res2 = o3))))) and ((((s4 = s6) and (res3 = res4)) and ((s7 = s5) and
-  (res5 = res3))) and ((ule(of_int(1), res2) and ule(res2, of_int(50))) and
-  ((((uge(current_time, sub(res3, of_int(1))) and
-  (forall s14:t. ((((ult(current_time, sub(res3, of_int(1))) ->
-  ule(add(sub(current_time, sub(res3, of_int(1))), of_int(50)), s14)) and
-  ((not ult(current_time, sub(res3, of_int(1)))) -> ule(sub(current_time,
-  sub(res3, of_int(1))), s14))) and ule(s14, current_time)) ->
-  lt(to_rep((battery_level_at[s14])), fliteral1)))) or
-  ((not uge(current_time, sub(res3, of_int(1)))) and
-  ((forall s14:t. ((ule(of_int(0), s14) and ule(s14, current_time)) ->
-   lt(to_rep((battery_level_at[s14])), fliteral1))) and
-  (forall s14:t. ((((ult(current_time, sub(res3, of_int(1))) ->
-  ule(add(sub(current_time, sub(res3, of_int(1))), of_int(50)), s14)) and
-  ((not ult(current_time, sub(res3, of_int(1)))) -> ule(sub(current_time,
-  sub(res3, of_int(1))), s14))) and ule(s14, of_int(49))) ->
-  lt(to_rep((battery_level_at[s14])), fliteral1)))))) and (res3 = add(s2,
+  (res2 = o3))))) and ((((s8 = s4) and (res3 = res7)) and ((s9 = s5) and
+  (res8 = res3))) and ((ule(of_int(1), res2) and ule(res2, of_int(50))) and
+  ((((uge(current_time, sub(res3, of_int(1))) ->
+  (forall s16:t. ((((ult(current_time, sub(res3, of_int(1))) and
+  ule(add(sub(current_time, sub(res3, of_int(1))), of_int(50)), s16)) or
+  ((not ult(current_time, sub(res3, of_int(1)))) and ule(sub(current_time,
+  sub(res3, of_int(1))), s16))) and ule(s16, current_time)) ->
+  lt(to_rep((battery_level_at[s16])), fliteral1)))) and
+  ((not uge(current_time, sub(res3, of_int(1)))) ->
+  ((forall s16:t. ((ule(of_int(0), s16) and ule(s16, current_time)) ->
+   lt(to_rep((battery_level_at[s16])), fliteral1))) and
+  (forall s16:t. ((((ult(current_time, sub(res3, of_int(1))) and
+  ule(add(sub(current_time, sub(res3, of_int(1))), of_int(50)), s16)) or
+  ((not ult(current_time, sub(res3, of_int(1)))) and ule(sub(current_time,
+  sub(res3, of_int(1))), s16))) and ule(s16, of_int(49))) ->
+  lt(to_rep((battery_level_at[s16])), fliteral1)))))) and (res3 = add(s2,
   of_int(1)))) and ((((ule(of_int(0), of_int(49)) -> in_range2(s2)) and
   (ule(of_int(0), of_int(50)) -> in_range3(res3))) and (ule(of_int(0),
   s2) and ule(s2, of_int(49)))) and ((((s2 = s4) and (s5 = s2)) and
   (s2 = of_int(49))) or ((not (s2 = of_int(49))) and (((s3 = s4) and
-  (s5 = s3)) and (((s2 = result4) and (s3 = add(s2, of_int(1)))) and
-  ((((((ult(current_time, s3) and (o4 = add(sub(current_time, s3),
-  of_int(50)))) or ((not ult(current_time, s3)) and (o4 = sub(current_time,
-  s3)))) and (o5 = (battery_level_at[o4]))) and (o6 = to_rep(o5))) and
-  ((lt(o6, fliteral1) and (result5 = true)) or ((not lt(o6, fliteral1)) and
-  (result5 = false)))) and (not (result5 = true))))))))))))))) and ((({
-  t__content = s8 } = { t__content = s6 }) and (res4 = res6)) and
-  ((s9 = s7) and (res7 = res5)))) and ((({ t__content = s10 } = {
-  t__content = s8 }) and ({ t__content = res8 } = { t__content = res6 })) and
-  ((s11 = s9) and (res9 = res7))))) or ((not (ule(of_int(0), s1) and ule(s1,
-  of_int(49)))) and (((s1 = s10) and (res1 = res8)) and ((s11 = s1) and
-  (res9 = res1)))))) and
-  (((failsafe__model__time_below_threshold__result1 = failsafe__model__time_below_threshold__result2) and
-  (failsafe__model__time_below_threshold__result3 = failsafe__model__time_below_threshold__result1)) and
-  ((result6 = failsafe__model__time_below_threshold__result) and
-  (failsafe__model__time_below_threshold__result1 = res8)))))) and
-  (((failsafe__model__time_below_threshold__result2 = failsafe__model__time_below_threshold__result4) and
-  ((s12 = s10) and (res10 = res8))) and
-  ((failsafe__model__time_below_threshold__result5 = failsafe__model__time_below_threshold__result3) and
-  ((s13 = s11) and (res11 = res9))))) ->
-  ((((bool_ge1(to_rep((battery_level_at[current_time])),
-  fliteral1) = true) and
-  (failsafe__model__time_below_threshold__result4 = of_int(0))) or
-  (not (bool_ge1(to_rep((battery_level_at[current_time])),
-  fliteral1) = true))) ->
-  ((((forall s14:t. ((ule(of_int(0), s14) and ule(s14, of_int(49))) ->
-     lt(to_rep((battery_level_at[s14])), fliteral1))) and
-  (failsafe__model__time_below_threshold__result4 = of_int(50))) or
-  (not (forall s14:t. ((ule(of_int(0), s14) and ule(s14, of_int(49))) ->
-       lt(to_rep((battery_level_at[s14])), fliteral1))))) ->
-  ((not ((bool_ge1(to_rep((battery_level_at[current_time])),
-  fliteral1) = false) ->
-  (forall s14:t. ((ule(of_int(0), s14) and ule(s14, of_int(49))) ->
-  lt(to_rep((battery_level_at[s14])), fliteral1))))) ->
-  (((ult(failsafe__model__time_below_threshold__result4, of_int(50)) and
-  (((((((o8 = failsafe__model__time_below_threshold__result4) and
-  in_range2(failsafe__model__time_below_threshold__result4)) and
-  (temp___265 = sub(current_time, o8))) and
-  ((((o9 = failsafe__model__time_below_threshold__result4) and
-  in_range2(failsafe__model__time_below_threshold__result4)) and
-  ((ult(current_time, o9) and (result8 = true)) or ((not ult(current_time,
-  o9)) and (result8 = false)))) and (((result8 = true) and
-  (o10 = add(temp___265, of_int(50)))) or ((not (result8 = true)) and
-  (o10 = temp___265))))) and (o11 = (battery_level_at[o10]))) and
-  (o12 = to_rep(o11))) and ((le(fliteral1, o12) and (result7 = true)) or
-  ((not le(fliteral1, o12)) and (result7 = false))))) or
-  ((not ult(failsafe__model__time_below_threshold__result4, of_int(50))) and
-  (result7 = false))) -> ((result7 = true) ->
-  ((((o7 = sub(failsafe__model__time_below_threshold__result4,
+  (s5 = s3)) and (((s2 = result6) and (s3 = add(s2, of_int(1)))) and
+  ((((((ult(current_time, s3) -> (o9 = add(sub(current_time, s3),
+  of_int(50)))) and ((not ult(current_time, s3)) -> (o9 = sub(current_time,
+  s3)))) and (o10 = (battery_level_at[o9]))) and (o11 = to_rep(o10))) and
+  ((lt(o11, fliteral1) -> (result7 = true)) and ((not lt(o11, fliteral1)) ->
+  (result7 = false)))) and (not (result7 = true))))))))))))))) and
+  (((s10 = s8) and (res9 = res7)) and ((s11 = s9) and (res10 = res8)))))
+
+axiom H7 : ((ule(of_int(0), s1) and ule(s1, of_int(49))) -> (s12 = s10))
+
+axiom H8 : ((ule(of_int(0), s1) and ule(s1, of_int(49))) -> (res11 = res9))
+
+axiom H9 : ((ule(of_int(0), s1) and ule(s1, of_int(49))) -> (s13 = s11))
+
+axiom H10 : ((ule(of_int(0), s1) and ule(s1, of_int(49))) -> (res12 = res10))
+
+axiom H11 : ((not (ule(of_int(0), s1) and ule(s1, of_int(49)))) ->
+  (s1 = s12))
+
+axiom H12 : ((not (ule(of_int(0), s1) and ule(s1, of_int(49)))) ->
+  (res1 = res11))
+
+axiom H13 : ((not (ule(of_int(0), s1) and ule(s1, of_int(49)))) ->
+  (s13 = s1))
+
+axiom H14 : ((not (ule(of_int(0), s1) and ule(s1, of_int(49)))) ->
+  (res12 = res1))
+
+axiom H15 :
+  (failsafe__model__time_below_threshold__result1 = failsafe__model__time_below_threshold__result2)
+
+axiom H16 :
+  (failsafe__model__time_below_threshold__result3 = failsafe__model__time_below_threshold__result1)
+
+axiom H17 : (result9 = failsafe__model__time_below_threshold__result)
+
+axiom H18 : (failsafe__model__time_below_threshold__result1 = res11)
+
+axiom H19 :
+  (failsafe__model__time_below_threshold__result4 = failsafe__model__time_below_threshold__result2)
+
+axiom H20 : (s14 = s12)
+
+axiom H21 : (res13 = res11)
+
+axiom H22 :
+  (failsafe__model__time_below_threshold__result5 = failsafe__model__time_below_threshold__result3)
+
+axiom H23 : (s15 = s13)
+
+axiom H24 : (res14 = res12)
+
+axiom H25 : ((bool_ge1(to_rep((battery_level_at[current_time])),
+  fliteral1) = true) ->
+  (failsafe__model__time_below_threshold__result4 = of_int(0)))
+
+axiom H26 :
+  ((forall s16:t. ((ule(of_int(0), s16) and ule(s16, of_int(49))) ->
+   lt(to_rep((battery_level_at[s16])), fliteral1))) ->
+  (failsafe__model__time_below_threshold__result4 = of_int(50)))
+
+axiom H27 : (not ((bool_ge1(to_rep((battery_level_at[current_time])),
+  fliteral1) = false) and
+  (forall s16:t. ((ule(of_int(0), s16) and ule(s16, of_int(49))) ->
+  lt(to_rep((battery_level_at[s16])), fliteral1)))))
+
+axiom H28 : (not (bool_ge1(to_rep((battery_level_at[current_time])),
+  fliteral1) = true))
+
+axiom H29 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((o18 = failsafe__model__time_below_threshold__result4) and
+  in_range2(failsafe__model__time_below_threshold__result4)))
+
+axiom H30 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> (temp___265 = sub(current_time, o18)))
+
+axiom H31 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((o19 = failsafe__model__time_below_threshold__result4) and
+  in_range2(failsafe__model__time_below_threshold__result4)))
+
+axiom H32 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((ult(current_time, o19) -> (result11 = true)) and
+  ((not ult(current_time, o19)) -> (result11 = false))))
+
+axiom H33 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((result11 = true) -> (o20 = add(temp___265, of_int(50)))))
+
+axiom H34 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((not (result11 = true)) -> (o20 = temp___265)))
+
+axiom H35 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> (o21 = (battery_level_at[o20])))
+
+axiom H36 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> (o22 = to_rep(o21)))
+
+axiom H37 : (ult(failsafe__model__time_below_threshold__result4,
+  of_int(50)) -> ((le(fliteral1, o22) -> (result10 = true)) and
+  ((not le(fliteral1, o22)) -> (result10 = false))))
+
+axiom H38 : ((not ult(failsafe__model__time_below_threshold__result4,
+  of_int(50))) -> (result10 = false))
+
+axiom H39 : (result10 = true)
+
+axiom H40 : ((o13 = sub(failsafe__model__time_below_threshold__result4,
   of_int(1))) and
-  in_range2(sub(failsafe__model__time_below_threshold__result4,
-  of_int(1)))) and ((uge(current_time, o7) and (result9 = true)) or
-  ((not uge(current_time, o7)) and (result9 = false)))) ->
-  ((not (result9 = true)) -> (((result10 = true) <->
-  (forall s14:t. ((ule(of_int(0), s14) and ule(s14, current_time)) ->
-  lt(to_rep((battery_level_at[s14])), fliteral1)))) -> ((result10 = true) ->
-  in_range2(sub(failsafe__model__time_below_threshold__result4,
-  of_int(1)))))))))))))))
+  in_range2(sub(failsafe__model__time_below_threshold__result4, of_int(1))))
+
+axiom H41 : ((uge(current_time, o13) -> (result12 = true)) and
+  ((not uge(current_time, o13)) -> (result12 = false)))
+
+axiom H42 : (not (result12 = true))
+
+axiom H43 : ((result13 = true) <->
+  (forall s16:t. ((ule(of_int(0), s16) and ule(s16, current_time)) ->
+  lt(to_rep((battery_level_at[s16])), fliteral1))))
+
+axiom H44 : (result13 = true)
+
+ (* File "failsafe.ads", line 16, characters 0-0 *)
+goal WP_parameter_def :
+  in_range2(sub(failsafe__model__time_below_threshold__result4, of_int(1)))

@@ -120,6 +120,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool) (temp___skip_constant_37 Bool) (temp___do_toplevel_38 Bool)) Bool (=> (or (= temp___is_init_36 true) (<= 1 2147483647)) (in_range2 temp___expr_39)))
 (declare-const x Int)
+(declare-const us Bool)
 (assert (dynamic_invariant1 i7b true false false))
 (assert (<= (to_rep (first (rt i7b))) x))
 (assert (<= x (to_rep (last (rt i7b)))))

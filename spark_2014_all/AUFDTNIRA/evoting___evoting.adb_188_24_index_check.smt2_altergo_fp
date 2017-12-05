@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -791,140 +791,345 @@ type t55b__ref = { t55b__content : t55b
 
 function t55b__ref___projection(a: t55b__ref) : t55b = (a).t55b__content
 
-logic temp___String_Literal_685 : unit -> (int,character) farray
+logic temp___String_Literal_679 : unit -> (int,character) farray
 
-axiom temp___String_Literal_685__def_axiom :
-  ((((((((((((((((to_rep((temp___String_Literal_685(void)[1])) = 42) and
-  (to_rep((temp___String_Literal_685(void)[2])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[3])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[4])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_685(void)[6])) = 86)) and
-  (to_rep((temp___String_Literal_685(void)[7])) = 111)) and
-  (to_rep((temp___String_Literal_685(void)[8])) = 116)) and
-  (to_rep((temp___String_Literal_685(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_685(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_685(void)[11])) = 103)) and
-  (to_rep((temp___String_Literal_685(void)[12])) = 32)) and
-  (to_rep((temp___String_Literal_685(void)[13])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[14])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[15])) = 42)) and
-  (to_rep((temp___String_Literal_685(void)[16])) = 42))
+axiom temp___String_Literal_679__def_axiom :
+  ((((((((((((((((to_rep((temp___String_Literal_679(void)[1])) = 42) and
+  (to_rep((temp___String_Literal_679(void)[2])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[3])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[4])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_679(void)[6])) = 86)) and
+  (to_rep((temp___String_Literal_679(void)[7])) = 111)) and
+  (to_rep((temp___String_Literal_679(void)[8])) = 116)) and
+  (to_rep((temp___String_Literal_679(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_679(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_679(void)[11])) = 103)) and
+  (to_rep((temp___String_Literal_679(void)[12])) = 32)) and
+  (to_rep((temp___String_Literal_679(void)[13])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[14])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[15])) = 42)) and
+  (to_rep((temp___String_Literal_679(void)[16])) = 42))
 
-logic temp___String_Literal_686 : unit -> (int,character) farray
+logic temp___String_Literal_680 : unit -> (int,character) farray
 
-axiom temp___String_Literal_686__def_axiom :
-  (((((((((((((((((((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_686(void)[1])) = 68) and
-  (to_rep((temp___String_Literal_686(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[3])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[4])) = 121)) and
-  (to_rep((temp___String_Literal_686(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[6])) = 117)) and
-  (to_rep((temp___String_Literal_686(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[8])) = 119)) and
-  (to_rep((temp___String_Literal_686(void)[9])) = 97)) and
-  (to_rep((temp___String_Literal_686(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_686(void)[11])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[12])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[13])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[14])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[15])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[16])) = 118)) and
-  (to_rep((temp___String_Literal_686(void)[17])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[18])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[19])) = 101)) and
-  (to_rep((temp___String_Literal_686(void)[20])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[21])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[22])) = 114)) and
-  (to_rep((temp___String_Literal_686(void)[23])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[24])) = 115)) and
-  (to_rep((temp___String_Literal_686(void)[25])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[26])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[27])) = 112)) and
-  (to_rep((temp___String_Literal_686(void)[28])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[29])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[30])) = 104)) and
-  (to_rep((temp___String_Literal_686(void)[31])) = 101)) and
-  (to_rep((temp___String_Literal_686(void)[32])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[33])) = 118)) and
-  (to_rep((temp___String_Literal_686(void)[34])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[35])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[36])) = 101)) and
-  (to_rep((temp___String_Literal_686(void)[37])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[38])) = 40)) and
-  (to_rep((temp___String_Literal_686(void)[39])) = 118)) and
-  (to_rep((temp___String_Literal_686(void)[40])) = 47)) and
-  (to_rep((temp___String_Literal_686(void)[41])) = 39)) and
-  (to_rep((temp___String_Literal_686(void)[42])) = 101)) and
-  (to_rep((temp___String_Literal_686(void)[43])) = 110)) and
-  (to_rep((temp___String_Literal_686(void)[44])) = 100)) and
-  (to_rep((temp___String_Literal_686(void)[45])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[46])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[47])) = 102)) and
-  (to_rep((temp___String_Literal_686(void)[48])) = 32)) and
-  (to_rep((temp___String_Literal_686(void)[49])) = 118)) and
-  (to_rep((temp___String_Literal_686(void)[50])) = 111)) and
-  (to_rep((temp___String_Literal_686(void)[51])) = 116)) and
-  (to_rep((temp___String_Literal_686(void)[52])) = 101)) and
-  (to_rep((temp___String_Literal_686(void)[53])) = 39)) and
-  (to_rep((temp___String_Literal_686(void)[54])) = 41)) and
-  (to_rep((temp___String_Literal_686(void)[55])) = 63))
+axiom temp___String_Literal_680__def_axiom :
+  (((((((((((((((((((((((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_680(void)[1])) = 68) and
+  (to_rep((temp___String_Literal_680(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[3])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[4])) = 121)) and
+  (to_rep((temp___String_Literal_680(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[6])) = 117)) and
+  (to_rep((temp___String_Literal_680(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[8])) = 119)) and
+  (to_rep((temp___String_Literal_680(void)[9])) = 97)) and
+  (to_rep((temp___String_Literal_680(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_680(void)[11])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[12])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[13])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[14])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[15])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[16])) = 118)) and
+  (to_rep((temp___String_Literal_680(void)[17])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[18])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[19])) = 101)) and
+  (to_rep((temp___String_Literal_680(void)[20])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[21])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[22])) = 114)) and
+  (to_rep((temp___String_Literal_680(void)[23])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[24])) = 115)) and
+  (to_rep((temp___String_Literal_680(void)[25])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[26])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[27])) = 112)) and
+  (to_rep((temp___String_Literal_680(void)[28])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[29])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[30])) = 104)) and
+  (to_rep((temp___String_Literal_680(void)[31])) = 101)) and
+  (to_rep((temp___String_Literal_680(void)[32])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[33])) = 118)) and
+  (to_rep((temp___String_Literal_680(void)[34])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[35])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[36])) = 101)) and
+  (to_rep((temp___String_Literal_680(void)[37])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[38])) = 40)) and
+  (to_rep((temp___String_Literal_680(void)[39])) = 118)) and
+  (to_rep((temp___String_Literal_680(void)[40])) = 47)) and
+  (to_rep((temp___String_Literal_680(void)[41])) = 39)) and
+  (to_rep((temp___String_Literal_680(void)[42])) = 101)) and
+  (to_rep((temp___String_Literal_680(void)[43])) = 110)) and
+  (to_rep((temp___String_Literal_680(void)[44])) = 100)) and
+  (to_rep((temp___String_Literal_680(void)[45])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[46])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[47])) = 102)) and
+  (to_rep((temp___String_Literal_680(void)[48])) = 32)) and
+  (to_rep((temp___String_Literal_680(void)[49])) = 118)) and
+  (to_rep((temp___String_Literal_680(void)[50])) = 111)) and
+  (to_rep((temp___String_Literal_680(void)[51])) = 116)) and
+  (to_rep((temp___String_Literal_680(void)[52])) = 101)) and
+  (to_rep((temp___String_Literal_680(void)[53])) = 39)) and
+  (to_rep((temp___String_Literal_680(void)[54])) = 41)) and
+  (to_rep((temp___String_Literal_680(void)[55])) = 63))
 
-logic temp___String_Literal_690 : unit -> (int,character) farray
+logic temp___String_Literal_684 : unit -> (int,character) farray
 
-axiom temp___String_Literal_690__def_axiom :
-  (((((((((((to_rep((temp___String_Literal_690(void)[1])) = 101) and
-  (to_rep((temp___String_Literal_690(void)[2])) = 110)) and
-  (to_rep((temp___String_Literal_690(void)[3])) = 100)) and
-  (to_rep((temp___String_Literal_690(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_690(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_690(void)[6])) = 102)) and
-  (to_rep((temp___String_Literal_690(void)[7])) = 32)) and
-  (to_rep((temp___String_Literal_690(void)[8])) = 118)) and
-  (to_rep((temp___String_Literal_690(void)[9])) = 111)) and
-  (to_rep((temp___String_Literal_690(void)[10])) = 116)) and
-  (to_rep((temp___String_Literal_690(void)[11])) = 101))
+axiom temp___String_Literal_684__def_axiom :
+  (((((((((((to_rep((temp___String_Literal_684(void)[1])) = 101) and
+  (to_rep((temp___String_Literal_684(void)[2])) = 110)) and
+  (to_rep((temp___String_Literal_684(void)[3])) = 100)) and
+  (to_rep((temp___String_Literal_684(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_684(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_684(void)[6])) = 102)) and
+  (to_rep((temp___String_Literal_684(void)[7])) = 32)) and
+  (to_rep((temp___String_Literal_684(void)[8])) = 118)) and
+  (to_rep((temp___String_Literal_684(void)[9])) = 111)) and
+  (to_rep((temp___String_Literal_684(void)[10])) = 116)) and
+  (to_rep((temp___String_Literal_684(void)[11])) = 101))
 
-logic temp___String_Literal_693 : unit -> (int,character) farray
+logic temp___String_Literal_687 : unit -> (int,character) farray
 
-axiom temp___String_Literal_693__def_axiom :
-  (((((((((((((to_rep((temp___String_Literal_693(void)[1])) = 86) and
-  (to_rep((temp___String_Literal_693(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_693(void)[3])) = 116)) and
-  (to_rep((temp___String_Literal_693(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_693(void)[5])) = 32)) and
-  (to_rep((temp___String_Literal_693(void)[6])) = 115)) and
-  (to_rep((temp___String_Literal_693(void)[7])) = 116)) and
-  (to_rep((temp___String_Literal_693(void)[8])) = 111)) and
-  (to_rep((temp___String_Literal_693(void)[9])) = 114)) and
-  (to_rep((temp___String_Literal_693(void)[10])) = 101)) and
-  (to_rep((temp___String_Literal_693(void)[11])) = 100)) and
-  (to_rep((temp___String_Literal_693(void)[12])) = 58)) and
-  (to_rep((temp___String_Literal_693(void)[13])) = 32))
+axiom temp___String_Literal_687__def_axiom :
+  (((((((((((((to_rep((temp___String_Literal_687(void)[1])) = 86) and
+  (to_rep((temp___String_Literal_687(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_687(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_687(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_687(void)[5])) = 32)) and
+  (to_rep((temp___String_Literal_687(void)[6])) = 115)) and
+  (to_rep((temp___String_Literal_687(void)[7])) = 116)) and
+  (to_rep((temp___String_Literal_687(void)[8])) = 111)) and
+  (to_rep((temp___String_Literal_687(void)[9])) = 114)) and
+  (to_rep((temp___String_Literal_687(void)[10])) = 101)) and
+  (to_rep((temp___String_Literal_687(void)[11])) = 100)) and
+  (to_rep((temp___String_Literal_687(void)[12])) = 58)) and
+  (to_rep((temp___String_Literal_687(void)[13])) = 32))
 
-logic temp___String_Literal_694 : unit -> (int,character) farray
+logic temp___String_Literal_688 : unit -> (int,character) farray
 
-axiom temp___String_Literal_694__def_axiom : true
+axiom temp___String_Literal_688__def_axiom : true
+
+logic counters : (int,counter_range_t) farray
+
+logic number_of_votes : int
+
+logic buf : (int,character) farray
+
+logic last2 : int
+
+logic chosen_vote : int
+
+logic o : int
+
+logic temp___693 : (int,counter_range_t) farray
+
+logic temp___692 : (int,character) farray
+
+logic temp___691 : int
+
+logic temp___690 : int
+
+logic temp___689 : int
+
+logic i : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : int
+
+logic o4 : counter_range_t
+
+logic o5 : (int,counter_range_t) farray
+
+logic o6 : int
+
+logic temp___685 : (int,character) farray
+
+logic o7 : int
+
+logic o8 : bool
+
+logic i1 : int
+
+logic counters1 : (int,counter_range_t) farray
+
+logic number_of_votes1 : int
+
+logic buf1 : (int,character) farray
+
+logic last3 : int
+
+logic chosen_vote1 : int
+
+logic result : bool
+
+logic counters2 : (int,counter_range_t) farray
+
+logic number_of_votes2 : int
+
+logic buf2 : (int,character) farray
+
+logic last4 : int
+
+logic chosen_vote2 : int
+
+logic last5 : int
+
+logic ada__text_io__get_line__2__item : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic buf3 : (int,character) farray
+
+logic chosen_vote3 : int
+
+logic result2 : (int,counter_range_t) farray
+
+logic counters3 : (int,counter_range_t) farray
+
+logic result3 : int
+
+logic number_of_votes3 : int
+
+logic result4 : bool
+
+logic chosen_vote4 : int
+
+logic chosen_vote5 : int
+
+logic result5 : bool
+
+logic counters4 : (int,counter_range_t) farray
+
+logic number_of_votes4 : int
+
+logic buf4 : (int,character) farray
+
+logic last6 : int
+
+logic chosen_vote6 : int
+
+logic counters5 : (int,counter_range_t) farray
+
+logic number_of_votes5 : int
+
+logic buf5 : (int,character) farray
+
+logic last7 : int
+
+logic chosen_vote7 : int
+
+logic counters6 : (int,counter_range_t) farray
+
+logic number_of_votes6 : int
+
+logic buf6 : (int,character) farray
+
+logic last8 : int
+
+logic chosen_vote8 : int
+
+logic counters7 : (int,counter_range_t) farray
+
+logic number_of_votes7 : int
+
+logic buf7 : (int,character) farray
+
+logic last9 : int
+
+logic chosen_vote9 : int
+
+logic counters8 : (int,counter_range_t) farray
+
+logic number_of_votes8 : int
+
+logic buf8 : (int,character) farray
+
+logic last10 : int
+
+logic chosen_vote10 : int
+
+logic counters9 : (int,counter_range_t) farray
+
+logic number_of_votes9 : int
+
+logic buf9 : (int,character) farray
+
+logic last11 : int
+
+logic chosen_vote11 : int
+
+logic counters10 : (int,counter_range_t) farray
+
+logic number_of_votes10 : int
+
+logic buf10 : (int,character) farray
+
+logic last12 : int
+
+logic chosen_vote12 : int
+
+logic counters11 : (int,counter_range_t) farray
+
+logic number_of_votes11 : int
+
+logic buf11 : (int,character) farray
+
+logic last13 : int
+
+logic chosen_vote13 : int
+
+logic counters12 : (int,counter_range_t) farray
+
+logic number_of_votes12 : int
+
+logic buf12 : (int,character) farray
+
+logic last14 : int
+
+logic chosen_vote14 : int
+
+logic counters13 : (int,counter_range_t) farray
+
+logic number_of_votes13 : int
+
+logic buf13 : (int,character) farray
+
+logic last15 : int
+
+logic chosen_vote15 : int
+
+axiom H : in_range5(program_phase)
+
+axiom H1 : in_range7(last_candidate)
+
+axiom H2 : in_range4(number_of_votes)
+
+axiom H3 : ((program_phase = 1) and
+  ((forall i2:int. (((0 <= i2) and (i2 <= 20)) ->
+   (to_rep2((counters[i2])) = 0))) and (number_of_votes = 0)))
+
+axiom H4 : ((0 <= 2147483647) -> in_range4(last2))
+
+axiom H5 : ((0 <= 20) -> in_range7(chosen_vote))
+
+axiom H6 : ((o = (last_candidate * 20)) and in_range1((last_candidate * 20)))
+
+axiom H7 : (((number_of_votes <  o) -> (result = true)) and
+  ((not (number_of_votes <  o)) -> (result = false)))
+
+axiom H8 : (result = true)
+
+axiom H9 :
+  (forall i2:int. ((((last_candidate + 1) <= i2) and (i2 <= 20)) ->
+  (to_rep2((counters2[i2])) = 0)))
+
+axiom H10 : (((in_range4(number_of_votes2) and ((0 <= 2147483647) ->
+  in_range4(last4))) and ((0 <= 20) -> in_range7(chosen_vote2))) and
+  (number_of_votes2 <  (last_candidate * 20)))
+
+axiom H11 : ((last_candidate + 1) <= i)
+
+axiom H12 : (i <= 20)
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall counters:(int,counter_range_t) farray. forall number_of_votes:int.
-  forall last2:int. forall chosen_vote:int. forall o:int. forall i:int.
-  forall result:bool. forall counters1:(int,counter_range_t) farray.
-  forall number_of_votes1:int. forall last3:int. forall chosen_vote1:int.
-  (in_range5(program_phase) -> (in_range7(last_candidate) ->
-  (in_range4(number_of_votes) -> (((program_phase = 1) and
-  ((forall i1:int. (((0 <= i1) and (i1 <= 20)) ->
-   (to_rep2((counters[i1])) = 0))) and
-  (number_of_votes = 0))) -> (((0 <= 2147483647) -> in_range4(last2)) ->
-  (((0 <= 20) -> in_range7(chosen_vote)) ->
-  ((((o = (last_candidate * 20)) and in_range1((last_candidate * 20))) and
-  (((number_of_votes <  o) and (result = true)) or
-  ((not (number_of_votes <  o)) and (result = false)))) ->
-  ((result = true) ->
-  ((forall i1:int. ((((last_candidate + 1) <= i1) and (i1 <= 20)) ->
-   (to_rep2((counters1[i1])) = 0))) ->
-  ((((in_range4(number_of_votes1) and ((0 <= 2147483647) ->
-  in_range4(last3))) and ((0 <= 20) -> in_range7(chosen_vote1))) and
-  (number_of_votes1 <  (last_candidate * 20))) ->
-  ((((last_candidate + 1) <= i) and (i <= 20)) -> (0 <= i)))))))))))))
+goal WP_parameter_def : (0 <= i)

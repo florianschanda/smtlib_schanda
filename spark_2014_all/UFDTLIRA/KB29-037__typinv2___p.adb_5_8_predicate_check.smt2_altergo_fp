@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -273,21 +273,64 @@ logic i1s1 : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v__split_fields : natural
+
+logic v__split_fields1 : bool
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : bool
+
+logic temp___144 : natural
+
+logic temp___1441 : bool
+
+logic temp___145 : natural
+
+logic temp___1451 : bool
+
+logic result : natural
+
+logic result1 : bool
+
+logic v__split_fields2 : natural
+
+logic v__split_fields3 : bool
+
+axiom H : ((i1s1 = true) <-> (3 <  to_rep(i1s)))
+
+axiom H1 : ((v__split_fields1 = true) <-> (3 <  to_rep(v__split_fields)))
+
+axiom H2 : ((o = (to_rep(v__split_fields) + 1)) and
+  in_range1((to_rep(v__split_fields) + 1)))
+
+axiom H3 : (to_rep(o1) = o)
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (v__split_fields1 = o3)
+
+axiom H6 : (temp___144 = o2)
+
+axiom H7 : (temp___1441 = o3)
+
+axiom H8 : ((temp___1441 = true) <-> (3 <  to_rep(temp___144)))
+
+axiom H9 : ((temp___145 = temp___144) and (temp___1451 = temp___1441))
+
+axiom H10 : (result = v__split_fields)
+
+axiom H11 : (result1 = v__split_fields1)
+
+axiom H12 : (temp___145 = v__split_fields2)
+
+axiom H13 : (temp___1451 = v__split_fields3)
+
+axiom H14 : (of_int(1) = true)
+
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:natural. forall v__split_fields1:bool.
-  forall o:int. forall o1:natural. forall o2:natural. forall o3:bool.
-  forall temp___144:natural. forall temp___1441:bool.
-  forall temp___145:natural. forall temp___1451:bool. forall result:natural.
-  forall result1:bool. forall v__split_fields2:natural.
-  forall v__split_fields3:bool. (((i1s1 = true) <-> (3 <  to_rep(i1s))) ->
-  (((v__split_fields1 = true) <-> (3 <  to_rep(v__split_fields))) ->
-  ((((((((o = (to_rep(v__split_fields) + 1)) and
-  in_range1((to_rep(v__split_fields) + 1))) and (to_rep(o1) = o)) and
-  ((o1 = o2) and (v__split_fields1 = o3))) and ((temp___144 = o2) and
-  (temp___1441 = o3))) and (((temp___1441 = true) <->
-  (3 <  to_rep(temp___144))) and ((temp___145 = temp___144) and
-  (temp___1451 = temp___1441)))) and (((result = v__split_fields) and
-  (result1 = v__split_fields1)) and ((temp___145 = v__split_fields2) and
-  (temp___1451 = v__split_fields3)))) -> ((of_int(1) = true) ->
-  (3 <  to_rep(v__split_fields2)))))))
+goal WP_parameter_def : (3 <  to_rep(v__split_fields2))

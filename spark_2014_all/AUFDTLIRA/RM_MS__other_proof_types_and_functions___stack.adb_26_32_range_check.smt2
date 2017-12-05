@@ -145,6 +145,7 @@
 (define-fun dynamic_invariant3 ((temp___expr_162 Int) (temp___is_init_159 Bool) (temp___skip_constant_160 Bool) (temp___do_toplevel_161 Bool)) Bool (=> (or (= temp___is_init_159 true) (<= 1 100)) (in_range4 temp___expr_162)))
 (declare-const my_stack__split_fields (Array Int integer))
 (declare-const my_stack__split_fields1 pointer_range)
+(declare-const o Int)
 (assert (in_range2 n))
 (assert (and (<= 1 n) (<= n (count (mk___split_fields my_stack__split_fields my_stack__split_fields1)))))
 (assert (not (in_range4 n)))

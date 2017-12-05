@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -442,23 +442,23 @@ logic bool_eq5 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq5(a, b)].
-  ((((((to_rep(((a).us_split_discrs1).rec__union_init__union_test__discr) = to_rep(((b).us_split_discrs1).rec__union_init__union_test__discr)) and
-  (union_init__union_test__field1__pred(a) ->
-  (to_rep(((a).us_split_fields3).rec__union_init__union_test__field1) = to_rep(((b).us_split_fields3).rec__union_init__union_test__field1)))) and
-  (union_init__union_test__field2__pred(a) ->
-  (bool_eq4(((a).us_split_fields3).rec__union_init__union_test__field2,
-  ((b).us_split_fields3).rec__union_init__union_test__field2) = true))) and
-  (union_init__union_test__field3__pred(a) ->
-  (to_rep1(((a).us_split_fields3).rec__union_init__union_test__field3) = to_rep1(((b).us_split_fields3).rec__union_init__union_test__field3)))) ->
-  (bool_eq5(a, b) = true)) and
-  ((not ((((to_rep(((a).us_split_discrs1).rec__union_init__union_test__discr) = to_rep(((b).us_split_discrs1).rec__union_init__union_test__discr)) and
-  (union_init__union_test__field1__pred(a) ->
-  (to_rep(((a).us_split_fields3).rec__union_init__union_test__field1) = to_rep(((b).us_split_fields3).rec__union_init__union_test__field1)))) and
+  ((((to_rep(((a).us_split_discrs1).rec__union_init__union_test__discr) = to_rep(((b).us_split_discrs1).rec__union_init__union_test__discr)) and
+  (((union_init__union_test__field1__pred(a) ->
+  (to_rep(((a).us_split_fields3).rec__union_init__union_test__field1) = to_rep(((b).us_split_fields3).rec__union_init__union_test__field1))) and
   (union_init__union_test__field2__pred(a) ->
   (bool_eq4(((a).us_split_fields3).rec__union_init__union_test__field2,
   ((b).us_split_fields3).rec__union_init__union_test__field2) = true))) and
   (union_init__union_test__field3__pred(a) ->
   (to_rep1(((a).us_split_fields3).rec__union_init__union_test__field3) = to_rep1(((b).us_split_fields3).rec__union_init__union_test__field3))))) ->
+  (bool_eq5(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__union_init__union_test__discr) = to_rep(((b).us_split_discrs1).rec__union_init__union_test__discr)) and
+  (((union_init__union_test__field1__pred(a) ->
+  (to_rep(((a).us_split_fields3).rec__union_init__union_test__field1) = to_rep(((b).us_split_fields3).rec__union_init__union_test__field1))) and
+  (union_init__union_test__field2__pred(a) ->
+  (bool_eq4(((a).us_split_fields3).rec__union_init__union_test__field2,
+  ((b).us_split_fields3).rec__union_init__union_test__field2) = true))) and
+  (union_init__union_test__field3__pred(a) ->
+  (to_rep1(((a).us_split_fields3).rec__union_init__union_test__field3) = to_rep1(((b).us_split_fields3).rec__union_init__union_test__field3)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size2 : int
@@ -706,16 +706,49 @@ type t3b__ref = { t3b__content : us_rep1
 
 function t3b__ref___projection(a: t3b__ref) : us_rep1 = (a).t3b__content
 
+logic test__split_discrs : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : (int,integer) farray
+
+logic o3 : integer
+
+logic temp___166 : integer
+
+logic temp___1661 : integer
+
+logic temp___1662 : integer
+
+logic temp___1663 : (int,integer) farray
+
+logic temp___1664 : natural
+
+logic temp___1665 : bool
+
+axiom H : (to_rep(test__split_discrs) = r2b)
+
+axiom H1 : in_range(r2b)
+
+axiom H2 : (to_rep(o) = 1)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (temp___166 = o3)
+
+axiom H5 : (dummy = temp___1661)
+
+axiom H6 : (o1 = temp___1662)
+
+axiom H7 : (o2 = temp___1663)
+
+axiom H8 : (dummy1 = temp___1664)
+
+axiom H9 : (true = temp___1665)
+
+axiom H10 : (test__attr__constrained = true)
+
  (* File "union_init.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall test__split_discrs:integer. forall o:integer. forall o1:integer.
-  forall o2:(int,integer) farray. forall o3:integer.
-  forall temp___166:integer. forall temp___1661:integer.
-  forall temp___1662:integer. forall temp___1663:(int,integer) farray.
-  forall temp___1664:natural. forall temp___1665:bool.
-  (((to_rep(test__split_discrs) = r2b) and in_range(r2b)) ->
-  ((((to_rep(o) = 1) and (o = o3)) and ((temp___166 = o3) and
-  (((dummy = temp___1661) and (((o1 = temp___1662) and
-  (o2 = temp___1663)) and (dummy1 = temp___1664))) and
-  (true = temp___1665)))) -> ((test__attr__constrained = true) ->
-  (temp___166 = test__split_discrs)))))
+goal WP_parameter_def : (temp___166 = test__split_discrs)

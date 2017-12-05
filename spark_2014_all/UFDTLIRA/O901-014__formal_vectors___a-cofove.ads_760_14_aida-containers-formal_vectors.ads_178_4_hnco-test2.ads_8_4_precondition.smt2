@@ -181,6 +181,7 @@
 (declare-const o us_rep1)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Bool)
 (declare-const result Bool)
 (assert (in_range3 item))
 (assert (in_range2 index))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -443,19 +443,60 @@ type t9b__ref = { t9b__content : us_t
 
 function t9b__ref___projection(a: t9b__ref) : us_t = (a).t9b__content
 
- (* File "foo.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall new_str:(int,character) farray.
-  forall new_sub:(int,character) farray. forall pos:int.
-  forall o:(int,character) farray. forall temp___157:(int,character) farray.
-  forall temp___1571:t. forall o1:bool. forall result:int. forall pos1:int.
-  forall result1:bool. forall pos2:int. (((result = pos) and (pos1 = 1)) ->
-  (in_range1(pos1) -> (((((((pos1 <= 5) -> (((1 <= pos1) and (pos1 <= 5)) and
-  ((1 <= 5) and (5 <= 5)))) and (o = new_str)) and ((o = temp___157) and
-  (mk(pos1, 5) = temp___1571))) and (o1 = bool_eq4(temp___157,
-  to_rep1(first(temp___1571)), to_rep1(last(temp___1571)), new_sub, 1,
-  5))) and (((not (o1 = true)) and (result1 = true)) or ((o1 = true) and
-  (result1 = false)))) -> ((result1 = true) ->
-  (((((-2147483648) <= 2147483647) -> in_range1(pos2)) and
+logic new_str : (int,character) farray
+
+logic new_sub : (int,character) farray
+
+logic pos : int
+
+logic o : (int,character) farray
+
+logic temp___157 : (int,character) farray
+
+logic temp___1571 : t
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : int
+
+logic pos1 : int
+
+logic result1 : bool
+
+logic pos2 : int
+
+logic result2 : int
+
+logic pos3 : int
+
+axiom H : (result = pos)
+
+axiom H1 : (pos1 = 1)
+
+axiom H2 : in_range1(pos1)
+
+axiom H3 : ((pos1 <= 5) -> (((1 <= pos1) and (pos1 <= 5)) and ((1 <= 5) and
+  (5 <= 5))))
+
+axiom H4 : (o = new_str)
+
+axiom H5 : (o = temp___157)
+
+axiom H6 : (mk(pos1, 5) = temp___1571)
+
+axiom H7 : (o1 = bool_eq4(temp___157, to_rep1(first(temp___1571)),
+  to_rep1(last(temp___1571)), new_sub, 1, 5))
+
+axiom H8 : (((not (o1 = true)) -> (result1 = true)) and ((o1 = true) ->
+  (result1 = false)))
+
+axiom H9 : (result1 = true)
+
+axiom H10 : ((((- 2147483648) <= 2147483647) -> in_range1(pos2)) and
   (not (bool_eq4(new_str, to_rep1(first(mk(pos2, 5))), to_rep1(last(mk(pos2,
-  5))), new_sub, 1, 5) = true))) -> in_range1((pos2 + 1))))))))
+  5))), new_sub, 1, 5) = true)))
+
+ (* File "foo.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : in_range1((pos2 + 1))

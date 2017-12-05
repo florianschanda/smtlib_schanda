@@ -296,10 +296,16 @@ axiom pre_rte_ok__def_axiom :
   ((pre_rte_ok(default_init__n) = true) <-> ((1 <= default_init__n) and
   (default_init__n <= 3))))
 
+logic n : int
+
+logic temp___280 : (int,nat) farray
+
+logic us : bool
+
+axiom H :
+  (forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 3)) ->
+  ((to_rep((temp___280[temp___281])) = 0) and
+  (nat_ok(to_rep((temp___280[temp___281]))) = true))))
+
  (* File "default_init.ads", line 63, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall temp___280:(int,nat) farray.
-  ((forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 3)) ->
-   ((to_rep((temp___280[temp___281])) = 0) and
-   (nat_ok(to_rep((temp___280[temp___281]))) = true)))) ->
-  (rte_ok(temp___280, n) = true)))
+goal WP_parameter_def : (rte_ok(temp___280, n) = true)

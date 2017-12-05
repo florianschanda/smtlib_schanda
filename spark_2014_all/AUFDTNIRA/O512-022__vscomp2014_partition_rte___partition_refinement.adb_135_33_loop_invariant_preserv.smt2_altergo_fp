@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -336,7 +336,7 @@ function interval__ref___projection(a: interval__ref) : us_rep =
 
 type tpartition_indexB
 
-predicate in_range4(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range4(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq6 : int, int -> bool
 
@@ -879,7 +879,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 type extended_index
 
-predicate in_range8(x: int) = (((-1) <= x) and (x <= 10001))
+predicate in_range8(x: int) = (((- 1) <= x) and (x <= 10001))
 
 logic bool_eq13 : int, int -> bool
 
@@ -907,11 +907,11 @@ logic oeq__function_guard : bool, us_rep2, us_rep2 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep2. forall b:us_rep2 [user_eq8(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
     (bool_eq5(get(a, n), get(b, n)) = true))) ->
   (user_eq8(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) ->
         (bool_eq5(get(a, n), get(b, n)) = true)))) ->
   (user_eq8(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -957,7 +957,7 @@ function index_type__ref___3__projection(a: index_type__ref) : index_type =
 
 type extended_index1
 
-predicate in_range10(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range10(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq15 : int, int -> bool
 
@@ -983,99 +983,351 @@ function extended_index__ref___4__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  ((((-1) + length1(container)) <= 10000) and in_range7(length1(container))))
+  ((((- 1) + length1(container)) <= 10000) and
+  in_range7(length1(container))))
 
 axiom get__post_axiom : true
 
- (* File "partition_refinement.adb", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:us_main_type. forall p_prime_index:int.
-  forall j:int. forall o:int.
-  forall partition_refinement__make_new_partitions__L_1__R29b__assume:int.
-  forall temp___1212:index. forall temp___12121:index.
-  forall temp___12122:index_count. forall o1:int. forall o2:index_count.
-  forall o3:index. forall o4:index. forall o5:index. forall o6:index_count.
-  forall temp___1213:index. forall temp___12131:index.
-  forall temp___12132:index_count. forall o7:int. forall o8:index.
-  forall o9:index. forall o10:index. forall o11:index_count.
-  forall temp___1215:index. forall temp___12151:index.
-  forall temp___12152:index_count. forall o12:index_count. forall o13:index.
-  forall o14:index. forall o15:index_count. forall temp___1217:index.
-  forall temp___12171:index. forall temp___12172:index_count. forall o16:int.
-  forall o17:int. forall temp___1220:(int,partition_index) farray.
-  forall o18:partition_index. forall o19:(int,partition_index) farray.
-  forall result:int. forall j1:int. forall p__split_fields1:us_main_type.
-  forall f:(int,partition_index) farray. forall p_elem__split_fields:index.
-  forall p_elem__split_fields1:index.
-  forall p_elem__split_fields2:index_count.
-  forall p_prime__split_fields:index. forall p_prime__split_fields1:index.
-  forall p_prime__split_fields2:index_count. forall p_prime_index1:int.
-  forall j2:int. forall i:int. forall rho:us_main_type.
-  forall rho1:us_main_type. forall result1:index. forall result2:index.
-  forall result3:index_count. forall p_elem__split_fields3:index.
-  forall p_elem__split_fields4:index.
-  forall p_elem__split_fields5:index_count. forall result4:index.
-  forall result5:index. forall result6:index_count.
-  forall p_prime__split_fields3:index. forall p_prime__split_fields4:index.
-  forall p_prime__split_fields5:index_count. forall result7:index.
-  forall result8:index. forall result9:index_count.
-  forall p_elem__split_fields6:index. forall p_elem__split_fields7:index.
-  forall p_elem__split_fields8:index_count. forall result10:index.
-  forall result11:index. forall result12:index_count.
-  forall p_elem__split_fields9:index. forall p_elem__split_fields10:index.
-  forall p_elem__split_fields11:index_count.
-  forall partition_refinement__partitions__replace_element__container__fields:us_main_type.
-  forall result13:us_main_type. forall p__split_fields2:us_split_fields2.
-  forall result14:int__ref. forall p_prime_index2:int.
-  forall partition_refinement__partitions__append__2__container__fields:us_split_fields2.
-  forall result15:us_split_fields__ref1.
-  forall p__split_fields3:us_split_fields2. forall result16:int__ref.
-  forall i1:int. forall f1:(int,partition_index) farray. forall i2:int.
-  forall result17:map__ref. forall f2:(int,partition_index) farray.
-  forall f3:map__ref. forall i3:int__ref.
-  forall f4:(int,partition_index) farray. forall i4:int. forall f5:map__ref.
-  forall i5:int__ref. forall f6:(int,partition_index) farray. forall i6:int.
-  forall p__split_fields4:us_split_fields__ref1. forall f7:map__ref.
-  forall p_elem__split_fields12:us_split_fields__ref.
-  forall p_prime__split_fields6:us_split_fields__ref.
-  forall p_prime_index3:int__ref. forall i7:int__ref.
-  forall p__split_fields5:us_split_fields2.
-  forall f8:(int,partition_index) farray.
-  forall p_elem__split_fields13:us_split_fields.
-  forall p_prime__split_fields7:us_split_fields. forall p_prime_index4:int.
-  forall i8:int. forall rho2:us_split_fields2. forall rho3:us_split_fields2.
-  forall result18:int__ref. forall j3:int.
-  forall p__split_fields6:us_split_fields__ref1. forall f9:map__ref.
-  forall p_elem__split_fields14:us_split_fields__ref.
-  forall p_prime__split_fields8:us_split_fields__ref.
-  forall p_prime_index5:int__ref. forall j4:int__ref. forall i9:int__ref.
-  forall p__split_fields7:us_split_fields2.
-  forall f10:(int,partition_index) farray.
-  forall p_elem__split_fields15:us_split_fields.
-  forall p_prime__split_fields9:us_split_fields. forall p_prime_index6:int.
-  forall j5:int. forall i10:int. forall rho4:us_split_fields2.
-  forall rho5:us_split_fields2. (((((of_int(1) = true) and ((2 * length({
-  us_split_discrs1 = {
+logic p__split_fields : us_main_type
+
+logic p_prime_index : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic partition_refinement__make_new_partitions__L_1__R29b__assume : int
+
+logic temp___1212 : index
+
+logic temp___12121 : index
+
+logic temp___12122 : index_count
+
+logic o5 : int
+
+logic o6 : index_count
+
+logic o7 : index
+
+logic o8 : index
+
+logic o9 : index
+
+logic o10 : index_count
+
+logic temp___1213 : index
+
+logic temp___12131 : index
+
+logic temp___12132 : index_count
+
+logic o11 : int
+
+logic o12 : index
+
+logic o13 : index
+
+logic o14 : index
+
+logic o15 : index_count
+
+logic temp___1215 : index
+
+logic temp___12151 : index
+
+logic temp___12152 : index_count
+
+logic o16 : index_count
+
+logic o17 : index
+
+logic o18 : index
+
+logic o19 : index_count
+
+logic temp___1217 : index
+
+logic temp___12171 : index
+
+logic temp___12172 : index_count
+
+logic o20 : int
+
+logic o21 : int
+
+logic temp___1220 : (int,partition_index) farray
+
+logic o22 : partition_index
+
+logic o23 : (int,partition_index) farray
+
+logic result : int
+
+logic j1 : int
+
+logic p__split_fields1 : us_main_type
+
+logic f : (int,partition_index) farray
+
+logic p_elem__split_fields : index
+
+logic p_elem__split_fields1 : index
+
+logic p_elem__split_fields2 : index_count
+
+logic p_prime__split_fields : index
+
+logic p_prime__split_fields1 : index
+
+logic p_prime__split_fields2 : index_count
+
+logic p_prime_index1 : int
+
+logic j2 : int
+
+logic i : int
+
+logic rho : us_main_type
+
+logic rho1 : us_main_type
+
+logic result1 : index
+
+logic result2 : index
+
+logic result3 : index_count
+
+logic p_elem__split_fields3 : index
+
+logic p_elem__split_fields4 : index
+
+logic p_elem__split_fields5 : index_count
+
+logic result4 : index
+
+logic result5 : index
+
+logic result6 : index_count
+
+logic p_prime__split_fields3 : index
+
+logic p_prime__split_fields4 : index
+
+logic p_prime__split_fields5 : index_count
+
+logic result7 : index
+
+logic result8 : index
+
+logic result9 : index_count
+
+logic p_elem__split_fields6 : index
+
+logic p_elem__split_fields7 : index
+
+logic p_elem__split_fields8 : index_count
+
+logic result10 : index
+
+logic result11 : index
+
+logic result12 : index_count
+
+logic p_elem__split_fields9 : index
+
+logic p_elem__split_fields10 : index
+
+logic p_elem__split_fields11 : index_count
+
+logic partition_refinement__partitions__replace_element__container__fields : us_main_type
+
+logic result13 : us_main_type
+
+logic p__split_fields2 : us_main_type
+
+logic result14 : int
+
+logic p_prime_index2 : int
+
+logic partition_refinement__partitions__append__2__container__fields : us_main_type
+
+logic result15 : us_main_type
+
+logic p__split_fields3 : us_main_type
+
+logic result16 : int
+
+logic i1 : int
+
+logic f1 : (int,partition_index) farray
+
+logic i2 : int
+
+logic result17 : (int,partition_index) farray
+
+logic f2 : (int,partition_index) farray
+
+logic f3 : (int,partition_index) farray
+
+logic i3 : int
+
+logic f4 : (int,partition_index) farray
+
+logic i4 : int
+
+logic f5 : (int,partition_index) farray
+
+logic i5 : int
+
+logic f6 : (int,partition_index) farray
+
+logic i6 : int
+
+logic p__split_fields4 : us_main_type
+
+logic f7 : (int,partition_index) farray
+
+logic p_elem__split_fields12 : index
+
+logic p_elem__split_fields13 : index
+
+logic p_elem__split_fields14 : index_count
+
+logic p_prime__split_fields6 : index
+
+logic p_prime__split_fields7 : index
+
+logic p_prime__split_fields8 : index_count
+
+logic p_prime_index3 : int
+
+logic i7 : int
+
+logic p__split_fields5 : us_main_type
+
+logic f8 : (int,partition_index) farray
+
+logic p_elem__split_fields15 : index
+
+logic p_elem__split_fields16 : index
+
+logic p_elem__split_fields17 : index_count
+
+logic p_prime__split_fields9 : index
+
+logic p_prime__split_fields10 : index
+
+logic p_prime__split_fields11 : index_count
+
+logic p_prime_index4 : int
+
+logic i8 : int
+
+logic rho2 : us_main_type
+
+logic rho3 : us_main_type
+
+logic result18 : int
+
+logic j3 : int
+
+logic p__split_fields6 : us_main_type
+
+logic f9 : (int,partition_index) farray
+
+logic p_elem__split_fields18 : index
+
+logic p_elem__split_fields19 : index
+
+logic p_elem__split_fields20 : index_count
+
+logic p_prime__split_fields12 : index
+
+logic p_prime__split_fields13 : index
+
+logic p_prime__split_fields14 : index_count
+
+logic p_prime_index5 : int
+
+logic j4 : int
+
+logic i9 : int
+
+logic p__split_fields7 : us_main_type
+
+logic f10 : (int,partition_index) farray
+
+logic p_elem__split_fields21 : index
+
+logic p_elem__split_fields22 : index
+
+logic p_elem__split_fields23 : index_count
+
+logic p_prime__split_fields15 : index
+
+logic p_prime__split_fields16 : index
+
+logic p_prime__split_fields17 : index_count
+
+logic p_prime_index6 : int
+
+logic j5 : int
+
+logic i10 : int
+
+logic rho4 : us_main_type
+
+logic rho5 : us_main_type
+
+axiom H : ((((of_int(1) = true) -> ((2 * length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) <= to_rep3(p__split_discrs))) or
-  ((not (of_int(1) = true)) and ((2 * length({ us_split_discrs1 = {
+  p__split_fields } })) <= to_rep3(p__split_discrs))) and
+  ((not (of_int(1) = true)) -> ((2 * length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
   p__split_fields } })) <= 10001))) and (length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } }) <= 5000)) -> (((0 <= 10000) ->
-  in_range5(p_prime_index)) -> ((((((o = length({ us_split_discrs1 = {
+  p__split_fields } }) <= 5000))
+
+axiom H1 : ((0 <= 10000) -> in_range5(p_prime_index))
+
+axiom H2 : ((o4 = length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) and (in_range6(o) and (((of_int(1) = true) and
-  (o <= to_rep3(p__split_discrs))) or ((not (of_int(1) = true)) and
-  (o <= 10001))))) and
-  (partition_refinement__make_new_partitions__L_1__R29b__assume = (o - 1))) and
-  (partition_refinement__make_new_partitions__L_1__R29b__assume = r29b)) and
-  in_range4(r29b)) -> (((result = j) and (j1 = 0)) -> (((0 <= j1) and
-  (j1 <= r29b)) -> (((0 <= (length({ us_split_discrs1 = {
+  p__split_fields } })) and (in_range6(o4) and (((of_int(1) = true) ->
+  (o4 <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o4 <= 10001)))))
+
+axiom H3 :
+  (partition_refinement__make_new_partitions__L_1__R29b__assume = (o4 - 1))
+
+axiom H4 :
+  (partition_refinement__make_new_partitions__L_1__R29b__assume = r29b)
+
+axiom H5 : in_range4(r29b)
+
+axiom H6 : (result = j)
+
+axiom H7 : (j1 = 0)
+
+axiom H8 : (0 <= j1)
+
+axiom H9 : (j1 <= r29b)
+
+axiom H10 : true
+
+axiom H11 : ((0 <= (length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
   p__split_fields1 } }) - length({ us_split_discrs1 = {
@@ -1087,9 +1339,12 @@ goal WP_parameter_def :
   p__split_fields1 } }) - length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })) <= j2)) -> (((((((0 <= 10000) ->
-  in_range5(p_prime_index1)) and ((0 <= r29b) -> dynamic_property(0, r29b,
-  j2))) and ((0 <= j2) and (j2 <= r29b))) and (((({ us_split_fields1 = {
+  p__split_fields } })) <= j2))
+
+axiom H12 : ((((0 <= 10000) -> in_range5(p_prime_index1)) and ((0 <= r29b) ->
+  dynamic_property(0, r29b, j2))) and ((0 <= j2) and (j2 <= r29b)))
+
+axiom H13 : (({ us_split_fields1 = {
   rec__partition_refinement__interval__first = temp___1212;
   rec__partition_refinement__interval__last = temp___12121;
   rec__partition_refinement__interval__count = temp___12122 }
@@ -1103,46 +1358,151 @@ goal WP_parameter_def :
   get(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields1 } }), j2)) = true)) and
-  (((result1 = p_elem__split_fields) and
-  ((result2 = p_elem__split_fields1) and
-  (result3 = p_elem__split_fields2))) and
-  ((temp___1212 = p_elem__split_fields3) and
-  ((temp___12121 = p_elem__split_fields4) and
-  (temp___12122 = p_elem__split_fields5))))) and
-  (((((1 <= to_rep(p_elem__split_fields5)) and
-  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) and
-  ((((((to_rep(o2) = 0) and
-  ((((o1 = (to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5))) and
-  in_range3((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)))) and
-  (to_rep1(o3) = o1)) and ((o3 = o4) and ((p_elem__split_fields4 = o5) and
-  (o2 = o6))))) and ((temp___1213 = o4) and ((temp___12131 = o5) and
-  (temp___12132 = o6)))) and (((result4 = p_prime__split_fields) and
+  p__split_fields1 } }), j2)) = true))
+
+axiom H14 : ((result1 = p_elem__split_fields) and
+  ((result2 = p_elem__split_fields1) and (result3 = p_elem__split_fields2)))
+
+axiom H15 : ((p_elem__split_fields3 = temp___1212) and
+  ((p_elem__split_fields4 = temp___12121) and
+  (p_elem__split_fields5 = temp___12122)))
+
+axiom H16 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep(o6) = 0))
+
+axiom H17 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((o5 = (to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5))) and
+  in_range3((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)))))
+
+axiom H18 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep1(o7) = o5))
+
+axiom H19 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (o7 = o8))
+
+axiom H20 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_elem__split_fields4 = o9))
+
+axiom H21 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (o6 = o10))
+
+axiom H22 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___1213 = o8))
+
+axiom H23 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12131 = o9))
+
+axiom H24 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12132 = o10))
+
+axiom H25 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((result4 = p_prime__split_fields) and
   ((result5 = p_prime__split_fields1) and
-  (result6 = p_prime__split_fields2))) and
-  ((temp___1213 = p_prime__split_fields3) and
-  ((temp___12131 = p_prime__split_fields4) and
-  (temp___12132 = p_prime__split_fields5))))) and
-  (((((((o7 = ((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)) - 1)) and
-  in_range3(((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)) - 1))) and
-  (to_rep1(o8) = o7)) and ((p_elem__split_fields3 = o9) and ((o8 = o10) and
-  (p_elem__split_fields5 = o11)))) and ((temp___1215 = o9) and
-  ((temp___12151 = o10) and (temp___12152 = o11)))) and
-  (((result7 = p_elem__split_fields3) and
-  ((result8 = p_elem__split_fields4) and
-  (result9 = p_elem__split_fields5))) and
-  ((temp___1215 = p_elem__split_fields6) and
-  ((temp___12151 = p_elem__split_fields7) and
-  (temp___12152 = p_elem__split_fields8))))) and (((((to_rep(o12) = 0) and
-  ((p_elem__split_fields6 = o13) and ((p_elem__split_fields7 = o14) and
-  (o12 = o15)))) and ((temp___1217 = o13) and ((temp___12171 = o14) and
-  (temp___12172 = o15)))) and (((result10 = p_elem__split_fields6) and
+  (result6 = p_prime__split_fields2))))
+
+axiom H26 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_prime__split_fields3 = temp___1213) and
+  ((p_prime__split_fields4 = temp___12131) and
+  (p_prime__split_fields5 = temp___12132))))
+
+axiom H27 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((o11 = ((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)) - 1)) and
+  in_range3(((to_rep1(p_elem__split_fields3) + to_rep(p_elem__split_fields5)) - 1))))
+
+axiom H28 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep1(o12) = o11))
+
+axiom H29 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_elem__split_fields3 = o13))
+
+axiom H30 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (o12 = o14))
+
+axiom H31 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_elem__split_fields5 = o15))
+
+axiom H32 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___1215 = o13))
+
+axiom H33 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12151 = o14))
+
+axiom H34 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12152 = o15))
+
+axiom H35 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((result7 = p_elem__split_fields3) and
+  ((result8 = p_elem__split_fields4) and (result9 = p_elem__split_fields5))))
+
+axiom H36 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_elem__split_fields6 = temp___1215) and
+  ((p_elem__split_fields7 = temp___12151) and
+  (p_elem__split_fields8 = temp___12152))))
+
+axiom H37 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep(o16) = 0))
+
+axiom H38 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_elem__split_fields6 = o17))
+
+axiom H39 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_elem__split_fields7 = o18))
+
+axiom H40 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (o16 = o19))
+
+axiom H41 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___1217 = o17))
+
+axiom H42 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12171 = o18))
+
+axiom H43 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (temp___12172 = o19))
+
+axiom H44 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((result10 = p_elem__split_fields6) and
   ((result11 = p_elem__split_fields7) and
-  (result12 = p_elem__split_fields8))) and
-  ((temp___1217 = p_elem__split_fields9) and
-  ((temp___12171 = p_elem__split_fields10) and
-  (temp___12172 = p_elem__split_fields11))))) and (((((length({
-  us_split_discrs1 = {
+  (result12 = p_elem__split_fields8))))
+
+axiom H45 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_elem__split_fields9 = temp___1217) and
+  ((p_elem__split_fields10 = temp___12171) and
+  (p_elem__split_fields11 = temp___12172))))
+
+axiom H46 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
   partition_refinement__partitions__replace_element__container__fields }
@@ -1156,7 +1516,7 @@ goal WP_parameter_def :
   j2), { us_split_fields1 = { rec__partition_refinement__interval__first =
   p_elem__split_fields9; rec__partition_refinement__interval__last =
   p_elem__split_fields10; rec__partition_refinement__interval__count =
-  p_elem__split_fields11 } }) = true)) and ((bool_eq1(length1(model__({
+  p_elem__split_fields11 } }) = true)) and (((bool_eq1(length1(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
@@ -1164,8 +1524,8 @@ goal WP_parameter_def :
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
   partition_refinement__partitions__replace_element__container__fields }
-  }))) = true) and
-  (forall i11:int. (((0 <= i11) and (i11 <= ((-1) + length1(model__({
+  }))) = true) ->
+  (forall i11:int. (((0 <= i11) and (i11 <= ((- 1) + length1(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
@@ -1177,132 +1537,384 @@ goal WP_parameter_def :
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
   partition_refinement__partitions__replace_element__container__fields } }),
-  i11)) = true)))))) and ((result13 = p__split_fields1) and
-  (p__split_fields2 = { rec__partition_refinement__partitions__vector =
-  partition_refinement__partitions__replace_element__container__fields
-  }))) and (((((o16 = length({ us_split_discrs1 = {
+  i11)) = true))))) and (not (bool_eq1(length1(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 })) and (in_range6(o16) and
-  (((of_int(1) = true) and (o16 <= to_rep3(p__split_discrs))) or
-  ((not (of_int(1) = true)) and (o16 <= 10001))))) and ((o17 = o16) and
-  in_range5(o16))) and ((result14 = { int__content = p_prime_index1 }) and
-  (p_prime_index2 = o17))) and (((((length({ us_split_discrs1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields1 } })), length1(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 =
-  partition_refinement__partitions__append__2__container__fields
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__replace_element__container__fields }
+  }))) = false)))))
+
+axiom H47 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (result13 = p__split_fields1))
+
+axiom H48 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p__split_fields2 = partition_refinement__partitions__replace_element__container__fields))
+
+axiom H49 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((o20 = length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } })) and (in_range6(o20) and (((of_int(1) = true) ->
+  (o20 <= to_rep3(p__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o20 <= 10001))))))
+
+axiom H50 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((o21 = o20) and in_range5(o20)))
+
+axiom H51 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (result14 = p_prime_index1))
+
+axiom H52 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_prime_index2 = o21))
+
+axiom H53 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__append__2__container__fields }
   }) = (length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 }) + 1)) and
-  ((bool_lt(length1(model__({ us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 })), length1(model__({
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } }) + 1)) and (((bool_lt(length1(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 =
-  partition_refinement__partitions__append__2__container__fields
-  }))) = true) and
-  (forall n:int. (((0 <= n) and (n <= ((-1) + length1(model__({
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } })), length1(model__({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__append__2__container__fields }
+  }))) = true) ->
+  (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(model__({
   us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 }))))) -> (bool_eq5(get(model__({
-  us_split_discrs1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } }))))) -> (bool_eq5(get(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 }), n), get(model__({
-  us_split_discrs1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } }), n), get(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 =
-  partition_refinement__partitions__append__2__container__fields }),
-  n)) = true))))) and (bool_eq5(get(model__({ us_split_discrs1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__append__2__container__fields } }),
+  n)) = true)))) and (not (bool_lt(length1(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 =
-  partition_refinement__partitions__append__2__container__fields }),
-  (((-1) + length1(model__({ us_split_discrs1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } })), length1(model__({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = p__split_fields2 }))) + 1)), { us_split_fields1 = {
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__append__2__container__fields }
+  }))) = false)))) and (bool_eq5(get(model__({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  partition_refinement__partitions__append__2__container__fields } }),
+  (((- 1) + length1(model__({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields2 } }))) + 1)), { us_split_fields1 = {
   rec__partition_refinement__interval__first = p_prime__split_fields3;
   rec__partition_refinement__interval__last = p_prime__split_fields4;
   rec__partition_refinement__interval__count = p_prime__split_fields5 }
-  }) = true)) and ((result15 = { us_split_fields__content1 = p__split_fields2
-  }) and
-  (p__split_fields3 = partition_refinement__partitions__append__2__container__fields))) and
-  (((to_rep1(p_prime__split_fields3) = r31b) and in_range3(r31b)) and
-  (((to_rep1(p_prime__split_fields4) = r32b) and in_range3(r32b)) and
-  (((result16 = { int__content = i }) and (i1 = r31b)) and
-  ((((r31b <= i1) and (i1 <= r32b)) and ((((temp___1220 = f) and
-  (((forall temp___1221:int. (((0 <= temp___1221) and (temp___1221 <= 5)) ->
-    ((i2 <= temp___1221) ->
-    ((f1[temp___1221]) = (temp___1220[temp___1221]))))) and
-  ((r31b <= i2) and (i2 <= r32b))) and ((((to_rep2(o18) = p_prime_index2) and
-  (o19 = (f1[i2 <- o18]))) and ((result17 = { map__content = f1 }) and
-  (f2 = o19))) and (i2 = r32b)))) and (((i3 = { int__content = i2 }) and
-  (f3 = { map__content = f2 })) and ((i4 = i2) and (f4 = f2)))) and
-  (((i5 = i3) and (f5 = f3)) and ((i6 = i4) and (f6 = f4))))) or
-  ((not ((r31b <= i1) and (i1 <= r32b))) and (((i5 = { int__content = i1
-  }) and (f5 = { map__content = f })) and ((i6 = i1) and
-  (f6 = f)))))))))))))) and (((i7 = i5) and ((p_prime_index3 = {
-  int__content = p_prime_index2 }) and ((p_prime__split_fields6 = {
-  us_split_fields__content = { rec__partition_refinement__interval__first =
-  p_prime__split_fields3; rec__partition_refinement__interval__last =
-  p_prime__split_fields4; rec__partition_refinement__interval__count =
-  p_prime__split_fields5 } }) and ((p_elem__split_fields12 = {
-  us_split_fields__content = { rec__partition_refinement__interval__first =
-  p_elem__split_fields9; rec__partition_refinement__interval__last =
-  p_elem__split_fields10; rec__partition_refinement__interval__count =
-  p_elem__split_fields11 } }) and ((f7 = f5) and (p__split_fields4 = {
-  us_split_fields__content1 = p__split_fields3 })))))) and
-  ((rho3 = partition_refinement__partitions__append__2__container__fields) and
-  ((rho2 = { rec__partition_refinement__partitions__vector =
-  partition_refinement__partitions__replace_element__container__fields }) and
-  ((i8 = i6) and ((p_prime_index4 = p_prime_index2) and
-  ((p_prime__split_fields7 = { rec__partition_refinement__interval__first =
-  p_prime__split_fields3; rec__partition_refinement__interval__last =
-  p_prime__split_fields4; rec__partition_refinement__interval__count =
-  p_prime__split_fields5 }) and ((p_elem__split_fields13 = {
-  rec__partition_refinement__interval__first = p_elem__split_fields9;
-  rec__partition_refinement__interval__last = p_elem__split_fields10;
-  rec__partition_refinement__interval__count = p_elem__split_fields11 }) and
-  ((f8 = f6) and (p__split_fields5 = p__split_fields3))))))))))) or
-  ((not ((1 <= to_rep(p_elem__split_fields5)) and
-  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) and
-  (((i7 = { int__content = i }) and ((p_prime_index3 = { int__content =
-  p_prime_index1 }) and ((p_prime__split_fields6 = {
-  us_split_fields__content = { rec__partition_refinement__interval__first =
-  p_prime__split_fields; rec__partition_refinement__interval__last =
-  p_prime__split_fields1; rec__partition_refinement__interval__count =
-  p_prime__split_fields2 } }) and ((p_elem__split_fields12 = {
-  us_split_fields__content = { rec__partition_refinement__interval__first =
-  p_elem__split_fields3; rec__partition_refinement__interval__last =
-  p_elem__split_fields4; rec__partition_refinement__interval__count =
-  p_elem__split_fields5 } }) and ((f7 = { map__content = f }) and
-  (p__split_fields4 = { us_split_fields__content1 = {
-  rec__partition_refinement__partitions__vector = p__split_fields1 }
-  })))))) and ((rho3 = { rec__partition_refinement__partitions__vector = rho1
-  }) and ((rho2 = { rec__partition_refinement__partitions__vector = rho
-  }) and ((i8 = i) and ((p_prime_index4 = p_prime_index1) and
-  ((p_prime__split_fields7 = { rec__partition_refinement__interval__first =
-  p_prime__split_fields; rec__partition_refinement__interval__last =
-  p_prime__split_fields1; rec__partition_refinement__interval__count =
-  p_prime__split_fields2 }) and ((p_elem__split_fields13 = {
-  rec__partition_refinement__interval__first = p_elem__split_fields3;
-  rec__partition_refinement__interval__last = p_elem__split_fields4;
-  rec__partition_refinement__interval__count = p_elem__split_fields5 }) and
-  ((f8 = f) and (p__split_fields5 = {
-  rec__partition_refinement__partitions__vector = p__split_fields1
-  }))))))))))) and ((not (j2 = r29b)) and ((result18 = { int__content = j2
-  }) and (j3 = (j2 + 1))))))) and (((i9 = i7) and ((j4 = { int__content = j3
-  }) and ((p_prime_index5 = p_prime_index3) and
-  ((p_prime__split_fields8 = p_prime__split_fields6) and
-  ((p_elem__split_fields14 = p_elem__split_fields12) and ((f9 = f7) and
-  (p__split_fields6 = p__split_fields4))))))) and ((rho5 = rho3) and
-  ((rho4 = rho2) and ((i10 = i8) and ((j5 = j3) and
-  ((p_prime_index6 = p_prime_index4) and
-  ((p_prime__split_fields9 = p_prime__split_fields7) and
-  ((p_elem__split_fields15 = p_elem__split_fields13) and ((f10 = f8) and
-  (p__split_fields7 = p__split_fields5))))))))))) -> (0 <= (length({
-  us_split_discrs1 = {
-  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
-  }; us_split_fields3 = (p__split_fields6).us_split_fields__content1
-  }) - length({ us_split_discrs1 = {
+  }) = true)))
+
+axiom H54 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (result15 = p__split_fields2))
+
+axiom H55 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p__split_fields3 = partition_refinement__partitions__append__2__container__fields))
+
+axiom H56 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep1(p_prime__split_fields3) = r31b))
+
+axiom H57 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  in_range3(r31b))
+
+axiom H58 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (to_rep1(p_prime__split_fields4) = r32b))
+
+axiom H59 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  in_range3(r32b))
+
+axiom H60 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (result16 = i))
+
+axiom H61 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (i1 = r31b))
+
+axiom H62 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (temp___1220 = f)))
+
+axiom H63 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) ->
+  ((forall temp___1221:int. (((0 <= temp___1221) and (temp___1221 <= 5)) ->
+   ((i2 <= temp___1221) ->
+   ((f1[temp___1221]) = (temp___1220[temp___1221]))))) and ((r31b <= i2) and
+  (i2 <= r32b)))))
+
+axiom H64 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (to_rep2(o22) = p_prime_index2)))
+
+axiom H65 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (o23 = (f1[i2 <- o22]))))
+
+axiom H66 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (result17 = f1)))
+
+axiom H67 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (f2 = o23)))
+
+axiom H68 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (i2 = r32b)))
+
+axiom H69 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (i3 = i2)))
+
+axiom H70 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (f3 = f2)))
+
+axiom H71 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (i4 = i2)))
+
+axiom H72 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (f4 = f2)))
+
+axiom H73 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (i5 = i3)))
+
+axiom H74 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (f5 = f3)))
+
+axiom H75 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (i6 = i4)))
+
+axiom H76 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (((r31b <= i1) and (i1 <= r32b)) -> (f6 = f4)))
+
+axiom H77 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((not ((r31b <= i1) and (i1 <= r32b))) -> (i5 = i1)))
+
+axiom H78 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((not ((r31b <= i1) and (i1 <= r32b))) -> (f5 = f)))
+
+axiom H79 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((not ((r31b <= i1) and (i1 <= r32b))) -> (i6 = i1)))
+
+axiom H80 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((not ((r31b <= i1) and (i1 <= r32b))) -> (f6 = f)))
+
+axiom H81 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (i7 = i5))
+
+axiom H82 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_prime_index3 = p_prime_index2))
+
+axiom H83 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_prime__split_fields6 = p_prime__split_fields3) and
+  ((p_prime__split_fields7 = p_prime__split_fields4) and
+  (p_prime__split_fields8 = p_prime__split_fields5))))
+
+axiom H84 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_elem__split_fields12 = p_elem__split_fields9) and
+  ((p_elem__split_fields13 = p_elem__split_fields10) and
+  (p_elem__split_fields14 = p_elem__split_fields11))))
+
+axiom H85 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (f7 = f5))
+
+axiom H86 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p__split_fields4 = p__split_fields3))
+
+axiom H87 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (rho3 = partition_refinement__partitions__append__2__container__fields))
+
+axiom H88 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (rho2 = partition_refinement__partitions__replace_element__container__fields))
+
+axiom H89 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (i8 = i6))
+
+axiom H90 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p_prime_index4 = p_prime_index2))
+
+axiom H91 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_prime__split_fields9 = p_prime__split_fields3) and
+  ((p_prime__split_fields10 = p_prime__split_fields4) and
+  (p_prime__split_fields11 = p_prime__split_fields5))))
+
+axiom H92 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  ((p_elem__split_fields15 = p_elem__split_fields9) and
+  ((p_elem__split_fields16 = p_elem__split_fields10) and
+  (p_elem__split_fields17 = p_elem__split_fields11))))
+
+axiom H93 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (f8 = f6))
+
+axiom H94 : (((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3)))) ->
+  (p__split_fields5 = p__split_fields3))
+
+axiom H95 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (i7 = i))
+
+axiom H96 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (p_prime_index3 = p_prime_index1))
+
+axiom H97 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  ((p_prime__split_fields6 = p_prime__split_fields) and
+  ((p_prime__split_fields7 = p_prime__split_fields1) and
+  (p_prime__split_fields8 = p_prime__split_fields2))))
+
+axiom H98 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  ((p_elem__split_fields12 = p_elem__split_fields3) and
+  ((p_elem__split_fields13 = p_elem__split_fields4) and
+  (p_elem__split_fields14 = p_elem__split_fields5))))
+
+axiom H99 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (f7 = f))
+
+axiom H100 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (p__split_fields4 = p__split_fields1))
+
+axiom H101 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (rho3 = rho1))
+
+axiom H102 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (rho2 = rho))
+
+axiom H103 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (i8 = i))
+
+axiom H104 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (p_prime_index4 = p_prime_index1))
+
+axiom H105 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  ((p_prime__split_fields9 = p_prime__split_fields) and
+  ((p_prime__split_fields10 = p_prime__split_fields1) and
+  (p_prime__split_fields11 = p_prime__split_fields2))))
+
+axiom H106 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  ((p_elem__split_fields15 = p_elem__split_fields3) and
+  ((p_elem__split_fields16 = p_elem__split_fields4) and
+  (p_elem__split_fields17 = p_elem__split_fields5))))
+
+axiom H107 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (f8 = f))
+
+axiom H108 : ((not ((1 <= to_rep(p_elem__split_fields5)) and
+  (to_rep(p_elem__split_fields5) <= (to_rep1(p_elem__split_fields4) - to_rep1(p_elem__split_fields3))))) ->
+  (p__split_fields5 = p__split_fields1))
+
+axiom H109 : (not (j2 = r29b))
+
+axiom H110 : (result18 = j2)
+
+axiom H111 : (j3 = (j2 + 1))
+
+axiom H112 : (i9 = i7)
+
+axiom H113 : (j4 = j3)
+
+axiom H114 : (p_prime_index5 = p_prime_index3)
+
+axiom H115 : ((p_prime__split_fields12 = p_prime__split_fields6) and
+  ((p_prime__split_fields13 = p_prime__split_fields7) and
+  (p_prime__split_fields14 = p_prime__split_fields8)))
+
+axiom H116 : ((p_elem__split_fields18 = p_elem__split_fields12) and
+  ((p_elem__split_fields19 = p_elem__split_fields13) and
+  (p_elem__split_fields20 = p_elem__split_fields14)))
+
+axiom H117 : (f9 = f7)
+
+axiom H118 : (p__split_fields6 = p__split_fields4)
+
+axiom H119 : (rho5 = rho3)
+
+axiom H120 : (rho4 = rho2)
+
+axiom H121 : (i10 = i8)
+
+axiom H122 : (j5 = j3)
+
+axiom H123 : (p_prime_index6 = p_prime_index4)
+
+axiom H124 : ((p_prime__split_fields15 = p_prime__split_fields9) and
+  ((p_prime__split_fields16 = p_prime__split_fields10) and
+  (p_prime__split_fields17 = p_prime__split_fields11)))
+
+axiom H125 : ((p_elem__split_fields21 = p_elem__split_fields15) and
+  ((p_elem__split_fields22 = p_elem__split_fields16) and
+  (p_elem__split_fields23 = p_elem__split_fields17)))
+
+axiom H126 : (f10 = f8)
+
+axiom H127 : (p__split_fields7 = p__split_fields5)
+
+ (* File "partition_refinement.adb", line 18, characters 0-0 *)
+goal WP_parameter_def : (0 <= (length({ us_split_discrs1 = {
   rec__partition_refinement__partitions__vector__capacity = p__split_discrs
   }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
-  p__split_fields } })))))))))))
+  p__split_fields6 } }) - length({ us_split_discrs1 = {
+  rec__partition_refinement__partitions__vector__capacity = p__split_discrs
+  }; us_split_fields3 = { rec__partition_refinement__partitions__vector =
+  p__split_fields } })))

@@ -99,6 +99,8 @@
 (declare-const position Int)
 (declare-const i Int)
 (declare-const j Int)
+(declare-const found Bool)
+(declare-const prime_search__natural_search__result Int)
 (assert (in_range1 search_item))
 (assert (=> (<= 0 2147483647) (in_range1 prime_index)))
 (assert (= (prime_search__primes__aggregate_def 2 3 5 7 11 13 17 19 23 29) primes))

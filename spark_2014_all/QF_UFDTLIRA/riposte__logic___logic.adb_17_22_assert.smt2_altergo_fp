@@ -85,6 +85,9 @@ logic f : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : ((t = true) and (not (f = true)))
+
+axiom H1 : (f = true)
+
  (* File "logic.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : (((t = true) and (not (f = true))) -> ((f = true) ->
-  (f = true)))
+goal WP_parameter_def : (f = true)

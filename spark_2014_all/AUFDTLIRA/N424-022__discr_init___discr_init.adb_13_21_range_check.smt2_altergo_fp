@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -904,6 +904,31 @@ logic y__split_discrs : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x__split_fields : (int,bool) farray
+
+logic y__split_fields : (int,bool) farray
+
+logic temp___j_197 : int
+
+logic us : int
+
+logic temp___198 : integer
+
+logic temp___1981 : (int,bool) farray
+
+logic temp___201 : (int,bool) farray
+
+logic temp___2011 : t
+
+logic temp___203 : integer
+
+logic temp___2031 : (int,bool) farray
+
+logic temp___206 : (int,bool) farray
+
+logic temp___2061 : t
+
+axiom H : in_range1(temp___j_197)
+
  (* File "discr_init.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___j_197:int. (in_range1(temp___j_197) -> in_range1(10)))
+goal WP_parameter_def : in_range1(10)

@@ -34,6 +34,7 @@
 (assert (=> (= f true) (= f true)))
 (assert (=> (= f true) (= t true)))
 (assert (not (=> (= t true) (= f true))))
-(assert (not (not (=> (= t true) (= t true)))))
+(assert (=> (= t true) (= t true)))
+(assert (not false))
 (check-sat)
 (exit)

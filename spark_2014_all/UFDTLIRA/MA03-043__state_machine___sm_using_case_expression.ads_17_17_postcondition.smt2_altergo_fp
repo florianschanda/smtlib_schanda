@@ -127,10 +127,27 @@ logic new_state : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic state : int
+
+logic result : int
+
+logic state1 : int
+
+logic state2 : int
+
+logic state3 : int
+
+axiom H : ((0 <= 3) -> in_range(state))
+
+axiom H1 : in_range(new_state)
+
+axiom H2 : (result = state)
+
+axiom H3 : (state1 = new_state)
+
+axiom H4 : (state1 = state2)
+
+axiom H5 : (state3 = state1)
+
  (* File "sm_types.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall state:int. forall result:int. forall state1:int. forall state2:int.
-  forall state3:int. ((((0 <= 3) -> in_range(state)) and
-  (in_range(new_state) and (((result = state) and (state1 = new_state)) and
-  ((state1 = state2) and (state3 = state1))))) ->
-  (get_state(state2) = new_state)))
+goal WP_parameter_def : (get_state(state2) = new_state)

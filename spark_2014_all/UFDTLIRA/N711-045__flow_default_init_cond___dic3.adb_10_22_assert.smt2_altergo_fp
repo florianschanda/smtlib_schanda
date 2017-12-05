@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type root_t
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,7 +111,7 @@ logic to_int__function_guard : int, int -> prop
 
 type derived_t
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -145,7 +145,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -181,9 +181,17 @@ axiom to_int__2__post_axiom :
 axiom to_int__2__def_axiom :
   (forall d:int [to_int__2(d)]. (in_range1(d) -> (to_int__2(d) = d)))
 
+logic x : int
+
+logic y : int
+
+axiom H : ((x = 5) and (to_int(x) = 5))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(x))
+
+axiom H2 : ((y = 5) and ((1 <= to_int__2(y)) and (to_int__2(y) <= 10)))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range1(y))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. (((x = 5) and (to_int(x) = 5)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(x)) -> (((y = 5) and
-  ((1 <= to_int__2(y)) and (to_int__2(y) <= 10))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(y)) -> (x = y))))))
+goal WP_parameter_def : (x = y)

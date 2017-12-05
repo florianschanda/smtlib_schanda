@@ -143,10 +143,51 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r : int
+
+logic basic__min_ub__result : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic r2 : int
+
+logic result2 : int
+
+logic basic__min_ub__result1 : int
+
+logic basic__min_ub__result2 : int
+
+logic basic__min_ub__result3 : int
+
+logic r3 : int
+
+logic basic__min_ub__result4 : int
+
+logic r4 : int
+
+logic basic__min_ub__result5 : int
+
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : ((0 <= 255) -> in_range1(r))
+
+axiom H3 : ((a <= b) -> (result = r))
+
+axiom H4 : ((a <= b) -> (r1 = a))
+
+axiom H5 : ((not (a <= b)) -> (result1 = r))
+
+axiom H6 : ((not (a <= b)) -> (r2 = b))
+
+axiom H7 : ((not (a <= b)) -> (r1 = r2))
+
+axiom H8 : (a <= b)
+
  (* File "basic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall result:int. forall r1:int. forall result1:int.
-  forall r2:int. (in_range1(a) -> (in_range1(b) -> (((0 <= 255) ->
-  in_range1(r)) -> ((((a <= b) and ((result = r) and (r1 = a))) or
-  ((not (a <= b)) and (((result1 = r) and (r2 = b)) and (r1 = r2)))) ->
-  ((a <= b) -> (r1 = a)))))))
+goal WP_parameter_def : (r1 = a)

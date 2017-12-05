@@ -216,7 +216,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -397,15 +397,15 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__containers__container__c) = to_rep(((b).us_split_discrs1).rec__containers__container__c)) and
-  (to_rep(((a).us_split_fields1).rec__containers__container__l) = to_rep(((b).us_split_fields1).rec__containers__container__l))) and
-  (bool_eq5(((a).us_split_fields1).rec__containers__container__v,
-  ((b).us_split_fields1).rec__containers__container__v) = true)) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__containers__container__c) = to_rep(((b).us_split_discrs1).rec__containers__container__c)) and
-  (to_rep(((a).us_split_fields1).rec__containers__container__l) = to_rep(((b).us_split_fields1).rec__containers__container__l))) and
+  ((((to_rep(((a).us_split_discrs1).rec__containers__container__c) = to_rep(((b).us_split_discrs1).rec__containers__container__c)) and
+  ((to_rep(((a).us_split_fields1).rec__containers__container__l) = to_rep(((b).us_split_fields1).rec__containers__container__l)) and
   (bool_eq5(((a).us_split_fields1).rec__containers__container__v,
   ((b).us_split_fields1).rec__containers__container__v) = true))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__containers__container__c) = to_rep(((b).us_split_discrs1).rec__containers__container__c)) and
+  ((to_rep(((a).us_split_fields1).rec__containers__container__l) = to_rep(((b).us_split_fields1).rec__containers__container__l)) and
+  (bool_eq5(((a).us_split_fields1).rec__containers__container__v,
+  ((b).us_split_fields1).rec__containers__container__v) = true)))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size1 : int
@@ -523,17 +523,31 @@ axiom length__def_axiom :
   rec__containers__container__l = x1; rec__containers__container__v = {
   elts = x2; rt = x3 } } }) = to_rep(x1))))
 
- (* File "containers.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___150:int. forall temp___149:natural.
-  forall temp___151:natural. forall temp___1511:natural.
-  forall temp___1512:(int,natural) farray. forall temp___1513:t.
-  ((in_range(temp___150) and (temp___150 = to_rep(temp___149))) ->
-  (((dynamic_property1(1, to_rep(temp___151), to_rep1(first(temp___1513)),
-  to_rep1(last(temp___1513))) and ((to_rep1(first(temp___1513)) = 1) and
+logic temp___150 : int
+
+logic temp___149 : natural
+
+logic temp___151 : natural
+
+logic temp___1511 : natural
+
+logic temp___1512 : (int,natural) farray
+
+logic temp___1513 : t
+
+axiom H : in_range(temp___150)
+
+axiom H1 : (temp___150 = to_rep(temp___149))
+
+axiom H2 : ((dynamic_property1(1, to_rep(temp___151),
+  to_rep1(first(temp___1513)), to_rep1(last(temp___1513))) and
+  ((to_rep1(first(temp___1513)) = 1) and
   (to_rep1(last(temp___1513)) = to_rep(temp___151)))) and
-  (to_rep(temp___1511) = 0)) -> (length1({ us_split_discrs1 = {
+  (to_rep(temp___1511) = 0))
+
+ (* File "containers.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (length1({ us_split_discrs1 = {
   rec__containers__container__c = temp___151 }; us_split_fields1 = {
   rec__containers__container__l = temp___1511;
   rec__containers__container__v = { elts = temp___1512; rt = temp___1513 } }
-  }) = 0))))
+  }) = 0)

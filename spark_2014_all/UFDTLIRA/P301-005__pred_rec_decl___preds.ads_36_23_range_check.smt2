@@ -41,6 +41,8 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const x Int)
+(declare-const temp___339 Int)
+(declare-const temp___341 sub_intp_bad)
 (assert (dynamic_invariant i17s true false true))
 (assert (dynamic_invariant x false false true))
 (assert (not (in_range 0)))

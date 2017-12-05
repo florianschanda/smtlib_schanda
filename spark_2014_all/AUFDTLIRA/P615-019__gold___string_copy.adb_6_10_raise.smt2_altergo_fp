@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -373,14 +373,25 @@ logic src1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic result : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(dest__first),
+  to_rep1(dest__last))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(src1)),
+  to_rep1(last(src1)))
+
+axiom H2 : ((to_rep1(dest__first) <= to_rep1(dest__last)) ->
+  (o = ((to_rep1(dest__last) - to_rep1(dest__first)) + 1)))
+
+axiom H3 : ((not (to_rep1(dest__first) <= to_rep1(dest__last))) -> (o = 0))
+
+axiom H4 : (((o <  length({ elts = src; rt = src1 })) -> (result = true)) and
+  ((not (o <  length({ elts = src; rt = src1 }))) -> (result = false)))
+
+axiom H5 : (result = true)
+
  (* File "string_copy.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (dynamic_property(1, 2147483647,
-  to_rep1(dest__first), to_rep1(dest__last)) -> (dynamic_property(1,
-  2147483647, to_rep1(first(src1)), to_rep1(last(src1))) ->
-  (((((to_rep1(dest__first) <= to_rep1(dest__last)) and
-  (o = ((to_rep1(dest__last) - to_rep1(dest__first)) + 1))) or
-  ((not (to_rep1(dest__first) <= to_rep1(dest__last))) and (o = 0))) and
-  (((o <  length({ elts = src; rt = src1 })) and (result = true)) or
-  ((not (o <  length({ elts = src; rt = src1 }))) and (result = false)))) ->
-  (not (result = true))))))
+goal WP_parameter_def : false

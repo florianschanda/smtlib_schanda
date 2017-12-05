@@ -133,18 +133,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -162,7 +162,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -218,7 +218,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type duration
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -355,7 +355,7 @@ function duration__ref___projection(a: duration__ref) : duration =
 
 type tduration_repB
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -382,7 +382,7 @@ function tduration_repB__ref___projection(a: tduration_repB__ref) : tduration_re
 
 type duration_rep
 
-predicate in_range3(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range3(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq3 : int, int -> bool
@@ -415,8 +415,15 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+axiom H : in_range(right)
+
+axiom H1 : ((0 <  right) and ((0 <  to_fixed(left)) and
+  (fxp_div_result_int(to_fixed(left),
+  1) <= comp_div(9223372036854775807,right))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(right) -> (((0 <  right) and
-  ((0 <  to_fixed(left)) and (fxp_div_result_int(to_fixed(left),
-  1) <= comp_div(9223372036854775807,right)))) ->
-  in_range1((to_fixed(left) * right))))
+goal WP_parameter_def : in_range1((to_fixed(left) * right))

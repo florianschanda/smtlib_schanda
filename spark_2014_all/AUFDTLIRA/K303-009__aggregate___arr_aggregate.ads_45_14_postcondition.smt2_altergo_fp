@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -592,24 +592,38 @@ axiom def_axiom14 :
   temp___301)[1]) = of_rep(temp___300)) and ((temp___298(temp___300,
   temp___301)[2]) = of_rep(temp___301))))
 
- (* File "arr_aggregate.ads", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall a:(int,(int,integer) farray) farray.
-  forall a1:(int,(int,integer) farray) farray.
-  forall a2:(int,(int,integer) farray) farray. ((in_range(one) and
-  (in_range(b) and ((one = 1) and ((((b = 1) and
+logic one : int
+
+logic a : (int,(int,integer) farray) farray
+
+logic a1 : (int,(int,integer) farray) farray
+
+logic a2 : (int,(int,integer) farray) farray
+
+axiom H : in_range(one)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (one = 1)
+
+axiom H3 : ((((b = 1) ->
   (forall j:int. (((1 <= j) and (j <= 2)) ->
-  ((to_rep(((a[j])[one])) = one) and (to_rep(((a[j])[2])) = 2))))) or
-  ((not (b = 1)) and (((b = 2) and
+  ((to_rep(((a[j])[one])) = one) and (to_rep(((a[j])[2])) = 2))))) and
+  ((not (b = 1)) -> (((b = 2) ->
   (forall j:int. (((1 <= j) and (j <= 2)) ->
-  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep(((a[j])[k])) = one)))))) or
-  ((not (b = 2)) and (((b = 3) and
+  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep(((a[j])[k])) = one)))))) and
+  ((not (b = 2)) -> (((b = 3) ->
   (forall j:int. (((1 <= j) and (j <= 2)) ->
-  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep(((a[j])[k])) = one)))))) or
-  ((not (b = 3)) and (((b = 4) and
+  (forall k:int. (((1 <= k) and (k <= 2)) -> (to_rep(((a[j])[k])) = one)))))) and
+  ((not (b = 3)) -> (((b = 4) ->
   (forall j:int. (((1 <= j) and (j <= 2)) -> ((to_rep(((a[j])[one])) = 2) and
-  (to_rep(((a[j])[2])) = one))))) or ((not (b = 4)) and
+  (to_rep(((a[j])[2])) = one))))) and ((not (b = 4)) ->
   (forall j:int. (((1 <= j) and (j <= 2)) ->
   ((to_rep(((a[j])[one])) = one) and (to_rep(((a[j])[2])) = 2)))))))))))) and
-  ((a = a1) and (a2 = a)))))) -> ((b = 1) -> (bool_eq4(a1, 1, 2,
-  temp___224(temp___229(one, 2), temp___234(one, 2)), 1, 2) = true))))
+  ((a = a1) and (a2 = a)))
+
+axiom H4 : (b = 1)
+
+ (* File "arr_aggregate.ads", line 41, characters 0-0 *)
+goal WP_parameter_def : (bool_eq4(a1, 1, 2, temp___224(temp___229(one, 2),
+  temp___234(one, 2)), 1, 2) = true)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type time_span
 
-predicate in_range(x: int) = (((-10) <= x) and (x <= 10))
+predicate in_range(x: int) = (((- 10) <= x) and (x <= 10))
 
 logic bool_eq : int, int -> bool
 
@@ -121,6 +121,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom t_zero__def_axiom : (t_zero = 0)
 
+axiom H : in_range(t_zero)
+
+axiom H1 : (0 = t_zero)
+
+axiom H2 : in_range(x)
+
+axiom H3 : (ogt(x, t_zero) = true)
+
+axiom H4 : (not (0 <  x))
+
  (* File "p.ads", line 12, characters 0-0 *)
-goal WP_parameter_def : (in_range(t_zero) -> ((0 = t_zero) -> (in_range(x) ->
-  ((ogt(x, t_zero) = true) -> (0 <  x)))))
+goal WP_parameter_def : false

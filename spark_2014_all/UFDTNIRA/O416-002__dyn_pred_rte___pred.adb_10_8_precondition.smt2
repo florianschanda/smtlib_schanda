@@ -95,6 +95,7 @@
 (assert (= last y))
 (declare-const i5b Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const o Bool)
 (assert (in_range x))
 (assert (in_range y))
 (assert (dynamic_invariant2 i5b true false false))

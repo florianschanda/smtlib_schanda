@@ -196,14 +196,31 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom c__def_axiom : ((c = us_null_ext__) and (c1 = us_tag1))
 
+logic r2__split_fields : us_private
+
+logic rc2__split_fields : us_private
+
+logic result : us_private
+
+logic r2__split_fields1 : us_private
+
+logic result1 : us_private
+
+logic rc2__split_fields1 : us_private
+
+axiom H : ((us_null_ext__ = c) and (us_tag1 = c1))
+
+axiom H1 : (result = r2__split_fields)
+
+axiom H2 : (r2__split_fields1 = c)
+
+axiom H3 : (r2__attr__tag = us_tag)
+
+axiom H4 : (result1 = rc2__split_fields)
+
+axiom H5 : (rc2__split_fields1 = r2__split_fields1)
+
+axiom H6 : (rc2__attr__tag = r2__attr__tag)
+
  (* File "tagged_conv.adb", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r2__split_fields:us_private. forall rc2__split_fields:us_private.
-  forall result:us_private. forall r2__split_fields1:us_private.
-  forall result1:us_private. forall rc2__split_fields1:us_private.
-  (((us_null_ext__ = c) and (us_tag1 = c1)) ->
-  ((((result = r2__split_fields) and (c = r2__split_fields1)) and
-  (r2__attr__tag = us_tag)) -> ((((result1 = rc2__split_fields) and
-  (rc2__split_fields1 = r2__split_fields1)) and
-  (rc2__attr__tag = r2__attr__tag)) -> us_compatible_tags(rc2__attr__tag,
-  us_tag1)))))
+goal WP_parameter_def : us_compatible_tags(rc2__attr__tag, us_tag1)

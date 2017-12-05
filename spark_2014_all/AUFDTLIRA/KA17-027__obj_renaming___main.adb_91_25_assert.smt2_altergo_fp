@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -395,66 +395,192 @@ logic r16b : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
- (* File "main.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cheat:bool. forall arr_obj:(int,us_rep) farray.
-  forall rec_obj__split_fields:natural. forall o:(int,us_rep) farray.
-  forall main__rec_obj__assume:natural. forall main__the_index__assume:int.
-  forall main__R14b__assume:(int,us_rep) farray.
-  forall main__R15b__assume:natural.
-  forall main__R16b__assume:(int,us_rep) farray. forall o1:natural.
-  forall o2:natural. forall o3:natural. forall o4:(int,us_rep) farray.
-  forall o5:int. forall o6:natural. forall o7:natural. forall o8:natural.
-  forall o9:(int,us_rep) farray. forall o10:natural. forall o11:natural.
-  forall temp___167:natural. forall result:bool. forall cheat1:bool.
-  forall result1:(int,us_rep) farray. forall arr_obj1:(int,us_rep) farray.
-  forall result2:natural. forall rec_obj__split_fields1:natural.
-  forall result3:bool. forall cheat2:bool.
-  forall result4:(int,us_rep) farray. forall arr_obj2:(int,us_rep) farray.
-  forall result5:(int,us_rep) farray. forall arr_obj3:(int,us_rep) farray.
-  forall result6:natural. forall rec_obj__split_fields2:natural.
-  (in_range1(choose) -> (((result = cheat) and (cheat1 = of_int(1))) ->
-  ((((o = get_arr(void)) and (bool_eq6(o, 1, 10, temp___157({
+logic cheat : bool
+
+logic arr_obj : (int,us_rep) farray
+
+logic rec_obj__split_fields : natural
+
+logic o : (int,us_rep) farray
+
+logic main__rec_obj__assume : natural
+
+logic main__the_index__assume : int
+
+logic main__R14b__assume : (int,us_rep) farray
+
+logic main__R15b__assume : natural
+
+logic main__R16b__assume : (int,us_rep) farray
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : (int,us_rep) farray
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : (int,us_rep) farray
+
+logic o10 : natural
+
+logic o11 : natural
+
+logic temp___167 : natural
+
+logic result : bool
+
+logic cheat1 : bool
+
+logic result1 : (int,us_rep) farray
+
+logic arr_obj1 : (int,us_rep) farray
+
+logic result2 : natural
+
+logic rec_obj__split_fields1 : natural
+
+logic result3 : bool
+
+logic cheat2 : bool
+
+logic result4 : (int,us_rep) farray
+
+logic arr_obj2 : (int,us_rep) farray
+
+logic result5 : (int,us_rep) farray
+
+logic arr_obj3 : (int,us_rep) farray
+
+logic result6 : natural
+
+logic rec_obj__split_fields2 : natural
+
+axiom H : in_range1(choose)
+
+axiom H1 : (result = cheat)
+
+axiom H2 : (cheat1 = of_int(1))
+
+axiom H3 : ((o = get_arr(void)) and (bool_eq6(o, 1, 10, temp___157({
   us_split_fields1 = { rec__main__rec__comp = of_rep(9012) } }), 1,
-  10) = true)) and ((result1 = arr_obj) and (arr_obj1 = o))) -> (((({
-  us_split_fields1 = { rec__main__rec__comp = main__rec_obj__assume }
-  } = get_rec(void)) and (bool_eq4({ us_split_fields1 = {
-  rec__main__rec__comp = main__rec_obj__assume } }, { us_split_fields1 = {
-  rec__main__rec__comp = of_rep(5678) } }) = true)) and
-  ((result2 = rec_obj__split_fields) and
-  (main__rec_obj__assume = rec_obj__split_fields1))) ->
-  ((((main__the_index__assume = get_index(cheat1)) and
-  (in_range3(main__the_index__assume) and (((cheat1 = true) and
-  (main__the_index__assume = 3)) or ((not (cheat1 = true)) and
-  (main__the_index__assume = 5))))) and
-  (main__the_index__assume = the_index)) -> (in_range3(the_index) ->
-  ((((main__R14b__assume = get_arr(void)) and (bool_eq6(main__R14b__assume,
-  1, 10, temp___157({ us_split_fields1 = { rec__main__rec__comp =
-  of_rep(9012) } }), 1, 10) = true)) and (main__R14b__assume = r14b)) ->
-  (((({ us_split_fields1 = { rec__main__rec__comp = main__R15b__assume }
-  } = get_rec(void)) and (bool_eq4({ us_split_fields1 = {
-  rec__main__rec__comp = main__R15b__assume } }, { us_split_fields1 = {
-  rec__main__rec__comp = of_rep(5678) } }) = true)) and
-  (r15b = main__R15b__assume)) -> ((((main__R16b__assume = get_arr(void)) and
+  10) = true))
+
+axiom H4 : (result1 = arr_obj)
+
+axiom H5 : (arr_obj1 = o)
+
+axiom H6 : (({ us_split_fields1 = { rec__main__rec__comp =
+  main__rec_obj__assume } } = get_rec(void)) and (bool_eq4({
+  us_split_fields1 = { rec__main__rec__comp = main__rec_obj__assume } }, {
+  us_split_fields1 = { rec__main__rec__comp = of_rep(5678) } }) = true))
+
+axiom H7 : (result2 = rec_obj__split_fields)
+
+axiom H8 : (rec_obj__split_fields1 = main__rec_obj__assume)
+
+axiom H9 : ((main__the_index__assume = get_index(cheat1)) and
+  (in_range3(main__the_index__assume) and (((cheat1 = true) ->
+  (main__the_index__assume = 3)) and ((not (cheat1 = true)) ->
+  (main__the_index__assume = 5)))))
+
+axiom H10 : (main__the_index__assume = the_index)
+
+axiom H11 : in_range3(the_index)
+
+axiom H12 : ((main__R14b__assume = get_arr(void)) and
+  (bool_eq6(main__R14b__assume, 1, 10, temp___157({ us_split_fields1 = {
+  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true))
+
+axiom H13 : (main__R14b__assume = r14b)
+
+axiom H14 : (({ us_split_fields1 = { rec__main__rec__comp =
+  main__R15b__assume } } = get_rec(void)) and (bool_eq4({ us_split_fields1 =
+  { rec__main__rec__comp = main__R15b__assume } }, { us_split_fields1 = {
+  rec__main__rec__comp = of_rep(5678) } }) = true))
+
+axiom H15 : (main__R15b__assume = r15b)
+
+axiom H16 : ((main__R16b__assume = get_arr(void)) and
   (bool_eq6(main__R16b__assume, 1, 10, temp___157({ us_split_fields1 = {
-  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true)) and
-  (main__R16b__assume = r16b)) -> (((result3 = cheat1) and
-  (cheat2 = of_int(0))) ->
-  ((to_rep((((arr_obj1[1])).us_split_fields1).rec__main__rec__comp) = 9012) ->
-  ((to_rep((((arr_obj1[the_index])).us_split_fields1).rec__main__rec__comp) = 9012) ->
-  ((to_rep((((r14b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012) ->
-  ((to_rep(rec_obj__split_fields1) = 5678) -> ((to_rep(r15b) = 5678) ->
-  ((to_rep((((r16b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012) ->
-  ((((((to_rep(o1) = 0) and (o1 = o2)) and (o3 = o2)) and
-  (o4 = (arr_obj1[1 <- { us_split_fields1 = { rec__main__rec__comp = o3 }
-  }]))) and ((result4 = arr_obj1) and (arr_obj2 = o4))) ->
-  ((((((((o5 = (to_rep((((arr_obj2[the_index])).us_split_fields1).rec__main__rec__comp) + 1)) and
-  in_range1((to_rep((((arr_obj2[the_index])).us_split_fields1).rec__main__rec__comp) + 1))) and
-  (to_rep(o6) = o5)) and (o6 = o7)) and (o8 = o7)) and
-  (o9 = (arr_obj2[the_index <- { us_split_fields1 = { rec__main__rec__comp =
-  o8 } }]))) and ((result5 = arr_obj2) and (arr_obj3 = o9))) ->
-  (((((to_rep(o10) = 0) and (o10 = o11)) and (temp___167 = o11)) and
-  ((result6 = rec_obj__split_fields1) and
-  (temp___167 = rec_obj__split_fields2))) -> ((not (choose = 0)) ->
-  ((not (choose = 1)) -> ((choose = 2) ->
-  (to_rep(rec_obj__split_fields2) = 5678))))))))))))))))))))))))
+  rec__main__rec__comp = of_rep(9012) } }), 1, 10) = true))
+
+axiom H17 : (main__R16b__assume = r16b)
+
+axiom H18 : (result3 = cheat1)
+
+axiom H19 : (cheat2 = of_int(0))
+
+axiom H20 :
+  (to_rep((((arr_obj1[1])).us_split_fields1).rec__main__rec__comp) = 9012)
+
+axiom H21 :
+  (to_rep((((arr_obj1[the_index])).us_split_fields1).rec__main__rec__comp) = 9012)
+
+axiom H22 :
+  (to_rep((((r14b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012)
+
+axiom H23 : (to_rep(rec_obj__split_fields1) = 5678)
+
+axiom H24 : (to_rep(r15b) = 5678)
+
+axiom H25 :
+  (to_rep((((r16b[the_index])).us_split_fields1).rec__main__rec__comp) = 9012)
+
+axiom H26 : (to_rep(o1) = 0)
+
+axiom H27 : (o1 = o2)
+
+axiom H28 : (o3 = o2)
+
+axiom H29 : (o4 = (arr_obj1[1 <- { us_split_fields1 = {
+  rec__main__rec__comp = o3 } }]))
+
+axiom H30 : (result4 = arr_obj1)
+
+axiom H31 : (arr_obj2 = o4)
+
+axiom H32 :
+  ((o5 = (to_rep((((arr_obj2[the_index])).us_split_fields1).rec__main__rec__comp) + 1)) and
+  in_range1((to_rep((((arr_obj2[the_index])).us_split_fields1).rec__main__rec__comp) + 1)))
+
+axiom H33 : (to_rep(o6) = o5)
+
+axiom H34 : (o6 = o7)
+
+axiom H35 : (o8 = o7)
+
+axiom H36 : (o9 = (arr_obj2[the_index <- { us_split_fields1 = {
+  rec__main__rec__comp = o8 } }]))
+
+axiom H37 : (result5 = arr_obj2)
+
+axiom H38 : (arr_obj3 = o9)
+
+axiom H39 : (to_rep(o10) = 0)
+
+axiom H40 : (o10 = o11)
+
+axiom H41 : (temp___167 = o11)
+
+axiom H42 : (result6 = rec_obj__split_fields1)
+
+axiom H43 : (rec_obj__split_fields2 = temp___167)
+
+axiom H44 : (not (choose = 0))
+
+axiom H45 : (not (choose = 1))
+
+axiom H46 : (choose = 2)
+
+ (* File "main.adb", line 9, characters 0-0 *)
+goal WP_parameter_def : (to_rep(rec_obj__split_fields2) = 5678)

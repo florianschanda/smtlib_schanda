@@ -184,18 +184,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -622,7 +622,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1016,7 +1016,7 @@ axiom range_int_axiom :
 
 type tstream_element_offsetB
 
-predicate in_range5(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range5(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq10 : int, int -> bool
@@ -1058,7 +1058,7 @@ axiom coerce_axiom4 :
 
 type stream_element_offset
 
-predicate in_range6(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range6(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq11 : int, int -> bool
@@ -1485,7 +1485,7 @@ axiom null_string__post_axiom :
   this1; rec__ext__ = this2 }; attr__tag = this3 })) = elements({
   us_split_fields1 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })) and dynamic_property1((-9223372036854775808),
+  this3 })) and dynamic_property1((- 9223372036854775808),
   9223372036854775807, to_rep4(first2((null_string({ us_split_fields1 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__ = this2 }; attr__tag = this3 })).rt1)),
@@ -1499,7 +1499,7 @@ axiom null_string__post__dispatch_axiom :
   forall this2:us_private. forall this3:int [null_string1(attr__tag1, {
   us_split_fields1 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })]. dynamic_property1((-9223372036854775808), 9223372036854775807,
+  this3 })]. dynamic_property1((- 9223372036854775808), 9223372036854775807,
   to_rep4(first2((null_string1(attr__tag1, { us_split_fields1 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__ = this2 }; attr__tag = this3 })).rt1)),
@@ -1549,53 +1549,149 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "a-stream.ads", line 54, characters 0-0 *)
-goal WP_parameter_def :
-  (forall len:int. forall out_stream:(int,stream_element) farray.
-  forall i:int.
-  forall fixed_stream__convert__result:(int,stream_element) farray.
-  forall fixed_stream__convert__result1:t2. forall o:int. forall o1:int.
-  forall o2:int.
-  forall fixed_stream__convert__out_stream__assume:(int,stream_element) farray.
-  forall fixed_stream__convert__out_stream__assume1:t2.
-  forall temp___277:(int,stream_element) farray. forall temp___275:int.
-  forall temp___274:int. forall o3:int. forall o4:character. forall o5:int.
-  forall o6:int. forall o7:t. forall o8:stream_element. forall o9:int.
-  forall o10:(int,stream_element) farray. forall result:int. forall len1:int.
-  forall result1:(int,stream_element) farray.
-  forall out_stream1:(int,stream_element) farray. forall result2:int.
-  forall i1:int. forall out_stream2:(int,stream_element) farray.
-  forall i2:int. forall result3:(int,stream_element) farray.
-  forall out_stream3:(int,stream_element) farray.
-  forall out_stream4:(int,stream_element) farray. forall i3:int.
-  forall out_stream5:(int,stream_element) farray. forall i4:int.
-  forall out_stream6:(int,stream_element) farray. forall i5:int.
-  forall out_stream7:(int,stream_element) farray. forall i6:int.
-  forall result4:(int,stream_element) farray. forall result5:t2.
-  forall fixed_stream__convert__result2:(int,stream_element) farray.
-  forall fixed_stream__convert__result3:t2.
-  forall fixed_stream__convert__result4:(int,stream_element) farray.
-  forall fixed_stream__convert__result5:t2.
-  forall fixed_stream__convert__result6:(int,stream_element) farray.
-  forall fixed_stream__convert__result7:t2. forall len2:int.
-  forall out_stream8:(int,stream_element) farray. forall i7:int.
-  forall fixed_stream__convert__result8:(int,stream_element) farray.
-  forall fixed_stream__convert__result9:t2. forall len3:int.
-  forall out_stream9:(int,stream_element) farray. forall i8:int.
-  forall fixed_stream__convert__result10:(int,stream_element) farray.
-  forall fixed_stream__convert__result11:t2.
-  (forall result6:(int,stream_element) farray. forall result7:t2.
-  ((dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
-  to_rep1(last(in_string1))) and ((((((((o = length({ elts = in_string; rt =
-  in_string1 })) and in_range1(length({ elts = in_string; rt = in_string1
-  }))) and (o1 = min(o, to_rep2(this)))) and ((o2 = o1) and
-  in_range4(o1))) and (({ int__content = result } = { int__content = len
-  }) and (len1 = o2))) and (in_range4(len1) and (((({ elts1 =
-  fixed_stream__convert__out_stream__assume; rt1 =
+logic len : int
+
+logic out_stream : (int,stream_element) farray
+
+logic i : int
+
+logic fixed_stream__convert__result : (int,stream_element) farray
+
+logic fixed_stream__convert__result1 : t2
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic fixed_stream__convert__out_stream__assume : (int,stream_element) farray
+
+logic fixed_stream__convert__out_stream__assume1 : t2
+
+logic temp___277 : (int,stream_element) farray
+
+logic temp___275 : int
+
+logic temp___274 : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : t
+
+logic o8 : stream_element
+
+logic o9 : int
+
+logic o10 : (int,stream_element) farray
+
+logic o11 : int
+
+logic o12 : int
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,stream_element) farray
+
+logic out_stream1 : (int,stream_element) farray
+
+logic result2 : int
+
+logic i1 : int
+
+logic out_stream2 : (int,stream_element) farray
+
+logic i2 : int
+
+logic result3 : (int,stream_element) farray
+
+logic out_stream3 : (int,stream_element) farray
+
+logic out_stream4 : (int,stream_element) farray
+
+logic i3 : int
+
+logic out_stream5 : (int,stream_element) farray
+
+logic i4 : int
+
+logic out_stream6 : (int,stream_element) farray
+
+logic i5 : int
+
+logic out_stream7 : (int,stream_element) farray
+
+logic i6 : int
+
+logic result4 : (int,stream_element) farray
+
+logic result5 : t2
+
+logic fixed_stream__convert__result2 : (int,stream_element) farray
+
+logic fixed_stream__convert__result3 : t2
+
+logic fixed_stream__convert__result4 : (int,stream_element) farray
+
+logic fixed_stream__convert__result5 : t2
+
+logic fixed_stream__convert__result6 : (int,stream_element) farray
+
+logic fixed_stream__convert__result7 : t2
+
+logic len2 : int
+
+logic out_stream8 : (int,stream_element) farray
+
+logic i7 : int
+
+logic fixed_stream__convert__result8 : (int,stream_element) farray
+
+logic fixed_stream__convert__result9 : t2
+
+logic len3 : int
+
+logic out_stream9 : (int,stream_element) farray
+
+logic i8 : int
+
+logic fixed_stream__convert__result10 : (int,stream_element) farray
+
+logic fixed_stream__convert__result11 : t2
+
+logic result6 : (int,stream_element) farray
+
+logic result7 : t2
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(in_string1)),
+  to_rep1(last(in_string1)))
+
+axiom H1 : ((o = length({ elts = in_string; rt = in_string1 })) and
+  in_range1(length({ elts = in_string; rt = in_string1 })))
+
+axiom H2 : (o1 = min(o, to_rep2(this)))
+
+axiom H3 : ((o2 = o1) and in_range4(o1))
+
+axiom H4 : (result = len)
+
+axiom H5 : (len1 = o2)
+
+axiom H6 : in_range4(len1)
+
+axiom H7 : (({ elts1 = fixed_stream__convert__out_stream__assume; rt1 =
   fixed_stream__convert__out_stream__assume1 } = null_string({
   us_split_fields1 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })) and (dynamic_property1((-9223372036854775808),
+  this3 })) and (dynamic_property1((- 9223372036854775808),
   9223372036854775807,
   to_rep4(first2(fixed_stream__convert__out_stream__assume1)),
   to_rep4(last2(fixed_stream__convert__out_stream__assume1))) and (length1({
@@ -1603,58 +1699,139 @@ goal WP_parameter_def :
   fixed_stream__convert__out_stream__assume1 }) = elements({
   us_split_fields1 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__ = this2 }; attr__tag =
-  this3 })))) and ((({ map__content1 = result1 } = { map__content1 =
-  out_stream }) and
-  (out_stream1 = fixed_stream__convert__out_stream__assume)) and
-  ((to_rep4(out_stream__first) = to_rep4(first2(fixed_stream__convert__out_stream__assume1))) and
-  (to_rep4(out_stream__last) = to_rep4(last2(fixed_stream__convert__out_stream__assume1)))))) and
-  (dynamic_property1((-9223372036854775808), 9223372036854775807,
-  to_rep4(out_stream__first), to_rep4(out_stream__last)) and
-  ((((len1 - 1) = r19b) and in_range1(r19b)) and (((({ int__content = result2
-  } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
-  (i1 <= r19b)) and ((((temp___277 = out_stream1) and (((1 <= i2) and
-  (i2 <= r19b)) and
-  (((((((((((temp___274 = (to_rep1(first(in_string1)) + i2)) and
-  in_range1((to_rep1(first(in_string1)) + i2))) and
-  (((to_rep1(first(in_string1)) <= temp___274) and
-  (temp___274 <= to_rep1(last(in_string1)))) and (o3 = temp___274))) and
-  (o4 = (in_string[o3]))) and (o5 = to_rep(o4))) and ((o6 = o5) and
-  uint_in_range(o5))) and (o7 = of_int(o6))) and (to_rep3(o8) = o7)) and
-  ((((temp___275 = (to_rep4(out_stream__first) + i2)) and
-  in_range5((to_rep4(out_stream__first) + i2))) and
-  (((to_rep4(out_stream__first) <= temp___275) and
-  (temp___275 <= to_rep4(out_stream__last))) and (o9 = temp___275))) and
-  (o10 = (out_stream2[o9 <- o8])))) and ((out_stream2 = result3) and
-  (out_stream3 = o10))) and (i2 = r19b)))) and (((i2 = i3) and
-  (out_stream3 = out_stream4)) and ((i4 = i2) and
-  (out_stream5 = out_stream3)))) and ((({ int__content = i5 } = {
-  int__content = i3 }) and ({ map__content1 = out_stream6 } = {
-  map__content1 = out_stream4 })) and ((i6 = i4) and
-  (out_stream7 = out_stream5))))) or ((not ((1 <= i1) and (i1 <= r19b))) and
-  (((i1 = i5) and (out_stream1 = out_stream6)) and ((i6 = i1) and
-  (out_stream7 = out_stream1)))))) and
-  ((((fixed_stream__convert__result4 = fixed_stream__convert__result2) and
-  (fixed_stream__convert__result5 = fixed_stream__convert__result3)) and ({
-  elts1 = fixed_stream__convert__result6; rt1 =
-  fixed_stream__convert__result7 } = { elts1 =
-  fixed_stream__convert__result2; rt1 = fixed_stream__convert__result3
-  })) and (({ stream_element_array__content = { elts1 = result4; rt1 =
-  result5 } } = { stream_element_array__content = { elts1 =
-  fixed_stream__convert__result; rt1 = fixed_stream__convert__result1 }
-  }) and ((out_stream6 = fixed_stream__convert__result2) and
-  (mk1(to_rep4(out_stream__first),
-  to_rep4(out_stream__last)) = fixed_stream__convert__result3)))))))))) and
-  ((({ stream_element_array__content = { elts1 =
-  fixed_stream__convert__result8; rt1 = fixed_stream__convert__result9 }
-  } = { stream_element_array__content = { elts1 =
-  fixed_stream__convert__result4; rt1 = fixed_stream__convert__result5 }
-  }) and ((i7 = i5) and ((out_stream8 = out_stream6) and (len2 = len1)))) and
-  (((fixed_stream__convert__result10 = fixed_stream__convert__result6) and
-  (fixed_stream__convert__result11 = fixed_stream__convert__result7)) and
-  ((i8 = i6) and ((out_stream9 = out_stream7) and (len3 = len1)))))) and
-  ((result6 = fixed_stream__convert__result8) and
-  (result7 = fixed_stream__convert__result9)))) -> (length1({ elts1 =
-  fixed_stream__convert__result8; rt1 = fixed_stream__convert__result9
-  }) = elements({ us_split_fields1 = { rec__fixed_stream__object__width =
-  this; rec__fixed_stream__object__name = this1; rec__ext__ = this2 };
-  attr__tag = this3 })))))
+  this3 }))))
+
+axiom H8 : (result1 = out_stream)
+
+axiom H9 : (out_stream1 = fixed_stream__convert__out_stream__assume)
+
+axiom H10 :
+  (to_rep4(out_stream__first) = to_rep4(first2(fixed_stream__convert__out_stream__assume1)))
+
+axiom H11 :
+  (to_rep4(out_stream__last) = to_rep4(last2(fixed_stream__convert__out_stream__assume1)))
+
+axiom H12 : dynamic_property1((- 9223372036854775808), 9223372036854775807,
+  to_rep4(out_stream__first), to_rep4(out_stream__last))
+
+axiom H13 : ((len1 - 1) = r19b)
+
+axiom H14 : in_range1(r19b)
+
+axiom H15 : (result2 = i)
+
+axiom H16 : (i1 = 1)
+
+axiom H17 : (((1 <= i1) and (i1 <= r19b)) -> (temp___277 = out_stream1))
+
+axiom H18 : (((1 <= i1) and (i1 <= r19b)) -> ((1 <= i2) and (i2 <= r19b)))
+
+axiom H19 : (((1 <= i1) and (i1 <= r19b)) ->
+  ((temp___274 = (to_rep1(first(in_string1)) + i2)) and
+  in_range1((to_rep1(first(in_string1)) + i2))))
+
+axiom H20 : (((1 <= i1) and (i1 <= r19b)) ->
+  ((to_rep1(first(in_string1)) <= temp___274) and
+  (temp___274 <= to_rep1(last(in_string1)))))
+
+axiom H21 : (((1 <= i1) and (i1 <= r19b)) -> (o3 = temp___274))
+
+axiom H22 : (((1 <= i1) and (i1 <= r19b)) -> (o4 = (in_string[o3])))
+
+axiom H23 : (((1 <= i1) and (i1 <= r19b)) -> (o5 = to_rep(o4)))
+
+axiom H24 : (((1 <= i1) and (i1 <= r19b)) -> ((o6 = o5) and
+  uint_in_range(o5)))
+
+axiom H25 : (((1 <= i1) and (i1 <= r19b)) -> (o7 = of_int(o6)))
+
+axiom H26 : (((1 <= i1) and (i1 <= r19b)) -> (to_rep3(o8) = o7))
+
+axiom H27 : (((1 <= i1) and (i1 <= r19b)) ->
+  ((temp___275 = (to_rep4(out_stream__first) + i2)) and
+  in_range5((to_rep4(out_stream__first) + i2))))
+
+axiom H28 : (((1 <= i1) and (i1 <= r19b)) ->
+  ((to_rep4(out_stream__first) <= temp___275) and
+  (temp___275 <= to_rep4(out_stream__last))))
+
+axiom H29 : (((1 <= i1) and (i1 <= r19b)) -> (o9 = temp___275))
+
+axiom H30 : (((1 <= i1) and (i1 <= r19b)) -> (o10 = (out_stream2[o9 <- o8])))
+
+axiom H31 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream2 = result3))
+
+axiom H32 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream3 = o10))
+
+axiom H33 : (((1 <= i1) and (i1 <= r19b)) -> (i2 = r19b))
+
+axiom H34 : (((1 <= i1) and (i1 <= r19b)) -> (i2 = i3))
+
+axiom H35 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream3 = out_stream4))
+
+axiom H36 : (((1 <= i1) and (i1 <= r19b)) -> (i4 = i2))
+
+axiom H37 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream5 = out_stream3))
+
+axiom H38 : (((1 <= i1) and (i1 <= r19b)) -> (i5 = i3))
+
+axiom H39 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream6 = out_stream4))
+
+axiom H40 : (((1 <= i1) and (i1 <= r19b)) -> (i6 = i4))
+
+axiom H41 : (((1 <= i1) and (i1 <= r19b)) -> (out_stream7 = out_stream5))
+
+axiom H42 : ((not ((1 <= i1) and (i1 <= r19b))) -> (i1 = i5))
+
+axiom H43 : ((not ((1 <= i1) and (i1 <= r19b))) ->
+  (out_stream1 = out_stream6))
+
+axiom H44 : ((not ((1 <= i1) and (i1 <= r19b))) -> (i6 = i1))
+
+axiom H45 : ((not ((1 <= i1) and (i1 <= r19b))) ->
+  (out_stream7 = out_stream1))
+
+axiom H46 : (fixed_stream__convert__result4 = fixed_stream__convert__result2)
+
+axiom H47 : (fixed_stream__convert__result5 = fixed_stream__convert__result3)
+
+axiom H48 :
+  ((fixed_stream__convert__result6 = fixed_stream__convert__result2) and
+  (fixed_stream__convert__result7 = fixed_stream__convert__result3))
+
+axiom H49 : ((result4 = fixed_stream__convert__result) and
+  (result5 = fixed_stream__convert__result1))
+
+axiom H50 : (out_stream6 = fixed_stream__convert__result2)
+
+axiom H51 : (mk1(to_rep4(out_stream__first),
+  to_rep4(out_stream__last)) = fixed_stream__convert__result3)
+
+axiom H52 :
+  ((fixed_stream__convert__result8 = fixed_stream__convert__result4) and
+  (fixed_stream__convert__result9 = fixed_stream__convert__result5))
+
+axiom H53 : (i7 = i5)
+
+axiom H54 : (out_stream8 = out_stream6)
+
+axiom H55 : (len2 = len1)
+
+axiom H56 :
+  ((fixed_stream__convert__result10 = fixed_stream__convert__result6) and
+  (fixed_stream__convert__result11 = fixed_stream__convert__result7))
+
+axiom H57 : (i8 = i6)
+
+axiom H58 : (out_stream9 = out_stream7)
+
+axiom H59 : (len3 = len1)
+
+axiom H60 : ((result6 = fixed_stream__convert__result8) and
+  (result7 = fixed_stream__convert__result9))
+
+ (* File "a-stream.ads", line 54, characters 0-0 *)
+goal WP_parameter_def : (length1({ elts1 = fixed_stream__convert__result8;
+  rt1 = fixed_stream__convert__result9 }) = elements({ us_split_fields1 = {
+  rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
+  this1; rec__ext__ = this2 }; attr__tag = this3 }))

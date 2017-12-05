@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type duration
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -299,7 +299,7 @@ function duration__ref___projection(a: duration__ref) : duration =
 
 type my_subduration
 
-predicate in_range1(x: int) = (((-10000000000) <= x) and (x <= 10000000000))
+predicate in_range1(x: int) = (((- 10000000000) <= x) and (x <= 10000000000))
 
 logic dummy1 : my_subduration
 
@@ -409,10 +409,29 @@ function my_subduration__ref___projection(a: my_subduration__ref) : my_subdurati
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic ms : my_subduration
+
+logic o : my_subduration
+
+logic o1 : duration
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : my_subduration
+
+logic ms1 : my_subduration
+
+axiom H : (to_fixed1(o) = 0)
+
+axiom H1 : (result = ms)
+
+axiom H2 : (ms1 = o)
+
+axiom H3 : (to_fixed(o1) = to_fixed1(ms1))
+
+axiom H4 : (o2 = to_fixed(o1))
+
  (* File "fxp_true_check_3b.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ms:my_subduration. forall o:my_subduration. forall o1:duration.
-  forall o2:int. forall result:my_subduration. forall ms1:my_subduration.
-  (((to_fixed1(o) = 0) and ((result = ms) and (ms1 = o))) ->
-  (((to_fixed(o1) = to_fixed1(ms1)) and (o2 = to_fixed(o1))) ->
-  in_range1(o2))))
+goal WP_parameter_def : in_range1(o2)

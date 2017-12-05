@@ -112,10 +112,25 @@ function ptr_t__ref___projection(a: ptr_t__ref) : ptr_t = (a).ptr_t__content
 
 axiom is_empty__post_axiom : true
 
+logic the_ptr : int
+
+logic result : int
+
+logic the_ptr1 : int
+
+logic the_ptr2 : int
+
+logic the_ptr3 : int
+
+axiom H : ((0 <= 100) -> in_range(the_ptr))
+
+axiom H1 : (result = the_ptr)
+
+axiom H2 : (the_ptr1 = 0)
+
+axiom H3 : (the_ptr1 = the_ptr2)
+
+axiom H4 : (the_ptr3 = the_ptr1)
+
  (* File "stack_asm.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall the_ptr:int. forall result:int. forall the_ptr1:int.
-  forall the_ptr2:int. forall the_ptr3:int. ((((0 <= 100) ->
-  in_range(the_ptr)) and (((result = the_ptr) and (the_ptr1 = 0)) and
-  ((the_ptr1 = the_ptr2) and (the_ptr3 = the_ptr1)))) ->
-  (is_empty(the_ptr2) = true)))
+goal WP_parameter_def : (is_empty(the_ptr2) = true)

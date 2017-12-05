@@ -176,5 +176,7 @@ logic b__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (b__attr__tag = us_tag1)
+
  (* File "membership.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : ((b__attr__tag = us_tag1) -> (b__attr__tag = us_tag))
+goal WP_parameter_def : (b__attr__tag = us_tag)

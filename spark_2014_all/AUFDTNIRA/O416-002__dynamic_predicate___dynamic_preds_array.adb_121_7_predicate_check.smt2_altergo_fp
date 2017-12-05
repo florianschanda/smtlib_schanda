@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -217,7 +217,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type even
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -380,29 +380,96 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic result__ : (int,even) farray
+
+logic o : int
+
+logic o1 : even
+
+logic temp___306 : (int,even) farray
+
+logic o2 : (int,even) farray
+
+logic temp___301 : int
+
+logic o3 : int
+
+logic o4 : even
+
+logic temp___303 : (int,even) farray
+
+logic o5 : (int,even) farray
+
+logic temp___307 : int
+
+logic o6 : int
+
+logic o7 : even
+
+logic temp___309 : (int,even) farray
+
+logic result : (int,even) farray
+
+logic result__1 : (int,even) farray
+
+logic result1 : (int,even) farray
+
+logic result__2 : (int,even) farray
+
+axiom H : in_range(above)
+
+axiom H1 : true
+
+axiom H2 : ((mod(above, 2) = 0) -> (mod(above, 2) = 0))
+
+axiom H3 : ((mod(above, 2) = 0) -> (o = above))
+
+axiom H4 : ((mod(above, 2) = 0) -> (to_rep(o1) = o))
+
+axiom H5 : ((mod(above, 2) = 0) -> (temp___306 = (result__[1 <- o1])))
+
+axiom H6 : ((mod(above, 2) = 0) ->
+  (to_rep((temp___306[2])) = (to_rep((temp___306[1])) + 2)))
+
+axiom H7 : ((mod(above, 2) = 0) -> (o2 = temp___306))
+
+axiom H8 : ((mod(above, 2) = 0) -> (result = result__))
+
+axiom H9 : ((mod(above, 2) = 0) -> (result__1 = o2))
+
+axiom H10 : ((not (mod(above, 2) = 0)) -> ((temp___301 = (above + 1)) and
+  in_range((above + 1))))
+
+axiom H11 : ((not (mod(above, 2) = 0)) -> (mod(temp___301, 2) = 0))
+
+axiom H12 : ((not (mod(above, 2) = 0)) -> (o3 = temp___301))
+
+axiom H13 : ((not (mod(above, 2) = 0)) -> (to_rep(o4) = o3))
+
+axiom H14 : ((not (mod(above, 2) = 0)) -> (temp___303 = (result__[1 <- o4])))
+
+axiom H15 : ((not (mod(above, 2) = 0)) ->
+  (to_rep((temp___303[2])) = (to_rep((temp___303[1])) + 2)))
+
+axiom H16 : ((not (mod(above, 2) = 0)) -> (o5 = temp___303))
+
+axiom H17 : ((not (mod(above, 2) = 0)) -> (result1 = result__))
+
+axiom H18 : ((not (mod(above, 2) = 0)) -> (result__2 = o5))
+
+axiom H19 : ((not (mod(above, 2) = 0)) -> (result__1 = result__2))
+
+axiom H20 : ((temp___307 = (to_rep((result__1[1])) + 2)) and
+  in_range((to_rep((result__1[1])) + 2)))
+
+axiom H21 : (mod(temp___307, 2) = 0)
+
+axiom H22 : (o6 = temp___307)
+
+axiom H23 : (to_rep(o7) = o6)
+
+axiom H24 : (temp___309 = (result__1[2 <- o7]))
+
  (* File "dynamic_preds_array.ads", line 20, characters 0-0 *)
 goal WP_parameter_def :
-  (forall result__:(int,even) farray. forall o:int. forall o1:even.
-  forall temp___306:(int,even) farray. forall o2:(int,even) farray.
-  forall temp___301:int. forall o3:int. forall o4:even.
-  forall temp___303:(int,even) farray. forall o5:(int,even) farray.
-  forall temp___307:int. forall o6:int. forall o7:even.
-  forall temp___309:(int,even) farray. forall result:(int,even) farray.
-  forall result__1:(int,even) farray. forall result1:(int,even) farray.
-  forall result__2:(int,even) farray. (in_range(above) -> ((((mod(above,
-  2) = 0) and ((((((mod(above, 2) = 0) and (o = above)) and
-  (to_rep(o1) = o)) and (temp___306 = (result__[1 <- o1]))) and
-  ((to_rep((temp___306[2])) = (to_rep((temp___306[1])) + 2)) and
-  (o2 = temp___306))) and ((result = result__) and (result__1 = o2)))) or
-  ((not (mod(above, 2) = 0)) and ((((((((temp___301 = (above + 1)) and
-  in_range((above + 1))) and ((mod(temp___301, 2) = 0) and
-  (o3 = temp___301))) and (to_rep(o4) = o3)) and
-  (temp___303 = (result__[1 <- o4]))) and
-  ((to_rep((temp___303[2])) = (to_rep((temp___303[1])) + 2)) and
-  (o5 = temp___303))) and ((result1 = result__) and (result__2 = o5))) and
-  (result__1 = result__2)))) ->
-  ((((((temp___307 = (to_rep((result__1[1])) + 2)) and
-  in_range((to_rep((result__1[1])) + 2))) and ((mod(temp___307, 2) = 0) and
-  (o6 = temp___307))) and (to_rep(o7) = o6)) and
-  (temp___309 = (result__1[2 <- o7]))) ->
-  (to_rep((temp___309[2])) = (to_rep((temp___309[1])) + 2))))))
+  (to_rep((temp___309[2])) = (to_rep((temp___309[1])) + 2))

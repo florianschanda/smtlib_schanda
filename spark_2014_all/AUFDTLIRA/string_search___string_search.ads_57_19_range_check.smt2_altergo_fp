@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -707,10 +707,763 @@ axiom partial_match_at__def_axiom :
   (forall i:int. (((1 <= i) and (i <= len)) ->
   (to_rep1((needle2[i])) = to_rep1((haystack2[(loc + (i - 1))]))))))))
 
+logic i : int
+
+logic r52b : int
+
+logic r53b : int
+
+logic shift : int
+
+logic r58b : int
+
+logic r59b : int
+
+logic k : int
+
+logic string_search__qs__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___309 : int
+
+logic temp___308 : int
+
+logic temp___307 : int
+
+logic temp___306 : int
+
+logic temp___305 : int
+
+logic temp___304 : int
+
+logic temp___311 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : (int,character) farray
+
+logic temp___296 : (int,character) farray
+
+logic temp___2961 : t1
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic temp___297 : int
+
+logic o20 : int
+
+logic o21 : character
+
+logic o22 : int
+
+logic o23 : positive
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic temp___300 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic temp___298 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic temp___299 : int
+
+logic o36 : int
+
+logic o37 : character
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic temp___2981 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic temp___2991 : int
+
+logic o47 : int
+
+logic o48 : character
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic temp___310 : int
+
+logic o56 : int
+
+logic o57 : character
+
+logic o58 : int
+
+logic o59 : positive
+
+logic o60 : int
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic temp___303 : int
+
+logic o65 : int
+
+logic o66 : character
+
+logic o67 : int
+
+logic o68 : positive
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : bool
+
+logic o79 : int
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : (int,character) farray
+
+logic temp___2962 : (int,character) farray
+
+logic temp___2963 : t1
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : int
+
+logic o86 : int
+
+logic o87 : int
+
+logic o88 : int
+
+logic o89 : int
+
+logic o90 : int
+
+logic temp___2971 : int
+
+logic o91 : int
+
+logic o92 : character
+
+logic o93 : int
+
+logic o94 : positive
+
+logic o95 : int
+
+logic o96 : int
+
+logic o97 : int
+
+logic o98 : int
+
+logic temp___3001 : int
+
+logic o99 : int
+
+logic o100 : int
+
+logic temp___2982 : int
+
+logic o101 : int
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : int
+
+logic o106 : int
+
+logic temp___2992 : int
+
+logic o107 : int
+
+logic o108 : character
+
+logic o109 : int
+
+logic o110 : int
+
+logic o111 : int
+
+logic temp___2983 : int
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : int
+
+logic o115 : int
+
+logic o116 : int
+
+logic o117 : int
+
+logic temp___2993 : int
+
+logic o118 : int
+
+logic o119 : character
+
+logic o120 : int
+
+logic o121 : int
+
+logic k1 : int
+
+logic o122 : int
+
+logic o123 : int
+
+logic o124 : int
+
+logic o125 : int
+
+logic o126 : int
+
+logic o127 : int
+
+logic o128 : int
+
+logic o129 : bool
+
+logic r52b1 : int
+
+logic r53b1 : int
+
+logic shift1 : int
+
+logic r58b1 : int
+
+logic r59b1 : int
+
+logic k2 : int
+
+logic string_search__qs__result1 : int
+
+logic result : bool
+
+logic bad_shift : (int,positive) farray
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : bool
+
+logic temp___3111 : int
+
+logic result3 : int
+
+logic r52b2 : int
+
+logic result4 : int
+
+logic r53b2 : int
+
+logic result5 : bool
+
+logic result6 : int
+
+logic string_search__qs__result2 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic shift2 : int
+
+logic result9 : int
+
+logic r58b2 : int
+
+logic result10 : int
+
+logic r59b2 : int
+
+logic result11 : int
+
+logic k3 : int
+
+logic k4 : int
+
+logic result12 : int
+
+logic k5 : int
+
+logic k6 : int
+
+logic k7 : int
+
+logic k8 : int
+
+logic k9 : int
+
+logic k10 : int
+
+logic k11 : int
+
+logic i2 : int
+
+logic r52b3 : int
+
+logic r53b3 : int
+
+logic shift3 : int
+
+logic r58b3 : int
+
+logic r59b3 : int
+
+logic k12 : int
+
+logic string_search__qs__result3 : int
+
+logic temp___3112 : int
+
+logic result13 : int
+
+logic temp___3113 : int
+
+logic result14 : int
+
+logic i3 : int
+
+logic result15 : bool
+
+logic result16 : int
+
+logic r52b4 : int
+
+logic result17 : int
+
+logic r53b4 : int
+
+logic result18 : bool
+
+logic result19 : int
+
+logic string_search__qs__result4 : int
+
+logic string_search__qs__result5 : int
+
+logic string_search__qs__result6 : int
+
+logic result20 : bool
+
+logic result21 : int
+
+logic shift4 : int
+
+logic result22 : int
+
+logic r58b4 : int
+
+logic result23 : int
+
+logic r59b4 : int
+
+logic result24 : int
+
+logic k13 : int
+
+logic k14 : int
+
+logic result25 : int
+
+logic k15 : int
+
+logic k16 : int
+
+logic k17 : int
+
+logic k18 : int
+
+logic k19 : int
+
+logic k20 : int
+
+logic k21 : int
+
+logic k22 : int
+
+logic k23 : int
+
+logic r52b5 : int
+
+logic r53b5 : int
+
+logic string_search__qs__result7 : int
+
+logic r52b6 : int
+
+logic r53b6 : int
+
+logic string_search__qs__result8 : int
+
+logic i4 : int
+
+logic r52b7 : int
+
+logic r53b7 : int
+
+logic shift5 : int
+
+logic r58b5 : int
+
+logic r59b5 : int
+
+logic k24 : int
+
+logic string_search__qs__result9 : int
+
+logic temp___3114 : int
+
+logic i5 : int
+
+logic r52b8 : int
+
+logic r53b8 : int
+
+logic shift6 : int
+
+logic r58b6 : int
+
+logic r59b6 : int
+
+logic k25 : int
+
+logic string_search__qs__result10 : int
+
+logic temp___3115 : int
+
+logic i6 : int
+
+logic r52b9 : int
+
+logic r53b9 : int
+
+logic shift7 : int
+
+logic r58b7 : int
+
+logic r59b7 : int
+
+logic k26 : int
+
+logic string_search__qs__result11 : int
+
+logic temp___3116 : int
+
+logic i7 : int
+
+logic r52b10 : int
+
+logic r53b10 : int
+
+logic shift8 : int
+
+logic r58b8 : int
+
+logic r59b8 : int
+
+logic k27 : int
+
+logic string_search__qs__result12 : int
+
+logic temp___3117 : int
+
+logic i8 : int
+
+logic r52b11 : int
+
+logic r53b11 : int
+
+logic shift9 : int
+
+logic r58b9 : int
+
+logic r59b9 : int
+
+logic k28 : int
+
+logic string_search__qs__result13 : int
+
+logic temp___3118 : int
+
+logic i9 : int
+
+logic r52b12 : int
+
+logic r53b12 : int
+
+logic shift10 : int
+
+logic r58b10 : int
+
+logic r59b10 : int
+
+logic k29 : int
+
+logic string_search__qs__result14 : int
+
+logic temp___3119 : int
+
+logic i10 : int
+
+logic r52b13 : int
+
+logic r53b13 : int
+
+logic shift11 : int
+
+logic r58b11 : int
+
+logic r59b11 : int
+
+logic k30 : int
+
+logic string_search__qs__result15 : int
+
+logic i11 : int
+
+logic r52b14 : int
+
+logic r53b14 : int
+
+logic shift12 : int
+
+logic r58b12 : int
+
+logic r59b12 : int
+
+logic k31 : int
+
+logic string_search__qs__result16 : int
+
+logic i12 : int
+
+logic r52b15 : int
+
+logic r53b15 : int
+
+logic shift13 : int
+
+logic r58b13 : int
+
+logic r59b13 : int
+
+logic k32 : int
+
+logic string_search__qs__result17 : int
+
+logic i13 : int
+
+logic r52b16 : int
+
+logic r53b16 : int
+
+logic shift14 : int
+
+logic r58b14 : int
+
+logic r59b14 : int
+
+logic k33 : int
+
+logic string_search__qs__result18 : int
+
+logic result26 : int
+
+logic string_search__qs__result19 : int
+
+logic string_search__qs__result20 : int
+
+logic string_search__qs__result21 : int
+
+logic i14 : int
+
+logic r52b17 : int
+
+logic r53b17 : int
+
+logic shift15 : int
+
+logic r58b15 : int
+
+logic r59b15 : int
+
+logic k34 : int
+
+logic string_search__qs__result22 : int
+
+logic i15 : int
+
+logic r52b18 : int
+
+logic r53b18 : int
+
+logic shift16 : int
+
+logic r58b16 : int
+
+logic r59b16 : int
+
+logic k35 : int
+
+logic string_search__qs__result23 : int
+
+logic bad_shift1 : (int,positive) farray
+
+logic i16 : int
+
+logic r52b19 : int
+
+logic r53b19 : int
+
+logic shift17 : int
+
+logic r58b17 : int
+
+logic r59b17 : int
+
+logic k36 : int
+
+logic string_search__qs__result24 : int
+
+logic bad_shift2 : (int,positive) farray
+
+logic i17 : int
+
+logic r52b20 : int
+
+logic r53b20 : int
+
+logic shift18 : int
+
+logic r58b18 : int
+
+logic r59b18 : int
+
+logic k37 : int
+
+logic string_search__qs__result25 : int
+
+logic result27 : bool
+
+axiom H : (dynamic_property(1, 2147483647, to_rep2(first(needle1)),
+  to_rep2(last(needle1))) and (to_rep2(first(needle1)) = 1))
+
+axiom H1 : (dynamic_property(1, 2147483647, to_rep2(first(haystack1)),
+  to_rep2(last(haystack1))) and (to_rep2(first(haystack1)) = 1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property(1, 2147483647,
-  to_rep2(first(needle1)), to_rep2(last(needle1))) and
-  (to_rep2(first(needle1)) = 1)) -> ((dynamic_property(1, 2147483647,
-  to_rep2(first(haystack1)), to_rep2(last(haystack1))) and
-  (to_rep2(first(haystack1)) = 1)) -> in_range1(length({ elts = needle; rt =
-  needle1 }))))
+goal WP_parameter_def : in_range1(length({ elts = needle; rt = needle1 }))

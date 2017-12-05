@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -139,10 +139,77 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : int
+
+logic math__sqrt__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___134 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : bool
+
+logic res2 : int
+
+logic result2 : int
+
+logic res3 : int
+
+logic result3 : bool
+
+logic res4 : int
+
+logic res5 : int
+
+logic res6 : int
+
+logic res7 : int
+
+logic result4 : int
+
+logic math__sqrt__result1 : int
+
+logic math__sqrt__result2 : int
+
+logic math__sqrt__result3 : int
+
+logic res8 : int
+
+logic math__sqrt__result4 : int
+
+logic res9 : int
+
+logic math__sqrt__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (0 <= x)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> ((0 <= x) -> (((bool_eq(x,
-  0) = true) -> (((bool_gt(x, 0) = true) -> (((0 + 1) + 1) <= 1)) and
-  ((not (bool_gt(x, 0) = true)) -> (((0 + 1) + 0) <= 1)))) and
-  ((not (bool_eq(x, 0) = true)) -> (((bool_gt(x, 0) = true) ->
-  (((0 + 0) + 1) <= 1)) and ((not (bool_gt(x, 0) = true)) ->
-  (((0 + 0) + 0) <= 1)))))))
+goal WP_parameter_def : (((bool_eq(x, 0) = true) -> (((bool_gt(x,
+  0) = true) -> (((0 + 1) + 1) <= 1)) and ((not (bool_gt(x, 0) = true)) ->
+  (((0 + 1) + 0) <= 1)))) and ((not (bool_eq(x, 0) = true)) -> (((bool_gt(x,
+  0) = true) -> (((0 + 0) + 1) <= 1)) and ((not (bool_gt(x, 0) = true)) ->
+  (((0 + 0) + 0) <= 1)))))

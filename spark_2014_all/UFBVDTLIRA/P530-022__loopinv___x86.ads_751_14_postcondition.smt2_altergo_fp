@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1090,13 +1090,38 @@ axiom writereglow8post__def_axiom :
   of_int1(18446744073709551360)) = bw_and1(regold,
   of_int1(18446744073709551360)))))))
 
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic rcx : t1
+
+logic rcx1 : t1
+
+logic rcx2 : t1
+
+logic rcx3 : t1
+
+logic rcx4 : t1
+
+axiom H : true
+
+axiom H1 : (((not (carryflag = true)) and (not (zeroflag = true))) ->
+  (writereglow8post(rcx, rcx1, of_int(1)) = true))
+
+axiom H2 : ((not ((not (carryflag = true)) and (not (zeroflag = true)))) ->
+  (writereglow8post(rcx, rcx2, of_int(0)) = true))
+
+axiom H3 : ((not ((not (carryflag = true)) and (not (zeroflag = true)))) ->
+  (rcx1 = rcx2))
+
+axiom H4 : (rcx1 = rcx3)
+
+axiom H5 : (rcx4 = rcx1)
+
+axiom H6 : (not (carryflag = true))
+
+axiom H7 : (not (zeroflag = true))
+
  (* File "x86.ads", line 251, characters 0-0 *)
-goal WP_parameter_def :
-  (forall zeroflag:bool. forall carryflag:bool. forall rcx:t1.
-  forall rcx1:t1. forall rcx2:t1. forall rcx3:t1. forall rcx4:t1.
-  ((((((not (carryflag = true)) and (not (zeroflag = true))) and
-  (writereglow8post(rcx, rcx1, of_int(1)) = true)) or
-  ((not ((not (carryflag = true)) and (not (zeroflag = true)))) and
-  ((writereglow8post(rcx, rcx2, of_int(0)) = true) and (rcx1 = rcx2)))) and
-  ((rcx1 = rcx3) and (rcx4 = rcx1))) -> (((not (carryflag = true)) and
-  (not (zeroflag = true))) -> (cl(rcx3) = of_int(1)))))
+goal WP_parameter_def : (cl(rcx3) = of_int(1))

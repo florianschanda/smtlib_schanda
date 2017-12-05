@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -596,7 +596,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -892,15 +892,35 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+axiom H : dynamic_property(of_int(0), of_int(65535), to_rep1(first(m1)),
+  to_rep1(last(m1)))
+
+axiom H1 : in_range(x)
+
+axiom H2 : (not (length({ elts = m; rt = m1 }) = 0))
+
+axiom H3 : ((tqtint(to_rep1(first(m1))) <= tqtint(to_rep1(last(m1)))) ->
+  (o = ((tqtint(to_rep1(last(m1))) - tqtint(to_rep1(first(m1)))) + 1)))
+
+axiom H4 :
+  ((not (tqtint(to_rep1(first(m1))) <= tqtint(to_rep1(last(m1))))) ->
+  (o = 0))
+
+axiom H5 : (o1 = (o + 1))
+
+axiom H6 : (o2 = (tqtint(to_rep1(first(m1))) + o1))
+
+axiom H7 : (o3 = (o2 - 1))
+
  (* File "ring_buf.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  (dynamic_property(of_int(0), of_int(65535), to_rep1(first(m1)),
-  to_rep1(last(m1))) -> (in_range(x) -> ((not (length({ elts = m; rt = m1
-  }) = 0)) ->
-  (((((((tqtint(to_rep1(first(m1))) <= tqtint(to_rep1(last(m1)))) and
-  (o = ((tqtint(to_rep1(last(m1))) - tqtint(to_rep1(first(m1)))) + 1))) or
-  ((not (tqtint(to_rep1(first(m1))) <= tqtint(to_rep1(last(m1))))) and
-  (o = 0))) and (o1 = (o + 1))) and
-  (o2 = (tqtint(to_rep1(first(m1))) + o1))) and (o3 = (o2 - 1))) ->
-  uint_in_range(o3))))))
+goal WP_parameter_def : uint_in_range(o3)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -273,9 +273,37 @@ logic i1s1 : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v__split_fields : natural
+
+logic v__split_fields1 : bool
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : bool
+
+logic temp___144 : natural
+
+logic temp___1441 : bool
+
+logic temp___145 : natural
+
+logic temp___1451 : bool
+
+logic result : natural
+
+logic result1 : bool
+
+logic v__split_fields2 : natural
+
+logic v__split_fields3 : bool
+
+axiom H : ((i1s1 = true) <-> (3 <  to_rep(i1s)))
+
+axiom H1 : ((v__split_fields1 = true) <-> (3 <  to_rep(v__split_fields)))
+
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v__split_fields:natural. forall v__split_fields1:bool.
-  (((i1s1 = true) <-> (3 <  to_rep(i1s))) -> (((v__split_fields1 = true) <->
-  (3 <  to_rep(v__split_fields))) ->
-  in_range1((to_rep(v__split_fields) + 1)))))
+goal WP_parameter_def : in_range1((to_rep(v__split_fields) + 1))

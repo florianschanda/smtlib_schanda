@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tpartition_indexB
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq : int, int -> bool
 
@@ -349,11 +349,11 @@ logic oeq__function_guard : bool, us_rep, us_rep -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep. forall b:us_rep [user_eq2(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
     (bool_eq6(get(a, n), get(b, n)) = true))) ->
   (user_eq2(a, b) = match_bool(bool_eq(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
         (bool_eq6(get(a, n), get(b, n)) = true)))) ->
   (user_eq2(a, b) = match_bool(bool_eq(length(a), length(b)), false,
   false)))))
@@ -386,11 +386,11 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 axiom length__post_axiom :
   (forall container:us_rep [length(container)].
-  ((((-1) + length(container)) <= 10000) and in_range4(length(container))))
+  ((((- 1) + length(container)) <= 10000) and in_range4(length(container))))
 
 type extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq8 : int, int -> bool
 
@@ -430,16 +430,38 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 axiom get__post_axiom : true
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range1(position)
+
+axiom H1 : ((o3 = length(container)) and (in_range4(o3) and
+  (((- 1) + o3) <= 10000)))
+
+axiom H2 : (((o3 <  2147483647) -> (result = true)) and
+  ((not (o3 <  2147483647)) -> (result = false)))
+
+axiom H3 : (result = true)
+
+axiom H4 : ((o2 = ((- 1) + length(container))) and (in_range5(o2) and
+  (o2 = ((- 1) + length(container)))))
+
+axiom H5 : (((o2 <  10000) -> (result1 = true)) and ((not (o2 <  10000)) ->
+  (result1 = false)))
+
+axiom H6 : (result1 = true)
+
+axiom H7 : ((o = ((- 1) + length(container))) and (in_range5(o) and
+  (o = ((- 1) + length(container)))))
+
  (* File "a-cofuve.ads", line 272, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall result:bool.
-  forall result1:bool. (in_range1(position) ->
-  ((((o2 = length(container)) and (in_range4(o2) and
-  (((-1) + o2) <= 10000))) and (((o2 <  2147483647) and (result = true)) or
-  ((not (o2 <  2147483647)) and (result = false)))) -> ((result = true) ->
-  ((((o1 = ((-1) + length(container))) and (in_range5(o1) and
-  (o1 = ((-1) + length(container))))) and (((o1 <  10000) and
-  (result1 = true)) or ((not (o1 <  10000)) and (result1 = false)))) ->
-  ((result1 = true) -> (((o = ((-1) + length(container))) and
-  (in_range5(o) and (o = ((-1) + length(container))))) ->
-  (not (o = 32767)))))))))
+goal WP_parameter_def : (not (o = 32767))

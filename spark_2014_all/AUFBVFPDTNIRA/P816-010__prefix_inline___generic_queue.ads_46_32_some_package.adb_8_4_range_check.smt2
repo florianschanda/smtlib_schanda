@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -120,7 +121,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort element_type 0)
 (define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x) (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x) (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
@@ -306,6 +306,7 @@
 (declare-const self__split_fields6 us_private)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (dynamic_property 0 256 (to_rep elements__first) (to_rep elements__last)))
 (assert (and (= o1 (length1 (mk___rep (mk___split_fields self__split_fields self__split_fields1 self__split_fields2 self__split_fields3 self__split_fields4 self__split_fields5 self__split_fields6) self__attr__tag))) (in_range5 o1)))
 (assert (=> (<= (to_rep elements__first) (to_rep elements__last)) (= o (+ (- (to_rep elements__last) (to_rep elements__first)) 1))))

@@ -285,6 +285,17 @@ axiom def_axiom :
   ((not (temp___263 = temp___261)) -> ((temp___258(temp___260, temp___261,
   temp___262)[temp___263]) = (temp___260[temp___263])))))))
 
+logic o : int
+
+logic o1 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(e)
+
+axiom H2 : (i <  10)
+
+axiom H3 : (0 <  e)
+
  (* File "ar.adb", line 85, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> (in_range2(e) -> (((i <  10) and
-  (0 <  e)) -> in_range2((e - 1)))))
+goal WP_parameter_def : in_range2((e - 1))

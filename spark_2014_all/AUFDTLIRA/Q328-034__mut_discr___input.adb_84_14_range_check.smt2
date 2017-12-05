@@ -122,7 +122,7 @@
 (declare-const dummy5 tlast_charS)
 (declare-datatypes () ((tlast_charS__ref (mk_tlast_charS__ref (tlast_charS__content tlast_charS)))))
 (define-fun tlast_charS__ref___projection ((a tlast_charS__ref)) tlast_charS (tlast_charS__content a))
-(define-fun dynamic_invariant ((temp___expr_589 Int) (temp___is_init_586 Bool) (temp___skip_constant_587 Bool) (temp___do_toplevel_588 Bool)) Bool (=> (or (= temp___is_init_586 true) (<= 0 1024)) (in_range4 temp___expr_589)))
+(define-fun dynamic_invariant ((temp___expr_583 Int) (temp___is_init_580 Bool) (temp___skip_constant_581 Bool) (temp___do_toplevel_582 Bool)) Bool (=> (or (= temp___is_init_580 true) (<= 0 1024)) (in_range4 temp___expr_583)))
 (declare-const r6b Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (define-fun dynamic_property1 ((first_int Int) (last_int Int) (x Int)) Bool (and (<= first_int x) (<= x last_int)))

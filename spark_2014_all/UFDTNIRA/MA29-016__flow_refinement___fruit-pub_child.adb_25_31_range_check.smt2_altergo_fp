@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -303,26 +303,117 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic apples : int
+
+logic oranges : int
+
+logic price_of_apple : int
+
+logic price_of_orange : int
+
+logic fruit_salads_made : int
+
+logic apples_in_fruit_salad : int
+
+logic oranges_in_fruit_salad : int
+
+logic extra_cost : int
+
+logic price_related_stuff : us_private
+
+logic fruits : us_private
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic fruit_salads_made1 : int
+
+logic apples1 : int
+
+logic oranges1 : int
+
+logic price_of_apple1 : int
+
+logic price_of_orange1 : int
+
+logic extra_cost1 : int
+
+logic price_related_stuff1 : us_private
+
+logic fruits1 : us_private
+
+logic apples2 : int
+
+logic oranges2 : int
+
+logic price_of_apple2 : int
+
+logic price_of_orange2 : int
+
+logic extra_cost2 : int
+
+axiom H : ((0 <= 2147483647) -> in_range1(fruit_salads_made))
+
+axiom H1 : in_range1(apples_in_fruit_salad)
+
+axiom H2 : in_range1(oranges_in_fruit_salad)
+
+axiom H3 : in_range1(apples)
+
+axiom H4 : in_range1(oranges)
+
+axiom H5 : in_range1(price_of_apple)
+
+axiom H6 : in_range1(price_of_orange)
+
+axiom H7 : in_range1(extra_cost)
+
+axiom H8 : ((o1 = number_of_oranges(apples, fruits, oranges, price_of_apple,
+  price_of_orange, extra_cost, price_related_stuff)) and in_range1(o1))
+
+axiom H9 : (o2 = comp_div(o1,oranges_in_fruit_salad))
+
+axiom H10 : ((o = number_of_apples(apples, fruits, oranges, price_of_apple,
+  price_of_orange, extra_cost, price_related_stuff)) and in_range1(o))
+
+axiom H11 : (o3 = comp_div(o,apples_in_fruit_salad))
+
+axiom H12 : (((o3 <= o2) -> (result = true)) and ((not (o3 <= o2)) ->
+  (result = false)))
+
+axiom H13 : (not (result = true))
+
+axiom H14 : ((o6 = number_of_oranges(apples, fruits, oranges, price_of_apple,
+  price_of_orange, extra_cost, price_related_stuff)) and in_range1(o6))
+
+axiom H15 : (o7 = comp_div(o6,oranges_in_fruit_salad))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall apples:int. forall oranges:int. forall price_of_apple:int.
-  forall price_of_orange:int. forall fruit_salads_made:int.
-  forall apples_in_fruit_salad:int. forall oranges_in_fruit_salad:int.
-  forall extra_cost:int. forall price_related_stuff:us_private.
-  forall fruits:us_private. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int. forall result:bool.
-  (((0 <= 2147483647) -> in_range1(fruit_salads_made)) ->
-  (in_range1(apples_in_fruit_salad) -> (in_range1(oranges_in_fruit_salad) ->
-  (in_range1(apples) -> (in_range1(oranges) -> (in_range1(price_of_apple) ->
-  (in_range1(price_of_orange) -> (in_range1(extra_cost) ->
-  (((((o1 = number_of_oranges(apples, fruits, oranges, price_of_apple,
-  price_of_orange, extra_cost, price_related_stuff)) and in_range1(o1)) and
-  (o2 = comp_div(o1,oranges_in_fruit_salad))) and
-  ((((o = number_of_apples(apples, fruits, oranges, price_of_apple,
-  price_of_orange, extra_cost, price_related_stuff)) and in_range1(o)) and
-  (o3 = comp_div(o,apples_in_fruit_salad))) and (((o3 <= o2) and
-  (result = true)) or ((not (o3 <= o2)) and (result = false))))) ->
-  ((not (result = true)) -> ((((o4 = number_of_oranges(apples, fruits,
-  oranges, price_of_apple, price_of_orange, extra_cost,
-  price_related_stuff)) and in_range1(o4)) and
-  (o5 = comp_div(o4,oranges_in_fruit_salad))) -> in_range1(o5)))))))))))))
+goal WP_parameter_def : in_range1(o7)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -339,37 +339,121 @@ axiom user_eq__def_axiom1 :
   a1 } }, { us_split_fields1 = { rec__record_subty__r__a = b;
   rec__record_subty__r__b = b1 } })))
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : integer
+
+logic y__split_fields : integer
+
+logic y__split_fields1 : integer
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic record_subty__x__assume : integer
+
+logic record_subty__x__assume1 : integer
+
+logic o8 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : integer
+
+logic o15 : integer
+
+logic record_subty__y__assume : integer
+
+logic record_subty__y__assume1 : integer
+
+logic result : integer
+
+logic result1 : integer
+
+logic x__split_fields2 : integer
+
+logic x__split_fields3 : integer
+
+logic result2 : integer
+
+logic result3 : integer
+
+logic y__split_fields2 : integer
+
+logic y__split_fields3 : integer
+
+axiom H : (to_rep(o) = 1)
+
+axiom H1 : (to_rep(o1) = 1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o = o3)
+
+axiom H4 : (o4 = o2)
+
+axiom H5 : (o5 = o3)
+
+axiom H6 : (o6 = o4)
+
+axiom H7 : (o7 = o5)
+
+axiom H8 : (record_subty__x__assume = o6)
+
+axiom H9 : (record_subty__x__assume1 = o7)
+
+axiom H10 : ((result = x__split_fields) and (result1 = x__split_fields1))
+
+axiom H11 : ((x__split_fields2 = record_subty__x__assume) and
+  (x__split_fields3 = record_subty__x__assume1))
+
+axiom H12 : (to_rep(o8) = 2)
+
+axiom H13 : (to_rep(o9) = 1)
+
+axiom H14 : (o9 = o10)
+
+axiom H15 : (o8 = o11)
+
+axiom H16 : (o12 = o10)
+
+axiom H17 : (o13 = o11)
+
+axiom H18 : ((o14 = o12) and (o15 = o13))
+
+axiom H19 : ((record_subty__y__assume = o14) and
+  (record_subty__y__assume1 = o15))
+
+axiom H20 : ((result2 = y__split_fields) and (result3 = y__split_fields1))
+
+axiom H21 : ((y__split_fields2 = record_subty__y__assume) and
+  (y__split_fields3 = record_subty__y__assume1))
+
  (* File "record_subty.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:integer.
-  forall y__split_fields:integer. forall y__split_fields1:integer.
-  forall o:integer. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall o5:integer. forall o6:integer. forall o7:integer.
-  forall record_subty__x__assume:integer.
-  forall record_subty__x__assume1:integer. forall o8:integer.
-  forall o9:integer. forall o10:integer. forall o11:integer.
-  forall o12:integer. forall o13:integer. forall o14:integer.
-  forall o15:integer. forall record_subty__y__assume:integer.
-  forall record_subty__y__assume1:integer. forall result:integer.
-  forall result1:integer. forall x__split_fields2:integer.
-  forall x__split_fields3:integer. forall result2:integer.
-  forall result3:integer. forall y__split_fields2:integer.
-  forall y__split_fields3:integer. (((((((to_rep(o) = 1) and
-  ((to_rep(o1) = 1) and ((o1 = o2) and (o = o3)))) and ((o4 = o2) and
-  (o5 = o3))) and ((o6 = o4) and (o7 = o5))) and
-  ((record_subty__x__assume = o6) and (record_subty__x__assume1 = o7))) and
-  (((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((record_subty__x__assume = x__split_fields2) and
-  (record_subty__x__assume1 = x__split_fields3)))) ->
-  (((((((to_rep(o8) = 2) and ((to_rep(o9) = 1) and ((o9 = o10) and
-  (o8 = o11)))) and ((o12 = o10) and (o13 = o11))) and ((o12 = o14) and
-  (o13 = o15))) and ((record_subty__y__assume = o14) and
-  (record_subty__y__assume1 = o15))) and (((result2 = y__split_fields) and
-  (result3 = y__split_fields1)) and
-  ((record_subty__y__assume = y__split_fields2) and
-  (record_subty__y__assume1 = y__split_fields3)))) -> (not (bool_eq3({
+goal WP_parameter_def : (not (bool_eq3({ us_split_fields3 = {
+  rec__record_subty__rr__c = { us_split_fields1 = { rec__record_subty__r__a =
+  x__split_fields2; rec__record_subty__r__b = x__split_fields3 } } } }, {
   us_split_fields3 = { rec__record_subty__rr__c = { us_split_fields1 = {
-  rec__record_subty__r__a = x__split_fields2; rec__record_subty__r__b =
-  x__split_fields3 } } } }, { us_split_fields3 = { rec__record_subty__rr__c =
-  { us_split_fields1 = { rec__record_subty__r__a = y__split_fields2;
-  rec__record_subty__r__b = y__split_fields3 } } } }) = true)))))
+  rec__record_subty__r__a = y__split_fields2; rec__record_subty__r__b =
+  y__split_fields3 } } } }) = true))

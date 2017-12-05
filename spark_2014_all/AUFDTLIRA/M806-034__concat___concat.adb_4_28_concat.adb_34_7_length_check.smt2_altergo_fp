@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -501,25 +501,102 @@ function t38b__ref___projection(a: t38b__ref) : t38b = (a).t38b__content
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic x : (int,integer) farray
+
+logic y : (int,integer) farray
+
+logic d : (int,integer) farray
+
+logic d1 : (int,integer) farray
+
+logic temp___195 : (int,integer) farray
+
+logic temp___194 : (int,integer) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___196 : (int,integer) farray
+
+logic temp___1961 : t
+
+logic o6 : (int,integer) farray
+
+logic temp___202 : (int,integer) farray
+
+logic temp___201 : (int,integer) farray
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___203 : (int,integer) farray
+
+logic temp___2031 : t1
+
+logic o13 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic d2 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic d3 : (int,integer) farray
+
+axiom H : ((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
+  (5 <= 10))))
+
+axiom H1 : (temp___195 = x)
+
+axiom H2 : ((6 <= 10) -> (((1 <= 6) and (6 <= 10)) and ((1 <= 10) and
+  (10 <= 10))))
+
+axiom H3 : (temp___194 = x)
+
+axiom H4 : ((1 <= 5) -> (o = ((5 - 1) + 1)))
+
+axiom H5 : ((not (1 <= 5)) -> (o = 0))
+
+axiom H6 : ((6 <= 10) -> (o1 = ((10 - 6) + 1)))
+
+axiom H7 : ((not (6 <= 10)) -> (o1 = 0))
+
+axiom H8 : (o2 = (o1 + o))
+
+axiom H9 : (o3 = (6 + o2))
+
+axiom H10 : (o4 = (o3 - 1))
+
+axiom H11 : ((o5 = o4) and in_range(o4))
+
+axiom H12 : (concat(temp___194, 6, 10, temp___195, 1, 5) = temp___196)
+
+axiom H13 : (mk(6, o5) = temp___1961)
+
  (* File "concat.ads", line 8, characters 0-0 *)
 goal WP_parameter_def :
-  (forall x:(int,integer) farray. forall temp___195:(int,integer) farray.
-  forall temp___194:(int,integer) farray. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall temp___196:(int,integer) farray. forall temp___1961:t.
-  (((((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and
-  (5 <= 10)))) and (temp___195 = x)) and ((((6 <= 10) -> (((1 <= 6) and
-  (6 <= 10)) and ((1 <= 10) and (10 <= 10)))) and (temp___194 = x)) and
-  ((((((((1 <= 5) and (o = ((5 - 1) + 1))) or ((not (1 <= 5)) and
-  (o = 0))) and ((((6 <= 10) and (o1 = ((10 - 6) + 1))) or
-  ((not (6 <= 10)) and (o1 = 0))) and (o2 = (o1 + o)))) and
-  (o3 = (6 + o2))) and (o4 = (o3 - 1))) and ((o5 = o4) and in_range(o4))) and
-  ((concat(temp___194, 6, 10, temp___195, 1, 5) = temp___196) and (mk(6,
-  o5) = temp___1961))))) ->
   (((to_rep(first(temp___1961)) <= to_rep(last(temp___1961))) ->
   (((1 <= 10) ->
   (((to_rep(last(temp___1961)) - to_rep(first(temp___1961))) + 1) = ((10 - 1) + 1))) and
   ((not (1 <= 10)) ->
   (((to_rep(last(temp___1961)) - to_rep(first(temp___1961))) + 1) = 0)))) and
   ((not (to_rep(first(temp___1961)) <= to_rep(last(temp___1961)))) ->
-  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))))
+  ((1 <= 10) -> (0 = ((10 - 1) + 1)))))

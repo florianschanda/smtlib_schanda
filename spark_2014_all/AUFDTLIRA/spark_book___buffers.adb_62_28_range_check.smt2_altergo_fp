@@ -306,18 +306,70 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "buffers.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(int,character) farray. forall count:int. forall index:int.
-  forall result:int. forall count1:int. forall result1:int.
-  forall index1:int. forall buffer1:(int,character) farray.
-  forall count2:int. forall index2:int. (in_range1(ch) -> (((0 <= 1024) ->
-  in_range2(count)) -> (((result = count) and (count1 = 0)) ->
-  (((result1 = index) and (index1 = 1)) -> (((1 <= index1) and
-  (index1 <= 1024)) -> ((count2 <  index2) -> ((((((0 <= 1024) ->
-  in_range2(count2)) and ((1 <= 1024) -> in_range3(index2))) and
+logic buffer : (int,character) farray
+
+logic count : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : character
+
+logic o2 : (int,character) farray
+
+logic result : int
+
+logic count1 : int
+
+logic result1 : int
+
+logic index1 : int
+
+logic buffer1 : (int,character) farray
+
+logic count2 : int
+
+logic index2 : int
+
+logic result2 : int
+
+logic count3 : int
+
+logic result3 : (int,character) farray
+
+logic buffer2 : (int,character) farray
+
+logic result4 : int
+
+logic index3 : int
+
+axiom H : in_range1(ch)
+
+axiom H1 : ((0 <= 1024) -> in_range2(count))
+
+axiom H2 : (result = count)
+
+axiom H3 : (count1 = 0)
+
+axiom H4 : (result1 = index)
+
+axiom H5 : (index1 = 1)
+
+axiom H6 : (1 <= index1)
+
+axiom H7 : (index1 <= 1024)
+
+axiom H8 : (count2 <  index2)
+
+axiom H9 : (((((0 <= 1024) -> in_range2(count2)) and ((1 <= 1024) ->
+  in_range3(index2))) and
   (forall temp___230:int. (((1 <= temp___230) and (temp___230 <= 1024)) ->
   ((index2 <= temp___230) ->
   ((buffer1[temp___230]) = (buffer[temp___230])))))) and ((1 <= index2) and
-  (index2 <= 1024))) -> ((to_rep((buffer1[index2])) = ch) ->
-  in_range2((count2 + 1)))))))))))
+  (index2 <= 1024)))
+
+axiom H10 : (to_rep((buffer1[index2])) = ch)
+
+ (* File "buffers.ads", line 6, characters 0-0 *)
+goal WP_parameter_def : in_range2((count2 + 1))

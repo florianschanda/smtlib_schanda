@@ -65,6 +65,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 (declare-const u Int)
+(declare-const o Int)
 (assert (in_range1 op))
 (assert (in_range x))
 (assert (in_range y))

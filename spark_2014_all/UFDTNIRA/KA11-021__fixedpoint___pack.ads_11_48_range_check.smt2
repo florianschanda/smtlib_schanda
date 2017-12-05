@@ -156,6 +156,7 @@
 (assert (= default_salary (of_fixed2 0)))
 (declare-const default_v volt)
 (declare-const o volt)
+(declare-const us Int)
 (declare-const result volt)
 (declare-const default_v1 volt)
 (assert (= (to_fixed o) (- 1)))

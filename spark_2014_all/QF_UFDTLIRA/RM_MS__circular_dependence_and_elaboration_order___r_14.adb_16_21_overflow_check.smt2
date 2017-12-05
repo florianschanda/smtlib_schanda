@@ -53,6 +53,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const r_s Int)
+(declare-const o Int)
 (assert (in_range2 r_s))
 (assert (in_range x))
 (assert (<= r_s (- 2147483647 x)))

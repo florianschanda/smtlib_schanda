@@ -77,6 +77,7 @@
 (declare-const o Int)
 (declare-const o1 item)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const e1 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range1 e)))

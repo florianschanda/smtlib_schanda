@@ -93,6 +93,7 @@
 (declare-const o1 Int)
 (declare-const fxp_div2__y__assume Int)
 (declare-const o2 Int)
+(declare-const fxp_div2__z__assume Int)
 (declare-const result duration)
 (declare-const x1 duration)
 (assert (= (to_fixed o) 3000000000))

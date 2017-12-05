@@ -178,6 +178,7 @@
 (declare-const temp___206 (Array Int integer))
 (declare-const temp___2061 ar_index)
 (declare-const temp___2062 length_type)
+(declare-const o9 Int)
 (declare-const result Int)
 (declare-const element1 Int)
 (declare-const result1 (Array Int integer))

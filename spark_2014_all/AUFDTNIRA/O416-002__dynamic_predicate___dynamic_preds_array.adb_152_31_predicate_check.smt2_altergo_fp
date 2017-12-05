@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -354,20 +354,39 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "dynamic_preds_array.ads", line 20, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,even) farray. forall o:(int,even) farray.
-  forall dynamic_preds_array__update_even_close_pair__x:(int,even) farray.
-  forall dynamic_preds_array__update_even_close_pair__x1:(int,even) farray.
-  forall result:(int,even) farray. forall x1:(int,even) farray.
-  ((in_range(i11s) and (mod(i11s, 2) = 0)) ->
-  ((forall temp___147:int. (((1 <= temp___147) and (temp___147 <= 2)) ->
-   (mod(to_rep((x[temp___147])), 2) = 0))) ->
-  (((((to_rep((x[2])) = (to_rep((x[1])) + 2)) and (o = x)) and
-  (o = dynamic_preds_array__update_even_close_pair__x)) and
-  (((to_rep((dynamic_preds_array__update_even_close_pair__x1[2])) = (to_rep((dynamic_preds_array__update_even_close_pair__x1[1])) + 2)) and
+logic x : (int,even) farray
+
+logic o : (int,even) farray
+
+logic dynamic_preds_array__update_even_close_pair__x : (int,even) farray
+
+logic dynamic_preds_array__update_even_close_pair__x1 : (int,even) farray
+
+logic result : (int,even) farray
+
+logic x1 : (int,even) farray
+
+axiom H : (in_range(i11s) and (mod(i11s, 2) = 0))
+
+axiom H1 :
+  (forall temp___147:int. (((1 <= temp___147) and (temp___147 <= 2)) ->
+  (mod(to_rep((x[temp___147])), 2) = 0)))
+
+axiom H2 : (to_rep((x[2])) = (to_rep((x[1])) + 2))
+
+axiom H3 : (o = x)
+
+axiom H4 : (o = dynamic_preds_array__update_even_close_pair__x)
+
+axiom H5 :
+  ((to_rep((dynamic_preds_array__update_even_close_pair__x1[2])) = (to_rep((dynamic_preds_array__update_even_close_pair__x1[1])) + 2)) and
   (forall temp___185:int. (((1 <= temp___185) and (temp___185 <= 2)) ->
   (mod(to_rep((dynamic_preds_array__update_even_close_pair__x1[temp___185])),
-  2) = 0)))) and ((result = x) and
-  (x1 = dynamic_preds_array__update_even_close_pair__x1)))) ->
-  (to_rep((x1[2])) = (to_rep((x1[1])) + 2))))))
+  2) = 0))))
+
+axiom H6 : (result = x)
+
+axiom H7 : (x1 = dynamic_preds_array__update_even_close_pair__x1)
+
+ (* File "dynamic_preds_array.ads", line 20, characters 0-0 *)
+goal WP_parameter_def : (to_rep((x1[2])) = (to_rep((x1[1])) + 2))

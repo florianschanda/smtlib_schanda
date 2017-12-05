@@ -442,10 +442,11 @@ axiom def_axiom3 :
   ((not (temp___679 = 1)) -> ((temp___675(temp___677,
   temp___678)[temp___679]) = of_rep(temp___678))))))
 
+axiom H : (bool_eq2(temp___658(32), 1, 5, temp___662(32, 32), 1, 5) = true)
+
  (* File "array_aggregates.adb", line 414, characters 0-0 *)
-goal WP_parameter_def : ((bool_eq2(temp___658(32), 1, 5, temp___662(32, 32),
-  1, 5) = true) -> (bool_eq5({ us_split_fields1 = {
+goal WP_parameter_def : (bool_eq5({ us_split_fields1 = {
   rec__array_aggregates__string_t__len = of_rep1(0);
   rec__array_aggregates__string_t__elem = temp___671(32) } }, {
   us_split_fields1 = { rec__array_aggregates__string_t__len = of_rep1(0);
-  rec__array_aggregates__string_t__elem = temp___675(32, 32) } }) = true))
+  rec__array_aggregates__string_t__elem = temp___675(32, 32) } }) = true)

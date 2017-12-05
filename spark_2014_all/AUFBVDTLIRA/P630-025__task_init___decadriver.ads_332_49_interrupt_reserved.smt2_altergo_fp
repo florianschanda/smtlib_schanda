@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2356,7 +2356,7 @@ function us_split_fields__ref___140__projection(a: us_split_fields__ref1) : us_s
 type us_rep1 = { us_split_fields3 : us_split_fields2
 }
 
-function us_rep___141__projection(a: us_rep1) : us_split_fields2 =
+function us_rep___142__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
 logic value__size1 : int
@@ -2609,12 +2609,12 @@ type driver_type__ref = { driver_type__content : us_rep1
 function driver_type__ref___projection(a: driver_type__ref) : us_rep1 =
   (a).driver_type__content
 
-logic temp___4500 : t2 -> (int,bits_32) farray
+logic temp___4490 : t2 -> (int,bits_32) farray
 
 axiom def_axiom :
-  (forall temp___4502:t2.
-  (forall temp___4503:int.
-  ((temp___4500(temp___4502)[temp___4503]) = of_rep4(temp___4502))))
+  (forall temp___4492:t2.
+  (forall temp___4493:int.
+  ((temp___4490(temp___4492)[temp___4493]) = of_rep4(temp___4492))))
 
 logic to_rep5 : bits_16 -> t1
 
@@ -2711,5 +2711,7 @@ logic self__37 : bool
 
 logic self__38 : bool
 
+logic temp___4590 : bool
+
  (* File "decadriver.ads", line 242, characters 0-0 *)
-goal WP_parameter_def : (forall temp___4600:bool. (temp___4600 = false))
+goal WP_parameter_def : (temp___4590 = false)

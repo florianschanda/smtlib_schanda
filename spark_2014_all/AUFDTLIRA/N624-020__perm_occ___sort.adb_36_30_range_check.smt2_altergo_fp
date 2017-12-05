@@ -174,7 +174,7 @@ function positive__ref___projection(a: positive__ref) : positive =
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -851,45 +851,155 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a[to_rep1(last(a1))])) = e)) -> (occ_def({ elts = a; rt = a1
   }, e) = occ_def(remove_last({ elts = a; rt = a1 }), e)))))))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall values:(int,natural) farray. forall interm:(int,natural) farray.
-  forall e:int. forall o:int. forall o1:int. forall o2:natural.
-  forall o3:int. forall o4:int. forall o5:natural. forall o6:int.
-  forall result:int. forall e1:int. (dynamic_property(1, 100,
-  to_rep1(values__first), to_rep1(values__last)) -> (in_range2(x) ->
-  (in_range2(y) -> ((dynamic_property2(to_rep1(values__first),
-  to_rep1(values__last), to_rep1(first2(init1)), to_rep1(last2(init1))) and
+logic values : (int,natural) farray
+
+logic interm : (int,natural) farray
+
+logic e : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic temp___268 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : natural
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : natural
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : natural
+
+logic o23 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic e1 : int
+
+logic e2 : int
+
+logic result2 : int
+
+logic e3 : int
+
+logic e4 : int
+
+logic e5 : int
+
+logic e6 : int
+
+logic e7 : int
+
+logic e8 : int
+
+logic e9 : int
+
+logic e10 : int
+
+logic e11 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(values__first),
+  to_rep1(values__last))
+
+axiom H1 : in_range2(x)
+
+axiom H2 : in_range2(y)
+
+axiom H3 : (dynamic_property2(to_rep1(values__first), to_rep1(values__last),
+  to_rep1(first2(init1)), to_rep1(last2(init1))) and
   ((to_rep1(first2(init1)) = to_rep1(values__first)) and
-  (to_rep1(last2(init1)) = to_rep1(values__last)))) ->
-  ((dynamic_property4(to_rep1(values__first), to_rep1(values__last),
+  (to_rep1(last2(init1)) = to_rep1(values__last))))
+
+axiom H4 : (dynamic_property4(to_rep1(values__first), to_rep1(values__last),
   to_rep1(interm__first), to_rep1(interm__last)) and
   ((to_rep1(interm__first) = to_rep1(values__first)) and
-  (to_rep1(interm__last) = to_rep1(values__last)))) ->
-  ((((to_rep1(values__first) <= x) and (x <= to_rep1(values__last))) and
-  (((to_rep1(values__first) <= y) and (y <= to_rep1(values__last))) and
-  ((is_set({ elts = init; rt = mk(to_rep1(first2(init1)),
-  to_rep1(last2(init1))) }, x, to_rep((init[y])), { elts = interm; rt =
-  mk(to_rep1(interm__first), to_rep1(interm__last)) }) = true) and (is_set({
-  elts = interm; rt = mk(to_rep1(interm__first), to_rep1(interm__last)) }, y,
-  to_rep((init[x])), { elts = values; rt = mk(to_rep1(values__first),
-  to_rep1(values__last)) }) = true)))) -> ((({ int__content = result } = {
-  int__content = e }) and (e1 = 0)) -> (((0 <= e1) and (e1 <= 2147483647)) ->
-  (((((((to_rep1(first2(init1)) <= y) and (y <= to_rep1(last2(init1)))) and
-  (o1 = y)) and (o2 = (init[o1]))) and (o3 = to_rep(o2))) and (((o = x) and
-  in_range4(x)) and (((o3 = to_rep((init[o]))) and (occ({ elts = interm; rt =
+  (to_rep1(interm__last) = to_rep1(values__last))))
+
+axiom H5 : (((to_rep1(values__first) <= x) and
+  (x <= to_rep1(values__last))) and (((to_rep1(values__first) <= y) and
+  (y <= to_rep1(values__last))) and ((is_set({ elts = init; rt =
+  mk(to_rep1(first2(init1)), to_rep1(last2(init1))) }, x, to_rep((init[y])),
+  { elts = interm; rt = mk(to_rep1(interm__first), to_rep1(interm__last))
+  }) = true) and (is_set({ elts = interm; rt = mk(to_rep1(interm__first),
+  to_rep1(interm__last)) }, y, to_rep((init[x])), { elts = values; rt =
+  mk(to_rep1(values__first), to_rep1(values__last)) }) = true))))
+
+axiom H6 : (result1 = e)
+
+axiom H7 : (e1 = 0)
+
+axiom H8 : (0 <= e1)
+
+axiom H9 : (e1 <= 2147483647)
+
+axiom H10 : ((to_rep1(first2(init1)) <= y) and (y <= to_rep1(last2(init1))))
+
+axiom H11 : (o9 = y)
+
+axiom H12 : (o10 = (init[o9]))
+
+axiom H13 : (o11 = to_rep(o10))
+
+axiom H14 : ((o8 = x) and in_range4(x))
+
+axiom H15 : (((o11 = to_rep((init[o8]))) -> (occ({ elts = interm; rt =
   mk(to_rep1(interm__first), to_rep1(interm__last)) }, e1) = occ({ elts =
-  init; rt = mk(to_rep1(first2(init1)), to_rep1(last2(init1))) }, e1))) or
-  ((not (o3 = to_rep((init[o])))) and (((o3 = e1) and (occ({ elts = interm;
+  init; rt = mk(to_rep1(first2(init1)), to_rep1(last2(init1))) }, e1))) and
+  ((not (o11 = to_rep((init[o8])))) -> (((o11 = e1) -> (occ({ elts = interm;
   rt = mk(to_rep1(interm__first), to_rep1(interm__last)) }, e1) = (occ({
   elts = init; rt = mk(to_rep1(first2(init1)), to_rep1(last2(init1))) },
-  e1) + 1))) or ((not (o3 = e1)) and (((to_rep((init[o])) = e1) and (occ({
+  e1) + 1))) and ((not (o11 = e1)) -> (((to_rep((init[o8])) = e1) -> (occ({
   elts = interm; rt = mk(to_rep1(interm__first), to_rep1(interm__last)) },
   e1) = (occ({ elts = init; rt = mk(to_rep1(first2(init1)),
-  to_rep1(last2(init1))) }, e1) - 1))) or ((not (to_rep((init[o])) = e1)) and
-  (occ({ elts = interm; rt = mk(to_rep1(interm__first),
-  to_rep1(interm__last)) }, e1) = occ({ elts = init; rt =
-  mk(to_rep1(first2(init1)), to_rep1(last2(init1))) }, e1)))))))))) ->
-  ((((((to_rep1(first2(init1)) <= x) and (x <= to_rep1(last2(init1)))) and
-  (o4 = x)) and (o5 = (init[o4]))) and (o6 = to_rep(o5))) ->
-  in_range4(y))))))))))))
+  to_rep1(last2(init1))) }, e1) - 1))) and
+  ((not (to_rep((init[o8])) = e1)) -> (occ({ elts = interm; rt =
+  mk(to_rep1(interm__first), to_rep1(interm__last)) }, e1) = occ({ elts =
+  init; rt = mk(to_rep1(first2(init1)), to_rep1(last2(init1))) }, e1))))))))
+
+axiom H16 : ((to_rep1(first2(init1)) <= x) and (x <= to_rep1(last2(init1))))
+
+axiom H17 : (o13 = x)
+
+axiom H18 : (o14 = (init[o13]))
+
+axiom H19 : (o15 = to_rep(o14))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range4(y)

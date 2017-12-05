@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -470,13 +470,55 @@ axiom def_axiom1 :
   ((not (temp___312 = 3)) -> ((temp___308(temp___310,
   temp___311)[temp___312]) = of_rep(temp___311))))))
 
+logic a : (int,(int,int5) farray) farray
+
+logic i : int
+
+logic o : int
+
+logic temp___303 : (int,int5) farray
+
+logic o1 : int
+
+logic o2 : int5
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic temp___313 : (int,int5) farray
+
+logic result : int
+
+logic i1 : int
+
+axiom H : in_range1(n)
+
+axiom H1 : ((2 <= n) and (n <= 6))
+
+axiom H2 : ((3 <= n) and (n <= 7))
+
+axiom H3 : (o = n)
+
+axiom H4 : (temp___303 = (a[o]))
+
+axiom H5 : ((2 <= n) and (n <= 6))
+
+axiom H6 : (o1 = n)
+
+axiom H7 : (o2 = (temp___303[o1]))
+
+axiom H8 : (o3 = to_rep(o2))
+
+axiom H9 : ((o4 = o3) and in_range3(o3))
+
+axiom H10 : (result = i)
+
+axiom H11 : (i1 = o4)
+
+axiom H12 : in_range3(i1)
+
  (* File "r.adb", line 41, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,int5) farray) farray. forall i:int. forall o:int.
-  forall temp___303:(int,int5) farray. forall o1:int. forall o2:int5.
-  forall o3:int. forall o4:int. forall result:int. forall i1:int.
-  (in_range1(n) -> (((2 <= n) and (n <= 6)) -> (((((((((3 <= n) and
-  (n <= 7)) and (o = n)) and (temp___303 = (a[o]))) and ((((2 <= n) and
-  (n <= 6)) and (o1 = n)) and (o2 = (temp___303[o1])))) and
-  (o3 = to_rep(o2))) and ((o4 = o3) and in_range3(o3))) and ((result = i) and
-  (i1 = o4))) -> (in_range3(i1) -> (3 <= n))))))
+goal WP_parameter_def : (3 <= n)

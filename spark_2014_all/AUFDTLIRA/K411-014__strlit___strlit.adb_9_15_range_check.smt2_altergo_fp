@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -428,29 +428,98 @@ axiom temp___String_Literal_155__def_axiom :
   (to_rep((temp___String_Literal_155(void)[4])) = 52)) and
   (to_rep((temp___String_Literal_155(void)[5])) = 53))
 
+logic x : (int,character) farray
+
+logic y : (int,character) farray
+
+logic z : (int,character) farray
+
+logic f : (int,character) farray
+
+logic strlit__dosome__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : (int,character) farray
+
+logic x1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic y1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic z1 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic f1 : (int,character) farray
+
+logic result4 : int
+
+logic strlit__dosome__result1 : int
+
+logic strlit__dosome__result2 : int
+
+logic strlit__dosome__result3 : int
+
+logic x2 : (int,character) farray
+
+logic y2 : (int,character) farray
+
+logic z2 : (int,character) farray
+
+logic f2 : (int,character) farray
+
+logic strlit__dosome__result4 : int
+
+logic x3 : (int,character) farray
+
+logic y3 : (int,character) farray
+
+logic z3 : (int,character) farray
+
+logic f3 : (int,character) farray
+
+logic strlit__dosome__result5 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = temp___String_Literal_150(void))
+
+axiom H2 : (result1 = y)
+
+axiom H3 : (y1 = temp___String_Literal_151(void))
+
+axiom H4 : (to_rep1(y__first) = to_rep1(first(mk(1, 10))))
+
+axiom H5 : (to_rep1(y__last) = to_rep1(last(mk(1, 10))))
+
+axiom H6 : dynamic_property(1, 2147483647, to_rep1(y__first),
+  to_rep1(y__last))
+
+axiom H7 : (result2 = z)
+
+axiom H8 : (z1 = temp___String_Literal_153(void))
+
+axiom H9 : (to_rep1(z__first) = to_rep1(first(mk(1, 10))))
+
+axiom H10 : (to_rep1(z__last) = to_rep1(last(mk(1, 10))))
+
+axiom H11 : dynamic_property(1, 2147483647, to_rep1(z__first),
+  to_rep1(z__last))
+
+axiom H12 : (result3 = f)
+
+axiom H13 : (f1 = temp___String_Literal_155(void))
+
+axiom H14 : ((to_rep1(z__first) <= to_rep1(z__last)) ->
+  (o = ((to_rep1(z__last) - to_rep1(z__first)) + 1)))
+
+axiom H15 : ((not (to_rep1(z__first) <= to_rep1(z__last))) -> (o = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall y:(int,character) farray.
-  forall z:(int,character) farray. forall f:(int,character) farray.
-  forall o:int. forall result:(int,character) farray.
-  forall x1:(int,character) farray. forall result1:(int,character) farray.
-  forall y1:(int,character) farray. forall result2:(int,character) farray.
-  forall z1:(int,character) farray. forall result3:(int,character) farray.
-  forall f1:(int,character) farray. ((({ map__content = result } = {
-  map__content = x }) and (x1 = temp___String_Literal_150(void))) -> (((({
-  map__content = result1 } = { map__content = y }) and
-  (y1 = temp___String_Literal_151(void))) and
-  ((to_rep1(y__first) = to_rep1(first(mk(1, 10)))) and
-  (to_rep1(y__last) = to_rep1(last(mk(1, 10)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(y__first), to_rep1(y__last)) -> (((({ map__content =
-  result2 } = { map__content = z }) and
-  (z1 = temp___String_Literal_153(void))) and
-  ((to_rep1(z__first) = to_rep1(first(mk(1, 10)))) and
-  (to_rep1(z__last) = to_rep1(last(mk(1, 10)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(z__first), to_rep1(z__last)) -> ((({ map__content =
-  result3 } = { map__content = f }) and
-  (f1 = temp___String_Literal_155(void))) ->
-  ((((to_rep1(z__first) <= to_rep1(z__last)) and
-  (o = ((to_rep1(z__last) - to_rep1(z__first)) + 1))) or
-  ((not (to_rep1(z__first) <= to_rep1(z__last))) and (o = 0))) ->
-  in_range(o)))))))))
+goal WP_parameter_def : in_range(o)

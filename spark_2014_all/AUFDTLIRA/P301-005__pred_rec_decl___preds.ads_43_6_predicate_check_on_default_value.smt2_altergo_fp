@@ -107,7 +107,7 @@ function tarr_okD1__ref___projection(a: tarr_okD1__ref) : tarr_okD1 =
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -248,12 +248,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : (int,integer) farray
+
+logic temp___346 : (int,integer) farray
+
+axiom H :
+  (forall k:int. (((1 <= k) and (k <= 10)) -> (not (to_rep((i19s[k])) = 0))))
+
+axiom H1 : true
+
+axiom H2 :
+  (forall temp___216:int. (((1 <= temp___216) and (temp___216 <= 10)) ->
+  (to_rep((temp___346[temp___216])) = 1)))
+
  (* File "preds.ads", line 45, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___346:(int,integer) farray.
-  ((forall k:int. (((1 <= k) and (k <= 10)) ->
-   (not (to_rep((i19s[k])) = 0)))) ->
-  ((forall temp___216:int. (((1 <= temp___216) and (temp___216 <= 10)) ->
-   (to_rep((temp___346[temp___216])) = 1))) ->
   (forall k:int. (((1 <= k) and (k <= 10)) ->
-  (not (to_rep((temp___346[k])) = 0)))))))
+  (not (to_rep((temp___346[k])) = 0))))

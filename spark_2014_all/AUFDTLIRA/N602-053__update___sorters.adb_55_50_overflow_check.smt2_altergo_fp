@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -520,12 +520,103 @@ type t21b__ref = { t21b__content : us_t1
 
 function t21b__ref___projection(a: t21b__ref) : us_t1 = (a).t21b__content
 
+logic values : (int,integer) farray
+
+logic smallest : int
+
+logic current : int
+
+logic temp___188 : int
+
+logic o : (int,integer) farray
+
+logic temp___181 : (int,integer) farray
+
+logic temp___1811 : t1
+
+logic o1 : (int,integer) farray
+
+logic o2 : t
+
+logic o3 : int
+
+logic o4 : int
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic j1 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic temp___186 : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : (int,integer) farray
+
+logic temp___1812 : (int,integer) farray
+
+logic temp___1813 : t1
+
+logic o14 : (int,integer) farray
+
+logic o15 : t
+
+logic o16 : int
+
+logic o17 : int
+
+logic values1 : (int,integer) farray
+
+logic result : int
+
+logic current1 : int
+
+logic result1 : int
+
+logic smallest1 : int
+
+logic values2 : (int,integer) farray
+
+logic values3 : (int,integer) farray
+
+logic smallest2 : int
+
+logic current2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic current3 : int
+
+logic result4 : int
+
+logic smallest3 : int
+
+logic values4 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : ((((to_rep(values__first) <= to_rep(values__last)) ->
+  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) and
+  ((not (to_rep(values__first) <= to_rep(values__last))) -> (1 <= 0))) and
+  (to_rep(values__last) <= 2147483647))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(smallest))
+
  (* File "sorters.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall smallest:int. (dynamic_property(1, 2147483647,
-  to_rep(values__first), to_rep(values__last)) ->
-  (((((to_rep(values__first) <= to_rep(values__last)) and
-  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) or
-  ((not (to_rep(values__first) <= to_rep(values__last))) and (1 <= 0))) and
-  (to_rep(values__last) <= 2147483647)) -> (((1 <= 2147483647) ->
-  in_range2(smallest)) -> in_range1((to_rep(values__last) - 1))))))
+goal WP_parameter_def : in_range1((to_rep(values__last) - 1))

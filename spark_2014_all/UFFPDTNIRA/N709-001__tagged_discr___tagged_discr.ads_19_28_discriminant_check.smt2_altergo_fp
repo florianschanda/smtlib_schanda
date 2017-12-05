@@ -1065,7 +1065,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1261,19 +1261,19 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  ((((((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
-  (((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z)) and
-  (tagged_discr__t__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
-  (tagged_discr__t__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y)))) ->
-  (bool_eq6(a, b) = true)) and
-  ((not ((((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
-  (((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z)) and
+  ((((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
   (tagged_discr__t__x__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
   (tagged_discr__t__y__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y))))) ->
+  (bool_eq6(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
+  (tagged_discr__t__x__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
+  (tagged_discr__t__y__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -1399,9 +1399,12 @@ logic v5 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (to_int1(v1) = to_int1(of_int1(0)))
+
+axiom H1 : ((not (to_rep2(v) = 0)) -> (to_rep2(v) = 2))
+
  (* File "tagged_discr.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : ((to_int1(v1) = to_int1(of_int1(0))) ->
-  (((not (to_rep2(v) = 0)) -> (to_rep2(v) = 2)) -> tagged_discr__t__x__pred({
-  us_split_discrs1 = { rec__tagged_discr__t__discr = v }; us_split_fields1 =
-  { rec__tagged_discr__t__z = v1; rec__tagged_discr__t__x = v2;
-  rec__tagged_discr__t__y = v3; rec__ext__ = v4 }; attr__tag = v5 })))
+goal WP_parameter_def : tagged_discr__t__x__pred({ us_split_discrs1 = {
+  rec__tagged_discr__t__discr = v }; us_split_fields1 = {
+  rec__tagged_discr__t__z = v1; rec__tagged_discr__t__x = v2;
+  rec__tagged_discr__t__y = v3; rec__ext__ = v4 }; attr__tag = v5 })

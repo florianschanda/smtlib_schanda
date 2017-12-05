@@ -135,7 +135,7 @@ function index_type__ref___projection(a: index_type__ref) : index_type =
 
 type contents_type
 
-predicate in_range2(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range2(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq3 : int, int -> bool
 
@@ -295,27 +295,91 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic t : (int,contents_type) farray
+
+logic t_old : (int,contents_type) farray
+
+logic temp : int
+
+logic o : contents_type
+
+logic o1 : (int,contents_type) farray
+
+logic o2 : contents_type
+
+logic o3 : (int,contents_type) farray
+
+logic result : (int,contents_type) farray
+
+logic t_old1 : (int,contents_type) farray
+
+logic result1 : int
+
+logic temp1 : int
+
+logic result2 : (int,contents_type) farray
+
+logic t1 : (int,contents_type) farray
+
+logic result3 : (int,contents_type) farray
+
+logic t2 : (int,contents_type) farray
+
+logic t3 : (int,contents_type) farray
+
+logic t_old2 : (int,contents_type) farray
+
+logic temp2 : int
+
+logic t4 : (int,contents_type) farray
+
+logic t_old3 : (int,contents_type) farray
+
+logic temp3 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range1(j)
+
+axiom H2 : (result = t_old)
+
+axiom H3 : (t_old1 = t)
+
+axiom H4 : (((- 1000) <= 1000) -> in_range2(temp))
+
+axiom H5 : (result1 = temp)
+
+axiom H6 : (temp1 = to_rep((t[i])))
+
+axiom H7 : (to_rep(o) = to_rep((t[j])))
+
+axiom H8 : (o1 = (t[i <- o]))
+
+axiom H9 : (result2 = t)
+
+axiom H10 : (t1 = o1)
+
+axiom H11 : (to_rep(o2) = temp1)
+
+axiom H12 : (o3 = (t1[j <- o2]))
+
+axiom H13 : (result3 = t1)
+
+axiom H14 : (t2 = o3)
+
+axiom H15 : (perm(t2, t_old1) = true)
+
+axiom H16 : (temp2 = temp1)
+
+axiom H17 : (t_old2 = t_old1)
+
+axiom H18 : (t2 = t3)
+
+axiom H19 : (temp3 = temp1)
+
+axiom H20 : (t_old3 = t_old1)
+
+axiom H21 : (t4 = t2)
+
  (* File "t3q5.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t:(int,contents_type) farray.
-  forall t_old:(int,contents_type) farray. forall temp:int.
-  forall o:contents_type. forall o1:(int,contents_type) farray.
-  forall o2:contents_type. forall o3:(int,contents_type) farray.
-  forall result:(int,contents_type) farray.
-  forall t_old1:(int,contents_type) farray. forall result1:int.
-  forall temp1:int. forall result2:(int,contents_type) farray.
-  forall t1:(int,contents_type) farray.
-  forall result3:(int,contents_type) farray.
-  forall t2:(int,contents_type) farray. forall t3:(int,contents_type) farray.
-  forall t_old2:(int,contents_type) farray. forall temp2:int.
-  forall t4:(int,contents_type) farray.
-  forall t_old3:(int,contents_type) farray. forall temp3:int.
-  ((in_range1(i) and (in_range1(j) and ((((result = t_old) and
-  (t_old1 = t)) and ((((-1000) <= 1000) -> in_range2(temp)) and
-  (((result1 = temp) and (temp1 = to_rep((t[i])))) and
-  ((((to_rep(o) = to_rep((t[j]))) and (o1 = (t[i <- o]))) and
-  ((result2 = t) and (t1 = o1))) and ((((to_rep(o2) = temp1) and
-  (o3 = (t1[j <- o2]))) and ((result3 = t1) and (t2 = o3))) and (perm(t2,
-  t_old1) = true)))))) and (((temp2 = temp1) and ((t_old2 = t_old1) and
-  (t2 = t3))) and ((temp3 = temp1) and ((t_old3 = t_old1) and
-  (t4 = t2))))))) -> (to_rep((t3[i])) = to_rep((t[j])))))
+goal WP_parameter_def : (to_rep((t3[i])) = to_rep((t[j])))

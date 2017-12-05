@@ -143,6 +143,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+axiom H : in_range1(a)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (a <= a)
+
  (* File "info_flow_tests.adb", line 158, characters 0-0 *)
-goal WP_parameter_def : (in_range1(a) -> (in_range1(b) -> ((a <= a) ->
-  (0 <= a))))
+goal WP_parameter_def : (0 <= a)

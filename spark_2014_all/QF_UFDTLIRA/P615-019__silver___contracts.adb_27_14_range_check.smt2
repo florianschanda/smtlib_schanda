@@ -45,6 +45,7 @@
 (declare-const y Int)
 (declare-const z Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const z1 Int)
 (assert (in_range1 y))
 (assert (=> (<= 0 2147483647) (in_range1 z)))

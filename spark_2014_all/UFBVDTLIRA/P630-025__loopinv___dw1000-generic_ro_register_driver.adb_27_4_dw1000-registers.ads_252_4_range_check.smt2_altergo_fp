@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1048,6 +1048,11 @@ axiom register_id__def_axiom : (register_id = of_int(19))
 
 axiom sub_register__def_axiom : (sub_register = of_int1(0))
 
+axiom H : in_range1(register_id)
+
+axiom H1 : in_range2(sub_register)
+
+axiom H2 : (1 <= 4)
+
  (* File "dw1000-generic_ro_register_driver.ads", line 38, characters 0-0 *)
-goal WP_parameter_def : (in_range1(register_id) ->
-  (in_range2(sub_register) -> ((1 <= 4) -> (0 <= 1))))
+goal WP_parameter_def : (0 <= 1)

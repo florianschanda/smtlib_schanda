@@ -240,6 +240,7 @@
 (assert true)
 (assert (forall ((container1 us_rep2)) (forall ((key us_rep1)) (! (=> (= (has_key container1 key) true) (let ((result (witness container1 key))) (and (= (has_witness container1 result) true) (dynamic_invariant2 result true false true)))) :pattern ((witness container1 key))))))
 (assert (forall ((container1 us_rep2)) (forall ((witness1 Int)) (! (=> (and (dynamic_invariant2 witness1 true true true) (= (has_witness container1 witness1) true)) (dynamic_invariant5 (w_get container1 witness1) true false true)) :pattern ((w_get container1 witness1))))))
+(declare-const o Int)
 (assert (in_range result__))
 (assert (= (has_key (positions container) position) true))
 (assert (not (= (has_key (positions container) position) true)))

@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -775,5 +775,19 @@ function r__ref___projection(a: r__ref) : us_rep2 = (a).r__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic v__split_fields : natural
+
+logic v__split_fields1 : (int,natural) farray
+
+logic v__split_fields2 : t1
+
+logic us : int
+
+logic priv__init__p__fields : (int,natural) farray
+
+logic priv__init__p__fields1 : t
+
+axiom H : in_range(max)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(max) -> in_range(max))
+goal WP_parameter_def : in_range(max)

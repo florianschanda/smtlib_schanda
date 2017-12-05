@@ -38,6 +38,8 @@
 (declare-const x1 Int)
 (declare-const result1 Int)
 (declare-const y1 Int)
+(declare-const x2 Int)
+(declare-const y2 Int)
 (assert (= result x))
 (assert (= x1 2147483647))
 (assert (in_range x1))

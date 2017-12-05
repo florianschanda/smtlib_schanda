@@ -451,18 +451,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -520,8 +520,33 @@ axiom has_prime__def_axiom :
   high) = true) <->
   (exists v:int. (((low <= v) and (v <= high)) and (is_prime(v) = true)))))
 
+logic is_prime1 : (int,bool) farray
+
+logic coprimes : (int,bool) farray
+
+logic result__ : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : (int,bool) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : (int,bool) farray
+
+logic coprimes1 : (int,bool) farray
+
+axiom H : (valid_prime_data(is_prime1) = true)
+
+axiom H1 : ((1 <= 2147483647) -> in_range(result__))
+
  (* File "prime_and_coprime_numbers.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall is_prime1:(int,bool) farray. forall result__:int.
-  ((valid_prime_data(is_prime1) = true) -> (((1 <= 2147483647) ->
-  in_range(result__)) -> (0 <= 555))))
+goal WP_parameter_def : (0 <= 555)

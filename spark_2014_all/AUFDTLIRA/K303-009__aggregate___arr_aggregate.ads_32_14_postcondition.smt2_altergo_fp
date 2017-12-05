@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -307,12 +307,25 @@ logic temp___185 : int -> (int,integer) farray
 axiom def_axiom1 :
   (forall temp___187:int. ((temp___185(temp___187)[1]) = of_rep(temp___187)))
 
- (* File "arr_aggregate.ads", line 28, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall a:(int,integer) farray.
-  forall a1:(int,integer) farray. forall a2:(int,integer) farray.
-  ((in_range(one) and (in_range(b) and ((one = 1) and ((((b = 1) and
-  (to_rep((a[one])) = one)) or ((not (b = 1)) and
+logic one : int
+
+logic a : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+axiom H : in_range(one)
+
+axiom H1 : in_range(b)
+
+axiom H2 : (one = 1)
+
+axiom H3 : ((((b = 1) -> (to_rep((a[one])) = one)) and ((not (b = 1)) ->
   (forall k:int. (((1 <= k) and (k <= 1)) -> (to_rep((a[k])) = one))))) and
-  ((a = a1) and (a2 = a)))))) -> ((b = 1) -> (bool_eq3(a1, 1, 1,
-  temp___180(one), 1, 1) = true))))
+  ((a = a1) and (a2 = a)))
+
+axiom H4 : (b = 1)
+
+ (* File "arr_aggregate.ads", line 28, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3(a1, 1, 1, temp___180(one), 1, 1) = true)

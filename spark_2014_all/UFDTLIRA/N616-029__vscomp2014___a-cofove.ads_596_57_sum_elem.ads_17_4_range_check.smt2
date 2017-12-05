@@ -207,6 +207,7 @@
 (assert (forall ((container us_rep1)) (! (let ((result (length1 container))) (and (<= (+ (- 1) result) 10000) (dynamic_invariant result true false true))) :pattern ((length1 container)))))
 (assert true)
 (declare-const container__split_fields us_main_type)
+(declare-const o Int)
 (assert (in_range2 index))
 (assert (in_range1 count))
 (assert (and (<= 0 index) (<= index (last (model__ (mk___rep container__split_discrs (mk___split_fields container__split_fields)))))))

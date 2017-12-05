@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -251,18 +251,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1138,9 +1138,25 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range3(w_get(container, witness1)))))
 
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___398 : count_type
+
+logic o2 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___398 = o1)
+
+axiom H3 : (temp___398 = no_element)
+
+axiom H4 : true
+
+axiom H5 : in_range1(count)
+
  (* File "a-cfdlli.ads", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:count_type. forall o1:count_type. forall temp___398:count_type.
-  (((((to_rep(o) = 0) and (o = o1)) and (temp___398 = o1)) and
-  (temp___398 = no_element)) -> (in_range1(count) ->
-  in_range((to_rep(container__split_discrs) - count)))))
+goal WP_parameter_def : in_range((to_rep(container__split_discrs) - count))

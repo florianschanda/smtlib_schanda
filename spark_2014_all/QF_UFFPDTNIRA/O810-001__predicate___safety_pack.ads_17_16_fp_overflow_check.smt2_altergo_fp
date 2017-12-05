@@ -1131,8 +1131,15 @@ logic threshold : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : tqtisFinite(value)
+
+axiom H1 : in_range2(threshold)
+
+axiom H2 : (not (le(neg(threshold), value) and le(value, threshold)))
+
+axiom H3 : (not lt(fliteral1, value))
+
+axiom H4 : lt(value, fliteral1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(value) -> (in_range2(threshold) ->
-  ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> (lt(value, fliteral1) ->
-  tqtisFinite(add(NearestTiesToEven, value, threshold)))))))
+goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, value, threshold))

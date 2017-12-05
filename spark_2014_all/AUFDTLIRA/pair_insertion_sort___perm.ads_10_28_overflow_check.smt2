@@ -129,6 +129,7 @@
 (define-fun t18s__ref___projection ((a1 t18s__ref)) us_t1 (t18s__content a1))
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (define-fun dynamic_invariant2 ((temp___expr_136 Int) (temp___is_init_133 Bool) (temp___skip_constant_134 Bool) (temp___do_toplevel_135 Bool)) Bool (=> (or (= temp___is_init_133 true) (<= 0 2147483646)) (in_range1 temp___expr_136)))
+(declare-const temp___227 Int)
 (assert (dynamic_invariant a true false true))
 (assert (< 0 (length a)))
 (assert (not (in_range (- (to_rep (last (rt a))) 1))))

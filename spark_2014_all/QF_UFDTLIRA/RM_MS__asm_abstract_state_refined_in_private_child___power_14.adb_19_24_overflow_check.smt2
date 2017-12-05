@@ -36,6 +36,7 @@
 (declare-const level Int)
 (declare-const level_a Int)
 (declare-const level_b Int)
+(declare-const o Int)
 (declare-const level_a1 Int)
 (declare-const level_b1 Int)
 (assert (=> (<= (- 2147483648) 2147483647) (in_range level)))

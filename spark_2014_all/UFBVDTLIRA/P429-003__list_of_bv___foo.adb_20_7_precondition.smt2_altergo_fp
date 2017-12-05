@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1357,14 +1357,33 @@ axiom w_get__post_axiom :
   (has_witness(container, witness1) = true)) -> in_range4(w_get(container,
   witness1)))))
 
+logic x : t
+
+logic l__split_fields : us_main_type
+
+logic us : int
+
+logic result : t
+
+logic x1 : t
+
+logic foo__lists__append__container__fields : us_main_type
+
+axiom H : true
+
+axiom H1 : ((us = 5) and in_range(5))
+
+axiom H2 : ((to_rep(l__split_discrs) = 5) and (is_empty({ us_split_discrs1 =
+  { rec__foo__lists__list__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__foo__lists__list = l__split_fields } }) = true))
+
+axiom H3 : (5 = to_rep(l__split_discrs))
+
+axiom H4 : (result = x)
+
+axiom H5 : (x1 = of_int(0))
+
  (* File "a-cfdlli.ads", line 1514, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall l__split_fields:us_main_type. forall us:int.
-  forall result:t. forall x1:t. (((us = 5) and in_range(5)) ->
-  (((to_rep(l__split_discrs) = 5) and (is_empty({ us_split_discrs1 = {
+goal WP_parameter_def : (length({ us_split_discrs1 = {
   rec__foo__lists__list__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__foo__lists__list = l__split_fields } }) = true)) ->
-  ((5 = to_rep(l__split_discrs)) -> (((result = x) and (x1 = of_int(0))) ->
-  (length({ us_split_discrs1 = { rec__foo__lists__list__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__foo__lists__list =
-  l__split_fields } }) <  to_rep(l__split_discrs)))))))
+  rec__foo__lists__list = l__split_fields } }) <  to_rep(l__split_discrs))

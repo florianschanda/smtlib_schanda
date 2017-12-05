@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -406,26 +406,108 @@ logic t1 : bool
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic a : (int,bool) farray
+
+logic o : int
+
+logic p1__swap__t__assume : bool
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : (int,bool) farray
+
+logic o5 : int
+
+logic o6 : (int,bool) farray
+
+logic o7 : int
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : bool
+
+logic k : int
+
+logic o11 : int
+
+logic o12 : bool
+
+logic o13 : int
+
+logic o14 : bool
+
+logic result : (int,bool) farray
+
+logic a1 : (int,bool) farray
+
+logic result1 : (int,bool) farray
+
+logic a2 : (int,bool) farray
+
+logic a3 : (int,bool) farray
+
+logic a4 : (int,bool) farray
+
+axiom H : dynamic_property(0, 1000000, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range2(j)
+
+axiom H3 : (((to_rep(a__first) <= i) and (i <= to_rep(a__last))) and
+  ((to_rep(a__first) <= j) and (j <= to_rep(a__last))))
+
+axiom H4 : ((to_rep(a__first) <= i) and (i <= to_rep(a__last)))
+
+axiom H5 : (o = i)
+
+axiom H6 : (p1__swap__t__assume = (a[o]))
+
+axiom H7 : (p1__swap__t__assume = t1)
+
+axiom H8 : ((to_rep(a__first) <= j) and (j <= to_rep(a__last)))
+
+axiom H9 : (o1 = j)
+
+axiom H10 : (o2 = (a[o1]))
+
+axiom H11 : ((to_rep(a__first) <= i) and (i <= to_rep(a__last)))
+
+axiom H12 : (o3 = i)
+
+axiom H13 : (o4 = (a[o3 <- o2]))
+
+axiom H14 : (result = a)
+
+axiom H15 : (a1 = o4)
+
+axiom H16 : ((to_rep(a__first) <= j) and (j <= to_rep(a__last)))
+
+axiom H17 : (o5 = j)
+
+axiom H18 : (o6 = (a1[o5 <- t1]))
+
+axiom H19 : (a1 = result1)
+
+axiom H20 : (a2 = o6)
+
+axiom H21 : (a2 = a3)
+
+axiom H22 : (a4 = a2)
+
+axiom H23 : (to_rep(a__first) <= k)
+
+axiom H24 : (k <= to_rep(a__last))
+
+axiom H25 : (not (k = i))
+
+axiom H26 : (not (k = j))
+
  (* File "p1.adb", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,bool) farray. forall o:int. forall p1__swap__t__assume:bool.
-  forall o1:int. forall o2:bool. forall o3:int. forall o4:(int,bool) farray.
-  forall o5:int. forall o6:(int,bool) farray. forall k:int.
-  forall result:(int,bool) farray. forall a1:(int,bool) farray.
-  forall result1:(int,bool) farray. forall a2:(int,bool) farray.
-  forall a3:(int,bool) farray. forall a4:(int,bool) farray.
-  (dynamic_property(0, 1000000, to_rep(a__first), to_rep(a__last)) ->
-  (in_range2(i) -> (in_range2(j) -> ((((to_rep(a__first) <= i) and
-  (i <= to_rep(a__last))) and ((to_rep(a__first) <= j) and
-  (j <= to_rep(a__last)))) -> ((((((((to_rep(a__first) <= i) and
-  (i <= to_rep(a__last))) and (o = i)) and
-  (p1__swap__t__assume = (a[o]))) and (p1__swap__t__assume = t1)) and
-  (((((((to_rep(a__first) <= j) and (j <= to_rep(a__last))) and (o1 = j)) and
-  (o2 = (a[o1]))) and ((((to_rep(a__first) <= i) and
-  (i <= to_rep(a__last))) and (o3 = i)) and (o4 = (a[o3 <- o2])))) and (({
-  map__content = result } = { map__content = a }) and (a1 = o4))) and
-  (((((to_rep(a__first) <= j) and (j <= to_rep(a__last))) and (o5 = j)) and
-  (o6 = (a1[o5 <- t1]))) and ((a1 = result1) and (a2 = o6))))) and
-  ((a2 = a3) and (a4 = a2))) -> (((to_rep(a__first) <= k) and
-  (k <= to_rep(a__last))) -> (((not (k = i)) and (not (k = j))) ->
-  (to_rep(a__first) <= k)))))))))
+goal WP_parameter_def : (to_rep(a__first) <= k)

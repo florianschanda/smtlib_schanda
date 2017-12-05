@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -205,15 +205,15 @@ logic bool_eq3 : us_rep, us_rep -> bool
 
 axiom bool_eq_def2 :
   (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep1(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-  (to_rep(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep(((b).us_split_fields1).rec__storage_place_attributes__r2__d3))) and
-  (storage_place_attributes__r2__d2__pred(a) ->
-  (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2))) ->
-  (bool_eq3(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep1(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
-  (to_rep(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep(((b).us_split_fields1).rec__storage_place_attributes__r2__d3))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep1(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+  ((to_rep(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep(((b).us_split_fields1).rec__storage_place_attributes__r2__d3)) and
   (storage_place_attributes__r2__d2__pred(a) ->
   (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2)))) ->
+  (bool_eq3(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__storage_place_attributes__r2__d1) = to_rep1(((b).us_split_discrs1).rec__storage_place_attributes__r2__d1)) and
+  ((to_rep(((a).us_split_fields1).rec__storage_place_attributes__r2__d3) = to_rep(((b).us_split_fields1).rec__storage_place_attributes__r2__d3)) and
+  (storage_place_attributes__r2__d2__pred(a) ->
+  (((a).us_split_fields1).rec__storage_place_attributes__r2__d2 = ((b).us_split_fields1).rec__storage_place_attributes__r2__d2))))) ->
   (bool_eq3(a, b) = false))))
 
 logic value__size : int
@@ -429,6 +429,7 @@ logic x3 : bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : ((5 = to_rep1(x)) and (x3 = true))
+
  (* File "storage_place_attributes.adb", line 59, characters 0-0 *)
-goal WP_parameter_def : (((5 = to_rep1(x)) and (x3 = true)) ->
-  (0 <= storage_place_attributes__r2__d1__first__bit1))
+goal WP_parameter_def : (0 <= storage_place_attributes__r2__d1__first__bit1)

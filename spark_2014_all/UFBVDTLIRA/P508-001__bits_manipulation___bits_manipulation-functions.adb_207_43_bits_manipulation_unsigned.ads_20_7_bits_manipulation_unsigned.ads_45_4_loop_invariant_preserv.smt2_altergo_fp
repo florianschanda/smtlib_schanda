@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -748,7 +748,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -812,37 +812,154 @@ function t771s__ref___projection(a: t771s__ref) : integer =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "bits_manipulation.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:t. forall i:int. forall o:t. forall o1:t. forall o2:t.
-  forall o3:t. forall result:t. forall result__1:t. forall result1:int.
-  forall i1:int. forall result2:t. forall result__2:t. forall result__3:t.
-  forall i2:int. forall result3:int. forall i3:int. forall result4:t.
-  forall result__4:t. (in_range1(amount) -> ((({ t__content = result } = {
-  t__content = result__ }) and (result__1 = of_int(0))) ->
-  ((axiom__(void) = true) -> ((({ int__content = result1 } = { int__content =
-  i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= amount)) ->
-  (((((((i1 - 1) <  18446744073709551616) and (o = lsl_bv(of_int(1),
-  of_int((i1 - 1))))) or ((not ((i1 - 1) <  18446744073709551616)) and
-  (o = of_int(0)))) and (o1 = add(result__1, o))) and
-  ((result__1 = result2) and (result__2 = o1))) ->
-  (((((i2 - 1) <  18446744073709551616) and
-  ((((i2 - 1) <  18446744073709551616) and (bw_and(result__3,
+logic result__ : t
+
+logic i : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result : t
+
+logic temp___487 : int
+
+logic temp___486 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic result : t
+
+logic result__1 : t
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : t
+
+logic result__2 : t
+
+logic result__3 : t
+
+logic i2 : int
+
+logic result3 : int
+
+logic i3 : int
+
+logic result4 : t
+
+logic result__4 : t
+
+logic result__5 : t
+
+logic i4 : int
+
+logic result__6 : t
+
+logic i5 : int
+
+logic result__7 : t
+
+logic i6 : int
+
+logic result__8 : t
+
+logic i7 : int
+
+logic result__9 : t
+
+logic i8 : int
+
+logic result__10 : t
+
+logic i9 : int
+
+logic result5 : t
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result1 : t
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result2 : t
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result3 : t
+
+logic result__11 : t
+
+logic i10 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result4 : t
+
+logic result__12 : t
+
+logic i11 : int
+
+logic bits_manipulation_unsigned__unsigned_64__functions__proofs__make_mask__lemma2__ones__result5 : t
+
+axiom H : in_range1(amount)
+
+axiom H1 : (result = result__)
+
+axiom H2 : (result__1 = of_int(0))
+
+axiom H3 : true
+
+axiom H4 : (axiom__(void) = true)
+
+axiom H5 : (result1 = i)
+
+axiom H6 : (i1 = 1)
+
+axiom H7 : (1 <= i1)
+
+axiom H8 : (i1 <= amount)
+
+axiom H9 : (((i1 - 1) <  18446744073709551616) -> (o = lsl_bv(of_int(1),
+  of_int((i1 - 1)))))
+
+axiom H10 : ((not ((i1 - 1) <  18446744073709551616)) -> (o = of_int(0)))
+
+axiom H11 : (o1 = add(result__1, o))
+
+axiom H12 : (result__1 = result2)
+
+axiom H13 : (result__2 = o1)
+
+axiom H14 : ((((i2 - 1) <  18446744073709551616) ->
+  ((((i2 - 1) <  18446744073709551616) -> (bw_and(result__3,
   lsl_bv(of_int(1), of_int((i2 - 1)))) = lsl_bv(of_int(1),
-  of_int((i2 - 1))))) or ((not ((i2 - 1) <  18446744073709551616)) and
-  (bw_and(result__3, lsl_bv(of_int(1), of_int((i2 - 1)))) = of_int(0))))) or
-  ((not ((i2 - 1) <  18446744073709551616)) and
-  ((((i2 - 1) <  18446744073709551616) and (bw_and(result__3,
-  of_int(0)) = lsl_bv(of_int(1), of_int((i2 - 1))))) or
-  ((not ((i2 - 1) <  18446744073709551616)) and (bw_and(result__3,
-  of_int(0)) = of_int(0)))))) -> (((((1 <= amount) -> dynamic_property(1,
-  amount, i2)) and ((1 <= i2) and (i2 <= amount))) and
-  ((not (i2 = amount)) and (((result3 = i2) and (i3 = (i2 + 1))) and
-  ((((((i3 - 1) <  18446744073709551616) and (o2 = lsl_bv(of_int(1),
-  of_int((i3 - 1))))) or ((not ((i3 - 1) <  18446744073709551616)) and
-  (o2 = of_int(0)))) and (o3 = add(result__3, o2))) and
-  ((result4 = result__3) and (result__4 = o3)))))) ->
-  ((((i3 - 1) <  18446744073709551616) ->
+  of_int((i2 - 1))))) and ((not ((i2 - 1) <  18446744073709551616)) ->
+  (bw_and(result__3, lsl_bv(of_int(1), of_int((i2 - 1)))) = of_int(0))))) and
+  ((not ((i2 - 1) <  18446744073709551616)) ->
+  ((((i2 - 1) <  18446744073709551616) -> (bw_and(result__3,
+  of_int(0)) = lsl_bv(of_int(1), of_int((i2 - 1))))) and
+  ((not ((i2 - 1) <  18446744073709551616)) -> (bw_and(result__3,
+  of_int(0)) = of_int(0))))))
+
+axiom H15 : (((1 <= amount) -> dynamic_property(1, amount, i2)) and
+  ((1 <= i2) and (i2 <= amount)))
+
+axiom H16 : (not (i2 = amount))
+
+axiom H17 : (result3 = i2)
+
+axiom H18 : (i3 = (i2 + 1))
+
+axiom H19 : (((i3 - 1) <  18446744073709551616) -> (o2 = lsl_bv(of_int(1),
+  of_int((i3 - 1)))))
+
+axiom H20 : ((not ((i3 - 1) <  18446744073709551616)) -> (o2 = of_int(0)))
+
+axiom H21 : (o3 = add(result__3, o2))
+
+axiom H22 : (result4 = result__3)
+
+axiom H23 : (result__4 = o3)
+
+ (* File "bits_manipulation.ads", line 3, characters 0-0 *)
+goal WP_parameter_def : ((((i3 - 1) <  18446744073709551616) ->
   ((((i3 - 1) <  18446744073709551616) -> (bw_and(result__4,
   lsl_bv(of_int(1), of_int((i3 - 1)))) = lsl_bv(of_int(1),
   of_int((i3 - 1))))) and ((not ((i3 - 1) <  18446744073709551616)) ->
@@ -851,4 +968,4 @@ goal WP_parameter_def :
   ((((i3 - 1) <  18446744073709551616) -> (bw_and(result__4,
   of_int(0)) = lsl_bv(of_int(1), of_int((i3 - 1))))) and
   ((not ((i3 - 1) <  18446744073709551616)) -> (bw_and(result__4,
-  of_int(0)) = of_int(0)))))))))))))))
+  of_int(0)) = of_int(0))))))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -686,7 +686,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1067,7 +1067,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type octet_array_extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 65535))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 65535))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1554,31 +1554,166 @@ axiom def_axiom :
   (forall temp___504:int. (((temp___499(temp___501, temp___502,
   temp___503)).elts3[temp___504]) = of_rep2(temp___501))))))
 
+logic last8 : int
+
+logic temporary_array : (int,octet) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic temp___506 : (int,octet) farray
+
+logic temp___5061 : t4
+
+logic temp___507 : (int,octet) farray
+
+logic temp___5071 : t3
+
+logic o9 : (int,octet) farray
+
+logic o10 : t3
+
+logic o11 : (int,octet) farray
+
+logic temp___510 : (int,octet) farray
+
+logic temp___508 : int
+
+logic o12 : octet
+
+logic o13 : int
+
+logic o14 : (int,octet) farray
+
+logic o15 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : (int,octet) farray
+
+logic temporary_array1 : (int,octet) farray
+
+logic result4 : int
+
+logic i1 : int
+
+logic temporary_array2 : (int,octet) farray
+
+logic i2 : int
+
+logic result5 : (int,octet) farray
+
+logic temporary_array3 : (int,octet) farray
+
+logic temporary_array4 : (int,octet) farray
+
+logic i3 : int
+
+logic temporary_array5 : (int,octet) farray
+
+logic i4 : int
+
+logic temporary_array6 : (int,octet) farray
+
+logic i5 : int
+
+logic temporary_array7 : (int,octet) farray
+
+logic i6 : int
+
+logic data : (int,octet) farray
+
+logic last9 : int
+
+logic data1 : (int,octet) farray
+
+logic last10 : int
+
+logic temporary_array8 : (int,octet) farray
+
+logic i7 : int
+
+logic data2 : (int,octet) farray
+
+logic last11 : int
+
+logic temporary_array9 : (int,octet) farray
+
+logic i8 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(value1)),
+  to_rep1(last(value1)))
+
+axiom H1 : dynamic_property1(0, 65535, to_rep1(data__first),
+  to_rep1(data__last))
+
+axiom H2 : in_range4(position)
+
+axiom H3 : (((- 1) <= 65535) -> in_range5(last8))
+
+axiom H4 : (comp_mod(position,4) = 0)
+
+axiom H5 : ((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (o7 = ((to_rep1(data__last) - to_rep1(data__first)) + 1)))
+
+axiom H6 : ((not (to_rep1(data__first) <= to_rep1(data__last))) -> (o7 = 0))
+
+axiom H7 : (((0 <  o7) -> (result = true)) and ((not (0 <  o7)) ->
+  (result = false)))
+
+axiom H8 : (result = true)
+
+axiom H9 : ((to_rep1(data__first) <= to_rep1(data__last)) ->
+  (o5 = ((to_rep1(data__last) - to_rep1(data__first)) + 1)))
+
+axiom H10 : ((not (to_rep1(data__first) <= to_rep1(data__last))) -> (o5 = 0))
+
+axiom H11 : (o6 = comp_mod(o5,4))
+
+axiom H12 : (((o6 = 0) -> (result1 = true)) and ((not (o6 = 0)) ->
+  (result1 = false)))
+
+axiom H13 : (result1 = true)
+
+axiom H14 : ((o4 = length({ elts = value; rt = value1 })) and
+  in_range1(length({ elts = value; rt = value1 })))
+
+axiom H15 : (((o4 <= 65536) -> (result2 = true)) and ((not (o4 <= 65536)) ->
+  (result2 = false)))
+
+axiom H16 : (result2 = true)
+
+axiom H17 : (to_rep1(data__first) <= position)
+
+axiom H18 : (position <= to_rep1(data__last))
+
+axiom H19 : ((o1 = (to_rep1(data__last) - position)) and
+  in_range1((to_rep1(data__last) - position)))
+
+axiom H20 : (o2 = (o1 + 1))
+
+axiom H21 : ((o3 = o2) and in_range1(o2))
+
  (* File "cubedos-lib-xdr.ads", line 138, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last8:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall o5:int. forall o6:int.
-  forall result:bool. forall result1:bool. forall result2:bool.
-  (dynamic_property(1, 2147483647, to_rep1(first(value1)),
-  to_rep1(last(value1))) -> (dynamic_property1(0, 65535,
-  to_rep1(data__first), to_rep1(data__last)) -> (in_range4(position) ->
-  ((((-1) <= 65535) -> in_range5(last8)) -> ((comp_mod(position,4) = 0) ->
-  (((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (o6 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and (o6 = 0))) and
-  (((0 <  o6) and (result = true)) or ((not (0 <  o6)) and
-  (result = false)))) -> ((result = true) ->
-  ((((((to_rep1(data__first) <= to_rep1(data__last)) and
-  (o4 = ((to_rep1(data__last) - to_rep1(data__first)) + 1))) or
-  ((not (to_rep1(data__first) <= to_rep1(data__last))) and (o4 = 0))) and
-  (o5 = comp_mod(o4,4))) and (((o5 = 0) and (result1 = true)) or
-  ((not (o5 = 0)) and (result1 = false)))) -> ((result1 = true) ->
-  ((((o3 = length({ elts = value; rt = value1 })) and in_range1(length({
-  elts = value; rt = value1 }))) and (((o3 <= 65536) and (result2 = true)) or
-  ((not (o3 <= 65536)) and (result2 = false)))) -> ((result2 = true) ->
-  (((to_rep1(data__first) <= position) and
-  (position <= to_rep1(data__last))) ->
-  (((((o = (to_rep1(data__last) - position)) and
-  in_range1((to_rep1(data__last) - position))) and (o1 = (o + 1))) and
-  ((o2 = o1) and in_range1(o1))) -> in_range6(length({ elts = value; rt =
-  value1 }))))))))))))))))
+goal WP_parameter_def : in_range6(length({ elts = value; rt = value1 }))

@@ -283,7 +283,21 @@ type index__ref = { index__content : index
 
 function index__ref___projection(a: index__ref) : index = (a).index__content
 
+logic sp : int
+
+logic o : int
+
+logic o1 : item
+
+logic result : int
+
+logic sp1 : int
+
+axiom H : in_range1(sp)
+
+axiom H1 : in_range(it)
+
+axiom H2 : (not (is_full(sp) = true))
+
  (* File "a_stack_no_spark_contracts_with_body.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sp:int. (in_range1(sp) -> (in_range(it) ->
-  ((not (is_full(sp) = true)) -> in_range1((sp + 1))))))
+goal WP_parameter_def : in_range1((sp + 1))

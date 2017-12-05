@@ -36,6 +36,7 @@
 (declare-const x Int)
 (declare-const y Int)
 (declare-const temp Int)
+(declare-const o Int)
 (declare-const temp1 Int)
 (assert (in_range x))
 (assert (in_range y))

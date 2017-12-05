@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -437,7 +437,7 @@ axiom coerce_axiom1 :
 
 type px_coord
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq8 : int, int -> bool
 
@@ -476,7 +476,7 @@ axiom coerce_axiom2 :
 
 type py_coord
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 19))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 19))
 
 logic bool_eq9 : int, int -> bool
 
@@ -2315,20 +2315,134 @@ axiom valid_configuration__def_axiom :
   rec__patris__piece__x = cur_piece2; rec__patris__piece__y = cur_piece3 }
   }) = true))))))
 
- (* File "patris.ads", line 196, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_board:(int,(int,cell) farray) farray.
-  forall cur_piece__split_fields:shape.
-  forall cur_piece__split_fields1:direction.
-  forall cur_piece__split_fields2:px_coord.
-  forall cur_piece__split_fields3:py_coord. forall cur_state:int.
-  forall action_request_nbr:int. forall speed_up:bool. forall speed_up1:bool.
-  forall speed_up2:bool. (in_range8(cur_state) ->
-  (in_range2(action_request_nbr) -> (in_range9(a) ->
-  ((valid_configuration__2(cur_state, { rec__patris__piece__s =
+logic cur_board : (int,(int,cell) farray) farray
+
+logic cur_piece__split_fields : shape
+
+logic cur_piece__split_fields1 : direction
+
+logic cur_piece__split_fields2 : px_coord
+
+logic cur_piece__split_fields3 : py_coord
+
+logic cur_state : int
+
+logic action_request_nbr : int
+
+logic speed_up : bool
+
+logic success : bool
+
+logic o : int
+
+logic cur_piece__split_fields4 : shape
+
+logic cur_piece__split_fields5 : direction
+
+logic cur_piece__split_fields6 : px_coord
+
+logic cur_piece__split_fields7 : py_coord
+
+logic action_request_nbr1 : int
+
+logic speed_up1 : bool
+
+logic success1 : bool
+
+logic result : bool
+
+logic speed_up2 : bool
+
+logic cur_piece__split_fields8 : shape
+
+logic cur_piece__split_fields9 : direction
+
+logic cur_piece__split_fields10 : px_coord
+
+logic cur_piece__split_fields11 : py_coord
+
+logic success2 : bool
+
+logic result1 : int
+
+logic action_request_nbr2 : int
+
+logic cur_piece__split_fields12 : shape
+
+logic cur_piece__split_fields13 : direction
+
+logic cur_piece__split_fields14 : px_coord
+
+logic cur_piece__split_fields15 : py_coord
+
+logic action_request_nbr3 : int
+
+logic speed_up3 : bool
+
+logic success3 : bool
+
+logic cur_piece__split_fields16 : shape
+
+logic cur_piece__split_fields17 : direction
+
+logic cur_piece__split_fields18 : px_coord
+
+logic cur_piece__split_fields19 : py_coord
+
+logic action_request_nbr4 : int
+
+logic speed_up4 : bool
+
+logic success4 : bool
+
+logic cur_piece__split_fields20 : shape
+
+logic cur_piece__split_fields21 : direction
+
+logic cur_piece__split_fields22 : px_coord
+
+logic cur_piece__split_fields23 : py_coord
+
+logic action_request_nbr5 : int
+
+logic speed_up5 : bool
+
+logic success5 : bool
+
+logic cur_piece__split_fields24 : shape
+
+logic cur_piece__split_fields25 : direction
+
+logic cur_piece__split_fields26 : px_coord
+
+logic cur_piece__split_fields27 : py_coord
+
+logic action_request_nbr6 : int
+
+logic speed_up6 : bool
+
+logic success6 : bool
+
+axiom H : in_range8(cur_state)
+
+axiom H1 : in_range2(action_request_nbr)
+
+axiom H2 : in_range9(a)
+
+axiom H3 : (valid_configuration__2(cur_state, { rec__patris__piece__s =
   cur_piece__split_fields; rec__patris__piece__d = cur_piece__split_fields1;
   rec__patris__piece__x = cur_piece__split_fields2; rec__patris__piece__y =
-  cur_piece__split_fields3 }, cur_board) = true) -> ((cur_state = 0) ->
-  (((not (a = 2)) and ((speed_up2 = speed_up) and
-  (speed_up2 = speed_up1))) -> ((action_request_nbr <  2) ->
-  (get_state(cur_state) = 0)))))))))
+  cur_piece__split_fields3 }, cur_board) = true)
+
+axiom H4 : (cur_state = 0)
+
+axiom H5 : (not (a = 2))
+
+axiom H6 : (speed_up2 = speed_up)
+
+axiom H7 : (speed_up2 = speed_up1)
+
+axiom H8 : (action_request_nbr <  2)
+
+ (* File "patris.ads", line 196, characters 0-0 *)
+goal WP_parameter_def : (get_state(cur_state) = 0)

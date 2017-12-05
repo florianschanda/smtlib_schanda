@@ -176,6 +176,8 @@
 (declare-fun p__z__aggregate_def (Bool Int Int) us_t1)
 (assert (forall ((temp___143 Bool)) (forall ((temp___144 Int) (temp___145 Int)) (let ((temp___142 (p__z__aggregate_def temp___143 temp___144 temp___145))) (and (=> (dynamic_property4 x y temp___144 temp___145) (and (= (first3 temp___142) temp___144) (= (last3 temp___142) temp___145))) (forall ((temp___146 Int)) (= (select (to_array1 temp___142) temp___146) temp___143)))))))
 (define-fun dynamic_invariant1 ((temp___expr_136 us_t) (temp___is_init_133 Bool) (temp___skip_constant_134 Bool) (temp___do_toplevel_135 Bool)) Bool (=> (not (= temp___skip_constant_134 true)) (and (dynamic_property1 x y (first1 temp___expr_136) (last1 temp___expr_136)) (and (= (first1 temp___expr_136) x) (= (last1 temp___expr_136) y)))))
+(declare-const temp___148 (Array Int Bool))
+(declare-const temp___1481 t1)
 (assert (in_range1 x))
 (assert (in_range1 y))
 (assert (<= x y))

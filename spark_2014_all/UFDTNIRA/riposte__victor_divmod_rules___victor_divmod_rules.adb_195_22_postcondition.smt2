@@ -66,6 +66,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const y Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const o Int)
 (assert (in_range2 x))
 (assert (in_range2 y))
 (assert (and (and (<= 0 x) (< y 0)) (not (= (mod1 x y) 0))))

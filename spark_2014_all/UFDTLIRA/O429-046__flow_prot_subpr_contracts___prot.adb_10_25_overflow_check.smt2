@@ -79,6 +79,7 @@
 (define-fun p_int__ref___projection ((a p_int__ref)) us_rep (p_int__content a))
 (declare-const visible Int)
 (declare-const self__ integer)
+(declare-const o Int)
 (assert (in_range visible))
 (assert (not (in_range (+ visible (to_rep self__)))))
 (check-sat)

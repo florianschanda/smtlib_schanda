@@ -50,20 +50,37 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : bool
+
+logic pkg__nested__get__result : bool
+
+logic result : bool
+
+logic pkg__nested__get__result1 : bool
+
+logic pkg__nested__get__result2 : bool
+
+logic pkg__nested__get__result3 : bool
+
+logic pkg__nested__get__result4 : bool
+
+logic pkg__nested__get__result5 : bool
+
+logic result1 : bool
+
+axiom H : (pkg__nested__get__result1 = pkg__nested__get__result2)
+
+axiom H1 : (pkg__nested__get__result3 = pkg__nested__get__result1)
+
+axiom H2 : (result = pkg__nested__get__result)
+
+axiom H3 : (pkg__nested__get__result1 = x)
+
+axiom H4 : (pkg__nested__get__result4 = pkg__nested__get__result2)
+
+axiom H5 : (pkg__nested__get__result5 = pkg__nested__get__result3)
+
+axiom H6 : (result1 = pkg__nested__get__result4)
+
  (* File "pkg.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:bool. forall pkg__nested__get__result:bool. forall result:bool.
-  forall pkg__nested__get__result1:bool.
-  forall pkg__nested__get__result2:bool.
-  forall pkg__nested__get__result3:bool.
-  forall pkg__nested__get__result4:bool.
-  forall pkg__nested__get__result5:bool.
-  (forall result1:bool.
-  ((((((pkg__nested__get__result1 = pkg__nested__get__result2) and
-  (pkg__nested__get__result3 = pkg__nested__get__result1)) and
-  ((result = pkg__nested__get__result) and
-  (pkg__nested__get__result1 = x))) and
-  ((pkg__nested__get__result4 = pkg__nested__get__result2) and
-  (pkg__nested__get__result5 = pkg__nested__get__result3))) and
-  (result1 = pkg__nested__get__result4)) ->
-  (pkg__nested__get__result4 = true))))
+goal WP_parameter_def : (pkg__nested__get__result4 = true)

@@ -193,6 +193,7 @@
 (declare-const x86__readmem32_v2__result4 (_ BitVec 32))
 (declare-const x86__readmem32_v2__result5 (_ BitVec 32))
 (declare-const result1 (_ BitVec 32))
+(assert true)
 (assert (= x86__readmem32_v2__result1 x86__readmem32_v2__result2))
 (assert (= x86__readmem32_v2__result3 x86__readmem32_v2__result1))
 (assert (and (= o1 (readmem16 (bvadd addr ((_ int2bv 64) 2)) memory)) (= o1 (bvor ((_ zero_extend 8) (to_rep (select memory (bvadd addr ((_ int2bv 64) 2))))) (ite (< 8 16) (bvshl ((_ zero_extend 8) (to_rep (select memory (bvadd (bvadd addr ((_ int2bv 64) 2)) ((_ int2bv 64) 1))))) ((_ int2bv 16) 8)) ((_ int2bv 16) 0))))))

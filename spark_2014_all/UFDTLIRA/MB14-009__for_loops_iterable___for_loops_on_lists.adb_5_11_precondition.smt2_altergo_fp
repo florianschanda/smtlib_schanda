@@ -824,5 +824,141 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range4(w_get(container, witness1)))))
 
+logic cu : count_type
+
+logic for_loops_on_lists__search_0_for_in__result : count_type
+
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___473 : count_type
+
+logic o2 : count_type
+
+logic temp___465 : count_type
+
+logic i : int
+
+logic o3 : us_rep3
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : us_rep2
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : count_type
+
+logic o11 : bool
+
+logic o12 : count_type
+
+logic temp___469 : us_rep2
+
+logic temp___468 : int
+
+logic o13 : bool
+
+logic o14 : bool
+
+logic e : int
+
+logic o15 : int
+
+logic for_loops_on_lists__search_0_for_in__result1 : count_type
+
+logic result : count_type
+
+logic cu1 : count_type
+
+logic result1 : bool
+
+logic cu2 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result2 : count_type
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result3 : count_type
+
+logic result5 : bool
+
+logic result6 : count_type
+
+logic cu3 : count_type
+
+logic cu4 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result4 : count_type
+
+logic cu5 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result5 : count_type
+
+logic cu6 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result6 : count_type
+
+logic cu7 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result7 : count_type
+
+logic cu8 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result8 : count_type
+
+logic cu9 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result9 : count_type
+
+logic result7 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result10 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result11 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result12 : count_type
+
+logic cu10 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result13 : count_type
+
+logic cu11 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result14 : count_type
+
+logic cu12 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result15 : count_type
+
+logic cu13 : count_type
+
+logic for_loops_on_lists__search_0_for_in__result16 : count_type
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___473 = o1)
+
+axiom H3 : (temp___473 = no_element)
+
  (* File "a-cfdlli.ads", line 51, characters 0-0 *)
 goal WP_parameter_def : true

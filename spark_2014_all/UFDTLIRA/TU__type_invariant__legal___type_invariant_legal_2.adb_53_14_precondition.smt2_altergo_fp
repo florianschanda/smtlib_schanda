@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -197,6 +197,42 @@ axiom e_priv__def_axiom :
 logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic x : int
+
+logic tmp : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic tmp1 : int
+
+logic result2 : int
+
+logic tmp2 : int
+
+axiom H : ((0 <= 2147483647) -> in_range2(x))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(tmp))
+
+axiom H2 : (result = x)
+
+axiom H3 : (x1 = 1)
+
+axiom H4 : (not (x1 = 0))
+
+axiom H5 : ((o = pub(x1)) and in_range1(o))
+
+axiom H6 : (result1 = tmp)
+
+axiom H7 : (tmp1 = o)
 
  (* File "type_invariant_legal_2.adb", line 27, characters 0-0 *)
 goal WP_parameter_def : true

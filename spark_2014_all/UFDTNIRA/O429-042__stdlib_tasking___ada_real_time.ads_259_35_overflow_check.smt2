@@ -110,6 +110,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range1 sc))
 (assert (and (= o (ts_sc ts)) (and (in_range1 o) (= o (to_int1 (to_fixed (to_duration__2 ts)))))))
 (assert (= o1 (+ sc o)))

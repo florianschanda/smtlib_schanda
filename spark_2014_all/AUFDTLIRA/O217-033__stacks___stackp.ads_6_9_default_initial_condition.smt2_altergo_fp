@@ -423,11 +423,18 @@ axiom size__def_axiom :
   rec__stackp__stack_root__content = s; rec__stackp__stack_root__length = s1;
   rec__ext__ = s2 }; attr__tag = s3 }) = to_rep(s1)))
 
+logic temp___451 : (int,element) farray
+
+logic temp___4511 : less_than_max
+
+logic temp___4512 : us_private
+
+logic temp___4513 : int
+
+axiom H : ((temp___4513 = us_tag) and (to_rep(temp___4511) = 0))
+
  (* File "stackp.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___451:(int,element) farray. forall temp___4511:less_than_max.
-  forall temp___4512:us_private. forall temp___4513:int.
-  (((temp___4513 = us_tag) and (to_rep(temp___4511) = 0)) -> (size({
-  us_split_fields1 = { rec__stackp__stack_root__content = temp___451;
+goal WP_parameter_def : (size({ us_split_fields1 = {
+  rec__stackp__stack_root__content = temp___451;
   rec__stackp__stack_root__length = temp___4511; rec__ext__ = temp___4512 };
-  attr__tag = temp___4513 }) = 0)))
+  attr__tag = temp___4513 }) = 0)

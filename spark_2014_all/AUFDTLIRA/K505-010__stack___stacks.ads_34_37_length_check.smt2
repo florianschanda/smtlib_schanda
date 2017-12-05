@@ -179,7 +179,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_discrs (us_split_discrs1 a))
 (define-fun us_rep___2__projection ((a us_rep)) us_split_fields (us_split_fields1 a))
 (define-fun us_rep___3__projection ((a us_rep)) Int (attr__tag a))
-(define-fun bool_eq3 ((a us_rep) (b us_rep)) Bool (ite (and (and (= (to_rep (rec__stacks__stack__max (us_split_discrs1 a))) (to_rep (rec__stacks__stack__max (us_split_discrs1 b)))) (= (to_rep3 (rec__stacks__stack__top (us_split_fields1 a))) (to_rep3 (rec__stacks__stack__top (us_split_fields1 b))))) (= (bool_eq1 (rec__stacks__stack__data (us_split_fields1 a)) (rec__stacks__stack__data (us_split_fields1 b))) true)) true false))
+(define-fun bool_eq3 ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep (rec__stacks__stack__max (us_split_discrs1 a))) (to_rep (rec__stacks__stack__max (us_split_discrs1 b)))) (and (= (to_rep3 (rec__stacks__stack__top (us_split_fields1 a))) (to_rep3 (rec__stacks__stack__top (us_split_fields1 b)))) (= (bool_eq1 (rec__stacks__stack__data (us_split_fields1 a)) (rec__stacks__stack__data (us_split_fields1 b))) true))) true false))
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)
 (declare-const us_tag Int)
 (declare-const value__size2 Int)

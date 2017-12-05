@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -851,7 +851,7 @@ function digit_index_type__ref___projection(a: digit_index_type__ref) : digit_in
 
 type tdigit_index_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1195,36 +1195,121 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
- (* File "aco-math-very_longs.ads", line 18, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number__split_fields:(int,octet) farray.
-  forall number__split_fields1:t1. forall digit_number:int.
-  forall bit_position:int. forall digit:t. forall o:int. forall o1:octet.
-  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
-  forall o7:t. forall o8:octet. forall result:int. forall digit_number1:int.
-  forall result1:int. forall bit_position1:int. forall result2:t.
-  forall digit1:t. forall result3:t. forall digit2:t. forall result4:t.
-  forall digit3:t. ((dynamic_property1(1, to_rep2(number__split_discrs),
+logic number__split_fields : (int,octet) farray
+
+logic number__split_fields1 : t1
+
+logic digit_number : int
+
+logic bit_position : int
+
+logic digit : t
+
+logic o : int
+
+logic o1 : octet
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : octet
+
+logic result : int
+
+logic digit_number1 : int
+
+logic result1 : int
+
+logic bit_position1 : int
+
+logic result2 : t
+
+logic digit1 : t
+
+logic result3 : t
+
+logic digit2 : t
+
+logic result4 : t
+
+logic digit3 : t
+
+axiom H : (dynamic_property1(1, to_rep2(number__split_discrs),
   to_rep1(first(number__split_fields1)),
   to_rep1(last(number__split_fields1))) and
   ((to_rep1(first(number__split_fields1)) = 1) and
-  (to_rep1(last(number__split_fields1)) = to_rep2(number__split_discrs)))) ->
-  (in_range3(bit_number) -> (in_range2(bit_value) -> (((1 <= 2147483647) ->
-  in_range(digit_number)) -> (((0 <= 2147483647) ->
-  in_range3(bit_position)) -> (((result = digit_number) and
-  (digit_number1 = (1 + comp_div(bit_number,8)))) ->
-  (((result1 = bit_position) and (bit_position1 = mod(bit_number, 8))) ->
-  (((((((to_rep1(first(number__split_fields1)) <= digit_number1) and
-  (digit_number1 <= to_rep1(last(number__split_fields1)))) and
-  (o = digit_number1)) and (o1 = (number__split_fields[o]))) and
-  (o2 = to_rep(o1))) and ((result2 = digit) and (digit1 = o2))) ->
-  ((((bit_value = 1) and (((((bit_position1 <  8) and (o3 = lsl_bv(of_int(1),
-  of_int(bit_position1)))) or ((not (bit_position1 <  8)) and
-  (o3 = of_int(0)))) and (o4 = bw_or(digit1, o3))) and
-  ((result3 = digit1) and (digit2 = o4)))) or ((not (bit_value = 1)) and
-  (((((((bit_position1 <  8) and (o5 = lsl_bv(of_int(1),
-  of_int(bit_position1)))) or ((not (bit_position1 <  8)) and
-  (o5 = of_int(0)))) and (o6 = bw_not(o5))) and (o7 = bw_and(digit1,
-  o6))) and ((result4 = digit1) and (digit3 = o7))) and
-  (digit2 = digit3)))) -> ((to_rep(o8) = digit2) ->
-  (to_rep1(first(number__split_fields1)) <= digit_number1))))))))))))
+  (to_rep1(last(number__split_fields1)) = to_rep2(number__split_discrs))))
+
+axiom H1 : in_range3(bit_number)
+
+axiom H2 : in_range2(bit_value)
+
+axiom H3 : ((1 <= 2147483647) -> in_range(digit_number))
+
+axiom H4 : ((0 <= 2147483647) -> in_range3(bit_position))
+
+axiom H5 : true
+
+axiom H6 : (result = digit_number)
+
+axiom H7 : (digit_number1 = (1 + comp_div(bit_number,8)))
+
+axiom H8 : (result1 = bit_position)
+
+axiom H9 : (bit_position1 = mod(bit_number, 8))
+
+axiom H10 : ((to_rep1(first(number__split_fields1)) <= digit_number1) and
+  (digit_number1 <= to_rep1(last(number__split_fields1))))
+
+axiom H11 : (o = digit_number1)
+
+axiom H12 : (o1 = (number__split_fields[o]))
+
+axiom H13 : (o2 = to_rep(o1))
+
+axiom H14 : (result2 = digit)
+
+axiom H15 : (digit1 = o2)
+
+axiom H16 : ((bit_value = 1) -> ((bit_position1 <  8) ->
+  (o3 = lsl_bv(of_int(1), of_int(bit_position1)))))
+
+axiom H17 : ((bit_value = 1) -> ((not (bit_position1 <  8)) ->
+  (o3 = of_int(0))))
+
+axiom H18 : ((bit_value = 1) -> (o4 = bw_or(digit1, o3)))
+
+axiom H19 : ((bit_value = 1) -> (result3 = digit1))
+
+axiom H20 : ((bit_value = 1) -> (digit2 = o4))
+
+axiom H21 : ((not (bit_value = 1)) -> ((bit_position1 <  8) ->
+  (o5 = lsl_bv(of_int(1), of_int(bit_position1)))))
+
+axiom H22 : ((not (bit_value = 1)) -> ((not (bit_position1 <  8)) ->
+  (o5 = of_int(0))))
+
+axiom H23 : ((not (bit_value = 1)) -> (o6 = bw_not(o5)))
+
+axiom H24 : ((not (bit_value = 1)) -> (o7 = bw_and(digit1, o6)))
+
+axiom H25 : ((not (bit_value = 1)) -> (result4 = digit1))
+
+axiom H26 : ((not (bit_value = 1)) -> (digit3 = o7))
+
+axiom H27 : ((not (bit_value = 1)) -> (digit2 = digit3))
+
+axiom H28 : (to_rep(o8) = digit2)
+
+ (* File "aco-math-very_longs.ads", line 18, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(first(number__split_fields1)) <= digit_number1)

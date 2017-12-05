@@ -157,6 +157,8 @@
 (declare-const o4 Int)
 (declare-const o5 Int)
 (declare-const o6 Int)
+(declare-const o7 Int)
+(declare-const o8 natural)
 (assert (in_range c))
 (assert (and (dynamic_property2 1 c (to_rep1 i__first) (to_rep1 i__last)) (and (= (to_rep1 i__first) 1) (= (to_rep1 i__last) c))))
 (assert (dynamic_invariant1 x true false true))

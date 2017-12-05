@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -109,13 +109,34 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic p__result : int
+
+logic o : int
+
+logic result : int
+
+logic p__result1 : int
+
+logic p__result2 : int
+
+logic p__result3 : int
+
+logic p__result4 : int
+
+logic p__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (0 <= x)
+
+axiom H2 : (((0 <= (x + x)) and (((p__result1 = p__result2) and
+  (p__result3 = p__result1)) and ((result = p__result) and
+  (p__result1 = x)))) and ((p__result4 = p__result2) and
+  (p__result5 = p__result3)))
+
+axiom H3 : (result1 = p__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__result:int. forall result:int. forall p__result1:int.
-  forall p__result2:int. forall p__result3:int. forall p__result4:int.
-  forall p__result5:int.
-  (forall result1:int. ((in_range(x) and ((0 <= x) and ((((0 <= (x + x)) and
-  (((p__result1 = p__result2) and (p__result3 = p__result1)) and
-  ((result = p__result) and (p__result1 = x)))) and
-  ((p__result4 = p__result2) and (p__result5 = p__result3))) and
-  (result1 = p__result4)))) -> (p__result4 = x))))
+goal WP_parameter_def : (p__result4 = x)

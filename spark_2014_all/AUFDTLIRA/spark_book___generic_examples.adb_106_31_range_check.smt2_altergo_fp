@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -1009,133 +1009,196 @@ logic generic_examples__my_percents__aggregate_def : int, int, int, int, int,
   int, int, int, int, int, int, int, int -> (int,percent) farray
 
 axiom def_axiom :
-  (forall temp___625:int. forall temp___626:int. forall temp___627:int.
+  (forall temp___619:int. forall temp___620:int. forall temp___621:int.
+  forall temp___622:int. forall temp___623:int. forall temp___624:int.
+  forall temp___625:int. forall temp___626:int. forall temp___627:int.
   forall temp___628:int. forall temp___629:int. forall temp___630:int.
-  forall temp___631:int. forall temp___632:int. forall temp___633:int.
-  forall temp___634:int. forall temp___635:int. forall temp___636:int.
-  forall temp___637:int.
-  ((((((((((((((generic_examples__my_percents__aggregate_def(temp___625,
-  temp___626, temp___627, temp___628, temp___629, temp___630, temp___631,
-  temp___632, temp___633, temp___634, temp___635, temp___636,
-  temp___637)[0]) = of_rep2(temp___625)) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[1]) = of_rep2(temp___626))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[2]) = of_rep2(temp___627))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[3]) = of_rep2(temp___628))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[4]) = of_rep2(temp___629))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[5]) = of_rep2(temp___630))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[6]) = of_rep2(temp___631))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[7]) = of_rep2(temp___632))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[8]) = of_rep2(temp___633))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[9]) = of_rep2(temp___634))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[10]) = of_rep2(temp___635))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[11]) = of_rep2(temp___636))) and
-  ((generic_examples__my_percents__aggregate_def(temp___625, temp___626,
-  temp___627, temp___628, temp___629, temp___630, temp___631, temp___632,
-  temp___633, temp___634, temp___635, temp___636,
-  temp___637)[12]) = of_rep2(temp___637))))
+  forall temp___631:int.
+  ((((((((((((((generic_examples__my_percents__aggregate_def(temp___619,
+  temp___620, temp___621, temp___622, temp___623, temp___624, temp___625,
+  temp___626, temp___627, temp___628, temp___629, temp___630,
+  temp___631)[0]) = of_rep2(temp___619)) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[1]) = of_rep2(temp___620))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[2]) = of_rep2(temp___621))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[3]) = of_rep2(temp___622))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[4]) = of_rep2(temp___623))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[5]) = of_rep2(temp___624))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[6]) = of_rep2(temp___625))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[7]) = of_rep2(temp___626))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[8]) = of_rep2(temp___627))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[9]) = of_rep2(temp___628))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[10]) = of_rep2(temp___629))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[11]) = of_rep2(temp___630))) and
+  ((generic_examples__my_percents__aggregate_def(temp___619, temp___620,
+  temp___621, temp___622, temp___623, temp___624, temp___625, temp___626,
+  temp___627, temp___628, temp___629, temp___630,
+  temp___631)[12]) = of_rep2(temp___631))))
 
-logic temp___String_Literal_640 : unit -> (int,character) farray
+logic temp___String_Literal_634 : unit -> (int,character) farray
 
-axiom temp___String_Literal_640__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_640(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_640(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_640(void)[3])) = 119)) and
-  (to_rep((temp___String_Literal_640(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_640(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_640(void)[6])) = 111)) and
-  (to_rep((temp___String_Literal_640(void)[7])) = 119)) and
-  (to_rep((temp___String_Literal_640(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_640(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_640(void)[10])) = 114)) and
-  (to_rep((temp___String_Literal_640(void)[11])) = 111)) and
-  (to_rep((temp___String_Literal_640(void)[12])) = 119)) and
-  (to_rep((temp___String_Literal_640(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_640(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_640(void)[15])) = 99)) and
-  (to_rep((temp___String_Literal_640(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_640(void)[17])) = 119))
+axiom temp___String_Literal_634__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_634(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_634(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_634(void)[3])) = 119)) and
+  (to_rep((temp___String_Literal_634(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_634(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_634(void)[6])) = 111)) and
+  (to_rep((temp___String_Literal_634(void)[7])) = 119)) and
+  (to_rep((temp___String_Literal_634(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_634(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_634(void)[10])) = 114)) and
+  (to_rep((temp___String_Literal_634(void)[11])) = 111)) and
+  (to_rep((temp___String_Literal_634(void)[12])) = 119)) and
+  (to_rep((temp___String_Literal_634(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_634(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_634(void)[15])) = 99)) and
+  (to_rep((temp___String_Literal_634(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_634(void)[17])) = 119))
 
-logic temp___String_Literal_641 : unit -> (int,character) farray
+logic temp___String_Literal_635 : unit -> (int,character) farray
 
-axiom temp___String_Literal_641__def_axiom :
-  (((((((((((((((((to_rep((temp___String_Literal_641(void)[1])) = 72) and
-  (to_rep((temp___String_Literal_641(void)[2])) = 111)) and
-  (to_rep((temp___String_Literal_641(void)[3])) = 119)) and
-  (to_rep((temp___String_Literal_641(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_641(void)[5])) = 110)) and
-  (to_rep((temp___String_Literal_641(void)[6])) = 111)) and
-  (to_rep((temp___String_Literal_641(void)[7])) = 119)) and
-  (to_rep((temp___String_Literal_641(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_641(void)[9])) = 98)) and
-  (to_rep((temp___String_Literal_641(void)[10])) = 114)) and
-  (to_rep((temp___String_Literal_641(void)[11])) = 111)) and
-  (to_rep((temp___String_Literal_641(void)[12])) = 119)) and
-  (to_rep((temp___String_Literal_641(void)[13])) = 110)) and
-  (to_rep((temp___String_Literal_641(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_641(void)[15])) = 99)) and
-  (to_rep((temp___String_Literal_641(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_641(void)[17])) = 119))
+axiom temp___String_Literal_635__def_axiom :
+  (((((((((((((((((to_rep((temp___String_Literal_635(void)[1])) = 72) and
+  (to_rep((temp___String_Literal_635(void)[2])) = 111)) and
+  (to_rep((temp___String_Literal_635(void)[3])) = 119)) and
+  (to_rep((temp___String_Literal_635(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_635(void)[5])) = 110)) and
+  (to_rep((temp___String_Literal_635(void)[6])) = 111)) and
+  (to_rep((temp___String_Literal_635(void)[7])) = 119)) and
+  (to_rep((temp___String_Literal_635(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_635(void)[9])) = 98)) and
+  (to_rep((temp___String_Literal_635(void)[10])) = 114)) and
+  (to_rep((temp___String_Literal_635(void)[11])) = 111)) and
+  (to_rep((temp___String_Literal_635(void)[12])) = 119)) and
+  (to_rep((temp___String_Literal_635(void)[13])) = 110)) and
+  (to_rep((temp___String_Literal_635(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_635(void)[15])) = 99)) and
+  (to_rep((temp___String_Literal_635(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_635(void)[17])) = 119))
+
+logic default_width : int
+
+logic default_base : int
+
+logic the_count : int
+
+logic my_percents : (int,percent) farray
+
+logic o : int
+
+logic o1 : (int,character) farray
+
+logic o2 : t1
+
+logic o3 : int
+
+logic o4 : (int,percent) farray
+
+logic o5 : t3
+
+logic o6 : int
+
+logic result : (int,percent) farray
+
+logic my_percents1 : (int,percent) farray
+
+logic result1 : int
+
+logic the_count1 : int
+
+logic result2 : int
+
+logic the_count2 : int
+
+logic result3 : int
+
+logic the_count3 : int
+
+axiom H : in_range4(default_width)
+
+axiom H1 : in_range5(default_base)
+
+axiom H2 : ((0 <= 2147483647) -> in_range3(the_count))
+
+axiom H3 : (result = my_percents)
+
+axiom H4 : (my_percents1 = generic_examples__my_percents__aggregate_def(5, 6,
+  7, 5, 3, 4, 19, 16, 5, 23, 45, 4, 3))
+
+axiom H5 : (to_rep(my_percents__first) = to_rep(first4(mk2(0, 12))))
+
+axiom H6 : (to_rep(my_percents__last) = to_rep(last4(mk2(0, 12))))
+
+axiom H7 : dynamic_property2(0, 255, to_rep(my_percents__first),
+  to_rep(my_percents__last))
+
+axiom H8 : ((o = count({ elts = temp___String_Literal_634(void); rt = mk(1,
+  17) }, 119)) and in_range3(o))
+
+axiom H9 : (result1 = the_count)
+
+axiom H10 : (the_count1 = o)
+
+axiom H11 : dynamic_property1(1, 2147483647, 1, 17)
+
+axiom H12 : (temp___String_Literal_635(void) = o1)
+
+axiom H13 : (mk1(1, 17) = o2)
+
+axiom H14 : ((o3 = char_count({ elts1 = o1; rt1 = o2 }, 119)) and
+  in_range3(o3))
+
+axiom H15 : (result2 = the_count1)
+
+axiom H16 : (the_count2 = o3)
+
+axiom H17 : dynamic_property3(0, 255, to_rep(my_percents__first),
+  to_rep(my_percents__last))
+
+axiom H18 : (my_percents1 = o4)
+
+axiom H19 : (mk3(to_rep(my_percents__first), to_rep(my_percents__last)) = o5)
+
+axiom H20 : ((o6 = percent_count({ elts3 = o4; rt3 = o5 }, 5)) and
+  in_range3(o6))
+
+axiom H21 : (result3 = the_count2)
+
+axiom H22 : (the_count3 = o6)
 
  (* File "generic_examples.adb", line 59, characters 0-0 *)
-goal WP_parameter_def :
-  (forall default_width:int. forall default_base:int. forall the_count:int.
-  forall my_percents:(int,percent) farray. forall o:int.
-  forall o1:(int,character) farray. forall o2:t1. forall o3:int.
-  forall o4:(int,percent) farray. forall o5:t3. forall o6:int.
-  forall result:(int,percent) farray.
-  forall my_percents1:(int,percent) farray. forall result1:int.
-  forall the_count1:int. forall result2:int. forall the_count2:int.
-  forall result3:int. forall the_count3:int. (in_range4(default_width) ->
-  (in_range5(default_base) -> (((0 <= 2147483647) -> in_range3(the_count)) ->
-  ((((result = my_percents) and
-  (my_percents1 = generic_examples__my_percents__aggregate_def(5, 6, 7, 5, 3,
-  4, 19, 16, 5, 23, 45, 4, 3))) and
-  ((to_rep(my_percents__first) = to_rep(first4(mk2(0, 12)))) and
-  (to_rep(my_percents__last) = to_rep(last4(mk2(0, 12)))))) ->
-  (dynamic_property2(0, 255, to_rep(my_percents__first),
-  to_rep(my_percents__last)) -> ((((o = count({ elts =
-  temp___String_Literal_640(void); rt = mk(1, 17) }, 119)) and
-  in_range3(o)) and ((result1 = the_count) and (the_count1 = o))) ->
-  ((((dynamic_property1(1, 2147483647, 1, 17) and
-  ((temp___String_Literal_641(void) = o1) and (mk1(1, 17) = o2))) and
-  ((o3 = char_count({ elts1 = o1; rt1 = o2 }, 119)) and in_range3(o3))) and
-  ((result2 = the_count1) and (the_count2 = o3))) -> ((((dynamic_property3(0,
-  255, to_rep(my_percents__first), to_rep(my_percents__last)) and
-  ((my_percents1 = o4) and (mk3(to_rep(my_percents__first),
-  to_rep(my_percents__last)) = o5))) and ((o6 = percent_count({ elts3 = o4;
-  rt3 = o5 }, 5)) and in_range3(o6))) and ((result3 = the_count2) and
-  (the_count3 = o6))) -> dynamic_property4(0, 255,
-  to_rep(my_percents__first), to_rep(my_percents__last)))))))))))
+goal WP_parameter_def : dynamic_property4(0, 255, to_rep(my_percents__first),
+  to_rep(my_percents__last))

@@ -36,6 +36,7 @@
 (declare-const g1 Int)
 (declare-const g2 Int)
 (declare-const par1 Int)
+(declare-const o Int)
 (assert (in_range g1))
 (assert (in_range g2))
 (assert (=> (<= (- 2147483648) 2147483647) (in_range par1)))

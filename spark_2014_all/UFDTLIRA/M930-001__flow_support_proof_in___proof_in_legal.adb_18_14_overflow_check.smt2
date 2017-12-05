@@ -40,6 +40,7 @@
 (declare-const var Int)
 (declare-const x Int)
 (declare-const body_var Int)
+(declare-const o Int)
 (assert (in_range body_var))
 (assert (in_range var))
 (assert (in_range x))

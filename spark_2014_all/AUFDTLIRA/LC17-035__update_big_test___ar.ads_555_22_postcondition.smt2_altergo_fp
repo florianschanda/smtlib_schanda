@@ -525,20 +525,57 @@ logic c : (int,et1) farray
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range2(i1)
+
+axiom H1 : in_range2(i2)
+
+axiom H2 : in_range1(j1)
+
+axiom H3 : in_range1(j2)
+
+axiom H4 : (result = a)
+
+axiom H5 : (a1 = (a[i1 <- ((a[i1])[j1 <- b])]))
+
+axiom H6 : (result1 = a1)
+
+axiom H7 : (a2 = (a1[i2 <- ((a1[i2])[j2 <- c])]))
+
+axiom H8 : (a2 = a3)
+
+axiom H9 : (a4 = a2)
+
+logic o : int
+
+axiom H10 : (1 <= o)
+
+axiom H11 : (o <= 16)
+
+logic n : int
+
+axiom H12 : (5 <= n)
+
+axiom H13 : (n <= 50)
+
+logic m : int
+
+axiom H14 : (1 <= m)
+
+axiom H15 : (m <= 10)
+
  (* File "ar.ads", line 550, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall result1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray.
-  forall a4:(int,(int,(int,et1) farray) farray) farray. ((in_range2(i1) and
-  (in_range2(i2) and (in_range1(j1) and (in_range1(j2) and
-  ((((result = a) and (a1 = (a[i1 <- ((a[i1])[j1 <- b])]))) and
-  ((result1 = a1) and (a2 = (a1[i2 <- ((a1[i2])[j2 <- c])])))) and
-  ((a2 = a3) and (a4 = a2))))))) ->
-  (forall o:int. (((1 <= o) and (o <= 16)) ->
-  (forall n:int. (((5 <= n) and (n <= 50)) ->
-  (forall m:int. (((1 <= m) and (m <= 10)) ->
-  in_range3(to_rep((((a3[o])[n])[m])))))))))))
+goal WP_parameter_def : in_range3(to_rep((((a3[o])[n])[m])))

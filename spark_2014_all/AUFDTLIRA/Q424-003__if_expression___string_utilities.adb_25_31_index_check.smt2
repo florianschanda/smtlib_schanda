@@ -237,6 +237,8 @@
 (assert (= last4 (ite (< (length s1) (length s2)) (length s2) (length s1))))
 (declare-const lengths map1)
 (declare-const o Int)
+(declare-const us Int)
+(declare-const us1 Int)
 (assert (dynamic_invariant2 s1 true false true))
 (assert (dynamic_invariant2 s2 true false true))
 (assert (and (and (and (dynamic_property6 first2 last2 (to_rep1 lengths__first) (to_rep1 lengths__last) first3 last3 (to_rep1 lengths__first_2) (to_rep1 lengths__last_2)) (and (= (to_rep1 lengths__first) (to_rep1 (first (rt s1)))) (= (to_rep1 lengths__last) (to_rep1 (last (rt s1)))))) (and (= (to_rep1 lengths__first_2) (to_rep1 (first (rt s2)))) (= (to_rep1 lengths__last_2) (to_rep1 (last (rt s2)))))) (forall ((temp___292 Int) (temp___293 Int)) (=> (and (and (<= (to_rep1 lengths__first) temp___292) (<= temp___292 (to_rep1 lengths__last))) (and (<= (to_rep1 lengths__first_2) temp___293) (<= temp___293 (to_rep1 lengths__last_2)))) (dynamic_property3 0 last4 (to_rep2 (get lengths temp___292 temp___293)))))))

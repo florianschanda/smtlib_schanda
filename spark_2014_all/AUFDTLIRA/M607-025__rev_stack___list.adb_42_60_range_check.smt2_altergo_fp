@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -954,7 +954,7 @@ logic element__function_guard : int, us_rep1, int -> prop
 
 type element_type
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq15 : int, int -> bool
 
@@ -1226,7 +1226,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range12(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range12(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq20 : int, int -> bool
 
@@ -1256,95 +1256,500 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length3(container))))) ->
   in_range12(get(container, position)))))
 
- (* File "list.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s__split_fields:r1. forall s__split_fields1:(int,integer) farray.
-  forall res__split_fields:us_main_type. forall i:int. forall i1:int.
-  forall list__reverse_list__s__assume:r1.
-  forall list__reverse_list__s__assume1:(int,integer) farray.
-  forall list__reverse_list__first__assume:int.
-  forall list__reverse_list__last__assume:int. forall temp___471:int.
-  forall temp___470:r1. forall temp___4701:(int,integer) farray.
-  forall o:int. forall o1:int. forall j:int. forall o2:int. forall o3:bool.
-  forall o4:int. forall o5:int. forall o6:int. forall j1:int. forall o7:int.
-  forall o8:int. forall o9:int. forall o10:bool.
-  forall o11:(int,integer) farray. forall o12:t. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall o17:int.
-  forall o18:int. forall result:r1. forall result1:(int,integer) farray.
-  forall s__split_fields2:r1. forall s__split_fields3:(int,integer) farray.
-  forall list__my_lists__clear__container__fields:us_main_type.
-  forall result2:us_main_type. forall res__split_fields1:us_main_type.
-  forall result3:int. forall i2:int. forall s__split_fields4:r1.
-  forall s__split_fields5:(int,integer) farray. forall s__split_fields6:r1.
-  forall s__split_fields7:(int,integer) farray. forall i3:int.
-  forall s__split_fields8:us_split_fields__ref. forall i4:int__ref.
-  forall s__split_fields9:us_split_fields. forall i5:int.
-  forall s__split_fields10:us_split_fields__ref. forall i6:int__ref.
-  forall s__split_fields11:us_split_fields. forall i7:int.
-  forall result4:int__ref. forall i8:int.
-  forall s__split_fields12:us_split_fields.
-  forall res__split_fields2:us_split_fields2. forall i9:int.
-  forall result5:bool. forall result6:bool. forall result7:bool.
-  forall result8:bool. forall result9:bool. ((100 = to_rep2(l)) -> (((({
-  us_split_fields1 = { rec__stack__stack__top =
+logic s__split_fields : r1
+
+logic s__split_fields1 : (int,integer) farray
+
+logic res__split_fields : us_main_type
+
+logic i : int
+
+logic i1 : int
+
+logic list__reverse_list__result : capacity_range
+
+logic list__reverse_list__result1 : us_main_type
+
+logic list__reverse_list__s__assume : r1
+
+logic list__reverse_list__s__assume1 : (int,integer) farray
+
+logic list__reverse_list__first__assume : int
+
+logic list__reverse_list__last__assume : int
+
+logic temp___471 : int
+
+logic temp___470 : r1
+
+logic temp___4701 : (int,integer) farray
+
+logic o : int
+
+logic o1 : int
+
+logic j : int
+
+logic temp___472 : (int,integer) farray
+
+logic temp___4721 : t
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___473 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : (int,integer) farray
+
+logic o7 : t
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic temp___481 : int
+
+logic temp___480 : r1
+
+logic temp___4801 : (int,integer) farray
+
+logic temp___479 : capacity_range
+
+logic temp___4791 : us_main_type
+
+logic temp___483 : r1
+
+logic temp___4831 : (int,integer) farray
+
+logic j1 : int
+
+logic o14 : int
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic j2 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : bool
+
+logic temp___482 : (int,integer) farray
+
+logic temp___4821 : t
+
+logic temp___484 : (int,integer) farray
+
+logic temp___4841 : t
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : int
+
+logic o30 : (int,integer) farray
+
+logic o31 : t
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic i2 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : bool
+
+logic o42 : bool
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : int
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : int
+
+logic result : r1
+
+logic result1 : (int,integer) farray
+
+logic s__split_fields2 : r1
+
+logic s__split_fields3 : (int,integer) farray
+
+logic list__my_lists__clear__container__fields : us_main_type
+
+logic result2 : us_main_type
+
+logic res__split_fields1 : us_main_type
+
+logic result3 : int
+
+logic i3 : int
+
+logic s__split_fields4 : r1
+
+logic s__split_fields5 : (int,integer) farray
+
+logic s__split_fields6 : r1
+
+logic s__split_fields7 : (int,integer) farray
+
+logic i4 : int
+
+logic result4 : bool
+
+logic result5 : int
+
+logic i5 : int
+
+logic s__split_fields8 : r1
+
+logic s__split_fields9 : (int,integer) farray
+
+logic s__split_fields10 : r1
+
+logic s__split_fields11 : (int,integer) farray
+
+logic i6 : int
+
+logic s__split_fields12 : r1
+
+logic s__split_fields13 : (int,integer) farray
+
+logic i7 : int
+
+logic s__split_fields14 : r1
+
+logic s__split_fields15 : (int,integer) farray
+
+logic i8 : int
+
+logic s__split_fields16 : r1
+
+logic s__split_fields17 : (int,integer) farray
+
+logic i9 : int
+
+logic s__split_fields18 : r1
+
+logic s__split_fields19 : (int,integer) farray
+
+logic i10 : int
+
+logic s__split_fields20 : r1
+
+logic s__split_fields21 : (int,integer) farray
+
+logic i11 : int
+
+logic result6 : int
+
+logic i12 : int
+
+logic s__split_fields22 : r1
+
+logic s__split_fields23 : (int,integer) farray
+
+logic res__split_fields2 : us_main_type
+
+logic i13 : int
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : bool
+
+logic result11 : bool
+
+logic list__my_lists__append__2__container__fields : us_main_type
+
+logic result12 : us_main_type
+
+logic res__split_fields3 : us_main_type
+
+logic s__split_fields24 : r1
+
+logic s__split_fields25 : (int,integer) farray
+
+logic result13 : int
+
+logic i14 : int
+
+logic s__split_fields26 : r1
+
+logic s__split_fields27 : (int,integer) farray
+
+logic res__split_fields4 : us_main_type
+
+logic i15 : int
+
+logic s__split_fields28 : r1
+
+logic s__split_fields29 : (int,integer) farray
+
+logic res__split_fields5 : us_main_type
+
+logic i16 : int
+
+logic rho : us_main_type
+
+logic s__split_fields30 : r1
+
+logic s__split_fields31 : (int,integer) farray
+
+logic res__split_fields6 : us_main_type
+
+logic i17 : int
+
+logic s__split_fields32 : r1
+
+logic s__split_fields33 : (int,integer) farray
+
+logic res__split_fields7 : us_main_type
+
+logic i18 : int
+
+logic s__split_fields34 : r1
+
+logic s__split_fields35 : (int,integer) farray
+
+logic res__split_fields8 : us_main_type
+
+logic i19 : int
+
+logic s__split_fields36 : r1
+
+logic s__split_fields37 : (int,integer) farray
+
+logic res__split_fields9 : us_main_type
+
+logic i20 : int
+
+logic s__split_fields38 : r1
+
+logic s__split_fields39 : (int,integer) farray
+
+logic res__split_fields10 : us_main_type
+
+logic i21 : int
+
+logic s__split_fields40 : r1
+
+logic s__split_fields41 : (int,integer) farray
+
+logic res__split_fields11 : us_main_type
+
+logic i22 : int
+
+logic result14 : capacity_range
+
+logic result15 : us_main_type
+
+logic list__reverse_list__result2 : capacity_range
+
+logic list__reverse_list__result3 : us_main_type
+
+logic s__split_fields42 : r1
+
+logic s__split_fields43 : (int,integer) farray
+
+logic res__split_fields12 : us_main_type
+
+logic i23 : int
+
+logic i24 : int
+
+logic list__reverse_list__result4 : capacity_range
+
+logic list__reverse_list__result5 : us_main_type
+
+logic s__split_fields44 : r1
+
+logic s__split_fields45 : (int,integer) farray
+
+logic res__split_fields13 : us_main_type
+
+logic i25 : int
+
+logic i26 : int
+
+logic list__reverse_list__result6 : capacity_range
+
+logic list__reverse_list__result7 : us_main_type
+
+logic s__split_fields46 : r1
+
+logic s__split_fields47 : (int,integer) farray
+
+logic res__split_fields14 : us_main_type
+
+logic i27 : int
+
+logic i28 : int
+
+logic list__reverse_list__result8 : capacity_range
+
+logic list__reverse_list__result9 : us_main_type
+
+logic s__split_fields48 : r1
+
+logic s__split_fields49 : (int,integer) farray
+
+logic res__split_fields15 : us_main_type
+
+logic i29 : int
+
+logic i30 : int
+
+logic list__reverse_list__result10 : capacity_range
+
+logic list__reverse_list__result11 : us_main_type
+
+logic result16 : bool
+
+axiom H : (100 = to_rep2(l))
+
+axiom H1 : (({ us_split_fields1 = { rec__stack__stack__top =
   list__reverse_list__s__assume; rec__stack__stack__content =
   list__reverse_list__s__assume1 } } = empty_stack(void)) and (is_empty({
   us_split_fields1 = { rec__stack__stack__top =
   list__reverse_list__s__assume; rec__stack__stack__content =
-  list__reverse_list__s__assume1 } }) = true)) and
-  (((result = s__split_fields) and (result1 = s__split_fields1)) and
-  ((list__reverse_list__s__assume = s__split_fields2) and
-  (list__reverse_list__s__assume1 = s__split_fields3)))) ->
-  ((((list__reverse_list__first__assume = 1) and
+  list__reverse_list__s__assume1 } }) = true))
+
+axiom H2 : ((result = s__split_fields) and (result1 = s__split_fields1))
+
+axiom H3 : ((s__split_fields2 = list__reverse_list__s__assume) and
+  (s__split_fields3 = list__reverse_list__s__assume1))
+
+axiom H4 : ((list__reverse_list__first__assume = 1) and
   (in_range5(list__reverse_list__first__assume) and
-  (list__reverse_list__first__assume = 1))) and
-  (list__reverse_list__first__assume = first4)) -> (in_range1(first4) ->
-  ((((list__reverse_list__last__assume = (0 + length3(model__({
+  (list__reverse_list__first__assume = 1)))
+
+axiom H5 : (list__reverse_list__first__assume = first4)
+
+axiom H6 : in_range1(first4)
+
+axiom H7 : ((list__reverse_list__last__assume = (0 + length3(model__({
   us_split_discrs1 = { rec__list__my_lists__vector__capacity = l };
   us_split_fields3 = { rec__list__my_lists__vector = l1 } })))) and
   (in_range7(list__reverse_list__last__assume) and
   (list__reverse_list__last__assume = (0 + length3(model__({
   us_split_discrs1 = { rec__list__my_lists__vector__capacity = l };
-  us_split_fields3 = { rec__list__my_lists__vector = l1 } })))))) and
-  (list__reverse_list__last__assume = last4)) -> (in_range1(last4) ->
-  ((((to_rep2(res__split_discrs) = 100) and (is_empty1({ us_split_discrs1 = {
-  rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = { rec__list__my_lists__vector = res__split_fields }
-  }) = true)) and (100 = to_rep2(res__split_discrs))) -> (((length2({
+  us_split_fields3 = { rec__list__my_lists__vector = l1 } }))))))
+
+axiom H8 : (list__reverse_list__last__assume = last4)
+
+axiom H9 : in_range1(last4)
+
+axiom H10 : ((to_rep2(res__split_discrs) = 100) and (is_empty1({
   us_split_discrs1 = { rec__list__my_lists__vector__capacity =
   res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
-  list__my_lists__clear__container__fields } }) = 0) and
-  ((result2 = res__split_fields) and
-  (res__split_fields1 = list__my_lists__clear__container__fields))) ->
-  ((((result3 = i) and (i2 = first4)) and ((((first4 <= i2) and
-  (i2 <= last4)) and ((((temp___471 = i2) and
-  (((temp___470 = s__split_fields2) and (temp___4701 = s__split_fields3)) and
-  (((((o = i2) and in_range5(i2)) and ((o1 = get(model__({ us_split_discrs1 =
+  res__split_fields } }) = true))
+
+axiom H11 : (100 = to_rep2(res__split_discrs))
+
+axiom H12 : (length2({ us_split_discrs1 = {
+  rec__list__my_lists__vector__capacity = res__split_discrs };
+  us_split_fields3 = { rec__list__my_lists__vector =
+  list__my_lists__clear__container__fields } }) = 0)
+
+axiom H13 : (result2 = res__split_fields)
+
+axiom H14 : (res__split_fields1 = list__my_lists__clear__container__fields)
+
+axiom H15 : (result3 = i)
+
+axiom H16 : (i3 = first4)
+
+axiom H17 : (((first4 <= i3) and (i3 <= last4)) -> (((temp___471 = i3) and
+  (((s__split_fields2 = temp___470) and (s__split_fields3 = temp___4701)) and
+  (((((o = i3) and in_range5(i3)) and ((o1 = get(model__({ us_split_discrs1 =
   { rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
   rec__list__my_lists__vector = l1 } }), o)) and (in_range8(o1) and
   (o1 = get(model__({ us_split_discrs1 = {
   rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
   rec__list__my_lists__vector = l1 } }), o))))) and (((length(to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0) and
+  rec__stack__stack__content = s__split_fields3 } })) = 0) ->
   (((length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })) = 0) and (((length(to__({ us_split_fields1 = { rec__stack__stack__top =
+  })) = 0) -> (((length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).rt)), to_rep(last((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).rt)), temp___182(o1), to_rep(first(mk(1, 1))),
-  to_rep(last(mk(1, 1)))) = true)) or ((not (length(to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  })) = 0) -> (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
+  to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).rt)),
+  to_rep(last((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).rt)),
+  temp___182(o1), to_rep(first(mk(1, 1))), to_rep(last(mk(1,
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
+  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1360,8 +1765,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1376,12 +1781,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1393,8 +1798,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1405,16 +1810,16 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
   ((not (length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })) = 0)) and (((to_rep(first((to__({ us_split_fields1 = {
+  })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (((length(to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (((length(to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0) and
+  rec__stack__stack__content = s__split_fields3 } })) = 0) ->
   (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1430,13 +1835,14 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1)))),
-  to_rep(last(mk(1, 1)))) = true)) or ((not (length(to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
+  to_rep(last(mk(1, 1)))) = true)) and ((not (length(to__({
+  us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
+  rec__stack__stack__content = s__split_fields3 } })) = 0)) ->
+  (((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 }
+  })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1460,8 +1866,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1485,12 +1891,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1510,8 +1916,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1531,10 +1937,10 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
-  ((not (1 <= 1)) and (((length(to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
+  ((not (1 <= 1)) -> (((length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })) = 0) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1550,13 +1956,13 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt))) + 1) + 0)) - 1)))), to_rep(last(mk(1,
-  1)))) = true)) or ((not (length(to__({ us_split_fields1 = {
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1580,8 +1986,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1605,12 +2011,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1630,8 +2036,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1651,14 +2057,14 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))) or
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (((length(to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (((length(to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0) and
+  rec__stack__stack__content = s__split_fields3 } })) = 0) ->
   (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1670,13 +2076,14 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1)))),
-  to_rep(last(mk(1, 1)))) = true)) or ((not (length(to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
+  to_rep(last(mk(1, 1)))) = true)) and ((not (length(to__({
+  us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
+  rec__stack__stack__content = s__split_fields3 } })) = 0)) ->
+  (((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 }
+  })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1696,8 +2103,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1717,12 +2124,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1738,8 +2145,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1755,10 +2162,10 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
-  ((not (1 <= 1)) and (((length(to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
+  ((not (1 <= 1)) -> (((length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })) = 0) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1770,13 +2177,13 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) + (0 + 0)) - 1)))), to_rep(last(mk(1,
-  1)))) = true)) or ((not (length(to__({ us_split_fields1 = {
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1796,8 +2203,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1817,12 +2224,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1838,8 +2245,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1855,34 +2262,33 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))))))) or
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))))))) and
   ((not (length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })) = 0)) and (((length(to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (((length(to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).rt)), to_rep(last((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
-  s__split_fields5 } })).rt)), concat((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).elts, to_rep(first((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)), to_rep(last((to__({ us_split_fields1 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)), temp___182(o1), 1, 1), to_rep(first(mk(1,
-  1))), to_rep(last(mk(1, 1)))) = true)) or ((not (length(to__({
-  us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0)) and
-  (((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  })) = 0)) -> (((length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
+  })) = 0) -> (((length(to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 }
+  })) = 0) -> (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
+  to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).rt)),
+  to_rep(last((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).rt)),
+  concat((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 } })).elts,
+  to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 } })).rt)),
+  to_rep(last((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 } })).rt)),
+  temp___182(o1), 1, 1), to_rep(first(mk(1, 1))), to_rep(last(mk(1,
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
+  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
+  s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
+  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1904,8 +2310,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1926,12 +2332,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1949,8 +2355,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -1967,16 +2373,16 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
   ((not (length(to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })) = 0)) and (((to_rep(first((to__({ us_split_fields1 = {
+  })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (((length(to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (((length(to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0) and
+  rec__stack__stack__content = s__split_fields3 } })) = 0) ->
   (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -1999,13 +2405,14 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1)))),
-  to_rep(last(mk(1, 1)))) = true)) or ((not (length(to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
-  { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
+  to_rep(last(mk(1, 1)))) = true)) and ((not (length(to__({
+  us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
+  rec__stack__stack__content = s__split_fields3 } })) = 0)) ->
+  (((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields2; rec__stack__stack__content = s__split_fields3 }
+  })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2036,8 +2443,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2067,12 +2474,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2099,8 +2506,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2126,10 +2533,10 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
-  ((not (1 <= 1)) and (((length(to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
+  ((not (1 <= 1)) -> (((length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })) = 0) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2151,13 +2558,13 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt))) + 1) + 0)) - 1)))), to_rep(last(mk(1,
-  1)))) = true)) or ((not (length(to__({ us_split_fields1 = {
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2188,8 +2595,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2219,12 +2626,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2251,8 +2658,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2278,14 +2685,14 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))) or
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (((length(to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (((length(to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields2;
-  rec__stack__stack__content = s__split_fields3 } })) = 0) and
+  rec__stack__stack__content = s__split_fields3 } })) = 0) ->
   (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2304,13 +2711,13 @@ goal WP_parameter_def :
   ((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) + (0 + ((1 - 1) + 1))) - 1)))), to_rep(last(mk(1,
-  1)))) = true)) or ((not (length(to__({ us_split_fields1 = {
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2337,8 +2744,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2364,12 +2771,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2392,8 +2799,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2415,10 +2822,10 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) or
-  ((not (1 <= 1)) and (((length(to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt)) + (0 + 0)) - 1))))) = true)))))))) and
+  ((not (1 <= 1)) -> (((length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })) = 0) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2436,13 +2843,13 @@ goal WP_parameter_def :
   s__split_fields3 } })).rt)), ((to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) + (0 + 0)) - 1)))), to_rep(last(mk(1,
-  1)))) = true)) or ((not (length(to__({ us_split_fields1 = {
+  1)))) = true)) and ((not (length(to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) = 0)) and (((to_rep(first((to__({ us_split_fields1 =
+  s__split_fields3 } })) = 0)) -> (((to_rep(first((to__({ us_split_fields1 =
   { rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2469,8 +2876,8 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) or
-  ((not (1 <= 1)) and (bool_eq3((to__({ us_split_fields1 = {
+  s__split_fields3 } })).rt))) + 1) + ((1 - 1) + 1))) - 1))))) = true)) and
+  ((not (1 <= 1)) -> (bool_eq3((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
   s__split_fields5 } })).elts, to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields4; rec__stack__stack__content =
@@ -2496,12 +2903,12 @@ goal WP_parameter_def :
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
   s__split_fields3 } })).rt)) - to_rep(first((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) or
+  s__split_fields3 } })).rt))) + 1) + 0)) - 1))))) = true)))) and
   ((not (to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
   })).rt)) <= to_rep(last((to__({ us_split_fields1 = {
   rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })).rt)))) and (((1 <= 1) and (bool_eq3((to__({
+  s__split_fields3 } })).rt)))) -> (((1 <= 1) -> (bool_eq3((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields4;
   rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2524,7 +2931,7 @@ goal WP_parameter_def :
   rec__stack__stack__content = s__split_fields3 } })).rt)),
   ((to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields2; rec__stack__stack__content = s__split_fields3 }
-  })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) or ((not (1 <= 1)) and
+  })).rt)) + (0 + ((1 - 1) + 1))) - 1))))) = true)) and ((not (1 <= 1)) ->
   (bool_eq3((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields4; rec__stack__stack__content = s__split_fields5 } })).elts,
   to_rep(first((to__({ us_split_fields1 = { rec__stack__stack__top =
@@ -2550,73 +2957,146 @@ goal WP_parameter_def :
   })).rt)) + (0 + 0)) - 1))))) = true)))))))))))))))) and
   (((to_rep(last((to__({ us_split_fields1 = { rec__stack__stack__top =
   s__split_fields6; rec__stack__stack__content = s__split_fields7 }
-  })).rt)) = ((i3 - first4) + 1)) and
-  (forall j2:int. (((first4 <= j2) and (j2 <= i3)) -> (to_rep(((to__({
+  })).rt)) = ((i4 - first4) + 1)) and
+  (forall j3:int. (((first4 <= j3) and (j3 <= i4)) -> (to_rep(((to__({
   us_split_fields1 = { rec__stack__stack__top = s__split_fields6;
   rec__stack__stack__content = s__split_fields7 }
-  })).elts[((j2 - first4) + 1)])) = get(model__({ us_split_discrs1 = {
+  })).elts[((j3 - first4) + 1)])) = get(model__({ us_split_discrs1 = {
   rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } }), j2))))) and ((((first4 <= last4) ->
-  dynamic_property3(first4, last4, i3)) and ((first4 <= i3) and
-  (i3 <= last4))) and (i3 = last4)))))) and (((i4 = { int__content = i3
-  }) and (s__split_fields8 = { us_split_fields__content = {
-  rec__stack__stack__top = s__split_fields6; rec__stack__stack__content =
-  s__split_fields7 } })) and ((i5 = i3) and (s__split_fields9 = {
-  rec__stack__stack__top = s__split_fields6; rec__stack__stack__content =
-  s__split_fields7 })))) and (((i6 = i4) and
-  (s__split_fields10 = s__split_fields8)) and ((i7 = i5) and
-  (s__split_fields11 = s__split_fields9))))) or ((not ((first4 <= i2) and
-  (i2 <= last4))) and (((i6 = { int__content = i2 }) and
-  (s__split_fields10 = { us_split_fields__content = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 } })) and ((i7 = i2) and (s__split_fields11 = {
-  rec__stack__stack__top = s__split_fields2; rec__stack__stack__content =
-  s__split_fields3 })))))) -> (((result4 = { int__content = i1 }) and
-  (i8 = first4)) -> (((first4 <= i8) and (i8 <= last4)) -> (((((length2({
-  us_split_discrs1 = { rec__list__my_lists__vector__capacity =
-  res__split_discrs }; us_split_fields3 = res__split_fields2
-  }) = (i9 - first4)) and (to_rep(last((to__({ us_split_fields1 =
-  s__split_fields12 })).rt)) = ((last4 - i9) + 1))) and
-  (forall j2:int. (((1 <= j2) and (j2 <= ((last4 - i9) + 1))) ->
-  (to_rep(((to__({ us_split_fields1 = s__split_fields12
-  })).elts[j2])) = to_rep(((to__({ us_split_fields1 =
-  (s__split_fields10).us_split_fields__content })).elts[j2])))))) and
-  (forall j2:int. (((first4 <= j2) and (j2 <= (i9 - 1))) -> (get(model__({
-  us_split_discrs1 = { rec__list__my_lists__vector__capacity =
-  res__split_discrs }; us_split_fields3 = res__split_fields2 }),
-  j2) = get(model__({ us_split_discrs1 = {
-  rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
-  rec__list__my_lists__vector = l1 } }), ((last4 - j2) + first4)))))) ->
-  ((((first4 <= last4) -> dynamic_property4(first4, last4, i9)) and
-  ((first4 <= i9) and (i9 <= last4))) -> ((((((o17 = (i9 - first4)) and
-  in_range1((i9 - first4))) and (((o18 = length2({ us_split_discrs1 = {
+  rec__list__my_lists__vector = l1 } }), j3))))) and ((((first4 <= last4) ->
+  dynamic_property3(first4, last4, i4)) and ((first4 <= i4) and
+  (i4 <= last4))) and (i4 = last4)))))) and (((i8 = i4) and
+  ((s__split_fields14 = s__split_fields6) and
+  (s__split_fields15 = s__split_fields7))) and ((i9 = i4) and
+  ((s__split_fields16 = s__split_fields6) and
+  (s__split_fields17 = s__split_fields7))))))
+
+axiom H18 : (((first4 <= i3) and (i3 <= last4)) -> (i10 = i8))
+
+axiom H19 : (((first4 <= i3) and (i3 <= last4)) ->
+  ((s__split_fields18 = s__split_fields14) and
+  (s__split_fields19 = s__split_fields15)))
+
+axiom H20 : (((first4 <= i3) and (i3 <= last4)) -> (i11 = i9))
+
+axiom H21 : (((first4 <= i3) and (i3 <= last4)) ->
+  ((s__split_fields20 = s__split_fields16) and
+  (s__split_fields21 = s__split_fields17)))
+
+axiom H22 : ((not ((first4 <= i3) and (i3 <= last4))) -> (i10 = i3))
+
+axiom H23 : ((not ((first4 <= i3) and (i3 <= last4))) ->
+  ((s__split_fields18 = s__split_fields2) and
+  (s__split_fields19 = s__split_fields3)))
+
+axiom H24 : ((not ((first4 <= i3) and (i3 <= last4))) -> (i11 = i3))
+
+axiom H25 : ((not ((first4 <= i3) and (i3 <= last4))) ->
+  ((s__split_fields20 = s__split_fields2) and
+  (s__split_fields21 = s__split_fields3)))
+
+axiom H26 : (result6 = i1)
+
+axiom H27 : (i12 = first4)
+
+axiom H28 : (first4 <= i12)
+
+axiom H29 : (i12 <= last4)
+
+axiom H30 : ((((length2({ us_split_discrs1 = {
   rec__list__my_lists__vector__capacity = res__split_discrs };
-  us_split_fields3 = res__split_fields2 })) and (in_range6(o18) and
-  (((of_int(1) = true) and (o18 <= to_rep2(res__split_discrs))) or
-  ((not (of_int(1) = true)) and (o18 <= 100))))) and (((o18 = o17) and
-  (result7 = true)) or ((not (o18 = o17)) and (result7 = false))))) and
-  (((result7 = true) and (((((o13 = (last4 - i9)) and
-  in_range1((last4 - i9))) and (o14 = (o13 + 1))) and ((o15 = o14) and
-  in_range1(o14))) and (((({ elts = o11; rt = o12 } = to__({
-  us_split_fields1 = s__split_fields12 })) and (dynamic_property(1,
-  2147483647, to_rep(first(o12)), to_rep(last(o12))) and
-  ((to_rep(first(o12)) = 1) and (0 <= to_rep(last(o12)))))) and
-  (o16 = to_rep(last(o12)))) and (((o16 = o15) and (result6 = true)) or
-  ((not (o16 = o15)) and (result6 = false)))))) or
-  ((not (result7 = true)) and (result6 = false)))) and (((result6 = true) and
-  (((((((o7 = (last4 - i9)) and in_range1((last4 - i9))) and
-  (o8 = (o7 + 1))) and ((o9 = o8) and in_range1(o8))) and (((j1 <= o9) and
-  (o10 = true)) or ((not (j1 <= o9)) and (o10 = false)))) and (((1 <= j1) and
-  (result8 = o10)) or ((not (1 <= j1)) and (result8 = false)))) and
-  ((result5 = true) <->
-  (forall j2:int. (((1 <= j2) and (j2 <= ((last4 - i9) + 1))) ->
-  (to_rep(((to__({ us_split_fields1 = s__split_fields12
-  })).elts[j2])) = to_rep(((to__({ us_split_fields1 =
-  (s__split_fields10).us_split_fields__content })).elts[j2])))))))) or
-  ((not (result6 = true)) and (result5 = false)))) -> ((result5 = true) ->
-  (((((o2 = (i9 - 1)) and in_range1((i9 - 1))) and (((j <= o2) and
-  (o3 = true)) or ((not (j <= o2)) and (o3 = false)))) and
-  (((first4 <= j) and (result9 = o3)) or ((not (first4 <= j)) and
-  (result9 = false)))) -> ((result9 = true) -> (((((o4 = (last4 - j)) and
-  in_range1((last4 - j))) and (o5 = (o4 + first4))) and ((o6 = o5) and
-  in_range1(o5))) -> in_range5(o6))))))))))))))))))))
+  us_split_fields3 = { rec__list__my_lists__vector = res__split_fields2 }
+  }) = (i13 - first4)) and (to_rep(last((to__({ us_split_fields1 = {
+  rec__stack__stack__top = s__split_fields22; rec__stack__stack__content =
+  s__split_fields23 } })).rt)) = ((last4 - i13) + 1))) and
+  (forall j3:int. (((1 <= j3) and (j3 <= ((last4 - i13) + 1))) ->
+  (to_rep(((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields22; rec__stack__stack__content = s__split_fields23 }
+  })).elts[j3])) = to_rep(((to__({ us_split_fields1 = {
+  rec__stack__stack__top = s__split_fields18; rec__stack__stack__content =
+  s__split_fields19 } })).elts[j3])))))) and
+  (forall j3:int. (((first4 <= j3) and (j3 <= (i13 - 1))) -> (get(model__({
+  us_split_discrs1 = { rec__list__my_lists__vector__capacity =
+  res__split_discrs }; us_split_fields3 = { rec__list__my_lists__vector =
+  res__split_fields2 } }), j3) = get(model__({ us_split_discrs1 = {
+  rec__list__my_lists__vector__capacity = l }; us_split_fields3 = {
+  rec__list__my_lists__vector = l1 } }), ((last4 - j3) + first4))))))
+
+axiom H31 : (((first4 <= last4) -> dynamic_property4(first4, last4, i13)) and
+  ((first4 <= i13) and (i13 <= last4)))
+
+axiom H32 : ((o36 = (i13 - first4)) and in_range1((i13 - first4)))
+
+axiom H33 : ((o37 = length2({ us_split_discrs1 = {
+  rec__list__my_lists__vector__capacity = res__split_discrs };
+  us_split_fields3 = { rec__list__my_lists__vector = res__split_fields2 }
+  })) and (in_range6(o37) and (((of_int(1) = true) ->
+  (o37 <= to_rep2(res__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o37 <= 100)))))
+
+axiom H34 : (((o37 = o36) -> (result9 = true)) and ((not (o37 = o36)) ->
+  (result9 = false)))
+
+axiom H35 : ((result9 = true) -> ((o32 = (last4 - i13)) and
+  in_range1((last4 - i13))))
+
+axiom H36 : ((result9 = true) -> (o33 = (o32 + 1)))
+
+axiom H37 : ((result9 = true) -> ((o34 = o33) and in_range1(o33)))
+
+axiom H38 : ((result9 = true) -> (({ elts = o30; rt = o31 } = to__({
+  us_split_fields1 = { rec__stack__stack__top = s__split_fields22;
+  rec__stack__stack__content = s__split_fields23 } })) and
+  (dynamic_property(1, 2147483647, to_rep(first(o31)), to_rep(last(o31))) and
+  ((to_rep(first(o31)) = 1) and (0 <= to_rep(last(o31)))))))
+
+axiom H39 : ((result9 = true) -> (o35 = to_rep(last(o31))))
+
+axiom H40 : ((result9 = true) -> (((o35 = o34) -> (result8 = true)) and
+  ((not (o35 = o34)) -> (result8 = false))))
+
+axiom H41 : ((not (result9 = true)) -> (result8 = false))
+
+axiom H42 : ((result8 = true) -> ((o23 = (last4 - i13)) and
+  in_range1((last4 - i13))))
+
+axiom H43 : ((result8 = true) -> (o24 = (o23 + 1)))
+
+axiom H44 : ((result8 = true) -> ((o25 = o24) and in_range1(o24)))
+
+axiom H45 : ((result8 = true) -> (((j2 <= o25) -> (o26 = true)) and
+  ((not (j2 <= o25)) -> (o26 = false))))
+
+axiom H46 : ((result8 = true) -> (((1 <= j2) -> (result10 = o26)) and
+  ((not (1 <= j2)) -> (result10 = false))))
+
+axiom H47 : ((result8 = true) -> ((result7 = true) <->
+  (forall j3:int. (((1 <= j3) and (j3 <= ((last4 - i13) + 1))) ->
+  (to_rep(((to__({ us_split_fields1 = { rec__stack__stack__top =
+  s__split_fields22; rec__stack__stack__content = s__split_fields23 }
+  })).elts[j3])) = to_rep(((to__({ us_split_fields1 = {
+  rec__stack__stack__top = s__split_fields18; rec__stack__stack__content =
+  s__split_fields19 } })).elts[j3])))))))
+
+axiom H48 : ((not (result8 = true)) -> (result7 = false))
+
+axiom H49 : (result7 = true)
+
+axiom H50 : ((o14 = (i13 - 1)) and in_range1((i13 - 1)))
+
+axiom H51 : (((j1 <= o14) -> (o15 = true)) and ((not (j1 <= o14)) ->
+  (o15 = false)))
+
+axiom H52 : (((first4 <= j1) -> (result11 = o15)) and
+  ((not (first4 <= j1)) -> (result11 = false)))
+
+axiom H53 : (result11 = true)
+
+axiom H54 : ((o17 = (last4 - j1)) and in_range1((last4 - j1)))
+
+axiom H55 : (o18 = (o17 + first4))
+
+axiom H56 : ((o19 = o18) and in_range1(o18))
+
+ (* File "list.ads", line 9, characters 0-0 *)
+goal WP_parameter_def : in_range5(o19)

@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -930,15 +930,27 @@ logic attr__ATTRIBUTE_ADDRESS : int
 axiom c__def_axiom : ({ elts = c; rt = c1
   } = create(of_int(18446744073709551615)))
 
- (* File "fail.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall fail__c__assume:(t,bool) farray. forall fail__c__assume1:t1. (((({
-  elts = fail__c__assume; rt = fail__c__assume1
+logic fail__c__assume : (t,bool) farray
+
+logic fail__c__assume1 : t1
+
+axiom H : (({ elts = fail__c__assume; rt = fail__c__assume1
   } = create(of_int(18446744073709551615))) and (dynamic_property(of_int(0),
   of_int(18446744073709551615), to_rep(first(fail__c__assume1)),
   to_rep(last(fail__c__assume1))) and
   ((to_rep(last(fail__c__assume1)) = of_int(18446744073709551615)) and
-  (to_rep(first(fail__c__assume1)) = of_int(0))))) and
-  ((c = fail__c__assume) and (c1 = fail__c__assume1))) ->
-  (dynamic_property(of_int(0), of_int(18446744073709551615),
-  to_rep(first(c1)), to_rep(last(c1))) -> (to_rep(first(c1)) = of_int(0)))))
+  (to_rep(first(fail__c__assume1)) = of_int(0)))))
+
+axiom H1 : ((fail__c__assume = c) and (fail__c__assume1 = c1))
+
+axiom H2 : dynamic_property(of_int(0), of_int(18446744073709551615),
+  to_rep(first(c1)), to_rep(last(c1)))
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+ (* File "fail.adb", line 12, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(c1)) = of_int(0))

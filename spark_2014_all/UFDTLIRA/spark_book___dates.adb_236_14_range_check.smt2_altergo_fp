@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type day_advance_type
 
-predicate in_range1(x: int) = (((-36524) <= x) and (x <= 36524))
+predicate in_range1(x: int) = (((- 36524) <= x) and (x <= 36524))
 
 logic bool_eq1 : int, int -> bool
 
@@ -403,7 +403,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -496,11 +496,139 @@ function t39b__ref___projection(a: t39b__ref) : integer = (a).t39b__content
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic current_date__split_fields : day_type
+
+logic current_date__split_fields1 : month_type
+
+logic current_date__split_fields2 : year_type
+
+logic valid : bool
+
+logic steps : int
+
+logic i : int
+
+logic i1 : int
+
+logic o : day_type
+
+logic o1 : month_type
+
+logic o2 : year_type
+
+logic o3 : day_type
+
+logic o4 : month_type
+
+logic o5 : year_type
+
+logic o6 : day_type
+
+logic o7 : month_type
+
+logic o8 : year_type
+
+logic o9 : day_type
+
+logic o10 : month_type
+
+logic o11 : year_type
+
+logic result : bool
+
+logic valid1 : bool
+
+logic result1 : int
+
+logic steps1 : int
+
+logic result2 : int
+
+logic i2 : int
+
+logic result3 : bool
+
+logic valid2 : bool
+
+logic current_date__split_fields3 : day_type
+
+logic current_date__split_fields4 : month_type
+
+logic current_date__split_fields5 : year_type
+
+logic valid3 : bool
+
+logic i3 : int
+
+logic current_date__split_fields6 : day_type
+
+logic current_date__split_fields7 : month_type
+
+logic current_date__split_fields8 : year_type
+
+logic result4 : int
+
+logic i4 : int
+
+logic result5 : bool
+
+logic valid4 : bool
+
+logic result6 : int
+
+logic steps2 : int
+
+logic result7 : int
+
+logic i5 : int
+
+logic result8 : bool
+
+logic valid5 : bool
+
+logic current_date__split_fields9 : day_type
+
+logic current_date__split_fields10 : month_type
+
+logic current_date__split_fields11 : year_type
+
+logic valid6 : bool
+
+logic i6 : int
+
+logic current_date__split_fields12 : day_type
+
+logic current_date__split_fields13 : month_type
+
+logic current_date__split_fields14 : year_type
+
+logic result9 : int
+
+logic i7 : int
+
+logic result10 : bool
+
+logic valid7 : bool
+
+axiom H : in_range1(by__)
+
+axiom H1 : (((- 36524) <= 36524) -> in_range1(steps))
+
+axiom H2 : (result = valid)
+
+axiom H3 : (valid1 = of_int(1))
+
+axiom H4 : (not (0 <= by__))
+
+axiom H5 : (result6 = steps)
+
+axiom H6 : (steps2 = (-by__))
+
+axiom H7 : (steps2 = r38b)
+
+axiom H8 : in_range1(r38b)
+
+axiom H9 : (1 <= r38b)
+
  (* File "dates.ads", line 89, characters 0-0 *)
-goal WP_parameter_def :
-  (forall valid:bool. forall steps:int. forall result:bool.
-  forall valid1:bool. forall result1:int. forall steps1:int.
-  (in_range1(by__) -> ((((-36524) <= 36524) -> in_range1(steps)) ->
-  (((result = valid) and (valid1 = of_int(1))) -> ((not (0 <= by__)) ->
-  (((result1 = steps) and (steps1 = (-by__))) -> (((steps1 = r38b) and
-  in_range1(r38b)) -> ((1 <= r38b) -> ((-36524) <= 1)))))))))
+goal WP_parameter_def : ((- 36524) <= 1)

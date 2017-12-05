@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -932,88 +932,452 @@ axiom temp___String_Literal_223__def_axiom :
   (to_rep((temp___String_Literal_223(void)[4])) = 97)) and
   (to_rep((temp___String_Literal_223(void)[5])) = 108))
 
- (* File "test_ints.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i__split_fields:integer. forall i__split_fields1:integer.
-  forall i__split_fields2:integer. forall i__split_fields3:us_private.
-  forall ai__split_fields:natural. forall ai__split_fields1:integer.
-  forall ai__split_fields2:integer. forall ai__split_fields3:integer.
-  forall ai__split_fields4:us_private. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:integer. forall o4:integer. forall o5:integer.
-  forall o6:us_private. forall test_ints__i__assume:integer.
-  forall test_ints__i__assume1:integer. forall test_ints__i__assume2:integer.
-  forall test_ints__i__assume3:us_private. forall test_ints__i__assume4:int.
-  forall o7:natural. forall o8:natural. forall o9:integer.
-  forall o10:integer. forall o11:integer. forall o12:us_private.
-  forall test_ints__ai__assume:natural.
-  forall test_ints__ai__assume1:integer.
-  forall test_ints__ai__assume2:integer.
-  forall test_ints__ai__assume3:integer.
-  forall test_ints__ai__assume4:us_private.
-  forall test_ints__ai__assume5:int. forall result:integer.
-  forall result1:integer. forall result2:integer. forall result3:us_private.
-  forall i__split_fields4:integer. forall i__split_fields5:integer.
-  forall i__split_fields6:integer. forall i__split_fields7:us_private.
-  forall result4:natural. forall result5:integer. forall result6:integer.
-  forall result7:integer. forall result8:us_private.
-  forall ai__split_fields5:natural. forall ai__split_fields6:integer.
-  forall ai__split_fields7:integer. forall ai__split_fields8:integer.
-  forall ai__split_fields9:us_private.
-  forall ints__bump__arg__fields:integer.
-  forall ints__bump__arg__fields1:integer.
-  forall ints__bump__arg__fields2:integer.
-  forall ints__bump__arg__fields3:us_private. forall result9:integer.
-  forall result10:integer. forall result11:integer.
-  forall result12:us_private. forall i__split_fields8:integer.
-  forall i__split_fields9:integer. forall i__split_fields10:integer.
-  forall i__split_fields11:us_private.
-  forall ints__bump__arg__fields4:integer.
-  forall ints__bump__arg__fields5:integer.
-  forall ints__bump__arg__fields6:integer.
-  forall ints__bump__arg__fields7:us_private. forall result13:integer.
-  forall result14:integer. forall result15:integer.
-  forall result16:us_private. forall i__split_fields12:integer.
-  forall i__split_fields13:integer. forall i__split_fields14:integer.
-  forall i__split_fields15:us_private. (((((to_rep1(o) = 42) and
-  ((to_rep1(o1) = 100) and ((to_rep1(o2) = 0) and ((o2 = o3) and
-  ((o1 = o4) and ((o = o5) and (us_null_ext__ = o6))))))) and
-  (((test_ints__i__assume = o3) and ((test_ints__i__assume1 = o4) and
-  ((test_ints__i__assume2 = o5) and (test_ints__i__assume3 = o6)))) and
-  (us_tag = test_ints__i__assume4))) and ((((result = i__split_fields) and
-  ((result1 = i__split_fields1) and ((result2 = i__split_fields2) and
-  (result3 = i__split_fields3)))) and
-  ((test_ints__i__assume = i__split_fields4) and
-  ((test_ints__i__assume1 = i__split_fields5) and
-  ((test_ints__i__assume2 = i__split_fields6) and
-  (test_ints__i__assume3 = i__split_fields7))))) and
-  (i__attr__tag = us_tag))) -> (((((to_rep2(o7) = 5) and ((o7 = o8) and
-  ((i__split_fields4 = o9) and ((i__split_fields5 = o10) and
-  ((i__split_fields6 = o11) and (us_null_ext__ = o12)))))) and
-  (((test_ints__ai__assume = o8) and ((test_ints__ai__assume1 = o9) and
-  ((test_ints__ai__assume2 = o10) and ((test_ints__ai__assume3 = o11) and
-  (test_ints__ai__assume4 = o12))))) and
-  (us_tag1 = test_ints__ai__assume5))) and
-  ((((result4 = ai__split_fields) and ((result5 = ai__split_fields1) and
-  ((result6 = ai__split_fields2) and ((result7 = ai__split_fields3) and
-  (result8 = ai__split_fields4))))) and
-  ((test_ints__ai__assume = ai__split_fields5) and
-  ((test_ints__ai__assume1 = ai__split_fields6) and
-  ((test_ints__ai__assume2 = ai__split_fields7) and
-  ((test_ints__ai__assume3 = ai__split_fields8) and
-  (test_ints__ai__assume4 = ai__split_fields9)))))) and
-  (ai__attr__tag = us_tag1))) ->
-  (((to_rep1(i__split_fields6) <  to_rep1(ints__bump__arg__fields2)) and
-  (((result9 = i__split_fields4) and ((result10 = i__split_fields5) and
-  ((result11 = i__split_fields6) and (result12 = i__split_fields7)))) and
-  ((ints__bump__arg__fields = i__split_fields8) and
-  ((ints__bump__arg__fields1 = i__split_fields9) and
-  ((ints__bump__arg__fields2 = i__split_fields10) and
-  (ints__bump__arg__fields3 = i__split_fields11)))))) ->
-  (((to_rep1(i__split_fields10) <  to_rep1(ints__bump__arg__fields6)) and
-  (((result13 = i__split_fields8) and ((result14 = i__split_fields9) and
-  ((result15 = i__split_fields10) and (result16 = i__split_fields11)))) and
-  ((i__split_fields12 = ints__bump__arg__fields4) and
+logic i__split_fields : integer
+
+logic i__split_fields1 : integer
+
+logic i__split_fields2 : integer
+
+logic i__split_fields3 : us_private
+
+logic ai__split_fields : natural
+
+logic ai__split_fields1 : integer
+
+logic ai__split_fields2 : integer
+
+logic ai__split_fields3 : integer
+
+logic ai__split_fields4 : us_private
+
+logic ic__split_fields : integer
+
+logic ic__split_fields1 : integer
+
+logic ic__split_fields2 : integer
+
+logic ic__split_fields3 : us_private
+
+logic ic__split_fields4 : integer
+
+logic ic__split_fields5 : integer
+
+logic ic__split_fields6 : integer
+
+logic ic__split_fields7 : us_private
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic o5 : integer
+
+logic o6 : us_private
+
+logic test_ints__i__assume : integer
+
+logic test_ints__i__assume1 : integer
+
+logic test_ints__i__assume2 : integer
+
+logic test_ints__i__assume3 : us_private
+
+logic test_ints__i__assume4 : int
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : us_private
+
+logic test_ints__ai__assume : natural
+
+logic test_ints__ai__assume1 : integer
+
+logic test_ints__ai__assume2 : integer
+
+logic test_ints__ai__assume3 : integer
+
+logic test_ints__ai__assume4 : us_private
+
+logic test_ints__ai__assume5 : int
+
+logic result : integer
+
+logic result1 : integer
+
+logic result2 : integer
+
+logic result3 : us_private
+
+logic i__split_fields4 : integer
+
+logic i__split_fields5 : integer
+
+logic i__split_fields6 : integer
+
+logic i__split_fields7 : us_private
+
+logic result4 : natural
+
+logic result5 : integer
+
+logic result6 : integer
+
+logic result7 : integer
+
+logic result8 : us_private
+
+logic ai__split_fields5 : natural
+
+logic ai__split_fields6 : integer
+
+logic ai__split_fields7 : integer
+
+logic ai__split_fields8 : integer
+
+logic ai__split_fields9 : us_private
+
+logic ints__bump__arg__fields : integer
+
+logic ints__bump__arg__fields1 : integer
+
+logic ints__bump__arg__fields2 : integer
+
+logic ints__bump__arg__fields3 : us_private
+
+logic result9 : integer
+
+logic result10 : integer
+
+logic result11 : integer
+
+logic result12 : us_private
+
+logic i__split_fields8 : integer
+
+logic i__split_fields9 : integer
+
+logic i__split_fields10 : integer
+
+logic i__split_fields11 : us_private
+
+logic ints__bump__arg__fields4 : integer
+
+logic ints__bump__arg__fields5 : integer
+
+logic ints__bump__arg__fields6 : integer
+
+logic ints__bump__arg__fields7 : us_private
+
+logic result13 : integer
+
+logic result14 : integer
+
+logic result15 : integer
+
+logic result16 : us_private
+
+logic i__split_fields12 : integer
+
+logic i__split_fields13 : integer
+
+logic i__split_fields14 : integer
+
+logic i__split_fields15 : us_private
+
+logic ints__bump__2__arg__fields : natural
+
+logic ints__bump__2__arg__fields1 : integer
+
+logic ints__bump__2__arg__fields2 : integer
+
+logic ints__bump__2__arg__fields3 : integer
+
+logic ints__bump__2__arg__fields4 : us_private
+
+logic result17 : natural
+
+logic result18 : integer
+
+logic result19 : integer
+
+logic result20 : integer
+
+logic result21 : us_private
+
+logic ai__split_fields10 : natural
+
+logic ai__split_fields11 : integer
+
+logic ai__split_fields12 : integer
+
+logic ai__split_fields13 : integer
+
+logic ai__split_fields14 : us_private
+
+logic ints__bump__arg__fields8 : integer
+
+logic ints__bump__arg__fields9 : integer
+
+logic ints__bump__arg__fields10 : integer
+
+logic ints__bump__arg__fields11 : us_private
+
+logic result22 : natural
+
+logic result23 : integer
+
+logic result24 : integer
+
+logic result25 : integer
+
+logic result26 : us_private
+
+logic ai__split_fields15 : natural
+
+logic ai__split_fields16 : integer
+
+logic ai__split_fields17 : integer
+
+logic ai__split_fields18 : integer
+
+logic ai__split_fields19 : us_private
+
+logic result27 : integer
+
+logic result28 : integer
+
+logic result29 : integer
+
+logic result30 : us_private
+
+logic ic__split_fields8 : integer
+
+logic ic__split_fields9 : integer
+
+logic ic__split_fields10 : integer
+
+logic ic__split_fields11 : us_private
+
+logic ints__bump__arg__fields12 : integer
+
+logic ints__bump__arg__fields13 : integer
+
+logic ints__bump__arg__fields14 : integer
+
+logic ints__bump__arg__fields15 : us_private
+
+logic result31 : integer
+
+logic result32 : integer
+
+logic result33 : integer
+
+logic result34 : us_private
+
+logic ic__split_fields12 : integer
+
+logic ic__split_fields13 : integer
+
+logic ic__split_fields14 : integer
+
+logic ic__split_fields15 : us_private
+
+logic result35 : integer
+
+logic result36 : integer
+
+logic result37 : integer
+
+logic result38 : us_private
+
+logic ic__split_fields16 : integer
+
+logic ic__split_fields17 : integer
+
+logic ic__split_fields18 : integer
+
+logic ic__split_fields19 : us_private
+
+logic ints__bump__arg__fields16 : integer
+
+logic ints__bump__arg__fields17 : integer
+
+logic ints__bump__arg__fields18 : integer
+
+logic ints__bump__arg__fields19 : us_private
+
+logic result39 : integer
+
+logic result40 : integer
+
+logic result41 : integer
+
+logic result42 : us_private
+
+logic ic__split_fields20 : integer
+
+logic ic__split_fields21 : integer
+
+logic ic__split_fields22 : integer
+
+logic ic__split_fields23 : us_private
+
+logic ints__call_bump__arg__fields : integer
+
+logic ints__call_bump__arg__fields1 : integer
+
+logic ints__call_bump__arg__fields2 : integer
+
+logic ints__call_bump__arg__fields3 : us_private
+
+logic result43 : integer
+
+logic result44 : integer
+
+logic result45 : integer
+
+logic result46 : us_private
+
+logic i__split_fields16 : integer
+
+logic i__split_fields17 : integer
+
+logic i__split_fields18 : integer
+
+logic i__split_fields19 : us_private
+
+logic ints__call_bump__arg__fields4 : integer
+
+logic ints__call_bump__arg__fields5 : integer
+
+logic ints__call_bump__arg__fields6 : integer
+
+logic ints__call_bump__arg__fields7 : us_private
+
+axiom H : (to_rep1(o) = 42)
+
+axiom H1 : (to_rep1(o1) = 100)
+
+axiom H2 : (to_rep1(o2) = 0)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (o = o5)
+
+axiom H6 : (us_null_ext__ = o6)
+
+axiom H7 : (test_ints__i__assume = o3)
+
+axiom H8 : (test_ints__i__assume1 = o4)
+
+axiom H9 : (test_ints__i__assume2 = o5)
+
+axiom H10 : (test_ints__i__assume3 = o6)
+
+axiom H11 : (us_tag = test_ints__i__assume4)
+
+axiom H12 : (result = i__split_fields)
+
+axiom H13 : (result1 = i__split_fields1)
+
+axiom H14 : (result2 = i__split_fields2)
+
+axiom H15 : (result3 = i__split_fields3)
+
+axiom H16 : (test_ints__i__assume = i__split_fields4)
+
+axiom H17 : (test_ints__i__assume1 = i__split_fields5)
+
+axiom H18 : (test_ints__i__assume2 = i__split_fields6)
+
+axiom H19 : (test_ints__i__assume3 = i__split_fields7)
+
+axiom H20 : (i__attr__tag = us_tag)
+
+axiom H21 : (to_rep2(o7) = 5)
+
+axiom H22 : (o7 = o8)
+
+axiom H23 : (i__split_fields4 = o9)
+
+axiom H24 : (i__split_fields5 = o10)
+
+axiom H25 : (i__split_fields6 = o11)
+
+axiom H26 : (us_null_ext__ = o12)
+
+axiom H27 : (test_ints__ai__assume = o8)
+
+axiom H28 : (test_ints__ai__assume1 = o9)
+
+axiom H29 : (test_ints__ai__assume2 = o10)
+
+axiom H30 : (test_ints__ai__assume3 = o11)
+
+axiom H31 : (test_ints__ai__assume4 = o12)
+
+axiom H32 : (us_tag1 = test_ints__ai__assume5)
+
+axiom H33 : (result4 = ai__split_fields)
+
+axiom H34 : (result5 = ai__split_fields1)
+
+axiom H35 : (result6 = ai__split_fields2)
+
+axiom H36 : (result7 = ai__split_fields3)
+
+axiom H37 : (result8 = ai__split_fields4)
+
+axiom H38 : (test_ints__ai__assume = ai__split_fields5)
+
+axiom H39 : (test_ints__ai__assume1 = ai__split_fields6)
+
+axiom H40 : (test_ints__ai__assume2 = ai__split_fields7)
+
+axiom H41 : (test_ints__ai__assume3 = ai__split_fields8)
+
+axiom H42 : (test_ints__ai__assume4 = ai__split_fields9)
+
+axiom H43 : (ai__attr__tag = us_tag1)
+
+axiom H44 : (to_rep1(i__split_fields6) <  to_rep1(ints__bump__arg__fields2))
+
+axiom H45 : ((result9 = i__split_fields4) and
+  ((result10 = i__split_fields5) and ((result11 = i__split_fields6) and
+  (result12 = i__split_fields7))))
+
+axiom H46 : ((i__split_fields8 = ints__bump__arg__fields) and
+  ((i__split_fields9 = ints__bump__arg__fields1) and
+  ((i__split_fields10 = ints__bump__arg__fields2) and
+  (i__split_fields11 = ints__bump__arg__fields3))))
+
+axiom H47 : (to_rep1(i__split_fields10) <  to_rep1(ints__bump__arg__fields6))
+
+axiom H48 : ((result13 = i__split_fields8) and
+  ((result14 = i__split_fields9) and ((result15 = i__split_fields10) and
+  (result16 = i__split_fields11))))
+
+axiom H49 : ((i__split_fields12 = ints__bump__arg__fields4) and
   ((i__split_fields13 = ints__bump__arg__fields5) and
   ((i__split_fields14 = ints__bump__arg__fields6) and
-  (i__split_fields15 = ints__bump__arg__fields7)))))) ->
-  (to_rep1(ai__split_fields8) <  (to_rep1(ai__split_fields7) - 10)))))))
+  (i__split_fields15 = ints__bump__arg__fields7))))
+
+ (* File "test_ints.adb", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1(ai__split_fields8) <  (to_rep1(ai__split_fields7) - 10))

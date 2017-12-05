@@ -47,6 +47,7 @@
 (declare-const res Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range1 x))
 (assert (in_range1 y))
 (assert (=> (<= 1 100) (in_range1 res)))

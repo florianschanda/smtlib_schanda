@@ -355,26 +355,77 @@ type t9b__ref = { t9b__content : us_rep
 
 function t9b__ref___projection(a: t9b__ref) : us_rep = (a).t9b__content
 
+logic us : int
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : bool
+
+logic o4 : natural
+
+logic o5 : bool
+
+logic o6 : natural
+
+logic o7 : bool
+
+logic temp___284 : natural
+
+logic temp___2841 : bool
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : natural
+
+logic o11 : bool
+
+logic o12 : natural
+
+logic o13 : bool
+
+logic o14 : natural
+
+logic o15 : bool
+
+axiom H : in_range(c)
+
+axiom H1 : ((us = c) and in_range(c))
+
+axiom H2 : ((d__attr__constrained = true) and (to_rep(d__split_discrs) = c))
+
+axiom H3 : ((c = to_rep(d__split_discrs)) and (d__attr__constrained = true))
+
+axiom H4 : (to_rep(o) = c)
+
+axiom H5 : (o = o1)
+
+axiom H6 : (o2 = o1)
+
+axiom H7 : (true = o3)
+
+axiom H8 : ((o4 = o2) and (o5 = o3))
+
+axiom H9 : ((o6 = o4) and (o7 = o5))
+
+axiom H10 : ((temp___284 = o6) and (temp___2841 = o7))
+
+axiom H11 : (d__split_discrs = temp___284)
+
+axiom H12 : (to_rep(o8) = 0)
+
+axiom H13 : (o8 = o9)
+
+axiom H14 : (o10 = o9)
+
+axiom H15 : (true = o11)
+
+axiom H16 : ((o12 = o10) and (o13 = o11))
+
  (* File "discr.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall o:natural. forall o1:natural. forall o2:natural.
-  forall o3:bool. forall o4:natural. forall o5:bool. forall o6:natural.
-  forall o7:bool. forall temp___284:natural. forall temp___2841:bool.
-  forall o8:natural. forall o9:natural. forall o10:natural. forall o11:bool.
-  forall o12:natural. forall o13:bool. (in_range(c) -> (((us = c) and
-  in_range(c)) -> (((d__attr__constrained = true) and
-  (to_rep(d__split_discrs) = c)) -> (((c = to_rep(d__split_discrs)) and
-  (d__attr__constrained = true)) -> ((((((((to_rep(o) = c) and (o = o1)) and
-  ((o2 = o1) and (true = o3))) and ({ us_split_discrs1 = {
-  rec__discr__with_default__c = o4 }; attr__constrained = o5 } = {
-  us_split_discrs1 = { rec__discr__with_default__c = o2 };
-  attr__constrained = o3 })) and ({ us_split_discrs1 = {
-  rec__discr__with_default__c = o6 }; attr__constrained = o7 } = {
-  us_split_discrs1 = { rec__discr__with_default__c = o4 };
-  attr__constrained = o5 })) and ((temp___284 = o6) and
-  (temp___2841 = o7))) and (d__split_discrs = temp___284)) ->
-  (((((to_rep(o8) = 0) and (o8 = o9)) and ((o10 = o9) and (true = o11))) and
-  ({ us_split_discrs1 = { rec__discr__with_default__c = o12 };
-  attr__constrained = o13 } = { us_split_discrs1 = {
-  rec__discr__with_default__c = o10 }; attr__constrained = o11 })) ->
-  (c = to_rep(o12)))))))))
+goal WP_parameter_def : (c = to_rep(o12))

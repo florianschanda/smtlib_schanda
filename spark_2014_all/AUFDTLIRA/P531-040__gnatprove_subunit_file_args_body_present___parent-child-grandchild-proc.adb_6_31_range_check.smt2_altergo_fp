@@ -632,5 +632,9 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+axiom H : in_range1(i)
+
  (* File "parent-child-grandchild.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (in_range1(i) -> in_range1((i + 1)))
+goal WP_parameter_def : in_range1((i + 1))

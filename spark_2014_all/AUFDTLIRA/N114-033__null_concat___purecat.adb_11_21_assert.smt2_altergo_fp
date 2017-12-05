@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -423,14 +423,33 @@ logic y1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : (int,character) farray
+
+logic o : character
+
+logic o1 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic x1 : (int,character) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(y1)),
+  to_rep1(last(y1)))
+
+axiom H1 : ((bool_eq5(x, 1, 1000, y, to_rep1(first(y1)),
+  to_rep1(last(y1))) = true) and (to_rep((x[1])) = 88))
+
+axiom H2 : (bool_eq5(x, 1, 1000, y, to_rep1(first(y1)),
+  to_rep1(last(y1))) = true)
+
+axiom H3 : (to_rep(o) = 63)
+
+axiom H4 : (o1 = (x[1 <- o]))
+
+axiom H5 : (result = x)
+
+axiom H6 : (x1 = o1)
+
  (* File "purecat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,character) farray. forall o:character.
-  forall o1:(int,character) farray. forall result:(int,character) farray.
-  forall x1:(int,character) farray. (dynamic_property(1, 2147483647,
-  to_rep1(first(y1)), to_rep1(last(y1))) -> (((bool_eq5(x, 1, 1000, y,
-  to_rep1(first(y1)), to_rep1(last(y1))) = true) and
-  (to_rep((x[1])) = 88)) -> ((bool_eq5(x, 1, 1000, y, to_rep1(first(y1)),
-  to_rep1(last(y1))) = true) -> ((((to_rep(o) = 63) and
-  (o1 = (x[1 <- o]))) and ((result = x) and (x1 = o1))) -> (not (bool_eq5(x1,
-  1, 1000, y, to_rep1(first(y1)), to_rep1(last(y1))) = true)))))))
+goal WP_parameter_def : (not (bool_eq5(x1, 1, 1000, y, to_rep1(first(y1)),
+  to_rep1(last(y1))) = true))

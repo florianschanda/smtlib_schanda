@@ -1097,36 +1097,74 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : ((o7 = pow7(x)) and (tqtisFinite(o7) and
+  (o7 = mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven, x, x),
+  x), x), x), x), x))))
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 5040.0))
+
+axiom H2 : (o8 = div(NearestTiesToEven, o7, fliteral1))
+
+axiom H3 : ((o3 = pow5(x)) and (tqtisFinite(o3) and
+  (o3 = mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, x, x), x), x), x))))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 120.0))
 
+axiom H4 : (o4 = div(NearestTiesToEven, o3, fliteral2))
+
+axiom H5 : ((o = pow3(x)) and (tqtisFinite(o) and (o = mul(NearestTiesToEven,
+  mul(NearestTiesToEven, x, x), x))))
+
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 6.0))
 
+axiom H6 : (o1 = div(NearestTiesToEven, o, fliteral3))
+
+axiom H7 : (o2 = sub(NearestTiesToEven, x, o1))
+
+axiom H8 : ((o5 = o2) and tqtisFinite(o2))
+
+axiom H9 : (o6 = add(NearestTiesToEven, o5, o4))
+
+axiom H10 : ((o9 = o6) and tqtisFinite(o6))
+
+axiom H11 : (o10 = sub(NearestTiesToEven, o9, o8))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
-  forall o10:t. (tqtisFinite(x) -> (((((o7 = pow7(x)) and
-  (tqtisFinite(o7) and (o7 = mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, x, x), x), x), x), x), x)))) and
-  (o8 = div(NearestTiesToEven, o7, fliteral1))) and ((((((o3 = pow5(x)) and
-  (tqtisFinite(o3) and (o3 = mul(NearestTiesToEven, mul(NearestTiesToEven,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, x, x), x), x), x)))) and
-  (o4 = div(NearestTiesToEven, o3, fliteral2))) and ((((((o = pow3(x)) and
-  (tqtisFinite(o) and (o = mul(NearestTiesToEven, mul(NearestTiesToEven, x,
-  x), x)))) and (o1 = div(NearestTiesToEven, o, fliteral3))) and
-  (o2 = sub(NearestTiesToEven, x, o1))) and ((o5 = o2) and
-  tqtisFinite(o2))) and (o6 = add(NearestTiesToEven, o5, o4)))) and
-  ((o9 = o6) and tqtisFinite(o6))) and (o10 = sub(NearestTiesToEven, o9,
-  o8)))) -> tqtisFinite(o10))))
+goal WP_parameter_def : tqtisFinite(o10)

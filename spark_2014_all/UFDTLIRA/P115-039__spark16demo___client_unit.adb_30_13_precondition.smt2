@@ -42,6 +42,8 @@
 (declare-const item_done Bool)
 (declare-const state3 Int)
 (declare-const item_done1 Bool)
+(declare-const state4 Int)
+(declare-const item_done2 Bool)
 (assert (in_range state))
 (assert (and (= (cur_state state1) 0) (in_range state1)))
 (assert (and (= (cur_state state2) (ite (= item_done true) 1 0)) (in_range state2)))

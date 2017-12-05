@@ -769,41 +769,109 @@ axiom def_axiom2 :
   ((not (temp___3349 = temp___3347)) -> ((temp___3344(temp___3346,
   temp___3347, temp___3348)[temp___3349]) = (temp___3346[temp___3349])))))))
 
+logic r__split_fields : enum1tb
+
+logic r__split_fields1 : (int,(int,(int,et1) farray) farray) farray
+
+logic r__split_fields2 : bool
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic o4 : enum1tb
+
+logic o5 : (int,(int,(int,et1) farray) farray) farray
+
+logic o6 : bool
+
+logic temp___8464 : enum1tb
+
+logic temp___84641 : (int,(int,(int,et1) farray) farray) farray
+
+logic temp___84642 : bool
+
+logic result : enum1tb
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result2 : bool
+
+logic r__split_fields3 : enum1tb
+
+logic r__split_fields4 : (int,(int,(int,et1) farray) farray) farray
+
+logic r__split_fields5 : bool
+
+logic r__split_fields6 : enum1tb
+
+logic r__split_fields7 : (int,(int,(int,et1) farray) farray) farray
+
+logic r__split_fields8 : bool
+
+logic r__split_fields9 : enum1tb
+
+logic r__split_fields10 : (int,(int,(int,et1) farray) farray) farray
+
+logic r__split_fields11 : bool
+
+axiom H : in_range3(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range1(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : (to_rep(o) = e)
+
+axiom H5 : (o1 = (((r__split_fields1[i])[j])[k <- o]))
+
+axiom H6 : (o2 = ((r__split_fields1[i])[j <- o1]))
+
+axiom H7 : (o3 = (r__split_fields1[i <- o2]))
+
+axiom H8 : (r__split_fields = o4)
+
+axiom H9 : (o3 = o5)
+
+axiom H10 : (r__split_fields2 = o6)
+
+axiom H11 : (temp___8464 = o4)
+
+axiom H12 : (temp___84641 = o5)
+
+axiom H13 : (temp___84642 = o6)
+
+axiom H14 : (result = r__split_fields)
+
+axiom H15 : (result1 = r__split_fields1)
+
+axiom H16 : (result2 = r__split_fields2)
+
+axiom H17 : (temp___8464 = r__split_fields3)
+
+axiom H18 : (temp___84641 = r__split_fields4)
+
+axiom H19 : (temp___84642 = r__split_fields5)
+
+axiom H20 : (r__split_fields6 = r__split_fields3)
+
+axiom H21 : (r__split_fields7 = r__split_fields4)
+
+axiom H22 : (r__split_fields8 = r__split_fields5)
+
+axiom H23 : (r__split_fields9 = r__split_fields3)
+
+axiom H24 : (r__split_fields10 = r__split_fields4)
+
+axiom H25 : (r__split_fields11 = r__split_fields5)
+
  (* File "ar.ads", line 1579, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:enum1tb.
-  forall r__split_fields1:(int,(int,(int,et1) farray) farray) farray.
-  forall r__split_fields2:bool. forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray. forall o4:enum1tb.
-  forall o5:(int,(int,(int,et1) farray) farray) farray. forall o6:bool.
-  forall temp___8464:enum1tb.
-  forall temp___84641:(int,(int,(int,et1) farray) farray) farray.
-  forall temp___84642:bool. forall result:enum1tb.
-  forall result1:(int,(int,(int,et1) farray) farray) farray.
-  forall result2:bool. forall r__split_fields3:enum1tb.
-  forall r__split_fields4:(int,(int,(int,et1) farray) farray) farray.
-  forall r__split_fields5:bool. forall r__split_fields6:enum1tb.
-  forall r__split_fields7:(int,(int,(int,et1) farray) farray) farray.
-  forall r__split_fields8:bool. forall r__split_fields9:enum1tb.
-  forall r__split_fields10:(int,(int,(int,et1) farray) farray) farray.
-  forall r__split_fields11:bool. ((in_range3(i) and (in_range2(j) and
-  (in_range1(k) and (in_range4(e) and ((((((((to_rep(o) = e) and
-  (o1 = (((r__split_fields1[i])[j])[k <- o]))) and
-  (o2 = ((r__split_fields1[i])[j <- o1]))) and
-  (o3 = (r__split_fields1[i <- o2]))) and ((r__split_fields = o4) and
-  ((o3 = o5) and (r__split_fields2 = o6)))) and ((temp___8464 = o4) and
-  ((temp___84641 = o5) and (temp___84642 = o6)))) and
-  (((result = r__split_fields) and ((result1 = r__split_fields1) and
-  (result2 = r__split_fields2))) and ((temp___8464 = r__split_fields3) and
-  ((temp___84641 = r__split_fields4) and
-  (temp___84642 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields3) and
-  ((r__split_fields7 = r__split_fields4) and
-  (r__split_fields8 = r__split_fields5))) and
-  ((r__split_fields9 = r__split_fields3) and
-  ((r__split_fields10 = r__split_fields4) and
-  (r__split_fields11 = r__split_fields5))))))))) ->
-  (bool_eq9(r__split_fields7, 1, 16, temp___3331(r__split_fields1, i,
-  temp___3337((r__split_fields1[i]), j,
-  temp___3344(((r__split_fields1[i])[j]), k, e))), 1, 16) = true)))
+goal WP_parameter_def : (bool_eq9(r__split_fields7, 1, 16,
+  temp___3331(r__split_fields1, i, temp___3337((r__split_fields1[i]), j,
+  temp___3344(((r__split_fields1[i])[j]), k, e))), 1, 16) = true)

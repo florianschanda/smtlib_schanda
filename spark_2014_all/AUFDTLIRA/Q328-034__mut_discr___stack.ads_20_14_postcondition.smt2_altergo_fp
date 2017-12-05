@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -609,35 +609,112 @@ axiom temp___String_Literal_171__def_axiom :
   (to_rep((temp___String_Literal_171(void)[10])) = 62)) and
   (to_rep((temp___String_Literal_171(void)[11])) = 32))
 
+logic last2 : int
+
+logic tab : (int,us_rep) farray
+
+logic temp___173 : (int,character) farray
+
+logic temp___1731 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : (int,character) farray
+
+logic o7 : t
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : (int,us_rep) farray
+
+logic o11 : int
+
+logic result : int
+
+logic last3 : int
+
+logic result1 : (int,us_rep) farray
+
+logic tab1 : (int,us_rep) farray
+
+logic last4 : int
+
+logic tab2 : (int,us_rep) farray
+
+logic last5 : int
+
+logic tab3 : (int,us_rep) farray
+
+axiom H : in_range3(last2)
+
+axiom H1 : (not (full(last2) = true))
+
+axiom H2 : (not (last2 = 200))
+
+axiom H3 : (({ elts = temp___173; rt = temp___1731 } = to_string1({
+  us_split_fields1 = { rec__types__value__e = v } })) and dynamic_property(1,
+  2147483647, to_rep1(first(temp___1731)), to_rep1(last(temp___1731))))
+
+axiom H4 : ((to_rep1(first(temp___1731)) <= to_rep1(last(temp___1731))) ->
+  (o = ((to_rep1(last(temp___1731)) - to_rep1(first(temp___1731))) + 1)))
+
+axiom H5 :
+  ((not (to_rep1(first(temp___1731)) <= to_rep1(last(temp___1731)))) ->
+  (o = 0))
+
+axiom H6 : ((1 <= 11) -> (o1 = ((11 - 1) + 1)))
+
+axiom H7 : ((not (1 <= 11)) -> (o1 = 0))
+
+axiom H8 : (o2 = (o1 + o))
+
+axiom H9 : (o3 = (1 + o2))
+
+axiom H10 : (o4 = (o3 - 1))
+
+axiom H11 : ((o5 = o4) and in_range1(o4))
+
+axiom H12 : (concat(temp___String_Literal_171(void), 1, 11, temp___173,
+  to_rep1(first(temp___1731)), to_rep1(last(temp___1731))) = o6)
+
+axiom H13 : (mk(1, o5) = o7)
+
+axiom H14 : ((o8 = (last2 + 1)) and in_range3((last2 + 1)))
+
+axiom H15 : (result = last2)
+
+axiom H16 : (last3 = o8)
+
+axiom H17 : ((1 <= last3) and (last3 <= 200))
+
+axiom H18 : (o9 = last3)
+
+axiom H19 : (o10 = (tab[o9 <- { us_split_fields1 = { rec__types__value__e = v
+  } }]))
+
+axiom H20 : (result1 = tab)
+
+axiom H21 : (tab1 = o10)
+
+axiom H22 : (tab1 = tab2)
+
+axiom H23 : (last3 = last4)
+
+axiom H24 : (tab3 = tab1)
+
+axiom H25 : (last5 = last3)
+
  (* File "stack.ads", line 60, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last2:int. forall tab:(int,us_rep) farray.
-  forall temp___173:(int,character) farray. forall temp___1731:t.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall o6:(int,character) farray. forall o7:t.
-  forall o8:int. forall o9:int. forall o10:(int,us_rep) farray.
-  forall result:int. forall last3:int. forall result1:(int,us_rep) farray.
-  forall tab1:(int,us_rep) farray. forall last4:int.
-  forall tab2:(int,us_rep) farray. forall last5:int.
-  forall tab3:(int,us_rep) farray. ((in_range3(last2) and
-  ((not (full(last2) = true)) and (((not (last2 = 200)) and (((({ elts =
-  temp___173; rt = temp___1731 } = to_string1({ us_split_fields1 = {
-  rec__types__value__e = v } })) and dynamic_property(1, 2147483647,
-  to_rep1(first(temp___1731)), to_rep1(last(temp___1731)))) and
-  ((((((((to_rep1(first(temp___1731)) <= to_rep1(last(temp___1731))) and
-  (o = ((to_rep1(last(temp___1731)) - to_rep1(first(temp___1731))) + 1))) or
-  ((not (to_rep1(first(temp___1731)) <= to_rep1(last(temp___1731)))) and
-  (o = 0))) and ((((1 <= 11) and (o1 = ((11 - 1) + 1))) or
-  ((not (1 <= 11)) and (o1 = 0))) and (o2 = (o1 + o)))) and
-  (o3 = (1 + o2))) and (o4 = (o3 - 1))) and ((o5 = o4) and
-  in_range1(o4))) and ((concat(temp___String_Literal_171(void), 1, 11,
-  temp___173, to_rep1(first(temp___1731)),
-  to_rep1(last(temp___1731))) = o6) and (mk(1, o5) = o7)))) and
-  ((((o8 = (last2 + 1)) and in_range3((last2 + 1))) and (({ int__content =
-  result } = { int__content = last2 }) and (last3 = o8))) and
-  (((((1 <= last3) and (last3 <= 200)) and (o9 = last3)) and
-  (o10 = (tab[o9 <- { us_split_fields1 = { rec__types__value__e = v }
-  }]))) and (({ map__content1 = result1 } = { map__content1 = tab }) and
-  (tab1 = o10)))))) and (((tab1 = tab2) and (last3 = last4)) and
-  ((tab3 = tab1) and (last5 = last3)))))) ->
-  (size(last4) = (size(last2) + 1))))
+goal WP_parameter_def : (size(last4) = (size(last2) + 1))

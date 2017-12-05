@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -139,14 +139,55 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic export__ : int
+
+logic a : int
+
+logic b : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic a1 : int
+
+logic result1 : int
+
+logic b1 : int
+
+logic export__1 : int
+
+logic a2 : int
+
+logic b2 : int
+
+logic result2 : int
+
+logic a3 : int
+
+logic export__2 : int
+
+logic b3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(export__))
+
+axiom H1 : (result = a)
+
+axiom H2 : (a1 = 0)
+
+axiom H3 : in_range1(a1)
+
+axiom H4 : (result1 = b)
+
+axiom H5 : (b1 = 100)
+
+axiom H6 : in_range1(b1)
+
+axiom H7 : (((((- 2147483648) <= 2147483647) -> in_range1(export__1)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(a2))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(b2)))
+
  (* File "test.adb", line 38, characters 0-0 *)
-goal WP_parameter_def :
-  (forall export__:int. forall a:int. forall b:int. forall result:int.
-  forall a1:int. forall result1:int. forall b1:int. forall export__1:int.
-  forall a2:int. forall b2:int. ((((-2147483648) <= 2147483647) ->
-  in_range1(export__)) -> (((result = a) and (a1 = 0)) -> (in_range1(a1) ->
-  (((result1 = b) and (b1 = 100)) -> (in_range1(b1) ->
-  ((((((-2147483648) <= 2147483647) -> in_range1(export__1)) and
-  (((-2147483648) <= 2147483647) -> in_range1(a2))) and
-  (((-2147483648) <= 2147483647) -> in_range1(b2))) ->
-  in_range1((a2 + 1)))))))))
+goal WP_parameter_def : in_range1((a2 + 1))

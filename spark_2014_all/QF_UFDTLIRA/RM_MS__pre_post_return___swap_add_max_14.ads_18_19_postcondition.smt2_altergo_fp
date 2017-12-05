@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,22 +113,47 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic swap_add_max_14__max__result : int
+
+logic o : int
+
+logic result : int
+
+logic swap_add_max_14__max__result1 : int
+
+logic swap_add_max_14__max__result2 : int
+
+logic swap_add_max_14__max__result3 : int
+
+logic swap_add_max_14__max__result4 : int
+
+logic swap_add_max_14__max__result5 : int
+
+logic result1 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (swap_add_max_14__max__result1 = swap_add_max_14__max__result2)
+
+axiom H3 : (swap_add_max_14__max__result3 = swap_add_max_14__max__result1)
+
+axiom H4 : ((y <= x) -> (o = x))
+
+axiom H5 : ((not (y <= x)) -> (o = y))
+
+axiom H6 : (result = swap_add_max_14__max__result)
+
+axiom H7 : (swap_add_max_14__max__result1 = o)
+
+axiom H8 : (swap_add_max_14__max__result4 = swap_add_max_14__max__result2)
+
+axiom H9 : (swap_add_max_14__max__result5 = swap_add_max_14__max__result3)
+
+axiom H10 : (result1 = swap_add_max_14__max__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall swap_add_max_14__max__result:int. forall o:int. forall result:int.
-  forall swap_add_max_14__max__result1:int.
-  forall swap_add_max_14__max__result2:int.
-  forall swap_add_max_14__max__result3:int.
-  forall swap_add_max_14__max__result4:int.
-  forall swap_add_max_14__max__result5:int.
-  (forall result1:int. ((in_range(x) and (in_range(y) and
-  (((((swap_add_max_14__max__result1 = swap_add_max_14__max__result2) and
-  (swap_add_max_14__max__result3 = swap_add_max_14__max__result1)) and
-  ((((y <= x) and (o = x)) or ((not (y <= x)) and (o = y))) and
-  ((result = swap_add_max_14__max__result) and
-  (swap_add_max_14__max__result1 = o)))) and
-  ((swap_add_max_14__max__result4 = swap_add_max_14__max__result2) and
-  (swap_add_max_14__max__result5 = swap_add_max_14__max__result3))) and
-  (result1 = swap_add_max_14__max__result4)))) -> (((y <= x) ->
+goal WP_parameter_def : (((y <= x) ->
   (swap_add_max_14__max__result4 = x)) and ((not (y <= x)) ->
-  (swap_add_max_14__max__result4 = y))))))
+  (swap_add_max_14__max__result4 = y)))

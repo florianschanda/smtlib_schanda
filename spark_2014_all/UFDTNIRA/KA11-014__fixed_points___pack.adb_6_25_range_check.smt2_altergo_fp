@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tmoneyB
 
-predicate in_range(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 axiom add_div :
@@ -166,18 +166,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -517,10 +517,50 @@ logic s : salary
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic stash : money
+
+logic pocket : money
+
+logic o : money
+
+logic o1 : int
+
+logic o2 : money
+
+logic o3 : money
+
+logic stash1 : money
+
+logic pocket1 : money
+
+logic result : bool
+
+logic result1 : money
+
+logic stash2 : money
+
+logic result2 : money
+
+logic pocket2 : money
+
+logic stash3 : money
+
+logic pocket3 : money
+
+logic stash4 : money
+
+logic pocket4 : money
+
+axiom H : (0 <  to_fixed2(s))
+
+axiom H1 : (to_fixed1(o) = to_fixed2(s))
+
+axiom H2 : (o1 = to_fixed1(o))
+
+axiom H3 : (((o1 <  to_fixed1(stash)) -> (result = true)) and
+  ((not (o1 <  to_fixed1(stash))) -> (result = false)))
+
+axiom H4 : (result = true)
+
  (* File "pack.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stash:money. forall o:money. forall o1:int. forall result:bool.
-  ((0 <  to_fixed2(s)) -> ((((to_fixed1(o) = to_fixed2(s)) and
-  (o1 = to_fixed1(o))) and (((o1 <  to_fixed1(stash)) and (result = true)) or
-  ((not (o1 <  to_fixed1(stash))) and (result = false)))) ->
-  ((result = true) -> in_range1((to_fixed1(stash) - to_fixed2(s)))))))
+goal WP_parameter_def : in_range1((to_fixed1(stash) - to_fixed2(s)))

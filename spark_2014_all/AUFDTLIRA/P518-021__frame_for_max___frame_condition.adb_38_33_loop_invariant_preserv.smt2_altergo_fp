@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -499,177 +499,902 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "frame_condition.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,us_rep) farray. forall k:int. forall max:int. forall o:int.
-  forall o1:int. forall temp___228:int.
-  forall temp___226:(int,us_rep) farray. forall temp___224:int.
-  forall o2:int. forall o3:natural. forall o4:natural. forall o5:natural.
-  forall o6:natural. forall o7:natural. forall o8:natural. forall o9:natural.
-  forall o10:int. forall o11:int. forall o12:natural. forall o13:natural.
-  forall o14:natural. forall o15:natural. forall o16:natural.
-  forall o17:natural. forall o18:natural. forall o19:int. forall o20:natural.
-  forall o21:natural. forall o22:natural. forall o23:natural.
-  forall o24:natural. forall o25:natural. forall o26:natural. forall o27:int.
-  forall o28:(int,us_rep) farray. forall o29:int. forall o30:int.
-  forall o31:natural. forall o32:natural. forall o33:natural.
-  forall o34:natural. forall o35:natural. forall o36:natural.
-  forall o37:natural. forall o38:int. forall o39:int. forall o40:natural.
-  forall o41:natural. forall o42:natural. forall o43:natural.
-  forall o44:natural. forall o45:natural. forall o46:natural. forall o47:int.
-  forall o48:natural. forall o49:natural. forall o50:natural.
-  forall o51:natural. forall o52:natural. forall o53:natural.
-  forall o54:natural. forall o55:int. forall o56:(int,us_rep) farray.
-  forall o57:int. forall o58:int. forall o59:natural. forall o60:natural.
-  forall o61:natural. forall o62:natural. forall o63:natural.
-  forall o64:natural. forall o65:natural. forall o66:int. forall o67:int.
-  forall o68:natural. forall o69:natural. forall o70:natural.
-  forall o71:natural. forall o72:natural. forall o73:natural.
-  forall o74:natural. forall o75:int. forall o76:natural.
-  forall o77:us_split_fields. forall o78:us_rep. forall o79:int.
-  forall o80:(int,us_rep) farray. forall result:bool.
-  forall result1:int__ref. forall k1:int. forall result2:int__ref.
-  forall max1:int. forall result3:bool. forall result4:int__ref.
-  forall max2:int. forall result5:map__ref. forall a1:(int,us_rep) farray.
-  forall a2:(int,us_rep) farray. forall k2:int. forall max3:int.
-  forall k3:int__ref. forall k4:int. forall a3:map__ref. forall k5:int__ref.
-  forall max4:int__ref. forall a4:(int,us_rep) farray. forall k6:int.
-  forall max5:int. forall a5:map__ref. forall k7:int__ref.
-  forall max6:int__ref. forall a6:(int,us_rep) farray. forall k8:int.
-  forall max7:int. forall result6:int__ref. forall k9:int.
-  forall result7:int__ref. forall max8:int. forall result8:bool.
-  forall result9:int__ref. forall max9:int. forall max10:int__ref.
-  forall max11:int. forall result10:map__ref. forall a7:(int,us_rep) farray.
-  forall a8:(int,us_rep) farray. forall k10:int. forall max12:int.
-  forall result11:int__ref. forall k11:int. forall result12:bool.
-  forall result13:int__ref. forall max13:int. forall max14:int__ref.
-  forall max15:int. forall result14:map__ref. forall a9:(int,us_rep) farray.
-  forall a10:map__ref. forall k12:int__ref. forall max16:int__ref.
-  forall a11:(int,us_rep) farray. forall k13:int. forall max17:int.
-  (dynamic_property(1, 2147483647, to_rep1(a__first), to_rep1(a__last)) ->
-  (((1 <= 2147483647) -> in_range3(k)) -> (((0 <= 2147483647) ->
-  in_range2(max)) -> ((((((to_rep1(a__first) <= to_rep1(a__last)) and
-  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1))) or
-  ((not (to_rep1(a__first) <= to_rep1(a__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (not (result = true))) ->
-  ((((o1 = to_rep1(a__first)) and in_range3(to_rep1(a__first))) and
-  ((result1 = { int__content = k }) and (k1 = o1))) -> (((result2 = {
-  int__content = max }) and (max1 = 0)) -> (((((temp___228 = max1) and
-  ((temp___226 = a) and ((temp___224 = k1) and
-  ((((((((((to_rep1(a__first) <= k1) and (k1 <= to_rep1(a__last))) and
-  (o2 = k1)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o3; rec__frame_condition__cell__max_left = o4;
-  rec__frame_condition__cell__max_right = o5 } } = (a[o2]))) and
-  ((o3 = o6) and ((o4 = o7) and (o5 = o8)))) and (o9 = o6)) and
-  (o10 = to_rep(o9))) and (((max1 <  o10) and (result3 = true)) or
-  ((not (max1 <  o10)) and (result3 = false)))) and (((result3 = true) and
-  ((((((((to_rep1(a__first) <= k1) and (k1 <= to_rep1(a__last))) and
-  (o11 = k1)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o12; rec__frame_condition__cell__max_left = o13;
-  rec__frame_condition__cell__max_right = o14 } } = (a[o11]))) and
-  ((o12 = o15) and ((o13 = o16) and (o14 = o17)))) and (o18 = o15)) and
-  (o19 = to_rep(o18))) and ((result4 = { int__content = max1 }) and
-  (max2 = o19)))) or ((not (result3 = true)) and (max2 = max1)))) and
-  ((((((to_rep(o20) = max2) and
-  (((((a[k1])).us_split_fields1).rec__frame_condition__cell__value = o21) and
-  ((o20 = o22) and
-  ((((a[k1])).us_split_fields1).rec__frame_condition__cell__max_right = o23)))) and
-  ((o24 = o21) and ((o25 = o22) and (o26 = o23)))) and
-  ((((to_rep1(a__first) <= k1) and (k1 <= to_rep1(a__last))) and
-  (o27 = k1)) and (o28 = (a[o27 <- { us_split_fields1 = {
+logic a : (int,us_rep) farray
+
+logic k : int
+
+logic max : int
+
+logic o : int
+
+logic o1 : int
+
+logic temp___228 : int
+
+logic temp___226 : (int,us_rep) farray
+
+logic temp___224 : int
+
+logic o2 : int
+
+logic o3 : natural
+
+logic o4 : natural
+
+logic o5 : natural
+
+logic o6 : natural
+
+logic o7 : natural
+
+logic o8 : natural
+
+logic o9 : natural
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : natural
+
+logic o13 : natural
+
+logic o14 : natural
+
+logic o15 : natural
+
+logic o16 : natural
+
+logic o17 : natural
+
+logic o18 : natural
+
+logic o19 : int
+
+logic o20 : natural
+
+logic o21 : natural
+
+logic o22 : natural
+
+logic o23 : natural
+
+logic o24 : natural
+
+logic o25 : natural
+
+logic o26 : natural
+
+logic o27 : int
+
+logic o28 : (int,us_rep) farray
+
+logic i : int
+
+logic i1 : int
+
+logic j : int
+
+logic o29 : int
+
+logic o30 : natural
+
+logic o31 : natural
+
+logic o32 : natural
+
+logic o33 : natural
+
+logic o34 : natural
+
+logic o35 : natural
+
+logic o36 : natural
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : natural
+
+logic o41 : natural
+
+logic o42 : natural
+
+logic o43 : natural
+
+logic o44 : natural
+
+logic o45 : natural
+
+logic o46 : natural
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : natural
+
+logic o50 : natural
+
+logic o51 : natural
+
+logic o52 : natural
+
+logic o53 : natural
+
+logic o54 : natural
+
+logic o55 : natural
+
+logic o56 : int
+
+logic o57 : natural
+
+logic o58 : natural
+
+logic o59 : natural
+
+logic o60 : natural
+
+logic o61 : natural
+
+logic o62 : natural
+
+logic o63 : natural
+
+logic o64 : int
+
+logic o65 : (int,us_rep) farray
+
+logic o66 : int
+
+logic temp___234 : int
+
+logic temp___232 : (int,us_rep) farray
+
+logic temp___230 : int
+
+logic o67 : int
+
+logic o68 : natural
+
+logic o69 : natural
+
+logic o70 : natural
+
+logic o71 : natural
+
+logic o72 : natural
+
+logic o73 : natural
+
+logic o74 : natural
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : natural
+
+logic o78 : natural
+
+logic o79 : natural
+
+logic o80 : natural
+
+logic o81 : natural
+
+logic o82 : natural
+
+logic o83 : natural
+
+logic o84 : int
+
+logic o85 : natural
+
+logic o86 : natural
+
+logic o87 : natural
+
+logic o88 : natural
+
+logic o89 : natural
+
+logic o90 : natural
+
+logic o91 : natural
+
+logic o92 : int
+
+logic o93 : (int,us_rep) farray
+
+logic i2 : int
+
+logic i3 : int
+
+logic j1 : int
+
+logic o94 : int
+
+logic o95 : natural
+
+logic o96 : natural
+
+logic o97 : natural
+
+logic o98 : natural
+
+logic o99 : natural
+
+logic o100 : natural
+
+logic o101 : natural
+
+logic o102 : int
+
+logic o103 : int
+
+logic o104 : int
+
+logic o105 : natural
+
+logic o106 : natural
+
+logic o107 : natural
+
+logic o108 : natural
+
+logic o109 : natural
+
+logic o110 : natural
+
+logic o111 : natural
+
+logic o112 : int
+
+logic o113 : int
+
+logic o114 : natural
+
+logic o115 : natural
+
+logic o116 : natural
+
+logic o117 : natural
+
+logic o118 : natural
+
+logic o119 : natural
+
+logic o120 : natural
+
+logic o121 : int
+
+logic o122 : natural
+
+logic o123 : natural
+
+logic o124 : natural
+
+logic o125 : natural
+
+logic o126 : natural
+
+logic o127 : natural
+
+logic o128 : natural
+
+logic o129 : int
+
+logic o130 : (int,us_rep) farray
+
+logic i4 : int
+
+logic o131 : int
+
+logic o132 : natural
+
+logic o133 : natural
+
+logic o134 : natural
+
+logic o135 : natural
+
+logic o136 : natural
+
+logic o137 : natural
+
+logic o138 : natural
+
+logic o139 : int
+
+logic j2 : int
+
+logic o140 : int
+
+logic o141 : natural
+
+logic o142 : natural
+
+logic o143 : natural
+
+logic o144 : natural
+
+logic o145 : natural
+
+logic o146 : natural
+
+logic o147 : natural
+
+logic o148 : int
+
+logic o149 : int
+
+logic o150 : natural
+
+logic o151 : natural
+
+logic o152 : natural
+
+logic o153 : natural
+
+logic o154 : natural
+
+logic o155 : natural
+
+logic o156 : natural
+
+logic o157 : int
+
+logic o158 : natural
+
+logic o159 : natural
+
+logic o160 : natural
+
+logic o161 : natural
+
+logic o162 : natural
+
+logic o163 : natural
+
+logic o164 : natural
+
+logic o165 : int
+
+logic o166 : int
+
+logic o167 : bool
+
+logic o168 : bool
+
+logic a1 : (int,us_rep) farray
+
+logic k1 : int
+
+logic max1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic k2 : int
+
+logic result2 : int
+
+logic max2 : int
+
+logic result3 : bool
+
+logic result4 : int
+
+logic max3 : int
+
+logic result5 : (int,us_rep) farray
+
+logic a2 : (int,us_rep) farray
+
+logic a3 : (int,us_rep) farray
+
+logic k3 : int
+
+logic max4 : int
+
+logic result6 : int
+
+logic k4 : int
+
+logic result7 : bool
+
+logic result8 : int
+
+logic max5 : int
+
+logic result9 : (int,us_rep) farray
+
+logic a4 : (int,us_rep) farray
+
+logic k5 : int
+
+logic k6 : int
+
+logic a5 : (int,us_rep) farray
+
+logic k7 : int
+
+logic max6 : int
+
+logic a6 : (int,us_rep) farray
+
+logic k8 : int
+
+logic max7 : int
+
+logic a7 : (int,us_rep) farray
+
+logic k9 : int
+
+logic max8 : int
+
+logic a8 : (int,us_rep) farray
+
+logic k10 : int
+
+logic max9 : int
+
+logic result10 : int
+
+logic k11 : int
+
+logic result11 : int
+
+logic max10 : int
+
+logic result12 : bool
+
+logic result13 : int
+
+logic max11 : int
+
+logic max12 : int
+
+logic max13 : int
+
+logic result14 : (int,us_rep) farray
+
+logic a9 : (int,us_rep) farray
+
+logic a10 : (int,us_rep) farray
+
+logic k12 : int
+
+logic max14 : int
+
+logic result15 : int
+
+logic k13 : int
+
+logic result16 : bool
+
+logic result17 : int
+
+logic max15 : int
+
+logic max16 : int
+
+logic max17 : int
+
+logic result18 : (int,us_rep) farray
+
+logic a11 : (int,us_rep) farray
+
+logic k14 : int
+
+logic k15 : int
+
+logic a12 : (int,us_rep) farray
+
+logic k16 : int
+
+logic max18 : int
+
+logic a13 : (int,us_rep) farray
+
+logic k17 : int
+
+logic max19 : int
+
+logic a14 : (int,us_rep) farray
+
+logic k18 : int
+
+logic max20 : int
+
+logic a15 : (int,us_rep) farray
+
+logic k19 : int
+
+logic max21 : int
+
+logic a16 : (int,us_rep) farray
+
+logic k20 : int
+
+logic max22 : int
+
+logic a17 : (int,us_rep) farray
+
+logic k21 : int
+
+logic max23 : int
+
+logic a18 : (int,us_rep) farray
+
+logic k22 : int
+
+logic max24 : int
+
+logic a19 : (int,us_rep) farray
+
+logic k23 : int
+
+logic max25 : int
+
+logic a20 : (int,us_rep) farray
+
+logic k24 : int
+
+logic max26 : int
+
+logic a21 : (int,us_rep) farray
+
+logic k25 : int
+
+logic max27 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : ((1 <= 2147483647) -> in_range3(k))
+
+axiom H2 : ((0 <= 2147483647) -> in_range2(max))
+
+axiom H3 : ((to_rep1(a__first) <= to_rep1(a__last)) ->
+  (o = ((to_rep1(a__last) - to_rep1(a__first)) + 1)))
+
+axiom H4 : ((not (to_rep1(a__first) <= to_rep1(a__last))) -> (o = 0))
+
+axiom H5 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
+  (result = false)))
+
+axiom H6 : (not (result = true))
+
+axiom H7 : ((o1 = to_rep1(a__first)) and in_range3(to_rep1(a__first)))
+
+axiom H8 : (result1 = k)
+
+axiom H9 : (k2 = o1)
+
+axiom H10 : (result2 = max)
+
+axiom H11 : (max2 = 0)
+
+axiom H12 : (temp___228 = max2)
+
+axiom H13 : (temp___226 = a)
+
+axiom H14 : (temp___224 = k2)
+
+axiom H15 : ((to_rep1(a__first) <= k2) and (k2 <= to_rep1(a__last)))
+
+axiom H16 : (o2 = k2)
+
+axiom H17 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o3;
+  rec__frame_condition__cell__max_left = o4;
+  rec__frame_condition__cell__max_right = o5 } } = (a[o2]))
+
+axiom H18 : (o3 = o6)
+
+axiom H19 : (o4 = o7)
+
+axiom H20 : (o5 = o8)
+
+axiom H21 : (o9 = o6)
+
+axiom H22 : (o10 = to_rep(o9))
+
+axiom H23 : (((max2 <  o10) -> (result3 = true)) and ((not (max2 <  o10)) ->
+  (result3 = false)))
+
+axiom H24 : ((result3 = true) -> ((to_rep1(a__first) <= k2) and
+  (k2 <= to_rep1(a__last))))
+
+axiom H25 : ((result3 = true) -> (o11 = k2))
+
+axiom H26 : ((result3 = true) -> ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o12;
+  rec__frame_condition__cell__max_left = o13;
+  rec__frame_condition__cell__max_right = o14 } } = (a[o11])))
+
+axiom H27 : ((result3 = true) -> (o12 = o15))
+
+axiom H28 : ((result3 = true) -> (o13 = o16))
+
+axiom H29 : ((result3 = true) -> (o14 = o17))
+
+axiom H30 : ((result3 = true) -> (o18 = o15))
+
+axiom H31 : ((result3 = true) -> (o19 = to_rep(o18)))
+
+axiom H32 : ((result3 = true) -> (result4 = max2))
+
+axiom H33 : ((result3 = true) -> (max3 = o19))
+
+axiom H34 : ((not (result3 = true)) -> (max3 = max2))
+
+axiom H35 : (to_rep(o20) = max3)
+
+axiom H36 :
+  ((((a[k2])).us_split_fields1).rec__frame_condition__cell__value = o21)
+
+axiom H37 : (o20 = o22)
+
+axiom H38 :
+  ((((a[k2])).us_split_fields1).rec__frame_condition__cell__max_right = o23)
+
+axiom H39 : (o24 = o21)
+
+axiom H40 : (o25 = o22)
+
+axiom H41 : (o26 = o23)
+
+axiom H42 : ((to_rep1(a__first) <= k2) and (k2 <= to_rep1(a__last)))
+
+axiom H43 : (o27 = k2)
+
+axiom H44 : (o28 = (a[o27 <- { us_split_fields1 = {
   rec__frame_condition__cell__value = o24;
   rec__frame_condition__cell__max_left = o25;
-  rec__frame_condition__cell__max_right = o26 } }])))) and ((result5 = {
-  map__content = a }) and (a1 = o28))) and ((((to_rep1(a__first) <= k2) and
-  (k2 <= to_rep1(a__last))) and
-  ((forall i:int. (((to_rep1(a__first) <= i) and (i <= k2)) ->
-   (to_rep((((a2[i])).us_split_fields1).rec__frame_condition__cell__value) <= max3))) and
-  (forall i:int. (((to_rep1(a__first) <= i) and (i <= k2)) ->
-  (forall j:int. (((i <= j) and (j <= k2)) ->
-  (to_rep((((a2[i])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a2[j])).us_split_fields1).rec__frame_condition__cell__max_left)))))))) and
-  (((((1 <= 2147483647) -> in_range3(k2)) and
+  rec__frame_condition__cell__max_right = o26 } }]))
+
+axiom H45 : (result5 = a)
+
+axiom H46 : (a2 = o28)
+
+axiom H47 : ((to_rep1(a__first) <= k3) and (k3 <= to_rep1(a__last)))
+
+axiom H48 :
+  (forall i5:int. (((to_rep1(a__first) <= i5) and (i5 <= k3)) ->
+  (to_rep((((a3[i5])).us_split_fields1).rec__frame_condition__cell__value) <= max4)))
+
+axiom H49 :
+  (forall i5:int. (((to_rep1(a__first) <= i5) and (i5 <= k3)) ->
+  (forall j3:int. (((i5 <= j3) and (j3 <= k3)) ->
+  (to_rep((((a3[i5])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a3[j3])).us_split_fields1).rec__frame_condition__cell__max_left))))))
+
+axiom H50 : ((((1 <= 2147483647) -> in_range3(k3)) and
   (forall temp___227:int. (((to_rep1(a__first) <= temp___227) and
   (temp___227 <= to_rep1(a__last))) ->
-  (((((a2[temp___227])).us_split_fields1).rec__frame_condition__cell__value = (((temp___226[temp___227])).us_split_fields1).rec__frame_condition__cell__value) and
-  ((((a2[temp___227])).us_split_fields1).rec__frame_condition__cell__max_right = (((temp___226[temp___227])).us_split_fields1).rec__frame_condition__cell__max_right))))) and
-  ((0 <= 2147483647) -> in_range2(max3))) and (((k3 = { int__content = k2
-  }) and (k4 = k2)) and (k2 = to_rep1(a__last)))))))))) and (((max4 = {
-  int__content = max3 }) and ((k5 = k3) and (a3 = { map__content = a2
-  }))) and ((max5 = max3) and ((k6 = k4) and (a4 = a2))))) and
-  (((max6 = max4) and ((k7 = k5) and (a5 = a3))) and ((max7 = max5) and
-  ((k8 = k6) and (a6 = a4))))) -> ((((o29 = to_rep1(a__last)) and
-  in_range3(to_rep1(a__last))) and ((result6 = k7) and (k9 = o29))) ->
-  (((result7 = max6) and (max8 = 0)) ->
-  ((((((((((to_rep1(a__first) <= k9) and (k9 <= to_rep1(a__last))) and
-  (o30 = k9)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o31; rec__frame_condition__cell__max_left = o32;
-  rec__frame_condition__cell__max_right = o33 }
-  } = ((a5).map__content[o30]))) and ((o31 = o34) and ((o32 = o35) and
-  (o33 = o36)))) and (o37 = o34)) and (o38 = to_rep(o37))) and
-  (((max8 <  o38) and (result8 = true)) or ((not (max8 <  o38)) and
-  (result8 = false)))) and (((result8 = true) and
-  (((((((((to_rep1(a__first) <= k9) and (k9 <= to_rep1(a__last))) and
-  (o39 = k9)) and ({ us_split_fields1 = { rec__frame_condition__cell__value =
-  o40; rec__frame_condition__cell__max_left = o41;
-  rec__frame_condition__cell__max_right = o42 }
-  } = ((a5).map__content[o39]))) and ((o40 = o43) and ((o41 = o44) and
-  (o42 = o45)))) and (o46 = o43)) and (o47 = to_rep(o46))) and ((result9 = {
-  int__content = max8 }) and (max9 = o47))) and ((max10 = { int__content =
-  max9 }) and (max11 = max9)))) or ((not (result8 = true)) and ((max10 = {
-  int__content = max8 }) and (max11 = max8))))) ->
-  ((((((to_rep(o48) = (max10).int__content) and
-  ((((((a5).map__content[k9])).us_split_fields1).rec__frame_condition__cell__value = o49) and
-  ((((((a5).map__content[k9])).us_split_fields1).rec__frame_condition__cell__max_left = o50) and
-  (o48 = o51)))) and ((o52 = o49) and ((o53 = o50) and (o54 = o51)))) and
-  ((((to_rep1(a__first) <= k9) and (k9 <= to_rep1(a__last))) and
-  (o55 = k9)) and (o56 = ((a5).map__content[o55 <- { us_split_fields1 = {
-  rec__frame_condition__cell__value = o52;
-  rec__frame_condition__cell__max_left = o53;
-  rec__frame_condition__cell__max_right = o54 } }])))) and
-  ((result10 = a5) and (a7 = o56))) -> ((((to_rep1(a__first) <= k10) and
-  (k10 <= to_rep1(a__last))) and
-  ((forall i:int. (((k10 <= i) and (i <= to_rep1(a__last))) ->
-   (to_rep((((a8[i])).us_split_fields1).rec__frame_condition__cell__value) <= max12))) and
-  (forall i:int. (((k10 <= i) and (i <= to_rep1(a__last))) ->
-  (forall j:int. (((i <= j) and (j <= to_rep1(a__last))) ->
-  (to_rep((((a8[j])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a8[i])).us_split_fields1).rec__frame_condition__cell__max_right)))))))) ->
-  (((((((1 <= 2147483647) -> in_range3(k10)) and
+  (((((a3[temp___227])).us_split_fields1).rec__frame_condition__cell__value = (((temp___226[temp___227])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((((a3[temp___227])).us_split_fields1).rec__frame_condition__cell__max_right = (((temp___226[temp___227])).us_split_fields1).rec__frame_condition__cell__max_right))))) and
+  ((0 <= 2147483647) -> in_range2(max4)))
+
+axiom H51 : (k5 = k3)
+
+axiom H52 : (k6 = k3)
+
+axiom H53 : (k3 = to_rep1(a__last))
+
+axiom H54 : (max6 = max4)
+
+axiom H55 : (k7 = k5)
+
+axiom H56 : (a5 = a3)
+
+axiom H57 : (max7 = max4)
+
+axiom H58 : (k8 = k6)
+
+axiom H59 : (a6 = a3)
+
+axiom H60 : (max8 = max6)
+
+axiom H61 : (k9 = k7)
+
+axiom H62 : (a7 = a5)
+
+axiom H63 : (max9 = max7)
+
+axiom H64 : (k10 = k8)
+
+axiom H65 : (a8 = a6)
+
+axiom H66 : ((o66 = to_rep1(a__last)) and in_range3(to_rep1(a__last)))
+
+axiom H67 : (result10 = k9)
+
+axiom H68 : (k11 = o66)
+
+axiom H69 : (result11 = max8)
+
+axiom H70 : (max10 = 0)
+
+axiom H71 : ((to_rep1(a__first) <= k11) and (k11 <= to_rep1(a__last)))
+
+axiom H72 : (o67 = k11)
+
+axiom H73 : ({ us_split_fields1 = { rec__frame_condition__cell__value = o68;
+  rec__frame_condition__cell__max_left = o69;
+  rec__frame_condition__cell__max_right = o70 } } = (a7[o67]))
+
+axiom H74 : ((o71 = o68) and ((o72 = o69) and (o73 = o70)))
+
+axiom H75 : (o74 = o71)
+
+axiom H76 : (o75 = to_rep(o74))
+
+axiom H77 : (((max10 <  o75) -> (result12 = true)) and
+  ((not (max10 <  o75)) -> (result12 = false)))
+
+axiom H78 : ((result12 = true) -> ((to_rep1(a__first) <= k11) and
+  (k11 <= to_rep1(a__last))))
+
+axiom H79 : ((result12 = true) -> (o76 = k11))
+
+axiom H80 : ((result12 = true) -> ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o77;
+  rec__frame_condition__cell__max_left = o78;
+  rec__frame_condition__cell__max_right = o79 } } = (a7[o76])))
+
+axiom H81 : ((result12 = true) -> ((o80 = o77) and ((o81 = o78) and
+  (o82 = o79))))
+
+axiom H82 : ((result12 = true) -> (o83 = o80))
+
+axiom H83 : ((result12 = true) -> (o84 = to_rep(o83)))
+
+axiom H84 : ((result12 = true) -> (result13 = max10))
+
+axiom H85 : ((result12 = true) -> (max11 = o84))
+
+axiom H86 : ((result12 = true) -> (max12 = max11))
+
+axiom H87 : ((result12 = true) -> (max13 = max11))
+
+axiom H88 : ((not (result12 = true)) -> (max12 = max10))
+
+axiom H89 : ((not (result12 = true)) -> (max13 = max10))
+
+axiom H90 : (to_rep(o85) = max12)
+
+axiom H91 :
+  ((o86 = (((a7[k11])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((o87 = (((a7[k11])).us_split_fields1).rec__frame_condition__cell__max_left) and
+  (o88 = o85)))
+
+axiom H92 : ((o89 = o86) and ((o90 = o87) and (o91 = o88)))
+
+axiom H93 : ((to_rep1(a__first) <= k11) and (k11 <= to_rep1(a__last)))
+
+axiom H94 : (o92 = k11)
+
+axiom H95 : (o93 = (a7[o92 <- { us_split_fields1 = {
+  rec__frame_condition__cell__value = o89;
+  rec__frame_condition__cell__max_left = o90;
+  rec__frame_condition__cell__max_right = o91 } }]))
+
+axiom H96 : (result14 = a7)
+
+axiom H97 : (a9 = o93)
+
+axiom H98 : ((to_rep1(a__first) <= k12) and (k12 <= to_rep1(a__last)))
+
+axiom H99 :
+  (forall i5:int. (((k12 <= i5) and (i5 <= to_rep1(a__last))) ->
+  (to_rep((((a10[i5])).us_split_fields1).rec__frame_condition__cell__value) <= max14)))
+
+axiom H100 :
+  (forall i5:int. (((k12 <= i5) and (i5 <= to_rep1(a__last))) ->
+  (forall j3:int. (((i5 <= j3) and (j3 <= to_rep1(a__last))) ->
+  (to_rep((((a10[j3])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a10[i5])).us_split_fields1).rec__frame_condition__cell__max_right))))))
+
+axiom H101 : ((((1 <= 2147483647) -> in_range3(k12)) and
   (forall temp___233:int. (((to_rep1(a__first) <= temp___233) and
   (temp___233 <= to_rep1(a__last))) ->
-  (((((a8[temp___233])).us_split_fields1).rec__frame_condition__cell__value = ((((a5).map__content[temp___233])).us_split_fields1).rec__frame_condition__cell__value) and
-  ((((a8[temp___233])).us_split_fields1).rec__frame_condition__cell__max_left = ((((a5).map__content[temp___233])).us_split_fields1).rec__frame_condition__cell__max_left))))) and
-  ((0 <= 2147483647) -> in_range2(max12))) and
-  ((not (k10 = to_rep1(a__first))) and ((((o57 = (k10 - 1)) and
-  in_range3((k10 - 1))) and ((result11 = { int__content = k10 }) and
-  (k11 = o57))) and ((((((((((to_rep1(a__first) <= k11) and
-  (k11 <= to_rep1(a__last))) and (o58 = k11)) and ({ us_split_fields1 = {
-  rec__frame_condition__cell__value = o59;
-  rec__frame_condition__cell__max_left = o60;
-  rec__frame_condition__cell__max_right = o61 } } = (a8[o58]))) and
-  ((o59 = o62) and ((o60 = o63) and (o61 = o64)))) and (o65 = o62)) and
-  (o66 = to_rep(o65))) and (((max12 <  o66) and (result12 = true)) or
-  ((not (max12 <  o66)) and (result12 = false)))) and (((result12 = true) and
-  (((((((((to_rep1(a__first) <= k11) and (k11 <= to_rep1(a__last))) and
-  (o67 = k11)) and ({ us_split_fields1 = {
-  rec__frame_condition__cell__value = o68;
-  rec__frame_condition__cell__max_left = o69;
-  rec__frame_condition__cell__max_right = o70 } } = (a8[o67]))) and
-  ((o68 = o71) and ((o69 = o72) and (o70 = o73)))) and (o74 = o71)) and
-  (o75 = to_rep(o74))) and ((result13 = { int__content = max12 }) and
-  (max13 = o75))) and ((max14 = { int__content = max13 }) and
-  (max15 = max13)))) or ((not (result12 = true)) and ((max14 = {
-  int__content = max12 }) and (max15 = max12))))) and
-  (((((to_rep(o76) = (max14).int__content) and (o77 = {
-  rec__frame_condition__cell__value =
-  (((a8[k11])).us_split_fields1).rec__frame_condition__cell__value;
-  rec__frame_condition__cell__max_left =
-  (((a8[k11])).us_split_fields1).rec__frame_condition__cell__max_left;
-  rec__frame_condition__cell__max_right = o76 })) and (o78 = {
-  us_split_fields1 = o77 })) and ((((to_rep1(a__first) <= k11) and
-  (k11 <= to_rep1(a__last))) and (o79 = k11)) and
-  (o80 = (a8[o79 <- o78])))) and ((result14 = { map__content = a8 }) and
-  (a9 = o80))))))) and (((max16 = max14) and ((k12 = { int__content = k11
-  }) and (a10 = { map__content = a9 }))) and ((max17 = max15) and
-  ((k13 = k11) and (a11 = a9))))) ->
-  (to_rep1(a__first) <= (k12).int__content)))))))))))))))
+  (((((a10[temp___233])).us_split_fields1).rec__frame_condition__cell__value = (((a7[temp___233])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((((a10[temp___233])).us_split_fields1).rec__frame_condition__cell__max_left = (((a7[temp___233])).us_split_fields1).rec__frame_condition__cell__max_left))))) and
+  ((0 <= 2147483647) -> in_range2(max14)))
+
+axiom H102 : (not (k12 = to_rep1(a__first)))
+
+axiom H103 : ((o103 = (k12 - 1)) and in_range3((k12 - 1)))
+
+axiom H104 : (result15 = k12)
+
+axiom H105 : (k13 = o103)
+
+axiom H106 : ((to_rep1(a__first) <= k13) and (k13 <= to_rep1(a__last)))
+
+axiom H107 : (o104 = k13)
+
+axiom H108 : ({ us_split_fields1 = { rec__frame_condition__cell__value =
+  o105; rec__frame_condition__cell__max_left = o106;
+  rec__frame_condition__cell__max_right = o107 } } = (a10[o104]))
+
+axiom H109 : ((o108 = o105) and ((o109 = o106) and (o110 = o107)))
+
+axiom H110 : (o111 = o108)
+
+axiom H111 : (o112 = to_rep(o111))
+
+axiom H112 : (((max14 <  o112) -> (result16 = true)) and
+  ((not (max14 <  o112)) -> (result16 = false)))
+
+axiom H113 : ((result16 = true) -> ((to_rep1(a__first) <= k13) and
+  (k13 <= to_rep1(a__last))))
+
+axiom H114 : ((result16 = true) -> (o113 = k13))
+
+axiom H115 : ((result16 = true) -> ({ us_split_fields1 = {
+  rec__frame_condition__cell__value = o114;
+  rec__frame_condition__cell__max_left = o115;
+  rec__frame_condition__cell__max_right = o116 } } = (a10[o113])))
+
+axiom H116 : ((result16 = true) -> ((o117 = o114) and ((o118 = o115) and
+  (o119 = o116))))
+
+axiom H117 : ((result16 = true) -> (o120 = o117))
+
+axiom H118 : ((result16 = true) -> (o121 = to_rep(o120)))
+
+axiom H119 : ((result16 = true) -> (result17 = max14))
+
+axiom H120 : ((result16 = true) -> (max15 = o121))
+
+axiom H121 : ((result16 = true) -> (max16 = max15))
+
+axiom H122 : ((result16 = true) -> (max17 = max15))
+
+axiom H123 : ((not (result16 = true)) -> (max16 = max14))
+
+axiom H124 : ((not (result16 = true)) -> (max17 = max14))
+
+axiom H125 : (to_rep(o122) = max16)
+
+axiom H126 :
+  ((o123 = (((a10[k13])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((o124 = (((a10[k13])).us_split_fields1).rec__frame_condition__cell__max_left) and
+  (o125 = o122)))
+
+axiom H127 : ((o126 = o123) and ((o127 = o124) and (o128 = o125)))
+
+axiom H128 : ((to_rep1(a__first) <= k13) and (k13 <= to_rep1(a__last)))
+
+axiom H129 : (o129 = k13)
+
+axiom H130 : (o130 = (a10[o129 <- { us_split_fields1 = {
+  rec__frame_condition__cell__value = o126;
+  rec__frame_condition__cell__max_left = o127;
+  rec__frame_condition__cell__max_right = o128 } }]))
+
+axiom H131 : (result18 = a10)
+
+axiom H132 : (a11 = o130)
+
+axiom H133 : (max18 = max16)
+
+axiom H134 : (k16 = k13)
+
+axiom H135 : (a12 = a11)
+
+axiom H136 : (max19 = max17)
+
+axiom H137 : (k17 = k13)
+
+axiom H138 : (a13 = a11)
+
+ (* File "frame_condition.ads", line 17, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(a__first) <= k16)

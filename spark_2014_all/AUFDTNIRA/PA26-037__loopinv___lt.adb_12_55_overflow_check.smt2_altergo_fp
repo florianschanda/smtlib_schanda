@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -428,19 +428,217 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic r : int
+
+logic i : int
+
+logic j : int
+
+logic temp___179 : int
+
+logic temp___178 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___1791 : int
+
+logic temp___1781 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : int
+
+logic j1 : int
+
+logic result3 : int
+
+logic r2 : int
+
+logic r3 : int
+
+logic j2 : int
+
+logic result4 : int
+
+logic j3 : int
+
+logic result5 : int
+
+logic r4 : int
+
+logic r5 : int
+
+logic j4 : int
+
+logic r6 : int
+
+logic j5 : int
+
+logic r7 : int
+
+logic j6 : int
+
+logic r8 : int
+
+logic j7 : int
+
+logic r9 : int
+
+logic j8 : int
+
+logic r10 : int
+
+logic j9 : int
+
+logic r11 : int
+
+logic i2 : int
+
+logic j10 : int
+
+logic result6 : int
+
+logic i3 : int
+
+logic result7 : int
+
+logic j11 : int
+
+logic result8 : int
+
+logic r12 : int
+
+logic r13 : int
+
+logic j12 : int
+
+logic result9 : int
+
+logic j13 : int
+
+logic result10 : int
+
+logic r14 : int
+
+logic r15 : int
+
+logic j14 : int
+
+logic r16 : int
+
+logic j15 : int
+
+logic r17 : int
+
+logic j16 : int
+
+logic r18 : int
+
+logic j17 : int
+
+logic r19 : int
+
+logic j18 : int
+
+logic r20 : int
+
+logic j19 : int
+
+logic r21 : int
+
+logic j20 : int
+
+logic r22 : int
+
+logic j21 : int
+
+logic r23 : int
+
+logic i4 : int
+
+logic j22 : int
+
+logic r24 : int
+
+logic i5 : int
+
+logic j23 : int
+
+axiom H : ((0 <= 100) -> in_range4(r))
+
+axiom H1 : (result = r)
+
+axiom H2 : (r1 = 0)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 0)
+
+axiom H5 : (0 <= i1)
+
+axiom H6 : (i1 <= 9)
+
+axiom H7 : (result2 = j)
+
+axiom H8 : (j1 = 0)
+
+axiom H9 : (0 <= j1)
+
+axiom H10 : (j1 <= 9)
+
+axiom H11 : ((o = (r1 + to_rep(((x[i1])[j1])))) and
+  in_range4((r1 + to_rep(((x[i1])[j1])))))
+
+axiom H12 : (r1 = result3)
+
+axiom H13 : (r2 = o)
+
+axiom H14 : (r3 <= (((i1 * 10) + j2) + 1))
+
+axiom H15 : ((((0 <= 100) -> in_range4(r3)) and ((0 <= 9) ->
+  in_range3(j2))) and ((0 <= j2) and (j2 <= 9)))
+
+axiom H16 : ((o1 = (i1 * 10)) and in_range1((i1 * 10)))
+
+axiom H17 : (o2 = (o1 + j2))
+
+axiom H18 : ((o3 = o2) and in_range1(o2))
+
+axiom H19 : (o4 = (o3 + 1))
+
  (* File "lt.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:int. forall i:int. forall j:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall result:int.
-  forall r1:int. forall result1:int. forall i1:int. forall result2:int.
-  forall j1:int. forall result3:int. forall r2:int. forall r3:int.
-  forall j2:int. (((0 <= 100) -> in_range4(r)) -> (((result = r) and
-  (r1 = 0)) -> (((result1 = i) and (i1 = 0)) -> (((0 <= i1) and (i1 <= 9)) ->
-  ((({ int__content = result2 } = { int__content = j }) and (j1 = 0)) ->
-  (((0 <= j1) and (j1 <= 9)) -> ((((o = (r1 + to_rep(((x[i1])[j1])))) and
-  in_range4((r1 + to_rep(((x[i1])[j1]))))) and ((r1 = result3) and
-  (r2 = o))) -> ((r3 <= (((i1 * 10) + j2) + 1)) -> (((((0 <= 100) ->
-  in_range4(r3)) and ((0 <= 9) -> in_range3(j2))) and ((0 <= j2) and
-  (j2 <= 9))) -> ((((((o1 = (i1 * 10)) and in_range1((i1 * 10))) and
-  (o2 = (o1 + j2))) and ((o3 = o2) and in_range1(o2))) and
-  (o4 = (o3 + 1))) -> in_range1(o4))))))))))))
+goal WP_parameter_def : in_range1(o4)

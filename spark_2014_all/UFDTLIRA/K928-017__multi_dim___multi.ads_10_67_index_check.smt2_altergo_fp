@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -333,21 +333,86 @@ axiom def_axiom4 :
   temp___189, temp___190, temp___191), temp___192,
   temp___193) = of_rep(temp___191)))))))))
 
+logic one : int
+
+logic a : map
+
+logic k : int
+
+logic result : map
+
+logic a1 : map
+
+logic result1 : map
+
+logic a2 : map
+
+logic result2 : map
+
+logic a3 : map
+
+logic result3 : map
+
+logic a4 : map
+
+logic result4 : map
+
+logic a5 : map
+
+logic a6 : map
+
+logic a7 : map
+
+axiom H : in_range1(one)
+
+axiom H1 : in_range1(b)
+
+axiom H2 : (one = 1)
+
+axiom H3 : ((b = 1) -> (result = a))
+
+axiom H4 : ((b = 1) -> (a1 = temp___159(one, 2, one, 2)))
+
+axiom H5 : ((not (b = 1)) -> ((b = 2) -> (result1 = a)))
+
+axiom H6 : ((not (b = 1)) -> ((b = 2) -> (a2 = temp___167(one))))
+
+axiom H7 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) -> (result2 = a))))
+
+axiom H8 : ((not (b = 1)) -> ((not (b = 2)) -> ((b = 3) ->
+  (a3 = temp___172(one, one, one)))))
+
+axiom H9 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
+  (result3 = a)))))
+
+axiom H10 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) -> ((b = 4) ->
+  (a4 = temp___179(2, one, one))))))
+
+axiom H11 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (result4 = a)))))
+
+axiom H12 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (a5 = temp___186(2, one, one, one))))))
+
+axiom H13 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  ((not (b = 4)) -> (a4 = a5)))))
+
+axiom H14 : ((not (b = 1)) -> ((not (b = 2)) -> ((not (b = 3)) ->
+  (a3 = a4))))
+
+axiom H15 : ((not (b = 1)) -> ((not (b = 2)) -> (a2 = a3)))
+
+axiom H16 : ((not (b = 1)) -> (a1 = a2))
+
+axiom H17 : (a1 = a6)
+
+axiom H18 : (a7 = a1)
+
+axiom H19 : (b = 1)
+
+axiom H20 : (1 <= k)
+
+axiom H21 : (k <= 2)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall one:int. forall a:map. forall k:int. forall result:map.
-  forall a1:map. forall result1:map. forall a2:map. forall result2:map.
-  forall a3:map. forall result3:map. forall a4:map. forall result4:map.
-  forall a5:map. forall a6:map. forall a7:map. (in_range1(one) ->
-  (in_range1(b) -> ((one = 1) -> (((((b = 1) and (({ map__content = result
-  } = { map__content = a }) and (a1 = temp___159(one, 2, one, 2)))) or
-  ((not (b = 1)) and ((((b = 2) and (({ map__content = result1 } = {
-  map__content = a }) and (a2 = temp___167(one)))) or ((not (b = 2)) and
-  ((((b = 3) and (({ map__content = result2 } = { map__content = a }) and
-  (a3 = temp___172(one, one, one)))) or ((not (b = 3)) and ((((b = 4) and (({
-  map__content = result3 } = { map__content = a }) and (a4 = temp___179(2,
-  one, one)))) or ((not (b = 4)) and ((({ map__content = result4 } = {
-  map__content = a }) and (a5 = temp___186(2, one, one, one))) and
-  (a4 = a5)))) and (a3 = a4)))) and (a2 = a3)))) and (a1 = a2)))) and
-  ((a1 = a6) and (a7 = a1))) -> ((b = 1) -> (((1 <= k) and (k <= 2)) ->
-  (1 <= one))))))))
+goal WP_parameter_def : (1 <= one)

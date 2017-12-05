@@ -1121,6 +1121,31 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic foo__float_tests__sqrt_comedy_1__result : bool
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : bool
+
+logic result : bool
+
+logic foo__float_tests__sqrt_comedy_1__result1 : bool
+
+logic foo__float_tests__sqrt_comedy_1__result2 : bool
+
+logic foo__float_tests__sqrt_comedy_1__result3 : bool
+
+logic foo__float_tests__sqrt_comedy_1__result4 : bool
+
+logic foo__float_tests__sqrt_comedy_1__result5 : bool
+
+axiom H : tqtisFinite(a)
+
+axiom H1 : tqtisFinite(b)
+
+axiom H2 : tqtisFinite(c)
+
  (* File "generic_float_tests.adb", line 112, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
-  (tqtisFinite(c) -> tqtisFinite(mul(NearestTiesToEven, b, b)))))
+goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, b, b))

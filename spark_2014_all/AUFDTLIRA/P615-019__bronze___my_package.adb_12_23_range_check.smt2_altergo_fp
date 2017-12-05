@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -401,15 +401,49 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic result__ : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic found : bool
+
+logic result__1 : int
+
+logic i2 : int
+
+logic result1 : bool
+
+logic found1 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(a1)),
+  to_rep1(last(a1)))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(result__))
+
+axiom H3 : (result = i)
+
+axiom H4 : (i1 = to_rep1(first(a1)))
+
+axiom H5 : (to_rep1(first(a1)) <= i1)
+
+axiom H6 : (i1 <= to_rep1(last(a1)))
+
+axiom H7 : (((1 <= 2147483647) -> in_range2(result__1)) and
+  ((to_rep1(first(a1)) <= i2) and (i2 <= to_rep1(last(a1)))))
+
+axiom H8 : (to_rep((a[i2])) = e)
+
+axiom H9 : (result1 = found)
+
+axiom H10 : (found1 = of_int(1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. forall i:int. forall result:int. forall i1:int.
-  forall found:bool. forall result__1:int. forall i2:int.
-  forall result1:bool. forall found1:bool. (dynamic_property(1, 2147483647,
-  to_rep1(first(a1)), to_rep1(last(a1))) -> (in_range1(e) ->
-  (((1 <= 2147483647) -> in_range2(result__)) -> (((result = i) and
-  (i1 = to_rep1(first(a1)))) -> (((to_rep1(first(a1)) <= i1) and
-  (i1 <= to_rep1(last(a1)))) -> ((((1 <= 2147483647) ->
-  in_range2(result__1)) and ((to_rep1(first(a1)) <= i2) and
-  (i2 <= to_rep1(last(a1))))) -> ((to_rep((a[i2])) = e) ->
-  (((result1 = found) and (found1 = of_int(1))) -> in_range2(i2))))))))))
+goal WP_parameter_def : in_range2(i2)

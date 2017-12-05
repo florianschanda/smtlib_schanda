@@ -1,0 +1,1284 @@
+(* this is the prelude for Alt-Ergo, version >= 0.95.2 *)
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+function xorb(x: bool, y: bool) : bool = match_bool(x, notb(y), y)
+
+function implb(x: bool, y: bool) : bool = match_bool(x, y, true)
+
+type us_private
+
+logic private__bool_eq : us_private, us_private -> bool
+
+logic us_null_ext__ : us_private
+
+type us_type_of_heap
+
+type us_type_of_heap__ref = { us_type_of_heap__content : us_type_of_heap
+}
+
+type us_image
+
+type int__ref = { int__content : int }
+
+type bool__ref = { bool__content : bool }
+
+type real__ref = { real__content : real }
+
+type us_private__ref = { us_private__content : us_private
+}
+
+function int__ref___projection(a: int__ref) : int = (a).int__content
+
+function bool__ref___projection(a: bool__ref) : bool = (a).bool__content
+
+function real__ref___projection(a: real__ref) : real = (a).real__content
+
+function us_private__ref___projection(a: us_private__ref) : us_private =
+  (a).us_private__content
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom :
+  (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 18446744073709551615)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (64 <= n)) -> (nth(x,
+  n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  64)) -> (nth(ones, n) = true)))
+
+logic bw_and : t, t -> t
+
+axiom Nth_bw_and :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_and(v1, v2), n) = match_bool(nth(v1, n), nth(v2, n), false))))
+
+logic bw_or : t, t -> t
+
+axiom Nth_bw_or :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_or(v1, v2), n) = match_bool(nth(v1, n), true, nth(v2, n)))))
+
+logic bw_xor : t, t -> t
+
+axiom Nth_bw_xor :
+  (forall v1:t. forall v2:t. forall n:int. (((0 <= n) and (n <  64)) ->
+  (nth(bw_xor(v1, v2), n) = xorb(nth(v1, n), nth(v2, n)))))
+
+logic bw_not : t -> t
+
+axiom Nth_bw_not :
+  (forall v:t. forall n:int. (((0 <= n) and (n <  64)) -> (nth(bw_not(v),
+  n) = match_bool(nth(v, n), false, true))))
+
+logic lsr : t, int -> t
+
+axiom Lsr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  (((n + s) <  64) -> (nth(lsr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Lsr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> ((0 <= n) ->
+  ((64 <= (n + s)) -> (nth(lsr(b, s), n) = false)))))
+
+axiom lsr_zeros : (forall x:t. (lsr(x, 0) = x))
+
+logic asr : t, int -> t
+
+axiom Asr_nth_low :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  64)) -> (((n + s) <  64) -> (nth(asr(b, s), n) = nth(b, (n + s)))))))
+
+axiom Asr_nth_high :
+  (forall b:t. forall n:int. forall s:int. ((0 <= s) -> (((0 <= n) and
+  (n <  64)) -> ((64 <= (n + s)) -> (nth(asr(b, s), n) = nth(b,
+  (64 - 1)))))))
+
+axiom asr_zeros : (forall x:t. (asr(x, 0) = x))
+
+logic lsl : t, int -> t
+
+axiom Lsl_nth_high :
+  (forall b:t. forall n:int. forall s:int. (((0 <= s) and ((s <= n) and
+  (n <  64))) -> (nth(lsl(b, s), n) = nth(b, (n - s)))))
+
+axiom Lsl_nth_low :
+  (forall b:t. forall n:int. forall s:int. (((0 <= n) and (n <  s)) ->
+  (nth(lsl(b, s), n) = false)))
+
+axiom lsl_zeros : (forall x:t. (lsl(x, 0) = x))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic rotate_right : t, int -> t
+
+axiom Nth_rotate_right :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
+  ((0 <= n) -> (nth(rotate_right(v, n), i) = nth(v, ((i + n) % 64))))))
+
+logic rotate_left : t, int -> t
+
+axiom Nth_rotate_left :
+  (forall v:t. forall n:int. forall i:int. (((0 <= i) and (i <  64)) ->
+  ((0 <= n) -> (nth(rotate_left(v, n), i) = nth(v, ((i - n) % 64))))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic is_signed_positive : t -> prop
+
+logic of_int : int -> t
+
+logic to_int : t -> int
+
+axiom to_int_def :
+  (forall x:t [to_int(x)]. ((is_signed_positive(x) ->
+  (to_int(x) = tqtint(x))) and ((not is_signed_positive(x)) ->
+  (to_int(x) = (-(18446744073709551616 - tqtint(x)))))))
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+predicate uint_in_range(i: int) = ((0 <= i) and (i <= 18446744073709551615))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  18446744073709551616)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  18446744073709551616)) ->
+  (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 64)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 18446744073709551615)
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+predicate sle(v1: t, v2: t) = (to_int(v1) <= to_int(v2))
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t.
+  (((tqtint(v1) + tqtint(v2)) <  18446744073709551616) -> (tqtint(add(v1,
+  v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  18446744073709551616)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic neg : t -> t
+
+axiom to_uint_neg :
+  (forall v:t. (tqtint(neg(v)) = ((-tqtint(v)) % 18446744073709551616)))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t.
+  (((tqtint(v1) * tqtint(v2)) <  18446744073709551616) -> (tqtint(mul(v1,
+  v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic lsr_bv : t, t -> t
+
+axiom lsr_bv_is_lsr :
+  (forall x:t. forall n:t. (lsr_bv(x, n) = lsr(x, tqtint(n))))
+
+axiom to_uint_lsr :
+  (forall v:t. forall n:t. (tqtint(lsr_bv(v,
+  n)) = (tqtint(v) / pow2(tqtint(n)))))
+
+logic asr_bv : t, t -> t
+
+axiom asr_bv_is_asr :
+  (forall x:t. forall n:t. (asr_bv(x, n) = asr(x, tqtint(n))))
+
+logic lsl_bv : t, t -> t
+
+axiom lsl_bv_is_lsl :
+  (forall x:t. forall n:t. (lsl_bv(x, n) = lsl(x, tqtint(n))))
+
+axiom to_uint_lsl :
+  (forall v:t. forall n:t. (tqtint(lsl_bv(v,
+  n)) = ((tqtint(v) * pow2(tqtint(n))) % 18446744073709551616)))
+
+logic rotate_right_bv : t, t -> t
+
+logic rotate_left_bv : t, t -> t
+
+axiom rotate_left_bv_is_rotate_left :
+  (forall v:t. forall n:t. (rotate_left_bv(v, n) = rotate_left(v,
+  tqtint(n))))
+
+axiom rotate_right_bv_is_rotate_right :
+  (forall v:t. forall n:t. (rotate_right_bv(v, n) = rotate_right(v,
+  tqtint(n))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  18446744073709551616)) ->
+  (nth_bv(x, of_int(i)) = nth(x, i))))
+
+logic eq_sub_bv : t, t, t, t -> prop
+
+predicate eq_sub(a: t, b: t, i: int, n: int) =
+  (forall j:int. (((i <= j) and (j <  (i + n))) -> (nth(a, j) = nth(b, j))))
+
+axiom eq_sub_equiv :
+  (forall a:t. forall b:t. forall i:t. forall n:t. (eq_sub(a, b, tqtint(i),
+  tqtint(n)) <-> eq_sub_bv(a, b, i, n)))
+
+axiom Extensionality :
+  (forall x:t. forall y:t [eq_sub(x, y, 0, 64)]. (eq_sub(x, y, 0, 64) ->
+  (x = y)))
+
+type t__ref = { t__content : t
+}
+
+logic bool_eq : t, t -> bool
+
+axiom bool_eq_def :
+  (forall x:t. forall y:t [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
+
+logic bool_ne : t, t -> bool
+
+axiom bool_ne_def :
+  (forall x:t. forall y:t [bool_ne(x, y)]. (((not (x = y)) -> (bool_ne(x,
+  y) = true)) and ((x = y) -> (bool_ne(x, y) = false))))
+
+logic bool_lt : t, t -> bool
+
+axiom bool_lt_def :
+  (forall x:t. forall y:t [bool_lt(x, y)]. ((ult(x, y) -> (bool_lt(x,
+  y) = true)) and ((not ult(x, y)) -> (bool_lt(x, y) = false))))
+
+logic bool_le : t, t -> bool
+
+axiom bool_le_def :
+  (forall x:t. forall y:t [bool_le(x, y)]. ((ule(x, y) -> (bool_le(x,
+  y) = true)) and ((not ule(x, y)) -> (bool_le(x, y) = false))))
+
+logic bool_gt : t, t -> bool
+
+axiom bool_gt_def :
+  (forall x:t. forall y:t [bool_gt(x, y)]. ((ugt(x, y) -> (bool_gt(x,
+  y) = true)) and ((not ugt(x, y)) -> (bool_gt(x, y) = false))))
+
+logic bool_ge : t, t -> bool
+
+axiom bool_ge_def :
+  (forall x:t. forall y:t [bool_ge(x, y)]. ((uge(x, y) -> (bool_ge(x,
+  y) = true)) and ((not uge(x, y)) -> (bool_ge(x, y) = false))))
+
+logic power : t, int -> t
+
+axiom Power_01 : (forall x:t. (power(x, 0) = one))
+
+axiom Power_11 : (forall x:t. (power(x, 1) = x))
+
+axiom Power_s1 :
+  (forall x:t. forall n:int. ((0 <= n) -> (power(x, (n + 1)) = mul(x,
+  power(x, n)))))
+
+axiom Power_s_alt :
+  (forall x:t. forall n:int. ((0 <  n) -> (power(x, n) = mul(x, power(x,
+  (n - 1))))))
+
+axiom Power_sum1 :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n + m)) = mul(power(x, n), power(x, m))))))
+
+axiom Power_mult :
+  (forall x:t. forall n:int. forall m:int. ((0 <= n) -> ((0 <= m) ->
+  (power(x, (n * m)) = power(power(x, n), m)))))
+
+axiom Power_mult2 :
+  (forall x:t. forall y:t. forall n:int. ((0 <= n) -> (power(mul(x, y),
+  n) = mul(power(x, n), power(y, n)))))
+
+logic bv_min : t, t -> t
+
+axiom bv_min_def :
+  (forall x:t. forall y:t [bv_min(x, y)]. ((ule(x, y) -> (bv_min(x,
+  y) = x)) and ((not ule(x, y)) -> (bv_min(x, y) = y))))
+
+logic bv_max : t, t -> t
+
+axiom bv_max_def :
+  (forall x:t. forall y:t [bv_max(x, y)]. ((ule(x, y) -> (bv_max(x,
+  y) = y)) and ((not ule(x, y)) -> (bv_max(x, y) = x))))
+
+logic min : int, int -> int
+
+axiom min_def :
+  (forall x:int. forall y:int [min(x, y)]. (((x <= y) -> (min(x, y) = x)) and
+  ((not (x <= y)) -> (min(x, y) = y))))
+
+logic max : int, int -> int
+
+axiom max_def :
+  (forall x:int. forall y:int [max(x, y)]. (((x <= y) -> (max(x, y) = y)) and
+  ((not (x <= y)) -> (max(x, y) = x))))
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+axiom bv_min_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_min(x, y)) = min(tqtint(x),
+  tqtint(y))))
+
+axiom bv_max_to_uint :
+  (forall x:t. forall y:t. (tqtint(bv_max(x, y)) = max(tqtint(x),
+  tqtint(y))))
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
+
+logic to_int1 : bool -> int
+
+axiom to_int_def1 :
+  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
+  ((not (b = true)) -> (to_int1(b) = 0))))
+
+logic of_int1 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
+  ((not (i = 0)) -> (of_int1(i) = true))))
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> bool
+
+type u64
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq2 : int, int -> bool
+
+logic bool_ne1 : int, int -> bool
+
+logic bool_lt1 : int, int -> bool
+
+logic bool_le1 : int, int -> bool
+
+logic bool_gt1 : int, int -> bool
+
+logic bool_ge1 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
+
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic user_eq : u64, u64 -> bool
+
+logic dummy : u64
+
+type u64__ref = { u64__content : u64
+}
+
+function u64__ref___projection(a: u64__ref) : u64 = (a).u64__content
+
+logic sqr : t -> t
+
+logic sqr__function_guard : t, t -> prop
+
+axiom sqr__post_axiom : true
+
+axiom sqr__def_axiom : (forall x:t [sqr(x)]. (sqr(x) = mul(x, x)))
+
+logic x : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic pow21 : t -> t
+
+logic pow2__function_guard : t, t -> prop
+
+axiom pow2__post_axiom : true
+
+axiom pow2__def_axiom :
+  (forall x1:t [pow21(x1)]. (pow21(x1) = lsl_bv(of_int(1),
+  of_int(tqtint(x1)))))
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+logic attr__ATTRIBUTE_ADDRESS7 : int
+
+logic attr__ATTRIBUTE_ADDRESS8 : int
+
+logic num : t
+
+logic bits : t
+
+logic res : t
+
+logic b : t
+
+logic i : t
+
+logic m : t
+
+logic bits_g : t
+
+logic res_g : t
+
+logic p64__sqrt_von_neumann_aux64__result : t
+
+logic temp___223 : t
+
+logic temp___221 : t
+
+logic temp___222 : t
+
+logic temp___219 : t
+
+logic temp___220 : t
+
+logic temp___217 : t
+
+logic temp___218 : t
+
+logic temp___216 : t
+
+logic temp___224 : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t
+
+logic b1 : t
+
+logic result : t
+
+logic i1 : t
+
+logic result1 : t
+
+logic num1 : t
+
+logic result2 : t
+
+logic bits1 : t
+
+logic result3 : t
+
+logic res1 : t
+
+logic result4 : t
+
+logic m1 : t
+
+logic result5 : t
+
+logic bits_g1 : t
+
+logic result6 : t
+
+logic res_g1 : t
+
+logic result7 : t
+
+logic i2 : t
+
+logic result8 : t
+
+logic m2 : t
+
+logic result9 : t
+
+logic b2 : t
+
+logic result10 : t
+
+logic res2 : t
+
+logic result11 : t
+
+logic num2 : t
+
+logic result12 : t
+
+logic res3 : t
+
+logic result13 : t
+
+logic res_g2 : t
+
+logic result14 : t
+
+logic bits2 : t
+
+logic result15 : t
+
+logic bits_g2 : t
+
+logic num3 : t
+
+logic bits3 : t
+
+logic res4 : t
+
+logic b3 : t
+
+logic i3 : t
+
+logic m3 : t
+
+logic bits_g3 : t
+
+logic res_g3 : t
+
+logic temp___2241 : t
+
+logic result16 : t
+
+logic temp___2242 : t
+
+logic result17 : t
+
+logic i4 : t
+
+logic result18 : t
+
+logic m4 : t
+
+logic result19 : t
+
+logic b4 : t
+
+logic result20 : t
+
+logic res5 : t
+
+logic result21 : t
+
+logic num4 : t
+
+logic result22 : t
+
+logic res6 : t
+
+logic result23 : t
+
+logic res_g4 : t
+
+logic result24 : t
+
+logic bits4 : t
+
+logic result25 : t
+
+logic bits_g4 : t
+
+logic num5 : t
+
+logic bits5 : t
+
+logic res7 : t
+
+logic b5 : t
+
+logic i5 : t
+
+logic m5 : t
+
+logic bits_g5 : t
+
+logic res_g5 : t
+
+logic num6 : t
+
+logic bits6 : t
+
+logic res8 : t
+
+logic b6 : t
+
+logic i6 : t
+
+logic m6 : t
+
+logic bits_g6 : t
+
+logic res_g6 : t
+
+logic num7 : t
+
+logic bits7 : t
+
+logic res9 : t
+
+logic b7 : t
+
+logic i7 : t
+
+logic m7 : t
+
+logic bits_g7 : t
+
+logic res_g7 : t
+
+logic num8 : t
+
+logic bits8 : t
+
+logic res10 : t
+
+logic b8 : t
+
+logic i8 : t
+
+logic m8 : t
+
+logic bits_g8 : t
+
+logic res_g8 : t
+
+logic num9 : t
+
+logic bits9 : t
+
+logic res11 : t
+
+logic b9 : t
+
+logic i9 : t
+
+logic m9 : t
+
+logic bits_g9 : t
+
+logic res_g9 : t
+
+logic num10 : t
+
+logic bits10 : t
+
+logic res12 : t
+
+logic b10 : t
+
+logic i10 : t
+
+logic m10 : t
+
+logic bits_g10 : t
+
+logic res_g10 : t
+
+logic result26 : t
+
+logic p64__sqrt_von_neumann_aux64__result1 : t
+
+logic p64__sqrt_von_neumann_aux64__result2 : t
+
+logic p64__sqrt_von_neumann_aux64__result3 : t
+
+logic num11 : t
+
+logic bits11 : t
+
+logic res13 : t
+
+logic b11 : t
+
+logic i11 : t
+
+logic m11 : t
+
+logic bits_g11 : t
+
+logic res_g11 : t
+
+logic p64__sqrt_von_neumann_aux64__result4 : t
+
+logic num12 : t
+
+logic bits12 : t
+
+logic res14 : t
+
+logic b12 : t
+
+logic i12 : t
+
+logic m12 : t
+
+logic bits_g12 : t
+
+logic res_g12 : t
+
+logic p64__sqrt_von_neumann_aux64__result5 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : (result = i)
+
+axiom H6 : (i1 = of_int(0))
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : (result1 = num)
+
+axiom H12 : (num1 = x)
+
+axiom H13 : ule(num1, of_int(18446744073709551615))
+
+axiom H14 : (result2 = bits)
+
+axiom H15 : (bits1 = of_int(4611686018427387904))
+
+axiom H16 : (result3 = res)
+
+axiom H17 : (res1 = of_int(0))
+
+axiom H18 : (result4 = m)
+
+axiom H19 : (m1 = of_int(32))
+
+axiom H20 : (result5 = bits_g)
+
+axiom H21 : (bits_g1 = of_int(2147483648))
+
+axiom H22 : (result6 = res_g)
+
+axiom H23 : (res_g1 = of_int(0))
+
+axiom H24 : (not (bits1 = of_int(0)))
+
+axiom H25 : (not (bits1 = of_int(0)))
+
+axiom H26 : (sqr(add(res_g1, bits_g1)) = add(sqr(res_g1), mul(bits_g1,
+  add(mul(of_int(2), res_g1), bits_g1))))
+
+axiom H27 : (not (bits1 = of_int(0)))
+
+axiom H28 : (not (bits_g1 = of_int(0)))
+
+axiom H29 : (not (m1 = of_int(0)))
+
+axiom H30 : (i1 = result7)
+
+axiom H31 : (i2 = add(i1, of_int(1)))
+
+axiom H32 : (m1 = result8)
+
+axiom H33 : (m2 = sub(m1, of_int(1)))
+
+axiom H34 : (res1 = mul(res_g1, pow21(add(m2, of_int(1)))))
+
+axiom H35 : (bits_g1 = pow21(m2))
+
+axiom H36 : (result9 = b)
+
+axiom H37 : (b2 = bw_or(res1, bits1))
+
+axiom H38 : (b2 = add(res1, bits1))
+
+axiom H39 : (b2 = mul(add(mul(of_int(2), res_g1), bits_g1), pow21(m2)))
+
+axiom H40 : (res1 = result10)
+
+axiom H41 : (res2 = lsr_bv(res1, of_int(1)))
+
+axiom H42 : (res2 = mul(res_g1, pow21(m2)))
+
+axiom H43 : (uge(num1, b2) -> (result11 = num1))
+
+axiom H44 : (uge(num1, b2) -> (num2 = sub(num1, b2)))
+
+axiom H45 : (uge(num1, b2) -> (result12 = res2))
+
+axiom H46 : (uge(num1, b2) -> (res3 = bw_or(res2, bits1)))
+
+axiom H47 : (uge(num1, b2) -> (res3 = mul(add(res_g1, bits_g1), pow21(m2))))
+
+axiom H48 : (uge(num1, b2) -> (result13 = res_g1))
+
+axiom H49 : (uge(num1, b2) -> (res_g2 = add(res_g1, bits_g1)))
+
+axiom H50 : ((not uge(num1, b2)) -> (res_g2 = res_g1))
+
+axiom H51 : ((not uge(num1, b2)) -> (res3 = res2))
+
+axiom H52 : ((not uge(num1, b2)) -> (num2 = num1))
+
+axiom H53 : (result14 = bits1)
+
+axiom H54 : (bits2 = udiv(bits1, of_int(4)))
+
+axiom H55 : (result15 = bits_g1)
+
+axiom H56 : (bits_g2 = lsr_bv(bits_g1, of_int(1)))
+
+axiom H57 : (sqr(add(res_g2, bits_g2)) = add(sqr(res_g2), mul(bits_g2,
+  add(mul(of_int(2), res_g2), bits_g2))))
+
+axiom H58 : ule(m3, of_int(32))
+
+axiom H59 : (((m3 = of_int(0)) -> (bits_g3 = of_int(0))) and
+  ((not (m3 = of_int(0))) -> (bits_g3 = pow21(sub(m3, of_int(1))))))
+
+axiom H60 : (bits3 = sqr(bits_g3))
+
+axiom H61 : (bw_and(res_g3, sub(pow21(m3), of_int(1))) = of_int(0))
+
+axiom H62 : ult(res_g3, of_int(4294967296))
+
+axiom H63 : (res4 = mul(res_g3, pow21(m3)))
+
+axiom H64 : ule(num3, x)
+
+axiom H65 : (sqr(add(res_g3, bits_g3)) = add(sqr(res_g3), mul(bits_g3,
+  add(mul(of_int(2), res_g3), bits_g3))))
+
+axiom H66 : ((not (m3 = of_int(0))) -> (bw_or(res4,
+  bits3) = mul(add(mul(of_int(2), res_g3), bits_g3), pow21(sub(m3,
+  of_int(1))))))
+
+axiom H67 : ((not (m3 = of_int(0))) -> (bits_g3 = pow21(sub(m3, of_int(1)))))
+
+axiom H68 : (sub(x, num3) = sqr(res_g3))
+
+axiom H69 : ule(add(res_g3, pow21(m3)), of_int(4294967296))
+
+axiom H70 : ule(x, sub(sqr(add(res_g3, pow21(m3))), of_int(1)))
+
+axiom H71 : true
+
+axiom H72 : (result16 = temp___2241)
+
+axiom H73 : (temp___2242 = bits3)
+
+axiom H74 : (not (bits3 = of_int(0)))
+
+axiom H75 : (not (bits3 = of_int(0)))
+
+axiom H76 : (sqr(add(res_g3, bits_g3)) = add(sqr(res_g3), mul(bits_g3,
+  add(mul(of_int(2), res_g3), bits_g3))))
+
+axiom H77 : (not (bits3 = of_int(0)))
+
+axiom H78 : (not (bits_g3 = of_int(0)))
+
+axiom H79 : (not (m3 = of_int(0)))
+
+axiom H80 : (result17 = i3)
+
+axiom H81 : (i4 = add(i3, of_int(1)))
+
+axiom H82 : (result18 = m3)
+
+axiom H83 : (m4 = sub(m3, of_int(1)))
+
+axiom H84 : (res4 = mul(res_g3, pow21(add(m4, of_int(1)))))
+
+axiom H85 : (bits_g3 = pow21(m4))
+
+axiom H86 : (result19 = b3)
+
+axiom H87 : (b4 = bw_or(res4, bits3))
+
+axiom H88 : (b4 = add(res4, bits3))
+
+axiom H89 : (b4 = mul(add(mul(of_int(2), res_g3), bits_g3), pow21(m4)))
+
+axiom H90 : (result20 = res4)
+
+axiom H91 : (res5 = lsr_bv(res4, of_int(1)))
+
+axiom H92 : (res5 = mul(res_g3, pow21(m4)))
+
+axiom H93 : (uge(num3, b4) -> (result21 = num3))
+
+axiom H94 : (uge(num3, b4) -> (num4 = sub(num3, b4)))
+
+axiom H95 : (uge(num3, b4) -> (result22 = res5))
+
+axiom H96 : (uge(num3, b4) -> (res6 = bw_or(res5, bits3)))
+
+axiom H97 : (uge(num3, b4) -> (res6 = mul(add(res_g3, bits_g3), pow21(m4))))
+
+axiom H98 : (uge(num3, b4) -> (result23 = res_g3))
+
+axiom H99 : (uge(num3, b4) -> (res_g4 = add(res_g3, bits_g3)))
+
+axiom H100 : ((not uge(num3, b4)) -> (res_g4 = res_g3))
+
+axiom H101 : ((not uge(num3, b4)) -> (res6 = res5))
+
+axiom H102 : ((not uge(num3, b4)) -> (num4 = num3))
+
+axiom H103 : (result24 = bits3)
+
+axiom H104 : (bits4 = udiv(bits3, of_int(4)))
+
+axiom H105 : (result25 = bits_g3)
+
+axiom H106 : (bits_g4 = lsr_bv(bits_g3, of_int(1)))
+
+axiom H107 : (sqr(add(res_g4, bits_g4)) = add(sqr(res_g4), mul(bits_g4,
+  add(mul(of_int(2), res_g4), bits_g4))))
+
+ (* File "p64.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : (res6 = mul(res_g4, pow21(m4)))

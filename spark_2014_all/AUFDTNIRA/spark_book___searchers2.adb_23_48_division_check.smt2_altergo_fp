@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -396,24 +396,296 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic found : bool
+
+logic result__ : int
+
+logic low_index : int
+
+logic mid_index : int
+
+logic high_index : int
+
+logic j : int
+
+logic k : int
+
+logic temp___153 : bool
+
+logic temp___152 : int
+
+logic temp___151 : int
+
+logic temp___150 : int
+
+logic temp___149 : int
+
+logic mid_index1 : int
+
+logic result : int
+
+logic low_index1 : int
+
+logic result1 : int
+
+logic high_index1 : int
+
+logic result2 : bool
+
+logic found1 : bool
+
+logic result3 : int
+
+logic result__1 : int
+
+logic result4 : int
+
+logic mid_index2 : int
+
+logic result5 : bool
+
+logic found2 : bool
+
+logic result6 : int
+
+logic result__2 : int
+
+logic found3 : bool
+
+logic result__3 : int
+
+logic low_index2 : int
+
+logic mid_index3 : int
+
+logic high_index2 : int
+
+logic result7 : int
+
+logic low_index3 : int
+
+logic result8 : int
+
+logic high_index3 : int
+
+logic result9 : int
+
+logic mid_index4 : int
+
+logic result10 : bool
+
+logic found4 : bool
+
+logic result11 : int
+
+logic result__4 : int
+
+logic found5 : bool
+
+logic result__5 : int
+
+logic mid_index5 : int
+
+logic found6 : bool
+
+logic result__6 : int
+
+logic mid_index6 : int
+
+logic found7 : bool
+
+logic result__7 : int
+
+logic low_index4 : int
+
+logic mid_index7 : int
+
+logic high_index4 : int
+
+logic found8 : bool
+
+logic result__8 : int
+
+logic low_index5 : int
+
+logic mid_index8 : int
+
+logic high_index5 : int
+
+logic found9 : bool
+
+logic result__9 : int
+
+logic low_index6 : int
+
+logic mid_index9 : int
+
+logic high_index6 : int
+
+logic found10 : bool
+
+logic result__10 : int
+
+logic low_index7 : int
+
+logic mid_index10 : int
+
+logic high_index7 : int
+
+logic found11 : bool
+
+logic result__11 : int
+
+logic low_index8 : int
+
+logic mid_index11 : int
+
+logic high_index8 : int
+
+logic found12 : bool
+
+logic result__12 : int
+
+logic low_index9 : int
+
+logic mid_index12 : int
+
+logic high_index9 : int
+
+logic found13 : bool
+
+logic result__13 : int
+
+logic low_index10 : int
+
+logic mid_index13 : int
+
+logic high_index10 : int
+
+logic found14 : bool
+
+logic result__14 : int
+
+logic low_index11 : int
+
+logic mid_index14 : int
+
+logic high_index11 : int
+
+logic found15 : bool
+
+logic result__15 : int
+
+logic low_index12 : int
+
+logic mid_index15 : int
+
+logic high_index12 : int
+
+logic found16 : bool
+
+logic result__16 : int
+
+logic low_index13 : int
+
+logic mid_index16 : int
+
+logic high_index13 : int
+
+logic found17 : bool
+
+logic result__17 : int
+
+logic low_index14 : int
+
+logic mid_index17 : int
+
+logic high_index14 : int
+
+logic found18 : bool
+
+logic result__18 : int
+
+logic low_index15 : int
+
+logic mid_index18 : int
+
+logic high_index15 : int
+
+logic found19 : bool
+
+logic result__19 : int
+
+logic low_index16 : int
+
+logic mid_index19 : int
+
+logic high_index16 : int
+
+logic found20 : bool
+
+logic result__20 : int
+
+logic low_index17 : int
+
+logic mid_index20 : int
+
+logic high_index17 : int
+
+logic found21 : bool
+
+logic result__21 : int
+
+logic low_index18 : int
+
+logic mid_index21 : int
+
+logic high_index18 : int
+
+logic found22 : bool
+
+logic result__22 : int
+
+logic low_index19 : int
+
+logic mid_index22 : int
+
+logic high_index19 : int
+
+axiom H : in_range1(search_item)
+
+axiom H1 : ((1 <= 100) -> in_range2(result__))
+
+axiom H2 :
+  (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
+  (forall k1:int. ((((j1 + 1) <= k1) and (k1 <= 100)) ->
+  (to_rep((items[j1])) <= to_rep((items[k1])))))))
+
+axiom H3 : (result = low_index)
+
+axiom H4 : (low_index1 = 1)
+
+axiom H5 : in_range2(low_index1)
+
+axiom H6 : ((1 <= 100) -> in_range2(mid_index))
+
+axiom H7 : (result1 = high_index)
+
+axiom H8 : (high_index1 = 100)
+
+axiom H9 : in_range2(high_index1)
+
+axiom H10 : (result2 = found)
+
+axiom H11 : (found1 = of_int(0))
+
+axiom H12 : (result3 = result__)
+
+axiom H13 : (result__1 = 1)
+
+axiom H14 : (not (search_item <  to_rep((items[low_index1]))))
+
+axiom H15 : (not (to_rep((items[high_index1])) <  search_item))
+
  (* File "searchers2.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall found:bool. forall result__:int. forall low_index:int.
-  forall mid_index:int. forall high_index:int. forall result:int.
-  forall low_index1:int. forall result1:int. forall high_index1:int.
-  forall result2:bool. forall found1:bool. forall result3:int.
-  forall result__1:int. (in_range1(search_item) -> (((1 <= 100) ->
-  in_range2(result__)) ->
-  ((forall j:int. (((1 <= j) and (j <= 100)) ->
-   (forall k:int. ((((j + 1) <= k) and (k <= 100)) ->
-   (to_rep((items[j])) <= to_rep((items[k]))))))) ->
-  ((({ int__content = result } = { int__content = low_index }) and
-  (low_index1 = 1)) -> (in_range2(low_index1) -> (((1 <= 100) ->
-  in_range2(mid_index)) -> ((({ int__content = result1 } = { int__content =
-  high_index }) and (high_index1 = 100)) -> (in_range2(high_index1) -> ((({
-  bool__content = result2 } = { bool__content = found }) and
-  (found1 = of_int(0))) -> ((({ int__content = result3 } = { int__content =
-  result__ }) and (result__1 = 1)) ->
-  ((not ((not (search_item <  to_rep((items[low_index1])))) ->
-  (to_rep((items[high_index1])) <  search_item))) ->
-  (not (2 = 0))))))))))))))
+goal WP_parameter_def : (not (2 = 0))

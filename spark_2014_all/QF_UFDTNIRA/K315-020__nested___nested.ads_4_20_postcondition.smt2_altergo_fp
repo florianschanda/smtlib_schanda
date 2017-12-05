@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -189,66 +189,262 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall i:int. forall j:int.
-  forall nested__search__result:int. forall temp___137:int.
-  forall temp___136:int. forall temp___134:int. forall temp___135:int.
-  forall temp___133:int. forall temp___132:int. forall o:int. forall j1:int.
-  forall result:int. forall x1:int. forall result1:int. forall i1:int.
-  forall x2:int. forall i2:int. forall j2:int. forall result2:int.
-  forall x3:int. forall result3:int. forall j3:int. forall x4:int.
-  forall j4:int. forall result4:int. forall x5:int. forall x6:int.
-  forall j5:int. forall x7:int. forall j6:int. forall x8:int. forall j7:int.
-  forall x9:int. forall j8:int. forall x10:int. forall j9:int.
-  forall x11:int. forall j10:int. forall x12:int. forall i3:int.
-  forall j11:int. forall x13:int. forall i4:int. forall j12:int.
-  forall x14:int. forall i5:int. forall j13:int. forall x15:int.
-  forall i6:int. forall j14:int. forall result5:int.
-  forall nested__search__result1:int. forall nested__search__result2:int.
-  forall nested__search__result3:int. forall x16:int. forall i7:int.
-  forall j15:int. forall nested__search__result4:int. forall x17:int.
-  forall i8:int. forall j16:int. forall nested__search__result5:int.
-  (forall result6:int. (((((({ int__content = result } = { int__content = x
-  }) and (x1 = 0)) and (in_range1(x1) and (((({ int__content = result1 } = {
-  int__content = i }) and (i1 = 1)) and ((((1 <= i1) and (i1 <= 10)) and
-  ((((temp___137 = i1) and ((temp___136 = x1) and ((x2 = ((i2 - 1) * 10)) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(x2)) and ((1 <= 10) ->
+logic x : int
+
+logic i : int
+
+logic j : int
+
+logic nested__search__result : int
+
+logic temp___137 : int
+
+logic temp___136 : int
+
+logic o : int
+
+logic temp___134 : int
+
+logic temp___135 : int
+
+logic temp___133 : int
+
+logic temp___132 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic j1 : int
+
+logic result : int
+
+logic x1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic x2 : int
+
+logic i2 : int
+
+logic j2 : int
+
+logic result2 : int
+
+logic x3 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic x4 : int
+
+logic j4 : int
+
+logic result4 : int
+
+logic x5 : int
+
+logic result5 : int
+
+logic j5 : int
+
+logic x6 : int
+
+logic j6 : int
+
+logic x7 : int
+
+logic j7 : int
+
+logic x8 : int
+
+logic j8 : int
+
+logic x9 : int
+
+logic j9 : int
+
+logic x10 : int
+
+logic j10 : int
+
+logic x11 : int
+
+logic j11 : int
+
+logic result6 : int
+
+logic i3 : int
+
+logic x12 : int
+
+logic j12 : int
+
+logic x13 : int
+
+logic j13 : int
+
+logic x14 : int
+
+logic i4 : int
+
+logic j14 : int
+
+logic x15 : int
+
+logic i5 : int
+
+logic j15 : int
+
+logic x16 : int
+
+logic i6 : int
+
+logic j16 : int
+
+logic x17 : int
+
+logic i7 : int
+
+logic j17 : int
+
+logic x18 : int
+
+logic i8 : int
+
+logic j18 : int
+
+logic x19 : int
+
+logic i9 : int
+
+logic j19 : int
+
+logic x20 : int
+
+logic i10 : int
+
+logic j20 : int
+
+logic x21 : int
+
+logic i11 : int
+
+logic j21 : int
+
+logic result7 : int
+
+logic nested__search__result1 : int
+
+logic nested__search__result2 : int
+
+logic nested__search__result3 : int
+
+logic x22 : int
+
+logic i12 : int
+
+logic j22 : int
+
+logic nested__search__result4 : int
+
+logic x23 : int
+
+logic i13 : int
+
+logic j23 : int
+
+logic nested__search__result5 : int
+
+logic result8 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 0)
+
+axiom H2 : in_range1(x1)
+
+axiom H3 : (result1 = i)
+
+axiom H4 : (i1 = 1)
+
+axiom H5 : (((1 <= i1) and (i1 <= 10)) -> (((temp___137 = i1) and
+  ((temp___136 = x1) and ((x2 = ((i2 - 1) * 10)) and
+  ((((((- 2147483648) <= 2147483647) -> in_range1(x2)) and ((1 <= 10) ->
   in_range2(i2))) and ((1 <= i2) and (i2 <= 10))) and (((x2 = result2) and
-  (x3 = 0)) and (((((j4 = j9) and (x5 = x10)) and ((j10 = j4) and
-  (x11 = x5))) and ((temp___134 = 1) and ((temp___135 = 10) and
+  (x3 = 0)) and (((((j4 = j12) and (x5 = x12)) and ((j13 = j4) and
+  (x13 = x5))) and ((temp___134 = 1) and ((temp___135 = 10) and
   (((j2 = result3) and (j3 = temp___134)) and (((temp___134 <= j3) and
   (j3 <= temp___135)) and ((temp___133 = j3) and ((temp___132 = x3) and
-  ((x4 = (i2 * (j4 - 1))) and ((((((-2147483648) <= 2147483647) ->
+  ((x4 = (i2 * (j4 - 1))) and ((((((- 2147483648) <= 2147483647) ->
   in_range1(x4)) and ((1 <= 10) -> in_range3(j4))) and ((1 <= j4) and
-  (j4 <= 10))) and ((((o = (i2 * j4)) and in_range1((i2 * j4))) and
-  ((x4 = result4) and (x5 = o))) and (45 <= x5))))))))))) or
-  ((((j2 = result3) and (j3 = 1)) and ((((1 <= j3) and (j3 <= 10)) and
+  (j4 <= 10))) and ((((o2 = (i2 * j4)) and in_range1((i2 * j4))) and
+  ((x4 = result4) and (x5 = o2))) and (45 <= x5))))))))))) or
+  ((((j2 = result3) and (j3 = 1)) and ((((1 <= j3) and (j3 <= 10)) ->
   ((((temp___133 = j3) and ((temp___132 = x3) and ((x4 = (i2 * (j4 - 1))) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(x4)) and ((1 <= 10) ->
-  in_range3(j4))) and ((1 <= j4) and (j4 <= 10))) and ((((o = (i2 * j4)) and
-  in_range1((i2 * j4))) and ((x4 = result4) and (x5 = o))) and
-  ((not (45 <= x5)) and (j4 = 10))))))) and (((j4 = j5) and (x5 = x6)) and
-  ((j6 = j4) and (x7 = x5)))) and ((({ int__content = j7 } = { int__content =
-  j5 }) and ({ int__content = x8 } = { int__content = x6 })) and
-  ((j8 = j6) and (x9 = x7))))) or ((not ((1 <= j3) and (j3 <= 10))) and
-  (((j3 = j7) and (x3 = x8)) and ((j8 = j3) and (x9 = x3)))))) and (((({
-  int__content = j9 } = { int__content = j7 }) and ({ int__content = x10
-  } = { int__content = x8 })) and ((j10 = j8) and (x11 = x9))) and
-  (i2 = 10))))))))) and ((({ int__content = j11 } = { int__content = j9
-  }) and ((i2 = i3) and ({ int__content = x12 } = { int__content = x10
-  }))) and ((j12 = j10) and ((i4 = i2) and (x13 = x11))))) and ((({
-  int__content = j13 } = { int__content = j11 }) and (({ int__content = i5
-  } = { int__content = i3 }) and ({ int__content = x14 } = { int__content =
-  x12 }))) and ((j14 = j12) and ((i6 = i4) and (x15 = x13)))))) or
-  ((not ((1 <= i1) and (i1 <= 10))) and (((j = j13) and ((i1 = i5) and
-  (x1 = x14))) and ((j14 = j1) and ((i6 = i1) and (x15 = x1))))))) and
-  (((nested__search__result1 = nested__search__result2) and
-  (nested__search__result3 = nested__search__result1)) and
-  ((result5 = nested__search__result) and
-  (nested__search__result1 = x14)))))) and ((({ int__content =
-  nested__search__result4 } = { int__content = nested__search__result2 }) and
-  ((j15 = j13) and ((i7 = i5) and (x16 = x14)))) and
-  ((nested__search__result5 = nested__search__result3) and ((j16 = j14) and
-  ((i8 = i6) and (x17 = x15)))))) and (result6 = nested__search__result4)) ->
-  (44 <= nested__search__result4))))
+  ((((((- 2147483648) <= 2147483647) -> in_range1(x4)) and ((1 <= 10) ->
+  in_range3(j4))) and ((1 <= j4) and (j4 <= 10))) and ((((o2 = (i2 * j4)) and
+  in_range1((i2 * j4))) and ((x4 = result4) and (x5 = o2))) and
+  ((not (45 <= x5)) and (j4 = 10))))))) and (((j4 = j8) and (x5 = x8)) and
+  ((j9 = j4) and (x9 = x5)))) and (((j10 = j8) and (x10 = x8)) and
+  ((j11 = j9) and (x11 = x9))))) and ((not ((1 <= j3) and (j3 <= 10))) ->
+  (((j3 = j10) and (x3 = x10)) and ((j11 = j3) and (x11 = x3)))))) and
+  ((((j12 = j10) and (x12 = x10)) and ((j13 = j11) and (x13 = x11))) and
+  (i2 = 10))))))))) and (((j18 = j12) and ((i8 = i2) and (x18 = x12))) and
+  ((j19 = j13) and ((i9 = i2) and (x19 = x13))))))
+
+axiom H6 : (((1 <= i1) and (i1 <= 10)) -> (j20 = j18))
+
+axiom H7 : (((1 <= i1) and (i1 <= 10)) -> (i10 = i8))
+
+axiom H8 : (((1 <= i1) and (i1 <= 10)) -> (x20 = x18))
+
+axiom H9 : (((1 <= i1) and (i1 <= 10)) -> (j21 = j19))
+
+axiom H10 : (((1 <= i1) and (i1 <= 10)) -> (i11 = i9))
+
+axiom H11 : (((1 <= i1) and (i1 <= 10)) -> (x21 = x19))
+
+axiom H12 : ((not ((1 <= i1) and (i1 <= 10))) -> (j20 = j))
+
+axiom H13 : ((not ((1 <= i1) and (i1 <= 10))) -> (i10 = i1))
+
+axiom H14 : ((not ((1 <= i1) and (i1 <= 10))) -> (x20 = x1))
+
+axiom H15 : ((not ((1 <= i1) and (i1 <= 10))) -> (j21 = j1))
+
+axiom H16 : ((not ((1 <= i1) and (i1 <= 10))) -> (i11 = i1))
+
+axiom H17 : ((not ((1 <= i1) and (i1 <= 10))) -> (x21 = x1))
+
+axiom H18 : (nested__search__result2 = nested__search__result1)
+
+axiom H19 : (nested__search__result3 = nested__search__result1)
+
+axiom H20 : (result7 = nested__search__result)
+
+axiom H21 : (nested__search__result1 = x20)
+
+axiom H22 : (nested__search__result4 = nested__search__result2)
+
+axiom H23 : (j22 = j20)
+
+axiom H24 : (i12 = i10)
+
+axiom H25 : (x22 = x20)
+
+axiom H26 : (nested__search__result5 = nested__search__result3)
+
+axiom H27 : (j23 = j21)
+
+axiom H28 : (i13 = i11)
+
+axiom H29 : (x23 = x21)
+
+axiom H30 : (result8 = nested__search__result4)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (44 <= nested__search__result4)

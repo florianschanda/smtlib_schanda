@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -139,39 +139,150 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic res : int
+
+logic math__sqrt__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___134 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic result : int
+
+logic res1 : int
+
+logic result1 : bool
+
+logic res2 : int
+
+logic result2 : int
+
+logic res3 : int
+
+logic result3 : bool
+
+logic res4 : int
+
+logic res5 : int
+
+logic res6 : int
+
+logic res7 : int
+
+logic result4 : int
+
+logic math__sqrt__result1 : int
+
+logic math__sqrt__result2 : int
+
+logic math__sqrt__result3 : int
+
+logic res8 : int
+
+logic math__sqrt__result4 : int
+
+logic res9 : int
+
+logic math__sqrt__result5 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : (0 <= x)
+
+axiom H2 : (result = res)
+
+axiom H3 : (res1 = 0)
+
+axiom H4 : in_range1(res1)
+
+axiom H5 : ((o = (res1 + 1)) and in_range1((res1 + 1)))
+
+axiom H6 : ((o1 = (res1 + 1)) and in_range1((res1 + 1)))
+
+axiom H7 : (o2 = (o1 * o))
+
+axiom H8 : ((o3 = o2) and in_range1(o2))
+
+axiom H9 : (((o3 <= x) -> (result1 = true)) and ((not (o3 <= x)) ->
+  (result1 = false)))
+
+axiom H10 : ((result1 = true) -> (temp___134 = res1))
+
+axiom H11 : ((result1 = true) -> ((((- 2147483648) <= 2147483647) ->
+  in_range1(res2)) and (((res2 + 1) * (res2 + 1)) <= x)))
+
+axiom H12 : ((result1 = true) -> ((o4 = (res2 + 1)) and
+  in_range1((res2 + 1))))
+
+axiom H13 : ((result1 = true) -> (res2 = result2))
+
+axiom H14 : ((result1 = true) -> (res3 = o4))
+
+axiom H15 : ((result1 = true) -> ((o5 = (res3 + 1)) and
+  in_range1((res3 + 1))))
+
+axiom H16 : ((result1 = true) -> ((o6 = (res3 + 1)) and
+  in_range1((res3 + 1))))
+
+axiom H17 : ((result1 = true) -> (o7 = (o6 * o5)))
+
+axiom H18 : ((result1 = true) -> ((o8 = o7) and in_range1(o7)))
+
+axiom H19 : ((result1 = true) -> (((o8 <= x) -> (o9 = true)) and
+  ((not (o8 <= x)) -> (o9 = false))))
+
+axiom H20 : ((result1 = true) -> (((not (o9 = true)) -> (result3 = true)) and
+  ((o9 = true) -> (result3 = false))))
+
+axiom H21 : ((result1 = true) -> (result3 = true))
+
+axiom H22 : ((result1 = true) -> (res3 = res4))
+
+axiom H23 : ((result1 = true) -> (res5 = res3))
+
+axiom H24 : ((result1 = true) -> (res6 = res4))
+
+axiom H25 : ((result1 = true) -> (res7 = res5))
+
+axiom H26 : ((not (result1 = true)) -> (res1 = res6))
+
+axiom H27 : ((not (result1 = true)) -> (res7 = res1))
+
+axiom H28 : (math__sqrt__result1 = math__sqrt__result2)
+
+axiom H29 : (math__sqrt__result3 = math__sqrt__result1)
+
+axiom H30 : (result4 = math__sqrt__result)
+
+axiom H31 : (math__sqrt__result1 = res6)
+
+axiom H32 : (math__sqrt__result4 = math__sqrt__result2)
+
+axiom H33 : (res8 = res6)
+
+axiom H34 : (math__sqrt__result5 = math__sqrt__result3)
+
+axiom H35 : (res9 = res7)
+
+axiom H36 : (bool_eq(x, 0) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall math__sqrt__result:int. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall temp___134:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:bool. forall result:int. forall res1:int. forall result1:bool.
-  forall res2:int. forall result2:int. forall res3:int. forall result3:bool.
-  forall res4:int. forall res5:int. forall res6:int. forall res7:int.
-  forall result4:int. forall math__sqrt__result1:int.
-  forall math__sqrt__result2:int. forall math__sqrt__result3:int.
-  forall res8:int. forall math__sqrt__result4:int. forall res9:int.
-  forall math__sqrt__result5:int. (in_range1(x) -> ((0 <= x) -> ((((({
-  int__content = result } = { int__content = res }) and (res1 = 0)) and
-  (in_range1(res1) and (((((((o = (res1 + 1)) and in_range1((res1 + 1))) and
-  (((o1 = (res1 + 1)) and in_range1((res1 + 1))) and (o2 = (o1 * o)))) and
-  ((o3 = o2) and in_range1(o2))) and (((o3 <= x) and (result1 = true)) or
-  ((not (o3 <= x)) and (result1 = false)))) and (((result1 = true) and
-  ((((temp___134 = res1) and (((((-2147483648) <= 2147483647) ->
-  in_range1(res2)) and (((res2 + 1) * (res2 + 1)) <= x)) and
-  ((((o4 = (res2 + 1)) and in_range1((res2 + 1))) and ((res2 = result2) and
-  (res3 = o4))) and (((((((o5 = (res3 + 1)) and in_range1((res3 + 1))) and
-  (((o6 = (res3 + 1)) and in_range1((res3 + 1))) and (o7 = (o6 * o5)))) and
-  ((o8 = o7) and in_range1(o7))) and (((o8 <= x) and (o9 = true)) or
-  ((not (o8 <= x)) and (o9 = false)))) and (((not (o9 = true)) and
-  (result3 = true)) or ((o9 = true) and (result3 = false)))) and
-  (result3 = true))))) and ((res3 = res4) and (res5 = res3))) and (({
-  int__content = res6 } = { int__content = res4 }) and (res7 = res5)))) or
-  ((not (result1 = true)) and ((res1 = res6) and (res7 = res1))))) and
-  (((math__sqrt__result1 = math__sqrt__result2) and
-  (math__sqrt__result3 = math__sqrt__result1)) and (({ int__content = result4
-  } = { int__content = math__sqrt__result }) and
-  (math__sqrt__result1 = res6)))))) and ((({ int__content =
-  math__sqrt__result4 } = { int__content = math__sqrt__result2 }) and ({
-  int__content = res8 } = { int__content = res6 })) and
-  ((math__sqrt__result5 = math__sqrt__result3) and (res9 = res7)))) ->
-  ((bool_eq(x, 0) = true) -> (math__sqrt__result4 = 0))))))
+goal WP_parameter_def : (math__sqrt__result4 = 0)

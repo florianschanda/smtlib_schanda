@@ -238,6 +238,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range2 temp___expr_15)))
 (define-fun dynamic_invariant3 ((temp___expr_172 us_rep) (temp___is_init_169 Bool) (temp___skip_constant_170 Bool) (temp___do_toplevel_171 Bool)) Bool (let ((temp___174 (rec__rec__sub_arr__l (us_split_discrs1 temp___expr_172)))) (let ((temp___173 (rec__rec__sub_arr__f (us_split_discrs1 temp___expr_172)))) (and (dynamic_property1 (to_rep temp___173) (to_rep temp___174) (first1 (rec__rec__sub_arr__content (us_split_fields1 temp___expr_172))) (last1 (rec__rec__sub_arr__content (us_split_fields1 temp___expr_172)))) (and (= (first1 (rec__rec__sub_arr__content (us_split_fields1 temp___expr_172))) (to_rep temp___173)) (= (last1 (rec__rec__sub_arr__content (us_split_fields1 temp___expr_172))) (to_rep temp___174)))))))
 (declare-const us Int)
+(declare-const us1 Int)
 (assert (in_range1 f))
 (assert (in_range1 l))
 (assert (and (= us l) (in_range1 l)))

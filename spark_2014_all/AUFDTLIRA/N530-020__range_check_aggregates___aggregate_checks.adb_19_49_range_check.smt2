@@ -148,6 +148,7 @@
 (assert (= first2 (first1 a)))
 (assert (= last2 (last1 a)))
 (assert (= should_fail2 (aggregate_checks__do_wrong_aggregate_2__should_fail2__aggregate_def 0)))
+(declare-const us Int)
 (assert (dynamic_invariant a true false true))
 (assert (<= (to_rep (first (rt a))) (to_rep (last (rt a)))))
 (assert (not (dynamic_property1 first2 last2 0)))

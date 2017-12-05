@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -291,7 +291,7 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 type element_type
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -315,15 +315,55 @@ type element_type__ref = { element_type__content : element_type
 function element_type__ref___3__projection(a: element_type__ref) : element_type =
   (a).element_type__content
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(fst)
+
+axiom H1 : in_range3(lst)
+
+axiom H2 : in_range1(offset)
+
+axiom H3 : ((o9 = (0 + length(left))) and (in_range3(o9) and
+  (o9 = (0 + length(left)))))
+
+axiom H4 : (((lst <= o9) -> (result = true)) and ((not (lst <= o9)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((offset <  0) -> ((o8 = ((- 2147483648) - offset)) and
+  in_range1(((- 2147483648) - offset))))
+
+axiom H7 : ((offset <  0) -> (((o8 <= 1) -> (result1 = true)) and
+  ((not (o8 <= 1)) -> (result1 = false))))
+
+axiom H8 : ((not (offset <  0)) -> (result1 = of_int(1)))
+
+axiom H9 : (result1 = true)
+
+axiom H10 : (fst <= lst)
+
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall result:bool. forall result1:bool.
-  (in_range2(fst) -> (in_range3(lst) -> (in_range1(offset) ->
-  ((((o1 = (0 + length(left))) and (in_range3(o1) and
-  (o1 = (0 + length(left))))) and (((lst <= o1) and (result = true)) or
-  ((not (lst <= o1)) and (result = false)))) -> ((result = true) ->
-  ((((offset <  0) and (((o = ((-2147483648) - offset)) and
-  in_range1(((-2147483648) - offset))) and (((o <= 1) and
-  (result1 = true)) or ((not (o <= 1)) and (result1 = false))))) or
-  ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
-  ((fst <= lst) -> in_range1(lst))))))))))
+goal WP_parameter_def : in_range1(lst)

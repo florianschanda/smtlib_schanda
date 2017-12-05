@@ -834,20 +834,32 @@ type s18b__ref = { s18b__content : us_rep
 
 function s18b__ref___projection(a: s18b__ref) : us_rep = (a).s18b__content
 
- (* File "tests.adb", line 301, characters 0-0 *)
-goal WP_parameter_def :
-  (forall h1__split_fields:bool. forall h1__split_fields1:natural.
-  forall h1__split_fields2:bool. forall tests__test_15__R17b__assume:bool.
-  forall tests__test_15__R17b__assume1:bool.
-  forall tests__test_15__R17b__assume2:natural.
-  forall tests__test_15__R17b__assume3:bool.
-  (((h1__split_discrs = of_int(0)) and ((h1__split_fields2 = true) and
-  (h1__split_fields = of_int(0)))) -> (((of_int(0) = h1__split_discrs) and
+logic h1__split_fields : bool
+
+logic h1__split_fields1 : natural
+
+logic h1__split_fields2 : bool
+
+logic temp___present_389 : bool
+
+logic tests__test_15__R17b__assume : bool
+
+logic tests__test_15__R17b__assume1 : bool
+
+logic tests__test_15__R17b__assume2 : natural
+
+logic tests__test_15__R17b__assume3 : bool
+
+axiom H : ((h1__split_discrs = of_int(0)) and ((h1__split_fields2 = true) and
+  (h1__split_fields = of_int(0))))
+
+axiom H1 : ((of_int(0) = h1__split_discrs) and
   (((of_int(0) = h1__split_fields) and (h1__split_fields2 = true)) and
-  (h1__split_fields2 = true))) -> ((((({ us_split_discrs3 = {
-  rec__tests__test_15__holder__present = tests__test_15__R17b__assume };
-  us_split_fields3 = { rec__tests__test_15__holder__content = {
-  us_split_discrs1 = {
+  (h1__split_fields2 = true)))
+
+axiom H2 : (({ us_split_discrs3 = { rec__tests__test_15__holder__present =
+  tests__test_15__R17b__assume }; us_split_fields3 = {
+  rec__tests__test_15__holder__content = { us_split_discrs1 = {
   rec__tests__test_15__record_with_mutable_discrs__present =
   tests__test_15__R17b__assume1 }; us_split_fields1 = {
   rec__tests__test_15__record_with_mutable_discrs__field =
@@ -866,9 +878,14 @@ goal WP_parameter_def :
   ((h1__split_discrs = tests__test_15__R17b__assume) and
   ((h1__split_fields = tests__test_15__R17b__assume1) and
   ((h1__split_fields1 = tests__test_15__R17b__assume2) and
-  (h1__split_fields2 = tests__test_15__R17b__assume3)))))) and
-  ((r17b = tests__test_15__R17b__assume) and
-  ((r17b1 = tests__test_15__R17b__assume1) and
-  ((r17b2 = tests__test_15__R17b__assume2) and
-  (r17b3 = tests__test_15__R17b__assume3))))) and (((r17b = r17b1) and
-  (r17b3 = true)) and (r17b3 = true))) -> in_range(to_int(r17b))))))
+  (h1__split_fields2 = tests__test_15__R17b__assume3))))))
+
+axiom H3 : ((tests__test_15__R17b__assume = r17b) and
+  ((tests__test_15__R17b__assume1 = r17b1) and
+  ((tests__test_15__R17b__assume2 = r17b2) and
+  (tests__test_15__R17b__assume3 = r17b3))))
+
+axiom H4 : (((r17b = r17b1) and (r17b3 = true)) and (r17b3 = true))
+
+ (* File "tests.adb", line 301, characters 0-0 *)
+goal WP_parameter_def : in_range(to_int(r17b))

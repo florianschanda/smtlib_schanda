@@ -105,6 +105,7 @@
 (declare-const o5 Int)
 (declare-const o6 Int)
 (declare-const o7 Int)
+(declare-const o8 Int)
 (assert (and (= o1 (ts_sc ts)) (and (in_range1 o1) (= o1 (to_int1 (to_fixed (to_duration__2 ts)))))))
 (assert (= o2 (* o1 1000000000)))
 (assert (= o3 o2))

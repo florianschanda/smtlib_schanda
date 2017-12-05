@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1068,9 +1068,28 @@ logic val__ : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic rbp : t1
+
+logic result : t1
+
+logic rbp1 : t1
+
+logic rbp2 : t1
+
+logic rbp3 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = rbp)
+
+axiom H3 : (rbp1 = bw_or1(bw_and1(rbp, of_int1(18446744069414584320)),
+  toBig(val__)))
+
+axiom H4 : (rbp1 = rbp2)
+
+axiom H5 : (rbp3 = rbp1)
+
  (* File "x86.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rbp:t1. forall result:t1. forall rbp1:t1. forall rbp2:t1.
-  forall rbp3:t1. ((((result = rbp) and (rbp1 = bw_or1(bw_and1(rbp,
-  of_int1(18446744069414584320)), toBig(val__)))) and ((rbp1 = rbp2) and
-  (rbp3 = rbp1))) -> (ebp(rbp2) = val__)))
+goal WP_parameter_def : (ebp(rbp2) = val__)

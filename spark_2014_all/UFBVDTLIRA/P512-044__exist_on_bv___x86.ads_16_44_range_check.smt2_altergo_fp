@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -695,30 +695,58 @@ logic range_size : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "x86.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x86__inrange64__result:bool. forall o:bool. forall result:bool.
-  forall x86__inrange64__result1:bool. forall x86__inrange64__result2:bool.
-  forall x86__inrange64__result3:bool. forall x86__inrange64__result4:bool.
-  forall x86__inrange64__result5:bool.
-  (((((x86__inrange64__result1 = x86__inrange64__result2) and
-  (x86__inrange64__result3 = x86__inrange64__result1)) and (((ule(bottom,
-  sub(of_int(18446744073709551615), range_size)) and ((ule(bottom, var) and
-  ((ule(var, add(bottom, range_size)) and (o = true)) or ((not ule(var,
-  add(bottom, range_size))) and (o = false)))) or ((not ule(bottom, var)) and
-  (o = false)))) or ((not ule(bottom, sub(of_int(18446744073709551615),
-  range_size))) and ((ule(bottom, var) and ((ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(1))) and
-  (o = match_bool(of_int1(1), true, true))) or ((not ule(var,
+logic x86__inrange64__result : bool
+
+logic o : bool
+
+logic result : bool
+
+logic x86__inrange64__result1 : bool
+
+logic x86__inrange64__result2 : bool
+
+logic x86__inrange64__result3 : bool
+
+logic x86__inrange64__result4 : bool
+
+logic x86__inrange64__result5 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (x86__inrange64__result1 = x86__inrange64__result2)
+
+axiom H4 : (x86__inrange64__result3 = x86__inrange64__result1)
+
+axiom H5 : (ule(bottom, sub(of_int(18446744073709551615), range_size)) ->
+  ((ule(bottom, var) -> ((ule(var, add(bottom, range_size)) ->
+  (o = true)) and ((not ule(var, add(bottom, range_size))) ->
+  (o = false)))) and ((not ule(bottom, var)) -> (o = false))))
+
+axiom H6 : ((not ule(bottom, sub(of_int(18446744073709551615),
+  range_size))) -> ((ule(bottom, var) -> ((ule(var, sub(sub(range_size,
+  sub(of_int(18446744073709551615), bottom)), of_int(1))) ->
+  (o = match_bool(of_int1(1), true, true))) and ((not ule(var,
   sub(sub(range_size, sub(of_int(18446744073709551615), bottom)),
-  of_int(1)))) and (o = match_bool(of_int1(1), true, false))))) or
-  ((not ule(bottom, var)) and ((ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(1))) and
-  (o = match_bool(false, true, true))) or ((not ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(1)))) and
-  (o = match_bool(false, true, false)))))))) and (({ bool__content = result
-  } = { bool__content = x86__inrange64__result }) and
-  (x86__inrange64__result1 = o)))) and (({ bool__content =
-  x86__inrange64__result4 } = { bool__content = x86__inrange64__result2
-  }) and (x86__inrange64__result5 = x86__inrange64__result3))) ->
-  (ule(of_int(0), range_size) -> uge(of_int(0), of_int(0)))))
+  of_int(1)))) -> (o = match_bool(of_int1(1), true, false))))) and
+  ((not ule(bottom, var)) -> ((ule(var, sub(sub(range_size,
+  sub(of_int(18446744073709551615), bottom)), of_int(1))) ->
+  (o = match_bool(false, true, true))) and ((not ule(var, sub(sub(range_size,
+  sub(of_int(18446744073709551615), bottom)), of_int(1)))) ->
+  (o = match_bool(false, true, false)))))))
+
+axiom H7 : (result = x86__inrange64__result)
+
+axiom H8 : (x86__inrange64__result1 = o)
+
+axiom H9 : (x86__inrange64__result4 = x86__inrange64__result2)
+
+axiom H10 : (x86__inrange64__result5 = x86__inrange64__result3)
+
+axiom H11 : ule(of_int(0), range_size)
+
+ (* File "x86.ads", line 14, characters 0-0 *)
+goal WP_parameter_def : uge(of_int(0), of_int(0))

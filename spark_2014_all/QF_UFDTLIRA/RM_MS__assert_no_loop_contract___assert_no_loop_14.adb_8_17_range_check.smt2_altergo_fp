@@ -139,8 +139,37 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic c : int
+
+logic o : int
+
+logic o1 : int
+
+logic c1 : int
+
+logic result : int
+
+logic c2 : int
+
+logic result1 : int
+
+logic c3 : int
+
+logic result2 : int
+
+logic c4 : int
+
+axiom H : in_range(a)
+
+axiom H1 : in_range(b)
+
+axiom H2 : in_range1(c)
+
+axiom H3 : (c <= (a + b))
+
+axiom H4 : (result = c)
+
+axiom H5 : (c2 = a)
+
  (* File "assert_no_loop_14.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall result:int. forall c1:int. (in_range(a) ->
-  (in_range(b) -> (in_range1(c) -> ((c <= (a + b)) -> ((({ int__content =
-  result } = { int__content = c }) and (c1 = a)) -> in_range1((c1 + b))))))))
+goal WP_parameter_def : in_range1((c2 + b))

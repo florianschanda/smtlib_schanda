@@ -255,7 +255,52 @@ logic b1 : unsigned_byte
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : ((in_range1((to_rep(a) + to_rep(b))) and
-  in_range1((to_rep(a1) + to_rep(b1)))) ->
+logic records__add_pair_a__result : unsigned_byte
+
+logic records__add_pair_a__result1 : unsigned_byte
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : unsigned_byte
+
+logic o3 : unsigned_byte
+
+logic o4 : unsigned_byte
+
+logic o5 : unsigned_byte
+
+logic o6 : unsigned_byte
+
+logic o7 : unsigned_byte
+
+logic result : unsigned_byte
+
+logic result1 : unsigned_byte
+
+logic records__add_pair_a__result2 : unsigned_byte
+
+logic records__add_pair_a__result3 : unsigned_byte
+
+logic records__add_pair_a__result4 : unsigned_byte
+
+logic records__add_pair_a__result5 : unsigned_byte
+
+logic records__add_pair_a__result6 : unsigned_byte
+
+logic records__add_pair_a__result7 : unsigned_byte
+
+logic records__add_pair_a__result8 : unsigned_byte
+
+logic records__add_pair_a__result9 : unsigned_byte
+
+logic records__add_pair_a__result10 : unsigned_byte
+
+logic records__add_pair_a__result11 : unsigned_byte
+
+axiom H : (in_range1((to_rep(a) + to_rep(b))) and
   in_range1((to_rep(a1) + to_rep(b1))))
+
+ (* File "records_prooffuncs.ads", line 11, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep(a1) + to_rep(b1)))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -786,36 +786,189 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x__split_fields : sixty
+
+logic x__split_fields1 : sixty
+
+logic x__split_fields2 : twenty_four
+
+logic x__split_fields3 : (int,character) farray
+
+logic x__split_fields4 : us_private
+
+logic ninc : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : sixty
+
+logic o3 : sixty
+
+logic o4 : sixty
+
+logic o5 : twenty_four
+
+logic o6 : (int,character) farray
+
+logic o7 : us_private
+
+logic temp___367 : sixty
+
+logic temp___3671 : sixty
+
+logic temp___3672 : twenty_four
+
+logic temp___3673 : (int,character) farray
+
+logic temp___3674 : us_private
+
+logic temp___3675 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : sixty
+
+logic o13 : sixty
+
+logic o14 : sixty
+
+logic o15 : twenty_four
+
+logic o16 : (int,character) farray
+
+logic o17 : us_private
+
+logic temp___369 : sixty
+
+logic temp___3691 : sixty
+
+logic temp___3692 : twenty_four
+
+logic temp___3693 : (int,character) farray
+
+logic temp___3694 : us_private
+
+logic temp___3695 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic result : sixty
+
+logic result1 : sixty
+
+logic result2 : twenty_four
+
+logic result3 : (int,character) farray
+
+logic result4 : us_private
+
+logic x__split_fields5 : sixty
+
+logic x__split_fields6 : sixty
+
+logic x__split_fields7 : twenty_four
+
+logic x__split_fields8 : (int,character) farray
+
+logic x__split_fields9 : us_private
+
+logic result5 : int
+
+logic ninc1 : int
+
+logic result6 : sixty
+
+logic result7 : sixty
+
+logic result8 : twenty_four
+
+logic result9 : (int,character) farray
+
+logic result10 : us_private
+
+logic x__split_fields10 : sixty
+
+logic x__split_fields11 : sixty
+
+logic x__split_fields12 : twenty_four
+
+logic x__split_fields13 : (int,character) farray
+
+logic x__split_fields14 : us_private
+
+logic result11 : int
+
+logic ninc2 : int
+
+axiom H : in_range(inc)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(ninc))
+
+axiom H2 : ((o = (to_rep(x__split_fields) + inc)) and
+  in_range((to_rep(x__split_fields) + inc)))
+
+axiom H3 : (o1 = mod(o, 60))
+
+axiom H4 : (to_rep(o2) = o1)
+
+axiom H5 : (o2 = o3)
+
+axiom H6 : (x__split_fields1 = o4)
+
+axiom H7 : (x__split_fields2 = o5)
+
+axiom H8 : (x__split_fields3 = o6)
+
+axiom H9 : (x__split_fields4 = o7)
+
+axiom H10 : (temp___367 = o3)
+
+axiom H11 : (temp___3671 = o4)
+
+axiom H12 : (temp___3672 = o5)
+
+axiom H13 : (temp___3673 = o6)
+
+axiom H14 : (temp___3674 = o7)
+
+axiom H15 : (x__attr__tag = temp___3675)
+
+axiom H16 : (result = x__split_fields)
+
+axiom H17 : (result1 = x__split_fields1)
+
+axiom H18 : (result2 = x__split_fields2)
+
+axiom H19 : (result3 = x__split_fields3)
+
+axiom H20 : (result4 = x__split_fields4)
+
+axiom H21 : (temp___367 = x__split_fields5)
+
+axiom H22 : (temp___3671 = x__split_fields6)
+
+axiom H23 : (temp___3672 = x__split_fields7)
+
+axiom H24 : (temp___3673 = x__split_fields8)
+
+axiom H25 : (temp___3674 = x__split_fields9)
+
+axiom H26 : ((o8 = (to_rep(x__split_fields5) + inc)) and
+  in_range((to_rep(x__split_fields5) + inc)))
+
  (* File "instr.ads", line 61, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:sixty. forall x__split_fields1:sixty.
-  forall x__split_fields2:twenty_four.
-  forall x__split_fields3:(int,character) farray.
-  forall x__split_fields4:us_private. forall ninc:int. forall o:int.
-  forall o1:int. forall o2:sixty. forall o3:sixty. forall o4:sixty.
-  forall o5:twenty_four. forall o6:(int,character) farray.
-  forall o7:us_private. forall temp___367:sixty. forall temp___3671:sixty.
-  forall temp___3672:twenty_four. forall temp___3673:(int,character) farray.
-  forall temp___3674:us_private. forall temp___3675:int. forall o8:int.
-  forall result:sixty. forall result1:sixty. forall result2:twenty_four.
-  forall result3:(int,character) farray. forall result4:us_private.
-  forall x__split_fields5:sixty. forall x__split_fields6:sixty.
-  forall x__split_fields7:twenty_four.
-  forall x__split_fields8:(int,character) farray.
-  forall x__split_fields9:us_private. (in_range(inc) ->
-  ((((-2147483648) <= 2147483647) -> in_range(ninc)) ->
-  ((((((((o = (to_rep(x__split_fields) + inc)) and
-  in_range((to_rep(x__split_fields) + inc))) and (o1 = mod(o, 60))) and
-  (to_rep(o2) = o1)) and ((o2 = o3) and ((x__split_fields1 = o4) and
-  ((x__split_fields2 = o5) and ((x__split_fields3 = o6) and
-  (x__split_fields4 = o7)))))) and (((temp___367 = o3) and
-  ((temp___3671 = o4) and ((temp___3672 = o5) and ((temp___3673 = o6) and
-  (temp___3674 = o7))))) and (x__attr__tag = temp___3675))) and
-  (((result = x__split_fields) and ((result1 = x__split_fields1) and
-  ((result2 = x__split_fields2) and ((result3 = x__split_fields3) and
-  (result4 = x__split_fields4))))) and ((temp___367 = x__split_fields5) and
-  ((temp___3671 = x__split_fields6) and ((temp___3672 = x__split_fields7) and
-  ((temp___3673 = x__split_fields8) and
-  (temp___3674 = x__split_fields9))))))) ->
-  (((o8 = (to_rep(x__split_fields5) + inc)) and
-  in_range((to_rep(x__split_fields5) + inc))) -> (not (60 = 0)))))))
+goal WP_parameter_def : (not (60 = 0))

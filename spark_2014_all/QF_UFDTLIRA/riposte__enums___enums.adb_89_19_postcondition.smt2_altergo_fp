@@ -165,27 +165,77 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic r : bool
+
+logic enums__is_subenum__result : bool
+
+logic result : bool
+
+logic r1 : bool
+
+logic result1 : bool
+
+logic r2 : bool
+
+logic result2 : bool
+
+logic r3 : bool
+
+logic result3 : bool
+
+logic enums__is_subenum__result1 : bool
+
+logic enums__is_subenum__result2 : bool
+
+logic enums__is_subenum__result3 : bool
+
+logic r4 : bool
+
+logic enums__is_subenum__result4 : bool
+
+logic r5 : bool
+
+logic enums__is_subenum__result5 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(a)
+
+axiom H1 : ((3 <= a) -> ((a <= 5) -> (result = r)))
+
+axiom H2 : ((3 <= a) -> ((a <= 5) -> (r1 = of_int(1))))
+
+axiom H3 : ((3 <= a) -> ((not (a <= 5)) -> (result1 = r)))
+
+axiom H4 : ((3 <= a) -> ((not (a <= 5)) -> (r2 = of_int(0))))
+
+axiom H5 : ((3 <= a) -> ((not (a <= 5)) -> (r1 = r2)))
+
+axiom H6 : ((not (3 <= a)) -> (result2 = r))
+
+axiom H7 : ((not (3 <= a)) -> (r3 = of_int(0)))
+
+axiom H8 : ((not (3 <= a)) -> (r1 = r3))
+
+axiom H9 : (enums__is_subenum__result1 = enums__is_subenum__result2)
+
+axiom H10 : (enums__is_subenum__result3 = enums__is_subenum__result1)
+
+axiom H11 : (result3 = enums__is_subenum__result)
+
+axiom H12 : (enums__is_subenum__result1 = r1)
+
+axiom H13 : (enums__is_subenum__result4 = enums__is_subenum__result2)
+
+axiom H14 : (r4 = r1)
+
+axiom H15 : (enums__is_subenum__result5 = enums__is_subenum__result3)
+
+axiom H16 : (r5 = r1)
+
+axiom H17 : (result4 = enums__is_subenum__result4)
+
+axiom H18 : (enums__is_subenum__result4 = true)
+
  (* File "enums.adb", line 88, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r:bool. forall enums__is_subenum__result:bool. forall result:bool.
-  forall r1:bool. forall result1:bool. forall r2:bool. forall result2:bool.
-  forall r3:bool. forall result3:bool.
-  forall enums__is_subenum__result1:bool.
-  forall enums__is_subenum__result2:bool.
-  forall enums__is_subenum__result3:bool. forall r4:bool.
-  forall enums__is_subenum__result4:bool. forall r5:bool.
-  forall enums__is_subenum__result5:bool.
-  (forall result4:bool. ((in_range1(a) and ((((((3 <= a) and (((a <= 5) and
-  ((result = r) and (r1 = of_int(1)))) or ((not (a <= 5)) and
-  (((result1 = r) and (r2 = of_int(0))) and (r1 = r2))))) or
-  ((not (3 <= a)) and (((result2 = r) and (r3 = of_int(0))) and
-  (r1 = r3)))) and
-  (((enums__is_subenum__result1 = enums__is_subenum__result2) and
-  (enums__is_subenum__result3 = enums__is_subenum__result1)) and
-  ((result3 = enums__is_subenum__result) and
-  (enums__is_subenum__result1 = r1)))) and
-  (((enums__is_subenum__result4 = enums__is_subenum__result2) and
-  (r4 = r1)) and
-  ((enums__is_subenum__result5 = enums__is_subenum__result3) and
-  (r5 = r1)))) and (result4 = enums__is_subenum__result4))) ->
-  ((enums__is_subenum__result4 = true) -> in_range2(a)))))
+goal WP_parameter_def : in_range2(a)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -256,27 +256,70 @@ axiom def_axiom :
   ((not (temp___275 = temp___273)) -> ((temp___270(temp___272, temp___273,
   temp___274)[temp___275]) = (temp___272[temp___275])))))))
 
+logic arr : (int,integer) farray
+
+logic arrays__f5__result : (int,integer) farray
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic result : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result1 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result2 : (int,integer) farray
+
+logic arrays__f5__result1 : (int,integer) farray
+
+logic arrays__f5__result2 : (int,integer) farray
+
+logic arrays__f5__result3 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic arrays__f5__result4 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic arrays__f5__result5 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+axiom H : (result = arr)
+
+axiom H1 : (arr1 = arr_in)
+
+axiom H2 : (to_rep(o) = 1)
+
+axiom H3 : (o1 = (arr1[2 <- o]))
+
+axiom H4 : (result1 = arr1)
+
+axiom H5 : (arr2 = o1)
+
+axiom H6 : (arrays__f5__result1 = arrays__f5__result2)
+
+axiom H7 : (arrays__f5__result3 = arrays__f5__result1)
+
+axiom H8 : (result2 = arrays__f5__result)
+
+axiom H9 : (arrays__f5__result1 = arr2)
+
+axiom H10 : (arrays__f5__result4 = arrays__f5__result2)
+
+axiom H11 : (arr3 = arr2)
+
+axiom H12 : (arrays__f5__result5 = arrays__f5__result3)
+
+axiom H13 : (arr4 = arr2)
+
+axiom H14 : (result3 = arrays__f5__result4)
+
  (* File "types.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall arr:(int,integer) farray.
-  forall arrays__f5__result:(int,integer) farray. forall o:integer.
-  forall o1:(int,integer) farray. forall result:(int,integer) farray.
-  forall arr1:(int,integer) farray. forall result1:(int,integer) farray.
-  forall arr2:(int,integer) farray. forall result2:(int,integer) farray.
-  forall arrays__f5__result1:(int,integer) farray.
-  forall arrays__f5__result2:(int,integer) farray.
-  forall arrays__f5__result3:(int,integer) farray.
-  forall arr3:(int,integer) farray.
-  forall arrays__f5__result4:(int,integer) farray.
-  forall arr4:(int,integer) farray.
-  forall arrays__f5__result5:(int,integer) farray.
-  (forall result3:(int,integer) farray. ((((((result = arr) and
-  (arr1 = arr_in)) and ((((to_rep(o) = 1) and (o1 = (arr1[2 <- o]))) and
-  ((result1 = arr1) and (arr2 = o1))) and
-  (((arrays__f5__result1 = arrays__f5__result2) and
-  (arrays__f5__result3 = arrays__f5__result1)) and
-  ((result2 = arrays__f5__result) and (arrays__f5__result1 = arr2))))) and
-  (((arrays__f5__result4 = arrays__f5__result2) and (arr3 = arr2)) and
-  ((arrays__f5__result5 = arrays__f5__result3) and (arr4 = arr2)))) and
-  (result3 = arrays__f5__result4)) -> (bool_eq3(arrays__f5__result4, 1, 8,
-  temp___270(arr_in, 2, 1), 1, 8) = true))))
+goal WP_parameter_def : (bool_eq3(arrays__f5__result4, 1, 8,
+  temp___270(arr_in, 2, 1), 1, 8) = true)

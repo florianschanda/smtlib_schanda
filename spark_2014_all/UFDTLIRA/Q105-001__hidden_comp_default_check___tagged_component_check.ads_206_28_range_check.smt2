@@ -121,6 +121,7 @@
 (define-fun default_initial_assumption ((temp___expr_456 us_rep) (temp___skip_top_level_457 Bool)) Bool (and (= (attr__tag temp___expr_456) us_tag) (= (to_rep (rec__tagged_component_check__s__p2__root__f (us_split_fields1 temp___expr_456))) (hide 32))))
 (define-fun default_initial_assumption1 ((temp___expr_466 us_rep1) (temp___skip_top_level_467 Bool)) Bool (and (= (attr__tag1 temp___expr_466) us_tag1) (and (= (to_rep (rec__tagged_component_check__s__p2__c__g (us_split_fields3 temp___expr_466))) (hide 33)) (= (to_rep (rec__tagged_component_check__s__p2__root__f1 (us_split_fields3 temp___expr_466))) (hide 32)))))
 (declare-const o Int)
+(declare-const us Int)
 (assert (and (= o (hide 33)) (in_range1 o)))
 (assert (not (in_range o)))
 (check-sat)

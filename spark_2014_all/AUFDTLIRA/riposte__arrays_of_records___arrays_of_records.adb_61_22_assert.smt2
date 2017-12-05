@@ -114,6 +114,8 @@
 (declare-const a2 (Array Int us_rep))
 (declare-const result2 (Array Int us_rep))
 (declare-const a3 (Array Int us_rep))
+(declare-const a4 (Array Int us_rep))
+(declare-const a5 (Array Int us_rep))
 (assert (= (mk_map__ref result) (mk_map__ref a)))
 (assert (= a1 (store a 17 (mk___rep (mk___split_fields (of_int 1) (rec__arrays_of_records__basic_record__first_value (us_split_fields1 (select a 17))) (rec__arrays_of_records__basic_record__second_value (us_split_fields1 (select a 17))))))))
 (assert (= (to_rep o) 42))

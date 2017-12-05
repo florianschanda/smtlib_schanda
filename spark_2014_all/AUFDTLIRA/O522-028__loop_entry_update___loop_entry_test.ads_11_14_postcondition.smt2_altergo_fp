@@ -282,7 +282,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -371,41 +371,138 @@ axiom def_axiom1 :
   ((temp___564(temp___566, temp___567, temp___568,
   temp___569)[temp___570]) = (temp___566[temp___570])))))))
 
- (* File "loop_entry_test.ads", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,component_t) farray.
-  forall a_loop_entry:(int,component_t) farray. forall j:int.
-  forall temp___562:(int,component_t) farray. forall temp___561:int.
-  forall o:component_t. forall o1:(int,component_t) farray.
-  forall a1:(int,component_t) farray. forall result:(int,component_t) farray.
-  forall a_loop_entry1:(int,component_t) farray. forall result1:int.
-  forall j1:int. forall result2:(int,component_t) farray.
-  forall a2:(int,component_t) farray. forall a3:(int,component_t) farray.
-  forall j2:int. forall a4:(int,component_t) farray. forall j3:int.
-  forall a5:(int,component_t) farray. forall j4:int.
-  forall a6:(int,component_t) farray. forall j5:int.
-  forall a7:(int,component_t) farray. forall j6:int.
-  forall a8:(int,component_t) farray.
-  forall a_loop_entry2:(int,component_t) farray. forall j7:int.
-  forall a9:(int,component_t) farray.
-  forall a_loop_entry3:(int,component_t) farray. forall j8:int.
-  ((in_range1(first) and (in_range1(last) and (((({ map__content = result
-  } = { map__content = a_loop_entry }) and (a_loop_entry1 = a)) and ((({
-  int__content = result1 } = { int__content = j }) and (j1 = first)) and
-  ((((first <= j1) and (j1 <= last)) and ((((temp___562 = a) and
-  ((temp___561 = j1) and ((((to_rep(o) = 0) and (o1 = (a[j1 <- o]))) and (({
-  map__content = result2 } = { map__content = a }) and (a2 = o1))) and
-  ((bool_eq4(a3, 1, 1000, temp___564(a_loop_entry1, first, j2, 0), 1,
-  1000) = true) and (((((first <= last) -> dynamic_property(first, last,
-  j2)) and
+logic a : (int,component_t) farray
+
+logic a_loop_entry : (int,component_t) farray
+
+logic j : int
+
+logic temp___562 : (int,component_t) farray
+
+logic temp___561 : int
+
+logic o : component_t
+
+logic o1 : (int,component_t) farray
+
+logic o2 : int
+
+logic o3 : component_t
+
+logic o4 : (int,component_t) farray
+
+logic a1 : (int,component_t) farray
+
+logic result : (int,component_t) farray
+
+logic a_loop_entry1 : (int,component_t) farray
+
+logic result1 : int
+
+logic j1 : int
+
+logic result2 : (int,component_t) farray
+
+logic a2 : (int,component_t) farray
+
+logic a3 : (int,component_t) farray
+
+logic j2 : int
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : (int,component_t) farray
+
+logic a4 : (int,component_t) farray
+
+logic a5 : (int,component_t) farray
+
+logic j4 : int
+
+logic a6 : (int,component_t) farray
+
+logic j5 : int
+
+logic a7 : (int,component_t) farray
+
+logic j6 : int
+
+logic a8 : (int,component_t) farray
+
+logic j7 : int
+
+logic a9 : (int,component_t) farray
+
+logic j8 : int
+
+logic a10 : (int,component_t) farray
+
+logic j9 : int
+
+logic a11 : (int,component_t) farray
+
+logic a_loop_entry2 : (int,component_t) farray
+
+logic j10 : int
+
+logic a12 : (int,component_t) farray
+
+logic a_loop_entry3 : (int,component_t) farray
+
+logic j11 : int
+
+axiom H : in_range1(first)
+
+axiom H1 : in_range1(last)
+
+axiom H2 : (result = a_loop_entry)
+
+axiom H3 : (a_loop_entry1 = a)
+
+axiom H4 : (result1 = j)
+
+axiom H5 : (j1 = first)
+
+axiom H6 : (((first <= j1) and (j1 <= last)) -> (((temp___562 = a) and
+  ((temp___561 = j1) and ((((to_rep(o) = 0) and (o1 = (a[j1 <- o]))) and
+  ((result2 = a) and (a2 = o1))) and ((bool_eq4(a3, 1, 1000,
+  temp___564(a_loop_entry1, first, j2, 0), 1, 1000) = true) and
+  (((((first <= last) -> dynamic_property(first, last, j2)) and
   (forall temp___563:int. (((1 <= temp___563) and (temp___563 <= 1000)) ->
   ((j2 <  temp___563) -> ((a3[temp___563]) = (temp___562[temp___563])))))) and
-  ((first <= j2) and (j2 <= last))) and (j2 = last)))))) and (((j2 = j3) and
-  (a3 = a4)) and ((j4 = j2) and (a5 = a3)))) and (((j5 = j3) and ({
-  map__content = a6 } = { map__content = a4 })) and ((j6 = j4) and
-  (a7 = a5))))) or ((not ((first <= j1) and (j1 <= last))) and
-  (((j1 = j5) and ({ map__content = a6 } = { map__content = a })) and
-  ((j6 = j1) and (a7 = a1))))))) and (((j7 = j5) and
-  ((a_loop_entry2 = a_loop_entry1) and (a8 = a6))) and ((j8 = j6) and
-  ((a_loop_entry3 = a_loop_entry1) and (a9 = a7))))))) -> (bool_eq4(a8, 1,
-  1000, temp___542(a, first, last, 0), 1, 1000) = true)))
+  ((first <= j2) and (j2 <= last))) and (j2 = last)))))) and (((j2 = j6) and
+  (a3 = a7)) and ((j7 = j2) and (a8 = a3)))))
+
+axiom H7 : (((first <= j1) and (j1 <= last)) -> (j8 = j6))
+
+axiom H8 : (((first <= j1) and (j1 <= last)) -> (a9 = a7))
+
+axiom H9 : (((first <= j1) and (j1 <= last)) -> (j9 = j7))
+
+axiom H10 : (((first <= j1) and (j1 <= last)) -> (a10 = a8))
+
+axiom H11 : ((not ((first <= j1) and (j1 <= last))) -> (j1 = j8))
+
+axiom H12 : ((not ((first <= j1) and (j1 <= last))) -> (a9 = a))
+
+axiom H13 : ((not ((first <= j1) and (j1 <= last))) -> (j9 = j1))
+
+axiom H14 : ((not ((first <= j1) and (j1 <= last))) -> (a10 = a1))
+
+axiom H15 : (j10 = j8)
+
+axiom H16 : (a_loop_entry2 = a_loop_entry1)
+
+axiom H17 : (a11 = a9)
+
+axiom H18 : (j11 = j9)
+
+axiom H19 : (a_loop_entry3 = a_loop_entry1)
+
+axiom H20 : (a12 = a10)
+
+ (* File "loop_entry_test.ads", line 8, characters 0-0 *)
+goal WP_parameter_def : (bool_eq4(a11, 1, 1000, temp___542(a, first, last,
+  0), 1, 1000) = true)

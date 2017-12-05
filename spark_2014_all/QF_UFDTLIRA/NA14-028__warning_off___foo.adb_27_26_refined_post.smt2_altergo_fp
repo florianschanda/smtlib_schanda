@@ -111,9 +111,27 @@ logic data : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic value : int
+
+logic result : int
+
+logic value1 : int
+
+logic value2 : int
+
+logic value3 : int
+
+axiom H : ((0 <= 2147483647) -> in_range(value))
+
+axiom H1 : in_range(data)
+
+axiom H2 : (result = value)
+
+axiom H3 : (value1 = data)
+
+axiom H4 : (value1 = value2)
+
+axiom H5 : (value3 = value1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:int. forall result:int. forall value1:int. forall value2:int.
-  forall value3:int. (((0 <= 2147483647) -> in_range(value)) ->
-  (in_range(data) -> ((((result = value) and (value1 = data)) and
-  ((value1 = value2) and (value3 = value1))) -> (value2 = data)))))
+goal WP_parameter_def : (value2 = data)

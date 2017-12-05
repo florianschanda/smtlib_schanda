@@ -195,7 +195,7 @@ function vector__ref___projection(a: vector__ref) : us_rep =
 
 type element_type
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -573,7 +573,7 @@ axiom length__post_axiom1 :
 
 type element_type1
 
-predicate in_range8(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range8(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq9 : int, int -> bool
 
@@ -603,18 +603,198 @@ axiom get__post_axiom :
   ((1 <= position) and (position <= (0 + length(container))))) ->
   in_range8(get(container, position)))))
 
+logic l__split_fields : us_main_type
+
+logic i : int
+
+logic rev_l__split_fields : us_main_type
+
+logic i1 : int
+
+logic main__B_2__rev_l__assume : capacity_range
+
+logic main__B_2__rev_l__assume1 : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic result : int
+
+logic i2 : int
+
+logic list__my_lists__append__2__container__fields : us_main_type
+
+logic result1 : us_main_type
+
+logic l__split_fields1 : us_main_type
+
+logic result2 : int
+
+logic i3 : int
+
+logic list__my_lists__append__2__container__fields1 : us_main_type
+
+logic result3 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic result4 : int
+
+logic i4 : int
+
+logic list__my_lists__append__2__container__fields2 : us_main_type
+
+logic result5 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic result6 : int
+
+logic i5 : int
+
+logic list__my_lists__append__2__container__fields3 : us_main_type
+
+logic result7 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+logic result8 : int
+
+logic i6 : int
+
+logic list__my_lists__append__2__container__fields4 : us_main_type
+
+logic result9 : us_main_type
+
+logic l__split_fields5 : us_main_type
+
+logic result10 : int
+
+logic i7 : int
+
+logic list__my_lists__append__2__container__fields5 : us_main_type
+
+logic result11 : us_main_type
+
+logic l__split_fields6 : us_main_type
+
+logic result12 : int
+
+logic i8 : int
+
+logic list__my_lists__append__2__container__fields6 : us_main_type
+
+logic result13 : us_main_type
+
+logic l__split_fields7 : us_main_type
+
+logic result14 : int
+
+logic i9 : int
+
+logic list__my_lists__append__2__container__fields7 : us_main_type
+
+logic result15 : us_main_type
+
+logic l__split_fields8 : us_main_type
+
+logic result16 : int
+
+logic i10 : int
+
+logic list__my_lists__append__2__container__fields8 : us_main_type
+
+logic result17 : us_main_type
+
+logic l__split_fields9 : us_main_type
+
+logic result18 : int
+
+logic i11 : int
+
+logic list__my_lists__append__2__container__fields9 : us_main_type
+
+logic result19 : us_main_type
+
+logic l__split_fields10 : us_main_type
+
+logic result20 : us_main_type
+
+logic rev_l__split_fields1 : us_main_type
+
+logic result21 : int
+
+logic i12 : int
+
+logic result22 : int
+
+logic i13 : int
+
+logic result23 : int
+
+logic i14 : int
+
+logic result24 : int
+
+logic i15 : int
+
+logic result25 : int
+
+logic i16 : int
+
+logic result26 : int
+
+logic i17 : int
+
+logic result27 : int
+
+logic i18 : int
+
+logic result28 : int
+
+logic i19 : int
+
+logic result29 : int
+
+logic i20 : int
+
+logic result30 : int
+
+logic i21 : int
+
+axiom H : ((to_rep(l__split_discrs) = 100) and (is_empty({ us_split_discrs1 =
+  { rec__list__my_lists__vector__capacity = l__split_discrs };
+  us_split_fields1 = { rec__list__my_lists__vector = l__split_fields }
+  }) = true))
+
+axiom H1 : (100 = to_rep(l__split_discrs))
+
+axiom H2 : (result = i)
+
+axiom H3 : (i2 = 1)
+
  (* File "main.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall i:int. forall result:int.
-  forall i1:int. (((to_rep(l__split_discrs) = 100) and (is_empty({
-  us_split_discrs1 = { rec__list__my_lists__vector__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__list__my_lists__vector =
-  l__split_fields } }) = true)) -> ((100 = to_rep(l__split_discrs)) -> ((({
-  int__content = result } = { int__content = i }) and (i1 = 1)) ->
-  (((of_int(1) = true) -> (length1({ us_split_discrs1 = {
-  rec__list__my_lists__vector__capacity = l__split_discrs };
+goal WP_parameter_def : (((of_int(1) = true) -> (length1({ us_split_discrs1 =
+  { rec__list__my_lists__vector__capacity = l__split_discrs };
   us_split_fields1 = { rec__list__my_lists__vector = l__split_fields }
   }) <  to_rep(l__split_discrs))) and ((not (of_int(1) = true)) -> (length1({
   us_split_discrs1 = { rec__list__my_lists__vector__capacity =
   l__split_discrs }; us_split_fields1 = { rec__list__my_lists__vector =
-  l__split_fields } }) <  100)))))))
+  l__split_fields } }) <  100)))

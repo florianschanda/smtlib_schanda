@@ -66,6 +66,8 @@
 (declare-const us1 Int)
 (declare-const temp___l_184 Int)
 (declare-const temp___f_183 Int)
+(declare-const temp___l_182 Int)
+(declare-const temp___f_181 Int)
 (assert (in_range2 temp___z_186))
 (assert (and (= us temp___z_186) (in_range3 temp___z_186)))
 (assert (in_range2 temp___z_185))

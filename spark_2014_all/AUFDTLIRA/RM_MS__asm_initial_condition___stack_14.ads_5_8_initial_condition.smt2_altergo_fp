@@ -147,7 +147,7 @@ axiom is_empty__def_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -289,12 +289,32 @@ axiom def_axiom :
   (forall temp___162:int.
   ((temp___159(temp___161)[temp___162]) = of_rep(temp___161))))
 
+logic s : (int,integer) farray
+
+logic pointer : int
+
+logic result : int
+
+logic pointer1 : int
+
+logic result1 : (int,integer) farray
+
+logic s1 : (int,integer) farray
+
+logic result2 : bool
+
+axiom H : ((0 <= 1024) -> in_range1(pointer))
+
+axiom H1 : (result = pointer)
+
+axiom H2 : (pointer1 = 0)
+
+axiom H3 : (result1 = s)
+
+axiom H4 : (s1 = temp___159(0))
+
+axiom H5 : ((result2 = is_empty(pointer1)) and ((result2 = true) <->
+  (pointer1 = 0)))
+
  (* File "stack_14.ads", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:(int,integer) farray. forall pointer:int. forall result:int.
-  forall pointer1:int. forall result1:(int,integer) farray.
-  forall s1:(int,integer) farray.
-  (forall result2:bool. ((((0 <= 1024) -> in_range1(pointer)) and
-  (((result = pointer) and (pointer1 = 0)) and (((result1 = s) and
-  (s1 = temp___159(0))) and ((result2 = is_empty(pointer1)) and
-  ((result2 = true) <-> (pointer1 = 0)))))) -> (is_empty(pointer1) = true))))
+goal WP_parameter_def : (is_empty(pointer1) = true)

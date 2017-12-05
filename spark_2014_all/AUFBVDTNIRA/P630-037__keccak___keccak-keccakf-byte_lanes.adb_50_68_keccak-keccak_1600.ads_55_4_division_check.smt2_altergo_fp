@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1033,7 +1033,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1592,30 +1592,595 @@ logic attr__ATTRIBUTE_ADDRESS12 : int
 
 logic attr__ATTRIBUTE_ADDRESS13 : int
 
- (* File "keccak-keccakf-permutation.adb", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:t. forall y:t. forall remaining_bits:int. forall offset:int.
-  forall initial_byte_len:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall result:t. forall x1:t. forall result1:t. forall y1:t.
-  forall result2:int. forall remaining_bits1:int. forall result3:int.
-  forall offset1:int. forall result4:int. forall initial_byte_len1:int.
-  forall x2:t. forall y2:t. forall remaining_bits2:int. forall offset2:int.
-  (dynamic_property(0, 2147483647, to_rep1(first(data1)),
-  to_rep1(last(data1))) -> (in_range2(bit_len) -> (((length({ elts = data;
-  rt = data1 }) <= 268435455) and ((bit_len <= (length({ elts = data; rt =
-  data1 }) * 8)) and (bit_len <= 1600))) -> (((result = x) and
-  (x1 = of_int(0))) -> (in_range4(x1) -> (((result1 = y) and
-  (y1 = of_int(0))) -> (in_range5(y1) -> (((result2 = remaining_bits) and
-  (remaining_bits1 = bit_len)) -> (in_range2(remaining_bits1) ->
-  (((result3 = offset) and (offset1 = 0)) -> (in_range2(offset1) ->
-  ((((((o = (bit_len + 7)) and in_range1((bit_len + 7))) and
-  (o1 = comp_div(o,8))) and ((o2 = o1) and in_range2(o1))) and
-  ((result4 = initial_byte_len) and (initial_byte_len1 = o2))) ->
-  (in_range2(initial_byte_len1) -> ((64 <= remaining_bits1) ->
-  (((mod(offset2, 8) = 0) and
-  ((offset2 + comp_div((remaining_bits2 + 7),8)) = initial_byte_len1)) ->
-  ((((((ule(of_int(0), of_int(4)) -> in_range5(y2)) and ((0 <= 2147483647) ->
+logic a : map
+
+logic x : t
+
+logic y : t
+
+logic remaining_bits : int
+
+logic offset : int
+
+logic initial_byte_len : int
+
+logic lane : t1
+
+logic i : int
+
+logic word : t1
+
+logic remaining_bytes : int
+
+logic i1 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic temp___724 : map
+
+logic temp___723 : int
+
+logic temp___722 : int
+
+logic temp___721 : t
+
+logic temp___720 : t
+
+logic temp___728 : int
+
+logic temp___727 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic o12 : int
+
+logic o13 : int
+
+logic temp___714 : int
+
+logic o14 : int
+
+logic o15 : byte
+
+logic o16 : t
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : t1
+
+logic o20 : t1
+
+logic o21 : t1
+
+logic o22 : t1
+
+logic o23 : int
+
+logic o24 : int
+
+logic temp___7141 : int
+
+logic o25 : int
+
+logic o26 : byte
+
+logic o27 : t
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : t1
+
+logic o31 : t1
+
+logic o32 : t1
+
+logic o33 : t1
+
+logic o34 : int
+
+logic o35 : int
+
+logic temp___7142 : int
+
+logic o36 : int
+
+logic o37 : byte
+
+logic o38 : t
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : t1
+
+logic o42 : t1
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic o45 : int
+
+logic o46 : int
+
+logic temp___7143 : int
+
+logic o47 : int
+
+logic o48 : byte
+
+logic o49 : t
+
+logic o50 : int
+
+logic o51 : int
+
+logic o52 : t1
+
+logic o53 : t1
+
+logic o54 : t1
+
+logic o55 : t1
+
+logic o56 : int
+
+logic o57 : int
+
+logic temp___7144 : int
+
+logic o58 : int
+
+logic o59 : byte
+
+logic o60 : t
+
+logic o61 : int
+
+logic o62 : int
+
+logic o63 : t1
+
+logic o64 : t1
+
+logic o65 : t1
+
+logic o66 : t1
+
+logic o67 : int
+
+logic o68 : int
+
+logic temp___7145 : int
+
+logic o69 : int
+
+logic o70 : byte
+
+logic o71 : t
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : t1
+
+logic o75 : t1
+
+logic o76 : t1
+
+logic o77 : t1
+
+logic o78 : int
+
+logic o79 : int
+
+logic temp___7146 : int
+
+logic o80 : int
+
+logic o81 : byte
+
+logic o82 : t
+
+logic o83 : int
+
+logic o84 : int
+
+logic o85 : t1
+
+logic o86 : t1
+
+logic o87 : t1
+
+logic o88 : t1
+
+logic o89 : int
+
+logic o90 : int
+
+logic temp___7147 : int
+
+logic o91 : int
+
+logic o92 : byte
+
+logic o93 : t
+
+logic o94 : int
+
+logic o95 : int
+
+logic o96 : t1
+
+logic o97 : t1
+
+logic o98 : t1
+
+logic o99 : t1
+
+logic o100 : lane_type
+
+logic o101 : map
+
+logic o102 : t
+
+logic o103 : t
+
+logic o104 : int
+
+logic o105 : int
+
+logic o106 : int
+
+logic o107 : int
+
+logic o108 : int
+
+logic o109 : int
+
+logic o110 : int
+
+logic temp___729 : int
+
+logic o111 : int
+
+logic o112 : int
+
+logic o113 : t1
+
+logic a1 : map
+
+logic lane1 : t1
+
+logic i2 : int
+
+logic result : bool
+
+logic result1 : t
+
+logic x1 : t
+
+logic result2 : t
+
+logic y1 : t
+
+logic result3 : int
+
+logic remaining_bits1 : int
+
+logic result4 : int
+
+logic offset1 : int
+
+logic result5 : int
+
+logic initial_byte_len1 : int
+
+logic a2 : map
+
+logic x2 : t
+
+logic y2 : t
+
+logic remaining_bits2 : int
+
+logic offset2 : int
+
+logic lane2 : t1
+
+logic i3 : int
+
+logic temp___7281 : int
+
+logic temp___7271 : int
+
+logic result6 : int
+
+logic temp___7282 : int
+
+logic result7 : int
+
+logic temp___7272 : int
+
+logic result8 : t1
+
+logic lane3 : t1
+
+logic result9 : int
+
+logic i4 : int
+
+logic result10 : t1
+
+logic lane4 : t1
+
+logic result11 : int
+
+logic i5 : int
+
+logic result12 : t1
+
+logic lane5 : t1
+
+logic result13 : int
+
+logic i6 : int
+
+logic result14 : t1
+
+logic lane6 : t1
+
+logic result15 : int
+
+logic i7 : int
+
+logic result16 : t1
+
+logic lane7 : t1
+
+logic result17 : int
+
+logic i8 : int
+
+logic result18 : t1
+
+logic lane8 : t1
+
+logic result19 : int
+
+logic i9 : int
+
+logic result20 : t1
+
+logic lane9 : t1
+
+logic result21 : int
+
+logic i10 : int
+
+logic result22 : t1
+
+logic lane10 : t1
+
+logic result23 : int
+
+logic i11 : int
+
+logic result24 : t1
+
+logic lane11 : t1
+
+logic result25 : map
+
+logic a3 : map
+
+logic result26 : t
+
+logic x3 : t
+
+logic result27 : t
+
+logic y3 : t
+
+logic result28 : int
+
+logic offset3 : int
+
+logic result29 : int
+
+logic remaining_bits3 : int
+
+logic a4 : map
+
+logic x4 : t
+
+logic y4 : t
+
+logic remaining_bits4 : int
+
+logic offset4 : int
+
+logic lane12 : t1
+
+logic i12 : int
+
+logic temp___7283 : int
+
+logic temp___7273 : int
+
+logic a5 : map
+
+logic x5 : t
+
+logic y5 : t
+
+logic remaining_bits5 : int
+
+logic offset5 : int
+
+logic lane13 : t1
+
+logic i13 : int
+
+logic temp___7284 : int
+
+logic temp___7274 : int
+
+logic a6 : map
+
+logic x6 : t
+
+logic y6 : t
+
+logic remaining_bits6 : int
+
+logic offset6 : int
+
+logic lane14 : t1
+
+logic i14 : int
+
+logic a7 : map
+
+logic x7 : t
+
+logic y7 : t
+
+logic remaining_bits7 : int
+
+logic offset7 : int
+
+logic lane15 : t1
+
+logic i15 : int
+
+logic a8 : map
+
+logic x8 : t
+
+logic y8 : t
+
+logic remaining_bits8 : int
+
+logic offset8 : int
+
+logic lane16 : t1
+
+logic i16 : int
+
+logic a9 : map
+
+logic x9 : t
+
+logic y9 : t
+
+logic remaining_bits9 : int
+
+logic offset9 : int
+
+logic lane17 : t1
+
+logic i17 : int
+
+logic result30 : t1
+
+logic word1 : t1
+
+logic result31 : int
+
+logic remaining_bytes1 : int
+
+logic result32 : int
+
+logic i18 : int
+
+logic word2 : t1
+
+logic i19 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep1(first(data1)),
+  to_rep1(last(data1)))
+
+axiom H1 : in_range2(bit_len)
+
+axiom H2 : ((length({ elts = data; rt = data1 }) <= 268435455) and
+  ((bit_len <= (length({ elts = data; rt = data1 }) * 8)) and
+  (bit_len <= 1600)))
+
+axiom H3 : (result1 = x)
+
+axiom H4 : (x1 = of_int(0))
+
+axiom H5 : in_range4(x1)
+
+axiom H6 : (result2 = y)
+
+axiom H7 : (y1 = of_int(0))
+
+axiom H8 : in_range5(y1)
+
+axiom H9 : (result3 = remaining_bits)
+
+axiom H10 : (remaining_bits1 = bit_len)
+
+axiom H11 : in_range2(remaining_bits1)
+
+axiom H12 : (result4 = offset)
+
+axiom H13 : (offset1 = 0)
+
+axiom H14 : in_range2(offset1)
+
+axiom H15 : ((o4 = (bit_len + 7)) and in_range1((bit_len + 7)))
+
+axiom H16 : (o5 = comp_div(o4,8))
+
+axiom H17 : ((o6 = o5) and in_range2(o5))
+
+axiom H18 : (result5 = initial_byte_len)
+
+axiom H19 : (initial_byte_len1 = o6)
+
+axiom H20 : in_range2(initial_byte_len1)
+
+axiom H21 : (64 <= remaining_bits1)
+
+axiom H22 : ((mod(offset2, 8) = 0) and
+  ((offset2 + comp_div((remaining_bits2 + 7),8)) = initial_byte_len1))
+
+axiom H23 : (((((ule(of_int(0), of_int(4)) -> in_range4(x2)) and
+  (ule(of_int(0), of_int(4)) -> in_range5(y2))) and ((0 <= 2147483647) ->
   in_range2(remaining_bits2))) and ((0 <= 2147483647) ->
-  in_range2(offset2))) and (ule(of_int(0), of_int(4)) -> in_range4(x2))) and
-  (64 <= remaining_bits2)) -> (((o3 = (remaining_bits2 + 7)) and
-  in_range1((remaining_bits2 + 7))) -> (not (8 = 0))))))))))))))))))))
+  in_range2(offset2))) and (64 <= remaining_bits2))
+
+axiom H24 : ((o7 = (remaining_bits2 + 7)) and
+  in_range1((remaining_bits2 + 7)))
+
+ (* File "keccak-keccakf-permutation.adb", line 30, characters 0-0 *)
+goal WP_parameter_def : (not (8 = 0))

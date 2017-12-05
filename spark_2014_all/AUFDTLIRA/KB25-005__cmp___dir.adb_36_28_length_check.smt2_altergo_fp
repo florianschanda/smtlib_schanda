@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -563,36 +563,58 @@ axiom test_value__def_axiom : ({ elts = test_value; rt = test_value1
   } = test({ elts = name; rt = name1 }, { elts =
   temp___String_Literal_133(void); rt = mk(1, 0) }))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:bool.
-  forall dir__full_name__B_1__value__assume:(int,character) farray.
-  forall dir__full_name__B_1__value__assume1:t.
-  forall dir__full_name__B_1__test_value__assume:(int,character) farray.
-  forall dir__full_name__B_1__test_value__assume1:t. forall result:bool.
-  (dynamic_property(1, 2147483647, to_rep1(first(name1)),
-  to_rep1(last(name1))) -> ((((o = is_valid({ elts = name; rt = name1 })) and
-  (o = true)) and (((not (o = true)) and (result = true)) or ((o = true) and
-  (result = false)))) -> ((not (result = true)) -> (((({ elts =
-  dir__full_name__B_1__value__assume; rt =
+logic o : bool
+
+logic dir__full_name__B_1__value__assume : (int,character) farray
+
+logic dir__full_name__B_1__value__assume1 : t
+
+logic dir__full_name__B_1__test_value__assume : (int,character) farray
+
+logic dir__full_name__B_1__test_value__assume1 : t
+
+logic us : int
+
+logic result : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(name1)),
+  to_rep1(last(name1)))
+
+axiom H1 : ((o = is_valid({ elts = name; rt = name1 })) and (o = true))
+
+axiom H2 : (((not (o = true)) -> (result = true)) and ((o = true) ->
+  (result = false)))
+
+axiom H3 : (not (result = true))
+
+axiom H4 : (({ elts = dir__full_name__B_1__value__assume; rt =
   dir__full_name__B_1__value__assume1 } = normalize_pathname({ elts = name;
   rt = name1 }, { elts = temp___String_Literal_132(void); rt = mk(1, 0) },
   of_int(1))) and dynamic_property(1, 2147483647,
   to_rep1(first(dir__full_name__B_1__value__assume1)),
-  to_rep1(last(dir__full_name__B_1__value__assume1)))) and
-  ((value = dir__full_name__B_1__value__assume) and
-  (value1 = dir__full_name__B_1__value__assume1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(value1)), to_rep1(last(value1))) -> (((({ elts =
-  dir__full_name__B_1__test_value__assume; rt =
+  to_rep1(last(dir__full_name__B_1__value__assume1))))
+
+axiom H5 : ((dir__full_name__B_1__value__assume = value) and
+  (dir__full_name__B_1__value__assume1 = value1))
+
+axiom H6 : dynamic_property(1, 2147483647, to_rep1(first(value1)),
+  to_rep1(last(value1)))
+
+axiom H7 : (({ elts = dir__full_name__B_1__test_value__assume; rt =
   dir__full_name__B_1__test_value__assume1 } = test({ elts = name; rt = name1
   }, { elts = temp___String_Literal_133(void); rt = mk(1, 0) })) and
   dynamic_property(1, 2147483647,
   to_rep1(first(dir__full_name__B_1__test_value__assume1)),
-  to_rep1(last(dir__full_name__B_1__test_value__assume1)))) and
-  ((test_value = dir__full_name__B_1__test_value__assume) and
-  (test_value1 = dir__full_name__B_1__test_value__assume1))) ->
-  (dynamic_property(1, 2147483647, to_rep1(first(test_value1)),
-  to_rep1(last(test_value1))) ->
+  to_rep1(last(dir__full_name__B_1__test_value__assume1))))
+
+axiom H8 : ((dir__full_name__B_1__test_value__assume = test_value) and
+  (dir__full_name__B_1__test_value__assume1 = test_value1))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(first(test_value1)),
+  to_rep1(last(test_value1)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
   (((to_rep1(first(value1)) <= to_rep1(last(value1))) -> (((1 <= length({
   elts = value; rt = value1 })) ->
   (((to_rep1(last(value1)) - to_rep1(first(value1))) + 1) = ((length({ elts =
@@ -601,4 +623,4 @@ goal WP_parameter_def :
   (((to_rep1(last(value1)) - to_rep1(first(value1))) + 1) = 0)))) and
   ((not (to_rep1(first(value1)) <= to_rep1(last(value1)))) -> ((1 <= length({
   elts = value; rt = value1 })) -> (0 = ((length({ elts = value; rt = value1
-  }) - 1) + 1)))))))))))))
+  }) - 1) + 1)))))

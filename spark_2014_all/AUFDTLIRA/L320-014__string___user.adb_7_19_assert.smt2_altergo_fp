@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -435,12 +435,19 @@ axiom s__def_axiom : ((s = temp___String_Literal_132(void)) and (s1 = mk(1,
 axiom s__def_axiom1 : ((s2 = temp___String_Literal_133(void)) and (s3 = mk(1,
   10)))
 
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : ((temp___String_Literal_132(void) = s) and (mk(1, 10) = s1))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(first(s3)),
+  to_rep1(last(s3)))
+
+axiom H3 : ((temp___String_Literal_133(void) = s2) and (mk(1, 10) = s3))
+
+axiom H4 : (bool_eq4(s, to_rep1(first(s1)), to_rep1(last(s1)),
+  temp___String_Literal_170(void), 1, 10) = true)
+
  (* File "user.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647, to_rep1(first(s1)),
-  to_rep1(last(s1))) -> (((temp___String_Literal_132(void) = s) and (mk(1,
-  10) = s1)) -> (dynamic_property(1, 2147483647, to_rep1(first(s3)),
-  to_rep1(last(s3))) -> (((temp___String_Literal_133(void) = s2) and (mk(1,
-  10) = s3)) -> ((bool_eq4(s, to_rep1(first(s1)), to_rep1(last(s1)),
-  temp___String_Literal_170(void), 1, 10) = true) -> (bool_eq4(s2,
-  to_rep1(first(s3)), to_rep1(last(s3)), temp___String_Literal_173(void), 1,
-  10) = true))))))
+goal WP_parameter_def : (bool_eq4(s2, to_rep1(first(s3)), to_rep1(last(s3)),
+  temp___String_Literal_173(void), 1, 10) = true)

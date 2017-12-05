@@ -172,7 +172,7 @@ function three_shape__ref___projection(a: three_shape__ref) : three_shape =
 
 type px_coord
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 9))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 9))
 
 logic bool_eq4 : int, int -> bool
 
@@ -211,7 +211,7 @@ axiom coerce_axiom1 :
 
 type py_coord
 
-predicate in_range4(x: int) = (((-1) <= x) and (x <= 49))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 49))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1688,7 +1688,7 @@ logic within_bounds__function_guard : bool, int, int -> prop
 
 type integer
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq11 : int, int -> bool
 
@@ -1830,10 +1830,12 @@ axiom possible_three_shapes__def_axiom :
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0), of_int(0))))
 
- (* File "tetris_integrity.ads", line 157, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:int. forall x:int.
-  ((tetris_integrity__possible_i_shapes__aggregate_def(temp___143(of_int(0),
+logic y : int
+
+logic x : int
+
+axiom H :
+  (tetris_integrity__possible_i_shapes__aggregate_def(temp___143(of_int(0),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(1), of_int(1),
   of_int(1), of_int(0), of_int(0), of_int(0), of_int(0), of_int(0),
   of_int(0), of_int(0), of_int(0)), temp___163(of_int(0), of_int(0),
@@ -1845,8 +1847,10 @@ goal WP_parameter_def :
   of_int(0)), temp___203(of_int(0), of_int(1), of_int(0), of_int(0),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(0), of_int(1),
   of_int(0), of_int(0), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_i_shapes) ->
-  ((tetris_integrity__possible_three_shapes__aggregate_def(temp___248(of_int(1),
+  of_int(0))) = possible_i_shapes)
+
+axiom H1 :
+  (tetris_integrity__possible_three_shapes__aggregate_def(temp___248(of_int(1),
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(1), of_int(0),
   of_int(0), of_int(0)), temp___261(of_int(0), of_int(1), of_int(1),
   of_int(0), of_int(1), of_int(0), of_int(0), of_int(1), of_int(0)),
@@ -1880,6 +1884,19 @@ goal WP_parameter_def :
   of_int(0), of_int(0), of_int(1), of_int(1), of_int(0), of_int(0),
   of_int(1), of_int(1)), temp___495(of_int(0), of_int(1), of_int(0),
   of_int(1), of_int(1), of_int(0), of_int(1), of_int(0),
-  of_int(0))) = possible_three_shapes) -> ((not (to_rep(p) = 2)) ->
-  ((not (to_rep(p) = 1)) -> (((0 <= y) and (y <= 2)) -> (((0 <= x) and
-  (x <= 2)) -> (3 <= to_rep(p)))))))))
+  of_int(0))) = possible_three_shapes)
+
+axiom H2 : (not (to_rep(p) = 2))
+
+axiom H3 : (not (to_rep(p) = 1))
+
+axiom H4 : (0 <= y)
+
+axiom H5 : (y <= 2)
+
+axiom H6 : (0 <= x)
+
+axiom H7 : (x <= 2)
+
+ (* File "tetris_integrity.ads", line 157, characters 0-0 *)
+goal WP_parameter_def : (3 <= to_rep(p))

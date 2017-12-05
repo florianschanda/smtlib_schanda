@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -37,7 +38,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
 (define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
@@ -350,6 +350,7 @@
 (declare-const o39 num_delimiters_range)
 (declare-const o40 us_split_fields2)
 (declare-const sec_3_13_2_monitoring_inputs__kwet_rst_model__assume us_rep1)
+(declare-const sec_3_13_2_monitoring_inputs__maximum_train_speed__assume Float32)
 (assert (in_range5 breaking_model))
 (assert (fp.isFinite32 t_traction_cut_off))
 (assert (= (to_rep o4) (fp #b0 #b00000000 #b00000000000000000000000)))

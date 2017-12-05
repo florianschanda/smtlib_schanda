@@ -259,13 +259,41 @@ function outer__ref___projection(a: outer__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : pt
+
+logic o1 : pt
+
+logic o2 : pt
+
+logic o3 : pt
+
+logic o4 : pt
+
+logic us_self__compl : pt
+
+logic outer_rec__split_fields : pt
+
+logic us_self__compl1 : pt
+
+logic result : pt
+
+logic outer_rec__split_fields1 : pt
+
+axiom H : (o = outer_rec__split_fields)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (o1 = o2)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o4 = o3)
+
+axiom H5 : (o4 = us_self__compl)
+
+axiom H6 : (result = outer_rec__split_fields)
+
+axiom H7 : (outer_rec__split_fields1 = us_self__compl1)
+
  (* File "nested_po.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:pt. forall o1:pt. forall o2:pt. forall o3:pt. forall o4:pt.
-  forall us_self__compl:pt. forall outer_rec__split_fields:pt.
-  forall us_self__compl1:pt. forall result:pt.
-  forall outer_rec__split_fields1:pt.
-  (not (((((((o = outer_rec__split_fields) and (o = o1)) and (o1 = o2)) and
-  (o2 = o3)) and (o4 = o3)) and (o4 = us_self__compl)) and
-  ((result = outer_rec__split_fields) and
-  (outer_rec__split_fields1 = us_self__compl1)))))
+goal WP_parameter_def : false

@@ -265,5 +265,7 @@ logic x1 : natural
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+axiom H : (x = true)
+
  (* File "default_init.ads", line 31, characters 0-0 *)
-goal WP_parameter_def : ((x = true) -> (to_int(x) = 1))
+goal WP_parameter_def : (to_int(x) = 1)

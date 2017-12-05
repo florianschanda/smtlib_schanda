@@ -235,9 +235,18 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 axiom zero_enum_map__def_axiom :
   (zero_enum_map = array_aggregates__zero_enum_map__aggregate_def(2, 0))
 
+logic m : (int,enum_t) farray
+
+logic result : (int,enum_t) farray
+
+logic m1 : (int,enum_t) farray
+
+axiom H : (array_aggregates__zero_enum_map__aggregate_def(2,
+  0) = zero_enum_map)
+
+axiom H1 : (result = m)
+
+axiom H2 : (m1 = zero_enum_map)
+
  (* File "array_aggregates.adb", line 68, characters 0-0 *)
-goal WP_parameter_def :
-  (forall m:(int,enum_t) farray. forall result:(int,enum_t) farray.
-  forall m1:(int,enum_t) farray.
-  ((array_aggregates__zero_enum_map__aggregate_def(2, 0) = zero_enum_map) ->
-  (((result = m) and (m1 = zero_enum_map)) -> (to_rep((m1[1])) = 0))))
+goal WP_parameter_def : (to_rep((m1[1])) = 0)

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -217,7 +217,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -522,84 +522,554 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "sorting.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall i:int. forall l:int. forall k:int.
-  forall temp___217:int. forall temp___216:(int,integer) farray.
-  forall temp___214:int. forall temp___213:(int,integer) farray.
-  forall o:int. forall o1:bool. forall j:int. forall o2:int. forall o3:int.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall o10:int. forall o11:int. forall o12:int.
-  forall o13:int. forall o14:int. forall o15:bool. forall result:int.
-  forall l1:int. forall a1:(int,integer) farray.
-  forall b:(int,integer) farray. forall i1:int. forall l2:int. forall k1:int.
-  forall result1:int. forall i2:int. forall a2:(int,integer) farray.
-  forall b1:(int,integer) farray. forall i3:int. forall k2:int.
-  forall result2:bool. forall a3:(int,integer) farray.
-  forall b2:(int,integer) farray. forall i4:int. forall k3:int.
-  forall a4:(int,integer) farray. forall b3:(int,integer) farray.
-  forall i5:int. forall k4:int. forall a5:(int,integer) farray.
-  forall b4:(int,integer) farray. forall i6:int. forall k5:int.
-  forall a6:(int,integer) farray. forall b5:(int,integer) farray.
-  forall i7:int. forall k6:int. forall a7:(int,integer) farray.
-  forall b6:(int,integer) farray. forall i8:int. forall k7:int.
-  forall a8:(int,integer) farray. forall b7:(int,integer) farray.
-  forall i9:int. forall k8:int. forall result3:bool. (dynamic_property(0,
-  2147483647, to_rep(a__first), to_rep(a__last)) -> (in_range2(a_first) ->
-  (in_range2(length1) -> (dynamic_property(0, 2147483647, to_rep(b__first),
-  to_rep(b__last)) -> ((((to_rep(a__first) <= a_first) and
+logic a : (int,integer) farray
+
+logic b : (int,integer) farray
+
+logic i : int
+
+logic l : int
+
+logic k : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : bool
+
+logic temp___219 : (int,integer) farray
+
+logic temp___228 : (int,integer) farray
+
+logic temp___227 : int
+
+logic temp___226 : int
+
+logic temp___225 : (int,integer) farray
+
+logic temp___223 : int
+
+logic temp___218 : (int,integer) farray
+
+logic temp___222 : (int,integer) farray
+
+logic j : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : bool
+
+logic temp___217 : int
+
+logic temp___216 : (int,integer) farray
+
+logic temp___214 : int
+
+logic temp___213 : (int,integer) farray
+
+logic o16 : int
+
+logic o17 : int
+
+logic j1 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic o35 : bool
+
+logic j2 : int
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic o48 : int
+
+logic o49 : bool
+
+logic o50 : bool
+
+logic o51 : int
+
+logic o52 : bool
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic o61 : int
+
+logic j3 : int
+
+logic o62 : int
+
+logic o63 : int
+
+logic o64 : int
+
+logic o65 : int
+
+logic o66 : int
+
+logic o67 : int
+
+logic o68 : int
+
+logic o69 : int
+
+logic o70 : int
+
+logic o71 : int
+
+logic o72 : int
+
+logic o73 : int
+
+logic o74 : int
+
+logic o75 : int
+
+logic o76 : int
+
+logic o77 : int
+
+logic o78 : int
+
+logic o79 : bool
+
+logic o80 : int
+
+logic o81 : int
+
+logic o82 : int
+
+logic result : int
+
+logic l1 : int
+
+logic a1 : (int,integer) farray
+
+logic b1 : (int,integer) farray
+
+logic i1 : int
+
+logic l2 : int
+
+logic k1 : int
+
+logic result1 : bool
+
+logic result2 : int
+
+logic i2 : int
+
+logic a2 : (int,integer) farray
+
+logic b2 : (int,integer) farray
+
+logic i3 : int
+
+logic k2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : int
+
+logic k3 : int
+
+logic a3 : (int,integer) farray
+
+logic b3 : (int,integer) farray
+
+logic result7 : int
+
+logic i4 : int
+
+logic a4 : (int,integer) farray
+
+logic b4 : (int,integer) farray
+
+logic i5 : int
+
+logic k4 : int
+
+logic a5 : (int,integer) farray
+
+logic b5 : (int,integer) farray
+
+logic i6 : int
+
+logic k5 : int
+
+logic a6 : (int,integer) farray
+
+logic b6 : (int,integer) farray
+
+logic i7 : int
+
+logic k6 : int
+
+logic a7 : (int,integer) farray
+
+logic b7 : (int,integer) farray
+
+logic i8 : int
+
+logic k7 : int
+
+logic a8 : (int,integer) farray
+
+logic b8 : (int,integer) farray
+
+logic i9 : int
+
+logic k8 : int
+
+logic a9 : (int,integer) farray
+
+logic b9 : (int,integer) farray
+
+logic i10 : int
+
+logic k9 : int
+
+logic a10 : (int,integer) farray
+
+logic b10 : (int,integer) farray
+
+logic i11 : int
+
+logic k10 : int
+
+logic a11 : (int,integer) farray
+
+logic b11 : (int,integer) farray
+
+logic i12 : int
+
+logic k11 : int
+
+logic result8 : bool
+
+logic result9 : bool
+
+logic result10 : int
+
+logic l3 : int
+
+logic l4 : int
+
+logic l5 : int
+
+logic a12 : (int,integer) farray
+
+logic b12 : (int,integer) farray
+
+logic i13 : int
+
+logic l6 : int
+
+logic k12 : int
+
+logic a13 : (int,integer) farray
+
+logic b13 : (int,integer) farray
+
+logic i14 : int
+
+logic l7 : int
+
+logic k13 : int
+
+logic a14 : (int,integer) farray
+
+logic b14 : (int,integer) farray
+
+logic i15 : int
+
+logic l8 : int
+
+logic k14 : int
+
+logic a15 : (int,integer) farray
+
+logic b15 : (int,integer) farray
+
+logic i16 : int
+
+logic l9 : int
+
+logic k15 : int
+
+logic a16 : (int,integer) farray
+
+logic b16 : (int,integer) farray
+
+logic i17 : int
+
+logic l10 : int
+
+logic k16 : int
+
+logic a17 : (int,integer) farray
+
+logic b17 : (int,integer) farray
+
+logic i18 : int
+
+logic l11 : int
+
+logic k17 : int
+
+logic a18 : (int,integer) farray
+
+logic b18 : (int,integer) farray
+
+logic i19 : int
+
+logic l12 : int
+
+logic k18 : int
+
+logic a19 : (int,integer) farray
+
+logic b19 : (int,integer) farray
+
+logic i20 : int
+
+logic l13 : int
+
+logic k19 : int
+
+logic a20 : (int,integer) farray
+
+logic b20 : (int,integer) farray
+
+logic i21 : int
+
+logic l14 : int
+
+logic k20 : int
+
+logic a21 : (int,integer) farray
+
+logic b21 : (int,integer) farray
+
+logic i22 : int
+
+logic l15 : int
+
+logic k21 : int
+
+axiom H : dynamic_property(0, 2147483647, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(a_first)
+
+axiom H2 : in_range2(length1)
+
+axiom H3 : dynamic_property(0, 2147483647, to_rep(b__first), to_rep(b__last))
+
+axiom H4 : (((to_rep(a__first) <= a_first) and
   ((a_first + length1) <= (to_rep(a__last) + 1))) and
-  (((to_rep(b__first) <= to_rep(b__last)) and
-  (length1 <= ((to_rep(b__last) - to_rep(b__first)) + 1))) or
-  ((not (to_rep(b__first) <= to_rep(b__last))) and (length1 <= 0)))) ->
-  (((0 <= 2147483647) -> in_range2(i)) -> (((0 <= 2147483647) ->
-  in_range2(l)) -> (((0 <= 2147483647) -> in_range2(k)) -> ((({
-  int__content = result } = { int__content = l }) and (l1 = 1)) ->
-  ((((forall j1:int. (((0 <= j1) and (j1 <= 2147483647)) ->
-     (((j1 * l2) <  length1) -> (sorted({ elts = a1; rt =
-     mk(to_rep(a__first), to_rep(a__last)) }, (a_first + (j1 * l2)), min(l2,
-     (length1 - (j1 * l2)))) = true)))) and
-  (perm({ elts = a; rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts =
-  a1; rt = mk(to_rep(a__first), to_rep(a__last)) }, a_first,
-  length1) = true)) and (1 <= l2)) -> (((((0 <= 2147483647) ->
-  in_range2(i1)) and ((0 <= 2147483647) -> in_range2(l2))) and
-  ((0 <= 2147483647) -> in_range2(k1))) -> (((i1 = result1) and (i2 = 0)) ->
-  (((((temp___217 = k1) and ((temp___216 = a1) and ((temp___214 = i2) and
-  ((temp___213 = b) and (((((((i3 <= length1) and ((i3 <  length1) ->
-  (mod(i3, (l2 * 2)) = 0))) and
-  (forall j1:int. (((0 <= j1) and (j1 <= 2147483647)) ->
-  ((((j1 * l2) * 2) <  i3) -> (sorted({ elts = a2; rt = mk(to_rep(a__first),
-  to_rep(a__last)) }, (a_first + ((j1 * l2) * 2)), min((l2 * 2),
-  (length1 - ((j1 * l2) * 2)))) = true))))) and
-  (forall j1:int. (((0 <= j1) and (j1 <= 2147483647)) ->
-  (((j1 * l2) <  (length1 - i3)) -> (sorted({ elts = a2; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, ((a_first + i3) + (j1 * l2)),
-  min(l2, ((length1 - i3) - (j1 * l2)))) = true))))) and (perm({ elts = a;
+  (((to_rep(b__first) <= to_rep(b__last)) ->
+  (length1 <= ((to_rep(b__last) - to_rep(b__first)) + 1))) and
+  ((not (to_rep(b__first) <= to_rep(b__last))) -> (length1 <= 0))))
+
+axiom H5 : ((0 <= 2147483647) -> in_range2(i))
+
+axiom H6 : ((0 <= 2147483647) -> in_range2(l))
+
+axiom H7 : ((0 <= 2147483647) -> in_range2(k))
+
+axiom H8 : (result = l)
+
+axiom H9 : (l1 = 1)
+
+axiom H10 :
+  (((forall j4:int. (((0 <= j4) and (j4 <= 2147483647)) ->
+    (((j4 * l2) <  length1) -> (sorted({ elts = a1; rt = mk(to_rep(a__first),
+    to_rep(a__last)) }, (a_first + (j4 * l2)), min(l2,
+    (length1 - (j4 * l2)))) = true)))) and (perm({ elts = a; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, { elts = a1; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, a_first, length1) = true)) and
+  (1 <= l2))
+
+axiom H11 : ((((0 <= 2147483647) -> in_range2(i1)) and ((0 <= 2147483647) ->
+  in_range2(l2))) and ((0 <= 2147483647) -> in_range2(k1)))
+
+axiom H12 : (i1 = result2)
+
+axiom H13 : (i2 = 0)
+
+axiom H14 : (((temp___217 = k1) and ((temp___216 = a1) and
+  ((temp___214 = i2) and ((temp___213 = b1) and (((((((i3 <= length1) and
+  ((i3 <  length1) -> (mod(i3, (l2 * 2)) = 0))) and
+  (forall j4:int. (((0 <= j4) and (j4 <= 2147483647)) ->
+  ((((j4 * l2) * 2) <  i3) -> (sorted({ elts = a2; rt = mk(to_rep(a__first),
+  to_rep(a__last)) }, (a_first + ((j4 * l2) * 2)), min((l2 * 2),
+  (length1 - ((j4 * l2) * 2)))) = true))))) and
+  (forall j4:int. (((0 <= j4) and (j4 <= 2147483647)) ->
+  (((j4 * l2) <  (length1 - i3)) -> (sorted({ elts = a2; rt =
+  mk(to_rep(a__first), to_rep(a__last)) }, ((a_first + i3) + (j4 * l2)),
+  min(l2, ((length1 - i3) - (j4 * l2)))) = true))))) and (perm({ elts = a;
   rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts = a2; rt =
   mk(to_rep(a__first), to_rep(a__last)) }, a_first, length1) = true)) and
   (1 <= l2)) and ((((0 <= 2147483647) -> in_range2(i3)) and
-  ((0 <= 2147483647) -> in_range2(k2))) and ((((k2 = k3) and ((i3 = i4) and
-  ((b1 = b2) and (a2 = a3)))) and ((k4 = k2) and ((i5 = i3) and
-  ((b3 = b1) and (a4 = a2))))) and (((((o = (length1 - l2)) and
-  in_range1((length1 - l2))) and (((i3 <  o) and (o1 = true)) or
-  ((not (i3 <  o)) and (o1 = false)))) and (((not (o1 = true)) and
-  (result2 = true)) or ((o1 = true) and (result2 = false)))) and
-  (result2 = true))))))))) and ((({ int__content = k5 } = { int__content = k3
-  }) and (({ int__content = i6 } = { int__content = i4 }) and (({
-  map__content = b4 } = { map__content = b2 }) and ({ map__content = a5 } = {
-  map__content = a3 })))) and ((k6 = k4) and ((i7 = i5) and ((b5 = b3) and
-  (a6 = a4)))))) and (((k7 = k5) and ((i8 = i6) and ((b6 = b4) and ({
-  map__content = a7 } = { map__content = a5 })))) and ((k8 = k6) and
-  ((i9 = i7) and ((b7 = b5) and (a8 = a6)))))) -> ((o15 = perm({ elts = a;
-  rt = mk(to_rep(a__first), to_rep(a__last)) }, { elts = a7; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, a_first, length1)) ->
-  (((0 <= j) and (j <= 2147483647)) -> ((((((o2 = (j * l2)) and
-  in_range1((j * l2))) and (o3 = (o2 * 2))) and ((o4 = o3) and
-  in_range1(o3))) and (((o4 <  length1) and (result3 = true)) or
-  ((not (o4 <  length1)) and (result3 = false)))) -> ((result3 = true) ->
-  (((((((((o7 = (j * l2)) and in_range1((j * l2))) and (o8 = (o7 * 2))) and
-  ((o9 = o8) and in_range1(o8))) and (o10 = (length1 - o9))) and
-  ((o11 = o10) and in_range1(o10))) and (((o12 = (l2 * 2)) and
-  in_range1((l2 * 2))) and (o13 = min(o12, o11)))) and ((o14 = o13) and
-  in_range2(o13))) -> ((((o5 = (j * l2)) and in_range1((j * l2))) and
-  (o6 = (o5 * 2))) -> in_range1(o6)))))))))))))))))))))
+  ((0 <= 2147483647) -> in_range2(k2))) and ((((k2 = k4) and ((i3 = i5) and
+  ((b2 = b4) and (a2 = a4)))) and ((k5 = k2) and ((i6 = i3) and
+  ((b5 = b2) and (a5 = a2))))) and (((((o51 = (length1 - l2)) and
+  in_range1((length1 - l2))) and (((i3 <  o51) -> (o52 = true)) and
+  ((not (i3 <  o51)) -> (o52 = false)))) and (((not (o52 = true)) ->
+  (result5 = true)) and ((o52 = true) -> (result5 = false)))) and
+  (result5 = true))))))))) and (((k8 = k4) and ((i9 = i5) and ((b8 = b4) and
+  (a8 = a4)))) and ((k9 = k5) and ((i10 = i6) and ((b9 = b5) and
+  (a9 = a5))))))
+
+axiom H15 : (k10 = k8)
+
+axiom H16 : (i11 = i9)
+
+axiom H17 : (b10 = b8)
+
+axiom H18 : (a10 = a8)
+
+axiom H19 : (k11 = k9)
+
+axiom H20 : (i12 = i10)
+
+axiom H21 : (b11 = b9)
+
+axiom H22 : (a11 = a9)
+
+axiom H23 : (o79 = perm({ elts = a; rt = mk(to_rep(a__first),
+  to_rep(a__last)) }, { elts = a10; rt = mk(to_rep(a__first),
+  to_rep(a__last)) }, a_first, length1))
+
+axiom H24 : (0 <= j3)
+
+axiom H25 : (j3 <= 2147483647)
+
+axiom H26 : ((o62 = (j3 * l2)) and in_range1((j3 * l2)))
+
+axiom H27 : (o63 = (o62 * 2))
+
+axiom H28 : ((o64 = o63) and in_range1(o63))
+
+axiom H29 : (((o64 <  length1) -> (result8 = true)) and
+  ((not (o64 <  length1)) -> (result8 = false)))
+
+axiom H30 : (result8 = true)
+
+axiom H31 : ((o71 = (j3 * l2)) and in_range1((j3 * l2)))
+
+axiom H32 : (o72 = (o71 * 2))
+
+axiom H33 : ((o73 = o72) and in_range1(o72))
+
+axiom H34 : (o74 = (length1 - o73))
+
+axiom H35 : ((o75 = o74) and in_range1(o74))
+
+axiom H36 : ((o76 = (l2 * 2)) and in_range1((l2 * 2)))
+
+axiom H37 : (o77 = min(o76, o75))
+
+axiom H38 : ((o78 = o77) and in_range2(o77))
+
+axiom H39 : ((o65 = (j3 * l2)) and in_range1((j3 * l2)))
+
+axiom H40 : (o66 = (o65 * 2))
+
+ (* File "sorting.ads", line 13, characters 0-0 *)
+goal WP_parameter_def : in_range1(o66)

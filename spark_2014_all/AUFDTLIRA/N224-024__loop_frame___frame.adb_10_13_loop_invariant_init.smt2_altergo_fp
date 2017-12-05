@@ -271,17 +271,123 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic a : (int,natural) farray
+
+logic j : int
+
+logic temp___176 : (int,natural) farray
+
+logic temp___175 : int
+
+logic temp___178 : (int,natural) farray
+
+logic temp___179 : (int,natural) farray
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic k : int
+
+logic o2 : int
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : natural
+
+logic o7 : int
+
+logic o8 : natural
+
+logic o9 : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result : int
+
+logic j1 : int
+
+logic result1 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic j2 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic j3 : int
+
+logic result4 : (int,natural) farray
+
+logic a4 : (int,natural) farray
+
+logic a5 : (int,natural) farray
+
+logic j4 : int
+
+logic a6 : (int,natural) farray
+
+logic j5 : int
+
+logic a7 : (int,natural) farray
+
+logic j6 : int
+
+logic a8 : (int,natural) farray
+
+logic j7 : int
+
+logic a9 : (int,natural) farray
+
+logic j8 : int
+
+logic a10 : (int,natural) farray
+
+logic j9 : int
+
+logic a11 : (int,natural) farray
+
+logic j10 : int
+
+logic a12 : (int,natural) farray
+
+logic j11 : int
+
+axiom H : (result = j)
+
+axiom H1 : (j1 = 1)
+
+axiom H2 : (1 <= j1)
+
+axiom H3 : (j1 <= 10)
+
+axiom H4 : ((10 <  to_rep((a[j1]))) -> (to_rep(o) = 10))
+
+axiom H5 : ((10 <  to_rep((a[j1]))) -> (o1 = (a[j1 <- o])))
+
+axiom H6 : ((10 <  to_rep((a[j1]))) -> (result1 = a))
+
+axiom H7 : ((10 <  to_rep((a[j1]))) -> (a2 = o1))
+
+axiom H8 : ((not (10 <  to_rep((a[j1])))) -> (a2 = a))
+
+axiom H9 : ((not (10 <  to_rep((a[j1])))) -> (a2 = a1))
+
+logic k1 : int
+
+axiom H10 : (1 <= k1)
+
+axiom H11 : (k1 <= j1)
+
  (* File "frame.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall j:int. forall o:natural.
-  forall o1:(int,natural) farray. forall a1:(int,natural) farray.
-  forall result:int. forall j1:int. forall result1:(int,natural) farray.
-  forall a2:(int,natural) farray. ((({ int__content = result } = {
-  int__content = j }) and (j1 = 1)) -> (((1 <= j1) and (j1 <= 10)) ->
-  ((((10 <  to_rep((a[j1]))) and (((to_rep(o) = 10) and
-  (o1 = (a[j1 <- o]))) and (({ map__content = result1 } = { map__content = a
-  }) and (a2 = o1)))) or ((not (10 <  to_rep((a[j1])))) and ((a2 = a) and
-  (a2 = a1)))) ->
-  (forall k:int. (((1 <= k) and (k <= j1)) -> (((10 <  to_rep((a[k]))) ->
-  (to_rep((a2[k])) = 10)) and ((not (10 <  to_rep((a[k])))) ->
-  (to_rep((a2[k])) = to_rep((a[k])))))))))))
+goal WP_parameter_def : (((10 <  to_rep((a[k1]))) ->
+  (to_rep((a2[k1])) = 10)) and ((not (10 <  to_rep((a[k1])))) ->
+  (to_rep((a2[k1])) = to_rep((a[k1])))))

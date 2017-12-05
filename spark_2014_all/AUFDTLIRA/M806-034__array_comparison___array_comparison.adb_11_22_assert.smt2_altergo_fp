@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -531,29 +531,69 @@ axiom def_axiom2 :
   ((array_comparison__p__z__aggregate_def(temp___147, temp___148,
   temp___149)[temp___150]) = of_rep1(temp___147)))))))))
 
+logic x : (int,natural) farray
+
+logic y : (int,natural) farray
+
+logic z : (int,natural) farray
+
+logic temp___157 : (int,natural) farray
+
+logic temp___159 : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic x1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic y1 : (int,natural) farray
+
+logic result2 : (int,natural) farray
+
+logic z1 : (int,natural) farray
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = array_comparison__p__x__aggregate_def(1))
+
+axiom H2 : (to_rep(x__first) = to_rep(first(mk(1, 10))))
+
+axiom H3 : (to_rep(x__last) = to_rep(last(mk(1, 10))))
+
+axiom H4 : dynamic_property((- 2147483648), 2147483647, to_rep(x__first),
+  to_rep(x__last))
+
+axiom H5 : (result1 = y)
+
+axiom H6 : (y1 = array_comparison__p__y__aggregate_def(1))
+
+axiom H7 : (to_rep(y__first) = to_rep(first(mk(1, 9))))
+
+axiom H8 : (to_rep(y__last) = to_rep(last(mk(1, 9))))
+
+axiom H9 : dynamic_property((- 2147483648), 2147483647, to_rep(y__first),
+  to_rep(y__last))
+
+axiom H10 : (result2 = z)
+
+axiom H11 : (z1 = array_comparison__p__z__aggregate_def(1, 0, 9))
+
+axiom H12 : (to_rep(z__first) = to_rep(first(mk(1, 20))))
+
+axiom H13 : (to_rep(z__last) = to_rep(last(mk(1, 20))))
+
+axiom H14 : dynamic_property((- 2147483648), 2147483647, to_rep(z__first),
+  to_rep(z__last))
+
+axiom H15 : (0 <  compare(x1, to_rep(x__first), to_rep(x__last), y1,
+  to_rep(y__first), to_rep(y__last)))
+
+axiom H16 : (bool_eq4(x1, 1, 5, z1, 1, 5) = true)
+
+axiom H17 : (0 <  compare(x1, to_rep(x__first), to_rep(x__last), z1,
+  to_rep(z__first), to_rep(z__last)))
+
  (* File "array_comparison.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:(int,natural) farray. forall y:(int,natural) farray.
-  forall z:(int,natural) farray. forall result:(int,natural) farray.
-  forall x1:(int,natural) farray. forall result1:(int,natural) farray.
-  forall y1:(int,natural) farray. forall result2:(int,natural) farray.
-  forall z1:(int,natural) farray. ((((result = x) and
-  (x1 = array_comparison__p__x__aggregate_def(1))) and
-  ((to_rep(x__first) = to_rep(first(mk(1, 10)))) and
-  (to_rep(x__last) = to_rep(last(mk(1, 10)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(x__first),
-  to_rep(x__last)) -> ((((result1 = y) and
-  (y1 = array_comparison__p__y__aggregate_def(1))) and
-  ((to_rep(y__first) = to_rep(first(mk(1, 9)))) and
-  (to_rep(y__last) = to_rep(last(mk(1, 9)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(y__first),
-  to_rep(y__last)) -> ((((result2 = z) and
-  (z1 = array_comparison__p__z__aggregate_def(1, 0, 9))) and
-  ((to_rep(z__first) = to_rep(first(mk(1, 20)))) and
-  (to_rep(z__last) = to_rep(last(mk(1, 20)))))) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep(z__first),
-  to_rep(z__last)) -> ((0 <  compare(x1, to_rep(x__first), to_rep(x__last),
-  y1, to_rep(y__first), to_rep(y__last))) -> ((bool_eq4(x1, 1, 5, z1, 1,
-  5) = true) -> ((0 <  compare(x1, to_rep(x__first), to_rep(x__last), z1,
-  to_rep(z__first), to_rep(z__last))) -> (compare(x1, to_rep(x__first),
-  to_rep(x__last), z1, to_rep(z__first), to_rep(z__last)) <  0)))))))))))
+goal WP_parameter_def : (compare(x1, to_rep(x__first), to_rep(x__last), z1,
+  to_rep(z__first), to_rep(z__last)) <  0)

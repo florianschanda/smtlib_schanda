@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -533,23 +533,58 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ret:(int,character) farray. forall pos:int. forall i:int.
-  forall result:int. forall i1:int. forall ret1:(int,character) farray.
-  forall pos1:int. forall i2:int. forall result1:int. forall pos2:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(str1)),
-  to_rep1(last(str1))) -> ((dynamic_property2(to_rep1(first(str1)),
-  to_rep1(last(str1)), to_rep1(ret__first), to_rep1(ret__last)) and
+logic ret : (int,character) farray
+
+logic pos : int
+
+logic i : int
+
+logic o : int
+
+logic result : int
+
+logic i1 : int
+
+logic ret1 : (int,character) farray
+
+logic pos1 : int
+
+logic i2 : int
+
+logic result1 : int
+
+logic pos2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : (dynamic_property2(to_rep1(first(str1)), to_rep1(last(str1)),
+  to_rep1(ret__first), to_rep1(ret__last)) and
   ((to_rep1(ret__first) = to_rep1(first(str1))) and
-  (to_rep1(ret__last) = to_rep1(last(str1))))) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(pos)) -> (((result = i) and
-  (i1 = to_rep1(first(str1)))) -> (((to_rep1(first(str1)) <= i1) and
-  (i1 <= to_rep1(last(str1)))) ->
-  ((((forall temp___217:int. (((to_rep1(ret__first) <= temp___217) and
-     (temp___217 <= to_rep1(ret__last))) -> ((i2 <= temp___217) ->
-     ((ret1[temp___217]) = (ret[temp___217]))))) and
-  (((-2147483648) <= 2147483647) -> in_range1(pos1))) and
-  ((to_rep1(first(str1)) <= i2) and (i2 <= to_rep1(last(str1))))) ->
-  (in_range4(to_rep((str[i2]))) -> (((result1 = pos1) and
-  (pos2 = (65 + (to_rep((str[i2])) - 97)))) -> in_range3(pos2))))))))))
+  (to_rep1(ret__last) = to_rep1(last(str1)))))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(pos))
+
+axiom H3 : (result = i)
+
+axiom H4 : (i1 = to_rep1(first(str1)))
+
+axiom H5 : (to_rep1(first(str1)) <= i1)
+
+axiom H6 : (i1 <= to_rep1(last(str1)))
+
+axiom H7 :
+  (((forall temp___217:int. (((to_rep1(ret__first) <= temp___217) and
+    (temp___217 <= to_rep1(ret__last))) -> ((i2 <= temp___217) ->
+    ((ret1[temp___217]) = (ret[temp___217]))))) and
+  (((- 2147483648) <= 2147483647) -> in_range1(pos1))) and
+  ((to_rep1(first(str1)) <= i2) and (i2 <= to_rep1(last(str1)))))
+
+axiom H8 : in_range4(to_rep((str[i2])))
+
+axiom H9 : (result1 = pos1)
+
+axiom H10 : (pos2 = (65 + (to_rep((str[i2])) - 97)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range3(pos2)

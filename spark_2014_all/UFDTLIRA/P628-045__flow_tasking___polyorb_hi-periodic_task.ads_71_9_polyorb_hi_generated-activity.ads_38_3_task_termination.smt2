@@ -100,6 +100,7 @@
 (define-fun dynamic_invariant2 ((temp___expr_319 Int) (temp___is_init_316 Bool) (temp___skip_constant_317 Bool) (temp___do_toplevel_318 Bool)) Bool (=> (or (= temp___is_init_316 true) (<= 0 97)) (in_range1 temp___expr_319)))
 (assert (= dispatch_offset (milliseconds 100)))
 (assert (= task_period (milliseconds 500)))
-(assert (not true))
+(assert false)
+(assert (not false))
 (check-sat)
 (exit)

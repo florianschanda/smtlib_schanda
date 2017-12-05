@@ -105,12 +105,39 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic us4 : int
+
+logic us5 : int
+
+logic us6 : int
+
+logic us7 : int
+
+logic us8 : int
+
+axiom H : ((us = 100) and in_range(100))
+
+axiom H1 : ((us1 = 100) and in_range(100))
+
+axiom H2 : ((us2 = 100) and in_range(100))
+
+axiom H3 : ((us3 = 100) and in_range(100))
+
+axiom H4 : ((us4 = 100) and in_range(100))
+
+axiom H5 : ((us5 = 100) and in_range(100))
+
+axiom H6 : ((us6 = 100) and in_range(100))
+
+axiom H7 : ((us7 = 100) and in_range(100))
+
  (* File "my_lists.ads", line 32, characters 0-0 *)
-goal WP_parameter_def :
-  (forall us:int. forall us1:int. forall us2:int. forall us3:int.
-  forall us4:int. forall us5:int. forall us6:int. forall us7:int.
-  (((us = 100) and in_range(100)) -> (((us1 = 100) and in_range(100)) ->
-  (((us2 = 100) and in_range(100)) -> (((us3 = 100) and in_range(100)) ->
-  (((us4 = 100) and in_range(100)) -> (((us5 = 100) and in_range(100)) ->
-  (((us6 = 100) and in_range(100)) -> (((us7 = 100) and in_range(100)) ->
-  in_range(100))))))))))
+goal WP_parameter_def : in_range(100)

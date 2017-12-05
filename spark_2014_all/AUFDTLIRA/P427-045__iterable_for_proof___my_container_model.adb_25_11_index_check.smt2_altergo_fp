@@ -334,7 +334,8 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (has_element(c, { us_split_fields1 = {
+  rec__my_container_model__cursor__index = p } }) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((has_element(c, { us_split_fields1 = {
-  rec__my_container_model__cursor__index = p } }) = true) ->
-  (1 <= to_rep(p)))
+goal WP_parameter_def : (1 <= to_rep(p))

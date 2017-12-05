@@ -349,12 +349,31 @@ type t1b__ref = { t1b__content : us_rep1
 
 function t1b__ref___projection(a: t1b__ref) : us_rep1 = (a).t1b__content
 
+logic t__split_discrs : token_kind
+
+logic o : token_kind
+
+logic o1 : token_kind
+
+logic temp___194 : token_kind
+
+logic temp___1941 : us_rep
+
+logic temp___1942 : bool
+
+axiom H : ((t__attr__constrained = false) and (to_rep(t__split_discrs) = 1))
+
+axiom H1 : (to_rep(o) = 1)
+
+axiom H2 : (o = o1)
+
+axiom H3 : (temp___194 = o1)
+
+axiom H4 : (dummy = temp___1941)
+
+axiom H5 : (true = temp___1942)
+
+axiom H6 : (t__attr__constrained = true)
+
  (* File "lexer.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t__split_discrs:token_kind. forall o:token_kind.
-  forall o1:token_kind. forall temp___194:token_kind.
-  forall temp___1941:us_rep. forall temp___1942:bool.
-  (((t__attr__constrained = false) and (to_rep(t__split_discrs) = 1)) ->
-  ((((to_rep(o) = 1) and (o = o1)) and ((temp___194 = o1) and
-  ((dummy = temp___1941) and (true = temp___1942)))) ->
-  ((t__attr__constrained = true) -> (temp___194 = t__split_discrs)))))
+goal WP_parameter_def : (temp___194 = t__split_discrs)

@@ -358,89 +358,139 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:bool. forall r__split_fields1:unsigned_byte.
-  forall r__split_fields2:unsigned_byte.
-  forall records__make_optional_pair_b__result:bool.
-  forall records__make_optional_pair_b__result1:unsigned_byte.
-  forall records__make_optional_pair_b__result2:unsigned_byte.
-  forall result:bool. forall result1:unsigned_byte.
-  forall result2:unsigned_byte. forall r__split_fields3:bool.
-  forall r__split_fields4:unsigned_byte.
-  forall r__split_fields5:unsigned_byte. forall result3:bool.
-  forall result4:unsigned_byte. forall result5:unsigned_byte.
-  forall records__make_optional_pair_b__result3:bool.
-  forall records__make_optional_pair_b__result4:unsigned_byte.
-  forall records__make_optional_pair_b__result5:unsigned_byte.
-  forall records__make_optional_pair_b__result6:bool.
-  forall records__make_optional_pair_b__result7:unsigned_byte.
-  forall records__make_optional_pair_b__result8:unsigned_byte.
-  forall records__make_optional_pair_b__result9:bool.
-  forall records__make_optional_pair_b__result10:unsigned_byte.
-  forall records__make_optional_pair_b__result11:unsigned_byte.
-  forall r__split_fields6:bool. forall r__split_fields7:unsigned_byte.
-  forall r__split_fields8:unsigned_byte.
-  forall records__make_optional_pair_b__result12:bool.
-  forall records__make_optional_pair_b__result13:unsigned_byte.
-  forall records__make_optional_pair_b__result14:unsigned_byte.
-  forall r__split_fields9:us_split_fields2.
-  forall records__make_optional_pair_b__result15:us_rep1.
-  (forall result6:bool. forall result7:unsigned_byte.
-  forall result8:unsigned_byte. (((((((result = r__split_fields) and
-  ((result1 = r__split_fields1) and (result2 = r__split_fields2))) and
-  ((of_int(1) = r__split_fields3) and ((x = r__split_fields4) and
-  (x1 = r__split_fields5)))) and
-  ((((records__make_optional_pair_b__result6 = records__make_optional_pair_b__result3) and
+logic r__split_fields : bool
+
+logic r__split_fields1 : unsigned_byte
+
+logic r__split_fields2 : unsigned_byte
+
+logic records__make_optional_pair_b__result : bool
+
+logic records__make_optional_pair_b__result1 : unsigned_byte
+
+logic records__make_optional_pair_b__result2 : unsigned_byte
+
+logic result : bool
+
+logic result1 : unsigned_byte
+
+logic result2 : unsigned_byte
+
+logic r__split_fields3 : bool
+
+logic r__split_fields4 : unsigned_byte
+
+logic r__split_fields5 : unsigned_byte
+
+logic result3 : bool
+
+logic result4 : unsigned_byte
+
+logic result5 : unsigned_byte
+
+logic records__make_optional_pair_b__result3 : bool
+
+logic records__make_optional_pair_b__result4 : unsigned_byte
+
+logic records__make_optional_pair_b__result5 : unsigned_byte
+
+logic records__make_optional_pair_b__result6 : bool
+
+logic records__make_optional_pair_b__result7 : unsigned_byte
+
+logic records__make_optional_pair_b__result8 : unsigned_byte
+
+logic records__make_optional_pair_b__result9 : bool
+
+logic records__make_optional_pair_b__result10 : unsigned_byte
+
+logic records__make_optional_pair_b__result11 : unsigned_byte
+
+logic r__split_fields6 : bool
+
+logic r__split_fields7 : unsigned_byte
+
+logic r__split_fields8 : unsigned_byte
+
+logic records__make_optional_pair_b__result12 : bool
+
+logic records__make_optional_pair_b__result13 : unsigned_byte
+
+logic records__make_optional_pair_b__result14 : unsigned_byte
+
+logic r__split_fields9 : bool
+
+logic r__split_fields10 : unsigned_byte
+
+logic r__split_fields11 : unsigned_byte
+
+logic records__make_optional_pair_b__result15 : bool
+
+logic records__make_optional_pair_b__result16 : unsigned_byte
+
+logic records__make_optional_pair_b__result17 : unsigned_byte
+
+logic result6 : bool
+
+logic result7 : unsigned_byte
+
+logic result8 : unsigned_byte
+
+axiom H : (result = r__split_fields)
+
+axiom H1 : (result1 = r__split_fields1)
+
+axiom H2 : (result2 = r__split_fields2)
+
+axiom H3 : (of_int(1) = r__split_fields3)
+
+axiom H4 : ((x = r__split_fields4) and (x1 = r__split_fields5))
+
+axiom H5 :
+  ((records__make_optional_pair_b__result6 = records__make_optional_pair_b__result3) and
   ((records__make_optional_pair_b__result7 = records__make_optional_pair_b__result4) and
-  (records__make_optional_pair_b__result8 = records__make_optional_pair_b__result5))) and
-  ({ us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
-  records__make_optional_pair_b__result9;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result10;
-  rec__records_prooffuncs__pair__b = records__make_optional_pair_b__result11
-  } } } } = { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists =
-  records__make_optional_pair_b__result3;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result4;
-  rec__records_prooffuncs__pair__b = records__make_optional_pair_b__result5 }
-  } } })) and (((result3 = records__make_optional_pair_b__result) and
-  ((result4 = records__make_optional_pair_b__result1) and
-  (result5 = records__make_optional_pair_b__result2))) and
-  ((records__make_optional_pair_b__result3 = r__split_fields3) and
+  (records__make_optional_pair_b__result8 = records__make_optional_pair_b__result5)))
+
+axiom H6 :
+  ((records__make_optional_pair_b__result9 = records__make_optional_pair_b__result3) and
+  ((records__make_optional_pair_b__result10 = records__make_optional_pair_b__result4) and
+  (records__make_optional_pair_b__result11 = records__make_optional_pair_b__result5)))
+
+axiom H7 : (result3 = records__make_optional_pair_b__result)
+
+axiom H8 : (result4 = records__make_optional_pair_b__result1)
+
+axiom H9 : (result5 = records__make_optional_pair_b__result2)
+
+axiom H10 : ((records__make_optional_pair_b__result3 = r__split_fields3) and
   ((records__make_optional_pair_b__result4 = r__split_fields4) and
-  (records__make_optional_pair_b__result5 = r__split_fields5)))))) and ((({
-  optional_pair__content = { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists =
-  records__make_optional_pair_b__result12;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result13;
-  rec__records_prooffuncs__pair__b = records__make_optional_pair_b__result14
-  } } } } } = { optional_pair__content = { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists =
-  records__make_optional_pair_b__result6;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result7;
-  rec__records_prooffuncs__pair__b = records__make_optional_pair_b__result8 }
-  } } } }) and ((r__split_fields6 = r__split_fields3) and
+  (records__make_optional_pair_b__result5 = r__split_fields5)))
+
+axiom H11 :
+  ((records__make_optional_pair_b__result12 = records__make_optional_pair_b__result6) and
+  ((records__make_optional_pair_b__result13 = records__make_optional_pair_b__result7) and
+  (records__make_optional_pair_b__result14 = records__make_optional_pair_b__result8)))
+
+axiom H12 : ((r__split_fields6 = r__split_fields3) and
   ((r__split_fields7 = r__split_fields4) and
-  (r__split_fields8 = r__split_fields5)))) and
-  ((records__make_optional_pair_b__result15 = { us_split_fields3 = {
-  rec__records_prooffuncs__optional_pair__exists =
-  records__make_optional_pair_b__result9;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result10;
-  rec__records_prooffuncs__pair__b = records__make_optional_pair_b__result11
-  } } } }) and (r__split_fields9 = {
-  rec__records_prooffuncs__optional_pair__exists = r__split_fields3;
-  rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
-  rec__records_prooffuncs__pair__a = r__split_fields4;
-  rec__records_prooffuncs__pair__b = r__split_fields5 } } })))) and
-  ((result6 = records__make_optional_pair_b__result12) and
+  (r__split_fields8 = r__split_fields5)))
+
+axiom H13 :
+  ((records__make_optional_pair_b__result15 = records__make_optional_pair_b__result9) and
+  ((records__make_optional_pair_b__result16 = records__make_optional_pair_b__result10) and
+  (records__make_optional_pair_b__result17 = records__make_optional_pair_b__result11)))
+
+axiom H14 : ((r__split_fields9 = r__split_fields3) and
+  ((r__split_fields10 = r__split_fields4) and
+  (r__split_fields11 = r__split_fields5)))
+
+axiom H15 : ((result6 = records__make_optional_pair_b__result12) and
   ((result7 = records__make_optional_pair_b__result13) and
-  (result8 = records__make_optional_pair_b__result14)))) -> (bool_eq4({
-  us_split_fields3 = { rec__records_prooffuncs__optional_pair__exists =
+  (result8 = records__make_optional_pair_b__result14)))
+
+ (* File "records_prooffuncs.ads", line 19, characters 0-0 *)
+goal WP_parameter_def : (bool_eq4({ us_split_fields3 = {
+  rec__records_prooffuncs__optional_pair__exists =
   records__make_optional_pair_b__result12;
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = records__make_optional_pair_b__result13;
@@ -449,4 +499,4 @@ goal WP_parameter_def :
   rec__records_prooffuncs__optional_pair__exists = of_int(1);
   rec__records_prooffuncs__optional_pair__the_pair = { us_split_fields1 = {
   rec__records_prooffuncs__pair__a = x; rec__records_prooffuncs__pair__b = x1
-  } } } }) = true))))
+  } } } }) = true)

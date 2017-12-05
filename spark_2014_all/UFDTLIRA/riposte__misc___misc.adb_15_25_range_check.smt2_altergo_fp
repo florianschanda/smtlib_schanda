@@ -113,7 +113,15 @@ logic foo__function_guard : int, unit -> prop
 
 axiom foo__post_axiom : in_range(foo(void))
 
+logic x : int
+
+logic o : int
+
+logic o1 : int
+
+axiom H : ((0 <= 2) -> in_range(x))
+
+axiom H1 : ((o = foo(void)) and in_range(o))
+
  (* File "misc.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall o:int. (((0 <= 2) -> in_range(x)) ->
-  (((o = foo(void)) and in_range(o)) -> (not (o = 2)))))
+goal WP_parameter_def : (not (o = 2))

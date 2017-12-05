@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const pr_var Int)
 (declare-const gn Int)
+(declare-const o Int)
 (assert (in_range pr_var))
 (assert (in_range gn))
 (assert (not (in_range (+ gn pr_var))))

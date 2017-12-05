@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -385,105 +385,378 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 axiom max__def_axiom : ((max = of_rep(2147483647)) and
   ((max1 = of_rep1(59)) and (max2 = of_rep2(59))))
 
- (* File "time.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result____split_fields:natural.
-  forall result____split_fields1:minutes_t.
-  forall result____split_fields2:seconds_t.
-  forall time__t_increment__result:natural.
-  forall time__t_increment__result1:minutes_t.
-  forall time__t_increment__result2:seconds_t. forall o:seconds_t.
-  forall o1:minutes_t. forall o2:natural. forall o3:natural.
-  forall o4:minutes_t. forall o5:seconds_t. forall temp___166:natural.
-  forall temp___1661:minutes_t. forall temp___1662:seconds_t. forall o6:int.
-  forall o7:seconds_t. forall o8:natural. forall o9:minutes_t.
-  forall o10:seconds_t. forall temp___165:natural.
-  forall temp___1651:minutes_t. forall temp___1652:seconds_t.
-  forall o11:seconds_t. forall o12:natural. forall o13:minutes_t.
-  forall o14:seconds_t. forall temp___157:natural.
-  forall temp___1571:minutes_t. forall temp___1572:seconds_t. forall o15:int.
-  forall o16:minutes_t. forall o17:natural. forall o18:minutes_t.
-  forall o19:seconds_t. forall temp___163:natural.
-  forall temp___1631:minutes_t. forall temp___1632:seconds_t.
-  forall o20:minutes_t. forall o21:natural. forall o22:minutes_t.
-  forall o23:seconds_t. forall temp___159:natural.
-  forall temp___1591:minutes_t. forall temp___1592:seconds_t. forall o24:int.
-  forall o25:natural. forall o26:natural. forall o27:minutes_t.
-  forall o28:seconds_t. forall temp___161:natural.
-  forall temp___1611:minutes_t. forall temp___1612:seconds_t.
-  forall result:natural. forall result1:minutes_t. forall result2:seconds_t.
-  forall result____split_fields3:natural.
-  forall result____split_fields4:minutes_t.
-  forall result____split_fields5:seconds_t. forall result3:natural.
-  forall result4:minutes_t. forall result5:seconds_t.
-  forall result____split_fields6:natural.
-  forall result____split_fields7:minutes_t.
-  forall result____split_fields8:seconds_t. forall result6:natural.
-  forall result7:minutes_t. forall result8:seconds_t.
-  forall time__t_increment__result3:natural.
-  forall time__t_increment__result4:minutes_t.
-  forall time__t_increment__result5:seconds_t. forall result9:natural.
-  forall result10:minutes_t. forall result11:seconds_t.
-  forall result____split_fields9:natural.
-  forall result____split_fields10:minutes_t.
-  forall result____split_fields11:seconds_t. forall result12:natural.
-  forall result13:minutes_t. forall result14:seconds_t.
-  forall result____split_fields12:natural.
-  forall result____split_fields13:minutes_t.
-  forall result____split_fields14:seconds_t. forall result15:natural.
-  forall result16:minutes_t. forall result17:seconds_t.
-  forall time__t_increment__result6:us_rep.
-  forall result18:us_split_fields__ref.
-  forall result____split_fields15:us_split_fields.
-  forall result19:us_split_fields__ref.
-  forall result____split_fields16:us_split_fields. forall result20:t__ref.
-  forall time__t_increment__result7:us_rep.
-  forall result____split_fields17:us_split_fields__ref.
-  forall time__t_increment__result8:t__ref.
-  forall result____split_fields18:us_split_fields.
-  forall time__t_increment__result9:us_rep.
-  forall result____split_fields19:us_split_fields__ref.
-  forall time__t_increment__result10:t__ref.
-  forall result____split_fields20:us_split_fields.
-  forall time__t_increment__result11:us_rep.
-  forall result____split_fields21:us_split_fields__ref.
-  forall time__t_increment__result12:t__ref.
-  forall result____split_fields22:us_split_fields.
-  forall time__t_increment__result13:us_rep.
-  forall result____split_fields23:us_split_fields__ref.
-  forall time__t_increment__result14:t__ref.
-  forall result____split_fields24:us_split_fields.
-  forall time__t_increment__result15:us_rep. (((((to_rep2(o) = 59) and
-  ((to_rep1(o1) = 59) and ((to_rep(o2) = 2147483647) and ((o2 = o3) and
-  ((o1 = o4) and (o = o5)))))) and ((temp___166 = o3) and
-  ((temp___1661 = o4) and (temp___1662 = o5)))) and ((temp___166 = max) and
-  ((temp___1661 = max1) and (temp___1662 = max2)))) -> ((not (bool_eq6({
-  us_split_fields1 = { rec__time__t__hours = x; rec__time__t__minutes = x1;
-  rec__time__t__seconds = x2 } }, { us_split_fields1 = {
-  rec__time__t__hours = max; rec__time__t__minutes = max1;
-  rec__time__t__seconds = max2 } }) = true)) ->
-  ((((((result = result____split_fields) and
+logic result____split_fields : natural
+
+logic result____split_fields1 : minutes_t
+
+logic result____split_fields2 : seconds_t
+
+logic time__t_increment__result : natural
+
+logic time__t_increment__result1 : minutes_t
+
+logic time__t_increment__result2 : seconds_t
+
+logic o : seconds_t
+
+logic o1 : minutes_t
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic o4 : minutes_t
+
+logic o5 : seconds_t
+
+logic temp___166 : natural
+
+logic temp___1661 : minutes_t
+
+logic temp___1662 : seconds_t
+
+logic o6 : int
+
+logic o7 : seconds_t
+
+logic o8 : natural
+
+logic o9 : minutes_t
+
+logic o10 : seconds_t
+
+logic temp___165 : natural
+
+logic temp___1651 : minutes_t
+
+logic temp___1652 : seconds_t
+
+logic o11 : seconds_t
+
+logic o12 : natural
+
+logic o13 : minutes_t
+
+logic o14 : seconds_t
+
+logic temp___157 : natural
+
+logic temp___1571 : minutes_t
+
+logic temp___1572 : seconds_t
+
+logic o15 : int
+
+logic o16 : minutes_t
+
+logic o17 : natural
+
+logic o18 : minutes_t
+
+logic o19 : seconds_t
+
+logic temp___163 : natural
+
+logic temp___1631 : minutes_t
+
+logic temp___1632 : seconds_t
+
+logic o20 : minutes_t
+
+logic o21 : natural
+
+logic o22 : minutes_t
+
+logic o23 : seconds_t
+
+logic temp___159 : natural
+
+logic temp___1591 : minutes_t
+
+logic temp___1592 : seconds_t
+
+logic o24 : int
+
+logic o25 : natural
+
+logic o26 : natural
+
+logic o27 : minutes_t
+
+logic o28 : seconds_t
+
+logic temp___161 : natural
+
+logic temp___1611 : minutes_t
+
+logic temp___1612 : seconds_t
+
+logic o29 : int
+
+logic result : natural
+
+logic result1 : minutes_t
+
+logic result2 : seconds_t
+
+logic result____split_fields3 : natural
+
+logic result____split_fields4 : minutes_t
+
+logic result____split_fields5 : seconds_t
+
+logic result3 : natural
+
+logic result4 : minutes_t
+
+logic result5 : seconds_t
+
+logic result____split_fields6 : natural
+
+logic result____split_fields7 : minutes_t
+
+logic result____split_fields8 : seconds_t
+
+logic result6 : natural
+
+logic result7 : minutes_t
+
+logic result8 : seconds_t
+
+logic time__t_increment__result3 : natural
+
+logic time__t_increment__result4 : minutes_t
+
+logic time__t_increment__result5 : seconds_t
+
+logic result9 : natural
+
+logic result10 : minutes_t
+
+logic result11 : seconds_t
+
+logic result____split_fields9 : natural
+
+logic result____split_fields10 : minutes_t
+
+logic result____split_fields11 : seconds_t
+
+logic result12 : natural
+
+logic result13 : minutes_t
+
+logic result14 : seconds_t
+
+logic result____split_fields12 : natural
+
+logic result____split_fields13 : minutes_t
+
+logic result____split_fields14 : seconds_t
+
+logic result15 : natural
+
+logic result16 : minutes_t
+
+logic result17 : seconds_t
+
+logic time__t_increment__result6 : natural
+
+logic time__t_increment__result7 : minutes_t
+
+logic time__t_increment__result8 : seconds_t
+
+logic result18 : natural
+
+logic result19 : minutes_t
+
+logic result20 : seconds_t
+
+logic result____split_fields15 : natural
+
+logic result____split_fields16 : minutes_t
+
+logic result____split_fields17 : seconds_t
+
+logic result21 : natural
+
+logic result22 : minutes_t
+
+logic result23 : seconds_t
+
+logic result____split_fields18 : natural
+
+logic result____split_fields19 : minutes_t
+
+logic result____split_fields20 : seconds_t
+
+logic result24 : natural
+
+logic result25 : minutes_t
+
+logic result26 : seconds_t
+
+logic time__t_increment__result9 : natural
+
+logic time__t_increment__result10 : minutes_t
+
+logic time__t_increment__result11 : seconds_t
+
+logic result____split_fields21 : natural
+
+logic result____split_fields22 : minutes_t
+
+logic result____split_fields23 : seconds_t
+
+logic time__t_increment__result12 : natural
+
+logic time__t_increment__result13 : minutes_t
+
+logic time__t_increment__result14 : seconds_t
+
+logic result____split_fields24 : natural
+
+logic result____split_fields25 : minutes_t
+
+logic result____split_fields26 : seconds_t
+
+logic time__t_increment__result15 : natural
+
+logic time__t_increment__result16 : minutes_t
+
+logic time__t_increment__result17 : seconds_t
+
+logic result____split_fields27 : natural
+
+logic result____split_fields28 : minutes_t
+
+logic result____split_fields29 : seconds_t
+
+logic time__t_increment__result18 : natural
+
+logic time__t_increment__result19 : minutes_t
+
+logic time__t_increment__result20 : seconds_t
+
+logic result____split_fields30 : natural
+
+logic result____split_fields31 : minutes_t
+
+logic result____split_fields32 : seconds_t
+
+logic time__t_increment__result21 : natural
+
+logic time__t_increment__result22 : minutes_t
+
+logic time__t_increment__result23 : seconds_t
+
+logic result____split_fields33 : natural
+
+logic result____split_fields34 : minutes_t
+
+logic result____split_fields35 : seconds_t
+
+logic time__t_increment__result24 : natural
+
+logic time__t_increment__result25 : minutes_t
+
+logic time__t_increment__result26 : seconds_t
+
+logic result____split_fields36 : natural
+
+logic result____split_fields37 : minutes_t
+
+logic result____split_fields38 : seconds_t
+
+logic time__t_increment__result27 : natural
+
+logic time__t_increment__result28 : minutes_t
+
+logic time__t_increment__result29 : seconds_t
+
+logic result____split_fields39 : natural
+
+logic result____split_fields40 : minutes_t
+
+logic result____split_fields41 : seconds_t
+
+logic time__t_increment__result30 : natural
+
+logic time__t_increment__result31 : minutes_t
+
+logic time__t_increment__result32 : seconds_t
+
+logic result____split_fields42 : natural
+
+logic result____split_fields43 : minutes_t
+
+logic result____split_fields44 : seconds_t
+
+logic time__t_increment__result33 : natural
+
+logic time__t_increment__result34 : minutes_t
+
+logic time__t_increment__result35 : seconds_t
+
+axiom H : (to_rep2(o) = 59)
+
+axiom H1 : (to_rep1(o1) = 59)
+
+axiom H2 : (to_rep(o2) = 2147483647)
+
+axiom H3 : (o2 = o3)
+
+axiom H4 : (o1 = o4)
+
+axiom H5 : (o = o5)
+
+axiom H6 : (temp___166 = o3)
+
+axiom H7 : (temp___1661 = o4)
+
+axiom H8 : (temp___1662 = o5)
+
+axiom H9 : ((temp___166 = max) and ((temp___1661 = max1) and
+  (temp___1662 = max2)))
+
+axiom H10 : (not (bool_eq6({ us_split_fields1 = { rec__time__t__hours = x;
+  rec__time__t__minutes = x1; rec__time__t__seconds = x2 } }, {
+  us_split_fields1 = { rec__time__t__hours = max; rec__time__t__minutes =
+  max1; rec__time__t__seconds = max2 } }) = true))
+
+axiom H11 : ((result = result____split_fields) and
   ((result1 = result____split_fields1) and
-  (result2 = result____split_fields2))) and
-  ((x = result____split_fields3) and ((x1 = result____split_fields4) and
-  (x2 = result____split_fields5)))) and
-  ((((time__t_increment__result12 = time__t_increment__result10) and
-  (result____split_fields21 = result____split_fields19)) and
-  ((time__t_increment__result13 = time__t_increment__result11) and
-  (result____split_fields22 = result____split_fields20))) and
-  (((to_rep2(x2) <  59) and ((((time__t_increment__result10 = { t__content =
-  { us_split_fields1 = { rec__time__t__hours = time__t_increment__result3;
-  rec__time__t__minutes = time__t_increment__result4; rec__time__t__seconds =
-  time__t_increment__result5 } } }) and (result____split_fields19 = {
-  us_split_fields__content = { rec__time__t__hours = result____split_fields6;
-  rec__time__t__minutes = result____split_fields7; rec__time__t__seconds =
-  result____split_fields8 } })) and ((time__t_increment__result11 = {
-  us_split_fields1 = { rec__time__t__hours = time__t_increment__result3;
-  rec__time__t__minutes = time__t_increment__result4; rec__time__t__seconds =
-  time__t_increment__result5 } }) and (result____split_fields20 = {
-  rec__time__t__hours = result____split_fields6; rec__time__t__minutes =
-  result____split_fields7; rec__time__t__seconds = result____split_fields8
-  }))) and (((((((o6 = (to_rep2(result____split_fields5) + 1)) and
+  (result2 = result____split_fields2)))
+
+axiom H12 : ((result____split_fields3 = x) and
+  ((result____split_fields4 = x1) and (result____split_fields5 = x2)))
+
+axiom H13 :
+  (((((time__t_increment__result24 = time__t_increment__result18) and
+  ((time__t_increment__result25 = time__t_increment__result19) and
+  (time__t_increment__result26 = time__t_increment__result20))) and
+  ((result____split_fields33 = result____split_fields27) and
+  ((result____split_fields34 = result____split_fields28) and
+  (result____split_fields35 = result____split_fields29)))) and
+  (((time__t_increment__result27 = time__t_increment__result21) and
+  ((time__t_increment__result28 = time__t_increment__result22) and
+  (time__t_increment__result29 = time__t_increment__result23))) and
+  ((result____split_fields36 = result____split_fields30) and
+  ((result____split_fields37 = result____split_fields31) and
+  (result____split_fields38 = result____split_fields32))))) and
+  (((to_rep2(x2) <  59) ->
+  (((((time__t_increment__result18 = time__t_increment__result3) and
+  ((time__t_increment__result19 = time__t_increment__result4) and
+  (time__t_increment__result20 = time__t_increment__result5))) and
+  ((result____split_fields27 = result____split_fields6) and
+  ((result____split_fields28 = result____split_fields7) and
+  (result____split_fields29 = result____split_fields8)))) and
+  (((time__t_increment__result21 = time__t_increment__result3) and
+  ((time__t_increment__result22 = time__t_increment__result4) and
+  (time__t_increment__result23 = time__t_increment__result5))) and
+  ((result____split_fields30 = result____split_fields6) and
+  ((result____split_fields31 = result____split_fields7) and
+  (result____split_fields32 = result____split_fields8))))) and
+  (((((((o6 = (to_rep2(result____split_fields5) + 1)) and
   in_range4((to_rep2(result____split_fields5) + 1))) and
   (to_rep2(o7) = o6)) and ((result____split_fields3 = o8) and
   ((result____split_fields4 = o9) and (o7 = o10)))) and
@@ -491,37 +764,49 @@ goal WP_parameter_def :
   (((result3 = result____split_fields3) and
   ((result4 = result____split_fields4) and
   (result5 = result____split_fields5))) and
-  ((temp___165 = result____split_fields6) and
-  ((temp___1651 = result____split_fields7) and
-  (temp___1652 = result____split_fields8))))) and
+  ((result____split_fields6 = temp___165) and
+  ((result____split_fields7 = temp___1651) and
+  (result____split_fields8 = temp___1652))))) and
   (((result6 = time__t_increment__result) and
   ((result7 = time__t_increment__result1) and
   (result8 = time__t_increment__result2))) and
   ((time__t_increment__result3 = result____split_fields6) and
   ((time__t_increment__result4 = result____split_fields7) and
-  (time__t_increment__result5 = result____split_fields8))))))) or
-  ((not (to_rep2(x2) <  59)) and
-  ((((time__t_increment__result10 = time__t_increment__result8) and
-  (result____split_fields19 = result____split_fields17)) and
-  ((time__t_increment__result11 = time__t_increment__result9) and
-  (result____split_fields20 = result____split_fields18))) and
+  (time__t_increment__result5 = result____split_fields8))))))) and
+  ((not (to_rep2(x2) <  59)) ->
+  (((((time__t_increment__result18 = time__t_increment__result12) and
+  ((time__t_increment__result19 = time__t_increment__result13) and
+  (time__t_increment__result20 = time__t_increment__result14))) and
+  ((result____split_fields27 = result____split_fields21) and
+  ((result____split_fields28 = result____split_fields22) and
+  (result____split_fields29 = result____split_fields23)))) and
+  (((time__t_increment__result21 = time__t_increment__result15) and
+  ((time__t_increment__result22 = time__t_increment__result16) and
+  (time__t_increment__result23 = time__t_increment__result17))) and
+  ((result____split_fields30 = result____split_fields24) and
+  ((result____split_fields31 = result____split_fields25) and
+  (result____split_fields32 = result____split_fields26))))) and
   (((((to_rep2(o11) = 0) and ((result____split_fields3 = o12) and
   ((result____split_fields4 = o13) and (o11 = o14)))) and
   ((temp___157 = o12) and ((temp___1571 = o13) and (temp___1572 = o14)))) and
   (((result9 = result____split_fields3) and
   ((result10 = result____split_fields4) and
   (result11 = result____split_fields5))) and
-  ((temp___157 = result____split_fields9) and
-  ((temp___1571 = result____split_fields10) and
-  (temp___1572 = result____split_fields11))))) and (((to_rep1(x1) <  59) and
-  ((((time__t_increment__result8 = { t__content = time__t_increment__result6
-  }) and (result____split_fields17 = { us_split_fields__content = {
-  rec__time__t__hours = result____split_fields12; rec__time__t__minutes =
-  result____split_fields13; rec__time__t__seconds = result____split_fields14
-  } })) and ((time__t_increment__result9 = time__t_increment__result6) and
-  (result____split_fields18 = { rec__time__t__hours =
-  result____split_fields12; rec__time__t__minutes = result____split_fields13;
-  rec__time__t__seconds = result____split_fields14 }))) and
+  ((result____split_fields9 = temp___157) and
+  ((result____split_fields10 = temp___1571) and
+  (result____split_fields11 = temp___1572))))) and (((to_rep1(x1) <  59) ->
+  (((((time__t_increment__result12 = time__t_increment__result6) and
+  ((time__t_increment__result13 = time__t_increment__result7) and
+  (time__t_increment__result14 = time__t_increment__result8))) and
+  ((result____split_fields21 = result____split_fields12) and
+  ((result____split_fields22 = result____split_fields13) and
+  (result____split_fields23 = result____split_fields14)))) and
+  (((time__t_increment__result15 = time__t_increment__result6) and
+  ((time__t_increment__result16 = time__t_increment__result7) and
+  (time__t_increment__result17 = time__t_increment__result8))) and
+  ((result____split_fields24 = result____split_fields12) and
+  ((result____split_fields25 = result____split_fields13) and
+  (result____split_fields26 = result____split_fields14))))) and
   (((((((o15 = (to_rep1(result____split_fields10) + 1)) and
   in_range3((to_rep1(result____split_fields10) + 1))) and
   (to_rep1(o16) = o15)) and ((result____split_fields9 = o17) and
@@ -530,61 +815,88 @@ goal WP_parameter_def :
   (((result12 = result____split_fields9) and
   ((result13 = result____split_fields10) and
   (result14 = result____split_fields11))) and
-  ((temp___163 = result____split_fields12) and
-  ((temp___1631 = result____split_fields13) and
-  (temp___1632 = result____split_fields14))))) and
+  ((result____split_fields12 = temp___163) and
+  ((result____split_fields13 = temp___1631) and
+  (result____split_fields14 = temp___1632))))) and
   (((result15 = time__t_increment__result) and
   ((result16 = time__t_increment__result1) and
   (result17 = time__t_increment__result2))) and
-  (time__t_increment__result6 = { us_split_fields1 = { rec__time__t__hours =
-  result____split_fields12; rec__time__t__minutes = result____split_fields13;
-  rec__time__t__seconds = result____split_fields14 } }))))) or
-  ((not (to_rep1(x1) <  59)) and ((((time__t_increment__result8 = {
-  t__content = time__t_increment__result7 }) and
-  (result____split_fields17 = { us_split_fields__content =
-  result____split_fields16 })) and
-  ((time__t_increment__result9 = time__t_increment__result7) and
-  (result____split_fields18 = result____split_fields16))) and
+  ((time__t_increment__result6 = result____split_fields12) and
+  ((time__t_increment__result7 = result____split_fields13) and
+  (time__t_increment__result8 = result____split_fields14))))))) and
+  ((not (to_rep1(x1) <  59)) ->
+  (((((time__t_increment__result12 = time__t_increment__result9) and
+  ((time__t_increment__result13 = time__t_increment__result10) and
+  (time__t_increment__result14 = time__t_increment__result11))) and
+  ((result____split_fields21 = result____split_fields18) and
+  ((result____split_fields22 = result____split_fields19) and
+  (result____split_fields23 = result____split_fields20)))) and
+  (((time__t_increment__result15 = time__t_increment__result9) and
+  ((time__t_increment__result16 = time__t_increment__result10) and
+  (time__t_increment__result17 = time__t_increment__result11))) and
+  ((result____split_fields24 = result____split_fields18) and
+  ((result____split_fields25 = result____split_fields19) and
+  (result____split_fields26 = result____split_fields20))))) and
   (((((to_rep1(o20) = 0) and ((result____split_fields9 = o21) and
   ((o20 = o22) and (result____split_fields11 = o23)))) and
   ((temp___159 = o21) and ((temp___1591 = o22) and (temp___1592 = o23)))) and
-  ((result18 = { us_split_fields__content = { rec__time__t__hours =
-  result____split_fields9; rec__time__t__minutes = result____split_fields10;
-  rec__time__t__seconds = result____split_fields11 } }) and
-  (result____split_fields15 = { rec__time__t__hours = temp___159;
-  rec__time__t__minutes = temp___1591; rec__time__t__seconds = temp___1592
-  }))) and
-  (((((((o24 = (to_rep((result____split_fields15).rec__time__t__hours) + 1)) and
-  in_range1((to_rep((result____split_fields15).rec__time__t__hours) + 1))) and
+  (((result18 = result____split_fields9) and
+  ((result19 = result____split_fields10) and
+  (result20 = result____split_fields11))) and
+  ((result____split_fields15 = temp___159) and
+  ((result____split_fields16 = temp___1591) and
+  (result____split_fields17 = temp___1592))))) and
+  (((((((o24 = (to_rep(result____split_fields15) + 1)) and
+  in_range1((to_rep(result____split_fields15) + 1))) and
   (to_rep(o25) = o24)) and ((o25 = o26) and
-  (((result____split_fields15).rec__time__t__minutes = o27) and
-  ((result____split_fields15).rec__time__t__seconds = o28)))) and
-  ((o26 = temp___161) and ((o27 = temp___1611) and (o28 = temp___1612)))) and
-  ((result19 = { us_split_fields__content = result____split_fields15 }) and
-  (result____split_fields16 = { rec__time__t__hours = temp___161;
-  rec__time__t__minutes = temp___1611; rec__time__t__seconds = temp___1612
-  }))) and ((result20 = { t__content = { us_split_fields1 = {
-  rec__time__t__hours = time__t_increment__result; rec__time__t__minutes =
-  time__t_increment__result1; rec__time__t__seconds =
-  time__t_increment__result2 } } }) and (time__t_increment__result7 = {
-  us_split_fields1 = result____split_fields16 }))))))))))))) and
-  (((time__t_increment__result14 = time__t_increment__result12) and
-  (result____split_fields23 = result____split_fields21)) and
-  ((time__t_increment__result15 = time__t_increment__result13) and
-  (result____split_fields24 = result____split_fields22)))) ->
-  ((((bool_lt(to_rep2(x2), 59) = true) and
-  (((to_rep2((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__seconds) = (to_rep2(x2) + 1)) and
-  (to_rep1((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__minutes) = to_rep1(x1))) and
-  (to_rep((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__hours) = to_rep(x)))) or
-  (not (bool_lt(to_rep2(x2), 59) = true))) ->
-  ((((match_bool(bool_eq(to_rep2(x2), 59), bool_lt(to_rep1(x1), 59),
-  false) = true) and
-  (((to_rep2((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__seconds) = 0) and
-  (to_rep1((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__minutes) = (to_rep1(x1) + 1))) and
-  (to_rep((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__hours) = to_rep(x)))) or
-  (not (match_bool(bool_eq(to_rep2(x2), 59), bool_lt(to_rep1(x1), 59),
-  false) = true))) -> ((match_bool(bool_eq(to_rep2(x2), 59),
-  bool_eq(to_rep1(x1), 59), false) = true) ->
-  (((to_rep2((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__seconds) = 0) and
-  (to_rep1((((time__t_increment__result14).t__content).us_split_fields1).rec__time__t__minutes) = 0)) ->
-  in_range1((to_rep(x) + 1))))))))))
+  ((result____split_fields16 = o27) and
+  (result____split_fields17 = o28)))) and ((temp___161 = o26) and
+  ((temp___1611 = o27) and (temp___1612 = o28)))) and
+  (((result21 = result____split_fields15) and
+  ((result22 = result____split_fields16) and
+  (result23 = result____split_fields17))) and
+  ((result____split_fields18 = temp___161) and
+  ((result____split_fields19 = temp___1611) and
+  (result____split_fields20 = temp___1612))))) and
+  (((result24 = time__t_increment__result) and
+  ((result25 = time__t_increment__result1) and
+  (result26 = time__t_increment__result2))) and
+  ((time__t_increment__result9 = result____split_fields18) and
+  ((time__t_increment__result10 = result____split_fields19) and
+  (time__t_increment__result11 = result____split_fields20))))))))))))))
+
+axiom H14 : ((time__t_increment__result30 = time__t_increment__result24) and
+  ((time__t_increment__result31 = time__t_increment__result25) and
+  (time__t_increment__result32 = time__t_increment__result26)))
+
+axiom H15 : ((result____split_fields39 = result____split_fields33) and
+  ((result____split_fields40 = result____split_fields34) and
+  (result____split_fields41 = result____split_fields35)))
+
+axiom H16 : ((time__t_increment__result33 = time__t_increment__result27) and
+  ((time__t_increment__result34 = time__t_increment__result28) and
+  (time__t_increment__result35 = time__t_increment__result29)))
+
+axiom H17 : ((result____split_fields42 = result____split_fields36) and
+  ((result____split_fields43 = result____split_fields37) and
+  (result____split_fields44 = result____split_fields38)))
+
+axiom H18 : ((bool_lt(to_rep2(x2), 59) = true) ->
+  (((to_rep2(time__t_increment__result32) = (to_rep2(x2) + 1)) and
+  (to_rep1(time__t_increment__result31) = to_rep1(x1))) and
+  (to_rep(time__t_increment__result30) = to_rep(x))))
+
+axiom H19 : ((match_bool(bool_eq(to_rep2(x2), 59), bool_lt(to_rep1(x1), 59),
+  false) = true) -> (((to_rep2(time__t_increment__result32) = 0) and
+  (to_rep1(time__t_increment__result31) = (to_rep1(x1) + 1))) and
+  (to_rep(time__t_increment__result30) = to_rep(x))))
+
+axiom H20 : (match_bool(bool_eq(to_rep2(x2), 59), bool_eq(to_rep1(x1), 59),
+  false) = true)
+
+axiom H21 : (to_rep2(time__t_increment__result32) = 0)
+
+axiom H22 : (to_rep1(time__t_increment__result31) = 0)
+
+ (* File "time.ads", line 6, characters 0-0 *)
+goal WP_parameter_def : in_range1((to_rep(x) + 1))

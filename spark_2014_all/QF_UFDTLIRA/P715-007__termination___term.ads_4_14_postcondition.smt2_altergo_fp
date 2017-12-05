@@ -137,31 +137,59 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall term__loop_except_on_zero__result:int. forall result:int.
-  forall term__loop_except_on_zero__result1:int. forall result1:int.
-  forall term__loop_except_on_zero__result2:int.
-  forall term__loop_except_on_zero__result3:int.
-  forall term__loop_except_on_zero__result4:int.
-  forall term__loop_except_on_zero__result5:int.
-  forall term__loop_except_on_zero__result6:int.
-  forall term__loop_except_on_zero__result7:int.
-  forall term__loop_except_on_zero__result8:int.
-  (forall result2:int. ((in_range1(x) and
-  (((((term__loop_except_on_zero__result3 = term__loop_except_on_zero__result5) and
-  (term__loop_except_on_zero__result6 = term__loop_except_on_zero__result4)) and
-  (((x = 0) and
-  (((term__loop_except_on_zero__result1 = term__loop_except_on_zero__result3) and
-  (term__loop_except_on_zero__result4 = term__loop_except_on_zero__result1)) and
+logic term__loop_except_on_zero__result : int
+
+logic result : int
+
+logic term__loop_except_on_zero__result1 : int
+
+logic result1 : int
+
+logic term__loop_except_on_zero__result2 : int
+
+logic term__loop_except_on_zero__result3 : int
+
+logic term__loop_except_on_zero__result4 : int
+
+logic term__loop_except_on_zero__result5 : int
+
+logic term__loop_except_on_zero__result6 : int
+
+logic term__loop_except_on_zero__result7 : int
+
+logic term__loop_except_on_zero__result8 : int
+
+logic term__loop_except_on_zero__result9 : int
+
+logic term__loop_except_on_zero__result10 : int
+
+logic result2 : int
+
+axiom H : in_range1(x)
+
+axiom H1 :
+  (((term__loop_except_on_zero__result7 = term__loop_except_on_zero__result5) and
+  (term__loop_except_on_zero__result8 = term__loop_except_on_zero__result6)) and
+  (((x = 0) ->
+  (((term__loop_except_on_zero__result1 = term__loop_except_on_zero__result5) and
+  (term__loop_except_on_zero__result6 = term__loop_except_on_zero__result1)) and
   ((result = term__loop_except_on_zero__result) and
-  (term__loop_except_on_zero__result1 = 0)))) or ((not (x = 0)) and
-  (((term__loop_except_on_zero__result2 = term__loop_except_on_zero__result3) and
-  (term__loop_except_on_zero__result4 = term__loop_except_on_zero__result2)) and
+  (term__loop_except_on_zero__result1 = 0)))) and ((not (x = 0)) ->
+  (((term__loop_except_on_zero__result2 = term__loop_except_on_zero__result5) and
+  (term__loop_except_on_zero__result6 = term__loop_except_on_zero__result2)) and
   (((of_int(1) = true) -> (not (of_int(1) = true))) and
   ((result1 = term__loop_except_on_zero__result) and
-  (term__loop_except_on_zero__result2 = 0))))))) and
-  ((term__loop_except_on_zero__result7 = term__loop_except_on_zero__result5) and
-  (term__loop_except_on_zero__result8 = term__loop_except_on_zero__result6))) and
-  (result2 = term__loop_except_on_zero__result7))) -> ((x = 0) ->
-  (term__loop_except_on_zero__result7 = 0)))))
+  (term__loop_except_on_zero__result2 = 0)))))))
+
+axiom H2 :
+  (term__loop_except_on_zero__result9 = term__loop_except_on_zero__result7)
+
+axiom H3 :
+  (term__loop_except_on_zero__result10 = term__loop_except_on_zero__result8)
+
+axiom H4 : (result2 = term__loop_except_on_zero__result9)
+
+axiom H5 : (x = 0)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (term__loop_except_on_zero__result9 = 0)

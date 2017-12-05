@@ -99,6 +99,8 @@
 (declare-const x86__signedlt_32__result4 Bool)
 (declare-const x86__signedlt_32__result5 Bool)
 (declare-const result1 Bool)
+(assert true)
+(assert true)
 (assert (= x86__signedlt_32__result1 x86__signedlt_32__result2))
 (assert (= x86__signedlt_32__result3 x86__signedlt_32__result1))
 (assert (= result x86__signedlt_32__result))

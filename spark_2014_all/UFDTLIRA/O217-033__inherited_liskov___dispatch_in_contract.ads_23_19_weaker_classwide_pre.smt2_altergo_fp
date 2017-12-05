@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -412,14 +412,19 @@ logic o__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "dispatch_in_contract.adb", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o__split_fields:integer. forall o__split_fields1:integer.
-  forall o__split_fields2:us_private. ((less_than_max__2({ us_split_fields3 =
-  { rec__dispatch_in_contract__child__f2 = o__split_fields;
-  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true) ->
-  (less_than_max__2({ us_split_fields3 = {
+logic o__split_fields : integer
+
+logic o__split_fields1 : integer
+
+logic o__split_fields2 : us_private
+
+axiom H : (less_than_max__2({ us_split_fields3 = {
   rec__dispatch_in_contract__child__f2 = o__split_fields;
   rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
-  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)))
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)
+
+ (* File "dispatch_in_contract.adb", line 13, characters 0-0 *)
+goal WP_parameter_def : (less_than_max__2({ us_split_fields3 = {
+  rec__dispatch_in_contract__child__f2 = o__split_fields;
+  rec__dispatch_in_contract__root__f11 = o__split_fields1; rec__ext__1 =
+  o__split_fields2 }; attr__tag1 = o__attr__tag }) = true)

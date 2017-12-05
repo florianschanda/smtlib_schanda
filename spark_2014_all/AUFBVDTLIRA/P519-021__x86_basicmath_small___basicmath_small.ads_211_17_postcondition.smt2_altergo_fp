@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1549,14 +1549,63 @@ axiom readmem64__post_axiom :
   of_int1(18374686479671623680)) = mul1(toBig(to_rep((x86__memory[add1(addr,
   of_int1(7))]))), of_int1(72057594037927936))))))
 
- (* File "x86.ads", line 561, characters 0-0 *)
-goal WP_parameter_def :
-  (forall xmm0:t1. forall rsp:t1. forall memory:(t1,unsigned8) farray.
-  forall o:t1. forall o1:t1. forall o2:t1. forall o3:t1. forall result:t1.
-  forall xmm01:t1. forall result1:t1. forall xmm02:t1. forall result2:t1.
-  forall rsp1:t1. forall xmm03:t1. forall rsp2:t1. forall xmm04:t1.
-  forall rsp3:t1. ((((rsp = of_int1(12105675798371893247)) and
-  (((((o = readmem64(of_int1(4198872), memory)) and ((((((((bw_and1(o,
+logic fs : t1
+
+logic gs : t1
+
+logic stackaddresssize : t
+
+logic xmm0 : t1
+
+logic rsp : t1
+
+logic rdi : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic o : t1
+
+logic o1 : t1
+
+logic o2 : t1
+
+logic o3 : t1
+
+logic result : t1
+
+logic xmm01 : t1
+
+logic result1 : t1
+
+logic xmm02 : t1
+
+logic result2 : t1
+
+logic rsp1 : t1
+
+logic xmm03 : t1
+
+logic rsp2 : t1
+
+logic xmm04 : t1
+
+logic rsp3 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : (rsp = of_int1(12105675798371893247))
+
+axiom H7 : ((o = readmem64(of_int1(4198872), memory)) and ((((((((bw_and1(o,
   of_int1(255)) = toBig(to_rep((memory[of_int1(4198872)])))) and (bw_and1(o,
   of_int1(65280)) = mul1(toBig(to_rep((memory[add1(of_int1(4198872),
   of_int1(1))]))), of_int1(256)))) and (bw_and1(o,
@@ -1571,9 +1620,16 @@ goal WP_parameter_def :
   of_int1(71776119061217280)) = mul1(toBig(to_rep((memory[add1(of_int1(4198872),
   of_int1(6))]))), of_int1(281474976710656)))) and (bw_and1(o,
   of_int1(18374686479671623680)) = mul1(toBig(to_rep((memory[add1(of_int1(4198872),
-  of_int1(7))]))), of_int1(72057594037927936))))) and (o1 = mul1(xmm0,
-  o))) and ((result = xmm0) and (xmm01 = o1))) and
-  (((((o2 = readmem64(of_int1(4198864), memory)) and ((((((((bw_and1(o2,
+  of_int1(7))]))), of_int1(72057594037927936)))))
+
+axiom H8 : (o1 = mul1(xmm0, o))
+
+axiom H9 : (result = xmm0)
+
+axiom H10 : (xmm01 = o1)
+
+axiom H11 : ((o2 = readmem64(of_int1(4198864), memory)) and
+  ((((((((bw_and1(o2,
   of_int1(255)) = toBig(to_rep((memory[of_int1(4198864)])))) and (bw_and1(o2,
   of_int1(65280)) = mul1(toBig(to_rep((memory[add1(of_int1(4198864),
   of_int1(1))]))), of_int1(256)))) and (bw_and1(o2,
@@ -1588,9 +1644,25 @@ goal WP_parameter_def :
   of_int1(71776119061217280)) = mul1(toBig(to_rep((memory[add1(of_int1(4198864),
   of_int1(6))]))), of_int1(281474976710656)))) and (bw_and1(o2,
   of_int1(18374686479671623680)) = mul1(toBig(to_rep((memory[add1(of_int1(4198864),
-  of_int1(7))]))), of_int1(72057594037927936))))) and
-  ((o3 = safedivision64(xmm01, o2)) and (o3 = udiv1(xmm01, o2)))) and
-  ((result1 = xmm01) and (xmm02 = o3))) and ((result2 = rsp) and
-  (rsp1 = add1(rsp, of_int1(8))))))) and (((rsp1 = rsp2) and
-  (xmm03 = xmm02)) and ((rsp3 = rsp1) and (xmm04 = xmm02)))) ->
-  (rsp2 = add1(rsp, of_int1(8)))))
+  of_int1(7))]))), of_int1(72057594037927936)))))
+
+axiom H12 : ((o3 = safedivision64(xmm01, o2)) and (o3 = udiv1(xmm01, o2)))
+
+axiom H13 : (result1 = xmm01)
+
+axiom H14 : (xmm02 = o3)
+
+axiom H15 : (result2 = rsp)
+
+axiom H16 : (rsp1 = add1(rsp, of_int1(8)))
+
+axiom H17 : (rsp1 = rsp2)
+
+axiom H18 : (xmm03 = xmm02)
+
+axiom H19 : (rsp3 = rsp1)
+
+axiom H20 : (xmm04 = xmm02)
+
+ (* File "x86.ads", line 561, characters 0-0 *)
+goal WP_parameter_def : (rsp2 = add1(rsp, of_int1(8)))

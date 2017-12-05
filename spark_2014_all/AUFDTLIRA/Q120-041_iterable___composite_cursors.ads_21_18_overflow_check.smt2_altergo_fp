@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -409,9 +409,15 @@ logic temp___176 : int -> (int,natural) farray
 axiom def_axiom :
   (forall temp___178:int. ((temp___176(temp___178)[1]) = of_rep(temp___178)))
 
- (* File "composite_cursors.ads", line 4, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(i17s1) <= 100) -> ((to_rep(c1) <= 100) ->
-  ((has_element({ us_split_fields1 = {
+logic o : int
+
+axiom H : (to_rep(i17s1) <= 100)
+
+axiom H1 : (to_rep(c1) <= 100)
+
+axiom H2 : (has_element({ us_split_fields1 = {
   rec__composite_cursors__cont1__content = c;
-  rec__composite_cursors__cont1__length = c1 } }, p) = true) ->
-  in_range((to_rep((p[1])) + 1)))))
+  rec__composite_cursors__cont1__length = c1 } }, p) = true)
+
+ (* File "composite_cursors.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep((p[1])) + 1))

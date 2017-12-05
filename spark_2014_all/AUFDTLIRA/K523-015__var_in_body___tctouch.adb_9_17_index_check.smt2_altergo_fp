@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -300,10 +300,27 @@ type tTcollectionSP1__ref = { tTcollectionSP1__content : tTcollectionSP1
 function tTcollectionSP1__ref___projection(a: tTcollectionSP1__ref) : tTcollectionSP1 =
   (a).tTcollectionSP1__content
 
+logic finger : int
+
+logic o : int
+
+logic o1 : character
+
+logic result : int
+
+logic finger1 : int
+
+axiom H : in_range1(finger)
+
+axiom H1 : in_range2(a_tag)
+
+axiom H2 : ((o = (finger + 1)) and in_range((finger + 1)))
+
+axiom H3 : (result = finger)
+
+axiom H4 : (finger1 = o)
+
+axiom H5 : (to_rep(o1) = a_tag)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall finger:int. forall o:int. forall o1:character. forall result:int.
-  forall finger1:int. (in_range1(finger) -> (in_range2(a_tag) ->
-  ((((o = (finger + 1)) and in_range((finger + 1))) and
-  ((result = finger) and (finger1 = o))) -> ((to_rep(o1) = a_tag) ->
-  (1 <= finger1))))))
+goal WP_parameter_def : (1 <= finger1)

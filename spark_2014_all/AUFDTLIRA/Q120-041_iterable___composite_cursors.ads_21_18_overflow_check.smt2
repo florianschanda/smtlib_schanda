@@ -119,6 +119,7 @@
 (assert (forall ((temp___178 Int)) (= (select (temp___176 temp___178) 1) (of_rep temp___178))))
 (define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool) (temp___skip_constant_31 Bool) (temp___do_toplevel_32 Bool)) Bool (=> (or (= temp___is_init_30 true) (<= 0 2147483647)) (in_range1 temp___expr_33)))
 (define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
+(declare-const o Int)
 (assert (<= (to_rep (rec__composite_cursors__cont1__length (us_split_fields1 i17s))) 100))
 (assert (<= (to_rep (rec__composite_cursors__cont1__length (us_split_fields1 c))) 100))
 (assert (= (has_element c p) true))

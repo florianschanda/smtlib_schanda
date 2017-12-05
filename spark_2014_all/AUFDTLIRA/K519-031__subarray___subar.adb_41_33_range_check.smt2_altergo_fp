@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type tone_twentyB
 
-predicate in_range2(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq3 : int, int -> bool
 
@@ -639,9 +639,37 @@ axiom def_axiom :
   (forall temp___244:int. (((temp___239(temp___241, temp___242,
   temp___243)).elts1[temp___244]) = of_rep(temp___241)))))
 
- (* File "subar.adb", line 16, characters 0-0 *)
-goal WP_parameter_def : (in_range3(x) -> (((1 <  x) and (x <  10)) ->
-  ((dynamic_property1((x - 1), (x + 1), to_rep1(z__first),
+logic z : (int,integer) farray
+
+logic temp___246 : (int,integer) farray
+
+logic temp___2461 : t1
+
+logic temp___247 : (int,integer) farray
+
+logic temp___2471 : t
+
+logic o : (int,integer) farray
+
+logic o1 : t
+
+logic o2 : (int,integer) farray
+
+logic o3 : integer
+
+logic result : (int,integer) farray
+
+logic z1 : (int,integer) farray
+
+axiom H : in_range3(x)
+
+axiom H1 : ((1 <  x) and (x <  10))
+
+axiom H2 : (dynamic_property1((x - 1), (x + 1), to_rep1(z__first),
   to_rep1(z__last)) and ((to_rep1(z__first) = (x - 1)) and
-  (to_rep1(z__last) = (x + 1)))) -> (((x - 1) <= (x + 1)) ->
-  (1 <= (x - 1))))))
+  (to_rep1(z__last) = (x + 1))))
+
+axiom H3 : ((x - 1) <= (x + 1))
+
+ (* File "subar.adb", line 16, characters 0-0 *)
+goal WP_parameter_def : (1 <= (x - 1))

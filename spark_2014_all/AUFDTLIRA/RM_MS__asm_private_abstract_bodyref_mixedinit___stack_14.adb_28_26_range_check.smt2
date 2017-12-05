@@ -78,6 +78,7 @@
 (declare-const o Int)
 (declare-const o1 integer)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (assert (in_range1 pointer))

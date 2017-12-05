@@ -46,6 +46,8 @@
 (assert (forall ((x Int)) (! (=> (and (dynamic_invariant x true true true) (< x 2147483647)) (let ((result (posit x))) (and (< x result) (dynamic_invariant result true false true)))) :pattern ((posit x)))))
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const x Int)
+(declare-const o Int)
+(declare-const o1 Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (assert (= result x))

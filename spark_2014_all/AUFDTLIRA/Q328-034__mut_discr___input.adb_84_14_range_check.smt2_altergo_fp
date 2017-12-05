@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -523,7 +523,15 @@ type t8b__ref = { t8b__content : us_t1
 
 function t8b__ref___projection(a: t8b__ref) : us_t1 = (a).t8b__content
 
+logic last_char : int
+
+axiom H : in_range4(last_char)
+
+axiom H1 : (last_char = r6b)
+
+axiom H2 : in_range4(r6b)
+
+axiom H3 : (1 <= r6b)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall last_char:int. (in_range4(last_char) -> (((last_char = r6b) and
-  in_range4(r6b)) -> ((1 <= r6b) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

@@ -244,7 +244,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -393,12 +393,31 @@ axiom def_axiom :
   (forall temp___251:int.
   ((temp___248(temp___250)[temp___251]) = of_rep(temp___250))))
 
+logic ad : (int,one_ten) farray
+
+logic o : one_ten
+
+logic o1 : (int,one_ten) farray
+
+logic result : (int,one_ten) farray
+
+logic ad1 : (int,one_ten) farray
+
+logic result1 : (int,one_ten) farray
+
+logic ad2 : (int,one_ten) farray
+
+axiom H : (result = ad)
+
+axiom H1 : (ad1 = temp___248(10))
+
+axiom H2 : (to_rep(o) = 1)
+
+axiom H3 : (o1 = (ad1[1 <- o]))
+
+axiom H4 : (result1 = ad1)
+
+axiom H5 : (ad2 = o1)
+
  (* File "subar.adb", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall ad:(int,one_ten) farray. forall o:one_ten.
-  forall o1:(int,one_ten) farray. forall result:(int,one_ten) farray.
-  forall ad1:(int,one_ten) farray. forall result1:(int,one_ten) farray.
-  forall ad2:(int,one_ten) farray. (((result = ad) and
-  (ad1 = temp___248(10))) -> ((((to_rep(o) = 1) and (o1 = (ad1[1 <- o]))) and
-  ((result1 = ad1) and (ad2 = o1))) -> (to_rep((ad2[to_rep1(first(mk(1,
-  10)))])) = 1))))
+goal WP_parameter_def : (to_rep((ad2[to_rep1(first(mk(1, 10)))])) = 1)

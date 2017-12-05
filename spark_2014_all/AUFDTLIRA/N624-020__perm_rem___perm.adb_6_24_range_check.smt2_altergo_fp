@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -719,32 +719,171 @@ logic result____last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "perm.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:(int,natural) farray. forall temp___546:(int,natural) farray.
-  forall temp___5461:t3. forall o1:(int,natural) farray.
-  forall temp___545:(int,natural) farray. forall temp___5451:t2.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int. forall o6:int.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range3(i) -> (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1))))) ->
-  ((((((i + 1) <= to_rep1(last(a1))) -> (((to_rep1(first(a1)) <= (i + 1)) and
-  ((i + 1) <= to_rep1(last(a1)))) and
+logic result__ : (int,natural) farray
+
+logic perm__remove__result : (int,natural) farray
+
+logic perm__remove__result1 : t
+
+logic us : int
+
+logic o : (int,natural) farray
+
+logic temp___546 : (int,natural) farray
+
+logic temp___5461 : t3
+
+logic o1 : (int,natural) farray
+
+logic temp___545 : (int,natural) farray
+
+logic temp___5451 : t2
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___547 : (int,natural) farray
+
+logic temp___5471 : t
+
+logic perm__remove__result__assume : (int,natural) farray
+
+logic perm__remove__result__assume1 : t1
+
+logic k : int
+
+logic o8 : int
+
+logic o9 : bool
+
+logic temp___550 : int
+
+logic o10 : int
+
+logic o11 : natural
+
+logic o12 : int
+
+logic k1 : int
+
+logic temp___551 : int
+
+logic o13 : int
+
+logic o14 : natural
+
+logic o15 : int
+
+logic k2 : int
+
+logic o16 : int
+
+logic o17 : natural
+
+logic o18 : int
+
+logic o19 : int
+
+logic result : (int,natural) farray
+
+logic result__1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic result2 : t
+
+logic perm__remove__result2 : (int,natural) farray
+
+logic perm__remove__result3 : t
+
+logic perm__remove__result4 : (int,natural) farray
+
+logic perm__remove__result5 : t
+
+logic perm__remove__result6 : (int,natural) farray
+
+logic perm__remove__result7 : t
+
+logic result__2 : (int,natural) farray
+
+logic perm__remove__result8 : (int,natural) farray
+
+logic perm__remove__result9 : t
+
+logic result__3 : (int,natural) farray
+
+logic perm__remove__result10 : (int,natural) farray
+
+logic perm__remove__result11 : t
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range3(i)
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and
+  ((to_rep1(first(a1)) <= i) and (i <= to_rep1(last(a1)))))
+
+axiom H3 : (((i + 1) <= to_rep1(last(a1))) ->
+  (((to_rep1(first(a1)) <= (i + 1)) and ((i + 1) <= to_rep1(last(a1)))) and
   ((to_rep1(first(a1)) <= to_rep1(last(a1))) and
-  (to_rep1(last(a1)) <= to_rep1(last(a1)))))) and (o = a)) and
-  ((o = temp___546) and (mk3((i + 1), to_rep1(last(a1))) = temp___5461))) ->
-  (((((1 <= (i - 1)) -> (((to_rep1(first(a1)) <= 1) and
+  (to_rep1(last(a1)) <= to_rep1(last(a1))))))
+
+axiom H4 : (o = a)
+
+axiom H5 : (o = temp___546)
+
+axiom H6 : (mk3((i + 1), to_rep1(last(a1))) = temp___5461)
+
+axiom H7 : ((1 <= (i - 1)) -> (((to_rep1(first(a1)) <= 1) and
   (1 <= to_rep1(last(a1)))) and ((to_rep1(first(a1)) <= (i - 1)) and
-  ((i - 1) <= to_rep1(last(a1)))))) and (o1 = a)) and ((o1 = temp___545) and
-  (mk2(1, (i - 1)) = temp___5451))) -> ((not (length2({ elts2 = temp___545;
-  rt2 = temp___5451 }) = 0)) ->
-  (((((((to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461))) and
-  (o2 = ((to_rep1(last6(temp___5461)) - to_rep1(first6(temp___5461))) + 1))) or
-  ((not (to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461)))) and
-  (o2 = 0))) and
-  ((((to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451))) and
-  (o3 = ((to_rep1(last4(temp___5451)) - to_rep1(first4(temp___5451))) + 1))) or
-  ((not (to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451)))) and
-  (o3 = 0))) and (o4 = (o3 + o2)))) and
-  (o5 = (to_rep1(first4(temp___5451)) + o4))) and (o6 = (o5 - 1))) ->
-  in_range3(o6)))))))))
+  ((i - 1) <= to_rep1(last(a1))))))
+
+axiom H8 : (o1 = a)
+
+axiom H9 : (o1 = temp___545)
+
+axiom H10 : (mk2(1, (i - 1)) = temp___5451)
+
+axiom H11 : (not (length2({ elts2 = temp___545; rt2 = temp___5451 }) = 0))
+
+axiom H12 : ((to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461))) ->
+  (o2 = ((to_rep1(last6(temp___5461)) - to_rep1(first6(temp___5461))) + 1)))
+
+axiom H13 :
+  ((not (to_rep1(first6(temp___5461)) <= to_rep1(last6(temp___5461)))) ->
+  (o2 = 0))
+
+axiom H14 : ((to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451))) ->
+  (o3 = ((to_rep1(last4(temp___5451)) - to_rep1(first4(temp___5451))) + 1)))
+
+axiom H15 :
+  ((not (to_rep1(first4(temp___5451)) <= to_rep1(last4(temp___5451)))) ->
+  (o3 = 0))
+
+axiom H16 : (o4 = (o3 + o2))
+
+axiom H17 : (o5 = (to_rep1(first4(temp___5451)) + o4))
+
+axiom H18 : (o6 = (o5 - 1))
+
+ (* File "perm.ads", line 4, characters 0-0 *)
+goal WP_parameter_def : in_range3(o6)

@@ -80,7 +80,7 @@ axiom assoc_div_div :
 
 type volt
 
-predicate in_range(x: int) = (((-1024) <= x) and (x <= 1016))
+predicate in_range(x: int) = (((- 1024) <= x) and (x <= 1016))
 
 axiom Monotonic :
   (forall x:int. forall y:int. ((x <= y) ->
@@ -165,18 +165,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -296,7 +296,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type money
 
-predicate in_range1(x: int) = (((-999999999999999) <= x) and
+predicate in_range1(x: int) = (((- 999999999999999) <= x) and
   (x <= 999999999999999))
 
 logic dummy1 : money
@@ -404,7 +404,7 @@ function money__ref___projection(a: money__ref) : money = (a).money__content
 
 type tmoneyB
 
-predicate in_range2(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic dummy2 : tmoneyB
@@ -632,10 +632,24 @@ axiom init_pocket__def_axiom : (init_pocket = of_fixed1(0))
 
 axiom default_salary__def_axiom : (default_salary = of_fixed2(0))
 
+logic default_v : volt
+
+logic o : volt
+
+logic us : int
+
+logic result : volt
+
+logic default_v1 : volt
+
+axiom H : (to_fixed(o) = (- 1))
+
+axiom H1 : (result = default_v)
+
+axiom H2 : (default_v1 = o)
+
+axiom H3 : (to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))) <= 9999999999)
+
  (* File "pack.ads", line 14, characters 0-0 *)
 goal WP_parameter_def :
-  (forall default_v:volt. forall o:volt. forall result:volt.
-  forall default_v1:volt. (((to_fixed(o) = (-1)) and
-  ((result = default_v) and (default_v1 = o))) ->
-  ((to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))) <= 9999999999) ->
-  ((-999999999999999) <= to_fixed1(of_fixed1(of_real1((-9999999999.0e-2))))))))
+  ((- 999999999999999) <= to_fixed1(of_fixed1(of_real1((-9999999999.0e-2)))))

@@ -148,7 +148,7 @@ axiom coerce_axiom :
 
 type element_type
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -644,7 +644,7 @@ axiom length__post_axiom1 :
 
 type element_type2
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -721,31 +721,67 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container2, witness1) = true)) ->
   in_range3(w_get(container2, witness1)))))
 
- (* File "a-cfdlli.ads", line 1403, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:count_type. forall o1:count_type. forall temp___450:count_type.
-  forall o2:us_rep3. (((((to_rep(o) = 0) and (o = o1)) and
-  (temp___450 = o1)) and (temp___450 = no_element)) -> (in_range2(item) ->
-  (((has_key(positions({ us_split_discrs1 = {
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___450 : count_type
+
+logic o2 : us_rep2
+
+logic o3 : us_rep3
+
+logic o4 : int
+
+logic o5 : bool
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___450 = o1)
+
+axiom H3 : (temp___450 = no_element)
+
+axiom H4 : in_range2(item)
+
+axiom H5 : ((has_key(positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = container };
   us_split_fields1 = { rec__formal_container__vdll__list = container1 } }), {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = position }
   }) = true) or (bool_eq5({ us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = position } }, {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true)) -> ((not (bool_eq5({ us_split_fields3 = {
+  } }) = true))
+
+axiom H6 : (not (bool_eq5({ us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = position } }, {
   us_split_fields3 = { rec__formal_container__vdll__cursor__node = no_element
-  } }) = true)) -> (((o2 = positions({ us_split_discrs1 = {
+  } }) = true))
+
+axiom H7 : ((o3 = positions({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = container };
   us_split_fields1 = { rec__formal_container__vdll__list = container1 }
-  })) and ((not (has_key(o2, { us_split_fields3 = {
+  })) and ((not (has_key(o3, { us_split_fields3 = {
   rec__formal_container__vdll__cursor__node = no_element } }) = true)) and
-  (forall i:us_rep1. ((has_key(o2, i) = true) -> (((1 <= get1(o2, i)) and
-  (get1(o2, i) <= length({ us_split_discrs1 = {
+  (forall i:count_type. ((has_key(o3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = i } }) = true) ->
+  (((1 <= get1(o3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = i } })) and (get1(o3, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = i }
+  }) <= length({ us_split_discrs1 = {
   rec__formal_container__vdll__list__capacity = container };
   us_split_fields1 = { rec__formal_container__vdll__list = container1 }
   }))) and
-  (forall j:us_rep1. ((has_key(o2, j) = true) -> ((get1(o2, i) = get1(o2,
-  j)) -> (bool_eq5(i, j) = true))))))))) -> (has_key(o2, { us_split_fields3 =
-  { rec__formal_container__vdll__cursor__node = position } }) = true)))))))
+  (forall j:count_type. ((has_key(o3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = j } }) = true) -> ((get1(o3, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = i }
+  }) = get1(o3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = j } })) -> (bool_eq5({
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = i } }, {
+  us_split_fields3 = { rec__formal_container__vdll__cursor__node = j }
+  }) = true)))))))))
+
+ (* File "a-cfdlli.ads", line 1403, characters 0-0 *)
+goal WP_parameter_def : (has_key(o3, { us_split_fields3 = {
+  rec__formal_container__vdll__cursor__node = position } }) = true)

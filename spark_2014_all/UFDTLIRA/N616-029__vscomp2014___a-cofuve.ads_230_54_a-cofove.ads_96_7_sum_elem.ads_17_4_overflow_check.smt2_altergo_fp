@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -161,7 +161,7 @@ function index_type__ref___2__projection(a: index_type__ref) : index_type =
 
 type extended_index
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 10000))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 10000))
 
 logic bool_eq4 : int, int -> bool
 
@@ -374,11 +374,11 @@ logic oeq__function_guard : bool, us_rep, us_rep -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep. forall b:us_rep [user_eq3(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
     (bool_eq7(get(a, n), get(b, n)) = true))) ->
   (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) ->
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) ->
         (bool_eq7(get(a, n), get(b, n)) = true)))) ->
   (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
   false)))))
@@ -411,7 +411,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 axiom length__post_axiom :
   (forall container:us_rep [length(container)].
-  ((((-1) + length(container)) <= 10000) and in_range5(length(container))))
+  ((((- 1) + length(container)) <= 10000) and in_range5(length(container))))
 
 logic left : us_rep
 
@@ -435,10 +435,43 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 axiom get__post_axiom : true
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(fst)
+
+axiom H1 : in_range3(lst)
+
+axiom H2 : in_range1(offset)
+
+axiom H3 : ((o8 = ((- 1) + length(left))) and (in_range3(o8) and
+  (o8 = ((- 1) + length(left)))))
+
+axiom H4 : (((lst <= o8) -> (result = true)) and ((not (lst <= o8)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : (offset <  0)
+
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall result:bool. (in_range2(fst) -> (in_range3(lst) ->
-  (in_range1(offset) -> ((((o = ((-1) + length(left))) and (in_range3(o) and
-  (o = ((-1) + length(left))))) and (((lst <= o) and (result = true)) or
-  ((not (lst <= o)) and (result = false)))) -> ((result = true) ->
-  ((offset <  0) -> in_range1(((-32768) - offset)))))))))
+goal WP_parameter_def : in_range1(((- 32768) - offset))

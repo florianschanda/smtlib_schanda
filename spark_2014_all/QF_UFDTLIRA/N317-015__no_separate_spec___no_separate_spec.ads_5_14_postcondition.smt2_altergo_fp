@@ -81,5 +81,29 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic b : bool
+
+logic result : bool
+
+logic b1 : bool
+
+logic b2 : bool
+
+logic b3 : bool
+
+axiom H : ((b = true) or (not (b = true)))
+
+axiom H1 : ((not (b = true)) -> (result = b))
+
+axiom H2 : ((not (b = true)) -> (b1 = of_int(1)))
+
+axiom H3 : ((b = true) -> (b1 = b))
+
+axiom H4 : (b1 = b2)
+
+axiom H5 : (b3 = b1)
+
+axiom H6 : (b2 = true)
+
  (* File "no_separate_spec.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : true

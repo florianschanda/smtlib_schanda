@@ -282,7 +282,17 @@ logic to__ : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic idx : int
+
+axiom H : in_range2(ch)
+
+axiom H1 : in_range1(from)
+
+axiom H2 : in_range1(to__)
+
+axiom H3 : (from <= idx)
+
+axiom H4 : (idx <= to__)
+
  (* File "helpers.ads", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall idx:int. (in_range2(ch) -> (in_range1(from) -> (in_range1(to__) ->
-  (((from <= idx) and (idx <= to__)) -> (1 <= idx))))))
+goal WP_parameter_def : (1 <= idx)

@@ -105,7 +105,11 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
+logic temp___m_height_191 : int
+
+axiom H : in_range(temp___m_height_191)
+
+axiom H1 : (0 <= temp___m_height_191)
+
  (* File "main.adb", line 11, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___m_height_191:int. (in_range(temp___m_height_191) ->
-  ((0 <= temp___m_height_191) -> (0 <= 0))))
+goal WP_parameter_def : (0 <= 0)

@@ -162,18 +162,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -808,18 +808,71 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
+logic estimatedgroundvelocityisavailable : bool
+
+logic estimatedgroundvelocity : int
+
+logic prevtime : t
+
+logic prevcount : t
+
+logic currtime : t
+
+logic thistime : t
+
+logic thiscount : t
+
+logic estimatedgroundvelocityisavailable1 : bool
+
+logic result : t
+
+logic currtime1 : t
+
+logic result1 : t
+
+logic thistime1 : t
+
+logic result2 : t
+
+logic thiscount1 : t
+
+logic estimatedgroundvelocityisavailable2 : bool
+
+logic estimatedgroundvelocityisavailable3 : bool
+
+logic estimatedgroundvelocity1 : int
+
+axiom H : in_range1(estimatedgroundvelocity)
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (result = currtime)
+
+axiom H4 : (currtime1 = of_int(100))
+
+axiom H5 : true
+
+axiom H6 : (result1 = thistime)
+
+axiom H7 : (thistime1 = of_int(5))
+
+axiom H8 : true
+
+axiom H9 : (result2 = thiscount)
+
+axiom H10 : (thiscount1 = of_int(20))
+
+axiom H11 : true
+
+axiom H12 : (not (thistime1 = prevtime))
+
+axiom H13 :
+  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable)
+
+axiom H14 :
+  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1)
+
  (* File "ng.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall estimatedgroundvelocityisavailable:bool.
-  forall estimatedgroundvelocity:int. forall prevtime:t. forall currtime:t.
-  forall thistime:t. forall thiscount:t.
-  forall estimatedgroundvelocityisavailable1:bool. forall result:t.
-  forall currtime1:t. forall result1:t. forall thistime1:t. forall result2:t.
-  forall thiscount1:t. forall estimatedgroundvelocityisavailable2:bool.
-  (in_range1(estimatedgroundvelocity) -> (((result = currtime) and
-  (currtime1 = of_int(100))) -> (((result1 = thistime) and
-  (thistime1 = of_int(5))) -> (((result2 = thiscount) and
-  (thiscount1 = of_int(20))) -> (((not (thistime1 = prevtime)) and
-  ((estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable) and
-  (estimatedgroundvelocityisavailable2 = estimatedgroundvelocityisavailable1))) ->
-  (not (thistime1 = prevtime))))))))
+goal WP_parameter_def : (not (thistime1 = prevtime))

@@ -220,18 +220,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -253,12 +253,64 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic x : int
+
+logic y : int
+
+logic p : int
+
+logic q : int
+
+logic r : int
+
+logic q1 : int
+
+logic r1 : int
+
+logic p1 : int
+
+logic x1 : int
+
+logic y1 : int
+
+logic r2 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic p2 : int
+
+logic q2 : int
+
+logic r3 : int
+
+logic x3 : int
+
+logic y3 : int
+
+logic p3 : int
+
+logic q3 : int
+
+logic r4 : int
+
+axiom H : in_range1(x)
+
+axiom H1 : in_range1(y)
+
+axiom H2 : ((0 <  y) and (0 <= x))
+
+axiom H3 : ((0 <= 2147483647) -> in_range1(p))
+
+axiom H4 : ((0 <= 2147483647) -> in_range1(q))
+
+axiom H5 : ((0 <= 2147483647) -> in_range1(r))
+
+axiom H6 : (((q1 = comp_div(x,y)) and (r1 = (x - (q1 * y)))) and
+  (in_range1(q1) and in_range1(r1)))
+
+axiom H7 : ((p1 = (q1 * y)) and in_range1(p1))
+
  (* File "t3q3.adb", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall p:int. forall q:int. forall r:int.
-  forall q1:int. forall r1:int. forall p1:int. (in_range1(x) ->
-  (in_range1(y) -> (((0 <  y) and (0 <= x)) -> (((0 <= 2147483647) ->
-  in_range1(p)) -> (((0 <= 2147483647) -> in_range1(q)) ->
-  (((0 <= 2147483647) -> in_range1(r)) -> ((((q1 = comp_div(x,y)) and
-  (r1 = (x - (q1 * y)))) and (in_range1(q1) and in_range1(r1))) ->
-  (((p1 = (q1 * y)) and in_range1(p1)) -> (p1 <= (2147483647 - r1)))))))))))
+goal WP_parameter_def : (p1 <= (2147483647 - r1))

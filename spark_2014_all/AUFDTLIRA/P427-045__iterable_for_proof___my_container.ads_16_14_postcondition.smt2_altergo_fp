@@ -411,36 +411,133 @@ function t2b__ref___projection(a: t2b__ref) : t2b = (a).t2b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:(int,natural) farray. forall i:int. forall temp___174:int.
-  forall temp___172:(int,natural) farray. forall o:natural.
-  forall o1:(int,natural) farray. forall c1:(int,natural) farray.
-  forall result:int. forall i1:int. forall result1:(int,natural) farray.
-  forall c2:(int,natural) farray. forall c3:(int,natural) farray.
-  forall i2:int. forall c4:(int,natural) farray. forall i3:int.
-  forall c5:(int,natural) farray. forall i4:int.
-  forall c6:(int,natural) farray. forall i5:int.
-  forall c7:(int,natural) farray. forall i6:int.
-  forall c8:(int,natural) farray. forall i7:int.
-  forall c9:(int,natural) farray. forall i8:int. ((((({ int__content = result
-  } = { int__content = i }) and (i1 = 1)) and ((((1 <= i1) and
-  (i1 <= 100)) and ((((temp___174 = i1) and ((temp___172 = c) and
-  ((((to_rep((c[i1])) = 0) and (((to_rep(o) = 1) and (o1 = (c[i1 <- o]))) and
-  (({ map__content = result1 } = { map__content = c }) and (c2 = o1)))) or
-  ((not (to_rep((c[i1])) = 0)) and ((c2 = c) and (c2 = c1)))) and
-  ((forall j:int. (((1 <= j) and (j <= i2)) ->
-   (valid(to_rep((c3[j]))) = true))) and
+logic c : (int,natural) farray
+
+logic i : int
+
+logic temp___174 : int
+
+logic temp___172 : (int,natural) farray
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic j : int
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic temp___178 : natural
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic e : int
+
+logic c1 : (int,natural) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,natural) farray
+
+logic c2 : (int,natural) farray
+
+logic c3 : (int,natural) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,natural) farray
+
+logic c4 : (int,natural) farray
+
+logic c5 : (int,natural) farray
+
+logic i4 : int
+
+logic c6 : (int,natural) farray
+
+logic i5 : int
+
+logic c7 : (int,natural) farray
+
+logic i6 : int
+
+logic c8 : (int,natural) farray
+
+logic i7 : int
+
+logic c9 : (int,natural) farray
+
+logic i8 : int
+
+logic c10 : (int,natural) farray
+
+logic i9 : int
+
+logic c11 : (int,natural) farray
+
+logic i10 : int
+
+logic c12 : (int,natural) farray
+
+logic i11 : int
+
+logic result4 : bool
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
+axiom H2 : (((1 <= i1) and (i1 <= 100)) -> (((temp___174 = i1) and
+  ((temp___172 = c) and ((((to_rep((c[i1])) = 0) -> (((to_rep(o) = 1) and
+  (o1 = (c[i1 <- o]))) and ((result1 = c) and (c2 = o1)))) and
+  ((not (to_rep((c[i1])) = 0)) -> ((c2 = c) and (c2 = c1)))) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= i2)) ->
+   (valid(to_rep((c3[j1]))) = true))) and
   ((((forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
      ((i2 <  temp___173) -> ((c3[temp___173]) = (temp___172[temp___173]))))) and
   ((1 <= 100) -> in_range3(i2))) and ((1 <= i2) and (i2 <= 100))) and
-  (i2 = 100)))))) and (((i2 = i3) and (c3 = c4)) and ((i4 = i2) and
-  (c5 = c3)))) and ((({ int__content = i5 } = { int__content = i3 }) and ({
-  map__content = c6 } = { map__content = c4 })) and ((i6 = i4) and
-  (c7 = c5))))) or ((not ((1 <= i1) and (i1 <= 100))) and (((i1 = i5) and ({
-  map__content = c6 } = { map__content = c })) and ((i6 = i1) and
-  (c7 = c1)))))) and ((({ int__content = i7 } = { int__content = i5 }) and ({
-  map__content = c8 } = { map__content = c6 })) and ((i8 = i6) and
-  (c9 = c7)))) ->
-  (forall temp___181:us_rep. ((has_element(c8, temp___181) = true) ->
-  (valid(element(c8, temp___181)) = true)))))
+  (i2 = 100)))))) and (((i2 = i6) and (c3 = c7)) and ((i7 = i2) and
+  (c8 = c3)))))
+
+axiom H3 : (((1 <= i1) and (i1 <= 100)) -> (i8 = i6))
+
+axiom H4 : (((1 <= i1) and (i1 <= 100)) -> (c9 = c7))
+
+axiom H5 : (((1 <= i1) and (i1 <= 100)) -> (i9 = i7))
+
+axiom H6 : (((1 <= i1) and (i1 <= 100)) -> (c10 = c8))
+
+axiom H7 : ((not ((1 <= i1) and (i1 <= 100))) -> (i1 = i8))
+
+axiom H8 : ((not ((1 <= i1) and (i1 <= 100))) -> (c9 = c))
+
+axiom H9 : ((not ((1 <= i1) and (i1 <= 100))) -> (i9 = i1))
+
+axiom H10 : ((not ((1 <= i1) and (i1 <= 100))) -> (c10 = c1))
+
+axiom H11 : (i10 = i8)
+
+axiom H12 : (c11 = c9)
+
+axiom H13 : (i11 = i9)
+
+axiom H14 : (c12 = c10)
+
+logic temp___181 : natural
+
+axiom H15 : (has_element(c11, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___181 } }) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (valid(element(c11, { us_split_fields1 = {
+  rec__my_container__cursor__index = temp___181 } })) = true)

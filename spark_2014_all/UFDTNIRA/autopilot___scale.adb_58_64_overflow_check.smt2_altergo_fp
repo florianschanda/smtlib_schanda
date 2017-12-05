@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -245,7 +245,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type controlangle
 
-predicate in_range2(x: int) = (((-45) <= x) and (x <= 45))
+predicate in_range2(x: int) = (((- 45) <= x) and (x <= 45))
 
 logic bool_eq3 : int, int -> bool
 
@@ -297,7 +297,7 @@ function machnumber__ref___projection(a: machnumber__ref) : machnumber =
 
 type scaledata
 
-predicate in_range4(x: int) = (((-100) <= x) and (x <= 100))
+predicate in_range4(x: int) = (((- 100) <= x) and (x <= 100))
 
 logic bool_eq5 : int, int -> bool
 
@@ -381,15 +381,131 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic target_angle : int
+
+logic k1 : int
+
+logic k2 : int
+
+logic gap : int
+
+logic scale__scale_movement__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic k11 : int
+
+logic k21 : int
+
+logic gap1 : int
+
+logic result : int
+
+logic target_angle1 : int
+
+logic result1 : int
+
+logic gap2 : int
+
+logic result2 : int
+
+logic gap3 : int
+
+logic result3 : int
+
+logic gap4 : int
+
+logic result4 : int
+
+logic k12 : int
+
+logic result5 : int
+
+logic k22 : int
+
+logic result6 : int
+
+logic k23 : int
+
+logic result7 : int
+
+logic target_angle2 : int
+
+logic result8 : int
+
+logic target_angle3 : int
+
+logic result9 : int
+
+logic scale__scale_movement__result1 : int
+
+logic scale__scale_movement__result2 : int
+
+logic scale__scale_movement__result3 : int
+
+logic target_angle4 : int
+
+logic k13 : int
+
+logic k24 : int
+
+logic gap5 : int
+
+logic scale__scale_movement__result4 : int
+
+logic target_angle5 : int
+
+logic k14 : int
+
+logic k25 : int
+
+logic gap6 : int
+
+logic scale__scale_movement__result5 : int
+
+axiom H : in_range3(mach)
+
+axiom H1 : in_range4(present)
+
+axiom H2 : in_range4(target)
+
+axiom H3 : in_range2(max)
+
+axiom H4 : (0 <  max)
+
+axiom H5 : (((- 45) <= 45) -> in_range2(target_angle))
+
+axiom H6 : (((- 2147483648) <= 2147483647) -> in_range1(k1))
+
+axiom H7 : (((- 2147483648) <= 2147483647) -> in_range1(k2))
+
+axiom H8 : (((- 2147483648) <= 2147483647) -> in_range1(gap))
+
+axiom H9 : (not (present = target))
+
+axiom H10 : ((in_range5(k12) and (0 <  k23)) and (k12 <= k23))
+
+axiom H11 : (((- 2147483648) <= 2147483647) -> in_range1(k12))
+
+axiom H12 : (((- 2147483648) <= 2147483647) -> in_range1(k23))
+
  (* File "surfaces.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target_angle:int. forall k1:int. forall k2:int. forall gap:int.
-  forall k11:int. forall k21:int. (in_range3(mach) -> (in_range4(present) ->
-  (in_range4(target) -> (in_range2(max) -> ((0 <  max) -> ((((-45) <= 45) ->
-  in_range2(target_angle)) -> ((((-2147483648) <= 2147483647) ->
-  in_range1(k1)) -> ((((-2147483648) <= 2147483647) -> in_range1(k2)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(gap)) ->
-  ((not (present = target)) -> (((in_range5(k11) and (0 <  k21)) and
-  (k11 <= k21)) -> ((((-2147483648) <= 2147483647) -> in_range1(k11)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(k21)) ->
-  in_range1((max * k11))))))))))))))))
+goal WP_parameter_def : in_range1((max * k12))

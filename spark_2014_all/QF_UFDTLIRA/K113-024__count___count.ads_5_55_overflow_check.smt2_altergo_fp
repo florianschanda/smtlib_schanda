@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -141,29 +141,94 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic res : int
+
+logic count__count__result : int
+
+logic o : int
+
+logic temp___132 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic res1 : int
+
+logic res2 : int
+
+logic result1 : int
+
+logic res3 : int
+
+logic res4 : int
+
+logic res5 : int
+
+logic res6 : int
+
+logic res7 : int
+
+logic res8 : int
+
+logic res9 : int
+
+logic result2 : int
+
+logic count__count__result1 : int
+
+logic count__count__result2 : int
+
+logic count__count__result3 : int
+
+logic res10 : int
+
+logic count__count__result4 : int
+
+logic res11 : int
+
+logic count__count__result5 : int
+
+axiom H : in_range(max)
+
+axiom H1 : in_range1(step)
+
+axiom H2 : ((0 <  step) and ((0 <= max) and (max <  (2147483647 - step))))
+
+axiom H3 : (result = res)
+
+axiom H4 : (res1 = 0)
+
+axiom H5 : in_range1(res1)
+
+axiom H6 : (((temp___132 = res1) and ((res2 <= max) and
+  (((0 <= 2147483647) -> in_range1(res2)) and ((((o1 = (res2 + step)) and
+  in_range((res2 + step))) and ((res2 = result1) and (res3 = o1))) and
+  (max <  res3))))) and ((res3 = res6) and (res7 = res3)))
+
+axiom H7 : (res8 = res6)
+
+axiom H8 : (res9 = res7)
+
+axiom H9 : (count__count__result1 = count__count__result2)
+
+axiom H10 : (count__count__result3 = count__count__result1)
+
+axiom H11 : (result2 = count__count__result)
+
+axiom H12 : (count__count__result1 = res8)
+
+axiom H13 : (count__count__result4 = count__count__result2)
+
+axiom H14 : (res10 = res8)
+
+axiom H15 : (count__count__result5 = count__count__result3)
+
+axiom H16 : (res11 = res9)
+
+axiom H17 : (max <  count__count__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:int. forall count__count__result:int. forall temp___132:int.
-  forall o:int. forall result:int. forall res1:int. forall res2:int.
-  forall result1:int. forall res3:int. forall res4:int. forall res5:int.
-  forall res6:int. forall res7:int. forall result2:int.
-  forall count__count__result1:int. forall count__count__result2:int.
-  forall count__count__result3:int. forall res8:int.
-  forall count__count__result4:int. forall res9:int.
-  forall count__count__result5:int. (in_range(max) -> (in_range1(step) ->
-  (((0 <  step) and ((0 <= max) and (max <  (2147483647 - step)))) -> ((((({
-  int__content = result } = { int__content = res }) and (res1 = 0)) and
-  (in_range1(res1) and (((((temp___132 = res1) and ((res2 <= max) and
-  (((0 <= 2147483647) -> in_range1(res2)) and ((((o = (res2 + step)) and
-  in_range((res2 + step))) and ((res2 = result1) and (res3 = o))) and
-  (max <  res3))))) and ((res3 = res4) and (res5 = res3))) and (({
-  int__content = res6 } = { int__content = res4 }) and (res7 = res5))) and
-  (((count__count__result1 = count__count__result2) and
-  (count__count__result3 = count__count__result1)) and (({ int__content =
-  result2 } = { int__content = count__count__result }) and
-  (count__count__result1 = res6)))))) and ((({ int__content =
-  count__count__result4 } = { int__content = count__count__result2 }) and ({
-  int__content = res8 } = { int__content = res6 })) and
-  ((count__count__result5 = count__count__result3) and (res9 = res7)))) ->
-  ((max <  count__count__result4) ->
-  in_range((count__count__result4 - step))))))))
+goal WP_parameter_def : in_range((count__count__result4 - step))

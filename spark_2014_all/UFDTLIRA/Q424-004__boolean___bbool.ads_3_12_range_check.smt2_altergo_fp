@@ -93,13 +93,21 @@ logic b_LAST : bool
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic bbool__b_FIRST__assume : bool
+
+logic bbool__b_LAST__assume : bool
+
+axiom H : ((bbool__b_FIRST__assume = f(of_int(0))) and
+  (not (bbool__b_FIRST__assume = true)))
+
+axiom H1 : (bbool__b_FIRST__assume = b_FIRST)
+
+axiom H2 : ((bbool__b_LAST__assume = f(of_int(1))) and
+  (not (bbool__b_LAST__assume = true)))
+
+axiom H3 : (bbool__b_LAST__assume = b_LAST)
+
+axiom H4 : (to_int(b_FIRST) <= to_int(b_LAST))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall bbool__b_FIRST__assume:bool. forall bbool__b_LAST__assume:bool.
-  ((((bbool__b_FIRST__assume = f(of_int(0))) and
-  (not (bbool__b_FIRST__assume = true))) and
-  (bbool__b_FIRST__assume = b_FIRST)) ->
-  ((((bbool__b_LAST__assume = f(of_int(1))) and
-  (not (bbool__b_LAST__assume = true))) and
-  (bbool__b_LAST__assume = b_LAST)) ->
-  ((to_int(b_FIRST) <= to_int(b_LAST)) -> (0 <= to_int(b_FIRST))))))
+goal WP_parameter_def : (0 <= to_int(b_FIRST))

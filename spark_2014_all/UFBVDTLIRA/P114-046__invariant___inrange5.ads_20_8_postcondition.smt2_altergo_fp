@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -695,59 +695,95 @@ logic range_size : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "inrange5.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall inrange5__inrange64__result:bool.
-  forall inrange5__inrange64__result1:bool. forall result:bool.
-  forall inrange5__inrange64__result2:bool. forall result1:bool.
-  forall inrange5__inrange64__result3:bool. forall result2:bool.
-  forall inrange5__inrange64__result4:bool.
-  forall inrange5__inrange64__result5:bool.
-  forall inrange5__inrange64__result6:bool.
-  forall inrange5__inrange64__result7:bool.
-  forall inrange5__inrange64__result8:bool.
-  forall inrange5__inrange64__result9:bool.
-  forall inrange5__inrange64__result10:bool.
-  forall inrange5__inrange64__result11:bool.
-  forall inrange5__inrange64__result12:bool.
-  (forall result3:bool. (((uge(range_size, of_int(2)) and ule(range_size,
-  of_int(65535))) and
-  ((((((inrange5__inrange64__result2 = inrange5__inrange64__result9) and
+logic inrange5__inrange64__result : bool
+
+logic inrange5__inrange64__result1 : bool
+
+logic result : bool
+
+logic inrange5__inrange64__result2 : bool
+
+logic result1 : bool
+
+logic inrange5__inrange64__result3 : bool
+
+logic result2 : bool
+
+logic inrange5__inrange64__result4 : bool
+
+logic inrange5__inrange64__result5 : bool
+
+logic inrange5__inrange64__result6 : bool
+
+logic inrange5__inrange64__result7 : bool
+
+logic inrange5__inrange64__result8 : bool
+
+logic inrange5__inrange64__result9 : bool
+
+logic inrange5__inrange64__result10 : bool
+
+logic inrange5__inrange64__result11 : bool
+
+logic inrange5__inrange64__result12 : bool
+
+logic result3 : bool
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : (uge(range_size, of_int(2)) and ule(range_size, of_int(65535)))
+
+axiom H4 :
+  ((((inrange5__inrange64__result2 = inrange5__inrange64__result9) and
   (inrange5__inrange64__result10 = inrange5__inrange64__result2)) and
   ((range_size = of_int(0)) and ((result = inrange5__inrange64__result) and
   (inrange5__inrange64__result2 = of_int1(1))))) or
   (((not (range_size = of_int(0))) and
   ((inrange5__inrange64__result2 = inrange5__inrange64__result) and
-  (inrange5__inrange64__result2 = inrange5__inrange64__result1))) and ((({
-  bool__content = inrange5__inrange64__result9 } = { bool__content =
-  inrange5__inrange64__result7 }) and
+  (inrange5__inrange64__result2 = inrange5__inrange64__result1))) and
+  (((inrange5__inrange64__result9 = inrange5__inrange64__result7) and
   (inrange5__inrange64__result10 = inrange5__inrange64__result8)) and
-  (((inrange5__inrange64__result5 = inrange5__inrange64__result7) and
+  (((inrange5__inrange64__result7 = inrange5__inrange64__result5) and
   (inrange5__inrange64__result8 = inrange5__inrange64__result6)) and
   ((uge(add(sub(of_int(18446744073709551615), range_size), of_int(1)),
-  bottom) and
+  bottom) ->
   (((inrange5__inrange64__result3 = inrange5__inrange64__result5) and
   (inrange5__inrange64__result6 = inrange5__inrange64__result3)) and
-  ((result1 = inrange5__inrange64__result2) and ((ule(bottom, var) and
-  ((ule(var, sub(add(bottom, range_size), of_int(1))) and
-  (inrange5__inrange64__result3 = true)) or ((not ule(var, sub(add(bottom,
-  range_size), of_int(1)))) and (inrange5__inrange64__result3 = false)))) or
-  ((not ule(bottom, var)) and (inrange5__inrange64__result3 = false)))))) or
+  ((result1 = inrange5__inrange64__result2) and ((ule(bottom, var) ->
+  ((ule(var, sub(add(bottom, range_size), of_int(1))) ->
+  (inrange5__inrange64__result3 = true)) and ((not ule(var, sub(add(bottom,
+  range_size), of_int(1)))) -> (inrange5__inrange64__result3 = false)))) and
+  ((not ule(bottom, var)) -> (inrange5__inrange64__result3 = false)))))) and
   ((not uge(add(sub(of_int(18446744073709551615), range_size), of_int(1)),
-  bottom)) and
+  bottom)) ->
   (((inrange5__inrange64__result4 = inrange5__inrange64__result5) and
   (inrange5__inrange64__result6 = inrange5__inrange64__result4)) and
   ((result2 = inrange5__inrange64__result2) and ((((ule(bottom, var) and
   ule(var, of_int(18446744073709551615))) or (ule(of_int(0), var) and
   ule(var, sub(sub(range_size, sub(of_int(18446744073709551615), bottom)),
-  of_int(2))))) and (inrange5__inrange64__result4 = true)) or
+  of_int(2))))) -> (inrange5__inrange64__result4 = true)) and
   ((not ((ule(bottom, var) and ule(var, of_int(18446744073709551615))) or
   (ule(of_int(0), var) and ule(var, sub(sub(range_size,
-  sub(of_int(18446744073709551615), bottom)), of_int(2)))))) and
-  (inrange5__inrange64__result4 = false))))))))))) and
-  ((inrange5__inrange64__result11 = inrange5__inrange64__result9) and
-  (inrange5__inrange64__result12 = inrange5__inrange64__result10))) and
-  (result3 = inrange5__inrange64__result11))) ->
-  ((not (inrange5__inrange64__result11 = true)) ->
-  (forall k:t. ((ule(of_int(0), k) and ule(k, sub(range_size, of_int(1)))) ->
-  (not (var = add(bottom, k)))))))))
+  sub(of_int(18446744073709551615), bottom)), of_int(2)))))) ->
+  (inrange5__inrange64__result4 = false)))))))))))
+
+axiom H5 : (inrange5__inrange64__result11 = inrange5__inrange64__result9)
+
+axiom H6 : (inrange5__inrange64__result12 = inrange5__inrange64__result10)
+
+axiom H7 : (result3 = inrange5__inrange64__result11)
+
+axiom H8 : (not (inrange5__inrange64__result11 = true))
+
+logic k : t
+
+axiom H9 : ule(of_int(0), k)
+
+axiom H10 : ule(k, sub(range_size, of_int(1)))
+
+ (* File "inrange5.ads", line 16, characters 0-0 *)
+goal WP_parameter_def : (not (var = add(bottom, k)))

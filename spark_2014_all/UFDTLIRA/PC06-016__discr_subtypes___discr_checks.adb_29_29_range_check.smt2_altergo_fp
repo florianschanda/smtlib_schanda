@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -143,11 +143,17 @@ logic r6b : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "discr_checks.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall discr_checks__check_subtype_prot__R6b__assume:int.
-  ((((discr_checks__check_subtype_prot__R6b__assume = bad(void)) and
+logic discr_checks__check_subtype_prot__R6b__assume : int
+
+logic us : int
+
+axiom H : ((discr_checks__check_subtype_prot__R6b__assume = bad(void)) and
   (in_range(discr_checks__check_subtype_prot__R6b__assume) and
-  (discr_checks__check_subtype_prot__R6b__assume = 6))) and
-  (discr_checks__check_subtype_prot__R6b__assume = r6b)) -> (in_range(r6b) ->
-  in_range1(r6b))))
+  (discr_checks__check_subtype_prot__R6b__assume = 6)))
+
+axiom H1 : (discr_checks__check_subtype_prot__R6b__assume = r6b)
+
+axiom H2 : in_range(r6b)
+
+ (* File "discr_checks.adb", line 22, characters 0-0 *)
+goal WP_parameter_def : in_range1(r6b)

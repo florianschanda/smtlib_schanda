@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -345,11 +345,25 @@ logic count : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+axiom H : in_range2(new_item)
+
+axiom H1 : in_range1(count)
+
+axiom H2 : ((((of_int(1) = true) ->
+  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o = 2147483647))) and (in_range3(o) and (((of_int(1) = true) ->
+  (o = to_rep(container__split_discrs))) and ((not (of_int(1) = true)) ->
+  (o = 2147483647)))))
+
+axiom H3 : (o1 = (o - count))
+
  (* File "a-cofove.ads", line 441, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. (in_range2(new_item) -> (in_range1(count) ->
-  ((((((of_int(1) = true) and (o = to_rep(container__split_discrs))) or
-  ((not (of_int(1) = true)) and (o = 2147483647))) and (in_range3(o) and
-  (((of_int(1) = true) and (o = to_rep(container__split_discrs))) or
-  ((not (of_int(1) = true)) and (o = 2147483647))))) and
-  (o1 = (o - count))) -> in_range(o1)))))
+goal WP_parameter_def : in_range(o1)

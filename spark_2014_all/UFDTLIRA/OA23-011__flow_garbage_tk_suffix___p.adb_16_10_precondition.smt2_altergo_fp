@@ -193,5 +193,19 @@ logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic temp___184 : bool
+
+logic po__split_fields : bool
+
+logic po__split_fields1 : bool
+
+logic po__split_fields2 : bool
+
+logic po__split_fields3 : bool
+
+logic po__split_fields4 : bool
+
+logic po__split_fields5 : bool
+
  (* File "p.ads", line 5, characters 0-0 *)
 goal WP_parameter_def : true

@@ -274,13 +274,31 @@ logic x : (int,t) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic y : (int,t) farray
+
+logic b : bool
+
+logic i : int
+
+logic j : int
+
+logic o : int
+
+logic o1 : int
+
+axiom H :
+  (forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
+  (exists temp___174:int. (((1 <= temp___174) and (temp___174 <= 100)) and
+  (to_rep((x[temp___173])) = to_rep((y[temp___174])))))))
+
+logic i1 : int
+
+axiom H1 : (1 <= i1)
+
+axiom H2 : (i1 <= 100)
+
  (* File "inline_for_proof.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
-  (forall y:(int,t) farray. forall b:bool.
-  ((forall temp___173:int. (((1 <= temp___173) and (temp___173 <= 100)) ->
-   (exists temp___174:int. (((1 <= temp___174) and (temp___174 <= 100)) and
-   (to_rep((x[temp___173])) = to_rep((y[temp___174]))))))) ->
-  (forall i:int. (((1 <= i) and (i <= 100)) ->
-  (exists j:int. (((1 <= j) and (j <= 100)) and (((b = true) ->
-  (to_rep((x[i])) = to_rep((y[j])))) and ((not (b = true)) ->
-  (to_rep((y[i])) = to_rep((y[j])))))))))))
+  (exists j1:int. (((1 <= j1) and (j1 <= 100)) and (((b = true) ->
+  (to_rep((x[i1])) = to_rep((y[j1])))) and ((not (b = true)) ->
+  (to_rep((y[i1])) = to_rep((y[j1])))))))

@@ -38,6 +38,7 @@
 (assert (forall ((x Int)) (! (=> (dynamic_invariant x true true true) (= (do_something x) (* x 2))) :pattern ((do_something x)))))
 (declare-const x Int)
 (declare-const y Int)
+(declare-const o Int)
 (declare-const result Int)
 (declare-const x1 Int)
 (assert (= result x))

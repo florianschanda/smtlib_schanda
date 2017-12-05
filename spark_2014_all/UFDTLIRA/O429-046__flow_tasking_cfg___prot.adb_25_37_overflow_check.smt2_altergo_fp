@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -238,12 +238,39 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic visible : int
+
+logic hidden : int
+
+logic self__ : integer
+
+logic self__1 : bool
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic hidden1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(hidden))
+
+axiom H1 : in_range(visible)
+
+axiom H2 : in_range(x)
+
+axiom H3 : (self__1 = true)
+
+axiom H4 : (result = hidden)
+
+axiom H5 : (hidden1 = visible)
+
+axiom H6 : ((o = (x + to_rep(self__))) and in_range((x + to_rep(self__))))
+
+axiom H7 : (o1 = (o - hidden1))
+
  (* File "prot.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall visible:int. forall hidden:int. forall self__:integer.
-  forall self__1:bool. forall o:int. forall o1:int. forall result:int.
-  forall hidden1:int. ((((-2147483648) <= 2147483647) -> in_range(hidden)) ->
-  (in_range(visible) -> (in_range(x) -> ((self__1 = true) ->
-  (((result = hidden) and (hidden1 = visible)) ->
-  ((((o = (x + to_rep(self__))) and in_range((x + to_rep(self__)))) and
-  (o1 = (o - hidden1))) -> in_range(o1))))))))
+goal WP_parameter_def : in_range(o1)

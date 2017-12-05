@@ -403,63 +403,127 @@ axiom def_axiom :
   (forall temp___452:int.
   ((stable_marriage__invert_2__result__aggregate_def(temp___451)[temp___452]) = of_rep1(temp___451))))
 
- (* File "stable_marriage.ads", line 45, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:(int,ranking) farray. forall rank:int.
-  forall stable_marriage__invert_2__result:(int,ranking) farray.
-  forall temp___455:int. forall temp___453:(int,ranking) farray.
-  forall o:ranking. forall o1:(int,ranking) farray.
-  forall result:(int,ranking) farray. forall result__1:(int,ranking) farray.
-  forall result1:int. forall rank1:int.
-  forall result__2:(int,ranking) farray. forall rank2:int.
-  forall result2:(int,ranking) farray. forall result__3:(int,ranking) farray.
-  forall result__4:(int,ranking) farray. forall rank3:int.
-  forall result__5:(int,ranking) farray. forall rank4:int.
-  forall result__6:(int,ranking) farray. forall rank5:int.
-  forall result__7:(int,ranking) farray. forall rank6:int.
-  forall result3:(int,ranking) farray.
-  forall stable_marriage__invert_2__result1:(int,ranking) farray.
-  forall stable_marriage__invert_2__result2:(int,ranking) farray.
-  forall stable_marriage__invert_2__result3:(int,ranking) farray.
-  forall result__8:(int,ranking) farray. forall rank7:int.
-  forall stable_marriage__invert_2__result4:(int,ranking) farray.
-  forall result__9:(int,ranking) farray. forall rank8:int.
-  forall stable_marriage__invert_2__result5:(int,ranking) farray.
-  (forall result4:(int,ranking) farray. (((is_permutation_2(r2) = true) and
-  ((((({ map__content1 = result } = { map__content1 = result__ }) and
+logic result__ : (int,ranking) farray
+
+logic rank : int
+
+logic stable_marriage__invert_2__result : (int,ranking) farray
+
+logic temp___455 : int
+
+logic temp___453 : (int,ranking) farray
+
+logic prev : int
+
+logic g2 : int
+
+logic prev1 : int
+
+logic o : ranking
+
+logic o1 : (int,ranking) farray
+
+logic result : (int,ranking) farray
+
+logic result__1 : (int,ranking) farray
+
+logic result1 : int
+
+logic rank1 : int
+
+logic result__2 : (int,ranking) farray
+
+logic rank2 : int
+
+logic result2 : (int,ranking) farray
+
+logic result__3 : (int,ranking) farray
+
+logic result3 : int
+
+logic rank3 : int
+
+logic result__4 : (int,ranking) farray
+
+logic rank4 : int
+
+logic result__5 : (int,ranking) farray
+
+logic rank5 : int
+
+logic result__6 : (int,ranking) farray
+
+logic rank6 : int
+
+logic result__7 : (int,ranking) farray
+
+logic rank7 : int
+
+logic result4 : (int,ranking) farray
+
+logic stable_marriage__invert_2__result1 : (int,ranking) farray
+
+logic stable_marriage__invert_2__result2 : (int,ranking) farray
+
+logic stable_marriage__invert_2__result3 : (int,ranking) farray
+
+logic result__8 : (int,ranking) farray
+
+logic rank8 : int
+
+logic stable_marriage__invert_2__result4 : (int,ranking) farray
+
+logic result__9 : (int,ranking) farray
+
+logic rank9 : int
+
+logic stable_marriage__invert_2__result5 : (int,ranking) farray
+
+logic result5 : (int,ranking) farray
+
+axiom H : (is_permutation_2(r2) = true)
+
+axiom H1 : ((((result = result__) and
   (result__1 = stable_marriage__invert_2__result__aggregate_def(64))) and
   ((forall rank11:int. (((1 <= rank11) and (rank11 <= 64)) ->
    (forall rank21:int. (((1 <= rank21) and (rank21 <= 64)) ->
    ((not (rank11 = rank21)) ->
    (not (to_rep((r2[rank11])) = to_rep((r2[rank21]))))))))) and
-  (((({ int__content = result1 } = { int__content = rank }) and
-  (rank1 = 1)) and ((((1 <= rank1) and (rank1 <= 64)) and
-  ((((temp___455 = rank1) and ((temp___453 = result__1) and
-  (((forall prev:int. (((1 <= prev) and (prev <= (rank2 - 1))) ->
-    (to_rep1((result__2[to_rep((r2[prev]))])) = prev))) and
-  (forall g2:int. (((1 <= g2) and (g2 <= 64)) ->
-  ((exists prev:int. (((1 <= prev) and (prev <= (rank2 - 1))) and
-   (to_rep((r2[prev])) = g2))) ->
-  (to_rep((r2[to_rep1((result__2[g2]))])) = g2))))) and ((((1 <= 64) ->
+  ((((result1 = rank) and (rank1 = 1)) and ((((1 <= rank1) and
+  (rank1 <= 64)) -> ((((temp___455 = rank1) and ((temp___453 = result__1) and
+  (((forall prev2:int. (((1 <= prev2) and (prev2 <= (rank2 - 1))) ->
+    (to_rep1((result__2[to_rep((r2[prev2]))])) = prev2))) and
+  (forall g21:int. (((1 <= g21) and (g21 <= 64)) ->
+  ((exists prev2:int. (((1 <= prev2) and (prev2 <= (rank2 - 1))) and
+   (to_rep((r2[prev2])) = g21))) ->
+  (to_rep((r2[to_rep1((result__2[g21]))])) = g21))))) and ((((1 <= 64) ->
   in_range2(rank2)) and ((1 <= rank2) and (rank2 <= 64))) and
   ((((to_rep1(o) = rank2) and
   (o1 = (result__2[to_rep((r2[rank2])) <- o]))) and
   ((result__2 = result2) and (result__3 = o1))) and (rank2 = 64)))))) and
-  (((rank2 = rank3) and (result__3 = result__4)) and ((rank4 = rank2) and
-  (result__5 = result__3)))) and (((rank3 = rank5) and
-  (result__4 = result__6)) and ((rank6 = rank4) and
-  (result__7 = result__5))))) or ((not ((1 <= rank1) and (rank1 <= 64))) and
-  (((rank1 = rank5) and (result__1 = result__6)) and ((rank6 = rank1) and
+  (((rank2 = rank4) and (result__3 = result__4)) and ((rank5 = rank2) and
+  (result__5 = result__3)))) and (((rank6 = rank4) and
+  (result__6 = result__4)) and ((rank7 = rank5) and
+  (result__7 = result__5))))) and ((not ((1 <= rank1) and (rank1 <= 64))) ->
+  (((rank1 = rank6) and (result__1 = result__6)) and ((rank7 = rank1) and
   (result__7 = result__1)))))) and
   (((stable_marriage__invert_2__result1 = stable_marriage__invert_2__result2) and
   (stable_marriage__invert_2__result3 = stable_marriage__invert_2__result1)) and
-  ((result3 = stable_marriage__invert_2__result) and
+  ((result4 = stable_marriage__invert_2__result) and
   (stable_marriage__invert_2__result1 = result__6)))))) and
   (((stable_marriage__invert_2__result4 = stable_marriage__invert_2__result2) and
-  (({ int__content = rank7 } = { int__content = rank5 }) and ({
-  map__content1 = result__8 } = { map__content1 = result__6 }))) and
+  ((rank8 = rank6) and (result__8 = result__6))) and
   ((stable_marriage__invert_2__result5 = stable_marriage__invert_2__result3) and
-  ((rank8 = rank6) and (result__9 = result__7))))) and
-  (result4 = stable_marriage__invert_2__result4))) ->
-  (forall rank9:int. (((1 <= rank9) and (rank9 <= 64)) ->
-  (to_rep1((stable_marriage__invert_2__result4[to_rep((r2[rank9]))])) = rank9))))))
+  ((rank9 = rank7) and (result__9 = result__7)))))
+
+axiom H2 : (result5 = stable_marriage__invert_2__result4)
+
+logic rank10 : int
+
+axiom H3 : (1 <= rank10)
+
+axiom H4 : (rank10 <= 64)
+
+ (* File "stable_marriage.ads", line 45, characters 0-0 *)
+goal WP_parameter_def :
+  (to_rep1((stable_marriage__invert_2__result4[to_rep((r2[rank10]))])) = rank10)

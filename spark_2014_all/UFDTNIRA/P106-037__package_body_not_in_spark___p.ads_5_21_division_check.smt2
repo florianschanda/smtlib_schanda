@@ -53,6 +53,7 @@
 (assert (forall ((us_void_param tuple0)) (! (= (zero us_void_param) 0) :pattern ((zero us_void_param)))))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (and (= o (zero Tuple0)) (and (in_range o) (= o 0))))
 (assert (not (not (= o 0))))
 (check-sat)

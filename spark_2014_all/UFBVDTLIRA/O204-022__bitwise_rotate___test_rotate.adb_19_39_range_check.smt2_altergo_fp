@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -601,7 +601,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -689,7 +689,32 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test_rotate__r__result : t
+
+logic o : int
+
+logic o1 : t
+
+logic o2 : t
+
+logic result : t
+
+logic test_rotate__r__result1 : t
+
+logic test_rotate__r__result2 : t
+
+logic test_rotate__r__result3 : t
+
+logic test_rotate__r__result4 : t
+
+logic test_rotate__r__result5 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (ule(a, of_int(18446744073709551615)) and
+  ((not (a = of_int(0))) and ule(b, of_int(2147483647))))
+
  (* File "commontypes.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : ((ule(a, of_int(18446744073709551615)) and
-  ((not (a = of_int(0))) and ule(b, of_int(2147483647)))) ->
-  in_range(tqtint(b)))
+goal WP_parameter_def : in_range(tqtint(b))

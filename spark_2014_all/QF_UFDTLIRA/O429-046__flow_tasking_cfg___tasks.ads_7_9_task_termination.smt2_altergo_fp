@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -137,18 +137,62 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic visible : int
+
+logic hidden : int
+
+logic temp___188 : int
+
+logic o : int
+
+logic visible1 : int
+
+logic visible2 : int
+
+logic result : int
+
+logic visible3 : int
+
+logic visible4 : int
+
+logic visible5 : int
+
+logic visible6 : int
+
+logic visible7 : int
+
+axiom H : in_range1(hidden)
+
+axiom H1 : in_range1(visible)
+
+axiom H2 : (((hidden <= 0) and (visible <= 0)) -> (temp___188 = visible))
+
+axiom H3 : (((hidden <= 0) and (visible <= 0)) -> (in_range1(visible2) and
+  ((hidden <= 0) and (visible2 <= 0))))
+
+axiom H4 : (((hidden <= 0) and (visible <= 0)) ->
+  ((o = (visible2 + hidden)) and in_range1((visible2 + hidden))))
+
+axiom H5 : (((hidden <= 0) and (visible <= 0)) -> (result = visible2))
+
+axiom H6 : (((hidden <= 0) and (visible <= 0)) -> (visible3 = o))
+
+axiom H7 : (((hidden <= 0) and (visible <= 0)) -> (not ((hidden <= 0) and
+  (visible3 <= 0))))
+
+axiom H8 : (((hidden <= 0) and (visible <= 0)) -> (visible3 = visible4))
+
+axiom H9 : (((hidden <= 0) and (visible <= 0)) -> (visible5 = visible3))
+
+axiom H10 : (((hidden <= 0) and (visible <= 0)) -> (visible6 = visible4))
+
+axiom H11 : (((hidden <= 0) and (visible <= 0)) -> (visible7 = visible5))
+
+axiom H12 : ((not ((hidden <= 0) and (visible <= 0))) ->
+  (visible6 = visible))
+
+axiom H13 : ((not ((hidden <= 0) and (visible <= 0))) ->
+  (visible7 = visible1))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall visible:int. forall hidden:int. forall temp___188:int.
-  forall o:int. forall visible1:int. forall visible2:int. forall result:int.
-  forall visible3:int. forall visible4:int. forall visible5:int.
-  forall visible6:int. forall visible7:int. (not (in_range1(hidden) and
-  (in_range1(visible) and ((((hidden <= 0) and (visible <= 0)) and
-  ((((temp___188 = visible) and ((in_range1(visible2) and ((hidden <= 0) and
-  (visible2 <= 0))) and ((((o = (visible2 + hidden)) and
-  in_range1((visible2 + hidden))) and ((result = visible2) and
-  (visible3 = o))) and (not ((hidden <= 0) and (visible3 <= 0)))))) and
-  ((visible3 = visible4) and (visible5 = visible3))) and
-  ((visible4 = visible6) and (visible7 = visible5)))) or
-  ((not ((hidden <= 0) and (visible <= 0))) and ((visible = visible6) and
-  (visible7 = visible1))))))))
+goal WP_parameter_def : false

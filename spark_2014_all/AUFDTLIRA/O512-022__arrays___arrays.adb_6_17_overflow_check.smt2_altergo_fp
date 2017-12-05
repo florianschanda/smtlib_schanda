@@ -109,7 +109,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -394,14 +394,91 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic s : int
+
+logic j : int
+
+logic arrays__sum__result : int
+
+logic j1 : int
+
+logic temp___164 : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic s1 : int
+
+logic result1 : int
+
+logic j2 : int
+
+logic s2 : int
+
+logic j3 : int
+
+logic result2 : int
+
+logic s3 : int
+
+logic s4 : int
+
+logic j4 : int
+
+logic s5 : int
+
+logic j5 : int
+
+logic s6 : int
+
+logic j6 : int
+
+logic s7 : int
+
+logic j7 : int
+
+logic result3 : int
+
+logic arrays__sum__result1 : int
+
+logic arrays__sum__result2 : int
+
+logic arrays__sum__result3 : int
+
+logic s8 : int
+
+logic j8 : int
+
+logic arrays__sum__result4 : int
+
+logic s9 : int
+
+logic j9 : int
+
+logic arrays__sum__result5 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(x1)),
+  to_rep1(last(x1)))
+
+axiom H1 : (result = s)
+
+axiom H2 : (s1 = 0)
+
+axiom H3 : in_range2(s1)
+
+axiom H4 : (result1 = j)
+
+axiom H5 : (j2 = to_rep1(first(x1)))
+
+axiom H6 : (to_rep1(first(x1)) <= j2)
+
+axiom H7 : (j2 <= to_rep1(last(x1)))
+
+axiom H8 : (((0 <= 2147483647) -> in_range2(s2)) and
+  ((to_rep1(first(x1)) <= j3) and (j3 <= to_rep1(last(x1)))))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall s:int. forall j:int. forall result:int. forall s1:int.
-  forall result1:int. forall j1:int. forall s2:int. forall j2:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(x1)), to_rep1(last(x1))) ->
-  ((({ int__content = result } = { int__content = s }) and (s1 = 0)) ->
-  (in_range2(s1) -> ((({ int__content = result1 } = { int__content = j }) and
-  (j1 = to_rep1(first(x1)))) -> (((to_rep1(first(x1)) <= j1) and
-  (j1 <= to_rep1(last(x1)))) -> ((((0 <= 2147483647) -> in_range2(s2)) and
-  ((to_rep1(first(x1)) <= j2) and (j2 <= to_rep1(last(x1))))) ->
-  in_range1((s2 + to_rep((x[j2])))))))))))
+goal WP_parameter_def : in_range1((s2 + to_rep((x[j3]))))

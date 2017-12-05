@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type my_integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,17 @@ function my_integer__ref___projection(a: my_integer__ref) : my_integer =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic mi : int
+
+logic result : int
+
+logic mi1 : int
+
+axiom H : (result = mi)
+
+axiom H1 : (mi1 = 0)
+
+axiom H2 : in_range(mi1)
+
  (* File "integer_true_check.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mi:int. forall result:int. forall mi1:int. (((result = mi) and
-  (mi1 = 0)) -> (in_range(mi1) -> (0 <= mi1))))
+goal WP_parameter_def : (0 <= mi1)

@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -966,7 +966,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tdigit_count_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1968,35 +1968,163 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
- (* File "very_longs-divide.adb", line 92, characters 0-0 *)
-goal WP_parameter_def :
-  (forall n:int. forall u__split_fields:(int,octet) farray.
-  forall u__split_fields1:t3. forall v__split_fields:(int,octet) farray.
-  forall v__split_fields1:t4. forall q_hat:t1. forall temporary_digit:t1.
-  forall r_hat:t1. forall temp___1247:int. forall o:int. forall o1:octet.
-  forall o2:t. forall o3:t1. forall o4:int. forall temp___1249:int.
-  forall o5:int. forall o6:octet. forall o7:t. forall o8:t1. forall o9:t1.
-  forall o10:t1. forall o11:int. forall o12:octet. forall o13:t.
-  forall o14:t1. forall o15:t1. forall o16:int. forall o17:octet.
-  forall o18:t. forall o19:t1. forall o20:t1. forall o21:int.
-  forall temp___1255:int. forall result:t1. forall temporary_digit1:t1.
-  forall result1:t1. forall q_hat1:t1. forall result2:t1. forall r_hat1:t1.
-  ((dynamic_property1(1, to_rep(dividend), to_rep2(first(dividend2)),
+logic n : int
+
+logic u__split_fields : (int,octet) farray
+
+logic u__split_fields1 : t3
+
+logic v__split_fields : (int,octet) farray
+
+logic v__split_fields1 : t4
+
+logic q_hat : t1
+
+logic temporary_digit : t1
+
+logic r_hat : t1
+
+logic o : int
+
+logic temp___1247 : int
+
+logic o1 : int
+
+logic o2 : octet
+
+logic o3 : t
+
+logic o4 : t1
+
+logic o5 : int
+
+logic temp___1249 : int
+
+logic o6 : int
+
+logic o7 : octet
+
+logic o8 : t
+
+logic o9 : t1
+
+logic o10 : t1
+
+logic o11 : t1
+
+logic o12 : int
+
+logic o13 : octet
+
+logic o14 : t
+
+logic o15 : t1
+
+logic o16 : t1
+
+logic o17 : int
+
+logic o18 : octet
+
+logic o19 : t
+
+logic o20 : t1
+
+logic o21 : t1
+
+logic o22 : int
+
+logic o23 : octet
+
+logic o24 : t
+
+logic o25 : t1
+
+logic o26 : int
+
+logic temp___1255 : int
+
+logic o27 : int
+
+logic o28 : octet
+
+logic o29 : t
+
+logic o30 : t1
+
+logic o31 : t1
+
+logic o32 : t1
+
+logic o33 : bool
+
+logic o34 : int
+
+logic o35 : octet
+
+logic o36 : t
+
+logic o37 : t1
+
+logic o38 : t1
+
+logic o39 : int
+
+logic temp___1260 : int
+
+logic o40 : int
+
+logic o41 : octet
+
+logic o42 : t
+
+logic o43 : t1
+
+logic o44 : t1
+
+logic result : t1
+
+logic temporary_digit1 : t1
+
+logic result1 : t1
+
+logic q_hat1 : t1
+
+logic result2 : t1
+
+logic r_hat1 : t1
+
+logic result3 : bool
+
+logic result4 : t1
+
+logic q_hat2 : t1
+
+logic result5 : t1
+
+logic r_hat2 : t1
+
+axiom H : (dynamic_property1(1, to_rep(dividend), to_rep2(first(dividend2)),
   to_rep2(last(dividend2))) and ((to_rep2(first(dividend2)) = 1) and
-  (to_rep2(last(dividend2)) = to_rep(dividend)))) -> ((dynamic_property1(1,
-  to_rep(divisor), to_rep2(first(divisor2)), to_rep2(last(divisor2))) and
-  ((to_rep2(first(divisor2)) = 1) and
-  (to_rep2(last(divisor2)) = to_rep(divisor)))) -> (dynamic_property2(1,
-  last2, n) -> ((((to_rep(dividend) + 1) = to_rep(((to_base({
-  us_split_discrs2 = { rec__very_longs__very_long__length = u__split_discrs
-  }; us_split_fields3 = { rec__very_longs__very_long__long_digits1 = {
-  elts1 = u__split_fields; rt1 = u__split_fields1 } }
+  (to_rep2(last(dividend2)) = to_rep(dividend))))
+
+axiom H1 : (dynamic_property1(1, to_rep(divisor), to_rep2(first(divisor2)),
+  to_rep2(last(divisor2))) and ((to_rep2(first(divisor2)) = 1) and
+  (to_rep2(last(divisor2)) = to_rep(divisor))))
+
+axiom H2 : dynamic_property2(1, last2, n)
+
+axiom H3 : (((to_rep(dividend) + 1) = to_rep(((to_base({ us_split_discrs2 = {
+  rec__very_longs__very_long__length = u__split_discrs }; us_split_fields3 =
+  { rec__very_longs__very_long__long_digits1 = { elts1 = u__split_fields;
+  rt1 = u__split_fields1 } }
   })).us_split_discrs1).rec__very_longs__very_long__length)) and
   (dynamic_property4(1, (to_rep(dividend) + 1),
   to_rep2(first2(u__split_fields1)), to_rep2(last3(u__split_fields1))) and
   ((to_rep2(first2(u__split_fields1)) = 1) and
-  (to_rep2(last3(u__split_fields1)) = (to_rep(dividend) + 1))))) ->
-  (((to_rep(divisor) = to_rep(((to_base1({ us_split_discrs3 = {
+  (to_rep2(last3(u__split_fields1)) = (to_rep(dividend) + 1)))))
+
+axiom H4 : ((to_rep(divisor) = to_rep(((to_base1({ us_split_discrs3 = {
   rec__very_longs__very_long__length = v__split_discrs }; us_split_fields5 =
   { rec__very_longs__very_long__long_digits2 = { elts2 = v__split_fields;
   rt2 = v__split_fields1 } }
@@ -2004,30 +2132,91 @@ goal WP_parameter_def :
   (dynamic_property6(1, to_rep(divisor), to_rep2(first4(v__split_fields1)),
   to_rep2(last5(v__split_fields1))) and
   ((to_rep2(first4(v__split_fields1)) = 1) and
-  (to_rep2(last5(v__split_fields1)) = to_rep(divisor))))) -> (in_range2(j) ->
-  (((1 <  n) and ((j + n) <= to_rep(u__split_discrs))) ->
-  ((((((((((o4 = (j + n)) and in_range1((j + n))) and
-  (temp___1249 = (o4 - 1))) and
-  (((to_rep2(first2(u__split_fields1)) <= temp___1249) and
-  (temp___1249 <= to_rep2(last3(u__split_fields1)))) and
-  (o5 = temp___1249))) and (o6 = (u__split_fields[o5]))) and
-  (o7 = to_rep1(o6))) and (o8 = toBig(o7))) and
-  ((((((((temp___1247 = (j + n)) and in_range1((j + n))) and
-  (((to_rep2(first2(u__split_fields1)) <= temp___1247) and
-  (temp___1247 <= to_rep2(last3(u__split_fields1)))) and
-  (o = temp___1247))) and (o1 = (u__split_fields[o]))) and
-  (o2 = to_rep1(o1))) and (o3 = toBig(o2))) and (o9 = mul1(of_int1(256),
-  o3))) and (o10 = add1(o9, o8)))) and ((result = temporary_digit) and
-  (temporary_digit1 = o10))) ->
-  (((((((((to_rep2(first4(v__split_fields1)) <= n) and
-  (n <= to_rep2(last5(v__split_fields1)))) and (o11 = n)) and
-  (o12 = (v__split_fields[o11]))) and (o13 = to_rep1(o12))) and
-  (o14 = toBig(o13))) and (o15 = udiv1(temporary_digit1, o14))) and
-  ((result1 = q_hat) and (q_hat1 = o15))) ->
-  (((((((((to_rep2(first4(v__split_fields1)) <= n) and
-  (n <= to_rep2(last5(v__split_fields1)))) and (o16 = n)) and
-  (o17 = (v__split_fields[o16]))) and (o18 = to_rep1(o17))) and
-  (o19 = toBig(o18))) and (o20 = urem1(temporary_digit1, o19))) and
-  ((result2 = r_hat) and (r_hat1 = o20))) -> ((((o21 = (j + n)) and
-  in_range1((j + n))) and (temp___1255 = (o21 - 2))) ->
-  (to_rep2(first2(u__split_fields1)) <= temp___1255)))))))))))))
+  (to_rep2(last5(v__split_fields1)) = to_rep(divisor)))))
+
+axiom H5 : true
+
+axiom H6 : in_range2(j)
+
+axiom H7 : ((1 <  n) and ((j + n) <= to_rep(u__split_discrs)))
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : ((o5 = (j + n)) and in_range1((j + n)))
+
+axiom H11 : (temp___1249 = (o5 - 1))
+
+axiom H12 : ((to_rep2(first2(u__split_fields1)) <= temp___1249) and
+  (temp___1249 <= to_rep2(last3(u__split_fields1))))
+
+axiom H13 : (o6 = temp___1249)
+
+axiom H14 : (o7 = (u__split_fields[o6]))
+
+axiom H15 : (o8 = to_rep1(o7))
+
+axiom H16 : (o9 = toBig(o8))
+
+axiom H17 : ((temp___1247 = (j + n)) and in_range1((j + n)))
+
+axiom H18 : ((to_rep2(first2(u__split_fields1)) <= temp___1247) and
+  (temp___1247 <= to_rep2(last3(u__split_fields1))))
+
+axiom H19 : (o1 = temp___1247)
+
+axiom H20 : (o2 = (u__split_fields[o1]))
+
+axiom H21 : (o3 = to_rep1(o2))
+
+axiom H22 : (o4 = toBig(o3))
+
+axiom H23 : (o10 = mul1(of_int1(256), o4))
+
+axiom H24 : (o11 = add1(o10, o9))
+
+axiom H25 : (result = temporary_digit)
+
+axiom H26 : (temporary_digit1 = o11)
+
+axiom H27 : ((to_rep2(first4(v__split_fields1)) <= n) and
+  (n <= to_rep2(last5(v__split_fields1))))
+
+axiom H28 : (o12 = n)
+
+axiom H29 : (o13 = (v__split_fields[o12]))
+
+axiom H30 : (o14 = to_rep1(o13))
+
+axiom H31 : (o15 = toBig(o14))
+
+axiom H32 : (o16 = udiv1(temporary_digit1, o15))
+
+axiom H33 : (result1 = q_hat)
+
+axiom H34 : (q_hat1 = o16)
+
+axiom H35 : ((to_rep2(first4(v__split_fields1)) <= n) and
+  (n <= to_rep2(last5(v__split_fields1))))
+
+axiom H36 : (o17 = n)
+
+axiom H37 : (o18 = (v__split_fields[o17]))
+
+axiom H38 : (o19 = to_rep1(o18))
+
+axiom H39 : (o20 = toBig(o19))
+
+axiom H40 : (o21 = urem1(temporary_digit1, o20))
+
+axiom H41 : (result2 = r_hat)
+
+axiom H42 : (r_hat1 = o21)
+
+axiom H43 : ((o26 = (j + n)) and in_range1((j + n)))
+
+axiom H44 : (temp___1255 = (o26 - 2))
+
+ (* File "very_longs-divide.adb", line 92, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first2(u__split_fields1)) <= temp___1255)

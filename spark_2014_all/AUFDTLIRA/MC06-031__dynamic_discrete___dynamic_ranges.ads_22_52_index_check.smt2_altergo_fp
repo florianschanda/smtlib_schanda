@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -481,73 +481,141 @@ axiom last__def_axiom2 : (last2 = to_rep(last(a1)))
 
 axiom c__def_axiom : (c = (last3 - 1))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dynamic_ranges__search_0__result:int. forall temp___244:int.
-  forall us:int. forall dynamic_ranges__search_0__c__assume:int.
-  forall o:int. forall o1:integer. forall o2:int. forall o3:int.
-  forall temp___245:int. forall o4:int. forall o5:integer. forall o6:int.
-  forall o7:int. forall o8:int. forall o9:int. forall i:int.
-  forall result:bool. forall result1:int.
-  forall dynamic_ranges__search_0__result1:int. forall result2:bool.
-  forall result3:int. forall dynamic_ranges__search_0__result2:int.
-  forall result4:int. forall dynamic_ranges__search_0__result3:int.
-  forall dynamic_ranges__search_0__result4:int.
-  forall dynamic_ranges__search_0__result5:int.
-  forall dynamic_ranges__search_0__result6:int.
-  forall dynamic_ranges__search_0__result7:int.
-  forall dynamic_ranges__search_0__result8:int.
-  forall dynamic_ranges__search_0__result9:int.
-  forall dynamic_ranges__search_0__result10:int.
-  forall dynamic_ranges__search_0__result11:int. (dynamic_property(1,
-  2147483647, to_rep(first(a1)), to_rep(last(a1))) ->
-  (((to_rep(first(a1)) <= to_rep(last(a1))) and
-  (2 <= (to_rep(last(a1)) - to_rep(first(a1))))) ->
-  (((((((temp___244 = (last3 - 1)) and in_range1((last3 - 1))) and
-  (((us = temp___244) and dynamic_property2(0, last3, temp___244)) and
-  (dynamic_ranges__search_0__c__assume = temp___244))) and
-  (dynamic_ranges__search_0__c__assume = c)) and (dynamic_property2(0, last3,
-  c) and ((({ int__content = dynamic_ranges__search_0__result8 } = {
-  int__content = dynamic_ranges__search_0__result6 }) and
+logic dynamic_ranges__search_0__result : int
+
+logic o : int
+
+logic us : int
+
+logic temp___244 : int
+
+logic us1 : int
+
+logic dynamic_ranges__search_0__c__assume : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___245 : int
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic i : int
+
+logic result : bool
+
+logic result1 : int
+
+logic dynamic_ranges__search_0__result1 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic dynamic_ranges__search_0__result2 : int
+
+logic result4 : int
+
+logic dynamic_ranges__search_0__result3 : int
+
+logic dynamic_ranges__search_0__result4 : int
+
+logic dynamic_ranges__search_0__result5 : int
+
+logic dynamic_ranges__search_0__result6 : int
+
+logic dynamic_ranges__search_0__result7 : int
+
+logic dynamic_ranges__search_0__result8 : int
+
+logic dynamic_ranges__search_0__result9 : int
+
+logic dynamic_ranges__search_0__result10 : int
+
+logic dynamic_ranges__search_0__result11 : int
+
+logic result5 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : ((to_rep(first(a1)) <= to_rep(last(a1))) and
+  (2 <= (to_rep(last(a1)) - to_rep(first(a1)))))
+
+axiom H2 : ((temp___244 = (last3 - 1)) and in_range1((last3 - 1)))
+
+axiom H3 : ((us1 = temp___244) and dynamic_property2(0, last3, temp___244))
+
+axiom H4 : (dynamic_ranges__search_0__c__assume = temp___244)
+
+axiom H5 : (dynamic_ranges__search_0__c__assume = c)
+
+axiom H6 : dynamic_property2(0, last3, c)
+
+axiom H7 :
+  (((dynamic_ranges__search_0__result8 = dynamic_ranges__search_0__result6) and
   (dynamic_ranges__search_0__result9 = dynamic_ranges__search_0__result7)) and
   (((((((to_rep(first(a1)) <= to_rep(last(a1))) and
-  (to_rep(last(a1)) <= to_rep(last(a1)))) and (o = to_rep(last(a1)))) and
-  (o1 = (a[o]))) and (o2 = to_rep(o1))) and (((o2 = 0) and
-  (result = true)) or ((not (o2 = 0)) and (result = false)))) and
-  (((result = true) and
+  (to_rep(last(a1)) <= to_rep(last(a1)))) and (o1 = to_rep(last(a1)))) and
+  (o2 = (a[o1]))) and (o3 = to_rep(o2))) and (((o3 = 0) ->
+  (result = true)) and ((not (o3 = 0)) -> (result = false)))) and
+  (((result = true) ->
   (((dynamic_ranges__search_0__result1 = dynamic_ranges__search_0__result6) and
   (dynamic_ranges__search_0__result7 = dynamic_ranges__search_0__result1)) and
-  (((o3 = to_rep(last(a1))) and in_range2(to_rep(last(a1)))) and (({
-  int__content = result1 } = { int__content =
-  dynamic_ranges__search_0__result }) and
-  (dynamic_ranges__search_0__result1 = o3))))) or ((not (result = true)) and
-  ((({ int__content = dynamic_ranges__search_0__result6 } = { int__content =
-  dynamic_ranges__search_0__result4 }) and
+  (((o4 = to_rep(last(a1))) and in_range2(to_rep(last(a1)))) and
+  ((result1 = dynamic_ranges__search_0__result) and
+  (dynamic_ranges__search_0__result1 = o4))))) and ((not (result = true)) ->
+  (((dynamic_ranges__search_0__result6 = dynamic_ranges__search_0__result4) and
   (dynamic_ranges__search_0__result7 = dynamic_ranges__search_0__result5)) and
   (((((((temp___245 = (to_rep(last(a1)) - 1)) and
   in_range1((to_rep(last(a1)) - 1))) and
   (((to_rep(first(a1)) <= temp___245) and
-  (temp___245 <= to_rep(last(a1)))) and (o4 = temp___245))) and
-  (o5 = (a[o4]))) and (o6 = to_rep(o5))) and (((o6 = 0) and
-  (result2 = true)) or ((not (o6 = 0)) and (result2 = false)))) and
-  (((result2 = true) and
+  (temp___245 <= to_rep(last(a1)))) and (o5 = temp___245))) and
+  (o6 = (a[o5]))) and (o7 = to_rep(o6))) and (((o7 = 0) ->
+  (result2 = true)) and ((not (o7 = 0)) -> (result2 = false)))) and
+  (((result2 = true) ->
   (((dynamic_ranges__search_0__result2 = dynamic_ranges__search_0__result4) and
   (dynamic_ranges__search_0__result5 = dynamic_ranges__search_0__result2)) and
-  ((((o7 = (to_rep(last(a1)) - 1)) and in_range1((to_rep(last(a1)) - 1))) and
-  ((o8 = o7) and in_range2(o7))) and (({ int__content = result3 } = {
-  int__content = dynamic_ranges__search_0__result }) and
-  (dynamic_ranges__search_0__result2 = o8))))) or ((not (result2 = true)) and
+  ((((o8 = (to_rep(last(a1)) - 1)) and in_range1((to_rep(last(a1)) - 1))) and
+  ((o9 = o8) and in_range2(o8))) and
+  ((result3 = dynamic_ranges__search_0__result) and
+  (dynamic_ranges__search_0__result2 = o9))))) and ((not (result2 = true)) ->
   (((dynamic_ranges__search_0__result3 = dynamic_ranges__search_0__result4) and
   (dynamic_ranges__search_0__result5 = dynamic_ranges__search_0__result3)) and
-  (((o9 = nested(void)) and (dynamic_property3(0, last4, o9) and
-  (((o9 = 0) and
+  (((o10 = nested(void)) and (dynamic_property3(0, last4, o10) and
+  (((o10 = 0) and
   (forall i1:int. (((to_rep(first(a1)) <= i1) and (i1 <= c)) ->
-  (not (to_rep((a[i1])) = 0))))) or ((to_rep(first(a1)) <= o9) and
-  (to_rep((a[o9])) = 0))))) and (({ int__content = result4 } = {
-  int__content = dynamic_ranges__search_0__result }) and
-  (dynamic_ranges__search_0__result3 = o9)))))))))))))) and (({
-  int__content = dynamic_ranges__search_0__result10 } = { int__content =
-  dynamic_ranges__search_0__result8 }) and
-  (dynamic_ranges__search_0__result11 = dynamic_ranges__search_0__result9))) ->
-  ((dynamic_ranges__search_0__result10 = 0) -> (((to_rep(first(a1)) <= i) and
-  (i <= to_rep(last(a1)))) -> (to_rep(first(a1)) <= i)))))))
+  (not (to_rep((a[i1])) = 0))))) or ((to_rep(first(a1)) <= o10) and
+  (to_rep((a[o10])) = 0))))) and
+  ((result4 = dynamic_ranges__search_0__result) and
+  (dynamic_ranges__search_0__result3 = o10))))))))))))
+
+axiom H8 :
+  (dynamic_ranges__search_0__result10 = dynamic_ranges__search_0__result8)
+
+axiom H9 :
+  (dynamic_ranges__search_0__result11 = dynamic_ranges__search_0__result9)
+
+axiom H10 : (dynamic_ranges__search_0__result10 = 0)
+
+axiom H11 : (to_rep(first(a1)) <= i)
+
+axiom H12 : (i <= to_rep(last(a1)))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep(first(a1)) <= i)

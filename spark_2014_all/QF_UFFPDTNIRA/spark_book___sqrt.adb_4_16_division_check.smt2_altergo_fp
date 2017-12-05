@@ -1096,10 +1096,52 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic approx : t
+
+logic o : t
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic result : t
+
+logic approx1 : t
+
+logic result1 : bool
+
+logic approx2 : t
+
+logic result2 : t
+
+logic approx3 : t
+
+axiom H : tqtisFinite(x)
+
+axiom H1 : tqtisFinite(tolerance)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
+
+axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(approx))
 
 logic fliteral2 : t
 
@@ -1107,7 +1149,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall approx:t. (tqtisFinite(x) -> (tqtisFinite(tolerance) ->
-  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(approx)) ->
-  (not is_zero(fliteral2))))))
+goal WP_parameter_def : (not is_zero(fliteral2))

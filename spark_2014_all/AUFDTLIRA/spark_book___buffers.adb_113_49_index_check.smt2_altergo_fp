@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -490,36 +490,111 @@ axiom def_axiom :
   (forall temp___256:int.
   ((temp___253(temp___255)[temp___256]) = of_rep(temp___255))))
 
- (* File "buffers.adb", line 69, characters 0-0 *)
-goal WP_parameter_def :
-  (forall buffer:(int,character) farray. forall characters_to_copy:int.
-  forall index:int. forall o:int. forall o1:int. forall temp___257:int.
-  forall result:int. forall characters_to_copy1:int.
-  forall result1:(int,character) farray.
-  forall buffer1:(int,character) farray. forall result2:bool.
-  forall result3:int. forall characters_to_copy2:int. forall result4:int.
-  forall index1:int. forall buffer2:(int,character) farray.
-  forall index2:int. (dynamic_property(1, 2147483647,
-  to_rep1(first(source1)), to_rep1(last(source1))) ->
-  (((result = characters_to_copy) and (characters_to_copy1 = 1024)) ->
-  (in_range4(characters_to_copy1) -> (((result1 = buffer) and
-  (buffer1 = temp___253(32))) -> (((((o = length({ elts = source; rt =
-  source1 })) and in_range1(length({ elts = source; rt = source1 }))) and
-  (((o <  characters_to_copy1) and (result2 = true)) or
-  ((not (o <  characters_to_copy1)) and (result2 = false)))) and
-  (((result2 = true) and (((o1 = length({ elts = source; rt = source1 })) and
-  in_range4(length({ elts = source; rt = source1 }))) and
-  ((result3 = characters_to_copy1) and (characters_to_copy2 = o1)))) or
-  ((not (result2 = true)) and
-  (characters_to_copy2 = characters_to_copy1)))) ->
-  (((characters_to_copy2 = r14b) and in_range4(r14b)) ->
-  (((result4 = index) and (index1 = 1)) -> (((1 <= index1) and
-  (index1 <= r14b)) -> ((characters_to_copy2 <= length({ elts = source; rt =
-  source1 })) -> (((((1 <= r14b) -> dynamic_property1(1, r14b, index2)) and
+logic buffer : (int,character) farray
+
+logic characters_to_copy : int
+
+logic index : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic temp___257 : int
+
+logic o3 : int
+
+logic o4 : character
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : (int,character) farray
+
+logic result : int
+
+logic characters_to_copy1 : int
+
+logic result1 : (int,character) farray
+
+logic buffer1 : (int,character) farray
+
+logic result2 : bool
+
+logic result3 : int
+
+logic characters_to_copy2 : int
+
+logic result4 : int
+
+logic index1 : int
+
+logic buffer2 : (int,character) farray
+
+logic index2 : int
+
+logic result5 : (int,character) farray
+
+logic buffer3 : (int,character) farray
+
+logic result6 : int
+
+logic index3 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(source1)),
+  to_rep1(last(source1)))
+
+axiom H1 : (result = characters_to_copy)
+
+axiom H2 : (characters_to_copy1 = 1024)
+
+axiom H3 : in_range4(characters_to_copy1)
+
+axiom H4 : (result1 = buffer)
+
+axiom H5 : (buffer1 = temp___253(32))
+
+axiom H6 : ((o = length({ elts = source; rt = source1 })) and
+  in_range1(length({ elts = source; rt = source1 })))
+
+axiom H7 : (((o <  characters_to_copy1) -> (result2 = true)) and
+  ((not (o <  characters_to_copy1)) -> (result2 = false)))
+
+axiom H8 : ((result2 = true) -> ((o1 = length({ elts = source; rt = source1
+  })) and in_range4(length({ elts = source; rt = source1 }))))
+
+axiom H9 : ((result2 = true) -> (result3 = characters_to_copy1))
+
+axiom H10 : ((result2 = true) -> (characters_to_copy2 = o1))
+
+axiom H11 : ((not (result2 = true)) ->
+  (characters_to_copy2 = characters_to_copy1))
+
+axiom H12 : (characters_to_copy2 = r14b)
+
+axiom H13 : in_range4(r14b)
+
+axiom H14 : (result4 = index)
+
+axiom H15 : (index1 = 1)
+
+axiom H16 : (1 <= index1)
+
+axiom H17 : (index1 <= r14b)
+
+axiom H18 : (characters_to_copy2 <= length({ elts = source; rt = source1 }))
+
+axiom H19 : ((((1 <= r14b) -> dynamic_property1(1, r14b, index2)) and
   (forall temp___260:int. (((1 <= temp___260) and (temp___260 <= 1024)) ->
   ((index2 <= temp___260) ->
   ((buffer2[temp___260]) = (buffer1[temp___260])))))) and ((1 <= index2) and
-  (index2 <= r14b))) ->
-  (((temp___257 = (to_rep1(first(source1)) + (index2 - 1))) and
-  in_range1((to_rep1(first(source1)) + (index2 - 1)))) ->
-  (to_rep1(first(source1)) <= temp___257)))))))))))))
+  (index2 <= r14b)))
+
+axiom H20 : ((temp___257 = (to_rep1(first(source1)) + (index2 - 1))) and
+  in_range1((to_rep1(first(source1)) + (index2 - 1))))
+
+ (* File "buffers.adb", line 69, characters 0-0 *)
+goal WP_parameter_def : (to_rep1(first(source1)) <= temp___257)

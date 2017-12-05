@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -496,5 +496,21 @@ axiom def_axiom :
   temp___1991; rec__foo__coordinate_t__z = temp___1992 }
   })[temp___200]) = (temp___197[temp___200]))))))))
 
+logic a__split_fields : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : int
+
+axiom H : in_range(n)
+
+axiom H1 : in_range(m)
+
  (* File "foo.adb", line 35, characters 0-0 *)
-goal WP_parameter_def : (in_range(n) -> (in_range(m) -> (1 <= m)))
+goal WP_parameter_def : (1 <= m)

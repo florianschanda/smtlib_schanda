@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -309,10 +309,51 @@ logic d__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic d : (int,integer) farray
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic concat__three__d__assume : (int,integer) farray
+
+logic concat__three__d__assume1 : t
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic result : (int,integer) farray
+
+logic d1 : (int,integer) farray
+
+axiom H : dynamic_property((- 2147483648), 2147483647, to_rep(first(a1)),
+  to_rep(last(a1)))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep(first(b1)),
+  to_rep(last(b1)))
+
+axiom H2 : (to_rep(first(a1)) <= to_rep(last(a1)))
+
+axiom H3 : (to_rep(first(b1)) <= to_rep(last(b1)))
+
  (* File "concat.adb", line 33, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property((-2147483648), 2147483647,
-  to_rep(first(a1)), to_rep(last(a1))) -> (dynamic_property((-2147483648),
-  2147483647, to_rep(first(b1)), to_rep(last(b1))) ->
-  ((to_rep(first(a1)) <= to_rep(last(a1))) ->
-  ((to_rep(first(b1)) <= to_rep(last(b1))) ->
-  in_range((to_rep(last(b1)) - to_rep(first(b1))))))))
+goal WP_parameter_def : in_range((to_rep(last(b1)) - to_rep(first(b1))))

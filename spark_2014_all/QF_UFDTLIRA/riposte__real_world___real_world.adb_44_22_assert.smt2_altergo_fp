@@ -136,6 +136,11 @@ logic param : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : int
+
+axiom H : in_range1(param)
+
+axiom H1 : ((param = 1) or (param = 3))
+
  (* File "real_world.adb", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range1(param) -> (((param = 1) or (param = 3)) ->
-  (param <  4)))
+goal WP_parameter_def : (param <  4)

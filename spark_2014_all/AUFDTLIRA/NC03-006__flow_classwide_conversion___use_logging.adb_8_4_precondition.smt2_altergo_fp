@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -522,14 +522,24 @@ axiom log_size__def_axiom :
   rec__logging__log_type__log_size = log1; rec__ext__ = log2 }; attr__tag =
   log3 }) = to_rep(log1)))
 
+logic log__split_fields : (int,integer) farray
+
+logic log__split_fields1 : log_count
+
+logic log__split_fields2 : us_private
+
+logic log__split_fields3 : (int,integer) farray
+
+logic log__split_fields4 : log_count
+
+logic log__split_fields5 : us_private
+
+axiom H : (log_size({ us_split_fields1 = { rec__logging__log_type__log_data =
+  log__split_fields; rec__logging__log_type__log_size = log__split_fields1;
+  rec__ext__ = log__split_fields2 }; attr__tag = log__attr__tag }) = 0)
+
  (* File "use_logging.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall log__split_fields:(int,integer) farray.
-  forall log__split_fields1:log_count. forall log__split_fields2:us_private.
-  ((log_size({ us_split_fields1 = { rec__logging__log_type__log_data =
-  log__split_fields; rec__logging__log_type__log_size = log__split_fields1;
-  rec__ext__ = log__split_fields2 }; attr__tag = log__attr__tag }) = 0) ->
-  (log_size({ us_split_fields1 = { rec__logging__log_type__log_data =
-  log__split_fields; rec__logging__log_type__log_size = log__split_fields1;
-  rec__ext__ = log__split_fields2 }; attr__tag = log__attr__tag
-  }) <  10000)))
+goal WP_parameter_def : (log_size({ us_split_fields1 = {
+  rec__logging__log_type__log_data = log__split_fields;
+  rec__logging__log_type__log_size = log__split_fields1; rec__ext__ =
+  log__split_fields2 }; attr__tag = log__attr__tag }) <  10000)

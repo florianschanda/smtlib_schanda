@@ -131,6 +131,8 @@
 (declare-const reg1 (_ BitVec 64))
 (declare-const reg2 (_ BitVec 64))
 (declare-const reg3 (_ BitVec 64))
+(assert true)
+(assert true)
 (assert (= result reg))
 (assert (= reg1 (bvor (bvand reg ((_ int2bv 64) 18446744073709486335)) ((_ zero_extend 48) (bvmul ((_ zero_extend 8) val__) ((_ int2bv 16) 256))))))
 (assert (= reg1 reg2))

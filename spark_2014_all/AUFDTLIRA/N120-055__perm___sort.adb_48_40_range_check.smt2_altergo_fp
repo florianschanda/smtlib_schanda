@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -570,20 +570,177 @@ type t15b__ref = { t15b__content : us_t1
 
 function t15b__ref___projection(a: t15b__ref) : us_t1 = (a).t15b__content
 
+logic values : (int,natural) farray
+
+logic smallest : int
+
+logic current : int
+
+logic o : int
+
+logic temp___172 : int
+
+logic temp___169 : int
+
+logic temp___168 : (int,natural) farray
+
+logic temp___170 : (int,natural) farray
+
+logic temp___166 : int
+
+logic o1 : (int,natural) farray
+
+logic temp___165 : (int,natural) farray
+
+logic temp___1651 : t1
+
+logic o2 : (int,natural) farray
+
+logic o3 : t
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,natural) farray
+
+logic temp___1652 : (int,natural) farray
+
+logic temp___1653 : t1
+
+logic o8 : (int,natural) farray
+
+logic o9 : t
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic values1 : (int,natural) farray
+
+logic smallest1 : int
+
+logic current1 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic current2 : int
+
+logic result2 : int
+
+logic smallest2 : int
+
+logic values2 : (int,natural) farray
+
+logic values3 : (int,natural) farray
+
+logic smallest3 : int
+
+logic current3 : int
+
+logic result3 : int
+
+logic current4 : int
+
+logic result4 : int
+
+logic smallest4 : int
+
+logic values4 : (int,natural) farray
+
+logic values5 : (int,natural) farray
+
+logic smallest5 : int
+
+logic current5 : int
+
+logic values6 : (int,natural) farray
+
+logic smallest6 : int
+
+logic current6 : int
+
+logic values7 : (int,natural) farray
+
+logic smallest7 : int
+
+logic current7 : int
+
+logic values8 : (int,natural) farray
+
+logic smallest8 : int
+
+logic current8 : int
+
+logic values9 : (int,natural) farray
+
+logic smallest9 : int
+
+logic current9 : int
+
+logic values10 : (int,natural) farray
+
+logic smallest10 : int
+
+logic current10 : int
+
+logic values11 : (int,natural) farray
+
+logic smallest11 : int
+
+logic current11 : int
+
+logic values12 : (int,natural) farray
+
+logic smallest12 : int
+
+logic current12 : int
+
+logic values13 : (int,natural) farray
+
+logic smallest13 : int
+
+logic current13 : int
+
+logic values14 : (int,natural) farray
+
+logic smallest14 : int
+
+logic current14 : int
+
+axiom H : dynamic_property(1, 100, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : ((1 <= 2147483647) -> in_range2(smallest))
+
+axiom H2 : ((to_rep(values__first) <= to_rep(values__last)) ->
+  (o = ((to_rep(values__last) - to_rep(values__first)) + 1)))
+
+axiom H3 : ((not (to_rep(values__first) <= to_rep(values__last))) -> (o = 0))
+
+axiom H4 : (((o = 0) -> (result = true)) and ((not (o = 0)) ->
+  (result = false)))
+
+axiom H5 : (not (result = true))
+
+axiom H6 : ((temp___172 = (to_rep(values__last) - 1)) and
+  in_range1((to_rep(values__last) - 1)))
+
+axiom H7 : (result1 = current)
+
+axiom H8 : (current2 = to_rep(values__first))
+
+axiom H9 : (to_rep(values__first) <= current2)
+
+axiom H10 : (current2 <= temp___172)
+
+axiom H11 : (current2 <= to_rep(values__last))
+
  (* File "sort.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall smallest:int. forall current:int. forall o:int.
-  forall temp___172:int. forall result:bool. forall result1:int.
-  forall current1:int. (dynamic_property(1, 100, to_rep(values__first),
-  to_rep(values__last)) -> (((1 <= 2147483647) -> in_range2(smallest)) ->
-  ((((((to_rep(values__first) <= to_rep(values__last)) and
-  (o = ((to_rep(values__last) - to_rep(values__first)) + 1))) or
-  ((not (to_rep(values__first) <= to_rep(values__last))) and (o = 0))) and
-  (((o = 0) and (result = true)) or ((not (o = 0)) and
-  (result = false)))) and (not (result = true))) ->
-  (((temp___172 = (to_rep(values__last) - 1)) and
-  in_range1((to_rep(values__last) - 1))) -> ((({ int__content = result1 } = {
-  int__content = current }) and (current1 = to_rep(values__first))) ->
-  (((to_rep(values__first) <= current1) and (current1 <= temp___172)) ->
-  ((current1 <= to_rep(values__last)) ->
-  (to_rep(values__first) <= current1)))))))))
+goal WP_parameter_def : (to_rep(values__first) <= current2)

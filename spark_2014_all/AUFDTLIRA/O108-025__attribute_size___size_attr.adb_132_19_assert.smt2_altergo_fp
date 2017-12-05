@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -2367,55 +2367,241 @@ axiom def_axiom7 :
   forall temp___415:int. (get2(size_attr__ua4__aggregate_def(temp___411),
   temp___412, temp___413, temp___414, temp___415) = of_rep2(temp___411))))
 
+logic b : bool
+
+logic i : int
+
+logic s : (int,character) farray
+
+logic mi : int
+
+logic v : r
+
+logic v1__split_fields : character
+
+logic v2__split_fields : character
+
+logic v2__split_discrs : bool
+
+logic v3__split_fields : character
+
+logic v4__split_fields : integer
+
+logic v5__split_fields : integer
+
+logic v5__split_fields1 : us_private
+
+logic v6__split_fields : integer
+
+logic v6__split_fields1 : integer
+
+logic v6__split_fields2 : us_private
+
+logic ca : (int,natural) farray
+
+logic ua : (int,natural) farray
+
+logic ca2 : (int,natural) farray
+
+logic ca3 : (int,natural) farray
+
+logic ca4 : (int,natural) farray
+
+logic ua2 : map
+
+logic ua3 : map1
+
+logic ua4 : map2
+
+logic o : integer
+
+logic o1 : integer
+
+logic size_attr__v4__assume : integer
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result3 : int
+
+logic mi1 : int
+
+logic result4 : integer
+
+logic v4__split_fields1 : integer
+
+logic result5 : (int,natural) farray
+
+logic ca1 : (int,natural) farray
+
+logic result6 : (int,natural) farray
+
+logic ua1 : (int,natural) farray
+
+logic result7 : (int,natural) farray
+
+logic ca21 : (int,natural) farray
+
+logic result8 : (int,natural) farray
+
+logic ca31 : (int,natural) farray
+
+logic result9 : (int,natural) farray
+
+logic ca41 : (int,natural) farray
+
+logic result10 : map
+
+logic ua21 : map
+
+logic result11 : map1
+
+logic ua31 : map1
+
+logic result12 : map2
+
+logic ua41 : map2
+
+axiom H : (result = b)
+
+axiom H1 : (b1 = of_int(0))
+
+axiom H2 : (result1 = i)
+
+axiom H3 : (i1 = 0)
+
+axiom H4 : in_range1(i1)
+
+axiom H5 : (result2 = s)
+
+axiom H6 : (s1 = temp___String_Literal_370(void))
+
+axiom H7 : (to_rep1(s__first) = to_rep1(first(mk(1, 3))))
+
+axiom H8 : (to_rep1(s__last) = to_rep1(last(mk(1, 3))))
+
+axiom H9 : dynamic_property(1, 2147483647, to_rep1(s__first),
+  to_rep1(s__last))
+
+axiom H10 : (result3 = mi)
+
+axiom H11 : (mi1 = 1)
+
+axiom H12 : in_range4(mi1)
+
+axiom H13 : ((v1__attr__constrained = true) and
+  (v1__split_discrs = of_int(0)))
+
+axiom H14 : ((of_int(0) = v1__split_discrs) and
+  (v1__attr__constrained = true))
+
+axiom H15 : ((v2__attr__constrained = false) and
+  (v2__split_discrs = of_int(0)))
+
+axiom H16 : ((v3__attr__constrained = true) and
+  (v3__split_discrs = of_int(0)))
+
+axiom H17 : ((of_int(0) = v3__split_discrs) and
+  (v3__attr__constrained = true))
+
+axiom H18 : (to_rep1(o) = 1)
+
+axiom H19 : (o1 = o)
+
+axiom H20 : (size_attr__v4__assume = o1)
+
+axiom H21 : (result4 = v4__split_fields)
+
+axiom H22 : (v4__split_fields1 = size_attr__v4__assume)
+
+axiom H23 : (v5__attr__tag = us_tag)
+
+axiom H24 : (v6__attr__tag = us_tag1)
+
+axiom H25 : (result5 = ca)
+
+axiom H26 : (ca1 = size_attr__ca__aggregate_def(1))
+
+axiom H27 : (result6 = ua)
+
+axiom H28 : (ua1 = size_attr__ua__aggregate_def(1))
+
+axiom H29 : (result7 = ca2)
+
+axiom H30 : (ca21 = size_attr__ca2__aggregate_def(1))
+
+axiom H31 : (result8 = ca3)
+
+axiom H32 : (ca31 = size_attr__ca3__aggregate_def(1))
+
+axiom H33 : (result9 = ca4)
+
+axiom H34 : (ca41 = size_attr__ca4__aggregate_def(1))
+
+axiom H35 : (result10 = ua2)
+
+axiom H36 : (ua21 = size_attr__ua2__aggregate_def(1))
+
+axiom H37 : (result11 = ua3)
+
+axiom H38 : (ua31 = size_attr__ua3__aggregate_def(1))
+
+axiom H39 : (result12 = ua4)
+
+axiom H40 : (ua41 = size_attr__ua4__aggregate_def(1))
+
+axiom H41 : (0 <= value__size1)
+
+axiom H42 : (0 <= value__size2)
+
+axiom H43 : (0 <= value__size3)
+
+axiom H44 : (0 <= value__size4)
+
+axiom H45 : (0 <= value__size5)
+
+axiom H46 : (0 <= value__size6)
+
+axiom H47 : (0 <= value__size7)
+
+axiom H48 : (0 <= value__size8)
+
+axiom H49 : (0 <= value__size)
+
+axiom H50 : (0 <= value__size9)
+
+axiom H51 : (0 <= value__size11)
+
+axiom H52 : (0 <= value__size13)
+
+axiom H53 : (0 <= value__size10)
+
+axiom H54 : (0 <= value__size12)
+
+axiom H55 : (0 <= value__size14)
+
+axiom H56 : true
+
+axiom H57 : true
+
+axiom H58 : (0 <= 32)
+
+axiom H59 : (0 <= object__size(s1))
+
+axiom H60 : (0 <= object__size7(ca1))
+
+axiom H61 : (0 <= object__size16(ua1))
+
+axiom H62 : (0 <= object__size7(ca21))
+
  (* File "size_attr.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall i:int. forall s:(int,character) farray.
-  forall mi:int. forall v2__split_discrs:bool.
-  forall v4__split_fields:integer. forall ca:(int,natural) farray.
-  forall ua:(int,natural) farray. forall ca2:(int,natural) farray.
-  forall ca3:(int,natural) farray. forall ca4:(int,natural) farray.
-  forall ua2:map. forall ua3:map1. forall ua4:map2. forall o:integer.
-  forall o1:integer. forall size_attr__v4__assume:integer.
-  forall result:bool. forall b1:bool. forall result1:int. forall i1:int.
-  forall result2:(int,character) farray. forall s1:(int,character) farray.
-  forall result3:int. forall mi1:int. forall result4:integer.
-  forall v4__split_fields1:integer. forall result5:(int,natural) farray.
-  forall ca1:(int,natural) farray. forall result6:(int,natural) farray.
-  forall ua1:(int,natural) farray. forall result7:(int,natural) farray.
-  forall ca21:(int,natural) farray. forall result8:(int,natural) farray.
-  forall ca31:(int,natural) farray. forall result9:(int,natural) farray.
-  forall ca41:(int,natural) farray. forall result10:map__ref2.
-  forall ua21:map. forall result11:map__ref3. forall ua31:map1.
-  forall result12:map__ref4. forall ua41:map2. (((result = b) and
-  (b1 = of_int(0))) -> (((result1 = i) and (i1 = 0)) -> (in_range1(i1) ->
-  ((((result2 = s) and (s1 = temp___String_Literal_370(void))) and
-  ((to_rep1(s__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(s__last) = to_rep1(last(mk(1, 3)))))) -> (dynamic_property(1,
-  2147483647, to_rep1(s__first), to_rep1(s__last)) -> (((result3 = mi) and
-  (mi1 = 1)) -> (in_range4(mi1) -> (((v1__attr__constrained = true) and
-  (v1__split_discrs = of_int(0))) -> (((of_int(0) = v1__split_discrs) and
-  (v1__attr__constrained = true)) -> (((v2__attr__constrained = false) and
-  (v2__split_discrs = of_int(0))) -> (((v3__attr__constrained = true) and
-  (v3__split_discrs = of_int(0))) -> (((of_int(0) = v3__split_discrs) and
-  (v3__attr__constrained = true)) -> (((((to_rep1(o) = 1) and (o = o1)) and
-  (size_attr__v4__assume = o1)) and ((result4 = v4__split_fields) and
-  (v4__split_fields1 = size_attr__v4__assume))) ->
-  ((v5__attr__tag = us_tag) -> ((v6__attr__tag = us_tag1) ->
-  (((result5 = ca) and (ca1 = size_attr__ca__aggregate_def(1))) ->
-  (((result6 = ua) and (ua1 = size_attr__ua__aggregate_def(1))) ->
-  (((result7 = ca2) and (ca21 = size_attr__ca2__aggregate_def(1))) ->
-  (((result8 = ca3) and (ca31 = size_attr__ca3__aggregate_def(1))) ->
-  (((result9 = ca4) and (ca41 = size_attr__ca4__aggregate_def(1))) ->
-  (((result10 = { map__content2 = ua2 }) and
-  (ua21 = size_attr__ua2__aggregate_def(1))) -> (((result11 = {
-  map__content3 = ua3 }) and (ua31 = size_attr__ua3__aggregate_def(1))) ->
-  (((result12 = { map__content4 = ua4 }) and
-  (ua41 = size_attr__ua4__aggregate_def(1))) -> ((0 <= value__size1) ->
-  ((0 <= value__size2) -> ((0 <= value__size3) -> ((0 <= value__size4) ->
-  ((0 <= value__size5) -> ((0 <= value__size6) -> ((0 <= value__size7) ->
-  ((0 <= value__size8) -> ((0 <= value__size) -> ((0 <= value__size9) ->
-  ((0 <= value__size11) -> ((0 <= value__size13) -> ((0 <= value__size10) ->
-  ((0 <= value__size12) -> ((0 <= value__size14) -> ((0 <= 32) ->
-  ((0 <= object__size(s1)) -> ((0 <= object__size7(ca1)) ->
-  ((0 <= object__size16(ua1)) -> ((0 <= object__size7(ca21)) ->
-  (0 <= object__size17(ua21))))))))))))))))))))))))))))))))))))))))))))))
+goal WP_parameter_def : (0 <= object__size17(ua21))

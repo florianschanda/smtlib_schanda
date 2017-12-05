@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1033,7 +1033,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1391,77 +1391,290 @@ logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
- (* File "cubedos-lib-xdr.ads", line 57, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,octet) farray. forall last2:int. forall temporary_1:t1.
-  forall temporary_2:t1. forall i:int. forall o:octet. forall o1:int.
-  forall o2:(int,octet) farray. forall o3:octet. forall o4:int.
-  forall o5:(int,octet) farray. forall o6:octet. forall o7:int.
-  forall o8:(int,octet) farray. forall o9:octet. forall o10:int.
-  forall o11:(int,octet) farray. forall o12:int. forall result:t1.
-  forall temporary_11:t1. forall result1:int. forall i1:int.
-  forall result2:t1. forall temporary_21:t1.
-  forall result3:(int,octet) farray. forall data1:(int,octet) farray.
-  forall result4:t1. forall temporary_12:t1. forall result5:int.
-  forall i2:int. forall result6:t1. forall temporary_22:t1.
-  forall result7:(int,octet) farray. forall data2:(int,octet) farray.
-  forall result8:t1. forall temporary_13:t1. forall result9:int.
-  forall i3:int. forall result10:t1. forall temporary_23:t1.
-  forall result11:(int,octet) farray. forall data3:(int,octet) farray.
-  forall result12:t1. forall temporary_14:t1. forall result13:int.
-  forall i4:int. forall result14:t1. forall temporary_24:t1.
-  forall result15:(int,octet) farray. forall data4:(int,octet) farray.
-  forall result16:t1. forall temporary_15:t1. forall result17:int.
-  forall last3:int. forall data5:(int,octet) farray. forall last4:int.
-  forall temporary_16:t1. forall temporary_25:t1. forall i5:int.
-  forall data6:(int,octet) farray. forall last5:int. forall temporary_17:t1.
-  forall temporary_26:t1. forall i6:int. ((dynamic_property(0, 65535,
-  to_rep(data__first), to_rep(data__last)) and (in_range2(position) and
-  (((0 <= 65535) -> in_range2(last2)) and (((((comp_mod(position,4) = 0) and
-  (((to_rep(data__first) <= to_rep(data__last)) and
-  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) or
-  ((not (to_rep(data__first) <= to_rep(data__last))) and
+logic data : (int,octet) farray
+
+logic last2 : int
+
+logic temporary_1 : t1
+
+logic temporary_2 : t1
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : bool
+
+logic o3 : octet
+
+logic o4 : int
+
+logic o5 : (int,octet) farray
+
+logic o6 : octet
+
+logic o7 : int
+
+logic o8 : (int,octet) farray
+
+logic o9 : octet
+
+logic o10 : int
+
+logic o11 : (int,octet) farray
+
+logic o12 : octet
+
+logic o13 : int
+
+logic o14 : (int,octet) farray
+
+logic o15 : int
+
+logic result : t1
+
+logic temporary_11 : t1
+
+logic result1 : int
+
+logic i1 : int
+
+logic result2 : t1
+
+logic temporary_21 : t1
+
+logic result3 : (int,octet) farray
+
+logic data1 : (int,octet) farray
+
+logic result4 : t1
+
+logic temporary_12 : t1
+
+logic result5 : int
+
+logic i2 : int
+
+logic result6 : t1
+
+logic temporary_22 : t1
+
+logic result7 : (int,octet) farray
+
+logic data2 : (int,octet) farray
+
+logic result8 : t1
+
+logic temporary_13 : t1
+
+logic result9 : int
+
+logic i3 : int
+
+logic result10 : t1
+
+logic temporary_23 : t1
+
+logic result11 : (int,octet) farray
+
+logic data3 : (int,octet) farray
+
+logic result12 : t1
+
+logic temporary_14 : t1
+
+logic result13 : int
+
+logic i4 : int
+
+logic result14 : t1
+
+logic temporary_24 : t1
+
+logic result15 : (int,octet) farray
+
+logic data4 : (int,octet) farray
+
+logic result16 : t1
+
+logic temporary_15 : t1
+
+logic result17 : int
+
+logic last3 : int
+
+logic data5 : (int,octet) farray
+
+logic last4 : int
+
+logic temporary_16 : t1
+
+logic temporary_25 : t1
+
+logic i5 : int
+
+logic data6 : (int,octet) farray
+
+logic last5 : int
+
+logic temporary_17 : t1
+
+logic temporary_26 : t1
+
+logic i6 : int
+
+axiom H : true
+
+axiom H1 : dynamic_property(0, 65535, to_rep(data__first),
+  to_rep(data__last))
+
+axiom H2 : in_range2(position)
+
+axiom H3 : ((0 <= 65535) -> in_range2(last2))
+
+axiom H4 : ((((comp_mod(position,4) = 0) and
+  (((to_rep(data__first) <= to_rep(data__last)) ->
+  (comp_mod(((to_rep(data__last) - to_rep(data__first)) + 1),4) = 0)) and
+  ((not (to_rep(data__first) <= to_rep(data__last))) ->
   (comp_mod(0,4) = 0)))) and ((to_rep(data__first) <= position) and
   (position <= to_rep(data__last)))) and
-  ((position + 3) <= to_rep(data__last))) and (((({ t__content1 = result
-  } = { t__content1 = temporary_1 }) and (temporary_11 = value)) and (((({
-  int__content = result1 } = { int__content = i }) and (i1 = 1)) and ((({
-  t__content1 = result2 } = { t__content1 = temporary_2 }) and
-  (temporary_21 = urem1(temporary_11, of_int1(256)))) and
-  ((((to_rep1(o) = toSmall(temporary_21)) and
-  ((((to_rep(data__first) <= (position + (4 - i1))) and
-  ((position + (4 - i1)) <= to_rep(data__last))) and
-  (o1 = (position + (4 - i1)))) and (o2 = (data[o1 <- o])))) and (({
-  map__content = result3 } = { map__content = data }) and (data1 = o2))) and
-  (((temporary_11 = result4) and (temporary_12 = udiv1(temporary_11,
-  of_int1(256)))) and (((i1 = result5) and (i2 = 2)) and
-  (((temporary_21 = result6) and (temporary_22 = urem1(temporary_12,
-  of_int1(256)))) and ((((to_rep1(o3) = toSmall(temporary_22)) and
-  ((((to_rep(data__first) <= (position + (4 - i2))) and
-  ((position + (4 - i2)) <= to_rep(data__last))) and
-  (o4 = (position + (4 - i2)))) and (o5 = (data1[o4 <- o3])))) and
-  ((data1 = result7) and (data2 = o5))) and (((temporary_12 = result8) and
-  (temporary_13 = udiv1(temporary_12, of_int1(256)))) and
-  (((i2 = result9) and (i3 = 3)) and (((temporary_22 = result10) and
-  (temporary_23 = urem1(temporary_13, of_int1(256)))) and
-  ((((to_rep1(o6) = toSmall(temporary_23)) and
-  ((((to_rep(data__first) <= (position + (4 - i3))) and
-  ((position + (4 - i3)) <= to_rep(data__last))) and
-  (o7 = (position + (4 - i3)))) and (o8 = (data2[o7 <- o6])))) and
-  ((data2 = result11) and (data3 = o8))) and (((temporary_13 = result12) and
-  (temporary_14 = udiv1(temporary_13, of_int1(256)))) and
-  (((i3 = result13) and (i4 = 4)) and (((temporary_23 = result14) and
-  (temporary_24 = urem1(temporary_14, of_int1(256)))) and
-  ((((to_rep1(o9) = toSmall(temporary_24)) and
-  ((((to_rep(data__first) <= (position + (4 - i4))) and
-  ((position + (4 - i4)) <= to_rep(data__last))) and
-  (o10 = (position + (4 - i4)))) and (o11 = (data3[o10 <- o9])))) and
-  ((data3 = result15) and (data4 = o11))) and ((result16 = temporary_14) and
-  (temporary_15 = udiv1(temporary_14, of_int1(256))))))))))))))))))) and
-  (((o12 = (position + 3)) and in_range2((position + 3))) and
-  ((result17 = last2) and (last3 = o12))))) and (((i5 = i4) and
-  ((temporary_25 = temporary_24) and ((temporary_16 = temporary_15) and
-  ((last3 = last4) and (data5 = data4))))) and ((i6 = i4) and
-  ((temporary_26 = temporary_24) and ((temporary_17 = temporary_15) and
-  ((last5 = last3) and (data6 = data4))))))))))) ->
-  (last4 = (position + 3))))
+  ((position + 3) <= to_rep(data__last)))
+
+axiom H5 : (result = temporary_1)
+
+axiom H6 : (temporary_11 = value)
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : (result1 = i)
+
+axiom H10 : (i1 = 1)
+
+axiom H11 : (result2 = temporary_2)
+
+axiom H12 : (temporary_21 = urem1(temporary_11, of_int1(256)))
+
+axiom H13 : (to_rep1(o3) = toSmall(temporary_21))
+
+axiom H14 : ((to_rep(data__first) <= (position + (4 - i1))) and
+  ((position + (4 - i1)) <= to_rep(data__last)))
+
+axiom H15 : (o4 = (position + (4 - i1)))
+
+axiom H16 : (o5 = (data[o4 <- o3]))
+
+axiom H17 : (result3 = data)
+
+axiom H18 : (data1 = o5)
+
+axiom H19 : (temporary_11 = result4)
+
+axiom H20 : (temporary_12 = udiv1(temporary_11, of_int1(256)))
+
+axiom H21 : (i1 = result5)
+
+axiom H22 : (i2 = 2)
+
+axiom H23 : (temporary_21 = result6)
+
+axiom H24 : (temporary_22 = urem1(temporary_12, of_int1(256)))
+
+axiom H25 : (to_rep1(o6) = toSmall(temporary_22))
+
+axiom H26 : ((to_rep(data__first) <= (position + (4 - i2))) and
+  ((position + (4 - i2)) <= to_rep(data__last)))
+
+axiom H27 : (o7 = (position + (4 - i2)))
+
+axiom H28 : (o8 = (data1[o7 <- o6]))
+
+axiom H29 : (data1 = result7)
+
+axiom H30 : (data2 = o8)
+
+axiom H31 : (temporary_12 = result8)
+
+axiom H32 : (temporary_13 = udiv1(temporary_12, of_int1(256)))
+
+axiom H33 : (i2 = result9)
+
+axiom H34 : (i3 = 3)
+
+axiom H35 : (temporary_22 = result10)
+
+axiom H36 : (temporary_23 = urem1(temporary_13, of_int1(256)))
+
+axiom H37 : (to_rep1(o9) = toSmall(temporary_23))
+
+axiom H38 : ((to_rep(data__first) <= (position + (4 - i3))) and
+  ((position + (4 - i3)) <= to_rep(data__last)))
+
+axiom H39 : (o10 = (position + (4 - i3)))
+
+axiom H40 : (o11 = (data2[o10 <- o9]))
+
+axiom H41 : (data2 = result11)
+
+axiom H42 : (data3 = o11)
+
+axiom H43 : (temporary_13 = result12)
+
+axiom H44 : (temporary_14 = udiv1(temporary_13, of_int1(256)))
+
+axiom H45 : (i3 = result13)
+
+axiom H46 : (i4 = 4)
+
+axiom H47 : (temporary_23 = result14)
+
+axiom H48 : (temporary_24 = urem1(temporary_14, of_int1(256)))
+
+axiom H49 : (to_rep1(o12) = toSmall(temporary_24))
+
+axiom H50 : ((to_rep(data__first) <= (position + (4 - i4))) and
+  ((position + (4 - i4)) <= to_rep(data__last)))
+
+axiom H51 : (o13 = (position + (4 - i4)))
+
+axiom H52 : (o14 = (data3[o13 <- o12]))
+
+axiom H53 : (data3 = result15)
+
+axiom H54 : (data4 = o14)
+
+axiom H55 : (result16 = temporary_14)
+
+axiom H56 : (temporary_15 = udiv1(temporary_14, of_int1(256)))
+
+axiom H57 : ((o15 = (position + 3)) and in_range2((position + 3)))
+
+axiom H58 : (result17 = last2)
+
+axiom H59 : (last3 = o15)
+
+axiom H60 : (i5 = i4)
+
+axiom H61 : (temporary_25 = temporary_24)
+
+axiom H62 : (temporary_16 = temporary_15)
+
+axiom H63 : (last4 = last3)
+
+axiom H64 : (data5 = data4)
+
+axiom H65 : (i6 = i4)
+
+axiom H66 : (temporary_26 = temporary_24)
+
+axiom H67 : (temporary_17 = temporary_15)
+
+axiom H68 : (last5 = last3)
+
+axiom H69 : (data6 = data4)
+
+ (* File "cubedos-lib-xdr.ads", line 57, characters 0-0 *)
+goal WP_parameter_def : (last4 = (position + 3))

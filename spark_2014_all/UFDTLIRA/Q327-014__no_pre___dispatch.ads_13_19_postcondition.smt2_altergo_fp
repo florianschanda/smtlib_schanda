@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -212,61 +212,114 @@ logic x2 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic dispatch__incr2__result : integer
+
+logic dispatch__incr2__result1 : us_private
+
+logic dispatch__incr2__result2 : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : us_private
+
+logic o4 : integer
+
+logic o5 : us_private
+
+logic o6 : int
+
+logic o7 : int
+
+logic result : integer
+
+logic result1 : us_private
+
+logic result2 : int
+
+logic dispatch__incr2__result3 : integer
+
+logic dispatch__incr2__result4 : us_private
+
+logic dispatch__incr2__result5 : int
+
+logic dispatch__incr2__result6 : integer
+
+logic dispatch__incr2__result7 : us_private
+
+logic dispatch__incr2__result8 : int
+
+logic dispatch__incr2__result9 : integer
+
+logic dispatch__incr2__result10 : us_private
+
+logic dispatch__incr2__result11 : int
+
+logic dispatch__incr2__result12 : integer
+
+logic dispatch__incr2__result13 : us_private
+
+logic dispatch__incr2__result14 : int
+
+logic dispatch__incr2__result15 : integer
+
+logic dispatch__incr2__result16 : us_private
+
+logic dispatch__incr2__result17 : int
+
+logic result3 : integer
+
+logic result4 : us_private
+
+logic result5 : int
+
+axiom H : (dispatch__incr2__result6 = dispatch__incr2__result3)
+
+axiom H1 : (dispatch__incr2__result7 = dispatch__incr2__result4)
+
+axiom H2 : (dispatch__incr2__result8 = dispatch__incr2__result5)
+
+axiom H3 : (((dispatch__incr2__result9 = dispatch__incr2__result3) and
+  (dispatch__incr2__result10 = dispatch__incr2__result4)) and
+  (dispatch__incr2__result11 = dispatch__incr2__result5))
+
+axiom H4 : ((o = (to_rep(x) + 1)) and in_range((to_rep(x) + 1)))
+
+axiom H5 : (to_rep(o1) = o)
+
+axiom H6 : (o1 = o2)
+
+axiom H7 : (us_null_ext__ = o3)
+
+axiom H8 : (o4 = o2)
+
+axiom H9 : (o5 = o3)
+
+axiom H10 : (us_tag = o6)
+
+axiom H11 : (((result = dispatch__incr2__result) and
+  (result1 = dispatch__incr2__result1)) and
+  (result2 = dispatch__incr2__result2))
+
+axiom H12 : (((dispatch__incr2__result3 = o4) and
+  (dispatch__incr2__result4 = o5)) and (dispatch__incr2__result5 = o6))
+
+axiom H13 : (((dispatch__incr2__result12 = dispatch__incr2__result6) and
+  (dispatch__incr2__result13 = dispatch__incr2__result7)) and
+  (dispatch__incr2__result14 = dispatch__incr2__result8))
+
+axiom H14 : (((dispatch__incr2__result15 = dispatch__incr2__result9) and
+  (dispatch__incr2__result16 = dispatch__incr2__result10)) and
+  (dispatch__incr2__result17 = dispatch__incr2__result11))
+
+axiom H15 : (result3 = dispatch__incr2__result12)
+
+axiom H16 : (result4 = dispatch__incr2__result13)
+
+axiom H17 : (result5 = dispatch__incr2__result14)
+
  (* File "dispatch.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall dispatch__incr2__result:integer.
-  forall dispatch__incr2__result1:us_private.
-  forall dispatch__incr2__result2:int. forall o:int. forall o1:integer.
-  forall o2:integer. forall o3:us_private. forall o4:integer.
-  forall o5:us_private. forall o6:int. forall result:integer.
-  forall result1:us_private. forall result2:int.
-  forall dispatch__incr2__result3:integer.
-  forall dispatch__incr2__result4:us_private.
-  forall dispatch__incr2__result5:int.
-  forall dispatch__incr2__result6:integer.
-  forall dispatch__incr2__result7:us_private.
-  forall dispatch__incr2__result8:int.
-  forall dispatch__incr2__result9:integer.
-  forall dispatch__incr2__result10:us_private.
-  forall dispatch__incr2__result11:int.
-  forall dispatch__incr2__result12:integer.
-  forall dispatch__incr2__result13:us_private.
-  forall dispatch__incr2__result14:int.
-  forall dispatch__incr2__result15:integer.
-  forall dispatch__incr2__result16:us_private.
-  forall dispatch__incr2__result17:int.
-  (forall result3:integer. forall result4:us_private. forall result5:int.
-  ((((((((dispatch__incr2__result6 = dispatch__incr2__result3) and
-  (dispatch__incr2__result7 = dispatch__incr2__result4)) and
-  (dispatch__incr2__result8 = dispatch__incr2__result5)) and ({
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr2__result9;
-  rec__ext__ = dispatch__incr2__result10 }; attr__tag =
-  dispatch__incr2__result11 } = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr2__result3; rec__ext__ =
-  dispatch__incr2__result4 }; attr__tag = dispatch__incr2__result5 })) and
-  ((((((o = (to_rep(x) + 1)) and in_range((to_rep(x) + 1))) and
-  (to_rep(o1) = o)) and ((o1 = o2) and (us_null_ext__ = o3))) and
-  (((o4 = o2) and (o5 = o3)) and (us_tag = o6))) and (({ root__content = {
-  us_split_fields1 = { rec__dispatch__root__f = result; rec__ext__ = result1
-  }; attr__tag = result2 } } = { root__content = { us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr2__result; rec__ext__ =
-  dispatch__incr2__result1 }; attr__tag = dispatch__incr2__result2 } }) and
-  ({ us_split_fields1 = { rec__dispatch__root__f = dispatch__incr2__result3;
-  rec__ext__ = dispatch__incr2__result4 }; attr__tag =
-  dispatch__incr2__result5 } = { us_split_fields1 = {
-  rec__dispatch__root__f = o4; rec__ext__ = o5 }; attr__tag = o6 })))) and
-  (({ root__content = { us_split_fields1 = { rec__dispatch__root__f =
-  dispatch__incr2__result12; rec__ext__ = dispatch__incr2__result13 };
-  attr__tag = dispatch__incr2__result14 } } = { root__content = {
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr2__result6;
-  rec__ext__ = dispatch__incr2__result7 }; attr__tag =
-  dispatch__incr2__result8 } }) and ({ us_split_fields1 = {
-  rec__dispatch__root__f = dispatch__incr2__result15; rec__ext__ =
-  dispatch__incr2__result16 }; attr__tag = dispatch__incr2__result17 } = {
-  us_split_fields1 = { rec__dispatch__root__f = dispatch__incr2__result9;
-  rec__ext__ = dispatch__incr2__result10 }; attr__tag =
-  dispatch__incr2__result11 }))) and
-  (((result3 = dispatch__incr2__result12) and
-  (result4 = dispatch__incr2__result13)) and
-  (result5 = dispatch__incr2__result14))) ->
-  (to_rep(dispatch__incr2__result12) = (to_rep(x) + 1)))))
+goal WP_parameter_def : (to_rep(dispatch__incr2__result12) = (to_rep(x) + 1))

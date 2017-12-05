@@ -235,9 +235,19 @@ axiom is_valid__def_axiom :
   rec__generic_instance__root__f = x; rec__ext__ = x1 }; attr__tag = x2
   }) = true) <-> (to_rep(x) <  2147483647)))
 
+logic x__split_fields : natural
+
+logic x__split_fields1 : us_private
+
+logic us : bool
+
+logic us1 : bool
+
+logic x__split_fields2 : natural
+
+logic x__split_fields3 : us_private
+
  (* File "generic_instance.adb", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:natural. forall x__split_fields1:us_private.
-  (is_valid({ us_split_fields1 = { rec__generic_instance__root__f =
-  x__split_fields; rec__ext__ = x__split_fields1 }; attr__tag = x__attr__tag
-  }) = true))
+goal WP_parameter_def : (is_valid({ us_split_fields1 = {
+  rec__generic_instance__root__f = x__split_fields; rec__ext__ =
+  x__split_fields1 }; attr__tag = x__attr__tag }) = true)

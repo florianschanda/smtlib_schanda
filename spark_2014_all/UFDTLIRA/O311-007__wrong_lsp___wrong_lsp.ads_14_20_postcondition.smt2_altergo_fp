@@ -341,29 +341,91 @@ logic r__attr__tag : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic r__split_fields : natural
+
+logic r__split_fields1 : natural
+
+logic r__split_fields2 : us_private
+
+logic o : natural
+
+logic o1 : natural
+
+logic o2 : natural
+
+logic o3 : us_private
+
+logic temp___163 : natural
+
+logic temp___1631 : natural
+
+logic temp___1632 : us_private
+
+logic temp___1633 : int
+
+logic result : natural
+
+logic result1 : natural
+
+logic result2 : us_private
+
+logic r__split_fields3 : natural
+
+logic r__split_fields4 : natural
+
+logic r__split_fields5 : us_private
+
+logic r__split_fields6 : natural
+
+logic r__split_fields7 : natural
+
+logic r__split_fields8 : us_private
+
+logic r__split_fields9 : natural
+
+logic r__split_fields10 : natural
+
+logic r__split_fields11 : us_private
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (r__split_fields = o1)
+
+axiom H2 : (o = o2)
+
+axiom H3 : (r__split_fields2 = o3)
+
+axiom H4 : (temp___163 = o1)
+
+axiom H5 : (temp___1631 = o2)
+
+axiom H6 : (temp___1632 = o3)
+
+axiom H7 : (r__attr__tag = temp___1633)
+
+axiom H8 : (result = r__split_fields)
+
+axiom H9 : (result1 = r__split_fields1)
+
+axiom H10 : (result2 = r__split_fields2)
+
+axiom H11 : (temp___163 = r__split_fields3)
+
+axiom H12 : (temp___1631 = r__split_fields4)
+
+axiom H13 : (temp___1632 = r__split_fields5)
+
+axiom H14 : (r__split_fields6 = r__split_fields3)
+
+axiom H15 : (r__split_fields7 = r__split_fields4)
+
+axiom H16 : (r__split_fields8 = r__split_fields5)
+
+axiom H17 : (r__split_fields9 = r__split_fields3)
+
+axiom H18 : (r__split_fields10 = r__split_fields4)
+
+axiom H19 : (r__split_fields11 = r__split_fields5)
+
  (* File "wrong_lsp.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:natural. forall r__split_fields1:natural.
-  forall r__split_fields2:us_private. forall o:natural. forall o1:natural.
-  forall o2:natural. forall o3:us_private. forall temp___163:natural.
-  forall temp___1631:natural. forall temp___1632:us_private.
-  forall temp___1633:int. forall result:natural. forall result1:natural.
-  forall result2:us_private. forall r__split_fields3:natural.
-  forall r__split_fields4:natural. forall r__split_fields5:us_private.
-  forall r__split_fields6:natural. forall r__split_fields7:natural.
-  forall r__split_fields8:us_private. forall r__split_fields9:natural.
-  forall r__split_fields10:natural. forall r__split_fields11:us_private.
-  ((((((to_rep(o) = 0) and ((r__split_fields = o1) and ((o = o2) and
-  (r__split_fields2 = o3)))) and (((temp___163 = o1) and
-  ((temp___1631 = o2) and (temp___1632 = o3))) and
-  (r__attr__tag = temp___1633))) and (((result = r__split_fields) and
-  ((result1 = r__split_fields1) and (result2 = r__split_fields2))) and
-  ((temp___163 = r__split_fields3) and ((temp___1631 = r__split_fields4) and
-  (temp___1632 = r__split_fields5))))) and
-  (((r__split_fields6 = r__split_fields3) and
-  ((r__split_fields7 = r__split_fields4) and
-  (r__split_fields8 = r__split_fields5))) and
-  ((r__split_fields9 = r__split_fields3) and
-  ((r__split_fields10 = r__split_fields4) and
-  (r__split_fields11 = r__split_fields5))))) ->
-  (to_rep(r__split_fields6) = to_rep(r__split_fields))))
+goal WP_parameter_def : (to_rep(r__split_fields6) = to_rep(r__split_fields))

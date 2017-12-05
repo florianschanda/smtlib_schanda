@@ -172,7 +172,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -671,26 +671,81 @@ axiom hbc__def_axiom : (hbc = extended_perm({ elts = b; rt = b1 }, { elts =
 axiom ic__def_axiom : (ic = get_witness({ elts = b; rt = b1 }, { elts = c;
   rt = c1 }, to_rep(w1)))
 
- (* File "perm.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall perm__perm_transitive__induction_hypothesis__result:int.
-  forall perm__perm_transitive__induction_hypothesis__B_9__w__assume:index.
-  forall perm__perm_transitive__induction_hypothesis__B_9__w__assume1:index.
-  forall perm__perm_transitive__induction_hypothesis__B_9__hbc__assume:int.
-  forall perm__perm_transitive__induction_hypothesis__B_9__ic__assume:int.
-  forall perm__perm_transitive__induction_hypothesis__result1:int.
-  forall perm__perm_transitive__induction_hypothesis__result2:int.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1))) ->
-  (dynamic_property(1, 100, to_rep1(first(c1)), to_rep1(last(c1))) ->
-  (((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({ elts = b;
-  rt = b1 }) = true) and ((invariant__({ elts = c; rt = c1 }) = true) and
-  ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1 }) = true) and
-  (is_perm({ elts = b; rt = b1 }, { elts = c; rt = c1 }) = true))))) ->
-  (((not (length({ elts = a; rt = a1 }) = 0)) and
-  ((perm__perm_transitive__induction_hypothesis__result2 = perm__perm_transitive__induction_hypothesis__result) and
-  (perm__perm_transitive__induction_hypothesis__result2 = perm__perm_transitive__induction_hypothesis__result1))) ->
-  (((({ us_split_fields1 = { rec__perm__witnesses__ia =
+logic perm__perm_transitive__induction_hypothesis__result : int
+
+logic perm__perm_transitive__induction_hypothesis__B_9__w__assume : index
+
+logic perm__perm_transitive__induction_hypothesis__B_9__w__assume1 : index
+
+logic perm__perm_transitive__induction_hypothesis__B_9__hbc__assume : int
+
+logic perm__perm_transitive__induction_hypothesis__B_9__ic__assume : int
+
+logic o : (int,natural) farray
+
+logic o1 : t
+
+logic o2 : (int,natural) farray
+
+logic o3 : t
+
+logic o4 : (int,natural) farray
+
+logic o5 : t
+
+logic o6 : int
+
+logic perm__perm_transitive__induction_hypothesis__result1 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : bool
+
+logic result3 : bool
+
+logic result4 : int
+
+logic perm__perm_transitive__induction_hypothesis__result2 : int
+
+logic result5 : int
+
+logic perm__perm_transitive__induction_hypothesis__result3 : int
+
+logic perm__perm_transitive__induction_hypothesis__result4 : int
+
+logic perm__perm_transitive__induction_hypothesis__result5 : int
+
+logic perm__perm_transitive__induction_hypothesis__result6 : int
+
+logic perm__perm_transitive__induction_hypothesis__result7 : int
+
+logic perm__perm_transitive__induction_hypothesis__result8 : int
+
+logic perm__perm_transitive__induction_hypothesis__result9 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : dynamic_property(1, 100, to_rep1(first(c1)), to_rep1(last(c1)))
+
+axiom H3 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and ((invariant__({ elts = c; rt = c1
+  }) = true) and ((is_perm({ elts = a; rt = a1 }, { elts = b; rt = b1
+  }) = true) and (is_perm({ elts = b; rt = b1 }, { elts = c; rt = c1
+  }) = true)))))
+
+axiom H4 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H5 :
+  (perm__perm_transitive__induction_hypothesis__result2 = perm__perm_transitive__induction_hypothesis__result)
+
+axiom H6 :
+  (perm__perm_transitive__induction_hypothesis__result2 = perm__perm_transitive__induction_hypothesis__result1)
+
+axiom H7 : (({ us_split_fields1 = { rec__perm__witnesses__ia =
   perm__perm_transitive__induction_hypothesis__B_9__w__assume;
   rec__perm__witnesses__ib =
   perm__perm_transitive__induction_hypothesis__B_9__w__assume1 }
@@ -703,10 +758,14 @@ goal WP_parameter_def :
   (is_perm(remove({ elts = a; rt = a1 },
   to_rep(perm__perm_transitive__induction_hypothesis__B_9__w__assume)),
   remove({ elts = b; rt = b1 },
-  to_rep(perm__perm_transitive__induction_hypothesis__B_9__w__assume1))) = true))))) and
-  ((w = perm__perm_transitive__induction_hypothesis__B_9__w__assume) and
-  (w1 = perm__perm_transitive__induction_hypothesis__B_9__w__assume1))) ->
-  ((((perm__perm_transitive__induction_hypothesis__B_9__hbc__assume = extended_perm({
+  to_rep(perm__perm_transitive__induction_hypothesis__B_9__w__assume1))) = true)))))
+
+axiom H8 :
+  ((perm__perm_transitive__induction_hypothesis__B_9__w__assume = w) and
+  (perm__perm_transitive__induction_hypothesis__B_9__w__assume1 = w1))
+
+axiom H9 :
+  ((perm__perm_transitive__induction_hypothesis__B_9__hbc__assume = extended_perm({
   elts = b; rt = b1 }, { elts = c; rt = c1 })) and
   (in_range1(perm__perm_transitive__induction_hypothesis__B_9__hbc__assume) and
   ((of_int(perm__perm_transitive__induction_hypothesis__B_9__hbc__assume) = true) ->
@@ -715,10 +774,15 @@ goal WP_parameter_def :
   (exists ib:int. (((to_rep1(first(c1)) <= ib) and
   (ib <= to_rep1(last(c1)))) and ((to_rep2((b[ia])) = to_rep2((c[ib]))) and
   (is_perm(remove({ elts = b; rt = b1 }, ia), remove({ elts = c; rt = c1 },
-  ib)) = true))))))))) and
-  (perm__perm_transitive__induction_hypothesis__B_9__hbc__assume = hbc)) ->
-  (in_range1(hbc) ->
-  ((((perm__perm_transitive__induction_hypothesis__B_9__ic__assume = get_witness({
+  ib)) = true)))))))))
+
+axiom H10 :
+  (perm__perm_transitive__induction_hypothesis__B_9__hbc__assume = hbc)
+
+axiom H11 : in_range1(hbc)
+
+axiom H12 :
+  ((perm__perm_transitive__induction_hypothesis__B_9__ic__assume = get_witness({
   elts = b; rt = b1 }, { elts = c; rt = c1 }, to_rep(w1))) and
   (in_range2(perm__perm_transitive__induction_hypothesis__B_9__ic__assume) and
   (((to_rep1(first(c1)) <= perm__perm_transitive__induction_hypothesis__B_9__ic__assume) and
@@ -726,6 +790,12 @@ goal WP_parameter_def :
   ((to_rep2((b[to_rep(w1)])) = to_rep2((c[perm__perm_transitive__induction_hypothesis__B_9__ic__assume]))) and
   (is_perm(remove({ elts = b; rt = b1 }, to_rep(w1)), remove({ elts = c; rt =
   c1 },
-  perm__perm_transitive__induction_hypothesis__B_9__ic__assume)) = true))))) and
-  (perm__perm_transitive__induction_hypothesis__B_9__ic__assume = ic)) ->
-  (in_range2(ic) -> (invariant__({ elts = c; rt = c1 }) = true))))))))))))
+  perm__perm_transitive__induction_hypothesis__B_9__ic__assume)) = true)))))
+
+axiom H13 :
+  (perm__perm_transitive__induction_hypothesis__B_9__ic__assume = ic)
+
+axiom H14 : in_range2(ic)
+
+ (* File "perm.ads", line 2, characters 0-0 *)
+goal WP_parameter_def : (invariant__({ elts = c; rt = c1 }) = true)

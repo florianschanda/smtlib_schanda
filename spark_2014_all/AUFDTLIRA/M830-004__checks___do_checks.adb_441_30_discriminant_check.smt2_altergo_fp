@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -6102,25 +6102,861 @@ axiom def_axiom16 :
   (forall temp___914:int.
   ((temp___911(temp___913)[temp___914]) = temp___913)))
 
+logic branch : int
+
+logic x__split_fields : (int,bool) farray
+
+logic x__split_fields1 : t
+
+logic y__split_fields : (int,bool) farray
+
+logic y__split_fields1 : t
+
+logic x__split_fields2 : (int,bool) farray
+
+logic y__split_fields2 : (int,bool) farray
+
+logic x__split_fields3 : (int,bool) farray
+
+logic x__split_fields4 : t
+
+logic x__split_fields5 : (int,bool) farray
+
+logic y__split_fields3 : (int,bool) farray
+
+logic x__split_fields6 : (int,bool) farray
+
+logic x__split_fields7 : t
+
+logic x__split_fields8 : (int,bool) farray
+
+logic y__split_fields4 : (int,bool) farray
+
+logic x__split_fields9 : (int,bool) farray
+
+logic x__split_fields10 : t
+
+logic y__split_fields5 : (int,bool) farray
+
+logic x__split_fields11 : (int,bool) farray
+
+logic y__split_fields6 : (int,bool) farray
+
+logic x__split_fields12 : (int,bool) farray
+
+logic x__split_fields13 : t
+
+logic y__split_fields7 : (int,bool) farray
+
+logic x__split_fields14 : (int,bool) farray
+
+logic y__split_fields8 : (int,bool) farray
+
+logic x__split_fields15 : (int,bool) farray
+
+logic x__split_fields16 : t
+
+logic y__split_fields9 : (int,bool) farray
+
+logic x__split_fields17 : (int,bool) farray
+
+logic y__split_fields10 : (int,bool) farray
+
+logic temp___j_834 : int
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic o : integer
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : (int,bool) farray
+
+logic o4 : t
+
+logic o5 : integer
+
+logic o6 : (int,bool) farray
+
+logic o7 : t
+
+logic o8 : integer
+
+logic o9 : (int,bool) farray
+
+logic o10 : t
+
+logic do_checks__do_discriminant_check__B_25__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_25__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_25__x__assume2 : t
+
+logic us3 : int
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic o13 : integer
+
+logic o14 : (int,bool) farray
+
+logic o15 : t
+
+logic o16 : integer
+
+logic o17 : (int,bool) farray
+
+logic o18 : t
+
+logic o19 : integer
+
+logic o20 : (int,bool) farray
+
+logic o21 : t
+
+logic do_checks__do_discriminant_check__B_25__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_25__y__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_25__y__assume2 : t
+
+logic o22 : integer
+
+logic o23 : integer
+
+logic o24 : integer
+
+logic o25 : (int,bool) farray
+
+logic o26 : integer
+
+logic o27 : (int,bool) farray
+
+logic o28 : t
+
+logic o29 : integer
+
+logic o30 : (int,bool) farray
+
+logic o31 : t
+
+logic do_checks__do_discriminant_check__B_26__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_26__x__assume1 : (int,bool) farray
+
+logic o32 : integer
+
+logic o33 : integer
+
+logic o34 : integer
+
+logic o35 : (int,bool) farray
+
+logic o36 : integer
+
+logic o37 : (int,bool) farray
+
+logic o38 : t
+
+logic o39 : integer
+
+logic o40 : (int,bool) farray
+
+logic o41 : t
+
+logic do_checks__do_discriminant_check__B_26__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_26__y__assume1 : (int,bool) farray
+
+logic us4 : int
+
+logic o42 : integer
+
+logic o43 : integer
+
+logic o44 : integer
+
+logic o45 : (int,bool) farray
+
+logic o46 : t
+
+logic o47 : integer
+
+logic o48 : (int,bool) farray
+
+logic o49 : t
+
+logic o50 : integer
+
+logic o51 : (int,bool) farray
+
+logic o52 : t
+
+logic do_checks__do_discriminant_check__B_27__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_27__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_27__x__assume2 : t
+
+logic o53 : integer
+
+logic o54 : integer
+
+logic o55 : integer
+
+logic o56 : (int,bool) farray
+
+logic o57 : integer
+
+logic o58 : (int,bool) farray
+
+logic o59 : t
+
+logic o60 : integer
+
+logic o61 : (int,bool) farray
+
+logic o62 : t
+
+logic us5 : int
+
+logic o63 : integer
+
+logic o64 : integer
+
+logic o65 : integer
+
+logic o66 : (int,bool) farray
+
+logic o67 : integer
+
+logic o68 : (int,bool) farray
+
+logic o69 : t
+
+logic o70 : integer
+
+logic o71 : (int,bool) farray
+
+logic o72 : t
+
+logic do_checks__do_discriminant_check__B_28__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_28__x__assume1 : (int,bool) farray
+
+logic o73 : integer
+
+logic o74 : integer
+
+logic o75 : integer
+
+logic o76 : (int,bool) farray
+
+logic o77 : integer
+
+logic o78 : (int,bool) farray
+
+logic o79 : t
+
+logic o80 : integer
+
+logic o81 : (int,bool) farray
+
+logic o82 : t
+
+logic do_checks__do_discriminant_check__B_28__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_28__y__assume1 : (int,bool) farray
+
+logic us6 : int
+
+logic o83 : integer
+
+logic o84 : integer
+
+logic o85 : integer
+
+logic o86 : (int,bool) farray
+
+logic o87 : t
+
+logic o88 : integer
+
+logic o89 : (int,bool) farray
+
+logic o90 : t
+
+logic o91 : integer
+
+logic o92 : (int,bool) farray
+
+logic o93 : t
+
+logic do_checks__do_discriminant_check__B_29__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_29__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_29__x__assume2 : t
+
+logic o94 : integer
+
+logic o95 : integer
+
+logic o96 : integer
+
+logic o97 : (int,bool) farray
+
+logic o98 : integer
+
+logic o99 : (int,bool) farray
+
+logic o100 : t
+
+logic o101 : integer
+
+logic o102 : (int,bool) farray
+
+logic o103 : t
+
+logic us7 : int
+
+logic o104 : integer
+
+logic o105 : integer
+
+logic o106 : integer
+
+logic o107 : (int,bool) farray
+
+logic o108 : integer
+
+logic o109 : (int,bool) farray
+
+logic o110 : t
+
+logic o111 : integer
+
+logic o112 : (int,bool) farray
+
+logic o113 : t
+
+logic do_checks__do_discriminant_check__B_30__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_30__x__assume1 : (int,bool) farray
+
+logic o114 : integer
+
+logic o115 : integer
+
+logic o116 : integer
+
+logic o117 : (int,bool) farray
+
+logic o118 : integer
+
+logic o119 : (int,bool) farray
+
+logic o120 : t
+
+logic o121 : integer
+
+logic o122 : (int,bool) farray
+
+logic o123 : t
+
+logic do_checks__do_discriminant_check__B_30__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_30__y__assume1 : (int,bool) farray
+
+logic o124 : integer
+
+logic o125 : integer
+
+logic do_checks__do_discriminant_check__B_31__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_31__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_31__x__assume2 : t
+
+logic o126 : integer
+
+logic o127 : integer
+
+logic o128 : integer
+
+logic o129 : (int,bool) farray
+
+logic o130 : integer
+
+logic o131 : (int,bool) farray
+
+logic o132 : t
+
+logic o133 : integer
+
+logic o134 : (int,bool) farray
+
+logic o135 : t
+
+logic do_checks__do_discriminant_check__B_31__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_31__y__assume1 : (int,bool) farray
+
+logic us8 : int
+
+logic o136 : integer
+
+logic o137 : integer
+
+logic o138 : integer
+
+logic o139 : (int,bool) farray
+
+logic o140 : integer
+
+logic o141 : (int,bool) farray
+
+logic o142 : t
+
+logic o143 : integer
+
+logic o144 : (int,bool) farray
+
+logic o145 : t
+
+logic do_checks__do_discriminant_check__B_32__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_32__x__assume1 : (int,bool) farray
+
+logic o146 : integer
+
+logic o147 : integer
+
+logic o148 : integer
+
+logic o149 : (int,bool) farray
+
+logic o150 : integer
+
+logic o151 : (int,bool) farray
+
+logic o152 : t
+
+logic o153 : integer
+
+logic o154 : (int,bool) farray
+
+logic o155 : t
+
+logic do_checks__do_discriminant_check__B_32__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_32__y__assume1 : (int,bool) farray
+
+logic us9 : int
+
+logic o156 : integer
+
+logic o157 : integer
+
+logic o158 : integer
+
+logic o159 : (int,bool) farray
+
+logic o160 : t
+
+logic o161 : integer
+
+logic o162 : (int,bool) farray
+
+logic o163 : t
+
+logic o164 : integer
+
+logic o165 : (int,bool) farray
+
+logic o166 : t
+
+logic do_checks__do_discriminant_check__B_33__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_33__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_33__x__assume2 : t
+
+logic o167 : integer
+
+logic o168 : integer
+
+logic o169 : integer
+
+logic o170 : (int,bool) farray
+
+logic o171 : integer
+
+logic o172 : (int,bool) farray
+
+logic o173 : t
+
+logic o174 : integer
+
+logic o175 : (int,bool) farray
+
+logic o176 : t
+
+logic do_checks__do_discriminant_check__B_33__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_33__y__assume1 : (int,bool) farray
+
+logic us10 : int
+
+logic o177 : integer
+
+logic o178 : integer
+
+logic o179 : integer
+
+logic o180 : (int,bool) farray
+
+logic o181 : integer
+
+logic o182 : (int,bool) farray
+
+logic o183 : t
+
+logic o184 : integer
+
+logic o185 : (int,bool) farray
+
+logic o186 : t
+
+logic do_checks__do_discriminant_check__B_34__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_34__x__assume1 : (int,bool) farray
+
+logic o187 : integer
+
+logic o188 : integer
+
+logic o189 : integer
+
+logic o190 : (int,bool) farray
+
+logic o191 : integer
+
+logic o192 : (int,bool) farray
+
+logic o193 : t
+
+logic o194 : integer
+
+logic o195 : (int,bool) farray
+
+logic o196 : t
+
+logic do_checks__do_discriminant_check__B_34__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_34__y__assume1 : (int,bool) farray
+
+logic us11 : int
+
+logic o197 : integer
+
+logic o198 : integer
+
+logic o199 : integer
+
+logic o200 : (int,bool) farray
+
+logic o201 : t
+
+logic o202 : integer
+
+logic o203 : (int,bool) farray
+
+logic o204 : t
+
+logic o205 : integer
+
+logic o206 : (int,bool) farray
+
+logic o207 : t
+
+logic do_checks__do_discriminant_check__B_35__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_35__x__assume1 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_35__x__assume2 : t
+
+logic o208 : integer
+
+logic o209 : integer
+
+logic o210 : integer
+
+logic o211 : (int,bool) farray
+
+logic o212 : integer
+
+logic o213 : (int,bool) farray
+
+logic o214 : t
+
+logic o215 : integer
+
+logic o216 : (int,bool) farray
+
+logic o217 : t
+
+logic do_checks__do_discriminant_check__B_35__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_35__y__assume1 : (int,bool) farray
+
+logic us12 : int
+
+logic o218 : integer
+
+logic o219 : integer
+
+logic o220 : integer
+
+logic o221 : (int,bool) farray
+
+logic o222 : integer
+
+logic o223 : (int,bool) farray
+
+logic o224 : t
+
+logic o225 : integer
+
+logic o226 : (int,bool) farray
+
+logic o227 : t
+
+logic do_checks__do_discriminant_check__B_36__x__assume : integer
+
+logic do_checks__do_discriminant_check__B_36__x__assume1 : (int,bool) farray
+
+logic o228 : integer
+
+logic o229 : integer
+
+logic o230 : integer
+
+logic o231 : (int,bool) farray
+
+logic o232 : integer
+
+logic o233 : (int,bool) farray
+
+logic o234 : t
+
+logic o235 : integer
+
+logic o236 : (int,bool) farray
+
+logic o237 : t
+
+logic do_checks__do_discriminant_check__B_36__y__assume : integer
+
+logic do_checks__do_discriminant_check__B_36__y__assume1 : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic result1 : t
+
+logic x__split_fields18 : (int,bool) farray
+
+logic x__split_fields19 : t
+
+logic result2 : (int,bool) farray
+
+logic result3 : t
+
+logic y__split_fields11 : (int,bool) farray
+
+logic y__split_fields12 : t
+
+logic do_checks__do_discriminant_check__B_25__p__y__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_25__p__y__fields1 : t
+
+logic do_checks__do_discriminant_check__B_25__p__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_25__p__x__fields1 : t
+
+logic result4 : (int,bool) farray
+
+logic x__split_fields20 : (int,bool) farray
+
+logic result5 : (int,bool) farray
+
+logic y__split_fields13 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_26__p__y__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_26__p__y__fields1 : t
+
+logic do_checks__do_discriminant_check__B_26__p__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_26__p__x__fields1 : t
+
+logic result6 : (int,bool) farray
+
+logic result7 : t
+
+logic x__split_fields21 : (int,bool) farray
+
+logic x__split_fields22 : t
+
+logic result8 : (int,bool) farray
+
+logic x__split_fields23 : (int,bool) farray
+
+logic result9 : (int,bool) farray
+
+logic y__split_fields14 : (int,bool) farray
+
+logic result10 : (int,bool) farray
+
+logic result11 : t
+
+logic x__split_fields24 : (int,bool) farray
+
+logic x__split_fields25 : t
+
+logic result12 : (int,bool) farray
+
+logic x__split_fields26 : (int,bool) farray
+
+logic result13 : (int,bool) farray
+
+logic y__split_fields15 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_30__p__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_30__p__x__fields1 : t
+
+logic result14 : (int,bool) farray
+
+logic result15 : t
+
+logic x__split_fields27 : (int,bool) farray
+
+logic x__split_fields28 : t
+
+logic result16 : (int,bool) farray
+
+logic y__split_fields16 : (int,bool) farray
+
+logic result17 : (int,bool) farray
+
+logic x__split_fields29 : (int,bool) farray
+
+logic result18 : (int,bool) farray
+
+logic y__split_fields17 : (int,bool) farray
+
+logic result19 : (int,bool) farray
+
+logic result20 : t
+
+logic x__split_fields30 : (int,bool) farray
+
+logic x__split_fields31 : t
+
+logic result21 : (int,bool) farray
+
+logic y__split_fields18 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_33__p2__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_33__p2__x__fields1 : t
+
+logic result22 : (int,bool) farray
+
+logic x__split_fields32 : (int,bool) farray
+
+logic result23 : (int,bool) farray
+
+logic y__split_fields19 : (int,bool) farray
+
+logic result24 : (int,bool) farray
+
+logic result25 : t
+
+logic x__split_fields33 : (int,bool) farray
+
+logic x__split_fields34 : t
+
+logic result26 : (int,bool) farray
+
+logic y__split_fields20 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_35__p__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_35__p__x__fields1 : t
+
+logic result27 : (int,bool) farray
+
+logic x__split_fields35 : (int,bool) farray
+
+logic result28 : (int,bool) farray
+
+logic y__split_fields21 : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_36__p__x__fields : (int,bool) farray
+
+logic do_checks__do_discriminant_check__B_36__p__x__fields1 : t
+
+axiom H : in_range2(branch)
+
+axiom H1 : in_range1(temp___j_834)
+
+axiom H2 : ((us = 10) and in_range1(10))
+
+axiom H3 : ((us1 = 10) and in_range1(10))
+
+axiom H4 : (not (branch = 1000))
+
+axiom H5 : (not (branch = 1001))
+
+axiom H6 : (not (branch = 1002))
+
+axiom H7 : (not (branch = 1003))
+
+axiom H8 : (not (branch = 1004))
+
+axiom H9 : (not (branch = 1005))
+
+axiom H10 : (not (branch = 1006))
+
+axiom H11 : (not (branch = 1007))
+
+axiom H12 : (not (branch = 1008))
+
+axiom H13 : (not (branch = 1009))
+
+axiom H14 : (not (branch = 1010))
+
+axiom H15 : (branch = 1011)
+
+axiom H16 : ((us10 = 10) and in_range1(10))
+
+axiom H17 : (to_rep(o177) = 10)
+
+axiom H18 : (o178 = o177)
+
+axiom H19 : ((o179 = o178) and (o180 = temp___897(of_int(1))))
+
+axiom H20 : ((o181 = o179) and ((o182 = o180) and (o183 = mk(1, 10))))
+
  (* File "do_checks.adb", line 202, characters 0-0 *)
-goal WP_parameter_def :
-  (forall branch:int. forall temp___j_834:int. forall us:int. forall us1:int.
-  forall us2:int. forall o:integer. forall o1:us_split_discrs.
-  forall o2:us_rep19. forall o3:us_rep. (in_range2(branch) ->
-  (in_range1(temp___j_834) -> (((us = 10) and in_range1(10)) ->
-  (((us1 = 10) and in_range1(10)) -> ((not (branch = 1000)) ->
-  ((not (branch = 1001)) -> ((not ((not (branch = 1002)) ->
-  (branch = 1003))) -> ((not (branch = 1004)) -> ((not (branch = 1005)) ->
-  ((not (branch = 1006)) -> ((not (branch = 1007)) ->
-  ((not (branch = 1008)) -> ((not (branch = 1009)) ->
-  ((not (branch = 1010)) -> ((branch = 1011) -> (((us2 = 10) and
-  in_range1(10)) -> (((((to_rep(o) = 10) and (o1 = {
-  rec__do_checks__do_discriminant_check__r1__j = o })) and (o2 = {
-  us_split_discrs20 = o1; us_split_fields39 = {
-  rec__do_checks__do_discriminant_check__r1__arr19 = temp___897(of_int(1)) }
-  })) and (o3 = { us_split_discrs1 = (o2).us_split_discrs20;
-  us_split_fields1 = { rec__do_checks__do_discriminant_check__r1__arr = {
-  elts =
-  ((o2).us_split_fields39).rec__do_checks__do_discriminant_check__r1__arr19;
-  rt = mk(1, 10) } } })) ->
-  (10 = to_rep(((o3).us_split_discrs1).rec__do_checks__do_discriminant_check__r1__j))))))))))))))))))))
+goal WP_parameter_def : (10 = to_rep(o181))

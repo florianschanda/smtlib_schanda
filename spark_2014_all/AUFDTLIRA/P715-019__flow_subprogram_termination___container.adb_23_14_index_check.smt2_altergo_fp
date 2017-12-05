@@ -479,7 +479,9 @@ logic p : natural
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+axiom H : (has_element({ us_split_fields1 = { rec__container__container__a =
+  c } }, { us_split_fields3 = { rec__container__cursor__index = p }
+  }) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : ((has_element({ us_split_fields1 = {
-  rec__container__container__a = c } }, { us_split_fields3 = {
-  rec__container__cursor__index = p } }) = true) -> (1 <= to_rep(p)))
+goal WP_parameter_def : (1 <= to_rep(p))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -524,13 +524,63 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep1(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
+logic perm__occ_def__result : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : (int,natural) farray
+
+logic o4 : t
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,natural) farray
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic perm__occ_def__result1 : int
+
+logic perm__occ_def__result2 : int
+
+logic perm__occ_def__result3 : int
+
+logic perm__occ_def__result4 : int
+
+logic perm__occ_def__result5 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : in_range1(e)
+
+axiom H2 : (not (length({ elts = a; rt = a1 }) = 0))
+
+axiom H3 : ((to_rep1(first(a1)) <= to_rep1(last(a1))) and
+  (to_rep1(last(a1)) <= to_rep1(last(a1))))
+
+axiom H4 : (o = to_rep1(last(a1)))
+
+axiom H5 : (o1 = (a[o]))
+
+axiom H6 : (o2 = to_rep(o1))
+
+axiom H7 : (((o2 = e) -> (result = true)) and ((not (o2 = e)) ->
+  (result = false)))
+
+axiom H8 : (not (result = true))
+
  (* File "perm.ads", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:natural. forall o2:int. forall result:bool.
-  (dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1))) ->
-  (in_range1(e) -> ((not (length({ elts = a; rt = a1 }) = 0)) ->
-  (((((((to_rep1(first(a1)) <= to_rep1(last(a1))) and
-  (to_rep1(last(a1)) <= to_rep1(last(a1)))) and (o = to_rep1(last(a1)))) and
-  (o1 = (a[o]))) and (o2 = to_rep(o1))) and (((o2 = e) and
-  (result = true)) or ((not (o2 = e)) and (result = false)))) ->
-  ((not (result = true)) -> (0 <  length({ elts = a; rt = a1 }))))))))
+goal WP_parameter_def : (0 <  length({ elts = a; rt = a1 }))

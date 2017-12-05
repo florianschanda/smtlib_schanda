@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -523,39 +523,95 @@ axiom head__def_axiom :
   r1; rec__ring_buf__ring_buffer__length = r2 }
   }) = to_rep2((r[to_rep(r1)]))))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall h:int. forall r__split_fields:(int,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall r__split_fields3:length_type.
-  forall r__split_fields4:(int,integer) farray.
-  forall r__split_fields5:ar_index. forall r__split_fields6:length_type.
-  forall r__split_fields7:length_type. forall h1:int.
-  forall r__split_fields8:(int,integer) farray.
-  forall r__split_fields9:ar_index. forall r__split_fields10:length_type.
-  forall r__split_fields11:(int,integer) farray.
-  forall r__split_fields12:ar_index. forall r__split_fields13:length_type.
-  forall h2:int. forall r__split_fields14:length_type. forall h3:int.
-  (in_range(x) -> (in_range(y) -> (in_range(z) ->
-  ((((-2147483648) <= 2147483647) -> in_range(h)) -> ((is_empty({
-  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r__split_fields;
+logic h : int
+
+logic r__split_fields : (int,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic r__split_fields3 : (int,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic r__split_fields6 : (int,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (int,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic h1 : int
+
+logic r__split_fields12 : (int,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+logic r__split_fields15 : (int,integer) farray
+
+logic r__split_fields16 : ar_index
+
+logic r__split_fields17 : length_type
+
+logic h2 : int
+
+logic r__split_fields18 : length_type
+
+logic h3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : in_range(z)
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(h))
+
+axiom H4 : (is_empty({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true) ->
-  ((to_rep1(r__split_fields3) = (to_rep1(r__split_fields2) + 1)) ->
-  ((to_rep1(r__split_fields6) = (to_rep1(r__split_fields3) + 1)) ->
-  ((((to_rep1(r__split_fields7) = (to_rep1(r__split_fields6) - 1)) and
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)
+
+axiom H5 : (to_rep1(r__split_fields5) = (to_rep1(r__split_fields2) + 1))
+
+axiom H6 : (to_rep1(r__split_fields8) = (to_rep1(r__split_fields5) + 1))
+
+axiom H7 :
+  (((to_rep1(r__split_fields11) = (to_rep1(r__split_fields8) - 1)) and
   (head({ us_split_fields1 = { rec__ring_buf__ring_buffer__data =
-  r__split_fields4; rec__ring_buf__ring_buffer__first = r__split_fields5;
-  rec__ring_buf__ring_buffer__length = r__split_fields6 } }) = h1)) and
-  in_range(h1)) -> ((h1 = x) ->
-  ((to_rep1(r__split_fields10) = (to_rep1(r__split_fields7) + 1)) ->
-  ((((to_rep1(r__split_fields13) = (to_rep1(r__split_fields10) - 1)) and
+  r__split_fields6; rec__ring_buf__ring_buffer__first = r__split_fields7;
+  rec__ring_buf__ring_buffer__length = r__split_fields8 } }) = h1)) and
+  in_range(h1))
+
+axiom H8 : (h1 = x)
+
+axiom H9 : (to_rep1(r__split_fields14) = (to_rep1(r__split_fields11) + 1))
+
+axiom H10 :
+  (((to_rep1(r__split_fields17) = (to_rep1(r__split_fields14) - 1)) and
   (head({ us_split_fields1 = { rec__ring_buf__ring_buffer__data =
-  r__split_fields8; rec__ring_buf__ring_buffer__first = r__split_fields9;
-  rec__ring_buf__ring_buffer__length = r__split_fields10 } }) = h2)) and
-  in_range(h2)) -> ((h2 = y) ->
-  ((((to_rep1(r__split_fields14) = (to_rep1(r__split_fields13) - 1)) and
+  r__split_fields12; rec__ring_buf__ring_buffer__first = r__split_fields13;
+  rec__ring_buf__ring_buffer__length = r__split_fields14 } }) = h2)) and
+  in_range(h2))
+
+axiom H11 : (h2 = y)
+
+axiom H12 :
+  (((to_rep1(r__split_fields18) = (to_rep1(r__split_fields17) - 1)) and
   (head({ us_split_fields1 = { rec__ring_buf__ring_buffer__data =
-  r__split_fields11; rec__ring_buf__ring_buffer__first = r__split_fields12;
-  rec__ring_buf__ring_buffer__length = r__split_fields13 } }) = h3)) and
-  in_range(h3)) -> (h3 = z)))))))))))))))
+  r__split_fields15; rec__ring_buf__ring_buffer__first = r__split_fields16;
+  rec__ring_buf__ring_buffer__length = r__split_fields17 } }) = h3)) and
+  in_range(h3))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (h3 = z)

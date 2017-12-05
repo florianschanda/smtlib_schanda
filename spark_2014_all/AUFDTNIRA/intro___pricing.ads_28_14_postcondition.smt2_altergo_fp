@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -528,59 +528,184 @@ axiom mult__post_axiom :
   ((not ((x * y) <  10000)) -> ((10000 <= (x * y)) -> (mult(x,
   y) = 10000)))) and in_range3(mult(x, y)))))
 
+logic total : int
+
+logic it : int
+
+logic pricing__price_of_basket__result : int
+
+logic temp___166 : int
+
+logic temp___165 : int
+
+logic k : int
+
+logic us : int
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : int
+
+logic o3 : int
+
+logic it1 : int
+
+logic result : int
+
+logic total1 : int
+
+logic result1 : int
+
+logic it2 : int
+
+logic total2 : int
+
+logic it3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic total3 : int
+
+logic result4 : int
+
+logic it4 : int
+
+logic total4 : int
+
+logic it5 : int
+
+logic total5 : int
+
+logic it6 : int
+
+logic total6 : int
+
+logic it7 : int
+
+logic total7 : int
+
+logic it8 : int
+
+logic total8 : int
+
+logic it9 : int
+
+logic total9 : int
+
+logic it10 : int
+
+logic result5 : int
+
+logic pricing__price_of_basket__result1 : int
+
+logic pricing__price_of_basket__result2 : int
+
+logic pricing__price_of_basket__result3 : int
+
+logic total10 : int
+
+logic it11 : int
+
+logic pricing__price_of_basket__result4 : int
+
+logic total11 : int
+
+logic it12 : int
+
+logic pricing__price_of_basket__result5 : int
+
+logic result6 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(bk1)),
+  to_rep1(last(bk1)))
+
+axiom H1 : (result = total)
+
+axiom H2 : (total1 = 0)
+
+axiom H3 : in_range3(total1)
+
+axiom H4 : (result1 = it)
+
+axiom H5 : (it2 = to_rep1(first(bk1)))
+
+axiom H6 : (((to_rep1(first(bk1)) <= it2) and (it2 <= to_rep1(last(bk1)))) ->
+  (((temp___166 = it2) and ((temp___165 = total1) and
+  ((forall k1:int. (((to_rep1(first(bk1)) <= k1) and (k1 <= (it3 - 1))) ->
+   (price_of_item((bk[k1])) <= total2))) and (((((0 <= 10000) ->
+  in_range3(total2)) and ((to_rep1(first(bk1)) <= to_rep1(last(bk1))) ->
+  dynamic_property1(to_rep1(first(bk1)), to_rep1(last(bk1)), it3))) and
+  ((to_rep1(first(bk1)) <= it3) and (it3 <= to_rep1(last(bk1))))) and
+  (((((o2 = price_of_item((bk[it3]))) and (in_range3(o2) and
+  (o2 = mult(to_rep((((bk[it3])).us_split_fields1).rec__pricing__item__price),
+  to_rep((((bk[it3])).us_split_fields1).rec__pricing__item__number))))) and
+  ((o3 = add(total2, o2)) and (in_range3(o3) and (((bool_lt((total2 + o2),
+  10000) = true) -> (o3 = (total2 + o2))) and ((not (bool_lt((total2 + o2),
+  10000) = true)) -> ((bool_ge((total2 + o2), 10000) = true) ->
+  (o3 = 10000))))))) and ((total2 = result3) and (total3 = o3))) and
+  (it3 = to_rep1(last(bk1)))))))) and (((it3 = it7) and
+  (total3 = total6)) and ((it8 = it3) and (total7 = total3)))))
+
+axiom H7 : (((to_rep1(first(bk1)) <= it2) and (it2 <= to_rep1(last(bk1)))) ->
+  (it9 = it7))
+
+axiom H8 : (((to_rep1(first(bk1)) <= it2) and (it2 <= to_rep1(last(bk1)))) ->
+  (total8 = total6))
+
+axiom H9 : (((to_rep1(first(bk1)) <= it2) and (it2 <= to_rep1(last(bk1)))) ->
+  (it10 = it8))
+
+axiom H10 : (((to_rep1(first(bk1)) <= it2) and
+  (it2 <= to_rep1(last(bk1)))) -> (total9 = total7))
+
+axiom H11 : ((not ((to_rep1(first(bk1)) <= it2) and
+  (it2 <= to_rep1(last(bk1))))) -> (it2 = it9))
+
+axiom H12 : ((not ((to_rep1(first(bk1)) <= it2) and
+  (it2 <= to_rep1(last(bk1))))) -> (total1 = total8))
+
+axiom H13 : ((not ((to_rep1(first(bk1)) <= it2) and
+  (it2 <= to_rep1(last(bk1))))) -> (it10 = it2))
+
+axiom H14 : ((not ((to_rep1(first(bk1)) <= it2) and
+  (it2 <= to_rep1(last(bk1))))) -> (total9 = total1))
+
+axiom H15 :
+  (pricing__price_of_basket__result1 = pricing__price_of_basket__result2)
+
+axiom H16 :
+  (pricing__price_of_basket__result3 = pricing__price_of_basket__result1)
+
+axiom H17 : (result5 = pricing__price_of_basket__result)
+
+axiom H18 : (pricing__price_of_basket__result1 = total8)
+
+axiom H19 :
+  (pricing__price_of_basket__result4 = pricing__price_of_basket__result2)
+
+axiom H20 : (it11 = it9)
+
+axiom H21 : (total10 = total8)
+
+axiom H22 :
+  (pricing__price_of_basket__result5 = pricing__price_of_basket__result3)
+
+axiom H23 : (it12 = it10)
+
+axiom H24 : (total11 = total9)
+
+axiom H25 : (result6 = pricing__price_of_basket__result4)
+
+logic it13 : int
+
+axiom H26 : (to_rep1(first(bk1)) <= it13)
+
+axiom H27 : (it13 <= to_rep1(last(bk1)))
+
  (* File "sat.ads", line 12, characters 0-0 *)
 goal WP_parameter_def :
-  (forall total:int. forall it:int.
-  forall pricing__price_of_basket__result:int. forall temp___166:int.
-  forall temp___165:int. forall o:int. forall o1:int. forall result:int.
-  forall total1:int. forall result1:int. forall it1:int. forall total2:int.
-  forall it2:int. forall result2:int. forall total3:int. forall total4:int.
-  forall it3:int. forall total5:int. forall it4:int. forall total6:int.
-  forall it5:int. forall total7:int. forall it6:int. forall result3:int.
-  forall pricing__price_of_basket__result1:int.
-  forall pricing__price_of_basket__result2:int.
-  forall pricing__price_of_basket__result3:int. forall total8:int.
-  forall it7:int. forall pricing__price_of_basket__result4:int.
-  forall total9:int. forall it8:int.
-  forall pricing__price_of_basket__result5:int.
-  (forall result4:int. ((dynamic_property(1, 2147483647, to_rep1(first(bk1)),
-  to_rep1(last(bk1))) and ((((({ int__content = result } = { int__content =
-  total }) and (total1 = 0)) and (in_range3(total1) and (((({ int__content =
-  result1 } = { int__content = it }) and (it1 = to_rep1(first(bk1)))) and
-  ((((to_rep1(first(bk1)) <= it1) and (it1 <= to_rep1(last(bk1)))) and
-  ((((temp___166 = it1) and ((temp___165 = total1) and
-  ((forall k:int. (((to_rep1(first(bk1)) <= k) and (k <= (it2 - 1))) ->
-   (price_of_item((bk[k])) <= total2))) and
-  (((((0 <= 10000) -> in_range3(total2)) and
-  ((to_rep1(first(bk1)) <= to_rep1(last(bk1))) ->
-  dynamic_property1(to_rep1(first(bk1)), to_rep1(last(bk1)), it2))) and
-  ((to_rep1(first(bk1)) <= it2) and (it2 <= to_rep1(last(bk1))))) and
-  (((((o = price_of_item((bk[it2]))) and (in_range3(o) and
-  (o = mult(to_rep((((bk[it2])).us_split_fields1).rec__pricing__item__price),
-  to_rep((((bk[it2])).us_split_fields1).rec__pricing__item__number))))) and
-  ((o1 = add(total2, o)) and (in_range3(o1) and (((bool_lt((total2 + o),
-  10000) = true) and (o1 = (total2 + o))) or ((not (bool_lt((total2 + o),
-  10000) = true)) and ((bool_ge((total2 + o), 10000) = true) ->
-  (o1 = 10000))))))) and ((total2 = result2) and (total3 = o1))) and
-  (it2 = to_rep1(last(bk1)))))))) and (((it2 = it3) and
-  (total3 = total4)) and ((it4 = it2) and (total5 = total3)))) and ((({
-  int__content = it5 } = { int__content = it3 }) and ({ int__content = total6
-  } = { int__content = total4 })) and ((it6 = it4) and
-  (total7 = total5))))) or ((not ((to_rep1(first(bk1)) <= it1) and
-  (it1 <= to_rep1(last(bk1))))) and (((it1 = it5) and (total1 = total6)) and
-  ((it6 = it1) and (total7 = total1)))))) and
-  (((pricing__price_of_basket__result1 = pricing__price_of_basket__result2) and
-  (pricing__price_of_basket__result3 = pricing__price_of_basket__result1)) and
-  (({ int__content = result3 } = { int__content =
-  pricing__price_of_basket__result }) and
-  (pricing__price_of_basket__result1 = total6)))))) and ((({ int__content =
-  pricing__price_of_basket__result4 } = { int__content =
-  pricing__price_of_basket__result2 }) and (({ int__content = it7 } = {
-  int__content = it5 }) and ({ int__content = total8 } = { int__content =
-  total6 }))) and
-  ((pricing__price_of_basket__result5 = pricing__price_of_basket__result3) and
-  ((it8 = it6) and (total9 = total7))))) and
-  (result4 = pricing__price_of_basket__result4))) ->
-  (forall it9:int. (((to_rep1(first(bk1)) <= it9) and
-  (it9 <= to_rep1(last(bk1)))) ->
-  (price_of_item((bk[it9])) <= pricing__price_of_basket__result4))))))
+  (price_of_item((bk[it13])) <= pricing__price_of_basket__result4)

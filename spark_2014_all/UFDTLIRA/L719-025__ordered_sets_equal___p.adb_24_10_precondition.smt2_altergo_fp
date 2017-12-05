@@ -1347,20 +1347,41 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
- (* File "a-cforse.ads", line 1427, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall result:bool. (in_range2(e) ->
-  (((contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), e) = true) or (length({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic o : count_type
+
+logic o1 : int
+
+logic result : bool
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic l__split_fields4 : us_main_type
+
+axiom H : in_range2(e)
+
+axiom H1 : ((contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
-  rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs))) ->
-  (((result = contains(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true) or (length({
+  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
+  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
+  }) <  to_rep(l__split_discrs)))
+
+axiom H2 : ((result = contains(model__({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }), e)) and ((result = true) <->
   (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), e) = true))) -> ((result = true) ->
-  (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
-  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), e) = true))))))
+  l__split_fields } }), e) = true)))
+
+axiom H3 : (result = true)
+
+ (* File "a-cforse.ads", line 1427, characters 0-0 *)
+goal WP_parameter_def : (contains(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true)

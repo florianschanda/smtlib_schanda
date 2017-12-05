@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -139,13 +139,52 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic sum : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic sum1 : int
+
+logic result1 : int
+
+logic i1 : int
+
+logic sum2 : int
+
+logic i2 : int
+
+logic tmp : int
+
+logic result2 : int
+
+logic sum3 : int
+
+logic result3 : int
+
+logic tmp1 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range1(sum))
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range1(i))
+
+axiom H2 : (result = sum)
+
+axiom H3 : (sum1 = 0)
+
+axiom H4 : (result1 = i)
+
+axiom H5 : (i1 = 1)
+
+axiom H6 : (i1 <  11)
+
+axiom H7 : (((((- 2147483648) <= 2147483647) -> in_range1(sum2)) and
+  (((- 2147483648) <= 2147483647) -> in_range1(i2))) and (i2 <  11))
+
  (* File "test.adb", line 262, characters 0-0 *)
-goal WP_parameter_def :
-  (forall sum:int. forall i:int. forall result:int. forall sum1:int.
-  forall result1:int. forall i1:int. forall sum2:int. forall i2:int.
-  ((((-2147483648) <= 2147483647) -> in_range1(sum)) ->
-  ((((-2147483648) <= 2147483647) -> in_range1(i)) -> (((result = sum) and
-  (sum1 = 0)) -> (((result1 = i) and (i1 = 1)) -> ((i1 <  11) ->
-  ((((((-2147483648) <= 2147483647) -> in_range1(sum2)) and
-  (((-2147483648) <= 2147483647) -> in_range1(i2))) and (i2 <  11)) ->
-  in_range1((sum2 + i2)))))))))
+goal WP_parameter_def : in_range1((sum2 + i2))

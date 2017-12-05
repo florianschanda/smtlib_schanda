@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -113,25 +113,84 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic input_value : int
+
+logic input_port : int
+
+logic first_read : int
+
+logic second_read : int
+
+logic o : int
+
+logic o1 : int
+
+logic input_port1 : int
+
+logic result : int
+
+logic second_read1 : int
+
+logic result1 : int
+
+logic first_read1 : int
+
+logic input_port2 : int
+
+logic result2 : int
+
+logic second_read2 : int
+
+logic result3 : int
+
+logic input_value1 : int
+
+logic result4 : int
+
+logic input_value2 : int
+
+axiom H : in_range(input_port)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(input_value))
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(first_read))
+
+axiom H3 : (((- 2147483648) <= 2147483647) -> in_range(second_read))
+
+axiom H4 : in_range(input_port1)
+
+axiom H5 : (o = input_port1)
+
+axiom H6 : (result = second_read)
+
+axiom H7 : (second_read1 = o)
+
+axiom H8 : (result1 = first_read)
+
+axiom H9 : (first_read1 = second_read1)
+
+axiom H10 : ((first_read1 = 0) -> in_range(input_port2))
+
+axiom H11 : ((first_read1 = 0) -> (o1 = input_port2))
+
+axiom H12 : ((first_read1 = 0) -> (result2 = second_read1))
+
+axiom H13 : ((first_read1 = 0) -> (second_read2 = o1))
+
+axiom H14 : ((first_read1 = 0) -> (result3 = input_value))
+
+axiom H15 : ((first_read1 = 0) -> (input_value1 = second_read2))
+
+axiom H16 : ((not (first_read1 = 0)) -> (result4 = input_value))
+
+axiom H17 : ((not (first_read1 = 0)) -> (input_value2 = first_read1))
+
+axiom H18 : ((not (first_read1 = 0)) -> (second_read2 = second_read1))
+
+axiom H19 : ((not (first_read1 = 0)) -> (input_port2 = input_port1))
+
+axiom H20 : ((not (first_read1 = 0)) -> (input_value1 = input_value2))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall input_value:int. forall input_port:int. forall first_read:int.
-  forall second_read:int. forall o:int. forall o1:int.
-  forall input_port1:int. forall result:int. forall second_read1:int.
-  forall result1:int. forall first_read1:int. forall input_port2:int.
-  forall result2:int. forall second_read2:int. forall result3:int.
-  forall input_value1:int. forall result4:int. forall input_value2:int.
-  (in_range(input_port) -> ((((-2147483648) <= 2147483647) ->
-  in_range(input_value)) -> ((((-2147483648) <= 2147483647) ->
-  in_range(first_read)) -> ((((-2147483648) <= 2147483647) ->
-  in_range(second_read)) -> (((in_range(input_port1) and
-  (o = input_port1)) and ((result = second_read) and (second_read1 = o))) ->
-  (((result1 = first_read) and (first_read1 = second_read1)) ->
-  ((((first_read1 = 0) and (((in_range(input_port2) and
-  (o1 = input_port2)) and ((result2 = second_read1) and
-  (second_read2 = o1))) and ((result3 = input_value) and
-  (input_value1 = second_read2)))) or ((not (first_read1 = 0)) and
-  (((result4 = input_value) and (input_value2 = first_read1)) and
-  ((second_read2 = second_read1) and ((input_port2 = input_port1) and
-  (input_value1 = input_value2)))))) -> (((first_read1 = 0) and
-  (input_value1 = second_read2)) or (input_value1 = first_read1))))))))))
+goal WP_parameter_def : (((first_read1 = 0) and
+  (input_value1 = second_read2)) or (input_value1 = first_read1))

@@ -107,7 +107,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -555,7 +555,7 @@ axiom last__def_axiom1 : (last3 = to_rep1(last(s21)))
 
 type tseq_lengthB
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1035,17 +1035,387 @@ logic temp___String_Literal_265 : unit -> (int,character) farray
 
 axiom temp___String_Literal_265__def_axiom : true
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lengths:map. forall x1:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall temp___250:int.
-  forall result:int. forall x11:int. forall lengths1:map. forall x12:int.
-  forall x2:int. forall result1:int. forall x21:int. forall lengths2:map.
-  forall x22:int. (dynamic_property(1, 2147483647, to_rep1(first(s11)),
-  to_rep1(last(s11))) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(s21)), to_rep1(last(s21))) -> ((((dynamic_property6(first2,
-  last2, to_rep1(lengths__first), to_rep1(lengths__last), first3, last3,
-  to_rep1(lengths__first_2), to_rep1(lengths__last_2)) and
+logic lengths : map
+
+logic x1 : int
+
+logic x2 : int
+
+logic result__ : (int,character) farray
+
+logic rx : int
+
+logic x11 : int
+
+logic x21 : int
+
+logic string_utilities__longest_common_subsequence__result : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result1 : t
+
+logic temp___260 : map
+
+logic temp___253 : map
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___250 : int
+
+logic us : int
+
+logic o5 : int
+
+logic o6 : tseq_lengthB
+
+logic o7 : map
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic temp___249 : int
+
+logic us1 : int
+
+logic o14 : int
+
+logic o15 : tseq_lengthB
+
+logic o16 : map
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic string_utilities__longest_common_subsequence__B_4__last__assume : int
+
+logic us2 : int
+
+logic o20 : int
+
+logic us3 : int
+
+logic o21 : int
+
+logic us4 : int
+
+logic o22 : int
+
+logic temp___276 : int
+
+logic temp___274 : (int,character) farray
+
+logic temp___272 : int
+
+logic temp___271 : int
+
+logic o23 : character
+
+logic o24 : (int,character) farray
+
+logic us5 : int
+
+logic o25 : int
+
+logic temp___269 : int
+
+logic us6 : int
+
+logic o26 : int
+
+logic temp___270 : int
+
+logic us7 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic temp___267 : int
+
+logic us8 : int
+
+logic temp___266 : int
+
+logic us9 : int
+
+logic o33 : int
+
+logic o34 : int
+
+logic lengths1 : map
+
+logic x22 : int
+
+logic result__1 : (int,character) farray
+
+logic rx1 : int
+
+logic x12 : int
+
+logic x23 : int
+
+logic string_utilities__longest_common_subsequence__result2 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result3 : t
+
+logic result : int
+
+logic x13 : int
+
+logic lengths2 : map
+
+logic x14 : int
+
+logic x24 : int
+
+logic result1 : int
+
+logic x25 : int
+
+logic lengths3 : map
+
+logic x26 : int
+
+logic result2 : map
+
+logic lengths4 : map
+
+logic result3 : map
+
+logic lengths5 : map
+
+logic lengths6 : map
+
+logic x27 : int
+
+logic lengths7 : map
+
+logic x28 : int
+
+logic lengths8 : map
+
+logic x29 : int
+
+logic lengths9 : map
+
+logic x210 : int
+
+logic lengths10 : map
+
+logic x15 : int
+
+logic x211 : int
+
+logic lengths11 : map
+
+logic x16 : int
+
+logic x212 : int
+
+logic lengths12 : map
+
+logic x17 : int
+
+logic x213 : int
+
+logic lengths13 : map
+
+logic x18 : int
+
+logic x214 : int
+
+logic result4 : bool
+
+logic result5 : (int,character) farray
+
+logic result6 : t
+
+logic string_utilities__longest_common_subsequence__result4 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result5 : t
+
+logic string_utilities__longest_common_subsequence__result6 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result7 : t
+
+logic string_utilities__longest_common_subsequence__result8 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result9 : t
+
+logic result7 : int
+
+logic rx2 : int
+
+logic result8 : int
+
+logic x19 : int
+
+logic result9 : int
+
+logic x215 : int
+
+logic result__2 : (int,character) farray
+
+logic rx3 : int
+
+logic x110 : int
+
+logic x216 : int
+
+logic string_utilities__longest_common_subsequence__result10 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result11 : t
+
+logic result10 : (int,character) farray
+
+logic result__3 : (int,character) farray
+
+logic result11 : (int,character) farray
+
+logic result12 : t
+
+logic string_utilities__longest_common_subsequence__result12 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result13 : t
+
+logic string_utilities__longest_common_subsequence__result14 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result15 : t
+
+logic string_utilities__longest_common_subsequence__result16 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result17 : t
+
+logic result13 : int
+
+logic rx4 : int
+
+logic result14 : int
+
+logic x111 : int
+
+logic result15 : bool
+
+logic result__4 : (int,character) farray
+
+logic rx5 : int
+
+logic x112 : int
+
+logic x217 : int
+
+logic string_utilities__longest_common_subsequence__result18 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result19 : t
+
+logic result__5 : (int,character) farray
+
+logic rx6 : int
+
+logic x113 : int
+
+logic x218 : int
+
+logic string_utilities__longest_common_subsequence__result20 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result21 : t
+
+logic result__6 : (int,character) farray
+
+logic rx7 : int
+
+logic x114 : int
+
+logic x219 : int
+
+logic string_utilities__longest_common_subsequence__result22 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result23 : t
+
+logic result__7 : (int,character) farray
+
+logic rx8 : int
+
+logic x115 : int
+
+logic x220 : int
+
+logic string_utilities__longest_common_subsequence__result24 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result25 : t
+
+logic lengths14 : map
+
+logic x116 : int
+
+logic x221 : int
+
+logic result__8 : (int,character) farray
+
+logic rx9 : int
+
+logic x117 : int
+
+logic x222 : int
+
+logic string_utilities__longest_common_subsequence__result26 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result27 : t
+
+logic lengths15 : map
+
+logic x118 : int
+
+logic x223 : int
+
+logic result__9 : (int,character) farray
+
+logic rx10 : int
+
+logic x119 : int
+
+logic x224 : int
+
+logic string_utilities__longest_common_subsequence__result28 : (int,character) farray
+
+logic string_utilities__longest_common_subsequence__result29 : t
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s11)),
+  to_rep1(last(s11)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(s21)),
+  to_rep1(last(s21)))
+
+axiom H2 : (((dynamic_property6(first2, last2, to_rep1(lengths__first),
+  to_rep1(lengths__last), first3, last3, to_rep1(lengths__first_2),
+  to_rep1(lengths__last_2)) and
   ((to_rep1(lengths__first) = to_rep1(first(s11))) and
   (to_rep1(lengths__last) = to_rep1(last(s11))))) and
   ((to_rep1(lengths__first_2) = to_rep1(first(s21))) and
@@ -1056,48 +1426,75 @@ goal WP_parameter_def :
   ((to_rep1(lengths__first_2) <= temp___248) and
   (temp___248 <= to_rep1(lengths__last_2)))) -> ((0 <= last4) ->
   dynamic_property3(0, last4, to_rep2(get(lengths, temp___247,
-  temp___248))))))) -> ((({ int__content = result } = { int__content = x1
-  }) and (x11 = to_rep1(first(s11)))) -> (((to_rep1(first(s11)) <= x11) and
-  (x11 <= to_rep1(last(s11)))) ->
-  ((((forall temp___258:int. forall temp___259:int.
-     ((((to_rep1(lengths__first) <= temp___258) and
-     (temp___258 <= to_rep1(lengths__last))) and
-     ((to_rep1(lengths__first_2) <= temp___259) and
-     (temp___259 <= to_rep1(lengths__last_2)))) -> ((0 <= last4) ->
-     dynamic_property3(0, last4, to_rep2(get(lengths1, temp___258,
-     temp___259)))))) and
+  temp___248)))))))
+
+axiom H3 : (result = x1)
+
+axiom H4 : (x13 = to_rep1(first(s11)))
+
+axiom H5 : (to_rep1(first(s11)) <= x13)
+
+axiom H6 : (x13 <= to_rep1(last(s11)))
+
+axiom H7 :
+  (((forall temp___258:int. forall temp___259:int.
+    ((((to_rep1(lengths__first) <= temp___258) and
+    (temp___258 <= to_rep1(lengths__last))) and
+    ((to_rep1(lengths__first_2) <= temp___259) and
+    (temp___259 <= to_rep1(lengths__last_2)))) -> ((0 <= last4) ->
+    dynamic_property3(0, last4, to_rep2(get(lengths2, temp___258,
+    temp___259)))))) and
   (forall temp___261:int. forall temp___262:int.
   ((((to_rep1(lengths__first) <= temp___261) and
   (temp___261 <= to_rep1(lengths__last))) and
   ((to_rep1(lengths__first_2) <= temp___262) and
-  (temp___262 <= to_rep1(lengths__last_2)))) -> ((x12 <= temp___261) ->
-  (get(lengths1, temp___261, temp___262) = get(lengths, temp___261,
-  temp___262)))))) and ((to_rep1(first(s11)) <= x12) and
-  (x12 <= to_rep1(last(s11))))) -> (((x2 = result1) and
-  (x21 = to_rep1(first(s21)))) -> (((to_rep1(first(s21)) <= x21) and
-  (x21 <= to_rep1(last(s21)))) ->
-  ((((forall temp___251:int. forall temp___252:int.
-     ((((to_rep1(lengths__first) <= temp___251) and
-     (temp___251 <= to_rep1(lengths__last))) and
-     ((to_rep1(lengths__first_2) <= temp___252) and
-     (temp___252 <= to_rep1(lengths__last_2)))) -> ((0 <= last4) ->
-     dynamic_property3(0, last4, to_rep2(get(lengths2, temp___251,
-     temp___252)))))) and
+  (temp___262 <= to_rep1(lengths__last_2)))) -> ((x14 <= temp___261) ->
+  (get(lengths2, temp___261, temp___262) = get(lengths, temp___261,
+  temp___262)))))) and ((to_rep1(first(s11)) <= x14) and
+  (x14 <= to_rep1(last(s11)))))
+
+axiom H8 : (x24 = result1)
+
+axiom H9 : (x25 = to_rep1(first(s21)))
+
+axiom H10 : (to_rep1(first(s21)) <= x25)
+
+axiom H11 : (x25 <= to_rep1(last(s21)))
+
+axiom H12 :
+  (((forall temp___251:int. forall temp___252:int.
+    ((((to_rep1(lengths__first) <= temp___251) and
+    (temp___251 <= to_rep1(lengths__last))) and
+    ((to_rep1(lengths__first_2) <= temp___252) and
+    (temp___252 <= to_rep1(lengths__last_2)))) -> ((0 <= last4) ->
+    dynamic_property3(0, last4, to_rep2(get(lengths3, temp___251,
+    temp___252)))))) and
   (forall temp___254:int. forall temp___255:int.
   ((((to_rep1(lengths__first) <= temp___254) and
   (temp___254 <= to_rep1(lengths__last))) and
   ((to_rep1(lengths__first_2) <= temp___255) and
-  (temp___255 <= to_rep1(lengths__last_2)))) -> (((x22 <= temp___255) or
-  (not (x12 = temp___254))) -> (get(lengths2, temp___254,
-  temp___255) = get(lengths1, temp___254, temp___255)))))) and
-  ((to_rep1(first(s21)) <= x22) and (x22 <= to_rep1(last(s21))))) ->
-  ((to_rep((s1[x12])) = to_rep((s2[x22]))) -> (((((((o1 = (x22 - 1)) and
-  in_range1((x22 - 1))) and ((o2 = o1) and in_range4(o1))) and
-  (((o = (x12 - 1)) and in_range1((x12 - 1))) and ((o3 = get_length(o, o2,
-  lengths2)) and (dynamic_property3(0, last4, o3) and
-  (((dynamic_property1(first2, last2, o) and dynamic_property2(first3, last3,
-  o2)) and (o3 = to_rep2(get(lengths2, o, o2)))) or
-  ((not (dynamic_property1(first2, last2, o) and dynamic_property2(first3,
-  last3, o2))) and (o3 = 0))))))) and (o4 = (1 + o3))) and
-  ((temp___250 = o4) and in_range5(o4))) -> dynamic_property3(0, last4,
-  temp___250)))))))))))))
+  (temp___255 <= to_rep1(lengths__last_2)))) -> (((x26 <= temp___255) or
+  (not (x14 = temp___254))) -> (get(lengths3, temp___254,
+  temp___255) = get(lengths2, temp___254, temp___255)))))) and
+  ((to_rep1(first(s21)) <= x26) and (x26 <= to_rep1(last(s21)))))
+
+axiom H13 : (to_rep((s1[x14])) = to_rep((s2[x26])))
+
+axiom H14 : ((o1 = (x26 - 1)) and in_range1((x26 - 1)))
+
+axiom H15 : ((o2 = o1) and in_range4(o1))
+
+axiom H16 : ((o = (x14 - 1)) and in_range1((x14 - 1)))
+
+axiom H17 : ((o3 = get_length(o, o2, lengths3)) and (dynamic_property3(0,
+  last4, o3) and (((dynamic_property1(first2, last2, o) and
+  dynamic_property2(first3, last3, o2)) -> (o3 = to_rep2(get(lengths3, o,
+  o2)))) and ((not (dynamic_property1(first2, last2, o) and
+  dynamic_property2(first3, last3, o2))) -> (o3 = 0)))))
+
+axiom H18 : (o4 = (1 + o3))
+
+axiom H19 : ((temp___250 = o4) and in_range5(o4))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : dynamic_property3(0, last4, temp___250)

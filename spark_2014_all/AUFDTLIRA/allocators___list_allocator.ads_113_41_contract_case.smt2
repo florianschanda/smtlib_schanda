@@ -350,7 +350,7 @@
 (assert (=> (not (= res 0)) (= o5 o3)))
 (assert (=> (not (= res 0)) (= o6 (to_rep1 o5))))
 (assert (=> (not (= res 0)) (= result (ite (= o6 1) true false))))
-(assert (=> (not (not (= res 0))) (= result false)))
+(assert (=> (= res 0) (= result false)))
 (assert (=> (= result true) (= (to_rep o7) first_available)))
 (assert (=> (= result true) (= (to_rep1 o8) 0)))
 (assert (=> (= result true) (= o8 o9)))

@@ -169,7 +169,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic tmp : int
+
+logic o : int
+
+axiom H : in_range1(y)
+
+axiom H1 : in_range2(the_action)
+
+axiom H2 : ((1 <= 16) -> in_range1(tmp))
+
+axiom H3 : (the_action = 3)
+
  (* File "tetris.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall tmp:int. (in_range1(y) -> (in_range2(the_action) -> (((1 <= 16) ->
-  in_range1(tmp)) -> ((the_action = 3) -> in_range1((y - 1)))))))
+goal WP_parameter_def : in_range1((y - 1))

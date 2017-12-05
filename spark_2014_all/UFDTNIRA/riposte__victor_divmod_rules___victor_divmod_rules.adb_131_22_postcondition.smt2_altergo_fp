@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -189,7 +189,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type ttB
 
-predicate in_range1(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq1 : int, int -> bool
 
@@ -244,7 +244,7 @@ function ttB__ref___projection(a: ttB__ref) : ttB = (a).ttB__content
 
 type t
 
-predicate in_range2(x: int) = (((-1000) <= x) and (x <= 1000))
+predicate in_range2(x: int) = (((- 1000) <= x) and (x <= 1000))
 
 logic bool_eq3 : int, int -> bool
 
@@ -275,6 +275,13 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic o : int
+
+axiom H : in_range2(x)
+
+axiom H1 : in_range2(y)
+
+axiom H2 : ((x <= 0) and (y <  0))
+
  (* File "victor_divmod_rules.adb", line 114, characters 0-0 *)
-goal WP_parameter_def : ((in_range2(x) and (in_range2(y) and ((x <= 0) and
-  (y <  0)))) -> ((y * comp_div(x,y)) <  (x - y)))
+goal WP_parameter_def : ((y * comp_div(x,y)) <  (x - y))

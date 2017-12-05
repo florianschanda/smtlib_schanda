@@ -269,18 +269,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1920,26 +1920,68 @@ axiom w_get__post_axiom1 :
   ((in_range3(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range10(w_get1(container, witness2)))))
 
- (* File "p.ads", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. forall e:int. forall o:int.
-  forall result:int. forall e1:int. forall l__split_fields1:us_main_type.
-  forall l__split_fields2:us_main_type. forall l__split_fields3:us_main_type.
-  forall e2:int. forall l__split_fields4:us_main_type. forall e3:int.
-  ((in_range2(k) and ((has_key1(model__({ us_split_discrs1 = {
+logic l__split_fields : us_main_type
+
+logic e : int
+
+logic o : int
+
+logic o1 : count_type
+
+logic o2 : count_type
+
+logic cu : count_type
+
+logic o3 : bool
+
+logic cu1 : count_type
+
+logic o4 : bool
+
+logic o5 : bool
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : bool
+
+logic result : int
+
+logic e1 : int
+
+logic l__split_fields1 : us_main_type
+
+logic l__split_fields2 : us_main_type
+
+logic l__split_fields3 : us_main_type
+
+logic e2 : int
+
+logic l__split_fields4 : us_main_type
+
+logic e3 : int
+
+logic result1 : bool
+
+logic result2 : bool
+
+axiom H : in_range2(k)
+
+axiom H1 : (has_key1(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }), k) = true) and
-  (((((o = get(model__({ us_split_discrs1 = {
+  rec__p__my_maps__map = l__split_fields } }), k) = true)
+
+axiom H2 : (((((o = get(model__({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields } }), k)) and (in_range4(o) and
   (o = get(model__({ us_split_discrs1 = { rec__p__my_maps__map__capacity =
   l__split_discrs; rec__p__my_maps__map__modulus = l__split_discrs1 };
   us_split_fields1 = { rec__p__my_maps__map = l__split_fields } }), k)))) and
-  (({ int__content = result } = { int__content = e }) and (e1 = o))) and
-  (in_range1(e1) and (((((((length({ us_split_discrs1 = {
-  rec__p__my_maps__map__capacity = l__split_discrs;
+  ((result = e) and (e1 = o))) and (in_range1(e1) and (((((((length({
+  us_split_discrs1 = { rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields1 } }) = (length({ us_split_discrs1 =
   { rec__p__my_maps__map__capacity = l__split_discrs;
@@ -2044,11 +2086,13 @@ goal WP_parameter_def :
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields2 } }, k)) = true))))) and
   (((e1 = e2) and (l__split_fields3 = l__split_fields2)) and ((e3 = e1) and
-  ({ rec__p__my_maps__map = l__split_fields4 } = { rec__p__my_maps__map =
-  l__split_fields2 })))))) -> (oeq({ us_split_discrs1 = {
+  (l__split_fields4 = l__split_fields2))))
+
+ (* File "p.ads", line 21, characters 0-0 *)
+goal WP_parameter_def : (oeq({ us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
   rec__p__my_maps__map = l__split_fields3 } }, { us_split_discrs1 = {
   rec__p__my_maps__map__capacity = l__split_discrs;
   rec__p__my_maps__map__modulus = l__split_discrs1 }; us_split_fields1 = {
-  rec__p__my_maps__map = l__split_fields } }) = true)))
+  rec__p__my_maps__map = l__split_fields } }) = true)

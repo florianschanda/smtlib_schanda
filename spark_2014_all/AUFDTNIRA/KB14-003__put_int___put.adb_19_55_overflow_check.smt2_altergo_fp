@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -641,25 +641,169 @@ type t3b__ref = { t3b__content : us_t1
 
 function t3b__ref___projection(a: t3b__ref) : us_t1 = (a).t3b__content
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall int__:int. forall first4:int. forall val__:int. forall o:int.
-  forall o1:int. forall o2:int. forall o3:int. forall result:int.
-  forall first5:int. forall result1:int. forall int__1:int.
-  forall int__2:int. forall first6:int. forall val__1:int.
-  forall result2:int. forall val__2:int. forall result3:int.
-  forall int__3:int. forall result4:int. forall first7:int. (in_range(x) ->
-  ((((-2147483648) <= 2147483647) -> in_range(int__)) ->
-  (((result = first4) and (first5 = 12)) -> (in_range3(first5) ->
-  ((((-2147483648) <= 2147483647) -> in_range(val__)) -> (((((x <  0) and
-  (o = x)) or ((not (x <  0)) and ((o = (-x)) and in_range((-x))))) and
-  ((result1 = int__) and (int__1 = o))) ->
-  ((((((-2147483648) <= 2147483647) -> in_range(int__2)) and
+logic int__ : int
+
+logic s : (int,character) farray
+
+logic first4 : int
+
+logic val__ : int
+
+logic o : int
+
+logic temp___518 : int
+
+logic temp___517 : int
+
+logic temp___515 : (int,character) farray
+
+logic temp___514 : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : character
+
+logic o7 : int
+
+logic o8 : (int,character) farray
+
+logic o9 : int
+
+logic o10 : character
+
+logic o11 : int
+
+logic o12 : (int,character) farray
+
+logic result : int
+
+logic first5 : int
+
+logic result1 : int
+
+logic int__1 : int
+
+logic int__2 : int
+
+logic s1 : (int,character) farray
+
+logic first6 : int
+
+logic val__1 : int
+
+logic result2 : int
+
+logic val__2 : int
+
+logic result3 : int
+
+logic int__3 : int
+
+logic result4 : int
+
+logic first7 : int
+
+logic result5 : (int,character) farray
+
+logic s2 : (int,character) farray
+
+logic int__4 : int
+
+logic s3 : (int,character) farray
+
+logic first8 : int
+
+logic val__3 : int
+
+logic int__5 : int
+
+logic s4 : (int,character) farray
+
+logic first9 : int
+
+logic val__4 : int
+
+logic int__6 : int
+
+logic s5 : (int,character) farray
+
+logic first10 : int
+
+logic val__5 : int
+
+logic int__7 : int
+
+logic s6 : (int,character) farray
+
+logic first11 : int
+
+logic val__6 : int
+
+logic result6 : int
+
+logic first12 : int
+
+logic result7 : (int,character) farray
+
+logic s7 : (int,character) farray
+
+logic s8 : (int,character) farray
+
+logic first13 : int
+
+logic s9 : (int,character) farray
+
+logic first14 : int
+
+axiom H : in_range(x)
+
+axiom H1 : (((- 2147483648) <= 2147483647) -> in_range(int__))
+
+axiom H2 : (result = first4)
+
+axiom H3 : (first5 = 12)
+
+axiom H4 : in_range3(first5)
+
+axiom H5 : (((- 2147483648) <= 2147483647) -> in_range(val__))
+
+axiom H6 : ((x <  0) -> (o = x))
+
+axiom H7 : ((not (x <  0)) -> ((o = (-x)) and in_range((-x))))
+
+axiom H8 : (result1 = int__)
+
+axiom H9 : (int__1 = o)
+
+axiom H10 : (((((- 2147483648) <= 2147483647) -> in_range(int__2)) and
   ((0 <= 2147483647) -> in_range3(first6))) and
-  (((-2147483648) <= 2147483647) -> in_range(val__1))) ->
-  (((val__1 = result2) and (val__2 = comp_mod(int__2,10))) ->
-  (((((o1 = (int__2 - val__2)) and in_range((int__2 - val__2))) and
-  (o2 = comp_div(o1,10))) and ((int__2 = result3) and (int__3 = o2))) ->
-  ((((o3 = (first6 - 1)) and in_range3((first6 - 1))) and
-  ((first6 = result4) and (first7 = o3))) ->
-  in_range((48 - val__2)))))))))))))
+  (((- 2147483648) <= 2147483647) -> in_range(val__1)))
+
+axiom H11 : (val__1 = result2)
+
+axiom H12 : (val__2 = comp_mod(int__2,10))
+
+axiom H13 : ((o1 = (int__2 - val__2)) and in_range((int__2 - val__2)))
+
+axiom H14 : (o2 = comp_div(o1,10))
+
+axiom H15 : (int__2 = result3)
+
+axiom H16 : (int__3 = o2)
+
+axiom H17 : ((o3 = (first6 - 1)) and in_range3((first6 - 1)))
+
+axiom H18 : (first6 = result4)
+
+axiom H19 : (first7 = o3)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : in_range((48 - val__2))

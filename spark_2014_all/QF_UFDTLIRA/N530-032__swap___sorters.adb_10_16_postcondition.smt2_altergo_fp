@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -111,14 +111,65 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic y : int
+
+logic temp : int
+
+logic result : int
+
+logic temp1 : int
+
+logic result1 : int
+
+logic x1 : int
+
+logic result2 : int
+
+logic y1 : int
+
+logic x2 : int
+
+logic y2 : int
+
+logic temp2 : int
+
+logic x3 : int
+
+logic y3 : int
+
+logic temp3 : int
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (((- 2147483648) <= 2147483647) -> in_range(temp))
+
+axiom H3 : (result = temp)
+
+axiom H4 : (temp1 = x)
+
+axiom H5 : (result1 = x)
+
+axiom H6 : (x1 = y)
+
+axiom H7 : (result2 = y)
+
+axiom H8 : (y1 = temp1)
+
+axiom H9 : (temp2 = temp1)
+
+axiom H10 : (y1 = y2)
+
+axiom H11 : (x1 = x2)
+
+axiom H12 : (temp3 = temp1)
+
+axiom H13 : (y3 = y1)
+
+axiom H14 : (x3 = x1)
+
  (* File "sorters.adb", line 49, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall y:int. forall temp:int. forall result:int.
-  forall temp1:int. forall result1:int. forall x1:int. forall result2:int.
-  forall y1:int. forall x2:int. forall y2:int. forall temp2:int.
-  forall x3:int. forall y3:int. forall temp3:int. ((in_range(x) and
-  (in_range(y) and (((((-2147483648) <= 2147483647) -> in_range(temp)) and
-  (((result = temp) and (temp1 = x)) and (((result1 = x) and (x1 = y)) and
-  ((result2 = y) and (y1 = temp1))))) and (((temp2 = temp1) and
-  ((y1 = y2) and (x1 = x2))) and ((temp3 = temp1) and ((y3 = y1) and
-  (x3 = x1))))))) -> (x2 = y)))
+goal WP_parameter_def : (x2 = y)

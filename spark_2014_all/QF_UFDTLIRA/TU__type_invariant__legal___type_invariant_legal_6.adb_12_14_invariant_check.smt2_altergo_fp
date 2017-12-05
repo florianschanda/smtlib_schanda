@@ -110,7 +110,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type integer
 
-predicate in_range1(x1: int) = (((-2147483648) <= x1) and (x1 <= 2147483647))
+predicate in_range1(x1: int) = (((- 2147483648) <= x1) and
+  (x1 <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -138,5 +139,9 @@ logic read : int -> int
 
 logic read__function_guard : int, int -> prop
 
+axiom H : in_range(x)
+
+axiom H1 : (not (x = 0))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range(x) -> ((not (x = 0)) -> (not (x = 0))))
+goal WP_parameter_def : (not (x = 0))

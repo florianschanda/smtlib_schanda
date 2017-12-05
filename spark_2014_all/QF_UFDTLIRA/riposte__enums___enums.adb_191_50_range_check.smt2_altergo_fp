@@ -109,16 +109,43 @@ logic a : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic enums__succ_a__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic enums__succ_a__result1 : int
+
+logic enums__succ_a__result2 : int
+
+logic enums__succ_a__result3 : int
+
+logic enums__succ_a__result4 : int
+
+logic enums__succ_a__result5 : int
+
+axiom H : in_range(a)
+
+axiom H1 : (enums__succ_a__result1 = enums__succ_a__result2)
+
+axiom H2 : (enums__succ_a__result3 = enums__succ_a__result1)
+
+axiom H3 : ((o = a) and (not (a = 8)))
+
+axiom H4 : (o1 = (o + 1))
+
+axiom H5 : (result = enums__succ_a__result)
+
+axiom H6 : (enums__succ_a__result1 = o1)
+
+axiom H7 : (enums__succ_a__result4 = enums__succ_a__result2)
+
+axiom H8 : (enums__succ_a__result5 = enums__succ_a__result3)
+
  (* File "enums.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall enums__succ_a__result:int. forall o:int. forall o1:int.
-  forall result:int. forall enums__succ_a__result1:int.
-  forall enums__succ_a__result2:int. forall enums__succ_a__result3:int.
-  forall enums__succ_a__result4:int. forall enums__succ_a__result5:int.
-  (in_range(a) -> (((((enums__succ_a__result1 = enums__succ_a__result2) and
-  (enums__succ_a__result3 = enums__succ_a__result1)) and ((((o = a) and
-  (not (a = 8))) and (o1 = (o + 1))) and (({ int__content = result } = {
-  int__content = enums__succ_a__result }) and
-  (enums__succ_a__result1 = o1)))) and (({ int__content =
-  enums__succ_a__result4 } = { int__content = enums__succ_a__result2 }) and
-  (enums__succ_a__result5 = enums__succ_a__result3))) -> (not (a = 8)))))
+goal WP_parameter_def : (not (a = 8))

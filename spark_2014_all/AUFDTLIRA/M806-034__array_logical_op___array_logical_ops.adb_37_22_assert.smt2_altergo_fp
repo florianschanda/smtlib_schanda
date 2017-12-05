@@ -290,7 +290,7 @@ axiom notb_def :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -522,16 +522,36 @@ axiom r3__def_axiom : ((r3 = xorb1(v, to_rep1(first(v1)), to_rep1(last(v1)),
   x, to_rep1(first(x1)), to_rep1(last(x1)))) and
   (r31 = mk(to_rep1(first(v1)), to_rep1(last(v1)))))
 
+logic i : int
+
+logic i1 : int
+
+axiom H : ((array_logical_ops__test_ok3__v__aggregate_def(0, 1, 0) = v) and
+  (mk(6, 45) = v1))
+
+axiom H1 : dynamic_property((- 2147483648), 2147483647, to_rep1(first(v1)),
+  to_rep1(last(v1)))
+
+axiom H2 : ((array_logical_ops__test_ok3__x__aggregate_def(1, 0, 1,
+  0) = x) and (mk(1, 40) = x1))
+
+axiom H3 : dynamic_property((- 2147483648), 2147483647, to_rep1(first(x1)),
+  to_rep1(last(x1)))
+
+axiom H4 : ((xorb1(v, to_rep1(first(v1)), to_rep1(last(v1)), x,
+  to_rep1(first(x1)), to_rep1(last(x1))) = r3) and (mk(to_rep1(first(v1)),
+  to_rep1(last(v1))) = r31))
+
+axiom H5 : dynamic_property((- 2147483648), 2147483647, to_rep1(first(r31)),
+  to_rep1(last(r31)))
+
+axiom H6 : (to_rep1(first(r31)) = 6)
+
+logic i2 : int
+
+axiom H7 : (to_rep1(first(r31)) <= i2)
+
+axiom H8 : (i2 <= 25)
+
  (* File "array_logical_ops.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (((array_logical_ops__test_ok3__v__aggregate_def(0,
-  1, 0) = v) and (mk(6, 45) = v1)) -> (dynamic_property((-2147483648),
-  2147483647, to_rep1(first(v1)), to_rep1(last(v1))) ->
-  (((array_logical_ops__test_ok3__x__aggregate_def(1, 0, 1, 0) = x) and
-  (mk(1, 40) = x1)) -> (dynamic_property((-2147483648), 2147483647,
-  to_rep1(first(x1)), to_rep1(last(x1))) -> (((xorb1(v, to_rep1(first(v1)),
-  to_rep1(last(v1)), x, to_rep1(first(x1)), to_rep1(last(x1))) = r3) and
-  (mk(to_rep1(first(v1)), to_rep1(last(v1))) = r31)) ->
-  (dynamic_property((-2147483648), 2147483647, to_rep1(first(r31)),
-  to_rep1(last(r31))) -> ((to_rep1(first(r31)) = 6) ->
-  (forall i:int. (((to_rep1(first(r31)) <= i) and (i <= 25)) ->
-  (of_int(to_rep((r3[i]))) = true))))))))))
+goal WP_parameter_def : (of_int(to_rep((r3[i2]))) = true)

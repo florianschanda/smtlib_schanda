@@ -98,6 +98,7 @@
 (declare-const data2 (_ BitVec 64))
 (declare-const data3 (_ BitVec 64))
 (assert (in_range field))
+(assert true)
 (assert (= result data))
 (assert (= data1 (to_rep (select value field))))
 (assert (= data1 data2))

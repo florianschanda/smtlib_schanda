@@ -410,20 +410,97 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
+logic a : (int,(int,et1) farray) farray
+
+logic j_next : int
+
+logic f : int
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : et1
+
+logic o6 : (int,et1) farray
+
+logic o7 : (int,(int,et1) farray) farray
+
+logic result : (int,(int,et1) farray) farray
+
+logic a1 : (int,(int,et1) farray) farray
+
+logic result1 : int
+
+logic j_next1 : int
+
+logic result2 : int
+
+logic j_next2 : int
+
+logic result3 : int
+
+logic f1 : int
+
+logic result4 : int
+
+logic f2 : int
+
+logic result5 : (int,(int,et1) farray) farray
+
+logic a2 : (int,(int,et1) farray) farray
+
+logic a3 : (int,(int,et1) farray) farray
+
+logic j_next3 : int
+
+logic f3 : int
+
+logic a4 : (int,(int,et1) farray) farray
+
+logic j_next4 : int
+
+logic f4 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range3(e)
+
+axiom H3 : ((5 <= 50) -> in_range2(j_next))
+
+axiom H4 : ((0 <= 99) -> in_range3(f))
+
+axiom H5 : (to_rep(o) = e)
+
+axiom H6 : (o1 = ((a[j])[i <- o]))
+
+axiom H7 : (o2 = (a[j <- o1]))
+
+axiom H8 : (result = a)
+
+axiom H9 : (a1 = o2)
+
+axiom H10 : ((j = 50) -> (result1 = j_next))
+
+axiom H11 : ((j = 50) -> (j_next1 = 5))
+
+axiom H12 : ((not (j = 50)) -> ((o3 = (j + 1)) and in_range2((j + 1))))
+
+axiom H13 : ((not (j = 50)) -> (result2 = j_next))
+
+axiom H14 : ((not (j = 50)) -> (j_next2 = o3))
+
+axiom H15 : ((not (j = 50)) -> (j_next1 = j_next2))
+
+axiom H16 : (not (e = 0))
+
  (* File "ar.ads", line 314, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,et1) farray) farray. forall j_next:int. forall f:int.
-  forall o:et1. forall o1:(int,et1) farray.
-  forall o2:(int,(int,et1) farray) farray. forall o3:int.
-  forall result:(int,(int,et1) farray) farray.
-  forall a1:(int,(int,et1) farray) farray. forall result1:int.
-  forall j_next1:int. forall result2:int. forall j_next2:int.
-  (in_range1(i) -> (in_range2(j) -> (in_range3(e) -> (((5 <= 50) ->
-  in_range2(j_next)) -> (((0 <= 99) -> in_range3(f)) ->
-  (((((to_rep(o) = e) and (o1 = ((a[j])[i <- o]))) and
-  (o2 = (a[j <- o1]))) and (({ map__content1 = result } = { map__content1 = a
-  }) and (a1 = o2))) -> ((((j = 50) and (({ int__content = result1 } = {
-  int__content = j_next }) and (j_next1 = 5))) or ((not (j = 50)) and
-  ((((o3 = (j + 1)) and in_range2((j + 1))) and (({ int__content = result2
-  } = { int__content = j_next }) and (j_next2 = o3))) and
-  (j_next1 = j_next2)))) -> ((not (e = 0)) -> in_range3((e - 1)))))))))))
+goal WP_parameter_def : in_range3((e - 1))

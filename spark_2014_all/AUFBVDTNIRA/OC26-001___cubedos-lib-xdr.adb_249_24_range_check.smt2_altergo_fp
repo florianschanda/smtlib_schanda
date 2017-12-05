@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -686,7 +686,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -1067,7 +1067,7 @@ function octet_array_index__ref___projection(a: octet_array_index__ref) : octet_
 
 type octet_array_extended_index
 
-predicate in_range5(x: int) = (((-1) <= x) and (x <= 65535))
+predicate in_range5(x: int) = (((- 1) <= x) and (x <= 65535))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1443,92 +1443,303 @@ axiom def_axiom :
   (forall temp___547:int. (((temp___542(temp___544, temp___545,
   temp___546)).elts2[temp___547]) = of_rep(temp___544)))))
 
- (* File "cubedos-lib-xdr.ads", line 261, characters 0-0 *)
-goal WP_parameter_def :
-  (forall value:(int,character) farray. forall last6:int. forall i:int.
-  forall temp___549:(int,character) farray. forall temp___5491:t3.
-  forall temp___550:(int,character) farray. forall temp___5501:t1.
-  forall temp___551:(int,character) farray. forall temp___5511:t1.
-  forall o:(int,character) farray. forall o1:int. forall o2:int.
-  forall o3:int. forall o4:int. forall temp___557:int.
-  forall temp___554:(int,character) farray. forall o5:int. forall o6:int.
-  forall temp___552:int. forall o7:int. forall o8:octet. forall o9:t.
-  forall o10:int. forall o11:character. forall o12:int.
-  forall o13:(int,character) farray. forall o14:int. forall o15:int.
-  forall o16:int. forall o17:int. forall o18:int.
-  forall result:(int,character) farray. forall value1:(int,character) farray.
-  forall result1:int. forall i1:int. forall value2:(int,character) farray.
-  forall i2:int. forall result2:(int,character) farray.
-  forall value3:(int,character) farray. forall value4:(int,character) farray.
-  forall i3:int. forall value5:(int,character) farray. forall i4:int.
-  forall value6:(int,character) farray. forall i5:int.
-  forall value7:(int,character) farray. forall i6:int. (dynamic_property1(0,
-  65535, to_rep1(first2(data1)), to_rep1(last2(data1))) ->
-  (in_range4(position) -> (dynamic_property(1, 2147483647,
-  to_rep1(value__first), to_rep1(value__last)) -> ((((-1) <= 65535) ->
-  in_range5(last6)) -> (((comp_mod(position,4) = 0) and ((0 <  length1({
-  elts1 = data; rt1 = data1 })) and ((comp_mod(length1({ elts1 = data; rt1 =
-  data1 }),4) = 0) and ((((to_rep1(value__first) <= to_rep1(value__last)) and
-  (((to_rep1(value__last) - to_rep1(value__first)) + 1) <= 65536)) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and
+logic value : (int,character) farray
+
+logic last6 : int
+
+logic i : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic temp___549 : (int,character) farray
+
+logic temp___5491 : t3
+
+logic temp___550 : (int,character) farray
+
+logic temp___5501 : t1
+
+logic temp___551 : (int,character) farray
+
+logic temp___5511 : t1
+
+logic o8 : (int,character) farray
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic o12 : int
+
+logic temp___557 : int
+
+logic temp___554 : (int,character) farray
+
+logic o13 : int
+
+logic o14 : int
+
+logic temp___552 : int
+
+logic o15 : int
+
+logic o16 : octet
+
+logic o17 : t
+
+logic o18 : int
+
+logic o19 : character
+
+logic o20 : int
+
+logic o21 : (int,character) farray
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic result : bool
+
+logic result1 : (int,character) farray
+
+logic value1 : (int,character) farray
+
+logic result2 : int
+
+logic i1 : int
+
+logic value2 : (int,character) farray
+
+logic i2 : int
+
+logic result3 : (int,character) farray
+
+logic value3 : (int,character) farray
+
+logic value4 : (int,character) farray
+
+logic i3 : int
+
+logic value5 : (int,character) farray
+
+logic i4 : int
+
+logic value6 : (int,character) farray
+
+logic i5 : int
+
+logic value7 : (int,character) farray
+
+logic i6 : int
+
+logic result4 : int
+
+logic last7 : int
+
+logic value8 : (int,character) farray
+
+logic last8 : int
+
+logic i7 : int
+
+logic value9 : (int,character) farray
+
+logic last9 : int
+
+logic i8 : int
+
+axiom H : dynamic_property1(0, 65535, to_rep1(first2(data1)),
+  to_rep1(last2(data1)))
+
+axiom H1 : in_range4(position)
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(value__first),
+  to_rep1(value__last))
+
+axiom H3 : (((- 1) <= 65535) -> in_range5(last6))
+
+axiom H4 : ((comp_mod(position,4) = 0) and ((0 <  length1({ elts1 = data;
+  rt1 = data1 })) and ((comp_mod(length1({ elts1 = data; rt1 = data1
+  }),4) = 0) and ((((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (((to_rep1(value__last) - to_rep1(value__first)) + 1) <= 65536)) and
+  ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
   (0 <= 65536))) and (((to_rep1(first2(data1)) <= position) and
   (position <= to_rep1(last2(data1)))) and
-  (((to_rep1(value__first) <= to_rep1(value__last)) and
-  (position <= (to_rep1(last2(data1)) - (length_with_padding(((to_rep1(value__last) - to_rep1(value__first)) + 1)) - 1)))) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and
-  (position <= (to_rep1(last2(data1)) - (length_with_padding(0) - 1)))))))))) ->
-  (((((((to_rep1(first4((temp___542(32, to_rep1(value__first),
-  to_rep1(value__last))).rt2)) = to_rep1(value__first)) and
-  ((to_rep1(last4((temp___542(32, to_rep1(value__first),
-  to_rep1(value__last))).rt2)) = to_rep1(value__last)) and ({ elts2 =
-  temp___549; rt2 = temp___5491 } = temp___542(32, to_rep1(value__first),
-  to_rep1(value__last))))) and ((temp___549 = temp___550) and
-  (mk(to_rep1(first4(temp___5491)),
-  to_rep1(last4(temp___5491))) = temp___5501))) and
-  ((((to_rep1(first(temp___5501)) <= to_rep1(last(temp___5501))) and
-  (((to_rep1(value__first) <= to_rep1(value__last)) and
-  (((to_rep1(last(temp___5501)) - to_rep1(first(temp___5501))) + 1) = ((to_rep1(value__last) - to_rep1(value__first)) + 1))) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and
-  (((to_rep1(last(temp___5501)) - to_rep1(first(temp___5501))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___5501)) <= to_rep1(last(temp___5501)))) and
-  (((to_rep1(value__first) <= to_rep1(value__last)) and
-  (0 = ((to_rep1(value__last) - to_rep1(value__first)) + 1))) or
-  (not (to_rep1(value__first) <= to_rep1(value__last)))))) and ({ elts =
-  temp___551; rt = temp___5511 } = { elts = temp___550; rt = temp___5501
-  }))) and (o = slide(temp___551, to_rep1(first(temp___5511)),
-  to_rep1(value__first)))) and (({ map__content = result } = { map__content =
-  value }) and (value1 = o))) ->
-  (((((((((to_rep1(value__first) <= to_rep1(value__last)) and
-  (o1 = ((to_rep1(value__last) - to_rep1(value__first)) + 1))) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and (o1 = 0))) and
-  ((o2 = o1) and in_range1(o1))) and (o3 = (position + o2))) and
-  ((o4 = o3) and in_range1(o3))) and (temp___557 = (o4 - 1))) and ((({
-  int__content = result1 } = { int__content = i }) and (i1 = position)) and
-  ((((position <= i1) and (i1 <= temp___557)) and
-  ((((temp___554 = value1) and (((position <= i2) and
-  (((to_rep1(value__first) <= to_rep1(value__last)) and
-  (i2 <= ((position + ((to_rep1(value__last) - to_rep1(value__first)) + 1)) - 1))) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and
-  (i2 <= ((position + 0) - 1))))) and
-  ((((((((((to_rep1(first2(data1)) <= i2) and
-  (i2 <= to_rep1(last2(data1)))) and (o7 = i2)) and (o8 = (data[o7]))) and
-  (o9 = to_rep2(o8))) and (o10 = tqtint(o9))) and (to_rep(o11) = o10)) and
-  ((((((o5 = (i2 - position)) and in_range1((i2 - position))) and
-  (o6 = (to_rep1(value__first) + o5))) and ((temp___552 = o6) and
-  in_range1(o6))) and (((to_rep1(value__first) <= temp___552) and
-  (temp___552 <= to_rep1(value__last))) and (o12 = temp___552))) and
-  (o13 = (value2[o12 <- o11])))) and ((value2 = result2) and
-  (value3 = o13))) and (i2 = temp___557)))) and (((i2 = i3) and
-  (value3 = value4)) and ((i4 = i2) and (value5 = value3)))) and ((({
-  int__content = i5 } = { int__content = i3 }) and ({ map__content = value6
-  } = { map__content = value4 })) and ((i6 = i4) and (value7 = value5))))) or
-  ((not ((position <= i1) and (i1 <= temp___557))) and (((i1 = i5) and
-  (value1 = value6)) and ((i6 = i1) and (value7 = value1))))))) ->
-  ((((((((to_rep1(value__first) <= to_rep1(value__last)) and
-  (o14 = ((to_rep1(value__last) - to_rep1(value__first)) + 1))) or
-  ((not (to_rep1(value__first) <= to_rep1(value__last))) and (o14 = 0))) and
-  ((o15 = o14) and in_range6(o14))) and ((o16 = length_with_padding(o15)) and
-  (in_range6(o16) and (((comp_mod(o15,4) = 0) and (o16 = (o15 + 0))) or
-  ((not (comp_mod(o15,4) = 0)) and
-  (o16 = (o15 + (4 - comp_mod(o15,4))))))))) and (o17 = (o16 - 1))) and
-  (o18 = (position + o17))) -> in_range5(o18))))))))))
+  (((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (position <= (to_rep1(last2(data1)) - (length_with_padding(((to_rep1(value__last) - to_rep1(value__first)) + 1)) - 1)))) and
+  ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
+  (position <= (to_rep1(last2(data1)) - (length_with_padding(0) - 1))))))))))
+
+axiom H5 : (to_rep1(first4((temp___542(32, to_rep1(value__first),
+  to_rep1(value__last))).rt2)) = to_rep1(value__first))
+
+axiom H6 : (to_rep1(last4((temp___542(32, to_rep1(value__first),
+  to_rep1(value__last))).rt2)) = to_rep1(value__last))
+
+axiom H7 : ({ elts2 = temp___549; rt2 = temp___5491 } = temp___542(32,
+  to_rep1(value__first), to_rep1(value__last)))
+
+axiom H8 : (temp___549 = temp___550)
+
+axiom H9 : (mk(to_rep1(first4(temp___5491)),
+  to_rep1(last4(temp___5491))) = temp___5501)
+
+axiom H10 : (((to_rep1(first(temp___5501)) <= to_rep1(last(temp___5501))) ->
+  (((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (((to_rep1(last(temp___5501)) - to_rep1(first(temp___5501))) + 1) = ((to_rep1(value__last) - to_rep1(value__first)) + 1))) and
+  ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
+  (((to_rep1(last(temp___5501)) - to_rep1(first(temp___5501))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___5501)) <= to_rep1(last(temp___5501)))) ->
+  ((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (0 = ((to_rep1(value__last) - to_rep1(value__first)) + 1)))))
+
+axiom H11 : ((temp___551 = temp___550) and (temp___5511 = temp___5501))
+
+axiom H12 : (o8 = slide(temp___551, to_rep1(first(temp___5511)),
+  to_rep1(value__first)))
+
+axiom H13 : (result1 = value)
+
+axiom H14 : (value1 = o8)
+
+axiom H15 : ((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (o9 = ((to_rep1(value__last) - to_rep1(value__first)) + 1)))
+
+axiom H16 : ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
+  (o9 = 0))
+
+axiom H17 : ((o10 = o9) and in_range1(o9))
+
+axiom H18 : (o11 = (position + o10))
+
+axiom H19 : ((o12 = o11) and in_range1(o11))
+
+axiom H20 : (temp___557 = (o12 - 1))
+
+axiom H21 : (result2 = i)
+
+axiom H22 : (i1 = position)
+
+axiom H23 : (((position <= i1) and (i1 <= temp___557)) ->
+  (temp___554 = value1))
+
+axiom H24 : (((position <= i1) and (i1 <= temp___557)) ->
+  ((position <= i2) and (((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (i2 <= ((position + ((to_rep1(value__last) - to_rep1(value__first)) + 1)) - 1))) and
+  ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
+  (i2 <= ((position + 0) - 1))))))
+
+axiom H25 : (((position <= i1) and (i1 <= temp___557)) ->
+  ((to_rep1(first2(data1)) <= i2) and (i2 <= to_rep1(last2(data1)))))
+
+axiom H26 : (((position <= i1) and (i1 <= temp___557)) -> (o15 = i2))
+
+axiom H27 : (((position <= i1) and (i1 <= temp___557)) ->
+  (o16 = (data[o15])))
+
+axiom H28 : (((position <= i1) and (i1 <= temp___557)) ->
+  (o17 = to_rep2(o16)))
+
+axiom H29 : (((position <= i1) and (i1 <= temp___557)) ->
+  (o18 = tqtint(o17)))
+
+axiom H30 : (((position <= i1) and (i1 <= temp___557)) ->
+  (to_rep(o19) = o18))
+
+axiom H31 : (((position <= i1) and (i1 <= temp___557)) ->
+  ((o13 = (i2 - position)) and in_range1((i2 - position))))
+
+axiom H32 : (((position <= i1) and (i1 <= temp___557)) ->
+  (o14 = (to_rep1(value__first) + o13)))
+
+axiom H33 : (((position <= i1) and (i1 <= temp___557)) ->
+  ((temp___552 = o14) and in_range1(o14)))
+
+axiom H34 : (((position <= i1) and (i1 <= temp___557)) ->
+  ((to_rep1(value__first) <= temp___552) and
+  (temp___552 <= to_rep1(value__last))))
+
+axiom H35 : (((position <= i1) and (i1 <= temp___557)) -> (o20 = temp___552))
+
+axiom H36 : (((position <= i1) and (i1 <= temp___557)) ->
+  (o21 = (value2[o20 <- o19])))
+
+axiom H37 : (((position <= i1) and (i1 <= temp___557)) -> (value2 = result3))
+
+axiom H38 : (((position <= i1) and (i1 <= temp___557)) -> (value3 = o21))
+
+axiom H39 : (((position <= i1) and (i1 <= temp___557)) -> (i2 = temp___557))
+
+axiom H40 : (((position <= i1) and (i1 <= temp___557)) -> (i2 = i3))
+
+axiom H41 : (((position <= i1) and (i1 <= temp___557)) -> (value3 = value4))
+
+axiom H42 : (((position <= i1) and (i1 <= temp___557)) -> (i4 = i2))
+
+axiom H43 : (((position <= i1) and (i1 <= temp___557)) -> (value5 = value3))
+
+axiom H44 : (((position <= i1) and (i1 <= temp___557)) -> (i5 = i3))
+
+axiom H45 : (((position <= i1) and (i1 <= temp___557)) -> (value6 = value4))
+
+axiom H46 : (((position <= i1) and (i1 <= temp___557)) -> (i6 = i4))
+
+axiom H47 : (((position <= i1) and (i1 <= temp___557)) -> (value7 = value5))
+
+axiom H48 : ((not ((position <= i1) and (i1 <= temp___557))) -> (i1 = i5))
+
+axiom H49 : ((not ((position <= i1) and (i1 <= temp___557))) ->
+  (value1 = value6))
+
+axiom H50 : ((not ((position <= i1) and (i1 <= temp___557))) -> (i6 = i1))
+
+axiom H51 : ((not ((position <= i1) and (i1 <= temp___557))) ->
+  (value7 = value1))
+
+axiom H52 : ((to_rep1(value__first) <= to_rep1(value__last)) ->
+  (o22 = ((to_rep1(value__last) - to_rep1(value__first)) + 1)))
+
+axiom H53 : ((not (to_rep1(value__first) <= to_rep1(value__last))) ->
+  (o22 = 0))
+
+axiom H54 : ((o23 = o22) and in_range6(o22))
+
+axiom H55 : ((o24 = length_with_padding(o23)) and (in_range6(o24) and
+  (((comp_mod(o23,4) = 0) -> (o24 = (o23 + 0))) and
+  ((not (comp_mod(o23,4) = 0)) -> (o24 = (o23 + (4 - comp_mod(o23,4))))))))
+
+axiom H56 : (o25 = (o24 - 1))
+
+axiom H57 : (o26 = (position + o25))
+
+ (* File "cubedos-lib-xdr.ads", line 261, characters 0-0 *)
+goal WP_parameter_def : in_range5(o26)

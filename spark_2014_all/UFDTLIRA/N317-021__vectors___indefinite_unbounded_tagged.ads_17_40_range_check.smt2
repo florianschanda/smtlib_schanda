@@ -110,6 +110,7 @@
 (assert (= no_index 0))
 (assert (= last_count 2147483647))
 (assert (= max_size_in_storage_elements value__size))
+(declare-const indefinite_unbounded_tagged__vect__max_size_in_storage_elements__assume Int)
 (assert (not (in_range1 value__size)))
 (check-sat)
 (exit)

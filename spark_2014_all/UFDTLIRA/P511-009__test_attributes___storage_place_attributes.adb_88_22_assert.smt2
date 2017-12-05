@@ -62,7 +62,7 @@
 (define-fun us_rep___4__projection ((a us_rep)) us_split_fields (us_split_fields1 a))
 (define-fun us_rep___5__projection ((a us_rep)) Bool (attr__constrained a))
 (define-fun storage_place_attributes__r2__d2__pred ((a us_rep)) Bool (= (to_rep1 (rec__storage_place_attributes__r2__d1 (us_split_discrs1 a))) 5))
-(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (and (= (to_rep1 (rec__storage_place_attributes__r2__d1 (us_split_discrs1 a))) (to_rep1 (rec__storage_place_attributes__r2__d1 (us_split_discrs1 b)))) (= (to_rep (rec__storage_place_attributes__r2__d3 (us_split_fields1 a))) (to_rep (rec__storage_place_attributes__r2__d3 (us_split_fields1 b))))) (=> (storage_place_attributes__r2__d2__pred a) (= (rec__storage_place_attributes__r2__d2 (us_split_fields1 a)) (rec__storage_place_attributes__r2__d2 (us_split_fields1 b))))) true false))
+(define-fun bool_eq ((a us_rep) (b us_rep)) Bool (ite (and (= (to_rep1 (rec__storage_place_attributes__r2__d1 (us_split_discrs1 a))) (to_rep1 (rec__storage_place_attributes__r2__d1 (us_split_discrs1 b)))) (and (= (to_rep (rec__storage_place_attributes__r2__d3 (us_split_fields1 a))) (to_rep (rec__storage_place_attributes__r2__d3 (us_split_fields1 b)))) (=> (storage_place_attributes__r2__d2__pred a) (= (rec__storage_place_attributes__r2__d2 (us_split_fields1 a)) (rec__storage_place_attributes__r2__d2 (us_split_fields1 b)))))) true false))
 (declare-const value__size Int)
 (declare-fun object__size (us_rep) Int)
 (declare-const value__alignment Int)

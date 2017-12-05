@@ -43,6 +43,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const var Int)
+(declare-const o Int)
 (assert (in_range var))
 (assert (not (in_range1 var)))
 (check-sat)

@@ -82,6 +82,7 @@
 (declare-const o Int)
 (declare-const o1 item)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (declare-const result Int)
 (declare-const it1 Int)
 (assert (in_range1 sp))

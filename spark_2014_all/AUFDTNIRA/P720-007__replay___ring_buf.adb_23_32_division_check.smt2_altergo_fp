@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -605,15 +605,100 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "ring_buf.ads", line 47, characters 0-0 *)
-goal WP_parameter_def :
-  (forall r__split_fields:(int,integer) farray.
-  forall r__split_fields1:ar_index. forall r__split_fields2:length_type.
-  forall element:int. forall result:int. forall element1:int.
-  ((((-2147483648) <= 2147483647) -> in_range(element)) -> ((not (is_empty({
-  us_split_fields1 = { rec__ring_buf__ring_buffer__data = r__split_fields;
+logic r__split_fields : (int,integer) farray
+
+logic r__split_fields1 : ar_index
+
+logic r__split_fields2 : length_type
+
+logic element : int
+
+logic o : ar_index
+
+logic o1 : (int,integer) farray
+
+logic o2 : ar_index
+
+logic o3 : length_type
+
+logic temp___204 : (int,integer) farray
+
+logic temp___2041 : ar_index
+
+logic temp___2042 : length_type
+
+logic o4 : int
+
+logic o5 : length_type
+
+logic o6 : (int,integer) farray
+
+logic o7 : ar_index
+
+logic o8 : length_type
+
+logic temp___206 : (int,integer) farray
+
+logic temp___2061 : ar_index
+
+logic temp___2062 : length_type
+
+logic o9 : int
+
+logic result : int
+
+logic element1 : int
+
+logic result1 : (int,integer) farray
+
+logic result2 : ar_index
+
+logic result3 : length_type
+
+logic r__split_fields3 : (int,integer) farray
+
+logic r__split_fields4 : ar_index
+
+logic r__split_fields5 : length_type
+
+logic result4 : (int,integer) farray
+
+logic result5 : ar_index
+
+logic result6 : length_type
+
+logic r__split_fields6 : (int,integer) farray
+
+logic r__split_fields7 : ar_index
+
+logic r__split_fields8 : length_type
+
+logic r__split_fields9 : (int,integer) farray
+
+logic r__split_fields10 : ar_index
+
+logic r__split_fields11 : length_type
+
+logic element2 : int
+
+logic r__split_fields12 : (int,integer) farray
+
+logic r__split_fields13 : ar_index
+
+logic r__split_fields14 : length_type
+
+logic element3 : int
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(element))
+
+axiom H1 : (not (is_empty({ us_split_fields1 = {
+  rec__ring_buf__ring_buffer__data = r__split_fields;
   rec__ring_buf__ring_buffer__first = r__split_fields1;
-  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true)) -> ((({
-  int__content = result } = { int__content = element }) and
-  (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))) ->
-  (not (10000 = 0))))))
+  rec__ring_buf__ring_buffer__length = r__split_fields2 } }) = true))
+
+axiom H2 : (result = element)
+
+axiom H3 : (element1 = to_rep((r__split_fields[to_rep1(r__split_fields1)])))
+
+ (* File "ring_buf.ads", line 47, characters 0-0 *)
+goal WP_parameter_def : (not (10000 = 0))

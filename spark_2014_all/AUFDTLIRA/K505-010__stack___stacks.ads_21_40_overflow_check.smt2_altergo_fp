@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -134,7 +134,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 type element
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -507,15 +507,15 @@ logic bool_eq9 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq9(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
-  (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
-  ((b).us_split_fields1).rec__stacks__stack__data) = true)) -> (bool_eq9(a,
-  b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
   (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
   ((b).us_split_fields1).rec__stacks__stack__data) = true))) -> (bool_eq9(a,
+  b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep1(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep(((a).us_split_fields1).rec__stacks__stack__top) = to_rep(((b).us_split_fields1).rec__stacks__stack__top)) and
+  (bool_eq8(((a).us_split_fields1).rec__stacks__stack__data,
+  ((b).us_split_fields1).rec__stacks__stack__data) = true)))) -> (bool_eq9(a,
   b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -749,22 +749,46 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "stacks.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall mystate:int. forall s__split_fields:natural.
-  forall s__split_fields1:(int,element) farray. forall s__split_fields2:t.
-  forall s__split_fields3:us_private. forall mystate1:int.
-  forall s__split_fields4:t. ((dynamic_property1(1, to_rep1(s__split_discrs),
+logic mystate : int
+
+logic s__split_fields : natural
+
+logic s__split_fields1 : (int,element) farray
+
+logic s__split_fields2 : t
+
+logic s__split_fields3 : us_private
+
+logic o : int
+
+logic mystate1 : int
+
+logic s__split_fields4 : natural
+
+logic s__split_fields5 : (int,element) farray
+
+logic s__split_fields6 : t
+
+logic s__split_fields7 : us_private
+
+axiom H : (dynamic_property1(1, to_rep1(s__split_discrs),
   to_rep2(first(s__split_fields2)), to_rep2(last(s__split_fields2))) and
   ((to_rep2(first(s__split_fields2)) = 1) and
-  (to_rep2(last(s__split_fields2)) = to_rep1(s__split_discrs)))) ->
-  (in_range2(e) -> (in_range1(mystate) -> (((dynamic_property1(1,
-  to_rep1(s__split_discrs), to_rep2(first(s__split_fields4)),
-  to_rep2(last(s__split_fields4))) and
-  ((to_rep2(first(s__split_fields4)) = 1) and
-  (to_rep2(last(s__split_fields4)) = to_rep1(s__split_discrs)))) and
-  in_range1(mystate1)) -> in_range((size({ us_split_discrs1 = {
+  (to_rep2(last(s__split_fields2)) = to_rep1(s__split_discrs))))
+
+axiom H1 : in_range2(e)
+
+axiom H2 : in_range1(mystate)
+
+axiom H3 : ((dynamic_property1(1, to_rep1(s__split_discrs),
+  to_rep2(first(s__split_fields6)), to_rep2(last(s__split_fields6))) and
+  ((to_rep2(first(s__split_fields6)) = 1) and
+  (to_rep2(last(s__split_fields6)) = to_rep1(s__split_discrs)))) and
+  in_range1(mystate1))
+
+ (* File "stacks.adb", line 3, characters 0-0 *)
+goal WP_parameter_def : in_range((size({ us_split_discrs1 = {
   rec__stacks__stack__max = s__split_discrs }; us_split_fields1 = {
   rec__stacks__stack__top = s__split_fields; rec__stacks__stack__data = {
   elts = s__split_fields1; rt = s__split_fields2 }; rec__ext__ =
-  s__split_fields3 }; attr__tag = s__attr__tag }) + 1)))))))
+  s__split_fields3 }; attr__tag = s__attr__tag }) + 1))

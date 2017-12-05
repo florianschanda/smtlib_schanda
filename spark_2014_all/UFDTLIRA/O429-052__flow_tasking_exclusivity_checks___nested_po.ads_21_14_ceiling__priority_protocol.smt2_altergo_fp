@@ -259,5 +259,25 @@ function outer__ref___projection(a: outer__ref) : us_rep1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : pt
+
+logic o1 : pt
+
+logic o2 : pt
+
+logic o3 : pt
+
+logic o4 : pt
+
+logic us_self__compl : pt
+
+logic outer_rec__split_fields : pt
+
+logic us_self__compl1 : pt
+
+logic result : pt
+
+logic outer_rec__split_fields1 : pt
+
  (* File "nested_po.adb", line 4, characters 0-0 *)
 goal WP_parameter_def : (97 <= 97)

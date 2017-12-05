@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -630,23 +630,227 @@ axiom included_except__post_axiom :
   (forall e:int. ((in_range4(e) and (contains(left, e) = true)) ->
   ((contains(right, e) = true) or (e = item))))))))
 
- (* File "simple_allocator.ads", line 30, characters 0-0 *)
-goal WP_parameter_def :
-  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
-  forall r:int. forall o:us_rep. forall o1:us_rep. forall avail1:us_rep.
-  forall alloc1:us_rep. forall result:int. forall r1:int.
-  forall result1:us_rep. forall avail2:us_rep. forall result2:us_rep.
-  forall alloc2:us_rep. ((is_empty(avail) = true) ->
-  ((is_empty(alloc) = true) -> ((({ int__content = result } = {
-  int__content = r }) and (r1 = 1)) -> (((1 <= r1) and (r1 <= 10000)) ->
-  ((((to_rep((data[r1])) = 0) and ((((o = add(avail, r1)) and
+logic data : (int,status) farray
+
+logic avail : us_rep
+
+logic alloc : us_rep
+
+logic r : int
+
+logic simple_allocator__m__model__result : us_rep
+
+logic simple_allocator__m__model__result1 : us_rep
+
+logic temp___237 : us_rep
+
+logic temp___236 : int
+
+logic temp___235 : us_rep
+
+logic o : us_rep
+
+logic o1 : us_rep
+
+logic rr : int
+
+logic o2 : int
+
+logic o3 : status
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : bool
+
+logic o8 : bool
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : bool
+
+logic e : int
+
+logic o12 : bool
+
+logic o13 : bool
+
+logic e1 : int
+
+logic o14 : bool
+
+logic o15 : bool
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : us_rep
+
+logic o21 : us_rep
+
+logic avail1 : us_rep
+
+logic alloc1 : us_rep
+
+logic result : int
+
+logic r1 : int
+
+logic result1 : us_rep
+
+logic avail2 : us_rep
+
+logic result2 : us_rep
+
+logic alloc2 : us_rep
+
+logic avail3 : us_rep
+
+logic alloc3 : us_rep
+
+logic r2 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+logic result5 : bool
+
+logic result6 : bool
+
+logic result7 : bool
+
+logic result8 : bool
+
+logic result9 : int
+
+logic r3 : int
+
+logic result10 : us_rep
+
+logic avail4 : us_rep
+
+logic result11 : us_rep
+
+logic alloc4 : us_rep
+
+logic avail5 : us_rep
+
+logic alloc5 : us_rep
+
+logic r4 : int
+
+logic avail6 : us_rep
+
+logic alloc6 : us_rep
+
+logic r5 : int
+
+logic avail7 : us_rep
+
+logic alloc7 : us_rep
+
+logic r6 : int
+
+logic avail8 : us_rep
+
+logic alloc8 : us_rep
+
+logic r7 : int
+
+logic avail9 : us_rep
+
+logic alloc9 : us_rep
+
+logic r8 : int
+
+logic avail10 : us_rep
+
+logic alloc10 : us_rep
+
+logic r9 : int
+
+logic result12 : us_rep
+
+logic result13 : us_rep
+
+logic simple_allocator__m__model__result2 : us_rep
+
+logic simple_allocator__m__model__result3 : us_rep
+
+logic simple_allocator__m__model__result4 : us_rep
+
+logic simple_allocator__m__model__result5 : us_rep
+
+logic simple_allocator__m__model__result6 : us_rep
+
+logic simple_allocator__m__model__result7 : us_rep
+
+logic avail11 : us_rep
+
+logic alloc11 : us_rep
+
+logic r10 : int
+
+logic simple_allocator__m__model__result8 : us_rep
+
+logic simple_allocator__m__model__result9 : us_rep
+
+logic avail12 : us_rep
+
+logic alloc12 : us_rep
+
+logic r11 : int
+
+logic simple_allocator__m__model__result10 : us_rep
+
+logic simple_allocator__m__model__result11 : us_rep
+
+axiom H : (is_empty(avail) = true)
+
+axiom H1 : (is_empty(alloc) = true)
+
+axiom H2 : (result = r)
+
+axiom H3 : (r1 = 1)
+
+axiom H4 : (1 <= r1)
+
+axiom H5 : (r1 <= 10000)
+
+axiom H6 : ((to_rep((data[r1])) = 0) -> ((o = add(avail, r1)) and
   ((((length(o) = (length(avail) + 1)) and (contains(o, r1) = true)) and
-  (ole(avail, o) = true)) and (included_except(o, avail, r1) = true))) and
-  (({ set__content = result1 } = { set__content = avail }) and
-  (avail2 = o))) and ((alloc2 = alloc) and (alloc2 = alloc1)))) or
-  ((not (to_rep((data[r1])) = 0)) and ((((o1 = add(alloc, r1)) and
+  (ole(avail, o) = true)) and (included_except(o, avail, r1) = true))))
+
+axiom H7 : ((to_rep((data[r1])) = 0) -> (result1 = avail))
+
+axiom H8 : ((to_rep((data[r1])) = 0) -> (avail2 = o))
+
+axiom H9 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc))
+
+axiom H10 : ((to_rep((data[r1])) = 0) -> (alloc2 = alloc1))
+
+axiom H11 : ((not (to_rep((data[r1])) = 0)) -> ((o1 = add(alloc, r1)) and
   ((((length(o1) = (length(alloc) + 1)) and (contains(o1, r1) = true)) and
-  (ole(alloc, o1) = true)) and (included_except(o1, alloc, r1) = true))) and
-  (({ set__content = result2 } = { set__content = alloc }) and
-  (alloc2 = o1))) and ((avail2 = avail) and (avail2 = avail1))))) ->
-  ((length(avail2) + length(alloc2)) = r1)))))))
+  (ole(alloc, o1) = true)) and (included_except(o1, alloc, r1) = true))))
+
+axiom H12 : ((not (to_rep((data[r1])) = 0)) -> (result2 = alloc))
+
+axiom H13 : ((not (to_rep((data[r1])) = 0)) -> (alloc2 = o1))
+
+axiom H14 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail))
+
+axiom H15 : ((not (to_rep((data[r1])) = 0)) -> (avail2 = avail1))
+
+ (* File "simple_allocator.ads", line 30, characters 0-0 *)
+goal WP_parameter_def : ((length(avail2) + length(alloc2)) = r1)

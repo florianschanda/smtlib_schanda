@@ -68,6 +68,8 @@
 (declare-const pack__minus__result4 (_ BitVec 8))
 (declare-const pack__minus__result5 (_ BitVec 8))
 (declare-const result1 (_ BitVec 8))
+(assert true)
+(assert true)
 (assert (not (= a b)))
 (assert (= pack__minus__result1 pack__minus__result2))
 (assert (= pack__minus__result3 pack__minus__result1))

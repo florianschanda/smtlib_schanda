@@ -6,6 +6,7 @@
 (set-info :status unknown)
 
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
+(define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 (declare-fun private__bool_eq (us_private us_private) Bool)
@@ -76,7 +77,6 @@
 (define-fun sqr ((x Real)) Real (* x x))
 (declare-fun sqrt (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
-(declare-fun is_int1 (Float32) Bool)
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
 (define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
@@ -299,6 +299,7 @@
 (define-fun dynamic_invariant6 ((temp___expr_217 Float32) (temp___is_init_214 Bool) (temp___skip_constant_215 Bool) (temp___do_toplevel_216 Bool)) Bool (=> (or (= temp___is_init_214 true) (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000))) (in_range4 temp___expr_217)))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (dynamic_property 0 256 (to_rep elements__first) (to_rep elements__last)))
 (assert (and (= o1 (length1 self)) (in_range5 o1)))
 (assert (=> (<= (to_rep elements__first) (to_rep elements__last)) (= o (+ (- (to_rep elements__last) (to_rep elements__first)) 1))))

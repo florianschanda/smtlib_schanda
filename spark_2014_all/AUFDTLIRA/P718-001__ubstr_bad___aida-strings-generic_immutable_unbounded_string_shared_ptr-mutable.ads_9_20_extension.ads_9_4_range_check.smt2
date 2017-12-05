@@ -151,6 +151,7 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type (count_type__content a))
 (define-fun dynamic_invariant4 ((temp___expr_158 Int) (temp___is_init_155 Bool) (temp___skip_constant_156 Bool) (temp___do_toplevel_157 Bool)) Bool (=> (or (= temp___is_init_155 true) (<= 0 2147483647)) (in_range3 temp___expr_158)))
 (define-fun default_initial_assumption1 ((temp___expr_799 us_rep) (temp___skip_top_level_800 Bool)) Bool (=> (not (= temp___skip_top_level_800 true)) (= (length1 temp___expr_799) 0)))
+(declare-const o Int)
 (assert (dynamic_invariant text true false true))
 (assert (not (in_range (length text))))
 (check-sat)

@@ -554,28 +554,89 @@ logic e : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+logic a : (int,(int,(int,et1) farray) farray) farray
+
+logic o : et1
+
+logic o1 : (int,et1) farray
+
+logic o2 : (int,(int,et1) farray) farray
+
+logic o3 : (int,(int,(int,et1) farray) farray) farray
+
+logic result : (int,(int,(int,et1) farray) farray) farray
+
+logic a1 : (int,(int,(int,et1) farray) farray) farray
+
+logic result1 : (int,(int,(int,et1) farray) farray) farray
+
+logic a2 : (int,(int,(int,et1) farray) farray) farray
+
+logic result2 : (int,(int,(int,et1) farray) farray) farray
+
+logic a3 : (int,(int,(int,et1) farray) farray) farray
+
+logic result3 : (int,(int,(int,et1) farray) farray) farray
+
+logic a4 : (int,(int,(int,et1) farray) farray) farray
+
+logic a5 : (int,(int,(int,et1) farray) farray) farray
+
+logic a6 : (int,(int,(int,et1) farray) farray) farray
+
+axiom H : in_range3(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : in_range1(k)
+
+axiom H3 : in_range4(e)
+
+axiom H4 : (result = a)
+
+axiom H5 : (a1 = b)
+
+axiom H6 : (result1 = a1)
+
+axiom H7 : (a2 = (a1[i <- c]))
+
+axiom H8 : (result2 = a2)
+
+axiom H9 : (a3 = (a2[i <- ((a2[i])[j <- d])]))
+
+axiom H10 : (to_rep(o) = e)
+
+axiom H11 : (o1 = (((a3[i])[j])[k <- o]))
+
+axiom H12 : (o2 = ((a3[i])[j <- o1]))
+
+axiom H13 : (o3 = (a3[i <- o2]))
+
+axiom H14 : (result3 = a3)
+
+axiom H15 : (a4 = o3)
+
+axiom H16 : (a4 = a5)
+
+axiom H17 : (a6 = a4)
+
+logic o4 : int
+
+axiom H18 : (1 <= o4)
+
+axiom H19 : (o4 <= 16)
+
+logic n : int
+
+axiom H20 : (5 <= n)
+
+axiom H21 : (n <= 50)
+
+logic m : int
+
+axiom H22 : (1 <= m)
+
+axiom H23 : (m <= 10)
+
  (* File "ar.ads", line 560, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,(int,(int,et1) farray) farray) farray. forall o:et1.
-  forall o1:(int,et1) farray. forall o2:(int,(int,et1) farray) farray.
-  forall o3:(int,(int,(int,et1) farray) farray) farray.
-  forall result:(int,(int,(int,et1) farray) farray) farray.
-  forall a1:(int,(int,(int,et1) farray) farray) farray.
-  forall result1:(int,(int,(int,et1) farray) farray) farray.
-  forall a2:(int,(int,(int,et1) farray) farray) farray.
-  forall result2:(int,(int,(int,et1) farray) farray) farray.
-  forall a3:(int,(int,(int,et1) farray) farray) farray.
-  forall result3:(int,(int,(int,et1) farray) farray) farray.
-  forall a4:(int,(int,(int,et1) farray) farray) farray.
-  forall a5:(int,(int,(int,et1) farray) farray) farray.
-  forall a6:(int,(int,(int,et1) farray) farray) farray. ((in_range3(i) and
-  (in_range2(j) and (in_range1(k) and (in_range4(e) and ((((result = a) and
-  (a1 = b)) and (((result1 = a1) and (a2 = (a1[i <- c]))) and
-  (((result2 = a2) and (a3 = (a2[i <- ((a2[i])[j <- d])]))) and
-  (((((to_rep(o) = e) and (o1 = (((a3[i])[j])[k <- o]))) and
-  (o2 = ((a3[i])[j <- o1]))) and (o3 = (a3[i <- o2]))) and
-  ((result3 = a3) and (a4 = o3)))))) and ((a4 = a5) and (a6 = a4))))))) ->
-  (forall o4:int. (((1 <= o4) and (o4 <= 16)) ->
-  (forall n:int. (((5 <= n) and (n <= 50)) ->
-  (forall m:int. (((1 <= m) and (m <= 10)) ->
-  in_range4(to_rep((((a5[o4])[n])[m])))))))))))
+goal WP_parameter_def : in_range4(to_rep((((a5[o4])[n])[m])))

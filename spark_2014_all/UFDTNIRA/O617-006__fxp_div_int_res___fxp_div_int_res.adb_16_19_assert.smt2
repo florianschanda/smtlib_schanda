@@ -88,6 +88,7 @@
 (declare-const o1 duration)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const result duration)
 (declare-const d11 duration)
 (declare-const result1 duration)

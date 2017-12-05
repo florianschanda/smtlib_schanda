@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -531,12 +531,24 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic p__split_fields : (int,natural) farray
+
+logic p__split_fields1 : t
+
+logic o : natural
+
+axiom H : (dynamic_property1(1, to_rep(p__split_discrs),
+  to_rep1(first(p__split_fields1)), to_rep1(last(p__split_fields1))) and
+  ((to_rep1(first(p__split_fields1)) = 1) and
+  (to_rep1(last(p__split_fields1)) = to_rep(p__split_discrs))))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : (1 <= i)
+
+axiom H3 : (i <= to_rep(p__split_discrs))
+
+axiom H4 : (to_rep(o) = 0)
+
  (* File "priv.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall p__split_fields:t. forall o:natural. ((dynamic_property1(1,
-  to_rep(p__split_discrs), to_rep1(first(p__split_fields)),
-  to_rep1(last(p__split_fields))) and
-  ((to_rep1(first(p__split_fields)) = 1) and
-  (to_rep1(last(p__split_fields)) = to_rep(p__split_discrs)))) ->
-  (in_range2(i) -> (((1 <= i) and (i <= to_rep(p__split_discrs))) ->
-  ((to_rep(o) = 0) -> (to_rep1(first(p__split_fields)) <= i))))))
+goal WP_parameter_def : (to_rep1(first(p__split_fields1)) <= i)

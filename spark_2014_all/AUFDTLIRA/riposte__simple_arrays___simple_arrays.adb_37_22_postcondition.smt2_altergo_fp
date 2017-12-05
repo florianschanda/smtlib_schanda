@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -250,36 +250,122 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "simple_arrays.adb", line 25, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall i:int.
-  forall temp___292:(int,integer) farray. forall temp___291:int.
-  forall o:integer. forall o1:(int,integer) farray.
-  forall a1:(int,integer) farray. forall result:int. forall i1:int.
-  forall result1:(int,integer) farray. forall a2:(int,integer) farray.
-  forall a3:(int,integer) farray. forall i2:int.
-  forall a4:(int,integer) farray. forall i3:int.
-  forall a5:(int,integer) farray. forall i4:int.
-  forall a6:(int,integer) farray. forall i5:int.
-  forall a7:(int,integer) farray. forall i6:int.
-  forall a8:(int,integer) farray. forall i7:int.
-  forall a9:(int,integer) farray. forall i8:int. ((((({ int__content = result
-  } = { int__content = i }) and (i1 = (-2147483648))) and
-  (((((-2147483648) <= i1) and (i1 <= 2147483647)) and
-  ((((temp___292 = a) and ((temp___291 = i1) and
-  ((((to_rep(o) = to_rep((b[i1]))) and (o1 = (a[i1 <- o]))) and (({
-  map__content = result1 } = { map__content = a }) and (a2 = o1))) and
-  ((forall j:int. ((((-2147483648) <= j) and (j <= i2)) ->
+logic a : (int,integer) farray
+
+logic i : int
+
+logic temp___292 : (int,integer) farray
+
+logic temp___291 : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+logic i2 : int
+
+logic result2 : int
+
+logic i3 : int
+
+logic result3 : (int,integer) farray
+
+logic a4 : (int,integer) farray
+
+logic a5 : (int,integer) farray
+
+logic i4 : int
+
+logic a6 : (int,integer) farray
+
+logic i5 : int
+
+logic a7 : (int,integer) farray
+
+logic i6 : int
+
+logic a8 : (int,integer) farray
+
+logic i7 : int
+
+logic a9 : (int,integer) farray
+
+logic i8 : int
+
+logic a10 : (int,integer) farray
+
+logic i9 : int
+
+logic a11 : (int,integer) farray
+
+logic i10 : int
+
+logic a12 : (int,integer) farray
+
+logic i11 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = (- 2147483648))
+
+axiom H2 : ((((- 2147483648) <= i1) and (i1 <= 2147483647)) ->
+  (((temp___292 = a) and ((temp___291 = i1) and
+  ((((to_rep(o) = to_rep((b[i1]))) and (o1 = (a[i1 <- o]))) and
+  ((result1 = a) and (a2 = o1))) and
+  ((forall j:int. ((((- 2147483648) <= j) and (j <= i2)) ->
    (to_rep((a3[j])) = to_rep((b[j]))))) and
-  ((((((-2147483648) <= 2147483647) -> in_range1(i2)) and
-  (forall temp___293:int. ((((-2147483648) <= temp___293) and
+  ((((((- 2147483648) <= 2147483647) -> in_range1(i2)) and
+  (forall temp___293:int. ((((- 2147483648) <= temp___293) and
   (temp___293 <= 2147483647)) -> ((i2 <  temp___293) ->
   ((a3[temp___293]) = (temp___292[temp___293])))))) and
-  (((-2147483648) <= i2) and (i2 <= 2147483647))) and
-  (i2 = 2147483647)))))) and (((i2 = i3) and (a3 = a4)) and ((i4 = i2) and
-  (a5 = a3)))) and (((i5 = i3) and ({ map__content = a6 } = { map__content =
-  a4 })) and ((i6 = i4) and (a7 = a5))))) or ((not (((-2147483648) <= i1) and
-  (i1 <= 2147483647))) and (((i1 = i5) and ({ map__content = a6 } = {
-  map__content = a })) and ((i6 = i1) and (a7 = a1)))))) and (((i7 = i5) and
-  (a8 = a6)) and ((i8 = i6) and (a9 = a7)))) -> (bool_eq3(a8, (-2147483648),
-  2147483647, b, (-2147483648), 2147483647) = true)))
+  (((- 2147483648) <= i2) and (i2 <= 2147483647))) and
+  (i2 = 2147483647)))))) and (((i2 = i6) and (a3 = a7)) and ((i7 = i2) and
+  (a8 = a3)))))
+
+axiom H3 : ((((- 2147483648) <= i1) and (i1 <= 2147483647)) -> (i8 = i6))
+
+axiom H4 : ((((- 2147483648) <= i1) and (i1 <= 2147483647)) -> (a9 = a7))
+
+axiom H5 : ((((- 2147483648) <= i1) and (i1 <= 2147483647)) -> (i9 = i7))
+
+axiom H6 : ((((- 2147483648) <= i1) and (i1 <= 2147483647)) -> (a10 = a8))
+
+axiom H7 : ((not (((- 2147483648) <= i1) and (i1 <= 2147483647))) ->
+  (i1 = i8))
+
+axiom H8 : ((not (((- 2147483648) <= i1) and (i1 <= 2147483647))) ->
+  (a9 = a))
+
+axiom H9 : ((not (((- 2147483648) <= i1) and (i1 <= 2147483647))) ->
+  (i9 = i1))
+
+axiom H10 : ((not (((- 2147483648) <= i1) and (i1 <= 2147483647))) ->
+  (a10 = a1))
+
+axiom H11 : (i10 = i8)
+
+axiom H12 : (a11 = a9)
+
+axiom H13 : (i11 = i9)
+
+axiom H14 : (a12 = a10)
+
+ (* File "simple_arrays.adb", line 25, characters 0-0 *)
+goal WP_parameter_def : (bool_eq3(a11, (- 2147483648), 2147483647, b,
+  (- 2147483648), 2147483647) = true)

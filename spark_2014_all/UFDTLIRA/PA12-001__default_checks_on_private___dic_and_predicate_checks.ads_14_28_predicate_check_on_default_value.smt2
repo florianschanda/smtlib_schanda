@@ -105,6 +105,8 @@
 (assert (forall ((x us_rep)) (! (= (= (is_valid x) true) (< 0 (to_rep (rec__dic_and_predicate_checks__r__f (us_split_fields1 x))))) :pattern ((is_valid x)))))
 (declare-const temp___215 integer)
 (declare-const temp___2151 integer)
+(declare-const temp___218 integer)
+(declare-const temp___2181 integer)
 (assert (= (to_rep temp___2151) 0))
 (assert (not (= (is_valid (mk___rep (mk___split_fields temp___215 temp___2151))) true)))
 (check-sat)

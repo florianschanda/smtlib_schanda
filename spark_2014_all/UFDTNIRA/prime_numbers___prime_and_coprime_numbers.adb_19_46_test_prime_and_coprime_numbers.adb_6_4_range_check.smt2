@@ -62,6 +62,7 @@
 (declare-const high Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const v Int)
+(declare-const o Int)
 (assert (in_range1 low))
 (assert (in_range1 high))
 (assert (<= low v))

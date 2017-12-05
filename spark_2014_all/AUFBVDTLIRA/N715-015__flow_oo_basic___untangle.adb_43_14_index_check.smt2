@@ -233,6 +233,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_136 (_ BitVec 8)) (temp___is_init_133 Bool) (temp___skip_constant_134 Bool) (temp___do_toplevel_135 Bool)) Bool true)
 (declare-const g Bool)
 (declare-const x__split_fields (Array Int us_rep))
+(declare-const x__split_discrs Bool)
 (declare-const temp___199 Int)
 (declare-const o byte)
 (declare-const o1 byte)

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -701,12 +701,21 @@ type t15b__ref = { t15b__content : us_t2
 
 function t15b__ref___projection(a: t15b__ref) : us_t2 = (a).t15b__content
 
-logic temp___539 : int -> (int,character) farray
+logic temp___533 : int -> (int,character) farray
 
 axiom def_axiom :
-  (forall temp___541:int.
-  (forall temp___542:int.
-  ((temp___539(temp___541)[temp___542]) = of_rep(temp___541))))
+  (forall temp___535:int.
+  (forall temp___536:int.
+  ((temp___533(temp___535)[temp___536]) = of_rep(temp___535))))
+
+logic temp___String_Literal_537 : unit -> (int,character) farray
+
+axiom temp___String_Literal_537__def_axiom :
+  (((((to_rep((temp___String_Literal_537(void)[1])) = 80) and
+  (to_rep((temp___String_Literal_537(void)[2])) = 101)) and
+  (to_rep((temp___String_Literal_537(void)[3])) = 116)) and
+  (to_rep((temp___String_Literal_537(void)[4])) = 101)) and
+  (to_rep((temp___String_Literal_537(void)[5])) = 114))
 
 logic temp___String_Literal_543 : unit -> (int,character) farray
 
@@ -717,105 +726,252 @@ axiom temp___String_Literal_543__def_axiom :
   (to_rep((temp___String_Literal_543(void)[4])) = 101)) and
   (to_rep((temp___String_Literal_543(void)[5])) = 114))
 
-logic temp___String_Literal_549 : unit -> (int,character) farray
-
-axiom temp___String_Literal_549__def_axiom :
-  (((((to_rep((temp___String_Literal_549(void)[1])) = 80) and
-  (to_rep((temp___String_Literal_549(void)[2])) = 101)) and
-  (to_rep((temp___String_Literal_549(void)[3])) = 116)) and
-  (to_rep((temp___String_Literal_549(void)[4])) = 101)) and
-  (to_rep((temp___String_Literal_549(void)[5])) = 114))
-
 axiom currency__def_axiom : ((currency = temp___String_Literal_151(void)) and
   (currency1 = mk(1, 7)))
 
+logic count : int
+
+logic name : (int,character) farray
+
+logic address : (int,character) farray
+
+logic city : (int,character) farray
+
+logic o : (int,character) farray
+
+logic o1 : (int,character) farray
+
+logic o2 : (int,character) farray
+
+logic o3 : (int,character) farray
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic temp___540 : (int,character) farray
+
+logic temp___5401 : t
+
+logic o10 : (int,character) farray
+
+logic o11 : (int,character) farray
+
+logic temp___544 : (int,character) farray
+
+logic temp___5441 : t1
+
+logic o12 : (int,character) farray
+
+logic temp___546 : (int,character) farray
+
+logic temp___5461 : t1
+
+logic temp___547 : (int,character) farray
+
+logic temp___5471 : t1
+
+logic o13 : (int,character) farray
+
+logic result : (int,character) farray
+
+logic address1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic name1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic name2 : (int,character) farray
+
+logic result3 : (int,character) farray
+
+logic address2 : (int,character) farray
+
+logic result4 : (int,character) farray
+
+logic city1 : (int,character) farray
+
+logic result5 : (int,character) farray
+
+logic name3 : (int,character) farray
+
+logic result6 : (int,character) farray
+
+logic address3 : (int,character) farray
+
+logic result7 : (int,character) farray
+
+logic address4 : (int,character) farray
+
+logic result8 : int
+
+logic count1 : int
+
+logic result9 : (int,character) farray
+
+logic name4 : (int,character) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(count))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(currency1)),
+  to_rep1(last(currency1)))
+
+axiom H2 : (result = address)
+
+axiom H3 : (address1 = temp___533(32))
+
+axiom H4 : (((1 <= 40) -> (((1 <= 20) ->
+  (((40 - 1) + 1) = ((20 - 1) + 1))) and ((not (1 <= 20)) ->
+  (((40 - 1) + 1) = 0)))) and ((not (1 <= 40)) -> ((1 <= 20) ->
+  (0 = ((20 - 1) + 1)))))
+
+axiom H5 : (o = address1)
+
+axiom H6 : (result1 = name)
+
+axiom H7 : (name1 = o)
+
+axiom H8 : (((1 <= 5) -> (((1 <= 20) -> (((5 - 1) + 1) = ((20 - 1) + 1))) and
+  ((not (1 <= 20)) -> (((5 - 1) + 1) = 0)))) and ((not (1 <= 5)) ->
+  ((1 <= 20) -> (0 = ((20 - 1) + 1)))))
+
+axiom H9 : (o1 = temp___String_Literal_537(void))
+
+axiom H10 : (result2 = name1)
+
+axiom H11 : (name2 = o1)
+
+axiom H12 : (((1 <= 20) -> (((1 <= 40) ->
+  (((20 - 1) + 1) = ((40 - 1) + 1))) and ((not (1 <= 40)) ->
+  (((20 - 1) + 1) = 0)))) and ((not (1 <= 20)) -> ((1 <= 40) ->
+  (0 = ((40 - 1) + 1)))))
+
+axiom H13 : (o2 = name2)
+
+axiom H14 : (result3 = address1)
+
+axiom H15 : (address2 = o2)
+
+axiom H16 : (result4 = city)
+
+axiom H17 : (city1 = slide(name2, 1, 3))
+
+axiom H18 : ((1 <= 20) -> (((1 <= 1) and (1 <= 40)) and ((1 <= 20) and
+  (20 <= 40))))
+
+axiom H19 : (o3 = address2)
+
+axiom H20 : (result5 = name2)
+
+axiom H21 : (name3 = o3)
+
+axiom H22 : ((1 <= 20) -> (o4 = ((20 - 1) + 1)))
+
+axiom H23 : ((not (1 <= 20)) -> (o4 = 0))
+
+axiom H24 : ((1 <= 20) -> (o5 = ((20 - 1) + 1)))
+
+axiom H25 : ((not (1 <= 20)) -> (o5 = 0))
+
+axiom H26 : (o6 = (o5 + o4))
+
+axiom H27 : (o7 = (1 + o6))
+
+axiom H28 : (o8 = (o7 - 1))
+
+axiom H29 : ((o9 = o8) and in_range1(o8))
+
+axiom H30 : (concat(name3, 1, 20, name3, 1, 20) = temp___540)
+
+axiom H31 : (mk(1, o9) = temp___5401)
+
+axiom H32 : (((to_rep1(first(temp___5401)) <= to_rep1(last(temp___5401))) ->
+  (((1 <= 40) ->
+  (((to_rep1(last(temp___5401)) - to_rep1(first(temp___5401))) + 1) = ((40 - 1) + 1))) and
+  ((not (1 <= 40)) ->
+  (((to_rep1(last(temp___5401)) - to_rep1(first(temp___5401))) + 1) = 0)))) and
+  ((not (to_rep1(first(temp___5401)) <= to_rep1(last(temp___5401)))) ->
+  ((1 <= 40) -> (0 = ((40 - 1) + 1)))))
+
+axiom H33 : (o10 = slide(temp___540, to_rep1(first(temp___5401)), 1))
+
+axiom H34 : (result6 = address2)
+
+axiom H35 : (address3 = o10)
+
+axiom H36 :
+  (forall temp___542:int. ((((9 <= temp___542) and (temp___542 <= 28)) ->
+  ((o11[temp___542]) = (slide(name3, 1, 9)[temp___542]))) and
+  ((not ((9 <= temp___542) and (temp___542 <= 28))) ->
+  ((o11[temp___542]) = (address3[temp___542])))))
+
+axiom H37 : (result7 = address3)
+
+axiom H38 : (address4 = o11)
+
+axiom H39 : (result8 = count)
+
+axiom H40 : (count1 = 5)
+
+axiom H41 : (count1 = r9b)
+
+axiom H42 : in_range(r9b)
+
+axiom H43 : (((1 <= 5) -> (((1 <= r9b) ->
+  (((5 - 1) + 1) = ((r9b - 1) + 1))) and ((not (1 <= r9b)) ->
+  (((5 - 1) + 1) = 0)))) and ((not (1 <= 5)) -> ((1 <= r9b) ->
+  (0 = ((r9b - 1) + 1)))))
+
+axiom H44 : (temp___String_Literal_543(void) = temp___544)
+
+axiom H45 : (mk1(1, 5) = temp___5441)
+
+axiom H46 : ((1 <= r9b) -> (((1 <= 1) and (1 <= 20)) and ((1 <= r9b) and
+  (r9b <= 20))))
+
+axiom H47 : (o12 = name3)
+
+axiom H48 : (o12 = temp___546)
+
+axiom H49 : (mk1(1, r9b) = temp___5461)
+
+axiom H50 :
+  (((to_rep1(first2(temp___5441)) <= to_rep1(last2(temp___5441))) ->
+  (((to_rep1(first2(temp___5461)) <= to_rep1(last2(temp___5461))) ->
+  (((to_rep1(last2(temp___5441)) - to_rep1(first2(temp___5441))) + 1) = ((to_rep1(last2(temp___5461)) - to_rep1(first2(temp___5461))) + 1))) and
+  ((not (to_rep1(first2(temp___5461)) <= to_rep1(last2(temp___5461)))) ->
+  (((to_rep1(last2(temp___5441)) - to_rep1(first2(temp___5441))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___5441)) <= to_rep1(last2(temp___5441)))) ->
+  ((to_rep1(first2(temp___5461)) <= to_rep1(last2(temp___5461))) ->
+  (0 = ((to_rep1(last2(temp___5461)) - to_rep1(first2(temp___5461))) + 1)))))
+
+axiom H51 : ((temp___547 = temp___544) and (temp___5471 = temp___5441))
+
+axiom H52 :
+  (forall temp___548:int. ((((1 <= temp___548) and (temp___548 <= r9b)) ->
+  ((o13[temp___548]) = (temp___547[temp___548]))) and
+  ((not ((1 <= temp___548) and (temp___548 <= r9b))) ->
+  ((o13[temp___548]) = (name3[temp___548])))))
+
+axiom H53 : (result9 = name3)
+
+axiom H54 : (name4 = o13)
+
+axiom H55 : (count1 = r13b)
+
+axiom H56 : in_range(r13b)
+
+axiom H57 : (1 <= r13b)
+
  (* File "string_examples.adb", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall count:int. forall name:(int,character) farray.
-  forall address:(int,character) farray. forall city:(int,character) farray.
-  forall o:(int,character) farray. forall o1:(int,character) farray.
-  forall o2:(int,character) farray. forall o3:(int,character) farray.
-  forall o4:int. forall o5:int. forall o6:int. forall o7:int. forall o8:int.
-  forall o9:int. forall temp___546:(int,character) farray.
-  forall temp___5461:t. forall o10:(int,character) farray.
-  forall o11:(int,character) farray.
-  forall temp___550:(int,character) farray. forall temp___5501:t1.
-  forall o12:(int,character) farray.
-  forall temp___552:(int,character) farray. forall temp___5521:t1.
-  forall temp___553:(int,character) farray. forall temp___5531:t1.
-  forall o13:(int,character) farray. forall result:(int,character) farray.
-  forall address1:(int,character) farray.
-  forall result1:(int,character) farray. forall name1:(int,character) farray.
-  forall result2:(int,character) farray. forall name2:(int,character) farray.
-  forall result3:(int,character) farray.
-  forall address2:(int,character) farray.
-  forall result4:(int,character) farray. forall city1:(int,character) farray.
-  forall result5:(int,character) farray. forall name3:(int,character) farray.
-  forall result6:(int,character) farray.
-  forall address3:(int,character) farray.
-  forall result7:(int,character) farray.
-  forall address4:(int,character) farray. forall result8:int.
-  forall count1:int. forall result9:(int,character) farray.
-  forall name4:(int,character) farray. ((((-2147483648) <= 2147483647) ->
-  in_range(count)) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(currency1)), to_rep1(last(currency1))) ->
-  (((result = address) and (address1 = temp___539(32))) -> ((((((1 <= 40) and
-  (((1 <= 20) and (((40 - 1) + 1) = ((20 - 1) + 1))) or ((not (1 <= 20)) and
-  (((40 - 1) + 1) = 0)))) or ((not (1 <= 40)) and (((1 <= 20) and
-  (0 = ((20 - 1) + 1))) or (not (1 <= 20))))) and (o = address1)) and
-  ((result1 = name) and (name1 = o))) -> ((((((1 <= 5) and (((1 <= 20) and
-  (((5 - 1) + 1) = ((20 - 1) + 1))) or ((not (1 <= 20)) and
-  (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and (((1 <= 20) and
-  (0 = ((20 - 1) + 1))) or (not (1 <= 20))))) and
-  (o1 = temp___String_Literal_543(void))) and ((result2 = name1) and
-  (name2 = o1))) -> ((((((1 <= 20) and (((1 <= 40) and
-  (((20 - 1) + 1) = ((40 - 1) + 1))) or ((not (1 <= 40)) and
-  (((20 - 1) + 1) = 0)))) or ((not (1 <= 20)) and (((1 <= 40) and
-  (0 = ((40 - 1) + 1))) or (not (1 <= 40))))) and (o2 = name2)) and
-  ((result3 = address1) and (address2 = o2))) -> (((result4 = city) and
-  (city1 = slide(name2, 1, 3))) -> (((((1 <= 20) -> (((1 <= 1) and
-  (1 <= 40)) and ((1 <= 20) and (20 <= 40)))) and (o3 = address2)) and
-  ((result5 = name2) and (name3 = o3))) -> (((((((((((1 <= 20) and
-  (o4 = ((20 - 1) + 1))) or ((not (1 <= 20)) and (o4 = 0))) and
-  ((((1 <= 20) and (o5 = ((20 - 1) + 1))) or ((not (1 <= 20)) and
-  (o5 = 0))) and (o6 = (o5 + o4)))) and (o7 = (1 + o6))) and
-  (o8 = (o7 - 1))) and ((o9 = o8) and in_range1(o8))) and ((concat(name3, 1,
-  20, name3, 1, 20) = temp___546) and (mk(1, o9) = temp___5461))) and
-  ((((to_rep1(first(temp___5461)) <= to_rep1(last(temp___5461))) and
-  (((1 <= 40) and
-  (((to_rep1(last(temp___5461)) - to_rep1(first(temp___5461))) + 1) = ((40 - 1) + 1))) or
-  ((not (1 <= 40)) and
-  (((to_rep1(last(temp___5461)) - to_rep1(first(temp___5461))) + 1) = 0)))) or
-  ((not (to_rep1(first(temp___5461)) <= to_rep1(last(temp___5461)))) and
-  (((1 <= 40) and (0 = ((40 - 1) + 1))) or (not (1 <= 40))))) and
-  (o10 = slide(temp___546, to_rep1(first(temp___5461)), 1)))) and
-  ((result6 = address2) and (address3 = o10))) ->
-  (((forall temp___548:int. ((((9 <= temp___548) and (temp___548 <= 28)) and
-    ((o11[temp___548]) = (slide(name3, 1, 9)[temp___548]))) or
-    ((not ((9 <= temp___548) and (temp___548 <= 28))) and
-    ((o11[temp___548]) = (address3[temp___548]))))) and
-  ((result7 = address3) and (address4 = o11))) -> (((result8 = count) and
-  (count1 = 5)) -> (((count1 = r9b) and in_range(r9b)) -> ((((((((1 <= 5) and
-  (((1 <= r9b) and (((5 - 1) + 1) = ((r9b - 1) + 1))) or
-  ((not (1 <= r9b)) and (((5 - 1) + 1) = 0)))) or ((not (1 <= 5)) and
-  (((1 <= r9b) and (0 = ((r9b - 1) + 1))) or (not (1 <= r9b))))) and
-  ((temp___String_Literal_549(void) = temp___550) and (mk1(1,
-  5) = temp___5501))) and (((((1 <= r9b) -> (((1 <= 1) and (1 <= 20)) and
-  ((1 <= r9b) and (r9b <= 20)))) and (o12 = name3)) and
-  ((o12 = temp___552) and (mk1(1, r9b) = temp___5521))) and
-  ((((to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501))) and
-  (((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) and
-  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))) or
-  ((not (to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521)))) and
-  (((to_rep1(last2(temp___5501)) - to_rep1(first2(temp___5501))) + 1) = 0)))) or
-  ((not (to_rep1(first2(temp___5501)) <= to_rep1(last2(temp___5501)))) and
-  (((to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))) and
-  (0 = ((to_rep1(last2(temp___5521)) - to_rep1(first2(temp___5521))) + 1))) or
-  (not (to_rep1(first2(temp___5521)) <= to_rep1(last2(temp___5521))))))) and
-  ((temp___553 = temp___550) and (temp___5531 = temp___5501))))) and
-  (forall temp___554:int. ((((1 <= temp___554) and (temp___554 <= r9b)) and
-  ((o13[temp___554]) = (temp___553[temp___554]))) or
-  ((not ((1 <= temp___554) and (temp___554 <= r9b))) and
-  ((o13[temp___554]) = (name3[temp___554])))))) and ((result9 = name3) and
-  (name4 = o13))) -> (((count1 = r13b) and in_range(r13b)) -> ((1 <= r13b) ->
-  (1 <= 1)))))))))))))))))
+goal WP_parameter_def : (1 <= 1)

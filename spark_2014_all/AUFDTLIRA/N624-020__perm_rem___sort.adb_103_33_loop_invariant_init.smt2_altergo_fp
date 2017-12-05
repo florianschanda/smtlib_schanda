@@ -335,7 +335,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type integer
 
-predicate in_range5(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -398,13 +398,108 @@ function t9b__ref___projection(a: t9b__ref) : integer = (a).t9b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic min : int
+
+logic index1 : int
+
+logic sort__index_of_minimum__result : int
+
+logic temp___272 : int
+
+logic temp___271 : int
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic result : int
+
+logic min1 : int
+
+logic result1 : int
+
+logic index2 : int
+
+logic min2 : int
+
+logic index3 : int
+
+logic result2 : bool
+
+logic result3 : int
+
+logic min3 : int
+
+logic result4 : int
+
+logic index4 : int
+
+logic min4 : int
+
+logic index5 : int
+
+logic min5 : int
+
+logic index6 : int
+
+logic min6 : int
+
+logic index7 : int
+
+logic min7 : int
+
+logic index8 : int
+
+logic min8 : int
+
+logic index9 : int
+
+logic min9 : int
+
+logic index10 : int
+
+logic result5 : int
+
+logic sort__index_of_minimum__result1 : int
+
+logic sort__index_of_minimum__result2 : int
+
+logic sort__index_of_minimum__result3 : int
+
+logic min10 : int
+
+logic index11 : int
+
+logic sort__index_of_minimum__result4 : int
+
+logic min11 : int
+
+logic index12 : int
+
+logic sort__index_of_minimum__result5 : int
+
+axiom H : in_range3(first)
+
+axiom H1 : in_range3(last)
+
+axiom H2 : ((first <= last) and (((1 <= first) and (first <= 100)) and
+  ((1 <= last) and (last <= 100))))
+
+axiom H3 : ((1 <= 2147483647) -> in_range2(min))
+
+axiom H4 : (result = min)
+
+axiom H5 : (min1 = first)
+
+axiom H6 : (result1 = index1)
+
+axiom H7 : (index2 = first)
+
+axiom H8 : (first <= index2)
+
+axiom H9 : (index2 <= last)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall min:int. forall index1:int. forall result:int. forall min1:int.
-  forall result1:int. forall index2:int. (in_range3(first) ->
-  (in_range3(last) -> (((first <= last) and (((1 <= first) and
-  (first <= 100)) and ((1 <= last) and (last <= 100)))) ->
-  (((1 <= 2147483647) -> in_range2(min)) -> ((({ int__content = result } = {
-  int__content = min }) and (min1 = first)) -> ((({ int__content = result1
-  } = { int__content = index1 }) and (index2 = first)) ->
-  (((first <= index2) and (index2 <= last)) -> (first <= min1)))))))))
+goal WP_parameter_def : (first <= min1)

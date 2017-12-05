@@ -79,15 +79,53 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic b : bool
+
+logic pack__f__result : bool
+
+logic result : bool
+
+logic b1 : bool
+
+logic result1 : bool
+
+logic pack__f__result1 : bool
+
+logic pack__f__result2 : bool
+
+logic pack__f__result3 : bool
+
+logic b2 : bool
+
+logic pack__f__result4 : bool
+
+logic b3 : bool
+
+logic pack__f__result5 : bool
+
+logic result2 : bool
+
+axiom H : (result = b)
+
+axiom H1 : (b1 = of_int(1))
+
+axiom H2 : (pack__f__result1 = pack__f__result2)
+
+axiom H3 : (pack__f__result3 = pack__f__result1)
+
+axiom H4 : (result1 = pack__f__result)
+
+axiom H5 : (pack__f__result1 = b1)
+
+axiom H6 : (pack__f__result4 = pack__f__result2)
+
+axiom H7 : (b2 = b1)
+
+axiom H8 : (pack__f__result5 = pack__f__result3)
+
+axiom H9 : (b3 = b1)
+
+axiom H10 : (result2 = pack__f__result4)
+
  (* File "pack.ads", line 2, characters 0-0 *)
-goal WP_parameter_def :
-  (forall b:bool. forall pack__f__result:bool. forall result:bool.
-  forall b1:bool. forall result1:bool. forall pack__f__result1:bool.
-  forall pack__f__result2:bool. forall pack__f__result3:bool. forall b2:bool.
-  forall pack__f__result4:bool. forall b3:bool. forall pack__f__result5:bool.
-  (forall result2:bool. ((((((result = b) and (b1 = of_int(1))) and
-  (((pack__f__result1 = pack__f__result2) and
-  (pack__f__result3 = pack__f__result1)) and ((result1 = pack__f__result) and
-  (pack__f__result1 = b1)))) and (((pack__f__result4 = pack__f__result2) and
-  (b2 = b1)) and ((pack__f__result5 = pack__f__result3) and (b3 = b1)))) and
-  (result2 = pack__f__result4)) -> (not (pack__f__result4 = true)))))
+goal WP_parameter_def : (not (pack__f__result4 = true))

@@ -227,18 +227,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1676,21 +1676,43 @@ logic ctx5 : states
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result : int
+
+logic result : int
+
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result1 : int
+
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result2 : int
+
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result3 : int
+
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result4 : int
+
+logic keccak__keccak_1600__sponge__in_queue_bit_length__result5 : int
+
+logic result1 : int
+
+axiom H :
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result1 = keccak__keccak_1600__sponge__in_queue_bit_length__result2)
+
+axiom H1 :
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result3 = keccak__keccak_1600__sponge__in_queue_bit_length__result1)
+
+axiom H2 :
+  (result = keccak__keccak_1600__sponge__in_queue_bit_length__result)
+
+axiom H3 :
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result1 = to_rep(ctx2))
+
+axiom H4 :
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result4 = keccak__keccak_1600__sponge__in_queue_bit_length__result2)
+
+axiom H5 :
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result5 = keccak__keccak_1600__sponge__in_queue_bit_length__result3)
+
+axiom H6 :
+  (result1 = keccak__keccak_1600__sponge__in_queue_bit_length__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall keccak__keccak_1600__sponge__in_queue_bit_length__result:int.
-  forall result:int.
-  forall keccak__keccak_1600__sponge__in_queue_bit_length__result1:int.
-  forall keccak__keccak_1600__sponge__in_queue_bit_length__result2:int.
-  forall keccak__keccak_1600__sponge__in_queue_bit_length__result3:int.
-  forall keccak__keccak_1600__sponge__in_queue_bit_length__result4:int.
-  forall keccak__keccak_1600__sponge__in_queue_bit_length__result5:int.
-  (forall result1:int.
-  ((((((keccak__keccak_1600__sponge__in_queue_bit_length__result1 = keccak__keccak_1600__sponge__in_queue_bit_length__result2) and
-  (keccak__keccak_1600__sponge__in_queue_bit_length__result3 = keccak__keccak_1600__sponge__in_queue_bit_length__result1)) and
-  ((result = keccak__keccak_1600__sponge__in_queue_bit_length__result) and
-  (keccak__keccak_1600__sponge__in_queue_bit_length__result1 = to_rep(ctx2)))) and
-  ((keccak__keccak_1600__sponge__in_queue_bit_length__result4 = keccak__keccak_1600__sponge__in_queue_bit_length__result2) and
-  (keccak__keccak_1600__sponge__in_queue_bit_length__result5 = keccak__keccak_1600__sponge__in_queue_bit_length__result3))) and
-  (result1 = keccak__keccak_1600__sponge__in_queue_bit_length__result4)) ->
-  (keccak__keccak_1600__sponge__in_queue_bit_length__result4 <  1600))))
+  (keccak__keccak_1600__sponge__in_queue_bit_length__result4 <  1600)

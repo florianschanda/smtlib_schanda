@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -272,11 +272,37 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic log_in : int
+
+logic log_size : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : integer
+
+logic result : int
+
+logic log_size1 : int
+
+logic log_in1 : int
+
+axiom H : in_range(log_in)
+
+axiom H1 : in_range1(log_size)
+
+axiom H2 : ((o = (log_size + 1)) and in_range((log_size + 1)))
+
+axiom H3 : (result = log_size)
+
+axiom H4 : (log_size1 = o)
+
+axiom H5 : in_range(log_in1)
+
+axiom H6 : (o1 = log_in1)
+
+axiom H7 : (to_rep(o2) = o1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall log_in:int. forall log_size:int. forall o:int. forall o1:int.
-  forall o2:integer. forall result:int. forall log_size1:int.
-  forall log_in1:int. (in_range(log_in) -> (in_range1(log_size) ->
-  ((((o = (log_size + 1)) and in_range((log_size + 1))) and
-  ((result = log_size) and (log_size1 = o))) -> (((in_range(log_in1) and
-  (o1 = log_in1)) and (to_rep(o2) = o1)) -> (1 <= log_size1))))))
+goal WP_parameter_def : (1 <= log_size1)

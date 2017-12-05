@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -340,7 +340,77 @@ logic new_data_2 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic r__split_fields : integer
+
+logic r__split_fields1 : natural
+
+logic r__split_fields2 : my_range
+
+logic r__split_fields3 : integer
+
+logic o : int
+
+logic o1 : my_range
+
+logic o2 : natural
+
+logic o3 : integer
+
+logic o4 : natural
+
+logic o5 : my_range
+
+logic o6 : integer
+
+logic temp___218 : integer
+
+logic temp___2181 : natural
+
+logic temp___2182 : my_range
+
+logic temp___2183 : integer
+
+logic o7 : int
+
+logic o8 : my_range
+
+logic result : integer
+
+logic result1 : natural
+
+logic result2 : my_range
+
+logic result3 : integer
+
+logic r__split_fields4 : integer
+
+logic r__split_fields5 : natural
+
+logic r__split_fields6 : my_range
+
+logic r__split_fields7 : integer
+
+logic r__split_fields8 : integer
+
+logic r__split_fields9 : natural
+
+logic r__split_fields10 : my_range
+
+logic r__split_fields11 : integer
+
+logic r__split_fields12 : integer
+
+logic r__split_fields13 : natural
+
+logic r__split_fields14 : my_range
+
+logic r__split_fields15 : integer
+
+axiom H : in_range(new_data)
+
+axiom H1 : in_range2(new_data_2)
+
+axiom H2 : (to_rep1(o1) = new_data_2)
+
  (* File "records.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:my_range. (in_range(new_data) -> (in_range2(new_data_2) ->
-  ((to_rep1(o) = new_data_2) -> in_range1(new_data)))))
+goal WP_parameter_def : in_range1(new_data)

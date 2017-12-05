@@ -182,6 +182,7 @@
 (declare-const temp___427 count_type)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (assert (= (to_rep o) 0))
 (assert (= o o1))
 (assert (= temp___427 o1))

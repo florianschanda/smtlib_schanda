@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1823,7 +1823,49 @@ axiom msb_index_slow_not_inline__def_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic result__ : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic result : int
+
+logic result__1 : int
+
+logic result1 : int
+
+logic result__2 : int
+
+logic result2 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result1 : int
+
+logic result__3 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result2 : int
+
+logic result__4 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result3 : int
+
+logic result__5 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result4 : int
+
+logic result__6 : int
+
+logic bits_manipulation_unsigned__unsigned_8__functions__msb_index__result5 : int
+
+axiom H : true
+
+axiom H1 : (not (value = of_int(0)))
+
+axiom H2 : ((0 <= 7) -> in_range(result__))
+
+axiom H3 : (2 = 0)
+
  (* File "bits_manipulation.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall result__:int. ((not (value = of_int(0))) -> (((0 <= 7) ->
-  in_range(result__)) -> ((2 = 0) -> (not (value = of_int(0)))))))
+goal WP_parameter_def : (not (value = of_int(0)))

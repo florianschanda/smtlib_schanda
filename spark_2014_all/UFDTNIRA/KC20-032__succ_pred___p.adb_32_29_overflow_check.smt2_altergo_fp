@@ -56,7 +56,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tvoltB
 
-predicate in_range(x: int) = (((-32768) <= x) and (x <= 32767))
+predicate in_range(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -165,18 +165,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -403,6 +403,23 @@ logic v : volt
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic p__ident__3__result : volt
+
+logic o : volt
+
+logic result : volt
+
+logic p__ident__3__result1 : volt
+
+logic p__ident__3__result2 : volt
+
+logic p__ident__3__result3 : volt
+
+logic p__ident__3__result4 : volt
+
+logic p__ident__3__result5 : volt
+
+axiom H : (not (to_fixed1(v) = 2040))
+
  (* File "p.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : ((not (to_fixed1(v) = 2040)) ->
-  (not ((to_fixed1(v) + 1) = (-32768))))
+goal WP_parameter_def : (not ((to_fixed1(v) + 1) = (- 32768)))

@@ -419,7 +419,7 @@ axiom compare_def_gt1 :
 
 type tmax_lsid_typeB
 
-predicate in_range4(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range4(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq7 : int, int -> bool
 
@@ -919,12 +919,15 @@ axiom def_axiom :
 axiom cpu_lsid_last__def_axiom :
   (cpu_lsid_last = foo__cpu_lsid_last__aggregate_def(3, 4))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall states__split_fields:(int,natural) farray.
-  forall states__split_fields1:t. (in_range1(cpu_id) -> ((in_range3(i11s) and
-  (i11s <= to_rep1((cpu_lsid_last[cpu_id])))) ->
-  (((to_rep1((cpu_lsid_last[cpu_id])) = to_rep1(((to_base({
+logic states__split_fields : (int,natural) farray
+
+logic states__split_fields1 : t
+
+axiom H : in_range1(cpu_id)
+
+axiom H1 : (in_range3(i11s) and (i11s <= to_rep1((cpu_lsid_last[cpu_id]))))
+
+axiom H2 : ((to_rep1((cpu_lsid_last[cpu_id])) = to_rep1(((to_base({
   us_split_discrs2 = { rec__foo__subject_state__max_id = states__split_discrs
   }; us_split_fields3 = { rec__foo__subject_state__states1 = { elts =
   states__split_fields; rt = states__split_fields1 } }
@@ -933,6 +936,9 @@ goal WP_parameter_def :
   to_rep2(first(states__split_fields1)),
   to_rep2(last(states__split_fields1))) and
   ((to_rep2(first(states__split_fields1)) = 0) and
-  (to_rep2(last(states__split_fields1)) = to_rep1((cpu_lsid_last[cpu_id])))))) ->
-  ((in_range3(id) and (id <= to_rep1((cpu_lsid_last[cpu_id])))) ->
-  (to_rep2(first(states__split_fields1)) <= id))))))
+  (to_rep2(last(states__split_fields1)) = to_rep1((cpu_lsid_last[cpu_id]))))))
+
+axiom H3 : (in_range3(id) and (id <= to_rep1((cpu_lsid_last[cpu_id]))))
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(first(states__split_fields1)) <= id)

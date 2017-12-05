@@ -100,6 +100,7 @@
 (declare-const inverted (Array Int ranking))
 (declare-const stable_marriage__is_preferred_1__result Bool)
 (declare-const o (Array Int ranking))
+(declare-const temp___471 (Array Int ranking))
 (declare-const temp___472 (Array Int ranking))
 (declare-const o1 ranking)
 (declare-const o2 Int)

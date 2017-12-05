@@ -41,6 +41,7 @@
 (declare-const h Int)
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
 (assert (in_range h))
 (assert (in_range g))
 (assert (in_range i))

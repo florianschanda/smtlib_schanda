@@ -190,6 +190,8 @@
 (declare-const c1__split_fields3 integer)
 (declare-const c1__split_fields4 integer)
 (declare-const c1__split_fields5 us_private)
+(declare-const dispatch_in_contract__incr__o__fields integer)
+(declare-const dispatch_in_contract__incr__o__fields1 us_private)
 (assert (= (to_rep o) 1))
 (assert (= (to_rep o1) 2147483647))
 (assert (= o1 o2))

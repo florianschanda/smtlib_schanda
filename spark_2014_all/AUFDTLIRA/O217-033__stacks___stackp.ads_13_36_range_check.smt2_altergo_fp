@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -577,11 +577,19 @@ logic s3 : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic stackp__get_model__result : (int,element) farray
+
+logic stackp__get_model__result1 : t
+
+logic o : int
+
+logic o1 : int
+
+axiom H : ((o = size({ us_split_fields1 = {
+  rec__stackp__stack_root__content = s; rec__stackp__stack_root__length = s1;
+  rec__ext__ = s2 }; attr__tag = s3 })) and (in_range1(o) and
+  (o = to_rep(s1))))
+
  (* File "stackp.ads", line 9, characters 0-0 *)
-goal WP_parameter_def :
-  (forall stackp__get_model__result:(int,element) farray.
-  forall stackp__get_model__result1:t. forall o:int. (((o = size({
-  us_split_fields1 = { rec__stackp__stack_root__content = s;
-  rec__stackp__stack_root__length = s1; rec__ext__ = s2 }; attr__tag = s3
-  })) and (in_range1(o) and (o = to_rep(s1)))) -> in_range(length({ elts =
-  stackp__get_model__result; rt = stackp__get_model__result1 }))))
+goal WP_parameter_def : in_range(length({ elts = stackp__get_model__result;
+  rt = stackp__get_model__result1 }))

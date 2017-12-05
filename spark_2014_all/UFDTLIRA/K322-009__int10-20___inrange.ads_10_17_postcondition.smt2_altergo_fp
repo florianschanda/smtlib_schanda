@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -172,18 +172,51 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic inrange__add__result : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic result : int
+
+logic inrange__add__result1 : int
+
+logic inrange__add__result2 : int
+
+logic inrange__add__result3 : int
+
+logic inrange__add__result4 : int
+
+logic inrange__add__result5 : int
+
+logic result1 : int
+
+axiom H : in_range1(i)
+
+axiom H1 : in_range2(j)
+
+axiom H2 : (inrange__add__result1 = inrange__add__result2)
+
+axiom H3 : (inrange__add__result3 = inrange__add__result1)
+
+axiom H4 : ((o = add1(j, j)) and (in_range(o) and (o <= 20)))
+
+axiom H5 : (o1 = (i + o))
+
+axiom H6 : ((o2 = o1) and in_range(o1))
+
+axiom H7 : (result = inrange__add__result)
+
+axiom H8 : (inrange__add__result1 = o2)
+
+axiom H9 : (inrange__add__result4 = inrange__add__result2)
+
+axiom H10 : (inrange__add__result5 = inrange__add__result3)
+
+axiom H11 : (result1 = inrange__add__result4)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall inrange__add__result:int. forall o:int. forall o1:int.
-  forall o2:int. forall result:int. forall inrange__add__result1:int.
-  forall inrange__add__result2:int. forall inrange__add__result3:int.
-  forall inrange__add__result4:int. forall inrange__add__result5:int.
-  (forall result1:int. ((in_range1(i) and (in_range2(j) and
-  (((((inrange__add__result1 = inrange__add__result2) and
-  (inrange__add__result3 = inrange__add__result1)) and (((((o = add1(j,
-  j)) and (in_range(o) and (o <= 20))) and (o1 = (i + o))) and ((o2 = o1) and
-  in_range(o1))) and ((result = inrange__add__result) and
-  (inrange__add__result1 = o2)))) and
-  ((inrange__add__result4 = inrange__add__result2) and
-  (inrange__add__result5 = inrange__add__result3))) and
-  (result1 = inrange__add__result4)))) -> (inrange__add__result4 <= 40))))
+goal WP_parameter_def : (inrange__add__result4 <= 40)

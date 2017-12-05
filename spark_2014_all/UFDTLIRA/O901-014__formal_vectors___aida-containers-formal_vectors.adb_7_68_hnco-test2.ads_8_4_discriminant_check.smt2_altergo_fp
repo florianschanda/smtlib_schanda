@@ -707,29 +707,53 @@ axiom length__post_axiom :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = container1 }
   }))))
 
+logic o : capacity_range1
+
+logic o1 : us_main_type
+
+logic o2 : capacity_range1
+
+logic o3 : capacity_range1
+
+logic hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume : int
+
+logic o4 : capacity_range1
+
+logic o5 : us_main_type
+
+logic o6 : capacity_range1
+
+logic o7 : us_main_type
+
+axiom H : (({ us_split_discrs1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o };
+  us_split_fields1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o1 }
+  } = empty_vector(void)) and (length({ us_split_discrs1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o };
+  us_split_fields1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o1 } }) = 0))
+
+axiom H1 : (o = o2)
+
+axiom H2 : (o3 = o2)
+
+axiom H3 :
+  (hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume = to_rep1(o3))
+
+axiom H4 :
+  (hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume = r186s)
+
+axiom H5 : in_range1(r186s)
+
+axiom H6 : (({ us_split_discrs1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o4 };
+  us_split_fields1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o5 }
+  } = empty_vector(void)) and (length({ us_split_discrs1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o4 };
+  us_split_fields1 = {
+  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o5 } }) = 0))
+
  (* File "aida-containers-formal_vectors.ads", line 182, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:capacity_range1. forall o1:us_main_type.
-  forall o2:capacity_range1. forall o3:capacity_range1.
-  forall hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume:int.
-  forall o4:capacity_range1. forall o5:us_main_type. (((((((({
-  us_split_discrs1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o };
-  us_split_fields1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o1 }
-  } = empty_vector(void)) and (length({ us_split_discrs1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o };
-  us_split_fields1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o1 }
-  }) = 0)) and (o = o2)) and (o3 = o2)) and
-  (hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume = to_rep1(o3))) and
-  (hnco__test2__v_type_owner__empty_vector__R185s__R186s__assume = r186s)) and
-  in_range1(r186s)) -> ((({ us_split_discrs1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o4 };
-  us_split_fields1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o5 }
-  } = empty_vector(void)) and (length({ us_split_discrs1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity = o4 };
-  us_split_fields1 = {
-  rec__hnco__test2__v_type_owner__vector_type_owner__vector = o5 }
-  }) = 0)) -> (r186s = to_rep1(o4)))))
+goal WP_parameter_def : (r186s = to_rep1(o4))

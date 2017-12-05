@@ -101,7 +101,7 @@ function us_split_fields__ref___28__projection(a: us_split_fields__ref) : us_spl
 type us_rep1 = { us_split_fields1 : us_split_fields
 }
 
-function us_rep___29__projection(a: us_rep1) : us_split_fields =
+function us_rep___30__projection(a: us_rep1) : us_split_fields =
   (a).us_split_fields1
 
 logic value__size1 : int
@@ -148,5 +148,7 @@ function po__ref___projection(a: po__ref) : us_rep1 = (a).po__content
 
 logic self__ : us_rep
 
+logic temp___1528 : bool
+
  (* File "interrupt_handler.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (forall temp___1538:bool. (temp___1538 = false))
+goal WP_parameter_def : (temp___1528 = false)

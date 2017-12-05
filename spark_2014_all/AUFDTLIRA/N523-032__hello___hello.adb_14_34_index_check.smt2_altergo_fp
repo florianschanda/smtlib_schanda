@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -421,10 +421,90 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic o : int
+
+logic o1 : character
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___584 : int
+
+logic o4 : int
+
+logic o5 : character
+
+logic o6 : int
+
+logic temp___5841 : int
+
+logic o7 : int
+
+logic o8 : character
+
+logic o9 : int
+
+logic o10 : bool
+
+logic o11 : bool
+
+logic o12 : bool
+
+logic temp___583 : int
+
+logic o13 : int
+
+logic o14 : character
+
+logic o15 : int
+
+logic temp___5831 : int
+
+logic o16 : int
+
+logic o17 : character
+
+logic o18 : int
+
+logic o19 : bool
+
+logic o20 : bool
+
+logic o21 : bool
+
+logic o22 : int
+
+logic o23 : character
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic o27 : character
+
+logic o28 : int
+
+logic o29 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(str1)),
+  to_rep1(last(str1)))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(res1)),
+  to_rep1(last(res1)))
+
+axiom H2 : in_range1(j)
+
+axiom H3 : (((to_rep1(first(str1)) <= j) and (j <= to_rep1(last(str1)))) and
+  ((to_rep1(first(res1)) <= j) and (j <= to_rep1(last(res1)))))
+
+axiom H4 : (j = to_rep1(first(str1)))
+
  (* File "hello.adb", line 10, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(1, 2147483647,
-  to_rep1(first(str1)), to_rep1(last(str1))) -> (dynamic_property(1,
-  2147483647, to_rep1(first(res1)), to_rep1(last(res1))) -> (in_range1(j) ->
-  ((((to_rep1(first(str1)) <= j) and (j <= to_rep1(last(str1)))) and
-  ((to_rep1(first(res1)) <= j) and (j <= to_rep1(last(res1))))) ->
-  ((j = to_rep1(first(str1))) -> (to_rep1(first(str1)) <= j))))))
+goal WP_parameter_def : (to_rep1(first(str1)) <= j)

@@ -179,6 +179,7 @@
 (declare-const stackp__get_model__result (Array Int element))
 (declare-const stackp__get_model__result1 t)
 (declare-const o Int)
+(declare-const o1 Int)
 (assert (and (= o (size s)) (and (in_range1 o) (= o (to_rep (rec__stackp__stack_root__length (us_split_fields1 s)))))))
 (assert (not (in_range (length (mk___t stackp__get_model__result stackp__get_model__result1)))))
 (check-sat)

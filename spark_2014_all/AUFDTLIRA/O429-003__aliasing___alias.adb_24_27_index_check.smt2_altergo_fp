@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -475,8 +475,35 @@ logic x__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic i : (int,natural) farray
+
+logic x : (int,natural) farray
+
+logic o : int
+
+logic o1 : natural
+
+logic o2 : int
+
+logic o3 : natural
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : natural
+
+axiom H : in_range(c)
+
+axiom H1 : (dynamic_property2(1, c, to_rep1(i__first), to_rep1(i__last)) and
+  ((to_rep1(i__first) = 1) and (to_rep1(i__last) = c)))
+
+axiom H2 : dynamic_property(1, 2147483647, to_rep1(x__first),
+  to_rep1(x__last))
+
  (* File "alias.adb", line 17, characters 0-0 *)
-goal WP_parameter_def : (in_range(c) -> ((dynamic_property2(1, c,
-  to_rep1(i__first), to_rep1(i__last)) and ((to_rep1(i__first) = 1) and
-  (to_rep1(i__last) = c))) -> (dynamic_property(1, 2147483647,
-  to_rep1(x__first), to_rep1(x__last)) -> (to_rep1(x__first) <= 1))))
+goal WP_parameter_def : (to_rep1(x__first) <= 1)

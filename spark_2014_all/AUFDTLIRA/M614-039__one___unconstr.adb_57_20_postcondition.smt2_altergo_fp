@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -617,63 +617,130 @@ axiom def_axiom :
   (((unconstr__unconstr_return__s__aggregate_def(temp___220, temp___221,
   temp___222)).elts2[temp___223]) = of_rep(temp___220)))))
 
+logic s : (int,character) farray
+
+logic unconstr__unconstr_return__result : (int,character) farray
+
+logic unconstr__unconstr_return__result1 : t
+
+logic temp___225 : (int,character) farray
+
+logic temp___2251 : t2
+
+logic unconstr__unconstr_return__s__assume : (int,character) farray
+
+logic unconstr__unconstr_return__s__assume1 : t1
+
+logic result : (int,character) farray
+
+logic s1 : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic result2 : t
+
+logic unconstr__unconstr_return__result2 : (int,character) farray
+
+logic unconstr__unconstr_return__result3 : t
+
+logic unconstr__unconstr_return__result4 : (int,character) farray
+
+logic unconstr__unconstr_return__result5 : t
+
+logic unconstr__unconstr_return__result6 : (int,character) farray
+
+logic unconstr__unconstr_return__result7 : t
+
+logic s2 : (int,character) farray
+
+logic unconstr__unconstr_return__result8 : (int,character) farray
+
+logic unconstr__unconstr_return__result9 : t
+
+logic s3 : (int,character) farray
+
+logic unconstr__unconstr_return__result10 : (int,character) farray
+
+logic unconstr__unconstr_return__result11 : t
+
+logic result3 : (int,character) farray
+
+logic result4 : t
+
+axiom H : in_range1(x)
+
+axiom H1 : (to_rep1(first4((unconstr__unconstr_return__s__aggregate_def(32,
+  1, x)).rt2)) = 1)
+
+axiom H2 : (to_rep1(last4((unconstr__unconstr_return__s__aggregate_def(32, 1,
+  x)).rt2)) = x)
+
+axiom H3 : ({ elts2 = temp___225; rt2 = temp___2251
+  } = unconstr__unconstr_return__s__aggregate_def(32, 1, x))
+
+axiom H4 : (((to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251))) ->
+  (((1 <= x) ->
+  (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = ((x - 1) + 1))) and
+  ((not (1 <= x)) ->
+  (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = 0)))) and
+  ((not (to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251)))) ->
+  ((1 <= x) -> (0 = ((x - 1) + 1)))))
+
+axiom H5 : (temp___225 = unconstr__unconstr_return__s__assume)
+
+axiom H6 : (mk1(to_rep1(first4(temp___2251)),
+  to_rep1(last4(temp___2251))) = unconstr__unconstr_return__s__assume1)
+
+axiom H7 : (result = s)
+
+axiom H8 : (s1 = unconstr__unconstr_return__s__assume)
+
+axiom H9 :
+  (to_rep1(s__first) = to_rep1(first2(unconstr__unconstr_return__s__assume1)))
+
+axiom H10 :
+  (to_rep1(s__last) = to_rep1(last2(unconstr__unconstr_return__s__assume1)))
+
+axiom H11 : (dynamic_property2(1, x, to_rep1(s__first), to_rep1(s__last)) and
+  ((to_rep1(s__first) = 1) and (to_rep1(s__last) = x)))
+
+axiom H12 :
+  (unconstr__unconstr_return__result4 = unconstr__unconstr_return__result2)
+
+axiom H13 :
+  (unconstr__unconstr_return__result5 = unconstr__unconstr_return__result3)
+
+axiom H14 :
+  ((unconstr__unconstr_return__result6 = unconstr__unconstr_return__result2) and
+  (unconstr__unconstr_return__result7 = unconstr__unconstr_return__result3))
+
+axiom H15 : (result1 = unconstr__unconstr_return__result)
+
+axiom H16 : (result2 = unconstr__unconstr_return__result1)
+
+axiom H17 : (s1 = unconstr__unconstr_return__result2)
+
+axiom H18 : (mk(to_rep1(s__first),
+  to_rep1(s__last)) = unconstr__unconstr_return__result3)
+
+axiom H19 :
+  ((unconstr__unconstr_return__result8 = unconstr__unconstr_return__result4) and
+  (unconstr__unconstr_return__result9 = unconstr__unconstr_return__result5))
+
+axiom H20 : (s2 = s1)
+
+axiom H21 :
+  (unconstr__unconstr_return__result10 = unconstr__unconstr_return__result6)
+
+axiom H22 :
+  (unconstr__unconstr_return__result11 = unconstr__unconstr_return__result7)
+
+axiom H23 : (s3 = s1)
+
+axiom H24 : (result3 = unconstr__unconstr_return__result8)
+
+axiom H25 : (result4 = unconstr__unconstr_return__result9)
+
  (* File "system.ads", line 1, characters 0-0 *)
 goal WP_parameter_def :
-  (forall s:(int,character) farray.
-  forall unconstr__unconstr_return__result:(int,character) farray.
-  forall unconstr__unconstr_return__result1:t.
-  forall temp___225:(int,character) farray. forall temp___2251:t2.
-  forall unconstr__unconstr_return__s__assume:(int,character) farray.
-  forall unconstr__unconstr_return__s__assume1:t1.
-  forall result:(int,character) farray. forall s1:(int,character) farray.
-  forall result1:(int,character) farray. forall result2:t.
-  forall unconstr__unconstr_return__result2:(int,character) farray.
-  forall unconstr__unconstr_return__result3:t.
-  forall unconstr__unconstr_return__result4:(int,character) farray.
-  forall unconstr__unconstr_return__result5:t.
-  forall unconstr__unconstr_return__result6:(int,character) farray.
-  forall unconstr__unconstr_return__result7:t.
-  forall s2:(int,character) farray.
-  forall unconstr__unconstr_return__result8:(int,character) farray.
-  forall unconstr__unconstr_return__result9:t.
-  forall s3:(int,character) farray.
-  forall unconstr__unconstr_return__result10:(int,character) farray.
-  forall unconstr__unconstr_return__result11:t.
-  (forall result3:(int,character) farray. forall result4:t.
-  ((in_range1(x) and
-  (((((((to_rep1(first4((unconstr__unconstr_return__s__aggregate_def(32, 1,
-  x)).rt2)) = 1) and
-  ((to_rep1(last4((unconstr__unconstr_return__s__aggregate_def(32, 1,
-  x)).rt2)) = x) and ({ elts2 = temp___225; rt2 = temp___2251
-  } = unconstr__unconstr_return__s__aggregate_def(32, 1, x)))) and
-  ((((to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251))) and
-  (((1 <= x) and
-  (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = ((x - 1) + 1))) or
-  ((not (1 <= x)) and
-  (((to_rep1(last4(temp___2251)) - to_rep1(first4(temp___2251))) + 1) = 0)))) or
-  ((not (to_rep1(first4(temp___2251)) <= to_rep1(last4(temp___2251)))) and
-  (((1 <= x) and (0 = ((x - 1) + 1))) or (not (1 <= x))))) and
-  ((temp___225 = unconstr__unconstr_return__s__assume) and
-  (mk1(to_rep1(first4(temp___2251)),
-  to_rep1(last4(temp___2251))) = unconstr__unconstr_return__s__assume1)))) and
-  (((result = s) and (s1 = unconstr__unconstr_return__s__assume)) and
-  ((to_rep1(s__first) = to_rep1(first2(unconstr__unconstr_return__s__assume1))) and
-  (to_rep1(s__last) = to_rep1(last2(unconstr__unconstr_return__s__assume1)))))) and
-  ((dynamic_property2(1, x, to_rep1(s__first), to_rep1(s__last)) and
-  ((to_rep1(s__first) = 1) and (to_rep1(s__last) = x))) and
-  ((((unconstr__unconstr_return__result4 = unconstr__unconstr_return__result2) and
-  (unconstr__unconstr_return__result5 = unconstr__unconstr_return__result3)) and
-  ((unconstr__unconstr_return__result6 = unconstr__unconstr_return__result2) and
-  (unconstr__unconstr_return__result7 = unconstr__unconstr_return__result3))) and
-  (((result1 = unconstr__unconstr_return__result) and
-  (result2 = unconstr__unconstr_return__result1)) and
-  ((s1 = unconstr__unconstr_return__result2) and (mk(to_rep1(s__first),
-  to_rep1(s__last)) = unconstr__unconstr_return__result3)))))) and
-  ((((unconstr__unconstr_return__result8 = unconstr__unconstr_return__result4) and
-  (unconstr__unconstr_return__result9 = unconstr__unconstr_return__result5)) and
-  (s2 = s1)) and
-  (((unconstr__unconstr_return__result10 = unconstr__unconstr_return__result6) and
-  (unconstr__unconstr_return__result11 = unconstr__unconstr_return__result7)) and
-  (s3 = s1)))) and ((result3 = unconstr__unconstr_return__result8) and
-  (result4 = unconstr__unconstr_return__result9)))) ->
-  (to_rep1(first(unconstr__unconstr_return__result9)) = 1))))
+  (to_rep1(first(unconstr__unconstr_return__result9)) = 1)

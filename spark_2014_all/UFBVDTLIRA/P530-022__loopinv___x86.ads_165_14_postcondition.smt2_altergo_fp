@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1058,9 +1058,28 @@ axiom readreglow8__post_axiom :
   (forall reg:t [readreglow8(reg)]. (readreglow8(reg) = toSmall(bw_and(reg,
   of_int(255)))))
 
+logic rax : t
+
+logic result : t
+
+logic rax1 : t
+
+logic rax2 : t
+
+logic rax3 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (result = rax)
+
+axiom H3 : (rax1 = bw_or(bw_and(rax, of_int(18446744073709551360)),
+  toBig(val__)))
+
+axiom H4 : (rax1 = rax2)
+
+axiom H5 : (rax3 = rax1)
+
  (* File "x86.ads", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t. forall result:t. forall rax1:t. forall rax2:t.
-  forall rax3:t. ((((result = rax) and (rax1 = bw_or(bw_and(rax,
-  of_int(18446744073709551360)), toBig(val__)))) and ((rax1 = rax2) and
-  (rax3 = rax1))) -> (writereglow8post(rax, rax2, val__) = true)))
+goal WP_parameter_def : (writereglow8post(rax, rax2, val__) = true)

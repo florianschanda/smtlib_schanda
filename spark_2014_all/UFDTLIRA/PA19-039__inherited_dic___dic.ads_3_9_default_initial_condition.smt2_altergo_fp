@@ -273,10 +273,14 @@ axiom is_ok__2__def_axiom :
   rec__dic__parent__b = obj; rec__ext__ = obj1 }; attr__tag = obj2
   }) = true) <-> (not (obj = true))))
 
+logic temp___159 : bool
+
+logic temp___1591 : us_private
+
+logic temp___1592 : int
+
+axiom H : ((temp___1592 = us_tag) and (temp___159 = of_int(1)))
+
  (* File "dic.ads", line 27, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___159:bool. forall temp___1591:us_private.
-  forall temp___1592:int. (((temp___1592 = us_tag) and
-  (temp___159 = of_int(1))) -> (is_ok({ us_split_fields1 = {
-  rec__dic__parent__b = temp___159; rec__ext__ = temp___1591 }; attr__tag =
-  temp___1592 }) = true)))
+goal WP_parameter_def : (is_ok({ us_split_fields1 = { rec__dic__parent__b =
+  temp___159; rec__ext__ = temp___1591 }; attr__tag = temp___1592 }) = true)

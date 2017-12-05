@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1285,24 +1285,45 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "test_length.adb", line 12, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a2:(t1,natural) farray.
-  forall test_length__p3__a2__assume:(t1,natural) farray.
-  forall test_length__p3__a2__assume1:t2. forall o:int.
-  forall result:(t1,natural) farray. forall a21:(t1,natural) farray. (((({
-  elts = test_length__p3__a2__assume; rt = test_length__p3__a2__assume1
-  } = create(of_int1(65532))) and (dynamic_property(of_int1(0),
-  of_int1(65535), to_rep(first(test_length__p3__a2__assume1)),
+logic a2 : (t1,natural) farray
+
+logic test_length__p3__a2__assume : (t1,natural) farray
+
+logic test_length__p3__a2__assume1 : t2
+
+logic o : int
+
+logic o1 : int
+
+logic result : (t1,natural) farray
+
+logic a21 : (t1,natural) farray
+
+axiom H : (({ elts = test_length__p3__a2__assume; rt =
+  test_length__p3__a2__assume1 } = create(of_int1(65532))) and
+  (dynamic_property(of_int1(0), of_int1(65535),
+  to_rep(first(test_length__p3__a2__assume1)),
   to_rep(last(test_length__p3__a2__assume1))) and
   ((to_rep(first(test_length__p3__a2__assume1)) = of_int1(0)) and
-  (to_rep(last(test_length__p3__a2__assume1)) = of_int1(65532))))) and
-  (((result = a2) and (a21 = test_length__p3__a2__assume)) and
-  ((to_rep(a2__first) = to_rep(first(test_length__p3__a2__assume1))) and
-  (to_rep(a2__last) = to_rep(last(test_length__p3__a2__assume1)))))) ->
-  (dynamic_property(of_int1(0), of_int1(65535), to_rep(a2__first),
-  to_rep(a2__last)) ->
-  ((((tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last))) and
-  (o = ((tqtint1(to_rep(a2__last)) - tqtint1(to_rep(a2__first))) + 1))) or
-  ((not (tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last)))) and
-  (o = 0))) -> uint_in_range(o)))))
+  (to_rep(last(test_length__p3__a2__assume1)) = of_int1(65532)))))
+
+axiom H1 : (result = a2)
+
+axiom H2 : (a21 = test_length__p3__a2__assume)
+
+axiom H3 : (to_rep(a2__first) = to_rep(first(test_length__p3__a2__assume1)))
+
+axiom H4 : (to_rep(a2__last) = to_rep(last(test_length__p3__a2__assume1)))
+
+axiom H5 : dynamic_property(of_int1(0), of_int1(65535), to_rep(a2__first),
+  to_rep(a2__last))
+
+axiom H6 : ((tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last))) ->
+  (o = ((tqtint1(to_rep(a2__last)) - tqtint1(to_rep(a2__first))) + 1)))
+
+axiom H7 :
+  ((not (tqtint1(to_rep(a2__first)) <= tqtint1(to_rep(a2__last)))) ->
+  (o = 0))
+
+ (* File "test_length.adb", line 12, characters 0-0 *)
+goal WP_parameter_def : uint_in_range(o)

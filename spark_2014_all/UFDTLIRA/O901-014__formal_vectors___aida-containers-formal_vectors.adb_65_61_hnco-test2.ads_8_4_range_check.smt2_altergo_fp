@@ -5298,7 +5298,7 @@ axiom length__post_axiom2 :
 
 type element_type
 
-predicate in_range46(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range46(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
 
@@ -5508,13 +5508,21 @@ logic container54 : int
 
 logic attr__ATTRIBUTE_ADDRESS17 : int
 
- (* File "aida-containers-formal_vectors.ads", line 64, characters 0-0 *)
-goal WP_parameter_def :
-  (forall target__split_fields:capacity_range1. forall us:int.
-  forall us1:int.
-  ((to_rep(target__split_discrs) = to_rep1(target__split_fields)) ->
-  ((to_rep(source) = to_rep1(source1)) -> (((of_int(1) = true) -> (length({
-  us_split_discrs3 = {
+logic target__split_fields : capacity_range1
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic hnco__test2__v_type_owner__vector_type_owner__assign__target__fields : us_main_type
+
+axiom H : (to_rep(target__split_discrs) = to_rep1(target__split_fields))
+
+axiom H1 : (to_rep(source) = to_rep1(source1))
+
+axiom H2 : ((of_int(1) = true) -> (length({ us_split_discrs3 = {
   rec__hnco__test2__v_type_owner__vector_type__capacity = source };
   us_split_fields3 = {
   rec__hnco__test2__v_type_owner__vector_type__hidden_vector = {
@@ -5523,7 +5531,15 @@ goal WP_parameter_def :
   source1 }; us_split_fields1 = {
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = source2 } };
   rec__ext__ = source3 }; attr__tag = source4
-  }) <= to_rep(target__split_discrs))) -> (((us = to_rep(source)) and
-  in_range1(to_rep(source))) -> (((to_rep(target__split_discrs) = r228s) and
-  in_range1(r228s)) -> (((us1 = r228s) and in_range2(r228s)) ->
-  in_range2(to_rep(source)))))))))
+  }) <= to_rep(target__split_discrs)))
+
+axiom H3 : ((us = to_rep(source)) and in_range1(to_rep(source)))
+
+axiom H4 : (to_rep(target__split_discrs) = r228s)
+
+axiom H5 : in_range1(r228s)
+
+axiom H6 : ((us1 = r228s) and in_range2(r228s))
+
+ (* File "aida-containers-formal_vectors.ads", line 64, characters 0-0 *)
+goal WP_parameter_def : in_range2(to_rep(source))

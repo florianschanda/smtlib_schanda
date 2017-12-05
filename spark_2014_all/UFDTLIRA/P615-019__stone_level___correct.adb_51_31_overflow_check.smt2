@@ -59,6 +59,7 @@
 (declare-const o1 Int)
 (declare-const o2 Int)
 (declare-const o3 Int)
+(declare-const o4 Int)
 (declare-const us_HEAP1 us_type_of_heap)
 (assert (and (= o (get data2 us_HEAP)) (in_range o)))
 (assert (and (= o1 (get data3 us_HEAP1)) (in_range o1)))

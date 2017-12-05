@@ -80,6 +80,7 @@
 (declare-const o Int)
 (declare-const o1 small)
 (declare-const o2 (Array Int small))
+(declare-const temp___214 Int)
 (declare-const result (Array Int small))
 (declare-const x1 (Array Int small))
 (assert (dynamic_invariant1 i3s true false true))

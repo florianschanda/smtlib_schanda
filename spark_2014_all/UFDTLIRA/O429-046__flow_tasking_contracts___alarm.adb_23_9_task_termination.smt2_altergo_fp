@@ -202,5 +202,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
+axiom H : false
+
  (* File "alarm.adb", line 55, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type even
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -350,35 +350,97 @@ function teven_pairD1__ref___projection(a: teven_pairD1__ref) : teven_pairD1 =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic result__ : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result : (int,even) farray
+
+logic o : int
+
+logic o1 : even
+
+logic o2 : (int,even) farray
+
+logic o3 : int
+
+logic o4 : even
+
+logic o5 : (int,even) farray
+
+logic result : (int,even) farray
+
+logic result__1 : (int,even) farray
+
+logic result1 : (int,even) farray
+
+logic result__2 : (int,even) farray
+
+logic result2 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result1 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result2 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result3 : (int,even) farray
+
+logic result__3 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result4 : (int,even) farray
+
+logic result__4 : (int,even) farray
+
+logic dynamic_preds_array__get_constant_even_pair__result5 : (int,even) farray
+
+logic result3 : (int,even) farray
+
+axiom H : true
+
+axiom H1 : (mod(0, 2) = 0)
+
+axiom H2 : (o = 0)
+
+axiom H3 : (to_rep(o1) = o)
+
+axiom H4 : (o2 = (result__[1 <- o1]))
+
+axiom H5 : (result = result__)
+
+axiom H6 : (result__1 = o2)
+
+axiom H7 : (mod(0, 2) = 0)
+
+axiom H8 : (o3 = 0)
+
+axiom H9 : (to_rep(o4) = o3)
+
+axiom H10 : (o5 = (result__1[2 <- o4]))
+
+axiom H11 : (result1 = result__1)
+
+axiom H12 : (result__2 = o5)
+
+axiom H13 :
+  (dynamic_preds_array__get_constant_even_pair__result1 = dynamic_preds_array__get_constant_even_pair__result2)
+
+axiom H14 :
+  (dynamic_preds_array__get_constant_even_pair__result3 = dynamic_preds_array__get_constant_even_pair__result1)
+
+axiom H15 : (result2 = dynamic_preds_array__get_constant_even_pair__result)
+
+axiom H16 :
+  (dynamic_preds_array__get_constant_even_pair__result1 = result__2)
+
+axiom H17 :
+  (dynamic_preds_array__get_constant_even_pair__result4 = dynamic_preds_array__get_constant_even_pair__result2)
+
+axiom H18 : (result__3 = result__2)
+
+axiom H19 :
+  (dynamic_preds_array__get_constant_even_pair__result5 = dynamic_preds_array__get_constant_even_pair__result3)
+
+axiom H20 : (result__4 = result__2)
+
+axiom H21 : (result3 = dynamic_preds_array__get_constant_even_pair__result4)
+
  (* File "dynamic_preds_array.ads", line 6, characters 0-0 *)
 goal WP_parameter_def :
-  (forall result__:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result:(int,even) farray.
-  forall o:int. forall o1:even. forall o2:(int,even) farray. forall o3:int.
-  forall o4:even. forall o5:(int,even) farray.
-  forall result:(int,even) farray. forall result__1:(int,even) farray.
-  forall result1:(int,even) farray. forall result__2:(int,even) farray.
-  forall result2:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result1:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result2:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result3:(int,even) farray.
-  forall result__3:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result4:(int,even) farray.
-  forall result__4:(int,even) farray.
-  forall dynamic_preds_array__get_constant_even_pair__result5:(int,even) farray.
-  (forall result3:(int,even) farray. (((((((((mod(0, 2) = 0) and (o = 0)) and
-  (to_rep(o1) = o)) and (o2 = (result__[1 <- o1]))) and (({ map__content =
-  result } = { map__content = result__ }) and (result__1 = o2))) and
-  ((((((mod(0, 2) = 0) and (o3 = 0)) and (to_rep(o4) = o3)) and
-  (o5 = (result__1[2 <- o4]))) and ((result1 = result__1) and
-  (result__2 = o5))) and
-  (((dynamic_preds_array__get_constant_even_pair__result1 = dynamic_preds_array__get_constant_even_pair__result2) and
-  (dynamic_preds_array__get_constant_even_pair__result3 = dynamic_preds_array__get_constant_even_pair__result1)) and
-  ((result2 = dynamic_preds_array__get_constant_even_pair__result) and
-  (dynamic_preds_array__get_constant_even_pair__result1 = result__2))))) and
-  (((dynamic_preds_array__get_constant_even_pair__result4 = dynamic_preds_array__get_constant_even_pair__result2) and
-  (result__3 = result__2)) and
-  ((dynamic_preds_array__get_constant_even_pair__result5 = dynamic_preds_array__get_constant_even_pair__result3) and
-  (result__4 = result__2)))) and
-  (result3 = dynamic_preds_array__get_constant_even_pair__result4)) ->
-  (to_rep((dynamic_preds_array__get_constant_even_pair__result4[1])) = 0))))
+  (to_rep((dynamic_preds_array__get_constant_even_pair__result4[1])) = 0)

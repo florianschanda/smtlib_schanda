@@ -162,18 +162,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -191,7 +191,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -219,26 +219,49 @@ logic val__ : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall subprograms__f2__result:int. forall o:int. forall result:int.
-  forall subprograms__f2__result1:int. forall result1:int.
-  forall subprograms__f2__result2:int. forall subprograms__f2__result3:int.
-  forall subprograms__f2__result4:int. forall subprograms__f2__result5:int.
-  forall subprograms__f2__result6:int. forall subprograms__f2__result7:int.
-  forall subprograms__f2__result8:int. (in_range(val__) ->
-  (((((subprograms__f2__result3 = subprograms__f2__result5) and
-  (subprograms__f2__result6 = subprograms__f2__result4)) and
-  (((val__ = 0) and
+logic subprograms__f2__result : int
+
+logic o : int
+
+logic result : int
+
+logic subprograms__f2__result1 : int
+
+logic result1 : int
+
+logic subprograms__f2__result2 : int
+
+logic subprograms__f2__result3 : int
+
+logic subprograms__f2__result4 : int
+
+logic subprograms__f2__result5 : int
+
+logic subprograms__f2__result6 : int
+
+logic subprograms__f2__result7 : int
+
+logic subprograms__f2__result8 : int
+
+axiom H : in_range(val__)
+
+axiom H1 : (((subprograms__f2__result5 = subprograms__f2__result3) and
+  (subprograms__f2__result6 = subprograms__f2__result4)) and (((val__ = 0) ->
   (((subprograms__f2__result1 = subprograms__f2__result3) and
   (subprograms__f2__result4 = subprograms__f2__result1)) and
   ((result = subprograms__f2__result) and
-  (subprograms__f2__result1 = 1)))) or ((not (val__ = 0)) and
+  (subprograms__f2__result1 = 1)))) and ((not (val__ = 0)) ->
   (((subprograms__f2__result2 = subprograms__f2__result3) and
   (subprograms__f2__result4 = subprograms__f2__result2)) and
   (((o = comp_div(val__,val__)) and in_range(comp_div(val__,val__))) and
   ((result1 = subprograms__f2__result) and
-  (subprograms__f2__result2 = o))))))) and
-  ((subprograms__f2__result7 = subprograms__f2__result5) and
-  (subprograms__f2__result8 = subprograms__f2__result6))) -> ((bool_eq(val__,
-  0) = true) -> (subprograms__f2__result7 = 0)))))
+  (subprograms__f2__result2 = o)))))))
+
+axiom H2 : (subprograms__f2__result7 = subprograms__f2__result5)
+
+axiom H3 : (subprograms__f2__result8 = subprograms__f2__result6)
+
+axiom H4 : (bool_eq(val__, 0) = true)
+
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def : (subprograms__f2__result7 = 0)

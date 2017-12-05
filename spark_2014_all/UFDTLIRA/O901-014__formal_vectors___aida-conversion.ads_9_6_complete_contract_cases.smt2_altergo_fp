@@ -156,13 +156,31 @@ logic source : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic aida__conversion__convert_character_digit_to_integer__result : int
+
+logic result : int
+
+logic aida__conversion__convert_character_digit_to_integer__result1 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result2 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result3 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result4 : int
+
+logic aida__conversion__convert_character_digit_to_integer__result5 : int
+
+axiom H : in_range1(source)
+
+axiom H1 : (is_digit(source) = true)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (in_range1(source) -> ((is_digit(source) = true) ->
-  (((bool_eq(source, 48) = true) -> (((bool_eq(source, 49) = true) ->
-  (((bool_eq(source, 50) = true) -> (((bool_eq(source, 51) = true) ->
-  (((bool_eq(source, 52) = true) -> (((bool_eq(source, 53) = true) ->
-  (((bool_eq(source, 54) = true) -> (((bool_eq(source, 55) = true) ->
-  (((bool_eq(source, 56) = true) -> (((bool_eq(source, 57) = true) ->
+goal WP_parameter_def : (((bool_eq(source, 48) = true) -> (((bool_eq(source,
+  49) = true) -> (((bool_eq(source, 50) = true) -> (((bool_eq(source,
+  51) = true) -> (((bool_eq(source, 52) = true) -> (((bool_eq(source,
+  53) = true) -> (((bool_eq(source, 54) = true) -> (((bool_eq(source,
+  55) = true) -> (((bool_eq(source, 56) = true) -> (((bool_eq(source,
+  57) = true) ->
   (1 <= ((((((((((0 + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1))) and
   ((not (bool_eq(source, 57) = true)) ->
   (1 <= ((((((((((0 + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 0))))) and
@@ -2545,4 +2563,4 @@ goal WP_parameter_def : (in_range1(source) -> ((is_digit(source) = true) ->
   ((not (bool_eq(source, 56) = true)) -> (((bool_eq(source, 57) = true) ->
   (1 <= ((((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 1))) and
   ((not (bool_eq(source, 57) = true)) ->
-  (1 <= ((((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0))))))))))))))))))))))))
+  (1 <= ((((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0))))))))))))))))))))))

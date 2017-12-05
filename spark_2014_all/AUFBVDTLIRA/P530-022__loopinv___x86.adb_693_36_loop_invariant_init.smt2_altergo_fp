@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1330,28 +1330,96 @@ function t76b__ref___projection(a: t76b__ref) : unsigned_64 =
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
- (* File "x86.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax:t1. forall rcx:t1. forall rdi:t1.
-  forall memory:(t1,unsigned8) farray. forall mem:(t1,unsigned8) farray.
-  forall i:t1. forall result:t1. forall i1:t1.
-  (((forall i2:t1. ((ule1(of_int1(0), i2) and ule1(i2, sub1(rcx_start,
-    rcx))) -> ((not (i2 = sub1(rcx_start, rcx))) -> (hasmem64(mem,
-    add1(rdi_start, mul1(i2, of_int1(8))), rax) = true)))) and
+logic rax : t1
+
+logic rcx : t1
+
+logic rdi : t1
+
+logic memory : (t1,unsigned8) farray
+
+logic mem : (t1,unsigned8) farray
+
+logic i : t1
+
+logic temp___392 : t1
+
+logic result : t1
+
+logic i1 : t1
+
+logic i2 : t1
+
+logic result1 : t1
+
+logic i3 : t1
+
+logic i4 : t1
+
+logic i5 : t1
+
+logic i6 : t1
+
+logic i7 : t1
+
+logic i8 : t1
+
+logic i9 : t1
+
+logic i10 : t1
+
+logic i11 : t1
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 :
+  ((forall i12:t1. ((ule1(of_int1(0), i12) and ule1(i12, sub1(rcx_start,
+   rcx))) -> ((not (i12 = sub1(rcx_start, rcx))) -> (hasmem64(mem,
+   add1(rdi_start, mul1(i12, of_int1(8))), rax) = true)))) and
   ((rdi = add1(rdi_start, mul1(sub1(rcx_start, rcx), of_int1(8)))) and
   (ule1(rcx, rcx_start) and (ult1(rcx_start,
   of_int1(2305843009213693951)) and ((nooverlap8equal(memory, mem,
   rdi) = true) and
-  (forall i2:t1. ((ule1(of_int1(0), i2) and ule1(i2, sub1(rcx_start,
-  rcx))) -> ((not (i2 = sub1(rcx_start, rcx))) -> (nooverlap8(add1(rdi_start,
-  mul1(i2, of_int1(8))), rdi) = true))))))))) -> ((sub1(rcx_start,
-  rcx) = r75b) -> ((({ t__content1 = result } = { t__content1 = i }) and
-  (i1 = of_int1(0))) -> ((ule1(of_int1(0), i1) and ule1(i1, r75b)) ->
-  (((not (i1 = sub1(rcx_start, rcx))) ->
-  ((forall j:t1. ((ule1(of_int1(0), j) and ule1(j, of_int1(7))) ->
-   (to_rep((memory[add1(add1(rdi_start, mul1(i1, of_int1(8))),
-   j)])) = to_rep((mem[add1(add1(rdi_start, mul1(i1, of_int1(8))), j)]))))) and
-  (hasmem64(memory, add1(rdi_start, mul1(i1, of_int1(8))), rax) = true))) ->
-  (forall j:t1. ((ule1(of_int1(0), j) and ule1(j, i1)) ->
-  ((not (j = sub1(rcx_start, rcx))) -> (hasmem64(memory, add1(rdi_start,
-  mul1(j, of_int1(8))), rax) = true))))))))))
+  (forall i12:t1. ((ule1(of_int1(0), i12) and ule1(i12, sub1(rcx_start,
+  rcx))) -> ((not (i12 = sub1(rcx_start, rcx))) ->
+  (nooverlap8(add1(rdi_start, mul1(i12, of_int1(8))), rdi) = true)))))))))
+
+axiom H6 : (sub1(rcx_start, rcx) = r75b)
+
+axiom H7 : true
+
+axiom H8 : (result = i)
+
+axiom H9 : (i1 = of_int1(0))
+
+axiom H10 : ule1(of_int1(0), i1)
+
+axiom H11 : ule1(i1, r75b)
+
+axiom H12 : ((not (i1 = sub1(rcx_start, rcx))) ->
+  (forall j:t1. ((ule1(of_int1(0), j) and ule1(j, of_int1(7))) ->
+  (to_rep((memory[add1(add1(rdi_start, mul1(i1, of_int1(8))),
+  j)])) = to_rep((mem[add1(add1(rdi_start, mul1(i1, of_int1(8))), j)]))))))
+
+axiom H13 : ((not (i1 = sub1(rcx_start, rcx))) -> (hasmem64(memory,
+  add1(rdi_start, mul1(i1, of_int1(8))), rax) = true))
+
+logic j : t1
+
+axiom H14 : ule1(of_int1(0), j)
+
+axiom H15 : ule1(j, i1)
+
+axiom H16 : (not (j = sub1(rcx_start, rcx)))
+
+ (* File "x86.ads", line 7, characters 0-0 *)
+goal WP_parameter_def : (hasmem64(memory, add1(rdi_start, mul1(j,
+  of_int1(8))), rax) = true)

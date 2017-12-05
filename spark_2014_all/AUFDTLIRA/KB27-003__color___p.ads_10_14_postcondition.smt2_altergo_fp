@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -246,23 +246,99 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic d : (int,integer) farray
+
+logic c : int
+
+logic o : integer
+
+logic o1 : (int,integer) farray
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : integer
+
+logic o5 : (int,integer) farray
+
+logic result : int
+
+logic c1 : int
+
+logic result1 : (int,integer) farray
+
+logic d1 : (int,integer) farray
+
+logic result2 : int
+
+logic c2 : int
+
+logic result3 : (int,integer) farray
+
+logic d2 : (int,integer) farray
+
+logic result4 : int
+
+logic c3 : int
+
+logic result5 : (int,integer) farray
+
+logic d3 : (int,integer) farray
+
+logic d4 : (int,integer) farray
+
+logic c4 : int
+
+logic d5 : (int,integer) farray
+
+logic c5 : int
+
+axiom H : (result = c)
+
+axiom H1 : (c1 = 0)
+
+axiom H2 : (to_rep(o) = to_rep((d[c1])))
+
+axiom H3 : (o1 = (d[c1 <- o]))
+
+axiom H4 : (result1 = d)
+
+axiom H5 : (d1 = o1)
+
+axiom H6 : (result2 = c1)
+
+axiom H7 : (c2 = 1)
+
+axiom H8 : (to_rep(o2) = to_rep((d1[c2])))
+
+axiom H9 : (o3 = (d1[c2 <- o2]))
+
+axiom H10 : (result3 = d1)
+
+axiom H11 : (d2 = o3)
+
+axiom H12 : (result4 = c2)
+
+axiom H13 : (c3 = 2)
+
+axiom H14 : (to_rep(o4) = to_rep((d2[c3])))
+
+axiom H15 : (o5 = (d2[c3 <- o4]))
+
+axiom H16 : (result5 = d2)
+
+axiom H17 : (d3 = o5)
+
+axiom H18 : (c4 = c3)
+
+axiom H19 : (d4 = d3)
+
+axiom H20 : (c5 = c3)
+
+axiom H21 : (d5 = d3)
+
+logic c6 : int
+
  (* File "p.ads", line 17, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d:(int,integer) farray. forall c:int. forall o:integer.
-  forall o1:(int,integer) farray. forall o2:integer.
-  forall o3:(int,integer) farray. forall o4:integer.
-  forall o5:(int,integer) farray. forall result:int. forall c1:int.
-  forall result1:(int,integer) farray. forall d1:(int,integer) farray.
-  forall result2:int. forall c2:int. forall result3:(int,integer) farray.
-  forall d2:(int,integer) farray. forall result4:int. forall c3:int.
-  forall result5:(int,integer) farray. forall d3:(int,integer) farray.
-  forall d4:(int,integer) farray. forall c4:int.
-  forall d5:(int,integer) farray. forall c5:int. (((((result = c) and
-  (c1 = 0)) and ((((to_rep(o) = to_rep((d[c1]))) and (o1 = (d[c1 <- o]))) and
-  ((result1 = d) and (d1 = o1))) and (((result2 = c1) and (c2 = 1)) and
-  ((((to_rep(o2) = to_rep((d1[c2]))) and (o3 = (d1[c2 <- o2]))) and
-  ((result3 = d1) and (d2 = o3))) and (((result4 = c2) and (c3 = 2)) and
-  (((to_rep(o4) = to_rep((d2[c3]))) and (o5 = (d2[c3 <- o4]))) and
-  ((result5 = d2) and (d3 = o5)))))))) and (((c4 = c3) and (d4 = d3)) and
-  ((c5 = c3) and (d5 = d3)))) ->
-  (forall c6:int. (not ((0 <= c6) and (c6 <= 2))))))
+goal WP_parameter_def : (not ((0 <= c6) and (c6 <= 2)))

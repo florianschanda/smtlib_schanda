@@ -256,6 +256,7 @@
 (declare-const o18 Int)
 (declare-const o19 Int)
 (declare-const o20 Int)
+(declare-const o21 Int)
 (declare-const result sixty)
 (declare-const result1 sixty)
 (declare-const result2 twenty_four)

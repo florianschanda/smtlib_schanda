@@ -157,6 +157,7 @@
 (define-fun capacity ((container1 us_rep)) Int (ite (= (of_int 1) true) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 container1))) 2147483647))
 (declare-fun capacity__function_guard (Int us_rep) Bool)
 (assert (forall ((container1 us_rep)) (! (let ((result (length container1))) (and (<= result (capacity container1)) (dynamic_invariant3 result true false true))) :pattern ((length container1)))))
+(declare-const us Int)
 (assert (= (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))) (to_rep1 (rec__hnco__test2__v_type_owner__vector_type_owner__vector__capacity (us_split_discrs1 (rec__hnco__test2__v_type_owner__vector_type__hidden_vector (us_split_fields3 container)))))))
 (assert (not (in_range1 (to_rep (rec__hnco__test2__v_type_owner__vector_type__capacity (us_split_discrs3 container))))))
 (check-sat)

@@ -545,12 +545,23 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range2(w_get(container, witness1)))))
 
- (* File "a-cfdlli.ads", line 1118, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:count_type.
-  forall o1:count_type. forall temp___939:count_type. (((((to_rep(o) = 0) and
-  (o = o1)) and (temp___939 = o1)) and (temp___939 = no_element)) ->
-  ((((has_key(positions({ us_split_discrs1 = {
+logic container__split_fields : us_main_type
+
+logic o : count_type
+
+logic o1 : count_type
+
+logic temp___933 : count_type
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o = o1)
+
+axiom H2 : (temp___933 = o1)
+
+axiom H3 : (temp___933 = no_element)
+
+axiom H4 : (((has_key(positions({ us_split_discrs1 = {
   rec__instances__lists__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__instances__lists__list = container__split_fields
   } }), { us_split_fields3 = { rec__instances__lists__cursor__node = before }
@@ -561,7 +572,10 @@ goal WP_parameter_def :
   rec__instances__lists__list__capacity = container__split_discrs };
   us_split_fields1 = { rec__instances__lists__list = container__split_fields
   } }), { us_split_fields3 = { rec__instances__lists__cursor__node = position
-  } }) = true)) -> (((bool_eq4({ us_split_fields3 = {
+  } }) = true))
+
+ (* File "a-cfdlli.ads", line 1118, characters 0-0 *)
+goal WP_parameter_def : (((bool_eq4({ us_split_fields3 = {
   rec__instances__lists__cursor__node = before } }, { us_split_fields3 = {
   rec__instances__lists__cursor__node = position } }) = true) ->
   (((bool_eq4({ us_split_fields3 = { rec__instances__lists__cursor__node =
@@ -578,4 +592,4 @@ goal WP_parameter_def :
   (((0 + 0) + 1) <= 1)) and ((not (bool_eq4({ us_split_fields3 = {
   rec__instances__lists__cursor__node = before } }, { us_split_fields3 = {
   rec__instances__lists__cursor__node = no_element } }) = true)) ->
-  (((0 + 0) + 0) <= 1))))))))
+  (((0 + 0) + 0) <= 1)))))

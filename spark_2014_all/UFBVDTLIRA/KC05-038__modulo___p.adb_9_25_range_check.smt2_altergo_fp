@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -594,7 +594,7 @@ axiom bv_max_to_uint :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -778,12 +778,43 @@ axiom b__def_axiom : (b = v)
 
 axiom zs__def_axiom : (zs = tqtint(urem(sub(a, b), of_int(16))))
 
+logic o : int
+
+logic p__u__assume : t
+
+logic o1 : int
+
+logic p__v__assume : t
+
+logic p__xs__assume : t
+
+logic p__a__assume : t
+
+logic p__b__assume : t
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : ((o = x) and in_range_int(x))
+
+axiom H3 : (p__u__assume = of_int(o))
+
+axiom H4 : (p__u__assume = u)
+
+axiom H5 : in_range1(u)
+
+axiom H6 : ((o1 = y) and in_range_int(y))
+
+axiom H7 : (p__v__assume = of_int(o1))
+
+axiom H8 : (p__v__assume = v)
+
+axiom H9 : in_range1(v)
+
+axiom H10 : (tqtint(urem(sub(u, v), of_int(16))) = w)
+
+axiom H11 : in_range2(w)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall p__u__assume:t. forall o1:int. forall p__v__assume:t.
-  (in_range(x) -> (in_range(y) -> (((((o = x) and in_range_int(x)) and
-  (p__u__assume = of_int(o))) and (p__u__assume = u)) -> (in_range1(u) ->
-  (((((o1 = y) and in_range_int(y)) and (p__v__assume = of_int(o1))) and
-  (p__v__assume = v)) -> (in_range1(v) -> ((tqtint(urem(sub(u, v),
-  of_int(16))) = w) -> (in_range2(w) -> in_range3(urem(sub(u, v),
-  of_int(16))))))))))))
+goal WP_parameter_def : in_range3(urem(sub(u, v), of_int(16)))

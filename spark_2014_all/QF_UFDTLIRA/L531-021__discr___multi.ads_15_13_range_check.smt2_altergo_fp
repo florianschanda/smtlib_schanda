@@ -104,7 +104,11 @@ type count__ref = { count__content : count
 
 function count__ref___projection(a: count__ref) : count = (a).count__content
 
+logic temp___x_150 : int
+
+axiom H : in_range(temp___x_150)
+
+axiom H1 : (1 <= temp___x_150)
+
  (* File "multi.ads", line 7, characters 0-0 *)
-goal WP_parameter_def :
-  (forall temp___x_150:int. (in_range(temp___x_150) ->
-  ((1 <= temp___x_150) -> (0 <= 1))))
+goal WP_parameter_def : (0 <= 1)

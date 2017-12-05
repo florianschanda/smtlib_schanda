@@ -197,6 +197,7 @@
 (declare-const o (Array Int byte))
 (declare-const o1 (Array Int byte))
 (declare-const o2 t)
+(declare-const o3 Int)
 (declare-const result (Array Int byte))
 (declare-const arr1 (Array Int byte))
 (declare-const result1 (Array Int byte))

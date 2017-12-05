@@ -722,5 +722,7 @@ axiom is_empty__post_axiom1 :
   rec__hnco__test2__v_type_owner__vector_type_owner__vector = container1 }
   }) = 0)))
 
+logic us : int
+
  (* File "hnco-test2.ads", line 11, characters 0-0 *)
 goal WP_parameter_def : in_range(10)

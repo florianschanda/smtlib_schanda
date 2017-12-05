@@ -72,6 +72,7 @@
 (assert (forall ((x Int)) (! (= (= (g x) true) (= (f__2 x) true)) :pattern ((g x)))))
 (assert true)
 (assert (forall ((x Int)) (! (= (f__2 x) true) :pattern ((f__2 x)))))
+(declare-const temp___149 Int)
 (declare-const temp___148 Int)
 (assert (in_range1 temp___148))
 (assert (not (type_invariant1 temp___148)))

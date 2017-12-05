@@ -197,6 +197,7 @@
 (declare-const o1 character)
 (declare-const o2 Int)
 (declare-const o3 (Array Int character))
+(declare-const pack__a1__my_b__assume (Array Int integer))
 (declare-const result (Array Int character))
 (declare-const my_s11 (Array Int character))
 (assert (dynamic_property 1 2147483647 (to_rep1 glob__first) (to_rep1 glob__last)))

@@ -132,18 +132,18 @@ axiom Div_inf1 :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult1 :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -161,7 +161,7 @@ axiom mod_def :
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -354,7 +354,179 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic arr : (int,integer) farray
+
+logic i : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : integer
+
+logic o4 : (int,integer) farray
+
+logic o5 : int
+
+logic o6 : integer
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : (int,integer) farray
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic o13 : integer
+
+logic o14 : (int,integer) farray
+
+logic o15 : int
+
+logic o16 : integer
+
+logic o17 : int
+
+logic o18 : integer
+
+logic o19 : (int,integer) farray
+
+logic o20 : int
+
+logic o21 : integer
+
+logic o22 : int
+
+logic o23 : integer
+
+logic o24 : (int,integer) farray
+
+logic o25 : int
+
+logic o26 : integer
+
+logic o27 : int
+
+logic o28 : integer
+
+logic o29 : (int,integer) farray
+
+logic o30 : int
+
+logic o31 : integer
+
+logic o32 : int
+
+logic o33 : integer
+
+logic o34 : (int,integer) farray
+
+logic o35 : int
+
+logic o36 : integer
+
+logic o37 : int
+
+logic o38 : integer
+
+logic o39 : (int,integer) farray
+
+logic o40 : int
+
+logic o41 : integer
+
+logic o42 : int
+
+logic o43 : integer
+
+logic o44 : (int,integer) farray
+
+logic result : int
+
+logic i1 : int
+
+logic result1 : (int,integer) farray
+
+logic arr1 : (int,integer) farray
+
+logic result2 : int
+
+logic i2 : int
+
+logic result3 : (int,integer) farray
+
+logic arr2 : (int,integer) farray
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,integer) farray
+
+logic arr3 : (int,integer) farray
+
+logic result6 : int
+
+logic i4 : int
+
+logic result7 : (int,integer) farray
+
+logic arr4 : (int,integer) farray
+
+logic result8 : int
+
+logic i5 : int
+
+logic result9 : (int,integer) farray
+
+logic arr5 : (int,integer) farray
+
+logic result10 : int
+
+logic i6 : int
+
+logic result11 : (int,integer) farray
+
+logic arr6 : (int,integer) farray
+
+logic result12 : int
+
+logic i7 : int
+
+logic result13 : (int,integer) farray
+
+logic arr7 : (int,integer) farray
+
+logic result14 : int
+
+logic i8 : int
+
+logic result15 : (int,integer) farray
+
+logic arr8 : (int,integer) farray
+
+logic result16 : int
+
+logic i9 : int
+
+logic result17 : (int,integer) farray
+
+logic arr9 : (int,integer) farray
+
+logic result18 : int
+
+logic i10 : int
+
+axiom H : (result = i)
+
+axiom H1 : (i1 = 1)
+
  (* File "uninitialized.adb", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall result:int. forall i1:int. (((result = i) and
-  (i1 = 1)) -> (not (2 = 0))))
+goal WP_parameter_def : (not (2 = 0))

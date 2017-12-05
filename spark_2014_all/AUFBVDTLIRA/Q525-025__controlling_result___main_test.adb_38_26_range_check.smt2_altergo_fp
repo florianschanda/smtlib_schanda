@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -363,7 +363,7 @@ function string__ref___projection(a: string__ref) : us_t =
 
 type long_integer
 
-predicate in_range3(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range3(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq6 : int, int -> bool
@@ -416,7 +416,7 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type tstream_element_offsetB
 
-predicate in_range5(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range5(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq8 : int, int -> bool
@@ -458,7 +458,7 @@ axiom coerce_axiom2 :
 
 type stream_element_offset
 
-predicate in_range6(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range6(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq9 : int, int -> bool
@@ -592,18 +592,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1840,7 +1840,7 @@ axiom null_string__post_axiom1 :
   this1; rec__ext__1 = this2 }; attr__tag1 = this3 })) = elements2({
   us_split_fields3 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__1 = this2 };
-  attr__tag1 = this3 })) and dynamic_property1((-9223372036854775808),
+  attr__tag1 = this3 })) and dynamic_property1((- 9223372036854775808),
   9223372036854775807, to_rep2(first2((null_string2({ us_split_fields3 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__1 = this2 }; attr__tag1 = this3 })).rt1)),
@@ -1854,7 +1854,7 @@ axiom null_string__post__dispatch_axiom1 :
   forall this2:us_private. forall this3:int [null_string3(attr__tag2, {
   us_split_fields3 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__1 = this2 };
-  attr__tag1 = this3 })]. dynamic_property1((-9223372036854775808),
+  attr__tag1 = this3 })]. dynamic_property1((- 9223372036854775808),
   9223372036854775807, to_rep2(first2((null_string3(attr__tag2, {
   us_split_fields3 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__1 = this2 };
@@ -1896,7 +1896,7 @@ axiom convert__post_axiom1 :
   rt = in_string1 })) = elements2({ us_split_fields3 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__1 = this2 }; attr__tag1 = this3 })) and
-  dynamic_property1((-9223372036854775808), 9223372036854775807,
+  dynamic_property1((- 9223372036854775808), 9223372036854775807,
   to_rep2(first2((convert2({ us_split_fields3 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__1 = this2 }; attr__tag1 = this3 }, { elts = in_string;
@@ -1913,7 +1913,7 @@ axiom convert__post__dispatch_axiom1 :
   [convert3(attr__tag2, { us_split_fields3 = {
   rec__fixed_stream__object__width = this; rec__fixed_stream__object__name =
   this1; rec__ext__1 = this2 }; attr__tag1 = this3 }, { elts = in_string;
-  rt = in_string1 })]. dynamic_property1((-9223372036854775808),
+  rt = in_string1 })]. dynamic_property1((- 9223372036854775808),
   9223372036854775807, to_rep2(first2((convert3(attr__tag2, {
   us_split_fields3 = { rec__fixed_stream__object__width = this;
   rec__fixed_stream__object__name = this1; rec__ext__1 = this2 };
@@ -2043,70 +2043,369 @@ axiom temp___String_Literal_281__def_axiom :
   (to_rep((temp___String_Literal_281(void)[2])) = 111)) and
   (to_rep((temp___String_Literal_281(void)[3])) = 111))
 
- (* File "main_test.adb", line 8, characters 0-0 *)
-goal WP_parameter_def :
-  (forall field_10__split_fields:natural.
-  forall field_10__split_fields1:(int,character) farray.
-  forall field_10__split_fields2:us_private.
-  forall field_06__split_fields:natural.
-  forall field_06__split_fields1:(int,character) farray.
-  forall field_06__split_fields2:us_private.
-  forall stream_10__split_fields:natural.
-  forall stream_10__split_fields1:(int,character) farray.
-  forall stream_10__split_fields2:us_private.
-  forall stream_06__split_fields:natural.
-  forall stream_06__split_fields1:(int,character) farray.
-  forall stream_06__split_fields2:us_private.
-  forall ref_string:(int,character) farray.
-  forall short_string:(int,character) farray. forall len_n:int.
-  forall len_i:int. forall len_l:int. forall total_len:int.
-  forall total_string:(int,character) farray.
-  forall total_stream:(int,stream_element) farray.
-  forall main_test__field_10__assume:natural.
-  forall main_test__field_10__assume1:(int,character) farray.
-  forall main_test__field_10__assume2:us_private.
-  forall main_test__field_10__assume3:int.
-  forall main_test__field_06__assume:natural.
-  forall main_test__field_06__assume1:(int,character) farray.
-  forall main_test__field_06__assume2:us_private.
-  forall main_test__field_06__assume3:int.
-  forall main_test__stream_10__assume:natural.
-  forall main_test__stream_10__assume1:(int,character) farray.
-  forall main_test__stream_10__assume2:us_private.
-  forall main_test__stream_10__assume3:int.
-  forall main_test__stream_06__assume:natural.
-  forall main_test__stream_06__assume1:(int,character) farray.
-  forall main_test__stream_06__assume2:us_private.
-  forall main_test__stream_06__assume3:int.
-  forall temp___284:(int,character) farray. forall temp___2841:t.
-  forall temp___283:(int,character) farray. forall temp___2831:t.
-  forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int.
-  forall main_test__total_string__assume:(int,character) farray.
-  forall main_test__total_string__assume1:t.
-  forall temp___287:(int,stream_element) farray. forall temp___2871:t2.
-  forall temp___286:(int,stream_element) farray. forall temp___2861:t2.
-  forall o6:int. forall o7:int. forall o8:int. forall o9:int. forall o10:int.
-  forall o11:int.
-  forall main_test__total_stream__assume:(int,stream_element) farray.
-  forall main_test__total_stream__assume1:t2. forall o12:int. forall o13:int.
-  forall o14:int. forall o15:int. forall o16:int. forall result:natural.
-  forall result1:(int,character) farray. forall result2:us_private.
-  forall field_10__split_fields3:natural.
-  forall field_10__split_fields4:(int,character) farray.
-  forall field_10__split_fields5:us_private. forall result3:natural.
-  forall result4:(int,character) farray. forall result5:us_private.
-  forall field_06__split_fields3:us_split_fields.
-  forall result6:us_split_fields__ref1.
-  forall stream_10__split_fields3:us_split_fields2.
-  forall result7:us_split_fields__ref1.
-  forall stream_06__split_fields3:us_split_fields2. forall result8:map__ref.
-  forall ref_string1:(int,character) farray. forall result9:map__ref.
-  forall short_string1:(int,character) farray. forall result10:map__ref.
-  forall total_string1:(int,character) farray. forall result11:map__ref1.
-  forall total_stream1:(int,stream_element) farray. forall result12:int__ref.
-  forall len_n1:int. forall result13:int__ref. forall len_i1:int. (((({
-  us_split_fields1 = { rec__fixed_string__object__width =
+logic field_10__split_fields : natural
+
+logic field_10__split_fields1 : (int,character) farray
+
+logic field_10__split_fields2 : us_private
+
+logic field_06__split_fields : natural
+
+logic field_06__split_fields1 : (int,character) farray
+
+logic field_06__split_fields2 : us_private
+
+logic stream_10__split_fields : natural
+
+logic stream_10__split_fields1 : (int,character) farray
+
+logic stream_10__split_fields2 : us_private
+
+logic stream_06__split_fields : natural
+
+logic stream_06__split_fields1 : (int,character) farray
+
+logic stream_06__split_fields2 : us_private
+
+logic ref_string : (int,character) farray
+
+logic short_string : (int,character) farray
+
+logic len_n : int
+
+logic len_i : int
+
+logic len_l : int
+
+logic total_len : int
+
+logic total_string : (int,character) farray
+
+logic total_stream : (int,stream_element) farray
+
+logic main_test__field_10__assume : natural
+
+logic main_test__field_10__assume1 : (int,character) farray
+
+logic main_test__field_10__assume2 : us_private
+
+logic main_test__field_10__assume3 : int
+
+logic main_test__field_06__assume : natural
+
+logic main_test__field_06__assume1 : (int,character) farray
+
+logic main_test__field_06__assume2 : us_private
+
+logic main_test__field_06__assume3 : int
+
+logic main_test__stream_10__assume : natural
+
+logic main_test__stream_10__assume1 : (int,character) farray
+
+logic main_test__stream_10__assume2 : us_private
+
+logic main_test__stream_10__assume3 : int
+
+logic main_test__stream_06__assume : natural
+
+logic main_test__stream_06__assume1 : (int,character) farray
+
+logic main_test__stream_06__assume2 : us_private
+
+logic main_test__stream_06__assume3 : int
+
+logic temp___284 : (int,character) farray
+
+logic temp___2841 : t
+
+logic temp___283 : (int,character) farray
+
+logic temp___2831 : t
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic main_test__total_string__assume : (int,character) farray
+
+logic main_test__total_string__assume1 : t
+
+logic temp___287 : (int,stream_element) farray
+
+logic temp___2871 : t2
+
+logic temp___286 : (int,stream_element) farray
+
+logic temp___2861 : t2
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic o11 : int
+
+logic main_test__total_stream__assume : (int,stream_element) farray
+
+logic main_test__total_stream__assume1 : t2
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : int
+
+logic o21 : int
+
+logic o22 : int
+
+logic o23 : int
+
+logic o24 : int
+
+logic o25 : int
+
+logic o26 : int
+
+logic temp___290 : (int,character) farray
+
+logic temp___2901 : t
+
+logic temp___289 : (int,character) farray
+
+logic temp___2891 : t
+
+logic o27 : int
+
+logic o28 : int
+
+logic o29 : int
+
+logic o30 : int
+
+logic o31 : int
+
+logic o32 : int
+
+logic temp___291 : (int,character) farray
+
+logic temp___2911 : t
+
+logic o33 : (int,character) farray
+
+logic o34 : t
+
+logic o35 : (int,character) farray
+
+logic o36 : int
+
+logic o37 : int
+
+logic o38 : int
+
+logic o39 : int
+
+logic o40 : int
+
+logic o41 : int
+
+logic temp___293 : (int,stream_element) farray
+
+logic temp___2931 : t2
+
+logic temp___292 : (int,stream_element) farray
+
+logic temp___2921 : t2
+
+logic o42 : int
+
+logic o43 : int
+
+logic o44 : int
+
+logic o45 : int
+
+logic o46 : int
+
+logic o47 : int
+
+logic temp___294 : (int,stream_element) farray
+
+logic temp___2941 : t2
+
+logic o48 : (int,stream_element) farray
+
+logic o49 : t2
+
+logic o50 : (int,stream_element) farray
+
+logic o51 : int
+
+logic o52 : int
+
+logic o53 : int
+
+logic o54 : int
+
+logic o55 : int
+
+logic o56 : int
+
+logic o57 : int
+
+logic o58 : int
+
+logic o59 : int
+
+logic o60 : int
+
+logic result : natural
+
+logic result1 : (int,character) farray
+
+logic result2 : us_private
+
+logic field_10__split_fields3 : natural
+
+logic field_10__split_fields4 : (int,character) farray
+
+logic field_10__split_fields5 : us_private
+
+logic result3 : natural
+
+logic result4 : (int,character) farray
+
+logic result5 : us_private
+
+logic field_06__split_fields3 : natural
+
+logic field_06__split_fields4 : (int,character) farray
+
+logic field_06__split_fields5 : us_private
+
+logic result6 : natural
+
+logic result7 : (int,character) farray
+
+logic result8 : us_private
+
+logic stream_10__split_fields3 : natural
+
+logic stream_10__split_fields4 : (int,character) farray
+
+logic stream_10__split_fields5 : us_private
+
+logic result9 : natural
+
+logic result10 : (int,character) farray
+
+logic result11 : us_private
+
+logic stream_06__split_fields3 : natural
+
+logic stream_06__split_fields4 : (int,character) farray
+
+logic stream_06__split_fields5 : us_private
+
+logic result12 : (int,character) farray
+
+logic ref_string1 : (int,character) farray
+
+logic result13 : (int,character) farray
+
+logic short_string1 : (int,character) farray
+
+logic result14 : (int,character) farray
+
+logic total_string1 : (int,character) farray
+
+logic result15 : (int,stream_element) farray
+
+logic total_stream1 : (int,stream_element) farray
+
+logic result16 : int
+
+logic len_n1 : int
+
+logic result17 : int
+
+logic len_i1 : int
+
+logic result18 : int
+
+logic len_l1 : int
+
+logic result19 : int
+
+logic len_n2 : int
+
+logic result20 : int
+
+logic len_i2 : int
+
+logic result21 : int
+
+logic len_l2 : int
+
+logic result22 : int
+
+logic total_len1 : int
+
+logic result23 : (int,character) farray
+
+logic total_string2 : (int,character) farray
+
+logic result24 : int
+
+logic total_len2 : int
+
+logic result25 : (int,stream_element) farray
+
+logic total_stream2 : (int,stream_element) farray
+
+logic result26 : int
+
+logic len_n3 : int
+
+logic result27 : int
+
+logic len_i3 : int
+
+logic result28 : int
+
+logic len_l3 : int
+
+logic result29 : int
+
+logic len_n4 : int
+
+axiom H : (({ us_split_fields1 = { rec__fixed_string__object__width =
   main_test__field_10__assume; rec__fixed_string__object__name =
   main_test__field_10__assume1; rec__ext__ = main_test__field_10__assume2 };
   attr__tag = main_test__field_10__assume3 } = create(10, { elts =
@@ -2114,172 +2413,306 @@ goal WP_parameter_def :
   us_split_fields1 = { rec__fixed_string__object__width =
   main_test__field_10__assume; rec__fixed_string__object__name =
   main_test__field_10__assume1; rec__ext__ = main_test__field_10__assume2 };
-  attr__tag = main_test__field_10__assume3 }) = 10)) and
-  ((((result = field_10__split_fields) and
+  attr__tag = main_test__field_10__assume3 }) = 10))
+
+axiom H1 : ((result = field_10__split_fields) and
   ((result1 = field_10__split_fields1) and
-  (result2 = field_10__split_fields2))) and
-  ((main_test__field_10__assume = field_10__split_fields3) and
-  ((main_test__field_10__assume1 = field_10__split_fields4) and
-  (main_test__field_10__assume2 = field_10__split_fields5)))) and
-  (field_10__attr__tag = us_tag))) -> (((({ us_split_fields1 = {
-  rec__fixed_string__object__width = main_test__field_06__assume;
-  rec__fixed_string__object__name = main_test__field_06__assume1;
-  rec__ext__ = main_test__field_06__assume2 }; attr__tag =
-  main_test__field_06__assume3 } = create(6, { elts =
+  (result2 = field_10__split_fields2)))
+
+axiom H2 : ((field_10__split_fields3 = main_test__field_10__assume) and
+  ((field_10__split_fields4 = main_test__field_10__assume1) and
+  (field_10__split_fields5 = main_test__field_10__assume2)))
+
+axiom H3 : (field_10__attr__tag = us_tag)
+
+axiom H4 : (({ us_split_fields1 = { rec__fixed_string__object__width =
+  main_test__field_06__assume; rec__fixed_string__object__name =
+  main_test__field_06__assume1; rec__ext__ = main_test__field_06__assume2 };
+  attr__tag = main_test__field_06__assume3 } = create(6, { elts =
   temp___String_Literal_276(void); rt = mk(1, 5) })) and (elements({
   us_split_fields1 = { rec__fixed_string__object__width =
   main_test__field_06__assume; rec__fixed_string__object__name =
   main_test__field_06__assume1; rec__ext__ = main_test__field_06__assume2 };
-  attr__tag = main_test__field_06__assume3 }) = 6)) and
-  ((((result3 = field_06__split_fields) and
+  attr__tag = main_test__field_06__assume3 }) = 6))
+
+axiom H5 : ((result3 = field_06__split_fields) and
   ((result4 = field_06__split_fields1) and
-  (result5 = field_06__split_fields2))) and (field_06__split_fields3 = {
-  rec__fixed_string__object__width = main_test__field_06__assume;
-  rec__fixed_string__object__name = main_test__field_06__assume1;
-  rec__ext__ = main_test__field_06__assume2 })) and
-  (field_06__attr__tag = us_tag))) -> (((({ us_split_fields3 = {
-  rec__fixed_stream__object__width = main_test__stream_10__assume;
-  rec__fixed_stream__object__name = main_test__stream_10__assume1;
-  rec__ext__1 = main_test__stream_10__assume2 }; attr__tag1 =
-  main_test__stream_10__assume3 } = create2(10, { elts =
+  (result5 = field_06__split_fields2)))
+
+axiom H6 : ((field_06__split_fields3 = main_test__field_06__assume) and
+  ((field_06__split_fields4 = main_test__field_06__assume1) and
+  (field_06__split_fields5 = main_test__field_06__assume2)))
+
+axiom H7 : (field_06__attr__tag = us_tag)
+
+axiom H8 : (({ us_split_fields3 = { rec__fixed_stream__object__width =
+  main_test__stream_10__assume; rec__fixed_stream__object__name =
+  main_test__stream_10__assume1; rec__ext__1 = main_test__stream_10__assume2
+  }; attr__tag1 = main_test__stream_10__assume3 } = create2(10, { elts =
   temp___String_Literal_277(void); rt = mk(1, 4) })) and (elements2({
   us_split_fields3 = { rec__fixed_stream__object__width =
   main_test__stream_10__assume; rec__fixed_stream__object__name =
   main_test__stream_10__assume1; rec__ext__1 = main_test__stream_10__assume2
-  }; attr__tag1 = main_test__stream_10__assume3 }) = 10)) and (((result6 = {
-  us_split_fields__content1 = { rec__fixed_stream__object__width =
-  stream_10__split_fields; rec__fixed_stream__object__name =
-  stream_10__split_fields1; rec__ext__1 = stream_10__split_fields2 } }) and
-  (stream_10__split_fields3 = { rec__fixed_stream__object__width =
-  main_test__stream_10__assume; rec__fixed_stream__object__name =
-  main_test__stream_10__assume1; rec__ext__1 = main_test__stream_10__assume2
-  })) and (stream_10__attr__tag = us_tag1))) -> (((({ us_split_fields3 = {
-  rec__fixed_stream__object__width = main_test__stream_06__assume;
-  rec__fixed_stream__object__name = main_test__stream_06__assume1;
-  rec__ext__1 = main_test__stream_06__assume2 }; attr__tag1 =
-  main_test__stream_06__assume3 } = create2(6, { elts =
+  }; attr__tag1 = main_test__stream_10__assume3 }) = 10))
+
+axiom H9 : ((result6 = stream_10__split_fields) and
+  ((result7 = stream_10__split_fields1) and
+  (result8 = stream_10__split_fields2)))
+
+axiom H10 : ((stream_10__split_fields3 = main_test__stream_10__assume) and
+  ((stream_10__split_fields4 = main_test__stream_10__assume1) and
+  (stream_10__split_fields5 = main_test__stream_10__assume2)))
+
+axiom H11 : (stream_10__attr__tag = us_tag1)
+
+axiom H12 : (({ us_split_fields3 = { rec__fixed_stream__object__width =
+  main_test__stream_06__assume; rec__fixed_stream__object__name =
+  main_test__stream_06__assume1; rec__ext__1 = main_test__stream_06__assume2
+  }; attr__tag1 = main_test__stream_06__assume3 } = create2(6, { elts =
   temp___String_Literal_278(void); rt = mk(1, 5) })) and (elements2({
   us_split_fields3 = { rec__fixed_stream__object__width =
   main_test__stream_06__assume; rec__fixed_stream__object__name =
   main_test__stream_06__assume1; rec__ext__1 = main_test__stream_06__assume2
-  }; attr__tag1 = main_test__stream_06__assume3 }) = 6)) and (((result7 = {
-  us_split_fields__content1 = { rec__fixed_stream__object__width =
-  stream_06__split_fields; rec__fixed_stream__object__name =
-  stream_06__split_fields1; rec__ext__1 = stream_06__split_fields2 } }) and
-  (stream_06__split_fields3 = { rec__fixed_stream__object__width =
-  main_test__stream_06__assume; rec__fixed_stream__object__name =
-  main_test__stream_06__assume1; rec__ext__1 = main_test__stream_06__assume2
-  })) and (stream_06__attr__tag = us_tag1))) -> ((((result8 = {
-  map__content = ref_string }) and
-  (ref_string1 = temp___String_Literal_279(void))) and
-  ((to_rep1(ref_string__first) = to_rep1(first(mk(1, 12)))) and
-  (to_rep1(ref_string__last) = to_rep1(last(mk(1, 12)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(ref_string__first),
-  to_rep1(ref_string__last)) -> ((((result9 = { map__content = short_string
-  }) and (short_string1 = temp___String_Literal_281(void))) and
-  ((to_rep1(short_string__first) = to_rep1(first(mk(1, 3)))) and
-  (to_rep1(short_string__last) = to_rep1(last(mk(1, 3)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(short_string__first),
-  to_rep1(short_string__last)) -> (((0 <= 2147483647) -> in_range4(len_n)) ->
-  ((((-2147483648) <= 2147483647) -> in_range(len_i)) ->
-  ((((-9223372036854775808) <= 9223372036854775807) -> in_range3(len_l)) ->
-  (((0 <= 2147483647) -> in_range4(total_len)) -> ((((({ elts = temp___284;
-  rt = temp___2841 } = null_string({ us_split_fields1 =
-  field_06__split_fields3; attr__tag = field_06__attr__tag })) and
-  (dynamic_property(1, 2147483647, to_rep1(first(temp___2841)),
-  to_rep1(last(temp___2841))) and (length({ elts = temp___284; rt =
-  temp___2841 }) = elements({ us_split_fields1 = field_06__split_fields3;
-  attr__tag = field_06__attr__tag })))) and ((({ elts = temp___283; rt =
-  temp___2831 } = null_string({ us_split_fields1 = {
-  rec__fixed_string__object__width = field_10__split_fields3;
-  rec__fixed_string__object__name = field_10__split_fields4; rec__ext__ =
-  field_10__split_fields5 }; attr__tag = field_10__attr__tag })) and
-  (dynamic_property(1, 2147483647, to_rep1(first(temp___2831)),
-  to_rep1(last(temp___2831))) and (length({ elts = temp___283; rt =
-  temp___2831 }) = elements({ us_split_fields1 = {
-  rec__fixed_string__object__width = field_10__split_fields3;
-  rec__fixed_string__object__name = field_10__split_fields4; rec__ext__ =
-  field_10__split_fields5 }; attr__tag = field_10__attr__tag })))) and
-  (((length({ elts = temp___283; rt = temp___2831 }) = 0) and
-  ((temp___284 = main_test__total_string__assume) and
-  (mk(to_rep1(first(temp___2841)),
-  to_rep1(last(temp___2841))) = main_test__total_string__assume1))) or
-  ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) and
-  ((((((((to_rep1(first(temp___2841)) <= to_rep1(last(temp___2841))) and
-  (o = ((to_rep1(last(temp___2841)) - to_rep1(first(temp___2841))) + 1))) or
-  ((not (to_rep1(first(temp___2841)) <= to_rep1(last(temp___2841)))) and
-  (o = 0))) and
-  ((((to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831))) and
-  (o1 = ((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1))) or
-  ((not (to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831)))) and
-  (o1 = 0))) and (o2 = (o1 + o)))) and
-  (o3 = (to_rep1(first(temp___2831)) + o2))) and (o4 = (o3 - 1))) and
-  ((o5 = o4) and in_range1(o4))) and ((concat(temp___283,
-  to_rep1(first(temp___2831)), to_rep1(last(temp___2831)), temp___284,
-  to_rep1(first(temp___2841)),
-  to_rep1(last(temp___2841))) = main_test__total_string__assume) and
-  (mk(to_rep1(first(temp___2831)),
-  o5) = main_test__total_string__assume1))))))) and (((result10 = {
-  map__content = total_string }) and
-  (total_string1 = main_test__total_string__assume)) and
-  ((to_rep1(total_string__first) = to_rep1(first(main_test__total_string__assume1))) and
-  (to_rep1(total_string__last) = to_rep1(last(main_test__total_string__assume1)))))) ->
-  (dynamic_property(1, 2147483647, to_rep1(total_string__first),
-  to_rep1(total_string__last)) -> ((((({ elts1 = temp___287; rt1 =
-  temp___2871 } = null_string2({ us_split_fields3 = stream_06__split_fields3;
-  attr__tag1 = stream_06__attr__tag })) and
-  (dynamic_property1((-9223372036854775808), 9223372036854775807,
-  to_rep2(first2(temp___2871)), to_rep2(last2(temp___2871))) and (length1({
-  elts1 = temp___287; rt1 = temp___2871 }) = elements2({ us_split_fields3 =
-  stream_06__split_fields3; attr__tag1 = stream_06__attr__tag })))) and ((({
-  elts1 = temp___286; rt1 = temp___2861 } = null_string2({ us_split_fields3 =
-  stream_10__split_fields3; attr__tag1 = stream_10__attr__tag })) and
-  (dynamic_property1((-9223372036854775808), 9223372036854775807,
-  to_rep2(first2(temp___2861)), to_rep2(last2(temp___2861))) and (length1({
-  elts1 = temp___286; rt1 = temp___2861 }) = elements2({ us_split_fields3 =
-  stream_10__split_fields3; attr__tag1 = stream_10__attr__tag })))) and
-  (((length1({ elts1 = temp___286; rt1 = temp___2861 }) = 0) and
-  ((temp___287 = main_test__total_stream__assume) and
-  (mk1(to_rep2(first2(temp___2871)),
-  to_rep2(last2(temp___2871))) = main_test__total_stream__assume1))) or
-  ((not (length1({ elts1 = temp___286; rt1 = temp___2861 }) = 0)) and
-  ((((((((to_rep2(first2(temp___2871)) <= to_rep2(last2(temp___2871))) and
-  (o6 = ((to_rep2(last2(temp___2871)) - to_rep2(first2(temp___2871))) + 1))) or
-  ((not (to_rep2(first2(temp___2871)) <= to_rep2(last2(temp___2871)))) and
-  (o6 = 0))) and
-  ((((to_rep2(first2(temp___2861)) <= to_rep2(last2(temp___2861))) and
-  (o7 = ((to_rep2(last2(temp___2861)) - to_rep2(first2(temp___2861))) + 1))) or
-  ((not (to_rep2(first2(temp___2861)) <= to_rep2(last2(temp___2861)))) and
-  (o7 = 0))) and (o8 = (o7 + o6)))) and
-  (o9 = (to_rep2(first2(temp___2861)) + o8))) and (o10 = (o9 - 1))) and
-  ((o11 = o10) and in_range6(o10))) and ((concat1(temp___286,
-  to_rep2(first2(temp___2861)), to_rep2(last2(temp___2861)), temp___287,
-  to_rep2(first2(temp___2871)),
-  to_rep2(last2(temp___2871))) = main_test__total_stream__assume) and
-  (mk1(to_rep2(first2(temp___2861)),
-  o11) = main_test__total_stream__assume1))))))) and (((result11 = {
-  map__content1 = total_stream }) and
-  (total_stream1 = main_test__total_stream__assume)) and
-  ((to_rep2(total_stream__first) = to_rep2(first2(main_test__total_stream__assume1))) and
-  (to_rep2(total_stream__last) = to_rep2(last2(main_test__total_stream__assume1)))))) ->
-  (dynamic_property1((-9223372036854775808), 9223372036854775807,
-  to_rep2(total_stream__first), to_rep2(total_stream__last)) -> ((elements({
+  }; attr__tag1 = main_test__stream_06__assume3 }) = 6))
+
+axiom H13 : ((result9 = stream_06__split_fields) and
+  ((result10 = stream_06__split_fields1) and
+  (result11 = stream_06__split_fields2)))
+
+axiom H14 : ((stream_06__split_fields3 = main_test__stream_06__assume) and
+  ((stream_06__split_fields4 = main_test__stream_06__assume1) and
+  (stream_06__split_fields5 = main_test__stream_06__assume2)))
+
+axiom H15 : (stream_06__attr__tag = us_tag1)
+
+axiom H16 : (result12 = ref_string)
+
+axiom H17 : (ref_string1 = temp___String_Literal_279(void))
+
+axiom H18 : (to_rep1(ref_string__first) = to_rep1(first(mk(1, 12))))
+
+axiom H19 : (to_rep1(ref_string__last) = to_rep1(last(mk(1, 12))))
+
+axiom H20 : dynamic_property(1, 2147483647, to_rep1(ref_string__first),
+  to_rep1(ref_string__last))
+
+axiom H21 : (result13 = short_string)
+
+axiom H22 : (short_string1 = temp___String_Literal_281(void))
+
+axiom H23 : (to_rep1(short_string__first) = to_rep1(first(mk(1, 3))))
+
+axiom H24 : (to_rep1(short_string__last) = to_rep1(last(mk(1, 3))))
+
+axiom H25 : dynamic_property(1, 2147483647, to_rep1(short_string__first),
+  to_rep1(short_string__last))
+
+axiom H26 : ((0 <= 2147483647) -> in_range4(len_n))
+
+axiom H27 : (((- 2147483648) <= 2147483647) -> in_range(len_i))
+
+axiom H28 : (((- 9223372036854775808) <= 9223372036854775807) ->
+  in_range3(len_l))
+
+axiom H29 : ((0 <= 2147483647) -> in_range4(total_len))
+
+axiom H30 : (({ elts = temp___284; rt = temp___2841 } = null_string({
+  us_split_fields1 = { rec__fixed_string__object__width =
+  field_06__split_fields3; rec__fixed_string__object__name =
+  field_06__split_fields4; rec__ext__ = field_06__split_fields5 };
+  attr__tag = field_06__attr__tag })) and (dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2841)), to_rep1(last(temp___2841))) and (length({
+  elts = temp___284; rt = temp___2841 }) = elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = field_06__split_fields3;
+  rec__fixed_string__object__name = field_06__split_fields4; rec__ext__ =
+  field_06__split_fields5 }; attr__tag = field_06__attr__tag }))))
+
+axiom H31 : (({ elts = temp___283; rt = temp___2831 } = null_string({
   us_split_fields1 = { rec__fixed_string__object__width =
   field_10__split_fields3; rec__fixed_string__object__name =
   field_10__split_fields4; rec__ext__ = field_10__split_fields5 };
-  attr__tag = field_10__attr__tag }) = 10) -> ((elements({ us_split_fields1 =
-  field_06__split_fields3; attr__tag = field_06__attr__tag }) = 6) ->
-  ((((((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) and
-  (o12 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1))) or
-  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) and
-  (o12 = 0))) and ((o13 = o12) and in_range4(o12))) and ((result12 = {
-  int__content = len_n }) and (len_n1 = o13))) ->
-  ((((((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) and
-  (o14 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1))) or
-  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) and
-  (o14 = 0))) and ((o15 = o14) and in_range(o14))) and ((result13 = {
-  int__content = len_i }) and (len_i1 = o15))) ->
-  ((((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) and
-  (o16 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1))) or
-  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) and
-  (o16 = 0))) -> in_range3(o16)))))))))))))))))))))))
+  attr__tag = field_10__attr__tag })) and (dynamic_property(1, 2147483647,
+  to_rep1(first(temp___2831)), to_rep1(last(temp___2831))) and (length({
+  elts = temp___283; rt = temp___2831 }) = elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = field_10__split_fields3;
+  rec__fixed_string__object__name = field_10__split_fields4; rec__ext__ =
+  field_10__split_fields5 }; attr__tag = field_10__attr__tag }))))
+
+axiom H32 : ((length({ elts = temp___283; rt = temp___2831 }) = 0) ->
+  ((main_test__total_string__assume = temp___284) and
+  (main_test__total_string__assume1 = mk(to_rep1(first(temp___2841)),
+  to_rep1(last(temp___2841))))))
+
+axiom H33 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((to_rep1(first(temp___2841)) <= to_rep1(last(temp___2841))) ->
+  (o = ((to_rep1(last(temp___2841)) - to_rep1(first(temp___2841))) + 1))))
+
+axiom H34 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((not (to_rep1(first(temp___2841)) <= to_rep1(last(temp___2841)))) ->
+  (o = 0)))
+
+axiom H35 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831))) ->
+  (o1 = ((to_rep1(last(temp___2831)) - to_rep1(first(temp___2831))) + 1))))
+
+axiom H36 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((not (to_rep1(first(temp___2831)) <= to_rep1(last(temp___2831)))) ->
+  (o1 = 0)))
+
+axiom H37 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  (o2 = (o1 + o)))
+
+axiom H38 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  (o3 = (to_rep1(first(temp___2831)) + o2)))
+
+axiom H39 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  (o4 = (o3 - 1)))
+
+axiom H40 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((o5 = o4) and in_range1(o4)))
+
+axiom H41 : ((not (length({ elts = temp___283; rt = temp___2831 }) = 0)) ->
+  ((main_test__total_string__assume = concat(temp___283,
+  to_rep1(first(temp___2831)), to_rep1(last(temp___2831)), temp___284,
+  to_rep1(first(temp___2841)), to_rep1(last(temp___2841)))) and
+  (main_test__total_string__assume1 = mk(to_rep1(first(temp___2831)), o5))))
+
+axiom H42 : (result14 = total_string)
+
+axiom H43 : (total_string1 = main_test__total_string__assume)
+
+axiom H44 :
+  (to_rep1(total_string__first) = to_rep1(first(main_test__total_string__assume1)))
+
+axiom H45 :
+  (to_rep1(total_string__last) = to_rep1(last(main_test__total_string__assume1)))
+
+axiom H46 : dynamic_property(1, 2147483647, to_rep1(total_string__first),
+  to_rep1(total_string__last))
+
+axiom H47 : (({ elts1 = temp___287; rt1 = temp___2871 } = null_string2({
+  us_split_fields3 = { rec__fixed_stream__object__width =
+  stream_06__split_fields3; rec__fixed_stream__object__name =
+  stream_06__split_fields4; rec__ext__1 = stream_06__split_fields5 };
+  attr__tag1 = stream_06__attr__tag })) and
+  (dynamic_property1((- 9223372036854775808), 9223372036854775807,
+  to_rep2(first2(temp___2871)), to_rep2(last2(temp___2871))) and (length1({
+  elts1 = temp___287; rt1 = temp___2871 }) = elements2({ us_split_fields3 = {
+  rec__fixed_stream__object__width = stream_06__split_fields3;
+  rec__fixed_stream__object__name = stream_06__split_fields4; rec__ext__1 =
+  stream_06__split_fields5 }; attr__tag1 = stream_06__attr__tag }))))
+
+axiom H48 : (({ elts1 = temp___286; rt1 = temp___2861 } = null_string2({
+  us_split_fields3 = { rec__fixed_stream__object__width =
+  stream_10__split_fields3; rec__fixed_stream__object__name =
+  stream_10__split_fields4; rec__ext__1 = stream_10__split_fields5 };
+  attr__tag1 = stream_10__attr__tag })) and
+  (dynamic_property1((- 9223372036854775808), 9223372036854775807,
+  to_rep2(first2(temp___2861)), to_rep2(last2(temp___2861))) and (length1({
+  elts1 = temp___286; rt1 = temp___2861 }) = elements2({ us_split_fields3 = {
+  rec__fixed_stream__object__width = stream_10__split_fields3;
+  rec__fixed_stream__object__name = stream_10__split_fields4; rec__ext__1 =
+  stream_10__split_fields5 }; attr__tag1 = stream_10__attr__tag }))))
+
+axiom H49 : ((length1({ elts1 = temp___286; rt1 = temp___2861 }) = 0) ->
+  ((main_test__total_stream__assume = temp___287) and
+  (main_test__total_stream__assume1 = mk1(to_rep2(first2(temp___2871)),
+  to_rep2(last2(temp___2871))))))
+
+axiom H50 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) ->
+  ((to_rep2(first2(temp___2871)) <= to_rep2(last2(temp___2871))) ->
+  (o6 = ((to_rep2(last2(temp___2871)) - to_rep2(first2(temp___2871))) + 1))))
+
+axiom H51 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) ->
+  ((not (to_rep2(first2(temp___2871)) <= to_rep2(last2(temp___2871)))) ->
+  (o6 = 0)))
+
+axiom H52 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) ->
+  ((to_rep2(first2(temp___2861)) <= to_rep2(last2(temp___2861))) ->
+  (o7 = ((to_rep2(last2(temp___2861)) - to_rep2(first2(temp___2861))) + 1))))
+
+axiom H53 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) ->
+  ((not (to_rep2(first2(temp___2861)) <= to_rep2(last2(temp___2861)))) ->
+  (o7 = 0)))
+
+axiom H54 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) -> (o8 = (o7 + o6)))
+
+axiom H55 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) -> (o9 = (to_rep2(first2(temp___2861)) + o8)))
+
+axiom H56 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) -> (o10 = (o9 - 1)))
+
+axiom H57 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) -> ((o11 = o10) and in_range6(o10)))
+
+axiom H58 : ((not (length1({ elts1 = temp___286; rt1 = temp___2861
+  }) = 0)) -> ((main_test__total_stream__assume = concat1(temp___286,
+  to_rep2(first2(temp___2861)), to_rep2(last2(temp___2861)), temp___287,
+  to_rep2(first2(temp___2871)), to_rep2(last2(temp___2871)))) and
+  (main_test__total_stream__assume1 = mk1(to_rep2(first2(temp___2861)),
+  o11))))
+
+axiom H59 : (result15 = total_stream)
+
+axiom H60 : (total_stream1 = main_test__total_stream__assume)
+
+axiom H61 :
+  (to_rep2(total_stream__first) = to_rep2(first2(main_test__total_stream__assume1)))
+
+axiom H62 :
+  (to_rep2(total_stream__last) = to_rep2(last2(main_test__total_stream__assume1)))
+
+axiom H63 : dynamic_property1((- 9223372036854775808), 9223372036854775807,
+  to_rep2(total_stream__first), to_rep2(total_stream__last))
+
+axiom H64 : (elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = field_10__split_fields3;
+  rec__fixed_string__object__name = field_10__split_fields4; rec__ext__ =
+  field_10__split_fields5 }; attr__tag = field_10__attr__tag }) = 10)
+
+axiom H65 : (elements({ us_split_fields1 = {
+  rec__fixed_string__object__width = field_06__split_fields3;
+  rec__fixed_string__object__name = field_06__split_fields4; rec__ext__ =
+  field_06__split_fields5 }; attr__tag = field_06__attr__tag }) = 6)
+
+axiom H66 : ((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) ->
+  (o12 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1)))
+
+axiom H67 :
+  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) ->
+  (o12 = 0))
+
+axiom H68 : ((o13 = o12) and in_range4(o12))
+
+axiom H69 : (result16 = len_n)
+
+axiom H70 : (len_n1 = o13)
+
+axiom H71 : ((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) ->
+  (o14 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1)))
+
+axiom H72 :
+  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) ->
+  (o14 = 0))
+
+axiom H73 : ((o15 = o14) and in_range(o14))
+
+axiom H74 : (result17 = len_i)
+
+axiom H75 : (len_i1 = o15)
+
+axiom H76 : ((to_rep2(total_stream__first) <= to_rep2(total_stream__last)) ->
+  (o16 = ((to_rep2(total_stream__last) - to_rep2(total_stream__first)) + 1)))
+
+axiom H77 :
+  ((not (to_rep2(total_stream__first) <= to_rep2(total_stream__last))) ->
+  (o16 = 0))
+
+ (* File "main_test.adb", line 8, characters 0-0 *)
+goal WP_parameter_def : in_range3(o16)

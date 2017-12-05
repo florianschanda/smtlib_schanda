@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -107,7 +107,7 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type tindexB
 
-predicate in_range1(x: int) = (((-128) <= x) and (x <= 127))
+predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
 
@@ -461,22 +461,88 @@ axiom def_axiom1 :
   temp___426, temp___427, temp___428, temp___429, temp___430,
   temp___431)).elts[temp___432]) = (temp___424[temp___432]))))))))))
 
+logic a : (int,integer) farray
+
+logic us : int
+
+logic us1 : int
+
+logic us2 : int
+
+logic us3 : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic temp___433 : (int,integer) farray
+
+logic temp___4331 : t
+
+logic temp___434 : (int,integer) farray
+
+logic temp___4341 : t
+
+logic o4 : (int,integer) farray
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : (int,integer) farray
+
+logic a1 : (int,integer) farray
+
+logic a2 : (int,integer) farray
+
+logic a3 : (int,integer) farray
+
+axiom H : dynamic_property(1, 8, to_rep(a__first), to_rep(a__last))
+
+axiom H1 : in_range2(i)
+
+axiom H2 : in_range2(j)
+
+axiom H3 : in_range2(k)
+
+axiom H4 : in_range2(l)
+
+axiom H5 : in_range(new_val)
+
+axiom H6 : ((us3 = l) and dynamic_property1(to_rep(a__first),
+  to_rep(a__last), l))
+
+axiom H7 : (o = l)
+
+axiom H8 : ((us2 = k) and dynamic_property1(to_rep(a__first),
+  to_rep(a__last), k))
+
+axiom H9 : (o1 = k)
+
+axiom H10 : ((us1 = j) and dynamic_property1(to_rep(a__first),
+  to_rep(a__last), j))
+
+axiom H11 : (o2 = j)
+
+axiom H12 : ((us = i) and dynamic_property1(to_rep(a__first),
+  to_rep(a__last), i))
+
+axiom H13 : (o3 = i)
+
+axiom H14 : ({ elts = temp___433; rt = temp___4331 } = temp___422({ elts = a;
+  rt = mk(to_rep(a__first), to_rep(a__last)) }, 1, o3, 0, o2, o1, o,
+  new_val))
+
  (* File "update_checks_1.ads", line 12, characters 0-0 *)
 goal WP_parameter_def :
-  (forall a:(int,integer) farray. forall us:int. forall us1:int.
-  forall us2:int. forall us3:int. forall o:int. forall o1:int. forall o2:int.
-  forall o3:int. forall temp___433:(int,integer) farray.
-  forall temp___4331:t. (dynamic_property(1, 8, to_rep(a__first),
-  to_rep(a__last)) -> (in_range2(i) -> (in_range2(j) -> (in_range2(k) ->
-  (in_range2(l) -> (in_range(new_val) -> (((((us3 = l) and
-  dynamic_property1(to_rep(a__first), to_rep(a__last), l)) and (o = l)) and
-  ((((us2 = k) and dynamic_property1(to_rep(a__first), to_rep(a__last),
-  k)) and (o1 = k)) and ((((us1 = j) and dynamic_property1(to_rep(a__first),
-  to_rep(a__last), j)) and (o2 = j)) and ((((us = i) and
-  dynamic_property1(to_rep(a__first), to_rep(a__last), i)) and (o3 = i)) and
-  ({ elts = temp___433; rt = temp___4331 } = temp___422({ elts = a; rt =
-  mk(to_rep(a__first), to_rep(a__last)) }, 1, o3, 0, o2, o1, o,
-  new_val)))))) ->
   (((to_rep(first(temp___4331)) <= to_rep(last(temp___4331))) ->
   (((to_rep(a__first) <= to_rep(a__last)) ->
   (((to_rep(last(temp___4331)) - to_rep(first(temp___4331))) + 1) = ((to_rep(a__last) - to_rep(a__first)) + 1))) and
@@ -484,4 +550,4 @@ goal WP_parameter_def :
   (((to_rep(last(temp___4331)) - to_rep(first(temp___4331))) + 1) = 0)))) and
   ((not (to_rep(first(temp___4331)) <= to_rep(last(temp___4331)))) ->
   ((to_rep(a__first) <= to_rep(a__last)) ->
-  (0 = ((to_rep(a__last) - to_rep(a__first)) + 1)))))))))))))
+  (0 = ((to_rep(a__last) - to_rep(a__first)) + 1)))))

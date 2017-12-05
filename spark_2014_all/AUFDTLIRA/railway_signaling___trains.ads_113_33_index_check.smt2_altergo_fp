@@ -553,21 +553,70 @@ axiom compare_def_gt :
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic cur_num_trains : int
+
+logic trains : (int,us_rep) farray
+
+logic track_signals : (int,signal) farray
+
+logic train : int
+
+logic o : int
+
+logic o1 : track_id
+
+logic o2 : natural
+
+logic o3 : track_id
+
+logic o4 : track_id
+
+logic o5 : natural
+
+logic o6 : track_id
+
+logic o7 : track_id
+
+logic o8 : int
+
+logic o9 : signal
+
+logic o10 : int
+
+logic result : bool
+
+axiom H : in_range2(cur_num_trains)
+
+axiom H1 : (1 <= train)
+
+axiom H2 : (train <= cur_num_trains)
+
+axiom H3 : ((1 <= train) and (train <= 10))
+
+axiom H4 : (o = train)
+
+axiom H5 : ({ us_split_fields1 = { rec__trains__train_position__track_begin =
+  o1; rec__trains__train_position__pos_begin = o2;
+  rec__trains__train_position__track_end = o3 } } = (trains[o]))
+
+axiom H6 : (o1 = o4)
+
+axiom H7 : (o2 = o5)
+
+axiom H8 : (o3 = o6)
+
+axiom H9 : (o7 = o4)
+
+axiom H10 : (o8 = to_rep(o7))
+
+axiom H11 : (o9 = (track_signals[o8]))
+
+axiom H12 : (o10 = to_rep2(o9))
+
+axiom H13 : (((o10 = 2) -> (result = true)) and ((not (o10 = 2)) ->
+  (result = false)))
+
+axiom H14 : (result = true)
+
  (* File "trains.ads", line 110, characters 0-0 *)
-goal WP_parameter_def :
-  (forall cur_num_trains:int. forall trains:(int,us_rep) farray.
-  forall track_signals:(int,signal) farray. forall train:int. forall o:int.
-  forall o1:track_id. forall o2:natural. forall o3:track_id.
-  forall o4:track_id. forall o5:natural. forall o6:track_id.
-  forall o7:track_id. forall o8:int. forall o9:signal. forall o10:int.
-  forall result:bool. (in_range2(cur_num_trains) -> (((1 <= train) and
-  (train <= cur_num_trains)) -> (((((((((((1 <= train) and (train <= 10)) and
-  (o = train)) and ({ us_split_fields1 = {
-  rec__trains__train_position__track_begin = o1;
-  rec__trains__train_position__pos_begin = o2;
-  rec__trains__train_position__track_end = o3 } } = (trains[o]))) and
-  ((o1 = o4) and ((o2 = o5) and (o3 = o6)))) and (o7 = o4)) and
-  (o8 = to_rep(o7))) and (o9 = (track_signals[o8]))) and
-  (o10 = to_rep2(o9))) and (((o10 = 2) and (result = true)) or
-  ((not (o10 = 2)) and (result = false)))) -> ((result = true) ->
-  (1 <= train))))))
+goal WP_parameter_def : (1 <= train)

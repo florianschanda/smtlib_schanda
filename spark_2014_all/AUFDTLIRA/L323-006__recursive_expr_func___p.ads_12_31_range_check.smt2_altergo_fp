@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -267,7 +267,7 @@ axiom compare_def_gt :
 
 type tindexB
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -400,17 +400,49 @@ logic sum : us_t, int, int -> int
 
 logic sum__function_guard : int, us_t, int, int -> prop
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : element
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : dynamic_property(0, 100, to_rep1(first(x1)), to_rep1(last(x1)))
+
+axiom H1 : in_range1(lo)
+
+axiom H2 : in_range1(hi)
+
+axiom H3 : ((hi <  lo) -> (result1 = true))
+
+axiom H4 : ((not (hi <  lo)) -> (((lo <  to_rep1(first(x1))) ->
+  (result1 = true)) and ((not (lo <  to_rep1(first(x1)))) ->
+  (result1 = false))))
+
+axiom H5 : ((result1 = true) -> (result = true))
+
+axiom H6 : ((not (result1 = true)) -> (((hi <  to_rep1(last(x1))) ->
+  (result = true)) and ((not (hi <  to_rep1(last(x1)))) ->
+  (result = false))))
+
+axiom H7 : (not (result = true))
+
+axiom H8 : ((to_rep1(first(x1)) <= hi) and (hi <= to_rep1(last(x1))))
+
+axiom H9 : (o1 = hi)
+
+axiom H10 : (o2 = (x[o1]))
+
+axiom H11 : (o3 = to_rep(o2))
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:element. forall o2:int. forall result:bool.
-  forall result1:bool. (dynamic_property(0, 100, to_rep1(first(x1)),
-  to_rep1(last(x1))) -> (in_range1(lo) -> (in_range1(hi) ->
-  (((((hi <  lo) and (result1 = true)) or ((not (hi <  lo)) and
-  (((lo <  to_rep1(first(x1))) and (result1 = true)) or
-  ((not (lo <  to_rep1(first(x1)))) and (result1 = false))))) and
-  (((result1 = true) and (result = true)) or ((not (result1 = true)) and
-  (((hi <  to_rep1(last(x1))) and (result = true)) or
-  ((not (hi <  to_rep1(last(x1)))) and (result = false)))))) ->
-  ((not (result = true)) -> ((((((to_rep1(first(x1)) <= hi) and
-  (hi <= to_rep1(last(x1)))) and (o = hi)) and (o1 = (x[o]))) and
-  (o2 = to_rep(o1))) -> in_range1((hi - 1)))))))))
+goal WP_parameter_def : in_range1((hi - 1))

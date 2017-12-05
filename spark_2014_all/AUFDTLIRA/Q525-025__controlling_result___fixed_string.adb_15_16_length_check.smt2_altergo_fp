@@ -107,7 +107,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -782,31 +782,159 @@ axiom def_axiom :
   (forall temp___247:int. (((temp___242(temp___244, temp___245,
   temp___246)).elts1[temp___247]) = of_rep(temp___244)))))
 
+logic change : (int,character) farray
+
+logic len : int
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic temp___249 : (int,character) farray
+
+logic temp___2491 : t1
+
+logic temp___250 : (int,character) farray
+
+logic temp___2501 : t
+
+logic temp___251 : (int,character) farray
+
+logic temp___2511 : t
+
+logic o5 : (int,character) farray
+
+logic fixed_string__trim_string__R5b__assume : int
+
+logic fixed_string__trim_string__R8b__assume : int
+
+logic o6 : (int,character) farray
+
+logic temp___253 : (int,character) farray
+
+logic temp___2531 : t3
+
+logic temp___254 : (int,character) farray
+
+logic temp___2541 : t2
+
+logic o7 : (int,character) farray
+
+logic temp___256 : (int,character) farray
+
+logic temp___2561 : t2
+
+logic temp___257 : (int,character) farray
+
+logic temp___2571 : t2
+
+logic o8 : (int,character) farray
+
+logic i : int
+
+logic o9 : int
+
+logic o10 : int
+
+logic temp___259 : int
+
+logic o11 : int
+
+logic o12 : character
+
+logic o13 : int
+
+logic o14 : int
+
+logic o15 : int
+
+logic o16 : int
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : int
+
+logic o20 : character
+
+logic o21 : int
+
+logic o22 : bool
+
+logic result : int
+
+logic len1 : int
+
+logic result1 : (int,character) farray
+
+logic change1 : (int,character) farray
+
+logic result2 : (int,character) farray
+
+logic change2 : (int,character) farray
+
+logic change3 : (int,character) farray
+
+logic len2 : int
+
+logic change4 : (int,character) farray
+
+logic len3 : int
+
+logic result3 : bool
+
+logic result4 : bool
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(change__first),
+  to_rep1(change__last))
+
+axiom H1 : dynamic_property(1, 2147483647, to_rep1(first(new_val1)),
+  to_rep1(last(new_val1)))
+
+axiom H2 : ((o1 = length({ elts = new_val; rt = new_val1 })) and
+  in_range1(length({ elts = new_val; rt = new_val1 })))
+
+axiom H3 : ((to_rep1(change__first) <= to_rep1(change__last)) ->
+  (o = ((to_rep1(change__last) - to_rep1(change__first)) + 1)))
+
+axiom H4 : ((not (to_rep1(change__first) <= to_rep1(change__last))) ->
+  (o = 0))
+
+axiom H5 : ((o2 = o) and in_range1(o))
+
+axiom H6 : (o3 = min(o2, o1))
+
+axiom H7 : ((o4 = o3) and in_range4(o3))
+
+axiom H8 : (result = len)
+
+axiom H9 : (len1 = o4)
+
+axiom H10 : in_range4(len1)
+
+axiom H11 : (to_rep1(first2((temp___242(0, to_rep1(change__first),
+  to_rep1(change__last))).rt1)) = to_rep1(change__first))
+
+axiom H12 : (to_rep1(last2((temp___242(0, to_rep1(change__first),
+  to_rep1(change__last))).rt1)) = to_rep1(change__last))
+
+axiom H13 : ({ elts1 = temp___249; rt1 = temp___2491 } = temp___242(0,
+  to_rep1(change__first), to_rep1(change__last)))
+
+axiom H14 : (temp___249 = temp___250)
+
+axiom H15 : (mk(to_rep1(first2(temp___2491)),
+  to_rep1(last2(temp___2491))) = temp___2501)
+
  (* File "fixed_string.ads", line 31, characters 0-0 *)
 goal WP_parameter_def :
-  (forall len:int. forall o:int. forall o1:int. forall o2:int. forall o3:int.
-  forall o4:int. forall temp___249:(int,character) farray.
-  forall temp___2491:t1. forall temp___250:(int,character) farray.
-  forall temp___2501:t. forall result:int. forall len1:int.
-  (dynamic_property(1, 2147483647, to_rep1(change__first),
-  to_rep1(change__last)) -> (dynamic_property(1, 2147483647,
-  to_rep1(first(new_val1)), to_rep1(last(new_val1))) -> ((((((o1 = length({
-  elts = new_val; rt = new_val1 })) and in_range1(length({ elts = new_val;
-  rt = new_val1 }))) and
-  (((((to_rep1(change__first) <= to_rep1(change__last)) and
-  (o = ((to_rep1(change__last) - to_rep1(change__first)) + 1))) or
-  ((not (to_rep1(change__first) <= to_rep1(change__last))) and (o = 0))) and
-  ((o2 = o) and in_range1(o))) and (o3 = min(o2, o1)))) and ((o4 = o3) and
-  in_range4(o3))) and (({ int__content = result } = { int__content = len
-  }) and (len1 = o4))) -> (in_range4(len1) ->
-  ((((to_rep1(first2((temp___242(0, to_rep1(change__first),
-  to_rep1(change__last))).rt1)) = to_rep1(change__first)) and
-  ((to_rep1(last2((temp___242(0, to_rep1(change__first),
-  to_rep1(change__last))).rt1)) = to_rep1(change__last)) and ({ elts1 =
-  temp___249; rt1 = temp___2491 } = temp___242(0, to_rep1(change__first),
-  to_rep1(change__last))))) and ((temp___249 = temp___250) and
-  (mk(to_rep1(first2(temp___2491)),
-  to_rep1(last2(temp___2491))) = temp___2501))) ->
   (((to_rep1(first(temp___2501)) <= to_rep1(last(temp___2501))) ->
   (((to_rep1(change__first) <= to_rep1(change__last)) ->
   (((to_rep1(last(temp___2501)) - to_rep1(first(temp___2501))) + 1) = ((to_rep1(change__last) - to_rep1(change__first)) + 1))) and
@@ -814,4 +942,4 @@ goal WP_parameter_def :
   (((to_rep1(last(temp___2501)) - to_rep1(first(temp___2501))) + 1) = 0)))) and
   ((not (to_rep1(first(temp___2501)) <= to_rep1(last(temp___2501)))) ->
   ((to_rep1(change__first) <= to_rep1(change__last)) ->
-  (0 = ((to_rep1(change__last) - to_rep1(change__first)) + 1)))))))))))
+  (0 = ((to_rep1(change__last) - to_rep1(change__first)) + 1)))))

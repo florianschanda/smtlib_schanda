@@ -90,6 +90,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (dynamic_invariant m true false true))
 (assert (and (= o (length_2 m)) (in_range (length_2 m))))
 (assert (and (= o1 (length m)) (in_range (length m))))

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tcount_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -161,7 +161,7 @@ function index_type__ref___2__projection(a: index_type__ref) : index_type =
 
 type extended_index
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq4 : int, int -> bool
 
@@ -234,11 +234,11 @@ logic oeq__function_guard : bool, us_rep, us_rep -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep. forall b:us_rep [user_eq3(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
     n) = get(b, n)))) ->
   (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length(a)))) -> (get(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length(a)))) -> (get(a,
         n) = get(b, n))))) ->
   (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
   false)))))
@@ -271,7 +271,7 @@ function count_type__ref___projection(a: count_type__ref) : count_type =
 
 axiom length__post_axiom :
   (forall container:us_rep [length(container)].
-  ((((-1) + length(container)) <= 2147483646) and
+  ((((- 1) + length(container)) <= 2147483646) and
   in_range4(length(container))))
 
 logic left : us_rep
@@ -323,22 +323,65 @@ function element_type__ref___2__projection(a: element_type__ref) : element_type 
 axiom get__post_axiom :
   (forall container:us_rep.
   (forall position:int [get(container, position)]. ((in_range3(position) and
-  ((0 <= position) and (position <= ((-1) + length(container))))) ->
+  ((0 <= position) and (position <= ((- 1) + length(container))))) ->
   in_range5(get(container, position)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic o5 : int
+
+logic o6 : bool
+
+logic o7 : int
+
+logic o8 : int
+
+logic result : bool
+
+logic result1 : bool
+
+axiom H : in_range2(fst)
+
+axiom H1 : in_range3(lst)
+
+axiom H2 : in_range1(offset)
+
+axiom H3 : ((o8 = ((- 1) + length(left))) and (in_range3(o8) and
+  (o8 = ((- 1) + length(left)))))
+
+axiom H4 : (((lst <= o8) -> (result = true)) and ((not (lst <= o8)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((offset <  0) -> ((o7 = ((- 2147483648) - offset)) and
+  in_range1(((- 2147483648) - offset))))
+
+axiom H7 : ((offset <  0) -> (((o7 <= 0) -> (result1 = true)) and
+  ((not (o7 <= 0)) -> (result1 = false))))
+
+axiom H8 : ((not (offset <  0)) -> (result1 = of_int(1)))
+
+axiom H9 : (result1 = true)
+
+axiom H10 : (fst <= lst)
+
+axiom H11 : ((o2 = lst) and in_range1(lst))
+
+axiom H12 : ((o1 = length(right)) and (in_range4(o1) and
+  (((- 1) + o1) <= 2147483646)))
+
+axiom H13 : (o3 = ((- 1) + o1))
+
+axiom H14 : (o4 = (o3 - o2))
+
  (* File "a-cofuve.ads", line 201, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
-  forall o5:int. forall result:bool. forall result1:bool. (in_range2(fst) ->
-  (in_range3(lst) -> (in_range1(offset) ->
-  ((((o5 = ((-1) + length(left))) and (in_range3(o5) and
-  (o5 = ((-1) + length(left))))) and (((lst <= o5) and (result = true)) or
-  ((not (lst <= o5)) and (result = false)))) -> ((result = true) ->
-  ((((offset <  0) and (((o4 = ((-2147483648) - offset)) and
-  in_range1(((-2147483648) - offset))) and (((o4 <= 0) and
-  (result1 = true)) or ((not (o4 <= 0)) and (result1 = false))))) or
-  ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
-  ((fst <= lst) -> ((((o1 = lst) and in_range1(lst)) and
-  ((((o = length(right)) and (in_range4(o) and
-  (((-1) + o) <= 2147483646))) and (o2 = ((-1) + o))) and
-  (o3 = (o2 - o1)))) -> in_range1(o3)))))))))))
+goal WP_parameter_def : in_range1(o4)

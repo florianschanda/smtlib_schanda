@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -480,7 +480,7 @@ logic key__function_guard1 : int, int, us_rep, us_rep1 -> prop
 
 type key_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
@@ -762,7 +762,7 @@ axiom model____post_axiom : true
 
 type key_type1
 
-predicate in_range4(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq10 : int, int -> bool
 
@@ -1062,7 +1062,7 @@ axiom has_key__post_axiom :
 
 type element_type
 
-predicate in_range6(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1172,7 +1172,7 @@ axiom length__post_axiom2 :
 
 type element_type1
 
-predicate in_range7(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range7(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq13 : int, int -> bool
 
@@ -1321,18 +1321,40 @@ axiom w_get__post_axiom1 :
   ((in_range2(witness2) and (has_witness1(container, witness2) = true)) ->
   in_range8(w_get1(container, witness2)))))
 
- (* File "a-cforma.ads", line 997, characters 0-0 *)
-goal WP_parameter_def :
-  (forall d__split_fields:us_main_type. forall c:count_type. forall o:bool.
-  forall o1:bool.
-  forall replacement__inverse_sets__replace__container__fields:us_main_type.
-  forall result:us_main_type. forall d__split_fields1:us_main_type.
-  forall result1:bool. (in_range1(k) -> ((has_key1(model__({
-  us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
-  d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } }), k) = true) ->
-  (((d__split_discrs = d_old) and (d__split_fields = d_old1)) ->
-  ((((((((oeq2(positions({ us_split_discrs1 = {
+logic d__split_fields : us_main_type
+
+logic c : count_type
+
+logic o : bool
+
+logic c1 : count_type
+
+logic o1 : bool
+
+logic o2 : bool
+
+logic o3 : int
+
+logic o4 : int
+
+logic replacement__inverse_sets__replace__container__fields : us_main_type
+
+logic result : us_main_type
+
+logic d__split_fields1 : us_main_type
+
+logic result1 : bool
+
+axiom H : in_range1(k)
+
+axiom H1 : (has_key1(model__({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
+  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
+  } }), k) = true)
+
+axiom H2 : ((d__split_discrs = d_old) and (d__split_fields = d_old1))
+
+axiom H3 : ((((((oeq2(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map =
   replacement__inverse_sets__replace__container__fields } }), positions({
@@ -1347,13 +1369,13 @@ goal WP_parameter_def :
   d__split_discrs }; us_split_fields1 = {
   rec__replacement__inverse_sets__map =
   replacement__inverse_sets__replace__container__fields } }), k)) = k)) and
-  ((bool_eq1(length(keys({ us_split_discrs1 = {
+  (((bool_eq1(length(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
   } })), length(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }))) = true) and
+  replacement__inverse_sets__replace__container__fields } }))) = true) ->
   (forall i:int. (((1 <= i) and (i <= (0 + length(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
@@ -1367,8 +1389,15 @@ goal WP_parameter_def :
   } }), i) = get(keys({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields } }), i))))))) and
-  (get2(model__({ us_split_discrs1 = {
+  replacement__inverse_sets__replace__container__fields } }), i)))))) and
+  (not (bool_eq1(length(keys({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
+  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields
+  } })), length(keys({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
+  us_split_fields1 = { rec__replacement__inverse_sets__map =
+  replacement__inverse_sets__replace__container__fields }
+  }))) = false)))) and (get2(model__({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map =
   replacement__inverse_sets__replace__container__fields } }), k) = 0)) and
@@ -1392,28 +1421,40 @@ goal WP_parameter_def :
   replacement__inverse_sets__replace__container__fields } }), model__({
   us_split_discrs1 = { rec__replacement__inverse_sets__map__capacity =
   d__split_discrs }; us_split_fields1 = {
-  rec__replacement__inverse_sets__map = d__split_fields } }), k) = true)) and
-  ((result = d__split_fields) and ({ rec__replacement__inverse_sets__map =
-  d__split_fields1 } = { rec__replacement__inverse_sets__map =
-  replacement__inverse_sets__replace__container__fields }))) ->
-  ((forall c1:us_rep1. ((has_key(positions({ us_split_discrs1 = {
-   rec__replacement__inverse_sets__map__capacity = d_old };
-   us_split_fields1 = { rec__replacement__inverse_sets__map = d_old1 } }),
-   c1) = true) -> (has_key(positions({ us_split_discrs1 = {
-   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
-   us_split_fields1 = { rec__replacement__inverse_sets__map =
-   d__split_fields1 } }), c1) = true))) ->
-  ((((o = has_key(positions({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map = d__split_fields } }), k) = true))
+
+axiom H4 : (result = d__split_fields)
+
+axiom H5 :
+  (d__split_fields1 = replacement__inverse_sets__replace__container__fields)
+
+axiom H6 :
+  (forall c2:us_rep1. ((has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d_old }; us_split_fields1 =
-  { rec__replacement__inverse_sets__map = d_old1 } }), { us_split_fields3 = {
-  rec__replacement__inverse_sets__cursor__node = c } })) and ((o = true) <->
+  { rec__replacement__inverse_sets__map = d_old1 } }), c2) = true) ->
   (has_key(positions({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d__split_discrs };
+  us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields1
+  } }), c2) = true)))
+
+axiom H7 : ((o1 = has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d_old }; us_split_fields1 =
   { rec__replacement__inverse_sets__map = d_old1 } }), { us_split_fields3 = {
-  rec__replacement__inverse_sets__cursor__node = c } }) = true))) and
-  ((o1 = true) and (result1 = match_bool(o1, o, false)))) ->
-  ((result1 = true) -> (has_key(positions({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__cursor__node = c1 } })) and
+  ((o1 = true) <-> (has_key(positions({ us_split_discrs1 = {
+  rec__replacement__inverse_sets__map__capacity = d_old }; us_split_fields1 =
+  { rec__replacement__inverse_sets__map = d_old1 } }), { us_split_fields3 = {
+  rec__replacement__inverse_sets__cursor__node = c1 } }) = true)))
+
+axiom H8 : (o2 = true)
+
+axiom H9 : (result1 = match_bool(o2, o1, false))
+
+axiom H10 : (result1 = true)
+
+ (* File "a-cforma.ads", line 997, characters 0-0 *)
+goal WP_parameter_def : (has_key(positions({ us_split_discrs1 = {
   rec__replacement__inverse_sets__map__capacity = d__split_discrs };
   us_split_fields1 = { rec__replacement__inverse_sets__map = d__split_fields1
   } }), { us_split_fields3 = { rec__replacement__inverse_sets__cursor__node =
-  c } }) = true)))))))))
+  c1 } }) = true)

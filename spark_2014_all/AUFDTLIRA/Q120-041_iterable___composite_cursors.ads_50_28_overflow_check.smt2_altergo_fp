@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -479,10 +479,16 @@ axiom has_element__2__def_axiom :
   rec__composite_cursors__rec_cursor__content = p1 } }) = true) <->
   ((1 <= to_rep(p1)) and (to_rep(p1) <= to_rep(c3))))))
 
- (* File "composite_cursors.ads", line 31, characters 0-0 *)
-goal WP_parameter_def : ((to_rep(i19s1) <= 100) -> ((to_rep(c1) <= 100) ->
-  ((has_element__2({ us_split_fields3 = {
+logic o : int
+
+axiom H : (to_rep(i19s1) <= 100)
+
+axiom H1 : (to_rep(c1) <= 100)
+
+axiom H2 : (has_element__2({ us_split_fields3 = {
   rec__composite_cursors__cont2__content = c;
   rec__composite_cursors__cont2__length = c1 } }, { us_split_fields1 = {
-  rec__composite_cursors__rec_cursor__content = p } }) = true) ->
-  in_range((to_rep(p) + 1)))))
+  rec__composite_cursors__rec_cursor__content = p } }) = true)
+
+ (* File "composite_cursors.ads", line 31, characters 0-0 *)
+goal WP_parameter_def : in_range((to_rep(p) + 1))

@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -245,8 +245,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : int
+
+logic temp___212 : (int,integer) farray
+
+logic v1 : (int,integer) farray
+
+axiom H : (((- 2147483648) <= 2147483647) -> in_range(a))
+
+axiom H1 : (temp___212 = v1)
+
+axiom H2 : (1 <= 4)
+
  (* File "vs.ads", line 16, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:int. forall temp___212:(int,integer) farray.
-  forall v1:(int,integer) farray. ((((-2147483648) <= 2147483647) ->
-  in_range(a)) -> ((temp___212 = v1) -> ((1 <= 4) -> (1 <= 1)))))
+goal WP_parameter_def : (1 <= 1)

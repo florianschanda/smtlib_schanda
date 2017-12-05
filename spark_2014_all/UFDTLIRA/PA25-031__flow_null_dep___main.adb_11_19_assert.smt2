@@ -47,6 +47,7 @@
 (define-fun dynamic_invariant1 ((temp___expr_135 Int) (temp___is_init_132 Bool) (temp___skip_constant_133 Bool) (temp___do_toplevel_134 Bool)) Bool (=> (or (= temp___is_init_132 true) (<= 1 10)) (in_range1 temp___expr_135)))
 (assert (forall ((entities__state us_private)) (! (dynamic_invariant1 (get_current_id entities__state) true false true) :pattern ((get_current_id entities__state)))))
 (declare-const state us_private)
+(declare-const state1 us_private)
 (assert (and (= (get_current_id state) 1) (= (get_current_cycles state) 2147483647)))
 (assert (= (get_current_id state) 1))
 (assert (not (= (get_current_cycles state) 2147483647)))

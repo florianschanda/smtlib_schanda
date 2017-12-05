@@ -94,6 +94,7 @@
 (declare-const o Int)
 (declare-const o1 Int)
 (declare-const o2 Int)
+(declare-const o3 Int)
 (assert (and (= o (length (mk___rep target__split_discrs (mk___split_fields target__split_fields)))) (and (in_range1 o) (<= o (capacity (mk___rep target__split_discrs (mk___split_fields target__split_fields)))))))
 (assert (and (= o1 (capacity (mk___rep target__split_discrs (mk___split_fields target__split_fields)))) (and (in_range1 o1) (= o1 (ite (= (of_int 1) true) (to_rep (rec__bounded__vect__vector__capacity target__split_discrs)) 2147483647)))))
 (assert (= o2 (- o1 o)))

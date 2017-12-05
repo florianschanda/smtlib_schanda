@@ -61,6 +61,8 @@
 (define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool) (temp___skip_constant_13 Bool) (temp___do_toplevel_14 Bool)) Bool (=> (or (= temp___is_init_12 true) (<= (- 2147483648) 2147483647)) (in_range temp___expr_15)))
 (declare-const o Int)
 (declare-const o1 Int)
+(declare-const o2 Int)
+(declare-const o3 Int)
 (assert (in_range1 length))
 (assert (=> (= (mod1 length 4) 0) (= o 0)))
 (assert (=> (not (= (mod1 length 4) 0)) (= o (- 4 (mod1 length 4)))))

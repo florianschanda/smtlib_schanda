@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -277,9 +277,27 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x : int
+
+logic o : int
+
+logic result : int
+
+logic x1 : int
+
+logic x2 : int
+
+axiom H : (result = x)
+
+axiom H1 : (x1 = 0)
+
+axiom H2 : in_range2(x1)
+
+axiom H3 : (not (to_rep(t1) = to_rep(t2)))
+
+axiom H4 : (of_int(1) = true)
+
+axiom H5 : ((0 <= 2147483647) -> in_range2(x2))
+
  (* File "task_types.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x:int. forall result:int. forall x1:int. forall x2:int.
-  (((result = x) and (x1 = 0)) -> (in_range2(x1) ->
-  ((not (to_rep(t1) = to_rep(t2))) -> ((of_int(1) = true) ->
-  (((0 <= 2147483647) -> in_range2(x2)) -> in_range1((x2 + 1))))))))
+goal WP_parameter_def : in_range1((x2 + 1))

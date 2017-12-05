@@ -291,5 +291,19 @@ logic b : (int,bool) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic test_main__my_sets__union__result : (int,bool) farray
+
+logic result : (int,bool) farray
+
+logic test_main__my_sets__union__result1 : (int,bool) farray
+
+logic test_main__my_sets__union__result2 : (int,bool) farray
+
+logic test_main__my_sets__union__result3 : (int,bool) farray
+
+logic test_main__my_sets__union__result4 : (int,bool) farray
+
+logic test_main__my_sets__union__result5 : (int,bool) farray
+
  (* File "bitsets.ads", line 52, characters 0-0 *)
 goal WP_parameter_def : true

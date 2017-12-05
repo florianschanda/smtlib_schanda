@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -555,13 +555,30 @@ axiom has_element__def_axiom :
   us_split_fields3 = { rec__with_iterable__cursor__i = cu3 } }) = true) <->
   ((1 <= to_rep(cu3)) and (to_rep(cu3) <= 100)))))
 
+logic o : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : natural
+
+logic temp___216 : natural
+
+logic temp___2161 : natural
+
+axiom H : ((101 = to_rep(i10s)) and ((1 <= to_rep(i10s1)) and
+  (to_rep(i10s1) <= to_rep(i10s))))
+
+axiom H1 : ((101 = to_rep(cu)) and ((1 <= to_rep(cu1)) and
+  (to_rep(cu1) <= to_rep(cu))))
+
+axiom H2 : (has_element({ us_split_fields1 = {
+  rec__with_iterable__container__content = a } }, { us_split_discrs1 = {
+  rec__with_iterable__cursor__c = cu }; us_split_fields3 = {
+  rec__with_iterable__cursor__i = cu1 } }) = true)
+
+axiom H3 : ((o = (to_rep(cu1) + 1)) and in_range((to_rep(cu1) + 1)))
+
  (* File "with_iterable.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. (((101 = to_rep(i10s)) and ((1 <= to_rep(i10s1)) and
-  (to_rep(i10s1) <= to_rep(i10s)))) -> (((101 = to_rep(cu)) and
-  ((1 <= to_rep(cu1)) and (to_rep(cu1) <= to_rep(cu)))) -> ((has_element({
-  us_split_fields1 = { rec__with_iterable__container__content = a } }, {
-  us_split_discrs1 = { rec__with_iterable__cursor__c = cu };
-  us_split_fields3 = { rec__with_iterable__cursor__i = cu1 } }) = true) ->
-  (((o = (to_rep(cu1) + 1)) and in_range((to_rep(cu1) + 1))) ->
-  in_range1(o))))))
+goal WP_parameter_def : in_range1(o)

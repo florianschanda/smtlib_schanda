@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type tcount_typeB
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -299,16 +299,30 @@ logic new_item1 : us_main_type
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "a-cfinve.ads", line 384, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:int. forall o2:int. ((((o = length({
-  us_split_discrs1 = {
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+axiom H : ((o = length({ us_split_discrs1 = {
   rec__indefinite_unbounded_tagged__vect__vector__capacity = new_item };
   us_split_fields1 = { rec__indefinite_unbounded_tagged__vect__vector =
-  new_item1 } })) and (in_range1(o) and (((of_int(0) = true) and
-  (o <= to_rep(new_item))) or ((not (of_int(0) = true)) and
-  (o <= 2147483647))))) and (((((of_int(0) = true) and
-  (o1 = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o1 = 2147483647))) and (in_range1(o1) and (((of_int(0) = true) and
-  (o1 = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o1 = 2147483647))))) and (o2 = (o1 - o)))) -> in_range(o2)))
+  new_item1 } })) and (in_range1(o) and (((of_int(0) = true) ->
+  (o <= to_rep(new_item))) and ((not (of_int(0) = true)) ->
+  (o <= 2147483647)))))
+
+axiom H1 : ((((of_int(0) = true) ->
+  (o1 = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o1 = 2147483647))) and (in_range1(o1) and (((of_int(0) = true) ->
+  (o1 = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o1 = 2147483647)))))
+
+axiom H2 : (o2 = (o1 - o))
+
+ (* File "a-cfinve.ads", line 384, characters 0-0 *)
+goal WP_parameter_def : in_range(o2)

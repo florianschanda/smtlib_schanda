@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -363,20 +363,70 @@ type taD1__ref = { taD1__content : taD1
 
 function taD1__ref___projection(a: taD1__ref) : taD1 = (a).taD1__content
 
+logic x__split_fields : bool
+
+logic x__split_fields1 : null_record_type
+
+logic cache : (int,us_rep) farray
+
+logic o : int
+
+logic o1 : bool
+
+logic o2 : null_record_type
+
+logic o3 : bool
+
+logic o4 : null_record_type
+
+logic o5 : bool
+
+logic o6 : bool
+
+logic o7 : null_record_type
+
+logic temp___168 : bool
+
+logic temp___1681 : null_record_type
+
+logic result : bool
+
+logic result1 : null_record_type
+
+logic x__split_fields2 : bool
+
+logic x__split_fields3 : null_record_type
+
+axiom H : in_range(i)
+
+axiom H1 : ((1 <= i) and (i <= 10))
+
+axiom H2 : (o = i)
+
+axiom H3 : ({ us_split_fields1 = { rec__test__crash__foo__valid = o1;
+  rec__test__crash__foo__field = o2 } } = (cache[o]))
+
+axiom H4 : (o1 = o3)
+
+axiom H5 : (o2 = o4)
+
+axiom H6 : (o5 = o3)
+
+axiom H7 : (o5 = o6)
+
+axiom H8 : (x__split_fields1 = o7)
+
+axiom H9 : (temp___168 = o6)
+
+axiom H10 : (temp___1681 = o7)
+
+axiom H11 : (result = x__split_fields)
+
+axiom H12 : (result1 = x__split_fields1)
+
+axiom H13 : (x__split_fields2 = temp___168)
+
+axiom H14 : (x__split_fields3 = temp___1681)
+
  (* File "my_generic.adb", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:bool. forall x__split_fields1:null_record_type.
-  forall cache:(int,us_rep) farray. forall o:int. forall o1:bool.
-  forall o2:null_record_type. forall o3:bool. forall o4:null_record_type.
-  forall o5:bool. forall o6:bool. forall o7:null_record_type.
-  forall temp___168:bool. forall temp___1681:null_record_type.
-  forall result:bool. forall result1:null_record_type.
-  forall x__split_fields2:bool. forall x__split_fields3:null_record_type.
-  (in_range(i) -> ((((((((((1 <= i) and (i <= 10)) and (o = i)) and ({
-  us_split_fields1 = { rec__test__crash__foo__valid = o1;
-  rec__test__crash__foo__field = o2 } } = (cache[o]))) and ((o1 = o3) and
-  (o2 = o4))) and (o5 = o3)) and ((o5 = o6) and (x__split_fields1 = o7))) and
-  ((temp___168 = o6) and (temp___1681 = o7))) and
-  (((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((x__split_fields2 = temp___168) and (x__split_fields3 = temp___1681)))) ->
-  (1 <= i))))
+goal WP_parameter_def : (1 <= i)

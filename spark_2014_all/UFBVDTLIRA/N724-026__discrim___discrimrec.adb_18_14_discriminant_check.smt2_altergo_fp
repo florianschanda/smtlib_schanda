@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1941,31 +1941,9 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def9 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((((((((((to_rep2(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep2(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
-  (discrimrec__register_type__value_64__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64)))) and
-  (discrimrec__register_type__ignore_32a__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
-  (discrimrec__register_type__value_32__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__value_32) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__value_32)))) and
-  (discrimrec__register_type__ignore_32b__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32b) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32b)))) and
-  (discrimrec__register_type__ignore_16a__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16a) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16a)))) and
-  (discrimrec__register_type__value_16__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_16) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_16)))) and
-  (discrimrec__register_type__ignore_32c__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32c) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32c)))) and
-  (discrimrec__register_type__ignore_16b__pred(a) ->
-  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16b) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16b)))) and
-  (discrimrec__register_type__value_high__pred(a) ->
-  (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
-  (discrimrec__register_type__value_low__pred(a) ->
-  (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_low)))) ->
-  (bool_eq10(a, b) = true)) and
-  ((not (((((((((((to_rep2(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep2(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
-  (discrimrec__register_type__value_64__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64)))) and
+  ((((to_rep2(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep2(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
+  ((((((((((discrimrec__register_type__value_64__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64))) and
   (discrimrec__register_type__ignore_32a__pred(a) ->
   (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
   (discrimrec__register_type__value_32__pred(a) ->
@@ -1984,6 +1962,28 @@ axiom bool_eq_def9 :
   (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
   (discrimrec__register_type__value_low__pred(a) ->
   (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_low))))) ->
+  (bool_eq10(a, b) = true)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__discrimrec__register_type__option) = to_rep2(((b).us_split_discrs1).rec__discrimrec__register_type__option)) and
+  ((((((((((discrimrec__register_type__value_64__pred(a) ->
+  (to_rep(((a).us_split_fields1).rec__discrimrec__register_type__value_64) = to_rep(((b).us_split_fields1).rec__discrimrec__register_type__value_64))) and
+  (discrimrec__register_type__ignore_32a__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32a) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32a)))) and
+  (discrimrec__register_type__value_32__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__value_32) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__value_32)))) and
+  (discrimrec__register_type__ignore_32b__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32b) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32b)))) and
+  (discrimrec__register_type__ignore_16a__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16a) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16a)))) and
+  (discrimrec__register_type__value_16__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__value_16) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__value_16)))) and
+  (discrimrec__register_type__ignore_32c__pred(a) ->
+  (to_rep1(((a).us_split_fields1).rec__discrimrec__register_type__ignore_32c) = to_rep1(((b).us_split_fields1).rec__discrimrec__register_type__ignore_32c)))) and
+  (discrimrec__register_type__ignore_16b__pred(a) ->
+  (to_rep3(((a).us_split_fields1).rec__discrimrec__register_type__ignore_16b) = to_rep3(((b).us_split_fields1).rec__discrimrec__register_type__ignore_16b)))) and
+  (discrimrec__register_type__value_high__pred(a) ->
+  (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_high) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_high)))) and
+  (discrimrec__register_type__value_low__pred(a) ->
+  (to_rep4(((a).us_split_fields1).rec__discrimrec__register_type__value_low) = to_rep4(((b).us_split_fields1).rec__discrimrec__register_type__value_low)))))) ->
   (bool_eq10(a, b) = false))))
 
 logic value__size : int
@@ -4102,174 +4102,687 @@ type t3b__ref = { t3b__content : us_rep
 
 function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 
- (* File "discrimrec.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rax__split_fields:unsigned_64.
-  forall rax__split_fields1:unsigned_32.
-  forall rax__split_fields2:unsigned_32.
-  forall rax__split_fields3:unsigned_32.
-  forall rax__split_fields4:unsigned_16.
-  forall rax__split_fields5:unsigned_16.
-  forall rax__split_fields6:unsigned_32.
-  forall rax__split_fields7:unsigned_16.
-  forall rax__split_fields8:unsigned_8. forall rax__split_fields9:unsigned_8.
-  forall eax__split_fields:unsigned_64.
-  forall eax__split_fields1:unsigned_32.
-  forall eax__split_fields2:unsigned_32.
-  forall eax__split_fields3:unsigned_32.
-  forall eax__split_fields4:unsigned_16.
-  forall eax__split_fields5:unsigned_16.
-  forall eax__split_fields6:unsigned_32.
-  forall eax__split_fields7:unsigned_16.
-  forall eax__split_fields8:unsigned_8. forall eax__split_fields9:unsigned_8.
-  forall us:int. forall o:register_option. forall o1:unsigned_64.
-  forall o2:unsigned_64. forall o3:unsigned_32. forall o4:unsigned_32.
-  forall o5:unsigned_32. forall o6:unsigned_16. forall o7:unsigned_16.
-  forall o8:unsigned_32. forall o9:unsigned_16. forall o10:unsigned_8.
-  forall o11:unsigned_8. forall o12:register_option.
-  forall o13:register_option. forall o14:unsigned_64. forall o15:unsigned_32.
-  forall o16:unsigned_32. forall o17:unsigned_32. forall o18:unsigned_16.
-  forall o19:unsigned_16. forall o20:unsigned_32. forall o21:unsigned_16.
-  forall o22:unsigned_8. forall o23:unsigned_8. forall o24:bool.
-  forall o25:register_option. forall o26:unsigned_64. forall o27:unsigned_32.
-  forall o28:unsigned_32. forall o29:unsigned_32. forall o30:unsigned_16.
-  forall o31:unsigned_16. forall o32:unsigned_32. forall o33:unsigned_16.
-  forall o34:unsigned_8. forall o35:unsigned_8. forall o36:bool.
-  forall o37:register_option. forall o38:unsigned_64. forall o39:unsigned_32.
-  forall o40:unsigned_32. forall o41:unsigned_32. forall o42:unsigned_16.
-  forall o43:unsigned_16. forall o44:unsigned_32. forall o45:unsigned_16.
-  forall o46:unsigned_8. forall o47:unsigned_8. forall o48:bool.
-  forall temp___260:register_option. forall temp___2601:unsigned_64.
-  forall temp___2602:unsigned_32. forall temp___2603:unsigned_32.
-  forall temp___2604:unsigned_32. forall temp___2605:unsigned_16.
-  forall temp___2606:unsigned_16. forall temp___2607:unsigned_32.
-  forall temp___2608:unsigned_16. forall temp___2609:unsigned_8.
-  forall temp___26010:unsigned_8. forall temp___26011:bool.
-  forall o49:register_option. forall o50:unsigned_64. forall o51:unsigned_32.
-  forall o52:unsigned_32. forall o53:unsigned_32. forall o54:unsigned_16.
-  forall o55:unsigned_16. forall o56:unsigned_32. forall o57:unsigned_16.
-  forall o58:unsigned_8. forall o59:unsigned_8. forall o60:bool.
-  forall o61:register_option. forall o62:unsigned_64. forall o63:unsigned_32.
-  forall o64:unsigned_32. forall o65:unsigned_32. forall o66:unsigned_16.
-  forall o67:unsigned_16. forall o68:unsigned_32. forall o69:unsigned_16.
-  forall o70:unsigned_8. forall o71:unsigned_8. forall o72:bool.
-  forall o73:register_option. forall o74:unsigned_64. forall o75:unsigned_32.
-  forall o76:unsigned_32. forall o77:unsigned_32. forall o78:unsigned_16.
-  forall o79:unsigned_16. forall o80:unsigned_32. forall o81:unsigned_16.
-  forall o82:unsigned_8. forall o83:unsigned_8. forall o84:bool.
-  forall temp___261:register_option. forall temp___2611:unsigned_64.
-  forall temp___2612:unsigned_32. forall temp___2613:unsigned_32.
-  forall temp___2614:unsigned_32. forall temp___2615:unsigned_16.
-  forall temp___2616:unsigned_16. forall temp___2617:unsigned_32.
-  forall temp___2618:unsigned_16. forall temp___2619:unsigned_8.
-  forall temp___26110:unsigned_8. forall temp___26111:bool.
-  forall result:us_split_fields__ref.
-  forall rax__split_fields10:us_split_fields.
-  forall result1:us_split_fields__ref.
-  forall eax__split_fields10:us_split_fields.
-  (((0 = to_rep2(rax__split_discrs)) and (rax__attr__constrained = true)) ->
-  (((us = 1) and in_range(1)) -> (((eax__attr__constrained = true) and
-  (to_rep2(eax__split_discrs) = 1)) -> (((1 = to_rep2(eax__split_discrs)) and
-  (eax__attr__constrained = true)) -> ((((((((to_rep(o1) = of_int1(16)) and
-  ((o1 = o2) and ((dummy1 = o3) and ((dummy1 = o4) and ((dummy1 = o5) and
-  ((dummy2 = o6) and ((dummy2 = o7) and ((dummy1 = o8) and ((dummy2 = o9) and
-  ((dummy3 = o10) and (dummy3 = o11))))))))))) and (((to_rep2(o) = 0) and
-  (o = o12)) and ((o13 = o12) and (((o14 = o2) and ((o15 = o3) and
-  ((o16 = o4) and ((o17 = o5) and ((o18 = o6) and ((o19 = o7) and
-  ((o20 = o8) and ((o21 = o9) and ((o22 = o10) and (o23 = o11)))))))))) and
-  (true = o24))))) and ({ us_split_discrs1 = {
-  rec__discrimrec__register_type__option = o25 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = o26;
-  rec__discrimrec__register_type__ignore_32a = o27;
-  rec__discrimrec__register_type__value_32 = o28;
-  rec__discrimrec__register_type__ignore_32b = o29;
-  rec__discrimrec__register_type__ignore_16a = o30;
-  rec__discrimrec__register_type__value_16 = o31;
-  rec__discrimrec__register_type__ignore_32c = o32;
-  rec__discrimrec__register_type__ignore_16b = o33;
-  rec__discrimrec__register_type__value_high = o34;
-  rec__discrimrec__register_type__value_low = o35 }; attr__constrained = o36
-  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o13 };
-  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o14;
-  rec__discrimrec__register_type__ignore_32a = o15;
-  rec__discrimrec__register_type__value_32 = o16;
-  rec__discrimrec__register_type__ignore_32b = o17;
-  rec__discrimrec__register_type__ignore_16a = o18;
-  rec__discrimrec__register_type__value_16 = o19;
-  rec__discrimrec__register_type__ignore_32c = o20;
-  rec__discrimrec__register_type__ignore_16b = o21;
-  rec__discrimrec__register_type__value_high = o22;
-  rec__discrimrec__register_type__value_low = o23 }; attr__constrained = o24
-  })) and ({ us_split_discrs1 = { rec__discrimrec__register_type__option =
-  o37 }; us_split_fields1 = { rec__discrimrec__register_type__value_64 = o38;
-  rec__discrimrec__register_type__ignore_32a = o39;
-  rec__discrimrec__register_type__value_32 = o40;
-  rec__discrimrec__register_type__ignore_32b = o41;
-  rec__discrimrec__register_type__ignore_16a = o42;
-  rec__discrimrec__register_type__value_16 = o43;
-  rec__discrimrec__register_type__ignore_32c = o44;
-  rec__discrimrec__register_type__ignore_16b = o45;
-  rec__discrimrec__register_type__value_high = o46;
-  rec__discrimrec__register_type__value_low = o47 }; attr__constrained = o48
-  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o25 };
-  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o26;
-  rec__discrimrec__register_type__ignore_32a = o27;
-  rec__discrimrec__register_type__value_32 = o28;
-  rec__discrimrec__register_type__ignore_32b = o29;
-  rec__discrimrec__register_type__ignore_16a = o30;
-  rec__discrimrec__register_type__value_16 = o31;
-  rec__discrimrec__register_type__ignore_32c = o32;
-  rec__discrimrec__register_type__ignore_16b = o33;
-  rec__discrimrec__register_type__value_high = o34;
-  rec__discrimrec__register_type__value_low = o35 }; attr__constrained = o36
-  })) and ({ us_split_discrs1 = { rec__discrimrec__register_type__option =
-  temp___260 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = temp___2601;
-  rec__discrimrec__register_type__ignore_32a = temp___2602;
-  rec__discrimrec__register_type__value_32 = temp___2603;
-  rec__discrimrec__register_type__ignore_32b = temp___2604;
-  rec__discrimrec__register_type__ignore_16a = temp___2605;
-  rec__discrimrec__register_type__value_16 = temp___2606;
-  rec__discrimrec__register_type__ignore_32c = temp___2607;
-  rec__discrimrec__register_type__ignore_16b = temp___2608;
-  rec__discrimrec__register_type__value_high = temp___2609;
-  rec__discrimrec__register_type__value_low = temp___26010 };
-  attr__constrained = temp___26011 } = { us_split_discrs1 = {
-  rec__discrimrec__register_type__option = o37 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = o38;
-  rec__discrimrec__register_type__ignore_32a = o39;
-  rec__discrimrec__register_type__value_32 = o40;
-  rec__discrimrec__register_type__ignore_32b = o41;
-  rec__discrimrec__register_type__ignore_16a = o42;
-  rec__discrimrec__register_type__value_16 = o43;
-  rec__discrimrec__register_type__ignore_32c = o44;
-  rec__discrimrec__register_type__ignore_16b = o45;
-  rec__discrimrec__register_type__value_high = o46;
-  rec__discrimrec__register_type__value_low = o47 }; attr__constrained = o48
-  })) and (((result = { us_split_fields__content = {
-  rec__discrimrec__register_type__value_64 = rax__split_fields;
-  rec__discrimrec__register_type__ignore_32a = rax__split_fields1;
-  rec__discrimrec__register_type__value_32 = rax__split_fields2;
-  rec__discrimrec__register_type__ignore_32b = rax__split_fields3;
-  rec__discrimrec__register_type__ignore_16a = rax__split_fields4;
-  rec__discrimrec__register_type__value_16 = rax__split_fields5;
-  rec__discrimrec__register_type__ignore_32c = rax__split_fields6;
-  rec__discrimrec__register_type__ignore_16b = rax__split_fields7;
-  rec__discrimrec__register_type__value_high = rax__split_fields8;
-  rec__discrimrec__register_type__value_low = rax__split_fields9 } }) and
-  (rax__split_fields10 = { rec__discrimrec__register_type__value_64 =
-  temp___2601; rec__discrimrec__register_type__ignore_32a = temp___2602;
-  rec__discrimrec__register_type__value_32 = temp___2603;
-  rec__discrimrec__register_type__ignore_32b = temp___2604;
-  rec__discrimrec__register_type__ignore_16a = temp___2605;
-  rec__discrimrec__register_type__value_16 = temp___2606;
-  rec__discrimrec__register_type__ignore_32c = temp___2607;
-  rec__discrimrec__register_type__ignore_16b = temp___2608;
-  rec__discrimrec__register_type__value_high = temp___2609;
-  rec__discrimrec__register_type__value_low = temp___26010 })) and
-  (rax__split_discrs = temp___260))) -> ((((((({ us_split_discrs1 = {
-  rec__discrimrec__register_type__option = o49 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = o50;
+logic rax__split_fields : unsigned_64
+
+logic rax__split_fields1 : unsigned_32
+
+logic rax__split_fields2 : unsigned_32
+
+logic rax__split_fields3 : unsigned_32
+
+logic rax__split_fields4 : unsigned_16
+
+logic rax__split_fields5 : unsigned_16
+
+logic rax__split_fields6 : unsigned_32
+
+logic rax__split_fields7 : unsigned_16
+
+logic rax__split_fields8 : unsigned_8
+
+logic rax__split_fields9 : unsigned_8
+
+logic eax__split_fields : unsigned_64
+
+logic eax__split_fields1 : unsigned_32
+
+logic eax__split_fields2 : unsigned_32
+
+logic eax__split_fields3 : unsigned_32
+
+logic eax__split_fields4 : unsigned_16
+
+logic eax__split_fields5 : unsigned_16
+
+logic eax__split_fields6 : unsigned_32
+
+logic eax__split_fields7 : unsigned_16
+
+logic eax__split_fields8 : unsigned_8
+
+logic eax__split_fields9 : unsigned_8
+
+logic us : int
+
+logic o : register_option
+
+logic o1 : unsigned_64
+
+logic o2 : unsigned_64
+
+logic o3 : unsigned_32
+
+logic o4 : unsigned_32
+
+logic o5 : unsigned_32
+
+logic o6 : unsigned_16
+
+logic o7 : unsigned_16
+
+logic o8 : unsigned_32
+
+logic o9 : unsigned_16
+
+logic o10 : unsigned_8
+
+logic o11 : unsigned_8
+
+logic o12 : register_option
+
+logic o13 : register_option
+
+logic o14 : unsigned_64
+
+logic o15 : unsigned_32
+
+logic o16 : unsigned_32
+
+logic o17 : unsigned_32
+
+logic o18 : unsigned_16
+
+logic o19 : unsigned_16
+
+logic o20 : unsigned_32
+
+logic o21 : unsigned_16
+
+logic o22 : unsigned_8
+
+logic o23 : unsigned_8
+
+logic o24 : bool
+
+logic o25 : register_option
+
+logic o26 : unsigned_64
+
+logic o27 : unsigned_32
+
+logic o28 : unsigned_32
+
+logic o29 : unsigned_32
+
+logic o30 : unsigned_16
+
+logic o31 : unsigned_16
+
+logic o32 : unsigned_32
+
+logic o33 : unsigned_16
+
+logic o34 : unsigned_8
+
+logic o35 : unsigned_8
+
+logic o36 : bool
+
+logic o37 : register_option
+
+logic o38 : unsigned_64
+
+logic o39 : unsigned_32
+
+logic o40 : unsigned_32
+
+logic o41 : unsigned_32
+
+logic o42 : unsigned_16
+
+logic o43 : unsigned_16
+
+logic o44 : unsigned_32
+
+logic o45 : unsigned_16
+
+logic o46 : unsigned_8
+
+logic o47 : unsigned_8
+
+logic o48 : bool
+
+logic temp___260 : register_option
+
+logic temp___2601 : unsigned_64
+
+logic temp___2602 : unsigned_32
+
+logic temp___2603 : unsigned_32
+
+logic temp___2604 : unsigned_32
+
+logic temp___2605 : unsigned_16
+
+logic temp___2606 : unsigned_16
+
+logic temp___2607 : unsigned_32
+
+logic temp___2608 : unsigned_16
+
+logic temp___2609 : unsigned_8
+
+logic temp___26010 : unsigned_8
+
+logic temp___26011 : bool
+
+logic o49 : register_option
+
+logic o50 : unsigned_64
+
+logic o51 : unsigned_32
+
+logic o52 : unsigned_32
+
+logic o53 : unsigned_32
+
+logic o54 : unsigned_16
+
+logic o55 : unsigned_16
+
+logic o56 : unsigned_32
+
+logic o57 : unsigned_16
+
+logic o58 : unsigned_8
+
+logic o59 : unsigned_8
+
+logic o60 : bool
+
+logic o61 : register_option
+
+logic o62 : unsigned_64
+
+logic o63 : unsigned_32
+
+logic o64 : unsigned_32
+
+logic o65 : unsigned_32
+
+logic o66 : unsigned_16
+
+logic o67 : unsigned_16
+
+logic o68 : unsigned_32
+
+logic o69 : unsigned_16
+
+logic o70 : unsigned_8
+
+logic o71 : unsigned_8
+
+logic o72 : bool
+
+logic o73 : register_option
+
+logic o74 : unsigned_64
+
+logic o75 : unsigned_32
+
+logic o76 : unsigned_32
+
+logic o77 : unsigned_32
+
+logic o78 : unsigned_16
+
+logic o79 : unsigned_16
+
+logic o80 : unsigned_32
+
+logic o81 : unsigned_16
+
+logic o82 : unsigned_8
+
+logic o83 : unsigned_8
+
+logic o84 : bool
+
+logic temp___261 : register_option
+
+logic temp___2611 : unsigned_64
+
+logic temp___2612 : unsigned_32
+
+logic temp___2613 : unsigned_32
+
+logic temp___2614 : unsigned_32
+
+logic temp___2615 : unsigned_16
+
+logic temp___2616 : unsigned_16
+
+logic temp___2617 : unsigned_32
+
+logic temp___2618 : unsigned_16
+
+logic temp___2619 : unsigned_8
+
+logic temp___26110 : unsigned_8
+
+logic temp___26111 : bool
+
+logic o85 : register_option
+
+logic o86 : unsigned_64
+
+logic o87 : unsigned_64
+
+logic o88 : unsigned_32
+
+logic o89 : unsigned_32
+
+logic o90 : unsigned_32
+
+logic o91 : unsigned_16
+
+logic o92 : unsigned_16
+
+logic o93 : unsigned_32
+
+logic o94 : unsigned_16
+
+logic o95 : unsigned_8
+
+logic o96 : unsigned_8
+
+logic o97 : register_option
+
+logic o98 : register_option
+
+logic o99 : unsigned_64
+
+logic o100 : unsigned_32
+
+logic o101 : unsigned_32
+
+logic o102 : unsigned_32
+
+logic o103 : unsigned_16
+
+logic o104 : unsigned_16
+
+logic o105 : unsigned_32
+
+logic o106 : unsigned_16
+
+logic o107 : unsigned_8
+
+logic o108 : unsigned_8
+
+logic o109 : bool
+
+logic o110 : register_option
+
+logic o111 : unsigned_64
+
+logic o112 : unsigned_32
+
+logic o113 : unsigned_32
+
+logic o114 : unsigned_32
+
+logic o115 : unsigned_16
+
+logic o116 : unsigned_16
+
+logic o117 : unsigned_32
+
+logic o118 : unsigned_16
+
+logic o119 : unsigned_8
+
+logic o120 : unsigned_8
+
+logic o121 : bool
+
+logic o122 : register_option
+
+logic o123 : unsigned_64
+
+logic o124 : unsigned_32
+
+logic o125 : unsigned_32
+
+logic o126 : unsigned_32
+
+logic o127 : unsigned_16
+
+logic o128 : unsigned_16
+
+logic o129 : unsigned_32
+
+logic o130 : unsigned_16
+
+logic o131 : unsigned_8
+
+logic o132 : unsigned_8
+
+logic o133 : bool
+
+logic temp___262 : register_option
+
+logic temp___2621 : unsigned_64
+
+logic temp___2622 : unsigned_32
+
+logic temp___2623 : unsigned_32
+
+logic temp___2624 : unsigned_32
+
+logic temp___2625 : unsigned_16
+
+logic temp___2626 : unsigned_16
+
+logic temp___2627 : unsigned_32
+
+logic temp___2628 : unsigned_16
+
+logic temp___2629 : unsigned_8
+
+logic temp___26210 : unsigned_8
+
+logic temp___26211 : bool
+
+logic result : unsigned_64
+
+logic result1 : unsigned_32
+
+logic result2 : unsigned_32
+
+logic result3 : unsigned_32
+
+logic result4 : unsigned_16
+
+logic result5 : unsigned_16
+
+logic result6 : unsigned_32
+
+logic result7 : unsigned_16
+
+logic result8 : unsigned_8
+
+logic result9 : unsigned_8
+
+logic rax__split_fields10 : unsigned_64
+
+logic rax__split_fields11 : unsigned_32
+
+logic rax__split_fields12 : unsigned_32
+
+logic rax__split_fields13 : unsigned_32
+
+logic rax__split_fields14 : unsigned_16
+
+logic rax__split_fields15 : unsigned_16
+
+logic rax__split_fields16 : unsigned_32
+
+logic rax__split_fields17 : unsigned_16
+
+logic rax__split_fields18 : unsigned_8
+
+logic rax__split_fields19 : unsigned_8
+
+logic result10 : unsigned_64
+
+logic result11 : unsigned_32
+
+logic result12 : unsigned_32
+
+logic result13 : unsigned_32
+
+logic result14 : unsigned_16
+
+logic result15 : unsigned_16
+
+logic result16 : unsigned_32
+
+logic result17 : unsigned_16
+
+logic result18 : unsigned_8
+
+logic result19 : unsigned_8
+
+logic eax__split_fields10 : unsigned_64
+
+logic eax__split_fields11 : unsigned_32
+
+logic eax__split_fields12 : unsigned_32
+
+logic eax__split_fields13 : unsigned_32
+
+logic eax__split_fields14 : unsigned_16
+
+logic eax__split_fields15 : unsigned_16
+
+logic eax__split_fields16 : unsigned_32
+
+logic eax__split_fields17 : unsigned_16
+
+logic eax__split_fields18 : unsigned_8
+
+logic eax__split_fields19 : unsigned_8
+
+logic result20 : unsigned_64
+
+logic result21 : unsigned_32
+
+logic result22 : unsigned_32
+
+logic result23 : unsigned_32
+
+logic result24 : unsigned_16
+
+logic result25 : unsigned_16
+
+logic result26 : unsigned_32
+
+logic result27 : unsigned_16
+
+logic result28 : unsigned_8
+
+logic result29 : unsigned_8
+
+logic rax__split_fields20 : unsigned_64
+
+logic rax__split_fields21 : unsigned_32
+
+logic rax__split_fields22 : unsigned_32
+
+logic rax__split_fields23 : unsigned_32
+
+logic rax__split_fields24 : unsigned_16
+
+logic rax__split_fields25 : unsigned_16
+
+logic rax__split_fields26 : unsigned_32
+
+logic rax__split_fields27 : unsigned_16
+
+logic rax__split_fields28 : unsigned_8
+
+logic rax__split_fields29 : unsigned_8
+
+logic rax__split_fields30 : unsigned_64
+
+logic rax__split_fields31 : unsigned_32
+
+logic rax__split_fields32 : unsigned_32
+
+logic rax__split_fields33 : unsigned_32
+
+logic rax__split_fields34 : unsigned_16
+
+logic rax__split_fields35 : unsigned_16
+
+logic rax__split_fields36 : unsigned_32
+
+logic rax__split_fields37 : unsigned_16
+
+logic rax__split_fields38 : unsigned_8
+
+logic rax__split_fields39 : unsigned_8
+
+logic eax__split_fields20 : unsigned_64
+
+logic eax__split_fields21 : unsigned_32
+
+logic eax__split_fields22 : unsigned_32
+
+logic eax__split_fields23 : unsigned_32
+
+logic eax__split_fields24 : unsigned_16
+
+logic eax__split_fields25 : unsigned_16
+
+logic eax__split_fields26 : unsigned_32
+
+logic eax__split_fields27 : unsigned_16
+
+logic eax__split_fields28 : unsigned_8
+
+logic eax__split_fields29 : unsigned_8
+
+logic rax__split_fields40 : unsigned_64
+
+logic rax__split_fields41 : unsigned_32
+
+logic rax__split_fields42 : unsigned_32
+
+logic rax__split_fields43 : unsigned_32
+
+logic rax__split_fields44 : unsigned_16
+
+logic rax__split_fields45 : unsigned_16
+
+logic rax__split_fields46 : unsigned_32
+
+logic rax__split_fields47 : unsigned_16
+
+logic rax__split_fields48 : unsigned_8
+
+logic rax__split_fields49 : unsigned_8
+
+logic eax__split_fields30 : unsigned_64
+
+logic eax__split_fields31 : unsigned_32
+
+logic eax__split_fields32 : unsigned_32
+
+logic eax__split_fields33 : unsigned_32
+
+logic eax__split_fields34 : unsigned_16
+
+logic eax__split_fields35 : unsigned_16
+
+logic eax__split_fields36 : unsigned_32
+
+logic eax__split_fields37 : unsigned_16
+
+logic eax__split_fields38 : unsigned_8
+
+logic eax__split_fields39 : unsigned_8
+
+axiom H : ((0 = to_rep2(rax__split_discrs)) and
+  (rax__attr__constrained = true))
+
+axiom H1 : ((us = 1) and in_range(1))
+
+axiom H2 : ((eax__attr__constrained = true) and
+  (to_rep2(eax__split_discrs) = 1))
+
+axiom H3 : ((1 = to_rep2(eax__split_discrs)) and
+  (eax__attr__constrained = true))
+
+axiom H4 : (to_rep(o1) = of_int1(16))
+
+axiom H5 : (o1 = o2)
+
+axiom H6 : (dummy1 = o3)
+
+axiom H7 : (dummy1 = o4)
+
+axiom H8 : (dummy1 = o5)
+
+axiom H9 : (dummy2 = o6)
+
+axiom H10 : (dummy2 = o7)
+
+axiom H11 : (dummy1 = o8)
+
+axiom H12 : (dummy2 = o9)
+
+axiom H13 : (dummy3 = o10)
+
+axiom H14 : (dummy3 = o11)
+
+axiom H15 : (to_rep2(o) = 0)
+
+axiom H16 : (o = o12)
+
+axiom H17 : (o13 = o12)
+
+axiom H18 : (o14 = o2)
+
+axiom H19 : (o15 = o3)
+
+axiom H20 : (o16 = o4)
+
+axiom H21 : (o17 = o5)
+
+axiom H22 : (o18 = o6)
+
+axiom H23 : (o19 = o7)
+
+axiom H24 : (o20 = o8)
+
+axiom H25 : (o21 = o9)
+
+axiom H26 : (o22 = o10)
+
+axiom H27 : (o23 = o11)
+
+axiom H28 : (true = o24)
+
+axiom H29 : ((o25 = o13) and (((o26 = o14) and ((o27 = o15) and
+  ((o28 = o16) and ((o29 = o17) and ((o30 = o18) and ((o31 = o19) and
+  ((o32 = o20) and ((o33 = o21) and ((o34 = o22) and (o35 = o23)))))))))) and
+  (o36 = o24)))
+
+axiom H30 : ((o37 = o25) and (((o38 = o26) and ((o39 = o27) and
+  ((o40 = o28) and ((o41 = o29) and ((o42 = o30) and ((o43 = o31) and
+  ((o44 = o32) and ((o45 = o33) and ((o46 = o34) and (o47 = o35)))))))))) and
+  (o48 = o36)))
+
+axiom H31 : ((temp___260 = o37) and (((temp___2601 = o38) and
+  ((temp___2602 = o39) and ((temp___2603 = o40) and ((temp___2604 = o41) and
+  ((temp___2605 = o42) and ((temp___2606 = o43) and ((temp___2607 = o44) and
+  ((temp___2608 = o45) and ((temp___2609 = o46) and
+  (temp___26010 = o47)))))))))) and (temp___26011 = o48)))
+
+axiom H32 : ((result = rax__split_fields) and
+  ((result1 = rax__split_fields1) and ((result2 = rax__split_fields2) and
+  ((result3 = rax__split_fields3) and ((result4 = rax__split_fields4) and
+  ((result5 = rax__split_fields5) and ((result6 = rax__split_fields6) and
+  ((result7 = rax__split_fields7) and ((result8 = rax__split_fields8) and
+  (result9 = rax__split_fields9))))))))))
+
+axiom H33 : ((rax__split_fields10 = temp___2601) and
+  ((rax__split_fields11 = temp___2602) and
+  ((rax__split_fields12 = temp___2603) and
+  ((rax__split_fields13 = temp___2604) and
+  ((rax__split_fields14 = temp___2605) and
+  ((rax__split_fields15 = temp___2606) and
+  ((rax__split_fields16 = temp___2607) and
+  ((rax__split_fields17 = temp___2608) and
+  ((rax__split_fields18 = temp___2609) and
+  (rax__split_fields19 = temp___26010))))))))))
+
+axiom H34 : (rax__split_discrs = temp___260)
+
+axiom H35 : (({ us_split_discrs1 = { rec__discrimrec__register_type__option =
+  o49 }; us_split_fields1 = { rec__discrimrec__register_type__value_64 = o50;
   rec__discrimrec__register_type__ignore_32a = o51;
   rec__discrimrec__register_type__value_32 = o52;
   rec__discrimrec__register_type__ignore_32b = o53;
@@ -4281,101 +4794,59 @@ goal WP_parameter_def :
   rec__discrimrec__register_type__value_low = o59 }; attr__constrained = o60
   } = convert_bit_64_to_bit_32({ us_split_discrs1 = {
   rec__discrimrec__register_type__option = rax__split_discrs };
-  us_split_fields1 = rax__split_fields10; attr__constrained =
-  rax__attr__constrained })) and (((1 = to_rep2(o49)) and (o60 = true)) and
-  ((of_rep2(1) = o49) and (((dummy = o50) and ((of_rep1(of_int(0)) = o51) and
-  ((of_rep1(toSmall(urem1(to_rep((rax__split_fields10).rec__discrimrec__register_type__value_64),
+  us_split_fields1 = { rec__discrimrec__register_type__value_64 =
+  rax__split_fields10; rec__discrimrec__register_type__ignore_32a =
+  rax__split_fields11; rec__discrimrec__register_type__value_32 =
+  rax__split_fields12; rec__discrimrec__register_type__ignore_32b =
+  rax__split_fields13; rec__discrimrec__register_type__ignore_16a =
+  rax__split_fields14; rec__discrimrec__register_type__value_16 =
+  rax__split_fields15; rec__discrimrec__register_type__ignore_32c =
+  rax__split_fields16; rec__discrimrec__register_type__ignore_16b =
+  rax__split_fields17; rec__discrimrec__register_type__value_high =
+  rax__split_fields18; rec__discrimrec__register_type__value_low =
+  rax__split_fields19 }; attr__constrained = rax__attr__constrained })) and
+  (((1 = to_rep2(o49)) and (o60 = true)) and ((of_rep2(1) = o49) and
+  (((dummy = o50) and ((of_rep1(of_int(0)) = o51) and
+  ((of_rep1(toSmall(urem1(to_rep(rax__split_fields10),
   of_int1(4294967296)))) = o52) and ((dummy1 = o53) and ((dummy2 = o54) and
   ((dummy2 = o55) and ((dummy1 = o56) and ((dummy2 = o57) and
-  ((dummy3 = o58) and (dummy3 = o59)))))))))) and (true = o60))))) and ({
-  us_split_discrs1 = { rec__discrimrec__register_type__option = o61 };
-  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o62;
-  rec__discrimrec__register_type__ignore_32a = o63;
-  rec__discrimrec__register_type__value_32 = o64;
-  rec__discrimrec__register_type__ignore_32b = o65;
-  rec__discrimrec__register_type__ignore_16a = o66;
-  rec__discrimrec__register_type__value_16 = o67;
-  rec__discrimrec__register_type__ignore_32c = o68;
-  rec__discrimrec__register_type__ignore_16b = o69;
-  rec__discrimrec__register_type__value_high = o70;
-  rec__discrimrec__register_type__value_low = o71 }; attr__constrained = o72
-  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o49 };
-  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o50;
-  rec__discrimrec__register_type__ignore_32a = o51;
-  rec__discrimrec__register_type__value_32 = o52;
-  rec__discrimrec__register_type__ignore_32b = o53;
-  rec__discrimrec__register_type__ignore_16a = o54;
-  rec__discrimrec__register_type__value_16 = o55;
-  rec__discrimrec__register_type__ignore_32c = o56;
-  rec__discrimrec__register_type__ignore_16b = o57;
-  rec__discrimrec__register_type__value_high = o58;
-  rec__discrimrec__register_type__value_low = o59 }; attr__constrained = o60
-  })) and ({ us_split_discrs1 = { rec__discrimrec__register_type__option =
-  o73 }; us_split_fields1 = { rec__discrimrec__register_type__value_64 = o74;
-  rec__discrimrec__register_type__ignore_32a = o75;
-  rec__discrimrec__register_type__value_32 = o76;
-  rec__discrimrec__register_type__ignore_32b = o77;
-  rec__discrimrec__register_type__ignore_16a = o78;
-  rec__discrimrec__register_type__value_16 = o79;
-  rec__discrimrec__register_type__ignore_32c = o80;
-  rec__discrimrec__register_type__ignore_16b = o81;
-  rec__discrimrec__register_type__value_high = o82;
-  rec__discrimrec__register_type__value_low = o83 }; attr__constrained = o84
-  } = { us_split_discrs1 = { rec__discrimrec__register_type__option = o61 };
-  us_split_fields1 = { rec__discrimrec__register_type__value_64 = o62;
-  rec__discrimrec__register_type__ignore_32a = o63;
-  rec__discrimrec__register_type__value_32 = o64;
-  rec__discrimrec__register_type__ignore_32b = o65;
-  rec__discrimrec__register_type__ignore_16a = o66;
-  rec__discrimrec__register_type__value_16 = o67;
-  rec__discrimrec__register_type__ignore_32c = o68;
-  rec__discrimrec__register_type__ignore_16b = o69;
-  rec__discrimrec__register_type__value_high = o70;
-  rec__discrimrec__register_type__value_low = o71 }; attr__constrained = o72
-  })) and ({ us_split_discrs1 = { rec__discrimrec__register_type__option =
-  temp___261 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = temp___2611;
-  rec__discrimrec__register_type__ignore_32a = temp___2612;
-  rec__discrimrec__register_type__value_32 = temp___2613;
-  rec__discrimrec__register_type__ignore_32b = temp___2614;
-  rec__discrimrec__register_type__ignore_16a = temp___2615;
-  rec__discrimrec__register_type__value_16 = temp___2616;
-  rec__discrimrec__register_type__ignore_32c = temp___2617;
-  rec__discrimrec__register_type__ignore_16b = temp___2618;
-  rec__discrimrec__register_type__value_high = temp___2619;
-  rec__discrimrec__register_type__value_low = temp___26110 };
-  attr__constrained = temp___26111 } = { us_split_discrs1 = {
-  rec__discrimrec__register_type__option = o73 }; us_split_fields1 = {
-  rec__discrimrec__register_type__value_64 = o74;
-  rec__discrimrec__register_type__ignore_32a = o75;
-  rec__discrimrec__register_type__value_32 = o76;
-  rec__discrimrec__register_type__ignore_32b = o77;
-  rec__discrimrec__register_type__ignore_16a = o78;
-  rec__discrimrec__register_type__value_16 = o79;
-  rec__discrimrec__register_type__ignore_32c = o80;
-  rec__discrimrec__register_type__ignore_16b = o81;
-  rec__discrimrec__register_type__value_high = o82;
-  rec__discrimrec__register_type__value_low = o83 }; attr__constrained = o84
-  })) and (((result1 = { us_split_fields__content = {
-  rec__discrimrec__register_type__value_64 = eax__split_fields;
-  rec__discrimrec__register_type__ignore_32a = eax__split_fields1;
-  rec__discrimrec__register_type__value_32 = eax__split_fields2;
-  rec__discrimrec__register_type__ignore_32b = eax__split_fields3;
-  rec__discrimrec__register_type__ignore_16a = eax__split_fields4;
-  rec__discrimrec__register_type__value_16 = eax__split_fields5;
-  rec__discrimrec__register_type__ignore_32c = eax__split_fields6;
-  rec__discrimrec__register_type__ignore_16b = eax__split_fields7;
-  rec__discrimrec__register_type__value_high = eax__split_fields8;
-  rec__discrimrec__register_type__value_low = eax__split_fields9 } }) and
-  (eax__split_fields10 = { rec__discrimrec__register_type__value_64 =
-  temp___2611; rec__discrimrec__register_type__ignore_32a = temp___2612;
-  rec__discrimrec__register_type__value_32 = temp___2613;
-  rec__discrimrec__register_type__ignore_32b = temp___2614;
-  rec__discrimrec__register_type__ignore_16a = temp___2615;
-  rec__discrimrec__register_type__value_16 = temp___2616;
-  rec__discrimrec__register_type__ignore_32c = temp___2617;
-  rec__discrimrec__register_type__ignore_16b = temp___2618;
-  rec__discrimrec__register_type__value_high = temp___2619;
-  rec__discrimrec__register_type__value_low = temp___26110 })) and
-  (eax__split_discrs = temp___261))) ->
-  (to_rep2(eax__split_discrs) = 1))))))))
+  ((dummy3 = o58) and (dummy3 = o59)))))))))) and (true = o60)))))
+
+axiom H36 : ((o61 = o49) and (((o62 = o50) and ((o63 = o51) and
+  ((o64 = o52) and ((o65 = o53) and ((o66 = o54) and ((o67 = o55) and
+  ((o68 = o56) and ((o69 = o57) and ((o70 = o58) and (o71 = o59)))))))))) and
+  (o72 = o60)))
+
+axiom H37 : ((o73 = o61) and (((o74 = o62) and ((o75 = o63) and
+  ((o76 = o64) and ((o77 = o65) and ((o78 = o66) and ((o79 = o67) and
+  ((o80 = o68) and ((o81 = o69) and ((o82 = o70) and (o83 = o71)))))))))) and
+  (o84 = o72)))
+
+axiom H38 : ((temp___261 = o73) and (((temp___2611 = o74) and
+  ((temp___2612 = o75) and ((temp___2613 = o76) and ((temp___2614 = o77) and
+  ((temp___2615 = o78) and ((temp___2616 = o79) and ((temp___2617 = o80) and
+  ((temp___2618 = o81) and ((temp___2619 = o82) and
+  (temp___26110 = o83)))))))))) and (temp___26111 = o84)))
+
+axiom H39 : ((result10 = eax__split_fields) and
+  ((result11 = eax__split_fields1) and ((result12 = eax__split_fields2) and
+  ((result13 = eax__split_fields3) and ((result14 = eax__split_fields4) and
+  ((result15 = eax__split_fields5) and ((result16 = eax__split_fields6) and
+  ((result17 = eax__split_fields7) and ((result18 = eax__split_fields8) and
+  (result19 = eax__split_fields9))))))))))
+
+axiom H40 : ((eax__split_fields10 = temp___2611) and
+  ((eax__split_fields11 = temp___2612) and
+  ((eax__split_fields12 = temp___2613) and
+  ((eax__split_fields13 = temp___2614) and
+  ((eax__split_fields14 = temp___2615) and
+  ((eax__split_fields15 = temp___2616) and
+  ((eax__split_fields16 = temp___2617) and
+  ((eax__split_fields17 = temp___2618) and
+  ((eax__split_fields18 = temp___2619) and
+  (eax__split_fields19 = temp___26110))))))))))
+
+axiom H41 : (eax__split_discrs = temp___261)
+
+ (* File "discrimrec.adb", line 6, characters 0-0 *)
+goal WP_parameter_def : (to_rep2(eax__split_discrs) = 1)

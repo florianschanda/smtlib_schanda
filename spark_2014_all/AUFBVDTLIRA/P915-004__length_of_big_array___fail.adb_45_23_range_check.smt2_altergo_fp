@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -629,7 +629,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type long_long_integer
 
-predicate in_range1(x: int) = (((-9223372036854775808) <= x) and
+predicate in_range1(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
 logic bool_eq2 : int, int -> bool
@@ -958,10 +958,15 @@ axiom create__post_axiom :
 axiom c__def_axiom : ({ elts = c; rt = c1
   } = create(of_int(18446744073709551615)))
 
+logic o : int
+
+axiom H : dynamic_property(of_int(0), of_int(18446744073709551615),
+  to_rep(first(c1)), to_rep(last(c1)))
+
+axiom H1 : (create(of_int(18446744073709551615)) = { elts = c; rt = c1 })
+
+axiom H2 : ((to_rep(first(c1)) = of_int(0)) and
+  (to_rep(last(c1)) = of_int(18446744073709551615)))
+
  (* File "fail.adb", line 32, characters 0-0 *)
-goal WP_parameter_def : (dynamic_property(of_int(0),
-  of_int(18446744073709551615), to_rep(first(c1)), to_rep(last(c1))) ->
-  ((create(of_int(18446744073709551615)) = { elts = c; rt = c1 }) ->
-  (((to_rep(first(c1)) = of_int(0)) and
-  (to_rep(last(c1)) = of_int(18446744073709551615))) -> in_range1(length({
-  elts = c; rt = c1 })))))
+goal WP_parameter_def : in_range1(length({ elts = c; rt = c1 }))

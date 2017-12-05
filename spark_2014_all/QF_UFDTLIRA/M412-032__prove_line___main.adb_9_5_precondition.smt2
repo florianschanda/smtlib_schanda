@@ -34,6 +34,8 @@
 (declare-const z Int)
 (declare-const result Int)
 (declare-const z1 Int)
+(declare-const z2 Int)
+(declare-const z3 Int)
 (assert (= result z))
 (assert (= z1 2))
 (assert (in_range z1))

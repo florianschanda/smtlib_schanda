@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1006,21 +1006,47 @@ logic y : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic t3__madd__result : t1
+
+logic o : t1
+
+logic result : t1
+
+logic t3__madd__result1 : t1
+
+logic t3__madd__result2 : t1
+
+logic t3__madd__result3 : t1
+
+logic t3__madd__result4 : t1
+
+logic t3__madd__result5 : t1
+
+logic result1 : t1
+
+axiom H : in_range(x)
+
+axiom H1 : in_range(y)
+
+axiom H2 : (t3__madd__result1 = t3__madd__result2)
+
+axiom H3 : (t3__madd__result3 = t3__madd__result1)
+
+axiom H4 : (ule1(sub1(of_int1(230), x), y) -> (o = sub1(add1(x, y),
+  of_int1(230))))
+
+axiom H5 : ((not ule1(sub1(of_int1(230), x), y)) -> (o = add1(x, y)))
+
+axiom H6 : (result = t3__madd__result)
+
+axiom H7 : (t3__madd__result1 = o)
+
+axiom H8 : (t3__madd__result4 = t3__madd__result2)
+
+axiom H9 : (t3__madd__result5 = t3__madd__result3)
+
+axiom H10 : (result1 = t3__madd__result4)
+
  (* File "t3.adb", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall t3__madd__result:t1. forall o:t1. forall result:t1.
-  forall t3__madd__result1:t1. forall t3__madd__result2:t1.
-  forall t3__madd__result3:t1. forall t3__madd__result4:t1.
-  forall t3__madd__result5:t1.
-  (forall result1:t1. ((in_range(x) and (in_range(y) and
-  (((((t3__madd__result1 = t3__madd__result2) and
-  (t3__madd__result3 = t3__madd__result1)) and (((ule1(sub1(of_int1(230), x),
-  y) and (o = sub1(add1(x, y), of_int1(230)))) or
-  ((not ule1(sub1(of_int1(230), x), y)) and (o = add1(x, y)))) and (({
-  t__content1 = result } = { t__content1 = t3__madd__result }) and
-  (t3__madd__result1 = o)))) and (({ t__content1 = t3__madd__result4 } = {
-  t__content1 = t3__madd__result2 }) and
-  (t3__madd__result5 = t3__madd__result3))) and
-  (result1 = t3__madd__result4)))) ->
-  (toSmall(t3__madd__result4) = urem(add(toSmall(x), toSmall(y)),
-  of_int(230))))))
+goal WP_parameter_def : (toSmall(t3__madd__result4) = urem(add(toSmall(x),
+  toSmall(y)), of_int(230)))

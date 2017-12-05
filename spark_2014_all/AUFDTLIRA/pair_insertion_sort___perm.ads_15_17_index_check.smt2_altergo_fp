@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -488,8 +488,50 @@ axiom occ_def__def_axiom :
   ((not (to_rep((a2[to_rep(last(a3))])) = e1)) -> (occ_def({ elts = a2; rt =
   a3 }, e1) = occ_def(remove_last({ elts = a2; rt = a3 }), e1)))))))))
 
+logic perm__occ_def__result : int
+
+logic o : int
+
+logic o1 : integer
+
+logic o2 : int
+
+logic o3 : (int,integer) farray
+
+logic o4 : t
+
+logic o5 : int
+
+logic o6 : int
+
+logic o7 : (int,integer) farray
+
+logic o8 : t
+
+logic o9 : int
+
+logic o10 : int
+
+logic result : bool
+
+logic result1 : int
+
+logic perm__occ_def__result1 : int
+
+logic perm__occ_def__result2 : int
+
+logic perm__occ_def__result3 : int
+
+logic perm__occ_def__result4 : int
+
+logic perm__occ_def__result5 : int
+
+axiom H : (dynamic_property(0, 2147483646, to_rep(first(a1)),
+  to_rep(last(a1))) and (to_rep(first(a1)) = 0))
+
+axiom H1 : in_range(e)
+
+axiom H2 : (not (length({ elts = a; rt = a1 }) = 0))
+
  (* File "perm.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : ((dynamic_property(0, 2147483646, to_rep(first(a1)),
-  to_rep(last(a1))) and (to_rep(first(a1)) = 0)) -> (in_range(e) ->
-  ((not (length({ elts = a; rt = a1 }) = 0)) ->
-  (to_rep(first(a1)) <= to_rep(last(a1))))))
+goal WP_parameter_def : (to_rep(first(a1)) <= to_rep(last(a1)))

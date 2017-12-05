@@ -148,6 +148,7 @@
 (assert (dynamic_invariant w true false true))
 (assert (= (mk___t (array_logical_ops__failing_content_check__v__aggregate_def 1) (mk 6 25)) v))
 (assert (dynamic_invariant v true false true))
-(assert (not (not (< 0 (ite (<= (to_rep1 (first (rt v))) (to_rep1 (last (rt v)))) (+ (- (to_rep1 (last (rt v))) (to_rep1 (first (rt v)))) 1) 0)))))
+(assert (< 0 (ite (<= (to_rep1 (first (rt v))) (to_rep1 (last (rt v)))) (+ (- (to_rep1 (last (rt v))) (to_rep1 (first (rt v)))) 1) 0)))
+(assert (not false))
 (check-sat)
 (exit)

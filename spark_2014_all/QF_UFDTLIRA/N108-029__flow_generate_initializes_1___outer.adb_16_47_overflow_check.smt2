@@ -34,6 +34,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const visible Int)
 (declare-const hidden Int)
+(declare-const o Int)
 (assert (in_range visible))
 (assert (in_range hidden))
 (assert (not (in_range (+ visible hidden))))

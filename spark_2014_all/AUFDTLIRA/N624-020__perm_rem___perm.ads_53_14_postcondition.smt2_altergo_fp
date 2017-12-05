@@ -270,7 +270,7 @@ axiom compare_def_gt :
 
 type integer
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -480,37 +480,98 @@ axiom remove__post_axiom :
   elts = a2; rt = a3 }, i)).rt)), to_rep1(last((remove({ elts = a2; rt = a3
   }, i)).rt)))))))
 
+logic hr : int
+
+logic perm__perm_eq__result : int
+
+logic o : int
+
+logic ia : int
+
+logic ib : int
+
+logic o1 : int
+
+logic o2 : natural
+
+logic o3 : int
+
+logic result : bool
+
+logic result1 : bool
+
+logic result2 : int
+
+logic hr1 : int
+
+logic result3 : int
+
+logic perm__perm_eq__result1 : int
+
+logic perm__perm_eq__result2 : int
+
+logic perm__perm_eq__result3 : int
+
+logic hr2 : int
+
+logic perm__perm_eq__result4 : int
+
+logic hr3 : int
+
+logic perm__perm_eq__result5 : int
+
+logic result4 : int
+
+axiom H : dynamic_property(1, 100, to_rep1(first(a1)), to_rep1(last(a1)))
+
+axiom H1 : dynamic_property(1, 100, to_rep1(first(b1)), to_rep1(last(b1)))
+
+axiom H2 : ((invariant__({ elts = a; rt = a1 }) = true) and ((invariant__({
+  elts = b; rt = b1 }) = true) and (is_perm({ elts = a; rt = a1 }, { elts =
+  b; rt = b1 }) = true)))
+
+axiom H3 : ((o = extended_perm({ elts = a; rt = a1 }, { elts = b; rt = b1
+  })) and (in_range2(o) and ((of_int(o) = true) ->
+  (forall ia1:int. (((to_rep1(first(a1)) <= ia1) and
+  (ia1 <= to_rep1(last(a1)))) ->
+  (exists ib1:int. (((to_rep1(first(b1)) <= ib1) and
+  (ib1 <= to_rep1(last(b1)))) and ((to_rep((a[ia1])) = to_rep((b[ib1]))) and
+  (is_perm(remove({ elts = a; rt = a1 }, ia1), remove({ elts = b; rt = b1 },
+  ib1)) = true)))))))))
+
+axiom H4 : (result2 = hr)
+
+axiom H5 : (hr1 = o)
+
+axiom H6 : in_range2(hr1)
+
+axiom H7 : (perm__perm_eq__result1 = perm__perm_eq__result2)
+
+axiom H8 : (perm__perm_eq__result3 = perm__perm_eq__result1)
+
+axiom H9 : (result3 = perm__perm_eq__result)
+
+axiom H10 : (perm__perm_eq__result1 = hr1)
+
+axiom H11 : (perm__perm_eq__result4 = perm__perm_eq__result2)
+
+axiom H12 : (hr1 = hr2)
+
+axiom H13 : (perm__perm_eq__result5 = perm__perm_eq__result3)
+
+axiom H14 : (hr3 = hr1)
+
+axiom H15 : (result4 = perm__perm_eq__result4)
+
+axiom H16 : (of_int(perm__perm_eq__result4) = true)
+
+logic ia1 : int
+
+axiom H17 : (to_rep1(first(a1)) <= ia1)
+
+axiom H18 : (ia1 <= to_rep1(last(a1)))
+
  (* File "perm.ads", line 2, characters 0-0 *)
 goal WP_parameter_def :
-  (forall hr:int. forall perm__perm_eq__result:int. forall o:int.
-  forall result:int. forall hr1:int. forall result1:int.
-  forall perm__perm_eq__result1:int. forall perm__perm_eq__result2:int.
-  forall perm__perm_eq__result3:int. forall hr2:int.
-  forall perm__perm_eq__result4:int. forall hr3:int.
-  forall perm__perm_eq__result5:int.
-  (forall result2:int. ((dynamic_property(1, 100, to_rep1(first(a1)),
-  to_rep1(last(a1))) and (dynamic_property(1, 100, to_rep1(first(b1)),
-  to_rep1(last(b1))) and (((invariant__({ elts = a; rt = a1 }) = true) and
-  ((invariant__({ elts = b; rt = b1 }) = true) and (is_perm({ elts = a; rt =
-  a1 }, { elts = b; rt = b1 }) = true))) and ((((((o = extended_perm({ elts =
-  a; rt = a1 }, { elts = b; rt = b1 })) and (in_range2(o) and
-  ((of_int(o) = true) ->
-  (forall ia:int. (((to_rep1(first(a1)) <= ia) and
-  (ia <= to_rep1(last(a1)))) ->
-  (exists ib:int. (((to_rep1(first(b1)) <= ib) and
-  (ib <= to_rep1(last(b1)))) and ((to_rep((a[ia])) = to_rep((b[ib]))) and
-  (is_perm(remove({ elts = a; rt = a1 }, ia), remove({ elts = b; rt = b1 },
-  ib)) = true))))))))) and (({ int__content = result } = { int__content = hr
-  }) and (hr1 = o))) and (in_range2(hr1) and
-  (((perm__perm_eq__result1 = perm__perm_eq__result2) and
-  (perm__perm_eq__result3 = perm__perm_eq__result1)) and (({ int__content =
-  result1 } = { int__content = perm__perm_eq__result }) and
-  (perm__perm_eq__result1 = hr1))))) and ((({ int__content =
-  perm__perm_eq__result4 } = { int__content = perm__perm_eq__result2 }) and
-  (hr1 = hr2)) and ((perm__perm_eq__result5 = perm__perm_eq__result3) and
-  (hr3 = hr1)))) and (result2 = perm__perm_eq__result4))))) ->
-  ((of_int(perm__perm_eq__result4) = true) ->
-  (forall ia:int. (((to_rep1(first(a1)) <= ia) and
-  (ia <= to_rep1(last(a1)))) ->
-  (exists ib:int. (((to_rep1(first(b1)) <= ib) and
-  (ib <= to_rep1(last(b1)))) and (to_rep((a[ia])) = to_rep((b[ib])))))))))))
+  (exists ib1:int. (((to_rep1(first(b1)) <= ib1) and
+  (ib1 <= to_rep1(last(b1)))) and (to_rep((a[ia1])) = to_rep((b[ib1])))))

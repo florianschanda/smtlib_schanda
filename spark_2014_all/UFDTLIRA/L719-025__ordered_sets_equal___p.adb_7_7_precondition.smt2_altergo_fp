@@ -1288,17 +1288,43 @@ axiom w_get__post_axiom :
   ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
   in_range8(w_get(container, witness1)))))
 
+logic l__split_fields : us_main_type
+
+logic l__split_fields1 : us_main_type
+
+logic cu__split_fields : count_type
+
+logic i : bool
+
+logic l__split_fields2 : us_main_type
+
+logic cu__split_fields1 : count_type
+
+logic l__split_fields3 : us_main_type
+
+logic cu__split_fields2 : count_type
+
+logic i1 : bool
+
+logic l__split_fields4 : us_main_type
+
+logic cu__split_fields3 : count_type
+
+logic i2 : bool
+
+axiom H : in_range2(e)
+
+axiom H1 : ((length({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
+  l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
+  l__split_fields } }) <  to_rep(l__split_discrs)) and
+  (not (contains(model__({ us_split_discrs1 = {
+  rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
+  rec__p__my_sets__set = l__split_fields } }), e) = true)))
+
  (* File "p.ads", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall l__split_fields:us_main_type. (in_range2(e) -> (((length({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields }
-  }) <  to_rep(l__split_discrs)) and (not (contains(model__({
-  us_split_discrs1 = { rec__p__my_sets__set__capacity = l__split_discrs };
-  us_split_fields1 = { rec__p__my_sets__set = l__split_fields } }),
-  e) = true))) -> ((length({ us_split_discrs1 = {
+goal WP_parameter_def : ((length({ us_split_discrs1 = {
   rec__p__my_sets__set__capacity = l__split_discrs }; us_split_fields1 = {
   rec__p__my_sets__set = l__split_fields } }) <  to_rep(l__split_discrs)) or
   (contains(model__({ us_split_discrs1 = { rec__p__my_sets__set__capacity =
   l__split_discrs }; us_split_fields1 = { rec__p__my_sets__set =
-  l__split_fields } }), e) = true)))))
+  l__split_fields } }), e) = true))

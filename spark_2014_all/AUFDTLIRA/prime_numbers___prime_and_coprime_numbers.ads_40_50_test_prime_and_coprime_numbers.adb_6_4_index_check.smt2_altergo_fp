@@ -312,8 +312,18 @@ logic high : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic v : int
+
+axiom H : in_range1(low)
+
+axiom H1 : in_range1(high)
+
+axiom H2 : (((0 <= low) and (low <= 100000)) and ((0 <= high) and
+  (high <= 100000)))
+
+axiom H3 : (low <= v)
+
+axiom H4 : (v <= high)
+
  (* File "prime_and_coprime_numbers.ads", line 37, characters 0-0 *)
-goal WP_parameter_def :
-  (forall v:int. (in_range1(low) -> (in_range1(high) -> ((((0 <= low) and
-  (low <= 100000)) and ((0 <= high) and (high <= 100000))) ->
-  (((low <= v) and (v <= high)) -> (0 <= v))))))
+goal WP_parameter_def : (0 <= v)

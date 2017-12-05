@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -475,69 +475,224 @@ type t19b__ref = { t19b__content : us_t1
 
 function t19b__ref___projection(a: t19b__ref) : us_t1 = (a).t19b__content
 
- (* File "sorters.adb", line 22, characters 0-0 *)
-goal WP_parameter_def :
-  (forall smallest:int. forall current:int. forall temp___166:int.
-  forall o:(int,integer) farray. forall temp___160:(int,integer) farray.
-  forall temp___1601:t1. forall o1:(int,integer) farray. forall o2:t.
-  forall o3:int. forall o4:int. forall o5:integer. forall o6:int.
-  forall sorters__swap__y:int. forall o7:int. forall o8:integer.
-  forall o9:int. forall sorters__swap__x:int. forall o10:integer.
-  forall o11:int. forall o12:(int,integer) farray. forall o13:integer.
-  forall o14:int. forall o15:(int,integer) farray. forall j:int.
-  forall result:int. forall current1:int. forall values:(int,integer) farray.
-  forall smallest1:int. forall current2:int. forall rho:int. forall rho1:int.
-  forall result1:int. forall smallest2:int. forall sorters__swap__y1:int.
-  forall sorters__swap__x1:int. forall result2:(int,integer) farray.
-  forall values1:(int,integer) farray. forall result3:(int,integer) farray.
-  forall values2:(int,integer) farray. (dynamic_property(1, 2147483647,
-  to_rep(values__first), to_rep(values__last)) ->
-  (((((to_rep(values__first) <= to_rep(values__last)) and
-  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) or
-  ((not (to_rep(values__first) <= to_rep(values__last))) and (1 <= 0))) and
-  (to_rep(values__last) <= 2147483647)) -> (((1 <= 2147483647) ->
-  in_range2(smallest)) -> (((temp___166 = (to_rep(values__last) - 1)) and
-  in_range1((to_rep(values__last) - 1))) -> (((result = current) and
-  (current1 = to_rep(values__first))) ->
-  (((to_rep(values__first) <= current1) and (current1 <= temp___166)) ->
-  ((((1 <= 2147483647) -> in_range2(smallest1)) and
+logic smallest : int
+
+logic current : int
+
+logic temp___166 : int
+
+logic o : (int,integer) farray
+
+logic temp___160 : (int,integer) farray
+
+logic temp___1601 : t1
+
+logic o1 : (int,integer) farray
+
+logic o2 : t
+
+logic o3 : int
+
+logic j : int
+
+logic o4 : int
+
+logic o5 : integer
+
+logic o6 : int
+
+logic o7 : int
+
+logic o8 : integer
+
+logic o9 : int
+
+logic sorters__swap__y : int
+
+logic o10 : int
+
+logic o11 : integer
+
+logic o12 : int
+
+logic sorters__swap__x : int
+
+logic o13 : integer
+
+logic o14 : int
+
+logic o15 : (int,integer) farray
+
+logic o16 : integer
+
+logic o17 : int
+
+logic o18 : (int,integer) farray
+
+logic j1 : int
+
+logic o19 : int
+
+logic o20 : integer
+
+logic o21 : int
+
+logic result : int
+
+logic current1 : int
+
+logic values : (int,integer) farray
+
+logic smallest1 : int
+
+logic current2 : int
+
+logic rho : int
+
+logic rho1 : int
+
+logic result1 : int
+
+logic smallest2 : int
+
+logic sorters__swap__y1 : int
+
+logic sorters__swap__x1 : int
+
+logic result2 : (int,integer) farray
+
+logic values1 : (int,integer) farray
+
+logic result3 : (int,integer) farray
+
+logic values2 : (int,integer) farray
+
+axiom H : dynamic_property(1, 2147483647, to_rep(values__first),
+  to_rep(values__last))
+
+axiom H1 : ((((to_rep(values__first) <= to_rep(values__last)) ->
+  (1 <= ((to_rep(values__last) - to_rep(values__first)) + 1))) and
+  ((not (to_rep(values__first) <= to_rep(values__last))) -> (1 <= 0))) and
+  (to_rep(values__last) <= 2147483647))
+
+axiom H2 : ((1 <= 2147483647) -> in_range2(smallest))
+
+axiom H3 : ((temp___166 = (to_rep(values__last) - 1)) and
+  in_range1((to_rep(values__last) - 1)))
+
+axiom H4 : (result = current)
+
+axiom H5 : (current1 = to_rep(values__first))
+
+axiom H6 : (to_rep(values__first) <= current1)
+
+axiom H7 : (current1 <= temp___166)
+
+axiom H8 : (((1 <= 2147483647) -> in_range2(smallest1)) and
   ((to_rep(values__first) <= current2) and
-  (current2 <= (to_rep(values__last) - 1)))) ->
-  ((((((((current2 <= to_rep(values__last)) ->
+  (current2 <= (to_rep(values__last) - 1))))
+
+axiom H9 : ((current2 <= to_rep(values__last)) ->
   (((to_rep(values__first) <= current2) and
   (current2 <= to_rep(values__last))) and
   ((to_rep(values__first) <= to_rep(values__last)) and
-  (to_rep(values__last) <= to_rep(values__last))))) and (o = values)) and
-  ((o = temp___160) and (mk1(current2,
-  to_rep(values__last)) = temp___1601))) and ((temp___160 = o1) and
-  (mk(to_rep(first2(temp___1601)), to_rep(last2(temp___1601))) = o2))) and
-  ((o3 = index_of_minimum({ elts = o1; rt = o2 })) and (in_range2(o3) and
-  (((to_rep(first(o2)) <= o3) and (o3 <= to_rep(last(o2)))) and
-  (forall j1:int. (((to_rep(first(o2)) <= j1) and
-  (j1 <= to_rep(last(o2)))) -> (to_rep((o1[o3])) <= to_rep((o1[j1]))))))))) and
-  ((result1 = smallest1) and (smallest2 = o3))) ->
-  ((forall j1:int. (((current2 <= j1) and (j1 <= to_rep(values__last))) ->
-   (to_rep((values[smallest2])) <= to_rep((values[j1]))))) ->
-  ((((not (smallest2 = current2)) and
-  (((((((to_rep(values__first) <= smallest2) and
-  (smallest2 <= to_rep(values__last))) and (o4 = smallest2)) and
-  (o5 = (values[o4]))) and (o6 = to_rep(o5))) and
-  (o6 = sorters__swap__y)) and (((((((to_rep(values__first) <= current2) and
-  (current2 <= to_rep(values__last))) and (o7 = current2)) and
-  (o8 = (values[o7]))) and (o9 = to_rep(o8))) and
-  (o9 = sorters__swap__x)) and ((((sorters__swap__x1 = sorters__swap__y) and
+  (to_rep(values__last) <= to_rep(values__last)))))
+
+axiom H10 : (o = values)
+
+axiom H11 : (o = temp___160)
+
+axiom H12 : (mk1(current2, to_rep(values__last)) = temp___1601)
+
+axiom H13 : (temp___160 = o1)
+
+axiom H14 : (mk(to_rep(first2(temp___1601)),
+  to_rep(last2(temp___1601))) = o2)
+
+axiom H15 : ((o3 = index_of_minimum({ elts = o1; rt = o2 })) and
+  (in_range2(o3) and (((to_rep(first(o2)) <= o3) and
+  (o3 <= to_rep(last(o2)))) and
+  (forall j2:int. (((to_rep(first(o2)) <= j2) and
+  (j2 <= to_rep(last(o2)))) -> (to_rep((o1[o3])) <= to_rep((o1[j2]))))))))
+
+axiom H16 : (result1 = smallest1)
+
+axiom H17 : (smallest2 = o3)
+
+axiom H18 :
+  (forall j2:int. (((current2 <= j2) and (j2 <= to_rep(values__last))) ->
+  (to_rep((values[smallest2])) <= to_rep((values[j2])))))
+
+axiom H19 : ((not (smallest2 = current2)) ->
+  ((to_rep(values__first) <= smallest2) and
+  (smallest2 <= to_rep(values__last))))
+
+axiom H20 : ((not (smallest2 = current2)) -> (o7 = smallest2))
+
+axiom H21 : ((not (smallest2 = current2)) -> (o8 = (values[o7])))
+
+axiom H22 : ((not (smallest2 = current2)) -> (o9 = to_rep(o8)))
+
+axiom H23 : ((not (smallest2 = current2)) -> (o9 = sorters__swap__y))
+
+axiom H24 : ((not (smallest2 = current2)) ->
+  ((to_rep(values__first) <= current2) and
+  (current2 <= to_rep(values__last))))
+
+axiom H25 : ((not (smallest2 = current2)) -> (o10 = current2))
+
+axiom H26 : ((not (smallest2 = current2)) -> (o11 = (values[o10])))
+
+axiom H27 : ((not (smallest2 = current2)) -> (o12 = to_rep(o11)))
+
+axiom H28 : ((not (smallest2 = current2)) -> (o12 = sorters__swap__x))
+
+axiom H29 : ((not (smallest2 = current2)) ->
+  (((sorters__swap__x1 = sorters__swap__y) and
   (sorters__swap__y1 = sorters__swap__x)) and
-  (in_range1(sorters__swap__x1) and in_range1(sorters__swap__y1))) and
-  ((((to_rep(o10) = sorters__swap__x1) and
-  ((((to_rep(values__first) <= current2) and
-  (current2 <= to_rep(values__last))) and (o11 = current2)) and
-  (o12 = (values[o11 <- o10])))) and ((values = result2) and
-  (values1 = o12))) and (((to_rep(o13) = sorters__swap__y1) and
-  ((((to_rep(values__first) <= smallest2) and
-  (smallest2 <= to_rep(values__last))) and (o14 = smallest2)) and
-  (o15 = (values1[o14 <- o13])))) and ((result3 = values1) and
-  (values2 = o15)))))))) or ((smallest2 = current2) and
-  ((values2 = values) and ((sorters__swap__x1 = rho1) and
-  ((sorters__swap__y1 = rho) and (values2 = values)))))) ->
-  (((current2 <= j) and (j <= to_rep(values__last))) ->
-  (to_rep(values__first) <= j)))))))))))))
+  (in_range1(sorters__swap__x1) and in_range1(sorters__swap__y1))))
+
+axiom H30 : ((not (smallest2 = current2)) ->
+  (to_rep(o13) = sorters__swap__x1))
+
+axiom H31 : ((not (smallest2 = current2)) ->
+  ((to_rep(values__first) <= current2) and
+  (current2 <= to_rep(values__last))))
+
+axiom H32 : ((not (smallest2 = current2)) -> (o14 = current2))
+
+axiom H33 : ((not (smallest2 = current2)) -> (o15 = (values[o14 <- o13])))
+
+axiom H34 : ((not (smallest2 = current2)) -> (values = result2))
+
+axiom H35 : ((not (smallest2 = current2)) -> (values1 = o15))
+
+axiom H36 : ((not (smallest2 = current2)) ->
+  (to_rep(o16) = sorters__swap__y1))
+
+axiom H37 : ((not (smallest2 = current2)) ->
+  ((to_rep(values__first) <= smallest2) and
+  (smallest2 <= to_rep(values__last))))
+
+axiom H38 : ((not (smallest2 = current2)) -> (o17 = smallest2))
+
+axiom H39 : ((not (smallest2 = current2)) -> (o18 = (values1[o17 <- o16])))
+
+axiom H40 : ((not (smallest2 = current2)) -> (result3 = values1))
+
+axiom H41 : ((not (smallest2 = current2)) -> (values2 = o18))
+
+axiom H42 : ((smallest2 = current2) -> (values2 = values))
+
+axiom H43 : ((smallest2 = current2) -> (sorters__swap__x1 = rho1))
+
+axiom H44 : ((smallest2 = current2) -> (sorters__swap__y1 = rho))
+
+axiom H45 : ((smallest2 = current2) -> (values2 = values))
+
+axiom H46 : (current2 <= j1)
+
+axiom H47 : (j1 <= to_rep(values__last))
+
+ (* File "sorters.adb", line 22, characters 0-0 *)
+goal WP_parameter_def : (to_rep(values__first) <= j1)

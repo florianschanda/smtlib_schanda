@@ -243,7 +243,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tindex_typeB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -309,7 +309,7 @@ function real_index_type__ref___projection(a: real_index_type__ref) : real_index
 
 type index_type
 
-predicate in_range3(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -411,41 +411,140 @@ type buffer_type__ref = { buffer_type__content : us_t
 function buffer_type__ref___projection(a: buffer_type__ref) : us_t =
   (a).buffer_type__content
 
- (* File "buf_read.adb", line 23, characters 0-0 *)
-goal WP_parameter_def :
-  (forall c:int. forall buffer:(int,character) farray. forall pointer:int.
-  forall max_read:int. forall o:tindex_typeB. forall o1:tindex_typeB.
-  forall o2:int. forall o3:int. forall buffer1:(int,character) farray.
-  forall max_read1:int. forall result:int. forall c1:int.
-  forall buf_read__read__count:int.
-  forall buf_read__read__b:(int,character) farray.
-  forall result1:(int,character) farray.
-  forall buffer2:(int,character) farray. forall result2:int.
-  forall max_read2:int. forall result3:int. forall pointer1:int.
-  forall result4:int. forall pointer2:int. forall c2:int.
-  forall buffer3:(int,character) farray. forall pointer3:int.
-  forall max_read3:int. forall c3:int. forall buffer4:(int,character) farray.
-  forall pointer4:int. forall max_read4:int. ((in_range2(pointer) and
-  (in_range2(max_read) and (((0 <= 255) -> in_range(c)) and
-  ((valid_state(buffer, pointer, max_read) = true) and (((({ int__content =
-  result } = { int__content = c }) and (c1 = to_rep((buffer[pointer])))) and
-  (((pointer = max_read) and ((((to_rep1(o1) = 1000) and
-  ((to_rep1(o) = 1) and ((((to_rep1(o) <= buf_read__read__count) and
+logic c : int
+
+logic buffer : (int,character) farray
+
+logic pointer : int
+
+logic max_read : int
+
+logic o : tindex_typeB
+
+logic o1 : tindex_typeB
+
+logic o2 : int
+
+logic o3 : int
+
+logic buffer1 : (int,character) farray
+
+logic max_read1 : int
+
+logic result : int
+
+logic c1 : int
+
+logic buf_read__read__count : int
+
+logic buf_read__read__b : (int,character) farray
+
+logic result1 : (int,character) farray
+
+logic buffer2 : (int,character) farray
+
+logic result2 : int
+
+logic max_read2 : int
+
+logic result3 : int
+
+logic pointer1 : int
+
+logic result4 : int
+
+logic pointer2 : int
+
+logic c2 : int
+
+logic buffer3 : (int,character) farray
+
+logic pointer3 : int
+
+logic max_read3 : int
+
+logic c3 : int
+
+logic buffer4 : (int,character) farray
+
+logic pointer4 : int
+
+logic max_read4 : int
+
+axiom H : in_range2(pointer)
+
+axiom H1 : in_range2(max_read)
+
+axiom H2 : ((0 <= 255) -> in_range(c))
+
+axiom H3 : (valid_state(buffer, pointer, max_read) = true)
+
+axiom H4 : (result = c)
+
+axiom H5 : (c1 = to_rep((buffer[pointer])))
+
+axiom H6 : ((pointer = max_read) -> (to_rep1(o1) = 1000))
+
+axiom H7 : ((pointer = max_read) -> (to_rep1(o) = 1))
+
+axiom H8 : ((pointer = max_read) ->
+  ((((to_rep1(o) <= buf_read__read__count) and
   (buf_read__read__count <= to_rep1(o1))) and
   (forall index:int. (((to_rep1(o) <= index) and
   (index <= ((to_rep1(o) + buf_read__read__count) - 1))) ->
   (valid(to_rep((buf_read__read__b[index]))) = true)))) and
-  in_range3(buf_read__read__count)))) and ((({ map__content = result1 } = {
-  map__content = buffer }) and (buffer2 = slide(buf_read__read__b,
-  to_rep1(first(mk(1, 1000))), 1))) and (((o2 = buf_read__read__count) and
-  in_range2(buf_read__read__count)) and ((result2 = max_read) and
-  (max_read2 = o2))))) and ((result3 = pointer) and (pointer1 = 1)))) or
-  ((not (pointer = max_read)) and ((((o3 = (pointer + 1)) and
-  in_range2((pointer + 1))) and ((result4 = pointer) and
-  (pointer2 = o3))) and (((max_read2 = max_read) and
-  ((pointer1 = pointer2) and (buffer2 = buffer))) and
-  ((max_read2 = max_read1) and ((pointer1 = pointer2) and
-  (buffer2 = buffer1)))))))) and (((max_read2 = max_read3) and
-  ((pointer1 = pointer3) and ((buffer2 = buffer3) and (c1 = c2)))) and
-  ((max_read4 = max_read2) and ((pointer4 = pointer1) and
-  ((buffer4 = buffer2) and (c3 = c1)))))))))) -> (valid(c2) = true)))
+  in_range3(buf_read__read__count)))
+
+axiom H9 : ((pointer = max_read) -> (result1 = buffer))
+
+axiom H10 : ((pointer = max_read) -> (buffer2 = slide(buf_read__read__b,
+  to_rep1(first(mk(1, 1000))), 1)))
+
+axiom H11 : ((pointer = max_read) -> ((o2 = buf_read__read__count) and
+  in_range2(buf_read__read__count)))
+
+axiom H12 : ((pointer = max_read) -> (result2 = max_read))
+
+axiom H13 : ((pointer = max_read) -> (max_read2 = o2))
+
+axiom H14 : ((pointer = max_read) -> (result3 = pointer))
+
+axiom H15 : ((pointer = max_read) -> (pointer1 = 1))
+
+axiom H16 : ((not (pointer = max_read)) -> ((o3 = (pointer + 1)) and
+  in_range2((pointer + 1))))
+
+axiom H17 : ((not (pointer = max_read)) -> (result4 = pointer))
+
+axiom H18 : ((not (pointer = max_read)) -> (pointer2 = o3))
+
+axiom H19 : ((not (pointer = max_read)) -> (max_read2 = max_read))
+
+axiom H20 : ((not (pointer = max_read)) -> (pointer1 = pointer2))
+
+axiom H21 : ((not (pointer = max_read)) -> (buffer2 = buffer))
+
+axiom H22 : ((not (pointer = max_read)) -> (max_read2 = max_read1))
+
+axiom H23 : ((not (pointer = max_read)) -> (pointer1 = pointer2))
+
+axiom H24 : ((not (pointer = max_read)) -> (buffer2 = buffer1))
+
+axiom H25 : (max_read2 = max_read3)
+
+axiom H26 : (pointer1 = pointer3)
+
+axiom H27 : (buffer2 = buffer3)
+
+axiom H28 : (c1 = c2)
+
+axiom H29 : (max_read4 = max_read2)
+
+axiom H30 : (pointer4 = pointer1)
+
+axiom H31 : (buffer4 = buffer2)
+
+axiom H32 : (c3 = c1)
+
+ (* File "buf_read.adb", line 23, characters 0-0 *)
+goal WP_parameter_def : (valid(c2) = true)

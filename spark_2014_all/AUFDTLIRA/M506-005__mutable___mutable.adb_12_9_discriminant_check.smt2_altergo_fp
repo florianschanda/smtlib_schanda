@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -157,7 +157,7 @@ axiom coerce_axiom1 :
 
 type tdB
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -435,15 +435,15 @@ logic bool_eq7 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
-  (((((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som))) and
-  (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
-  ((b).us_split_fields1).rec__mutable__t__arr) = true)) -> (bool_eq7(a,
-  b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som))) and
+  ((((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som)) and
   (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
   ((b).us_split_fields1).rec__mutable__t__arr) = true))) -> (bool_eq7(a,
+  b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__mutable__t__k) = to_rep1(((b).us_split_discrs1).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields1).rec__mutable__t__som) = to_rep(((b).us_split_fields1).rec__mutable__t__som)) and
+  (bool_eq6(((a).us_split_fields1).rec__mutable__t__arr,
+  ((b).us_split_fields1).rec__mutable__t__arr) = true)))) -> (bool_eq7(a,
   b) = false))))
 
 logic value__size1 : int
@@ -637,15 +637,15 @@ logic bool_eq9 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
-  (((((to_rep1(((a).us_split_discrs2).rec__mutable__t__k) = to_rep1(((b).us_split_discrs2).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields3).rec__mutable__t__som1) = to_rep(((b).us_split_fields3).rec__mutable__t__som1))) and
-  (bool_eq4(((a).us_split_fields3).rec__mutable__t__arr1, 1, 5,
-  ((b).us_split_fields3).rec__mutable__t__arr1, 1, 5) = true)) ->
-  (bool_eq9(a, b) = true)) and
-  ((not (((to_rep1(((a).us_split_discrs2).rec__mutable__t__k) = to_rep1(((b).us_split_discrs2).rec__mutable__t__k)) and
-  (to_rep(((a).us_split_fields3).rec__mutable__t__som1) = to_rep(((b).us_split_fields3).rec__mutable__t__som1))) and
+  ((((to_rep1(((a).us_split_discrs2).rec__mutable__t__k) = to_rep1(((b).us_split_discrs2).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields3).rec__mutable__t__som1) = to_rep(((b).us_split_fields3).rec__mutable__t__som1)) and
   (bool_eq4(((a).us_split_fields3).rec__mutable__t__arr1, 1, 5,
   ((b).us_split_fields3).rec__mutable__t__arr1, 1, 5) = true))) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((to_rep1(((a).us_split_discrs2).rec__mutable__t__k) = to_rep1(((b).us_split_discrs2).rec__mutable__t__k)) and
+  ((to_rep(((a).us_split_fields3).rec__mutable__t__som1) = to_rep(((b).us_split_fields3).rec__mutable__t__som1)) and
+  (bool_eq4(((a).us_split_fields3).rec__mutable__t__arr1, 1, 5,
+  ((b).us_split_fields3).rec__mutable__t__arr1, 1, 5) = true)))) ->
   (bool_eq9(a, b) = false))))
 
 predicate in_range4(rec__mutable__t__k1: int, a: us_rep) =
@@ -738,22 +738,80 @@ axiom def_axiom :
   (forall temp___193:int.
   ((temp___190(temp___192)[temp___193]) = of_rep(temp___192))))
 
+logic x__split_fields : integer
+
+logic x__split_fields1 : (int,integer) farray
+
+logic x__split_fields2 : t
+
+logic x__split_discrs : d
+
+logic o : d
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : (int,integer) farray
+
+logic o4 : d
+
+logic o5 : d
+
+logic o6 : integer
+
+logic o7 : (int,integer) farray
+
+logic o8 : bool
+
+logic temp___194 : d
+
+logic temp___1941 : integer
+
+logic temp___1942 : (int,integer) farray
+
+logic temp___1943 : t
+
+logic temp___1944 : bool
+
+axiom H : (dynamic_property1(1, to_rep1(x__split_discrs),
+  to_rep2(first(x__split_fields2)), to_rep2(last(x__split_fields2))) and
+  ((to_rep2(first(x__split_fields2)) = 1) and
+  (to_rep2(last(x__split_fields2)) = to_rep1(x__split_discrs))))
+
+axiom H1 : (to_rep1(x__split_discrs) = r4b)
+
+axiom H2 : in_range1(r4b)
+
+axiom H3 : (to_rep(o1) = 3)
+
+axiom H4 : (o1 = o2)
+
+axiom H5 : (temp___190(0) = o3)
+
+axiom H6 : (to_rep1(o) = 5)
+
+axiom H7 : (o = o4)
+
+axiom H8 : (o5 = o4)
+
+axiom H9 : (o6 = o2)
+
+axiom H10 : (o7 = o3)
+
+axiom H11 : (true = o8)
+
+axiom H12 : (o5 = temp___194)
+
+axiom H13 : (o6 = temp___1941)
+
+axiom H14 : (o7 = temp___1942)
+
+axiom H15 : (mk(1, 5) = temp___1943)
+
+axiom H16 : (o8 = temp___1944)
+
+axiom H17 : (x__attr__constrained = true)
+
  (* File "mutable.adb", line 15, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:t. forall x__split_discrs:d. forall o:d.
-  forall o1:integer. forall o2:integer. forall o3:(int,integer) farray.
-  forall o4:d. forall o5:d. forall o6:integer.
-  forall o7:(int,integer) farray. forall o8:bool. forall temp___194:d.
-  forall temp___1941:integer. forall temp___1942:(int,integer) farray.
-  forall temp___1943:t. forall temp___1944:bool. ((dynamic_property1(1,
-  to_rep1(x__split_discrs), to_rep2(first(x__split_fields)),
-  to_rep2(last(x__split_fields))) and
-  ((to_rep2(first(x__split_fields)) = 1) and
-  (to_rep2(last(x__split_fields)) = to_rep1(x__split_discrs)))) ->
-  (((to_rep1(x__split_discrs) = r4b) and in_range1(r4b)) ->
-  (((((to_rep(o1) = 3) and ((o1 = o2) and (temp___190(0) = o3))) and
-  (((to_rep1(o) = 5) and (o = o4)) and ((o5 = o4) and (((o6 = o2) and
-  (o7 = o3)) and (true = o8))))) and ((o5 = temp___194) and
-  (((o6 = temp___1941) and ((o7 = temp___1942) and (mk(1,
-  5) = temp___1943))) and (o8 = temp___1944)))) ->
-  ((x__attr__constrained = true) -> (temp___194 = x__split_discrs))))))
+goal WP_parameter_def : (temp___194 = x__split_discrs)

@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -427,6 +427,14 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 logic b__attr__constrained : bool
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic a__split_fields : integer
+
+logic b__split_discrs : bool
+
+logic result : integer
+
+logic a__split_fields1 : integer
 
  (* File "tests.adb", line 330, characters 0-0 *)
 goal WP_parameter_def : true

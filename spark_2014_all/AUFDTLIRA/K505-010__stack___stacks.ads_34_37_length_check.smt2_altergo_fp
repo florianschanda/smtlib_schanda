@@ -120,7 +120,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
 
@@ -159,7 +159,7 @@ axiom coerce_axiom1 :
 
 type element
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -582,16 +582,16 @@ logic bool_eq10 : us_rep, us_rep -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep. forall b:us_rep [bool_eq10(a, b)].
-  (((((to_rep(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep3(((a).us_split_fields1).rec__stacks__stack__top) = to_rep3(((b).us_split_fields1).rec__stacks__stack__top))) and
-  (bool_eq6(((a).us_split_fields1).rec__stacks__stack__data,
-  ((b).us_split_fields1).rec__stacks__stack__data) = true)) -> (bool_eq10(a,
-  b) = true)) and
-  ((not (((to_rep(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep(((b).us_split_discrs1).rec__stacks__stack__max)) and
-  (to_rep3(((a).us_split_fields1).rec__stacks__stack__top) = to_rep3(((b).us_split_fields1).rec__stacks__stack__top))) and
+  ((((to_rep(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep3(((a).us_split_fields1).rec__stacks__stack__top) = to_rep3(((b).us_split_fields1).rec__stacks__stack__top)) and
   (bool_eq6(((a).us_split_fields1).rec__stacks__stack__data,
   ((b).us_split_fields1).rec__stacks__stack__data) = true))) -> (bool_eq10(a,
-  b) = false))))
+  b) = true)) and
+  ((not ((to_rep(((a).us_split_discrs1).rec__stacks__stack__max) = to_rep(((b).us_split_discrs1).rec__stacks__stack__max)) and
+  ((to_rep3(((a).us_split_fields1).rec__stacks__stack__top) = to_rep3(((b).us_split_fields1).rec__stacks__stack__top)) and
+  (bool_eq6(((a).us_split_fields1).rec__stacks__stack__data,
+  ((b).us_split_fields1).rec__stacks__stack__data) = true)))) ->
+  (bool_eq10(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
 
@@ -770,26 +770,38 @@ logic temp___195 : int, int, int -> us_t1
 
 axiom def_axiom :
   (forall temp___197:int. forall temp___198:int. forall temp___199:int.
-  ((dynamic_property4((-2147483648), 2147483647, temp___198, temp___199) ->
+  ((dynamic_property4((- 2147483648), 2147483647, temp___198, temp___199) ->
   ((to_rep1(first2((temp___195(temp___197, temp___198,
   temp___199)).rt1)) = temp___198) and (to_rep1(last2((temp___195(temp___197,
   temp___198, temp___199)).rt1)) = temp___199))) and
   (forall temp___200:int. (((temp___195(temp___197, temp___198,
   temp___199)).elts1[temp___200]) = of_rep2(temp___197)))))
 
+logic temp___194 : int
+
+logic temp___193 : positive
+
+logic temp___202 : (int,element) farray
+
+logic temp___2021 : t1
+
+axiom H : in_range(temp___194)
+
+axiom H1 : (temp___194 = to_rep(temp___193))
+
+axiom H2 : (to_rep1(first2((temp___195(0, 1, temp___194)).rt1)) = 1)
+
+axiom H3 : (to_rep1(last2((temp___195(0, 1, temp___194)).rt1)) = temp___194)
+
+axiom H4 : ({ elts1 = temp___202; rt1 = temp___2021 } = temp___195(0, 1,
+  temp___194))
+
  (* File "stacks.ads", line 34, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___194:int. forall temp___193:positive.
-  forall temp___202:(int,element) farray. forall temp___2021:t1.
-  (in_range(temp___194) -> ((temp___194 = to_rep(temp___193)) ->
-  (((to_rep1(first2((temp___195(0, 1, temp___194)).rt1)) = 1) and
-  ((to_rep1(last2((temp___195(0, 1, temp___194)).rt1)) = temp___194) and ({
-  elts1 = temp___202; rt1 = temp___2021 } = temp___195(0, 1,
-  temp___194)))) ->
   (((to_rep1(first2(temp___2021)) <= to_rep1(last2(temp___2021))) ->
   (((1 <= temp___194) ->
   (((to_rep1(last2(temp___2021)) - to_rep1(first2(temp___2021))) + 1) = ((temp___194 - 1) + 1))) and
   ((not (1 <= temp___194)) ->
   (((to_rep1(last2(temp___2021)) - to_rep1(first2(temp___2021))) + 1) = 0)))) and
   ((not (to_rep1(first2(temp___2021)) <= to_rep1(last2(temp___2021)))) ->
-  ((1 <= temp___194) -> (0 = ((temp___194 - 1) + 1)))))))))
+  ((1 <= temp___194) -> (0 = ((temp___194 - 1) + 1)))))

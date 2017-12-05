@@ -104,7 +104,15 @@ function pt__ref___projection(a: pt__ref) : pt = (a).pt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic o : pt
+
+logic us_self__compl : pt
+
+logic po : pt
+
+axiom H : (o = po)
+
+axiom H1 : (us_self__compl = o)
+
  (* File "p.adb", line 21, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:pt. forall us_self__compl:pt. forall po:pt. (not ((o = po) and
-  (us_self__compl = o))))
+goal WP_parameter_def : false

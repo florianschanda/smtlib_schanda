@@ -146,7 +146,7 @@ axiom coerce_axiom :
 
 type integer
 
-predicate in_range2(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
 
@@ -371,23 +371,82 @@ logic j : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic a : (int,positive) farray
+
+logic o : int
+
+logic o1 : positive
+
+logic o2 : int
+
+logic aliasing__swap__y : int
+
+logic o3 : int
+
+logic o4 : positive
+
+logic o5 : int
+
+logic aliasing__swap__x : int
+
+logic o6 : positive
+
+logic o7 : int
+
+logic o8 : (int,positive) farray
+
+logic o9 : positive
+
+logic aliasing__swap__y1 : int
+
+logic aliasing__swap__x1 : int
+
+logic result : (int,positive) farray
+
+logic a1 : (int,positive) farray
+
+axiom H : dynamic_property(0, 2147483647, to_rep1(a__first),
+  to_rep1(a__last))
+
+axiom H1 : in_range(i)
+
+axiom H2 : in_range(j)
+
+axiom H3 : ((to_rep1(a__first) <= j) and (j <= to_rep1(a__last)))
+
+axiom H4 : (o = j)
+
+axiom H5 : (o1 = (a[o]))
+
+axiom H6 : (o2 = to_rep(o1))
+
+axiom H7 : (o2 = aliasing__swap__y)
+
+axiom H8 : ((to_rep1(a__first) <= i) and (i <= to_rep1(a__last)))
+
+axiom H9 : (o3 = i)
+
+axiom H10 : (o4 = (a[o3]))
+
+axiom H11 : (o5 = to_rep(o4))
+
+axiom H12 : (o5 = aliasing__swap__x)
+
+axiom H13 : (in_range1(aliasing__swap__x1) and in_range1(aliasing__swap__y1))
+
+axiom H14 : (to_rep(o6) = aliasing__swap__x1)
+
+axiom H15 : ((to_rep1(a__first) <= i) and (i <= to_rep1(a__last)))
+
+axiom H16 : (o7 = i)
+
+axiom H17 : (o8 = (a[o7 <- o6]))
+
+axiom H18 : (result = a)
+
+axiom H19 : (a1 = o8)
+
+axiom H20 : (to_rep(o9) = aliasing__swap__y1)
+
  (* File "aliasing.adb", line 4, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,positive) farray. forall o:int. forall o1:positive.
-  forall o2:int. forall aliasing__swap__y:int. forall o3:int.
-  forall o4:positive. forall o5:int. forall aliasing__swap__x:int.
-  forall o6:positive. forall o7:int. forall o8:(int,positive) farray.
-  forall o9:positive. forall aliasing__swap__y1:int.
-  forall aliasing__swap__x1:int. forall result:(int,positive) farray.
-  forall a1:(int,positive) farray. (dynamic_property(0, 2147483647,
-  to_rep1(a__first), to_rep1(a__last)) -> (in_range(i) -> (in_range(j) ->
-  (((((((to_rep1(a__first) <= j) and (j <= to_rep1(a__last))) and
-  (o = j)) and (o1 = (a[o]))) and (o2 = to_rep(o1))) and
-  (o2 = aliasing__swap__y)) -> (((((((to_rep1(a__first) <= i) and
-  (i <= to_rep1(a__last))) and (o3 = i)) and (o4 = (a[o3]))) and
-  (o5 = to_rep(o4))) and (o5 = aliasing__swap__x)) ->
-  ((in_range1(aliasing__swap__x1) and in_range1(aliasing__swap__y1)) ->
-  ((((to_rep(o6) = aliasing__swap__x1) and ((((to_rep1(a__first) <= i) and
-  (i <= to_rep1(a__last))) and (o7 = i)) and (o8 = (a[o7 <- o6])))) and
-  ((result = a) and (a1 = o8))) -> ((to_rep(o9) = aliasing__swap__y1) ->
-  (to_rep1(a__first) <= j))))))))))
+goal WP_parameter_def : (to_rep1(a__first) <= j)

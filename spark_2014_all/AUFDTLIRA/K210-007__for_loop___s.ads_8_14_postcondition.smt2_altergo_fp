@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -303,60 +303,137 @@ function t1b__ref___projection(a: t1b__ref) : t1b = (a).t1b__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic index : int
+
+logic s__contains__result : bool
+
+logic temp___159 : int
+
+logic temp___160 : int
+
+logic temp___158 : int
+
+logic j : int
+
+logic s__contains__result1 : bool
+
+logic result : int
+
+logic index1 : int
+
+logic index2 : int
+
+logic s__contains__result2 : bool
+
+logic result1 : bool
+
+logic s__contains__result3 : bool
+
+logic result2 : int
+
+logic index3 : int
+
+logic index4 : int
+
+logic s__contains__result4 : bool
+
+logic index5 : int
+
+logic s__contains__result5 : bool
+
+logic index6 : int
+
+logic s__contains__result6 : bool
+
+logic index7 : int
+
+logic s__contains__result7 : bool
+
+logic index8 : int
+
+logic s__contains__result8 : bool
+
+logic index9 : int
+
+logic s__contains__result9 : bool
+
+logic result3 : bool
+
+logic s__contains__result10 : bool
+
+logic s__contains__result11 : bool
+
+logic s__contains__result12 : bool
+
+logic index10 : int
+
+logic s__contains__result13 : bool
+
+logic index11 : int
+
+logic s__contains__result14 : bool
+
+logic index12 : int
+
+logic s__contains__result15 : bool
+
+logic index13 : int
+
+logic s__contains__result16 : bool
+
+logic result4 : bool
+
+axiom H : in_range1(value)
+
+axiom H1 : (((((s__contains__result3 = s__contains__result13) and
+  (index2 = index10)) and ((s__contains__result14 = s__contains__result3) and
+  (index11 = index2))) and ((temp___159 = 1) and ((temp___160 = 10) and
+  (((result = index) and (index1 = temp___159)) and
+  (((temp___159 <= index1) and (index1 <= temp___160)) and
+  ((temp___158 = index1) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= (index2 - 1))) ->
+   (not (to_rep((table[j1])) = value)))) and ((((1 <= 10) ->
+  in_range3(index2)) and ((1 <= index2) and (index2 <= 10))) and
+  ((to_rep((table[index2])) = value) and
+  ((result1 = s__contains__result2) and
+  (s__contains__result3 = of_int(1)))))))))))) or ((((result = index) and
+  (index1 = 1)) and ((((1 <= index1) and (index1 <= 10)) ->
+  ((((temp___158 = index1) and
+  ((forall j1:int. (((1 <= j1) and (j1 <= (index2 - 1))) ->
+   (not (to_rep((table[j1])) = value)))) and ((((1 <= 10) ->
+  in_range3(index2)) and ((1 <= index2) and (index2 <= 10))) and
+  (((not (to_rep((table[index2])) = value)) and
+  (s__contains__result3 = s__contains__result2)) and (index2 = 10))))) and
+  (((s__contains__result3 = s__contains__result6) and (index2 = index6)) and
+  ((s__contains__result7 = s__contains__result3) and (index7 = index2)))) and
+  (((s__contains__result8 = s__contains__result6) and (index8 = index6)) and
+  ((s__contains__result9 = s__contains__result7) and
+  (index9 = index7))))) and ((not ((1 <= index1) and (index1 <= 10))) ->
+  (((s__contains__result8 = s__contains__result) and (index1 = index8)) and
+  ((s__contains__result9 = s__contains__result1) and
+  (index9 = index1)))))) and
+  ((((s__contains__result13 = s__contains__result11) and
+  (index10 = index8)) and
+  ((s__contains__result14 = s__contains__result12) and
+  (index11 = index9))) and
+  (((s__contains__result10 = s__contains__result11) and
+  (s__contains__result12 = s__contains__result10)) and
+  ((result3 = s__contains__result8) and
+  (s__contains__result10 = of_int(0)))))))
+
+axiom H2 : (s__contains__result15 = s__contains__result13)
+
+axiom H3 : (index12 = index10)
+
+axiom H4 : (s__contains__result16 = s__contains__result14)
+
+axiom H5 : (index13 = index11)
+
+axiom H6 : (result4 = s__contains__result15)
+
+axiom H7 : (s__contains__result15 = true)
+
  (* File "s.ads", line 7, characters 0-0 *)
 goal WP_parameter_def :
-  (forall index:int. forall s__contains__result:bool. forall temp___159:int.
-  forall temp___160:int. forall temp___158:int.
-  forall s__contains__result1:bool. forall result:int. forall index1:int.
-  forall index2:int. forall s__contains__result2:bool. forall result1:bool.
-  forall s__contains__result3:bool. forall index3:int.
-  forall s__contains__result4:bool. forall index4:int.
-  forall s__contains__result5:bool. forall index5:int.
-  forall s__contains__result6:bool. forall index6:int.
-  forall s__contains__result7:bool. forall result2:bool.
-  forall s__contains__result8:bool. forall s__contains__result9:bool.
-  forall s__contains__result10:bool. forall index7:int.
-  forall s__contains__result11:bool. forall index8:int.
-  forall s__contains__result12:bool. forall index9:int.
-  forall s__contains__result13:bool. forall index10:int.
-  forall s__contains__result14:bool.
-  (forall result3:bool. ((in_range1(value) and
-  (((((((s__contains__result3 = s__contains__result11) and
-  (index2 = index7)) and ((s__contains__result12 = s__contains__result3) and
-  (index8 = index2))) and ((temp___159 = 1) and ((temp___160 = 10) and ((({
-  int__content = result } = { int__content = index }) and
-  (index1 = temp___159)) and (((temp___159 <= index1) and
-  (index1 <= temp___160)) and ((temp___158 = index1) and
-  ((forall j:int. (((1 <= j) and (j <= (index2 - 1))) ->
-   (not (to_rep((table[j])) = value)))) and
-  ((((1 <= 10) -> in_range3(index2)) and ((1 <= index2) and
-  (index2 <= 10))) and ((to_rep((table[index2])) = value) and
-  ((result1 = s__contains__result2) and
-  (s__contains__result3 = of_int(1)))))))))))) or (((({ int__content = result
-  } = { int__content = index }) and (index1 = 1)) and ((((1 <= index1) and
-  (index1 <= 10)) and ((((temp___158 = index1) and
-  ((forall j:int. (((1 <= j) and (j <= (index2 - 1))) ->
-   (not (to_rep((table[j])) = value)))) and
-  ((((1 <= 10) -> in_range3(index2)) and ((1 <= index2) and
-  (index2 <= 10))) and (((not (to_rep((table[index2])) = value)) and
-  (s__contains__result3 = s__contains__result2)) and (index2 = 10))))) and
-  (((s__contains__result3 = s__contains__result4) and (index2 = index3)) and
-  ((s__contains__result5 = s__contains__result3) and (index4 = index2)))) and
-  ((({ bool__content = s__contains__result6 } = { bool__content =
-  s__contains__result4 }) and ({ int__content = index5 } = { int__content =
-  index3 })) and ((s__contains__result7 = s__contains__result5) and
-  (index6 = index4))))) or ((not ((1 <= index1) and (index1 <= 10))) and
-  (((s__contains__result = s__contains__result6) and (index1 = index5)) and
-  ((s__contains__result7 = s__contains__result1) and
-  (index6 = index1)))))) and
-  ((((s__contains__result9 = s__contains__result11) and
-  (index7 = index5)) and ((s__contains__result12 = s__contains__result10) and
-  (index8 = index6))) and (((s__contains__result8 = s__contains__result9) and
-  (s__contains__result10 = s__contains__result8)) and
-  ((result2 = s__contains__result6) and
-  (s__contains__result8 = of_int(0))))))) and
-  (((s__contains__result13 = s__contains__result11) and
-  (index9 = index7)) and ((s__contains__result14 = s__contains__result12) and
-  (index10 = index8)))) and (result3 = s__contains__result13))) ->
-  ((s__contains__result13 = true) ->
-  (exists j:int. (((1 <= j) and (j <= 10)) and (to_rep((table[j])) = value)))))))
+  (exists j1:int. (((1 <= j1) and (j1 <= 10)) and
+  (to_rep((table[j1])) = value)))

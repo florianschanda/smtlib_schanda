@@ -51,7 +51,7 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
-predicate in_range(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -436,30 +436,139 @@ axiom m__def_axiom : (m = fm(1))
 
 axiom n__def_axiom : (n = ((2 * fm(1)) - 1))
 
+logic o : int
+
+logic o1 : integer
+
+logic o2 : integer
+
+logic o3 : integer
+
+logic o4 : integer
+
+logic temp___168 : integer
+
+logic temp___1681 : integer
+
+logic o5 : integer
+
+logic o6 : integer
+
+logic o7 : integer
+
+logic o8 : integer
+
+logic temp___169 : integer
+
+logic temp___1691 : integer
+
+logic o9 : integer
+
+logic o10 : integer
+
+logic o11 : integer
+
+logic o12 : integer
+
+logic temp___170 : integer
+
+logic temp___1701 : integer
+
+axiom H : (const__c__aggregate_def(1) = c)
+
+axiom H1 : (const__c2__aggregate_def(1) = c2)
+
+axiom H2 : (const__d2__aggregate_def(1, 1) = d2)
+
+axiom H3 : (to_rep(o1) = 1)
+
+axiom H4 : (to_rep(o2) = 1)
+
+axiom H5 : (o2 = o3)
+
+axiom H6 : (o1 = o4)
+
+axiom H7 : (temp___168 = o3)
+
+axiom H8 : (temp___1681 = o4)
+
+axiom H9 : ((temp___168 = e) and (temp___1681 = e1))
+
+axiom H10 : (to_rep(o5) = 1)
+
+axiom H11 : (to_rep(o6) = 1)
+
+axiom H12 : (o6 = o7)
+
+axiom H13 : (o5 = o8)
+
+axiom H14 : (temp___169 = o7)
+
+axiom H15 : (temp___1691 = o8)
+
+axiom H16 : ((temp___169 = f) and (temp___1691 = f1))
+
+axiom H17 : (to_rep(o9) = 1)
+
+axiom H18 : (to_rep(o10) = 1)
+
+axiom H19 : (o10 = o11)
+
+axiom H20 : (o9 = o12)
+
+axiom H21 : (temp___170 = o11)
+
+axiom H22 : (temp___1701 = o12)
+
+axiom H23 : ((temp___170 = g) and (temp___1701 = g1))
+
+axiom H24 : in_range(i)
+
+axiom H25 : (fi(void) = i)
+
+axiom H26 : in_range(j)
+
+axiom H27 : (((2 * fi(void)) - 1) = j)
+
+axiom H28 : in_range(k)
+
+axiom H29 : (fk(void) = k)
+
+axiom H30 : in_range(l)
+
+axiom H31 : (((2 * fk(void)) - 1) = l)
+
+axiom H32 : in_range(m)
+
+axiom H33 : (fm(1) = m)
+
+axiom H34 : in_range(n)
+
+axiom H35 : (((2 * fm(1)) - 1) = n)
+
+axiom H36 : in_range(o)
+
+axiom H37 : in_range(p)
+
+axiom H38 : (to_rep((c[1])) = 1)
+
+axiom H39 : (to_rep((c[2])) = 1)
+
+axiom H40 : (to_rep((c2[1])) = 1)
+
+axiom H41 : (to_rep((c2[2])) = 1)
+
+axiom H42 : (to_rep((d2[1])) = 1)
+
+axiom H43 : (to_rep((d2[2])) = 1)
+
+axiom H44 : (to_rep(e) = 1)
+
+axiom H45 : (to_rep(e1) = 1)
+
+axiom H46 : (to_rep(f) = 1)
+
+axiom H47 : (to_rep(f1) = 1)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:int. forall o1:integer. forall o2:integer. forall o3:integer.
-  forall o4:integer. forall temp___168:integer. forall temp___1681:integer.
-  forall o5:integer. forall o6:integer. forall o7:integer. forall o8:integer.
-  forall temp___169:integer. forall temp___1691:integer. forall o9:integer.
-  forall o10:integer. forall o11:integer. forall o12:integer.
-  forall temp___170:integer. forall temp___1701:integer.
-  ((const__c__aggregate_def(1) = c) -> ((const__c2__aggregate_def(1) = c2) ->
-  ((const__d2__aggregate_def(1, 1) = d2) -> (((((to_rep(o1) = 1) and
-  ((to_rep(o2) = 1) and ((o2 = o3) and (o1 = o4)))) and
-  ((temp___168 = o3) and (temp___1681 = o4))) and ((temp___168 = e) and
-  (temp___1681 = e1))) -> (((((to_rep(o5) = 1) and ((to_rep(o6) = 1) and
-  ((o6 = o7) and (o5 = o8)))) and ((temp___169 = o7) and
-  (temp___1691 = o8))) and ((temp___169 = f) and (temp___1691 = f1))) ->
-  (((((to_rep(o9) = 1) and ((to_rep(o10) = 1) and ((o10 = o11) and
-  (o9 = o12)))) and ((temp___170 = o11) and (temp___1701 = o12))) and
-  ((temp___170 = g) and (temp___1701 = g1))) -> (in_range(i) ->
-  ((fi(void) = i) -> (in_range(j) -> ((((2 * fi(void)) - 1) = j) ->
-  (in_range(k) -> ((fk(void) = k) -> (in_range(l) ->
-  ((((2 * fk(void)) - 1) = l) -> (in_range(m) -> ((fm(1) = m) ->
-  (in_range(n) -> ((((2 * fm(1)) - 1) = n) -> (in_range(o) -> (in_range(p) ->
-  ((to_rep((c[1])) = 1) -> ((to_rep((c[2])) = 1) -> ((to_rep((c2[1])) = 1) ->
-  ((to_rep((c2[2])) = 1) -> ((to_rep((d2[1])) = 1) ->
-  ((to_rep((d2[2])) = 1) -> ((to_rep(e) = 1) -> ((to_rep(e1) = 1) ->
-  ((to_rep(f) = 1) -> ((to_rep(f1) = 1) ->
-  (to_rep(g) = 1))))))))))))))))))))))))))))))))
+goal WP_parameter_def : (to_rep(g) = 1)

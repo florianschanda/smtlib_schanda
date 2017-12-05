@@ -31,6 +31,7 @@
 (define-fun capacity_range__ref___projection ((a capacity_range__ref)) capacity_range (capacity_range__content a))
 (define-fun dynamic_invariant ((temp___expr_274 Int) (temp___is_init_271 Bool) (temp___skip_constant_272 Bool) (temp___do_toplevel_273 Bool)) Bool (=> (or (= temp___is_init_271 true) (<= 0 100)) (in_range temp___expr_274)))
 (declare-const us Int)
+(declare-const us1 Int)
 (assert (and (= us 100) (in_range 100)))
 (assert (not (in_range 100)))
 (check-sat)

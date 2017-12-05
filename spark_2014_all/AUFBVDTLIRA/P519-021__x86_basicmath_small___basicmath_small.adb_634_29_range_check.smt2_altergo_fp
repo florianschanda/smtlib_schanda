@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -2228,6 +2228,1309 @@ axiom writereg32post__post_axiom :
   (forall val__:t2 [writereg32post(regnew, val__)]. ((writereg32post(regnew,
   val__) = true) <-> ((readreg32(regnew) = val__) and (bw_and3(regnew,
   of_int3(18446744069414584320)) = of_int3(0))))))
+
+logic ds : t3
+
+logic fs : t3
+
+logic gs : t3
+
+logic ss : t3
+
+logic stackaddresssize : t1
+
+logic zeroflag : bool
+
+logic carryflag : bool
+
+logic signflag : bool
+
+logic overflowflag : bool
+
+logic xmm0 : t3
+
+logic xmm1 : t3
+
+logic xmm2 : t3
+
+logic xmm3 : t3
+
+logic xmm4 : t3
+
+logic xmm5 : t3
+
+logic xmm6 : t3
+
+logic xmm7 : t3
+
+logic rax : t3
+
+logic rcx : t3
+
+logic rdx : t3
+
+logic rbx : t3
+
+logic rsp : t3
+
+logic rbp : t3
+
+logic rsi : t3
+
+logic rdi : t3
+
+logic r8 : t3
+
+logic r9 : t3
+
+logic r10 : t3
+
+logic r11 : t3
+
+logic r12 : t3
+
+logic r13 : t3
+
+logic r14 : t3
+
+logic r15 : t3
+
+logic memory : (t3,unsigned8) farray
+
+logic dummy_var : t3
+
+logic savestackptr : t3
+
+logic ra0 : t
+
+logic ra1 : t
+
+logic ra2 : t
+
+logic ra3 : t
+
+logic ra4 : t
+
+logic ra5 : t
+
+logic ra6 : t
+
+logic ra7 : t
+
+logic saverbx : t3
+
+logic saverbp : t3
+
+logic saver12 : t3
+
+logic saver13 : t3
+
+logic saver14 : t3
+
+logic saver15 : t3
+
+logic o : t3
+
+logic o1 : t
+
+logic o2 : t
+
+logic o3 : t
+
+logic o4 : t
+
+logic o5 : t
+
+logic o6 : t
+
+logic o7 : t
+
+logic o8 : t
+
+logic o9 : t
+
+logic o10 : t
+
+logic o11 : t
+
+logic o12 : t
+
+logic o13 : t
+
+logic o14 : t
+
+logic o15 : t
+
+logic o16 : t
+
+logic o17 : t3
+
+logic o18 : t3
+
+logic o19 : t3
+
+logic o20 : t3
+
+logic o21 : t3
+
+logic o22 : t3
+
+logic o23 : t3
+
+logic o24 : t3
+
+logic o25 : t3
+
+logic o26 : t3
+
+logic o27 : t2
+
+logic o28 : t2
+
+logic o29 : t3
+
+logic o30 : t2
+
+logic o31 : t2
+
+logic o32 : t2
+
+logic o33 : t2
+
+logic o34 : bool
+
+logic o35 : t2
+
+logic o36 : t2
+
+logic o37 : t2
+
+logic o38 : bool
+
+logic o39 : t3
+
+logic o40 : t3
+
+logic o41 : t3
+
+logic o42 : t3
+
+logic o43 : t2
+
+logic o44 : t2
+
+logic o45 : t3
+
+logic o46 : t2
+
+logic o47 : t2
+
+logic o48 : t2
+
+logic o49 : t2
+
+logic o50 : bool
+
+logic o51 : t2
+
+logic o52 : t2
+
+logic o53 : t2
+
+logic o54 : bool
+
+logic o55 : t3
+
+logic o56 : t3
+
+logic o57 : t3
+
+logic o58 : t3
+
+logic o59 : t2
+
+logic o60 : t2
+
+logic o61 : t3
+
+logic o62 : t2
+
+logic o63 : t2
+
+logic o64 : t2
+
+logic o65 : t2
+
+logic o66 : bool
+
+logic o67 : t2
+
+logic o68 : t2
+
+logic o69 : t2
+
+logic o70 : bool
+
+logic o71 : t3
+
+logic o72 : t3
+
+logic o73 : t3
+
+logic o74 : t2
+
+logic o75 : t2
+
+logic o76 : t3
+
+logic o77 : t2
+
+logic o78 : t2
+
+logic o79 : t2
+
+logic o80 : t2
+
+logic o81 : bool
+
+logic o82 : t2
+
+logic o83 : t2
+
+logic o84 : t2
+
+logic o85 : bool
+
+logic o86 : t3
+
+logic o87 : t2
+
+logic o88 : t2
+
+logic o89 : t3
+
+logic o90 : t2
+
+logic o91 : t2
+
+logic o92 : t3
+
+logic o93 : t2
+
+logic o94 : t3
+
+logic o95 : t3
+
+logic o96 : t3
+
+logic o97 : t3
+
+logic o98 : t3
+
+logic o99 : t3
+
+logic result : t3
+
+logic savestackptr1 : t3
+
+logic result1 : t
+
+logic ra01 : t
+
+logic result2 : t
+
+logic ra11 : t
+
+logic result3 : t
+
+logic ra21 : t
+
+logic result4 : t
+
+logic ra31 : t
+
+logic result5 : t
+
+logic ra41 : t
+
+logic result6 : t
+
+logic ra51 : t
+
+logic result7 : t
+
+logic ra61 : t
+
+logic result8 : t
+
+logic ra71 : t
+
+logic result9 : t3
+
+logic saverbx1 : t3
+
+logic result10 : t3
+
+logic saverbp1 : t3
+
+logic result11 : t3
+
+logic saver121 : t3
+
+logic result12 : t3
+
+logic saver131 : t3
+
+logic result13 : t3
+
+logic saver141 : t3
+
+logic result14 : t3
+
+logic saver151 : t3
+
+logic memory1 : (t3,unsigned8) farray
+
+logic result15 : t3
+
+logic rsp1 : t3
+
+logic memory2 : (t3,unsigned8) farray
+
+logic result16 : t3
+
+logic rsp2 : t3
+
+logic rdi1 : t3
+
+logic memory3 : (t3,unsigned8) farray
+
+logic result17 : t3
+
+logic rsp3 : t3
+
+logic memory4 : (t3,unsigned8) farray
+
+logic result18 : t3
+
+logic rsp4 : t3
+
+logic memory5 : (t3,unsigned8) farray
+
+logic result19 : t3
+
+logic rsp5 : t3
+
+logic memory6 : (t3,unsigned8) farray
+
+logic result20 : t3
+
+logic rsp6 : t3
+
+logic rbx1 : t3
+
+logic result21 : t3
+
+logic rsp7 : t3
+
+logic result22 : t3
+
+logic rsp8 : t3
+
+logic rsp9 : t3
+
+logic result23 : t3
+
+logic rsi1 : t3
+
+logic result24 : t3
+
+logic rdi2 : t3
+
+logic result25 : t3
+
+logic rbp1 : t3
+
+logic result26 : t3
+
+logic xmm31 : t3
+
+logic result27 : t3
+
+logic xmm21 : t3
+
+logic result28 : t3
+
+logic xmm11 : t3
+
+logic result29 : t3
+
+logic xmm01 : t3
+
+logic result30 : t3
+
+logic rsp10 : t3
+
+logic rsp11 : t3
+
+logic rdi3 : t3
+
+logic rax1 : t3
+
+logic result31 : t3
+
+logic rsp12 : t3
+
+logic rsp13 : t3
+
+logic rdi4 : t3
+
+logic result32 : bool
+
+logic zeroflag1 : bool
+
+logic result33 : bool
+
+logic signflag1 : bool
+
+logic result34 : bool
+
+logic carryflag1 : bool
+
+logic result35 : bool
+
+logic overflowflag1 : bool
+
+logic zeroflag2 : bool
+
+logic carryflag2 : bool
+
+logic signflag2 : bool
+
+logic overflowflag2 : bool
+
+logic xmm02 : t3
+
+logic rax2 : t3
+
+logic rbx2 : t3
+
+logic rsp14 : t3
+
+logic rbp2 : t3
+
+logic rdi5 : t3
+
+logic rdi6 : t3
+
+logic rbx3 : t3
+
+logic result36 : t3
+
+logic rbp3 : t3
+
+logic result37 : t3
+
+logic rsp15 : t3
+
+logic rsp16 : t3
+
+logic result38 : t3
+
+logic rsi2 : t3
+
+logic result39 : t3
+
+logic rdi7 : t3
+
+logic result40 : t3
+
+logic xmm32 : t3
+
+logic result41 : t3
+
+logic xmm22 : t3
+
+logic result42 : t3
+
+logic xmm12 : t3
+
+logic result43 : t3
+
+logic xmm03 : t3
+
+logic result44 : t3
+
+logic rsp17 : t3
+
+logic rsp18 : t3
+
+logic rax3 : t3
+
+logic rdi8 : t3
+
+logic result45 : t3
+
+logic rsp19 : t3
+
+logic rsp20 : t3
+
+logic rsi3 : t3
+
+logic result46 : bool
+
+logic zeroflag3 : bool
+
+logic result47 : bool
+
+logic signflag3 : bool
+
+logic result48 : bool
+
+logic carryflag3 : bool
+
+logic result49 : bool
+
+logic overflowflag3 : bool
+
+logic zeroflag4 : bool
+
+logic carryflag4 : bool
+
+logic signflag4 : bool
+
+logic overflowflag4 : bool
+
+logic xmm04 : t3
+
+logic rax4 : t3
+
+logic rbx4 : t3
+
+logic rsp21 : t3
+
+logic rbp4 : t3
+
+logic rdi9 : t3
+
+logic rdi10 : t3
+
+logic rbx5 : t3
+
+logic result50 : t3
+
+logic rbp5 : t3
+
+logic result51 : t3
+
+logic rsp22 : t3
+
+logic rsp23 : t3
+
+logic result52 : t3
+
+logic rsi4 : t3
+
+logic result53 : t3
+
+logic rdi11 : t3
+
+logic result54 : t3
+
+logic xmm33 : t3
+
+logic result55 : t3
+
+logic xmm23 : t3
+
+logic result56 : t3
+
+logic xmm13 : t3
+
+logic result57 : t3
+
+logic xmm05 : t3
+
+logic result58 : t3
+
+logic rsp24 : t3
+
+logic rsp25 : t3
+
+logic rax5 : t3
+
+logic rdi12 : t3
+
+logic result59 : t3
+
+logic rsp26 : t3
+
+logic rsp27 : t3
+
+logic rcx1 : t3
+
+logic result60 : bool
+
+logic zeroflag5 : bool
+
+logic result61 : bool
+
+logic signflag5 : bool
+
+logic result62 : bool
+
+logic carryflag5 : bool
+
+logic result63 : bool
+
+logic overflowflag5 : bool
+
+logic zeroflag6 : bool
+
+logic carryflag6 : bool
+
+logic signflag6 : bool
+
+logic overflowflag6 : bool
+
+logic xmm06 : t3
+
+logic rax6 : t3
+
+logic rbx6 : t3
+
+logic rsp28 : t3
+
+logic rbp6 : t3
+
+logic rdi13 : t3
+
+logic rdi14 : t3
+
+logic rbx7 : t3
+
+logic result64 : t3
+
+logic rbp7 : t3
+
+logic result65 : t3
+
+logic rsp29 : t3
+
+logic rsp30 : t3
+
+logic result66 : t3
+
+logic xmm24 : t3
+
+logic result67 : t3
+
+logic rsi5 : t3
+
+logic result68 : t3
+
+logic rdi15 : t3
+
+logic result69 : t3
+
+logic xmm34 : t3
+
+logic result70 : t3
+
+logic xmm14 : t3
+
+logic result71 : t3
+
+logic xmm07 : t3
+
+logic result72 : t3
+
+logic rsp31 : t3
+
+logic rsp32 : t3
+
+logic rax7 : t3
+
+logic rdi16 : t3
+
+logic result73 : t3
+
+logic rsp33 : t3
+
+logic rsp34 : t3
+
+logic rdx1 : t3
+
+logic result74 : bool
+
+logic zeroflag7 : bool
+
+logic result75 : bool
+
+logic signflag7 : bool
+
+logic result76 : bool
+
+logic carryflag7 : bool
+
+logic result77 : bool
+
+logic overflowflag7 : bool
+
+logic xmm08 : t3
+
+logic rax8 : t3
+
+logic rbx8 : t3
+
+logic rsp35 : t3
+
+logic rbp8 : t3
+
+logic rdi17 : t3
+
+logic rdi18 : t3
+
+logic result78 : t3
+
+logic r151 : t3
+
+logic result79 : t3
+
+logic rsp36 : t3
+
+logic rsp37 : t3
+
+logic result80 : t3
+
+logic xmm61 : t3
+
+logic memory7 : (t3,unsigned8) farray
+
+logic xmm09 : t3
+
+logic xmm15 : t3
+
+logic xmm25 : t3
+
+logic xmm35 : t3
+
+logic xmm41 : t3
+
+logic xmm51 : t3
+
+logic xmm62 : t3
+
+logic xmm71 : t3
+
+logic rax9 : t3
+
+logic rbx9 : t3
+
+logic rsp38 : t3
+
+logic rbp9 : t3
+
+logic rsi6 : t3
+
+logic rdi19 : t3
+
+logic r121 : t3
+
+logic r131 : t3
+
+logic r141 : t3
+
+logic r152 : t3
+
+logic memory8 : (t3,unsigned8) farray
+
+logic rdi20 : t3
+
+logic rbx10 : t3
+
+logic rax10 : t3
+
+logic rcx2 : t3
+
+logic rdx2 : t3
+
+logic rbx11 : t3
+
+logic rsp39 : t3
+
+logic rbp10 : t3
+
+logic rsi7 : t3
+
+logic rdi21 : t3
+
+logic r81 : t3
+
+logic memory9 : (t3,unsigned8) farray
+
+logic result81 : t3
+
+logic rsi8 : t3
+
+logic rdi22 : t3
+
+logic rbx12 : t3
+
+logic result82 : t3
+
+logic rsp40 : t3
+
+logic exit_called : bool
+
+logic carryflag8 : bool
+
+logic signflag8 : bool
+
+logic overflowflag8 : bool
+
+logic rax11 : t3
+
+logic rcx3 : t3
+
+logic rdx3 : t3
+
+logic rsp41 : t3
+
+logic rdi23 : t3
+
+logic r82 : t3
+
+logic memory10 : (t3,unsigned8) farray
+
+logic rdx4 : t3
+
+logic rsi9 : t3
+
+logic rdi24 : t3
+
+logic rax12 : t3
+
+logic result83 : t3
+
+logic rsp42 : t3
+
+logic rsp43 : t3
+
+logic rdi25 : t3
+
+logic result84 : t3
+
+logic rsp44 : t3
+
+logic rsp45 : t3
+
+logic result85 : t3
+
+logic xmm26 : t3
+
+logic xmm010 : t3
+
+logic xmm16 : t3
+
+logic xmm27 : t3
+
+logic rax13 : t3
+
+logic rbx13 : t3
+
+logic rsp46 : t3
+
+logic rbp11 : t3
+
+logic rdi26 : t3
+
+logic memory11 : (t3,unsigned8) farray
+
+logic rdi27 : t3
+
+logic rbx14 : t3
+
+logic result86 : t3
+
+logic rsp47 : t3
+
+logic rsp48 : t3
+
+logic result87 : t3
+
+logic xmm28 : t3
+
+logic zeroflag8 : bool
+
+logic xmm011 : t3
+
+logic xmm17 : t3
+
+logic xmm29 : t3
+
+logic rax14 : t3
+
+logic rbx15 : t3
+
+logic rsp49 : t3
+
+logic rbp12 : t3
+
+logic rdi28 : t3
+
+logic memory12 : (t3,unsigned8) farray
+
+logic result88 : t3
+
+logic rsp50 : t3
+
+logic rax15 : t3
+
+logic result89 : t3
+
+logic rbx16 : t3
+
+logic result90 : t3
+
+logic rsp51 : t3
+
+logic result91 : t3
+
+logic rbp13 : t3
+
+logic result92 : t3
+
+logic rsp52 : t3
+
+logic result93 : t3
+
+logic r122 : t3
+
+logic result94 : t3
+
+logic rsp53 : t3
+
+logic result95 : t3
+
+logic r132 : t3
+
+logic result96 : t3
+
+logic rsp54 : t3
+
+logic result97 : t3
+
+logic r142 : t3
+
+logic result98 : t3
+
+logic rsp55 : t3
+
+logic result99 : t3
+
+logic r153 : t3
+
+logic result100 : t3
+
+logic rsp56 : t3
+
+logic result101 : t3
+
+logic rsp57 : t3
+
+logic exit_called1 : bool
+
+logic zeroflag9 : bool
+
+logic carryflag9 : bool
+
+logic signflag9 : bool
+
+logic overflowflag9 : bool
+
+logic xmm012 : t3
+
+logic xmm18 : t3
+
+logic xmm210 : t3
+
+logic xmm36 : t3
+
+logic xmm42 : t3
+
+logic xmm52 : t3
+
+logic xmm63 : t3
+
+logic xmm72 : t3
+
+logic rax16 : t3
+
+logic rcx4 : t3
+
+logic rdx5 : t3
+
+logic rbx17 : t3
+
+logic rsp58 : t3
+
+logic rbp14 : t3
+
+logic rsi10 : t3
+
+logic rdi29 : t3
+
+logic r83 : t3
+
+logic r123 : t3
+
+logic r133 : t3
+
+logic r143 : t3
+
+logic r154 : t3
+
+logic memory13 : (t3,unsigned8) farray
+
+logic savestackptr2 : t3
+
+logic ra02 : t
+
+logic ra12 : t
+
+logic ra22 : t
+
+logic ra32 : t
+
+logic ra42 : t
+
+logic ra52 : t
+
+logic ra62 : t
+
+logic ra72 : t
+
+logic saverbx2 : t3
+
+logic saverbp2 : t3
+
+logic saver122 : t3
+
+logic saver132 : t3
+
+logic saver142 : t3
+
+logic saver152 : t3
+
+logic exit_called2 : bool
+
+logic zeroflag10 : bool
+
+logic carryflag10 : bool
+
+logic signflag10 : bool
+
+logic overflowflag10 : bool
+
+logic xmm013 : t3
+
+logic xmm19 : t3
+
+logic xmm211 : t3
+
+logic xmm37 : t3
+
+logic xmm43 : t3
+
+logic xmm53 : t3
+
+logic xmm64 : t3
+
+logic xmm73 : t3
+
+logic rax17 : t3
+
+logic rcx5 : t3
+
+logic rdx6 : t3
+
+logic rbx18 : t3
+
+logic rsp59 : t3
+
+logic rbp15 : t3
+
+logic rsi11 : t3
+
+logic rdi30 : t3
+
+logic r84 : t3
+
+logic r124 : t3
+
+logic r134 : t3
+
+logic r144 : t3
+
+logic r155 : t3
+
+logic memory14 : (t3,unsigned8) farray
+
+logic savestackptr3 : t3
+
+logic ra03 : t
+
+logic ra13 : t
+
+logic ra23 : t
+
+logic ra33 : t
+
+logic ra43 : t
+
+logic ra53 : t
+
+logic ra63 : t
+
+logic ra73 : t
+
+logic saverbx3 : t3
+
+logic saverbp3 : t3
+
+logic saver123 : t3
+
+logic saver133 : t3
+
+logic saver143 : t3
+
+logic saver153 : t3
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : true
+
+axiom H3 : true
+
+axiom H4 : true
+
+axiom H5 : true
+
+axiom H6 : true
+
+axiom H7 : true
+
+axiom H8 : true
+
+axiom H9 : true
+
+axiom H10 : true
+
+axiom H11 : true
+
+axiom H12 : true
+
+axiom H13 : true
+
+axiom H14 : true
+
+axiom H15 : true
+
+axiom H16 : true
+
+axiom H17 : true
+
+axiom H18 : true
+
+axiom H19 : true
+
+axiom H20 : true
+
+axiom H21 : true
+
+axiom H22 : true
+
+axiom H23 : true
+
+axiom H24 : true
+
+axiom H25 : true
+
+axiom H26 : true
+
+axiom H27 : true
+
+axiom H28 : true
+
+axiom H29 : true
+
+axiom H30 : (o = rsp)
+
+axiom H31 : (result = savestackptr)
+
+axiom H32 : (savestackptr1 = o)
+
+axiom H33 : true
+
+axiom H34 : ((o1 = readmem8(rsp, memory)) and (o1 = to_rep((memory[rsp]))))
+
+axiom H35 : (o2 = o1)
+
+axiom H36 : (result1 = ra0)
+
+axiom H37 : (ra01 = o2)
+
+axiom H38 : true
+
+axiom H39 : ((o3 = readmem8(add3(rsp, of_int3(1)), memory)) and
+  (o3 = to_rep((memory[add3(rsp, of_int3(1))]))))
+
+axiom H40 : (o4 = o3)
+
+axiom H41 : (result2 = ra1)
+
+axiom H42 : (ra11 = o4)
+
+axiom H43 : true
+
+axiom H44 : ((o5 = readmem8(add3(rsp, of_int3(2)), memory)) and
+  (o5 = to_rep((memory[add3(rsp, of_int3(2))]))))
+
+axiom H45 : (o6 = o5)
+
+axiom H46 : (result3 = ra2)
+
+axiom H47 : (ra21 = o6)
+
+axiom H48 : true
+
+axiom H49 : ((o7 = readmem8(add3(rsp, of_int3(3)), memory)) and
+  (o7 = to_rep((memory[add3(rsp, of_int3(3))]))))
+
+axiom H50 : (o8 = o7)
+
+axiom H51 : (result4 = ra3)
+
+axiom H52 : (ra31 = o8)
+
+axiom H53 : true
+
+axiom H54 : ((o9 = readmem8(add3(rsp, of_int3(4)), memory)) and
+  (o9 = to_rep((memory[add3(rsp, of_int3(4))]))))
+
+axiom H55 : (o10 = o9)
+
+axiom H56 : (result5 = ra4)
+
+axiom H57 : (ra41 = o10)
+
+axiom H58 : true
+
+axiom H59 : ((o11 = readmem8(add3(rsp, of_int3(5)), memory)) and
+  (o11 = to_rep((memory[add3(rsp, of_int3(5))]))))
 
  (* File "x86.ads", line 334, characters 0-0 *)
 goal WP_parameter_def : true

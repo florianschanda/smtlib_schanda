@@ -156,18 +156,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -1218,7 +1218,25 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic g : bool
+
+logic x__split_fields : (int,us_rep) farray
+
+logic x__split_discrs : bool
+
+logic temp___199 : int
+
+logic o : byte
+
+logic o1 : byte
+
+logic o2 : byte
+
+logic o3 : byte
+
+logic o4 : byte
+
+axiom H : in_range(n)
+
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_discrs:bool. (in_range(n) ->
-  (to_int2(x__split_discrs) = 1)))
+goal WP_parameter_def : (to_int2(x__split_discrs) = 1)

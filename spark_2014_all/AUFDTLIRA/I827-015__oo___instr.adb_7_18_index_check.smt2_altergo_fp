@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -565,16 +565,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic x__split_fields : (int,character) farray
+
+logic j : int
+
+logic o : character
+
+logic result : int
+
+logic j1 : int
+
+logic x__split_fields1 : (int,character) farray
+
+logic j2 : int
+
+axiom H : dynamic_property(1, 2147483647, to_rep1(first(s1)),
+  to_rep1(last(s1)))
+
+axiom H1 : (result = j)
+
+axiom H2 : (j1 = to_rep1(first(s1)))
+
+axiom H3 : (to_rep1(first(s1)) <= j1)
+
+axiom H4 : (j1 <= to_rep1(last(s1)))
+
+axiom H5 :
+  ((forall temp___323:int. (((1 <= temp___323) and (temp___323 <= 14)) ->
+   ((j2 <= temp___323) ->
+   ((x__split_fields1[temp___323]) = (x__split_fields[temp___323]))))) and
+  ((to_rep1(first(s1)) <= j2) and (j2 <= to_rep1(last(s1)))))
+
+axiom H6 : (to_rep(o) = to_rep((s[j2])))
+
  (* File "instr.ads", line 87, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:(int,character) farray. forall j:int.
-  forall o:character. forall result:int. forall j1:int.
-  forall x__split_fields1:(int,character) farray. forall j2:int.
-  (dynamic_property(1, 2147483647, to_rep1(first(s1)), to_rep1(last(s1))) ->
-  (((result = j) and (j1 = to_rep1(first(s1)))) ->
-  (((to_rep1(first(s1)) <= j1) and (j1 <= to_rep1(last(s1)))) ->
-  (((forall temp___323:int. (((1 <= temp___323) and (temp___323 <= 14)) ->
-    ((j2 <= temp___323) ->
-    ((x__split_fields1[temp___323]) = (x__split_fields[temp___323]))))) and
-  ((to_rep1(first(s1)) <= j2) and (j2 <= to_rep1(last(s1))))) ->
-  ((to_rep(o) = to_rep((s[j2]))) -> (1 <= j2)))))))
+goal WP_parameter_def : (1 <= j2)

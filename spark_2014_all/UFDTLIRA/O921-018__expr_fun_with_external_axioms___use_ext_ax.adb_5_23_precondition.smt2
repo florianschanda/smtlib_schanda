@@ -22,6 +22,7 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-fun my_eq__logic (Int Int) Bool)
 (assert (forall ((x1 Int) (x2 Int)) (! (= (= (my_eq__logic x1 x2) true) (= x1 x2)) :pattern ((my_eq__logic x1 x2)))))
+(assert (= (my_eq__logic 1 1) true))
 (assert (not true))
 (check-sat)
 (exit)

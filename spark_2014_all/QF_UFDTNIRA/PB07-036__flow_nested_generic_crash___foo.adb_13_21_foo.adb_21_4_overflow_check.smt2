@@ -35,6 +35,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const ip2 Int)
 (declare-const o Int)
+(declare-const o1 Int)
 (declare-const ip21 Int)
 (assert (in_range ip1))
 (assert (in_range ip2))

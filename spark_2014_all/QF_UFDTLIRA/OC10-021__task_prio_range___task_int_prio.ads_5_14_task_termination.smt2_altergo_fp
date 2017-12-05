@@ -137,5 +137,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic x : int
+
+axiom H : false
+
  (* File "task_int_prio.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def : false

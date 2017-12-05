@@ -177,6 +177,7 @@
 (assert (forall ((par1 us_rep1)) (forall ((dic__g Int)) (! (= (= (foo par1 dic__g) true) (= (+ (to_rep (rec__dic__pr_record_t2__x (us_split_fields3 par1))) (to_rep (rec__dic__pr_record_t2__y (us_split_fields3 par1)))) dic__g)) :pattern ((foo par1 dic__g))))))
 (declare-const a__split_fields integer)
 (declare-const a__split_fields1 integer)
+(declare-const o Int)
 (assert (not (in_range (+ (to_rep a__split_fields) (to_rep a__split_fields1)))))
 (check-sat)
 (exit)

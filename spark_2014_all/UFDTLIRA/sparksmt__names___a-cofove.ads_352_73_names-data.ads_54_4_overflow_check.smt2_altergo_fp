@@ -79,7 +79,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tchar_table_indexB
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -162,7 +162,7 @@ function element_type__ref___projection(a: element_type__ref) : element_type =
 
 type extended_index
 
-predicate in_range3(x: int) = (((-1) <= x) and (x <= 2147483647))
+predicate in_range3(x: int) = (((- 1) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
 
@@ -428,11 +428,11 @@ logic oeq__function_guard : bool, us_rep1, us_rep1 -> prop
 
 axiom user_eq__def_axiom :
   (forall a:us_rep1. forall b:us_rep1 [user_eq5(a, b)].
-  (((forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get(a,
+  (((forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) -> (get(a,
     n) = get(b, n)))) ->
   (user_eq5(a, b) = match_bool(bool_eq1(length1(a), length1(b)), true,
   false))) and
-  ((not (forall n:int. (((0 <= n) and (n <= ((-1) + length1(a)))) -> (get(a,
+  ((not (forall n:int. (((0 <= n) and (n <= ((- 1) + length1(a)))) -> (get(a,
         n) = get(b, n))))) ->
   (user_eq5(a, b) = match_bool(bool_eq1(length1(a), length1(b)), false,
   false)))))
@@ -451,7 +451,7 @@ axiom model____post_axiom :
 
 type extended_index1
 
-predicate in_range6(x: int) = (((-1) <= x) and (x <= 2147483646))
+predicate in_range6(x: int) = (((- 1) <= x) and (x <= 2147483646))
 
 logic bool_eq8 : int, int -> bool
 
@@ -477,7 +477,7 @@ function extended_index__ref___2__projection(a: extended_index__ref1) : extended
 
 axiom length__post_axiom1 :
   (forall container:us_rep1 [length1(container)].
-  ((((-1) + length1(container)) <= 2147483646) and
+  ((((- 1) + length1(container)) <= 2147483646) and
   in_range5(length1(container))))
 
 type element_type1
@@ -509,30 +509,55 @@ function element_type__ref___2__projection(a: element_type__ref1) : element_type
 axiom get__post_axiom :
   (forall container:us_rep1.
   (forall position:int [get(container, position)]. ((in_range6(position) and
-  ((0 <= position) and (position <= ((-1) + length1(container))))) ->
+  ((0 <= position) and (position <= ((- 1) + length1(container))))) ->
   in_range7(get(container, position)))))
 
- (* File "a-cofove.ads", line 304, characters 0-0 *)
-goal WP_parameter_def :
-  (forall container__split_fields:us_main_type. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall result:bool. (in_range3(before) ->
-  (in_range2(new_item) -> ((((((of_int(0) = true) and
-  (o2 = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o2 = 2147483647))) and (in_range4(o2) and (((of_int(0) = true) and
-  (o2 = to_rep(container__split_discrs))) or ((not (of_int(0) = true)) and
-  (o2 = 2147483647))))) and (((o3 = length({ us_split_discrs1 = {
+logic container__split_fields : us_main_type
+
+logic o : int
+
+logic o1 : int
+
+logic o2 : int
+
+logic o3 : int
+
+logic o4 : int
+
+logic result : bool
+
+axiom H : in_range3(before)
+
+axiom H1 : in_range2(new_item)
+
+axiom H2 : ((((of_int(0) = true) ->
+  (o3 = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o3 = 2147483647))) and (in_range4(o3) and (((of_int(0) = true) ->
+  (o3 = to_rep(container__split_discrs))) and ((not (of_int(0) = true)) ->
+  (o3 = 2147483647)))))
+
+axiom H3 : ((o4 = length({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
-  container__split_fields } })) and (in_range4(o3) and
-  (((of_int(0) = true) and (o3 <= to_rep(container__split_discrs))) or
-  ((not (of_int(0) = true)) and (o3 <= 2147483647))))) and (((o3 <  o2) and
-  (result = true)) or ((not (o3 <  o2)) and (result = false))))) ->
-  ((result = true) -> ((((o = ((-1) + length1(model__({ us_split_discrs1 = {
+  container__split_fields } })) and (in_range4(o4) and
+  (((of_int(0) = true) -> (o4 <= to_rep(container__split_discrs))) and
+  ((not (of_int(0) = true)) -> (o4 <= 2147483647)))))
+
+axiom H4 : (((o4 <  o3) -> (result = true)) and ((not (o4 <  o3)) ->
+  (result = false)))
+
+axiom H5 : (result = true)
+
+axiom H6 : ((o = ((- 1) + length1(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
   container__split_fields } })))) and (in_range3(o) and
-  (o = ((-1) + length1(model__({ us_split_discrs1 = {
+  (o = ((- 1) + length1(model__({ us_split_discrs1 = {
   rec__names__data__char_tables__vector__capacity = container__split_discrs
   }; us_split_fields1 = { rec__names__data__char_tables__vector =
-  container__split_fields } })))))) and (o1 = (o + 1))) ->
-  in_range1(o1)))))))
+  container__split_fields } }))))))
+
+axiom H7 : (o1 = (o + 1))
+
+ (* File "a-cofove.ads", line 304, characters 0-0 *)
+goal WP_parameter_def : in_range1(o1)

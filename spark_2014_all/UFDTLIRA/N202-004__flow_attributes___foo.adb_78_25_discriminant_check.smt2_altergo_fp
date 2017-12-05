@@ -391,10 +391,25 @@ type t17b__ref = { t17b__content : us_rep
 
 function t17b__ref___projection(a: t17b__ref) : us_rep = (a).t17b__content
 
+logic o : positive
+
+logic o1 : positive
+
+logic temp___278 : bool
+
+logic temp___2781 : positive
+
+axiom H : (to_int(a__split_discrs) = 1)
+
+axiom H1 : (a__split_discrs = r13b)
+
+axiom H2 : (to_rep(o) = 1)
+
+axiom H3 : (o = o1)
+
+axiom H4 : (of_int(1) = temp___278)
+
+axiom H5 : (temp___2781 = o1)
+
  (* File "foo.adb", line 66, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:positive. forall o1:positive. forall temp___278:bool.
-  forall temp___2781:positive. ((to_int(a__split_discrs) = 1) ->
-  ((a__split_discrs = r13b) -> ((((to_rep(o) = 1) and (o = o1)) and
-  ((of_int(1) = temp___278) and (temp___2781 = o1))) ->
-  (temp___278 = a__split_discrs)))))
+goal WP_parameter_def : (temp___278 = a__split_discrs)

@@ -113,7 +113,7 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
-predicate in_range1(x: int) = (((-2147483648) <= x) and (x <= 2147483647))
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
 
@@ -357,43 +357,185 @@ function t26b__ref___projection(a: t26b__ref) : t26b = (a).t26b__content
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "array_applications.adb", line 10, characters 0-0 *)
-goal WP_parameter_def :
-  (forall a:(int,natural) farray. forall i:int. forall o:natural.
-  forall o1:(int,natural) farray. forall o2:natural.
-  forall o3:(int,natural) farray. forall temp___173:(int,natural) farray.
-  forall temp___172:int. forall o4:int. forall o5:natural.
-  forall o6:(int,natural) farray. forall result:(int,natural) farray.
-  forall a1:(int,natural) farray. forall result1:(int,natural) farray.
-  forall a2:(int,natural) farray. forall result2:int. forall i1:int.
-  forall result3:(int,natural) farray. forall a3:(int,natural) farray.
-  forall a4:(int,natural) farray. forall i2:int.
-  forall a5:(int,natural) farray. forall i3:int.
-  forall a6:(int,natural) farray. forall i4:int.
-  forall a7:(int,natural) farray. forall i5:int.
-  forall a8:(int,natural) farray. forall i6:int.
-  forall a9:(int,natural) farray. forall i7:int.
-  forall a10:(int,natural) farray. forall i8:int. ((((((to_rep(o) = 0) and
-  (o1 = (a[0 <- o]))) and (({ map__content = result } = { map__content = a
-  }) and (a1 = o1))) and ((((to_rep(o2) = 1) and (o3 = (a1[1 <- o2]))) and
-  ((a1 = result1) and (a2 = o3))) and ((({ int__content = result2 } = {
-  int__content = i }) and (i1 = 2)) and ((((2 <= i1) and (i1 <= 30)) and
-  ((((temp___173 = a2) and ((temp___172 = i1) and
+logic a : (int,natural) farray
+
+logic i : int
+
+logic o : natural
+
+logic o1 : (int,natural) farray
+
+logic o2 : natural
+
+logic o3 : (int,natural) farray
+
+logic temp___173 : (int,natural) farray
+
+logic temp___172 : int
+
+logic o4 : int
+
+logic o5 : natural
+
+logic o6 : (int,natural) farray
+
+logic j : int
+
+logic o7 : int
+
+logic o8 : natural
+
+logic o9 : int
+
+logic o10 : natural
+
+logic o11 : int
+
+logic o12 : int
+
+logic o13 : int
+
+logic o14 : int
+
+logic j1 : int
+
+logic o15 : int
+
+logic o16 : natural
+
+logic o17 : int
+
+logic o18 : int
+
+logic o19 : bool
+
+logic o20 : bool
+
+logic o21 : int
+
+logic o22 : natural
+
+logic o23 : (int,natural) farray
+
+logic result : (int,natural) farray
+
+logic a1 : (int,natural) farray
+
+logic result1 : (int,natural) farray
+
+logic a2 : (int,natural) farray
+
+logic result2 : int
+
+logic i1 : int
+
+logic result3 : (int,natural) farray
+
+logic a3 : (int,natural) farray
+
+logic a4 : (int,natural) farray
+
+logic i2 : int
+
+logic result4 : int
+
+logic i3 : int
+
+logic result5 : (int,natural) farray
+
+logic a5 : (int,natural) farray
+
+logic a6 : (int,natural) farray
+
+logic i4 : int
+
+logic a7 : (int,natural) farray
+
+logic i5 : int
+
+logic a8 : (int,natural) farray
+
+logic i6 : int
+
+logic a9 : (int,natural) farray
+
+logic i7 : int
+
+logic a10 : (int,natural) farray
+
+logic i8 : int
+
+logic a11 : (int,natural) farray
+
+logic i9 : int
+
+logic a12 : (int,natural) farray
+
+logic i10 : int
+
+logic a13 : (int,natural) farray
+
+logic i11 : int
+
+axiom H : (to_rep(o) = 0)
+
+axiom H1 : (o1 = (a[0 <- o]))
+
+axiom H2 : (result = a)
+
+axiom H3 : (a1 = o1)
+
+axiom H4 : (to_rep(o2) = 1)
+
+axiom H5 : (o3 = (a1[1 <- o2]))
+
+axiom H6 : (a1 = result1)
+
+axiom H7 : (a2 = o3)
+
+axiom H8 : (result2 = i)
+
+axiom H9 : (i1 = 2)
+
+axiom H10 : (((2 <= i1) and (i1 <= 30)) -> (((temp___173 = a2) and
+  ((temp___172 = i1) and
   ((((((o4 = (to_rep((a2[(i1 - 1)])) + to_rep((a2[(i1 - 2)])))) and
   in_range1((to_rep((a2[(i1 - 1)])) + to_rep((a2[(i1 - 2)]))))) and
   (to_rep(o5) = o4)) and (o6 = (a2[i1 <- o5]))) and ((a2 = result3) and
   (a3 = o6))) and (((((to_rep((a4[0])) = 0) and (to_rep((a4[1])) = 1)) and
-  (forall j:int. (((2 <= j) and (j <= i2)) ->
-  (to_rep((a4[j])) = (to_rep((a4[(j - 1)])) + to_rep((a4[(j - 2)]))))))) and
-  (forall j:int. (((0 <= j) and (j <= i2)) -> ((0 <= to_rep((a4[j]))) and
-  (to_rep((a4[j])) <  power(2, j)))))) and (((((2 <= 30) ->
+  (forall j2:int. (((2 <= j2) and (j2 <= i2)) ->
+  (to_rep((a4[j2])) = (to_rep((a4[(j2 - 1)])) + to_rep((a4[(j2 - 2)]))))))) and
+  (forall j2:int. (((0 <= j2) and (j2 <= i2)) -> ((0 <= to_rep((a4[j2]))) and
+  (to_rep((a4[j2])) <  power(2, j2)))))) and (((((2 <= 30) ->
   in_range4(i2)) and
   (forall temp___174:int. (((0 <= temp___174) and (temp___174 <= 30)) ->
   ((i2 <  temp___174) -> ((a4[temp___174]) = (temp___173[temp___174])))))) and
-  ((2 <= i2) and (i2 <= 30))) and (i2 = 30)))))) and (((i2 = i3) and
-  (a4 = a5)) and ((i4 = i2) and (a6 = a4)))) and (((i5 = i3) and ({
-  map__content = a7 } = { map__content = a5 })) and ((i6 = i4) and
-  (a8 = a6))))) or ((not ((2 <= i1) and (i1 <= 30))) and (((i1 = i5) and
-  (a2 = a7)) and ((i6 = i1) and (a8 = a2)))))))) and (((i7 = i5) and
-  (a9 = a7)) and ((i8 = i6) and (a10 = a8)))) ->
-  (to_rep((a9[30])) = 832040)))
+  ((2 <= i2) and (i2 <= 30))) and (i2 = 30)))))) and (((i2 = i6) and
+  (a4 = a8)) and ((i7 = i2) and (a9 = a4)))))
+
+axiom H11 : (((2 <= i1) and (i1 <= 30)) -> (i8 = i6))
+
+axiom H12 : (((2 <= i1) and (i1 <= 30)) -> (a10 = a8))
+
+axiom H13 : (((2 <= i1) and (i1 <= 30)) -> (i9 = i7))
+
+axiom H14 : (((2 <= i1) and (i1 <= 30)) -> (a11 = a9))
+
+axiom H15 : ((not ((2 <= i1) and (i1 <= 30))) -> (i1 = i8))
+
+axiom H16 : ((not ((2 <= i1) and (i1 <= 30))) -> (a2 = a10))
+
+axiom H17 : ((not ((2 <= i1) and (i1 <= 30))) -> (i9 = i1))
+
+axiom H18 : ((not ((2 <= i1) and (i1 <= 30))) -> (a11 = a2))
+
+axiom H19 : (i10 = i8)
+
+axiom H20 : (a12 = a10)
+
+axiom H21 : (i11 = i9)
+
+axiom H22 : (a13 = a11)
+
+ (* File "array_applications.adb", line 10, characters 0-0 *)
+goal WP_parameter_def : (to_rep((a12[30])) = 832040)

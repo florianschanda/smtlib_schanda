@@ -158,18 +158,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -660,14 +660,39 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom mask__def_axiom : (mask = of_int(4095))
 
+logic saturate__result : t
+
+logic result : t
+
+logic saturate__result1 : t
+
+logic saturate__result2 : t
+
+logic saturate__result3 : t
+
+logic saturate__result4 : t
+
+logic saturate__result5 : t
+
+logic result1 : t
+
+axiom H : true
+
+axiom H1 : true
+
+axiom H2 : (saturate__result1 = saturate__result2)
+
+axiom H3 : (saturate__result3 = saturate__result1)
+
+axiom H4 : (result = saturate__result)
+
+axiom H5 : (saturate__result1 = bw_and(val__, of_int(4095)))
+
+axiom H6 : (saturate__result4 = saturate__result2)
+
+axiom H7 : (saturate__result5 = saturate__result3)
+
+axiom H8 : (result1 = saturate__result4)
+
  (* File "interfac.ads", line 66, characters 0-0 *)
-goal WP_parameter_def :
-  (forall saturate__result:t. forall result:t. forall saturate__result1:t.
-  forall saturate__result2:t. forall saturate__result3:t.
-  forall saturate__result4:t. forall saturate__result5:t.
-  (forall result1:t. ((((((saturate__result1 = saturate__result2) and
-  (saturate__result3 = saturate__result1)) and
-  ((result = saturate__result) and (saturate__result1 = bw_and(val__,
-  of_int(4095))))) and ((saturate__result4 = saturate__result2) and
-  (saturate__result5 = saturate__result3))) and
-  (result1 = saturate__result4)) -> ult(saturate__result4, of_int(256)))))
+goal WP_parameter_def : ult(saturate__result4, of_int(256))

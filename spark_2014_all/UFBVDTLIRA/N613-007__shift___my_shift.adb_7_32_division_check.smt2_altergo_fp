@@ -159,18 +159,18 @@ axiom Div_inf :
 
 axiom Div_inf_neg :
   (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
-  (((-x) / y) = (-1))))
+  (((-x) / y) = (- 1))))
 
 axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
 
 axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
 
-axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((-1) / y) = (-1))))
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
 
 axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
 
 axiom Mod_minus1_left :
-  (forall y:int [((-1) % y)]. ((1 <  y) -> (((-1) % y) = (y - 1))))
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
 
 axiom Div_mult :
   (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
@@ -659,8 +659,25 @@ logic z_old : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
+logic z : t
+
+logic result : t
+
+logic z1 : t
+
+logic result1 : t
+
+logic z2 : t
+
+axiom H : true
+
+axiom H1 : (z = z_old)
+
+axiom H2 : true
+
+axiom H3 : (result = z)
+
+axiom H4 : (z1 = lsr_bv(z, of_int(1)))
+
  (* File "my_shift.ads", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall z:t. forall result:t. forall z1:t. ((z = z_old) ->
-  (((result = z) and (z1 = lsr_bv(z, of_int(1)))) ->
-  (not (of_int(2) = zeros)))))
+goal WP_parameter_def : (not (of_int(2) = zeros))

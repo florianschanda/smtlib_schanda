@@ -42,6 +42,7 @@
 (define-fun t__ref___2__projection ((a t__ref1)) t1 (t__content1 a))
 (define-fun dynamic_invariant1 ((temp___expr_160 Int) (temp___is_init_157 Bool) (temp___skip_constant_158 Bool) (temp___do_toplevel_159 Bool)) Bool (=> (or (= temp___is_init_157 true) (<= 1 10)) (in_range1 temp___expr_160)))
 (declare-const x Int)
+(declare-const g2__op__a Int)
 (assert (in_range x))
 (assert (< x 10))
 (assert (not (< x 10)))

@@ -563,5 +563,17 @@ logic a : (int,natural) farray
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic cu : natural
+
+logic cu1 : natural
+
+logic o : bool
+
+logic o1 : bool
+
+logic o2 : int
+
+logic result : bool
+
  (* File "with_iterable.ads", line 29, characters 0-0 *)
 goal WP_parameter_def : true
