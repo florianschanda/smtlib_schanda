@@ -27,6 +27,7 @@
 # available). This script can be used to post-process the SPARK
 # benchmarks and add some of this information afterwards.
 
+import sys
 import os
 import subprocess
 from glob import glob
@@ -338,6 +339,9 @@ def process(task):
     return rv
 
 def main():
+    sys.setrecursionlimit(4000)
+    os.nice(5)
+
     tasks = []
     for path, dirs, files in os.walk("spark_2014_all/ALL"):
         for f in files:
@@ -350,7 +354,7 @@ def main():
     p = multiprocessing.Pool()
 
     n = len(tasks)
-    for msg in p.imap_unordered(process, tasks, 2):
+    for msg in p.imap_unordered(process, tasks):
         for line in msg:
             print "%6u: %s" % (n, line)
         n -= 1
